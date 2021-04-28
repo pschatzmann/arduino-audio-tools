@@ -186,10 +186,10 @@ class Converter {
 
 };
 
-#ifdef A2DP
-static (int16[2])* toArray(Channel *c){
-    return (static_cast<(int16[2])*>(c));
-}
+
+// static int16[2][] toArray(Channel *c){
+//     return (static_cast<(int16[2])*>(c));
+// }
 
 /**
  * @brief Covnerts the data from T src[][2] to a Channels array 
@@ -217,6 +217,5 @@ class ChannelConverter {
 
 };
 
-#endif
 
 }

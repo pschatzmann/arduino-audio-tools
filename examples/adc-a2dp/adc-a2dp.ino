@@ -1,9 +1,6 @@
 #include "Arduino.h"
-#include "SoundTools.h"
-#ifndef A2DP
-#error You need to install the A2DP Library
-#endif
 #include "BluetoothA2DPSource.h"
+#include "SoundTools.h"
 
 using namespace sound_tools;  
 
@@ -11,16 +8,13 @@ using namespace sound_tools;
  * @brief We use a mcp6022 analog microphone as input and send the data to A2DP
  */ 
 
-const int32_t max_buffer_len = 512;
 ADC adc;
 BluetoothA2DPSource a2dp_source;
-int16_t buffer[max_buffer_len][2];
 
 // callback used by A2DP to provide the sound data
 int32_t get_sound_data(Channels* data, int32_t len) {
-   int req_len = min(max_buffer_len, len);
-   // the microphone provides data in int16_t data
-   return i2s.read(static_cast<Channels*>(data), req_len);   
+   // the ADC provides data in int16_t data which matches the definition of Channels
+   return adc.read((arrayOf2int16_t*)data, len);   
 }
 
 // Arduino Setup
