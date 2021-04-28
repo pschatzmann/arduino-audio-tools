@@ -27,8 +27,8 @@ class ADCConfig {
     friend class ADC;
 
     // public config parameters
-    int sample_rate = 22000;
-    int dma_buf_count = 5;
+    int sample_rate = 44100;
+    int dma_buf_count = 10;
     int dma_buf_len = 512;
     bool use_apll = false;
 
