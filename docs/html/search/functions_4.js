@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['read_52',['read',['../classsound__tools_1_1_i2_s.html#a54e5b02dbb302658a9913604e2e9c314',1,'sound_tools::I2S']]]
+  ['mainfrequency_62',['mainFrequency',['../classsound__tools_1_1_notes.html#ac41804dfe32904885babc0a1cecda480',1,'sound_tools::Notes::mainFrequency(uint8_t mainNoteIdx, uint8_t octave)'],['../classsound__tools_1_1_notes.html#ac637b493dc2d32c15101b10657f38ed8',1,'sound_tools::Notes::mainFrequency(uint64_t idx)']]]
 ];

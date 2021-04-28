@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['sinewavegenerator_42',['SineWaveGenerator',['../classsound__tools_1_1_sine_wave_generator.html',1,'sound_tools']]],
-  ['singlebuffer_43',['SingleBuffer',['../classsound__tools_1_1_single_buffer.html',1,'sound_tools']]],
-  ['soundgenerator_44',['SoundGenerator',['../classsound__tools_1_1_sound_generator.html',1,'sound_tools']]]
+  ['nbuffer_49',['NBuffer',['../classsound__tools_1_1_n_buffer.html',1,'sound_tools']]],
+  ['noisegenerator_50',['NoiseGenerator',['../classsound__tools_1_1_noise_generator.html',1,'sound_tools']]],
+  ['notes_51',['Notes',['../classsound__tools_1_1_notes.html',1,'sound_tools']]]
 ];

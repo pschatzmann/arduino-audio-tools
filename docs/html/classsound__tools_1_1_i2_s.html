@@ -75,10 +75,10 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Simple <a class="el" href="classsound__tools_1_1_i2_s.html" title="Simple I2S interface class.">I2S</a> interface class.  
+<p>A Simple <a class="el" href="classsound__tools_1_1_i2_s.html" title="A Simple I2S interface class.">I2S</a> interface class.  
  <a href="classsound__tools_1_1_i2_s.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_i2_s___e_s_p32_8h_source.html">I2S_ESP32.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_i2_s_8h_source.html">I2S.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -93,20 +93,20 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsound__tools_1_1_i2_s.html#a8f99f63034b26dd0304ff643e78f2f8f">stop</a> ()</td></tr>
 <tr class="memdesc:a8f99f63034b26dd0304ff643e78f2f8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">stops the I2C and unistalls the driver <br /></td></tr>
 <tr class="separator:a8f99f63034b26dd0304ff643e78f2f8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a78272956f5aa726594d03e157b6cf7cb"><td class="memItemLeft" align="right" valign="top"><a id="a78272956f5aa726594d03e157b6cf7cb"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsound__tools_1_1_i2_s.html#a78272956f5aa726594d03e157b6cf7cb">write</a> (T src[][2], size_t sizeFrames, TickType_t ticks_to_wait=portMAX_DELAY)</td></tr>
-<tr class="memdesc:a78272956f5aa726594d03e157b6cf7cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes the data to the <a class="el" href="classsound__tools_1_1_i2_s.html" title="Simple I2S interface class.">I2S</a> interface <br /></td></tr>
-<tr class="separator:a78272956f5aa726594d03e157b6cf7cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54e5b02dbb302658a9913604e2e9c314"><td class="memItemLeft" align="right" valign="top"><a id="a54e5b02dbb302658a9913604e2e9c314"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsound__tools_1_1_i2_s.html#a54e5b02dbb302658a9913604e2e9c314">read</a> (T src[][2], size_t sizeFrames, TickType_t ticks_to_wait=portMAX_DELAY)</td></tr>
-<tr class="memdesc:a54e5b02dbb302658a9913604e2e9c314"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads data from <a class="el" href="classsound__tools_1_1_i2_s.html" title="Simple I2S interface class.">I2S</a>. <br /></td></tr>
-<tr class="separator:a54e5b02dbb302658a9913604e2e9c314"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4844092da5fa679dbf6baecb7863b88"><td class="memItemLeft" align="right" valign="top"><a id="ad4844092da5fa679dbf6baecb7863b88"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsound__tools_1_1_i2_s.html#ad4844092da5fa679dbf6baecb7863b88">write</a> (T(*src)[2], size_t sizeFrames, TickType_t ticks_to_wait=portMAX_DELAY)</td></tr>
+<tr class="memdesc:ad4844092da5fa679dbf6baecb7863b88"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes the data to the <a class="el" href="classsound__tools_1_1_i2_s.html" title="A Simple I2S interface class.">I2S</a> interface <br /></td></tr>
+<tr class="separator:ad4844092da5fa679dbf6baecb7863b88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43e28cfd8768e986a2ae4cc565c2161e"><td class="memItemLeft" align="right" valign="top"><a id="a43e28cfd8768e986a2ae4cc565c2161e"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsound__tools_1_1_i2_s.html#a43e28cfd8768e986a2ae4cc565c2161e">read</a> (T(*src)[2], size_t sizeFrames, TickType_t ticks_to_wait=portMAX_DELAY)</td></tr>
+<tr class="memdesc:a43e28cfd8768e986a2ae4cc565c2161e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads data from <a class="el" href="classsound__tools_1_1_i2_s.html" title="A Simple I2S interface class.">I2S</a>. <br /></td></tr>
+<tr class="separator:a43e28cfd8768e986a2ae4cc565c2161e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:affe76951a160f3cac092671b216be90e"><td class="memItemLeft" align="right" valign="top"><a id="affe76951a160f3cac092671b216be90e"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsound__tools_1_1_i2_s.html#affe76951a160f3cac092671b216be90e">writeBytes</a> (const void *src, size_t size_bytes, TickType_t ticks_to_wait=portMAX_DELAY)</td></tr>
-<tr class="memdesc:affe76951a160f3cac092671b216be90e"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes the data to the <a class="el" href="classsound__tools_1_1_i2_s.html" title="Simple I2S interface class.">I2S</a> interface <br /></td></tr>
+<tr class="memdesc:affe76951a160f3cac092671b216be90e"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes the data to the <a class="el" href="classsound__tools_1_1_i2_s.html" title="A Simple I2S interface class.">I2S</a> interface <br /></td></tr>
 <tr class="separator:affe76951a160f3cac092671b216be90e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9fd1b6da77d5721b8611a1fc5c097c6c"><td class="memItemLeft" align="right" valign="top"><a id="a9fd1b6da77d5721b8611a1fc5c097c6c"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>readBytes</b> (void *dest, size_t size_bytes, TickType_t ticks_to_wait=portMAX_DELAY)</td></tr>
@@ -128,9 +128,9 @@ i2s_config_t&#160;</td><td class="memItemRight" valign="bottom"><b>i2s_config</b
 <div class="textblock"><h3>template&lt;typename T&gt;<br />
 class sound_tools::I2S&lt; T &gt;</h3>
 
-<p>Simple <a class="el" href="classsound__tools_1_1_i2_s.html" title="Simple I2S interface class.">I2S</a> interface class. </p>
+<p>A Simple <a class="el" href="classsound__tools_1_1_i2_s.html" title="A Simple I2S interface class.">I2S</a> interface class. </p>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/<a class="el" href="_i2_s___e_s_p32_8h_source.html">I2S_ESP32.h</a></li>
+<li>src/SoundTools/<a class="el" href="_i2_s_8h_source.html">I2S.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
