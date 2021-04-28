@@ -1,6 +1,8 @@
 #pragma once
 #include <bits/stdc++.h>
 
+namespace sound_tools {
+
 /**
  * @brief 24bit integer which is used for I2S sound processing. It works only on little endian machines!
  * 
@@ -60,3 +62,4 @@ class int24_t {
     uint8_t value[3]; 
 };
 
+}
