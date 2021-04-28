@@ -5,7 +5,7 @@
 
 // configuration
 const int minutes = 5;
-const char* file_name = "audio.pcm";
+const char* file_name = "audio.row";
 const int buffer_len = 512;
 const int sd_ss_pin = 4;
 

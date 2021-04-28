@@ -11,7 +11,7 @@ Some basic C++ classes that can be used for Audio Processing using the Arduino F
 - TimerAlarmRepeating (e.g. for sampling sound data using exact times) [ESP32 only]
 
 This functionality provides the glue which makes different sound processing components and libraries work together.
-We also provide plenty of examples which demonstrate how to implement the different scenarios.
+We also provide plenty of examples that demonstrate how to implement the different scenarios.
 
 ## Optional Libraries
 
@@ -20,7 +20,11 @@ We also provide plenty of examples which demonstrate how to implement the differ
 - arduino-fdk-aac
 - ESP8266Audio
 
-# Documentation
+## Examples
+
+All examples can be found in the [examples folder](https://github.com/pschatzmann/arduino-sound-tools/tree/main/examples)
+
+## Documentation
 
 Here is the generated [Class documentation](https://pschatzmann.github.io/arduino-sound-tools/html/annotated.html)
 
