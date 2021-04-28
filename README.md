@@ -24,6 +24,17 @@ We also provide plenty of examples that demonstrate how to implement the differe
 
 All examples can be found in the [examples folder](https://github.com/pschatzmann/arduino-sound-tools/tree/main/examples)
 
+
+## Installation
+
+You can download the library as zip and call include Library -> zip library. Or you can git clone this project into the Arduino libraries folder e.g. with
+
+```
+cd  ~/Documents/Arduino/libraries
+git clone pschatzmann/arduino-sound-tools.git
+
+```
+
 ## Documentation
 
 Here is the generated [Class documentation](https://pschatzmann.github.io/arduino-sound-tools/html/annotated.html)
