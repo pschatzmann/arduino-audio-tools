@@ -20,7 +20,12 @@ We also provide plenty of examples which demonstrate how to implement the differ
 - arduino-fdk-aac
 - ESP8266Audio
 
+# Documentation
+
+Here is the generated [Class documentation](https://pschatzmann.github.io/arduino-sound-tools/html)
+
 ## Project Status
+
 This is currently work in progress. 
 
 
