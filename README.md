@@ -1,6 +1,6 @@
 # Arduino Audio Tools
 
-Some basic C++ classes that can be used for Audio Processing using the Arduino Framework
+Some basic C++ classes that can be used for Audio Processing privided as Arduino Library
 
 - a simple I2S class (to read and write to the internal I2S) [ESP32 only]
 - a simple ADC class (to read analog data with the help of I2S) [ESP32 only]
