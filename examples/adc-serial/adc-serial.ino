@@ -11,6 +11,7 @@ using namespace sound_tools;
 ADC adc;
 const int32_t max_buffer_len = 512;
 int16_t buffer[max_buffer_len][2];
+// The data has a center of around 26427, so we we need to shift it down to bring the center to 0
 FilterScaler<int16_t> scaler(1.0, -26427, 32700 );
 
 // Arduino Setup
