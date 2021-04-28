@@ -21,20 +21,17 @@ class I2SConfig {
     i2s_config_t i2s_config;
     i2s_pin_config_t pin_config;
 
+    /// Default Constructor
     I2SConfig(I2SMode mode = TX) {
         i2s_config = defaultConfig(mode);
         pin_config = defaultPinConfig(mode);
     }
 
+    /// Copy constructor
     I2SConfig(const I2SConfig<T> &cfg) {
       port_no = cfg.port_no;
       i2s_config = cfg.i2s_config;
       pin_config = cfg.pin_config;
-    }
-
-    I2SConfig(){
-        i2s_config = defaultConfig(TX);
-        pin_config = defaultPinConfig(TX);
     }
 
 
@@ -74,13 +71,16 @@ class I2SConfig {
 template<typename T>
 class I2S {
   public:
+    /// Default Constructor
     I2S() {
     }
 
+    /// Destructor
     ~I2S() {
       stop();
     }
 
+    /// Provides the default configuration
     I2SConfig<T> defaultConfig(I2SMode mode) {
         ESP_LOGD(I2S_TAG, "%s", __func__);
         I2SConfig<T> config(mode);

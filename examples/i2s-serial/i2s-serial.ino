@@ -11,8 +11,8 @@ using namespace sound_tools;
  */ 
 
 I2S<int32_t> i2s;
-const int32_t max_buffer_len = 512;
-int32_t buffer[max_buffer_len][2];
+const size_t max_buffer_len = 512;
+int16_t buffer[max_buffer_len][2];
 
 // Arduino Setup
 void setup(void) {
@@ -26,6 +26,7 @@ void setup(void) {
 // Arduino loop - repeated processing 
 void loop() {
   size_t len = i2s.read(buffer, max_buffer_len); 
+
   for (int j=0;j<len;j++){
     Serial.print(buffer[j][0]);
     Serial.print(", ");

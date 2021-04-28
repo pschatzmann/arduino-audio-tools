@@ -23,8 +23,11 @@ const char* ADC_TAG = "ADC";
  */
 class ADCConfig {
   public:
-    int i2s_number = 1;
-    int sample_rate = 44100;
+    // allow ADC to access the protected methods
+    friend class ADC;
+
+    // public config parameters
+    int sample_rate = 22000;
     int dma_buf_count = 5;
     int dma_buf_len = 512;
     bool use_apll = false;
@@ -34,6 +37,7 @@ class ADCConfig {
       setPin(DEFAUT_ADC_PIN);
     }
 
+    /// Copy constructor
     ADCConfig(const ADCConfig &cfg) = default;
 
     /// provides the current ADC pin
@@ -41,7 +45,7 @@ class ADCConfig {
       return adc_pin;
     }
 
-    /// Defines the current ADC pin
+    /// Defines the current ADC pin. The following GPIO pins are supported: GPIO32-GPIO39
     void setPin(int gpio){
       this->adc_pin = gpio;
       switch(gpio){
@@ -96,13 +100,16 @@ class ADCConfig {
  */
 class ADC {
   public:
+    /// Default constructor
     ADC() {
     }
 
+    /// Destructor
     ~ADC() {
       stop();
     }
 
+    /// Provides the default configuration
     ADCConfig defaultConfig() {
         ESP_LOGD(ADC_TAG, "%s", __func__);
         ADCConfig config;
@@ -111,13 +118,11 @@ class ADC {
 
     /// starts the DAC 
     void begin(ADCConfig cfg) {
-      i2s_num = static_cast<i2s_port_t>(cfg.i2s_number);
-
       i2s_config_t i2s_config = {
           .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_RX | I2S_MODE_ADC_BUILT_IN),
           .sample_rate = cfg.sample_rate,
           .bits_per_sample = I2S_BITS_PER_SAMPLE_16BIT,
-          .channel_format = I2S_CHANNEL_FMT_ONLY_LEFT,
+          .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,
           .communication_format = I2S_COMM_FORMAT_I2S_LSB,
           .intr_alloc_flags = ESP_INTR_FLAG_LEVEL1,
           .dma_buf_count = cfg.dma_buf_count,
@@ -132,16 +137,20 @@ class ADC {
         ESP_LOGE(ADC_TAG, "%s - %s", __func__, "i2s_driver_install");
       }      
 
-      i2s_zero_dma_buffer(i2s_num);
-
-      //install and start i2s driver
-      i2s_driver_install(i2s_num, &i2s_config, 0, NULL);
+      // clear i2s buffer
+      if (i2s_zero_dma_buffer(i2s_num)!=ESP_OK) {
+        ESP_LOGE(ADC_TAG, "%s - %s", __func__, "i2s_zero_dma_buffer");
+      }
 
       //init ADC pad
-      i2s_set_adc_mode(ADC_UNIT_1, ADC1_CHANNEL_7);
+      if (i2s_set_adc_mode(cfg.unit, cfg.channel)!=ESP_OK) {
+        ESP_LOGE(ADC_TAG, "%s - %s", __func__, "i2s_driver_install");
+      }
 
       // enable the ADC
-      i2s_adc_enable(i2s_num);
+      if (i2s_adc_enable(i2s_num)!=ESP_OK) {
+        ESP_LOGE(ADC_TAG, "%s - %s", __func__, "i2s_adc_enable");
+      }
 
     }
 
@@ -160,7 +169,7 @@ class ADC {
     }
     
   protected:
-    i2s_port_t i2s_num;
+    const i2s_port_t i2s_num =(i2s_port_t) 0; // Analog input only supports 0!
     
     size_t readBytes(void *dest, size_t size_bytes,  TickType_t ticks_to_wait=portMAX_DELAY){
       size_t result = 0;

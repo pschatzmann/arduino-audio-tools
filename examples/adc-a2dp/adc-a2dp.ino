@@ -10,11 +10,15 @@ using namespace sound_tools;
 
 ADC adc;
 BluetoothA2DPSource a2dp_source;
+FilterScaler<int16_t> scaler(1.0, -26427, 32700 );
 
 // callback used by A2DP to provide the sound data
 int32_t get_sound_data(Channels* data, int32_t len) {
+    arrayOf2int16_t *data_arrays = (arrayOf2int16_t *) data;
    // the ADC provides data in int16_t data which matches the definition of Channels
-   return adc.read((arrayOf2int16_t*)data, len);   
+    size_t result_len = adc.read(data_arrays, len);   
+    scaler.process(data_arrays, result_len);
+    return result_len;
 }
 
 // Arduino Setup

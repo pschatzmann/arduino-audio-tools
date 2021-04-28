@@ -31,32 +31,33 @@ static int16_t convertFrom32To16(int32_t value)  {
 template<typename T>
 class BaseFilter {
     public:
-        void process(T src[][2], size_t size) = 0;
+        virtual void process(T (*src)[2], size_t size) = 0;
 };
 
 
 /**
- * @brief Multiplies the values with the indicated factor and clips at maxValue. To mute use a factor of 0.0!
+ * @brief Multiplies the values with the indicated factor adds the offset and clips at maxValue. To mute use a factor of 0.0!
  * 
  * @tparam T 
  */
 template<typename T>
-class FilterAmplifier : public  BaseFilter<T> {
+class FilterScaler : public  BaseFilter<T> {
     public:
-        FilterAmplifier(float factor, T maxValue){
+        FilterScaler(float factor, T offset, T maxValue){
             this->factor = factor;
             this->maxValue = maxValue;
+            this->offset = offset;
         }
 
-        void process(T src[][2], size_t size) {
+        void process(T (*src)[2], size_t size) {
             for (size_t j=0;j<size;j++){
-                src[j][0] = src[j][0] * factor;
+                src[j][0] = (src[j][0] + offset) * factor;
                 if (src[j][0]>maxValue){
                     src[j][0] = maxValue;
                 } else if (src[j][0]<-maxValue){
                     src[j][0] = -maxValue;
                 }
-                src[j][1] = src[j][1] * factor;
+                src[j][1] = src[j][1] + offset * factor;
                 if (src[j][1]>maxValue){
                     src[j][1] = maxValue;
                 } else if (src[j][0]<-maxValue){
@@ -67,6 +68,7 @@ class FilterAmplifier : public  BaseFilter<T> {
     protected:
         float factor;
         T maxValue;
+        T offset;
 };
 
 /**
@@ -79,7 +81,7 @@ class FilterSwitchLeftAndRight : public  BaseFilter<T> {
     public:
         FilterSwitchLeftAndRight(){
         }
-        void process(T src[][2], size_t size) {
+        void process(T (*src)[2], size_t size) {
             for (size_t j=0;j<size;j++){
                 src[j][1] = src[j][0];
                 src[j][0] = src[j][1];
@@ -97,7 +99,7 @@ class FilterFillLeftAndRight : public  BaseFilter<T> {
     public:
         FilterFillLeftAndRight(){
         }
-        void process(T src[][2], size_t size) {
+        void process(T (*src)[2], size_t size) {
             setup(src, size);
             if (left_empty && !right_empty){
                 for (size_t j=0;j<size;j++){
@@ -150,7 +152,7 @@ class FilterToInternalDACFormat : public  BaseFilter<T> {
         FilterToInternalDACFormat(){
         }
 
-        void process(T src[][2], size_t size) {
+        void process(T (*src)[2], size_t size) {
             for (int i=0; i<size; i++) {
                 src[i][0] = src[i][0] + 0x8000;
                 src[i][1] = src[i][1] + 0x8000;

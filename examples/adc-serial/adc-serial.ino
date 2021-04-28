@@ -11,6 +11,7 @@ using namespace sound_tools;
 ADC adc;
 const int32_t max_buffer_len = 512;
 int16_t buffer[max_buffer_len][2];
+FilterScaler<int16_t> scaler(1.0, -26427, 32700 );
 
 // Arduino Setup
 void setup(void) {
@@ -25,6 +26,9 @@ void setup(void) {
 // Arduino loop - repeated processing 
 void loop() {
   size_t len = adc.read(buffer, max_buffer_len); 
+  // move center to 0 and scale the values
+  scaler.process(buffer, len);
+
   for (int j=0;j<len;j++){
     Serial.print(buffer[j][0]);
     Serial.print(", ");
