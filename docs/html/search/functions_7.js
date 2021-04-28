@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['write_70',['write',['../classsound__tools_1_1_i2_s.html#ad4844092da5fa679dbf6baecb7863b88',1,'sound_tools::I2S']]],
-  ['writebytes_71',['writeBytes',['../classsound__tools_1_1_i2_s.html#affe76951a160f3cac092671b216be90e',1,'sound_tools::I2S']]]
+  ['pin_71',['pin',['../classsound__tools_1_1_a_d_c_config.html#a03fcbae3fe0948e0f5ba4fb108a6f943',1,'sound_tools::ADCConfig']]]
 ];

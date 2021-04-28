@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['nbuffer_18',['NBuffer',['../classsound__tools_1_1_n_buffer.html',1,'sound_tools']]],
-  ['noisegenerator_19',['NoiseGenerator',['../classsound__tools_1_1_noise_generator.html',1,'sound_tools']]],
-  ['notes_20',['Notes',['../classsound__tools_1_1_notes.html',1,'sound_tools']]]
+  ['mainfrequency_18',['mainFrequency',['../classsound__tools_1_1_notes.html#ac41804dfe32904885babc0a1cecda480',1,'sound_tools::Notes::mainFrequency(uint8_t mainNoteIdx, uint8_t octave)'],['../classsound__tools_1_1_notes.html#ac637b493dc2d32c15101b10657f38ed8',1,'sound_tools::Notes::mainFrequency(uint64_t idx)']]]
 ];

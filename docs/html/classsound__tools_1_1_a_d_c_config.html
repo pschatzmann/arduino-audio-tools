@@ -69,6 +69,7 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
 <a href="classsound__tools_1_1_a_d_c_config-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">sound_tools::ADCConfig Class Reference</div>  </div>
@@ -86,25 +87,26 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsound__tools_1_1_a_d_c_config.html#ab062c7d03463a6e31386198904f05f54">ADCConfig</a> ()</td></tr>
 <tr class="memdesc:ab062c7d03463a6e31386198904f05f54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor. <br /></td></tr>
 <tr class="separator:ab062c7d03463a6e31386198904f05f54"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc8a2abf049cfd1825b197949c7f6c89"><td class="memItemLeft" align="right" valign="top"><a id="afc8a2abf049cfd1825b197949c7f6c89"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsound__tools_1_1_a_d_c_config.html#afc8a2abf049cfd1825b197949c7f6c89">ADCConfig</a> (const A2CConfig&lt; T &gt; &amp;cfg)=default int pin()</td></tr>
-<tr class="memdesc:afc8a2abf049cfd1825b197949c7f6c89"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the current <a class="el" href="classsound__tools_1_1_a_d_c.html" title="A very fast Analog to Digital Converter which is using the ESP32 I2S interface.">ADC</a> pin <br /></td></tr>
-<tr class="separator:afc8a2abf049cfd1825b197949c7f6c89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46f0cb4726a7b8c9b6a57aed9c3f4fc1"><td class="memItemLeft" align="right" valign="top"><a id="a46f0cb4726a7b8c9b6a57aed9c3f4fc1"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsound__tools_1_1_a_d_c_config.html#a46f0cb4726a7b8c9b6a57aed9c3f4fc1">ADCConfig</a> (const <a class="el" href="classsound__tools_1_1_a_d_c_config.html">ADCConfig</a> &amp;cfg)=default</td></tr>
+<tr class="memdesc:a46f0cb4726a7b8c9b6a57aed9c3f4fc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor. <br /></td></tr>
+<tr class="separator:a46f0cb4726a7b8c9b6a57aed9c3f4fc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03fcbae3fe0948e0f5ba4fb108a6f943"><td class="memItemLeft" align="right" valign="top"><a id="a03fcbae3fe0948e0f5ba4fb108a6f943"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsound__tools_1_1_a_d_c_config.html#a03fcbae3fe0948e0f5ba4fb108a6f943">pin</a> ()</td></tr>
+<tr class="memdesc:a03fcbae3fe0948e0f5ba4fb108a6f943"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the current <a class="el" href="classsound__tools_1_1_a_d_c.html" title="A very fast Analog to Digital Converter which is using the ESP32 I2S interface.">ADC</a> pin <br /></td></tr>
+<tr class="separator:a03fcbae3fe0948e0f5ba4fb108a6f943"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad8c324fc92e5d182927287752c2b2899"><td class="memItemLeft" align="right" valign="top"><a id="ad8c324fc92e5d182927287752c2b2899"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsound__tools_1_1_a_d_c_config.html#ad8c324fc92e5d182927287752c2b2899">setPin</a> (int gpio)</td></tr>
-<tr class="memdesc:ad8c324fc92e5d182927287752c2b2899"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the current <a class="el" href="classsound__tools_1_1_a_d_c.html" title="A very fast Analog to Digital Converter which is using the ESP32 I2S interface.">ADC</a> pin. <br /></td></tr>
+<tr class="memdesc:ad8c324fc92e5d182927287752c2b2899"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the current <a class="el" href="classsound__tools_1_1_a_d_c.html" title="A very fast Analog to Digital Converter which is using the ESP32 I2S interface.">ADC</a> pin. The following GPIO pins are supported: GPIO32-GPIO39. <br /></td></tr>
 <tr class="separator:ad8c324fc92e5d182927287752c2b2899"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:ab7ecb8270d2009398ef70bcbafc43cd0"><td class="memItemLeft" align="right" valign="top"><a id="ab7ecb8270d2009398ef70bcbafc43cd0"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>i2s_number</b> = 1</td></tr>
-<tr class="separator:ab7ecb8270d2009398ef70bcbafc43cd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a35a789734b6cea3e283a4fc2421e0f"><td class="memItemLeft" align="right" valign="top"><a id="a7a35a789734b6cea3e283a4fc2421e0f"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>sample_rate</b> = 44100</td></tr>
 <tr class="separator:a7a35a789734b6cea3e283a4fc2421e0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2dcde0269c90a64501ca656723b17c28"><td class="memItemLeft" align="right" valign="top"><a id="a2dcde0269c90a64501ca656723b17c28"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>dma_buf_count</b> = 5</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>dma_buf_count</b> = 10</td></tr>
 <tr class="separator:a2dcde0269c90a64501ca656723b17c28"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa8da13d17e901fd6520a6aafa6810fe"><td class="memItemLeft" align="right" valign="top"><a id="afa8da13d17e901fd6520a6aafa6810fe"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>dma_buf_len</b> = 512</td></tr>
@@ -121,9 +123,15 @@ adc_unit_t&#160;</td><td class="memItemRight" valign="bottom"><b>unit</b></td></
 <tr class="memitem:a7f63d598fb32230ec99d98cac6dde317"><td class="memItemLeft" align="right" valign="top"><a id="a7f63d598fb32230ec99d98cac6dde317"></a>
 adc1_channel_t&#160;</td><td class="memItemRight" valign="bottom"><b>channel</b></td></tr>
 <tr class="separator:a7f63d598fb32230ec99d98cac6dde317"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f09662ae9596f959b37155f75c3e27f"><td class="memItemLeft" align="right" valign="top"><a id="a6f09662ae9596f959b37155f75c3e27f"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>pin</b></td></tr>
-<tr class="separator:a6f09662ae9596f959b37155f75c3e27f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8ab4ae2e8bf1b6f183f4d35160d2f66"><td class="memItemLeft" align="right" valign="top"><a id="aa8ab4ae2e8bf1b6f183f4d35160d2f66"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>adc_pin</b></td></tr>
+<tr class="separator:aa8ab4ae2e8bf1b6f183f4d35160d2f66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a15c3621696d3a37e8253160e8f8fdb5c"><td class="memItemLeft" align="right" valign="top"><a id="a15c3621696d3a37e8253160e8f8fdb5c"></a>
+class&#160;</td><td class="memItemRight" valign="bottom"><b>ADC</b></td></tr>
+<tr class="separator:a15c3621696d3a37e8253160e8f8fdb5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>ESP32 specific configuration for i2s input via adc. The default input pin is GPIO34. </p>

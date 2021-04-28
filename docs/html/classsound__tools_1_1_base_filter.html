@@ -83,8 +83,8 @@ Inheritance diagram for sound_tools::BaseFilter&lt; T &gt;:</div>
  <div class="center">
   <img src="classsound__tools_1_1_base_filter.png" usemap="#sound_5Ftools::BaseFilter_3C_20T_20_3E_map" alt=""/>
   <map id="sound_5Ftools::BaseFilter_3C_20T_20_3E_map" name="sound_5Ftools::BaseFilter_3C_20T_20_3E_map">
-<area href="classsound__tools_1_1_filter_amplifier.html" title="Multiplies the values with the indicated factor and clips at maxValue. To mute use a factor of 0...." alt="sound_tools::FilterAmplifier&lt; T &gt;" shape="rect" coords="0,56,267,80"/>
-<area href="classsound__tools_1_1_filter_fill_left_and_right.html" title="Make sure that both channels contain any data." alt="sound_tools::FilterFillLeftAndRight&lt; T &gt;" shape="rect" coords="277,56,544,80"/>
+<area href="classsound__tools_1_1_filter_fill_left_and_right.html" title="Make sure that both channels contain any data." alt="sound_tools::FilterFillLeftAndRight&lt; T &gt;" shape="rect" coords="0,56,267,80"/>
+<area href="classsound__tools_1_1_filter_scaler.html" title="Multiplies the values with the indicated factor adds the offset and clips at maxValue...." alt="sound_tools::FilterScaler&lt; T &gt;" shape="rect" coords="277,56,544,80"/>
 <area href="classsound__tools_1_1_filter_switch_left_and_right.html" title="Switches the left and right channel." alt="sound_tools::FilterSwitchLeftAndRight&lt; T &gt;" shape="rect" coords="554,56,821,80"/>
 <area href="classsound__tools_1_1_filter_to_internal_d_a_c_format.html" title="special case for internal DAC output, the incomming PCM buffer needs to be converted from signed 16bi..." alt="sound_tools::FilterToInternalDACFormat&lt; T &gt;" shape="rect" coords="831,56,1098,80"/>
   </map>
@@ -92,9 +92,9 @@ Inheritance diagram for sound_tools::BaseFilter&lt; T &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ada11cfc7e1f4eabb5b6caee743b7864e"><td class="memItemLeft" align="right" valign="top"><a id="ada11cfc7e1f4eabb5b6caee743b7864e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (T src[][2], size_t size)=0</td></tr>
-<tr class="separator:ada11cfc7e1f4eabb5b6caee743b7864e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c1d129395a6f60aef97a159b0bc5027"><td class="memItemLeft" align="right" valign="top"><a id="a7c1d129395a6f60aef97a159b0bc5027"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (T(*src)[2], size_t size)=0</td></tr>
+<tr class="separator:a7c1d129395a6f60aef97a159b0bc5027"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename T&gt;<br />
