@@ -1,7 +1,7 @@
 
 # Stream I2S Input to A2DP
 
-![INMP441](https://pschatzmann.github.io/arduino-sound-tools/doc/resources/inmp441.jpeg)
+![INMP441](https://pschatzmann.github.io/arduino-sound-tools/resources/inmp441.jpeg)
 
 ## General Description:
 We implement a A2DP source: We stream the sound input which we read in from the I2S interface to a A2DP sink. We can use any device which provides the sound data via I2S. In order to test the functionality we use the INMP441 microphone.
