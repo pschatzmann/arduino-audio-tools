@@ -1,6 +1,6 @@
 #pragma once
 
-namespace sound_tools {
+namespace audio_tools {
 
 #define INT24_MAX 0x7FFFFF
 

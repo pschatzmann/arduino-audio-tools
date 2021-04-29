@@ -6,7 +6,7 @@
 #include "driver/i2s.h"
 #include "freertos/queue.h"
 
-namespace sound_tools {
+namespace audio_tools {
 
 enum I2SMode  { TX_MODE, RX_MODE };
 const char* I2S_TAG = "I2S";

@@ -10,7 +10,7 @@
 #define PRINTF_BUFFER_SIZE 160
 #endif
 
-namespace sound_tools {
+namespace audio_tools {
 
 /**
  * @brief A simple Logger that writes messages dependent on the log level
@@ -18,7 +18,7 @@ namespace sound_tools {
  * @copyright GPLv3
  * 
  */
-class SoundLogger {
+class AudioLogger {
     public:
         /**
          * @brief Supported log levels. You can change the default log level with the help of the PICO_LOG_LEVEL define.
@@ -31,7 +31,7 @@ class SoundLogger {
             Error
         };
 
-        SoundLogger(){}
+        AudioLogger(){}
 
         /// activate the logging
         void begin(Stream& out, LogLevel level=SOUND_LOG_LEVEL){
@@ -105,6 +105,6 @@ class SoundLogger {
 
 };
 
-SoundLogger Logger;
+AudioLogger Logger;
 
 }    

@@ -2,7 +2,7 @@
 
 #ifdef ESP32
 
-namespace sound_tools {
+namespace audio_tools {
 
 typedef void (* repeating_timer_callback_t )(void* obj);
 typedef void (* simple_callback )(void);

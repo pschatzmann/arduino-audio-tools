@@ -2,7 +2,7 @@
  *  Generate a sine wave to test the TimerAlarmRepeating and UpSampler
  */
 
-#include "SoundTools.h"
+#include "AudioTools.h"
 
 const int sample_rate = 44100;  
 const int buffer_size = 512;  

@@ -1,6 +1,6 @@
 #pragma once
 
-namespace sound_tools {
+namespace audio_tools {
 
 /**
  * @brief Base class to define the abstract interface for the sound generating classes

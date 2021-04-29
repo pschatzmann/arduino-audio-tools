@@ -2,7 +2,7 @@
 #include "SoundTypes.h"
 #include "BluetoothA2DPSource.h"
 
-namespace sound_tools {
+namespace audio_tools {
 
 
 static int32_t convertFrom24To32(int24_t value)  {

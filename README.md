@@ -8,11 +8,11 @@ Some basic C++ classes that can be used for Audio Processing privided as Arduino
 - Converters
 - Musical Notes (with Frequencies of notes)
 - SineWaveGenerator (to generate some sine tone)
-- NBuffer (Multi buffer for writing and reading of (sound) data)
-- TimerAlarmRepeating (e.g. for sampling sound data using exact times) [ESP32 only]
+- NBuffer (Multi buffer for writing and reading of (audio) data)
+- TimerAlarmRepeating (e.g. for sampling audio data using exact times) [ESP32 only]
 - A Wav Encoder and Decoder
 
-This functionality provides the glue which makes different sound processing components and libraries work together.
+This functionality provides the glue which makes different audio processing components and libraries work together.
 We also provide plenty of examples that demonstrate how to implement the different scenarios.
 
 ## Optional Libraries
@@ -24,7 +24,7 @@ We also provide plenty of examples that demonstrate how to implement the differe
 
 ## Examples
 
-All examples can be found in the [examples folder](https://github.com/pschatzmann/arduino-sound-tools/tree/main/examples)
+All examples can be found in the [examples folder](https://github.com/pschatzmann/arduino-audio-tools/tree/main/examples)
 
 
 ## Installation
@@ -33,13 +33,13 @@ You can download the library as zip and call include Library -> zip library. Or 
 
 ```
 cd  ~/Documents/Arduino/libraries
-git clone pschatzmann/arduino-sound-tools.git
+git clone pschatzmann/arduino-audio-tools.git
 
 ```
 
 ## Documentation
 
-Here is the generated [Class documentation](https://pschatzmann.github.io/arduino-sound-tools/html/annotated.html). You might find further information in [one of my blogs](https://www.pschatzmann.ch/home/category/machine-sound/)
+Here is the generated [Class documentation](https://pschatzmann.github.io/arduino-audio-tools/html/annotated.html). You might find further information in [one of my blogs](https://www.pschatzmann.ch/home/category/machine-sound/)
 
 ## Project Status
 

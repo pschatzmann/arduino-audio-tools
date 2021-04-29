@@ -2,7 +2,7 @@
 #pragma once
 #include <algorithm>    // std::min
 
-namespace sound_tools {
+namespace audio_tools {
 
 /**
  * @brief Shared functionality of all buffers

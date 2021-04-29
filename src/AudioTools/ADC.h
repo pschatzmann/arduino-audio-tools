@@ -11,7 +11,7 @@
 #define DEFAUT_ADC_PIN 34
 #endif
 
-namespace sound_tools {
+namespace audio_tools {
 
 typedef int16_t arrayOf2int16_t[2];
 

@@ -1,8 +1,8 @@
 #include "Arduino.h"
-#include "SoundTools.h"
+#include "AudioTools.h"
 #include "BluetoothA2DPSource.h"
 
-using namespace sound_tools;  
+using namespace audio_tools;  
 
 /**
  * @brief We use I2S as input and send the data to A2DP

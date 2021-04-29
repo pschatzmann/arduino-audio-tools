@@ -2,7 +2,7 @@
  *  Test sampling rate
  */
 
-#include "SoundTools.h"
+#include "AudioTools.h"
 
 unsigned long count;
 unsigned long start;

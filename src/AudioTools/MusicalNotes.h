@@ -113,7 +113,7 @@
 #define AS8 7459
 #define B8  7902
 
-namespace sound_tools {
+namespace audio_tools {
 
 /**
  * @brief Determination of the frequency of a music note

@@ -1,6 +1,6 @@
 #pragma once
 
-namespace sound_tools {
+namespace audio_tools {
 
 
 /**
@@ -131,7 +131,7 @@ class UrlStream : public Stream {
                 return result;
             }
 
-            Logger.printf(SoundLogger::Info, "Status = %d, content_length = %d",
+            Logger.printf(AudioLogger::Info, "Status = %d, content_length = %d",
                     esp_http_client_get_status_code(client),
                     esp_http_client_get_content_length(client));
         
