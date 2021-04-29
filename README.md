@@ -39,7 +39,7 @@ git clone pschatzmann/arduino-sound-tools.git
 
 ## Documentation
 
-Here is the generated [Class documentation](https://pschatzmann.github.io/arduino-sound-tools/html/annotated.html). You might find further information in ][one of my blogs](https://www.pschatzmann.ch/home/category/machine-sound/)
+Here is the generated [Class documentation](https://pschatzmann.github.io/arduino-sound-tools/html/annotated.html). You might find further information in [one of my blogs](https://www.pschatzmann.ch/home/category/machine-sound/)
 
 ## Project Status
 
