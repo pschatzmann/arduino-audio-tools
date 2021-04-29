@@ -11,7 +11,7 @@ using namespace sound_tools;
 ADC adc;
 BluetoothA2DPSource a2dp_source;
 // The data has a center of around 26427, so we we need to shift it down to bring the center to 0
-<int16_t> scaler(1.0, -26427, 32700 );
+FilterScaler<int16_t> scaler(1.0, -26427, 32700 );
 
 // callback used by A2DP to provide the sound data
 int32_t get_sound_data(Channels* data, int32_t len) {
