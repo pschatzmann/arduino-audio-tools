@@ -1,4 +1,5 @@
-# Using ESP8266Audio to Read Files 
+# Stream SD MP3 Files to A2DP Bluetooth using the ESP8266Audio Library
+
 
 The processing of files with the help of the [ESP8266Audio](https://github.com/earlephilhower/ESP8266Audio) is a little bit more involved. Howver it allows to process different file types from different sources. Please consult the project for further details.
 
