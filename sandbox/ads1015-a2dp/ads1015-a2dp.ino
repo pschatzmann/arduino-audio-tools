@@ -6,8 +6,7 @@
 #include "Wire.h"
 #include "Adafruit_ADS1015.h"
 #include "BluetoothA2DPSource.h"
-#include "Buffer.h"
-#include "TimerAlarmRepeating.h"
+#include "SoundTools.h"
 
 const int buffer_size = 512;  
 const int buffer_count = 10;

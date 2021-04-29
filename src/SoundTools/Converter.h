@@ -1,5 +1,4 @@
 #pragma once
-#include "Config.h"
 #include "SoundTypes.h"
 #include "BluetoothA2DPSource.h"
 

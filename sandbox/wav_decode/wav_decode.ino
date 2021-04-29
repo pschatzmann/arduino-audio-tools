@@ -1,6 +1,5 @@
 #include "AudioWAV.h"
-#include "AudioTools.h" 
-#include "AudioToolsESP32.h" 
+#include "SoundTools.h"
 
 I2S i2s; // I2S output destination
 WAVDecoder decoder(i2s);  
