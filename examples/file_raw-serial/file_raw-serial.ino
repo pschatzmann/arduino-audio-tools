@@ -3,8 +3,8 @@
 #include <SD.h>
 
 File sound_file;
-const char* file_name = "audio.raw";
-const int sd_ss_pin = 4;
+const char* file_name = "/audio.raw";
+const int sd_ss_pin = 5;
 const int32_t max_buffer_len = 512;
 int32_t buffer[max_buffer_len][2];
 
