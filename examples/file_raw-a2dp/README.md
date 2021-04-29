@@ -10,15 +10,16 @@ The SD module is connected with the help of the SPI bus
 
 ### Pins:
 
-We use SPI2 (HSPI):
+We connect the SD to the ESP32:
 
-| MCP6022 | ESP32
+| SD      | ESP32
 |---------|---------------
 | VCC     | 5V
 | GND     | GND
-| CS      | CS GP15
-| SCK     | SCK GP14
-| MOSI    | MOSI GP13
-| MISO    | MISO GP12
+| CS      | CS GP5
+| SCK     | SCK GP18
+| MOSI    | MOSI GP23
+| MISO    | MISO GP19
+
 
 
