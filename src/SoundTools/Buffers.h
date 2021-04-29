@@ -6,6 +6,8 @@ namespace sound_tools {
 
 /**
  * @brief Shared functionality of all buffers
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 template<typename T>
 class BaseBuffer {
@@ -73,6 +75,8 @@ public:
 
 /**
  * @brief A simple Buffer implementation which just uses a (dynamically sized) array
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 
 template<typename T>
@@ -144,6 +148,8 @@ protected:
 
 /**
  * @brief A lock free N buffer. If count=2 we create a DoubleBuffer, if count=3 a TripleBuffer etc.
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 template<typename T>
 class NBuffer : public BaseBuffer<T> {

@@ -7,11 +7,19 @@ namespace sound_tools {
 
 /**
  * @brief 24bit integer which is used for I2S sound processing. It works only on little endian machines!
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  * 
  */
 class int24_t {
 
   public:
+
+    int24_t(){
+        value[0]=0;
+        value[1]=0;
+        value[2]=0;
+    }
 
     int24_t(uint8_t *ptr){
         value[0]=ptr[0];

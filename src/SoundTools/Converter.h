@@ -26,6 +26,8 @@ static int16_t convertFrom32To16(int32_t value)  {
 /**
  * @brief Abstract Base class for Filters
  * A filter is processing the data in the indicated array
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  * @tparam T 
  */
 template<typename T>
@@ -37,6 +39,8 @@ class BaseFilter {
 
 /**
  * @brief Multiplies the values with the indicated factor adds the offset and clips at maxValue. To mute use a factor of 0.0!
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  * 
  * @tparam T 
  */
@@ -73,6 +77,8 @@ class FilterScaler : public  BaseFilter<T> {
 
 /**
  * @brief Switches the left and right channel
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  * 
  * @tparam T 
  */
@@ -91,6 +97,8 @@ class FilterSwitchLeftAndRight : public  BaseFilter<T> {
 
 /**
  * @brief Make sure that both channels contain any data
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  * 
  * @tparam T 
  */
@@ -143,6 +151,8 @@ class FilterFillLeftAndRight : public  BaseFilter<T> {
 /**
  * @brief special case for internal DAC output, the incomming PCM buffer needs 
  *  to be converted from signed 16bit to unsigned
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  * 
  * @tparam T 
  */
@@ -165,6 +175,8 @@ class FilterToInternalDACFormat : public  BaseFilter<T> {
 
 /**
  * @brief Converts e.g. 24bit data to the indicated bigger data type
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  * 
  * @tparam T 
  */
@@ -195,6 +207,8 @@ class Converter {
 
 /**
  * @brief Covnerts the data from T src[][2] to a Channels array 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  * 
  * @tparam T 
  */

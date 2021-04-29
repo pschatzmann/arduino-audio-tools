@@ -4,6 +4,8 @@ namespace sound_tools {
 
 /**
  * @brief Base class to define the abstract interface for the sound generating classes
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  * 
  * @tparam T 
  */
@@ -27,6 +29,8 @@ class SoundGenerator  {
 
 /**
  * @brief Generates a Sound with the help of sin() function.
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  * 
  */
 template <class T>
@@ -72,6 +76,8 @@ class SineWaveGenerator : public SoundGenerator<T> {
 
 /**
  * @brief Generates a Sound with the help of rand() function.
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  * 
  */
 template <class T>

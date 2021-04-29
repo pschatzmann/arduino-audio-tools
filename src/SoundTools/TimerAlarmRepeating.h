@@ -10,6 +10,8 @@ typedef void (* simple_callback )(void);
 
 /**
  * @brief Internal class to manage User callbacks. An optinal parameter can be passed to the callback method
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 class UserCallback {
   public:
@@ -30,6 +32,8 @@ class UserCallback {
 
 /**
  * @brief Internal class to manage the different timer callbacks for the 4 hardware timers
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 class TimerCallback {
   public:
@@ -67,6 +71,8 @@ class TimerCallback {
  * @brief Repeating Timer functions for simple scheduling of repeated execution.
  * The basic logic is taken from https://www.toptal.com/embedded/esp32-audio-sampling.
  * 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  * 
  */
 class TimerAlarmRepeating {
@@ -90,7 +96,6 @@ class TimerAlarmRepeating {
         ~TimerAlarmRepeating(){
             stop();
         }
-
 
         /**
          * We can not do any I2C calls in the interrupt handler so we need to do this in a separate task
