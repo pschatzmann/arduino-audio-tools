@@ -67,13 +67,15 @@ $(function() {
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md_README"></a> Some basic C++ classes that can be used for Audio Processing privided as Arduino Library</p>
 <ul>
+<li>Additinal Stream implementations: MemoryStream, UrlStream [ESP32 only]</li>
 <li>a simple I2S class (to read and write to the internal I2S) [ESP32 only]</li>
 <li>a simple ADC class (to read analog data with the help of I2S) [ESP32 only]</li>
 <li>Converters</li>
-<li>Notes (Frequencies of notes)</li>
+<li>Musical Notes (with Frequencies of notes)</li>
 <li>SineWaveGenerator (to generate some sine tone)</li>
 <li>NBuffer (Multi buffer for writing and reading of (sound) data)</li>
 <li>TimerAlarmRepeating (e.g. for sampling sound data using exact times) [ESP32 only]</li>
+<li>A Wav Encoder and Decoder</li>
 </ul>
 <p>This functionality provides the glue which makes different sound processing components and libraries work together. We also provide plenty of examples that demonstrate how to implement the different scenarios.</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
@@ -97,7 +99,10 @@ Documentation</h1>
 <p>Here is the generated <a href="https://pschatzmann.github.io/arduino-sound-tools/html/annotated.html">Class documentation</a></p>
 <h1><a class="anchor" id="autotoc_md5"></a>
 Project Status</h1>
-<p>This is currently work in progress. </p>
+<p>This is currently work in progress:</p>
+<p>| Functionality | Status |--------------------------------&mdash; | Analog input - ADC | tested | I2S | open | Streams | open | WAV encoding/deconding | open <br  />
+ | AAC encoding/deconding | open <br  />
+ </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->

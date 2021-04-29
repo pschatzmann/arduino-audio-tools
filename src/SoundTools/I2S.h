@@ -12,51 +12,52 @@ enum I2SMode  { TX_MODE, RX_MODE };
 const char* I2S_TAG = "I2S";
 /**
  * @brief ESP32 specific configuration for all i2s settings
- * 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 template<typename T>
 class I2SConfig {
   public:
-    int port_no = 0;
-    i2s_config_t i2s_config;
-    i2s_pin_config_t pin_config;
+    i2s_port_t port_no = I2S_NUM_0;
+    i2s_config_t i2s;
+    i2s_pin_config_t pin;
 
     /// Default Constructor
-    I2SConfig(I2SMode mode = TX) {
-        i2s_config = defaultConfig(mode);
-        pin_config = defaultPinConfig(mode);
+    I2SConfig(I2SMode mode) {
+        i2s = defaultConfig(mode);
+        pin = defaultPinConfig(mode);
     }
 
     /// Copy constructor
     I2SConfig(const I2SConfig<T> &cfg) {
       port_no = cfg.port_no;
-      i2s_config = cfg.i2s_config;
-      pin_config = cfg.pin_config;
+      i2s = cfg.i2s;
+      pin = cfg.pin;
     }
 
 
   protected:
-      i2s_config_t defaultConfig(I2SMode mode = TX_MODE) {
+      i2s_config_t defaultConfig(I2SMode mode) {
       ESP_LOGD(I2S_TAG, "%s", __func__);
       i2s_config_t i2s_config = {
-            .mode = (i2s_mode_t) ((mode == TX) ? (I2S_MODE_MASTER | I2S_MODE_TX) :  (I2S_MODE_MASTER | I2S_MODE_RX)) ,
+            .mode = (i2s_mode_t) ((mode == TX_MODE) ? (I2S_MODE_MASTER | I2S_MODE_TX) :  (I2S_MODE_MASTER | I2S_MODE_RX)) ,
             .sample_rate = 44100,
             .bits_per_sample = (i2s_bits_per_sample_t) (sizeof(T) * 8),
             .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,
             .communication_format = static_cast<i2s_comm_format_t>(I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_MSB),
             .intr_alloc_flags = ESP_INTR_FLAG_LEVEL1, // default interrupt priority
             .dma_buf_count = 8,
-            .dma_buf_len = 512,
+            .dma_buf_len = 1024,
             .use_apll = false,
         };
         return i2s_config;
     }
 
-    i2s_pin_config_t defaultPinConfig(I2SMode mode = TX) {
-        ESP_LOGD(I2S_TAG, "%s - mode: %s", __func__, mode==TX ? "TX" : "RX");
+    i2s_pin_config_t defaultPinConfig(I2SMode mode = TX_MODE) {
+        ESP_LOGD(I2S_TAG, "%s - mode: %s", __func__, mode==TX_MODE ? "TX" : "RX");
         i2s_pin_config_t pin_config_const = {
-            .bck_io_num = 26,
-            .ws_io_num = 25,
+            .bck_io_num = 14,
+            .ws_io_num = 15,
             .data_out_num = mode == TX_MODE ? 22 : I2S_PIN_NO_CHANGE,
             .data_in_num = mode == RX_MODE ? 32 : I2S_PIN_NO_CHANGE
         };
@@ -67,6 +68,8 @@ class I2SConfig {
 
 /**
  * @brief A Simple I2S interface class.
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 template<typename T>
 class I2S {
@@ -90,10 +93,12 @@ class I2S {
     /// starts the DAC 
     void begin(I2SConfig<T> cfg) {
       ESP_LOGD(I2S_TAG, "%s", __func__);
-      this->i2s_num = (i2s_port_t) cfg.port_no;            
-      this->i2s_config = cfg.i2s_config;
-      this->pin_config = cfg.pin_config;
+      this->i2s_num =  cfg.port_no;            
+      this->i2s_config = cfg.i2s;
+      this->pin_config = cfg.pin;
 
+      ESP_LOGD(I2S_TAG, "sample rate: %d", i2s_config.sample_rate);
+      ESP_LOGD(I2S_TAG, "bits per sample: %d", i2s_config.bits_per_sample);
       ESP_LOGD(I2S_TAG, "pin bck_io_num: %d", pin_config.bck_io_num);
       ESP_LOGD(I2S_TAG, "pin ws_io_num: %d", pin_config.ws_io_num);
       ESP_LOGD(I2S_TAG, "pin data_out_num: %d", pin_config.data_out_num);
@@ -109,6 +114,7 @@ class I2S {
         ESP_LOGE(I2S_TAG, "%s - %s", __func__, "i2s_set_pin");
       }
 
+      // clear initial buffer
       i2s_zero_dma_buffer(i2s_num);
 
     }
@@ -134,10 +140,11 @@ class I2S {
     }
     
   protected:
-    i2s_port_t i2s_num = (i2s_port_t) 0; // i2s port number
+    i2s_port_t i2s_num;
     i2s_pin_config_t pin_config;
     i2s_config_t i2s_config;
     
+
     /// writes the data to the I2S interface
     size_t writeBytes(const void *src, size_t size_bytes, TickType_t ticks_to_wait=portMAX_DELAY){
       size_t result = 0;            
@@ -146,6 +153,7 @@ class I2S {
       }
       return result;
     }
+
 
     size_t readBytes(void *dest, size_t size_bytes,  TickType_t ticks_to_wait=portMAX_DELAY){
       size_t result = 0;

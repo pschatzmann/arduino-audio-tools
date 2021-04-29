@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['i2s_15',['I2S',['../classsound__tools_1_1_i2_s.html#a010d30140b94a6cde55243257dede9c1',1,'sound_tools::I2S::I2S()'],['../classsound__tools_1_1_i2_s.html',1,'sound_tools::I2S&lt; T &gt;']]],
-  ['i2sconfig_16',['I2SConfig',['../classsound__tools_1_1_i2_s_config.html#a86e294f8f1c6c36742335ac5205c6776',1,'sound_tools::I2SConfig::I2SConfig(I2SMode mode=TX)'],['../classsound__tools_1_1_i2_s_config.html#aa9b4155ce0f7f88b663ebf69f8424439',1,'sound_tools::I2SConfig::I2SConfig(const I2SConfig&lt; T &gt; &amp;cfg)'],['../classsound__tools_1_1_i2_s_config.html',1,'sound_tools::I2SConfig&lt; T &gt;']]],
-  ['int24_5ft_17',['int24_t',['../classsound__tools_1_1int24__t.html',1,'sound_tools']]]
+  ['filterfillleftandright_13',['FilterFillLeftAndRight',['../classsound__tools_1_1_filter_fill_left_and_right.html',1,'sound_tools']]],
+  ['filterscaler_14',['FilterScaler',['../classsound__tools_1_1_filter_scaler.html',1,'sound_tools']]],
+  ['filterswitchleftandright_15',['FilterSwitchLeftAndRight',['../classsound__tools_1_1_filter_switch_left_and_right.html',1,'sound_tools']]],
+  ['filtertointernaldacformat_16',['FilterToInternalDACFormat',['../classsound__tools_1_1_filter_to_internal_d_a_c_format.html',1,'sound_tools']]],
+  ['frequency_17',['frequency',['../classsound__tools_1_1_musical_notes.html#a1468c117c5a1bb38fcf0b46721fcd0ed',1,'sound_tools::MusicalNotes::frequency(MusicalNotesEnum note, uint8_t octave)'],['../classsound__tools_1_1_musical_notes.html#a00982415290f2ccd586e73183f9083cc',1,'sound_tools::MusicalNotes::frequency(uint16_t idx)']]]
 ];

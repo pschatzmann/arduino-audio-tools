@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['timeralarmrepeating_33',['TimerAlarmRepeating',['../classsound__tools_1_1_timer_alarm_repeating.html',1,'sound_tools']]],
-  ['timercallback_34',['TimerCallback',['../classsound__tools_1_1_timer_callback.html',1,'sound_tools']]]
+  ['read_32',['read',['../classsound__tools_1_1_a_d_c.html#a60b1caf4f6b9de0398a2be22cd3850fc',1,'sound_tools::ADC::read()'],['../classsound__tools_1_1_i2_s.html#a43e28cfd8768e986a2ae4cc565c2161e',1,'sound_tools::I2S::read()']]]
 ];

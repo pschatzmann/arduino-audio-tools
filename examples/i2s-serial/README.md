@@ -14,10 +14,10 @@ The INMP441 is a high-performance, low power, digital-output, omnidirectional ME
 | --------| ---------------
 | VDD     |  3.3
 | GND     |  GND
-| SD      |  IN (GPIO23)
+| SD      |  IN (GPIO32)
 | L/R     |  GND
-| WS      |  WS (GPIO25)
-| SCK     |  BCK (GPIO26)
+| WS      |  WS (GPIO15)
+| SCK     |  BCK (GPIO14)
 
 
 SCK: Serial data clock for I²S interface

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['read_72',['read',['../classsound__tools_1_1_a_d_c.html#a60b1caf4f6b9de0398a2be22cd3850fc',1,'sound_tools::ADC::read()'],['../classsound__tools_1_1_i2_s.html#a43e28cfd8768e986a2ae4cc565c2161e',1,'sound_tools::I2S::read()']]]
+  ['mainfrequency_103',['mainFrequency',['../classsound__tools_1_1_musical_notes.html#a838e64b92ae4515b00e1b698dd3a79e8',1,'sound_tools::MusicalNotes::mainFrequency(uint8_t mainNoteIdx, uint8_t octave)'],['../classsound__tools_1_1_musical_notes.html#aa6048659df37fb360e89192b5638b983',1,'sound_tools::MusicalNotes::mainFrequency(uint64_t idx)']]]
 ];

@@ -18,6 +18,8 @@ typedef int16_t arrayOf2int16_t[2];
 const char* ADC_TAG = "ADC";
 /**
  * @brief ESP32 specific configuration for i2s input via adc. The default input pin is GPIO34.
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  * 
  * 
  */
@@ -97,6 +99,8 @@ class ADCConfig {
 
 /**
  * @brief A very fast Analog to Digital Converter which is using the ESP32 I2S interface
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 class ADC {
   public:

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['write_79',['write',['../classsound__tools_1_1_i2_s.html#ad4844092da5fa679dbf6baecb7863b88',1,'sound_tools::I2S']]],
-  ['writebytes_80',['writeBytes',['../classsound__tools_1_1_i2_s.html#affe76951a160f3cac092671b216be90e',1,'sound_tools::I2S']]]
+  ['read_106',['read',['../classsound__tools_1_1_a_d_c.html#a60b1caf4f6b9de0398a2be22cd3850fc',1,'sound_tools::ADC::read()'],['../classsound__tools_1_1_i2_s.html#a43e28cfd8768e986a2ae4cc565c2161e',1,'sound_tools::I2S::read()']]]
 ];

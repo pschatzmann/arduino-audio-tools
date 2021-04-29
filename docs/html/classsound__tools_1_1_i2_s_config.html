@@ -82,10 +82,10 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a86e294f8f1c6c36742335ac5205c6776"><td class="memItemLeft" align="right" valign="top"><a id="a86e294f8f1c6c36742335ac5205c6776"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsound__tools_1_1_i2_s_config.html#a86e294f8f1c6c36742335ac5205c6776">I2SConfig</a> (I2SMode mode=TX)</td></tr>
-<tr class="memdesc:a86e294f8f1c6c36742335ac5205c6776"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Constructor. <br /></td></tr>
-<tr class="separator:a86e294f8f1c6c36742335ac5205c6776"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a9fe97bb87af0e073eb5adbdc2311b7"><td class="memItemLeft" align="right" valign="top"><a id="a3a9fe97bb87af0e073eb5adbdc2311b7"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsound__tools_1_1_i2_s_config.html#a3a9fe97bb87af0e073eb5adbdc2311b7">I2SConfig</a> (I2SMode mode)</td></tr>
+<tr class="memdesc:a3a9fe97bb87af0e073eb5adbdc2311b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Constructor. <br /></td></tr>
+<tr class="separator:a3a9fe97bb87af0e073eb5adbdc2311b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa9b4155ce0f7f88b663ebf69f8424439"><td class="memItemLeft" align="right" valign="top"><a id="aa9b4155ce0f7f88b663ebf69f8424439"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsound__tools_1_1_i2_s_config.html#aa9b4155ce0f7f88b663ebf69f8424439">I2SConfig</a> (const <a class="el" href="classsound__tools_1_1_i2_s_config.html">I2SConfig</a>&lt; T &gt; &amp;cfg)</td></tr>
 <tr class="memdesc:aa9b4155ce0f7f88b663ebf69f8424439"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor. <br /></td></tr>
@@ -93,30 +93,32 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a955a6330d9c2b472e2300b5cbd9ffb1b"><td class="memItemLeft" align="right" valign="top"><a id="a955a6330d9c2b472e2300b5cbd9ffb1b"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>port_no</b> = 0</td></tr>
-<tr class="separator:a955a6330d9c2b472e2300b5cbd9ffb1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae258ad7ad1b52c73450b636cd3888dd3"><td class="memItemLeft" align="right" valign="top"><a id="ae258ad7ad1b52c73450b636cd3888dd3"></a>
-i2s_config_t&#160;</td><td class="memItemRight" valign="bottom"><b>i2s_config</b></td></tr>
-<tr class="separator:ae258ad7ad1b52c73450b636cd3888dd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d31b31252e95d8a8faa404b10f400d7"><td class="memItemLeft" align="right" valign="top"><a id="a4d31b31252e95d8a8faa404b10f400d7"></a>
-i2s_pin_config_t&#160;</td><td class="memItemRight" valign="bottom"><b>pin_config</b></td></tr>
-<tr class="separator:a4d31b31252e95d8a8faa404b10f400d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad82396d8e31bbcf75c645fa848c44b1b"><td class="memItemLeft" align="right" valign="top"><a id="ad82396d8e31bbcf75c645fa848c44b1b"></a>
+i2s_port_t&#160;</td><td class="memItemRight" valign="bottom"><b>port_no</b> = I2S_NUM_0</td></tr>
+<tr class="separator:ad82396d8e31bbcf75c645fa848c44b1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefb1a2634a38729374dd60f8f3e08102"><td class="memItemLeft" align="right" valign="top"><a id="aefb1a2634a38729374dd60f8f3e08102"></a>
+i2s_config_t&#160;</td><td class="memItemRight" valign="bottom"><b>i2s</b></td></tr>
+<tr class="separator:aefb1a2634a38729374dd60f8f3e08102"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a767239bed54e006a17d712bf3d5744a9"><td class="memItemLeft" align="right" valign="top"><a id="a767239bed54e006a17d712bf3d5744a9"></a>
+i2s_pin_config_t&#160;</td><td class="memItemRight" valign="bottom"><b>pin</b></td></tr>
+<tr class="separator:a767239bed54e006a17d712bf3d5744a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a787a9d3162807146bdd96c2897688494"><td class="memItemLeft" align="right" valign="top"><a id="a787a9d3162807146bdd96c2897688494"></a>
-i2s_config_t&#160;</td><td class="memItemRight" valign="bottom"><b>defaultConfig</b> (I2SMode mode=TX_MODE)</td></tr>
-<tr class="separator:a787a9d3162807146bdd96c2897688494"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa19ea1314bde5f496322a2515d7aa4e"><td class="memItemLeft" align="right" valign="top"><a id="aaa19ea1314bde5f496322a2515d7aa4e"></a>
-i2s_pin_config_t&#160;</td><td class="memItemRight" valign="bottom"><b>defaultPinConfig</b> (I2SMode mode=TX)</td></tr>
-<tr class="separator:aaa19ea1314bde5f496322a2515d7aa4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e2a88dfd520c680cd590422f7a91408"><td class="memItemLeft" align="right" valign="top"><a id="a1e2a88dfd520c680cd590422f7a91408"></a>
+i2s_config_t&#160;</td><td class="memItemRight" valign="bottom"><b>defaultConfig</b> (I2SMode mode)</td></tr>
+<tr class="separator:a1e2a88dfd520c680cd590422f7a91408"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcd5ddc2e607d0d84f6ae1000df2620b"><td class="memItemLeft" align="right" valign="top"><a id="abcd5ddc2e607d0d84f6ae1000df2620b"></a>
+i2s_pin_config_t&#160;</td><td class="memItemRight" valign="bottom"><b>defaultPinConfig</b> (I2SMode mode=TX_MODE)</td></tr>
+<tr class="separator:abcd5ddc2e607d0d84f6ae1000df2620b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename T&gt;<br />
 class sound_tools::I2SConfig&lt; T &gt;</h3>
 
 <p>ESP32 specific configuration for all i2s settings. </p>
+<dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/SoundTools/<a class="el" href="_i2_s_8h_source.html">I2S.h</a></li>
 </ul>

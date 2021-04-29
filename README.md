@@ -2,13 +2,15 @@
 
 Some basic C++ classes that can be used for Audio Processing privided as Arduino Library
 
+- Additinal Stream implementations: MemoryStream, UrlStream [ESP32 only]
 - a simple I2S class (to read and write to the internal I2S) [ESP32 only]
 - a simple ADC class (to read analog data with the help of I2S) [ESP32 only]
 - Converters
-- Notes (Frequencies of notes)
+- Musical Notes (with Frequencies of notes)
 - SineWaveGenerator (to generate some sine tone)
 - NBuffer (Multi buffer for writing and reading of (sound) data)
 - TimerAlarmRepeating (e.g. for sampling sound data using exact times) [ESP32 only]
+- A Wav Encoder and Decoder
 
 This functionality provides the glue which makes different sound processing components and libraries work together.
 We also provide plenty of examples that demonstrate how to implement the different scenarios.
@@ -41,6 +43,15 @@ Here is the generated [Class documentation](https://pschatzmann.github.io/arduin
 
 ## Project Status
 
-This is currently work in progress. 
+This is currently work in progress:
 
+| Functionality          | Status
+|-----------------------------------
+| Analog input - ADC     | tested 
+| I2S                    | tested
+| Files                  | open
+| Streams                | open
+| WAV encoding/deconding | open               
+| AAC encoding/deconding | open               
+| int24_t                | open               
 

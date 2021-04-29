@@ -5,14 +5,13 @@
 using namespace sound_tools;  
 
 /**
- * @brief We use a ADS1015 I2S microphone as input and send the data to A2DP
- * Unfortunatly the data type from the microphone (int32_t)  does not match with the required data type by A2DP (int16_t),
- * so we need to convert.
+ * @brief We use I2S as input and send the data to A2DP
+ * To test we use a INMP441 microphone. 
  */ 
 
 I2S<int32_t> i2s;
 const size_t max_buffer_len = 512;
-int16_t buffer[max_buffer_len][2];
+int32_t buffer[max_buffer_len][2];
 
 // Arduino Setup
 void setup(void) {
@@ -20,7 +19,9 @@ void setup(void) {
 
   // start i2s input with default configuration
   Serial.println("starting I2S...");
-  i2s.begin(i2s.defaultConfig(RX_MODE));
+  I2SConfig<int32_t> config = i2s.defaultConfig(RX_MODE);
+  config.i2s.sample_rate = 16000;
+  i2s.begin(config);
 }
 
 // Arduino loop - repeated processing 
@@ -28,8 +29,8 @@ void loop() {
   size_t len = i2s.read(buffer, max_buffer_len); 
 
   for (int j=0;j<len;j++){
-    Serial.print(buffer[j][0]);
+    Serial.print((int32_t)buffer[j][0]);
     Serial.print(", ");
-    Serial.println(buffer[j][1]);
+    Serial.println((int32_t)buffer[j][1]);
   }
 }
