@@ -45,13 +45,13 @@ Here is the generated [Class documentation](https://pschatzmann.github.io/arduin
 
 This is currently work in progress:
 
-| Functionality          | Status
-|-----------------------------------
-| Analog input - ADC     | tested 
-| I2S                    | tested
-| Files                  | open
-| Streams                | open
-| WAV encoding/deconding | open               
-| AAC encoding/deconding | open               
-| int24_t                | open               
+| Functionality          | Status  |
+|------------------------|---------|
+| Analog input - ADC     | tested  |
+| I2S                    | tested  |
+| Files                  | open    |
+| Streams                | open    |
+| WAV encoding/deconding | open    |          
+| AAC encoding/deconding | open    |          
+| int24_t                | open    |           
 
