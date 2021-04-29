@@ -14,4 +14,5 @@
 #include "SoundTools/SoundGenerator.h"
 #include "SoundTools/I2S.h"
 #include "SoundTools/ADC.h"
+#include "SoundTools/AudioLogger.h"
 #include "SoundTools/Buffers.h"

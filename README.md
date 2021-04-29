@@ -17,10 +17,10 @@ We also provide plenty of examples that demonstrate how to implement the differe
 
 ## Optional Libraries
 
-- SD Library
-- A2DP Library
-- arduino-fdk-aac
-- ESP8266Audio
+- [ESP32-A2DP Library](https://github.com/pschatzmann/ESP32-A2DP)
+- [arduino-fdk-aac](https://github.com/pschatzmann/arduino-fdk-aac)
+- [ESP8266Audio](https://github.com/earlephilhower/ESP8266Audio)
+- [SD Library](https://www.arduino.cc/en/reference/SD)
 
 ## Examples
 
@@ -49,7 +49,7 @@ This is currently work in progress:
 |------------------------|---------|
 | Analog input - ADC     | tested  |
 | I2S                    | tested  |
-| Files                  | tested    |
+| Files (RAW, MP3...)    | tested  |
 | Streams                | open    |
 | WAV encoding/deconding | open    |          
 | AAC encoding/deconding | open    |          
