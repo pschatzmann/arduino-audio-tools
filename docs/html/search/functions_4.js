@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['error_96',['error',['../classpico__arduino_1_1_sound_logger.html#a43f4419acb2eec1781cc3cfd4f48aafc',1,'pico_arduino::SoundLogger']]]
+  ['error_102',['error',['../classsound__tools_1_1_sound_logger.html#adc41bb01ad64a3bea6055229cf7951b4',1,'sound_tools::SoundLogger']]]
 ];

@@ -6,7 +6,11 @@
 #define SOUND_LOG_LEVEL Error
 #endif
 
-namespace pico_arduino {
+#ifndef PRINTF_BUFFER_SIZE
+#define PRINTF_BUFFER_SIZE 160
+#endif
+
+namespace sound_tools {
 
 /**
  * @brief A simple Logger that writes messages dependent on the log level
@@ -101,6 +105,6 @@ class SoundLogger {
 
 };
 
-inline SoundLogger Logger;
+SoundLogger Logger;
 
 }    

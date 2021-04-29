@@ -1,5 +1,4 @@
 #pragma once
-#include <bits/stdc++.h>
 
 namespace sound_tools {
 

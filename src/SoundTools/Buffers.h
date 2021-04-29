@@ -221,7 +221,7 @@ public:
               actual_write_buffer = getNextAvailableBuffer();
           }
       } else {
-          Serial.println("actual_write_buffer is full");
+          //Logger.debug("actual_write_buffer is full");
       }
       
       if (start_time==0l){
@@ -290,14 +290,14 @@ public:
     
     
 protected:
-    uint16_t buffer_count;
-    uint16_t write_buffer_count;
-    BaseBuffer<T> *actual_read_buffer;
-    BaseBuffer<T> *actual_write_buffer;
-    BaseBuffer<T> **avaliable_buffers;
-    BaseBuffer<T> **filled_buffers;
-    unsigned long start_time;
-    unsigned long sample_count;
+    uint16_t buffer_count = 0;
+    uint16_t write_buffer_count = 0;
+    BaseBuffer<T> *actual_read_buffer = nullptr;
+    BaseBuffer<T> *actual_write_buffer = nullptr;
+    BaseBuffer<T> **avaliable_buffers = nullptr;
+    BaseBuffer<T> **filled_buffers = nullptr;
+    unsigned long start_time = 0;
+    unsigned long sample_count = 0;
 
 
     BaseBuffer<T> *getNextAvailableBuffer() {

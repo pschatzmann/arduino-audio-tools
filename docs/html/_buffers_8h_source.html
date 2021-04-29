@@ -276,7 +276,7 @@ $(function() {
 <div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;              actual_write_buffer = getNextAvailableBuffer();</div>
 <div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;          }</div>
 <div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;      } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;          Serial.println(<span class="stringliteral">&quot;actual_write_buffer is full&quot;</span>);</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;          <span class="comment">//Logger.debug(&quot;actual_write_buffer is full&quot;);</span></div>
 <div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;      }</div>
 <div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;      </div>
 <div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;      <span class="keywordflow">if</span> (start_time==0l){</div>
@@ -345,14 +345,14 @@ $(function() {
 <div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    </div>
 <div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    </div>
 <div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    uint16_t buffer_count;</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    uint16_t write_buffer_count;</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    <a class="code" href="classsound__tools_1_1_base_buffer.html">BaseBuffer&lt;T&gt;</a> *actual_read_buffer;</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    <a class="code" href="classsound__tools_1_1_base_buffer.html">BaseBuffer&lt;T&gt;</a> *actual_write_buffer;</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    <a class="code" href="classsound__tools_1_1_base_buffer.html">BaseBuffer&lt;T&gt;</a> **avaliable_buffers;</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    <a class="code" href="classsound__tools_1_1_base_buffer.html">BaseBuffer&lt;T&gt;</a> **filled_buffers;</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> start_time;</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> sample_count;</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    uint16_t buffer_count = 0;</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    uint16_t write_buffer_count = 0;</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    <a class="code" href="classsound__tools_1_1_base_buffer.html">BaseBuffer&lt;T&gt;</a> *actual_read_buffer = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    <a class="code" href="classsound__tools_1_1_base_buffer.html">BaseBuffer&lt;T&gt;</a> *actual_write_buffer = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    <a class="code" href="classsound__tools_1_1_base_buffer.html">BaseBuffer&lt;T&gt;</a> **avaliable_buffers = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    <a class="code" href="classsound__tools_1_1_base_buffer.html">BaseBuffer&lt;T&gt;</a> **filled_buffers = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> start_time = 0;</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> sample_count = 0;</div>
 <div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160; </div>
 <div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160; </div>
 <div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    <a class="code" href="classsound__tools_1_1_base_buffer.html">BaseBuffer&lt;T&gt;</a> *getNextAvailableBuffer() {</div>
