@@ -1,9 +1,5 @@
 
 #include "SoundTools.h"
-#ifndef A2DP
-#error You need to install the A2DP Library
-#endif
-
 #include "BluetoothA2DPSource.h"
 #include <SPI.h>
 #include <SD.h>

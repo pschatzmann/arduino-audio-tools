@@ -2,9 +2,7 @@
  *  Test sampling rate
  */
 
-#include "SoundGenerator.h"
-#include "TimerAlarmRepeating.h"
-#include "Notes.h"
+#include "SoundTools.h"
 
 unsigned long count;
 unsigned long start;
