@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-sound-tools: src/TimerAlarmRepeating_ESP32.h Source File</title>
+<title>arduino-audio-tools: src/TimerAlarmRepeating_ESP32.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">arduino-sound-tools
+   <div id="projectname">arduino-audio-tools
    </div>
   </td>
  </tr>
@@ -73,7 +73,7 @@ $(function() {
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#ifdef ESP32</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keyword">namespace </span>sound_tools {</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keyword">namespace </span>audio_tools {</div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">typedef</span> void (* repeating_timer_callback_t )(<span class="keywordtype">void</span>* obj);</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">typedef</span> void (* simple_callback )(void);</div>
@@ -215,11 +215,11 @@ $(function() {
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;}</div>
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclasssound__tools_1_1_timer_alarm_repeating_html"><div class="ttname"><a href="classsound__tools_1_1_timer_alarm_repeating.html">sound_tools::TimerAlarmRepeating</a></div><div class="ttdoc">Repeating Timer functions for simple scheduling of repeated execution. The basic logic is taken from ...</div><div class="ttdef"><b>Definition:</b> TimerAlarmRepeating_ESP32.h:72</div></div>
-<div class="ttc" id="aclasssound__tools_1_1_timer_alarm_repeating_html_a17fa6188fb0e3c7b881e84fd21bf29f0"><div class="ttname"><a href="classsound__tools_1_1_timer_alarm_repeating.html#a17fa6188fb0e3c7b881e84fd21bf29f0">sound_tools::TimerAlarmRepeating::start</a></div><div class="ttdeci">bool start(repeating_timer_callback_t callback_f, uint64_t time, TimeUnit unit=TimerAlarmRepeating::MS, void *user_data=nullptr)</div><div class="ttdef"><b>Definition:</b> TimerAlarmRepeating_ESP32.h:116</div></div>
-<div class="ttc" id="aclasssound__tools_1_1_timer_alarm_repeating_html_a3f65e5eb1e1ffb4d32c92dbaa147c47f"><div class="ttname"><a href="classsound__tools_1_1_timer_alarm_repeating.html#a3f65e5eb1e1ffb4d32c92dbaa147c47f">sound_tools::TimerAlarmRepeating::complexHandler</a></div><div class="ttdeci">static void complexHandler(void *param)</div><div class="ttdef"><b>Definition:</b> TimerAlarmRepeating_ESP32.h:98</div></div>
-<div class="ttc" id="aclasssound__tools_1_1_timer_callback_html"><div class="ttname"><a href="classsound__tools_1_1_timer_callback.html">sound_tools::TimerCallback</a></div><div class="ttdoc">Internal class to manage the different timer callbacks for the 4 hardware timers.</div><div class="ttdef"><b>Definition:</b> TimerAlarmRepeating_ESP32.h:34</div></div>
-<div class="ttc" id="aclasssound__tools_1_1_user_callback_html"><div class="ttname"><a href="classsound__tools_1_1_user_callback.html">sound_tools::UserCallback</a></div><div class="ttdoc">Internal class to manage User callbacks. An optinal parameter can be passed to the callback method.</div><div class="ttdef"><b>Definition:</b> TimerAlarmRepeating_ESP32.h:14</div></div>
+<div class="ttc" id="aclasssound__tools_1_1_timer_alarm_repeating_html"><div class="ttname"><a href="classsound__tools_1_1_timer_alarm_repeating.html">audio_tools::TimerAlarmRepeating</a></div><div class="ttdoc">Repeating Timer functions for simple scheduling of repeated execution. The basic logic is taken from ...</div><div class="ttdef"><b>Definition:</b> TimerAlarmRepeating_ESP32.h:72</div></div>
+<div class="ttc" id="aclasssound__tools_1_1_timer_alarm_repeating_html_a17fa6188fb0e3c7b881e84fd21bf29f0"><div class="ttname"><a href="classsound__tools_1_1_timer_alarm_repeating.html#a17fa6188fb0e3c7b881e84fd21bf29f0">audio_tools::TimerAlarmRepeating::start</a></div><div class="ttdeci">bool start(repeating_timer_callback_t callback_f, uint64_t time, TimeUnit unit=TimerAlarmRepeating::MS, void *user_data=nullptr)</div><div class="ttdef"><b>Definition:</b> TimerAlarmRepeating_ESP32.h:116</div></div>
+<div class="ttc" id="aclasssound__tools_1_1_timer_alarm_repeating_html_a3f65e5eb1e1ffb4d32c92dbaa147c47f"><div class="ttname"><a href="classsound__tools_1_1_timer_alarm_repeating.html#a3f65e5eb1e1ffb4d32c92dbaa147c47f">audio_tools::TimerAlarmRepeating::complexHandler</a></div><div class="ttdeci">static void complexHandler(void *param)</div><div class="ttdef"><b>Definition:</b> TimerAlarmRepeating_ESP32.h:98</div></div>
+<div class="ttc" id="aclasssound__tools_1_1_timer_callback_html"><div class="ttname"><a href="classsound__tools_1_1_timer_callback.html">audio_tools::TimerCallback</a></div><div class="ttdoc">Internal class to manage the different timer callbacks for the 4 hardware timers.</div><div class="ttdef"><b>Definition:</b> TimerAlarmRepeating_ESP32.h:34</div></div>
+<div class="ttc" id="aclasssound__tools_1_1_user_callback_html"><div class="ttname"><a href="classsound__tools_1_1_user_callback.html">audio_tools::UserCallback</a></div><div class="ttdoc">Internal class to manage User callbacks. An optinal parameter can be passed to the callback method.</div><div class="ttdef"><b>Definition:</b> TimerAlarmRepeating_ESP32.h:14</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

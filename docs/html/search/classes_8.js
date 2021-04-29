@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['timeralarmrepeating_85',['TimerAlarmRepeating',['../classsound__tools_1_1_timer_alarm_repeating.html',1,'sound_tools']]],
-  ['timercallback_86',['TimerCallback',['../classsound__tools_1_1_timer_callback.html',1,'sound_tools']]]
+  ['timeralarmrepeating_85',['TimerAlarmRepeating',['../classaudio__tools_1_1_timer_alarm_repeating.html',1,'audio_tools']]],
+  ['timercallback_86',['TimerCallback',['../classaudio__tools_1_1_timer_callback.html',1,'audio_tools']]]
 ];

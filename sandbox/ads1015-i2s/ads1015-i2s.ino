@@ -5,12 +5,12 @@
 
 #include "Wire.h"
 #include "Adafruit_ADS1015.h"
-#include "BluetoothA2DPSource.h"
-#include "SoundTools.h"
+#include "AudioTools.h"
 
 const int buffer_size = 512;  
 const int buffer_count = 10;
-const int sampling_rate = 44100;
+const int sampling_rate = 3300;  // max supported Sample Rate	
+int16_t array[100][2];
 
 Adafruit_ADS1015 ads1015(0x48);   
 TimerAlarmRepeating sound_timer;
@@ -38,17 +38,11 @@ void setup(void) {
   sound_timer.start(write_sample, waitUs, TimerAlarmRepeating::US);
 }
 
-void writeI2S(){
-  static sound_t array[50][2];
+// Arduino loop - repeated processing
+void loop() {
   // copy sound data from samples to I2S
   size_t len = buffer.readFrames(array);
   if (len>0){
     i2s.write(array, len);
   }  
-  
-}
-
-// Arduino loop - repeated processing
-void loop() {
-  writeI2S();
 }

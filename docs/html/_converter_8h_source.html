@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-sound-tools: src/SoundTools/Converter.h Source File</title>
+<title>arduino-audio-tools: src/AudioTools/Converter.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">arduino-sound-tools
+   <div id="projectname">arduino-audio-tools
    </div>
   </td>
  </tr>
@@ -61,7 +61,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_a50c1b24240d73a4899e7172ebea8dc1.html">SoundTools</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -73,7 +73,7 @@ $(function() {
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;SoundTypes.h&quot;</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;BluetoothA2DPSource.h&quot;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keyword">namespace </span>sound_tools {</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keyword">namespace </span>audio_tools {</div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">static</span> int32_t convertFrom24To32(int24_t value)  {</div>
@@ -94,16 +94,16 @@ $(function() {
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classsound__tools_1_1_base_filter.html">   33</a></span>&#160;<span class="keyword">class </span><a class="code" href="classsound__tools_1_1_base_filter.html">BaseFilter</a> {</div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_base_filter.html">   33</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_base_filter.html">BaseFilter</a> {</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> process(T (*src)[2], <span class="keywordtype">size_t</span> size) = 0;</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;};</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classsound__tools_1_1_filter_scaler.html">   47</a></span>&#160;<span class="keyword">class </span><a class="code" href="classsound__tools_1_1_filter_scaler.html">FilterScaler</a> : <span class="keyword">public</span>  <a class="code" href="classsound__tools_1_1_base_filter.html">BaseFilter</a>&lt;T&gt; {</div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_filter_scaler.html">   47</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_filter_scaler.html">FilterScaler</a> : <span class="keyword">public</span>  <a class="code" href="classaudio__tools_1_1_base_filter.html">BaseFilter</a>&lt;T&gt; {</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <a class="code" href="classsound__tools_1_1_filter_scaler.html">FilterScaler</a>(<span class="keywordtype">float</span> factor, T offset, T maxValue){</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <a class="code" href="classaudio__tools_1_1_filter_scaler.html">FilterScaler</a>(<span class="keywordtype">float</span> factor, T offset, T maxValue){</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            this-&gt;factor = factor;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            this-&gt;maxValue = maxValue;</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            this-&gt;offset = offset;</div>
@@ -132,9 +132,9 @@ $(function() {
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;};</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="classsound__tools_1_1_filter_switch_left_and_right.html">   85</a></span>&#160;<span class="keyword">class </span><a class="code" href="classsound__tools_1_1_filter_switch_left_and_right.html">FilterSwitchLeftAndRight</a> : <span class="keyword">public</span>  <a class="code" href="classsound__tools_1_1_base_filter.html">BaseFilter</a>&lt;T&gt; {</div>
+<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_filter_switch_left_and_right.html">   85</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_filter_switch_left_and_right.html">FilterSwitchLeftAndRight</a> : <span class="keyword">public</span>  <a class="code" href="classaudio__tools_1_1_base_filter.html">BaseFilter</a>&lt;T&gt; {</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <a class="code" href="classsound__tools_1_1_filter_switch_left_and_right.html">FilterSwitchLeftAndRight</a>(){</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <a class="code" href="classaudio__tools_1_1_filter_switch_left_and_right.html">FilterSwitchLeftAndRight</a>(){</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        }</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="keywordtype">void</span> process(T (*src)[2], <span class="keywordtype">size_t</span> size) {</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> j=0;j&lt;size;j++){</div>
@@ -145,9 +145,9 @@ $(function() {
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;};</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="classsound__tools_1_1_filter_fill_left_and_right.html">  105</a></span>&#160;<span class="keyword">class </span><a class="code" href="classsound__tools_1_1_filter_fill_left_and_right.html">FilterFillLeftAndRight</a> : <span class="keyword">public</span>  <a class="code" href="classsound__tools_1_1_base_filter.html">BaseFilter</a>&lt;T&gt; {</div>
+<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_filter_fill_left_and_right.html">  105</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_filter_fill_left_and_right.html">FilterFillLeftAndRight</a> : <span class="keyword">public</span>  <a class="code" href="classaudio__tools_1_1_base_filter.html">BaseFilter</a>&lt;T&gt; {</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <a class="code" href="classsound__tools_1_1_filter_fill_left_and_right.html">FilterFillLeftAndRight</a>(){</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <a class="code" href="classaudio__tools_1_1_filter_fill_left_and_right.html">FilterFillLeftAndRight</a>(){</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        }</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        <span class="keywordtype">void</span> process(T (*src)[2], <span class="keywordtype">size_t</span> size) {</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            setup(src, size);</div>
@@ -191,9 +191,9 @@ $(function() {
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;};</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00159"></a><span class="lineno"><a class="line" href="classsound__tools_1_1_filter_to_internal_d_a_c_format.html">  159</a></span>&#160;<span class="keyword">class </span><a class="code" href="classsound__tools_1_1_filter_to_internal_d_a_c_format.html">FilterToInternalDACFormat</a> : <span class="keyword">public</span>  <a class="code" href="classsound__tools_1_1_base_filter.html">BaseFilter</a>&lt;T&gt; {</div>
+<div class="line"><a name="l00159"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_filter_to_internal_d_a_c_format.html">  159</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_filter_to_internal_d_a_c_format.html">FilterToInternalDACFormat</a> : <span class="keyword">public</span>  <a class="code" href="classaudio__tools_1_1_base_filter.html">BaseFilter</a>&lt;T&gt; {</div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        <a class="code" href="classsound__tools_1_1_filter_to_internal_d_a_c_format.html">FilterToInternalDACFormat</a>(){</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        <a class="code" href="classaudio__tools_1_1_filter_to_internal_d_a_c_format.html">FilterToInternalDACFormat</a>(){</div>
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        }</div>
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        <span class="keywordtype">void</span> process(T (*src)[2], <span class="keywordtype">size_t</span> size) {</div>
@@ -208,9 +208,9 @@ $(function() {
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; </div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; </div>
 <div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> FromType, <span class="keyword">typename</span> ToType&gt;</div>
-<div class="line"><a name="l00183"></a><span class="lineno"><a class="line" href="classsound__tools_1_1_converter.html">  183</a></span>&#160;<span class="keyword">class </span><a class="code" href="classsound__tools_1_1_converter.html">Converter</a> {</div>
+<div class="line"><a name="l00183"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_converter.html">  183</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_converter.html">Converter</a> {</div>
 <div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        <a class="code" href="classsound__tools_1_1_converter.html">Converter</a>(ToType (*converter)(FromType v)){</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        <a class="code" href="classaudio__tools_1_1_converter.html">Converter</a>(ToType (*converter)(FromType v)){</div>
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;            this-&gt;convert_ptr = converter;</div>
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        }</div>
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
@@ -233,9 +233,9 @@ $(function() {
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="comment">// }</span></div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; </div>
 <div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00216"></a><span class="lineno"><a class="line" href="classsound__tools_1_1_channel_converter.html">  216</a></span>&#160;<span class="keyword">class </span><a class="code" href="classsound__tools_1_1_channel_converter.html">ChannelConverter</a> {</div>
+<div class="line"><a name="l00216"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_channel_converter.html">  216</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_channel_converter.html">ChannelConverter</a> {</div>
 <div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;        <a class="code" href="classsound__tools_1_1_channel_converter.html">ChannelConverter</a>( int16_t (*convert_ptr)(T from)){</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;        <a class="code" href="classaudio__tools_1_1_channel_converter.html">ChannelConverter</a>( int16_t (*convert_ptr)(T from)){</div>
 <div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;            this-&gt;convert_ptr = convert_ptr;</div>
 <div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;        }</div>
 <div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160; </div>
@@ -254,13 +254,13 @@ $(function() {
 <div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160; </div>
 <div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160; </div>
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;}</div>
-<div class="ttc" id="aclasssound__tools_1_1_base_filter_html"><div class="ttname"><a href="classsound__tools_1_1_base_filter.html">sound_tools::BaseFilter</a></div><div class="ttdoc">Abstract Base class for Filters A filter is processing the data in the indicated array.</div><div class="ttdef"><b>Definition:</b> Converter.h:33</div></div>
-<div class="ttc" id="aclasssound__tools_1_1_channel_converter_html"><div class="ttname"><a href="classsound__tools_1_1_channel_converter.html">sound_tools::ChannelConverter</a></div><div class="ttdoc">Covnerts the data from T src[][2] to a Channels array.</div><div class="ttdef"><b>Definition:</b> Converter.h:216</div></div>
-<div class="ttc" id="aclasssound__tools_1_1_converter_html"><div class="ttname"><a href="classsound__tools_1_1_converter.html">sound_tools::Converter</a></div><div class="ttdoc">Converts e.g. 24bit data to the indicated bigger data type.</div><div class="ttdef"><b>Definition:</b> Converter.h:183</div></div>
-<div class="ttc" id="aclasssound__tools_1_1_filter_fill_left_and_right_html"><div class="ttname"><a href="classsound__tools_1_1_filter_fill_left_and_right.html">sound_tools::FilterFillLeftAndRight</a></div><div class="ttdoc">Make sure that both channels contain any data.</div><div class="ttdef"><b>Definition:</b> Converter.h:105</div></div>
-<div class="ttc" id="aclasssound__tools_1_1_filter_scaler_html"><div class="ttname"><a href="classsound__tools_1_1_filter_scaler.html">sound_tools::FilterScaler</a></div><div class="ttdoc">Multiplies the values with the indicated factor adds the offset and clips at maxValue....</div><div class="ttdef"><b>Definition:</b> Converter.h:47</div></div>
-<div class="ttc" id="aclasssound__tools_1_1_filter_switch_left_and_right_html"><div class="ttname"><a href="classsound__tools_1_1_filter_switch_left_and_right.html">sound_tools::FilterSwitchLeftAndRight</a></div><div class="ttdoc">Switches the left and right channel.</div><div class="ttdef"><b>Definition:</b> Converter.h:85</div></div>
-<div class="ttc" id="aclasssound__tools_1_1_filter_to_internal_d_a_c_format_html"><div class="ttname"><a href="classsound__tools_1_1_filter_to_internal_d_a_c_format.html">sound_tools::FilterToInternalDACFormat</a></div><div class="ttdoc">special case for internal DAC output, the incomming PCM buffer needs to be converted from signed 16bi...</div><div class="ttdef"><b>Definition:</b> Converter.h:159</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_base_filter_html"><div class="ttname"><a href="classaudio__tools_1_1_base_filter.html">audio_tools::BaseFilter</a></div><div class="ttdoc">Abstract Base class for Filters A filter is processing the data in the indicated array.</div><div class="ttdef"><b>Definition:</b> Converter.h:33</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_channel_converter_html"><div class="ttname"><a href="classaudio__tools_1_1_channel_converter.html">audio_tools::ChannelConverter</a></div><div class="ttdoc">Covnerts the data from T src[][2] to a Channels array.</div><div class="ttdef"><b>Definition:</b> Converter.h:216</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_converter_html"><div class="ttname"><a href="classaudio__tools_1_1_converter.html">audio_tools::Converter</a></div><div class="ttdoc">Converts e.g. 24bit data to the indicated bigger data type.</div><div class="ttdef"><b>Definition:</b> Converter.h:183</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_filter_fill_left_and_right_html"><div class="ttname"><a href="classaudio__tools_1_1_filter_fill_left_and_right.html">audio_tools::FilterFillLeftAndRight</a></div><div class="ttdoc">Make sure that both channels contain any data.</div><div class="ttdef"><b>Definition:</b> Converter.h:105</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_filter_scaler_html"><div class="ttname"><a href="classaudio__tools_1_1_filter_scaler.html">audio_tools::FilterScaler</a></div><div class="ttdoc">Multiplies the values with the indicated factor adds the offset and clips at maxValue....</div><div class="ttdef"><b>Definition:</b> Converter.h:47</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_filter_switch_left_and_right_html"><div class="ttname"><a href="classaudio__tools_1_1_filter_switch_left_and_right.html">audio_tools::FilterSwitchLeftAndRight</a></div><div class="ttdoc">Switches the left and right channel.</div><div class="ttdef"><b>Definition:</b> Converter.h:85</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_filter_to_internal_d_a_c_format_html"><div class="ttname"><a href="classaudio__tools_1_1_filter_to_internal_d_a_c_format.html">audio_tools::FilterToInternalDACFormat</a></div><div class="ttdoc">special case for internal DAC output, the incomming PCM buffer needs to be converted from signed 16bi...</div><div class="ttdef"><b>Definition:</b> Converter.h:159</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

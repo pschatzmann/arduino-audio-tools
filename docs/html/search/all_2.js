@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['channelconverter_7',['ChannelConverter',['../classsound__tools_1_1_channel_converter.html',1,'sound_tools']]],
-  ['complexhandler_8',['complexHandler',['../classsound__tools_1_1_timer_alarm_repeating.html#a3f65e5eb1e1ffb4d32c92dbaa147c47f',1,'sound_tools::TimerAlarmRepeating']]],
-  ['consumesample_9',['ConsumeSample',['../classsound__tools_1_1_audio_output_with_callback.html#ac03dda29338aac6f64f57cce8d0cc1cc',1,'sound_tools::AudioOutputWithCallback']]],
-  ['converter_10',['Converter',['../classsound__tools_1_1_converter.html',1,'sound_tools']]],
-  ['copy_11',['copy',['../classsound__tools_1_1_stream_copy.html#a3c4e09fb16466bd230c0d8d8d5eccbda',1,'sound_tools::StreamCopy']]]
+  ['channelconverter_9',['ChannelConverter',['../classaudio__tools_1_1_channel_converter.html',1,'audio_tools']]],
+  ['complexhandler_10',['complexHandler',['../classaudio__tools_1_1_timer_alarm_repeating.html#a3787e678da0669e9e6f15df4088ad7d6',1,'audio_tools::TimerAlarmRepeating']]],
+  ['consumesample_11',['ConsumeSample',['../classaudio__tools_1_1_audio_output_with_callback.html#a2beb1208ad1e364e80c7cc3117dfd5b1',1,'audio_tools::AudioOutputWithCallback']]],
+  ['converter_12',['Converter',['../classaudio__tools_1_1_converter.html',1,'audio_tools']]],
+  ['copy_13',['copy',['../classaudio__tools_1_1_stream_copy.html#a5d7d93db91c36440ecd3aa61423d4479',1,'audio_tools::StreamCopy']]]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['pin_33',['pin',['../classsound__tools_1_1_a_d_c_config.html#a03fcbae3fe0948e0f5ba4fb108a6f943',1,'sound_tools::ADCConfig']]],
-  ['printf_34',['printf',['../classsound__tools_1_1_sound_logger.html#a5b68af738cdff2980fd77cfe85c2bbf9',1,'sound_tools::SoundLogger']]]
+  ['pin_35',['pin',['../classaudio__tools_1_1_a_d_c_config.html#a42caea9e5d75c2c0d585bc1c0ed7a72f',1,'audio_tools::ADCConfig']]],
+  ['printf_36',['printf',['../classaudio__tools_1_1_audio_logger.html#a21235008c5c0397fdf1e22524b7d8933',1,'audio_tools::AudioLogger']]]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['adc_94',['ADC',['../classsound__tools_1_1_a_d_c.html#af3c377305541d575ec3e73aea2d72568',1,'sound_tools::ADC']]],
-  ['adcconfig_95',['ADCConfig',['../classsound__tools_1_1_a_d_c_config.html#ab062c7d03463a6e31386198904f05f54',1,'sound_tools::ADCConfig::ADCConfig()'],['../classsound__tools_1_1_a_d_c_config.html#a46f0cb4726a7b8c9b6a57aed9c3f4fc1',1,'sound_tools::ADCConfig::ADCConfig(const ADCConfig &amp;cfg)=default']]]
+  ['adc_94',['ADC',['../classaudio__tools_1_1_a_d_c.html#aa94dbe437d56dd905f50dd03c10709fd',1,'audio_tools::ADC']]],
+  ['adcconfig_95',['ADCConfig',['../classaudio__tools_1_1_a_d_c_config.html#ae6d8c93b2e1f090d13a38b2be4102dc9',1,'audio_tools::ADCConfig::ADCConfig()'],['../classaudio__tools_1_1_a_d_c_config.html#a24bfd90582aab7e704a7ca677a7b8833',1,'audio_tools::ADCConfig::ADCConfig(const ADCConfig &amp;cfg)=default']]]
 ];

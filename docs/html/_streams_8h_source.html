@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-sound-tools: src/SoundTools/Streams.h Source File</title>
+<title>arduino-audio-tools: src/AudioTools/Streams.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">arduino-sound-tools
+   <div id="projectname">arduino-audio-tools
    </div>
   </td>
  </tr>
@@ -61,7 +61,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_a50c1b24240d73a4899e7172ebea8dc1.html">SoundTools</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -71,25 +71,25 @@ $(function() {
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="keyword">namespace </span>sound_tools {</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="keyword">namespace </span>audio_tools {</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="classsound__tools_1_1_memory_stream.html">   12</a></span>&#160;<span class="keyword">class </span><a class="code" href="classsound__tools_1_1_memory_stream.html">MemoryStream</a> : <span class="keyword">public</span> Stream {</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_memory_stream.html">   12</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_memory_stream.html">MemoryStream</a> : <span class="keyword">public</span> Stream {</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keyword">public</span>: </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        <a class="code" href="classsound__tools_1_1_memory_stream.html">MemoryStream</a>(<span class="keywordtype">int</span> buffer_size = 512){</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        <a class="code" href="classaudio__tools_1_1_memory_stream.html">MemoryStream</a>(<span class="keywordtype">int</span> buffer_size = 512){</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;            this-&gt;buffer_size = buffer_size;</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;            this-&gt;buffer = <span class="keyword">new</span> uint8_t[buffer_size];</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;            this-&gt;owns_buffer = <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        }</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <a class="code" href="classsound__tools_1_1_memory_stream.html">MemoryStream</a>(<span class="keyword">const</span> uint8_t *buffer, <span class="keywordtype">int</span> buffer_size){</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <a class="code" href="classaudio__tools_1_1_memory_stream.html">MemoryStream</a>(<span class="keyword">const</span> uint8_t *buffer, <span class="keywordtype">int</span> buffer_size){</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            this-&gt;buffer_size = buffer_size;</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            this-&gt;write_pos = buffer_size;</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            this-&gt;buffer = (uint8_t*)buffer;</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            this-&gt;owns_buffer = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        }</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        ~<a class="code" href="classsound__tools_1_1_memory_stream.html">MemoryStream</a>(){</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        ~<a class="code" href="classaudio__tools_1_1_memory_stream.html">MemoryStream</a>(){</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            <span class="keywordflow">if</span> (owns_buffer)</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                <span class="keyword">delete</span>[] buffer;</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        }</div>
@@ -147,13 +147,13 @@ $(function() {
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;};</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">#ifdef ESP32</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="classsound__tools_1_1_url_stream.html">   91</a></span>&#160;<span class="keyword">class </span><a class="code" href="classsound__tools_1_1_url_stream.html">UrlStream</a> : <span class="keyword">public</span> Stream {</div>
+<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_url_stream.html">   91</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_url_stream.html">UrlStream</a> : <span class="keyword">public</span> Stream {</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <a class="code" href="classsound__tools_1_1_url_stream.html">UrlStream</a>(<span class="keywordtype">int</span> readBufferSize=512){</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <a class="code" href="classaudio__tools_1_1_url_stream.html">UrlStream</a>(<span class="keywordtype">int</span> readBufferSize=512){</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            read_buffer = <span class="keyword">new</span> uint8_t[readBufferSize];</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        }</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        ~<a class="code" href="classsound__tools_1_1_url_stream.html">UrlStream</a>(){</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        ~<a class="code" href="classaudio__tools_1_1_url_stream.html">UrlStream</a>(){</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            <span class="keyword">delete</span>[] read_buffer;</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            esp_http_client_close(client);</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            esp_http_client_cleanup(client);</div>
@@ -163,7 +163,7 @@ $(function() {
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            <span class="keywordtype">int</span> result = -1;</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            config.url = url;</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            config.method = HTTP_METHOD_GET;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            Logger.<a class="code" href="classsound__tools_1_1_sound_logger.html#a665c9a29e2005b56cd38ac9094e3fc96">info</a>(<span class="stringliteral">&quot;UrlStream.begin &quot;</span>,url);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            Logger.<a class="code" href="classaudio__tools_1_1_audio_logger.html#a094ddc0cfb0021cd40433b93d7ca38e6">info</a>(<span class="stringliteral">&quot;UrlStream.begin &quot;</span>,url);</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            <span class="comment">// cleanup last begin if necessary</span></div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            <span class="keywordflow">if</span> (client==<span class="keyword">nullptr</span>){</div>
@@ -174,23 +174,23 @@ $(function() {
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            client = esp_http_client_init(&amp;config);</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            <span class="keywordflow">if</span> (client==<span class="keyword">nullptr</span>){</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                Logger.<a class="code" href="classsound__tools_1_1_sound_logger.html#adc41bb01ad64a3bea6055229cf7951b4">error</a>(<span class="stringliteral">&quot;esp_http_client_init failed&quot;</span>);</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                Logger.<a class="code" href="classaudio__tools_1_1_audio_logger.html#aa4137013f2e027525b5ceb9659872a1b">error</a>(<span class="stringliteral">&quot;esp_http_client_init failed&quot;</span>);</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                <span class="keywordflow">return</span> -1;</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            }</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;            <span class="keywordtype">int</span> write_buffer_len = 0;</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;            result = esp_http_client_open(client, write_buffer_len);</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;            <span class="keywordflow">if</span> (result != ESP_OK) {</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                Logger.<a class="code" href="classsound__tools_1_1_sound_logger.html#adc41bb01ad64a3bea6055229cf7951b4">error</a>(<span class="stringliteral">&quot;http_client_open failed&quot;</span>);</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                Logger.<a class="code" href="classaudio__tools_1_1_audio_logger.html#aa4137013f2e027525b5ceb9659872a1b">error</a>(<span class="stringliteral">&quot;http_client_open failed&quot;</span>);</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;                <span class="keywordflow">return</span> result;</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            }</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;            size = esp_http_client_fetch_headers(client);</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;            <span class="keywordflow">if</span> (size&lt;=0) {</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                Logger.<a class="code" href="classsound__tools_1_1_sound_logger.html#adc41bb01ad64a3bea6055229cf7951b4">error</a>(<span class="stringliteral">&quot;esp_http_client_fetch_headers failed&quot;</span>);</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                Logger.<a class="code" href="classaudio__tools_1_1_audio_logger.html#aa4137013f2e027525b5ceb9659872a1b">error</a>(<span class="stringliteral">&quot;esp_http_client_fetch_headers failed&quot;</span>);</div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                <span class="keywordflow">return</span> result;</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            }</div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;            Logger.<a class="code" href="classsound__tools_1_1_sound_logger.html#a5b68af738cdff2980fd77cfe85c2bbf9">printf</a>(SoundLogger::Info, <span class="stringliteral">&quot;Status = %d, content_length = %d&quot;</span>,</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;            Logger.<a class="code" href="classaudio__tools_1_1_audio_logger.html#a21235008c5c0397fdf1e22524b7d8933">printf</a>(AudioLogger::Info, <span class="stringliteral">&quot;Status = %d, content_length = %d&quot;</span>,</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                    esp_http_client_get_status_code(client),</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;                    esp_http_client_get_content_length(client));</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        </div>
@@ -219,7 +219,7 @@ $(function() {
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        }</div>
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; </div>
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        <span class="keywordtype">size_t</span> write(uint8_t) {</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;            Logger.<a class="code" href="classsound__tools_1_1_sound_logger.html#adc41bb01ad64a3bea6055229cf7951b4">error</a>(<span class="stringliteral">&quot;UrlStream write - not supported&quot;</span>);</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;            Logger.<a class="code" href="classaudio__tools_1_1_audio_logger.html#aa4137013f2e027525b5ceb9659872a1b">error</a>(<span class="stringliteral">&quot;UrlStream write - not supported&quot;</span>);</div>
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        }</div>
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160; </div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
@@ -249,20 +249,20 @@ $(function() {
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160; </div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; </div>
-<div class="line"><a name="l00198"></a><span class="lineno"><a class="line" href="classsound__tools_1_1_stream_copy.html">  198</a></span>&#160;<span class="keyword">class </span><a class="code" href="classsound__tools_1_1_stream_copy.html">StreamCopy</a> {</div>
+<div class="line"><a name="l00198"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_stream_copy.html">  198</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_stream_copy.html">StreamCopy</a> {</div>
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        <a class="code" href="classsound__tools_1_1_stream_copy.html">StreamCopy</a>(Stream &amp;from, Stream &amp;to, <span class="keywordtype">int</span> buffer_size){</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        <a class="code" href="classaudio__tools_1_1_stream_copy.html">StreamCopy</a>(Stream &amp;from, Stream &amp;to, <span class="keywordtype">int</span> buffer_size){</div>
 <div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;            this-&gt;from = &amp;from;</div>
 <div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;            this-&gt;to = &amp;to;</div>
 <div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;            this-&gt;buffer_size = buffer_size;</div>
 <div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;            buffer = <span class="keyword">new</span> uint8_t[buffer_size];</div>
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        }</div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; </div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        ~<a class="code" href="classsound__tools_1_1_stream_copy.html">StreamCopy</a>(){</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        ~<a class="code" href="classaudio__tools_1_1_stream_copy.html">StreamCopy</a>(){</div>
 <div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;            <span class="keyword">delete</span>[] buffer;</div>
 <div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        }</div>
 <div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; </div>
-<div class="line"><a name="l00212"></a><span class="lineno"><a class="line" href="classsound__tools_1_1_stream_copy.html#a3c4e09fb16466bd230c0d8d8d5eccbda">  212</a></span>&#160;        <span class="keywordtype">size_t</span> <a class="code" href="classsound__tools_1_1_stream_copy.html#a3c4e09fb16466bd230c0d8d8d5eccbda">copy</a>() {</div>
+<div class="line"><a name="l00212"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_stream_copy.html#a5d7d93db91c36440ecd3aa61423d4479">  212</a></span>&#160;        <span class="keywordtype">size_t</span> <a class="code" href="classaudio__tools_1_1_stream_copy.html#a5d7d93db91c36440ecd3aa61423d4479">copy</a>() {</div>
 <div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;            <span class="keywordtype">size_t</span> total_bytes = available();</div>
 <div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;            <span class="keywordtype">size_t</span> result = total_bytes;</div>
 <div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;            <span class="keywordflow">while</span> (total_bytes&gt;0){</div>
@@ -289,13 +289,13 @@ $(function() {
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160; </div>
 <div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;}</div>
 <div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160; </div>
-<div class="ttc" id="aclasssound__tools_1_1_memory_stream_html"><div class="ttname"><a href="classsound__tools_1_1_memory_stream.html">sound_tools::MemoryStream</a></div><div class="ttdoc">A simple Stream implementation which is backed by allocated memory.</div><div class="ttdef"><b>Definition:</b> Streams.h:12</div></div>
-<div class="ttc" id="aclasssound__tools_1_1_sound_logger_html_a5b68af738cdff2980fd77cfe85c2bbf9"><div class="ttname"><a href="classsound__tools_1_1_sound_logger.html#a5b68af738cdff2980fd77cfe85c2bbf9">sound_tools::SoundLogger::printf</a></div><div class="ttdeci">int printf(LogLevel current_level, const char *fmt,...)</div><div class="ttdoc">printf support</div><div class="ttdef"><b>Definition:</b> AudioLogger.h:68</div></div>
-<div class="ttc" id="aclasssound__tools_1_1_sound_logger_html_a665c9a29e2005b56cd38ac9094e3fc96"><div class="ttname"><a href="classsound__tools_1_1_sound_logger.html#a665c9a29e2005b56cd38ac9094e3fc96">sound_tools::SoundLogger::info</a></div><div class="ttdeci">void info(const char *str, const char *str1=nullptr, const char *str2=nullptr)</div><div class="ttdoc">logs an info message</div><div class="ttdef"><b>Definition:</b> AudioLogger.h:53</div></div>
-<div class="ttc" id="aclasssound__tools_1_1_sound_logger_html_adc41bb01ad64a3bea6055229cf7951b4"><div class="ttname"><a href="classsound__tools_1_1_sound_logger.html#adc41bb01ad64a3bea6055229cf7951b4">sound_tools::SoundLogger::error</a></div><div class="ttdeci">void error(const char *str, const char *str1=nullptr, const char *str2=nullptr)</div><div class="ttdoc">logs an error</div><div class="ttdef"><b>Definition:</b> AudioLogger.h:48</div></div>
-<div class="ttc" id="aclasssound__tools_1_1_stream_copy_html"><div class="ttname"><a href="classsound__tools_1_1_stream_copy.html">sound_tools::StreamCopy</a></div><div class="ttdoc">Helper class which Copies an input stream to a output stream.</div><div class="ttdef"><b>Definition:</b> Streams.h:198</div></div>
-<div class="ttc" id="aclasssound__tools_1_1_stream_copy_html_a3c4e09fb16466bd230c0d8d8d5eccbda"><div class="ttname"><a href="classsound__tools_1_1_stream_copy.html#a3c4e09fb16466bd230c0d8d8d5eccbda">sound_tools::StreamCopy::copy</a></div><div class="ttdeci">size_t copy()</div><div class="ttdoc">copies the available bytes from the input stream to the ouptut stream</div><div class="ttdef"><b>Definition:</b> Streams.h:212</div></div>
-<div class="ttc" id="aclasssound__tools_1_1_url_stream_html"><div class="ttname"><a href="classsound__tools_1_1_url_stream.html">sound_tools::UrlStream</a></div><div class="ttdoc">Represents the content of a URL as Stream. We use the ESP32 ESP HTTP Client API.</div><div class="ttdef"><b>Definition:</b> Streams.h:91</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_logger_html_a094ddc0cfb0021cd40433b93d7ca38e6"><div class="ttname"><a href="classaudio__tools_1_1_audio_logger.html#a094ddc0cfb0021cd40433b93d7ca38e6">audio_tools::AudioLogger::info</a></div><div class="ttdeci">void info(const char *str, const char *str1=nullptr, const char *str2=nullptr)</div><div class="ttdoc">logs an info message</div><div class="ttdef"><b>Definition:</b> AudioLogger.h:53</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_logger_html_a21235008c5c0397fdf1e22524b7d8933"><div class="ttname"><a href="classaudio__tools_1_1_audio_logger.html#a21235008c5c0397fdf1e22524b7d8933">audio_tools::AudioLogger::printf</a></div><div class="ttdeci">int printf(LogLevel current_level, const char *fmt,...)</div><div class="ttdoc">printf support</div><div class="ttdef"><b>Definition:</b> AudioLogger.h:68</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_logger_html_aa4137013f2e027525b5ceb9659872a1b"><div class="ttname"><a href="classaudio__tools_1_1_audio_logger.html#aa4137013f2e027525b5ceb9659872a1b">audio_tools::AudioLogger::error</a></div><div class="ttdeci">void error(const char *str, const char *str1=nullptr, const char *str2=nullptr)</div><div class="ttdoc">logs an error</div><div class="ttdef"><b>Definition:</b> AudioLogger.h:48</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_memory_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_memory_stream.html">audio_tools::MemoryStream</a></div><div class="ttdoc">A simple Stream implementation which is backed by allocated memory.</div><div class="ttdef"><b>Definition:</b> Streams.h:12</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_stream_copy_html"><div class="ttname"><a href="classaudio__tools_1_1_stream_copy.html">audio_tools::StreamCopy</a></div><div class="ttdoc">Helper class which Copies an input stream to a output stream.</div><div class="ttdef"><b>Definition:</b> Streams.h:198</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_stream_copy_html_a5d7d93db91c36440ecd3aa61423d4479"><div class="ttname"><a href="classaudio__tools_1_1_stream_copy.html#a5d7d93db91c36440ecd3aa61423d4479">audio_tools::StreamCopy::copy</a></div><div class="ttdeci">size_t copy()</div><div class="ttdoc">copies the available bytes from the input stream to the ouptut stream</div><div class="ttdef"><b>Definition:</b> Streams.h:212</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_url_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_url_stream.html">audio_tools::UrlStream</a></div><div class="ttdoc">Represents the content of a URL as Stream. We use the ESP32 ESP HTTP Client API.</div><div class="ttdef"><b>Definition:</b> Streams.h:91</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

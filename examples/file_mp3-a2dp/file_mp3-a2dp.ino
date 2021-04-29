@@ -4,9 +4,9 @@
 #include "AudioGeneratorMP3.h"
 #include "AudioOutputWithCallback.h"
 #include "BluetoothA2DPSource.h"
-#include "SoundTools.h"
+#include "AudioTools.h"
 
-using namespace sound_tools;  
+using namespace audio_tools;  
 
 const int sd_ss_pin = 5;
 const char* fileName = "/audio.mp3";

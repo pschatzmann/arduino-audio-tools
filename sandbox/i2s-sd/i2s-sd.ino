@@ -1,7 +1,7 @@
 #include "Arduino.h"
 #include <SPI.h>
 #include <SD.h>
-#include "SoundTools.h"
+#include "AudioTools.h"
 
 // configuration
 const int minutes = 5;

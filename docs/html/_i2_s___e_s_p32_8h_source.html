@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-sound-tools: src/I2S_ESP32.h Source File</title>
+<title>arduino-audio-tools: src/I2S_ESP32.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">arduino-sound-tools
+   <div id="projectname">arduino-audio-tools
    </div>
   </td>
  </tr>
@@ -77,7 +77,7 @@ $(function() {
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;driver/i2s.h&quot;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;freertos/queue.h&quot;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>sound_tools {</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>audio_tools {</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">enum</span> I2SMode  { TX_MODE, RX_MODE };</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
@@ -183,13 +183,13 @@ $(function() {
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;}</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclasssound__tools_1_1_i2_s_config_html"><div class="ttname"><a href="classsound__tools_1_1_i2_s_config.html">sound_tools::I2SConfig</a></div><div class="ttdoc">ESP32 Platform specific configuration for all i2s configuration settings.</div><div class="ttdef"><b>Definition:</b> I2S_ESP32.h:18</div></div>
-<div class="ttc" id="aclasssound__tools_1_1_i2_s_html"><div class="ttname"><a href="classsound__tools_1_1_i2_s.html">sound_tools::I2S</a></div><div class="ttdoc">Simple I2S interface class.</div><div class="ttdef"><b>Definition:</b> I2S_ESP32.h:61</div></div>
-<div class="ttc" id="aclasssound__tools_1_1_i2_s_html_a54e5b02dbb302658a9913604e2e9c314"><div class="ttname"><a href="classsound__tools_1_1_i2_s.html#a54e5b02dbb302658a9913604e2e9c314">sound_tools::I2S::read</a></div><div class="ttdeci">size_t read(T src[][2], size_t sizeFrames, TickType_t ticks_to_wait=portMAX_DELAY)</div><div class="ttdoc">Reads data from I2S.</div><div class="ttdef"><b>Definition:</b> I2S_ESP32.h:99</div></div>
-<div class="ttc" id="aclasssound__tools_1_1_i2_s_html_a78272956f5aa726594d03e157b6cf7cb"><div class="ttname"><a href="classsound__tools_1_1_i2_s.html#a78272956f5aa726594d03e157b6cf7cb">sound_tools::I2S::write</a></div><div class="ttdeci">size_t write(T src[][2], size_t sizeFrames, TickType_t ticks_to_wait=portMAX_DELAY)</div><div class="ttdoc">writes the data to the I2S interface</div><div class="ttdef"><b>Definition:</b> I2S_ESP32.h:94</div></div>
-<div class="ttc" id="aclasssound__tools_1_1_i2_s_html_a81bbfc5f3317e6bd16890cd42a72e9cf"><div class="ttname"><a href="classsound__tools_1_1_i2_s.html#a81bbfc5f3317e6bd16890cd42a72e9cf">sound_tools::I2S::begin</a></div><div class="ttdeci">void begin(I2SConfig&lt; T &gt; cfg)</div><div class="ttdoc">starts the DAC</div><div class="ttdef"><b>Definition:</b> I2S_ESP32.h:76</div></div>
-<div class="ttc" id="aclasssound__tools_1_1_i2_s_html_a8f99f63034b26dd0304ff643e78f2f8f"><div class="ttname"><a href="classsound__tools_1_1_i2_s.html#a8f99f63034b26dd0304ff643e78f2f8f">sound_tools::I2S::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdoc">stops the I2C and unistalls the driver</div><div class="ttdef"><b>Definition:</b> I2S_ESP32.h:89</div></div>
-<div class="ttc" id="aclasssound__tools_1_1_i2_s_html_affe76951a160f3cac092671b216be90e"><div class="ttname"><a href="classsound__tools_1_1_i2_s.html#affe76951a160f3cac092671b216be90e">sound_tools::I2S::writeBytes</a></div><div class="ttdeci">size_t writeBytes(const void *src, size_t size_bytes, TickType_t ticks_to_wait=portMAX_DELAY)</div><div class="ttdoc">writes the data to the I2S interface</div><div class="ttdef"><b>Definition:</b> I2S_ESP32.h:109</div></div>
+<div class="ttc" id="aclasssound__tools_1_1_i2_s_config_html"><div class="ttname"><a href="classsound__tools_1_1_i2_s_config.html">audio_tools::I2SConfig</a></div><div class="ttdoc">ESP32 Platform specific configuration for all i2s configuration settings.</div><div class="ttdef"><b>Definition:</b> I2S_ESP32.h:18</div></div>
+<div class="ttc" id="aclasssound__tools_1_1_i2_s_html"><div class="ttname"><a href="classsound__tools_1_1_i2_s.html">audio_tools::I2S</a></div><div class="ttdoc">Simple I2S interface class.</div><div class="ttdef"><b>Definition:</b> I2S_ESP32.h:61</div></div>
+<div class="ttc" id="aclasssound__tools_1_1_i2_s_html_a54e5b02dbb302658a9913604e2e9c314"><div class="ttname"><a href="classsound__tools_1_1_i2_s.html#a54e5b02dbb302658a9913604e2e9c314">audio_tools::I2S::read</a></div><div class="ttdeci">size_t read(T src[][2], size_t sizeFrames, TickType_t ticks_to_wait=portMAX_DELAY)</div><div class="ttdoc">Reads data from I2S.</div><div class="ttdef"><b>Definition:</b> I2S_ESP32.h:99</div></div>
+<div class="ttc" id="aclasssound__tools_1_1_i2_s_html_a78272956f5aa726594d03e157b6cf7cb"><div class="ttname"><a href="classsound__tools_1_1_i2_s.html#a78272956f5aa726594d03e157b6cf7cb">audio_tools::I2S::write</a></div><div class="ttdeci">size_t write(T src[][2], size_t sizeFrames, TickType_t ticks_to_wait=portMAX_DELAY)</div><div class="ttdoc">writes the data to the I2S interface</div><div class="ttdef"><b>Definition:</b> I2S_ESP32.h:94</div></div>
+<div class="ttc" id="aclasssound__tools_1_1_i2_s_html_a81bbfc5f3317e6bd16890cd42a72e9cf"><div class="ttname"><a href="classsound__tools_1_1_i2_s.html#a81bbfc5f3317e6bd16890cd42a72e9cf">audio_tools::I2S::begin</a></div><div class="ttdeci">void begin(I2SConfig&lt; T &gt; cfg)</div><div class="ttdoc">starts the DAC</div><div class="ttdef"><b>Definition:</b> I2S_ESP32.h:76</div></div>
+<div class="ttc" id="aclasssound__tools_1_1_i2_s_html_a8f99f63034b26dd0304ff643e78f2f8f"><div class="ttname"><a href="classsound__tools_1_1_i2_s.html#a8f99f63034b26dd0304ff643e78f2f8f">audio_tools::I2S::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdoc">stops the I2C and unistalls the driver</div><div class="ttdef"><b>Definition:</b> I2S_ESP32.h:89</div></div>
+<div class="ttc" id="aclasssound__tools_1_1_i2_s_html_affe76951a160f3cac092671b216be90e"><div class="ttname"><a href="classsound__tools_1_1_i2_s.html#affe76951a160f3cac092671b216be90e">audio_tools::I2S::writeBytes</a></div><div class="ttdeci">size_t writeBytes(const void *src, size_t size_bytes, TickType_t ticks_to_wait=portMAX_DELAY)</div><div class="ttdoc">writes the data to the I2S interface</div><div class="ttdef"><b>Definition:</b> I2S_ESP32.h:109</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

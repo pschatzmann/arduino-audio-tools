@@ -2,8 +2,8 @@
 
 We can read an analog signal from a microphone and and write it out to Serial so that we can check the result in the __Arduino Serial Plotter__. To test the functionality I am using a MCP6022 microphone module.
 
-![MCP6022](https://pschatzmann.github.io/arduino-sound-tools/resources/mcp6022.jpeg)
-![MCP6022](https://pschatzmann.github.io/arduino-sound-tools/resources/mcp6022-1.jpeg)
+![MCP6022](https://pschatzmann.github.io/arduino-audio-tools/resources/mcp6022.jpeg)
+![MCP6022](https://pschatzmann.github.io/arduino-audio-tools/resources/mcp6022-1.jpeg)
 
 The MCP6022 is a anlog microphone which operates at 3.3 V
 We sample the sound signal with the help of the ESP32 I2S ADC input functionality.
@@ -19,7 +19,7 @@ We sample the sound signal with the help of the ESP32 I2S ADC input functionalit
 
 ## Serial Plotter
 
-![Serial](https://pschatzmann.github.io/arduino-sound-tools/resources/serial_plotter.png)
+![Serial](https://pschatzmann.github.io/arduino-audio-tools/resources/serial_plotter.png)
 
 
 

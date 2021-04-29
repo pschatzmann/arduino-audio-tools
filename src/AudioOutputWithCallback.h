@@ -3,9 +3,9 @@
 
 #include "AudioOutput.h"
 #include "SoundData.h"
-#include "SoundTools.h"
+#include "AudioTools.h"
 
-namespace sound_tools {
+namespace audio_tools {
 
 /**
  * @brief ESP8266Audio AudioOutput class which stores the data in a temporary buffer. 

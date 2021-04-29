@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-sound-tools: src/Filter.h Source File</title>
+<title>arduino-audio-tools: src/Filter.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">arduino-sound-tools
+   <div id="projectname">arduino-audio-tools
    </div>
   </td>
  </tr>
@@ -74,7 +74,7 @@ $(function() {
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;SoundTypes.h&quot;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;BluetoothA2DPSource.h&quot;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span>sound_tools {</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span>audio_tools {</div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
 <div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classsound__tools_1_1_base_filter.html">   14</a></span>&#160;<span class="keyword">class </span><a class="code" href="classsound__tools_1_1_base_filter.html">BaseFilter</a> {</div>
@@ -229,13 +229,13 @@ $(function() {
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;};</div>
 <div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160; </div>
 <div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;}</div>
-<div class="ttc" id="aclasssound__tools_1_1_base_filter_html"><div class="ttname"><a href="classsound__tools_1_1_base_filter.html">sound_tools::BaseFilter</a></div><div class="ttdoc">Abstract Base class for Filters A filter is processing the data in the indicated array.</div><div class="ttdef"><b>Definition:</b> Filter.h:14</div></div>
-<div class="ttc" id="aclasssound__tools_1_1_channel_converter_html"><div class="ttname"><a href="classsound__tools_1_1_channel_converter.html">sound_tools::ChannelConverter</a></div><div class="ttdoc">Covnerts the data from T src[][2] to a Channels array.</div><div class="ttdef"><b>Definition:</b> Filter.h:151</div></div>
-<div class="ttc" id="aclasssound__tools_1_1_converter_html"><div class="ttname"><a href="classsound__tools_1_1_converter.html">sound_tools::Converter</a></div><div class="ttdoc">Converts e.g. 24bit data to the indicated bigger data type.</div><div class="ttdef"><b>Definition:</b> Filter.h:178</div></div>
-<div class="ttc" id="aclasssound__tools_1_1_filter_amplifier_html"><div class="ttname"><a href="classsound__tools_1_1_filter_amplifier.html">sound_tools::FilterAmplifier</a></div><div class="ttdoc">Multiplies the values with the indicated factor and clips at maxValue. To mute use a factor of 0....</div><div class="ttdef"><b>Definition:</b> Filter.h:26</div></div>
-<div class="ttc" id="aclasssound__tools_1_1_filter_fill_left_and_right_html"><div class="ttname"><a href="classsound__tools_1_1_filter_fill_left_and_right.html">sound_tools::FilterFillLeftAndRight</a></div><div class="ttdoc">Make sure that both channels contain any data.</div><div class="ttdef"><b>Definition:</b> Filter.h:78</div></div>
-<div class="ttc" id="aclasssound__tools_1_1_filter_switch_left_and_right_html"><div class="ttname"><a href="classsound__tools_1_1_filter_switch_left_and_right.html">sound_tools::FilterSwitchLeftAndRight</a></div><div class="ttdoc">Switches the left and right channel.</div><div class="ttdef"><b>Definition:</b> Filter.h:60</div></div>
-<div class="ttc" id="aclasssound__tools_1_1_filter_to_internal_d_a_c_format_html"><div class="ttname"><a href="classsound__tools_1_1_filter_to_internal_d_a_c_format.html">sound_tools::FilterToInternalDACFormat</a></div><div class="ttdoc">special case for internal DAC output, the incomming PCM buffer needs to be converted from signed 16bi...</div><div class="ttdef"><b>Definition:</b> Filter.h:130</div></div>
+<div class="ttc" id="aclasssound__tools_1_1_base_filter_html"><div class="ttname"><a href="classsound__tools_1_1_base_filter.html">audio_tools::BaseFilter</a></div><div class="ttdoc">Abstract Base class for Filters A filter is processing the data in the indicated array.</div><div class="ttdef"><b>Definition:</b> Filter.h:14</div></div>
+<div class="ttc" id="aclasssound__tools_1_1_channel_converter_html"><div class="ttname"><a href="classsound__tools_1_1_channel_converter.html">audio_tools::ChannelConverter</a></div><div class="ttdoc">Covnerts the data from T src[][2] to a Channels array.</div><div class="ttdef"><b>Definition:</b> Filter.h:151</div></div>
+<div class="ttc" id="aclasssound__tools_1_1_converter_html"><div class="ttname"><a href="classsound__tools_1_1_converter.html">audio_tools::Converter</a></div><div class="ttdoc">Converts e.g. 24bit data to the indicated bigger data type.</div><div class="ttdef"><b>Definition:</b> Filter.h:178</div></div>
+<div class="ttc" id="aclasssound__tools_1_1_filter_amplifier_html"><div class="ttname"><a href="classsound__tools_1_1_filter_amplifier.html">audio_tools::FilterAmplifier</a></div><div class="ttdoc">Multiplies the values with the indicated factor and clips at maxValue. To mute use a factor of 0....</div><div class="ttdef"><b>Definition:</b> Filter.h:26</div></div>
+<div class="ttc" id="aclasssound__tools_1_1_filter_fill_left_and_right_html"><div class="ttname"><a href="classsound__tools_1_1_filter_fill_left_and_right.html">audio_tools::FilterFillLeftAndRight</a></div><div class="ttdoc">Make sure that both channels contain any data.</div><div class="ttdef"><b>Definition:</b> Filter.h:78</div></div>
+<div class="ttc" id="aclasssound__tools_1_1_filter_switch_left_and_right_html"><div class="ttname"><a href="classsound__tools_1_1_filter_switch_left_and_right.html">audio_tools::FilterSwitchLeftAndRight</a></div><div class="ttdoc">Switches the left and right channel.</div><div class="ttdef"><b>Definition:</b> Filter.h:60</div></div>
+<div class="ttc" id="aclasssound__tools_1_1_filter_to_internal_d_a_c_format_html"><div class="ttname"><a href="classsound__tools_1_1_filter_to_internal_d_a_c_format.html">audio_tools::FilterToInternalDACFormat</a></div><div class="ttdoc">special case for internal DAC output, the incomming PCM buffer needs to be converted from signed 16bi...</div><div class="ttdef"><b>Definition:</b> Filter.h:130</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

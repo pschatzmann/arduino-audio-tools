@@ -5,9 +5,9 @@
 
 #include "Wire.h"
 #include "Adafruit_ADS1015.h"
-#include "SoundTools.h"
+#include "AudioTools.h"
 
-const int sample_rate = 500;
+const int sample_rate = 3300;
 const int buffer_size = 50;
 
 Adafruit_ADS1015 ads1015(0x48);   

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-sound-tools: src/SoundTools/SoundGenerator.h Source File</title>
+<title>arduino-audio-tools: src/AudioTools/SoundGenerator.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">arduino-sound-tools
+   <div id="projectname">arduino-audio-tools
    </div>
   </td>
  </tr>
@@ -61,7 +61,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_a50c1b24240d73a4899e7172ebea8dc1.html">SoundTools</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -71,10 +71,10 @@ $(function() {
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="keyword">namespace </span>sound_tools {</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="keyword">namespace </span>audio_tools {</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classsound__tools_1_1_sound_generator.html">   13</a></span>&#160;<span class="keyword">class </span><a class="code" href="classsound__tools_1_1_sound_generator.html">SoundGenerator</a>  {</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_sound_generator.html">   13</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>  {</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> readBytes(uint8_t *buffer, <span class="keywordtype">size_t</span> bytes) = 0;</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> readSamples(T* data, <span class="keywordtype">size_t</span> size)=0;</div>
@@ -92,10 +92,10 @@ $(function() {
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;};</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classsound__tools_1_1_sine_wave_generator.html">   37</a></span>&#160;<span class="keyword">class </span><a class="code" href="classsound__tools_1_1_sine_wave_generator.html">SineWaveGenerator</a> : <span class="keyword">public</span> <a class="code" href="classsound__tools_1_1_sound_generator.html">SoundGenerator</a>&lt;T&gt; {</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_sine_wave_generator.html">   37</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_sine_wave_generator.html">SineWaveGenerator</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt;T&gt; {</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="comment">// the scale defines the max value which is generated</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <a class="code" href="classsound__tools_1_1_sine_wave_generator.html">SineWaveGenerator</a>(<span class="keywordtype">double</span> scale=1.0) {</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <a class="code" href="classaudio__tools_1_1_sine_wave_generator.html">SineWaveGenerator</a>(<span class="keywordtype">double</span> scale=1.0) {</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            this-&gt;scale = scale;</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        }</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
@@ -133,10 +133,10 @@ $(function() {
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="classsound__tools_1_1_noise_generator.html">   84</a></span>&#160;<span class="keyword">class </span><a class="code" href="classsound__tools_1_1_noise_generator.html">NoiseGenerator</a> : <span class="keyword">public</span> <a class="code" href="classsound__tools_1_1_sound_generator.html">SoundGenerator</a>&lt;T&gt; {</div>
+<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_noise_generator.html">   84</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_noise_generator.html">NoiseGenerator</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt;T&gt; {</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="comment">// the scale defines the max value which is generated</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <a class="code" href="classsound__tools_1_1_noise_generator.html">NoiseGenerator</a>(<span class="keywordtype">double</span> scale=1.0) {</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <a class="code" href="classaudio__tools_1_1_noise_generator.html">NoiseGenerator</a>(<span class="keywordtype">double</span> scale=1.0) {</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            this-&gt;scale = scale;</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        }</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
@@ -164,9 +164,9 @@ $(function() {
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;};</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;}</div>
-<div class="ttc" id="aclasssound__tools_1_1_noise_generator_html"><div class="ttname"><a href="classsound__tools_1_1_noise_generator.html">sound_tools::NoiseGenerator</a></div><div class="ttdoc">Generates a Sound with the help of rand() function.</div><div class="ttdef"><b>Definition:</b> SoundGenerator.h:84</div></div>
-<div class="ttc" id="aclasssound__tools_1_1_sine_wave_generator_html"><div class="ttname"><a href="classsound__tools_1_1_sine_wave_generator.html">sound_tools::SineWaveGenerator</a></div><div class="ttdoc">Generates a Sound with the help of sin() function.</div><div class="ttdef"><b>Definition:</b> SoundGenerator.h:37</div></div>
-<div class="ttc" id="aclasssound__tools_1_1_sound_generator_html"><div class="ttname"><a href="classsound__tools_1_1_sound_generator.html">sound_tools::SoundGenerator</a></div><div class="ttdoc">Base class to define the abstract interface for the sound generating classes.</div><div class="ttdef"><b>Definition:</b> SoundGenerator.h:13</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_noise_generator_html"><div class="ttname"><a href="classaudio__tools_1_1_noise_generator.html">audio_tools::NoiseGenerator</a></div><div class="ttdoc">Generates a Sound with the help of rand() function.</div><div class="ttdef"><b>Definition:</b> SoundGenerator.h:84</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_sine_wave_generator_html"><div class="ttname"><a href="classaudio__tools_1_1_sine_wave_generator.html">audio_tools::SineWaveGenerator</a></div><div class="ttdoc">Generates a Sound with the help of sin() function.</div><div class="ttdef"><b>Definition:</b> SoundGenerator.h:37</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_sound_generator_html"><div class="ttname"><a href="classaudio__tools_1_1_sound_generator.html">audio_tools::SoundGenerator</a></div><div class="ttdoc">Base class to define the abstract interface for the sound generating classes.</div><div class="ttdef"><b>Definition:</b> SoundGenerator.h:13</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

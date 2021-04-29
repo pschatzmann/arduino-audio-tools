@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['adc_0',['ADC',['../classsound__tools_1_1_a_d_c.html#af3c377305541d575ec3e73aea2d72568',1,'sound_tools::ADC::ADC()'],['../classsound__tools_1_1_a_d_c.html',1,'sound_tools::ADC']]],
-  ['adcconfig_1',['ADCConfig',['../classsound__tools_1_1_a_d_c_config.html#ab062c7d03463a6e31386198904f05f54',1,'sound_tools::ADCConfig::ADCConfig()'],['../classsound__tools_1_1_a_d_c_config.html#a46f0cb4726a7b8c9b6a57aed9c3f4fc1',1,'sound_tools::ADCConfig::ADCConfig(const ADCConfig &amp;cfg)=default'],['../classsound__tools_1_1_a_d_c_config.html',1,'sound_tools::ADCConfig']]],
+  ['adc_0',['ADC',['../classaudio__tools_1_1_a_d_c.html#aa94dbe437d56dd905f50dd03c10709fd',1,'audio_tools::ADC::ADC()'],['../classaudio__tools_1_1_a_d_c.html',1,'audio_tools::ADC']]],
+  ['adcconfig_1',['ADCConfig',['../classaudio__tools_1_1_a_d_c_config.html#ae6d8c93b2e1f090d13a38b2be4102dc9',1,'audio_tools::ADCConfig::ADCConfig()'],['../classaudio__tools_1_1_a_d_c_config.html#a24bfd90582aab7e704a7ca677a7b8833',1,'audio_tools::ADCConfig::ADCConfig(const ADCConfig &amp;cfg)=default'],['../classaudio__tools_1_1_a_d_c_config.html',1,'audio_tools::ADCConfig']]],
   ['arduino_20audio_20tools_2',['Arduino Audio Tools',['../index.html',1,'']]],
-  ['audiooutputwithcallback_3',['AudioOutputWithCallback',['../classsound__tools_1_1_audio_output_with_callback.html',1,'sound_tools']]]
+  ['audiologger_3',['AudioLogger',['../classaudio__tools_1_1_audio_logger.html',1,'audio_tools']]],
+  ['audiooutputwithcallback_4',['AudioOutputWithCallback',['../classaudio__tools_1_1_audio_output_with_callback.html',1,'audio_tools']]],
+  ['audiotools_2eh_5',['AudioTools.h',['../_audio_tools_8h.html',1,'']]]
 ];

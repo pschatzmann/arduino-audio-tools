@@ -1,6 +1,6 @@
 # ADS1015
 
-![ADS1015](https://pschatzmann.github.io/arduino-sound-tools/doc/resources/ads1015.jpeg)
+![ADS1015](https://pschatzmann.github.io/arduino-audio-tools/doc/resources/ads1015.jpeg)
 
 The ADS1015 is a 12 bit ADC which is connected via I2C.
 

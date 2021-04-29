@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-sound-tools: src/SoundTools/MusicalNotes.h Source File</title>
+<title>arduino-audio-tools: src/AudioTools/MusicalNotes.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">arduino-sound-tools
+   <div id="projectname">arduino-audio-tools
    </div>
   </td>
  </tr>
@@ -61,7 +61,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_a50c1b24240d73a4899e7172ebea8dc1.html">SoundTools</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -181,35 +181,35 @@ $(function() {
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="preprocessor">#define AS8 7459</span></div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="preprocessor">#define B8  7902</span></div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="keyword">namespace </span>sound_tools {</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="keyword">namespace </span>audio_tools {</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00124"></a><span class="lineno"><a class="line" href="classsound__tools_1_1_musical_notes.html">  124</a></span>&#160;<span class="keyword">class </span><a class="code" href="classsound__tools_1_1_musical_notes.html">MusicalNotes</a> {</div>
+<div class="line"><a name="l00124"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_musical_notes.html">  124</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_musical_notes.html">MusicalNotes</a> {</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keyword">enum</span> MusicalNotesEnum {C, CS, D, DS, E, F, FS, G, GS, A, AS, B};</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
-<div class="line"><a name="l00129"></a><span class="lineno"><a class="line" href="classsound__tools_1_1_musical_notes.html#a1468c117c5a1bb38fcf0b46721fcd0ed">  129</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classsound__tools_1_1_musical_notes.html#a1468c117c5a1bb38fcf0b46721fcd0ed">frequency</a>(MusicalNotesEnum note, uint8_t octave){</div>
+<div class="line"><a name="l00129"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_musical_notes.html#a89c506ffae7511b916b627d05b045fc9">  129</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1_musical_notes.html#a89c506ffae7511b916b627d05b045fc9">frequency</a>(MusicalNotesEnum note, uint8_t octave){</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        <span class="keywordflow">if</span> (note&gt;11) <span class="keywordflow">return</span> 0;</div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        <span class="keywordflow">if</span> (octave&gt;7) <span class="keywordflow">return</span> 0;</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        <span class="keywordflow">return</span> notes[octave][note];</div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    }</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
-<div class="line"><a name="l00136"></a><span class="lineno"><a class="line" href="classsound__tools_1_1_musical_notes.html#a00982415290f2ccd586e73183f9083cc">  136</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classsound__tools_1_1_musical_notes.html#a00982415290f2ccd586e73183f9083cc">frequency</a>(uint16_t idx){</div>
+<div class="line"><a name="l00136"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_musical_notes.html#aba42db1fb7e3bdee307484908304b0b3">  136</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1_musical_notes.html#aba42db1fb7e3bdee307484908304b0b3">frequency</a>(uint16_t idx){</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        MusicalNotesEnum mainNote = (MusicalNotesEnum) (idx % 12);</div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        uint8_t level = idx / 12;</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classsound__tools_1_1_musical_notes.html#a1468c117c5a1bb38fcf0b46721fcd0ed">frequency</a>(mainNote, level);</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classaudio__tools_1_1_musical_notes.html#a89c506ffae7511b916b627d05b045fc9">frequency</a>(mainNote, level);</div>
 <div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    }</div>
 <div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    </div>
-<div class="line"><a name="l00143"></a><span class="lineno"><a class="line" href="classsound__tools_1_1_musical_notes.html#a838e64b92ae4515b00e1b698dd3a79e8">  143</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classsound__tools_1_1_musical_notes.html#a838e64b92ae4515b00e1b698dd3a79e8">mainFrequency</a>(uint8_t mainNoteIdx, uint8_t octave){</div>
+<div class="line"><a name="l00143"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_musical_notes.html#a9e4dfd5356dffd568f75aba449736e58">  143</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1_musical_notes.html#a9e4dfd5356dffd568f75aba449736e58">mainFrequency</a>(uint8_t mainNoteIdx, uint8_t octave){</div>
 <div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        <span class="keywordflow">if</span> (mainNoteIdx&gt;6) <span class="keywordflow">return</span> 0;</div>
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        <span class="keyword">static</span> uint16_t mainNotes[] = {0,2,4,5,7,9,11};</div>
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        MusicalNotesEnum note = (MusicalNotesEnum) mainNotes[mainNoteIdx];</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classsound__tools_1_1_musical_notes.html#a1468c117c5a1bb38fcf0b46721fcd0ed">frequency</a>(note, octave);</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classaudio__tools_1_1_musical_notes.html#a89c506ffae7511b916b627d05b045fc9">frequency</a>(note, octave);</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    }</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    </div>
-<div class="line"><a name="l00151"></a><span class="lineno"><a class="line" href="classsound__tools_1_1_musical_notes.html#aa6048659df37fb360e89192b5638b983">  151</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classsound__tools_1_1_musical_notes.html#aa6048659df37fb360e89192b5638b983">mainFrequency</a>(uint64_t idx){</div>
+<div class="line"><a name="l00151"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_musical_notes.html#afebef1d8ed5d1a8f8da76b25f2c84f30">  151</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1_musical_notes.html#afebef1d8ed5d1a8f8da76b25f2c84f30">mainFrequency</a>(uint64_t idx){</div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        uint8_t mainNote = idx % 7;</div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        uint8_t level = idx /7;</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classsound__tools_1_1_musical_notes.html#a838e64b92ae4515b00e1b698dd3a79e8">mainFrequency</a>(mainNote, level);</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classaudio__tools_1_1_musical_notes.html#a9e4dfd5356dffd568f75aba449736e58">mainFrequency</a>(mainNote, level);</div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    }</div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="keyword">protected</span>:</div>
@@ -231,11 +231,11 @@ $(function() {
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; </div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;}</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; </div>
-<div class="ttc" id="aclasssound__tools_1_1_musical_notes_html"><div class="ttname"><a href="classsound__tools_1_1_musical_notes.html">sound_tools::MusicalNotes</a></div><div class="ttdoc">Determination of the frequency of a music note.</div><div class="ttdef"><b>Definition:</b> MusicalNotes.h:124</div></div>
-<div class="ttc" id="aclasssound__tools_1_1_musical_notes_html_a00982415290f2ccd586e73183f9083cc"><div class="ttname"><a href="classsound__tools_1_1_musical_notes.html#a00982415290f2ccd586e73183f9083cc">sound_tools::MusicalNotes::frequency</a></div><div class="ttdeci">int frequency(uint16_t idx)</div><div class="ttdoc">Determines the frequency of the indicate note index from 0 to 107.</div><div class="ttdef"><b>Definition:</b> MusicalNotes.h:136</div></div>
-<div class="ttc" id="aclasssound__tools_1_1_musical_notes_html_a1468c117c5a1bb38fcf0b46721fcd0ed"><div class="ttname"><a href="classsound__tools_1_1_musical_notes.html#a1468c117c5a1bb38fcf0b46721fcd0ed">sound_tools::MusicalNotes::frequency</a></div><div class="ttdeci">int frequency(MusicalNotesEnum note, uint8_t octave)</div><div class="ttdoc">Determines the frequency of the indicate note and octave (0-8)</div><div class="ttdef"><b>Definition:</b> MusicalNotes.h:129</div></div>
-<div class="ttc" id="aclasssound__tools_1_1_musical_notes_html_a838e64b92ae4515b00e1b698dd3a79e8"><div class="ttname"><a href="classsound__tools_1_1_musical_notes.html#a838e64b92ae4515b00e1b698dd3a79e8">sound_tools::MusicalNotes::mainFrequency</a></div><div class="ttdeci">int mainFrequency(uint8_t mainNoteIdx, uint8_t octave)</div><div class="ttdoc">Determines the frequency of the indicate main note index (0-6) and octave (0-8)</div><div class="ttdef"><b>Definition:</b> MusicalNotes.h:143</div></div>
-<div class="ttc" id="aclasssound__tools_1_1_musical_notes_html_aa6048659df37fb360e89192b5638b983"><div class="ttname"><a href="classsound__tools_1_1_musical_notes.html#aa6048659df37fb360e89192b5638b983">sound_tools::MusicalNotes::mainFrequency</a></div><div class="ttdeci">int mainFrequency(uint64_t idx)</div><div class="ttdoc">Determines the frequency of the indicate main note index from 0 to 62.</div><div class="ttdef"><b>Definition:</b> MusicalNotes.h:151</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_musical_notes_html"><div class="ttname"><a href="classaudio__tools_1_1_musical_notes.html">audio_tools::MusicalNotes</a></div><div class="ttdoc">Determination of the frequency of a music note.</div><div class="ttdef"><b>Definition:</b> MusicalNotes.h:124</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_musical_notes_html_a89c506ffae7511b916b627d05b045fc9"><div class="ttname"><a href="classaudio__tools_1_1_musical_notes.html#a89c506ffae7511b916b627d05b045fc9">audio_tools::MusicalNotes::frequency</a></div><div class="ttdeci">int frequency(MusicalNotesEnum note, uint8_t octave)</div><div class="ttdoc">Determines the frequency of the indicate note and octave (0-8)</div><div class="ttdef"><b>Definition:</b> MusicalNotes.h:129</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_musical_notes_html_a9e4dfd5356dffd568f75aba449736e58"><div class="ttname"><a href="classaudio__tools_1_1_musical_notes.html#a9e4dfd5356dffd568f75aba449736e58">audio_tools::MusicalNotes::mainFrequency</a></div><div class="ttdeci">int mainFrequency(uint8_t mainNoteIdx, uint8_t octave)</div><div class="ttdoc">Determines the frequency of the indicate main note index (0-6) and octave (0-8)</div><div class="ttdef"><b>Definition:</b> MusicalNotes.h:143</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_musical_notes_html_aba42db1fb7e3bdee307484908304b0b3"><div class="ttname"><a href="classaudio__tools_1_1_musical_notes.html#aba42db1fb7e3bdee307484908304b0b3">audio_tools::MusicalNotes::frequency</a></div><div class="ttdeci">int frequency(uint16_t idx)</div><div class="ttdoc">Determines the frequency of the indicate note index from 0 to 107.</div><div class="ttdef"><b>Definition:</b> MusicalNotes.h:136</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_musical_notes_html_afebef1d8ed5d1a8f8da76b25f2c84f30"><div class="ttname"><a href="classaudio__tools_1_1_musical_notes.html#afebef1d8ed5d1a8f8da76b25f2c84f30">audio_tools::MusicalNotes::mainFrequency</a></div><div class="ttdeci">int mainFrequency(uint64_t idx)</div><div class="ttdoc">Determines the frequency of the indicate main note index from 0 to 62.</div><div class="ttdef"><b>Definition:</b> MusicalNotes.h:151</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
