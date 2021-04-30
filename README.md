@@ -2,7 +2,7 @@
 
 Some basic C++ classes that can be used for Audio Processing privided as Arduino Library
 
-- Additinal Stream implementations: MemoryStream, UrlStream [ESP32 only]
+- Additional Stream implementations: MemoryStream, UrlStream [ESP32 only]
 - a simple I2S class (to read and write to the internal I2S) [ESP32 only]
 - a simple ADC class (to read analog data with the help of I2S) [ESP32 only]
 - Converters
@@ -20,9 +20,9 @@ We also provide plenty of examples that demonstrate how to implement the differe
 Dependent on the example you might need to install some of the following libraries:
 
 - [ESP32-A2DP Library](https://github.com/pschatzmann/ESP32-A2DP)
-- [arduino-fdk-aac](https://github.com/pschatzmann/arduino-fdk-aac)
 - [ESP8266Audio](https://github.com/earlephilhower/ESP8266Audio)
 - [SD Library](https://www.arduino.cc/en/reference/SD)
+- [arduino-fdk-aac](https://github.com/pschatzmann/arduino-fdk-aac)
 
 
 # Examples
