@@ -17,14 +17,23 @@ We also provide plenty of examples that demonstrate how to implement the differe
 
 ## Optional Libraries
 
+Dependent on the example you might need to install some of the following libraries:
+
 - [ESP32-A2DP Library](https://github.com/pschatzmann/ESP32-A2DP)
 - [arduino-fdk-aac](https://github.com/pschatzmann/arduino-fdk-aac)
 - [ESP8266Audio](https://github.com/earlephilhower/ESP8266Audio)
 - [SD Library](https://www.arduino.cc/en/reference/SD)
 
-## Examples
 
-All examples can be found in the [examples folder](https://github.com/pschatzmann/arduino-audio-tools/tree/main/examples)
+# Examples
+
+- [adc-a2dp](examples/adc-a2dp) - Stream Analog input to A2DP Bluetooth 
+- [adc-serial](examples/adc-serial) - Stream Analog input to Serial
+- [file_raw-a2dp](examples/file_raw-a2dp) - Stream Row File from SD card to A2DP Bluetooth
+- [file_raw-serial](examples/file_raw-serial) - Stream Raw File from SD card to Serial
+- [file_mp3-a2dp](examples/file_mp3-a2dp) - Stream MP3 File from SD card to A2DP Bluetooth using the ESP8266Audio library
+- [i2s-a2dp](examples/i2s-a2dp) - Stream I2S Input to A2DP Bluetooth
+- [i2s-serial](examples/i2s-serial) - Stream I2S Input to Serial
 
 
 ## Installation
