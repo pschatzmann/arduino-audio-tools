@@ -15,3 +15,8 @@ The ADS1015 is a 12 bit ADC which is connected via I2C.
 | ADDR    | GND  
 | ALRT    | -
 | A0      | Analog Source (e.g. Electic Guitar) 
+
+
+## Conclusion
+
+The sampling rate is too low to be usefull.

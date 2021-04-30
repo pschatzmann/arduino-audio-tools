@@ -32,7 +32,6 @@ void setup(void) {
 
 }
 
-
 // Arduino loop - repeated processing: we calculate the sampling rate every 1000 samples
 void loop() {
 	if (count % 1000 == 0){
