@@ -1,3 +1,12 @@
+/**
+ * @file file_mp3-a2dp.ino
+ * @author Phil Schatzmann
+ * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/file_mp3-a2dp/README.md
+ * 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+
 #include <SPI.h>
 #include <SD.h>
 #include "AudioFileSourceSD.h"

@@ -1,3 +1,12 @@
+/**
+ * @file adc-serial.ino
+ * @author Phil Schatzmann
+ * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/adc-serial/README.md
+ * 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+ 
 #include "Arduino.h"
 #include "BluetoothA2DPSource.h"
 #include "AudioTools.h"

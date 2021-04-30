@@ -1,3 +1,12 @@
+/**
+ * @file file_raw-serial.ino
+ * @author Phil Schatzmann
+ * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/file_raw-serial/README.md
+ * 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+
 #include <Arduino.h>
 #include <SPI.h>
 #include <SD.h>

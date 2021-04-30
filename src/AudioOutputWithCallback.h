@@ -10,6 +10,8 @@ namespace audio_tools {
 /**
  * @brief ESP8266Audio AudioOutput class which stores the data in a temporary buffer. 
  * The buffer can be consumed e.g. by a callback function by calling read();
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 class AudioOutputWithCallback : public AudioOutput
 {

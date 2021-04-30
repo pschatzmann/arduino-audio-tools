@@ -1,3 +1,12 @@
+/**
+ * @file i2s-serial.ino
+ * @author Phil Schatzmann
+ * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/i2s-serial/README.md
+ * 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+
 #include "Arduino.h"
 #include "AudioTools.h"
 #include "BluetoothA2DPSource.h"
