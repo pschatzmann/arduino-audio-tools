@@ -6,6 +6,7 @@
 #define WAV_FORMAT_PCM 0x0001
 #define TAG(a, b, c, d) (((a) << 24) | ((b) << 16) | ((c) << 8) | (d))
 
+namespace audio_tools {
 
 /**
  * @brief Sound information which is available in the WAV header
@@ -363,3 +364,5 @@ class WAVEncoder {
         }
 
 };
+
+}
