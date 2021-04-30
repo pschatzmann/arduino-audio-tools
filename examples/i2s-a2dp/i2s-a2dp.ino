@@ -1,13 +1,18 @@
+/**
+ * @file i2s-a2dp.ino
+ * @author Phil Schatzmann
+ * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/i2s-a2dp/README.md
+ * 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+
+
 #include "Arduino.h"
 #include "AudioTools.h"
 
 using namespace audio_tools;  
 
-/**
- * @brief We use a ADS1015 I2S microphone as input and send the data to A2DP
- * Unfortunatly the data type from the microphone (int32_t)  does not match with the required data type by A2DP (int16_t),
- * so we need to convert.
- */ 
 
 BluetoothA2DPSource a2dp_source;
 I2S<int32_t> i2s;
