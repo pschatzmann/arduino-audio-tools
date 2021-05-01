@@ -36,6 +36,12 @@ class AudioLogger {
         void begin(Stream& out, LogLevel level=SOUND_LOG_LEVEL) {
             this->log_stream_ptr = &out;
             this->log_level = level;
+            this->active = true;
+        }
+
+        /// stops the logger
+        void end(){
+            this->active = false;
         }
 
         /// checks if the logging is active
@@ -66,7 +72,7 @@ class AudioLogger {
         /// printf support
         int printf(LogLevel current_level, const char* fmt, ...) const {
             int len = 0;
-            if (log_stream_ptr!=nullptr && current_level >= log_level){
+            if (this->active && log_stream_ptr!=nullptr && current_level >= log_level){
                 char serial_printf_buffer[PRINTF_BUFFER_SIZE] = {0};
                 va_list args;
                 va_start(args,fmt);
@@ -80,7 +86,7 @@ class AudioLogger {
 
         /// write an message to the log
         void log(LogLevel current_level, const char *str, const char* str1=nullptr, const char* str2=nullptr) const {
-            if (log_stream_ptr!=nullptr){
+            if (this->active && log_stream_ptr!=nullptr){
                 if (current_level >= log_level){
                     log_stream_ptr->print((char*)str);
                     if (str1!=nullptr){
@@ -109,7 +115,8 @@ class AudioLogger {
 
     protected:
         Stream *log_stream_ptr;
-        LogLevel log_level;  
+        LogLevel log_level;
+        bool active;  
 
         AudioLogger(){
 
