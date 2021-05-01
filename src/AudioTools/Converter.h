@@ -1,5 +1,5 @@
 #pragma once
-#include "SoundTypes.h"
+#include "AudioTypes.h"
 #include "BluetoothA2DPSource.h"
 
 namespace audio_tools {
