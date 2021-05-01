@@ -5,7 +5,7 @@
 #include "esp_a2dp_api.h"
 #include "driver/i2s.h"
 #include "freertos/queue.h"
-#include "SoundTypes.h"
+#include "AudioTypes.h"
 
 namespace audio_tools {
 

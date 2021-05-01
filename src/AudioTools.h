@@ -7,7 +7,7 @@
  * @copyright GPLv3
  *
  */
-#include "AudioTools/SoundTypes.h"
+#include "AudioTools/AudioTypes.h"
 #include "AudioTools/Buffers.h"
 #include "AudioTools/Converter.h"
 #include "AudioTools/MusicalNotes.h"

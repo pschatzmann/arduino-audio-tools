@@ -11,6 +11,7 @@ Some basic C++ classes that can be used for Audio Processing privided as Arduino
 - NBuffer (Multi buffer for writing and reading of (audio) data)
 - TimerAlarmRepeating (e.g. for sampling audio data using exact times) [ESP32 only]
 - A Wav Encoder and Decoder
+- AudioOutputWithCallback class to provide callback integration with ESP8266Audio
 
 This functionality provides the glue which makes different audio processing components and libraries work together.
 We also provide plenty of examples that demonstrate how to implement the different scenarios.
@@ -62,5 +63,5 @@ This is currently work in progress:
 | Streams                | open    |
 | WAV encoding/deconding | open    |          
 | AAC encoding/deconding | open    |          
-| int24_t                | open    |           
+| int24_t                | tested  |           
 

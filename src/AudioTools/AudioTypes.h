@@ -20,6 +20,10 @@ class int24_t {
         value[2]=0;
     }
 
+    int24_t(void *ptr){
+      int24_t(static_cast<uint8_t*>(ptr));
+    }
+
     int24_t(uint8_t *ptr){
         value[0]=ptr[0];
         value[1]=ptr[1];
@@ -58,8 +62,8 @@ class int24_t {
     }
 
     /// provides value between -2,147,483,647 and 2,147,483,647
-    int16_t scale32()  {
-        return static_cast<float>(*this)  * INT32_MAX / INT24_MAX; 
+    int32_t scale32()  {
+        return static_cast<float>(*this) / static_cast<float>(INT24_MAX) * static_cast<float>(INT32_MAX) ; 
     }
 
     /// provides value between -1.0 and 1.0
