@@ -9,7 +9,7 @@
 
 #include <AudioFileSourcePROGMEM.h>
 #include "AudioGeneratorMIDI.h"
-#include "AudioOutputWithCallback.h"
+#include "ESP8266AudioSupport.h"
 #include "BluetoothA2DPSource.h"
 #include "AudioTools.h"
 #include "Undertale_Megalovania.h" // midi

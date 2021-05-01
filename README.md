@@ -14,7 +14,10 @@ Some basic C++ classes that can be used for Audio Processing privided as Arduino
 - AudioOutputWithCallback class to provide callback integration with ESP8266Audio
 
 This functionality provides the glue which makes different audio processing components and libraries work together.
-We also provide plenty of examples that demonstrate how to implement the different scenarios.
+We also provide plenty of examples that demonstrate how to implement the different scenarios. 
+
+The design philosophy is based on the Arduino conventions: we use the ```begin()``` and ```end()``` methods to start and stop the processing and we propagate the use of Streams.
+
 
 ## Optional Libraries
 

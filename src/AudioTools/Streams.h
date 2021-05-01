@@ -93,7 +93,7 @@ class MemoryStream : public Stream {
  */
 class StreamCopy {
     public:
-        StreamCopy(Stream &from, Stream &to, int buffer_size){
+        StreamCopy(Stream &to, Stream &from, int buffer_size){
             this->from = &from;
             this->to = &to;
             this->buffer_size = buffer_size;
@@ -128,6 +128,8 @@ class StreamCopy {
         int buffer_size;
 
 };
+
+
 
 #ifdef ESP32
 /**

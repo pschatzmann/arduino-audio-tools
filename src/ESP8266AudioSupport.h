@@ -1,4 +1,3 @@
-
 #pragma once
 
 #include "AudioOutput.h"
@@ -13,9 +12,9 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioOutputWithCallback : public AudioOutput
-{
+class AudioOutputWithCallback : public AudioOutput {
   public:
+    // Default constructor
     AudioOutputWithCallback(int bufferSize, int bufferCount ){
         buffer_ptr = new NBuffer<Channels>(bufferSize, bufferCount);
     }
@@ -54,4 +53,32 @@ class AudioOutputWithCallback : public AudioOutput
     bool active;
 };
 
+/**
+ * @brief ESP8266Audio Output to Stream
+ * 
+ */
+class SerialOutputStream(): public AudioOutput {
+    public:
+        SerialOutputStream(Stream &out){
+            this->out = out;
+        }
+
+        virtual bool begin() {
+            active = start;
+        }
+
+        virtual bool ConsumeSample(int16_t sample[2]){
+            if (active) out.write((uint8_t*)sample, const_exptr(2*sizeof(int16_t)));
+        }
+
+        virtual bool stop() {
+            active = false;
+        }
+
+    protected:
+        const Stream &out;
+        bool active;
+};
+
 }
+

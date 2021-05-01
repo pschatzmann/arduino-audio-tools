@@ -149,14 +149,6 @@ class WAVHeader  {
         size_t data_pos = 0;
         size_t sound_pos = 0;
 
-        void logInfo(){
-            WAVLogger.printf(AudioLogger::Info,"WAVHeader sound_pos: ", sound_pos);
-            WAVLogger.printf(AudioLogger::Info,"WAVHeader channels: ", headerInfo.channels);
-            WAVLogger.printf(AudioLogger::Info,"WAVHeader bits_per_sample: ", headerInfo.bits_per_sample);
-            WAVLogger.printf(AudioLogger::Info,"WAVHeader sample_rate: ", headerInfo.sample_rate);
-            WAVLogger.printf(AudioLogger::Info,"WAVHeader format: ", headerInfo.format);
-        }
-
         uint32_t read_tag() {
             uint32_t tag = 0;
             tag = (tag << 8) | getChar();
@@ -210,6 +202,15 @@ class WAVHeader  {
         bool eof() {
             return data_pos>=len-1;
         }
+
+        void logInfo(){
+            WAVLogger.printf(AudioLogger::Info,"WAVHeader sound_pos: ", sound_pos);
+            WAVLogger.printf(AudioLogger::Info,"WAVHeader channels: ", headerInfo.channels);
+            WAVLogger.printf(AudioLogger::Info,"WAVHeader bits_per_sample: ", headerInfo.bits_per_sample);
+            WAVLogger.printf(AudioLogger::Info,"WAVHeader sample_rate: ", headerInfo.sample_rate);
+            WAVLogger.printf(AudioLogger::Info,"WAVHeader format: ", headerInfo.format);
+        }
+
 };
 
 AudioBaseInfoDependent AudioBaseInfoDependentNone;

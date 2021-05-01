@@ -67,7 +67,7 @@ $(function() {
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md_README"></a> Some basic C++ classes that can be used for Audio Processing privided as Arduino Library</p>
 <ul>
-<li>Additional Stream implementations: MemoryStream, UrlStream [ESP32 only]</li>
+<li>Additional Stream implementations: MemoryStream - ESP32 only: UrlStream, I2SStream</li>
 <li>a simple I2S class (to read and write to the internal I2S) [ESP32 only]</li>
 <li>a simple ADC class (to read analog data with the help of I2S) [ESP32 only]</li>
 <li>Converters</li>
@@ -76,8 +76,10 @@ $(function() {
 <li>NBuffer (Multi buffer for writing and reading of (audio) data)</li>
 <li>TimerAlarmRepeating (e.g. for sampling audio data using exact times) [ESP32 only]</li>
 <li>A Wav Encoder and Decoder</li>
+<li>AudioOutputWithCallback class to provide callback integration with ESP8266Audio</li>
 </ul>
 <p>This functionality provides the glue which makes different audio processing components and libraries work together. We also provide plenty of examples that demonstrate how to implement the different scenarios.</p>
+<p>The design philosophy is based on the Arduino conventions: we use the begin and end methods to start and stop the processing and we propagate the use of Streams.</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
 Optional Libraries</h1>
 <p>Dependent on the example you might need to install some of the following libraries:</p>
@@ -125,7 +127,7 @@ Project Status</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">AAC encoding/deconding   </td><td class="markdownTableBodyNone">open    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">int24_t   </td><td class="markdownTableBodyNone">open   </td></tr>
+<td class="markdownTableBodyNone">int24_t   </td><td class="markdownTableBodyNone">tested   </td></tr>
 </table>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
