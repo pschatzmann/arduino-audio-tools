@@ -31,10 +31,9 @@ class AudioLogger {
             Error
         };
 
-        AudioLogger(){}
 
         /// activate the logging
-        void begin(Stream& out, LogLevel level=SOUND_LOG_LEVEL){
+        void begin(Stream& out, LogLevel level=SOUND_LOG_LEVEL) {
             this->log_stream_ptr = &out;
             this->log_level = level;
         }
@@ -45,27 +44,27 @@ class AudioLogger {
         }
 
         /// logs an error
-        void error(const char *str, const char* str1=nullptr, const char* str2=nullptr){
+        void error(const char *str, const char* str1=nullptr, const char* str2=nullptr) const {
             log(Error, str, str1, str2);
         }
             
         /// logs an info message    
-        void info(const char *str, const char* str1=nullptr, const char* str2=nullptr){
+        void info(const char *str, const char* str1=nullptr, const char* str2=nullptr) const {
             log(Info, str, str1, str2);
         }
 
         /// logs an warning    
-        void warning(const char *str, const char* str1=nullptr, const char* str2=nullptr){
+        void warning(const char *str, const char* str1=nullptr, const char* str2=nullptr) const {
             log(Warning, str, str1, str2);
         }
 
         /// writes an debug message    
-        void debug(const char *str, const char* str1=nullptr, const char* str2=nullptr){
+        void debug(const char *str, const char* str1=nullptr, const char* str2=nullptr) const {
             log(Debug, str, str1, str2);
         }
 
         /// printf support
-        int printf(LogLevel current_level, const char* fmt, ...) {
+        int printf(LogLevel current_level, const char* fmt, ...) const {
             int len = 0;
             if (log_stream_ptr!=nullptr && current_level >= log_level){
                 char serial_printf_buffer[PRINTF_BUFFER_SIZE] = {0};
@@ -80,7 +79,7 @@ class AudioLogger {
 
 
         /// write an message to the log
-        void log(LogLevel current_level, const char *str, const char* str1=nullptr, const char* str2=nullptr){
+        void log(LogLevel current_level, const char *str, const char* str1=nullptr, const char* str2=nullptr) const {
             if (log_stream_ptr!=nullptr){
                 if (current_level >= log_level){
                     log_stream_ptr->print((char*)str);
@@ -98,13 +97,25 @@ class AudioLogger {
             }
         }
 
+        /// provides the singleton instance
+        static AudioLogger &instance(){
+            static AudioLogger *ptr;
+            if (ptr==nullptr){
+                ptr = new AudioLogger;
+            }
+            return *ptr;
+        }
+
+
     protected:
         Stream *log_stream_ptr;
         LogLevel log_level;  
 
+        AudioLogger(){
+
+        }
+
 
 };
-
-AudioLogger Logger;
 
 }    

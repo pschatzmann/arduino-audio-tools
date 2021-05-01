@@ -2,7 +2,7 @@
 
 Some basic C++ classes that can be used for Audio Processing privided as Arduino Library
 
-- Additional Stream implementations: MemoryStream, UrlStream [ESP32 only]
+- Additional Stream implementations: MemoryStream - ESP32 only: UrlStream, I2SStream
 - a simple I2S class (to read and write to the internal I2S) [ESP32 only]
 - a simple ADC class (to read analog data with the help of I2S) [ESP32 only]
 - Converters
