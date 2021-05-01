@@ -8,13 +8,14 @@
 
 namespace audio_tools {
 
+
 /**
  * @brief Sound information which is available in the WAV header
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 
  */
-struct WavAudioInfo {
+struct WAVAudioInfo {
     int format;
     int sample_rate;
     int bits_per_sample;
@@ -34,19 +35,19 @@ struct WavAudioInfo {
  * @copyright GPLv3
  * 
  */
-class WavHeader  {
+class WAVHeader  {
     public:
-        WavHeader(){
+        WAVHeader(){
         };
 
         void begin(uint8_t* buffer, size_t len){
-            AudioLogger.info("WavHeader len: ", len);
+            Logger.printf(AudioLogger::Info,"WAVHeader len: ", len);
 
             this->buffer = buffer;
             this->len = len;
             this->data_pos = 0l;
             
-            memset(&headerInfo, 0, sizeof(AudioInfo));
+            memset(&headerInfo, 0, sizeof(WAVAudioInfo));
             while (!eof()) {
                 uint32_t tag, tag2, length;
                 tag = read_tag();
@@ -125,7 +126,7 @@ class WavHeader  {
 
 
         // provides the AudioInfo
-        WavAudioInfo &audioInfo() {
+        WAVAudioInfo &audioInfo() {
             return headerInfo;
         }
 
@@ -141,19 +142,18 @@ class WavHeader  {
         }
 
     protected:
-        struct WavAudioInfo headerInfo;
+        struct WAVAudioInfo headerInfo;
         uint8_t* buffer;
         size_t len;
         size_t data_pos = 0;
         size_t sound_pos = 0;
 
         void logInfo(){
-            AudioLogger.info("WavHeader sound_pos: ", sound_pos);
-            AudioLogger.info("WavHeader channels: ", headerInfo.channels);
-            AudioLogger.info("WavHeader bits_per_sample: ", headerInfo.bits_per_sample);
-            AudioLogger.info("WavHeader sample_rate: ", headerInfo.sample_rate);
-            AudioLogger.info("WavHeader format: ", headerInfo.format);
-
+            Logger.printf(AudioLogger::Info,"WAVHeader sound_pos: ", sound_pos);
+            Logger.printf(AudioLogger::Info,"WAVHeader channels: ", headerInfo.channels);
+            Logger.printf(AudioLogger::Info,"WAVHeader bits_per_sample: ", headerInfo.bits_per_sample);
+            Logger.printf(AudioLogger::Info,"WAVHeader sample_rate: ", headerInfo.sample_rate);
+            Logger.printf(AudioLogger::Info,"WAVHeader format: ", headerInfo.format);
         }
 
         uint32_t read_tag() {
@@ -211,6 +211,8 @@ class WavHeader  {
         }
 };
 
+AudioBaseInfoDependent AudioBaseInfoDependentNone;
+
 /**
  * @brief WAVDecoder - We parse the header data on the first record
  * and send the sound data to the stream which was indicated in the
@@ -220,20 +222,16 @@ class WavHeader  {
  */
 class WAVDecoder {
     public:
-        WAVDecoder(Stream &out_stream){
+        WAVDecoder(Print &out_stream, AudioBaseInfoDependent &bi = AudioBaseInfoDependentNone){
             this->out = &out_stream;
+            this->audioBaseInfoSupport = &bi;
         }
     
-        WAVDecoder(AudioOut &out){
-            this->out = &out;
-            this->audioTarget = &out;
-        }
-
         void begin() {
             isFirst = true;
         }
 
-        WavAudioInfo &audioInfo() {
+        WAVAudioInfo &audioInfo() {
             return header.audioInfo();
         }
 
@@ -247,24 +245,31 @@ class WAVDecoder {
                     isFirst = false;
                     isValid = header.audioInfo().is_valid;
 
-                    AudioLogger.info("WAV data_length: ", header.audioInfo().data_length);
-                    AudioLogger.info("WAV is_streamed: ", header.audioInfo().is_streamed);
-                    AudioLogger.info("WAV is_valid: ", header.audioInfo().is_valid);
+                    Logger.printf(AudioLogger::Info,"WAV sample_rate: ", header.audioInfo().sample_rate);
+                    Logger.printf(AudioLogger::Info,"WAV data_length: ", header.audioInfo().data_length);
+                    Logger.printf(AudioLogger::Info,"WAV is_streamed: ", header.audioInfo().is_streamed);
+                    Logger.printf(AudioLogger::Info,"WAVis_valid: ", header.audioInfo().is_valid);
                     
                     // check format
                     int format = header.audioInfo().format;
                     isValid = format == WAV_FORMAT_PCM;
                     if (format != WAV_FORMAT_PCM){
-                        AudioLogger.error("WAV format not supported: ", format);
+                        Logger.printf(AudioLogger::Error,"WAV format not supported: ", format);
                         isValid = false;
-                    }
+                    } else {
+                        // update sampling rate if the target supports it
+                        if (audioBaseInfoSupport!=nullptr){
+                            AudioBaseInfo bi;
+                            bi.sample_rate = header.audioInfo().sample_rate;
+                            bi.channels = header.audioInfo().channels;
+                            bi.bits_per_sample = header.audioInfo().bits_per_sample;
+                            audioBaseInfoSupport->setAudioBaseInfo(bi);
+                        }
 
-                    // write prm data from first record
-                    if (isValid){
-                        AudioLogger.info("WAVDecoder writing first sound data");
+                        // write prm data from first record
+                        Logger.printf(AudioLogger::Info,"WAVDecoder writing first sound data");
                         out->write(sound_ptr, len);
                     }
-
                 }
             } else {
                 out->write((uint8_t*)in_ptr, in_size);
@@ -272,8 +277,9 @@ class WAVDecoder {
         }
 
     protected:
-        WavHeader header;
-        Stream *out;
+        WAVHeader header;
+        Print *out;
+        AudioBaseInfoDependent *audioBaseInfoSupport;
         bool isFirst = true;
         bool isValid = true;
 
@@ -305,7 +311,7 @@ class WAVEncoder {
             this->max_samples = samples;
         }
 
-        virtual int begin(AudioInfo &ai) {
+        virtual int begin(WAVAudioInfo &ai) {
             audioInfo = ai;
         }
 
@@ -334,7 +340,7 @@ class WAVEncoder {
 
     protected:
         Stream* stream_ptr;
-        WavAudioInfo audioInfo;
+        WAVAudioInfo audioInfo;
         uint32_t max_samples;
 
         void writeRiffHeader(){

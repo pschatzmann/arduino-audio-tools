@@ -41,14 +41,17 @@ void read_data_stream(const uint8_t *data, uint32_t length) {
 // Handle meta data changes
 void avrc_metadata_callback(uint8_t data1, const uint8_t *data2) {
     Serial.printf("AVRC metadata rsp: attribute id 0x%x, %s\n", data1, data2);
-    openFile()
+    if (data1==01 && strncmp(last, (char*)data2, 100)!=0){
+      openFile();
+    }
+    if (data2) strncpy(last,(char*)data2,100);
 }
 
 void setup() {
     Serial.begin(115200);
 
     // setup A2DP
-    a2dp_sink.set_stream_reader(read_data_stream);
+    a2dp_sink.set_stream_reader(read_data_stream, false);
     a2dp_sink.set_avrc_metadata_callback(avrc_metadata_callback);
     a2dp_sink.start("AAC-Recorder");
 
