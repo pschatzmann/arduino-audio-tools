@@ -24,6 +24,7 @@ class AudioOutputWithCallback : public AudioOutput
         delete buffer_ptr;
     }
 
+    /// Activates the output
     virtual bool begin() { 
         active = true;
         return true;

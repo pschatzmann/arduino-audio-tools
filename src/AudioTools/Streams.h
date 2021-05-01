@@ -221,6 +221,7 @@ class UrlStream : public Stream {
         uint16_t read_buffer_size;
         uint16_t read_pos;
         uint16_t read_size;
+        const AudioLogger &Logger = AudioLogger::instance();
 
 
         inline void fillBuffer() {
