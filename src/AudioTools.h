@@ -16,3 +16,4 @@
 #include "AudioTools/ADC.h"
 #include "AudioTools/AudioLogger.h"
 #include "AudioTools/Buffers.h"
+#include "AudioTools/Streams.h"

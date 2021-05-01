@@ -71,4 +71,26 @@ class int24_t {
     uint8_t value[3]; 
 };
 
+
+/**
+ * @brief Basic Audio information which drives e.g. I2S
+ * 
+ */
+struct AudioBaseInfo {
+    //AudioBaseInfo(AudioBaseInfo& c) = default;
+    int sample_rate;
+    int bits_per_sample;
+    int channels;
+};
+
+/**
+ * @brief Supports changes to the sampling rate, bits and channels
+ */
+class AudioBaseInfoDependent {
+    public:
+      virtual ~AudioBaseInfoDependent(){}
+      virtual void setAudioBaseInfo(AudioBaseInfo info) {};
+};
+
+
 }

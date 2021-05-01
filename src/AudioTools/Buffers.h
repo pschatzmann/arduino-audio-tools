@@ -54,6 +54,10 @@ public:
 
     // checks if the buffer is full
     virtual bool isFull() = 0;
+
+    bool isEmpty() {
+        return available() == 0;
+    }
     
     // write add an entry to the buffer
     virtual bool write(T data) = 0;
@@ -83,8 +87,8 @@ template<typename T>
 class SingleBuffer : public BaseBuffer<T> {
 public:
     SingleBuffer(int size){
-        this->size = size;
-        buffer = new T[size];
+        this->max_size = size;
+        buffer = new T[max_size];
         reset();
     }
     
@@ -94,7 +98,7 @@ public:
 
     bool write(T sample){
         bool result = false;
-        if (current_write_pos<size){
+        if (current_write_pos<max_size){
             buffer[current_write_pos++] = sample;
             result = true;
         }
@@ -123,7 +127,7 @@ public:
     }
     
     int availableToWrite() {
-        return size - current_write_pos;
+        return max_size - current_write_pos;
     }
     
     bool isFull(){
@@ -138,9 +142,19 @@ public:
         current_read_pos = 0;
         current_write_pos = 0;
     }
+
+    /// If we load values directly into the address we need to set the avialeble size
+    void setAvailable(size_t available_size){
+        current_read_pos = 0;
+        current_write_pos = available_size;
+    }
+
+    size_t size() {
+        return max_size;
+    }
     
 protected:
-    int size;
+    int max_size;
     int current_read_pos;
     int current_write_pos;
     T *buffer;

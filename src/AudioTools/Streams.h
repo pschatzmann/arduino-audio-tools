@@ -1,4 +1,7 @@
 #pragma once
+#include "Arduino.h"
+#include <esp_http_client.h>
+#include "i2s.h"
 
 namespace audio_tools {
 
@@ -78,6 +81,51 @@ class MemoryStream : public Stream {
         int buffer_size;
         uint8_t *buffer;
         bool owns_buffer;
+
+};
+
+
+
+/**
+ * @brief Helper class which Copies an input stream to a output stream
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class StreamCopy {
+    public:
+        StreamCopy(Stream &from, Stream &to, int buffer_size){
+            this->from = &from;
+            this->to = &to;
+            this->buffer_size = buffer_size;
+            buffer = new uint8_t[buffer_size];
+        }
+
+        ~StreamCopy(){
+            delete[] buffer;
+        }
+
+        /// copies the available bytes from the input stream to the ouptut stream
+        size_t copy() {
+            size_t total_bytes = available();
+            size_t result = total_bytes;
+            while (total_bytes>0){
+                size_t bytes_to_read = min(total_bytes,static_cast<size_t>(buffer_size) );
+                from->readBytes(buffer, bytes_to_read);
+                to->write(buffer, bytes_to_read);
+                total_bytes -= bytes_to_read;
+            }
+            return result;
+        }
+
+        int available() {
+            return from->available();
+        }
+
+    protected:
+        Stream *from;
+        Stream *to;
+        uint8_t *buffer;
+        int buffer_size;
 
 };
 
@@ -188,51 +236,101 @@ class UrlStream : public Stream {
 
 };
 
-#endif
 
 /**
- * @brief Helper class which Copies an input stream to a output stream
- * @author Phil Schatzmann
- * @copyright GPLv3
+ * @brief We support the Stream interface on I2S
+ * 
+ * @tparam T 
  */
-class StreamCopy {
-    public:
-        StreamCopy(Stream &from, Stream &to, int buffer_size){
-            this->from = &from;
-            this->to = &to;
-            this->buffer_size = buffer_size;
-            buffer = new uint8_t[buffer_size];
-        }
 
-        ~StreamCopy(){
-            delete[] buffer;
-        }
+class I2SStream : public Stream, public AudioBaseInfoDependent  {
 
-        /// copies the available bytes from the input stream to the ouptut stream
-        size_t copy() {
-            size_t total_bytes = available();
-            size_t result = total_bytes;
-            while (total_bytes>0){
-                size_t bytes_to_read = min(total_bytes,static_cast<size_t>(buffer_size) );
-                from->readBytes(buffer, bytes_to_read);
-                to->write(buffer, bytes_to_read);
-                total_bytes -= bytes_to_read;
-            }
-            return result;
-        }
+  public:
+    template<typename T>
+    I2SStream(I2S<T> &i2s){
+      this->i2s = (I2S<uint8_t>*) &i2s;
+      size_t buffer_size = this->i2s->config().i2s.dma_buf_len;
+      buffer = new SingleBuffer<uint8_t>(buffer_size);
+    }
 
-        int available() {
-            return from->available();
-        }
+    ~I2SStream() {
+      delete [] buffer;
+    }
 
-    protected:
-        Stream *from;
-        Stream *to;
-        uint8_t *buffer;
-        int buffer_size;
+    /// writes a byte to the buffer
+    virtual size_t write(uint8_t c) {
+      if (buffer->isFull()){
+        flush();
+      }
+      return buffer->write(c);
+    }
+
+    /// Use this method: write an array
+    virtual size_t write(const uint8_t* data, size_t len) {    
+      flush();
+      return i2s->writeBytes(data, len);
+    }
+
+    /// empties the buffer
+    virtual void flush() {
+      // just dump the memory of the buffer and clear it
+      if (buffer->available()>0){
+        i2s->writeBytes(buffer->address(), buffer->available());
+        buffer->reset();
+      }
+    }
+
+    /// reads a byte - to be avoided
+    virtual int read() {
+      if (buffer->isEmpty()){
+          refill();
+      }
+      return buffer->read(); 
+    }
+
+    /// peeks a byte - to be avoided
+    virtual int peek() {
+      if (buffer->isEmpty()){
+          refill();
+      }
+      return buffer->peek();
+    };
+    
+    /// Use this method !!
+    size_t readBytes( uint8_t *data, size_t length) { 
+      if (buffer->isEmpty()){
+        return i2s->readBytes(data, length);
+      } else {
+        return buffer->readArray(data, length);
+      }
+    }
+
+    /// Returns the available bytes in the buffer: to be avoided
+    virtual int available() {
+      if (buffer->isEmpty()){
+          refill();
+      }
+      return buffer->available();
+    }
+
+    /// updates the sample rate dynamically 
+    virtual void setAudioBaseInfo(AudioBaseInfo info) {
+        i2s->setAudioBaseInfo(info);
+    }
+
+  protected:
+    I2S<uint8_t> *i2s;
+    SingleBuffer<uint8_t> *buffer;
+
+    // refills the buffer with data from i2s
+    void refill() {
+        size_t result = i2s->readBytes(buffer->address(), buffer->size());
+        buffer->setAvailable(result);
+    }
 
 };
 
+#endif
 
 }
 
