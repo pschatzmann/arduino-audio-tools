@@ -69,6 +69,7 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
 <a href="classaudio__tools_1_1_i2_s-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">audio_tools::I2S&lt; T &gt; Class Template Reference</div>  </div>
@@ -79,6 +80,15 @@ $(function() {
  <a href="classaudio__tools_1_1_i2_s.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_i2_s_8h_source.html">I2S.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for audio_tools::I2S&lt; T &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classaudio__tools_1_1_i2_s.png" usemap="#audio_5Ftools::I2S_3C_20T_20_3E_map" alt=""/>
+  <map id="audio_5Ftools::I2S_3C_20T_20_3E_map" name="audio_5Ftools::I2S_3C_20T_20_3E_map">
+<area href="classaudio__tools_1_1_audio_base_info_dependent.html" title="Supports changes to the sampling rate, bits and channels." alt="audio_tools::AudioBaseInfoDependent" shape="rect" coords="0,0,225,24"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -110,6 +120,14 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cl
 size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s.html#aa62b4c475fdf58e7c48bc246289a99c5">read</a> (T(*src)[2], size_t sizeFrames, TickType_t ticks_to_wait=portMAX_DELAY)</td></tr>
 <tr class="memdesc:aa62b4c475fdf58e7c48bc246289a99c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads data from <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class.">I2S</a>. <br /></td></tr>
 <tr class="separator:aa62b4c475fdf58e7c48bc246289a99c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b7285fe31d902fbf24f6bd3d3ed87e5"><td class="memItemLeft" align="right" valign="top"><a id="a8b7285fe31d902fbf24f6bd3d3ed87e5"></a>
+<a class="el" href="classaudio__tools_1_1_i2_s_config.html">I2SConfig</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s.html#a8b7285fe31d902fbf24f6bd3d3ed87e5">config</a> ()</td></tr>
+<tr class="memdesc:a8b7285fe31d902fbf24f6bd3d3ed87e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the actual configuration <br /></td></tr>
+<tr class="separator:a8b7285fe31d902fbf24f6bd3d3ed87e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a276024d876d51a3cfeb786f21bab926a"><td class="memItemLeft" align="right" valign="top"><a id="a276024d876d51a3cfeb786f21bab926a"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s.html#a276024d876d51a3cfeb786f21bab926a">setAudioBaseInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> info)</td></tr>
+<tr class="memdesc:a276024d876d51a3cfeb786f21bab926a"><td class="mdescLeft">&#160;</td><td class="mdescRight">updates the sample rate dynamically <br /></td></tr>
+<tr class="separator:a276024d876d51a3cfeb786f21bab926a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -123,15 +141,21 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>readBytes</b> (void
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:ae1b8c2ebec41b61968abaf4830742250"><td class="memItemLeft" align="right" valign="top"><a id="ae1b8c2ebec41b61968abaf4830742250"></a>
+<a class="el" href="classaudio__tools_1_1_i2_s_config.html">I2SConfig</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>cfg</b></td></tr>
+<tr class="separator:ae1b8c2ebec41b61968abaf4830742250"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac5fd74ab0d10dd5573480658de4ab5cc"><td class="memItemLeft" align="right" valign="top"><a id="ac5fd74ab0d10dd5573480658de4ab5cc"></a>
 i2s_port_t&#160;</td><td class="memItemRight" valign="bottom"><b>i2s_num</b></td></tr>
 <tr class="separator:ac5fd74ab0d10dd5573480658de4ab5cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f32fa888719253353ff5ee0a7ef9e9f"><td class="memItemLeft" align="right" valign="top"><a id="a5f32fa888719253353ff5ee0a7ef9e9f"></a>
-i2s_pin_config_t&#160;</td><td class="memItemRight" valign="bottom"><b>pin_config</b></td></tr>
-<tr class="separator:a5f32fa888719253353ff5ee0a7ef9e9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7100433e779637f1633368472720bb4d"><td class="memItemLeft" align="right" valign="top"><a id="a7100433e779637f1633368472720bb4d"></a>
-i2s_config_t&#160;</td><td class="memItemRight" valign="bottom"><b>i2s_config</b></td></tr>
-<tr class="separator:a7100433e779637f1633368472720bb4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4111858464cb7d62332519fc3ad91451"><td class="memItemLeft" align="right" valign="top"><a id="a4111858464cb7d62332519fc3ad91451"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_started</b> = false</td></tr>
+<tr class="separator:a4111858464cb7d62332519fc3ad91451"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a49d68d3ec66122796de68319d66bcfb3"><td class="memItemLeft" align="right" valign="top"><a id="a49d68d3ec66122796de68319d66bcfb3"></a>
+class&#160;</td><td class="memItemRight" valign="bottom"><b>I2SStream</b></td></tr>
+<tr class="separator:a49d68d3ec66122796de68319d66bcfb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename T&gt;<br />

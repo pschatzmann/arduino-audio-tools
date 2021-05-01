@@ -133,11 +133,28 @@ $(function() {
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    uint8_t value[3]; </div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;};</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;}</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_audio_base_info.html">   79</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> {</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="comment">//AudioBaseInfo(AudioBaseInfo&amp; c) = default;</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordtype">int</span> sample_rate;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">int</span> bits_per_sample;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordtype">int</span> channels;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;};</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_base_info_dependent.html">   89</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> {</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;      <span class="keyword">virtual</span> ~<a class="code" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a>(){}</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;      <span class="keyword">virtual</span> <span class="keywordtype">void</span> setAudioBaseInfo(<a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> info) {};</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;};</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;}</div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_base_info_dependent_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_base_info_dependent.html">audio_tools::AudioBaseInfoDependent</a></div><div class="ttdoc">Supports changes to the sampling rate, bits and channels.</div><div class="ttdef"><b>Definition:</b> SoundTypes.h:89</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1int24__t_html"><div class="ttname"><a href="classaudio__tools_1_1int24__t.html">audio_tools::int24_t</a></div><div class="ttdoc">24bit integer which is used for I2S sound processing. It works only on little endian machines!</div><div class="ttdef"><b>Definition:</b> SoundTypes.h:13</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1int24__t_html_a2cbe4721d18de27d9a0f0db2e36e01c6"><div class="ttname"><a href="classaudio__tools_1_1int24__t.html#a2cbe4721d18de27d9a0f0db2e36e01c6">audio_tools::int24_t::scale16</a></div><div class="ttdeci">int16_t scale16()</div><div class="ttdoc">provides value between -32767 and 32767</div><div class="ttdef"><b>Definition:</b> SoundTypes.h:56</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1int24__t_html_a9dbef89a873ff057348d4b0967f49025"><div class="ttname"><a href="classaudio__tools_1_1int24__t.html#a9dbef89a873ff057348d4b0967f49025">audio_tools::int24_t::scale32</a></div><div class="ttdeci">int16_t scale32()</div><div class="ttdoc">provides value between -2,147,483,647 and 2,147,483,647</div><div class="ttdef"><b>Definition:</b> SoundTypes.h:61</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1int24__t_html_accd265f0388323773bd7196534bf5064"><div class="ttname"><a href="classaudio__tools_1_1int24__t.html#accd265f0388323773bd7196534bf5064">audio_tools::int24_t::scaleFloat</a></div><div class="ttdeci">float scaleFloat()</div><div class="ttdoc">provides value between -1.0 and 1.0</div><div class="ttdef"><b>Definition:</b> SoundTypes.h:66</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_audio_base_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_base_info.html">audio_tools::AudioBaseInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition:</b> SoundTypes.h:79</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

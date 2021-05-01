@@ -117,6 +117,13 @@ T *&#160;</td><td class="memItemRight" valign="bottom"><b>address</b> ()</td></t
 <tr class="memitem:aa1b9797b2313ec8379467ad99580215f"><td class="memItemLeft" align="right" valign="top"><a id="aa1b9797b2313ec8379467ad99580215f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>reset</b> ()</td></tr>
 <tr class="separator:aa1b9797b2313ec8379467ad99580215f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1777687cba0e73e71d25ca19d5851c16"><td class="memItemLeft" align="right" valign="top"><a id="a1777687cba0e73e71d25ca19d5851c16"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_single_buffer.html#a1777687cba0e73e71d25ca19d5851c16">setAvailable</a> (size_t available_size)</td></tr>
+<tr class="memdesc:a1777687cba0e73e71d25ca19d5851c16"><td class="mdescLeft">&#160;</td><td class="mdescRight">If we load values directly into the address we need to set the avialeble size. <br /></td></tr>
+<tr class="separator:a1777687cba0e73e71d25ca19d5851c16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c02a022634a2d1a515c0fa6b4370d7c"><td class="memItemLeft" align="right" valign="top"><a id="a4c02a022634a2d1a515c0fa6b4370d7c"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> ()</td></tr>
+<tr class="separator:a4c02a022634a2d1a515c0fa6b4370d7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classaudio__tools_1_1_base_buffer"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classaudio__tools_1_1_base_buffer')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classaudio__tools_1_1_base_buffer.html">audio_tools::BaseBuffer&lt; T &gt;</a></td></tr>
 <tr class="memitem:a7fd749abdea072e421c71d887b4f05ec inherit pub_methods_classaudio__tools_1_1_base_buffer"><td class="memItemLeft" align="right" valign="top"><a id="a7fd749abdea072e421c71d887b4f05ec"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>readArray</b> (T data[], int len)</td></tr>
@@ -128,12 +135,15 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>readFrames</b> (T data
 template&lt;int rows, int channels&gt; </td></tr>
 <tr class="memitem:a0af321b42255fa356e4618ed7a4cfeb4 inherit pub_methods_classaudio__tools_1_1_base_buffer"><td class="memTemplItemLeft" align="right" valign="top">int&#160;</td><td class="memTemplItemRight" valign="bottom"><b>readFrames</b> (T(&amp;data)[rows][channels])</td></tr>
 <tr class="separator:a0af321b42255fa356e4618ed7a4cfeb4 inherit pub_methods_classaudio__tools_1_1_base_buffer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff2118f0177b4cd95b696e85e45ba586 inherit pub_methods_classaudio__tools_1_1_base_buffer"><td class="memItemLeft" align="right" valign="top"><a id="aff2118f0177b4cd95b696e85e45ba586"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isEmpty</b> ()</td></tr>
+<tr class="separator:aff2118f0177b4cd95b696e85e45ba586 inherit pub_methods_classaudio__tools_1_1_base_buffer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:ad3bcc4a57930521136a7ee7e0d85254c"><td class="memItemLeft" align="right" valign="top"><a id="ad3bcc4a57930521136a7ee7e0d85254c"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>size</b></td></tr>
-<tr class="separator:ad3bcc4a57930521136a7ee7e0d85254c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e20fd0533012cfce4e3e674ffa08213"><td class="memItemLeft" align="right" valign="top"><a id="a6e20fd0533012cfce4e3e674ffa08213"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>max_size</b></td></tr>
+<tr class="separator:a6e20fd0533012cfce4e3e674ffa08213"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab9c00ce636d54ca408959c2d9893b4f9"><td class="memItemLeft" align="right" valign="top"><a id="ab9c00ce636d54ca408959c2d9893b4f9"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>current_read_pos</b></td></tr>
 <tr class="separator:ab9c00ce636d54ca408959c2d9893b4f9"><td class="memSeparator" colspan="2">&#160;</td></tr>

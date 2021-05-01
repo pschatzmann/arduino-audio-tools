@@ -67,7 +67,7 @@ $(function() {
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md_README"></a> Some basic C++ classes that can be used for Audio Processing privided as Arduino Library</p>
 <ul>
-<li>Additinal Stream implementations: MemoryStream, UrlStream [ESP32 only]</li>
+<li>Additional Stream implementations: MemoryStream, UrlStream [ESP32 only]</li>
 <li>a simple I2S class (to read and write to the internal I2S) [ESP32 only]</li>
 <li>a simple ADC class (to read analog data with the help of I2S) [ESP32 only]</li>
 <li>Converters</li>
@@ -80,25 +80,34 @@ $(function() {
 <p>This functionality provides the glue which makes different audio processing components and libraries work together. We also provide plenty of examples that demonstrate how to implement the different scenarios.</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
 Optional Libraries</h1>
+<p>Dependent on the example you might need to install some of the following libraries:</p>
 <ul>
 <li><a href="https://github.com/pschatzmann/ESP32-A2DP">ESP32-A2DP Library</a></li>
-<li><a href="https://github.com/pschatzmann/arduino-fdk-aac">arduino-fdk-aac</a></li>
 <li><a href="https://github.com/earlephilhower/ESP8266Audio">ESP8266Audio</a></li>
 <li><a href="https://www.arduino.cc/en/reference/SD">SD Library</a></li>
+<li><a href="https://github.com/pschatzmann/arduino-fdk-aac">arduino-fdk-aac</a></li>
 </ul>
 <h1><a class="anchor" id="autotoc_md2"></a>
 Examples</h1>
-<p>All examples can be found in the <a href="https://github.com/pschatzmann/arduino-audio-tools/tree/main/examples">examples folder</a></p>
-<h1><a class="anchor" id="autotoc_md3"></a>
-Installation</h1>
+<ul>
+<li><a href="examples/adc-a2dp">adc-a2dp</a> - Stream Analog input to A2DP Bluetooth</li>
+<li><a href="examples/adc-serial">adc-serial</a> - Stream Analog input to Serial</li>
+<li><a href="examples/file_raw-a2dp">file_raw-a2dp</a> - Stream Row File from SD card to A2DP Bluetooth</li>
+<li><a href="examples/file_raw-serial">file_raw-serial</a> - Stream Raw File from SD card to Serial</li>
+<li><a href="examples/file_mp3-a2dp">file_mp3-a2dp</a> - Stream MP3 File from SD card to A2DP Bluetooth using the ESP8266Audio library</li>
+<li><a href="examples/i2s-a2dp">i2s-a2dp</a> - Stream I2S Input to A2DP Bluetooth</li>
+<li><a href="examples/i2s-serial">i2s-serial</a> - Stream I2S Input to Serial</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md3"></a>
+Installation</h2>
 <p>You can download the library as zip and call include Library -&gt; zip library. Or you can git clone this project into the Arduino libraries folder e.g. with</p>
 <div class="fragment"><div class="line">cd  ~/Documents/Arduino/libraries</div>
 <div class="line">git clone pschatzmann/arduino-audio-tools.git</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md4"></a>
-Documentation</h1>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md4"></a>
+Documentation</h2>
 <p>Here is the generated <a href="https://pschatzmann.github.io/arduino-audio-tools/html/annotated.html">Class documentation</a>. You might find further information in <a href="https://www.pschatzmann.ch/home/category/machine-sound/">one of my blogs</a></p>
-<h1><a class="anchor" id="autotoc_md5"></a>
-Project Status</h1>
+<h2><a class="anchor" id="autotoc_md5"></a>
+Project Status</h2>
 <p>This is currently work in progress:</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">

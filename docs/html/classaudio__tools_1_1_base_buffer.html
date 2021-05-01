@@ -83,9 +83,10 @@ Inheritance diagram for audio_tools::BaseBuffer&lt; T &gt;:</div>
  <div class="center">
   <img src="classaudio__tools_1_1_base_buffer.png" usemap="#audio_5Ftools::BaseBuffer_3C_20T_20_3E_map" alt=""/>
   <map id="audio_5Ftools::BaseBuffer_3C_20T_20_3E_map" name="audio_5Ftools::BaseBuffer_3C_20T_20_3E_map">
-<area href="classaudio__tools_1_1_n_buffer.html" alt="audio_tools::NBuffer&lt; Channels &gt;" shape="rect" coords="0,56,203,80"/>
-<area href="classaudio__tools_1_1_n_buffer.html" title="A lock free N buffer. If count=2 we create a DoubleBuffer, if count=3 a TripleBuffer etc." alt="audio_tools::NBuffer&lt; T &gt;" shape="rect" coords="213,56,416,80"/>
-<area href="classaudio__tools_1_1_single_buffer.html" title="A simple Buffer implementation which just uses a (dynamically sized) array." alt="audio_tools::SingleBuffer&lt; T &gt;" shape="rect" coords="426,56,629,80"/>
+<area href="classaudio__tools_1_1_n_buffer.html" alt="audio_tools::NBuffer&lt; Channels &gt;" shape="rect" coords="0,56,213,80"/>
+<area href="classaudio__tools_1_1_single_buffer.html" alt="audio_tools::SingleBuffer&lt; uint8_t &gt;" shape="rect" coords="223,56,436,80"/>
+<area href="classaudio__tools_1_1_n_buffer.html" title="A lock free N buffer. If count=2 we create a DoubleBuffer, if count=3 a TripleBuffer etc." alt="audio_tools::NBuffer&lt; T &gt;" shape="rect" coords="446,56,659,80"/>
+<area href="classaudio__tools_1_1_single_buffer.html" title="A simple Buffer implementation which just uses a (dynamically sized) array." alt="audio_tools::SingleBuffer&lt; T &gt;" shape="rect" coords="669,56,882,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -110,6 +111,9 @@ virtual T&#160;</td><td class="memItemRight" valign="bottom"><b>peek</b> ()=0</t
 <tr class="memitem:a4218946712e44e9626bfbe27d52422e2"><td class="memItemLeft" align="right" valign="top"><a id="a4218946712e44e9626bfbe27d52422e2"></a>
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>isFull</b> ()=0</td></tr>
 <tr class="separator:a4218946712e44e9626bfbe27d52422e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff2118f0177b4cd95b696e85e45ba586"><td class="memItemLeft" align="right" valign="top"><a id="aff2118f0177b4cd95b696e85e45ba586"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isEmpty</b> ()</td></tr>
+<tr class="separator:aff2118f0177b4cd95b696e85e45ba586"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6eff81f6e9f70eff08b9e8ffec3f8770"><td class="memItemLeft" align="right" valign="top"><a id="a6eff81f6e9f70eff08b9e8ffec3f8770"></a>
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (T data)=0</td></tr>
 <tr class="separator:a6eff81f6e9f70eff08b9e8ffec3f8770"><td class="memSeparator" colspan="2">&#160;</td></tr>

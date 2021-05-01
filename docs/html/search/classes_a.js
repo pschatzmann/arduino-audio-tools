@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['wavaudioinfo_89',['WavAudioInfo',['../struct_wav_audio_info.html',1,'']]],
-  ['wavdecoder_90',['WAVDecoder',['../class_w_a_v_decoder.html',1,'']]],
-  ['wavencoder_91',['WAVEncoder',['../class_w_a_v_encoder.html',1,'']]],
-  ['wavheader_92',['WavHeader',['../class_wav_header.html',1,'']]]
+  ['wavaudioinfo_106',['WAVAudioInfo',['../structaudio__tools_1_1_w_a_v_audio_info.html',1,'audio_tools']]],
+  ['wavdecoder_107',['WAVDecoder',['../classaudio__tools_1_1_w_a_v_decoder.html',1,'audio_tools']]],
+  ['wavencoder_108',['WAVEncoder',['../classaudio__tools_1_1_w_a_v_encoder.html',1,'audio_tools']]],
+  ['wavheader_109',['WAVHeader',['../classaudio__tools_1_1_w_a_v_header.html',1,'audio_tools']]]
 ];
