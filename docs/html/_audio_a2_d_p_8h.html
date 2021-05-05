@@ -80,11 +80,11 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_channel_converter.html">audio_tools::ChannelConverter&lt; T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Covnerts the data from T src[][2] to a Channels array.  <a href="classaudio__tools_1_1_channel_converter.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a2_d_p_stream.html">audio_tools::A2DPStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stream support for A2DP: When calling write we start a a2dp_source - when calling read we start a a2dp_sink The data is in int16_t with 2 channels at 44100 hertz.  <a href="classaudio__tools_1_1_a2_d_p_stream.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_channel_converter.html">audio_tools::ChannelConverter&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Covnerts the data from T src[][2] to a Channels array.  <a href="classaudio__tools_1_1_channel_converter.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -92,12 +92,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a7d1f41800565427e9ce68616fcec4fa2"><td class="memItemLeft" align="right" valign="top"><a id="a7d1f41800565427e9ce68616fcec4fa2"></a>
 AudioOutputWithCallback&#160;</td><td class="memItemRight" valign="bottom"><b>audio_tools::a2dp_stream_out</b> (A2DP_BUFFER_SIZE, A2DP_BUFFER_COUNT)</td></tr>
 <tr class="separator:a7d1f41800565427e9ce68616fcec4fa2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a319a40a8efa261c1015be6149dd6b38c"><td class="memItemLeft" align="right" valign="top"><a id="a319a40a8efa261c1015be6149dd6b38c"></a>
-int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>audio_tools::a2dp_stream_source_sound_data</b> (Channels *data, int32_t len)</td></tr>
-<tr class="separator:a319a40a8efa261c1015be6149dd6b38c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a617391bdaaaa3fd418ff3a10e7428d63"><td class="memItemLeft" align="right" valign="top"><a id="a617391bdaaaa3fd418ff3a10e7428d63"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>audio_tools::a2dp_stream_sink_sound_data</b> (const uint8_t *data, uint32_t len)</td></tr>
 <tr class="separator:a617391bdaaaa3fd418ff3a10e7428d63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a319a40a8efa261c1015be6149dd6b38c"><td class="memItemLeft" align="right" valign="top"><a id="a319a40a8efa261c1015be6149dd6b38c"></a>
+int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>audio_tools::a2dp_stream_source_sound_data</b> (Channels *data, int32_t len)</td></tr>
+<tr class="separator:a319a40a8efa261c1015be6149dd6b38c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A2DP Support via Arduino Streams. </p>

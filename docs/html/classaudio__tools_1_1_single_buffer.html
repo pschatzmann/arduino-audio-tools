@@ -93,15 +93,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a77d72fb81b055d21a214bfe6349b72ba"><td class="memItemLeft" align="right" valign="top"><a id="a77d72fb81b055d21a214bfe6349b72ba"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>SingleBuffer</b> (int size)</td></tr>
 <tr class="separator:a77d72fb81b055d21a214bfe6349b72ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79a3b8137cc68f381bc3dfbcf26a5a88"><td class="memItemLeft" align="right" valign="top"><a id="a79a3b8137cc68f381bc3dfbcf26a5a88"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (T sample)</td></tr>
-<tr class="separator:a79a3b8137cc68f381bc3dfbcf26a5a88"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64bbefed73babf8d5cf98e64e4aa1c21"><td class="memItemLeft" align="right" valign="top"><a id="a64bbefed73babf8d5cf98e64e4aa1c21"></a>
-T&#160;</td><td class="memItemRight" valign="bottom"><b>read</b> ()</td></tr>
-<tr class="separator:a64bbefed73babf8d5cf98e64e4aa1c21"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a482cccfaf7744bbb37fa57852e859c80"><td class="memItemLeft" align="right" valign="top"><a id="a482cccfaf7744bbb37fa57852e859c80"></a>
-T&#160;</td><td class="memItemRight" valign="bottom"><b>peek</b> ()</td></tr>
-<tr class="separator:a482cccfaf7744bbb37fa57852e859c80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb270f099c9125238f6add31a61c1e67"><td class="memItemLeft" align="right" valign="top"><a id="abb270f099c9125238f6add31a61c1e67"></a>
+T *&#160;</td><td class="memItemRight" valign="bottom"><b>address</b> ()</td></tr>
+<tr class="separator:abb270f099c9125238f6add31a61c1e67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a34dac2b2c67dc48b0c6014fd467ef346"><td class="memItemLeft" align="right" valign="top"><a id="a34dac2b2c67dc48b0c6014fd467ef346"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>available</b> ()</td></tr>
 <tr class="separator:a34dac2b2c67dc48b0c6014fd467ef346"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -111,9 +105,12 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>availableToWrite</b> (
 <tr class="memitem:a722a00a0c38ffe4c0c4cd74b5708eceb"><td class="memItemLeft" align="right" valign="top"><a id="a722a00a0c38ffe4c0c4cd74b5708eceb"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isFull</b> ()</td></tr>
 <tr class="separator:a722a00a0c38ffe4c0c4cd74b5708eceb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb270f099c9125238f6add31a61c1e67"><td class="memItemLeft" align="right" valign="top"><a id="abb270f099c9125238f6add31a61c1e67"></a>
-T *&#160;</td><td class="memItemRight" valign="bottom"><b>address</b> ()</td></tr>
-<tr class="separator:abb270f099c9125238f6add31a61c1e67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a482cccfaf7744bbb37fa57852e859c80"><td class="memItemLeft" align="right" valign="top"><a id="a482cccfaf7744bbb37fa57852e859c80"></a>
+T&#160;</td><td class="memItemRight" valign="bottom"><b>peek</b> ()</td></tr>
+<tr class="separator:a482cccfaf7744bbb37fa57852e859c80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64bbefed73babf8d5cf98e64e4aa1c21"><td class="memItemLeft" align="right" valign="top"><a id="a64bbefed73babf8d5cf98e64e4aa1c21"></a>
+T&#160;</td><td class="memItemRight" valign="bottom"><b>read</b> ()</td></tr>
+<tr class="separator:a64bbefed73babf8d5cf98e64e4aa1c21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1b9797b2313ec8379467ad99580215f"><td class="memItemLeft" align="right" valign="top"><a id="aa1b9797b2313ec8379467ad99580215f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>reset</b> ()</td></tr>
 <tr class="separator:aa1b9797b2313ec8379467ad99580215f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -124,13 +121,16 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a4c02a022634a2d1a515c0fa6b4370d7c"><td class="memItemLeft" align="right" valign="top"><a id="a4c02a022634a2d1a515c0fa6b4370d7c"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> ()</td></tr>
 <tr class="separator:a4c02a022634a2d1a515c0fa6b4370d7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79a3b8137cc68f381bc3dfbcf26a5a88"><td class="memItemLeft" align="right" valign="top"><a id="a79a3b8137cc68f381bc3dfbcf26a5a88"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (T sample)</td></tr>
+<tr class="separator:a79a3b8137cc68f381bc3dfbcf26a5a88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classaudio__tools_1_1_base_buffer"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classaudio__tools_1_1_base_buffer')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classaudio__tools_1_1_base_buffer.html">audio_tools::BaseBuffer&lt; T &gt;</a></td></tr>
+<tr class="memitem:aff2118f0177b4cd95b696e85e45ba586 inherit pub_methods_classaudio__tools_1_1_base_buffer"><td class="memItemLeft" align="right" valign="top"><a id="aff2118f0177b4cd95b696e85e45ba586"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isEmpty</b> ()</td></tr>
+<tr class="separator:aff2118f0177b4cd95b696e85e45ba586 inherit pub_methods_classaudio__tools_1_1_base_buffer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7fd749abdea072e421c71d887b4f05ec inherit pub_methods_classaudio__tools_1_1_base_buffer"><td class="memItemLeft" align="right" valign="top"><a id="a7fd749abdea072e421c71d887b4f05ec"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>readArray</b> (T data[], int len)</td></tr>
 <tr class="separator:a7fd749abdea072e421c71d887b4f05ec inherit pub_methods_classaudio__tools_1_1_base_buffer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac3ef12580a9afcab1ed71ee9250c5a1a inherit pub_methods_classaudio__tools_1_1_base_buffer"><td class="memItemLeft" align="right" valign="top"><a id="ac3ef12580a9afcab1ed71ee9250c5a1a"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>writeArray</b> (T data[], int len)</td></tr>
-<tr class="separator:ac3ef12580a9afcab1ed71ee9250c5a1a inherit pub_methods_classaudio__tools_1_1_base_buffer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80bfb175393c71f19a9f0235853d5f01 inherit pub_methods_classaudio__tools_1_1_base_buffer"><td class="memItemLeft" align="right" valign="top"><a id="a80bfb175393c71f19a9f0235853d5f01"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>readFrames</b> (T data[][2], int len)</td></tr>
 <tr class="separator:a80bfb175393c71f19a9f0235853d5f01 inherit pub_methods_classaudio__tools_1_1_base_buffer"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -138,24 +138,24 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>readFrames</b> (T data
 template&lt;int rows, int channels&gt; </td></tr>
 <tr class="memitem:a0af321b42255fa356e4618ed7a4cfeb4 inherit pub_methods_classaudio__tools_1_1_base_buffer"><td class="memTemplItemLeft" align="right" valign="top">int&#160;</td><td class="memTemplItemRight" valign="bottom"><b>readFrames</b> (T(&amp;data)[rows][channels])</td></tr>
 <tr class="separator:a0af321b42255fa356e4618ed7a4cfeb4 inherit pub_methods_classaudio__tools_1_1_base_buffer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff2118f0177b4cd95b696e85e45ba586 inherit pub_methods_classaudio__tools_1_1_base_buffer"><td class="memItemLeft" align="right" valign="top"><a id="aff2118f0177b4cd95b696e85e45ba586"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isEmpty</b> ()</td></tr>
-<tr class="separator:aff2118f0177b4cd95b696e85e45ba586 inherit pub_methods_classaudio__tools_1_1_base_buffer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3ef12580a9afcab1ed71ee9250c5a1a inherit pub_methods_classaudio__tools_1_1_base_buffer"><td class="memItemLeft" align="right" valign="top"><a id="ac3ef12580a9afcab1ed71ee9250c5a1a"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>writeArray</b> (T data[], int len)</td></tr>
+<tr class="separator:ac3ef12580a9afcab1ed71ee9250c5a1a inherit pub_methods_classaudio__tools_1_1_base_buffer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a6e20fd0533012cfce4e3e674ffa08213"><td class="memItemLeft" align="right" valign="top"><a id="a6e20fd0533012cfce4e3e674ffa08213"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>max_size</b></td></tr>
-<tr class="separator:a6e20fd0533012cfce4e3e674ffa08213"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad49fec19a451e2df62f936712be0a3c5"><td class="memItemLeft" align="right" valign="top"><a id="ad49fec19a451e2df62f936712be0a3c5"></a>
+T *&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b></td></tr>
+<tr class="separator:ad49fec19a451e2df62f936712be0a3c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab9c00ce636d54ca408959c2d9893b4f9"><td class="memItemLeft" align="right" valign="top"><a id="ab9c00ce636d54ca408959c2d9893b4f9"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>current_read_pos</b></td></tr>
 <tr class="separator:ab9c00ce636d54ca408959c2d9893b4f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae34258537a458c9a475d70a33895d02f"><td class="memItemLeft" align="right" valign="top"><a id="ae34258537a458c9a475d70a33895d02f"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>current_write_pos</b></td></tr>
 <tr class="separator:ae34258537a458c9a475d70a33895d02f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad49fec19a451e2df62f936712be0a3c5"><td class="memItemLeft" align="right" valign="top"><a id="ad49fec19a451e2df62f936712be0a3c5"></a>
-T *&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b></td></tr>
-<tr class="separator:ad49fec19a451e2df62f936712be0a3c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e20fd0533012cfce4e3e674ffa08213"><td class="memItemLeft" align="right" valign="top"><a id="a6e20fd0533012cfce4e3e674ffa08213"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>max_size</b></td></tr>
+<tr class="separator:a6e20fd0533012cfce4e3e674ffa08213"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename T&gt;<br />

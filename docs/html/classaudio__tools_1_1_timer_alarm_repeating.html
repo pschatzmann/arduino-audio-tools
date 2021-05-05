@@ -106,21 +106,21 @@ Static Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:ae9a7c41967c291f3c322b9a6fcf0e6e9"><td class="memItemLeft" align="right" valign="top"><a id="ae9a7c41967c291f3c322b9a6fcf0e6e9"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>timer_id</b></td></tr>
-<tr class="separator:ae9a7c41967c291f3c322b9a6fcf0e6e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a430427a3f9a62df99df8af8e2b5620fd"><td class="memItemLeft" align="right" valign="top"><a id="a430427a3f9a62df99df8af8e2b5620fd"></a>
-TaskHandle_t&#160;</td><td class="memItemRight" valign="bottom"><b>handler_task</b></td></tr>
-<tr class="separator:a430427a3f9a62df99df8af8e2b5620fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c5329fc7bffca6c182dad3ac7f07cfe"><td class="memItemLeft" align="right" valign="top"><a id="a0c5329fc7bffca6c182dad3ac7f07cfe"></a>
 hw_timer_t *&#160;</td><td class="memItemRight" valign="bottom"><b>adc_timer</b></td></tr>
 <tr class="separator:a0c5329fc7bffca6c182dad3ac7f07cfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1fb5a1e56d025f0cf49fcd9cf2dad5e"><td class="memItemLeft" align="right" valign="top"><a id="ae1fb5a1e56d025f0cf49fcd9cf2dad5e"></a>
-<a class="el" href="classaudio__tools_1_1_user_callback.html">UserCallback</a>&#160;</td><td class="memItemRight" valign="bottom"><b>user_callback</b></td></tr>
-<tr class="separator:ae1fb5a1e56d025f0cf49fcd9cf2dad5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7bb55ac5fdebdf537f069d630bcd9783"><td class="memItemLeft" align="right" valign="top"><a id="a7bb55ac5fdebdf537f069d630bcd9783"></a>
 void(*&#160;</td><td class="memItemRight" valign="bottom"><b>current_timer_callback</b> )()</td></tr>
 <tr class="separator:a7bb55ac5fdebdf537f069d630bcd9783"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a430427a3f9a62df99df8af8e2b5620fd"><td class="memItemLeft" align="right" valign="top"><a id="a430427a3f9a62df99df8af8e2b5620fd"></a>
+TaskHandle_t&#160;</td><td class="memItemRight" valign="bottom"><b>handler_task</b></td></tr>
+<tr class="separator:a430427a3f9a62df99df8af8e2b5620fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9a7c41967c291f3c322b9a6fcf0e6e9"><td class="memItemLeft" align="right" valign="top"><a id="ae9a7c41967c291f3c322b9a6fcf0e6e9"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>timer_id</b></td></tr>
+<tr class="separator:ae9a7c41967c291f3c322b9a6fcf0e6e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1fb5a1e56d025f0cf49fcd9cf2dad5e"><td class="memItemLeft" align="right" valign="top"><a id="ae1fb5a1e56d025f0cf49fcd9cf2dad5e"></a>
+<a class="el" href="classaudio__tools_1_1_user_callback.html">UserCallback</a>&#160;</td><td class="memItemRight" valign="bottom"><b>user_callback</b></td></tr>
+<tr class="separator:ae1fb5a1e56d025f0cf49fcd9cf2dad5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Repeating Timer functions for simple scheduling of repeated execution. The basic logic is taken from <a href="https://www.toptal.com/embedded/esp32-audio-sampling">https://www.toptal.com/embedded/esp32-audio-sampling</a>. </p>
