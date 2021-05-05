@@ -18,7 +18,7 @@ We also provide plenty of examples that demonstrate how to implement the differe
 
 As “Audio Sources” we will have e.g.:
 
-- Analog Microphones – [AnalogAudio](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_analog_audio.html)
+- Analog Microphones – [AnalogAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_analog_audio_stream.html)
 - Digital Microphonse – [I2SStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_i2_s_stream.html)
 - Files on the Internet – [UrlStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_url_stream.html)
 - Generated Sound – [GeneratedSoundStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_generated_sound_stream.html)
@@ -29,7 +29,7 @@ As “Audio Sources” we will have e.g.:
 As “Audio Sinks” we will have e.g:
 
 - external DAC – [I2SStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_i2_s_stream.html)
-- an Amplifier – [AnalogAudio](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_analog_audio.html)
+- an Amplifier – [AnalogAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_analog_audio_stream.html)
 - Bluetooth Speakers – [A2DPStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_a2_d_p_stream.html)
 - Serial to display the data as CSV – [CsvStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_csv_stream.html)
 - SD Files
