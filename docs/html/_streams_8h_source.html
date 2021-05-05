@@ -84,7 +84,7 @@ $(function() {
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">const</span> AudioLogger &amp;log = <a class="code" href="classaudio__tools_1_1_audio_logger.html#a5375c7cffa3a7aff6594cd941a8fa9b3">AudioLogger::instance</a>();</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_memory_stream.html">   22</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_memory_stream.html">MemoryStream</a> : <span class="keyword">public</span> Stream {</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_memory_stream.html">   22</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_memory_stream.html">MemoryStream</a> : <span class="keyword">public</span> <a class="code" href="class_stream.html">Stream</a> {</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">public</span>: </div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <a class="code" href="classaudio__tools_1_1_memory_stream.html">MemoryStream</a>(<span class="keywordtype">int</span> buffer_size = 512){</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            this-&gt;buffer_size = buffer_size;</div>
@@ -177,7 +177,7 @@ $(function() {
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;};</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00123"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_generated_sound_stream.html">  123</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_generated_sound_stream.html">GeneratedSoundStream</a> : <span class="keyword">public</span> Stream {</div>
+<div class="line"><a name="l00123"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_generated_sound_stream.html">  123</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_generated_sound_stream.html">GeneratedSoundStream</a> : <span class="keyword">public</span> <a class="code" href="class_stream.html">Stream</a> {</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        <a class="code" href="classaudio__tools_1_1_generated_sound_stream.html">GeneratedSoundStream</a>(<a class="code" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator&lt;T&gt;</a> &amp;generator, uint8_t channels=2){</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            this-&gt;generator_ptr = &amp;generator;</div>
@@ -234,7 +234,7 @@ $(function() {
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
 <div class="line"><a name="l00192"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_stream_copy.html">  192</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_stream_copy.html">StreamCopy</a> {</div>
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        <a class="code" href="classaudio__tools_1_1_stream_copy.html">StreamCopy</a>(Print &amp;to, Stream &amp;from, <span class="keywordtype">int</span> buffer_size=DEFAULT_BUFFER_SIZE){</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        <a class="code" href="classaudio__tools_1_1_stream_copy.html">StreamCopy</a>(<a class="code" href="class_print.html">Print</a> &amp;to, <a class="code" href="class_stream.html">Stream</a> &amp;from, <span class="keywordtype">int</span> buffer_size=DEFAULT_BUFFER_SIZE){</div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;            this-&gt;from = &amp;from;</div>
 <div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;            this-&gt;to = &amp;to;</div>
 <div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;            this-&gt;buffer_size = buffer_size;</div>
@@ -276,8 +276,8 @@ $(function() {
 <div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        }</div>
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160; </div>
 <div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;        Stream *from;</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;        Print *to;</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;        <a class="code" href="class_stream.html">Stream</a> *from;</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;        <a class="code" href="class_print.html">Print</a> *to;</div>
 <div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;        uint8_t *buffer;</div>
 <div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;        <span class="keywordtype">int</span> buffer_size;</div>
 <div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160; </div>
@@ -286,7 +286,7 @@ $(function() {
 <div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00251"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_stream_copy_t.html">  251</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_stream_copy_t.html">StreamCopyT</a> {</div>
 <div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        <a class="code" href="classaudio__tools_1_1_stream_copy_t.html">StreamCopyT</a>(Print &amp;to, Stream &amp;from, <span class="keywordtype">int</span> buffer_size=DEFAULT_BUFFER_SIZE){</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        <a class="code" href="classaudio__tools_1_1_stream_copy_t.html">StreamCopyT</a>(<a class="code" href="class_print.html">Print</a> &amp;to, <a class="code" href="class_stream.html">Stream</a> &amp;from, <span class="keywordtype">int</span> buffer_size=DEFAULT_BUFFER_SIZE){</div>
 <div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;            this-&gt;from = &amp;from;</div>
 <div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;            this-&gt;to = &amp;to;</div>
 <div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;            this-&gt;buffer_size = buffer_size;</div>
@@ -340,14 +340,14 @@ $(function() {
 <div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;        }</div>
 <div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160; </div>
 <div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;        Stream *from;</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;        Print *to;</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;        <a class="code" href="class_stream.html">Stream</a> *from;</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;        <a class="code" href="class_print.html">Print</a> *to;</div>
 <div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;        uint8_t *buffer;</div>
 <div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;        <span class="keywordtype">int</span> buffer_size;</div>
 <div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160; </div>
 <div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;};</div>
 <div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160; </div>
-<div class="line"><a name="l00321"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_buffered_stream.html">  321</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_buffered_stream.html">BufferedStream</a> : <span class="keyword">public</span> Stream {</div>
+<div class="line"><a name="l00321"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_buffered_stream.html">  321</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_buffered_stream.html">BufferedStream</a> : <span class="keyword">public</span> <a class="code" href="class_stream.html">Stream</a> {</div>
 <div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;        <a class="code" href="classaudio__tools_1_1_buffered_stream.html">BufferedStream</a>(<span class="keywordtype">size_t</span> buffer_size){</div>
 <div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;            buffer = <span class="keyword">new</span> <a class="code" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer&lt;uint8_t&gt;</a>(buffer_size);</div>
@@ -426,7 +426,7 @@ $(function() {
 <div class="line"><a name="l00409"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_csv_stream.html">  409</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_csv_stream.html">CsvStream</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_buffered_stream.html">BufferedStream</a>, <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a>  {</div>
 <div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160; </div>
 <div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00413"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_csv_stream.html#ae6f403984ed50e5f692ee6472fa7a5da">  413</a></span>&#160;        <a class="code" href="classaudio__tools_1_1_csv_stream.html#ae6f403984ed50e5f692ee6472fa7a5da">CsvStream</a>(Print &amp;out, <span class="keywordtype">int</span> channels, <span class="keywordtype">int</span> buffer_size=DEFAULT_BUFFER_SIZE, <span class="keywordtype">bool</span> active=<span class="keyword">true</span>) : <a class="code" href="classaudio__tools_1_1_buffered_stream.html">BufferedStream</a>(buffer_size){</div>
+<div class="line"><a name="l00413"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_csv_stream.html#ae6f403984ed50e5f692ee6472fa7a5da">  413</a></span>&#160;        <a class="code" href="classaudio__tools_1_1_csv_stream.html#ae6f403984ed50e5f692ee6472fa7a5da">CsvStream</a>(<a class="code" href="class_print.html">Print</a> &amp;out, <span class="keywordtype">int</span> channels, <span class="keywordtype">int</span> buffer_size=DEFAULT_BUFFER_SIZE, <span class="keywordtype">bool</span> active=<span class="keyword">true</span>) : <a class="code" href="classaudio__tools_1_1_buffered_stream.html">BufferedStream</a>(buffer_size){</div>
 <div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;            this-&gt;channels = channels;</div>
 <div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;            this-&gt;out_ptr = &amp;out;</div>
 <div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;            this-&gt;active = active;</div>
@@ -442,7 +442,7 @@ $(function() {
 <div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160; </div>
 <div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;    <span class="keyword">protected</span>:</div>
 <div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;        T *data_ptr;</div>
-<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;        Print *out_ptr;</div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;        <a class="code" href="class_print.html">Print</a> *out_ptr;</div>
 <div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;        <span class="keywordtype">int</span> channels;</div>
 <div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;        <span class="keywordtype">bool</span> active;</div>
 <div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160; </div>
@@ -532,7 +532,7 @@ $(function() {
 <div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160; </div>
 <div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;<span class="preprocessor">#ifdef ESP32</span></div>
 <div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160; </div>
-<div class="line"><a name="l00537"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_url_stream.html">  537</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_url_stream.html">UrlStream</a> : <span class="keyword">public</span> Stream {</div>
+<div class="line"><a name="l00537"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_url_stream.html">  537</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_url_stream.html">UrlStream</a> : <span class="keyword">public</span> <a class="code" href="class_stream.html">Stream</a> {</div>
 <div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;        <a class="code" href="classaudio__tools_1_1_url_stream.html">UrlStream</a>(<span class="keywordtype">int</span> readBufferSize=DEFAULT_BUFFER_SIZE){</div>
 <div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;            read_buffer = <span class="keyword">new</span> uint8_t[readBufferSize];</div>
@@ -687,6 +687,8 @@ $(function() {
 <div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160; </div>
 <div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160;}</div>
 <div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160; </div>
+<div class="ttc" id="aclass_print_html"><div class="ttname"><a href="class_print.html">Print</a></div><div class="ttdef"><b>Definition:</b> Print.h:34</div></div>
+<div class="ttc" id="aclass_stream_html"><div class="ttname"><a href="class_stream.html">Stream</a></div><div class="ttdef"><b>Definition:</b> Stream.h:49</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_analog_audio_html_a04d0751f5388c1b204f9bec298a9f18d"><div class="ttname"><a href="classaudio__tools_1_1_analog_audio.html#a04d0751f5388c1b204f9bec298a9f18d">audio_tools::AnalogAudio::begin</a></div><div class="ttdeci">void begin(AnalogConfig cfg)</div><div class="ttdoc">starts the DAC</div><div class="ttdef"><b>Definition:</b> AnalogAudio.h:145</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_analog_audio_html_a87a9bcf73033362f0567da7d91475a8f"><div class="ttname"><a href="classaudio__tools_1_1_analog_audio.html#a87a9bcf73033362f0567da7d91475a8f">audio_tools::AnalogAudio::end</a></div><div class="ttdeci">void end()</div><div class="ttdoc">stops the I2C and unistalls the driver</div><div class="ttdef"><b>Definition:</b> AnalogAudio.h:194</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_analog_audio_html_ae2aabbe86710a350377766b4e4f08bb7"><div class="ttname"><a href="classaudio__tools_1_1_analog_audio.html#ae2aabbe86710a350377766b4e4f08bb7">audio_tools::AnalogAudio::defaultConfig</a></div><div class="ttdeci">AnalogConfig defaultConfig(RxTxMode mode)</div><div class="ttdoc">Provides the default configuration.</div><div class="ttdef"><b>Definition:</b> AnalogAudio.h:138</div></div>

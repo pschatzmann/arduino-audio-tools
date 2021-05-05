@@ -276,7 +276,7 @@ $(function() {
 <div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160; </div>
 <div class="line"><a name="l00225"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_w_a_v_decoder.html">  225</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_w_a_v_decoder.html">WAVDecoder</a> {</div>
 <div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        <a class="code" href="classaudio__tools_1_1_w_a_v_decoder.html">WAVDecoder</a>(Print &amp;out_stream, <a class="code" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> &amp;bi = AudioBaseInfoDependentNone){</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        <a class="code" href="classaudio__tools_1_1_w_a_v_decoder.html">WAVDecoder</a>(<a class="code" href="class_print.html">Print</a> &amp;out_stream, <a class="code" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> &amp;bi = AudioBaseInfoDependentNone){</div>
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;            this-&gt;out = &amp;out_stream;</div>
 <div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;            this-&gt;audioBaseInfoSupport = bi;</div>
 <div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        }</div>
@@ -334,7 +334,7 @@ $(function() {
 <div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160; </div>
 <div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    <span class="keyword">protected</span>:</div>
 <div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;        <a class="code" href="classaudio__tools_1_1_w_a_v_header.html">WAVHeader</a> header;</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        Print *out;</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        <a class="code" href="class_print.html">Print</a> *out;</div>
 <div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;        <span class="keyword">const</span> <a class="code" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> &amp;audioBaseInfoSupport;</div>
 <div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;        <span class="keywordtype">bool</span> isFirst = <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;        <span class="keywordtype">bool</span> isValid = <span class="keyword">true</span>;</div>
@@ -345,7 +345,7 @@ $(function() {
 <div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160; </div>
 <div class="line"><a name="l00299"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_w_a_v_encoder.html">  299</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_w_a_v_encoder.html">WAVEncoder</a> {</div>
 <div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    <span class="keyword">public</span>: </div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;        <a class="code" href="classaudio__tools_1_1_w_a_v_encoder.html">WAVEncoder</a>(Stream &amp;out){</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;        <a class="code" href="classaudio__tools_1_1_w_a_v_encoder.html">WAVEncoder</a>(<a class="code" href="class_stream.html">Stream</a> &amp;out){</div>
 <div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;            stream_ptr = &amp;out;</div>
 <div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;        }</div>
 <div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160; </div>
@@ -390,7 +390,7 @@ $(function() {
 <div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;        }</div>
 <div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160; </div>
 <div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;        Stream* stream_ptr;</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;        <a class="code" href="class_stream.html">Stream</a>* stream_ptr;</div>
 <div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;        <a class="code" href="structaudio__tools_1_1_w_a_v_audio_info.html">WAVAudioInfo</a> audioInfo;</div>
 <div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;        uint32_t max_samples;</div>
 <div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160; </div>
@@ -424,6 +424,8 @@ $(function() {
 <div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160; </div>
 <div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;}</div>
 <div class="ttc" id="a_audio_tools_8h_html"><div class="ttname"><a href="_audio_tools_8h.html">AudioTools.h</a></div><div class="ttdoc">Includes all classes.</div></div>
+<div class="ttc" id="aclass_print_html"><div class="ttname"><a href="class_print.html">Print</a></div><div class="ttdef"><b>Definition:</b> Print.h:34</div></div>
+<div class="ttc" id="aclass_stream_html"><div class="ttname"><a href="class_stream.html">Stream</a></div><div class="ttdef"><b>Definition:</b> Stream.h:49</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_base_info_dependent_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_base_info_dependent.html">audio_tools::AudioBaseInfoDependent</a></div><div class="ttdoc">Supports changes to the sampling rate, bits and channels.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:104</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_logger_html_a1f1dec67021e89cfbd1746c123c6fcdd"><div class="ttname"><a href="classaudio__tools_1_1_audio_logger.html#a1f1dec67021e89cfbd1746c123c6fcdd">audio_tools::AudioLogger::printf</a></div><div class="ttdeci">int printf(LogLevel current_level, const char *fmt,...) const</div><div class="ttdoc">printf support</div><div class="ttdef"><b>Definition:</b> AudioLogger.h:74</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_logger_html_a5375c7cffa3a7aff6594cd941a8fa9b3"><div class="ttname"><a href="classaudio__tools_1_1_audio_logger.html#a5375c7cffa3a7aff6594cd941a8fa9b3">audio_tools::AudioLogger::instance</a></div><div class="ttdeci">static AudioLogger &amp; instance()</div><div class="ttdoc">provides the singleton instance</div><div class="ttdef"><b>Definition:</b> AudioLogger.h:115</div></div>

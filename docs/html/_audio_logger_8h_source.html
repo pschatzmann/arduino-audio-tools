@@ -94,7 +94,7 @@ $(function() {
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        };</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_logger.html#af04cd66822c113bacd6f726ba2a78aad">   37</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_audio_logger.html#af04cd66822c113bacd6f726ba2a78aad">begin</a>(Stream&amp; out, <a class="code" href="classaudio__tools_1_1_audio_logger.html#a514bd8ffbf484d01cb439a4c82c305e0">LogLevel</a> level=SOUND_LOG_LEVEL) {</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_logger.html#af04cd66822c113bacd6f726ba2a78aad">   37</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_audio_logger.html#af04cd66822c113bacd6f726ba2a78aad">begin</a>(<a class="code" href="class_stream.html">Stream</a>&amp; out, <a class="code" href="classaudio__tools_1_1_audio_logger.html#a514bd8ffbf484d01cb439a4c82c305e0">LogLevel</a> level=SOUND_LOG_LEVEL) {</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            this-&gt;log_stream_ptr = &amp;out;</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            this-&gt;log_level = level;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            this-&gt;active = <span class="keyword">true</span>;</div>
@@ -174,7 +174,7 @@ $(function() {
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        Stream *log_stream_ptr = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        <a class="code" href="class_stream.html">Stream</a> *log_stream_ptr = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">char</span>* TAG = <span class="stringliteral">&quot;AudioTools&quot;</span>;</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        <a class="code" href="classaudio__tools_1_1_audio_logger.html#a514bd8ffbf484d01cb439a4c82c305e0">LogLevel</a> log_level = Error;</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        <span class="keywordtype">bool</span> active = <span class="keyword">false</span>;  </div>
@@ -185,6 +185,7 @@ $(function() {
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;};</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;}    </div>
+<div class="ttc" id="aclass_stream_html"><div class="ttname"><a href="class_stream.html">Stream</a></div><div class="ttdef"><b>Definition:</b> Stream.h:49</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_logger_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_logger.html">audio_tools::AudioLogger</a></div><div class="ttdoc">A simple Logger that writes messages dependent on the log level.</div><div class="ttdef"><b>Definition:</b> AudioLogger.h:22</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_logger_html_a1f1dec67021e89cfbd1746c123c6fcdd"><div class="ttname"><a href="classaudio__tools_1_1_audio_logger.html#a1f1dec67021e89cfbd1746c123c6fcdd">audio_tools::AudioLogger::printf</a></div><div class="ttdeci">int printf(LogLevel current_level, const char *fmt,...) const</div><div class="ttdoc">printf support</div><div class="ttdef"><b>Definition:</b> AudioLogger.h:74</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_logger_html_a34f452e05084a6cff5e25e2d9b455ea4"><div class="ttname"><a href="classaudio__tools_1_1_audio_logger.html#a34f452e05084a6cff5e25e2d9b455ea4">audio_tools::AudioLogger::isLogging</a></div><div class="ttdeci">bool isLogging(LogLevel level=Info)</div><div class="ttdoc">checks if the logging is active</div><div class="ttdef"><b>Definition:</b> AudioLogger.h:49</div></div>
