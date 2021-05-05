@@ -88,6 +88,7 @@ Here is the list of examples:
 - [streams-generator-i2s_external_dac](/examples/streams-generator-i2s_external_dac) Playing generated sound on external DAC via I2S
 - [streams-memory_raw-i2s_external_dac](examples/streams-memory_raw-i2s_external_dac) - Play music form Flash Memory via I2S to External DAC
 - [streams-url_raw-serial](/examples/streams-url_raw-serial) Displaying a music file from the internet on the Serial Plotter
+- [streams-url_raw-I2S_external_dac.ino](/examples/streams-url_raw-I2S_external_dac.ino) Streaming a File from the Internet to on external DAC via I2S
 
 ... these are just a few examples, but you can combine any Input Stream with any Output Stream as you like...
 
