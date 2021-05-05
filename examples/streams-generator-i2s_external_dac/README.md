@@ -1,6 +1,9 @@
 # Digital output via I2S to a external DAC
 
-To test the I2S output I'm using the generate sine signal and write it to I2S.
+Sometimes it is quite useful to be able to generate a test tone.
+We can use the GeneratedSoundStream class together with a SoundGenerator class. In my example I use a SineWaveGenerator.
+
+To test the I2S output I'm using this generated signal and write it to I2S.
 
 For my tests I am using the 24-bit PCM5102 PCM5102A Stereo DAC Digital-to-analog Converter PLL Voice Module pHAT
 ![DAC](https://pschatzmann.github.io/arduino-audio-tools/resources/dac.jpeg)
