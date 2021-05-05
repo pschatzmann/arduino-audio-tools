@@ -9,10 +9,11 @@ Unlike in the other examples I am using the typed __StreamCopyT<int16_t>__ class
 Please note that you must compile this sketch with the __Partition Scheme: Huge App__!
 
 
-For my tests I am using the 24-bit PCM5102 PCM5102A Stereo DAC Digital-to-analog Converter PLL Voice Module pHAT
+### External DAC:
+
 ![DAC](https://pschatzmann.github.io/arduino-audio-tools/resources/dac.jpeg)
 
-### External DAC:
+For my tests I am using the 24-bit PCM5102 PCM5102A Stereo DAC Digital-to-analog Converter PLL Voice Module pHAT
 
 I am just using the default pins defined by the framework. However I could change them with the help of the config object. The mute pin can be defined in the constructor of the I2SStream - by not defining anything we use the default which is GPIO23
 
