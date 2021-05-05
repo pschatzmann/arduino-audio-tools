@@ -1,6 +1,6 @@
 # Stream URL to I2S external DAC
 
-We are reading a raw audio file from the Intenet and write the data to the I2S interface. The audio file must be available using 16 bit integers with 2 channels. 
+We are reading a raw audio file from the Intenet and write the data to the I2S interface. The audio file must be available using 16 bit integers with 2 channels. I used a sampling rate of 8000.
 
 [Audacity](https://www.audacityteam.org/) might help you out here: export with the file name audio.raw as RAW signed 16 bit PCM and copy it to the SD card. In my example I was using the file [audio.raw](https://pschatzmann.github.io/arduino-audio-tools/resources/audio.raw). 
 
@@ -16,8 +16,6 @@ We are reading a raw audio file from the Intenet and write the data to the I2S i
 | WS      |  WS (GPIO15)
 | SCK     |  BCK (GPIO14)
 
-
-Comments - The Playing is breaking up most likely because we receive the data not fast enough. Try to make an example with a lower sampes per second....
 
 
 
