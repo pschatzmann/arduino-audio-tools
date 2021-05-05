@@ -83,13 +83,11 @@ Here is the list of examples:
 
 #### Stream API
 
-- [streams-url_raw-serial](/examples/streams-url_raw-serial) Displaying a music file from the internet on the Serial Plotter
-- [streams-generator-serial](/examples/streams-generator-serial) Displaying generated sound on the Serial Plotter
 - [streams-adc-serial](/examples/streams-adc-serial) Displaying input from analog microphone on the Serial Plotter
-- [streams-i2s-a2dp](examples/streams-i2s-a2dp) - Sample analog sound and write it to a A2DP Bluetooth source 
-- [streams-file_raw-a2dp](examples/streams-file_raw-a2dp) - Read Raw File from SD card write it A2DP Bluetooth 
-- [streams-adc-a2dp](examples/streams-adc-a2dp) - Sample analog sound from analog microphone and send it to Bluetooth Speaker 
+- [streams-generator-serial](/examples/streams-generator-serial) Displaying generated sound on the Serial Plotter
+- [streams-generator-i2s_external_dac](/examples/streams-generator-i2s_external_dac) Playing generated sound on external DAC via I2S
 - [streams-memory_raw-i2s_external_dac](examples/streams-memory_raw-i2s_external_dac) - Play music form Flash Memory via I2S to External DAC
+- [streams-url_raw-serial](/examples/streams-url_raw-serial) Displaying a music file from the internet on the Serial Plotter
 
 ... these are just a few examples, but you can combine any Input Stream with any Output Stream as you like...
 
