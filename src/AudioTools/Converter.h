@@ -1,6 +1,6 @@
 #pragma once
 #include "AudioTypes.h"
-#include "BluetoothA2DPSource.h"
+#include "Vector.h"
 
 namespace audio_tools {
 
@@ -23,17 +23,18 @@ static int16_t convertFrom32To16(int32_t value)  {
 
 
 /**
- * @brief Abstract Base class for Filters
- * A filter is processing the data in the indicated array
+ * @brief Abstract Base class for Converters
+ * A converter is processing the data in the indicated array
  * @author Phil Schatzmann
  * @copyright GPLv3
  * @tparam T 
  */
 template<typename T>
-class BaseFilter {
+class BaseConverter {
     public:
-        virtual void process(T (*src)[2], size_t size) = 0;
+        virtual void convert(T (*src)[2], size_t size) = 0;
 };
+
 
 
 /**
@@ -44,15 +45,15 @@ class BaseFilter {
  * @tparam T 
  */
 template<typename T>
-class FilterScaler : public  BaseFilter<T> {
+class ConverterScaler : public  BaseConverter<T> {
     public:
-        FilterScaler(float factor, T offset, T maxValue){
+        ConverterScaler(float factor, T offset, T maxValue){
             this->factor = factor;
             this->maxValue = maxValue;
             this->offset = offset;
         }
 
-        void process(T (*src)[2], size_t size) {
+        void convert(T (*src)[2], size_t size) {
             for (size_t j=0;j<size;j++){
                 src[j][0] = (src[j][0] + offset) * factor;
                 if (src[j][0]>maxValue){
@@ -75,6 +76,53 @@ class FilterScaler : public  BaseFilter<T> {
 };
 
 /**
+ * @brief Makes sure that the avg of the signal is set to 0
+ * 
+ * @tparam T 
+ */
+template<typename T>
+class ConverterAutoCenter : public  BaseConverter<T> {
+    public:
+        ConverterAutoCenter(){
+        }
+
+        void convert(T (*src)[2], size_t size) {
+            setup(src, size);
+            if (is_setup){
+                for (size_t j=0; j<size; j++){
+                    src[j][0] = src[j][0] - offset;
+                    src[j][1] = src[j][1] - offset;
+                }
+            }
+        }
+
+    protected:
+        T offset;
+        float left;
+        float right;
+        bool is_setup = false;
+
+        void setup(T (*src)[2], size_t size){
+            if (!is_setup) {
+                for (size_t j=0;j<size;j++){
+                    left += src[j][0];
+                    right += src[j][1];
+                }
+                left = left / size;
+                right = right / size;
+
+                if (left>0){
+                    offset = left;
+                    is_setup = true;
+                } else if (right>0){
+                    offset = right;
+                    is_setup = true;
+                }
+            }
+        }
+};
+
+/**
  * @brief Switches the left and right channel
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -82,11 +130,11 @@ class FilterScaler : public  BaseFilter<T> {
  * @tparam T 
  */
 template<typename T>
-class FilterSwitchLeftAndRight : public  BaseFilter<T> {
+class ConverterSwitchLeftAndRight : public  BaseConverter<T> {
     public:
-        FilterSwitchLeftAndRight(){
+        ConverterSwitchLeftAndRight(){
         }
-        void process(T (*src)[2], size_t size) {
+        void convert(T (*src)[2], size_t size) {
             for (size_t j=0;j<size;j++){
                 src[j][1] = src[j][0];
                 src[j][0] = src[j][1];
@@ -102,11 +150,11 @@ class FilterSwitchLeftAndRight : public  BaseFilter<T> {
  * @tparam T 
  */
 template<typename T>
-class FilterFillLeftAndRight : public  BaseFilter<T> {
+class ConverterFillLeftAndRight : public  BaseConverter<T> {
     public:
-        FilterFillLeftAndRight(){
+        ConverterFillLeftAndRight(){
         }
-        void process(T (*src)[2], size_t size) {
+        void convert(T (*src)[2], size_t size) {
             setup(src, size);
             if (left_empty && !right_empty){
                 for (size_t j=0;j<size;j++){
@@ -156,12 +204,12 @@ class FilterFillLeftAndRight : public  BaseFilter<T> {
  * @tparam T 
  */
 template<typename T>
-class FilterToInternalDACFormat : public  BaseFilter<T> {
+class ConverterToInternalDACFormat : public  BaseConverter<T> {
     public:
-        FilterToInternalDACFormat(){
+        ConverterToInternalDACFormat(){
         }
 
-        void process(T (*src)[2], size_t size) {
+        void convert(T (*src)[2], size_t size) {
             for (int i=0; i<size; i++) {
                 src[i][0] = src[i][0] + 0x8000;
                 src[i][1] = src[i][1] + 0x8000;
@@ -169,8 +217,33 @@ class FilterToInternalDACFormat : public  BaseFilter<T> {
         }
 };
 
+/**
+ * @brief Combines multiple converters
+ * 
+ * @tparam T 
+ */
+template<typename T>
+class MultiConverter : public BaseConverter<T> {
+    public:
+        MultiConverter(){
+        }
 
+        // adds a converter
+        void add(BaseConverter<T> &converter){
+            converters.push_back(converter);
+        }
 
+        // The data is provided as int24_t tgt[][2] but  returned as int24_t
+        void convert(T (*src)[2], size_t size) {
+            for(int i=0; i < converters.size(); i++){
+                converters[i].convert(src);
+            }
+        }
+
+    private:
+        Vector<T> converters;
+
+};
 
 /**
  * @brief Converts e.g. 24bit data to the indicated bigger data type
@@ -180,9 +253,9 @@ class FilterToInternalDACFormat : public  BaseFilter<T> {
  * @tparam T 
  */
 template<typename FromType, typename ToType>
-class Converter {
+class CallbackConverter {
     public:
-        Converter(ToType (*converter)(FromType v)){
+        CallbackConverter(ToType (*converter)(FromType v)){
             this->convert_ptr = converter;
         }
 
@@ -199,38 +272,6 @@ class Converter {
 
 };
 
-
-// static int16[2][] toArray(Channel *c){
-//     return (static_cast<(int16[2])*>(c));
-// }
-
-/**
- * @brief Covnerts the data from T src[][2] to a Channels array 
- * @author Phil Schatzmann
- * @copyright GPLv3
- * 
- * @tparam T 
- */
-
-template<typename T>
-class ChannelConverter {
-    public:
-        ChannelConverter( int16_t (*convert_ptr)(T from)){
-            this->convert_ptr = convert_ptr;
-        }
-
-        // The data is provided as int24_t tgt[][2] but  returned as int24_t
-        void convert(T src[][2], Channels* channels, size_t size) {
-            for (int i=size; i>0; i--) {
-                channels[i].channel1 = (*convert_ptr)(src[i][0]);
-                channels[i].channel2 = (*convert_ptr)(src[i][1]);
-            }
-        }
-
-    private:
-        int16_t (*convert_ptr)(T from);
-
-};
 
 
 }

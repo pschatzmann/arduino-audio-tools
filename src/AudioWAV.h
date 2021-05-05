@@ -226,7 +226,7 @@ class WAVDecoder {
     public:
         WAVDecoder(Print &out_stream, AudioBaseInfoDependent &bi = AudioBaseInfoDependentNone){
             this->out = &out_stream;
-            this->audioBaseInfoSupport = &bi;
+            this->audioBaseInfoSupport = bi;
         }
     
         void begin() {
@@ -260,17 +260,19 @@ class WAVDecoder {
                         isValid = false;
                     } else {
                         // update sampling rate if the target supports it
-                        if (audioBaseInfoSupport!=nullptr){
-                            AudioBaseInfo bi;
-                            bi.sample_rate = header.audioInfo().sample_rate;
-                            bi.channels = header.audioInfo().channels;
-                            bi.bits_per_sample = header.audioInfo().bits_per_sample;
+                        AudioBaseInfo bi;
+                        bi.sample_rate = header.audioInfo().sample_rate;
+                        bi.channels = header.audioInfo().channels;
+                        bi.bits_per_sample = header.audioInfo().bits_per_sample;
+                        // we provide some functionality so that we could check if the destination supports the requested format
+                        isValid = audioBaseInfoSupport.validate(bi);
+                        WAVLogger.printf(AudioLogger::Error,"isValid: ", isValid ? "true":"false");
+                        if (isValid){
                             audioBaseInfoSupport->setAudioBaseInfo(bi);
+                            // write prm data from first record
+                            WAVLogger.printf(AudioLogger::Info,"WAVDecoder writing first sound data");
+                            out->write(sound_ptr, len);
                         }
-
-                        // write prm data from first record
-                        WAVLogger.printf(AudioLogger::Info,"WAVDecoder writing first sound data");
-                        out->write(sound_ptr, len);
                     }
                 }
             } else {
@@ -281,7 +283,7 @@ class WAVDecoder {
     protected:
         WAVHeader header;
         Print *out;
-        AudioBaseInfoDependent *audioBaseInfoSupport;
+        const AudioBaseInfoDependent &audioBaseInfoSupport;
         bool isFirst = true;
         bool isValid = true;
 

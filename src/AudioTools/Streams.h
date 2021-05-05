@@ -1,10 +1,17 @@
 #pragma once
 #include "Arduino.h"
+#include "AudioConfig.h"
+#include "AudioTypes.h"
+#include "Buffers.h"
+#include "AudioI2S.h"
+
+#ifdef ESP32
 #include <esp_http_client.h>
-#include "i2s.h"
+#endif
 
 namespace audio_tools {
 
+const AudioLogger &log = AudioLogger::instance();
 
 /**
  * @brief A simple Stream implementation which is backed by allocated memory
@@ -42,21 +49,43 @@ class MemoryStream : public Stream {
             return result;
         }
 
+        virtual size_t write(const uint8_t *buffer, size_t size){
+            size_t result = 0;
+            for (int j=0;j<size;j++){
+                if(!write(buffer[j])){
+                    break;
+                }
+                result = j;
+            }
+        }
+
         virtual int available() {
             return write_pos - read_pos;
         }
 
         virtual int read() {
             int result = peek();
-            if (result>0){
+            if (result>=0){
                 read_pos++;
             }
             return result;
         }
 
+        size_t readBytes(char *buffer, size_t length){
+            size_t count = 0;
+            while (count < length) {
+                int c = read();
+                if (c < 0) break;
+                *buffer++ = (char)c;
+                count++;
+            }
+            return count;
+        }
+
+
         virtual int peek() {
             int result = -1;
-            if (available()>0 && read_pos < write_pos){
+            if (available()>0){
                 result = buffer[read_pos];
             }
             return result;
@@ -74,16 +103,85 @@ class MemoryStream : public Stream {
             }
         }
 
-
     protected:
         int write_pos;
         int read_pos;
         int buffer_size;
         uint8_t *buffer;
         bool owns_buffer;
-
 };
 
+/**
+ * @brief Source for reading generated tones. Please note 
+ * - that the output is for one channel only! 
+ * - we do not support reading of individual characters!
+ * - we do not support any write operations
+ * @param generator 
+ */
+
+template <class T>
+class GeneratedSoundStream : public Stream {
+    public:
+        GeneratedSoundStream(SoundGenerator<T> &generator, uint8_t channels=2){
+            this->generator_ptr = &generator;
+            this->channels = channels;
+        }
+        
+        /// unsupported operations
+        virtual size_t write(uint8_t) {
+            return not_supported();
+        };
+        /// unsupported operations
+        virtual int availableForWrite() {       
+            return not_supported();
+        }
+
+        /// unsupported operations
+        virtual size_t write(const uint8_t *buffer, size_t size) { 
+            return not_supported();
+        }
+
+        /// unsupported operations
+        virtual int read() {
+            return -1;
+        }        
+        /// unsupported operations
+        virtual int peek() {
+            return -1;
+        }
+        /// This is unbounded so we just return the buffer size
+        virtual int available() {
+            return DEFAULT_BUFFER_SIZE;
+        }
+
+        /// privide the data as byte stream
+        size_t readBytes( char *buffer, size_t length) {
+            return generator_ptr->readBytes((uint8_t*)buffer, length, channels);
+        }
+
+        /// start the processing
+        void begin() {
+            generator_ptr->begin();
+        }
+
+        /// stop the processing
+        void stop() {
+            generator_ptr->stop();
+        }
+
+        void flush(){
+        }
+
+    protected:
+        SoundGenerator<T> *generator_ptr;  
+        uint8_t channels; 
+
+        int not_supported() {
+            log.error("GeneratedSoundStream-unsupported operation!");
+            return 0;
+        } 
+
+};
 
 
 /**
@@ -93,7 +191,7 @@ class MemoryStream : public Stream {
  */
 class StreamCopy {
     public:
-        StreamCopy(Stream &to, Stream &from, int buffer_size){
+        StreamCopy(Print &to, Stream &from, int buffer_size=DEFAULT_BUFFER_SIZE){
             this->from = &from;
             this->to = &to;
             this->buffer_size = buffer_size;
@@ -104,16 +202,31 @@ class StreamCopy {
             delete[] buffer;
         }
 
-        /// copies the available bytes from the input stream to the ouptut stream
+        /// copies a buffer length of data - repeat this call until everthing is copied
         size_t copy() {
-            size_t total_bytes = available();
-            size_t result = total_bytes;
-            while (total_bytes>0){
-                size_t bytes_to_read = min(total_bytes,static_cast<size_t>(buffer_size) );
-                from->readBytes(buffer, bytes_to_read);
-                to->write(buffer, bytes_to_read);
-                total_bytes -= bytes_to_read;
-            }
+            log.printf(AudioLogger::Info, "StreamCopy::copy");
+            size_t result = available();
+            if (result>0){
+                size_t bytes_to_read = min(result,static_cast<size_t>(buffer_size) );
+                result = from->readBytes(buffer, bytes_to_read);
+                to->write(buffer, result);
+            } 
+            log.printf(AudioLogger::Info, "StreamCopy::copy %d bytes\n", result);
+            return result;
+        }
+
+        /// copies a buffer length of data and applies the converter
+        template<typename T>
+        size_t copy(BaseConverter<T> &converter) {
+            size_t result = available();
+            BaseConverter<T> *coverter_ptr = &converter;
+            if (result>0){
+                size_t bytes_to_read = min(result, static_cast<size_t>(buffer_size) );
+                result = from->readBytes(buffer, bytes_to_read);
+                // convert to pointer to array of 2
+                coverter_ptr->convert((T(*)[2])buffer,  result / (sizeof(T)*2) );
+                to->write(buffer, result);
+            } 
             return result;
         }
 
@@ -123,15 +236,298 @@ class StreamCopy {
 
     protected:
         Stream *from;
-        Stream *to;
+        Print *to;
         uint8_t *buffer;
         int buffer_size;
 
 };
 
+/**
+ * @brief Typed Stream Copy which supports the conversion from channel to 2 channels. We make sure that we
+ * allways copy full samples
+ * @tparam T 
+ */
+template <class T>
+class StreamCopyT {
+    public:
+        StreamCopyT(Print &to, Stream &from, int buffer_size=DEFAULT_BUFFER_SIZE){
+            this->from = &from;
+            this->to = &to;
+            this->buffer_size = buffer_size;
+            buffer = new uint8_t[buffer_size];
+        }
 
+        ~StreamCopyT(){
+            delete[] buffer;
+        }
+
+        // copies the data from one channel from the source to 2 channels on the destination
+        size_t copy(){
+            size_t result = available();
+            if (result>0){
+                size_t bytes_to_read = min(result, static_cast<size_t>(buffer_size));
+                size_t samples = bytes_to_read / sizeof(T);
+                size_t bytes = samples * sizeof(T);
+                from->readBytes(buffer, bytes);
+                result = to->write(buffer, bytes);
+            } 
+            log.printf(AudioLogger::Info, "StreamCopyT::copy %d bytes\n", result);
+            return result;
+        }
+
+        // copies the data from one channel from the source to 2 channels on the destination
+        size_t copy2(){
+            size_t result = available();
+            size_t bytes_read;
+            log.printf(AudioLogger::Info, "StreamCopyT::copy2 %u\n", result);
+            if (result>0){
+                size_t bytes_to_read = min(result, static_cast<size_t>(buffer_size / 2));
+                size_t frames = bytes_to_read / sizeof(T);
+                T temp_data[frames];
+                bytes_read = from->readBytes((uint8_t*)temp_data, frames * sizeof(T));
+
+                T* bufferT = (T*) buffer;
+                for (int j=0;j<frames;j++){
+                    *bufferT = temp_data[j];
+                    bufferT++;
+                    *bufferT = temp_data[j];
+                    bufferT++;
+                }
+                result = to->write(buffer, frames * sizeof(T)*2);
+            } 
+            log.printf(AudioLogger::Info, "StreamCopyT::copy2 %u -> %u bytes / available %u\n", bytes_read, result, available());
+            return result;
+        }
+
+        /// available bytes in the data source
+        int available() {
+            return from->available();
+        }
+
+    protected:
+        Stream *from;
+        Print *to;
+        uint8_t *buffer;
+        int buffer_size;
+
+};
+
+/**
+ * @brief The Arduino Stream supports operations on single characters. This is usually not the best way to push audio information, but we 
+ * will support it anyway - by using a buffer. On reads: if the buffer is empty it gets refilled - for writes
+ * if it is full it gets flushed.
+ * 
+ */
+class BufferedStream : public Stream {
+    public:
+        BufferedStream(size_t buffer_size){
+            buffer = new SingleBuffer<uint8_t>(buffer_size);
+        }
+
+        ~BufferedStream() {
+            delete [] buffer;
+        }
+
+        /// writes a byte to the buffer
+        virtual size_t write(uint8_t c) {
+        if (buffer->isFull()){
+                flush();
+            }
+            return buffer->write(c);
+        }
+
+        /// Use this method: write an array
+        virtual size_t write(const uint8_t* data, size_t len) {    
+            flush();
+            return writeExt(data, len);
+        }
+
+        /// empties the buffer
+        virtual void flush() {
+            // just dump the memory of the buffer and clear it
+            if (buffer->available()>0){
+                writeExt(buffer->address(), buffer->available());
+                buffer->reset();
+            }
+        }
+
+        /// reads a byte - to be avoided
+        virtual int read() {
+        if (buffer->isEmpty()){
+                refill();
+            }
+            return buffer->read(); 
+        }
+
+        /// peeks a byte - to be avoided
+        virtual int peek() {
+        if (buffer->isEmpty()){
+                refill();
+            }
+            return buffer->peek();
+        };
+        
+        /// Use this method !!
+        size_t readBytes( uint8_t *data, size_t length) { 
+            if (buffer->isEmpty()){
+                return readExt(data, length);
+            } else {
+                return buffer->readArray(data, length);
+            }
+        }
+
+        // refills the buffer with data from i2s
+        void refill() {
+            size_t result = readExt(buffer->address(), buffer->size());
+            buffer->setAvailable(result);
+        }
+
+        /// Returns the available bytes in the buffer: to be avoided
+        virtual int available() {
+            if (buffer->isEmpty()){
+                refill();
+            }
+            return buffer->available();
+        }
+
+    protected:
+        SingleBuffer<uint8_t> *buffer;
+
+        virtual size_t writeExt(const uint8_t* data, size_t len) = 0;
+        virtual size_t readExt( uint8_t *data, size_t length) = 0;
+
+
+};
+
+
+/**
+ * @brief Stream Wrapper which can be used to print the values as readable ASCII to the screen to be analyzed in the Serial Plotter
+ * The frames are separated by a new line. The channels in one frame are separated by a ,
+ * @tparam T 
+ */
+template<typename T>
+class CsvStream : public BufferedStream, public AudioBaseInfoDependent  {
+
+    public:
+        /// Constructor
+        CsvStream(Print &out, int channels, int buffer_size=DEFAULT_BUFFER_SIZE, bool active=true) : BufferedStream(buffer_size){
+            this->channels = channels;
+            this->out_ptr = &out;
+            this->active = active;
+        }
+
+        /// Sets the CsvStream as active 
+        void begin(){
+            active = true;
+        }
+
+        /// Sets the CsvStream as inactive 
+        void end() {
+            active = false;
+        }
+
+    protected:
+        T *data_ptr;
+        Print *out_ptr;
+        int channels;
+        bool active;
+
+        virtual size_t writeExt(const uint8_t* data, size_t len) {   
+            if (!active) return 0;
+            size_t lenChannels = len / (sizeof(T)*channels); 
+            data_ptr = (T*)data;
+            for (int j=0;j<lenChannels;j++){
+                for (int ch=0;ch<channels;ch++){
+                    out_ptr->print(*data_ptr);
+                    data_ptr++;
+                    if (ch<channels-1) Serial.print(", ");
+                }
+                Serial.println();
+            }
+            return len;
+        }
+
+        virtual size_t readExt( uint8_t *data, size_t length) { 
+            return 0;
+        }
+
+
+};
+
+
+/**
+ * @brief We support the Stream interface for the I2S access. In addition we allow a separate mute pin which might also be used
+ * to drive a LED... 
+ * 
+ * @tparam T 
+ */
+
+class I2SStream : public BufferedStream, public AudioBaseInfoDependent  {
+
+    public:
+        I2SStream(int mute_pin=PIN_I2S_MUTE) : BufferedStream(DEFAULT_BUFFER_SIZE){
+            this->mute_pin = mute_pin;
+            if (mute_pin>0) {
+                pinMode(mute_pin, OUTPUT);
+                mute(true);
+            }
+        }
+
+        /// Provides the default configuration
+        I2SConfig defaultConfig(RxTxMode mode) {
+            return i2s.defaultConfig(mode);
+        }
+
+        void begin(I2SConfig cfg) {
+            i2s.begin(cfg);
+            // unmute
+            mute(false);
+        }
+
+        void end() {
+            mute(true);
+            i2s.end();
+        }
+
+        /// updates the sample rate dynamically 
+        virtual void setAudioBaseInfo(AudioBaseInfo info) {
+            bool is_update = false;
+            I2SConfig cfg = i2s.config();
+            if (cfg.sample_rate != info.sample_rate
+                || cfg.channels != info.channels
+                || cfg.bits_per_sample != info.bits_per_sample) {
+                cfg.sample_rate = info.sample_rate;
+                cfg.bits_per_sample = info.bits_per_sample;
+                cfg.channels = info.channels;
+
+                i2s.end();
+                i2s.begin(cfg);        
+            }
+        }
+
+    protected:
+        I2SBase i2s;
+        int mute_pin;
+
+        /// set mute pin on or off
+        void mute(bool is_mute){
+            if (mute_pin>0) {
+                digitalWrite(mute_pin, is_mute ? SOFT_MUTE_VALUE : !SOFT_MUTE_VALUE );
+            }
+        }
+
+        virtual size_t writeExt(const uint8_t* data, size_t len) {    
+            return i2s.writeBytes(data, len);
+        }
+
+        virtual size_t readExt( uint8_t *data, size_t length) { 
+            return i2s.readBytes(data, length);
+        }
+
+};
 
 #ifdef ESP32
+
 /**
  * @brief Represents the content of a URL as Stream. We use the ESP32 ESP HTTP Client API
  * @author Phil Schatzmann
@@ -140,21 +536,20 @@ class StreamCopy {
  */
 class UrlStream : public Stream {
     public:
-        UrlStream(int readBufferSize=512){
+        UrlStream(int readBufferSize=DEFAULT_BUFFER_SIZE){
             read_buffer = new uint8_t[readBufferSize];
         }
 
         ~UrlStream(){
             delete[] read_buffer;
-            esp_http_client_close(client);
-            esp_http_client_cleanup(client);
+            end();
         }
 
         int begin(const char* url) {
             int result = -1;
             config.url = url;
             config.method = HTTP_METHOD_GET;
-            Logger.info("UrlStream.begin ",url);
+            Logger.printf(AudioLogger::Info, "UrlStream.begin %s\n",url);
 
             // cleanup last begin if necessary
             if (client==nullptr){
@@ -189,16 +584,19 @@ class UrlStream : public Stream {
         }
 
         virtual int available() {
-            return size - read_pos;
+            return size - total_read;
         }
 
         virtual size_t readBytes(uint8_t *buffer, size_t length){
-            return esp_http_client_read(client, (char*)buffer, length);
+            size_t read = esp_http_client_read(client, (char*)buffer, length);
+            total_read+=read;
+            return read;
         }
 
         virtual int read() {
             fillBuffer();
-            return isEOS() ? -1 : read_buffer[read_pos++];
+            total_read++;
+            return isEOS() ? -1 :read_buffer[read_pos++];
         }
 
         virtual int peek() {
@@ -213,11 +611,17 @@ class UrlStream : public Stream {
             Logger.error("UrlStream write - not supported");
         }
 
+        void end(){
+            esp_http_client_close(client);
+            esp_http_client_cleanup(client);
+        }
+
 
     protected:
         esp_http_client_handle_t client;
         esp_http_client_config_t config;
         long size;
+        long total_read;
         // buffered read
         uint8_t *read_buffer;
         uint16_t read_buffer_size;
@@ -225,9 +629,9 @@ class UrlStream : public Stream {
         uint16_t read_size;
         const AudioLogger &Logger = AudioLogger::instance();
 
-
         inline void fillBuffer() {
             if (isEOS()){
+                // if we consumed all bytes we refill the buffer
                 read_size = readBytes(read_buffer,read_buffer_size);
                 read_pos = 0;
             }
@@ -241,95 +645,51 @@ class UrlStream : public Stream {
 
 
 /**
- * @brief We support the Stream interface on I2S
+ * @brief We support the Stream interface for the ADC class
  * 
  * @tparam T 
  */
 
-class I2SStream : public Stream, public AudioBaseInfoDependent  {
+class AnalogAudioStream : public BufferedStream, public AudioBaseInfoDependent  {
 
-  public:
-    template<typename T>
-    I2SStream(I2S<T> &i2s){
-      this->i2s = (I2S<uint8_t>*) &i2s;
-      size_t buffer_size = this->i2s->config().i2s.dma_buf_len;
-      buffer = new SingleBuffer<uint8_t>(buffer_size);
-    }
+    public:
+        AnalogAudioStream() : BufferedStream(DEFAULT_BUFFER_SIZE){
+        }
 
-    ~I2SStream() {
-      delete [] buffer;
-    }
+        /// Provides the default configuration
+        AnalogConfig defaultConfig(RxTxMode mode) {
+            return adc.defaultConfig(mode);
+        }
 
-    /// writes a byte to the buffer
-    virtual size_t write(uint8_t c) {
-      if (buffer->isFull()){
-        flush();
-      }
-      return buffer->write(c);
-    }
+        void begin(AnalogConfig cfg) {
+            adc.begin(cfg);
+            // unmute
+            mute(false);
+        }
 
-    /// Use this method: write an array
-    virtual size_t write(const uint8_t* data, size_t len) {    
-      flush();
-      return i2s->writeBytes(data, len);
-    }
+        void end() {
+            mute(true);
+            adc.end();
+        }
 
-    /// empties the buffer
-    virtual void flush() {
-      // just dump the memory of the buffer and clear it
-      if (buffer->available()>0){
-        i2s->writeBytes(buffer->address(), buffer->available());
-        buffer->reset();
-      }
-    }
+    protected:
+        AnalogAudio adc;
+        int mute_pin;
 
-    /// reads a byte - to be avoided
-    virtual int read() {
-      if (buffer->isEmpty()){
-          refill();
-      }
-      return buffer->read(); 
-    }
+        /// set mute pin on or off
+        void mute(bool is_mute){
+            if (mute_pin>0) {
+                digitalWrite(mute_pin, is_mute ? SOFT_MUTE_VALUE : !SOFT_MUTE_VALUE );
+            }
+        }
 
-    /// peeks a byte - to be avoided
-    virtual int peek() {
-      if (buffer->isEmpty()){
-          refill();
-      }
-      return buffer->peek();
-    };
-    
-    /// Use this method !!
-    size_t readBytes( uint8_t *data, size_t length) { 
-      if (buffer->isEmpty()){
-        return i2s->readBytes(data, length);
-      } else {
-        return buffer->readArray(data, length);
-      }
-    }
+        virtual size_t writeExt(const uint8_t* data, size_t len) {
+            return adc.writeBytes(data, len);
+        }
 
-    /// Returns the available bytes in the buffer: to be avoided
-    virtual int available() {
-      if (buffer->isEmpty()){
-          refill();
-      }
-      return buffer->available();
-    }
-
-    /// updates the sample rate dynamically 
-    virtual void setAudioBaseInfo(AudioBaseInfo info) {
-        i2s->setAudioBaseInfo(info);
-    }
-
-  protected:
-    I2S<uint8_t> *i2s;
-    SingleBuffer<uint8_t> *buffer;
-
-    // refills the buffer with data from i2s
-    void refill() {
-        size_t result = i2s->readBytes(buffer->address(), buffer->size());
-        buffer->setAvailable(result);
-    }
+        virtual size_t readExt( uint8_t *data, size_t length) { 
+            return adc.readBytes(data, length);
+        }
 
 };
 

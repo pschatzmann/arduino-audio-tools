@@ -24,6 +24,17 @@ public:
         return lenResult;
     }
 
+    int writeArray(T data[], int len){
+        int result = 0;
+        for (int j=0;j<len;j++){
+            result = j;
+            if (write(data[j])==0){
+                break;
+            }
+        }
+        return result;
+    }
+
     // reads multiple values for array of 2 dimensional frames
     int readFrames(T data[][2], int len) {
         int result = min(len, available());
@@ -47,7 +58,6 @@ public:
         }
         return lenResult;
     }
-
 
     // peeks the actual entry from the buffer
     virtual T peek() = 0;
