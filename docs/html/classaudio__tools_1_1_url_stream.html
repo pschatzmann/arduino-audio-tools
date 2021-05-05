@@ -88,9 +88,9 @@ Inheritance diagram for audio_tools::UrlStream:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aff2f057c1a6045b3ec1e24176d16a321"><td class="memItemLeft" align="right" valign="top"><a id="aff2f057c1a6045b3ec1e24176d16a321"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>UrlStream</b> (int readBufferSize=512)</td></tr>
-<tr class="separator:aff2f057c1a6045b3ec1e24176d16a321"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbfd0abb9d2df245c64f417ad0503c81"><td class="memItemLeft" align="right" valign="top"><a id="acbfd0abb9d2df245c64f417ad0503c81"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>UrlStream</b> (int readBufferSize=DEFAULT_BUFFER_SIZE)</td></tr>
+<tr class="separator:acbfd0abb9d2df245c64f417ad0503c81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8517881bff1ca3424c75d576a57f93d2"><td class="memItemLeft" align="right" valign="top"><a id="a8517881bff1ca3424c75d576a57f93d2"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (const char *url)</td></tr>
 <tr class="separator:a8517881bff1ca3424c75d576a57f93d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -112,6 +112,9 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>flush</b> ()<
 <tr class="memitem:a0eb3d1368eaa219a8104618117a8f038"><td class="memItemLeft" align="right" valign="top"><a id="a0eb3d1368eaa219a8104618117a8f038"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (uint8_t)</td></tr>
 <tr class="separator:a0eb3d1368eaa219a8104618117a8f038"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98185a1bf98b080f00f6d47611e3a2df"><td class="memItemLeft" align="right" valign="top"><a id="a98185a1bf98b080f00f6d47611e3a2df"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
+<tr class="separator:a98185a1bf98b080f00f6d47611e3a2df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -133,6 +136,9 @@ esp_http_client_config_t&#160;</td><td class="memItemRight" valign="bottom"><b>c
 <tr class="memitem:a7875494e44cec7eda3ffde5a0f821c94"><td class="memItemLeft" align="right" valign="top"><a id="a7875494e44cec7eda3ffde5a0f821c94"></a>
 long&#160;</td><td class="memItemRight" valign="bottom"><b>size</b></td></tr>
 <tr class="separator:a7875494e44cec7eda3ffde5a0f821c94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fc72ea7d4ea15b95daa7b2badf3322a"><td class="memItemLeft" align="right" valign="top"><a id="a3fc72ea7d4ea15b95daa7b2badf3322a"></a>
+long&#160;</td><td class="memItemRight" valign="bottom"><b>total_read</b></td></tr>
+<tr class="separator:a3fc72ea7d4ea15b95daa7b2badf3322a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e83e4fd646fbff151b6749f4c9bbc0e"><td class="memItemLeft" align="right" valign="top"><a id="a6e83e4fd646fbff151b6749f4c9bbc0e"></a>
 uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><b>read_buffer</b></td></tr>
 <tr class="separator:a6e83e4fd646fbff151b6749f4c9bbc0e"><td class="memSeparator" colspan="2">&#160;</td></tr>

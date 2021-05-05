@@ -83,9 +83,9 @@ Inheritance diagram for audio_tools::AudioBaseInfoDependent:</div>
  <div class="center">
   <img src="classaudio__tools_1_1_audio_base_info_dependent.png" usemap="#audio_5Ftools::AudioBaseInfoDependent_map" alt=""/>
   <map id="audio_5Ftools::AudioBaseInfoDependent_map" name="audio_5Ftools::AudioBaseInfoDependent_map">
-<area href="classaudio__tools_1_1_i2_s.html" alt="audio_tools::I2S&lt; uint8_t &gt;" shape="rect" coords="0,56,225,80"/>
-<area href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class." alt="audio_tools::I2S&lt; T &gt;" shape="rect" coords="235,56,460,80"/>
-<area href="classaudio__tools_1_1_i2_s_stream.html" title="We support the Stream interface on I2S." alt="audio_tools::I2SStream" shape="rect" coords="470,56,695,80"/>
+<area href="classaudio__tools_1_1_analog_audio_stream.html" title="We support the Stream interface for the ADC class." alt="audio_tools::AnalogAudioStream" shape="rect" coords="0,56,225,80"/>
+<area href="classaudio__tools_1_1_csv_stream.html" title="Stream Wrapper which can be used to print the values as readable ASCII to the screen to be analyzed i..." alt="audio_tools::CsvStream&lt; T &gt;" shape="rect" coords="235,56,460,80"/>
+<area href="classaudio__tools_1_1_i2_s_stream.html" title="We support the Stream interface for the I2S access. In addition we allow a separate mute pin which mi..." alt="audio_tools::I2SStream" shape="rect" coords="470,56,695,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -94,6 +94,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa78b125bf242c6eaabb24fd07aba0b54"><td class="memItemLeft" align="right" valign="top"><a id="aa78b125bf242c6eaabb24fd07aba0b54"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setAudioBaseInfo</b> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> info)</td></tr>
 <tr class="separator:aa78b125bf242c6eaabb24fd07aba0b54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16c99d6218d2dc4574d4d9725d77052a"><td class="memItemLeft" align="right" valign="top"><a id="a16c99d6218d2dc4574d4d9725d77052a"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>validate</b> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> &amp;info)</td></tr>
+<tr class="separator:a16c99d6218d2dc4574d4d9725d77052a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Supports changes to the sampling rate, bits and channels. </p>

@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['read_46',['read',['../classaudio__tools_1_1_a_d_c.html#aa53bcc9825e36a32e468ee5eee6ff993',1,'audio_tools::ADC::read()'],['../classaudio__tools_1_1_i2_s.html#aa62b4c475fdf58e7c48bc246289a99c5',1,'audio_tools::I2S::read()'],['../classaudio__tools_1_1_i2_s_stream.html#a17617296f8c9463fd1d729828492a856',1,'audio_tools::I2SStream::read()'],['../classaudio__tools_1_1_audio_output_with_callback.html#a06ba162644e0a9664ff71c4900d340db',1,'audio_tools::AudioOutputWithCallback::read()']]],
-  ['readbytes_47',['readBytes',['../classaudio__tools_1_1_i2_s_stream.html#adb615449aa92724768a30a12216c645c',1,'audio_tools::I2SStream']]]
+  ['peek_55',['peek',['../classaudio__tools_1_1_generated_sound_stream.html#a059b94845cc57669fb8a8ca76974bc12',1,'audio_tools::GeneratedSoundStream::peek()'],['../classaudio__tools_1_1_buffered_stream.html#ad57a56c08ece36792cc3e744992fdbb9',1,'audio_tools::BufferedStream::peek()']]],
+  ['pin_56',['pin',['../classaudio__tools_1_1_analog_config.html#a9b23d7225eb36a909ba19087696a7e77',1,'audio_tools::AnalogConfig']]],
+  ['printf_57',['printf',['../classaudio__tools_1_1_audio_logger.html#a1f1dec67021e89cfbd1746c123c6fcdd',1,'audio_tools::AudioLogger']]]
 ];

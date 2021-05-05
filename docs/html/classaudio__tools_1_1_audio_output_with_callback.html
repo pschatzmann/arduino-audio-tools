@@ -67,6 +67,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_audio_output_with_callback-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -74,16 +75,19 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>ESP8266Audio AudioOutput class which stores the data in a temporary buffer. The buffer can be consumed e.g. by a callback function by calling <a class="el" href="classaudio__tools_1_1_audio_output_with_callback.html#a06ba162644e0a9664ff71c4900d340db" title="Provides the data from the internal buffer to the callback.">read()</a>;.  
+<p>ESP8266Audio AudioOutput class which stores the data in a temporary buffer. The buffer can be consumed e.g. by a callback function by calling <a class="el" href="classaudio__tools_1_1_buffered_stream.html#a057be5d11995e5454884913f39870a8b" title="reads a byte - to be avoided">read()</a>;.  
  <a href="classaudio__tools_1_1_audio_output_with_callback.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_e_s_p8266_audio_support_8h_source.html">ESP8266AudioSupport.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_audio_e_s_p8266_8h_source.html">AudioESP8266.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for audio_tools::AudioOutputWithCallback:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classaudio__tools_1_1_audio_output_with_callback.png" alt=""/>
- </div></div>
+  <img src="classaudio__tools_1_1_audio_output_with_callback.png" usemap="#audio_5Ftools::AudioOutputWithCallback_map" alt=""/>
+  <map id="audio_5Ftools::AudioOutputWithCallback_map" name="audio_5Ftools::AudioOutputWithCallback_map">
+<area href="classaudio__tools_1_1_buffered_stream.html" title="The Arduino Stream supports operations on single characters. This is usually not the best way to push..." alt="audio_tools::BufferedStream" shape="rect" coords="235,56,460,80"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -106,22 +110,70 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_output_with_callback.html#a06ba162644e0a9664ff71c4900d340db">read</a> (Channels *src, size_t len)</td></tr>
 <tr class="memdesc:a06ba162644e0a9664ff71c4900d340db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the data from the internal buffer to the callback. <br /></td></tr>
 <tr class="separator:a06ba162644e0a9664ff71c4900d340db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classaudio__tools_1_1_buffered_stream"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classaudio__tools_1_1_buffered_stream')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classaudio__tools_1_1_buffered_stream.html">audio_tools::BufferedStream</a></td></tr>
+<tr class="memitem:a11d889e19ed66eb4b74d981c5671d22c inherit pub_methods_classaudio__tools_1_1_buffered_stream"><td class="memItemLeft" align="right" valign="top"><a id="a11d889e19ed66eb4b74d981c5671d22c"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>BufferedStream</b> (size_t buffer_size)</td></tr>
+<tr class="separator:a11d889e19ed66eb4b74d981c5671d22c inherit pub_methods_classaudio__tools_1_1_buffered_stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1d5f131ff15dbb2c4b495a420f52873 inherit pub_methods_classaudio__tools_1_1_buffered_stream"><td class="memItemLeft" align="right" valign="top"><a id="ac1d5f131ff15dbb2c4b495a420f52873"></a>
+virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffered_stream.html#ac1d5f131ff15dbb2c4b495a420f52873">write</a> (uint8_t c)</td></tr>
+<tr class="memdesc:ac1d5f131ff15dbb2c4b495a420f52873 inherit pub_methods_classaudio__tools_1_1_buffered_stream"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes a byte to the buffer <br /></td></tr>
+<tr class="separator:ac1d5f131ff15dbb2c4b495a420f52873 inherit pub_methods_classaudio__tools_1_1_buffered_stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abeb7e0207dbb88e3816cae7a6ada72c2 inherit pub_methods_classaudio__tools_1_1_buffered_stream"><td class="memItemLeft" align="right" valign="top"><a id="abeb7e0207dbb88e3816cae7a6ada72c2"></a>
+virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffered_stream.html#abeb7e0207dbb88e3816cae7a6ada72c2">write</a> (const uint8_t *data, size_t len)</td></tr>
+<tr class="memdesc:abeb7e0207dbb88e3816cae7a6ada72c2 inherit pub_methods_classaudio__tools_1_1_buffered_stream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use this method: write an array. <br /></td></tr>
+<tr class="separator:abeb7e0207dbb88e3816cae7a6ada72c2 inherit pub_methods_classaudio__tools_1_1_buffered_stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa38aa4596bfd515da483756b7df02aec inherit pub_methods_classaudio__tools_1_1_buffered_stream"><td class="memItemLeft" align="right" valign="top"><a id="aa38aa4596bfd515da483756b7df02aec"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffered_stream.html#aa38aa4596bfd515da483756b7df02aec">flush</a> ()</td></tr>
+<tr class="memdesc:aa38aa4596bfd515da483756b7df02aec inherit pub_methods_classaudio__tools_1_1_buffered_stream"><td class="mdescLeft">&#160;</td><td class="mdescRight">empties the buffer <br /></td></tr>
+<tr class="separator:aa38aa4596bfd515da483756b7df02aec inherit pub_methods_classaudio__tools_1_1_buffered_stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a057be5d11995e5454884913f39870a8b inherit pub_methods_classaudio__tools_1_1_buffered_stream"><td class="memItemLeft" align="right" valign="top"><a id="a057be5d11995e5454884913f39870a8b"></a>
+virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffered_stream.html#a057be5d11995e5454884913f39870a8b">read</a> ()</td></tr>
+<tr class="memdesc:a057be5d11995e5454884913f39870a8b inherit pub_methods_classaudio__tools_1_1_buffered_stream"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads a byte - to be avoided <br /></td></tr>
+<tr class="separator:a057be5d11995e5454884913f39870a8b inherit pub_methods_classaudio__tools_1_1_buffered_stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad57a56c08ece36792cc3e744992fdbb9 inherit pub_methods_classaudio__tools_1_1_buffered_stream"><td class="memItemLeft" align="right" valign="top"><a id="ad57a56c08ece36792cc3e744992fdbb9"></a>
+virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffered_stream.html#ad57a56c08ece36792cc3e744992fdbb9">peek</a> ()</td></tr>
+<tr class="memdesc:ad57a56c08ece36792cc3e744992fdbb9 inherit pub_methods_classaudio__tools_1_1_buffered_stream"><td class="mdescLeft">&#160;</td><td class="mdescRight">peeks a byte - to be avoided <br /></td></tr>
+<tr class="separator:ad57a56c08ece36792cc3e744992fdbb9 inherit pub_methods_classaudio__tools_1_1_buffered_stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92ed2def0a580ea78947722a85b57509 inherit pub_methods_classaudio__tools_1_1_buffered_stream"><td class="memItemLeft" align="right" valign="top"><a id="a92ed2def0a580ea78947722a85b57509"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffered_stream.html#a92ed2def0a580ea78947722a85b57509">readBytes</a> (uint8_t *data, size_t length)</td></tr>
+<tr class="memdesc:a92ed2def0a580ea78947722a85b57509 inherit pub_methods_classaudio__tools_1_1_buffered_stream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use this method !! <br /></td></tr>
+<tr class="separator:a92ed2def0a580ea78947722a85b57509 inherit pub_methods_classaudio__tools_1_1_buffered_stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c60edf7433c0761f6151c598496ba63 inherit pub_methods_classaudio__tools_1_1_buffered_stream"><td class="memItemLeft" align="right" valign="top"><a id="a6c60edf7433c0761f6151c598496ba63"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>refill</b> ()</td></tr>
+<tr class="separator:a6c60edf7433c0761f6151c598496ba63 inherit pub_methods_classaudio__tools_1_1_buffered_stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add7c826932c60e135fe6ae134fb22b3d inherit pub_methods_classaudio__tools_1_1_buffered_stream"><td class="memItemLeft" align="right" valign="top"><a id="add7c826932c60e135fe6ae134fb22b3d"></a>
+virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffered_stream.html#add7c826932c60e135fe6ae134fb22b3d">available</a> ()</td></tr>
+<tr class="memdesc:add7c826932c60e135fe6ae134fb22b3d inherit pub_methods_classaudio__tools_1_1_buffered_stream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the available bytes in the buffer: to be avoided. <br /></td></tr>
+<tr class="separator:add7c826932c60e135fe6ae134fb22b3d inherit pub_methods_classaudio__tools_1_1_buffered_stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a0117a982edd1ca1ef6625be6dad53988"><td class="memItemLeft" align="right" valign="top"><a id="a0117a982edd1ca1ef6625be6dad53988"></a>
+virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>writeExt</b> (const uint8_t *data, size_t len)</td></tr>
+<tr class="separator:a0117a982edd1ca1ef6625be6dad53988"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb7903c39960d92af33e9b4cab5060fe"><td class="memItemLeft" align="right" valign="top"><a id="aeb7903c39960d92af33e9b4cab5060fe"></a>
+virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>readExt</b> (uint8_t *data, size_t len)</td></tr>
+<tr class="separator:aeb7903c39960d92af33e9b4cab5060fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:ae324a75d6451d5104aca0b9cb12a9a1f"><td class="memItemLeft" align="right" valign="top"><a id="ae324a75d6451d5104aca0b9cb12a9a1f"></a>
-<a class="el" href="classaudio__tools_1_1_n_buffer.html">NBuffer</a>&lt; Channels &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_ptr</b></td></tr>
-<tr class="separator:ae324a75d6451d5104aca0b9cb12a9a1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76e95894177b2e01c84ff3d60ff965ee"><td class="memItemLeft" align="right" valign="top"><a id="a76e95894177b2e01c84ff3d60ff965ee"></a>
+<a class="el" href="classaudio__tools_1_1_n_buffer.html">NBuffer</a>&lt; Channels &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>callback_buffer_ptr</b></td></tr>
+<tr class="separator:a76e95894177b2e01c84ff3d60ff965ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f603fda91498416165134683dc7e5fe"><td class="memItemLeft" align="right" valign="top"><a id="a6f603fda91498416165134683dc7e5fe"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>active</b></td></tr>
 <tr class="separator:a6f603fda91498416165134683dc7e5fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classaudio__tools_1_1_buffered_stream"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classaudio__tools_1_1_buffered_stream')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classaudio__tools_1_1_buffered_stream.html">audio_tools::BufferedStream</a></td></tr>
+<tr class="memitem:ab250fac4485d6badb4d53c755639d855 inherit pro_attribs_classaudio__tools_1_1_buffered_stream"><td class="memItemLeft" align="right" valign="top"><a id="ab250fac4485d6badb4d53c755639d855"></a>
+<a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; uint8_t &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b></td></tr>
+<tr class="separator:ab250fac4485d6badb4d53c755639d855 inherit pro_attribs_classaudio__tools_1_1_buffered_stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>ESP8266Audio AudioOutput class which stores the data in a temporary buffer. The buffer can be consumed e.g. by a callback function by calling <a class="el" href="classaudio__tools_1_1_audio_output_with_callback.html#a06ba162644e0a9664ff71c4900d340db" title="Provides the data from the internal buffer to the callback.">read()</a>;. </p>
+<div class="textblock"><p>ESP8266Audio AudioOutput class which stores the data in a temporary buffer. The buffer can be consumed e.g. by a callback function by calling <a class="el" href="classaudio__tools_1_1_buffered_stream.html#a057be5d11995e5454884913f39870a8b" title="reads a byte - to be avoided">read()</a>;. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/<a class="el" href="_e_s_p8266_audio_support_8h_source.html">ESP8266AudioSupport.h</a></li>
+<li>src/<a class="el" href="_audio_e_s_p8266_8h_source.html">AudioESP8266.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

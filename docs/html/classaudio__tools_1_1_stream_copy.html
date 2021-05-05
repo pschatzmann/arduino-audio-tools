@@ -81,13 +81,18 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9ff51f2393576c65b8c39f0975ae5d75"><td class="memItemLeft" align="right" valign="top"><a id="a9ff51f2393576c65b8c39f0975ae5d75"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>StreamCopy</b> (Stream &amp;to, Stream &amp;from, int buffer_size)</td></tr>
-<tr class="separator:a9ff51f2393576c65b8c39f0975ae5d75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58da8d7396412238d1f2df576c2dbcb3"><td class="memItemLeft" align="right" valign="top"><a id="a58da8d7396412238d1f2df576c2dbcb3"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>StreamCopy</b> (Print &amp;to, Stream &amp;from, int buffer_size=DEFAULT_BUFFER_SIZE)</td></tr>
+<tr class="separator:a58da8d7396412238d1f2df576c2dbcb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d7d93db91c36440ecd3aa61423d4479"><td class="memItemLeft" align="right" valign="top"><a id="a5d7d93db91c36440ecd3aa61423d4479"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_stream_copy.html#a5d7d93db91c36440ecd3aa61423d4479">copy</a> ()</td></tr>
-<tr class="memdesc:a5d7d93db91c36440ecd3aa61423d4479"><td class="mdescLeft">&#160;</td><td class="mdescRight">copies the available bytes from the input stream to the ouptut stream <br /></td></tr>
+<tr class="memdesc:a5d7d93db91c36440ecd3aa61423d4479"><td class="mdescLeft">&#160;</td><td class="mdescRight">copies a buffer length of data - repeat this call until everthing is copied <br /></td></tr>
 <tr class="separator:a5d7d93db91c36440ecd3aa61423d4479"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a392f5a5a59ecce04c34c1af4ae2ac08f"><td class="memTemplParams" colspan="2"><a id="a392f5a5a59ecce04c34c1af4ae2ac08f"></a>
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a392f5a5a59ecce04c34c1af4ae2ac08f"><td class="memTemplItemLeft" align="right" valign="top">size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_stream_copy.html#a392f5a5a59ecce04c34c1af4ae2ac08f">copy</a> (<a class="el" href="classaudio__tools_1_1_base_converter.html">BaseConverter</a>&lt; T &gt; &amp;converter)</td></tr>
+<tr class="memdesc:a392f5a5a59ecce04c34c1af4ae2ac08f"><td class="mdescLeft">&#160;</td><td class="mdescRight">copies a buffer length of data and applies the converter <br /></td></tr>
+<tr class="separator:a392f5a5a59ecce04c34c1af4ae2ac08f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f1bccb9c88c4aed26cd6c8118c71b6e"><td class="memItemLeft" align="right" valign="top"><a id="a7f1bccb9c88c4aed26cd6c8118c71b6e"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>available</b> ()</td></tr>
 <tr class="separator:a7f1bccb9c88c4aed26cd6c8118c71b6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -97,9 +102,9 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:aa491917ccc38ccf54f4344ba689fa3fe"><td class="memItemLeft" align="right" valign="top"><a id="aa491917ccc38ccf54f4344ba689fa3fe"></a>
 Stream *&#160;</td><td class="memItemRight" valign="bottom"><b>from</b></td></tr>
 <tr class="separator:aa491917ccc38ccf54f4344ba689fa3fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acff1f5451507e4c9beec27b2d3459db6"><td class="memItemLeft" align="right" valign="top"><a id="acff1f5451507e4c9beec27b2d3459db6"></a>
-Stream *&#160;</td><td class="memItemRight" valign="bottom"><b>to</b></td></tr>
-<tr class="separator:acff1f5451507e4c9beec27b2d3459db6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8dbfb3349dc50c51517492963462716a"><td class="memItemLeft" align="right" valign="top"><a id="a8dbfb3349dc50c51517492963462716a"></a>
+Print *&#160;</td><td class="memItemRight" valign="bottom"><b>to</b></td></tr>
+<tr class="separator:a8dbfb3349dc50c51517492963462716a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac608939242100dd21a0e44a47480a82a"><td class="memItemLeft" align="right" valign="top"><a id="ac608939242100dd21a0e44a47480a82a"></a>
 uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b></td></tr>
 <tr class="separator:ac608939242100dd21a0e44a47480a82a"><td class="memSeparator" colspan="2">&#160;</td></tr>

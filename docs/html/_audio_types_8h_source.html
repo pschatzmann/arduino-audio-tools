@@ -71,94 +71,155 @@ $(function() {
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="keyword">namespace </span>audio_tools {</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;AudioConfig.h&quot;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#define INT24_MAX 0x7FFFFF</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keyword">namespace </span>audio_tools {</div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1int24__t.html">   13</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1int24__t.html">int24_t</a> {</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#define INT24_MAX 0x7FFFFF</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1int24__t.html">   15</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1int24__t.html">int24_t</a> : <span class="keyword">public</span> Printable {</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="classaudio__tools_1_1int24__t.html">int24_t</a>(){</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        value[0]=0;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        value[1]=0;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        value[2]=0;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    }</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="classaudio__tools_1_1int24__t.html">int24_t</a>(<span class="keywordtype">void</span> *ptr){</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;      <a class="code" href="classaudio__tools_1_1int24__t.html">int24_t</a>(<span class="keyword">static_cast&lt;</span>uint8_t*<span class="keyword">&gt;</span>(ptr));</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    }</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="classaudio__tools_1_1int24__t.html">int24_t</a>(uint8_t *ptr){</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        value[0]=ptr[0];</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        value[1]=ptr[1];</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        value[2]=ptr[2];</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    }</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="classaudio__tools_1_1int24__t.html">int24_t</a>(int16_t in){</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;      value[2] = in &gt; 0 ? 0 : 0xFF;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;      value[1] = (in &gt;&gt; 8) &amp; 0xFF;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;      value[0] = in &amp; 0xFF;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    }</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="classaudio__tools_1_1int24__t.html">int24_t</a>(int32_t in){</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;      value[2] = (in &gt;&gt; 16) &amp; 0xFF;;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;      value[1] = (in &gt;&gt; 8) &amp; 0xFF;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;      value[0] = in &amp; 0xFF;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    }</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">operator</span> int32_t()  {</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        uint8_t tmp[4];</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        tmp[0] = value[0];</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        tmp[1] = value[1];</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        tmp[2] = value[2];</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        tmp[3] = value[2] &amp; 0x80  ? 0xFF : 0;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        int32_t *ptr = (int32_t *)&amp;tmp;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keywordflow">return</span> *ptr;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    }</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keyword">operator</span> float()  {</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>int32_t<span class="keyword">&gt;</span>(*this);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    }</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1int24__t.html#a2cbe4721d18de27d9a0f0db2e36e01c6">   60</a></span>&#160;    int16_t <a class="code" href="classaudio__tools_1_1int24__t.html#a2cbe4721d18de27d9a0f0db2e36e01c6">scale16</a>()  {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(*this) * INT16_MAX / INT24_MAX ; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="classaudio__tools_1_1int24__t.html">int24_t</a>(){</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        value[0]=0;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        value[1]=0;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        value[2]=0;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    }</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="classaudio__tools_1_1int24__t.html">int24_t</a>(<span class="keywordtype">void</span> *ptr){</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        uint8_t *ptrChar = <span class="keyword">static_cast&lt;</span>uint8_t*<span class="keyword">&gt;</span>(ptr);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        value[0]=ptrChar[0];</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        value[1]=ptrChar[1];</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        value[2]=ptrChar[2];</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    }</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="classaudio__tools_1_1int24__t.html">int24_t</a>(uint8_t *ptr){</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        value[0]=ptr[0];</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        value[1]=ptr[1];</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        value[2]=ptr[2];</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    }</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="classaudio__tools_1_1int24__t.html">int24_t</a>(<span class="keyword">const</span> int16_t &amp;in) {</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;      value[2] = in &gt; 0 ? 0 : 0xFF;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;      value[1] = (in &gt;&gt; 8) &amp; 0xFF;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;      value[0] = in &amp; 0xFF;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    }</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="classaudio__tools_1_1int24__t.html">int24_t</a>(<span class="keyword">const</span> int32_t &amp;in){</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;      value[2] = (in &gt;&gt; 16) &amp; 0xFF;;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;      value[1] = (in &gt;&gt; 8) &amp; 0xFF;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;      value[0] = in &amp; 0xFF;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    }</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keyword">operator</span> int32_t()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        uint8_t tmp[4];</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        tmp[0] = value[0];</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        tmp[1] = value[1];</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        tmp[2] = value[2];</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        tmp[3] = value[2] &amp; 0x80  ? 0xFF : 0;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        int32_t *ptr = (int32_t *)&amp;tmp;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordflow">return</span> *ptr;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    }</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keyword">operator</span> float()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(*this);</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    }</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1int24__t.html#a7819cba1d49854c0e9a0d25e45d453b5">   65</a></span>&#160;    int32_t <a class="code" href="classaudio__tools_1_1int24__t.html#a7819cba1d49854c0e9a0d25e45d453b5">scale32</a>()  {</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(*this) / <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(INT24_MAX) * <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(INT32_MAX) ; </div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1int24__t.html#afecd445388a55e48c5bb4860f28a0042">   65</a></span>&#160;    int16_t <a class="code" href="classaudio__tools_1_1int24__t.html#afecd445388a55e48c5bb4860f28a0042">scale16</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(*this) * INT16_MAX / INT24_MAX ; </div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    }</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1int24__t.html#accd265f0388323773bd7196534bf5064">   70</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="classaudio__tools_1_1int24__t.html#accd265f0388323773bd7196534bf5064">scaleFloat</a>()  {</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(*this)  / INT24_MAX ; </div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1int24__t.html#a941c9375328b5593619c16fe81c9a1c8">   70</a></span>&#160;    int32_t <a class="code" href="classaudio__tools_1_1int24__t.html#a941c9375328b5593619c16fe81c9a1c8">scale32</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(*this) / <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(INT24_MAX) * <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(INT32_MAX) ; </div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    }</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    uint8_t value[3]; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;};</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1int24__t.html#a3298ae3a80ee055b725e2e4ee0bf8662">   75</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="classaudio__tools_1_1int24__t.html#a3298ae3a80ee055b725e2e4ee0bf8662">scaleFloat</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(*this)  / INT24_MAX ; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    }</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_audio_base_info.html">   83</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> {</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="comment">//AudioBaseInfo(AudioBaseInfo&amp; c) = default;</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">int</span> sample_rate;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordtype">int</span> bits_per_sample;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordtype">int</span> channels;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;};</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> printTo(Print&amp; p)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="comment">// just print as int32_t</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="keyword">const</span> int32_t v = *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="keywordflow">return</span> p.print(v);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    }</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    uint8_t value[3]; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;};</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_base_info_dependent.html">   93</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> {</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;      <span class="keyword">virtual</span> ~<a class="code" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a>(){}</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;      <span class="keyword">virtual</span> <span class="keywordtype">void</span> setAudioBaseInfo(<a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> info) {};</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;};</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;}</div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_base_info_dependent_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_base_info_dependent.html">audio_tools::AudioBaseInfoDependent</a></div><div class="ttdoc">Supports changes to the sampling rate, bits and channels.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:93</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1int24__t_html"><div class="ttname"><a href="classaudio__tools_1_1int24__t.html">audio_tools::int24_t</a></div><div class="ttdoc">24bit integer which is used for I2S sound processing. It works only on little endian machines!</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:13</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1int24__t_html_a2cbe4721d18de27d9a0f0db2e36e01c6"><div class="ttname"><a href="classaudio__tools_1_1int24__t.html#a2cbe4721d18de27d9a0f0db2e36e01c6">audio_tools::int24_t::scale16</a></div><div class="ttdeci">int16_t scale16()</div><div class="ttdoc">provides value between -32767 and 32767</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:60</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1int24__t_html_a7819cba1d49854c0e9a0d25e45d453b5"><div class="ttname"><a href="classaudio__tools_1_1int24__t.html#a7819cba1d49854c0e9a0d25e45d453b5">audio_tools::int24_t::scale32</a></div><div class="ttdeci">int32_t scale32()</div><div class="ttdoc">provides value between -2,147,483,647 and 2,147,483,647</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:65</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1int24__t_html_accd265f0388323773bd7196534bf5064"><div class="ttname"><a href="classaudio__tools_1_1int24__t.html#accd265f0388323773bd7196534bf5064">audio_tools::int24_t::scaleFloat</a></div><div class="ttdeci">float scaleFloat()</div><div class="ttdoc">provides value between -1.0 and 1.0</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:70</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_audio_base_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_base_info.html">audio_tools::AudioBaseInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:83</div></div>
+<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_audio_base_info.html">   94</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> {</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="comment">//AudioBaseInfo(AudioBaseInfo&amp; c) = default;</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordtype">int</span> sample_rate;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordtype">int</span> bits_per_sample;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordtype">int</span> channels;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;};</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_base_info_dependent.html">  104</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> {</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;      <span class="keyword">virtual</span> ~<a class="code" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a>(){}</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;      <span class="keyword">virtual</span> <span class="keywordtype">void</span> setAudioBaseInfo(<a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> info) {};</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;      <span class="keyword">virtual</span> <span class="keywordtype">bool</span> validate(<a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> &amp;info){</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;      }</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;};</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="keyword">enum</span> RxTxMode  { TX_MODE, RX_MODE };</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="keyword">enum</span> I2SMode {</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  I2S_PHILIPS_MODE,</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  I2S_RIGHT_JUSTIFIED_MODE,</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  I2S_LEFT_JUSTIFIED_MODE</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;};</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
+<div class="line"><a name="l00129"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_config.html">  129</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_i2_s_config.html">I2SConfig</a> {</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <a class="code" href="classaudio__tools_1_1_i2_s_config.html">I2SConfig</a>() {</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    }</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
+<div class="line"><a name="l00136"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_config.html#a6ddcfcef498a6bda2cab7339d62e166a">  136</a></span>&#160;    <a class="code" href="classaudio__tools_1_1_i2_s_config.html#a6ddcfcef498a6bda2cab7339d62e166a">I2SConfig</a>(RxTxMode mode) {</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        this-&gt;<a class="code" href="classaudio__tools_1_1_i2_s_config.html#a79971ed4bb50a6b67c3cf28197ac5a05">rx_tx_mode</a> = mode;</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        pin_data = <a class="code" href="classaudio__tools_1_1_i2_s_config.html#a79971ed4bb50a6b67c3cf28197ac5a05">rx_tx_mode</a> == TX_MODE ? PIN_I2S_DATA_OUT : PIN_I2S_DATA_IN;</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    }</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; </div>
+<div class="line"><a name="l00142"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_config.html#a4f62605fe47b2e5ace54bce453806dcf">  142</a></span>&#160;    <a class="code" href="classaudio__tools_1_1_i2_s_config.html#a4f62605fe47b2e5ace54bce453806dcf">I2SConfig</a>(<span class="keyword">const</span> <a class="code" href="classaudio__tools_1_1_i2_s_config.html">I2SConfig</a> &amp;cfg) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; </div>
+<div class="line"><a name="l00146"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_config.html#a79971ed4bb50a6b67c3cf28197ac5a05">  146</a></span>&#160;    RxTxMode <a class="code" href="classaudio__tools_1_1_i2_s_config.html#a79971ed4bb50a6b67c3cf28197ac5a05">rx_tx_mode</a> = TX_MODE;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    <span class="keywordtype">int</span> port_no = 0;  <span class="comment">// processor dependent port</span></div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <span class="keywordtype">int</span> channels = I2S_DEFAULT_CHANNELS;</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    <span class="keywordtype">int</span> sample_rate = I2S_DEFAULT_SAMPLE_RATE; </div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    <span class="keywordtype">int</span> bits_per_sample = I2S_DEFAULT_BITS_PER_SAMPLE;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <span class="keywordtype">int</span> pin_ws = PIN_I2S_WS;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="keywordtype">int</span> pin_bck = PIN_I2S_BCK;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="keywordtype">int</span> pin_data = PIN_I2S_DATA_OUT;</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    I2SMode i2s_mode = I2S_PHILIPS_MODE;</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    <span class="keywordtype">bool</span> is_digital = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;};</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="keywordtype">void</span> stop() {</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;  <span class="keywordflow">while</span>(<span class="keyword">true</span>){</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    delay(1000);</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;  }</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;}</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160; </div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;}</div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_base_info_dependent_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_base_info_dependent.html">audio_tools::AudioBaseInfoDependent</a></div><div class="ttdoc">Supports changes to the sampling rate, bits and channels.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:104</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_i2_s_config_html"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_config.html">audio_tools::I2SConfig</a></div><div class="ttdoc">configuration for all common i2s settings</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:129</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_i2_s_config_html_a4f62605fe47b2e5ace54bce453806dcf"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_config.html#a4f62605fe47b2e5ace54bce453806dcf">audio_tools::I2SConfig::I2SConfig</a></div><div class="ttdeci">I2SConfig(const I2SConfig &amp;cfg)=default</div><div class="ttdoc">Default Copy Constructor.</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_i2_s_config_html_a6ddcfcef498a6bda2cab7339d62e166a"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_config.html#a6ddcfcef498a6bda2cab7339d62e166a">audio_tools::I2SConfig::I2SConfig</a></div><div class="ttdeci">I2SConfig(RxTxMode mode)</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:136</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_i2_s_config_html_a79971ed4bb50a6b67c3cf28197ac5a05"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_config.html#a79971ed4bb50a6b67c3cf28197ac5a05">audio_tools::I2SConfig::rx_tx_mode</a></div><div class="ttdeci">RxTxMode rx_tx_mode</div><div class="ttdoc">public settings</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:146</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1int24__t_html"><div class="ttname"><a href="classaudio__tools_1_1int24__t.html">audio_tools::int24_t</a></div><div class="ttdoc">24bit integer which is used for I2S sound processing. It works only on little endian machines!</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:15</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1int24__t_html_a3298ae3a80ee055b725e2e4ee0bf8662"><div class="ttname"><a href="classaudio__tools_1_1int24__t.html#a3298ae3a80ee055b725e2e4ee0bf8662">audio_tools::int24_t::scaleFloat</a></div><div class="ttdeci">float scaleFloat() const</div><div class="ttdoc">provides value between -1.0 and 1.0</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:75</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1int24__t_html_a941c9375328b5593619c16fe81c9a1c8"><div class="ttname"><a href="classaudio__tools_1_1int24__t.html#a941c9375328b5593619c16fe81c9a1c8">audio_tools::int24_t::scale32</a></div><div class="ttdeci">int32_t scale32() const</div><div class="ttdoc">provides value between -2,147,483,647 and 2,147,483,647</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:70</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1int24__t_html_afecd445388a55e48c5bb4860f28a0042"><div class="ttname"><a href="classaudio__tools_1_1int24__t.html#afecd445388a55e48c5bb4860f28a0042">audio_tools::int24_t::scale16</a></div><div class="ttdeci">int16_t scale16() const</div><div class="ttdoc">provides value between -32767 and 32767</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:65</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_audio_base_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_base_info.html">audio_tools::AudioBaseInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:94</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

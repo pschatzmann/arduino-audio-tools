@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['peek_132',['peek',['../classaudio__tools_1_1_i2_s_stream.html#a02527441cc58f2dab714570e7dadc2e1',1,'audio_tools::I2SStream']]],
-  ['pin_133',['pin',['../classaudio__tools_1_1_a_d_c_config.html#a42caea9e5d75c2c0d585bc1c0ed7a72f',1,'audio_tools::ADCConfig']]],
-  ['printf_134',['printf',['../classaudio__tools_1_1_audio_logger.html#a1f1dec67021e89cfbd1746c123c6fcdd',1,'audio_tools::AudioLogger']]]
+  ['peek_167',['peek',['../classaudio__tools_1_1_generated_sound_stream.html#a059b94845cc57669fb8a8ca76974bc12',1,'audio_tools::GeneratedSoundStream::peek()'],['../classaudio__tools_1_1_buffered_stream.html#ad57a56c08ece36792cc3e744992fdbb9',1,'audio_tools::BufferedStream::peek()']]],
+  ['pin_168',['pin',['../classaudio__tools_1_1_analog_config.html#a9b23d7225eb36a909ba19087696a7e77',1,'audio_tools::AnalogConfig']]],
+  ['printf_169',['printf',['../classaudio__tools_1_1_audio_logger.html#a1f1dec67021e89cfbd1746c123c6fcdd',1,'audio_tools::AudioLogger']]]
 ];

@@ -65,51 +65,117 @@ $(function() {
 <div class="title">Arduino Audio Tools </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md_README"></a> Some basic C++ classes that can be used for Audio Processing privided as Arduino Library</p>
+<div class="textblock"><p><a class="anchor" id="md_README"></a> Some basic <b>header-only C++ classes</b> that can be used for <b>Audio Processing</b> provided as <b>Arduino Library</b>:</p>
 <ul>
-<li>Additional Stream implementations: MemoryStream - ESP32 only: UrlStream, I2SStream</li>
-<li>a simple I2S class (to read and write to the internal I2S) [ESP32 only]</li>
-<li>a simple ADC class (to read analog data with the help of I2S) [ESP32 only]</li>
+<li>a simple I2S class (to read and write to the internal I2S)</li>
+<li>a simple ADC class (to read analog data with the help of I2S)</li>
+<li>Additional Stream implementations: MemoryStream, UrlStream, I2SStream, A2DPStream, PrintStream</li>
 <li>Converters</li>
-<li>Musical Notes (with Frequencies of notes)</li>
+<li>Musical Notes (with frequencies of notes)</li>
 <li>SineWaveGenerator (to generate some sine tone)</li>
 <li>NBuffer (Multi buffer for writing and reading of (audio) data)</li>
 <li>TimerAlarmRepeating (e.g. for sampling audio data using exact times) [ESP32 only]</li>
 <li>A Wav Encoder and Decoder</li>
-<li>AudioOutputWithCallback class to provide callback integration with ESP8266Audio</li>
+<li>AudioOutputWithCallback class to provide callback integration e.g. with ESP8266Audio</li>
 </ul>
-<p>This functionality provides the glue which makes different audio processing components and libraries work together. We also provide plenty of examples that demonstrate how to implement the different scenarios.</p>
-<p>The design philosophy is based on the Arduino conventions: we use the begin and end methods to start and stop the processing and we propagate the use of Streams.</p>
+<p>This functionality provides the glue which makes different audio processing components and libraries work together. We also provide plenty of examples that demonstrate how to implement the different scenarios. The <b>design philosophy</b> is based on the Arduino conventions: we use the <code>begin()</code> and <code>end()</code> methods to start and stop the processing and we propagate the <b>use of Streams</b>. We all know the Arduino Streams. We use them to write out print messages and sometimes we use them to read the output from Serial devices. The same thing applies to my “Audio Streams”: You can read audio data from “Audio Sources” and you write them to “Audio Sinks”.</p>
+<p>As “Audio Sources” we will have e.g.:</p>
+<ul>
+<li>Analog Microphones – AnalogStream</li>
+<li>Digital Microphonse – I2SStream</li>
+<li>Files on the Internet – UrlStream</li>
+<li>Generated Sound – GeneratedSoundStream</li>
+<li>Mobile Phone A2DP Bluetooth – A2DPStream</li>
+<li>Binary Data in Flash Memory – MemoryStream</li>
+<li>SD Files</li>
+</ul>
+<p>As “Audio Sinks” we will have e.g:</p>
+<ul>
+<li>external DAC – I2SStream</li>
+<li>an Amplifier – AnalogStream</li>
+<li>Bluetooth Speakers – A2DPStream</li>
+<li>Serial to display the data as CSV – CsvStream.</li>
+<li>SD Files</li>
+</ul>
+<p>Here is an simple example which streams a file from the Flash Memory and writes it to I2S:</p>
+<div class="fragment"><div class="line">#include &quot;AudioTools.h&quot;</div>
+<div class="line">#include &quot;StarWars30.h&quot;</div>
+<div class="line"> </div>
+<div class="line">using namespace audio_tools;  </div>
+<div class="line"> </div>
+<div class="line">uint8_t channels = 2;</div>
+<div class="line">uint16_t sample_rate = 22050;</div>
+<div class="line"> </div>
+<div class="line">MemoryStream music(StarWars30_raw, StarWars30_raw_len);</div>
+<div class="line">I2SStream i2s;  // Output to I2S</div>
+<div class="line">StreamCopyT&lt;int16_t&gt; copier(i2s, music); // copies sound into i2s</div>
+<div class="line"> </div>
+<div class="line">void setup(){</div>
+<div class="line">    Serial.begin(115200);</div>
+<div class="line"> </div>
+<div class="line">    I2SConfig config = i2s.defaultConfig(TX_MODE);</div>
+<div class="line">    config.sample_rate = sample_rate;</div>
+<div class="line">    config.channels = channels;</div>
+<div class="line">    config.bits_per_sample = 16;</div>
+<div class="line">    i2s.begin(config);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">void loop(){</div>
+<div class="line">    if (!copier.copy2()){</div>
+<div class="line">      i2s.end();</div>
+<div class="line">      stop();</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> A complete list of the supported Audio Stream classes and scenarios can be found in the Scenarios Document</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
+Examples</h1>
+<p>The examples follow the following naming convention: "scenario type"-"source"-"destination". For the scenario types we might have <b>base</b> (using basic api functionality), <b>stream</b> for examples using Streams and <b>test</b> for the test cases.</p>
+<p>For the <b>source</b> we currently have <b>adc</b> for analog input devices like analog microphones, <b>i2s</b> for digital input devices (e.g. digital microphones), <b>file</b> for SD files and <b>a2dp</b> for input from Bluetooth A2DP (e.g. from a Mobile Phone).</p>
+<p>For the <b>destination</b> we use <b>dac</b> for analog output (e.g. to an amplifier), <b>i2s</b> for digital output devices (e.g. an external DAC), <b>file</b> for SD files and <b>a2dp</b> for output to Bluetooth A2DP (e.g. a Bluetooth Speaker).</p>
+<p>Here is the list of examples:</p>
+<h3><a class="anchor" id="autotoc_md2"></a>
+Stream API</h3>
+<ul>
+<li><a href="/examples/streams-url_raw-serial">streams-url_raw-serial</a> Displaying a music file from the internet on the Serial Plotter</li>
+<li><a href="/examples/streams-generator-serial">streams-generator-serial</a> Displaying generated sound on the Serial Plotter</li>
+<li><a href="/examples/streams-adc-serial">streams-adc-serial</a> Displaying input from analog microphone on the Serial Plotter</li>
+<li><a href="examples/streams-i2s-a2dp">streams-i2s-a2dp</a> - Sample analog sound and write it to a A2DP Bluetooth source</li>
+<li><a href="examples/streams-file_raw-a2dp">streams-file_raw-a2dp</a> - Read Raw File from SD card write it A2DP Bluetooth</li>
+<li><a href="examples/streams-adc-a2dp">streams-adc-a2dp</a> - Sample analog sound from analog microphone and send it to Bluetooth Speaker</li>
+<li><a href="examples/streams-memory_raw-i2s_external_dac">streams-memory_raw-i2s_external_dac</a> - Play music form Flash Memory via I2S to External DAC</li>
+</ul>
+<p>... these are just a few examples, but you can combine any Input Stream with any Output Stream as you like...</p>
+<h3><a class="anchor" id="autotoc_md3"></a>
+Basic API</h3>
+<ul>
+<li><a href="examples/base-adc-serial">base-adc-serial</a> - Sample analog sound and write it to Serial</li>
+<li><a href="examples/base-adc-a2dp">base-adc-a2dp</a> - Sample analog sound and write it to a A2DP Bluetooth source</li>
+<li><a href="examples/base-file_raw-serial">base-file_raw-serial</a> - Read Raw File from SD card to and write it to Serial</li>
+<li><a href="examples/base-file_raw-a2dp">base-file_raw-a2dp</a> - Read Raw File from SD card write it A2DP Bluetooth</li>
+<li><a href="examples/base-file_mp3-a2dp">base-file_mp3-a2dp</a> - Stream MP3 File from SD card to A2DP Bluetooth using the ESP8266Audio library</li>
+<li><a href="examples/base-i2s-serial">base-i2s-serial</a> - Sample digital sound and write it to Serial</li>
+<li><a href="examples/base-i2s-a2dp">base-i2s-a2dp</a> - Sample analog sound and write it to a A2DP Bluetooth source</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md4"></a>
 Optional Libraries</h1>
 <p>Dependent on the example you might need to install some of the following libraries:</p>
 <ul>
-<li><a href="https://github.com/pschatzmann/ESP32-A2DP">ESP32-A2DP Library</a></li>
-<li><a href="https://github.com/earlephilhower/ESP8266Audio">ESP8266Audio</a></li>
-<li><a href="https://www.arduino.cc/en/reference/SD">SD Library</a></li>
-<li><a href="https://github.com/pschatzmann/arduino-fdk-aac">arduino-fdk-aac</a></li>
+<li><a href="https://github.com/pschatzmann/ESP32-A2DP">ESP32-A2DP Library</a> to support A2DP Bluetooth Audio</li>
+<li>[ESP8266Audio]( ) to play different audio Formats</li>
+<li><a href="https://www.arduino.cc/en/reference/SD">SD Library</a> to read and write files.</li>
+<li><a href="https://github.com/pschatzmann/arduino-fdk-aac">arduino-fdk-aac</a> to encode or decode AAC</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md2"></a>
-Examples</h1>
-<ul>
-<li><a href="examples/adc-a2dp">adc-a2dp</a> - Stream Analog input to A2DP Bluetooth</li>
-<li><a href="examples/adc-serial">adc-serial</a> - Stream Analog input to Serial</li>
-<li><a href="examples/file_raw-a2dp">file_raw-a2dp</a> - Stream Row File from SD card to A2DP Bluetooth</li>
-<li><a href="examples/file_raw-serial">file_raw-serial</a> - Stream Raw File from SD card to Serial</li>
-<li><a href="examples/file_mp3-a2dp">file_mp3-a2dp</a> - Stream MP3 File from SD card to A2DP Bluetooth using the ESP8266Audio library</li>
-<li><a href="examples/i2s-a2dp">i2s-a2dp</a> - Stream I2S Input to A2DP Bluetooth</li>
-<li><a href="examples/i2s-serial">i2s-serial</a> - Stream I2S Input to Serial</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md3"></a>
-Installation</h2>
+<h1><a class="anchor" id="autotoc_md5"></a>
+Installation</h1>
 <p>You can download the library as zip and call include Library -&gt; zip library. Or you can git clone this project into the Arduino libraries folder e.g. with</p>
 <div class="fragment"><div class="line">cd  ~/Documents/Arduino/libraries</div>
 <div class="line">git clone pschatzmann/arduino-audio-tools.git</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md4"></a>
-Documentation</h2>
-<p>Here is the generated <a href="https://pschatzmann.github.io/arduino-audio-tools/html/annotated.html">Class documentation</a>. You might find further information in <a href="https://www.pschatzmann.ch/home/category/machine-sound/">one of my blogs</a></p>
-<h2><a class="anchor" id="autotoc_md5"></a>
-Project Status</h2>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md6"></a>
+Documentation</h1>
+<p>Here is the generated <a href="https://pschatzmann.github.io/arduino-audio-tools/html/annotated.html">Class documentation</a>.</p>
+<p>You also might find further information in <a href="https://www.pschatzmann.ch/home/category/machine-sound/">one of my blogs</a></p>
+<h1><a class="anchor" id="autotoc_md7"></a>
+Project Status</h1>
 <p>This is currently work in progress:</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -121,7 +187,7 @@ Project Status</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Files (RAW, MP3...)   </td><td class="markdownTableBodyNone">tested    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Streams   </td><td class="markdownTableBodyNone">open    </td></tr>
+<td class="markdownTableBodyNone">Streams   </td><td class="markdownTableBodyNone">tested    </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">WAV encoding/deconding   </td><td class="markdownTableBodyNone">open    </td></tr>
 <tr class="markdownTableRowEven">

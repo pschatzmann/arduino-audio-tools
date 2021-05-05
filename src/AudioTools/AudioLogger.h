@@ -1,5 +1,6 @@
 #pragma once
 
+#include "AudioConfig.h"
 #include "Stream.h"
 
 #ifndef SOUND_LOG_LEVEL
@@ -50,57 +51,64 @@ class AudioLogger {
         }
 
         /// logs an error
-        void error(const char *str, const char* str1=nullptr, const char* str2=nullptr) const {
-            log(Error, str, str1, str2);
+        void error(const char *str) const {
+            printf(Error,"%s\n", str);
         }
             
         /// logs an info message    
-        void info(const char *str, const char* str1=nullptr, const char* str2=nullptr) const {
-            log(Info, str, str1, str2);
+        void info(const char *str) const {
+            printf(Info,"%s\n", str);
         }
 
         /// logs an warning    
-        void warning(const char *str, const char* str1=nullptr, const char* str2=nullptr) const {
-            log(Warning, str, str1, str2);
+        void warning(const char *str) const {
+            printf(Warning,"%s\n", str);
         }
 
         /// writes an debug message    
-        void debug(const char *str, const char* str1=nullptr, const char* str2=nullptr) const {
-            log(Debug, str, str1, str2);
+        void debug(const char *str) const {
+            printf(Debug,"%s\n", str);
         }
 
         /// printf support
         int printf(LogLevel current_level, const char* fmt, ...) const {
+            char serial_printf_buffer[PRINTF_BUFFER_SIZE] = {0};
             int len = 0;
+            va_list args;
+
+#ifdef USE_ESP32_LOGGER
+            va_start(args,fmt);
+            len = vsnprintf(serial_printf_buffer, PRINTF_BUFFER_SIZE, fmt, args);
+            va_end(args);   
+            Serial.println(serial_printf_buffer);
+            // TODO why is the following not working
+            switch(current_level){
+                case Error:
+                    esp_log_write(ESP_LOG_ERROR, TAG, (const char*)serial_printf_buffer);
+                    break;
+                case Info:
+                    esp_log_write(ESP_LOG_INFO, TAG, (const char*)serial_printf_buffer);
+                    break;
+                case Warning:
+                    esp_log_write(ESP_LOG_WARN,TAG, (const char*)serial_printf_buffer);
+                    break;
+                case Debug:
+                    esp_log_write(ESP_LOG_DEBUG, TAG, (const char*)serial_printf_buffer);
+                    break;
+                default:
+                    esp_log_write(ESP_LOG_INFO, TAG, (const char*)serial_printf_buffer);
+                    break;
+            }
+#else
             if (this->active && log_stream_ptr!=nullptr && current_level >= log_level){
                 char serial_printf_buffer[PRINTF_BUFFER_SIZE] = {0};
-                va_list args;
                 va_start(args,fmt);
                 len = vsnprintf(serial_printf_buffer,PRINTF_BUFFER_SIZE, fmt, args);
                 log_stream_ptr->print(serial_printf_buffer);
                 va_end(args);
             }
+#endif
             return len;
-        }
-
-
-        /// write an message to the log
-        void log(LogLevel current_level, const char *str, const char* str1=nullptr, const char* str2=nullptr) const {
-            if (this->active && log_stream_ptr!=nullptr){
-                if (current_level >= log_level){
-                    log_stream_ptr->print((char*)str);
-                    if (str1!=nullptr){
-                        log_stream_ptr->print(" ");
-                        log_stream_ptr->print(str1);
-                    }
-                    if (str2!=nullptr){
-                        log_stream_ptr->print(" ");
-                        log_stream_ptr->print(str2);
-                    }
-                    log_stream_ptr->println();
-                    log_stream_ptr->flush();
-                }
-            }
         }
 
         /// provides the singleton instance
@@ -114,14 +122,13 @@ class AudioLogger {
 
 
     protected:
-        Stream *log_stream_ptr;
-        LogLevel log_level;
-        bool active;  
+        Stream *log_stream_ptr = nullptr;
+        const char* TAG = "AudioTools";
+        LogLevel log_level = Error;
+        bool active = false;  
 
         AudioLogger(){
-
         }
-
 
 };
 

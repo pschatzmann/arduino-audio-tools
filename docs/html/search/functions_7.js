@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['log_130',['log',['../classaudio__tools_1_1_audio_logger.html#a54c32d9d566d3533ca2aff1349006564',1,'audio_tools::AudioLogger']]]
+  ['logger_164',['logger',['../classaudio__tools_1_1_sound_generator.html#a62f4f5c9c97aff0e1af0b16f749e5479',1,'audio_tools::SoundGenerator']]]
 ];

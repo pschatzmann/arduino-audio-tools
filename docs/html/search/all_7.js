@@ -1,5 +1,12 @@
 var searchData=
 [
-  ['log_35',['log',['../classaudio__tools_1_1_audio_logger.html#a54c32d9d566d3533ca2aff1349006564',1,'audio_tools::AudioLogger']]],
-  ['loglevel_36',['LogLevel',['../classaudio__tools_1_1_audio_logger.html#a514bd8ffbf484d01cb439a4c82c305e0',1,'audio_tools::AudioLogger']]]
+  ['i2s_36',['I2S',['../classaudio__tools_1_1_i2_s.html',1,'audio_tools::I2S&lt; T &gt;'],['../classaudio__tools_1_1_i2_s.html#abef3e77f3339ebdcabdd7c08faa099c2',1,'audio_tools::I2S::I2S()']]],
+  ['i2sbase_37',['I2SBase',['../classaudio__tools_1_1_i2_s_base.html',1,'audio_tools']]],
+  ['i2sconfig_38',['I2SConfig',['../classaudio__tools_1_1_i2_s_config.html',1,'audio_tools::I2SConfig'],['../classaudio__tools_1_1_i2_s_config.html#a6ddcfcef498a6bda2cab7339d62e166a',1,'audio_tools::I2SConfig::I2SConfig(RxTxMode mode)'],['../classaudio__tools_1_1_i2_s_config.html#a4f62605fe47b2e5ace54bce453806dcf',1,'audio_tools::I2SConfig::I2SConfig(const I2SConfig &amp;cfg)=default']]],
+  ['i2sstream_39',['I2SStream',['../classaudio__tools_1_1_i2_s_stream.html',1,'audio_tools']]],
+  ['info_40',['info',['../classaudio__tools_1_1_audio_logger.html#a6acd4740c75c9e68746ead92f5767efc',1,'audio_tools::AudioLogger']]],
+  ['instance_41',['instance',['../classaudio__tools_1_1_a2_d_p_stream.html#a9fd624ba31d596fbfe17496f0ef2ef57',1,'audio_tools::A2DPStream::instance()'],['../classaudio__tools_1_1_audio_logger.html#a5375c7cffa3a7aff6594cd941a8fa9b3',1,'audio_tools::AudioLogger::instance()']]],
+  ['int24_5ft_42',['int24_t',['../classaudio__tools_1_1int24__t.html',1,'audio_tools']]],
+  ['islogging_43',['isLogging',['../classaudio__tools_1_1_audio_logger.html#a34f452e05084a6cff5e25e2d9b455ea4',1,'audio_tools::AudioLogger']]],
+  ['iterator_44',['iterator',['../classaudio__tools_1_1_vector_1_1iterator.html',1,'audio_tools::Vector']]]
 ];
