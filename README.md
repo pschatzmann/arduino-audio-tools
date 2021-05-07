@@ -7,7 +7,7 @@ Some basic __header-only C++ classes__ that can be used for __Audio Processing__
 - Additional Stream implementations: MemoryStream, UrlStream, I2SStream, A2DPStream, PrintStream
 - Converters
 - Musical Notes (with frequencies of notes)
-- SineWaveGenerator (to generate some sine tone)
+- SineWaveGenerator (to generate a sine tone) and [Mozzi](https://sensorium.github.io/Mozzi/) for more complex scenario 
 - NBuffer (Multi buffer for writing and reading of (audio) data)
 - TimerAlarmRepeating (e.g. for sampling audio data using exact times) [ESP32 only]
 - A Wav Encoder and Decoder
@@ -96,6 +96,7 @@ And some more useful examples:
 - [streams-memory_raw-i2s](examples/streams-memory_raw-i2s_external_dac) - Play music form Flash Memory via I2S to External DAC
 - [streams-url_raw-serial](/examples/streams-url_raw-serial) Displaying a music file from the internet on the Serial Plotter
 - [streams-url_raw-I2S_external_dac.ino](/examples/streams-url_raw-I2S_external_dac.ino) Streaming a File from the Internet to on external DAC via I2S
+- [streams-mozzi-a2dp](/examples/streams-mozzi-a2dp) Use Mozzi to generate Sound to be sent to a Bluetooth Speaker
 
 ... these are just a few examples, but you can combine any Input Stream with any Output Stream as you like...
 
