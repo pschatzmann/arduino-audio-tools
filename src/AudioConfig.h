@@ -10,7 +10,10 @@
  * @brief Optional Functionality - comment out if not wanted
  */
 
+// Activate ESP32 Audio - for ESP32, ESP8266 and Raspberry Pico
 #define USE_ESP8266_AUDIO
+
+// Activate the A2DP library - for ESP32 only
 #ifdef ESP32
 #define USE_A2DP
 #endif
@@ -33,7 +36,6 @@
 #define DEFAUT_ADC_PIN 34
 #define I2S_TAG "I2S"
 #define AUDIO_TAG "AUDIO"
-
 /**
  * @brief Platform specific Settings
  * 
@@ -49,6 +51,8 @@
 // Default Setting: The mute pin can be switched off by setting it to -1. Or you could drive the LED by assigning LED_BUILTIN
 #define PIN_I2S_MUTE 23
 #define SOFT_MUTE_VALUE LOW  
+
+
 
 #endif
 
