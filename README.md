@@ -24,7 +24,7 @@ As “Audio Sources” we will have e.g.:
 - Generated Sound – [GeneratedSoundStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_generated_sound_stream.html)
 - Mobile Phone A2DP Bluetooth – [A2DPStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_a2_d_p_stream.html)
 - Binary Data in Flash Memory – [MemoryStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_memory_stream.html)
-- SD Files
+- Any other Arduino Classes implementing Streams: SD, Ethernet etc
 
 As “Audio Sinks” we will have e.g:
 
@@ -32,7 +32,7 @@ As “Audio Sinks” we will have e.g:
 - an Amplifier – [AnalogAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_analog_audio_stream.html)
 - Bluetooth Speakers – [A2DPStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_a2_d_p_stream.html)
 - Serial to display the data as CSV – [CsvStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_csv_stream.html)
-- SD Files
+- Any other Arduino Classes implementing Streams: SD, Ethernet etc
 
 Here is an simple example which streams a file from the Flash Memory and writes it to I2S: 
 
@@ -93,22 +93,22 @@ Here are a couple of simple test sketches to demo different output destinations:
 
 And some more useful examples:
 
-- [streams-memory_raw-i2s](examples/streams-memory_raw-i2s_external_dac) - Play music form Flash Memory via I2S to External DAC
+- [streams-memory_raw-i2s](examples/streams-memory_raw-i2s) - Play music form Flash Memory via I2S to External DAC
 - [streams-url_raw-serial](/examples/streams-url_raw-serial) Displaying a music file from the internet on the Serial Plotter
-- [streams-url_raw-I2S_external_dac.ino](/examples/streams-url_raw-I2S_external_dac.ino) Streaming a File from the Internet to on external DAC via I2S
+- [streams-url_raw-I2S.ino](/examples/streams-url_raw-i2s) Streaming a File from the Internet to on external DAC via I2S
 - [streams-mozzi-a2dp](/examples/streams-mozzi-a2dp) Use Mozzi to generate Sound to be sent to a Bluetooth Speaker
 
 ... these are just a few examples, but you can combine any Input Stream with any Output Stream as you like...
 
 #### Basic API
 
-- [base-adc-serial](examples/base-adc-serial) - Sample analog sound and write it to Serial
-- [base-adc-a2dp](examples/base-adc-a2dp) - Sample analog sound and write it to a A2DP Bluetooth source 
-- [base-file_raw-serial](examples/base-file_raw-serial) - Read Raw File from SD card to and write it to Serial
-- [base-file_raw-a2dp](examples/base-file_raw-a2dp) - Read Raw File from SD card write it A2DP Bluetooth
-- [base-file_mp3-a2dp](examples/base-file_mp3-a2dp) - Stream MP3 File from SD card to A2DP Bluetooth using the ESP8266Audio library
-- [base-i2s-serial](examples/base-i2s-serial) - Sample digital sound and write it to Serial
-- [base-i2s-a2dp](examples/base-i2s-a2dp) - Sample analog sound and write it to a A2DP Bluetooth source 
+- [base-adc-serial](basic-api/base-adc-serial) - Sample analog sound and write it to Serial
+- [base-adc-a2dp](basic-api/base-adc-a2dp) - Sample analog sound and write it to a A2DP Bluetooth source 
+- [base-file_raw-serial](basic-api/base-file_raw-serial) - Read Raw File from SD card to and write it to Serial
+- [base-file_raw-a2dp](basic-api/base-file_raw-a2dp) - Read Raw File from SD card write it A2DP Bluetooth
+- [base-file_mp3-a2dp](basic-api/base-file_mp3-a2dp) - Stream MP3 File from SD card to A2DP Bluetooth using the ESP8266Audio library
+- [base-i2s-serial](basic-api/base-i2s-serial) - Sample digital sound and write it to Serial
+- [base-i2s-a2dp](basic-api/base-i2s-a2dp) - Sample analog sound and write it to a A2DP Bluetooth source 
 
 
 
@@ -117,7 +117,7 @@ And some more useful examples:
 Dependent on the example you might need to install some of the following libraries:
 
 - [ESP32-A2DP Library](https://github.com/pschatzmann/ESP32-A2DP) to support A2DP Bluetooth Audio
-- [ESP8266Audio]( ) to play different audio Formats
+- [ESP8266Audio](https://github.com/earlephilhower/ESP8266Audio) to play different audio Formats
 - [SD Library](https://www.arduino.cc/en/reference/SD) to read and write files.
 - [arduino-fdk-aac](https://github.com/pschatzmann/arduino-fdk-aac) to encode or decode AAC 
 - [Mozzi](https://github.com/pschatzmann/Mozzi) A sound synthesis library for Arduino
