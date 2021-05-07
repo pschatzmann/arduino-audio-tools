@@ -24,13 +24,13 @@ public:
         return lenResult;
     }
 
-    int writeArray(T data[], int len){
+    int writeArray(const T data[], int len){
         int result = 0;
         for (int j=0;j<len;j++){
-            result = j;
             if (write(data[j])==0){
                 break;
             }
+            result = j+1;
         }
         return result;
     }

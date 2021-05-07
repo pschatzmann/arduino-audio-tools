@@ -36,6 +36,16 @@ class BaseConverter {
 };
 
 
+/**
+ * @brief Dummy converter which does nothing
+ * 
+ * @tparam T 
+ */
+template<typename T>
+class NOPConverter : public  BaseConverter<T> {
+    public:
+        virtual void convert(T (*src)[2], size_t size) {};
+};
 
 /**
  * @brief Multiplies the values with the indicated factor adds the offset and clips at maxValue. To mute use a factor of 0.0!

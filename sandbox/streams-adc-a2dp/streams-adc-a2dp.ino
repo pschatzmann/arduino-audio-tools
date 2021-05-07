@@ -1,0 +1,39 @@
+/**
+ * @file streams-adc-a2dp.ino
+ * @author Phil Schatzmann
+ * @brief We use a mcp6022 analog microphone as input and send the data to A2DP
+ * see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/streams-adc-a2dp/README.md
+ * 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ * 
+ */
+#include "Arduino.h"
+#include "AudioTools.h"
+#include "AudioA2DP.h"
+
+using namespace audio_tools;  
+
+AnalogAudioStream in; // analog mic
+A2DPStream out = A2DPStream::instance() ; // A2DP output - A2DPStream is a singleton!
+StreamCopy copier(out, in); // copy in to out
+ConverterAutoCenter<int16_t> center; // The data has a center of around 26427, so we we need to shift it down to bring the center to 0
+
+// Arduino Setup
+void setup(void) {
+  Serial.begin(115200);
+
+  // start the bluetooth
+  Serial.println("starting A2DP...");
+  out.begin(TX_MODE, "MyMusic");  
+
+  // start i2s input with default configuration
+  Serial.println("starting ADC...");
+  in.begin(in.defaultConfig(RX_MODE));
+
+}
+
+// Arduino loop: just copy the data 
+void loop() {
+  copier.copy(center);
+}

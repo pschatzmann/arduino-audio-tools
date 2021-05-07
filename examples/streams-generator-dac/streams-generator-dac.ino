@@ -1,12 +1,13 @@
 /**
- * @file streams-generator-i2s.ino
+ * @file streams-generator-dac.ino
  * @author Phil Schatzmann
- * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/streams-generator-i2s/README.md 
+ * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/streams-generator-dac/README.md 
  * @author Phil Schatzmann
  * @copyright GPLv3
- */
+ **/
  
 #include "AudioTools.h"
+#include "AudioA2DP.h"
 
 using namespace audio_tools;  
 
@@ -15,7 +16,7 @@ uint16_t sample_rate=44100;
 uint8_t channels = 2;                                      // The stream will have 2 channels 
 SineWaveGenerator<sound_t> sineWave(32000);                // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<sound_t> sound(sineWave, channels);   // Stream generated from sine wave
-I2SStream out;                                             // Output to I2S
+AnalogAudioStream out; 
 StreamCopy copier(out, sound);                             // copies sound into i2s
 
 // Arduino Setup
@@ -23,15 +24,14 @@ void setup(void) {
   // Open Serial 
   Serial.begin(115200);
 
+  // start the bluetooth
+  Serial.println("starting A2DP...");
+  AnalogConfig config = out.defaultConfig(TX_MODE);
+  config.sample_rate = sample_rate; 
+  out.begin(config);
+
   // Setup sine wave
   sineWave.begin(sample_rate, B4);
-
-  // Open I2S
-  I2SConfig config = out.defaultConfig(TX_MODE);
-  config.sample_rate = sample_rate;
-  config.channels = channels;
-  config.bits_per_sample = sizeof(sound_t)*8;
-  out.begin(config);
 }
 
 // Arduino loop - copy sound to out 

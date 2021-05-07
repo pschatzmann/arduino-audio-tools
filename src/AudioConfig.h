@@ -27,18 +27,19 @@
 #define I2S_DEFAULT_BITS_PER_SAMPLE 16
 #define I2S_DEFAULT_PORT 0
 #define I2S_BUFFER_SIZE 1024
-#define I2S_BUFFER_COUNT 6
-#define A2DP_BUFFER_SIZE 512
-#define A2DP_BUFFER_COUNT 5
+#define I2S_BUFFER_COUNT 5
+#define A2DP_BUFFER_SIZE 4096
+#define A2DP_BUFFER_COUNT 8
 #define DEFAUT_ADC_PIN 34
 #define I2S_TAG "I2S"
+#define AUDIO_TAG "AUDIO"
 
 /**
  * @brief Platform specific Settings
  * 
  */
 #ifdef ESP32
-
+#include "esp32-hal-log.h"
 #define USE_ESP32_LOGGER
 #define PIN_I2S_BCK 14
 #define PIN_I2S_WS 15

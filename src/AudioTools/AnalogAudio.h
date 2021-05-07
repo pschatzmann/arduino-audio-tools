@@ -144,6 +144,7 @@ class AnalogAudio {
     /// starts the DAC 
     void begin(AnalogConfig cfg) {
       ESP_LOGI(ADC_TAG, "%s", __func__);
+      disableCore0WDT();
 
       adc_config = cfg;
       i2s_config_t i2s_config = {
@@ -193,6 +194,7 @@ class AnalogAudio {
     /// stops the I2C and unistalls the driver
     void end(){
         ESP_LOGD(ADC_TAG, "%s", __func__);
+        enableCore0WDT();
         i2s_driver_uninstall(i2s_num);    
     }
 
@@ -227,6 +229,7 @@ class AnalogAudio {
         ESP_LOGE(I2S_TAG, "%s", __func__);
       }
       ESP_LOGD(ADC_TAG, "%s - len: %d -> %d", __func__, size_bytes, result);
+      //vTaskDelay(1);
       return result;
     }
 

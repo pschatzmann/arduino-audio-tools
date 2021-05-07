@@ -14,7 +14,7 @@ Some basic __header-only C++ classes__ that can be used for __Audio Processing__
 - AudioOutputWithCallback class to provide callback integration e.g. with ESP8266Audio
 
 This functionality provides the glue which makes different audio processing components and libraries work together.
-We also provide plenty of examples that demonstrate how to implement the different scenarios. The __design philosophy__ is based on the Arduino conventions: we use the ```begin()``` and ```end()``` methods to start and stop the processing and we propagate the __use of Streams__.  We all know the Arduino Streams: We use them to write out print messages and sometimes we use them to read the output from Serial devices. The same thing applies to my “Audio Streams”: You can read audio data from “Audio Sources” and you write them to “Audio Sinks”.
+We also provide plenty of examples that demonstrate how to implement the different scenarios. The __design philosophy__ is based on the Arduino conventions: we use the ```begin()``` and ```end()``` methods to start and stop the processing and we propagate the __use of Streams__.  We all know the [Arduino Streams](https://pschatzmann.github.io/arduino-audio-tools/html/class_stream.html): We use them to write out print messages and sometimes we use them to read the output from Serial devices. The same thing applies to my “Audio Streams”: You can read audio data from “Audio Sources” and you write them to “Audio Sinks”.
 
 As “Audio Sources” we will have e.g.:
 
@@ -83,10 +83,17 @@ Here is the list of examples:
 
 #### Stream API
 
-- [streams-adc-serial](/examples/streams-adc-serial) Displaying input from analog microphone on the Serial Plotter
+Here are a couple of simple test sketches to demo different output destinations:
+
 - [streams-generator-serial](/examples/streams-generator-serial) Displaying generated sound on the Serial Plotter
-- [streams-generator-i2s_external_dac](/examples/streams-generator-i2s_external_dac) Playing generated sound on external DAC via I2S
-- [streams-memory_raw-i2s_external_dac](examples/streams-memory_raw-i2s_external_dac) - Play music form Flash Memory via I2S to External DAC
+- [streams-generator-i2s](/examples/streams-generator-i2s) Output of generated sound on external DAC via I2S
+- [streams-generator-dac](/examples/streams-generator-dac) Output of generated sound on ESP32 internal DAC via I2S
+- [streams-generator-a2dp](/examples/streams-generator-a2dp) Output of generated sound on Bluetooth Speaker using A2DP
+- [streams-adc-serial](/examples/streams-adc-serial) Displaying input from analog microphone on the Serial Plotter
+
+And some more useful examples:
+
+- [streams-memory_raw-i2s](examples/streams-memory_raw-i2s_external_dac) - Play music form Flash Memory via I2S to External DAC
 - [streams-url_raw-serial](/examples/streams-url_raw-serial) Displaying a music file from the internet on the Serial Plotter
 - [streams-url_raw-I2S_external_dac.ino](/examples/streams-url_raw-I2S_external_dac.ino) Streaming a File from the Internet to on external DAC via I2S
 

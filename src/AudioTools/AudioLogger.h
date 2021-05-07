@@ -11,6 +11,7 @@
 #define PRINTF_BUFFER_SIZE 160
 #endif
 
+
 namespace audio_tools {
 
 /**
@@ -78,27 +79,30 @@ class AudioLogger {
 
 #ifdef USE_ESP32_LOGGER
             va_start(args,fmt);
-            len = vsnprintf(serial_printf_buffer, PRINTF_BUFFER_SIZE, fmt, args);
-            va_end(args);   
-            Serial.println(serial_printf_buffer);
+            //Serial.println(serial_printf_buffer);
             // TODO why is the following not working
+            const char* msg = serial_printf_buffer;
+            esp_log_level_t level;
             switch(current_level){
                 case Error:
-                    esp_log_write(ESP_LOG_ERROR, TAG, (const char*)serial_printf_buffer);
+                    level = ESP_LOG_ERROR;
                     break;
                 case Info:
-                    esp_log_write(ESP_LOG_INFO, TAG, (const char*)serial_printf_buffer);
+                    level = ESP_LOG_INFO;
                     break;
                 case Warning:
-                    esp_log_write(ESP_LOG_WARN,TAG, (const char*)serial_printf_buffer);
+                    level = ESP_LOG_WARN;
                     break;
                 case Debug:
-                    esp_log_write(ESP_LOG_DEBUG, TAG, (const char*)serial_printf_buffer);
+                    level = ESP_LOG_DEBUG;
                     break;
                 default:
-                    esp_log_write(ESP_LOG_INFO, TAG, (const char*)serial_printf_buffer);
+                    level = ESP_LOG_DEBUG;
                     break;
             }
+            esp_log_writev(level, TAG, fmt, args);
+            va_end(args);   
+
 #else
             if (this->active && log_stream_ptr!=nullptr && current_level >= log_level){
                 char serial_printf_buffer[PRINTF_BUFFER_SIZE] = {0};
