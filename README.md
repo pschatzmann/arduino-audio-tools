@@ -120,7 +120,7 @@ Dependent on the example you might need to install some of the following librari
 - [ESP8266Audio]( ) to play different audio Formats
 - [SD Library](https://www.arduino.cc/en/reference/SD) to read and write files.
 - [arduino-fdk-aac](https://github.com/pschatzmann/arduino-fdk-aac) to encode or decode AAC 
-
+- [Mozzi](https://github.com/pschatzmann/Mozzi) A sound synthesis library for Arduino
 
 
 ## Installation
