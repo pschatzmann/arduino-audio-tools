@@ -78,7 +78,7 @@ $(function() {
 <li>A Wav Encoder and Decoder</li>
 <li>AudioOutputWithCallback class to provide callback integration e.g. with ESP8266Audio</li>
 </ul>
-<p>This functionality provides the glue which makes different audio processing components and libraries work together. We also provide plenty of examples that demonstrate how to implement the different scenarios. The <b>design philosophy</b> is based on the Arduino conventions: we use the <code>begin()</code> and <code>end()</code> methods to start and stop the processing and we propagate the <b>use of Streams</b>. We all know the Arduino Streams: We use them to write out print messages and sometimes we use them to read the output from Serial devices. The same thing applies to my “Audio Streams”: You can read audio data from “Audio Sources” and you write them to “Audio Sinks”.</p>
+<p>This functionality provides the glue which makes different audio processing components and libraries work together. We also provide plenty of examples that demonstrate how to implement the different scenarios. The <b>design philosophy</b> is based on the Arduino conventions: we use the <code>begin()</code> and <code>end()</code> methods to start and stop the processing and we propagate the <b>use of Streams</b>. We all know the <a href="https://pschatzmann.github.io/arduino-audio-tools/html/class_stream.html">Arduino Streams</a>: We use them to write out print messages and sometimes we use them to read the output from Serial devices. The same thing applies to my “Audio Streams”: You can read audio data from “Audio Sources” and you write them to “Audio Sinks”.</p>
 <p>As “Audio Sources” we will have e.g.:</p>
 <ul>
 <li>Analog Microphones – <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_analog_audio_stream.html">AnalogAudioStream</a></li>
@@ -135,11 +135,17 @@ Examples</h1>
 <p>Here is the list of examples:</p>
 <h3><a class="anchor" id="autotoc_md2"></a>
 Stream API</h3>
+<p>Here are a couple of simple test sketches to demo different output destinations:</p>
 <ul>
-<li><a href="/examples/streams-adc-serial">streams-adc-serial</a> Displaying input from analog microphone on the Serial Plotter</li>
 <li><a href="/examples/streams-generator-serial">streams-generator-serial</a> Displaying generated sound on the Serial Plotter</li>
-<li><a href="/examples/streams-generator-i2s_external_dac">streams-generator-i2s_external_dac</a> Playing generated sound on external DAC via I2S</li>
-<li><a href="examples/streams-memory_raw-i2s_external_dac">streams-memory_raw-i2s_external_dac</a> - Play music form Flash Memory via I2S to External DAC</li>
+<li><a href="/examples/streams-generator-i2s">streams-generator-i2s</a> Output of generated sound on external DAC via I2S</li>
+<li><a href="/examples/streams-generator-dac">streams-generator-dac</a> Output of generated sound on ESP32 internal DAC via I2S</li>
+<li><a href="/examples/streams-generator-a2dp">streams-generator-a2dp</a> Output of generated sound on Bluetooth Speaker using A2DP</li>
+<li><a href="/examples/streams-adc-serial">streams-adc-serial</a> Displaying input from analog microphone on the Serial Plotter</li>
+</ul>
+<p>And some more useful examples:</p>
+<ul>
+<li><a href="examples/streams-memory_raw-i2s_external_dac">streams-memory_raw-i2s</a> - Play music form Flash Memory via I2S to External DAC</li>
 <li><a href="/examples/streams-url_raw-serial">streams-url_raw-serial</a> Displaying a music file from the internet on the Serial Plotter</li>
 <li><a href="/examples/streams-url_raw-I2S_external_dac.ino">streams-url_raw-I2S_external_dac.ino</a> Streaming a File from the Internet to on external DAC via I2S</li>
 </ul>

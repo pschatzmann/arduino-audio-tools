@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['vector_88',['Vector',['../classaudio__tools_1_1_vector.html',1,'audio_tools']]]
+  ['urlstream_91',['UrlStream',['../classaudio__tools_1_1_url_stream.html',1,'audio_tools']]],
+  ['usercallback_92',['UserCallback',['../classaudio__tools_1_1_user_callback.html',1,'audio_tools']]]
 ];

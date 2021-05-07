@@ -67,7 +67,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">AudioA2DP.h File Reference</div>  </div>
 </div><!--header-->
@@ -81,7 +82,7 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a2_d_p_stream.html">audio_tools::A2DPStream</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_stream.html">Stream</a> support for A2DP: When calling write we start a a2dp_source - when calling read we start a a2dp_sink The data is in int16_t with 2 channels at 44100 hertz.  <a href="classaudio__tools_1_1_a2_d_p_stream.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_stream.html">Stream</a> support for A2DP: begin(TX_MODE) uses a2dp_source - begin(RX_MODE) a a2dp_sink The data is in int16_t with 2 channels at 44100 hertz.  <a href="classaudio__tools_1_1_a2_d_p_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_channel_converter.html">audio_tools::ChannelConverter&lt; T &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Covnerts the data from T src[][2] to a Channels array.  <a href="classaudio__tools_1_1_channel_converter.html#details">More...</a><br /></td></tr>
@@ -89,15 +90,24 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a7d1f41800565427e9ce68616fcec4fa2"><td class="memItemLeft" align="right" valign="top"><a id="a7d1f41800565427e9ce68616fcec4fa2"></a>
-AudioOutputWithCallback&#160;</td><td class="memItemRight" valign="bottom"><b>audio_tools::a2dp_stream_out</b> (A2DP_BUFFER_SIZE, A2DP_BUFFER_COUNT)</td></tr>
-<tr class="separator:a7d1f41800565427e9ce68616fcec4fa2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab199eb221e8c4a924801efe90d92ef7d"><td class="memItemLeft" align="right" valign="top"><a id="ab199eb221e8c4a924801efe90d92ef7d"></a>
+NBuffer&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>audio_tools::a2dp_buffer</b> (A2DP_BUFFER_SIZE, A2DP_BUFFER_COUNT)</td></tr>
+<tr class="separator:ab199eb221e8c4a924801efe90d92ef7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a617391bdaaaa3fd418ff3a10e7428d63"><td class="memItemLeft" align="right" valign="top"><a id="a617391bdaaaa3fd418ff3a10e7428d63"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>audio_tools::a2dp_stream_sink_sound_data</b> (const uint8_t *data, uint32_t len)</td></tr>
 <tr class="separator:a617391bdaaaa3fd418ff3a10e7428d63"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a319a40a8efa261c1015be6149dd6b38c"><td class="memItemLeft" align="right" valign="top"><a id="a319a40a8efa261c1015be6149dd6b38c"></a>
 int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>audio_tools::a2dp_stream_source_sound_data</b> (Channels *data, int32_t len)</td></tr>
 <tr class="separator:a319a40a8efa261c1015be6149dd6b38c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a8502a92d5e42a963681ed13dd03fdb29"><td class="memItemLeft" align="right" valign="top"><a id="a8502a92d5e42a963681ed13dd03fdb29"></a>
+volatile bool&#160;</td><td class="memItemRight" valign="bottom"><b>audio_tools::is_a2dp_setup</b> = false</td></tr>
+<tr class="separator:a8502a92d5e42a963681ed13dd03fdb29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a821c706532cdd52697d357a4df38f771"><td class="memItemLeft" align="right" valign="top"><a id="a821c706532cdd52697d357a4df38f771"></a>
+AudioLogger &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>audio_tools::log_a2dp</b> = AudioLogger::instance()</td></tr>
+<tr class="separator:a821c706532cdd52697d357a4df38f771"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A2DP Support via Arduino Streams. </p>

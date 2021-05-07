@@ -1,21 +1,8 @@
 var searchData=
 [
-  ['scale16_66',['scale16',['../classaudio__tools_1_1int24__t.html#afecd445388a55e48c5bb4860f28a0042',1,'audio_tools::int24_t']]],
-  ['scale32_67',['scale32',['../classaudio__tools_1_1int24__t.html#a941c9375328b5593619c16fe81c9a1c8',1,'audio_tools::int24_t']]],
-  ['scalefloat_68',['scaleFloat',['../classaudio__tools_1_1int24__t.html#a3298ae3a80ee055b725e2e4ee0bf8662',1,'audio_tools::int24_t']]],
-  ['setaudiobaseinfo_69',['setAudioBaseInfo',['../classaudio__tools_1_1_i2_s_stream.html#a1ac568fbbb6187fa72fd197afb5f04dd',1,'audio_tools::I2SStream']]],
-  ['setavailable_70',['setAvailable',['../classaudio__tools_1_1_single_buffer.html#a1777687cba0e73e71d25ca19d5851c16',1,'audio_tools::SingleBuffer']]],
-  ['setfrequency_71',['setFrequency',['../classaudio__tools_1_1_sine_wave_generator.html#aa74429c5f93d07e2ab0b056af0c90965',1,'audio_tools::SineWaveGenerator']]],
-  ['setpin_72',['setPin',['../classaudio__tools_1_1_analog_config.html#a44deeabcd6c87a20c3cf6ca292b6b89a',1,'audio_tools::AnalogConfig']]],
-  ['sinewavegenerator_73',['SineWaveGenerator',['../classaudio__tools_1_1_sine_wave_generator.html',1,'audio_tools']]],
-  ['singlebuffer_74',['SingleBuffer',['../classaudio__tools_1_1_single_buffer.html',1,'audio_tools']]],
-  ['singlebuffer_3c_20uint8_5ft_20_3e_75',['SingleBuffer&lt; uint8_t &gt;',['../classaudio__tools_1_1_single_buffer.html',1,'audio_tools']]],
-  ['sink_76',['sink',['../classaudio__tools_1_1_a2_d_p_stream.html#a62ff1438dbe441759910ea4d134e54c2',1,'audio_tools::A2DPStream']]],
-  ['soundgenerator_77',['SoundGenerator',['../classaudio__tools_1_1_sound_generator.html',1,'audio_tools']]],
-  ['source_78',['source',['../classaudio__tools_1_1_a2_d_p_stream.html#a5675d25c4d6dda7352410be5c33ad8df',1,'audio_tools::A2DPStream']]],
-  ['start_79',['start',['../classaudio__tools_1_1_timer_alarm_repeating.html#acf7796072b45af8a2f9c082bb034e1ce',1,'audio_tools::TimerAlarmRepeating']]],
-  ['stop_80',['stop',['../classaudio__tools_1_1_audio_output_with_callback.html#af8c887b9ce6c100722de3e6b8aaf23cf',1,'audio_tools::AudioOutputWithCallback::stop()'],['../classaudio__tools_1_1_generated_sound_stream.html#a710d4eb3b923766949329ad0829e1ab2',1,'audio_tools::GeneratedSoundStream::stop()']]],
-  ['stream_81',['Stream',['../class_stream.html',1,'']]],
-  ['streamcopy_82',['StreamCopy',['../classaudio__tools_1_1_stream_copy.html',1,'audio_tools']]],
-  ['streamcopyt_83',['StreamCopyT',['../classaudio__tools_1_1_stream_copy_t.html',1,'audio_tools']]]
+  ['read_65',['read',['../classaudio__tools_1_1_audio_output_with_callback.html#a06ba162644e0a9664ff71c4900d340db',1,'audio_tools::AudioOutputWithCallback::read()'],['../classaudio__tools_1_1_analog_audio.html#a610fbd64a9173a21db5a51b02aa291b8',1,'audio_tools::AnalogAudio::read()'],['../classaudio__tools_1_1_i2_s.html#a41def4677c9d184aff4d0df0fd32456b',1,'audio_tools::I2S::read()'],['../classaudio__tools_1_1_generated_sound_stream.html#ad0683d66f2396c4913c89908c33927b5',1,'audio_tools::GeneratedSoundStream::read()'],['../classaudio__tools_1_1_buffered_stream.html#a057be5d11995e5454884913f39870a8b',1,'audio_tools::BufferedStream::read()']]],
+  ['readbytes_66',['readBytes',['../classaudio__tools_1_1_a2_d_p_stream.html#a11ed2a5226eb0136218c9898ecbdda9e',1,'audio_tools::A2DPStream::readBytes()'],['../classaudio__tools_1_1_i2_s_base.html#a0a056fd260ffaf85b62219d2fdd4d983',1,'audio_tools::I2SBase::readBytes()'],['../classaudio__tools_1_1_sound_generator.html#a64df0d06fc6cfa5e5b713f614ccde9ed',1,'audio_tools::SoundGenerator::readBytes()'],['../classaudio__tools_1_1_generated_sound_stream.html#a17bc85da66c10448a1a9351b55a8dcc3',1,'audio_tools::GeneratedSoundStream::readBytes()'],['../classaudio__tools_1_1_buffered_stream.html#a92ed2def0a580ea78947722a85b57509',1,'audio_tools::BufferedStream::readBytes()']]],
+  ['readsample_67',['readSample',['../classaudio__tools_1_1_sound_generator.html#abbb42e8d17faee7775e7aaa9ce3a7c91',1,'audio_tools::SoundGenerator::readSample()'],['../classaudio__tools_1_1_sine_wave_generator.html#a0775e9aa8d48c5fd71235a18200276c9',1,'audio_tools::SineWaveGenerator::readSample()'],['../classaudio__tools_1_1_noise_generator.html#acb572e4861b4cfc49244d62607fb409a',1,'audio_tools::NoiseGenerator::readSample()']]],
+  ['readsamples_68',['readSamples',['../classaudio__tools_1_1_sound_generator.html#ab9300854be580fdd56a09a51c17b1074',1,'audio_tools::SoundGenerator::readSamples(T *data, size_t sampleCount=512)'],['../classaudio__tools_1_1_sound_generator.html#a2b944991871ea46eddac66f4dad958da',1,'audio_tools::SoundGenerator::readSamples(T src[][2], size_t frameCount)']]],
+  ['rx_5ftx_5fmode_69',['rx_tx_mode',['../classaudio__tools_1_1_i2_s_config.html#a79971ed4bb50a6b67c3cf28197ac5a05',1,'audio_tools::I2SConfig']]]
 ];

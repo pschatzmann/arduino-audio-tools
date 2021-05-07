@@ -10,6 +10,6 @@ var searchData=
   ['converterscaler_24',['ConverterScaler',['../classaudio__tools_1_1_converter_scaler.html',1,'audio_tools']]],
   ['converterswitchleftandright_25',['ConverterSwitchLeftAndRight',['../classaudio__tools_1_1_converter_switch_left_and_right.html',1,'audio_tools']]],
   ['convertertointernaldacformat_26',['ConverterToInternalDACFormat',['../classaudio__tools_1_1_converter_to_internal_d_a_c_format.html',1,'audio_tools']]],
-  ['copy_27',['copy',['../classaudio__tools_1_1_stream_copy.html#a5d7d93db91c36440ecd3aa61423d4479',1,'audio_tools::StreamCopy::copy()'],['../classaudio__tools_1_1_stream_copy.html#a392f5a5a59ecce04c34c1af4ae2ac08f',1,'audio_tools::StreamCopy::copy(BaseConverter&lt; T &gt; &amp;converter)']]],
+  ['copy_27',['copy',['../classaudio__tools_1_1_stream_copy.html#a392f5a5a59ecce04c34c1af4ae2ac08f',1,'audio_tools::StreamCopy']]],
   ['csvstream_28',['CsvStream',['../classaudio__tools_1_1_csv_stream.html',1,'audio_tools::CsvStream&lt; T &gt;'],['../classaudio__tools_1_1_csv_stream.html#ae6f403984ed50e5f692ee6472fa7a5da',1,'audio_tools::CsvStream::CsvStream()']]]
 ];

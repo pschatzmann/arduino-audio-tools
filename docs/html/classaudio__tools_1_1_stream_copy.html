@@ -67,17 +67,25 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_stream_copy-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">audio_tools::StreamCopy Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Helper class which Copies an input stream to a output stream.  
+<p>We provide the typeless <a class="el" href="classaudio__tools_1_1_stream_copy.html" title="We provide the typeless StreamCopy as a subclass of StreamCopyT.">StreamCopy</a> as a subclass of <a class="el" href="classaudio__tools_1_1_stream_copy_t.html" title="Typed Stream Copy which supports the conversion from channel to 2 channels. We make sure that we allw...">StreamCopyT</a>.  
  <a href="classaudio__tools_1_1_stream_copy.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_streams_8h_source.html">Streams.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_audio_copy_8h_source.html">AudioCopy.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for audio_tools::StreamCopy:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classaudio__tools_1_1_stream_copy.png" usemap="#audio_5Ftools::StreamCopy_map" alt=""/>
+  <map id="audio_5Ftools::StreamCopy_map" name="audio_5Ftools::StreamCopy_map">
+<area href="classaudio__tools_1_1_stream_copy_t.html" alt="audio_tools::StreamCopyT&lt; uint8_t &gt;" shape="rect" coords="0,0,219,24"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -88,36 +96,52 @@ Public Member Functions</h2></td></tr>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>available</b> ()</td></tr>
 <tr class="separator:a7f1bccb9c88c4aed26cd6c8118c71b6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d7d93db91c36440ecd3aa61423d4479"><td class="memItemLeft" align="right" valign="top"><a id="a5d7d93db91c36440ecd3aa61423d4479"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_stream_copy.html#a5d7d93db91c36440ecd3aa61423d4479">copy</a> ()</td></tr>
-<tr class="memdesc:a5d7d93db91c36440ecd3aa61423d4479"><td class="mdescLeft">&#160;</td><td class="mdescRight">copies a buffer length of data - repeat this call until everthing is copied <br /></td></tr>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>copy</b> ()</td></tr>
 <tr class="separator:a5d7d93db91c36440ecd3aa61423d4479"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a392f5a5a59ecce04c34c1af4ae2ac08f"><td class="memTemplParams" colspan="2"><a id="a392f5a5a59ecce04c34c1af4ae2ac08f"></a>
 template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a392f5a5a59ecce04c34c1af4ae2ac08f"><td class="memTemplItemLeft" align="right" valign="top">size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_stream_copy.html#a392f5a5a59ecce04c34c1af4ae2ac08f">copy</a> (<a class="el" href="classaudio__tools_1_1_base_converter.html">BaseConverter</a>&lt; T &gt; &amp;converter)</td></tr>
 <tr class="memdesc:a392f5a5a59ecce04c34c1af4ae2ac08f"><td class="mdescLeft">&#160;</td><td class="mdescRight">copies a buffer length of data and applies the converter <br /></td></tr>
 <tr class="separator:a392f5a5a59ecce04c34c1af4ae2ac08f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classaudio__tools_1_1_stream_copy_t"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classaudio__tools_1_1_stream_copy_t')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classaudio__tools_1_1_stream_copy_t.html">audio_tools::StreamCopyT&lt; uint8_t &gt;</a></td></tr>
+<tr class="memitem:aa7edeb526fd202d8bbaa6507a649bf5e inherit pub_methods_classaudio__tools_1_1_stream_copy_t"><td class="memItemLeft" align="right" valign="top"><a id="aa7edeb526fd202d8bbaa6507a649bf5e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>StreamCopyT</b> (<a class="el" href="class_print.html">Print</a> &amp;to, <a class="el" href="class_stream.html">Stream</a> &amp;from, int buffer_size=DEFAULT_BUFFER_SIZE)</td></tr>
+<tr class="separator:aa7edeb526fd202d8bbaa6507a649bf5e inherit pub_methods_classaudio__tools_1_1_stream_copy_t"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a573c7beae26a6a28a32b9ee4f11a31a2 inherit pub_methods_classaudio__tools_1_1_stream_copy_t"><td class="memItemLeft" align="right" valign="top"><a id="a573c7beae26a6a28a32b9ee4f11a31a2"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_stream_copy_t.html#a573c7beae26a6a28a32b9ee4f11a31a2">available</a> ()</td></tr>
+<tr class="memdesc:a573c7beae26a6a28a32b9ee4f11a31a2 inherit pub_methods_classaudio__tools_1_1_stream_copy_t"><td class="mdescLeft">&#160;</td><td class="mdescRight">available bytes in the data source <br /></td></tr>
+<tr class="separator:a573c7beae26a6a28a32b9ee4f11a31a2 inherit pub_methods_classaudio__tools_1_1_stream_copy_t"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39d972df8a204d17eece1bfad2d864e5 inherit pub_methods_classaudio__tools_1_1_stream_copy_t"><td class="memItemLeft" align="right" valign="top"><a id="a39d972df8a204d17eece1bfad2d864e5"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>copy</b> ()</td></tr>
+<tr class="separator:a39d972df8a204d17eece1bfad2d864e5 inherit pub_methods_classaudio__tools_1_1_stream_copy_t"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a666fb69b66e9739d464cd34fe6b16780 inherit pub_methods_classaudio__tools_1_1_stream_copy_t"><td class="memItemLeft" align="right" valign="top"><a id="a666fb69b66e9739d464cd34fe6b16780"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>copy2</b> ()</td></tr>
+<tr class="separator:a666fb69b66e9739d464cd34fe6b16780 inherit pub_methods_classaudio__tools_1_1_stream_copy_t"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:ac608939242100dd21a0e44a47480a82a"><td class="memItemLeft" align="right" valign="top"><a id="ac608939242100dd21a0e44a47480a82a"></a>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_classaudio__tools_1_1_stream_copy_t"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classaudio__tools_1_1_stream_copy_t')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classaudio__tools_1_1_stream_copy_t.html">audio_tools::StreamCopyT&lt; uint8_t &gt;</a></td></tr>
+<tr class="memitem:afb28d25472d48b444da5f08b169608bd inherit pro_methods_classaudio__tools_1_1_stream_copy_t"><td class="memItemLeft" align="right" valign="top"><a id="afb28d25472d48b444da5f08b169608bd"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (size_t len, size_t &amp;delayCount)</td></tr>
+<tr class="separator:afb28d25472d48b444da5f08b169608bd inherit pro_methods_classaudio__tools_1_1_stream_copy_t"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classaudio__tools_1_1_stream_copy_t"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classaudio__tools_1_1_stream_copy_t')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classaudio__tools_1_1_stream_copy_t.html">audio_tools::StreamCopyT&lt; uint8_t &gt;</a></td></tr>
+<tr class="memitem:ad01cd4cf450c02a01b8d701eec8b9f00 inherit pro_attribs_classaudio__tools_1_1_stream_copy_t"><td class="memItemLeft" align="right" valign="top"><a id="ad01cd4cf450c02a01b8d701eec8b9f00"></a>
 uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b></td></tr>
-<tr class="separator:ac608939242100dd21a0e44a47480a82a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a984ab77bcf96e69a4194df61bb987858"><td class="memItemLeft" align="right" valign="top"><a id="a984ab77bcf96e69a4194df61bb987858"></a>
+<tr class="separator:ad01cd4cf450c02a01b8d701eec8b9f00 inherit pro_attribs_classaudio__tools_1_1_stream_copy_t"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3213a3faf0bfeca8b179bc064144188c inherit pro_attribs_classaudio__tools_1_1_stream_copy_t"><td class="memItemLeft" align="right" valign="top"><a id="a3213a3faf0bfeca8b179bc064144188c"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_size</b></td></tr>
-<tr class="separator:a984ab77bcf96e69a4194df61bb987858"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa491917ccc38ccf54f4344ba689fa3fe"><td class="memItemLeft" align="right" valign="top"><a id="aa491917ccc38ccf54f4344ba689fa3fe"></a>
+<tr class="separator:a3213a3faf0bfeca8b179bc064144188c inherit pro_attribs_classaudio__tools_1_1_stream_copy_t"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82b08dcf6ffa69a5ee12cc5ef0808e4f inherit pro_attribs_classaudio__tools_1_1_stream_copy_t"><td class="memItemLeft" align="right" valign="top"><a id="a82b08dcf6ffa69a5ee12cc5ef0808e4f"></a>
 <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>from</b></td></tr>
-<tr class="separator:aa491917ccc38ccf54f4344ba689fa3fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8dbfb3349dc50c51517492963462716a"><td class="memItemLeft" align="right" valign="top"><a id="a8dbfb3349dc50c51517492963462716a"></a>
+<tr class="separator:a82b08dcf6ffa69a5ee12cc5ef0808e4f inherit pro_attribs_classaudio__tools_1_1_stream_copy_t"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5eef238094d6aca58f554451a9e84f5a inherit pro_attribs_classaudio__tools_1_1_stream_copy_t"><td class="memItemLeft" align="right" valign="top"><a id="a5eef238094d6aca58f554451a9e84f5a"></a>
 <a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>to</b></td></tr>
-<tr class="separator:a8dbfb3349dc50c51517492963462716a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a5eef238094d6aca58f554451a9e84f5a inherit pro_attribs_classaudio__tools_1_1_stream_copy_t"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Helper class which Copies an input stream to a output stream. </p>
-<dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
-<dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
+<div class="textblock"><p>We provide the typeless <a class="el" href="classaudio__tools_1_1_stream_copy.html" title="We provide the typeless StreamCopy as a subclass of StreamCopyT.">StreamCopy</a> as a subclass of <a class="el" href="classaudio__tools_1_1_stream_copy_t.html" title="Typed Stream Copy which supports the conversion from channel to 2 channels. We make sure that we allw...">StreamCopyT</a>. </p>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/<a class="el" href="_streams_8h_source.html">Streams.h</a></li>
+<li>src/AudioTools/<a class="el" href="_audio_copy_8h_source.html">AudioCopy.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

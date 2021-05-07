@@ -129,16 +129,16 @@ class I2SBase {
     }
 
     void logConfig() {
-      ESP_LOGD(I2S_TAG, "mode: %s", cfg.rx_tx_mode == TX_MODE ? "TX":"RX");
-      ESP_LOGD(I2S_TAG, "sample rate: %d", cfg.sample_rate);
-      ESP_LOGD(I2S_TAG, "bits per sample: %d", cfg.bits_per_sample);
-      ESP_LOGD(I2S_TAG, "number of channels: %d", cfg.channels);
+      ESP_LOGI(I2S_TAG, "mode: %s", cfg.rx_tx_mode == TX_MODE ? "TX":"RX");
+      ESP_LOGI(I2S_TAG, "sample rate: %d", cfg.sample_rate);
+      ESP_LOGI(I2S_TAG, "bits per sample: %d", cfg.bits_per_sample);
+      ESP_LOGI(I2S_TAG, "number of channels: %d", cfg.channels);
     }
 
     void logConfigPins(i2s_pin_config_t pin_config){
-      ESP_LOGD(I2S_TAG, "pin bck_io_num: %d", cfg.pin_bck);
-      ESP_LOGD(I2S_TAG, "pin ws_io_num: %d", cfg.pin_ws);
-      ESP_LOGD(I2S_TAG, "pin data_num: %d", cfg.pin_data);
+      ESP_LOGI(I2S_TAG, "pin bck_io_num: %d", cfg.pin_bck);
+      ESP_LOGI(I2S_TAG, "pin ws_io_num: %d", cfg.pin_ws);
+      ESP_LOGI(I2S_TAG, "pin data_num: %d", cfg.pin_data);
     }
 
 };

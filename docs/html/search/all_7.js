@@ -7,6 +7,8 @@ var searchData=
   ['info_40',['info',['../classaudio__tools_1_1_audio_logger.html#a6acd4740c75c9e68746ead92f5767efc',1,'audio_tools::AudioLogger']]],
   ['instance_41',['instance',['../classaudio__tools_1_1_a2_d_p_stream.html#a9fd624ba31d596fbfe17496f0ef2ef57',1,'audio_tools::A2DPStream::instance()'],['../classaudio__tools_1_1_audio_logger.html#a5375c7cffa3a7aff6594cd941a8fa9b3',1,'audio_tools::AudioLogger::instance()']]],
   ['int24_5ft_42',['int24_t',['../classaudio__tools_1_1int24__t.html',1,'audio_tools']]],
-  ['islogging_43',['isLogging',['../classaudio__tools_1_1_audio_logger.html#a34f452e05084a6cff5e25e2d9b455ea4',1,'audio_tools::AudioLogger']]],
-  ['iterator_44',['iterator',['../classaudio__tools_1_1_vector_1_1iterator.html',1,'audio_tools::Vector']]]
+  ['isconnected_43',['isConnected',['../classaudio__tools_1_1_a2_d_p_stream.html#ad41805a13facc9e76779397a966bad15',1,'audio_tools::A2DPStream']]],
+  ['islogging_44',['isLogging',['../classaudio__tools_1_1_audio_logger.html#a34f452e05084a6cff5e25e2d9b455ea4',1,'audio_tools::AudioLogger']]],
+  ['isready_45',['isReady',['../classaudio__tools_1_1_a2_d_p_stream.html#a292e6d8d9c24c205341f4a1ffdaccb1a',1,'audio_tools::A2DPStream']]],
+  ['iterator_46',['iterator',['../classaudio__tools_1_1_vector_1_1iterator.html',1,'audio_tools::Vector']]]
 ];

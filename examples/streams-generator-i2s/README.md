@@ -1,15 +1,16 @@
-# Digital output via I2S to a external DAC
+# I2S Digital Output Test
 
-Sometimes it is quite useful to be able to generate a test tone.
-We can use the GeneratedSoundStream class together with a SoundGenerator class. In my example I use a SineWaveGenerator.
+This is a simple basic test for the I2S output to an external DAC
 
-To test the I2S output I'm using this generated signal and write it to I2S.
-
-For my tests I am using the 24-bit PCM5102 PCM5102A Stereo DAC Digital-to-analog Converter PLL Voice Module pHAT
-![DAC](https://pschatzmann.github.io/arduino-audio-tools/resources/dac.jpeg)
+We just send a generated sine wave and expect to hear a clean signal.
+Please note the log level should be set so that there is no disturbing output!
 
  
 ### External DAC:
+
+For my tests I am using the 24-bit PCM5102 PCM5102A Stereo DAC Digital-to-analog Converter PLL Voice Module pHAT
+
+![DAC](https://pschatzmann.github.io/arduino-audio-tools/resources/dac.jpeg)
 
 I am just using the default pins defined by the framework. However I could change them with the help of the config object. The mute pin can be defined in the constructor of the I2SStream - by not defining anything we use the default which is GPIO23
 
@@ -31,5 +32,3 @@ I am just using the default pins defined by the framework. However I could chang
 - SCK - System clock input (probably SCL on your board).
 - FMT - Audio format selection : I2S (Low) / Left justified (High)
 - XSMT - Soft mute control(1): Soft mute (Low) / soft un-mute (High)
-
-
