@@ -104,7 +104,7 @@ class AnalogConfig {
           break;
 
         default:
-          ESP_LOGE(ADC_TAG, "%s - pin GPIO%d is not supported", __func__,gpio);
+          LOGE( "%s - pin GPIO%d is not supported", __func__,gpio);
       }
     }
 
@@ -136,14 +136,14 @@ class AnalogAudio {
 
     /// Provides the default configuration
     AnalogConfig defaultConfig(RxTxMode mode) {
-        ESP_LOGD(ADC_TAG, "%s", __func__);
+        LOGD( "%s", __func__);
         AnalogConfig config(mode);
         return config;
     }
 
     /// starts the DAC 
     void begin(AnalogConfig cfg) {
-      ESP_LOGI(ADC_TAG, "%s", __func__);
+      LOGI("%s", __func__);
       disableCore0WDT();
 
       adc_config = cfg;
@@ -163,37 +163,37 @@ class AnalogAudio {
 
       // setup config
       if (i2s_driver_install(i2s_num, &i2s_config, 0, NULL)!=ESP_OK){
-        ESP_LOGE(ADC_TAG, "%s - %s", __func__, "i2s_driver_install");
+        LOGE( "%s - %s", __func__, "i2s_driver_install");
       }      
 
       // clear i2s buffer
       if (i2s_zero_dma_buffer(i2s_num)!=ESP_OK) {
-        ESP_LOGE(ADC_TAG, "%s - %s", __func__, "i2s_zero_dma_buffer");
+        LOGE( "%s - %s", __func__, "i2s_zero_dma_buffer");
       }
 
       switch (cfg.mode) {
         case RX_MODE:
           //init ADC pad
           if (i2s_set_adc_mode(cfg.unit, cfg.channel)!=ESP_OK) {
-            ESP_LOGE(ADC_TAG, "%s - %s", __func__, "i2s_driver_install");
+            LOGE( "%s - %s", __func__, "i2s_driver_install");
           }
 
           // enable the ADC
           if (i2s_adc_enable(i2s_num)!=ESP_OK) {
-            ESP_LOGE(ADC_TAG, "%s - %s", __func__, "i2s_adc_enable");
+            LOGE( "%s - %s", __func__, "i2s_adc_enable");
           }
           break;
         case TX_MODE:
           i2s_set_pin(i2s_num, NULL); 
           break;
       }
-      ESP_LOGI(ADC_TAG, "%s - %s", __func__,"end");
+      LOGI(ADC_TAG, "%s - %s", __func__,"end");
 
     }
 
     /// stops the I2C and unistalls the driver
     void end(){
-        ESP_LOGD(ADC_TAG, "%s", __func__);
+        LOGD( "%s", __func__);
         enableCore0WDT();
         i2s_driver_uninstall(i2s_num);    
     }
@@ -202,7 +202,7 @@ class AnalogAudio {
     size_t read(int16_t (*src)[2], size_t sizeFrames){
       size_t len = readBytes(src, sizeFrames * sizeof(int16_t)*2); // 2 bytes * 2 channels     
       size_t result = len / (sizeof(int16_t) * 2); 
-      ESP_LOGD(ADC_TAG, "%s - len: %d -> %d", __func__,sizeFrames, result);
+      LOGD( "%s - len: %d -> %d", __func__,sizeFrames, result);
       return result;
     }
 
@@ -218,7 +218,7 @@ class AnalogAudio {
     size_t writeBytes(const void *src, size_t size_bytes){
       size_t result = 0;            
       if (i2s_write(i2s_num, src, size_bytes, &result, portMAX_DELAY)!=ESP_OK){
-        ESP_LOGE("%s", __func__);
+        LOGE("%s", __func__);
       }
       return result;
     }
@@ -226,9 +226,9 @@ class AnalogAudio {
     size_t readBytes(void *dest, size_t size_bytes){
       size_t result = 0;
       if (i2s_read(i2s_num, dest, size_bytes, &result, portMAX_DELAY)!=ESP_OK){
-        ESP_LOGE("%s", __func__);
+        LOGE("%s", __func__);
       }
-      ESP_LOGD(ADC_TAG, "%s - len: %d -> %d", __func__, size_bytes, result);
+      LOGD( "%s - len: %d -> %d", __func__, size_bytes, result);
       //vTaskDelay(1);
       return result;
     }

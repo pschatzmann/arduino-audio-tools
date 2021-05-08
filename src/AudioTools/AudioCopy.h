@@ -23,7 +23,7 @@ class StreamCopyT {
             this->buffer_size = buffer_size;
             buffer = new uint8_t[buffer_size];
             if (buffer==nullptr){
-                ESP_LOGE("Could not allocate enough memory for StreamCopy: %d bytes", buffer_size);
+                LOGE("Could not allocate enough memory for StreamCopy: %d bytes", buffer_size);
             }
         }
 
@@ -37,7 +37,7 @@ class StreamCopyT {
             size_t delayCount = 0;
             size_t len = available();
             size_t bytes_to_read;
-            ESP_LOGI("StreamCopyT::copy -  begin");
+            LOGI("StreamCopyT::copy -  begin");
 
             if (len>0){
                 bytes_to_read = min(len, static_cast<size_t>(buffer_size));
@@ -46,7 +46,7 @@ class StreamCopyT {
                 size_t bytes_read = from->readBytes(buffer, bytes_to_read);
                 result = write(bytes_read,delayCount);
             } 
-            ESP_LOGI("StreamCopy::copy %u -> %u bytes - in %d hops\n", bytes_to_read, result, delayCount);
+            LOGI("StreamCopy::copy %u -> %u bytes - in %d hops\n", bytes_to_read, result, delayCount);
             return result;
         }
 
@@ -58,7 +58,7 @@ class StreamCopyT {
             size_t bytes_read;
             size_t len = available();
             size_t bytes_to_read;
-            ESP_LOGI("StreamCopyT::copy2 -  begin");
+            LOGI("StreamCopyT::copy2 -  begin");
             
             if (len>0){
                 bytes_to_read = min(len, static_cast<size_t>(buffer_size / 2));
@@ -77,7 +77,7 @@ class StreamCopyT {
                 }
                 result = write(samples * sizeof(T)*2, delayCount);
             } 
-            ESP_LOGI("StreamCopy::copy %u -> %u bytes - in %d hops", bytes_to_read, result, delayCount);
+            LOGI("StreamCopy::copy %u -> %u bytes - in %d hops", bytes_to_read, result, delayCount);
             return result;
         }
 
@@ -130,7 +130,7 @@ class StreamCopy : public StreamCopyT<uint8_t> {
                 write(result, delayCount);
             } 
 
-            ESP_LOGI("StreamCopy::copy %d bytes - in %d hops\n", result, delayCount);
+            LOGI("StreamCopy::copy %d bytes - in %d hops\n", result, delayCount);
             return result;
         }
         
