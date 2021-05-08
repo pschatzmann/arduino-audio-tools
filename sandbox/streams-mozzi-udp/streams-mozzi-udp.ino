@@ -8,8 +8,9 @@
  * 
  */
 #include "AudioTools.h"
-#include "AudioA2DP.h"
+#include "AudioNet.h"
 #include "AudioMozzi.h"
+#include "WiFi.h"
 #include <Oscil.h>
 #include <tables/cos2048_int8.h> // table for Oscils to play
 #include <mozzi_fixmath.h>
@@ -23,7 +24,7 @@ typedef int16_t sound_t;                                  // sound will be repre
 uint8_t channels = 2;                                     // The stream will have 2 channels 
 MozziGenerator mozzi(CONTROL_RATE);                       // subclass of SoundGenerator 
 GeneratedSoundStream<sound_t> in(mozzi, channels);        // Stream generated with mozzi
-A2DPStream out = A2DPStream::instance() ;                 // A2DP output - A2DPStream is a singleton!
+UDPStream out;                                            // UDP Output - A2DPStream is a singleton!
 StreamCopy copier(out, in); // copy in to out
 
 /// Copied from AMsynth.ino
@@ -49,14 +50,22 @@ Q8n0 octave_start_note = 42;
 void setup(){
   Serial.begin(115200);
 
+  // connect to WIFI
+  WiFi.begin("network", "password");
+  while (WiFi.status() != WL_CONNECTED){
+    Serial.print(".");
+    delay(500); 
+  }
+  Serial.println("Connected to WIFI");
+
   if (mozzi.config().sample_rate!=44100){
     Serial.println("Please set the AUDIO_RATE in the mozzi_config.h to 44100");
     stop();
   }
 
-  // We send the test signal via A2DP - so we conect to the MyMusic Bluetooth Speaker
-  out.begin(TX_MODE, "MyMusic");
-  Serial.println("A2DP is connected now...");
+  // We send the sound via UDP (to a broadcast address)
+  IPAddress ip(192, 168, 1, 255);
+  out.begin(ip, 3333);
 
   ratio = float_to_Q8n8(3.0f);   // define modulation ratio in float and convert to fixed-point
   kNoteChangeDelay.set(200); // note duration ms, within resolution of CONTROL_RATE
