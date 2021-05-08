@@ -5,8 +5,10 @@
  * 
  */
 #pragma once
+#include <string.h>
 
 /**
+ * ------------------------------------------------------------------------- 
  * @brief Optional Functionality - comment out if not wanted
  */
 
@@ -19,6 +21,7 @@
 #endif
 
 /**
+ * ------------------------------------------------------------------------- 
  * @brief Common Default Settings that can usually be changed in the API
  */
 #ifndef LED_BUILTIN
@@ -34,15 +37,14 @@
 #define A2DP_BUFFER_SIZE 4096
 #define A2DP_BUFFER_COUNT 8
 #define DEFAUT_ADC_PIN 34
-#define I2S_TAG "I2S"
-#define AUDIO_TAG "AUDIO"
+
 /**
+ * ------------------------------------------------------------------------- 
  * @brief Platform specific Settings
  * 
  */
 #ifdef ESP32
 #include "esp32-hal-log.h"
-#define USE_ESP32_LOGGER
 #define PIN_I2S_BCK 14
 #define PIN_I2S_WS 15
 #define PIN_I2S_DATA_IN 32
@@ -51,13 +53,9 @@
 // Default Setting: The mute pin can be switched off by setting it to -1. Or you could drive the LED by assigning LED_BUILTIN
 #define PIN_I2S_MUTE 23
 #define SOFT_MUTE_VALUE LOW  
-
-
-
 #endif
 
 #ifdef ESP8266
-
 #define PIN_I2S_BCK -1
 #define PIN_I2S_WS -1
 #define PIN_I2S_DATA_IN -1
@@ -65,6 +63,28 @@
 #define I2S_USE_APLL false  
 #define PIN_I2S_MUTE 23
 #define SOFT_MUTE_VALUE LOW  
-
 #endif
 
+/**
+ * ------------------------------------------------------------------------- 
+ * @brief Logging
+ */
+
+// Logging Configuration
+#define USE_LOGGING
+#define LOG_LEVEL  AudioLogger::Info
+#define LOG_STREAM Serial
+
+// Logging Implementation
+#define __FILENAME__ (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
+#ifdef USE_LOGGING
+#define LOGD(...) AudioLogger::instance().printLog(__FILENAME__,__LINE__, AudioLogger::Debug,  __VA_ARGS__)
+#define LOGI(...) AudioLogger::instance().printLog(__FILENAME__,__LINE__, AudioLogger::Info,  __VA_ARGS__)
+#define LOGW(...) AudioLogger::instance().printLog(__FILENAME__,__LINE__, AudioLogger::Warn,  __VA_ARGS__)
+#define LOGE(...) AudioLogger::instance().printLog(__FILENAME__,__LINE__, AudioLogger::Error, __VA_ARGS__)
+#else 
+#define LOGD(...) 
+#define LOGI(...) 
+#define LOGW(...) 
+#define LOGE(...) 
+#endif

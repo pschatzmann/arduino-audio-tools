@@ -25,9 +25,8 @@ class I2SBase {
     void begin(I2SConfig cfg) {
       i2s_set_rate(cfg.sample_rate);
       cfg.bits_per_sample = 16;
-      AudioLogger logger = AudioLogger::instance();
       if(!i2s_rxtx_begin(cfg.rx_tx_mode == RX_MODE, cfg.rx_tx_mode == TX_MODE)){
-          logger.error("i2s_rxtx_begin failed");
+          LOGE("i2s_rxtx_begin failed");
       }
     }
 

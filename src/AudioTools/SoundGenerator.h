@@ -50,33 +50,28 @@ class SoundGenerator  {
                         result = readSamples((T(*)[2]) buffer, lengthBytes / frame_size);
                         break;
                     default:
-                        logger().printf(AudioLogger::Error, "SoundGenerator::readBytes -> number of channels %d is not supported (use 1 or 2)\n", channels);
+                        LOGE( "SoundGenerator::readBytes -> number of channels %d is not supported (use 1 or 2)\n", channels);
                         result = 0;
                         break;
                 }
             } else {
-                logger().debug("SoundGenerator::readBytes -> inactive");
+                LOGD("SoundGenerator::readBytes -> inactive");
                 // when inactive did not generate anything
                 result = 0;
             }
-            logger().printf(AudioLogger::Debug, "SoundGenerator::readBytes (channels: %d) %d -> %d\n",channels, lengthBytes,result);
+            LOGD( "SoundGenerator::readBytes (channels: %d) %d -> %d\n",channels, lengthBytes,result);
             return result * frame_size;
         }
 
         void begin() {
-            logger().info("SoundGenerator::begin");
+            LOGI("SoundGenerator::begin");
             active = true;
         }
 
         /// ends the processing
         void end(){
-            logger().info("SoundGenerator::end");
+            LOGI("SoundGenerator::end");
             active = false;
-        }
-
-        /// provides the logger
-        AudioLogger &logger() {
-            return AudioLogger::instance();
         }
 
         bool isActive() {
@@ -105,7 +100,7 @@ class SineWaveGenerator : public SoundGenerator<T> {
 
         /// Starts the processing by defining the sample rate and frequency
         void begin(uint16_t sample_rate=44100, uint16_t frequency=0){
-            SoundGenerator<T>::logger().info("SineWaveGenerator::begin");
+            LOGI("SineWaveGenerator::begin");
             this->m_frequency = frequency;
             this->m_sample_rate = sample_rate;
             this->m_deltaTime = 1.0 / m_sample_rate;
@@ -137,11 +132,10 @@ class SineWaveGenerator : public SoundGenerator<T> {
         float double_Pi = PI * 2.0;
 
         void logStatus() {
-            AudioLogger &log = SoundGenerator<T>::logger();
-            log.printf(AudioLogger::Info, "frequency: %f", this->m_frequency );
-            log.printf(AudioLogger::Info, "sample rate: %u", this->m_sample_rate );
-            log.printf(AudioLogger::Info, "amplitude: %f", this->m_amplitude );
-            log.printf(AudioLogger::Info, "active: %s", SoundGenerator<T>::active ? "true" : "false" );
+            LOGI( "frequency: %f", this->m_frequency );
+            LOGI( "sample rate: %u", this->m_sample_rate );
+            LOGI( "amplitude: %f", this->m_amplitude );
+            LOGI( "active: %s", SoundGenerator<T>::active ? "true" : "false" );
         }
 
 };
