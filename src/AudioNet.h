@@ -41,7 +41,7 @@ class UDPStream : public WiFiUDP {
     public:
 
         virtual uint8_t begin(IPAddress remote_host, uint16_t remote_port, uint16_t local_port=0, bool multicast = false ) {
-            ESP_LOGI(AUDIO_TAG, "begin");
+            LOGI( "begin");
             this->remote_host = remote_host;
             this->remote_port = remote_port;
             this->local_port = local_port != 0 ? local_port : remote_port;
@@ -61,7 +61,7 @@ class UDPStream : public WiFiUDP {
         }      
 
         virtual size_t write(const uint8_t *buffer, size_t size) {
-            ESP_LOGD(AUDIO_TAG, "write %u bytes", size);
+            LOGD( "write %u bytes", size);
             beginPacket(remote_host, remote_port);
             size_t result = WiFiUDP::write(buffer, size);
             endPacket();

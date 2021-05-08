@@ -60,7 +60,7 @@ int32_t a2dp_stream_source_sound_data(Channels* data, int32_t len) {
     size_t result_len_bytes = a2dp_buffer.readArray((uint8_t*)data, len*sizeof(Channels));
     // result is in number of frames
     result_len = result_len_bytes / sizeof(Channels);
-    ESP_LOGI( "a2dp_stream_source_sound_data %d -> %d", len ,result_len);   
+    LOGI("a2dp_stream_source_sound_data %d -> %d", len ,result_len);   
     // allow some other task 
     yield();
     return result_len;
@@ -70,7 +70,7 @@ int32_t a2dp_stream_source_sound_data(Channels* data, int32_t len) {
 void a2dp_stream_sink_sound_data(const uint8_t* data, uint32_t len) {
     if (is_a2dp_setup){
         uint32_t result_len = a2dp_buffer.writeArray(data, len);
-        ESP_LOGI( "a2dp_stream_sink_sound_data %d -> %d", len, result_len);
+        LOGI("a2dp_stream_sink_sound_data %d -> %d", len, result_len);
         // allow some other task 
         yield();
     }
@@ -170,9 +170,9 @@ class A2DPStream : public Stream {
             size_t result = 0; 
             if (is_a2dp_setup){
                 result = a2dp_buffer.writeArray(data,len);
-                ESP_LOGI( "write %d->%d", len,result);
+                LOGI("write %d->%d", len,result);
             } else {
-                ESP_LOGW( "write failed because !is_a2dp_setup");
+                LOGW( "write failed because !is_a2dp_setup");
             }
             return result;
         }
@@ -193,21 +193,21 @@ class A2DPStream : public Stream {
             size_t result = 0; 
             if (is_a2dp_setup){
                 result = a2dp_buffer.readArray(data, len);
-                ESP_LOGI( "read %d->%d", len,result);
+                LOGI("read %d->%d", len,result);
             } else {
-                ESP_LOGW( "readBytes failed because !is_a2dp_setup");
+                LOGW( "readBytes failed because !is_a2dp_setup");
             }
             return result;
         }
 
         // not supported
         virtual int read() {
-            ESP_LOGE( "read() not supported");
+            LOGE( "read() not supported");
             return -1;
         }
         // not supported
         virtual int peek() {
-            ESP_LOGE( "peek() not supported");
+            LOGE( "peek() not supported");
             return -1;
         }
        
