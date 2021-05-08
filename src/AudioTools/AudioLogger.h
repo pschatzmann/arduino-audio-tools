@@ -3,10 +3,6 @@
 #include "AudioConfig.h"
 #include "Stream.h"
 
-#ifndef SOUND_LOG_LEVEL
-#define SOUND_LOG_LEVEL Error
-#endif
-
 #ifndef PRINTF_BUFFER_SIZE
 #define PRINTF_BUFFER_SIZE 160
 #endif
@@ -35,7 +31,7 @@ class AudioLogger {
 
 
         /// activate the logging
-        void begin(Stream& out, LogLevel level=SOUND_LOG_LEVEL) {
+        void begin(Stream& out, LogLevel level=LOG_LEVEL) {
             this->log_stream_ptr = &out;
             this->log_level = level;
             this->active = true;
@@ -77,33 +73,6 @@ class AudioLogger {
             int len = 0;
             va_list args;
 
-#ifdef USE_ESP32_LOGGER
-            va_start(args,fmt);
-            //Serial.println(serial_printf_buffer);
-            // TODO why is the following not working
-            const char* msg = serial_printf_buffer;
-            esp_log_level_t level;
-            switch(current_level){
-                case Error:
-                    level = ESP_LOG_ERROR;
-                    break;
-                case Info:
-                    level = ESP_LOG_INFO;
-                    break;
-                case Warning:
-                    level = ESP_LOG_WARN;
-                    break;
-                case Debug:
-                    level = ESP_LOG_DEBUG;
-                    break;
-                default:
-                    level = ESP_LOG_DEBUG;
-                    break;
-            }
-            esp_log_writev(level, TAG, fmt, args);
-            va_end(args);   
-
-#else
             if (this->active && log_stream_ptr!=nullptr && current_level >= log_level){
                 char serial_printf_buffer[PRINTF_BUFFER_SIZE] = {0};
                 va_start(args,fmt);
@@ -111,7 +80,26 @@ class AudioLogger {
                 log_stream_ptr->print(serial_printf_buffer);
                 va_end(args);
             }
-#endif
+            return len;
+        }
+
+        int printLog(const char* file, int line, LogLevel current_level, const char* fmt, ...) const {
+            char serial_printf_buffer[PRINTF_BUFFER_SIZE] = {0};
+            int len = 0;
+            va_list args;
+            len+=log_stream_ptr->print(file);
+            len+=log_stream_ptr->print(" ");
+            len+=log_stream_ptr->print(line);
+            len+=log_stream_ptr->print(": ");
+   
+            if (this->active && log_stream_ptr!=nullptr && current_level >= log_level){
+                char serial_printf_buffer[PRINTF_BUFFER_SIZE] = {0};
+                va_start(args,fmt);
+                len += vsnprintf(serial_printf_buffer,PRINTF_BUFFER_SIZE, fmt, args);
+                log_stream_ptr->print(serial_printf_buffer);
+                va_end(args);
+            }
+            len += log_stream_ptr->println();
             return len;
         }
 
@@ -126,10 +114,10 @@ class AudioLogger {
 
 
     protected:
-        Stream *log_stream_ptr = nullptr;
+        Stream *log_stream_ptr = &LOG_STREAM;
         const char* TAG = "AudioTools";
-        LogLevel log_level = Error;
-        bool active = false;  
+        LogLevel log_level = LOG_LEVEL;
+        bool active = true;  
 
         AudioLogger(){
         }

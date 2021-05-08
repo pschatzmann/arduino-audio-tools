@@ -11,8 +11,6 @@
 
 namespace audio_tools {
 
-const AudioLogger &log = AudioLogger::instance();
-
 /**
  * @brief A simple Stream implementation which is backed by allocated memory
  * @author Phil Schatzmann
@@ -177,7 +175,7 @@ class GeneratedSoundStream : public Stream {
         uint8_t channels; 
 
         int not_supported() {
-            log.error("GeneratedSoundStream-unsupported operation!");
+            LOGE("GeneratedSoundStream-unsupported operation!");
             return 0;
         } 
 
@@ -422,7 +420,7 @@ class UrlStream : public Stream {
             int result = -1;
             config.url = url;
             config.method = HTTP_METHOD_GET;
-            Logger.printf(AudioLogger::Info, "UrlStream.begin %s\n",url);
+            LOGI( "UrlStream.begin %s\n",url);
 
             // cleanup last begin if necessary
             if (client==nullptr){
@@ -433,23 +431,23 @@ class UrlStream : public Stream {
 
             client = esp_http_client_init(&config);
             if (client==nullptr){
-                Logger.error("esp_http_client_init failed");
+                LOGE("esp_http_client_init failed");
                 return -1;
             }
 
             int write_buffer_len = 0;
             result = esp_http_client_open(client, write_buffer_len);
             if (result != ESP_OK) {
-                Logger.error("http_client_open failed");
+                LOGE("http_client_open failed");
                 return result;
             }
             size = esp_http_client_fetch_headers(client);
             if (size<=0) {
-                Logger.error("esp_http_client_fetch_headers failed");
+                LOGE("esp_http_client_fetch_headers failed");
                 return result;
             }
 
-            Logger.printf(AudioLogger::Info, "Status = %d, content_length = %d",
+            LOGI( "Status = %d, content_length = %d",
                     esp_http_client_get_status_code(client),
                     esp_http_client_get_content_length(client));
         
@@ -481,7 +479,7 @@ class UrlStream : public Stream {
         }
 
         size_t write(uint8_t) {
-            Logger.error("UrlStream write - not supported");
+            LOGE("UrlStream write - not supported");
         }
 
         void end(){
@@ -500,7 +498,6 @@ class UrlStream : public Stream {
         uint16_t read_buffer_size;
         uint16_t read_pos;
         uint16_t read_size;
-        const AudioLogger &Logger = AudioLogger::instance();
 
         inline void fillBuffer() {
             if (isEOS()){

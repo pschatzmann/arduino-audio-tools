@@ -218,7 +218,7 @@ class AnalogAudio {
     size_t writeBytes(const void *src, size_t size_bytes){
       size_t result = 0;            
       if (i2s_write(i2s_num, src, size_bytes, &result, portMAX_DELAY)!=ESP_OK){
-        ESP_LOGE(I2S_TAG, "%s", __func__);
+        ESP_LOGE("%s", __func__);
       }
       return result;
     }
@@ -226,7 +226,7 @@ class AnalogAudio {
     size_t readBytes(void *dest, size_t size_bytes){
       size_t result = 0;
       if (i2s_read(i2s_num, dest, size_bytes, &result, portMAX_DELAY)!=ESP_OK){
-        ESP_LOGE(I2S_TAG, "%s", __func__);
+        ESP_LOGE("%s", __func__);
       }
       ESP_LOGD(ADC_TAG, "%s - len: %d -> %d", __func__, size_bytes, result);
       //vTaskDelay(1);

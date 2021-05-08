@@ -8,8 +8,6 @@
 
 namespace audio_tools {
 
-const AudioLogger& WAVLogger = AudioLogger::instance();
-
 /**
  * @brief Sound information which is available in the WAV header
  * @author Phil Schatzmann
@@ -42,7 +40,7 @@ class WAVHeader  {
         };
 
         void begin(uint8_t* buffer, size_t len){
-            WAVLogger.printf(AudioLogger::Info,"WAVHeader len: ", len);
+            LOGII("WAVHeader len: ", len);
 
             this->buffer = buffer;
             this->len = len;
@@ -204,11 +202,11 @@ class WAVHeader  {
         }
 
         void logInfo(){
-            WAVLogger.printf(AudioLogger::Info,"WAVHeader sound_pos: ", sound_pos);
-            WAVLogger.printf(AudioLogger::Info,"WAVHeader channels: ", headerInfo.channels);
-            WAVLogger.printf(AudioLogger::Info,"WAVHeader bits_per_sample: ", headerInfo.bits_per_sample);
-            WAVLogger.printf(AudioLogger::Info,"WAVHeader sample_rate: ", headerInfo.sample_rate);
-            WAVLogger.printf(AudioLogger::Info,"WAVHeader format: ", headerInfo.format);
+            LOGII("WAVHeader sound_pos: ", sound_pos);
+            LOGII("WAVHeader channels: ", headerInfo.channels);
+            LOGII("WAVHeader bits_per_sample: ", headerInfo.bits_per_sample);
+            LOGII("WAVHeader sample_rate: ", headerInfo.sample_rate);
+            LOGII("WAVHeader format: ", headerInfo.format);
         }
 
 };
@@ -247,16 +245,16 @@ class WAVDecoder {
                     isFirst = false;
                     isValid = header.audioInfo().is_valid;
 
-                    WAVLogger.printf(AudioLogger::Info,"WAV sample_rate: ", header.audioInfo().sample_rate);
-                    WAVLogger.printf(AudioLogger::Info,"WAV data_length: ", header.audioInfo().data_length);
-                    WAVLogger.printf(AudioLogger::Info,"WAV is_streamed: ", header.audioInfo().is_streamed);
-                    WAVLogger.printf(AudioLogger::Info,"WAVis_valid: ", header.audioInfo().is_valid);
+                    LOGII("WAV sample_rate: ", header.audioInfo().sample_rate);
+                    LOGII("WAV data_length: ", header.audioInfo().data_length);
+                    LOGII("WAV is_streamed: ", header.audioInfo().is_streamed);
+                    LOGII("WAVis_valid: ", header.audioInfo().is_valid);
                     
                     // check format
                     int format = header.audioInfo().format;
                     isValid = format == WAV_FORMAT_PCM;
                     if (format != WAV_FORMAT_PCM){
-                        WAVLogger.printf(AudioLogger::Error,"WAV format not supported: ", format);
+                        LOGE("WAV format not supported: %d", format);
                         isValid = false;
                     } else {
                         // update sampling rate if the target supports it
@@ -266,11 +264,11 @@ class WAVDecoder {
                         bi.bits_per_sample = header.audioInfo().bits_per_sample;
                         // we provide some functionality so that we could check if the destination supports the requested format
                         isValid = audioBaseInfoSupport.validate(bi);
-                        WAVLogger.printf(AudioLogger::Error,"isValid: ", isValid ? "true":"false");
+                        LOGE("isValid: %s", isValid ? "true":"false");
                         if (isValid){
                             audioBaseInfoSupport->setAudioBaseInfo(bi);
                             // write prm data from first record
-                            WAVLogger.printf(AudioLogger::Info,"WAVDecoder writing first sound data");
+                            LOGII("WAVDecoder writing first sound data");
                             out->write(sound_ptr, len);
                         }
                     }

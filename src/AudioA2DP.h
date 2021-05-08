@@ -18,8 +18,6 @@
 
 namespace audio_tools {
 
-AudioLogger &log_a2dp = AudioLogger::instance();
-
 /**
  * @brief Covnerts the data from T src[][2] to a Channels array 
  * @author Phil Schatzmann
@@ -62,7 +60,7 @@ int32_t a2dp_stream_source_sound_data(Channels* data, int32_t len) {
     size_t result_len_bytes = a2dp_buffer.readArray((uint8_t*)data, len*sizeof(Channels));
     // result is in number of frames
     result_len = result_len_bytes / sizeof(Channels);
-    ESP_LOGI(AUDIO_TAG, "a2dp_stream_source_sound_data %d -> %d", len ,result_len);   
+    ESP_LOGI( "a2dp_stream_source_sound_data %d -> %d", len ,result_len);   
     // allow some other task 
     yield();
     return result_len;
@@ -72,7 +70,7 @@ int32_t a2dp_stream_source_sound_data(Channels* data, int32_t len) {
 void a2dp_stream_sink_sound_data(const uint8_t* data, uint32_t len) {
     if (is_a2dp_setup){
         uint32_t result_len = a2dp_buffer.writeArray(data, len);
-        ESP_LOGI(AUDIO_TAG, "a2dp_stream_sink_sound_data %d -> %d", len, result_len);
+        ESP_LOGI( "a2dp_stream_sink_sound_data %d -> %d", len, result_len);
         // allow some other task 
         yield();
     }
@@ -125,26 +123,26 @@ class A2DPStream : public Stream {
 
            switch (mode){
                 case TX_MODE:
-                    log_a2dp.info("Starting a2dp_source...");
+                    LOGI("Starting a2dp_source...");
                     source(); // allocate object
                     a2dp_source->start(name, a2dp_stream_source_sound_data);  
                     while(!a2dp_source->isConnected()){
                         yield();
                     }
-                    log_a2dp.info("a2dp_source is connected...");
+                    LOGI("a2dp_source is connected...");
                     //is_a2dp_setup done in callback
                     //is_a2dp_setup = true;
                     break;
 
                 case RX_MODE:
-                    log_a2dp.info("Starting a2dp_sink...");
+                    LOGI("Starting a2dp_sink...");
                     sink(); // allocate object
                     a2dp_sink->set_stream_reader(&a2dp_stream_sink_sound_data, false);
                     a2dp_sink->start(name);
                     while(!a2dp_sink->isConnected()){
                         yield();
                     }
-                    log_a2dp.info("a2dp_sink is connected...");
+                    LOGI("a2dp_sink is connected...");
                     is_a2dp_setup = true;
                     break;
             }
@@ -172,9 +170,9 @@ class A2DPStream : public Stream {
             size_t result = 0; 
             if (is_a2dp_setup){
                 result = a2dp_buffer.writeArray(data,len);
-                ESP_LOGI(AUDIO_TAG, "write %d->%d", len,result);
+                ESP_LOGI( "write %d->%d", len,result);
             } else {
-                ESP_LOGW(AUDIO_TAG, "write failed because !is_a2dp_setup");
+                ESP_LOGW( "write failed because !is_a2dp_setup");
             }
             return result;
         }
@@ -195,21 +193,21 @@ class A2DPStream : public Stream {
             size_t result = 0; 
             if (is_a2dp_setup){
                 result = a2dp_buffer.readArray(data, len);
-                ESP_LOGI(AUDIO_TAG, "read %d->%d", len,result);
+                ESP_LOGI( "read %d->%d", len,result);
             } else {
-                ESP_LOGW(AUDIO_TAG, "readBytes failed because !is_a2dp_setup");
+                ESP_LOGW( "readBytes failed because !is_a2dp_setup");
             }
             return result;
         }
 
         // not supported
         virtual int read() {
-            ESP_LOGE(AUDIO_TAG, "read() not supported");
+            ESP_LOGE( "read() not supported");
             return -1;
         }
         // not supported
         virtual int peek() {
-            ESP_LOGE(AUDIO_TAG, "peek() not supported");
+            ESP_LOGE( "peek() not supported");
             return -1;
         }
        
@@ -228,7 +226,7 @@ class A2DPStream : public Stream {
         char* name = nullptr;
 
         A2DPStream() {
-            log_a2dp.info("A2DPStream");
+            LOGI("A2DPStream");
         }
 
 };

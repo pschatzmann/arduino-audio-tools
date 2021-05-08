@@ -9,8 +9,6 @@
 
 namespace audio_tools {
 
-AudioLogger stream_log = AudioLogger::instance();
-
 /**
  * @brief Typed Stream Copy which supports the conversion from channel to 2 channels. We make sure that we
  * allways copy full samples
@@ -25,7 +23,7 @@ class StreamCopyT {
             this->buffer_size = buffer_size;
             buffer = new uint8_t[buffer_size];
             if (buffer==nullptr){
-                ESP_LOGE(AUDIO_TAG, "Could not allocate enough memory for StreamCopy: %d bytes", buffer_size);
+                ESP_LOGE("Could not allocate enough memory for StreamCopy: %d bytes", buffer_size);
             }
         }
 
@@ -39,7 +37,7 @@ class StreamCopyT {
             size_t delayCount = 0;
             size_t len = available();
             size_t bytes_to_read;
-            ESP_LOGI(AUDIO_TAG, "StreamCopyT::copy -  begin");
+            ESP_LOGI("StreamCopyT::copy -  begin");
 
             if (len>0){
                 bytes_to_read = min(len, static_cast<size_t>(buffer_size));
@@ -48,7 +46,7 @@ class StreamCopyT {
                 size_t bytes_read = from->readBytes(buffer, bytes_to_read);
                 result = write(bytes_read,delayCount);
             } 
-            ESP_LOGI(AUDIO_TAG, "StreamCopy::copy %u -> %u bytes - in %d hops\n", bytes_to_read, result, delayCount);
+            ESP_LOGI("StreamCopy::copy %u -> %u bytes - in %d hops\n", bytes_to_read, result, delayCount);
             return result;
         }
 
@@ -60,7 +58,7 @@ class StreamCopyT {
             size_t bytes_read;
             size_t len = available();
             size_t bytes_to_read;
-            ESP_LOGI(AUDIO_TAG, "StreamCopyT::copy2 -  begin");
+            ESP_LOGI("StreamCopyT::copy2 -  begin");
             
             if (len>0){
                 bytes_to_read = min(len, static_cast<size_t>(buffer_size / 2));
@@ -79,7 +77,7 @@ class StreamCopyT {
                 }
                 result = write(samples * sizeof(T)*2, delayCount);
             } 
-            ESP_LOGI(AUDIO_TAG, "StreamCopy::copy %u -> %u bytes - in %d hops", bytes_to_read, result, delayCount);
+            ESP_LOGI("StreamCopy::copy %u -> %u bytes - in %d hops", bytes_to_read, result, delayCount);
             return result;
         }
 
@@ -132,7 +130,7 @@ class StreamCopy : public StreamCopyT<uint8_t> {
                 write(result, delayCount);
             } 
 
-            ESP_LOGI(AUDIO_TAG, "StreamCopy::copy %d bytes - in %d hops\n", result, delayCount);
+            ESP_LOGI("StreamCopy::copy %d bytes - in %d hops\n", result, delayCount);
             return result;
         }
         
