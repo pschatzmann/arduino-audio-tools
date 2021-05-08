@@ -87,7 +87,7 @@ $(function() {
 <li>Generated Sound – <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_generated_sound_stream.html">GeneratedSoundStream</a></li>
 <li>Mobile Phone A2DP Bluetooth – <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_a2_d_p_stream.html">A2DPStream</a></li>
 <li>Binary Data in Flash Memory – <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_memory_stream.html">MemoryStream</a></li>
-<li>SD Files</li>
+<li>Any other Arduino Classes implementing Streams: SD, Ethernet etc</li>
 </ul>
 <p>As “Audio Sinks” we will have e.g:</p>
 <ul>
@@ -95,7 +95,7 @@ $(function() {
 <li>an Amplifier – <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_analog_audio_stream.html">AnalogAudioStream</a></li>
 <li>Bluetooth Speakers – <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_a2_d_p_stream.html">A2DPStream</a></li>
 <li>Serial to display the data as CSV – <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_csv_stream.html">CsvStream</a></li>
-<li>SD Files</li>
+<li>Any other Arduino Classes implementing Streams: SD, Ethernet etc</li>
 </ul>
 <p>Here is an simple example which streams a file from the Flash Memory and writes it to I2S:</p>
 <div class="fragment"><div class="line">#include &quot;AudioTools.h&quot;</div>
@@ -145,31 +145,32 @@ Stream API</h3>
 </ul>
 <p>And some more useful examples:</p>
 <ul>
-<li><a href="examples/streams-memory_raw-i2s_external_dac">streams-memory_raw-i2s</a> - Play music form Flash Memory via I2S to External DAC</li>
+<li><a href="examples/streams-memory_raw-i2s">streams-memory_raw-i2s</a> - Play music form Flash Memory via I2S to External DAC</li>
 <li><a href="/examples/streams-url_raw-serial">streams-url_raw-serial</a> Displaying a music file from the internet on the Serial Plotter</li>
-<li><a href="/examples/streams-url_raw-I2S_external_dac.ino">streams-url_raw-I2S_external_dac.ino</a> Streaming a File from the Internet to on external DAC via I2S</li>
+<li><a href="/examples/streams-url_raw-i2s">streams-url_raw-I2S.ino</a> Streaming a File from the Internet to on external DAC via I2S</li>
 <li><a href="/examples/streams-mozzi-a2dp">streams-mozzi-a2dp</a> Use Mozzi to generate Sound to be sent to a Bluetooth Speaker</li>
 </ul>
 <p>... these are just a few examples, but you can combine any Input <a class="el" href="class_stream.html">Stream</a> with any Output <a class="el" href="class_stream.html">Stream</a> as you like...</p>
 <h3><a class="anchor" id="autotoc_md3"></a>
 Basic API</h3>
 <ul>
-<li><a href="examples/base-adc-serial">base-adc-serial</a> - Sample analog sound and write it to Serial</li>
-<li><a href="examples/base-adc-a2dp">base-adc-a2dp</a> - Sample analog sound and write it to a A2DP Bluetooth source</li>
-<li><a href="examples/base-file_raw-serial">base-file_raw-serial</a> - Read Raw File from SD card to and write it to Serial</li>
-<li><a href="examples/base-file_raw-a2dp">base-file_raw-a2dp</a> - Read Raw File from SD card write it A2DP Bluetooth</li>
-<li><a href="examples/base-file_mp3-a2dp">base-file_mp3-a2dp</a> - <a class="el" href="class_stream.html">Stream</a> MP3 File from SD card to A2DP Bluetooth using the ESP8266Audio library</li>
-<li><a href="examples/base-i2s-serial">base-i2s-serial</a> - Sample digital sound and write it to Serial</li>
-<li><a href="examples/base-i2s-a2dp">base-i2s-a2dp</a> - Sample analog sound and write it to a A2DP Bluetooth source</li>
+<li><a href="basic-api/base-adc-serial">base-adc-serial</a> - Sample analog sound and write it to Serial</li>
+<li><a href="basic-api/base-adc-a2dp">base-adc-a2dp</a> - Sample analog sound and write it to a A2DP Bluetooth source</li>
+<li><a href="basic-api/base-file_raw-serial">base-file_raw-serial</a> - Read Raw File from SD card to and write it to Serial</li>
+<li><a href="basic-api/base-file_raw-a2dp">base-file_raw-a2dp</a> - Read Raw File from SD card write it A2DP Bluetooth</li>
+<li><a href="basic-api/base-file_mp3-a2dp">base-file_mp3-a2dp</a> - <a class="el" href="class_stream.html">Stream</a> MP3 File from SD card to A2DP Bluetooth using the ESP8266Audio library</li>
+<li><a href="basic-api/base-i2s-serial">base-i2s-serial</a> - Sample digital sound and write it to Serial</li>
+<li><a href="basic-api/base-i2s-a2dp">base-i2s-a2dp</a> - Sample analog sound and write it to a A2DP Bluetooth source</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md4"></a>
 Optional Libraries</h1>
 <p>Dependent on the example you might need to install some of the following libraries:</p>
 <ul>
 <li><a href="https://github.com/pschatzmann/ESP32-A2DP">ESP32-A2DP Library</a> to support A2DP Bluetooth Audio</li>
-<li>[ESP8266Audio]( ) to play different audio Formats</li>
+<li><a href="https://github.com/earlephilhower/ESP8266Audio">ESP8266Audio</a> to play different audio Formats</li>
 <li><a href="https://www.arduino.cc/en/reference/SD">SD Library</a> to read and write files.</li>
 <li><a href="https://github.com/pschatzmann/arduino-fdk-aac">arduino-fdk-aac</a> to encode or decode AAC</li>
+<li><a href="https://github.com/pschatzmann/Mozzi">Mozzi</a> A sound synthesis library for Arduino</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md5"></a>
 Installation</h1>
