@@ -1,6 +1,6 @@
 # Using Mozzi on Bluetooth
 
-I am providing a simple integration for [Mozzi](https://sensorium.github.io/Mozzi/).  Unfortunatly I needed to make some small changes to make things work together. Those can be found in my [fork](https://github.com/pschatzmann/Mozzi).
+I am providing a simple integration for [Mozzi](https://sensorium.github.io/Mozzi/).  
 
 A standard Sketch will need to combine the Audio-Tools with the Mozzi Logic:
 
@@ -70,5 +70,15 @@ void loop() {
 }
 ```
 
-That's all to output the generated sound to a Bluetooth Speaker...
 
+### Mozzi Configuration 
+
+A2DP requires an audio rate of 44100. Therefore you need to make sure that you have the following settings in your ```mozzi_config.h```:
+
+```
+#define AUDIO_RATE 44100
+#define MICROS_PER_AUDIO_TICK 1000000 / AUDIO_RATE 
+```
+
+
+That's all to output the generated sound to a Bluetooth Speaker...
