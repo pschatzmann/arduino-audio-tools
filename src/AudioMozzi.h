@@ -5,13 +5,10 @@
 #include "mozzi_analog.h"
 #include "MozziGuts.h"
 
-unsigned long total_tick_count = 0;
-
-unsigned long audioTicks() {
-    return total_tick_count;
-}
+extern uint64_t samples_written_to_buffer;
 
 namespace audio_tools {
+
 
 /**
  * @brief Support for  https://sensorium.github.io/Mozzi/ 
@@ -49,7 +46,7 @@ class MozziGenerator : public SoundGenerator<int16_t> {
                 ::updateControl();
             }
             int result = (int) ::updateAudio();
-            total_tick_count++;
+            samples_written_to_buffer++;
             return result;
         }
 
