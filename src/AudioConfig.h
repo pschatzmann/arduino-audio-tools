@@ -76,12 +76,11 @@
 #define LOG_STREAM Serial
 
 // Logging Implementation
-#define __FILENAME__ (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
 #ifdef USE_LOGGING
-#define LOGD(...) AudioLogger::instance().printLog(__FILENAME__,__LINE__, AudioLogger::Debug,  __VA_ARGS__)
-#define LOGI(...) AudioLogger::instance().printLog(__FILENAME__,__LINE__, AudioLogger::Info,  __VA_ARGS__)
-#define LOGW(...) AudioLogger::instance().printLog(__FILENAME__,__LINE__, AudioLogger::Warning,  __VA_ARGS__)
-#define LOGE(...) AudioLogger::instance().printLog(__FILENAME__,__LINE__, AudioLogger::Error, __VA_ARGS__)
+#define LOGD(...) AudioLogger::instance().printLog(__FILE__,__LINE__, AudioLogger::Debug,  __VA_ARGS__)
+#define LOGI(...) AudioLogger::instance().printLog(__FILE__,__LINE__, AudioLogger::Info,  __VA_ARGS__)
+#define LOGW(...) AudioLogger::instance().printLog(__FILE__,__LINE__, AudioLogger::Warning,  __VA_ARGS__)
+#define LOGE(...) AudioLogger::instance().printLog(__FILE__,__LINE__, AudioLogger::Error, __VA_ARGS__)
 #else 
 #define LOGD(...) 
 #define LOGI(...) 

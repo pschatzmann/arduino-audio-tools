@@ -86,21 +86,19 @@ class AudioLogger {
         int printLog(const char* file, int line, LogLevel current_level, const char* fmt, ...) const {
             char serial_printf_buffer[PRINTF_BUFFER_SIZE] = {0};
             int len = 0;
-            va_list args;
    
             if (this->active && log_stream_ptr!=nullptr && current_level >= log_level){
-
-                len+=log_stream_ptr->print(file);
-                len+=log_stream_ptr->print(" ");
-                len+=log_stream_ptr->print(line);
-                len+=log_stream_ptr->print(": ");
-
+                // content
                 char serial_printf_buffer[PRINTF_BUFFER_SIZE] = {0};
+                // prefix
+                len += printPrefix(file, line, current_level);
+
+                va_list args;
                 va_start(args,fmt);
                 len += vsnprintf(serial_printf_buffer,PRINTF_BUFFER_SIZE, fmt, args);
                 log_stream_ptr->print(serial_printf_buffer);
                 va_end(args);
-    
+                // newline
                 len += log_stream_ptr->println();
             }
             return len;
@@ -123,6 +121,33 @@ class AudioLogger {
         bool active = true;  
 
         AudioLogger(){
+        }
+
+        const char* levelName(LogLevel level) const {
+            switch(level){
+                case Debug:
+                    return "D";
+                case Info:
+                    return "I";
+                case Warning:
+                    return "W";
+                case Error:
+                    return "E";
+            }
+            return "";
+        }
+
+        int printPrefix(const char* file, int line, LogLevel current_level) const {
+            const char* file_name = strrchr(file, '/') ? strrchr(file, '/') + 1 : file;
+            const char* level_code = levelName(current_level);
+            int len = log_stream_ptr->print("[");
+            len += log_stream_ptr->print(level_code);
+            len += log_stream_ptr->print("] ");
+            len += log_stream_ptr->print(file_name);
+            len += log_stream_ptr->print(" : ");
+            len += log_stream_ptr->print(line);
+            len += log_stream_ptr->print(" - ");
+            return len;
         }
 
 };
