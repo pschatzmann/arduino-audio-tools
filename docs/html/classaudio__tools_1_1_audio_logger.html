@@ -93,10 +93,10 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:af04cd66822c113bacd6f726ba2a78aad"><td class="memItemLeft" align="right" valign="top"><a id="af04cd66822c113bacd6f726ba2a78aad"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_logger.html#af04cd66822c113bacd6f726ba2a78aad">begin</a> (<a class="el" href="class_stream.html">Stream</a> &amp;out, <a class="el" href="classaudio__tools_1_1_audio_logger.html#a514bd8ffbf484d01cb439a4c82c305e0">LogLevel</a> level=SOUND_LOG_LEVEL)</td></tr>
-<tr class="memdesc:af04cd66822c113bacd6f726ba2a78aad"><td class="mdescLeft">&#160;</td><td class="mdescRight">activate the logging <br /></td></tr>
-<tr class="separator:af04cd66822c113bacd6f726ba2a78aad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0ec04aa634aa6c974e1ecc7fb27d878"><td class="memItemLeft" align="right" valign="top"><a id="ac0ec04aa634aa6c974e1ecc7fb27d878"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_logger.html#ac0ec04aa634aa6c974e1ecc7fb27d878">begin</a> (<a class="el" href="class_stream.html">Stream</a> &amp;out, <a class="el" href="classaudio__tools_1_1_audio_logger.html#a514bd8ffbf484d01cb439a4c82c305e0">LogLevel</a> level=LOG_LEVEL)</td></tr>
+<tr class="memdesc:ac0ec04aa634aa6c974e1ecc7fb27d878"><td class="mdescLeft">&#160;</td><td class="mdescRight">activate the logging <br /></td></tr>
+<tr class="separator:ac0ec04aa634aa6c974e1ecc7fb27d878"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44c6693a929b8c1305d9587afedbf8fc"><td class="memItemLeft" align="right" valign="top"><a id="a44c6693a929b8c1305d9587afedbf8fc"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_logger.html#a44c6693a929b8c1305d9587afedbf8fc">debug</a> (const char *str) const</td></tr>
 <tr class="memdesc:a44c6693a929b8c1305d9587afedbf8fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes an debug message <br  />
@@ -123,6 +123,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_logger.html#a1f1dec67021e89cfbd1746c123c6fcdd">printf</a> (<a class="el" href="classaudio__tools_1_1_audio_logger.html#a514bd8ffbf484d01cb439a4c82c305e0">LogLevel</a> current_level, const char *fmt,...) const</td></tr>
 <tr class="memdesc:a1f1dec67021e89cfbd1746c123c6fcdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">printf support <br /></td></tr>
 <tr class="separator:a1f1dec67021e89cfbd1746c123c6fcdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac57112f7d09f7ad87cffddd61a77653b"><td class="memItemLeft" align="right" valign="top"><a id="ac57112f7d09f7ad87cffddd61a77653b"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>printLog</b> (const char *file, int line, <a class="el" href="classaudio__tools_1_1_audio_logger.html#a514bd8ffbf484d01cb439a4c82c305e0">LogLevel</a> current_level, const char *fmt,...) const</td></tr>
+<tr class="separator:ac57112f7d09f7ad87cffddd61a77653b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aabd4790239aeb990b074ec028376f7df"><td class="memItemLeft" align="right" valign="top"><a id="aabd4790239aeb990b074ec028376f7df"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_logger.html#aabd4790239aeb990b074ec028376f7df">warning</a> (const char *str) const</td></tr>
 <tr class="memdesc:aabd4790239aeb990b074ec028376f7df"><td class="mdescLeft">&#160;</td><td class="mdescRight">logs an warning <br  />
@@ -139,13 +142,13 @@ static <a class="el" href="classaudio__tools_1_1_audio_logger.html">AudioLogger<
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a3d888722c4d348128b8e82fdb48b1acd"><td class="memItemLeft" align="right" valign="top"><a id="a3d888722c4d348128b8e82fdb48b1acd"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>active</b> = false</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>active</b> = true</td></tr>
 <tr class="separator:a3d888722c4d348128b8e82fdb48b1acd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab511c5f5f7bd3c8e4575972bb9e21999"><td class="memItemLeft" align="right" valign="top"><a id="ab511c5f5f7bd3c8e4575972bb9e21999"></a>
-<a class="el" href="classaudio__tools_1_1_audio_logger.html#a514bd8ffbf484d01cb439a4c82c305e0">LogLevel</a>&#160;</td><td class="memItemRight" valign="bottom"><b>log_level</b> = Error</td></tr>
+<a class="el" href="classaudio__tools_1_1_audio_logger.html#a514bd8ffbf484d01cb439a4c82c305e0">LogLevel</a>&#160;</td><td class="memItemRight" valign="bottom"><b>log_level</b> = LOG_LEVEL</td></tr>
 <tr class="separator:ab511c5f5f7bd3c8e4575972bb9e21999"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad0d86c0403d79943b1924c052e8976ce"><td class="memItemLeft" align="right" valign="top"><a id="ad0d86c0403d79943b1924c052e8976ce"></a>
-<a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>log_stream_ptr</b> = nullptr</td></tr>
+<a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>log_stream_ptr</b> = &amp;LOG_STREAM</td></tr>
 <tr class="separator:ad0d86c0403d79943b1924c052e8976ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ea3a8515687c75b4b0a77b2a4bef521"><td class="memItemLeft" align="right" valign="top"><a id="a6ea3a8515687c75b4b0a77b2a4bef521"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><b>TAG</b> = &quot;AudioTools&quot;</td></tr>

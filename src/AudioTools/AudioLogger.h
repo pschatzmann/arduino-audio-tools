@@ -87,19 +87,22 @@ class AudioLogger {
             char serial_printf_buffer[PRINTF_BUFFER_SIZE] = {0};
             int len = 0;
             va_list args;
-            len+=log_stream_ptr->print(file);
-            len+=log_stream_ptr->print(" ");
-            len+=log_stream_ptr->print(line);
-            len+=log_stream_ptr->print(": ");
    
             if (this->active && log_stream_ptr!=nullptr && current_level >= log_level){
+
+                len+=log_stream_ptr->print(file);
+                len+=log_stream_ptr->print(" ");
+                len+=log_stream_ptr->print(line);
+                len+=log_stream_ptr->print(": ");
+
                 char serial_printf_buffer[PRINTF_BUFFER_SIZE] = {0};
                 va_start(args,fmt);
                 len += vsnprintf(serial_printf_buffer,PRINTF_BUFFER_SIZE, fmt, args);
                 log_stream_ptr->print(serial_printf_buffer);
                 va_end(args);
+    
+                len += log_stream_ptr->println();
             }
-            len += log_stream_ptr->println();
             return len;
         }
 

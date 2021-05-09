@@ -72,7 +72,7 @@
 
 // Logging Configuration
 #define USE_LOGGING
-#define LOG_LEVEL  AudioLogger::Info
+#define LOG_LEVEL  AudioLogger::Warning
 #define LOG_STREAM Serial
 
 // Logging Implementation
