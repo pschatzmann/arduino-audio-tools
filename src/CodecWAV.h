@@ -1,8 +1,6 @@
 #pragma once
 
-#include "Arduino.h"
 #include "AudioTools.h"
-#include "AudioWAV.h"
 
 #define WAV_FORMAT_PCM 0x0001
 #define TAG(a, b, c, d) (((a) << 24) | ((b) << 16) | ((c) << 8) | (d))
@@ -303,6 +301,10 @@ class WAVDecoder : public AudioWriter {
                 }
             }
             return result;
+        }
+
+        virtual operator boolean() {
+            return active;
         }
 
     protected:
