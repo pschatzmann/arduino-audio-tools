@@ -151,7 +151,7 @@ This is currently work in progress:
 | I2S                    | tested  |
 | Files (RAW, MP3...)    | tested  |
 | Streams                | tested  |
-| WAV encoding/deconding | tested    |          
+| WAV encoding/deconding | tested  |          
 | AAC encoding/deconding | open    |          
 | int24_t                | tested  |           
 

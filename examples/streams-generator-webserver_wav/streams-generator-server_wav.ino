@@ -3,11 +3,13 @@
 
 using namespace audio_tools;
 
+// WIFI
 const char *ssid = "ssid";
 const char *password = "password";
 WiFiServer server(80);
 WiFiClient client;
 
+// Sound Generation
 const int sample_rate = 10000;
 const int data_length = 100000;
 const int channels = 1;
@@ -18,14 +20,13 @@ StreamCopy copier;                                        // buffered copy
 WAVEncoder encoder;
 AudioOutputStream wav_stream(encoder); // WAV output stream
 
-void setup()
-{
+
+void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial,AudioLogger::Debug);
 
   WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED)
-  {
+  while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
   }
@@ -35,13 +36,15 @@ void setup()
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
 
+  // start server
   server.begin();
-  sineWave.begin(sample_rate, B4);
 
+  // start generation of sound
+  sineWave.begin(sample_rate, B4);
   in.begin();
 }
 
-
+// Handle an new client connection and return the data
 void processClient() {
   if (client)  { // if you get a client,
     Serial.println("New Client."); // print a message out the serial port
@@ -86,6 +89,7 @@ void processClient() {
   }  
 }
 
+// copy the data
 void loop() {
   if (!client.connected()) {
     client = server.available(); // listen for incoming clients
@@ -94,6 +98,7 @@ void loop() {
     // We are connected: copy input from source to wav output
     if (encoder){
       copier.copy();
+      // if we limit the size of the WAV the encoder gets automatically closed when all has been sent
       if (!encoder) {
         Serial.println("stop client...");
         client.stop();
