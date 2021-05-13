@@ -1,0 +1,18 @@
+{
+    "files.associations": {
+        "ostream": "cpp",
+        "cullsettings": "cpp",
+        "types": "cpp",
+        "*.tcc": "cpp",
+        "functional": "cpp",
+        "string_view": "cpp",
+        "quat": "cpp",
+        "vec2d": "cpp",
+        "vec2f": "cpp",
+        "vec3d": "cpp",
+        "vec3f": "cpp",
+        "vec4d": "cpp",
+        "vec4f": "cpp",
+        "tuple": "cpp"
+    }
+}

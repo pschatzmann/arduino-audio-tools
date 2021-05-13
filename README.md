@@ -90,6 +90,8 @@ Here are a couple of simple test sketches to demo different output destinations:
 - [streams-generator-dac](/examples/streams-generator-dac) Output of generated sound on ESP32 internal DAC via I2S
 - [streams-generator-a2dp](/examples/streams-generator-a2dp) Output of generated sound on Bluetooth Speaker using A2DP
 - [streams-adc-serial](/examples/streams-adc-serial) Displaying input from analog microphone on the Serial Plotter
+- [streams-memory_wav-serial](/examples/streams-memory_wav-serial) Decoding of WAV from Flash memory and display on the Serial Plotter
+- [streams-generator-webserver_wav](/examples/streams-generator-webserver_wav) Encoding of WAV from generated sound returned via Webserver
 
 And some more useful examples:
 
@@ -149,7 +151,7 @@ This is currently work in progress:
 | I2S                    | tested  |
 | Files (RAW, MP3...)    | tested  |
 | Streams                | tested  |
-| WAV encoding/deconding | open    |          
+| WAV encoding/deconding | tested    |          
 | AAC encoding/deconding | open    |          
 | int24_t                | tested  |           
 

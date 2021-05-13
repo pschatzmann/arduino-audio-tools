@@ -18,13 +18,29 @@ template <class T>
 class StreamCopyT {
     public:
         StreamCopyT(Print &to, Stream &from, int buffer_size=DEFAULT_BUFFER_SIZE){
-            this->from = &from;
-            this->to = &to;
+            begin(to, from);
             this->buffer_size = buffer_size;
             buffer = new uint8_t[buffer_size];
             if (buffer==nullptr){
                 LOGE("Could not allocate enough memory for StreamCopy: %d bytes", buffer_size);
             }
+        }
+
+        StreamCopyT(int buffer_size=DEFAULT_BUFFER_SIZE){
+            this->buffer_size = buffer_size;
+            buffer = new uint8_t[buffer_size];
+            if (buffer==nullptr){
+                LOGE("Could not allocate enough memory for StreamCopy: %d bytes", buffer_size);
+            }
+        }
+
+        void begin(){            
+        }
+
+        // assign a new output and input stream
+        void begin(Print &to, Stream &from){
+            this->from = &from;
+            this->to = &to;
         }
 
         ~StreamCopyT(){
@@ -37,7 +53,6 @@ class StreamCopyT {
             size_t delayCount = 0;
             size_t len = available();
             size_t bytes_to_read;
-            LOGI("StreamCopyT::copy -  begin");
 
             if (len>0){
                 bytes_to_read = min(len, static_cast<size_t>(buffer_size));
@@ -46,7 +61,7 @@ class StreamCopyT {
                 size_t bytes_read = from->readBytes(buffer, bytes_to_read);
                 result = write(bytes_read,delayCount);
             } 
-            LOGI("StreamCopy::copy %u -> %u bytes - in %d hops\n", bytes_to_read, result, delayCount);
+            LOGI("StreamCopy::copy %u -> %u bytes - in %d hops", bytes_to_read, result, delayCount);
             return result;
         }
 
@@ -58,7 +73,6 @@ class StreamCopyT {
             size_t bytes_read;
             size_t len = available();
             size_t bytes_to_read;
-            LOGI("StreamCopyT::copy2 -  begin");
             
             if (len>0){
                 bytes_to_read = min(len, static_cast<size_t>(buffer_size / 2));
@@ -95,11 +109,18 @@ class StreamCopyT {
         // blocking write - until everything is processed
         size_t write(size_t len, size_t &delayCount ){
             size_t total = 0;
+            int retry = 0;
             while(total<len){
                 size_t written = to->write(buffer+total, len-total);
                 total += written;
                 yield();
                 delayCount++;
+
+                if (retry++ > 10){
+                    break;
+                }
+                LOGI("try write - %d ",retry);
+
             }
             return total;
         }
@@ -112,6 +133,9 @@ class StreamCopyT {
  */
 class StreamCopy : public StreamCopyT<uint8_t> {
     public:
+        StreamCopy(int buffer_size=DEFAULT_BUFFER_SIZE): StreamCopyT<uint8_t>(buffer_size) {            
+        }
+
         StreamCopy(Print &to, Stream &from, int buffer_size=DEFAULT_BUFFER_SIZE) : StreamCopyT<uint8_t>(to, from, buffer_size){
         }
 
@@ -130,7 +154,7 @@ class StreamCopy : public StreamCopyT<uint8_t> {
                 write(result, delayCount);
             } 
 
-            LOGI("StreamCopy::copy %d bytes - in %d hops\n", result, delayCount);
+            LOGI("StreamCopy::copy %d bytes - in %d hops", result, delayCount);
             return result;
         }
         

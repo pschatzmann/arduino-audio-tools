@@ -28,9 +28,9 @@
 #define LED_BUILTIN 13 // pin number is specific to your esp32 board
 #endif
 #define DEFAULT_BUFFER_SIZE 1024
-#define I2S_DEFAULT_SAMPLE_RATE 44100
-#define I2S_DEFAULT_CHANNELS 2
-#define I2S_DEFAULT_BITS_PER_SAMPLE 16
+#define DEFAULT_SAMPLE_RATE 44100
+#define DEFAULT_CHANNELS 2
+#define DEFAULT_BITS_PER_SAMPLE 16
 #define I2S_DEFAULT_PORT 0
 #define I2S_BUFFER_SIZE 1024
 #define I2S_BUFFER_COUNT 5
@@ -68,15 +68,20 @@
 /**
  * ------------------------------------------------------------------------- 
  * @brief Logging
+ * Logging Configuration in Arduino -> set USE_AUDIO_LOGGING to false if you want to deactivate Logging.
+ * When using cmake you can set -DUSE_AUDIO_LOGGING=false
+ * You can also change the LOG_LEVEL and LOG_STREAM here.
+ * However it is recommended to do it in your Sketch e.g with AudioLogger::instance().begin(Serial,AudioLogger::Warning);
  */
-
-// Logging Configuration
-#define USE_LOGGING
+ 
+#ifndef USE_AUDIO_LOGGING
+#define USE_AUDIO_LOGGING true
+#endif 
 #define LOG_LEVEL  AudioLogger::Warning
 #define LOG_STREAM Serial
 
 // Logging Implementation
-#ifdef USE_LOGGING
+#if USE_AUDIO_LOGGING
 #define LOGD(...) AudioLogger::instance().printLog(__FILE__,__LINE__, AudioLogger::Debug,  __VA_ARGS__)
 #define LOGI(...) AudioLogger::instance().printLog(__FILE__,__LINE__, AudioLogger::Info,  __VA_ARGS__)
 #define LOGW(...) AudioLogger::instance().printLog(__FILE__,__LINE__, AudioLogger::Warning,  __VA_ARGS__)

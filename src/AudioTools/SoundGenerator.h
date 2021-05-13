@@ -59,7 +59,7 @@ class SoundGenerator  {
                 // when inactive did not generate anything
                 result = 0;
             }
-            LOGD( "SoundGenerator::readBytes (channels: %d) %d -> %d\n",channels, lengthBytes,result);
+            LOGD( "SoundGenerator::readBytes (channels: %d) %d bytes -> %d samples \n",channels, lengthBytes,result);
             return result * frame_size;
         }
 

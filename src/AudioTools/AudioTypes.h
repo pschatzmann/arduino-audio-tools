@@ -104,7 +104,7 @@ struct AudioBaseInfo {
 class AudioBaseInfoDependent {
     public:
       virtual ~AudioBaseInfoDependent(){}
-      virtual void setAudioBaseInfo(AudioBaseInfo info) {};
+      virtual void setAudioInfo(AudioBaseInfo info) {};
       virtual bool validate(AudioBaseInfo &info){
         return true;
       }
@@ -145,9 +145,9 @@ class I2SConfig {
     /// public settings
     RxTxMode rx_tx_mode = TX_MODE;
     int port_no = 0;  // processor dependent port
-    int channels = I2S_DEFAULT_CHANNELS;
-    int sample_rate = I2S_DEFAULT_SAMPLE_RATE; 
-    int bits_per_sample = I2S_DEFAULT_BITS_PER_SAMPLE;
+    int channels = DEFAULT_CHANNELS;
+    int sample_rate = DEFAULT_SAMPLE_RATE; 
+    int bits_per_sample = DEFAULT_BITS_PER_SAMPLE;
     int pin_ws = PIN_I2S_WS;
     int pin_bck = PIN_I2S_BCK;
     int pin_data = PIN_I2S_DATA_OUT;
@@ -155,6 +155,19 @@ class I2SConfig {
     bool is_digital = true;
 
 };
+
+
+/**
+ * @brief E.g. used by Encoders and Decoders
+ * 
+ */
+class AudioWriter {
+  public: 
+	    virtual size_t write(const void *in_ptr, size_t in_size) = 0;
+      virtual operator boolean() = 0;
+};
+
+
 
 /// stops any further processing by spinning in an endless loop
 void stop() {
