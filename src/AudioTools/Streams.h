@@ -4,7 +4,7 @@
 #include "AudioTypes.h"
 #include "Buffers.h"
 #include "AudioI2S.h"
-
+#include "AudioWAV.h"
 #ifdef ESP32
 #include <esp_http_client.h>
 #endif
@@ -99,6 +99,10 @@ class MemoryStream : public Stream {
                 // we clear the buffer data
                 memset(buffer,0,buffer_size);
             }
+        }
+
+        operator bool() {
+            return available()>0;
         }
 
     protected:
@@ -319,10 +323,52 @@ class CsvStream : public BufferedStream, public AudioBaseInfoDependent  {
         }
 
         virtual size_t readExt( uint8_t *data, size_t length) { 
+            LOGE("not implemented: %s", __FUNCTION__);
             return 0;
         }
 
 
+};
+
+/**
+ * @brief Construct a new Encoded Stream object which is supporting defined Audio File types
+ * 
+ */
+class AudioOutputStream : public BufferedStream {
+    public:
+        AudioOutputStream() : BufferedStream(DEFAULT_BUFFER_SIZE){
+            active = true;
+        }        
+
+        AudioOutputStream(AudioWriter &writer) : BufferedStream(DEFAULT_BUFFER_SIZE){
+            writer_ptr = &writer;
+            active = true;
+        }
+    
+        void begin() {
+            active = true;
+        }
+
+        void end() {
+            active = false;
+        }
+
+        operator bool() {
+            return active && *writer_ptr;
+        }
+
+    protected:
+        AudioWriter *writer_ptr;
+        bool active;
+
+        virtual size_t writeExt(const uint8_t* data, size_t len) {  
+            return (writer_ptr!=nullptr && active) ? writer_ptr->write(data, len) : 0;
+        }
+
+        virtual size_t readExt( uint8_t *data, size_t len) { 
+            LOGE("not implemented: %s", __FUNCTION__);
+            return 0;
+        }
 };
 
 
@@ -361,7 +407,7 @@ class I2SStream : public BufferedStream, public AudioBaseInfoDependent  {
         }
 
         /// updates the sample rate dynamically 
-        virtual void setAudioBaseInfo(AudioBaseInfo info) {
+        virtual void setAudioInfo(AudioBaseInfo info) {
             bool is_update = false;
             I2SConfig cfg = i2s.config();
             if (cfg.sample_rate != info.sample_rate

@@ -1,6 +1,7 @@
 
 #pragma once
-#include <algorithm>    // std::min
+
+#define MIN(A,B) ((A) < (B) ? (A) : (B))
 
 namespace audio_tools {
 
@@ -17,7 +18,7 @@ public:
     
     // reads multiple values
     int readArray(T data[], int len){
-        int lenResult = min(len, available());
+        int lenResult = MIN(len, available());
         for (int j=0;j<lenResult;j++){
             data[j] = read();
         }
@@ -37,7 +38,7 @@ public:
 
     // reads multiple values for array of 2 dimensional frames
     int readFrames(T data[][2], int len) {
-        int result = min(len, available());
+        int result = MIN(len, available());
         for (int j=0;j<result;j++){
             T sample = read();
             data[j][0] = sample;
@@ -48,7 +49,7 @@ public:
 
     template <int rows, int channels>
     int readFrames(T (&data)[rows][channels]){
-        int lenResult = min(rows, available());
+        int lenResult = MIN(rows, available());
         for (int j=0;j<lenResult;j++){
             T sample = read();
             for (int i=0;i<channels;i++){
@@ -256,7 +257,7 @@ public:
       return result;
   }
 
-  // determines the available entries for the current read buffer
+  // deterMINes the available entries for the current read buffer
   int available() {
       if (actual_read_buffer==nullptr){
           actual_read_buffer = getNextFilledBuffer();
@@ -273,7 +274,7 @@ public:
       return result;
   }
 
-  // determines the available entries for the write buffer
+  // deterMINes the available entries for the write buffer
   int availableToWrite() {
       if (actual_write_buffer==nullptr){
           actual_write_buffer = getNextAvailableBuffer();
