@@ -159,7 +159,7 @@ $(function() {
 <div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_base_info_dependent.html">  104</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> {</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;      <span class="keyword">virtual</span> ~<a class="code" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a>(){}</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;      <span class="keyword">virtual</span> <span class="keywordtype">void</span> setAudioBaseInfo(<a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> info) {};</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;      <span class="keyword">virtual</span> <span class="keywordtype">void</span> setAudioInfo(<a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> info) {};</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;      <span class="keyword">virtual</span> <span class="keywordtype">bool</span> validate(<a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> &amp;info){</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;      }</div>
@@ -203,16 +203,26 @@ $(function() {
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;};</div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="keywordtype">void</span> stop() {</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;  <span class="keywordflow">while</span>(<span class="keyword">true</span>){</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    delay(1000);</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;  }</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;}</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160; </div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;}</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
+<div class="line"><a name="l00164"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_writer.html">  164</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_audio_writer.html">AudioWriter</a> {</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;  <span class="keyword">public</span>: </div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> <span class="keywordtype">void</span> *in_ptr, <span class="keywordtype">size_t</span> in_size) = 0;</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;      <span class="keyword">virtual</span> <span class="keyword">operator</span> boolean() = 0;</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;};</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="keywordtype">void</span> stop() {</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;  <span class="keywordflow">while</span>(<span class="keyword">true</span>){</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    delay(1000);</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;  }</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;}</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;}</div>
 <div class="ttc" id="aclass_print_html"><div class="ttname"><a href="class_print.html">Print</a></div><div class="ttdef"><b>Definition:</b> Print.h:34</div></div>
 <div class="ttc" id="aclass_printable_html"><div class="ttname"><a href="class_printable.html">Printable</a></div><div class="ttdef"><b>Definition:</b> Printable.h:33</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_base_info_dependent_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_base_info_dependent.html">audio_tools::AudioBaseInfoDependent</a></div><div class="ttdoc">Supports changes to the sampling rate, bits and channels.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:104</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_writer_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_writer.html">audio_tools::AudioWriter</a></div><div class="ttdoc">E.g. used by Encoders and Decoders.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:164</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_config_html"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_config.html">audio_tools::I2SConfig</a></div><div class="ttdoc">configuration for all common i2s settings</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:129</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_config_html_a4f62605fe47b2e5ace54bce453806dcf"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_config.html#a4f62605fe47b2e5ace54bce453806dcf">audio_tools::I2SConfig::I2SConfig</a></div><div class="ttdeci">I2SConfig(const I2SConfig &amp;cfg)=default</div><div class="ttdoc">Default Copy Constructor.</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_config_html_a6ddcfcef498a6bda2cab7339d62e166a"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_config.html#a6ddcfcef498a6bda2cab7339d62e166a">audio_tools::I2SConfig::I2SConfig</a></div><div class="ttdeci">I2SConfig(RxTxMode mode)</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:136</div></div>

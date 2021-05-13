@@ -4,7 +4,7 @@
 #include "AudioTypes.h"
 #include "Buffers.h"
 #include "AudioI2S.h"
-#include "AudioWAV.h"
+#include "CodecWAV.h"
 #ifdef ESP32
 #include <esp_http_client.h>
 #endif

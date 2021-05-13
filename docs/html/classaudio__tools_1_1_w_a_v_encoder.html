@@ -78,34 +78,52 @@ $(function() {
 <p>A simple WAV file encoder.  
  <a href="classaudio__tools_1_1_w_a_v_encoder.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_audio_w_a_v_8h_source.html">AudioWAV.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_codec_w_a_v_8h_source.html">CodecWAV.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for audio_tools::WAVEncoder:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classaudio__tools_1_1_w_a_v_encoder.png" usemap="#audio_5Ftools::WAVEncoder_map" alt=""/>
+  <map id="audio_5Ftools::WAVEncoder_map" name="audio_5Ftools::WAVEncoder_map">
+<area href="classaudio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="audio_tools::AudioWriter" shape="rect" coords="0,0,159,24"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a9ae30b1e9d56ade39b512a693d8dfb95"><td class="memItemLeft" align="right" valign="top"><a id="a9ae30b1e9d56ade39b512a693d8dfb95"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>WAVEncoder</b> (<a class="el" href="class_stream.html">Stream</a> &amp;out)</td></tr>
 <tr class="separator:a9ae30b1e9d56ade39b512a693d8dfb95"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab0392cf30a096d7280e68ce938849766"><td class="memItemLeft" align="right" valign="top"><a id="ab0392cf30a096d7280e68ce938849766"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (int input_channels=2, int input_sample_rate=44100, int input_bits_per_sample=16)</td></tr>
-<tr class="separator:ab0392cf30a096d7280e68ce938849766"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab46b8a6a23376ea58a97542af13f01e5"><td class="memItemLeft" align="right" valign="top"><a id="ab46b8a6a23376ea58a97542af13f01e5"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (<a class="el" href="structaudio__tools_1_1_w_a_v_audio_info.html">WAVAudioInfo</a> &amp;ai)</td></tr>
-<tr class="separator:ab46b8a6a23376ea58a97542af13f01e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a599dfe5c2edec9bc9298ff7930d90a"><td class="memItemLeft" align="right" valign="top"><a id="a4a599dfe5c2edec9bc9298ff7930d90a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setDataFormat</b> (uint16_t format=WAV_FORMAT_PCM)</td></tr>
-<tr class="separator:a4a599dfe5c2edec9bc9298ff7930d90a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae25ff94a6a6cb6dd93858463ddb4d983"><td class="memItemLeft" align="right" valign="top"><a id="ae25ff94a6a6cb6dd93858463ddb4d983"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setFileSize</b> (uint32_t length=0xffffffff)</td></tr>
-<tr class="separator:ae25ff94a6a6cb6dd93858463ddb4d983"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a594ed95d32b635ced19842b48810adad"><td class="memItemLeft" align="right" valign="top"><a id="a594ed95d32b635ced19842b48810adad"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setMaxSamples</b> (uint32_t samples)</td></tr>
-<tr class="separator:a594ed95d32b635ced19842b48810adad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0ce9d19bbe570f80a2799089c8f03a74"><td class="memItemLeft" align="right" valign="top"><a id="a0ce9d19bbe570f80a2799089c8f03a74"></a>
-virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (void *in_ptr, size_t in_size)</td></tr>
-<tr class="separator:a0ce9d19bbe570f80a2799089c8f03a74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa48d011ca1b2652ca1fbad1af0d23ba4"><td class="memItemLeft" align="right" valign="top"><a id="aa48d011ca1b2652ca1fbad1af0d23ba4"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (<a class="el" href="class_stream.html">Stream</a> &amp;out, <a class="el" href="structaudio__tools_1_1_w_a_v_audio_info.html">WAVAudioInfo</a> &amp;ai)</td></tr>
+<tr class="separator:aa48d011ca1b2652ca1fbad1af0d23ba4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a927aff1e0552bf0e657c39f9ff3fec90"><td class="memItemLeft" align="right" valign="top"><a id="a927aff1e0552bf0e657c39f9ff3fec90"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (<a class="el" href="structaudio__tools_1_1_w_a_v_audio_info.html">WAVAudioInfo</a> &amp;ai)</td></tr>
+<tr class="separator:a927aff1e0552bf0e657c39f9ff3fec90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afadd9c5f629c4271ef0bc600e7f9b7c3"><td class="memItemLeft" align="right" valign="top"><a id="afadd9c5f629c4271ef0bc600e7f9b7c3"></a>
+<a class="el" href="structaudio__tools_1_1_w_a_v_audio_info.html">WAVAudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>defaultConfig</b> ()</td></tr>
+<tr class="separator:afadd9c5f629c4271ef0bc600e7f9b7c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73a1f5df8904648ffe27ef47a64ab2dc"><td class="memItemLeft" align="right" valign="top"><a id="a73a1f5df8904648ffe27ef47a64ab2dc"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
+<tr class="separator:a73a1f5df8904648ffe27ef47a64ab2dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74960892a513edf72c37c724e3d828fe"><td class="memItemLeft" align="right" valign="top"><a id="a74960892a513edf72c37c724e3d828fe"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isOpen</b> ()</td></tr>
+<tr class="separator:a74960892a513edf72c37c724e3d828fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26e7818fb17d533426c5b8892d5cadce"><td class="memItemLeft" align="right" valign="top"><a id="a26e7818fb17d533426c5b8892d5cadce"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>operator boolean</b> ()</td></tr>
+<tr class="separator:a26e7818fb17d533426c5b8892d5cadce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ddbbd8e1d802faec19d658e2dda80ea"><td class="memItemLeft" align="right" valign="top"><a id="a1ddbbd8e1d802faec19d658e2dda80ea"></a>
+virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (const void *in_ptr, size_t in_size)</td></tr>
+<tr class="separator:a1ddbbd8e1d802faec19d658e2dda80ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:aaae23212a8d29a8709a8787631af61b5"><td class="memItemLeft" align="right" valign="top"><a id="aaae23212a8d29a8709a8787631af61b5"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>write16</b> (<a class="el" href="class_stream.html">Stream</a> &amp;stream, uint16_t value)</td></tr>
+<tr class="separator:aaae23212a8d29a8709a8787631af61b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac03763cdb6f766318996479a9dccebc1"><td class="memItemLeft" align="right" valign="top"><a id="ac03763cdb6f766318996479a9dccebc1"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>write32</b> (<a class="el" href="class_stream.html">Stream</a> &amp;stream, uint64_t value)</td></tr>
+<tr class="separator:ac03763cdb6f766318996479a9dccebc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1eca34b8d1db37c89ecb8815bace9b0e"><td class="memItemLeft" align="right" valign="top"><a id="a1eca34b8d1db37c89ecb8815bace9b0e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>writeDataHeader</b> ()</td></tr>
 <tr class="separator:a1eca34b8d1db37c89ecb8815bace9b0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -119,11 +137,17 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>writeRiffHeader</b> (
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:aff46c2847ce30c2cbe511453d8736dcb"><td class="memItemLeft" align="right" valign="top"><a id="aff46c2847ce30c2cbe511453d8736dcb"></a>
-<a class="el" href="structaudio__tools_1_1_w_a_v_audio_info.html">WAVAudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>audioInfo</b></td></tr>
+<a class="el" href="structaudio__tools_1_1_w_a_v_audio_info.html">WAVAudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>audioInfo</b> = defaultConfig()</td></tr>
 <tr class="separator:aff46c2847ce30c2cbe511453d8736dcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed459b48301e36d380e6e4f63ff1a41d"><td class="memItemLeft" align="right" valign="top"><a id="aed459b48301e36d380e6e4f63ff1a41d"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>max_samples</b></td></tr>
-<tr class="separator:aed459b48301e36d380e6e4f63ff1a41d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cd103b0537bfec2f9f9553f7f7b171c"><td class="memItemLeft" align="right" valign="top"><a id="a7cd103b0537bfec2f9f9553f7f7b171c"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>header_written</b> = false</td></tr>
+<tr class="separator:a7cd103b0537bfec2f9f9553f7f7b171c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62c50c502da8dddf4bb47fa4d201e7d0"><td class="memItemLeft" align="right" valign="top"><a id="a62c50c502da8dddf4bb47fa4d201e7d0"></a>
+volatile bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_open</b></td></tr>
+<tr class="separator:a62c50c502da8dddf4bb47fa4d201e7d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af690e2e6d4f3edf68e07a7cdcda8fd45"><td class="memItemLeft" align="right" valign="top"><a id="af690e2e6d4f3edf68e07a7cdcda8fd45"></a>
+int64_t&#160;</td><td class="memItemRight" valign="bottom"><b>size_limit</b></td></tr>
+<tr class="separator:af690e2e6d4f3edf68e07a7cdcda8fd45"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8c22b152077b3f6867c2d11f754875c"><td class="memItemLeft" align="right" valign="top"><a id="ab8c22b152077b3f6867c2d11f754875c"></a>
 <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>stream_ptr</b></td></tr>
 <tr class="separator:ab8c22b152077b3f6867c2d11f754875c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -133,7 +157,7 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>max_samples</b></
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/<a class="el" href="_audio_w_a_v_8h_source.html">AudioWAV.h</a></li>
+<li>src/<a class="el" href="_codec_w_a_v_8h_source.html">CodecWAV.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
