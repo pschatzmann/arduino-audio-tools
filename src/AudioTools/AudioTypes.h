@@ -121,6 +121,8 @@ enum I2SMode {
 };
 
 
+#ifdef I2S_SUPPORT
+
 /**
  * @brief configuration for all common i2s settings
  * @author Phil Schatzmann
@@ -156,6 +158,7 @@ class I2SConfig {
 
 };
 
+#endif
 
 /**
  * @brief E.g. used by Encoders and Decoders

@@ -67,10 +67,20 @@ class AACDecoder : public AudioWriter  {
             return result;
         }
 
-        // provides information about the stream
-        CStreamInfo &info(){
+        // provides detailed information about the stream
+        CStreamInfo &infoEx(){
             return *aacDecoder_GetStreamInfo(aacDecoderInfo);
         }
+
+		// provides common information
+		AudioBaseInfo &info() {
+			AudioBaseInfo result;
+			CStreamInfo& i = infoEx();
+			result.channels = i.numChannels;
+			result.sample_rate = i.sampleRate;
+			result.bits_per_sample = 16;
+			return result;
+		}
 
         // release the resources
         void close(){

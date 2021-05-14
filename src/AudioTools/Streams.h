@@ -372,6 +372,8 @@ class AudioOutputStream : public BufferedStream {
 };
 
 
+#ifdef I2S_SUPPORT
+
 /**
  * @brief We support the Stream interface for the I2S access. In addition we allow a separate mute pin which might also be used
  * to drive a LED... 
@@ -442,6 +444,8 @@ class I2SStream : public BufferedStream, public AudioBaseInfoDependent  {
         }
 
 };
+
+#endif
 
 #ifdef ESP32
 
