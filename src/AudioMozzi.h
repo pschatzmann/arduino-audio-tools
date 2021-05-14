@@ -3,9 +3,8 @@
 #include "mozzi_config.h"
 #include "hardware_defines.h"
 #include "mozzi_analog.h"
-#include "MozziGuts.h"
+#include "Mozzi.h"
 
-extern uint64_t samples_written_to_buffer;
 
 namespace audio_tools {
 
@@ -54,6 +53,7 @@ class MozziGenerator : public SoundGenerator<int16_t> {
         AudioBaseInfo info;
         int control_counter_max;
         int control_counter;
+        uint64_t samples_written_to_buffer;
 
 };
 

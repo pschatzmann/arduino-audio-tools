@@ -45,6 +45,7 @@
  */
 #ifdef ESP32
 #include "esp32-hal-log.h"
+#define I2S_SUPPORT
 #define PIN_I2S_BCK 14
 #define PIN_I2S_WS 15
 #define PIN_I2S_DATA_IN 32
@@ -56,6 +57,7 @@
 #endif
 
 #ifdef ESP8266
+#define I2S_SUPPORT
 #define PIN_I2S_BCK -1
 #define PIN_I2S_WS -1
 #define PIN_I2S_DATA_IN -1

@@ -1,6 +1,6 @@
 # Using Mozzi with UDP
 
-I am providing a simple integration for [Mozzi](https://sensorium.github.io/Mozzi/).  Unfortunatly I needed to make some small changes to make things work together. Those can be found in my [fork](https://github.com/pschatzmann/Mozzi).
+I am providing a simple integration for [Mozzi](https://sensorium.github.io/Mozzi/).  
 
 We can send the output via TCP/IP or UDP. In this example I am using UDP:
 

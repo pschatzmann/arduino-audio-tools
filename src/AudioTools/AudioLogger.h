@@ -2,6 +2,7 @@
 
 #include "AudioConfig.h"
 #include "Stream.h"
+#include <cstdarg>
 
 #ifndef PRINTF_BUFFER_SIZE
 #define PRINTF_BUFFER_SIZE 160

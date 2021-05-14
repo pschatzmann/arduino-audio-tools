@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AudioConfig.h"
+#ifdef I2S_SUPPORT
 #include "AudioTypes.h"
 #include "I2S_ESP32.h"
 #include "I2S_ESP8266.h"
@@ -48,3 +49,5 @@ class I2S : public I2SBase {
 
 
 }
+
+#endif
