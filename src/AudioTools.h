@@ -16,6 +16,6 @@
 #include "AudioTools/AudioI2S.h"
 #include "AudioTools/AnalogAudio.h"
 #include "AudioTools/AudioLogger.h"
-#include "AudioTools/Buffers.h"
+#include "AudioTools/TimerAlarmRepeating.h"
 #include "AudioTools/Streams.h"
 #include "AudioTools/AudioCopy.h"
