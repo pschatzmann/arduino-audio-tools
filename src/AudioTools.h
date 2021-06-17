@@ -19,3 +19,4 @@
 #include "AudioTools/Buffers.h"
 #include "AudioTools/Streams.h"
 #include "AudioTools/AudioCopy.h"
+#include "AudioTools/AudioPWM.h"

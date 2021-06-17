@@ -65,32 +65,7 @@ class AudioOutputWithCallback : public AudioOutput, public BufferedStream {
 
 };
 
-// /**
-//  * @brief ESP8266Audio Output to Stream
-//  * 
-//  */
-// class SerialOutputStream : public AudioOutput {
-//     public:
-//         SerialOutputStream(const Stream &out){
-//             this->out = &out;
-//         }
 
-//         virtual bool begin() {
-//             active = true;
-//         }
-
-//         virtual bool ConsumeSample(int16_t sample[2]){
-//             if (active) out->write((uint8_t*)sample, 2*sizeof(int16_t));
-//         }
-
-//         virtual bool stop() {
-//             active = false;
-//         }
-
-//     protected:
-//         Stream *out;
-//         bool active;
-// };
 
 }
 

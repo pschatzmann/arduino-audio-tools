@@ -5,3 +5,7 @@ We can use the GeneratedSoundStream class together with a SoundGenerator class. 
 
 To test the output I'm using this generated signal and write it to A2DP (e.g. a Bluetooth Speaker).
 
+
+## Compile Settings
+
+Please set the Patition Scheme to __Hugh APP__

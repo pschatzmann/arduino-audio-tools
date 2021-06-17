@@ -14,7 +14,8 @@
 
 using namespace audio_tools;  
 
-MemoryStream in(audio_aac, audio_aac_len);
+//recorded with 2 channels at 44100 hz
+MemoryStream in(gs_16b_2c_44100hz_aac, gs_16b_2c_44100hz_aac_len);
 
 A2DPStream a2dp = A2DPStream::instance() ;  // A2DP input - A2DPStream is a singleton!
 AACDecoder decoder(a2dp);                   // decode AAC to pcm and send it to a2dp
@@ -26,7 +27,7 @@ void setup(void) {
   Serial.begin(115200);
 
   // We send the sound signal via A2DP - so we conect to the MyMusic Bluetooth Speaker
-  out.begin(TX_MODE, "MyMusic");
+  a2dp.begin(TX_MODE, "MyMusic");
 
   Serial.println("A2DP is connected now...");
 }

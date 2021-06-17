@@ -110,7 +110,7 @@ class SineWaveGenerator : public SoundGenerator<T> {
 
         /// Defines the frequency - after the processing has been started
         void setFrequency(uint16_t frequency) {
-            this->frequency = frequency;
+            this->m_frequency = frequency;
         }
 
         /// Provides a single sample

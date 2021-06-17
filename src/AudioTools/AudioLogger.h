@@ -1,12 +1,14 @@
 #pragma once
 
-#include "AudioConfig.h"
 #include "Stream.h"
 #include <cstdarg>
 
 #ifndef PRINTF_BUFFER_SIZE
 #define PRINTF_BUFFER_SIZE 160
 #endif
+
+#define LOG_LEVEL  AudioLogger::Warning
+#define LOG_STREAM Serial
 
 
 namespace audio_tools {

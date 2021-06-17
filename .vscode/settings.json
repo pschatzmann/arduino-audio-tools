@@ -13,6 +13,25 @@
         "vec3f": "cpp",
         "vec4d": "cpp",
         "vec4f": "cpp",
-        "tuple": "cpp"
+        "tuple": "cpp",
+        "deque": "cpp",
+        "list": "cpp",
+        "string": "cpp",
+        "vector": "cpp",
+        "hash_map": "cpp",
+        "array": "cpp",
+        "hashtable": "cpp",
+        "unordered_map": "cpp",
+        "unordered_set": "cpp",
+        "initializer_list": "cpp",
+        "ranges": "cpp",
+        "mixinvector": "cpp",
+        "type_traits": "cpp",
+        "utility": "cpp",
+        "optional": "cpp",
+        "istream": "cpp",
+        "ratio": "cpp",
+        "system_error": "cpp",
+        "valueobject": "cpp"
     }
 }
