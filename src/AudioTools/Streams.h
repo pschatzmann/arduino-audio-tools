@@ -20,12 +20,14 @@ namespace audio_tools {
 class MemoryStream : public Stream {
     public: 
         MemoryStream(int buffer_size = 512){
+	 		LOGD("MemoryStream: %d", buffer_size);
             this->buffer_size = buffer_size;
             this->buffer = new uint8_t[buffer_size];
             this->owns_buffer = true;
         }
 
         MemoryStream(const uint8_t *buffer, int buffer_size){
+	 		LOGD("MemoryStream: %d", buffer_size);
             this->buffer_size = buffer_size;
             this->write_pos = buffer_size;
             this->buffer = (uint8_t*)buffer;
@@ -33,8 +35,16 @@ class MemoryStream : public Stream {
         }
 
         ~MemoryStream(){
+	 		LOGD(__FUNCTION__);
             if (owns_buffer)
                 delete[] buffer;
+        }
+
+        // resets the read pointer
+        void begin() {
+	 		LOGD(__FUNCTION__);
+            write_pos = buffer_size;
+            read_pos = 0;
         }
 
         virtual size_t write(uint8_t byte) {
@@ -55,6 +65,7 @@ class MemoryStream : public Stream {
                 }
                 result = j;
             }
+            return result;
         }
 
         virtual int available() {
@@ -101,16 +112,17 @@ class MemoryStream : public Stream {
             }
         }
 
+
         operator bool() {
             return available()>0;
         }
 
     protected:
-        int write_pos;
-        int read_pos;
-        int buffer_size;
-        uint8_t *buffer;
-        bool owns_buffer;
+        int write_pos = 0;
+        int read_pos = 0;
+        int buffer_size = 0;
+        uint8_t *buffer = nullptr;
+        bool owns_buffer=false;
 };
 
 /**
@@ -163,11 +175,13 @@ class GeneratedSoundStream : public Stream {
 
         /// start the processing
         void begin() {
+	 		LOGD(__FUNCTION__);
             generator_ptr->begin();
         }
 
         /// stop the processing
-        void stop() {
+        void end() {
+	 		LOGD(__FUNCTION__);
             generator_ptr->stop();
         }
 
@@ -284,6 +298,10 @@ template<typename T>
 class CsvStream : public BufferedStream, public AudioBaseInfoDependent  {
 
     public:
+        CsvStream(int buffer_size=DEFAULT_BUFFER_SIZE, bool active=true) : BufferedStream(buffer_size){
+            this->active = active;
+        }
+
         /// Constructor
         CsvStream(Print &out, int channels, int buffer_size=DEFAULT_BUFFER_SIZE, bool active=true) : BufferedStream(buffer_size){
             this->channels = channels;
@@ -291,13 +309,17 @@ class CsvStream : public BufferedStream, public AudioBaseInfoDependent  {
             this->active = active;
         }
 
-        /// Sets the CsvStream as active 
-        void begin(){
-            active = true;
+        void begin(int channels, Print &out=Serial){
+	 		LOGD(__FUNCTION__);
+            this->channels = channels;
+            this->out_ptr = &out;
+            this->active = true;
         }
+
 
         /// Sets the CsvStream as inactive 
         void end() {
+	 		LOGD(__FUNCTION__);
             active = false;
         }
 

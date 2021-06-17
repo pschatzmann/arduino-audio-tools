@@ -23,9 +23,11 @@ class AACDecoder : public AudioWriter  {
 
         // opens the decoder
         int begin(TRANSPORT_TYPE transportType = TT_UNKNOWN, UINT nrOfLayers=1){
-            aacDecoderInfo = aacDecoder_Open(transportType, nrOfLayers);
+			LOGD(__FUNCTION__);
+			int error;
+            aacDecoderInfo = aacDecoder_Open_Ex(transportType, nrOfLayers, error);
 			if (aacDecoderInfo==NULL){
-				LOGE("aacDecoder_Open -> Error");
+				LOGE("aacDecoder_Open -> Error: %d", error);
 				return -1;
 			}
 			is_open = true;
@@ -45,6 +47,7 @@ class AACDecoder : public AudioWriter  {
 
         // write AAC data to be converted to PCM data
       	virtual size_t write(const void *in_ptr, size_t in_size) {
+			LOGD("write %d bytes", in_size);
 			size_t result = 0;
 			if (aacDecoderInfo!=nullptr) {
 				uint32_t bytesValid = 0;
@@ -84,6 +87,7 @@ class AACDecoder : public AudioWriter  {
 
         // release the resources
         void close(){
+	 		LOGD(__FUNCTION__);
             if (aacDecoderInfo!=nullptr){
                 aacDecoder_Close(aacDecoderInfo); 
                 aacDecoderInfo = nullptr;
@@ -221,6 +225,7 @@ public:
 	 * @return int 
 	 */
 	virtual int begin(AudioBaseInfo info) {
+		LOGD(__FUNCTION__);
 		begin(info.channels, info.sample_rate, info.bits_per_sample);
 	}
 
@@ -233,6 +238,7 @@ public:
 	 * @return int 0 => ok; error with negative number
 	 */
 	virtual int begin(int input_channels=2, int input_sample_rate=44100, int input_bits_per_sample=16) {
+		LOGD(__FUNCTION__);
 		this->channels = input_channels;
 		this->sample_rate = input_sample_rate;
 		this->bits_per_sample = input_bits_per_sample;
@@ -292,6 +298,7 @@ public:
 
 	// convert PCM data to AAC
 	int32_t write(void *in_ptr, int in_size){
+		LOGD("write %d bytes", in_size);
 		if (input_buf==nullptr){
 			LOGE("The encoder is not open\n");
 			return -1;
@@ -330,6 +337,7 @@ public:
 
 	// release resources
 	void close(){
+		LOGD(__FUNCTION__);
 		if (input_buf!=nullptr)
 			free(input_buf);
 		input_buf = nullptr;

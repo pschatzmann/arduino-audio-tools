@@ -26,6 +26,7 @@ struct WAVAudioInfo {
     uint32_t file_size;
 };
 
+const char* wav_mime = "audio/wav";
 
 /**
  * @brief Parser for Wav header data
@@ -227,9 +228,10 @@ class WAVDecoder : public AudioWriter {
          * 
          * @param out_stream Output Stream to which we write the decoded result
          */
-        WAVDecoder(Print &out_stream){
+        WAVDecoder(Print &out_stream, bool active=true){
             this->out = &out_stream;
             this->audioBaseInfoSupport = nullptr;
+            this->active = active;
         }
 
         /**
@@ -247,6 +249,14 @@ class WAVDecoder : public AudioWriter {
         void begin() {
             isFirst = true;
             active = true;
+        }
+
+        void end() {
+            active = false;
+        }
+
+        const char* mime(){
+            return wav_mime;
         }
 
         WAVAudioInfo &audioInfo() {
@@ -335,6 +345,10 @@ class WAVEncoder : public AudioWriter {
             stream_ptr = &out;
         }
 
+        const char* mime(){
+            return wav_mime;
+        }
+
         // Provides the default configuration
         WAVAudioInfo defaultConfig() {
             WAVAudioInfo info;
@@ -380,7 +394,6 @@ class WAVEncoder : public AudioWriter {
         virtual size_t write(const void *in_ptr, size_t in_size){
             if (!is_open){
                 LOGE("The WAVEncoder is not open - please call begin()");
-                int x = 10 / 0;
                 return 0;
             }
             if (stream_ptr==nullptr){

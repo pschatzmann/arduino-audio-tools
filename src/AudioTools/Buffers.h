@@ -1,6 +1,7 @@
 
 #pragma once
 
+#undef MIN
 #define MIN(A,B) ((A) < (B) ? (A) : (B))
 
 namespace audio_tools {
@@ -26,6 +27,7 @@ public:
     }
 
     int writeArray(const T data[], int len){
+	 	LOGD("writeArray: %d", len);
         int result = 0;
         for (int j=0;j<len;j++){
             if (write(data[j])==0){

@@ -119,7 +119,8 @@ class StreamCopyT {
                 if (retry++ > 10){
                     break;
                 }
-                LOGI("try write - %d ",retry);
+                
+                if (retry>1) LOGI("try write - %d ",retry);
 
             }
             return total;
@@ -159,7 +160,7 @@ class StreamCopy : public StreamCopyT<uint8_t> {
         }
         
         size_t copy() {
-            StreamCopyT<uint8_t>::copy();
+            return StreamCopyT<uint8_t>::copy();
         }
 
         int available() {
