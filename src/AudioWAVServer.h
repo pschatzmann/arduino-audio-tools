@@ -4,14 +4,34 @@
 
 using namespace audio_tools;
 
+/// Calback which writes the sound data to the stream
+typedef void (*AudioWAVServerDataCallback)(Stream &out);
+
 /**
- * @brief ESP32 Webserver which streams the result as WAV file. 
- * 
+ * @brief A simple Arduino Webserver which streams the result as WAV file. 
+ * This class is based on the WiFiServer class. All you need to do is to provide the data 
+ * with a callback method or from a Stream.
  */
 class AudioWAVServer {
 
 public:
+    /**
+     * @brief Construct a new Audio W A V Server object
+     * We assume that the WiFi is already connected
+     */
     AudioWAVServer() = default;
+
+    /**
+     * @brief Construct a new Audio W A V Server object
+     * 
+     * @param network 
+     * @param password 
+     */
+    AudioWAVServer(const char* network, const char *password) {
+        this->network = network;
+        this->password = password;
+    }
+
     /**
      * @brief Start the server. You need to be connected to WiFI before calling this method
      * 
@@ -24,7 +44,26 @@ public:
         this->sample_rate = sample_rate;
         this->channels = channels;
 
-        LOGI("IP address: %s",WiFi.localIP().toString().c_str());
+        connectWiFi();
+
+        // start server
+        server.begin();
+    }
+
+    /**
+     * @brief Start the server. The data must be provided by a callback method
+     * 
+     * @param cb 
+     * @param sample_rate 
+     * @param channels 
+     */
+    void begin(AudioWAVServerDataCallback cb, int sample_rate, int channels) {
+        this->in =nullptr;
+        this->callback = cb;
+        this->sample_rate = sample_rate;
+        this->channels = channels;
+
+        connectWiFi();
 
         // start server
         server.begin();
@@ -32,41 +71,82 @@ public:
 
     /**
      * @brief Add this method to your loop
+     * Returns true while the client is connected. (The same functionality like doLoop())
      * 
+     * @return true 
+     * @return false 
      */
-    void copy() {
+    bool copy(){
+        return doLoop();
+    }
+
+    /**
+     * @brief Add this method to your loop
+     * Returns true while the client is connected.
+     */
+    bool doLoop() {
+        //LOGD("doLoop");
+        bool active = true;
         if (!client.connected()) {
             client = server.available(); // listen for incoming clients
             processClient();
         } else {
             // We are connected: copy input from source to wav output
             if (encoder){
-                copier.copy();
-                // if we limit the size of the WAV the encoder gets automatically closed when all has been sent
-                if (!encoder) {
-                    LOGI("stop client...");
-                    client.stop();
-                }
+                if (callback==nullptr) {
+                    LOGI("copy data...");
+                    copier.copy();
+                    // if we limit the size of the WAV the encoder gets automatically closed when all has been sent
+                    if (!encoder) {
+                        LOGI("stop client...");
+                        client.stop();
+                        active = false;
+                    }
+                } 
+            } else {
+                LOGI("client was not connected");
             }
         }
+        return active;
     }
+
 
 protected:
     // WIFI
     WiFiServer server = WiFiServer(80);
     WiFiClient client;
+    const char *password = nullptr;
+    const char *network = nullptr;
 
     // Sound Generation
     int sample_rate;
     int channels;
 
-    Stream *in;                             // Stream generated from sine wave
-    StreamCopy copier;                      // buffered copy
+    AudioWAVServerDataCallback callback = nullptr;
+    Stream *in = nullptr;                    
+    StreamCopy copier;                      
     WAVEncoder encoder;
     AudioOutputStream wav_stream = AudioOutputStream(encoder);  // WAV output stream
 
+    void connectWiFi() {
+        LOGD("connectWiFi");
+        if (WiFi.status() != WL_CONNECTED && network!=nullptr && password != nullptr){
+            WiFi.begin(network, password);
+            WiFi.setSleep(false);
+            while (WiFi.status() != WL_CONNECTED){
+                Serial.print(".");
+                delay(500); 
+            }
+            Serial.println();
+        }
+        char msg[80];
+        sprintf(msg, "IP address: %s",WiFi.localIP().toString().c_str());
+        LOGI(msg);
+        Serial.println(msg);
+    }
 
     void sendReply(){
+        LOGD("sendReply");
         // HTTP headers always start with a response code (e.g. HTTP/1.1 200 OK)
         // and a content-type so the client knows what's coming, then a blank line:
         client.println("HTTP/1.1 200 OK");
@@ -81,13 +161,22 @@ protected:
         config.is_streamed = true;
         encoder.begin(client, config);
 
-        LOGI("Returning WAV stream...");
-        copier.begin(wav_stream, *in);
+        // copy only for stream
+        if (callback!=nullptr){
+            LOGI("sendReply - calling callback");
+            // provide data via Callback
+            callback(wav_stream);
+            client.stop();
+        } else {
+            LOGI("sendReply - Returning WAV stream...");
+            copier.begin(wav_stream, *in);
+        }
    }
 
 
     // Handle an new client connection and return the data
     void processClient() {
+        //LOGD("processClient");
         if (client)  { // if you get a client,
             LOGI("New Client."); // print a message out the serial port
             String currentLine = "";       // make a String to hold incoming data from the client

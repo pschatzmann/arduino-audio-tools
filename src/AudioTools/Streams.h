@@ -552,6 +552,7 @@ class UrlStream : public Stream {
 
         size_t write(uint8_t) {
             LOGE("UrlStream write - not supported");
+            return 0;
         }
 
         void end(){
