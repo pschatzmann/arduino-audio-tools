@@ -28,8 +28,8 @@ public:
      * @param password 
      */
     AudioWAVServer(const char* network, const char *password) {
-        this->network = network;
-        this->password = password;
+        this->network = (char*)network;
+        this->password = (char*)password;
     }
 
     /**
@@ -39,10 +39,11 @@ public:
      * @param sample_rate 
      * @param channels 
      */
-    void begin(Stream &in, int sample_rate, int channels) {
+    void begin(Stream &in, int sample_rate, int channels, int bits_per_sample=16) {
         this->in = &in;
         this->sample_rate = sample_rate;
         this->channels = channels;
+        this->bits_per_sample = bits_per_sample;
 
         connectWiFi();
 
@@ -57,11 +58,12 @@ public:
      * @param sample_rate 
      * @param channels 
      */
-    void begin(AudioWAVServerDataCallback cb, int sample_rate, int channels) {
+    void begin(AudioWAVServerDataCallback cb, int sample_rate, int channels, int bits_per_sample=16) {
         this->in =nullptr;
         this->callback = cb;
         this->sample_rate = sample_rate;
         this->channels = channels;
+        this->bits_per_sample = bits_per_sample;
 
         connectWiFi();
 
@@ -115,12 +117,13 @@ protected:
     // WIFI
     WiFiServer server = WiFiServer(80);
     WiFiClient client;
-    const char *password = nullptr;
-    const char *network = nullptr;
+    char *password = nullptr;
+    char *network = nullptr;
 
     // Sound Generation
     int sample_rate;
     int channels;
+    int bits_per_sample;
 
     AudioWAVServerDataCallback callback = nullptr;
     Stream *in = nullptr;                    
@@ -132,17 +135,15 @@ protected:
         LOGD("connectWiFi");
         if (WiFi.status() != WL_CONNECTED && network!=nullptr && password != nullptr){
             WiFi.begin(network, password);
-            WiFi.setSleep(false);
+            //WiFi.setSleep(false);
             while (WiFi.status() != WL_CONNECTED){
                 Serial.print(".");
                 delay(500); 
             }
             Serial.println();
         }
-        char msg[80];
-        sprintf(msg, "IP address: %s",WiFi.localIP().toString().c_str());
-        LOGI(msg);
-        Serial.println(msg);
+        Serial.print("IP address: ");
+        Serial.println(WiFi.localIP());
     }
 
     void sendReply(){
@@ -158,16 +159,17 @@ protected:
         config.channels = channels;
         config.sample_rate = sample_rate;
         //config.data_length = data_length;
+        config.bits_per_sample = bits_per_sample;
         config.is_streamed = true;
         encoder.begin(client, config);
 
-        // copy only for stream
         if (callback!=nullptr){
-            LOGI("sendReply - calling callback");
             // provide data via Callback
+            LOGI("sendReply - calling callback");
             callback(wav_stream);
             client.stop();
         } else {
+            // provide data for stream
             LOGI("sendReply - Returning WAV stream...");
             copier.begin(wav_stream, *in);
         }

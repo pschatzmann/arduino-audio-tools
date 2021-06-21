@@ -1,5 +1,10 @@
 #pragma once
 
+#include "AudioConfig.h"
+
+#if USE_AUDIO_LOGGING
+
+
 #include "Stream.h"
 #include <cstdarg>
 
@@ -7,7 +12,7 @@
 #define PRINTF_BUFFER_SIZE 160
 #endif
 
-#define LOG_LEVEL  AudioLogger::Warning
+#define LOG_LEVEL AudioLogger::Warning
 #define LOG_STREAM Serial
 
 
@@ -156,3 +161,5 @@ class AudioLogger {
 };
 
 }    
+
+#endif
