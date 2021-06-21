@@ -31,7 +31,7 @@ class AudioOutputWithCallback : public AudioOutput, public BufferedStream {
             return true;
         }
 
-        /// puts the sample into a buffer
+        /// For ESP8266 Audio Framework -  puts the sample into a buffer
         virtual bool ConsumeSample(int16_t sample[2]) {
             Channels c;
             c.channel1 = sample[0];
