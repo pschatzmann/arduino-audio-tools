@@ -1,6 +1,8 @@
 
 #pragma once
 
+#include "AudioTools/AudioLogger.h"
+
 #undef MIN
 #define MIN(A,B) ((A) < (B) ? (A) : (B))
 

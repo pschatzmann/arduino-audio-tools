@@ -23,7 +23,7 @@ typedef int16_t sound_t;                                  // sound will be repre
 uint8_t channels = 1;                                     // The stream will have 2 channels 
 MozziGenerator mozzi(CONTROL_RATE);                       // subclass of SoundGenerator 
 GeneratedSoundStream<sound_t> in(mozzi, channels);        // Stream generated with mozzi
-AudioWAVServer server;
+AudioWAVServer server("network", "password");
 
 /// Copied from AMsynth.ino
 #define CONTROL_RATE 64 // Hz, powers of 2 are most reliable
@@ -48,19 +48,6 @@ Q8n0 octave_start_note = 42;
 void setup(){
   Serial.begin(115200);
 
-  // connect to WIFI
-  WiFi.begin("network", "password");
-  while (WiFi.status() != WL_CONNECTED){
-    Serial.print(".");
-    delay(500); 
-  }
-  Serial.println();
-  Serial.print("Connect to http://");
-  Serial.print(WiFi.localIP());
-
-  //start stream
-  in.begin();
-
   // We send the audio via the server
   server.begin(in, mozzi.config().sample_rate, channels);
 
@@ -69,6 +56,8 @@ void setup(){
   kNoteChangeDelay.set(200); // note duration ms, within resolution of CONTROL_RATE
   aModDepth.setFreq(13.f);     // vary mod depth to highlight am effects
   randSeed(); // reseed the random generator for different results each time the sketch runs
+
+  // Start Mozzi Stream
   in.begin();
 }
 
@@ -123,5 +112,5 @@ AudioOutput_t updateAudio(){
 
 // Arduino loop  
 void loop() {
-  server.copy();
+  server.doLoop();
 }
