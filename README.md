@@ -85,20 +85,20 @@ Here is the list of examples:
 
 Here are a couple of simple test sketches to demo different output destinations:
 
-- [streams-generator-serial](/examples/streams-generator-serial) Displaying generated sound on the Serial Plotter
-- [streams-generator-i2s](/examples/streams-generator-i2s) Output of generated sound on external DAC via I2S
-- [streams-generator-dac](/examples/streams-generator-dac) Output of generated sound on ESP32 internal DAC via I2S
-- [streams-generator-a2dp](/examples/streams-generator-a2dp) Output of generated sound on Bluetooth Speaker using A2DP
-- [streams-adc-serial](/examples/streams-adc-serial) Displaying input from analog microphone on the Serial Plotter
-- [streams-memory_wav-serial](/examples/streams-memory_wav-serial) Decoding of WAV from Flash memory and display on the Serial Plotter
-- [streams-generator-webserver_wav](/examples/streams-generator-webserver_wav) Encoding of WAV from generated sound returned via Webserver
+- [streams-generator-serial](examples/streams-generator-serial) Displaying generated sound on the Serial Plotter
+- [streams-generator-i2s](examples/streams-generator-i2s) Output of generated sound on external DAC via I2S
+- [streams-generator-dac](examples/streams-generator-dac) Output of generated sound on ESP32 internal DAC via I2S
+- [streams-generator-a2dp](examples/streams-generator-a2dp) Output of generated sound on Bluetooth Speaker using A2DP
+- [streams-adc-serial](examples/streams-adc-serial) Displaying input from analog microphone on the Serial Plotter
+- [streams-memory_wav-serial](examples/streams-memory_wav-serial) Decoding of WAV from Flash memory and display on the Serial Plotter
+- [streams-generator-webserver_wav](examples/streams-generator-webserver_wav) Encoding of WAV from generated sound returned via Webserver
 
 And some more useful examples:
 
-- [streams-memory_raw-i2s](/examples/streams-memory_raw-i2s) - Play music form Flash Memory via I2S to External DAC
-- [streams-url_raw-serial](/examples/streams-url_raw-serial) Displaying a music file from the internet on the Serial Plotter
-- [streams-url_raw-I2S.ino](/examples/streams-url_raw-i2s) Streaming a File from the Internet to on external DAC via I2S
-- [streams-mozzi-a2dp](/examples/streams-mozzi-a2dp) Use Mozzi to generate Sound to be sent to a Bluetooth Speaker
+- [streams-memory_raw-i2s](examples/streams-memory_raw-i2s) - Play music form Flash Memory via I2S to External DAC
+- [streams-url_raw-serial](examples/streams-url_raw-serial) Displaying a music file from the internet on the Serial Plotter
+- [streams-url_raw-I2S.ino](examples/streams-url_raw-i2s) Streaming a File from the Internet to on external DAC via I2S
+- [streams-mozzi-a2dp](examples/streams-mozzi-a2dp) Use Mozzi to generate Sound to be sent to a Bluetooth Speaker
 
 ... these are just a few examples, but you can combine any Input Stream with any Output Stream as you like...
 
@@ -116,8 +116,8 @@ And some more useful examples:
 
 I am providing a simple webserver which can render the audio data as wav result. Here are some examples
 
-- [streams-generator-webserver](/examples/streams-generator-webserver) A Webserver which renders some generated sound
-- [streams-sam-webserver](/examples/streams-sam-webserver) A Webserver which renders the result from the SAM TTS engine
+- [streams-generator-webserver](examples/streams-generator-webserver) A Webserver which renders some generated sound
+- [streams-sam-webserver](examples/streams-sam-webserver) A Webserver which renders the result from the SAM TTS engine
 
 
 ## Optional Libraries
