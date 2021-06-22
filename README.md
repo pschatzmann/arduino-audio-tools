@@ -118,6 +118,20 @@ I am providing a simple webserver which can render the audio data as wav result.
 - [streams-generator-webserver_wav](examples/streams-generator-webserver_wav) A Webserver which renders some generated sound
 - [streams-sam-webserver_wav](examples/streams-sam-webserver_wav) A Webserver which renders the result from the SAM TTS engine
 
+#### Logging
+
+The application uses a built in logger. You can adapt the loging by changing AudioConfig.h  
+
+```
+#define USE_AUDIO_LOGGING false
+```
+
+Per default we use the log level warning and the logging output is going to Serial. You can also change this in your sketch by calling AudioLogger begin with the output stream and the log level e.g:
+
+```
+AudioLogger::instance().begin(Serial, AudioLogger::Debug);
+```
+
 
 ## Optional Libraries
 

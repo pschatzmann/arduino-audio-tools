@@ -10,13 +10,27 @@
 //#define VARARG_SUPPORT false
 //#endif
 
-#define LOG_LEVEL AudioLogger::Warning
-#define LOG_STREAM Serial
-
 #ifndef PRINTF_BUFFER_SIZE
 #define PRINTF_BUFFER_SIZE 160
 #endif
 
+// Logging Implementation
+// #if USE_AUDIO_LOGGING && VARARG_SUPPORT
+// #define LOGD(...) AudioLogger::instance().printLog(__FILE__,__LINE__, AudioLogger::Debug,  __VA_ARGS__)
+// #define LOGI(...) AudioLogger::instance().printLog(__FILE__,__LINE__, AudioLogger::Info,  __VA_ARGS__)
+// #define LOGW(...) AudioLogger::instance().printLog(__FILE__,__LINE__, AudioLogger::Warning,  __VA_ARGS__)
+// #define LOGE(...) AudioLogger::instance().printLog(__FILE__,__LINE__, AudioLogger::Error, __VA_ARGS__)
+#if USE_AUDIO_LOGGING
+#define LOGD(...) snprintf(AudioLogger::instance().prefix(__FILE__,__LINE__, AudioLogger::Debug).str(),PRINTF_BUFFER_SIZE,__VA_ARGS__); AudioLogger::instance().println();
+#define LOGI(...) snprintf(AudioLogger::instance().prefix(__FILE__,__LINE__, AudioLogger::Info).str(),PRINTF_BUFFER_SIZE,__VA_ARGS__); AudioLogger::instance().println();
+#define LOGW(...) snprintf(AudioLogger::instance().prefix(__FILE__,__LINE__, AudioLogger::Warning).str(),PRINTF_BUFFER_SIZE,__VA_ARGS__); AudioLogger::instance().println();
+#define LOGE(...) snprintf(AudioLogger::instance().prefix(__FILE__,__LINE__, AudioLogger::Error).str(),PRINTF_BUFFER_SIZE,__VA_ARGS__); AudioLogger::instance().println();
+#else
+#define LOGD(...) 
+#define LOGI(...) 
+#define LOGW(...) 
+#define LOGE(...) 
+#endif
 
 namespace audio_tools {
 
