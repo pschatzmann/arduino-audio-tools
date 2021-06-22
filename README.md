@@ -91,7 +91,6 @@ Here are a couple of simple test sketches to demo different output destinations:
 - [streams-generator-a2dp](examples/streams-generator-a2dp) Output of generated sound on Bluetooth Speaker using A2DP
 - [streams-adc-serial](examples/streams-adc-serial) Displaying input from analog microphone on the Serial Plotter
 - [streams-memory_wav-serial](examples/streams-memory_wav-serial) Decoding of WAV from Flash memory and display on the Serial Plotter
-- [streams-generator-webserver_wav](examples/streams-generator-webserver_wav) Encoding of WAV from generated sound returned via Webserver
 
 And some more useful examples:
 
@@ -116,8 +115,8 @@ And some more useful examples:
 
 I am providing a simple webserver which can render the audio data as wav result. Here are some examples
 
-- [streams-generator-webserver](examples/streams-generator-webserver) A Webserver which renders some generated sound
-- [streams-sam-webserver](examples/streams-sam-webserver) A Webserver which renders the result from the SAM TTS engine
+- [streams-generator-webserver_wav](examples/streams-generator-webserver_wav) A Webserver which renders some generated sound
+- [streams-sam-webserver_wav](examples/streams-sam-webserver_wav) A Webserver which renders the result from the SAM TTS engine
 
 
 ## Optional Libraries
