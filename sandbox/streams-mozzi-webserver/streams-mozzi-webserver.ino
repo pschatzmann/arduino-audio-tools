@@ -1,7 +1,7 @@
 /**
- * @file streams-generator-a2dp.ino
+ * @file streams-mozzi-webserver_wav.ino
  * @author Phil Schatzmann
- * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/streams-generator-a2dp/README.md
+ * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/streams-mozzi-webserver_wav/README.md
  * 
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -23,7 +23,7 @@ typedef int16_t sound_t;                                  // sound will be repre
 uint8_t channels = 1;                                     // The stream will have 2 channels 
 MozziGenerator mozzi(CONTROL_RATE);                       // subclass of SoundGenerator 
 GeneratedSoundStream<sound_t> in(mozzi, channels);        // Stream generated with mozzi
-WebServer server;
+AudioWAVServer server;
 
 /// Copied from AMsynth.ino
 #define CONTROL_RATE 64 // Hz, powers of 2 are most reliable
