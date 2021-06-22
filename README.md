@@ -113,17 +113,20 @@ And some more useful examples:
 
 #### Listening to the Result with a Webbrowser
 
-I am providing a simple webserver which can render the audio data as wav result. Here are some examples
+I am providing a simple webserver which can render the audio data as wav result. 
+Here are some examples:
 
 - [streams-generator-webserver_wav](examples/streams-generator-webserver_wav) A Webserver which renders some generated sound
 - [streams-sam-webserver_wav](examples/streams-sam-webserver_wav) A Webserver which renders the result from the SAM TTS engine
 
 #### Logging
 
-The application uses a built in logger. You can adapt the loging by changing AudioConfig.h  
+The application uses a built in logger (see AudioLogger.h and AudioConfig.h). You can  e.g. deactivate the logging by changing USE_AUDIO_LOGGING to false in the AudioConfig.h: 
 
 ```
 #define USE_AUDIO_LOGGING false
+#define LOG_LEVEL AudioLogger::Warning
+#define LOG_STREAM Serial
 ```
 
 Per default we use the log level warning and the logging output is going to Serial. You can also change this in your sketch by calling AudioLogger begin with the output stream and the log level e.g:
