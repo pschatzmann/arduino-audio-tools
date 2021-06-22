@@ -100,6 +100,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa67e158e7d10eee24a978653c2ad1f55"><td class="memItemLeft" align="right" valign="top"><a id="aa67e158e7d10eee24a978653c2ad1f55"></a>
 virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>available</b> ()</td></tr>
 <tr class="separator:aa67e158e7d10eee24a978653c2ad1f55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7dd9c3eb605d95f67b0152ddde4fd97a"><td class="memItemLeft" align="right" valign="top"><a id="a7dd9c3eb605d95f67b0152ddde4fd97a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> ()</td></tr>
+<tr class="separator:a7dd9c3eb605d95f67b0152ddde4fd97a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2cbc55b52996f8863a6cb34587c71e4c"><td class="memItemLeft" align="right" valign="top"><a id="a2cbc55b52996f8863a6cb34587c71e4c"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> (bool reset=false)</td></tr>
 <tr class="separator:a2cbc55b52996f8863a6cb34587c71e4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -283,19 +286,19 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (const ch
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:acddba228a9b679ec85bf1f6d3b87a3fe"><td class="memItemLeft" align="right" valign="top"><a id="acddba228a9b679ec85bf1f6d3b87a3fe"></a>
-uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b></td></tr>
+uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b> = nullptr</td></tr>
 <tr class="separator:acddba228a9b679ec85bf1f6d3b87a3fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23286e0bb7f1342513843a32d4214c81"><td class="memItemLeft" align="right" valign="top"><a id="a23286e0bb7f1342513843a32d4214c81"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_size</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_size</b> = 0</td></tr>
 <tr class="separator:a23286e0bb7f1342513843a32d4214c81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7bf2dd0840e2a7ec8249d8dd2d2eff13"><td class="memItemLeft" align="right" valign="top"><a id="a7bf2dd0840e2a7ec8249d8dd2d2eff13"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>owns_buffer</b></td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>owns_buffer</b> =false</td></tr>
 <tr class="separator:a7bf2dd0840e2a7ec8249d8dd2d2eff13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7edb9de3c58e2e40173c2de95feaf68"><td class="memItemLeft" align="right" valign="top"><a id="ab7edb9de3c58e2e40173c2de95feaf68"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>read_pos</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>read_pos</b> = 0</td></tr>
 <tr class="separator:ab7edb9de3c58e2e40173c2de95feaf68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae6d73f5d2c5173e9603481695255cfa6"><td class="memItemLeft" align="right" valign="top"><a id="ae6d73f5d2c5173e9603481695255cfa6"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>write_pos</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>write_pos</b> = 0</td></tr>
 <tr class="separator:ae6d73f5d2c5173e9603481695255cfa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_class_stream"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_stream')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_stream.html">Stream</a></td></tr>
 <tr class="memitem:abf61d2006d28d18f2e028285a323fe5a inherit pro_attribs_class_stream"><td class="memItemLeft" align="right" valign="top"><a id="abf61d2006d28d18f2e028285a323fe5a"></a>

@@ -82,7 +82,7 @@ $(function() {
 <p>As “Audio Sources” we will have e.g.:</p>
 <ul>
 <li>Analog Microphones – <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_analog_audio_stream.html">AnalogAudioStream</a></li>
-<li>Digital Microphonse – <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_i2_s_stream.html">I2SStream</a></li>
+<li>Digital Microphones – <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_i2_s_stream.html">I2SStream</a></li>
 <li>Files on the Internet – <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_url_stream.html">UrlStream</a></li>
 <li>Generated Sound – <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_generated_sound_stream.html">GeneratedSoundStream</a></li>
 <li>Mobile Phone A2DP Bluetooth – <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_a2_d_p_stream.html">A2DPStream</a></li>
@@ -147,7 +147,7 @@ Stream API</h3>
 </ul>
 <p>And some more useful examples:</p>
 <ul>
-<li><a href="examples/streams-memory_raw-i2s">streams-memory_raw-i2s</a> - Play music form Flash Memory via I2S to External DAC</li>
+<li><a href="/examples/streams-memory_raw-i2s">streams-memory_raw-i2s</a> - Play music form Flash Memory via I2S to External DAC</li>
 <li><a href="/examples/streams-url_raw-serial">streams-url_raw-serial</a> Displaying a music file from the internet on the Serial Plotter</li>
 <li><a href="/examples/streams-url_raw-i2s">streams-url_raw-I2S.ino</a> Streaming a File from the Internet to on external DAC via I2S</li>
 <li><a href="/examples/streams-mozzi-a2dp">streams-mozzi-a2dp</a> Use Mozzi to generate Sound to be sent to a Bluetooth Speaker</li>
@@ -164,7 +164,14 @@ Basic API</h3>
 <li><a href="basic-api/base-i2s-serial">base-i2s-serial</a> - Sample digital sound and write it to Serial</li>
 <li><a href="basic-api/base-i2s-a2dp">base-i2s-a2dp</a> - Sample analog sound and write it to a A2DP Bluetooth source</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md4"></a>
+<h3><a class="anchor" id="autotoc_md4"></a>
+Listening to the Result with a Webbrowser</h3>
+<p>I am providing a simple webserver which can render the audio data as wav result. Here are some examples</p>
+<ul>
+<li><a href="/examples/streams-generator-webserver">streams-generator-webserver</a> A Webserver which renders some generated sound</li>
+<li><a href="/examples/streams-sam-webserver">streams-sam-webserver</a> A Webserver which renders the result from the SAM TTS engine</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md5"></a>
 Optional Libraries</h1>
 <p>Dependent on the example you might need to install some of the following libraries:</p>
 <ul>
@@ -173,17 +180,18 @@ Optional Libraries</h1>
 <li><a href="https://www.arduino.cc/en/reference/SD">SD Library</a> to read and write files.</li>
 <li><a href="https://github.com/pschatzmann/arduino-fdk-aac">arduino-fdk-aac</a> to encode or decode AAC</li>
 <li><a href="https://github.com/pschatzmann/Mozzi">Mozzi</a> A sound synthesis library for Arduino</li>
+<li><a href="https://github.com/pschatzmann/SAM">SAM</a> A Text to Speach Engine</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md5"></a>
+<h1><a class="anchor" id="autotoc_md6"></a>
 Installation</h1>
 <p>You can download the library as zip and call include Library -&gt; zip library. Or you can git clone this project into the Arduino libraries folder e.g. with</p>
 <div class="fragment"><div class="line">cd  ~/Documents/Arduino/libraries</div>
 <div class="line">git clone pschatzmann/arduino-audio-tools.git</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md6"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md7"></a>
 Documentation</h1>
 <p>Here is the generated <a href="https://pschatzmann.github.io/arduino-audio-tools/html/annotated.html">Class documentation</a>.</p>
 <p>You also might find further information in <a href="https://www.pschatzmann.ch/home/category/machine-sound/">one of my blogs</a></p>
-<h1><a class="anchor" id="autotoc_md7"></a>
+<h1><a class="anchor" id="autotoc_md8"></a>
 Project Status</h1>
 <p>This is currently work in progress:</p>
 <table class="markdownTable">

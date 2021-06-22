@@ -13,9 +13,11 @@ var searchData=
   ['audiologger_10',['AudioLogger',['../classaudio__tools_1_1_audio_logger.html',1,'audio_tools']]],
   ['audiooutputstream_11',['AudioOutputStream',['../classaudio__tools_1_1_audio_output_stream.html',1,'audio_tools']]],
   ['audiooutputwithcallback_12',['AudioOutputWithCallback',['../classaudio__tools_1_1_audio_output_with_callback.html',1,'audio_tools']]],
-  ['audiotools_2eh_13',['AudioTools.h',['../_audio_tools_8h.html',1,'']]],
-  ['audiousb_14',['AudioUSB',['../classaudio__tools_1_1_audio_u_s_b.html',1,'audio_tools']]],
-  ['audiowriter_15',['AudioWriter',['../classaudio__tools_1_1_audio_writer.html',1,'audio_tools']]],
-  ['available_16',['available',['../classaudio__tools_1_1_stream_copy_t.html#a573c7beae26a6a28a32b9ee4f11a31a2',1,'audio_tools::StreamCopyT::available()'],['../classaudio__tools_1_1_generated_sound_stream.html#a51b33c6540d03dab178091e2180657b9',1,'audio_tools::GeneratedSoundStream::available()'],['../classaudio__tools_1_1_buffered_stream.html#add7c826932c60e135fe6ae134fb22b3d',1,'audio_tools::BufferedStream::available()']]],
-  ['availableforwrite_17',['availableForWrite',['../classaudio__tools_1_1_generated_sound_stream.html#a265baf4841c1ed28d7e3887efef98744',1,'audio_tools::GeneratedSoundStream']]]
+  ['audiopwm_13',['AudioPWM',['../classaudio__tools_1_1_audio_p_w_m.html',1,'audio_tools']]],
+  ['audiotools_2eh_14',['AudioTools.h',['../_audio_tools_8h.html',1,'']]],
+  ['audiousb_15',['AudioUSB',['../classaudio__tools_1_1_audio_u_s_b.html',1,'audio_tools']]],
+  ['audiowavserver_16',['AudioWAVServer',['../class_audio_w_a_v_server.html',1,'AudioWAVServer'],['../class_audio_w_a_v_server.html#a69d227182483782c1fa954a711f49d47',1,'AudioWAVServer::AudioWAVServer()=default'],['../class_audio_w_a_v_server.html#a6119d8487f4f1c4cc75c741f8d1c75bf',1,'AudioWAVServer::AudioWAVServer(const char *network, const char *password)']]],
+  ['audiowriter_17',['AudioWriter',['../classaudio__tools_1_1_audio_writer.html',1,'audio_tools']]],
+  ['available_18',['available',['../classaudio__tools_1_1_stream_copy_t.html#a573c7beae26a6a28a32b9ee4f11a31a2',1,'audio_tools::StreamCopyT::available()'],['../classaudio__tools_1_1_generated_sound_stream.html#a51b33c6540d03dab178091e2180657b9',1,'audio_tools::GeneratedSoundStream::available()'],['../classaudio__tools_1_1_buffered_stream.html#add7c826932c60e135fe6ae134fb22b3d',1,'audio_tools::BufferedStream::available()']]],
+  ['availableforwrite_19',['availableForWrite',['../classaudio__tools_1_1_generated_sound_stream.html#a265baf4841c1ed28d7e3887efef98744',1,'audio_tools::GeneratedSoundStream']]]
 ];

@@ -95,7 +95,7 @@ Here are a couple of simple test sketches to demo different output destinations:
 
 And some more useful examples:
 
-- [streams-memory_raw-i2s](examples/streams-memory_raw-i2s) - Play music form Flash Memory via I2S to External DAC
+- [streams-memory_raw-i2s](/examples/streams-memory_raw-i2s) - Play music form Flash Memory via I2S to External DAC
 - [streams-url_raw-serial](/examples/streams-url_raw-serial) Displaying a music file from the internet on the Serial Plotter
 - [streams-url_raw-I2S.ino](/examples/streams-url_raw-i2s) Streaming a File from the Internet to on external DAC via I2S
 - [streams-mozzi-a2dp](/examples/streams-mozzi-a2dp) Use Mozzi to generate Sound to be sent to a Bluetooth Speaker
@@ -112,6 +112,12 @@ And some more useful examples:
 - [base-i2s-serial](basic-api/base-i2s-serial) - Sample digital sound and write it to Serial
 - [base-i2s-a2dp](basic-api/base-i2s-a2dp) - Sample analog sound and write it to a A2DP Bluetooth source 
 
+#### Listening to the Result with a Webbrowser
+
+I am providing a simple webserver which can render the audio data as wav result. Here are some examples
+
+- [streams-generator-webserver](/examples/streams-generator-webserver) A Webserver which renders some generated sound
+- [streams-sam-webserver](/examples/streams-sam-webserver) A Webserver which renders the result from the SAM TTS engine
 
 
 ## Optional Libraries
@@ -123,7 +129,7 @@ Dependent on the example you might need to install some of the following librari
 - [SD Library](https://www.arduino.cc/en/reference/SD) to read and write files.
 - [arduino-fdk-aac](https://github.com/pschatzmann/arduino-fdk-aac) to encode or decode AAC 
 - [Mozzi](https://github.com/pschatzmann/Mozzi) A sound synthesis library for Arduino
-
+- [SAM](https://github.com/pschatzmann/SAM) A Text to Speach Engine
 
 ## Installation
 

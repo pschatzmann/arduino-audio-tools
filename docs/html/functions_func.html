@@ -70,6 +70,9 @@ $(function() {
 <li>AnalogConfig()
 : <a class="el" href="classaudio__tools_1_1_analog_config.html#a72e7418310b96c03bf13a06ee12ca68c">audio_tools::AnalogConfig</a>
 </li>
+<li>AudioWAVServer()
+: <a class="el" href="class_audio_w_a_v_server.html#a69d227182483782c1fa954a711f49d47">AudioWAVServer</a>
+</li>
 <li>available()
 : <a class="el" href="classaudio__tools_1_1_buffered_stream.html#add7c826932c60e135fe6ae134fb22b3d">audio_tools::BufferedStream</a>
 , <a class="el" href="classaudio__tools_1_1_generated_sound_stream.html#a51b33c6540d03dab178091e2180657b9">audio_tools::GeneratedSoundStream&lt; T &gt;</a>
@@ -88,10 +91,10 @@ $(function() {
 , <a class="el" href="classaudio__tools_1_1_analog_audio.html#a04d0751f5388c1b204f9bec298a9f18d">audio_tools::AnalogAudio</a>
 , <a class="el" href="classaudio__tools_1_1_audio_logger.html#ac0ec04aa634aa6c974e1ecc7fb27d878">audio_tools::AudioLogger</a>
 , <a class="el" href="classaudio__tools_1_1_audio_output_with_callback.html#adbc03b094993cbe8360f70168ace4853">audio_tools::AudioOutputWithCallback</a>
-, <a class="el" href="classaudio__tools_1_1_csv_stream.html#a5985b6bc24b0e4cd88f45f3404a2b372">audio_tools::CsvStream&lt; T &gt;</a>
 , <a class="el" href="classaudio__tools_1_1_generated_sound_stream.html#ab72f6f63d20359825d4abbe82ccb3a27">audio_tools::GeneratedSoundStream&lt; T &gt;</a>
 , <a class="el" href="classaudio__tools_1_1_i2_s_base.html#a7ba4d5c09e12e4cf2a88c433e863482f">audio_tools::I2SBase</a>
 , <a class="el" href="classaudio__tools_1_1_sine_wave_generator.html#a2654d0c09f99b58d6bf3dc78fa620140">audio_tools::SineWaveGenerator&lt; T &gt;</a>
+, <a class="el" href="class_audio_w_a_v_server.html#a521e5ddc9f241b2c8469897e93344beb">AudioWAVServer</a>
 </li>
 </ul>
 
@@ -112,6 +115,7 @@ $(function() {
 </li>
 <li>copy()
 : <a class="el" href="classaudio__tools_1_1_stream_copy.html#a392f5a5a59ecce04c34c1af4ae2ac08f">audio_tools::StreamCopy</a>
+, <a class="el" href="class_audio_w_a_v_server.html#aa7a7448c05d37ed7f0f7fda93108a321">AudioWAVServer</a>
 </li>
 <li>CsvStream()
 : <a class="el" href="classaudio__tools_1_1_csv_stream.html#ae6f403984ed50e5f692ee6472fa7a5da">audio_tools::CsvStream&lt; T &gt;</a>
@@ -120,14 +124,14 @@ $(function() {
 
 
 <h3><a id="index_d"></a>- d -</h3><ul>
-<li>debug()
-: <a class="el" href="classaudio__tools_1_1_audio_logger.html#a44c6693a929b8c1305d9587afedbf8fc">audio_tools::AudioLogger</a>
-</li>
 <li>defaultConfig()
 : <a class="el" href="classaudio__tools_1_1_analog_audio.html#ae2aabbe86710a350377766b4e4f08bb7">audio_tools::AnalogAudio</a>
 , <a class="el" href="classaudio__tools_1_1_analog_audio_stream.html#aa376f60a1da3c13e5377fe55f57a1037">audio_tools::AnalogAudioStream</a>
 , <a class="el" href="classaudio__tools_1_1_i2_s_base.html#aa5996b640516a91a449ae4cddb24a129">audio_tools::I2SBase</a>
 , <a class="el" href="classaudio__tools_1_1_i2_s_stream.html#a01e39098fe866fc4d45cda664a26ce95">audio_tools::I2SStream</a>
+</li>
+<li>doLoop()
+: <a class="el" href="class_audio_w_a_v_server.html#aba6a5a6583052c39aca701366936243e">AudioWAVServer</a>
 </li>
 </ul>
 
@@ -137,11 +141,9 @@ $(function() {
 : <a class="el" href="classaudio__tools_1_1_analog_audio.html#a87a9bcf73033362f0567da7d91475a8f">audio_tools::AnalogAudio</a>
 , <a class="el" href="classaudio__tools_1_1_audio_logger.html#af5e4bc15794bfed5583e49fbd0023063">audio_tools::AudioLogger</a>
 , <a class="el" href="classaudio__tools_1_1_csv_stream.html#a772fc2ddc81fd6ef84ceb061669b4230">audio_tools::CsvStream&lt; T &gt;</a>
+, <a class="el" href="classaudio__tools_1_1_generated_sound_stream.html#af7c39dd8347444bad383fea145dddc44">audio_tools::GeneratedSoundStream&lt; T &gt;</a>
 , <a class="el" href="classaudio__tools_1_1_i2_s_base.html#a08984251ffdc990da5d9c232485b9cd4">audio_tools::I2SBase</a>
 , <a class="el" href="classaudio__tools_1_1_sound_generator.html#aea4c7b4838a41b359d80dbaf7abe4f97">audio_tools::SoundGenerator&lt; T &gt;</a>
-</li>
-<li>error()
-: <a class="el" href="classaudio__tools_1_1_audio_logger.html#adae4028f10d84d47783ba579054b8c2c">audio_tools::AudioLogger</a>
 </li>
 </ul>
 
@@ -162,9 +164,6 @@ $(function() {
 </li>
 <li>I2SConfig()
 : <a class="el" href="classaudio__tools_1_1_i2_s_config.html#a6ddcfcef498a6bda2cab7339d62e166a">audio_tools::I2SConfig</a>
-</li>
-<li>info()
-: <a class="el" href="classaudio__tools_1_1_audio_logger.html#a6acd4740c75c9e68746ead92f5767efc">audio_tools::AudioLogger</a>
 </li>
 <li>instance()
 : <a class="el" href="classaudio__tools_1_1_a2_d_p_stream.html#a9fd624ba31d596fbfe17496f0ef2ef57">audio_tools::A2DPStream</a>
@@ -207,9 +206,6 @@ $(function() {
 </li>
 <li>pin()
 : <a class="el" href="classaudio__tools_1_1_analog_config.html#a9b23d7225eb36a909ba19087696a7e77">audio_tools::AnalogConfig</a>
-</li>
-<li>printf()
-: <a class="el" href="classaudio__tools_1_1_audio_logger.html#a1f1dec67021e89cfbd1746c123c6fcdd">audio_tools::AudioLogger</a>
 </li>
 </ul>
 
@@ -289,17 +285,13 @@ $(function() {
 </li>
 <li>stop()
 : <a class="el" href="classaudio__tools_1_1_audio_output_with_callback.html#af8c887b9ce6c100722de3e6b8aaf23cf">audio_tools::AudioOutputWithCallback</a>
-, <a class="el" href="classaudio__tools_1_1_generated_sound_stream.html#a710d4eb3b923766949329ad0829e1ab2">audio_tools::GeneratedSoundStream&lt; T &gt;</a>
 </li>
 </ul>
 
 
 <h3><a id="index_w"></a>- w -</h3><ul>
-<li>warning()
-: <a class="el" href="classaudio__tools_1_1_audio_logger.html#aabd4790239aeb990b074ec028376f7df">audio_tools::AudioLogger</a>
-</li>
 <li>WAVDecoder()
-: <a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#ad12d61515e25bd59a37a3c5af877deff">audio_tools::WAVDecoder</a>
+: <a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a5bdda66b6bfcf91e5be2e9267cb36bde">audio_tools::WAVDecoder</a>
 </li>
 <li>write()
 : <a class="el" href="classaudio__tools_1_1_a2_d_p_stream.html#af3a36b39bac9c52733d2cc7e864bb0a1">audio_tools::A2DPStream</a>

@@ -90,18 +90,24 @@ Inheritance diagram for audio_tools::WAVDecoder:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad12d61515e25bd59a37a3c5af877deff"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#ad12d61515e25bd59a37a3c5af877deff">WAVDecoder</a> (<a class="el" href="class_print.html">Print</a> &amp;out_stream)</td></tr>
-<tr class="memdesc:ad12d61515e25bd59a37a3c5af877deff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html" title="WAVDecoder - We parse the header data on the first record and send the sound data to the stream which...">WAVDecoder</a> object.  <a href="classaudio__tools_1_1_w_a_v_decoder.html#ad12d61515e25bd59a37a3c5af877deff">More...</a><br /></td></tr>
-<tr class="separator:ad12d61515e25bd59a37a3c5af877deff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a63043a9a160d9316d154347561f6d471"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a63043a9a160d9316d154347561f6d471">WAVDecoder</a> (<a class="el" href="class_print.html">Print</a> &amp;out_stream, <a class="el" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> &amp;bi)</td></tr>
 <tr class="memdesc:a63043a9a160d9316d154347561f6d471"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html" title="WAVDecoder - We parse the header data on the first record and send the sound data to the stream which...">WAVDecoder</a> object.  <a href="classaudio__tools_1_1_w_a_v_decoder.html#a63043a9a160d9316d154347561f6d471">More...</a><br /></td></tr>
 <tr class="separator:a63043a9a160d9316d154347561f6d471"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bdda66b6bfcf91e5be2e9267cb36bde"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a5bdda66b6bfcf91e5be2e9267cb36bde">WAVDecoder</a> (<a class="el" href="class_print.html">Print</a> &amp;out_stream, bool active=true)</td></tr>
+<tr class="memdesc:a5bdda66b6bfcf91e5be2e9267cb36bde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html" title="WAVDecoder - We parse the header data on the first record and send the sound data to the stream which...">WAVDecoder</a> object.  <a href="classaudio__tools_1_1_w_a_v_decoder.html#a5bdda66b6bfcf91e5be2e9267cb36bde">More...</a><br /></td></tr>
+<tr class="separator:a5bdda66b6bfcf91e5be2e9267cb36bde"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b24bbf4f2dbd26be024b43b1665606d"><td class="memItemLeft" align="right" valign="top"><a id="a6b24bbf4f2dbd26be024b43b1665606d"></a>
 <a class="el" href="structaudio__tools_1_1_w_a_v_audio_info.html">WAVAudioInfo</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>audioInfo</b> ()</td></tr>
 <tr class="separator:a6b24bbf4f2dbd26be024b43b1665606d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9525fdd8f5600b5e35eabcae8eec24f"><td class="memItemLeft" align="right" valign="top"><a id="af9525fdd8f5600b5e35eabcae8eec24f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> ()</td></tr>
 <tr class="separator:af9525fdd8f5600b5e35eabcae8eec24f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab568eb4d603416bc542aad3a325d1140"><td class="memItemLeft" align="right" valign="top"><a id="ab568eb4d603416bc542aad3a325d1140"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
+<tr class="separator:ab568eb4d603416bc542aad3a325d1140"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e011253587192e733429769a9cb55ea"><td class="memItemLeft" align="right" valign="top"><a id="a8e011253587192e733429769a9cb55ea"></a>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><b>mime</b> ()</td></tr>
+<tr class="separator:a8e011253587192e733429769a9cb55ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8d3c2d72be55e398d1292b92cc95cf5"><td class="memItemLeft" align="right" valign="top"><a id="ae8d3c2d72be55e398d1292b92cc95cf5"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><b>operator boolean</b> ()</td></tr>
 <tr class="separator:ae8d3c2d72be55e398d1292b92cc95cf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -135,8 +141,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isValid</b> = true</t
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ad12d61515e25bd59a37a3c5af877deff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad12d61515e25bd59a37a3c5af877deff">&#9670;&nbsp;</a></span>WAVDecoder() <span class="overload">[1/2]</span></h2>
+<a id="a5bdda66b6bfcf91e5be2e9267cb36bde"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bdda66b6bfcf91e5be2e9267cb36bde">&#9670;&nbsp;</a></span>WAVDecoder() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -148,8 +154,18 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isValid</b> = true</t
           <td class="memname">audio_tools::WAVDecoder::WAVDecoder </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_print.html">Print</a> &amp;&#160;</td>
-          <td class="paramname"><em>out_stream</em></td><td>)</td>
+          <td class="paramname"><em>out_stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>active</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
