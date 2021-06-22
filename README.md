@@ -14,7 +14,7 @@ Some basic __header-only C++ classes__ that can be used for __Audio Processing__
 - AudioOutputWithCallback class to provide callback integration e.g. with ESP8266Audio
 
 This functionality provides the glue which makes different audio processing components and libraries work together.
-We also provide plenty of examples that demonstrate how to implement the different scenarios. The __design philosophy__ is based on the Arduino conventions: we use the ```begin()``` and ```end()``` methods to start and stop the processing and we propagate the __use of Streams__.  We all know the [Arduino Streams](https://pschatzmann.github.io/arduino-audio-tools/html/class_stream.html): We use them to write out print messages and sometimes we use them to read the output from Serial devices. The same thing applies to my “Audio Streams”: You can read audio data from “Audio Sources” and you write them to “Audio Sinks”.
+We also provide plenty of examples that demonstrate how to implement the different scenarios. The __design philosophy__ is based on the Arduino conventions: we use the ```begin()``` and ```end()``` methods to start and stop the processing and we propagate the __use of Streams__.  We all know the [Arduino Streams](https://pschatzmann.github.io/arduino-audio-tools/html/class_stream.html): We usually use them to write out print messages and sometimes we use them to read the output from Serial devices. The same thing applies to “Audio Streams”: You can read audio data from “Audio Sources” and you write them to “Audio Sinks”.
 
 As “Audio Sources” we will have e.g.:
 
@@ -113,7 +113,7 @@ And some more useful examples:
 
 #### Listening to the Result with a Webbrowser
 
-I am providing a simple webserver which can render the audio data as wav result. 
+I am also providing a simple webserver which can render the audio data as wav result. 
 Here are some examples:
 
 - [streams-generator-webserver_wav](examples/streams-generator-webserver_wav) A Webserver which renders some generated sound
