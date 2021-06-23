@@ -1,33 +1,30 @@
 /**
- * @file streams-sam-webserver_wav.ino
+ * @file streams-tts-webserver_wav.ino
  * 
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 
  */
-#include "sam_arduino.h"
+#include "TTS.h"
 #include "AudioWAVServer.h"
 
 using namespace audio_tools;  
 
 AudioWAVServer server("ssid","password");
-int channels = 1;
-int bits_per_sample = 8;
 
 // Callback which provides the audio data 
 void outputData(Stream &out){
   Serial.print("providing data...");
-  SAM sam(out,  false);
-  sam.setOutputChannels(channels);
-  sam.setBitsPerSample(bits_per_sample);
-
-  sam.say("hallo, I am SAM");
+  TTS tts(out);
+  tts.sayText("Hallo, my name is Alice");
 }
 
 void setup(){
   Serial.begin(115200);
+  //AudioLogger::instance().begin(Serial, AudioLogger::Debug);
   // start data sink
-  server.begin(outputData, SAM::sampleRate(), channels, bits_per_sample);
+  TTSInfo info = TTS::getInfo();
+  server.begin(outputData, info.sample_rate, info.channels, info.bits_per_sample);
 }
 
 

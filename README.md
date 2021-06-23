@@ -118,6 +118,7 @@ Here are some examples:
 
 - [streams-generator-webserver_wav](examples/streams-generator-webserver_wav) A Webserver which renders some generated sound
 - [streams-sam-webserver_wav](examples/streams-sam-webserver_wav) A Webserver which renders the result from the SAM TTS engine
+- [streams-tts-webserver_wav](examples/streams-tts-webserver_wav) A Webserver which renders the result from the SAM TTS engine
 
 #### Logging
 
@@ -146,6 +147,7 @@ Dependent on the example you might need to install some of the following librari
 - [arduino-fdk-aac](https://github.com/pschatzmann/arduino-fdk-aac) to encode or decode AAC 
 - [Mozzi](https://github.com/pschatzmann/Mozzi) A sound synthesis library for Arduino
 - [SAM](https://github.com/pschatzmann/SAM) A Text to Speach Engine
+- [TTS](https://github.com/pschatzmann/TTS) A Text to Speach Engine
 
 ## Installation
 
