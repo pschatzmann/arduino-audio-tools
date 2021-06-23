@@ -78,7 +78,7 @@ $(function() {
 <li>A Wav Encoder and Decoder</li>
 <li>AudioOutputWithCallback class to provide callback integration e.g. with ESP8266Audio</li>
 </ul>
-<p>This functionality provides the glue which makes different audio processing components and libraries work together. We also provide plenty of examples that demonstrate how to implement the different scenarios. The <b>design philosophy</b> is based on the Arduino conventions: we use the <code>begin()</code> and <code>end()</code> methods to start and stop the processing and we propagate the <b>use of Streams</b>. We all know the <a href="https://pschatzmann.github.io/arduino-audio-tools/html/class_stream.html">Arduino Streams</a>: We use them to write out print messages and sometimes we use them to read the output from Serial devices. The same thing applies to my “Audio Streams”: You can read audio data from “Audio Sources” and you write them to “Audio Sinks”.</p>
+<p>This functionality provides the glue which makes different audio processing components and libraries work together. We also provide plenty of examples that demonstrate how to implement the different scenarios. The <b>design philosophy</b> is based on the Arduino conventions: we use the <code>begin()</code> and <code>end()</code> methods to start and stop the processing and we propagate the <b>use of Streams</b>. We all know the <a href="https://pschatzmann.github.io/arduino-audio-tools/html/class_stream.html">Arduino Streams</a>: We usually use them to write out print messages and sometimes we use them to read the output from Serial devices. The same thing applies to “Audio Streams”: You can read audio data from “Audio Sources” and you write them to “Audio Sinks”.</p>
 <p>As “Audio Sources” we will have e.g.:</p>
 <ul>
 <li>Analog Microphones – <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_analog_audio_stream.html">AnalogAudioStream</a></li>
@@ -137,20 +137,19 @@ Examples</h1>
 Stream API</h3>
 <p>Here are a couple of simple test sketches to demo different output destinations:</p>
 <ul>
-<li><a href="/examples/streams-generator-serial">streams-generator-serial</a> Displaying generated sound on the Serial Plotter</li>
-<li><a href="/examples/streams-generator-i2s">streams-generator-i2s</a> Output of generated sound on external DAC via I2S</li>
-<li><a href="/examples/streams-generator-dac">streams-generator-dac</a> Output of generated sound on ESP32 internal DAC via I2S</li>
-<li><a href="/examples/streams-generator-a2dp">streams-generator-a2dp</a> Output of generated sound on Bluetooth Speaker using A2DP</li>
-<li><a href="/examples/streams-adc-serial">streams-adc-serial</a> Displaying input from analog microphone on the Serial Plotter</li>
-<li><a href="/examples/streams-memory_wav-serial">streams-memory_wav-serial</a> Decoding of WAV from Flash memory and display on the Serial Plotter</li>
-<li><a href="/examples/streams-generator-webserver_wav">streams-generator-webserver_wav</a> Encoding of WAV from generated sound returned via Webserver</li>
+<li><a href="examples/streams-generator-serial">streams-generator-serial</a> Displaying generated sound on the Serial Plotter</li>
+<li><a href="examples/streams-generator-i2s">streams-generator-i2s</a> Output of generated sound on external DAC via I2S</li>
+<li><a href="examples/streams-generator-dac">streams-generator-dac</a> Output of generated sound on ESP32 internal DAC via I2S</li>
+<li><a href="examples/streams-generator-a2dp">streams-generator-a2dp</a> Output of generated sound on Bluetooth Speaker using A2DP</li>
+<li><a href="examples/streams-adc-serial">streams-adc-serial</a> Displaying input from analog microphone on the Serial Plotter</li>
+<li><a href="examples/streams-memory_wav-serial">streams-memory_wav-serial</a> Decoding of WAV from Flash memory and display on the Serial Plotter</li>
 </ul>
 <p>And some more useful examples:</p>
 <ul>
-<li><a href="/examples/streams-memory_raw-i2s">streams-memory_raw-i2s</a> - Play music form Flash Memory via I2S to External DAC</li>
-<li><a href="/examples/streams-url_raw-serial">streams-url_raw-serial</a> Displaying a music file from the internet on the Serial Plotter</li>
-<li><a href="/examples/streams-url_raw-i2s">streams-url_raw-I2S.ino</a> Streaming a File from the Internet to on external DAC via I2S</li>
-<li><a href="/examples/streams-mozzi-a2dp">streams-mozzi-a2dp</a> Use Mozzi to generate Sound to be sent to a Bluetooth Speaker</li>
+<li><a href="examples/streams-memory_raw-i2s">streams-memory_raw-i2s</a> - Play music form Flash Memory via I2S to External DAC</li>
+<li><a href="examples/streams-url_raw-serial">streams-url_raw-serial</a> Displaying a music file from the internet on the Serial Plotter</li>
+<li><a href="examples/streams-url_raw-i2s">streams-url_raw-I2S.ino</a> Streaming a File from the Internet to on external DAC via I2S</li>
+<li><a href="examples/streams-mozzi-a2dp">streams-mozzi-a2dp</a> Use Mozzi to generate Sound to be sent to a Bluetooth Speaker</li>
 </ul>
 <p>... these are just a few examples, but you can combine any Input <a class="el" href="class_stream.html">Stream</a> with any Output <a class="el" href="class_stream.html">Stream</a> as you like...</p>
 <h3><a class="anchor" id="autotoc_md3"></a>
@@ -166,12 +165,22 @@ Basic API</h3>
 </ul>
 <h3><a class="anchor" id="autotoc_md4"></a>
 Listening to the Result with a Webbrowser</h3>
-<p>I am providing a simple webserver which can render the audio data as wav result. Here are some examples</p>
+<p>I am also providing a simple webserver which can render the audio data as wav result. Here are some examples:</p>
 <ul>
-<li><a href="/examples/streams-generator-webserver">streams-generator-webserver</a> A Webserver which renders some generated sound</li>
-<li><a href="/examples/streams-sam-webserver">streams-sam-webserver</a> A Webserver which renders the result from the SAM TTS engine</li>
+<li><a href="examples/streams-generator-webserver_wav">streams-generator-webserver_wav</a> A Webserver which renders some generated sound</li>
+<li><a href="examples/streams-sam-webserver_wav">streams-sam-webserver_wav</a> A Webserver which renders the result from the SAM TTS engine</li>
+<li><a href="examples/streams-tts-webserver_wav">streams-tts-webserver_wav</a> A Webserver which renders the result from the Arduino TTS engine</li>
+<li><a href="examples/streams-flite-webserver_wav">streams-flite-webserver_wav</a> A Webserver which renders the result from the Flite TTS engine</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md5"></a>
+<h3><a class="anchor" id="autotoc_md5"></a>
+Logging</h3>
+<p>The application uses a built in logger (see <a class="el" href="_audio_logger_8h_source.html">AudioLogger.h</a> and <a class="el" href="_audio_config_8h_source.html">AudioConfig.h</a>). You can e.g. deactivate the logging by changing USE_AUDIO_LOGGING to false in the <a class="el" href="_audio_config_8h_source.html">AudioConfig.h</a>:</p>
+<div class="fragment"><div class="line">#define USE_AUDIO_LOGGING false</div>
+<div class="line">#define LOG_LEVEL AudioLogger::Warning</div>
+<div class="line">#define LOG_STREAM Serial</div>
+</div><!-- fragment --><p>Per default we use the log level warning and the logging output is going to Serial. You can also change this in your sketch by calling AudioLogger begin with the output stream and the log level e.g:</p>
+<div class="fragment"><div class="line">AudioLogger::instance().begin(Serial, AudioLogger::Debug);</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md6"></a>
 Optional Libraries</h1>
 <p>Dependent on the example you might need to install some of the following libraries:</p>
 <ul>
@@ -181,17 +190,19 @@ Optional Libraries</h1>
 <li><a href="https://github.com/pschatzmann/arduino-fdk-aac">arduino-fdk-aac</a> to encode or decode AAC</li>
 <li><a href="https://github.com/pschatzmann/Mozzi">Mozzi</a> A sound synthesis library for Arduino</li>
 <li><a href="https://github.com/pschatzmann/SAM">SAM</a> A Text to Speach Engine</li>
+<li><a href="https://github.com/pschatzmann/TTS">TTS</a> A Text to Speach Engine</li>
+<li><a href="https://github.com/pschatzmann/flite">flite</a> A Text to Speach Engine</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md6"></a>
+<h1><a class="anchor" id="autotoc_md7"></a>
 Installation</h1>
 <p>You can download the library as zip and call include Library -&gt; zip library. Or you can git clone this project into the Arduino libraries folder e.g. with</p>
 <div class="fragment"><div class="line">cd  ~/Documents/Arduino/libraries</div>
 <div class="line">git clone pschatzmann/arduino-audio-tools.git</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md7"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md8"></a>
 Documentation</h1>
 <p>Here is the generated <a href="https://pschatzmann.github.io/arduino-audio-tools/html/annotated.html">Class documentation</a>.</p>
 <p>You also might find further information in <a href="https://www.pschatzmann.ch/home/category/machine-sound/">one of my blogs</a></p>
-<h1><a class="anchor" id="autotoc_md8"></a>
+<h1><a class="anchor" id="autotoc_md9"></a>
 Project Status</h1>
 <p>This is currently work in progress:</p>
 <table class="markdownTable">
