@@ -118,7 +118,8 @@ Here are some examples:
 
 - [streams-generator-webserver_wav](examples/streams-generator-webserver_wav) A Webserver which renders some generated sound
 - [streams-sam-webserver_wav](examples/streams-sam-webserver_wav) A Webserver which renders the result from the SAM TTS engine
-- [streams-tts-webserver_wav](examples/streams-tts-webserver_wav) A Webserver which renders the result from the SAM TTS engine
+- [streams-tts-webserver_wav](examples/streams-tts-webserver_wav) A Webserver which renders the result from the Arduino TTS engine
+- [streams-flite-webserver_wav](examples/streams-flite-webserver_wav) A Webserver which renders the result from the Flite TTS engine
 
 #### Logging
 
@@ -148,6 +149,7 @@ Dependent on the example you might need to install some of the following librari
 - [Mozzi](https://github.com/pschatzmann/Mozzi) A sound synthesis library for Arduino
 - [SAM](https://github.com/pschatzmann/SAM) A Text to Speach Engine
 - [TTS](https://github.com/pschatzmann/TTS) A Text to Speach Engine
+- [flite](https://github.com/pschatzmann/flite) A Text to Speach Engine
 
 ## Installation
 
