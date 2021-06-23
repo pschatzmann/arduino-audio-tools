@@ -7,7 +7,7 @@
  */
 
 #include "flite_arduino.h"
-#include "AudioWAVServer.h"
+#include "AudioServer.h"
 
 using namespace audio_tools;  
 

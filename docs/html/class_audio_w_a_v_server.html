@@ -74,7 +74,7 @@ $(function() {
 <p>A simple Arduino Webserver which streams the result as WAV file. This class is based on the WiFiServer class. All you need to do is to provide the data with a callback method or from a <a class="el" href="class_stream.html">Stream</a>.  
  <a href="class_audio_w_a_v_server.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_audio_w_a_v_server_8h_source.html">AudioWAVServer.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_audio_w_a_v_server_8h_source.html">AudioServer.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -85,7 +85,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a6119d8487f4f1c4cc75c741f8d1c75bf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_w_a_v_server.html#a6119d8487f4f1c4cc75c741f8d1c75bf">AudioWAVServer</a> (const char *network, const char *password)</td></tr>
 <tr class="memdesc:a6119d8487f4f1c4cc75c741f8d1c75bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Audio W A V Server object.  <a href="class_audio_w_a_v_server.html#a6119d8487f4f1c4cc75c741f8d1c75bf">More...</a><br /></td></tr>
 <tr class="separator:a6119d8487f4f1c4cc75c741f8d1c75bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d416aab8ef12a43cfe297a4bc0a8019"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_w_a_v_server.html#a4d416aab8ef12a43cfe297a4bc0a8019">begin</a> (AudioWAVServerDataCallback cb, int sample_rate, int channels, int bits_per_sample=16)</td></tr>
+<tr class="memitem:a4d416aab8ef12a43cfe297a4bc0a8019"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_w_a_v_server.html#a4d416aab8ef12a43cfe297a4bc0a8019">begin</a> (AudioServerDataCallback cb, int sample_rate, int channels, int bits_per_sample=16)</td></tr>
 <tr class="memdesc:a4d416aab8ef12a43cfe297a4bc0a8019"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the server. The data must be provided by a callback method.  <a href="class_audio_w_a_v_server.html#a4d416aab8ef12a43cfe297a4bc0a8019">More...</a><br /></td></tr>
 <tr class="separator:a4d416aab8ef12a43cfe297a4bc0a8019"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a521e5ddc9f241b2c8469897e93344beb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_w_a_v_server.html#a521e5ddc9f241b2c8469897e93344beb">begin</a> (<a class="el" href="class_stream.html">Stream</a> &amp;in, int sample_rate, int channels, int bits_per_sample=16)</td></tr>
@@ -117,7 +117,7 @@ Protected Attributes</h2></td></tr>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>bits_per_sample</b></td></tr>
 <tr class="separator:a2977845a5b82a1e3cc33160a127fd95c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a4802e46975f1c4e7605cde513359ba"><td class="memItemLeft" align="right" valign="top"><a id="a6a4802e46975f1c4e7605cde513359ba"></a>
-AudioWAVServerDataCallback&#160;</td><td class="memItemRight" valign="bottom"><b>callback</b> = nullptr</td></tr>
+AudioServerDataCallback&#160;</td><td class="memItemRight" valign="bottom"><b>callback</b> = nullptr</td></tr>
 <tr class="separator:a6a4802e46975f1c4e7605cde513359ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37d66ab8bac4e36dce0bd653fe431d76"><td class="memItemLeft" align="right" valign="top"><a id="a37d66ab8bac4e36dce0bd653fe431d76"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b></td></tr>
@@ -211,7 +211,7 @@ WiFiServer&#160;</td><td class="memItemRight" valign="bottom"><b>server</b> = Wi
         <tr>
           <td class="memname">void AudioWAVServer::begin </td>
           <td>(</td>
-          <td class="paramtype">AudioWAVServerDataCallback&#160;</td>
+          <td class="paramtype">AudioServerDataCallback&#160;</td>
           <td class="paramname"><em>cb</em>, </td>
         </tr>
         <tr>
@@ -346,7 +346,7 @@ false </dd></dl>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/<a class="el" href="_audio_w_a_v_server_8h_source.html">AudioWAVServer.h</a></li>
+<li>src/<a class="el" href="_audio_w_a_v_server_8h_source.html">AudioServer.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
