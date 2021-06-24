@@ -1,8 +1,10 @@
+#pragma once
+
 #include <WiFi.h>
 #include "AudioTools.h"
 #include "CodecWAV.h"
 
-using namespace audio_tools;
+namespace audio_tools {
 
 /// Calback which writes the sound data to the stream
 typedef void (*AudioServerDataCallback)(Stream &out);
@@ -11,6 +13,8 @@ typedef void (*AudioServerDataCallback)(Stream &out);
  * @brief A simple Arduino Webserver which streams the result 
  * This class is based on the WiFiServer class. All you need to do is to provide the data 
  * with a callback method or from an Arduino Stream.
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 class AudioServer {
 
@@ -292,3 +296,5 @@ protected:
    }
 
 };
+
+}

@@ -5,9 +5,6 @@
 #include "Buffers.h"
 #include "AudioI2S.h"
 #include "CodecWAV.h"
-#ifdef ESP32
-#include <esp_http_client.h>
-#endif
 
 namespace audio_tools {
 
@@ -394,6 +391,104 @@ class AudioOutputStream : public BufferedStream {
 };
 
 
+
+
+/**
+ * @brief We support the Stream interface for the ADC class
+ * 
+ * @tparam T 
+ */
+
+class AnalogAudioStream : public BufferedStream, public AudioBaseInfoDependent  {
+
+    public:
+        AnalogAudioStream() : BufferedStream(DEFAULT_BUFFER_SIZE){
+        }
+
+        /// Provides the default configuration
+        AnalogConfig defaultConfig(RxTxMode mode) {
+            return adc.defaultConfig(mode);
+        }
+
+        void begin(AnalogConfig cfg) {
+            adc.begin(cfg);
+            // unmute
+            mute(false);
+        }
+
+        void end() {
+            mute(true);
+            adc.end();
+        }
+
+    protected:
+        AnalogAudio adc;
+        int mute_pin;
+
+        /// set mute pin on or off
+        void mute(bool is_mute){
+            if (mute_pin>0) {
+                digitalWrite(mute_pin, is_mute ? SOFT_MUTE_VALUE : !SOFT_MUTE_VALUE );
+            }
+        }
+
+        virtual size_t writeExt(const uint8_t* data, size_t len) {
+            return adc.writeBytes(data, len);
+        }
+
+        virtual size_t readExt( uint8_t *data, size_t length) { 
+            return adc.readBytes(data, length);
+        }
+
+};
+
+/**
+ * @brief AudioOutput class which stores the data in a temporary buffer. 
+ * The buffer can be consumed e.g. by a callback function by calling read();
+
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+template <class T>
+class CallbackStream :  public BufferedStream {
+    public:
+        // Default constructor
+        CallbackStream(int bufferSize, int bufferCount ):BufferedStream(bufferSize) {
+            callback_buffer_ptr = new NBuffer<T>(bufferSize, bufferCount);
+        }
+
+        virtual ~CallbackStream() {    
+            delete callback_buffer_ptr;
+        }
+
+        /// Activates the output
+        virtual bool begin() { 
+            active = true;
+            return true;
+        }
+        
+        /// stops the processing
+        virtual bool stop() {
+            active = false;
+            return true;
+        };
+
+    
+  protected:
+        NBuffer<T> *callback_buffer_ptr;
+        bool active;
+
+        virtual size_t writeExt(const uint8_t* data, size_t len) {    
+            return callback_buffer_ptr->writeArray(data, len/sizeof(T));
+        }
+
+        virtual size_t readExt( uint8_t *data, size_t len) { 
+            return callback_buffer_ptr->readArray(data, len/sizeof(T));;
+        }
+
+};
+
+
 #ifdef I2S_SUPPORT
 
 /**
@@ -463,175 +558,6 @@ class I2SStream : public BufferedStream, public AudioBaseInfoDependent  {
 
         virtual size_t readExt( uint8_t *data, size_t length) { 
             return i2s.readBytes(data, length);
-        }
-
-};
-
-#endif
-
-#ifdef ESP32
-
-/**
- * @brief Represents the content of a URL as Stream. We use the ESP32 ESP HTTP Client API
- * @author Phil Schatzmann
- * @copyright GPLv3
- * 
- */
-class UrlStream : public Stream {
-    public:
-        UrlStream(int readBufferSize=DEFAULT_BUFFER_SIZE){
-            read_buffer = new uint8_t[readBufferSize];
-        }
-
-        ~UrlStream(){
-            delete[] read_buffer;
-            end();
-        }
-
-        int begin(const char* url) {
-            int result = -1;
-            config.url = url;
-            config.method = HTTP_METHOD_GET;
-            LOGI( "UrlStream.begin %s\n",url);
-
-            // cleanup last begin if necessary
-            if (client==nullptr){
-                client = esp_http_client_init(&config);
-            } else {
-                esp_http_client_set_url(client,url);
-            }
-
-            client = esp_http_client_init(&config);
-            if (client==nullptr){
-                LOGE("esp_http_client_init failed");
-                return -1;
-            }
-
-            int write_buffer_len = 0;
-            result = esp_http_client_open(client, write_buffer_len);
-            if (result != ESP_OK) {
-                LOGE("http_client_open failed");
-                return result;
-            }
-            size = esp_http_client_fetch_headers(client);
-            if (size<=0) {
-                LOGE("esp_http_client_fetch_headers failed");
-                return result;
-            }
-
-            LOGI( "Status = %d, content_length = %d",
-                    esp_http_client_get_status_code(client),
-                    esp_http_client_get_content_length(client));
-        
-            return result;
-        }
-
-        virtual int available() {
-            return size - total_read;
-        }
-
-        virtual size_t readBytes(uint8_t *buffer, size_t length){
-            size_t read = esp_http_client_read(client, (char*)buffer, length);
-            total_read+=read;
-            return read;
-        }
-
-        virtual int read() {
-            fillBuffer();
-            total_read++;
-            return isEOS() ? -1 :read_buffer[read_pos++];
-        }
-
-        virtual int peek() {
-            fillBuffer();
-            return isEOS() ? -1 : read_buffer[read_pos];
-        }
-
-        virtual void flush(){
-        }
-
-        size_t write(uint8_t) {
-            LOGE("UrlStream write - not supported");
-            return 0;
-        }
-
-        void end(){
-            esp_http_client_close(client);
-            esp_http_client_cleanup(client);
-        }
-
-
-    protected:
-        esp_http_client_handle_t client;
-        esp_http_client_config_t config;
-        long size;
-        long total_read;
-        // buffered read
-        uint8_t *read_buffer;
-        uint16_t read_buffer_size;
-        uint16_t read_pos;
-        uint16_t read_size;
-
-        inline void fillBuffer() {
-            if (isEOS()){
-                // if we consumed all bytes we refill the buffer
-                read_size = readBytes(read_buffer,read_buffer_size);
-                read_pos = 0;
-            }
-        }
-
-        inline bool isEOS() {
-            return read_pos>=read_size;
-        }
-
-};
-
-
-/**
- * @brief We support the Stream interface for the ADC class
- * 
- * @tparam T 
- */
-
-class AnalogAudioStream : public BufferedStream, public AudioBaseInfoDependent  {
-
-    public:
-        AnalogAudioStream() : BufferedStream(DEFAULT_BUFFER_SIZE){
-        }
-
-        /// Provides the default configuration
-        AnalogConfig defaultConfig(RxTxMode mode) {
-            return adc.defaultConfig(mode);
-        }
-
-        void begin(AnalogConfig cfg) {
-            adc.begin(cfg);
-            // unmute
-            mute(false);
-        }
-
-        void end() {
-            mute(true);
-            adc.end();
-        }
-
-    protected:
-        AnalogAudio adc;
-        int mute_pin;
-
-        /// set mute pin on or off
-        void mute(bool is_mute){
-            if (mute_pin>0) {
-                digitalWrite(mute_pin, is_mute ? SOFT_MUTE_VALUE : !SOFT_MUTE_VALUE );
-            }
-        }
-
-        virtual size_t writeExt(const uint8_t* data, size_t len) {
-            return adc.writeBytes(data, len);
-        }
-
-        virtual size_t readExt( uint8_t *data, size_t length) { 
-            return adc.readBytes(data, length);
         }
 
 };

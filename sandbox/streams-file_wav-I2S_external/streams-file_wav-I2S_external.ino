@@ -7,7 +7,7 @@ using namespace audio_tools;
 I2S<int16_t> i2s;               // I2S output destination
 I2SStream i2s_stream(i2s);      // WAVDecoder neads I2S Output as stream
 WAVDecoder decoder(i2s_stream); // Decoder writing to I2S Stream 
-UrlStream music;                // Music Stream
+URLStream music;                // Music Stream
 const size_t buffer_size = 512;
 uint8_t buffer[buffer_size];
 bool is_valid = true;

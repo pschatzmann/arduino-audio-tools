@@ -20,3 +20,10 @@
 #include "AudioTools/Streams.h"
 #include "AudioTools/AudioCopy.h"
 #include "AudioTools/AudioPWM.h"
+#include "AudioHttp/AudioServer.h"
+
+#ifdef USE_URL_ARDUINO
+#include "AudioHttp/URLStreamArduino.h"
+#elif defined(ESP32)
+#include "AudioHttp/URLStreamESP32.h"
+#endif

@@ -8,7 +8,6 @@
  * 
  */
 #include "AudioTools.h"
-#include "AudioServer.h"
 #include "AudioMozzi.h"
 #include <Oscil.h>
 #include <tables/cos2048_int8.h> // table for Oscils to play

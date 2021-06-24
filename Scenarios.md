@@ -5,7 +5,7 @@
 Unfortunatly Arduino does not provide an I2S functionality which is standrdized acress the different processors. There is only an official documentation for SAMD21 processors. The full functionality of the library is currently only available on the ESP32: 
 
 
-| Processor      | I2SStream | ADCStream | A2DP   | UrlStream | Other  |
+| Processor      | I2SStream | ADCStream | A2DP   | URLStream | Other  |
 |----------------|-----------|-----------|--------|-----------|--------|
 | ESP32          |  +        |  +        |   +    |   +       |   +    |
 | ESP8266        |  *        |  *        |        |           |   +    |
@@ -26,7 +26,7 @@ Here are the related Stream classes with their supported operations that can be 
 | I2SStream               |   +  |   +   | i2s                |
 | AnalogAudioStream       |   +  |   +   | adc, dac           |
 | MemoryStream            |   +  |   +   | memory             |
-| UrlStream               |   +  |       | url                |
+| URLStream               |   +  |       | url                |
 | A2DPStream              |   +  |   +   | a2dp               |
 | GeneratedSoundStream    |   +  |       | gen                |
 | AudioOutputWithCallback |   +  |   +   |                    |

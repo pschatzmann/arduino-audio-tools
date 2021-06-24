@@ -6,7 +6,7 @@
  * 
  */
 #include "sam_arduino.h"
-#include "AudioServer.h"
+#include "AudioTools.h"
 
 using namespace audio_tools;  
 

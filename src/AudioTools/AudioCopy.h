@@ -100,6 +100,14 @@ class StreamCopyT {
             return from->available();
         }
 
+        /// copies all data
+        void copyAll(){
+            while(copy()){
+                yield();
+                delay(100);
+            }
+        }
+
     protected:
         Stream *from;
         Print *to;
