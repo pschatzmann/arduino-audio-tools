@@ -11,7 +11,7 @@
 
 using namespace audio_tools;  
 
-UrlStream music;          // Music Stream
+URLStream music;          // Music Stream
 I2S<int16_t> i2s;         // I2S 
 I2SStream i2s_stream(i2s);// I2S as Stream
 StreamCopy copier(i2s_stream, music, 1024); // copy music to i2s_stream

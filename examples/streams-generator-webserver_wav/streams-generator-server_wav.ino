@@ -1,5 +1,4 @@
 #include "AudioTools.h"
-#include "AudioServer.h"
 
 using namespace audio_tools;
 

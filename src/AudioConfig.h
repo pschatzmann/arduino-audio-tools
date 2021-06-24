@@ -6,18 +6,6 @@
  */
 #pragma once
 #include <string.h>
-/**
- * ------------------------------------------------------------------------- 
- * @brief Optional Functionality - comment out if not wanted
- */
-
-// Activate ESP32 Audio - for ESP32, ESP8266 and Raspberry Pico
-#define USE_ESP8266_AUDIO
-
-// Activate the A2DP library - for ESP32 only
-#ifdef ESP32
-#define USE_A2DP
-#endif
 
 /**
  * ------------------------------------------------------------------------- 
@@ -40,9 +28,27 @@
 
 /**
  * ------------------------------------------------------------------------- 
+ * @brief Optional Functionality - comment out if not wanted
+ */
+
+#define USE_URL_ARDUINO
+
+
+// Activate ESP32 Audio - for ESP32, ESP8266 and Raspberry Pico
+#define USE_ESP8266_AUDIO
+
+// Activate the A2DP library - for ESP32 only
+#ifdef ESP32
+#define USE_A2DP
+#endif
+
+
+/**
+ * ------------------------------------------------------------------------- 
  * @brief Platform specific Settings
  * 
  */
+
 #ifdef ESP32
 #include "esp32-hal-log.h"
 #define I2S_SUPPORT
@@ -76,9 +82,7 @@
  * However it is recommended to do it in your Sketch e.g with AudioLogger::instance().begin(Serial,AudioLogger::Warning);
  */
  
-#ifndef USE_AUDIO_LOGGING
 #define USE_AUDIO_LOGGING true
-#endif 
-
+#define PRINTF_BUFFER_SIZE 160
 #define LOG_LEVEL AudioLogger::Warning
 #define LOG_STREAM Serial

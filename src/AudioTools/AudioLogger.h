@@ -1,36 +1,10 @@
 #pragma once
 
 #include "AudioConfig.h"
-
 #include "Stream.h"
-//#if __has_include (<cstdarg>)
-//#include <cstdarg>
-//#define VARARG_SUPPORT false
-//#else
-//#define VARARG_SUPPORT false
-//#endif
-
-#ifndef PRINTF_BUFFER_SIZE
-#define PRINTF_BUFFER_SIZE 160
-#endif
 
 // Logging Implementation
-// #if USE_AUDIO_LOGGING && VARARG_SUPPORT
-// #define LOGD(...) AudioLogger::instance().printLog(__FILE__,__LINE__, AudioLogger::Debug,  __VA_ARGS__)
-// #define LOGI(...) AudioLogger::instance().printLog(__FILE__,__LINE__, AudioLogger::Info,  __VA_ARGS__)
-// #define LOGW(...) AudioLogger::instance().printLog(__FILE__,__LINE__, AudioLogger::Warning,  __VA_ARGS__)
-// #define LOGE(...) AudioLogger::instance().printLog(__FILE__,__LINE__, AudioLogger::Error, __VA_ARGS__)
 #if USE_AUDIO_LOGGING
-#define LOGD(...) snprintf(AudioLogger::instance().prefix(__FILE__,__LINE__, AudioLogger::Debug).str(),PRINTF_BUFFER_SIZE,__VA_ARGS__); AudioLogger::instance().println();
-#define LOGI(...) snprintf(AudioLogger::instance().prefix(__FILE__,__LINE__, AudioLogger::Info).str(),PRINTF_BUFFER_SIZE,__VA_ARGS__); AudioLogger::instance().println();
-#define LOGW(...) snprintf(AudioLogger::instance().prefix(__FILE__,__LINE__, AudioLogger::Warning).str(),PRINTF_BUFFER_SIZE,__VA_ARGS__); AudioLogger::instance().println();
-#define LOGE(...) snprintf(AudioLogger::instance().prefix(__FILE__,__LINE__, AudioLogger::Error).str(),PRINTF_BUFFER_SIZE,__VA_ARGS__); AudioLogger::instance().println();
-#else
-#define LOGD(...) 
-#define LOGI(...) 
-#define LOGW(...) 
-#define LOGE(...) 
-#endif
 
 namespace audio_tools {
 
@@ -53,85 +27,16 @@ class AudioLogger {
             Error
         };
 
-
         /// activate the logging
         void begin(Stream& out, LogLevel level=LOG_LEVEL) {
             this->log_stream_ptr = &out;
             this->log_level = level;
-            this->active = true;
-        }
-
-        /// stops the logger
-        void end(){
-            this->active = false;
         }
 
         /// checks if the logging is active
         bool isLogging(LogLevel level = Info){
             return log_stream_ptr!=nullptr && level >= log_level;
         }
-
-// #if VARARG_SUPPORT
-
-//         /// logs an error
-//         void error(const char *str) const {
-//             printf(Error,"%s\n", str);
-//         }
-            
-//         /// logs an info message    
-//         void info(const char *str) const {
-//             printf(Info,"%s\n", str);
-//         }
-
-//         /// logs an warning    
-//         void warning(const char *str) const {
-//             printf(Warning,"%s\n", str);
-//         }
-
-//         /// writes an debug message    
-//         void debug(const char *str) const {
-//             printf(Debug,"%s\n", str);
-//         }
-
-
-//         /// printf support
-//         int printf(LogLevel current_level, const char* fmt, ...) const {
-//             char serial_printf_buffer[PRINTF_BUFFER_SIZE] = {0};
-//             int len = 0;
-//             va_list args;
-
-//             if (this->active && log_stream_ptr!=nullptr && current_level >= log_level){
-//                 char serial_printf_buffer[PRINTF_BUFFER_SIZE] = {0};
-//                 va_start(args,fmt);
-//                 len = vsnprintf(serial_printf_buffer,PRINTF_BUFFER_SIZE, fmt, args);
-//                 log_stream_ptr->print(serial_printf_buffer);
-//                 va_end(args);
-//             }
-//             return len;
-//         }
-
-//         int printLog(const char* file, int line, LogLevel current_level, const char* fmt, ...) const {
-//             char serial_printf_buffer[PRINTF_BUFFER_SIZE] = {0};
-//             int len = 0;
-   
-//             if (this->active && log_stream_ptr!=nullptr && current_level >= log_level){
-//                 // content
-//                 char serial_printf_buffer[PRINTF_BUFFER_SIZE] = {0};
-//                 // prefix
-//                 len += printPrefix(file, line, current_level);
-
-//                 va_list args;
-//                 va_start(args,fmt);
-//                 len += vsnprintf(serial_printf_buffer,PRINTF_BUFFER_SIZE, fmt, args);
-//                 log_stream_ptr->print(serial_printf_buffer);
-//                 va_end(args);
-//                 // newline
-//                 len += log_stream_ptr->println();
-//             }
-//             return len;
-//         }
-
-// #else
 
         AudioLogger &prefix(const char* file, int line, LogLevel current_level){
             printPrefix(file,line,current_level);
@@ -147,9 +52,6 @@ class AudioLogger {
             return print_buffer;
         }
 
-
-//#endif
-
         /// provides the singleton instance
         static AudioLogger &instance(){
             static AudioLogger *ptr;
@@ -159,17 +61,18 @@ class AudioLogger {
             return *ptr;
         }
 
+        LogLevel level() {
+            return log_level;
+        }
+
 
     protected:
         Stream *log_stream_ptr = &LOG_STREAM;
         const char* TAG = "AudioTools";
         LogLevel log_level = LOG_LEVEL;
-        bool active = true;  
-//#if !VARARG_SUPPORT
         char print_buffer[PRINTF_BUFFER_SIZE];
-//#endif
-        AudioLogger(){
-        }
+
+        AudioLogger() {}
 
         const char* levelName(LogLevel level) const {
             switch(level){
@@ -201,3 +104,19 @@ class AudioLogger {
 };
 
 }    
+
+#define LOG_OUT(level, ...) snprintf(audio_tools::AudioLogger::instance().prefix(__FILE__,__LINE__, level).str(),PRINTF_BUFFER_SIZE,__VA_ARGS__); audio_tools::AudioLogger::instance().println();
+
+#define LOGD(...) if (audio_tools::AudioLogger::instance().level()<=audio_tools::AudioLogger::Debug) { LOG_OUT(audio_tools::AudioLogger::Debug, __VA_ARGS__);}
+#define LOGI(...) if (audio_tools::AudioLogger::instance().level()<=audio_tools::AudioLogger::Info) { LOG_OUT(audio_tools::AudioLogger::Info, __VA_ARGS__);}
+#define LOGW(...) if (audio_tools::AudioLogger::instance().level()<=audio_tools::AudioLogger::Warning) { LOG_OUT(audio_tools::AudioLogger::Warning, __VA_ARGS__);}
+#define LOGE(...) if (audio_tools::AudioLogger::instance().level()<=audio_tools::AudioLogger::Error) { LOG_OUT(audio_tools::AudioLogger::Error, __VA_ARGS__);}
+
+#else
+
+#define LOGD(...) 
+#define LOGI(...) 
+#define LOGW(...) 
+#define LOGE(...) 
+
+#endif

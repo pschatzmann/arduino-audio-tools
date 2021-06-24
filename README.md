@@ -4,7 +4,7 @@ Some basic __header-only C++ classes__ that can be used for __Audio Processing__
 
 - a simple I2S class (to read and write to the internal I2S) 
 - a simple ADC class (to read analog data with the help of I2S) 
-- Additional Stream implementations: MemoryStream, UrlStream, I2SStream, A2DPStream, PrintStream
+- Additional Stream implementations: MemoryStream, URLStream, I2SStream, A2DPStream, PrintStream
 - Converters
 - Musical Notes (with frequencies of notes)
 - SineWaveGenerator (to generate a sine tone) and [Mozzi](https://sensorium.github.io/Mozzi/) for more complex scenario 
@@ -20,7 +20,7 @@ As “Audio Sources” we will have e.g.:
 
 - Analog Microphones – [AnalogAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_analog_audio_stream.html)
 - Digital Microphones – [I2SStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_i2_s_stream.html)
-- Files on the Internet – [UrlStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_url_stream.html)
+- Files on the Internet – [URLStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_url_stream.html)
 - Generated Sound – [GeneratedSoundStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_generated_sound_stream.html)
 - Mobile Phone A2DP Bluetooth – [A2DPStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_a2_d_p_stream.html)
 - Binary Data in Flash Memory – [MemoryStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_memory_stream.html)
