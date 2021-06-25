@@ -1,5 +1,5 @@
 /**
- * @file test-memory_wav-serial.ino
+ * @file streams-url_wav-serial.ino
  * @author Phil Schatzmann
  * @brief decode WAV stream from url and output it on I2S
  * @version 0.1
@@ -14,7 +14,7 @@
 using namespace audio_tools;  
 
 // UrlStream -copy-> AudioOutputStream -> WAVDecoder -> I2S
-URLStream url;
+URLStream url("ssid","password");
 I2SStream i2s;                  // I2S stream 
 WAVDecoder decoder(i2s);        // decode wav to pcm and send it to I2S
 AudioOutputStream out(decoder); // output to decoder
@@ -25,20 +25,24 @@ void setup(){
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Debug);  
 
-// url.begin("http://pi.local:5002//api/tts?text=hallo my name is sam")
-//  url.begin("http://192.168.1.37:12101/api/text-to-speech?play=false", UrlStream::POST, "text/plain","Hallo, my name is Alice");
-
-  I2SConfig config = out.defaultConfig(TX_MODE);
-  config.sample_rate = 16000; 
+  // setup i2s
+  I2SConfig config = i2s.defaultConfig(TX_MODE);
+  config.sample_rate = 16000; // Mozzilla 22050
   config.bits_per_sample = 32;
   config.channels = 1;
-
   i2s.begin(config);
+
+// Mozilla tts
+// url.begin("http://192.168.1.37:5002/api/tts", POST, "text/plain","Hallo, my name is Alice");
+// rhasspy
+  url.begin("http://192.168.1.37:12101/api/text-to-speech?play=false", POST, "text/plain","Hallo, my name is Alice");
+
+
 
 }
 
 void loop(){
-  if (wav) {
+  if (decoder) {
     copier.copy();
   } else {
     stop();

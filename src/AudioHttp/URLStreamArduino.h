@@ -26,20 +26,9 @@ class URLStream : public Stream {
         }
 
         URLStream(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE) {
-            read_buffer = new uint8_t[readBufferSize];            
-            LOGD("connectWiFi");
-            if (WiFi.status() != WL_CONNECTED && network!=nullptr && password != nullptr){
-                WiFi.begin(network, password);
-                while (WiFi.status() != WL_CONNECTED){
-                    Serial.print(".");
-                    delay(500); 
-                }
-                Serial.println();
-            }
-            WiFiClient client;
-            request.setClient(client);
-            Serial.print("IP address: ");
-            Serial.println(WiFi.localIP());
+            read_buffer = new uint8_t[readBufferSize];
+            this->network = network;
+            this->password = password;            
         }
 
         ~URLStream(){
@@ -48,6 +37,7 @@ class URLStream : public Stream {
         }
 
         bool begin(const char* urlStr, MethodID action = GET, const char* reqMime="", const char*reqData="") {
+            login();
             Url url(urlStr);
             int result = -1;
 
@@ -101,6 +91,9 @@ class URLStream : public Stream {
         uint16_t read_buffer_size;
         uint16_t read_pos;
         uint16_t read_size;
+        const char* network;
+        const char* password;
+        WiFiClient client;
 
         inline void fillBuffer() {
             if (isEOS()){
@@ -112,6 +105,20 @@ class URLStream : public Stream {
 
         inline bool isEOS() {
             return read_pos>=read_size;
+        }
+
+        void login(){
+            LOGD("connectWiFi");
+            if (WiFi.status() != WL_CONNECTED && network!=nullptr && password != nullptr){
+                WiFi.begin(network, password);
+                while (WiFi.status() != WL_CONNECTED){
+                    Serial.print(".");
+                    delay(500); 
+                }
+                Serial.println();
+            }
+            request.setClient(client);
+            delay(500);            
         }
 
 };

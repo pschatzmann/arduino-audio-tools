@@ -45,23 +45,25 @@ class HttpRequest {
         }
 
         operator bool() {
-            return (bool)*client_ptr;
+            return client_ptr != nullptr ? (bool)*client_ptr : false;
         }
 
         virtual bool connected(){
-            return client_ptr->connected();
+            return client_ptr != nullptr ? (bool)*client_ptr && client_ptr->connected() : false;
         } 
 
         virtual int available() {
             if (reply_header.isChunked()){
                 return chunk_reader.available();
             }
-            return client_ptr->available();
+            return client_ptr != nullptr ? client_ptr->available() : 0;
         }
 
         virtual void stop(){
             LOGI("stop");
-            client_ptr->stop();
+            if (client_ptr!=nullptr){
+                client_ptr->stop();
+            }
         }
 
         virtual int post(Url &url, const char* mime, const char *data, int len=-1){
@@ -158,14 +160,19 @@ class HttpRequest {
 
         // sends request and reads the reply_header from the server
         virtual int process(MethodID action, Url &url, const char* mime, const char *data, int len=-1){
-            if (!connected()){
+            if (client_ptr==nullptr){
+                LOGE("The client has not been defined");
+                return -1;
+            }
+            if (!this->connected()){
                 char msg[1024];
-
                 LOGI("process connecting to host %s port %d", url.host(), url.port());
-                bool connected = connect(url.host(), url.port());
-                if (!connected){
+                bool is_connected = connect(url.host(), url.port());
+                if (!is_connected){
                     LOGE("Connect failed");
                 }
+            } else {
+                LOGI("process is already connected");
             }
 
             host_name = url.host();                
@@ -184,12 +191,13 @@ class HttpRequest {
             request_header.write(*client_ptr);
 
             if (len>0){
-                LOGI("process - writing data: %d bytes", len);
+                LOGI("Writing data: %d bytes", len);
                 client_ptr->write((const uint8_t*)data,len);
+                LOGD(data);
             }
-            client_ptr->flush();
+            
             LOGI("Request written ... waiting for reply")
-
+            client_ptr->flush();
             reply_header.read(*client_ptr);
 
             // if we use chunked tranfer we need to read the first chunked length

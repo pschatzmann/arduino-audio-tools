@@ -148,6 +148,7 @@ class TimerAlarmRepeating {
 
         // stops the timer and if necessary the task
         bool stop(){
+            LOGW("stop");
             timerEnd(adc_timer);
             if (handler_task!=nullptr){
               vTaskDelete(handler_task);
