@@ -85,7 +85,7 @@ class HttpHeader {
         }
 
         HttpHeader& put(const char* key, const char* value){
-            if (value!=nullptr){
+            if (value!=nullptr && strlen(value)>0){
                 HttpHeaderLine *hl = headerLine(key);
                 if (hl==nullptr){
                     LOGE("HttpHeader::put - did not add HttpHeaderLine for %s", key);
@@ -296,7 +296,7 @@ class HttpHeader {
                 }
                 if (create_new_lines){
                     HttpHeaderLine *newLine = new HttpHeaderLine();
-                    LOGI("HttpHeader::headerLine - new line created for %s", key);
+                    LOGD("HttpHeader::headerLine - new line created for %s", key);
                     newLine->active = true;
                     newLine->key = key;
                     lines.push_back(newLine);

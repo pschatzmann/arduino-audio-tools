@@ -277,7 +277,7 @@ class WAVDecoder : public AudioWriter {
                         LOGI("WAV sample_rate: %d", header.audioInfo().sample_rate);
                         LOGI("WAV data_length: %d", header.audioInfo().data_length);
                         LOGI("WAV is_streamed: %d", header.audioInfo().is_streamed);
-                        LOGI("WAVis_valid: %d", header.audioInfo().is_valid);
+                        LOGI("WAV is_valid: %s", header.audioInfo().is_valid ? "true" :  "false");
                         
                         // check format
                         int format = header.audioInfo().format;

@@ -101,13 +101,12 @@ class I2SBase {
 
     // update the cfg.i2s.channel_format based on the number of channels
     void setChannels(int channels){
-          if (channels==2){
-             i2s_config.channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT;
-          } else if (channels==1){
-             i2s_config.channel_format = I2S_CHANNEL_FMT_ONLY_RIGHT;
-          }
-          cfg.channels = channels;
-          
+        if (channels==2){
+            i2s_config.channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT;
+        } else if (channels==1){
+            i2s_config.channel_format = I2S_CHANNEL_FMT_ONLY_RIGHT;
+        }
+        cfg.channels = channels;          
     }
     
     /// writes the data to the I2S interface
