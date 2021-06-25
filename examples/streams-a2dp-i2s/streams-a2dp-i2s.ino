@@ -1,12 +1,10 @@
 /**
-/**
  * @file streams-a2dp-i2s.ino
  * @author Phil Schatzmann
  * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/streams-a2dp-i2s/README.md
  * 
  * @author Phil Schatzmann
  * @copyright GPLv3
- * 
  */
 #include "AudioTools.h"
 #include "AudioA2DP.h"
