@@ -1,14 +1,10 @@
 var searchData=
 [
-  ['i2s_44',['I2S',['../classaudio__tools_1_1_i2_s.html',1,'audio_tools::I2S&lt; T &gt;'],['../classaudio__tools_1_1_i2_s.html#abef3e77f3339ebdcabdd7c08faa099c2',1,'audio_tools::I2S::I2S()']]],
-  ['i2sbase_45',['I2SBase',['../classaudio__tools_1_1_i2_s_base.html',1,'audio_tools']]],
-  ['i2sconfig_46',['I2SConfig',['../classaudio__tools_1_1_i2_s_config.html',1,'audio_tools::I2SConfig'],['../classaudio__tools_1_1_i2_s_config.html#a6ddcfcef498a6bda2cab7339d62e166a',1,'audio_tools::I2SConfig::I2SConfig(RxTxMode mode)'],['../classaudio__tools_1_1_i2_s_config.html#a4f62605fe47b2e5ace54bce453806dcf',1,'audio_tools::I2SConfig::I2SConfig(const I2SConfig &amp;cfg)=default']]],
-  ['i2sstream_47',['I2SStream',['../classaudio__tools_1_1_i2_s_stream.html',1,'audio_tools']]],
-  ['instance_48',['instance',['../classaudio__tools_1_1_a2_d_p_stream.html#a9fd624ba31d596fbfe17496f0ef2ef57',1,'audio_tools::A2DPStream::instance()'],['../classaudio__tools_1_1_audio_logger.html#a5375c7cffa3a7aff6594cd941a8fa9b3',1,'audio_tools::AudioLogger::instance()']]],
-  ['int24_5ft_49',['int24_t',['../classaudio__tools_1_1int24__t.html',1,'audio_tools']]],
-  ['ipstream_50',['IPStream',['../classaudio__tools_1_1_i_p_stream.html',1,'audio_tools']]],
-  ['isconnected_51',['isConnected',['../classaudio__tools_1_1_a2_d_p_stream.html#ad41805a13facc9e76779397a966bad15',1,'audio_tools::A2DPStream']]],
-  ['islogging_52',['isLogging',['../classaudio__tools_1_1_audio_logger.html#a34f452e05084a6cff5e25e2d9b455ea4',1,'audio_tools::AudioLogger']]],
-  ['isready_53',['isReady',['../classaudio__tools_1_1_a2_d_p_stream.html#a292e6d8d9c24c205341f4a1ffdaccb1a',1,'audio_tools::A2DPStream']]],
-  ['iterator_54',['iterator',['../classaudio__tools_1_1_vector_1_1iterator.html',1,'audio_tools::Vector']]]
+  ['httpchunkreader_48',['HttpChunkReader',['../classaudio__tools_1_1_http_chunk_reader.html',1,'audio_tools::HttpChunkReader'],['../classaudio__tools_1_1_http_chunk_reader.html#a1dc610bb96ccbde960d85e80603a0670',1,'audio_tools::HttpChunkReader::HttpChunkReader()'],['../classaudio__tools_1_1_http_chunk_reader.html#a07e9d1af0f704c76adc30a97747fb368',1,'audio_tools::HttpChunkReader::HttpChunkReader(HttpReplyHeader &amp;header)']]],
+  ['httpheader_49',['HttpHeader',['../classaudio__tools_1_1_http_header.html',1,'audio_tools']]],
+  ['httpheaderline_50',['HttpHeaderLine',['../structaudio__tools_1_1_http_header_line.html',1,'audio_tools']]],
+  ['httplinereader_51',['HttpLineReader',['../classaudio__tools_1_1_http_line_reader.html',1,'audio_tools']]],
+  ['httpreplyheader_52',['HttpReplyHeader',['../classaudio__tools_1_1_http_reply_header.html',1,'audio_tools']]],
+  ['httprequest_53',['HttpRequest',['../classaudio__tools_1_1_http_request.html',1,'audio_tools']]],
+  ['httprequestheader_54',['HttpRequestHeader',['../classaudio__tools_1_1_http_request_header.html',1,'audio_tools']]]
 ];

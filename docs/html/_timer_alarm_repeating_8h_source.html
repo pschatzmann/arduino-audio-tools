@@ -195,25 +195,26 @@ $(function() {
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        <span class="comment">// stops the timer and if necessary the task</span></div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        <span class="keywordtype">bool</span> stop(){</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;            timerEnd(adc_timer);</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;            <span class="keywordflow">if</span> (handler_task!=<span class="keyword">nullptr</span>){</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;              vTaskDelete(handler_task);</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;            }</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        }</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;      <span class="keywordtype">int</span> timer_id;</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;      TaskHandle_t handler_task;</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;      hw_timer_t* adc_timer; <span class="comment">// our timer</span></div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;      UserCallback user_callback;</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;      </div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;      void (*current_timer_callback)();     </div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;};</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;}</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;            LOGW(<span class="stringliteral">&quot;stop&quot;</span>);</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;            timerEnd(adc_timer);</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;            <span class="keywordflow">if</span> (handler_task!=<span class="keyword">nullptr</span>){</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;              vTaskDelete(handler_task);</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;            }</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        }</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;      <span class="keywordtype">int</span> timer_id;</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;      TaskHandle_t handler_task;</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;      hw_timer_t* adc_timer; <span class="comment">// our timer</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;      UserCallback user_callback;</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;      </div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;      void (*current_timer_callback)();     </div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;};</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160; </div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;}</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_timer_alarm_repeating_html"><div class="ttname"><a href="classaudio__tools_1_1_timer_alarm_repeating.html">audio_tools::TimerAlarmRepeating</a></div><div class="ttdoc">Repeating Timer functions for simple scheduling of repeated execution. The basic logic is taken from ...</div><div class="ttdef"><b>Definition:</b> TimerAlarmRepeating.h:78</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_timer_alarm_repeating_html_a3787e678da0669e9e6f15df4088ad7d6"><div class="ttname"><a href="classaudio__tools_1_1_timer_alarm_repeating.html#a3787e678da0669e9e6f15df4088ad7d6">audio_tools::TimerAlarmRepeating::complexHandler</a></div><div class="ttdeci">static void complexHandler(void *param)</div><div class="ttdef"><b>Definition:</b> TimerAlarmRepeating.h:103</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_timer_alarm_repeating_html_acf7796072b45af8a2f9c082bb034e1ce"><div class="ttname"><a href="classaudio__tools_1_1_timer_alarm_repeating.html#acf7796072b45af8a2f9c082bb034e1ce">audio_tools::TimerAlarmRepeating::start</a></div><div class="ttdeci">bool start(repeating_timer_callback_t callback_f, uint64_t time, TimeUnit unit=TimerAlarmRepeating::MS, void *user_data=nullptr)</div><div class="ttdef"><b>Definition:</b> TimerAlarmRepeating.h:121</div></div>

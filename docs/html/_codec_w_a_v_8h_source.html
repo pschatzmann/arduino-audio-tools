@@ -315,7 +315,7 @@ $(function() {
 <div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;                        LOGI(<span class="stringliteral">&quot;WAV sample_rate: %d&quot;</span>, header.audioInfo().sample_rate);</div>
 <div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;                        LOGI(<span class="stringliteral">&quot;WAV data_length: %d&quot;</span>, header.audioInfo().data_length);</div>
 <div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;                        LOGI(<span class="stringliteral">&quot;WAV is_streamed: %d&quot;</span>, header.audioInfo().is_streamed);</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;                        LOGI(<span class="stringliteral">&quot;WAVis_valid: %d&quot;</span>, header.audioInfo().is_valid);</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;                        LOGI(<span class="stringliteral">&quot;WAV is_valid: %s&quot;</span>, header.audioInfo().is_valid ? <span class="stringliteral">&quot;true&quot;</span> :  <span class="stringliteral">&quot;false&quot;</span>);</div>
 <div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;                        </div>
 <div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;                        <span class="comment">// check format</span></div>
 <div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;                        <span class="keywordtype">int</span> format = header.audioInfo().format;</div>

@@ -1,6 +1,19 @@
 var searchData=
 [
-  ['wavdecoder_241',['WAVDecoder',['../classaudio__tools_1_1_w_a_v_decoder.html#a5bdda66b6bfcf91e5be2e9267cb36bde',1,'audio_tools::WAVDecoder::WAVDecoder(Print &amp;out_stream, bool active=true)'],['../classaudio__tools_1_1_w_a_v_decoder.html#a63043a9a160d9316d154347561f6d471',1,'audio_tools::WAVDecoder::WAVDecoder(Print &amp;out_stream, AudioBaseInfoDependent &amp;bi)']]],
-  ['write_242',['write',['../classaudio__tools_1_1_a2_d_p_stream.html#af3a36b39bac9c52733d2cc7e864bb0a1',1,'audio_tools::A2DPStream::write()'],['../classaudio__tools_1_1_i2_s.html#a9a474765e4e4b2c0b8e753a0da969d36',1,'audio_tools::I2S::write()'],['../classaudio__tools_1_1_generated_sound_stream.html#a6643388b8adf51c92744beb08579b1dc',1,'audio_tools::GeneratedSoundStream::write(uint8_t)'],['../classaudio__tools_1_1_generated_sound_stream.html#a7aaede952e8fd190d97e801c9e76012a',1,'audio_tools::GeneratedSoundStream::write(const uint8_t *buffer, size_t size)'],['../classaudio__tools_1_1_buffered_stream.html#ac1d5f131ff15dbb2c4b495a420f52873',1,'audio_tools::BufferedStream::write(uint8_t c)'],['../classaudio__tools_1_1_buffered_stream.html#abeb7e0207dbb88e3816cae7a6ada72c2',1,'audio_tools::BufferedStream::write(const uint8_t *data, size_t len)']]],
-  ['writebytes_243',['writeBytes',['../classaudio__tools_1_1_analog_audio.html#a261c855468a604ed52cb76bf4965062d',1,'audio_tools::AnalogAudio::writeBytes()'],['../classaudio__tools_1_1_i2_s_base.html#a5c6b4fb3347110d753e8674718212530',1,'audio_tools::I2SBase::writeBytes(const void *src, size_t size_bytes)'],['../classaudio__tools_1_1_i2_s_base.html#a5c6b4fb3347110d753e8674718212530',1,'audio_tools::I2SBase::writeBytes(const void *src, size_t size_bytes)']]]
+  ['scale16_257',['scale16',['../classaudio__tools_1_1int24__t.html#afecd445388a55e48c5bb4860f28a0042',1,'audio_tools::int24_t']]],
+  ['scale32_258',['scale32',['../classaudio__tools_1_1int24__t.html#a941c9375328b5593619c16fe81c9a1c8',1,'audio_tools::int24_t']]],
+  ['scalefloat_259',['scaleFloat',['../classaudio__tools_1_1int24__t.html#a3298ae3a80ee055b725e2e4ee0bf8662',1,'audio_tools::int24_t']]],
+  ['setafterburner_260',['setAfterburner',['../classaudio__tools_1_1_a_a_c_encoder.html#a3f4b16f2f72b16aa016a567171587fb1',1,'audio_tools::AACEncoder']]],
+  ['setaudioinfo_261',['setAudioInfo',['../classaudio__tools_1_1_i2_s_stream.html#a0b77e75668b8616d52312462f0a30e2e',1,'audio_tools::I2SStream']]],
+  ['setaudioobjecttype_262',['setAudioObjectType',['../classaudio__tools_1_1_a_a_c_encoder.html#adbde047fe0539f049679301ba49373d9',1,'audio_tools::AACEncoder']]],
+  ['setavailable_263',['setAvailable',['../classaudio__tools_1_1_single_buffer.html#a1777687cba0e73e71d25ca19d5851c16',1,'audio_tools::SingleBuffer']]],
+  ['setbitrate_264',['setBitrate',['../classaudio__tools_1_1_a_a_c_encoder.html#ace06e0b89fe6b9a1c4ad363ded54f49d',1,'audio_tools::AACEncoder']]],
+  ['setfrequency_265',['setFrequency',['../classaudio__tools_1_1_sine_wave_generator.html#aa74429c5f93d07e2ab0b056af0c90965',1,'audio_tools::SineWaveGenerator']]],
+  ['setoutputbuffersize_266',['setOutputBufferSize',['../classaudio__tools_1_1_a_a_c_encoder.html#ab8818ab455d69340bed180530eae8a03',1,'audio_tools::AACEncoder']]],
+  ['setpin_267',['setPin',['../classaudio__tools_1_1_analog_config.html#a44deeabcd6c87a20c3cf6ca292b6b89a',1,'audio_tools::AnalogConfig']]],
+  ['setspecialbandreplication_268',['setSpecialBandReplication',['../classaudio__tools_1_1_a_a_c_encoder.html#a4d01a9674476c953964ff17b991c3a21',1,'audio_tools::AACEncoder']]],
+  ['sink_269',['sink',['../classaudio__tools_1_1_a2_d_p_stream.html#a62ff1438dbe441759910ea4d134e54c2',1,'audio_tools::A2DPStream']]],
+  ['source_270',['source',['../classaudio__tools_1_1_a2_d_p_stream.html#a5675d25c4d6dda7352410be5c33ad8df',1,'audio_tools::A2DPStream']]],
+  ['start_271',['start',['../classaudio__tools_1_1_timer_alarm_repeating.html#acf7796072b45af8a2f9c082bb034e1ce',1,'audio_tools::TimerAlarmRepeating']]],
+  ['stop_272',['stop',['../classaudio__tools_1_1_audio_output_with_callback.html#af8c887b9ce6c100722de3e6b8aaf23cf',1,'audio_tools::AudioOutputWithCallback::stop()'],['../classaudio__tools_1_1_callback_stream.html#a8fabe3a2416b5273de5c5b352670e30e',1,'audio_tools::CallbackStream::stop()']]]
 ];

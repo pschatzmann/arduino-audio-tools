@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['udpstream_107',['UDPStream',['../classaudio__tools_1_1_u_d_p_stream.html',1,'audio_tools']]],
-  ['URLStream_108',['URLStream',['../classaudio__tools_1_1_url_stream.html',1,'audio_tools']]],
-  ['usercallback_109',['UserCallback',['../classaudio__tools_1_1_user_callback.html',1,'audio_tools']]]
+  ['timeralarmrepeating_119',['TimerAlarmRepeating',['../classaudio__tools_1_1_timer_alarm_repeating.html',1,'audio_tools']]],
+  ['timercallback_120',['TimerCallback',['../classaudio__tools_1_1_timer_callback.html',1,'audio_tools']]],
+  ['trim_121',['trim',['../classaudio__tools_1_1_str.html#af5cd084c377811ee46e7c1d0d8f54bba',1,'audio_tools::Str']]]
 ];
