@@ -147,9 +147,9 @@ Dependent on the example you might need to install some of the following librari
 - [SD Library](https://www.arduino.cc/en/reference/SD) to read and write files.
 - [arduino-fdk-aac](https://github.com/pschatzmann/arduino-fdk-aac) to encode or decode AAC 
 - [Mozzi](https://github.com/pschatzmann/Mozzi) A sound synthesis library for Arduino
-- [SAM](https://github.com/pschatzmann/SAM) A Text to Speach Engine
+- [SAM](https://github.com/pschatzmann/arduino-SAM) A Text to Speach Engine
 - [TTS](https://github.com/pschatzmann/TTS) A Text to Speach Engine
-- [flite](https://github.com/pschatzmann/flite) A Text to Speach Engine
+- [flite](https://github.com/pschatzmann/arduino-flite) A Text to Speach Engine
 
 ## Installation
 

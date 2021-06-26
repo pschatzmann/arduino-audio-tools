@@ -1,18 +1,10 @@
 #pragma once
 
-#ifdef ESP32
-
-#pragma once
 #include "AudioConfig.h"
 #if(defined ESP32)
 #include "driver/i2s.h"
 #include "esp_a2dp_api.h"
 //#include "freertos/queue.h"
-#endif
-#if(defined ESP8266)
-#include "i2s.h"
-#define I2S_NUM_0 0
-#endif
 
 namespace audio_tools {
 
@@ -238,3 +230,5 @@ class AnalogAudio {
 }
 
 #endif
+
+

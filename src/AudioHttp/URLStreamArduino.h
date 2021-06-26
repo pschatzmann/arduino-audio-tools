@@ -27,8 +27,8 @@ class URLStream : public Stream {
 
         URLStream(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE) {
             read_buffer = new uint8_t[readBufferSize];
-            this->network = network;
-            this->password = password;            
+            this->network = (char*)network;
+            this->password = (char*)password;            
         }
 
         ~URLStream(){
@@ -91,8 +91,8 @@ class URLStream : public Stream {
         uint16_t read_buffer_size;
         uint16_t read_pos;
         uint16_t read_size;
-        const char* network;
-        const char* password;
+        char* network;
+        char* password;
         WiFiClient client;
 
         inline void fillBuffer() {

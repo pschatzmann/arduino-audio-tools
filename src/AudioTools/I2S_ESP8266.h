@@ -45,9 +45,95 @@ class I2SBase {
     
     /// writes the data to the I2S interface
     size_t writeBytes(const void *src, size_t size_bytes){
+      size_t result = 0;
       size_t frame_size = cfg.channels * (cfg.bits_per_sample/8);
       uint16_t frame_count = size_bytes / frame_size;
-      return i2s_write_buffer(( int16_t *)src, frame_count ) * frame_size;
+      if (cfg.channels==2 && cfg.bits_per_sample==16){
+        result = i2s_write_buffer(( int16_t *)src, frame_count ) * frame_size;
+      } else {
+        result = writeExt(src, size_bytes);
+      }    
+      return result; 
+    }
+
+    /// writes the data by making shure that we send 2 channels 16 bit data
+    size_t writeExt(const void *src, size_t size_bytes){
+        size_t result = 0;   
+        int j;
+
+        switch(cfg.bits_per_sample){
+
+          case 8:
+            for (j=0; j<size_bytes; j += cfg.channels){
+              int8_t *data = (int8_t *)src;
+              int16_t frame[2];
+              frame[0]=data[j] * 256;
+              if (cfg.channels==1){
+                frame[1]=data[j] * 256;
+              } else {
+                frame[1]=data[j+1] * 256;
+              }
+              uint32_t* frame_ptr = (uint32_t*)frame;
+              if(i2s_write_sample(*frame_ptr)){
+                result+=2;
+              }
+            }
+            break;
+
+          case 16:
+            for (j=0;j<size_bytes/2; j += cfg.channels){
+              int16_t *data = (int16_t *)src;
+              int16_t frame[2];
+              frame[0]=data[j];
+              if (cfg.channels==1){
+                frame[1]=data[j];
+              } else {
+                frame[1]=data[j+1];
+              }
+              uint32_t* frame_ptr = (uint32_t*)frame;
+              if(i2s_write_sample(*frame_ptr)){
+                result+=2;
+              }
+            }
+            break;
+
+          case 24:
+            for (j=0;j<size_bytes/3; j += cfg.channels){
+              int24_t *data = (int24_t *)src;
+              int24_t frame[2];
+              int32_t value = data[j];
+              frame[0]=value;
+              if (cfg.channels==1){
+                frame[1]=value;
+              } else {
+                value = data[j+1];
+                frame[1]=value / 256;
+              }
+              uint32_t* frame_ptr = (uint32_t*)frame;
+              if(i2s_write_sample(*frame_ptr)){
+                result+=2;
+              }
+            }
+            break;
+
+          case 32:
+            for (j=0; j<size_bytes/4; j += cfg.channels){
+              int32_t *data = (int32_t *)src;
+              int32_t frame[2];
+              frame[0]=data[j] / 65538;
+              if (cfg.channels==1){
+                frame[1]=data[j] / 65538;
+              } else {
+                frame[1]=data[j+1] / 65538;
+              }
+              uint32_t* frame_ptr = (uint32_t*)frame;
+              if(i2s_write_sample(*frame_ptr)){
+                result+=2;
+              }
+            }
+            break;
+        }
+        return result;
     }
 
     /// reads the data from the I2S interface
