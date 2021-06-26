@@ -391,7 +391,7 @@ class AudioOutputStream : public BufferedStream {
 };
 
 
-
+#ifdef ESP32
 
 /**
  * @brief We support the Stream interface for the ADC class
@@ -441,6 +441,8 @@ class AnalogAudioStream : public BufferedStream, public AudioBaseInfoDependent  
         }
 
 };
+
+#endif
 
 /**
  * @brief AudioOutput class which stores the data in a temporary buffer. 

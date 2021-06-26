@@ -55,6 +55,7 @@ class StrExt : public Str {
         // move assingment
         StrExt& operator = (StrExt &obj) {
             set(obj.c_str());
+            return *this;
         };
 
 

@@ -8,7 +8,7 @@
 namespace audio_tools {
 
 /**
- * @brief Basic I2S API - for the ESP32
+ * @brief Basic I2S API - for the ESP32. If we receive 1 channel, we expand the result to 2 channels.
  * 
  */
 class I2SBase {
@@ -101,21 +101,89 @@ class I2SBase {
 
     // update the cfg.i2s.channel_format based on the number of channels
     void setChannels(int channels){
-        if (channels==2){
-            i2s_config.channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT;
-        } else if (channels==1){
-            i2s_config.channel_format = I2S_CHANNEL_FMT_ONLY_RIGHT;
-        }
         cfg.channels = channels;          
     }
     
     /// writes the data to the I2S interface
     size_t writeBytes(const void *src, size_t size_bytes){
-      size_t result = 0;            
-      if (i2s_write(i2s_num, src, size_bytes, &result, portMAX_DELAY)!=ESP_OK){
-        LOGE("%s", __func__);
-      }
+      size_t result = 0;   
+      if (cfg.channels==2){
+        if (i2s_write(i2s_num, src, size_bytes, &result, portMAX_DELAY)!=ESP_OK){
+          LOGE("%s", __func__);
+        }
+      } else {
+        result = writeExpandChannel(src, size_bytes);
+      }       
       return result;
+    }
+
+    /// writes the data by making shure that we send 2 channels
+    size_t writeExpandChannel(const void *src, size_t size_bytes){
+        size_t result = 0;   
+        int j;
+        switch(cfg.bits_per_sample){
+
+          case 8:
+            for (j=0;j<size_bytes;j++){
+              int8_t frame[2];
+              int8_t *data = (int8_t *)src;
+              frame[0]=data[j];
+              frame[1]=data[j];
+              size_t result_call = 0;   
+              if (i2s_write(i2s_num, frame, sizeof(int8_t)*2, &result_call, portMAX_DELAY)!=ESP_OK){
+                LOGE("%s", __func__);
+              } else {
+                result += result_call;
+              }
+            }
+            break;
+
+          case 16:
+            for (j=0;j<size_bytes/2;j++){
+              int16_t frame[2];
+              int16_t *data = (int16_t*)src;
+              frame[0]=data[j];
+              frame[1]=data[j];
+              size_t result_call = 0;   
+              if (i2s_write(i2s_num, frame, sizeof(int16_t)*2, &result_call, portMAX_DELAY)!=ESP_OK){
+                LOGE("%s", __func__);
+              } else {
+                result += result_call;
+              }
+            }
+            break;
+
+          case 24:
+            for (j=0;j<size_bytes/4;j++){
+              int24_t frame[2];
+              int24_t *data = (int24_t*) src;
+              frame[0]=data[j];
+              frame[1]=data[j];
+              size_t result_call = 0;   
+              if (i2s_write(i2s_num, frame, sizeof(int24_t)*2, &result_call, portMAX_DELAY)!=ESP_OK){
+                LOGE("%s", __func__);
+              } else {
+                result += result_call;
+              }
+            }
+            break;
+
+          case 32:
+            for (j=0;j<size_bytes/4;j++){
+              int32_t frame[2];
+              int32_t *data = (int32_t*) src;
+              frame[0]=data[j];
+              frame[1]=data[j];
+              size_t result_call = 0;   
+              if (i2s_write(i2s_num, frame, sizeof(int32_t)*2, &result_call, portMAX_DELAY)!=ESP_OK){
+                LOGE("%s", __func__);
+              } else {
+                result += result_call;
+              }
+            }
+            break;
+        }
+        return result;
     }
 
     size_t readBytes(void *dest, size_t size_bytes){

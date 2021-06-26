@@ -9,6 +9,21 @@
 
 /**
  * ------------------------------------------------------------------------- 
+ * @brief Logging
+ * Logging Configuration in Arduino -> set USE_AUDIO_LOGGING to false if you want to deactivate Logging.
+ * When using cmake you can set -DUSE_AUDIO_LOGGING=false
+ * You can also change the LOG_LEVEL and LOG_STREAM here.
+ * However it is recommended to do it in your Sketch e.g with AudioLogger::instance().begin(Serial,AudioLogger::Warning);
+ */
+ 
+#define USE_AUDIO_LOGGING true
+#define PRINTF_BUFFER_SIZE 160
+#define LOG_LEVEL AudioLogger::Warning
+#define LOG_STREAM Serial
+
+
+/**
+ * ------------------------------------------------------------------------- 
  * @brief Common Default Settings that can usually be changed in the API
  */
 #ifndef LED_BUILTIN
@@ -73,16 +88,3 @@
 #define SOFT_MUTE_VALUE LOW  
 #endif
 
-/**
- * ------------------------------------------------------------------------- 
- * @brief Logging
- * Logging Configuration in Arduino -> set USE_AUDIO_LOGGING to false if you want to deactivate Logging.
- * When using cmake you can set -DUSE_AUDIO_LOGGING=false
- * You can also change the LOG_LEVEL and LOG_STREAM here.
- * However it is recommended to do it in your Sketch e.g with AudioLogger::instance().begin(Serial,AudioLogger::Warning);
- */
- 
-#define USE_AUDIO_LOGGING true
-#define PRINTF_BUFFER_SIZE 160
-#define LOG_LEVEL AudioLogger::Warning
-#define LOG_STREAM Serial
