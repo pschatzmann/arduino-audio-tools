@@ -16,7 +16,7 @@ const char* ADC_TAG = "ADC";
 static int16_t convert8DAC(int value, int value_bits_per_sample){
     // -> convert to positive 
     int16_t result = (value * maxValue(8) / maxValue(value_bits_per_sample)) + maxValue(8) / 2;
-    return result;
+    return result;    
 }
 
 
@@ -43,17 +43,20 @@ class AnalogConfig {
     int mode_internal; 
     int bits_per_sample = 16;
     int channels = 2;
+    bool auto_scale = true;
 
-    AnalogConfig() {
+    AnalogConfig(bool auto_scale = true) {
         this->mode = RX_MODE;
+        this->auto_scale = auto_scale;
         setPin(DEFAUT_ADC_PIN);
         mode_internal = (I2S_MODE_MASTER | I2S_MODE_RX | I2S_MODE_ADC_BUILT_IN);
     }
     
 
     /// Default constructor
-    AnalogConfig(RxTxMode mode) {
+    AnalogConfig(RxTxMode mode,bool auto_scale = true) {
       this->mode = mode;
+      this->auto_scale = auto_scale;
       if (mode == RX_MODE) {
         setPin(DEFAUT_ADC_PIN);
         mode_internal = (I2S_MODE_MASTER | I2S_MODE_RX | I2S_MODE_ADC_BUILT_IN);
@@ -216,7 +219,13 @@ class AnalogAudio  {
     /// writes the data to the I2S interface
     size_t writeBytes(const void *src, size_t size_bytes){
       size_t result = 0;   
-      result = AnalogAudio::writeExpandChannel(i2s_num, adc_config.channels, adc_config.bits_per_sample, src, size_bytes);  
+      if (!adc_config.auto_scale){
+        if (i2s_write(i2s_num, src, size_bytes, &result, portMAX_DELAY)!=ESP_OK){
+          LOGE("%s", __func__);
+        }
+      } else {
+          result = AnalogAudio::writeExpandChannel(i2s_num, adc_config.channels, adc_config.bits_per_sample, src, size_bytes);  
+      }       
       return result;
     }
 
