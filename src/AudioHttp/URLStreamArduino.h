@@ -45,6 +45,9 @@ class URLStream : public Stream {
             result = request.process(action, url, reqMime, reqData);
             size = request.getReceivedContentLength();
             LOGI("size: %d", size);
+            if (size>0){
+                waitForData();
+            }
             return result == 200;
         }
 
@@ -120,6 +123,16 @@ class URLStream : public Stream {
             request.setClient(client);
             delay(500);            
         }
+
+         virtual void waitForData() {
+            if(request.available()==0){
+                LOGI("Request written ... waiting for reply")
+                while(request.available()==0){
+                    delay(500);
+                }
+            }
+        }
+       
 
 };
 
