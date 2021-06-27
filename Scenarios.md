@@ -5,12 +5,12 @@
 Unfortunatly Arduino does not provide an I2S functionality which is standrdized acress the different processors. There is only an official documentation for SAMD21 processors. The full functionality of the library is currently only available on the ESP32: 
 
 
-| Processor      | I2SStream | ADCStream | A2DP   | URLStream | Other  |
-|----------------|-----------|-----------|--------|-----------|--------|
-| ESP32          |  +        |  +        |   +    |   +       |   +    |
-| ESP8266        |  *        |  *        |        |           |   +    |
-| SAMD21         |  *        |           |        |           |   +    |
-| Raspberry Pico |           |           |        |           |   +    |
+| Processor      | I2S       | ADC/DAC  | A2DP   | URLStream | PWM   | Other  |
+|----------------|-----------|----------|--------|-----------|-------|--------|
+| ESP32          |  +        |  +       |   +    |   +       |   *   |   +    |
+| ESP8266        |  *        |  *       |        |           |       |   +    |
+| SAMD21         |  *        |          |        |           |       |   +    |
+| Raspberry Pico |           |          |        |           |   *   |   +    |
  
 
 + supported
@@ -24,6 +24,7 @@ Here are the related Stream classes with their supported operations that can be 
 | Class                   | Read | Write | Comments           |
 |-------------------------|------|-------|--------------------|
 | I2SStream               |   +  |   +   | i2s                |
+| PWMAduioStream          |      |   +   | pwm                |
 | AnalogAudioStream       |   +  |   +   | adc, dac           |
 | MemoryStream            |   +  |   +   | memory             |
 | URLStream               |   +  |       | url                |

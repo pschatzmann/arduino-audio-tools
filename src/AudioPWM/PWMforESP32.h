@@ -5,15 +5,14 @@
 #include "AudioTools/AudioLogger.h"
 #include "AudioTools/Vector.h"
 #include "Stream.h"
-
-#define PWM_BUFFER_LENGTH 512
+#include <math.h>       /* pow */
 
 namespace audio_tools {
 
-enum PWMResolution {Res8,Res9,Res10,Res11};
-void defaultAudioOutputCallback();
+// forward declaration
 class AudioPWM;
-static AudioPWM *accessAudioPWM; 
+void defaultPWMAudioOutputCallback();
+static AudioPWM *accessAudioPWM = nullptr; 
 
 /**
  * @brief Configuration for PWM output
@@ -25,6 +24,7 @@ static AudioPWM *accessAudioPWM;
  *   11  | 2048 | 39.0625
  *
  *   The default resolution is 8. The value must be between 8 and 11 and also drives the PWM frequency.
+ *
  * @author Phil Schatzmann
  * @copyright GPLv3
 
@@ -36,7 +36,7 @@ struct PWMConfig {
     int start_pin = 3; 
     int buffer_size = 1024 * 8;
     int bits_per_sample = 16;
-    int resolution = 8;  // must be between 8 and 11
+    int resolution = 8;  // must be between 8 and 11 -> drives pwm frequency
 } default_config;
 
 /**
@@ -50,17 +50,17 @@ struct PINInfo {
 };
 
 /**
- * @brief Audio output to PWM pins for the ESP32.  
+ * @brief Audio output to PWM pins for the ESP32. The ESP32 supports up to 16 channels. 
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 
-class AudioPWM : public Stream {
+class PWMAudioStream : public Stream {
     friend void defaultAudioOutputCallback();
 
     public:
 
-        AudioPWM(){
+        PWMAudioStream(){
             accessAudioPWM = this;
         }
 
@@ -73,15 +73,30 @@ class AudioPWM : public Stream {
         }
 
         // starts the processing
-        virtual void begin(PWMConfig config){
+        bool begin(PWMConfig config){
 	 		LOGD(__FUNCTION__);
             this->audio_config = config;
             LOGI("sample_rate: %d", audio_config.sample_rate);
             LOGI("channels: %d", audio_config.channels);
+            LOGI("bits_per_sample: %d", audio_config.bits_per_sample);
             LOGI("start_pin: %d", audio_config.start_pin);
+            LOGI("resolution: %d", audio_config.resolution);
+
+            // controller has max 16 independent channels
+            if (audio_config.channels>=16){
+                LOGE("Only max 16 channels are supported");
+                return false;
+            }
+
+            // check selected resolution
+            if (audio_config.resolution<8 || audio_config.resolution>11){
+                LOGE("The resolution must be between 8 and 11!");
+                return false;
+            }
 
             setupPWM();
             setupTimer();
+            return true;
         }
 
         // Ends the output
@@ -91,7 +106,7 @@ class AudioPWM : public Stream {
             for (int j=0;j<audio_config.channels;j++){
                 ledcDetachPin(pins[j].gpio);
             }
-            has_data = false;
+            data_write_started = false;
         }
 
         // not supported
@@ -125,21 +140,27 @@ class AudioPWM : public Stream {
         virtual void flush() { 
         }
 
+
         // blocking write for a single byte
         virtual size_t write(uint8_t value) {
             if (buffer.availableToWrite()>1){
                 buffer.write(value);
-                has_data = true;
+                setWriteStarted();
             }
         }
 
         // blocking write for an array: we expect a singed value and convert it into a unsigned 
         virtual size_t write(const uint8_t *wrt_buffer, size_t size){
+            LOGI("write: %lu bytes", size)
             while(availableForWrite()<size){
-                delay(5);
+       	 	    LOGI("Buffer is full - waiting...");
+                delay(10);
             }
             size_t result = buffer.writeArray(wrt_buffer, size);
-            has_data = true;
+            if (result!=size){
+                LOGW("Could not write all data: %d -> %d", size, result);
+            }
+            setWriteStarted();
             return result;
         }
 
@@ -147,15 +168,24 @@ class AudioPWM : public Stream {
     protected:
         PWMConfig audio_config;
         Vector<PINInfo> pins;      
-        NBuffer<uint8_t> buffer = NBuffer<uint8_t>(DEFAULT_BUFFER_SIZE,4);
-        int buffer_idx = 0;
-        bool data_write_started = false;
-        hw_timer_t * timer = NULL;
+        NBuffer<uint8_t> buffer = NBuffer<uint8_t>(PWM_BUFFER_SIZE, PWM_BUFFERS);
+        hw_timer_t * timer = nullptr;
         portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
-        bool has_data = false;
+        bool data_write_started = false;
 
+        /// when we get the first write -> we activate the timer to start with the output of data
+        void setWriteStarted(){
+            if (!data_write_started){
+                LOGI("timerAlarmEnable");
+                data_write_started = true;
+                timerAlarmEnable(timer);
+            }
+        }
 
+        /// Setup LED PWM
         void setupPWM(){
+            LOGD(__FUNCTION__);
+
             pins.resize(audio_config.channels);
             for (int j=0;j<audio_config.channels;j++){
                 int pwmChannel = j;
@@ -166,23 +196,25 @@ class AudioPWM : public Stream {
             }
         }
 
+        /// Setup ESP32 timer with callback
         void setupTimer() {
+	 		LOGD(__FUNCTION__);
             // Attach timer int at sample rate
             timer = timerBegin(0, 1, true); // Timer at full 40Mhz, no prescaling
             uint64_t counter = 40000000 / audio_config.sample_rate;
             LOGI("timer counter is %lu", counter);
-            timerAttachInterrupt(timer, &defaultAudioOutputCallback, true);
+            timerAttachInterrupt(timer, &defaultPWMAudioOutputCallback, true);
             timerAlarmWrite(timer, counter, true); // Timer fires at ~44100Hz [40Mhz / 907]
-            timerAlarmEnable(timer);
         } 
 
+        /// provides the max value for the configured resulution
         int maxUnsignedValue(){
-            return maxUnsignedValue(audio_config.bits_per_sample);
+            return maxUnsignedValue(audio_config.resolution);
         }
-
         
+        /// provides the max value for the indicated resulution
         int maxUnsignedValue(int resolution){
-            return 2^resolution;
+            return pow(2,resolution);
         } 
 
         /// determiens the PWM frequency based on the requested resolution
@@ -198,10 +230,16 @@ class AudioPWM : public Stream {
 
         /// writes the next frame to the output pins 
         void playNextFrame(){
-            int required = (audio_config.bits_per_sample / 8) * audio_config.channels;
-            if (has_data && buffer.available() >= required){
-                for (int j=0;j<audio_config.channels;j++){
-                    ledcWrite(pins[j].pwm_channel, nextValue());
+            if (data_write_started){
+                int required = (audio_config.bits_per_sample / 8) * audio_config.channels;
+                if (buffer.available() >= required){
+                    for (int j=0;j<audio_config.channels;j++){
+                        int value  = nextValue();
+                        //Serial.println(value);
+                        ledcWrite(pins[j].pwm_channel, value);
+                    }
+                } else {
+                    LOGW("playNextFrame - underflow");
                 }
             }
         } 
@@ -210,23 +248,35 @@ class AudioPWM : public Stream {
         int nextValue() {
             switch(audio_config.bits_per_sample ){
                 case 8: {
-                    int8_t value;
-                    buffer.readArray((uint8_t*)&value,1);
+                    int value = buffer.read();
+                    if (value<0){
+                        LOGE("Could not read full data");
+                        value = 0;
+                    }
                     return map(value, -maxValue(8), maxValue(8), 0, maxUnsignedValue());
                 }
                 case 16: {
                     int16_t value;
-                    buffer.readArray((uint8_t*)&value,2);
+                    if (buffer.readArray((uint8_t*)&value,2)!=2){
+                        LOGE("Could not read full data");
+                    }
+                    //Serial.print(value);
+                    //Serial.print(" -> ");
+                    //Serial.println(map(value, -maxValue(16), maxValue(16), 0, maxUnsignedValue()));
                     return map(value, -maxValue(16), maxValue(16), 0, maxUnsignedValue());
                 }
                 case 24: {
                     int24_t value;
-                    buffer.readArray((uint8_t*)&value,3);
+                    if (buffer.readArray((uint8_t*)&value,3)!=3){
+                        LOGE("Could not read full data");
+                    }
                     return map((int32_t)value, -maxValue(24), maxValue(24), 0, maxUnsignedValue());
                 }
                 case 32: {
                     int32_t value;
-                    buffer.readArray((uint8_t*)&value,4);
+                    if (buffer.readArray((uint8_t*)&value,4)!=4){
+                        LOGE("Could not read full data");
+                    }
                     return map(value, -maxValue(32), maxValue(32), 0, maxUnsignedValue());
                 }
             }            
@@ -236,7 +286,8 @@ class AudioPWM : public Stream {
       
 };
 
-void IRAM_ATTR defaultAudioOutputCallback() {
+/// timer callback: write the next frame to the pins
+void IRAM_ATTR defaultPWMAudioOutputCallback() {
     if (accessAudioPWM!=nullptr){
         portENTER_CRITICAL_ISR(&(accessAudioPWM->timerMux));
         accessAudioPWM->playNextFrame();

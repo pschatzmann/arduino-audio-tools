@@ -51,12 +51,12 @@ struct PWMConfig {
  */
 
 template <class T>
-class AudioPWM : public Stream {
+class PWMAudioStream : public Stream {
     friend bool defaultAudioOutputCallback(repeating_timer* ptr);
 
     public:
 
-        AudioPWM(){
+        PWMAudioStream(){
             T amplitude_in = getDefaultAmplitude();
             audio_config.amplitude_in = amplitude_in;
             default_config.amplitude_in = amplitude_in;
@@ -157,7 +157,7 @@ class AudioPWM : public Stream {
     protected:
         PWMConfig audio_config;
         Vector<PicoChannelOut> pins;      
-        NBuffer<T> buffer = NBuffer<T>(DEFAULT_BUFFER_SIZE,4);
+        NBuffer<T> buffer = NBuffer<T>(PWM_BUFFER_SIZE, PWM_BUFFERS);
         repeating_timer_t timer;
         uint64_t underflow_count = 0;
         bool data_write_started = false;
