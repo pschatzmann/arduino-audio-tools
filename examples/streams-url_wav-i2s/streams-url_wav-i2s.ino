@@ -27,13 +27,11 @@ void setup(){
 
   // setup i2s
   I2SConfig config = i2s.defaultConfig(TX_MODE);
-  config.sample_rate = 16000; // Mozzilla 22050
+  config.sample_rate = 16000; 
   config.bits_per_sample = 32;
   config.channels = 1;
   i2s.begin(config);
 
-// Mozilla tts
-// url.begin("http://192.168.1.37:5002/api/tts", POST, "text/plain","Hallo, my name is Alice");
 // rhasspy
   url.begin("http://192.168.1.37:12101/api/text-to-speech?play=false", POST, "text/plain","Hallo, my name is Alice");
 
