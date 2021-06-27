@@ -34,9 +34,6 @@ void setup(){
 
 // rhasspy
   url.begin("http://192.168.1.37:12101/api/text-to-speech?play=false", POST, "text/plain","Hallo, my name is Alice");
-
-
-
 }
 
 void loop(){

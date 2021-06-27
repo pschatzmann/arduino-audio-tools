@@ -18,8 +18,9 @@ namespace audio_tools {
 bool defaultAudioOutputCallback(repeating_timer* ptr);
 
 /**
- * @brief Pico Channel to pin assignments
- * 
+ * @brief Rasperry Pico Channel to pin assignments
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 struct PicoChannelOut {
     int gpio = -1;
@@ -28,10 +29,10 @@ struct PicoChannelOut {
     uint channel; // pico pwm channel
 };
 
-
 /**
- * @brief Configuration for PWM output
- * 
+ * @brief Configuration for Rasperry Pico PWM output
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 struct PWMConfig {
     int sample_rate = 10000;  // sample rate in Hz
@@ -43,8 +44,10 @@ struct PWMConfig {
 } default_config;
 
 /**
- * @brief Audio output to PWM pins
- * 
+ * @brief Audio output for the Rasperry Pico to PWM pins
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+
  */
 
 template <class T>
