@@ -69,7 +69,8 @@ $(function() {
 <ul>
 <li>a simple I2S class (to read and write to the internal I2S)</li>
 <li>a simple ADC class (to read analog data with the help of I2S)</li>
-<li>Additional <a class="el" href="class_stream.html">Stream</a> implementations: MemoryStream, URLStream, I2SStream, A2DPStream, PrintStream</li>
+<li>a simple PWM class (to write audio data with the help of PWM)</li>
+<li>Additional <a class="el" href="class_stream.html">Stream</a> implementations: MemoryStream, URLStream, I2SStream, A2DPStream, PrintStream,</li>
 <li>Converters</li>
 <li>Musical Notes (with frequencies of notes)</li>
 <li>SineWaveGenerator (to generate a sine tone) and <a href="https://sensorium.github.io/Mozzi/">Mozzi</a> for more complex scenario</li>
@@ -93,6 +94,7 @@ $(function() {
 <ul>
 <li>external DAC – <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_i2_s_stream.html">I2SStream</a></li>
 <li>an Amplifier – <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_analog_audio_stream.html">AnalogAudioStream</a></li>
+<li>Earphones – <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_pwm_audio_stream.html">PWMAudioStream</a></li>
 <li>Bluetooth Speakers – <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_a2_d_p_stream.html">A2DPStream</a></li>
 <li>Serial to display the data as CSV – <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_csv_stream.html">CsvStream</a></li>
 <li>Any other Arduino Classes implementing Streams: SD, Ethernet etc</li>
@@ -127,13 +129,20 @@ $(function() {
 <div class="line">    }</div>
 <div class="line">}</div>
 </div><!-- fragment --><p> A complete list of the supported Audio <a class="el" href="class_stream.html">Stream</a> classes and scenarios can be found in the Scenarios Document</p>
-<h1><a class="anchor" id="autotoc_md1"></a>
+<h2><a class="anchor" id="autotoc_md1"></a>
+Sound Output</h2>
+<ul>
+<li><b>I2SStream</b>: The best quality can be achieved with the help of I2S and an external DAC. I2S is supporting 2 channels only.</li>
+<li><b>AnalogAudioStream</b>: Some processors are providing an analog output, this is usually an easy and good approach: The number of pins (and herewith output channels) however is usually very limited.</li>
+<li><b>PWMAudioStream</b>: The last possibility is to simulate an analog output with the help of PWM by using a frequency which is beyond the audible range of 20 KHz. This method is supported by all processor and usually supports a bigger number of output pins. In terms of audio quality this is usually the worst option.</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md2"></a>
 Examples</h1>
 <p>The examples follow the following naming convention: "scenario type"-"source"-"destination". For the scenario types we might have <b>base</b> (using basic api functionality), <b>stream</b> for examples using Streams and <b>test</b> for the test cases.</p>
 <p>For the <b>source</b> we currently have <b>adc</b> for analog input devices like analog microphones, <b>i2s</b> for digital input devices (e.g. digital microphones), <b>file</b> for SD files and <b>a2dp</b> for input from Bluetooth A2DP (e.g. from a Mobile Phone).</p>
 <p>For the <b>destination</b> we use <b>dac</b> for analog output (e.g. to an amplifier), <b>i2s</b> for digital output devices (e.g. an external DAC), <b>file</b> for SD files and <b>a2dp</b> for output to Bluetooth A2DP (e.g. a Bluetooth Speaker).</p>
 <p>Here is the list of examples:</p>
-<h3><a class="anchor" id="autotoc_md2"></a>
+<h3><a class="anchor" id="autotoc_md3"></a>
 Stream API</h3>
 <p>Here are a couple of simple test sketches to demo different output destinations:</p>
 <ul>
@@ -150,9 +159,10 @@ Stream API</h3>
 <li><a href="examples/streams-url_raw-serial">streams-url_raw-serial</a> Displaying a music file from the internet on the Serial Plotter</li>
 <li><a href="examples/streams-url_raw-i2s">streams-url_raw-I2S.ino</a> Streaming a File from the Internet to on external DAC via I2S</li>
 <li><a href="examples/streams-mozzi-a2dp">streams-mozzi-a2dp</a> Use Mozzi to generate Sound to be sent to a Bluetooth Speaker</li>
+<li><a href="examples/streams-url_wav-i2s">streams-url_wav-i2s</a> Text to Speach example using Rhasspy</li>
 </ul>
 <p>... these are just a few examples, but you can combine any Input <a class="el" href="class_stream.html">Stream</a> with any Output <a class="el" href="class_stream.html">Stream</a> as you like...</p>
-<h3><a class="anchor" id="autotoc_md3"></a>
+<h3><a class="anchor" id="autotoc_md4"></a>
 Basic API</h3>
 <ul>
 <li><a href="basic-api/base-adc-serial">base-adc-serial</a> - Sample analog sound and write it to Serial</li>
@@ -163,7 +173,7 @@ Basic API</h3>
 <li><a href="basic-api/base-i2s-serial">base-i2s-serial</a> - Sample digital sound and write it to Serial</li>
 <li><a href="basic-api/base-i2s-a2dp">base-i2s-a2dp</a> - Sample analog sound and write it to a A2DP Bluetooth source</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md4"></a>
+<h3><a class="anchor" id="autotoc_md5"></a>
 Listening to the Result with a Webbrowser</h3>
 <p>I am also providing a simple webserver which can render the audio data as wav result. Here are some examples:</p>
 <ul>
@@ -172,7 +182,7 @@ Listening to the Result with a Webbrowser</h3>
 <li><a href="examples/streams-tts-webserver_wav">streams-tts-webserver_wav</a> A Webserver which renders the result from the Arduino TTS engine</li>
 <li><a href="examples/streams-flite-webserver_wav">streams-flite-webserver_wav</a> A Webserver which renders the result from the Flite TTS engine</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md5"></a>
+<h3><a class="anchor" id="autotoc_md6"></a>
 Logging</h3>
 <p>The application uses a built in logger (see <a class="el" href="_audio_logger_8h_source.html">AudioLogger.h</a> and <a class="el" href="_audio_config_8h_source.html">AudioConfig.h</a>). You can e.g. deactivate the logging by changing USE_AUDIO_LOGGING to false in the <a class="el" href="_audio_config_8h_source.html">AudioConfig.h</a>:</p>
 <div class="fragment"><div class="line">#define USE_AUDIO_LOGGING false</div>
@@ -180,7 +190,7 @@ Logging</h3>
 <div class="line">#define LOG_STREAM Serial</div>
 </div><!-- fragment --><p>Per default we use the log level warning and the logging output is going to Serial. You can also change this in your sketch by calling AudioLogger begin with the output stream and the log level e.g:</p>
 <div class="fragment"><div class="line">AudioLogger::instance().begin(Serial, AudioLogger::Debug);</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md6"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md7"></a>
 Optional Libraries</h1>
 <p>Dependent on the example you might need to install some of the following libraries:</p>
 <ul>
@@ -189,20 +199,20 @@ Optional Libraries</h1>
 <li><a href="https://www.arduino.cc/en/reference/SD">SD Library</a> to read and write files.</li>
 <li><a href="https://github.com/pschatzmann/arduino-fdk-aac">arduino-fdk-aac</a> to encode or decode AAC</li>
 <li><a href="https://github.com/pschatzmann/Mozzi">Mozzi</a> A sound synthesis library for Arduino</li>
-<li><a href="https://github.com/pschatzmann/SAM">SAM</a> A Text to Speach Engine</li>
+<li><a href="https://github.com/pschatzmann/arduino-SAM">SAM</a> A Text to Speach Engine</li>
 <li><a href="https://github.com/pschatzmann/TTS">TTS</a> A Text to Speach Engine</li>
-<li><a href="https://github.com/pschatzmann/flite">flite</a> A Text to Speach Engine</li>
+<li><a href="https://github.com/pschatzmann/arduino-flite">flite</a> A Text to Speach Engine</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md7"></a>
+<h1><a class="anchor" id="autotoc_md8"></a>
 Installation</h1>
 <p>You can download the library as zip and call include Library -&gt; zip library. Or you can git clone this project into the Arduino libraries folder e.g. with</p>
 <div class="fragment"><div class="line">cd  ~/Documents/Arduino/libraries</div>
 <div class="line">git clone pschatzmann/arduino-audio-tools.git</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md8"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md9"></a>
 Documentation</h1>
 <p>Here is the generated <a href="https://pschatzmann.github.io/arduino-audio-tools/html/annotated.html">Class documentation</a>.</p>
 <p>You also might find further information in <a href="https://www.pschatzmann.ch/home/category/machine-sound/">one of my blogs</a></p>
-<h1><a class="anchor" id="autotoc_md9"></a>
+<h1><a class="anchor" id="autotoc_md10"></a>
 Project Status</h1>
 <p>This is currently work in progress:</p>
 <table class="markdownTable">

@@ -4,7 +4,8 @@ Some basic __header-only C++ classes__ that can be used for __Audio Processing__
 
 - a simple I2S class (to read and write to the internal I2S) 
 - a simple ADC class (to read analog data with the help of I2S) 
-- Additional Stream implementations: MemoryStream, URLStream, I2SStream, A2DPStream, PrintStream
+- a simple PWM class (to write audio data with the help of PWM) 
+- Additional Stream implementations: MemoryStream, URLStream, I2SStream, A2DPStream, PrintStream, 
 - Converters
 - Musical Notes (with frequencies of notes)
 - SineWaveGenerator (to generate a sine tone) and [Mozzi](https://sensorium.github.io/Mozzi/) for more complex scenario 
@@ -30,6 +31,7 @@ As “Audio Sinks” we will have e.g:
 
 - external DAC – [I2SStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_i2_s_stream.html)
 - an Amplifier – [AnalogAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_analog_audio_stream.html)
+- Earphones – [PWMAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_pwm_audio_stream.html)
 - Bluetooth Speakers – [A2DPStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_a2_d_p_stream.html)
 - Serial to display the data as CSV – [CsvStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_csv_stream.html)
 - Any other Arduino Classes implementing Streams: SD, Ethernet etc
@@ -68,6 +70,12 @@ void loop(){
 
 ```
 A complete list of the supported Audio Stream classes and scenarios can be found in the [Scenarios Document](Scenarios.md)
+
+### Sound Output
+
+- __I2SStream__: The best quality can be achieved with the help of I2S and an external DAC.  I2S is supporting 2 channels only. 
+- __AnalogAudioStream__: Some processors are providing an analog output, this is usually an easy and good approach: The number of pins (and herewith output channels) however is usually very limited.
+- __PWMAudioStream__: The last possibility is to simulate an analog output with the help of PWM by using a frequency which is beyond the audible range of 20 KHz. This method is supported by all processor and usually supports a bigger number of output pins. In terms of audio quality this is usually the worst option.
 
 
 ## Examples

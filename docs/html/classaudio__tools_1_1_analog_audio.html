@@ -67,9 +67,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="#friends">Friends</a> &#124;
 <a href="classaudio__tools_1_1_analog_audio-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">audio_tools::AnalogAudio Class Reference</div>  </div>
@@ -110,9 +109,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_audio.html#a610fbd64a9173a21db5a51b02aa291b8">read</a> (int16_t(*src)[2], size_t sizeFrames)</td></tr>
 <tr class="memdesc:a610fbd64a9173a21db5a51b02aa291b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads data from <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for the ESP32 which supports the reading and writing with a defined data...">I2S</a>. <br /></td></tr>
 <tr class="separator:a610fbd64a9173a21db5a51b02aa291b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
 <tr class="memitem:a376f93fd6b35245dc203b798636670e2"><td class="memItemLeft" align="right" valign="top"><a id="a376f93fd6b35245dc203b798636670e2"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>readBytes</b> (void *dest, size_t size_bytes)</td></tr>
 <tr class="separator:a376f93fd6b35245dc203b798636670e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -120,6 +116,13 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>readBytes</b> (void
 size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_audio.html#a261c855468a604ed52cb76bf4965062d">writeBytes</a> (const void *src, size_t size_bytes)</td></tr>
 <tr class="memdesc:a261c855468a604ed52cb76bf4965062d"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes the data to the <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for the ESP32 which supports the reading and writing with a defined data...">I2S</a> interface <br /></td></tr>
 <tr class="separator:a261c855468a604ed52cb76bf4965062d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-methods"></a>
+Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:ae41ecc619e96dcf9e662c6187f4f6cf0"><td class="memItemLeft" align="right" valign="top"><a id="ae41ecc619e96dcf9e662c6187f4f6cf0"></a>
+static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_audio.html#ae41ecc619e96dcf9e662c6187f4f6cf0">writeExpandChannel</a> (i2s_port_t i2s_num, int channels, const int bits_per_sample, const void *src, size_t size_bytes)</td></tr>
+<tr class="memdesc:ae41ecc619e96dcf9e662c6187f4f6cf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes the data by making shure that we send 2 channels 16 data scaled to 8 bits <br /></td></tr>
+<tr class="separator:ae41ecc619e96dcf9e662c6187f4f6cf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -129,12 +132,6 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a289e2f2223f6c13dfa06d032d9494578"><td class="memItemLeft" align="right" valign="top"><a id="a289e2f2223f6c13dfa06d032d9494578"></a>
 const i2s_port_t&#160;</td><td class="memItemRight" valign="bottom"><b>i2s_num</b> = I2S_NUM_0</td></tr>
 <tr class="separator:a289e2f2223f6c13dfa06d032d9494578"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
-Friends</h2></td></tr>
-<tr class="memitem:af5ab52f3d03b83e5568fdf9bf67bb240"><td class="memItemLeft" align="right" valign="top"><a id="af5ab52f3d03b83e5568fdf9bf67bb240"></a>
-class&#160;</td><td class="memItemRight" valign="bottom"><b>AnalogAudioStream</b></td></tr>
-<tr class="separator:af5ab52f3d03b83e5568fdf9bf67bb240"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A very fast ADC and DAC using the ESP32 <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for the ESP32 which supports the reading and writing with a defined data...">I2S</a> interface. </p>

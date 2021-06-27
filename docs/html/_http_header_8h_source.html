@@ -294,223 +294,224 @@ $(function() {
 <div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;                    }</div>
 <div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;                    put(line);                </div>
 <div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;                }</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;            }</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;        }</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160; </div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;        <span class="comment">// writes the full header to the indicated HttpStreamedMultiOutput stream</span></div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;        <span class="keywordtype">void</span> write(Client &amp;out){</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;            LOGI(<span class="stringliteral">&quot;HttpHeader::write&quot;</span>);</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;            write1stLine(out);</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;            <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = lines.begin() ; it != lines.end(); ++it){</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;                writeHeaderLine(out, *it);</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;            }</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;            <span class="comment">// print empty line</span></div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;            crlf(out);</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;            out.flush();</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;            is_written = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;        }</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160; </div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;        <span class="comment">// automatically create new lines</span></div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        <span class="keywordtype">void</span> setAutoCreateLines(<span class="keywordtype">bool</span> is_auto_line){</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;            create_new_lines = is_auto_line;</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;        }</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160; </div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160; </div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;            }</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;        }</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160; </div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;        <span class="comment">// writes the full header to the indicated HttpStreamedMultiOutput stream</span></div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;        <span class="keywordtype">void</span> write(Client &amp;out){</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;            LOGI(<span class="stringliteral">&quot;HttpHeader::write&quot;</span>);</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;            write1stLine(out);</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;            <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = lines.begin() ; it != lines.end(); ++it){</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;                writeHeaderLine(out, *it);</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;            }</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;            <span class="comment">// print empty line</span></div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;            crlf(out);</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;            out.flush();</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;            is_written = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;        }</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160; </div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        <span class="comment">// automatically create new lines</span></div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        <span class="keywordtype">void</span> setAutoCreateLines(<span class="keywordtype">bool</span> is_auto_line){</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;            create_new_lines = is_auto_line;</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;        }</div>
 <div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160; </div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        <span class="keywordtype">int</span> status_code = UNDEFINED;</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        <span class="keywordtype">bool</span> is_written = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        <span class="keywordtype">bool</span> is_chunked = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;        <span class="keywordtype">bool</span> create_new_lines = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        MethodID method_id;</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;        <span class="comment">// we store the values on the heap. this is acceptable because we just have one instance for the</span></div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        <span class="comment">// requests and one for the replys: which needs about 2*100 bytes </span></div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;        StrExt protocol_str = StrExt(10);</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;        StrExt url_path = StrExt(70);</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;        StrExt status_msg = StrExt(20);</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;        Vector&lt;HttpHeaderLine*&gt; lines;</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;        HttpLineReader reader;</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">char</span>* CRLF = <span class="stringliteral">&quot;\r\n&quot;</span>;</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160; </div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        <span class="comment">// the headers need to delimited with CR LF</span></div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;        <span class="keywordtype">void</span> crlf(Client &amp;out) {</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;            out.print(CRLF);</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;            LOGI(<span class="stringliteral">&quot; -&gt; %s &quot;</span>, <span class="stringliteral">&quot;&lt;CR LF&gt;&quot;</span>);</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;        }</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160; </div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        <span class="comment">// gets or creates a header line by key</span></div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;        HttpHeaderLine *headerLine(<span class="keyword">const</span> <span class="keywordtype">char</span>* key) {</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;            <span class="keywordflow">if</span> (key!=<span class="keyword">nullptr</span>){</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;                <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = lines.begin() ; it != lines.end(); ++it){</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;                    HttpHeaderLine *pt = (*it);</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;                    <span class="keywordflow">if</span> (pt!=<span class="keyword">nullptr</span> &amp;&amp; pt-&gt;key.c_str()!=<span class="keyword">nullptr</span>){</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;                        <span class="keywordflow">if</span> (strcmp(pt-&gt;key.c_str(),key)==0){</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;                            pt-&gt;active = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;                            <span class="keywordflow">return</span> pt;</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;                        }</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;                    }</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;                }</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;                <span class="keywordflow">if</span> (create_new_lines){</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;                    HttpHeaderLine *newLine = <span class="keyword">new</span> HttpHeaderLine();</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;                    LOGD(<span class="stringliteral">&quot;HttpHeader::headerLine - new line created for %s&quot;</span>, key);</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;                    newLine-&gt;active = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;                    newLine-&gt;key = key;</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;                    lines.push_back(newLine);</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;                    <span class="keywordflow">return</span> newLine;</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;                }</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;                LOGI(<span class="stringliteral">&quot;HttpHeader::headerLine %s&quot;</span>, <span class="stringliteral">&quot;The key must not be null&quot;</span>);</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;            }</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;            </div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;        }</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160; </div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;        MethodID getMethod(<span class="keyword">const</span> <span class="keywordtype">char</span>* line){</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;            <span class="comment">// set action</span></div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0; methods[j]!=<span class="keyword">nullptr</span>;j++){</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;                <span class="keyword">const</span> <span class="keywordtype">char</span> *action = methods[j];</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;                <span class="keywordtype">int</span> len = strlen(action);</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;                <span class="keywordflow">if</span> (strncmp(action,line,len)==0){</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;                    <span class="keywordflow">return</span> (MethodID) j;</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;                }</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;            }</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;            <span class="keywordflow">return</span> (MethodID)0;</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;        }</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160; </div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160; </div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        <span class="keywordtype">int</span> status_code = UNDEFINED;</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        <span class="keywordtype">bool</span> is_written = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;        <span class="keywordtype">bool</span> is_chunked = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        <span class="keywordtype">bool</span> create_new_lines = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;        MethodID method_id;</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        <span class="comment">// we store the values on the heap. this is acceptable because we just have one instance for the</span></div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;        <span class="comment">// requests and one for the replys: which needs about 2*100 bytes </span></div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;        StrExt protocol_str = StrExt(10);</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;        StrExt url_path = StrExt(70);</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;        StrExt status_msg = StrExt(20);</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;        Vector&lt;HttpHeaderLine*&gt; lines;</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        HttpLineReader reader;</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">char</span>* CRLF = <span class="stringliteral">&quot;\r\n&quot;</span>;</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160; </div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;        <span class="comment">// the headers need to delimited with CR LF</span></div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;        <span class="keywordtype">void</span> crlf(Client &amp;out) {</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;            out.print(CRLF);</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;            LOGI(<span class="stringliteral">&quot; -&gt; %s &quot;</span>, <span class="stringliteral">&quot;&lt;CR LF&gt;&quot;</span>);</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;        }</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160; </div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;        <span class="comment">// gets or creates a header line by key</span></div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;        HttpHeaderLine *headerLine(<span class="keyword">const</span> <span class="keywordtype">char</span>* key) {</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;            <span class="keywordflow">if</span> (key!=<span class="keyword">nullptr</span>){</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;                <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = lines.begin() ; it != lines.end(); ++it){</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;                    HttpHeaderLine *pt = (*it);</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;                    <span class="keywordflow">if</span> (pt!=<span class="keyword">nullptr</span> &amp;&amp; pt-&gt;key.c_str()!=<span class="keyword">nullptr</span>){</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;                        <span class="keywordflow">if</span> (strcmp(pt-&gt;key.c_str(),key)==0){</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;                            pt-&gt;active = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;                            <span class="keywordflow">return</span> pt;</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;                        }</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;                    }</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;                }</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;                <span class="keywordflow">if</span> (create_new_lines){</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;                    HttpHeaderLine *newLine = <span class="keyword">new</span> HttpHeaderLine();</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;                    LOGD(<span class="stringliteral">&quot;HttpHeader::headerLine - new line created for %s&quot;</span>, key);</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;                    newLine-&gt;active = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;                    newLine-&gt;key = key;</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;                    lines.push_back(newLine);</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;                    <span class="keywordflow">return</span> newLine;</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;                }</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;                LOGI(<span class="stringliteral">&quot;HttpHeader::headerLine %s&quot;</span>, <span class="stringliteral">&quot;The key must not be null&quot;</span>);</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;            }</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;            </div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;        }</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160; </div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;        MethodID getMethod(<span class="keyword">const</span> <span class="keywordtype">char</span>* line){</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;            <span class="comment">// set action</span></div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0; methods[j]!=<span class="keyword">nullptr</span>;j++){</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;                <span class="keyword">const</span> <span class="keywordtype">char</span> *action = methods[j];</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;                <span class="keywordtype">int</span> len = strlen(action);</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;                <span class="keywordflow">if</span> (strncmp(action,line,len)==0){</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;                    <span class="keywordflow">return</span> (MethodID) j;</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;                }</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;            }</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;            <span class="keywordflow">return</span> (MethodID)0;</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;        }</div>
 <div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160; </div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> write1stLine(Client &amp;out) = 0;</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> parse1stLine(<span class="keyword">const</span> <span class="keywordtype">char</span> *line) = 0;</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160; </div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;     </div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;};</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160; </div>
-<div class="line"><a name="l00335"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_http_request_header.html">  335</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_http_request_header.html">HttpRequestHeader</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_http_header.html">HttpHeader</a> {</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;        <span class="comment">// Defines the action id, url path and http version for an request</span></div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;        <a class="code" href="classaudio__tools_1_1_http_header.html">HttpHeader</a>&amp; setValues(MethodID <span class="keywordtype">id</span>, <span class="keyword">const</span> <span class="keywordtype">char</span>* urlPath, <span class="keyword">const</span> <span class="keywordtype">char</span>* protocol=<span class="keyword">nullptr</span>){</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;            this-&gt;method_id = id;</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;            this-&gt;url_path = urlPath;</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;            </div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;            LOGI(<span class="stringliteral">&quot;HttpRequestHeader::setValues - path: %s&quot;</span>,this-&gt;url_path.c_str());</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;            <span class="keywordflow">if</span> (protocol!=<span class="keyword">nullptr</span>){</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;                this-&gt;protocol_str = protocol;</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;            }</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;            <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;        }</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160; </div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;        <span class="comment">// action path protocol</span></div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;        <span class="keywordtype">void</span> write1stLine(Client &amp;out){</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;            LOGI(<span class="stringliteral">&quot;HttpRequestHeader::write1stLine&quot;</span>);</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;            <span class="keywordtype">char</span> msg[200];</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;            <a class="code" href="classaudio__tools_1_1_str.html">Str</a> msg_str(msg,200);</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160; </div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">char</span>* method_str = methods[this-&gt;method_id];</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;            msg_str = method_str;</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;            msg_str += <span class="stringliteral">&quot; &quot;</span>;</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;            msg_str += this-&gt;url_path.c_str();</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;            msg_str += <span class="stringliteral">&quot; &quot;</span>;</div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;            msg_str += this-&gt;protocol_str.c_str();</div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;            msg_str += CRLF;</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;            out.print(msg);</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160; </div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;            <span class="keywordtype">int</span> len = strlen(msg);</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;            msg[len-2]=0;</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;            LOGI(<span class="stringliteral">&quot;-&gt; %s&quot;</span>, msg);</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;        }</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160; </div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;        <span class="comment">// parses the requestline </span></div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;        <span class="comment">// Request-Line = Method SP Request-URI SP HTTP-Version CRLF</span></div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;        <span class="keywordtype">void</span> parse1stLine(<span class="keyword">const</span> <span class="keywordtype">char</span> *line){</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;            LOGI(<span class="stringliteral">&quot;HttpRequestHeader::parse1stLine %s&quot;</span>, line);</div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;            <a class="code" href="classaudio__tools_1_1_str.html">Str</a> line_str(line);</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;            <span class="keywordtype">int</span> space1 = line_str.indexOf(<span class="stringliteral">&quot; &quot;</span>);</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;            <span class="keywordtype">int</span> space2 = line_str.indexOf(<span class="stringliteral">&quot; &quot;</span>, space1+1);</div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160; </div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;            this-&gt;method_id = getMethod(line);</div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;            this-&gt;protocol_str.substring(line_str, space2+1, line_str.length());</div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;            this-&gt;url_path.substring(line_str,space1+1,space2);</div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;            this-&gt;url_path.trim();</div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;  </div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;            LOGI(<span class="stringliteral">&quot;-&gt;method %s&quot;</span>, methods[this-&gt;method_id]);</div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;            LOGI(<span class="stringliteral">&quot;-&gt;protocol %s&quot;</span>, protocol_str.c_str());</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;            LOGI(<span class="stringliteral">&quot;-&gt;url_path %s&quot;</span>, url_path.c_str());</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;        }</div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160; </div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;};</div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160; </div>
-<div class="line"><a name="l00394"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_http_reply_header.html">  394</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_http_reply_header.html">HttpReplyHeader</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_http_header.html">HttpHeader</a>  {</div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;        <span class="comment">// defines the values for the rely</span></div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;        <span class="keywordtype">void</span> setValues(<span class="keywordtype">int</span> statusCode, <span class="keyword">const</span> <span class="keywordtype">char</span>* msg=<span class="stringliteral">&quot;&quot;</span>, <span class="keyword">const</span> <span class="keywordtype">char</span>* protocol=<span class="keyword">nullptr</span>){</div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;            LOGI(<span class="stringliteral">&quot;HttpReplyHeader::setValues&quot;</span>);</div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;            status_msg = msg;</div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;            status_code = statusCode;</div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;            <span class="keywordflow">if</span> (protocol!=<span class="keyword">nullptr</span>){</div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;                this-&gt;protocol_str = protocol;</div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;            }</div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;        }</div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160; </div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;        <span class="comment">// reads the final chunked reply headers </span></div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;        <span class="keywordtype">void</span> readExt(Client &amp;in) {</div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;            LOGI(<span class="stringliteral">&quot;HttpReplyHeader::readExt&quot;</span>);</div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;            <span class="keywordtype">char</span> line[MaxHeaderLineLength];   </div>
-<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;            readLine(in, line, MaxHeaderLineLength);</div>
-<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;            <span class="keywordflow">while</span>(strlen(line)!=0){</div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;                put(line);                </div>
-<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;                readLine(in, line, MaxHeaderLineLength);</div>
-<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;            }</div>
-<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;        }</div>
-<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160; </div>
-<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;        <span class="comment">// HTTP-Version SP Status-Code SP Reason-Phrase CRLF</span></div>
-<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;        <span class="keywordtype">void</span> write1stLine(Client &amp;out){</div>
-<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;            LOGI(<span class="stringliteral">&quot;HttpReplyHeader::write1stLine&quot;</span>);</div>
-<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;            <span class="keywordtype">char</span> msg[200];</div>
-<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;            <a class="code" href="classaudio__tools_1_1_str.html">Str</a> msg_str(msg,200);</div>
-<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;            msg_str = this-&gt;protocol_str.c_str();</div>
-<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;            msg_str += <span class="stringliteral">&quot; &quot;</span>;</div>
-<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;            msg_str += this-&gt;status_code;</div>
-<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;            msg_str += <span class="stringliteral">&quot; &quot;</span>;</div>
-<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;            msg_str += this-&gt;status_msg.c_str();</div>
-<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;            LOGI(<span class="stringliteral">&quot;-&gt;&quot;</span>, msg);</div>
-<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;            out.print(msg);</div>
-<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;            crlf(out);</div>
-<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;        }</div>
-<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160; </div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160; </div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> write1stLine(Client &amp;out) = 0;</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> parse1stLine(<span class="keyword">const</span> <span class="keywordtype">char</span> *line) = 0;</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160; </div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;     </div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;};</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160; </div>
+<div class="line"><a name="l00336"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_http_request_header.html">  336</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_http_request_header.html">HttpRequestHeader</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_http_header.html">HttpHeader</a> {</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;        <span class="comment">// Defines the action id, url path and http version for an request</span></div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;        <a class="code" href="classaudio__tools_1_1_http_header.html">HttpHeader</a>&amp; setValues(MethodID <span class="keywordtype">id</span>, <span class="keyword">const</span> <span class="keywordtype">char</span>* urlPath, <span class="keyword">const</span> <span class="keywordtype">char</span>* protocol=<span class="keyword">nullptr</span>){</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;            this-&gt;method_id = id;</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;            this-&gt;url_path = urlPath;</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;            </div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;            LOGI(<span class="stringliteral">&quot;HttpRequestHeader::setValues - path: %s&quot;</span>,this-&gt;url_path.c_str());</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;            <span class="keywordflow">if</span> (protocol!=<span class="keyword">nullptr</span>){</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;                this-&gt;protocol_str = protocol;</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;            }</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;            <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;        }</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160; </div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;        <span class="comment">// action path protocol</span></div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;        <span class="keywordtype">void</span> write1stLine(Client &amp;out){</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;            LOGI(<span class="stringliteral">&quot;HttpRequestHeader::write1stLine&quot;</span>);</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;            <span class="keywordtype">char</span> msg[200];</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;            <a class="code" href="classaudio__tools_1_1_str.html">Str</a> msg_str(msg,200);</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160; </div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">char</span>* method_str = methods[this-&gt;method_id];</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;            msg_str = method_str;</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;            msg_str += <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;            msg_str += this-&gt;url_path.c_str();</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;            msg_str += <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;            msg_str += this-&gt;protocol_str.c_str();</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;            msg_str += CRLF;</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;            out.print(msg);</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160; </div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;            <span class="keywordtype">int</span> len = strlen(msg);</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;            msg[len-2]=0;</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;            LOGI(<span class="stringliteral">&quot;-&gt; %s&quot;</span>, msg);</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;        }</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160; </div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;        <span class="comment">// parses the requestline </span></div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;        <span class="comment">// Request-Line = Method SP Request-URI SP HTTP-Version CRLF</span></div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;        <span class="keywordtype">void</span> parse1stLine(<span class="keyword">const</span> <span class="keywordtype">char</span> *line){</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;            LOGI(<span class="stringliteral">&quot;HttpRequestHeader::parse1stLine %s&quot;</span>, line);</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;            <a class="code" href="classaudio__tools_1_1_str.html">Str</a> line_str(line);</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;            <span class="keywordtype">int</span> space1 = line_str.indexOf(<span class="stringliteral">&quot; &quot;</span>);</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;            <span class="keywordtype">int</span> space2 = line_str.indexOf(<span class="stringliteral">&quot; &quot;</span>, space1+1);</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160; </div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;            this-&gt;method_id = getMethod(line);</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;            this-&gt;protocol_str.substring(line_str, space2+1, line_str.length());</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;            this-&gt;url_path.substring(line_str,space1+1,space2);</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;            this-&gt;url_path.trim();</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;  </div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;            LOGI(<span class="stringliteral">&quot;-&gt;method %s&quot;</span>, methods[this-&gt;method_id]);</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;            LOGI(<span class="stringliteral">&quot;-&gt;protocol %s&quot;</span>, protocol_str.c_str());</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;            LOGI(<span class="stringliteral">&quot;-&gt;url_path %s&quot;</span>, url_path.c_str());</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;        }</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160; </div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;};</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160; </div>
+<div class="line"><a name="l00395"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_http_reply_header.html">  395</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_http_reply_header.html">HttpReplyHeader</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_http_header.html">HttpHeader</a>  {</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;        <span class="comment">// defines the values for the rely</span></div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;        <span class="keywordtype">void</span> setValues(<span class="keywordtype">int</span> statusCode, <span class="keyword">const</span> <span class="keywordtype">char</span>* msg=<span class="stringliteral">&quot;&quot;</span>, <span class="keyword">const</span> <span class="keywordtype">char</span>* protocol=<span class="keyword">nullptr</span>){</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;            LOGI(<span class="stringliteral">&quot;HttpReplyHeader::setValues&quot;</span>);</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;            status_msg = msg;</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;            status_code = statusCode;</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;            <span class="keywordflow">if</span> (protocol!=<span class="keyword">nullptr</span>){</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;                this-&gt;protocol_str = protocol;</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;            }</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;        }</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160; </div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;        <span class="comment">// reads the final chunked reply headers </span></div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;        <span class="keywordtype">void</span> readExt(Client &amp;in) {</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;            LOGI(<span class="stringliteral">&quot;HttpReplyHeader::readExt&quot;</span>);</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;            <span class="keywordtype">char</span> line[MaxHeaderLineLength];   </div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;            readLine(in, line, MaxHeaderLineLength);</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;            <span class="keywordflow">while</span>(strlen(line)!=0){</div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;                put(line);                </div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;                readLine(in, line, MaxHeaderLineLength);</div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;            }</div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;        }</div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160; </div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;        <span class="comment">// HTTP-Version SP Status-Code SP Reason-Phrase CRLF</span></div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;        <span class="keywordtype">void</span> write1stLine(Client &amp;out){</div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;            LOGI(<span class="stringliteral">&quot;HttpReplyHeader::write1stLine&quot;</span>);</div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;            <span class="keywordtype">char</span> msg[200];</div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;            <a class="code" href="classaudio__tools_1_1_str.html">Str</a> msg_str(msg,200);</div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;            msg_str = this-&gt;protocol_str.c_str();</div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;            msg_str += <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;            msg_str += this-&gt;status_code;</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;            msg_str += <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;            msg_str += this-&gt;status_msg.c_str();</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;            LOGI(<span class="stringliteral">&quot;-&gt;&quot;</span>, msg);</div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;            out.print(msg);</div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;            crlf(out);</div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;        }</div>
 <div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160; </div>
-<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;        <span class="comment">// HTTP-Version SP Status-Code SP Reason-Phrase CRLF</span></div>
-<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;        <span class="comment">// we just update the pointers to point to the correct position in the</span></div>
-<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;        <span class="comment">// http_status_line</span></div>
-<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;        <span class="keywordtype">void</span> parse1stLine(<span class="keyword">const</span> <span class="keywordtype">char</span> *line){</div>
-<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;            LOGI(<span class="stringliteral">&quot;HttpReplyHeader::parse1stLine&quot;</span>,line);</div>
-<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;            <a class="code" href="classaudio__tools_1_1_str.html">Str</a> line_str(line);</div>
-<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;            <span class="keywordtype">int</span> space1 = line_str.indexOf(<span class="charliteral">&#39; &#39;</span>,0);</div>
-<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;            <span class="keywordtype">int</span> space2 = line_str.indexOf(<span class="charliteral">&#39; &#39;</span>,space1+1);</div>
-<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160; </div>
-<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;            <span class="comment">// save http version </span></div>
-<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;            protocol_str.substring(line_str,0,space1);</div>
-<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160; </div>
-<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;            <span class="comment">// find response status code after the first space</span></div>
-<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;            <span class="keywordtype">char</span> status_c[6];</div>
-<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;            <a class="code" href="classaudio__tools_1_1_str.html">Str</a> status(status_c,6);</div>
-<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;            status.substring(line_str, space1+1, space2);</div>
-<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;            status_code = atoi(status_c);</div>
-<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160; </div>
-<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;            <span class="comment">// get reason-phrase after last SP</span></div>
-<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;            status_msg.substring(line_str, space2+1, line_str.length());</div>
-<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160; </div>
-<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;        }</div>
-<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160; </div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160; </div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;        <span class="comment">// HTTP-Version SP Status-Code SP Reason-Phrase CRLF</span></div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;        <span class="comment">// we just update the pointers to point to the correct position in the</span></div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;        <span class="comment">// http_status_line</span></div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;        <span class="keywordtype">void</span> parse1stLine(<span class="keyword">const</span> <span class="keywordtype">char</span> *line){</div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;            LOGI(<span class="stringliteral">&quot;HttpReplyHeader::parse1stLine&quot;</span>,line);</div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;            <a class="code" href="classaudio__tools_1_1_str.html">Str</a> line_str(line);</div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;            <span class="keywordtype">int</span> space1 = line_str.indexOf(<span class="charliteral">&#39; &#39;</span>,0);</div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;            <span class="keywordtype">int</span> space2 = line_str.indexOf(<span class="charliteral">&#39; &#39;</span>,space1+1);</div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160; </div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;            <span class="comment">// save http version </span></div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;            protocol_str.substring(line_str,0,space1);</div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160; </div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;            <span class="comment">// find response status code after the first space</span></div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;            <span class="keywordtype">char</span> status_c[6];</div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;            <a class="code" href="classaudio__tools_1_1_str.html">Str</a> status(status_c,6);</div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;            status.substring(line_str, space1+1, space2);</div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;            status_code = atoi(status_c);</div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160; </div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;            <span class="comment">// get reason-phrase after last SP</span></div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;            status_msg.substring(line_str, space2+1, line_str.length());</div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160; </div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;        }</div>
 <div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160; </div>
-<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;};</div>
-<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160; </div>
-<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;}</div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160; </div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;};</div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160; </div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;}</div>
 <div class="ttc" id="aclassaudio__tools_1_1_http_header_html"><div class="ttname"><a href="classaudio__tools_1_1_http_header.html">audio_tools::HttpHeader</a></div><div class="ttdoc">In a http request and reply we need to process header information. With this API we can define and qu...</div><div class="ttdef"><b>Definition:</b> HttpHeader.h:55</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_http_header_html_a7d2555d1372a463e2f994bfdf67d955e"><div class="ttname"><a href="classaudio__tools_1_1_http_header.html#a7d2555d1372a463e2f994bfdf67d955e">audio_tools::HttpHeader::clear</a></div><div class="ttdeci">HttpHeader &amp; clear(bool activeFlag=true)</div><div class="ttdoc">clears the data - usually we do not delete but we just set the active flag</div><div class="ttdef"><b>Definition:</b> HttpHeader.h:70</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_http_header_html_a96e5375cbc78ff1ef4d011dd5d794bf6"><div class="ttname"><a href="classaudio__tools_1_1_http_header.html#a96e5375cbc78ff1ef4d011dd5d794bf6">audio_tools::HttpHeader::put</a></div><div class="ttdeci">HttpHeader &amp; put(const char *key, int value)</div><div class="ttdoc">adds a new line to the header - e.g. for content size</div><div class="ttdef"><b>Definition:</b> HttpHeader.h:112</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_http_header_html_ab497ec1ba82834e820a5da6d076c0a36"><div class="ttname"><a href="classaudio__tools_1_1_http_header.html#ab497ec1ba82834e820a5da6d076c0a36">audio_tools::HttpHeader::put</a></div><div class="ttdeci">HttpHeader &amp; put(const char *line)</div><div class="ttdoc">adds a received new line to the header</div><div class="ttdef"><b>Definition:</b> HttpHeader.h:128</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_http_reply_header_html"><div class="ttname"><a href="classaudio__tools_1_1_http_reply_header.html">audio_tools::HttpReplyHeader</a></div><div class="ttdoc">Reading and Writing of Http Replys.</div><div class="ttdef"><b>Definition:</b> HttpHeader.h:394</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_http_request_header_html"><div class="ttname"><a href="classaudio__tools_1_1_http_request_header.html">audio_tools::HttpRequestHeader</a></div><div class="ttdoc">Reading and writing of Http Requests.</div><div class="ttdef"><b>Definition:</b> HttpHeader.h:335</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_http_reply_header_html"><div class="ttname"><a href="classaudio__tools_1_1_http_reply_header.html">audio_tools::HttpReplyHeader</a></div><div class="ttdoc">Reading and Writing of Http Replys.</div><div class="ttdef"><b>Definition:</b> HttpHeader.h:395</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_http_request_header_html"><div class="ttname"><a href="classaudio__tools_1_1_http_request_header.html">audio_tools::HttpRequestHeader</a></div><div class="ttdoc">Reading and writing of Http Requests.</div><div class="ttdef"><b>Definition:</b> HttpHeader.h:336</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_str_ext_html"><div class="ttname"><a href="classaudio__tools_1_1_str_ext.html">audio_tools::StrExt</a></div><div class="ttdoc">Str which keeps the data on the heap. We grow the allocated memory only if the copy source is not fit...</div><div class="ttdef"><b>Definition:</b> StrExt.h:22</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_str_html"><div class="ttname"><a href="classaudio__tools_1_1_str.html">audio_tools::Str</a></div><div class="ttdoc">A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a...</div><div class="ttdef"><b>Definition:</b> Str.h:18</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_str_html_af5cd084c377811ee46e7c1d0d8f54bba"><div class="ttname"><a href="classaudio__tools_1_1_str.html#af5cd084c377811ee46e7c1d0d8f54bba">audio_tools::Str::trim</a></div><div class="ttdeci">virtual void trim()</div><div class="ttdoc">remove leading and traling spaces</div><div class="ttdef"><b>Definition:</b> Str.h:392</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_str_html"><div class="ttname"><a href="classaudio__tools_1_1_str.html">audio_tools::Str</a></div><div class="ttdoc">A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a...</div><div class="ttdef"><b>Definition:</b> Str.h:17</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_str_html_af5cd084c377811ee46e7c1d0d8f54bba"><div class="ttname"><a href="classaudio__tools_1_1_str.html#af5cd084c377811ee46e7c1d0d8f54bba">audio_tools::Str::trim</a></div><div class="ttdeci">virtual void trim()</div><div class="ttdoc">remove leading and traling spaces</div><div class="ttdef"><b>Definition:</b> Str.h:391</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_http_header_line_html"><div class="ttname"><a href="structaudio__tools_1_1_http_header_line.html">audio_tools::HttpHeaderLine</a></div><div class="ttdoc">A individual key - value header line.</div><div class="ttdef"><b>Definition:</b> HttpHeader.h:40</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

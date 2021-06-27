@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['operator_20bool_248',['operator bool',['../classaudio__tools_1_1_a2_d_p_stream.html#a0448efeed35b854e6337041f08f6e607',1,'audio_tools::A2DPStream']]]
+  ['nextvalue_261',['nextValue',['../classaudio__tools_1_1_p_w_m_audio_stream.html#aed2d8b84d755be762c67e2a9f6974a8f',1,'audio_tools::PWMAudioStream']]]
 ];

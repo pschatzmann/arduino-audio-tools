@@ -83,7 +83,7 @@ Inheritance diagram for audio_tools::I2S&lt; T &gt;:</div>
  <div class="center">
   <img src="classaudio__tools_1_1_i2_s.png" usemap="#audio_5Ftools::I2S_3C_20T_20_3E_map" alt=""/>
   <map id="audio_5Ftools::I2S_3C_20T_20_3E_map" name="audio_5Ftools::I2S_3C_20T_20_3E_map">
-<area href="classaudio__tools_1_1_i2_s_base.html" title="Basic I2S API - for the ESP32." alt="audio_tools::I2SBase" shape="rect" coords="0,0,131,24"/>
+<area href="classaudio__tools_1_1_i2_s_base.html" title="Basic I2S API - for the ESP32. If we receive 1 channel, we expand the result to 2 channels." alt="audio_tools::I2SBase" shape="rect" coords="0,0,131,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -141,6 +141,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_base.html#a08984251ffdc990da5d9c232485b9cd4">end</a> ()</td></tr>
 <tr class="memdesc:a08984251ffdc990da5d9c232485b9cd4 inherit pub_methods_classaudio__tools_1_1_i2_s_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">stops the I2C and unistalls the driver <br /></td></tr>
 <tr class="separator:a08984251ffdc990da5d9c232485b9cd4 inherit pub_methods_classaudio__tools_1_1_i2_s_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a056fd260ffaf85b62219d2fdd4d983 inherit pub_methods_classaudio__tools_1_1_i2_s_base"><td class="memItemLeft" align="right" valign="top"><a id="a0a056fd260ffaf85b62219d2fdd4d983"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>readBytes</b> (void *dest, size_t size_bytes)</td></tr>
+<tr class="separator:a0a056fd260ffaf85b62219d2fdd4d983 inherit pub_methods_classaudio__tools_1_1_i2_s_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c6b4fb3347110d753e8674718212530 inherit pub_methods_classaudio__tools_1_1_i2_s_base"><td class="memItemLeft" align="right" valign="top"><a id="a5c6b4fb3347110d753e8674718212530"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_base.html#a5c6b4fb3347110d753e8674718212530">writeBytes</a> (const void *src, size_t size_bytes)</td></tr>
+<tr class="memdesc:a5c6b4fb3347110d753e8674718212530 inherit pub_methods_classaudio__tools_1_1_i2_s_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes the data to the <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for the ESP32 which supports the reading and writing with a defined data...">I2S</a> interface <br /></td></tr>
+<tr class="separator:a5c6b4fb3347110d753e8674718212530 inherit pub_methods_classaudio__tools_1_1_i2_s_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -152,9 +159,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>logConfig</b> ()</td>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>logConfigPins</b> (i2s_pin_config_t pin_config)</td></tr>
 <tr class="separator:a20da44d1bf37eda688e6d49a51f4da1b inherit pro_methods_classaudio__tools_1_1_i2_s_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a056fd260ffaf85b62219d2fdd4d983 inherit pro_methods_classaudio__tools_1_1_i2_s_base"><td class="memItemLeft" align="right" valign="top"><a id="a0a056fd260ffaf85b62219d2fdd4d983"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>readBytes</b> (void *dest, size_t size_bytes)</td></tr>
-<tr class="separator:a0a056fd260ffaf85b62219d2fdd4d983 inherit pro_methods_classaudio__tools_1_1_i2_s_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a056fd260ffaf85b62219d2fdd4d983 inherit pro_methods_classaudio__tools_1_1_i2_s_base"><td class="memItemLeft" align="right" valign="top"><a id="a0a056fd260ffaf85b62219d2fdd4d983"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_base.html#a0a056fd260ffaf85b62219d2fdd4d983">readBytes</a> (void *dest, size_t size_bytes)</td></tr>
 <tr class="memdesc:a0a056fd260ffaf85b62219d2fdd4d983 inherit pro_methods_classaudio__tools_1_1_i2_s_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads the data from the <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for the ESP32 which supports the reading and writing with a defined data...">I2S</a> interface <br /></td></tr>
 <tr class="separator:a0a056fd260ffaf85b62219d2fdd4d983 inherit pro_methods_classaudio__tools_1_1_i2_s_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -165,10 +169,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setChannels</b> (int 
 size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_base.html#a5c6b4fb3347110d753e8674718212530">writeBytes</a> (const void *src, size_t size_bytes)</td></tr>
 <tr class="memdesc:a5c6b4fb3347110d753e8674718212530 inherit pro_methods_classaudio__tools_1_1_i2_s_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes the data to the <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for the ESP32 which supports the reading and writing with a defined data...">I2S</a> interface <br /></td></tr>
 <tr class="separator:a5c6b4fb3347110d753e8674718212530 inherit pro_methods_classaudio__tools_1_1_i2_s_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5c6b4fb3347110d753e8674718212530 inherit pro_methods_classaudio__tools_1_1_i2_s_base"><td class="memItemLeft" align="right" valign="top"><a id="a5c6b4fb3347110d753e8674718212530"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_base.html#a5c6b4fb3347110d753e8674718212530">writeBytes</a> (const void *src, size_t size_bytes)</td></tr>
-<tr class="memdesc:a5c6b4fb3347110d753e8674718212530 inherit pro_methods_classaudio__tools_1_1_i2_s_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes the data to the <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for the ESP32 which supports the reading and writing with a defined data...">I2S</a> interface <br /></td></tr>
-<tr class="separator:a5c6b4fb3347110d753e8674718212530 inherit pro_methods_classaudio__tools_1_1_i2_s_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2320e12a5e066627016d3ce04bc19c9b inherit pro_methods_classaudio__tools_1_1_i2_s_base"><td class="memItemLeft" align="right" valign="top"><a id="a2320e12a5e066627016d3ce04bc19c9b"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_base.html#a2320e12a5e066627016d3ce04bc19c9b">writeExt</a> (const void *src, size_t size_bytes)</td></tr>
+<tr class="memdesc:a2320e12a5e066627016d3ce04bc19c9b inherit pro_methods_classaudio__tools_1_1_i2_s_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes the data by making shure that we send 2 channels 16 bit data <br /></td></tr>
+<tr class="separator:a2320e12a5e066627016d3ce04bc19c9b inherit pro_methods_classaudio__tools_1_1_i2_s_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_static_methods_classaudio__tools_1_1_i2_s_base"><td colspan="2" onclick="javascript:toggleInherit('pro_static_methods_classaudio__tools_1_1_i2_s_base')"><img src="closed.png" alt="-"/>&#160;Static Protected Member Functions inherited from <a class="el" href="classaudio__tools_1_1_i2_s_base.html">audio_tools::I2SBase</a></td></tr>
+<tr class="memitem:aeb4d3fdf57bf7f87c835835e2a32c34f inherit pro_static_methods_classaudio__tools_1_1_i2_s_base"><td class="memItemLeft" align="right" valign="top"><a id="aeb4d3fdf57bf7f87c835835e2a32c34f"></a>
+static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_base.html#aeb4d3fdf57bf7f87c835835e2a32c34f">writeExpandChannel</a> (i2s_port_t i2s_num, const int bits_per_sample, const void *src, size_t size_bytes)</td></tr>
+<tr class="memdesc:aeb4d3fdf57bf7f87c835835e2a32c34f inherit pro_static_methods_classaudio__tools_1_1_i2_s_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes the data by making shure that we send 2 channels <br /></td></tr>
+<tr class="separator:aeb4d3fdf57bf7f87c835835e2a32c34f inherit pro_static_methods_classaudio__tools_1_1_i2_s_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classaudio__tools_1_1_i2_s_base"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classaudio__tools_1_1_i2_s_base')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classaudio__tools_1_1_i2_s_base.html">audio_tools::I2SBase</a></td></tr>
 <tr class="memitem:a4b716ed0c9b26e2def19c8be11c4545b inherit pro_attribs_classaudio__tools_1_1_i2_s_base"><td class="memItemLeft" align="right" valign="top"><a id="a4b716ed0c9b26e2def19c8be11c4545b"></a>
 <a class="el" href="classaudio__tools_1_1_i2_s_config.html">I2SConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><b>cfg</b></td></tr>

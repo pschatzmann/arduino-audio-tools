@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['mainfrequency_66',['mainFrequency',['../classaudio__tools_1_1_musical_notes.html#a9e4dfd5356dffd568f75aba449736e58',1,'audio_tools::MusicalNotes::mainFrequency(uint8_t mainNoteIdx, uint8_t octave)'],['../classaudio__tools_1_1_musical_notes.html#afebef1d8ed5d1a8f8da76b25f2c84f30',1,'audio_tools::MusicalNotes::mainFrequency(uint64_t idx)']]],
+  ['mainfrequency_65',['mainFrequency',['../classaudio__tools_1_1_musical_notes.html#a9e4dfd5356dffd568f75aba449736e58',1,'audio_tools::MusicalNotes::mainFrequency(uint8_t mainNoteIdx, uint8_t octave)'],['../classaudio__tools_1_1_musical_notes.html#afebef1d8ed5d1a8f8da76b25f2c84f30',1,'audio_tools::MusicalNotes::mainFrequency(uint64_t idx)']]],
+  ['maxunsignedvalue_66',['maxUnsignedValue',['../classaudio__tools_1_1_p_w_m_audio_stream.html#a901fe216424c085f25eba8963763890f',1,'audio_tools::PWMAudioStream::maxUnsignedValue()'],['../classaudio__tools_1_1_p_w_m_audio_stream.html#a67871cefe724f967d15c71ea6026a526',1,'audio_tools::PWMAudioStream::maxUnsignedValue(int resolution)']]],
   ['memorystream_67',['MemoryStream',['../classaudio__tools_1_1_memory_stream.html',1,'audio_tools']]],
   ['mozzigenerator_68',['MozziGenerator',['../classaudio__tools_1_1_mozzi_generator.html',1,'audio_tools']]],
   ['multiconverter_69',['MultiConverter',['../classaudio__tools_1_1_multi_converter.html',1,'audio_tools']]],

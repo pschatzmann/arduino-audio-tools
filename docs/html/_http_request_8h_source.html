@@ -266,15 +266,16 @@ $(function() {
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;                chunk_reader.open(*client_ptr);</div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;            };</div>
 <div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160; </div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;            <span class="keywordflow">return</span> reply_header.statusCode();</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        }</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; </div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;};</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160; </div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;}</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;            <span class="comment">// wait for data</span></div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;            <span class="keywordflow">return</span> reply_header.statusCode();</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        }</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160; </div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;};</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160; </div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;}</div>
 <div class="ttc" id="aclassaudio__tools_1_1_http_chunk_reader_html"><div class="ttname"><a href="classaudio__tools_1_1_http_chunk_reader.html">audio_tools::HttpChunkReader</a></div><div class="ttdoc">Http might reply with chunks. So we need to dechunk the data. see https://en.wikipedia....</div><div class="ttdef"><b>Definition:</b> HttpChunkReader.h:15</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_http_reply_header_html"><div class="ttname"><a href="classaudio__tools_1_1_http_reply_header.html">audio_tools::HttpReplyHeader</a></div><div class="ttdoc">Reading and Writing of Http Replys.</div><div class="ttdef"><b>Definition:</b> HttpHeader.h:394</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_http_request_header_html"><div class="ttname"><a href="classaudio__tools_1_1_http_request_header.html">audio_tools::HttpRequestHeader</a></div><div class="ttdoc">Reading and writing of Http Requests.</div><div class="ttdef"><b>Definition:</b> HttpHeader.h:335</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_http_reply_header_html"><div class="ttname"><a href="classaudio__tools_1_1_http_reply_header.html">audio_tools::HttpReplyHeader</a></div><div class="ttdoc">Reading and Writing of Http Replys.</div><div class="ttdef"><b>Definition:</b> HttpHeader.h:395</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_http_request_header_html"><div class="ttname"><a href="classaudio__tools_1_1_http_request_header.html">audio_tools::HttpRequestHeader</a></div><div class="ttdoc">Reading and writing of Http Requests.</div><div class="ttdef"><b>Definition:</b> HttpHeader.h:336</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_http_request_html"><div class="ttname"><a href="classaudio__tools_1_1_http_request.html">audio_tools::HttpRequest</a></div><div class="ttdoc">Simple API to process get, put, post, del http requests I tried to use Arduino HttpClient,...</div><div class="ttdef"><b>Definition:</b> HttpRequest.h:22</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_u_r_l_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_u_r_l_stream.html">audio_tools::URLStream</a></div><div class="ttdoc">Represents the content of a URL as Stream. We use the WiFi.h API.</div><div class="ttdef"><b>Definition:</b> URLStreamArduino.h:14</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_url_html"><div class="ttname"><a href="classaudio__tools_1_1_url.html">audio_tools::Url</a></div><div class="ttdoc">URL parser which breaks a full url string up into its individual parts.</div><div class="ttdef"><b>Definition:</b> Url.h:22</div></div>
