@@ -15,7 +15,9 @@
 namespace audio_tools {
 
 // forwrd declaratioin of callback
+class PWMAudioStreamPico;
 bool defaultAudioOutputCallback(repeating_timer* ptr);
+typedef PWMAudioStreamESP32 AudioPWM;
 
 /**
  * @brief Rasperry Pico Channel to pin assignments
@@ -34,7 +36,7 @@ struct PicoChannelOut {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-struct PWMConfig {
+struct PWMConfigPico {
     int sample_rate = 10000;  // sample rate in Hz
     int channels = 2;
     int pwm_freq = 60000;    // audable range is from 20 to 20,000Hz 
@@ -42,6 +44,8 @@ struct PWMConfig {
     int amplitude_in = 0; 
     int start_pin = 2; // channel 0 will be on gpio 2, channel 1 on 3 etc
 } default_config;
+
+typedef PWMConfigPico PWMConfig;
 
 /**
  * @brief Audio output for the Rasperry Pico to PWM pins
@@ -51,12 +55,12 @@ struct PWMConfig {
  */
 
 template <class T>
-class PWMAudioStream : public Stream {
+class PWMAudioStreamPico : public Stream {
     friend bool defaultAudioOutputCallback(repeating_timer* ptr);
 
     public:
 
-        PWMAudioStream(){
+        PWMAudioStreamPico(){
             T amplitude_in = getDefaultAmplitude();
             audio_config.amplitude_in = amplitude_in;
             default_config.amplitude_in = amplitude_in;

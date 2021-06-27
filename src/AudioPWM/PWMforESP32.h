@@ -5,14 +5,15 @@
 #include "AudioTools/AudioLogger.h"
 #include "AudioTools/Vector.h"
 #include "Stream.h"
-#include <math.h>       /* pow */
+#include <math.h>    
 
 namespace audio_tools {
 
 // forward declaration
-class AudioPWM;
+class PWMAudioStreamESP32;
+typedef PWMAudioStreamESP32 AudioPWM;
 void defaultPWMAudioOutputCallback();
-static AudioPWM *accessAudioPWM = nullptr; 
+static PWMAudioStreamESP32 *accessAudioPWM = nullptr; 
 
 /**
  * @brief Configuration for PWM output
@@ -30,7 +31,7 @@ static AudioPWM *accessAudioPWM = nullptr;
 
  */
 
-struct PWMConfig {
+struct PWMConfigESP32 {
     int sample_rate = 10000;  // sample rate in Hz
     int channels = 2;
     int start_pin = 3; 
@@ -39,15 +40,20 @@ struct PWMConfig {
     int resolution = 8;  // must be between 8 and 11 -> drives pwm frequency
 } default_config;
 
+typedef PWMConfigESP32 PWMConfig;
+
 /**
  * @brief Information for a PIN
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-struct PINInfo {
+struct PinInfoESP32 {
     int pwm_channel;
     int gpio;
 };
+
+typedef PinInfoESP32 PinInfo;
+
 
 /**
  * @brief Audio output to PWM pins for the ESP32. The ESP32 supports up to 16 channels. 
@@ -55,12 +61,12 @@ struct PINInfo {
  * @copyright GPLv3
  */
 
-class PWMAudioStream : public Stream {
-    friend void defaultAudioOutputCallback();
+class PWMAudioStreamESP32 : public Stream {
+    friend void defaultPWMAudioOutputCallback();
 
     public:
 
-        PWMAudioStream(){
+        PWMAudioStreamESP32(){
             accessAudioPWM = this;
         }
 
@@ -167,7 +173,7 @@ class PWMAudioStream : public Stream {
 
     protected:
         PWMConfig audio_config;
-        Vector<PINInfo> pins;      
+        Vector<PinInfo> pins;      
         NBuffer<uint8_t> buffer = NBuffer<uint8_t>(PWM_BUFFER_SIZE, PWM_BUFFERS);
         hw_timer_t * timer = nullptr;
         portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;

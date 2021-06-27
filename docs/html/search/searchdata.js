@@ -6,7 +6,8 @@ var indexSectionsWithContent =
   3: "abcdefhimnoprstw~",
   4: "r",
   5: "l",
-  6: "a"
+  6: "d",
+  7: "a"
 };
 
 var indexSectionNames =
@@ -17,7 +18,8 @@ var indexSectionNames =
   3: "functions",
   4: "variables",
   5: "enums",
-  6: "pages"
+  6: "related",
+  7: "pages"
 };
 
 var indexSectionLabels =
@@ -28,6 +30,7 @@ var indexSectionLabels =
   3: "Functions",
   4: "Variables",
   5: "Enumerations",
-  6: "Pages"
+  6: "Friends",
+  7: "Pages"
 };
 
