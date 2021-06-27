@@ -12,8 +12,8 @@ namespace audio_tools {
  * 
  */
 class I2SBase {
-  friend class I2SStream;
-
+  friend class AnalogAudio;
+  
   public:
 
     /// Provides the default configuration
@@ -93,6 +93,28 @@ class I2SBase {
       return cfg;
     }
 
+    /// writes the data to the I2S interface
+    size_t writeBytes(const void *src, size_t size_bytes){
+      size_t result = 0;   
+      if (cfg.channels==2){
+        if (i2s_write(i2s_num, src, size_bytes, &result, portMAX_DELAY)!=ESP_OK){
+          LOGE("%s", __func__);
+        }
+      } else {
+        result = I2SBase::writeExpandChannel(i2s_num, cfg.bits_per_sample, src, size_bytes);
+      }       
+      return result;
+    }
+
+    size_t readBytes(void *dest, size_t size_bytes){
+      size_t result = 0;
+      if (i2s_read(i2s_num, dest, size_bytes, &result, portMAX_DELAY)!=ESP_OK){
+        LOGE("%s", __func__);
+      }
+      return result;
+    }
+
+
   protected:
     I2SConfig cfg;
     i2s_port_t i2s_num;
@@ -104,24 +126,12 @@ class I2SBase {
         cfg.channels = channels;          
     }
     
-    /// writes the data to the I2S interface
-    size_t writeBytes(const void *src, size_t size_bytes){
-      size_t result = 0;   
-      if (cfg.channels==2){
-        if (i2s_write(i2s_num, src, size_bytes, &result, portMAX_DELAY)!=ESP_OK){
-          LOGE("%s", __func__);
-        }
-      } else {
-        result = writeExpandChannel(src, size_bytes);
-      }       
-      return result;
-    }
 
     /// writes the data by making shure that we send 2 channels
-    size_t writeExpandChannel(const void *src, size_t size_bytes){
+    static size_t writeExpandChannel(i2s_port_t i2s_num, const int bits_per_sample, const void *src, size_t size_bytes){
         size_t result = 0;   
         int j;
-        switch(cfg.bits_per_sample){
+        switch(bits_per_sample){
 
           case 8:
             for (j=0;j<size_bytes;j++){
@@ -184,14 +194,6 @@ class I2SBase {
             break;
         }
         return result;
-    }
-
-    size_t readBytes(void *dest, size_t size_bytes){
-      size_t result = 0;
-      if (i2s_read(i2s_num, dest, size_bytes, &result, portMAX_DELAY)!=ESP_OK){
-        LOGE("%s", __func__);
-      }
-      return result;
     }
 
     void logConfig() {

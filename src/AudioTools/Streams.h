@@ -390,6 +390,52 @@ class AudioOutputStream : public BufferedStream {
         }
 };
 
+/**
+ * @brief AudioOutput class which stores the data in a temporary buffer. 
+ * The buffer can be consumed e.g. by a callback function by calling read();
+
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+template <class T>
+class CallbackStream :  public BufferedStream {
+    public:
+        // Default constructor
+        CallbackStream(int bufferSize, int bufferCount ):BufferedStream(bufferSize) {
+            callback_buffer_ptr = new NBuffer<T>(bufferSize, bufferCount);
+        }
+
+        virtual ~CallbackStream() {    
+            delete callback_buffer_ptr;
+        }
+
+        /// Activates the output
+        virtual bool begin() { 
+            active = true;
+            return true;
+        }
+        
+        /// stops the processing
+        virtual bool stop() {
+            active = false;
+            return true;
+        };
+
+    
+  protected:
+        NBuffer<T> *callback_buffer_ptr;
+        bool active;
+
+        virtual size_t writeExt(const uint8_t* data, size_t len) {    
+            return callback_buffer_ptr->writeArray(data, len/sizeof(T));
+        }
+
+        virtual size_t readExt( uint8_t *data, size_t len) { 
+            return callback_buffer_ptr->readArray(data, len/sizeof(T));;
+        }
+
+};
+
 
 #ifdef ESP32
 
@@ -444,51 +490,6 @@ class AnalogAudioStream : public BufferedStream, public AudioBaseInfoDependent  
 
 #endif
 
-/**
- * @brief AudioOutput class which stores the data in a temporary buffer. 
- * The buffer can be consumed e.g. by a callback function by calling read();
-
- * @author Phil Schatzmann
- * @copyright GPLv3
- */
-template <class T>
-class CallbackStream :  public BufferedStream {
-    public:
-        // Default constructor
-        CallbackStream(int bufferSize, int bufferCount ):BufferedStream(bufferSize) {
-            callback_buffer_ptr = new NBuffer<T>(bufferSize, bufferCount);
-        }
-
-        virtual ~CallbackStream() {    
-            delete callback_buffer_ptr;
-        }
-
-        /// Activates the output
-        virtual bool begin() { 
-            active = true;
-            return true;
-        }
-        
-        /// stops the processing
-        virtual bool stop() {
-            active = false;
-            return true;
-        };
-
-    
-  protected:
-        NBuffer<T> *callback_buffer_ptr;
-        bool active;
-
-        virtual size_t writeExt(const uint8_t* data, size_t len) {    
-            return callback_buffer_ptr->writeArray(data, len/sizeof(T));
-        }
-
-        virtual size_t readExt( uint8_t *data, size_t len) { 
-            return callback_buffer_ptr->readArray(data, len/sizeof(T));;
-        }
-
-};
 
 
 #ifdef I2S_SUPPORT

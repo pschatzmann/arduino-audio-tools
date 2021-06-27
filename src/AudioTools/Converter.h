@@ -21,6 +21,31 @@ static int16_t convertFrom32To16(int32_t value)  {
     return static_cast<float>(value) / INT32_MAX * INT16_MAX;
 }
 
+static int maxValue(int value_bits_per_sample){
+    switch(value_bits_per_sample/8){
+        case 8:
+            return 127;
+        case 16:
+            return 32767;
+        case 24:
+            return 8388607;
+        case 32:
+            return 2147483647;
+
+    }
+    return 32767;
+}
+
+static int16_t convert16(int value, int value_bits_per_sample){
+    return value * maxValue(16) / maxValue(value_bits_per_sample);
+
+}
+
+static int16_t convert8(int value, int value_bits_per_sample){
+    return value * maxValue(8) / maxValue(value_bits_per_sample);
+}
+
+
 
 /**
  * @brief Abstract Base class for Converters

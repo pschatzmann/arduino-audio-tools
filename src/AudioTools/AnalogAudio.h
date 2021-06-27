@@ -11,6 +11,16 @@ namespace audio_tools {
 typedef int16_t arrayOf2int16_t[2];
 
 const char* ADC_TAG = "ADC";
+
+// Output I2S data to built-in DAC, no matter the data format is 16bit or 32 bit, the DAC module will only take the 8bits from MSB
+static int16_t convert8DAC(int value, int value_bits_per_sample){
+    // -> convert to positive 
+    int16_t result = (value * maxValue(8) / maxValue(value_bits_per_sample)) + maxValue(8) / 2;
+    return result;
+}
+
+
+
 /**
  * @brief ESP32 specific configuration for i2s input via adc. The default input pin is GPIO34. We always use int16_t values on 2 channels 
  * 
@@ -31,6 +41,8 @@ class AnalogConfig {
     int dma_buf_len = I2S_BUFFER_SIZE;
     bool use_apll = false;
     int mode_internal; 
+    int bits_per_sample = 16;
+    int channels = 2;
 
     AnalogConfig() {
         this->mode = RX_MODE;
@@ -113,8 +125,7 @@ class AnalogConfig {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AnalogAudio {
-  friend class AnalogAudioStream;
+class AnalogAudio  {
 
   public:
     /// Default constructor
@@ -142,7 +153,7 @@ class AnalogAudio {
       i2s_config_t i2s_config = {
           .mode = (i2s_mode_t) cfg.mode_internal,
           .sample_rate = cfg.sample_rate,
-          .bits_per_sample = I2S_BITS_PER_SAMPLE_16BIT,
+          .bits_per_sample = (i2s_bits_per_sample_t)16,
           .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,
           .communication_format = I2S_COMM_FORMAT_I2S_LSB,
           .intr_alloc_flags = ESP_INTR_FLAG_LEVEL1,
@@ -202,18 +213,13 @@ class AnalogAudio {
       return adc_config;
     }
     
-  protected:
-    const i2s_port_t i2s_num = I2S_NUM_0; // Analog input only supports 0!
-    AnalogConfig adc_config;
-    
     /// writes the data to the I2S interface
     size_t writeBytes(const void *src, size_t size_bytes){
-      size_t result = 0;            
-      if (i2s_write(i2s_num, src, size_bytes, &result, portMAX_DELAY)!=ESP_OK){
-        LOGE("%s", __func__);
-      }
+      size_t result = 0;   
+      result = AnalogAudio::writeExpandChannel(i2s_num, adc_config.channels, adc_config.bits_per_sample, src, size_bytes);  
       return result;
     }
+
 
     size_t readBytes(void *dest, size_t size_bytes){
       size_t result = 0;
@@ -224,6 +230,81 @@ class AnalogAudio {
       //vTaskDelay(1);
       return result;
     }
+
+  protected:
+    const i2s_port_t i2s_num = I2S_NUM_0; // Analog input only supports 0!
+    AnalogConfig adc_config;
+    
+
+    /// writes the data by making shure that we send 2 channels 16 data scaled to 8 bits
+    static size_t writeExpandChannel(i2s_port_t i2s_num, int channels, const int bits_per_sample, const void *src, size_t size_bytes){
+        size_t result = 0;   
+        int j;
+        switch(bits_per_sample){
+
+          case 8:
+            for (j=0;j<size_bytes;j+=channels) {
+              int16_t frame[2];
+              int8_t *data = (int8_t *)src;
+              frame[0]=convert8DAC(data[j],bits_per_sample);
+              frame[1]=convert8DAC(data[j+channels-1],bits_per_sample);
+              size_t result_call = 0;   
+              if (i2s_write(i2s_num, frame, sizeof(int16_t)*2, &result_call, portMAX_DELAY)!=ESP_OK){
+                LOGE("%s", __func__);
+              } else {
+                result += result_call;
+              }
+            }
+            break;
+
+          case 16:
+            for (j=0;j<size_bytes/2;j+=channels) {
+              int16_t frame[2];
+              int16_t *data = (int16_t*)src;
+              frame[0]=convert8DAC(data[j],bits_per_sample);
+              frame[1]=convert8DAC(data[j+channels-1],bits_per_sample);
+              size_t result_call = 0;   
+              if (i2s_write(i2s_num, frame, sizeof(int16_t)*2, &result_call, portMAX_DELAY)!=ESP_OK){
+                LOGE("%s", __func__);
+              } else {
+                result += result_call;
+              }
+            }
+            break;
+
+          case 24:
+            for (j=0;j<size_bytes/4;j+=channels){
+              int16_t frame[2];
+              int24_t *data = (int24_t*) src;
+              frame[0]=convert8DAC(data[j],bits_per_sample);
+              frame[1]=convert8DAC(data[j+channels-1],bits_per_sample);
+              size_t result_call = 0;   
+              if (i2s_write(i2s_num, frame, sizeof(int16_t)*2, &result_call, portMAX_DELAY)!=ESP_OK){
+                LOGE("%s", __func__);
+              } else {
+                result += result_call;
+              }
+            }
+            break;
+
+          case 32:
+            for (j=0;j<size_bytes/4;j+=channels){
+              int16_t frame[2];
+              int32_t *data = (int32_t*) src;
+              frame[0]=convert8DAC(data[j],bits_per_sample);
+              frame[1]=convert8DAC(data[j+channels-1],bits_per_sample);
+              size_t result_call = 0;   
+              if (i2s_write(i2s_num, frame, sizeof(int16_t)*2, &result_call, portMAX_DELAY)!=ESP_OK){
+                LOGE("%s", __func__);
+              } else {
+                result += result_call;
+              }
+            }
+            break;
+        }
+        return result;
+    }    
+
 
 };
 

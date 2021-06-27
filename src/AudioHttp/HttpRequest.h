@@ -205,6 +205,7 @@ class HttpRequest {
                 chunk_reader.open(*client_ptr);
             };
 
+            // wait for data
             return reply_header.statusCode();
         }
 

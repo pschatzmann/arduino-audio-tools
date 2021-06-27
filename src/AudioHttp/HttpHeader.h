@@ -239,6 +239,7 @@ class HttpHeader {
                     }
                     put(line);                
                 }
+
             }
         }
 
