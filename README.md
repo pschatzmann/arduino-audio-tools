@@ -97,6 +97,7 @@ Here are a couple of simple test sketches to demo different output destinations:
 - [streams-generator-i2s](examples/streams-generator-i2s) Output of generated sound on external DAC via I2S
 - [streams-generator-dac](examples/streams-generator-dac) Output of generated sound on ESP32 internal DAC via I2S
 - [streams-generator-a2dp](examples/streams-generator-a2dp) Output of generated sound on Bluetooth Speaker using A2DP
+- [streams-generator-pwm](examples/streams-generator-pwm) Output of generated sound with PWM
 - [streams-adc-serial](examples/streams-adc-serial) Displaying input from analog microphone on the Serial Plotter
 - [streams-memory_wav-serial](examples/streams-memory_wav-serial) Decoding of WAV from Flash memory and display on the Serial Plotter
 

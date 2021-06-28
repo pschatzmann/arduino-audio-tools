@@ -134,7 +134,7 @@ Sound Output</h2>
 <ul>
 <li><b>I2SStream</b>: The best quality can be achieved with the help of I2S and an external DAC. I2S is supporting 2 channels only.</li>
 <li><b>AnalogAudioStream</b>: Some processors are providing an analog output, this is usually an easy and good approach: The number of pins (and herewith output channels) however is usually very limited.</li>
-<li><b>PWMAudioStream</b>: The last possibility is to simulate an analog output with the help of PWM by using a frequency which is beyond the audible range of 20 KHz. This method is supported by all processor and usually supports a bigger number of output pins. In terms of audio quality this is usually the worst option.</li>
+<li><b>PWMAudioStream</b>: The last possibility is to simulate an analog output with the help of PWM by using a frequency which is beyond the audible range of 20 KHz. This method is supported by all processors and usually supports a bigger number of output pins. In terms of audio quality this is usually the worst option.</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md2"></a>
 Examples</h1>
@@ -150,6 +150,7 @@ Stream API</h3>
 <li><a href="examples/streams-generator-i2s">streams-generator-i2s</a> Output of generated sound on external DAC via I2S</li>
 <li><a href="examples/streams-generator-dac">streams-generator-dac</a> Output of generated sound on ESP32 internal DAC via I2S</li>
 <li><a href="examples/streams-generator-a2dp">streams-generator-a2dp</a> Output of generated sound on Bluetooth Speaker using A2DP</li>
+<li><a href="examples/streams-generator-pwm">streams-generator-pwm</a> Output of generated sound with PWM</li>
 <li><a href="examples/streams-adc-serial">streams-adc-serial</a> Displaying input from analog microphone on the Serial Plotter</li>
 <li><a href="examples/streams-memory_wav-serial">streams-memory_wav-serial</a> Decoding of WAV from Flash memory and display on the Serial Plotter</li>
 </ul>
