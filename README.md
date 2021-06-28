@@ -75,7 +75,7 @@ A complete list of the supported Audio Stream classes and scenarios can be found
 
 - __I2SStream__: The best quality can be achieved with the help of I2S and an external DAC.  I2S is supporting 2 channels only. 
 - __AnalogAudioStream__: Some processors are providing an analog output, this is usually an easy and good approach: The number of pins (and herewith output channels) however is usually very limited.
-- __PWMAudioStream__: The last possibility is to simulate an analog output with the help of PWM by using a frequency which is beyond the audible range of 20 KHz. This method is supported by all processor and usually supports a bigger number of output pins. In terms of audio quality this is usually the worst option.
+- __PWMAudioStream__: The last possibility is to simulate an analog output with the help of PWM by using a frequency which is beyond the audible range of 20 KHz. This method is supported by all processors and usually supports a bigger number of output pins. In terms of audio quality this is usually the worst option.
 
 
 ## Examples

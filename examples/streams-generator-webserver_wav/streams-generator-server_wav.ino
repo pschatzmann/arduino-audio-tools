@@ -24,7 +24,7 @@ void setup() {
   server.begin(in, sample_rate, channels);
 
   // start generation of sound
-  sineWave.begin(sample_rate, B4);
+  sineWave.begin(sample_rate, N_B4);
   in.begin();
 }
 
