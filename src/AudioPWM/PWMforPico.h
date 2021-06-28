@@ -43,12 +43,17 @@ struct PWMConfigPico {
     int amplitude_out = 127; // amplitude of square wave (pwm values -amplitude to amplitude) for one byte
     int amplitude_in = 0; 
     int start_pin = 2; // channel 0 will be on gpio 2, channel 1 on 3 etc
+
+    int maxChannels() {
+        return 16;
+    }    
 } default_config;
 
 typedef PWMConfigPico PWMConfig;
 
 /**
- * @brief Audio output for the Rasperry Pico to PWM pins
+ * @brief Audio output for the Rasperry Pico to PWM pins.
+   The Raspberry Pi Pico has 8 PWM blocks/slices(1-8) and each PWM block provides up to two PWM outputs(A-B). 
  * @author Phil Schatzmann
  * @copyright GPLv3
 

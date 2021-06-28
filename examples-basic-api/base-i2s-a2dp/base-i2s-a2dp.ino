@@ -10,14 +10,19 @@
 
 #include "Arduino.h"
 #include "AudioTools.h"
-#include "BluetoothA2DPSource.h"
+#include "AudioA2DP.h"
 
 using namespace audio_tools;  
 
+/**
+ * @brief We use a ADS1015 I2S microphone as input and send the data to A2DP
+ * Unfortunatly the data type from the microphone (int32_t)  does not match with the required data type by A2DP (int16_t),
+ * so we need to convert.
+ */ 
 
 BluetoothA2DPSource a2dp_source;
 I2S<int32_t> i2s;
-CallbackConverter<int32_t,int16_t> converter(&convertFrom32To16);
+ChannelConverter<int32_t> converter(&convertFrom32To16);
 ConverterFillLeftAndRight<int32_t> bothChannels;
 const size_t max_buffer_len = 1024;
 int32_t buffer[max_buffer_len][2];
@@ -33,7 +38,7 @@ int32_t get_sound_data(Channels* data, int32_t len) {
    bothChannels.convert(buffer, result_len);
    
    // convert buffer to int16 for A2DP
-   converter.convert(buffer, (int16_t(*)[2]) data, result_len);
+   converter.convert(buffer, data, result_len);
    return result_len;
 }
 
