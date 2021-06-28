@@ -1,4 +1,4 @@
-
+/**
  * @file i2s-serial.ino
  * @author Phil Schatzmann
  * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/i2s-serial/README.md

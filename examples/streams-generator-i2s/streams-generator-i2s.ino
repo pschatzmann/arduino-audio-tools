@@ -1,7 +1,7 @@
 /**
- * @file streams-generator-a2dp.ino
+ * @file streams-generator-i2s.ino
  * @author Phil Schatzmann
- * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/streams-generator-a2dp/README.md 
+ * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/streams-generator-i2s/README.md 
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -25,7 +25,7 @@ void setup(void) {
   Serial.begin(115200);
 
   // start the bluetooth
-  Serial.println("starting A2DP...");
+  Serial.println("starting I2S...");
   I2SConfig config = out.defaultConfig(TX_MODE);
   config.sample_rate = sample_rate; 
   config.channels = 2;

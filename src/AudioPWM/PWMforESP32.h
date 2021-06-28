@@ -38,6 +38,11 @@ struct PWMConfigESP32 {
     int buffer_size = 1024 * 8;
     int bits_per_sample = 16;
     int resolution = 8;  // must be between 8 and 11 -> drives pwm frequency
+
+    int maxChannels() {
+        return 16;
+    }
+
 } default_config;
 
 typedef PWMConfigESP32 PWMConfig;
