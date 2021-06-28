@@ -34,13 +34,29 @@ static PWMAudioStreamESP32 *accessAudioPWM = nullptr;
 struct PWMConfigESP32 {
     int sample_rate = 10000;  // sample rate in Hz
     int channels = 2;
-    int start_pin = 3; 
     int buffer_size = 1024 * 8;
     int bits_per_sample = 16;
     int resolution = 8;  // must be between 8 and 11 -> drives pwm frequency
 
+    int start_pin = 3; 
+    int *pins = nullptr;
+
+    // determine the maximum number of channels
     int maxChannels() {
         return 16;
+    }
+
+    // define all pins by passing an array and updates the channels by the number of pins
+    template<size_t N> 
+    void setPins(int (&array)[N]) {
+	 	LOGD(__FUNCTION__);
+        int new_channels = sizeof(array)/sizeof(int);
+        if (channels!=new_channels) {
+            LOGI("channels updated to %d", new_channels); 
+            channels = new_channels;
+        }
+        pins = array;
+        start_pin = -1; // mark start pin as invalid
     }
 
 } default_config;
@@ -58,7 +74,6 @@ struct PinInfoESP32 {
 };
 
 typedef PinInfoESP32 PinInfo;
-
 
 /**
  * @brief Audio output to PWM pins for the ESP32. The ESP32 supports up to 16 channels. 
@@ -91,7 +106,8 @@ class PWMAudioStreamESP32 : public Stream {
             LOGI("channels: %d", audio_config.channels);
             LOGI("bits_per_sample: %d", audio_config.bits_per_sample);
             LOGI("start_pin: %d", audio_config.start_pin);
-            LOGI("resolution: %d", audio_config.resolution);
+            LOGI("resolution: %d bits", audio_config.resolution);
+            LOGI("pwm freq: %f khz", frequency(audio_config.resolution));
 
             // controller has max 16 independent channels
             if (audio_config.channels>=16){
@@ -104,7 +120,6 @@ class PWMAudioStreamESP32 : public Stream {
                 LOGE("The resolution must be between 8 and 11!");
                 return false;
             }
-
             setupPWM();
             setupTimer();
             return true;
@@ -171,8 +186,14 @@ class PWMAudioStreamESP32 : public Stream {
             if (result!=size){
                 LOGW("Could not write all data: %d -> %d", size, result);
             }
+            // activate the timer now - if not already done
             setWriteStarted();
             return result;
+        }
+
+        // When the timer does not have enough data we increase the underflow_count;
+        uint64_t underflowsPerSecond(){
+            return underflow_count;
         }
 
 
@@ -183,6 +204,7 @@ class PWMAudioStreamESP32 : public Stream {
         hw_timer_t * timer = nullptr;
         portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
         bool data_write_started = false;
+        uint64_t underflow_count = 0;
 
         /// when we get the first write -> we activate the timer to start with the output of data
         void setWriteStarted(){
@@ -199,22 +221,36 @@ class PWMAudioStreamESP32 : public Stream {
 
             pins.resize(audio_config.channels);
             for (int j=0;j<audio_config.channels;j++){
+                LOGD("Processing channel %d", j);
                 int pwmChannel = j;
                 pins[j].pwm_channel = pwmChannel;
-                pins[j].gpio = audio_config.start_pin + j;
+                if (audio_config.pins==nullptr){
+                    // use sequential pins starting from start_pin
+                    LOGD("-> defining pin %d",audio_config.start_pin + j);
+                    pins[j].gpio = audio_config.start_pin + j;
+                } else {
+                    // use defined pins
+                    LOGD("-> defining pin %d",audio_config.pins[j]);
+                    pins[j].gpio = audio_config.pins[j];
+                }
+                LOGD("-> ledcSetup");
                 ledcSetup(pwmChannel, frequency(audio_config.resolution), audio_config.resolution);
-                ledcAttachPin(pwmChannel, pins[j].gpio);
+                LOGD("-> ledcAttachPin");
+                ledcAttachPin(pins[j].gpio, pwmChannel);
             }
         }
 
         /// Setup ESP32 timer with callback
         void setupTimer() {
 	 		LOGD(__FUNCTION__);
+
             // Attach timer int at sample rate
             timer = timerBegin(0, 1, true); // Timer at full 40Mhz, no prescaling
             uint64_t counter = 40000000 / audio_config.sample_rate;
-            LOGI("timer counter is %lu", counter);
+            LOGI("-> timer counter is %lu", counter);
+            LOGD("-> timerAttachInterrupt");
             timerAttachInterrupt(timer, &defaultPWMAudioOutputCallback, true);
+            LOGD("-> timerAlarmWrite");
             timerAlarmWrite(timer, counter, true); // Timer fires at ~44100Hz [40Mhz / 907]
         } 
 
@@ -241,22 +277,33 @@ class PWMAudioStreamESP32 : public Stream {
 
         /// writes the next frame to the output pins 
         void playNextFrame(){
+            static long underflow_time = millis()+1000;
             if (data_write_started){
                 int required = (audio_config.bits_per_sample / 8) * audio_config.channels;
                 if (buffer.available() >= required){
+                    underflow_count = 0;
                     for (int j=0;j<audio_config.channels;j++){
                         int value  = nextValue();
-                        //Serial.println(value);
                         ledcWrite(pins[j].pwm_channel, value);
                     }
                 } else {
-                    LOGW("playNextFrame - underflow");
+                    underflow_count++;
                 }
+
+                if (underflow_time>millis()){
+                    underflow_time = millis()+1000;
+                    underflow_count = 0;
+                }
+ 
             }
         } 
 
         /// determines the next scaled value
         int nextValue() {
+            static long counter=0; static int min_value=INT_MAX; static int max_value=INT_MIN;
+
+            counter++;
+            int result;
             switch(audio_config.bits_per_sample ){
                 case 8: {
                     int value = buffer.read();
@@ -264,35 +311,42 @@ class PWMAudioStreamESP32 : public Stream {
                         LOGE("Could not read full data");
                         value = 0;
                     }
-                    return map(value, -maxValue(8), maxValue(8), 0, maxUnsignedValue());
+                    result = map(value, -maxValue(8), maxValue(8), 0, maxUnsignedValue());
+                    break;
                 }
                 case 16: {
                     int16_t value;
                     if (buffer.readArray((uint8_t*)&value,2)!=2){
                         LOGE("Could not read full data");
                     }
-                    //Serial.print(value);
-                    //Serial.print(" -> ");
-                    //Serial.println(map(value, -maxValue(16), maxValue(16), 0, maxUnsignedValue()));
-                    return map(value, -maxValue(16), maxValue(16), 0, maxUnsignedValue());
+                    result = map(value, -maxValue(16), maxValue(16), 0, maxUnsignedValue());
+                    break;
                 }
                 case 24: {
                     int24_t value;
                     if (buffer.readArray((uint8_t*)&value,3)!=3){
                         LOGE("Could not read full data");
                     }
-                    return map((int32_t)value, -maxValue(24), maxValue(24), 0, maxUnsignedValue());
+                    result = map((int32_t)value, -maxValue(24), maxValue(24), 0, maxUnsignedValue());
+                    break;
                 }
                 case 32: {
                     int32_t value;
                     if (buffer.readArray((uint8_t*)&value,4)!=4){
                         LOGE("Could not read full data");
                     }
-                    return map(value, -maxValue(32), maxValue(32), 0, maxUnsignedValue());
+                    result = map(value, -maxValue(32), maxValue(32), 0, maxUnsignedValue());
+                    break;
                 }
-            }            
-            LOGE("nextValue could not be determined because bits_per_sample is not valid: ",audio_config.bits_per_sample);
-            return 0;
+            }        
+
+            // if (counter>=1024){
+            //     max_value = max(max_value, result);
+            //     min_value = min(min_value, result);
+            //     LOGD("output: min %d / max %d", min_value, max_value);
+            //     counter = 0;
+            // }  
+            return result;
         }      
       
 };

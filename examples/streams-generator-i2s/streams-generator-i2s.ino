@@ -33,7 +33,7 @@ void setup(void) {
   out.begin(config);
 
   // Setup sine wave
-  sineWave.begin(sample_rate, B4);
+  sineWave.begin(sample_rate, N_B4);
 }
 
 // Arduino loop - copy sound to out 
