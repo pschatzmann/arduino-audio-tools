@@ -21,7 +21,7 @@ static int16_t convertFrom32To16(int32_t value)  {
     return static_cast<float>(value) / INT32_MAX * INT16_MAX;
 }
 
-static int maxValue(int value_bits_per_sample){
+static int64_t maxValue(int value_bits_per_sample){
     switch(value_bits_per_sample/8){
         case 8:
             return 127;

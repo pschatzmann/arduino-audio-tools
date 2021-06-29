@@ -16,7 +16,7 @@ using namespace audio_tools;
 
 // MemoryStream -> AudioOutputStream -> WAVDecoder -> CsvStream
 MemoryStream wav(knghtsng_wav, knghtsng_wav_len);
-AudioPWM<int16_t> pwm;          // PWM output 
+PWMAudioStream pwm;          // PWM output 
 WAVDecoder decoder(pwm);        // decode wav to pcm and send it to printer
 AudioOutputStream out(decoder); // output to decoder
 StreamCopy copier(out, wav);    // copy in to out

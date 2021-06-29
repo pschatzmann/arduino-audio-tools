@@ -134,6 +134,7 @@ template <class T>
 class GeneratedSoundStream : public Stream {
     public:
         GeneratedSoundStream(SoundGenerator<T> &generator, uint8_t channels=2){
+            LOGD("GeneratedSoundStream channels: %d", channels);
             this->generator_ptr = &generator;
             this->channels = channels;
         }

@@ -14,9 +14,9 @@ To test the output I am using a piezo electric element
 It should also be possible to connect a headphone to the output pins...
 
 
-On the ESP32 the output is on the Pins GPIO26 and GPIO27
+The pins depend on the Processor:
 
-| PIEZO     |  ESP32
-| --------| ---------------
-| +       |  GPIO22 / GPIO23
-| -       |  GND
+| PIEZO   |  ESP32         | AVR             | Rpi Pico
+| --------| ---------------|-----------------|--------------
+| +       |  GPIO3 / GPIO4 | GPIO3 / GPIO11  | GPIO03/GPIO04
+| -       |  GND           |                 |

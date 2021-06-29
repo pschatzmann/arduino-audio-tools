@@ -99,6 +99,7 @@ $(function() {
 , <a class="el" href="classaudio__tools_1_1_callback_stream.html#aa086aca607e05e4c5e576afea011bf7c">audio_tools::CallbackStream&lt; T &gt;</a>
 , <a class="el" href="classaudio__tools_1_1_generated_sound_stream.html#ab72f6f63d20359825d4abbe82ccb3a27">audio_tools::GeneratedSoundStream&lt; T &gt;</a>
 , <a class="el" href="classaudio__tools_1_1_i2_s_base.html#a7ba4d5c09e12e4cf2a88c433e863482f">audio_tools::I2SBase</a>
+, <a class="el" href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#a293eb976c04183e5e29f8e35316f079a">audio_tools::PWMAudioStreamBase</a>
 , <a class="el" href="classaudio__tools_1_1_sine_wave_generator.html#a2654d0c09f99b58d6bf3dc78fa620140">audio_tools::SineWaveGenerator&lt; T &gt;</a>
 </li>
 </ul>
@@ -218,7 +219,8 @@ $(function() {
 
 <h3><a id="index_n"></a>- n -</h3><ul>
 <li>nextValue()
-: <a class="el" href="classaudio__tools_1_1_p_w_m_audio_stream_e_s_p32.html#af5af7b9471568be6d47fa3de34b341f0">audio_tools::PWMAudioStreamESP32</a>
+: <a class="el" href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#a52908d290349c998e4077bd811e9e300">audio_tools::PWMAudioStreamBase</a>
+, <a class="el" href="classaudio__tools_1_1_p_w_m_audio_stream_e_s_p32.html#af5af7b9471568be6d47fa3de34b341f0">audio_tools::PWMAudioStreamESP32</a>
 </li>
 </ul>
 
@@ -238,11 +240,15 @@ $(function() {
 <li>pin()
 : <a class="el" href="classaudio__tools_1_1_analog_config.html#a9b23d7225eb36a909ba19087696a7e77">audio_tools::AnalogConfig</a>
 </li>
-<li>playNextFrame()
-: <a class="el" href="classaudio__tools_1_1_p_w_m_audio_stream_e_s_p32.html#a54f55d49cb45e223e4e999536cb038fb">audio_tools::PWMAudioStreamESP32</a>
+<li>playNextFrameStream()
+: <a class="el" href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#abe51f92fdb30f5bf2c79f6af7887227d">audio_tools::PWMAudioStreamBase</a>
 </li>
 <li>put()
 : <a class="el" href="classaudio__tools_1_1_http_header.html#a96e5375cbc78ff1ef4d011dd5d794bf6">audio_tools::HttpHeader</a>
+</li>
+<li>pwmWrite()
+: <a class="el" href="classaudio__tools_1_1_p_w_m_audio_stream_e_s_p32.html#a25fcedff3e4be29d1de442a922282ab1">audio_tools::PWMAudioStreamESP32</a>
+, <a class="el" href="classaudio__tools_1_1_p_w_m_audio_stream_pico.html#a53b7a80e1d69ad57f02fd1c77a4c3a1a">audio_tools::PWMAudioStreamPico</a>
 </li>
 </ul>
 
@@ -315,13 +321,16 @@ $(function() {
 : <a class="el" href="classaudio__tools_1_1_a_a_c_encoder.html#a4d01a9674476c953964ff17b991c3a21">audio_tools::AACEncoder</a>
 </li>
 <li>setupPWM()
-: <a class="el" href="classaudio__tools_1_1_p_w_m_audio_stream_e_s_p32.html#a4a5c8c8c0ab2125a1200a9f2f654c4b2">audio_tools::PWMAudioStreamESP32</a>
+: <a class="el" href="classaudio__tools_1_1_p_w_m_audio_stream_a_v_r.html#a0bf8bc83e099de1fa268d22ba2d6fcbe">audio_tools::PWMAudioStreamAVR</a>
+, <a class="el" href="classaudio__tools_1_1_p_w_m_audio_stream_e_s_p32.html#a4a5c8c8c0ab2125a1200a9f2f654c4b2">audio_tools::PWMAudioStreamESP32</a>
 </li>
 <li>setupTimer()
-: <a class="el" href="classaudio__tools_1_1_p_w_m_audio_stream_e_s_p32.html#ab9051a8442720736039f50f70e97db9b">audio_tools::PWMAudioStreamESP32</a>
+: <a class="el" href="classaudio__tools_1_1_p_w_m_audio_stream_a_v_r.html#a50563dd4e48881540ffdb6c89ba5b793">audio_tools::PWMAudioStreamAVR</a>
+, <a class="el" href="classaudio__tools_1_1_p_w_m_audio_stream_e_s_p32.html#ab9051a8442720736039f50f70e97db9b">audio_tools::PWMAudioStreamESP32</a>
 </li>
 <li>setWriteStarted()
-: <a class="el" href="classaudio__tools_1_1_p_w_m_audio_stream_e_s_p32.html#af27828bd9d6f0d6b882b118b0362e689">audio_tools::PWMAudioStreamESP32</a>
+: <a class="el" href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#a5971342d3cf43d8643cfec895c4cb228">audio_tools::PWMAudioStreamBase</a>
+, <a class="el" href="classaudio__tools_1_1_p_w_m_audio_stream_e_s_p32.html#af27828bd9d6f0d6b882b118b0362e689">audio_tools::PWMAudioStreamESP32</a>
 </li>
 <li>sink()
 : <a class="el" href="classaudio__tools_1_1_a2_d_p_stream.html#a62ff1438dbe441759910ea4d134e54c2">audio_tools::A2DPStream</a>
