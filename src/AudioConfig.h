@@ -17,7 +17,7 @@
  */
  
 #define USE_AUDIO_LOGGING true
-#define PRINTF_BUFFER_SIZE 160
+#define PRINTF_BUFFER_SIZE 80
 #define LOG_LEVEL AudioLogger::Warning
 #define LOG_STREAM Serial
 
@@ -30,18 +30,18 @@
 #define LED_BUILTIN 13 // pin number is specific to your esp32 board
 #endif
 
-#define DEFAULT_BUFFER_SIZE 1024
+#define DEFAULT_BUFFER_SIZE 512
 #define DEFAULT_SAMPLE_RATE 44100
 #define DEFAULT_CHANNELS 2
 #define DEFAULT_BITS_PER_SAMPLE 16
 #define I2S_DEFAULT_PORT 0
-#define I2S_BUFFER_SIZE 1024
+#define I2S_BUFFER_SIZE 512
 #define I2S_BUFFER_COUNT 5
 #define A2DP_BUFFER_SIZE 4096
 #define A2DP_BUFFER_COUNT 8
 #define DEFAUT_ADC_PIN 34
-#define PWM_BUFFER_SIZE 1024
-#define PWM_BUFFERS 4
+#define PWM_BUFFER_SIZE 512
+#define PWM_BUFFERS 2
 
 /**
  * ------------------------------------------------------------------------- 

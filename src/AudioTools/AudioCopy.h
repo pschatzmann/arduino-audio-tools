@@ -18,6 +18,7 @@ template <class T>
 class StreamCopyT {
     public:
         StreamCopyT(Print &to, Stream &from, int buffer_size=DEFAULT_BUFFER_SIZE){
+            LOGD("StreamCopyT")
             begin(to, from);
             this->buffer_size = buffer_size;
             buffer = new uint8_t[buffer_size];
@@ -27,6 +28,7 @@ class StreamCopyT {
         }
 
         StreamCopyT(int buffer_size=DEFAULT_BUFFER_SIZE){
+            LOGD("StreamCopyT")
             this->buffer_size = buffer_size;
             buffer = new uint8_t[buffer_size];
             if (buffer==nullptr){
@@ -143,9 +145,11 @@ class StreamCopyT {
 class StreamCopy : public StreamCopyT<uint8_t> {
     public:
         StreamCopy(int buffer_size=DEFAULT_BUFFER_SIZE): StreamCopyT<uint8_t>(buffer_size) {            
+            LOGD("StreamCopy")
         }
 
         StreamCopy(Print &to, Stream &from, int buffer_size=DEFAULT_BUFFER_SIZE) : StreamCopyT<uint8_t>(to, from, buffer_size){
+            LOGD("StreamCopy")
         }
 
         /// copies a buffer length of data and applies the converter

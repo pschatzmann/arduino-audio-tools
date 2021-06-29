@@ -94,6 +94,7 @@ class SineWaveGenerator : public SoundGenerator<T> {
     public:
         // the scale defines the max value which is generated
         SineWaveGenerator(float amplitude = 32767.0, float phase = 0) {
+            LOGD("SineWaveGenerator");
             m_amplitude = amplitude;
             m_phase = phase;
         }
