@@ -10,7 +10,7 @@
 
 using namespace audio_tools;  
 
-int pins[] = {22, 23};
+//int pins[] = {22, 23};
 int channels = 2;
 uint16_t sample_rate=22000;
 SineWaveGenerator<int16_t> sineWave(32000); // subclass of SoundGenerator with max amplitude of 32000

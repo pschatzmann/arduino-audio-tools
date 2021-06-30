@@ -68,6 +68,8 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
 <a href="structaudio__tools_1_1_p_w_m_config-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">audio_tools::PWMConfig Struct Reference</div>  </div>
@@ -100,26 +102,71 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>buffers</b> = PWM_
 <tr class="memitem:aa5464ac43c98b7d9a8117b2ee910e9ca"><td class="memItemLeft" align="right" valign="top"><a id="aa5464ac43c98b7d9a8117b2ee910e9ca"></a>
 uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b> = 2</td></tr>
 <tr class="separator:aa5464ac43c98b7d9a8117b2ee910e9ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a234168e676f82d0343bc176f3e467962"><td class="memItemLeft" align="right" valign="top"><a id="a234168e676f82d0343bc176f3e467962"></a>
-int *&#160;</td><td class="memItemRight" valign="bottom"><b>pins</b> = nullptr</td></tr>
-<tr class="separator:a234168e676f82d0343bc176f3e467962"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a54f4888e4e97cdc937fe391e5656c158"><td class="memItemLeft" align="right" valign="top"><a id="a54f4888e4e97cdc937fe391e5656c158"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>pwm_freq</b> = 60000</td></tr>
 <tr class="separator:a54f4888e4e97cdc937fe391e5656c158"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae5904f5f0a40bf1d10505d1e2fd7a18b"><td class="memItemLeft" align="right" valign="top"><a id="ae5904f5f0a40bf1d10505d1e2fd7a18b"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>resolution</b> = 8</td></tr>
+<tr class="memitem:ae5904f5f0a40bf1d10505d1e2fd7a18b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_p_w_m_config.html#ae5904f5f0a40bf1d10505d1e2fd7a18b">resolution</a> = 8</td></tr>
+<tr class="memdesc:ae5904f5f0a40bf1d10505d1e2fd7a18b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuration for PWM output.  <a href="structaudio__tools_1_1_p_w_m_config.html#ae5904f5f0a40bf1d10505d1e2fd7a18b">More...</a><br /></td></tr>
 <tr class="separator:ae5904f5f0a40bf1d10505d1e2fd7a18b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac011cf67cc07808bc617d0281ba8504b"><td class="memItemLeft" align="right" valign="top"><a id="ac011cf67cc07808bc617d0281ba8504b"></a>
 uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>sample_rate</b> = 10000</td></tr>
 <tr class="separator:ac011cf67cc07808bc617d0281ba8504b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab432bf1be6899ce0e37452f58748c490"><td class="memItemLeft" align="right" valign="top"><a id="ab432bf1be6899ce0e37452f58748c490"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>start_pin</b> = 3</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>start_pin</b> = 4</td></tr>
 <tr class="separator:ab432bf1be6899ce0e37452f58748c490"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b74f72d47a672b786cfa07446706b2b"><td class="memItemLeft" align="right" valign="top"><a id="a5b74f72d47a672b786cfa07446706b2b"></a>
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>timer_id</b> = 0</td></tr>
+<tr class="separator:a5b74f72d47a672b786cfa07446706b2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a234168e676f82d0343bc176f3e467962"><td class="memItemLeft" align="right" valign="top"><a id="a234168e676f82d0343bc176f3e467962"></a>
+int *&#160;</td><td class="memItemRight" valign="bottom"><b>pins</b> = nullptr</td></tr>
+<tr class="separator:a234168e676f82d0343bc176f3e467962"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a4eff29be48c75dbec71397d411ddfea3"><td class="memItemLeft" align="right" valign="top"><a id="a4eff29be48c75dbec71397d411ddfea3"></a>
+class&#160;</td><td class="memItemRight" valign="bottom"><b>PWMAudioStreamESP32</b></td></tr>
+<tr class="separator:a4eff29be48c75dbec71397d411ddfea3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79f10750b0f220fe41ba9fcdf90081d1"><td class="memItemLeft" align="right" valign="top"><a id="a79f10750b0f220fe41ba9fcdf90081d1"></a>
+class&#160;</td><td class="memItemRight" valign="bottom"><b>PWMAudioStreamPico</b></td></tr>
+<tr class="separator:a79f10750b0f220fe41ba9fcdf90081d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>PWMConfigAVR </p><dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
+</div><h2 class="groupheader">Member Data Documentation</h2>
+<a id="ae5904f5f0a40bf1d10505d1e2fd7a18b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5904f5f0a40bf1d10505d1e2fd7a18b">&#9670;&nbsp;</a></span>resolution</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int audio_tools::PWMConfig::resolution = 8</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Configuration for PWM output. </p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">RES   </th><th class="markdownTableHeadNone">BITS   </th><th class="markdownTableHeadNone">MAX_FREQ (kHz)    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">8   </td><td class="markdownTableBodyNone">256   </td><td class="markdownTableBodyNone">312.5    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">9   </td><td class="markdownTableBodyNone">512   </td><td class="markdownTableBodyNone">156.25    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">10   </td><td class="markdownTableBodyNone">1024   </td><td class="markdownTableBodyNone">78.125    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">11   </td><td class="markdownTableBodyNone">2048   </td><td class="markdownTableBodyNone">39.0625   </td></tr>
+</table>
+<p>The default resolution is 8. The value must be between 8 and 11 and also drives the PWM frequency. </p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
 <li>src/AudioPWM/<a class="el" href="_p_w_m_audio_stream_base_8h_source.html">PWMAudioStreamBase.h</a></li>
 </ul>
 </div><!-- contents -->

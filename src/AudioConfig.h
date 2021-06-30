@@ -41,7 +41,7 @@
 #define A2DP_BUFFER_COUNT 8
 #define DEFAUT_ADC_PIN 34
 #define PWM_BUFFER_SIZE 512
-#define PWM_BUFFERS 2
+#define PWM_BUFFERS 10
 
 /**
  * ------------------------------------------------------------------------- 

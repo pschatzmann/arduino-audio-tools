@@ -41,7 +41,7 @@ class PWMAudioStreamAVR : public PWMAudioStreamBase {
             TCCR2A = 0;
             interrupts(); // enable all interrupts
 
-            data_write_started = false;
+            is_timer_started = false;
         }
 
         /// Setup AVR timer with callback
@@ -120,11 +120,15 @@ class PWMAudioStreamAVR : public PWMAudioStreamBase {
     protected:
         int pins[2] =  {3, 11};
       
+        virtual int maxOutputValue(){
+            return 255;
+        }
+
 };
 
 /// separate method that can be defined as friend so that we can access protected information
 void defaultPWMAudioOutputCallback(){
-    if (accessAudioPWM!=nullptr && accessAudioPWM->data_write_started){
+    if (accessAudioPWM!=nullptr && accessAudioPWM->is_timer_started){
         accessAudioPWM->playNextFrame();
     }
 }
