@@ -44,14 +44,12 @@ class PWMAudioStreamPico : public PWMAudioStreamBase {
             LOGD("PWMAudioStreamPico");
         }
 
-        virtual int maxChannels() {
-            return 16;
-        };
-
-        // Ends the output -> resets the timer and the pins
+        /// Ends the output -> resets the timer and the pins
         void end(){
 	 		LOGD(__FUNCTION__);
-            cancel_repeating_timer(&timer);
+            if (!cancel_repeating_timer(&timer)){
+                LOGE("cancel_repeating_timer failed")
+            }
             for(auto pin : pins) {
                 if (pin.gpio!=-1){
                     pwm_set_enabled(pin.slice, false);
@@ -63,6 +61,7 @@ class PWMAudioStreamPico : public PWMAudioStreamBase {
         Vector<PicoChannelOut> pins;      
         repeating_timer_t timer;
 
+
         // setup pwm config and all pins
         void setupPWM(){
 	 		LOGD(__FUNCTION__);
@@ -73,13 +72,19 @@ class PWMAudioStreamPico : public PWMAudioStreamBase {
             pins.resize(audio_config.channels, empty);
 
             // setup pin values
-            for (int j;j< audio_config.channels;j++) {
+            for (int j=0;j< audio_config.channels;j++) {
                 int gpio = audio_config.start_pin + j;
                 int channel = j;
+                if (audio_config.pins!=nullptr){
+                    gpio = audio_config.pins[j];
+                }
+                LOGD("-> defining pin %d",gpio);
+
                 pins[channel].slice = pwm_gpio_to_slice_num(gpio);
                 pins[channel].channel = pwm_gpio_to_channel(gpio);
                 pins[channel].audioChannel = j;
                 pins[channel].gpio = gpio;
+
                 setupPWMPin(cfg, pins[channel]);
             }
         }
@@ -89,14 +94,14 @@ class PWMAudioStreamPico : public PWMAudioStreamBase {
 	 		LOGD(__FUNCTION__);
             // setup pwm frequency
             pwm_config pico_pwm_config = pwm_get_default_config();
-            int amplitude_out = 127; // amplitude of square wave (pwm values -amplitude to amplitude) for one byte
-            float pwmClockDivider = static_cast<float>(clock_get_hz(clk_sys)) / (audio_config.pwm_freq * amplitude_out * 2);
-            LOGI("clock speed is %f", static_cast<float>(clock_get_hz(clk_sys)));
-            LOGI("divider is %f", pwmClockDivider);
+            int wrap_value = maxOutputValue(); // amplitude of square wave (pwm values -amplitude to amplitude) for one byte
+            float pwmClockDivider = static_cast<float>(clock_get_hz(clk_sys)) / (audio_config.pwm_freq * wrap_value);
+            LOGI("->clock speed is %f", static_cast<float>(clock_get_hz(clk_sys)));
+            LOGI("->divider is %f", pwmClockDivider);
             pwm_config_set_clkdiv(&pico_pwm_config, pwmClockDivider);
             pwm_config_set_clkdiv_mode(&pico_pwm_config, PWM_DIV_FREE_RUNNING);
-            pwm_config_set_phase_correct(&pico_pwm_config, true);
-            pwm_config_set_wrap (&pico_pwm_config, amplitude_out);
+            //pwm_config_set_phase_correct(&pico_pwm_config, false);
+            pwm_config_set_wrap (&pico_pwm_config, wrap_value);
             return pico_pwm_config;
         } 
 
@@ -117,14 +122,24 @@ class PWMAudioStreamPico : public PWMAudioStreamBase {
         void setupTimer(){
 	 		LOGD(__FUNCTION__);
             // setup timer
-            uint32_t time = 1000000.0 / audio_config.sample_rate;
-            LOGI("Timer value %d us", time);
+            uint64_t time = 1000000UL / audio_config.sample_rate;
+            LOGI("->Timer value %ld us", time);
 
-            if (!add_repeating_timer_us(-time, defaultPWMAudioOutputCallbackPico, nullptr, &timer)){
-                LOGI("Error: alarm_pool_add_repeating_timer_us failed; no alarm slots available");
+            if (!add_repeating_timer_us(-time, &defaultPWMAudioOutputCallbackPico, this, &timer)){
+                LOGE("Error: alarm_pool_add_repeating_timer_us failed; no alarm slots available");
             }
         }
 
+        /// The pico supports max 16 pwm pins
+        virtual int maxChannels() {
+            return 16;
+        };
+
+        /// Max pwm output value
+        virtual int maxOutputValue(){
+            return 255;
+        }
+        
         /// write a pwm value to the indicated channel. The values are between 0 and 255
         void pwmWrite(int audioChannel, int value){
             pwm_set_chan_level(pins[audioChannel].slice, pins[audioChannel].channel, value);
@@ -132,10 +147,13 @@ class PWMAudioStreamPico : public PWMAudioStreamBase {
 
 };
 
+
 // timed output executed at the sampleRate
 bool defaultPWMAudioOutputCallbackPico(repeating_timer* ptr) {
     PWMAudioStreamPico *self = (PWMAudioStreamPico*)  ptr->user_data;
-    self->playNextFrame();
+    if (self!=nullptr){
+        self->playNextFrame();
+    }
     return true;
 }
 

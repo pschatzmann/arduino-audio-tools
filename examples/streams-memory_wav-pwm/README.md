@@ -6,8 +6,8 @@ MemoryStream -> AudioOutputStream -> WAVDecoder -> AudioPWM
 
 The pins depend on the Processor:
 
-| PIEZO   |  ESP32         | AVR (Nano)      | Rpi Pico
-| --------| ---------------|-----------------|--------------
-| +       |  GPIO3 / GPIO4 | GPIO3 / GPIO11  | GPIO03/GPIO04
+| PIEZO   |  ESP32         | RPI Pico        | 
+| --------| ---------------|-----------------|
+| +       |  GPIO4         | GPIO2           |
 | -       |  GND           |                 |
 

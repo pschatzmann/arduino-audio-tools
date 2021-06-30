@@ -14,7 +14,7 @@
 
 using namespace audio_tools;  
 
-// MemoryStream -> AudioOutputStream -> WAVDecoder -> CsvStream
+// MemoryStream -> AudioOutputStream -> WAVDecoder -> PWMAudioStream
 MemoryStream wav(knghtsng_wav, knghtsng_wav_len);
 PWMAudioStream pwm;          // PWM output 
 WAVDecoder decoder(pwm);        // decode wav to pcm and send it to printer
@@ -23,12 +23,13 @@ StreamCopy copier(out, wav);    // copy in to out
 
 void setup(){
   Serial.begin(115200);
+  while(!Serial);
   AudioLogger::instance().begin(Serial, AudioLogger::Debug);  
 
   // setup pwm output
   PWMConfig config = pwm.defaultConfig();
   config.channels = 1;
-  config.sample_rate = 1000;
+  config.sample_rate = 11025;
   pwm.begin(config);
 }
 
