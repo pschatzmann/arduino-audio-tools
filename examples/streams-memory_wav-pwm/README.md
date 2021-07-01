@@ -8,8 +8,8 @@ MemoryStream -> AudioOutputStream -> WAVDecoder -> AudioPWM
 
 The pins depend on the Processor:
 
-| PIEZO   |  ESP32         | RPI Pico        | 
-| --------| ---------------|-----------------|
-| +       |  GPIO4         | GPIO2           |
-| -       |  GND           |                 |
+| PIEZO   |  ESP32       | RPI Pico      | MBED         |
+| --------| -------------|---------------|--------------|
+| +       |  GPIO4       | GPIO2         | GPIO2        |
+| -       |  GND         |               |              |
 
