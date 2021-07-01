@@ -85,11 +85,12 @@ Inheritance diagram for audio_tools::PWMAudioStreamBase:</div>
  <div class="center">
   <img src="classaudio__tools_1_1_p_w_m_audio_stream_base.png" usemap="#audio_5Ftools::PWMAudioStreamBase_map" alt=""/>
   <map id="audio_5Ftools::PWMAudioStreamBase_map" name="audio_5Ftools::PWMAudioStreamBase_map">
-<area href="class_stream.html" alt="Stream" shape="rect" coords="232,56,454,80"/>
-<area href="class_print.html" alt="Print" shape="rect" coords="232,0,454,24"/>
+<area href="class_stream.html" alt="Stream" shape="rect" coords="348,56,570,80"/>
+<area href="class_print.html" alt="Print" shape="rect" coords="348,0,570,24"/>
 <area href="classaudio__tools_1_1_p_w_m_audio_stream_a_v_r.html" title="Experimental: Audio output to PWM pins for the AVR. The AVR supports only up to 2 channels." alt="audio_tools::PWMAudioStreamAVR" shape="rect" coords="0,168,222,192"/>
 <area href="classaudio__tools_1_1_p_w_m_audio_stream_e_s_p32.html" title="Audio output to PWM pins for the ESP32. The ESP32 supports up to 16 channels." alt="audio_tools::PWMAudioStreamESP32" shape="rect" coords="232,168,454,192"/>
-<area href="classaudio__tools_1_1_p_w_m_audio_stream_pico.html" title="Audio output for the Rasperry Pico to PWM pins. The Raspberry Pi Pico has 8 PWM blocks/slices(1-8) an..." alt="audio_tools::PWMAudioStreamPico" shape="rect" coords="464,168,686,192"/>
+<area href="classaudio__tools_1_1_p_w_m_audio_stream_m_b_e_d.html" title="Audio output to PWM pins for MBED based Arduino implementations." alt="audio_tools::PWMAudioStreamMBED" shape="rect" coords="464,168,686,192"/>
+<area href="classaudio__tools_1_1_p_w_m_audio_stream_pico.html" title="Audio output for the Rasperry Pico to PWM pins. The Raspberry Pi Pico has 8 PWM blocks/slices(1-8) an..." alt="audio_tools::PWMAudioStreamPico" shape="rect" coords="696,168,918,192"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -101,6 +102,9 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>available</b> 
 <tr class="memitem:a2ae9b93bd27cfd52819551d48b5aad0e"><td class="memItemLeft" align="right" valign="top"><a id="a2ae9b93bd27cfd52819551d48b5aad0e"></a>
 virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>availableForWrite</b> ()</td></tr>
 <tr class="separator:a2ae9b93bd27cfd52819551d48b5aad0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9adb52ae5bb3d21dec4cb20ba14b98e5"><td class="memItemLeft" align="right" valign="top"><a id="a9adb52ae5bb3d21dec4cb20ba14b98e5"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> ()</td></tr>
+<tr class="separator:a9adb52ae5bb3d21dec4cb20ba14b98e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a246c965f26bca25f12bf7b90d5925f4d"><td class="memItemLeft" align="right" valign="top"><a id="a246c965f26bca25f12bf7b90d5925f4d"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#a246c965f26bca25f12bf7b90d5925f4d">begin</a> (<a class="el" href="structaudio__tools_1_1_p_w_m_config.html">PWMConfig</a> config)</td></tr>
 <tr class="memdesc:a246c965f26bca25f12bf7b90d5925f4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">starts the processing using Streams <br /></td></tr>
@@ -115,6 +119,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a4217a0251cfb11e421c8865ae81e1dc5"><td class="memItemLeft" align="right" valign="top"><a id="a4217a0251cfb11e421c8865ae81e1dc5"></a>
 <a class="el" href="structaudio__tools_1_1_p_w_m_config.html">PWMConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><b>defaultConfig</b> ()</td></tr>
 <tr class="separator:a4217a0251cfb11e421c8865ae81e1dc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb2a5eaea29e8f415c0803509503811e"><td class="memItemLeft" align="right" valign="top"><a id="aeb2a5eaea29e8f415c0803509503811e"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
+<tr class="separator:aeb2a5eaea29e8f415c0803509503811e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf013e79b30ed5f949bbf1595180409a"><td class="memItemLeft" align="right" valign="top"><a id="adf013e79b30ed5f949bbf1595180409a"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>flush</b> ()</td></tr>
 <tr class="separator:adf013e79b30ed5f949bbf1595180409a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -297,9 +304,9 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (const ch
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a085f4226ae02c369efd8b7af373c1148"><td class="memItemLeft" align="right" valign="top"><a id="a085f4226ae02c369efd8b7af373c1148"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>logConfig</b> ()</td></tr>
-<tr class="separator:a085f4226ae02c369efd8b7af373c1148"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04bc2e4bc40c30fa32e5979e236d466c"><td class="memItemLeft" align="right" valign="top"><a id="a04bc2e4bc40c30fa32e5979e236d466c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>logConfig</b> ()</td></tr>
+<tr class="separator:a04bc2e4bc40c30fa32e5979e236d466c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa720962f751aac9f2db37ad549325853"><td class="memItemLeft" align="right" valign="top"><a id="aa720962f751aac9f2db37ad549325853"></a>
 virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>maxChannels</b> ()=0</td></tr>
 <tr class="separator:aa720962f751aac9f2db37ad549325853"><td class="memSeparator" colspan="2">&#160;</td></tr>
