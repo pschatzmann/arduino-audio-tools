@@ -272,7 +272,7 @@ public:
       int result = actual_read_buffer->available();
       if (result == 0){
           // make current read buffer available again
-          reset();
+          resetCurrent();
           result = actual_read_buffer==nullptr? 0 : actual_read_buffer->available();
       }
       return result;
@@ -301,14 +301,15 @@ public:
       return actual_read_buffer==nullptr ? nullptr : actual_read_buffer->address();
   }
   
-  // resets the current read buffer and moves to the next available buffer
+  // resets all buffers
   void reset(){
-      if (actual_read_buffer!=nullptr){
+      LOGD(__FUNCTION__);
+      while (actual_read_buffer!=nullptr){
           actual_read_buffer->reset();
           addAvailableBuffer(actual_read_buffer);
+          // get next read buffer
+          actual_read_buffer = getNextFilledBuffer();
       }
-      // get next read buffer
-      actual_read_buffer = getNextFilledBuffer();
   }
   
   // provides the actual sample rate
@@ -328,6 +329,14 @@ protected:
     unsigned long start_time = 0;
     unsigned long sample_count = 0;
 
+    void resetCurrent(){
+      if (actual_read_buffer!=nullptr){
+          actual_read_buffer->reset();
+          addAvailableBuffer(actual_read_buffer);
+      }
+      // get next read buffer
+      actual_read_buffer = getNextFilledBuffer();
+    }
 
     BaseBuffer<T> *getNextAvailableBuffer() {
         BaseBuffer<T> *result = nullptr;

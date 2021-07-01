@@ -20,10 +20,13 @@
 #include "AudioTools/Streams.h"
 #include "AudioTools/AudioCopy.h"
 #include "AudioTools/AudioPWM.h"
-#include "AudioHttp/AudioServer.h"
 
 #ifdef USE_URL_ARDUINO
+// Arduino network support (incl ESP32)
+#include "AudioHttp/AudioServer.h"
 #include "AudioHttp/URLStreamArduino.h"
 #elif defined(ESP32)
+// network support with ESP32 API
+#include "AudioHttp/AudioServer.h"
 #include "AudioHttp/URLStreamESP32.h"
 #endif

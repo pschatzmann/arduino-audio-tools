@@ -1,6 +1,6 @@
 
 #pragma once
-#ifdef ARDUINO_ARCH_RP2040
+#if defined(ARDUINO_ARCH_RP2040) && !__has_include("mbed.h") 
 #include "AudioPWM/PWMAudioStreamBase.h"
 #include "hardware/gpio.h"
 #include "hardware/adc.h"
@@ -95,7 +95,7 @@ class PWMAudioStreamPico : public PWMAudioStreamBase {
             // setup pwm frequency
             pwm_config pico_pwm_config = pwm_get_default_config();
             int wrap_value = maxOutputValue(); // amplitude of square wave (pwm values -amplitude to amplitude) for one byte
-            float pwmClockDivider = static_cast<float>(clock_get_hz(clk_sys)) / (audio_config.pwm_freq * wrap_value);
+            float pwmClockDivider = static_cast<float>(clock_get_hz(clk_sys)) / (audio_config.pwm_frequency * wrap_value);
             LOGI("->clock speed is %f", static_cast<float>(clock_get_hz(clk_sys)));
             LOGI("->divider is %f", pwmClockDivider);
             pwm_config_set_clkdiv(&pico_pwm_config, pwmClockDivider);
