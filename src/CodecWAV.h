@@ -233,6 +233,7 @@ class WAVDecoder : public AudioWriter {
          * @param out_stream Output Stream to which we write the decoded result
          */
         WAVDecoder(Print &out_stream, bool active=true){
+        	LOGD(__FUNCTION__);
             this->out = &out_stream;
             this->audioBaseInfoSupport = nullptr;
             this->active = active;
@@ -246,16 +247,19 @@ class WAVDecoder : public AudioWriter {
          */
 
         WAVDecoder(Print &out_stream, AudioBaseInfoDependent &bi){
+        	LOGD(__FUNCTION__);
             this->out = &out_stream;
             this->audioBaseInfoSupport = &bi;
         }
     
         void begin() {
+        	LOGD(__FUNCTION__);
             isFirst = true;
             active = true;
         }
 
         void end() {
+        	LOGD(__FUNCTION__);
             active = false;
         }
 

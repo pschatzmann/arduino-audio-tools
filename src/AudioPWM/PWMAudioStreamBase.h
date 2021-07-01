@@ -17,6 +17,7 @@ void defaultPWMAudioOutputCallback();
 // Stream classes
 class PWMAudioStreamESP32;
 class PWMAudioStreamPico;
+class PWMAudioStreamMBED;
 
 /**
  * PWMConfigAVR
@@ -24,46 +25,22 @@ class PWMAudioStreamPico;
  * @copyright GPLv3
  */
 struct PWMConfig {
+    friend class PWMAudioStreamESP32;
+    friend class PWMAudioStreamPico;
+    friend class PWMAudioStreamMBED;
+
+    // basic information
     uint16_t sample_rate = 10000;  // sample rate in Hz
     uint8_t channels = 2;
     uint8_t bits_per_sample = 16;
     uint16_t buffer_size = PWM_BUFFER_SIZE;
     uint8_t buffers = PWM_BUFFERS; 
 
-    void logConfig(){
-        LOGI("sample_rate: %d", sample_rate);
-        LOGI("channels: %d", channels);
-        LOGI("bits_per_sample: %d", bits_per_sample);
-        LOGI("buffer_size: %d", buffer_size);
-    }
-
-#ifdef ESP32
-/**
- * @brief Configuration for PWM output
- *   RES | BITS | MAX_FREQ (kHz)
- *   ----|------|-------
- *    8  | 256  | 312.5
- *    9  | 512  | 156.25
- *   10  | 1024 | 78.125
- *   11  | 2048 | 39.0625
- *
- *   The default resolution is 8. The value must be between 8 and 11 and also drives the PWM frequency.
- */
-    int resolution = 8;     // must be between 8 and 11 -> drives pwm frequency
-    int start_pin = 4; 
-    uint8_t timer_id = 0;   // must be between 0 and 3
-#endif
-
-#ifdef ARDUINO_ARCH_RP2040
-    int pwm_freq = 60000;   // audable range is from 20 to 20,000Hz 
-    int start_pin = 2;      // channel 0 will be on gpio 2, channel 1 on 3 etc
-#endif
-
-// for architectures which support many flexible pins we support setPins
-#if defined(ESP32) || defined(ARDUINO_ARCH_RP2040)
-    friend class PWMAudioStreamESP32;
-    friend class PWMAudioStreamPico;
-
+    // additinal info
+    uint16_t start_pin = PWM_START_PIN; 
+    uint32_t pwm_frequency = PWM_FREQUENCY;  // audable range is from 20 to 20,000Hz (not used by ESP32)
+    uint8_t resolution = 8;     // Only used by ESP32: must be between 8 and 11 -> drives pwm frequency
+    uint8_t timer_id = 0;       // Only used by ESP32 must be between 0 and 3
 
     // define all pins by passing an array and updates the channels by the number of pins
     template<size_t N> 
@@ -78,11 +55,20 @@ struct PWMConfig {
         start_pin = -1; // mark start pin as invalid
     }
 
+    void logConfig(){
+        LOGI("sample_rate: %d", sample_rate);
+        LOGI("channels: %d", channels);
+        LOGI("bits_per_sample: %d", bits_per_sample);
+        LOGI("buffer_size: %d", buffer_size);
+        LOGI("start_pin: %d", start_pin);
+        LOGI("pwm_frequency: %d", pwm_frequency);
+        //LOGI("resolution: %d", resolution);
+        //LOGI("timer_id: %d", timer_id);
+    }
+
     protected:
         int *pins = nullptr;
 
-
-#endif
 
 } default_config;
 
@@ -93,6 +79,11 @@ struct PWMConfig {
  */
 class PWMAudioStreamBase : public Stream {
     public:
+        ~PWMAudioStreamBase(){
+            if (is_timer_started){
+                end();
+            }
+        }
 
         PWMConfig defaultConfig() {
             return default_config;
@@ -134,6 +125,8 @@ class PWMAudioStreamBase : public Stream {
             if (buffer==nullptr) {
                 LOGI("Allocating new buffer %d * %d bytes",config.buffers, config.buffer_size);
                 buffer = new NBuffer<uint8_t>(config.buffer_size, config.buffers);
+            } else {
+                buffer->reset();
             }
             // check allocation
             if (buffer==nullptr){
@@ -146,7 +139,45 @@ class PWMAudioStreamBase : public Stream {
             setupTimer();
 
             return true;
-        }   
+        }  
+
+        // restart with prior definitions
+        bool begin(){
+	 		LOGD(__FUNCTION__);
+            // allocate buffer if necessary
+            if (user_callback==nullptr) {
+                if (buffer==nullptr) {
+                    LOGI("->Allocating new buffer %d * %d bytes",audio_config.buffers, audio_config.buffer_size);
+                    buffer = new NBuffer<uint8_t>(audio_config.buffer_size, audio_config.buffers);
+                } else {
+                    buffer->reset();
+                }
+            }
+            // initialize if necessary
+            if (!is_timer_started){
+                logConfig();
+                setupPWM();
+                setupTimer();
+            }
+
+            // reset class variables
+            is_timer_started = true;
+            underflow_count = 0;
+            underflow_per_second = 0;
+            frame_count = 0;
+            frames_per_second = 0;     
+            
+            LOGI("->Buffer available: %d", buffer->available());
+            LOGI("->Buffer available for write: %d", buffer->availableToWrite());
+            LOGI("->is_timer_started: %s ", is_timer_started ? "true" : "false");
+        } 
+
+        virtual void end(){
+	 		LOGD(__FUNCTION__);
+            is_timer_started = false;
+        }
+
+
         // not supported
         virtual int available() {
             LOGE("not supported");
@@ -190,15 +221,10 @@ class PWMAudioStreamBase : public Stream {
 
         // blocking write for an array: we expect a singed value and convert it into a unsigned 
         virtual size_t write(const uint8_t *wrt_buffer, size_t size){
-            LOGD("write: %lu bytes", size)
-            bool log_flag = true;
-            while(availableForWrite()<size){
-                if (log_flag) LOGI("Buffer is full - waiting...");
-                log_flag = false;
-                delay(10);
-            }
-            size_t result = buffer->writeArray(wrt_buffer, size);
-            if (result!=size){
+            size_t available = min((size_t)availableForWrite(),size);
+            LOGD("write: %lu bytes -> %lu", size, available);
+            size_t result = buffer->writeArray(wrt_buffer, available);
+            if (result!=available){
                 LOGW("Could not write all data: %d -> %d", size, result);
             }
             // activate the timer now - if not already done
@@ -229,10 +255,6 @@ class PWMAudioStreamBase : public Stream {
         uint64_t time_1_sec;
         bool is_timer_started = false;
 
-        virtual void logConfig() {
-            audio_config.logConfig();
-        }
-
         virtual void setupPWM() = 0;
         virtual void setupTimer() = 0;
         virtual int maxChannels() = 0;
@@ -258,6 +280,9 @@ class PWMAudioStreamBase : public Stream {
             }
         }
 
+        void logConfig() {
+            audio_config.logConfig();
+        }
 
         void playNextFrameCallback(){
 	 		//LOGD(__FUNCTION__);

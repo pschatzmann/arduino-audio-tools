@@ -68,6 +68,9 @@ class PWMAudioStreamESP32 : public PWMAudioStreamBase {
         /// Setup LED PWM
         virtual void setupPWM(){
             LOGD(__FUNCTION__);
+            // frequency is driven by selected resolution
+            uint64_t freq = frequency(audio_config.resolution)*1000;
+            audio_config.pwm_frequency = freq;
 
             pins.resize(audio_config.channels);
             for (int j=0;j<audio_config.channels;j++){
@@ -83,7 +86,6 @@ class PWMAudioStreamESP32 : public PWMAudioStreamBase {
                     LOGD("-> defining pin %d",audio_config.pins[j]);
                     pins[j].gpio = audio_config.pins[j];
                 }
-                uint64_t freq = frequency(audio_config.resolution)*1000;
                 LOGD("-> ledcSetup:  frequency=%d / resolution=%d", freq, audio_config.resolution);
                 ledcSetup(pwmChannel, freq, audio_config.resolution);
                 LOGD("-> ledcAttachPin: %d", pins[j].gpio);

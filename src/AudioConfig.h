@@ -40,16 +40,27 @@
 #define A2DP_BUFFER_SIZE 4096
 #define A2DP_BUFFER_COUNT 8
 #define DEFAUT_ADC_PIN 34
-#define PWM_BUFFER_SIZE 512
-#define PWM_BUFFERS 10
+
 
 /**
  * ------------------------------------------------------------------------- 
- * @brief Optional Functionality - comment out if not wanted
+ * @brief PWM
  */
-
+#define PWM_BUFFER_SIZE 512
+#define PWM_BUFFERS 10
+#define PWM_FREQUENCY 60000
+#if defined(ESP32)
+#define PWM_START_PIN 4
+#elif defined(__arm__)
+#define PWM_START_PIN 2
+#endif
+/**
+ * ------------------------------------------------------------------------- 
+ * @brief Optional Functionality - comment out if not wanted 
+ */
+#ifndef __arm__
 #define USE_URL_ARDUINO
-
+#endif
 
 // Activate ESP32 Audio - for ESP32, ESP8266 and Raspberry Pico
 #define USE_ESP8266_AUDIO
