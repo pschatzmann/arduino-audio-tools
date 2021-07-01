@@ -37,10 +37,12 @@ struct PWMConfig {
     uint8_t buffers = PWM_BUFFERS; 
 
     // additinal info
-    uint16_t start_pin = PWM_START_PIN; 
     uint32_t pwm_frequency = PWM_FREQUENCY;  // audable range is from 20 to 20,000Hz (not used by ESP32)
     uint8_t resolution = 8;     // Only used by ESP32: must be between 8 and 11 -> drives pwm frequency
     uint8_t timer_id = 0;       // Only used by ESP32 must be between 0 and 3
+    
+#ifndef __AVR__
+    uint16_t start_pin = PWM_START_PIN; 
 
     // define all pins by passing an array and updates the channels by the number of pins
     template<size_t N> 
@@ -55,12 +57,13 @@ struct PWMConfig {
         start_pin = -1; // mark start pin as invalid
     }
 
+#endif
+
     void logConfig(){
         LOGI("sample_rate: %d", sample_rate);
         LOGI("channels: %d", channels);
         LOGI("bits_per_sample: %d", bits_per_sample);
         LOGI("buffer_size: %d", buffer_size);
-        LOGI("start_pin: %d", start_pin);
         LOGI("pwm_frequency: %d", pwm_frequency);
         //LOGI("resolution: %d", resolution);
         //LOGI("timer_id: %d", timer_id);
