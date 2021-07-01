@@ -11,7 +11,8 @@ var searchData=
   ['pwmaudiostreamavr_91',['PWMAudioStreamAVR',['../classaudio__tools_1_1_p_w_m_audio_stream_a_v_r.html',1,'audio_tools']]],
   ['pwmaudiostreambase_92',['PWMAudioStreamBase',['../classaudio__tools_1_1_p_w_m_audio_stream_base.html',1,'audio_tools']]],
   ['pwmaudiostreamesp32_93',['PWMAudioStreamESP32',['../classaudio__tools_1_1_p_w_m_audio_stream_e_s_p32.html',1,'audio_tools']]],
-  ['pwmaudiostreampico_94',['PWMAudioStreamPico',['../classaudio__tools_1_1_p_w_m_audio_stream_pico.html',1,'audio_tools']]],
-  ['pwmconfig_95',['PWMConfig',['../structaudio__tools_1_1_p_w_m_config.html',1,'audio_tools']]],
-  ['pwmwrite_96',['pwmWrite',['../classaudio__tools_1_1_p_w_m_audio_stream_e_s_p32.html#a8601c26c69bcb1b6950804ec9c69524a',1,'audio_tools::PWMAudioStreamESP32::pwmWrite()'],['../classaudio__tools_1_1_p_w_m_audio_stream_pico.html#a53b7a80e1d69ad57f02fd1c77a4c3a1a',1,'audio_tools::PWMAudioStreamPico::pwmWrite()']]]
+  ['pwmaudiostreammbed_94',['PWMAudioStreamMBED',['../classaudio__tools_1_1_p_w_m_audio_stream_m_b_e_d.html',1,'audio_tools']]],
+  ['pwmaudiostreampico_95',['PWMAudioStreamPico',['../classaudio__tools_1_1_p_w_m_audio_stream_pico.html',1,'audio_tools']]],
+  ['pwmconfig_96',['PWMConfig',['../structaudio__tools_1_1_p_w_m_config.html',1,'audio_tools']]],
+  ['pwmwrite_97',['pwmWrite',['../classaudio__tools_1_1_p_w_m_audio_stream_e_s_p32.html#a8601c26c69bcb1b6950804ec9c69524a',1,'audio_tools::PWMAudioStreamESP32::pwmWrite()'],['../classaudio__tools_1_1_p_w_m_audio_stream_m_b_e_d.html#ad8684d868a820711509336763c220c1d',1,'audio_tools::PWMAudioStreamMBED::pwmWrite()'],['../classaudio__tools_1_1_p_w_m_audio_stream_pico.html#a53b7a80e1d69ad57f02fd1c77a4c3a1a',1,'audio_tools::PWMAudioStreamPico::pwmWrite()']]]
 ];

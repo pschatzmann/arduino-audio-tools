@@ -16,7 +16,8 @@ It should also be possible to connect a headphone to the output pins...
 
 The pins depend on the Processor:
 
-| PIEZO   |  ESP32         | Rpi Pico        |
-| --------| ---------------|-----------------|
-| +       |  GPIO4/GPIO5   | GPIO02/GPIO03   |
-| -       |  GND           |                 |
+
+| PIEZO   |  ESP32       | RPI Pico      | MBED         |
+| --------| -------------|---------------|--------------|
+| +       |  GPI4/GPIO5  | GPI2/GPIO3    | GPI2/GPI3    |
+| -       |  GND         |               |              |

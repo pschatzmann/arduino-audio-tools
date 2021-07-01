@@ -326,7 +326,7 @@ $(function() {
 <div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;      <span class="keywordtype">int</span> result = actual_read_buffer-&gt;available();</div>
 <div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;      <span class="keywordflow">if</span> (result == 0){</div>
 <div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;          <span class="comment">// make current read buffer available again</span></div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;          reset();</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;          resetCurrent();</div>
 <div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;          result = actual_read_buffer==<span class="keyword">nullptr</span>? 0 : actual_read_buffer-&gt;available();</div>
 <div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;      }</div>
 <div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;      <span class="keywordflow">return</span> result;</div>
@@ -355,85 +355,94 @@ $(function() {
 <div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;      <span class="keywordflow">return</span> actual_read_buffer==<span class="keyword">nullptr</span> ? nullptr : actual_read_buffer-&gt;address();</div>
 <div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;  }</div>
 <div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;  </div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;  <span class="comment">// resets the current read buffer and moves to the next available buffer</span></div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;  <span class="comment">// resets all buffers</span></div>
 <div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;  <span class="keywordtype">void</span> reset(){</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;      <span class="keywordflow">if</span> (actual_read_buffer!=<span class="keyword">nullptr</span>){</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;          actual_read_buffer-&gt;reset();</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;          addAvailableBuffer(actual_read_buffer);</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;      }</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;      <span class="comment">// get next read buffer</span></div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;      actual_read_buffer = getNextFilledBuffer();</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;  }</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;  </div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;  <span class="comment">// provides the actual sample rate</span></div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> sampleRate() {</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;      <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> run_time = (millis() - start_time);</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;      <span class="keywordflow">return</span> run_time == 0 ? 0 : sample_count * 1000 / run_time;</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;  }</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;    </div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;      LOGD(__FUNCTION__);</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;      <span class="keywordflow">while</span> (actual_read_buffer!=<span class="keyword">nullptr</span>){</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;          actual_read_buffer-&gt;reset();</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;          addAvailableBuffer(actual_read_buffer);</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;          <span class="comment">// get next read buffer</span></div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;          actual_read_buffer = getNextFilledBuffer();</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;      }</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;  }</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;  </div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;  <span class="comment">// provides the actual sample rate</span></div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> sampleRate() {</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;      <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> run_time = (millis() - start_time);</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;      <span class="keywordflow">return</span> run_time == 0 ? 0 : sample_count * 1000 / run_time;</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;  }</div>
 <div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    </div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;    uint16_t buffer_count = 0;</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    uint16_t write_buffer_count = 0;</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    <a class="code" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer&lt;T&gt;</a> *actual_read_buffer = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    <a class="code" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer&lt;T&gt;</a> *actual_write_buffer = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    <a class="code" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer&lt;T&gt;</a> **avaliable_buffers = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    <a class="code" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer&lt;T&gt;</a> **filled_buffers = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> start_time = 0;</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> sample_count = 0;</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160; </div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    </div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    uint16_t buffer_count = 0;</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    uint16_t write_buffer_count = 0;</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    <a class="code" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer&lt;T&gt;</a> *actual_read_buffer = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    <a class="code" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer&lt;T&gt;</a> *actual_write_buffer = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    <a class="code" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer&lt;T&gt;</a> **avaliable_buffers = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    <a class="code" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer&lt;T&gt;</a> **filled_buffers = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> start_time = 0;</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> sample_count = 0;</div>
 <div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160; </div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    <a class="code" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer&lt;T&gt;</a> *getNextAvailableBuffer() {</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;        <a class="code" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer&lt;T&gt;</a> *result = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0;j&lt;buffer_count;j++){</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;            result = avaliable_buffers[j];</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;            <span class="keywordflow">if</span> (result!=<span class="keyword">nullptr</span>){</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;                avaliable_buffers[j] = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;                <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;            }</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;        }</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;        <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;    }</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    </div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;    <span class="keywordtype">bool</span> addAvailableBuffer(<a class="code" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer&lt;T&gt;</a> *buffer){</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;        <span class="keywordtype">bool</span> result = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0;j&lt;buffer_count;j++){</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;            <span class="keywordflow">if</span> (avaliable_buffers[j]==<span class="keyword">nullptr</span>){</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;                avaliable_buffers[j] = buffer;</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;                result = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;                <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;            }</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;        }</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;        <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;    }</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;    </div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;    <a class="code" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer&lt;T&gt;</a> *getNextFilledBuffer() {</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;        <a class="code" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer&lt;T&gt;</a> *result = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;        <span class="keywordflow">if</span> (write_buffer_count &gt; 0){</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;            <span class="comment">// get oldest entry</span></div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;            result = filled_buffers[0];</div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;            <span class="comment">// move data by 1 entry to the left</span></div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0;j&lt;write_buffer_count-1;j++)</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;                filled_buffers[j]=filled_buffers[j+1];</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;            <span class="comment">// clear last enty</span></div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;            filled_buffers[write_buffer_count-1]=<span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;            write_buffer_count--;</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;        }</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;        <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;    }</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;    </div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;    <span class="keywordtype">bool</span> addFilledBuffer(<a class="code" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer&lt;T&gt;</a> *buffer){</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;        <span class="keywordtype">bool</span> result = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;        <span class="keywordflow">if</span> (write_buffer_count&lt;buffer_count){</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;            filled_buffers[write_buffer_count++] = buffer;</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;            result = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    <span class="keywordtype">void</span> resetCurrent(){</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;      <span class="keywordflow">if</span> (actual_read_buffer!=<span class="keyword">nullptr</span>){</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;          actual_read_buffer-&gt;reset();</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;          addAvailableBuffer(actual_read_buffer);</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;      }</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;      <span class="comment">// get next read buffer</span></div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;      actual_read_buffer = getNextFilledBuffer();</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;    }</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160; </div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;    <a class="code" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer&lt;T&gt;</a> *getNextAvailableBuffer() {</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;        <a class="code" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer&lt;T&gt;</a> *result = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0;j&lt;buffer_count;j++){</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;            result = avaliable_buffers[j];</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;            <span class="keywordflow">if</span> (result!=<span class="keyword">nullptr</span>){</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;                avaliable_buffers[j] = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;            }</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;        }</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;        <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;    }</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;    </div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;    <span class="keywordtype">bool</span> addAvailableBuffer(<a class="code" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer&lt;T&gt;</a> *buffer){</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;        <span class="keywordtype">bool</span> result = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0;j&lt;buffer_count;j++){</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;            <span class="keywordflow">if</span> (avaliable_buffers[j]==<span class="keyword">nullptr</span>){</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;                avaliable_buffers[j] = buffer;</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;                result = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;            }</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;        }</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;        <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;    }</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;    </div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    <a class="code" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer&lt;T&gt;</a> *getNextFilledBuffer() {</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;        <a class="code" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer&lt;T&gt;</a> *result = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;        <span class="keywordflow">if</span> (write_buffer_count &gt; 0){</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;            <span class="comment">// get oldest entry</span></div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;            result = filled_buffers[0];</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;            <span class="comment">// move data by 1 entry to the left</span></div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0;j&lt;write_buffer_count-1;j++)</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;                filled_buffers[j]=filled_buffers[j+1];</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;            <span class="comment">// clear last enty</span></div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;            filled_buffers[write_buffer_count-1]=<span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;            write_buffer_count--;</div>
 <div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;        }</div>
 <div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;        <span class="keywordflow">return</span> result;</div>
 <div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;    }</div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160; </div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;};</div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160; </div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;} <span class="comment">// namespace</span></div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;    </div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;    <span class="keywordtype">bool</span> addFilledBuffer(<a class="code" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer&lt;T&gt;</a> *buffer){</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;        <span class="keywordtype">bool</span> result = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;        <span class="keywordflow">if</span> (write_buffer_count&lt;buffer_count){</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;            filled_buffers[write_buffer_count++] = buffer;</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;            result = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;        }</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;        <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;    }</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160; </div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;};</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160; </div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;} <span class="comment">// namespace</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_buffer_html"><div class="ttname"><a href="classaudio__tools_1_1_base_buffer.html">audio_tools::BaseBuffer</a></div><div class="ttdoc">Shared functionality of all buffers.</div><div class="ttdef"><b>Definition:</b> Buffers.h:17</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_n_buffer_html"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer.html">audio_tools::NBuffer</a></div><div class="ttdoc">A lock free N buffer. If count=2 we create a DoubleBuffer, if count=3 a TripleBuffer etc.</div><div class="ttdef"><b>Definition:</b> Buffers.h:184</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_single_buffer_html"><div class="ttname"><a href="classaudio__tools_1_1_single_buffer.html">audio_tools::SingleBuffer</a></div><div class="ttdoc">A simple Buffer implementation which just uses a (dynamically sized) array.</div><div class="ttdef"><b>Definition:</b> Buffers.h:102</div></div>
