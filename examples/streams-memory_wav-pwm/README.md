@@ -13,4 +13,3 @@ The pins depend on the Processor:
 | +       |  GPIO4         | GPIO2           |
 | -       |  GND           |                 |
 
-
