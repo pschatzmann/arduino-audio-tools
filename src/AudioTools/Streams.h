@@ -56,7 +56,7 @@ class MemoryStream : public Stream {
 
         virtual size_t write(const uint8_t *buffer, size_t size){
             size_t result = 0;
-            for (int j=0;j<size;j++){
+            for (size_t j=0;j<size;j++){
                 if(!write(buffer[j])){
                     break;
                 }
@@ -531,7 +531,6 @@ class I2SStream : public BufferedStream, public AudioBaseInfoDependent  {
 
         /// updates the sample rate dynamically 
         virtual void setAudioInfo(AudioBaseInfo info) {
-            bool is_update = false;
             I2SConfig cfg = i2s.config();
             if (cfg.sample_rate != info.sample_rate
                 || cfg.channels != info.channels

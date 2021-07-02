@@ -308,5 +308,76 @@ class CallbackConverter {
 };
 
 
+/**
+ * @brief Reads n numbers from an Arduino Stream
+ * 
+ */
+class NumberReader {
+    public:
+        NumberReader(Stream &in) {
+            stream_ptr = &in;
+        }
+
+        NumberReader() {
+        }
+
+        bool read(int inBits, int outBits, bool outSigned, int n, int32_t *result){
+            bool result_bool = false;
+            int len = inBits/8 * n;
+            if (stream_ptr!=nullptr && stream_ptr->available()>len){
+                uint8_t buffer[len];
+                stream_ptr->readBytes((uint8_t*)buffer, n * len);
+                result_bool = toNumbers((void*)buffer, inBits, outBits, outSigned, n, result);
+            }
+            return result_bool;
+        }
+
+        /// converts a buffer to a number array
+        bool toNumbers(void *bufferIn, int inBits, int outBits, bool outSigned, int n, int32_t *result){
+            bool result_bool = false;
+            switch(inBits){
+                case 8: {
+                        int8_t *buffer=(int8_t *)bufferIn;
+                        for (int j=0;j<n;j++){
+                            result[j] = scale(buffer[j],inBits,outBits,outSigned);
+                        }
+                        result_bool = true;
+                    }
+                    break;
+                case 16: {
+                        int16_t *buffer=(int16_t *)bufferIn;
+                        for (int j=0;j<n;j++){
+                            result[j] = scale(buffer[j],inBits,outBits,outSigned);
+                        }
+                        result_bool = true;
+                    }
+                    break;
+                case 32: {
+                        int32_t *buffer=(int32_t*)bufferIn;
+                        for (int j=0;j<n;j++){
+                            result[j] = scale(buffer[j],inBits,outBits,outSigned);
+                        }
+                        result_bool = true;
+                    }
+                    break;
+            }
+            return result_bool;
+
+        }
+
+    protected:
+        Stream *stream_ptr=nullptr;
+
+        /// scale the value
+        int32_t scale(int32_t value, int inBits, int outBits, bool outSigned=true){
+            int32_t result = static_cast<float>(value) / maxValue(inBits) * maxValue(outBits);
+            if (!outSigned){
+                result += (maxValue(outBits) / 2);
+            }
+            return result;
+        }
+
+};
+
 
 }

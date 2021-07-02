@@ -14,9 +14,16 @@ namespace audio_tools {
 template <class T>
 class SoundGenerator  {
     public:
+        SoundGenerator() {
+        }
+
+        virtual ~SoundGenerator() {
+            end();
+        }
+
         /// Provides the samples into simple array - which represents 1 channel
         virtual size_t readSamples(T* data, size_t sampleCount=512){
-            for (int j=0;j<sampleCount;j++){
+            for (size_t j=0;j<sampleCount;j++){
                 data[j] = readSample();
             }
             return sampleCount;

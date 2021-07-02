@@ -173,6 +173,7 @@ class PWMAudioStreamBase : public Stream {
             LOGI("->Buffer available: %d", buffer->available());
             LOGI("->Buffer available for write: %d", buffer->availableToWrite());
             LOGI("->is_timer_started: %s ", is_timer_started ? "true" : "false");
+            return true;
         } 
 
         virtual void end(){

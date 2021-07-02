@@ -185,6 +185,7 @@ This is currently work in progress:
 |------------------------|---------|
 | Analog input - ADC     | tested  |
 | I2S                    | tested  |
+| PWM Output             | tested  |
 | Files (RAW, MP3...)    | tested  |
 | Streams                | tested  |
 | WAV encoding/deconding | tested  |          

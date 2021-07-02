@@ -130,7 +130,9 @@ class StreamCopyT {
                     break;
                 }
                 
-                if (retry>1) LOGI("try write - %d ",retry);
+                if (retry>1) {
+                    LOGI("try write - %d ",retry);
+                }
 
             }
             return total;
