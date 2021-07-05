@@ -66,17 +66,41 @@ class MozziGenerator : public SoundGenerator<AudioOutputStorage_t> {
 
         /// Provides a single sample
         virtual AudioOutputStorage_t readSample() {
+            if (info.updateAudio==nullptr){
+                LOGE("The updateAudio method has not been defined!");
+                end();
+                return 0;
+            }
+
+            // return prior right value from buffer
             if (is_read_buffer_filled){
                 // for stereo output we might have the value already
                 is_read_buffer_filled = false;
                 return read_buffer;
             }
 
+            // control update
             if (--control_counter<0){
                 control_counter = control_counter_max;
-                info.updateControl();
+                if (info.updateControl!=nullptr){
+                    info.updateControl();
+                }
             }
-            
+
+            // return left value
+            AudioOutputStorage_t result = updateSample();
+            return result;
+        }
+
+    protected:
+        MozziConfig info;
+        int control_counter_max;
+        int control_counter;
+        int read_buffer;
+        bool is_read_buffer_filled = false;
+
+
+        AudioOutputStorage_t updateSample(){
             AudioOutput out = info.updateAudio();
             // requested mono
             AudioOutputStorage_t result = 0;
@@ -105,12 +129,6 @@ class MozziGenerator : public SoundGenerator<AudioOutputStorage_t> {
             return result;
         }
 
-    protected:
-        MozziConfig info;
-        int control_counter_max;
-        int control_counter;
-        int read_buffer;
-        bool is_read_buffer_filled = false;
 
 };
 
