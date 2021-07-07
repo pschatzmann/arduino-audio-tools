@@ -1,7 +1,7 @@
 /**
- * @file streams-mozzi-webserver_wav.ino
+ * @file streams-mozzi-webserver.ino
  * @author Phil Schatzmann
- * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/streams-mozzi-webserver_wav/README.md
+ * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/streams-mozzi-webserver/README.md
  * 
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -19,10 +19,9 @@
 using namespace audio_tools;  
 
 typedef int16_t sound_t;                                  // sound will be represented as int16_t (with 2 bytes)
-uint8_t channels = 1;                                     // The stream will have 2 channels 
-MozziGenerator mozzi(CONTROL_RATE);                       // subclass of SoundGenerator 
-GeneratedSoundStream<sound_t> in(mozzi, channels);        // Stream generated with mozzi
-AudioWAVServer server("network", "password");
+uint8_t channels = 2;                                     // The stream will have 2 channels 
+MozziStream mozzi;
+AudioWAVServer server("ssid","password");
 
 /// Copied from AMsynth.ino
 #define CONTROL_RATE 64 // Hz, powers of 2 are most reliable
@@ -46,18 +45,20 @@ Q8n0 octave_start_note = 42;
 
 void setup(){
   Serial.begin(115200);
+  AudioLogger::instance().begin(Serial, AudioLogger::Debug);
 
-  // We send the audio via the server
-  server.begin(in, mozzi.config().sample_rate, channels);
+  // configure mozzi
+  auto cfg = mozzi.defaultConfig();
+  mozzi.begin(cfg);
+  
+  // We connect to the server  
+  server.begin(mozzi, cfg.sample_rate, cfg.channels);
 
   // Start Mozzi
-  ratio = float_to_Q8n8(3.0f);   // define modulation ratio in float and convert to fixed-point
-  kNoteChangeDelay.set(200); // note duration ms, within resolution of CONTROL_RATE
-  aModDepth.setFreq(13.f);     // vary mod depth to highlight am effects
+  ratio = float_to_Q8n8(3.0f);  // define modulation ratio in float and convert to fixed-point
+  kNoteChangeDelay.set(200);    // note duration ms, within resolution of CONTROL_RATE
+  aModDepth.setFreq(13.f);      // vary mod depth to highlight am effects
   randSeed(); // reseed the random generator for different results each time the sketch runs
-
-  // Start Mozzi Stream
-  in.begin();
 }
 
 void updateControl(){
@@ -111,5 +112,5 @@ AudioOutput_t updateAudio(){
 
 // Arduino loop  
 void loop() {
-  server.doLoop();
+  server.copy();
 }

@@ -8,16 +8,6 @@
  * @copyright Copyright (c) 2021
  */
 
-/**
- * @file stream-memory_wav-pwm.ino
- * @author Phil Schatzmann
- * @brief decode WAV stream and output to PWM pins
- * @version 0.1
- * @date 2021-01-24
- * 
- * @copyright Copyright (c) 2021
- */
-
 #include "AudioTools.h"
 #include "CodecWAV.h"
 //#include "knghtsng.h"

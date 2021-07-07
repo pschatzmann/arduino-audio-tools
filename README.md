@@ -106,7 +106,6 @@ And some more useful examples:
 - [streams-memory_raw-i2s](examples/streams-memory_raw-i2s) - Play music form Flash Memory via I2S to External DAC
 - [streams-url_raw-serial](examples/streams-url_raw-serial) Displaying a music file from the internet on the Serial Plotter
 - [streams-url_raw-I2S.ino](examples/streams-url_raw-i2s) Streaming a File from the Internet to on external DAC via I2S
-- [streams-mozzi-a2dp](examples/streams-mozzi-a2dp) Use Mozzi to generate Sound to be sent to a Bluetooth Speaker
 - [streams-url_wav-i2s](examples/streams-url_wav-i2s) Text to Speach example using Rhasspy
 
 ... these are just a few examples, but you can combine any Input Stream with any Output Stream as you like...
