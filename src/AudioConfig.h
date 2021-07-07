@@ -59,7 +59,7 @@
  * @brief Optional Functionality - comment out if not wanted 
  */
 #ifndef __arm__
-#define USE_URL_ARDUINO
+//#define USE_URL_ARDUINO
 #endif
 
 // Activate ESP32 Audio - for ESP32, ESP8266 and Raspberry Pico

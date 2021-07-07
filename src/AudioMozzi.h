@@ -175,6 +175,10 @@ class MozziStream : public Stream {
             if (input_ptr == nullptr && config.control_rate>0){
                 input_ptr = new MozziGenerator(config);
             }
+            if (cfg.channels != config.channels){
+                LOGE("You need to change the AUDIO_CHANNELS in mozzi_config.h to %d", cfg.channels);
+            }
+
             Mozzi.start(0);
         }
 
