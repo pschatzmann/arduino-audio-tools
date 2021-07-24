@@ -92,7 +92,7 @@ class PortAudioStream : public BufferedStream {
         }
 
         operator boolean() {
-            return err != paNoError;
+            return err == paNoError;
         }
 
     protected:
