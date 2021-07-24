@@ -14,11 +14,11 @@ void setup(void) {
   Serial.begin(115200);
 
   // open output
-  auto config = out.defaultConfig();
+  PortAudioInfo config = out.defaultConfig();
   config.sample_rate = sample_rate;
   config.channels = channels;
   config.bits_per_sample = sizeof(int16_t)*8;
-  out.begin();
+  out.begin(config);
 
   // Setup sine wave
   sineWave.begin(sample_rate, B4);

@@ -13,8 +13,9 @@
  * 
  */
 class PortAudioInfo : public AudioBaseInfo {
-    bool is_input = false;
-    bool is_output = true;
+    public:
+        bool is_input = false;
+        bool is_output = true;
 };
 
 /**
@@ -49,20 +50,17 @@ class PortAudioStream :  BufferedStream {
 
             /* Open an audio I/O stream. */
             err = Pa_OpenDefaultStream( &stream,
-                                        info.is_input ? info.channels : 0,          /* no input channels */
-                                        info.is_output ? info.channels : 0,          /* stereo output */
-                                        getFormat(info.bits_per_sample),  /* 32 bit integer */
-                                        info.sample_rate,
-                                        paFramesPerBufferUnspecified, /* frames per buffer, i.e. the number
-                                                        of sample frames that PortAudio will
-                                                        request from the callback. Many apps
-                                                        may want to use
-                                                        paFramesPerBufferUnspecified, which
-                                                        tells PortAudio to pick the best,
-                                                        possibly changing, buffer size.*/
-                                        nullptr, /* this is your callback function */
-                                        nullptr ); /*This is a pointer that will be passed to
-                                                        your callback*/
+                info.is_input ? info.channels : 0,          /* no input channels */
+                info.is_output ? info.channels : 0,          /* stereo output */
+                getFormat(info.bits_per_sample),  
+                info.sample_rate,
+                paFramesPerBufferUnspecified, /* frames per buffer, i.e. the number
+                                of sample frames that PortAudio will
+                                request from the callback. Many apps
+                                may want to use*/
+                nullptr, /* this is your callback function */
+                nullptr ); /*This is a pointer that will be passed to
+                                your callback*/
             if( err != paNoError ) {
                 LOGE(  "PortAudio error: %s\n", Pa_GetErrorText( err ) );
             }
@@ -89,7 +87,6 @@ class PortAudioStream :  BufferedStream {
         PaStream *stream = nullptr;
         PaError err = paNoError;
         PortAudioInfo info;
-
 
         virtual size_t writeExt(const uint8_t* data, size_t len) {  
             size_t result = 0;
