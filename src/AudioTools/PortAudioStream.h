@@ -25,7 +25,7 @@ class PortAudioConfig : public AudioBaseInfo {
  * @brief Arduino Audio Stream using PortAudio
  * 
  */
-class PortAudioStream :  BufferedStream {
+class PortAudioStream : public BufferedStream {
     public:
         PortAudioStream():BufferedStream(DEFAULT_BUFFER_SIZE) {
         }
