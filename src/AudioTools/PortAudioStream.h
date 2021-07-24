@@ -15,7 +15,7 @@ namespace audio_tools {
  * @brief PortAudio information
  * 
  */
-class PortAudioInfo : public AudioBaseInfo {
+class PortAudioConfig : public AudioBaseInfo {
     public:
         bool is_input = false;
         bool is_output = true;
@@ -34,16 +34,16 @@ class PortAudioStream :  BufferedStream {
             Pa_Terminate();
         }
 
-        PortAudioInfo getDefaultInfo() {
-            PortAudioInfo default_info;
+        PortAudioConfig defaultConfig() {
+            PortAudioConfig default_info;
             return default_info;
         }
 
         void begin() {
-            begin(getDefaultInfo());
+            begin(defaultConfig());
         }
 
-        void begin(PortAudioInfo info) {
+        void begin(PortAudioConfig info) {
             this->info = info;
             err = Pa_Initialize();
             if( err != paNoError ) {
@@ -89,7 +89,7 @@ class PortAudioStream :  BufferedStream {
     protected:
         PaStream *stream = nullptr;
         PaError err = paNoError;
-        PortAudioInfo info;
+        PortAudioConfig info;
 
         virtual size_t writeExt(const uint8_t* data, size_t len) {  
             size_t result = 0;

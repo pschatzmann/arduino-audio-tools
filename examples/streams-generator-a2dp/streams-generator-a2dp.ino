@@ -30,7 +30,7 @@ void setup(void) {
   Serial.println("A2DP is connected now...");
 
   // Setup sine wave
-  sineWave.begin(sample_rate, B4);
+  sineWave.begin(sample_rate, N_B4);
 
 }
 

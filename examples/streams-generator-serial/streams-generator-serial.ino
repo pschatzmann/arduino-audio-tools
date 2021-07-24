@@ -24,7 +24,7 @@ void setup(void) {
   Serial.begin(115200);
 
   // Setup sine wave
-  sineWave.begin(sample_rate, B4);
+  sineWave.begin(sample_rate, N_B4);
 }
 
 
