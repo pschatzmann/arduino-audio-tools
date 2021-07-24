@@ -32,20 +32,12 @@ if(NOT arduino_audio_tools_POPULATED)
     add_subdirectory(${arduino_audio_tools_SOURCE_DIR})
 endif()
 
-
-# build sketch to executable
+# build sketch as executable
 add_executable (generator generator.cpp)
+
+# use main() from arduino_emulator
+target_compile_definitions(arduino_emulator PUBLIC -DDEFINE_MAIN)
 
 # specify libraries
 target_link_libraries(generator portaudio_static arduino_emulator arduino-audio-tools)
 
-# Hmm...This should not be needed!
-target_include_directories(generator PRIVATE
-   "${arduino_emulator_SOURCE_DIR}/ArduinoCore-API/api"
-   "${arduino_emulator_SOURCE_DIR}/ArduinoCore-Linux/cores/arduino"
-   "${arduino_audio_tools_SOURCE_DIR}/src"
-)
-
-
-# define dependencies
-add_dependencies(generator portaudio_static arduino_emulator arduino-audio-tools ) 

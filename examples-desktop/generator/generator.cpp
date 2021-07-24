@@ -1,11 +1,6 @@
-// Simple wrapper to make Arduino sketch compilable by cpp in cmake
+// Simple wrapper for Arduino sketch to compilable with cpp in cmake
 #include "Arduino.h"
+
+// Provide sketch
 #include "generator.ino"
 
-// Privide main()
-int main(){
-  setup();
-  while(true){
-    loop();
-  }
-}

@@ -12,6 +12,7 @@ StreamCopy copier(out, in); // copy in to out
 // Arduino Setup
 void setup(void) {
   Serial.begin(115200);
+  AudioLogger::instance().begin(Serial, AudioLogger::Debug);
 
   // open output
   PortAudioConfig config = out.defaultConfig();
