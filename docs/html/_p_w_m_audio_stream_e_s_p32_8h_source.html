@@ -75,7 +75,7 @@ $(function() {
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;AudioPWM/PWMAudioStreamBase.h&quot;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span>audio_tools {</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaudio__tools.html">audio_tools</a> {</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// forward declaration</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">class </span>PWMAudioStreamESP32;</div>
@@ -196,7 +196,7 @@ $(function() {
 <div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;      </div>
 <div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;};</div>
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="keywordtype">void</span> IRAM_ATTR defaultPWMAudioOutputCallback() {</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="keywordtype">void</span> IRAM_ATTR <a class="code" href="namespaceaudio__tools.html#a6d3366afe95c009b2a445ebcc5eeccac">defaultPWMAudioOutputCallback</a>() {</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <span class="keywordflow">if</span> (accessAudioPWM!=<span class="keyword">nullptr</span>){</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        portENTER_CRITICAL_ISR(&amp;(accessAudioPWM-&gt;timerMux));</div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        accessAudioPWM-&gt;playNextFrame();</div>
@@ -220,6 +220,8 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_p_w_m_audio_stream_e_s_p32_html_ad092038f8ee364f491bab5882e7a4753"><div class="ttname"><a href="classaudio__tools_1_1_p_w_m_audio_stream_e_s_p32.html#ad092038f8ee364f491bab5882e7a4753">audio_tools::PWMAudioStreamESP32::setupTimer</a></div><div class="ttdeci">virtual void setupTimer()</div><div class="ttdoc">Setup ESP32 timer with callback.</div><div class="ttdef"><b>Definition:</b> PWMAudioStreamESP32.h:97</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_p_w_m_audio_stream_e_s_p32_html_adee2ba07dacdf8fd8ac11fb43a89c919"><div class="ttname"><a href="classaudio__tools_1_1_p_w_m_audio_stream_e_s_p32.html#adee2ba07dacdf8fd8ac11fb43a89c919">audio_tools::PWMAudioStreamESP32::frequency</a></div><div class="ttdeci">float frequency(int resolution)</div><div class="ttdoc">determiens the PWM frequency based on the requested resolution</div><div class="ttdef"><b>Definition:</b> PWMAudioStreamESP32.h:129</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_vector_html"><div class="ttname"><a href="classaudio__tools_1_1_vector.html">audio_tools::Vector</a></div><div class="ttdoc">Vector implementation which provides the most important methods as defined by std::vector....</div><div class="ttdef"><b>Definition:</b> Vector.h:15</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AudioA2DP.h:19</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html_a6d3366afe95c009b2a445ebcc5eeccac"><div class="ttname"><a href="namespaceaudio__tools.html#a6d3366afe95c009b2a445ebcc5eeccac">audio_tools::defaultPWMAudioOutputCallback</a></div><div class="ttdeci">void defaultPWMAudioOutputCallback()</div><div class="ttdoc">separate method that can be defined as friend so that we can access protected information</div><div class="ttdef"><b>Definition:</b> PWMAudioStreamAVR.h:130</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_pin_info_e_s_p32_html"><div class="ttname"><a href="structaudio__tools_1_1_pin_info_e_s_p32.html">audio_tools::PinInfoESP32</a></div><div class="ttdoc">Information for a PIN.</div><div class="ttdef"><b>Definition:</b> PWMAudioStreamESP32.h:20</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

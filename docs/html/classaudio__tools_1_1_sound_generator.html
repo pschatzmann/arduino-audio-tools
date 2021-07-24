@@ -61,7 +61,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>audio_tools</b></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -94,6 +94,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0724f3d60804dbabfeee91b5224f1c6c"><td class="memItemLeft" align="right" valign="top"><a id="a0724f3d60804dbabfeee91b5224f1c6c"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> ()</td></tr>
 <tr class="separator:a0724f3d60804dbabfeee91b5224f1c6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03dfc9fa19784d5a0feea00e18e78c82"><td class="memItemLeft" align="right" valign="top"><a id="a03dfc9fa19784d5a0feea00e18e78c82"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b> ()</td></tr>
+<tr class="separator:a03dfc9fa19784d5a0feea00e18e78c82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea4c7b4838a41b359d80dbaf7abe4f97"><td class="memItemLeft" align="right" valign="top"><a id="aea4c7b4838a41b359d80dbaf7abe4f97"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#aea4c7b4838a41b359d80dbaf7abe4f97">end</a> ()</td></tr>
 <tr class="memdesc:aea4c7b4838a41b359d80dbaf7abe4f97"><td class="mdescLeft">&#160;</td><td class="mdescRight">ends the processing <br /></td></tr>
@@ -101,10 +104,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a4f0c95d02901c5d5c0af6d521745a2a8"><td class="memItemLeft" align="right" valign="top"><a id="a4f0c95d02901c5d5c0af6d521745a2a8"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive</b> ()</td></tr>
 <tr class="separator:a4f0c95d02901c5d5c0af6d521745a2a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64df0d06fc6cfa5e5b713f614ccde9ed"><td class="memItemLeft" align="right" valign="top"><a id="a64df0d06fc6cfa5e5b713f614ccde9ed"></a>
-virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#a64df0d06fc6cfa5e5b713f614ccde9ed">readBytes</a> (uint8_t *buffer, size_t lengthBytes, uint8_t channels=1)</td></tr>
-<tr class="memdesc:a64df0d06fc6cfa5e5b713f614ccde9ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the data as byte array. <br /></td></tr>
-<tr class="separator:a64df0d06fc6cfa5e5b713f614ccde9ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8534989c802aeb687aa13b9a3d6ee781"><td class="memItemLeft" align="right" valign="top"><a id="a8534989c802aeb687aa13b9a3d6ee781"></a>
+virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#a8534989c802aeb687aa13b9a3d6ee781">readBytes</a> (uint8_t *buffer, size_t lengthBytes)</td></tr>
+<tr class="memdesc:a8534989c802aeb687aa13b9a3d6ee781"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the data as byte array with the requested number of channels. <br /></td></tr>
+<tr class="separator:a8534989c802aeb687aa13b9a3d6ee781"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abbb42e8d17faee7775e7aaa9ce3a7c91"><td class="memItemLeft" align="right" valign="top"><a id="abbb42e8d17faee7775e7aaa9ce3a7c91"></a>
 virtual T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#abbb42e8d17faee7775e7aaa9ce3a7c91">readSample</a> ()=0</td></tr>
 <tr class="memdesc:abbb42e8d17faee7775e7aaa9ce3a7c91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides a single sample. <br /></td></tr>
@@ -117,12 +120,21 @@ virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#a2b944991871ea46eddac66f4dad958da">readSamples</a> (T src[][2], size_t frameCount)</td></tr>
 <tr class="memdesc:a2b944991871ea46eddac66f4dad958da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the samples into a 2 channel array. <br /></td></tr>
 <tr class="separator:a2b944991871ea46eddac66f4dad958da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58638da917b965730488e7b798b8a931"><td class="memItemLeft" align="right" valign="top"><a id="a58638da917b965730488e7b798b8a931"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setChannels</b> (int ch)</td></tr>
+<tr class="separator:a58638da917b965730488e7b798b8a931"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a5e4b8a5ae783890d5af44bcba043ccaf"><td class="memItemLeft" align="right" valign="top"><a id="a5e4b8a5ae783890d5af44bcba043ccaf"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>active</b> = false</td></tr>
 <tr class="separator:a5e4b8a5ae783890d5af44bcba043ccaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2de041ab50f51d1a5642124d68265d28"><td class="memItemLeft" align="right" valign="top"><a id="a2de041ab50f51d1a5642124d68265d28"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>activeWarningIssued</b> = false</td></tr>
+<tr class="separator:a2de041ab50f51d1a5642124d68265d28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2385abe592d12223ea26589b021a442a"><td class="memItemLeft" align="right" valign="top"><a id="a2385abe592d12223ea26589b021a442a"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>output_channels</b> = 1</td></tr>
+<tr class="separator:a2385abe592d12223ea26589b021a442a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class T&gt;<br />

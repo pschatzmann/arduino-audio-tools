@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['_7eaacencoder_153',['~AACEncoder',['../classaudio__tools_1_1_a_a_c_encoder.html#a569d64f3e0d1d8505851a96994b90eac',1,'audio_tools::AACEncoder']]],
-  ['_7eanalogaudio_154',['~AnalogAudio',['../classaudio__tools_1_1_analog_audio.html#a9a58964b46b5d88a22d325c41e5328df',1,'audio_tools::AnalogAudio']]],
-  ['_7ei2s_155',['~I2S',['../classaudio__tools_1_1_i2_s.html#aebea427f445b4efe619cd80926e10625',1,'audio_tools::I2S']]]
+  ['_7eaacencoder_163',['~AACEncoder',['../classaudio__tools_1_1_a_a_c_encoder.html#a569d64f3e0d1d8505851a96994b90eac',1,'audio_tools::AACEncoder']]],
+  ['_7eanalogaudio_164',['~AnalogAudio',['../classaudio__tools_1_1_analog_audio.html#a9a58964b46b5d88a22d325c41e5328df',1,'audio_tools::AnalogAudio']]],
+  ['_7ei2s_165',['~I2S',['../classaudio__tools_1_1_i2_s.html#aebea427f445b4efe619cd80926e10625',1,'audio_tools::I2S']]]
 ];
