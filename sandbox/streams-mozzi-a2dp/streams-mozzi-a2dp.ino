@@ -1,5 +1,5 @@
 /**
- * @file streams-generator-a2dp.ino
+ * @file streams-mozzi-a2dp.ino
  * @author Phil Schatzmann
  * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/streams-generator-a2dp/README.md
  * 
@@ -19,11 +19,8 @@
 
 using namespace audio_tools;  
 
-typedef int16_t sound_t;                                  // sound will be represented as int16_t (with 2 bytes)
-uint8_t channels = 2;                                     // The stream will have 2 channels 
-MozziGenerator mozzi(CONTROL_RATE);                       // subclass of SoundGenerator 
-GeneratedSoundStream<sound_t> in(mozzi, channels);        // Stream generated with mozzi
-A2DPStream out = A2DPStream::instance() ;                 // A2DP output - A2DPStream is a singleton!
+MozziStream in;                              // Stream generated with mozzi
+A2DPStream out = A2DPStream::instance() ;    // A2DP output - A2DPStream is a singleton!
 StreamCopy copier(out, in); // copy in to out
 
 /// Copied from AMsynth.ino
@@ -45,24 +42,33 @@ Q24n8 mod_freq; // unsigned long with 24 integer bits and 8 fractional bits
 // for random notes
 Q8n0 octave_start_note = 42;
 
-
+// Setup Mozzi and A2DP
 void setup(){
   Serial.begin(115200);
+  AudioLogger::instance().begin(Serial, AudioLogger::Debug);
 
-  if (mozzi.config().sample_rate!=44100){
-    Serial.println("Please set the AUDIO_RATE in the mozzi_config.h to 44100");
-    stop();
-  }
+  // setup MozziStream
+  auto cfg = in.defaultConfig();
+  cfg.channels = 2;
+  cfg.updateAudio = updateAudio;
+  cfg.updateControl = updateControl;
+  in.begin(cfg);
 
   // We send the test signal via A2DP - so we conect to the MyMusic Bluetooth Speaker
   out.begin(TX_MODE, "MyMusic");
   Serial.println("A2DP is connected now...");
 
+  // setup Mozzi 
   ratio = float_to_Q8n8(3.0f);   // define modulation ratio in float and convert to fixed-point
   kNoteChangeDelay.set(200); // note duration ms, within resolution of CONTROL_RATE
   aModDepth.setFreq(13.f);     // vary mod depth to highlight am effects
   randSeed(); // reseed the random generator for different results each time the sketch runs
-  in.begin();
+}
+
+// Arduino loop  
+void loop() {
+  if (out)
+    copier.copy();
 }
 
 void updateControl(){
@@ -112,10 +118,4 @@ void updateControl(){
 AudioOutput_t updateAudio(){
   int32_t mod = (128u+ aModulator.next()) * ((byte)128+ aModDepth.next());
   return MonoOutput::fromNBit(24, mod * aCarrier.next());
-}
-
-// Arduino loop  
-void loop() {
-  if (out)
-    copier.copy();
 }
