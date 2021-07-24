@@ -109,9 +109,9 @@ Dependent on the example you might need to install some of the following librari
 
 ### Documentation
 
-Here is the generated [Class documentation](https://pschatzmann.github.io/arduino-audio-tools/html/annotated.html). 
-
-You also might find further information in [one of my blogs](https://www.pschatzmann.ch/home/category/machine-sound/)
+- Here is the generated [Class documentation](https://pschatzmann.github.io/arduino-audio-tools/html/annotated.html). 
+- Please also check out the [information in the wiki](https://github.com/pschatzmann/arduino-audio-tools/wiki)
+- You also might find further information in [one of my blogs](https://www.pschatzmann.ch/home/category/machine-sound/)
 
 
 ### Installation
