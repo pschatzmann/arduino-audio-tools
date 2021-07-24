@@ -11,10 +11,10 @@
 using namespace audio_tools;  
 
 //int pins[] = {22, 23};
-int channels = 2;
+int channels = 1;
 uint16_t sample_rate=22000;
 SineWaveGenerator<int16_t> sineWave(32000); // subclass of SoundGenerator with max amplitude of 32000
-GeneratedSoundStream<int16_t> sound(sineWave, channels);  // Stream generated from sine wave
+GeneratedSoundStream<int16_t> sound(sineWave);  // Stream generated from sine wave
 PWMAudioStream pwm;                  
 StreamCopy copier(pwm, sound);    // copy in to out
 
@@ -24,7 +24,7 @@ void setup() {
   AudioLogger::instance().begin(Serial, AudioLogger::Warning);  
 
   // setup sine wave
-  sineWave.begin(sample_rate, N_B4);
+  sineWave.begin(channels, sample_rate, N_B4);
 
   // setup PWM output
   auto config = pwm.defaultConfig();

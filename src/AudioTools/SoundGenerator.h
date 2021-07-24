@@ -46,7 +46,7 @@ class SoundGenerator  {
 
         /// Provides the data as byte array with the requested number of channels
         virtual size_t readBytes( uint8_t *buffer, size_t lengthBytes){
-            LOGD("readBytes: %d - channesl = %d",lengthBytes);
+            LOGD("readBytes: %d - channesl = %d", lengthBytes);
             size_t result = 0;
             int ch = channels();
             int frame_size = sizeof(T) * ch;
@@ -132,6 +132,7 @@ class SineWaveGenerator : public SoundGenerator<T> {
 
         void begin(int channels, uint16_t sample_rate, uint16_t frequency=0){
             LOGI("SineWaveGenerator::begin");
+            this->setChannels(channels);
             this->m_frequency = frequency;
             this->m_sample_rate = sample_rate;
             this->m_deltaTime = 1.0 / m_sample_rate;
@@ -163,6 +164,7 @@ class SineWaveGenerator : public SoundGenerator<T> {
         float double_Pi = PI * 2.0;
 
         void logStatus() {
+            LOGI( "channels: %d", this->channels() );
             LOGI( "frequency: %f", this->m_frequency );
             LOGI( "sample rate: %u", this->m_sample_rate );
             LOGI( "amplitude: %f", this->m_amplitude );

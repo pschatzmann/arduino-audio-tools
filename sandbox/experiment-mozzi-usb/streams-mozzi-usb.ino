@@ -22,7 +22,7 @@ using namespace audio_tools;
 typedef int16_t sound_t;                                  // sound will be represented as int16_t (with 2 bytes)
 uint8_t channels = 2;                                     // The stream will have 2 channels 
 MozziGenerator mozzi(CONTROL_RATE);                       // subclass of SoundGenerator 
-GeneratedSoundStream<sound_t> in(mozzi, channels);        // Stream generated with mozzi
+GeneratedSoundStream<sound_t> in(mozzi);        // Stream generated with mozzi
 AudioUSB out;                                            // UDP Output - A2DPStream is a singleton!
 StreamCopy copier(out, in); // copy in to out
 

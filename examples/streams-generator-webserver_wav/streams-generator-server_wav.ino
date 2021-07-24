@@ -13,7 +13,7 @@ const int sample_rate = 10000;
 const int channels = 1;
 
 SineWaveGenerator<int16_t> sineWave;                      // subclass of SoundGenerator with max amplitude of 32000
-GeneratedSoundStream<int16_t> in(sineWave, channels);     // Stream generated from sine wave
+GeneratedSoundStream<int16_t> in(sineWave);     // Stream generated from sine wave
 
 
 void setup() {
@@ -24,7 +24,7 @@ void setup() {
   server.begin(in, sample_rate, channels);
 
   // start generation of sound
-  sineWave.begin(sample_rate, N_B4);
+  sineWave.begin(channels, sample_rate, N_B4);
   in.begin();
 }
 

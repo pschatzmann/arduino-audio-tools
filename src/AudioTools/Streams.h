@@ -133,10 +133,9 @@ class MemoryStream : public Stream {
 template <class T>
 class GeneratedSoundStream : public Stream {
     public:
-        GeneratedSoundStream(SoundGenerator<T> &generator, uint8_t channels=2){
-            LOGD("GeneratedSoundStream channels: %d", channels);
+        GeneratedSoundStream(SoundGenerator<T> &generator){
+	 		LOGD(__FUNCTION__);
             this->generator_ptr = &generator;
-            this->channels = channels;
         }
         
         /// unsupported operations
@@ -169,7 +168,7 @@ class GeneratedSoundStream : public Stream {
         /// privide the data as byte stream
         size_t readBytes( char *buffer, size_t length) {
             LOGD("GeneratedSoundStream::readBytes: %zu", length);
-            return generator_ptr->readBytes((uint8_t*)buffer, length, channels);
+            return generator_ptr->readBytes((uint8_t*)buffer, length);
         }
 
         /// start the processing
@@ -189,7 +188,6 @@ class GeneratedSoundStream : public Stream {
 
     protected:
         SoundGenerator<T> *generator_ptr;  
-        uint8_t channels; 
 
         int not_supported() {
             LOGE("GeneratedSoundStream-unsupported operation!");
