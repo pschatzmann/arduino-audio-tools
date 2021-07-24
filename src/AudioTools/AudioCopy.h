@@ -55,12 +55,13 @@ class StreamCopyT {
             size_t delayCount = 0;
             size_t len = available();
             size_t bytes_to_read;
+            size_t bytes_read; 
 
             if (len>0){
                 bytes_to_read = min(len, static_cast<size_t>(buffer_size));
                 size_t samples = bytes_to_read / sizeof(T);
                 bytes_to_read = samples * sizeof(T);
-                size_t bytes_read = from->readBytes(buffer, bytes_to_read);
+                bytes_read = from->readBytes(buffer, bytes_to_read);
                 result = write(bytes_read, delayCount);
             } 
             LOGI("StreamCopy::copy %zu -> %zu -> %zu bytes - in %zu hops", bytes_to_read, bytes_read, result, delayCount);
