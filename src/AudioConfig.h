@@ -30,7 +30,7 @@
 #define LED_BUILTIN 13 // pin number is specific to your esp32 board
 #endif
 
-#define DEFAULT_BUFFER_SIZE 512
+#define DEFAULT_BUFFER_SIZE 1024
 #define DEFAULT_SAMPLE_RATE 44100
 #define DEFAULT_CHANNELS 2
 #define DEFAULT_BITS_PER_SAMPLE 16
