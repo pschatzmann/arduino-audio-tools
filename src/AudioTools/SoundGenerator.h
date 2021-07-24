@@ -46,7 +46,7 @@ class SoundGenerator  {
 
         /// Provides the data as byte array with the requested number of channels
         virtual size_t readBytes( uint8_t *buffer, size_t lengthBytes){
-            LOGD("readBytes: %d - channesl = %d", lengthBytes);
+            LOGD("readBytes: %d", lengthBytes);
             size_t result = 0;
             int ch = channels();
             int frame_size = sizeof(T) * ch;
