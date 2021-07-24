@@ -54,8 +54,8 @@ class StreamCopyT {
             size_t result = 0;
             size_t delayCount = 0;
             size_t len = available();
-            size_t bytes_to_read;
-            size_t bytes_read; 
+            size_t bytes_to_read=0;
+            size_t bytes_read=0; 
 
             if (len>0){
                 bytes_to_read = min(len, static_cast<size_t>(buffer_size));
