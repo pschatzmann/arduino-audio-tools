@@ -1,8 +1,10 @@
 cmake_minimum_required(VERSION 3.20)
 
 # set the project name
-project(desktop)
+project(generator)
 set (CMAKE_CXX_STANDARD 11)
+set (DCMAKE_CXX_FLAGS "-Werror")
+
 include(FetchContent)
 option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
 
@@ -32,13 +34,18 @@ endif()
 
 
 # build sketch to executable
-add_executable (desktop generator.cpp)
+add_executable (generator generator.cpp)
+
+# specify libraries
+target_link_libraries(generator portaudio_static arduino_emulator arduino-audio-tools)
 
 # Hmm...This should not be needed!
-target_include_directories(desktop PRIVATE
+target_include_directories(generator PRIVATE
    "${arduino_emulator_SOURCE_DIR}/ArduinoCore-API/api"
    "${arduino_emulator_SOURCE_DIR}/ArduinoCore-Linux/cores/arduino"
    "${arduino_audio_tools_SOURCE_DIR}/src"
 )
+
+
 # define dependencies
-add_dependencies(desktop portaudio_static arduino_emulator arduino-audio-tools ) 
+add_dependencies(generator portaudio_static arduino_emulator arduino-audio-tools ) 
