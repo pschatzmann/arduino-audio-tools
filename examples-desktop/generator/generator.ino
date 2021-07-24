@@ -14,7 +14,7 @@ void setup(void) {
   Serial.begin(115200);
 
   // open output
-  PortAudioInfo config = out.defaultConfig();
+  PortAudioConfig config = out.defaultConfig();
   config.sample_rate = sample_rate;
   config.channels = channels;
   config.bits_per_sample = sizeof(int16_t)*8;
