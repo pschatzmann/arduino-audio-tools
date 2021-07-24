@@ -101,14 +101,3 @@
 #define SOFT_MUTE_VALUE LOW  
 #endif
 
-
-/**
- * ------------------------------------------------------------------------- 
- * @brief typedefs for DefaultStream
- * 
- */
-#if defined(__linux__) || defined(_WIN32) || defined(__APPLE__)
-typedef PortAudioStream DefaultStream;
-#elif defined(ESP32) || defined(ESP8266) || defined(__SAMD21G18A__)
-typedef A2DPStream DefaultStream;
-#endif
