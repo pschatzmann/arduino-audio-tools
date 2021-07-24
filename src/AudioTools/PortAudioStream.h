@@ -5,8 +5,11 @@
  */
 
 #if defined(__linux__) || defined(_WIN32) || defined(__APPLE__)
+
 #include "AudioTools.h"
 #include "portaudio.h"
+
+namespace audio_tools {
 
 /**
  * @brief PortAudio information
@@ -135,6 +138,8 @@ class PortAudioStream :  BufferedStream {
 
 
 };
+
+} // namespace
 
 #endif
 
