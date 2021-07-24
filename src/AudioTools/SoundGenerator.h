@@ -58,7 +58,7 @@ class SoundGenerator  {
                         result = readSamples((T(*)[2]) buffer, lengthBytes / frame_size);
                         break;
                     default:
-                        LOGE( "SoundGenerator::readBytes -> number of channels %d is not supported (use 1 or 2)\n", channels);
+                        LOGE( "SoundGenerator::readBytes -> number of channels %d is not supported (use 1 or 2)", channels);
                         result = 0;
                         break;
                 }
@@ -70,7 +70,7 @@ class SoundGenerator  {
                 // when inactive did not generate anything
                 result = 0;
             }
-            LOGD( "SoundGenerator::readBytes (channels: %d) %d bytes -> %d samples \n",channels, lengthBytes,result);
+            LOGD( "SoundGenerator::readBytes (channels: %d) %zu bytes -> %zu samples", channels, lengthBytes, result);
             return result * frame_size;
         }
 
