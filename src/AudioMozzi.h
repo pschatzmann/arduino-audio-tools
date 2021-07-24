@@ -12,14 +12,14 @@ namespace audio_tools {
  * 
  */
 struct MozziConfig : AudioBaseInfo {
-    uint16_t control_rate=0;
+    uint16_t control_rate=CONTROL_RATE;
     void (*updateControl)() = nullptr; //&::updateControl;
     AudioOutput_t (*updateAudio)() = nullptr; // = &::updateAudio;
 
     MozziConfig(){
         channels = AUDIO_CHANNELS;
         sample_rate = AUDIO_RATE;
-        bits_per_sample = sizeof(AudioOutputStorage_t)*8;
+        bits_per_sample = 16;
     }
 };
 /**
@@ -33,7 +33,7 @@ struct MozziConfig : AudioBaseInfo {
  * @copyright GPLv3
  */
  
-class MozziGenerator : public SoundGenerator<AudioOutputStorage_t> {
+class MozziGenerator : public SoundGenerator<int16_t> {
     public:
         MozziGenerator(){   
 	 		LOGD(__FUNCTION__);
@@ -48,6 +48,7 @@ class MozziGenerator : public SoundGenerator<AudioOutputStorage_t> {
         }
 
         void begin(MozziConfig config){
+            SoundGenerator<int16_t>::begin();
             info = config;
             if (info.control_rate==0){
                 info.control_rate = CONTROL_RATE;
@@ -65,14 +66,14 @@ class MozziGenerator : public SoundGenerator<AudioOutputStorage_t> {
         }
 
         /// Provides a single sample
-        virtual AudioOutputStorage_t readSample() {
+        virtual int16_t readSample() {
             if (info.updateAudio==nullptr){
-                LOGE("The updateAudio method has not been defined!");
-                end();
+                LOGE("The updateAudio method has not been defined in the configuration !");
+                stop();
                 return 0;
             }
 
-            // return prior right value from buffer
+            // return value from buffer -> channel 2 
             if (is_read_buffer_filled){
                 // for stereo output we might have the value already
                 is_read_buffer_filled = false;
@@ -83,12 +84,13 @@ class MozziGenerator : public SoundGenerator<AudioOutputStorage_t> {
             if (--control_counter<0){
                 control_counter = control_counter_max;
                 if (info.updateControl!=nullptr){
+                    LOGD("updateControl");
                     info.updateControl();
                 }
             }
 
             // return left value
-            AudioOutputStorage_t result = updateSample();
+            int16_t result = updateSample();
             return result;
         }
 
@@ -100,30 +102,30 @@ class MozziGenerator : public SoundGenerator<AudioOutputStorage_t> {
         bool is_read_buffer_filled = false;
 
 
-        AudioOutputStorage_t updateSample(){
+        // we make sure that we return one sample for each 
+        // requested number of channels sequentially
+        int16_t updateSample(){
             AudioOutput out = info.updateAudio();
             // requested mono
-            AudioOutputStorage_t result = 0;
+            int16_t result = 0;
             #if (AUDIO_CHANNELS == MONO)
-                // generated stereo
-                if (sizeof(out) == sizeof(AudioOutputStorage_t)*2){
-                    result = out[0]/2 + out[1]/2;
-                // generated mono
-                } else  if (sizeof(out) == sizeof(AudioOutputStorage_t)){
+                if (info.channels==2){
+                    result = out[0];
+                    read_buffer = out[0];
+                    is_read_buffer_filled = true;
+                } else  if (info.channels==1){
                     result = out[0];
                 }
 
             // requested stereo
             #elif (AUDIO_CHANNELS == STEREO)
                 result = out[0];
-                // generated stereo
-                if (sizeof(out) == sizeof(AudioOutputStorage_t)*2){
+                if (info.channels==2){
+                    result = out[0];
                     read_buffer = out[1];
                     is_read_buffer_filled = true;
-                // generated mono
-                } else if (sizeof(out) == sizeof(AudioOutputStorage_t)){
-                    read_buffer = out[0];
-                    is_read_buffer_filled = true;
+                } else if (info.channels==1){
+                    result = out[0]/2 + out[1]/2;
                 }
             #endif
             return result;
@@ -172,14 +174,11 @@ class MozziStream : public Stream {
             config = cfg;
             Mozzi.setAudioRate(config.sample_rate);
             // in output mode we do not allocate any unnecessary functionality
-            if (input_ptr == nullptr && config.control_rate>0){
-                input_ptr = new MozziGenerator(config);
-            }
             if (cfg.channels != config.channels){
                 LOGE("You need to change the AUDIO_CHANNELS in mozzi_config.h to %d", cfg.channels);
             }
 
-            Mozzi.start(0);
+            Mozzi.start(config.control_rate);
         }
 
         void end(){
@@ -205,6 +204,7 @@ class MozziStream : public Stream {
         virtual size_t write(const uint8_t *buffer, size_t size) {
             for (size_t j=0;j<size;j++){
                 if (write(buffer[j])<=0){
+                    LOGE("Could not write all data: %d of %d", j, size);
                     return j;
                 }
             }
@@ -216,7 +216,8 @@ class MozziStream : public Stream {
         }
 
         virtual size_t readBytes(char *buffer, size_t length){
-            return input_ptr==nullptr ? 0 : input_ptr->readBytes((uint8_t*)buffer, length);
+            LOGD("readBytes: %d", length);
+            return get_input_ptr()->readBytes((uint8_t*)buffer, length, config.channels);
         }
 
         virtual int read(){
@@ -239,6 +240,17 @@ class MozziStream : public Stream {
         int32_t frame[2];
         uint8_t buffer[64];
         int buffer_pos;
+
+        MozziGenerator *get_input_ptr(){
+            if (input_ptr==nullptr){
+                // allocate  generator only when requested
+                if (config.control_rate>0){
+                    config.control_rate = CONTROL_RATE;
+                }
+                input_ptr = new MozziGenerator(config);
+            }
+            return input_ptr;
+        }
 
         // writes individual bytes and puts them together as MonoOutput or StereoOutput
         void writeChar(uint8_t c){

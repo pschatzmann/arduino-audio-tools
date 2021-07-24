@@ -44,8 +44,9 @@ class SoundGenerator  {
         virtual  T readSample() = 0;
 
 
-        /// Provides the data as byte array
+        /// Provides the data as byte array with the requested number of channels
         virtual size_t readBytes( uint8_t *buffer, size_t lengthBytes, uint8_t channels=1){
+            LOGD("readBytes: %d - channesl = %d",lengthBytes, channels);
             size_t result = 0;
             int frame_size = sizeof(T) * channels;
             if (active){
@@ -62,7 +63,10 @@ class SoundGenerator  {
                         break;
                 }
             } else {
-                LOGD("SoundGenerator::readBytes -> inactive");
+                if (!activeWarningIssued){
+                    LOGE("SoundGenerator::readBytes -> inactive");
+                }
+                activeWarningIssued = true;
                 // when inactive did not generate anything
                 result = 0;
             }
@@ -87,6 +91,7 @@ class SoundGenerator  {
 
     protected:
         bool active = false;
+        bool activeWarningIssued = false;
 
 };
 

@@ -20,6 +20,7 @@
 #include "AudioTools/Streams.h"
 #include "AudioTools/AudioCopy.h"
 #include "AudioTools/AudioPWM.h"
+#include "AudioTools/PortAudioStream.h"
 
 #ifdef USE_URL_ARDUINO
 // Arduino network support (incl ESP32)

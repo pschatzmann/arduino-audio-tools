@@ -18,8 +18,6 @@
 
 using namespace audio_tools;  
 
-typedef int16_t sound_t;                                  // sound will be represented as int16_t (with 2 bytes)
-uint8_t channels = 2;                                     // The stream will have 2 channels 
 MozziStream mozzi;
 AudioWAVServer server("ssid","password");
 
@@ -49,10 +47,13 @@ void setup(){
 
   // configure mozzi
   auto cfg = mozzi.defaultConfig();
+  cfg.channels = 1;
+  cfg.updateAudio = updateAudio;
+  cfg.updateControl = updateControl;
   mozzi.begin(cfg);
   
-  // We connect to the server  
-  server.begin(mozzi, cfg.sample_rate, cfg.channels);
+  // We start to the server  
+  server.begin(mozzi, cfg.sample_rate, cfg.channels, cfg.bits_per_sample);
 
   // Start Mozzi
   ratio = float_to_Q8n8(3.0f);  // define modulation ratio in float and convert to fixed-point

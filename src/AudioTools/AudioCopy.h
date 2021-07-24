@@ -61,7 +61,7 @@ class StreamCopyT {
                 size_t samples = bytes_to_read / sizeof(T);
                 bytes_to_read = samples * sizeof(T);
                 size_t bytes_read = from->readBytes(buffer, bytes_to_read);
-                result = write(bytes_read,delayCount);
+                result = write(bytes_read, delayCount);
             } 
             LOGI("StreamCopy::copy %u -> %u bytes - in %d hops", bytes_to_read, result, delayCount);
             return result;
@@ -123,14 +123,14 @@ class StreamCopyT {
             while(total<len){
                 size_t written = to->write(buffer+total, len-total);
                 total += written;
-                yield();
                 delayCount++;
 
-                if (retry++ > 10){
+                if (retry++ > 20){
                     break;
                 }
                 
                 if (retry>1) {
+                    delay(5);
                     LOGI("try write - %d ",retry);
                 }
 
