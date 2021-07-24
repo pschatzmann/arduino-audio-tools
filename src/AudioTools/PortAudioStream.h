@@ -24,17 +24,10 @@ class PortAudioInfo : public AudioBaseInfo {
 class PortAudioStream :  BufferedStream {
     public:
         PortAudioStream() {
-            self = this;
         }
 
         ~PortAudioStream(){
             Pa_Terminate();
-        }
-
-        /// Singleton support to be compatible with the I2S interace
-        PortAudioStream instance() {
-            static PortAudioStream inst;
-            return inst;
         }
 
         PortAudioInfo getDefaultInfo() {
