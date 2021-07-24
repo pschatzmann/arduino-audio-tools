@@ -89,6 +89,7 @@ class PortAudioStream : public BufferedStream {
             if( err != paNoError ) {
                 LOGE(  "PortAudio error: %s\n", Pa_GetErrorText( err ) );
             }
+            stream_started = false;
         }
 
         operator boolean() {
@@ -99,9 +100,13 @@ class PortAudioStream : public BufferedStream {
         PaStream *stream = nullptr;
         PaError err = paNoError;
         PortAudioConfig info;
+        bool stream_started = false;
 
         virtual size_t writeExt(const uint8_t* data, size_t len) {  
             LOGD("writeExt: %zu", len);
+
+            startStream();
+
             size_t result = 0;
             if (stream!=nullptr){
                 int bytes = info.bits_per_sample / 8;
@@ -149,6 +154,20 @@ class PortAudioStream : public BufferedStream {
             }
             // make sure that we return a valid value 
             return paInt16;
+        }
+
+        /// automatically start the stream when we start to get data
+        void startStream() {
+            if (!stream_started) {
+                LOGD(__FUNCTION__);
+                err = Pa_StartStream( stream );
+                if( err == paNoError ) {
+                    stream_started = true;
+                } else {
+                    stream_started = false;
+                    LOGE(  "PortAudio error: %s\n", Pa_GetErrorText( err ) );
+                }
+            }            
         }
 };
 
