@@ -48,7 +48,7 @@ class SoundGenerator  {
         virtual size_t readBytes( uint8_t *buffer, size_t lengthBytes){
             LOGD("readBytes: %d - channesl = %d",lengthBytes);
             size_t result = 0;
-            int ch = channels(;)
+            int ch = channels();
             int frame_size = sizeof(T) * ch;
             if (active){
                 switch (ch){
