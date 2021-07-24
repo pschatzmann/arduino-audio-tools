@@ -49,13 +49,16 @@ class PortAudioStream : public BufferedStream {
         void begin(PortAudioConfig info) {
             LOGD(__FUNCTION__);
             this->info = info;
+            LOGD("Pa_Initialize");
             err = Pa_Initialize();
+            LOGD("Pa_Initialize - done");
             if( err != paNoError ) {
                 LOGE(  "PortAudio error: %s\n", Pa_GetErrorText( err ) );
                 return;
             }
 
             /* Open an audio I/O stream. */
+            LOGD("Pa_OpenDefaultStream");
             err = Pa_OpenDefaultStream( &stream,
                 info.is_input ? info.channels : 0,          /* no input channels */
                 info.is_output ? info.channels : 0,          /* stereo output */
@@ -68,6 +71,7 @@ class PortAudioStream : public BufferedStream {
                 nullptr, /* this is your callback function */
                 nullptr ); /*This is a pointer that will be passed to
                                 your callback*/
+            LOGD("Pa_OpenDefaultStream - done");
             if( err != paNoError ) {
                 LOGE(  "PortAudio error: %s\n", Pa_GetErrorText( err ) );
             }
