@@ -38,6 +38,8 @@ add_executable (generator generator.cpp)
 # use main() from arduino_emulator
 target_compile_definitions(arduino_emulator PUBLIC -DDEFINE_MAIN)
 
+target_compile_definitions(portaudio PUBLIC -DPA_USE_COREAUDIO=1)
+
 # specify libraries
 target_link_libraries(generator portaudio_static arduino_emulator arduino-audio-tools)
 
