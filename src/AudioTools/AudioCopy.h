@@ -52,7 +52,7 @@ class StreamCopyT {
         // copies the data from one channel from the source to 2 channels on the destination - the result is in bytes
          size_t copy(){
             size_t result = 0;
-            size_t delayCount = 0;
+            uint16_t delayCount = 0;
             size_t len = available();
             size_t bytes_to_read;
 
@@ -63,7 +63,7 @@ class StreamCopyT {
                 size_t bytes_read = from->readBytes(buffer, bytes_to_read);
                 result = write(bytes_read, delayCount);
             } 
-            LOGI("StreamCopy::copy %u -> %u bytes - in %d hops", bytes_to_read, result, delayCount);
+            LOGI("StreamCopy::copy %zu -> %zu -> %zu bytes - in %d hops", bytes_to_read, bytes_read, result, delayCount);
             return result;
         }
 
@@ -93,7 +93,7 @@ class StreamCopyT {
                 }
                 result = write(samples * sizeof(T)*2, delayCount);
             } 
-            LOGI("StreamCopy::copy %u -> %u bytes - in %d hops", bytes_to_read, result, delayCount);
+            LOGI("StreamCopy::copy %zu -> %zu bytes - in %d hops", bytes_to_read, result, delayCount);
             return result;
         }
 
@@ -158,7 +158,7 @@ class StreamCopy : public StreamCopyT<uint8_t> {
         template<typename T>
         size_t copy(BaseConverter<T> &converter) {
             size_t result = available();
-            size_t delayCount = 0;
+            uint16_t delayCount = 0;
 
             BaseConverter<T> *coverter_ptr = &converter;
             if (result>0){
@@ -169,7 +169,7 @@ class StreamCopy : public StreamCopyT<uint8_t> {
                 write(result, delayCount);
             } 
 
-            LOGI("StreamCopy::copy %d bytes - in %d hops", result, delayCount);
+            LOGI("StreamCopy::copy %zu bytes - in %d hops", result, delayCount);
             return result;
         }
         
