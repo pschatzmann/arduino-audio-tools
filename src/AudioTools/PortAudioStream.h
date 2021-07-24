@@ -24,7 +24,7 @@ class PortAudioInfo : public AudioBaseInfo {
  */
 class PortAudioStream :  BufferedStream {
     public:
-        PortAudioStream() {
+        PortAudioStream():BufferedStream(DEFAULT_BUFFER_SIZE) {
         }
 
         ~PortAudioStream(){
@@ -115,7 +115,7 @@ class PortAudioStream :  BufferedStream {
                     LOGE(  "PortAudio error: %s\n", Pa_GetErrorText( err ) );
                 }
             }
-            return len            
+            return len;            
         }
 
         PaSampleFormat getFormat(int bitLength){
