@@ -5,7 +5,7 @@
  */
 
 #if defined(__linux__) || defined(_WIN32) || defined(__APPLE__)
-#include "AudioTools/stream.h"
+#include "AudioTools.h"
 #include "portaudio.h"
 
 /**
