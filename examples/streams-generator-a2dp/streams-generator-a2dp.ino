@@ -16,7 +16,7 @@ typedef int16_t sound_t;                                  // sound will be repre
 uint16_t sample_rate=44100;
 uint8_t channels = 2;                                     // The stream will have 2 channels 
 SineWaveGenerator<sound_t> sineWave(32000);               // subclass of SoundGenerator with max amplitude of 32000
-GeneratedSoundStream<sound_t> in(sineWave, channels);     // Stream generated from sine wave
+GeneratedSoundStream<sound_t> in(sineWave);               // Stream generated from sine wave
 A2DPStream out = A2DPStream::instance() ;                 // A2DP input - A2DPStream is a singleton!
 StreamCopy copier(out, in); // copy in to out
 
@@ -30,7 +30,7 @@ void setup(void) {
   Serial.println("A2DP is connected now...");
 
   // Setup sine wave
-  sineWave.begin(sample_rate, N_B4);
+  sineWave.begin(channels, sample_rate, N_B4);
 
 }
 
