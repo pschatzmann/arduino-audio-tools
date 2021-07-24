@@ -27,8 +27,9 @@ class PortAudioConfig : public AudioBaseInfo {
  */
 class PortAudioStream : public BufferedStream {
     public:
-        PortAudioStream():BufferedStream(DEFAULT_BUFFER_SIZE) {
+        PortAudioStream(int buffer_size=DEFAULT_BUFFER_SIZE):BufferedStream(buffer_size) {
             LOGD(__FUNCTION__);
+            this->buffer_size = buffer_size;
         }
 
         ~PortAudioStream(){
@@ -57,20 +58,20 @@ class PortAudioStream : public BufferedStream {
                 return;
             }
 
-            /* Open an audio I/O stream. */
+            // calculate frames
+            int bytes = info.bits_per_sample / 8;
+            int buffer_frames = buffer_size / bytes / info.channels;
+
+            // Open an audio I/O stream. 
             LOGD("Pa_OpenDefaultStream");
             err = Pa_OpenDefaultStream( &stream,
-                info.is_input ? info.channels : 0,          /* no input channels */
-                info.is_output ? info.channels : 0,          /* stereo output */
-                getFormat(info.bits_per_sample),  
-                info.sample_rate,
-                paFramesPerBufferUnspecified, /* frames per buffer, i.e. the number
-                                of sample frames that PortAudio will
-                                request from the callback. Many apps
-                                may want to use*/
-                nullptr, /* this is your callback function */
-                nullptr ); /*This is a pointer that will be passed to
-                                your callback*/
+                info.is_input ? info.channels : 0,    // no input channels 
+                info.is_output ? info.channels : 0,   // stereo output 
+                getFormat(info.bits_per_sample),      // format  
+                info.sample_rate,                     // sample rate
+                buffer_frames,                        // frames per buffer 
+                nullptr,   
+                nullptr ); 
             LOGD("Pa_OpenDefaultStream - done");
             if( err != paNoError ) {
                 LOGE(  "PortAudio error: %s\n", Pa_GetErrorText( err ) );
@@ -101,6 +102,7 @@ class PortAudioStream : public BufferedStream {
         PaError err = paNoError;
         PortAudioConfig info;
         bool stream_started = false;
+        int buffer_size;
 
         virtual size_t writeExt(const uint8_t* data, size_t len) {  
             LOGD("writeExt: %zu", len);
