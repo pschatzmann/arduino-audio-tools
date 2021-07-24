@@ -30,15 +30,15 @@ if(NOT arduino_audio_tools_POPULATED)
     add_subdirectory(${arduino_audio_tools_SOURCE_DIR})
 endif()
 
-# Hmm...This should not be needed!
-include_directories(
-    "${arduino_emulator_SOURCE_DIR}/ArduinoCore-API/api"
-    "${arduino_emulator_SOURCE_DIR}/MathFunctions/ArduinoCore-Linux/cores/arduino"
-    "${arduino_audio_tools_SOURCE_DIR}/src"
-)
 
 # build sketch to executable
 add_executable (desktop generator.cpp)
 
+# Hmm...This should not be needed!
+target_include_directories(desktop PRIVATE
+   "${arduino_emulator_SOURCE_DIR}/ArduinoCore-API/api"
+   "${arduino_emulator_SOURCE_DIR}/ArduinoCore-Linux/cores/arduino"
+   "${arduino_audio_tools_SOURCE_DIR}/src"
+)
 # define dependencies
 add_dependencies(desktop portaudio_static arduino_emulator arduino-audio-tools ) 
