@@ -3,7 +3,7 @@
 using namespace audio_tools;  
 
 uint16_t sample_rate=44100;
-uint8_t channels = 2;                                     // The stream will have 2 channels 
+uint8_t channels = 1;                                     // The stream will have 2 channels 
 SineWaveGenerator<int16_t> sineWave(32000);               // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> in(sineWave, channels);     // Stream generated from sine wave
 DefaultStream out;                                        // On desktop we use 
@@ -22,7 +22,7 @@ void setup(void) {
   out.begin(config);
 
   // Setup sine wave
-  sineWave.begin(sample_rate, N_B4);
+  sineWave.begin(channels, sample_rate, N_B4);
 
 }
 

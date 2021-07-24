@@ -43,18 +43,14 @@ class SoundGenerator  {
         /// Provides a single sample
         virtual  T readSample() = 0;
 
-        /// Provides the data as byte array with the requested number of channels
-        virtual size_t readBytes( uint8_t *buffer, size_t lengthBytes){
-            return readBytes(buffer, lengthBytes);
-        }
 
         /// Provides the data as byte array with the requested number of channels
-        virtual size_t readBytes( uint8_t *buffer, size_t lengthBytes, uint8_t channels){
+        virtual size_t readBytes( uint8_t *buffer, size_t lengthBytes){
             LOGD("readBytes: %d - channesl = %d",lengthBytes, channels);
             size_t result = 0;
             int frame_size = sizeof(T) * channels;
             if (active){
-                switch (channels){
+                switch (channels()){
                     case 1:
                         result = readSamples((T*) buffer, lengthBytes / frame_size) ;
                         break;
@@ -93,11 +89,22 @@ class SoundGenerator  {
             return active;
         }
 
+        void setChannels(int channels){
+            output_channels = channels;
+        }
+
+        int channels() {
+            return output_channels;
+        }
+
     protected:
         bool active = false;
         bool activeWarningIssued = false;
+        int output_channels = 1;
 
 };
+
+
 
 /**
  * @brief Generates a Sound with the help of sin() function.
@@ -115,8 +122,15 @@ class SineWaveGenerator : public SoundGenerator<T> {
             m_phase = phase;
         }
 
-        /// Starts the processing by defining the sample rate and frequency
-        void begin(uint16_t sample_rate=44100, uint16_t frequency=0){
+        void begin() {
+            b
+            egin(1, 44100, 0);
+        }
+        void begin(uint16_t sample_rate, uint16_t frequency=0){
+            begin(1, sample_rate, frequency);
+        }
+
+        void begin(int channels, uint16_t sample_rate, uint16_t frequency=0){
             LOGI("SineWaveGenerator::begin");
             this->m_frequency = frequency;
             this->m_sample_rate = sample_rate;
