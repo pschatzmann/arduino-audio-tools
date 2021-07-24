@@ -123,8 +123,7 @@ class SineWaveGenerator : public SoundGenerator<T> {
         }
 
         void begin() {
-            b
-            egin(1, 44100, 0);
+            begin(1, 44100, 0);
         }
         void begin(uint16_t sample_rate, uint16_t frequency=0){
             begin(1, sample_rate, frequency);
