@@ -46,11 +46,12 @@ class SoundGenerator  {
 
         /// Provides the data as byte array with the requested number of channels
         virtual size_t readBytes( uint8_t *buffer, size_t lengthBytes){
-            LOGD("readBytes: %d - channesl = %d",lengthBytes, channels);
+            LOGD("readBytes: %d - channesl = %d",lengthBytes);
             size_t result = 0;
-            int frame_size = sizeof(T) * channels;
+            int ch = channels(;)
+            int frame_size = sizeof(T) * ch;
             if (active){
-                switch (channels()){
+                switch (ch){
                     case 1:
                         result = readSamples((T*) buffer, lengthBytes / frame_size) ;
                         break;
@@ -58,7 +59,7 @@ class SoundGenerator  {
                         result = readSamples((T(*)[2]) buffer, lengthBytes / frame_size);
                         break;
                     default:
-                        LOGE( "SoundGenerator::readBytes -> number of channels %d is not supported (use 1 or 2)", channels);
+                        LOGE( "SoundGenerator::readBytes -> number of channels %d is not supported (use 1 or 2)", ch);
                         result = 0;
                         break;
                 }
@@ -70,7 +71,7 @@ class SoundGenerator  {
                 // when inactive did not generate anything
                 result = 0;
             }
-            LOGD( "SoundGenerator::readBytes (channels: %d) %zu bytes -> %zu samples", channels, lengthBytes, result);
+            LOGD( "SoundGenerator::readBytes (channels: %d) %zu bytes -> %zu samples", ch, lengthBytes, result);
             return result * frame_size;
         }
 
@@ -89,8 +90,8 @@ class SoundGenerator  {
             return active;
         }
 
-        void setChannels(int channels){
-            output_channels = channels;
+        void setChannels(int ch){
+            output_channels = ch;
         }
 
         int channels() {
