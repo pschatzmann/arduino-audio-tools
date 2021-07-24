@@ -28,13 +28,16 @@ class PortAudioConfig : public AudioBaseInfo {
 class PortAudioStream : public BufferedStream {
     public:
         PortAudioStream():BufferedStream(DEFAULT_BUFFER_SIZE) {
+            LOGD(__FUNCTION__);
         }
 
         ~PortAudioStream(){
+            LOGD(__FUNCTION__);
             Pa_Terminate();
         }
 
         PortAudioConfig defaultConfig() {
+            LOGD(__FUNCTION__);
             PortAudioConfig default_info;
             return default_info;
         }
@@ -44,6 +47,7 @@ class PortAudioStream : public BufferedStream {
         }
 
         void begin(PortAudioConfig info) {
+            LOGD(__FUNCTION__);
             this->info = info;
             err = Pa_Initialize();
             if( err != paNoError ) {
@@ -71,6 +75,7 @@ class PortAudioStream : public BufferedStream {
         }
 
         void end() {
+            LOGD(__FUNCTION__);
             err = Pa_StopStream( stream );
             if( err != paNoError ) {
                 LOGE(  "PortAudio error: %s\n", Pa_GetErrorText( err ) );
@@ -92,6 +97,7 @@ class PortAudioStream : public BufferedStream {
         PortAudioConfig info;
 
         virtual size_t writeExt(const uint8_t* data, size_t len) {  
+            LOGD("writeExt: %zu", len);
             size_t result = 0;
             if (stream!=nullptr){
                 int bytes = info.bits_per_sample / 8;
@@ -102,11 +108,14 @@ class PortAudioStream : public BufferedStream {
                 } else {
                     LOGE(  "PortAudio error: %s\n", Pa_GetErrorText( err ) );
                 }
-            };
+            } else {
+                LOGW("stream is null")
+            }
             return len;
         }
 
         virtual size_t readExt( uint8_t *data, size_t len) { 
+            LOGD("writeExt: %zu", len);
             size_t result = 0;
             if (stream!=nullptr){
                 int bytes = info.bits_per_sample / 8;
@@ -117,6 +126,8 @@ class PortAudioStream : public BufferedStream {
                 } else {
                     LOGE(  "PortAudio error: %s\n", Pa_GetErrorText( err ) );
                 }
+            } else {
+                LOGW("stream is null")
             }
             return len;            
         }
@@ -135,8 +146,6 @@ class PortAudioStream : public BufferedStream {
             // make sure that we return a valid value 
             return paInt16;
         }
-
-
 };
 
 } // namespace
