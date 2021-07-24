@@ -15,7 +15,7 @@ void setup(void) {
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
   // open output
-  PortAudioConfig config = out.defaultConfig();
+  auto config = out.defaultConfig();
   config.sample_rate = sample_rate;
   config.channels = channels;
   config.bits_per_sample = sizeof(int16_t)*8;
