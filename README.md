@@ -70,7 +70,6 @@ void loop(){
 }
 
 ```
-A complete list of the supported Audio Stream classes and scenarios can be found in the [Scenarios Document](Scenarios.md)
 
 ### Examples
 
