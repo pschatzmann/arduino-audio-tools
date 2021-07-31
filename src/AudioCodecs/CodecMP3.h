@@ -6,7 +6,7 @@
 #define LOGGING_ACTIVE true
 
 #include "AudioTools/AudioTypes.h"
-#include "AudioMinimp3/minimp3.h"
+#include "AudioCodecs/ext/minimp3/minimp3.h"
 
 namespace audio_tools {
 
@@ -215,7 +215,7 @@ class MP3DecoderMini : public AudioWriter  {
             MP3MiniAudioInfo info;
             info.sample_rate = mp3dec_info.hz;
             info.channels = mp3dec_info.channels;
-
+            info.bits_per_sample = 16;
             provideResultCallback(info, samples);
             provideResultStream(info, samples);
             // store last audio_info so that we can detect any changes
