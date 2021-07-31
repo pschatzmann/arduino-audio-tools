@@ -3,3 +3,5 @@
 In this example we decode a WAV file into RAW output and send it to the Serial output. The audio processing chain is:
  
 MemoryStream -> AudioOutputStream -> WAVDecoder -> CsvStream
+
+Complie with Partition Scheme Huge APP!

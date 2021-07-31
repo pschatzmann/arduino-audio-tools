@@ -92,10 +92,18 @@ class int24_t : public Printable {
  * 
  */
 struct AudioBaseInfo {
-    //AudioBaseInfo(AudioBaseInfo& c) = default;
+    AudioBaseInfo() = default;
+    AudioBaseInfo(const AudioBaseInfo &) = default;
     int sample_rate;
-    int bits_per_sample;
     int channels;
+    int bits_per_sample=16;
+
+    bool operator==(AudioBaseInfo alt){
+        return sample_rate==alt.sample_rate && channels == alt.channels && bits_per_sample == alt.bits_per_sample;
+    }
+    bool operator!=(AudioBaseInfo alt){
+        return !(*this == alt);
+    }       
 };
 
 /**

@@ -13,3 +13,5 @@ The pins depend on the Processor:
 | +       |  GPIO4       | GPIO2         | GPIO2        |
 | -       |  GND         |               |              |
 
+
+Complie with Partition Scheme Huge APP!

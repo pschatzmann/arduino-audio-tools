@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AAC.h"
-#include "AudioTools.h"
+#include "AudioTools/AudioTypes.h"
 
 namespace audio_tools {
 

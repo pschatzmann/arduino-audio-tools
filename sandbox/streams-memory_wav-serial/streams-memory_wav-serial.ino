@@ -9,7 +9,6 @@
  
  */
 #include "AudioTools.h"
-#include "CodecWAV.h"
 #include "knghtsng.h"
 
 using namespace audio_tools;  

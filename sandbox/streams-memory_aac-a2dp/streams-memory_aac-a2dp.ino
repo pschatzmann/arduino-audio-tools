@@ -7,7 +7,6 @@
  * @copyright GPLv3
  * 
  */
-#include "CodecAAC.h"
 #include "AudioTools.h"
 #include "AudioA2DP.h"
 #include "audio.h"
