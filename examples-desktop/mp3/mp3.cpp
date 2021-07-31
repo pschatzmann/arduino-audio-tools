@@ -19,6 +19,11 @@ void mp3InfoCallback(MP3MiniAudioInfo &info){
     PortAudioConfig pc;
     pc = info;
     pc.is_output = true;
+    Serial.print("sample_rate: ");
+    Serial.println(pc.sample_rate);
+    Serial.print("channels: ");
+    Serial.println(pc.channels);
+
     portaudio_stream.begin(pc);
 }
 
