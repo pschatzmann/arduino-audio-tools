@@ -24,7 +24,7 @@ void mp3InfoCallback(MP3MiniAudioInfo &info){
 
 void setup(){
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Debug);  
+  AudioLogger::instance().begin(Serial, AudioLogger::Info);  
   // this is not really necessary
   mp3_decoder.setMP3InfoCallback(mp3InfoCallback);
   mp3_decoder.begin();
