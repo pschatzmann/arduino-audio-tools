@@ -117,7 +117,7 @@ class A2DPStream : public Stream {
         }
 
         /// Opens the processing
-        void begin(RxTxMode mode, char* name){
+        void begin(RxTxMode mode, const char* name){
             this->mode = mode;
             this->name = name;
 
@@ -125,7 +125,7 @@ class A2DPStream : public Stream {
                 case TX_MODE:
                     LOGI("Starting a2dp_source...");
                     source(); // allocate object
-                    a2dp_source->start(name, a2dp_stream_source_sound_data);  
+                    a2dp_source->start((char*)name, a2dp_stream_source_sound_data);  
                     while(!a2dp_source->isConnected()){
                         yield();
                     }
@@ -138,7 +138,7 @@ class A2DPStream : public Stream {
                     LOGI("Starting a2dp_sink...");
                     sink(); // allocate object
                     a2dp_sink->set_stream_reader(&a2dp_stream_sink_sound_data, false);
-                    a2dp_sink->start(name);
+                    a2dp_sink->start((char*)name);
                     while(!a2dp_sink->isConnected()){
                         yield();
                     }
@@ -223,7 +223,7 @@ class A2DPStream : public Stream {
         BluetoothA2DPSource *a2dp_source = nullptr;
         BluetoothA2DPSink *a2dp_sink = nullptr;
         RxTxMode mode;
-        char* name = nullptr;
+        const char* name = nullptr;
 
         A2DPStream() {
             LOGI("A2DPStream");
