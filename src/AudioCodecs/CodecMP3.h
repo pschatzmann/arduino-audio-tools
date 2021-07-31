@@ -211,7 +211,7 @@ class MP3DecoderMini : public AudioWriter  {
         }
 
         void provideResult(int samples){
-            LOGD("provideResult: %d samples", samples);
+            LOGI("provideResult: %d samples", samples);
             MP3MiniAudioInfo info;
             info.sample_rate = mp3dec_info.hz;
             info.channels = mp3dec_info.channels;
