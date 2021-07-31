@@ -22,6 +22,10 @@
 #include "AudioTools/AudioPWM.h"
 #include "AudioTools/PortAudioStream.h"
 
+#include "AudioCodecs/CodecWAV.h"
+#include "AudioCodecs/CodecMP3.h"
+//#include "AudioCodecs/CodecAAC.h"
+
 #ifdef USE_URL_ARDUINO
 // Arduino network support (incl ESP32)
 #include "AudioHttp/AudioServer.h"
@@ -35,10 +39,11 @@
 
 /**
  * ------------------------------------------------------------------------- 
- * @brief typedefs for DefaultStream
+ * @brief typedefs for Default
  * 
  */
 namespace audio_tools {
+typedef MP3DecoderMini MP3Decoder;
 
 #if defined(__linux__) || defined(_WIN32) || defined(__APPLE__)
 typedef PortAudioStream DefaultStream;

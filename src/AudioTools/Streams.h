@@ -4,7 +4,6 @@
 #include "AudioTypes.h"
 #include "Buffers.h"
 #include "AudioI2S.h"
-#include "CodecWAV.h"
 
 namespace audio_tools {
 

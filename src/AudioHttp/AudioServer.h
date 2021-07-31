@@ -2,7 +2,6 @@
 
 #include <WiFi.h>
 #include "AudioTools.h"
-#include "CodecWAV.h"
 
 namespace audio_tools {
 

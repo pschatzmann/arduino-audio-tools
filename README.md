@@ -12,6 +12,7 @@ Some basic __header-only C++ classes__ that can be used for __Audio Processing__
 - NBuffer (Multi buffer for writing and reading of (audio) data)
 - TimerAlarmRepeating (e.g. for sampling audio data using exact times) [ESP32 only]
 - A Wav Encoder and Decoder
+- A MP3 Decoder
 - AudioOutputWithCallback class to provide callback integration e.g. with ESP8266Audio
 - Building of Arduino Audio Sketches to be run on [Linux, Windows and OS/X](https://github.com/pschatzmann/arduino-audio-tools/wiki/Running-an-Audio-Sketch-on-the-Desktop)
 
