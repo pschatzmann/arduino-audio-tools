@@ -161,7 +161,7 @@ class MP3DecoderMini : public AudioWriter  {
             size_t remaining_bytes = len;
             buffer_pos = 0;
             while(true){
-                LOGD("-> mp3dec_decode_frame: %zu -> %zu ", buffer_pos, remaining_bytes);
+                LOGI("-> mp3dec_decode_frame: %zu -> %zu ", buffer_pos, remaining_bytes);
                 int samples = mp3dec_decode_frame(&mp3d, fileData+buffer_pos, remaining_bytes, pcm, &mp3dec_info);
                 buffer_pos+= mp3dec_info.frame_bytes;
                 remaining_bytes-=mp3dec_info.frame_bytes;
