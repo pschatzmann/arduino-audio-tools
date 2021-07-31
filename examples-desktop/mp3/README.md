@@ -12,4 +12,3 @@ cmake ..
 make
 ```
 
-Unfortunatly the example does not generate any sound because of __Output underflowes__: The mp3 decoder can not provide the audio data fast enough...
