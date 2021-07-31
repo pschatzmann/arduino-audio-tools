@@ -17,6 +17,7 @@ namespace audio_tools {
  */
 class PortAudioConfig : public AudioBaseInfo {
     public:
+        PortAudioConfig() = default;
         PortAudioConfig(const PortAudioConfig&) = default;
         PortAudioConfig(const AudioBaseInfo& in) {
             sample_rate = in.sample_rate;
