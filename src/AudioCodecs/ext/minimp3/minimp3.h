@@ -191,7 +191,7 @@ static int have_simd()
 #define HAVE_SIMD 0
 #endif /* !defined(MINIMP3_NO_SIMD) */
 
-#if defined(__ARM_ARCH) && (__ARM_ARCH >= 6) && !defined(__aarch64__) && !defined(_M_ARM64)
+#if defined(__ARM_ARCH) && (__ARM_ARCH >= 6) && !defined(__aarch64__) && !defined(_M_ARM64) && !defined(ARDUINO_ARCH_RP2040)
 #define HAVE_ARMV6 1
 static __inline__ __attribute__((always_inline)) int32_t minimp3_clip_int16_arm(int32_t a)
 {
