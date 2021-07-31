@@ -40,6 +40,7 @@ local.properties
 *.suo
 *.user
 *.sln.docstates
+.vscode/
 
 # Build results
 
@@ -208,8 +209,11 @@ pip-log.txt
 .coverage
 .tox
 
-#Translations
+# Translations
 *.mo
 
-#Mr Developer
+# Mr Developer
 .mr.developer.cfg
+
+# Doxygen
+.DS_Store
