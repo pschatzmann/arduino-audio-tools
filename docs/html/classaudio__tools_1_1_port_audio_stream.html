@@ -93,6 +93,9 @@ Inheritance diagram for audio_tools::PortAudioStream:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a13a9351d7da14dc6bdd6a8f8e5f6b0da"><td class="memItemLeft" align="right" valign="top"><a id="a13a9351d7da14dc6bdd6a8f8e5f6b0da"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>PortAudioStream</b> (int buffer_size=DEFAULT_BUFFER_SIZE)</td></tr>
+<tr class="separator:a13a9351d7da14dc6bdd6a8f8e5f6b0da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d5e8e04994e2bd6ab2472e9c0c9ecbd"><td class="memItemLeft" align="right" valign="top"><a id="a5d5e8e04994e2bd6ab2472e9c0c9ecbd"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> ()</td></tr>
 <tr class="separator:a5d5e8e04994e2bd6ab2472e9c0c9ecbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -307,6 +310,10 @@ PaSampleFormat&#160;</td><td class="memItemRight" valign="bottom"><b>getFormat</
 <tr class="memitem:ace27eaecc93fe4ef67abc71a65a23f12"><td class="memItemLeft" align="right" valign="top"><a id="ace27eaecc93fe4ef67abc71a65a23f12"></a>
 virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>readExt</b> (uint8_t *data, size_t len)</td></tr>
 <tr class="separator:ace27eaecc93fe4ef67abc71a65a23f12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3dd08fd8569d89a6beecaaf338f2082"><td class="memItemLeft" align="right" valign="top"><a id="af3dd08fd8569d89a6beecaaf338f2082"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_port_audio_stream.html#af3dd08fd8569d89a6beecaaf338f2082">startStream</a> ()</td></tr>
+<tr class="memdesc:af3dd08fd8569d89a6beecaaf338f2082"><td class="mdescLeft">&#160;</td><td class="mdescRight">automatically start the stream when we start to get data <br /></td></tr>
+<tr class="separator:af3dd08fd8569d89a6beecaaf338f2082"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1a223509abd869d0e1ce9172c944795"><td class="memItemLeft" align="right" valign="top"><a id="aa1a223509abd869d0e1ce9172c944795"></a>
 virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>writeExt</b> (const uint8_t *data, size_t len)</td></tr>
 <tr class="separator:aa1a223509abd869d0e1ce9172c944795"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -336,6 +343,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteError</b> (in
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:adab5c9a82cd59105470a7668d7628df2"><td class="memItemLeft" align="right" valign="top"><a id="adab5c9a82cd59105470a7668d7628df2"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_size</b></td></tr>
+<tr class="separator:adab5c9a82cd59105470a7668d7628df2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af3e31cca49872f0ba5aa557752d66705"><td class="memItemLeft" align="right" valign="top"><a id="af3e31cca49872f0ba5aa557752d66705"></a>
 PaError&#160;</td><td class="memItemRight" valign="bottom"><b>err</b> = paNoError</td></tr>
 <tr class="separator:af3e31cca49872f0ba5aa557752d66705"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -345,6 +355,9 @@ PaError&#160;</td><td class="memItemRight" valign="bottom"><b>err</b> = paNoErro
 <tr class="memitem:a3d442bfb943e0a63f578d2dbacaa08dc"><td class="memItemLeft" align="right" valign="top"><a id="a3d442bfb943e0a63f578d2dbacaa08dc"></a>
 PaStream *&#160;</td><td class="memItemRight" valign="bottom"><b>stream</b> = nullptr</td></tr>
 <tr class="separator:a3d442bfb943e0a63f578d2dbacaa08dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa828f419befab52ec1b63b1066df1d87"><td class="memItemLeft" align="right" valign="top"><a id="aa828f419befab52ec1b63b1066df1d87"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>stream_started</b> = false</td></tr>
+<tr class="separator:aa828f419befab52ec1b63b1066df1d87"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classaudio__tools_1_1_buffered_stream"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classaudio__tools_1_1_buffered_stream')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classaudio__tools_1_1_buffered_stream.html">audio_tools::BufferedStream</a></td></tr>
 <tr class="memitem:ab250fac4485d6badb4d53c755639d855 inherit pro_attribs_classaudio__tools_1_1_buffered_stream"><td class="memItemLeft" align="right" valign="top"><a id="ab250fac4485d6badb4d53c755639d855"></a>
 <a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; uint8_t &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b></td></tr>

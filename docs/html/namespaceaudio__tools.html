@@ -208,6 +208,9 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_mozzi_stream.html">MozziStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">We use the output functionality of Mozzi to output audio data. We expect the data as array of int16_t with one or two channels. Though we support the setting of a sample rate, we recommend to use the default sample rate from Mozzi which is available with the AUDIO_RATE define.  <a href="classaudio__tools_1_1_mozzi_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html">MP3DecoderMini</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">MP3 Decoder using <a href="https://github.com/lieff/minimp3">https://github.com/lieff/minimp3</a>.  <a href="classaudio__tools_1_1_m_p3_decoder_mini.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_multi_converter.html">MultiConverter</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Combines multiple converters.  <a href="classaudio__tools_1_1_multi_converter.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -319,6 +322,19 @@ typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 <tr class="memitem:a6ec6e20986bbe492bb4b30bfd2190620"><td class="memItemLeft" align="right" valign="top"><a id="a6ec6e20986bbe492bb4b30bfd2190620"></a>
 typedef <a class="el" href="classaudio__tools_1_1_port_audio_stream.html">PortAudioStream</a>&#160;</td><td class="memItemRight" valign="bottom"><b>DefaultStream</b></td></tr>
 <tr class="separator:a6ec6e20986bbe492bb4b30bfd2190620"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af464b4ec891d44c504d35d08d64ded5d"><td class="memItemLeft" align="right" valign="top"><a id="af464b4ec891d44c504d35d08d64ded5d"></a>
+typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><b>MP3DataCallback</b>) (<a class="el" href="namespaceaudio__tools.html#ad4db4b9c171ed57912eb37695f8c6188">MP3MiniAudioInfo</a> &amp;info, int16_t *pwm_buffer, size_t len)</td></tr>
+<tr class="separator:af464b4ec891d44c504d35d08d64ded5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bff1ba76aff0e2d051c075e5e07403d"><td class="memItemLeft" align="right" valign="top"><a id="a7bff1ba76aff0e2d051c075e5e07403d"></a>
+typedef <a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html">MP3DecoderMini</a>&#160;</td><td class="memItemRight" valign="bottom"><b>MP3Decoder</b></td></tr>
+<tr class="separator:a7bff1ba76aff0e2d051c075e5e07403d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06e115ca85ae77bab10d6ede221ebc30"><td class="memItemLeft" align="right" valign="top"><a id="a06e115ca85ae77bab10d6ede221ebc30"></a>
+typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><b>MP3InfoCallback</b>) (<a class="el" href="namespaceaudio__tools.html#ad4db4b9c171ed57912eb37695f8c6188">MP3MiniAudioInfo</a> &amp;info)</td></tr>
+<tr class="separator:a06e115ca85ae77bab10d6ede221ebc30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4db4b9c171ed57912eb37695f8c6188"><td class="memItemLeft" align="right" valign="top"><a id="ad4db4b9c171ed57912eb37695f8c6188"></a>
+typedef <a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ad4db4b9c171ed57912eb37695f8c6188">MP3MiniAudioInfo</a></td></tr>
+<tr class="memdesc:ad4db4b9c171ed57912eb37695f8c6188"><td class="mdescLeft">&#160;</td><td class="mdescRight">Audio Info provided by the decoder. <br /></td></tr>
+<tr class="separator:ad4db4b9c171ed57912eb37695f8c6188"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e6e500fbc5f89d845c33d54da501bf5"><td class="memItemLeft" align="right" valign="top"><a id="a6e6e500fbc5f89d845c33d54da501bf5"></a>
 typedef <a class="el" href="structaudio__tools_1_1_pin_info_e_s_p32.html">PinInfoESP32</a>&#160;</td><td class="memItemRight" valign="bottom"><b>PinInfo</b></td></tr>
 <tr class="separator:a6e6e500fbc5f89d845c33d54da501bf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -480,7 +496,7 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>wav_mime</b> 
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Generic Implementation of sound input and output for desktop environments using portaudio. </p>
-<p>typedefs for DefaultStream</p>
+<p>typedefs for Default</p>
 <hr  />
  </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a6d3366afe95c009b2a445ebcc5eeccac"></a>

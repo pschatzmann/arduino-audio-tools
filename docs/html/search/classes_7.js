@@ -1,9 +1,20 @@
 var searchData=
 [
-  ['nbuffer_214',['NBuffer',['../classaudio__tools_1_1_n_buffer.html',1,'audio_tools']]],
-  ['nbuffer_3c_20channels_20_3e_215',['NBuffer&lt; Channels &gt;',['../classaudio__tools_1_1_n_buffer.html',1,'audio_tools']]],
-  ['nbuffer_3c_20uint8_5ft_20_3e_216',['NBuffer&lt; uint8_t &gt;',['../classaudio__tools_1_1_n_buffer.html',1,'audio_tools']]],
-  ['noisegenerator_217',['NoiseGenerator',['../classaudio__tools_1_1_noise_generator.html',1,'audio_tools']]],
-  ['nopconverter_218',['NOPConverter',['../classaudio__tools_1_1_n_o_p_converter.html',1,'audio_tools']]],
-  ['numberreader_219',['NumberReader',['../classaudio__tools_1_1_number_reader.html',1,'audio_tools']]]
+  ['memorystream_232',['MemoryStream',['../classaudio__tools_1_1_memory_stream.html',1,'audio_tools']]],
+  ['mozziconfig_233',['MozziConfig',['../structaudio__tools_1_1_mozzi_config.html',1,'audio_tools']]],
+  ['mozzigenerator_234',['MozziGenerator',['../classaudio__tools_1_1_mozzi_generator.html',1,'audio_tools']]],
+  ['mozzistream_235',['MozziStream',['../classaudio__tools_1_1_mozzi_stream.html',1,'audio_tools']]],
+  ['mp3dec_5fex_5ft_236',['mp3dec_ex_t',['../structmp3dec__ex__t.html',1,'']]],
+  ['mp3dec_5ffile_5finfo_5ft_237',['mp3dec_file_info_t',['../structmp3dec__file__info__t.html',1,'']]],
+  ['mp3dec_5fframe_5finfo_5ft_238',['mp3dec_frame_info_t',['../structmp3dec__frame__info__t.html',1,'']]],
+  ['mp3dec_5fframe_5ft_239',['mp3dec_frame_t',['../structmp3dec__frame__t.html',1,'']]],
+  ['mp3dec_5findex_5ft_240',['mp3dec_index_t',['../structmp3dec__index__t.html',1,'']]],
+  ['mp3dec_5fio_5ft_241',['mp3dec_io_t',['../structmp3dec__io__t.html',1,'']]],
+  ['mp3dec_5fmap_5finfo_5ft_242',['mp3dec_map_info_t',['../structmp3dec__map__info__t.html',1,'']]],
+  ['mp3dec_5fscratch_5ft_243',['mp3dec_scratch_t',['../structmp3dec__scratch__t.html',1,'']]],
+  ['mp3dec_5ft_244',['mp3dec_t',['../structmp3dec__t.html',1,'']]],
+  ['mp3decodermini_245',['MP3DecoderMini',['../classaudio__tools_1_1_m_p3_decoder_mini.html',1,'audio_tools']]],
+  ['multiconverter_246',['MultiConverter',['../classaudio__tools_1_1_multi_converter.html',1,'audio_tools']]],
+  ['multitarget_247',['MultiTarget',['../struct_stream_1_1_multi_target.html',1,'Stream']]],
+  ['musicalnotes_248',['MusicalNotes',['../classaudio__tools_1_1_musical_notes.html',1,'audio_tools']]]
 ];
