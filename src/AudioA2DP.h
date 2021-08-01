@@ -60,9 +60,9 @@ int32_t a2dp_stream_source_sound_data(Channels* data, int32_t len) {
     size_t result_len_bytes = a2dp_buffer.readArray((uint8_t*)data, len*sizeof(Channels));
     // result is in number of frames
     result_len = result_len_bytes / sizeof(Channels);
-    LOGI("a2dp_stream_source_sound_data %d -> %d", len ,result_len);   
     // allow some other task 
     yield();
+    LOGI("a2dp_stream_source_sound_data %d -> %d", len ,result_len);   
     return result_len;
 }
 

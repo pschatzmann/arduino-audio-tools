@@ -267,11 +267,6 @@ class BufferedStream : public Stream {
             }
         }
 
-        // refills the buffer with data from i2s
-        void refill() {
-            size_t result = readExt(buffer->address(), buffer->size());
-            buffer->setAvailable(result);
-        }
 
         /// Returns the available bytes in the buffer: to be avoided
         virtual int available() {
@@ -284,9 +279,14 @@ class BufferedStream : public Stream {
     protected:
         SingleBuffer<uint8_t> *buffer;
 
+        // refills the buffer with data from i2s
+        void refill() {
+            size_t result = readExt(buffer->address(), buffer->size());
+            buffer->setAvailable(result);
+        }
+
         virtual size_t writeExt(const uint8_t* data, size_t len) = 0;
         virtual size_t readExt( uint8_t *data, size_t length) = 0;
-
 
 };
 
