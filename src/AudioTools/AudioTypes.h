@@ -187,11 +187,11 @@ class AudioWriter {
  */
 class AudioDecoder : public AudioWriter {
   public: 
-  		virtual void setStream(Stream &out_stream);
-      virtual void begin();
-      virtual void end();
-      virtual AudioBaseInfo audioInfo();
-      virtual void setNotifyAudioBaseInfoChange(AudioBaseInfoDependent &bi) {}
+  		virtual void setStream(Stream &out_stream) = 0;
+      virtual void begin() = 0;
+      virtual void end() = 0;
+      virtual AudioBaseInfo audioInfo() = 0;
+      virtual void setNotifyAudioBaseInfoChange(AudioBaseInfoDependent &bi) = 0;
 };
 
 /**
@@ -200,9 +200,9 @@ class AudioDecoder : public AudioWriter {
  */
 class AudioEncoder : public AudioWriter {
   public: 
-  		void setStream(Stream &out_stream);
-      void begin();
-      void end();
+  		virtual void setStream(Stream &out_stream) = 0;
+      virtual void begin() = 0;
+      virtual void end() = 0;
 };
 
 
