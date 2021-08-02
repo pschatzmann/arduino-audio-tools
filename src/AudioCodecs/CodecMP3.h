@@ -270,7 +270,7 @@ class MP3DecoderMini : public AudioDecoder  {
             // provide result pwm data
             if(out!=nullptr && is_output_valid){
                 // output via callback
-                out->write((uint8_t*)pcm, samples);
+                out->write((uint8_t*)pcm, samples*2);
             } 
         }
 };
