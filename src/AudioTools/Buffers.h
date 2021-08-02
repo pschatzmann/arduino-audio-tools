@@ -176,6 +176,101 @@ protected:
 };
 
 /**
+ * @brief Implements a typed Ringbuffer
+ * 
+ * @tparam T 
+ */
+template<typename T>
+class RingBuffer : public BaseBuffer<T> {
+    public:
+        RingBuffer(int size){
+            this->max_size = size;
+            _aucBuffer = new T[max_size];
+            reset();
+        }
+        
+        ~RingBuffer() {
+            delete[] _aucBuffer;
+        }
+
+        virtual T read(){
+            if (isEmpty())
+                return -1;
+
+            uint8_t value = _aucBuffer[_iTail];
+            _iTail = nextIndex(_iTail);
+            _numElems--;
+
+            return value;
+        }
+
+        // peeks the actual entry from the buffer
+        virtual T peek() {
+            if (isEmpty())
+                return -1;
+
+            return _aucBuffer[_iTail];
+        }
+
+        // checks if the buffer is full
+        virtual bool isFull() {
+            return available()==max_size;
+        }
+
+        bool isEmpty() {
+            return available() == 0;
+        }
+        
+        // write add an entry to the buffer
+        virtual bool write(T data) {
+            bool result = false;
+            if (!isFull()){
+                _aucBuffer[_iHead] = data ;
+                _iHead = nextIndex(_iHead);
+                _numElems++;
+                result = true;
+            }
+            return result;
+        }
+        
+        // clears the buffer
+        virtual void reset() {
+            _iHead = 0;
+            _iTail = 0;
+            _numElems = 0;
+        }
+        
+        // provides the number of entries that are available to read
+        virtual int available() {
+            return _numElems;
+        }
+        
+        // provides the number of entries that are available to write
+        virtual int availableToWrite() {
+            return (max_size - _numElems);
+        }
+        
+        // returns the address of the start of the physical read buffer
+        virtual T* address() {
+            return _aucBuffer;
+        }
+        
+
+    protected:
+        T *_aucBuffer ;
+        volatile int _iHead ;
+        volatile int _iTail ;
+        volatile int _numElems;
+        int max_size;
+
+        int nextIndex(int index){
+            return (uint32_t)(index + 1) % max_size;
+        }
+
+    
+};
+
+/**
  * @brief A lock free N buffer. If count=2 we create a DoubleBuffer, if count=3 a TripleBuffer etc.
  * @author Phil Schatzmann
  * @copyright GPLv3

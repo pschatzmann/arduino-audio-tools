@@ -136,33 +136,36 @@ enum I2SMode {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class I2SConfig {
+class I2SConfig : public AudioBaseInfo {
   public:
 
     I2SConfig() {
+      channels = DEFAULT_CHANNELS;
+      sample_rate = DEFAULT_SAMPLE_RATE; 
+      bits_per_sample = DEFAULT_BITS_PER_SAMPLE;
     }
 
     /// Constructor
     I2SConfig(RxTxMode mode) {
+        channels = DEFAULT_CHANNELS;
+        sample_rate = DEFAULT_SAMPLE_RATE; 
+        bits_per_sample = DEFAULT_BITS_PER_SAMPLE;
         this->rx_tx_mode = mode;
         pin_data = rx_tx_mode == TX_MODE ? PIN_I2S_DATA_OUT : PIN_I2S_DATA_IN;
     }
-
     /// Default Copy Constructor
     I2SConfig(const I2SConfig &cfg) = default;
 
 
     /// public settings
     RxTxMode rx_tx_mode = TX_MODE;
+    bool is_master = true;
     int port_no = 0;  // processor dependent port
-    int channels = DEFAULT_CHANNELS;
-    int sample_rate = DEFAULT_SAMPLE_RATE; 
-    int bits_per_sample = DEFAULT_BITS_PER_SAMPLE;
     int pin_ws = PIN_I2S_WS;
     int pin_bck = PIN_I2S_BCK;
     int pin_data = PIN_I2S_DATA_OUT;
     I2SMode i2s_mode = I2S_PHILIPS_MODE;
-    bool is_digital = true;
+    bool is_digital = true;  // e.g. the ESP32 supports analog input or output
 
 };
 

@@ -8,6 +8,12 @@
 
 namespace audio_tools {
 
+#if defined(ESP32) && defined(SYNCHRONIZED_LOGGING)
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+static portMUX_TYPE mutex_logger = portMUX_INITIALIZER_UNLOCKED;
+#endif
+
 /**
  * @brief A simple Logger that writes messages dependent on the log level
  * @author Phil Schatzmann
@@ -39,6 +45,7 @@ class AudioLogger {
         }
 
         AudioLogger &prefix(const char* file, int line, LogLevel current_level){
+            lock();
             printPrefix(file,line,current_level);
             return *this;
         }
@@ -46,6 +53,7 @@ class AudioLogger {
         void println(){
             log_stream_ptr->println(print_buffer);
             print_buffer[0]=0;
+            unlock();
         }
 
         char* str() {
@@ -64,6 +72,7 @@ class AudioLogger {
         LogLevel level() {
             return log_level;
         }
+
 
 
     protected:
@@ -100,6 +109,19 @@ class AudioLogger {
             len += log_stream_ptr->print(" - ");
             return len;
         }
+
+        void lock(){
+            #if defined(ESP32) && defined(SYNCHRONIZED_LOGGING)
+                portENTER_CRITICAL(&mutex_logger);
+            #endif
+        }
+
+        void unlock(){
+            #if defined(ESP32) && defined(SYNCHRONIZED_LOGGING)
+                portEXIT_CRITICAL(&mutex_logger);
+            #endif
+        }
+
 
 };
 

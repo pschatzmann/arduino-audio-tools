@@ -94,7 +94,11 @@ public:
             if (client){
                 if (callback==nullptr) {
                     LOGI("copy data...");
-                    copier.copy();
+                    if (converter_ptr==nullptr) {
+                        copier.copy();
+                    }else {
+                        copier.copy<int16_t>(*converter_ptr);
+                    }
                     // if we limit the size of the WAV the encoder gets automatically closed when all has been sent
                     if (!client) {
                         LOGI("stop client...");
@@ -107,6 +111,11 @@ public:
             }
         }
         return active;
+    }
+
+    // defines a converter that will be used when the audio is rendered
+    void setConverter(BaseConverter<int16_t>  *c){
+        converter_ptr = c;
     }
 
 
@@ -122,6 +131,7 @@ protected:
     AudioServerDataCallback callback = nullptr;
     Stream *in = nullptr;                    
     StreamCopy copier;
+    BaseConverter<int16_t> *converter_ptr = nullptr;
 
     void connectWiFi() {
         LOGD("connectWiFi");
@@ -222,11 +232,32 @@ public:
      * @param sample_rate 
      * @param channels 
      */
-    void begin(Stream &in, int sample_rate, int channels, int bits_per_sample=16) {
+    void begin(Stream &in, int sample_rate, int channels, int bits_per_sample=16, BaseConverter<int16_t> *converter=nullptr) {
         this->in = &in;
         this->sample_rate = sample_rate;
         this->channels = channels;
         this->bits_per_sample = bits_per_sample;
+        setConverter(converter);
+
+        connectWiFi();
+
+        // start server
+        server.begin();
+    }
+
+    /**
+     * @brief Start the server. You need to be connected to WiFI before calling this method
+     * 
+     * @param in 
+     * @param info 
+     * @param converter 
+     */
+    void begin(Stream &in, AudioBaseInfo info, BaseConverter<int16_t> *converter=nullptr) {
+        this->in = &in;
+        this->sample_rate = info.sample_rate;
+        this->channels = info.channels;
+        this->bits_per_sample = info.bits_per_sample;
+        setConverter(converter);
 
         connectWiFi();
 

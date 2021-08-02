@@ -177,6 +177,9 @@ class ConverterSwitchLeftAndRight : public  BaseConverter<T> {
         }
 };
 
+
+enum FillLeftAndRightStatus {Auto, LeftIsEmpty, RightIsEmpty};
+
 /**
  * @brief Make sure that both channels contain any data
  * @author Phil Schatzmann
@@ -184,11 +187,26 @@ class ConverterSwitchLeftAndRight : public  BaseConverter<T> {
  * 
  * @tparam T 
  */
+
+
 template<typename T>
 class ConverterFillLeftAndRight : public  BaseConverter<T> {
     public:
-        ConverterFillLeftAndRight(){
+        ConverterFillLeftAndRight(FillLeftAndRightStatus config=Auto){
+            switch(config){
+                case LeftIsEmpty:
+                    left_empty = true;
+                    right_empty = false;
+                    is_setup = true;
+                    break;
+                case RightIsEmpty:
+                    left_empty = false;
+                    right_empty = true;
+                    is_setup = true;
+                    break;
+            }
         }
+
         void convert(T (*src)[2], size_t size) {
             setup(src, size);
             if (left_empty && !right_empty){

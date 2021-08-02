@@ -46,29 +46,49 @@ class ChannelConverter {
 
 };
 
+
 // buffer which is used to exchange data
-NBuffer<uint8_t> a2dp_buffer(A2DP_BUFFER_SIZE, A2DP_BUFFER_COUNT);
+RingBuffer<uint8_t> a2dp_buffer(A2DP_BUFFER_SIZE*A2DP_BUFFER_COUNT);
 // flag to indicated that we are ready to process data
-volatile bool is_a2dp_setup = false;
+volatile bool is_a2dp_active = false;
 
 // callback used by A2DP to provide the a2dp_source sound data
 int32_t a2dp_stream_source_sound_data(Channels* data, int32_t len) {
+    LOGD("a2dp_stream_source_sound_data: %d", len);   
     size_t result_len = 0;
-    is_a2dp_setup = true;
- 
+    // at first call we start with some empty data
+    if (!is_a2dp_active){
+        LOGI("setting is_a2dp_active to true");
+        // prevent underflow on first call
+        for(int j=0;j<len;j++){
+            a2dp_buffer.write(0);
+        }
+        is_a2dp_active = true;        
+    }
     // the data in the file must be in int16 with 2 channels 
     size_t result_len_bytes = a2dp_buffer.readArray((uint8_t*)data, len*sizeof(Channels));
+
     // result is in number of frames
     result_len = result_len_bytes / sizeof(Channels);
+
+    // Log result
+    if (AudioLogger::instance().level()==AudioLogger::Debug){
+        LOGD("a2dp_stream_source_sound_data %d -> %d", len, result_len);   
+    } else {
+        if (result_len<len){
+            LOGW("a2dp_stream_source_sound_data underflow: %d -> %d ", len, result_len);   
+        }
+    }
+
     // allow some other task 
-    yield();
-    LOGI("a2dp_stream_source_sound_data %d -> %d", len ,result_len);   
+    //yield();
+
     return result_len;
 }
 
 // callback used by A2DP to write the sound data
 void a2dp_stream_sink_sound_data(const uint8_t* data, uint32_t len) {
-    if (is_a2dp_setup){
+    if (is_a2dp_active){
         uint32_t result_len = a2dp_buffer.writeArray(data, len);
         LOGI("a2dp_stream_sink_sound_data %d -> %d", len, result_len);
         // allow some other task 
@@ -130,8 +150,8 @@ class A2DPStream : public Stream {
                         yield();
                     }
                     LOGI("a2dp_source is connected...");
-                    //is_a2dp_setup done in callback
-                    //is_a2dp_setup = true;
+
+                    //is_a2dp_active done in callback to prevent a buffer overflow
                     break;
 
                 case RX_MODE:
@@ -143,7 +163,7 @@ class A2DPStream : public Stream {
                         yield();
                     }
                     LOGI("a2dp_sink is connected...");
-                    is_a2dp_setup = true;
+                    is_a2dp_active = true;
                     break;
             }
         }
@@ -157,7 +177,7 @@ class A2DPStream : public Stream {
 
         /// is ready to process data
         bool isReady() {
-            return is_a2dp_setup;
+            return is_a2dp_active;
         }
 
         /// convert to bool
@@ -168,21 +188,20 @@ class A2DPStream : public Stream {
         /// Writes the data into a temporary send buffer - where it can be picked up by the callback
         virtual size_t write(const uint8_t* data, size_t len) {   
             size_t result = 0; 
-            if (is_a2dp_setup){
+            if (is_a2dp_active){
+                LOGD("write %d", len);
+                yield();
                 result = a2dp_buffer.writeArray(data,len);
-                LOGI("write %d->%d", len,result);
+                LOGI("write %d -> %d", len,result);
             } else {
-                LOGW( "write failed because !is_a2dp_setup");
+                LOGW( "write failed because !is_a2dp_active");
             }
             return result;
         }
 
         virtual size_t write(uint8_t c) {
-            size_t result = 0; 
-            if (is_a2dp_setup){
-                result = a2dp_buffer.write(c);
-            }
-            return result;
+            LOGE( "write(char) not supported");
+            return -1;
         }
 
         virtual void flush() {
@@ -191,11 +210,13 @@ class A2DPStream : public Stream {
         /// Reads the data from the temporary buffer
         virtual size_t readBytes(uint8_t *data, size_t len) { 
             size_t result = 0; 
-            if (is_a2dp_setup){
+            if (is_a2dp_active){
+                LOGD("readBytes %d", len);
+
                 result = a2dp_buffer.readArray(data, len);
-                LOGI("read %d->%d", len,result);
+                LOGI("readBytes %d->%d", len,result);
             } else {
-                LOGW( "readBytes failed because !is_a2dp_setup");
+                LOGW( "readBytes failed because !is_a2dp_active");
             }
             return result;
         }
