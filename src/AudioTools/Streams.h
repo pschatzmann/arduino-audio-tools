@@ -484,7 +484,6 @@ class EncodedAudioStream : public Stream {
             writer_ptr->setNotifyAudioBaseInfoChange(bi);
         }
 
-
         void begin() {
             active = true;
             writer_ptr->begin();
@@ -496,6 +495,7 @@ class EncodedAudioStream : public Stream {
         }
 
         virtual int available (){
+            decode(DEFAULT_BUFFER_SIZE);
             return ring_buffer.available();
         }
         
@@ -503,9 +503,11 @@ class EncodedAudioStream : public Stream {
         }
         
         virtual int peek() {
+            decode(DEFAULT_BUFFER_SIZE);
             return ring_buffer.peek();
         }        
         virtual int read() {
+            decode(DEFAULT_BUFFER_SIZE);
             return ring_buffer.read();
         }
         
@@ -525,7 +527,7 @@ class EncodedAudioStream : public Stream {
         }
 
         operator bool() {
-            return active && *writer_ptr;
+            return active && *writer_ptr && hasMoreData();
         }
 
         AudioDecoder &decoder() {
@@ -543,10 +545,14 @@ class EncodedAudioStream : public Stream {
         void decode(int len) {
             uint8_t buffer[len];
             // push data to decoder until we have enugh data to return
-            while(input_ptr->available()>0 && ring_buffer.available()<len){
+            while(input_ptr->available()>0 && ring_buffer.available()==0){
                 int eff_len = input_ptr->readBytes(buffer, len);
                 writer_ptr->write(buffer, eff_len);
             }
+        }
+
+        bool hasMoreData() {
+            input_ptr->available()>0 || ring_buffer.available()>0;
         }
 };
 
