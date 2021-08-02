@@ -263,7 +263,7 @@ class WAVDecoder : public AudioDecoder {
             this->out = &out_stream;
 		}
 
-        void setNotifyAudioBaseInfoChange(AudioBaseInfoDependent &bi){
+        void setNotifyAudioChange(AudioBaseInfoDependent &bi){
             this->audioBaseInfoSupport = &bi;
         }
 
