@@ -5,6 +5,7 @@
 //#define MINIMP3_NO_SIMD
 #define LOGGING_ACTIVE true
 
+#include "Stream.h"
 #include "AudioTools/AudioTypes.h"
 #include "AudioCodecs/ext/minimp3/minimp3.h"
 
@@ -21,10 +22,12 @@ typedef void (*MP3DataCallback)(MP3MiniAudioInfo &info,int16_t *pwm_buffer, size
  * @brief MP3 Decoder using https://github.com/lieff/minimp3
  * 
  */
-class MP3DecoderMini : public AudioWriter  {
+class MP3DecoderMini : public AudioDecoder  {
     public:
 
-        MP3DecoderMini() = default;
+        MP3DecoderMini() {
+        	LOGD(__FUNCTION__);
+        }
         /**
          * @brief Construct a new MP3DecoderMini object
          * 
@@ -80,8 +83,18 @@ class MP3DecoderMini : public AudioWriter  {
             this->pwmCallback = cb;
         }      
 
+        /// Defines the output Stream
+		void setStream(Stream &out_stream){
+            this->out = &out_stream;
+		}
+
         /// Starts the processing
-        void begin(int bufferLen = 16*1024){
+        void begin(){
+            begin(16*1024);
+        }        
+
+        /// Starts the processing
+        void begin(int bufferLen){
         	LOGD(__FUNCTION__);
             flush();
             mp3dec_init(&mp3d);

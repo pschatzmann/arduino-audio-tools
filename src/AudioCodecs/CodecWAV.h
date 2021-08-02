@@ -225,8 +225,17 @@ class WAVHeader  {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class WAVDecoder : public AudioWriter {
+class WAVDecoder : public AudioDecoder {
     public:
+        /**
+         * @brief Construct a new WAVDecoder object
+         */
+
+        WAVDecoder(){
+        	LOGD(__FUNCTION__);
+            this->audioBaseInfoSupport = nullptr;
+        }
+
         /**
          * @brief Construct a new WAVDecoder object
          * 
@@ -251,7 +260,13 @@ class WAVDecoder : public AudioWriter {
             this->out = &out_stream;
             this->audioBaseInfoSupport = &bi;
         }
-    
+
+        /// Defines the output Stream
+		void setStream(Stream &out_stream){
+            this->out = &out_stream;
+		}
+
+
         void begin() {
         	LOGD(__FUNCTION__);
             isFirst = true;

@@ -15,10 +15,9 @@ using namespace audio_tools;
 
 // MemoryStream -> AudioOutputStream -> MP3Decoder -> CsvStream
 MemoryStream mp3(BabyElephantWalk60_mp3, BabyElephantWalk60_mp3_len);
+EncodedAudioStream decoded(mp3, new MP3DecoderMini()); // output to decoder
 CsvStream<int16_t> printer(Serial, 1);  // ASCII stream 
-MP3DecoderMini decoder(printer);    // decode wav to pcm and send it to printer
-AudioOutputStream out(decoder); // output to decoder
-StreamCopy copier(out, mp3);    // copy in to out
+StreamCopy copier(out, decoded);    // copy in to out
 
 void setup(){
   Serial.begin(115200);

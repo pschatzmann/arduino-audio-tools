@@ -127,6 +127,8 @@ class MemoryStream : public Stream {
  * - we do not support reading of individual characters!
  * - we do not support any write operations
  * @param generator 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 
 template <class T>
@@ -207,7 +209,8 @@ class GeneratedSoundStream : public Stream {
  * @brief The Arduino Stream supports operations on single characters. This is usually not the best way to push audio information, but we 
  * will support it anyway - by using a buffer. On reads: if the buffer is empty it gets refilled - for writes
  * if it is full it gets flushed.
- * 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 class BufferedStream : public Stream {
     public:
@@ -295,7 +298,9 @@ class BufferedStream : public Stream {
  * @brief Stream Wrapper which can be used to print the values as readable ASCII to the screen to be analyzed in the Serial Plotter
  * The frames are separated by a new line. The channels in one frame are separated by a ,
  * @tparam T 
- */
+  * @author Phil Schatzmann
+ * @copyright GPLv3
+*/
 template<typename T>
 class CsvStream : public BufferedStream, public AudioBaseInfoDependent  {
 
@@ -356,7 +361,8 @@ class CsvStream : public BufferedStream, public AudioBaseInfoDependent  {
 
 /**
  * @brief Construct a new Encoded Stream object which is supporting defined Audio File types
- * 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 class AudioOutputStream : public BufferedStream {
     public:
@@ -394,6 +400,150 @@ class AudioOutputStream : public BufferedStream {
             return 0;
         }
 };
+
+/**
+ * @brief A Stream backed by a Ringbuffer. We can 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class RingBufferStream : public Stream {
+    public:
+        RingBufferStream(int size=DEFAULT_BUFFER_SIZE) {
+            buffer = new RingBuffer<uint8_t>(size);
+        }
+
+        ~RingBufferStream(){
+            if (buffer!=nullptr){
+                delete buffer;
+            }
+        }
+
+        virtual int available (){
+            return buffer->available();
+        }
+        
+        virtual void flush (){
+        }
+        
+        virtual int peek() {
+            return buffer->peek();
+        }        
+        virtual int read() {
+            return buffer->read();
+        }
+        
+        virtual size_t readBytes(uint8_t *data, size_t length) {
+            return buffer->readArray(data, length);
+        }
+        
+        virtual size_t write(const uint8_t *data, size_t len){
+            return buffer->writeArray(data, len);
+        }
+        
+        virtual size_t 	write(uint8_t c) {
+            return buffer->write(c);
+        }
+
+    protected:
+        RingBuffer<uint8_t> *buffer=nullptr;
+
+};
+
+
+/**
+ * @brief A more natural Stream class to process encoded data (aac, wav, mp3...) at the cost of memory use.
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class EncodedAudioStream : public Stream { 
+    public: 
+        /**
+         * @brief Construct a new Encoded Stream object
+         * 
+         * @param outputStream 
+         * @param decoder 
+         */
+        EncodedAudioStream(Stream &inputStream, AudioDecoder &decoder) {
+            writer_ptr = &decoder;
+            writer_ptr->setStream(ring_buffer);
+            input_ptr = &inputStream;
+            active = false;
+            direction = RX_MODE;
+        }
+
+        EncodedAudioStream(Stream &inputStream, AudioDecoder *decoder) {
+            writer_ptr = decoder;
+            writer_ptr->setStream(ring_buffer);
+            input_ptr = &inputStream;
+            active = false;
+            direction = RX_MODE;
+        }
+
+        void begin() {
+            active = true;
+            writer_ptr->begin();
+        }
+
+        void end() {
+            writer_ptr->end();
+            active = false;
+        }
+
+        virtual int available (){
+            return ring_buffer.available();
+        }
+        
+        virtual void flush (){
+        }
+        
+        virtual int peek() {
+            return ring_buffer.peek();
+        }        
+        virtual int read() {
+            return ring_buffer.read();
+        }
+        
+        virtual size_t readBytes(uint8_t *data, size_t length) {
+            decode(length);
+            return ring_buffer.readBytes(data, length);
+        }
+        
+        virtual size_t write(const uint8_t *data, size_t len){
+            LOGE("not implemented: %s", __FUNCTION__);
+            return -1;
+        }
+        
+        virtual size_t 	write(uint8_t c) {
+            LOGE("not implemented: %s", __FUNCTION__);
+            return -1;
+        }
+
+        operator bool() {
+            return active && *writer_ptr;
+        }
+
+        AudioDecoder &decoder() {
+            return *writer_ptr;
+        }
+
+    protected:
+        RingBufferStream ring_buffer;
+        AudioDecoder *writer_ptr;  // decoder
+        Stream *input_ptr; // data source for encoded data
+        RxTxMode direction; // RX_MODE is decoding
+        bool active;
+        
+        /// decode data into ringbuffer
+        void decode(int len) {
+            uint8_t buffer[len];
+            // push data to decoder until we have enugh data to return
+            while(input_ptr->available()>0 && ring_buffer.available()<len){
+                int eff_len = input_ptr->readBytes(buffer, len);
+                writer_ptr->write(buffer, eff_len);
+            }
+        }
+};
+
 
 /**
  * @brief AudioOutput class which stores the data in a temporary buffer. 
@@ -448,6 +598,8 @@ class CallbackStream :  public BufferedStream {
  * @brief We support the Stream interface for the ADC class
  * 
  * @tparam T 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 
 class AnalogAudioStream : public BufferedStream, public AudioBaseInfoDependent  {
@@ -504,6 +656,8 @@ class AnalogAudioStream : public BufferedStream, public AudioBaseInfoDependent  
  * to drive a LED... 
  * 
  * @tparam T 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 
 class I2SStream : public BufferedStream, public AudioBaseInfoDependent  {
