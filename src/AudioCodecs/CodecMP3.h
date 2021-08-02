@@ -73,7 +73,7 @@ class MP3DecoderMini : public AudioDecoder  {
         }
 
         /// Defines the callback object to which the Audio information change is provided
-        void setNotifyBaseInfoChange(AudioBaseInfoDependent &bi){
+        void setNotifyAudioBaseInfoChange(AudioBaseInfoDependent &bi){
             this->audioBaseInfoSupport = &bi;
         }
 
