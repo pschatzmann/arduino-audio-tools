@@ -258,6 +258,9 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_p_w_m_config.html">PWMConfig</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implements a typed Ringbuffer.  <a href="classaudio__tools_1_1_ring_buffer.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sine_wave_generator.html">SineWaveGenerator</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a Sound with the help of sin() function.  <a href="classaudio__tools_1_1_sine_wave_generator.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -353,6 +356,11 @@ typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><b>simple_call
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
+<tr class="memitem:a359b1a4f9253f70ed40245edabc906cc"><td class="memItemLeft" align="right" valign="top"><a id="a359b1a4f9253f70ed40245edabc906cc"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>FillLeftAndRightStatus</b> { <b>Auto</b>
+, <b>LeftIsEmpty</b>
+, <b>RightIsEmpty</b>
+ }</td></tr>
+<tr class="separator:a359b1a4f9253f70ed40245edabc906cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4c260dc79b2237ac8f920e23666847d"><td class="memItemLeft" align="right" valign="top"><a id="ae4c260dc79b2237ac8f920e23666847d"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>I2SMode</b> { <b>I2S_PHILIPS_MODE</b>
 , <b>I2S_RIGHT_JUSTIFIED_MODE</b>
 , <b>I2S_LEFT_JUSTIFIED_MODE</b>
@@ -365,9 +373,9 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ab199eb221e8c4a924801efe90d92ef7d"><td class="memItemLeft" align="right" valign="top"><a id="ab199eb221e8c4a924801efe90d92ef7d"></a>
-<a class="el" href="classaudio__tools_1_1_n_buffer.html">NBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>a2dp_buffer</b> (A2DP_BUFFER_SIZE, A2DP_BUFFER_COUNT)</td></tr>
-<tr class="separator:ab199eb221e8c4a924801efe90d92ef7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6ccc5b7ff74334888fc050ea16618bf"><td class="memItemLeft" align="right" valign="top"><a id="ad6ccc5b7ff74334888fc050ea16618bf"></a>
+<a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>a2dp_buffer</b> (A2DP_BUFFER_SIZE *A2DP_BUFFER_COUNT)</td></tr>
+<tr class="separator:ad6ccc5b7ff74334888fc050ea16618bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a617391bdaaaa3fd418ff3a10e7428d63"><td class="memItemLeft" align="right" valign="top"><a id="a617391bdaaaa3fd418ff3a10e7428d63"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>a2dp_stream_sink_sound_data</b> (const uint8_t *data, uint32_t len)</td></tr>
 <tr class="separator:a617391bdaaaa3fd418ff3a10e7428d63"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -466,9 +474,9 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>HOST</b> = &q
 <tr class="memitem:ae0c4006a98f4ccc684f2af4e103d7d6f"><td class="memItemLeft" align="right" valign="top"><a id="ae0c4006a98f4ccc684f2af4e103d7d6f"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><b>IDENTITY</b> = &quot;identity&quot;</td></tr>
 <tr class="separator:ae0c4006a98f4ccc684f2af4e103d7d6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8502a92d5e42a963681ed13dd03fdb29"><td class="memItemLeft" align="right" valign="top"><a id="a8502a92d5e42a963681ed13dd03fdb29"></a>
-volatile bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_a2dp_setup</b> = false</td></tr>
-<tr class="separator:a8502a92d5e42a963681ed13dd03fdb29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1f03792dca3c9b9072791ad52b5ba14"><td class="memItemLeft" align="right" valign="top"><a id="ae1f03792dca3c9b9072791ad52b5ba14"></a>
+volatile bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_a2dp_active</b> = false</td></tr>
+<tr class="separator:ae1f03792dca3c9b9072791ad52b5ba14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65287e24020e71beca0a59659cf627fd"><td class="memItemLeft" align="right" valign="top"><a id="a65287e24020e71beca0a59659cf627fd"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><b>LOCATION</b> = &quot;Location&quot;</td></tr>
 <tr class="separator:a65287e24020e71beca0a59659cf627fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -478,6 +486,9 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>MaxHeaderLineLen
 <tr class="memitem:a197983ed7b1a31c3a9a45980f57a6477"><td class="memItemLeft" align="right" valign="top"><a id="a197983ed7b1a31c3a9a45980f57a6477"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><b>methods</b> [] = {&quot;?&quot;,&quot;GET&quot;,&quot;HEAD&quot;,&quot;POST&quot;,&quot;PUT&quot;,&quot;DELETE&quot;,&quot;TRACE&quot;,&quot;OPTIONS&quot;,&quot;CONNECT&quot;,&quot;PATCH&quot;,nullptr}</td></tr>
 <tr class="separator:a197983ed7b1a31c3a9a45980f57a6477"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38bf0cac6f2d298b34f8545d3a2a90b6"><td class="memItemLeft" align="right" valign="top"><a id="a38bf0cac6f2d298b34f8545d3a2a90b6"></a>
+static portMUX_TYPE&#160;</td><td class="memItemRight" valign="bottom"><b>mutex_logger</b> = portMUX_INITIALIZER_UNLOCKED</td></tr>
+<tr class="separator:a38bf0cac6f2d298b34f8545d3a2a90b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a39517ccd473450adc836daea214cf4a7"><td class="memItemLeft" align="right" valign="top"><a id="a39517ccd473450adc836daea214cf4a7"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><b>SUCCESS</b> = &quot;Success&quot;</td></tr>
 <tr class="separator:a39517ccd473450adc836daea214cf4a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
