@@ -33,7 +33,7 @@ class PortAudioConfig : public AudioBaseInfo {
  * @brief Arduino Audio Stream using PortAudio
  * 
  */
-class PortAudioStream : public BufferedStream  :  public AudioBaseInfoDependent {
+class PortAudioStream : public BufferedStream,  public AudioBaseInfoDependent {
     public:
         PortAudioStream(int buffer_size=DEFAULT_BUFFER_SIZE):BufferedStream(buffer_size) {
             LOGD(__FUNCTION__);
