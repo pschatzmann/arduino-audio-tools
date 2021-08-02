@@ -33,7 +33,7 @@ class PortAudioConfig : public AudioBaseInfo {
  * @brief Arduino Audio Stream using PortAudio
  * 
  */
-class PortAudioStream : public BufferedStream {
+class PortAudioStream : public BufferedStream  :  public AudioBaseInfoDependent {
     public:
         PortAudioStream(int buffer_size=DEFAULT_BUFFER_SIZE):BufferedStream(buffer_size) {
             LOGD(__FUNCTION__);
@@ -51,38 +51,54 @@ class PortAudioStream : public BufferedStream {
             return default_info;
         }
 
+        /// notification of audio info change
+        virtual void setAudioInfo(AudioBaseInfo in) {
+            LOGD(__FUNCTION__);
+            info.channels = in.channels;
+            info.sample_rate = in.sample_rate;
+            info.bits_per_sample = in.bits_per_sample;
+            begin(info)
+        };
+
+        // start with default configuration
         void begin() {
             begin(defaultConfig());
         }
 
+        // start with the indicated configuration
         void begin(PortAudioConfig info) {
             LOGD(__FUNCTION__);
             this->info = info;
-            LOGD("Pa_Initialize");
-            err = Pa_Initialize();
-            LOGD("Pa_Initialize - done");
-            if( err != paNoError ) {
-                LOGE(  "PortAudio error: %s\n", Pa_GetErrorText( err ) );
-                return;
-            }
 
-            // calculate frames
-            int bytes = info.bits_per_sample / 8;
-            int buffer_frames = buffer_size / bytes / info.channels;
+            if (info.channels>0 && info.sample_rate && info.bits_per_sample>0){
+                LOGD("Pa_Initialize");
+                err = Pa_Initialize();
+                LOGD("Pa_Initialize - done");
+                if( err != paNoError ) {
+                    LOGE(  "PortAudio error: %s\n", Pa_GetErrorText( err ) );
+                    return;
+                }
 
-            // Open an audio I/O stream. 
-            LOGD("Pa_OpenDefaultStream");
-            err = Pa_OpenDefaultStream( &stream,
-                info.is_input ? info.channels : 0,    // no input channels 
-                info.is_output ? info.channels : 0,   // stereo output 
-                getFormat(info.bits_per_sample),      // format  
-                info.sample_rate,                     // sample rate
-                buffer_frames,                        // frames per buffer 
-                nullptr,   
-                nullptr ); 
-            LOGD("Pa_OpenDefaultStream - done");
-            if( err != paNoError ) {
-                LOGE(  "PortAudio error: %s\n", Pa_GetErrorText( err ) );
+                // calculate frames
+                int bytes = info.bits_per_sample / 8;
+                int buffer_frames = buffer_size / bytes / info.channels;
+
+                // Open an audio I/O stream. 
+                LOGD("Pa_OpenDefaultStream");
+                err = Pa_OpenDefaultStream( &stream,
+                    info.is_input ? info.channels : 0,    // no input channels 
+                    info.is_output ? info.channels : 0,   // stereo output 
+                    getFormat(info.bits_per_sample),      // format  
+                    info.sample_rate,                     // sample rate
+                    buffer_frames,                        // frames per buffer 
+                    nullptr,   
+                    nullptr ); 
+                LOGD("Pa_OpenDefaultStream - done");
+                if( err != paNoError ) {
+                    LOGE(  "PortAudio error: %s\n", Pa_GetErrorText( err ) );
+                }
+            } else {
+                LOGI("basic audio information is missing...");
             }
 
         }
