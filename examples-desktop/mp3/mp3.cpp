@@ -13,7 +13,7 @@ StreamCopy copier(portaudio_stream, in); // copy in to out
 
 void setup(){
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);  
+  AudioLogger::instance().begin(Serial, AudioLogger::Debug);  
 
   in.setNotifyAudioChange(portaudio_stream);
   in.begin();
