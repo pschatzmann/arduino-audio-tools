@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['generatedsoundstream_218',['GeneratedSoundStream',['../classaudio__tools_1_1_generated_sound_stream.html',1,'audio_tools']]]
+  ['encodedaudiostream_227',['EncodedAudioStream',['../classaudio__tools_1_1_encoded_audio_stream.html',1,'audio_tools']]]
 ];
