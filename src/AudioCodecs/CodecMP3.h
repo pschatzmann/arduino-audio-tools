@@ -258,7 +258,7 @@ class MP3DecoderMini : public AudioDecoder  {
         void provideResultStream(MP3MiniAudioInfo &info, int samples){
         	LOGD(__FUNCTION__);
             // audio has changed
-            if (audioBaseInfoSupport!=nullptr){
+            if (audioBaseInfoSupport!=nullptr && audio_info != info){
                 is_output_valid = audioBaseInfoSupport->validate(info);
                 if (is_output_valid){
                     audioBaseInfoSupport->setAudioInfo(info); 
