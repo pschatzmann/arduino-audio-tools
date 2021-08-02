@@ -2,7 +2,6 @@
 
 #define MINIMP3_IMPLEMENTATION
 #define MINIMP3_NO_STDIO
-//#define MINIMP3_NO_SIMD
 #define LOGGING_ACTIVE true
 
 #include "Stream.h"
@@ -73,6 +72,12 @@ class MP3DecoderMini : public AudioDecoder  {
             }
         }
 
+        /// Defines the callback object to which the Audio information change is provided
+        void setNotifyBaseInfoChange(AudioBaseInfoDependent &bi){
+            this->audioBaseInfoSupport = &bi;
+        }
+
+
         /// Defines the callback which provides the Audio information
         void setMP3InfoCallback(MP3InfoCallback cb){
             this->infoCallback = cb;
@@ -112,9 +117,7 @@ class MP3DecoderMini : public AudioDecoder  {
             buffer = nullptr;
         }
 
-
-        /// Provides the last available MP3FrameInfo
-        MP3MiniAudioInfo audioInfo(){
+        AudioBaseInfo audioInfo(){
             return audio_info;
         }
 
