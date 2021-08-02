@@ -57,7 +57,7 @@ class PortAudioStream : public BufferedStream,  public AudioBaseInfoDependent {
             info.channels = in.channels;
             info.sample_rate = in.sample_rate;
             info.bits_per_sample = in.bits_per_sample;
-            begin(info)
+            begin(info);
         };
 
         // start with default configuration
