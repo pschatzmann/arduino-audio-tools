@@ -94,9 +94,9 @@ class int24_t : public Printable {
 struct AudioBaseInfo {
     AudioBaseInfo() = default;
     AudioBaseInfo(const AudioBaseInfo &) = default;
-    int sample_rate;
-    int channels;
-    int bits_per_sample=16;
+    int sample_rate = 0;    // undefined
+    int channels = 0;       // undefined
+    int bits_per_sample=16; // we assume int16_t
 
     bool operator==(AudioBaseInfo alt){
         return sample_rate==alt.sample_rate && channels == alt.channels && bits_per_sample == alt.bits_per_sample;
@@ -208,9 +208,13 @@ class AudioEncoder : public AudioWriter {
 
 /// stops any further processing by spinning in an endless loop
 void stop() {
+  #ifdef EXIT_ON_STOP
+  exit(0);
+  #else
   while(true){
     delay(1000);
   }
+  #endif
 }
 
 }
