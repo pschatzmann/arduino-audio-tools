@@ -10,18 +10,20 @@
 
 #include "Arduino.h"
 #include "AudioTools.h"
+#include "AudioA2DP.h"
 
 using namespace audio_tools;  
 
 I2SStream i2sStream;                        // Access I2S as stream
 A2DPStream a2dpStream = A2DPStream::instance(); // access A2DP as stream
 StreamCopy copier(a2dpStream, i2sStream); // copy i2sStream to a2dpStream
+ConverterFillLeftAndRight<int16_t> filler(RightIsEmpty); // fill both channels
 
 
 // Arduino Setup
 void setup(void) {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Debug);
+  AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
   // start the bluetooth
   Serial.println("starting A2DP...");
@@ -42,6 +44,6 @@ void setup(void) {
 // Arduino loop - copy data 
 void loop() {
     if (a2dpStream){
-        copier.copy();
+        copier.copy(filler);
     }
 }

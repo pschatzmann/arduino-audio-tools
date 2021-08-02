@@ -30,11 +30,11 @@ class I2SBase {
       setChannels(cfg.channels);
 
       i2s_config_t i2s_config_new = {
-            .mode = (i2s_mode_t) ((cfg.rx_tx_mode == TX_MODE) ? (I2S_MODE_MASTER | I2S_MODE_TX) :  (I2S_MODE_MASTER | I2S_MODE_RX)) ,
+            .mode = toMode(cfg),
             .sample_rate = cfg.sample_rate,
             .bits_per_sample = (i2s_bits_per_sample_t) cfg.bits_per_sample,
             .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,
-            .communication_format = static_cast<i2s_comm_format_t>(I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_MSB),
+            .communication_format = toCommFormat(cfg.i2s_mode),
             .intr_alloc_flags = ESP_INTR_FLAG_LEVEL1, // default interrupt priority
             .dma_buf_count = I2S_BUFFER_COUNT,
             .dma_buf_len = I2S_BUFFER_SIZE,
@@ -48,7 +48,6 @@ class I2SBase {
           end();
           LOGD("%s", "I2S restarting");
       }
-
 
       // setup config
       if (i2s_driver_install(i2s_num, &i2s_config, 0, NULL)!=ESP_OK){
@@ -196,11 +195,37 @@ class I2SBase {
         return result;
     }
 
+    // determines the i2s_comm_format_t - by default we use I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_MSB
+    i2s_comm_format_t toCommFormat(I2SMode mode){
+        switch(mode){
+          case I2S_RIGHT_JUSTIFIED_MODE:
+            return (i2s_comm_format_t) (I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_LSB);
+          default:
+            return (i2s_comm_format_t) (I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_MSB);
+        }
+    }
+
+    // determines the i2s_mode_t
+    i2s_mode_t toMode(I2SConfig &cfg) {
+      i2s_mode_t mode;
+      if (cfg.is_digital){
+        int i2s_mode = cfg.is_master ? I2S_MODE_MASTER : I2S_MODE_SLAVE;
+        int rx_tx = cfg.rx_tx_mode == TX_MODE ? I2S_MODE_TX : I2S_MODE_RX;
+        mode = (i2s_mode_t) (i2s_mode | rx_tx);
+      } else {
+        mode = (i2s_mode_t) (cfg.rx_tx_mode ? I2S_MODE_DAC_BUILT_IN : I2S_MODE_ADC_BUILT_IN);
+      }
+      return mode;
+    }
+
+
     void logConfig() {
-      LOGI("mode: %s", cfg.rx_tx_mode == TX_MODE ? "TX":"RX");
+      LOGI("rx/tx mode: %s", cfg.rx_tx_mode == TX_MODE ? "TX":"RX");
       LOGI("sample rate: %d", cfg.sample_rate);
       LOGI("bits per sample: %d", cfg.bits_per_sample);
       LOGI("number of channels: %d", cfg.channels);
+      LOGI("is_master: %s", cfg.is_master ? "Master":"Slave");
+      LOGI("mode: %d", cfg.i2s_mode);
     }
 
     void logConfigPins(i2s_pin_config_t pin_config){
