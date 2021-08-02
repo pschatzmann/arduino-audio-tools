@@ -479,6 +479,12 @@ class EncodedAudioStream : public Stream {
             direction = RX_MODE;
         }
 
+        /// Define object which need to be notified if the basinfo is changing
+        void setNotifyBaseInfoChange(AudioBaseInfoDependent &bi) {
+            writer_ptr->setNotifyBaseInfoChange(bi);
+        }
+
+
         void begin() {
             active = true;
             writer_ptr->begin();

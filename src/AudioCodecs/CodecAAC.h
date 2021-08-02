@@ -87,7 +87,7 @@ class AACDecoder : public AudioDecoder  {
         }
 
 		// provides common information
-		AudioBaseInfo &info() {
+		AudioBaseInfo &audioInfo() {
 			AudioBaseInfo result;
 			CStreamInfo& i = infoEx();
 			result.channels = i.numChannels;

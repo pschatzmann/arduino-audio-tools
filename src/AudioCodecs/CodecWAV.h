@@ -13,11 +13,8 @@ namespace audio_tools {
  * @copyright GPLv3
  * 
  */
-struct WAVAudioInfo {
+struct WAVAudioInfo : AudioBaseInfo {
     int format;
-    int sample_rate;
-    int bits_per_sample;
-    int channels;
     int byte_rate;
     int block_align;
     bool is_streamed;
@@ -266,6 +263,10 @@ class WAVDecoder : public AudioDecoder {
             this->out = &out_stream;
 		}
 
+        void setNotifyBaseInfoChange(AudioBaseInfoDependent &bi){
+            this->audioBaseInfoSupport = &bi;
+        }
+
 
         void begin() {
         	LOGD(__FUNCTION__);
@@ -282,7 +283,11 @@ class WAVDecoder : public AudioDecoder {
             return wav_mime;
         }
 
-        WAVAudioInfo &audioInfo() {
+        WAVAudioInfo &audioInfoEx() {
+            return header.audioInfo();
+        }
+
+        AudioBaseInfo audioInfo(){
             return header.audioInfo();
         }
 

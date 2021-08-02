@@ -187,9 +187,11 @@ class AudioWriter {
  */
 class AudioDecoder : public AudioWriter {
   public: 
-  		void setStream(Stream &out_stream);
-      void begin();
-      void end();
+  		virtual void setStream(Stream &out_stream);
+      virtual void begin();
+      virtual void end();
+      virtual AudioBaseInfo audioInfo();
+      void setNotifyBaseInfoChange(AudioBaseInfoDependent &bi);
 };
 
 /**
