@@ -73,7 +73,7 @@ class MP3DecoderMini : public AudioDecoder  {
         }
 
         /// Defines the callback object to which the Audio information change is provided
-        void setNotifyAudioBaseInfoChange(AudioBaseInfoDependent &bi){
+        virtual void setNotifyAudioBaseInfoChange(AudioBaseInfoDependent &bi){
             this->audioBaseInfoSupport = &bi;
         }
 
@@ -89,12 +89,12 @@ class MP3DecoderMini : public AudioDecoder  {
         }      
 
         /// Defines the output Stream
-		void setStream(Stream &out_stream){
+		virtual void setStream(Stream &out_stream){
             this->out = &out_stream;
 		}
 
         /// Starts the processing
-        void begin(){
+        virtual void begin(){
             begin(16*1024);
         }        
 
@@ -108,7 +108,7 @@ class MP3DecoderMini : public AudioDecoder  {
         }
 
         /// Releases the reserved memory
-        void end(){
+        virtual void end(){
         	LOGD(__FUNCTION__);
             flush();
             active = false;
@@ -117,7 +117,7 @@ class MP3DecoderMini : public AudioDecoder  {
             buffer = nullptr;
         }
 
-        AudioBaseInfo audioInfo(){
+        virtual AudioBaseInfo audioInfo(){
             return audio_info;
         }
 
