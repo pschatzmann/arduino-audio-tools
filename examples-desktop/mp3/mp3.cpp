@@ -9,27 +9,16 @@ using namespace audio_tools;
 MemoryStream mp3(BabyElephantWalk60_mp3, BabyElephantWalk60_mp3_len);
 EncodedAudioStream in(mp3, new MP3DecoderMini()); // MP3 data source
 PortAudioStream portaudio_stream;   // Output of sound on desktop 
-StreamCopy copier(portaudio_stream, in);            // copy in to out
-
-
-/// open portaudio with audio inform provided by mp3
-void mp3InfoCallback(MP3MiniAudioInfo &info){
-    PortAudioConfig pc;
-    pc = info;
-    pc.is_output = true;
-    Serial.print("sample_rate: ");
-    Serial.println(pc.sample_rate);
-    Serial.print("channels: ");
-    Serial.println(pc.channels);
-
-    portaudio_stream.begin(pc);
-}
+StreamCopy copier(portaudio_stream, in); // copy in to out
 
 void setup(){
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);  
-  // this is not really necessary
+
+  in.setNotifyAudioBaseInfoChange(portaudio_stream);
   in.begin();
+
+  portaudio_stream.begin();
 }
 
 void loop(){
