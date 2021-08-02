@@ -480,8 +480,8 @@ class EncodedAudioStream : public Stream {
         }
 
         /// Define object which need to be notified if the basinfo is changing
-        void setNotifyBaseInfoChange(AudioBaseInfoDependent &bi) {
-            writer_ptr->setNotifyBaseInfoChange(bi);
+        void setNotifyAudioBaseInfoChange(AudioBaseInfoDependent &bi) {
+            writer_ptr->setNotifyAudioBaseInfoChange(bi);
         }
 
 

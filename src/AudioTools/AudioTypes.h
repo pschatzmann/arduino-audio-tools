@@ -191,7 +191,7 @@ class AudioDecoder : public AudioWriter {
       virtual void begin();
       virtual void end();
       virtual AudioBaseInfo audioInfo();
-      void setNotifyBaseInfoChange(AudioBaseInfoDependent &bi);
+      virtual void setNotifyAudioBaseInfoChange(AudioBaseInfoDependent &bi) {}
 };
 
 /**
