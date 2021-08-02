@@ -20,7 +20,7 @@ class PWMAudioStreamPico;
 class PWMAudioStreamMBED;
 
 /**
- * PWMConfigAVR
+ * @brief Configuration data for PWM audio output
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

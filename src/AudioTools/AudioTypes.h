@@ -181,6 +181,27 @@ class AudioWriter {
       virtual operator boolean() = 0;
 };
 
+/**
+ * @brief Docoding of encoded audio into PCM data
+ * 
+ */
+class AudioDecoder : public AudioWriter {
+  public: 
+  		void setStream(Stream &out_stream);
+      void begin();
+      void end();
+};
+
+/**
+ * @brief  Encoding of PCM data
+ * 
+ */
+class AudioEncoder : public AudioWriter {
+  public: 
+  		void setStream(Stream &out_stream);
+      void begin();
+      void end();
+};
 
 
 /// stops any further processing by spinning in an endless loop

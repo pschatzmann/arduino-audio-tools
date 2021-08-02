@@ -9,9 +9,16 @@ namespace audio_tools {
  * @brief Audio Decoder which decodes AAC into a PCM stream
  * 
  */
-class AACDecoder : public AudioWriter  {
+class AACDecoder : public AudioDecoder  {
     public:
+        AACDecoder(int output_buffer_size=2048){
+        	LOGD(__FUNCTION__);
+            this->output_buffer_size = output_buffer_size;
+            this->output_buffer = new INT_PCM[output_buffer_size];
+		}
+
         AACDecoder(Stream &out_stream, int output_buffer_size=2048){
+        	LOGD(__FUNCTION__);
             this->out = &out_stream;
             this->output_buffer_size = output_buffer_size;
             this->output_buffer = new INT_PCM[output_buffer_size];
@@ -20,6 +27,10 @@ class AACDecoder : public AudioWriter  {
         ~AACDecoder(){
             close();
         }
+
+		void setStream(Stream &out_stream){
+            this->out = &out_stream;
+		}
 
         // opens the decoder
         int begin(TRANSPORT_TYPE transportType = TT_UNKNOWN, UINT nrOfLayers=1){
