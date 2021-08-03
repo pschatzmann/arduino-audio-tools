@@ -149,7 +149,7 @@ class MP3DecoderMini : public AudioDecoder  {
             return len;
         }
 
-        /// alternative API to write() - gets the data from an input stream. Each call will result in one record of decoded data in the defined output stream
+        /// Alternative API to write() - gets the data from an input stream. Each call will result in one record of decoded data in the defined output stream
         int readStream(Stream &in){
             int decoded_len = 0;
             

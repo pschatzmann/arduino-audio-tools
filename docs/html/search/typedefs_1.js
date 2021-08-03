@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mp3miniaudioinfo_400',['MP3MiniAudioInfo',['../namespaceaudio__tools.html#ad4db4b9c171ed57912eb37695f8c6188',1,'audio_tools']]]
+  ['mp3infocallback_411',['MP3InfoCallback',['../namespaceaudio__tools.html#a06e115ca85ae77bab10d6ede221ebc30',1,'audio_tools']]]
 ];

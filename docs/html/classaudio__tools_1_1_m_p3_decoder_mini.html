@@ -92,7 +92,7 @@ Inheritance diagram for audio_tools::MP3DecoderMini:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a712ca44e39f1cf0f25d31244ec156008"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html#a712ca44e39f1cf0f25d31244ec156008">MP3DecoderMini</a> (MP3DataCallback dataCallback, MP3InfoCallback infoCallback=nullptr)</td></tr>
+<tr class="memitem:a712ca44e39f1cf0f25d31244ec156008"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html#a712ca44e39f1cf0f25d31244ec156008">MP3DecoderMini</a> (MP3DataCallback dataCallback, <a class="el" href="namespaceaudio__tools.html#a06e115ca85ae77bab10d6ede221ebc30">MP3InfoCallback</a> infoCallback=nullptr)</td></tr>
 <tr class="memdesc:a712ca44e39f1cf0f25d31244ec156008"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html" title="MP3 Decoder using https://github.com/lieff/minimp3.">MP3DecoderMini</a> object. Callbacks are used to provide the resultng decoded data.  <a href="classaudio__tools_1_1_m_p3_decoder_mini.html#a712ca44e39f1cf0f25d31244ec156008">More...</a><br /></td></tr>
 <tr class="separator:a712ca44e39f1cf0f25d31244ec156008"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8ae8eec16116619856fd6b9bff13937"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html#ac8ae8eec16116619856fd6b9bff13937">MP3DecoderMini</a> (<a class="el" href="class_print.html">Print</a> &amp;out_stream)</td></tr>
@@ -105,22 +105,21 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html#a0da17646295d473dde7f69540e9d2b7a">~MP3DecoderMini</a> ()</td></tr>
 <tr class="memdesc:a0da17646295d473dde7f69540e9d2b7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the <a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html" title="MP3 Decoder using https://github.com/lieff/minimp3.">MP3DecoderMini</a> object. <br /></td></tr>
 <tr class="separator:a0da17646295d473dde7f69540e9d2b7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93c3496f43f0e3d59d8eaf1a2db52248"><td class="memItemLeft" align="right" valign="top"><a id="a93c3496f43f0e3d59d8eaf1a2db52248"></a>
-<a class="el" href="namespaceaudio__tools.html#ad4db4b9c171ed57912eb37695f8c6188">MP3MiniAudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html#a93c3496f43f0e3d59d8eaf1a2db52248">audioInfo</a> ()</td></tr>
-<tr class="memdesc:a93c3496f43f0e3d59d8eaf1a2db52248"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the last available MP3FrameInfo. <br /></td></tr>
-<tr class="separator:a93c3496f43f0e3d59d8eaf1a2db52248"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76dc877691a11b1b368ad1bdca902914"><td class="memItemLeft" align="right" valign="top"><a id="a76dc877691a11b1b368ad1bdca902914"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html#a76dc877691a11b1b368ad1bdca902914">begin</a> ()</td></tr>
-<tr class="memdesc:a76dc877691a11b1b368ad1bdca902914"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the processing. <br /></td></tr>
-<tr class="separator:a76dc877691a11b1b368ad1bdca902914"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9886b86c100e754c9a7b72aab86f1476"><td class="memItemLeft" align="right" valign="top"><a id="a9886b86c100e754c9a7b72aab86f1476"></a>
+virtual <a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>audioInfo</b> ()</td></tr>
+<tr class="separator:a9886b86c100e754c9a7b72aab86f1476"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadeb4a9f74c854c03d878957bec7570f"><td class="memItemLeft" align="right" valign="top"><a id="aadeb4a9f74c854c03d878957bec7570f"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html#aadeb4a9f74c854c03d878957bec7570f">begin</a> ()</td></tr>
+<tr class="memdesc:aadeb4a9f74c854c03d878957bec7570f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the processing. <br /></td></tr>
+<tr class="separator:aadeb4a9f74c854c03d878957bec7570f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a545712bb6100c1699768659b9f305403"><td class="memItemLeft" align="right" valign="top"><a id="a545712bb6100c1699768659b9f305403"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html#a545712bb6100c1699768659b9f305403">begin</a> (int bufferLen)</td></tr>
 <tr class="memdesc:a545712bb6100c1699768659b9f305403"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the processing. <br /></td></tr>
 <tr class="separator:a545712bb6100c1699768659b9f305403"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f9fb8f16d8e04a89af2978d9340fec4"><td class="memItemLeft" align="right" valign="top"><a id="a6f9fb8f16d8e04a89af2978d9340fec4"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html#a6f9fb8f16d8e04a89af2978d9340fec4">end</a> ()</td></tr>
-<tr class="memdesc:a6f9fb8f16d8e04a89af2978d9340fec4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases the reserved memory. <br /></td></tr>
-<tr class="separator:a6f9fb8f16d8e04a89af2978d9340fec4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf708176870f7e9080118f00b4228fa3"><td class="memItemLeft" align="right" valign="top"><a id="abf708176870f7e9080118f00b4228fa3"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html#abf708176870f7e9080118f00b4228fa3">end</a> ()</td></tr>
+<tr class="memdesc:abf708176870f7e9080118f00b4228fa3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases the reserved memory. <br /></td></tr>
+<tr class="separator:abf708176870f7e9080118f00b4228fa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa728a898f32c41878188fd8fc0b9357e"><td class="memItemLeft" align="right" valign="top"><a id="aa728a898f32c41878188fd8fc0b9357e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html#aa728a898f32c41878188fd8fc0b9357e">flush</a> ()</td></tr>
 <tr class="memdesc:aa728a898f32c41878188fd8fc0b9357e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decodes the last outstanding data. <br /></td></tr>
@@ -129,44 +128,42 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html#ac584c1b1419d2fd7172cb2f5255b4b1e">operator boolean</a> ()</td></tr>
 <tr class="memdesc:ac584c1b1419d2fd7172cb2f5255b4b1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if the class is active <br /></td></tr>
 <tr class="separator:ac584c1b1419d2fd7172cb2f5255b4b1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af722ad5107608f291ed6a38030bd1234"><td class="memItemLeft" align="right" valign="top"><a id="af722ad5107608f291ed6a38030bd1234"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html#af722ad5107608f291ed6a38030bd1234">readStream</a> (<a class="el" href="class_stream.html">Stream</a> &amp;in)</td></tr>
+<tr class="memdesc:af722ad5107608f291ed6a38030bd1234"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alternative API to <a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html#af175cdcaccf175f79804f63c2eae47d3" title="Write mp3 data to decoder.">write()</a> - gets the data from an input stream. Each call will result in one record of decoded data in the defined output stream. <br /></td></tr>
+<tr class="separator:af722ad5107608f291ed6a38030bd1234"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a347efc9f9bd06ea87b19027aea604842"><td class="memItemLeft" align="right" valign="top"><a id="a347efc9f9bd06ea87b19027aea604842"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html#a347efc9f9bd06ea87b19027aea604842">setMP3DataCallback</a> (MP3DataCallback cb)</td></tr>
 <tr class="memdesc:a347efc9f9bd06ea87b19027aea604842"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the callback which provides the Audio data. <br /></td></tr>
 <tr class="separator:a347efc9f9bd06ea87b19027aea604842"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31ae306fe9f089724424bd0ca7b52ee8"><td class="memItemLeft" align="right" valign="top"><a id="a31ae306fe9f089724424bd0ca7b52ee8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html#a31ae306fe9f089724424bd0ca7b52ee8">setMP3InfoCallback</a> (MP3InfoCallback cb)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html#a31ae306fe9f089724424bd0ca7b52ee8">setMP3InfoCallback</a> (<a class="el" href="namespaceaudio__tools.html#a06e115ca85ae77bab10d6ede221ebc30">MP3InfoCallback</a> cb)</td></tr>
 <tr class="memdesc:a31ae306fe9f089724424bd0ca7b52ee8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the callback which provides the Audio information. <br /></td></tr>
 <tr class="separator:a31ae306fe9f089724424bd0ca7b52ee8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0266f6a4b5e4a2cf5cd3c0862c52cac9"><td class="memItemLeft" align="right" valign="top"><a id="a0266f6a4b5e4a2cf5cd3c0862c52cac9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html#a0266f6a4b5e4a2cf5cd3c0862c52cac9">setStream</a> (<a class="el" href="class_stream.html">Stream</a> &amp;out_stream)</td></tr>
-<tr class="memdesc:a0266f6a4b5e4a2cf5cd3c0862c52cac9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the output <a class="el" href="class_stream.html">Stream</a>. <br /></td></tr>
-<tr class="separator:a0266f6a4b5e4a2cf5cd3c0862c52cac9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadbb338c1a1540c7fa9af067c0267164"><td class="memItemLeft" align="right" valign="top"><a id="aadbb338c1a1540c7fa9af067c0267164"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html#aadbb338c1a1540c7fa9af067c0267164">setNotifyAudioChange</a> (<a class="el" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> &amp;bi)</td></tr>
+<tr class="memdesc:aadbb338c1a1540c7fa9af067c0267164"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the callback object to which the Audio information change is provided. <br /></td></tr>
+<tr class="separator:aadbb338c1a1540c7fa9af067c0267164"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a157690356e50a83a41a494397f8fe57a"><td class="memItemLeft" align="right" valign="top"><a id="a157690356e50a83a41a494397f8fe57a"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html#a157690356e50a83a41a494397f8fe57a">setStream</a> (<a class="el" href="class_stream.html">Stream</a> &amp;out_stream)</td></tr>
+<tr class="memdesc:a157690356e50a83a41a494397f8fe57a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the output <a class="el" href="class_stream.html">Stream</a>. <br /></td></tr>
+<tr class="separator:a157690356e50a83a41a494397f8fe57a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af175cdcaccf175f79804f63c2eae47d3"><td class="memItemLeft" align="right" valign="top"><a id="af175cdcaccf175f79804f63c2eae47d3"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html#af175cdcaccf175f79804f63c2eae47d3">write</a> (const void *fileData, size_t len)</td></tr>
 <tr class="memdesc:af175cdcaccf175f79804f63c2eae47d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write mp3 data to decoder. <br /></td></tr>
 <tr class="separator:af175cdcaccf175f79804f63c2eae47d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classaudio__tools_1_1_audio_decoder"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classaudio__tools_1_1_audio_decoder')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classaudio__tools_1_1_audio_decoder.html">audio_tools::AudioDecoder</a></td></tr>
-<tr class="memitem:a21989d10f8a9e645d277088c94949b44 inherit pub_methods_classaudio__tools_1_1_audio_decoder"><td class="memItemLeft" align="right" valign="top"><a id="a21989d10f8a9e645d277088c94949b44"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> ()</td></tr>
-<tr class="separator:a21989d10f8a9e645d277088c94949b44 inherit pub_methods_classaudio__tools_1_1_audio_decoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa88f8df00437b17d4619c93bf004de52 inherit pub_methods_classaudio__tools_1_1_audio_decoder"><td class="memItemLeft" align="right" valign="top"><a id="aa88f8df00437b17d4619c93bf004de52"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
-<tr class="separator:aa88f8df00437b17d4619c93bf004de52 inherit pub_methods_classaudio__tools_1_1_audio_decoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae89451862cbc622f275956534c64e8a8 inherit pub_methods_classaudio__tools_1_1_audio_decoder"><td class="memItemLeft" align="right" valign="top"><a id="ae89451862cbc622f275956534c64e8a8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setStream</b> (<a class="el" href="class_stream.html">Stream</a> &amp;out_stream)</td></tr>
-<tr class="separator:ae89451862cbc622f275956534c64e8a8 inherit pub_methods_classaudio__tools_1_1_audio_decoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:a6c4af4beb9977f3c0e0b2d0c90b7043f"><td class="memItemLeft" align="right" valign="top"><a id="a6c4af4beb9977f3c0e0b2d0c90b7043f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>provideAudioInfo</b> (<a class="el" href="structaudio__tools_1_1_m_p3_mini_audio_info.html">MP3MiniAudioInfo</a> &amp;info)</td></tr>
+<tr class="separator:a6c4af4beb9977f3c0e0b2d0c90b7043f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d25d49614e177024398c5da44f7adb3"><td class="memItemLeft" align="right" valign="top"><a id="a3d25d49614e177024398c5da44f7adb3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>provideData</b> (<a class="el" href="structaudio__tools_1_1_m_p3_mini_audio_info.html">MP3MiniAudioInfo</a> &amp;info, int samples)</td></tr>
+<tr class="separator:a3d25d49614e177024398c5da44f7adb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a18bd061e024b3d7de5c88308672a3518"><td class="memItemLeft" align="right" valign="top"><a id="a18bd061e024b3d7de5c88308672a3518"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>provideResult</b> (int samples)</td></tr>
 <tr class="separator:a18bd061e024b3d7de5c88308672a3518"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8d431c58393675d641aedc8305d2b542"><td class="memItemLeft" align="right" valign="top"><a id="a8d431c58393675d641aedc8305d2b542"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>provideResultCallback</b> (<a class="el" href="namespaceaudio__tools.html#ad4db4b9c171ed57912eb37695f8c6188">MP3MiniAudioInfo</a> &amp;info, int samples)</td></tr>
-<tr class="separator:a8d431c58393675d641aedc8305d2b542"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac4f9acb0c0e0a48d48827cdc76c0183b"><td class="memItemLeft" align="right" valign="top"><a id="ac4f9acb0c0e0a48d48827cdc76c0183b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>provideResultStream</b> (<a class="el" href="namespaceaudio__tools.html#ad4db4b9c171ed57912eb37695f8c6188">MP3MiniAudioInfo</a> &amp;info, int samples)</td></tr>
-<tr class="separator:ac4f9acb0c0e0a48d48827cdc76c0183b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7c5ea93bc73a2f34ec46288b0474060"><td class="memItemLeft" align="right" valign="top"><a id="aa7c5ea93bc73a2f34ec46288b0474060"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>writeBuffer</b> (uint8_t *fileData, size_t len)</td></tr>
 <tr class="separator:aa7c5ea93bc73a2f34ec46288b0474060"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -180,7 +177,7 @@ Protected Attributes</h2></td></tr>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>active</b></td></tr>
 <tr class="separator:a8639c2d6bdc093fb850f34c643454080"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ec37c52f9ce33f77307678be648e4c7"><td class="memItemLeft" align="right" valign="top"><a id="a1ec37c52f9ce33f77307678be648e4c7"></a>
-<a class="el" href="namespaceaudio__tools.html#ad4db4b9c171ed57912eb37695f8c6188">MP3MiniAudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>audio_info</b></td></tr>
+<a class="el" href="structaudio__tools_1_1_m_p3_mini_audio_info.html">MP3MiniAudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>audio_info</b></td></tr>
 <tr class="separator:a1ec37c52f9ce33f77307678be648e4c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c8fd062157e449b81225fabd762d0bb"><td class="memItemLeft" align="right" valign="top"><a id="a2c8fd062157e449b81225fabd762d0bb"></a>
 <a class="el" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>audioBaseInfoSupport</b> = nullptr</td></tr>
@@ -195,7 +192,7 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_len</b> = 16
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_pos</b> = 0</td></tr>
 <tr class="separator:af3343274ee3c1a49d713697cb0fe5b59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a434255b05a20efc767d56bf3c08342de"><td class="memItemLeft" align="right" valign="top"><a id="a434255b05a20efc767d56bf3c08342de"></a>
-MP3InfoCallback&#160;</td><td class="memItemRight" valign="bottom"><b>infoCallback</b> = nullptr</td></tr>
+<a class="el" href="namespaceaudio__tools.html#a06e115ca85ae77bab10d6ede221ebc30">MP3InfoCallback</a>&#160;</td><td class="memItemRight" valign="bottom"><b>infoCallback</b> = nullptr</td></tr>
 <tr class="separator:a434255b05a20efc767d56bf3c08342de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72e076edf2e5cf50e87808685c800979"><td class="memItemLeft" align="right" valign="top"><a id="a72e076edf2e5cf50e87808685c800979"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_output_valid</b></td></tr>
@@ -316,7 +313,7 @@ MP3DataCallback&#160;</td><td class="memItemRight" valign="bottom"><b>pwmCallbac
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">MP3InfoCallback&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceaudio__tools.html#a06e115ca85ae77bab10d6ede221ebc30">MP3InfoCallback</a>&#160;</td>
           <td class="paramname"><em>infoCallback</em> = <code>nullptr</code>&#160;</td>
         </tr>
         <tr>

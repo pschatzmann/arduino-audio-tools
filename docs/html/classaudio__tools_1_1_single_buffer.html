@@ -90,8 +90,11 @@ Inheritance diagram for audio_tools::SingleBuffer&lt; T &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a77d72fb81b055d21a214bfe6349b72ba"><td class="memItemLeft" align="right" valign="top"><a id="a77d72fb81b055d21a214bfe6349b72ba"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>SingleBuffer</b> (int size)</td></tr>
+<tr class="memitem:a346c292f4e91cb627c5da086e980cb82"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_single_buffer.html#a346c292f4e91cb627c5da086e980cb82">SingleBuffer</a> ()</td></tr>
+<tr class="memdesc:a346c292f4e91cb627c5da086e980cb82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Single Buffer w/o allocating any memory.  <a href="classaudio__tools_1_1_single_buffer.html#a346c292f4e91cb627c5da086e980cb82">More...</a><br /></td></tr>
+<tr class="separator:a346c292f4e91cb627c5da086e980cb82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77d72fb81b055d21a214bfe6349b72ba"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_single_buffer.html#a77d72fb81b055d21a214bfe6349b72ba">SingleBuffer</a> (int size)</td></tr>
+<tr class="memdesc:a77d72fb81b055d21a214bfe6349b72ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Single Buffer object.  <a href="classaudio__tools_1_1_single_buffer.html#a77d72fb81b055d21a214bfe6349b72ba">More...</a><br /></td></tr>
 <tr class="separator:a77d72fb81b055d21a214bfe6349b72ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb270f099c9125238f6add31a61c1e67"><td class="memItemLeft" align="right" valign="top"><a id="abb270f099c9125238f6add31a61c1e67"></a>
 T *&#160;</td><td class="memItemRight" valign="bottom"><b>address</b> ()</td></tr>
@@ -105,6 +108,10 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>availableToWrite</b> (
 <tr class="memitem:a722a00a0c38ffe4c0c4cd74b5708eceb"><td class="memItemLeft" align="right" valign="top"><a id="a722a00a0c38ffe4c0c4cd74b5708eceb"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isFull</b> ()</td></tr>
 <tr class="separator:a722a00a0c38ffe4c0c4cd74b5708eceb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa53e0adf832f0a0ddc10d4f3464c9baf"><td class="memItemLeft" align="right" valign="top"><a id="aa53e0adf832f0a0ddc10d4f3464c9baf"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_single_buffer.html#aa53e0adf832f0a0ddc10d4f3464c9baf">onExternalBufferRefilled</a> (void *data, int len)</td></tr>
+<tr class="memdesc:aa53e0adf832f0a0ddc10d4f3464c9baf"><td class="mdescLeft">&#160;</td><td class="mdescRight">notifies that the external buffer has been refilled <br /></td></tr>
+<tr class="separator:aa53e0adf832f0a0ddc10d4f3464c9baf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a482cccfaf7744bbb37fa57852e859c80"><td class="memItemLeft" align="right" valign="top"><a id="a482cccfaf7744bbb37fa57852e859c80"></a>
 T&#160;</td><td class="memItemRight" valign="bottom"><b>peek</b> ()</td></tr>
 <tr class="separator:a482cccfaf7744bbb37fa57852e859c80"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -145,17 +152,20 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>writeArray</b> (const 
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:ad49fec19a451e2df62f936712be0a3c5"><td class="memItemLeft" align="right" valign="top"><a id="ad49fec19a451e2df62f936712be0a3c5"></a>
-T *&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b></td></tr>
+T *&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b> = nullptr</td></tr>
 <tr class="separator:ad49fec19a451e2df62f936712be0a3c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab9c00ce636d54ca408959c2d9893b4f9"><td class="memItemLeft" align="right" valign="top"><a id="ab9c00ce636d54ca408959c2d9893b4f9"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>current_read_pos</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>current_read_pos</b> =0</td></tr>
 <tr class="separator:ab9c00ce636d54ca408959c2d9893b4f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae34258537a458c9a475d70a33895d02f"><td class="memItemLeft" align="right" valign="top"><a id="ae34258537a458c9a475d70a33895d02f"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>current_write_pos</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>current_write_pos</b> =0</td></tr>
 <tr class="separator:ae34258537a458c9a475d70a33895d02f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e20fd0533012cfce4e3e674ffa08213"><td class="memItemLeft" align="right" valign="top"><a id="a6e20fd0533012cfce4e3e674ffa08213"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>max_size</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>max_size</b> =0</td></tr>
 <tr class="separator:a6e20fd0533012cfce4e3e674ffa08213"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fce429bbd843001e36c81463acbd56f"><td class="memItemLeft" align="right" valign="top"><a id="a9fce429bbd843001e36c81463acbd56f"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>owns_buffer</b> = true</td></tr>
+<tr class="separator:a9fce429bbd843001e36c81463acbd56f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename T&gt;<br />
@@ -164,7 +174,81 @@ class audio_tools::SingleBuffer&lt; T &gt;</h3>
 <p>A simple Buffer implementation which just uses a (dynamically sized) array. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a77d72fb81b055d21a214bfe6349b72ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77d72fb81b055d21a214bfe6349b72ba">&#9670;&nbsp;</a></span>SingleBuffer() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_single_buffer.html">audio_tools::SingleBuffer</a>&lt; T &gt;::<a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a> </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct a new Single Buffer object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a346c292f4e91cb627c5da086e980cb82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a346c292f4e91cb627c5da086e980cb82">&#9670;&nbsp;</a></span>SingleBuffer() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classaudio__tools_1_1_single_buffer.html">audio_tools::SingleBuffer</a>&lt; T &gt;::<a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct a new Single Buffer w/o allocating any memory. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td></td></tr>
+    <tr><td class="paramname">size</td><td></td></tr>
+    <tr><td class="paramname">len</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/AudioTools/<a class="el" href="_buffers_8h_source.html">Buffers.h</a></li>
 </ul>
 </div><!-- contents -->

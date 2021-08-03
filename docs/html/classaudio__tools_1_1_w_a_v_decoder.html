@@ -101,9 +101,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5bdda66b6bfcf91e5be2e9267cb36bde"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a5bdda66b6bfcf91e5be2e9267cb36bde">WAVDecoder</a> (<a class="el" href="class_print.html">Print</a> &amp;out_stream, bool active=true)</td></tr>
 <tr class="memdesc:a5bdda66b6bfcf91e5be2e9267cb36bde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html" title="WAVDecoder - We parse the header data on the first record and send the sound data to the stream which...">WAVDecoder</a> object.  <a href="classaudio__tools_1_1_w_a_v_decoder.html#a5bdda66b6bfcf91e5be2e9267cb36bde">More...</a><br /></td></tr>
 <tr class="separator:a5bdda66b6bfcf91e5be2e9267cb36bde"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b24bbf4f2dbd26be024b43b1665606d"><td class="memItemLeft" align="right" valign="top"><a id="a6b24bbf4f2dbd26be024b43b1665606d"></a>
-<a class="el" href="structaudio__tools_1_1_w_a_v_audio_info.html">WAVAudioInfo</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>audioInfo</b> ()</td></tr>
-<tr class="separator:a6b24bbf4f2dbd26be024b43b1665606d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a319bf78b2db0e162a7103abcacad32bd"><td class="memItemLeft" align="right" valign="top"><a id="a319bf78b2db0e162a7103abcacad32bd"></a>
+<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>audioInfo</b> ()</td></tr>
+<tr class="separator:a319bf78b2db0e162a7103abcacad32bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed8c1063eadc022d7954ad5fb2affc0b"><td class="memItemLeft" align="right" valign="top"><a id="aed8c1063eadc022d7954ad5fb2affc0b"></a>
+<a class="el" href="structaudio__tools_1_1_w_a_v_audio_info.html">WAVAudioInfo</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>audioInfoEx</b> ()</td></tr>
+<tr class="separator:aed8c1063eadc022d7954ad5fb2affc0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9525fdd8f5600b5e35eabcae8eec24f"><td class="memItemLeft" align="right" valign="top"><a id="af9525fdd8f5600b5e35eabcae8eec24f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> ()</td></tr>
 <tr class="separator:af9525fdd8f5600b5e35eabcae8eec24f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -116,6 +119,13 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>mime</b> ()</
 <tr class="memitem:ae8d3c2d72be55e398d1292b92cc95cf5"><td class="memItemLeft" align="right" valign="top"><a id="ae8d3c2d72be55e398d1292b92cc95cf5"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><b>operator boolean</b> ()</td></tr>
 <tr class="separator:ae8d3c2d72be55e398d1292b92cc95cf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae05e6c1f74d0b03f63ae3830f672e1df"><td class="memItemLeft" align="right" valign="top"><a id="ae05e6c1f74d0b03f63ae3830f672e1df"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#ae05e6c1f74d0b03f63ae3830f672e1df">readStream</a> (<a class="el" href="class_stream.html">Stream</a> &amp;in)</td></tr>
+<tr class="memdesc:ae05e6c1f74d0b03f63ae3830f672e1df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alternative API which provides the data from an input stream. <br /></td></tr>
+<tr class="separator:ae05e6c1f74d0b03f63ae3830f672e1df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69c91113c69f2d84e0c15cb3623fdd47"><td class="memItemLeft" align="right" valign="top"><a id="a69c91113c69f2d84e0c15cb3623fdd47"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setNotifyAudioChange</b> (<a class="el" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> &amp;bi)</td></tr>
+<tr class="separator:a69c91113c69f2d84e0c15cb3623fdd47"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab0de383d3dbd065dd47987bdc9daff45"><td class="memItemLeft" align="right" valign="top"><a id="ab0de383d3dbd065dd47987bdc9daff45"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#ab0de383d3dbd065dd47987bdc9daff45">setStream</a> (<a class="el" href="class_stream.html">Stream</a> &amp;out_stream)</td></tr>
 <tr class="memdesc:ab0de383d3dbd065dd47987bdc9daff45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the output <a class="el" href="class_stream.html">Stream</a>. <br /></td></tr>
@@ -123,16 +133,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a78973aa179dc6541741f0b4fc6505c79"><td class="memItemLeft" align="right" valign="top"><a id="a78973aa179dc6541741f0b4fc6505c79"></a>
 virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (const void *in_ptr, size_t in_size)</td></tr>
 <tr class="separator:a78973aa179dc6541741f0b4fc6505c79"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classaudio__tools_1_1_audio_decoder"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classaudio__tools_1_1_audio_decoder')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classaudio__tools_1_1_audio_decoder.html">audio_tools::AudioDecoder</a></td></tr>
-<tr class="memitem:a21989d10f8a9e645d277088c94949b44 inherit pub_methods_classaudio__tools_1_1_audio_decoder"><td class="memItemLeft" align="right" valign="top"><a id="a21989d10f8a9e645d277088c94949b44"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> ()</td></tr>
-<tr class="separator:a21989d10f8a9e645d277088c94949b44 inherit pub_methods_classaudio__tools_1_1_audio_decoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa88f8df00437b17d4619c93bf004de52 inherit pub_methods_classaudio__tools_1_1_audio_decoder"><td class="memItemLeft" align="right" valign="top"><a id="aa88f8df00437b17d4619c93bf004de52"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
-<tr class="separator:aa88f8df00437b17d4619c93bf004de52 inherit pub_methods_classaudio__tools_1_1_audio_decoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae89451862cbc622f275956534c64e8a8 inherit pub_methods_classaudio__tools_1_1_audio_decoder"><td class="memItemLeft" align="right" valign="top"><a id="ae89451862cbc622f275956534c64e8a8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setStream</b> (<a class="el" href="class_stream.html">Stream</a> &amp;out_stream)</td></tr>
-<tr class="separator:ae89451862cbc622f275956534c64e8a8 inherit pub_methods_classaudio__tools_1_1_audio_decoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
