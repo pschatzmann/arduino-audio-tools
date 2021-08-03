@@ -55,7 +55,7 @@ uint16_t sample_rate = 22050;
 
 MemoryStream music(StarWars30_raw, StarWars30_raw_len);
 I2SStream i2s;  // Output to I2S
-StreamCopyT<int16_t> copier(i2s, music); // copies sound into i2s
+StreamCopy copier(i2s, music); // copies sound into i2s
 
 void setup(){
     Serial.begin(115200);
@@ -68,7 +68,7 @@ void setup(){
 }
 
 void loop(){
-    if (!copier.copy2()){
+    if (!copier.copy()){
       i2s.end();
       stop();
     }
