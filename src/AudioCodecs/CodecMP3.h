@@ -313,6 +313,7 @@ class MP3DecoderMini : public AudioDecoder  {
             }
         }
 
+
         // return the result PWM data
         void provideData(MP3MiniAudioInfo &info, int samples){
         	LOGD(__FUNCTION__);
@@ -328,7 +329,7 @@ class MP3DecoderMini : public AudioDecoder  {
                 int bytes = samples*2;
                 int bytes_written = out->write((uint8_t*)pcm, bytes);
                 if (bytes!=bytes_written){
-                    LOGE("could not write all audio data: %d of %d", bytes_written,bytes);
+                    LOGE("Could not write all audio data: %d of %d", bytes_written,bytes);
                 }
             } 
         }
