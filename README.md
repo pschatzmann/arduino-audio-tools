@@ -14,7 +14,7 @@ Some basic __header-only C++ classes__ that can be used for __Audio Processing__
 - A Wav Encoder and Decoder
 - A MP3 Decoder
 - AudioOutputWithCallback class to provide callback integration e.g. with ESP8266Audio
-- Building of Arduino Audio Sketches to be run on [Linux, Windows and OS/X](https://github.com/pschatzmann/arduino-audio-tools/wiki/Running-an-Audio-Sketch-on-the-Desktop)
+- Desktop Integration: Building of Arduino Audio Sketches to be run on [Linux, Windows and OS/X](https://github.com/pschatzmann/arduino-audio-tools/wiki/Running-an-Audio-Sketch-on-the-Desktop)
 
 This functionality provides the glue which makes different audio processing components and libraries work together.
 We also provide plenty of examples that demonstrate how to implement the different scenarios. The __design philosophy__ is based on the Arduino conventions: we use the ```begin()``` and ```end()``` methods to start and stop the processing and we propagate the __use of Streams__.  We all know the [Arduino Streams](https://pschatzmann.github.io/arduino-audio-tools/html/class_stream.html): We usually use them to write out print messages and sometimes we use them to read the output from Serial devices. The same thing applies to “Audio Streams”: You can read audio data from “Audio Sources” and you write them to “Audio Sinks”.
@@ -27,6 +27,7 @@ As “Audio Sources” we will have e.g.:
 - Generated Sound – [GeneratedSoundStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_generated_sound_stream.html)
 - Mobile Phone A2DP Bluetooth – [A2DPStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_a2_d_p_stream.html)
 - Binary Data in Flash Memory – [MemoryStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_memory_stream.html)
+- Desktop Integration - [PortAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_port_audio_stream.html)
 - Any other Arduino Classes implementing Streams: SD, Ethernet etc
 
 As “Audio Sinks” we will have e.g:
@@ -36,6 +37,7 @@ As “Audio Sinks” we will have e.g:
 - with a Piezo Electric Element – [PWMAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_p_w_m_audio_stream_base.html)
 - Bluetooth Speakers – [A2DPStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_a2_d_p_stream.html)
 - Serial to display the data as CSV – [CsvStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_csv_stream.html)
+- Desktop Integration - [PortAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_port_audio_stream.html)
 - Any other Arduino Classes implementing Streams: SD, Ethernet etc
 
 Here is an simple example which streams a file from the Flash Memory and writes it to I2S: 
@@ -109,9 +111,9 @@ Dependent on the example you might need to install some of the following librari
 
 ### Documentation
 
-- Here is the generated [Class documentation](https://pschatzmann.github.io/arduino-audio-tools/html/annotated.html). 
-- Please also check out the [information in the wiki](https://github.com/pschatzmann/arduino-audio-tools/wiki)
-- You also might find further information in [one of my blogs](https://www.pschatzmann.ch/home/category/machine-sound/)
+- Here is the generated [Class Documentation](https://pschatzmann.github.io/arduino-audio-tools/html/annotated.html). 
+- Please also check out the [Information in the Wiki](https://github.com/pschatzmann/arduino-audio-tools/wiki)
+- You also might find further information in [one of my Blogs](https://www.pschatzmann.ch/home/category/machine-sound/)
 
 
 ### Installation
