@@ -98,6 +98,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a81f2ca312b918838647fb55c3287c096"><td class="memItemLeft" align="right" valign="top"><a id="a81f2ca312b918838647fb55c3287c096"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>EncodedAudioStream</b> (<a class="el" href="class_stream.html">Stream</a> &amp;inputStream, <a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> *decoder)</td></tr>
 <tr class="separator:a81f2ca312b918838647fb55c3287c096"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa132632fe4799b9ad7bdfe87c1fe8cfa"><td class="memItemLeft" align="right" valign="top"><a id="aa132632fe4799b9ad7bdfe87c1fe8cfa"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>EncodedAudioStream</b> (<a class="el" href="class_stream.html">Stream</a> &amp;inputStream, <a class="el" href="classaudio__tools_1_1_audio_encoder.html">AudioEncoder</a> *encoder)</td></tr>
+<tr class="separator:aa132632fe4799b9ad7bdfe87c1fe8cfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17aa8f2c1f58716a8f5e6b77fdb1b7f0"><td class="memItemLeft" align="right" valign="top"><a id="a17aa8f2c1f58716a8f5e6b77fdb1b7f0"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>EncodedAudioStream</b> (<a class="el" href="class_stream.html">Stream</a> &amp;outputStream, <a class="el" href="classaudio__tools_1_1_audio_encoder.html">AudioEncoder</a> &amp;encoder)</td></tr>
+<tr class="separator:a17aa8f2c1f58716a8f5e6b77fdb1b7f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41f1ec316ff0dbb9240e58264bf6a824"><td class="memItemLeft" align="right" valign="top"><a id="a41f1ec316ff0dbb9240e58264bf6a824"></a>
 virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>available</b> ()</td></tr>
 <tr class="separator:a41f1ec316ff0dbb9240e58264bf6a824"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -123,14 +129,16 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>peek</b> ()</t
 virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>read</b> ()</td></tr>
 <tr class="separator:ab7789da7858ac73c5c57966418343fa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a821797a4b7de754c19f100132946e7be"><td class="memItemLeft" align="right" valign="top"><a id="a821797a4b7de754c19f100132946e7be"></a>
-virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>readBytes</b> (uint8_t *data, size_t length)</td></tr>
+virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_encoded_audio_stream.html#a821797a4b7de754c19f100132946e7be">readBytes</a> (uint8_t *data, size_t length)</td></tr>
+<tr class="memdesc:a821797a4b7de754c19f100132946e7be"><td class="mdescLeft">&#160;</td><td class="mdescRight">decode the data <br /></td></tr>
 <tr class="separator:a821797a4b7de754c19f100132946e7be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a947c62be23d19e02c0388f9a18649c26"><td class="memItemLeft" align="right" valign="top"><a id="a947c62be23d19e02c0388f9a18649c26"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_encoded_audio_stream.html#a947c62be23d19e02c0388f9a18649c26">setNotifyAudioChange</a> (<a class="el" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> &amp;bi)</td></tr>
 <tr class="memdesc:a947c62be23d19e02c0388f9a18649c26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define object which need to be notified if the basinfo is changing. <br /></td></tr>
 <tr class="separator:a947c62be23d19e02c0388f9a18649c26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a68ddea26ce11d3064eecf907e927af90"><td class="memItemLeft" align="right" valign="top"><a id="a68ddea26ce11d3064eecf907e927af90"></a>
-virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (const uint8_t *data, size_t len)</td></tr>
+virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_encoded_audio_stream.html#a68ddea26ce11d3064eecf907e927af90">write</a> (const uint8_t *data, size_t len)</td></tr>
+<tr class="memdesc:a68ddea26ce11d3064eecf907e927af90"><td class="mdescLeft">&#160;</td><td class="mdescRight">encode the data <br /></td></tr>
 <tr class="separator:a68ddea26ce11d3064eecf907e927af90"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7bcf0b42b2395b392b65dc9e0f4537f"><td class="memItemLeft" align="right" valign="top"><a id="ac7bcf0b42b2395b392b65dc9e0f4537f"></a>
 virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (uint8_t c)</td></tr>
@@ -333,9 +341,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>active</b></td></tr>
 <tr class="memitem:aa1a77057702c0b259939ff78eb7f4400"><td class="memItemLeft" align="right" valign="top"><a id="aa1a77057702c0b259939ff78eb7f4400"></a>
 <a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>decoder_ptr</b></td></tr>
 <tr class="separator:aa1a77057702c0b259939ff78eb7f4400"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad601c9cb8d296bc1922362da4bf6c24f"><td class="memItemLeft" align="right" valign="top"><a id="ad601c9cb8d296bc1922362da4bf6c24f"></a>
-RxTxMode&#160;</td><td class="memItemRight" valign="bottom"><b>direction</b></td></tr>
-<tr class="separator:ad601c9cb8d296bc1922362da4bf6c24f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a1efa63e5d45b507c7085da017529ff"><td class="memItemLeft" align="right" valign="top"><a id="a6a1efa63e5d45b507c7085da017529ff"></a>
+<a class="el" href="classaudio__tools_1_1_audio_encoder.html">AudioEncoder</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>encoder_ptr</b></td></tr>
+<tr class="separator:a6a1efa63e5d45b507c7085da017529ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa01be28776171622c96ec9be259ee07a"><td class="memItemLeft" align="right" valign="top"><a id="aa01be28776171622c96ec9be259ee07a"></a>
 <a class="el" href="classaudio__tools_1_1_external_buffer_stream.html">ExternalBufferStream</a>&#160;</td><td class="memItemRight" valign="bottom"><b>ext_buffer</b></td></tr>
 <tr class="separator:aa01be28776171622c96ec9be259ee07a"><td class="memSeparator" colspan="2">&#160;</td></tr>
