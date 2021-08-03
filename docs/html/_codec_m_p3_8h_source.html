@@ -82,7 +82,7 @@ $(function() {
 <div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_m_p3_mini_audio_info.html">   15</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structaudio__tools_1_1_m_p3_mini_audio_info.html">MP3MiniAudioInfo</a> : <span class="keyword">public</span> <a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> {</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="structaudio__tools_1_1_m_p3_mini_audio_info.html">MP3MiniAudioInfo</a>() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="structaudio__tools_1_1_m_p3_mini_audio_info.html">MP3MiniAudioInfo</a>(<span class="keyword">const</span> <a class="code" href="structaudio__tools_1_1_m_p3_mini_audio_info.html">MP3MiniAudioInfo</a>&amp; alt) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="structaudio__tools_1_1_m_p3_mini_audio_info.html">MP3MiniAudioInfo</a>(<span class="keyword">const</span> <a class="code" href="structmp3dec__frame__info__t.html">mp3dec_frame_info_t</a> &amp;alt){</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="structaudio__tools_1_1_m_p3_mini_audio_info.html">MP3MiniAudioInfo</a>(<span class="keyword">const</span> <a class="code" href="structminimp3_1_1mp3dec__frame__info__t.html">minimp3::mp3dec_frame_info_t</a> &amp;alt){</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        sample_rate = alt.hz;</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        channels = alt.channels;</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        bits_per_sample = 16;</div>
@@ -144,7 +144,7 @@ $(function() {
 <div class="line"><a name="l00113"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_m_p3_decoder_mini.html#a545712bb6100c1699768659b9f305403">  113</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_m_p3_decoder_mini.html#a545712bb6100c1699768659b9f305403">begin</a>(<span class="keywordtype">int</span> bufferLen){</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            LOGD(__FUNCTION__);</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            <a class="code" href="classaudio__tools_1_1_m_p3_decoder_mini.html#aa728a898f32c41878188fd8fc0b9357e">flush</a>();</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            mp3dec_init(&amp;mp3d);</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            minimp3::mp3dec_init(&amp;mp3d);</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            buffer_len = bufferLen;</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            active = <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        }</div>
@@ -191,7 +191,7 @@ $(function() {
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;            <span class="keywordflow">while</span>(<span class="keyword">true</span>){</div>
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;                <span class="comment">// decode only if we have data</span></div>
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;                <span class="keywordflow">if</span> (buffer_pos&gt;0){</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                    decoded_len = mp3dec_decode_frame(&amp;mp3d, buffer, buffer_pos, pcm, &amp;mp3dec_info);</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                    decoded_len = minimp3::mp3dec_decode_frame(&amp;mp3d, buffer, buffer_pos, pcm, &amp;mp3dec_info);</div>
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                    <span class="keywordflow">if</span> (decoded_len&gt;0) {</div>
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                        <span class="comment">// publish info</span></div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;                        <a class="code" href="structaudio__tools_1_1_m_p3_mini_audio_info.html">MP3MiniAudioInfo</a> info(mp3dec_info);</div>
@@ -243,8 +243,8 @@ $(function() {
 <div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;        <a class="code" href="namespaceaudio__tools.html#a06e115ca85ae77bab10d6ede221ebc30">MP3InfoCallback</a> infoCallback = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;        <a class="code" href="class_print.html">Print</a> *out = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;        <a class="code" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> *audioBaseInfoSupport = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;        <a class="code" href="structmp3dec__t.html">mp3dec_t</a> mp3d;</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;        <a class="code" href="structmp3dec__frame__info__t.html">mp3dec_frame_info_t</a> mp3dec_info;</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;        <a class="code" href="structminimp3_1_1mp3dec__t.html">minimp3::mp3dec_t</a> mp3d;</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;        <a class="code" href="structminimp3_1_1mp3dec__frame__info__t.html">minimp3::mp3dec_frame_info_t</a> mp3dec_info;</div>
 <div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;        <span class="keywordtype">size_t</span> buffer_len = 16*1024;</div>
 <div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        <span class="keywordtype">size_t</span> buffer_pos = 0;</div>
 <div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;        uint8_t *buffer=<span class="keyword">nullptr</span>;</div>
@@ -261,7 +261,7 @@ $(function() {
 <div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;            buffer_pos = 0;</div>
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;            <span class="keywordflow">while</span>(<span class="keyword">true</span>){</div>
 <div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;                LOGI(<span class="stringliteral">&quot;-&gt; mp3dec_decode_frame: %zu -&gt; %zu &quot;</span>, buffer_pos, remaining_bytes);</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;                <span class="keywordtype">int</span> samples = mp3dec_decode_frame(&amp;mp3d, fileData+buffer_pos, remaining_bytes, pcm, &amp;mp3dec_info);</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;                <span class="keywordtype">int</span> samples = minimp3::mp3dec_decode_frame(&amp;mp3d, fileData+buffer_pos, remaining_bytes, pcm, &amp;mp3dec_info);</div>
 <div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;                buffer_pos+= mp3dec_info.frame_bytes;</div>
 <div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;                remaining_bytes-=mp3dec_info.frame_bytes;</div>
 <div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;                <span class="keywordflow">if</span> (samples&gt;0){</div>
@@ -389,8 +389,8 @@ $(function() {
 <div class="ttc" id="anamespaceaudio__tools_html_a06e115ca85ae77bab10d6ede221ebc30"><div class="ttname"><a href="namespaceaudio__tools.html#a06e115ca85ae77bab10d6ede221ebc30">audio_tools::MP3InfoCallback</a></div><div class="ttdeci">void(* MP3InfoCallback)(MP3MiniAudioInfo &amp;info)</div><div class="ttdoc">Audio Info provided by the decoder.</div><div class="ttdef"><b>Definition:</b> CodecMP3.h:28</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_base_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_base_info.html">audio_tools::AudioBaseInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:94</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_m_p3_mini_audio_info_html"><div class="ttname"><a href="structaudio__tools_1_1_m_p3_mini_audio_info.html">audio_tools::MP3MiniAudioInfo</a></div><div class="ttdoc">Audio Information for MP3.</div><div class="ttdef"><b>Definition:</b> CodecMP3.h:15</div></div>
-<div class="ttc" id="astructmp3dec__frame__info__t_html"><div class="ttname"><a href="structmp3dec__frame__info__t.html">mp3dec_frame_info_t</a></div><div class="ttdef"><b>Definition:</b> minimp3_tables.h:64</div></div>
-<div class="ttc" id="astructmp3dec__t_html"><div class="ttname"><a href="structmp3dec__t.html">mp3dec_t</a></div><div class="ttdef"><b>Definition:</b> minimp3_tables.h:69</div></div>
+<div class="ttc" id="astructminimp3_1_1mp3dec__frame__info__t_html"><div class="ttname"><a href="structminimp3_1_1mp3dec__frame__info__t.html">minimp3::mp3dec_frame_info_t</a></div><div class="ttdef"><b>Definition:</b> minimp3.h:17</div></div>
+<div class="ttc" id="astructminimp3_1_1mp3dec__t_html"><div class="ttname"><a href="structminimp3_1_1mp3dec__t.html">minimp3::mp3dec_t</a></div><div class="ttdef"><b>Definition:</b> minimp3.h:22</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

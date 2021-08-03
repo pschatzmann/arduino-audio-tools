@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: mp3dec_frame_t Struct Reference</title>
+<title>arduino-audio-tools: minimp3::mp3dec_t Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -59,27 +59,43 @@ $(function() {
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceminimp3.html">minimp3</a></li><li class="navelem"><a class="el" href="structminimp3_1_1mp3dec__t.html">mp3dec_t</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="structmp3dec__frame__t-members.html">List of all members</a>  </div>
+<a href="structminimp3_1_1mp3dec__t-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">mp3dec_frame_t Struct Reference</div>  </div>
+<div class="title">minimp3::mp3dec_t Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a69e9429014223e9a3f5acf989e0e52eb"><td class="memItemLeft" align="right" valign="top"><a id="a69e9429014223e9a3f5acf989e0e52eb"></a>
-uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>offset</b></td></tr>
-<tr class="separator:a69e9429014223e9a3f5acf989e0e52eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac1acca4e33a1b46f175ab13abe04b5b"><td class="memItemLeft" align="right" valign="top"><a id="aac1acca4e33a1b46f175ab13abe04b5b"></a>
-uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>sample</b></td></tr>
-<tr class="separator:aac1acca4e33a1b46f175ab13abe04b5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98f14e27957b5c9bbdc6a126d3dbd7d0"><td class="memItemLeft" align="right" valign="top"><a id="a98f14e27957b5c9bbdc6a126d3dbd7d0"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>free_format_bytes</b></td></tr>
+<tr class="separator:a98f14e27957b5c9bbdc6a126d3dbd7d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57810073799dd4abddbb0ec89111745c"><td class="memItemLeft" align="right" valign="top"><a id="a57810073799dd4abddbb0ec89111745c"></a>
+unsigned char&#160;</td><td class="memItemRight" valign="bottom"><b>header</b> [4]</td></tr>
+<tr class="separator:a57810073799dd4abddbb0ec89111745c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4af69069bbe22fa3914851687f522e26"><td class="memItemLeft" align="right" valign="top"><a id="a4af69069bbe22fa3914851687f522e26"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>mdct_overlap</b> [2][9 *32]</td></tr>
+<tr class="separator:a4af69069bbe22fa3914851687f522e26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a741ef785c364b6e36c967ebdd5034b95"><td class="memItemLeft" align="right" valign="top"><a id="a741ef785c364b6e36c967ebdd5034b95"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>qmf_state</b> [15 *2 *32]</td></tr>
+<tr class="separator:a741ef785c364b6e36c967ebdd5034b95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93551633b3f298c376d42101ff2c9648"><td class="memItemLeft" align="right" valign="top"><a id="a93551633b3f298c376d42101ff2c9648"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>reserv</b></td></tr>
+<tr class="separator:a93551633b3f298c376d42101ff2c9648"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a04a74eea1fc8affce010abe584bdee"><td class="memItemLeft" align="right" valign="top"><a id="a7a04a74eea1fc8affce010abe584bdee"></a>
+unsigned char&#160;</td><td class="memItemRight" valign="bottom"><b>reserv_buf</b> [511]</td></tr>
+<tr class="separator:a7a04a74eea1fc8affce010abe584bdee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>src/AudioCodecs/ext/minimp3/<a class="el" href="minimp3__ex_8h_source.html">minimp3_ex.h</a></li>
+<li>src/AudioCodecs/ext/minimp3/<a class="el" href="minimp3_8h_source.html">minimp3.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

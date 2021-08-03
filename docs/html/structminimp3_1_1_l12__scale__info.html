@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: mp3dec_map_info_t Struct Reference</title>
+<title>arduino-audio-tools: minimp3::L12_scale_info Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -59,27 +59,40 @@ $(function() {
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceminimp3.html">minimp3</a></li><li class="navelem"><a class="el" href="structminimp3_1_1_l12__scale__info.html">L12_scale_info</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="structmp3dec__map__info__t-members.html">List of all members</a>  </div>
+<a href="structminimp3_1_1_l12__scale__info-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">mp3dec_map_info_t Struct Reference</div>  </div>
+<div class="title">minimp3::L12_scale_info Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a4afbdfb44a26e7b5c1ae07a62655f3d1"><td class="memItemLeft" align="right" valign="top"><a id="a4afbdfb44a26e7b5c1ae07a62655f3d1"></a>
-const uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b></td></tr>
-<tr class="separator:a4afbdfb44a26e7b5c1ae07a62655f3d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b7009a8a777a4cdae12a805db0fa4ab"><td class="memItemLeft" align="right" valign="top"><a id="a3b7009a8a777a4cdae12a805db0fa4ab"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>size</b></td></tr>
-<tr class="separator:a3b7009a8a777a4cdae12a805db0fa4ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18ffb06242ce83b692864c5beac2188f"><td class="memItemLeft" align="right" valign="top"><a id="a18ffb06242ce83b692864c5beac2188f"></a>
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>bitalloc</b> [64]</td></tr>
+<tr class="separator:a18ffb06242ce83b692864c5beac2188f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a212dda7a3f063104c2cafa16565165de"><td class="memItemLeft" align="right" valign="top"><a id="a212dda7a3f063104c2cafa16565165de"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>scf</b> [3 *64]</td></tr>
+<tr class="separator:a212dda7a3f063104c2cafa16565165de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad36fc1fa979127f7aaa445707a420566"><td class="memItemLeft" align="right" valign="top"><a id="ad36fc1fa979127f7aaa445707a420566"></a>
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>scfcod</b> [64]</td></tr>
+<tr class="separator:ad36fc1fa979127f7aaa445707a420566"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8c39a0b8337954841ee401c15000339"><td class="memItemLeft" align="right" valign="top"><a id="ae8c39a0b8337954841ee401c15000339"></a>
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>stereo_bands</b></td></tr>
+<tr class="separator:ae8c39a0b8337954841ee401c15000339"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac58b8b98b6e6d0e5202f07fb05c61ed0"><td class="memItemLeft" align="right" valign="top"><a id="ac58b8b98b6e6d0e5202f07fb05c61ed0"></a>
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>total_bands</b></td></tr>
+<tr class="separator:ac58b8b98b6e6d0e5202f07fb05c61ed0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>src/AudioCodecs/ext/minimp3/<a class="el" href="minimp3__ex_8h_source.html">minimp3_ex.h</a></li>
+<li>src/AudioCodecs/ext/minimp3/<a class="el" href="minimp3_8h_source.html">minimp3.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -10,6 +10,9 @@
 
 #define MINIMP3_MAX_SAMPLES_PER_FRAME (1152*2)
 
+/// minimp3 audio decoder - see https://github.com/lieff/minimp3
+namespace minimp3 { 	
+
 typedef struct
 {
     int frame_bytes, frame_offset, channels, hz, layer, bitrate_kbps;
@@ -38,6 +41,8 @@ int mp3dec_decode_frame(mp3dec_t *dec, const uint8_t *mp3, int mp3_bytes, mp3d_s
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */
+
+} // namespace
 
 #endif /* MINIMP3_H */
 #if defined(MINIMP3_IMPLEMENTATION) && !defined(_MINIMP3_IMPLEMENTATION_GUARD)
@@ -83,6 +88,8 @@ int mp3dec_decode_frame(mp3dec_t *dec, const uint8_t *mp3, int mp3_bytes, mp3d_s
 
 #define MINIMP3_MIN(a, b)           ((a) > (b) ? (b) : (a))
 #define MINIMP3_MAX(a, b)           ((a) < (b) ? (b) : (a))
+
+namespace minimp3 { 	
 
 #if !defined(MINIMP3_NO_SIMD)
 
@@ -1852,4 +1859,7 @@ void mp3dec_f32_to_s16(const float *in, int16_t *out, int num_samples)
     }
 }
 #endif /* MINIMP3_FLOAT_OUTPUT */
+
+} // namespace
+
 #endif /* MINIMP3_IMPLEMENTATION && !_MINIMP3_IMPLEMENTATION_GUARD */

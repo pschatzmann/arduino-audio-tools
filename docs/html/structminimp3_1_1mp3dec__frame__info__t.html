@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: bs_t Struct Reference</title>
+<title>arduino-audio-tools: minimp3::mp3dec_frame_info_t Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -59,30 +59,43 @@ $(function() {
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceminimp3.html">minimp3</a></li><li class="navelem"><a class="el" href="structminimp3_1_1mp3dec__frame__info__t.html">mp3dec_frame_info_t</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="structbs__t-members.html">List of all members</a>  </div>
+<a href="structminimp3_1_1mp3dec__frame__info__t-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">bs_t Struct Reference</div>  </div>
+<div class="title">minimp3::mp3dec_frame_info_t Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a1e50a064050e48b7989943aff73e5b4d"><td class="memItemLeft" align="right" valign="top"><a id="a1e50a064050e48b7989943aff73e5b4d"></a>
-const uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><b>buf</b></td></tr>
-<tr class="separator:a1e50a064050e48b7989943aff73e5b4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d71de887112673814e3bc1fd060e5c2"><td class="memItemLeft" align="right" valign="top"><a id="a9d71de887112673814e3bc1fd060e5c2"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>limit</b></td></tr>
-<tr class="separator:a9d71de887112673814e3bc1fd060e5c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a503a298425e415f5f0b4dbdad8d67ec2"><td class="memItemLeft" align="right" valign="top"><a id="a503a298425e415f5f0b4dbdad8d67ec2"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>pos</b></td></tr>
-<tr class="separator:a503a298425e415f5f0b4dbdad8d67ec2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8df4b95c4c80c5bf83dbdfcc1f9550c7"><td class="memItemLeft" align="right" valign="top"><a id="a8df4b95c4c80c5bf83dbdfcc1f9550c7"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>bitrate_kbps</b></td></tr>
+<tr class="separator:a8df4b95c4c80c5bf83dbdfcc1f9550c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16f48d2e37d92a9b19739d9c997bec4e"><td class="memItemLeft" align="right" valign="top"><a id="a16f48d2e37d92a9b19739d9c997bec4e"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b></td></tr>
+<tr class="separator:a16f48d2e37d92a9b19739d9c997bec4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac88d2b2d4fc1758adeb4f15aadafe449"><td class="memItemLeft" align="right" valign="top"><a id="ac88d2b2d4fc1758adeb4f15aadafe449"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>frame_bytes</b></td></tr>
+<tr class="separator:ac88d2b2d4fc1758adeb4f15aadafe449"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a703ddc80b170aabc7459671e8454a5f4"><td class="memItemLeft" align="right" valign="top"><a id="a703ddc80b170aabc7459671e8454a5f4"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>frame_offset</b></td></tr>
+<tr class="separator:a703ddc80b170aabc7459671e8454a5f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad701847aac673a6740b7dd4fef63dcba"><td class="memItemLeft" align="right" valign="top"><a id="ad701847aac673a6740b7dd4fef63dcba"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>hz</b></td></tr>
+<tr class="separator:ad701847aac673a6740b7dd4fef63dcba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa787da33390ca91f8fc4bc99b6744785"><td class="memItemLeft" align="right" valign="top"><a id="aa787da33390ca91f8fc4bc99b6744785"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>layer</b></td></tr>
+<tr class="separator:aa787da33390ca91f8fc4bc99b6744785"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>src/AudioCodecs/ext/minimp3/bak/<a class="el" href="minimp3__tables_8h_source.html">minimp3_tables.h</a></li>
+<li>src/AudioCodecs/ext/minimp3/<a class="el" href="minimp3_8h_source.html">minimp3.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
