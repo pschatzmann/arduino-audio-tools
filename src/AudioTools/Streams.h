@@ -420,7 +420,7 @@ class AudioOutputStream : public BufferedStream {
 };
 
 /**
- * @brief A Stream backed by a Ringbuffer. We can write and read to the stream
+ * @brief A Stream backed by a Ringbuffer. We can write to the end and read from the beginning of the stream
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -470,14 +470,16 @@ class RingBufferStream : public Stream {
 };
 
 /**
- * @brief A Stream backed by a SingleBufferStream. We assume that the memory is externally allocated and that we can write only
- * full buffer records. 
+ * @brief A Stream backed by a SingleBufferStream. We assume that the memory is externally allocated and that we can submit only
+ * full buffer records, which are then available for reading.
+ *  
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 class ExternalBufferStream : public Stream {
     public:
-        ExternalBufferStream(int size=DEFAULT_BUFFER_SIZE) {
+        ExternalBufferStream() {
+	 		LOGD(__FUNCTION__);
         }
 
         virtual int available (){
@@ -489,7 +491,8 @@ class ExternalBufferStream : public Stream {
         
         virtual int peek() {
             return buffer.peek();
-        }        
+        }   
+             
         virtual int read() {
             return buffer.read();
         }
@@ -503,7 +506,8 @@ class ExternalBufferStream : public Stream {
             return len;
         }
         
-        virtual size_t 	write(uint8_t c) {
+        virtual size_t write(uint8_t c) {
+            LOGE("not implemented: %s", __FUNCTION__);
         }
 
     protected:
@@ -513,7 +517,7 @@ class ExternalBufferStream : public Stream {
 
 
 /**
- * @brief A more natural Stream class to process encoded data (aac, wav, mp3...) at the cost of memory use.
+ * @brief A more natural Stream class to process encoded data (aac, wav, mp3...).
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
