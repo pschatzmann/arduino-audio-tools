@@ -12,15 +12,14 @@ namespace audio_tools {
  * @brief Audio Information for MP3
  * 
  */
-class MP3MiniAudioInfo : public AudioBaseInfo {
-    public:
-        MP3MiniAudioInfo() = default;
-        MP3MiniAudioInfo(const MP3MiniAudioInfo& alt) = default;
-        MP3MiniAudioInfo(const mp3dec_frame_info_t &alt){
-            sample_rate = alt.hz;
-            channels = alt.channels;
-            bits_per_sample = 16;
-        }
+struct MP3MiniAudioInfo : public AudioBaseInfo {
+    MP3MiniAudioInfo() = default;
+    MP3MiniAudioInfo(const MP3MiniAudioInfo& alt) = default;
+    MP3MiniAudioInfo(const mp3dec_frame_info_t &alt){
+        sample_rate = alt.hz;
+        channels = alt.channels;
+        bits_per_sample = 16;
+    }
 };
 
 /**
@@ -169,16 +168,19 @@ class MP3DecoderMini : public AudioDecoder  {
                         // publish info
                         MP3MiniAudioInfo info(mp3dec_info);
                         provideAudioInfo(info);
-
-                        // publish 1 data record
-                        out->write((uint8_t*)pcm, decoded_len);
-                        break;
+                        provideData(info, decoded_len);
                     } 
                     // remove decoded data from buffer
                     buffer_pos -= mp3dec_info.frame_bytes;
                     memmove(buffer, buffer + mp3dec_info.frame_bytes, buffer_pos);
 
+                    // stop loop after we have decoded data
+                    if (decoded_len>0){
+                        break;
+                    }
+
                 } else {
+                    // stop loop if we are at end
                     if (in.available()==0){
                         break;
                     }
@@ -292,21 +294,24 @@ class MP3DecoderMini : public AudioDecoder  {
         // Handles the audio_info changes
         void provideAudioInfo(MP3MiniAudioInfo &info){
             // audio has changed
-            if (infoCallback != nullptr && audio_info != info){
-                infoCallback(info);
-            }
+            if (audio_info != info){
+             	LOGI(__FUNCTION__);
 
-            if (audioBaseInfoSupport!=nullptr && audio_info != info){
-                is_output_valid = audioBaseInfoSupport->validate(info);
-                if (is_output_valid){
-                    audioBaseInfoSupport->setAudioInfo(info); 
+                if (infoCallback != nullptr){
+                    infoCallback(info);
                 }
-            } else {
-                is_output_valid = true;
-            }
-            audio_info = info;
-        }
 
+                if (audioBaseInfoSupport!=nullptr){
+                    is_output_valid = audioBaseInfoSupport->validate(info);
+                    if (is_output_valid){
+                        audioBaseInfoSupport->setAudioInfo(info); 
+                    }
+                } else {
+                    is_output_valid = true;
+                }
+                audio_info = info;
+            }
+        }
 
         // return the result PWM data
         void provideData(MP3MiniAudioInfo &info, int samples){

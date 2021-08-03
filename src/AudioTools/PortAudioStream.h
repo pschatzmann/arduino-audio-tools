@@ -53,7 +53,7 @@ class PortAudioStream : public BufferedStream,  public AudioBaseInfoDependent {
 
         /// notification of audio info change
         virtual void setAudioInfo(AudioBaseInfo in) {
-            LOGD(__FUNCTION__);
+            LOGI(__FUNCTION__);
             info.channels = in.channels;
             info.sample_rate = in.sample_rate;
             info.bits_per_sample = in.bits_per_sample;
