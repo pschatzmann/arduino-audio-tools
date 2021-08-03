@@ -1,5 +1,3 @@
-#pragma once
-
 #define MINIMP3_IMPLEMENTATION
 #define MINIMP3_NO_STDIO
 #define LOGGING_ACTIVE true
@@ -11,9 +9,23 @@
 namespace audio_tools {
 
 /**
+ * @brief Audio Information for MP3
+ * 
+ */
+class MP3MiniAudioInfo : public AudioBaseInfo {
+    public:
+        MP3MiniAudioInfo() = default;
+        MP3MiniAudioInfo(const MP3MiniAudioInfo& alt) = default;
+        MP3MiniAudioInfo(const mp3dec_frame_info_t &alt){
+            sample_rate = alt.hz;
+            channels = alt.channels;
+            bits_per_sample = 16;
+        }
+};
+
+/**
  * @brief Audio Info provided by the decoder 
  */
-typedef AudioBaseInfo MP3MiniAudioInfo;
 typedef void (*MP3InfoCallback)(MP3MiniAudioInfo &info);
 typedef void (*MP3DataCallback)(MP3MiniAudioInfo &info,int16_t *pwm_buffer, size_t len);
 
@@ -154,6 +166,11 @@ class MP3DecoderMini : public AudioDecoder  {
                 if (buffer_pos>0){
                     decoded_len = mp3dec_decode_frame(&mp3d, buffer, buffer_pos, pcm, &mp3dec_info);
                     if (decoded_len>0) {
+                        // publish info
+                        MP3MiniAudioInfo info(mp3dec_info);
+                        provideAudioInfo(info);
+
+                        // publish 1 data record
                         out->write((uint8_t*)pcm, decoded_len);
                         break;
                     } 
@@ -266,36 +283,19 @@ class MP3DecoderMini : public AudioDecoder  {
 
         void provideResult(int samples){
             LOGI("provideResult: %d samples", samples);
-            MP3MiniAudioInfo info;
-            info.sample_rate = mp3dec_info.hz;
-            info.channels = mp3dec_info.channels;
-            info.bits_per_sample = 16;
-            provideResultCallback(info, samples);
-            provideResultStream(info, samples);
-            // store last audio_info so that we can detect any changes
-            audio_info = info;
+            MP3MiniAudioInfo info(mp3dec_info);
+            provideAudioInfo(info);
+            provideData(info, samples);
         }
 
 
-        // return the result PWM data
-        void provideResultCallback(MP3MiniAudioInfo &info, int samples){
-        	LOGD(__FUNCTION__);
+        // Handles the audio_info changes
+        void provideAudioInfo(MP3MiniAudioInfo &info){
             // audio has changed
             if (infoCallback != nullptr && audio_info != info){
                 infoCallback(info);
             }
 
-            // provide result pwm data
-            if(pwmCallback!=nullptr){
-                // output via callback
-                pwmCallback(info, (int16_t*) pcm, samples);
-            } 
-        }
-
-        // return the result PWM data
-        void provideResultStream(MP3MiniAudioInfo &info, int samples){
-        	LOGD(__FUNCTION__);
-            // audio has changed
             if (audioBaseInfoSupport!=nullptr && audio_info != info){
                 is_output_valid = audioBaseInfoSupport->validate(info);
                 if (is_output_valid){
@@ -304,6 +304,18 @@ class MP3DecoderMini : public AudioDecoder  {
             } else {
                 is_output_valid = true;
             }
+            audio_info = info;
+        }
+
+
+        // return the result PWM data
+        void provideData(MP3MiniAudioInfo &info, int samples){
+        	LOGD(__FUNCTION__);
+            // provide result pwm data
+            if(pwmCallback!=nullptr){
+                // output via callback
+                pwmCallback(info, (int16_t*) pcm, samples);
+            } 
 
             // provide result pwm data
             if(out!=nullptr && is_output_valid){
@@ -315,6 +327,9 @@ class MP3DecoderMini : public AudioDecoder  {
                 }
             } 
         }
+
+
+
 };
 
 } // namespace
