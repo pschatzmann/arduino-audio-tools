@@ -15,7 +15,7 @@ namespace audio_tools {
 struct MP3MiniAudioInfo : public AudioBaseInfo {
     MP3MiniAudioInfo() = default;
     MP3MiniAudioInfo(const MP3MiniAudioInfo& alt) = default;
-    MP3MiniAudioInfo(const mp3dec_frame_info_t &alt){
+    MP3MiniAudioInfo(const minimp3::mp3dec_frame_info_t &alt){
         sample_rate = alt.hz;
         channels = alt.channels;
         bits_per_sample = 16;
@@ -113,7 +113,7 @@ class MP3DecoderMini : public AudioDecoder  {
         void begin(int bufferLen){
         	LOGD(__FUNCTION__);
             flush();
-            mp3dec_init(&mp3d);
+            minimp3::mp3dec_init(&mp3d);
             buffer_len = bufferLen;
             active = true;
         }
@@ -163,7 +163,7 @@ class MP3DecoderMini : public AudioDecoder  {
             while(true){
                 // decode only if we have data
                 if (buffer_pos>0){
-                    decoded_len = mp3dec_decode_frame(&mp3d, buffer, buffer_pos, pcm, &mp3dec_info);
+                    decoded_len = minimp3::mp3dec_decode_frame(&mp3d, buffer, buffer_pos, pcm, &mp3dec_info);
                     if (decoded_len>0) {
                         // publish info
                         MP3MiniAudioInfo info(mp3dec_info);
@@ -217,8 +217,8 @@ class MP3DecoderMini : public AudioDecoder  {
         MP3InfoCallback infoCallback = nullptr;
         Print *out = nullptr;
         AudioBaseInfoDependent *audioBaseInfoSupport = nullptr;
-        mp3dec_t mp3d;
-        mp3dec_frame_info_t mp3dec_info;
+        minimp3::mp3dec_t mp3d;
+        minimp3::mp3dec_frame_info_t mp3dec_info;
         size_t buffer_len = 16*1024;
         size_t buffer_pos = 0;
         uint8_t *buffer=nullptr;
@@ -235,7 +235,7 @@ class MP3DecoderMini : public AudioDecoder  {
             buffer_pos = 0;
             while(true){
                 LOGI("-> mp3dec_decode_frame: %zu -> %zu ", buffer_pos, remaining_bytes);
-                int samples = mp3dec_decode_frame(&mp3d, fileData+buffer_pos, remaining_bytes, pcm, &mp3dec_info);
+                int samples = minimp3::mp3dec_decode_frame(&mp3d, fileData+buffer_pos, remaining_bytes, pcm, &mp3dec_info);
                 buffer_pos+= mp3dec_info.frame_bytes;
                 remaining_bytes-=mp3dec_info.frame_bytes;
                 if (samples>0){
