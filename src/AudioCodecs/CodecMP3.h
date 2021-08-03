@@ -138,6 +138,44 @@ class MP3DecoderMini : public AudioDecoder  {
             return len;
         }
 
+        /// alternative API to write() - gets the data from an input stream. Each call will result in one record of decoded data in the defined output stream
+        int readStream(Stream &in){
+            int decoded_len = 0;
+            
+            // allocate buffer once
+            if (buffer==nullptr){
+                LOGI("Allocating buffer with %zu bytes", buffer_len);
+                buffer = new uint8_t[buffer_len];
+            }
+
+            // decode until we have some audio data - we skip e.g. meta data records
+            while(true){
+                // decode only if we have data
+                if (buffer_pos>0){
+                    decoded_len = mp3dec_decode_frame(&mp3d, buffer, buffer_pos, pcm, &mp3dec_info);
+                    if (decoded_len>0) {
+                        out->write((uint8_t*)pcm, decoded_len);
+                        break;
+                    } 
+                    // remove decoded data from buffer
+                    buffer_pos -= mp3dec_info.frame_bytes;
+                    memmove(buffer, buffer + mp3dec_info.frame_bytes, buffer_pos);
+
+                } else {
+                    if (in.available()==0){
+                        break;
+                    }
+                }
+
+                // refill buffer with consumed bytes
+                int len = min(in.available(), (int)(buffer_len-buffer_pos));
+                int len_read = in.readBytes(buffer+buffer_pos, len);
+                buffer_pos += len_read;
+            }
+            return decoded_len;
+        }
+
+
         /// Decodes the last outstanding data
         void flush() {
             if (buffer_pos>0 && buffer!=nullptr){
@@ -270,7 +308,11 @@ class MP3DecoderMini : public AudioDecoder  {
             // provide result pwm data
             if(out!=nullptr && is_output_valid){
                 // output via callback
-                out->write((uint8_t*)pcm, samples*2);
+                int bytes = samples*2;
+                int bytes_written = out->write((uint8_t*)pcm, bytes);
+                if (bytes!=bytes_written){
+                    LOGE("could not write all audio data: %d of %d", bytes_written,bytes);
+                }
             } 
         }
 };

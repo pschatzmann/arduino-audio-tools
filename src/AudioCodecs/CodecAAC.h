@@ -82,7 +82,7 @@ class AACDecoder : public AudioDecoder  {
         }
 
         // provides detailed information about the stream
-        CStreamInfo &infoEx(){
+        CStreamInfo &audioInfoEx(){
             return *aacDecoder_GetStreamInfo(aacDecoderInfo);
         }
 

@@ -4,6 +4,7 @@
 
 #define WAV_FORMAT_PCM 0x0001
 #define TAG(a, b, c, d) ((static_cast<uint32_t>(a) << 24) | (static_cast<uint32_t>(b) << 16) | (static_cast<uint32_t>(c) << 8) | (d))
+#define READ_BUFFER_SIZE 512
 
 namespace audio_tools {
 
@@ -292,6 +293,7 @@ class WAVDecoder : public AudioDecoder {
         }
 
         virtual size_t write(const void *in_ptr, size_t in_size) {
+        	LOGD(__FUNCTION__);
             size_t result = 0;
             if (active) {
                 if (isFirst){
@@ -339,6 +341,14 @@ class WAVDecoder : public AudioDecoder {
                 }
             }
             return result;
+        }
+
+        /// Alternative API which provides the data from an input stream
+        int readStream(Stream &in){
+        	LOGD(__FUNCTION__);
+            uint8_t buffer[READ_BUFFER_SIZE];
+            int len = in.readBytes(buffer, READ_BUFFER_SIZE);
+            return write(buffer, len);
         }
 
         virtual operator boolean() {
