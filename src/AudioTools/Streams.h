@@ -535,7 +535,6 @@ class EncodedAudioStream : public Stream {
             decoder_ptr->setStream(ext_buffer);
             input_ptr = &inputStream;
             active = false;
-            direction = RX_MODE;
         }
 
         EncodedAudioStream(Stream &inputStream, AudioDecoder *decoder) {
@@ -544,7 +543,20 @@ class EncodedAudioStream : public Stream {
             decoder_ptr->setStream(ext_buffer);
             input_ptr = &inputStream;
             active = false;
-            direction = RX_MODE;
+        }
+
+        EncodedAudioStream(Stream &outputStream, AudioEncoder &encoder) {
+	 		LOGD(__FUNCTION__);
+            encoder_ptr = &encoder;
+            encoder_ptr->setStream(outputStream);
+            active = false;
+        }
+
+        EncodedAudioStream(Stream &inputStream, AudioEncoder *encoder) {
+	 		LOGD(__FUNCTION__);
+            encoder_ptr = encoder;
+            encoder_ptr->setStream(inputStream);
+            active = false;
         }
 
         /// Define object which need to be notified if the basinfo is changing
@@ -576,20 +588,22 @@ class EncodedAudioStream : public Stream {
         virtual int peek() {
             decode();
             return ext_buffer.peek();
-        }        
+        }     
+
         virtual int read() {
             decode();
             return ext_buffer.read();
         }
         
+        /// decode the data
         virtual size_t readBytes(uint8_t *data, size_t length) {
             decode();
             return ext_buffer.readBytes(data, length);
         }
         
+        /// encode the data
         virtual size_t write(const uint8_t *data, size_t len){
-            LOGE("not implemented: %s", __FUNCTION__);
-            return -1;
+            return active && encoder_ptr != nullptr ? encoder_ptr->write(data, len) : 0;
         }
         
         virtual size_t write(uint8_t c) {
@@ -608,13 +622,13 @@ class EncodedAudioStream : public Stream {
     protected:
         ExternalBufferStream ext_buffer; 
         AudioDecoder *decoder_ptr;  // decoder
+        AudioEncoder *encoder_ptr;  // decoder
         Stream *input_ptr; // data source for encoded data
-        RxTxMode direction; // RX_MODE is decoding
         bool active;
         
         /// decode data into ringbuffer - only if there is no data in the ringbuffer yet
         void decode() {
-            if (ext_buffer.available()==0){
+            if (active && decoder_ptr != nullptr && ext_buffer.available()==0){
                 LOGD(__FUNCTION__);
                 decoder_ptr->readStream(*input_ptr);
             }
@@ -622,10 +636,23 @@ class EncodedAudioStream : public Stream {
 
         /// checks if we have still some data to process
         bool hasMoreData() {
-            size_t in = input_ptr->available();
-            size_t out = ext_buffer.available();
-            LOGD("hasMoreData - raw: %d, decoded: %d ",in, out);
-            return in>0 || out>0;
+            if (input_ptr==nullptr){
+                // prevent NPE
+                return false;
+            } else if (decoder_ptr != nullptr) {
+                // decoding
+                size_t in = input_ptr->available();
+                size_t out = ext_buffer.available();
+                LOGD("hasMoreData - raw: %d, decoded: %d ",in, out);
+                return in>0 || out>0;
+            } else if (encoder_ptr!=nullptr){
+                // encoding
+                size_t in = input_ptr->available();
+                LOGD("hasMoreData - %d ",in);
+                return in>0;
+            } else {
+                return false;
+            }
         }
 };
 
