@@ -552,10 +552,10 @@ class EncodedAudioStream : public Stream {
             active = false;
         }
 
-        EncodedAudioStream(Stream &inputStream, AudioEncoder *encoder) {
+        EncodedAudioStream(Stream &outputStream, AudioEncoder *encoder) {
 	 		LOGD(__FUNCTION__);
             encoder_ptr = encoder;
-            encoder_ptr->setStream(inputStream);
+            encoder_ptr->setStream(outputStream);
             active = false;
         }
 
