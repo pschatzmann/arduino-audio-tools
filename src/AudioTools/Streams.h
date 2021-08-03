@@ -316,6 +316,17 @@ class CsvStream : public BufferedStream, public AudioBaseInfoDependent  {
             this->active = active;
         }
 
+        void begin(){
+	 		LOGD(__FUNCTION__);
+            this->active = true;
+        }
+
+        void begin(AudioBaseInfo info){
+	 		LOGD(__FUNCTION__);
+            this->active = true;
+            this->channels = info.channels;
+        }
+
         void begin(int channels, Print &out=Serial){
 	 		LOGD(__FUNCTION__);
             this->channels = channels;
@@ -330,11 +341,18 @@ class CsvStream : public BufferedStream, public AudioBaseInfoDependent  {
             active = false;
         }
 
+        /// defines the number of channels
+        virtual void setAudioInfo(AudioBaseInfo info) {
+	 		LOGD(__FUNCTION__);
+            this->channels = info.channels;
+        };
+
+
     protected:
         T *data_ptr;
-        Print *out_ptr;
-        int channels;
-        bool active;
+        Print *out_ptr = &Serial;
+        int channels = 1;
+        bool active = false;
 
         virtual size_t writeExt(const uint8_t* data, size_t len) {   
             if (!active) return 0;
@@ -371,7 +389,7 @@ class AudioOutputStream : public BufferedStream {
         }        
 
         AudioOutputStream(AudioWriter &writer) : BufferedStream(DEFAULT_BUFFER_SIZE){
-            writer_ptr = &writer;
+            decoder_ptr = &writer;
             active = true;
         }
     
@@ -384,15 +402,15 @@ class AudioOutputStream : public BufferedStream {
         }
 
         operator bool() {
-            return active && *writer_ptr;
+            return active && *decoder_ptr;
         }
 
     protected:
-        AudioWriter *writer_ptr;
+        AudioWriter *decoder_ptr;
         bool active;
 
         virtual size_t writeExt(const uint8_t* data, size_t len) {  
-            return (writer_ptr!=nullptr && active) ? writer_ptr->write(data, len) : 0;
+            return (decoder_ptr!=nullptr && active) ? decoder_ptr->write(data, len) : 0;
         }
 
         virtual size_t readExt( uint8_t *data, size_t len) { 
@@ -402,7 +420,7 @@ class AudioOutputStream : public BufferedStream {
 };
 
 /**
- * @brief A Stream backed by a Ringbuffer. We can 
+ * @brief A Stream backed by a Ringbuffer. We can write and read to the stream
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -419,6 +437,7 @@ class RingBufferStream : public Stream {
         }
 
         virtual int available (){
+            //LOGD("RingBufferStream::available: %zu",buffer->available());
             return buffer->available();
         }
         
@@ -437,6 +456,7 @@ class RingBufferStream : public Stream {
         }
         
         virtual size_t write(const uint8_t *data, size_t len){
+            //LOGD("RingBufferStream::write: %zu",len);
             return buffer->writeArray(data, len);
         }
         
@@ -446,6 +466,48 @@ class RingBufferStream : public Stream {
 
     protected:
         RingBuffer<uint8_t> *buffer=nullptr;
+
+};
+
+/**
+ * @brief A Stream backed by a SingleBufferStream. We assume that the memory is externally allocated and that we can write only
+ * full buffer records. 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class ExternalBufferStream : public Stream {
+    public:
+        ExternalBufferStream(int size=DEFAULT_BUFFER_SIZE) {
+        }
+
+        virtual int available (){
+            return buffer.available();
+        }
+        
+        virtual void flush (){
+        }
+        
+        virtual int peek() {
+            return buffer.peek();
+        }        
+        virtual int read() {
+            return buffer.read();
+        }
+        
+        virtual size_t readBytes(uint8_t *data, size_t length) {
+            return buffer.readArray(data, length);
+        }
+        
+        virtual size_t write(const uint8_t *data, size_t len){
+            buffer.onExternalBufferRefilled((void*)data, len);
+            return len;
+        }
+        
+        virtual size_t 	write(uint8_t c) {
+        }
+
+    protected:
+        SingleBuffer<uint8_t> buffer;
 
 };
 
@@ -464,16 +526,18 @@ class EncodedAudioStream : public Stream {
          * @param decoder 
          */
         EncodedAudioStream(Stream &inputStream, AudioDecoder &decoder) {
-            writer_ptr = &decoder;
-            writer_ptr->setStream(ring_buffer);
+	 		LOGD(__FUNCTION__);
+            decoder_ptr = &decoder;
+            decoder_ptr->setStream(ext_buffer);
             input_ptr = &inputStream;
             active = false;
             direction = RX_MODE;
         }
 
         EncodedAudioStream(Stream &inputStream, AudioDecoder *decoder) {
-            writer_ptr = decoder;
-            writer_ptr->setStream(ring_buffer);
+	 		LOGD(__FUNCTION__);
+            decoder_ptr = decoder;
+            decoder_ptr->setStream(ext_buffer);
             input_ptr = &inputStream;
             active = false;
             direction = RX_MODE;
@@ -481,39 +545,42 @@ class EncodedAudioStream : public Stream {
 
         /// Define object which need to be notified if the basinfo is changing
         void setNotifyAudioChange(AudioBaseInfoDependent &bi) {
-            writer_ptr->setNotifyAudioChange(bi);
+	 		LOGD(__FUNCTION__);
+            decoder_ptr->setNotifyAudioChange(bi);
         }
 
         void begin() {
+	 		LOGD(__FUNCTION__);
             active = true;
-            writer_ptr->begin();
+            decoder_ptr->begin();
         }
 
         void end() {
-            writer_ptr->end();
+	 		LOGD(__FUNCTION__);
+            decoder_ptr->end();
             active = false;
         }
 
         virtual int available (){
-            decode(DEFAULT_BUFFER_SIZE);
-            return ring_buffer.available();
+            decode();
+            return ext_buffer.available();
         }
         
         virtual void flush (){
         }
         
         virtual int peek() {
-            decode(DEFAULT_BUFFER_SIZE);
-            return ring_buffer.peek();
+            decode();
+            return ext_buffer.peek();
         }        
         virtual int read() {
-            decode(DEFAULT_BUFFER_SIZE);
-            return ring_buffer.read();
+            decode();
+            return ext_buffer.read();
         }
         
         virtual size_t readBytes(uint8_t *data, size_t length) {
-            decode(length);
-            return ring_buffer.readBytes(data, length);
+            decode();
+            return ext_buffer.readBytes(data, length);
         }
         
         virtual size_t write(const uint8_t *data, size_t len){
@@ -521,38 +588,40 @@ class EncodedAudioStream : public Stream {
             return -1;
         }
         
-        virtual size_t 	write(uint8_t c) {
+        virtual size_t write(uint8_t c) {
             LOGE("not implemented: %s", __FUNCTION__);
             return -1;
         }
 
         operator bool() {
-            return active && *writer_ptr && hasMoreData();
+            return active && hasMoreData();
         }
 
         AudioDecoder &decoder() {
-            return *writer_ptr;
+            return *decoder_ptr;
         }
 
     protected:
-        RingBufferStream ring_buffer;
-        AudioDecoder *writer_ptr;  // decoder
+        ExternalBufferStream ext_buffer; 
+        AudioDecoder *decoder_ptr;  // decoder
         Stream *input_ptr; // data source for encoded data
         RxTxMode direction; // RX_MODE is decoding
         bool active;
         
-        /// decode data into ringbuffer
-        void decode(int len) {
-            uint8_t buffer[len];
-            // push data to decoder until we have enugh data to return
-            while(input_ptr->available()>0 && ring_buffer.available()==0){
-                int eff_len = input_ptr->readBytes(buffer, len);
-                writer_ptr->write(buffer, eff_len);
+        /// decode data into ringbuffer - only if there is no data in the ringbuffer yet
+        void decode() {
+            if (ext_buffer.available()==0){
+                LOGD(__FUNCTION__);
+                decoder_ptr->readStream(*input_ptr);
             }
         }
 
+        /// checks if we have still some data to process
         bool hasMoreData() {
-            input_ptr->available()>0 || ring_buffer.available()>0;
+            size_t in = input_ptr->available();
+            size_t out = ext_buffer.available();
+            LOGD("hasMoreData - raw: %d, decoded: %d ",in, out);
+            return in>0 || out>0;
         }
 };
 

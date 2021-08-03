@@ -101,14 +101,40 @@ public:
 template<typename T>
 class SingleBuffer : public BaseBuffer<T> {
 public:
+    /**
+     * @brief Construct a new Single Buffer object
+     * 
+     * @param size 
+     */
     SingleBuffer(int size){
         this->max_size = size;
         buffer = new T[max_size];
         reset();
     }
-    
+
+    /**
+     * @brief Construct a new Single Buffer w/o allocating any memory
+     * 
+     * @param data 
+     * @param size 
+     * @param len 
+     */
+    SingleBuffer(){
+        reset();
+    }
+
+    /// notifies that the external buffer has been refilled
+    void onExternalBufferRefilled(void *data, int len){
+        this->owns_buffer = false;
+        this->buffer = (uint8_t*)data;
+        this->current_read_pos = 0;
+        this->current_write_pos = len;
+    }
+
     ~SingleBuffer() {
-        delete[] buffer;
+        if (owns_buffer && buffer!=nullptr){
+            delete[] buffer;
+        }
     }
 
     bool write(T sample){
@@ -169,10 +195,11 @@ public:
     }
     
 protected:
-    int max_size;
-    int current_read_pos;
-    int current_write_pos;
-    T *buffer;
+    int max_size=0;
+    int current_read_pos=0;
+    int current_write_pos=0;
+    bool owns_buffer = true;
+    T *buffer = nullptr;
 };
 
 /**
