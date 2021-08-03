@@ -615,14 +615,20 @@ class EncodedAudioStream : public Stream {
             return active && hasMoreData();
         }
 
+        /// Provides the initialized decoder
         AudioDecoder &decoder() {
             return *decoder_ptr;
         }
 
+        /// Provides the initialized encoder
+        AudioEncoder &encoder() {
+            return *encoder_ptr;
+        }
+
     protected:
         ExternalBufferStream ext_buffer; 
-        AudioDecoder *decoder_ptr;  // decoder
-        AudioEncoder *encoder_ptr;  // decoder
+        AudioDecoder *decoder_ptr = CodecNOP::instance();  // decoder
+        AudioEncoder *encoder_ptr = CodecNOP::instance();  // decoder
         Stream *input_ptr; // data source for encoded data
         bool active;
         

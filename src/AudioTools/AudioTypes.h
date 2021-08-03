@@ -207,6 +207,38 @@ class AudioEncoder : public AudioWriter {
 };
 
 
+/**
+ * @brief Dummpy no implmentation Codec. This is used so that we can initialize some pointers to decoders and encoders to make
+ * sure that they do not point to null.
+ */
+class CodecNOP : public  AudioDecoder, public AudioEncoder {
+    public:
+        static CodecNOP *instance() {
+            static CodecNOP self;
+            return &self;
+        } 
+
+        virtual void begin() {}
+        virtual void end() {}
+  	    virtual void setStream(Stream &out_stream) {}
+        virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi) {}
+
+        virtual AudioBaseInfo audioInfo() {
+            AudioBaseInfo info;
+            return info;
+        }
+        virtual operator boolean() {
+            return false;
+        }
+        virtual int readStream(Stream &in) { 
+            return 0; 
+        };
+
+	      virtual size_t write(const void *in_ptr, size_t in_size) {
+            return 0;           
+        }
+};
+
 /// stops any further processing by spinning in an endless loop
 void stop() {
   #ifdef EXIT_ON_STOP
