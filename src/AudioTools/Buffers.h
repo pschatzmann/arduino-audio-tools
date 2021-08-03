@@ -139,7 +139,7 @@ public:
 
     bool write(T sample){
         bool result = false;
-        if (current_write_pos<max_size){
+        if (buffer != nullptr &&  current_write_pos<max_size){
             buffer[current_write_pos++] = sample;
             result = true;
         }
@@ -148,7 +148,7 @@ public:
     
     T read() {
         T result = 0;
-        if (current_read_pos < current_write_pos){
+        if (buffer != nullptr && current_read_pos < current_write_pos){
             result = buffer[current_read_pos++];
         }
         return result;
@@ -156,7 +156,7 @@ public:
 
     T peek() {
         T result = 0;
-        if (current_read_pos < current_write_pos){
+        if (buffer != nullptr && current_read_pos < current_write_pos){
             result = buffer[current_read_pos];
         }
         return result;
