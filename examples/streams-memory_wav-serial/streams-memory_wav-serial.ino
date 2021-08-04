@@ -15,9 +15,9 @@ using namespace audio_tools;
 
 // MemoryStream -> AudioOutputStream -> WAVDecoder -> CsvStream
 MemoryStream wav(knghtsng_wav, knghtsng_wav_len);
-EncodedAudioStream in(wav, new WAVDecoder());
 CsvStream<int16_t> out(Serial);  // ASCII stream 
-StreamCopy copier(out, in);    // copy in to out
+EncodedAudioStream enc(out, new WAVDecoder());
+StreamCopy copier(enc, wav);    // copy in to out
 
 void setup(){
   Serial.begin(115200);

@@ -19,17 +19,22 @@ class AACDecoder : public AudioDecoder  {
 
         AACDecoder(Stream &out_stream, int output_buffer_size=2048){
         	LOGD(__FUNCTION__);
-            this->out = &out_stream;
             this->output_buffer_size = output_buffer_size;
             this->output_buffer = new INT_PCM[output_buffer_size];
+			setStream(out_stream)
         }
 
         ~AACDecoder(){
             close();
         }
 
+		/// Defines the output stream
 		void setStream(Stream &out_stream){
             this->out = &out_stream;
+		}
+
+        int begin(){
+			begin(TT_UNKNOWN, 1);
 		}
 
         // opens the decoder
@@ -89,7 +94,7 @@ class AACDecoder : public AudioDecoder  {
 		// provides common information
 		AudioBaseInfo &audioInfo() {
 			AudioBaseInfo result;
-			CStreamInfo& i = infoEx();
+			CStreamInfo& i = audioInfoEx();
 			result.channels = i.numChannels;
 			result.sample_rate = i.sampleRate;
 			result.bits_per_sample = 16;
@@ -97,7 +102,7 @@ class AACDecoder : public AudioDecoder  {
 		}
 
         // release the resources
-        void close(){
+        void end(){
 	 		LOGD(__FUNCTION__);
             if (aacDecoderInfo!=nullptr){
                 aacDecoder_Close(aacDecoderInfo); 
@@ -128,7 +133,7 @@ class AACDecoder : public AudioDecoder  {
  * @brief Encodes PCM data to the AAC format and writes the result to a stream
  * 
  */
-class AACEncoder : public AudioWriter {
+class AACEncoder : public AudioEncoder {
 
 public:
 	AACEncoder(Stream &out_stream){
@@ -229,15 +234,24 @@ public:
 		this->out_size = outbuf_size;
 	}
 
+	/// Defines the Audio Info
+    virtual void setAudioInfo(AudioBaseInfo from) {
+		LOGD(__FUNCTION__);
+		this->channels = input_channels;
+		this->sample_rate = input_sample_rate;
+		this->bits_per_sample = input_bits_per_sample;
+    }
+
 	/**
 	 * @brief Opens the encoder  
 	 * 
 	 * @param info 
 	 * @return int 
 	 */
-	virtual int begin(AudioBaseInfo info) {
+	virtual void begin(AudioBaseInfo info) {
 		LOGD(__FUNCTION__);
-		begin(info.channels, info.sample_rate, info.bits_per_sample);
+		setAudioInfo(info);
+		begin();
 	}
 
 	/**
@@ -248,11 +262,18 @@ public:
 	 * @param input_bits_per_sample 
 	 * @return int 0 => ok; error with negative number
 	 */
-	virtual int begin(int input_channels=2, int input_sample_rate=44100, int input_bits_per_sample=16) {
+	virtual void begin(int input_channels=2, int input_sample_rate=44100, int input_bits_per_sample=16) {
 		LOGD(__FUNCTION__);
-		this->channels = input_channels;
-		this->sample_rate = input_sample_rate;
-		this->bits_per_sample = input_bits_per_sample;
+		AudioInfo ai;
+		ai.channels = input_channels;
+		ai.sample_rate = input_sample_rate;
+		ai.bits_per_sample = input_bits_per_sample;
+		setAudioInfo(info);
+		begin();
+	}
+
+	// starts the processing
+	void begin() {
 
 		switch (channels) {
 		case 1: mode = MODE_1;       break;
@@ -263,47 +284,47 @@ public:
 		case 6: mode = MODE_1_2_2_1; break;
 		default:
 			LOGE("Unsupported WAV channels\n");
-			return -1;
+			return;
 		}
 
 		if (aacEncOpen(&handle, 0, channels) != AACENC_OK) {
 			LOGE("Unable to open encoder\n");
-			return -1;
+			return;
 		}
 
 		if (updateParams()<0) {
 			LOGE("Unable to update parameters\n");
-			return -1;
+			return;
 		}
 
 		if (aacEncEncode(handle, NULL, NULL, NULL, NULL) != AACENC_OK) {
 			LOGE("Unable to initialize the encoder\n");
-			return -1;
+			return;
 		}
 
 		if (aacEncInfo(handle, &info) != AACENC_OK) {
 			LOGE("Unable to get the encoder info\n");
-			return -1;
+			return;
 		}
 
 		input_size = channels*2*info.frameLength;
 		input_buf = (uint8_t*) malloc(input_size);
 		if (input_buf==nullptr){
 			LOGE("Unable to allocate memory for input buffer\n");
-			return -1;
+			return;
 		}
 		convert_buf = (int16_t*) malloc(input_size);
 		if (convert_buf==nullptr){
 			LOGE("Unable to allocate memory for convert buffer\n");
-			return -1;
+			return;
 		}
 		outbuf = (uint8_t*) malloc(out_size);
 		if (outbuf==nullptr){
 			LOGE("Unable to allocate memory for output buffer\n");
-			return -1;
+			return;
 		}
 
-		return 0;
+		active = true;
 	}
 	
 
@@ -347,8 +368,9 @@ public:
 	}
 
 	// release resources
-	void close(){
+	void end(){
 		LOGD(__FUNCTION__);
+		active = false;
 		if (input_buf!=nullptr)
 			free(input_buf);
 		input_buf = nullptr;
@@ -378,7 +400,7 @@ protected:
 	Stream *out;
 	int vbr = 0;
 	int bitrate = 64000;
-	int ch;
+	int ch = 0;
 	const char *infile;
 	void *wav;
 	int format, sample_rate, channels, bits_per_sample;
@@ -403,7 +425,7 @@ protected:
 	uint8_t* outbuf;
 	int out_size = 20480;
 	AACENC_ERROR err;
-
+	bool active;
 
 	int updateParams() {
 		if (setParameter(AACENC_AOT, aot) != AACENC_OK) {
