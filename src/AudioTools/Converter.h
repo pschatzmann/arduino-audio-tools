@@ -204,6 +204,9 @@ class ConverterFillLeftAndRight : public  BaseConverter<T> {
                     right_empty = true;
                     is_setup = true;
                     break;
+                case Auto:
+                    is_setup = false;
+                    break;
             }
         }
 

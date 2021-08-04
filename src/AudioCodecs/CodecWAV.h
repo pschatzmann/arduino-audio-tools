@@ -15,6 +15,13 @@ namespace audio_tools {
  * 
  */
 struct WAVAudioInfo : AudioBaseInfo {
+    WAVAudioInfo() = default;
+    WAVAudioInfo(const AudioBaseInfo& from){
+        sample_rate = from.sample_rate;    
+        channels = from.channels;       
+        bits_per_sample=from.bits_per_sample; 
+    }
+
     int format;
     int byte_rate;
     int block_align;
@@ -372,7 +379,7 @@ class WAVDecoder : public AudioDecoder {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class WAVEncoder : public AudioWriter {
+class WAVEncoder : public AudioEncoder {
     public: 
         // Empty Constructor - the output stream must be provided with begin()
         WAVEncoder(){
@@ -383,6 +390,18 @@ class WAVEncoder : public AudioWriter {
             stream_ptr = &out;
         }
 
+        // Constructor providing the output stream and the WAVAudioInfo
+        WAVEncoder(Stream &out, WAVAudioInfo ai){
+            stream_ptr = &out;
+            setAudioInfo(ai);
+        }
+
+        /// Defines the otuput stream
+        void setStream(Stream &out){
+            stream_ptr = &out;
+        }
+
+        /// Provides "audio/wav"
         const char* mime(){
             return wav_mime;
         }
@@ -401,10 +420,15 @@ class WAVEncoder : public AudioWriter {
             return info;
         }
 
-        // starts the processing
-        virtual void begin(WAVAudioInfo &ai) {
-            header_written = false;
-            is_open = true;
+        /// Update actual WAVAudioInfo 
+        virtual void setAudioInfo(AudioBaseInfo from) {
+            audioInfo.sample_rate = from.sample_rate;    
+            audioInfo.channels = from.channels;       
+            audioInfo.bits_per_sample=from.bits_per_sample; 
+        }
+
+        /// Defines the WAVAudioInfo
+        virtual void setAudioInfo(WAVAudioInfo ai) {
             audioInfo = ai;
             audioInfo.byte_rate = audioInfo.sample_rate * audioInfo.bits_per_sample * audioInfo.channels;
             audioInfo.block_align =  audioInfo.bits_per_sample / 8 * audioInfo.channels;
@@ -416,19 +440,33 @@ class WAVEncoder : public AudioWriter {
                 size_limit = audioInfo.data_length;
                 LOGI("size_limit is %ld", size_limit);
             }
+
+        };
+
+        /// starts the processing using the actual WAVAudioInfo
+        virtual void begin() {
+            begin(audioInfo);
         }
 
-        // starts the processing
-        virtual void begin(Stream &out, WAVAudioInfo &ai) {
+        /// starts the processing
+        void begin(WAVAudioInfo &ai) {
+            header_written = false;
+            setAudioInfo(ai);
+            is_open = true;
+        }
+
+        /// starts the processing
+        void begin(Stream &out, WAVAudioInfo &ai) {
             stream_ptr = &out;
             begin(ai);
         }
 
+        /// stops the processing
         void end() {
             is_open = false;
         }
 
-        // Writes PCM data to be encoded as WAV
+        /// Writes PCM data to be encoded as WAV
         virtual size_t write(const void *in_ptr, size_t in_size){
             if (!is_open){
                 LOGE("The WAVEncoder is not open - please call begin()");
@@ -501,6 +539,7 @@ class WAVEncoder : public AudioWriter {
         void write32(Stream &stream, uint64_t value ){
             stream.write((uint8_t *) &value, 4);
         }
+        
         void write16(Stream &stream, uint16_t value ){
             stream.write((uint8_t *) &value, 2);
         }

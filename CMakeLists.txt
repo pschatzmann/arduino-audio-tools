@@ -14,3 +14,5 @@ install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/src/" # source directory
     FILES_MATCHING # install only matched files
     PATTERN "*.h" # select header files
 )
+
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests)

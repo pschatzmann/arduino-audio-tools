@@ -529,11 +529,11 @@ class EncodedAudioStream : public Stream {
          * @param outputStream 
          * @param decoder 
          */
-        EncodedAudioStream(Stream &inputStream, AudioDecoder &decoder) {
+        EncodedAudioStream(Stream &outputStream, AudioDecoder &decoder) {
 	 		LOGD(__FUNCTION__);
             decoder_ptr = &decoder;
-            decoder_ptr->setStream(ext_buffer);
-            input_ptr = &inputStream;
+            decoder_ptr->setStream(outputStream);
+            writer_ptr = decoder_ptr;
             active = false;
         }
 
@@ -543,11 +543,11 @@ class EncodedAudioStream : public Stream {
          * @param inputStream 
          * @param decoder 
          */
-        EncodedAudioStream(Stream &inputStream, AudioDecoder *decoder) {
+        EncodedAudioStream(Stream &outputStream, AudioDecoder *decoder) {
 	 		LOGD(__FUNCTION__);
             decoder_ptr = decoder;
-            decoder_ptr->setStream(ext_buffer);
-            input_ptr = &inputStream;
+            decoder_ptr->setStream(outputStream);
+            writer_ptr = decoder_ptr;
             active = false;
         }
 
@@ -561,6 +561,7 @@ class EncodedAudioStream : public Stream {
 	 		LOGD(__FUNCTION__);
             encoder_ptr = &encoder;
             encoder_ptr->setStream(outputStream);
+            writer_ptr = encoder_ptr;
             active = false;
         }
 
@@ -574,6 +575,7 @@ class EncodedAudioStream : public Stream {
 	 		LOGD(__FUNCTION__);
             encoder_ptr = encoder;
             encoder_ptr->setStream(outputStream);
+            writer_ptr = encoder_ptr;
             active = false;
         }
 
@@ -596,9 +598,9 @@ class EncodedAudioStream : public Stream {
         /// Starts the processing - sets the status to active
         void begin() {
 	 		LOGD(__FUNCTION__);
-            active = true;
             decoder_ptr->begin();
             encoder_ptr->begin();
+            active = true;
         }
 
         /// Ends the processing
@@ -609,10 +611,9 @@ class EncodedAudioStream : public Stream {
             active = false;
         }
 
-        /// Returns the number of decoded bytes. If used as encoder we always get 0!
-        virtual int available (){
-            decode();
-            return ext_buffer.available();
+        /// note: always return 0!
+        virtual int available(){
+            return 0;
         }
         
         /// writes out any buffered data
@@ -623,27 +624,24 @@ class EncodedAudioStream : public Stream {
             }
         }
         
-        /// peek for a single decoded byte
+        /// not implemented
         virtual int peek() {
-            decode();
-            return ext_buffer.peek();
+            return -1;
         }     
 
-        /// decode a single byte
+        /// not implemented
         virtual int read() {
-            decode();
-            return ext_buffer.read();
+            return -1;
         }
         
-        /// decode the data
+        /// not implemented
         virtual size_t readBytes(uint8_t *data, size_t length) {
-            decode();
-            return ext_buffer.readBytes(data, length);
+            return 0;
         }
         
         /// encode the data
         virtual size_t write(const uint8_t *data, size_t len){
-            return active ? encoder_ptr->write(data, len) : 0;
+            return writer_ptr!=nullptr ? writer_ptr->write(data,len) : 0;
         }
         
         /// encode the data
@@ -659,11 +657,12 @@ class EncodedAudioStream : public Stream {
             if (write_buffer_pos==write_buffer_size){
                 flush();
             }
+            return 0;
         }
 
         /// Returns true if status is active and we still have data to be processed
         operator bool() {
-            return active && hasMoreData();
+            return active;
         }
 
         /// Provides the initialized decoder
@@ -677,43 +676,17 @@ class EncodedAudioStream : public Stream {
         }
 
     protected:
-        ExternalBufferStream ext_buffer; 
+        //ExternalBufferStream ext_buffer; 
         AudioDecoder *decoder_ptr = CodecNOP::instance();  // decoder
         AudioEncoder *encoder_ptr = CodecNOP::instance();  // decoder
+        AudioWriter *writer_ptr = nullptr ;
+
         Stream *input_ptr; // data source for encoded data
         uint8_t *write_buffer = nullptr;
         int write_buffer_pos = 0;
         const int write_buffer_size = 256;
         bool active;
         
-        /// decode data into ringbuffer - only if there is no data in the ringbuffer yet
-        void decode() {
-            if (active  && ext_buffer.available()==0){
-                LOGD(__FUNCTION__);
-                decoder_ptr->readStream(*input_ptr);
-            }
-        }
-
-        /// checks if we have still some data to process
-        bool hasMoreData() {
-            if (input_ptr==nullptr){
-                // prevent NPE
-                return false;
-            } else if (decoder_ptr != CodecNOP::instance()) {
-                // decoding
-                size_t in = input_ptr->available();
-                size_t out = ext_buffer.available();
-                LOGD("hasMoreData - raw: %d, decoded: %d ",in, out);
-                return in>0 || out>0;
-            } else if (encoder_ptr != CodecNOP::instance()){
-                // encoding
-                size_t in = input_ptr->available();
-                LOGD("hasMoreData - %d ",in);
-                return in>0;
-            } else {
-                return false;
-            }
-        }
 };
 
 
