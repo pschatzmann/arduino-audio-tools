@@ -219,7 +219,9 @@ class BufferedStream : public Stream {
         }
 
         ~BufferedStream() {
-            delete [] buffer;
+            if (buffer!=nullptr){
+                delete buffer;
+            }
         }
 
         /// writes a byte to the buffer
@@ -280,7 +282,7 @@ class BufferedStream : public Stream {
         }
 
     protected:
-        SingleBuffer<uint8_t> *buffer;
+        SingleBuffer<uint8_t> *buffer=nullptr;
 
         // refills the buffer with data from i2s
         void refill() {

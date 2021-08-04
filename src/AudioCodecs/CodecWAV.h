@@ -46,7 +46,7 @@ class WAVHeader  {
         };
 
         void begin(uint8_t* buffer, size_t len){
-            LOGI("WAVHeader len: %u", len);
+            LOGI("WAVHeader len: %zu", len);
 
             this->buffer = buffer;
             this->len = len;
@@ -212,7 +212,7 @@ class WAVHeader  {
         }
 
         void logInfo(){
-            LOGI("WAVHeader sound_pos: %d", sound_pos);
+            LOGI("WAVHeader sound_pos: %zu", sound_pos);
             LOGI("WAVHeader channels: %d ", headerInfo.channels);
             LOGI("WAVHeader bits_per_sample: %d", headerInfo.bits_per_sample);
             LOGI("WAVHeader sample_rate: %d ", headerInfo.sample_rate);
@@ -438,7 +438,7 @@ class WAVEncoder : public AudioEncoder {
                 audioInfo.data_length = ~0;
             } else {
                 size_limit = audioInfo.data_length;
-                LOGI("size_limit is %ld", size_limit);
+                LOGI("size_limit is %zu", size_limit);
             }
 
         };
