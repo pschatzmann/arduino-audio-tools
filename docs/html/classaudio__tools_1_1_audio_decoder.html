@@ -83,11 +83,12 @@ Inheritance diagram for audio_tools::AudioDecoder:</div>
  <div class="center">
   <img src="classaudio__tools_1_1_audio_decoder.png" usemap="#audio_5Ftools::AudioDecoder_map" alt=""/>
   <map id="audio_5Ftools::AudioDecoder_map" name="audio_5Ftools::AudioDecoder_map">
-<area href="classaudio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="audio_tools::AudioWriter" shape="rect" coords="286,0,467,24"/>
-<area href="classaudio__tools_1_1_a_a_c_decoder.html" title="Audio Decoder which decodes AAC into a PCM stream." alt="audio_tools::AACDecoder" shape="rect" coords="0,112,181,136"/>
-<area href="classaudio__tools_1_1_codec_n_o_p.html" title="Dummpy no implmentation Codec. This is used so that we can initialize some pointers to decoders and e..." alt="audio_tools::CodecNOP" shape="rect" coords="191,112,372,136"/>
-<area href="classaudio__tools_1_1_m_p3_decoder_mini.html" title="MP3 Decoder using https://github.com/lieff/minimp3." alt="audio_tools::MP3DecoderMini" shape="rect" coords="382,112,563,136"/>
-<area href="classaudio__tools_1_1_w_a_v_decoder.html" title="WAVDecoder - We parse the header data on the first record and send the sound data to the stream which..." alt="audio_tools::WAVDecoder" shape="rect" coords="573,112,754,136"/>
+<area href="classaudio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="audio_tools::AudioWriter" shape="rect" coords="390,0,575,24"/>
+<area href="classaudio__tools_1_1_a_a_c_decoder.html" title="Audio Decoder which decodes AAC into a PCM stream." alt="audio_tools::AACDecoder" shape="rect" coords="0,112,185,136"/>
+<area href="classaudio__tools_1_1_codec_n_o_p.html" title="Dummpy no implmentation Codec. This is used so that we can initialize some pointers to decoders and e..." alt="audio_tools::CodecNOP" shape="rect" coords="195,112,380,136"/>
+<area href="classaudio__tools_1_1_m_p3_decoder_helix.html" title="MP3 Decoder using libhelix: https://github.com/pschatzmann/arduino-libhelix." alt="audio_tools::MP3DecoderHelix" shape="rect" coords="390,112,575,136"/>
+<area href="classaudio__tools_1_1_m_p3_decoder_mini.html" title="MP3 Decoder using https://github.com/lieff/minimp3." alt="audio_tools::MP3DecoderMini" shape="rect" coords="585,112,770,136"/>
+<area href="classaudio__tools_1_1_w_a_v_decoder.html" title="WAVDecoder - We parse the header data on the first record and send the sound data to the stream which..." alt="audio_tools::WAVDecoder" shape="rect" coords="780,112,965,136"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -102,9 +103,6 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> ()=
 <tr class="memitem:aa15e5480c3644bab7452dee1c10f3323"><td class="memItemLeft" align="right" valign="top"><a id="aa15e5480c3644bab7452dee1c10f3323"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()=0</td></tr>
 <tr class="separator:aa15e5480c3644bab7452dee1c10f3323"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc7e34489f1a0ed2c0673911929dfa0f"><td class="memItemLeft" align="right" valign="top"><a id="abc7e34489f1a0ed2c0673911929dfa0f"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>readStream</b> (<a class="el" href="class_stream.html">Stream</a> &amp;in)=0</td></tr>
-<tr class="separator:abc7e34489f1a0ed2c0673911929dfa0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff7551f51f2698e13d00cd75de8be8b6"><td class="memItemLeft" align="right" valign="top"><a id="aff7551f51f2698e13d00cd75de8be8b6"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setNotifyAudioChange</b> (<a class="el" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> &amp;bi)=0</td></tr>
 <tr class="separator:aff7551f51f2698e13d00cd75de8be8b6"><td class="memSeparator" colspan="2">&#160;</td></tr>

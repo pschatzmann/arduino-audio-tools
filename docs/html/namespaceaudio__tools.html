@@ -223,8 +223,14 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_mozzi_stream.html">MozziStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">We use the output functionality of Mozzi to output audio data. We expect the data as array of int16_t with one or two channels. Though we support the setting of a sample rate, we recommend to use the default sample rate from Mozzi which is available with the AUDIO_RATE define.  <a href="classaudio__tools_1_1_mozzi_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_helix.html">MP3DecoderHelix</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">MP3 Decoder using libhelix: <a href="https://github.com/pschatzmann/arduino-libhelix">https://github.com/pschatzmann/arduino-libhelix</a>.  <a href="classaudio__tools_1_1_m_p3_decoder_helix.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html">MP3DecoderMini</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">MP3 Decoder using <a href="https://github.com/lieff/minimp3">https://github.com/lieff/minimp3</a>.  <a href="classaudio__tools_1_1_m_p3_decoder_mini.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_m_p3_helix_audio_info.html">MP3HelixAudioInfo</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Audio Information for MP3.  <a href="structaudio__tools_1_1_m_p3_helix_audio_info.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_m_p3_mini_audio_info.html">MP3MiniAudioInfo</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Audio Information for MP3.  <a href="structaudio__tools_1_1_m_p3_mini_audio_info.html#details">More...</a><br /></td></tr>
@@ -350,9 +356,6 @@ typedef <a class="el" href="classaudio__tools_1_1_port_audio_stream.html">PortAu
 <tr class="memitem:af464b4ec891d44c504d35d08d64ded5d"><td class="memItemLeft" align="right" valign="top"><a id="af464b4ec891d44c504d35d08d64ded5d"></a>
 typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><b>MP3DataCallback</b>) (<a class="el" href="structaudio__tools_1_1_m_p3_mini_audio_info.html">MP3MiniAudioInfo</a> &amp;info, int16_t *pwm_buffer, size_t len)</td></tr>
 <tr class="separator:af464b4ec891d44c504d35d08d64ded5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7bff1ba76aff0e2d051c075e5e07403d"><td class="memItemLeft" align="right" valign="top"><a id="a7bff1ba76aff0e2d051c075e5e07403d"></a>
-typedef <a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html">MP3DecoderMini</a>&#160;</td><td class="memItemRight" valign="bottom"><b>MP3Decoder</b></td></tr>
-<tr class="separator:a7bff1ba76aff0e2d051c075e5e07403d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06e115ca85ae77bab10d6ede221ebc30"><td class="memItemLeft" align="right" valign="top"><a id="a06e115ca85ae77bab10d6ede221ebc30"></a>
 typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a06e115ca85ae77bab10d6ede221ebc30">MP3InfoCallback</a>) (<a class="el" href="structaudio__tools_1_1_m_p3_mini_audio_info.html">MP3MiniAudioInfo</a> &amp;info)</td></tr>
 <tr class="memdesc:a06e115ca85ae77bab10d6ede221ebc30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Audio Info provided by the decoder. <br /></td></tr>
@@ -422,6 +425,9 @@ static float&#160;</td><td class="memItemRight" valign="bottom"><b>convertFrom24
 <tr class="memitem:a6c232795fc97b0e63de9ecf4fd157c9b"><td class="memItemLeft" align="right" valign="top"><a id="a6c232795fc97b0e63de9ecf4fd157c9b"></a>
 static int16_t&#160;</td><td class="memItemRight" valign="bottom"><b>convertFrom32To16</b> (int32_t value)</td></tr>
 <tr class="separator:a6c232795fc97b0e63de9ecf4fd157c9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac749b0dda3e6680c743392ad78011c5f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ac749b0dda3e6680c743392ad78011c5f">dataCallback_MP3DecoderHelix</a> (MP3FrameInfo &amp;info, int16_t *pwm_buffer, size_t len)</td></tr>
+<tr class="memdesc:ac749b0dda3e6680c743392ad78011c5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data Callback for libhelix.  <a href="namespaceaudio__tools.html#ac749b0dda3e6680c743392ad78011c5f">More...</a><br /></td></tr>
+<tr class="separator:ac749b0dda3e6680c743392ad78011c5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d3366afe95c009b2a445ebcc5eeccac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a6d3366afe95c009b2a445ebcc5eeccac">defaultPWMAudioOutputCallback</a> ()</td></tr>
 <tr class="memdesc:a6d3366afe95c009b2a445ebcc5eeccac"><td class="mdescLeft">&#160;</td><td class="mdescRight">separate method that can be defined as friend so that we can access protected information  <a href="namespaceaudio__tools.html#a6d3366afe95c009b2a445ebcc5eeccac">More...</a><br /></td></tr>
 <tr class="separator:a6d3366afe95c009b2a445ebcc5eeccac"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -508,6 +514,9 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>methods</b> [
 <tr class="memitem:a38bf0cac6f2d298b34f8545d3a2a90b6"><td class="memItemLeft" align="right" valign="top"><a id="a38bf0cac6f2d298b34f8545d3a2a90b6"></a>
 static portMUX_TYPE&#160;</td><td class="memItemRight" valign="bottom"><b>mutex_logger</b> = portMUX_INITIALIZER_UNLOCKED</td></tr>
 <tr class="separator:a38bf0cac6f2d298b34f8545d3a2a90b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24f7a67b5eeb0075b05af5ef1c016429"><td class="memItemLeft" align="right" valign="top"><a id="a24f7a67b5eeb0075b05af5ef1c016429"></a>
+<a class="el" href="classaudio__tools_1_1_m_p3_decoder_helix.html">MP3DecoderHelix</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>self_MP3DecoderHelix</b></td></tr>
+<tr class="separator:a24f7a67b5eeb0075b05af5ef1c016429"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a39517ccd473450adc836daea214cf4a7"><td class="memItemLeft" align="right" valign="top"><a id="a39517ccd473450adc836daea214cf4a7"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><b>SUCCESS</b> = &quot;Success&quot;</td></tr>
 <tr class="separator:a39517ccd473450adc836daea214cf4a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -529,6 +538,50 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>wav_mime</b> 
 <p>typedefs for Default</p>
 <hr  />
  </div><h2 class="groupheader">Function Documentation</h2>
+<a id="ac749b0dda3e6680c743392ad78011c5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac749b0dda3e6680c743392ad78011c5f">&#9670;&nbsp;</a></span>dataCallback_MP3DecoderHelix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void audio_tools::dataCallback_MP3DecoderHelix </td>
+          <td>(</td>
+          <td class="paramtype">MP3FrameInfo &amp;&#160;</td>
+          <td class="paramname"><em>info</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int16_t *&#160;</td>
+          <td class="paramname"><em>pwm_buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Data Callback for libhelix. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">info</td><td></td></tr>
+    <tr><td class="paramname">pwm_buffer</td><td></td></tr>
+    <tr><td class="paramname">len</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a6d3366afe95c009b2a445ebcc5eeccac"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6d3366afe95c009b2a445ebcc5eeccac">&#9670;&nbsp;</a></span>defaultPWMAudioOutputCallback()</h2>
 

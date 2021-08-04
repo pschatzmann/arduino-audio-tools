@@ -116,7 +116,7 @@ $(function() {
 <div class="line"> </div>
 <div class="line">MemoryStream music(StarWars30_raw, StarWars30_raw_len);</div>
 <div class="line">I2SStream i2s;  // Output to I2S</div>
-<div class="line">StreamCopyT&lt;int16_t&gt; copier(i2s, music); // copies sound into i2s</div>
+<div class="line">StreamCopy copier(i2s, music); // copies sound into i2s</div>
 <div class="line"> </div>
 <div class="line">void setup(){</div>
 <div class="line">    Serial.begin(115200);</div>
@@ -129,7 +129,7 @@ $(function() {
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line">void loop(){</div>
-<div class="line">    if (!copier.copy2()){</div>
+<div class="line">    if (!copier.copy()){</div>
 <div class="line">      i2s.end();</div>
 <div class="line">      stop();</div>
 <div class="line">    }</div>

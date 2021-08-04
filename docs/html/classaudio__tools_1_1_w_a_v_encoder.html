@@ -85,7 +85,8 @@ Inheritance diagram for audio_tools::WAVEncoder:</div>
  <div class="center">
   <img src="classaudio__tools_1_1_w_a_v_encoder.png" usemap="#audio_5Ftools::WAVEncoder_map" alt=""/>
   <map id="audio_5Ftools::WAVEncoder_map" name="audio_5Ftools::WAVEncoder_map">
-<area href="classaudio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="audio_tools::AudioWriter" shape="rect" coords="0,0,159,24"/>
+<area href="classaudio__tools_1_1_audio_encoder.html" title="Encoding of PCM data." alt="audio_tools::AudioEncoder" shape="rect" coords="0,56,163,80"/>
+<area href="classaudio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="audio_tools::AudioWriter" shape="rect" coords="0,0,163,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -94,29 +95,53 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9ae30b1e9d56ade39b512a693d8dfb95"><td class="memItemLeft" align="right" valign="top"><a id="a9ae30b1e9d56ade39b512a693d8dfb95"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>WAVEncoder</b> (<a class="el" href="class_stream.html">Stream</a> &amp;out)</td></tr>
 <tr class="separator:a9ae30b1e9d56ade39b512a693d8dfb95"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa48d011ca1b2652ca1fbad1af0d23ba4"><td class="memItemLeft" align="right" valign="top"><a id="aa48d011ca1b2652ca1fbad1af0d23ba4"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (<a class="el" href="class_stream.html">Stream</a> &amp;out, <a class="el" href="structaudio__tools_1_1_w_a_v_audio_info.html">WAVAudioInfo</a> &amp;ai)</td></tr>
-<tr class="separator:aa48d011ca1b2652ca1fbad1af0d23ba4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a927aff1e0552bf0e657c39f9ff3fec90"><td class="memItemLeft" align="right" valign="top"><a id="a927aff1e0552bf0e657c39f9ff3fec90"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (<a class="el" href="structaudio__tools_1_1_w_a_v_audio_info.html">WAVAudioInfo</a> &amp;ai)</td></tr>
-<tr class="separator:a927aff1e0552bf0e657c39f9ff3fec90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49f2d9a7ef631fc39465365d6a37497f"><td class="memItemLeft" align="right" valign="top"><a id="a49f2d9a7ef631fc39465365d6a37497f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>WAVEncoder</b> (<a class="el" href="class_stream.html">Stream</a> &amp;out, <a class="el" href="structaudio__tools_1_1_w_a_v_audio_info.html">WAVAudioInfo</a> ai)</td></tr>
+<tr class="separator:a49f2d9a7ef631fc39465365d6a37497f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18da3a82c9a9f25ffe63941a4da91cb8"><td class="memItemLeft" align="right" valign="top"><a id="a18da3a82c9a9f25ffe63941a4da91cb8"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#a18da3a82c9a9f25ffe63941a4da91cb8">begin</a> ()</td></tr>
+<tr class="memdesc:a18da3a82c9a9f25ffe63941a4da91cb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">starts the processing using the actual <a class="el" href="structaudio__tools_1_1_w_a_v_audio_info.html" title="Sound information which is available in the WAV header.">WAVAudioInfo</a> <br /></td></tr>
+<tr class="separator:a18da3a82c9a9f25ffe63941a4da91cb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a81c39534ac2417ae2c8d5e39e34453"><td class="memItemLeft" align="right" valign="top"><a id="a4a81c39534ac2417ae2c8d5e39e34453"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#a4a81c39534ac2417ae2c8d5e39e34453">begin</a> (<a class="el" href="class_stream.html">Stream</a> &amp;out, <a class="el" href="structaudio__tools_1_1_w_a_v_audio_info.html">WAVAudioInfo</a> &amp;ai)</td></tr>
+<tr class="memdesc:a4a81c39534ac2417ae2c8d5e39e34453"><td class="mdescLeft">&#160;</td><td class="mdescRight">starts the processing <br /></td></tr>
+<tr class="separator:a4a81c39534ac2417ae2c8d5e39e34453"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8c935c8431a6b6adc0fab3aaae50368"><td class="memItemLeft" align="right" valign="top"><a id="aa8c935c8431a6b6adc0fab3aaae50368"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#aa8c935c8431a6b6adc0fab3aaae50368">begin</a> (<a class="el" href="structaudio__tools_1_1_w_a_v_audio_info.html">WAVAudioInfo</a> &amp;ai)</td></tr>
+<tr class="memdesc:aa8c935c8431a6b6adc0fab3aaae50368"><td class="mdescLeft">&#160;</td><td class="mdescRight">starts the processing <br /></td></tr>
+<tr class="separator:aa8c935c8431a6b6adc0fab3aaae50368"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afadd9c5f629c4271ef0bc600e7f9b7c3"><td class="memItemLeft" align="right" valign="top"><a id="afadd9c5f629c4271ef0bc600e7f9b7c3"></a>
 <a class="el" href="structaudio__tools_1_1_w_a_v_audio_info.html">WAVAudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>defaultConfig</b> ()</td></tr>
 <tr class="separator:afadd9c5f629c4271ef0bc600e7f9b7c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a73a1f5df8904648ffe27ef47a64ab2dc"><td class="memItemLeft" align="right" valign="top"><a id="a73a1f5df8904648ffe27ef47a64ab2dc"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#a73a1f5df8904648ffe27ef47a64ab2dc">end</a> ()</td></tr>
+<tr class="memdesc:a73a1f5df8904648ffe27ef47a64ab2dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">stops the processing <br /></td></tr>
 <tr class="separator:a73a1f5df8904648ffe27ef47a64ab2dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74960892a513edf72c37c724e3d828fe"><td class="memItemLeft" align="right" valign="top"><a id="a74960892a513edf72c37c724e3d828fe"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isOpen</b> ()</td></tr>
 <tr class="separator:a74960892a513edf72c37c724e3d828fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ae78c1422b7df903e9031c7e70515d0"><td class="memItemLeft" align="right" valign="top"><a id="a9ae78c1422b7df903e9031c7e70515d0"></a>
-const char *&#160;</td><td class="memItemRight" valign="bottom"><b>mime</b> ()</td></tr>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#a9ae78c1422b7df903e9031c7e70515d0">mime</a> ()</td></tr>
+<tr class="memdesc:a9ae78c1422b7df903e9031c7e70515d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides "audio/wav". <br /></td></tr>
 <tr class="separator:a9ae78c1422b7df903e9031c7e70515d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26e7818fb17d533426c5b8892d5cadce"><td class="memItemLeft" align="right" valign="top"><a id="a26e7818fb17d533426c5b8892d5cadce"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>operator boolean</b> ()</td></tr>
 <tr class="separator:a26e7818fb17d533426c5b8892d5cadce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac61bb13de1fcf11bb393eabacc996f8d"><td class="memItemLeft" align="right" valign="top"><a id="ac61bb13de1fcf11bb393eabacc996f8d"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#ac61bb13de1fcf11bb393eabacc996f8d">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> from)</td></tr>
+<tr class="memdesc:ac61bb13de1fcf11bb393eabacc996f8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update actual <a class="el" href="structaudio__tools_1_1_w_a_v_audio_info.html" title="Sound information which is available in the WAV header.">WAVAudioInfo</a>. <br /></td></tr>
+<tr class="separator:ac61bb13de1fcf11bb393eabacc996f8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bd21534770f89bb8b981de89ef184b5"><td class="memItemLeft" align="right" valign="top"><a id="a8bd21534770f89bb8b981de89ef184b5"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#a8bd21534770f89bb8b981de89ef184b5">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_w_a_v_audio_info.html">WAVAudioInfo</a> ai)</td></tr>
+<tr class="memdesc:a8bd21534770f89bb8b981de89ef184b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the <a class="el" href="structaudio__tools_1_1_w_a_v_audio_info.html" title="Sound information which is available in the WAV header.">WAVAudioInfo</a>. <br /></td></tr>
+<tr class="separator:a8bd21534770f89bb8b981de89ef184b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3158247b5f72cfa65cf2148f59e230c0"><td class="memItemLeft" align="right" valign="top"><a id="a3158247b5f72cfa65cf2148f59e230c0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#a3158247b5f72cfa65cf2148f59e230c0">setStream</a> (<a class="el" href="class_stream.html">Stream</a> &amp;out)</td></tr>
+<tr class="memdesc:a3158247b5f72cfa65cf2148f59e230c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the otuput stream. <br /></td></tr>
+<tr class="separator:a3158247b5f72cfa65cf2148f59e230c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ddbbd8e1d802faec19d658e2dda80ea"><td class="memItemLeft" align="right" valign="top"><a id="a1ddbbd8e1d802faec19d658e2dda80ea"></a>
-virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (const void *in_ptr, size_t in_size)</td></tr>
+virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#a1ddbbd8e1d802faec19d658e2dda80ea">write</a> (const void *in_ptr, size_t in_size)</td></tr>
+<tr class="memdesc:a1ddbbd8e1d802faec19d658e2dda80ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes PCM data to be encoded as WAV. <br /></td></tr>
 <tr class="separator:a1ddbbd8e1d802faec19d658e2dda80ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>

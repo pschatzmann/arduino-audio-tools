@@ -85,7 +85,8 @@ Inheritance diagram for audio_tools::AACEncoder:</div>
  <div class="center">
   <img src="classaudio__tools_1_1_a_a_c_encoder.png" usemap="#audio_5Ftools::AACEncoder_map" alt=""/>
   <map id="audio_5Ftools::AACEncoder_map" name="audio_5Ftools::AACEncoder_map">
-<area href="classaudio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="audio_tools::AudioWriter" shape="rect" coords="0,0,157,24"/>
+<area href="classaudio__tools_1_1_audio_encoder.html" title="Encoding of PCM data." alt="audio_tools::AudioEncoder" shape="rect" coords="0,56,163,80"/>
+<area href="classaudio__tools_1_1_audio_writer.html" title="E.g. used by Encoders and Decoders." alt="audio_tools::AudioWriter" shape="rect" coords="0,0,163,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -96,22 +97,29 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a6969f30daccc693ea2fc456b40556bae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a569d64f3e0d1d8505851a96994b90eac"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder.html#a569d64f3e0d1d8505851a96994b90eac">~AACEncoder</a> ()</td></tr>
 <tr class="separator:a569d64f3e0d1d8505851a96994b90eac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47c5911b3fe40d3211e5086f10aef6c1"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder.html#a47c5911b3fe40d3211e5086f10aef6c1">begin</a> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> info)</td></tr>
-<tr class="memdesc:a47c5911b3fe40d3211e5086f10aef6c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens the encoder <br  />
-  <a href="classaudio__tools_1_1_a_a_c_encoder.html#a47c5911b3fe40d3211e5086f10aef6c1">More...</a><br /></td></tr>
-<tr class="separator:a47c5911b3fe40d3211e5086f10aef6c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe21cb2c4343322bc7b8f5452ea09239"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder.html#abe21cb2c4343322bc7b8f5452ea09239">begin</a> (int input_channels=2, int input_sample_rate=44100, int input_bits_per_sample=16)</td></tr>
-<tr class="memdesc:abe21cb2c4343322bc7b8f5452ea09239"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens the encoder <br  />
-  <a href="classaudio__tools_1_1_a_a_c_encoder.html#abe21cb2c4343322bc7b8f5452ea09239">More...</a><br /></td></tr>
-<tr class="separator:abe21cb2c4343322bc7b8f5452ea09239"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a317851498b72554129019cef597849a4"><td class="memItemLeft" align="right" valign="top"><a id="a317851498b72554129019cef597849a4"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>close</b> ()</td></tr>
-<tr class="separator:a317851498b72554129019cef597849a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a3d24a1553f71f49726b4c024a7545b"><td class="memItemLeft" align="right" valign="top"><a id="a4a3d24a1553f71f49726b4c024a7545b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> ()</td></tr>
+<tr class="separator:a4a3d24a1553f71f49726b4c024a7545b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcb0b6bd2b51bcf8bd63b70117c7be73"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder.html#abcb0b6bd2b51bcf8bd63b70117c7be73">begin</a> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> info)</td></tr>
+<tr class="memdesc:abcb0b6bd2b51bcf8bd63b70117c7be73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens the encoder <br  />
+  <a href="classaudio__tools_1_1_a_a_c_encoder.html#abcb0b6bd2b51bcf8bd63b70117c7be73">More...</a><br /></td></tr>
+<tr class="separator:abcb0b6bd2b51bcf8bd63b70117c7be73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9cb8acf2c3c4c94db7f2f136b05a232"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder.html#ac9cb8acf2c3c4c94db7f2f136b05a232">begin</a> (int input_channels=2, int input_sample_rate=44100, int input_bits_per_sample=16)</td></tr>
+<tr class="memdesc:ac9cb8acf2c3c4c94db7f2f136b05a232"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens the encoder <br  />
+  <a href="classaudio__tools_1_1_a_a_c_encoder.html#ac9cb8acf2c3c4c94db7f2f136b05a232">More...</a><br /></td></tr>
+<tr class="separator:ac9cb8acf2c3c4c94db7f2f136b05a232"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44c76ce64d108c36a717090b4e66d0c7"><td class="memItemLeft" align="right" valign="top"><a id="a44c76ce64d108c36a717090b4e66d0c7"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
+<tr class="separator:a44c76ce64d108c36a717090b4e66d0c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a30f3c2027c1ad9af08828e73e0b818f2"><td class="memItemLeft" align="right" valign="top"><a id="a30f3c2027c1ad9af08828e73e0b818f2"></a>
 UINT&#160;</td><td class="memItemRight" valign="bottom"><b>getParameter</b> (const AACENC_PARAM param)</td></tr>
 <tr class="separator:a30f3c2027c1ad9af08828e73e0b818f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f4b16f2f72b16aa016a567171587fb1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder.html#a3f4b16f2f72b16aa016a567171587fb1">setAfterburner</a> (bool afterburner)</td></tr>
 <tr class="separator:a3f4b16f2f72b16aa016a567171587fb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafcf6c73135e842d3a12135e3db06db0"><td class="memItemLeft" align="right" valign="top"><a id="aafcf6c73135e842d3a12135e3db06db0"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder.html#aafcf6c73135e842d3a12135e3db06db0">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> from)</td></tr>
+<tr class="memdesc:aafcf6c73135e842d3a12135e3db06db0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the Audio Info. <br /></td></tr>
+<tr class="separator:aafcf6c73135e842d3a12135e3db06db0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbde047fe0539f049679301ba49373d9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder.html#adbde047fe0539f049679301ba49373d9">setAudioObjectType</a> (int aot)</td></tr>
 <tr class="separator:adbde047fe0539f049679301ba49373d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace06e0b89fe6b9a1c4ad363ded54f49d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder.html#ace06e0b89fe6b9a1c4ad363ded54f49d">setBitrate</a> (int bitrate)</td></tr>
@@ -130,6 +138,10 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setVariableBi
 <tr class="memitem:a7af7edd4f3c587fb9c6975e9d172c0d6"><td class="memItemLeft" align="right" valign="top"><a id="a7af7edd4f3c587fb9c6975e9d172c0d6"></a>
 int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (void *in_ptr, int in_size)</td></tr>
 <tr class="separator:a7af7edd4f3c587fb9c6975e9d172c0d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classaudio__tools_1_1_audio_encoder"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classaudio__tools_1_1_audio_encoder')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classaudio__tools_1_1_audio_encoder.html">audio_tools::AudioEncoder</a></td></tr>
+<tr class="memitem:a6f511b604826b9ddbb24768c6a14aa66 inherit pub_methods_classaudio__tools_1_1_audio_encoder"><td class="memItemLeft" align="right" valign="top"><a id="a6f511b604826b9ddbb24768c6a14aa66"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setStream</b> (<a class="el" href="class_stream.html">Stream</a> &amp;out_stream)=0</td></tr>
+<tr class="separator:a6f511b604826b9ddbb24768c6a14aa66 inherit pub_methods_classaudio__tools_1_1_audio_encoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classaudio__tools_1_1_audio_writer"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classaudio__tools_1_1_audio_writer')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classaudio__tools_1_1_audio_writer.html">audio_tools::AudioWriter</a></td></tr>
 <tr class="memitem:a7696d242b1dd400de37af651790dbda5 inherit pub_methods_classaudio__tools_1_1_audio_writer"><td class="memItemLeft" align="right" valign="top"><a id="a7696d242b1dd400de37af651790dbda5"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><b>operator boolean</b> ()=0</td></tr>
@@ -146,6 +158,9 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>updateParams</b> ()</t
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:ad047ad2108362123202eef18a597e0ce"><td class="memItemLeft" align="right" valign="top"><a id="ad047ad2108362123202eef18a597e0ce"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>active</b></td></tr>
+<tr class="separator:ad047ad2108362123202eef18a597e0ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc3038136b1a4917aa16e51395ed8d5c"><td class="memItemLeft" align="right" valign="top"><a id="abc3038136b1a4917aa16e51395ed8d5c"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>afterburner</b> = true</td></tr>
 <tr class="separator:abc3038136b1a4917aa16e51395ed8d5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -159,7 +174,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>bitrate</b> = 64000</t
 int&#160;</td><td class="memItemRight" valign="bottom"><b>bits_per_sample</b></td></tr>
 <tr class="separator:a911b94dcaf39d9a46a0b6897cc3cf2ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a327d94996211b2caf9f6c6dfd25e53c3"><td class="memItemLeft" align="right" valign="top"><a id="a327d94996211b2caf9f6c6dfd25e53c3"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>ch</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>ch</b> = 0</td></tr>
 <tr class="separator:a327d94996211b2caf9f6c6dfd25e53c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b6175c6b6a7b4ef5b4cb87b11859445"><td class="memItemLeft" align="right" valign="top"><a id="a6b6175c6b6a7b4ef5b4cb87b11859445"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b></td></tr>
@@ -277,8 +292,8 @@ void *&#160;</td><td class="memItemRight" valign="bottom"><b>wav</b></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a47c5911b3fe40d3211e5086f10aef6c1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a47c5911b3fe40d3211e5086f10aef6c1">&#9670;&nbsp;</a></span>begin() <span class="overload">[1/2]</span></h2>
+<a id="abcb0b6bd2b51bcf8bd63b70117c7be73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abcb0b6bd2b51bcf8bd63b70117c7be73">&#9670;&nbsp;</a></span>begin() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -287,7 +302,7 @@ void *&#160;</td><td class="memItemRight" valign="bottom"><b>wav</b></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual int audio_tools::AACEncoder::begin </td>
+          <td class="memname">virtual void audio_tools::AACEncoder::begin </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a>&#160;</td>
           <td class="paramname"><em>info</em></td><td>)</td>
@@ -313,8 +328,8 @@ void *&#160;</td><td class="memItemRight" valign="bottom"><b>wav</b></td></tr>
 
 </div>
 </div>
-<a id="abe21cb2c4343322bc7b8f5452ea09239"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abe21cb2c4343322bc7b8f5452ea09239">&#9670;&nbsp;</a></span>begin() <span class="overload">[2/2]</span></h2>
+<a id="ac9cb8acf2c3c4c94db7f2f136b05a232"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9cb8acf2c3c4c94db7f2f136b05a232">&#9670;&nbsp;</a></span>begin() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -323,7 +338,7 @@ void *&#160;</td><td class="memItemRight" valign="bottom"><b>wav</b></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual int audio_tools::AACEncoder::begin </td>
+          <td class="memname">virtual void audio_tools::AACEncoder::begin </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>input_channels</em> = <code>2</code>, </td>
