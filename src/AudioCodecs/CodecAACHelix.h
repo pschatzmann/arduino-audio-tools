@@ -5,68 +5,68 @@
 
 #define HELIX_LOGGING_ACTIVE false
 //#define HELIX_LOG_LEVEL Info
-#include "MP3DecoderHelix.h"
+#include "AACDecoderHelix.h"
 
 namespace audio_tools {
 
 /**
- * @brief Audio Information for MP3
+ * @brief Audio Information for AAC
  * 
  */
-struct MP3HelixAudioInfo : public AudioBaseInfo {
-    MP3HelixAudioInfo() = default;
-    MP3HelixAudioInfo(const MP3HelixAudioInfo& alt) = default;
-    MP3HelixAudioInfo(const MP3FrameInfo& alt) {
-        sample_rate = alt.samprate;
+struct AACHelixAudioInfo : public AudioBaseInfo {
+    AACHelixAudioInfo() = default;
+    AACHelixAudioInfo(const AACHelixAudioInfo& alt) = default;
+    AACHelixAudioInfo(const _AACFrameInfo& alt) {
+        sample_rate = alt.sampRateOut;
         channels = alt.nChans;
         bits_per_sample = alt.bitsPerSample;   
     }         
 }; 
 
 // forware declaration
-class MP3DecoderHelix;
-void dataCallback_MP3DecoderHelix(MP3FrameInfo &info, int16_t *pwm_buffer, size_t len);
-MP3DecoderHelix *self_MP3DecoderHelix;
+class AACDecoderHelix;
+void dataCallback_AACDecoderHelix(_AACFrameInfo &info, int16_t *pwm_buffer, size_t len);
+AACDecoderHelix *self_AACDecoderHelix;
 
 
 /**
- * @brief MP3 Decoder using libhelix: https://github.com/pschatzmann/arduino-libhelix
+ * @brief AAC Decoder using libhelix: https://github.com/pschatzmann/arduino-libhelix
  * 
  */
-class MP3DecoderHelix : public AudioDecoder  {
+class AACDecoderHelix : public AudioDecoder  {
     public:
 
-        MP3DecoderHelix() {
+        AACDecoderHelix() {
         	LOGD(__FUNCTION__);
         }
         /**
-         * @brief Construct a new MP3DecoderMini object
+         * @brief Construct a new AACDecoderMini object
          * 
          * @param out_stream 
          */
-        MP3DecoderHelix(Print &out_stream){
+        AACDecoderHelix(Print &out_stream){
         	LOGD(__FUNCTION__);
             this->out = &out_stream;
         }  
 
         /**
-         * @brief Construct a new MP3DecoderMini object. The decoded output will go to the 
+         * @brief Construct a new AACDecoderMini object. The decoded output will go to the 
          * print object.
          * 
          * @param out_stream 
          * @param bi 
          */
-        MP3DecoderHelix(Print &out_stream, AudioBaseInfoDependent &bi){
+        AACDecoderHelix(Print &out_stream, AudioBaseInfoDependent &bi){
         	LOGD(__FUNCTION__);
             this->out = &out_stream;
             this->audioBaseInfoSupport = &bi;
         }  
 
         /**
-         * @brief Destroy the MP3DecoderMini object
+         * @brief Destroy the AACDecoderMini object
          * 
          */
-        ~MP3DecoderHelix(){
+        ~AACDecoderHelix(){
             if (active){
                 end();
             }
@@ -85,9 +85,9 @@ class MP3DecoderHelix : public AudioDecoder  {
         /// Starts the processing
         void begin(){
         	LOGD(__FUNCTION__);
-            mp3.setDataCallback(dataCallback_MP3DecoderHelix);
-            mp3.begin();
-            self_MP3DecoderHelix = this;
+            AAC.setDataCallback(dataCallback_AACDecoderHelix);
+            AAC.begin();
+            self_AACDecoderHelix = this;
             active = true;
         }
 
@@ -95,18 +95,18 @@ class MP3DecoderHelix : public AudioDecoder  {
         virtual void end(){
         	LOGD(__FUNCTION__);
             flush();
-            mp3.end();
-            self_MP3DecoderHelix = nullptr;
+            AAC.end();
+            self_AACDecoderHelix = nullptr;
             active = false;
         }
 
         virtual AudioBaseInfo audioInfo(){
-            return mp3HelixAudioInfo;
+            return AACHelixAudioInfo;
         }
 
-        /// Write mp3 data to decoder
+        /// Write AAC data to decoder
         size_t write(const void* fileData, size_t len) {
-            return mp3.write((uint8_t*)fileData, len);
+            return AAC.write((uint8_t*)fileData, len);
         }
 
         /// checks if the class is active 
@@ -119,19 +119,19 @@ class MP3DecoderHelix : public AudioDecoder  {
         }
 
 
-    friend void dataCallback_MP3DecoderHelix(MP3FrameInfo &info, int16_t *pwm_buffer, size_t len);
+    friend void dataCallback_AACDecoderHelix(_AACFrameInfo &info, int16_t *pwm_buffer, size_t len);
 
     protected:
         Print *out = nullptr;
         AudioBaseInfoDependent *audioBaseInfoSupport = nullptr;
-        MP3HelixAudioInfo mp3HelixAudioInfo;
-        libhelix::MP3DecoderHelix mp3;
+        AACHelixAudioInfo AACHelixAudioInfo;
+        libhelix::AACDecoderHelix AAC;
         bool active;
 
-        void notifyInfoChange(MP3HelixAudioInfo info) {
-            if (info != mp3HelixAudioInfo ){
+        void notifyInfoChange(struct AACHelixAudioInfo info) {
+            if (info != AACHelixAudioInfo ){
                 audioBaseInfoSupport->setAudioInfo(info);
-                mp3HelixAudioInfo = info;
+                AACHelixAudioInfo = info;
             }
         }
 
@@ -147,12 +147,12 @@ class MP3DecoderHelix : public AudioDecoder  {
  * @param pwm_buffer 
  * @param len 
  */
-void dataCallback_MP3DecoderHelix(MP3FrameInfo &info, int16_t *pwm_buffer, size_t len) {
-    if (self_MP3DecoderHelix!=nullptr){
-        MP3HelixAudioInfo audio_info(info);
+void dataCallback_AACDecoderHelix(_AACFrameInfo &info, int16_t *pwm_buffer, size_t len) {
+    if (self_AACDecoderHelix!=nullptr){
+        AACHelixAudioInfo audio_info(info);
         if (len>0){
-            self_MP3DecoderHelix->notifyInfoChange(info);
-            self_MP3DecoderHelix->writePCM((uint8_t*)pwm_buffer, len*2);
+            self_AACDecoderHelix->notifyInfoChange(info);
+            self_AACDecoderHelix->writePCM((uint8_t*)pwm_buffer, len*2);
         }
     }
 }

@@ -3,7 +3,10 @@ cmake_minimum_required(VERSION 3.20)
 # set the project name
 project(tests)
 set (CMAKE_CXX_STANDARD 11)
-set (DCMAKE_CXX_FLAGS "-Werror")
+set (DCMAKE_CXX_FLAGS "-Werror" )
+set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
+set (CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
+
 
 include(FetchContent)
 
@@ -26,7 +29,5 @@ endif()
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/mp3-mini ${CMAKE_CURRENT_BINARY_DIR}/mp3)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/mp3-helix ${CMAKE_CURRENT_BINARY_DIR}/mp3-helix)
-
-# cmake missing in https://github.com/pschatzmann/arduino-fdk-aac.git
-#add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/aac ${CMAKE_CURRENT_BINARY_DIR}/aac)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/aac-helix ${CMAKE_CURRENT_BINARY_DIR}/aac-helix)
 
