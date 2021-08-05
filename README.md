@@ -27,7 +27,6 @@ As “Audio Sources” we will have e.g.:
 - Generated Sound – [GeneratedSoundStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_generated_sound_stream.html)
 - Mobile Phone A2DP Bluetooth – [A2DPStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_a2_d_p_stream.html)
 - Binary Data in Flash Memory – [MemoryStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_memory_stream.html)
-- Decoding [EncodedAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_encoded_audio_stream.html)
 - Desktop Integration - [PortAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_port_audio_stream.html)
 - Any other Arduino Classes implementing Streams: SD, Ethernet etc
 
@@ -38,7 +37,7 @@ As “Audio Sinks” we will have e.g:
 - with a Piezo Electric Element – [PWMAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_p_w_m_audio_stream_base.html)
 - Bluetooth Speakers – [A2DPStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_a2_d_p_stream.html)
 - Serial to display the data as CSV – [CsvStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_csv_stream.html)
-- Encoding [EncodedAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_encoded_audio_stream.html)
+- Encoding and Decoding of Audio [EncodedAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_encoded_audio_stream.html)
 - Desktop Integration - [PortAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_port_audio_stream.html)
 - Any other Arduino Classes implementing Streams: SD, Ethernet etc
 
@@ -102,13 +101,13 @@ AudioLogger::instance().begin(Serial, AudioLogger::Debug);
 Dependent on the example you might need to install some of the following libraries:
 
 - [ESP32-A2DP Library](https://github.com/pschatzmann/ESP32-A2DP) to support A2DP Bluetooth Audio
-- [ESP8266Audio](https://github.com/earlephilhower/ESP8266Audio) to play different audio Formats
+- [arduino-libhelix](https://github.com/pschatzmann/arduino-libhelix) Decoders for MP3 and AAC
 - [SD Library](https://www.arduino.cc/en/reference/SD) to read and write files.
-- [arduino-fdk-aac](https://github.com/pschatzmann/arduino-fdk-aac) to encode or decode AAC 
 - [Mozzi](https://github.com/pschatzmann/Mozzi) A sound synthesis library for Arduino
 - [SAM](https://github.com/pschatzmann/arduino-SAM) A Text to Speach Engine
 - [TTS](https://github.com/pschatzmann/TTS) A Text to Speach Engine
 - [flite](https://github.com/pschatzmann/arduino-flite) A Text to Speach Engine
+- [ESP8266Audio](https://github.com/earlephilhower/ESP8266Audio) to play different audio Formats
 
 
 ### Documentation
