@@ -383,11 +383,13 @@ class WAVEncoder : public AudioEncoder {
     public: 
         // Empty Constructor - the output stream must be provided with begin()
         WAVEncoder(){
+            audioInfo = defaultConfig();
         }        
 
         // Constructor providing the output stream
         WAVEncoder(Stream &out){
             stream_ptr = &out;
+            audioInfo = defaultConfig();
         }
 
         // Constructor providing the output stream and the WAVAudioInfo
