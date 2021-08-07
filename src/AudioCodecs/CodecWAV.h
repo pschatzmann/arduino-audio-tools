@@ -267,7 +267,7 @@ class WAVDecoder : public AudioDecoder {
         }
 
         /// Defines the output Stream
-		void setStream(Stream &out_stream){
+		void setOutputStream(Stream &out_stream){
             this->out = &out_stream;
 		}
 
@@ -372,8 +372,6 @@ class WAVDecoder : public AudioDecoder {
 
 };
 
-
-
 /**
  * @brief A simple WAV file encoder. 
  * @author Phil Schatzmann
@@ -399,7 +397,7 @@ class WAVEncoder : public AudioEncoder {
         }
 
         /// Defines the otuput stream
-        void setStream(Stream &out){
+        void setOutputStream(Stream &out){
             stream_ptr = &out;
         }
 

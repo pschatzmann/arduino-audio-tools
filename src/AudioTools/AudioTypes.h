@@ -187,7 +187,7 @@ class AudioWriter {
  */
 class AudioDecoder : public AudioWriter {
   public: 
-  		virtual void setStream(Stream &out_stream) = 0;
+  		virtual void setOutputStream(Stream &out_stream) = 0;
       virtual void begin() = 0;
       virtual void end() = 0;
       virtual AudioBaseInfo audioInfo() = 0;
@@ -201,10 +201,11 @@ class AudioDecoder : public AudioWriter {
 class AudioEncoder : public AudioWriter {
   public: 
       AudioEncoder() = default;
-  		virtual void setStream(Stream &out_stream) = 0;
+  		virtual void setOutputStream(Stream &out_stream) = 0;
       virtual void setAudioInfo(AudioBaseInfo info) = 0;
       virtual void begin() = 0;
       virtual void end() = 0;
+      virtual const char *mime() = 0;
 };
 
 
@@ -221,7 +222,7 @@ class CodecNOP : public  AudioDecoder, public AudioEncoder {
 
         virtual void begin() {}
         virtual void end() {}
-  	    virtual void setStream(Stream &out_stream) {}
+  	    virtual void setOutputStream(Stream &out_stream) {}
         virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi) {}
         virtual void setAudioInfo(AudioBaseInfo info) {}
 
@@ -239,6 +240,10 @@ class CodecNOP : public  AudioDecoder, public AudioEncoder {
 	      virtual size_t write(const void *in_ptr, size_t in_size) {
             return 0;           
         }
+        virtual const char *mime() {
+            return nullptr;
+        }
+
 };
 
 /// stops any further processing by spinning in an endless loop

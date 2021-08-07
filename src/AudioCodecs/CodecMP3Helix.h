@@ -9,35 +9,19 @@
 
 namespace audio_tools {
 
-/**
- * @brief Audio Information for MP3
- * 
- */
-struct MP3HelixAudioInfo : public AudioBaseInfo {
-    MP3HelixAudioInfo() = default;
-    MP3HelixAudioInfo(const MP3HelixAudioInfo& alt) = default;
-    MP3HelixAudioInfo(const MP3FrameInfo& alt) {
-        sample_rate = alt.samprate;
-        channels = alt.nChans;
-        bits_per_sample = alt.bitsPerSample;   
-    }         
-}; 
-
-// forware declaration
-class MP3DecoderHelix;
-void dataCallback_MP3DecoderHelix(MP3FrameInfo &info, int16_t *pwm_buffer, size_t len);
-MP3DecoderHelix *self_MP3DecoderHelix;
-
+// audio change notification target
+AudioBaseInfoDependent *audioChangeMP3Helix=nullptr;
 
 /**
  * @brief MP3 Decoder using libhelix: https://github.com/pschatzmann/arduino-libhelix
- * 
+ * This is basically just a simple wrapper to provide AudioBaseInfo and AudioBaseInfoDependent
  */
 class MP3DecoderHelix : public AudioDecoder  {
     public:
 
         MP3DecoderHelix() {
         	LOGD(__FUNCTION__);
+            mp3 = new libhelix::MP3DecoderHelix();
         }
         /**
          * @brief Construct a new MP3DecoderMini object
@@ -46,7 +30,7 @@ class MP3DecoderHelix : public AudioDecoder  {
          */
         MP3DecoderHelix(Print &out_stream){
         	LOGD(__FUNCTION__);
-            this->out = &out_stream;
+            mp3 = new libhelix::MP3DecoderHelix(out_stream);
         }  
 
         /**
@@ -58,8 +42,8 @@ class MP3DecoderHelix : public AudioDecoder  {
          */
         MP3DecoderHelix(Print &out_stream, AudioBaseInfoDependent &bi){
         	LOGD(__FUNCTION__);
-            this->out = &out_stream;
-            this->audioBaseInfoSupport = &bi;
+            mp3 = new libhelix::MP3DecoderHelix(out_stream);
+            setNotifyAudioChange(bi);
         }  
 
         /**
@@ -67,95 +51,81 @@ class MP3DecoderHelix : public AudioDecoder  {
          * 
          */
         ~MP3DecoderHelix(){
-            if (active){
-                end();
-            }
-        }
-
-        /// Defines the callback object to which the Audio information change is provided
-        virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi){
-            this->audioBaseInfoSupport = &bi;
+            delete mp3;
         }
 
         /// Defines the output Stream
-		virtual void setStream(Stream &out_stream){
-            this->out = &out_stream;
+		virtual void setOutputStream(Stream &outStream){
+            mp3->setStream(outStream);
 		}
 
         /// Starts the processing
         void begin(){
         	LOGD(__FUNCTION__);
-            mp3.setDataCallback(dataCallback_MP3DecoderHelix);
-            mp3.begin();
-            self_MP3DecoderHelix = this;
-            active = true;
+            mp3->begin();
         }
 
         /// Releases the reserved memory
         virtual void end(){
         	LOGD(__FUNCTION__);
-            flush();
-            mp3.end();
-            self_MP3DecoderHelix = nullptr;
-            active = false;
+            mp3->end();
+        }
+
+        virtual libhelix::MP3FrameInfo audioInfoEx(){
+            return mp3->audioInfo();
         }
 
         virtual AudioBaseInfo audioInfo(){
-            return mp3HelixAudioInfo;
+            libhelix::MP3FrameInfo i = audioInfoEx();
+            AudioBaseInfo baseInfo;
+            baseInfo.channels = i.channels;
+            baseInfo.sample_rate = i.sample_rate;
+            baseInfo.bits_per_sample = i.bits_per_sample;
+            return baseInfo;
         }
 
         /// Write mp3 data to decoder
-        size_t write(const void* fileData, size_t len) {
-            return mp3.write((uint8_t*)fileData, len);
+        size_t write(const void* mp3Data, size_t len) {
+            mp3->write(mp3Data, len);
         }
 
         /// checks if the class is active 
         virtual operator boolean(){
-            return active;
+            return (bool) *mp3;
+        }
+
+        libhelix::MP3DecoderHelix driver() {
+            return mp3;
         }
 
         void flush(){
-            out->flush();
+            mp3->flush();
         }
 
+        /// Defines the callback object to which the Audio information change is provided
+        virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi){
+        	LOGD(__FUNCTION__);
+            audioChangeMP3Helix = &bi;
+            setNotifyAudioChange(infoCallback);
+        }
 
-    friend void dataCallback_MP3DecoderHelix(MP3FrameInfo &info, int16_t *pwm_buffer, size_t len);
-
-    protected:
-        Print *out = nullptr;
-        AudioBaseInfoDependent *audioBaseInfoSupport = nullptr;
-        MP3HelixAudioInfo mp3HelixAudioInfo;
-        libhelix::MP3DecoderHelix mp3;
-        bool active;
-
-        void notifyInfoChange(MP3HelixAudioInfo info) {
-            if (info != mp3HelixAudioInfo ){
-                audioBaseInfoSupport->setAudioInfo(info);
-                mp3HelixAudioInfo = info;
+        /// notifies the subscriber about a change
+        static void infoCallback(libhelix::MP3FrameInfo &i){
+            if (audioChangeAACHelix!=nullptr){
+            	LOGD(__FUNCTION__);
+                AudioBaseInfo baseInfo;
+                baseInfo.channels = i.channels;
+                baseInfo.sample_rate = i.sample_rate;
+                baseInfo.bits_per_sample = i.bits_per_sample;
+                audioChangeAACHelix->setAudioInfo(baseInfo);   
             }
         }
 
-        void writePCM(uint8_t* data, size_t len){
-            out->write(data, len);
-        }
-};
 
-/**
- * @brief Data Callback for libhelix
- * 
- * @param info 
- * @param pwm_buffer 
- * @param len 
- */
-void dataCallback_MP3DecoderHelix(MP3FrameInfo &info, int16_t *pwm_buffer, size_t len) {
-    if (self_MP3DecoderHelix!=nullptr){
-        MP3HelixAudioInfo audio_info(info);
-        if (len>0){
-            self_MP3DecoderHelix->notifyInfoChange(info);
-            self_MP3DecoderHelix->writePCM((uint8_t*)pwm_buffer, len*2);
-        }
-    }
-}
+    protected:
+        libhelix::MP3DecoderHelix *mp3=nullptr;
+
+};
 
 
 } // namespace
