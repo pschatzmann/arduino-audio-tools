@@ -90,7 +90,6 @@ $(function() {
 <li>Generated Sound – <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_generated_sound_stream.html">GeneratedSoundStream</a></li>
 <li>Mobile Phone A2DP Bluetooth – <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_a2_d_p_stream.html">A2DPStream</a></li>
 <li>Binary Data in Flash Memory – <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_memory_stream.html">MemoryStream</a></li>
-<li>Decoding <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_encoded_audio_stream.html">EncodedAudioStream</a></li>
 <li>Desktop Integration - <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_port_audio_stream.html">PortAudioStream</a></li>
 <li>Any other Arduino Classes implementing Streams: SD, Ethernet etc</li>
 </ul>
@@ -101,7 +100,7 @@ $(function() {
 <li>with a Piezo Electric Element – <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_p_w_m_audio_stream_base.html">PWMAudioStream</a></li>
 <li>Bluetooth Speakers – <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_a2_d_p_stream.html">A2DPStream</a></li>
 <li>Serial to display the data as CSV – <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_csv_stream.html">CsvStream</a></li>
-<li>Encoding <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_encoded_audio_stream.html">EncodedAudioStream</a></li>
+<li>Encoding and Decoding of Audio <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_encoded_audio_stream.html">EncodedAudioStream</a></li>
 <li>Desktop Integration - <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_port_audio_stream.html">PortAudioStream</a></li>
 <li>Any other Arduino Classes implementing Streams: SD, Ethernet etc</li>
 </ul>
@@ -150,13 +149,15 @@ Optional Libraries</h2>
 <p>Dependent on the example you might need to install some of the following libraries:</p>
 <ul>
 <li><a href="https://github.com/pschatzmann/ESP32-A2DP">ESP32-A2DP Library</a> to support A2DP Bluetooth Audio</li>
-<li><a href="https://github.com/earlephilhower/ESP8266Audio">ESP8266Audio</a> to play different audio Formats</li>
+<li><a href="https://github.com/pschatzmann/arduino-libhelix">arduino-libhelix</a> A <b>MP3 and AAC Decoder</b> from Realnetworks</li>
+<li><a href="https://github.com/pschatzmann/arduino-fdk-aac">arduino-fdk-aac</a> A <b>AAC Encoder and Decoder</b> from the Frauenhofer Institute</li>
+<li><a href="https://github.com/pschatzmann/arduino-libmad">arduino-libmad</a> A open source <b>MP3 Decoder</b> from Underbit</li>
 <li><a href="https://www.arduino.cc/en/reference/SD">SD Library</a> to read and write files.</li>
-<li><a href="https://github.com/pschatzmann/arduino-fdk-aac">arduino-fdk-aac</a> to encode or decode AAC</li>
 <li><a href="https://github.com/pschatzmann/Mozzi">Mozzi</a> A sound synthesis library for Arduino</li>
 <li><a href="https://github.com/pschatzmann/arduino-SAM">SAM</a> A Text to Speach Engine</li>
 <li><a href="https://github.com/pschatzmann/TTS">TTS</a> A Text to Speach Engine</li>
 <li><a href="https://github.com/pschatzmann/arduino-flite">flite</a> A Text to Speach Engine</li>
+<li><a href="https://github.com/earlephilhower/ESP8266Audio">ESP8266Audio</a> to play different audio Formats</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md4"></a>
 Documentation</h2>
