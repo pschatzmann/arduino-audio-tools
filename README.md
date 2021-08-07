@@ -101,7 +101,9 @@ AudioLogger::instance().begin(Serial, AudioLogger::Debug);
 Dependent on the example you might need to install some of the following libraries:
 
 - [ESP32-A2DP Library](https://github.com/pschatzmann/ESP32-A2DP) to support A2DP Bluetooth Audio
-- [arduino-libhelix](https://github.com/pschatzmann/arduino-libhelix) Decoders for MP3 and AAC
+- [arduino-libhelix](https://github.com/pschatzmann/arduino-libhelix) A __MP3 and AAC Decoder__ from Realnetworks
+- [arduino-fdk-aac](https://github.com/pschatzmann/arduino-fdk-aac) A __AAC Encoder and Decoder__ from the Frauenhofer Institute
+- [arduino-libmad](https://github.com/pschatzmann/arduino-libmad) A open source __MP3 Decoder__ from Underbit
 - [SD Library](https://www.arduino.cc/en/reference/SD) to read and write files.
 - [Mozzi](https://github.com/pschatzmann/Mozzi) A sound synthesis library for Arduino
 - [SAM](https://github.com/pschatzmann/arduino-SAM) A Text to Speach Engine
