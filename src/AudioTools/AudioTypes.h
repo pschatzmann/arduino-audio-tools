@@ -200,7 +200,9 @@ class AudioDecoder : public AudioWriter {
  */
 class AudioEncoder : public AudioWriter {
   public: 
+      AudioEncoder() = default;
   		virtual void setStream(Stream &out_stream) = 0;
+      virtual void setAudioInfo(AudioBaseInfo info) = 0;
       virtual void begin() = 0;
       virtual void end() = 0;
 };
@@ -221,6 +223,7 @@ class CodecNOP : public  AudioDecoder, public AudioEncoder {
         virtual void end() {}
   	    virtual void setStream(Stream &out_stream) {}
         virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi) {}
+        virtual void setAudioInfo(AudioBaseInfo info) {}
 
         virtual AudioBaseInfo audioInfo() {
             AudioBaseInfo info;
