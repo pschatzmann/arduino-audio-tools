@@ -534,7 +534,7 @@ class EncodedAudioStream : public Stream {
         EncodedAudioStream(Stream &outputStream, AudioDecoder &decoder) {
 	 		LOGD(__FUNCTION__);
             decoder_ptr = &decoder;
-            decoder_ptr->setStream(outputStream);
+            decoder_ptr->setOutputStream(outputStream);
             writer_ptr = decoder_ptr;
             active = false;
         }
@@ -548,7 +548,7 @@ class EncodedAudioStream : public Stream {
         EncodedAudioStream(Stream &outputStream, AudioDecoder *decoder) {
 	 		LOGD(__FUNCTION__);
             decoder_ptr = decoder;
-            decoder_ptr->setStream(outputStream);
+            decoder_ptr->setOutputStream(outputStream);
             writer_ptr = decoder_ptr;
             active = false;
         }
@@ -562,7 +562,7 @@ class EncodedAudioStream : public Stream {
         EncodedAudioStream(Stream &outputStream, AudioEncoder &encoder) {
 	 		LOGD(__FUNCTION__);
             encoder_ptr = &encoder;
-            encoder_ptr->setStream(outputStream);
+            encoder_ptr->setOutputStream(outputStream);
             writer_ptr = encoder_ptr;
             active = false;
         }
@@ -576,7 +576,7 @@ class EncodedAudioStream : public Stream {
         EncodedAudioStream(Stream &outputStream, AudioEncoder *encoder) {
 	 		LOGD(__FUNCTION__);
             encoder_ptr = encoder;
-            encoder_ptr->setStream(outputStream);
+            encoder_ptr->setOutputStream(outputStream);
             writer_ptr = encoder_ptr;
             active = false;
         }
