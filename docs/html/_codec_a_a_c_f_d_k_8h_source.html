@@ -80,203 +80,203 @@ $(function() {
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// audio change notification target</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;AudioBaseInfoDependent *audioChangeFDK = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_decoder_f_d_k.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_a_a_c_decoder_f_d_k.html">AACDecoderFDK</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a>  {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <a class="code" href="classaudio__tools_1_1_a_a_c_decoder_f_d_k.html">AACDecoderFDK</a>(<span class="keywordtype">int</span> output_buffer_size=2048){</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;            LOGD(__FUNCTION__);</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            dec = <span class="keyword">new</span> aac_fdk::AACDecoderFDK(output_buffer_size);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        }</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <a class="code" href="classaudio__tools_1_1_a_a_c_decoder_f_d_k.html">AACDecoderFDK</a>(<a class="code" href="class_stream.html">Stream</a> &amp;out_stream, <span class="keywordtype">int</span> output_buffer_size=2048){</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            LOGD(__FUNCTION__);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            dec = <span class="keyword">new</span> aac_fdk::AACDecoderFDK(out_stream, output_buffer_size);</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        }</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        ~<a class="code" href="classaudio__tools_1_1_a_a_c_decoder_f_d_k.html">AACDecoderFDK</a>(){</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            <span class="keyword">delete</span> dec;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        }</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_decoder_f_d_k.html#a1762af6596d399f71fc28587ca8d59c6">   34</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_a_a_c_decoder_f_d_k.html#a1762af6596d399f71fc28587ca8d59c6">setOutputStream</a>(<a class="code" href="class_stream.html">Stream</a> &amp;out_stream){</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            dec-&gt;setStream(out_stream);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        }</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keywordtype">void</span> begin(){</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            dec-&gt;begin(TT_MP4_ADTS, 1);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        }</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="comment">// opens the decoder</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordtype">void</span> begin(TRANSPORT_TYPE transportType, UINT nrOfLayers){</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            dec-&gt;begin(transportType, nrOfLayers);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        }</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_decoder_f_d_k.html#a52b0b4b57b92683f050819fd88fafd3e">   54</a></span>&#160;        AAC_DECODER_ERROR <a class="code" href="classaudio__tools_1_1_a_a_c_decoder_f_d_k.html#a52b0b4b57b92683f050819fd88fafd3e">configure</a>(uint8_t *conf, <span class="keyword">const</span> uint32_t &amp;length) {</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <span class="keywordflow">return</span> dec-&gt;configure(conf, length);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        }</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="comment">// write AAC data to be converted to PCM data</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> <span class="keywordtype">void</span> *in_ptr, <span class="keywordtype">size_t</span> in_size) {</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            <span class="keywordflow">return</span> dec-&gt;write(in_ptr, in_size);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        }</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="comment">// provides detailed information about the stream</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        CStreamInfo &amp;audioInfoEx(){</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            <span class="keywordflow">return</span> dec-&gt;audioInfo();</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        }</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="comment">// provides common information</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        AudioBaseInfo &amp;audioInfo() {</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            AudioBaseInfo result;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            CStreamInfo&amp; i = audioInfoEx();</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            result.channels = i.numChannels;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            result.sample_rate = i.sampleRate;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            result.bits_per_sample = 16;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        }</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="comment">// release the resources</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordtype">void</span> end(){</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            LOGD(__FUNCTION__);</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            dec-&gt;end();</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        }</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keyword">virtual</span> <span class="keyword">operator</span> bool() {</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            <span class="keywordflow">return</span> (<span class="keywordtype">bool</span>)*dec;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        }</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        aac_fdk::AACDecoderFDK *driver() {</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            <span class="keywordflow">return</span> dec;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        }</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> audioChangeCallback(CStreamInfo &amp;info){</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            <span class="keywordflow">if</span> (audioChangeFDK!=<span class="keyword">nullptr</span>){</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                AudioBaseInfo base;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                base.channels = info.channels;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                base.sample_rate = info.sample_rate;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                base.bits_per_sample = info.bits_per_sample;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                <span class="comment">// notify audio change</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                audioChangeFDK-&gt;setAudioInfo(base);</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            }</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        }</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> setNotifyAudioChange(AudioBaseInfoDependent &amp;bi) {</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            audioChangeFDK = &amp;bi;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            <span class="comment">// register audio change handler</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            dec-&gt;setInfoCallback(audioChangeCallback);</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        }</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        aac_fdk::AACDecoderFDK *dec=<span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;};</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
-<div class="line"><a name="l00118"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html">  118</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html">AACEncoderFDK</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_audio_encoder.html">AudioEncoder</a> {</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <a class="code" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html">AACEncoderFDK</a>(<a class="code" href="class_stream.html">Stream</a> &amp;out_stream){</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        enc = <span class="keyword">new</span> aac_fdk::AACEncoderFDK(out_stream);</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    }</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
-<div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#afd7376200791949f122078cd6a584e03">  125</a></span>&#160;     <a class="code" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#afd7376200791949f122078cd6a584e03">~AACEncoderFDK</a>(){</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;         <span class="keyword">delete</span> enc;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;     }</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_decoder_f_d_k.html">   19</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_a_a_c_decoder_f_d_k.html">AACDecoderFDK</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a>  {</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <a class="code" href="classaudio__tools_1_1_a_a_c_decoder_f_d_k.html">AACDecoderFDK</a>(<span class="keywordtype">int</span> output_buffer_size=2048){</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            LOGD(__FUNCTION__);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            dec = <span class="keyword">new</span> aac_fdk::AACDecoderFDK(output_buffer_size);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        }</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <a class="code" href="classaudio__tools_1_1_a_a_c_decoder_f_d_k.html">AACDecoderFDK</a>(<a class="code" href="class_stream.html">Stream</a> &amp;out_stream, <span class="keywordtype">int</span> output_buffer_size=2048){</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            LOGD(__FUNCTION__);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            dec = <span class="keyword">new</span> aac_fdk::AACDecoderFDK(out_stream, output_buffer_size);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        }</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        ~<a class="code" href="classaudio__tools_1_1_a_a_c_decoder_f_d_k.html">AACDecoderFDK</a>(){</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            <span class="keyword">delete</span> dec;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        }</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_decoder_f_d_k.html#a1762af6596d399f71fc28587ca8d59c6">   36</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_a_a_c_decoder_f_d_k.html#a1762af6596d399f71fc28587ca8d59c6">setOutputStream</a>(<a class="code" href="class_stream.html">Stream</a> &amp;out_stream){</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            dec-&gt;setStream(out_stream);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        }</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keywordtype">void</span> begin(){</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            dec-&gt;begin(TT_MP4_ADTS, 1);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        }</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="comment">// opens the decoder</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordtype">void</span> begin(TRANSPORT_TYPE transportType, UINT nrOfLayers){</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            dec-&gt;begin(transportType, nrOfLayers);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        }</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_decoder_f_d_k.html#a52b0b4b57b92683f050819fd88fafd3e">   56</a></span>&#160;        AAC_DECODER_ERROR <a class="code" href="classaudio__tools_1_1_a_a_c_decoder_f_d_k.html#a52b0b4b57b92683f050819fd88fafd3e">configure</a>(uint8_t *conf, <span class="keyword">const</span> uint32_t &amp;length) {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <span class="keywordflow">return</span> dec-&gt;configure(conf, length);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        }</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="comment">// write AAC data to be converted to PCM data</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> <span class="keywordtype">void</span> *in_ptr, <span class="keywordtype">size_t</span> in_size) {</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            <span class="keywordflow">return</span> dec-&gt;write(in_ptr, in_size);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        }</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="comment">// provides detailed information about the stream</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        CStreamInfo &amp;audioInfoEx(){</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            <span class="keywordflow">return</span> dec-&gt;audioInfo();</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        }</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="comment">// provides common information</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        AudioBaseInfo &amp;audioInfo() {</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            AudioBaseInfo result;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            CStreamInfo&amp; i = audioInfoEx();</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            result.channels = i.numChannels;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            result.sample_rate = i.sampleRate;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            result.bits_per_sample = 16;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        }</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="comment">// release the resources</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="keywordtype">void</span> end(){</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            LOGD(__FUNCTION__);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            dec-&gt;end();</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        }</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="keyword">virtual</span> <span class="keyword">operator</span> bool() {</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            <span class="keywordflow">return</span> (<span class="keywordtype">bool</span>)*dec;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        }</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        aac_fdk::AACDecoderFDK *driver() {</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            <span class="keywordflow">return</span> dec;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        }</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> audioChangeCallback(CStreamInfo &amp;info){</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            <span class="keywordflow">if</span> (audioChangeFDK!=<span class="keyword">nullptr</span>){</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                AudioBaseInfo base;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                base.channels = info.channels;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                base.sample_rate = info.sample_rate;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                base.bits_per_sample = info.bits_per_sample;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                <span class="comment">// notify audio change</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                audioChangeFDK-&gt;setAudioInfo(base);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            }</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        }</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> setNotifyAudioChange(AudioBaseInfoDependent &amp;bi) {</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            audioChangeFDK = &amp;bi;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            <span class="comment">// register audio change handler</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            dec-&gt;setInfoCallback(audioChangeCallback);</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        }</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        aac_fdk::AACDecoderFDK *dec=<span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;};</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00122"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html">  122</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html">AACEncoderFDK</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_audio_encoder.html">AudioEncoder</a> {</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <a class="code" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html">AACEncoderFDK</a>(<a class="code" href="class_stream.html">Stream</a> &amp;out_stream){</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        enc = <span class="keyword">new</span> aac_fdk::AACEncoderFDK(out_stream);</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    }</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
-<div class="line"><a name="l00134"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#aa8bdd433d7b6f6c431d210177179728d">  134</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#aa8bdd433d7b6f6c431d210177179728d">setBitrate</a>(<span class="keywordtype">int</span> bitrate){</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        enc-&gt;setBitrate(bitrate);</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    }</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
-<div class="line"><a name="l00159"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#af795921ecd5bc1e8ad6adcbce8e5d500">  159</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#af795921ecd5bc1e8ad6adcbce8e5d500">setAudioObjectType</a>(<span class="keywordtype">int</span> aot){</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        enc-&gt;setAudioObjectType(aot);</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    }</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160; </div>
-<div class="line"><a name="l00174"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#a414f73b40a9ffb5b0612b1ab8c5164df">  174</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#a414f73b40a9ffb5b0612b1ab8c5164df">setAfterburner</a>(<span class="keywordtype">bool</span> afterburner){</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        enc-&gt;setAfterburner(afterburner);</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    }</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
-<div class="line"><a name="l00184"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#aa77d974c4959439014c82dc09348912f">  184</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#aa77d974c4959439014c82dc09348912f">setSpecialBandReplication</a>(<span class="keywordtype">int</span> eld_sbr){</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        enc-&gt;setSpecialBandReplication(eld_sbr);</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    }</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> setVariableBitrateMode(<span class="keywordtype">int</span> vbr){</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        enc-&gt;setVariableBitrateMode(vbr);</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    }</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    </div>
-<div class="line"><a name="l00215"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#af7522c06ecc83a93266a0d093c19d529">  215</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#af7522c06ecc83a93266a0d093c19d529">setOutputBufferSize</a>(<span class="keywordtype">int</span> outbuf_size){</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;        enc-&gt;setOutputBufferSize(outbuf_size);</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    }</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160; </div>
-<div class="line"><a name="l00220"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#a67cabe7386bc292b7e372907c4e6ae83">  220</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#a67cabe7386bc292b7e372907c4e6ae83">setAudioInfo</a>(<a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> from) {</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;        LOGD(__FUNCTION__);</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;        aac_fdk::AudioInfo info;</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        info.channels = from.channels;</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;        info.sample_rate = from.sample_rate;</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;        info.bits_per_sample = from.bits_per_sample;</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        enc-&gt;setAudioInfo(info);</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    }</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160; </div>
-<div class="line"><a name="l00235"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#ad21bd0ce34a7370a4669d4e62e11c70c">  235</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#ad21bd0ce34a7370a4669d4e62e11c70c">begin</a>(<a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> info) {</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        LOGD(__FUNCTION__);</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        enc-&gt;begin(info.channels,info.sample_rate, info.bits_per_sample);</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    }</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160; </div>
-<div class="line"><a name="l00248"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#ae1dfabc4b09ff73987c032c7a0c423eb">  248</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#ae1dfabc4b09ff73987c032c7a0c423eb">begin</a>(<span class="keywordtype">int</span> input_channels=2, <span class="keywordtype">int</span> input_sample_rate=44100, <span class="keywordtype">int</span> input_bits_per_sample=16) {</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        LOGD(__FUNCTION__);</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;        enc-&gt;begin(input_channels,input_sample_rate, input_bits_per_sample);</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    }</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160; </div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    <span class="comment">// starts the processing</span></div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    <span class="keywordtype">void</span> begin() {</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;        enc-&gt;begin();</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    }</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    </div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    <span class="comment">// convert PCM data to AAC</span></div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    int32_t write(<span class="keywordtype">void</span> *in_ptr, <span class="keywordtype">int</span> in_size){</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        LOGD(<span class="stringliteral">&quot;write %d bytes&quot;</span>, in_size);</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;        enc-&gt;write(in_ptr, in_size);</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    }</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160; </div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    <span class="comment">// release resources</span></div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    <span class="keywordtype">void</span> end(){</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        LOGD(__FUNCTION__);</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        enc-&gt;end();</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    }</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160; </div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    UINT getParameter(<span class="keyword">const</span> AACENC_PARAM param) {</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        <span class="keywordflow">return</span> enc-&gt;getParameter(param);</div>
+<div class="line"><a name="l00129"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#afd7376200791949f122078cd6a584e03">  129</a></span>&#160;     <a class="code" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#afd7376200791949f122078cd6a584e03">~AACEncoderFDK</a>(){</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;         <span class="keyword">delete</span> enc;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;     }</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
+<div class="line"><a name="l00138"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#aa8bdd433d7b6f6c431d210177179728d">  138</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#aa8bdd433d7b6f6c431d210177179728d">setBitrate</a>(<span class="keywordtype">int</span> bitrate){</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        enc-&gt;setBitrate(bitrate);</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    }</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160; </div>
+<div class="line"><a name="l00163"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#af795921ecd5bc1e8ad6adcbce8e5d500">  163</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#af795921ecd5bc1e8ad6adcbce8e5d500">setAudioObjectType</a>(<span class="keywordtype">int</span> aot){</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        enc-&gt;setAudioObjectType(aot);</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    }</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
+<div class="line"><a name="l00178"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#a414f73b40a9ffb5b0612b1ab8c5164df">  178</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#a414f73b40a9ffb5b0612b1ab8c5164df">setAfterburner</a>(<span class="keywordtype">bool</span> afterburner){</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        enc-&gt;setAfterburner(afterburner);</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    }</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160; </div>
+<div class="line"><a name="l00188"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#aa77d974c4959439014c82dc09348912f">  188</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#aa77d974c4959439014c82dc09348912f">setSpecialBandReplication</a>(<span class="keywordtype">int</span> eld_sbr){</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        enc-&gt;setSpecialBandReplication(eld_sbr);</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    }</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> setVariableBitrateMode(<span class="keywordtype">int</span> vbr){</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        enc-&gt;setVariableBitrateMode(vbr);</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    }</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    </div>
+<div class="line"><a name="l00219"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#af7522c06ecc83a93266a0d093c19d529">  219</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#af7522c06ecc83a93266a0d093c19d529">setOutputBufferSize</a>(<span class="keywordtype">int</span> outbuf_size){</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;        enc-&gt;setOutputBufferSize(outbuf_size);</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    }</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160; </div>
+<div class="line"><a name="l00224"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#a67cabe7386bc292b7e372907c4e6ae83">  224</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#a67cabe7386bc292b7e372907c4e6ae83">setAudioInfo</a>(<a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> from) {</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;        LOGD(__FUNCTION__);</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        aac_fdk::AudioInfo info;</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        info.channels = from.channels;</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;        info.sample_rate = from.sample_rate;</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;        info.bits_per_sample = from.bits_per_sample;</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        enc-&gt;setAudioInfo(info);</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    }</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160; </div>
+<div class="line"><a name="l00239"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#ad21bd0ce34a7370a4669d4e62e11c70c">  239</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#ad21bd0ce34a7370a4669d4e62e11c70c">begin</a>(<a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> info) {</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;        LOGD(__FUNCTION__);</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;        enc-&gt;begin(info.channels,info.sample_rate, info.bits_per_sample);</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    }</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160; </div>
+<div class="line"><a name="l00252"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#ae1dfabc4b09ff73987c032c7a0c423eb">  252</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#ae1dfabc4b09ff73987c032c7a0c423eb">begin</a>(<span class="keywordtype">int</span> input_channels=2, <span class="keywordtype">int</span> input_sample_rate=44100, <span class="keywordtype">int</span> input_bits_per_sample=16) {</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        LOGD(__FUNCTION__);</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;        enc-&gt;begin(input_channels,input_sample_rate, input_bits_per_sample);</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    }</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160; </div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    <span class="comment">// starts the processing</span></div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    <span class="keywordtype">void</span> begin() {</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        enc-&gt;begin();</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    }</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    </div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <span class="comment">// convert PCM data to AAC</span></div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    int32_t write(<span class="keywordtype">void</span> *in_ptr, <span class="keywordtype">int</span> in_size){</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        LOGD(<span class="stringliteral">&quot;write %d bytes&quot;</span>, in_size);</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        enc-&gt;write(in_ptr, in_size);</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    }</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160; </div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    <span class="comment">// release resources</span></div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    <span class="keywordtype">void</span> end(){</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;        LOGD(__FUNCTION__);</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        enc-&gt;end();</div>
 <div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    }</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    </div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    <span class="keywordtype">int</span> setParameter(AACENC_PARAM param, uint32_t value){</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;        <span class="keywordflow">return</span> enc-&gt;setParameter(param, value);</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160; </div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    UINT getParameter(<span class="keyword">const</span> AACENC_PARAM param) {</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;        <span class="keywordflow">return</span> enc-&gt;getParameter(param);</div>
 <div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    }</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160; </div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    aac_fdk::AACEncoderFDK *driver() {</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        <span class="keywordflow">return</span> enc;</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    </div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    <span class="keywordtype">int</span> setParameter(AACENC_PARAM param, uint32_t value){</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        <span class="keywordflow">return</span> enc-&gt;setParameter(param, value);</div>
 <div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    }</div>
 <div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160; </div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *mime() {</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;        <span class="keywordflow">return</span> <span class="stringliteral">&quot;audio/aac&quot;</span>;</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    aac_fdk::AACEncoderFDK *driver() {</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;        <span class="keywordflow">return</span> enc;</div>
 <div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    }</div>
 <div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160; </div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160; </div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    aac_fdk::AACEncoderFDK *enc=<span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *mime() {</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;        <span class="keywordflow">return</span> <span class="stringliteral">&quot;audio/aac&quot;</span>;</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    }</div>
 <div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160; </div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;};</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160; </div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;}</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160; </div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;    aac_fdk::AACEncoderFDK *enc=<span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160; </div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;};</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160; </div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;}</div>
 <div class="ttc" id="aclass_stream_html"><div class="ttname"><a href="class_stream.html">Stream</a></div><div class="ttdef"><b>Definition:</b> Stream.h:49</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_decoder_f_d_k_html"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_decoder_f_d_k.html">audio_tools::AACDecoderFDK</a></div><div class="ttdoc">Audio Decoder which decodes AAC into a PCM stream This is basically just a wrapper using https://gith...</div><div class="ttdef"><b>Definition:</b> CodecAACFDK.h:17</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_decoder_f_d_k_html_a1762af6596d399f71fc28587ca8d59c6"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_decoder_f_d_k.html#a1762af6596d399f71fc28587ca8d59c6">audio_tools::AACDecoderFDK::setOutputStream</a></div><div class="ttdeci">void setOutputStream(Stream &amp;out_stream)</div><div class="ttdoc">Defines the output stream.</div><div class="ttdef"><b>Definition:</b> CodecAACFDK.h:34</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_decoder_f_d_k_html_a52b0b4b57b92683f050819fd88fafd3e"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_decoder_f_d_k.html#a52b0b4b57b92683f050819fd88fafd3e">audio_tools::AACDecoderFDK::configure</a></div><div class="ttdeci">AAC_DECODER_ERROR configure(uint8_t *conf, const uint32_t &amp;length)</div><div class="ttdoc">Explicitly configure the decoder by passing a raw AudioSpecificConfig (ASC) or a StreamMuxConfig (SMC...</div><div class="ttdef"><b>Definition:</b> CodecAACFDK.h:54</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_encoder_f_d_k_html"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html">audio_tools::AACEncoderFDK</a></div><div class="ttdoc">Encodes PCM data to the AAC format and writes the result to a stream This is basically just a wrapper...</div><div class="ttdef"><b>Definition:</b> CodecAACFDK.h:118</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_encoder_f_d_k_html_a414f73b40a9ffb5b0612b1ab8c5164df"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#a414f73b40a9ffb5b0612b1ab8c5164df">audio_tools::AACEncoderFDK::setAfterburner</a></div><div class="ttdeci">virtual void setAfterburner(bool afterburner)</div><div class="ttdef"><b>Definition:</b> CodecAACFDK.h:174</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_encoder_f_d_k_html_a67cabe7386bc292b7e372907c4e6ae83"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#a67cabe7386bc292b7e372907c4e6ae83">audio_tools::AACEncoderFDK::setAudioInfo</a></div><div class="ttdeci">virtual void setAudioInfo(AudioBaseInfo from)</div><div class="ttdoc">Defines the Audio Info.</div><div class="ttdef"><b>Definition:</b> CodecAACFDK.h:220</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_encoder_f_d_k_html_aa77d974c4959439014c82dc09348912f"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#aa77d974c4959439014c82dc09348912f">audio_tools::AACEncoderFDK::setSpecialBandReplication</a></div><div class="ttdeci">virtual void setSpecialBandReplication(int eld_sbr)</div><div class="ttdef"><b>Definition:</b> CodecAACFDK.h:184</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_encoder_f_d_k_html_aa8bdd433d7b6f6c431d210177179728d"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#aa8bdd433d7b6f6c431d210177179728d">audio_tools::AACEncoderFDK::setBitrate</a></div><div class="ttdeci">virtual void setBitrate(int bitrate)</div><div class="ttdef"><b>Definition:</b> CodecAACFDK.h:134</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_encoder_f_d_k_html_ad21bd0ce34a7370a4669d4e62e11c70c"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#ad21bd0ce34a7370a4669d4e62e11c70c">audio_tools::AACEncoderFDK::begin</a></div><div class="ttdeci">virtual void begin(AudioBaseInfo info)</div><div class="ttdoc">Opens the encoder</div><div class="ttdef"><b>Definition:</b> CodecAACFDK.h:235</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_encoder_f_d_k_html_ae1dfabc4b09ff73987c032c7a0c423eb"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#ae1dfabc4b09ff73987c032c7a0c423eb">audio_tools::AACEncoderFDK::begin</a></div><div class="ttdeci">virtual void begin(int input_channels=2, int input_sample_rate=44100, int input_bits_per_sample=16)</div><div class="ttdoc">Opens the encoder</div><div class="ttdef"><b>Definition:</b> CodecAACFDK.h:248</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_encoder_f_d_k_html_af7522c06ecc83a93266a0d093c19d529"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#af7522c06ecc83a93266a0d093c19d529">audio_tools::AACEncoderFDK::setOutputBufferSize</a></div><div class="ttdeci">virtual void setOutputBufferSize(int outbuf_size)</div><div class="ttdoc">Set the Output Buffer Size object.</div><div class="ttdef"><b>Definition:</b> CodecAACFDK.h:215</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_encoder_f_d_k_html_af795921ecd5bc1e8ad6adcbce8e5d500"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#af795921ecd5bc1e8ad6adcbce8e5d500">audio_tools::AACEncoderFDK::setAudioObjectType</a></div><div class="ttdeci">virtual void setAudioObjectType(int aot)</div><div class="ttdef"><b>Definition:</b> CodecAACFDK.h:159</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_encoder_f_d_k_html_afd7376200791949f122078cd6a584e03"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#afd7376200791949f122078cd6a584e03">audio_tools::AACEncoderFDK::~AACEncoderFDK</a></div><div class="ttdeci">~AACEncoderFDK()</div><div class="ttdef"><b>Definition:</b> CodecAACFDK.h:125</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_decoder_f_d_k_html"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_decoder_f_d_k.html">audio_tools::AACDecoderFDK</a></div><div class="ttdoc">Audio Decoder which decodes AAC into a PCM stream This is basically just a wrapper using https://gith...</div><div class="ttdef"><b>Definition:</b> CodecAACFDK.h:19</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_decoder_f_d_k_html_a1762af6596d399f71fc28587ca8d59c6"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_decoder_f_d_k.html#a1762af6596d399f71fc28587ca8d59c6">audio_tools::AACDecoderFDK::setOutputStream</a></div><div class="ttdeci">void setOutputStream(Stream &amp;out_stream)</div><div class="ttdoc">Defines the output stream.</div><div class="ttdef"><b>Definition:</b> CodecAACFDK.h:36</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_decoder_f_d_k_html_a52b0b4b57b92683f050819fd88fafd3e"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_decoder_f_d_k.html#a52b0b4b57b92683f050819fd88fafd3e">audio_tools::AACDecoderFDK::configure</a></div><div class="ttdeci">AAC_DECODER_ERROR configure(uint8_t *conf, const uint32_t &amp;length)</div><div class="ttdoc">Explicitly configure the decoder by passing a raw AudioSpecificConfig (ASC) or a StreamMuxConfig (SMC...</div><div class="ttdef"><b>Definition:</b> CodecAACFDK.h:56</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_encoder_f_d_k_html"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html">audio_tools::AACEncoderFDK</a></div><div class="ttdoc">Encodes PCM data to the AAC format and writes the result to a stream This is basically just a wrapper...</div><div class="ttdef"><b>Definition:</b> CodecAACFDK.h:122</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_encoder_f_d_k_html_a414f73b40a9ffb5b0612b1ab8c5164df"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#a414f73b40a9ffb5b0612b1ab8c5164df">audio_tools::AACEncoderFDK::setAfterburner</a></div><div class="ttdeci">virtual void setAfterburner(bool afterburner)</div><div class="ttdef"><b>Definition:</b> CodecAACFDK.h:178</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_encoder_f_d_k_html_a67cabe7386bc292b7e372907c4e6ae83"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#a67cabe7386bc292b7e372907c4e6ae83">audio_tools::AACEncoderFDK::setAudioInfo</a></div><div class="ttdeci">virtual void setAudioInfo(AudioBaseInfo from)</div><div class="ttdoc">Defines the Audio Info.</div><div class="ttdef"><b>Definition:</b> CodecAACFDK.h:224</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_encoder_f_d_k_html_aa77d974c4959439014c82dc09348912f"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#aa77d974c4959439014c82dc09348912f">audio_tools::AACEncoderFDK::setSpecialBandReplication</a></div><div class="ttdeci">virtual void setSpecialBandReplication(int eld_sbr)</div><div class="ttdef"><b>Definition:</b> CodecAACFDK.h:188</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_encoder_f_d_k_html_aa8bdd433d7b6f6c431d210177179728d"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#aa8bdd433d7b6f6c431d210177179728d">audio_tools::AACEncoderFDK::setBitrate</a></div><div class="ttdeci">virtual void setBitrate(int bitrate)</div><div class="ttdef"><b>Definition:</b> CodecAACFDK.h:138</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_encoder_f_d_k_html_ad21bd0ce34a7370a4669d4e62e11c70c"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#ad21bd0ce34a7370a4669d4e62e11c70c">audio_tools::AACEncoderFDK::begin</a></div><div class="ttdeci">virtual void begin(AudioBaseInfo info)</div><div class="ttdoc">Opens the encoder</div><div class="ttdef"><b>Definition:</b> CodecAACFDK.h:239</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_encoder_f_d_k_html_ae1dfabc4b09ff73987c032c7a0c423eb"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#ae1dfabc4b09ff73987c032c7a0c423eb">audio_tools::AACEncoderFDK::begin</a></div><div class="ttdeci">virtual void begin(int input_channels=2, int input_sample_rate=44100, int input_bits_per_sample=16)</div><div class="ttdoc">Opens the encoder</div><div class="ttdef"><b>Definition:</b> CodecAACFDK.h:252</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_encoder_f_d_k_html_af7522c06ecc83a93266a0d093c19d529"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#af7522c06ecc83a93266a0d093c19d529">audio_tools::AACEncoderFDK::setOutputBufferSize</a></div><div class="ttdeci">virtual void setOutputBufferSize(int outbuf_size)</div><div class="ttdoc">Set the Output Buffer Size object.</div><div class="ttdef"><b>Definition:</b> CodecAACFDK.h:219</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_encoder_f_d_k_html_af795921ecd5bc1e8ad6adcbce8e5d500"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#af795921ecd5bc1e8ad6adcbce8e5d500">audio_tools::AACEncoderFDK::setAudioObjectType</a></div><div class="ttdeci">virtual void setAudioObjectType(int aot)</div><div class="ttdef"><b>Definition:</b> CodecAACFDK.h:163</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_encoder_f_d_k_html_afd7376200791949f122078cd6a584e03"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#afd7376200791949f122078cd6a584e03">audio_tools::AACEncoderFDK::~AACEncoderFDK</a></div><div class="ttdeci">~AACEncoderFDK()</div><div class="ttdef"><b>Definition:</b> CodecAACFDK.h:129</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_decoder.html">audio_tools::AudioDecoder</a></div><div class="ttdoc">Docoding of encoded audio into PCM data.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:188</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_encoder_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_encoder.html">audio_tools::AudioEncoder</a></div><div class="ttdoc">Encoding of PCM data.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:201</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AudioA2DP.h:19</div></div>

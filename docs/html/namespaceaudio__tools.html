@@ -113,6 +113,9 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_encoder_server.html">AudioEncoderServer</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple Arduino Webserver which streams the audio using the indicated encoder.. This class is based on the WiFiServer class. All you need to do is to provide the data with a callback method or from a <a class="el" href="class_stream.html">Stream</a>.  <a href="classaudio__tools_1_1_audio_encoder_server.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_audio_info_l_a_m_e.html">AudioInfoLAME</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">LAME parameters.  <a href="structaudio__tools_1_1_audio_info_l_a_m_e.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_logger.html">AudioLogger</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple Logger that writes messages dependent on the log level.  <a href="classaudio__tools_1_1_audio_logger.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -181,6 +184,9 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_generated_sound_stream.html">GeneratedSoundStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Source for reading generated tones. Please note.  <a href="classaudio__tools_1_1_generated_sound_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_hex_dump_stream.html">HexDumpStream</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a Hex Dump.  <a href="classaudio__tools_1_1_hex_dump_stream.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_http_chunk_reader.html">HttpChunkReader</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Http might reply with chunks. So we need to dechunk the data. see <a href="https://en.wikipedia.org/wiki/Chunked_transfer_encoding">https://en.wikipedia.org/wiki/Chunked_transfer_encoding</a>.  <a href="classaudio__tools_1_1_http_chunk_reader.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -237,6 +243,9 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html">MP3DecoderMini</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">MP3 Decoder using <a href="https://github.com/lieff/minimp3">https://github.com/lieff/minimp3</a>.  <a href="classaudio__tools_1_1_m_p3_decoder_mini.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html">MP3EncoderLAME</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encodes PCM data to the MP3 format and writes the result to a stream This is basically just a wrapper using <a href="https://github.com/pschatzmann/arduino-liblame">https://github.com/pschatzmann/arduino-liblame</a>.  <a href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_m_p3_mini_audio_info.html">MP3MiniAudioInfo</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Audio Information for MP3.  <a href="structaudio__tools_1_1_m_p3_mini_audio_info.html#details">More...</a><br /></td></tr>
@@ -478,9 +487,9 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>ADC_TAG</b> =
 <tr class="memitem:a5b99845442e83ed83468818b5b551b76"><td class="memItemLeft" align="right" valign="top"><a id="a5b99845442e83ed83468818b5b551b76"></a>
 <a class="el" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>audioChangeFDK</b> = nullptr</td></tr>
 <tr class="separator:a5b99845442e83ed83468818b5b551b76"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6d804a91e4d1c846eddcec6be964fed6"><td class="memItemLeft" align="right" valign="top"><a id="a6d804a91e4d1c846eddcec6be964fed6"></a>
-<a class="el" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a>&#160;</td><td class="memItemRight" valign="bottom"><b>audioChangeMAD</b></td></tr>
-<tr class="separator:a6d804a91e4d1c846eddcec6be964fed6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a112339896a87fa55f4b44ed2a77d6305"><td class="memItemLeft" align="right" valign="top"><a id="a112339896a87fa55f4b44ed2a77d6305"></a>
+<a class="el" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>audioChangeMAD</b></td></tr>
+<tr class="separator:a112339896a87fa55f4b44ed2a77d6305"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d492a36795a9573c7217330de9cb176"><td class="memItemLeft" align="right" valign="top"><a id="a5d492a36795a9573c7217330de9cb176"></a>
 <a class="el" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>audioChangeMP3Helix</b> =nullptr</td></tr>
 <tr class="separator:a5d492a36795a9573c7217330de9cb176"><td class="memSeparator" colspan="2">&#160;</td></tr>

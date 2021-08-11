@@ -82,105 +82,103 @@ $(function() {
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// audio change notification target</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;AudioBaseInfoDependent *audioChangeAACHelix=<span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_decoder_helix.html">   18</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_a_a_c_decoder_helix.html">AACDecoderHelix</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a>  {</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <a class="code" href="classaudio__tools_1_1_a_a_c_decoder_helix.html">AACDecoderHelix</a>() {</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            LOGD(__FUNCTION__);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            aac = <span class="keyword">new</span> libhelix::AACDecoderHelix();</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        }</div>
-<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a921daccfcc009837023a14892e992095">   30</a></span>&#160;        <a class="code" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a921daccfcc009837023a14892e992095">AACDecoderHelix</a>(<a class="code" href="class_print.html">Print</a> &amp;out_stream){</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            LOGD(__FUNCTION__);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            aac = <span class="keyword">new</span> libhelix::AACDecoderHelix(out_stream);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        }  </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#ac4c6d1fdeb6c073058d5e9b2dcb847b9">   42</a></span>&#160;        <a class="code" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#ac4c6d1fdeb6c073058d5e9b2dcb847b9">AACDecoderHelix</a>(<a class="code" href="class_print.html">Print</a> &amp;out_stream, <a class="code" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> &amp;bi){</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            LOGD(__FUNCTION__);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            aac = <span class="keyword">new</span> libhelix::AACDecoderHelix(out_stream);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            <a class="code" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a865b7423abea726c09bdc589196053b8">setNotifyAudioChange</a>(bi);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        }  </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a54309136d0a021255feb205638e8c9a9">   52</a></span>&#160;        <a class="code" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a54309136d0a021255feb205638e8c9a9">~AACDecoderHelix</a>(){</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            LOGD(__FUNCTION__);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <span class="keyword">delete</span> aac;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        }</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#aab34b2eaa327d2b155516594ddfadbc1">   58</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#aab34b2eaa327d2b155516594ddfadbc1">setOutputStream</a>(<a class="code" href="class_stream.html">Stream</a> &amp;out_stream){</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            LOGD(__FUNCTION__);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            aac-&gt;setStream(out_stream);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        }</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a4ea57b9bc8cf768c7810ebb7ba4117d4">   64</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a4ea57b9bc8cf768c7810ebb7ba4117d4">begin</a>(){</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            LOGD(__FUNCTION__);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            aac-&gt;begin();</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        }</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#af4c1cb254d6ed588567299183ed1af38">   70</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#af4c1cb254d6ed588567299183ed1af38">end</a>(){</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            LOGD(__FUNCTION__);</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            aac-&gt;end();</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        }</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keyword">virtual</span> libhelix::_AACFrameInfo audioInfoEx(){</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            <span class="keywordflow">return</span> aac-&gt;audioInfo();</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        }</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keyword">virtual</span> AudioBaseInfo audioInfo(){</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            AudioBaseInfo result;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            <span class="keyword">auto</span> i = audioInfoEx();</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            result.channels = i.channels;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            result.sample_rate = i.sample_rate;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            result.bits_per_sample = i.bits_per_sample;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        }</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a885b70a03343e5e0006f235643cde4d9">   89</a></span>&#160;        <span class="keywordtype">size_t</span> <a class="code" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a885b70a03343e5e0006f235643cde4d9">write</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* aac_data, <span class="keywordtype">size_t</span> len) {</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            aac-&gt;write(aac_data, len);</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        }</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a44a3a4e1fab85747d40f2e17ddf91e8c">   94</a></span>&#160;        <span class="keyword">virtual</span> <span class="keyword">operator</span> boolean(){</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            <span class="keywordflow">return</span> (<span class="keywordtype">bool</span>)*aac;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        }</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keywordtype">void</span> flush(){</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            aac-&gt;flush();</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        }</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
-<div class="line"><a name="l00103"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a865b7423abea726c09bdc589196053b8">  103</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a865b7423abea726c09bdc589196053b8">setNotifyAudioChange</a>(<a class="code" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> &amp;bi){</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            LOGD(__FUNCTION__);</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            audioChangeAACHelix = &amp;bi;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            <a class="code" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a865b7423abea726c09bdc589196053b8">setNotifyAudioChange</a>(<a class="code" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#ae75c32cfbb7645a25c128220228bfb51">infoCallback</a>);</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        }</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
-<div class="line"><a name="l00110"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#ae75c32cfbb7645a25c128220228bfb51">  110</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#ae75c32cfbb7645a25c128220228bfb51">infoCallback</a>(libhelix::_AACFrameInfo &amp;i){</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            <span class="keywordflow">if</span> (audioChangeAACHelix!=<span class="keyword">nullptr</span>){</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                LOGD(__FUNCTION__);</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                <a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> baseInfo;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                baseInfo.channels = i.channels;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                baseInfo.sample_rate = i.sample_rate;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                baseInfo.bits_per_sample = i.bits_per_sample;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                audioChangeAACHelix-&gt;setAudioInfo(baseInfo);   </div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            }</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        }</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        libhelix::AACDecoderHelix *aac=<span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;};</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_decoder_helix.html">   20</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_a_a_c_decoder_helix.html">AACDecoderHelix</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a>  {</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <a class="code" href="classaudio__tools_1_1_a_a_c_decoder_helix.html">AACDecoderHelix</a>() {</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            LOGD(__FUNCTION__);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            aac = <span class="keyword">new</span> libhelix::AACDecoderHelix();</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        }</div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a921daccfcc009837023a14892e992095">   32</a></span>&#160;        <a class="code" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a921daccfcc009837023a14892e992095">AACDecoderHelix</a>(<a class="code" href="class_print.html">Print</a> &amp;out_stream){</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            LOGD(__FUNCTION__);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            aac = <span class="keyword">new</span> libhelix::AACDecoderHelix(out_stream);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        }  </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#ac4c6d1fdeb6c073058d5e9b2dcb847b9">   44</a></span>&#160;        <a class="code" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#ac4c6d1fdeb6c073058d5e9b2dcb847b9">AACDecoderHelix</a>(<a class="code" href="class_print.html">Print</a> &amp;out_stream, <a class="code" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> &amp;bi){</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            LOGD(__FUNCTION__);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            aac = <span class="keyword">new</span> libhelix::AACDecoderHelix(out_stream);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            <a class="code" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a865b7423abea726c09bdc589196053b8">setNotifyAudioChange</a>(bi);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        }  </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a54309136d0a021255feb205638e8c9a9">   54</a></span>&#160;        <a class="code" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a54309136d0a021255feb205638e8c9a9">~AACDecoderHelix</a>(){</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            LOGD(__FUNCTION__);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <span class="keyword">delete</span> aac;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        }</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a9f7404e95c93f1966c006177f44817ff">   60</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a9f7404e95c93f1966c006177f44817ff">setOutputStream</a>(<a class="code" href="class_print.html">Print</a> &amp;out_stream){</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            LOGD(__FUNCTION__);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            aac-&gt;setOutput(out_stream);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        }</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a4ea57b9bc8cf768c7810ebb7ba4117d4">   66</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a4ea57b9bc8cf768c7810ebb7ba4117d4">begin</a>(){</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            LOGD(__FUNCTION__);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            aac-&gt;begin();</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        }</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#af4c1cb254d6ed588567299183ed1af38">   72</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#af4c1cb254d6ed588567299183ed1af38">end</a>(){</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            LOGD(__FUNCTION__);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            aac-&gt;end();</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        }</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keyword">virtual</span> _AACFrameInfo audioInfoEx(){</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            <span class="keywordflow">return</span> aac-&gt;audioInfo();</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        }</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="keyword">virtual</span> AudioBaseInfo audioInfo(){</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            AudioBaseInfo result;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            <span class="keyword">auto</span> i = audioInfoEx();</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            result.channels = i.nChans;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            result.sample_rate = i.sampRateOut;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            result.bits_per_sample = i.bitsPerSample;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        }</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a885b70a03343e5e0006f235643cde4d9">   91</a></span>&#160;        <span class="keywordtype">size_t</span> <a class="code" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a885b70a03343e5e0006f235643cde4d9">write</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* aac_data, <span class="keywordtype">size_t</span> len) {</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            <span class="keywordflow">return</span> aac-&gt;write(aac_data, len);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        }</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a44a3a4e1fab85747d40f2e17ddf91e8c">   96</a></span>&#160;        <span class="keyword">virtual</span> <span class="keyword">operator</span> boolean(){</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            <span class="keywordflow">return</span> (<span class="keywordtype">bool</span>)*aac;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        }</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <span class="keywordtype">void</span> flush(){</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <span class="comment">//     aac-&gt;flush();</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        }</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a865b7423abea726c09bdc589196053b8">  105</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a865b7423abea726c09bdc589196053b8">setNotifyAudioChange</a>(<a class="code" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> &amp;bi){</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            LOGD(__FUNCTION__);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            audioChangeAACHelix = &amp;bi;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        }</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#ac1193a60357fefc9662a70208051751f">  111</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#ac1193a60357fefc9662a70208051751f">infoCallback</a>(_AACFrameInfo &amp;i){</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            <span class="keywordflow">if</span> (audioChangeAACHelix!=<span class="keyword">nullptr</span>){</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                LOGD(__FUNCTION__);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                <a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> baseInfo;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                baseInfo.channels = i.nChans;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                baseInfo.sample_rate = i.sampRateOut;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                baseInfo.bits_per_sample = i.bitsPerSample;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                audioChangeAACHelix-&gt;setAudioInfo(baseInfo);   </div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;            }</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        }</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        libhelix::AACDecoderHelix *aac=<span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;};</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;} <span class="comment">// namespace</span></div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;} <span class="comment">// namespace</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
 <div class="ttc" id="aclass_print_html"><div class="ttname"><a href="class_print.html">Print</a></div><div class="ttdef"><b>Definition:</b> Print.h:34</div></div>
-<div class="ttc" id="aclass_stream_html"><div class="ttname"><a href="class_stream.html">Stream</a></div><div class="ttdef"><b>Definition:</b> Stream.h:49</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_decoder_helix_html"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_decoder_helix.html">audio_tools::AACDecoderHelix</a></div><div class="ttdoc">AAC Decoder using libhelix: https://github.com/pschatzmann/arduino-libhelix This is basically just a ...</div><div class="ttdef"><b>Definition:</b> CodecAACHelix.h:18</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_decoder_helix_html_a4ea57b9bc8cf768c7810ebb7ba4117d4"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a4ea57b9bc8cf768c7810ebb7ba4117d4">audio_tools::AACDecoderHelix::begin</a></div><div class="ttdeci">void begin()</div><div class="ttdoc">Starts the processing.</div><div class="ttdef"><b>Definition:</b> CodecAACHelix.h:64</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_decoder_helix_html_a54309136d0a021255feb205638e8c9a9"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a54309136d0a021255feb205638e8c9a9">audio_tools::AACDecoderHelix::~AACDecoderHelix</a></div><div class="ttdeci">~AACDecoderHelix()</div><div class="ttdoc">Destroy the AACDecoderMini object.</div><div class="ttdef"><b>Definition:</b> CodecAACHelix.h:52</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_decoder_helix_html_a865b7423abea726c09bdc589196053b8"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a865b7423abea726c09bdc589196053b8">audio_tools::AACDecoderHelix::setNotifyAudioChange</a></div><div class="ttdeci">virtual void setNotifyAudioChange(AudioBaseInfoDependent &amp;bi)</div><div class="ttdoc">Defines the callback object to which the Audio information change is provided.</div><div class="ttdef"><b>Definition:</b> CodecAACHelix.h:103</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_decoder_helix_html_a885b70a03343e5e0006f235643cde4d9"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a885b70a03343e5e0006f235643cde4d9">audio_tools::AACDecoderHelix::write</a></div><div class="ttdeci">size_t write(const void *aac_data, size_t len)</div><div class="ttdoc">Write AAC data to decoder.</div><div class="ttdef"><b>Definition:</b> CodecAACHelix.h:89</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_decoder_helix_html_a921daccfcc009837023a14892e992095"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a921daccfcc009837023a14892e992095">audio_tools::AACDecoderHelix::AACDecoderHelix</a></div><div class="ttdeci">AACDecoderHelix(Print &amp;out_stream)</div><div class="ttdoc">Construct a new AACDecoderMini object.</div><div class="ttdef"><b>Definition:</b> CodecAACHelix.h:30</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_decoder_helix_html_aab34b2eaa327d2b155516594ddfadbc1"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_decoder_helix.html#aab34b2eaa327d2b155516594ddfadbc1">audio_tools::AACDecoderHelix::setOutputStream</a></div><div class="ttdeci">virtual void setOutputStream(Stream &amp;out_stream)</div><div class="ttdoc">Defines the output Stream.</div><div class="ttdef"><b>Definition:</b> CodecAACHelix.h:58</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_decoder_helix_html_ac4c6d1fdeb6c073058d5e9b2dcb847b9"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_decoder_helix.html#ac4c6d1fdeb6c073058d5e9b2dcb847b9">audio_tools::AACDecoderHelix::AACDecoderHelix</a></div><div class="ttdeci">AACDecoderHelix(Print &amp;out_stream, AudioBaseInfoDependent &amp;bi)</div><div class="ttdoc">Construct a new AACDecoderMini object. The decoded output will go to the print object.</div><div class="ttdef"><b>Definition:</b> CodecAACHelix.h:42</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_decoder_helix_html_ae75c32cfbb7645a25c128220228bfb51"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_decoder_helix.html#ae75c32cfbb7645a25c128220228bfb51">audio_tools::AACDecoderHelix::infoCallback</a></div><div class="ttdeci">static void infoCallback(libhelix::_AACFrameInfo &amp;i)</div><div class="ttdoc">notifies the subscriber about a change</div><div class="ttdef"><b>Definition:</b> CodecAACHelix.h:110</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_decoder_helix_html_af4c1cb254d6ed588567299183ed1af38"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_decoder_helix.html#af4c1cb254d6ed588567299183ed1af38">audio_tools::AACDecoderHelix::end</a></div><div class="ttdeci">virtual void end()</div><div class="ttdoc">Releases the reserved memory.</div><div class="ttdef"><b>Definition:</b> CodecAACHelix.h:70</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_decoder_helix_html"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_decoder_helix.html">audio_tools::AACDecoderHelix</a></div><div class="ttdoc">AAC Decoder using libhelix: https://github.com/pschatzmann/arduino-libhelix This is basically just a ...</div><div class="ttdef"><b>Definition:</b> CodecAACHelix.h:20</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_decoder_helix_html_a4ea57b9bc8cf768c7810ebb7ba4117d4"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a4ea57b9bc8cf768c7810ebb7ba4117d4">audio_tools::AACDecoderHelix::begin</a></div><div class="ttdeci">void begin()</div><div class="ttdoc">Starts the processing.</div><div class="ttdef"><b>Definition:</b> CodecAACHelix.h:66</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_decoder_helix_html_a54309136d0a021255feb205638e8c9a9"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a54309136d0a021255feb205638e8c9a9">audio_tools::AACDecoderHelix::~AACDecoderHelix</a></div><div class="ttdeci">~AACDecoderHelix()</div><div class="ttdoc">Destroy the AACDecoderMini object.</div><div class="ttdef"><b>Definition:</b> CodecAACHelix.h:54</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_decoder_helix_html_a865b7423abea726c09bdc589196053b8"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a865b7423abea726c09bdc589196053b8">audio_tools::AACDecoderHelix::setNotifyAudioChange</a></div><div class="ttdeci">virtual void setNotifyAudioChange(AudioBaseInfoDependent &amp;bi)</div><div class="ttdoc">Defines the callback object to which the Audio information change is provided.</div><div class="ttdef"><b>Definition:</b> CodecAACHelix.h:105</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_decoder_helix_html_a885b70a03343e5e0006f235643cde4d9"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a885b70a03343e5e0006f235643cde4d9">audio_tools::AACDecoderHelix::write</a></div><div class="ttdeci">size_t write(const void *aac_data, size_t len)</div><div class="ttdoc">Write AAC data to decoder.</div><div class="ttdef"><b>Definition:</b> CodecAACHelix.h:91</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_decoder_helix_html_a921daccfcc009837023a14892e992095"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a921daccfcc009837023a14892e992095">audio_tools::AACDecoderHelix::AACDecoderHelix</a></div><div class="ttdeci">AACDecoderHelix(Print &amp;out_stream)</div><div class="ttdoc">Construct a new AACDecoderMini object.</div><div class="ttdef"><b>Definition:</b> CodecAACHelix.h:32</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_decoder_helix_html_a9f7404e95c93f1966c006177f44817ff"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a9f7404e95c93f1966c006177f44817ff">audio_tools::AACDecoderHelix::setOutputStream</a></div><div class="ttdeci">virtual void setOutputStream(Print &amp;out_stream)</div><div class="ttdoc">Defines the output Stream.</div><div class="ttdef"><b>Definition:</b> CodecAACHelix.h:60</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_decoder_helix_html_ac1193a60357fefc9662a70208051751f"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_decoder_helix.html#ac1193a60357fefc9662a70208051751f">audio_tools::AACDecoderHelix::infoCallback</a></div><div class="ttdeci">static void infoCallback(_AACFrameInfo &amp;i)</div><div class="ttdoc">notifies the subscriber about a change</div><div class="ttdef"><b>Definition:</b> CodecAACHelix.h:111</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_decoder_helix_html_ac4c6d1fdeb6c073058d5e9b2dcb847b9"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_decoder_helix.html#ac4c6d1fdeb6c073058d5e9b2dcb847b9">audio_tools::AACDecoderHelix::AACDecoderHelix</a></div><div class="ttdeci">AACDecoderHelix(Print &amp;out_stream, AudioBaseInfoDependent &amp;bi)</div><div class="ttdoc">Construct a new AACDecoderMini object. The decoded output will go to the print object.</div><div class="ttdef"><b>Definition:</b> CodecAACHelix.h:44</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_a_c_decoder_helix_html_af4c1cb254d6ed588567299183ed1af38"><div class="ttname"><a href="classaudio__tools_1_1_a_a_c_decoder_helix.html#af4c1cb254d6ed588567299183ed1af38">audio_tools::AACDecoderHelix::end</a></div><div class="ttdeci">virtual void end()</div><div class="ttdoc">Releases the reserved memory.</div><div class="ttdef"><b>Definition:</b> CodecAACHelix.h:72</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_base_info_dependent_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_base_info_dependent.html">audio_tools::AudioBaseInfoDependent</a></div><div class="ttdoc">Supports changes to the sampling rate, bits and channels.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:112</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_decoder.html">audio_tools::AudioDecoder</a></div><div class="ttdoc">Docoding of encoded audio into PCM data.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:188</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AudioA2DP.h:19</div></div>
