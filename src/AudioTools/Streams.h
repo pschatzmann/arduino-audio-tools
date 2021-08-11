@@ -203,8 +203,6 @@ class GeneratedSoundStream : public Stream {
 
 };
 
-
-
 /**
  * @brief The Arduino Stream supports operations on single characters. This is usually not the best way to push audio information, but we 
  * will support it anyway - by using a buffer. On reads: if the buffer is empty it gets refilled - for writes
@@ -375,8 +373,65 @@ class CsvStream : public BufferedStream, public AudioBaseInfoDependent  {
             LOGE("not implemented: %s", __FUNCTION__);
             return 0;
         }
+};
+
+/**
+ * @brief Creates a Hex Dump
+ * 
+ */
+class HexDumpStream : public BufferedStream {
+
+    public:
+        HexDumpStream(int buffer_size=DEFAULT_BUFFER_SIZE, bool active=true) : BufferedStream(buffer_size){
+            this->active = active;
+        }
+
+        /// Constructor
+        HexDumpStream(Print &out, int buffer_size=DEFAULT_BUFFER_SIZE, bool active=true) : BufferedStream(buffer_size){
+            this->out_ptr = &out;
+            this->active = active;
+        }
+
+        void begin(){
+	 		LOGD(__FUNCTION__);
+            this->active = true;
+            pos = 0;
+        }
+
+        /// Sets the CsvStream as inactive 
+        void end() {
+	 		LOGD(__FUNCTION__);
+            active = false;
+        }
 
 
+    protected:
+        Print *out_ptr = &Serial;
+        int pos = 0;
+        bool active = false;
+
+        virtual size_t writeExt(const uint8_t* data, size_t len) {   
+            if (!active) return 0;
+            for (int j=0;j<len;j++){
+                out_ptr->print(data[j], HEX);
+                out_ptr->print(" ");
+                pos++;
+                if (pos == 8){
+                    Serial.print(" - ");
+                    pos = 0;
+                }
+                if (pos == 16){
+                    Serial.println();
+                    pos = 0;
+                }
+            }
+            return len;
+        }
+
+        virtual size_t readExt( uint8_t *data, size_t length) { 
+            LOGE("not implemented: %s", __FUNCTION__);
+            return 0;
+        }
 };
 
 /**
@@ -510,6 +565,7 @@ class ExternalBufferStream : public Stream {
         
         virtual size_t write(uint8_t c) {
             LOGE("not implemented: %s", __FUNCTION__);
+            return 0;
         }
 
     protected:

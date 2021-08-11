@@ -11,11 +11,12 @@
 namespace audio_tools {
 
 // forward audio changes
-AudioBaseInfoDependent audioChangeMAD;
+AudioBaseInfoDependent *audioChangeMAD;
 
 /**
  * @brief MP3 Decoder using https://github.com/pschatzmann/arduino-libmad
- * 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 class MP3DecoderMAD : public AudioDecoder  {
     public:
@@ -36,12 +37,12 @@ class MP3DecoderMAD : public AudioDecoder  {
             delete mad;
         }
 
-        void setOutputStream(Print &mad_output_streamput){
-            mad->setOutput(input);
+        void setOutputStream(Print &out){
+            mad->setOutput(out);
         }
 
-        void setInputStream(Stream &input){
-            mad->setInput(input);
+        void setInputStream(Stream &in){
+            mad->setInput(in);
         }
 
         /// Defines the callback which receives the decoded data
@@ -74,8 +75,8 @@ class MP3DecoderMAD : public AudioDecoder  {
             return mad->audioInfo();
         }
 
-        BaseAudioInfo audioInfo(){
-            MadAudioInfo info = audioInfoEx();
+        AudioBaseInfo audioInfo(){
+            libmad::MadAudioInfo info = audioInfoEx();
             AudioBaseInfo base;
             base.channels = info.channels;
             base.sample_rate = info.sample_rate;
@@ -103,20 +104,20 @@ class MP3DecoderMAD : public AudioDecoder  {
         }
 
 		static void audioChangeCallback(libmad::MadAudioInfo &info){
-			if (audioChangeFDK!=nullptr){
+			if (audioChangeMAD!=nullptr){
 				AudioBaseInfo base;
 				base.channels = info.channels;
 				base.sample_rate = info.sample_rate;
 				base.bits_per_sample = info.bits_per_sample;
 				// notify audio change
-				audioChangeFDK->setAudioInfo(base);
+				audioChangeMAD->setAudioInfo(base);
 			}
 		}
 
 		virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi) {
 			audioChangeMAD = &bi;
 			// register audio change handler
-			dec->setInfoCallback(audioChangeCallback);
+			mad->setInfoCallback(audioChangeCallback);
 		}
 
     protected:

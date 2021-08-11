@@ -12,7 +12,8 @@ namespace audio_tools {
 
 /**
  * @brief Audio Information for MP3
- * 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 struct MP3MiniAudioInfo : public AudioBaseInfo {
     MP3MiniAudioInfo() = default;
@@ -32,7 +33,8 @@ typedef void (*MP3DataCallback)(MP3MiniAudioInfo &info,int16_t *pwm_buffer, size
 
 /**
  * @brief MP3 Decoder using https://github.com/lieff/minimp3
- * 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 class MP3DecoderMini : public AudioDecoder  {
     public:
@@ -101,7 +103,7 @@ class MP3DecoderMini : public AudioDecoder  {
         }      
 
         /// Defines the output Stream
-		virtual void setOutputStream(Stream &out_stream){
+		virtual void setOutputStream(Print &out_stream){
             this->out = &out_stream;
 		}
 
