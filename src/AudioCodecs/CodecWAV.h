@@ -397,7 +397,7 @@ class WAVEncoder : public AudioEncoder {
         }
 
         /// Defines the otuput stream
-        void setOutputStream(Stream &out){
+        void setOutputStream(Print &out){
             stream_ptr = &out;
         }
 
@@ -510,7 +510,7 @@ class WAVEncoder : public AudioEncoder {
         }
 
     protected:
-        Stream* stream_ptr;
+        Print* stream_ptr;
         WAVAudioInfo audioInfo = defaultConfig();
         int64_t size_limit;
         bool header_written = false;
@@ -536,11 +536,11 @@ class WAVEncoder : public AudioEncoder {
             write16(*stream_ptr, audioInfo.bits_per_sample);             
         }
 
-        void write32(Stream &stream, uint64_t value ){
+        void write32(Print &stream, uint64_t value ){
             stream.write((uint8_t *) &value, 4);
         }
         
-        void write16(Stream &stream, uint16_t value ){
+        void write16(Print &stream, uint16_t value ){
             stream.write((uint8_t *) &value, 2);
         }
 

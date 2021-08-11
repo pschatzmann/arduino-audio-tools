@@ -15,6 +15,8 @@ AudioBaseInfoDependent *audioChangeMP3Helix=nullptr;
 /**
  * @brief MP3 Decoder using libhelix: https://github.com/pschatzmann/arduino-libhelix
  * This is basically just a simple wrapper to provide AudioBaseInfo and AudioBaseInfoDependent
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 class MP3DecoderHelix : public AudioDecoder  {
     public:
@@ -30,7 +32,8 @@ class MP3DecoderHelix : public AudioDecoder  {
          */
         MP3DecoderHelix(Print &out_stream){
         	LOGD(__FUNCTION__);
-            mp3 = new libhelix::MP3DecoderHelix(out_stream);
+            mp3 = new libhelix::MP3DecoderHelix();
+            setOutputStream(out_stream);
         }  
 
         /**
@@ -42,7 +45,8 @@ class MP3DecoderHelix : public AudioDecoder  {
          */
         MP3DecoderHelix(Print &out_stream, AudioBaseInfoDependent &bi){
         	LOGD(__FUNCTION__);
-            mp3 = new libhelix::MP3DecoderHelix(out_stream);
+            mp3 = new libhelix::MP3DecoderHelix();
+            setOutputStream(out_stream);
             setNotifyAudioChange(bi);
         }  
 
@@ -55,8 +59,8 @@ class MP3DecoderHelix : public AudioDecoder  {
         }
 
         /// Defines the output Stream
-		virtual void setOutputStream(Stream &outStream){
-            mp3->setStream(outStream);
+		virtual void setOutputStream(Print &outStream){
+            mp3->setOutput(outStream);
 		}
 
         /// Starts the processing
@@ -66,58 +70,57 @@ class MP3DecoderHelix : public AudioDecoder  {
         }
 
         /// Releases the reserved memory
-        virtual void end(){
+        void end(){
         	LOGD(__FUNCTION__);
             mp3->end();
         }
 
-        virtual libhelix::MP3FrameInfo audioInfoEx(){
+        MP3FrameInfo audioInfoEx(){
             return mp3->audioInfo();
         }
 
-        virtual AudioBaseInfo audioInfo(){
-            libhelix::MP3FrameInfo i = audioInfoEx();
+        AudioBaseInfo audioInfo(){
+            MP3FrameInfo i = audioInfoEx();
             AudioBaseInfo baseInfo;
-            baseInfo.channels = i.channels;
-            baseInfo.sample_rate = i.sample_rate;
-            baseInfo.bits_per_sample = i.bits_per_sample;
+            baseInfo.channels = i.nChans;
+            baseInfo.sample_rate = i.samprate;
+            baseInfo.bits_per_sample = i.bitsPerSample;
             return baseInfo;
         }
 
         /// Write mp3 data to decoder
         size_t write(const void* mp3Data, size_t len) {
-            mp3->write(mp3Data, len);
+            return mp3->write(mp3Data, len);
         }
 
         /// checks if the class is active 
-        virtual operator boolean(){
+        operator boolean(){
             return (bool) *mp3;
         }
 
-        libhelix::MP3DecoderHelix driver() {
+        libhelix::MP3DecoderHelix *driver() {
             return mp3;
         }
 
-        void flush(){
-            mp3->flush();
-        }
+        // void flush(){
+        //     mp3->flush();
+        // }
 
         /// Defines the callback object to which the Audio information change is provided
-        virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi){
+        void setNotifyAudioChange(AudioBaseInfoDependent &bi){
         	LOGD(__FUNCTION__);
             audioChangeMP3Helix = &bi;
-            setNotifyAudioChange(infoCallback);
         }
 
         /// notifies the subscriber about a change
-        static void infoCallback(libhelix::MP3FrameInfo &i){
-            if (audioChangeAACHelix!=nullptr){
+        void infoCallback(MP3FrameInfo &i){
+            if (audioChangeMP3Helix!=nullptr){
             	LOGD(__FUNCTION__);
                 AudioBaseInfo baseInfo;
-                baseInfo.channels = i.channels;
-                baseInfo.sample_rate = i.sample_rate;
-                baseInfo.bits_per_sample = i.bits_per_sample;
-                audioChangeAACHelix->setAudioInfo(baseInfo);   
+                baseInfo.channels = i.nChans;
+                baseInfo.sample_rate = i.samprate;
+                baseInfo.bits_per_sample = i.bitsPerSample;
+                audioChangeMP3Helix->setAudioInfo(baseInfo);   
             }
         }
 

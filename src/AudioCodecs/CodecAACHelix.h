@@ -14,6 +14,8 @@ AudioBaseInfoDependent *audioChangeAACHelix=nullptr;
 /**
  * @brief AAC Decoder using libhelix: https://github.com/pschatzmann/arduino-libhelix
  * This is basically just a simple wrapper to provide AudioBaseInfo and AudioBaseInfoDependent
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 class AACDecoderHelix : public AudioDecoder  {
     public:
@@ -55,9 +57,9 @@ class AACDecoderHelix : public AudioDecoder  {
         }
 
         /// Defines the output Stream
-		virtual void setOutputStream(Stream &out_stream){
+		virtual void setOutputStream(Print &out_stream){
         	LOGD(__FUNCTION__);
-            aac->setStream(out_stream);
+            aac->setOutput(out_stream);
 		}
 
         /// Starts the processing
@@ -72,22 +74,22 @@ class AACDecoderHelix : public AudioDecoder  {
             aac->end();
         }
 
-        virtual libhelix::_AACFrameInfo audioInfoEx(){
+        virtual _AACFrameInfo audioInfoEx(){
             return aac->audioInfo();
         }
 
         virtual AudioBaseInfo audioInfo(){
         	AudioBaseInfo result;
 			auto i = audioInfoEx();
-			result.channels = i.channels;
-			result.sample_rate = i.sample_rate;
-			result.bits_per_sample = i.bits_per_sample;
+			result.channels = i.nChans;
+			result.sample_rate = i.sampRateOut;
+			result.bits_per_sample = i.bitsPerSample;
 			return result;
         }
 
         /// Write AAC data to decoder
         size_t write(const void* aac_data, size_t len) {
-            aac->write(aac_data, len);
+            return aac->write(aac_data, len);
         }
 
         /// checks if the class is active 
@@ -96,24 +98,23 @@ class AACDecoderHelix : public AudioDecoder  {
         }
 
         void flush(){
-            aac->flush();
+        //     aac->flush();
         }
 
         /// Defines the callback object to which the Audio information change is provided
         virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi){
         	LOGD(__FUNCTION__);
             audioChangeAACHelix = &bi;
-            setNotifyAudioChange(infoCallback);
         }
 
         /// notifies the subscriber about a change
-        static void infoCallback(libhelix::_AACFrameInfo &i){
+        static void infoCallback(_AACFrameInfo &i){
             if (audioChangeAACHelix!=nullptr){
             	LOGD(__FUNCTION__);
                 AudioBaseInfo baseInfo;
-                baseInfo.channels = i.channels;
-                baseInfo.sample_rate = i.sample_rate;
-                baseInfo.bits_per_sample = i.bits_per_sample;
+                baseInfo.channels = i.nChans;
+                baseInfo.sample_rate = i.sampRateOut;
+                baseInfo.bits_per_sample = i.bitsPerSample;
                 audioChangeAACHelix->setAudioInfo(baseInfo);   
             }
         }

@@ -13,6 +13,8 @@ AudioBaseInfoDependent *audioChangeFDK = nullptr;
  * @brief Audio Decoder which decodes AAC into a PCM stream
  * This is basically just a wrapper using https://github.com/pschatzmann/arduino-fdk-aac
  * which uses AudioBaseInfo and provides the handlig of AudioBaseInfo changes.
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 class AACDecoderFDK : public AudioDecoder  {
     public:
@@ -114,6 +116,8 @@ class AACDecoderFDK : public AudioDecoder  {
 /**
  * @brief Encodes PCM data to the AAC format and writes the result to a stream
  * This is basically just a wrapper using https://github.com/pschatzmann/arduino-fdk-aac
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 class AACEncoderFDK : public AudioEncoder {
 

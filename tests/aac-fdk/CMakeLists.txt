@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.20)
 
 # set the project name
-project(aac-helix)
+project(aac-fdk)
 set (CMAKE_CXX_STANDARD 11)
 set (DCMAKE_CXX_FLAGS "-Werror")
 set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
@@ -17,14 +17,14 @@ if(NOT helix_POPULATED)
 endif()
 
 # build sketch as executable
-add_executable (aac-helix aac-helix.cpp)
+add_executable (aac-fdk aac-fdk.cpp)
 
 # use main() from arduino_emulator
-target_compile_definitions(aac-helix PUBLIC -DARDUINO -DEXIT_ON_STOP)
+target_compile_definitions(aac-fdk PUBLIC -DARDUINO -DEXIT_ON_STOP)
 
 # OS/X might need this setting for core audio
 #target_compile_definitions(portaudio PUBLIC -DPA_USE_COREAUDIO=1)
 
 # specify libraries
-target_link_libraries(aac-helix portaudio_static arduino_emulator arduino_helix arduino-audio-tools)
+target_link_libraries(aac-fdk portaudio_static arduino_emulator arduino_helix arduino-audio-tools)
 

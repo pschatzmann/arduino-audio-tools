@@ -30,4 +30,7 @@ endif()
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/mp3-mini ${CMAKE_CURRENT_BINARY_DIR}/mp3)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/mp3-helix ${CMAKE_CURRENT_BINARY_DIR}/mp3-helix)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/aac-helix ${CMAKE_CURRENT_BINARY_DIR}/aac-helix)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/aac-fdk ${CMAKE_CURRENT_BINARY_DIR}/aac-fdk)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/mp3-mad ${CMAKE_CURRENT_BINARY_DIR}/mp3-mad)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/mp3-lame ${CMAKE_CURRENT_BINARY_DIR}/mp3-lame)
 
