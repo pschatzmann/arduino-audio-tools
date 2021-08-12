@@ -438,7 +438,7 @@ class WAVEncoder : public AudioEncoder {
                 audioInfo.data_length = ~0;
             } else {
                 size_limit = audioInfo.data_length;
-                LOGI("size_limit is %zu", size_limit);
+                LOGI("size_limit is %d", (int) size_limit);
             }
 
         };

@@ -404,6 +404,11 @@ class HexDumpStream : public BufferedStream {
             active = false;
         }
 
+        void flush(){
+            Serial.println();
+            pos = 0;
+        }
+
 
     protected:
         Print *out_ptr = &Serial;
@@ -418,7 +423,6 @@ class HexDumpStream : public BufferedStream {
                 pos++;
                 if (pos == 8){
                     Serial.print(" - ");
-                    pos = 0;
                 }
                 if (pos == 16){
                     Serial.println();

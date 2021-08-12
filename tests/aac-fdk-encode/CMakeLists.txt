@@ -1,13 +1,14 @@
 cmake_minimum_required(VERSION 3.20)
 
 # set the project name
-project(aac-fdk)
+project(aac-fdk-encode)
 set (CMAKE_CXX_STANDARD 11)
 set (DCMAKE_CXX_FLAGS "-Werror")
 if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
     set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
     set (CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
 endif()
+
 include(FetchContent)
 
 # Build with arduino-fdk-aac
@@ -19,14 +20,10 @@ if(NOT fdk_aac_POPULATED)
 endif()
 
 # build sketch as executable
-add_executable (aac-fdk aac-fdk.cpp)
-
+add_executable (aac-fdk-encode aac-fdk-encode.cpp)
 # use main() from arduino_emulator
-target_compile_definitions(aac-fdk PUBLIC -DARDUINO -DEXIT_ON_STOP)
-
-# OS/X might need this setting for core audio
-#target_compile_definitions(portaudio PUBLIC -DPA_USE_COREAUDIO=1)
+target_compile_definitions(aac-fdk-encode PUBLIC -DARDUINO -DEXIT_ON_STOP)
 
 # specify libraries
-target_link_libraries(aac-fdk portaudio arduino_emulator fdk_aac arduino-audio-tools)
+target_link_libraries(aac-fdk-encode arduino_emulator fdk_aac arduino-audio-tools)
 

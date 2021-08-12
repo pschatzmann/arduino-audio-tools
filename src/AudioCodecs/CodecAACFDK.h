@@ -33,8 +33,8 @@ class AACDecoderFDK : public AudioDecoder  {
         }
 
 		/// Defines the output stream
-		void setOutputStream(Stream &out_stream){
-			dec->setStream(out_stream);
+		void setOutputStream(Print &out_stream){
+			dec->setOutput(out_stream);
 		}
 
         void begin(){
@@ -63,14 +63,14 @@ class AACDecoderFDK : public AudioDecoder  {
         }
 
         // provides detailed information about the stream
-        CStreamInfo &audioInfoEx(){
+        CStreamInfo audioInfoEx(){
             return dec->audioInfo();
         }
 
 		// provides common information
-		AudioBaseInfo &audioInfo() {
+		AudioBaseInfo audioInfo() {
 			AudioBaseInfo result;
-			CStreamInfo& i = audioInfoEx();
+			CStreamInfo i = audioInfoEx();
 			result.channels = i.numChannels;
 			result.sample_rate = i.sampleRate;
 			result.bits_per_sample = 16;
@@ -94,9 +94,9 @@ class AACDecoderFDK : public AudioDecoder  {
 		static void audioChangeCallback(CStreamInfo &info){
 			if (audioChangeFDK!=nullptr){
 				AudioBaseInfo base;
-				base.channels = info.channels;
-				base.sample_rate = info.sample_rate;
-				base.bits_per_sample = info.bits_per_sample;
+				base.channels = info.numChannels;
+				base.sample_rate = info.sampleRate;
+				base.bits_per_sample = 16;
 				// notify audio change
 				audioChangeFDK->setAudioInfo(base);
 			}
@@ -122,12 +122,22 @@ class AACDecoderFDK : public AudioDecoder  {
 class AACEncoderFDK : public AudioEncoder {
 
 public:
-	AACEncoderFDK(Stream &out_stream){
-		enc = new aac_fdk::AACEncoderFDK(out_stream);
+
+	AACEncoderFDK(){
+		enc = new aac_fdk::AACEncoderFDK();
+	}
+
+	AACEncoderFDK(Print &out_stream){
+		enc = new aac_fdk::AACEncoderFDK();
+		enc->setOutput(out_stream);
 	}
 
 	 ~AACEncoderFDK(){
 		 delete enc;
+	 }
+
+	 void setOutputStream(Print &out_stream){
+		 enc->setOutput(out_stream);
 	 }
 
 	/*!< Total encoder bitrate. This parameter is	
@@ -260,9 +270,9 @@ public:
 	}
 	
 	// convert PCM data to AAC
-	int32_t write(void *in_ptr, int in_size){
-		LOGD("write %d bytes", in_size);
-		enc->write(in_ptr, in_size);
+	size_t write(const void *in_ptr, size_t in_size){
+		LOGD("write %d bytes", (int)in_size);
+		return enc->write((uint8_t*)in_ptr, in_size);
 	}
 
 	// release resources
@@ -285,6 +295,10 @@ public:
 
 	const char *mime() {
 		return "audio/aac";
+	}
+
+	operator boolean(){
+		return (bool) *enc;
 	}
 
 

@@ -4,8 +4,10 @@ cmake_minimum_required(VERSION 3.20)
 project(tests)
 set (CMAKE_CXX_STANDARD 11)
 set (DCMAKE_CXX_FLAGS "-Werror" )
-set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
-set (CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
+if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
+    set (CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
+endif()
 
 
 include(FetchContent)
@@ -27,10 +29,12 @@ if(NOT arduino_emulator_POPULATED)
 endif()
 
 
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/mp3-mini ${CMAKE_CURRENT_BINARY_DIR}/mp3)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/mp3-mini ${CMAKE_CURRENT_BINARY_DIR}/mp3-mini)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/mp3-helix ${CMAKE_CURRENT_BINARY_DIR}/mp3-helix)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/aac-helix ${CMAKE_CURRENT_BINARY_DIR}/aac-helix)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/aac-fdk ${CMAKE_CURRENT_BINARY_DIR}/aac-fdk)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/mp3-mad ${CMAKE_CURRENT_BINARY_DIR}/mp3-mad)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/aac-fdk-encode ${CMAKE_CURRENT_BINARY_DIR}/aac-fdk-encode)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/mp3-lame ${CMAKE_CURRENT_BINARY_DIR}/mp3-lame)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/mp3-mad_cb ${CMAKE_CURRENT_BINARY_DIR}/mp3-mad_cb)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/mp3-mad ${CMAKE_CURRENT_BINARY_DIR}/mp3-mad)
 
