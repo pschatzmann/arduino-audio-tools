@@ -1,13 +1,13 @@
 #include "Arduino.h"
 #include "AudioTools.h"
-#include "AudioCodecs/CodecAACHelix.h"
+#include "AudioCodecs/CodecAACFDK.h"
 #include "audio.h"
 
 using namespace audio_tools;  
 
 MemoryStream aac(gs_16b_2c_44100hz_aac, gs_16b_2c_44100hz_aac_len);
 PortAudioStream portaudio_stream;   // Output of sound on desktop 
-EncodedAudioStream dec(portaudio_stream, new AACDecoderHelix()); // aac data source
+EncodedAudioStream dec(portaudio_stream, new AACDecoderFDK(1024)); // aac data source
 StreamCopy copier(dec, aac); // copy in to out
 
 void setup(){

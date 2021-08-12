@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.20)
 
 # set the project name
-project(mp3-mad)
+project(mp3-mad_cb)
+
 set (CMAKE_CXX_STANDARD 11)
 set (DCMAKE_CXX_FLAGS "-Werror")
 if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
@@ -20,10 +21,10 @@ if(NOT arduino_libmad_POPULATED)
 endif()
 
 # build sketch as executable
-add_executable (mp3-mad mp3-mad.cpp)
+add_executable (mp3-mad_cb mp3-mad_cb.cpp)
 # use main() from arduino_emulator
-target_compile_definitions(mp3-mad PUBLIC -DARDUINO -DEXIT_ON_STOP)
+target_compile_definitions(mp3-mad_cb PUBLIC -DARDUINO -DEXIT_ON_STOP)
 
 # specify libraries
-target_link_libraries(mp3-mad portaudio arduino_emulator arduino_libmad arduino-audio-tools)
+target_link_libraries(mp3-mad_cb portaudio arduino_emulator arduino_libmad arduino-audio-tools)
 

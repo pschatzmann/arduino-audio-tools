@@ -110,10 +110,11 @@ class MP3DecoderHelix : public AudioDecoder  {
         void setNotifyAudioChange(AudioBaseInfoDependent &bi){
         	LOGD(__FUNCTION__);
             audioChangeMP3Helix = &bi;
+            mp3->setInfoCallback(infoCallback);
         }
 
         /// notifies the subscriber about a change
-        void infoCallback(MP3FrameInfo &i){
+        static void infoCallback(MP3FrameInfo &i){
             if (audioChangeMP3Helix!=nullptr){
             	LOGD(__FUNCTION__);
                 AudioBaseInfo baseInfo;

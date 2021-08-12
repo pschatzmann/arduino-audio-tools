@@ -105,6 +105,7 @@ class AACDecoderHelix : public AudioDecoder  {
         virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi){
         	LOGD(__FUNCTION__);
             audioChangeAACHelix = &bi;
+            aac->setInfoCallback(infoCallback);
         }
 
         /// notifies the subscriber about a change
