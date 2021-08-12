@@ -6,7 +6,7 @@ Some basic __header-only C++ classes__ that can be used for __Audio Processing__
 - a simple ADC class (to read analog data with the help of I2S) 
 - a simple PWM class (to write audio data with the help of PWM) 
 - Additional Stream implementations: MemoryStream, URLStream, I2SStream, A2DPStream, PrintStream etc
-- Support for different Encoders and Decoders for AAC, MP3 and WAV 
+- Support for different [Encoders](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_audio_encoder.html) and [Decoders](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_audio_decoder.html) for AAC, MP3 and WAV 
 - Converters
 - Musical Notes (with frequencies of notes)
 - SineWaveGenerator (to generate a sine tone) and [Mozzi](https://sensorium.github.io/Mozzi/) for more complex scenario 
