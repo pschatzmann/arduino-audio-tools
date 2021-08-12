@@ -18,12 +18,12 @@ AudioBaseInfoDependent *audioChangeFDK = nullptr;
  */
 class AACDecoderFDK : public AudioDecoder  {
     public:
-        AACDecoderFDK(int output_buffer_size=2048){
+        AACDecoderFDK(){
         	LOGD(__FUNCTION__);
-			dec = new aac_fdk::AACDecoderFDK(output_buffer_size);
+			dec = new aac_fdk::AACDecoderFDK();
 		}
 
-        AACDecoderFDK(Stream &out_stream, int output_buffer_size=2048){
+        AACDecoderFDK(Print &out_stream, int output_buffer_size=2048){
         	LOGD(__FUNCTION__);
 			dec = new aac_fdk::AACDecoderFDK(out_stream, output_buffer_size);
         }
