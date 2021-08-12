@@ -5,14 +5,13 @@ Some basic __header-only C++ classes__ that can be used for __Audio Processing__
 - a simple I2S class (to read and write to the internal I2S) 
 - a simple ADC class (to read analog data with the help of I2S) 
 - a simple PWM class (to write audio data with the help of PWM) 
-- Additional Stream implementations: MemoryStream, URLStream, I2SStream, A2DPStream, PrintStream, 
+- Additional Stream implementations: MemoryStream, URLStream, I2SStream, A2DPStream, PrintStream etc
+- Support for different Encoders and Decoders for AAC, MP3 and WAV 
 - Converters
 - Musical Notes (with frequencies of notes)
 - SineWaveGenerator (to generate a sine tone) and [Mozzi](https://sensorium.github.io/Mozzi/) for more complex scenario 
-- NBuffer (Multi buffer for writing and reading of (audio) data)
+- Different buffer implementations 
 - TimerAlarmRepeating (e.g. for sampling audio data using exact times) [ESP32 only]
-- A Wav Encoder and Decoder
-- A MP3 Decoder
 - AudioOutputWithCallback class to provide callback integration e.g. with ESP8266Audio
 - Desktop Integration: Building of Arduino Audio Sketches to be run on [Linux, Windows and OS/X](https://github.com/pschatzmann/arduino-audio-tools/wiki/Running-an-Audio-Sketch-on-the-Desktop)
 
@@ -104,6 +103,7 @@ Dependent on the example you might need to install some of the following librari
 - [arduino-libhelix](https://github.com/pschatzmann/arduino-libhelix) A __MP3 and AAC Decoder__ from Realnetworks
 - [arduino-fdk-aac](https://github.com/pschatzmann/arduino-fdk-aac) A __AAC Encoder and Decoder__ from the Frauenhofer Institute
 - [arduino-libmad](https://github.com/pschatzmann/arduino-libmad) A open source __MP3 Decoder__ from Underbit
+- [arduino-liblame](https://github.com/pschatzmann/arduino-liblame) A open source __MP3 Encoder__ 
 - [SD Library](https://www.arduino.cc/en/reference/SD) to read and write files.
 - [Mozzi](https://github.com/pschatzmann/Mozzi) A sound synthesis library for Arduino
 - [SAM](https://github.com/pschatzmann/arduino-SAM) A Text to Speach Engine
