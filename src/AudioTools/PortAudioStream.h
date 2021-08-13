@@ -139,14 +139,15 @@ class PortAudioStream : public BufferedStream,  public AudioBaseInfoDependent {
                 int frames = len / bytes / info.channels;
                 err = Pa_WriteStream( stream, data, frames);
                 if( err == paNoError ) {
+                    LOGD("Pa_WriteStream: %zu", len);
                     result = len;
                 } else {
-                    LOGE(  "PortAudio error: %s\n", Pa_GetErrorText( err ) );
+                    LOGE("PortAudio error: %s", Pa_GetErrorText( err ) );
                 }
             } else {
                 LOGW("stream is null")
             }
-            return len;
+            return result;
         }
 
         virtual size_t readExt( uint8_t *data, size_t len) { 
