@@ -6,6 +6,7 @@
 #include "I2S_ESP32.h"
 #include "I2S_ESP8266.h"
 #include "I2S_SAMD.h"
+#include "I2S_NanoSenseBLE.h"
 
 namespace audio_tools {
 
