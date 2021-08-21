@@ -494,7 +494,7 @@ class WAVEncoder : public AudioEncoder {
 
                 if (size_limit<=0){
                     LOGI("The defined size was written - so we close the WAVEncoder now");
-                    stream_ptr->flush();
+                    //stream_ptr->flush();
                     is_open = false;
                 }
             }  
