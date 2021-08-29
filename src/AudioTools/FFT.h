@@ -5,9 +5,12 @@
  * @copyright GPLv3
  */
 
+#pragma once
 #include <complex>
 #include <iostream>
 #include <valarray>
+
+namespace audio_tools {
 
 /**
  * @brief Template Array of complex numbers
@@ -17,7 +20,7 @@
 template <class T> using FFTArray = std::valarray<std::complex<T>>;
 
 /**
- * @brief Cooley–Tukey FFT which allows the speicification of the numeric data
+ * @brief Cooley–Tukey FFT which allows the specification of the numeric data type NT
  * type
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -146,3 +149,5 @@ public:
     }
   }
 };
+
+}
