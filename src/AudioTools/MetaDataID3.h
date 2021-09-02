@@ -407,8 +407,8 @@ class MetaDataID3V2 : public MetaDataID3Base  {
             if (partial_tag!=nullptr){
                 int tag_pos = findTag(partial_tag, (const char*)  data, len);
                 memmove(&frame_header, data+tag_pos, sizeof(ID3v2Frame));
-                int size = min(len - tag_pos, calcSize(frame_header.size)); 
-                strncpy((char*)result, (char*)data+tag_pos+sizeof(ID3v2Frame), size);
+                int size = min(len - tag_pos, calcSize(frame_header.size)-1); 
+                strncpy((char*)result, (char*)data+tag_pos+sizeof(ID3v2Frame)+1, size);
                 use_bytes_of_next_write = size;
                 status = PartialTagAtTail;
             }
