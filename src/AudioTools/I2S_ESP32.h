@@ -24,7 +24,7 @@ class I2SBase {
 
     /// starts the DAC with the default config
     void begin(RxTxMode mode = TX_MODE) {
-      begin(defaultConfig(mode));
+        begin(defaultConfig(mode));
     }
 
 
