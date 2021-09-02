@@ -308,8 +308,11 @@ struct ID3v2ExtendedHeader {
 /// ID3 verion 2 Tag
 struct ID3v2Frame {
     uint8_t id[4]; 
-    uint32_t size;
+    uint32_t size_encoded;
     uint16_t flags;
+    uint32_t size() {
+        return (size_encoded & 127) + 128 * ((size_encoded >> 8) & 127) + 16384 * ((size_encoded >>16) & 127) + 2097152 * ((size_encoded >> 24) & 127);
+    }
 }; 
 
 /**
@@ -404,8 +407,8 @@ class MetaDataID3V2 : public MetaDataID3Base  {
                     memmove(&frame_header, data+tag_pos, sizeof(ID3v2Frame));
 
                     // get tag content
-                    if(tag_pos + frame_header.size() <= len){
-                        strncpy((char*)result, (char*) data+tag_pos+sizeof(ID3v2Frame), frame_header.size);
+                    if(frame_header.size() <= len){
+                        strncpy((char*)result, (char*) data+tag_pos+sizeof(ID3v2Frame), frame_header.size());
                         processNotify();
                     } else {
                         partial_tag = tag;
@@ -417,7 +420,7 @@ class MetaDataID3V2 : public MetaDataID3Base  {
             if (partial_tag!=nullptr){
                 int tag_pos = findTag(partial_tag, (const char*)  data, len);
                 memmove(&frame_header, data+tag_pos, sizeof(ID3v2Frame));
-                int size = min(len - tag_pos,frame_header.size); 
+                int size = min(len - tag_pos,frame_header.size()); 
                 strncpy((char*)result, (char*)data+tag_pos+sizeof(ID3v2Frame), size);
                 use_bytes_of_next_write = size;
                 status = PartialTagAtTail;
@@ -430,7 +433,7 @@ class MetaDataID3V2 : public MetaDataID3Base  {
 
     /// We have the beginning of the metadata and need to process the remainder
     void processPartialTagAtTail(const uint8_t* data, size_t len) {
-        int remainder = frame_header.size - use_bytes_of_next_write;
+        int remainder = frame_header.size() - use_bytes_of_next_write;
         memcpy(result+use_bytes_of_next_write, data, remainder);
         processNotify();    
 
