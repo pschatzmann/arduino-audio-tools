@@ -45,6 +45,11 @@ const char *genres[] = { "Classic Rock", "Country", "Dance", "Disco", "Funk", "G
 /// current status of the parsing
 enum ParseStatus { TagNotFound, PartialTagAtTail, TagFoundPartial, TagFoundComplete, TagProcessed};
 
+/// Type of meta info
+enum MetaInfo { Title, Artist, Album, Genre};
+
+/// Test Description for meta info
+const char* MetaInfoStr[] = {"Title", "Artis", "Album", "Genre"};
 
 /**
  * @brief ID3 Meta Data Common Functionality
@@ -57,31 +62,13 @@ class MetaDataID3Base {
 
     MetaDataID3Base() = default;
 
-    void setTitleCallback(void (*fn)(const char* str, int len)) {
-        titleCB = fn;
-        armed = true;
-    }
-
-    void setArtistCallback(void (*fn)(const char* str, int len)) {
-        artistCB = fn;
-        armed = true;
-    }
-
-    void setAlbumCallback(void (*fn)(const char* str, int len)) {
-        albumCB = fn;
-        armed = true;
-    }
-
-    void setGenreCallback(void (*fn)(const char* str, int len)) {
-        genreCB = fn;
+    void setCallback(void (*fn)(MetaInfo info, const char* str, int len)) {
+        callback = fn;
         armed = true;
     }
 
   protected:
-    void (*titleCB)(const char* title, int len);
-    void (*artistCB)(const char* artist, int len);
-    void (*albumCB)(const char* album, int len);
-    void (*genreCB)(const char* genre, int len);
+    void (*callback)(MetaInfo info, const char* title, int len);
     bool armed = false;
 
     /// find the tag position in the string - if not found we return -1;
@@ -242,32 +229,26 @@ class MetaDataID3V1  : public MetaDataID3Base {
 
     /// executes the callbacks
     void processNotify() {
+        if (callback==nullptr) return;
+
         if (tag_ext!=nullptr){
-            if (titleCB!=nullptr)
-                titleCB(tag_ext->title,strnlen(tag_ext->title,60));
-            if (artistCB!=nullptr)
-                artistCB(tag_ext->artist,strnlen(tag_ext->artist,60));
-            if (albumCB!=nullptr)
-                albumCB(tag_ext->album,strnlen(tag_ext->album,60));
-            if (genreCB!=nullptr)
-                genreCB(tag_ext->genre,strnlen(tag_ext->genre,30));
+            callback(Title, tag_ext->title,strnlen(tag_ext->title,60));
+            callback(Artist, tag_ext->artist,strnlen(tag_ext->artist,60));
+            callback(Album, tag_ext->album,strnlen(tag_ext->album,60));
+            callback(Genre, tag_ext->genre,strnlen(tag_ext->genre,30));
             delete tag_ext;
             tag_ext = nullptr;
             status = TagProcessed;
         }
 
         if (tag!=nullptr){
-            if (titleCB!=nullptr)
-                titleCB(tag->title,strnlen(tag->title,30));
-            if (artistCB!=nullptr)
-                artistCB(tag->artist,strnlen(tag->artist,30));
-            if (albumCB!=nullptr)
-                albumCB(tag->album,strnlen(tag->album,30));
-        
+            callback(Title, tag->title,strnlen(tag->title,30));
+            callback(Artist, tag->artist,strnlen(tag->artist,30));
+            callback(Album, tag->album,strnlen(tag->album,30));        
             int genre = tag->genre;
-            if (genreCB!=nullptr &&  genre < sizeof(genres)){
+            if (genre < sizeof(genres)){
                 const char* genre_str = genres[genre];
-                genreCB(genre_str,strlen(genre_str));
+                callback(Genre, genre_str,strlen(genre_str));
             }
             delete tag;
             tag = nullptr;
@@ -286,33 +267,38 @@ class MetaDataID3V1  : public MetaDataID3Base {
 /// Relevant v2 Tags        
 const char* id3_v2_tags[] = {"TALB", "TOPE", "TIT2", "TCON"};
 
+// calculate the synch save size
+static uint32_t calcSize(uint8_t chars[4]) {
+    uint32_t byte0 = chars[0];
+    uint32_t byte1 = chars[1];
+    uint32_t byte2 = chars[2];
+    uint32_t byte3 = chars[3];
+    return byte0 << 21 | byte1 << 14 | byte2 << 7 | byte3;
+}
+
+
 /// ID3 verion 2 TAG Header (10 bytes)
 struct ID3v2 {
     uint8_t header[3]; // ID3
     uint8_t version[2];
     uint8_t flags;
-    uint32_t size_encoded;
-    uint32_t size() {
-        return (size_encoded & 127) + 128 * ((size_encoded >> 8) & 127) + 16384 * ((size_encoded >>16) & 127) + 2097152 * ((size_encoded >> 24) & 127);
-    }
+    uint8_t size[4];
 
 };
 
 /// ID3 verion 2 Extended Header 
 struct ID3v2ExtendedHeader {
-    uint32_t size;
+    uint8_t size[4];
     uint16_t flags;
     uint32_t padding_size;
 }; 
 
+
 /// ID3 verion 2 Tag
 struct ID3v2Frame {
     uint8_t id[4]; 
-    uint32_t size_encoded;
+    uint8_t size[4];
     uint16_t flags;
-    uint32_t size() {
-        return (size_encoded & 127) + 128 * ((size_encoded >> 8) & 127) + 16384 * ((size_encoded >>16) & 127) + 2097152 * ((size_encoded >> 24) & 127);
-    }
 }; 
 
 /**
@@ -378,13 +364,13 @@ class MetaDataID3V2 : public MetaDataID3Base  {
         // activate tag processing when we have an ID3 Tag
         if (!tag_active){
             int pos = findTag("ID3", (const char*) data, len);
-            if (pos>0){
+            if (pos>=0){
                 // fill v2 tag header
                 tag_active = true;  
                 // if we have enough data for the header we process it
                 if (len>=pos+sizeof(ID3v2)){
                     memcpy(&tagv2, data+pos, sizeof(ID3v2));   
-                    end_len = total_len + tagv2.size();
+                    end_len = total_len + calcSize(tagv2.size);
                 }
             }
         }
@@ -407,8 +393,9 @@ class MetaDataID3V2 : public MetaDataID3Base  {
                     memmove(&frame_header, data+tag_pos, sizeof(ID3v2Frame));
 
                     // get tag content
-                    if(frame_header.size() <= len){
-                        strncpy((char*)result, (char*) data+tag_pos+sizeof(ID3v2Frame), frame_header.size());
+                    if(calcSize(frame_header.size) <= len){
+                        int l = min(calcSize(frame_header.size)-1, 256);
+                        strncpy((char*)result, (char*) data+tag_pos+sizeof(ID3v2Frame)+1, l);
                         processNotify();
                     } else {
                         partial_tag = tag;
@@ -420,7 +407,7 @@ class MetaDataID3V2 : public MetaDataID3Base  {
             if (partial_tag!=nullptr){
                 int tag_pos = findTag(partial_tag, (const char*)  data, len);
                 memmove(&frame_header, data+tag_pos, sizeof(ID3v2Frame));
-                int size = min(len - tag_pos,frame_header.size()); 
+                int size = min(len - tag_pos, calcSize(frame_header.size)); 
                 strncpy((char*)result, (char*)data+tag_pos+sizeof(ID3v2Frame), size);
                 use_bytes_of_next_write = size;
                 status = PartialTagAtTail;
@@ -433,7 +420,7 @@ class MetaDataID3V2 : public MetaDataID3Base  {
 
     /// We have the beginning of the metadata and need to process the remainder
     void processPartialTagAtTail(const uint8_t* data, size_t len) {
-        int remainder = frame_header.size() - use_bytes_of_next_write;
+        int remainder = calcSize(frame_header.size) - use_bytes_of_next_write;
         memcpy(result+use_bytes_of_next_write, data, remainder);
         processNotify();    
 
@@ -443,15 +430,15 @@ class MetaDataID3V2 : public MetaDataID3Base  {
 
     /// executes the callbacks
     void processNotify() {
-        if (actual_tag!=nullptr){
-            if (strcmp(actual_tag,"TALB")==0)
-                titleCB(actual_tag,strnlen(actual_tag, 256));
+        if (callback!=nullptr && actual_tag!=nullptr){
+            if (strncmp(actual_tag,"TALB",4)==0)
+                callback(Title, result,strnlen(result, 256));
             else if (strncmp(actual_tag,"TOPE",4)==0)
-                artistCB(actual_tag,strnlen(actual_tag, 256));
+                callback(Artist, result,strnlen(result, 256));
             else if (strncmp(actual_tag,"TIT2",4)==0)
-                albumCB(actual_tag,strnlen(actual_tag, 256));
+                callback(Album, result,strnlen(result, 256));
             else if (strncmp(actual_tag,"TCON",4)==0)
-                genreCB(actual_tag,strnlen(actual_tag, 256));
+                callback(Genre, result,strnlen(result, 256));
         }
     }
 
@@ -475,24 +462,9 @@ class MetaDataID3 : public BufferedStream {
         end();
     }
 
-    void setTitleCallback(void (*fn)(const char* str, int len)) {
-        id3v1.setTitleCallback(fn);        
-        id3v2.setTitleCallback(fn);        
-    }
-
-    void setArtistCallback(void (*fn)(const char* str, int len)) {
-        id3v1.setArtistCallback(fn);        
-        id3v2.setArtistCallback(fn);        
-    }
-
-    void setAlbumCallback(void (*fn)(const char* str, int len)) {
-        id3v1.setAlbumCallback(fn);        
-        id3v2.setAlbumCallback(fn);        
-    }
-
-    void setGenreCallback(void (*fn)(const char* str, int len)) {
-        id3v1.setGenreCallback(fn);        
-        id3v2.setGenreCallback(fn);        
+    void setCallback(void (*fn)(MetaInfo info, const char* str, int len)) {
+        id3v1.setCallback(fn);        
+        id3v2.setCallback(fn);        
     }
 
     void begin() {

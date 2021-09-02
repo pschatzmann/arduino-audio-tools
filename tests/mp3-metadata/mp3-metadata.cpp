@@ -11,9 +11,11 @@ StreamCopy copier(out, mp3); // copy in to out
 bool title_printed = false;
 
 
-void printTitle(const char* title, int len){
-  Serial.print("==> Title: ");
-  Serial.println(title);
+void printMetaData(MetaInfo type, const char* str, int len){
+  Serial.print("==> ");
+  Serial.print(MetaInfoStr[type]);
+  Serial.print(": ");
+  Serial.println(str);
   title_printed = true;
 }
 
@@ -21,7 +23,7 @@ void setup(){
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);  
 
-  out.setTitleCallback(printTitle);
+  out.setCallback(printMetaData);
   out.begin();
   mp3.begin();
 }
