@@ -11,6 +11,18 @@
 
 namespace audio_tools {
 
+/// String array with genres
+const char *genres[] = { "Classic Rock", "Country", "Dance", "Disco", "Funk", "Grunge", "Hip-Hop", "Jazz", "Metal", "New Age", "Oldies", "Other", "Pop", "R&B", "Rap", "Reggae", "Rock", "Techno", "Industrial", "Alternative", "Ska", "Death Metal", "Pranks", "Soundtrack", "Euro-Techno", "Ambient", "Trip-Hop", "Vocal", "Jazz+Funk", "Fusion", "Trance", "Classical", "Instrumental", "Acid", "House", "Game", "Sound Clip", "Gospel", "Noise", "Alternative Rock", "Bass", "Soul", "Punk", "Space", "Meditative", "Instrumental Pop", "Instrumental Rock", "Ethnic", "Gothic", "Darkwave", "Techno-Insdustiral", "Electronic", "Pop-Folk", "Eurodance", "Dream", "Southern Rock", "Comedy", "Cult", "Gangsta", "Top 40", "Christian Rap", "Pop/Funk", "Jungle", "Native US", "Cabaret", "New Wave", "Psychadelic", "Rave", "Showtunes", "Trailer", "Lo-Fi", "Tribal", "Acid Punk", "Acid Jazz", "Polka", "Retro", "Musical", "Rock & Roll", "Hard Rock", "Folk", "Folk-Rock", "National Folk", "Swing", "Fast Fusion", "Bebob", "Latin", "Revival", "Celtic", "Bluegrass", "Avantgarde", "Gothic Rock", "Progressive Rock", "Psychedelic Rock", "Symphonic Rock", "Slow Rock", "Big Band", "Chorus", "Easy Listening", "Acoustic","Humour", "Speech", "Chanson", "Opera", "Chamber Music", "Sonata", "Symphony", "Booty Bass", "Primus", "Porn Groove", "Satire", "Slow Jam", "Club", "Tango", "Samba", "Folklore", "Ballad", "Power Ballad", "Rhytmic Soul", "Freestyle", "Duet", "Punk Rock", "Drum Solo", "Acapella", "Euro-House", "Dance Hall", "Goa", "Drum & Bass", "Club-House", "Hardcore", "Terror", "Indie", "BritPop", "Negerpunk", "Polsk Punk", "Beat", "Christian Gangsta", "Heavy Metal", "Black Metal", "Crossover", "Contemporary C", "Christian Rock", "Merengue", "Salsa", "Thrash Metal", "Anime", "JPop", "SynthPop" };
+
+/// current status of the parsing
+enum ParseStatus { TagNotFound, PartialTagAtTail, TagFoundPartial, TagFoundComplete, TagProcessed};
+
+/// Type of meta info
+enum MetaDataType { Title, Artist, Album, Genre};
+
+/// Test Description for meta info
+const char* MetaDataTypeStr[] = {"Title", "Artis", "Album", "Genre"};
+
 
 /// ID3 verion 1 TAG (130 bytes)
 struct ID3v1 {
@@ -39,18 +51,6 @@ struct ID3v1Enhanced {
 };
 
 
-/// String array with genres
-const char *genres[] = { "Classic Rock", "Country", "Dance", "Disco", "Funk", "Grunge", "Hip-Hop", "Jazz", "Metal", "New Age", "Oldies", "Other", "Pop", "R&B", "Rap", "Reggae", "Rock", "Techno", "Industrial", "Alternative", "Ska", "Death Metal", "Pranks", "Soundtrack", "Euro-Techno", "Ambient", "Trip-Hop", "Vocal", "Jazz+Funk", "Fusion", "Trance", "Classical", "Instrumental", "Acid", "House", "Game", "Sound Clip", "Gospel", "Noise", "Alternative Rock", "Bass", "Soul", "Punk", "Space", "Meditative", "Instrumental Pop", "Instrumental Rock", "Ethnic", "Gothic", "Darkwave", "Techno-Insdustiral", "Electronic", "Pop-Folk", "Eurodance", "Dream", "Southern Rock", "Comedy", "Cult", "Gangsta", "Top 40", "Christian Rap", "Pop/Funk", "Jungle", "Native US", "Cabaret", "New Wave", "Psychadelic", "Rave", "Showtunes", "Trailer", "Lo-Fi", "Tribal", "Acid Punk", "Acid Jazz", "Polka", "Retro", "Musical", "Rock & Roll", "Hard Rock", "Folk", "Folk-Rock", "National Folk", "Swing", "Fast Fusion", "Bebob", "Latin", "Revival", "Celtic", "Bluegrass", "Avantgarde", "Gothic Rock", "Progressive Rock", "Psychedelic Rock", "Symphonic Rock", "Slow Rock", "Big Band", "Chorus", "Easy Listening", "Acoustic","Humour", "Speech", "Chanson", "Opera", "Chamber Music", "Sonata", "Symphony", "Booty Bass", "Primus", "Porn Groove", "Satire", "Slow Jam", "Club", "Tango", "Samba", "Folklore", "Ballad", "Power Ballad", "Rhytmic Soul", "Freestyle", "Duet", "Punk Rock", "Drum Solo", "Acapella", "Euro-House", "Dance Hall", "Goa", "Drum & Bass", "Club-House", "Hardcore", "Terror", "Indie", "BritPop", "Negerpunk", "Polsk Punk", "Beat", "Christian Gangsta", "Heavy Metal", "Black Metal", "Crossover", "Contemporary C", "Christian Rock", "Merengue", "Salsa", "Thrash Metal", "Anime", "JPop", "SynthPop" };
-
-/// current status of the parsing
-enum ParseStatus { TagNotFound, PartialTagAtTail, TagFoundPartial, TagFoundComplete, TagProcessed};
-
-/// Type of meta info
-enum MetaInfo { Title, Artist, Album, Genre};
-
-/// Test Description for meta info
-const char* MetaInfoStr[] = {"Title", "Artis", "Album", "Genre"};
-
 /**
  * @brief ID3 Meta Data Common Functionality
  * @author Phil Schatzmann
@@ -62,13 +62,13 @@ class MetaDataID3Base {
 
     MetaDataID3Base() = default;
 
-    void setCallback(void (*fn)(MetaInfo info, const char* str, int len)) {
+    void setCallback(void (*fn)(MetaDataType info, const char* str, int len)) {
         callback = fn;
         armed = true;
     }
 
   protected:
-    void (*callback)(MetaInfo info, const char* title, int len);
+    void (*callback)(MetaDataType info, const char* title, int len);
     bool armed = false;
 
     /// find the tag position in the string - if not found we return -1;
@@ -462,7 +462,7 @@ class MetaDataID3 : public BufferedStream {
         end();
     }
 
-    void setCallback(void (*fn)(MetaInfo info, const char* str, int len)) {
+    void setCallback(void (*fn)(MetaDataType info, const char* str, int len)) {
         id3v1.setCallback(fn);        
         id3v2.setCallback(fn);        
     }
