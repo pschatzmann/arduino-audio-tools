@@ -101,3 +101,12 @@
 #define SOFT_MUTE_VALUE LOW  
 #endif
 
+#ifdef ARDUINO_ARDUINO_NANO33BLE
+#define I2S_SUPPORT
+#define PIN_I2S_BCK 2
+#define PIN_I2S_WS 1
+#define PIN_I2S_DATA_IN 3
+#define PIN_I2S_DATA_OUT 3
+#define PIN_I2S_MUTE 4
+#define SOFT_MUTE_VALUE LOW  
+#endif

@@ -8,6 +8,10 @@
 
 namespace audio_tools {
 
+// forward declaration
+template<typename T> class NBuffer;
+
+
 /**
  * @brief Shared functionality of all buffers
  * @author Phil Schatzmann
@@ -88,7 +92,12 @@ public:
     
     // returns the address of the start of the physical read buffer
     virtual T* address() = 0;
-    
+
+  protected:
+    void setWritePos(int pos) {};
+
+    friend NBuffer<T>;
+
 };
 
 
@@ -200,6 +209,12 @@ protected:
     int current_write_pos=0;
     bool owns_buffer = true;
     T *buffer = nullptr;
+
+    void setWritePos(int pos) {
+        current_write_pos = pos;
+    }
+
+
 };
 
 /**
@@ -307,11 +322,12 @@ class NBuffer : public BaseBuffer<T> {
 public:
 
   NBuffer(int size=512, int count=2){
-      filled_buffers = new BaseBuffer<T>*[size];
-      avaliable_buffers = new BaseBuffer<T>*[size];
+      filled_buffers = new BaseBuffer<T>*[count];
+      avaliable_buffers = new BaseBuffer<T>*[count];
 
       write_buffer_count = 0;
       buffer_count = count;
+      buffer_size = size;
       for (int j=0;j<count;j++){
         avaliable_buffers[j] = new SingleBuffer<T>(size);
       }
@@ -417,11 +433,6 @@ public:
       }
       return actual_write_buffer->availableToWrite();
   }
-
-  // returns the address of the start of the phsical read buffer
-  T* address() {
-      return actual_read_buffer==nullptr ? nullptr : actual_read_buffer->address();
-  }
   
   // resets all buffers
   void reset(){
@@ -439,9 +450,31 @@ public:
       unsigned long run_time = (millis() - start_time);
       return run_time == 0 ? 0 : sample_count * 1000 / run_time;
   }
+
+  // returns the address of the start of the phsical read buffer
+  T* address() {
+      return actual_read_buffer==nullptr ? nullptr : actual_read_buffer->address();
+  }
+  // Alternative interface using address: the current buffer has been filled
+  BaseBuffer<T> &writeEnd(){
+    if (actual_write_buffer!=nullptr){
+        actual_write_buffer->setWritePos(buffer_size);
+        addFilledBuffer(actual_write_buffer);
+    }
+    actual_write_buffer = getNextAvailableBuffer();
+    return *actual_write_buffer;
+  }
+
+  // Alternative interface using address: marks actual buffer as processed and provides access to next read buffer
+  BaseBuffer<T> &readEnd() {
+    // make current read buffer available again
+    resetCurrent();
+    return *actual_read_buffer;
+  }
     
     
 protected:
+    int buffer_size = 0;
     uint16_t buffer_count = 0;
     uint16_t write_buffer_count = 0;
     BaseBuffer<T> *actual_read_buffer = nullptr;
