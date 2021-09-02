@@ -602,13 +602,27 @@ class EncodedAudioStream : public Stream {
         /**
          * @brief Construct a new Encoded Audio Stream object - used for decoding
          * 
-         * @param inputStream 
+         * @param outputStream 
          * @param decoder 
          */
         EncodedAudioStream(Stream &outputStream, AudioDecoder *decoder) {
 	 		LOGD(__FUNCTION__);
             decoder_ptr = decoder;
             decoder_ptr->setOutputStream(outputStream);
+            writer_ptr = decoder_ptr;
+            active = false;
+        }
+
+        /**
+         * @brief Construct a new Encoded Audio Stream object - used for decoding
+         * 
+         * @param outputStream 
+         * @param decoder 
+         */
+        EncodedAudioStream(Stream *outputStream, AudioDecoder *decoder) {
+	 		LOGD(__FUNCTION__);
+            decoder_ptr = decoder;
+            decoder_ptr->setOutputStream(*outputStream);
             writer_ptr = decoder_ptr;
             active = false;
         }
@@ -641,6 +655,19 @@ class EncodedAudioStream : public Stream {
             active = false;
         }
 
+        /**
+         * @brief Construct a new Encoded Audio Stream object - used for encoding
+         * 
+         * @param outputStream 
+         * @param encoder 
+         */
+        EncodedAudioStream(Stream *outputStream, AudioEncoder *encoder) {
+	 		LOGD(__FUNCTION__);
+            encoder_ptr = encoder;
+            encoder_ptr->setOutputStream(*outputStream);
+            writer_ptr = encoder_ptr;
+            active = false;
+        }
         /**
          * @brief Destroy the Encoded Audio Stream object
          * 

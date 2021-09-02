@@ -21,6 +21,7 @@
 #include "AudioTools/AudioCopy.h"
 #include "AudioTools/AudioPWM.h"
 #include "AudioTools/PortAudioStream.h"
+#include "AudioTools/MetaDataID3.h"
 
 #include "AudioCodecs/CodecWAV.h"
 //#include "AudioCodecs/CodecMP3Mini.h"
