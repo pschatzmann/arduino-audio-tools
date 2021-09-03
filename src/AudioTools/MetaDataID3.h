@@ -267,15 +267,6 @@ class MetaDataID3V1  : public MetaDataID3Base {
 /// Relevant v2 Tags        
 const char* id3_v2_tags[] = {"TALB", "TOPE", "TIT2", "TCON"};
 
-// calculate the synch save size
-static uint32_t calcSize(uint8_t chars[4]) {
-    uint32_t byte0 = chars[0];
-    uint32_t byte1 = chars[1];
-    uint32_t byte2 = chars[2];
-    uint32_t byte3 = chars[3];
-    return byte0 << 21 | byte1 << 14 | byte2 << 7 | byte3;
-}
-
 
 /// ID3 verion 2 TAG Header (10 bytes)
 struct ID3v2 {
@@ -361,6 +352,17 @@ class MetaDataID3V2 : public MetaDataID3Base  {
         return len;
     }
 
+    /// provides the ID3v2 header
+    ID3v2 header() {
+        return tagv2;
+    }
+
+    /// provides the current frame header
+    ID3v2FrameString frameHeader() {
+        return frame_header;
+    }
+
+
 
   protected:
     ID3v2 tagv2;
@@ -374,14 +376,13 @@ class MetaDataID3V2 : public MetaDataID3Base  {
     uint64_t total_len = 0;
     uint64_t end_len = 0;
 
-    /// provides the ID3v2 header
-    ID3v2 header() {
-        return tagv2;
-    }
-
-    /// provides the current frame header
-    ID3v2FrameString frameHeader() {
-        return frame_header;
+    // calculate the synch save size
+    int calcSize(uint8_t chars[4]) {
+        uint32_t byte0 = chars[0];
+        uint32_t byte1 = chars[1];
+        uint32_t byte2 = chars[2];
+        uint32_t byte3 = chars[3];
+        return byte0 << 21 | byte1 << 14 | byte2 << 7 | byte3;
     }
 
     /// try to find the metatdata tag in the provided data
@@ -434,7 +435,7 @@ class MetaDataID3V2 : public MetaDataID3Base  {
             if (partial_tag!=nullptr){
                 int tag_pos = findTag(partial_tag, (const char*)  data, len);
                 memmove(&frame_header, data+tag_pos, sizeof(ID3v2FrameString));
-                int size = min(len - tag_pos, calcSize(frame_header.size)-1); 
+                int size = min(len - tag_pos, (size_t) calcSize(frame_header.size)-1); 
                 strncpy((char*)result, (char*)data+tag_pos+ID3FrameSize, size);
                 use_bytes_of_next_write = size;
                 status = PartialTagAtTail;
@@ -483,7 +484,7 @@ class MetaDataID3V2 : public MetaDataID3Base  {
                         // we just use the first entry
                         result[end_pos]=0;
                         int idx = atoi(result+1);
-                        if (idx<sizeof(genres)){
+                        if (idx>=0 && idx<sizeof(genres)){
                             strncpy((char*)result,genres[idx],256);
                         }
                     }
