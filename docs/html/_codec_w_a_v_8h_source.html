@@ -461,7 +461,7 @@ $(function() {
 <div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;                audioInfo.data_length = ~0;</div>
 <div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;            } <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;                size_limit = audioInfo.data_length;</div>
-<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;                LOGI(<span class="stringliteral">&quot;size_limit is %zu&quot;</span>, size_limit);</div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;                LOGI(<span class="stringliteral">&quot;size_limit is %d&quot;</span>, (<span class="keywordtype">int</span>) size_limit);</div>
 <div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;            }</div>
 <div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160; </div>
 <div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;        };</div>
@@ -512,7 +512,7 @@ $(function() {
 <div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160; </div>
 <div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;                <span class="keywordflow">if</span> (size_limit&lt;=0){</div>
 <div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;                    LOGI(<span class="stringliteral">&quot;The defined size was written - so we close the WAVEncoder now&quot;</span>);</div>
-<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;                    stream_ptr-&gt;flush();</div>
+<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;                   <span class="comment">// stream_ptr-&gt;flush();</span></div>
 <div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;                    is_open = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;                }</div>
 <div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;            }  </div>
@@ -593,7 +593,7 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_w_a_v_encoder_html_ac383645fc94e295cdfa9d007ffee049d"><div class="ttname"><a href="classaudio__tools_1_1_w_a_v_encoder.html#ac383645fc94e295cdfa9d007ffee049d">audio_tools::WAVEncoder::setOutputStream</a></div><div class="ttdeci">void setOutputStream(Print &amp;out)</div><div class="ttdoc">Defines the otuput stream.</div><div class="ttdef"><b>Definition:</b> CodecWAV.h:400</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_w_a_v_encoder_html_ac61bb13de1fcf11bb393eabacc996f8d"><div class="ttname"><a href="classaudio__tools_1_1_w_a_v_encoder.html#ac61bb13de1fcf11bb393eabacc996f8d">audio_tools::WAVEncoder::setAudioInfo</a></div><div class="ttdeci">virtual void setAudioInfo(AudioBaseInfo from)</div><div class="ttdoc">Update actual WAVAudioInfo.</div><div class="ttdef"><b>Definition:</b> CodecWAV.h:424</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_w_a_v_header_html"><div class="ttname"><a href="classaudio__tools_1_1_w_a_v_header.html">audio_tools::WAVHeader</a></div><div class="ttdoc">Parser for Wav header data for details see https://de.wikipedia.org/wiki/RIFF_WAVE.</div><div class="ttdef"><b>Definition:</b> CodecWAV.h:43</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AudioA2DP.h:19</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Parser for MP3 ID3 Meta Data: The goal is to implement a simple API which provides the title,...</div><div class="ttdef"><b>Definition:</b> AudioA2DP.h:19</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_base_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_base_info.html">audio_tools::AudioBaseInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:94</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_w_a_v_audio_info_html"><div class="ttname"><a href="structaudio__tools_1_1_w_a_v_audio_info.html">audio_tools::WAVAudioInfo</a></div><div class="ttdoc">Sound information which is available in the WAV header.</div><div class="ttdef"><b>Definition:</b> CodecWAV.h:17</div></div>
 </div><!-- fragment --></div><!-- contents -->

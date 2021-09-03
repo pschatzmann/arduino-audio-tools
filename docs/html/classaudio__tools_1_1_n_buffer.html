@@ -112,6 +112,9 @@ T&#160;</td><td class="memItemRight" valign="bottom"><b>peek</b> ()</td></tr>
 <tr class="memitem:aef92365ddb2dd9238a9892b7bf6d617c"><td class="memItemLeft" align="right" valign="top"><a id="aef92365ddb2dd9238a9892b7bf6d617c"></a>
 T&#160;</td><td class="memItemRight" valign="bottom"><b>read</b> ()</td></tr>
 <tr class="separator:aef92365ddb2dd9238a9892b7bf6d617c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae16567ebcbcf400a2c795c9dc1678c12"><td class="memItemLeft" align="right" valign="top"><a id="ae16567ebcbcf400a2c795c9dc1678c12"></a>
+<a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>readEnd</b> ()</td></tr>
+<tr class="separator:ae16567ebcbcf400a2c795c9dc1678c12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb7e202148a7fdc2e5eb12d46f47d45d"><td class="memItemLeft" align="right" valign="top"><a id="adb7e202148a7fdc2e5eb12d46f47d45d"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>reset</b> ()</td></tr>
 <tr class="separator:adb7e202148a7fdc2e5eb12d46f47d45d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -121,6 +124,9 @@ unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>sampleRate</
 <tr class="memitem:ac88a1b2201a318d87d2f13086b2d645e"><td class="memItemLeft" align="right" valign="top"><a id="ac88a1b2201a318d87d2f13086b2d645e"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (T data)</td></tr>
 <tr class="separator:ac88a1b2201a318d87d2f13086b2d645e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfb8840de2fd25249e40786cf7378731"><td class="memItemLeft" align="right" valign="top"><a id="acfb8840de2fd25249e40786cf7378731"></a>
+<a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>writeEnd</b> ()</td></tr>
+<tr class="separator:acfb8840de2fd25249e40786cf7378731"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classaudio__tools_1_1_base_buffer"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classaudio__tools_1_1_base_buffer')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classaudio__tools_1_1_base_buffer.html">audio_tools::BaseBuffer&lt; T &gt;</a></td></tr>
 <tr class="memitem:aff2118f0177b4cd95b696e85e45ba586 inherit pub_methods_classaudio__tools_1_1_base_buffer"><td class="memItemLeft" align="right" valign="top"><a id="aff2118f0177b4cd95b696e85e45ba586"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isEmpty</b> ()</td></tr>
@@ -156,6 +162,10 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>addFilledBuffer</b> (
 <tr class="memitem:a2f077ba09952359b4dc3c6bbc5048ef3"><td class="memItemLeft" align="right" valign="top"><a id="a2f077ba09952359b4dc3c6bbc5048ef3"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>resetCurrent</b> ()</td></tr>
 <tr class="separator:a2f077ba09952359b4dc3c6bbc5048ef3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_classaudio__tools_1_1_base_buffer"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classaudio__tools_1_1_base_buffer')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classaudio__tools_1_1_base_buffer.html">audio_tools::BaseBuffer&lt; T &gt;</a></td></tr>
+<tr class="memitem:ad37afb3a4e16b13514440ef2123c838c inherit pro_methods_classaudio__tools_1_1_base_buffer"><td class="memItemLeft" align="right" valign="top"><a id="ad37afb3a4e16b13514440ef2123c838c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setWritePos</b> (int pos)</td></tr>
+<tr class="separator:ad37afb3a4e16b13514440ef2123c838c inherit pro_methods_classaudio__tools_1_1_base_buffer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -171,6 +181,9 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a714b3291ed863b4f515eb7b37bcd58b4"><td class="memItemLeft" align="right" valign="top"><a id="a714b3291ed863b4f515eb7b37bcd58b4"></a>
 uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_count</b> = 0</td></tr>
 <tr class="separator:a714b3291ed863b4f515eb7b37bcd58b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab17b6279ae5419e5fc23dadfd1f28673"><td class="memItemLeft" align="right" valign="top"><a id="ab17b6279ae5419e5fc23dadfd1f28673"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_size</b> = 0</td></tr>
+<tr class="separator:ab17b6279ae5419e5fc23dadfd1f28673"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a18146067b822f2b53c1bc4e7f9da7fbe"><td class="memItemLeft" align="right" valign="top"><a id="a18146067b822f2b53c1bc4e7f9da7fbe"></a>
 <a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; T &gt; **&#160;</td><td class="memItemRight" valign="bottom"><b>filled_buffers</b> = nullptr</td></tr>
 <tr class="separator:a18146067b822f2b53c1bc4e7f9da7fbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -183,6 +196,10 @@ unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>start_time</
 <tr class="memitem:acab5a676367858dc0a6da026710a7339"><td class="memItemLeft" align="right" valign="top"><a id="acab5a676367858dc0a6da026710a7339"></a>
 uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_count</b> = 0</td></tr>
 <tr class="separator:acab5a676367858dc0a6da026710a7339"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classaudio__tools_1_1_base_buffer"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classaudio__tools_1_1_base_buffer')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classaudio__tools_1_1_base_buffer.html">audio_tools::BaseBuffer&lt; T &gt;</a></td></tr>
+<tr class="memitem:ac8fc5b0ee59ed8dbf3cb8cda33cf3f3b inherit pro_attribs_classaudio__tools_1_1_base_buffer"><td class="memItemLeft" align="right" valign="top"><a id="ac8fc5b0ee59ed8dbf3cb8cda33cf3f3b"></a>
+friend&#160;</td><td class="memItemRight" valign="bottom"><b>NBuffer&lt; T &gt;</b></td></tr>
+<tr class="separator:ac8fc5b0ee59ed8dbf3cb8cda33cf3f3b inherit pro_attribs_classaudio__tools_1_1_base_buffer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename T&gt;<br />

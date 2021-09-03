@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['minimp3_330',['minimp3',['../namespaceminimp3.html',1,'']]]
+  ['minimp3_379',['minimp3',['../namespaceminimp3.html',1,'']]]
 ];

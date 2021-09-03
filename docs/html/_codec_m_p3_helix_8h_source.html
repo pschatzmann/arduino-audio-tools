@@ -153,33 +153,33 @@ $(function() {
 <div class="line"><a name="l00110"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_m_p3_decoder_helix.html#a480eacb313a4fc29bb2f7ac35a868433">  110</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_m_p3_decoder_helix.html#a480eacb313a4fc29bb2f7ac35a868433">setNotifyAudioChange</a>(<a class="code" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> &amp;bi){</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            LOGD(__FUNCTION__);</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            audioChangeMP3Helix = &amp;bi;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        }</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
-<div class="line"><a name="l00116"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_m_p3_decoder_helix.html#a01f7b193c73dfc4cb81b35cbf67ff90e">  116</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_m_p3_decoder_helix.html#a01f7b193c73dfc4cb81b35cbf67ff90e">infoCallback</a>(MP3FrameInfo &amp;i){</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            <span class="keywordflow">if</span> (audioChangeMP3Helix!=<span class="keyword">nullptr</span>){</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                LOGD(__FUNCTION__);</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                <a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> baseInfo;</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                baseInfo.channels = i.nChans;</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                baseInfo.sample_rate = i.samprate;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                baseInfo.bits_per_sample = i.bitsPerSample;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                audioChangeMP3Helix-&gt;setAudioInfo(baseInfo);   </div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;            }</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        }</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            mp3-&gt;setInfoCallback(<a class="code" href="classaudio__tools_1_1_m_p3_decoder_helix.html#ab475383cfd862324468e3ca3f05be2be">infoCallback</a>);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        }</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00117"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_m_p3_decoder_helix.html#ab475383cfd862324468e3ca3f05be2be">  117</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_m_p3_decoder_helix.html#ab475383cfd862324468e3ca3f05be2be">infoCallback</a>(MP3FrameInfo &amp;i){</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            <span class="keywordflow">if</span> (audioChangeMP3Helix!=<span class="keyword">nullptr</span>){</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                LOGD(__FUNCTION__);</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                <a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> baseInfo;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                baseInfo.channels = i.nChans;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                baseInfo.sample_rate = i.samprate;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                baseInfo.bits_per_sample = i.bitsPerSample;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                audioChangeMP3Helix-&gt;setAudioInfo(baseInfo);   </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;            }</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        }</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        libhelix::MP3DecoderHelix *mp3=<span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;};</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        libhelix::MP3DecoderHelix *mp3=<span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;};</div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;} <span class="comment">// namespace</span></div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;} <span class="comment">// namespace</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
 <div class="ttc" id="aclass_print_html"><div class="ttname"><a href="class_print.html">Print</a></div><div class="ttdef"><b>Definition:</b> Print.h:34</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_base_info_dependent_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_base_info_dependent.html">audio_tools::AudioBaseInfoDependent</a></div><div class="ttdoc">Supports changes to the sampling rate, bits and channels.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:112</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_decoder.html">audio_tools::AudioDecoder</a></div><div class="ttdoc">Docoding of encoded audio into PCM data.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:188</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_m_p3_decoder_helix_html"><div class="ttname"><a href="classaudio__tools_1_1_m_p3_decoder_helix.html">audio_tools::MP3DecoderHelix</a></div><div class="ttdoc">MP3 Decoder using libhelix: https://github.com/pschatzmann/arduino-libhelix This is basically just a ...</div><div class="ttdef"><b>Definition:</b> CodecMP3Helix.h:21</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_m_p3_decoder_helix_html_a01f7b193c73dfc4cb81b35cbf67ff90e"><div class="ttname"><a href="classaudio__tools_1_1_m_p3_decoder_helix.html#a01f7b193c73dfc4cb81b35cbf67ff90e">audio_tools::MP3DecoderHelix::infoCallback</a></div><div class="ttdeci">void infoCallback(MP3FrameInfo &amp;i)</div><div class="ttdoc">notifies the subscriber about a change</div><div class="ttdef"><b>Definition:</b> CodecMP3Helix.h:116</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_m_p3_decoder_helix_html_a0214bb1e79f5e7c1f69c92229eac17e3"><div class="ttname"><a href="classaudio__tools_1_1_m_p3_decoder_helix.html#a0214bb1e79f5e7c1f69c92229eac17e3">audio_tools::MP3DecoderHelix::write</a></div><div class="ttdeci">size_t write(const void *mp3Data, size_t len)</div><div class="ttdoc">Write mp3 data to decoder.</div><div class="ttdef"><b>Definition:</b> CodecMP3Helix.h:92</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_m_p3_decoder_helix_html_a0e7c27b8a35fa991ef3bf1a09ff88974"><div class="ttname"><a href="classaudio__tools_1_1_m_p3_decoder_helix.html#a0e7c27b8a35fa991ef3bf1a09ff88974">audio_tools::MP3DecoderHelix::begin</a></div><div class="ttdeci">void begin()</div><div class="ttdoc">Starts the processing.</div><div class="ttdef"><b>Definition:</b> CodecMP3Helix.h:67</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_m_p3_decoder_helix_html_a13d299c3c1b1733047bd7813cbd76c3d"><div class="ttname"><a href="classaudio__tools_1_1_m_p3_decoder_helix.html#a13d299c3c1b1733047bd7813cbd76c3d">audio_tools::MP3DecoderHelix::end</a></div><div class="ttdeci">void end()</div><div class="ttdoc">Releases the reserved memory.</div><div class="ttdef"><b>Definition:</b> CodecMP3Helix.h:73</div></div>
@@ -187,8 +187,9 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_m_p3_decoder_helix_html_a4b40c717c19ea48f8e29270d33c54e77"><div class="ttname"><a href="classaudio__tools_1_1_m_p3_decoder_helix.html#a4b40c717c19ea48f8e29270d33c54e77">audio_tools::MP3DecoderHelix::MP3DecoderHelix</a></div><div class="ttdeci">MP3DecoderHelix(Print &amp;out_stream)</div><div class="ttdoc">Construct a new MP3DecoderMini object.</div><div class="ttdef"><b>Definition:</b> CodecMP3Helix.h:33</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_m_p3_decoder_helix_html_aa3a44b7494589d1bf48cf6fafddfe224"><div class="ttname"><a href="classaudio__tools_1_1_m_p3_decoder_helix.html#aa3a44b7494589d1bf48cf6fafddfe224">audio_tools::MP3DecoderHelix::setOutputStream</a></div><div class="ttdeci">virtual void setOutputStream(Print &amp;outStream)</div><div class="ttdoc">Defines the output Stream.</div><div class="ttdef"><b>Definition:</b> CodecMP3Helix.h:62</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_m_p3_decoder_helix_html_aaaeb3a0457d0d505554f571cfb7a0a3e"><div class="ttname"><a href="classaudio__tools_1_1_m_p3_decoder_helix.html#aaaeb3a0457d0d505554f571cfb7a0a3e">audio_tools::MP3DecoderHelix::~MP3DecoderHelix</a></div><div class="ttdeci">~MP3DecoderHelix()</div><div class="ttdoc">Destroy the MP3DecoderMini object.</div><div class="ttdef"><b>Definition:</b> CodecMP3Helix.h:57</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_m_p3_decoder_helix_html_ab475383cfd862324468e3ca3f05be2be"><div class="ttname"><a href="classaudio__tools_1_1_m_p3_decoder_helix.html#ab475383cfd862324468e3ca3f05be2be">audio_tools::MP3DecoderHelix::infoCallback</a></div><div class="ttdeci">static void infoCallback(MP3FrameInfo &amp;i)</div><div class="ttdoc">notifies the subscriber about a change</div><div class="ttdef"><b>Definition:</b> CodecMP3Helix.h:117</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_m_p3_decoder_helix_html_ad753121a00c74689a5a7843d0d2601d2"><div class="ttname"><a href="classaudio__tools_1_1_m_p3_decoder_helix.html#ad753121a00c74689a5a7843d0d2601d2">audio_tools::MP3DecoderHelix::MP3DecoderHelix</a></div><div class="ttdeci">MP3DecoderHelix(Print &amp;out_stream, AudioBaseInfoDependent &amp;bi)</div><div class="ttdoc">Construct a new MP3DecoderMini object. The decoded output will go to the print object.</div><div class="ttdef"><b>Definition:</b> CodecMP3Helix.h:46</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AudioA2DP.h:19</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Parser for MP3 ID3 Meta Data: The goal is to implement a simple API which provides the title,...</div><div class="ttdef"><b>Definition:</b> AudioA2DP.h:19</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_base_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_base_info.html">audio_tools::AudioBaseInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:94</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
