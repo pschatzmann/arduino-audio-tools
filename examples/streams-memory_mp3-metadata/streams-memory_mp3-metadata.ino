@@ -13,7 +13,6 @@ using namespace audio_tools;
 MemoryStream mp3(sample_12s_mp3, sample_12s_mp3_len);
 MetaDataID3 out;
 StreamCopy copier(out, mp3); // copy in to out
-bool title_printed = false;
 
 // callback for meta data
 void printMetaData(MetaDataType type, const char* str, int len){
@@ -21,7 +20,6 @@ void printMetaData(MetaDataType type, const char* str, int len){
   Serial.print(MetaDataTypeStr[type]);
   Serial.print(": ");
   Serial.println(str);
-  title_printed = true;
 }
 
 void setup(){
