@@ -460,6 +460,12 @@ class MetaDataID3V2 : public MetaDataID3Base  {
         return frame_header.encoding == 0 || frame_header.encoding == 3;
     }
 
+    int strpos(char* str, const char* target) {
+        char* res = strstr(str, target); 
+        return (res == nullptr) ? -1 : res - str;
+    }
+
+
     /// executes the callbacks
     void processNotify() {
         if (callback!=nullptr && actual_tag!=nullptr && encodingIsSupported()){
@@ -469,8 +475,21 @@ class MetaDataID3V2 : public MetaDataID3Base  {
                 callback(Artist, result,strnlen(result, 256));
             else if (strncmp(actual_tag,"TIT2",4)==0)
                 callback(Album, result,strnlen(result, 256));
-            else if (strncmp(actual_tag,"TCON",4)==0)
+            else if (strncmp(actual_tag,"TCON",4)==0) {
+                if (result[0]=='('){
+                    // convert genre id to string
+                    int end_pos = strpos((char*)result, ")");
+                    if (end_pos>0){
+                        // we just use the first entry
+                        result[end_pos]=0;
+                        int idx = atoi(result+1);
+                        if (idx<sizeof(genres)){
+                            strncpy((char*)result,genres[idx],256);
+                        }
+                    }
+                }
                 callback(Genre, result,strnlen(result, 256));
+            }
         }
     }
 
