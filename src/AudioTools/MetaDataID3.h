@@ -286,12 +286,12 @@ struct ID3v2 {
 
 };
 
-/// ID3 verion 2 Extended Header 
-struct ID3v2ExtendedHeader {
-    uint8_t size[4];
-    uint16_t flags;
-    uint32_t padding_size;
-}; 
+// /// ID3 verion 2 Extended Header 
+// struct ID3v2ExtendedHeader {
+//     uint8_t size[4];
+//     uint16_t flags;
+//     uint32_t padding_size;
+// }; 
 
 
 /// ID3 verion 2 Tag
@@ -300,6 +300,22 @@ struct ID3v2Frame {
     uint8_t size[4];
     uint16_t flags;
 }; 
+
+/// ID3 verion 2 Tag
+struct ID3v2FrameString {
+    uint8_t id[4]; 
+    uint8_t size[4];
+    uint16_t flags;
+
+// encoding:
+// 00 – ISO-8859-1 (ASCII).
+// 01 – UCS-2 (UTF-16 encoded Unicode with BOM), in ID3v2.2 and ID3v2.3.
+// 02 – UTF-16BE encoded Unicode without BOM, in ID3v2.4.
+// 03 – UTF-8 encoded Unicode, in ID3v2.4.
+    uint8_t encoding; // encoding byte for strings
+}; 
+
+const int ID3FrameSize = 11;
 
 /**
  * @brief Simple ID3 Meta Data API which supports ID3 V2: We only support the "TALB", "TOPE", "TIT2", "TCON" tags
@@ -349,20 +365,30 @@ class MetaDataID3V2 : public MetaDataID3Base  {
   protected:
     ID3v2 tagv2;
     bool tag_active = false;
+    bool tag_processed = false;
     ParseStatus status = TagNotFound;
     const char* actual_tag;
-    ID3v2Frame frame_header;
+    ID3v2FrameString frame_header;
     int use_bytes_of_next_write = 0;
     char result[256];
     uint64_t total_len = 0;
     uint64_t end_len = 0;
 
+    /// provides the ID3v2 header
+    ID3v2 header() {
+        return tagv2;
+    }
+
+    /// provides the current frame header
+    ID3v2FrameString frameHeader() {
+        return frame_header;
+    }
 
     /// try to find the metatdata tag in the provided data
     void processTagNotFound(const uint8_t* data, size_t len) {
 
         // activate tag processing when we have an ID3 Tag
-        if (!tag_active){
+        if (!tag_active && !tag_processed){
             int pos = findTag("ID3", (const char*) data, len);
             if (pos>=0){
                 // fill v2 tag header
@@ -378,6 +404,7 @@ class MetaDataID3V2 : public MetaDataID3Base  {
         // deactivate tag processing when we are out of range
         if (end_len>0 && total_len>end_len){
             tag_active = false;
+            tag_processed = false;
         }
 
         
@@ -390,12 +417,12 @@ class MetaDataID3V2 : public MetaDataID3Base  {
 
                 if (tag_pos>0 && tag_pos+sizeof(ID3v2Frame)<=len){
                     // setup tag header
-                    memmove(&frame_header, data+tag_pos, sizeof(ID3v2Frame));
+                    memmove(&frame_header, data+tag_pos, sizeof(ID3v2FrameString));
 
                     // get tag content
                     if(calcSize(frame_header.size) <= len){
                         int l = min(calcSize(frame_header.size)-1, 256);
-                        strncpy((char*)result, (char*) data+tag_pos+sizeof(ID3v2Frame)+1, l);
+                        strncpy((char*)result, (char*) data+tag_pos+ID3FrameSize, l);
                         processNotify();
                     } else {
                         partial_tag = tag;
@@ -406,9 +433,9 @@ class MetaDataID3V2 : public MetaDataID3Base  {
             // save partial tag information so that we process the remainder with the next write
             if (partial_tag!=nullptr){
                 int tag_pos = findTag(partial_tag, (const char*)  data, len);
-                memmove(&frame_header, data+tag_pos, sizeof(ID3v2Frame));
+                memmove(&frame_header, data+tag_pos, sizeof(ID3v2FrameString));
                 int size = min(len - tag_pos, calcSize(frame_header.size)-1); 
-                strncpy((char*)result, (char*)data+tag_pos+sizeof(ID3v2Frame)+1, size);
+                strncpy((char*)result, (char*)data+tag_pos+ID3FrameSize, size);
                 use_bytes_of_next_write = size;
                 status = PartialTagAtTail;
             }
@@ -428,9 +455,14 @@ class MetaDataID3V2 : public MetaDataID3Base  {
         processTagNotFound(data+use_bytes_of_next_write, len-use_bytes_of_next_write);
     }
 
+    /// For the time beeing we support only ASCII and UTF8
+    bool encodingIsSupported(){
+        return frame_header.encoding == 0 || frame_header.encoding == 3;
+    }
+
     /// executes the callbacks
     void processNotify() {
-        if (callback!=nullptr && actual_tag!=nullptr){
+        if (callback!=nullptr && actual_tag!=nullptr && encodingIsSupported()){
             if (strncmp(actual_tag,"TALB",4)==0)
                 callback(Title, result,strnlen(result, 256));
             else if (strncmp(actual_tag,"TOPE",4)==0)
