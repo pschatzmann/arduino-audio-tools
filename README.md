@@ -38,6 +38,7 @@ As “Audio Sinks” we will have e.g:
 - Serial to display the data as CSV – [CsvStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_csv_stream.html)
 - Encoding and Decoding of Audio [EncodedAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_encoded_audio_stream.html)
 - Desktop Integration - [PortAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_port_audio_stream.html)
+- ID3 Metadata for MP3 - [MetaDataID3](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_meta_data_i_d3.html)
 - Any other Arduino Classes implementing Streams: SD, Ethernet etc
 
 Here is an simple example which streams a file from the Flash Memory and writes it to I2S: 
