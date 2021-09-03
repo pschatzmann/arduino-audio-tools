@@ -29,7 +29,9 @@ template <class NT> class FFTBase {
 public:
   /// forward fft
   virtual FFTArray<NT> &calculateArray(NT array[], int len) {
-    FFTArray<NT> complex_array(len);
+    if (complex_array.size() != len) {
+      complex_array.resize(len);
+    }
     for (int j = 0; j < len; ++j) {
       complex_array[j] = array[j];
     }
