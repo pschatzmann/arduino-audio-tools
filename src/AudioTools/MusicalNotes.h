@@ -154,6 +154,38 @@ public:
         return mainFrequency(mainNote, level);
     }
 
+    /// Returns true if the frequency is audible (in the range of 20 Hz to 20 kHz)
+    bool isAudible(uint16_t frequency){
+        return frequency >= 20 && frequency<=20000;
+    }
+
+    /// Determines the closes note for a frequency. We also return the frequency difference
+    const char* note(int frequency, int &diff){
+        uint16_t* all_notes = (uint16_t*) notes;
+        const int note_count = 12*9;
+
+        // find closest note
+        int min_diff = frequency;
+        int min_pos = 0;
+        for (int j=0; j<note_count; j++){
+            int tmp = abs(frequency - all_notes[j]);
+            if (tmp<min_diff){
+                min_diff = tmp;
+                min_pos = j;
+            }
+        }
+
+        int noteFrequency = all_notes[min_pos];
+        diff = frequency - noteFrequency;
+        return notes_str[min_pos];
+    }
+
+    /// Determines the closes note for a frequency
+    const char* note(int frequency){
+        int diff;
+        return note(frequency, diff);
+    }
+
 protected:
 
     uint16_t notes[9][12] = {
@@ -166,6 +198,18 @@ protected:
         {N_C6, N_CS6, N_D6, N_DS6, N_E6, N_F6, N_FS6, N_G6, N_GS6, N_A6, N_AS6, N_B6},
         {N_C7, N_CS7, N_D7, N_DS7, N_E7, N_F7, N_FS7, N_G7, N_GS7, N_A7, N_AS7, N_B7},
         {N_C8, N_CS8, N_D8, N_DS8, N_E8, N_F8, N_FS8, N_G8, N_GS8, N_A8, N_AS8, N_B8}
+    };
+
+    const char *notes_str[9*12]= {
+         "C0","CS0","D0","DS0","E0","F0","FS0","G0","GS0","A0","AS0","B0",
+         "C1","CS1","D1","DS1","E1","F1","FS1","G1","GS1","A1","AS1","B1",
+         "C2","CS2","D2","DS2","E2","F2","FS2","G2","GS2","A2","AS2","B2",
+         "C3","CS3","D3","DS3","E3","F3","FS3","G3","GS3","A3","AS3","B3",
+         "C4","CS4","D4","DS4","E4","F4","FS4","G4","GS4","A4","AS4","B4",
+         "C5","CS5","D5","DS5","E5","F5","FS5","G5","GS5","A5","AS5","B5",
+         "C6","CS6","D6","DS6","E6","F6","FS6","G6","GS6","A6","AS6","B6",
+         "C7","CS7","D7","DS7","E7","F7","FS7","G7","GS7","A7","AS7","B7",
+         "C8","CS8","D8","DS8","E8","F8","FS8","G8","GS8","A8","AS8","B8"
     };
 
 

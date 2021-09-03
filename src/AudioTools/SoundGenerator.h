@@ -46,7 +46,7 @@ class SoundGenerator  {
 
         /// Provides the data as byte array with the requested number of channels
         virtual size_t readBytes( uint8_t *buffer, size_t lengthBytes){
-            LOGD("readBytes: %d", lengthBytes);
+            LOGD("readBytes: %d", (int)lengthBytes);
             size_t result = 0;
             int ch = channels();
             int frame_size = sizeof(T) * ch;
@@ -98,6 +98,7 @@ class SoundGenerator  {
             return output_channels;
         }
 
+
     protected:
         bool active = false;
         bool activeWarningIssued = false;
@@ -114,10 +115,10 @@ class SoundGenerator  {
  * 
  */
 template <class T>
-class SineWaveGenerator : public SoundGenerator<T> {
+class SineWaveGenerator : public SoundGenerator<T>, public AudioBaseInfoDependent {
     public:
         // the scale defines the max value which is generated
-        SineWaveGenerator(float amplitude = 32767.0, float phase = 0) {
+        SineWaveGenerator(float amplitude = 32767.0, float phase = 0.0) {
             LOGD("SineWaveGenerator");
             m_amplitude = amplitude;
             m_phase = phase;
@@ -126,6 +127,11 @@ class SineWaveGenerator : public SoundGenerator<T> {
         void begin() {
             begin(1, 44100, 0);
         }
+
+        void begin(AudioBaseInfo info, uint16_t frequency=0){
+            begin(info.channels, info.sample_rate, frequency);
+        }
+
         void begin(uint16_t sample_rate, uint16_t frequency=0){
             begin(1, sample_rate, frequency);
         }
@@ -138,6 +144,15 @@ class SineWaveGenerator : public SoundGenerator<T> {
             this->m_deltaTime = 1.0 / m_sample_rate;
             SoundGenerator<T>::active = true;
             logStatus();
+        }
+
+        /// provides the AudioBaseInfo
+        AudioBaseInfo audioInfo() {
+            AudioBaseInfo baseInfo;
+            baseInfo.sample_rate = m_sample_rate;
+            baseInfo.channels = SoundGenerator<T>::channels();
+            baseInfo.bits_per_sample = sizeof(T)*8;
+            return baseInfo;
         }
 
         /// Defines the frequency - after the processing has been started
@@ -154,12 +169,11 @@ class SineWaveGenerator : public SoundGenerator<T> {
         }
 
     protected:
-        uint16_t m_sample_rate; 
-
+        uint16_t m_sample_rate = 0; 
         float m_frequency = 0;
         float m_time = 0.0;
         float m_amplitude = 1.0;  
-        float m_deltaTime = 1.0 / m_sample_rate;
+        float m_deltaTime = 0.0;
         float m_phase = 0.0;
         float double_Pi = PI * 2.0;
 
