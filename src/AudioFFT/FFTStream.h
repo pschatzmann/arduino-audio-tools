@@ -1,9 +1,15 @@
 #pragma once
-#include "AudioTools/FFT.h"
+
+// Deactivate Multithreading and vector support
+#define POCKETFFT_NO_MULTITHREADING
+#define POCKETFFT_NO_VECTORS
+
 #include "AudioTools/Streams.h"
 #include "AudioTools/MusicalNotes.h"
+#include "AudioFFT/FFT.h"
 #include <cmath>
 #include <cfloat>
+#include <cstdlib>
 
 namespace audio_tools {
 
@@ -21,13 +27,15 @@ public:
     array.resize(max_samples);
   }
 
-  void begin(AudioBaseInfo info){
+  void begin(AudioBaseInfo info, WindowFunction wf){
     current_samples = 0;
     this->info = info;
+    windowFunction = wf;
   }
 
-  void begin(){
+  void begin(WindowFunction wf){
     current_samples = 0;
+    windowFunction = wf;
   }
 
   /// Determines the frequency resolution of the FFTArray: Sample Frequency / Number of data points 
@@ -100,6 +108,7 @@ protected:
   int current_samples = 0;
   AudioBaseInfo info;
   MusicalNotes notes;
+  WindowFunction windowFunction;
 
 
   /// write data to FFT
@@ -118,7 +127,7 @@ protected:
       }
       // if array is full we calculate the fft
       if (current_samples == max_samples) {
-        fft.calculate(array);
+        fft.calculate(array, windowFunction);
         cb(*this, array);
         current_samples = 0;
       }

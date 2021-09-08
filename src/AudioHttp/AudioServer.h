@@ -1,7 +1,7 @@
 #pragma once
 
 #include <WiFi.h>
-#include "AudioCodecs/CodecWav.h"
+#include "AudioCodecs/CodecWAV.h"
 #include "AudioTools.h"
 
 namespace audio_tools {
