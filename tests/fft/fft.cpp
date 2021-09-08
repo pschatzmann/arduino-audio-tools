@@ -7,7 +7,7 @@
  
 #include "Arduino.h"
 #include "AudioTools.h"
-#include "AudioTools/FFTStream.h"
+#include "AudioFFT/FFTStream.h"
 
 using namespace audio_tools;  
 
@@ -43,7 +43,7 @@ void processFFTResult(FFTStream<int16_t,float> &fft, FFTArray<float> &values){
 
   Serial.print("=> max index: ");
   Serial.println(fft.maxAmplitudeIdx(values));
-  Serial.print("=> note: ");
+  Serial.print("=> note: (expected B4)  ");
   Serial.println(fft.note(values, diff));
   Serial.print(" / diff: ");
   Serial.print(diff);
@@ -56,7 +56,7 @@ void setup(void) {
   Serial.begin(115200);
   sineWave.begin(channels, sample_rate, N_B4);
   out.setCallback(processFFTResult);
-  out.begin(sineWave.audioInfo());
+  out.begin(sineWave.audioInfo(), Hamming);
 }
 
 // Arduino loop - copy sound to out 
