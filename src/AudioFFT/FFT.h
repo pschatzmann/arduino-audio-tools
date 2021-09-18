@@ -1,10 +1,3 @@
-/**
- * Cooley–Tukey FFT inpired by
- * https://rosettacode.org/wiki/Fast_Fourier_transform
- * @author Phil Schatzmann
- * @copyright GPLv3
- */
-
 #pragma once
 #include "AudioConfig.h"
 #include <complex>
@@ -17,7 +10,7 @@ namespace audio_tools {
 enum WindowFunction {None, Hanning, Hamming, Triangular, Gauss, BlackmanHarris, Random};
 
 /**
- * @brief Support for different Window functions
+ * @brief Support for different FFT Window functions: Hanning, Hamming, Triangular, Gauss, BlackmanHarris, Random
  * 
  */
 class WindowCalculator {
@@ -232,7 +225,7 @@ public:
 template <class NT> class FFT : public FFTBase<NT> {
 public:
   /**
-   * @brief Forward fft in place using pocket fft
+   * @brief Forward (in place) FFT using pocketfft
    * 
    * @param data 
    */
@@ -247,7 +240,7 @@ public:
   }
 
   /**
-   * @brief Revert FFT in place
+   * @brief Revert FFT (in place)
    * 
    */
   void invert(FFTArray<NT>&data) override {
