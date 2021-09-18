@@ -104,6 +104,17 @@ class ConverterScaler : public  BaseConverter<T> {
                 }
             }
         }
+
+        /// Defines the factor (volume)
+        void setFactor(T factor){
+            this->factor = factor;
+        }
+
+        /// Defines the offset
+        void setOffset(T offset) {
+            this->offset = offset;
+        }
+
     protected:
         float factor;
         T maxValue;
