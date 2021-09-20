@@ -86,17 +86,25 @@ Inheritance diagram for audio_tools::SineWaveGenerator&lt; T &gt;:</div>
   <img src="classaudio__tools_1_1_sine_wave_generator.png" usemap="#audio_5Ftools::SineWaveGenerator_3C_20T_20_3E_map" alt=""/>
   <map id="audio_5Ftools::SineWaveGenerator_3C_20T_20_3E_map" name="audio_5Ftools::SineWaveGenerator_3C_20T_20_3E_map">
 <area href="classaudio__tools_1_1_sound_generator.html" title="Base class to define the abstract interface for the sound generating classes." alt="audio_tools::SoundGenerator&lt; T &gt;" shape="rect" coords="0,0,227,24"/>
+<area href="classaudio__tools_1_1_audio_base_info_dependent.html" title="Supports changes to the sampling rate, bits and channels." alt="audio_tools::AudioBaseInfoDependent" shape="rect" coords="237,0,464,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9e866367d8881dece31b0b580f33dfb6"><td class="memItemLeft" align="right" valign="top"><a id="a9e866367d8881dece31b0b580f33dfb6"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>SineWaveGenerator</b> (float amplitude=32767.0, float phase=0)</td></tr>
-<tr class="separator:a9e866367d8881dece31b0b580f33dfb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74aa7308528c798b6f6a8e8e2a5c6fb9"><td class="memItemLeft" align="right" valign="top"><a id="a74aa7308528c798b6f6a8e8e2a5c6fb9"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>SineWaveGenerator</b> (float amplitude=32767.0, float phase=0.0)</td></tr>
+<tr class="separator:a74aa7308528c798b6f6a8e8e2a5c6fb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84748568a8bf3980f838e96b514d8c57"><td class="memItemLeft" align="right" valign="top"><a id="a84748568a8bf3980f838e96b514d8c57"></a>
+<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sine_wave_generator.html#a84748568a8bf3980f838e96b514d8c57">audioInfo</a> ()</td></tr>
+<tr class="memdesc:a84748568a8bf3980f838e96b514d8c57"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the <a class="el" href="structaudio__tools_1_1_audio_base_info.html" title="Basic Audio information which drives e.g. I2S.">AudioBaseInfo</a> <br /></td></tr>
+<tr class="separator:a84748568a8bf3980f838e96b514d8c57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab985205e910888ec19cfde815d2db985"><td class="memItemLeft" align="right" valign="top"><a id="ab985205e910888ec19cfde815d2db985"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> ()</td></tr>
 <tr class="separator:ab985205e910888ec19cfde815d2db985"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a701ca4d6f2f074fb00aa6febbff64ae4"><td class="memItemLeft" align="right" valign="top"><a id="a701ca4d6f2f074fb00aa6febbff64ae4"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> info, uint16_t frequency=0)</td></tr>
+<tr class="separator:a701ca4d6f2f074fb00aa6febbff64ae4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6443d19e2d4bb509f20587cdc0a343d6"><td class="memItemLeft" align="right" valign="top"><a id="a6443d19e2d4bb509f20587cdc0a343d6"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (int channels, uint16_t sample_rate, uint16_t frequency=0)</td></tr>
 <tr class="separator:a6443d19e2d4bb509f20587cdc0a343d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -140,6 +148,13 @@ virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 <tr class="memitem:a58638da917b965730488e7b798b8a931 inherit pub_methods_classaudio__tools_1_1_sound_generator"><td class="memItemLeft" align="right" valign="top"><a id="a58638da917b965730488e7b798b8a931"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setChannels</b> (int ch)</td></tr>
 <tr class="separator:a58638da917b965730488e7b798b8a931 inherit pub_methods_classaudio__tools_1_1_sound_generator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classaudio__tools_1_1_audio_base_info_dependent"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classaudio__tools_1_1_audio_base_info_dependent')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classaudio__tools_1_1_audio_base_info_dependent.html">audio_tools::AudioBaseInfoDependent</a></td></tr>
+<tr class="memitem:a00aba34fefa5ae47e695a1cf931f66dc inherit pub_methods_classaudio__tools_1_1_audio_base_info_dependent"><td class="memItemLeft" align="right" valign="top"><a id="a00aba34fefa5ae47e695a1cf931f66dc"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setAudioInfo</b> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> info)</td></tr>
+<tr class="separator:a00aba34fefa5ae47e695a1cf931f66dc inherit pub_methods_classaudio__tools_1_1_audio_base_info_dependent"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16c99d6218d2dc4574d4d9725d77052a inherit pub_methods_classaudio__tools_1_1_audio_base_info_dependent"><td class="memItemLeft" align="right" valign="top"><a id="a16c99d6218d2dc4574d4d9725d77052a"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>validate</b> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> &amp;info)</td></tr>
+<tr class="separator:a16c99d6218d2dc4574d4d9725d77052a inherit pub_methods_classaudio__tools_1_1_audio_base_info_dependent"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -156,7 +171,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>double_Pi</b> = PI *
 float&#160;</td><td class="memItemRight" valign="bottom"><b>m_amplitude</b> = 1.0</td></tr>
 <tr class="separator:a34d176c925a7b5d05c441ec77777d465"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35c1ad292ea3abda9b07d21c3d1f6e08"><td class="memItemLeft" align="right" valign="top"><a id="a35c1ad292ea3abda9b07d21c3d1f6e08"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>m_deltaTime</b> = 1.0 / m_sample_rate</td></tr>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>m_deltaTime</b> = 0.0</td></tr>
 <tr class="separator:a35c1ad292ea3abda9b07d21c3d1f6e08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a94197797749296a13ab631e14597f643"><td class="memItemLeft" align="right" valign="top"><a id="a94197797749296a13ab631e14597f643"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>m_frequency</b> = 0</td></tr>
@@ -165,7 +180,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>m_frequency</b> = 0<
 float&#160;</td><td class="memItemRight" valign="bottom"><b>m_phase</b> = 0.0</td></tr>
 <tr class="separator:abab203b076efcfdea0f8d6d47fc8cb8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeb0aaca552214b49f05896f8d10ca0a1"><td class="memItemLeft" align="right" valign="top"><a id="aeb0aaca552214b49f05896f8d10ca0a1"></a>
-uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>m_sample_rate</b></td></tr>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>m_sample_rate</b> = 0</td></tr>
 <tr class="separator:aeb0aaca552214b49f05896f8d10ca0a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a348ebc5bd66cbbd4cebf9d5f012adcb2"><td class="memItemLeft" align="right" valign="top"><a id="a348ebc5bd66cbbd4cebf9d5f012adcb2"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>m_time</b> = 0.0</td></tr>

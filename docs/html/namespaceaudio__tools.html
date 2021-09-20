@@ -181,17 +181,6 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_external_buffer_stream.html">ExternalBufferStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A <a class="el" href="class_stream.html">Stream</a> backed by a SingleBufferStream. We assume that the memory is externally allocated and that we can submit only full buffer records, which are then available for reading.  <a href="classaudio__tools_1_1_external_buffer_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t.html">FFT</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cooley-Tukey <a class="el" href="classaudio__tools_1_1_f_f_t.html" title="Cooley-Tukey FFT (in-place, breadth-first, decimation-in-frequency) Better optimized but less intuiti...">FFT</a> (in-place, breadth-first, decimation-in-frequency) Better optimized but less intuitive.  <a href="classaudio__tools_1_1_f_f_t.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_base.html">FFTBase</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cooley–Tukey <a class="el" href="classaudio__tools_1_1_f_f_t.html" title="Cooley-Tukey FFT (in-place, breadth-first, decimation-in-frequency) Better optimized but less intuiti...">FFT</a> which allows the specification of the numeric data type NT type.  <a href="classaudio__tools_1_1_f_f_t_base.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_divide_and_conquer.html">FFTDivideAndConquer</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cooley–Tukey <a class="el" href="classaudio__tools_1_1_f_f_t.html" title="Cooley-Tukey FFT (in-place, breadth-first, decimation-in-frequency) Better optimized but less intuiti...">FFT</a> (in-place, divide-and-conquer) Higher memory requirements and redundancy although more intuitive.  <a href="classaudio__tools_1_1_f_f_t_divide_and_conquer.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_stream.html">FFTStream</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_generated_sound_stream.html">GeneratedSoundStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Source for reading generated tones. Please note.  <a href="classaudio__tools_1_1_generated_sound_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -410,10 +399,6 @@ typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 <tr class="memitem:a6ec6e20986bbe492bb4b30bfd2190620"><td class="memItemLeft" align="right" valign="top"><a id="a6ec6e20986bbe492bb4b30bfd2190620"></a>
 typedef <a class="el" href="classaudio__tools_1_1_port_audio_stream.html">PortAudioStream</a>&#160;</td><td class="memItemRight" valign="bottom"><b>DefaultStream</b></td></tr>
 <tr class="separator:a6ec6e20986bbe492bb4b30bfd2190620"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a025aefdfa5bfabf11bde0995bf538c3b"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:a025aefdfa5bfabf11bde0995bf538c3b"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a025aefdfa5bfabf11bde0995bf538c3b">FFTArray</a> = std::valarray&lt; std::complex&lt; T &gt; &gt;</td></tr>
-<tr class="memdesc:a025aefdfa5bfabf11bde0995bf538c3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template Array of complex numbers.  <a href="namespaceaudio__tools.html#a025aefdfa5bfabf11bde0995bf538c3b">More...</a><br /></td></tr>
-<tr class="separator:a025aefdfa5bfabf11bde0995bf538c3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af464b4ec891d44c504d35d08d64ded5d"><td class="memItemLeft" align="right" valign="top"><a id="af464b4ec891d44c504d35d08d64ded5d"></a>
 typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><b>MP3DataCallback</b>) (<a class="el" href="structaudio__tools_1_1_m_p3_mini_audio_info.html">MP3MiniAudioInfo</a> &amp;info, int16_t *pwm_buffer, size_t len)</td></tr>
 <tr class="separator:af464b4ec891d44c504d35d08d64ded5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -650,33 +635,10 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>wav_mime</b> 
 <div class="textblock"><p>Parser for MP3 ID3 Meta Data: The goal is to implement a simple API which provides the title, artist, albmum and the Genre. </p>
 <p>typedefs for Default</p>
 <p>Generic Implementation of sound input and output for desktop environments using portaudio.</p>
-<p>Cooley–Tukey <a class="el" href="classaudio__tools_1_1_f_f_t.html" title="Cooley-Tukey FFT (in-place, breadth-first, decimation-in-frequency) Better optimized but less intuiti...">FFT</a> inpired by <a href="https://rosettacode.org/wiki/Fast_Fourier_transform">https://rosettacode.org/wiki/Fast_Fourier_transform</a> </p><dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
-<dl class="section copyright"><dt>Copyright</dt><dd>GPLv3</dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3</dd></dl>
 <hr  />
- </div><h2 class="groupheader">Typedef Documentation</h2>
-<a id="a025aefdfa5bfabf11bde0995bf538c3b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a025aefdfa5bfabf11bde0995bf538c3b">&#9670;&nbsp;</a></span>FFTArray</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="namespaceaudio__tools.html#a025aefdfa5bfabf11bde0995bf538c3b">audio_tools::FFTArray</a> = typedef std::valarray&lt;std::complex&lt;T&gt; &gt;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Template Array of complex numbers. </p>
-<dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
-<dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
-
-</div>
-</div>
-<h2 class="groupheader">Function Documentation</h2>
+ </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a6d3366afe95c009b2a445ebcc5eeccac"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6d3366afe95c009b2a445ebcc5eeccac">&#9670;&nbsp;</a></span>defaultPWMAudioOutputCallback()</h2>
 
