@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['vector_369',['Vector',['../classaudio__tools_1_1_vector.html',1,'audio_tools']]],
-  ['vector_3c_20audio_5ftools_3a_3ahttpheaderline_20_2a_20_3e_370',['Vector&lt; audio_tools::HttpHeaderLine * &gt;',['../classaudio__tools_1_1_vector.html',1,'audio_tools']]],
-  ['vector_3c_20audio_5ftools_3a_3apicochannelout_20_3e_371',['Vector&lt; audio_tools::PicoChannelOut &gt;',['../classaudio__tools_1_1_vector.html',1,'audio_tools']]],
-  ['vector_3c_20audio_5ftools_3a_3apininfoesp32_20_3e_372',['Vector&lt; audio_tools::PinInfoESP32 &gt;',['../classaudio__tools_1_1_vector.html',1,'audio_tools']]],
-  ['vector_3c_20mbed_3a_3apwmout_20_2a_20_3e_373',['Vector&lt; mbed::PwmOut * &gt;',['../classaudio__tools_1_1_vector.html',1,'audio_tools']]]
+  ['wavaudioinfo_365',['WAVAudioInfo',['../structaudio__tools_1_1_w_a_v_audio_info.html',1,'audio_tools']]],
+  ['wavdecoder_366',['WAVDecoder',['../classaudio__tools_1_1_w_a_v_decoder.html',1,'audio_tools']]],
+  ['wavencoder_367',['WAVEncoder',['../classaudio__tools_1_1_w_a_v_encoder.html',1,'audio_tools']]],
+  ['wavheader_368',['WAVHeader',['../classaudio__tools_1_1_w_a_v_header.html',1,'audio_tools']]]
 ];

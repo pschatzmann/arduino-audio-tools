@@ -1,22 +1,11 @@
 var searchData=
 [
-  ['memorystream_311',['MemoryStream',['../classaudio__tools_1_1_memory_stream.html',1,'audio_tools']]],
-  ['metadataid3_312',['MetaDataID3',['../classaudio__tools_1_1_meta_data_i_d3.html',1,'audio_tools']]],
-  ['metadataid3base_313',['MetaDataID3Base',['../classaudio__tools_1_1_meta_data_i_d3_base.html',1,'audio_tools']]],
-  ['metadataid3v1_314',['MetaDataID3V1',['../classaudio__tools_1_1_meta_data_i_d3_v1.html',1,'audio_tools']]],
-  ['metadataid3v2_315',['MetaDataID3V2',['../classaudio__tools_1_1_meta_data_i_d3_v2.html',1,'audio_tools']]],
-  ['mozziconfig_316',['MozziConfig',['../structaudio__tools_1_1_mozzi_config.html',1,'audio_tools']]],
-  ['mozzigenerator_317',['MozziGenerator',['../classaudio__tools_1_1_mozzi_generator.html',1,'audio_tools']]],
-  ['mozzistream_318',['MozziStream',['../classaudio__tools_1_1_mozzi_stream.html',1,'audio_tools']]],
-  ['mp3dec_5fframe_5finfo_5ft_319',['mp3dec_frame_info_t',['../structminimp3_1_1mp3dec__frame__info__t.html',1,'minimp3']]],
-  ['mp3dec_5fscratch_5ft_320',['mp3dec_scratch_t',['../structminimp3_1_1mp3dec__scratch__t.html',1,'minimp3']]],
-  ['mp3dec_5ft_321',['mp3dec_t',['../structminimp3_1_1mp3dec__t.html',1,'minimp3']]],
-  ['mp3decoderhelix_322',['MP3DecoderHelix',['../classaudio__tools_1_1_m_p3_decoder_helix.html',1,'audio_tools']]],
-  ['mp3decodermad_323',['MP3DecoderMAD',['../classaudio__tools_1_1_m_p3_decoder_m_a_d.html',1,'audio_tools']]],
-  ['mp3decodermini_324',['MP3DecoderMini',['../classaudio__tools_1_1_m_p3_decoder_mini.html',1,'audio_tools']]],
-  ['mp3encoderlame_325',['MP3EncoderLAME',['../classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html',1,'audio_tools']]],
-  ['mp3miniaudioinfo_326',['MP3MiniAudioInfo',['../structaudio__tools_1_1_m_p3_mini_audio_info.html',1,'audio_tools']]],
-  ['multiconverter_327',['MultiConverter',['../classaudio__tools_1_1_multi_converter.html',1,'audio_tools']]],
-  ['multitarget_328',['MultiTarget',['../struct_stream_1_1_multi_target.html',1,'Stream']]],
-  ['musicalnotes_329',['MusicalNotes',['../classaudio__tools_1_1_musical_notes.html',1,'audio_tools']]]
+  ['nano_5fble_5ffreq_5finfo_321',['Nano_BLE_freq_info',['../structaudio__tools_1_1_nano___b_l_e__freq__info.html',1,'audio_tools']]],
+  ['nano_5fble_5fratio_5finfo_322',['Nano_BLE_ratio_info',['../structaudio__tools_1_1_nano___b_l_e__ratio__info.html',1,'audio_tools']]],
+  ['nbuffer_323',['NBuffer',['../classaudio__tools_1_1_n_buffer.html',1,'audio_tools']]],
+  ['nbuffer_3c_20channels_20_3e_324',['NBuffer&lt; Channels &gt;',['../classaudio__tools_1_1_n_buffer.html',1,'audio_tools']]],
+  ['nbuffer_3c_20uint8_5ft_20_3e_325',['NBuffer&lt; uint8_t &gt;',['../classaudio__tools_1_1_n_buffer.html',1,'audio_tools']]],
+  ['noisegenerator_326',['NoiseGenerator',['../classaudio__tools_1_1_noise_generator.html',1,'audio_tools']]],
+  ['nopconverter_327',['NOPConverter',['../classaudio__tools_1_1_n_o_p_converter.html',1,'audio_tools']]],
+  ['numberreader_328',['NumberReader',['../classaudio__tools_1_1_number_reader.html',1,'audio_tools']]]
 ];
