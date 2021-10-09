@@ -7,6 +7,13 @@ namespace audio_tools {
 #define INT24_MAX 0x7FFFFF
 
 /**
+ * @brief Time Units
+ */
+
+enum TimeUnit {MS, US};
+
+
+/**
  * @brief 24bit integer which is used for I2S sound processing. It works only on little endian machines!
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -103,7 +110,13 @@ struct AudioBaseInfo {
     }
     bool operator!=(AudioBaseInfo alt){
         return !(*this == alt);
-    }       
+    } 
+
+    void logInfo() {
+      LOGI("sample_rate: %d", sample_rate);
+      LOGI("channels: %d", channels);
+      LOGI("bits_per_sample: %d", bits_per_sample);
+    }      
 };
 
 /**
@@ -112,7 +125,7 @@ struct AudioBaseInfo {
 class AudioBaseInfoDependent {
     public:
       virtual ~AudioBaseInfoDependent(){}
-      virtual void setAudioInfo(AudioBaseInfo info) {};
+      virtual void setAudioInfo(AudioBaseInfo info)=0;
       virtual bool validate(AudioBaseInfo &info){
         return true;
       }
@@ -129,7 +142,7 @@ enum I2SMode {
 };
 
 
-#ifdef I2S_SUPPORT
+#ifdef USE_I2S
 
 /**
  * @brief configuration for all common i2s settings

@@ -36,24 +36,24 @@ class PortAudioConfig : public AudioBaseInfo {
 class PortAudioStream : public BufferedStream,  public AudioBaseInfoDependent {
     public:
         PortAudioStream(int buffer_size=DEFAULT_BUFFER_SIZE):BufferedStream(buffer_size) {
-            LOGD(__FUNCTION__);
+            LOGD(LOG_METHOD);
             this->buffer_size = buffer_size;
         }
 
         ~PortAudioStream(){
-            LOGD(__FUNCTION__);
+            LOGD(LOG_METHOD);
             Pa_Terminate();
         }
 
         PortAudioConfig defaultConfig() {
-            LOGD(__FUNCTION__);
+            LOGD(LOG_METHOD);
             PortAudioConfig default_info;
             return default_info;
         }
 
         /// notification of audio info change
         virtual void setAudioInfo(AudioBaseInfo in) {
-            LOGI(__FUNCTION__);
+            LOGI(LOG_METHOD);
             info.channels = in.channels;
             info.sample_rate = in.sample_rate;
             info.bits_per_sample = in.bits_per_sample;
@@ -67,7 +67,7 @@ class PortAudioStream : public BufferedStream,  public AudioBaseInfoDependent {
 
         // start with the indicated configuration
         void begin(PortAudioConfig info) {
-            LOGD(__FUNCTION__);
+            LOGD(LOG_METHOD);
             this->info = info;
 
             if (info.channels>0 && info.sample_rate && info.bits_per_sample>0){
@@ -104,7 +104,7 @@ class PortAudioStream : public BufferedStream,  public AudioBaseInfoDependent {
         }
 
         void end() {
-            LOGD(__FUNCTION__);
+            LOGD(LOG_METHOD);
             err = Pa_StopStream( stream );
             if( err != paNoError ) {
                 LOGE(  "PortAudio error: %s\n", Pa_GetErrorText( err ) );
@@ -186,7 +186,7 @@ class PortAudioStream : public BufferedStream,  public AudioBaseInfoDependent {
         /// automatically start the stream when we start to get data
         void startStream() {
             if (!stream_started) {
-                LOGD(__FUNCTION__);
+                LOGD(LOG_METHOD);
                 err = Pa_StartStream( stream );
                 if( err == paNoError ) {
                     stream_started = true;

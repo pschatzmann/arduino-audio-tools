@@ -21,7 +21,7 @@ class AACDecoderHelix : public AudioDecoder  {
     public:
 
         AACDecoderHelix() {
-        	LOGD(__FUNCTION__);
+        	LOGD(LOG_METHOD);
             aac = new libhelix::AACDecoderHelix();
         }
         /**
@@ -30,7 +30,7 @@ class AACDecoderHelix : public AudioDecoder  {
          * @param out_stream 
          */
         AACDecoderHelix(Print &out_stream){
-        	LOGD(__FUNCTION__);
+        	LOGD(LOG_METHOD);
             aac = new libhelix::AACDecoderHelix(out_stream);
         }  
 
@@ -42,7 +42,7 @@ class AACDecoderHelix : public AudioDecoder  {
          * @param bi 
          */
         AACDecoderHelix(Print &out_stream, AudioBaseInfoDependent &bi){
-        	LOGD(__FUNCTION__);
+        	LOGD(LOG_METHOD);
             aac = new libhelix::AACDecoderHelix(out_stream);
             setNotifyAudioChange(bi);
         }  
@@ -52,25 +52,25 @@ class AACDecoderHelix : public AudioDecoder  {
          * 
          */
         ~AACDecoderHelix(){
-         	LOGD(__FUNCTION__);
+         	LOGD(LOG_METHOD);
             delete aac;
         }
 
         /// Defines the output Stream
 		virtual void setOutputStream(Print &out_stream){
-        	LOGD(__FUNCTION__);
+        	LOGD(LOG_METHOD);
             aac->setOutput(out_stream);
 		}
 
         /// Starts the processing
         void begin(){
-        	LOGD(__FUNCTION__);
+        	LOGD(LOG_METHOD);
             aac->begin();
         }
 
         /// Releases the reserved memory
         virtual void end(){
-        	LOGD(__FUNCTION__);
+        	LOGD(LOG_METHOD);
             aac->end();
         }
 
@@ -103,7 +103,7 @@ class AACDecoderHelix : public AudioDecoder  {
 
         /// Defines the callback object to which the Audio information change is provided
         virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi){
-        	LOGD(__FUNCTION__);
+        	LOGD(LOG_METHOD);
             audioChangeAACHelix = &bi;
             aac->setInfoCallback(infoCallback);
         }
@@ -111,7 +111,7 @@ class AACDecoderHelix : public AudioDecoder  {
         /// notifies the subscriber about a change
         static void infoCallback(_AACFrameInfo &i){
             if (audioChangeAACHelix!=nullptr){
-            	LOGD(__FUNCTION__);
+            	LOGD(LOG_METHOD);
                 AudioBaseInfo baseInfo;
                 baseInfo.channels = i.nChans;
                 baseInfo.sample_rate = i.sampRateOut;

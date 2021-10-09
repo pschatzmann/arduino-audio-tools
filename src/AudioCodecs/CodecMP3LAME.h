@@ -27,29 +27,29 @@ class MP3EncoderLAME : public AudioEncoder {
 
 public:
 	MP3EncoderLAME(){
-		LOGD(__FUNCTION__);
+		LOGD(LOG_METHOD);
 		enc = new liblame::MP3EncoderLAME();
 	}
 
 	MP3EncoderLAME(Stream &out_stream){
-		LOGD(__FUNCTION__);
+		LOGD(LOG_METHOD);
 		enc = new liblame::MP3EncoderLAME(out_stream);
 	}
 
 	~MP3EncoderLAME(){
-		LOGD(__FUNCTION__);
+		LOGD(LOG_METHOD);
 		 delete enc;
 	 }
 
 	/// Defines the output stream
 	void setOutputStream(Print &out_stream){
-		LOGD(__FUNCTION__);
+		LOGD(LOG_METHOD);
         enc->setOutput(out_stream);
     }
 
 	/// Defines the Audio Info
     void setAudioInfo(AudioBaseInfo from) {
-		LOGD(__FUNCTION__);
+		LOGD(LOG_METHOD);
 		liblame::AudioInfo info;
 		info.channels = from.channels;
 		info.sample_rate = from.sample_rate;
@@ -60,7 +60,7 @@ public:
 	/// Defines the Audio Info
     
     void setAudioInfo(AudioInfoLAME from) {
-		LOGD(__FUNCTION__);
+		LOGD(LOG_METHOD);
 		liblame::AudioInfo info;
 		info.channels = from.channels;
 		info.sample_rate = from.sample_rate;
@@ -81,13 +81,13 @@ public:
 	 * @return int 
 	 */
 	void begin(AudioInfoLAME info) {
-		LOGD(__FUNCTION__);
+		LOGD(LOG_METHOD);
 		setAudioInfo(info);
         enc->begin();
 	}
 
 	void begin(int input_channels, int input_sample_rate, int input_bits_per_sample) {
-		LOGD(__FUNCTION__);
+		LOGD(LOG_METHOD);
         enc->begin(input_channels, input_sample_rate, input_bits_per_sample);
     }
 
@@ -112,7 +112,7 @@ public:
 
 	// release resources
 	void end(){
-		LOGD(__FUNCTION__);
+		LOGD(LOG_METHOD);
 		enc->end();
 	}
 

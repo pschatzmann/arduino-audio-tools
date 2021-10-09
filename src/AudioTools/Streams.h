@@ -3,7 +3,8 @@
 #include "AudioConfig.h"
 #include "AudioTypes.h"
 #include "Buffers.h"
-#include "AudioI2S.h"
+//#include "AudioI2S/AudioI2S.h"
+//#include "AudioTools/AnalogAudio.h"
 
 namespace audio_tools {
 
@@ -31,14 +32,14 @@ class MemoryStream : public Stream {
         }
 
         ~MemoryStream(){
-	 		LOGD(__FUNCTION__);
+	 		LOGD(LOG_METHOD);
             if (owns_buffer)
                 delete[] buffer;
         }
 
         // resets the read pointer
         void begin() {
-	 		LOGD(__FUNCTION__);
+	 		LOGD(LOG_METHOD);
             write_pos = buffer_size;
             read_pos = 0;
         }
@@ -135,7 +136,7 @@ template <class T>
 class GeneratedSoundStream : public Stream {
     public:
         GeneratedSoundStream(SoundGenerator<T> &generator){
-	 		LOGD(__FUNCTION__);
+	 		LOGD(LOG_METHOD);
             this->generator_ptr = &generator;
         }
         
@@ -180,13 +181,13 @@ class GeneratedSoundStream : public Stream {
 
         /// start the processing
         void begin() {
-	 		LOGD(__FUNCTION__);
+	 		LOGD(LOG_METHOD);
             generator_ptr->begin();
         }
 
         /// stop the processing
         void end() {
-	 		LOGD(__FUNCTION__);
+	 		LOGD(LOG_METHOD);
             generator_ptr->stop();
         }
 
@@ -213,10 +214,12 @@ class GeneratedSoundStream : public Stream {
 class BufferedStream : public Stream {
     public:
         BufferedStream(size_t buffer_size){
+	 		LOGD(LOG_METHOD);
             buffer = new SingleBuffer<uint8_t>(buffer_size);
         }
 
         ~BufferedStream() {
+	 		LOGD(LOG_METHOD);
             if (buffer!=nullptr){
                 delete buffer;
             }
@@ -232,6 +235,7 @@ class BufferedStream : public Stream {
 
         /// Use this method: write an array
         virtual size_t write(const uint8_t* data, size_t len) {    
+	 		LOGD(LOG_METHOD);
             flush();
             return writeExt(data, len);
         }
@@ -317,18 +321,18 @@ class CsvStream : public BufferedStream, public AudioBaseInfoDependent  {
         }
 
         void begin(){
-	 		LOGD(__FUNCTION__);
+	 		LOGD(LOG_METHOD);
             this->active = true;
         }
 
         void begin(AudioBaseInfo info){
-	 		LOGD(__FUNCTION__);
+	 		LOGD(LOG_METHOD);
             this->active = true;
             this->channels = info.channels;
         }
 
         void begin(int channels, Print &out=Serial){
-	 		LOGD(__FUNCTION__);
+	 		LOGD(LOG_METHOD);
             this->channels = channels;
             this->out_ptr = &out;
             this->active = true;
@@ -337,13 +341,13 @@ class CsvStream : public BufferedStream, public AudioBaseInfoDependent  {
 
         /// Sets the CsvStream as inactive 
         void end() {
-	 		LOGD(__FUNCTION__);
+	 		LOGD(LOG_METHOD);
             active = false;
         }
 
         /// defines the number of channels
         virtual void setAudioInfo(AudioBaseInfo info) {
-	 		LOGD(__FUNCTION__);
+	 		LOGD(LOG_METHOD);
             this->channels = info.channels;
         };
 
@@ -370,7 +374,7 @@ class CsvStream : public BufferedStream, public AudioBaseInfoDependent  {
         }
 
         virtual size_t readExt( uint8_t *data, size_t length) { 
-            LOGE("not implemented: %s", __FUNCTION__);
+            LOGE("not implemented: %s", LOG_METHOD);
             return 0;
         }
 };
@@ -393,14 +397,14 @@ class HexDumpStream : public BufferedStream {
         }
 
         void begin(){
-	 		LOGD(__FUNCTION__);
+	 		LOGD(LOG_METHOD);
             this->active = true;
             pos = 0;
         }
 
         /// Sets the CsvStream as inactive 
         void end() {
-	 		LOGD(__FUNCTION__);
+	 		LOGD(LOG_METHOD);
             active = false;
         }
 
@@ -433,7 +437,7 @@ class HexDumpStream : public BufferedStream {
         }
 
         virtual size_t readExt( uint8_t *data, size_t length) { 
-            LOGE("not implemented: %s", __FUNCTION__);
+            LOGE("not implemented: %s", LOG_METHOD);
             return 0;
         }
 };
@@ -475,7 +479,7 @@ class AudioOutputStream : public BufferedStream {
         }
 
         virtual size_t readExt( uint8_t *data, size_t len) { 
-            LOGE("not implemented: %s", __FUNCTION__);
+            LOGE("not implemented: %s", LOG_METHOD);
             return 0;
         }
 };
@@ -540,7 +544,7 @@ class RingBufferStream : public Stream {
 class ExternalBufferStream : public Stream {
     public:
         ExternalBufferStream() {
-	 		LOGD(__FUNCTION__);
+	 		LOGD(LOG_METHOD);
         }
 
         virtual int available (){
@@ -568,7 +572,7 @@ class ExternalBufferStream : public Stream {
         }
         
         virtual size_t write(uint8_t c) {
-            LOGE("not implemented: %s", __FUNCTION__);
+            LOGE("not implemented: %s", LOG_METHOD);
             return 0;
         }
 
@@ -591,8 +595,8 @@ class EncodedAudioStream : public Stream {
          * @param outputStream 
          * @param decoder 
          */
-        EncodedAudioStream(Stream &outputStream, AudioDecoder &decoder) {
-	 		LOGD(__FUNCTION__);
+        EncodedAudioStream(Print &outputStream, AudioDecoder &decoder) {
+	 		LOGD(LOG_METHOD);
             decoder_ptr = &decoder;
             decoder_ptr->setOutputStream(outputStream);
             writer_ptr = decoder_ptr;
@@ -605,8 +609,8 @@ class EncodedAudioStream : public Stream {
          * @param outputStream 
          * @param decoder 
          */
-        EncodedAudioStream(Stream &outputStream, AudioDecoder *decoder) {
-	 		LOGD(__FUNCTION__);
+        EncodedAudioStream(Print &outputStream, AudioDecoder *decoder) {
+	 		LOGD(LOG_METHOD);
             decoder_ptr = decoder;
             decoder_ptr->setOutputStream(outputStream);
             writer_ptr = decoder_ptr;
@@ -619,8 +623,8 @@ class EncodedAudioStream : public Stream {
          * @param outputStream 
          * @param decoder 
          */
-        EncodedAudioStream(Stream *outputStream, AudioDecoder *decoder) {
-	 		LOGD(__FUNCTION__);
+        EncodedAudioStream(Print *outputStream, AudioDecoder *decoder) {
+	 		LOGD(LOG_METHOD);
             decoder_ptr = decoder;
             decoder_ptr->setOutputStream(*outputStream);
             writer_ptr = decoder_ptr;
@@ -633,8 +637,8 @@ class EncodedAudioStream : public Stream {
          * @param outputStream 
          * @param encoder 
          */
-        EncodedAudioStream(Stream &outputStream, AudioEncoder &encoder) {
-	 		LOGD(__FUNCTION__);
+        EncodedAudioStream(Print &outputStream, AudioEncoder &encoder) {
+	 		LOGD(LOG_METHOD);
             encoder_ptr = &encoder;
             encoder_ptr->setOutputStream(outputStream);
             writer_ptr = encoder_ptr;
@@ -647,8 +651,8 @@ class EncodedAudioStream : public Stream {
          * @param outputStream 
          * @param encoder 
          */
-        EncodedAudioStream(Stream &outputStream, AudioEncoder *encoder) {
-	 		LOGD(__FUNCTION__);
+        EncodedAudioStream(Print &outputStream, AudioEncoder *encoder) {
+	 		LOGD(LOG_METHOD);
             encoder_ptr = encoder;
             encoder_ptr->setOutputStream(outputStream);
             writer_ptr = encoder_ptr;
@@ -661,8 +665,8 @@ class EncodedAudioStream : public Stream {
          * @param outputStream 
          * @param encoder 
          */
-        EncodedAudioStream(Stream *outputStream, AudioEncoder *encoder) {
-	 		LOGD(__FUNCTION__);
+        EncodedAudioStream(Print *outputStream, AudioEncoder *encoder) {
+	 		LOGD(LOG_METHOD);
             encoder_ptr = encoder;
             encoder_ptr->setOutputStream(*outputStream);
             writer_ptr = encoder_ptr;
@@ -680,13 +684,13 @@ class EncodedAudioStream : public Stream {
 
         /// Define object which need to be notified if the basinfo is changing
         void setNotifyAudioChange(AudioBaseInfoDependent &bi) {
-	 		LOGD(__FUNCTION__);
+	 		LOGD(LOG_METHOD);
             decoder_ptr->setNotifyAudioChange(bi);
         }
 
         /// Starts the processing - sets the status to active
         void begin() {
-	 		LOGD(__FUNCTION__);
+	 		LOGD(LOG_METHOD);
             decoder_ptr->begin();
             encoder_ptr->begin();
             active = true;
@@ -694,7 +698,7 @@ class EncodedAudioStream : public Stream {
 
         /// Ends the processing
         void end() {
-	 		LOGD(__FUNCTION__);
+	 		LOGD(LOG_METHOD);
             decoder_ptr->end();
             encoder_ptr->end();
             active = false;
@@ -730,6 +734,10 @@ class EncodedAudioStream : public Stream {
         
         /// encode the data
         virtual size_t write(const uint8_t *data, size_t len){
+	 		LOGD(LOG_METHOD);
+            if(writer_ptr==nullptr){
+                LOGE("writer_ptr is null");
+            }
             return writer_ptr!=nullptr ? writer_ptr->write(data,len) : 0;
         }
         
@@ -824,140 +832,6 @@ class CallbackStream :  public BufferedStream {
         }
 
 };
-
-
-#ifdef ESP32
-
-/**
- * @brief We support the Stream interface for the ADC class
- * 
- * @tparam T 
- * @author Phil Schatzmann
- * @copyright GPLv3
- */
-
-class AnalogAudioStream : public BufferedStream, public AudioBaseInfoDependent  {
-
-    public:
-        AnalogAudioStream() : BufferedStream(DEFAULT_BUFFER_SIZE){
-        }
-
-        /// Provides the default configuration
-        AnalogConfig defaultConfig(RxTxMode mode) {
-            return adc.defaultConfig(mode);
-        }
-
-        void begin(AnalogConfig cfg) {
-            adc.begin(cfg);
-            // unmute
-            mute(false);
-        }
-
-        void end() {
-            mute(true);
-            adc.end();
-        }
-
-    protected:
-        AnalogAudio adc;
-        int mute_pin;
-
-        /// set mute pin on or off
-        void mute(bool is_mute){
-            if (mute_pin>0) {
-                digitalWrite(mute_pin, is_mute ? SOFT_MUTE_VALUE : !SOFT_MUTE_VALUE );
-            }
-        }
-
-        virtual size_t writeExt(const uint8_t* data, size_t len) {
-            return adc.writeBytes(data, len);
-        }
-
-        virtual size_t readExt( uint8_t *data, size_t length) { 
-            return adc.readBytes(data, length);
-        }
-
-};
-
-#endif
-
-
-
-#ifdef I2S_SUPPORT
-
-/**
- * @brief We support the Stream interface for the I2S access. In addition we allow a separate mute pin which might also be used
- * to drive a LED... 
- * 
- * @tparam T 
- * @author Phil Schatzmann
- * @copyright GPLv3
- */
-
-class I2SStream : public BufferedStream, public AudioBaseInfoDependent  {
-
-    public:
-        I2SStream(int mute_pin=PIN_I2S_MUTE) : BufferedStream(DEFAULT_BUFFER_SIZE){
-            this->mute_pin = mute_pin;
-            if (mute_pin>0) {
-                pinMode(mute_pin, OUTPUT);
-                mute(true);
-            }
-        }
-
-        /// Provides the default configuration
-        I2SConfig defaultConfig(RxTxMode mode) {
-            return i2s.defaultConfig(mode);
-        }
-
-        void begin(I2SConfig cfg) {
-            i2s.begin(cfg);
-            // unmute
-            mute(false);
-        }
-
-        void end() {
-            mute(true);
-            i2s.end();
-        }
-
-        /// updates the sample rate dynamically 
-        virtual void setAudioInfo(AudioBaseInfo info) {
-            I2SConfig cfg = i2s.config();
-            if (cfg.sample_rate != info.sample_rate
-                || cfg.channels != info.channels
-                || cfg.bits_per_sample != info.bits_per_sample) {
-                cfg.sample_rate = info.sample_rate;
-                cfg.bits_per_sample = info.bits_per_sample;
-                cfg.channels = info.channels;
-
-                i2s.end();
-                i2s.begin(cfg);        
-            }
-        }
-
-    protected:
-        I2SBase i2s;
-        int mute_pin;
-
-        /// set mute pin on or off
-        void mute(bool is_mute){
-            if (mute_pin>0) {
-                digitalWrite(mute_pin, is_mute ? SOFT_MUTE_VALUE : !SOFT_MUTE_VALUE );
-            }
-        }
-
-        virtual size_t writeExt(const uint8_t* data, size_t len) {    
-            return i2s.writeBytes(data, len);
-        }
-
-        virtual size_t readExt( uint8_t *data, size_t length) { 
-            return i2s.readBytes(data, length);
-        }
-
-};
-
-#endif
 
 }
 

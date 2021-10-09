@@ -22,7 +22,7 @@ As “Audio Sources” we will have e.g.:
 
 - Analog Microphones – [AnalogAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_analog_audio_stream.html)
 - Digital Microphones – [I2SStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_i2_s_stream.html)
-- Files on the Internet – [URLStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_url_stream.html)
+- Files on the Internet – [URLStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_u_r_l_stream.html)
 - Generated Sound – [GeneratedSoundStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_generated_sound_stream.html)
 - Mobile Phone A2DP Bluetooth – [A2DPStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_a2_d_p_stream.html)
 - Binary Data in Flash Memory – [MemoryStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_memory_stream.html)
@@ -75,9 +75,34 @@ void loop(){
 
 ```
 
+
 ### Examples
 
 Further examples can be found in the [wiki](https://github.com/pschatzmann/arduino-audio-tools/wiki/Examples)!
+
+
+### Audio Player
+
+It is pretty simple to build a simple audio player with the help of the Stream API. E.g. a SD file is a sublass of an Arduino Stream, so all you need to do is to copy from the file stream to the desired output strem. Finally you need to add some logic which handles the end of file to automatically process the next file and maybe a status flag to halt and contine the processing. In addition it adds only a little bit of additional complexity to add volume control and meta data support.
+
+In order to simplify things, I decided to provide this functionality as well and to prove the point: The AudioPlayer class took only 120 lines of code to implement!
+
+The AudioPlayer supports 
+
+- __multiple audio data sources__ (AudioSourceSdFat, AudioSourceURL, AudioSourceCallback)
+- __different Output__ Scenarios (I2S, PWM, A2DP etc). Just pass the desired output stream object to the constructor.
+- __different Decoders__ for MP3, AAC, WAV. Just pass the desired decoder object to the constructor.
+- __Volume Control__ (by calling player.setVolume())
+- __Stopping and Resuming__ the processing (by calling player.stop() and player.play())
+- __Navigation__: You can move to the next file by calling player.next();
+- __Metadata__
+- __multiple processor architectures__
+
+Here are a couple of examples that demonstrate how to use the AudioPlayer class:
+
+- [A Simple SdFat Audio Player](examples/player-sd-i2s)
+- [A Simple Network Streaming Audio Player](examples/player-url-i2s)
+- [A Simple Callback Audio Player](examples/player-callback-i2s)
 
 
 ### Logging
@@ -105,11 +130,12 @@ Dependent on the example you might need to install some of the following librari
 - [arduino-fdk-aac](https://github.com/pschatzmann/arduino-fdk-aac) A __AAC Encoder and Decoder__ from the Frauenhofer Institute
 - [arduino-libmad](https://github.com/pschatzmann/arduino-libmad) A open source __MP3 Decoder__ from Underbit
 - [arduino-liblame](https://github.com/pschatzmann/arduino-liblame) A open source __MP3 Encoder__ 
-- [SD Library](https://www.arduino.cc/en/reference/SD) to read and write files.
-- [Mozzi](https://github.com/pschatzmann/Mozzi) A sound synthesis library for Arduino
+- [SdFat Library](https://github.com/greiman/SdFat) to read and write files supporting SD cards with FAT16/FAT32 and exFAT
+- [SD Library](https://www.arduino.cc/en/reference/SD) to read and write files supporting SD cards with FAT16 and FAT32
 - [SAM](https://github.com/pschatzmann/arduino-SAM) A Text to Speach Engine
 - [TTS](https://github.com/pschatzmann/TTS) A Text to Speach Engine
 - [flite](https://github.com/pschatzmann/arduino-flite) A Text to Speach Engine
+- [Mozzi](https://github.com/pschatzmann/Mozzi) A sound synthesis library for Arduino
 - [ESP8266Audio](https://github.com/earlephilhower/ESP8266Audio) to play different audio Formats
 
 
