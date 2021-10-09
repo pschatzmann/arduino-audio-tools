@@ -85,7 +85,7 @@ Further examples can be found in the [wiki](https://github.com/pschatzmann/ardui
 
 It is pretty simple to build a simple audio player with the help of the Stream API. E.g. a SD file is a sublass of an Arduino Stream, so all you need to do is to copy from the file stream to the desired output strem. Finally you need to add some logic which handles the end of file to automatically process the next file and maybe a status flag to halt and contine the processing. In addition it adds only a little bit of additional complexity to add volume control and meta data support.
 
-In order to simplify things, I decided to provide this functionality as well and to prove the point: The AudioPlayer class took only 120 lines of code to implement!
+In order to simplify things, I decided to provide this functionality as well and to prove the point: The [AudioPlayer class](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_audio_player.html) took only 120 lines of code to implement!
 
 The AudioPlayer supports 
 
@@ -100,9 +100,9 @@ The AudioPlayer supports
 
 Here are a couple of examples that demonstrate how to use the AudioPlayer class:
 
-- [A Simple SdFat Audio Player](examples/player-sd-i2s)
-- [A Simple Network Streaming Audio Player](examples/player-url-i2s)
-- [A Simple Callback Audio Player](examples/player-callback-i2s)
+- [A Simple SdFat Audio Player](examples/examples-player/player-sd-i2s)
+- [A Simple Network Streaming Audio Player](examples/examples-player/player-url-i2s)
+- [A Simple Callback Audio Player](examples/examples-player/player-callback-i2s)
 
 
 ### Logging
