@@ -226,53 +226,52 @@ $(function() {
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;                <span class="keywordflow">return</span> -1;</div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;            }</div>
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;            <span class="keywordflow">if</span> (!this-&gt;connected()){</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                <span class="keywordtype">char</span> msg[1024];</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;                LOGI(<span class="stringliteral">&quot;process connecting to host %s port %d&quot;</span>, url.host(), url.port());</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;                <span class="keywordtype">bool</span> is_connected = connect(url.host(), url.port());</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;                <span class="keywordflow">if</span> (!is_connected){</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;                    LOGE(<span class="stringliteral">&quot;Connect failed&quot;</span>);</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;                }</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;                LOGI(<span class="stringliteral">&quot;process is already connected&quot;</span>);</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;            }</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;            host_name = url.host();                </div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;            request_header.setValues(action, url.path());</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;            <span class="keywordflow">if</span> (len==-1 &amp;&amp; data!=<span class="keyword">nullptr</span>){</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;                len = strlen(data);</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;                request_header.put(CONTENT_LENGTH, len);</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;            }</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;            request_header.put(HOST, host_name);                </div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;            request_header.put(CONNECTION, connection);</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;            request_header.put(USER_AGENT, agent);</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;            request_header.put(ACCEPT_ENCODING, accept_encoding);</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;            request_header.put(ACCEPT, accept);</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;            request_header.put(CONTENT_TYPE, mime);</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;            </div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;            request_header.write(*client_ptr);</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; </div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;            <span class="keywordflow">if</span> (len&gt;0){</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;                LOGI(<span class="stringliteral">&quot;Writing data: %d bytes&quot;</span>, len);</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;                client_ptr-&gt;write((<span class="keyword">const</span> uint8_t*)data,len);</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;                LOGD(data);</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;            }</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;            </div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;            LOGI(<span class="stringliteral">&quot;Request written ... waiting for reply&quot;</span>)</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;            client_ptr-&gt;flush();</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;            reply_header.read(*client_ptr);</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; </div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;            <span class="comment">// if we use chunked tranfer we need to read the first chunked length</span></div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;            <span class="keywordflow">if</span> (reply_header.isChunked()){</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;                chunk_reader.open(*client_ptr);</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;            };</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160; </div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;            <span class="comment">// wait for data</span></div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;            <span class="keywordflow">return</span> reply_header.statusCode();</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        }</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160; </div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;};</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160; </div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;}</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                LOGI(<span class="stringliteral">&quot;process connecting to host %s port %d&quot;</span>, url.host(), url.port());</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;                <span class="keywordtype">bool</span> is_connected = connect(url.host(), url.port());</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;                <span class="keywordflow">if</span> (!is_connected){</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;                    LOGE(<span class="stringliteral">&quot;Connect failed&quot;</span>);</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;                }</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;                LOGI(<span class="stringliteral">&quot;process is already connected&quot;</span>);</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;            }</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;            host_name = url.host();                </div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;            request_header.setValues(action, url.path());</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;            <span class="keywordflow">if</span> (len==-1 &amp;&amp; data!=<span class="keyword">nullptr</span>){</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;                len = strlen(data);</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;                request_header.put(CONTENT_LENGTH, len);</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;            }</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;            request_header.put(HOST, host_name);                </div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;            request_header.put(CONNECTION, connection);</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;            request_header.put(USER_AGENT, agent);</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;            request_header.put(ACCEPT_ENCODING, accept_encoding);</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;            request_header.put(ACCEPT, accept);</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;            request_header.put(CONTENT_TYPE, mime);</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;            </div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;            request_header.write(*client_ptr);</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;            <span class="keywordflow">if</span> (len&gt;0){</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;                LOGI(<span class="stringliteral">&quot;Writing data: %d bytes&quot;</span>, len);</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;                client_ptr-&gt;write((<span class="keyword">const</span> uint8_t*)data,len);</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;                LOGD(data);</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;            }</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;            </div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;            LOGI(<span class="stringliteral">&quot;Request written ... waiting for reply&quot;</span>)</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;            client_ptr-&gt;flush();</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;            reply_header.read(*client_ptr);</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; </div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;            <span class="comment">// if we use chunked tranfer we need to read the first chunked length</span></div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;            <span class="keywordflow">if</span> (reply_header.isChunked()){</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;                chunk_reader.open(*client_ptr);</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;            };</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; </div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;            <span class="comment">// wait for data</span></div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;            <span class="keywordflow">return</span> reply_header.statusCode();</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        }</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; </div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;};</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160; </div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;}</div>
 <div class="ttc" id="aclassaudio__tools_1_1_http_chunk_reader_html"><div class="ttname"><a href="classaudio__tools_1_1_http_chunk_reader.html">audio_tools::HttpChunkReader</a></div><div class="ttdoc">Http might reply with chunks. So we need to dechunk the data. see https://en.wikipedia....</div><div class="ttdef"><b>Definition:</b> HttpChunkReader.h:15</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_http_reply_header_html"><div class="ttname"><a href="classaudio__tools_1_1_http_reply_header.html">audio_tools::HttpReplyHeader</a></div><div class="ttdoc">Reading and Writing of Http Replys.</div><div class="ttdef"><b>Definition:</b> HttpHeader.h:395</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_http_request_header_html"><div class="ttname"><a href="classaudio__tools_1_1_http_request_header.html">audio_tools::HttpRequestHeader</a></div><div class="ttdoc">Reading and writing of Http Requests.</div><div class="ttdef"><b>Definition:</b> HttpHeader.h:336</div></div>

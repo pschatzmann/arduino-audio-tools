@@ -85,7 +85,7 @@ $(function() {
 <ul>
 <li>Analog Microphones – <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_analog_audio_stream.html">AnalogAudioStream</a></li>
 <li>Digital Microphones – <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_i2_s_stream.html">I2SStream</a></li>
-<li>Files on the Internet – <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_url_stream.html">URLStream</a></li>
+<li>Files on the Internet – <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_u_r_l_stream.html">URLStream</a></li>
 <li>Generated Sound – <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_generated_sound_stream.html">GeneratedSoundStream</a></li>
 <li>Mobile Phone A2DP Bluetooth – <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_a2_d_p_stream.html">A2DPStream</a></li>
 <li>Binary Data in Flash Memory – <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_memory_stream.html">MemoryStream</a></li>
@@ -137,6 +137,27 @@ $(function() {
 Examples</h2>
 <p>Further examples can be found in the <a href="https://github.com/pschatzmann/arduino-audio-tools/wiki/Examples">wiki</a>!</p>
 <h2><a class="anchor" id="autotoc_md2"></a>
+Audio Player</h2>
+<p>It is pretty simple to build a simple audio player with the help of the <a class="el" href="class_stream.html">Stream</a> API. E.g. a SD file is a sublass of an Arduino <a class="el" href="class_stream.html">Stream</a>, so all you need to do is to copy from the file stream to the desired output strem. Finally you need to add some logic which handles the end of file to automatically process the next file and maybe a status flag to halt and contine the processing. In addition it adds only a little bit of additional complexity to add volume control and meta data support.</p>
+<p>In order to simplify things, I decided to provide this functionality as well and to prove the point: The AudioPlayer class took only 120 lines of code to implement!</p>
+<p>The AudioPlayer supports</p>
+<ul>
+<li><b>multiple audio data sources</b> (AudioSourceSdFat, AudioSourceURL, AudioSourceCallback)</li>
+<li><b>different Output</b> Scenarios (I2S, PWM, A2DP etc). Just pass the desired output stream object to the constructor.</li>
+<li><b>different Decoders</b> for MP3, AAC, WAV. Just pass the desired decoder object to the constructor.</li>
+<li><b>Volume Control</b> (by calling player.setVolume())</li>
+<li><b>Stopping and Resuming</b> the processing (by calling player.stop() and player.play())</li>
+<li><b>Navigation</b>: You can move to the next file by calling player.next();</li>
+<li><b>Metadata</b></li>
+<li><b>multiple processor architectures</b></li>
+</ul>
+<p>Here are a couple of examples that demonstrate how to use the AudioPlayer class:</p>
+<ul>
+<li><a href="examples/player-sd-i2s">A Simple SdFat Audio Player</a></li>
+<li><a href="examples/player-url-i2s">A Simple Network Streaming Audio Player</a></li>
+<li><a href="examples/player-callback-i2s">A Simple Callback Audio Player</a></li>
+</ul>
+<h2><a class="anchor" id="autotoc_md3"></a>
 Logging</h2>
 <p>The application uses a built in logger (see <a class="el" href="_audio_logger_8h_source.html">AudioLogger.h</a> and <a class="el" href="_audio_config_8h_source.html">AudioConfig.h</a>). You can e.g. deactivate the logging by changing USE_AUDIO_LOGGING to false in the <a class="el" href="_audio_config_8h_source.html">AudioConfig.h</a>:</p>
 <div class="fragment"><div class="line">#define USE_AUDIO_LOGGING false</div>
@@ -144,7 +165,7 @@ Logging</h2>
 <div class="line">#define LOG_STREAM Serial</div>
 </div><!-- fragment --><p>Per default we use the log level warning and the logging output is going to Serial. You can also change this in your sketch by calling AudioLogger begin with the output stream and the log level e.g:</p>
 <div class="fragment"><div class="line">AudioLogger::instance().begin(Serial, AudioLogger::Debug);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md3"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md4"></a>
 Optional Libraries</h2>
 <p>Dependent on the example you might need to install some of the following libraries:</p>
 <ul>
@@ -153,21 +174,22 @@ Optional Libraries</h2>
 <li><a href="https://github.com/pschatzmann/arduino-fdk-aac">arduino-fdk-aac</a> A <b>AAC Encoder and Decoder</b> from the Frauenhofer Institute</li>
 <li><a href="https://github.com/pschatzmann/arduino-libmad">arduino-libmad</a> A open source <b>MP3 Decoder</b> from Underbit</li>
 <li><a href="https://github.com/pschatzmann/arduino-liblame">arduino-liblame</a> A open source <b>MP3 Encoder</b></li>
-<li><a href="https://www.arduino.cc/en/reference/SD">SD Library</a> to read and write files.</li>
-<li><a href="https://github.com/pschatzmann/Mozzi">Mozzi</a> A sound synthesis library for Arduino</li>
+<li><a href="https://github.com/greiman/SdFat">SdFat Library</a> to read and write files supporting SD cards with FAT16/FAT32 and exFAT</li>
+<li><a href="https://www.arduino.cc/en/reference/SD">SD Library</a> to read and write files supporting SD cards with FAT16 and FAT32</li>
 <li><a href="https://github.com/pschatzmann/arduino-SAM">SAM</a> A Text to Speach Engine</li>
 <li><a href="https://github.com/pschatzmann/TTS">TTS</a> A Text to Speach Engine</li>
 <li><a href="https://github.com/pschatzmann/arduino-flite">flite</a> A Text to Speach Engine</li>
+<li><a href="https://github.com/pschatzmann/Mozzi">Mozzi</a> A sound synthesis library for Arduino</li>
 <li><a href="https://github.com/earlephilhower/ESP8266Audio">ESP8266Audio</a> to play different audio Formats</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md4"></a>
+<h2><a class="anchor" id="autotoc_md5"></a>
 Documentation</h2>
 <ul>
 <li>Here is the generated <a href="https://pschatzmann.github.io/arduino-audio-tools/html/annotated.html">Class Documentation</a>.</li>
 <li>Please also check out the <a href="https://github.com/pschatzmann/arduino-audio-tools/wiki">Information in the Wiki</a></li>
 <li>You also might find further information in <a href="https://www.pschatzmann.ch/home/category/machine-sound/">one of my Blogs</a></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md5"></a>
+<h2><a class="anchor" id="autotoc_md6"></a>
 Installation</h2>
 <p>You can download the library as zip and call include Library -&gt; zip library. Or you can git clone this project into the Arduino libraries folder e.g. with</p>
 <div class="fragment"><div class="line">cd  ~/Documents/Arduino/libraries</div>

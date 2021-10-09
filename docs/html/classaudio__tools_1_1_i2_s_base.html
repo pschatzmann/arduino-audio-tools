@@ -77,22 +77,34 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Basic <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for the ESP32 which supports the reading and writing with a defined data...">I2S</a> API - for the ESP32. If we receive 1 channel, we expand the result to 2 channels.  
+<p>Basic <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for multiple Architectures that supports the reading and writing with a ...">I2S</a> API - for the ESP32. If we receive 1 channel, we expand the result to 2 channels.  
  <a href="classaudio__tools_1_1_i2_s_base.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_i2_s___e_s_p32_8h_source.html">I2S_ESP32.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_i2_s_e_s_p32_8h_source.html">I2SESP32.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for audio_tools::I2SBase:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="classaudio__tools_1_1_i2_s_base.png" usemap="#audio_5Ftools::I2SBase_map" alt=""/>
   <map id="audio_5Ftools::I2SBase_map" name="audio_5Ftools::I2SBase_map">
-<area href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for the ESP32 which supports the reading and writing with a defined data..." alt="audio_tools::I2S&lt; T &gt;" shape="rect" coords="0,56,131,80"/>
+<area href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for multiple Architectures that supports the reading and writing with a ..." alt="audio_tools::I2S&lt; T &gt;" shape="rect" coords="0,56,131,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a7ba4d5c09e12e4cf2a88c433e863482f"><td class="memItemLeft" align="right" valign="top"><a id="a7ba4d5c09e12e4cf2a88c433e863482f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_base.html#a7ba4d5c09e12e4cf2a88c433e863482f">begin</a> (<a class="el" href="classaudio__tools_1_1_i2_s_config.html">I2SConfig</a> cfg)</td></tr>
+<tr class="memdesc:a7ba4d5c09e12e4cf2a88c433e863482f"><td class="mdescLeft">&#160;</td><td class="mdescRight">starts the DAC <br /></td></tr>
+<tr class="separator:a7ba4d5c09e12e4cf2a88c433e863482f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ba4d5c09e12e4cf2a88c433e863482f"><td class="memItemLeft" align="right" valign="top"><a id="a7ba4d5c09e12e4cf2a88c433e863482f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_base.html#a7ba4d5c09e12e4cf2a88c433e863482f">begin</a> (<a class="el" href="classaudio__tools_1_1_i2_s_config.html">I2SConfig</a> cfg)</td></tr>
+<tr class="memdesc:a7ba4d5c09e12e4cf2a88c433e863482f"><td class="mdescLeft">&#160;</td><td class="mdescRight">starts the DAC <br /></td></tr>
+<tr class="separator:a7ba4d5c09e12e4cf2a88c433e863482f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ba4d5c09e12e4cf2a88c433e863482f"><td class="memItemLeft" align="right" valign="top"><a id="a7ba4d5c09e12e4cf2a88c433e863482f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_base.html#a7ba4d5c09e12e4cf2a88c433e863482f">begin</a> (<a class="el" href="classaudio__tools_1_1_i2_s_config.html">I2SConfig</a> cfg)</td></tr>
+<tr class="memdesc:a7ba4d5c09e12e4cf2a88c433e863482f"><td class="mdescLeft">&#160;</td><td class="mdescRight">starts the DAC <br /></td></tr>
+<tr class="separator:a7ba4d5c09e12e4cf2a88c433e863482f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ba4d5c09e12e4cf2a88c433e863482f"><td class="memItemLeft" align="right" valign="top"><a id="a7ba4d5c09e12e4cf2a88c433e863482f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_base.html#a7ba4d5c09e12e4cf2a88c433e863482f">begin</a> (<a class="el" href="classaudio__tools_1_1_i2_s_config.html">I2SConfig</a> cfg)</td></tr>
 <tr class="memdesc:a7ba4d5c09e12e4cf2a88c433e863482f"><td class="mdescLeft">&#160;</td><td class="mdescRight">starts the DAC <br /></td></tr>
@@ -117,6 +129,30 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_base.html#a0c6ef9346d946958af02507688564b5f">begin</a> (RxTxMode mode=TX_MODE)</td></tr>
 <tr class="memdesc:a0c6ef9346d946958af02507688564b5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">starts the DAC with the default config in TX Mode <br /></td></tr>
 <tr class="separator:a0c6ef9346d946958af02507688564b5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c6ef9346d946958af02507688564b5f"><td class="memItemLeft" align="right" valign="top"><a id="a0c6ef9346d946958af02507688564b5f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_base.html#a0c6ef9346d946958af02507688564b5f">begin</a> (RxTxMode mode=TX_MODE)</td></tr>
+<tr class="memdesc:a0c6ef9346d946958af02507688564b5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">starts the DAC with the default config in TX Mode <br /></td></tr>
+<tr class="separator:a0c6ef9346d946958af02507688564b5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c6ef9346d946958af02507688564b5f"><td class="memItemLeft" align="right" valign="top"><a id="a0c6ef9346d946958af02507688564b5f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_base.html#a0c6ef9346d946958af02507688564b5f">begin</a> (RxTxMode mode=TX_MODE)</td></tr>
+<tr class="memdesc:a0c6ef9346d946958af02507688564b5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">starts the DAC with the default config in TX Mode <br /></td></tr>
+<tr class="separator:a0c6ef9346d946958af02507688564b5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c6ef9346d946958af02507688564b5f"><td class="memItemLeft" align="right" valign="top"><a id="a0c6ef9346d946958af02507688564b5f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_base.html#a0c6ef9346d946958af02507688564b5f">begin</a> (RxTxMode mode=TX_MODE)</td></tr>
+<tr class="memdesc:a0c6ef9346d946958af02507688564b5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">starts the DAC with the default config in TX Mode <br /></td></tr>
+<tr class="separator:a0c6ef9346d946958af02507688564b5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2345e7444407b13d1140662dcb899177"><td class="memItemLeft" align="right" valign="top"><a id="a2345e7444407b13d1140662dcb899177"></a>
+<a class="el" href="classaudio__tools_1_1_i2_s_config.html">I2SConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_base.html#a2345e7444407b13d1140662dcb899177">config</a> ()</td></tr>
+<tr class="memdesc:a2345e7444407b13d1140662dcb899177"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the actual configuration <br /></td></tr>
+<tr class="separator:a2345e7444407b13d1140662dcb899177"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2345e7444407b13d1140662dcb899177"><td class="memItemLeft" align="right" valign="top"><a id="a2345e7444407b13d1140662dcb899177"></a>
+<a class="el" href="classaudio__tools_1_1_i2_s_config.html">I2SConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_base.html#a2345e7444407b13d1140662dcb899177">config</a> ()</td></tr>
+<tr class="memdesc:a2345e7444407b13d1140662dcb899177"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the actual configuration <br /></td></tr>
+<tr class="separator:a2345e7444407b13d1140662dcb899177"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2345e7444407b13d1140662dcb899177"><td class="memItemLeft" align="right" valign="top"><a id="a2345e7444407b13d1140662dcb899177"></a>
+<a class="el" href="classaudio__tools_1_1_i2_s_config.html">I2SConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_base.html#a2345e7444407b13d1140662dcb899177">config</a> ()</td></tr>
+<tr class="memdesc:a2345e7444407b13d1140662dcb899177"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the actual configuration <br /></td></tr>
+<tr class="separator:a2345e7444407b13d1140662dcb899177"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2345e7444407b13d1140662dcb899177"><td class="memItemLeft" align="right" valign="top"><a id="a2345e7444407b13d1140662dcb899177"></a>
 <a class="el" href="classaudio__tools_1_1_i2_s_config.html">I2SConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_base.html#a2345e7444407b13d1140662dcb899177">config</a> ()</td></tr>
 <tr class="memdesc:a2345e7444407b13d1140662dcb899177"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the actual configuration <br /></td></tr>
@@ -141,6 +177,30 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <a class="el" href="classaudio__tools_1_1_i2_s_config.html">I2SConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_base.html#aa5996b640516a91a449ae4cddb24a129">defaultConfig</a> (RxTxMode mode)</td></tr>
 <tr class="memdesc:aa5996b640516a91a449ae4cddb24a129"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the default configuration. <br /></td></tr>
 <tr class="separator:aa5996b640516a91a449ae4cddb24a129"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5996b640516a91a449ae4cddb24a129"><td class="memItemLeft" align="right" valign="top"><a id="aa5996b640516a91a449ae4cddb24a129"></a>
+<a class="el" href="classaudio__tools_1_1_i2_s_config.html">I2SConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_base.html#aa5996b640516a91a449ae4cddb24a129">defaultConfig</a> (RxTxMode mode)</td></tr>
+<tr class="memdesc:aa5996b640516a91a449ae4cddb24a129"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the default configuration. <br /></td></tr>
+<tr class="separator:aa5996b640516a91a449ae4cddb24a129"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5996b640516a91a449ae4cddb24a129"><td class="memItemLeft" align="right" valign="top"><a id="aa5996b640516a91a449ae4cddb24a129"></a>
+<a class="el" href="classaudio__tools_1_1_i2_s_config.html">I2SConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_base.html#aa5996b640516a91a449ae4cddb24a129">defaultConfig</a> (RxTxMode mode)</td></tr>
+<tr class="memdesc:aa5996b640516a91a449ae4cddb24a129"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the default configuration. <br /></td></tr>
+<tr class="separator:aa5996b640516a91a449ae4cddb24a129"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5996b640516a91a449ae4cddb24a129"><td class="memItemLeft" align="right" valign="top"><a id="aa5996b640516a91a449ae4cddb24a129"></a>
+<a class="el" href="classaudio__tools_1_1_i2_s_config.html">I2SConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_base.html#aa5996b640516a91a449ae4cddb24a129">defaultConfig</a> (RxTxMode mode)</td></tr>
+<tr class="memdesc:aa5996b640516a91a449ae4cddb24a129"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the default configuration. <br /></td></tr>
+<tr class="separator:aa5996b640516a91a449ae4cddb24a129"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08984251ffdc990da5d9c232485b9cd4"><td class="memItemLeft" align="right" valign="top"><a id="a08984251ffdc990da5d9c232485b9cd4"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_base.html#a08984251ffdc990da5d9c232485b9cd4">end</a> ()</td></tr>
+<tr class="memdesc:a08984251ffdc990da5d9c232485b9cd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">stops the I2C and unistalls the driver <br /></td></tr>
+<tr class="separator:a08984251ffdc990da5d9c232485b9cd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08984251ffdc990da5d9c232485b9cd4"><td class="memItemLeft" align="right" valign="top"><a id="a08984251ffdc990da5d9c232485b9cd4"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_base.html#a08984251ffdc990da5d9c232485b9cd4">end</a> ()</td></tr>
+<tr class="memdesc:a08984251ffdc990da5d9c232485b9cd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">stops the I2C and unistalls the driver <br /></td></tr>
+<tr class="separator:a08984251ffdc990da5d9c232485b9cd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08984251ffdc990da5d9c232485b9cd4"><td class="memItemLeft" align="right" valign="top"><a id="a08984251ffdc990da5d9c232485b9cd4"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_base.html#a08984251ffdc990da5d9c232485b9cd4">end</a> ()</td></tr>
+<tr class="memdesc:a08984251ffdc990da5d9c232485b9cd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">stops the I2C and unistalls the driver <br /></td></tr>
+<tr class="separator:a08984251ffdc990da5d9c232485b9cd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08984251ffdc990da5d9c232485b9cd4"><td class="memItemLeft" align="right" valign="top"><a id="a08984251ffdc990da5d9c232485b9cd4"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_base.html#a08984251ffdc990da5d9c232485b9cd4">end</a> ()</td></tr>
 <tr class="memdesc:a08984251ffdc990da5d9c232485b9cd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">stops the I2C and unistalls the driver <br /></td></tr>
@@ -156,13 +216,40 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a0a056fd260ffaf85b62219d2fdd4d983"><td class="memItemLeft" align="right" valign="top"><a id="a0a056fd260ffaf85b62219d2fdd4d983"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>readBytes</b> (void *dest, size_t size_bytes)</td></tr>
 <tr class="separator:a0a056fd260ffaf85b62219d2fdd4d983"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a056fd260ffaf85b62219d2fdd4d983"><td class="memItemLeft" align="right" valign="top"><a id="a0a056fd260ffaf85b62219d2fdd4d983"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>readBytes</b> (void *dest, size_t size_bytes)</td></tr>
+<tr class="separator:a0a056fd260ffaf85b62219d2fdd4d983"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a056fd260ffaf85b62219d2fdd4d983"><td class="memItemLeft" align="right" valign="top"><a id="a0a056fd260ffaf85b62219d2fdd4d983"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>readBytes</b> (void *dest, size_t size_bytes)</td></tr>
+<tr class="separator:a0a056fd260ffaf85b62219d2fdd4d983"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a056fd260ffaf85b62219d2fdd4d983"><td class="memItemLeft" align="right" valign="top"><a id="a0a056fd260ffaf85b62219d2fdd4d983"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>readBytes</b> (void *dest, size_t size_bytes)</td></tr>
+<tr class="separator:a0a056fd260ffaf85b62219d2fdd4d983"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c6b4fb3347110d753e8674718212530"><td class="memItemLeft" align="right" valign="top"><a id="a5c6b4fb3347110d753e8674718212530"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_base.html#a5c6b4fb3347110d753e8674718212530">writeBytes</a> (const void *src, size_t size_bytes)</td></tr>
-<tr class="memdesc:a5c6b4fb3347110d753e8674718212530"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes the data to the <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for the ESP32 which supports the reading and writing with a defined data...">I2S</a> interface <br /></td></tr>
+<tr class="memdesc:a5c6b4fb3347110d753e8674718212530"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes the data to the <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for multiple Architectures that supports the reading and writing with a ...">I2S</a> interface <br /></td></tr>
+<tr class="separator:a5c6b4fb3347110d753e8674718212530"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c6b4fb3347110d753e8674718212530"><td class="memItemLeft" align="right" valign="top"><a id="a5c6b4fb3347110d753e8674718212530"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_base.html#a5c6b4fb3347110d753e8674718212530">writeBytes</a> (const void *src, size_t size_bytes)</td></tr>
+<tr class="memdesc:a5c6b4fb3347110d753e8674718212530"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes the data to the <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for multiple Architectures that supports the reading and writing with a ...">I2S</a> interface <br /></td></tr>
+<tr class="separator:a5c6b4fb3347110d753e8674718212530"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c6b4fb3347110d753e8674718212530"><td class="memItemLeft" align="right" valign="top"><a id="a5c6b4fb3347110d753e8674718212530"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_base.html#a5c6b4fb3347110d753e8674718212530">writeBytes</a> (const void *src, size_t size_bytes)</td></tr>
+<tr class="memdesc:a5c6b4fb3347110d753e8674718212530"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes the data to the <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for multiple Architectures that supports the reading and writing with a ...">I2S</a> interface <br /></td></tr>
+<tr class="separator:a5c6b4fb3347110d753e8674718212530"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c6b4fb3347110d753e8674718212530"><td class="memItemLeft" align="right" valign="top"><a id="a5c6b4fb3347110d753e8674718212530"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_base.html#a5c6b4fb3347110d753e8674718212530">writeBytes</a> (const void *src, size_t size_bytes)</td></tr>
+<tr class="memdesc:a5c6b4fb3347110d753e8674718212530"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes the data to the <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for multiple Architectures that supports the reading and writing with a ...">I2S</a> interface <br /></td></tr>
 <tr class="separator:a5c6b4fb3347110d753e8674718212530"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:a59dccc72ccda5bf7a82e0fdec4ba8794"><td class="memItemLeft" align="right" valign="top"><a id="a59dccc72ccda5bf7a82e0fdec4ba8794"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>getDataFormat</b> (<a class="el" href="classaudio__tools_1_1_i2_s_config.html">I2SConfig</a> &amp;cfg)</td></tr>
+<tr class="separator:a59dccc72ccda5bf7a82e0fdec4ba8794"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfa7a20433b1f8d1c63e2af445f1036a"><td class="memItemLeft" align="right" valign="top"><a id="adfa7a20433b1f8d1c63e2af445f1036a"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>getMode</b> (<a class="el" href="classaudio__tools_1_1_i2_s_config.html">I2SConfig</a> &amp;cfg)</td></tr>
+<tr class="separator:adfa7a20433b1f8d1c63e2af445f1036a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a15442b443dbd9ed9ab60d507d04f97a5"><td class="memItemLeft" align="right" valign="top"><a id="a15442b443dbd9ed9ab60d507d04f97a5"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>logConfig</b> ()</td></tr>
 <tr class="separator:a15442b443dbd9ed9ab60d507d04f97a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -171,7 +258,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>logConfigPins</b> (i2
 <tr class="separator:a20da44d1bf37eda688e6d49a51f4da1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a056fd260ffaf85b62219d2fdd4d983"><td class="memItemLeft" align="right" valign="top"><a id="a0a056fd260ffaf85b62219d2fdd4d983"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_base.html#a0a056fd260ffaf85b62219d2fdd4d983">readBytes</a> (void *dest, size_t size_bytes)</td></tr>
-<tr class="memdesc:a0a056fd260ffaf85b62219d2fdd4d983"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads the data from the <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for the ESP32 which supports the reading and writing with a defined data...">I2S</a> interface <br /></td></tr>
+<tr class="memdesc:a0a056fd260ffaf85b62219d2fdd4d983"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads the data from the <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for multiple Architectures that supports the reading and writing with a ...">I2S</a> interface <br /></td></tr>
 <tr class="separator:a0a056fd260ffaf85b62219d2fdd4d983"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a056fd260ffaf85b62219d2fdd4d983"><td class="memItemLeft" align="right" valign="top"><a id="a0a056fd260ffaf85b62219d2fdd4d983"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>readBytes</b> (void *dest, size_t size_bytes)</td></tr>
@@ -208,11 +295,11 @@ i2s_mode_t&#160;</td><td class="memItemRight" valign="bottom"><b>toMode</b> (<a 
 <tr class="separator:a36b9feeb46b506b0731cb9352b045230"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c6b4fb3347110d753e8674718212530"><td class="memItemLeft" align="right" valign="top"><a id="a5c6b4fb3347110d753e8674718212530"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_base.html#a5c6b4fb3347110d753e8674718212530">writeBytes</a> (const void *src, size_t size_bytes)</td></tr>
-<tr class="memdesc:a5c6b4fb3347110d753e8674718212530"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes the data to the <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for the ESP32 which supports the reading and writing with a defined data...">I2S</a> interface <br /></td></tr>
+<tr class="memdesc:a5c6b4fb3347110d753e8674718212530"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes the data to the <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for multiple Architectures that supports the reading and writing with a ...">I2S</a> interface <br /></td></tr>
 <tr class="separator:a5c6b4fb3347110d753e8674718212530"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c6b4fb3347110d753e8674718212530"><td class="memItemLeft" align="right" valign="top"><a id="a5c6b4fb3347110d753e8674718212530"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_base.html#a5c6b4fb3347110d753e8674718212530">writeBytes</a> (const void *src, size_t size_bytes)</td></tr>
-<tr class="memdesc:a5c6b4fb3347110d753e8674718212530"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes the data to the <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for the ESP32 which supports the reading and writing with a defined data...">I2S</a> buffer <br /></td></tr>
+<tr class="memdesc:a5c6b4fb3347110d753e8674718212530"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes the data to the <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for multiple Architectures that supports the reading and writing with a ...">I2S</a> buffer <br /></td></tr>
 <tr class="separator:a5c6b4fb3347110d753e8674718212530"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2320e12a5e066627016d3ce04bc19c9b"><td class="memItemLeft" align="right" valign="top"><a id="a2320e12a5e066627016d3ce04bc19c9b"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_base.html#a2320e12a5e066627016d3ce04bc19c9b">writeExt</a> (const void *src, size_t size_bytes)</td></tr>
@@ -231,6 +318,12 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a4b716ed0c9b26e2def19c8be11c4545b"><td class="memItemLeft" align="right" valign="top"><a id="a4b716ed0c9b26e2def19c8be11c4545b"></a>
 <a class="el" href="classaudio__tools_1_1_i2_s_config.html">I2SConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><b>cfg</b></td></tr>
 <tr class="separator:a4b716ed0c9b26e2def19c8be11c4545b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14d5040388acb6569428c9dfe2f5ce07"><td class="memItemLeft" align="right" valign="top"><a id="a14d5040388acb6569428c9dfe2f5ce07"></a>
+I2SClass&#160;</td><td class="memItemRight" valign="bottom"><b>i2s</b></td></tr>
+<tr class="separator:a14d5040388acb6569428c9dfe2f5ce07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacf33620a4763939bc4ab2df839c428b"><td class="memItemLeft" align="right" valign="top"><a id="aacf33620a4763939bc4ab2df839c428b"></a>
+I2S_HandleTypeDef&#160;</td><td class="memItemRight" valign="bottom"><b>i2s</b></td></tr>
+<tr class="separator:aacf33620a4763939bc4ab2df839c428b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b9e9e8adfd432689f0d72f48826202d"><td class="memItemLeft" align="right" valign="top"><a id="a5b9e9e8adfd432689f0d72f48826202d"></a>
 i2s_config_t&#160;</td><td class="memItemRight" valign="bottom"><b>i2s_config</b></td></tr>
 <tr class="separator:a5b9e9e8adfd432689f0d72f48826202d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -251,13 +344,20 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>I2SStream</b></td></
 <tr class="separator:ac8507ba27b9cacfbff10d6b145711ba9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Basic <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for the ESP32 which supports the reading and writing with a defined data...">I2S</a> API - for the ESP32. If we receive 1 channel, we expand the result to 2 channels. </p>
-<p>Basic <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for the ESP32 which supports the reading and writing with a defined data...">I2S</a> API - for the Arduino Nano BLE Sense.</p>
-<p>Basic <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for the ESP32 which supports the reading and writing with a defined data...">I2S</a> API - for the ESP8266 Only 16 bits are supported ! </p>
+<div class="textblock"><p>Basic <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for multiple Architectures that supports the reading and writing with a ...">I2S</a> API - for the ESP32. If we receive 1 channel, we expand the result to 2 channels. </p>
+<p>Basic <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for multiple Architectures that supports the reading and writing with a ...">I2S</a> API - for the STM32.</p>
+<p>Basic <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for multiple Architectures that supports the reading and writing with a ...">I2S</a> API - for the ...</p>
+<p>Basic <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for multiple Architectures that supports the reading and writing with a ...">I2S</a> API - for the Arduino Nano BLE Sense.</p>
+<p>Basic <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for multiple Architectures that supports the reading and writing with a ...">I2S</a> API - for the ESP8266 Only 16 bits are supported !</p>
+<dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><hr/>The documentation for this class was generated from the following files:<ul>
-<li>src/AudioTools/<a class="el" href="_i2_s___e_s_p32_8h_source.html">I2S_ESP32.h</a></li>
-<li>src/AudioTools/<a class="el" href="_i2_s___e_s_p8266_8h_source.html">I2S_ESP8266.h</a></li>
-<li>src/AudioTools/<a class="el" href="_i2_s___nano_sense_b_l_e_8h_source.html">I2S_NanoSenseBLE.h</a></li>
+<li>src/AudioI2S/<a class="el" href="_i2_s_e_s_p32_8h_source.html">I2SESP32.h</a></li>
+<li>src/AudioI2S/<a class="el" href="_i2_s_e_s_p8266_8h_source.html">I2SESP8266.h</a></li>
+<li>src/AudioI2S/<a class="el" href="_i2_s_nano_sense_b_l_e_8h_source.html">I2SNanoSenseBLE.h</a></li>
+<li>src/AudioI2S/<a class="el" href="_i2_s_r_p2040_8h_source.html">I2SRP2040.h</a></li>
+<li>src/AudioI2S/<a class="el" href="_i2_s_s_t_m32_8h_source.html">I2SSTM32.h</a></li>
+<li>src/AudioI2S/<a class="el" href="_i2_s_template_8h_source.html">I2STemplate.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

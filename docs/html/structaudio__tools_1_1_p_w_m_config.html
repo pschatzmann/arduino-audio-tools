@@ -79,7 +79,16 @@ $(function() {
 <p>Configuration data for PWM audio output.  
  <a href="structaudio__tools_1_1_p_w_m_config.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_p_w_m_audio_stream_base_8h_source.html">PWMAudioStreamBase.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_p_w_m_audio_base_8h_source.html">PWMAudioBase.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for audio_tools::PWMConfig:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="structaudio__tools_1_1_p_w_m_config.png" usemap="#audio_5Ftools::PWMConfig_map" alt=""/>
+  <map id="audio_5Ftools::PWMConfig_map" name="audio_5Ftools::PWMConfig_map">
+<area href="structaudio__tools_1_1_audio_base_info.html" title="Basic Audio information which drives e.g. I2S." alt="audio_tools::AudioBaseInfo" shape="rect" coords="0,0,164,24"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -90,36 +99,50 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>logConfig</b> ()</td>
 template&lt;size_t N&gt; </td></tr>
 <tr class="memitem:ad00e30481f8bc155e5a0dcc11f0317f1"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>setPins</b> (int(&amp;array)[N])</td></tr>
 <tr class="separator:ad00e30481f8bc155e5a0dcc11f0317f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_structaudio__tools_1_1_audio_base_info"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_structaudio__tools_1_1_audio_base_info')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="structaudio__tools_1_1_audio_base_info.html">audio_tools::AudioBaseInfo</a></td></tr>
+<tr class="memitem:a5408fddd164a3f14acec6d9eef52ecc6 inherit pub_methods_structaudio__tools_1_1_audio_base_info"><td class="memItemLeft" align="right" valign="top"><a id="a5408fddd164a3f14acec6d9eef52ecc6"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>AudioBaseInfo</b> (const <a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> &amp;)=default</td></tr>
+<tr class="separator:a5408fddd164a3f14acec6d9eef52ecc6 inherit pub_methods_structaudio__tools_1_1_audio_base_info"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99d3dca8be51dbcd04008751465138a3 inherit pub_methods_structaudio__tools_1_1_audio_base_info"><td class="memItemLeft" align="right" valign="top"><a id="a99d3dca8be51dbcd04008751465138a3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>logInfo</b> ()</td></tr>
+<tr class="separator:a99d3dca8be51dbcd04008751465138a3 inherit pub_methods_structaudio__tools_1_1_audio_base_info"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec79c1127b5e453d71827e5dbbce58d0 inherit pub_methods_structaudio__tools_1_1_audio_base_info"><td class="memItemLeft" align="right" valign="top"><a id="aec79c1127b5e453d71827e5dbbce58d0"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator!=</b> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> alt)</td></tr>
+<tr class="separator:aec79c1127b5e453d71827e5dbbce58d0 inherit pub_methods_structaudio__tools_1_1_audio_base_info"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e724d3c17a6f5f8e5d1c2d09cee426f inherit pub_methods_structaudio__tools_1_1_audio_base_info"><td class="memItemLeft" align="right" valign="top"><a id="a7e724d3c17a6f5f8e5d1c2d09cee426f"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator==</b> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> alt)</td></tr>
+<tr class="separator:a7e724d3c17a6f5f8e5d1c2d09cee426f inherit pub_methods_structaudio__tools_1_1_audio_base_info"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a99f4604576971e136e66a637f774c33c"><td class="memItemLeft" align="right" valign="top"><a id="a99f4604576971e136e66a637f774c33c"></a>
-uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>bits_per_sample</b> = 16</td></tr>
-<tr class="separator:a99f4604576971e136e66a637f774c33c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a565061b904d5d4035cdbd63050a6b8c7"><td class="memItemLeft" align="right" valign="top"><a id="a565061b904d5d4035cdbd63050a6b8c7"></a>
 uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_size</b> = PWM_BUFFER_SIZE</td></tr>
 <tr class="separator:a565061b904d5d4035cdbd63050a6b8c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4abe8328151dbce9f28ac8b3aae13ad8"><td class="memItemLeft" align="right" valign="top"><a id="a4abe8328151dbce9f28ac8b3aae13ad8"></a>
 uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>buffers</b> = PWM_BUFFERS</td></tr>
 <tr class="separator:a4abe8328151dbce9f28ac8b3aae13ad8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa5464ac43c98b7d9a8117b2ee910e9ca"><td class="memItemLeft" align="right" valign="top"><a id="aa5464ac43c98b7d9a8117b2ee910e9ca"></a>
-uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b> = 2</td></tr>
-<tr class="separator:aa5464ac43c98b7d9a8117b2ee910e9ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa8358812f532bfb1ecddc5f6afaafcf2"><td class="memItemLeft" align="right" valign="top"><a id="aa8358812f532bfb1ecddc5f6afaafcf2"></a>
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>pwm_frequency</b> = PWM_FREQUENCY</td></tr>
 <tr class="separator:aa8358812f532bfb1ecddc5f6afaafcf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e033bc0eb6f8584f5493c702b3f66c3"><td class="memItemLeft" align="right" valign="top"><a id="a4e033bc0eb6f8584f5493c702b3f66c3"></a>
 uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>resolution</b> = 8</td></tr>
 <tr class="separator:a4e033bc0eb6f8584f5493c702b3f66c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac011cf67cc07808bc617d0281ba8504b"><td class="memItemLeft" align="right" valign="top"><a id="ac011cf67cc07808bc617d0281ba8504b"></a>
-uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>sample_rate</b> = 10000</td></tr>
-<tr class="separator:ac011cf67cc07808bc617d0281ba8504b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1b48e6070f2c0da6f9ddbb237b9b7df"><td class="memItemLeft" align="right" valign="top"><a id="ac1b48e6070f2c0da6f9ddbb237b9b7df"></a>
 uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>start_pin</b> = PWM_START_PIN</td></tr>
 <tr class="separator:ac1b48e6070f2c0da6f9ddbb237b9b7df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b74f72d47a672b786cfa07446706b2b"><td class="memItemLeft" align="right" valign="top"><a id="a5b74f72d47a672b786cfa07446706b2b"></a>
 uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>timer_id</b> = 0</td></tr>
 <tr class="separator:a5b74f72d47a672b786cfa07446706b2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_structaudio__tools_1_1_audio_base_info"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_structaudio__tools_1_1_audio_base_info')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="structaudio__tools_1_1_audio_base_info.html">audio_tools::AudioBaseInfo</a></td></tr>
+<tr class="memitem:a3656e1572c91c5cde3d538637a2267a5 inherit pub_attribs_structaudio__tools_1_1_audio_base_info"><td class="memItemLeft" align="right" valign="top"><a id="a3656e1572c91c5cde3d538637a2267a5"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>bits_per_sample</b> =16</td></tr>
+<tr class="separator:a3656e1572c91c5cde3d538637a2267a5 inherit pub_attribs_structaudio__tools_1_1_audio_base_info"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a8f51cefe9260a9d35172ff08eeff51 inherit pub_attribs_structaudio__tools_1_1_audio_base_info"><td class="memItemLeft" align="right" valign="top"><a id="a3a8f51cefe9260a9d35172ff08eeff51"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b> = 0</td></tr>
+<tr class="separator:a3a8f51cefe9260a9d35172ff08eeff51 inherit pub_attribs_structaudio__tools_1_1_audio_base_info"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4578a109aeae16fd315a4ca60a36dfc2 inherit pub_attribs_structaudio__tools_1_1_audio_base_info"><td class="memItemLeft" align="right" valign="top"><a id="a4578a109aeae16fd315a4ca60a36dfc2"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>sample_rate</b> = 0</td></tr>
+<tr class="separator:a4578a109aeae16fd315a4ca60a36dfc2 inherit pub_attribs_structaudio__tools_1_1_audio_base_info"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -144,7 +167,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>PWMAudioStreamPico</
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
-<li>src/AudioPWM/<a class="el" href="_p_w_m_audio_stream_base_8h_source.html">PWMAudioStreamBase.h</a></li>
+<li>src/AudioPWM/<a class="el" href="_p_w_m_audio_base_8h_source.html">PWMAudioBase.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

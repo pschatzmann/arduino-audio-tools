@@ -75,10 +75,10 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>We support the <a class="el" href="class_stream.html">Stream</a> interface for the <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for the ESP32 which supports the reading and writing with a defined data...">I2S</a> access. In addition we allow a separate mute pin which might also be used to drive a LED...  
+<p>We support the <a class="el" href="class_stream.html">Stream</a> interface for the <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for multiple Architectures that supports the reading and writing with a ...">I2S</a> access. In addition we allow a separate mute pin which might also be used to drive a LED...  
  <a href="classaudio__tools_1_1_i2_s_stream.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_streams_8h_source.html">Streams.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_audio_i2_s_8h_source.html">AudioI2S.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for audio_tools::I2SStream:</div>
 <div class="dyncontent">
@@ -100,10 +100,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9154ca881ed2e41d23206f36f263cc38"><td class="memItemLeft" align="right" valign="top"><a id="a9154ca881ed2e41d23206f36f263cc38"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (<a class="el" href="classaudio__tools_1_1_i2_s_config.html">I2SConfig</a> cfg)</td></tr>
 <tr class="separator:a9154ca881ed2e41d23206f36f263cc38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01e39098fe866fc4d45cda664a26ce95"><td class="memItemLeft" align="right" valign="top"><a id="a01e39098fe866fc4d45cda664a26ce95"></a>
-<a class="el" href="classaudio__tools_1_1_i2_s_config.html">I2SConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_stream.html#a01e39098fe866fc4d45cda664a26ce95">defaultConfig</a> (RxTxMode mode)</td></tr>
-<tr class="memdesc:a01e39098fe866fc4d45cda664a26ce95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the default configuration. <br /></td></tr>
-<tr class="separator:a01e39098fe866fc4d45cda664a26ce95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20d3be958955d433502d0218cc5dc46f"><td class="memItemLeft" align="right" valign="top"><a id="a20d3be958955d433502d0218cc5dc46f"></a>
+<a class="el" href="classaudio__tools_1_1_i2_s_config.html">I2SConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_stream.html#a20d3be958955d433502d0218cc5dc46f">defaultConfig</a> (RxTxMode mode=TX_MODE)</td></tr>
+<tr class="memdesc:a20d3be958955d433502d0218cc5dc46f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the default configuration. <br /></td></tr>
+<tr class="separator:a20d3be958955d433502d0218cc5dc46f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40dff8e6bddd7e461c4a61c9f80e91dc"><td class="memItemLeft" align="right" valign="top"><a id="a40dff8e6bddd7e461c4a61c9f80e91dc"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
 <tr class="separator:a40dff8e6bddd7e461c4a61c9f80e91dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -364,7 +364,7 @@ unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b>
 <tr class="separator:aae48f1a926d2e82a452f2c75af0c6a29 inherit pro_attribs_class_stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>We support the <a class="el" href="class_stream.html">Stream</a> interface for the <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for the ESP32 which supports the reading and writing with a defined data...">I2S</a> access. In addition we allow a separate mute pin which might also be used to drive a LED... </p>
+<div class="textblock"><p>We support the <a class="el" href="class_stream.html">Stream</a> interface for the <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for multiple Architectures that supports the reading and writing with a ...">I2S</a> access. In addition we allow a separate mute pin which might also be used to drive a LED... </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td></td></tr>
@@ -374,7 +374,7 @@ unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/<a class="el" href="_streams_8h_source.html">Streams.h</a></li>
+<li>src/AudioI2S/<a class="el" href="_audio_i2_s_8h_source.html">AudioI2S.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

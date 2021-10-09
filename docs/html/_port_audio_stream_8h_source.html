@@ -94,23 +94,23 @@ $(function() {
 <div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_port_audio_stream.html">   36</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_port_audio_stream.html">PortAudioStream</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_buffered_stream.html">BufferedStream</a>,  <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> {</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <a class="code" href="classaudio__tools_1_1_port_audio_stream.html">PortAudioStream</a>(<span class="keywordtype">int</span> buffer_size=DEFAULT_BUFFER_SIZE):<a class="code" href="classaudio__tools_1_1_buffered_stream.html">BufferedStream</a>(buffer_size) {</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            LOGD(__FUNCTION__);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            LOGD(LOG_METHOD);</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            this-&gt;buffer_size = buffer_size;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        }</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        ~<a class="code" href="classaudio__tools_1_1_port_audio_stream.html">PortAudioStream</a>(){</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            LOGD(__FUNCTION__);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            LOGD(LOG_METHOD);</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            Pa_Terminate();</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        }</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <a class="code" href="classaudio__tools_1_1_port_audio_config.html">PortAudioConfig</a> defaultConfig() {</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            LOGD(__FUNCTION__);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            LOGD(LOG_METHOD);</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <a class="code" href="classaudio__tools_1_1_port_audio_config.html">PortAudioConfig</a> default_info;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <span class="keywordflow">return</span> default_info;</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        }</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
 <div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_port_audio_stream.html#ac7bf8ff0eb4c1f0607434a359405badf">   55</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_port_audio_stream.html#ac7bf8ff0eb4c1f0607434a359405badf">setAudioInfo</a>(<a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> in) {</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            LOGI(__FUNCTION__);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            LOGI(LOG_METHOD);</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            info.channels = in.channels;</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            info.sample_rate = in.sample_rate;</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            info.bits_per_sample = in.bits_per_sample;</div>
@@ -124,7 +124,7 @@ $(function() {
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="comment">// start with the indicated configuration</span></div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keywordtype">void</span> begin(PortAudioConfig info) {</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            LOGD(__FUNCTION__);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            LOGD(LOG_METHOD);</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            this-&gt;info = info;</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <span class="keywordflow">if</span> (info.channels&gt;0 &amp;&amp; info.sample_rate &amp;&amp; info.bits_per_sample&gt;0){</div>
@@ -161,7 +161,7 @@ $(function() {
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        }</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        <span class="keywordtype">void</span> end() {</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            LOGD(__FUNCTION__);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            LOGD(LOG_METHOD);</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            err = Pa_StopStream( stream );</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            <span class="keywordflow">if</span>( err != paNoError ) {</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                LOGE(  <span class="stringliteral">&quot;PortAudio error: %s\n&quot;</span>, Pa_GetErrorText( err ) );</div>
@@ -242,7 +242,7 @@ $(function() {
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160; </div>
 <div class="line"><a name="l00187"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_port_audio_stream.html#af3dd08fd8569d89a6beecaaf338f2082">  187</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_port_audio_stream.html#af3dd08fd8569d89a6beecaaf338f2082">startStream</a>() {</div>
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;            <span class="keywordflow">if</span> (!stream_started) {</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;                LOGD(__FUNCTION__);</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;                LOGD(LOG_METHOD);</div>
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;                err = Pa_StartStream( stream );</div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;                <span class="keywordflow">if</span>( err == paNoError ) {</div>
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;                    stream_started = <span class="keyword">true</span>;</div>
@@ -260,14 +260,14 @@ $(function() {
 <div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160; </div>
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160; </div>
 <div class="ttc" id="a_audio_tools_8h_html"><div class="ttname"><a href="_audio_tools_8h.html">AudioTools.h</a></div><div class="ttdoc">Includes all classes.</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_base_info_dependent_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_base_info_dependent.html">audio_tools::AudioBaseInfoDependent</a></div><div class="ttdoc">Supports changes to the sampling rate, bits and channels.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:112</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_buffered_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_buffered_stream.html">audio_tools::BufferedStream</a></div><div class="ttdoc">The Arduino Stream supports operations on single characters. This is usually not the best way to push...</div><div class="ttdef"><b>Definition:</b> Streams.h:213</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_base_info_dependent_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_base_info_dependent.html">audio_tools::AudioBaseInfoDependent</a></div><div class="ttdoc">Supports changes to the sampling rate, bits and channels.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:125</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_buffered_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_buffered_stream.html">audio_tools::BufferedStream</a></div><div class="ttdoc">The Arduino Stream supports operations on single characters. This is usually not the best way to push...</div><div class="ttdef"><b>Definition:</b> Streams.h:214</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_port_audio_config_html"><div class="ttname"><a href="classaudio__tools_1_1_port_audio_config.html">audio_tools::PortAudioConfig</a></div><div class="ttdoc">PortAudio information.</div><div class="ttdef"><b>Definition:</b> PortAudioStream.h:18</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_port_audio_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_port_audio_stream.html">audio_tools::PortAudioStream</a></div><div class="ttdoc">Arduino Audio Stream using PortAudio.</div><div class="ttdef"><b>Definition:</b> PortAudioStream.h:36</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_port_audio_stream_html_ac7bf8ff0eb4c1f0607434a359405badf"><div class="ttname"><a href="classaudio__tools_1_1_port_audio_stream.html#ac7bf8ff0eb4c1f0607434a359405badf">audio_tools::PortAudioStream::setAudioInfo</a></div><div class="ttdeci">virtual void setAudioInfo(AudioBaseInfo in)</div><div class="ttdoc">notification of audio info change</div><div class="ttdef"><b>Definition:</b> PortAudioStream.h:55</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_port_audio_stream_html_af3dd08fd8569d89a6beecaaf338f2082"><div class="ttname"><a href="classaudio__tools_1_1_port_audio_stream.html#af3dd08fd8569d89a6beecaaf338f2082">audio_tools::PortAudioStream::startStream</a></div><div class="ttdeci">void startStream()</div><div class="ttdoc">automatically start the stream when we start to get data</div><div class="ttdef"><b>Definition:</b> PortAudioStream.h:187</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Parser for MP3 ID3 Meta Data: The goal is to implement a simple API which provides the title,...</div><div class="ttdef"><b>Definition:</b> AudioA2DP.h:19</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_audio_base_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_base_info.html">audio_tools::AudioBaseInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:94</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_audio_base_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_base_info.html">audio_tools::AudioBaseInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:101</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

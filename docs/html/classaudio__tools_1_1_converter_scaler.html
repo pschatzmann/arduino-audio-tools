@@ -91,31 +91,39 @@ Inheritance diagram for audio_tools::ConverterScaler&lt; T &gt;:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a5ceecf18ec13a3ff43f49139eda96b4a"><td class="memItemLeft" align="right" valign="top"><a id="a5ceecf18ec13a3ff43f49139eda96b4a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ConverterScaler</b> (float factor, T offset, T maxValue)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>ConverterScaler</b> (float <a class="el" href="classaudio__tools_1_1_converter_scaler.html#a3eeb57b2789b0ea7cb9ef951c6c938b3">factor</a>, T <a class="el" href="classaudio__tools_1_1_converter_scaler.html#abd01950f76aae1d1797af5b55bbd5b34">offset</a>, T maxValue)</td></tr>
 <tr class="separator:a5ceecf18ec13a3ff43f49139eda96b4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a063d3a8129df3b7ec914a22efdbf3ed0"><td class="memItemLeft" align="right" valign="top"><a id="a063d3a8129df3b7ec914a22efdbf3ed0"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>convert</b> (T(*src)[2], size_t size)</td></tr>
 <tr class="separator:a063d3a8129df3b7ec914a22efdbf3ed0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3eeb57b2789b0ea7cb9ef951c6c938b3"><td class="memItemLeft" align="right" valign="top"><a id="a3eeb57b2789b0ea7cb9ef951c6c938b3"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_converter_scaler.html#a3eeb57b2789b0ea7cb9ef951c6c938b3">factor</a> ()</td></tr>
+<tr class="memdesc:a3eeb57b2789b0ea7cb9ef951c6c938b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the actual factor (volume) <br /></td></tr>
+<tr class="separator:a3eeb57b2789b0ea7cb9ef951c6c938b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd01950f76aae1d1797af5b55bbd5b34"><td class="memItemLeft" align="right" valign="top"><a id="abd01950f76aae1d1797af5b55bbd5b34"></a>
+T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_converter_scaler.html#abd01950f76aae1d1797af5b55bbd5b34">offset</a> ()</td></tr>
+<tr class="memdesc:abd01950f76aae1d1797af5b55bbd5b34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the offset value. <br /></td></tr>
+<tr class="separator:abd01950f76aae1d1797af5b55bbd5b34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a29356a47530c6aa2b19a2618c4356a67"><td class="memItemLeft" align="right" valign="top"><a id="a29356a47530c6aa2b19a2618c4356a67"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_converter_scaler.html#a29356a47530c6aa2b19a2618c4356a67">setFactor</a> (T factor)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_converter_scaler.html#a29356a47530c6aa2b19a2618c4356a67">setFactor</a> (T <a class="el" href="classaudio__tools_1_1_converter_scaler.html#a3eeb57b2789b0ea7cb9ef951c6c938b3">factor</a>)</td></tr>
 <tr class="memdesc:a29356a47530c6aa2b19a2618c4356a67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the factor (volume) <br /></td></tr>
 <tr class="separator:a29356a47530c6aa2b19a2618c4356a67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92b3cc7734789236ccf25d03444e6851"><td class="memItemLeft" align="right" valign="top"><a id="a92b3cc7734789236ccf25d03444e6851"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_converter_scaler.html#a92b3cc7734789236ccf25d03444e6851">setOffset</a> (T offset)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_converter_scaler.html#a92b3cc7734789236ccf25d03444e6851">setOffset</a> (T <a class="el" href="classaudio__tools_1_1_converter_scaler.html#abd01950f76aae1d1797af5b55bbd5b34">offset</a>)</td></tr>
 <tr class="memdesc:a92b3cc7734789236ccf25d03444e6851"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the offset. <br /></td></tr>
 <tr class="separator:a92b3cc7734789236ccf25d03444e6851"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a92744621b467290ae78eda127409b1b0"><td class="memItemLeft" align="right" valign="top"><a id="a92744621b467290ae78eda127409b1b0"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>factor</b></td></tr>
-<tr class="separator:a92744621b467290ae78eda127409b1b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad46585b0e5d38ccae11c3d26ded9bc4e"><td class="memItemLeft" align="right" valign="top"><a id="ad46585b0e5d38ccae11c3d26ded9bc4e"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>factor_value</b></td></tr>
+<tr class="separator:ad46585b0e5d38ccae11c3d26ded9bc4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab977fdf63a324b8bbf8d6f38ebdf946e"><td class="memItemLeft" align="right" valign="top"><a id="ab977fdf63a324b8bbf8d6f38ebdf946e"></a>
 T&#160;</td><td class="memItemRight" valign="bottom"><b>maxValue</b></td></tr>
 <tr class="separator:ab977fdf63a324b8bbf8d6f38ebdf946e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ab08c90f01ce9901f71a47ab94d7f06"><td class="memItemLeft" align="right" valign="top"><a id="a4ab08c90f01ce9901f71a47ab94d7f06"></a>
-T&#160;</td><td class="memItemRight" valign="bottom"><b>offset</b></td></tr>
-<tr class="separator:a4ab08c90f01ce9901f71a47ab94d7f06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53713d8d2986b7fe15c331b339ed952d"><td class="memItemLeft" align="right" valign="top"><a id="a53713d8d2986b7fe15c331b339ed952d"></a>
+T&#160;</td><td class="memItemRight" valign="bottom"><b>offset_value</b></td></tr>
+<tr class="separator:a53713d8d2986b7fe15c331b339ed952d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename T&gt;<br />

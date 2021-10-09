@@ -69,7 +69,7 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classaudio__tools_1_1_audio_base_info_dependent-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">audio_tools::AudioBaseInfoDependent Class Reference</div>  </div>
+<div class="title">audio_tools::AudioBaseInfoDependent Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -83,19 +83,22 @@ Inheritance diagram for audio_tools::AudioBaseInfoDependent:</div>
  <div class="center">
   <img src="classaudio__tools_1_1_audio_base_info_dependent.png" usemap="#audio_5Ftools::AudioBaseInfoDependent_map" alt=""/>
   <map id="audio_5Ftools::AudioBaseInfoDependent_map" name="audio_5Ftools::AudioBaseInfoDependent_map">
-<area href="classaudio__tools_1_1_analog_audio_stream.html" title="We support the Stream interface for the ADC class." alt="audio_tools::AnalogAudioStream" shape="rect" coords="0,56,227,80"/>
-<area href="classaudio__tools_1_1_csv_stream.html" title="Stream Wrapper which can be used to print the values as readable ASCII to the screen to be analyzed i..." alt="audio_tools::CsvStream&lt; T &gt;" shape="rect" coords="237,56,464,80"/>
-<area href="classaudio__tools_1_1_i2_s_stream.html" title="We support the Stream interface for the I2S access. In addition we allow a separate mute pin which mi..." alt="audio_tools::I2SStream" shape="rect" coords="474,56,701,80"/>
-<area href="classaudio__tools_1_1_port_audio_stream.html" title="Arduino Audio Stream using PortAudio." alt="audio_tools::PortAudioStream" shape="rect" coords="711,56,938,80"/>
-<area href="classaudio__tools_1_1_sine_wave_generator.html" title="Generates a Sound with the help of sin() function." alt="audio_tools::SineWaveGenerator&lt; T &gt;" shape="rect" coords="948,56,1175,80"/>
+<area href="classaudio__tools_1_1_analog_audio.html" title="A very fast ADC and DAC using the ESP32 I2S interface." alt="audio_tools::AnalogAudio" shape="rect" coords="237,56,464,80"/>
+<area href="classaudio__tools_1_1_analog_audio_stream.html" title="We support the Stream interface for the AnalogAudio class." alt="audio_tools::AnalogAudioStream" shape="rect" coords="237,112,464,136"/>
+<area href="classaudio__tools_1_1_audio_player.html" title="Implements a simple audio player which supports the following commands:" alt="audio_tools::AudioPlayer" shape="rect" coords="237,168,464,192"/>
+<area href="classaudio__tools_1_1_csv_stream.html" title="Stream Wrapper which can be used to print the values as readable ASCII to the screen to be analyzed i..." alt="audio_tools::CsvStream&lt; T &gt;" shape="rect" coords="237,224,464,248"/>
+<area href="classaudio__tools_1_1_i2_s_stream.html" title="We support the Stream interface for the I2S access. In addition we allow a separate mute pin which mi..." alt="audio_tools::I2SStream" shape="rect" coords="237,280,464,304"/>
+<area href="classaudio__tools_1_1_p_w_m_audio_stream_base.html" title="Common functionality for PWM output." alt="audio_tools::PWMAudioStreamBase" shape="rect" coords="237,336,464,360"/>
+<area href="classaudio__tools_1_1_port_audio_stream.html" title="Arduino Audio Stream using PortAudio." alt="audio_tools::PortAudioStream" shape="rect" coords="237,392,464,416"/>
+<area href="classaudio__tools_1_1_sine_wave_generator.html" title="Generates a Sound with the help of sin() function." alt="audio_tools::SineWaveGenerator&lt; T &gt;" shape="rect" coords="237,448,464,472"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a00aba34fefa5ae47e695a1cf931f66dc"><td class="memItemLeft" align="right" valign="top"><a id="a00aba34fefa5ae47e695a1cf931f66dc"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setAudioInfo</b> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> info)</td></tr>
-<tr class="separator:a00aba34fefa5ae47e695a1cf931f66dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b26e4e65dcfe43155284e2b08cda05a"><td class="memItemLeft" align="right" valign="top"><a id="a7b26e4e65dcfe43155284e2b08cda05a"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setAudioInfo</b> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> info)=0</td></tr>
+<tr class="separator:a7b26e4e65dcfe43155284e2b08cda05a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a16c99d6218d2dc4574d4d9725d77052a"><td class="memItemLeft" align="right" valign="top"><a id="a16c99d6218d2dc4574d4d9725d77052a"></a>
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>validate</b> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> &amp;info)</td></tr>
 <tr class="separator:a16c99d6218d2dc4574d4d9725d77052a"><td class="memSeparator" colspan="2">&#160;</td></tr>

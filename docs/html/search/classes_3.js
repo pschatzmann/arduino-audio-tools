@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['encodedaudiostream_277',['EncodedAudioStream',['../classaudio__tools_1_1_encoded_audio_stream.html',1,'audio_tools']]],
-  ['externalbufferstream_278',['ExternalBufferStream',['../classaudio__tools_1_1_external_buffer_stream.html',1,'audio_tools']]]
+  ['dacinfo_332',['DACInfo',['../classaudio__tools_1_1_d_a_c_info.html',1,'audio_tools']]],
+  ['dacout_333',['DACOut',['../classaudio__tools_1_1_d_a_c_out.html',1,'audio_tools']]],
+  ['deltasigmadac_334',['DeltaSigmaDAC',['../classaudio__tools_1_1_delta_sigma_d_a_c.html',1,'audio_tools']]]
 ];

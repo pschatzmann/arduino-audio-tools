@@ -133,14 +133,36 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>copy2</b> ()</td></
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_stream_copy_t.html#a2012c75d5f2ab98e7cda1aab95608ec3">copyAll</a> ()</td></tr>
 <tr class="memdesc:a2012c75d5f2ab98e7cda1aab95608ec3 inherit pub_methods_classaudio__tools_1_1_stream_copy_t"><td class="mdescLeft">&#160;</td><td class="mdescRight">copies all data <br /></td></tr>
 <tr class="separator:a2012c75d5f2ab98e7cda1aab95608ec3 inherit pub_methods_classaudio__tools_1_1_stream_copy_t"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a475ccf85f62b1d72ff03485b4b9bc6dc inherit pub_methods_classaudio__tools_1_1_stream_copy_t"><td class="memItemLeft" align="right" valign="top"><a id="a475ccf85f62b1d72ff03485b4b9bc6dc"></a>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_stream_copy_t.html#a475ccf85f62b1d72ff03485b4b9bc6dc">mime</a> ()</td></tr>
+<tr class="memdesc:a475ccf85f62b1d72ff03485b4b9bc6dc inherit pub_methods_classaudio__tools_1_1_stream_copy_t"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the actual mime type, that was determined from the first available data. <br /></td></tr>
+<tr class="separator:a475ccf85f62b1d72ff03485b4b9bc6dc inherit pub_methods_classaudio__tools_1_1_stream_copy_t"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba98d7f6707f54f7cf19bf1984b37179 inherit pub_methods_classaudio__tools_1_1_stream_copy_t"><td class="memItemLeft" align="right" valign="top"><a id="aba98d7f6707f54f7cf19bf1984b37179"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_stream_copy_t.html#aba98d7f6707f54f7cf19bf1984b37179">setCallbackOnWrite</a> (void(*onWrite)(void *obj, void *buffer, size_t len), void *obj)</td></tr>
+<tr class="memdesc:aba98d7f6707f54f7cf19bf1984b37179 inherit pub_methods_classaudio__tools_1_1_stream_copy_t"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a callback that is notified with the wirtten data. <br /></td></tr>
+<tr class="separator:aba98d7f6707f54f7cf19bf1984b37179 inherit pub_methods_classaudio__tools_1_1_stream_copy_t"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b56ba6349a67373f5ca084839ad4671 inherit pub_methods_classaudio__tools_1_1_stream_copy_t"><td class="memItemLeft" align="right" valign="top"><a id="a9b56ba6349a67373f5ca084839ad4671"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_stream_copy_t.html#a9b56ba6349a67373f5ca084839ad4671">setMimeCallback</a> (void(*callback)(const char *))</td></tr>
+<tr class="memdesc:a9b56ba6349a67373f5ca084839ad4671 inherit pub_methods_classaudio__tools_1_1_stream_copy_t"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define the callback that will notify about mime changes. <br /></td></tr>
+<tr class="separator:a9b56ba6349a67373f5ca084839ad4671 inherit pub_methods_classaudio__tools_1_1_stream_copy_t"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab63060c6b804e5a0ce1afe310be10613 inherit pub_methods_classaudio__tools_1_1_stream_copy_t"><td class="memItemLeft" align="right" valign="top"><a id="ab63060c6b804e5a0ce1afe310be10613"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setRetry</b> (int retry)</td></tr>
+<tr class="separator:ab63060c6b804e5a0ce1afe310be10613 inherit pub_methods_classaudio__tools_1_1_stream_copy_t"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_methods_classaudio__tools_1_1_stream_copy_t"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classaudio__tools_1_1_stream_copy_t')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classaudio__tools_1_1_stream_copy_t.html">audio_tools::StreamCopyT&lt; uint8_t &gt;</a></td></tr>
+<tr class="memitem:a3b8b75b96bba66618f06382eceb2e1a8 inherit pro_methods_classaudio__tools_1_1_stream_copy_t"><td class="memItemLeft" align="right" valign="top"><a id="a3b8b75b96bba66618f06382eceb2e1a8"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_stream_copy_t.html#a3b8b75b96bba66618f06382eceb2e1a8">notifyMime</a> (void *data, size_t len)</td></tr>
+<tr class="memdesc:a3b8b75b96bba66618f06382eceb2e1a8 inherit pro_methods_classaudio__tools_1_1_stream_copy_t"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the mime type. <br /></td></tr>
+<tr class="separator:a3b8b75b96bba66618f06382eceb2e1a8 inherit pro_methods_classaudio__tools_1_1_stream_copy_t"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb28d25472d48b444da5f08b169608bd inherit pro_methods_classaudio__tools_1_1_stream_copy_t"><td class="memItemLeft" align="right" valign="top"><a id="afb28d25472d48b444da5f08b169608bd"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (size_t len, size_t &amp;delayCount)</td></tr>
 <tr class="separator:afb28d25472d48b444da5f08b169608bd inherit pro_methods_classaudio__tools_1_1_stream_copy_t"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classaudio__tools_1_1_stream_copy_t"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classaudio__tools_1_1_stream_copy_t')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classaudio__tools_1_1_stream_copy_t.html">audio_tools::StreamCopyT&lt; uint8_t &gt;</a></td></tr>
+<tr class="memitem:a1cfbfa48c59b861378ee49d59bea2cb8 inherit pro_attribs_classaudio__tools_1_1_stream_copy_t"><td class="memItemLeft" align="right" valign="top"><a id="a1cfbfa48c59b861378ee49d59bea2cb8"></a>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><b>actual_mime</b></td></tr>
+<tr class="separator:a1cfbfa48c59b861378ee49d59bea2cb8 inherit pro_attribs_classaudio__tools_1_1_stream_copy_t"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad01cd4cf450c02a01b8d701eec8b9f00 inherit pro_attribs_classaudio__tools_1_1_stream_copy_t"><td class="memItemLeft" align="right" valign="top"><a id="ad01cd4cf450c02a01b8d701eec8b9f00"></a>
 uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b></td></tr>
 <tr class="separator:ad01cd4cf450c02a01b8d701eec8b9f00 inherit pro_attribs_classaudio__tools_1_1_stream_copy_t"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -150,6 +172,21 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_size</b></td></
 <tr class="memitem:a82b08dcf6ffa69a5ee12cc5ef0808e4f inherit pro_attribs_classaudio__tools_1_1_stream_copy_t"><td class="memItemLeft" align="right" valign="top"><a id="a82b08dcf6ffa69a5ee12cc5ef0808e4f"></a>
 <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>from</b></td></tr>
 <tr class="separator:a82b08dcf6ffa69a5ee12cc5ef0808e4f inherit pro_attribs_classaudio__tools_1_1_stream_copy_t"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34c18e76a6442621a824059e3d4de03f inherit pro_attribs_classaudio__tools_1_1_stream_copy_t"><td class="memItemLeft" align="right" valign="top"><a id="a34c18e76a6442621a824059e3d4de03f"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_first</b></td></tr>
+<tr class="separator:a34c18e76a6442621a824059e3d4de03f inherit pro_attribs_classaudio__tools_1_1_stream_copy_t"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12c73e0711f4ca857204ad32a3da515e inherit pro_attribs_classaudio__tools_1_1_stream_copy_t"><td class="memItemLeft" align="right" valign="top"><a id="a12c73e0711f4ca857204ad32a3da515e"></a>
+void(*&#160;</td><td class="memItemRight" valign="bottom"><b>notifyMimeCallback</b> )(const char *<a class="el" href="classaudio__tools_1_1_stream_copy_t.html#a475ccf85f62b1d72ff03485b4b9bc6dc">mime</a>)</td></tr>
+<tr class="separator:a12c73e0711f4ca857204ad32a3da515e inherit pro_attribs_classaudio__tools_1_1_stream_copy_t"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa594b24ff1e823eb0c930ee2238c35e9 inherit pro_attribs_classaudio__tools_1_1_stream_copy_t"><td class="memItemLeft" align="right" valign="top"><a id="aa594b24ff1e823eb0c930ee2238c35e9"></a>
+void(*&#160;</td><td class="memItemRight" valign="bottom"><b>onWrite</b> )(void *obj, void *buffer, size_t len)</td></tr>
+<tr class="separator:aa594b24ff1e823eb0c930ee2238c35e9 inherit pro_attribs_classaudio__tools_1_1_stream_copy_t"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38b34f597114504829784494b2a1524b inherit pro_attribs_classaudio__tools_1_1_stream_copy_t"><td class="memItemLeft" align="right" valign="top"><a id="a38b34f597114504829784494b2a1524b"></a>
+void *&#160;</td><td class="memItemRight" valign="bottom"><b>onWriteObj</b></td></tr>
+<tr class="separator:a38b34f597114504829784494b2a1524b inherit pro_attribs_classaudio__tools_1_1_stream_copy_t"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afadd82e2e8f8ec11a649b4fa924d2886 inherit pro_attribs_classaudio__tools_1_1_stream_copy_t"><td class="memItemLeft" align="right" valign="top"><a id="afadd82e2e8f8ec11a649b4fa924d2886"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>retryLimit</b></td></tr>
+<tr class="separator:afadd82e2e8f8ec11a649b4fa924d2886 inherit pro_attribs_classaudio__tools_1_1_stream_copy_t"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5eef238094d6aca58f554451a9e84f5a inherit pro_attribs_classaudio__tools_1_1_stream_copy_t"><td class="memItemLeft" align="right" valign="top"><a id="a5eef238094d6aca58f554451a9e84f5a"></a>
 <a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>to</b></td></tr>
 <tr class="separator:a5eef238094d6aca58f554451a9e84f5a inherit pro_attribs_classaudio__tools_1_1_stream_copy_t"><td class="memSeparator" colspan="2">&#160;</td></tr>

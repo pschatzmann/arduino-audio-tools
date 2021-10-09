@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['header_405',['header',['../classaudio__tools_1_1_meta_data_i_d3_v2.html#af0fa4982249a071d4a1d9b2b5605cba8',1,'audio_tools::MetaDataID3V2']]],
-  ['hexdumpstream_406',['HexDumpStream',['../classaudio__tools_1_1_hex_dump_stream.html#a8adc1bd6e72e51531426e3a01a26a889',1,'audio_tools::HexDumpStream']]],
-  ['httpchunkreader_407',['HttpChunkReader',['../classaudio__tools_1_1_http_chunk_reader.html#a1dc610bb96ccbde960d85e80603a0670',1,'audio_tools::HttpChunkReader::HttpChunkReader()'],['../classaudio__tools_1_1_http_chunk_reader.html#a07e9d1af0f704c76adc30a97747fb368',1,'audio_tools::HttpChunkReader::HttpChunkReader(HttpReplyHeader &amp;header)']]]
+  ['getfile_473',['getFile',['../classaudio__tools_1_1_audio_source_sd_fat.html#a0fb7001772effe4b8f171e1d9ed1ce45',1,'audio_tools::AudioSourceSdFat']]],
+  ['getfileatindex_474',['getFileAtIndex',['../classaudio__tools_1_1_audio_source_sd_fat.html#a2ce266429510a2702b479b12d58b22e8',1,'audio_tools::AudioSourceSdFat']]]
 ];

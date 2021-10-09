@@ -283,24 +283,24 @@ $(function() {
 <div class="line"><a name="l00233"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_w_a_v_decoder.html">  233</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_w_a_v_decoder.html">WAVDecoder</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> {</div>
 <div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00239"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_w_a_v_decoder.html#a1b54cd47888e5c7457739d2e67ab6f27">  239</a></span>&#160;        <a class="code" href="classaudio__tools_1_1_w_a_v_decoder.html#a1b54cd47888e5c7457739d2e67ab6f27">WAVDecoder</a>(){</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;            LOGD(__FUNCTION__);</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;            LOGD(LOG_METHOD);</div>
 <div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;            this-&gt;audioBaseInfoSupport = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;        }</div>
 <div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160; </div>
 <div class="line"><a name="l00249"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_w_a_v_decoder.html#a5bdda66b6bfcf91e5be2e9267cb36bde">  249</a></span>&#160;        <a class="code" href="classaudio__tools_1_1_w_a_v_decoder.html#a5bdda66b6bfcf91e5be2e9267cb36bde">WAVDecoder</a>(<a class="code" href="class_print.html">Print</a> &amp;out_stream, <span class="keywordtype">bool</span> active=<span class="keyword">true</span>){</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;            LOGD(__FUNCTION__);</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;            LOGD(LOG_METHOD);</div>
 <div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;            this-&gt;out = &amp;out_stream;</div>
 <div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;            this-&gt;audioBaseInfoSupport = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;            this-&gt;active = active;</div>
 <div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;        }</div>
 <div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160; </div>
 <div class="line"><a name="l00263"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_w_a_v_decoder.html#a63043a9a160d9316d154347561f6d471">  263</a></span>&#160;        <a class="code" href="classaudio__tools_1_1_w_a_v_decoder.html#a63043a9a160d9316d154347561f6d471">WAVDecoder</a>(<a class="code" href="class_print.html">Print</a> &amp;out_stream, <a class="code" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> &amp;bi){</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;            LOGD(__FUNCTION__);</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;            LOGD(LOG_METHOD);</div>
 <div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;            this-&gt;out = &amp;out_stream;</div>
 <div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;            this-&gt;audioBaseInfoSupport = &amp;bi;</div>
 <div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        }</div>
 <div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160; </div>
-<div class="line"><a name="l00270"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_w_a_v_decoder.html#ab84905f765ec0f888faa2f4c6375c609">  270</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_w_a_v_decoder.html#ab84905f765ec0f888faa2f4c6375c609">setOutputStream</a>(<a class="code" href="class_stream.html">Stream</a> &amp;out_stream){</div>
+<div class="line"><a name="l00270"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_w_a_v_decoder.html#a95e1a04ad2f0cc08cf228846d37409fd">  270</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_w_a_v_decoder.html#a95e1a04ad2f0cc08cf228846d37409fd">setOutputStream</a>(<a class="code" href="class_print.html">Print</a> &amp;out_stream){</div>
 <div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;            this-&gt;out = &amp;out_stream;</div>
 <div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;        }</div>
 <div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160; </div>
@@ -310,13 +310,13 @@ $(function() {
 <div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160; </div>
 <div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160; </div>
 <div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        <span class="keywordtype">void</span> begin() {</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;            LOGD(__FUNCTION__);</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;            LOGD(LOG_METHOD);</div>
 <div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;            isFirst = <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;            active = <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;        }</div>
 <div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160; </div>
 <div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        <span class="keywordtype">void</span> end() {</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;            LOGD(__FUNCTION__);</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;            LOGD(LOG_METHOD);</div>
 <div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;            active = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;        }</div>
 <div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160; </div>
@@ -333,7 +333,7 @@ $(function() {
 <div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;        }</div>
 <div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160; </div>
 <div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> <span class="keywordtype">void</span> *in_ptr, <span class="keywordtype">size_t</span> in_size) {</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;            LOGD(__FUNCTION__);</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;            LOGD(LOG_METHOD);</div>
 <div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;            <span class="keywordtype">size_t</span> result = 0;</div>
 <div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;            <span class="keywordflow">if</span> (active) {</div>
 <div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;                <span class="keywordflow">if</span> (isFirst){</div>
@@ -384,7 +384,7 @@ $(function() {
 <div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;        }</div>
 <div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160; </div>
 <div class="line"><a name="l00354"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_w_a_v_decoder.html#ae05e6c1f74d0b03f63ae3830f672e1df">  354</a></span>&#160;        <span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1_w_a_v_decoder.html#ae05e6c1f74d0b03f63ae3830f672e1df">readStream</a>(<a class="code" href="class_stream.html">Stream</a> &amp;in){</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;            LOGD(__FUNCTION__);</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;            LOGD(LOG_METHOD);</div>
 <div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;            uint8_t buffer[READ_BUFFER_SIZE];</div>
 <div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;            <span class="keywordtype">int</span> len = in.readBytes(buffer, READ_BUFFER_SIZE);</div>
 <div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;            <span class="keywordflow">return</span> write(buffer, len);</div>
@@ -573,14 +573,14 @@ $(function() {
 <div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160;}</div>
 <div class="ttc" id="aclass_print_html"><div class="ttname"><a href="class_print.html">Print</a></div><div class="ttdef"><b>Definition:</b> Print.h:34</div></div>
 <div class="ttc" id="aclass_stream_html"><div class="ttname"><a href="class_stream.html">Stream</a></div><div class="ttdef"><b>Definition:</b> Stream.h:49</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_base_info_dependent_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_base_info_dependent.html">audio_tools::AudioBaseInfoDependent</a></div><div class="ttdoc">Supports changes to the sampling rate, bits and channels.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:112</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_decoder.html">audio_tools::AudioDecoder</a></div><div class="ttdoc">Docoding of encoded audio into PCM data.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:188</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_encoder_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_encoder.html">audio_tools::AudioEncoder</a></div><div class="ttdoc">Encoding of PCM data.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:201</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_base_info_dependent_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_base_info_dependent.html">audio_tools::AudioBaseInfoDependent</a></div><div class="ttdoc">Supports changes to the sampling rate, bits and channels.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:125</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_decoder.html">audio_tools::AudioDecoder</a></div><div class="ttdoc">Docoding of encoded audio into PCM data.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:201</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_encoder_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_encoder.html">audio_tools::AudioEncoder</a></div><div class="ttdoc">Encoding of PCM data.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:214</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_w_a_v_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_w_a_v_decoder.html">audio_tools::WAVDecoder</a></div><div class="ttdoc">WAVDecoder - We parse the header data on the first record and send the sound data to the stream which...</div><div class="ttdef"><b>Definition:</b> CodecWAV.h:233</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_w_a_v_decoder_html_a1b54cd47888e5c7457739d2e67ab6f27"><div class="ttname"><a href="classaudio__tools_1_1_w_a_v_decoder.html#a1b54cd47888e5c7457739d2e67ab6f27">audio_tools::WAVDecoder::WAVDecoder</a></div><div class="ttdeci">WAVDecoder()</div><div class="ttdoc">Construct a new WAVDecoder object.</div><div class="ttdef"><b>Definition:</b> CodecWAV.h:239</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_w_a_v_decoder_html_a5bdda66b6bfcf91e5be2e9267cb36bde"><div class="ttname"><a href="classaudio__tools_1_1_w_a_v_decoder.html#a5bdda66b6bfcf91e5be2e9267cb36bde">audio_tools::WAVDecoder::WAVDecoder</a></div><div class="ttdeci">WAVDecoder(Print &amp;out_stream, bool active=true)</div><div class="ttdoc">Construct a new WAVDecoder object.</div><div class="ttdef"><b>Definition:</b> CodecWAV.h:249</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_w_a_v_decoder_html_a63043a9a160d9316d154347561f6d471"><div class="ttname"><a href="classaudio__tools_1_1_w_a_v_decoder.html#a63043a9a160d9316d154347561f6d471">audio_tools::WAVDecoder::WAVDecoder</a></div><div class="ttdeci">WAVDecoder(Print &amp;out_stream, AudioBaseInfoDependent &amp;bi)</div><div class="ttdoc">Construct a new WAVDecoder object.</div><div class="ttdef"><b>Definition:</b> CodecWAV.h:263</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_w_a_v_decoder_html_ab84905f765ec0f888faa2f4c6375c609"><div class="ttname"><a href="classaudio__tools_1_1_w_a_v_decoder.html#ab84905f765ec0f888faa2f4c6375c609">audio_tools::WAVDecoder::setOutputStream</a></div><div class="ttdeci">void setOutputStream(Stream &amp;out_stream)</div><div class="ttdoc">Defines the output Stream.</div><div class="ttdef"><b>Definition:</b> CodecWAV.h:270</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_w_a_v_decoder_html_a95e1a04ad2f0cc08cf228846d37409fd"><div class="ttname"><a href="classaudio__tools_1_1_w_a_v_decoder.html#a95e1a04ad2f0cc08cf228846d37409fd">audio_tools::WAVDecoder::setOutputStream</a></div><div class="ttdeci">void setOutputStream(Print &amp;out_stream)</div><div class="ttdoc">Defines the output Stream.</div><div class="ttdef"><b>Definition:</b> CodecWAV.h:270</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_w_a_v_decoder_html_ae05e6c1f74d0b03f63ae3830f672e1df"><div class="ttname"><a href="classaudio__tools_1_1_w_a_v_decoder.html#ae05e6c1f74d0b03f63ae3830f672e1df">audio_tools::WAVDecoder::readStream</a></div><div class="ttdeci">int readStream(Stream &amp;in)</div><div class="ttdoc">Alternative API which provides the data from an input stream.</div><div class="ttdef"><b>Definition:</b> CodecWAV.h:354</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_w_a_v_encoder_html"><div class="ttname"><a href="classaudio__tools_1_1_w_a_v_encoder.html">audio_tools::WAVEncoder</a></div><div class="ttdoc">A simple WAV file encoder.</div><div class="ttdef"><b>Definition:</b> CodecWAV.h:380</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_w_a_v_encoder_html_a18da3a82c9a9f25ffe63941a4da91cb8"><div class="ttname"><a href="classaudio__tools_1_1_w_a_v_encoder.html#a18da3a82c9a9f25ffe63941a4da91cb8">audio_tools::WAVEncoder::begin</a></div><div class="ttdeci">virtual void begin()</div><div class="ttdoc">starts the processing using the actual WAVAudioInfo</div><div class="ttdef"><b>Definition:</b> CodecWAV.h:447</div></div>
@@ -594,7 +594,7 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_w_a_v_encoder_html_ac61bb13de1fcf11bb393eabacc996f8d"><div class="ttname"><a href="classaudio__tools_1_1_w_a_v_encoder.html#ac61bb13de1fcf11bb393eabacc996f8d">audio_tools::WAVEncoder::setAudioInfo</a></div><div class="ttdeci">virtual void setAudioInfo(AudioBaseInfo from)</div><div class="ttdoc">Update actual WAVAudioInfo.</div><div class="ttdef"><b>Definition:</b> CodecWAV.h:424</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_w_a_v_header_html"><div class="ttname"><a href="classaudio__tools_1_1_w_a_v_header.html">audio_tools::WAVHeader</a></div><div class="ttdoc">Parser for Wav header data for details see https://de.wikipedia.org/wiki/RIFF_WAVE.</div><div class="ttdef"><b>Definition:</b> CodecWAV.h:43</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Parser for MP3 ID3 Meta Data: The goal is to implement a simple API which provides the title,...</div><div class="ttdef"><b>Definition:</b> AudioA2DP.h:19</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_audio_base_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_base_info.html">audio_tools::AudioBaseInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:94</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_audio_base_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_base_info.html">audio_tools::AudioBaseInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:101</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_w_a_v_audio_info_html"><div class="ttname"><a href="structaudio__tools_1_1_w_a_v_audio_info.html">audio_tools::WAVAudioInfo</a></div><div class="ttdoc">Sound information which is available in the WAV header.</div><div class="ttdef"><b>Definition:</b> CodecWAV.h:17</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

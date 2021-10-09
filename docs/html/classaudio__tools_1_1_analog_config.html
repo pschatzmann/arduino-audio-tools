@@ -68,6 +68,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="#friends">Friends</a> &#124;
 <a href="classaudio__tools_1_1_analog_config-members.html">List of all members</a>  </div>
@@ -76,74 +77,104 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>ESP32 specific configuration for i2s input via adc. The default input pin is GPIO34. We always use int16_t values on 2 channels.  
+<p>ESP32 specific configuration for i2s input via adc. The default input pin is GPIO34. We always use int16_t values. The default output pins are GPIO25 and GPIO26!  
  <a href="classaudio__tools_1_1_analog_config.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_analog_audio_8h_source.html">AnalogAudio.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_e_s_p32_analog_audio_8h_source.html">ESP32AnalogAudio.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for audio_tools::AnalogConfig:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classaudio__tools_1_1_analog_config.png" usemap="#audio_5Ftools::AnalogConfig_map" alt=""/>
+  <map id="audio_5Ftools::AnalogConfig_map" name="audio_5Ftools::AnalogConfig_map">
+<area href="structaudio__tools_1_1_audio_base_info.html" title="Basic Audio information which drives e.g. I2S." alt="audio_tools::AudioBaseInfo" shape="rect" coords="0,0,164,24"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aac1f00c331b50440cbe9a5f8b10ee4ae"><td class="memItemLeft" align="right" valign="top"><a id="aac1f00c331b50440cbe9a5f8b10ee4ae"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>AnalogConfig</b> (bool auto_scale=true)</td></tr>
-<tr class="separator:aac1f00c331b50440cbe9a5f8b10ee4ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b5204fb086fada9142200c1913a7c69"><td class="memItemLeft" align="right" valign="top"><a id="a9b5204fb086fada9142200c1913a7c69"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_config.html#a9b5204fb086fada9142200c1913a7c69">AnalogConfig</a> (const <a class="el" href="classaudio__tools_1_1_analog_config.html">AnalogConfig</a> &amp;cfg)=default</td></tr>
 <tr class="memdesc:a9b5204fb086fada9142200c1913a7c69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor. <br /></td></tr>
 <tr class="separator:a9b5204fb086fada9142200c1913a7c69"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8757aa2237cbe130c4345f7db9ea9972"><td class="memItemLeft" align="right" valign="top"><a id="a8757aa2237cbe130c4345f7db9ea9972"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_config.html#a8757aa2237cbe130c4345f7db9ea9972">AnalogConfig</a> (RxTxMode mode, bool auto_scale=true)</td></tr>
-<tr class="memdesc:a8757aa2237cbe130c4345f7db9ea9972"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor. <br /></td></tr>
-<tr class="separator:a8757aa2237cbe130c4345f7db9ea9972"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b23d7225eb36a909ba19087696a7e77"><td class="memItemLeft" align="right" valign="top"><a id="a9b23d7225eb36a909ba19087696a7e77"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_config.html#a9b23d7225eb36a909ba19087696a7e77">pin</a> ()</td></tr>
-<tr class="memdesc:a9b23d7225eb36a909ba19087696a7e77"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the current ADC pin <br /></td></tr>
-<tr class="separator:a9b23d7225eb36a909ba19087696a7e77"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44deeabcd6c87a20c3cf6ca292b6b89a"><td class="memItemLeft" align="right" valign="top"><a id="a44deeabcd6c87a20c3cf6ca292b6b89a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_config.html#a44deeabcd6c87a20c3cf6ca292b6b89a">setPin</a> (int gpio)</td></tr>
-<tr class="memdesc:a44deeabcd6c87a20c3cf6ca292b6b89a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the current ADC pin. The following GPIO pins are supported: GPIO32-GPIO39. <br /></td></tr>
-<tr class="separator:a44deeabcd6c87a20c3cf6ca292b6b89a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add201395a071ac7c8222993f4b26af02"><td class="memItemLeft" align="right" valign="top"><a id="add201395a071ac7c8222993f4b26af02"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_config.html#add201395a071ac7c8222993f4b26af02">AnalogConfig</a> (RxTxMode rxtxMode)</td></tr>
+<tr class="memdesc:add201395a071ac7c8222993f4b26af02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor. <br /></td></tr>
+<tr class="separator:add201395a071ac7c8222993f4b26af02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0449c04f36a874818145806ceeb50de8"><td class="memItemLeft" align="right" valign="top"><a id="a0449c04f36a874818145806ceeb50de8"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>logInfo</b> ()</td></tr>
+<tr class="separator:a0449c04f36a874818145806ceeb50de8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ca657478e77bffc358f26d78febf23a"><td class="memItemLeft" align="right" valign="top"><a id="a9ca657478e77bffc358f26d78febf23a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_config.html#a9ca657478e77bffc358f26d78febf23a">setInputPin1</a> (int pin=PIN_ADC1)</td></tr>
+<tr class="memdesc:a9ca657478e77bffc358f26d78febf23a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines an alternative input pin (for the left channel) <br /></td></tr>
+<tr class="separator:a9ca657478e77bffc358f26d78febf23a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a432317449a15f87655d40e3b52a90128"><td class="memItemLeft" align="right" valign="top"><a id="a432317449a15f87655d40e3b52a90128"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_config.html#a432317449a15f87655d40e3b52a90128">setInputPin2</a> (int pin=PIN_ADC2)</td></tr>
+<tr class="memdesc:a432317449a15f87655d40e3b52a90128"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines an alternative input pin for the right channel. <br /></td></tr>
+<tr class="separator:a432317449a15f87655d40e3b52a90128"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_structaudio__tools_1_1_audio_base_info"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_structaudio__tools_1_1_audio_base_info')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="structaudio__tools_1_1_audio_base_info.html">audio_tools::AudioBaseInfo</a></td></tr>
+<tr class="memitem:a5408fddd164a3f14acec6d9eef52ecc6 inherit pub_methods_structaudio__tools_1_1_audio_base_info"><td class="memItemLeft" align="right" valign="top"><a id="a5408fddd164a3f14acec6d9eef52ecc6"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>AudioBaseInfo</b> (const <a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> &amp;)=default</td></tr>
+<tr class="separator:a5408fddd164a3f14acec6d9eef52ecc6 inherit pub_methods_structaudio__tools_1_1_audio_base_info"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99d3dca8be51dbcd04008751465138a3 inherit pub_methods_structaudio__tools_1_1_audio_base_info"><td class="memItemLeft" align="right" valign="top"><a id="a99d3dca8be51dbcd04008751465138a3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>logInfo</b> ()</td></tr>
+<tr class="separator:a99d3dca8be51dbcd04008751465138a3 inherit pub_methods_structaudio__tools_1_1_audio_base_info"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec79c1127b5e453d71827e5dbbce58d0 inherit pub_methods_structaudio__tools_1_1_audio_base_info"><td class="memItemLeft" align="right" valign="top"><a id="aec79c1127b5e453d71827e5dbbce58d0"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator!=</b> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> alt)</td></tr>
+<tr class="separator:aec79c1127b5e453d71827e5dbbce58d0 inherit pub_methods_structaudio__tools_1_1_audio_base_info"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e724d3c17a6f5f8e5d1c2d09cee426f inherit pub_methods_structaudio__tools_1_1_audio_base_info"><td class="memItemLeft" align="right" valign="top"><a id="a7e724d3c17a6f5f8e5d1c2d09cee426f"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator==</b> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> alt)</td></tr>
+<tr class="separator:a7e724d3c17a6f5f8e5d1c2d09cee426f inherit pub_methods_structaudio__tools_1_1_audio_base_info"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a95bd2bdd024a3bc42f5eada676d43ab3"><td class="memItemLeft" align="right" valign="top"><a id="a95bd2bdd024a3bc42f5eada676d43ab3"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>auto_scale</b> = true</td></tr>
-<tr class="separator:a95bd2bdd024a3bc42f5eada676d43ab3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8635632f48fa144baaeb392603297155"><td class="memItemLeft" align="right" valign="top"><a id="a8635632f48fa144baaeb392603297155"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>bits_per_sample</b> = 16</td></tr>
-<tr class="separator:a8635632f48fa144baaeb392603297155"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae47a2c442247be7796828210345c03a1"><td class="memItemLeft" align="right" valign="top"><a id="ae47a2c442247be7796828210345c03a1"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b> = 2</td></tr>
-<tr class="separator:ae47a2c442247be7796828210345c03a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a443c6126253785d1df643e0f60fdcc96"><td class="memItemLeft" align="right" valign="top"><a id="a443c6126253785d1df643e0f60fdcc96"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>dma_buf_count</b> = I2S_BUFFER_COUNT</td></tr>
 <tr class="separator:a443c6126253785d1df643e0f60fdcc96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acdd7a36846d4c7d57fd40c2164d391b3"><td class="memItemLeft" align="right" valign="top"><a id="acdd7a36846d4c7d57fd40c2164d391b3"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>dma_buf_len</b> = I2S_BUFFER_SIZE</td></tr>
 <tr class="separator:acdd7a36846d4c7d57fd40c2164d391b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b623159f10b59c9f6c5d84bda2bda03"><td class="memItemLeft" align="right" valign="top"><a id="a7b623159f10b59c9f6c5d84bda2bda03"></a>
+i2s_port_t&#160;</td><td class="memItemRight" valign="bottom"><b>i2s_port</b> = I2S_NUM_0</td></tr>
+<tr class="separator:a7b623159f10b59c9f6c5d84bda2bda03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afdf6b31628f69a2fc3a0a3ab29c2c159"><td class="memItemLeft" align="right" valign="top"><a id="afdf6b31628f69a2fc3a0a3ab29c2c159"></a>
 RxTxMode&#160;</td><td class="memItemRight" valign="bottom"><b>mode</b></td></tr>
 <tr class="separator:afdf6b31628f69a2fc3a0a3ab29c2c159"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a937e432f9b998f004f28a13620a34c57"><td class="memItemLeft" align="right" valign="top"><a id="a937e432f9b998f004f28a13620a34c57"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>mode_internal</b></td></tr>
 <tr class="separator:a937e432f9b998f004f28a13620a34c57"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa43e6c9ff120c61a2a6682f0273bc656"><td class="memItemLeft" align="right" valign="top"><a id="aa43e6c9ff120c61a2a6682f0273bc656"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>sample_rate</b> = 44100</td></tr>
-<tr class="separator:aa43e6c9ff120c61a2a6682f0273bc656"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8230beb2dd6d32d46f0f8a6a05acc49e"><td class="memItemLeft" align="right" valign="top"><a id="a8230beb2dd6d32d46f0f8a6a05acc49e"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>use_apll</b> = false</td></tr>
 <tr class="separator:a8230beb2dd6d32d46f0f8a6a05acc49e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_structaudio__tools_1_1_audio_base_info"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_structaudio__tools_1_1_audio_base_info')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="structaudio__tools_1_1_audio_base_info.html">audio_tools::AudioBaseInfo</a></td></tr>
+<tr class="memitem:a3656e1572c91c5cde3d538637a2267a5 inherit pub_attribs_structaudio__tools_1_1_audio_base_info"><td class="memItemLeft" align="right" valign="top"><a id="a3656e1572c91c5cde3d538637a2267a5"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>bits_per_sample</b> =16</td></tr>
+<tr class="separator:a3656e1572c91c5cde3d538637a2267a5 inherit pub_attribs_structaudio__tools_1_1_audio_base_info"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a8f51cefe9260a9d35172ff08eeff51 inherit pub_attribs_structaudio__tools_1_1_audio_base_info"><td class="memItemLeft" align="right" valign="top"><a id="a3a8f51cefe9260a9d35172ff08eeff51"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b> = 0</td></tr>
+<tr class="separator:a3a8f51cefe9260a9d35172ff08eeff51 inherit pub_attribs_structaudio__tools_1_1_audio_base_info"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4578a109aeae16fd315a4ca60a36dfc2 inherit pub_attribs_structaudio__tools_1_1_audio_base_info"><td class="memItemLeft" align="right" valign="top"><a id="a4578a109aeae16fd315a4ca60a36dfc2"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>sample_rate</b> = 0</td></tr>
+<tr class="separator:a4578a109aeae16fd315a4ca60a36dfc2 inherit pub_attribs_structaudio__tools_1_1_audio_base_info"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:accc690b68bc4168d7804dcd33ed5b564"><td class="memItemLeft" align="right" valign="top"><a id="accc690b68bc4168d7804dcd33ed5b564"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_config.html#accc690b68bc4168d7804dcd33ed5b564">setInputPin1</a> (int gpio, int channelIdx)</td></tr>
+<tr class="memdesc:accc690b68bc4168d7804dcd33ed5b564"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the current ADC pin. The following GPIO pins are supported: GPIO32-GPIO39. <br /></td></tr>
+<tr class="separator:accc690b68bc4168d7804dcd33ed5b564"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a0df51ee56633bac12cec4cf46403ea73"><td class="memItemLeft" align="right" valign="top"><a id="a0df51ee56633bac12cec4cf46403ea73"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>adc_pin</b></td></tr>
-<tr class="separator:a0df51ee56633bac12cec4cf46403ea73"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1cb9547e3b1d6b8bf0c9a6bf16fbd547"><td class="memItemLeft" align="right" valign="top"><a id="a1cb9547e3b1d6b8bf0c9a6bf16fbd547"></a>
-adc1_channel_t&#160;</td><td class="memItemRight" valign="bottom"><b>channel</b></td></tr>
-<tr class="separator:a1cb9547e3b1d6b8bf0c9a6bf16fbd547"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a53cea59ae6d27dbe1860a8336d34ac43"><td class="memItemLeft" align="right" valign="top"><a id="a53cea59ae6d27dbe1860a8336d34ac43"></a>
-adc_unit_t&#160;</td><td class="memItemRight" valign="bottom"><b>unit</b></td></tr>
-<tr class="separator:a53cea59ae6d27dbe1860a8336d34ac43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14aa12572deee3dcec88840add4d4971"><td class="memItemLeft" align="right" valign="top"><a id="a14aa12572deee3dcec88840add4d4971"></a>
+adc1_channel_t&#160;</td><td class="memItemRight" valign="bottom"><b>adc_channel</b> [2]</td></tr>
+<tr class="separator:a14aa12572deee3dcec88840add4d4971"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24ad04d6d7b77e67c83f5c5706c7bda4"><td class="memItemLeft" align="right" valign="top"><a id="a24ad04d6d7b77e67c83f5c5706c7bda4"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>adc_pin</b> [2]</td></tr>
+<tr class="separator:a24ad04d6d7b77e67c83f5c5706c7bda4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af473c73fa706dcde5131c7eda0e038dd"><td class="memItemLeft" align="right" valign="top"><a id="af473c73fa706dcde5131c7eda0e038dd"></a>
+adc_unit_t&#160;</td><td class="memItemRight" valign="bottom"><b>adc_unit</b> [2]</td></tr>
+<tr class="separator:af473c73fa706dcde5131c7eda0e038dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
@@ -152,11 +183,11 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>AnalogAudio</b></td>
 <tr class="separator:a0134c04e4b722a44cf093839f2ca10d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>ESP32 specific configuration for i2s input via adc. The default input pin is GPIO34. We always use int16_t values on 2 channels. </p>
+<div class="textblock"><p>ESP32 specific configuration for i2s input via adc. The default input pin is GPIO34. We always use int16_t values. The default output pins are GPIO25 and GPIO26! </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/<a class="el" href="_analog_audio_8h_source.html">AnalogAudio.h</a></li>
+<li>src/AudioAnalog/<a class="el" href="_e_s_p32_analog_audio_8h_source.html">ESP32AnalogAudio.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
