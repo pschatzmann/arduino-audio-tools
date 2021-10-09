@@ -117,8 +117,9 @@ class SoundGenerator  {
 template <class T>
 class SineWaveGenerator : public SoundGenerator<T>, public AudioBaseInfoDependent {
     public:
+
         // the scale defines the max value which is generated
-        SineWaveGenerator(float amplitude = 32767.0, float phase = 0.0) {
+        SineWaveGenerator(float amplitude = 32767.0, float phase = 0.0){
             LOGD("SineWaveGenerator");
             m_amplitude = amplitude;
             m_phase = phase;
@@ -139,7 +140,7 @@ class SineWaveGenerator : public SoundGenerator<T>, public AudioBaseInfoDependen
         void begin(int channels, uint16_t sample_rate, uint16_t frequency=0){
             LOGI("SineWaveGenerator::begin");
             this->setChannels(channels);
-            this->m_frequency = frequency;
+            this->setFrequency(frequency);
             this->m_sample_rate = sample_rate;
             this->m_deltaTime = 1.0 / m_sample_rate;
             SoundGenerator<T>::active = true;
@@ -154,6 +155,17 @@ class SineWaveGenerator : public SoundGenerator<T>, public AudioBaseInfoDependen
             baseInfo.bits_per_sample = sizeof(T)*8;
             return baseInfo;
         }
+
+        virtual void setAudioInfo(AudioBaseInfo info){
+            m_sample_rate = info.sample_rate;
+            if (info.channels!=SoundGenerator<T>::channels()){
+                LOGE("invalid channels: %d", info.channels);
+            }   
+            if (info.bits_per_sample!=sizeof(T)*8){
+                LOGE("invalid bits_per_sample: %d", info.channels);
+            }   
+        }
+
 
         /// Defines the frequency - after the processing has been started
         void setFrequency(uint16_t frequency) {
@@ -187,9 +199,33 @@ class SineWaveGenerator : public SoundGenerator<T>, public AudioBaseInfoDependen
 
 };
 
+/**
+ * @brief Generates a square wave sound.
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ * 
+ */
+template <class T>
+class SquareWaveGenerator : public SineWaveGenerator<T> {
+    public:
+        SquareWaveGenerator(float amplitude = 32767.0, float phase = 0.0) : SineWaveGenerator<T>(amplitude, phase) {
+            LOGD("SquareWaveGenerator");
+        }
+
+        virtual  T readSample() {
+            return value(SineWaveGenerator<T>::readSample(), SineWaveGenerator<T>::m_amplitude);
+        }
+
+    protected:
+        // returns amplitude for positive vales and -amplitude for negative values
+        T value(T value, T amplitude) {
+            return (value >= 0) ? amplitude : -amplitude;
+        }
+};
+
 
 /**
- * @brief Generates a Sound with the help of rand() function.
+ * @brief Generates a random noise sound with the help of rand() function.
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 
@@ -211,5 +247,32 @@ class NoiseGenerator : public SoundGenerator<T> {
         double scale;
 
 };
+
+
+/**
+ * @brief Provides 0 as sound data. This can be used e.g. to test the output functionality which should optimally just output
+ * silence and no artifacts.
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ * 
+ */
+template <class T>
+class SilenceGenerator : public SoundGenerator<T> {
+    public:
+        // the scale defines the max value which is generated
+        SilenceGenerator(double scale=1.0) {
+            this->scale = scale;
+        }
+
+        /// Provides a single sample
+        T readSample() {
+        	return  0; // return 0
+        }
+
+    protected:
+        double scale;
+
+};
+
 
 }

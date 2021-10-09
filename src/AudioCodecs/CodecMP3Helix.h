@@ -22,7 +22,7 @@ class MP3DecoderHelix : public AudioDecoder  {
     public:
 
         MP3DecoderHelix() {
-        	LOGD(__FUNCTION__);
+        	LOGD(LOG_METHOD);
             mp3 = new libhelix::MP3DecoderHelix();
         }
         /**
@@ -31,7 +31,7 @@ class MP3DecoderHelix : public AudioDecoder  {
          * @param out_stream 
          */
         MP3DecoderHelix(Print &out_stream){
-        	LOGD(__FUNCTION__);
+        	LOGD(LOG_METHOD);
             mp3 = new libhelix::MP3DecoderHelix();
             setOutputStream(out_stream);
         }  
@@ -44,7 +44,7 @@ class MP3DecoderHelix : public AudioDecoder  {
          * @param bi 
          */
         MP3DecoderHelix(Print &out_stream, AudioBaseInfoDependent &bi){
-        	LOGD(__FUNCTION__);
+        	LOGD(LOG_METHOD);
             mp3 = new libhelix::MP3DecoderHelix();
             setOutputStream(out_stream);
             setNotifyAudioChange(bi);
@@ -65,13 +65,13 @@ class MP3DecoderHelix : public AudioDecoder  {
 
         /// Starts the processing
         void begin(){
-        	LOGD(__FUNCTION__);
+        	LOGD(LOG_METHOD);
             mp3->begin();
         }
 
         /// Releases the reserved memory
         void end(){
-        	LOGD(__FUNCTION__);
+        	LOGD(LOG_METHOD);
             mp3->end();
         }
 
@@ -90,6 +90,7 @@ class MP3DecoderHelix : public AudioDecoder  {
 
         /// Write mp3 data to decoder
         size_t write(const void* mp3Data, size_t len) {
+        	LOGD(LOG_METHOD);
             return mp3->write(mp3Data, len);
         }
 
@@ -108,7 +109,7 @@ class MP3DecoderHelix : public AudioDecoder  {
 
         /// Defines the callback object to which the Audio information change is provided
         void setNotifyAudioChange(AudioBaseInfoDependent &bi){
-        	LOGD(__FUNCTION__);
+        	LOGD(LOG_METHOD);
             audioChangeMP3Helix = &bi;
             mp3->setInfoCallback(infoCallback);
         }
@@ -116,7 +117,7 @@ class MP3DecoderHelix : public AudioDecoder  {
         /// notifies the subscriber about a change
         static void infoCallback(MP3FrameInfo &i){
             if (audioChangeMP3Helix!=nullptr){
-            	LOGD(__FUNCTION__);
+            	LOGD(LOG_METHOD);
                 AudioBaseInfo baseInfo;
                 baseInfo.channels = i.nChans;
                 baseInfo.sample_rate = i.samprate;

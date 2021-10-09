@@ -36,13 +36,15 @@ class StreamCopyT {
             }
         }
 
-        void begin(){            
+        void begin(){     
+            is_first = true;       
         }
 
         // assign a new output and input stream
         void begin(Print &to, Stream &from){
             this->from = &from;
             this->to = &to;
+            is_first = true;
         }
 
         ~StreamCopyT(){
@@ -51,6 +53,9 @@ class StreamCopyT {
 
         // copies the data from one channel from the source to 2 channels on the destination - the result is in bytes
          size_t copy(){
+            if (from==nullptr || to == nullptr) 
+                return 0;
+
             size_t result = 0;
             size_t delayCount = 0;
             size_t len = available();
@@ -62,6 +67,13 @@ class StreamCopyT {
                 size_t samples = bytes_to_read / sizeof(T);
                 bytes_to_read = samples * sizeof(T);
                 bytes_read = from->readBytes(buffer, bytes_to_read);
+
+                notifyMime(buffer, bytes_to_read);
+                is_first = false;
+
+                // callback with unconverted data
+                if (onWrite!=nullptr) onWrite(onWriteObj, buffer, result);
+                // write data
                 result = write(bytes_read, delayCount);
             } 
             LOGI("StreamCopy::copy %zu -> %zu -> %zu bytes - in %zu hops", bytes_to_read, bytes_read, result, delayCount);
@@ -71,6 +83,8 @@ class StreamCopyT {
 
         // copies the data from one channel from the source to 2 channels on the destination - the result is in bytes
         size_t copy2(){
+            if (from==nullptr || to == nullptr) 
+                return 0;
             size_t result = 0;
             size_t delayCount = 0;
             size_t bytes_read;
@@ -84,6 +98,8 @@ class StreamCopyT {
 
                 T temp_data[samples];
                 bytes_read = from->readBytes((uint8_t*)temp_data, bytes_to_read);
+                // callback with unconverted data
+                if (onWrite!=nullptr) onWrite(onWriteObj, temp_data, bytes_read);
 
                 T* bufferT = (T*) buffer;
                 for (int j=0;j<samples;j++){
@@ -100,22 +116,51 @@ class StreamCopyT {
 
         /// available bytes in the data source
         int available() {
-            return from->available();
+            return from == nullptr ? 0 : from->available();
         }
 
         /// copies all data
         void copyAll(){
+            if (from==nullptr || to == nullptr) 
+                return;
+
             while(copy()){
                 yield();
                 delay(100);
             }
         }
 
+        /// Provides the actual mime type, that was determined from the first available data
+        const char* mime() {
+            return actual_mime;
+        }
+
+        /// Define the callback that will notify about mime changes
+        void setMimeCallback(void (*callback)(const char*)){
+            this->notifyMimeCallback = callback;
+        }
+
+        /// Defines a callback that is notified with the wirtten data
+        void setCallbackOnWrite(void (*onWrite)(void*obj, void*buffer, size_t len), void* obj){
+            this->onWrite = onWrite;
+            this->onWriteObj = obj;
+        }
+
+        void setRetry(int retry){
+            retryLimit = retry;
+        }
+
     protected:
-        Stream *from;
-        Print *to;
-        uint8_t *buffer;
+        Stream *from = nullptr;
+        Print *to = nullptr;
+        uint8_t *buffer = nullptr;
         int buffer_size;
+        void (*onWrite)(void*obj, void*buffer, size_t len) = nullptr;
+        void (*notifyMimeCallback)(const char*mime) = nullptr;
+        void *onWriteObj = nullptr;
+        bool is_first = false;
+        const char* actual_mime = nullptr;
+        int retryLimit = 20;
 
         // blocking write - until everything is processed
         size_t write(size_t len, size_t &delayCount ){
@@ -126,7 +171,8 @@ class StreamCopyT {
                 total += written;
                 delayCount++;
 
-                if (retry++ > 20){
+                if (retry++ > retryLimit){
+                    LOGE("write to target has failed!");
                     break;
                 }
                 
@@ -137,6 +183,22 @@ class StreamCopyT {
 
             }
             return total;
+        }
+
+        /// Update the mime type
+        void notifyMime(void* data, size_t len){
+            const char *start = (const char *) data;
+            actual_mime = "audio/basic";
+            if (start[0]==0xFF && start[1]==0xF1){
+                actual_mime = "audio/aac";
+            } else if (strncmp(start,"ID3",3) || start[0]==0xFF || start[0]==0xFE ){
+                actual_mime = "audio/mpeg";
+            } else if (strncmp(start,"RIFF",4)){
+                actual_mime = "audio/vnd.wave";
+            }
+            if (notifyMimeCallback!=nullptr){
+                notifyMimeCallback(actual_mime);
+            }
         }
 
 };
@@ -165,6 +227,9 @@ class StreamCopy : public StreamCopyT<uint8_t> {
             if (result>0){
                 size_t bytes_to_read = min(result, static_cast<size_t>(buffer_size) );
                 result = from->readBytes(buffer, bytes_to_read);
+                // callback with unconverted data
+                if (onWrite!=nullptr) onWrite(onWriteObj, buffer, result);
+
                 // convert to pointer to array of 2
                 coverter_ptr->convert((T(*)[2])buffer,  result / (sizeof(T)*2) );
                 write(result, delayCount);

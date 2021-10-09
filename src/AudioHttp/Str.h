@@ -157,6 +157,12 @@ class Str {
             }            
         }
 
+        // checks if the string equals indicated parameter string
+        virtual bool equals(const char* str){
+            if (str==nullptr) return false;
+            return strcmp(this->chars, str)==0;
+        }
+
         // checks if the string starts with the indicated substring
         virtual bool startsWith(const char* str){
             if (str==nullptr) return false;
@@ -171,17 +177,97 @@ class Str {
             return strncmp(this->chars+(len-endlen),str, endlen)==0;
         }
     
-        virtual bool matches(const char* match){
-            int m_size = strlen(match);
-            if (length() < m_size)
-                return false;
-            if (strncmp(this->chars,match,m_size-1)!=0)
-                return false;
-            if (match[m_size-1]=='*' || match[m_size-1]==this->chars[m_size-1] ){
+        // virtual bool matches(const char* match){
+        //     int m_size = strlen(match);
+        //     if (length() < m_size)
+        //         return false;
+        //     if (strncmp(this->chars,match,m_size-1)!=0)
+        //         return false;
+        //     if (match[m_size-1]=='*' || match[m_size-1]==this->chars[m_size-1] ){
+        //         return true;
+        //     }
+        //     return false;
+        // }
+
+        /// file matching supporting * and ? - replacing regex which is not supported in all environments
+        virtual bool matches(const char* pattern)  {
+            // returns 1 (true) if there is a match
+            // returns 0 if the pattern is not whitin the line
+            int wildcard = 0;
+            const char* line = this->chars;
+
+            const char* last_pattern_start = 0;
+            const char* last_line_start = 0;
+            do{
+                if (*pattern == *line){
+                    if(wildcard == 1)
+                        last_line_start = line + 1;
+
+                    line++;
+                    pattern++;
+                    wildcard = 0;
+                }
+                else if (*pattern == '?'){
+                    if(*(line) == '\0') // the line is ended but char was expected
+                        return 0;
+                    if(wildcard == 1)
+                        last_line_start = line + 1;
+                    line++;
+                    pattern++;
+                    wildcard = 0;
+                }
+                else if (*pattern == '*') {
+                    if (*(pattern+1) == '\0'){
+                        return 1;
+                    }
+
+                    last_pattern_start = pattern;
+                    //last_line_start = line + 1;
+                    wildcard = 1;
+
+                    pattern++;
+                }
+                else if (wildcard) {
+                    if (*line == *pattern)
+                    {
+                        wildcard = 0;
+                        line++;
+                        pattern++;
+                        last_line_start = line + 1 ;
+                    }
+                    else
+                    {
+                        line++;
+                    }
+                } else
+                {
+                    if ((*pattern) == '\0' && (*line) == '\0')  // end of mask
+                        return 1; // if the line also ends here then the pattern match
+                    else
+                    {
+                        if (last_pattern_start != 0) // try to restart the mask on the rest
+                        {
+                            pattern = last_pattern_start;
+                            line = last_line_start;
+                            last_line_start = 0;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                }
+
+            } while (*line);
+
+
+            if (*pattern == '\0'){
                 return true;
+            } else {
+                return false;
             }
-            return false;
         }
+            
 
 
         // provides the position of the the indicated character after the indicated start position

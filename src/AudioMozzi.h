@@ -36,7 +36,7 @@ struct MozziConfig : AudioBaseInfo {
 class MozziGenerator : public SoundGenerator<int16_t> {
     public:
         MozziGenerator(){   
-	 		LOGD(__FUNCTION__);
+	 		LOGD(LOG_METHOD);
         }
 
         MozziGenerator(MozziConfig config){
@@ -145,11 +145,11 @@ class MozziStream : public Stream {
 
     public:
         MozziStream(){
-	 		LOGD(__FUNCTION__);
+	 		LOGD(LOG_METHOD);
         }
 
         ~MozziStream(){
-	 		LOGD(__FUNCTION__);
+	 		LOGD(LOG_METHOD);
             end();
             if (input_ptr!=nullptr){
                 delete input_ptr;
@@ -170,7 +170,7 @@ class MozziStream : public Stream {
         // Start Mozzi -  if controlRate > 0 we actiavate the sound generation (=>allow reads); the parameters describe the values if the
         // provided input stream or resulting output stream;
         void begin(MozziConfig cfg){
- 	 		LOGD(__FUNCTION__);
+ 	 		LOGD(LOG_METHOD);
             config = cfg;
             Mozzi.setAudioRate(config.sample_rate);
             // in output mode we do not allocate any unnecessary functionality
@@ -182,7 +182,7 @@ class MozziStream : public Stream {
         }
 
         void end(){
-	 		LOGD(__FUNCTION__);
+	 		LOGD(LOG_METHOD);
             Mozzi.stop();
         }
 

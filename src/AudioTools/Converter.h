@@ -83,20 +83,20 @@ template<typename T>
 class ConverterScaler : public  BaseConverter<T> {
     public:
         ConverterScaler(float factor, T offset, T maxValue){
-            this->factor = factor;
+            this->factor_value = factor;
             this->maxValue = maxValue;
-            this->offset = offset;
+            this->offset_value = offset;
         }
 
         void convert(T (*src)[2], size_t size) {
             for (size_t j=0;j<size;j++){
-                src[j][0] = (src[j][0] + offset) * factor;
+                src[j][0] = (src[j][0] + offset_value) * factor_value;
                 if (src[j][0]>maxValue){
                     src[j][0] = maxValue;
                 } else if (src[j][0]<-maxValue){
                     src[j][0] = -maxValue;
                 }
-                src[j][1] = src[j][1] + offset * factor;
+                src[j][1] = src[j][1] + offset_value * factor_value;
                 if (src[j][1]>maxValue){
                     src[j][1] = maxValue;
                 } else if (src[j][0]<-maxValue){
@@ -107,18 +107,29 @@ class ConverterScaler : public  BaseConverter<T> {
 
         /// Defines the factor (volume)
         void setFactor(T factor){
-            this->factor = factor;
+            this->factor_value = factor;
         }
 
         /// Defines the offset
         void setOffset(T offset) {
-            this->offset = offset;
+            this->offset_value = offset;
         }
 
+        /// Determines the actual factor (volume)
+        float factor() {
+            return factor_value;
+        }
+
+        /// Determines the offset value
+        T offset() {
+            return offset_value;
+        }
+
+
     protected:
-        float factor;
+        float factor_value;
         T maxValue;
-        T offset;
+        T offset_value;
 };
 
 /**

@@ -165,7 +165,6 @@ class HttpRequest {
                 return -1;
             }
             if (!this->connected()){
-                char msg[1024];
                 LOGI("process connecting to host %s port %d", url.host(), url.port());
                 bool is_connected = connect(url.host(), url.port());
                 if (!is_connected){

@@ -6,6 +6,7 @@
  */
 #pragma once
 #include <string.h>
+#include <stdint.h>
 
 /**
  * ------------------------------------------------------------------------- 
@@ -20,7 +21,7 @@
 #define PRINTF_BUFFER_SIZE 80
 #define LOG_LEVEL AudioLogger::Warning
 #define LOG_STREAM Serial
-
+#define LOG_METHOD __PRETTY_FUNCTION__
 
 /**
  * ------------------------------------------------------------------------- 
@@ -49,45 +50,26 @@
 #define PWM_BUFFER_SIZE 512
 #define PWM_BUFFERS 10
 #define PWM_FREQUENCY 60000
-#if defined(ESP32)
-#define PWM_START_PIN 4
-#elif defined(__arm__)
-#define PWM_START_PIN 2
-#endif
-/**
- * ------------------------------------------------------------------------- 
- * @brief Optional Functionality - comment out if not wanted 
- */
-#ifndef __arm__
-//#define USE_URL_ARDUINO
-#endif
 
-// Activate ESP32 Audio - for ESP32, ESP8266 and Raspberry Pico
-#define USE_ESP8266_AUDIO
-
-// Activate the A2DP library - for ESP32 only
-#ifdef ESP32
-#define USE_A2DP
-#endif
-
-/**
- * ------------------------------------------------------------------------- 
- * @brief FFT
- * 
- */
-#define CUSTOM_FFT 1
-#define POCKET_FFT 2
-#define FFT_IMPL POCKET_FFT
 
 /**
  * ------------------------------------------------------------------------- 
  * @brief Platform specific Settings
  * 
  */
-
+//----------------
 #ifdef ESP32
 #include "esp32-hal-log.h"
-#define I2S_SUPPORT
+#define USE_A2DP
+#define USE_PWM
+#define USE_URL_ARDUINO
+#define USE_ESP8266_AUDIO
+#define USE_I2S
+#define USE_DELTASIGMA
+#define USE_SDFAT
+
+#define PWM_FREQENCY 30000
+#define PWM_START_PIN 12
 #define PIN_I2S_BCK 14
 #define PIN_I2S_WS 15
 #define PIN_I2S_DATA_IN 32
@@ -96,10 +78,23 @@
 // Default Setting: The mute pin can be switched off by setting it to -1. Or you could drive the LED by assigning LED_BUILTIN
 #define PIN_I2S_MUTE 23
 #define SOFT_MUTE_VALUE LOW  
+#define PIN_CS SS
+#define PIN_ADC1 34 
+#define PIN_ADC2 35
+
 #endif
 
+//----------------
 #ifdef ESP8266
-#define I2S_SUPPORT
+#define USE_A2DP
+#define USE_URL_ARDUINO
+#define USE_ESP8266_AUDIO
+#define USE_I2S
+#define USE_DELTASIGMA
+#define USE_PWM
+#define USE_SDFAT
+
+#define PWM_START_PIN 12
 #define PIN_I2S_BCK -1
 #define PIN_I2S_WS -1
 #define PIN_I2S_DATA_IN -1
@@ -107,14 +102,68 @@
 #define I2S_USE_APLL false  
 #define PIN_I2S_MUTE 23
 #define SOFT_MUTE_VALUE LOW  
+#define PIN_CS SS
 #endif
 
+//----------------
 #ifdef ARDUINO_ARDUINO_NANO33BLE
-#define I2S_SUPPORT
+#define USE_I2S
+#define USE_DELTASIGMA
+#define USE_PWM
+#define USE_SDFAT
+
+#define PWM_START_PIN 6
 #define PIN_I2S_BCK 2
 #define PIN_I2S_WS 1
 #define PIN_I2S_DATA_IN 3
 #define PIN_I2S_DATA_OUT 3
 #define PIN_I2S_MUTE 4
 #define SOFT_MUTE_VALUE LOW  
+#define PIN_CS SS
+#endif
+
+
+//----------------
+#ifdef ARDUINO_ARCH_RP2040
+#define USE_ESP8266_AUDIO
+#define USE_I2S
+#define USE_DELTASIGMA
+#define USE_PWM
+#define USE_SDFAT
+
+#define PWM_START_PIN 6
+#define PIN_I2S_BCK 1
+#define PIN_I2S_WS PIN_I2S_BCK+1
+#define PIN_I2S_DATA_IN 3
+#define PIN_I2S_DATA_OUT 3
+#define PIN_I2S_MUTE 4
+#define SOFT_MUTE_VALUE LOW  
+#define PIN_CS PIN_SPI0_SS
+#endif
+
+//----------------
+#ifdef __AVR__
+#define USE_DELTASIGMA
+#define USE_PWM
+#define USE_SDFAT
+
+#define PWM_START_PIN 6
+#define PIN_CS CS
+#endif
+
+//----------------
+#ifdef STM32_CORE_VERSION
+#define USE_I2S
+#define USE_DELTASIGMA
+#define USE_PWM
+#define USE_SDFAT
+
+#define PWM_START_PIN 6
+#define PIN_I2S_BCK 1
+#define PIN_I2S_WS PIN_I2S_BCK+1
+#define PIN_I2S_DATA_IN 3
+#define PIN_I2S_DATA_OUT 3
+#define PIN_I2S_MUTE 4
+#define SOFT_MUTE_VALUE LOW  
+#define PIN_CS CS
 #endif

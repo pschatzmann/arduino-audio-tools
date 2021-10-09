@@ -40,7 +40,7 @@ class MP3DecoderMini : public AudioDecoder  {
     public:
 
         MP3DecoderMini() {
-        	LOGD(__FUNCTION__);
+        	LOGD(LOG_METHOD);
         }
         /**
          * @brief Construct a new MP3DecoderMini object
@@ -48,7 +48,7 @@ class MP3DecoderMini : public AudioDecoder  {
          * @param out_stream 
          */
         MP3DecoderMini(Print &out_stream){
-        	LOGD(__FUNCTION__);
+        	LOGD(LOG_METHOD);
             this->out = &out_stream;
         }  
 
@@ -60,7 +60,7 @@ class MP3DecoderMini : public AudioDecoder  {
          * @param bi 
          */
         MP3DecoderMini(Print &out_stream, AudioBaseInfoDependent &bi){
-        	LOGD(__FUNCTION__);
+        	LOGD(LOG_METHOD);
             this->out = &out_stream;
             this->audioBaseInfoSupport = &bi;
         }  
@@ -114,7 +114,7 @@ class MP3DecoderMini : public AudioDecoder  {
 
         /// Starts the processing
         void begin(int bufferLen){
-        	LOGD(__FUNCTION__);
+        	LOGD(LOG_METHOD);
             flush();
             minimp3::mp3dec_init(&mp3d);
             buffer_len = bufferLen;
@@ -123,7 +123,7 @@ class MP3DecoderMini : public AudioDecoder  {
 
         /// Releases the reserved memory
         virtual void end(){
-        	LOGD(__FUNCTION__);
+        	LOGD(LOG_METHOD);
             flush();
             active = false;
             // release buffer
@@ -155,7 +155,7 @@ class MP3DecoderMini : public AudioDecoder  {
         /// Decodes the last outstanding data
         void flush() {
             if (buffer_pos>0 && buffer!=nullptr){
-             	LOGD(__FUNCTION__);
+             	LOGD(LOG_METHOD);
                 size_t consumed = writeBuffer(buffer, buffer_pos);
                 buffer_pos -= consumed;
                 // move not consumed bytes to the head
@@ -186,7 +186,7 @@ class MP3DecoderMini : public AudioDecoder  {
 
         // Splits the data up into individual parts - Returns the successfully consumed number of bytes
         int writeBuffer(uint8_t* fileData, size_t len){
-        	LOGD(__FUNCTION__);
+        	LOGD(LOG_METHOD);
             // split into
             size_t remaining_bytes = len;
             buffer_pos = 0;
@@ -208,7 +208,7 @@ class MP3DecoderMini : public AudioDecoder  {
 
         // Writes the data in small pieces: the api recommends to combine 16 frames before calling mp3dec_decode_frame
         int writePart(uint8_t* fileData, size_t len){
-        	LOGD(__FUNCTION__);
+        	LOGD(LOG_METHOD);
             // allocate buffer if it does not exist 
             if (buffer==nullptr){
                 LOGI("Allocating buffer with %zu bytes", buffer_len);
@@ -252,7 +252,7 @@ class MP3DecoderMini : public AudioDecoder  {
         void provideAudioInfo(MP3MiniAudioInfo &info){
             // audio has changed
             if (audio_info != info){
-             	LOGI(__FUNCTION__);
+             	LOGI(LOG_METHOD);
 
                 if (infoCallback != nullptr){
                     infoCallback(info);
@@ -273,7 +273,7 @@ class MP3DecoderMini : public AudioDecoder  {
 
         // return the result PWM data
         void provideData(MP3MiniAudioInfo &info, int samples){
-        	LOGD(__FUNCTION__);
+        	LOGD(LOG_METHOD);
             // provide result pwm data
             if(pwmCallback!=nullptr){
                 // output via callback

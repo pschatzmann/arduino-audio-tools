@@ -300,9 +300,9 @@ class RingBuffer : public BaseBuffer<T> {
 
     protected:
         T *_aucBuffer ;
-        volatile int _iHead ;
-        volatile int _iTail ;
-        volatile int _numElems;
+        int _iHead ;
+        int _iTail ;
+        int _numElems;
         int max_size;
 
         int nextIndex(int index){
@@ -436,7 +436,7 @@ public:
   
   // resets all buffers
   void reset(){
-      LOGD(__FUNCTION__);
+      LOGD(LOG_METHOD);
       while (actual_read_buffer!=nullptr){
           actual_read_buffer->reset();
           addAvailableBuffer(actual_read_buffer);
