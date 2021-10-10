@@ -44,7 +44,7 @@ class URLStream : public Stream {
             LOGI( "URLStream.begin %s",urlStr);
             result = request.process(action, url, reqMime, reqData);
             size = request.getReceivedContentLength();
-            LOGI("size: %d", size);
+            LOGI("size: %d", (int)size);
             if (size>=0){
                 waitForData();
             }
