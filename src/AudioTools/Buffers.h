@@ -140,7 +140,7 @@ public:
         this->current_write_pos = len;
     }
 
-    ~SingleBuffer() {
+    virtual ~SingleBuffer() {
         if (owns_buffer && buffer!=nullptr){
             delete[] buffer;
         }
@@ -333,7 +333,7 @@ public:
       }
   }
 
-  ~NBuffer() {
+  virtual ~NBuffer() {
       delete actual_write_buffer;
       delete actual_read_buffer;
 

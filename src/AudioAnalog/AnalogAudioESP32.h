@@ -201,8 +201,9 @@ class AnalogAudio  : public Stream,  public AudioBaseInfoDependent  {
           .dma_buf_count = cfg.dma_buf_count,
           .dma_buf_len = cfg.dma_buf_len,
           .use_apll = cfg.use_apll,
-          .tx_desc_auto_clear = false,
-          .fixed_mclk = 0};
+          .tx_desc_auto_clear = false
+        //  .fixed_mclk = 0
+        };
 
 
       // setup config
