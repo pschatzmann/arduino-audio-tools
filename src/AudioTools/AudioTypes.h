@@ -200,6 +200,7 @@ class AudioWriter {
  */
 class AudioDecoder : public AudioWriter {
   public: 
+      virtual ~AudioDecoder(){};
   		virtual void setOutputStream(Print &out_stream) = 0;
       virtual void begin() = 0;
       virtual void end() = 0;
