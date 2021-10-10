@@ -41,9 +41,9 @@ class AnalogConfig : public AudioBaseInfo {
     RxTxMode mode;
     int dma_buf_count = I2S_BUFFER_COUNT;
     int dma_buf_len = I2S_BUFFER_SIZE;
-    bool use_apll = false;
     int mode_internal; 
-    i2s_port_t i2s_port = I2S_NUM_0; // Analog input only supports 0!
+    int port_no = I2S_NUM_0; // Analog input and output only supports 0!
+    bool use_apll = false;
 
     AnalogConfig() {
         sample_rate = 44100;
@@ -85,13 +85,13 @@ class AnalogConfig : public AudioBaseInfo {
     void logInfo() {
       AudioBaseInfo::logInfo();
       if (mode == TX_MODE){
-        //int pin1, pin2;
-        //dac_pad_get_io_num(DAC_CHANNEL_1, pin1);
-        //dac_pad_get_io_num(DAC_CHANNEL_2, pin2);
         LOGI("analog left output pin: %d", 25);
         LOGI("analog right output pin: %d", 26);
       } else {
-        LOGI("input pin: %d", adc_pin);
+        LOGI("input pin1: %d", adc_pin[0]);
+        if (channels==2){
+          LOGI("input pin2: %d", adc_pin[1]);
+        }
       }
     }
 
@@ -106,35 +106,35 @@ class AnalogConfig : public AudioBaseInfo {
       this->adc_pin[channelIdx] = gpio;
       switch(gpio){
         case 32:
-          adc_unit[0] = ADC_UNIT_1;
+          adc_unit[channelIdx] = ADC_UNIT_1;
           adc_channel[channelIdx] = ADC1_GPIO32_CHANNEL;
           break;
         case 33:
-          adc_unit[0] = ADC_UNIT_1;
+          adc_unit[channelIdx] = ADC_UNIT_1;
           adc_channel[channelIdx]  = ADC1_GPIO33_CHANNEL;
           break;
         case 34:
-          adc_unit[0] = ADC_UNIT_1;
+          adc_unit[channelIdx] = ADC_UNIT_1;
           adc_channel[channelIdx]  = ADC1_GPIO34_CHANNEL;
           break;
         case 35:
-          adc_unit[0] = ADC_UNIT_1;
+          adc_unit[channelIdx] = ADC_UNIT_1;
           adc_channel[channelIdx]  = ADC1_GPIO35_CHANNEL;
           break;
         case 36:
-          adc_unit[0] = ADC_UNIT_1;
+          adc_unit[channelIdx] = ADC_UNIT_1;
           adc_channel[channelIdx]  = ADC1_GPIO36_CHANNEL;
           break;
         case 37:
-          adc_unit[0] = ADC_UNIT_1;
+          adc_unit[channelIdx] = ADC_UNIT_1;
           adc_channel[channelIdx]  = ADC1_GPIO37_CHANNEL;
           break;
         case 38:
-          adc_unit[0] = ADC_UNIT_1;
+          adc_unit[channelIdx] = ADC_UNIT_1;
           adc_channel[channelIdx]  = ADC1_GPIO38_CHANNEL;
           break;
         case 39:
-          adc_unit[0] = ADC_UNIT_1;
+          adc_unit[channelIdx] = ADC_UNIT_1;
           adc_channel[channelIdx]  = ADC1_GPIO39_CHANNEL;
           break;
 
@@ -142,8 +142,6 @@ class AnalogConfig : public AudioBaseInfo {
           LOGE( "%s - pin GPIO%d is not supported", __func__,gpio);
       }
     }    
-
-
 };
 
 
@@ -190,6 +188,7 @@ class AnalogAudio  : public Stream,  public AudioBaseInfoDependent  {
     void begin(AnalogConfig cfg) {
       LOGI(LOG_METHOD);
       cfg.logInfo();
+      port_no = (i2s_port_t) cfg.port_no;
 
       adc_config = cfg;
       i2s_config_t i2s_config = {
@@ -207,13 +206,13 @@ class AnalogAudio  : public Stream,  public AudioBaseInfoDependent  {
 
 
       // setup config
-      if (i2s_driver_install(cfg.i2s_port, &i2s_config, 0, nullptr)!=ESP_OK){
+      if (i2s_driver_install(port_no, &i2s_config, 0, nullptr)!=ESP_OK){
         LOGE( "%s - %s", __func__, "i2s_driver_install");
         return;
       }      
 
       // clear i2s buffer
-      if (i2s_zero_dma_buffer(cfg.i2s_port)!=ESP_OK) {
+      if (i2s_zero_dma_buffer(port_no)!=ESP_OK) {
         LOGE( "%s - %s", __func__, "i2s_zero_dma_buffer");
         return;
       }
@@ -221,10 +220,12 @@ class AnalogAudio  : public Stream,  public AudioBaseInfoDependent  {
       switch (cfg.mode) {
         case RX_MODE:
           //init ADC pad
+
           if (i2s_set_adc_mode(cfg.adc_unit[0], cfg.adc_channel[0])!=ESP_OK) {
             LOGE( "%s - %s", __func__, "i2s_driver_install");
             return;
           }
+
           if (cfg.channels>1){
             if (i2s_set_adc_mode(cfg.adc_unit[1], cfg.adc_channel[1])!=ESP_OK) {
               LOGE( "%s - %s", __func__, "i2s_driver_install");
@@ -233,14 +234,21 @@ class AnalogAudio  : public Stream,  public AudioBaseInfoDependent  {
           }
 
           // enable the ADC
-          if (i2s_adc_enable(cfg.i2s_port)!=ESP_OK) {
+          if (i2s_adc_enable(port_no)!=ESP_OK) {
             LOGE( "%s - %s", __func__, "i2s_adc_enable");
             return;
           }
 
+          // if (adc1_config_channel_atten(ADC1_CHANNEL_6,ADC_ATTEN_DB_11)!=ESP_OK){
+          //   LOGE( "%s - %s", __func__, "adc1_config_channel_atten");
+          // }
+          // if (adc1_config_channel_atten(ADC1_CHANNEL_7,ADC_ATTEN_DB_11)!=ESP_OK){
+          //   LOGE( "%s - %s", __func__, "adc1_config_channel_atten");
+          // }
+
           break;
         case TX_MODE:
-          i2s_set_pin(cfg.i2s_port, nullptr); 
+          i2s_set_pin(port_no, nullptr); 
           break;
       }
       active = true;
@@ -251,7 +259,8 @@ class AnalogAudio  : public Stream,  public AudioBaseInfoDependent  {
     /// stops the I2C and unistalls the driver
     void end(){
         LOGD( "%s", __func__);
-        i2s_driver_uninstall(adc_config.i2s_port); 
+        i2s_adc_disable(port_no); 
+        i2s_driver_uninstall(port_no); 
         active = false;   
     }
 
@@ -273,19 +282,19 @@ class AnalogAudio  : public Stream,  public AudioBaseInfoDependent  {
 
       size_t result = 0;   
       if (adc_config.channels==2){
-        if (i2s_write(adc_config.i2s_port, src, size_bytes, &result, portMAX_DELAY)!=ESP_OK){
+        if (i2s_write(port_no, src, size_bytes, &result, portMAX_DELAY)!=ESP_OK){
           LOGE(LOG_METHOD);
         }
         LOGD("i2s_write %d -> %d bytes", size_bytes, result);
       } else {
-        result = I2SBase::writeExpandChannel(adc_config.i2s_port, adc_config.bits_per_sample, src, size_bytes);
+        result = I2SBase::writeExpandChannel(port_no, adc_config.bits_per_sample, src, size_bytes);
       }       
       return result;
     }   
 
     size_t readBytes(void *dest, size_t size_bytes){
       size_t result = 0;
-      if (i2s_read(adc_config.i2s_port, dest, size_bytes, &result, portMAX_DELAY)!=ESP_OK){
+      if (i2s_read(port_no, dest, size_bytes, &result, portMAX_DELAY)!=ESP_OK){
         LOGE(LOG_METHOD);
       }
       LOGD( "%s - len: %d -> %d", __func__, size_bytes, result);
@@ -314,77 +323,9 @@ class AnalogAudio  : public Stream,  public AudioBaseInfoDependent  {
 
   protected:
     AnalogConfig adc_config;
+    i2s_port_t port_no;
     bool active = false;
     
-
-    // /// writes the data by making shure that we send 2 channels 16 data scaled to 8 bits
-    // static size_t writeExpandChannel(i2s_port_t i2s_port, int channels, const int bits_per_sample, const void *src, size_t size_bytes){
-    //     size_t result = 0;   
-    //     int j;
-    //     switch(bits_per_sample){
-
-    //       case 8:
-    //         for (j=0;j<size_bytes;j+=channels) {
-    //           int16_t frame[2];
-    //           int8_t *data = (int8_t *)src;
-    //           frame[0]=convert8DAC(data[j],bits_per_sample);
-    //           frame[1]=convert8DAC(data[j+channels-1],bits_per_sample);
-    //           size_t result_call = 0;   
-    //           if (i2s_write(i2s_port, frame, sizeof(int16_t)*2, &result_call, portMAX_DELAY)!=ESP_OK){
-    //             LOGE(LOG_METHOD);
-    //           } else {
-    //             result += result_call;
-    //           }
-    //         }
-    //         break;
-
-    //       case 16:
-    //         for (j=0;j<size_bytes/2;j+=channels) {
-    //           int16_t frame[2];
-    //           int16_t *data = (int16_t*)src;
-    //           frame[0]=convert8DAC(data[j],bits_per_sample);
-    //           frame[1]=convert8DAC(data[j+channels-1],bits_per_sample);
-    //           size_t result_call = 0;   
-    //           if (i2s_write(i2s_port, frame, sizeof(int16_t)*2, &result_call, portMAX_DELAY)!=ESP_OK){
-    //             LOGE(LOG_METHOD);
-    //           } else {
-    //             result += result_call;
-    //           }
-    //         }
-    //         break;
-
-    //       case 24:
-    //         for (j=0;j<size_bytes/4;j+=channels){
-    //           int16_t frame[2];
-    //           int24_t *data = (int24_t*) src;
-    //           frame[0]=convert8DAC(data[j],bits_per_sample);
-    //           frame[1]=convert8DAC(data[j+channels-1],bits_per_sample);
-    //           size_t result_call = 0;   
-    //           if (i2s_write(i2s_port, frame, sizeof(int16_t)*2, &result_call, portMAX_DELAY)!=ESP_OK){
-    //             LOGE(LOG_METHOD);
-    //           } else {
-    //             result += result_call;
-    //           }
-    //         }
-    //         break;
-
-    //       case 32:
-    //         for (j=0;j<size_bytes/4;j+=channels){
-    //           int16_t frame[2];
-    //           int32_t *data = (int32_t*) src;
-    //           frame[0]=convert8DAC(data[j],bits_per_sample);
-    //           frame[1]=convert8DAC(data[j+channels-1],bits_per_sample);
-    //           size_t result_call = 0;   
-    //           if (i2s_write(i2s_port, frame, sizeof(int16_t)*2, &result_call, portMAX_DELAY)!=ESP_OK){
-    //             LOGE(LOG_METHOD);
-    //           } else {
-    //             result += result_call;
-    //           }
-    //         }
-    //         break;
-    //     }
-    //     return result;
-    // }    
 };
 
 /**
