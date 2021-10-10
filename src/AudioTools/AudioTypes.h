@@ -200,7 +200,8 @@ class AudioWriter {
  */
 class AudioDecoder : public AudioWriter {
   public: 
-      virtual ~AudioDecoder(){};
+      AudioDecoder() = default;
+      virtual ~AudioDecoder() = default;
   		virtual void setOutputStream(Print &out_stream) = 0;
       virtual void begin() = 0;
       virtual void end() = 0;
@@ -215,6 +216,7 @@ class AudioDecoder : public AudioWriter {
 class AudioEncoder : public AudioWriter {
   public: 
       AudioEncoder() = default;
+      virtual ~AudioEncoder() = default;
   		virtual void setOutputStream(Print &out_stream) = 0;
       virtual void setAudioInfo(AudioBaseInfo info) = 0;
       virtual void begin() = 0;
