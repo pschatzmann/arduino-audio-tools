@@ -2,6 +2,7 @@
 
 #ifdef ESP32
 
+#include "AudioConfig.h"
 #include "driver/i2s.h"
 #include "esp_a2dp_api.h"
 
