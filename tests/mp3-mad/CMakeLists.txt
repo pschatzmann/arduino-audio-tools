@@ -11,7 +11,7 @@ endif()
 
 include(FetchContent)
 
-# Build with Portaudio 
+# Build with libmad 
 FetchContent_Declare(arduino_libmad GIT_REPOSITORY "https://github.com/pschatzmann/arduino-libmad.git" GIT_TAG main )
 FetchContent_GetProperties(arduino_libmad)
 if(NOT arduino_libmad_POPULATED)

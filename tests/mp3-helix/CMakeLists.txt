@@ -11,7 +11,7 @@ endif()
 
 include(FetchContent)
 
-# Build with Portaudio 
+# Build with helix 
 FetchContent_Declare(helix GIT_REPOSITORY "https://github.com/pschatzmann/arduino-libhelix.git" GIT_TAG main )
 FetchContent_GetProperties(helix)
 if(NOT helix_POPULATED)

@@ -1,5 +1,7 @@
 #pragma once
 
+#if __has_include ("MP3DecoderMAD.h")
+
 #define MINIMP3_IMPLEMENTATION
 #define MINIMP3_NO_STDIO
 #define LOGGING_ACTIVE true
@@ -132,4 +134,6 @@ class MP3DecoderMAD : public AudioDecoder  {
 };
 
 } // namespace
+
+#endif
 

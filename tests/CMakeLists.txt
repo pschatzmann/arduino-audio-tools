@@ -29,8 +29,6 @@ if(NOT arduino_emulator_POPULATED)
 endif()
 
 
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/fft ${CMAKE_CURRENT_BINARY_DIR}/fft)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/mp3-mini ${CMAKE_CURRENT_BINARY_DIR}/mp3-mini)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/mp3-helix ${CMAKE_CURRENT_BINARY_DIR}/mp3-helix)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/aac-helix ${CMAKE_CURRENT_BINARY_DIR}/aac-helix)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/aac-fdk ${CMAKE_CURRENT_BINARY_DIR}/aac-fdk)

@@ -1,10 +1,9 @@
 #pragma once
 
+#if __has_include ("MP3DecoderHelix.h")
+
 #include "Stream.h"
 #include "AudioTools/AudioTypes.h"
-
-#define HELIX_LOGGING_ACTIVE false
-//#define HELIX_LOG_LEVEL Info
 #include "MP3DecoderHelix.h"
 
 namespace audio_tools {
@@ -134,4 +133,6 @@ class MP3DecoderHelix : public AudioDecoder  {
 
 
 } // namespace
+
+#endif
 
