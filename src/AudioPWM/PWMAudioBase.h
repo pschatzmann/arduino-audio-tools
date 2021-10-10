@@ -221,7 +221,7 @@ class PWMAudioStreamBase : public Print, public AudioBaseInfoDependent {
         // blocking write for an array: we expect a singed value and convert it into a unsigned 
         virtual size_t write(const uint8_t *wrt_buffer, size_t size){
             size_t available = min((size_t)availableForWrite(),size);
-            LOGD("write: %lu bytes -> %lu", size, available);
+            LOGD("write: %zu bytes -> %zu", size, available);
             size_t result = buffer->writeArray(wrt_buffer, available);
             if (result!=available){
                 LOGW("Could not write all data: %d -> %d", size, result);
