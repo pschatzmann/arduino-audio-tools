@@ -28,7 +28,7 @@ class HttpChunkReader : public HttpLineReader {
         }
 
         void open(Client &client){
-            LOGD("HttpChunkReader", "open");
+            LOGD("HttpChunkReader: %s", "open");
             has_ended = false;
             readChunkLen(client);
 
@@ -36,7 +36,7 @@ class HttpChunkReader : public HttpLineReader {
 
         // reads a block of data from the chunks
         virtual int read(Client &client, uint8_t* str, int len) {
-            LOGD("HttpChunkReader", "read");
+            LOGD("HttpChunkReader: %s", "read");
             if (has_ended && open_chunk_len==0) return 0;
 
             // read the chunk data - but not more then available
@@ -56,7 +56,7 @@ class HttpChunkReader : public HttpLineReader {
 
         // reads a single line from the chunks
         virtual int readln(Client &client, uint8_t* str, int len, bool incl_nl=true){
-            LOGD("HttpChunkReader", "readln");
+            LOGD("HttpChunkReader: %s", "readln");
             if (has_ended && open_chunk_len==0) return 0;
 
             int read_max = len < open_chunk_len ? len : open_chunk_len;
@@ -77,7 +77,7 @@ class HttpChunkReader : public HttpLineReader {
             int result = has_ended ? 0 : open_chunk_len;
             char msg[50];
             sprintf(msg,"available=>%d",result);
-            LOGD("HttpChunkReader",msg);
+            LOGD("HttpChunkReader: %s",msg);
 
             return result;
         }
@@ -90,14 +90,14 @@ class HttpChunkReader : public HttpLineReader {
 
 
         void removeCRLF(Client &client){
-            LOGD("HttpChunkReader", "removeCRLF");
+            LOGD("HttpChunkReader: %s", "removeCRLF");
             // remove traling CR LF from data
             if (client.peek()=='\r'){
-                LOGD("HttpChunkReader", "removeCR");
+                LOGD("HttpChunkReader: %s", "removeCR");
                 client.read();
             }
             if (client.peek()=='\n'){
-                LOGD("HttpChunkReader", "removeLF");
+                LOGD("HttpChunkReader: %s", "removeLF");
                 client.read();
             }
         }

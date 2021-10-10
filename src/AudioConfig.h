@@ -81,6 +81,10 @@
 #define PIN_CS SS
 #define PIN_ADC1 34 
 #define PIN_ADC2 35
+#if ESP_IDF_VERSION_MAJOR < 4 
+#define I2S_COMM_FORMAT_STAND_I2S (I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_MSB)
+#endif
+
 
 #endif
 
