@@ -1,5 +1,7 @@
 #pragma once
 
+#if __has_include ("MP3EncoderLAME.h")
+
 #include "AudioTools/AudioTypes.h"
 #include "MP3EncoderLAME.h"
 
@@ -134,3 +136,5 @@ protected:
 };
 
 }
+
+#endif

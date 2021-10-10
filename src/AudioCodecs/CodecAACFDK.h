@@ -1,5 +1,7 @@
 #pragma once
 
+#if __has_include ("AACDecoderFDK.h")
+
 #include "AudioTools/AudioTypes.h"
 #include "AACDecoderFDK.h"
 #include "AACEncoderFDK.h"
@@ -308,3 +310,5 @@ protected:
 };
 
 }
+
+#endif

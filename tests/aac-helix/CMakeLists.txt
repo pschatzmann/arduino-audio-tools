@@ -10,7 +10,7 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
 endif()
 include(FetchContent)
 
-# Build with arduino-fdk-aac
+# Build with libhelix
 FetchContent_Declare(helix GIT_REPOSITORY "https://github.com/pschatzmann/arduino-libhelix.git" GIT_TAG main )
 FetchContent_GetProperties(helix)
 if(NOT helix_POPULATED)
