@@ -20,6 +20,10 @@ template<typename T> class NBuffer;
 template<typename T>
 class BaseBuffer {
 public:
+
+    virtual ~BaseBuffer(){
+    }
+
     // reads a single value
     virtual T read() = 0;
     
