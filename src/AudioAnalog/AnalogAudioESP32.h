@@ -196,7 +196,7 @@ class AnalogAudio  : public Stream,  public AudioBaseInfoDependent  {
           .sample_rate = cfg.sample_rate,
           .bits_per_sample = (i2s_bits_per_sample_t)16,
           .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,
-          .communication_format = I2S_COMM_FORMAT_STAND_I2S,
+          .communication_format = (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_I2S,
           .intr_alloc_flags = ESP_INTR_FLAG_LEVEL1,
           .dma_buf_count = cfg.dma_buf_count,
           .dma_buf_len = cfg.dma_buf_len,
