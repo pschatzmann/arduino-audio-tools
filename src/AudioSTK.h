@@ -10,7 +10,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioSTK : public BufferedStream<int16_t> {
+class STKStream : public BufferedStream<int16_t> {
 
     public:
         /// provides the audio from a Voicer
