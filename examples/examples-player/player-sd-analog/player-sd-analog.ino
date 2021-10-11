@@ -6,7 +6,7 @@ using namespace audio_tools;
 const char *startFilePath="/";
 const char* ext="mp3";
 AudioSourceSdFat source(startFilePath, ext);
-AnalogStream out;
+AnalogAudioStream out;
 MP3DecoderHelix decoder;
 AudioPlayer player(source, out, decoder);
 
