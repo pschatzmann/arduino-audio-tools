@@ -135,6 +135,7 @@ Dependent on the example you might need to install some of the following librari
 - [SAM](https://github.com/pschatzmann/arduino-SAM) A Text to Speach Engine
 - [TTS](https://github.com/pschatzmann/TTS) A Text to Speach Engine
 - [flite](https://github.com/pschatzmann/arduino-flite) A Text to Speach Engine
+- [arduino-stk](https://github.com/pschatzmann/Arduino-STK) Synthesis ToolKit in C++ (STK) 
 - [Mozzi](https://github.com/pschatzmann/Mozzi) A sound synthesis library for Arduino
 - [ESP8266Audio](https://github.com/earlephilhower/ESP8266Audio) to play different audio Formats
 
