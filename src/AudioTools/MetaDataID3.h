@@ -423,6 +423,7 @@ class MetaDataID3V2 : public MetaDataID3Base  {
                     // get tag content
                     if(calcSize(frame_header.size) <= len){
                         int l = min(calcSize(frame_header.size)-1, 256);
+                        memset(result,0,256);
                         strncpy((char*)result, (char*) data+tag_pos+ID3FrameSize, l);
                         processNotify();
                     } else {
