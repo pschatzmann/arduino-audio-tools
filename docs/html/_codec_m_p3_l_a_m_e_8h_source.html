@@ -71,131 +71,135 @@ $(function() {
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;AudioTools/AudioTypes.h&quot;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;MP3EncoderLAME.h&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaudio__tools.html">audio_tools</a> {</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#if __has_include (&quot;MP3EncoderLAME.h&quot;</span>)</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;AudioTools/AudioTypes.h&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;MP3EncoderLAME.h&quot;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_audio_info_l_a_m_e.html">   13</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structaudio__tools_1_1_audio_info_l_a_m_e.html">AudioInfoLAME</a> :  <a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a>  {</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <a class="code" href="structaudio__tools_1_1_audio_info_l_a_m_e.html">AudioInfoLAME</a> () = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <a class="code" href="structaudio__tools_1_1_audio_info_l_a_m_e.html">AudioInfoLAME</a> (<span class="keyword">const</span> <a class="code" href="structaudio__tools_1_1_audio_info_l_a_m_e.html">AudioInfoLAME</a>  &amp;) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordtype">int</span> quality = 7; <span class="comment">// 0..9.  0=best (very slow).  9=worst.</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;};</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html">   26</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html">MP3EncoderLAME</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_audio_encoder.html">AudioEncoder</a> {</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <a class="code" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html">MP3EncoderLAME</a>(){</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        LOGD(LOG_METHOD);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        enc = <span class="keyword">new</span> liblame::MP3EncoderLAME();</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    }</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <a class="code" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html">MP3EncoderLAME</a>(<a class="code" href="class_stream.html">Stream</a> &amp;out_stream){</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        LOGD(LOG_METHOD);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        enc = <span class="keyword">new</span> liblame::MP3EncoderLAME(out_stream);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    }</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    ~<a class="code" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html">MP3EncoderLAME</a>(){</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        LOGD(LOG_METHOD);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;         <span class="keyword">delete</span> enc;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;     }</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#a535702cb7c5e71f5b0bcd1cff8d8a071">   45</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#a535702cb7c5e71f5b0bcd1cff8d8a071">setOutputStream</a>(<a class="code" href="class_print.html">Print</a> &amp;out_stream){</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        LOGD(LOG_METHOD);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        enc-&gt;setOutput(out_stream);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    }</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#acbf250c55d58dc07bbb05a61f696a265">   51</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#acbf250c55d58dc07bbb05a61f696a265">setAudioInfo</a>(<a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> from) {</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        LOGD(LOG_METHOD);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        liblame::AudioInfo info;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        info.channels = from.channels;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        info.sample_rate = from.sample_rate;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        info.bits_per_sample = from.bits_per_sample;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        enc-&gt;setAudioInfo(info);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    }</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    </div>
-<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#acdf63074534f758fc6207e23489ce765">   62</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#acdf63074534f758fc6207e23489ce765">setAudioInfo</a>(<a class="code" href="structaudio__tools_1_1_audio_info_l_a_m_e.html">AudioInfoLAME</a> from) {</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        LOGD(LOG_METHOD);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        liblame::AudioInfo info;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        info.channels = from.channels;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        info.sample_rate = from.sample_rate;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        info.bits_per_sample = from.bits_per_sample;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        info.quality = from.quality;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        enc-&gt;setAudioInfo(info);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    }</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="comment">// starts the processing</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">void</span> begin() {</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        enc-&gt;begin();</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    }</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#adf6bcc51495bed6897cca43754dd4c22">   83</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#adf6bcc51495bed6897cca43754dd4c22">begin</a>(<a class="code" href="structaudio__tools_1_1_audio_info_l_a_m_e.html">AudioInfoLAME</a> info) {</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        LOGD(LOG_METHOD);</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <a class="code" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#acbf250c55d58dc07bbb05a61f696a265">setAudioInfo</a>(info);</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        enc-&gt;begin();</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    }</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordtype">void</span> begin(<span class="keywordtype">int</span> input_channels, <span class="keywordtype">int</span> input_sample_rate, <span class="keywordtype">int</span> input_bits_per_sample) {</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        LOGD(LOG_METHOD);</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        enc-&gt;begin(input_channels, input_sample_rate, input_bits_per_sample);</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    }</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    liblame::AudioInfo audioInfoEx(){</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <span class="keywordflow">return</span> enc-&gt;audioInfo();</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    }</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    AudioBaseInfo audioInfo(){</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        liblame::AudioInfo from = enc-&gt;audioInfo();</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        AudioBaseInfo info;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        info.channels = from.channels;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        info.sample_rate = from.sample_rate;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        info.bits_per_sample = from.bits_per_sample;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <span class="keywordflow">return</span> info;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    }</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    </div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="comment">// convert PCM data to convert into MP3</span></div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> <span class="keywordtype">void</span> *in_ptr, <span class="keywordtype">size_t</span> in_size){</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        LOGD(<span class="stringliteral">&quot;write %d bytes&quot;</span>, (<span class="keywordtype">int</span>) in_size);</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <span class="keywordflow">return</span> enc-&gt;write((uint8_t*)in_ptr, in_size);</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    }</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="comment">// release resources</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordtype">void</span> end(){</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        LOGD(LOG_METHOD);</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        enc-&gt;end();</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    }</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    liblame::MP3EncoderLAME *driver() {</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        <span class="keywordflow">return</span> enc;</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    }</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *mime() {</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        <span class="keywordflow">return</span> <span class="stringliteral">&quot;audio/mp3&quot;</span>;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    }</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">operator</span> boolean() {</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        <span class="keywordflow">return</span> (<span class="keywordtype">bool</span>)(*enc);</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    }</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    liblame::MP3EncoderLAME *enc=<span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;};</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaudio__tools.html">audio_tools</a> {</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_audio_info_l_a_m_e.html">   15</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structaudio__tools_1_1_audio_info_l_a_m_e.html">AudioInfoLAME</a> :  <a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a>  {</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="structaudio__tools_1_1_audio_info_l_a_m_e.html">AudioInfoLAME</a> () = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="structaudio__tools_1_1_audio_info_l_a_m_e.html">AudioInfoLAME</a> (<span class="keyword">const</span> <a class="code" href="structaudio__tools_1_1_audio_info_l_a_m_e.html">AudioInfoLAME</a>  &amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordtype">int</span> quality = 7; <span class="comment">// 0..9.  0=best (very slow).  9=worst.</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;};</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html">   28</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html">MP3EncoderLAME</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_audio_encoder.html">AudioEncoder</a> {</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html">MP3EncoderLAME</a>(){</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        LOGD(LOG_METHOD);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        enc = <span class="keyword">new</span> liblame::MP3EncoderLAME();</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    }</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html">MP3EncoderLAME</a>(<a class="code" href="class_stream.html">Stream</a> &amp;out_stream){</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        LOGD(LOG_METHOD);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        enc = <span class="keyword">new</span> liblame::MP3EncoderLAME(out_stream);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    }</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    ~<a class="code" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html">MP3EncoderLAME</a>(){</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        LOGD(LOG_METHOD);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;         <span class="keyword">delete</span> enc;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;     }</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#a535702cb7c5e71f5b0bcd1cff8d8a071">   47</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#a535702cb7c5e71f5b0bcd1cff8d8a071">setOutputStream</a>(<a class="code" href="class_print.html">Print</a> &amp;out_stream){</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        LOGD(LOG_METHOD);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        enc-&gt;setOutput(out_stream);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    }</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#acbf250c55d58dc07bbb05a61f696a265">   53</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#acbf250c55d58dc07bbb05a61f696a265">setAudioInfo</a>(<a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> from) {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        LOGD(LOG_METHOD);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        liblame::AudioInfo info;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        info.channels = from.channels;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        info.sample_rate = from.sample_rate;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        info.bits_per_sample = from.bits_per_sample;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        enc-&gt;setAudioInfo(info);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    }</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    </div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#acdf63074534f758fc6207e23489ce765">   64</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#acdf63074534f758fc6207e23489ce765">setAudioInfo</a>(<a class="code" href="structaudio__tools_1_1_audio_info_l_a_m_e.html">AudioInfoLAME</a> from) {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        LOGD(LOG_METHOD);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        liblame::AudioInfo info;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        info.channels = from.channels;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        info.sample_rate = from.sample_rate;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        info.bits_per_sample = from.bits_per_sample;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        info.quality = from.quality;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        enc-&gt;setAudioInfo(info);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    }</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="comment">// starts the processing</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordtype">void</span> begin() {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        enc-&gt;begin();</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    }</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#adf6bcc51495bed6897cca43754dd4c22">   85</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#adf6bcc51495bed6897cca43754dd4c22">begin</a>(<a class="code" href="structaudio__tools_1_1_audio_info_l_a_m_e.html">AudioInfoLAME</a> info) {</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        LOGD(LOG_METHOD);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <a class="code" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#acbf250c55d58dc07bbb05a61f696a265">setAudioInfo</a>(info);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        enc-&gt;begin();</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    }</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordtype">void</span> begin(<span class="keywordtype">int</span> input_channels, <span class="keywordtype">int</span> input_sample_rate, <span class="keywordtype">int</span> input_bits_per_sample) {</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        LOGD(LOG_METHOD);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        enc-&gt;begin(input_channels, input_sample_rate, input_bits_per_sample);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    }</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    liblame::AudioInfo audioInfoEx(){</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="keywordflow">return</span> enc-&gt;audioInfo();</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    }</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    AudioBaseInfo audioInfo(){</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        liblame::AudioInfo from = enc-&gt;audioInfo();</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        AudioBaseInfo info;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        info.channels = from.channels;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        info.sample_rate = from.sample_rate;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        info.bits_per_sample = from.bits_per_sample;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        <span class="keywordflow">return</span> info;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    }</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="comment">// convert PCM data to convert into MP3</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> <span class="keywordtype">void</span> *in_ptr, <span class="keywordtype">size_t</span> in_size){</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        LOGD(<span class="stringliteral">&quot;write %d bytes&quot;</span>, (<span class="keywordtype">int</span>) in_size);</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        <span class="keywordflow">return</span> enc-&gt;write((uint8_t*)in_ptr, in_size);</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    }</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="comment">// release resources</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keywordtype">void</span> end(){</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        LOGD(LOG_METHOD);</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        enc-&gt;end();</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    }</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    liblame::MP3EncoderLAME *driver() {</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        <span class="keywordflow">return</span> enc;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    }</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *mime() {</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <span class="keywordflow">return</span> <span class="stringliteral">&quot;audio/mp3&quot;</span>;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    }</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">operator</span> boolean() {</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        <span class="keywordflow">return</span> (<span class="keywordtype">bool</span>)(*enc);</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    }</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    liblame::MP3EncoderLAME *enc=<span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;}</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;};</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;}</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclass_print_html"><div class="ttname"><a href="class_print.html">Print</a></div><div class="ttdef"><b>Definition:</b> Print.h:34</div></div>
 <div class="ttc" id="aclass_stream_html"><div class="ttname"><a href="class_stream.html">Stream</a></div><div class="ttdef"><b>Definition:</b> Stream.h:49</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_encoder_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_encoder.html">audio_tools::AudioEncoder</a></div><div class="ttdoc">Encoding of PCM data.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:214</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_m_p3_encoder_l_a_m_e_html"><div class="ttname"><a href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html">audio_tools::MP3EncoderLAME</a></div><div class="ttdoc">Encodes PCM data to the MP3 format and writes the result to a stream This is basically just a wrapper...</div><div class="ttdef"><b>Definition:</b> CodecMP3LAME.h:26</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_m_p3_encoder_l_a_m_e_html_a535702cb7c5e71f5b0bcd1cff8d8a071"><div class="ttname"><a href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#a535702cb7c5e71f5b0bcd1cff8d8a071">audio_tools::MP3EncoderLAME::setOutputStream</a></div><div class="ttdeci">void setOutputStream(Print &amp;out_stream)</div><div class="ttdoc">Defines the output stream.</div><div class="ttdef"><b>Definition:</b> CodecMP3LAME.h:45</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_m_p3_encoder_l_a_m_e_html_acbf250c55d58dc07bbb05a61f696a265"><div class="ttname"><a href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#acbf250c55d58dc07bbb05a61f696a265">audio_tools::MP3EncoderLAME::setAudioInfo</a></div><div class="ttdeci">void setAudioInfo(AudioBaseInfo from)</div><div class="ttdoc">Defines the Audio Info.</div><div class="ttdef"><b>Definition:</b> CodecMP3LAME.h:51</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_m_p3_encoder_l_a_m_e_html_acdf63074534f758fc6207e23489ce765"><div class="ttname"><a href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#acdf63074534f758fc6207e23489ce765">audio_tools::MP3EncoderLAME::setAudioInfo</a></div><div class="ttdeci">void setAudioInfo(AudioInfoLAME from)</div><div class="ttdoc">Defines the Audio Info.</div><div class="ttdef"><b>Definition:</b> CodecMP3LAME.h:62</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_m_p3_encoder_l_a_m_e_html_adf6bcc51495bed6897cca43754dd4c22"><div class="ttname"><a href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#adf6bcc51495bed6897cca43754dd4c22">audio_tools::MP3EncoderLAME::begin</a></div><div class="ttdeci">void begin(AudioInfoLAME info)</div><div class="ttdoc">Opens the encoder</div><div class="ttdef"><b>Definition:</b> CodecMP3LAME.h:83</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_encoder_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_encoder.html">audio_tools::AudioEncoder</a></div><div class="ttdoc">Encoding of PCM data.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:216</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_m_p3_encoder_l_a_m_e_html"><div class="ttname"><a href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html">audio_tools::MP3EncoderLAME</a></div><div class="ttdoc">Encodes PCM data to the MP3 format and writes the result to a stream This is basically just a wrapper...</div><div class="ttdef"><b>Definition:</b> CodecMP3LAME.h:28</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_m_p3_encoder_l_a_m_e_html_a535702cb7c5e71f5b0bcd1cff8d8a071"><div class="ttname"><a href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#a535702cb7c5e71f5b0bcd1cff8d8a071">audio_tools::MP3EncoderLAME::setOutputStream</a></div><div class="ttdeci">void setOutputStream(Print &amp;out_stream)</div><div class="ttdoc">Defines the output stream.</div><div class="ttdef"><b>Definition:</b> CodecMP3LAME.h:47</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_m_p3_encoder_l_a_m_e_html_acbf250c55d58dc07bbb05a61f696a265"><div class="ttname"><a href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#acbf250c55d58dc07bbb05a61f696a265">audio_tools::MP3EncoderLAME::setAudioInfo</a></div><div class="ttdeci">void setAudioInfo(AudioBaseInfo from)</div><div class="ttdoc">Defines the Audio Info.</div><div class="ttdef"><b>Definition:</b> CodecMP3LAME.h:53</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_m_p3_encoder_l_a_m_e_html_acdf63074534f758fc6207e23489ce765"><div class="ttname"><a href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#acdf63074534f758fc6207e23489ce765">audio_tools::MP3EncoderLAME::setAudioInfo</a></div><div class="ttdeci">void setAudioInfo(AudioInfoLAME from)</div><div class="ttdoc">Defines the Audio Info.</div><div class="ttdef"><b>Definition:</b> CodecMP3LAME.h:64</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_m_p3_encoder_l_a_m_e_html_adf6bcc51495bed6897cca43754dd4c22"><div class="ttname"><a href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#adf6bcc51495bed6897cca43754dd4c22">audio_tools::MP3EncoderLAME::begin</a></div><div class="ttdeci">void begin(AudioInfoLAME info)</div><div class="ttdoc">Opens the encoder</div><div class="ttdef"><b>Definition:</b> CodecMP3LAME.h:85</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Parser for MP3 ID3 Meta Data: The goal is to implement a simple API which provides the title,...</div><div class="ttdef"><b>Definition:</b> AudioA2DP.h:19</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_base_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_base_info.html">audio_tools::AudioBaseInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:101</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_audio_info_l_a_m_e_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_info_l_a_m_e.html">audio_tools::AudioInfoLAME</a></div><div class="ttdoc">LAME parameters.</div><div class="ttdef"><b>Definition:</b> CodecMP3LAME.h:13</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_audio_info_l_a_m_e_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_info_l_a_m_e.html">audio_tools::AudioInfoLAME</a></div><div class="ttdoc">LAME parameters.</div><div class="ttdef"><b>Definition:</b> CodecMP3LAME.h:15</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -166,7 +166,7 @@ $(function() {
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            <span class="keywordtype">bool</span> rising_edge = <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            timer = timerBegin(audio_config.timer_id, prescale, rising_edge); <span class="comment">// Timer at full 40Mhz, no prescaling</span></div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            uint32_t counter = 40000000 / audio_config.sample_rate;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            LOGI(<span class="stringliteral">&quot;-&gt; timer counter is %lu&quot;</span>, counter);</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            LOGI(<span class="stringliteral">&quot;-&gt; timer counter is %zu&quot;</span>, counter);</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            LOGD(<span class="stringliteral">&quot;-&gt; timerAttachInterrupt&quot;</span>);</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            <span class="keywordtype">bool</span> interrupt_edge_type = <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            timerAttachInterrupt(timer, &amp;<a class="code" href="classaudio__tools_1_1_p_w_m_audio_stream_e_s_p32.html#ac74c69e5f370226829182a11466619eb">defaultPWMAudioOutputCallback</a>, interrupt_edge_type);</div>

@@ -447,126 +447,127 @@ $(function() {
 <div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;                    <span class="comment">// get tag content</span></div>
 <div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;                    <span class="keywordflow">if</span>(calcSize(frame_header.size) &lt;= len){</div>
 <div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;                        <span class="keywordtype">int</span> l = min(calcSize(frame_header.size)-1, 256);</div>
-<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;                        strncpy((<span class="keywordtype">char</span>*)result, (<span class="keywordtype">char</span>*) data+tag_pos+ID3FrameSize, l);</div>
-<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;                        <a class="code" href="classaudio__tools_1_1_meta_data_i_d3_v2.html#ac0a78421e834eadeb96c71c20cd4f156">processNotify</a>();</div>
-<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;                    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;                        partial_tag = tag;</div>
-<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;                    }</div>
-<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;                }</div>
-<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;            }</div>
-<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;            </div>
-<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;            <span class="comment">// save partial tag information so that we process the remainder with the next write</span></div>
-<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;            <span class="keywordflow">if</span> (partial_tag!=<span class="keyword">nullptr</span>){</div>
-<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;                <span class="keywordtype">int</span> tag_pos = <a class="code" href="classaudio__tools_1_1_meta_data_i_d3_base.html#a41827ad7db08212f2921b34b5a5af084">findTag</a>(partial_tag, (<span class="keyword">const</span> <span class="keywordtype">char</span>*)  data, len);</div>
-<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;                memmove(&amp;frame_header, data+tag_pos, <span class="keyword">sizeof</span>(<a class="code" href="structaudio__tools_1_1_i_d3v2_frame_string.html">ID3v2FrameString</a>));</div>
-<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;                <span class="keywordtype">int</span> size = min(len - tag_pos, (<span class="keywordtype">size_t</span>) calcSize(frame_header.size)-1); </div>
-<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;                strncpy((<span class="keywordtype">char</span>*)result, (<span class="keywordtype">char</span>*)data+tag_pos+ID3FrameSize, size);</div>
-<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;                use_bytes_of_next_write = size;</div>
-<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;                status = PartialTagAtTail;</div>
-<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;            }</div>
-<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;        }</div>
-<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;    </div>
-<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;        total_len += len;</div>
-<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160; </div>
-<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;    }</div>
-<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160; </div>
-<div class="line"><a name="l00450"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_meta_data_i_d3_v2.html#aca053a1923f7ed1feb5b395f98ac1ab9">  450</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_meta_data_i_d3_v2.html#aca053a1923f7ed1feb5b395f98ac1ab9">processPartialTagAtTail</a>(<span class="keyword">const</span> uint8_t* data, <span class="keywordtype">size_t</span> len) {</div>
-<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;        <span class="keywordtype">int</span> remainder = calcSize(frame_header.size) - use_bytes_of_next_write;</div>
-<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;        memcpy(result+use_bytes_of_next_write, data, remainder);</div>
-<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;        <a class="code" href="classaudio__tools_1_1_meta_data_i_d3_v2.html#ac0a78421e834eadeb96c71c20cd4f156">processNotify</a>();    </div>
-<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160; </div>
-<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;        status = TagNotFound;</div>
-<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;        <a class="code" href="classaudio__tools_1_1_meta_data_i_d3_v2.html#a1a1836ea3afbc556f6ff39efe21336e2">processTagNotFound</a>(data+use_bytes_of_next_write, len-use_bytes_of_next_write);</div>
-<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;    }</div>
-<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160; </div>
-<div class="line"><a name="l00460"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_meta_data_i_d3_v2.html#ab39538d495a042722709a84692b2fca5">  460</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_meta_data_i_d3_v2.html#ab39538d495a042722709a84692b2fca5">encodingIsSupported</a>(){</div>
-<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;        <span class="keywordflow">return</span> frame_header.encoding == 0 || frame_header.encoding == 3;</div>
-<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;    }</div>
-<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160; </div>
-<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;    <span class="keywordtype">int</span> strpos(<span class="keywordtype">char</span>* str, <span class="keyword">const</span> <span class="keywordtype">char</span>* target) {</div>
-<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;        <span class="keywordtype">char</span>* res = strstr(str, target); </div>
-<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;        <span class="keywordflow">return</span> (res == <span class="keyword">nullptr</span>) ? -1 : res - str;</div>
-<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;    }</div>
-<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160; </div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;                        memset(result,0,256);</div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;                        strncpy((<span class="keywordtype">char</span>*)result, (<span class="keywordtype">char</span>*) data+tag_pos+ID3FrameSize, l);</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;                        <a class="code" href="classaudio__tools_1_1_meta_data_i_d3_v2.html#ac0a78421e834eadeb96c71c20cd4f156">processNotify</a>();</div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;                    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;                        partial_tag = tag;</div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;                    }</div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;                }</div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;            }</div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;            </div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;            <span class="comment">// save partial tag information so that we process the remainder with the next write</span></div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;            <span class="keywordflow">if</span> (partial_tag!=<span class="keyword">nullptr</span>){</div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;                <span class="keywordtype">int</span> tag_pos = <a class="code" href="classaudio__tools_1_1_meta_data_i_d3_base.html#a41827ad7db08212f2921b34b5a5af084">findTag</a>(partial_tag, (<span class="keyword">const</span> <span class="keywordtype">char</span>*)  data, len);</div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;                memmove(&amp;frame_header, data+tag_pos, <span class="keyword">sizeof</span>(<a class="code" href="structaudio__tools_1_1_i_d3v2_frame_string.html">ID3v2FrameString</a>));</div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;                <span class="keywordtype">int</span> size = min(len - tag_pos, (<span class="keywordtype">size_t</span>) calcSize(frame_header.size)-1); </div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;                strncpy((<span class="keywordtype">char</span>*)result, (<span class="keywordtype">char</span>*)data+tag_pos+ID3FrameSize, size);</div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;                use_bytes_of_next_write = size;</div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;                status = PartialTagAtTail;</div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;            }</div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;        }</div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;    </div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;        total_len += len;</div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160; </div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;    }</div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160; </div>
+<div class="line"><a name="l00451"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_meta_data_i_d3_v2.html#aca053a1923f7ed1feb5b395f98ac1ab9">  451</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_meta_data_i_d3_v2.html#aca053a1923f7ed1feb5b395f98ac1ab9">processPartialTagAtTail</a>(<span class="keyword">const</span> uint8_t* data, <span class="keywordtype">size_t</span> len) {</div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;        <span class="keywordtype">int</span> remainder = calcSize(frame_header.size) - use_bytes_of_next_write;</div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;        memcpy(result+use_bytes_of_next_write, data, remainder);</div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;        <a class="code" href="classaudio__tools_1_1_meta_data_i_d3_v2.html#ac0a78421e834eadeb96c71c20cd4f156">processNotify</a>();    </div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160; </div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;        status = TagNotFound;</div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;        <a class="code" href="classaudio__tools_1_1_meta_data_i_d3_v2.html#a1a1836ea3afbc556f6ff39efe21336e2">processTagNotFound</a>(data+use_bytes_of_next_write, len-use_bytes_of_next_write);</div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;    }</div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160; </div>
+<div class="line"><a name="l00461"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_meta_data_i_d3_v2.html#ab39538d495a042722709a84692b2fca5">  461</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_meta_data_i_d3_v2.html#ab39538d495a042722709a84692b2fca5">encodingIsSupported</a>(){</div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;        <span class="keywordflow">return</span> frame_header.encoding == 0 || frame_header.encoding == 3;</div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;    }</div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160; </div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;    <span class="keywordtype">int</span> strpos(<span class="keywordtype">char</span>* str, <span class="keyword">const</span> <span class="keywordtype">char</span>* target) {</div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;        <span class="keywordtype">char</span>* res = strstr(str, target); </div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;        <span class="keywordflow">return</span> (res == <span class="keyword">nullptr</span>) ? -1 : res - str;</div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;    }</div>
 <div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160; </div>
-<div class="line"><a name="l00471"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_meta_data_i_d3_v2.html#ac0a78421e834eadeb96c71c20cd4f156">  471</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_meta_data_i_d3_v2.html#ac0a78421e834eadeb96c71c20cd4f156">processNotify</a>() {</div>
-<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;        <span class="keywordflow">if</span> (callback!=<span class="keyword">nullptr</span> &amp;&amp; actual_tag!=<span class="keyword">nullptr</span> &amp;&amp; <a class="code" href="classaudio__tools_1_1_meta_data_i_d3_v2.html#ab39538d495a042722709a84692b2fca5">encodingIsSupported</a>()){</div>
-<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;            <span class="keywordflow">if</span> (strncmp(actual_tag,<span class="stringliteral">&quot;TALB&quot;</span>,4)==0)</div>
-<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;                callback(Title, result,strnlen(result, 256));</div>
-<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (strncmp(actual_tag,<span class="stringliteral">&quot;TOPE&quot;</span>,4)==0)</div>
-<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;                callback(Artist, result,strnlen(result, 256));</div>
-<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (strncmp(actual_tag,<span class="stringliteral">&quot;TIT2&quot;</span>,4)==0)</div>
-<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;                callback(Album, result,strnlen(result, 256));</div>
-<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (strncmp(actual_tag,<span class="stringliteral">&quot;TCON&quot;</span>,4)==0) {</div>
-<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;                <span class="keywordflow">if</span> (result[0]==<span class="charliteral">&#39;(&#39;</span>){</div>
-<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;                    <span class="comment">// convert genre id to string</span></div>
-<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;                    <span class="keywordtype">int</span> end_pos = strpos((<span class="keywordtype">char</span>*)result, <span class="stringliteral">&quot;)&quot;</span>);</div>
-<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;                    <span class="keywordflow">if</span> (end_pos&gt;0){</div>
-<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;                        <span class="comment">// we just use the first entry</span></div>
-<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;                        result[end_pos]=0;</div>
-<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160;                        <span class="keywordtype">int</span> idx = atoi(result+1);</div>
-<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;                        <span class="keywordflow">if</span> (idx&gt;=0 &amp;&amp; idx&lt;<span class="keyword">sizeof</span>(<a class="code" href="namespaceaudio__tools.html#ae9d9368ae309f8d73f1651936d4ac33f">genres</a>)){</div>
-<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;                            strncpy((<span class="keywordtype">char</span>*)result,<a class="code" href="namespaceaudio__tools.html#ae9d9368ae309f8d73f1651936d4ac33f">genres</a>[idx],256);</div>
-<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;                        }</div>
-<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;                    }</div>
-<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;                }</div>
-<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;                callback(Genre, result,strnlen(result, 256));</div>
-<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;            }</div>
-<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;        }</div>
-<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;    }</div>
-<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160; </div>
-<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;};</div>
-<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160; </div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160; </div>
+<div class="line"><a name="l00472"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_meta_data_i_d3_v2.html#ac0a78421e834eadeb96c71c20cd4f156">  472</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_meta_data_i_d3_v2.html#ac0a78421e834eadeb96c71c20cd4f156">processNotify</a>() {</div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;        <span class="keywordflow">if</span> (callback!=<span class="keyword">nullptr</span> &amp;&amp; actual_tag!=<span class="keyword">nullptr</span> &amp;&amp; <a class="code" href="classaudio__tools_1_1_meta_data_i_d3_v2.html#ab39538d495a042722709a84692b2fca5">encodingIsSupported</a>()){</div>
+<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;            <span class="keywordflow">if</span> (strncmp(actual_tag,<span class="stringliteral">&quot;TALB&quot;</span>,4)==0)</div>
+<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;                callback(Title, result,strnlen(result, 256));</div>
+<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (strncmp(actual_tag,<span class="stringliteral">&quot;TOPE&quot;</span>,4)==0)</div>
+<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;                callback(Artist, result,strnlen(result, 256));</div>
+<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (strncmp(actual_tag,<span class="stringliteral">&quot;TIT2&quot;</span>,4)==0)</div>
+<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;                callback(Album, result,strnlen(result, 256));</div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (strncmp(actual_tag,<span class="stringliteral">&quot;TCON&quot;</span>,4)==0) {</div>
+<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;                <span class="keywordflow">if</span> (result[0]==<span class="charliteral">&#39;(&#39;</span>){</div>
+<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;                    <span class="comment">// convert genre id to string</span></div>
+<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;                    <span class="keywordtype">int</span> end_pos = strpos((<span class="keywordtype">char</span>*)result, <span class="stringliteral">&quot;)&quot;</span>);</div>
+<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;                    <span class="keywordflow">if</span> (end_pos&gt;0){</div>
+<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;                        <span class="comment">// we just use the first entry</span></div>
+<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160;                        result[end_pos]=0;</div>
+<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;                        <span class="keywordtype">int</span> idx = atoi(result+1);</div>
+<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;                        <span class="keywordflow">if</span> (idx&gt;=0 &amp;&amp; idx&lt;<span class="keyword">sizeof</span>(<a class="code" href="namespaceaudio__tools.html#ae9d9368ae309f8d73f1651936d4ac33f">genres</a>)){</div>
+<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;                            strncpy((<span class="keywordtype">char</span>*)result,<a class="code" href="namespaceaudio__tools.html#ae9d9368ae309f8d73f1651936d4ac33f">genres</a>[idx],256);</div>
+<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;                        }</div>
+<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;                    }</div>
+<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;                }</div>
+<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;                callback(Genre, result,strnlen(result, 256));</div>
+<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;            }</div>
+<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;        }</div>
+<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;    }</div>
+<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160; </div>
+<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;};</div>
 <div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160; </div>
-<div class="line"><a name="l00507"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_meta_data_i_d3.html">  507</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_meta_data_i_d3.html">MetaDataID3</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_buffered_stream.html">BufferedStream</a> {</div>
-<div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160;  <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160; </div>
-<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;    <a class="code" href="classaudio__tools_1_1_meta_data_i_d3.html">MetaDataID3</a>(<span class="keywordtype">int</span> buffer_size=512):<a class="code" href="classaudio__tools_1_1_buffered_stream.html">BufferedStream</a>(buffer_size) {</div>
-<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;    }</div>
-<div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160;    </div>
-<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;    ~<a class="code" href="classaudio__tools_1_1_meta_data_i_d3.html">MetaDataID3</a>(){</div>
-<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160;        end();</div>
-<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;    }</div>
-<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160; </div>
-<div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;    <span class="keywordtype">void</span> setCallback(<span class="keywordtype">void</span> (*fn)(<a class="code" href="namespaceaudio__tools.html#a66747a0ba3d8821e3228fd1680106e68">MetaDataType</a> info, <span class="keyword">const</span> <span class="keywordtype">char</span>* str, <span class="keywordtype">int</span> len)) {</div>
-<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;        id3v1.setCallback(fn);        </div>
-<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;        id3v2.setCallback(fn);        </div>
-<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;    }</div>
-<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160; </div>
-<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;    <span class="keywordtype">void</span> begin() {</div>
-<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;        id3v1.<a class="code" href="classaudio__tools_1_1_meta_data_i_d3_v1.html#ab5b979a0686c94ddb16fc4d9f2566df5">begin</a>();</div>
-<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;        id3v2.<a class="code" href="classaudio__tools_1_1_meta_data_i_d3_v2.html#ac6a8d3502103cee393485ac2bd19f410">begin</a>();</div>
-<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;    }</div>
-<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160; </div>
-<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;    <span class="keywordtype">void</span> end() {</div>
-<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;        id3v1.<a class="code" href="classaudio__tools_1_1_meta_data_i_d3_v1.html#a694aeffb3aa7e8a35b826ff9d5be4b68">end</a>();</div>
-<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;        id3v2.<a class="code" href="classaudio__tools_1_1_meta_data_i_d3_v2.html#a7a4d36f3ebb37ab298fb4222bcd2de93">end</a>();</div>
-<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;    }</div>
-<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160; </div>
-<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;  <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;    <a class="code" href="classaudio__tools_1_1_meta_data_i_d3_v1.html">MetaDataID3V1</a> id3v1;</div>
-<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;    <a class="code" href="classaudio__tools_1_1_meta_data_i_d3_v2.html">MetaDataID3V2</a> id3v2;</div>
-<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160; </div>
-<div class="line"><a name="l00537"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_meta_data_i_d3.html#ad9386c8382f447ae4b94957ce8a96f42">  537</a></span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="classaudio__tools_1_1_meta_data_i_d3.html#ad9386c8382f447ae4b94957ce8a96f42">readExt</a>(uint8_t *data, <span class="keywordtype">size_t</span> length){</div>
-<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;    }</div>
-<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160; </div>
-<div class="line"><a name="l00542"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_meta_data_i_d3.html#abecb2937671e50d820376b2b1c0bd480">  542</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> <a class="code" href="classaudio__tools_1_1_meta_data_i_d3.html#abecb2937671e50d820376b2b1c0bd480">writeExt</a>(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> length){</div>
-<div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;        id3v1.<a class="code" href="classaudio__tools_1_1_meta_data_i_d3_v1.html#ae32cdb8afe169b44af8c187bcca821fb">write</a>(data, length);</div>
-<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;        id3v2.<a class="code" href="classaudio__tools_1_1_meta_data_i_d3_v2.html#ac599e093fa325a3655c85e3993e26bf5">write</a>(data, length);</div>
-<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;        <span class="keywordflow">return</span> length;</div>
-<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;    }</div>
-<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160; </div>
+<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160; </div>
+<div class="line"><a name="l00508"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_meta_data_i_d3.html">  508</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_meta_data_i_d3.html">MetaDataID3</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_buffered_stream.html">BufferedStream</a> {</div>
+<div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160; </div>
+<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;    <a class="code" href="classaudio__tools_1_1_meta_data_i_d3.html">MetaDataID3</a>(<span class="keywordtype">int</span> buffer_size=512):<a class="code" href="classaudio__tools_1_1_buffered_stream.html">BufferedStream</a>(buffer_size) {</div>
+<div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160;    }</div>
+<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;    </div>
+<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160;    ~<a class="code" href="classaudio__tools_1_1_meta_data_i_d3.html">MetaDataID3</a>(){</div>
+<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;        end();</div>
+<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;    }</div>
+<div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160; </div>
+<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;    <span class="keywordtype">void</span> setCallback(<span class="keywordtype">void</span> (*fn)(<a class="code" href="namespaceaudio__tools.html#a66747a0ba3d8821e3228fd1680106e68">MetaDataType</a> info, <span class="keyword">const</span> <span class="keywordtype">char</span>* str, <span class="keywordtype">int</span> len)) {</div>
+<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;        id3v1.setCallback(fn);        </div>
+<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;        id3v2.setCallback(fn);        </div>
+<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;    }</div>
+<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160; </div>
+<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;    <span class="keywordtype">void</span> begin() {</div>
+<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;        id3v1.<a class="code" href="classaudio__tools_1_1_meta_data_i_d3_v1.html#ab5b979a0686c94ddb16fc4d9f2566df5">begin</a>();</div>
+<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;        id3v2.<a class="code" href="classaudio__tools_1_1_meta_data_i_d3_v2.html#ac6a8d3502103cee393485ac2bd19f410">begin</a>();</div>
+<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;    }</div>
+<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160; </div>
+<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;    <span class="keywordtype">void</span> end() {</div>
+<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;        id3v1.<a class="code" href="classaudio__tools_1_1_meta_data_i_d3_v1.html#a694aeffb3aa7e8a35b826ff9d5be4b68">end</a>();</div>
+<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;        id3v2.<a class="code" href="classaudio__tools_1_1_meta_data_i_d3_v2.html#a7a4d36f3ebb37ab298fb4222bcd2de93">end</a>();</div>
+<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;    }</div>
+<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160; </div>
+<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;  <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;    <a class="code" href="classaudio__tools_1_1_meta_data_i_d3_v1.html">MetaDataID3V1</a> id3v1;</div>
+<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;    <a class="code" href="classaudio__tools_1_1_meta_data_i_d3_v2.html">MetaDataID3V2</a> id3v2;</div>
+<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160; </div>
+<div class="line"><a name="l00538"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_meta_data_i_d3.html#ad9386c8382f447ae4b94957ce8a96f42">  538</a></span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="classaudio__tools_1_1_meta_data_i_d3.html#ad9386c8382f447ae4b94957ce8a96f42">readExt</a>(uint8_t *data, <span class="keywordtype">size_t</span> length){</div>
+<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;    }</div>
+<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160; </div>
+<div class="line"><a name="l00543"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_meta_data_i_d3.html#abecb2937671e50d820376b2b1c0bd480">  543</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> <a class="code" href="classaudio__tools_1_1_meta_data_i_d3.html#abecb2937671e50d820376b2b1c0bd480">writeExt</a>(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> length){</div>
+<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;        id3v1.<a class="code" href="classaudio__tools_1_1_meta_data_i_d3_v1.html#ae32cdb8afe169b44af8c187bcca821fb">write</a>(data, length);</div>
+<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;        id3v2.<a class="code" href="classaudio__tools_1_1_meta_data_i_d3_v2.html#ac599e093fa325a3655c85e3993e26bf5">write</a>(data, length);</div>
+<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;        <span class="keywordflow">return</span> length;</div>
+<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;    }</div>
 <div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160; </div>
-<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;};</div>
-<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160; </div>
-<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160;} <span class="comment">// namespace</span></div>
+<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160; </div>
+<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;};</div>
+<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160; </div>
+<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;} <span class="comment">// namespace</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_buffered_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_buffered_stream.html">audio_tools::BufferedStream</a></div><div class="ttdoc">The Arduino Stream supports operations on single characters. This is usually not the best way to push...</div><div class="ttdef"><b>Definition:</b> Streams.h:214</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_meta_data_i_d3_base_html"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_i_d3_base.html">audio_tools::MetaDataID3Base</a></div><div class="ttdoc">ID3 Meta Data Common Functionality.</div><div class="ttdef"><b>Definition:</b> MetaDataID3.h:60</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_meta_data_i_d3_base_html_a41827ad7db08212f2921b34b5a5af084"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_i_d3_base.html#a41827ad7db08212f2921b34b5a5af084">audio_tools::MetaDataID3Base::findTag</a></div><div class="ttdeci">int findTag(const char *tag, const char *str, size_t len)</div><div class="ttdoc">find the tag position in the string - if not found we return -1;</div><div class="ttdef"><b>Definition:</b> MetaDataID3.h:75</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_meta_data_i_d3_html"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_i_d3.html">audio_tools::MetaDataID3</a></div><div class="ttdoc">Simple ID3 Meta Data Parser which supports ID3 V1 and V2 and implements the Stream interface....</div><div class="ttdef"><b>Definition:</b> MetaDataID3.h:507</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_meta_data_i_d3_html_abecb2937671e50d820376b2b1c0bd480"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_i_d3.html#abecb2937671e50d820376b2b1c0bd480">audio_tools::MetaDataID3::writeExt</a></div><div class="ttdeci">virtual size_t writeExt(const uint8_t *data, size_t length)</div><div class="ttdoc">Provide tha audio data to the API to parse for Meta Data.</div><div class="ttdef"><b>Definition:</b> MetaDataID3.h:542</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_meta_data_i_d3_html_ad9386c8382f447ae4b94957ce8a96f42"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_i_d3.html#ad9386c8382f447ae4b94957ce8a96f42">audio_tools::MetaDataID3::readExt</a></div><div class="ttdeci">size_t readExt(uint8_t *data, size_t length)</div><div class="ttdoc">not supported</div><div class="ttdef"><b>Definition:</b> MetaDataID3.h:537</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_meta_data_i_d3_html"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_i_d3.html">audio_tools::MetaDataID3</a></div><div class="ttdoc">Simple ID3 Meta Data Parser which supports ID3 V1 and V2 and implements the Stream interface....</div><div class="ttdef"><b>Definition:</b> MetaDataID3.h:508</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_meta_data_i_d3_html_abecb2937671e50d820376b2b1c0bd480"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_i_d3.html#abecb2937671e50d820376b2b1c0bd480">audio_tools::MetaDataID3::writeExt</a></div><div class="ttdeci">virtual size_t writeExt(const uint8_t *data, size_t length)</div><div class="ttdoc">Provide tha audio data to the API to parse for Meta Data.</div><div class="ttdef"><b>Definition:</b> MetaDataID3.h:543</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_meta_data_i_d3_html_ad9386c8382f447ae4b94957ce8a96f42"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_i_d3.html#ad9386c8382f447ae4b94957ce8a96f42">audio_tools::MetaDataID3::readExt</a></div><div class="ttdeci">size_t readExt(uint8_t *data, size_t length)</div><div class="ttdoc">not supported</div><div class="ttdef"><b>Definition:</b> MetaDataID3.h:538</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_meta_data_i_d3_v1_html"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_i_d3_v1.html">audio_tools::MetaDataID3V1</a></div><div class="ttdoc">Simple ID3 Meta Data API which supports ID3 V1.</div><div class="ttdef"><b>Definition:</b> MetaDataID3.h:94</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_meta_data_i_d3_v1_html_a4a91a5f7ec5c81e45dc614fbf2a7b79c"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_i_d3_v1.html#a4a91a5f7ec5c81e45dc614fbf2a7b79c">audio_tools::MetaDataID3V1::processNotify</a></div><div class="ttdeci">void processNotify()</div><div class="ttdoc">executes the callbacks</div><div class="ttdef"><b>Definition:</b> MetaDataID3.h:231</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_meta_data_i_d3_v1_html_a59983d3a4f711544650b7fc68f2590b4"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_i_d3_v1.html#a59983d3a4f711544650b7fc68f2590b4">audio_tools::MetaDataID3V1::processTagFoundPartial</a></div><div class="ttdeci">void processTagFoundPartial(const uint8_t *data, size_t len)</div><div class="ttdoc">We have the beginning of the metadata and need to process the remainder.</div><div class="ttdef"><b>Definition:</b> MetaDataID3.h:216</div></div>
@@ -579,11 +580,11 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_meta_data_i_d3_v2_html_a1a1836ea3afbc556f6ff39efe21336e2"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_i_d3_v2.html#a1a1836ea3afbc556f6ff39efe21336e2">audio_tools::MetaDataID3V2::processTagNotFound</a></div><div class="ttdeci">void processTagNotFound(const uint8_t *data, size_t len)</div><div class="ttdoc">try to find the metatdata tag in the provided data</div><div class="ttdef"><b>Definition:</b> MetaDataID3.h:389</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_meta_data_i_d3_v2_html_a5fae6d28348f9074a7916b5f16785fe2"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_i_d3_v2.html#a5fae6d28348f9074a7916b5f16785fe2">audio_tools::MetaDataID3V2::frameHeader</a></div><div class="ttdeci">ID3v2FrameString frameHeader()</div><div class="ttdoc">provides the current frame header</div><div class="ttdef"><b>Definition:</b> MetaDataID3.h:361</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_meta_data_i_d3_v2_html_a7a4d36f3ebb37ab298fb4222bcd2de93"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_i_d3_v2.html#a7a4d36f3ebb37ab298fb4222bcd2de93">audio_tools::MetaDataID3V2::end</a></div><div class="ttdeci">void end()</div><div class="ttdoc">Ends the processing and releases the memory.</div><div class="ttdef"><b>Definition:</b> MetaDataID3.h:330</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_meta_data_i_d3_v2_html_ab39538d495a042722709a84692b2fca5"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_i_d3_v2.html#ab39538d495a042722709a84692b2fca5">audio_tools::MetaDataID3V2::encodingIsSupported</a></div><div class="ttdeci">bool encodingIsSupported()</div><div class="ttdoc">For the time beeing we support only ASCII and UTF8.</div><div class="ttdef"><b>Definition:</b> MetaDataID3.h:460</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_meta_data_i_d3_v2_html_ac0a78421e834eadeb96c71c20cd4f156"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_i_d3_v2.html#ac0a78421e834eadeb96c71c20cd4f156">audio_tools::MetaDataID3V2::processNotify</a></div><div class="ttdeci">void processNotify()</div><div class="ttdoc">executes the callbacks</div><div class="ttdef"><b>Definition:</b> MetaDataID3.h:471</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_meta_data_i_d3_v2_html_ab39538d495a042722709a84692b2fca5"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_i_d3_v2.html#ab39538d495a042722709a84692b2fca5">audio_tools::MetaDataID3V2::encodingIsSupported</a></div><div class="ttdeci">bool encodingIsSupported()</div><div class="ttdoc">For the time beeing we support only ASCII and UTF8.</div><div class="ttdef"><b>Definition:</b> MetaDataID3.h:461</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_meta_data_i_d3_v2_html_ac0a78421e834eadeb96c71c20cd4f156"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_i_d3_v2.html#ac0a78421e834eadeb96c71c20cd4f156">audio_tools::MetaDataID3V2::processNotify</a></div><div class="ttdeci">void processNotify()</div><div class="ttdoc">executes the callbacks</div><div class="ttdef"><b>Definition:</b> MetaDataID3.h:472</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_meta_data_i_d3_v2_html_ac599e093fa325a3655c85e3993e26bf5"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_i_d3_v2.html#ac599e093fa325a3655c85e3993e26bf5">audio_tools::MetaDataID3V2::write</a></div><div class="ttdeci">size_t write(const uint8_t *data, size_t len)</div><div class="ttdoc">provide the (partial) data which might contain the meta data</div><div class="ttdef"><b>Definition:</b> MetaDataID3.h:338</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_meta_data_i_d3_v2_html_ac6a8d3502103cee393485ac2bd19f410"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_i_d3_v2.html#ac6a8d3502103cee393485ac2bd19f410">audio_tools::MetaDataID3V2::begin</a></div><div class="ttdeci">void begin()</div><div class="ttdoc">(re)starts the processing</div><div class="ttdef"><b>Definition:</b> MetaDataID3.h:321</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_meta_data_i_d3_v2_html_aca053a1923f7ed1feb5b395f98ac1ab9"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_i_d3_v2.html#aca053a1923f7ed1feb5b395f98ac1ab9">audio_tools::MetaDataID3V2::processPartialTagAtTail</a></div><div class="ttdeci">void processPartialTagAtTail(const uint8_t *data, size_t len)</div><div class="ttdoc">We have the beginning of the metadata and need to process the remainder.</div><div class="ttdef"><b>Definition:</b> MetaDataID3.h:450</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_meta_data_i_d3_v2_html_aca053a1923f7ed1feb5b395f98ac1ab9"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_i_d3_v2.html#aca053a1923f7ed1feb5b395f98ac1ab9">audio_tools::MetaDataID3V2::processPartialTagAtTail</a></div><div class="ttdeci">void processPartialTagAtTail(const uint8_t *data, size_t len)</div><div class="ttdoc">We have the beginning of the metadata and need to process the remainder.</div><div class="ttdef"><b>Definition:</b> MetaDataID3.h:451</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_meta_data_i_d3_v2_html_af0fa4982249a071d4a1d9b2b5605cba8"><div class="ttname"><a href="classaudio__tools_1_1_meta_data_i_d3_v2.html#af0fa4982249a071d4a1d9b2b5605cba8">audio_tools::MetaDataID3V2::header</a></div><div class="ttdeci">ID3v2 header()</div><div class="ttdoc">provides the ID3v2 header</div><div class="ttdef"><b>Definition:</b> MetaDataID3.h:356</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Parser for MP3 ID3 Meta Data: The goal is to implement a simple API which provides the title,...</div><div class="ttdef"><b>Definition:</b> AudioA2DP.h:19</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html_a2bf99e743756d972f8f88dc10c2b24d6"><div class="ttname"><a href="namespaceaudio__tools.html#a2bf99e743756d972f8f88dc10c2b24d6">audio_tools::ParseStatus</a></div><div class="ttdeci">ParseStatus</div><div class="ttdoc">current status of the parsing</div><div class="ttdef"><b>Definition:</b> MetaDataID3.h:18</div></div>
