@@ -1,5 +1,7 @@
 #pragma once
 
+#if __has_include ("AACDecoderHelix.h")
+
 #include "Stream.h"
 #include "AudioTools/AudioTypes.h"
 
@@ -126,4 +128,6 @@ class AACDecoderHelix : public AudioDecoder  {
 
 
 } // namespace
+
+#endif
 
