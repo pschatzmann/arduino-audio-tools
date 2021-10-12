@@ -124,7 +124,8 @@ class TimerAlarmRepeatingESP32 : public TimerAlarmRepeatingDef {
                     break;
             }
             LOGI("Timer every: %u us", timeUs);
-            adc_timer = timerBegin(0, 80, true);  // divider=80 -> 1000000 calls per second
+            uint32_t cpu_freq = getCpuFrequencyMhz();  // 80 ? 
+            adc_timer = timerBegin(0, cpu_freq, true);  // divider=80 -> 1000000 calls per second
 
             if (with_task) {
                 // we start the timer which runs the callback in a seprate task

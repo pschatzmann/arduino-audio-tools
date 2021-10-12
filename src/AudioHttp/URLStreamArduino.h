@@ -18,17 +18,23 @@ class URLStream : public Stream {
             read_buffer = new uint8_t[readBufferSize];
             WiFiClient client;
             request.setClient(client);
+            // do not store reply header lines
+            request.reply().setAutoCreateLines(false);
         }
 
         URLStream(Client &client, int readBufferSize=DEFAULT_BUFFER_SIZE){
             read_buffer = new uint8_t[readBufferSize];
             request.setClient(client);
+            // do not store reply header lines
+            request.reply().setAutoCreateLines(false);
         }
 
         URLStream(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE) {
             read_buffer = new uint8_t[readBufferSize];
             this->network = (char*)network;
             this->password = (char*)password;            
+            // do not store reply header lines
+            request.reply().setAutoCreateLines(false);
         }
 
         ~URLStream(){

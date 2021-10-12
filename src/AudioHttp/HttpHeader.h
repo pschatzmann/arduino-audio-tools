@@ -425,7 +425,7 @@ class HttpReplyHeader : public HttpHeader  {
             msg_str += this->status_code;
             msg_str += " ";
             msg_str += this->status_msg.c_str();
-            LOGI("->", msg);
+            LOGI("-> %s", msg);
             out.print(msg);
             crlf(out);
         }

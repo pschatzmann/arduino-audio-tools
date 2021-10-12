@@ -42,7 +42,9 @@ class StrExt : public Str {
                 len = strlen(str);
                 maxlen = len; 
                 grow(maxlen);
-                strcpy(chars, str);
+                if (chars!=nullptr){
+                    strcpy(chars, str);
+                }
             }
         }
 
@@ -112,11 +114,14 @@ class StrExt : public Str {
                 if (chars!=nullptr){
                     char* tmp = chars;
                     chars = new char[newSize+1];
-                    strcpy(chars,tmp);
+                    if (chars!=nullptr){
+                        strcpy(chars,tmp);
+                    }
                     delete [] tmp;
                 } else {
                     chars = new char[newSize+1];
-                    chars[0] = 0;
+                    if (chars!=nullptr)
+                        chars[0] = 0;
                 }
                 maxlen = newSize;
                 
