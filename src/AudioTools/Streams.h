@@ -299,6 +299,23 @@ class BufferedStream : public Stream {
 
 
 /**
+ * @brief The Arduino Stream which provides silence and simulates a null device when used as audio target
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class NullStream : public BufferedStream {
+    protected:
+        virtual size_t writeExt(const uint8_t* data, size_t len) {
+            return len;
+        }
+        virtual size_t readExt( uint8_t *data, size_t len) {
+            memset(data, 0, len);
+            return len;
+        }
+};
+
+
+/**
  * @brief Stream Wrapper which can be used to print the values as readable ASCII to the screen to be analyzed in the Serial Plotter
  * The frames are separated by a new line. The channels in one frame are separated by a ,
  * @tparam T 

@@ -23,7 +23,7 @@ void setup() {
   out.begin(TX_MODE, "MyMusic");
 
   // setup player
-  source.setFileFilter("*Bob Dylan*");
+  //source.setFileFilter("*Bob Dylan*");
   player.setCallbackMetadata(printMetaData);
   player.begin();
 }

@@ -176,7 +176,7 @@ class HttpRequest {
 
             host_name = url.host();                
             request_header.setValues(action, url.path());
-            if (len==-1 && data!=nullptr){
+            if (len>0 && data!=nullptr){
                 len = strlen(data);
                 request_header.put(CONTENT_LENGTH, len);
             }
