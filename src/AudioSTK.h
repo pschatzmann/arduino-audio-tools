@@ -1,8 +1,9 @@
 #pragma once
 #include "Arduino.h"
-#include <Voicer.h>
-#include <Instrument.h>
-
+#include "freertos/FreeRTOS.h"
+#include "Stk.h"
+#include "Voicer.h"
+#include "Instrmnt.h"
 
 namespace audio_tools {
 
