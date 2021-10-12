@@ -25,7 +25,7 @@
 #endif
 
 
-// Try max SPI clock for an SD. Reduce SPI_CLOCK if errors occur.
+// Try max SPI clock for an SD. Reduce SPI_CLOCK if errors occur. (40?)
 #define SPI_CLOCK SD_SCK_MHZ(50)
 // Max file name length including directory path
 #define MAX_FILE_LEN 256
