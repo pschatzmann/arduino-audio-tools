@@ -282,14 +282,18 @@ class AnalogAudio  : public Stream,  public AudioBaseInfoDependent  {
       LOGD(LOG_METHOD);
 
       size_t result = 0;   
-      if (adc_config.channels==2){
-        if (i2s_write(port_no, src, size_bytes, &result, portMAX_DELAY)!=ESP_OK){
-          LOGE(LOG_METHOD);
-        }
-        LOGD("i2s_write %d -> %d bytes", size_bytes, result);
-      } else {
-        result = I2SBase::writeExpandChannel(port_no, adc_config.bits_per_sample, src, size_bytes);
-      }       
+      switch(adc_config.channels){
+        case 1:
+          result = outputMono(src, size_bytes);    
+          break;      
+        case 2:
+          result = outputStereo(src, size_bytes);    
+          break;   
+        default:
+          LOGE("Unsupported number of channels: %d", adc_config.channels);   
+          stop();
+      }
+   
       return result;
     }   
 
@@ -326,6 +330,93 @@ class AnalogAudio  : public Stream,  public AudioBaseInfoDependent  {
     AnalogConfig adc_config;
     i2s_port_t port_no;
     bool active = false;
+    size_t result;
+    size_t resultTotal = 0;
+
+
+    // The internal DAC only supports 8 bit values - so we need to convert the data
+    size_t outputStereo(const void *src, size_t size_bytes) {
+      size_t output_size = 0;   
+      size_t result;
+
+      switch(adc_config.bits_per_sample){
+        case 16: {
+            int16_t *data=(int16_t *)src;
+            output_size = (size_bytes/2) * 2;
+            for (int j=0;j<size_bytes/2;j++){
+              data[j] = convert8DAC(data[j], adc_config.bits_per_sample);
+            }
+          } break;
+        case 24: {
+            int24_t *data=(int24_t *)src;
+            output_size = (size_bytes/3) * 3;
+            for (int j=0;j<size_bytes/3;j++){
+              data[j] = convert8DAC(data[j], adc_config.bits_per_sample);
+            }
+          } break;
+        case 32: {
+            int32_t *data=(int32_t *)src;
+            output_size = (size_bytes/4) * 4;
+            for (int j=0;j<size_bytes/4;j++){
+              data[j] = convert8DAC(data[j], adc_config.bits_per_sample);
+            }
+          } break;        
+      }
+
+      if (i2s_write(port_no, src, output_size, &result, portMAX_DELAY)!=ESP_OK){
+        LOGE(LOG_METHOD);
+      }
+
+      LOGD("i2s_write %d -> %d bytes", size_bytes, result);
+      return result;
+
+    }
+
+    // I2S requires stereo so we convert mono to stereo
+    size_t outputMono(const void *src, size_t size_bytes) {
+      size_t output_size = 0;   
+      int16_t out[2];
+
+      switch(adc_config.bits_per_sample){
+        case 16: {
+            int16_t *data=(int16_t *)src;
+            for (int j=0;j<size_bytes/2;j++){
+                out[0] = convert8DAC(data[j], adc_config.bits_per_sample);
+                out[1] = out[0];
+                if (i2s_write(port_no, out, 4, &result, portMAX_DELAY)!=ESP_OK){
+                  LOGE(LOG_METHOD);
+                }
+                resultTotal += result;
+            }
+          }break;
+        case 24: {
+            int24_t *data=(int24_t*)src;
+            for (int j=0;j<size_bytes/3;j++){
+                out[0] = convert8DAC(data[j], adc_config.bits_per_sample);
+                out[1] = out[0];
+                if (i2s_write(port_no, out, 4, &result, portMAX_DELAY)!=ESP_OK){
+                  LOGE(LOG_METHOD);
+                }
+                resultTotal += result;
+            }
+          } break;
+        case 32: {
+            int32_t *data=(int32_t *)src;
+            for (int j=0;j<size_bytes/4;j++){
+                out[0] = convert8DAC(data[j], adc_config.bits_per_sample);
+                out[1] = out[0];
+                if (i2s_write(port_no, out, 4, &result, portMAX_DELAY)!=ESP_OK){
+                  LOGE(LOG_METHOD);
+                }
+                resultTotal += result;
+            }
+          } break;        
+      }
+
+      LOGD("i2s_write %d -> %d bytes", size_bytes, resultTotal);
+      return resultTotal;
+    }
+
     
 };
 

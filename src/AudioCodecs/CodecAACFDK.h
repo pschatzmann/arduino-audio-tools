@@ -1,6 +1,6 @@
 #pragma once
 
-#if __has_include ("AACDecoderFDK.h")
+#if defined(USE_FDK) || defined(USE_DECODERS)
 
 #include "AudioTools/AudioTypes.h"
 #include "AACDecoderFDK.h"

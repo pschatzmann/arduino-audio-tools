@@ -1,6 +1,6 @@
 #pragma once
 
-#if __has_include ("MP3EncoderLAME.h")
+#if defined(USE_LAME) || defined(USE_DECODERS)
 
 #include "AudioTools/AudioTypes.h"
 #include "MP3EncoderLAME.h"

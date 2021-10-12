@@ -22,7 +22,7 @@ endif()
 # build sketch as executable
 add_executable (mp3-lame mp3-lame.cpp)
 # use main() from arduino_emulator
-target_compile_definitions(mp3-lame PUBLIC -DARDUINO -DEXIT_ON_STOP)
+target_compile_definitions(mp3-lame PUBLIC -DARDUINO -DEXIT_ON_STOP -DIGNORE_DECODERS -DUSE_LAME)
 
 # specify libraries
 target_link_libraries(mp3-lame arduino_emulator arduino_liblame arduino-audio-tools)

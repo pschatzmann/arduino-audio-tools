@@ -1,6 +1,6 @@
 #pragma once
 
-#if __has_include ("MP3DecoderMAD.h")
+#if defined(USE_MAD) || defined(USE_DECODERS)
 
 #define MINIMP3_IMPLEMENTATION
 #define MINIMP3_NO_STDIO
