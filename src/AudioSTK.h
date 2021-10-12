@@ -1,6 +1,7 @@
 #pragma once
 #include "Arduino.h"
 #include <Voicer.h>
+#include <Instrument.h>
 
 
 namespace audio_tools {
@@ -16,6 +17,7 @@ class STKStream : public BufferedStream<int16_t> {
         /// provides the audio from a Voicer
         void begin(stk::Voicer &voicer) {
             p_voicer = &voicer;
+            p_stk = p_voicer;
             p_instrument = nullptr;
             active = true;
         }
@@ -32,9 +34,18 @@ class STKStream : public BufferedStream<int16_t> {
             active = false;
         }
 
+        /// Provides the basic audio info: mainly the sample rate
+        AudioBaseInfo audioInfo() {
+            AudioBaseInfo info;
+            info.sample_rate = stk::STK::sampleRate();
+            info.bits_per_sample = 16;
+            info.channels = 1;
+            return info;
+        }
+
     protected:
-        stk::Voicer *p_voicer;
-        stk::Instrument *p_instrument;
+        stk::Voicer *p_voicer=nullptr;
+        stk::Instrument *p_instrument=nullptr;
         bool active = false;
 
         // not supported
