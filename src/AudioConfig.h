@@ -55,6 +55,13 @@
 
 /**
  * ------------------------------------------------------------------------- 
+ * @brief Activate decoders by default
+ */
+#ifndef IGNORE_DECODERS
+#define USE_DECODERS
+#endif
+/**
+ * ------------------------------------------------------------------------- 
  * @brief Platform specific Settings
  * 
  */

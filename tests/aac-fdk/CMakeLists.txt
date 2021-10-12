@@ -22,7 +22,7 @@ endif()
 add_executable (aac-fdk aac-fdk.cpp)
 
 # use main() from arduino_emulator
-target_compile_definitions(aac-fdk PUBLIC -DARDUINO -DEXIT_ON_STOP)
+target_compile_definitions(aac-fdk PUBLIC -DARDUINO -DEXIT_ON_STOP -DIGNORE_DECODERS -DUSE_FDK)
 
 # OS/X might need this setting for core audio
 #target_compile_definitions(portaudio PUBLIC -DPA_USE_COREAUDIO=1)
