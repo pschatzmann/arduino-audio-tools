@@ -304,6 +304,10 @@ class BufferedStream : public Stream {
  * @copyright GPLv3
  */
 class NullStream : public BufferedStream {
+    public:
+        NullStream() : BufferedStream(100){
+        }
+        
     protected:
         virtual size_t writeExt(const uint8_t* data, size_t len) {
             return len;

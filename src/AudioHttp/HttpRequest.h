@@ -129,6 +129,10 @@ class HttpRequest {
             this->accept_encoding = enc;
         }
 
+        virtual void setAcceptMime(const char* mime){
+            this->accept = mime;
+        }
+
         size_t getReceivedContentLength() {
             const char *len_str = reply().get(CONTENT_LENGTH);
             int len = 0;
@@ -169,10 +173,15 @@ class HttpRequest {
                 bool is_connected = connect(url.host(), url.port());
                 if (!is_connected){
                     LOGE("Connect failed");
+                    return -1;
                 }
             } else {
                 LOGI("process is already connected");
             }
+
+#ifdef ESP32
+            LOGI("Free heap: %u", ESP.getFreeHeap());
+#endif
 
             host_name = url.host();                
             request_header.setValues(action, url.path());
@@ -180,7 +189,7 @@ class HttpRequest {
                 len = strlen(data);
                 request_header.put(CONTENT_LENGTH, len);
             }
-            request_header.put(HOST, host_name);                
+            request_header.put(HOST_C, host_name);                
             request_header.put(CONNECTION, connection);
             request_header.put(USER_AGENT, agent);
             request_header.put(ACCEPT_ENCODING, accept_encoding);
@@ -192,7 +201,7 @@ class HttpRequest {
             if (len>0){
                 LOGI("Writing data: %d bytes", len);
                 client_ptr->write((const uint8_t*)data,len);
-                LOGD(data);
+                LOGD("%s",data);
             }
             
             LOGI("Request written ... waiting for reply")

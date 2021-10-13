@@ -1,6 +1,7 @@
 #pragma once
 
 #include <WiFi.h>
+#include <WiFiClientSecure.h>
 #include "AudioHttp/HttpRequest.h"
 
 namespace audio_tools {
@@ -16,7 +17,6 @@ class URLStream : public Stream {
 
         URLStream(int readBufferSize=DEFAULT_BUFFER_SIZE){
             read_buffer = new uint8_t[readBufferSize];
-            WiFiClient client;
             request.setClient(client);
             // do not store reply header lines
             request.reply().setAutoCreateLines(false);
@@ -34,6 +34,7 @@ class URLStream : public Stream {
             this->network = (char*)network;
             this->password = (char*)password;            
             // do not store reply header lines
+            request.setClient(client);
             request.reply().setAutoCreateLines(false);
         }
 
@@ -42,38 +43,55 @@ class URLStream : public Stream {
             end();
         }
 
-        bool begin(const char* urlStr, MethodID action = GET, const char* reqMime="", const char*reqData="") {
-            login();
-            Url url(urlStr);
+
+        bool begin(const char* urlStr, const char* acceptMime=nullptr, MethodID action=GET,  const char* reqMime="", const char*reqData="") {
+            LOGI( "URLStream.begin %s",urlStr);
+            
+            client.setInsecure();
+            url.setUrl(urlStr);
             int result = -1;
 
-            LOGI( "URLStream.begin %s",urlStr);
-            result = request.process(action, url, reqMime, reqData);
-            size = request.getReceivedContentLength();
-            LOGI("size: %d", (int)size);
-            if (size>=0){
-                waitForData();
+            // optional: login if necessary
+            login();
+
+            if (acceptMime!=nullptr){
+                request.setAcceptMime(acceptMime);
             }
-            return result == 200;
+            result = request.process(action, url, reqMime, reqData);
+            if (result>0){
+                size = request.getReceivedContentLength();
+                LOGI("size: %d", (int)size);
+                if (size>=0){
+                    waitForData();
+                }
+            }
+            active = result == 200;
+            return active;
         }
 
         virtual int available() {
+            if (!active) return 0;
             return request.available();
         }
 
         virtual size_t readBytes(uint8_t *buffer, size_t length){
+            if (!active) return -1;
+
             size_t read = request.read((uint8_t*)buffer, length);
             total_read+=read;
             return read;
         }
 
         virtual int read() {
+            if (!active) return -1;
             fillBuffer();
             total_read++;
             return isEOS() ? -1 :read_buffer[read_pos++];
         }
 
         virtual int peek() {
+            if (!active) return -1;
+
             fillBuffer();
             return isEOS() ? -1 : read_buffer[read_pos];
         }
@@ -87,12 +105,14 @@ class URLStream : public Stream {
         }
 
         void end(){
+            active = false;
             request.stop();
         }
 
 
     protected:
         HttpRequest request;
+        Url url;
         long size;
         long total_read;
         // buffered read
@@ -100,9 +120,11 @@ class URLStream : public Stream {
         uint16_t read_buffer_size;
         uint16_t read_pos;
         uint16_t read_size;
+        bool active = false;
+        // optional 
         char* network;
         char* password;
-        WiFiClient client;
+        WiFiClientSecure client;
 
         inline void fillBuffer() {
             if (isEOS()){

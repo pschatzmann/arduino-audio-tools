@@ -32,11 +32,10 @@ void setup(){
   dec.begin();
 
 // mp3 radio
-  url.begin("http://centralcharts.ice.infomaniak.ch/centralcharts-128.mp3");
+  url.begin("https://centralcharts.ice.infomaniak.ch/centralcharts-128.mp3","audio/mp3");
+
 }
 
 void loop(){
-  if (!copier.copy()) {
-    stop();
-  }
+  copier.copy();
 }

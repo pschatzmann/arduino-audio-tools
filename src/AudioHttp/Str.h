@@ -547,9 +547,9 @@ class Str {
 
     protected:
         char* chars = nullptr;
-        bool is_const;
-        int len;
-        int maxlen;
+        bool is_const=false;
+        int len=0;
+        int maxlen = 0;
         int savedLen = -1;
         char savedChar;
 
