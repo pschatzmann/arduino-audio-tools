@@ -7,6 +7,7 @@
  * @copyright GPLv3
  * 
  */
+#include "Arduino.h"
 #include "AudioTools.h"
 #include "AudioA2DP.h"
 

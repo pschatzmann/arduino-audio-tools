@@ -1,21 +1,19 @@
 /**
- * @file streams-a2dp-serial.ino
+ * @file streams-a2dp-analog.ino
  * @author Phil Schatzmann
- * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/streams-a2dp-serial/README.md
+ * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/streams-a2dp-analog/README.md
  * 
  * @author Phil Schatzmann
  * @copyright GPLv3
- * 
  */
-#include "Arduino.h"
 #include "AudioTools.h"
 #include "AudioA2DP.h"
 
 using namespace audio_tools;  
 
 A2DPStream in = A2DPStream::instance() ; // A2DP input - A2DPStream is a singleton!
-CsvStream<int16_t> out(Serial, 2); // ASCII stream as csv 
-StreamCopy copier(out, in); // copy in to out
+AnalogAudioStream out; 
+StreamCopy copier(out, in, 4100); // copy in to out
 
 // Arduino Setup
 void setup(void) {
@@ -24,9 +22,15 @@ void setup(void) {
   // start the bluetooth audio receiver
   Serial.println("starting A2DP...");
   in.begin(RX_MODE, "MyReceiver");  
+
+  auto config = out.defaultConfig(TX_MODE);
+  config.sample_rate = in.sink().sample_rate(); 
+  config.channels = 2;
+  config.bits_per_sample = 16;
+  out.begin(config);
 }
 
 // Arduino loop  
 void loop() {
-  copier.copy();
+    copier.copy();
 }

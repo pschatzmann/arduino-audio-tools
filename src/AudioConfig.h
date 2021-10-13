@@ -75,6 +75,7 @@
 #define USE_I2S
 #define USE_DELTASIGMA
 #define USE_SDFAT
+#define USE_AUDIO_SERVER
 
 #define PWM_FREQENCY 30000
 #define PWM_START_PIN 12
@@ -91,7 +92,7 @@
 #define PIN_ADC2 35
 
 // support for old idf releases
-#if ESP_IDF_VERSION_MAJOR < 4 
+#if ESP_IDF_VERSION_MAJOR < 4 && !defined(I2S_COMM_FORMAT_STAND_I2S)
 #define I2S_COMM_FORMAT_STAND_I2S (I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_LSB)
 #define I2S_COMM_FORMAT_STAND_MSB (I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_MSB)
 #endif
@@ -108,6 +109,7 @@
 #define USE_DELTASIGMA
 #define USE_PWM
 #define USE_SDFAT
+#define USE_AUDIO_SERVER
 
 #define PWM_START_PIN 12
 #define PIN_I2S_BCK -1
@@ -181,4 +183,9 @@
 #define PIN_I2S_MUTE 4
 #define SOFT_MUTE_VALUE LOW  
 #define PIN_CS CS
+#endif
+
+
+#if defined(__linux__) || defined(_WIN32) || defined(__APPLE__)
+#define USE_URL_ARDUINO
 #endif

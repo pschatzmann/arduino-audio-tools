@@ -1,5 +1,8 @@
 #pragma once
 
+#include "AudioConfig.h"
+#ifdef USE_AUDIO_SERVER
+
 #include <WiFi.h>
 #include "AudioCodecs/CodecWAV.h"
 #include "AudioTools.h"
@@ -376,3 +379,5 @@ class AudioWAVServer : public AudioEncoderServer {
 };
 
 }
+
+#endif

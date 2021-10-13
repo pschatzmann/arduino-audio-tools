@@ -24,7 +24,7 @@ const char* ACCEPT_ALL = "*/*";
 const char* SUCCESS = "Success";
 const char* USER_AGENT = "User-Agent";
 const char* DEFAULT_AGENT = "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)";
-const char* HOST = "Host";
+const char* HOST_C = "Host";
 const char* ACCEPT_ENCODING = "Accept-Encoding";
 const char* IDENTITY = "identity";
 const char* LOCATION = "Location";
@@ -232,14 +232,15 @@ class HttpHeader {
                 parse1stLine(line);
                 while (in.available()){
                     readLine(in, line, MaxHeaderLineLength);
-                    Str lineStr(line);
-                    lineStr.ltrim();
-                    if (lineStr.isEmpty()){
-                        break;
-                    }
-                    put(line);                
+                    if (isValidStatus()){
+                        Str lineStr(line);
+                        lineStr.ltrim();
+                        if (lineStr.isEmpty()){
+                            break;
+                        }
+                        put(line); 
+                    }               
                 }
-
             }
         }
 
@@ -259,6 +260,10 @@ class HttpHeader {
         // automatically create new lines
         void setAutoCreateLines(bool is_auto_line){
             create_new_lines = is_auto_line;
+        }
+
+        bool isValidStatus() {
+            return status_code >= 200 && status_code < 300;
         }
 
 
@@ -435,7 +440,7 @@ class HttpReplyHeader : public HttpHeader  {
         // we just update the pointers to point to the correct position in the
         // http_status_line
         void parse1stLine(const char *line){
-            LOGI("HttpReplyHeader::parse1stLine",line);
+            LOGI("HttpReplyHeader::parse1stLine: %s",line);
             Str line_str(line);
             int space1 = line_str.indexOf(' ',0);
             int space2 = line_str.indexOf(' ',space1+1);
