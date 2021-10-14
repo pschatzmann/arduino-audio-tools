@@ -15,7 +15,7 @@ var searchData=
   ['audiodecoder_12',['AudioDecoder',['../classaudio__tools_1_1_audio_decoder.html',1,'audio_tools']]],
   ['audioencoder_13',['AudioEncoder',['../classaudio__tools_1_1_audio_encoder.html',1,'audio_tools']]],
   ['audioencoderserver_14',['AudioEncoderServer',['../classaudio__tools_1_1_audio_encoder_server.html',1,'audio_tools::AudioEncoderServer'],['../classaudio__tools_1_1_audio_encoder_server.html#a78f0ea545696555cda78585be3a14e9e',1,'audio_tools::AudioEncoderServer::AudioEncoderServer(AudioEncoder *encoder)'],['../classaudio__tools_1_1_audio_encoder_server.html#a5faa004897782b807a357083a90e4cc8',1,'audio_tools::AudioEncoderServer::AudioEncoderServer(AudioEncoder *encoder, const char *network, const char *password)']]],
-  ['audioinfo_15',['audioInfo',['../classaudio__tools_1_1_sine_wave_generator.html#a84748568a8bf3980f838e96b514d8c57',1,'audio_tools::SineWaveGenerator']]],
+  ['audioinfo_15',['audioInfo',['../classaudio__tools_1_1_sine_wave_generator.html#a84748568a8bf3980f838e96b514d8c57',1,'audio_tools::SineWaveGenerator::audioInfo()'],['../classaudio__tools_1_1_s_t_k_stream.html#a6a1399171296dee84731f500d46aabdd',1,'audio_tools::STKStream::audioInfo()']]],
   ['audioinfoex_16',['audioInfoEx',['../classaudio__tools_1_1_m_p3_decoder_m_a_d.html#a226d6f99aeb0866197300557c24488da',1,'audio_tools::MP3DecoderMAD']]],
   ['audioinfolame_17',['AudioInfoLAME',['../structaudio__tools_1_1_audio_info_l_a_m_e.html',1,'audio_tools']]],
   ['audiologger_18',['AudioLogger',['../classaudio__tools_1_1_audio_logger.html',1,'audio_tools']]],

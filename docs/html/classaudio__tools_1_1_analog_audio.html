@@ -67,6 +67,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_analog_audio-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -308,27 +309,14 @@ virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>validate</b> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> &amp;info)</td></tr>
 <tr class="separator:a16c99d6218d2dc4574d4d9725d77052a inherit pub_methods_classaudio__tools_1_1_audio_base_info_dependent"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:abfa9def16d1d1e47ca8e516bd53130e3"><td class="memItemLeft" align="right" valign="top"><a id="abfa9def16d1d1e47ca8e516bd53130e3"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>active</b> = false</td></tr>
-<tr class="separator:abfa9def16d1d1e47ca8e516bd53130e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7e316ca2852a49641ffce6004eaed8c"><td class="memItemLeft" align="right" valign="top"><a id="ac7e316ca2852a49641ffce6004eaed8c"></a>
-<a class="el" href="classaudio__tools_1_1_analog_config.html">AnalogConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><b>adc_config</b></td></tr>
-<tr class="separator:ac7e316ca2852a49641ffce6004eaed8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:accb017cbd0c94aa81f75815af14f955f"><td class="memItemLeft" align="right" valign="top"><a id="accb017cbd0c94aa81f75815af14f955f"></a>
-i2s_port_t&#160;</td><td class="memItemRight" valign="bottom"><b>port_no</b></td></tr>
-<tr class="separator:accb017cbd0c94aa81f75815af14f955f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_attribs_class_stream"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_stream')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_stream.html">Stream</a></td></tr>
-<tr class="memitem:abf61d2006d28d18f2e028285a323fe5a inherit pro_attribs_class_stream"><td class="memItemLeft" align="right" valign="top"><a id="abf61d2006d28d18f2e028285a323fe5a"></a>
-unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>_startMillis</b></td></tr>
-<tr class="separator:abf61d2006d28d18f2e028285a323fe5a inherit pro_attribs_class_stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae48f1a926d2e82a452f2c75af0c6a29 inherit pro_attribs_class_stream"><td class="memItemLeft" align="right" valign="top"><a id="aae48f1a926d2e82a452f2c75af0c6a29"></a>
-unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b></td></tr>
-<tr class="separator:aae48f1a926d2e82a452f2c75af0c6a29 inherit pro_attribs_class_stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a770a01c9c89570ccf920b3a1fa16cef4"><td class="memItemLeft" align="right" valign="top"><a id="a770a01c9c89570ccf920b3a1fa16cef4"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>outputMono</b> (const void *src, size_t size_bytes)</td></tr>
+<tr class="separator:a770a01c9c89570ccf920b3a1fa16cef4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbb76dc4eec2b01af9369a91f69f2ed6"><td class="memItemLeft" align="right" valign="top"><a id="adbb76dc4eec2b01af9369a91f69f2ed6"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>outputStereo</b> (const void *src, size_t size_bytes)</td></tr>
+<tr class="separator:adbb76dc4eec2b01af9369a91f69f2ed6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_class_stream"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_stream')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_stream.html">Stream</a></td></tr>
 <tr class="memitem:a5fb669d95dbf5b7b8a8e900c53d62a1e inherit pro_methods_class_stream"><td class="memItemLeft" align="right" valign="top"><a id="a5fb669d95dbf5b7b8a8e900c53d62a1e"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>findMulti</b> (struct <a class="el" href="struct_stream_1_1_multi_target.html">MultiTarget</a> *targets, int tCount)</td></tr>
@@ -352,6 +340,31 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>timedRead</b> ()</td><
 <tr class="memitem:a46656410e23c0ec14d7a01b38b3b6f00 inherit pro_methods_class_print"><td class="memItemLeft" align="right" valign="top"><a id="a46656410e23c0ec14d7a01b38b3b6f00"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteError</b> (int err=1)</td></tr>
 <tr class="separator:a46656410e23c0ec14d7a01b38b3b6f00 inherit pro_methods_class_print"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:abfa9def16d1d1e47ca8e516bd53130e3"><td class="memItemLeft" align="right" valign="top"><a id="abfa9def16d1d1e47ca8e516bd53130e3"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>active</b> = false</td></tr>
+<tr class="separator:abfa9def16d1d1e47ca8e516bd53130e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7e316ca2852a49641ffce6004eaed8c"><td class="memItemLeft" align="right" valign="top"><a id="ac7e316ca2852a49641ffce6004eaed8c"></a>
+<a class="el" href="classaudio__tools_1_1_analog_config.html">AnalogConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><b>adc_config</b></td></tr>
+<tr class="separator:ac7e316ca2852a49641ffce6004eaed8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accb017cbd0c94aa81f75815af14f955f"><td class="memItemLeft" align="right" valign="top"><a id="accb017cbd0c94aa81f75815af14f955f"></a>
+i2s_port_t&#160;</td><td class="memItemRight" valign="bottom"><b>port_no</b></td></tr>
+<tr class="separator:accb017cbd0c94aa81f75815af14f955f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f1dba81a39711d40c147e1ef044f254"><td class="memItemLeft" align="right" valign="top"><a id="a3f1dba81a39711d40c147e1ef044f254"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>result</b></td></tr>
+<tr class="separator:a3f1dba81a39711d40c147e1ef044f254"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac34c578c44915bd51905599b56701c6b"><td class="memItemLeft" align="right" valign="top"><a id="ac34c578c44915bd51905599b56701c6b"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>resultTotal</b> = 0</td></tr>
+<tr class="separator:ac34c578c44915bd51905599b56701c6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_class_stream"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_stream')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_stream.html">Stream</a></td></tr>
+<tr class="memitem:abf61d2006d28d18f2e028285a323fe5a inherit pro_attribs_class_stream"><td class="memItemLeft" align="right" valign="top"><a id="abf61d2006d28d18f2e028285a323fe5a"></a>
+unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>_startMillis</b></td></tr>
+<tr class="separator:abf61d2006d28d18f2e028285a323fe5a inherit pro_attribs_class_stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae48f1a926d2e82a452f2c75af0c6a29 inherit pro_attribs_class_stream"><td class="memItemLeft" align="right" valign="top"><a id="aae48f1a926d2e82a452f2c75af0c6a29"></a>
+unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b></td></tr>
+<tr class="separator:aae48f1a926d2e82a452f2c75af0c6a29 inherit pro_attribs_class_stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A very fast ADC and DAC using the ESP32 <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for multiple Architectures that supports the reading and writing with a ...">I2S</a> interface. </p>
