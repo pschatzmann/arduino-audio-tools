@@ -35,7 +35,6 @@ class HttpRequest {
         void setClient(Client &client){
             this->client_ptr = &client;
             this->client_ptr->setTimeout(20000);
-
         }
 
         // the requests usually need a host. This needs to be set if we did not provide a URL

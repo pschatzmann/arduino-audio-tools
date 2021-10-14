@@ -1,5 +1,8 @@
 #pragma once
 
+#include "AudioConfig.h"
+#ifdef USE_URL_ARDUINO
+
 #include <WiFi.h>
 #include <WiFiClientSecure.h>
 #include "AudioHttp/HttpRequest.h"
@@ -17,29 +20,32 @@ class URLStream : public Stream {
 
         URLStream(int readBufferSize=DEFAULT_BUFFER_SIZE){
             read_buffer = new uint8_t[readBufferSize];
-            request.setClient(client);
-            // do not store reply header lines
-            request.reply().setAutoCreateLines(false);
         }
 
-        URLStream(Client &client, int readBufferSize=DEFAULT_BUFFER_SIZE){
+        URLStream(Client &clientPar, int readBufferSize=DEFAULT_BUFFER_SIZE){
             read_buffer = new uint8_t[readBufferSize];
-            request.setClient(client);
-            // do not store reply header lines
-            request.reply().setAutoCreateLines(false);
+            client = &clientPar;
         }
 
         URLStream(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE) {
             read_buffer = new uint8_t[readBufferSize];
             this->network = (char*)network;
             this->password = (char*)password;            
-            // do not store reply header lines
-            request.setClient(client);
-            request.reply().setAutoCreateLines(false);
         }
 
         ~URLStream(){
-            delete[] read_buffer;
+            if (read_buffer!=nullptr){
+                delete[] read_buffer;
+                read_buffer = nullptr;
+            }
+            if (clientSecure!=nullptr){
+                delete clientSecure;
+                clientSecure = nullptr;
+            }
+            if (clientInsecure!=nullptr){
+                delete clientInsecure;
+                clientInsecure = nullptr;
+            }
             end();
         }
 
@@ -47,17 +53,17 @@ class URLStream : public Stream {
         bool begin(const char* urlStr, const char* acceptMime=nullptr, MethodID action=GET,  const char* reqMime="", const char*reqData="") {
             LOGI( "URLStream.begin %s",urlStr);
             
-            client.setInsecure();
             url.setUrl(urlStr);
             int result = -1;
 
             // optional: login if necessary
             login();
 
+            //request.reply().setAutoCreateLines(false);
             if (acceptMime!=nullptr){
                 request.setAcceptMime(acceptMime);
             }
-            result = request.process(action, url, reqMime, reqData);
+            result = process(action, url, reqMime, reqData);
             if (result>0){
                 size = request.getReceivedContentLength();
                 LOGI("size: %d", (int)size);
@@ -84,6 +90,7 @@ class URLStream : public Stream {
 
         virtual int read() {
             if (!active) return -1;
+
             fillBuffer();
             total_read++;
             return isEOS() ? -1 :read_buffer[read_pos++];
@@ -109,6 +116,10 @@ class URLStream : public Stream {
             request.stop();
         }
 
+        /// provides access to the HttpRequest
+        HttpRequest &httpRequest(){
+            return request;
+        }
 
     protected:
         HttpRequest request;
@@ -116,15 +127,51 @@ class URLStream : public Stream {
         long size;
         long total_read;
         // buffered read
-        uint8_t *read_buffer;
+        uint8_t *read_buffer=nullptr;
         uint16_t read_buffer_size;
         uint16_t read_pos;
         uint16_t read_size;
         bool active = false;
         // optional 
-        char* network;
-        char* password;
-        WiFiClientSecure client;
+        char* network=nullptr;
+        char* password=nullptr;
+        Client *client=nullptr;
+        WiFiClient *clientInsecure=nullptr;
+        WiFiClientSecure *clientSecure=nullptr;
+
+        /// Process the Http request and handle redirects
+        int process(MethodID action, Url &url, const char* reqMime, const char *reqData, int len=-1) {
+            request.setClient(getClient(url.isSecure()));
+            int status_code = request.process(action, url, reqMime, reqData, len);
+            // redirect
+            if (status_code>=300 && status_code<400){
+                const char *redirect_url = request.reply().get(LOCATION);
+                LOGW("Rederected to: %s", redirect_url);
+                url.setUrl(redirect_url);
+                request.setClient(getClient(url.isSecure()));
+                status_code = request.process(action, url, reqMime, reqData, len);
+            }
+            return status_code;
+        }
+
+        /// Determines the client 
+        Client &getClient(bool isSecure){
+            if (client!=nullptr) return *client;
+            if (isSecure){
+                if (clientSecure==nullptr){
+                    clientSecure = new WiFiClientSecure();
+                    clientSecure->setInsecure();
+                } 
+                LOGI("WiFiClientSecure");
+                return *clientSecure;
+            }
+            if (clientInsecure==nullptr){
+                clientInsecure = new WiFiClient();
+            }
+            LOGI("WiFiClient");
+            return *clientInsecure;
+        }
+
 
         inline void fillBuffer() {
             if (isEOS()){
@@ -148,7 +195,6 @@ class URLStream : public Stream {
                 }
                 Serial.println();
             }
-            request.setClient(client);
             delay(500);            
         }
 
@@ -165,3 +211,5 @@ class URLStream : public Stream {
 };
 
 }
+
+#endif

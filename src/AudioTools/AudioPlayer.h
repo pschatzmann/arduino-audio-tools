@@ -9,19 +9,11 @@
 #include "AudioTools/AudioCopy.h"
 #include "AudioCodecs/CodecMP3Helix.h"
 #include "AudioHttp/Str.h"
+#include "AudioHttp/URLStream.h"
 
 #ifdef USE_SDFAT
 #include <SPI.h>
 #include <SdFat.h>
-#endif
-
-// URL Support
-#ifdef USE_URL_ARDUINO
-// Arduino network support (incl ESP32)
-#include "AudioHttp/URLStreamArduino.h"
-#elif defined(ESP32)
-// network support with ESP32 API
-#include "AudioHttp/URLStreamESP32.h"
 #endif
 
 
