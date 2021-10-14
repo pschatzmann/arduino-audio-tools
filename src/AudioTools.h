@@ -25,22 +25,6 @@
 #include "AudioTools/AudioPlayer.h"
 #include "AudioCodecs/CodecWAV.h"
 
-/**
- * ------------------------------------------------------------------------- 
- * @brief Network Support
- * 
- */
-
-#ifdef USE_URL_ARDUINO
-// Arduino network support (incl ESP32)
-#include "AudioHttp/AudioServer.h"
-#include "AudioHttp/URLStreamArduino.h"
-#elif defined(ESP32)
-// network support with ESP32 API
-#include "AudioHttp/AudioServer.h"
-#include "AudioHttp/URLStreamESP32.h"
-#endif
-
 
 /**
  * ------------------------------------------------------------------------- 

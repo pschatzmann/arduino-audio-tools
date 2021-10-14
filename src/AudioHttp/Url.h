@@ -53,6 +53,7 @@ class Url {
         const char* protocol() {return protocolStr.c_str();}
         const char* urlRoot() {return urlRootStr.c_str();} // prefix w/o path -> https://host:port
         int port() {return portInt;}
+        bool isSecure() { return portInt==443; }
 
         void setUrl(const char* url){
             LOGD("setUrl %s",url);
