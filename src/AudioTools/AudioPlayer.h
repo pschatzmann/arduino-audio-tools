@@ -39,6 +39,11 @@ class AudioSource {
         /// Returns next audio stream
         virtual Stream* nextStream(int offset) = 0;
 
+        /// Provides the timeout which is triggering to move to the next stream
+        virtual int timeoutMs() {
+            return 500;
+        }
+
 };
 
 /**
@@ -214,11 +219,12 @@ class AudioSourceSdFat : public AudioSource {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioSourceURL : public AudioSource{
+class AudioSourceURL : public AudioSource {
     public:
-        AudioSourceURL(URLStream &urlSstream, const char *urlArray[], int arraySize=0, int startPos=0) {
+        AudioSourceURL(URLStream &urlSstream, const char *urlArray[],const char* mime, int arraySize=0, int startPos=0) {
 	 		LOGD(LOG_METHOD);
             this->actual_stream = &urlSstream;
+            this->mime = mime;
             this->urlArray = urlArray;
             this->max = arraySize;
             this->startPos = startPos;
@@ -244,25 +250,34 @@ class AudioSourceURL : public AudioSource{
         /// Opens the next url from the array
         Stream* nextStream(int offset){
             LOGI("nextStream: %s", urlArray[pos]);
-            actual_stream->begin(urlArray[pos]);
+            actual_stream->begin(urlArray[pos], mime);
             pos += offset;
             if (pos>=max){
                 pos = 0;
             } else if (pos<0){
                 pos = max -1;
             }
+
             return actual_stream;
         }
 
-    protected:
+        void setTimeoutMs(int millisec){
+            timeout = millisec;   
+        }
 
+        int timeoutMs() {
+            return timeout;
+        }
+
+    protected:
         URLStream *actual_stream;
         const char **urlArray;
         int pos;
         int max;
         int startPos;
-        const char* network;
-        const char* password;
+        const char *mime=nullptr;
+        int timeout = 60000;
+
 };
 
 #endif
@@ -380,7 +395,14 @@ class AudioPlayer: public AudioBaseInfoDependent {
             if (active){
     	 		LOGD(LOG_METHOD);
                 // handle sound
-                if (!copier.copy(scaler)){
+                if (copier.copy(scaler) || timeout==0){
+                    // reset timeout
+                    timeout = millis() + source->timeoutMs();
+                }
+
+                // move to next stream after timeout
+                if (millis()>timeout){
+        	 		LOGI("-> timeout");
                     // open next stream
                     input_stream = nextStream(+1);
                     if (input_stream!=nullptr){
@@ -413,6 +435,7 @@ class AudioPlayer: public AudioBaseInfoDependent {
         StreamCopy copier; // copies sound into i2s
         ConverterScaler<int16_t> scaler; // volume control
         AudioBaseInfoDependent *audioInfoTarget=nullptr;
+        uint32_t timeout = 0;
 
 
         /// Callback implementation which writes to metadata

@@ -33,6 +33,9 @@ void callbackPrintMetaData(MetaDataType type, const char* str, int len){
 
 
 void setup() {
+  Serial.begin(115200);
+  AudioLogger::instance().begin(Serial, AudioLogger::Debug);
+
   // setup output
   I2SConfig cfg = i2s.defaultConfig(TX_MODE);
   i2s.begin(cfg);
