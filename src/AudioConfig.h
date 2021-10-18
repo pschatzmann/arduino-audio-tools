@@ -127,7 +127,7 @@
 #define USE_I2S
 #define USE_DELTASIGMA
 #define USE_PWM
-#define USE_SDFAT
+//#define USE_SDFAT
 
 #define PWM_START_PIN 6
 #define PIN_I2S_BCK 2
@@ -146,7 +146,7 @@
 #define USE_I2S
 #define USE_DELTASIGMA
 #define USE_PWM
-#define USE_SDFAT
+//#define USE_SDFAT
 
 #define PWM_START_PIN 6
 #define PIN_I2S_BCK 1
@@ -162,7 +162,7 @@
 #ifdef __AVR__
 #define USE_DELTASIGMA
 #define USE_PWM
-#define USE_SDFAT
+//#define USE_SDFAT
 
 #define PWM_START_PIN 6
 #define PIN_CS CS
@@ -173,7 +173,7 @@
 #define USE_I2S
 #define USE_DELTASIGMA
 #define USE_PWM
-#define USE_SDFAT
+//#define USE_SDFAT
 
 #define PWM_START_PIN 6
 #define PIN_I2S_BCK 1
