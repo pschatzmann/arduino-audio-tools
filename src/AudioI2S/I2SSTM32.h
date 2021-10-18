@@ -90,10 +90,13 @@ class I2SBase {
     uint32_t getMode(I2SConfig &cfg){
       uint32_t result;
       switch(cfg.i2s_mode) {
-        case I2S_PHILIPS_MODE:
+          case I2S_PHILIPS_MODE:
           return I2S_STANDARD_PHILIPS;
+        case I2S_STD_MODE:
+        case I2S_LSB_MODE:
         case I2S_RIGHT_JUSTIFIED_MODE:
           return I2S_STANDARD_MSB;
+        case I2S_MSB_MODE:
         case I2S_LEFT_JUSTIFIED_MODE:
           return I2S_STANDARD_LSB;
       }
