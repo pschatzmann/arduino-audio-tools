@@ -1,6 +1,7 @@
 #pragma once
 
 #ifdef ARDUINO_ARCH_RP2040
+#include "AudioI2S/I2SConfig.h"
 #include <I2S.h>
 
 namespace audio_tools {

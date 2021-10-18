@@ -74,7 +74,7 @@
 #define USE_ESP8266_AUDIO
 #define USE_I2S
 #define USE_DELTASIGMA
-#define USE_SDFAT
+//#define USE_SDFAT
 #define USE_AUDIO_SERVER
 
 #define PWM_FREQENCY 30000

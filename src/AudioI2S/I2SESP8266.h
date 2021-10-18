@@ -2,6 +2,7 @@
 
 #ifdef ESP8266
 #include "AudioTools/AudioLogger.h"
+#include "AudioI2S/I2SConfig.h"
 #include <I2S.h>
 
 namespace audio_tools {

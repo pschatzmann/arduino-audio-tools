@@ -1,6 +1,7 @@
 #pragma once
 
 #ifdef SPECIFIC_PROCESSOR_ARCHITECTURE
+#include "AudioI2S/I2SConfig.h"
 
 namespace audio_tools {
 

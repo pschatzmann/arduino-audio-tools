@@ -1,6 +1,7 @@
 #pragma once
 
 #ifdef __SAMD21G18A__
+#include "AudioI2S/I2SConfig.h"
 
 namespace audio_tools {
 

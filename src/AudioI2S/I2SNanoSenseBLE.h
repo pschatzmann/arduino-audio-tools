@@ -6,6 +6,7 @@
 #include "AudioTools/AudioTypes.h"
 #include "AudioTools/Buffers.h"
 #include "AudioTools/AudioLogger.h"
+#include "AudioI2S/I2SConfig.h"
 
 namespace audio_tools {
 
