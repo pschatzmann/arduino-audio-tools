@@ -25,6 +25,11 @@ void setup(){
 
   // setup i2s
   auto config = i2s.defaultConfig(TX_MODE);
+  // you could define e.g your pins and change other settings
+  //config.pin_ws = 10;
+  //config.pin_bck = 11;
+  //config.pin_data = 12;
+  //config.mode = I2S_STD_MODE;
   i2s.begin(config);
 
   // setup I2S based on sampling rate provided by decoder
