@@ -209,10 +209,17 @@ class I2SBase {
     // determines the i2s_comm_format_t - by default we use I2S_COMM_FORMAT_STAND_I2S
     i2s_comm_format_t toCommFormat(I2SMode mode){
         switch(mode){
+          case I2S_PHILIPS_MODE:
+          case I2S_STD_MODE:
+          case I2S_LSB_MODE:
           case I2S_RIGHT_JUSTIFIED_MODE:
             return (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_I2S;
-          default:
+          case I2S_MSB_MODE:
+          case I2S_LEFT_JUSTIFIED_MODE:
             return (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_MSB;
+          default:
+            LOGE("unsupported mode");
+            return (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_I2S;
         }
     }
 
