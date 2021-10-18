@@ -132,7 +132,6 @@ class I2SStream : public BufferedStream, public AudioBaseInfoDependent  {
 
 };
 
-
 }
 
 #endif

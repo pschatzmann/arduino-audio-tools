@@ -1,6 +1,7 @@
 #pragma once
 
 #ifdef STM32_CORE_VERSION
+#include "AudioI2S/I2SConfig.h"
 
 namespace audio_tools {
 
