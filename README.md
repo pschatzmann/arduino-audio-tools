@@ -79,32 +79,7 @@ void loop(){
 
 ### Examples
 
-Further examples can be found in the [wiki](https://github.com/pschatzmann/arduino-audio-tools/wiki/Examples)!
-
-
-### Audio Player
-
-It is pretty simple to build a simple audio player with the help of the Stream API. E.g. a SD file is a sublass of an Arduino Stream, so all you need to do is to copy from the file stream to the desired output strem. Finally you need to add some logic which handles the end of file to automatically process the next file and maybe a status flag to halt and contine the processing. In addition it adds only a little bit of additional complexity to add volume control and meta data support.
-
-In order to simplify things, I decided to provide this functionality as well and to prove the point: The [AudioPlayer class](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_audio_player.html) took only 120 lines of code to implement!
-
-The AudioPlayer supports 
-
-- __multiple audio data sources__ (AudioSourceSdFat, AudioSourceURL, AudioSourceCallback)
-- __different Output__ Scenarios (I2S, PWM, A2DP etc). Just pass the desired output stream object to the constructor.
-- __different Decoders__ for MP3, AAC, WAV. Just pass the desired decoder object to the constructor.
-- __Volume Control__ (by calling player.setVolume())
-- __Stopping and Resuming__ the processing (by calling player.stop() and player.play())
-- __Navigation__: You can move to the next file by calling player.next();
-- __Metadata__
-- __multiple processor architectures__
-
-Here are a couple of examples that demonstrate how to use the AudioPlayer class:
-
-- [A Simple SdFat Audio Player](examples/examples-player/player-sd-i2s)
-- [A Simple Network Streaming Audio Player](examples/examples-player/player-url-i2s)
-- [A Simple Callback Audio Player](examples/examples-player/player-callback-i2s)
-
+Further examples can be found in the [Wiki](https://github.com/pschatzmann/arduino-audio-tools/wiki/Examples). The library also provides a versatile [AudioPlayer](https://github.com/pschatzmann/arduino-audio-tools/wiki/The-Audio-Player-Class).
 
 ### Logging
 
@@ -140,6 +115,7 @@ Dependent on the example you might need to install some of the following librari
 - [Mozzi](https://github.com/pschatzmann/Mozzi) A sound synthesis library for Arduino
 - [ESP8266Audio](https://github.com/earlephilhower/ESP8266Audio) to play different audio Formats
 
+After installing a library, you might need to activate it's usage in the ```AudioConfig.h``` file!
 
 ### Documentation
 
@@ -148,7 +124,7 @@ Dependent on the example you might need to install some of the following librari
 - You also might find further information in [one of my Blogs](https://www.pschatzmann.ch/home/category/machine-sound/)
 
 
-### Installation
+### Installation in Arduino
 
 You can download the library as zip and call include Library -> zip library. Or you can git clone this project into the Arduino libraries folder e.g. with
 
@@ -157,3 +133,5 @@ cd  ~/Documents/Arduino/libraries
 git clone pschatzmann/arduino-audio-tools.git
 
 ```
+
+If you want to use the library in PlatformIO, you can find a [detailed description in the Wiki](https://github.com/pschatzmann/arduino-audio-tools/wiki/Working-with-PlatformIO).
