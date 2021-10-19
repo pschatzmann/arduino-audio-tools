@@ -36,7 +36,7 @@ void setup() {
   AudioLogger::instance().begin(Serial, AudioLogger::Debug);
 
   // setup output
-  I2SConfig cfg = i2s.defaultConfig(TX_MODE);
+  auto cfg = i2s.defaultConfig(TX_MODE);
   i2s.begin(cfg);
 
   // setup player

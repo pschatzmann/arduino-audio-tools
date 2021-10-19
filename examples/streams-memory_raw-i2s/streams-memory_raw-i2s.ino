@@ -24,7 +24,7 @@ StreamCopyT<int16_t> copier(i2s, music); // copies sound into i2s
 void setup(){
     Serial.begin(115200);
 
-    I2SConfig config = i2s.defaultConfig(TX_MODE);
+    auto config = i2s.defaultConfig(TX_MODE);
     config.sample_rate = sample_rate;
     config.channels = channels;
     config.bits_per_sample = 16;

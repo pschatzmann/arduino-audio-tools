@@ -32,7 +32,7 @@ void setup(void) {
 
   // start i2s input with default configuration
   Serial.println("starting I2S...");
-  I2SConfig config = i2sStream.defaultConfig(RX_MODE);
+  auto config = i2sStream.defaultConfig(RX_MODE);
   config.sample_rate = 44100;
   config.channels = 2;
   config.bits_per_sample = 16;

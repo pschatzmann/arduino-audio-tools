@@ -3,8 +3,7 @@
 
 using namespace audio_tools;  
 
-I2S<int16_t> i2s;               // I2S output destination
-I2SStream i2s_stream(i2s);      // WAVDecoder neads I2S Output as stream
+I2SStream i2s;                  // WAVDecoder neads I2S Output as stream
 WAVDecoder decoder(i2s_stream); // Decoder writing to I2S Stream 
 URLStream music;                // Music Stream
 const size_t buffer_size = 512;
@@ -22,7 +21,7 @@ void setup(){
     }
 
     // start I2S with the default configuration
-    I2SConfig<int16_t> config = i2s.defaultConfig(TX_MODE);
+    auto config = i2s.defaultConfig(TX_MODE);
     i2s.begin(config);
 
     // open music stream

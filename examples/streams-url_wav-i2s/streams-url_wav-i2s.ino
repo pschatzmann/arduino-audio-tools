@@ -25,7 +25,7 @@ void setup(){
   AudioLogger::instance().begin(Serial, AudioLogger::Debug);  
 
   // setup i2s
-  I2SConfig config = i2s.defaultConfig(TX_MODE);
+  auto config = i2s.defaultConfig(TX_MODE);
   config.sample_rate = 16000; 
   config.bits_per_sample = 32;
   config.channels = 1;

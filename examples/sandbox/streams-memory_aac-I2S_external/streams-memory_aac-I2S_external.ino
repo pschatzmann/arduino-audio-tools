@@ -26,7 +26,7 @@ StreamCopy copier(dec, in); // copy in to out
 // Arduino Setup
 void setup(void) {
   Serial.begin(115200);
-  I2SConfig config = i2s.defaultConfig(TX_MODE);
+  auto config = i2s.defaultConfig(TX_MODE);
   i2s.begin(config);
 
   dec.setNotifyAudioChange(i2s);
