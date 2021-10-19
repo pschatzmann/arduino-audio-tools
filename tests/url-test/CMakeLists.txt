@@ -14,7 +14,7 @@ include(FetchContent)
 # build sketch as executable
 add_executable (url-test url-test.cpp)
 # use main() from arduino_emulator
-target_compile_definitions(url-test PUBLIC -DARDUINO -DEXIT_ON_STOP -DIGNORE_DECODERS cd u)
+target_compile_definitions(url-test PUBLIC -DARDUINO -DEXIT_ON_STOP )
 
 # OS/X might need this setting for core audio
 #target_compile_definitions(portaudio PUBLIC -DPA_USE_COREAUDIO=1)

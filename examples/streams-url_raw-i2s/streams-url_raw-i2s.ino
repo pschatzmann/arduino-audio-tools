@@ -11,10 +11,9 @@
 
 using namespace audio_tools;  
 
-URLStream music;          // Music Stream
-I2S<int16_t> i2s;         // I2S 
-I2SStream i2s_stream(i2s);// I2S as Stream
-StreamCopy copier(i2s_stream, music, 1024); // copy music to i2s_stream
+URLStream music;    // Music Stream
+I2SStream i2s;// I2S as Stream
+StreamCopy copier(i2s, music, 1024); // copy music to i2s
 
 
 // Arduino Setup
@@ -33,7 +32,7 @@ void setup(void) {
 
   // start I2S with external DAC
   Serial.println("\nstarting I2S...");
-  I2SConfig cfg = i2s.defaultConfig(TX_MODE);
+  auto cfg = i2s.defaultConfig(TX_MODE);
   cfg.sample_rate = 8000;
   i2s.begin(cfg);
 }
