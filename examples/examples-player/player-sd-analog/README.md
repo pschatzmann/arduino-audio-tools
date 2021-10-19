@@ -1,6 +1,6 @@
 # A Simple SdFat Audio Player
 
-It is pretty simple to build a simple audio player with the help of the Stream API. A SD file is a sublass of an Arduino Stream, so all you need to do is to copy from the file to the desired output strem. Finally you need to add some logic which handles the end of file to automatically process the next file and maybe a status flag to halt and contine the processing. In addition it adds only a little bit of additional complexity to add volume control and meta data support.
+It was pretty simple to build a simple audio player with the help of the Stream API. A SD file is a sublass of an Arduino Stream, so all you need to do is to copy from the file to the desired output strem. Finally you need to add some logic which handles the end of file to automatically process the next file and maybe a status flag to halt and contine the processing. In addition it adds only a little bit of additional complexity to add volume control and meta data support.
 
 In order to simplify things, I decided to provide this functionality as well and to prove the point: The AudioPlayer class took only 120 lines of code to implement!
 
