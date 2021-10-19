@@ -33,7 +33,7 @@ void setup(){
   File audioFile = SD.open("/music.mp3");
 
   // setup i2s
-  I2SConfig config = i2s.defaultConfig(TX_MODE);
+  auto config = i2s.defaultConfig(TX_MODE);
   i2s.begin(config);
 
   // setup I2S based on sampling rate provided by decoder

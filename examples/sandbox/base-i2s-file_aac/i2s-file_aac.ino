@@ -45,7 +45,7 @@ void setup() {
     Serial.begin(115200);
 
     // setup I2S
-    I2SConfig config = i2s.defaultConfig(RX);
+    auto config = i2s.defaultConfig(RX);
     i2s.begin(config);
 
     // Setup SD and open file

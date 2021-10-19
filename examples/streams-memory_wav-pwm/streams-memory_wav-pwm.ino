@@ -22,12 +22,13 @@ PWMAudioStream pwm;          // PWM output
 WAVDecoder decoder(pwm);        // decode wav to pcm and send it to printer
 AudioOutputStream out(decoder); // output to decoder
 StreamCopy copier(out, wav);    // copy in to out
-PWMConfig config = pwm.defaultConfig();
 
 void setup(){
   Serial.begin(115200);
   while(!Serial);
   AudioLogger::instance().begin(Serial, AudioLogger::Debug);  
+
+  auto config = pwm.defaultConfig();
 
   // setup pwm output
   config.channels = 1;

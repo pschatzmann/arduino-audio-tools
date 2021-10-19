@@ -25,7 +25,7 @@ void setup(void) {
 
   // start the bluetooth
   Serial.println("starting I2S...");
-  I2SConfig config = out.defaultConfig(TX_MODE);
+  auto config = out.defaultConfig(TX_MODE);
   config.sample_rate = sample_rate; 
   config.channels = channels;
   config.bits_per_sample = 16;
