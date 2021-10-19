@@ -24,7 +24,7 @@ I am just using the default pins defined by the framework. However I could chang
 | WS      |  WS (GPIO15)
 | SCK     |  BCK (GPIO14)
 | FMT     |  GND 
-| XSMT     | GPIO23 
+| XSMT    | +3V 
 
 
 - DEMP - De-emphasis control for 44.1kHz sampling rate(1): Off (Low) / On (High)
