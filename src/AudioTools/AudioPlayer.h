@@ -275,8 +275,8 @@ class AudioSourceURL : public AudioSource {
     protected:
         URLStream *actual_stream=nullptr;
         const char **urlArray;
-        int pos;
-        int max;
+        int pos=0;
+        int max=0;
         const char *mime=nullptr;
         int timeout = 60000;
 
@@ -433,7 +433,7 @@ class AudioPlayer: public AudioBaseInfoDependent {
         AudioSource *source = nullptr;
         AudioDecoder *decoder = nullptr;
         EncodedAudioStream *out = nullptr; // Decoding stream
-        Stream* input_stream;
+        Stream* input_stream = nullptr;
         MetaDataID3 meta_out;
         bool meta_active = false;
         StreamCopy copier; // copies sound into i2s
@@ -450,12 +450,6 @@ class AudioPlayer: public AudioBaseInfoDependent {
                 p->meta_out.write((const uint8_t*)data, len);
             }
         }
-
-        // /// Reset actual stream and move to root
-        // virtual void onStart() {
-    	//  	LOGD(LOG_METHOD);
-        //     source->begin();
-        // };
 
         /// Returns next stream
         virtual Stream* nextStream(int offset) {
