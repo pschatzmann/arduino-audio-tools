@@ -55,15 +55,17 @@
 
 /**
  * ------------------------------------------------------------------------- 
- * @brief Activate decoders by default
+ * @brief Activate decoders - only after installing them !
  */
-#ifndef IGNORE_DECODERS
-#define USE_DECODERS
-#endif
+
+//#define USE_HELIX
+//#define USE_FDK
+//#define USE_LAME
+//#define USE_MAD
+
 /**
  * ------------------------------------------------------------------------- 
  * @brief Platform specific Settings
- * 
  */
 //----------------
 #ifdef ESP32

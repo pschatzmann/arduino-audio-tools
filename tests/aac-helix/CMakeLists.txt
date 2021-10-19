@@ -22,7 +22,7 @@ endif()
 add_executable (aac-helix aac-helix.cpp)
 
 # use main() from arduino_emulator
-target_compile_definitions(aac-helix PUBLIC -DARDUINO -DEXIT_ON_STOP -DIGNORE_DECODERS -DUSE_HELIX)
+target_compile_definitions(aac-helix PUBLIC -DARDUINO -DEXIT_ON_STOP -DUSE_HELIX)
 
 # OS/X might need this setting for core audio
 #target_compile_definitions(portaudio PUBLIC -DPA_USE_COREAUDIO=1)
