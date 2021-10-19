@@ -28,9 +28,6 @@
  * ------------------------------------------------------------------------- 
  * @brief Common Default Settings that can usually be changed in the API
  */
-#ifndef LED_BUILTIN
-#define LED_BUILTIN 13 // pin number is specific to your esp32 board
-#endif
 
 #define DEFAULT_BUFFER_SIZE 1024
 #define DEFAULT_SAMPLE_RATE 44100
@@ -41,7 +38,6 @@
 #define I2S_BUFFER_COUNT 5
 #define A2DP_BUFFER_SIZE 512
 #define A2DP_BUFFER_COUNT 50
-#define DEFAUT_ADC_PIN 34
 
 
 /**
@@ -63,17 +59,22 @@
 //#define USE_LAME
 //#define USE_MAD
 
+
 /**
  * ------------------------------------------------------------------------- 
  * @brief Activate Other Tools
  */
+
 #define USE_STK
+//#define USE_SDFAT
+//#define USE_DELTASIGMA 
+
 
 /**
  * ------------------------------------------------------------------------- 
  * @brief Platform specific Settings
  */
-//----------------
+
 #ifdef ESP32
 #include "esp32-hal-log.h"
 #define USE_A2DP
@@ -81,8 +82,6 @@
 #define USE_URL_ARDUINO
 #define USE_ESP8266_AUDIO
 #define USE_I2S
-#define USE_DELTASIGMA
-//#define USE_SDFAT
 #define USE_AUDIO_SERVER
 
 #define PWM_FREQENCY 30000
@@ -99,12 +98,16 @@
 #define PIN_ADC1 34 
 #define PIN_ADC2 35
 
-// support for old idf releases
-#if ESP_IDF_VERSION_MAJOR < 4 && !defined(I2S_COMM_FORMAT_STAND_I2S)
-#define I2S_COMM_FORMAT_STAND_I2S (I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_LSB)
-#define I2S_COMM_FORMAT_STAND_MSB (I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_MSB)
+// Default LED
+#ifndef LED_BUILTIN
+# define LED_BUILTIN 13 // pin number is specific to your esp32 board
 #endif
 
+// support for old idf releases
+#if ESP_IDF_VERSION_MAJOR < 4 && !defined(I2S_COMM_FORMAT_STAND_I2S)
+# define I2S_COMM_FORMAT_STAND_I2S (I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_LSB)
+# define I2S_COMM_FORMAT_STAND_MSB (I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_MSB)
+#endif
 
 #endif
 
@@ -114,7 +117,6 @@
 #define USE_URL_ARDUINO
 #define USE_ESP8266_AUDIO
 #define USE_I2S
-#define USE_DELTASIGMA
 #define USE_PWM
 #define USE_SDFAT
 #define USE_AUDIO_SERVER
@@ -133,9 +135,7 @@
 //----------------
 #ifdef ARDUINO_ARDUINO_NANO33BLE
 #define USE_I2S
-#define USE_DELTASIGMA
 #define USE_PWM
-//#define USE_SDFAT
 
 #define PWM_START_PIN 6
 #define PIN_I2S_BCK 2
@@ -152,9 +152,7 @@
 #ifdef ARDUINO_ARCH_RP2040
 #define USE_ESP8266_AUDIO
 #define USE_I2S
-#define USE_DELTASIGMA
 #define USE_PWM
-//#define USE_SDFAT
 
 #define PWM_START_PIN 6
 #define PIN_I2S_BCK 1
@@ -168,9 +166,7 @@
 
 //----------------
 #ifdef __AVR__
-#define USE_DELTASIGMA
 #define USE_PWM
-//#define USE_SDFAT
 
 #define PWM_START_PIN 6
 #define PIN_CS CS
@@ -179,9 +175,7 @@
 //----------------
 #ifdef STM32_CORE_VERSION
 #define USE_I2S
-#define USE_DELTASIGMA
 #define USE_PWM
-//#define USE_SDFAT
 
 #define PWM_START_PIN 6
 #define PIN_I2S_BCK 1
@@ -194,6 +188,13 @@
 #endif
 
 
+//----------------
 #if defined(__linux__) || defined(_WIN32) || defined(__APPLE__)
+#define USE_URL_ARDUINO
+#define IS_DESKTOP
+#endif
+
+
+#ifdef IS_DESKTOP
 #define USE_URL_ARDUINO
 #endif

@@ -18,7 +18,7 @@ const char *wifi = "wifi";
 const char *password = "password";
 
 URLStream urlStream(wifi, password);
-AudioSourceURL source(urlStream, urls, 5, 0);
+AudioSourceURL source(urlStream, urls,"audio/mp3", 5, 0);
 I2SStream i2s;
 MP3DecoderHelix decoder;
 AudioPlayer player(source, i2s, decoder);
