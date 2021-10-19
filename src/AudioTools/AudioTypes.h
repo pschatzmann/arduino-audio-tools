@@ -48,6 +48,13 @@ class AudioBaseInfoDependent {
       }
 };
 
+/**
+ * @brief Supports the subscription to audio change notifications
+ */
+class AudioBaseInfoSource {
+    public:
+      virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi) = 0;
+};
 
 enum RxTxMode  { TX_MODE, RX_MODE };
 
@@ -76,7 +83,7 @@ class AudioWriter {
  * @brief Docoding of encoded audio into PCM data
  * 
  */
-class AudioDecoder : public AudioWriter {
+class AudioDecoder : public AudioWriter, public  AudioBaseInfoSource {
   public: 
       AudioDecoder() = default;
       virtual ~AudioDecoder() = default;
