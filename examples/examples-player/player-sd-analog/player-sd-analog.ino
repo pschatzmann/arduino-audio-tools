@@ -1,5 +1,6 @@
 // set this in AudioConfig.h or here after installing https://github.com/pschatzmann/arduino-libhelix.git
 #define USE_HELIX 
+#define USE_SDFAT
 
 #include "AudioTools.h"
 #include "AudioCodecs/CodecMP3Helix.h"
@@ -23,7 +24,7 @@ void printMetaData(MetaDataType type, const char* str, int len){
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Debug);
+  AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
   // setup output
   auto cfg = out.defaultConfig();
