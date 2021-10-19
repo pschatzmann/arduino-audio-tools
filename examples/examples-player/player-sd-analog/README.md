@@ -33,6 +33,25 @@ Here is the information how to wire the SD card to the ESP32
 ![SD](https://www.pschatzmann.ch/wp-content/uploads/2021/04/sd-module.jpeg)
 
 
+### Output Device: Piezo Electric Element
+
+To test the output I am using piezo electric elements
+
+![DAC](https://pschatzmann.github.io/arduino-audio-tools/resources/piezo.jpeg)
+
+It should also be possible to connect a headphone to the output pins.
+
+
+| PIEZO Left  |  ESP32       
+| ------------| --------------
+| +           |  GPIO25  
+| -           |  GND        
+
+| PIEZO2 Rigt |  ESP32       
+| ------------| --------------
+| +           |  GPIO26  
+| -           |  GND        
+
 
 ## Dependencies
 
