@@ -29,9 +29,9 @@ struct CallbackAudioStreamInfo : public AudioBaseInfo {
  * @copyright GPLv3
  * 
  */
-class CallbackAudioStream : public BufferedStream {
+class CallbackAudioStream : public BufferedStream, public AudioBaseInfoSource, public AudioBaseInfoDependent {
     public:
-        CallbackAudioStream():BufferedStream(256) {
+        CallbackAudioStream():BufferedStream(80) {
         }
 
         ~CallbackAudioStream(){
@@ -40,9 +40,34 @@ class CallbackAudioStream : public BufferedStream {
             if (frame!=nullptr) delete[] frame;
         }
 
+        /// Provides the default configuration
         CallbackAudioStreamInfo defaultConfig() {
             CallbackAudioStreamInfo def;
             return def;
+        }
+
+        /// updates the audio information 
+        virtual void setAudioInfo(AudioBaseInfo info){
+            if (cfg.sample_rate != info.sample_rate
+            || cfg.channels != info.channels
+            || cfg.bits_per_sample != info.bits_per_sample){
+                bool do_restart = active;
+                if (do_restart) end();
+                cfg.sample_rate = info.sample_rate;
+                cfg.channels = info.channels;
+                cfg.bits_per_sample = info.bits_per_sample;
+                if (do_restart) begin(cfg, frameCallback);
+            }
+        }
+
+        /// Defines the target that needs to be notified
+        void setNotifyAudioChange(AudioBaseInfoDependent &bi) {
+            notifyTarget = &bi;
+        }
+
+        /// Provides the current audio information
+        CallbackAudioStreamInfo audioInfo(){
+            return cfg;
         }
 
         void begin(CallbackAudioStreamInfo cfg, uint16_t (*frameCB)(uint8_t *data, uint16_t len)){
@@ -53,19 +78,45 @@ class CallbackAudioStream : public BufferedStream {
                 frame = new uint8_t[frameSize];
                 timer = new TimerAlarmRepeating(cfg.secure_timer, cfg.timer_id);
                 buffer = new RingBuffer<uint8_t>(cfg.buffer_size);
-                uint32_t time = AudioUtils::toTimeUs(cfg.sample_rate);
+                time = AudioUtils::toTimeUs(cfg.sample_rate);
                 timer->setCallbackParameter(this);
                 timer->begin(timerCallback, time, TimeUnit::US);
+            }
+            if (notifyTarget!=nullptr){
+                notifyTarget->setAudioInfo(cfg);
             }
             active = true;
         }
 
+        /// Restart the processing
+        void begin() {
+            if (this->frameCallback!=nullptr){
+                if (cfg.use_timer){
+                    timer->begin(timerCallback, time, TimeUnit::US);
+                } 
+                active = true;
+            }
+        }
+
+        /// Stops the processing
         void end() {
             if (cfg.use_timer){
                 timer->end();
             }
             active = false;
         }
+
+    protected:
+        CallbackAudioStreamInfo cfg;
+        AudioBaseInfoDependent *notifyTarget=nullptr;
+        bool active=false;
+        uint16_t (*frameCallback)(uint8_t *data, uint16_t len);
+        // below only relevant with timer
+        TimerAlarmRepeating *timer = nullptr;
+        RingBuffer<uint8_t> *buffer = nullptr;
+        uint8_t *frame=nullptr;
+        uint16_t frameSize=0;
+        uint32_t time=0;
 
         // relevant only if use_timer == true
         static void timerCallback(void* obj){
@@ -84,16 +135,6 @@ class CallbackAudioStream : public BufferedStream {
                 }
             }
         }
-
-    protected:
-        CallbackAudioStreamInfo cfg;
-        bool active=false;
-        uint16_t (*frameCallback)(uint8_t *data, uint16_t len);
-        // below only relevant with timer
-        TimerAlarmRepeating *timer = nullptr;
-        RingBuffer<uint8_t> *buffer = nullptr;
-        uint8_t *frame=nullptr;
-        uint16_t frameSize;
 
         // used for audio sink
         virtual size_t writeExt(const uint8_t* data, size_t len) {
