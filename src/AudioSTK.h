@@ -1,4 +1,8 @@
 #pragma once
+
+#include "AudioConfig.h"
+#ifdef "USE_STK"
+
 #include "Arduino.h"
 #include "freertos/FreeRTOS.h"
 #include "Stk.h"
@@ -81,3 +85,5 @@ class STKStream : public BufferedStream<int16_t> {
 
 
 }
+
+#endif
