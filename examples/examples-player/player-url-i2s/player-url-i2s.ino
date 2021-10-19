@@ -3,7 +3,6 @@
 
 #include "AudioTools.h"
 #include "AudioCodecs/CodecMP3Helix.h"
-#include "WiFi.h"
 
 using namespace audio_tools;  
 
@@ -22,6 +21,7 @@ AudioSourceURL source(urlStream, urls,"audio/mp3", 5, 0);
 I2SStream i2s;
 MP3DecoderHelix decoder;
 AudioPlayer player(source, i2s, decoder);
+const int volumePin = 15;
 
 
 void printMetaData(MetaDataType type, const char* str, int len){
@@ -44,6 +44,14 @@ void setup() {
   player.begin();
 }
 
+void updateVolume() {
+  // Reading potentiometer value (range is 0 - 4095)
+  float vol = static_cast<float>(analogRead(volumePin)) 
+  // min in 0 - max is 1.0
+  player.setVolume(vol/4095.0;);
+}
+
 void loop() {
+  //updateVolume();
   player.copy();
 }
