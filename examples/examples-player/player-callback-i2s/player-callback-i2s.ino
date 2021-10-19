@@ -1,6 +1,7 @@
 // set this in AudioConfig.h or here after installing https://github.com/pschatzmann/arduino-libhelix.git
 #define USE_HELIX 
 
+#include "Arduino.h"
 #include "AudioTools.h"
 #include "AudioCodecs/CodecMP3Helix.h"
 #include <SPI.h>
@@ -8,8 +9,14 @@
 
 using namespace audio_tools;  
 
-const int chipSelect=10;
-AudioSourceCallback source(callbackInit, callbackStream);
+// forward declarations
+void callbackInit();
+Stream* callbackStream();
+
+
+// data
+const int chipSelect=5;
+AudioSourceCallback source(callbackStream,callbackInit);
 I2SStream i2s;
 MP3DecoderHelix decoder;
 AudioPlayer player(source, i2s, decoder);
@@ -21,9 +28,10 @@ void callbackInit() {
   audioFile = SD.open("/");
 }
 
-void Stream* callbackStream() {
-  audioFile.close();
+Stream* callbackStream() {
+  auto lastFile = audioFile;
   audioFile = audioFile.openNextFile();
+  lastFile.close();
   return &audioFile;
 }
 
@@ -37,7 +45,7 @@ void callbackPrintMetaData(MetaDataType type, const char* str, int len){
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Debug);
+  AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
   // setup output
   I2SConfig cfg = i2s.defaultConfig(TX_MODE);
