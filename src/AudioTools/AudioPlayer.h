@@ -227,37 +227,40 @@ class AudioSourceURL : public AudioSource {
             this->mime = mime;
             this->urlArray = urlArray;
             this->max = arraySize;
-            this->startPos = startPos;
+            this->pos = startPos-1;
         }
 
         /// Setup Wifi URL
         virtual void begin() {
 	 		LOGD(LOG_METHOD);
-            setPos(startPos);
-            nextStream(+1);
+            setPos(-1);
         }
 
         /// Defines the actual position
         void setPos(int newPos) {
             pos = newPos;
-            if (pos>=max){
-                pos = 0;
-            } else if (pos<0){
-                pos = max -1;
-            }
+            if (pos>=max || pos<0){
+                pos = -1;
+            } 
         }
 
         /// Opens the next url from the array
         Stream* nextStream(int offset){
-            LOGI("nextStream: %s", urlArray[pos]);
-            actual_stream->begin(urlArray[pos], mime);
             pos += offset;
-            if (pos>=max){
-                pos = 0;
-            } else if (pos<0){
-                pos = max -1;
+            if (pos<0){
+                pos=0;
             }
-
+            LOGI("nextStream: %s", urlArray[pos]);
+            if (offset!=0 || actual_stream==nullptr){
+                actual_stream->end();
+                actual_stream->begin(urlArray[pos], mime);
+                pos += offset;
+                if (pos>=max){
+                    pos = 0;
+                } else if (pos<0){
+                    pos = max -1;
+                }
+            }
             return actual_stream;
         }
 
@@ -270,11 +273,10 @@ class AudioSourceURL : public AudioSource {
         }
 
     protected:
-        URLStream *actual_stream;
+        URLStream *actual_stream=nullptr;
         const char **urlArray;
         int pos;
         int max;
-        int startPos;
         const char *mime=nullptr;
         int timeout = 60000;
 
@@ -317,13 +319,14 @@ class AudioPlayer: public AudioBaseInfoDependent {
             bool result = false;
             this->out->begin();
             // setup input
-            source->begin();
+            this->source->begin();
             // get first streem
-            input_stream = nextStream(+0);
+            input_stream = nextStream(1);
             if (input_stream!=nullptr) {
                 meta_out.begin();
                 copier.setCallbackOnWrite(onWrite, this);
                 copier.begin(*out, *input_stream);
+                timeout = millis() + source->timeoutMs();
                 active = isActive;
                 result = true;
             } else {
@@ -363,10 +366,11 @@ class AudioPlayer: public AudioBaseInfoDependent {
 
             input_stream = nextStream(+1);
             meta_out.begin();
-            copier.begin(*out, *input_stream);
 
             if (input_stream!=nullptr) {
+                copier.begin(*out, *input_stream);
                 active = true;
+                timeout = millis() + source->timeoutMs();
             }    
         }
 
@@ -402,7 +406,7 @@ class AudioPlayer: public AudioBaseInfoDependent {
 
                 // move to next stream after timeout
                 if (millis()>timeout){
-        	 		LOGI("-> timeout");
+        	 		LOGW("-> timeout");
                     // open next stream
                     input_stream = nextStream(+1);
                     if (input_stream!=nullptr){
@@ -447,11 +451,11 @@ class AudioPlayer: public AudioBaseInfoDependent {
             }
         }
 
-        /// Reset actual stream and move to root
-        virtual void onStart() {
-    	 	LOGD(LOG_METHOD);
-            source->begin();
-        };
+        // /// Reset actual stream and move to root
+        // virtual void onStart() {
+    	//  	LOGD(LOG_METHOD);
+        //     source->begin();
+        // };
 
         /// Returns next stream
         virtual Stream* nextStream(int offset) {
