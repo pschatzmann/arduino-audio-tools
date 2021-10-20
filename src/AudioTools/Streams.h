@@ -442,7 +442,7 @@ class HexDumpStream : public BufferedStream {
 
         virtual size_t writeExt(const uint8_t* data, size_t len) {   
             if (!active) return 0;
-            for (int j=0;j<len;j++){
+            for (size_t j=0;j<len;j++){
                 out_ptr->print(data[j], HEX);
                 out_ptr->print(" ");
                 pos++;

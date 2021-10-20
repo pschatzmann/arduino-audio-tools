@@ -1,7 +1,7 @@
 #pragma once
 
-#ifdef STM32_CORE_VERSION
-#include "AudioI2S/I2SConfig.h"
+#ifdef STM32
+#include "AudioI2S/I2sConfig.h"
 
 namespace audio_tools {
 
@@ -16,7 +16,7 @@ class I2SBase {
   public:
 
     /// Provides the default configuration
-    I2SConfig defaultConfig(RxTxMode mode) {
+    I2SConfig defaultConfig(RxTxMode mode = TX_MODE) {
         I2SConfig c(mode);
         return c;
     }
@@ -43,7 +43,6 @@ class I2SBase {
       if (HAL_I2S_Init(&i2s) != HAL_OK){
         LOGE("HAL_I2S_Init failed");
       }
-
     }
 
     /// stops the I2C and unistalls the driver
@@ -51,7 +50,6 @@ class I2SBase {
       if (HAL_I2S_DeInit(&i2s) != HAL_OK){
         LOGE("HAL_I2S_DeInit failed");
       }
-
     }
 
     /// provides the actual configuration

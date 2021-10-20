@@ -535,7 +535,7 @@ class Str {
         }
 
         virtual bool equalsIgnoreCase(const char* alt){
-            if (len != strlen(alt)){
+            if ((size_t)len != strlen(alt)){
                 return false;
             }
             for (int j=0;j<len;j++){
@@ -633,7 +633,7 @@ class Str {
             }
 
             // generate space padding
-            if ((widthp != 0)&&(widthp >= strlen(outstr))){
+            if ((widthp != 0)&&( (size_t)widthp >= strlen(outstr))){
                 int J=0;
                 J = widthp - strlen(outstr);
                 

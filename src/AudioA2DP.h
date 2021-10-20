@@ -8,8 +8,6 @@
 #pragma once
 
 #include "AudioConfig.h"
-
-// see AudioConfig.h
 #ifdef USE_A2DP
 
 #include "AudioTools.h"
