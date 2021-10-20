@@ -52,8 +52,8 @@ class TimerAlarmRepeatingRP2040 : public TimerAlarmRepeatingDef{
             return result;
         }
 
-        static bool staticCallback(repeating_timer *ptr) override {
-            TimerAlarmRepeating *self = (TimerAlarmRepeating *)ptr->user_data; 
+        static bool staticCallback(repeating_timer *ptr)  {
+            TimerAlarmRepeatingRP2040 *self = (TimerAlarmRepeatingRP2040 *)ptr->user_data; 
             self->instanceCallback(self);
             return true;
         }
