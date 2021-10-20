@@ -382,8 +382,11 @@ class AudioPlayer: public AudioBaseInfoDependent {
         /// sets the volume - values need to be between 0.0 and 1.0
         void setVolume(float volume){
             if (volume>=0 && volume<=1.0) {
-                LOGI("setVolume(%f)", volume);
-                scaler.setFactor(volume);
+                if (volume!=currentVolume){
+                    LOGI("setVolume(%f)", volume);
+                    scaler.setFactor(volume);
+                    currentVolume = volume;
+                }
             } else {
                 LOGE("setVolume value '%f' out of range (0.0 -1.0)", volume);
             }
@@ -440,6 +443,7 @@ class AudioPlayer: public AudioBaseInfoDependent {
         ConverterScaler<int16_t> scaler; // volume control
         AudioBaseInfoDependent *audioInfoTarget=nullptr;
         uint32_t timeout = 0;
+        float currentVolume=-1; // illegal value which will trigger an update
 
 
         /// Callback implementation which writes to metadata
