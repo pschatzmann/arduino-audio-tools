@@ -9,12 +9,11 @@
 
 #include "Arduino.h"
 #include "AudioTools.h"
-#include "BluetoothA2DPSource.h"
 
 using namespace audio_tools;  
 
 /**
- * @brief We use I2S as input and send the data to A2DP
+ * @brief We use I2S as input 
  * To test we use a INMP441 microphone. 
  */ 
 

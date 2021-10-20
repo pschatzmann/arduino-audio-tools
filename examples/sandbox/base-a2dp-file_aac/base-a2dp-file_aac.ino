@@ -1,3 +1,6 @@
+// Add this in your sketch or change the setting in AudioConfig.h
+#define USE_A2DP
+
 #include "Arduino.h"
 #include <SPI.h>
 #include <SD.h>
