@@ -77,8 +77,10 @@ class StreamCopyT {
                 if (onWrite!=nullptr) onWrite(onWriteObj, buffer, result);
                 // write data
                 result = write(bytes_read, delayCount);
+                LOGI("StreamCopy::copy %zu -> %zu -> %zu bytes - in %zu hops", bytes_to_read, bytes_read, result, delayCount);
+            } else {
+
             } 
-            LOGI("StreamCopy::copy %zu -> %zu -> %zu bytes - in %zu hops", bytes_to_read, bytes_read, result, delayCount);
             return result;
         }
 
@@ -111,14 +113,21 @@ class StreamCopyT {
                     bufferT++;
                 }
                 result = write(samples * sizeof(T)*2, delayCount);
-            } 
-            LOGI("StreamCopy::copy %zu -> %zu bytes - in %d hops", bytes_to_read, result, delayCount);
+                LOGI("StreamCopy::copy %zu -> %zu bytes - in %d hops", bytes_to_read, result, delayCount);
+            } else {
+                delay(delay_on_no_data);
+            }
             return result;
         }
 
         /// available bytes in the data source
         int available() {
             return from == nullptr ? 0 : from->available();
+        }
+
+        /// Defines the dealy that is used if no data is available
+        void setDelayOnNoData(int delayMs){
+            delay_on_no_data = delayMs;
         }
 
         /// copies all data
@@ -163,6 +172,7 @@ class StreamCopyT {
         bool is_first = false;
         const char* actual_mime = nullptr;
         int retryLimit = 20;
+        int delay_on_no_data = 50;
 
         // blocking write - until everything is processed
         size_t write(size_t len, size_t &delayCount ){
@@ -237,7 +247,10 @@ class StreamCopy : public StreamCopyT<uint8_t> {
                 coverter_ptr->convert((T(*)[2])buffer,  result / (sizeof(T)*2) );
                 write(result, delayCount);
                 LOGI("StreamCopy::copy %zu bytes - in %zu hops", result, delayCount);
-            } 
+            } else {
+                // give the processor some time 
+                delay(delay_on_no_data);
+            }
             return result;
         }
         

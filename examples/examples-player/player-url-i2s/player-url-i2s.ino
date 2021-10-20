@@ -21,7 +21,7 @@ AudioSourceURL source(urlStream, urls,"audio/mp3", 5, 0);
 I2SStream i2s;
 MP3DecoderHelix decoder;
 AudioPlayer player(source, i2s, decoder);
-const int volumePin = 15;
+const int volumePin = A0;
 
 
 void printMetaData(MetaDataType type, const char* str, int len){

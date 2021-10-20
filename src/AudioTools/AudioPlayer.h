@@ -382,7 +382,7 @@ class AudioPlayer: public AudioBaseInfoDependent {
         /// sets the volume - values need to be between 0.0 and 1.0
         void setVolume(float volume){
             if (volume>=0 && volume<=1.0) {
-                if (volume!=currentVolume){
+                if (abs(volume-currentVolume)>0.01){
                     LOGI("setVolume(%f)", volume);
                     scaler.setFactor(volume);
                     currentVolume = volume;
