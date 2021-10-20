@@ -4,8 +4,6 @@
 
 #include "Stream.h"
 #include "AudioTools/AudioTypes.h"
-
-#define HELIX_LOGGING_ACTIVE false
 #include "AACDecoderHelix.h"
 
 namespace audio_tools {
