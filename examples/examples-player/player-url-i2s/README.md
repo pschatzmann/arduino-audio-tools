@@ -14,9 +14,9 @@ The AudioPlayer supports
 - support for __Metadata__
 
 
-The example demonstrates how to implement an __MP3 Player__ which provides the data via the Internet (with the help of the AudioSourceURL class) and sends the audio via I2S to an external DAC.
+The example demonstrates how to implement an __MP3 Player__ which provides the data via the Internet (with the help of the AudioSourceURL class) and sends the audio via I2S to an external DAC using an ESP32.
 
-### External DAC
+### The External DAC
 
 For my tests I am using the 24-bit PCM5102 PCM5102A Stereo DAC Digital-to-analog Converter PLL Voice Module pHAT
 
@@ -43,7 +43,8 @@ I am just using the default pins defined by the framework. However I could chang
 - FMT - Audio format selection : I2S (Low) / Left justified (High)
 - XSMT - Soft mute control(1): Soft mute (Low) / soft un-mute (High)
 
-#### Wiring the Potentiometer
+
+### Wiring the Volume Potentiometer
 
 ![DAC](https://www.pschatzmann.ch/wp-content/uploads/2021/10/Pot.jpg)
 
@@ -55,8 +56,7 @@ I am just using the default pins defined by the framework. However I could chang
 
 
 
-
-## Dependencies
+### Dependencies
 
 - https://github.com/pschatzmann/arduino-audio-tools
 - https://github.com/pschatzmann/arduino-libhelix
