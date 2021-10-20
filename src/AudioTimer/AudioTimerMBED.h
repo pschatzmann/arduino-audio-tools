@@ -6,8 +6,8 @@
 
 namespace audio_tools {
 
-class TimerAlarmRepeating;
-TimerAlarmRepeating *timerAlarmRepeating = nullptr;
+class TimerAlarmRepeatingMBED;
+TimerAlarmRepeatingMBED *timerAlarmRepeating = nullptr;
 typedef void (* repeating_timer_callback_t )(void* obj);
 
 /**
@@ -54,11 +54,11 @@ class TimerAlarmRepeatingMBED : public TimerAlarmRepeatingDef {
         }
 
     protected:
-        Ticker ticker;
+        mbed::Ticker ticker;
         repeating_timer_callback_t callback;
 
         static void tickerCallback(){
-            timerAlarmRepeating->callback_f(timerAlarmRepeating);
+            timerAlarmRepeating->callback(timerAlarmRepeating);
         }
 
 };
