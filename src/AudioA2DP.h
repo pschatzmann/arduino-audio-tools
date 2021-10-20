@@ -19,7 +19,7 @@
 namespace audio_tools {
 
 /**
- * @brief Covnerts the data from T src[][2] to a Channels array 
+ * @brief Covnerts the data from T src[][2] to a Frame array 
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 
@@ -34,7 +34,7 @@ class ChannelConverter {
         }
 
         // The data is provided as int24_t tgt[][2] but  returned as int24_t
-        void convert(T src[][2], Channels* channels, size_t size) {
+        void convert(T src[][2], Frame* channels, size_t size) {
             for (int i=size; i>0; i--) {
                 channels[i].channel1 = (*convert_ptr)(src[i][0]);
                 channels[i].channel2 = (*convert_ptr)(src[i][1]);
@@ -53,7 +53,7 @@ RingBuffer<uint8_t> a2dp_buffer(A2DP_BUFFER_SIZE*A2DP_BUFFER_COUNT);
 volatile bool is_a2dp_active = false;
 
 // callback used by A2DP to provide the a2dp_source sound data
-int32_t a2dp_stream_source_sound_data(Channels* data, int32_t len) {
+int32_t a2dp_stream_source_sound_data(Frame* data, int32_t len) {
     LOGD("a2dp_stream_source_sound_data: %d", len);   
     size_t result_len = 0;
     // at first call we start with some empty data
@@ -66,10 +66,10 @@ int32_t a2dp_stream_source_sound_data(Channels* data, int32_t len) {
         is_a2dp_active = true;        
     }
     // the data in the file must be in int16 with 2 channels 
-    size_t result_len_bytes = a2dp_buffer.readArray((uint8_t*)data, len*sizeof(Channels));
+    size_t result_len_bytes = a2dp_buffer.readArray((uint8_t*)data, len*sizeof(Frame));
 
     // result is in number of frames
-    result_len = result_len_bytes / sizeof(Channels);
+    result_len = result_len_bytes / sizeof(Frame);
 
     // Log result
     if (AudioLogger::instance().level()==AudioLogger::Debug){

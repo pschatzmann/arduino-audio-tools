@@ -7,6 +7,9 @@
  * @copyright GPLv3
  */
 
+// Add this in your sketch or change the setting in AudioConfig.h
+#define USE_A2DP
+
 #include <SPI.h>
 #include <SD.h>
 #include "AudioFileSourceSD.h"

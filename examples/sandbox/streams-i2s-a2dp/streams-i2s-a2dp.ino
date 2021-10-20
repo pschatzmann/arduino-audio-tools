@@ -7,16 +7,8 @@
  * @copyright GPLv3
  */
 
-
-/**
- * @file streams-i2s-a2dp.ino
- * @author Phil Schatzmann
- * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/i2s-a2dp/README.md
- * 
- * @author Phil Schatzmann
- * @copyright GPLv3
- */
-
+// Add this in your sketch or change the setting in AudioConfig.h
+#define USE_A2DP
 
 #include "Arduino.h"
 #include "AudioTools.h"

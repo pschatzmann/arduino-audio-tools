@@ -24,7 +24,7 @@ typedef int16_t sound_t;                                  // sound will be repre
 uint8_t channels = 2;                                     // The stream will have 2 channels 
 MozziGenerator mozzi(CONTROL_RATE);                       // subclass of SoundGenerator 
 GeneratedSoundStream<sound_t> in(mozzi);        // Stream generated with mozzi
-UDPStream out;                                            // UDP Output - A2DPStream is a singleton!
+UDPStream out;                                            // UDP Output 
 StreamCopy copier(out, in); // copy in to out
 
 /// Copied from AMsynth.ino
