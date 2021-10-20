@@ -3,8 +3,11 @@
 #include "AudioConfig.h"
 #ifdef USE_URL_ARDUINO
 
-#include <WiFi.h>
+#ifdef ESP8266
+#include <ESP8266WiFi.h>
+#else 
 #include <WiFiClientSecure.h>
+#endif
 #include "AudioHttp/HttpRequest.h"
 
 namespace audio_tools {

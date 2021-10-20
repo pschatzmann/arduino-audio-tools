@@ -46,9 +46,9 @@ void setup() {
 
 void updateVolume() {
   // Reading potentiometer value (range is 0 - 4095)
-  float vol = static_cast<float>(analogRead(volumePin)) 
+  float vol = static_cast<float>(analogRead(volumePin));
   // min in 0 - max is 1.0
-  player.setVolume(vol/4095.0;);
+  player.setVolume(vol/4095.0);
 }
 
 void loop() {
