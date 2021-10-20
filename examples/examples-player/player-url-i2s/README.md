@@ -16,7 +16,7 @@ The AudioPlayer supports
 
 The example demonstrates how to implement an __MP3 Player__ which provides the data via the Internet (with the help of the AudioSourceURL class) and sends the audio via I2S to an external DAC.
 
-### External DAC:
+### External DAC
 
 For my tests I am using the 24-bit PCM5102 PCM5102A Stereo DAC Digital-to-analog Converter PLL Voice Module pHAT
 
@@ -42,6 +42,18 @@ I am just using the default pins defined by the framework. However I could chang
 - SCK - System clock input (probably SCL on your board).
 - FMT - Audio format selection : I2S (Low) / Left justified (High)
 - XSMT - Soft mute control(1): Soft mute (Low) / soft un-mute (High)
+
+#### Wiring the Potentiometer
+
+![DAC](https://www.pschatzmann.ch/wp-content/uploads/2021/10/Pot.jpg)
+
+| Pot     |  ESP32
+| --------| ---------------
+| POW     |  3V
+| GND     |  GND
+| VOUT    |  GPIO15
+
+
 
 
 ## Dependencies
