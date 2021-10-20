@@ -25,16 +25,17 @@ For my tests I am using the 24-bit PCM5102 PCM5102A Stereo DAC Digital-to-analog
 I am just using the default pins defined by the framework. However I could change them with the help of the config object. The mute pin can be defined in the constructor of the I2SStream - by not defining anything we use the default which is GPIO23
 
  
-| DAC     |  ESP32
-| --------| ---------------
-| VDD     |  5V
-| GND     |  GND
-| SD      |  OUT (GPIO22)
-| L/R     |  GND
-| WS      |  WS (GPIO15)
-| SCK     |  BCK (GPIO14)
-| FMT     |  GND 
-| XSMT    |  +3V 
+| DAC     |  ESP32        |  ESP8266
+| --------| --------------|-----------
+| VDD     |  5V           |  5V
+| GND     |  GND          |  GND
+| SD      |  OUT (GPIO22) |  GPIO3/RX0
+| L/R     |  GND          |  GND
+| WS      |  WS (GPIO15)  |  GPIO2/TX1
+| SCK     |  BCK (GPIO14) |  GPIO15
+| FMT     |  GND          |  GND
+| XSMT    | +3V           |  +3V
+
 
 
 - DEMP - De-emphasis control for 44.1kHz sampling rate(1): Off (Low) / On (High)
@@ -48,11 +49,11 @@ I am just using the default pins defined by the framework. However I could chang
 
 ![DAC](https://www.pschatzmann.ch/wp-content/uploads/2021/10/Pot.jpg)
 
-| Pot     |  ESP32
-| --------| ---------------
-| POW     |  3V
-| GND     |  GND
-| VOUT    |  GPIO15
+| Pot     |  ESP32   | ESP8266
+| --------| ---------|---------
+| POW     |  3V      | 3V
+| GND     |  GND     | GND
+| VOUT    |  A0      | A0
 
 
 
