@@ -236,9 +236,8 @@ class StreamCopy : public StreamCopyT<uint8_t> {
                 // convert to pointer to array of 2
                 coverter_ptr->convert((T(*)[2])buffer,  result / (sizeof(T)*2) );
                 write(result, delayCount);
+                LOGI("StreamCopy::copy %zu bytes - in %zu hops", result, delayCount);
             } 
-
-            LOGI("StreamCopy::copy %zu bytes - in %zu hops", result, delayCount);
             return result;
         }
         
