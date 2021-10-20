@@ -73,8 +73,8 @@ class MetaDataID3Base {
 
     /// find the tag position in the string - if not found we return -1;
     int findTag(const char* tag, const char*str, size_t len){
-        int tag_len = strlen(tag);
-        for (int j=0;j<=len-tag_len;j++){
+        size_t tag_len = strlen(tag);
+        for (size_t j=0;j<=len-tag_len;j++){
             if (strncmp(str+j,tag, tag_len)==0){
                 return j;
             }
@@ -245,7 +245,7 @@ class MetaDataID3V1  : public MetaDataID3Base {
             callback(Title, tag->title,strnlen(tag->title,30));
             callback(Artist, tag->artist,strnlen(tag->artist,30));
             callback(Album, tag->album,strnlen(tag->album,30));        
-            int genre = tag->genre;
+            uint16_t genre = tag->genre;
             if (genre < sizeof(genres)){
                 const char* genre_str = genres[genre];
                 callback(Genre, genre_str,strlen(genre_str));
@@ -377,7 +377,7 @@ class MetaDataID3V2 : public MetaDataID3Base  {
     uint64_t end_len = 0;
 
     // calculate the synch save size
-    int calcSize(uint8_t chars[4]) {
+    uint32_t calcSize(uint8_t chars[4]) {
         uint32_t byte0 = chars[0];
         uint32_t byte1 = chars[1];
         uint32_t byte2 = chars[2];
@@ -422,7 +422,7 @@ class MetaDataID3V2 : public MetaDataID3Base  {
 
                     // get tag content
                     if(calcSize(frame_header.size) <= len){
-                        int l = min(calcSize(frame_header.size)-1, 256);
+                        int l = min(calcSize(frame_header.size)-1, (uint32_t) 256);
                         memset(result,0,256);
                         strncpy((char*)result, (char*) data+tag_pos+ID3FrameSize, l);
                         processNotify();
@@ -484,7 +484,7 @@ class MetaDataID3V2 : public MetaDataID3Base  {
                     if (end_pos>0){
                         // we just use the first entry
                         result[end_pos]=0;
-                        int idx = atoi(result+1);
+                        size_t idx = atoi(result+1);
                         if (idx>=0 && idx<sizeof(genres)){
                             strncpy((char*)result,genres[idx],256);
                         }

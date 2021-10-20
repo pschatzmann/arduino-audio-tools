@@ -1,6 +1,6 @@
 #pragma once
 
-#if defined(STM32_CORE_VERSION)
+#if defined(STM32)
 #include "AudioTimer/AudioTimerDef.h"
 
 namespace audio_tools {

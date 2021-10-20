@@ -312,7 +312,7 @@ class WAVDecoder : public AudioDecoder {
                         isValid = header.audioInfo().is_valid;
 
                         LOGI("WAV sample_rate: %d", header.audioInfo().sample_rate);
-                        LOGI("WAV data_length: %d", header.audioInfo().data_length);
+                        LOGI("WAV data_length: %zu", header.audioInfo().data_length);
                         LOGI("WAV is_streamed: %d", header.audioInfo().is_streamed);
                         LOGI("WAV is_valid: %s", header.audioInfo().is_valid ? "true" :  "false");
                         
@@ -433,7 +433,7 @@ class WAVEncoder : public AudioEncoder {
             audioInfo.byte_rate = audioInfo.sample_rate * audioInfo.bits_per_sample * audioInfo.channels;
             audioInfo.block_align =  audioInfo.bits_per_sample / 8 * audioInfo.channels;
             if (audioInfo.is_streamed || audioInfo.data_length==0 || audioInfo.data_length >= 0x7fff0000) {
-                LOGI("is_streamed! because length is %u", audioInfo.data_length);
+                LOGI("is_streamed! because length is %zu", audioInfo.data_length);
                 audioInfo.is_streamed = true;
                 audioInfo.data_length = ~0;
             } else {

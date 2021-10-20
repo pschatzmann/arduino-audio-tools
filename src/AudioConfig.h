@@ -173,7 +173,11 @@
 #endif
 
 //----------------
-#ifdef STM32_CORE_VERSION
+#ifdef ARDUINO_ARCH_STM32F4
+#define STM32
+#endif
+
+#ifdef STM32
 #define USE_I2S
 #define USE_PWM
 
@@ -184,7 +188,7 @@
 #define PIN_I2S_DATA_OUT 3
 #define PIN_I2S_MUTE 4
 #define SOFT_MUTE_VALUE LOW  
-#define PIN_CS CS
+#define PIN_CS 10
 #endif
 
 

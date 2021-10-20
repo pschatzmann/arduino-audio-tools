@@ -1,5 +1,8 @@
 #pragma once
 
+#include "AudioConfig.h"
+#ifdef USE_MOZZI
+
 #include "mozzi_config.h"
 #include "hardware_defines.h"
 #include "mozzi_analog.h"
@@ -290,3 +293,5 @@ class MozziStream : public Stream {
 
 
 } // Namespace
+
+#endif  // USE_MOZZI
