@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Arduino.h"
 #include "AudioConfig.h"
 #include "AudioTools.h"
 #include "AudioTools/AudioLogger.h"
+#include "AudioTools/AudioOutput.h"
 #include "AudioTools/Vector.h"
 #include "Stream.h"
 
