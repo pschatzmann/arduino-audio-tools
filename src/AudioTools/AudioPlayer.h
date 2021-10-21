@@ -5,7 +5,7 @@
 #include "AudioTools/Buffers.h"
 #include "AudioTools/Converter.h"
 #include "AudioTools/AudioLogger.h"
-#include "AudioTools/Streams.h"
+#include "AudioTools/AudioStreams.h"
 #include "AudioTools/AudioCopy.h"
 #include "AudioCodecs/CodecMP3Helix.h"
 #include "AudioHttp/Str.h"
@@ -304,10 +304,11 @@ class AudioPlayer: public AudioBaseInfoDependent {
          * @param output 
          * @param chipSelect 
          */
-        AudioPlayer(AudioSource &source, Print &output, AudioDecoder &decoder ) : scaler(1.0, 0, 32767){
+        AudioPlayer(AudioSource &source, Print &output, AudioDecoder &decoder ) {
 	 		LOGD(LOG_METHOD);
             this->source = &source;
-            this->out = new EncodedAudioStream(&output, &decoder); 
+            this->volumeOut.begin(output); 
+            this->out = new EncodedAudioStream(&volumeOut, &decoder); 
             // notification for audio configuration
             decoder.setNotifyAudioChange(*this);            
             audioInfoTarget = (AudioBaseInfoDependent*) &output;
@@ -336,14 +337,15 @@ class AudioPlayer: public AudioBaseInfoDependent {
         }
 
         virtual void setAudioInfo(AudioBaseInfo info) {
-            if (audioInfoTarget!=nullptr){
-                LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
                 LOGI("sample_rate: %d", info.sample_rate);
                 LOGI("bits_per_sample: %d", info.bits_per_sample);
                 LOGI("channels: %d", info.channels);
-                audioInfoTarget->setAudioInfo(info);
+                if (audioInfoTarget!=nullptr){
+                    audioInfoTarget->setAudioInfo(info);
+                }
+                volumeOut.setAudioInfo(info);
                 begin(true);
-            }
         };
 
 
@@ -384,7 +386,7 @@ class AudioPlayer: public AudioBaseInfoDependent {
             if (volume>=0 && volume<=1.0) {
                 if (abs(volume-currentVolume)>0.01){
                     LOGI("setVolume(%f)", volume);
-                    scaler.setFactor(volume);
+                    volumeOut.setVolume(volume);
                     currentVolume = volume;
                 }
             } else {
@@ -394,7 +396,7 @@ class AudioPlayer: public AudioBaseInfoDependent {
 
         /// Determines the actual volume
         float volume() {
-            return scaler.factor();
+            return volumeOut.volume();
         }
 
         /// Call this method in the loop. 
@@ -402,7 +404,7 @@ class AudioPlayer: public AudioBaseInfoDependent {
             if (active){
     	 		LOGD(LOG_METHOD);
                 // handle sound
-                if (copier.copy(scaler) || timeout==0){
+                if (copier.copy() || timeout==0){
                     // reset timeout
                     timeout = millis() + source->timeoutMs();
                 }
@@ -436,11 +438,11 @@ class AudioPlayer: public AudioBaseInfoDependent {
         AudioSource *source = nullptr;
         AudioDecoder *decoder = nullptr;
         EncodedAudioStream *out = nullptr; // Decoding stream
+        VolumeOutput volumeOut; // volume control
         Stream* input_stream = nullptr;
         MetaDataID3 meta_out;
         bool meta_active = false;
         StreamCopy copier; // copies sound into i2s
-        ConverterScaler<int16_t> scaler; // volume control
         AudioBaseInfoDependent *audioInfoTarget=nullptr;
         uint32_t timeout = 0;
         float currentVolume=-1; // illegal value which will trigger an update

@@ -36,11 +36,11 @@
 #define DEFAULT_CHANNELS 2
 #define DEFAULT_BITS_PER_SAMPLE 16
 #define I2S_DEFAULT_PORT 0
-#define I2S_BUFFER_SIZE 512
-#define I2S_BUFFER_COUNT 5
+#define I2S_BUFFER_SIZE 256
+#define I2S_BUFFER_COUNT 10
 #define A2DP_BUFFER_SIZE 512
 #define A2DP_BUFFER_COUNT 50
-#define CODEC_DELAY_MS 8
+#define CODEC_DELAY_MS 10
 
 /**
  * ------------------------------------------------------------------------- 

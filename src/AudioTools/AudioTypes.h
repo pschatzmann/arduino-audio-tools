@@ -29,7 +29,7 @@ struct AudioBaseInfo {
         return !(*this == alt);
     } 
 
-    void logInfo() {
+    virtual void logInfo() {
       LOGI("sample_rate: %d", sample_rate);
       LOGI("channels: %d", channels);
       LOGI("bits_per_sample: %d", bits_per_sample);

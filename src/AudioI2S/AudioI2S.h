@@ -4,7 +4,7 @@
 
 #ifdef USE_I2S
 #include "AudioTools/AudioTypes.h"
-#include "AudioTools/Streams.h"
+#include "AudioTools/AudioStreams.h"
 #include "AudioI2S/I2sConfig.h"
 #include "AudioI2S/I2SESP32.h"
 #include "AudioI2S/I2SESP8266.h"
@@ -98,6 +98,7 @@ class I2SStream : public BufferedStream, public AudioBaseInfoDependent  {
 
         /// updates the sample rate dynamically 
         virtual void setAudioInfo(AudioBaseInfo info) {
+            LOGI(LOG_METHOD);
             I2SConfig cfg = i2s.config();
             if (cfg.sample_rate != info.sample_rate
                 || cfg.channels != info.channels
@@ -105,6 +106,7 @@ class I2SStream : public BufferedStream, public AudioBaseInfoDependent  {
                 cfg.sample_rate = info.sample_rate;
                 cfg.bits_per_sample = info.bits_per_sample;
                 cfg.channels = info.channels;
+                cfg.logInfo();
 
                 i2s.end();
                 i2s.begin(cfg);        

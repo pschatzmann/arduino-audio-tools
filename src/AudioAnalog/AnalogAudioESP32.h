@@ -7,7 +7,7 @@
 #include "driver/adc.h"
 #include "soc/dac_channel.h"
 #include "soc/adc_channel.h"
-#include "AudioTools/Streams.h"
+#include "AudioTools/AudioStreams.h"
 
 namespace audio_tools {
 
