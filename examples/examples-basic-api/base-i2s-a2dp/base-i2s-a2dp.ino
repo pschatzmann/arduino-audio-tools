@@ -30,7 +30,7 @@ const size_t max_buffer_len = 1024;
 int32_t buffer[max_buffer_len][2];
 
 // callback used by A2DP to provide the sound data
-int32_t get_sound_data(Channels* data, int32_t len) {
+int32_t get_sound_data(Frame* data, int32_t len) {
    size_t req_len = min(max_buffer_len,(size_t) len);
 
    // the microphone provides data in int32_t -> we read it into the buffer of int32_t data
