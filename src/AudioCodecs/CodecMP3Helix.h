@@ -23,6 +23,9 @@ class MP3DecoderHelix : public AudioDecoder  {
         MP3DecoderHelix() {
         	LOGD(LOG_METHOD);
             mp3 = new libhelix::MP3DecoderHelix();
+            if (mp3==nullptr){
+                LOGE("Not enough memory for libhelix");
+            }
         }
         /**
          * @brief Construct a new MP3DecoderMini object
@@ -32,6 +35,9 @@ class MP3DecoderHelix : public AudioDecoder  {
         MP3DecoderHelix(Print &out_stream){
         	LOGD(LOG_METHOD);
             mp3 = new libhelix::MP3DecoderHelix();
+            if (mp3==nullptr){
+                LOGE("Not enough memory for libhelix");
+            }
             setOutputStream(out_stream);
         }  
 
@@ -45,6 +51,9 @@ class MP3DecoderHelix : public AudioDecoder  {
         MP3DecoderHelix(Print &out_stream, AudioBaseInfoDependent &bi){
         	LOGD(LOG_METHOD);
             mp3 = new libhelix::MP3DecoderHelix();
+            if (mp3==nullptr){
+                LOGE("Not enough memory for libhelix");
+            }
             setOutputStream(out_stream);
             setNotifyAudioChange(bi);
         }  
@@ -54,24 +63,24 @@ class MP3DecoderHelix : public AudioDecoder  {
          * 
          */
         ~MP3DecoderHelix(){
-            delete mp3;
+            if (mp3!=nullptr) delete mp3;
         }
 
         /// Defines the output Stream
 		virtual void setOutputStream(Print &outStream){
-            mp3->setOutput(outStream);
+            if (mp3!=nullptr) mp3->setOutput(outStream);
 		}
 
         /// Starts the processing
         void begin(){
         	LOGD(LOG_METHOD);
-            mp3->begin();
+            if (mp3!=nullptr) mp3->begin();
         }
 
         /// Releases the reserved memory
         void end(){
         	LOGD(LOG_METHOD);
-            mp3->end();
+            if (mp3!=nullptr) mp3->end();
         }
 
         MP3FrameInfo audioInfoEx(){
@@ -90,12 +99,12 @@ class MP3DecoderHelix : public AudioDecoder  {
         /// Write mp3 data to decoder
         size_t write(const void* mp3Data, size_t len) {
         	LOGD(LOG_METHOD);
-            return mp3->write(mp3Data, len);
+            return mp3==nullptr ? 0 : mp3->write(mp3Data, len);
         }
 
         /// checks if the class is active 
         operator boolean(){
-            return (bool) *mp3;
+            return mp3!=nullptr && (bool) *mp3;
         }
 
         libhelix::MP3DecoderHelix *driver() {
@@ -110,7 +119,7 @@ class MP3DecoderHelix : public AudioDecoder  {
         void setNotifyAudioChange(AudioBaseInfoDependent &bi){
         	LOGD(LOG_METHOD);
             audioChangeMP3Helix = &bi;
-            mp3->setInfoCallback(infoCallback);
+            if (mp3!=nullptr)  mp3->setInfoCallback(infoCallback);
         }
 
         /// notifies the subscriber about a change

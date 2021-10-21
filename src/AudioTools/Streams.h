@@ -303,13 +303,45 @@ class BufferedStream : public Stream {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class NullStream : public BufferedStream {
+class NullStream : public BufferedStream,  public AudioBaseInfoDependent {
     public:
-        NullStream() : BufferedStream(100){
+        NullStream(bool measureWrite=false) : BufferedStream(100){
+            is_measure = measureWrite;
+        }
+
+        void begin(AudioBaseInfo info, int opt=0) {
+        }
+
+        void begin(){
+        }
+
+        AudioBaseInfo defaultConfig(int opt=0) {
+            AudioBaseInfo info;
+            return info;
         }
         
+        /// Define object which need to be notified if the basinfo is changing
+        void setNotifyAudioChange(AudioBaseInfoDependent &bi) {
+        }
+
+        void setAudioInfo(AudioBaseInfo info){
+        }
+
     protected:
+        size_t total = 0;
+        unsigned long timeout=0;
+        bool is_measure;
+
         virtual size_t writeExt(const uint8_t* data, size_t len) {
+            if (is_measure){
+                if (millis()<timeout){
+                    total += len;
+                } else {
+                    LOGI("Thruput = %zu kBytes/sec", total/1000);
+                    total = 0;
+                    timeout = millis()+1000;
+                }
+            }
             return len;
         }
         virtual size_t readExt( uint8_t *data, size_t len) {
