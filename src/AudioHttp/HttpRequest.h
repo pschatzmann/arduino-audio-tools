@@ -21,7 +21,7 @@ namespace audio_tools {
 
 class HttpRequest {
     public:
-        friend class URLStream;
+        friend class URLStreamDefault;
 
         HttpRequest() {
              LOGI("HttpRequest");
@@ -142,6 +142,11 @@ class HttpRequest {
             }
             return len;
         }
+
+        /// returns true when the request has completed and ready for the data to be requested
+        bool isReady() {
+            return is_ready;
+        }
    
     protected:
         Client *client_ptr;
@@ -154,6 +159,7 @@ class HttpRequest {
         const char *connection = CON_CLOSE;
         const char *accept = ACCEPT_ALL;
         const char *accept_encoding = nullptr;
+        bool is_ready = false;
 
         // opens a connection to the indicated host
         virtual int connect(const char *ip, uint16_t port) {
@@ -163,6 +169,7 @@ class HttpRequest {
 
         // sends request and reads the reply_header from the server
         virtual int process(MethodID action, Url &url, const char* mime, const char *data, int len=-1){
+            is_ready = false;
             if (client_ptr==nullptr){
                 LOGE("The client has not been defined");
                 return -1;
@@ -213,6 +220,7 @@ class HttpRequest {
             };
 
             // wait for data
+            is_ready = true;
             return reply_header.statusCode();
         }
 

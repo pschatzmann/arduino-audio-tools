@@ -9,12 +9,23 @@
 namespace audio_tools {
 
 /**
+ *  Base class for all Audio Streams. It support the boolean operator to test if the object
+ *  is ready with data
+ */
+class AudioStream : public Stream {
+    public:
+        operator bool() {
+            return available()>0;
+        }
+};
+
+/**
  * @brief A simple Stream implementation which is backed by allocated memory
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 
  */
-class MemoryStream : public Stream {
+class MemoryStream : public AudioStream {
     public: 
         MemoryStream(int buffer_size = 512){
 	 		LOGD("MemoryStream: %d", buffer_size);
@@ -109,7 +120,6 @@ class MemoryStream : public Stream {
             }
         }
 
-
         operator bool() {
             return available()>0;
         }
@@ -133,7 +143,7 @@ class MemoryStream : public Stream {
  */
 
 template <class T>
-class GeneratedSoundStream : public Stream {
+class GeneratedSoundStream : public AudioStream {
     public:
         GeneratedSoundStream(SoundGenerator<T> &generator){
 	 		LOGD(LOG_METHOD);
@@ -183,12 +193,18 @@ class GeneratedSoundStream : public Stream {
         void begin() {
 	 		LOGD(LOG_METHOD);
             generator_ptr->begin();
+            active = true;
         }
 
         /// stop the processing
         void end() {
 	 		LOGD(LOG_METHOD);
             generator_ptr->stop();
+            active = false;
+        }
+
+        operator bool() {
+            return active;
         }
 
         void flush(){
@@ -196,6 +212,7 @@ class GeneratedSoundStream : public Stream {
 
     protected:
         SoundGenerator<T> *generator_ptr;  
+        bool active = false;
 
         int not_supported() {
             LOGE("GeneratedSoundStream-unsupported operation!");
@@ -211,7 +228,7 @@ class GeneratedSoundStream : public Stream {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class BufferedStream : public Stream {
+class BufferedStream : public AudioStream {
     public:
         BufferedStream(size_t buffer_size){
 	 		LOGD(LOG_METHOD);
@@ -273,7 +290,6 @@ class BufferedStream : public Stream {
                 return buffer->readArray(data, length);
             }
         }
-
 
         /// Returns the available bytes in the buffer: to be avoided
         virtual int available() {
@@ -356,7 +372,7 @@ class NullStream : public BufferedStream,  public AudioBaseInfoDependent {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class RingBufferStream : public Stream {
+class RingBufferStream : public AudioStream {
     public:
         RingBufferStream(int size=DEFAULT_BUFFER_SIZE) {
             buffer = new RingBuffer<uint8_t>(size);
@@ -408,7 +424,7 @@ class RingBufferStream : public Stream {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class ExternalBufferStream : public Stream {
+class ExternalBufferStream : public AudioStream {
     public:
         ExternalBufferStream() {
 	 		LOGD(LOG_METHOD);
@@ -480,8 +496,7 @@ class CallbackStream :  public BufferedStream {
             active = false;
             return true;
         };
-
-    
+  
   protected:
         NBuffer<T> *callback_buffer_ptr;
         bool active;
