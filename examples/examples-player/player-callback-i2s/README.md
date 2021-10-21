@@ -29,9 +29,9 @@ DAC  |	ESP32
 -----|----------------
 VCC  |	5V
 GND  |	GND
-BCK  |	BCK (GPIO26)
+BCK  |	BCK (GPIO14)
 DIN  |	OUT (GPIO22)
-LCK  |	WS (GPIO25)
+LCK  |	BCK (GPIO15)
 FMT  |	GND
 XMT  |	3V (or another GPIO PIN which is set to high)
 
