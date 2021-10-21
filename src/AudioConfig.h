@@ -42,6 +42,7 @@
 #define A2DP_BUFFER_COUNT 50
 #define CODEC_DELAY_MS 10
 #define COPY_DELAY_ON_NODATA 10
+#define STACK_SIZE 20000
 /**
  * ------------------------------------------------------------------------- 
  * @brief PWM
@@ -86,6 +87,7 @@
 #define USE_I2S
 #define USE_AUDIO_SERVER
 
+#define URL_STREAM_BUFFER_COUNT 10
 #define PWM_FREQENCY 30000
 #define PWM_START_PIN 12
 #define PIN_I2S_BCK 14

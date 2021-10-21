@@ -217,8 +217,6 @@ protected:
     void setWritePos(int pos) {
         current_write_pos = pos;
     }
-
-
 };
 
 /**
@@ -313,7 +311,6 @@ class RingBuffer : public BaseBuffer<T> {
             return (uint32_t)(index + 1) % max_size;
         }
 
-    
 };
 
 /**
