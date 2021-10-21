@@ -49,6 +49,7 @@ class I2SBase {
             .dma_buf_count = I2S_BUFFER_COUNT,
             .dma_buf_len = I2S_BUFFER_SIZE,
             .use_apll = I2S_USE_APLL,
+            .tx_desc_auto_clear = true // avoiding noise in case of data unavailability
       };
       i2s_config = i2s_config_new;
       logConfig();
