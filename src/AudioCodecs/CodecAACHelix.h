@@ -23,6 +23,9 @@ class AACDecoderHelix : public AudioDecoder  {
         AACDecoderHelix() {
         	LOGD(LOG_METHOD);
             aac = new libhelix::AACDecoderHelix();
+            if (aac==nullptr){
+                LOGE("Not enough memory for libhelix");
+            }
         }
         /**
          * @brief Construct a new AACDecoderMini object
@@ -32,6 +35,9 @@ class AACDecoderHelix : public AudioDecoder  {
         AACDecoderHelix(Print &out_stream){
         	LOGD(LOG_METHOD);
             aac = new libhelix::AACDecoderHelix(out_stream);
+            if (aac==nullptr){
+                LOGE("Not enough memory for libhelix");
+            }
         }  
 
         /**
@@ -44,6 +50,9 @@ class AACDecoderHelix : public AudioDecoder  {
         AACDecoderHelix(Print &out_stream, AudioBaseInfoDependent &bi){
         	LOGD(LOG_METHOD);
             aac = new libhelix::AACDecoderHelix(out_stream);
+            if (aac==nullptr){
+                LOGE("Not enough memory for libhelix");
+            }
             setNotifyAudioChange(bi);
         }  
 
@@ -53,25 +62,25 @@ class AACDecoderHelix : public AudioDecoder  {
          */
         ~AACDecoderHelix(){
          	LOGD(LOG_METHOD);
-            delete aac;
+            if (aac!=nullptr) delete aac;
         }
 
         /// Defines the output Stream
 		virtual void setOutputStream(Print &out_stream){
         	LOGD(LOG_METHOD);
-            aac->setOutput(out_stream);
+            if (aac!=nullptr) aac->setOutput(out_stream);
 		}
 
         /// Starts the processing
         void begin(){
         	LOGD(LOG_METHOD);
-            aac->begin();
+            if (aac!=nullptr) aac->begin();
         }
 
         /// Releases the reserved memory
         virtual void end(){
         	LOGD(LOG_METHOD);
-            aac->end();
+            if (aac!=nullptr) aac->end();
         }
 
         virtual _AACFrameInfo audioInfoEx(){
@@ -89,12 +98,12 @@ class AACDecoderHelix : public AudioDecoder  {
 
         /// Write AAC data to decoder
         size_t write(const void* aac_data, size_t len) {
-            return aac->write(aac_data, len);
+            return aac==nullptr ? 0 : aac->write(aac_data, len);
         }
 
         /// checks if the class is active 
         virtual operator boolean(){
-            return (bool)*aac;
+            return aac!=nullptr && (bool)*aac;
         }
 
         void flush(){
@@ -105,7 +114,7 @@ class AACDecoderHelix : public AudioDecoder  {
         virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi){
         	LOGD(LOG_METHOD);
             audioChangeAACHelix = &bi;
-            aac->setInfoCallback(infoCallback);
+            if (aac!=nullptr) aac->setInfoCallback(infoCallback);
         }
 
         /// notifies the subscriber about a change
