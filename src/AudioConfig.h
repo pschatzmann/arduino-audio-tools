@@ -41,7 +41,7 @@
 #define A2DP_BUFFER_SIZE 512
 #define A2DP_BUFFER_COUNT 50
 #define CODEC_DELAY_MS 10
-
+#define COPY_DELAY_ON_NODATA 10
 /**
  * ------------------------------------------------------------------------- 
  * @brief PWM

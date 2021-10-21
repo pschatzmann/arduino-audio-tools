@@ -172,7 +172,7 @@ class StreamCopyT {
         bool is_first = false;
         const char* actual_mime = nullptr;
         int retryLimit = 20;
-        int delay_on_no_data = 50;
+        int delay_on_no_data = COPY_DELAY_ON_NODATA;
 
         // blocking write - until everything is processed
         size_t write(size_t len, size_t &delayCount ){
