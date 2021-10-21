@@ -21,7 +21,7 @@ void outputData(Stream &out){
 
 void setup(){
   Serial.begin(115200);
-  //AudioLogger::instance().begin(Serial, AudioLogger::Debug);
+  //AudioLogger::instance().begin(Serial, AudioLogger::Info);
   // start data sink
   TTSInfo info = TTS::getInfo();
   server.begin(outputData, info.sample_rate, info.channels, info.bits_per_sample);

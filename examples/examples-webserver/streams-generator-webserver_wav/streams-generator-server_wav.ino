@@ -18,7 +18,7 @@ GeneratedSoundStream<int16_t> in(sineWave);     // Stream generated from sine wa
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial,AudioLogger::Debug);
+  AudioLogger::instance().begin(Serial,AudioLogger::Info);
 
   // start server
   server.begin(in, sample_rate, channels);

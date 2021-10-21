@@ -24,7 +24,7 @@ void printMetaData(MetaDataType type, const char* str, int len){
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Debug);
+  AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
   // setup output - We send the test signal via A2DP - so we conect to the MyMusic Bluetooth Speaker
   out.begin(TX_MODE, "MyMusic");

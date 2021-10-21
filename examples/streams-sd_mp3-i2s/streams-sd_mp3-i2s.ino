@@ -26,7 +26,7 @@ StreamCopy copier;
 
 void setup(){
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Debug);  
+  AudioLogger::instance().begin(Serial, AudioLogger::Info);  
 
   // setup file
   SD.begin(chipSelect);

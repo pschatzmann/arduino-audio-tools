@@ -21,7 +21,7 @@ char buffer[buffer_len];
 
 void setup(){
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Debug);
+  AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
   int len = wav.readBytes(buffer, buffer_len);
   decoder.write(buffer, len);

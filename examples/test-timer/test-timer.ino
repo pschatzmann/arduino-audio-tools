@@ -13,7 +13,7 @@ void callback(void*ptr){
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Debug);
+  AudioLogger::instance().begin(Serial, AudioLogger::Info);
   Serial.print("Delay us: ");
   Serial.println(delay_us);
 }

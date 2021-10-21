@@ -22,7 +22,7 @@ StreamCopy copier(out, url);    // copy in to out
 
 void setup(){
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Debug);  
+  AudioLogger::instance().begin(Serial, AudioLogger::Info);  
 
   // setup i2s
   auto config = i2s.defaultConfig(TX_MODE);
