@@ -49,7 +49,7 @@ Q8n0 octave_start_note = 42;
 // Setup Mozzi and A2DP
 void setup(){
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Debug);
+  AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
   // setup MozziStream
   auto cfg = in.defaultConfig();
