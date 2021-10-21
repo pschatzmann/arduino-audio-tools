@@ -28,7 +28,7 @@ AudioGeneratorMIDI *midi;
 AudioOutputWithCallback *out;
 
 // callback used by A2DP to provide the sound data
-int32_t get_sound_data(Channels* data, int32_t len) {
+int32_t get_sound_data(Frame* data, int32_t len) {
   return out == nullptr ? 0 : out->read(data, len);
 }
 

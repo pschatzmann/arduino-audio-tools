@@ -30,7 +30,7 @@ volatile float volume = 1.0  // you can update this value to change the volue
 
 
 // callback used by A2DP to provide the sound data
-int32_t get_sound_data(Channels* data, int32_t len) {  
+int32_t get_sound_data(Frame* data, int32_t len) {  
   // get data
   if out == 0 return 0;
   int32_t result = out->read(data, len)

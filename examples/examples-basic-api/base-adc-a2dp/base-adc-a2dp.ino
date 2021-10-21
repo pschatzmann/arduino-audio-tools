@@ -26,7 +26,7 @@ BluetoothA2DPSource a2dp_source;
 ConverterScaler<int16_t> scaler(1.0, -26427, 32700 );
 
 // callback used by A2DP to provide the sound data
-int32_t get_sound_data(Channels* data, int32_t len) {
+int32_t get_sound_data(Frame* data, int32_t len) {
     arrayOf2int16_t *data_arrays = (arrayOf2int16_t *) data;
    // the ADC provides data in 16 bits
     size_t result_len = adc.read(data_arrays, len);   

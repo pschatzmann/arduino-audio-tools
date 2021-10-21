@@ -79,7 +79,7 @@ class DACOut {
  * @copyright GPLv3
  * 
  */
-class OversamplingDAC : public Print {
+class OversamplingDAC : public AudioPrint {
     public:
 
         OversamplingDAC(){

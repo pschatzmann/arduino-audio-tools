@@ -22,7 +22,7 @@ const int frame_size_bytes = sizeof(int16_t) * 2;
 
 
 // callback used by A2DP to provide the sound data
-int32_t get_sound_data(Channels* data, int32_t len) {
+int32_t get_sound_data(Frame* data, int32_t len) {
   // the data in the file must be in int16 with 2 channels 
   size_t result_len_bytes = sound_file.read((uint8_t*)data, len * frame_size_bytes );
   // result is in number of frames
