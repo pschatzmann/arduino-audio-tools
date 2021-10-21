@@ -40,7 +40,7 @@
 #define I2S_BUFFER_COUNT 5
 #define A2DP_BUFFER_SIZE 512
 #define A2DP_BUFFER_COUNT 50
-
+#define CODEC_DELAY_MS 8
 
 /**
  * ------------------------------------------------------------------------- 

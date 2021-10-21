@@ -74,7 +74,10 @@ class MP3DecoderHelix : public AudioDecoder  {
         /// Starts the processing
         void begin(){
         	LOGD(LOG_METHOD);
-            if (mp3!=nullptr) mp3->begin();
+            if (mp3!=nullptr) {
+                mp3->setDelay(CODEC_DELAY_MS);   
+                mp3->begin();
+            } 
         }
 
         /// Releases the reserved memory

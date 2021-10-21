@@ -74,7 +74,10 @@ class AACDecoderHelix : public AudioDecoder  {
         /// Starts the processing
         void begin(){
         	LOGD(LOG_METHOD);
-            if (aac!=nullptr) aac->begin();
+            if (aac!=nullptr) {
+                aac->setDelay(CODEC_DELAY_MS);
+                aac->begin();
+            }
         }
 
         /// Releases the reserved memory
