@@ -90,6 +90,7 @@ class CsvStream : public AudioPrint, public AudioBaseInfoDependent  {
 
         virtual size_t write(const uint8_t* data, size_t len) {   
             if (!active) return 0;
+	 		LOGD(LOG_METHOD);
             size_t lenChannels = len / (sizeof(T)*channels); 
             data_ptr = (T*)data;
             for (int j=0;j<lenChannels;j++){
@@ -147,6 +148,7 @@ class HexDumpStream : public AudioPrint {
 
         virtual size_t write(const uint8_t* data, size_t len) {   
             if (!active) return 0;
+	 		LOGD(LOG_METHOD);
             for (size_t j=0;j<len;j++){
                 out_ptr->print(data[j], HEX);
                 out_ptr->print(" ");
@@ -197,7 +199,9 @@ class AudioOutputStream : public AudioPrint {
         }
 
         virtual size_t write(const uint8_t* data, size_t len) {  
-            return (decoder_ptr!=nullptr && active) ? decoder_ptr->write(data, len) : 0;
+            if (decoder_ptr==nullptr || !active) return 0;
+	 		LOGD(LOG_METHOD);
+            return decoder_ptr->write(data, len);
         }
 
     protected:
@@ -374,29 +378,49 @@ class EncodedAudioStream : public AudioPrint {
  */
 class VolumeOutput : public AudioPrint, public AudioBaseInfoDependent {
     public:
+
+        VolumeOutput() = default;
+
+        VolumeOutput(Print &out) {
+            begin(out);
+        }
+
+        /// Assigns the final output 
         void begin(Print &out){
+	 		LOGD(LOG_METHOD);
             p_out = &out;
         }
+
+        /// Writes raw PCM audio data, which will be the input for the volume control 
         virtual size_t write(const uint8_t *buffer, size_t size){
-            applyVolume(buffer,size);
+	 		LOGD(LOG_METHOD);
+            //if (volume_value!=1.0) applyVolume(buffer,size);
             return p_out->write(buffer, size);
         }
 
+        /// Provides the nubmer of bytes we can write
         virtual int availableForWrite() { 
             return p_out==nullptr? 0 : p_out->availableForWrite();
         }
 
+        /// Detines the Audio info - The bits_per_sample are critical to work properly!
         void setAudioInfo(AudioBaseInfo info){
+	 		LOGD(LOG_METHOD);
             this->info = info;
         }
 
-        /// needs to be in the range of 0 to 1.0
+        /// Decreases the volume:  needs to be in the range of 0 to 1.0
         void setVolume(float vol){
             if (vol>1.0) vol = 1;
             if (vol<0.0) vol = 0;
-            volume_value = vol;
+
+            // round to 2 digits
+            float value = (int)(vol * 100 + .5);
+            volume_value = (float)value / 100;;
+	 		LOGI("setVolume: %f", volume_value);
         }
 
+        /// Provides the current volume setting
         float volume() {
             return volume_value;
         }
@@ -411,9 +435,9 @@ class VolumeOutput : public AudioPrint, public AudioBaseInfoDependent {
                 case 16:
                     applyVolume16((int16_t*)buffer, size/2);
                     break;
-                // case 24:
-                //     applyVolume24((int24_t*)buffer, size/3);
-                //     break;
+                case 24:
+                    applyVolume24((int24_t*)buffer, size/3);
+                    break;
                 case 32:
                     applyVolume32((int32_t*)buffer, size/4);
                     break;
@@ -428,12 +452,13 @@ class VolumeOutput : public AudioPrint, public AudioBaseInfoDependent {
             }
         }
 
-        // void applyVolume24(int24_t* data, size_t size) {
-        //     for (size_t j=0;j<size;j++){
-        //         int32_t v = static_cast<int32_t>(data[j]);
-        //         data[j]= static_cast<int24_t>(volume_value * v);
-        //     }
-        // }
+        void applyVolume24(int24_t* data, size_t size) {
+            for (size_t j=0;j<size;j++){
+                int32_t v = static_cast<int32_t>(data[j]);
+                int32_t v1 = volume_value * v;
+                data[j] = v1;
+            }
+        }
 
         void applyVolume32(int32_t* data, size_t size) {
             for (size_t j=0;j<size;j++){
