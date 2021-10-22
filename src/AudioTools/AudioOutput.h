@@ -394,7 +394,7 @@ class VolumeOutput : public AudioPrint, public AudioBaseInfoDependent {
         /// Writes raw PCM audio data, which will be the input for the volume control 
         virtual size_t write(const uint8_t *buffer, size_t size){
 	 		LOGD(LOG_METHOD);
-            //if (volume_value!=1.0) applyVolume(buffer,size);
+            if (volume_value!=1.0) applyVolume(buffer,size);
             return p_out->write(buffer, size);
         }
 
@@ -407,6 +407,16 @@ class VolumeOutput : public AudioPrint, public AudioBaseInfoDependent {
         void setAudioInfo(AudioBaseInfo info){
 	 		LOGD(LOG_METHOD);
             this->info = info;
+        }
+
+        /// Simplified helper method to define the sample size (alternative to setAudioInfo)
+        void setBitsPerSample(int bits_per_sample){
+            info.bits_per_sample = bits_per_sample;
+        }
+
+        /// Simplified helper method to define the sample size (alternative to setAudioInfo)
+        void setBytesPerSample(int bytes_per_sample){
+            info.bits_per_sample = bytes_per_sample*8;
         }
 
         /// Decreases the volume:  needs to be in the range of 0 to 1.0
