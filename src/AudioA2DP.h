@@ -13,6 +13,7 @@
 #include "AudioTools.h"
 #include "BluetoothA2DPSink.h"
 #include "BluetoothA2DPSource.h"
+#include "AudioTools/AudioStreams.h"
 
 namespace audio_tools {
 
@@ -101,7 +102,7 @@ void a2dp_stream_sink_sound_data(const uint8_t* data, uint32_t len) {
  *
  * Because we support only one instance the class is implemented as singleton!
  */
-class A2DPStream : public Stream {
+class A2DPStream : public AudioStream {
     public:
         // Release the allocate a2dp_source or a2dp_sink
         ~A2DPStream(){
