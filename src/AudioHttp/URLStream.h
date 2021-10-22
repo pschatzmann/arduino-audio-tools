@@ -18,25 +18,25 @@ namespace audio_tools {
  * @copyright GPLv3
  * 
  */
-class URLStream : public Stream {
+class URLStreamDefault : public AudioStream {
     public:
 
-        URLStream(int readBufferSize=DEFAULT_BUFFER_SIZE){
+        URLStreamDefault(int readBufferSize=DEFAULT_BUFFER_SIZE){
             read_buffer = new uint8_t[readBufferSize];
         }
 
-        URLStream(Client &clientPar, int readBufferSize=DEFAULT_BUFFER_SIZE){
+        URLStreamDefault(Client &clientPar, int readBufferSize=DEFAULT_BUFFER_SIZE){
             read_buffer = new uint8_t[readBufferSize];
             client = &clientPar;
         }
 
-        URLStream(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE) {
+        URLStreamDefault(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE) {
             read_buffer = new uint8_t[readBufferSize];
             this->network = (char*)network;
             this->password = (char*)password;            
         }
 
-        ~URLStream(){
+        ~URLStreamDefault(){
             if (read_buffer!=nullptr){
                 delete[] read_buffer;
                 read_buffer = nullptr;
@@ -124,6 +124,11 @@ class URLStream : public Stream {
             return request;
         }
 
+        operator bool() {
+            return active && request.isReady();
+        }
+
+
     protected:
         HttpRequest request;
         Url url;
@@ -209,9 +214,24 @@ class URLStream : public Stream {
                 }
             }
         }
-       
-
 };
+#ifndef ESP32
+class URLStream : public URLStreamDefault {
+    public:
+        URLStream(int readBufferSize=DEFAULT_BUFFER_SIZE)
+        :URLStreamDefault(readBufferSize){
+        }
+
+        URLStream(Client &clientPar, int readBufferSize=DEFAULT_BUFFER_SIZE)
+        :URLStreamDefault(clientPar, readBufferSize){
+        }
+
+        URLStream(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE)
+        :URLStreamDefault(network,password,readBufferSize) {            
+        }
+};
+
+#endif
 
 }
 

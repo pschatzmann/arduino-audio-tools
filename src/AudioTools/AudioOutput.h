@@ -14,6 +14,7 @@ namespace audio_tools {
  * 
  */
 class AudioPrint : public Print {
+    public:
         virtual size_t write(const uint8_t *buffer, size_t size) = 0;
 
         virtual size_t write(uint8_t ch) {
@@ -202,8 +203,6 @@ class AudioOutputStream : public AudioPrint {
     protected:
         AudioWriter *decoder_ptr;
         bool active;
-
-
 };
 
 /**
@@ -380,7 +379,7 @@ class VolumeOutput : public AudioPrint, public AudioBaseInfoDependent {
         }
         virtual size_t write(const uint8_t *buffer, size_t size){
             applyVolume(buffer,size);
-            p_out->write(buffer, size);
+            return p_out->write(buffer, size);
         }
 
         virtual int availableForWrite() { 
@@ -393,7 +392,7 @@ class VolumeOutput : public AudioPrint, public AudioBaseInfoDependent {
 
         /// needs to be in the range of 0 to 1.0
         void setVolume(float vol){
-            if (vol>1.0) vol=1;
+            if (vol>1.0) vol = 1;
             if (vol<0.0) vol = 0;
             volume_value = vol;
         }
