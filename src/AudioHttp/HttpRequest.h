@@ -60,7 +60,7 @@ class HttpRequest {
 
         virtual void stop(){
             LOGI("stop");
-            if (client_ptr!=nullptr){
+            if (connected()){
                 client_ptr->stop();
             }
         }

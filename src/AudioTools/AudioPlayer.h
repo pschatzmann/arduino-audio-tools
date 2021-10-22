@@ -253,7 +253,7 @@ class AudioSourceURL : public AudioSource {
             }
             LOGI("nextStream: %s", urlArray[pos]);
             if (offset!=0 || actual_stream==nullptr){
-                actual_stream->end();
+                if (started) actual_stream->end();
                 actual_stream->begin(urlArray[pos], mime);
                 pos += offset;
                 if (pos>=max){
@@ -261,6 +261,7 @@ class AudioSourceURL : public AudioSource {
                 } else if (pos<0){
                     pos = max -1;
                 }
+                started=true;
             }
             return actual_stream;
         }
@@ -280,6 +281,7 @@ class AudioSourceURL : public AudioSource {
         int max=0;
         const char *mime=nullptr;
         int timeout = 60000;
+        bool started = false;
 
 };
 
@@ -339,14 +341,13 @@ class AudioPlayer: public AudioBaseInfoDependent {
 
         virtual void setAudioInfo(AudioBaseInfo info) {
             LOGD(LOG_METHOD);
-                LOGI("sample_rate: %d", info.sample_rate);
-                LOGI("bits_per_sample: %d", info.bits_per_sample);
-                LOGI("channels: %d", info.channels);
-                if (audioInfoTarget!=nullptr){
-                    audioInfoTarget->setAudioInfo(info);
-                }
-                volumeOut.setAudioInfo(info);
-                begin(true);
+            LOGI("sample_rate: %d", info.sample_rate);
+            LOGI("bits_per_sample: %d", info.bits_per_sample);
+            LOGI("channels: %d", info.channels);
+            volumeOut.setAudioInfo(info);
+            if (audioInfoTarget!=nullptr){
+                audioInfoTarget->setAudioInfo(info);
+            }
         };
 
 
@@ -410,7 +411,7 @@ class AudioPlayer: public AudioBaseInfoDependent {
                     timeout = millis() + source->timeoutMs();
                 }
 
-                // move to next stream after timeout
+                //move to next stream after timeout
                 if (millis()>timeout){
         	 		LOGW("-> timeout");
                     // open next stream
