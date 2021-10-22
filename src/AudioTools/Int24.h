@@ -3,6 +3,8 @@
 
 #define INT24_MAX 0x7FFFFF
 
+namespace audio_tools {
+
 /**
  * @brief 24bit integer which is used for I2S sound processing. It works only on little endian machines!
  * @author Phil Schatzmann
@@ -82,3 +84,5 @@ class int24_t : public Printable {
   private:
     uint8_t value[3]; 
 };
+
+}
