@@ -28,7 +28,7 @@ class BufferedTaskStream : public AudioStream {
             LOGD(LOG_METHOD);
             active=true;
             ready = false;
-            xTaskCreatePinnedToCore(task, "BufferedTaskStream", STACK_SIZE, this, 2, &xHandle, 0);
+            xTaskCreatePinnedToCore(task, "BufferedTaskStream", STACK_SIZE, this, URL_STREAM_PRIORITY, &xHandle, URL_STREAM_CORE);
             if (!wait) ready=true;
         }
 

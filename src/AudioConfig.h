@@ -87,7 +87,6 @@
 #define USE_I2S
 #define USE_AUDIO_SERVER
 
-#define URL_STREAM_BUFFER_COUNT 10
 #define PWM_FREQENCY 30000
 #define PWM_START_PIN 12
 #define PIN_I2S_BCK 14
@@ -101,6 +100,11 @@
 #define PIN_CS SS
 #define PIN_ADC1 34 
 #define PIN_ADC2 35
+
+// URLStream
+#define URL_STREAM_CORE 0
+#define URL_STREAM_PRIORITY 2
+#define URL_STREAM_BUFFER_COUNT 10
 
 // Default LED
 #ifndef LED_BUILTIN
