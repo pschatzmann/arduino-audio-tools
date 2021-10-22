@@ -7,6 +7,7 @@
 #include "hardware_defines.h"
 #include "mozzi_analog.h"
 #include "Mozzi.h"
+#include "AudioTools/AudioStreams.h"
 
 namespace audio_tools {
 
@@ -144,7 +145,7 @@ class MozziGenerator : public SoundGenerator<int16_t> {
  * one or two channels. Though we support the setting of a sample rate, we recommend to use the default sample rate
  * from Mozzi which is available with the AUDIO_RATE define.
  */
-class MozziStream : public Stream {
+class MozziStream : public AudioStream {
 
     public:
         MozziStream(){

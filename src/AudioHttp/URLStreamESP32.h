@@ -124,7 +124,7 @@ class BufferedTaskStream : public AudioStream {
             while(true){
                 size_t available_to_write = self->buffers.availableToWrite();
                 if (*(self->p_stream) && available_to_write>0){
-                    size_t to_read = min(available_to_write, 512);
+                    size_t to_read = min(available_to_write, (size_t) 512);
                     size_t avail_read = self->p_stream->readBytes((uint8_t*)buffer, to_read);
                     xSemaphoreTake(self->mutex, portMAX_DELAY);
                     self->buffers.writeArray(buffer, avail_read);
