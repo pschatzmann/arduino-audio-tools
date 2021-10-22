@@ -8,6 +8,7 @@
 #pragma once
 #include <string.h>
 #include <stdint.h>
+#include <ctype.h>
 
 namespace audio_tools {
 
@@ -425,7 +426,8 @@ class MetaDataID3V2 : public MetaDataID3Base  {
                         int l = min(calcSize(frame_header.size)-1, (uint32_t) 256);
                         memset(result,0,256);
                         strncpy((char*)result, (char*) data+tag_pos+ID3FrameSize, l);
-                        processNotify();
+                        if (isAscii(l))
+                            processNotify();
                     } else {
                         partial_tag = tag;
                     }
@@ -445,6 +447,16 @@ class MetaDataID3V2 : public MetaDataID3Base  {
     
         total_len += len;
 
+    }
+
+    /// Make sure that the result is a valid ASCII string
+    bool isAscii(int l){
+        // check on first 10 characters
+        int m = l < 5 ? l : 10;
+        for (int j=0; j<m; j++){
+            if (!isascii(result[j])) return false;
+        }
+        return true;
     }
 
     /// We have the beginning of the metadata and need to process the remainder
