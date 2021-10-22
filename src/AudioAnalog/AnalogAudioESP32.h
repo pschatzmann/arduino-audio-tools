@@ -150,7 +150,7 @@ class AnalogConfig : public AudioBaseInfo {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AnalogAudio  : public Stream,  public AudioBaseInfoDependent  {
+class AnalogAudio  : public AudioStream,  public AudioBaseInfoDependent  {
 
   public:
     /// Default constructor
