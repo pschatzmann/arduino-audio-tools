@@ -34,15 +34,14 @@ class BufferedTaskStream : public AudioStream {
 
         void end() {
             LOGD(LOG_METHOD);
-            vTaskDelete( xHandle );
+            if (xHandle!=NULL) vTaskDelete( xHandle );
             active = false;
+            ready = false;
         }
 
         void setInput(AudioStream &input){
             LOGD(LOG_METHOD);
-            //end();
             p_stream = &input;
-            //begin();           
         }
 
         /// writes a byte to the buffer
@@ -61,6 +60,7 @@ class BufferedTaskStream : public AudioStream {
 
         /// reads a byte - to be avoided
         virtual int read() {
+            if (!ready) return -1;
             int result = -1;
             xSemaphoreTake(mutex, portMAX_DELAY);
             result = buffers.read();
@@ -71,6 +71,7 @@ class BufferedTaskStream : public AudioStream {
         /// peeks a byte - to be avoided
         virtual int peek() {
             int result = -1;
+            if (!ready) return -1;
             xSemaphoreTake(mutex, portMAX_DELAY);
             result = buffers.peek();
             xSemaphoreGive(mutex);
@@ -80,6 +81,7 @@ class BufferedTaskStream : public AudioStream {
         /// Use this method !!
         size_t readBytes( uint8_t *data, size_t length) { 
             LOGD(LOG_METHOD);
+            if (!ready) return 0;
             size_t result = 0;
             xSemaphoreTake(mutex, portMAX_DELAY);
             result = buffers.readArray(data, length);
@@ -106,6 +108,7 @@ class BufferedTaskStream : public AudioStream {
         bool ready = false;
 
         void createMutex() {
+            LOGD(LOG_METHOD);
             if (mutex == NULL){
                 mutex = xSemaphoreCreateMutex();
                 if (mutex==NULL){
@@ -121,7 +124,7 @@ class BufferedTaskStream : public AudioStream {
             while(true){
                 size_t available_to_write = self->buffers.availableToWrite();
                 if (*(self->p_stream) && available_to_write>0){
-                    size_t to_read = min(self->buffers.availableToWrite(), 512);
+                    size_t to_read = min(available_to_write, 512);
                     size_t avail_read = self->p_stream->readBytes((uint8_t*)buffer, to_read);
                     xSemaphoreTake(self->mutex, portMAX_DELAY);
                     self->buffers.writeArray(buffer, avail_read);

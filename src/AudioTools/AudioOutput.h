@@ -203,8 +203,6 @@ class AudioOutputStream : public AudioPrint {
     protected:
         AudioWriter *decoder_ptr;
         bool active;
-
-
 };
 
 /**
@@ -394,7 +392,7 @@ class VolumeOutput : public AudioPrint, public AudioBaseInfoDependent {
 
         /// needs to be in the range of 0 to 1.0
         void setVolume(float vol){
-            if (vol>1.0) vol=1;
+            if (vol>1.0) vol = 1;
             if (vol<0.0) vol = 0;
             volume_value = vol;
         }
