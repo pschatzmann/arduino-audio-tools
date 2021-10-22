@@ -74,9 +74,10 @@ class MetaDataID3Base {
 
     /// find the tag position in the string - if not found we return -1;
     int findTag(const char* tag, const char*str, size_t len){
+        if (len>1600 || str==nullptr || len<=0) return -1;
         size_t tag_len = strlen(tag);
-        for (size_t j=0;j<=len-tag_len;j++){
-            if (strncmp(str+j,tag, tag_len)==0){
+        for (size_t j=0;j<=len-tag_len-1;j++){
+            if (memcmp(str+j,tag, tag_len)==0){
                 return j;
             }
         }

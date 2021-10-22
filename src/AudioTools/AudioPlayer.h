@@ -301,7 +301,8 @@ class AudioPlayer: public AudioBaseInfoDependent {
 
     public:
         /**
-         * @brief Construct a new Audio Player object
+         * @brief Construct a new Audio Player object. The processing chain is
+         * AudioSource -> Stream -copy> EncodedAudioStream -> VolumeOutput -> Print
          * 
          * @param decoder 
          * @param output 
@@ -309,28 +310,38 @@ class AudioPlayer: public AudioBaseInfoDependent {
          */
         AudioPlayer(AudioSource &source, Print &output, AudioDecoder &decoder ) {
 	 		LOGD(LOG_METHOD);
-            this->source = &source;
-            this->volumeOut.begin(output); 
-            this->out = new EncodedAudioStream(&volumeOut, &decoder); 
+            this->p_source = &source;
+            this->volume_out.begin(output); 
+            this->p_out_decoding = new EncodedAudioStream(&volume_out, &decoder); 
+            this->p_final_output = &output;
+
             // notification for audio configuration
-            decoder.setNotifyAudioChange(*this);            
-            audioInfoTarget = (AudioBaseInfoDependent*) &output;
+            decoder.setNotifyAudioChange(*this); 
+        }
+
+        /// Default destructor
+        virtual  ~AudioPlayer(){
+            if (p_out_decoding!=nullptr){
+                delete p_out_decoding;
+            }
         }
 
         /// (Re)Starts the playing of the music (from the beginning)
         bool begin(bool isActive = true) {
 	 		LOGD(LOG_METHOD);
             bool result = false;
-            this->out->begin();
-            // setup input
-            this->source->begin();
+
+            // start dependent objects
+            p_out_decoding->begin();
+            p_source->begin();
+            meta_out.begin();
+
             // get first streem
-            input_stream = nextStream(1);
-            if (input_stream!=nullptr) {
-                meta_out.begin();
+            p_input_stream = p_source->nextStream(1);
+            if (p_input_stream!=nullptr) {
                 copier.setCallbackOnWrite(onWrite, this);
-                copier.begin(*out, *input_stream);
-                timeout = millis() + source->timeoutMs();
+                copier.begin(*p_out_decoding, *p_input_stream);
+                timeout = millis() + p_source->timeoutMs();
                 active = isActive;
                 result = true;
             } else {
@@ -339,12 +350,16 @@ class AudioPlayer: public AudioBaseInfoDependent {
             return result;
         }
 
+        /// Updates the audio info in the related objects
         virtual void setAudioInfo(AudioBaseInfo info) {
             LOGD(LOG_METHOD);
             LOGI("sample_rate: %d", info.sample_rate);
             LOGI("bits_per_sample: %d", info.bits_per_sample);
             LOGI("channels: %d", info.channels);
-            volumeOut.setAudioInfo(info);
+            // notifiy volume
+            volume_out.setAudioInfo(info);
+            // notifiy final ouput: e.g. i2s
+            AudioBaseInfoDependent *audioInfoTarget = (AudioBaseInfoDependent*) p_final_output;
             if (audioInfoTarget!=nullptr){
                 audioInfoTarget->setAudioInfo(info);
             }
@@ -368,13 +383,13 @@ class AudioPlayer: public AudioBaseInfoDependent {
 	 		LOGD(LOG_METHOD);
             active = false;
 
-            input_stream = nextStream(+1);
+            p_input_stream = p_source->nextStream(+1);
             meta_out.begin();
 
-            if (input_stream!=nullptr) {
-                copier.begin(*out, *input_stream);
+            if (p_input_stream!=nullptr) {
+                copier.begin(*p_out_decoding, *p_input_stream);
                 active = true;
-                timeout = millis() + source->timeoutMs();
+                timeout = millis() + p_source->timeoutMs();
             }    
         }
 
@@ -386,10 +401,10 @@ class AudioPlayer: public AudioBaseInfoDependent {
         /// sets the volume - values need to be between 0.0 and 1.0
         void setVolume(float volume){
             if (volume>=0 && volume<=1.0) {
-                if (abs(volume-currentVolume)>0.01){
+                if (abs(volume - current_volume)>0.01){
                     LOGI("setVolume(%f)", volume);
-                    volumeOut.setVolume(volume);
-                    currentVolume = volume;
+                    volume_out.setVolume(volume);
+                    current_volume = volume;
                 }
             } else {
                 LOGE("setVolume value '%f' out of range (0.0 -1.0)", volume);
@@ -398,7 +413,7 @@ class AudioPlayer: public AudioBaseInfoDependent {
 
         /// Determines the actual volume
         float volume() {
-            return volumeOut.volume();
+            return volume_out.volume();
         }
 
         /// Call this method in the loop. 
@@ -408,18 +423,18 @@ class AudioPlayer: public AudioBaseInfoDependent {
                 // handle sound
                 if (copier.copy() || timeout==0){
                     // reset timeout
-                    timeout = millis() + source->timeoutMs();
+                    timeout = millis() + p_source->timeoutMs();
                 }
 
                 //move to next stream after timeout
                 if (millis()>timeout){
         	 		LOGW("-> timeout");
                     // open next stream
-                    input_stream = nextStream(+1);
-                    if (input_stream!=nullptr){
+                    p_input_stream = p_source->nextStream(+1);
+                    if (p_input_stream!=nullptr){
                         LOGD("open next stream");
                         meta_out.begin();
-                        copier.begin(*out, *input_stream);
+                        copier.begin(*p_out_decoding, *p_input_stream);
                     } else {
                         LOGD("stream is null");
                     }
@@ -437,17 +452,17 @@ class AudioPlayer: public AudioBaseInfoDependent {
     protected:
 
         bool active = false;
-        AudioSource *source = nullptr;
-        AudioDecoder *decoder = nullptr;
-        EncodedAudioStream *out = nullptr; // Decoding stream
-        VolumeOutput volumeOut; // volume control
-        Stream* input_stream = nullptr;
+        AudioSource *p_source = nullptr;
+        //AudioDecoder *p_decoder = nullptr;
+        EncodedAudioStream *p_out_decoding = nullptr; // Decoding stream
+        VolumeOutput volume_out; // volume control
+        Stream* p_input_stream = nullptr;
+        Print *p_final_output = nullptr;
         MetaDataID3 meta_out;
-        bool meta_active = false;
         StreamCopy copier; // copies sound into i2s
-        AudioBaseInfoDependent *audioInfoTarget=nullptr;
+        bool meta_active = false;
         uint32_t timeout = 0;
-        float currentVolume=-1; // illegal value which will trigger an update
+        float current_volume=-1; // illegal value which will trigger an update
 
 
         /// Callback implementation which writes to metadata
@@ -458,12 +473,6 @@ class AudioPlayer: public AudioBaseInfoDependent {
                 p->meta_out.write((const uint8_t*)data, len);
             }
         }
-
-        /// Returns next stream
-        virtual Stream* nextStream(int offset) {
-    	 	LOGD(LOG_METHOD);
-            return source->nextStream(offset);
-        };
 
 };
 
