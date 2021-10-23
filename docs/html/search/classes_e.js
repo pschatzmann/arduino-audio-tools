@@ -3,7 +3,7 @@ var searchData=
   ['serialdac_438',['SerialDAC',['../classaudio__tools_1_1_serial_d_a_c.html',1,'audio_tools']]],
   ['silencegenerator_439',['SilenceGenerator',['../classaudio__tools_1_1_silence_generator.html',1,'audio_tools']]],
   ['simpledac_440',['SimpleDAC',['../classaudio__tools_1_1_simple_d_a_c.html',1,'audio_tools']]],
-  ['simulatedaudiopot_441',['SimulatedAudioPot',['../class_simulated_audio_pot.html',1,'']]],
+  ['simulatedaudiopot_441',['SimulatedAudioPot',['../classaudio__tools_1_1_simulated_audio_pot.html',1,'audio_tools']]],
   ['sinewavegenerator_442',['SineWaveGenerator',['../classaudio__tools_1_1_sine_wave_generator.html',1,'audio_tools']]],
   ['singlebuffer_443',['SingleBuffer',['../classaudio__tools_1_1_single_buffer.html',1,'audio_tools']]],
   ['singlebuffer_3c_20uint8_5ft_20_3e_444',['SingleBuffer&lt; uint8_t &gt;',['../classaudio__tools_1_1_single_buffer.html',1,'audio_tools']]],

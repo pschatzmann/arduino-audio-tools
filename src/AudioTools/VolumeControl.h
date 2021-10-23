@@ -1,5 +1,7 @@
 #pragma once
 
+namespace audio_tools {
+
 /**
  * @brief Abstract class for handling of the linear input volume to determine the multiplication factor which should be applied to the audio signal 
  * @author Phil Schatzmann
@@ -165,3 +167,5 @@ class CallbackVolumeControl : public VolumeControl {
         float (*callback)(float in) = nullptr;
 
 };
+
+} // namespace

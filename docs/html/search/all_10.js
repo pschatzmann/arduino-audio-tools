@@ -35,7 +35,7 @@ var searchData=
   ['setvolumecontrol_253',['setVolumeControl',['../classaudio__tools_1_1_volume_output.html#a96581c547ab2aa928ef156ee000a34b1',1,'audio_tools::VolumeOutput']]],
   ['silencegenerator_254',['SilenceGenerator',['../classaudio__tools_1_1_silence_generator.html',1,'audio_tools']]],
   ['simpledac_255',['SimpleDAC',['../classaudio__tools_1_1_simple_d_a_c.html',1,'audio_tools']]],
-  ['simulatedaudiopot_256',['SimulatedAudioPot',['../class_simulated_audio_pot.html',1,'']]],
+  ['simulatedaudiopot_256',['SimulatedAudioPot',['../classaudio__tools_1_1_simulated_audio_pot.html',1,'audio_tools']]],
   ['sinewavegenerator_257',['SineWaveGenerator',['../classaudio__tools_1_1_sine_wave_generator.html',1,'audio_tools']]],
   ['singlebuffer_258',['SingleBuffer',['../classaudio__tools_1_1_single_buffer.html',1,'audio_tools::SingleBuffer&lt; T &gt;'],['../classaudio__tools_1_1_single_buffer.html#a77d72fb81b055d21a214bfe6349b72ba',1,'audio_tools::SingleBuffer::SingleBuffer(int size)'],['../classaudio__tools_1_1_single_buffer.html#a346c292f4e91cb627c5da086e980cb82',1,'audio_tools::SingleBuffer::SingleBuffer()']]],
   ['singlebuffer_3c_20uint8_5ft_20_3e_259',['SingleBuffer&lt; uint8_t &gt;',['../classaudio__tools_1_1_single_buffer.html',1,'audio_tools']]],
