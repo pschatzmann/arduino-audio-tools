@@ -3,14 +3,14 @@
 #include "AudioConfig.h"
 #include "AudioTypes.h"
 #include "Buffers.h"
-//#include "AudioI2S/AudioI2S.h"
-//#include "AudioTools/AnalogAudio.h"
 
 namespace audio_tools {
 
 /**
- *  Base class for all Audio Streams. It support the boolean operator to test if the object
- *  is ready with data
+ * @brief Base class for all Audio Streams. It support the boolean operator to test if the object
+ * is ready with data
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 class AudioStream : public Stream {
     public:
@@ -44,8 +44,7 @@ class MemoryStream : public AudioStream {
 
         ~MemoryStream(){
 	 		LOGD(LOG_METHOD);
-            if (owns_buffer)
-                delete[] buffer;
+            if (owns_buffer) delete[] buffer;
         }
 
         // resets the read pointer
@@ -88,7 +87,7 @@ class MemoryStream : public AudioStream {
             return result;
         }
 
-        size_t readBytes(char *buffer, size_t length){
+        virtual size_t readBytes(char *buffer, size_t length){
             size_t count = 0;
             while (count < length) {
                 int c = read();
@@ -111,17 +110,13 @@ class MemoryStream : public AudioStream {
         virtual void flush(){
         }
 
-        void clear(bool reset=false){
+        virtual void clear(bool reset=false){
             write_pos = 0;
             read_pos = 0;
             if (reset){
                 // we clear the buffer data
                 memset(buffer,0,buffer_size);
             }
-        }
-
-        operator bool() {
-            return available()>0;
         }
 
     protected:
@@ -268,7 +263,7 @@ class BufferedStream : public AudioStream {
 
         /// reads a byte - to be avoided
         virtual int read() {
-        if (buffer->isEmpty()){
+            if (buffer->isEmpty()){
                 refill();
             }
             return buffer->read(); 
@@ -276,7 +271,7 @@ class BufferedStream : public AudioStream {
 
         /// peeks a byte - to be avoided
         virtual int peek() {
-        if (buffer->isEmpty()){
+            if (buffer->isEmpty()){
                 refill();
             }
             return buffer->peek();

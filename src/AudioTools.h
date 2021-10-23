@@ -14,7 +14,7 @@
 #include "AudioTools/Converter.h"
 #include "AudioTools/MusicalNotes.h"
 #include "AudioTools/SoundGenerator.h"
-#include "AudioI2S/AudioI2S.h"
+#include "AudioI2S/I2SStream.h"
 #include "AudioPWM/AudioPWM.h"
 #include "AudioAnalog/AnalogAudio.h"
 #include "AudioTools/AudioLogger.h"
