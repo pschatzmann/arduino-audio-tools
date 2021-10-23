@@ -31,18 +31,17 @@
  * @brief Common Default Settings that can usually be changed in the API
  */
 
-#define DEFAULT_BUFFER_SIZE 1024
+#define DEFAULT_BUFFER_SIZE 2048
 #define DEFAULT_SAMPLE_RATE 44100
 #define DEFAULT_CHANNELS 2
 #define DEFAULT_BITS_PER_SAMPLE 16
 #define I2S_DEFAULT_PORT 0
-#define I2S_BUFFER_SIZE 256
-#define I2S_BUFFER_COUNT 10
+#define I2S_BUFFER_SIZE 512
+#define I2S_BUFFER_COUNT 20
 #define A2DP_BUFFER_SIZE 512
 #define A2DP_BUFFER_COUNT 50
 #define CODEC_DELAY_MS 10
 #define COPY_DELAY_ON_NODATA 10
-#define STACK_SIZE 20000
 /**
  * ------------------------------------------------------------------------- 
  * @brief PWM
@@ -105,6 +104,7 @@
 #define URL_STREAM_CORE 0
 #define URL_STREAM_PRIORITY 2
 #define URL_STREAM_BUFFER_COUNT 10
+#define STACK_SIZE 20000
 
 // Default LED
 #ifndef LED_BUILTIN
