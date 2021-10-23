@@ -4,6 +4,7 @@
 #include "AudioTools/AudioTypes.h"
 #include "AudioTools/Buffers.h"
 #include "AudioTools/int24.h"
+#include "AudioTools/VolumeControl.h"
 
 #define MAX_SINGLE_CHARS 8
 
@@ -11,7 +12,8 @@ namespace audio_tools {
 
 /**
  * @brief Abstract Audio Ouptut class
- * 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 class AudioPrint : public Print {
     public:
@@ -40,7 +42,7 @@ class AudioPrint : public Print {
  * @brief Stream Wrapper which can be used to print the values as readable ASCII to the screen to be analyzed in the Serial Plotter
  * The frames are separated by a new line. The channels in one frame are separated by a ,
  * @tparam T 
-  * @author Phil Schatzmann
+ * @author Phil Schatzmann
  * @copyright GPLv3
 */
 template<typename T>
@@ -114,7 +116,8 @@ class CsvStream : public AudioPrint, public AudioBaseInfoDependent  {
 
 /**
  * @brief Creates a Hex Dump
- * 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 class HexDumpStream : public AudioPrint {
 
@@ -230,19 +233,6 @@ class EncodedAudioStream : public AudioPrint {
             active = false;
         }
 
-        /**
-         * @brief Construct a new Encoded Audio Stream object - used for decoding
-         * 
-         * @param outputStream 
-         * @param decoder 
-         */
-        EncodedAudioStream(Print &outputStream, AudioDecoder *decoder) {
-	 		LOGD(LOG_METHOD);
-            decoder_ptr = decoder;
-            decoder_ptr->setOutputStream(outputStream);
-            writer_ptr = decoder_ptr;
-            active = false;
-        }
 
         /**
          * @brief Construct a new Encoded Audio Stream object - used for decoding
@@ -272,19 +262,6 @@ class EncodedAudioStream : public AudioPrint {
             active = false;
         }
 
-        /**
-         * @brief Construct a new Encoded Audio Stream object - used for encoding
-         * 
-         * @param outputStream 
-         * @param encoder 
-         */
-        EncodedAudioStream(Print &outputStream, AudioEncoder *encoder) {
-	 		LOGD(LOG_METHOD);
-            encoder_ptr = encoder;
-            encoder_ptr->setOutputStream(outputStream);
-            writer_ptr = encoder_ptr;
-            active = false;
-        }
 
         /**
          * @brief Construct a new Encoded Audio Stream object - used for encoding
@@ -334,10 +311,11 @@ class EncodedAudioStream : public AudioPrint {
         /// encode the data
         virtual size_t write(const uint8_t *data, size_t len){
 	 		LOGD(LOG_METHOD);
-            if(writer_ptr==nullptr){
-                LOGE("writer_ptr is null");
+            if(writer_ptr==nullptr || data==nullptr){
+                LOGE("NPE");
+                return 0;
             }
-            return writer_ptr!=nullptr ? writer_ptr->write(data,len) : 0;
+            return writer_ptr->write(data, len);
         }
         
 
@@ -370,17 +348,19 @@ class EncodedAudioStream : public AudioPrint {
 };
 
 
-
-
 /**
- * @brief Output PWM object on which we can apply some volume settings.
- * 
+ * @brief Output PWM object on which we can apply some volume settings. To work properly the class needs to know the 
+ * bits per sample. If nothing is defined we assume 16 bits!
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 class VolumeOutput : public AudioPrint, public AudioBaseInfoDependent {
     public:
 
+        /// Default Constructor
         VolumeOutput() = default;
 
+        /// Constructor which automatically calls begin(Print out)!
         VolumeOutput(Print &out) {
             begin(out);
         }
@@ -391,10 +371,24 @@ class VolumeOutput : public AudioPrint, public AudioBaseInfoDependent {
             p_out = &out;
         }
 
+        /// Defines the volume control logic
+        void setVolumeControl(VolumeControl &vc){
+            cached_volume.setVolumeControl(vc);
+        }
+
+        /// Resets the volume control to use the standard logic
+        void resetVolumeControl(){
+            cached_volume.setVolumeControl(default_volume);
+        }
+
         /// Writes raw PCM audio data, which will be the input for the volume control 
         virtual size_t write(const uint8_t *buffer, size_t size){
 	 		LOGD(LOG_METHOD);
-            if (volume_value!=1.0) applyVolume(buffer,size);
+            if (buffer==nullptr || p_out==nullptr){
+                LOGE("NPE");
+                return 0;
+            }
+            if (volume_value < 0.99) applyVolume(buffer,size);
             return p_out->write(buffer, size);
         }
 
@@ -409,20 +403,20 @@ class VolumeOutput : public AudioPrint, public AudioBaseInfoDependent {
             this->info = info;
         }
 
-        /// Simplified helper method to define the sample size (alternative to setAudioInfo)
+        /// Shortcut method to define the sample size (alternative to setAudioInfo())
         void setBitsPerSample(int bits_per_sample){
             info.bits_per_sample = bits_per_sample;
         }
 
-        /// Simplified helper method to define the sample size (alternative to setAudioInfo)
+        /// Shortcut method to define the sample size (alternative to setAudioInfo())
         void setBytesPerSample(int bytes_per_sample){
             info.bits_per_sample = bytes_per_sample*8;
         }
 
         /// Decreases the volume:  needs to be in the range of 0 to 1.0
         void setVolume(float vol){
-            if (vol>1.0) vol = 1;
-            if (vol<0.0) vol = 0;
+            if (vol>1.0) vol = 1.0;
+            if (vol<0.0) vol = 0.0;
 
             // round to 2 digits
             float value = (int)(vol * 100 + .5);
@@ -439,6 +433,12 @@ class VolumeOutput : public AudioPrint, public AudioBaseInfoDependent {
         Print *p_out=nullptr;
         AudioBaseInfo info;
         float volume_value=1.0;
+        SimulatedAudioPot default_volume;
+        CachedVolumeControl cached_volume = CachedVolumeControl(default_volume);
+
+        VolumeControl &volumeControl(){
+            return cached_volume;
+        }
 
         void applyVolume(const uint8_t *buffer, size_t size){
             switch(info.bits_per_sample){
@@ -457,22 +457,25 @@ class VolumeOutput : public AudioPrint, public AudioBaseInfoDependent {
         }
 
         void applyVolume16(int16_t* data, size_t size){
+            float factor = volumeControl().getVolumeFactor(volume_value);
             for (size_t j=0;j<size;j++){
-                data[j]= static_cast<int16_t>(volume_value * data[j]);
+                data[j]= static_cast<int16_t>(factor * data[j]);
             }
         }
 
         void applyVolume24(int24_t* data, size_t size) {
+            float factor = volumeControl().getVolumeFactor(volume_value);
             for (size_t j=0;j<size;j++){
                 int32_t v = static_cast<int32_t>(data[j]);
-                int32_t v1 = volume_value * v;
+                int32_t v1 = factor * v;
                 data[j] = v1;
             }
         }
 
         void applyVolume32(int32_t* data, size_t size) {
+            float factor = volumeControl().getVolumeFactor(volume_value);
             for (size_t j=0;j<size;j++){
-                data[j]= static_cast<int32_t>(volume_value * data[j]);
+                data[j]= static_cast<int32_t>(factor * data[j]);
             }
         }
 
