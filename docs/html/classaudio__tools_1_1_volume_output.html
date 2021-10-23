@@ -75,7 +75,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Output PWM object on which we can apply some volume settings.  
+<p>Output PWM object on which we can apply some volume settings. To work properly the class needs to know the bits per sample. If nothing is defined we assume 16 bits!  
  <a href="classaudio__tools_1_1_volume_output.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_audio_output_8h_source.html">AudioOutput.h</a>&gt;</code></p>
@@ -93,8 +93,13 @@ Inheritance diagram for audio_tools::VolumeOutput:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:ad1ef07b703a8a4a969f30cb32f7d545b"><td class="memItemLeft" align="right" valign="top"><a id="ad1ef07b703a8a4a969f30cb32f7d545b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_volume_output.html#ad1ef07b703a8a4a969f30cb32f7d545b">VolumeOutput</a> ()=default</td></tr>
+<tr class="memdesc:ad1ef07b703a8a4a969f30cb32f7d545b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Constructor. <br /></td></tr>
+<tr class="separator:ad1ef07b703a8a4a969f30cb32f7d545b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08771fed2dab056c001cb0ddb296431d"><td class="memItemLeft" align="right" valign="top"><a id="a08771fed2dab056c001cb0ddb296431d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>VolumeOutput</b> (<a class="el" href="class_print.html">Print</a> &amp;out)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_volume_output.html#a08771fed2dab056c001cb0ddb296431d">VolumeOutput</a> (<a class="el" href="class_print.html">Print</a> &amp;out)</td></tr>
+<tr class="memdesc:a08771fed2dab056c001cb0ddb296431d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor which automatically calls begin(Print out)! <br /></td></tr>
 <tr class="separator:a08771fed2dab056c001cb0ddb296431d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9189c85370ef42b2d7cebd3a83f13e06"><td class="memItemLeft" align="right" valign="top"><a id="a9189c85370ef42b2d7cebd3a83f13e06"></a>
 virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_volume_output.html#a9189c85370ef42b2d7cebd3a83f13e06">availableForWrite</a> ()</td></tr>
@@ -104,22 +109,30 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_volume_output.html#afcb7af17e1821fd445f48031b1d69ec0">begin</a> (<a class="el" href="class_print.html">Print</a> &amp;out)</td></tr>
 <tr class="memdesc:afcb7af17e1821fd445f48031b1d69ec0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns the final output. <br /></td></tr>
 <tr class="separator:afcb7af17e1821fd445f48031b1d69ec0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acda1cd8cc28cb4572ba995c5c49f9bff"><td class="memItemLeft" align="right" valign="top"><a id="acda1cd8cc28cb4572ba995c5c49f9bff"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_volume_output.html#acda1cd8cc28cb4572ba995c5c49f9bff">resetVolumeControl</a> ()</td></tr>
+<tr class="memdesc:acda1cd8cc28cb4572ba995c5c49f9bff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the volume control to use the standard logic. <br /></td></tr>
+<tr class="separator:acda1cd8cc28cb4572ba995c5c49f9bff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8a33f26824a3973b4ce3ab246e44b4e"><td class="memItemLeft" align="right" valign="top"><a id="af8a33f26824a3973b4ce3ab246e44b4e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_volume_output.html#af8a33f26824a3973b4ce3ab246e44b4e">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> info)</td></tr>
 <tr class="memdesc:af8a33f26824a3973b4ce3ab246e44b4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detines the Audio info - The bits_per_sample are critical to work properly! <br /></td></tr>
 <tr class="separator:af8a33f26824a3973b4ce3ab246e44b4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a564af9041c5bd81febc73a061f94fbf8"><td class="memItemLeft" align="right" valign="top"><a id="a564af9041c5bd81febc73a061f94fbf8"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_volume_output.html#a564af9041c5bd81febc73a061f94fbf8">setBitsPerSample</a> (int bits_per_sample)</td></tr>
-<tr class="memdesc:a564af9041c5bd81febc73a061f94fbf8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simplified helper method to define the sample size (alternative to setAudioInfo) <br /></td></tr>
+<tr class="memdesc:a564af9041c5bd81febc73a061f94fbf8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shortcut method to define the sample size (alternative to <a class="el" href="classaudio__tools_1_1_volume_output.html#af8a33f26824a3973b4ce3ab246e44b4e" title="Detines the Audio info - The bits_per_sample are critical to work properly!">setAudioInfo()</a>) <br /></td></tr>
 <tr class="separator:a564af9041c5bd81febc73a061f94fbf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75d566d352b90ad00f80fad4d18656d6"><td class="memItemLeft" align="right" valign="top"><a id="a75d566d352b90ad00f80fad4d18656d6"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_volume_output.html#a75d566d352b90ad00f80fad4d18656d6">setBytesPerSample</a> (int bytes_per_sample)</td></tr>
-<tr class="memdesc:a75d566d352b90ad00f80fad4d18656d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simplified helper method to define the sample size (alternative to setAudioInfo) <br /></td></tr>
+<tr class="memdesc:a75d566d352b90ad00f80fad4d18656d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shortcut method to define the sample size (alternative to <a class="el" href="classaudio__tools_1_1_volume_output.html#af8a33f26824a3973b4ce3ab246e44b4e" title="Detines the Audio info - The bits_per_sample are critical to work properly!">setAudioInfo()</a>) <br /></td></tr>
 <tr class="separator:a75d566d352b90ad00f80fad4d18656d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a690867ea2ac2cae6f38b70bba18f1d22"><td class="memItemLeft" align="right" valign="top"><a id="a690867ea2ac2cae6f38b70bba18f1d22"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_volume_output.html#a690867ea2ac2cae6f38b70bba18f1d22">setVolume</a> (float vol)</td></tr>
 <tr class="memdesc:a690867ea2ac2cae6f38b70bba18f1d22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decreases the volume: needs to be in the range of 0 to 1.0. <br /></td></tr>
 <tr class="separator:a690867ea2ac2cae6f38b70bba18f1d22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96581c547ab2aa928ef156ee000a34b1"><td class="memItemLeft" align="right" valign="top"><a id="a96581c547ab2aa928ef156ee000a34b1"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_volume_output.html#a96581c547ab2aa928ef156ee000a34b1">setVolumeControl</a> (<a class="el" href="class_volume_control.html">VolumeControl</a> &amp;vc)</td></tr>
+<tr class="memdesc:a96581c547ab2aa928ef156ee000a34b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the volume control logic. <br /></td></tr>
+<tr class="separator:a96581c547ab2aa928ef156ee000a34b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e7f7561ddc7847d06c1036073a25fcf"><td class="memItemLeft" align="right" valign="top"><a id="a1e7f7561ddc7847d06c1036073a25fcf"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_volume_output.html#a1e7f7561ddc7847d06c1036073a25fcf">volume</a> ()</td></tr>
 <tr class="memdesc:a1e7f7561ddc7847d06c1036073a25fcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the current volume setting. <br /></td></tr>
@@ -248,6 +261,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>applyVolume24</b> (<a
 <tr class="memitem:a2d80493fcd1a7c54e5ffe4dcb7fae5f6"><td class="memItemLeft" align="right" valign="top"><a id="a2d80493fcd1a7c54e5ffe4dcb7fae5f6"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>applyVolume32</b> (int32_t *data, size_t size)</td></tr>
 <tr class="separator:a2d80493fcd1a7c54e5ffe4dcb7fae5f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7193cc3749431198fe37d3ec0a821a8"><td class="memItemLeft" align="right" valign="top"><a id="aa7193cc3749431198fe37d3ec0a821a8"></a>
+<a class="el" href="class_volume_control.html">VolumeControl</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>volumeControl</b> ()</td></tr>
+<tr class="separator:aa7193cc3749431198fe37d3ec0a821a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_class_print"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_print')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_print.html">Print</a></td></tr>
 <tr class="memitem:a46656410e23c0ec14d7a01b38b3b6f00 inherit pro_methods_class_print"><td class="memItemLeft" align="right" valign="top"><a id="a46656410e23c0ec14d7a01b38b3b6f00"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteError</b> (int err=1)</td></tr>
@@ -255,6 +271,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteError</b> (in
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:a1c89e48ab7134efa910af60078d36a8e"><td class="memItemLeft" align="right" valign="top"><a id="a1c89e48ab7134efa910af60078d36a8e"></a>
+<a class="el" href="class_cached_volume_control.html">CachedVolumeControl</a>&#160;</td><td class="memItemRight" valign="bottom"><b>cached_volume</b> = <a class="el" href="class_cached_volume_control.html">CachedVolumeControl</a>(default_volume)</td></tr>
+<tr class="separator:a1c89e48ab7134efa910af60078d36a8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab524232d6cf2becdb4ff4ce3c01cd1f4"><td class="memItemLeft" align="right" valign="top"><a id="ab524232d6cf2becdb4ff4ce3c01cd1f4"></a>
+<a class="el" href="class_simulated_audio_pot.html">SimulatedAudioPot</a>&#160;</td><td class="memItemRight" valign="bottom"><b>default_volume</b></td></tr>
+<tr class="separator:ab524232d6cf2becdb4ff4ce3c01cd1f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a889cb3d5ebffec7913136121396027e9"><td class="memItemLeft" align="right" valign="top"><a id="a889cb3d5ebffec7913136121396027e9"></a>
 <a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>info</b></td></tr>
 <tr class="separator:a889cb3d5ebffec7913136121396027e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -273,7 +295,9 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>tmpPos</b> =0</td></tr
 <tr class="separator:a9b463ab612e2a848734cf95caf9a7fb8 inherit pro_attribs_classaudio__tools_1_1_audio_print"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Output PWM object on which we can apply some volume settings. </p>
+<div class="textblock"><p>Output PWM object on which we can apply some volume settings. To work properly the class needs to know the bits per sample. If nothing is defined we assume 16 bits! </p>
+<dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/AudioTools/<a class="el" href="_audio_output_8h_source.html">AudioOutput.h</a></li>
 </ul>

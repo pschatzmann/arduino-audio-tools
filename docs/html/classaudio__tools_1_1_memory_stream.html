@@ -84,7 +84,7 @@ Inheritance diagram for audio_tools::MemoryStream:</div>
  <div class="center">
   <img src="classaudio__tools_1_1_memory_stream.png" usemap="#audio_5Ftools::MemoryStream_map" alt=""/>
   <map id="audio_5Ftools::MemoryStream_map" name="audio_5Ftools::MemoryStream_map">
-<area href="classaudio__tools_1_1_audio_stream.html" alt="audio_tools::AudioStream" shape="rect" coords="0,112,167,136"/>
+<area href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="audio_tools::AudioStream" shape="rect" coords="0,112,167,136"/>
 <area href="class_stream.html" alt="Stream" shape="rect" coords="0,56,167,80"/>
 <area href="class_print.html" alt="Print" shape="rect" coords="0,0,167,24"/>
   </map>
@@ -104,24 +104,21 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>available</b> 
 <tr class="memitem:a7dd9c3eb605d95f67b0152ddde4fd97a"><td class="memItemLeft" align="right" valign="top"><a id="a7dd9c3eb605d95f67b0152ddde4fd97a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> ()</td></tr>
 <tr class="separator:a7dd9c3eb605d95f67b0152ddde4fd97a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2cbc55b52996f8863a6cb34587c71e4c"><td class="memItemLeft" align="right" valign="top"><a id="a2cbc55b52996f8863a6cb34587c71e4c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> (bool reset=false)</td></tr>
-<tr class="separator:a2cbc55b52996f8863a6cb34587c71e4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad88572f515e30501749a81dee9c888f3"><td class="memItemLeft" align="right" valign="top"><a id="ad88572f515e30501749a81dee9c888f3"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> (bool reset=false)</td></tr>
+<tr class="separator:ad88572f515e30501749a81dee9c888f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2964574e95e333f840d39a4c4a11d0f3"><td class="memItemLeft" align="right" valign="top"><a id="a2964574e95e333f840d39a4c4a11d0f3"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>flush</b> ()</td></tr>
 <tr class="separator:a2964574e95e333f840d39a4c4a11d0f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ccd11ea881ecbed368b13607a16262f"><td class="memItemLeft" align="right" valign="top"><a id="a7ccd11ea881ecbed368b13607a16262f"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>operator bool</b> ()</td></tr>
-<tr class="separator:a7ccd11ea881ecbed368b13607a16262f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab695ba5bc47821e7b2fe4adf83007cbb"><td class="memItemLeft" align="right" valign="top"><a id="ab695ba5bc47821e7b2fe4adf83007cbb"></a>
 virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>peek</b> ()</td></tr>
 <tr class="separator:ab695ba5bc47821e7b2fe4adf83007cbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc4802b620b7027ffa222d1633b7d62e"><td class="memItemLeft" align="right" valign="top"><a id="abc4802b620b7027ffa222d1633b7d62e"></a>
 virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>read</b> ()</td></tr>
 <tr class="separator:abc4802b620b7027ffa222d1633b7d62e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0b1248da9b2c3b87ef242ca15b7b2836"><td class="memItemLeft" align="right" valign="top"><a id="a0b1248da9b2c3b87ef242ca15b7b2836"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>readBytes</b> (char *buffer, size_t length)</td></tr>
-<tr class="separator:a0b1248da9b2c3b87ef242ca15b7b2836"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4820a70cc137dd1241a479e0b788ca17"><td class="memItemLeft" align="right" valign="top"><a id="a4820a70cc137dd1241a479e0b788ca17"></a>
+virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>readBytes</b> (char *buffer, size_t length)</td></tr>
+<tr class="separator:a4820a70cc137dd1241a479e0b788ca17"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a16d18d7c1f2d9ccb36733b8142f863b9"><td class="memItemLeft" align="right" valign="top"><a id="a16d18d7c1f2d9ccb36733b8142f863b9"></a>
 virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (const uint8_t *buffer, size_t size)</td></tr>
 <tr class="separator:a16d18d7c1f2d9ccb36733b8142f863b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
