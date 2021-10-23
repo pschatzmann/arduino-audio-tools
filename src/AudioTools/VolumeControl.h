@@ -108,9 +108,9 @@ class ExponentialVolumeControl : public VolumeControl {
 
 /**
  * Simple simulated audio pot volume control inspired by https://eepower.com/resistor-guide/resistor-types/potentiometer-taper/#
- * We split up the input/output curve into 2 linear pieces with a slow and a fast rasing part. 
- * The slow rasing part goes from (0,0) to (x,y).
- * The fast rasing part goes from (x,y) to (1,1).
+ * We split up the input/output curve into 2 linear pieces with a slow and a fast raising part. 
+ * The slow raising part goes from (0,0) to (x,y).
+ * The fast raising part goes from (x,y) to (1,1).
  *  
  * @author Phil Schatzmann
  * @copyright GPLv3
