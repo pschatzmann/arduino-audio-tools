@@ -39,7 +39,7 @@
 #define I2S_BUFFER_SIZE 512
 #define I2S_BUFFER_COUNT 20
 #define A2DP_BUFFER_SIZE 512
-#define A2DP_BUFFER_COUNT 50
+#define A2DP_BUFFER_COUNT 20
 #define CODEC_DELAY_MS 10
 #define COPY_DELAY_ON_NODATA 10
 /**
@@ -121,7 +121,6 @@
 
 //----------------
 #ifdef ESP8266
-#define USE_A2DP
 #define USE_URL_ARDUINO
 #define USE_ESP8266_AUDIO
 #define USE_I2S

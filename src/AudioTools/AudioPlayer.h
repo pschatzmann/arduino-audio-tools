@@ -304,16 +304,55 @@ class AudioPlayer: public AudioBaseInfoDependent {
          * @brief Construct a new Audio Player object. The processing chain is
          * AudioSource -> Stream -copy> EncodedAudioStream -> VolumeOutput -> Print
          * 
-         * @param decoder 
+         * @param source 
          * @param output 
-         * @param chipSelect 
+         * @param decoder 
          */
-        AudioPlayer(AudioSource &source, Print &output, AudioDecoder &decoder ) {
+        AudioPlayer(AudioSource &source, AudioPrint &output, AudioDecoder &decoder ) {
             LOGD(LOG_METHOD);
             this->p_source = &source;
             this->volume_out.begin(output); 
             this->p_out_decoding = new EncodedAudioStream(volume_out, decoder); 
-            this->p_final_output = &output;
+            this->p_final_print = &output;
+
+            // notification for audio configuration
+            decoder.setNotifyAudioChange(*this); 
+        }
+
+        /**
+         * @brief Construct a new Audio Player object. The processing chain is
+         * AudioSource -> Stream -copy> EncodedAudioStream -> VolumeOutput -> Print
+         * 
+         * @param source 
+         * @param output 
+         * @param decoder 
+         * @param notify 
+         */
+        AudioPlayer(AudioSource &source, Print &output, AudioDecoder &decoder, AudioBaseInfoDependent *notify=nullptr ) {
+            LOGD(LOG_METHOD);
+            this->p_source = &source;
+            this->volume_out.begin(output); 
+            this->p_out_decoding = new EncodedAudioStream(volume_out, decoder); 
+            this->p_final_notify = notify;
+
+            // notification for audio configuration
+            decoder.setNotifyAudioChange(*this); 
+        }
+
+        /**
+         * @brief Construct a new Audio Player object. The processing chain is
+         * AudioSource -> Stream -copy> EncodedAudioStream -> VolumeOutput -> Print
+         * 
+         * @param source 
+         * @param output 
+         * @param decoder 
+         */
+        AudioPlayer(AudioSource &source, AudioStream &output, AudioDecoder &decoder ) {
+            LOGD(LOG_METHOD);
+            this->p_source = &source;
+            this->volume_out.begin(output); 
+            this->p_out_decoding = new EncodedAudioStream(volume_out, decoder); 
+            this->p_final_stream = &output;
 
             // notification for audio configuration
             decoder.setNotifyAudioChange(*this); 
@@ -359,10 +398,9 @@ class AudioPlayer: public AudioBaseInfoDependent {
             // notifiy volume
             volume_out.setAudioInfo(info);
             // notifiy final ouput: e.g. i2s
-            AudioBaseInfoDependent *audioInfoTarget = (AudioBaseInfoDependent*) p_final_output;
-            if (audioInfoTarget!=nullptr){
-                audioInfoTarget->setAudioInfo(info);
-            }
+            if (p_final_print!=nullptr) p_final_print->setAudioInfo(info);
+            if (p_final_stream!=nullptr) p_final_stream->setAudioInfo(info);
+            if (p_final_notify!=nullptr) p_final_notify->setAudioInfo(info);
         };
 
 
@@ -443,7 +481,9 @@ class AudioPlayer: public AudioBaseInfoDependent {
         MetaDataID3 meta_out; // Metadata parser
         EncodedAudioStream *p_out_decoding = nullptr; // Decoding stream
         Stream* p_input_stream = nullptr;
-        Print *p_final_output = nullptr;
+        AudioPrint *p_final_print = nullptr;
+        AudioStream *p_final_stream = nullptr;
+        AudioBaseInfoDependent *p_final_notify = nullptr;
         StreamCopy copier; // copies sound into i2s
         bool meta_active = false;
         uint32_t timeout = 0;

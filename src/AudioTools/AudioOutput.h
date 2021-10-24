@@ -32,11 +32,19 @@ class AudioPrint : public Print {
             tmpPos=0;
         }
 
+        // overwrite to do something useful
+        virtual void setAudioInfo(AudioBaseInfo info) {
+	 		LOGD(LOG_METHOD);
+            info.logInfo();
+        }
+
     protected:
         uint8_t tmp[MAX_SINGLE_CHARS];
         int tmpPos=0;
 
 };
+
+
 
 /**
  * @brief Stream Wrapper which can be used to print the values as readable ASCII to the screen to be analyzed in the Serial Plotter
@@ -46,7 +54,7 @@ class AudioPrint : public Print {
  * @copyright GPLv3
 */
 template<typename T>
-class CsvStream : public AudioPrint, public AudioBaseInfoDependent  {
+class CsvStream : public AudioPrint {
 
     public:
         CsvStream(int buffer_size=DEFAULT_BUFFER_SIZE, bool active=true) {
@@ -354,7 +362,7 @@ class EncodedAudioStream : public AudioPrint {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class VolumeOutput : public AudioPrint, public AudioBaseInfoDependent {
+class VolumeOutput : public AudioPrint {
     public:
 
         /// Default Constructor

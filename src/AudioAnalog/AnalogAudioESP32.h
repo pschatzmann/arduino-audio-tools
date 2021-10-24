@@ -150,7 +150,7 @@ class AnalogConfig : public AudioBaseInfo {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AnalogAudio  : public AudioStream,  public AudioBaseInfoDependent  {
+class AnalogAudio  : public AudioStream {
 
   public:
     /// Default constructor
@@ -428,7 +428,7 @@ class AnalogAudio  : public AudioStream,  public AudioBaseInfoDependent  {
  * @copyright GPLv3
  */
 
-class AnalogAudioStream : public BufferedStream, public AudioBaseInfoDependent  {
+class AnalogAudioStream : public BufferedStream  {
 
     public:
         AnalogAudioStream() : BufferedStream(DEFAULT_BUFFER_SIZE){

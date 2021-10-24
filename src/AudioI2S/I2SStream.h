@@ -66,7 +66,7 @@ class I2S : public I2SBase {
  * @copyright GPLv3
  */
 
-class I2SStream : public BufferedStream, public AudioBaseInfoDependent  {
+class I2SStream : public BufferedStream  {
 
     public:
         I2SStream(int mute_pin=PIN_I2S_MUTE) : BufferedStream(DEFAULT_BUFFER_SIZE){

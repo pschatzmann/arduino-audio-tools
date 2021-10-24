@@ -78,8 +78,6 @@ class StreamCopyT {
                 // write data
                 result = write(bytes_read, delayCount);
                 LOGI("StreamCopy::copy %zu -> %zu -> %zu bytes - in %zu hops", bytes_to_read, bytes_read, result, delayCount);
-            } else {
-
             } 
             return result;
         }
@@ -179,7 +177,7 @@ class StreamCopyT {
             size_t total = 0;
             int retry = 0;
             while(total<len){
-                size_t written = to->write(buffer+total, len-total);
+                size_t written = to->write((const uint8_t*)buffer+total, len-total);
                 total += written;
                 delayCount++;
 
