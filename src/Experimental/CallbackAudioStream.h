@@ -29,7 +29,7 @@ struct CallbackAudioStreamInfo : public AudioBaseInfo {
  * @copyright GPLv3
  * 
  */
-class CallbackAudioStream : public BufferedStream, public AudioBaseInfoSource, public AudioBaseInfoDependent {
+class CallbackAudioStream : public BufferedStream, public AudioBaseInfoSource{
     public:
         CallbackAudioStream():BufferedStream(80) {
         }

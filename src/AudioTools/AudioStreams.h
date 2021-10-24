@@ -12,8 +12,14 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioStream : public Stream {
+class AudioStream : public Stream, public AudioBaseInfoDependent {
     public:
+        // overwrite to do something useful
+        virtual void setAudioInfo(AudioBaseInfo info) {
+	 		LOGD(LOG_METHOD);
+            info.logInfo();
+        }
+
         operator bool() {
             return available()>0;
         }
@@ -314,7 +320,7 @@ class BufferedStream : public AudioStream {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class NullStream : public BufferedStream,  public AudioBaseInfoDependent {
+class NullStream : public BufferedStream {
     public:
         NullStream(bool measureWrite=false) : BufferedStream(100){
             is_measure = measureWrite;

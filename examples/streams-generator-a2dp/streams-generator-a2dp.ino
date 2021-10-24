@@ -29,6 +29,7 @@ void setup(void) {
   Serial.begin(115200);
 
   // We send the test signal via A2DP - so we conect to the MyMusic Bluetooth Speaker
+  out.setVolume(10);
   out.begin(TX_MODE, "MyMusic");
 
   Serial.println("A2DP is connected now...");

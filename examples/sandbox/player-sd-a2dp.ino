@@ -1,8 +1,10 @@
 // set this in AudioConfig.h or here after installing https://github.com/pschatzmann/arduino-libhelix.git
 #define USE_HELIX 
 #define USE_A2DP
+#define USE_SDFAT
 
 #include "AudioTools.h"
+#include "AudioA2DP.h"
 #include "AudioCodecs/CodecMP3Helix.h"
 
 using namespace audio_tools;  
@@ -15,13 +17,6 @@ MP3DecoderHelix decoder;
 AudioPlayer player(source, out, decoder);
 
 
-void printMetaData(MetaDataType type, const char* str, int len){
-  Serial.print("==> ");
-  Serial.print(MetaDataTypeStr[type]);
-  Serial.print(": ");
-  Serial.println(str);
-}
-
 void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
@@ -30,8 +25,7 @@ void setup() {
   out.begin(TX_MODE, "MyMusic");
 
   // setup player
-  //source.setFileFilter("*Bob Dylan*");
-  player.setCallbackMetadata(printMetaData);
+  player.setVolume(0.5);
   player.begin();
 }
 
