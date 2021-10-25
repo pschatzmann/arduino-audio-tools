@@ -60,8 +60,8 @@ void updateVolume() {
 // Moves to the next url when we touch the pin
 void updatePosition() {
    if (touchRead(nextButtonPin) < buttonPressedLimit) {
-      if (debouncer.debounce(next){
-        Serial.println("Moving to next url");
+      Serial.println("Moving to next url");
+      if (debouncer.debounce()){
         player.next();
       }
   }
