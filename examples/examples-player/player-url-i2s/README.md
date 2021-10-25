@@ -42,7 +42,6 @@ XMT  |	3V (or another GPIO PIN which is set to high)
 - XMT - Soft mute control(1): Soft mute (Low) / soft un-mute (High)
 
 
-
 ### Wiring the Volume Potentiometer
 
 ![DAC](https://www.pschatzmann.ch/wp-content/uploads/2021/10/Pot.jpg)
@@ -53,7 +52,15 @@ XMT  |	3V (or another GPIO PIN which is set to high)
 | GND     |  GND     | GND
 | VOUT    |  A0      | A0
 
+### Moving to the next song
 
+We use sensitive touch to move to the next url. 
+
+|  ESP32   | ESP8266
+|----------|---------
+|  GPIO13  | n/a
+
+Of cause it would be simpler just to use a simple push button. But I just had non at hand...
 
 ### Dependencies
 
