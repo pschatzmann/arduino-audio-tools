@@ -8,9 +8,8 @@
 #include "AudioTools/AudioStreams.h"
 #include "AudioTools/AudioCopy.h"
 #include "AudioCodecs/CodecMP3Helix.h"
+#include "AudioHttp/AudioHttp.h"
 #include "AudioHttp/Str.h"
-#include "AudioHttp/URLStream.h"
-#include "AudioHttp/URLStreamESP32.h"
 
 #ifdef USE_SDFAT
 #include <SPI.h>

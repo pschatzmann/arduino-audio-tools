@@ -23,8 +23,9 @@
 #include "AudioTools/AudioCopy.h"
 #include "AudioTools/PortAudioStream.h"
 #include "AudioTools/MetaDataID3.h"
-#include "AudioTools/AudioPlayer.h"
 #include "AudioCodecs/CodecWAV.h"
+#include "AudioHttp/AudioHttp.h"
+#include "AudioTools/AudioPlayer.h"
 
 
 /**
