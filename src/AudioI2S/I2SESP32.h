@@ -227,14 +227,14 @@ class I2SBase {
     }
 
     // determines the i2s_format_t
-    i2s_format_t toMode(I2SConfig &cfg) {
-      i2s_format_t mode;
+    i2s_mode_t toMode(I2SConfig &cfg) {
+      i2s_mode_t mode;
       if (cfg.is_digital){
         int i2s_format = cfg.is_master ? I2S_MODE_MASTER : I2S_MODE_SLAVE;
         int rx_tx = cfg.rx_tx_mode == TX_MODE ? I2S_MODE_TX : I2S_MODE_RX;
-        mode = (i2s_format_t) (i2s_format | rx_tx);
+        mode = (i2s_mode_t) (i2s_format | rx_tx);
       } else {
-        mode = (i2s_format_t) (cfg.rx_tx_mode ? I2S_MODE_DAC_BUILT_IN : I2S_MODE_ADC_BUILT_IN);
+        mode = (i2s_mode_t) (cfg.rx_tx_mode ? I2S_MODE_DAC_BUILT_IN : I2S_MODE_ADC_BUILT_IN);
       }
       return mode;
     }
