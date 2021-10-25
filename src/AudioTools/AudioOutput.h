@@ -181,44 +181,6 @@ class HexDumpStream : public AudioPrint {
         bool active = false;
 };
 
-/**
- * @brief Construct a new Encoded Stream object which is supporting defined Audio File types
- * @author Phil Schatzmann
- * @copyright GPLv3
- */
-class AudioOutputStream : public AudioPrint {
-    public:
-        AudioOutputStream(){
-            active = true;
-        }        
-
-        AudioOutputStream(AudioWriter &writer){
-            decoder_ptr = &writer;
-            active = true;
-        }
-    
-        void begin() {
-            active = true;
-        }
-
-        void end() {
-            active = false;
-        }
-
-        operator bool() {
-            return active && *decoder_ptr;
-        }
-
-        virtual size_t write(const uint8_t* data, size_t len) {  
-            if (decoder_ptr==nullptr || !active) return 0;
-	 		LOGD(LOG_METHOD);
-            return decoder_ptr->write(data, len);
-        }
-
-    protected:
-        AudioWriter *decoder_ptr;
-        bool active;
-};
 
 /**
  * @brief A more natural Stream class to process encoded data (aac, wav, mp3...).
@@ -270,7 +232,6 @@ class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource {
             active = false;
         }
 
-
         /**
          * @brief Construct a new Encoded Audio Stream object - used for encoding
          * 
@@ -284,6 +245,16 @@ class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource {
             writer_ptr = encoder_ptr;
             active = false;
         }
+
+        /**
+         * @brief Construct a new Encoded Audio Stream object - the Output and Encoder/Decoder needs to be defined with the begin method
+         * 
+         */
+        EncodedAudioStream(){
+	 		LOGD(LOG_METHOD);
+            active = false;
+        }
+
         /**
          * @brief Destroy the Encoded Audio Stream object
          * 
@@ -300,12 +271,36 @@ class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource {
             decoder_ptr->setNotifyAudioChange(bi);
         }
 
+
+        /// Starts the processing - sets the status to active
+        void begin(Print *outputStream, AudioEncoder *encoder) {
+	 		LOGD(LOG_METHOD);
+            encoder_ptr = encoder;
+            encoder_ptr->setOutputStream(*outputStream);
+            writer_ptr = encoder_ptr;
+            begin();
+        }
+
+        /// Starts the processing - sets the status to active
+        void begin(Print *outputStream, AudioDecoder *decoder) {
+	 		LOGD(LOG_METHOD);
+            decoder_ptr = decoder;
+            decoder_ptr->setOutputStream(*outputStream);
+            writer_ptr = decoder_ptr;
+            begin();
+        }
+
         /// Starts the processing - sets the status to active
         void begin() {
 	 		LOGD(LOG_METHOD);
-            decoder_ptr->begin();
-            encoder_ptr->begin();
-            active = true;
+            const CodecNOP *nop =  CodecNOP::instance();
+            if (decoder_ptr != nop || encoder_ptr != nop){
+                decoder_ptr->begin();
+                encoder_ptr->begin();
+                active = true;
+            } else {
+                LOGW("no decoder or encoder defined");
+            }
         }
 
         /// Ends the processing
