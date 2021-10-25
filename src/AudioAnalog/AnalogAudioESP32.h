@@ -192,7 +192,7 @@ class AnalogAudio  : public AudioStream {
 
       adc_config = cfg;
       i2s_config_t i2s_config = {
-          .mode = (i2s_format_t) cfg.mode_internal,
+          .mode = (i2s_mode_t) cfg.mode_internal,
           .sample_rate = cfg.sample_rate,
           .bits_per_sample = (i2s_bits_per_sample_t)16,
           .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,
