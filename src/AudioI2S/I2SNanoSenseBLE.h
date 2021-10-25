@@ -211,18 +211,18 @@ class I2SBase {
     void setupMode(I2SConfig cfg){
         LOGD(LOG_METHOD);
         // setup mode
-        switch(cfg.i2s_mode){
-          case I2S_STD_MODE:
-          case I2S_PHILIPS_MODE:
+        switch(cfg.i2s_format){
+          case I2S_STD_FORMAT:
+          case I2S_PHILIPS_FORMAT:
             NRF_I2S->CONFIG.ALIGN = I2S_CONFIG_FORMAT_FORMAT_I2S << I2S_CONFIG_FORMAT_FORMAT_Pos;
             break;
-          case I2S_MSB_MODE:
-          case I2S_LEFT_JUSTIFIED_MODE:
+          case I2S_MSB_FORMAT:
+          case I2S_LEFT_JUSTIFIED_FORMAT:
             NRF_I2S->CONFIG.FORMAT = I2S_CONFIG_FORMAT_FORMAT_I2S << I2S_CONFIG_FORMAT_FORMAT_Pos;
             NRF_I2S->CONFIG.ALIGN = I2S_CONFIG_ALIGN_ALIGN_Left << I2S_CONFIG_ALIGN_ALIGN_Pos;;
             break;
-          case I2S_LSB_MODE:
-          case I2S_RIGHT_JUSTIFIED_MODE:
+          case I2S_LSB_FORMAT:
+          case I2S_RIGHT_JUSTIFIED_FORMAT:
             NRF_I2S->CONFIG.FORMAT = I2S_CONFIG_FORMAT_FORMAT_I2S << I2S_CONFIG_FORMAT_FORMAT_Pos;
             NRF_I2S->CONFIG.ALIGN = I2S_CONFIG_ALIGN_ALIGN_Right << I2S_CONFIG_ALIGN_ALIGN_Pos;;
             break;

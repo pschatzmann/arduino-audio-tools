@@ -37,7 +37,7 @@ class I2SConfig : public AudioBaseInfo {
     int pin_ws = PIN_I2S_WS;
     int pin_bck = PIN_I2S_BCK;
     int pin_data = PIN_I2S_DATA_OUT;
-    I2SMode i2s_mode = I2S_STD_MODE;
+    I2SFormat i2s_format = I2S_STD_FORMAT;
     bool is_digital = true;  // e.g. the ESP32 supports analog input or output
 
     void logInfo() {
@@ -45,7 +45,7 @@ class I2SConfig : public AudioBaseInfo {
       LOGI("pin_ws: %d", pin_ws);
       LOGI("pin_bck: %d", pin_bck);
       LOGI("pin_data: %d", pin_data);
-      LOGI("i2s_mode: %d", i2s_mode);
+      LOGI("i2s_format: %d", i2s_format);
     }
 
 };

@@ -32,7 +32,7 @@ void setup(){
   //config.pin_ws = 10;
   //config.pin_bck = 11;
   //config.pin_data = 12;
-  //config.mode = I2S_STD_MODE;
+  //config.mode = I2S_STD_FORMAT;
   i2s.begin(config);
 
   // setup I2S based on sampling rate provided by decoder

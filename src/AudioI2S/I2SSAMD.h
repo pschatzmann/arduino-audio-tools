@@ -28,7 +28,7 @@ class I2SBase {
 
     /// starts the DAC 
     void begin(I2SConfig cfg) {
-        I2S.begin(cfg.i2s_mode, cfg.sample_rate, cfg.bits_per_sample, cfg.is_master);
+        I2S.begin(cfg.i2s_format, cfg.sample_rate, cfg.bits_per_sample, cfg.is_master);
         if (cfg.mode = TX_MODE){
             I2S.enableTransmitter();
         } else {
