@@ -298,15 +298,18 @@ class Debouncer {
         }
 
         /// Prevents that the same method is executed multiple times within the indicated time limit
-        void debounce(void(*cb)(void *ref)){
+        bool debounce(void(*cb)(void *ref)=nullptr){
+            bool result = false;
             if (millis() > debounce_ms){
                 LOGI("accpted");
-                cb(p_ref);
+                if (cb!=nullptr) cb(p_ref);
                 // new time limit
                 debounce_ms = millis()+ms;
+                result = true;
             } else {
                 LOGI("rejected");
             }
+            return result;
         }
 
     protected:
