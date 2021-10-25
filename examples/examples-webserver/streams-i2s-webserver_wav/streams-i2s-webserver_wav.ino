@@ -5,8 +5,8 @@
  *
  * @author Phil Schatzmann
  * @copyright GPLv3
- * 
  */
+
 #include "TTS.h"
 #include "AudioTools.h"
 
