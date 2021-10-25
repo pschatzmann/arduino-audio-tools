@@ -9,6 +9,7 @@
 
 // Add this in your sketch or change the setting in AudioConfig.h
 #define USE_A2DP
+#define USE_ESP8266_AUDIO
 
 #include <SPI.h>
 #include <SD.h>
@@ -23,17 +24,17 @@ using namespace audio_tools;
 const int sd_ss_pin = 5;
 const char* fileName = "/audio.mp3";
 BluetoothA2DPSource a2dp_source;
-AudioFileSourceSD *file;
-AudioGeneratorMP3 *mp3;
-AudioOutputWithCallback *out;
-volatile float volume = 1.0  // you can update this value to change the volue
+AudioFileSourceSD *file=nullptr;
+AudioGeneratorMP3 *mp3=nullptr;
+AudioOutputWithCallback *out=nullptr;
+volatile float volume = 1.0;  // you can update this value to change the volue
 
 
 // callback used by A2DP to provide the sound data
 int32_t get_sound_data(Frame* data, int32_t len) {  
   // get data
-  if out == 0 return 0;
-  int32_t result = out->read(data, len)
+  if (out == nullptr) return 0;
+  int32_t result = out->read(data, len);
   // set volume
   for (int j=0;j<len;j++){
     data[j].channel1 = data[j].channel1 * volume;
