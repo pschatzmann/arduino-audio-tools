@@ -21,8 +21,12 @@ AudioSourceURL source(urlStream, urls,"audio/mp3", 5, 0);
 I2SStream i2s;
 MP3DecoderHelix decoder;
 AudioPlayer player(source, i2s, decoder);
-const int volumePin = A0;
 
+// additional controls
+const int volumePin = A0;
+Debouncer nextBuffonDebouncer(2000);
+const int nextButtonPin = 13; // Sensitive touch 4 
+const int buttonPressedLimit = 30;// touch limit -> increase to make more sensitive
 
 void printMetaData(MetaDataType type, const char* str, int len){
   Serial.print("==> ");
@@ -44,6 +48,7 @@ void setup() {
   player.begin();
 }
 
+// Sets the volume control from a linear potentiometer input
 void updateVolume() {
   // Reading potentiometer value (range is 0 - 4095)
   float vol = static_cast<float>(analogRead(volumePin));
@@ -51,7 +56,21 @@ void updateVolume() {
   player.setVolume(vol/4095.0);
 }
 
+
+// Moves to the next url when we touch the pin
+// Moves to the next url when we touch the pin
+void updatePosition() {
+   if (touchRead(nextButtonPin) < buttonPressedLimit) {
+      Serial.println("Moving to next url");
+      auto next = [](void *) { player.next();};
+      debouncer.debounce(next);
+  }
+}
+
+
+
 void loop() {
-  //updateVolume();
+  //updateVolume(); // remove comments to activate volume control
+  //updatePosition();  // remove comments to activate position control
   player.copy();
 }
