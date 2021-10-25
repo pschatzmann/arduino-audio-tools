@@ -10,7 +10,7 @@
 namespace audio_tools {
 
 /// Calback which writes the sound data to the stream
-typedef void (*AudioServerDataCallback)(Stream &out);
+typedef void (*AudioServerDataCallback)(Stream *out);
 
 /**
  * @brief A simple Arduino Webserver which streams the result 
@@ -164,7 +164,7 @@ class AudioServer {
             if (callback!=nullptr){
                 // provide data via Callback
                 LOGI("sendReply - calling callback");
-                callback(client);
+                callback(&client);
                 client.stop();
             } else {
                 // provide data for stream
@@ -331,10 +331,10 @@ class AudioEncoderServer  : public AudioServer {
 
             beginEncoder();
 
-            if (callback!=nullptr){
+            if (callback!=nullptr && encoded_stream!=nullptr){
                 // provide data via Callback
                 LOGI("sendReply - calling callback");
-                callback(*encoded_stream);
+                callback((Stream*)encoded_stream);
                 client.stop();
             } else {
                 // provide data for stream

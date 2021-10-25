@@ -14,9 +14,9 @@ using namespace audio_tools;
 AudioWAVServer server("ssid","password");
 
 // Callback which provides the audio data 
-void outputData(Stream &out){
+void outputData(Stream *out){
   Serial.print("providing data...");
-  Flite flite(out);
+  Flite flite(*out);
 
   // Setup Audio Info
   FliteOutputBase *o = flite.getOutput();

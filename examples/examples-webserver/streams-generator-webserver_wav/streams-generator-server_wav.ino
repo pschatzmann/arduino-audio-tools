@@ -1,3 +1,13 @@
+/**
+ * @file streams-generator-server_wav.ino
+ *
+ *  This sketch generates a test sine wave. The result is provided as WAV stream which can be listened to in a Web Browser
+ *
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ * 
+ */
+
 #include "AudioTools.h"
 
 using namespace audio_tools;

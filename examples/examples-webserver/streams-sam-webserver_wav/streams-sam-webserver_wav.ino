@@ -15,11 +15,11 @@ int channels = 1;
 int bits_per_sample = 8;
 
 // Callback which provides the audio data 
-void outputData(Stream &out){
+void outputData(Stream *out){
   Serial.print("providing data...");
-  SAM sam(out,  false);
+  SAM sam(*out,  false);
   sam.setOutputChannels(channels);
-  sam.setBitsPerSample(bits_per_sample);
+  sam.setOutputBitsPerSample(bits_per_sample);
 
   sam.say("hallo, I am SAM");
 }
