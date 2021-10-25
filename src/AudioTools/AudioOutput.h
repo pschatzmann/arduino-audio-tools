@@ -225,7 +225,7 @@ class AudioOutputStream : public AudioPrint {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class EncodedAudioStream : public AudioPrint { 
+class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource { 
     public: 
         /**
          * @brief Construct a new Encoded Stream object - used for decoding

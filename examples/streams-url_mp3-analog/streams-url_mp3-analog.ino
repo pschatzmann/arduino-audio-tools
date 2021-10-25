@@ -18,7 +18,7 @@ using namespace audio_tools;
 
 URLStream url("ssid","password");
 I2SStream i2s; // final output of decoded stream
-EncodedAudioStream dec(i2s, new MP3DecoderHelix()); // Decoding stream
+EncodedAudioStream dec(&i2s, new MP3DecoderHelix()); // Decoding stream
 StreamCopy copier(dec, url); // copy url to decoder
 
 

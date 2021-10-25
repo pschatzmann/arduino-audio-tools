@@ -16,7 +16,7 @@ using namespace audio_tools;
 // MemoryStream -> AudioOutputStream -> WAVDecoder -> CsvStream
 MemoryStream wav(knghtsng_wav, knghtsng_wav_len);
 CsvStream<int16_t> out(Serial);  // ASCII stream 
-EncodedAudioStream enc(out, new WAVDecoder());
+EncodedAudioStream enc(&out, new WAVDecoder());
 StreamCopy copier(enc, wav);    // copy in to out
 
 void setup(){
@@ -24,17 +24,17 @@ void setup(){
   AudioLogger::instance().begin(Serial, AudioLogger::Info);  
 
   // update number of channels from wav file
-  in.setNotifyAudioChange(out);
+  enc.setNotifyAudioChange(out);
   
   out.begin();
-  in.begin()
+  wav.begin();
 }
 
 void loop(){
-  if (in) {
+  if (wav) {
     copier.copy();
   } else {
-    auto info = in.decoder().audioInfo();
+    auto info = enc.decoder().audioInfo();
     LOGI("The audio rate from the wav file is %d", info.sample_rate);
     LOGI("The channels from the wav file is %d", info.channels);
     stop();
