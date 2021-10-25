@@ -12,7 +12,9 @@
 
 using namespace audio_tools;  
 
-AudioWAVServer server("ssid","password");
+//AudioEncoderServer server(new WAVEncoder(),"ssid","password");  
+AudioWAVServer server("ssid","password"); // the same a above
+
 I2SStream i2sStream;    // Access I2S as stream
 ConverterFillLeftAndRight<int16_t> filler(RightIsEmpty); // fill both channels
 
