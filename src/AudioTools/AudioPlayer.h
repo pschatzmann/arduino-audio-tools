@@ -233,7 +233,7 @@ class AudioSourceURL : public AudioSource {
 
         /// Setup Wifi URL
         virtual void begin() {
-             LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             setPos(-1);
         }
 
@@ -248,19 +248,13 @@ class AudioSourceURL : public AudioSource {
         /// Opens the next url from the array
         Stream* nextStream(int offset){
             pos += offset;
-            if (pos<0){
+            if (pos<0 || pos>=max){
                 pos=0;
             }
-            LOGI("nextStream: %s", urlArray[pos]);
+            LOGI("nextStream: %d -> %s", pos, urlArray[pos]);
             if (offset!=0 || actual_stream==nullptr){
                 if (started) actual_stream->end();
                 actual_stream->begin(urlArray[pos], mime);
-                pos += offset;
-                if (pos>=max){
-                    pos = 0;
-                } else if (pos<0){
-                    pos = max -1;
-                }
                 started=true;
             }
             return actual_stream;
@@ -286,6 +280,41 @@ class AudioSourceURL : public AudioSource {
 };
 
 #endif
+
+/**
+ * @brief Helper class to debounce user input from a push button
+ * 
+ */
+class Debouncer {
+
+    public: 
+        Debouncer(uint16_t timeoutMs = 5000, void* ref=nullptr){
+            setDebounceTimeout(timeoutMs);
+            p_ref = ref;
+        }
+
+        void setDebounceTimeout(uint16_t timeoutMs){
+            ms = timeoutMs;
+        }
+
+        /// Prevents that the same method is executed multiple times within the indicated time limit
+        void debounce(void(*cb)(void *ref)){
+            if (millis() > debounce_ms){
+                LOGI("accpted");
+                cb(p_ref);
+                // new time limit
+                debounce_ms = millis()+ms;
+            } else {
+                LOGI("rejected");
+            }
+        }
+
+    protected:
+        unsigned long debounce_ms = 0; // Debounce sensitive touch
+        uint16_t ms;
+        void *p_ref = nullptr;
+    
+};
 
 /**
  * @brief Implements a simple audio player which supports the following commands:
@@ -472,6 +501,12 @@ class AudioPlayer: public AudioBaseInfoDependent {
             meta_active = true;
             meta_out.setCallback(callback);
         }
+
+        /// Change the VolumeControl implementation
+        virtual void setVolumeControl(VolumeControl &vc){
+            volume_out.setVolumeControl(vc);
+        }
+
 
     protected:
         bool active = false;
