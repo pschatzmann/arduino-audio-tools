@@ -375,6 +375,12 @@ class AudioWAVServer : public AudioEncoderServer {
             }
         }
 
+                // provides a pointer to the encoder
+        WAVEncoder &wavEncoder(){
+            return *static_cast<WAVEncoder*>(encoder);
+        }
+
+
 };
 
 }

@@ -509,12 +509,18 @@ class WAVEncoder : public AudioEncoder {
             return is_open;
         }
 
+        /// Adds adds n empty bytes at the beginning of the data
+        void setDataOffset(uint16_t offset){
+            this->offset = offset;
+        }
+
     protected:
         Print* stream_ptr;
         WAVAudioInfo audioInfo = defaultConfig();
         int64_t size_limit;
         bool header_written = false;
         volatile bool is_open;
+        uint32_t offset=0; //adds n empty bytes at the beginning of the data
 
         void writeRiffHeader(){
             stream_ptr->write("RIFF",4);
@@ -548,6 +554,12 @@ class WAVEncoder : public AudioEncoder {
             stream_ptr->write("data",4);
             audioInfo.file_size -=44;
             write32(*stream_ptr, audioInfo.file_size);
+            if (offset>0) {
+                char empty[offset];
+                memset(empty,0, offset);
+                stream_ptr->write(empty,offset);  // resolve issue with wrong aligment
+            }
+
         }
 
 };
