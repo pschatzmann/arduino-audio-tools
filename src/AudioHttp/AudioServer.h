@@ -49,7 +49,7 @@ class AudioServer {
          * @param contentType Mime Type of result
          */
         void begin(Stream &in, const char* contentType) {
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             this->in = &in;
             this->content_type = contentType;
 
@@ -66,7 +66,7 @@ class AudioServer {
          * @param contentType Mime Type of result
          */
         void begin(AudioServerDataCallback cb, const char* contentType) {
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             this->in =nullptr;
             this->callback = cb;
             this->content_type = contentType;
@@ -150,7 +150,7 @@ class AudioServer {
         BaseConverter<int16_t> *converter_ptr = nullptr;
 
         void connectWiFi() {
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             if (WiFi.status() != WL_CONNECTED && network!=nullptr && password != nullptr){
                 WiFi.begin(network, password);
                 //WiFi.setSleep(false);
@@ -165,7 +165,7 @@ class AudioServer {
         }
 
         virtual void sendReplyHeader(){
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             // HTTP headers always start with a response code (e.g. HTTP/1.1 200 OK)
             // and a content-type so the client knows what's coming, then a blank line:
             client_obj.println("HTTP/1.1 200 OK");
@@ -178,7 +178,7 @@ class AudioServer {
         }
 
         virtual void sendReplyContent() {
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             if (callback!=nullptr){
                 // provide data via Callback
                 LOGI("sendReply - calling callback");
@@ -267,7 +267,7 @@ class AudioEncoderServer  : public AudioServer {
          * @param channels 
          */
         void begin(Stream &in, int sample_rate, int channels, int bits_per_sample=16, BaseConverter<int16_t> *converter=nullptr) {
-	 		LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             this->in = &in;
             audio_info.sample_rate = sample_rate;
             audio_info.channels = channels;
@@ -285,7 +285,7 @@ class AudioEncoderServer  : public AudioServer {
          * @param converter 
          */
         void begin(Stream &in, AudioBaseInfo info, BaseConverter<int16_t> *converter=nullptr) {
-	 		LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             this->in = &in;
             this->audio_info = info;
             encoder->setAudioInfo(audio_info);
@@ -302,7 +302,7 @@ class AudioEncoderServer  : public AudioServer {
          * @param channels 
          */
         void begin(AudioServerDataCallback cb, int sample_rate, int channels, int bits_per_sample=16) {
-	 		LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             audio_info.sample_rate = sample_rate;
             audio_info.channels = channels;
             audio_info.bits_per_sample = bits_per_sample;
@@ -326,7 +326,7 @@ class AudioEncoderServer  : public AudioServer {
 
 
         virtual void sendReplyContent() {
-	 		LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             if (callback!=nullptr){
                 encoded_stream.begin(out_ptr(), encoder);
                 // provide data via Callback to encoded_stream
