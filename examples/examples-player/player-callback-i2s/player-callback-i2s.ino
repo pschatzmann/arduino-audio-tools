@@ -1,3 +1,12 @@
+/**
+ * @file player-sd-callback.ino
+ * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-player/player-callback-i2s/README.md
+ * 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+
+
 // set this in AudioConfig.h or here after installing https://github.com/pschatzmann/arduino-libhelix.git
 #define USE_HELIX 
 
