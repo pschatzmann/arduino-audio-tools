@@ -221,12 +221,13 @@ class AudioSourceSdFat : public AudioSource {
  */
 class AudioSourceURL : public AudioSource {
     public:
-        AudioSourceURL(URLStream &urlSstream, const char *urlArray[],const char* mime, int arraySize=0, int startPos=0) {
+        template<typename T, size_t N>
+        AudioSourceURL(URLStream &urlStream, T (&urlArray)[N],const char* mime,  int startPos=0) {
             LOGD(LOG_METHOD);
-            this->actual_stream = &urlSstream;
+            this->actual_stream = &urlStream;
             this->mime = mime;
             this->urlArray = urlArray;
-            this->max = arraySize;
+            this->max = N;
             this->pos = startPos-1;
         }
 
@@ -488,7 +489,7 @@ class AudioPlayer: public AudioBaseInfoDependent {
 
                 // move to next stream after timeout
                 if (millis()>timeout){
-                    LOGW("-> timeout");
+                    LOGW("-> timeout - moving to next stream");
                     // open next stream
                     if (!startNextStream()){
                         LOGD("stream is null");
