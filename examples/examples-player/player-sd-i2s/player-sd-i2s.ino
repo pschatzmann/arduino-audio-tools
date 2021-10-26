@@ -1,3 +1,11 @@
+/**
+ * @file player-sd-i2s.ino
+ * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-player/player-sd-i2s/README.md
+ * 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+
 // set this in AudioConfig.h or here after installing https://github.com/pschatzmann/arduino-libhelix.git
 #define USE_HELIX 
 #define USE_SDFAT

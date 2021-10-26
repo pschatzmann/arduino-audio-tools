@@ -1,3 +1,11 @@
+/**
+ * @file player-url-i2s.ino
+ * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-player/player-url-i2s/README.md
+ * 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+
 // set this in AudioConfig.h or here after installing https://github.com/pschatzmann/arduino-libhelix.git
 #define USE_HELIX 
 
@@ -17,7 +25,7 @@ const char *wifi = "wifi";
 const char *password = "password";
 
 URLStream urlStream(wifi, password);
-AudioSourceURL source(urlStream, urls,"audio/mp3");
+AudioSourceURL source(urlStream, urls, "audio/mp3");
 I2SStream i2s;
 MP3DecoderHelix decoder;
 AudioPlayer player(source, i2s, decoder);
