@@ -54,13 +54,13 @@ XMT  |	3V (or another GPIO PIN which is set to high)
 
 ### Moving to the next song
 
-We use sensitive touch to move to the next url. 
+We use a button to move to the next url. 
 
-|  ESP32   | ESP8266
-|----------|---------
-|  GPIO13  | n/a
+|  Button    |  ESP32   | ESP8266
+|------------|----------|---------
+|  Button    |  GPIO13  | GPIO13
+|  Out 3V
 
-Of cause it would be simpler just to use a simple push button. But I just had non at hand...
 
 ### Dependencies
 

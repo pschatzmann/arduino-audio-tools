@@ -17,16 +17,15 @@ const char *wifi = "wifi";
 const char *password = "password";
 
 URLStream urlStream(wifi, password);
-AudioSourceURL source(urlStream, urls,"audio/mp3", 5, 0);
+AudioSourceURL source(urlStream, urls,"audio/mp3");
 I2SStream i2s;
 MP3DecoderHelix decoder;
 AudioPlayer player(source, i2s, decoder);
 
 // additional controls
 const int volumePin = A0;
-Debouncer nextBuffonDebouncer(2000);
-const int nextButtonPin = 13; // Sensitive touch 4 
-const int buttonPressedLimit = 30;// touch limit -> increase to make more sensitive
+Debouncer nextButtonDebouncer(2000);
+const int nextButtonPin = 13;
 
 void printMetaData(MetaDataType type, const char* str, int len){
   Serial.print("==> ");
@@ -59,9 +58,9 @@ void updateVolume() {
 
 // Moves to the next url when we touch the pin
 void updatePosition() {
-   if (touchRead(nextButtonPin) < buttonPressedLimit) {
+   if (digitalRead(nextButtonPin)) {
       Serial.println("Moving to next url");
-      if (debouncer.debounce()){
+      if (nextButtonDebouncer.debounce()){
         player.next();
       }
   }

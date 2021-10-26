@@ -70,8 +70,8 @@ class BufferedTaskStream : public AudioStream {
 
         /// peeks a byte - to be avoided
         virtual int peek() {
-            int result = -1;
             if (!ready) return -1;
+            int result = -1;
             xSemaphoreTake(mutex, portMAX_DELAY);
             result = buffers.peek();
             xSemaphoreGive(mutex);
@@ -199,8 +199,8 @@ class URLStream : public AudioStream {
 
         void end(){
             LOGD(LOG_METHOD);
-            p_urlStream->end();
             taskStream.end();
+            p_urlStream->end();
         }
 
         /// provides access to the HttpRequest
