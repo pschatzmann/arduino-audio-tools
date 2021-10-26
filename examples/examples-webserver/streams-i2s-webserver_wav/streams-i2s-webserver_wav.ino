@@ -7,7 +7,6 @@
  * @copyright GPLv3
  */
 
-#include "TTS.h"
 #include "AudioTools.h"
 
 using namespace audio_tools;  
@@ -22,9 +21,14 @@ void setup(){
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
+  //server.audioEncoder()->setOffset(1);
+
   // start i2s input with default configuration
   Serial.println("starting I2S...");
   auto config = i2sStream.defaultConfig(RX_MODE);
+  config.pin_bck = 32;
+  config.pin_ws = 35;
+  config.pin_data = 34;
   config.sample_rate = 22050;
   config.channels = 2;
   config.bits_per_sample = 16;

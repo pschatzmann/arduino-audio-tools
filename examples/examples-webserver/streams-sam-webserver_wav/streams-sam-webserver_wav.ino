@@ -5,8 +5,8 @@
  * @copyright GPLv3
  * 
  */
-#include "sam_arduino.h"
 #include "AudioTools.h"
+#include "sam_arduino.h"
 
 using namespace audio_tools;  
 
