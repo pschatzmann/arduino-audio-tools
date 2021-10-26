@@ -7,12 +7,14 @@
  * @copyright GPLv3
  */
 
+#define USE_LAME
+
 #include "AudioTools.h"
+#include "AudioCodecs/CodecMP3LAME.h"
 
 using namespace audio_tools;  
 
-//AudioEncoderServer server(new WAVEncoder(),"ssid","password");  
-AudioWAVServer server("ssid","password"); // the same a above
+AudioEncoderServer server(new MP3EncoderLAME(),"ssid","password");  
 
 I2SStream i2sStream;    // Access I2S as stream
 ConverterFillLeftAndRight<int16_t> filler(RightIsEmpty); // fill both channels
@@ -24,7 +26,7 @@ void setup(){
   // start i2s input with default configuration
   Serial.println("starting I2S...");
   auto config = i2sStream.defaultConfig(RX_MODE);
-  config.i2s_format = I2S_LSB_FORMAT; // if quality is bad change to I2S_MSB_FORMAT https://github.com/pschatzmann/arduino-audio-tools/issues/23
+  config.i2s_format = I2S_MSB_FORMAT;
   config.sample_rate = 22050;
   config.channels = 2;
   config.bits_per_sample = 16;
