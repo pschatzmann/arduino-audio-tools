@@ -31,13 +31,13 @@
  * @brief Common Default Settings that can usually be changed in the API
  */
 
-#define DEFAULT_BUFFER_SIZE 2048
+#define DEFAULT_BUFFER_SIZE 1024 // 2048
 #define DEFAULT_SAMPLE_RATE 44100
 #define DEFAULT_CHANNELS 2
 #define DEFAULT_BITS_PER_SAMPLE 16
 #define I2S_DEFAULT_PORT 0
 #define I2S_BUFFER_SIZE 512
-#define I2S_BUFFER_COUNT 20
+#define I2S_BUFFER_COUNT 5 // 20
 #define A2DP_BUFFER_SIZE 512
 #define A2DP_BUFFER_COUNT 20
 #define CODEC_DELAY_MS 10
