@@ -155,8 +155,14 @@ class StreamCopyT {
             this->onWriteObj = obj;
         }
 
+        /// Defines the max number of retries 
         void setRetry(int retry){
             retryLimit = retry;
+        }
+
+        /// Provides the buffer size
+        int bufferSize() {
+            return buffer_size;
         }
 
     protected:

@@ -82,19 +82,6 @@ int32_t a2dp_stream_source_sound_data(Frame* data, int32_t len) {
         result_len = len;
     }
 
-
-    // Log result
-    // if (AudioLogger::instance().level()==AudioLogger::Debug){
-    //     LOGD("a2dp_stream_source_sound_data %d -> %d", len, result_len);   
-    // } else {
-    //     if (result_len<len){
-    //         LOGW("a2dp_stream_source_sound_data underflow: %d -> %d ", len, result_len);   
-    //     }
-    // }
-
-    // allow some other task 
-    //yield();
-
     return result_len;
 }
 
@@ -104,7 +91,7 @@ void a2dp_stream_sink_sound_data(const uint8_t* data, uint32_t len) {
         uint32_t result_len = a2dp_buffer.writeArray(data, len);
         LOGI("a2dp_stream_sink_sound_data %d -> %d", len, result_len);
         // allow some other task 
-        yield();
+        //yield();
     }
 }
 
@@ -152,6 +139,7 @@ class A2DPStream : public AudioStream {
         void begin(RxTxMode mode, const char* name){
             this->mode = mode;
             this->name = name;
+            LOGI("Connecting to %s",name);
 
 
            switch (mode){
@@ -160,7 +148,7 @@ class A2DPStream : public AudioStream {
                     source(); // allocate object
                     a2dp_source->start((char*)name, a2dp_stream_source_sound_data);  
                     a2dp_source->set_on_connection_state_changed(a2dpStateCallback, this);
-                    while(!a2dp_source->isConnected()){
+                    while(!a2dp_source->is_connected()){
                         delay(1000);
                     }
                     LOGI("a2dp_source is connected...");
@@ -173,7 +161,7 @@ class A2DPStream : public AudioStream {
                     a2dp_sink->set_stream_reader(&a2dp_stream_sink_sound_data, false);
                     a2dp_sink->start((char*)name);
                     a2dp_sink->set_on_connection_state_changed(a2dpStateCallback, this);
-                    while(!a2dp_sink->isConnected()){
+                    while(!a2dp_sink->is_connected()){
                         delay(1000);
                     }
                     LOGI("a2dp_sink is connected...");
@@ -185,8 +173,8 @@ class A2DPStream : public AudioStream {
         /// checks if we are connected
         bool isConnected() {
             if (a2dp_source==nullptr && a2dp_sink==nullptr) return false;
-            if (a2dp_source!=nullptr) return a2dp_source->isConnected();
-            return a2dp_sink->isConnected();
+            if (a2dp_source!=nullptr) return a2dp_source->is_connected();
+            return a2dp_sink->is_connected();
         }
 
         /// is ready to process data
@@ -201,11 +189,16 @@ class A2DPStream : public AudioStream {
 
         /// Writes the data into a temporary send buffer - where it can be picked up by the callback
         virtual size_t write(const uint8_t* data, size_t len) {   
+	 		LOGD("%s: %zu", LOG_METHOD, len);
+
             size_t result = 0; 
             if (is_a2dp_active){
-                LOGD("write %d", len);
-                result = a2dp_buffer.writeArray(data,len);
-                LOGI("write %d -> %d", len,result);
+                if (a2dp_buffer.availableToWrite()>=len){
+                    result = a2dp_buffer.writeArray(data, len);
+                    LOGD("write %d -> %d", len, result);
+                } else {
+                    LOGI("write %d - buffer full (available sound: %d, free: %d)", len, a2dp_buffer.available(), a2dp_buffer.availableToWrite() );
+                }
             } else {
                 LOGW( "write failed because !is_a2dp_active (yet)");
                 delay(5000);
@@ -274,9 +267,9 @@ class A2DPStream : public AudioStream {
         static void a2dpStateCallback(esp_a2d_connection_state_t state, void *caller){
             LOGD(LOG_METHOD);
             A2DPStream *self = (A2DPStream*)caller;
-            // if (state==ESP_A2D_CONNECTION_STATE_CONNECTED){
-            //     self->is_a2dp_active = true;
-            // } 
+            if (state==ESP_A2D_CONNECTION_STATE_CONNECTED){
+                 is_a2dp_active = true;
+            } 
             LOGW("==> state: %s", self->a2dp->to_str(state));
         }
 

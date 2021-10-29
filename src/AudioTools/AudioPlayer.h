@@ -410,7 +410,9 @@ class AudioPlayer: public AudioBaseInfoDependent {
             // get first streem
             p_input_stream = p_source->nextStream(1);
             if (p_input_stream!=nullptr) {
-                copier.setCallbackOnWrite(decodeMetaData, this);
+                if (meta_active){
+                    copier.setCallbackOnWrite(decodeMetaData, this);
+                }
                 copier.begin(*p_out_decoding, *p_input_stream);
                 timeout = millis() + p_source->timeoutMs();
                 active = isActive;
