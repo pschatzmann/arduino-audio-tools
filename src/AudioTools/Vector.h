@@ -260,9 +260,9 @@ class Vector {
     T *data = nullptr;
 
     inline void resize_internal(int newSize, bool copy, bool shrink=false)  {
-      bool withNewSize = false;
+      //bool withNewSize = false;
       if (newSize>bufferLen || this->data==nullptr ||shrink){
-        withNewSize = true;            
+        //withNewSize = true;            
         T* oldData = data;
         int oldBufferLen = this->bufferLen;
         this->data = new T[newSize+1];
