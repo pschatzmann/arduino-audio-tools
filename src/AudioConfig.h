@@ -67,7 +67,7 @@
  * @brief Activate Other Tools
  */
 
-#define USE_STK
+//#define USE_STK
 //#define USE_SDFAT
 //#define USE_DELTASIGMA 
 
@@ -125,7 +125,6 @@
 #define USE_ESP8266_AUDIO
 #define USE_I2S
 #define USE_PWM
-#define USE_SDFAT
 #define USE_AUDIO_SERVER
 
 #define PWM_START_PIN 12
