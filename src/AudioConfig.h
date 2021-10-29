@@ -21,7 +21,7 @@
  */
  
 #define USE_AUDIO_LOGGING true
-#define PRINTF_BUFFER_SIZE 160
+#define LOG_PRINTF_BUFFER_SIZE 160
 #define LOG_LEVEL AudioLogger::Warning
 #define LOG_STREAM Serial
 #define LOG_METHOD __PRETTY_FUNCTION__

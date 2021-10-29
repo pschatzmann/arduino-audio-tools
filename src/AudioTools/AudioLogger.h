@@ -79,7 +79,7 @@ class AudioLogger {
         Stream *log_stream_ptr = &LOG_STREAM;
         const char* TAG = "AudioTools";
         LogLevel log_level = LOG_LEVEL;
-        char print_buffer[PRINTF_BUFFER_SIZE];
+        char print_buffer[LOG_PRINTF_BUFFER_SIZE];
 
         AudioLogger() {}
 
@@ -127,7 +127,7 @@ class AudioLogger {
 
 }    
 
-#define LOG_OUT(level, ...) snprintf(audio_tools::AudioLogger::instance().prefix(__FILE__,__LINE__, level).str(),PRINTF_BUFFER_SIZE,__VA_ARGS__); audio_tools::AudioLogger::instance().println();
+#define LOG_OUT(level, ...) snprintf(audio_tools::AudioLogger::instance().prefix(__FILE__,__LINE__, level).str(),LOG_PRINTF_BUFFER_SIZE,__VA_ARGS__); audio_tools::AudioLogger::instance().println();
 
 #define LOGD(...) if (audio_tools::AudioLogger::instance().level()<=audio_tools::AudioLogger::Debug) { LOG_OUT(audio_tools::AudioLogger::Debug, __VA_ARGS__);}
 #define LOGI(...) if (audio_tools::AudioLogger::instance().level()<=audio_tools::AudioLogger::Info) { LOG_OUT(audio_tools::AudioLogger::Info, __VA_ARGS__);}
