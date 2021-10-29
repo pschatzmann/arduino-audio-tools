@@ -614,7 +614,7 @@ class FormatConverterStream : public AudioPrint {
             if (no_conversion){
                 result = p_out->write(data, len);
             } else if (convert.multiply>0){
-                int size = len / p_info_in->bits_per_sample / 8;
+                //int size = len / p_info_in->bits_per_sample / 8;
                 convert.target_bits_per_sample = p_info_out->bits_per_sample;
                 switch(p_info_in->bits_per_sample) {
                     case 8:

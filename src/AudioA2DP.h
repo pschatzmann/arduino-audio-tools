@@ -50,7 +50,9 @@ class ChannelConverter {
 NBuffer<uint8_t> a2dp_buffer(A2DP_BUFFER_SIZE, A2DP_BUFFER_COUNT);
 // flag to indicated that we are ready to process data
 volatile bool is_a2dp_active = false;
+// Volume control
 SimulatedAudioPot a2dp_volume_control;
+// actul volume factor
 float a2dp_volume=1.0;
 
 // callback used by A2DP to provide the a2dp_source sound data
