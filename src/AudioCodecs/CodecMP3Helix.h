@@ -101,7 +101,7 @@ class MP3DecoderHelix : public AudioDecoder  {
 
         /// Write mp3 data to decoder
         size_t write(const void* mp3Data, size_t len) {
-        	LOGD(LOG_METHOD);
+        	LOGD("%s: %zu", LOG_METHOD, len);
             return mp3==nullptr ? 0 : mp3->write(mp3Data, len);
         }
 

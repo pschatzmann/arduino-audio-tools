@@ -331,6 +331,9 @@ public:
       buffer_size = size;
       for (int j=0;j<count;j++){
         avaliable_buffers[j] = new SingleBuffer<T>(size);
+        if (avaliable_buffers[j]==nullptr){
+            LOGE("Not Enough Memory for buffer %d",j);
+        }
       }
   }
 
@@ -400,7 +403,7 @@ public:
       return result;
   }
 
-  // deterMINes the available entries for the current read buffer
+  // determines the available entries for the current read buffer
   int available() {
       if (actual_read_buffer==nullptr){
           actual_read_buffer = getNextFilledBuffer();
@@ -413,6 +416,9 @@ public:
           // make current read buffer available again
           resetCurrent();
           result = actual_read_buffer==nullptr? 0 : actual_read_buffer->available();
+      }
+      if(actual_read_buffer!=nullptr){
+          result+=write_buffer_count*buffer_size;
       }
       return result;
   }
@@ -432,7 +438,7 @@ public:
           addFilledBuffer(actual_write_buffer);
           actual_write_buffer = getNextAvailableBuffer();
       }
-      return actual_write_buffer->availableToWrite();
+      return actual_write_buffer->availableToWrite() + (buffer_count - write_buffer_count) *buffer_size;
   }
   
   // resets all buffers
@@ -485,6 +491,7 @@ protected:
     unsigned long start_time = 0;
     unsigned long sample_count = 0;
 
+
     void resetCurrent(){
       if (actual_read_buffer!=nullptr){
           actual_read_buffer->reset();
@@ -505,7 +512,8 @@ protected:
         }
         return result;
     }
-    
+
+
     bool addAvailableBuffer(BaseBuffer<T> *buffer){
         bool result = false;
         for (int j=0;j<buffer_count;j++){

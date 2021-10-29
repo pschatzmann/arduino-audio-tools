@@ -21,7 +21,7 @@
  */
  
 #define USE_AUDIO_LOGGING true
-#define PRINTF_BUFFER_SIZE 80
+#define PRINTF_BUFFER_SIZE 160
 #define LOG_LEVEL AudioLogger::Warning
 #define LOG_STREAM Serial
 #define LOG_METHOD __PRETTY_FUNCTION__
@@ -38,8 +38,8 @@
 #define I2S_DEFAULT_PORT 0
 #define I2S_BUFFER_SIZE 512
 #define I2S_BUFFER_COUNT 5 // 20
-#define A2DP_BUFFER_SIZE 512
-#define A2DP_BUFFER_COUNT 20
+#define A2DP_BUFFER_SIZE 1280
+#define A2DP_BUFFER_COUNT 50
 #define CODEC_DELAY_MS 10
 #define COPY_DELAY_ON_NODATA 10
 /**

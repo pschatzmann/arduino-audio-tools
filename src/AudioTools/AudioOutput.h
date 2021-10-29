@@ -313,7 +313,7 @@ class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource {
         
         /// encode the data
         virtual size_t write(const uint8_t *data, size_t len){
-	 		LOGD(LOG_METHOD);
+	 		LOGD("%s: %zu", LOG_METHOD, len);
             if(writer_ptr==nullptr || data==nullptr){
                 LOGE("NPE");
                 return 0;
@@ -572,11 +572,11 @@ class FormatConverterStream : public AudioPrint {
                 // copy 1:1
                 convert.multiply = 1;
                 convert.step = 1;
-            } else if (p_info_in->channels = 1 && p_info_out->channels>1){
+            } else if (p_info_in->channels == 1 && p_info_out->channels>1){
                 // generate multiple output channels per frame
                 convert.multiply = p_info_out->channels;
                 convert.step = 1;
-            } else if (p_info_out->channels = 1){
+            } else if (p_info_out->channels == 1){
                 convert.multiply = 1;
                 convert.step = p_info_in->channels; // just output 1 channel per frame
             } else {
