@@ -419,7 +419,7 @@ namespace audio_tools {
 		}
 
 		/// (Re)Starts the playing of the music (from the beginning)
-		virtual bool begin(bool isActive = true) {
+		virtual bool begin(int station = 1, bool isActive = true) {
 			LOGD(LOG_METHOD);
 			bool result = false;
 
@@ -428,8 +428,7 @@ namespace audio_tools {
 			p_source->begin();
 			meta_out.begin();
 
-			// get first streem
-			p_input_stream = p_source->nextStream(1);
+			p_input_stream = p_source->selectStream(station);
 			if (p_input_stream != nullptr) {
 				if (meta_active) {
 					copier.setCallbackOnWrite(decodeMetaData, this);
@@ -561,6 +560,9 @@ namespace audio_tools {
 
 		/// start next stream
 		virtual bool startNextStream() {
+			end();
+			p_out_decoding->begin();
+			p_source->begin();
 			p_input_stream = p_source->nextStream(+1);
 			if (p_input_stream != nullptr) {
 				LOGD("open next stream");
@@ -571,6 +573,9 @@ namespace audio_tools {
 		}
 		/// start selected stream
 		virtual bool startSelectedStream(int station) {
+			end();
+			p_out_decoding->begin();
+			p_source->begin();
 			p_input_stream = p_source->selectStream(station);
 			if (p_input_stream != nullptr) {
 				LOGD("open selected stream");
