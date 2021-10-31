@@ -444,6 +444,12 @@ namespace audio_tools {
 			return result;
 		}
 
+		virtual void end() {
+			LOGD(LOG_METHOD);
+			p_out_decoding->end();
+			meta_out.end();
+		}
+
 		/// Updates the audio info in the related objects
 		virtual void setAudioInfo(AudioBaseInfo info) {
 			LOGD(LOG_METHOD);
@@ -457,7 +463,6 @@ namespace audio_tools {
 			if (p_final_stream != nullptr) p_final_stream->setAudioInfo(info);
 			if (p_final_notify != nullptr) p_final_notify->setAudioInfo(info);
 		};
-
 
 		/// starts / resumes the playing of a matching song
 		virtual void play() {
