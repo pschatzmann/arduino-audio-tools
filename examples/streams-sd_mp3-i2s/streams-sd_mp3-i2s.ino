@@ -20,7 +20,7 @@ using namespace audio_tools;
 
 const int chipSelect=10;
 I2SStream i2s; // final output of decoded stream
-EncodedAudioStream decoder(i2s, new MP3DecoderHelix()); // Decoding stream
+EncodedAudioStream decoder(&i2s, new MP3DecoderHelix()); // Decoding stream
 StreamCopy copier; 
 
 
