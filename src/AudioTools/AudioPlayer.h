@@ -40,7 +40,7 @@ namespace audio_tools {
 		virtual Stream* nextStream(int offset) = 0;
 
 		/// Returns next audio stream
-		virtual Stream* selectStream(int station) {
+		virtual Stream* selectStream(int index) {
             LOGE("Not Supported!");
             return nullptr;
         }
@@ -80,6 +80,12 @@ namespace audio_tools {
 			return nextStreamCallback == nullptr ? nullptr : nextStreamCallback();
 		}
 
+    		/// Returns next audio stream
+		virtual Stream* selectStream(int index) {
+			return indexStreamCallback == nullptr ? nullptr : indexStreamCallback(index);
+        }
+
+
 		void setCallbackOnStart(void (*callback)()) {
 			onStartCallback = callback;
 		}
@@ -88,9 +94,14 @@ namespace audio_tools {
 			nextStreamCallback = callback;
 		}
 
+		void setCallbackSelectStream(Stream* (*callback)(int idx)) {
+			indexStreamCallback = callback;
+		}
+
 	protected:
 		void (*onStartCallback)() = nullptr;
 		Stream* (*nextStreamCallback)() = nullptr;
+		Stream* (*indexStreamCallback)(int index) = nullptr;
 
 	};
 
@@ -139,6 +150,14 @@ namespace audio_tools {
 			LOGI("-> nextStream: '%s'", file_name);
 			return file ? &file : nullptr;
 		}
+
+		virtual Stream* selectStream(int index) {
+			file.close();
+			file = getFile(start_path, index);
+			file.getName(file_name, MAX_FILE_LEN);
+			LOGI("-> nextStream: '%s'", file_name);
+			return file ? &file : nullptr;
+        }
 
 		/// Defines the regex filter criteria for selecting files. E.g. ".*Bob Dylan.*" 
 		void setFileFilter(const char* filter) {
