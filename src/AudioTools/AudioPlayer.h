@@ -45,6 +45,9 @@ namespace audio_tools {
             return nullptr;
         }
 
+		/// Returns previous audio stream
+		virtual Stream* previousStream(int offset) = 0;
+
 		/// Provides the timeout which is triggering to move to the next stream
 		virtual int timeoutMs() {
 			return 500;
@@ -80,11 +83,16 @@ namespace audio_tools {
 			return nextStreamCallback == nullptr ? nullptr : nextStreamCallback();
 		}
 
-    		/// Returns next audio stream
+    		/// Returns selected audio stream
 		virtual Stream* selectStream(int index) {
 			return indexStreamCallback == nullptr ? nullptr : indexStreamCallback(index);
         }
 
+		/// Returns previous stream
+		virtual Stream* previousStream(int offset) {
+			LOGD(LOG_METHOD);
+			return previousStreamCallback == nullptr ? nullptr : previousStreamCallback();
+		}
 
 		void setCallbackOnStart(void (*callback)()) {
 			onStartCallback = callback;
@@ -98,11 +106,15 @@ namespace audio_tools {
 			indexStreamCallback = callback;
 		}
 
+		void setCallbackPreviousStream(Stream* (*callback)()) {
+			previousStreamCallback = callback;
+		}
+
 	protected:
 		void (*onStartCallback)() = nullptr;
 		Stream* (*nextStreamCallback)() = nullptr;
 		Stream* (*indexStreamCallback)(int index) = nullptr;
-
+		Stream* (*previousStreamCallback)() = nullptr;
 	};
 
 #ifdef USE_SDFAT
@@ -286,14 +298,20 @@ namespace audio_tools {
 			}
 			return actual_stream;
 		}
-		/// Opens the next url from the array
+
+		/// Opens the selected url from the array
 		Stream* selectStream(int Station) {
 			//pos += offset;
 			pos = Station;
-			if (pos < 0 || pos >= max) {
+			if (pos < 0) {
 				pos = 0;
+				LOGI("array out of limits: %d -> %s", Station, pos);
 			}
-			LOGI("nextStream: %d -> %s", pos, urlArray[pos]);
+			if (pos >= max) {
+				pos = max-1;
+				LOGI("array out of limits: %d -> %s", Station, pos);
+			}
+			LOGI("selectStream: %d -> %s", pos, urlArray[pos]);
 			if (Station != 0 || actual_stream == nullptr) {
 				if (started) actual_stream->end();
 				actual_stream->begin(urlArray[pos], mime);
@@ -302,6 +320,20 @@ namespace audio_tools {
 			return actual_stream;
 		}
 
+		/// Opens the Previous url from the array
+		Stream* previousStream(int offset) {
+			pos -= offset;
+			if (pos < 0 || pos >= max) {
+				pos = max - 1;
+			}
+			LOGI("previousStream: %d -> %s", pos, urlArray[pos]);
+			if (offset != 0 || actual_stream == nullptr) {
+				if (started) actual_stream->end();
+				actual_stream->begin(urlArray[pos], mime);
+				started = true;
+			}
+			return actual_stream;
+		}
 
 		void setTimeoutMs(int millisec) {
 			timeout = millisec;
@@ -532,11 +564,18 @@ namespace audio_tools {
             return active;
 		}
 
-		/// moves to next file
+		/// moves to selected file
 		virtual bool setIndex(int idx) {
 			LOGD(LOG_METHOD);
             active = setStream(*(p_source->selectStream(idx)));
             return active;
+		}
+
+		/// moves to previous file
+		virtual bool previous() {
+			LOGD(LOG_METHOD);
+			active = setStream(*(p_source->previousStream(+1)));
+			return active;
 		}
 
     	/// start selected input stream
@@ -552,7 +591,6 @@ namespace audio_tools {
 			}
 			return p_input_stream != nullptr;
 		}
-
 
 		/// determines if the player is active
 		virtual bool isActive() {
@@ -611,7 +649,6 @@ namespace audio_tools {
 			volume_out.setVolumeControl(vc);
 		}
 
-
 	protected:
 		bool active = false;
 		AudioSource* p_source = nullptr;
@@ -627,7 +664,6 @@ namespace audio_tools {
 		bool meta_active = false;
 		uint32_t timeout = 0;
 		float current_volume = -1; // illegal value which will trigger an update
-
 
 		/// Callback implementation which writes to metadata
 		static void decodeMetaData(void* obj, void* data, size_t len) {
