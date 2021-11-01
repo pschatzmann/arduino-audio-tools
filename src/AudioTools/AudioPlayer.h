@@ -40,7 +40,10 @@ namespace audio_tools {
 		virtual Stream* nextStream(int offset) = 0;
 
 		/// Returns next audio stream
-		virtual Stream* selectStream(int station) = 0;
+		virtual Stream* selectStream(int station) {
+            LOGE("Not Supported!");
+            return nullptr;
+        }
 
 		/// Provides the timeout which is triggering to move to the next stream
 		virtual int timeoutMs() {
@@ -280,6 +283,7 @@ namespace audio_tools {
 			return actual_stream;
 		}
 
+
 		void setTimeoutMs(int millisec) {
 			timeout = millisec;
 		}
@@ -419,7 +423,7 @@ namespace audio_tools {
 		}
 
 		/// (Re)Starts the playing of the music (from the beginning)
-		virtual bool begin(int station = 1, bool isActive = true) {
+		virtual bool begin(bool isActive = true) {
 			LOGD(LOG_METHOD);
 			bool result = false;
 
@@ -428,7 +432,33 @@ namespace audio_tools {
 			p_source->begin();
 			meta_out.begin();
 
-			p_input_stream = p_source->selectStream(station);
+			p_input_stream = p_source->nextStream(1);
+			if (p_input_stream != nullptr) {
+				if (meta_active) {
+					copier.setCallbackOnWrite(decodeMetaData, this);
+				}
+				copier.begin(*p_out_decoding, *p_input_stream);
+				timeout = millis() + p_source->timeoutMs();
+				active = isActive;
+				result = true;
+			}
+			else {
+				LOGW("-> begin: no data found");
+			}
+			return result;
+		}
+
+		/// (Re)Starts the playing of the music (from the beginning)
+		virtual bool begin(int index, bool isActive = true) {
+			LOGD(LOG_METHOD);
+			bool result = false;
+
+			// start dependent objects
+			p_out_decoding->begin();
+			p_source->begin();
+			meta_out.begin();
+
+			p_input_stream = p_source->selectStream(index);
 			if (p_input_stream != nullptr) {
 				if (meta_active) {
 					copier.setCallbackOnWrite(decodeMetaData, this);
@@ -477,16 +507,33 @@ namespace audio_tools {
 		}
 
 		/// moves to next file
-		virtual void next() {
+		virtual bool next() {
 			LOGD(LOG_METHOD);
-			active = startNextStream();
+			active = setStream(*(p_source->nextStream(+1)));
+            return active;
 		}
+
 		/// moves to next file
-		virtual void Select(int station) {
+		virtual bool setIndex(int idx) {
 			LOGD(LOG_METHOD);
-			active = startSelectedStream(station);
-			//startSelectedStream(station);
+            active = setStream(*(p_source->selectStream(idx)));
+            return active;
 		}
+
+    	/// start selected input stream
+		virtual bool setStream(Stream &input) {
+			end();
+			p_out_decoding->begin();
+			p_source->begin();
+			p_input_stream = &input;
+			if (p_input_stream != nullptr) {
+				LOGD("open selected stream");
+				meta_out.begin();
+				copier.begin(*p_out_decoding, *p_input_stream);
+			}
+			return p_input_stream != nullptr;
+		}
+
 
 		/// determines if the player is active
 		virtual bool isActive() {
@@ -526,7 +573,7 @@ namespace audio_tools {
 				if (millis() > timeout) {
 					LOGW("-> timeout - moving to next stream");
 					// open next stream
-					if (!startNextStream()) {
+					if (!next()) {
 						LOGD("stream is null");
 					}
 				}
@@ -562,33 +609,6 @@ namespace audio_tools {
 		uint32_t timeout = 0;
 		float current_volume = -1; // illegal value which will trigger an update
 
-
-		/// start next stream
-		virtual bool startNextStream() {
-			end();
-			p_out_decoding->begin();
-			p_source->begin();
-			p_input_stream = p_source->nextStream(+1);
-			if (p_input_stream != nullptr) {
-				LOGD("open next stream");
-				meta_out.begin();
-				copier.begin(*p_out_decoding, *p_input_stream);
-			}
-			return p_input_stream != nullptr;
-		}
-		/// start selected stream
-		virtual bool startSelectedStream(int station) {
-			end();
-			p_out_decoding->begin();
-			p_source->begin();
-			p_input_stream = p_source->selectStream(station);
-			if (p_input_stream != nullptr) {
-				LOGD("open selected stream");
-				meta_out.begin();
-				copier.begin(*p_out_decoding, *p_input_stream);
-			}
-			return p_input_stream != nullptr;
-		}
 
 		/// Callback implementation which writes to metadata
 		static void decodeMetaData(void* obj, void* data, size_t len) {
