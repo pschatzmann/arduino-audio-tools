@@ -42,6 +42,9 @@ namespace audio_tools {
 		/// Returns next audio stream
 		virtual Stream* selectStream(int station) = 0;
 
+		/// Returns previous audio stream
+		virtual Stream* previousStream(int station) = 0;
+
 		/// Provides the timeout which is triggering to move to the next stream
 		virtual int timeoutMs() {
 			return 500;
@@ -239,7 +242,7 @@ namespace audio_tools {
 		/// Setup Wifi URL
 		virtual void begin() {
 			LOGD(LOG_METHOD);
-			setPos(-1);
+			//setPos(-1);
 		}
 
 		/// Defines the actual position
@@ -264,15 +267,30 @@ namespace audio_tools {
 			}
 			return actual_stream;
 		}
-		/// Opens the next url from the array
+
+		/// Opens the selected url from the array
 		Stream* selectStream(int Station) {
-			//pos += offset;
 			pos = Station;
 			if (pos < 0 || pos >= max) {
 				pos = 0;
 			}
-			LOGI("nextStream: %d -> %s", pos, urlArray[pos]);
+			LOGI("selectedStream: %d -> %s", pos, urlArray[pos]);
 			if (Station != 0 || actual_stream == nullptr) {
+				if (started) actual_stream->end();
+				actual_stream->begin(urlArray[pos], mime);
+				started = true;
+			}
+			return actual_stream;
+		}
+
+		/// Opens the Selected url from the array
+		Stream* previousStream(int offset) {
+			pos -= offset;
+			if (pos < 0 || pos >= max) {
+				pos = max - 1;
+			}
+			LOGI("previousStream: %d -> %s", pos, urlArray[pos]);
+			if (offset != 0 || actual_stream == nullptr) {
 				if (started) actual_stream->end();
 				actual_stream->begin(urlArray[pos], mime);
 				started = true;
@@ -419,7 +437,7 @@ namespace audio_tools {
 		}
 
 		/// (Re)Starts the playing of the music (from the beginning)
-		virtual bool begin(int station = 1, bool isActive = true) {
+		virtual bool begin(int index = 0, bool isActive = true) {
 			LOGD(LOG_METHOD);
 			bool result = false;
 
@@ -428,7 +446,7 @@ namespace audio_tools {
 			p_source->begin();
 			meta_out.begin();
 
-			p_input_stream = p_source->selectStream(station);
+			p_input_stream = p_source->selectStream(index);
 			if (p_input_stream != nullptr) {
 				if (meta_active) {
 					copier.setCallbackOnWrite(decodeMetaData, this);
@@ -481,11 +499,18 @@ namespace audio_tools {
 			LOGD(LOG_METHOD);
 			active = startNextStream();
 		}
-		/// moves to next file
+
+		/// moves to Selected file
 		virtual void Select(int station) {
 			LOGD(LOG_METHOD);
 			active = startSelectedStream(station);
 			//startSelectedStream(station);
+		}
+
+		/// moves to previous file
+		virtual void previous() {
+			LOGD(LOG_METHOD);
+			active = startPreviousStream();
 		}
 
 		/// determines if the player is active
@@ -589,7 +614,19 @@ namespace audio_tools {
 			}
 			return p_input_stream != nullptr;
 		}
-
+		/// start previous stream
+		virtual bool startPreviousStream() {
+			end();
+			p_out_decoding->begin();
+			p_source->begin();
+			p_input_stream = p_source->previousStream(1);
+			if (p_input_stream != nullptr) {
+				LOGD("open previous stream");
+				meta_out.begin();
+				copier.begin(*p_out_decoding, *p_input_stream);
+			}
+			return p_input_stream != nullptr;
+		}
 		/// Callback implementation which writes to metadata
 		static void decodeMetaData(void* obj, void* data, size_t len) {
 			LOGD(LOG_METHOD);
