@@ -24,7 +24,7 @@ Stream* callbackStream();
 
 
 // data
-const int chipSelect=5;
+const int chipSelect=PIN_CS;
 AudioSourceCallback source(callbackStream,callbackInit);
 I2SStream i2s;
 MP3DecoderHelix decoder;

@@ -12,21 +12,24 @@ using namespace audio_tools;
 const char *startFilePath="/";
 const char* ext="mp3";
 AudioSourceSdFat source(startFilePath, ext);
-A2DPStream out = A2DPStream::instance() ;                 // A2DP input - A2DPStream is a singleton!
+A2DPStream out = A2DPStream::instance();  // A2DP input - A2DPStream is a singleton!
 MP3DecoderHelix decoder;
 AudioPlayer player(source, out, decoder);
 
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
 
-  // setup output - We send the test signal via A2DP - so we conect to the MyMusic Bluetooth Speaker
-  out.begin(TX_MODE, "MyMusic");
+  // setup output - We send the test signal via A2DP - so we conect to the "LEXON MINO L" Bluetooth Speaker
+  auto cfg = out.defaultConfig(TX_MODE);
+  cfg.name = "LEXON MINO L";
+  out.begin(cfg);
 
   // setup player
-  player.setVolume(0.5);
+  player.setVolume(0.1);
   player.begin();
+
 }
 
 void loop() {
