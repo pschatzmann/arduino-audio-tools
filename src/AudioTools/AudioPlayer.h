@@ -79,22 +79,16 @@ namespace audio_tools {
 			if (onStartCallback != nullptr) onStartCallback();
 		};
 
-		/// Returns next stream
+		/// Returns next (with positive index) or previous stream (with negative index)
 		virtual Stream* nextStream(int offset) {
 			LOGD(LOG_METHOD);
 			return nextStreamCallback == nullptr ? nullptr : nextStreamCallback();
 		}
 
-    		/// Returns selected audio stream
+    	/// Returns selected audio stream
 		virtual Stream* selectStream(int index) {
 			return indexStreamCallback == nullptr ? nullptr : indexStreamCallback(index);
         }
-
-		/// Returns previous stream
-		virtual Stream* previousStream(int offset) {
-			LOGD(LOG_METHOD);
-			return previousStreamCallback == nullptr ? nullptr : previousStreamCallback();
-		}
 
 		void setCallbackOnStart(void (*callback)()) {
 			onStartCallback = callback;
@@ -108,15 +102,11 @@ namespace audio_tools {
 			indexStreamCallback = callback;
 		}
 
-		void setCallbackPreviousStream(Stream* (*callback)()) {
-			previousStreamCallback = callback;
-		}
 
 	protected:
 		void (*onStartCallback)() = nullptr;
 		Stream* (*nextStreamCallback)() = nullptr;
 		Stream* (*indexStreamCallback)(int index) = nullptr;
-		Stream* (*previousStreamCallback)() = nullptr;
 	};
 
 #ifdef USE_SDFAT
@@ -169,8 +159,12 @@ namespace audio_tools {
 		}
 
 		virtual Stream* selectStream(int index) {
+			pos = index;
+			if (pos<0){
+				pos = 0;
+			}
 			file.close();
-			file = getFile(start_path, index);
+			file = getFile(start_path, pos);
 			file.getName(file_name, MAX_FILE_LEN);
 			LOGI("-> selectStream: '%s'", file_name);
 			return file ? &file : nullptr;
