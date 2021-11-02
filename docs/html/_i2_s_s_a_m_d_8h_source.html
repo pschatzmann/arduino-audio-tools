@@ -91,7 +91,7 @@ $(function() {
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    }</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_i2_s_base.html#a0c6ef9346d946958af02507688564b5f">begin</a>(I2SConfig cfg) {</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        I2S.begin(cfg.i2s_mode, cfg.sample_rate, cfg.bits_per_sample, cfg.is_master);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        I2S.begin(cfg.i2s_format, cfg.sample_rate, cfg.bits_per_sample, cfg.is_master);</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keywordflow">if</span> (cfg.mode = TX_MODE){</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            I2S.enableTransmitter();</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        } <span class="keywordflow">else</span> {</div>

@@ -317,9 +317,9 @@ $(function() {
 <div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    T *data = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160; </div>
 <div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">void</span> resize_internal(<span class="keywordtype">int</span> newSize, <span class="keywordtype">bool</span> copy, <span class="keywordtype">bool</span> shrink=<span class="keyword">false</span>)  {</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;      <span class="keywordtype">bool</span> withNewSize = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;      <span class="comment">//bool withNewSize = false;</span></div>
 <div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;      <span class="keywordflow">if</span> (newSize&gt;bufferLen || this-&gt;data==<span class="keyword">nullptr</span> ||shrink){</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        withNewSize = <span class="keyword">true</span>;            </div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        <span class="comment">//withNewSize = true;            </span></div>
 <div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        T* oldData = data;</div>
 <div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        <span class="keywordtype">int</span> oldBufferLen = this-&gt;bufferLen;</div>
 <div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;        this-&gt;data = <span class="keyword">new</span> T[newSize+1];</div>

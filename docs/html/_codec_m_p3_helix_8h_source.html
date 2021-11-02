@@ -146,7 +146,7 @@ $(function() {
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        }</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
 <div class="line"><a name="l00103"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_m_p3_decoder_helix.html#a0214bb1e79f5e7c1f69c92229eac17e3">  103</a></span>&#160;        <span class="keywordtype">size_t</span> <a class="code" href="classaudio__tools_1_1_m_p3_decoder_helix.html#a0214bb1e79f5e7c1f69c92229eac17e3">write</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* mp3Data, <span class="keywordtype">size_t</span> len) {</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            LOGD(LOG_METHOD);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            LOGD(<span class="stringliteral">&quot;%s: %zu&quot;</span>, LOG_METHOD, len);</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            <span class="keywordflow">return</span> mp3==<span class="keyword">nullptr</span> ? 0 : mp3-&gt;write(mp3Data, len);</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        }</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>

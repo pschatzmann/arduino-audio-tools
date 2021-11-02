@@ -68,6 +68,7 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
@@ -82,6 +83,8 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a2_d_p_config.html">audio_tools::A2DPConfig</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a2_d_p_stream.html">audio_tools::A2DPStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_stream.html">Stream</a> support for A2DP: begin(TX_MODE) uses a2dp_source - begin(RX_MODE) a a2dp_sink The data is in int16_t with 2 channels at 44100 hertz.  <a href="classaudio__tools_1_1_a2_d_p_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -95,11 +98,19 @@ Namespaces</h2></td></tr>
 <tr class="memdesc:namespaceaudio__tools"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parser for MP3 ID3 Meta Data: The goal is to implement a simple API which provides the title, artist, albmum and the Genre. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a9fe93dfdda01251b2699acb1cec63b9b"><td class="memItemLeft" align="right" valign="top"><a id="a9fe93dfdda01251b2699acb1cec63b9b"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>A2DPNoData</b> { <b>A2DPSilence</b>
+, <b>A2DPWhoosh</b>
+ }</td></tr>
+<tr class="separator:a9fe93dfdda01251b2699acb1cec63b9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd6cb3ce6049a4040d21d0893c8f483d"><td class="memItemLeft" align="right" valign="top"><a id="abd6cb3ce6049a4040d21d0893c8f483d"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>A2DPStartLogic</b> { <b>StartWhenBufferFull</b>
+, <b>StartOnConnect</b>
+ }</td></tr>
+<tr class="separator:abd6cb3ce6049a4040d21d0893c8f483d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ad6ccc5b7ff74334888fc050ea16618bf"><td class="memItemLeft" align="right" valign="top"><a id="ad6ccc5b7ff74334888fc050ea16618bf"></a>
-RingBuffer&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>audio_tools::a2dp_buffer</b> (A2DP_BUFFER_SIZE *A2DP_BUFFER_COUNT)</td></tr>
-<tr class="separator:ad6ccc5b7ff74334888fc050ea16618bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a617391bdaaaa3fd418ff3a10e7428d63"><td class="memItemLeft" align="right" valign="top"><a id="a617391bdaaaa3fd418ff3a10e7428d63"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>audio_tools::a2dp_stream_sink_sound_data</b> (const uint8_t *data, uint32_t len)</td></tr>
 <tr class="separator:a617391bdaaaa3fd418ff3a10e7428d63"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -109,6 +120,12 @@ int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>audio_tools::a2dp_
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
+<tr class="memitem:a3c3c22b176eb26d22ec569bb819d8ae8"><td class="memItemLeft" align="right" valign="top"><a id="a3c3c22b176eb26d22ec569bb819d8ae8"></a>
+RingBuffer&lt; uint8_t &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>audio_tools::a2dp_buffer</b> = nullptr</td></tr>
+<tr class="separator:a3c3c22b176eb26d22ec569bb819d8ae8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84f080d5979280d0558c7153ad5a86a6"><td class="memItemLeft" align="right" valign="top"><a id="a84f080d5979280d0558c7153ad5a86a6"></a>
+A2DPStream *&#160;</td><td class="memItemRight" valign="bottom"><b>audio_tools::A2DPStream_self</b> =nullptr</td></tr>
+<tr class="separator:a84f080d5979280d0558c7153ad5a86a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1f03792dca3c9b9072791ad52b5ba14"><td class="memItemLeft" align="right" valign="top"><a id="ae1f03792dca3c9b9072791ad52b5ba14"></a>
 volatile bool&#160;</td><td class="memItemRight" valign="bottom"><b>audio_tools::is_a2dp_active</b> = false</td></tr>
 <tr class="separator:ae1f03792dca3c9b9072791ad52b5ba14"><td class="memSeparator" colspan="2">&#160;</td></tr>

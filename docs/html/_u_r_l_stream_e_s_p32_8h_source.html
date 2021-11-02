@@ -132,8 +132,8 @@ $(function() {
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        }</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
 <div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_buffered_task_stream.html#a9c5307f6b2970c6e075d33ce548127f7">   72</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1_buffered_task_stream.html#a9c5307f6b2970c6e075d33ce548127f7">peek</a>() {</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <span class="keywordtype">int</span> result = -1;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            <span class="keywordflow">if</span> (!ready) <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <span class="keywordflow">if</span> (!ready) <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            <span class="keywordtype">int</span> result = -1;</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            xSemaphoreTake(mutex, portMAX_DELAY);</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            result = buffers.peek();</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            xSemaphoreGive(mutex);</div>
@@ -259,8 +259,8 @@ $(function() {
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
 <div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        <span class="keywordtype">void</span> end(){</div>
 <div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;            LOGD(LOG_METHOD);</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;            p_urlStream-&gt;end();</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;            taskStream.end();</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;            taskStream.end();</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;            p_urlStream-&gt;end();</div>
 <div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        }</div>
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160; </div>
 <div class="line"><a name="l00207"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_u_r_l_stream.html#a83c746e497b1eab1c6a3c35aaedfccd8">  207</a></span>&#160;        <a class="code" href="classaudio__tools_1_1_http_request.html">HttpRequest</a> &amp;<a class="code" href="classaudio__tools_1_1_u_r_l_stream.html#a83c746e497b1eab1c6a3c35aaedfccd8">httpRequest</a>(){</div>

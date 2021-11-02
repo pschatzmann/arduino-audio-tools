@@ -100,7 +100,7 @@ $(function() {
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">int</span> pin_ws = PIN_I2S_WS;</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">int</span> pin_bck = PIN_I2S_BCK;</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">int</span> pin_data = PIN_I2S_DATA_OUT;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    I2SMode i2s_mode = I2S_STD_MODE;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    I2SFormat i2s_format = I2S_STD_FORMAT;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">bool</span> is_digital = <span class="keyword">true</span>;  <span class="comment">// e.g. the ESP32 supports analog input or output</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">void</span> logInfo() {</div>
@@ -108,7 +108,7 @@ $(function() {
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;      LOGI(<span class="stringliteral">&quot;pin_ws: %d&quot;</span>, pin_ws);</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;      LOGI(<span class="stringliteral">&quot;pin_bck: %d&quot;</span>, pin_bck);</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;      LOGI(<span class="stringliteral">&quot;pin_data: %d&quot;</span>, pin_data);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;      LOGI(<span class="stringliteral">&quot;i2s_mode: %d&quot;</span>, i2s_mode);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;      LOGI(<span class="stringliteral">&quot;i2s_format: %d&quot;</span>, i2s_format);</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    }</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;};</div>
