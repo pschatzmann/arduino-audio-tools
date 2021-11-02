@@ -45,57 +45,28 @@ class ChannelConverter {
 
 };
 
-
+class A2DPStream;
+A2DPStream *A2DPStream_self=nullptr;
 // buffer which is used to exchange data
-NBuffer<uint8_t> a2dp_buffer(A2DP_BUFFER_SIZE, A2DP_BUFFER_COUNT);
+RingBuffer<uint8_t> *a2dp_buffer = nullptr;
 // flag to indicated that we are ready to process data
 volatile bool is_a2dp_active = false;
-// Volume control
-SimulatedAudioPot a2dp_volume_control;
-// actul volume factor
-float a2dp_volume=1.0;
 
-// callback used by A2DP to provide the a2dp_source sound data
-int32_t a2dp_stream_source_sound_data(Frame* data, int32_t len) {
-    LOGD("a2dp_stream_source_sound_data: %d", len);   
-    size_t result_len = 0;
+int32_t a2dp_stream_source_sound_data(Frame* data, int32_t len);
+void a2dp_stream_sink_sound_data(const uint8_t* data, uint32_t len);
 
-    // at first call we start with some empty data
-    if (is_a2dp_active && a2dp_buffer.available()>0){
-        // the data in the file must be in int16 with 2 channels 
-        size_t result_len_bytes = a2dp_buffer.readArray((uint8_t*)data, len*sizeof(Frame));
+enum A2DPStartLogic {StartWhenBufferFull, StartOnConnect};
+enum A2DPNoData {A2DPSilence, A2DPWhoosh};
 
-        // adjust volume
-        float factor = a2dp_volume_control.getVolumeFactor(a2dp_volume);
-        for (int j=0;j<len;j++){
-            data[j].channel1 =  factor * data[j].channel1;
-            data[j].channel2 =  factor * data[j].channel1;
-        }
-
-        // result is in number of frames
-        result_len = result_len_bytes / sizeof(Frame);
-    } else {
-        // prevent underflow on first call
-        memset(data,0, len*sizeof(Frame));
-        if (!is_a2dp_active){
-            LOGI("Setting is_a2dp_active active");
-        }
-        is_a2dp_active = true;
-        result_len = len;
-    }
-
-    return result_len;
-}
-
-// callback used by A2DP to write the sound data
-void a2dp_stream_sink_sound_data(const uint8_t* data, uint32_t len) {
-    if (is_a2dp_active){
-        uint32_t result_len = a2dp_buffer.writeArray(data, len);
-        LOGI("a2dp_stream_sink_sound_data %d -> %d", len, result_len);
-        // allow some other task 
-        //yield();
-    }
-}
+// Config for A2DP Stream
+class A2DPConfig {
+    public:
+        A2DPStartLogic startLogic = StartWhenBufferFull;
+        A2DPNoData noData = A2DPSilence;
+        RxTxMode mode = RX_MODE;
+        const char* name = "A2DP"; 
+        int bufferSize = A2DP_BUFFER_SIZE * A2DP_BUFFER_COUNT;
+};
 
 
 /**
@@ -105,11 +76,19 @@ void a2dp_stream_sink_sound_data(const uint8_t* data, uint32_t len) {
  * Because we support only one instance the class is implemented as singleton!
  */
 class A2DPStream : public AudioStream {
+
     public:
         // Release the allocate a2dp_source or a2dp_sink
         ~A2DPStream(){
             if (a2dp_source!=nullptr) delete a2dp_source;
-            if (a2dp_sink!=nullptr) delete a2dp_sink;
+            if (a2dp_sink!=nullptr) delete a2dp_sink;      
+            A2DPStream_self = nullptr;      
+        }
+
+        A2DPConfig defaultConfig(RxTxMode mode=RX_MODE){
+            A2DPConfig cfg;
+            cfg.mode = mode;
+            return cfg;
         }
 
         /// Provides the A2DPStream singleton instance
@@ -137,20 +116,29 @@ class A2DPStream : public AudioStream {
             return *a2dp_sink;
         }
 
-        /// Opens the processing
         void begin(RxTxMode mode, const char* name){
-            this->mode = mode;
-            this->name = name;
-            LOGI("Connecting to %s",name);
+            A2DPConfig cfg;
+            cfg.mode = mode;
+            cfg.name = name;
+            begin(cfg);
+        }
 
+        /// Opens the processing
+        void begin(A2DPConfig cfg){
+            this->config = cfg;
+            LOGI("Connecting to %s",cfg.name);
+            if (a2dp_buffer==nullptr){
+                a2dp_buffer = new RingBuffer<uint8_t>(cfg.bufferSize);
+            }
 
-           switch (mode){
+            switch (cfg.mode){
                 case TX_MODE:
                     LOGI("Starting a2dp_source...");
                     source(); // allocate object
-                    a2dp_source->start((char*)name, a2dp_stream_source_sound_data);  
+                    a2dp_source->start((char*)cfg.name, a2dp_stream_source_sound_data);  
                     a2dp_source->set_on_connection_state_changed(a2dpStateCallback, this);
                     while(!a2dp_source->is_connected()){
+                        LOGD("waiting for connection");
                         delay(1000);
                     }
                     LOGI("a2dp_source is connected...");
@@ -161,9 +149,10 @@ class A2DPStream : public AudioStream {
                     LOGI("Starting a2dp_sink...");
                     sink(); // allocate object
                     a2dp_sink->set_stream_reader(&a2dp_stream_sink_sound_data, false);
-                    a2dp_sink->start((char*)name);
+                    a2dp_sink->start((char*)cfg.name);
                     a2dp_sink->set_on_connection_state_changed(a2dpStateCallback, this);
                     while(!a2dp_sink->is_connected()){
+                        LOGD("waiting for connection");
                         delay(1000);
                     }
                     LOGI("a2dp_sink is connected...");
@@ -191,20 +180,32 @@ class A2DPStream : public AudioStream {
 
         /// Writes the data into a temporary send buffer - where it can be picked up by the callback
         virtual size_t write(const uint8_t* data, size_t len) {   
+            if (a2dp_buffer==nullptr) return 0;
 	 		LOGD("%s: %zu", LOG_METHOD, len);
 
-            size_t result = 0; 
-            if (is_a2dp_active){
-                if (a2dp_buffer.availableToWrite()>=len){
-                    result = a2dp_buffer.writeArray(data, len);
-                    LOGD("write %d -> %d", len, result);
-                } else {
-                    LOGI("write %d - buffer full (available sound: %d, free: %d)", len, a2dp_buffer.available(), a2dp_buffer.availableToWrite() );
-                }
-            } else {
-                LOGW( "write failed because !is_a2dp_active (yet)");
-                delay(5000);
+            // blocking write - we wait for space in buffer
+            bool isBufferFull = true;
+            while(isBufferFull){
+                lockSemaphore(true);
+                isBufferFull = a2dp_buffer->availableToWrite()<len;
+                lockSemaphore(false);
+
+               // we wait until the buffer is full
+               if (isBufferFull){
+                    if (!is_a2dp_active){
+                        is_a2dp_active = true;
+                        LOGW("is_a2dp_active -> true with %d bytes", a2dp_buffer->available());
+                    }
+                    delay(100);
+                    LOGD("Waiting for free buffer space - available: %d", a2dp_buffer->available());
+                } 
             }
+
+            // write to buffer
+            lockSemaphore(true);
+            size_t result = a2dp_buffer->writeArray(data, len);
+            lockSemaphore(false);
+            LOGD("write %d -> %d", len, result);
             return result;
         }
 
@@ -219,11 +220,12 @@ class A2DPStream : public AudioStream {
 
         /// Reads the data from the temporary buffer
         virtual size_t readBytes(uint8_t *data, size_t len) { 
+            if (a2dp_buffer==nullptr) return 0;
             size_t result = 0; 
             if (is_a2dp_active){
                 LOGD("readBytes %d", len);
 
-                result = a2dp_buffer.readArray(data, len);
+                result = a2dp_buffer->readArray(data, len);
                 LOGI("readBytes %d->%d", len,result);
             } else {
                 LOGW( "readBytes failed because !is_a2dp_active");
@@ -243,39 +245,118 @@ class A2DPStream : public AudioStream {
         }
        
         virtual int available() {
-            return a2dp_buffer.available();
+            return a2dp_buffer==nullptr ? 0 : a2dp_buffer->available();
         }
 
         virtual int availableToWrite() {
-            return a2dp_buffer.availableToWrite();
+            return a2dp_buffer==nullptr ? 0 : a2dp_buffer->availableToWrite();
         }
 
         virtual void setVolume(float volume){
-            a2dp_volume = volume;
+            //a2dp_volume = volume;
+            a2dp->set_volume(volume * 100);
         }
 
     protected:
+        A2DPConfig config;
         BluetoothA2DPSource *a2dp_source = nullptr;
         BluetoothA2DPSink *a2dp_sink = nullptr;
         BluetoothA2DPCommon *a2dp=nullptr;
-        RxTxMode mode;
         int volume;
-        const char* name = nullptr;
+        // semaphore to synchronize acess to the buffer
+        SemaphoreHandle_t xSemaphore = NULL;
 
         A2DPStream() {
             LOGD(LOG_METHOD);
+            xSemaphore = xSemaphoreCreateMutex();
+
+            A2DPStream_self = this;
         }
 
         static void a2dpStateCallback(esp_a2d_connection_state_t state, void *caller){
             LOGD(LOG_METHOD);
             A2DPStream *self = (A2DPStream*)caller;
-            if (state==ESP_A2D_CONNECTION_STATE_CONNECTED){
+            if (state==ESP_A2D_CONNECTION_STATE_CONNECTED && self->config.startLogic==StartOnConnect){
                  is_a2dp_active = true;
             } 
             LOGW("==> state: %s", self->a2dp->to_str(state));
         }
 
+        bool lockSemaphore(bool locked, bool immediate=false){
+            bool result = false;
+            if (locked){
+                result = xSemaphoreTake( xSemaphore, immediate ? 10 : portMAX_DELAY ) == pdTRUE;     
+            } else {
+                result = xSemaphoreGive( xSemaphore ) == pdTRUE;
+            }
+            return result;    
+        }
+
+        // callback used by A2DP to provide the a2dp_source sound data
+        static int32_t a2dp_stream_source_sound_data(Frame* data, int32_t len) {
+            if (a2dp_buffer==nullptr) return 0;
+            int32_t result_len = 0;
+
+            bool isAvailable = false;
+            bool isLocked = false;
+            if (is_a2dp_active) {
+                if (A2DPStream_self->lockSemaphore(true)) {
+                    isAvailable = a2dp_buffer->available()>0;
+                    LOGD("buffer: %d, free %d",a2dp_buffer->available(), a2dp_buffer->availableToWrite() )
+                    isLocked = true;
+                } else {
+                    LOGE("lock failed");
+                }
+            }
+
+            // at first call we start with some empty data
+            if (isAvailable){
+                // the data in the file must be in int16 with 2 channels 
+                size_t result_len_bytes = a2dp_buffer->readArray((uint8_t*)data, len*sizeof(Frame));
+                A2DPStream_self->lockSemaphore(false);
+
+                // result is in number of frames
+                result_len = result_len_bytes / sizeof(Frame);
+            } else {
+                if (isLocked) A2DPStream_self->lockSemaphore(false);
+
+                // prevent underflow on first call
+                switch (A2DPStream_self->config.noData) {
+                    case A2DPSilence:
+                        memset(data, 0, len*sizeof(Frame));
+                        break;
+                    case A2DPWhoosh:
+                        for (int j=0;j<len;j++){
+                            data[j].channel2 = data[j].channel1 = (rand() % 50) - 25; 
+                        }
+                        break;
+                }
+                result_len = len;
+                delay(3);
+
+                // Priority: 22  on core 0
+			    // LOGI("Priority: %d  on core %d", uxTaskPriorityGet(NULL), xPortGetCoreID());
+
+            }
+
+            LOGD("a2dp_stream_source_sound_data: %d -> %d (%s)", len, result_len, isAvailable?"+":"-");   
+            return result_len;
+        }
+
+        // callback used by A2DP to write the sound data
+        static void a2dp_stream_sink_sound_data(const uint8_t* data, uint32_t len) {
+            if (is_a2dp_active && a2dp_buffer!=nullptr){
+                uint32_t result_len = a2dp_buffer->writeArray(data, len);
+                LOGD("a2dp_stream_sink_sound_data %d -> %d", len, result_len);
+                // allow some other task 
+                //yield();
+            } 
+        }
+
 };
+
+
+
 
 }
 

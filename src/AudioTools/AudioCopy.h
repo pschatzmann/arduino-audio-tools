@@ -42,6 +42,11 @@ class StreamCopyT {
             is_first = true;       
         }
 
+        void end() {
+            this->from = nullptr;
+            this->to = nullptr;
+        }
+
         // assign a new output and input stream
         void begin(Print &to, Stream &from){
             this->from = &from;
@@ -49,15 +54,20 @@ class StreamCopyT {
             is_first = true;
         }
 
+        Stream *getFrom(){
+            return from;
+        }
+
+        Stream *getTo() {
+            return to;
+        }
+
         ~StreamCopyT(){
             delete[] buffer;
         }
 
         // copies the data from one channel from the source to 2 channels on the destination - the result is in bytes
-         size_t copy(){
-            if (from==nullptr || to == nullptr) 
-                return 0;
-
+        size_t copy(){
             size_t result = 0;
             size_t delayCount = 0;
             size_t len = available();
@@ -70,6 +80,7 @@ class StreamCopyT {
                 bytes_to_read = samples * sizeof(T);
                 bytes_read = from->readBytes(buffer, bytes_to_read);
 
+                // determine mime
                 notifyMime(buffer, bytes_to_read);
                 is_first = false;
 
@@ -78,7 +89,10 @@ class StreamCopyT {
                 // write data
                 result = write(bytes_read, delayCount);
                 LOGI("StreamCopy::copy %zu -> %zu -> %zu bytes - in %zu hops", bytes_to_read, bytes_read, result, delayCount);
-            } 
+            } else {
+                // give the processor some time 
+                delay(delay_on_no_data);
+            }
             return result;
         }
 
@@ -203,17 +217,19 @@ class StreamCopyT {
 
         /// Update the mime type
         void notifyMime(void* data, size_t len){
-            const char *start = (const char *) data;
-            actual_mime = "audio/basic";
-            if (start[0]==0xFF && start[1]==0xF1){
-                actual_mime = "audio/aac";
-            } else if (strncmp(start,"ID3",3) || start[0]==0xFF || start[0]==0xFE ){
-                actual_mime = "audio/mpeg";
-            } else if (strncmp(start,"RIFF",4)){
-                actual_mime = "audio/vnd.wave";
-            }
-            if (notifyMimeCallback!=nullptr){
-                notifyMimeCallback(actual_mime);
+            if (len>4) {
+                const char *start = (const char *) data;
+                actual_mime = "audio/basic";
+                if (start[0]==0xFF && start[1]==0xF1){
+                    actual_mime = "audio/aac";
+                } else if (strncmp(start,"ID3",3) || start[0]==0xFF || start[0]==0xFE ){
+                    actual_mime = "audio/mpeg";
+                } else if (strncmp(start,"RIFF",4)){
+                    actual_mime = "audio/vnd.wave";
+                }
+                if (notifyMimeCallback!=nullptr){
+                    notifyMimeCallback(actual_mime);
+                }
             }
         }
 
@@ -227,11 +243,11 @@ class StreamCopyT {
 class StreamCopy : public StreamCopyT<uint8_t> {
     public:
         StreamCopy(int buffer_size=DEFAULT_BUFFER_SIZE): StreamCopyT<uint8_t>(buffer_size) {            
-            LOGD("StreamCopy")
+	 		LOGD(LOG_METHOD);
         }
 
         StreamCopy(Print &to, Stream &from, int buffer_size=DEFAULT_BUFFER_SIZE) : StreamCopyT<uint8_t>(to, from, buffer_size){
-            LOGD("StreamCopy")
+	 		LOGD(LOG_METHOD);
         }
 
         /// copies a buffer length of data and applies the converter
@@ -244,6 +260,11 @@ class StreamCopy : public StreamCopyT<uint8_t> {
             if (result>0){
                 size_t bytes_to_read = min(result, static_cast<size_t>(buffer_size) );
                 result = from->readBytes(buffer, bytes_to_read);
+
+                // determine mime
+                notifyMime(buffer, bytes_to_read);
+                is_first = false;
+
                 // callback with unconverted data
                 if (onWrite!=nullptr) onWrite(onWriteObj, buffer, result);
 
@@ -263,7 +284,7 @@ class StreamCopy : public StreamCopyT<uint8_t> {
         }
 
         int available() {
-            return from->available();
+            return from == nullptr ? 0 : from->available();
         }
 
 

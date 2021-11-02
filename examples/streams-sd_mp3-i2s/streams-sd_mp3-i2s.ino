@@ -22,7 +22,7 @@ const int chipSelect=10;
 I2SStream i2s; // final output of decoded stream
 EncodedAudioStream decoder(&i2s, new MP3DecoderHelix()); // Decoding stream
 StreamCopy copier; 
-
+File audioFile;
 
 void setup(){
   Serial.begin(115200);
@@ -30,7 +30,7 @@ void setup(){
 
   // setup file
   SD.begin(chipSelect);
-  File audioFile = SD.open("/music.mp3");
+  audioFile = SD.open("/Music/Conquistadores.mp3");
 
   // setup i2s
   auto config = i2s.defaultConfig(TX_MODE);
