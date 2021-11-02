@@ -273,27 +273,18 @@ namespace audio_tools {
 		/// Setup Wifi URL
 		virtual void begin() {
 			LOGD(LOG_METHOD);
-			setPos(-1);
-		}
-
-		/// Defines the actual position
-		void setPos(int newPos) {
-			pos = newPos;
-			if (pos >= max || pos < 0) {
-				pos = -1;
-			}
 		}
 
 		/// Opens the next url from the array
 		Stream* nextStream(int offset) {
 			pos += offset;
-			if (pos < 0 || pos >= max) {
-				pos = 0;
+			if (pos < 1 || pos > max) {
+				pos = 1;
 			}
-			LOGI("nextStream: %d -> %s", pos, urlArray[pos]);
+			LOGI("nextStream: %d -> %s", String(pos) + "/" + String(max), urlArray[pos-1]);
 			if (offset != 0 || actual_stream == nullptr) {
 				if (started) actual_stream->end();
-				actual_stream->begin(urlArray[pos], mime);
+				actual_stream->begin(urlArray[pos-1], mime);
 				started = true;
 			}
 			return actual_stream;
@@ -303,18 +294,18 @@ namespace audio_tools {
 		Stream* selectStream(int Station) {
 			//pos += offset;
 			pos = Station;
-			if (pos < 0) {
-				pos = 0;
-				LOGI("array out of limits: %d -> %s", Station, pos);
+			if (pos < 1) {
+				pos = 1;
+				LOGI("url array out of limits: %d -> %d", Station, pos);
 			}
-			if (pos >= max) {
-				pos = max-1;
-				LOGI("array out of limits: %d -> %s", Station, pos);
+			if (pos > max) {
+				pos = max;
+				LOGI("url array out of limits: %d -> %d", Station, pos);
 			}
-			LOGI("selectStream: %d -> %s", pos, urlArray[pos]);
+			LOGI("selectStream: %s -> %s", String(pos) + "/" + String(max), urlArray[pos-1]);
 			if (Station != 0 || actual_stream == nullptr) {
 				if (started) actual_stream->end();
-				actual_stream->begin(urlArray[pos], mime);
+				actual_stream->begin(urlArray[pos-1], mime);
 				started = true;
 			}
 			return actual_stream;
@@ -323,13 +314,13 @@ namespace audio_tools {
 		/// Opens the Previous url from the array
 		Stream* previousStream(int offset) {
 			pos -= offset;
-			if (pos < 0 || pos >= max) {
-				pos = max - 1;
+			if (pos < 1 || pos > max) {
+				pos = max;
 			}
-			LOGI("previousStream: %d -> %s", pos, urlArray[pos]);
+			LOGI("previousStream: %s -> %s", String(pos) + "/" + String(max), urlArray[pos-1]);
 			if (offset != 0 || actual_stream == nullptr) {
 				if (started) actual_stream->end();
-				actual_stream->begin(urlArray[pos], mime);
+				actual_stream->begin(urlArray[pos-1], mime);
 				started = true;
 			}
 			return actual_stream;
@@ -477,7 +468,7 @@ namespace audio_tools {
 		virtual bool begin(bool isActive = true) {
 			LOGD(LOG_METHOD);
 			bool result = false;
-
+			
 			// start dependent objects
 			p_out_decoding->begin();
 			p_source->begin();
