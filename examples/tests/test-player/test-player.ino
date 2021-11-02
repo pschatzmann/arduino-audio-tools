@@ -43,14 +43,27 @@ void testSD() {
         }
     }
     Serial.println("--------------------------");
-
 }
+
+void testSDNext() {
+    sdsource.begin();
+    for (int j=0;j<20;j++){
+        Stream *out = sdsource.nextStream(1);
+        Serial.printf("%d -> %d / %s \n", j, sdsource.index(), sdsource.toStr());
+        if (out!=nullptr){
+          assert(out->available()>0);
+        }
+    }
+    Serial.println("--------------------------");
+}
+
 
 void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Error);  
   testUrl();
   testSD();
+  testSDNext();
 }
 
 void loop(){

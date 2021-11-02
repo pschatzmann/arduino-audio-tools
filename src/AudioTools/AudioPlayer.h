@@ -50,10 +50,17 @@ namespace audio_tools {
             return nullptr;
         }
 
+		virtual void setTimeoutMs(int millisec) {
+			timeout_value = millisec;
+		}
+
 		/// Provides the timeout which is triggering to move to the next stream
 		virtual int timeoutMs() {
-			return 500;
+			return timeout_value;
 		}
+
+	protected:
+		int timeout_value = 500;
 
 	};
 
@@ -74,19 +81,19 @@ namespace audio_tools {
 		}
 
 		/// Reset actual stream and move to root
-		virtual void begin() {
+		virtual void begin() override {
 			LOGD(LOG_METHOD);
 			if (onStartCallback != nullptr) onStartCallback();
 		};
 
 		/// Returns next (with positive index) or previous stream (with negative index)
-		virtual Stream* nextStream(int offset) {
+		virtual Stream* nextStream(int offset) override {
 			LOGD(LOG_METHOD);
 			return nextStreamCallback == nullptr ? nullptr : nextStreamCallback();
 		}
 
     	/// Returns selected audio stream
-		virtual Stream* selectStream(int index) {
+		virtual Stream* selectStream(int index) override {
 			return indexStreamCallback == nullptr ? nullptr : indexStreamCallback(index);
         }
 
@@ -101,7 +108,6 @@ namespace audio_tools {
 		void setCallbackSelectStream(Stream* (*callback)(int idx)) {
 			indexStreamCallback = callback;
 		}
-
 
 	protected:
 		void (*onStartCallback)() = nullptr;
@@ -139,25 +145,22 @@ namespace audio_tools {
 			exension = ext;
 		}
 
-		virtual void begin() {
+		virtual void begin() override {
 			LOGD(LOG_METHOD);
-			pos = 0;
+			idx_pos = 0;
 		}
 
-		virtual Stream* nextStream(int offset) {
-			LOGD(LOG_METHOD);
-			return selectStream(pos+offset);
+		virtual Stream* nextStream(int offset) override {
+			LOGW("-> nextStream: %d", offset);
+			return selectStream(idx_pos+offset);
 		}
 
-		virtual Stream* selectStream(int index) {
-			pos = index;
-			if (pos<0){
-				pos = 0;
-			}
+		virtual Stream* selectStream(int index) override {
+			idx_pos = index<0 ? 0 : index;
 			file.close();
-			file = getFile(start_path, pos);
+			file = getFile(start_path, idx_pos);
 			file.getName(file_name, MAX_FILE_LEN);
-			LOGI("-> selectStream: '%s'", file_name);
+			LOGW("-> selectStream: %d '%s'", idx_pos, file_name);
 			return file ? &file : nullptr;
         }
 
@@ -166,10 +169,20 @@ namespace audio_tools {
 			file_name_pattern = filter;
 		}
 
+		/// Provides the current index position
+		int index() {
+			return idx_pos;
+		}
+
+		/// provides the actual file name
+		const char *toStr() {
+			return file_name;
+		}
+
 	protected:
 		AudioFile file;
 		AudioFs sd;
-		size_t pos = 0;
+		size_t idx_pos = 0;
 		char file_name[MAX_FILE_LEN];
 		const char* exension = nullptr;
 		const char* start_path = nullptr;
@@ -258,15 +271,16 @@ namespace audio_tools {
 			this->urlArray = urlArray;
 			this->max = N;
 			this->pos = startPos - 1;
+			this->timeout_value = 60000;
 		}
 
 		/// Setup Wifi URL
-		virtual void begin() {
+		virtual void begin() override {
 			LOGD(LOG_METHOD);
 		}
 
 		/// Opens the next url from the array
-		Stream* nextStream(int offset) {
+		Stream* nextStream(int offset) override {
 			pos += offset;
 			if (pos < 1 || pos > max) {
 				pos = 1;
@@ -281,19 +295,19 @@ namespace audio_tools {
 		}
 
 		/// Opens the selected url from the array
-		Stream* selectStream(int Station) {
+		Stream* selectStream(int idx) override {
 			//pos += offset;
-			pos = Station;
+			pos = idx;
 			if (pos < 1) {
 				pos = 1;
-				LOGI("url array out of limits: %d -> %d", Station, pos);
+				LOGI("url array out of limits: %d -> %d", idx, pos);
 			}
 			if (pos > max) {
 				pos = max;
-				LOGI("url array out of limits: %d -> %d", Station, pos);
+				LOGI("url array out of limits: %d -> %d", idx, pos);
 			}
 			LOGI("selectStream: %d/%d -> %s", pos, max, urlArray[pos-1]);
-			if (Station != 0 || actual_stream == nullptr) {
+			if (idx != 0 || actual_stream == nullptr) {
 				if (started) actual_stream->end();
 				actual_stream->begin(urlArray[pos-1], mime);
 				started = true;
@@ -302,7 +316,7 @@ namespace audio_tools {
 		}
 
 		/// Opens the Previous url from the array
-		Stream* previousStream(int offset) {
+		Stream* previousStream(int offset) override {
 			pos -= offset;
 			if (pos < 1 || pos > max) {
 				pos = max;
@@ -316,12 +330,12 @@ namespace audio_tools {
 			return actual_stream;
 		}
 
-		void setTimeoutMs(int millisec) {
-			timeout = millisec;
+		int index() {
+			return pos;
 		}
 
-		int timeoutMs() {
-			return timeout;
+		const char *toStr() {
+			return urlArray[pos];
 		}
 
 	protected:
@@ -330,7 +344,6 @@ namespace audio_tools {
 		int pos = 0;
 		int max = 0;
 		const char* mime = nullptr;
-		int timeout = 60000;
 		bool started = false;
 
 	};
@@ -513,9 +526,9 @@ namespace audio_tools {
 		}
 
 		/// moves to next file
-		virtual bool next() {
+		virtual bool next(int offset=1) {
 			LOGD(LOG_METHOD);
-			active = setStream(*(p_source->nextStream(+1)));
+			active = setStream(*(p_source->nextStream(offset)));
             return active;
 		}
 
@@ -527,9 +540,9 @@ namespace audio_tools {
 		}
 
 		/// moves to previous file
-		virtual bool previous() {
+		virtual bool previous(int offset=1) {
 			LOGD(LOG_METHOD);
-			active = setStream(*(p_source->previousStream(+1)));
+			active = setStream(*(p_source->previousStream(offset)));
 			return active;
 		}
 
@@ -537,7 +550,6 @@ namespace audio_tools {
 		virtual bool setStream(Stream &input) {
 			end();
 			p_out_decoding->begin();
-			p_source->begin();
 			p_input_stream = &input;
 			if (p_input_stream != nullptr) {
 				LOGD("open selected stream");
@@ -585,7 +597,7 @@ namespace audio_tools {
 				if (millis() > timeout) {
 					LOGW("-> timeout - moving to next stream");
 					// open next stream
-					if (!next()) {
+					if (!next(1)) {
 						LOGD("stream is null");
 					}
 				}
