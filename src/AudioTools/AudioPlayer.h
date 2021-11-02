@@ -146,16 +146,7 @@ namespace audio_tools {
 
 		virtual Stream* nextStream(int offset) {
 			LOGD(LOG_METHOD);
-			// move to next file
-			pos += offset;
-			if (pos<0){
-				pos = 0;
-			}
-			file.close();
-			file = getFile(start_path, pos);
-			file.getName(file_name, MAX_FILE_LEN);
-			LOGI("-> nextStream: '%s'", file_name);
-			return file ? &file : nullptr;
+			return selectStream(pos+offset);
 		}
 
 		virtual Stream* selectStream(int index) {
