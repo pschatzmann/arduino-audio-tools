@@ -39,14 +39,16 @@ namespace audio_tools {
 		/// Returns next audio stream
 		virtual Stream* nextStream(int offset) = 0;
 
+		/// Returns previous audio stream
+		virtual Stream* previousStream(int offset) {
+			return nextStream(-offset);
+		};
+
 		/// Returns next audio stream
 		virtual Stream* selectStream(int index) {
             LOGE("Not Supported!");
             return nullptr;
         }
-
-		/// Returns previous audio stream
-		virtual Stream* previousStream(int offset) = 0;
 
 		/// Provides the timeout which is triggering to move to the next stream
 		virtual int timeoutMs() {
@@ -156,6 +158,9 @@ namespace audio_tools {
 			LOGD(LOG_METHOD);
 			// move to next file
 			pos += offset;
+			if (pos<0){
+				pos = 0;
+			}
 			file.close();
 			file = getFile(start_path, pos);
 			file.getName(file_name, MAX_FILE_LEN);
@@ -167,7 +172,7 @@ namespace audio_tools {
 			file.close();
 			file = getFile(start_path, index);
 			file.getName(file_name, MAX_FILE_LEN);
-			LOGI("-> nextStream: '%s'", file_name);
+			LOGI("-> selectStream: '%s'", file_name);
 			return file ? &file : nullptr;
         }
 
@@ -281,7 +286,7 @@ namespace audio_tools {
 			if (pos < 1 || pos > max) {
 				pos = 1;
 			}
-			LOGI("nextStream: %d -> %s", String(pos) + "/" + String(max), urlArray[pos-1]);
+			LOGI("nextStream: %d/%d -> %s", pos, max, urlArray[pos-1]);
 			if (offset != 0 || actual_stream == nullptr) {
 				if (started) actual_stream->end();
 				actual_stream->begin(urlArray[pos-1], mime);
@@ -302,7 +307,7 @@ namespace audio_tools {
 				pos = max;
 				LOGI("url array out of limits: %d -> %d", Station, pos);
 			}
-			LOGI("selectStream: %s -> %s", String(pos) + "/" + String(max), urlArray[pos-1]);
+			LOGI("selectStream: %d/%d -> %s", pos, max, urlArray[pos-1]);
 			if (Station != 0 || actual_stream == nullptr) {
 				if (started) actual_stream->end();
 				actual_stream->begin(urlArray[pos-1], mime);
@@ -317,7 +322,7 @@ namespace audio_tools {
 			if (pos < 1 || pos > max) {
 				pos = max;
 			}
-			LOGI("previousStream: %s -> %s", String(pos) + "/" + String(max), urlArray[pos-1]);
+			LOGI("previousStream: %d/%d -> %s", pos, max, urlArray[pos-1]);
 			if (offset != 0 || actual_stream == nullptr) {
 				if (started) actual_stream->end();
 				actual_stream->begin(urlArray[pos-1], mime);
