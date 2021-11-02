@@ -464,33 +464,7 @@ namespace audio_tools {
 		}
 
 		/// (Re)Starts the playing of the music (from the beginning)
-		virtual bool begin(bool isActive = true) {
-			LOGD(LOG_METHOD);
-			bool result = false;
-			
-			// start dependent objects
-			p_out_decoding->begin();
-			p_source->begin();
-			meta_out.begin();
-
-			p_input_stream = p_source->nextStream(1);
-			if (p_input_stream != nullptr) {
-				if (meta_active) {
-					copier.setCallbackOnWrite(decodeMetaData, this);
-				}
-				copier.begin(*p_out_decoding, *p_input_stream);
-				timeout = millis() + p_source->timeoutMs();
-				active = isActive;
-				result = true;
-			}
-			else {
-				LOGW("-> begin: no data found");
-			}
-			return result;
-		}
-
-		/// (Re)Starts the playing of the music (from the beginning)
-		virtual bool begin(int index, bool isActive = true) {
+		virtual bool begin(int index=0, bool isActive = true) {
 			LOGD(LOG_METHOD);
 			bool result = false;
 
