@@ -44,7 +44,7 @@ namespace audio_tools {
 			return nextStream(-offset);
 		};
 
-		/// Returns next audio stream
+		/// Returns audio stream at the indicated index (the index is zero based, so the first value is 0!)
 		virtual Stream* selectStream(int index) {
             LOGE("Not Supported!");
             return nullptr;
@@ -297,7 +297,6 @@ namespace audio_tools {
 
 		/// Opens the selected url from the array
 		Stream* selectStream(int idx) override {
-			//pos += offset;
 			pos = idx;
 			if (pos < 0) {
 				pos = 0;
