@@ -271,7 +271,7 @@ namespace audio_tools {
 			this->urlArray = urlArray;
 			this->max = N;
 			this->pos = startPos - 1;
-			this->timeout_value = 10000;
+			this->timeout_value = 20000;
 		}
 
 		/// Setup Wifi URL
@@ -585,11 +585,11 @@ namespace audio_tools {
 				// move to next stream after timeout
 				if (p_input_stream == nullptr || millis() > timeout) {
 					LOGW("-> timeout - moving to next stream");
-					timeout = millis() + p_source->timeoutMs();
 					// open next stream
 					if (!next(1)) {
 						LOGD("stream is null");
 					}
+					timeout = millis() + p_source->timeoutMs();
 				}
 			}
 		}
