@@ -75,7 +75,7 @@ class A2DPConfig {
  *
  * Because we support only one instance the class is implemented as singleton!
  */
-class A2DPStream : public AudioStream {
+class A2DPStream : public AudioStream, public AudioBaseInfoSource {
 
     public:
         // Release the allocate a2dp_source or a2dp_sink
@@ -142,6 +142,7 @@ class A2DPStream : public AudioStream {
                         delay(1000);
                     }
                     LOGI("a2dp_source is connected...");
+                    notifyBaseInfo(44100);
                     //is_a2dp_active = true;
                     break;
 
@@ -151,6 +152,7 @@ class A2DPStream : public AudioStream {
                     a2dp_sink->set_stream_reader(&a2dp_stream_sink_sound_data, false);
                     a2dp_sink->start((char*)cfg.name);
                     a2dp_sink->set_on_connection_state_changed(a2dpStateCallback, this);
+                    a2dp_sink->set_sample_rate_callback(sample_rate_callback);
                     while(!a2dp_sink->is_connected()){
                         LOGD("waiting for connection");
                         delay(1000);
@@ -257,11 +259,17 @@ class A2DPStream : public AudioStream {
             a2dp->set_volume(volume * 100);
         }
 
+        virtual void setNotifyAudioChange (AudioBaseInfoDependent &bi) {
+            audioBaseInfoDependent = &bi;
+        }
+
+
     protected:
         A2DPConfig config;
         BluetoothA2DPSource *a2dp_source = nullptr;
         BluetoothA2DPSink *a2dp_sink = nullptr;
         BluetoothA2DPCommon *a2dp=nullptr;
+        AudioBaseInfoDependent *audioBaseInfoDependent=nullptr;
         int volume;
         // semaphore to synchronize acess to the buffer
         SemaphoreHandle_t xSemaphore = NULL;
@@ -343,7 +351,7 @@ class A2DPStream : public AudioStream {
             return result_len;
         }
 
-        // callback used by A2DP to write the sound data
+        /// callback used by A2DP to write the sound data
         static void a2dp_stream_sink_sound_data(const uint8_t* data, uint32_t len) {
             if (is_a2dp_active && a2dp_buffer!=nullptr){
                 uint32_t result_len = a2dp_buffer->writeArray(data, len);
@@ -351,6 +359,24 @@ class A2DPStream : public AudioStream {
                 // allow some other task 
                 //yield();
             } 
+        }
+
+        /// notify subscriber with AudioBaseInfo
+        void notifyBaseInfo(int rate){
+            if (audioBaseInfoDependent!=nullptr){
+                AudioBaseInfo info;
+                info.channels = 2;
+                info.bits_per_sample = 16;
+                info.sample_rate = rate;
+                audioBaseInfoDependent->setAudioInfo(info);
+            }
+        }
+
+        /// callback to update audio info with used a2dp sample rate
+        static void sample_rate_callback(uint16_t rate) {
+            if (A2DPStream_self->audioBaseInfoDependent!=nullptr){
+                A2DPStream_self->notifyBaseInfo(rate);
+            }
         }
 
 };
