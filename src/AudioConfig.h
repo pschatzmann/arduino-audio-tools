@@ -9,7 +9,7 @@
 #include <string.h>
 #include <stdint.h>
 
-#define AUDIOTOOLS_VERSION "0.6.1"
+#define AUDIOTOOLS_VERSION "0.7.0"
 
 /**
  * ------------------------------------------------------------------------- 
