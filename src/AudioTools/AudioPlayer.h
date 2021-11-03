@@ -289,7 +289,7 @@ namespace audio_tools {
 			LOGI("nextStream: %d/%d -> %s", pos, max, urlArray[pos]);
 			if (offset != 0 || actual_stream == nullptr) {
 				if (started) actual_stream->end();
-				actual_stream->begin(urlArray[pos-1], mime);
+				actual_stream->begin(urlArray[pos], mime);
 				started = true;
 			}
 			return actual_stream;
@@ -320,7 +320,7 @@ namespace audio_tools {
 			if (pos < 0 || pos >= max) {
 				pos = max-1;
 			}
-			LOGI("previousStream: %d/%d -> %s", pos, max, urlArray[pos-1]);
+			LOGI("previousStream: %d/%d -> %s", pos, max, urlArray[pos]);
 			if (offset != 0 || actual_stream == nullptr) {
 				if (started) actual_stream->end();
 				actual_stream->begin(urlArray[pos], mime);
