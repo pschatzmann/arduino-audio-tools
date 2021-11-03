@@ -291,12 +291,9 @@ namespace audio_tools {
 				pos = max-1;
 				LOGI("url array out of limits: %d -> %d", idx, pos);
 			}
-			LOGI("selectStream: %d/%d -> %s", pos, max, urlArray[pos]);
+			LOGI("selectStream: %d/%d -> %s", pos, max-1, urlArray[pos]);
 			if (started) actual_stream->end();
 			actual_stream->begin(urlArray[pos], mime);
-			if (!actual_stream->httpRequest().reply().isValidStatus()){
-				actual_stream = nullptr;
-			}
 			started = true;
 			return actual_stream;
 		}
@@ -307,7 +304,7 @@ namespace audio_tools {
 			if (pos < 0 || pos >= max) {
 				pos = 0;
 			}
-			LOGI("nextStream: %d/%d -> %s", pos, max, urlArray[pos]);
+			LOGI("nextStream: %d/%d -> %s", pos, max-1, urlArray[pos]);
 			return selectStream(pos);
 		}
 
@@ -317,7 +314,7 @@ namespace audio_tools {
 			if (pos < 0 || pos >= max) {
 				pos = max-1;
 			}
-			LOGI("previousStream: %d/%d -> %s", pos, max, urlArray[pos]);
+			LOGI("previousStream: %d/%d -> %s", pos, max-1, urlArray[pos]);
 			return selectStream(pos);
 		}
 
@@ -480,6 +477,7 @@ namespace audio_tools {
 			}
 			else {
 				LOGW("-> begin: no data found");
+				active = isActive;
 			}
 			return result;
 		}
@@ -587,6 +585,7 @@ namespace audio_tools {
 				// move to next stream after timeout
 				if (p_input_stream == nullptr || millis() > timeout) {
 					LOGW("-> timeout - moving to next stream");
+					timeout = millis() + p_source->timeoutMs();
 					// open next stream
 					if (!next(1)) {
 						LOGD("stream is null");

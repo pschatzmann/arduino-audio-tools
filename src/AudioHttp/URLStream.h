@@ -146,6 +146,7 @@ class URLStreamDefault : public AudioStream {
         Client *client=nullptr;
         WiFiClient *clientInsecure=nullptr;
         WiFiClientSecure *clientSecure=nullptr;
+        int clientTimeout = 10;
 
         /// Process the Http request and handle redirects
         int process(MethodID action, Url &url, const char* reqMime, const char *reqData, int len=-1) {
@@ -206,13 +207,19 @@ class URLStreamDefault : public AudioStream {
             delay(500);            
         }
 
-         virtual void waitForData() {
-            if(request.available()==0){
+        /// waits for some data - returns fals if the request has failed
+         virtual bool waitForData() {
+            if(request.available()==0 ){
                 LOGI("Request written ... waiting for reply")
                 while(request.available()==0){
+                    // stop waiting if we got an error
+                    if (request.reply().statusCode()>=300){
+                        break;
+                    }
                     delay(500);
                 }
             }
+            return request.available()>0;
         }
 };
 #ifndef ESP32
