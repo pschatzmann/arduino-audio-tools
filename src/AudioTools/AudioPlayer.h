@@ -274,18 +274,24 @@ namespace audio_tools {
 			this->timeout_value = 60000;
 		}
 
+		virtual int timeoutMs() override {
+			return 60000; //timeout_value;
+		}
+
+
 		/// Setup Wifi URL
 		virtual void begin() override {
 			LOGD(LOG_METHOD);
+			this->pos = 0;
 		}
 
 		/// Opens the next url from the array
 		Stream* nextStream(int offset) override {
 			pos += offset;
-			if (pos < 1 || pos > max) {
-				pos = 1;
+			if (pos < 0 || pos >= max) {
+				pos = 0;
 			}
-			LOGI("nextStream: %d/%d -> %s", pos, max, urlArray[pos-1]);
+			LOGI("nextStream: %d/%d -> %s", pos, max, urlArray[pos]);
 			if (offset != 0 || actual_stream == nullptr) {
 				if (started) actual_stream->end();
 				actual_stream->begin(urlArray[pos-1], mime);
@@ -298,33 +304,31 @@ namespace audio_tools {
 		Stream* selectStream(int idx) override {
 			//pos += offset;
 			pos = idx;
-			if (pos < 1) {
-				pos = 1;
+			if (pos < 0) {
+				pos = 0;
 				LOGI("url array out of limits: %d -> %d", idx, pos);
 			}
-			if (pos > max) {
-				pos = max;
+			if (pos >= max) {
+				pos = max-1;
 				LOGI("url array out of limits: %d -> %d", idx, pos);
 			}
-			LOGI("selectStream: %d/%d -> %s", pos, max, urlArray[pos-1]);
-			if (idx != 0 || actual_stream == nullptr) {
-				if (started) actual_stream->end();
-				actual_stream->begin(urlArray[pos-1], mime);
-				started = true;
-			}
+			LOGI("selectStream: %d/%d -> %s", pos, max, urlArray[pos]);
+			if (started) actual_stream->end();
+			actual_stream->begin(urlArray[pos], mime);
+			started = true;
 			return actual_stream;
 		}
 
 		/// Opens the Previous url from the array
 		Stream* previousStream(int offset) override {
 			pos -= offset;
-			if (pos < 1 || pos > max) {
-				pos = max;
+			if (pos < 0 || pos >= max) {
+				pos = max-1;
 			}
 			LOGI("previousStream: %d/%d -> %s", pos, max, urlArray[pos-1]);
 			if (offset != 0 || actual_stream == nullptr) {
 				if (started) actual_stream->end();
-				actual_stream->begin(urlArray[pos-1], mime);
+				actual_stream->begin(urlArray[pos], mime);
 				started = true;
 			}
 			return actual_stream;
