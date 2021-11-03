@@ -271,28 +271,13 @@ namespace audio_tools {
 			this->urlArray = urlArray;
 			this->max = N;
 			this->pos = startPos - 1;
-			this->timeout_value = 60000;
+			this->timeout_value = 10000;
 		}
 
 		/// Setup Wifi URL
 		virtual void begin() override {
 			LOGD(LOG_METHOD);
 			this->pos = 0;
-		}
-
-		/// Opens the next url from the array
-		Stream* nextStream(int offset) override {
-			pos += offset;
-			if (pos < 0 || pos >= max) {
-				pos = 0;
-			}
-			LOGI("nextStream: %d/%d -> %s", pos, max, urlArray[pos]);
-			if (offset != 0 || actual_stream == nullptr) {
-				if (started) actual_stream->end();
-				actual_stream->begin(urlArray[pos], mime);
-				started = true;
-			}
-			return actual_stream;
 		}
 
 		/// Opens the selected url from the array
@@ -309,8 +294,21 @@ namespace audio_tools {
 			LOGI("selectStream: %d/%d -> %s", pos, max, urlArray[pos]);
 			if (started) actual_stream->end();
 			actual_stream->begin(urlArray[pos], mime);
+			if (!actual_stream->httpRequest().reply().isValidStatus()){
+				actual_stream = nullptr;
+			}
 			started = true;
 			return actual_stream;
+		}
+
+		/// Opens the next url from the array
+		Stream* nextStream(int offset) override {
+			pos += offset;
+			if (pos < 0 || pos >= max) {
+				pos = 0;
+			}
+			LOGI("nextStream: %d/%d -> %s", pos, max, urlArray[pos]);
+			return selectStream(pos);
 		}
 
 		/// Opens the Previous url from the array
@@ -320,12 +318,7 @@ namespace audio_tools {
 				pos = max-1;
 			}
 			LOGI("previousStream: %d/%d -> %s", pos, max, urlArray[pos]);
-			if (offset != 0 || actual_stream == nullptr) {
-				if (started) actual_stream->end();
-				actual_stream->begin(urlArray[pos], mime);
-				started = true;
-			}
-			return actual_stream;
+			return selectStream(pos);
 		}
 
 		int index() {
@@ -526,29 +519,29 @@ namespace audio_tools {
 		/// moves to next file
 		virtual bool next(int offset=1) {
 			LOGD(LOG_METHOD);
-			active = setStream(*(p_source->nextStream(offset)));
+			active = setStream(p_source->nextStream(offset));
             return active;
 		}
 
 		/// moves to selected file
 		virtual bool setIndex(int idx) {
 			LOGD(LOG_METHOD);
-            active = setStream(*(p_source->selectStream(idx)));
+            active = setStream(p_source->selectStream(idx));
             return active;
 		}
 
 		/// moves to previous file
 		virtual bool previous(int offset=1) {
 			LOGD(LOG_METHOD);
-			active = setStream(*(p_source->previousStream(offset)));
+			active = setStream(p_source->previousStream(offset));
 			return active;
 		}
 
     	/// start selected input stream
-		virtual bool setStream(Stream &input) {
+		virtual bool setStream(Stream *input) {
 			end();
 			p_out_decoding->begin();
-			p_input_stream = &input;
+			p_input_stream = input;
 			if (p_input_stream != nullptr) {
 				LOGD("open selected stream");
 				meta_out.begin();
@@ -592,7 +585,7 @@ namespace audio_tools {
 				}
 
 				// move to next stream after timeout
-				if (millis() > timeout) {
+				if (p_input_stream == nullptr || millis() > timeout) {
 					LOGW("-> timeout - moving to next stream");
 					// open next stream
 					if (!next(1)) {
