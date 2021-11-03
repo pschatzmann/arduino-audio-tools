@@ -188,7 +188,6 @@ class HttpHeader {
             header->active = false;
         }
         
-
         const char* urlPath() {
             return url_path.c_str(); 
         }
@@ -214,7 +213,7 @@ class HttpHeader {
             return is_chunked;
         }
 
-        // reads the full header from the request (stream)
+        /// reads the full header from the request (stream)
         void read(Client &in) {
             LOGI("HttpHeader::read");
             // remove all existing value
@@ -244,7 +243,7 @@ class HttpHeader {
             }
         }
 
-        // writes the full header to the indicated HttpStreamedMultiOutput stream
+        /// writes the full header to the indicated HttpStreamedMultiOutput stream
         void write(Client &out){
             LOGI("HttpHeader::write");
             write1stLine(out);
@@ -257,11 +256,12 @@ class HttpHeader {
             is_written = true;
         }
 
-        // automatically create new lines
+        /// automatically create new lines
         void setAutoCreateLines(bool is_auto_line){
             create_new_lines = is_auto_line;
         }
 
+        /// returns true if status code >=200 and < 300
         bool isValidStatus() {
             return status_code >= 200 && status_code < 300;
         }
