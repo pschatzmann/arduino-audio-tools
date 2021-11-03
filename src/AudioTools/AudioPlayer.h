@@ -274,11 +274,6 @@ namespace audio_tools {
 			this->timeout_value = 60000;
 		}
 
-		virtual int timeoutMs() override {
-			return 60000; //timeout_value;
-		}
-
-
 		/// Setup Wifi URL
 		virtual void begin() override {
 			LOGD(LOG_METHOD);
