@@ -619,7 +619,6 @@ namespace audio_tools {
 	protected:
 		bool active = false;
 		AudioSource* p_source = nullptr;
-		//AudioDecoder *p_decoder = nullptr;
 		VolumeOutput volume_out; // Volume control
 		MetaDataID3 meta_out; // Metadata parser
 		EncodedAudioStream* p_out_decoding = nullptr; // Decoding stream
