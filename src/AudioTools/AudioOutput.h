@@ -54,7 +54,7 @@ class AudioPrint : public Print {
  * @copyright GPLv3
 */
 template<typename T>
-class CsvStream : public AudioPrint {
+class CsvStream : public AudioPrint, public AudioBaseInfoDependent {
 
     public:
         CsvStream(int buffer_size=DEFAULT_BUFFER_SIZE, bool active=true) {

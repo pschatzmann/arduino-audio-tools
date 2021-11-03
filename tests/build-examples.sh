@@ -4,9 +4,9 @@
 # We compile all examples using arduino-cli in order to identify compile errors 
 # The return code is made available in the build-examples-log.txt file.
 ##
-arduino-cli lib upgrade
-arduino-cli lib linstall 
-git -C .. pu
+#arduino-cli lib upgrade
+#arduino-cli lib linstall 
+git -C .. pull
 git -C ../../ESP32-A2DP pull
 
 function compile_example {
@@ -16,7 +16,8 @@ function compile_example {
   do
     echo "Processing $f ..."
     # take action on each file. $f store current file name
-    arduino-cli compile -b "$ARCH" "$f"
+    #arduino-cli compile  -b "$ARCH"  "$f"
+    arduino-cli compile  -b "$ARCH"  --build-property "build.partitions=huge_app" --build-property "upload.maximum_size=3145728" "$f"
     EC=$?
     #if [ $EC -ne 0 ]; then
       #break
@@ -25,9 +26,9 @@ function compile_example {
   done
 }
 
-#compile_example "esp32:esp32:esp32" "../examples/examples-basic-api/base*"
-#compile_example "esp32:esp32:esp32" "../examples/examples-player/player*"
+compile_example "esp32:esp32:esp32" "../examples/examples-basic-api/base*"
+compile_example "esp32:esp32:esp32" "../examples/examples-player/player*"
 compile_example "esp32:esp32:esp32" "../examples/examples-webserver/str*"
+compile_example "esp32:esp32:esp32" "../examples/examples-streams/streams*"
 #compile_example "esp32:esp32:esp32" "../examples/tests/test*"
-#compile_example "esp32:esp32:esp32" "../examples/streams*"
 
