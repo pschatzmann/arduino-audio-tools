@@ -128,6 +128,11 @@ class URLStreamDefault : public AudioStream {
             return active && request.isReady();
         }
 
+        /// Defines the client timeout
+        void setTimeout(int ms){
+            clientTimeout = ms;
+        }
+
 
     protected:
         HttpRequest request;
@@ -146,11 +151,13 @@ class URLStreamDefault : public AudioStream {
         Client *client=nullptr;
         WiFiClient *clientInsecure=nullptr;
         WiFiClientSecure *clientSecure=nullptr;
-        int clientTimeout = 10;
+        int clientTimeout = 60000;
 
         /// Process the Http request and handle redirects
         int process(MethodID action, Url &url, const char* reqMime, const char *reqData, int len=-1) {
             request.setClient(getClient(url.isSecure()));
+            // set timeout
+            getClient(url.isSecure()).setTimeout(clientTimeout);
             int status_code = request.process(action, url, reqMime, reqData, len);
             // redirect
             if (status_code>=300 && status_code<400){
