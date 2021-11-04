@@ -31,12 +31,17 @@ void setup(void) {
   // We send the test signal via A2DP - so we conect to the MyMusic Bluetooth Speaker
   out.setVolume(10);
   out.begin(TX_MODE, "MyMusic");
-
   Serial.println("A2DP is connected now...");
 
   // Setup sine wave
-  sineWave.begin(channels, sample_rate, N_B4);
-
+  auto cfg = in.defaultConfig();
+  cfg.channels = channels;
+  cfg.sample_rate = sample_rate;
+  in.setNotifyAudioChange(out);
+  in.begin(cfg);
+  
+  // set the frequency
+  sineWave.setFrequency(N_B4);
 }
 
 // Arduino loop  

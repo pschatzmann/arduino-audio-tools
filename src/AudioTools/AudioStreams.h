@@ -144,13 +144,44 @@ class MemoryStream : public AudioStream {
  */
 
 template <class T>
-class GeneratedSoundStream : public AudioStream {
+class GeneratedSoundStream : public AudioStream, public AudioBaseInfoSource {
     public:
         GeneratedSoundStream(SoundGenerator<T> &generator){
 	 		LOGD(LOG_METHOD);
             this->generator_ptr = &generator;
         }
+
+        AudioBaseInfo defaultConfig(){
+            return this->generator_ptr->defaultConfig();
+        }
         
+        /// start the processing
+        void begin() {
+	 		LOGD(LOG_METHOD);
+            generator_ptr->begin();
+            if (audioBaseInfoDependent!=nullptr) audioBaseInfoDependent->setAudioInfo(generator_ptr->audioInfo());
+            active = true;
+        }
+
+        /// start the processing
+        void begin(AudioBaseInfo cfg) {
+	 		LOGD(LOG_METHOD);
+            generator_ptr->begin(cfg);
+            if (audioBaseInfoDependent!=nullptr) audioBaseInfoDependent->setAudioInfo(generator_ptr->audioInfo());
+            active = true;
+        }
+
+        /// stop the processing
+        void end() {
+	 		LOGD(LOG_METHOD);
+            generator_ptr->stop();
+            active = false;
+        }
+
+        virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi){
+            audioBaseInfoDependent = &bi;
+        }
+
         /// unsupported operations
         virtual size_t write(uint8_t) {
             return not_supported();
@@ -190,20 +221,6 @@ class GeneratedSoundStream : public AudioStream {
             return generator_ptr->readBytes(buffer, length);
         }
 
-        /// start the processing
-        void begin() {
-	 		LOGD(LOG_METHOD);
-            generator_ptr->begin();
-            active = true;
-        }
-
-        /// stop the processing
-        void end() {
-	 		LOGD(LOG_METHOD);
-            generator_ptr->stop();
-            active = false;
-        }
-
         operator bool() {
             return active;
         }
@@ -214,6 +231,7 @@ class GeneratedSoundStream : public AudioStream {
     protected:
         SoundGenerator<T> *generator_ptr;  
         bool active = false;
+        AudioBaseInfoDependent *audioBaseInfoDependent=nullptr;
 
         int not_supported() {
             LOGE("GeneratedSoundStream-unsupported operation!");

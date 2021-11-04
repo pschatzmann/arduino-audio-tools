@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AudioConfig.h"
-#ifdef "USE_STK"
+#ifdef USE_STK
 
 #include "Arduino.h"
 #include "freertos/FreeRTOS.h"
@@ -11,82 +11,51 @@
 
 namespace audio_tools {
 
-/**
- * @brief Stream Source which provides the audio data using the STK framework: https://github.com/pschatzmann/Arduino-STK
- * @author Phil Schatzmann
- * @copyright GPLv3
- */
-class STKStream : public BufferedStream<int16_t> {
 
+template <class T>
+class STKGenerator : public SoundGenerator<T> {
     public:
-        /// provides the audio from a Voicer
-        void begin(stk::Voicer &voicer) {
-            p_voicer = &voicer;
-            p_stk = p_voicer;
-            p_instrument = nullptr;
-            active = true;
+        // the scale defines the max value which is generated
+        STKGenerator(stk::Instrmnt &instrument) : SoundGenerator<T>() {
+            this->p_instrument = &instrument;
+        }
+        STKGenerator(stk::Voicer  &voicer) : SoundGenerator<T>() {
+            this->p_voicer = &voicer;
         }
 
-        /// provides the audio from an Instrument
-        void begin(stk::Instrument &instrument) {
-            p_instrument = &instrument;
-            p_voicer = nullptr;
-            active = true;
-        }
-
-        /// stops the generation of sound
-        void end() {
-            active = false;
-        }
-
-        /// Provides the basic audio info: mainly the sample rate
-        AudioBaseInfo audioInfo() {
+        AudioBaseInfo defaultConfig() {
             AudioBaseInfo info;
-            info.sample_rate = stk::STK::sampleRate();
-            info.bits_per_sample = 16;
             info.channels = 1;
+            info.bits_per_sample = sizeof(T) * 8;
+            info.sample_rate = stk::Stk::sampleRate();
             return info;
         }
 
-    protected:
-        stk::Voicer *p_voicer=nullptr;
-        stk::Instrument *p_instrument=nullptr;
-        bool active = false;
-        int volumeValue = 32768;
-
-        // not supported
-        virtual size_t writeExt(const uint8_t* data, size_t len) {    
-            LOGE("not supported");
-            return 0;
+        void begin(AudioBaseInfo cfg){
+	 		LOGI(LOG_METHOD);
+            cfg.logInfo();
+            SoundGenerator<T>::begin(cfg);
+            SoundGenerator<T>::setChannels(cfg.channels);
+            max_value = maxValue(sizeof(T)*8);
+            stk::Stk::setSampleRate(SoundGenerator<T>::info.sample_rate);
         }
 
-        /// Defines the volume (range 0.0 to 1.0)
-        void setVolume(float vol){
-            volumeValue = vol * 32768;
-        }
-
-        virtual size_t readExt( uint8_t *data, size_t len) { 
-            // generate samples
-            size_t result = 0;
-            if (active){
-                result = len;
-                size_t sample_count = len / sizeof(int16_t);
-                int16_t* samples = (int16_t*)data;
-
-                if (p_voicer!=nullptr){
-                    for (int j=0;j<sample_count;j++){
-                        // scale ticks to int16 values
-                        samples[j] = p_voicer->tick() * volumeValue;
-                    }
-                } else if (p_instrument!=nullptr){
-                    for (int j=0;j<sample_count;j++){
-                        // scale ticks to int16 values
-                        samples[j] = p_instrument->tick() * volumeValue;
-                    }
-                }
+        /// Provides a single sample
+        T readSample() {
+            T result = 0;
+            if (p_instrument!=nullptr) {
+                result = p_instrument->tick()*max_value;
+            } else if (p_voicer!=nullptr){
+                result = p_voicer->tick()*max_value;
             }
             return result;
         }
+
+    protected:
+        stk::Instrmnt *p_instrument=nullptr;
+        stk::Voicer *p_voicer=nullptr;
+        T max_value;
+
 };
 
 
