@@ -135,8 +135,9 @@ class A2DPStream : public AudioStream, public AudioBaseInfoSource {
                 case TX_MODE:
                     LOGI("Starting a2dp_source...");
                     source(); // allocate object
-                    a2dp_source->start((char*)cfg.name, a2dp_stream_source_sound_data);  
+                    a2dp_source->set_volume(volume * 100);
                     a2dp_source->set_on_connection_state_changed(a2dpStateCallback, this);
+                    a2dp_source->start((char*)cfg.name, a2dp_stream_source_sound_data);  
                     while(!a2dp_source->is_connected()){
                         LOGD("waiting for connection");
                         delay(1000);
@@ -150,9 +151,10 @@ class A2DPStream : public AudioStream, public AudioBaseInfoSource {
                     LOGI("Starting a2dp_sink...");
                     sink(); // allocate object
                     a2dp_sink->set_stream_reader(&a2dp_stream_sink_sound_data, false);
-                    a2dp_sink->start((char*)cfg.name);
+                    a2dp_sink->set_volume(volume * 100);
                     a2dp_sink->set_on_connection_state_changed(a2dpStateCallback, this);
                     a2dp_sink->set_sample_rate_callback(sample_rate_callback);
+                    a2dp_sink->start((char*)cfg.name);
                     while(!a2dp_sink->is_connected()){
                         LOGD("waiting for connection");
                         delay(1000);
@@ -255,8 +257,8 @@ class A2DPStream : public AudioStream, public AudioBaseInfoSource {
         }
 
         virtual void setVolume(float volume){
-            //a2dp_volume = volume;
-            a2dp->set_volume(volume * 100);
+            this->volume = volume;
+            if (a2dp!=nullptr) a2dp->set_volume(volume * 100);
         }
 
         virtual void setNotifyAudioChange (AudioBaseInfoDependent &bi) {
@@ -270,7 +272,7 @@ class A2DPStream : public AudioStream, public AudioBaseInfoSource {
         BluetoothA2DPSink *a2dp_sink = nullptr;
         BluetoothA2DPCommon *a2dp=nullptr;
         AudioBaseInfoDependent *audioBaseInfoDependent=nullptr;
-        int volume;
+        float volume = 1.0;
         // semaphore to synchronize acess to the buffer
         SemaphoreHandle_t xSemaphore = NULL;
 

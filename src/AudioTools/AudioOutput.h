@@ -94,7 +94,8 @@ class CsvStream : public AudioPrint, public AudioBaseInfoDependent {
 
         /// defines the number of channels
         virtual void setAudioInfo(AudioBaseInfo info) {
-	 		LOGD(LOG_METHOD);
+	 		LOGI(LOG_METHOD);
+            info.logInfo();
             this->channels = info.channels;
         };
 
