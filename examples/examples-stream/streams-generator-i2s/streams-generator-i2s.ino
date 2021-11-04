@@ -1,7 +1,7 @@
 /**
  * @file streams-generator-i2s.ino
  * @author Phil Schatzmann
- * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/streams-generator-i2s/README.md 
+ * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-stream/streams-generator-i2s/README.md 
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

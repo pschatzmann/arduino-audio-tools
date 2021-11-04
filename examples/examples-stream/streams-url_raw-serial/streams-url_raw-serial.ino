@@ -1,7 +1,7 @@
 /**
  * @file streams-url_raw-serial.ino
  * @author Phil Schatzmann
- * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/streams-url_raw-serial/README.md 
+ * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-stream/streams-url_raw-serial/README.md 
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

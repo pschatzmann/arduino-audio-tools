@@ -1,7 +1,7 @@
 /**
  * @file streams-memory_aac-a2dp.ino
  * @author Phil Schatzmann
- * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/streams-memory_aac-a2dp/README.md
+ * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-stream/streams-memory_aac-a2dp/README.md
  * 
  * @author Phil Schatzmann
  * @copyright GPLv3

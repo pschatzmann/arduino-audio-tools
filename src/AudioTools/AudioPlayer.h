@@ -50,11 +50,12 @@ namespace audio_tools {
             return nullptr;
         }
 
+		/// Sets the timeout which is triggering to move to the next stream. - the default value is 500 ms
 		virtual void setTimeoutMs(int millisec) {
 			timeout_value = millisec;
 		}
 
-		/// Provides the timeout which is triggering to move to the next stream
+		/// Provides the timeout which is triggering to move to the next stream.
 		virtual int timeoutMs() {
 			return timeout_value;
 		}
@@ -326,7 +327,7 @@ namespace audio_tools {
 			return urlArray[pos];
 		}
 
-		/// Sets the timeout of the URL Stream
+		/// Sets the timeout of the URL Stream in milliseconds
 		void setUrlTimeout(int time){
 			actual_stream->setTimeout(time);
 		}
