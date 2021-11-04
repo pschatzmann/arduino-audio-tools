@@ -326,6 +326,11 @@ namespace audio_tools {
 			return urlArray[pos];
 		}
 
+		/// Sets the timeout of the URL Stream
+		void setUrlTimeout(int time){
+			actual_stream->setTimeout(time);
+		}
+
 	protected:
 		URLStream* actual_stream = nullptr;
 		const char** urlArray;
