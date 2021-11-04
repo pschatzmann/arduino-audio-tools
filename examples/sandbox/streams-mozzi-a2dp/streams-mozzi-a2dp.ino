@@ -1,7 +1,7 @@
 /**
  * @file streams-mozzi-a2dp.ino
  * @author Phil Schatzmann
- * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/streams-generator-a2dp/README.md
+ * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-stream/streams-generator-a2dp/README.md
  * 
  * @author Phil Schatzmann
  * @copyright GPLv3

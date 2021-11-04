@@ -1,7 +1,7 @@
 /**
- * @file streams-analog-i2s.ino
+ * @file streams-analog-serial.ino
  * @author Phil Schatzmann
- * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/streams-analog-i2s/README.md
+ * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-stream/streams-analog-serial/README.md
  * 
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -14,10 +14,11 @@
 using namespace audio_tools;  
 
 const uint16_t sample_rate = 44100;
+const uint8_t channels = 2;
 AnalogAudioStream in; 
-I2SStream out;                        
+CsvStream<int16_t> out(Serial, channels); // ASCII output stream 
 StreamCopy copier(out, in); // copy i2sStream to a2dpStream
-ConverterAutoCenter<int16_t> converter;
+ConverterAutoCenter<int16_t> center; // set avg to 0
 
 // Arduino Setup
 void setup(void) {
@@ -28,16 +29,13 @@ void setup(void) {
   auto cfgRx = in.defaultConfig(RX_MODE);
   cfgRx.sample_rate = sample_rate;
   in.begin(cfgRx);
- 
-  // TX on I2S_NUM_1 
-  auto cfgTx = out.defaultConfig(TX_MODE);
-  cfgTx.port_no = 1;
-  cfgTx.sample_rate = sample_rate;
-  out.begin(cfgTx);
+
+  // open output
+  out.begin();
 
 }
 
 // Arduino loop - copy data 
 void loop() {
-  copier.copy(converter);
+  copier.copy(center);
 }

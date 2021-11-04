@@ -2,7 +2,7 @@
  * @file streams-adc-a2dp.ino
  * @author Phil Schatzmann
  * @brief We use a mcp6022 analog microphone as input and send the data to A2DP
- * see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/streams-adc-a2dp/README.md
+ * see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-stream/streams-adc-a2dp/README.md
  * 
  * @author Phil Schatzmann
  * @copyright GPLv3

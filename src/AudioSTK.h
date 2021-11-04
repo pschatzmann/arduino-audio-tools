@@ -52,11 +52,17 @@ class STKStream : public BufferedStream<int16_t> {
         stk::Voicer *p_voicer=nullptr;
         stk::Instrument *p_instrument=nullptr;
         bool active = false;
+        int volumeValue = 32768;
 
         // not supported
         virtual size_t writeExt(const uint8_t* data, size_t len) {    
             LOGE("not supported");
             return 0;
+        }
+
+        /// Defines the volume (range 0.0 to 1.0)
+        void setVolume(float vol){
+            volumeValue = vol * 32768;
         }
 
         virtual size_t readExt( uint8_t *data, size_t len) { 
@@ -70,12 +76,12 @@ class STKStream : public BufferedStream<int16_t> {
                 if (p_voicer!=nullptr){
                     for (int j=0;j<sample_count;j++){
                         // scale ticks to int16 values
-                        samples[j] = p_voicer->tick() * 32768;
+                        samples[j] = p_voicer->tick() * volumeValue;
                     }
                 } else if (p_instrument!=nullptr){
                     for (int j=0;j<sample_count;j++){
                         // scale ticks to int16 values
-                        samples[j] = p_instrument->tick() * 32768;
+                        samples[j] = p_instrument->tick() * volumeValue;
                     }
                 }
             }

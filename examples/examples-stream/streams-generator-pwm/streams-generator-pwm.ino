@@ -1,7 +1,7 @@
 /**
  * @file streams-generator-pwm.ino
  * @author Phil Schatzmann
- * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/streams-generator-pwm/README.md 
+ * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-stream/streams-generator-pwm/README.md 
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

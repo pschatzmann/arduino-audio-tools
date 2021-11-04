@@ -1,7 +1,7 @@
 /**
  * @file streams-a2dp-serial.ino
  * @author Phil Schatzmann
- * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/streams-a2dp-serial/README.md
+ * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-stream/streams-a2dp-serial/README.md
  * 
  * @author Phil Schatzmann
  * @copyright GPLv3

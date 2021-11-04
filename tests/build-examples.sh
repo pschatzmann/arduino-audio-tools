@@ -29,6 +29,6 @@ function compile_example {
 compile_example "esp32:esp32:esp32" "../examples/examples-basic-api/base*"
 compile_example "esp32:esp32:esp32" "../examples/examples-player/player*"
 compile_example "esp32:esp32:esp32" "../examples/examples-webserver/str*"
-compile_example "esp32:esp32:esp32" "../examples/examples-streams/streams*"
+compile_example "esp32:esp32:esp32" "../examples/examples-stream/streams*"
 #compile_example "esp32:esp32:esp32" "../examples/tests/test*"
 
