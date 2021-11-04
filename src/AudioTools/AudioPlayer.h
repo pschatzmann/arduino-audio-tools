@@ -523,7 +523,7 @@ namespace audio_tools {
 		/// moves to next file
 		virtual bool next(int offset=1) {
 			LOGD(LOG_METHOD);
-			//previous_stream = false;
+			previous_stream = false;
 			active = setStream(p_source->nextStream(offset));
             return active;
 		}
@@ -531,7 +531,7 @@ namespace audio_tools {
 		/// moves to selected file
 		virtual bool setIndex(int idx) {
 			LOGD(LOG_METHOD);
-			//previous_stream = false;
+			previous_stream = false;
             active = setStream(p_source->selectStream(idx));
             return active;
 		}
@@ -539,7 +539,7 @@ namespace audio_tools {
 		/// moves to previous file
 		virtual bool previous(int offset=1) {
 			LOGD(LOG_METHOD);
-			//previous_stream = true;
+			previous_stream = true;
 			active = setStream(p_source->previousStream(offset));
 			return active;
 		}
@@ -593,21 +593,21 @@ namespace audio_tools {
 
 				// move to next stream after timeout
 				if (p_input_stream == nullptr || millis() > timeout) {
-					//if (previous_stream == false) {
-					//	LOGW("-> timeout - moving to next stream");
-					//	// open next stream
-					//	if (!next(1)) {
-					//		LOGD("stream is null");
-					//	}
-					//}
-					//else {
-					//	LOGW("-> timeout - moving to previous stream");
-					//	// open previous stream
-					//	if (!previous(1)) {
-					//		LOGD("stream is null");
-					//	}
-					//}
-					LOGW("-> timeout or no stream recieved");
+					if (previous_stream == false) {
+						LOGW("-> timeout - moving to next stream");
+						// open next stream
+						if (!next(1)) {
+							LOGD("stream is null");
+						}
+					}
+					else {
+						LOGW("-> timeout - moving to previous stream");
+						// open previous stream
+						if (!previous(1)) {
+							LOGD("stream is null");
+						}
+					}
+
 					timeout = millis() + p_source->timeoutMs();
 				}
 			}
