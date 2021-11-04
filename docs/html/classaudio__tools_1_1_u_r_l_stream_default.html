@@ -132,6 +132,10 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>read</b> ()</t
 <tr class="memitem:a687f6300ffc53dce35848fabc2487e6f"><td class="memItemLeft" align="right" valign="top"><a id="a687f6300ffc53dce35848fabc2487e6f"></a>
 virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>readBytes</b> (uint8_t *buffer, size_t length)</td></tr>
 <tr class="separator:a687f6300ffc53dce35848fabc2487e6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52585ee54268dd9c516afd066d515172"><td class="memItemLeft" align="right" valign="top"><a id="a52585ee54268dd9c516afd066d515172"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_r_l_stream_default.html#a52585ee54268dd9c516afd066d515172">setTimeout</a> (int ms)</td></tr>
+<tr class="memdesc:a52585ee54268dd9c516afd066d515172"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the client timeout. <br /></td></tr>
+<tr class="separator:a52585ee54268dd9c516afd066d515172"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a1c9b4defc7e77a768c6c0f9dc42466"><td class="memItemLeft" align="right" valign="top"><a id="a5a1c9b4defc7e77a768c6c0f9dc42466"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (uint8_t)</td></tr>
 <tr class="separator:a5a1c9b4defc7e77a768c6c0f9dc42466"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -324,9 +328,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>login</b> ()</td></tr
 int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_r_l_stream_default.html#a6fd684c52ab989aa4810c36789c1031c">process</a> (MethodID action, <a class="el" href="classaudio__tools_1_1_url.html">Url</a> &amp;url, const char *reqMime, const char *reqData, int len=-1)</td></tr>
 <tr class="memdesc:a6fd684c52ab989aa4810c36789c1031c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process the Http request and handle redirects. <br /></td></tr>
 <tr class="separator:a6fd684c52ab989aa4810c36789c1031c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a397608908821185c26079eb07f62d70c"><td class="memItemLeft" align="right" valign="top"><a id="a397608908821185c26079eb07f62d70c"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>waitForData</b> ()</td></tr>
-<tr class="separator:a397608908821185c26079eb07f62d70c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95ba73b22a289402e0e78190f539d3cb"><td class="memItemLeft" align="right" valign="top"><a id="a95ba73b22a289402e0e78190f539d3cb"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_r_l_stream_default.html#a95ba73b22a289402e0e78190f539d3cb">waitForData</a> ()</td></tr>
+<tr class="memdesc:a95ba73b22a289402e0e78190f539d3cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">waits for some data - returns fals if the request has failed <br /></td></tr>
+<tr class="separator:a95ba73b22a289402e0e78190f539d3cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_class_stream"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_stream')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_stream.html">Stream</a></td></tr>
 <tr class="memitem:a5fb669d95dbf5b7b8a8e900c53d62a1e inherit pro_methods_class_stream"><td class="memItemLeft" align="right" valign="top"><a id="a5fb669d95dbf5b7b8a8e900c53d62a1e"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>findMulti</b> (struct <a class="el" href="struct_stream_1_1_multi_target.html">MultiTarget</a> *targets, int tCount)</td></tr>
@@ -365,6 +370,9 @@ WiFiClient *&#160;</td><td class="memItemRight" valign="bottom"><b>clientInsecur
 <tr class="memitem:a9c39b4844c03d1d481343b9da4031926"><td class="memItemLeft" align="right" valign="top"><a id="a9c39b4844c03d1d481343b9da4031926"></a>
 WiFiClientSecure *&#160;</td><td class="memItemRight" valign="bottom"><b>clientSecure</b> =nullptr</td></tr>
 <tr class="separator:a9c39b4844c03d1d481343b9da4031926"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e89739b9b4a5ad7038482be8a9de661"><td class="memItemLeft" align="right" valign="top"><a id="a9e89739b9b4a5ad7038482be8a9de661"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>clientTimeout</b> = 60000</td></tr>
+<tr class="separator:a9e89739b9b4a5ad7038482be8a9de661"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8325185dff6cf7787050e92077d993f"><td class="memItemLeft" align="right" valign="top"><a id="ac8325185dff6cf7787050e92077d993f"></a>
 char *&#160;</td><td class="memItemRight" valign="bottom"><b>network</b> =nullptr</td></tr>
 <tr class="separator:ac8325185dff6cf7787050e92077d993f"><td class="memSeparator" colspan="2">&#160;</td></tr>

@@ -67,6 +67,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_audio_source-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">audio_tools::AudioSource Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
@@ -105,12 +106,22 @@ virtual <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class=
 <tr class="separator:a59dd587de12ed8aabb4f812dd4dbec37"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a34afea2bb051055c609fa0b42906ddcf"><td class="memItemLeft" align="right" valign="top"><a id="a34afea2bb051055c609fa0b42906ddcf"></a>
 virtual <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a34afea2bb051055c609fa0b42906ddcf">selectStream</a> (int index)</td></tr>
-<tr class="memdesc:a34afea2bb051055c609fa0b42906ddcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns next audio stream. <br /></td></tr>
+<tr class="memdesc:a34afea2bb051055c609fa0b42906ddcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns audio stream at the indicated index (the index is zero based, so the first value is 0!) <br /></td></tr>
 <tr class="separator:a34afea2bb051055c609fa0b42906ddcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e836d914f6d1aaab1b33d1de16a5e46"><td class="memItemLeft" align="right" valign="top"><a id="a0e836d914f6d1aaab1b33d1de16a5e46"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a0e836d914f6d1aaab1b33d1de16a5e46">setTimeoutMs</a> (int millisec)</td></tr>
+<tr class="memdesc:a0e836d914f6d1aaab1b33d1de16a5e46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the timeout which is triggering to move to the next stream. - the default value is 500 ms. <br /></td></tr>
+<tr class="separator:a0e836d914f6d1aaab1b33d1de16a5e46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c9055d30e04bcd529d63ea6ee6b5c22"><td class="memItemLeft" align="right" valign="top"><a id="a3c9055d30e04bcd529d63ea6ee6b5c22"></a>
 virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a3c9055d30e04bcd529d63ea6ee6b5c22">timeoutMs</a> ()</td></tr>
 <tr class="memdesc:a3c9055d30e04bcd529d63ea6ee6b5c22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the timeout which is triggering to move to the next stream. <br /></td></tr>
 <tr class="separator:a3c9055d30e04bcd529d63ea6ee6b5c22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:abdab36077b038b12686adad57d4ff6b0"><td class="memItemLeft" align="right" valign="top"><a id="abdab36077b038b12686adad57d4ff6b0"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_value</b> = 500</td></tr>
+<tr class="separator:abdab36077b038b12686adad57d4ff6b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Abstract Audio Data Source which is used by the Audio Players. </p>

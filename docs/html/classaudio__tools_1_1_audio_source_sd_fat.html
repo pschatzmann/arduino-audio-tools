@@ -94,27 +94,39 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9355ec17fbde1d07510a924cef76b1fa"><td class="memItemLeft" align="right" valign="top"><a id="a9355ec17fbde1d07510a924cef76b1fa"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>AudioSourceSdFat</b> (const char *startFilePath=&quot;/&quot;, const char *ext=&quot;.mp3&quot;, int chipSelect=PIN_CS, int speedMHz=2)</td></tr>
 <tr class="separator:a9355ec17fbde1d07510a924cef76b1fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22a5aabea5a387fff5d288d9bcf39244"><td class="memItemLeft" align="right" valign="top"><a id="a22a5aabea5a387fff5d288d9bcf39244"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_sd_fat.html#a22a5aabea5a387fff5d288d9bcf39244">begin</a> ()</td></tr>
-<tr class="memdesc:a22a5aabea5a387fff5d288d9bcf39244"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset actual stream and move to root. <br /></td></tr>
-<tr class="separator:a22a5aabea5a387fff5d288d9bcf39244"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd9f11be9ab6595aec78f1f327a3e0c7"><td class="memItemLeft" align="right" valign="top"><a id="abd9f11be9ab6595aec78f1f327a3e0c7"></a>
-virtual <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_sd_fat.html#abd9f11be9ab6595aec78f1f327a3e0c7">nextStream</a> (int offset)</td></tr>
-<tr class="memdesc:abd9f11be9ab6595aec78f1f327a3e0c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns next audio stream. <br /></td></tr>
-<tr class="separator:abd9f11be9ab6595aec78f1f327a3e0c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af60287bc5d97a42d6af98782606ef40c"><td class="memItemLeft" align="right" valign="top"><a id="af60287bc5d97a42d6af98782606ef40c"></a>
-virtual <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_sd_fat.html#af60287bc5d97a42d6af98782606ef40c">selectStream</a> (int index)</td></tr>
-<tr class="memdesc:af60287bc5d97a42d6af98782606ef40c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns next audio stream. <br /></td></tr>
-<tr class="separator:af60287bc5d97a42d6af98782606ef40c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7b1a30f2f31fb2623a9c0bf1efaba49"><td class="memItemLeft" align="right" valign="top"><a id="ad7b1a30f2f31fb2623a9c0bf1efaba49"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_sd_fat.html#ad7b1a30f2f31fb2623a9c0bf1efaba49">begin</a> () override</td></tr>
+<tr class="memdesc:ad7b1a30f2f31fb2623a9c0bf1efaba49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset actual stream and move to root. <br /></td></tr>
+<tr class="separator:ad7b1a30f2f31fb2623a9c0bf1efaba49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8a32465fc908b5836b6807b34a22ffd"><td class="memItemLeft" align="right" valign="top"><a id="ac8a32465fc908b5836b6807b34a22ffd"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_sd_fat.html#ac8a32465fc908b5836b6807b34a22ffd">index</a> ()</td></tr>
+<tr class="memdesc:ac8a32465fc908b5836b6807b34a22ffd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the current index position. <br /></td></tr>
+<tr class="separator:ac8a32465fc908b5836b6807b34a22ffd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacbd304a5ba40836fa315795d48e882d"><td class="memItemLeft" align="right" valign="top"><a id="aacbd304a5ba40836fa315795d48e882d"></a>
+virtual <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_sd_fat.html#aacbd304a5ba40836fa315795d48e882d">nextStream</a> (int offset) override</td></tr>
+<tr class="memdesc:aacbd304a5ba40836fa315795d48e882d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns next audio stream. <br /></td></tr>
+<tr class="separator:aacbd304a5ba40836fa315795d48e882d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af53cb33f507dad7baafa2983b283049f"><td class="memItemLeft" align="right" valign="top"><a id="af53cb33f507dad7baafa2983b283049f"></a>
+virtual <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_sd_fat.html#af53cb33f507dad7baafa2983b283049f">selectStream</a> (int <a class="el" href="classaudio__tools_1_1_audio_source_sd_fat.html#ac8a32465fc908b5836b6807b34a22ffd">index</a>) override</td></tr>
+<tr class="memdesc:af53cb33f507dad7baafa2983b283049f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns audio stream at the indicated index (the index is zero based, so the first value is 0!) <br /></td></tr>
+<tr class="separator:af53cb33f507dad7baafa2983b283049f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac933ce093b038f781f27f6996f15e91c"><td class="memItemLeft" align="right" valign="top"><a id="ac933ce093b038f781f27f6996f15e91c"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_sd_fat.html#ac933ce093b038f781f27f6996f15e91c">setFileFilter</a> (const char *filter)</td></tr>
 <tr class="memdesc:ac933ce093b038f781f27f6996f15e91c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the regex filter criteria for selecting files. E.g. ".*Bob Dylan.*". <br /></td></tr>
 <tr class="separator:ac933ce093b038f781f27f6996f15e91c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:addf747f78dd091b0ad682a1bb1012846"><td class="memItemLeft" align="right" valign="top"><a id="addf747f78dd091b0ad682a1bb1012846"></a>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_sd_fat.html#addf747f78dd091b0ad682a1bb1012846">toStr</a> ()</td></tr>
+<tr class="memdesc:addf747f78dd091b0ad682a1bb1012846"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides the actual file name <br /></td></tr>
+<tr class="separator:addf747f78dd091b0ad682a1bb1012846"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classaudio__tools_1_1_audio_source"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classaudio__tools_1_1_audio_source')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classaudio__tools_1_1_audio_source.html">audio_tools::AudioSource</a></td></tr>
 <tr class="memitem:a59dd587de12ed8aabb4f812dd4dbec37 inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="memItemLeft" align="right" valign="top"><a id="a59dd587de12ed8aabb4f812dd4dbec37"></a>
 virtual <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a59dd587de12ed8aabb4f812dd4dbec37">previousStream</a> (int offset)</td></tr>
 <tr class="memdesc:a59dd587de12ed8aabb4f812dd4dbec37 inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns previous audio stream. <br /></td></tr>
 <tr class="separator:a59dd587de12ed8aabb4f812dd4dbec37 inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e836d914f6d1aaab1b33d1de16a5e46 inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="memItemLeft" align="right" valign="top"><a id="a0e836d914f6d1aaab1b33d1de16a5e46"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a0e836d914f6d1aaab1b33d1de16a5e46">setTimeoutMs</a> (int millisec)</td></tr>
+<tr class="memdesc:a0e836d914f6d1aaab1b33d1de16a5e46 inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the timeout which is triggering to move to the next stream. - the default value is 500 ms. <br /></td></tr>
+<tr class="separator:a0e836d914f6d1aaab1b33d1de16a5e46 inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c9055d30e04bcd529d63ea6ee6b5c22 inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="memItemLeft" align="right" valign="top"><a id="a3c9055d30e04bcd529d63ea6ee6b5c22"></a>
 virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a3c9055d30e04bcd529d63ea6ee6b5c22">timeoutMs</a> ()</td></tr>
 <tr class="memdesc:a3c9055d30e04bcd529d63ea6ee6b5c22 inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the timeout which is triggering to move to the next stream. <br /></td></tr>
@@ -149,15 +161,19 @@ char&#160;</td><td class="memItemRight" valign="bottom"><b>file_name</b> [MAX_FI
 <tr class="memitem:a29ffee094068ccfcd4099d90d484ce38"><td class="memItemLeft" align="right" valign="top"><a id="a29ffee094068ccfcd4099d90d484ce38"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><b>file_name_pattern</b> = &quot;*&quot;</td></tr>
 <tr class="separator:a29ffee094068ccfcd4099d90d484ce38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a444c7065a186e0551d26bb630149aa8f"><td class="memItemLeft" align="right" valign="top"><a id="a444c7065a186e0551d26bb630149aa8f"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>pos</b> = 0</td></tr>
-<tr class="separator:a444c7065a186e0551d26bb630149aa8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13568c7ed18071e645487c49796a509a"><td class="memItemLeft" align="right" valign="top"><a id="a13568c7ed18071e645487c49796a509a"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>idx_pos</b> = 0</td></tr>
+<tr class="separator:a13568c7ed18071e645487c49796a509a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d8be8ded72480fe1e79c1f60e9fc4e2"><td class="memItemLeft" align="right" valign="top"><a id="a6d8be8ded72480fe1e79c1f60e9fc4e2"></a>
 AudioFs&#160;</td><td class="memItemRight" valign="bottom"><b>sd</b></td></tr>
 <tr class="separator:a6d8be8ded72480fe1e79c1f60e9fc4e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6bdff15755bd9564fcb6ec2b786792b1"><td class="memItemLeft" align="right" valign="top"><a id="a6bdff15755bd9564fcb6ec2b786792b1"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><b>start_path</b> = nullptr</td></tr>
 <tr class="separator:a6bdff15755bd9564fcb6ec2b786792b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classaudio__tools_1_1_audio_source"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classaudio__tools_1_1_audio_source')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classaudio__tools_1_1_audio_source.html">audio_tools::AudioSource</a></td></tr>
+<tr class="memitem:abdab36077b038b12686adad57d4ff6b0 inherit pro_attribs_classaudio__tools_1_1_audio_source"><td class="memItemLeft" align="right" valign="top"><a id="abdab36077b038b12686adad57d4ff6b0"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_value</b> = 500</td></tr>
+<tr class="separator:abdab36077b038b12686adad57d4ff6b0 inherit pro_attribs_classaudio__tools_1_1_audio_source"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source which is used by the Audio Players.">AudioSource</a> using an SD card as data source. This class is based on <a href="https://github.com/greiman/SdFat">https://github.com/greiman/SdFat</a>. </p>

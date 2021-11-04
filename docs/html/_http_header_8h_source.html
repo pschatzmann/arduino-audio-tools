@@ -243,81 +243,77 @@ $(function() {
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;            header-&gt;active = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        }</div>
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        </div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">char</span>* urlPath() {</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;            <span class="keywordflow">return</span> url_path.c_str(); </div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        }</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160; </div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">char</span>* protocol() {</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;            <span class="keywordflow">return</span> protocol_str.c_str(); </div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        }</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        MethodID method(){</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;            <span class="keywordflow">return</span> method_id;</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;        }</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160; </div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        <span class="keywordtype">int</span> statusCode() {</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;            <span class="keywordflow">return</span> status_code;</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;        }</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160; </div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">char</span>* statusMessage() {</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;            <span class="keywordflow">return</span> status_msg.c_str();</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        }</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160; </div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        <span class="keywordtype">bool</span> isChunked(){</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;            <span class="comment">// the value is automatically set from the reply</span></div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;            <span class="keywordflow">return</span> is_chunked;</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;        }</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160; </div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;        <span class="comment">// reads the full header from the request (stream)</span></div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;        <span class="keywordtype">void</span> read(Client &amp;in) {</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;            LOGI(<span class="stringliteral">&quot;HttpHeader::read&quot;</span>);</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;            <span class="comment">// remove all existing value</span></div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;            <a class="code" href="classaudio__tools_1_1_http_header.html#a7d2555d1372a463e2f994bfdf67d955e">clear</a>();</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160; </div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;            <span class="keywordtype">char</span> line[MaxHeaderLineLength];   </div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;            <span class="keywordflow">if</span> (in.connected()){</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;                <span class="keywordflow">if</span> (in.available()==0) {</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;                    LOGW(<span class="stringliteral">&quot;Waiting for data...&quot;</span>);</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;                    <span class="keywordflow">while</span>(in.available()==0){</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;                        delay(500);</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;                    }</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;                }</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;                readLine(in, line, MaxHeaderLineLength);</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;                parse1stLine(line);</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;                <span class="keywordflow">while</span> (in.available()){</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;                    readLine(in, line, MaxHeaderLineLength);</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                    <span class="keywordflow">if</span> (isValidStatus()){</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;                        Str lineStr(line);</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;                        lineStr.ltrim();</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;                        <span class="keywordflow">if</span> (lineStr.isEmpty()){</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;                            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;                        }</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;                        put(line); </div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;                    }               </div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;                }</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;            }</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;        }</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160; </div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;        <span class="comment">// writes the full header to the indicated HttpStreamedMultiOutput stream</span></div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;        <span class="keywordtype">void</span> write(Client &amp;out){</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;            LOGI(<span class="stringliteral">&quot;HttpHeader::write&quot;</span>);</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;            write1stLine(out);</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;            <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = lines.begin() ; it != lines.end(); ++it){</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;                writeHeaderLine(out, *it);</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;            }</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;            <span class="comment">// print empty line</span></div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;            crlf(out);</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;            out.flush();</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;            is_written = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;        }</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; </div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        <span class="comment">// automatically create new lines</span></div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;        <span class="keywordtype">void</span> setAutoCreateLines(<span class="keywordtype">bool</span> is_auto_line){</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;            create_new_lines = is_auto_line;</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        }</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160; </div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        <span class="keywordtype">bool</span> isValidStatus() {</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">char</span>* urlPath() {</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;            <span class="keywordflow">return</span> url_path.c_str(); </div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;        }</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; </div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">char</span>* protocol() {</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;            <span class="keywordflow">return</span> protocol_str.c_str(); </div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        }</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160; </div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        MethodID method(){</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;            <span class="keywordflow">return</span> method_id;</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        }</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; </div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        <span class="keywordtype">int</span> statusCode() {</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;            <span class="keywordflow">return</span> status_code;</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        }</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; </div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">char</span>* statusMessage() {</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;            <span class="keywordflow">return</span> status_msg.c_str();</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        }</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; </div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        <span class="keywordtype">bool</span> isChunked(){</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;            <span class="comment">// the value is automatically set from the reply</span></div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;            <span class="keywordflow">return</span> is_chunked;</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        }</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160; </div>
+<div class="line"><a name="l00217"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_http_header.html#abf91761af638dc7e0b3e13276d90ce74">  217</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_http_header.html#abf91761af638dc7e0b3e13276d90ce74">read</a>(Client &amp;in) {</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;            LOGI(<span class="stringliteral">&quot;HttpHeader::read&quot;</span>);</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;            <span class="comment">// remove all existing value</span></div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;            <a class="code" href="classaudio__tools_1_1_http_header.html#a7d2555d1372a463e2f994bfdf67d955e">clear</a>();</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160; </div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;            <span class="keywordtype">char</span> line[MaxHeaderLineLength];   </div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;            <span class="keywordflow">if</span> (in.connected()){</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;                <span class="keywordflow">if</span> (in.available()==0) {</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;                    LOGW(<span class="stringliteral">&quot;Waiting for data...&quot;</span>);</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;                    <span class="keywordflow">while</span>(in.available()==0){</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;                        delay(500);</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;                    }</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;                }</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;                readLine(in, line, MaxHeaderLineLength);</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;                parse1stLine(line);</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;                <span class="keywordflow">while</span> (in.available()){</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;                    readLine(in, line, MaxHeaderLineLength);</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;                    <span class="keywordflow">if</span> (<a class="code" href="classaudio__tools_1_1_http_header.html#acf5032e36c70b909f820ea5d72152e8c">isValidStatus</a>()){</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                        <a class="code" href="classaudio__tools_1_1_str.html">Str</a> lineStr(line);</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;                        lineStr.ltrim();</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;                        <span class="keywordflow">if</span> (lineStr.isEmpty()){</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;                            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;                        }</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;                        put(line); </div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;                    }               </div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;                }</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;            }</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;        }</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160; </div>
+<div class="line"><a name="l00247"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_http_header.html#a4c1383f091154a6c34e78ff1f63a1231">  247</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_http_header.html#a4c1383f091154a6c34e78ff1f63a1231">write</a>(Client &amp;out){</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;            LOGI(<span class="stringliteral">&quot;HttpHeader::write&quot;</span>);</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;            write1stLine(out);</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;            <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = lines.begin() ; it != lines.end(); ++it){</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;                writeHeaderLine(out, *it);</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;            }</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;            <span class="comment">// print empty line</span></div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;            crlf(out);</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;            out.flush();</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;            is_written = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;        }</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160; </div>
+<div class="line"><a name="l00260"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_http_header.html#a53db71b916f2d98167f8f50d64f3d34e">  260</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_http_header.html#a53db71b916f2d98167f8f50d64f3d34e">setAutoCreateLines</a>(<span class="keywordtype">bool</span> is_auto_line){</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;            create_new_lines = is_auto_line;</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;        }</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160; </div>
+<div class="line"><a name="l00265"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_http_header.html#acf5032e36c70b909f820ea5d72152e8c">  265</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_http_header.html#acf5032e36c70b909f820ea5d72152e8c">isValidStatus</a>() {</div>
 <div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;            <span class="keywordflow">return</span> status_code &gt;= 200 &amp;&amp; status_code &lt; 300;</div>
 <div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        }</div>
 <div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160; </div>
@@ -330,11 +326,11 @@ $(function() {
 <div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;        MethodID method_id;</div>
 <div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;        <span class="comment">// we store the values on the heap. this is acceptable because we just have one instance for the</span></div>
 <div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        <span class="comment">// requests and one for the replys: which needs about 2*100 bytes </span></div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;        StrExt protocol_str = StrExt(10);</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        StrExt url_path = StrExt(70);</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;        StrExt status_msg = StrExt(20);</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;        Vector&lt;HttpHeaderLine*&gt; lines;</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;        HttpLineReader reader;</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;        <a class="code" href="classaudio__tools_1_1_str_ext.html">StrExt</a> protocol_str = <a class="code" href="classaudio__tools_1_1_str_ext.html">StrExt</a>(10);</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        <a class="code" href="classaudio__tools_1_1_str_ext.html">StrExt</a> url_path = <a class="code" href="classaudio__tools_1_1_str_ext.html">StrExt</a>(70);</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;        <a class="code" href="classaudio__tools_1_1_str_ext.html">StrExt</a> status_msg = <a class="code" href="classaudio__tools_1_1_str_ext.html">StrExt</a>(20);</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;        <a class="code" href="classaudio__tools_1_1_vector.html">Vector&lt;HttpHeaderLine*&gt;</a> lines;</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;        <a class="code" href="classaudio__tools_1_1_http_line_reader.html">HttpLineReader</a> reader;</div>
 <div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">char</span>* CRLF = <span class="stringliteral">&quot;\r\n&quot;</span>;</div>
 <div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160; </div>
 <div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        <span class="comment">// the headers need to delimited with CR LF</span></div>
@@ -433,7 +429,7 @@ $(function() {
 <div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;            this-&gt;method_id = getMethod(line);</div>
 <div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;            this-&gt;protocol_str.substring(line_str, space2+1, line_str.length());</div>
 <div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;            this-&gt;url_path.substring(line_str,space1+1,space2);</div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;            this-&gt;url_path.trim();</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;            this-&gt;url_path.<a class="code" href="classaudio__tools_1_1_str.html#af5cd084c377811ee46e7c1d0d8f54bba">trim</a>();</div>
 <div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;  </div>
 <div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;            LOGI(<span class="stringliteral">&quot;-&gt;method %s&quot;</span>, methods[this-&gt;method_id]);</div>
 <div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;            LOGI(<span class="stringliteral">&quot;-&gt;protocol %s&quot;</span>, protocol_str.c_str());</div>
@@ -509,14 +505,20 @@ $(function() {
 <div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160; </div>
 <div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;}</div>
 <div class="ttc" id="aclassaudio__tools_1_1_http_header_html"><div class="ttname"><a href="classaudio__tools_1_1_http_header.html">audio_tools::HttpHeader</a></div><div class="ttdoc">In a http request and reply we need to process header information. With this API we can define and qu...</div><div class="ttdef"><b>Definition:</b> HttpHeader.h:55</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_http_header_html_a4c1383f091154a6c34e78ff1f63a1231"><div class="ttname"><a href="classaudio__tools_1_1_http_header.html#a4c1383f091154a6c34e78ff1f63a1231">audio_tools::HttpHeader::write</a></div><div class="ttdeci">void write(Client &amp;out)</div><div class="ttdoc">writes the full header to the indicated HttpStreamedMultiOutput stream</div><div class="ttdef"><b>Definition:</b> HttpHeader.h:247</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_http_header_html_a53db71b916f2d98167f8f50d64f3d34e"><div class="ttname"><a href="classaudio__tools_1_1_http_header.html#a53db71b916f2d98167f8f50d64f3d34e">audio_tools::HttpHeader::setAutoCreateLines</a></div><div class="ttdeci">void setAutoCreateLines(bool is_auto_line)</div><div class="ttdoc">automatically create new lines</div><div class="ttdef"><b>Definition:</b> HttpHeader.h:260</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_http_header_html_a7d2555d1372a463e2f994bfdf67d955e"><div class="ttname"><a href="classaudio__tools_1_1_http_header.html#a7d2555d1372a463e2f994bfdf67d955e">audio_tools::HttpHeader::clear</a></div><div class="ttdeci">HttpHeader &amp; clear(bool activeFlag=true)</div><div class="ttdoc">clears the data - usually we do not delete but we just set the active flag</div><div class="ttdef"><b>Definition:</b> HttpHeader.h:70</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_http_header_html_a96e5375cbc78ff1ef4d011dd5d794bf6"><div class="ttname"><a href="classaudio__tools_1_1_http_header.html#a96e5375cbc78ff1ef4d011dd5d794bf6">audio_tools::HttpHeader::put</a></div><div class="ttdeci">HttpHeader &amp; put(const char *key, int value)</div><div class="ttdoc">adds a new line to the header - e.g. for content size</div><div class="ttdef"><b>Definition:</b> HttpHeader.h:112</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_http_header_html_ab497ec1ba82834e820a5da6d076c0a36"><div class="ttname"><a href="classaudio__tools_1_1_http_header.html#ab497ec1ba82834e820a5da6d076c0a36">audio_tools::HttpHeader::put</a></div><div class="ttdeci">HttpHeader &amp; put(const char *line)</div><div class="ttdoc">adds a received new line to the header</div><div class="ttdef"><b>Definition:</b> HttpHeader.h:128</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_http_header_html_abf91761af638dc7e0b3e13276d90ce74"><div class="ttname"><a href="classaudio__tools_1_1_http_header.html#abf91761af638dc7e0b3e13276d90ce74">audio_tools::HttpHeader::read</a></div><div class="ttdeci">void read(Client &amp;in)</div><div class="ttdoc">reads the full header from the request (stream)</div><div class="ttdef"><b>Definition:</b> HttpHeader.h:217</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_http_header_html_acf5032e36c70b909f820ea5d72152e8c"><div class="ttname"><a href="classaudio__tools_1_1_http_header.html#acf5032e36c70b909f820ea5d72152e8c">audio_tools::HttpHeader::isValidStatus</a></div><div class="ttdeci">bool isValidStatus()</div><div class="ttdoc">returns true if status code &gt;=200 and &lt; 300</div><div class="ttdef"><b>Definition:</b> HttpHeader.h:265</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_http_line_reader_html"><div class="ttname"><a href="classaudio__tools_1_1_http_line_reader.html">audio_tools::HttpLineReader</a></div><div class="ttdoc">We read a single line. A terminating 0 is added to the string to make it compliant for c string funct...</div><div class="ttdef"><b>Definition:</b> HttpLineReader.h:14</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_http_reply_header_html"><div class="ttname"><a href="classaudio__tools_1_1_http_reply_header.html">audio_tools::HttpReplyHeader</a></div><div class="ttdoc">Reading and Writing of Http Replys.</div><div class="ttdef"><b>Definition:</b> HttpHeader.h:400</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_http_request_header_html"><div class="ttname"><a href="classaudio__tools_1_1_http_request_header.html">audio_tools::HttpRequestHeader</a></div><div class="ttdoc">Reading and writing of Http Requests.</div><div class="ttdef"><b>Definition:</b> HttpHeader.h:341</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_str_ext_html"><div class="ttname"><a href="classaudio__tools_1_1_str_ext.html">audio_tools::StrExt</a></div><div class="ttdoc">Str which keeps the data on the heap. We grow the allocated memory only if the copy source is not fit...</div><div class="ttdef"><b>Definition:</b> StrExt.h:22</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_str_html"><div class="ttname"><a href="classaudio__tools_1_1_str.html">audio_tools::Str</a></div><div class="ttdoc">A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a...</div><div class="ttdef"><b>Definition:</b> Str.h:17</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_str_html_af5cd084c377811ee46e7c1d0d8f54bba"><div class="ttname"><a href="classaudio__tools_1_1_str.html#af5cd084c377811ee46e7c1d0d8f54bba">audio_tools::Str::trim</a></div><div class="ttdeci">virtual void trim()</div><div class="ttdoc">remove leading and traling spaces</div><div class="ttdef"><b>Definition:</b> Str.h:477</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_vector_html"><div class="ttname"><a href="classaudio__tools_1_1_vector.html">audio_tools::Vector</a></div><div class="ttdoc">Vector implementation which provides the most important methods as defined by std::vector....</div><div class="ttdef"><b>Definition:</b> Vector.h:14</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Parser for MP3 ID3 Meta Data: The goal is to implement a simple API which provides the title,...</div><div class="ttdef"><b>Definition:</b> AudioA2DP.h:18</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_http_header_line_html"><div class="ttname"><a href="structaudio__tools_1_1_http_header_line.html">audio_tools::HttpHeaderLine</a></div><div class="ttdoc">A individual key - value header line.</div><div class="ttdef"><b>Definition:</b> HttpHeader.h:40</div></div>
 </div><!-- fragment --></div><!-- contents -->

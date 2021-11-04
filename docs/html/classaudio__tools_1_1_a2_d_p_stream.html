@@ -88,6 +88,7 @@ Inheritance diagram for audio_tools::A2DPStream:</div>
   <img src="classaudio__tools_1_1_a2_d_p_stream.png" usemap="#audio_5Ftools::A2DPStream_map" alt=""/>
   <map id="audio_5Ftools::A2DPStream_map" name="audio_5Ftools::A2DPStream_map">
 <area href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="audio_tools::AudioStream" shape="rect" coords="117,112,342,136"/>
+<area href="classaudio__tools_1_1_audio_base_info_source.html" title="Supports the subscription to audio change notifications." alt="audio_tools::AudioBaseInfoSource" shape="rect" coords="352,112,577,136"/>
 <area href="class_stream.html" alt="Stream" shape="rect" coords="0,56,225,80"/>
 <area href="classaudio__tools_1_1_audio_base_info_dependent.html" title="Supports changes to the sampling rate, bits and channels." alt="audio_tools::AudioBaseInfoDependent" shape="rect" coords="235,56,460,80"/>
 <area href="class_print.html" alt="Print" shape="rect" coords="0,0,225,24"/>
@@ -137,6 +138,9 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>read</b> ()</t
 virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a2_d_p_stream.html#a11ed2a5226eb0136218c9898ecbdda9e">readBytes</a> (uint8_t *data, size_t len)</td></tr>
 <tr class="memdesc:a11ed2a5226eb0136218c9898ecbdda9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads the data from the temporary buffer. <br /></td></tr>
 <tr class="separator:a11ed2a5226eb0136218c9898ecbdda9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c459c1b273e845eb890e9f60321867e"><td class="memItemLeft" align="right" valign="top"><a id="a6c459c1b273e845eb890e9f60321867e"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setNotifyAudioChange</b> (<a class="el" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> &amp;bi)</td></tr>
+<tr class="separator:a6c459c1b273e845eb890e9f60321867e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acded43a485ffb3f362b4e16c89d356f7"><td class="memItemLeft" align="right" valign="top"><a id="acded43a485ffb3f362b4e16c89d356f7"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setVolume</b> (float volume)</td></tr>
 <tr class="separator:acded43a485ffb3f362b4e16c89d356f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -334,6 +338,10 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:aed053214c17c19b7387ad0e7f0119ba0"><td class="memItemLeft" align="right" valign="top"><a id="aed053214c17c19b7387ad0e7f0119ba0"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>lockSemaphore</b> (bool locked, bool immediate=false)</td></tr>
 <tr class="separator:aed053214c17c19b7387ad0e7f0119ba0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9481fdbb92af3ad22f96183ed593cc28"><td class="memItemLeft" align="right" valign="top"><a id="a9481fdbb92af3ad22f96183ed593cc28"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a2_d_p_stream.html#a9481fdbb92af3ad22f96183ed593cc28">notifyBaseInfo</a> (int rate)</td></tr>
+<tr class="memdesc:a9481fdbb92af3ad22f96183ed593cc28"><td class="mdescLeft">&#160;</td><td class="mdescRight">notify subscriber with <a class="el" href="structaudio__tools_1_1_audio_base_info.html" title="Basic Audio information which drives e.g. I2S.">AudioBaseInfo</a> <br /></td></tr>
+<tr class="separator:a9481fdbb92af3ad22f96183ed593cc28"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_class_stream"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_stream')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_stream.html">Stream</a></td></tr>
 <tr class="memitem:a5fb669d95dbf5b7b8a8e900c53d62a1e inherit pro_methods_class_stream"><td class="memItemLeft" align="right" valign="top"><a id="a5fb669d95dbf5b7b8a8e900c53d62a1e"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>findMulti</b> (struct <a class="el" href="struct_stream_1_1_multi_target.html">MultiTarget</a> *targets, int tCount)</td></tr>
@@ -361,7 +369,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteError</b> (in
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
 <tr class="memitem:ace6561b9e7afdb7c06a24f20cfe5457c"><td class="memItemLeft" align="right" valign="top"><a id="ace6561b9e7afdb7c06a24f20cfe5457c"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>a2dp_stream_sink_sound_data</b> (const uint8_t *data, uint32_t len)</td></tr>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a2_d_p_stream.html#ace6561b9e7afdb7c06a24f20cfe5457c">a2dp_stream_sink_sound_data</a> (const uint8_t *data, uint32_t len)</td></tr>
+<tr class="memdesc:ace6561b9e7afdb7c06a24f20cfe5457c"><td class="mdescLeft">&#160;</td><td class="mdescRight">callback used by A2DP to write the sound data <br /></td></tr>
 <tr class="separator:ace6561b9e7afdb7c06a24f20cfe5457c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abac635bcce7c82ee1a59de2fa1c5afa3"><td class="memItemLeft" align="right" valign="top"><a id="abac635bcce7c82ee1a59de2fa1c5afa3"></a>
 static int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>a2dp_stream_source_sound_data</b> (Frame *data, int32_t len)</td></tr>
@@ -369,6 +378,10 @@ static int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>a2dp_stream
 <tr class="memitem:ab1056cc150ed4a5fe564d3893f43b974"><td class="memItemLeft" align="right" valign="top"><a id="ab1056cc150ed4a5fe564d3893f43b974"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>a2dpStateCallback</b> (esp_a2d_connection_state_t state, void *caller)</td></tr>
 <tr class="separator:ab1056cc150ed4a5fe564d3893f43b974"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac579b49f2bf3b84dbdf9ab4d69578cf7"><td class="memItemLeft" align="right" valign="top"><a id="ac579b49f2bf3b84dbdf9ab4d69578cf7"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a2_d_p_stream.html#ac579b49f2bf3b84dbdf9ab4d69578cf7">sample_rate_callback</a> (uint16_t rate)</td></tr>
+<tr class="memdesc:ac579b49f2bf3b84dbdf9ab4d69578cf7"><td class="mdescLeft">&#160;</td><td class="mdescRight">callback to update audio info with used a2dp sample rate <br /></td></tr>
+<tr class="separator:ac579b49f2bf3b84dbdf9ab4d69578cf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -381,12 +394,15 @@ BluetoothA2DPSink *&#160;</td><td class="memItemRight" valign="bottom"><b>a2dp_s
 <tr class="memitem:a562702ebff4c5a91ebc0a2eac0e89d4a"><td class="memItemLeft" align="right" valign="top"><a id="a562702ebff4c5a91ebc0a2eac0e89d4a"></a>
 BluetoothA2DPSource *&#160;</td><td class="memItemRight" valign="bottom"><b>a2dp_source</b> = nullptr</td></tr>
 <tr class="separator:a562702ebff4c5a91ebc0a2eac0e89d4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecc0dc68b7f09d50388fca2677db2a56"><td class="memItemLeft" align="right" valign="top"><a id="aecc0dc68b7f09d50388fca2677db2a56"></a>
+<a class="el" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>audioBaseInfoDependent</b> =nullptr</td></tr>
+<tr class="separator:aecc0dc68b7f09d50388fca2677db2a56"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d877a80c4614277bd7c0b4d92346c3a"><td class="memItemLeft" align="right" valign="top"><a id="a5d877a80c4614277bd7c0b4d92346c3a"></a>
 <a class="el" href="classaudio__tools_1_1_a2_d_p_config.html">A2DPConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><b>config</b></td></tr>
 <tr class="separator:a5d877a80c4614277bd7c0b4d92346c3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64c1fc9ae112a58d9ed46c831e6bcbc6"><td class="memItemLeft" align="right" valign="top"><a id="a64c1fc9ae112a58d9ed46c831e6bcbc6"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>volume</b></td></tr>
-<tr class="separator:a64c1fc9ae112a58d9ed46c831e6bcbc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8c42f8f50be356c6949a319bf789f69"><td class="memItemLeft" align="right" valign="top"><a id="ad8c42f8f50be356c6949a319bf789f69"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>volume</b> = 1.0</td></tr>
+<tr class="separator:ad8c42f8f50be356c6949a319bf789f69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad4146972a9458dc3f6186d8893cb8f0b"><td class="memItemLeft" align="right" valign="top"><a id="ad4146972a9458dc3f6186d8893cb8f0b"></a>
 SemaphoreHandle_t&#160;</td><td class="memItemRight" valign="bottom"><b>xSemaphore</b> = NULL</td></tr>
 <tr class="separator:ad4146972a9458dc3f6186d8893cb8f0b"><td class="memSeparator" colspan="2">&#160;</td></tr>

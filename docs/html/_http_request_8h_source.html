@@ -262,7 +262,7 @@ $(function() {
 <div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;            request_header.put(ACCEPT, accept);</div>
 <div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;            request_header.put(CONTENT_TYPE, mime);</div>
 <div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;            </div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;            request_header.write(*client_ptr);</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;            request_header.<a class="code" href="classaudio__tools_1_1_http_header.html#a4c1383f091154a6c34e78ff1f63a1231">write</a>(*client_ptr);</div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; </div>
 <div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;            <span class="keywordflow">if</span> (len&gt;0){</div>
 <div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;                LOGI(<span class="stringliteral">&quot;Writing data: %d bytes&quot;</span>, len);</div>
@@ -288,6 +288,7 @@ $(function() {
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160; </div>
 <div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;}</div>
 <div class="ttc" id="aclassaudio__tools_1_1_http_chunk_reader_html"><div class="ttname"><a href="classaudio__tools_1_1_http_chunk_reader.html">audio_tools::HttpChunkReader</a></div><div class="ttdoc">Http might reply with chunks. So we need to dechunk the data. see https://en.wikipedia....</div><div class="ttdef"><b>Definition:</b> HttpChunkReader.h:15</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_http_header_html_a4c1383f091154a6c34e78ff1f63a1231"><div class="ttname"><a href="classaudio__tools_1_1_http_header.html#a4c1383f091154a6c34e78ff1f63a1231">audio_tools::HttpHeader::write</a></div><div class="ttdeci">void write(Client &amp;out)</div><div class="ttdoc">writes the full header to the indicated HttpStreamedMultiOutput stream</div><div class="ttdef"><b>Definition:</b> HttpHeader.h:247</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_http_reply_header_html"><div class="ttname"><a href="classaudio__tools_1_1_http_reply_header.html">audio_tools::HttpReplyHeader</a></div><div class="ttdoc">Reading and Writing of Http Replys.</div><div class="ttdef"><b>Definition:</b> HttpHeader.h:400</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_http_request_header_html"><div class="ttname"><a href="classaudio__tools_1_1_http_request_header.html">audio_tools::HttpRequestHeader</a></div><div class="ttdoc">Reading and writing of Http Requests.</div><div class="ttdef"><b>Definition:</b> HttpHeader.h:341</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_http_request_html"><div class="ttname"><a href="classaudio__tools_1_1_http_request.html">audio_tools::HttpRequest</a></div><div class="ttdoc">Simple API to process get, put, post, del http requests I tried to use Arduino HttpClient,...</div><div class="ttdef"><b>Definition:</b> HttpRequest.h:22</div></div>

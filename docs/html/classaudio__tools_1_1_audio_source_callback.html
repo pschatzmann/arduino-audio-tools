@@ -93,18 +93,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab29ef3705787e685531155b40b18ca4a"><td class="memItemLeft" align="right" valign="top"><a id="ab29ef3705787e685531155b40b18ca4a"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>AudioSourceCallback</b> (<a class="el" href="class_stream.html">Stream</a> *(*nextStreamCallback)(), void(*onStartCallback)()=nullptr)</td></tr>
 <tr class="separator:ab29ef3705787e685531155b40b18ca4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad25192f19a4a0294f1ee64dd3fcaef26"><td class="memItemLeft" align="right" valign="top"><a id="ad25192f19a4a0294f1ee64dd3fcaef26"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_callback.html#ad25192f19a4a0294f1ee64dd3fcaef26">begin</a> ()</td></tr>
-<tr class="memdesc:ad25192f19a4a0294f1ee64dd3fcaef26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset actual stream and move to root. <br /></td></tr>
-<tr class="separator:ad25192f19a4a0294f1ee64dd3fcaef26"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afcf5a6c361dcaeaad9fdd316cf4e1572"><td class="memItemLeft" align="right" valign="top"><a id="afcf5a6c361dcaeaad9fdd316cf4e1572"></a>
-virtual <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_callback.html#afcf5a6c361dcaeaad9fdd316cf4e1572">nextStream</a> (int offset)</td></tr>
-<tr class="memdesc:afcf5a6c361dcaeaad9fdd316cf4e1572"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns next (with positive index) or previous stream (with negative index) <br /></td></tr>
-<tr class="separator:afcf5a6c361dcaeaad9fdd316cf4e1572"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48ceb2c9286c92247048f1673839bac4"><td class="memItemLeft" align="right" valign="top"><a id="a48ceb2c9286c92247048f1673839bac4"></a>
-virtual <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_callback.html#a48ceb2c9286c92247048f1673839bac4">selectStream</a> (int index)</td></tr>
-<tr class="memdesc:a48ceb2c9286c92247048f1673839bac4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns selected audio stream. <br /></td></tr>
-<tr class="separator:a48ceb2c9286c92247048f1673839bac4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f585a271d38e9d38e1016692da4eb51"><td class="memItemLeft" align="right" valign="top"><a id="a2f585a271d38e9d38e1016692da4eb51"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_callback.html#a2f585a271d38e9d38e1016692da4eb51">begin</a> () override</td></tr>
+<tr class="memdesc:a2f585a271d38e9d38e1016692da4eb51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset actual stream and move to root. <br /></td></tr>
+<tr class="separator:a2f585a271d38e9d38e1016692da4eb51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b9248c36df510cf2a1afad0e2cd5cb8"><td class="memItemLeft" align="right" valign="top"><a id="a3b9248c36df510cf2a1afad0e2cd5cb8"></a>
+virtual <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_callback.html#a3b9248c36df510cf2a1afad0e2cd5cb8">nextStream</a> (int offset) override</td></tr>
+<tr class="memdesc:a3b9248c36df510cf2a1afad0e2cd5cb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns next (with positive index) or previous stream (with negative index) <br /></td></tr>
+<tr class="separator:a3b9248c36df510cf2a1afad0e2cd5cb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bf660bd47284120b3967d13c26bb190"><td class="memItemLeft" align="right" valign="top"><a id="a7bf660bd47284120b3967d13c26bb190"></a>
+virtual <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_callback.html#a7bf660bd47284120b3967d13c26bb190">selectStream</a> (int index) override</td></tr>
+<tr class="memdesc:a7bf660bd47284120b3967d13c26bb190"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns selected audio stream. <br /></td></tr>
+<tr class="separator:a7bf660bd47284120b3967d13c26bb190"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e3d7966c1d1081c4d1e5474fe1eb088"><td class="memItemLeft" align="right" valign="top"><a id="a8e3d7966c1d1081c4d1e5474fe1eb088"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setCallbackNextStream</b> (<a class="el" href="class_stream.html">Stream</a> *(*callback)())</td></tr>
 <tr class="separator:a8e3d7966c1d1081c4d1e5474fe1eb088"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -119,6 +119,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setCallbackSelectStre
 virtual <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a59dd587de12ed8aabb4f812dd4dbec37">previousStream</a> (int offset)</td></tr>
 <tr class="memdesc:a59dd587de12ed8aabb4f812dd4dbec37 inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns previous audio stream. <br /></td></tr>
 <tr class="separator:a59dd587de12ed8aabb4f812dd4dbec37 inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e836d914f6d1aaab1b33d1de16a5e46 inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="memItemLeft" align="right" valign="top"><a id="a0e836d914f6d1aaab1b33d1de16a5e46"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a0e836d914f6d1aaab1b33d1de16a5e46">setTimeoutMs</a> (int millisec)</td></tr>
+<tr class="memdesc:a0e836d914f6d1aaab1b33d1de16a5e46 inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the timeout which is triggering to move to the next stream. - the default value is 500 ms. <br /></td></tr>
+<tr class="separator:a0e836d914f6d1aaab1b33d1de16a5e46 inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c9055d30e04bcd529d63ea6ee6b5c22 inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="memItemLeft" align="right" valign="top"><a id="a3c9055d30e04bcd529d63ea6ee6b5c22"></a>
 virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a3c9055d30e04bcd529d63ea6ee6b5c22">timeoutMs</a> ()</td></tr>
 <tr class="memdesc:a3c9055d30e04bcd529d63ea6ee6b5c22 inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the timeout which is triggering to move to the next stream. <br /></td></tr>
@@ -135,6 +139,10 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:aef67ebcee7a82a48949df27a66d64bb8"><td class="memItemLeft" align="right" valign="top"><a id="aef67ebcee7a82a48949df27a66d64bb8"></a>
 void(*&#160;</td><td class="memItemRight" valign="bottom"><b>onStartCallback</b> )() = nullptr</td></tr>
 <tr class="separator:aef67ebcee7a82a48949df27a66d64bb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classaudio__tools_1_1_audio_source"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classaudio__tools_1_1_audio_source')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classaudio__tools_1_1_audio_source.html">audio_tools::AudioSource</a></td></tr>
+<tr class="memitem:abdab36077b038b12686adad57d4ff6b0 inherit pro_attribs_classaudio__tools_1_1_audio_source"><td class="memItemLeft" align="right" valign="top"><a id="abdab36077b038b12686adad57d4ff6b0"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_value</b> = 500</td></tr>
+<tr class="separator:abdab36077b038b12686adad57d4ff6b0 inherit pro_attribs_classaudio__tools_1_1_audio_source"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Callback Audio Data Source which is used by the Audio Players. </p>
