@@ -60,6 +60,9 @@ namespace audio_tools {
 			return timeout_value;
 		}
 
+		/// Sets the timeout of the URL Stream in milliseconds
+		void setUrlTimeout(int time);
+
 		/// Returns default setting go to the next
 		virtual bool isAutoNext();
 
