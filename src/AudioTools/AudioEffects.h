@@ -29,8 +29,9 @@ class AudioEffect  {
         }
     protected:
         bool active_flag = true;
+
         /// generic clipping method
-        int16_t clip(int32_t in, int16_t clipLimit=32768, int16_t resultLimit=32768 ) {
+        int16_t clip(int32_t in, int16_t clipLimit=32767, int16_t resultLimit=32767 ) {
             int32_t result = in;
             if (result > clipLimit) {result = resultLimit;}
             if (result < -clipLimit) {result = -resultLimit;}
@@ -47,7 +48,7 @@ class AudioEffect  {
 class Boost : public AudioEffect {
     public:
         /// volume 0.1 - 1.0: decrease result; volume >0: increase result 
-        Boost(float &volume, float ym=0.1){
+        Boost(float &volume){
             p_effect_value = &volume;
         }
 
@@ -72,7 +73,7 @@ class Distortion : public AudioEffect  {
     public:
         // e.g. use clipThreashold 4990
         Distortion(int16_t &clipThreashold, int16_t maxInput=6500){
-            p_effect_value = &clipThreashold;
+            p_clip_threashold = &clipThreashold;
             max_input = maxInput;   
         }
 
@@ -80,11 +81,11 @@ class Distortion : public AudioEffect  {
             if (!active()) return input;
             //the input signal is 16bits (values from -32768 to +32768
             //the value of input is clipped to the distortion_threshold value      
-            return clip(input,*p_effect_value,max_input);
+            return clip(input,*p_clip_threashold, max_input);
         }
 
     protected:
-        int16_t *p_effect_value;
+        int16_t *p_clip_threashold;
         int16_t max_input;
 
 };
@@ -105,8 +106,9 @@ class Fuzz : public AudioEffect  {
 
         effect_t process(effect_t input){
             if (!active()) return input;
-            int32_t result = clip(*p_effect_value * input) ;
-            return map(result * (*p_effect_value), -32768, +32768,-max_out, max_out);
+            float v = *p_effect_value;
+            int32_t result = clip(v * input) ;
+            return map(result * v, -32768, +32767,-max_out, max_out);
         }
 
     protected:
@@ -117,52 +119,46 @@ class Fuzz : public AudioEffect  {
 
 /**
  * @brief EffectTremolo
- * see https://www.dsprelated.com/showcode/234.php
  * @tparam effect_t 
  */
 
 class Tremolo : public AudioEffect  {
     public:
-        // use e.g. effect_rate=4000
-        Tremolo(int16_t &effect_rate, int32_t depth=1) {
-            dep     = depth; 
-            control = 1;
-            mod     = 0;
-            counter_limit = effect_rate;
-            offset  = 1 - dep;
+        // use e.g. duration_ms=2000; depth=0.5
+        Tremolo(int16_t &duration_ms, float &depth, uint16_t sampleRate) {
+            int32_t rate_count = static_cast<int32_t>(duration_ms) * sampleRate / 1000;
+            rate_count_half = rate_count / 2;
+            
+            // limit value to max 1.0
+            tremolo_depth = depth>1.0 ? 1.0 : depth;
+            signal_depth = 1.0 - depth;
         }
 
         effect_t process(effect_t input) {
             if (!active()) return input;
-            int32_t yout;
-            int32_t m;
 
-            m = (int32_t)mod*dep/counter_limit;
-            yout = (m + offset)*input;
+            float tremolo_factor = tremolo_depth / rate_count_half;
+            int32_t out = (signal_depth * input) + (tremolo_factor * count * input); 
 
-            // Makes LFO vary
-            sweep();
-            return yout;
+            //saw tooth shaped counter
+            count+=inc;
+            if (count>=rate_count_half){
+                inc = -1;
+            } else if (count<=0) {
+                inc = +1;
+            }
+
+            return clip(out);
         }
 
 
     protected:
-        int32_t dep;
-        int32_t offset;
-        int16_t counter_limit;
-        int16_t control;
-        int16_t mod;
-
-        void sweep(void) {
-            mod += control;
-    
-            if (mod > counter_limit) {
-                control = -1;
-            } 
-            else if(!mod) {
-                control = 1;
-            }
-        }
+        int32_t count = 0;
+        int16_t inc = 1;
+        int32_t rate_count_half; // number of samples for on raise and fall
+        float tremolo_depth;
+        float signal_depth;
+        float tremolo_factor ;
 
 };
 
@@ -176,6 +172,11 @@ class Tremolo : public AudioEffect  {
 class AudioEffects : public SoundGenerator<effect_t>  {
 
     public:
+        /// Default constructor
+        AudioEffects(SoundGenerator &in){
+            setInput(in);
+        }
+
         /// Defines the input source for the raw guitar input
         void setInput(SoundGenerator &in){
             p_source = &in;

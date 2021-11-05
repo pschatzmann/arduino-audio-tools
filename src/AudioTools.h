@@ -26,6 +26,7 @@
 #include "AudioCodecs/CodecWAV.h"
 #include "AudioHttp/AudioHttp.h"
 #include "AudioTools/AudioPlayer.h"
+#include "AudioTools/AudioEffects.h"
 
 
 /**
