@@ -158,10 +158,9 @@ class SineWaveGenerator : public SoundGenerator<T>{
         }
 
         void begin(int channels, int sample_rate, uint16_t frequency=0){
-            AudioBaseInfo info = defaultConfig();
-            info.channels  = channels;
-            info.sample_rate = sample_rate;
-            begin(info, frequency);
+            SoundGenerator<T>::info.channels  = channels;
+            SoundGenerator<T>::info.sample_rate = sample_rate;
+            begin(SoundGenerator<T>::info, frequency);
         }
 
         /// Defines the frequency - after the processing has been started

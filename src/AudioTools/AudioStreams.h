@@ -186,6 +186,7 @@ class GeneratedSoundStream : public AudioStream, public AudioBaseInfoSource {
         virtual size_t write(uint8_t) {
             return not_supported();
         };
+        
         /// unsupported operations
         virtual int availableForWrite() {       
             return not_supported();
