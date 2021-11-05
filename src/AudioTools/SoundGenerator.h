@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AudioLogger.h"
+#include "AudioTypes.h"
 
 namespace audio_tools {
 
@@ -48,7 +49,7 @@ class SoundGenerator  {
         virtual size_t readBytes( uint8_t *buffer, size_t lengthBytes){
             LOGD("readBytes: %d", (int)lengthBytes);
             size_t result = 0;
-            int ch = channels();
+            int ch = audioInfo().channels;
             int frame_size = sizeof(T) * ch;
             if (active){
                 switch (ch){
@@ -75,7 +76,7 @@ class SoundGenerator  {
             return result * frame_size;
         }
 
-        AudioBaseInfo defaultConfig(){
+        virtual AudioBaseInfo defaultConfig(){
             AudioBaseInfo def;
             def.bits_per_sample!=sizeof(T)*8;
             def.channels = 1;
@@ -101,14 +102,6 @@ class SoundGenerator  {
 
         virtual bool isActive() {
             return active;
-        }
-
-        virtual void setChannels(int ch){
-            info.channels = ch;
-        }
-
-        virtual int channels() {
-            return info.channels;
         }
 
         virtual AudioBaseInfo audioInfo() {
@@ -158,6 +151,17 @@ class SineWaveGenerator : public SoundGenerator<T>{
             SoundGenerator<T>::begin(info);
             this->m_deltaTime = 1.0 / SoundGenerator<T>::info.sample_rate;
             setFrequency(frequency);
+        }
+
+        virtual AudioBaseInfo defaultConfig(){
+            return SoundGenerator<T>::defaultConfig();
+        }
+
+        void begin(int channels, int sample_rate, uint16_t frequency=0){
+            AudioBaseInfo info = defaultConfig();
+            info.channels  = channels;
+            info.sample_rate = sample_rate;
+            begin(info, frequency);
         }
 
         /// Defines the frequency - after the processing has been started
