@@ -60,9 +60,11 @@ namespace audio_tools {
 			return timeout_value;
 		}
 
+		/// Returns default setting go to the next
+		virtual bool isAutoNext();
+
 	protected:
 		int timeout_value = 500;
-
 	};
 
 	/**
@@ -179,6 +181,11 @@ namespace audio_tools {
 		const char *toStr() {
 			return file_name;
 		}
+
+		// provides default setting go to the next
+		virtual bool isAutoNext() {
+			return true;
+		};
 
 	protected:
 		AudioFile file;
@@ -332,6 +339,11 @@ namespace audio_tools {
 			actual_stream->setTimeout(time);
 		}
 
+		// provides go not to the next on error
+		virtual bool isAutoNext() {
+			return false;
+		};
+
 	protected:
 		URLStream* actual_stream = nullptr;
 		const char** urlArray;
@@ -465,12 +477,12 @@ namespace audio_tools {
 		virtual bool begin(int index=0, bool isActive = true) {
 			LOGD(LOG_METHOD);
 			bool result = false;
-
+			isAutoNext();
 			// start dependent objects
 			p_out_decoding->begin();
 			p_source->begin();
 			meta_out.begin();
-
+			
 			p_input_stream = p_source->selectStream(index);
 			if (p_input_stream != nullptr) {
 				if (meta_active) {
@@ -581,6 +593,17 @@ namespace audio_tools {
 			return volume_out.volume();
 		}
 
+		/// Determines if moving to the next
+		virtual bool isAutoNext() {
+			autonext = p_source->isAutoNext();
+			return autonext;
+		}
+
+		/// Set move to next
+		virtual void setAutoNext(bool next) {
+			autonext = next;
+		}
+
 		/// Call this method in the loop. 
 		virtual void copy() {
 			if (active) {
@@ -590,24 +613,24 @@ namespace audio_tools {
 					// reset timeout
 					timeout = millis() + p_source->timeoutMs();
 				}
-
 				// move to next stream after timeout
 				if (p_input_stream == nullptr || millis() > timeout) {
-					if (previous_stream == false) {
-						LOGW("-> timeout - moving to next stream");
-						// open next stream
-						if (!next(1)) {
-							LOGD("stream is null");
+					if (autonext) {
+						if (previous_stream == false) {
+							LOGW("-> timeout - moving to next stream");
+							// open next stream
+							if (!next(1)) {
+								LOGD("stream is null");
+							}
+						}
+						else {
+							LOGW("-> timeout - moving to previous stream");
+							// open previous stream
+							if (!previous(1)) {
+								LOGD("stream is null");
+							}
 						}
 					}
-					else {
-						LOGW("-> timeout - moving to previous stream");
-						// open previous stream
-						if (!previous(1)) {
-							LOGD("stream is null");
-						}
-					}
-
 					timeout = millis() + p_source->timeoutMs();
 				}
 			}
@@ -627,6 +650,7 @@ namespace audio_tools {
 
 	protected:
 		bool active = false;
+		bool autonext = false;
 		AudioSource* p_source = nullptr;
 		VolumeOutput volume_out; // Volume control
 		MetaDataID3 meta_out; // Metadata parser
