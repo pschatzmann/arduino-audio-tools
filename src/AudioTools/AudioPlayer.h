@@ -51,17 +51,17 @@ namespace audio_tools {
         }
 
 		/// Sets the timeout which is triggering to move to the next stream. - the default value is 500 ms
-		virtual void setTimeoutMs(int millisec) {
+		virtual void setTimeoutAutoNext(int millisec) {
 			timeout_value = millisec;
 		}
 
 		/// Provides the timeout which is triggering to move to the next stream.
-		virtual int timeoutMs() {
+		virtual int timeoutAutoNext() {
 			return timeout_value;
 		}
 
-		/// Sets the timeout of the URL Stream in milliseconds
-		void setUrlTimeout(int time);
+		/// Sets the timeout of Stream in milliseconds
+		void setTimeout(int millisec);
 
 		/// Returns default setting go to the next
 		virtual bool isAutoNext();
@@ -338,13 +338,13 @@ namespace audio_tools {
 		}
 
 		/// Sets the timeout of the URL Stream in milliseconds
-		void setUrlTimeout(int time){
-			actual_stream->setTimeout(time);
+		void setTimeout(int millisec){
+			actual_stream->setTimeout(millisec);
 		}
 
 		// provides go not to the next on error
 		virtual bool isAutoNext() {
-			return false;
+			return true;
 		};
 
 	protected:
@@ -480,7 +480,8 @@ namespace audio_tools {
 		virtual bool begin(int index=0, bool isActive = true) {
 			LOGD(LOG_METHOD);
 			bool result = false;
-			isAutoNext();
+			autonext = p_source->isAutoNext();
+
 			// start dependent objects
 			p_out_decoding->begin();
 			p_source->begin();
@@ -492,7 +493,7 @@ namespace audio_tools {
 					copier.setCallbackOnWrite(decodeMetaData, this);
 				}
 				copier.begin(*p_out_decoding, *p_input_stream);
-				timeout = millis() + p_source->timeoutMs();
+				timeout = millis() + p_source->timeoutAutoNext();
 				active = isActive;
 				result = true;
 			}
@@ -596,12 +597,6 @@ namespace audio_tools {
 			return volume_out.volume();
 		}
 
-		/// Determines if moving to the next
-		virtual bool isAutoNext() {
-			autonext = p_source->isAutoNext();
-			return autonext;
-		}
-
 		/// Set move to next
 		virtual void setAutoNext(bool next) {
 			autonext = next;
@@ -614,7 +609,7 @@ namespace audio_tools {
 				// handle sound
 				if (copier.copy() || timeout == 0) {
 					// reset timeout
-					timeout = millis() + p_source->timeoutMs();
+					timeout = millis() + p_source->timeoutAutoNext();
 				}
 				// move to next stream after timeout
 				if (p_input_stream == nullptr || millis() > timeout) {
@@ -634,7 +629,7 @@ namespace audio_tools {
 							}
 						}
 					}
-					timeout = millis() + p_source->timeoutMs();
+					timeout = millis() + p_source->timeoutAutoNext();
 				}
 			}
 		}
