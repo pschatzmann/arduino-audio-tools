@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: src/Experimental/AudioDAC.h Source File</title>
+<title>arduino-audio-tools: src/AudioExperiments/AudioDAC.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,7 +61,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_21b75194c928ebf2ba0685a11b5b7836.html">Experimental</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_0711a3d3d10784feb86fab2d9afc7342.html">AudioExperiments</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -74,7 +74,7 @@ $(function() {
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;AudioTools/AudioLogger.h&quot;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;AudioTools/Buffers.h&quot;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;AudioTimer/AudioTimer.h&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;Print.h&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;AudioTools/AudioOutput.h&quot;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaudio__tools.html">audio_tools</a> {</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
@@ -663,7 +663,7 @@ $(function() {
 <div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160; </div>
 <div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160;} <span class="comment">// namesapce</span></div>
 <div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160; </div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_print_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_print.html">audio_tools::AudioPrint</a></div><div class="ttdoc">Abstract Audio Ouptut class.</div><div class="ttdef"><b>Definition:</b> AudioOutput.h:18</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_print_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_print.html">audio_tools::AudioPrint</a></div><div class="ttdoc">Abstract Audio Ouptut class.</div><div class="ttdef"><b>Definition:</b> AudioOutput.h:19</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_utils_html_a6d6f47cc755a7a2e0c023bb00e20e75c"><div class="ttname"><a href="classaudio__tools_1_1_audio_utils.html#a6d6f47cc755a7a2e0c023bb00e20e75c">audio_tools::AudioUtils::toTimeUs</a></div><div class="ttdeci">static uint32_t toTimeUs(uint32_t samplingRate, uint8_t limit=100)</div><div class="ttdoc">converts sampling rate to delay in microseconds (μs)</div><div class="ttdef"><b>Definition:</b> AudioTimerDef.h:37</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_d_a_c_info_html"><div class="ttname"><a href="classaudio__tools_1_1_d_a_c_info.html">audio_tools::DACInfo</a></div><div class="ttdoc">Config info for DeltaSigma DAC.</div><div class="ttdef"><b>Definition:</b> AudioDAC.h:20</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_d_a_c_info_html_a0905879d2c5412ccadaaf442c1273d07"><div class="ttname"><a href="classaudio__tools_1_1_d_a_c_info.html#a0905879d2c5412ccadaaf442c1273d07">audio_tools::DACInfo::logInfo</a></div><div class="ttdeci">void logInfo(bool withPins=false)</div><div class="ttdoc">Logs the configuration settings to the console (if logging is active)</div><div class="ttdef"><b>Definition:</b> AudioDAC.h:50</div></div>

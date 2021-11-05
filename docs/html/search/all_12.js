@@ -1,11 +1,7 @@
 var searchData=
 [
-  ['vector_288',['Vector',['../classaudio__tools_1_1_vector.html',1,'audio_tools']]],
-  ['vector_3c_20audio_5ftools_3a_3ahttpheaderline_20_2a_20_3e_289',['Vector&lt; audio_tools::HttpHeaderLine * &gt;',['../classaudio__tools_1_1_vector.html',1,'audio_tools']]],
-  ['vector_3c_20audio_5ftools_3a_3apicochannelout_20_3e_290',['Vector&lt; audio_tools::PicoChannelOut &gt;',['../classaudio__tools_1_1_vector.html',1,'audio_tools']]],
-  ['vector_3c_20audio_5ftools_3a_3apininfoesp32_20_3e_291',['Vector&lt; audio_tools::PinInfoESP32 &gt;',['../classaudio__tools_1_1_vector.html',1,'audio_tools']]],
-  ['vector_3c_20mbed_3a_3apwmout_20_2a_20_3e_292',['Vector&lt; mbed::PwmOut * &gt;',['../classaudio__tools_1_1_vector.html',1,'audio_tools']]],
-  ['volume_293',['volume',['../classaudio__tools_1_1_volume_output.html#a1e7f7561ddc7847d06c1036073a25fcf',1,'audio_tools::VolumeOutput::volume()'],['../classaudio__tools_1_1_audio_player.html#a599919a623aee1f084528473638c62cb',1,'audio_tools::AudioPlayer::volume()']]],
-  ['volumecontrol_294',['VolumeControl',['../classaudio__tools_1_1_volume_control.html',1,'audio_tools']]],
-  ['volumeoutput_295',['VolumeOutput',['../classaudio__tools_1_1_volume_output.html',1,'audio_tools::VolumeOutput'],['../classaudio__tools_1_1_volume_output.html#ad1ef07b703a8a4a969f30cb32f7d545b',1,'audio_tools::VolumeOutput::VolumeOutput()=default'],['../classaudio__tools_1_1_volume_output.html#a08771fed2dab056c001cb0ddb296431d',1,'audio_tools::VolumeOutput::VolumeOutput(Print &amp;out)']]]
+  ['url_322',['Url',['../classaudio__tools_1_1_url.html',1,'audio_tools']]],
+  ['urlstream_323',['URLStream',['../classaudio__tools_1_1_u_r_l_stream.html',1,'audio_tools']]],
+  ['urlstreamdefault_324',['URLStreamDefault',['../classaudio__tools_1_1_u_r_l_stream_default.html',1,'audio_tools']]],
+  ['usercallback_325',['UserCallback',['../classaudio__tools_1_1_user_callback.html',1,'audio_tools']]]
 ];

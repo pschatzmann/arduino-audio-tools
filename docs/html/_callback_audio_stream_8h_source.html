@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: src/Experimental/CallbackAudioStream.h Source File</title>
+<title>arduino-audio-tools: src/AudioExperiments/CallbackAudioStream.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,7 +61,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_21b75194c928ebf2ba0685a11b5b7836.html">Experimental</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_0711a3d3d10784feb86fab2d9afc7342.html">AudioExperiments</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -87,7 +87,7 @@ $(function() {
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">bool</span> secure_timer = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;};</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_callback_audio_stream.html">   32</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_callback_audio_stream.html">CallbackAudioStream</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_buffered_stream.html">BufferedStream</a>, <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_audio_base_info_source.html">AudioBaseInfoSource</a>, <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> {</div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_callback_audio_stream.html">   32</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_callback_audio_stream.html">CallbackAudioStream</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_buffered_stream.html">BufferedStream</a>, <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_audio_base_info_source.html">AudioBaseInfoSource</a>{</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <a class="code" href="classaudio__tools_1_1_callback_audio_stream.html">CallbackAudioStream</a>():<a class="code" href="classaudio__tools_1_1_buffered_stream.html">BufferedStream</a>(80) {</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        }</div>
@@ -216,7 +216,7 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_audio_base_info_dependent_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_base_info_dependent.html">audio_tools::AudioBaseInfoDependent</a></div><div class="ttdoc">Supports changes to the sampling rate, bits and channels.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:42</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_base_info_source_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_base_info_source.html">audio_tools::AudioBaseInfoSource</a></div><div class="ttdoc">Supports the subscription to audio change notifications.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:54</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_utils_html_a6d6f47cc755a7a2e0c023bb00e20e75c"><div class="ttname"><a href="classaudio__tools_1_1_audio_utils.html#a6d6f47cc755a7a2e0c023bb00e20e75c">audio_tools::AudioUtils::toTimeUs</a></div><div class="ttdeci">static uint32_t toTimeUs(uint32_t samplingRate, uint8_t limit=100)</div><div class="ttdoc">converts sampling rate to delay in microseconds (μs)</div><div class="ttdef"><b>Definition:</b> AudioTimerDef.h:37</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_buffered_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_buffered_stream.html">audio_tools::BufferedStream</a></div><div class="ttdoc">The Arduino Stream supports operations on single characters. This is usually not the best way to push...</div><div class="ttdef"><b>Definition:</b> AudioStreams.h:226</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_buffered_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_buffered_stream.html">audio_tools::BufferedStream</a></div><div class="ttdoc">The Arduino Stream supports operations on single characters. This is usually not the best way to push...</div><div class="ttdef"><b>Definition:</b> AudioStreams.h:251</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_callback_audio_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_callback_audio_stream.html">audio_tools::CallbackAudioStream</a></div><div class="ttdoc">Callback driven Audio Source (rx_tx_mode==RX_MODE) or Audio Sink (rx_tx_mode==TX_MODE)....</div><div class="ttdef"><b>Definition:</b> CallbackAudioStream.h:32</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_callback_audio_stream_html_a088f35080bd4492f30c9b831349ed22c"><div class="ttname"><a href="classaudio__tools_1_1_callback_audio_stream.html#a088f35080bd4492f30c9b831349ed22c">audio_tools::CallbackAudioStream::end</a></div><div class="ttdeci">void end()</div><div class="ttdoc">Stops the processing.</div><div class="ttdef"><b>Definition:</b> CallbackAudioStream.h:102</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_callback_audio_stream_html_a26b6ebcf1795d70ea00a773a49474024"><div class="ttname"><a href="classaudio__tools_1_1_callback_audio_stream.html#a26b6ebcf1795d70ea00a773a49474024">audio_tools::CallbackAudioStream::audioInfo</a></div><div class="ttdeci">CallbackAudioStreamInfo audioInfo()</div><div class="ttdoc">Provides the current audio information.</div><div class="ttdef"><b>Definition:</b> CallbackAudioStream.h:69</div></div>

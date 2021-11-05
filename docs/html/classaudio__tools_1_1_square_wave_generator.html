@@ -108,6 +108,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> ()</td></tr
 <tr class="memitem:a701ca4d6f2f074fb00aa6febbff64ae4 inherit pub_methods_classaudio__tools_1_1_sine_wave_generator"><td class="memItemLeft" align="right" valign="top"><a id="a701ca4d6f2f074fb00aa6febbff64ae4"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> info, uint16_t frequency=0)</td></tr>
 <tr class="separator:a701ca4d6f2f074fb00aa6febbff64ae4 inherit pub_methods_classaudio__tools_1_1_sine_wave_generator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0cbfd45d0bef5986c2524df8dec94af2 inherit pub_methods_classaudio__tools_1_1_sine_wave_generator"><td class="memItemLeft" align="right" valign="top"><a id="a0cbfd45d0bef5986c2524df8dec94af2"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (int channels, int sample_rate, uint16_t frequency=0)</td></tr>
+<tr class="separator:a0cbfd45d0bef5986c2524df8dec94af2 inherit pub_methods_classaudio__tools_1_1_sine_wave_generator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a629ccc35d0774630c5a49dce76e18186 inherit pub_methods_classaudio__tools_1_1_sine_wave_generator"><td class="memItemLeft" align="right" valign="top"><a id="a629ccc35d0774630c5a49dce76e18186"></a>
+virtual <a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>defaultConfig</b> ()</td></tr>
+<tr class="separator:a629ccc35d0774630c5a49dce76e18186 inherit pub_methods_classaudio__tools_1_1_sine_wave_generator"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa74429c5f93d07e2ab0b056af0c90965 inherit pub_methods_classaudio__tools_1_1_sine_wave_generator"><td class="memItemLeft" align="right" valign="top"><a id="aa74429c5f93d07e2ab0b056af0c90965"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sine_wave_generator.html#aa74429c5f93d07e2ab0b056af0c90965">setFrequency</a> (uint16_t frequency)</td></tr>
 <tr class="memdesc:aa74429c5f93d07e2ab0b056af0c90965 inherit pub_methods_classaudio__tools_1_1_sine_wave_generator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the frequency - after the processing has been started. <br /></td></tr>
@@ -119,12 +125,6 @@ virtual <a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBa
 <tr class="memitem:a8a42d7a52e7f0ea7d41d539737b3dd09 inherit pub_methods_classaudio__tools_1_1_sound_generator"><td class="memItemLeft" align="right" valign="top"><a id="a8a42d7a52e7f0ea7d41d539737b3dd09"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> info)</td></tr>
 <tr class="separator:a8a42d7a52e7f0ea7d41d539737b3dd09 inherit pub_methods_classaudio__tools_1_1_sound_generator"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65e421e65b79ff6542d03f1e6fbb33b5 inherit pub_methods_classaudio__tools_1_1_sound_generator"><td class="memItemLeft" align="right" valign="top"><a id="a65e421e65b79ff6542d03f1e6fbb33b5"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b> ()</td></tr>
-<tr class="separator:a65e421e65b79ff6542d03f1e6fbb33b5 inherit pub_methods_classaudio__tools_1_1_sound_generator"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a995d38b9e0c5f8d8ccea4d4a7bb9406f inherit pub_methods_classaudio__tools_1_1_sound_generator"><td class="memItemLeft" align="right" valign="top"><a id="a995d38b9e0c5f8d8ccea4d4a7bb9406f"></a>
-<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>defaultConfig</b> ()</td></tr>
-<tr class="separator:a995d38b9e0c5f8d8ccea4d4a7bb9406f inherit pub_methods_classaudio__tools_1_1_sound_generator"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a355ddf14fffecaa8538a85310900ca4a inherit pub_methods_classaudio__tools_1_1_sound_generator"><td class="memItemLeft" align="right" valign="top"><a id="a355ddf14fffecaa8538a85310900ca4a"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#a355ddf14fffecaa8538a85310900ca4a">end</a> ()</td></tr>
 <tr class="memdesc:a355ddf14fffecaa8538a85310900ca4a inherit pub_methods_classaudio__tools_1_1_sound_generator"><td class="mdescLeft">&#160;</td><td class="mdescRight">ends the processing <br /></td></tr>
@@ -147,9 +147,6 @@ virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 <tr class="memitem:a7286c6f1c3ee11b6de98bf2b9658d14c inherit pub_methods_classaudio__tools_1_1_sound_generator"><td class="memItemLeft" align="right" valign="top"><a id="a7286c6f1c3ee11b6de98bf2b9658d14c"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setAudioInfo</b> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> info)</td></tr>
 <tr class="separator:a7286c6f1c3ee11b6de98bf2b9658d14c inherit pub_methods_classaudio__tools_1_1_sound_generator"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a327d069ba1e7aa2d0715d32f1dc507f8 inherit pub_methods_classaudio__tools_1_1_sound_generator"><td class="memItemLeft" align="right" valign="top"><a id="a327d069ba1e7aa2d0715d32f1dc507f8"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setChannels</b> (int ch)</td></tr>
-<tr class="separator:a327d069ba1e7aa2d0715d32f1dc507f8 inherit pub_methods_classaudio__tools_1_1_sound_generator"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>

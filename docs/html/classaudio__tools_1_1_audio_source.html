@@ -96,6 +96,10 @@ Public Member Functions</h2></td></tr>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#af0c35bb74f7c00f29c286dfd7eb15402">begin</a> ()=0</td></tr>
 <tr class="memdesc:af0c35bb74f7c00f29c286dfd7eb15402"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset actual stream and move to root. <br /></td></tr>
 <tr class="separator:af0c35bb74f7c00f29c286dfd7eb15402"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a432e5e9be171820579c9acbe4429c6df"><td class="memItemLeft" align="right" valign="top"><a id="a432e5e9be171820579c9acbe4429c6df"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a432e5e9be171820579c9acbe4429c6df">isAutoNext</a> ()</td></tr>
+<tr class="memdesc:a432e5e9be171820579c9acbe4429c6df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns default setting go to the next. <br /></td></tr>
+<tr class="separator:a432e5e9be171820579c9acbe4429c6df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4754f777dd26037b59bbd0a31a1debe"><td class="memItemLeft" align="right" valign="top"><a id="ac4754f777dd26037b59bbd0a31a1debe"></a>
 virtual <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#ac4754f777dd26037b59bbd0a31a1debe">nextStream</a> (int offset)=0</td></tr>
 <tr class="memdesc:ac4754f777dd26037b59bbd0a31a1debe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns next audio stream. <br /></td></tr>
@@ -108,14 +112,18 @@ virtual <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class=
 virtual <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a34afea2bb051055c609fa0b42906ddcf">selectStream</a> (int index)</td></tr>
 <tr class="memdesc:a34afea2bb051055c609fa0b42906ddcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns audio stream at the indicated index (the index is zero based, so the first value is 0!) <br /></td></tr>
 <tr class="separator:a34afea2bb051055c609fa0b42906ddcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0e836d914f6d1aaab1b33d1de16a5e46"><td class="memItemLeft" align="right" valign="top"><a id="a0e836d914f6d1aaab1b33d1de16a5e46"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a0e836d914f6d1aaab1b33d1de16a5e46">setTimeoutMs</a> (int millisec)</td></tr>
-<tr class="memdesc:a0e836d914f6d1aaab1b33d1de16a5e46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the timeout which is triggering to move to the next stream. - the default value is 500 ms. <br /></td></tr>
-<tr class="separator:a0e836d914f6d1aaab1b33d1de16a5e46"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c9055d30e04bcd529d63ea6ee6b5c22"><td class="memItemLeft" align="right" valign="top"><a id="a3c9055d30e04bcd529d63ea6ee6b5c22"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a3c9055d30e04bcd529d63ea6ee6b5c22">timeoutMs</a> ()</td></tr>
-<tr class="memdesc:a3c9055d30e04bcd529d63ea6ee6b5c22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the timeout which is triggering to move to the next stream. <br /></td></tr>
-<tr class="separator:a3c9055d30e04bcd529d63ea6ee6b5c22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a527d24d2618d719b87eff1f40251f2bb"><td class="memItemLeft" align="right" valign="top"><a id="a527d24d2618d719b87eff1f40251f2bb"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a527d24d2618d719b87eff1f40251f2bb">setTimeout</a> (int millisec)</td></tr>
+<tr class="memdesc:a527d24d2618d719b87eff1f40251f2bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the timeout of <a class="el" href="class_stream.html">Stream</a> in milliseconds. <br /></td></tr>
+<tr class="separator:a527d24d2618d719b87eff1f40251f2bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94efcff45d9249047df9e8041e4189f3"><td class="memItemLeft" align="right" valign="top"><a id="a94efcff45d9249047df9e8041e4189f3"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a94efcff45d9249047df9e8041e4189f3">setTimeoutAutoNext</a> (int millisec)</td></tr>
+<tr class="memdesc:a94efcff45d9249047df9e8041e4189f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the timeout which is triggering to move to the next stream. - the default value is 500 ms. <br /></td></tr>
+<tr class="separator:a94efcff45d9249047df9e8041e4189f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae884e74dd3b63caffbdf6bf31fedb792"><td class="memItemLeft" align="right" valign="top"><a id="ae884e74dd3b63caffbdf6bf31fedb792"></a>
+virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#ae884e74dd3b63caffbdf6bf31fedb792">timeoutAutoNext</a> ()</td></tr>
+<tr class="memdesc:ae884e74dd3b63caffbdf6bf31fedb792"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the timeout which is triggering to move to the next stream. <br /></td></tr>
+<tr class="separator:ae884e74dd3b63caffbdf6bf31fedb792"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>

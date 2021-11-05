@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['volume_617',['volume',['../classaudio__tools_1_1_volume_output.html#a1e7f7561ddc7847d06c1036073a25fcf',1,'audio_tools::VolumeOutput::volume()'],['../classaudio__tools_1_1_audio_player.html#a599919a623aee1f084528473638c62cb',1,'audio_tools::AudioPlayer::volume()']]],
-  ['volumeoutput_618',['VolumeOutput',['../classaudio__tools_1_1_volume_output.html#ad1ef07b703a8a4a969f30cb32f7d545b',1,'audio_tools::VolumeOutput::VolumeOutput()=default'],['../classaudio__tools_1_1_volume_output.html#a08771fed2dab056c001cb0ddb296431d',1,'audio_tools::VolumeOutput::VolumeOutput(Print &amp;out)']]]
+  ['timeoutautonext_690',['timeoutAutoNext',['../classaudio__tools_1_1_audio_source.html#ae884e74dd3b63caffbdf6bf31fedb792',1,'audio_tools::AudioSource']]],
+  ['tonumbers_691',['toNumbers',['../classaudio__tools_1_1_number_reader.html#aeabc211ca9adbc65c880cee94dcb1c6e',1,'audio_tools::NumberReader']]],
+  ['tostr_692',['toStr',['../classaudio__tools_1_1_audio_source_sd_fat.html#addf747f78dd091b0ad682a1bb1012846',1,'audio_tools::AudioSourceSdFat']]],
+  ['totimeus_693',['toTimeUs',['../classaudio__tools_1_1_audio_utils.html#a6d6f47cc755a7a2e0c023bb00e20e75c',1,'audio_tools::AudioUtils']]],
+  ['trim_694',['trim',['../classaudio__tools_1_1_str.html#af5cd084c377811ee46e7c1d0d8f54bba',1,'audio_tools::Str']]]
 ];
