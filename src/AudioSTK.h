@@ -52,7 +52,6 @@ class STKGenerator : public SoundGenerator<T> {
 	 		LOGI(LOG_METHOD);
             cfg.logInfo();
             SoundGenerator<T>::begin(cfg);
-            SoundGenerator<T>::setChannels(cfg.channels);
             max_value = maxValue(sizeof(T)*8);
             stk::Stk::setSampleRate(SoundGenerator<T>::info.sample_rate);
         }

@@ -1,5 +1,5 @@
 #pragma once
-
+#ifdef USE_USB
 #if! __has_include("mbed.h") 
 #error "This functionality is only supported on ARM Mbed devices"
 #endif
@@ -58,3 +58,4 @@ class AudioUSB : public BufferedStream {
 };
 
 }
+#endif

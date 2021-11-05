@@ -2,6 +2,7 @@
 #include "Arduino.h"
 #include "AudioConfig.h"
 #include "AudioTools/AudioTypes.h"
+#include "AudioTools/Converter.h"
 #include "AudioTools/Buffers.h"
 #include "AudioTools/int24.h"
 #include "AudioTools/VolumeControl.h"
