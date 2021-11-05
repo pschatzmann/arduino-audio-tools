@@ -221,6 +221,7 @@ class URLStreamDefault : public AudioStream {
                 while(request.available()==0){
                     // stop waiting if we got an error
                     if (request.reply().statusCode()>=300){
+						LOGE("Error code recieved ... stop waiting for reply");
                         break;
                     }
                     delay(500);
