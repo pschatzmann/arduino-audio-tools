@@ -66,8 +66,11 @@ namespace audio_tools {
 		/// Returns default setting go to the next
 		virtual bool isAutoNext();
 
+		virtual void resetPath();
+
 	protected:
 		int timeout_value = 500;
+
 	};
 
 	/**
@@ -302,6 +305,8 @@ namespace audio_tools {
 				pos = max-1;
 				LOGI("url array out of limits: %d -> %d", idx, pos);
 			}
+			resetPath();
+			Path();
 			LOGI("selectStream: %d/%d -> %s", pos, max-1, urlArray[pos]);
 			if (started) actual_stream->end();
 			actual_stream->begin(urlArray[pos], mime);
@@ -315,6 +320,8 @@ namespace audio_tools {
 			if (pos < 0 || pos >= max) {
 				pos = 0;
 			}
+			resetPath();
+			Path();
 			LOGI("nextStream: %d/%d -> %s", pos, max-1, urlArray[pos]);
 			return selectStream(pos);
 		}
@@ -325,6 +332,8 @@ namespace audio_tools {
 			if (pos < 0 || pos >= max) {
 				pos = max-1;
 			}
+			resetPath();
+			Path();
 			LOGI("previousStream: %d/%d -> %s", pos, max-1, urlArray[pos]);
 			return selectStream(pos);
 		}
@@ -343,10 +352,40 @@ namespace audio_tools {
 		}
 
 		// provides go not to the next on error
-		virtual bool isAutoNext() {
-			return true;
-		};
+		bool isAutoNext() {
+			return false;
+		}
+		
+		//const char* GetPath() {
+		//	return actual_stream->httpRequest().reply().get("icy-url");
+		//}
 
+		const char* Path() {
+			urlPath = toStr();
+			size_t length = strlen(urlPath);  // find the string length
+			for (size_t i = length-1; i > 0; i--) {
+				if (urlPath[i - 1] == '/') {
+					urlPath = &(urlPath[i]);
+					break;
+				}
+			}
+			return urlPath;
+		}
+
+		void resetPath() {
+			newPath =true;
+		}
+
+		bool pathReset(){
+			if (newPath == true) {
+				newPath = false;
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+		
 	protected:
 		URLStream* actual_stream = nullptr;
 		const char** urlArray;
@@ -354,6 +393,8 @@ namespace audio_tools {
 		int max = 0;
 		const char* mime = nullptr;
 		bool started = false;
+		const char* urlPath = nullptr;
+		bool newPath = false;
 
 	};
 
@@ -614,6 +655,7 @@ namespace audio_tools {
 				// move to next stream after timeout
 				if (p_input_stream == nullptr || millis() > timeout) {
 					if (autonext) {
+						p_source->resetPath();
 						if (previous_stream == false) {
 							LOGW("-> timeout - moving to next stream");
 							// open next stream
