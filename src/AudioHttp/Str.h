@@ -303,7 +303,7 @@ class Str {
             if (cont==nullptr) return -1;
             int contLen = strlen(cont);
             for (int j=(len-contLen);j>=0;j--){
-                if (indexOf(cont, j)!=1){
+                if (strncmp(cont,chars+j,contLen)==0){
                     return j;
                 }
             }
