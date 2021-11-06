@@ -267,4 +267,36 @@ class SilenceGenerator : public SoundGenerator<T> {
 
 };
 
+/**
+ * @brief An Adapter Class which lets you use any Stream as a Generator
+ * 
+ * @tparam T 
+ */
+template <class T>
+class GeneratorFromStream : public SoundGenerator<T> {
+    public:
+        GeneratorFromStream() = default;
+
+        GeneratorFromStream(Stream &input){
+            setStream(input);
+        }
+
+        /// (Re-)Assigns a stream to the Adapter class
+        void setStream(Stream &input){
+            this->p_stream = &input;
+        }
+        
+        /// Provides a single sample from the stream
+        T readSample() {
+            T data = 0;
+            if (p_stream!=nullptr) {
+                p_stream->readBytes((uint8_t*)&data, sizeof(T));
+            }
+            return data;
+        }
+
+    protected:
+        Stream *p_stream = nullptr;
+};
+
 }
