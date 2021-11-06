@@ -665,7 +665,7 @@ namespace audio_tools {
 
 		/// Callback implementation which writes to metadata
 		static void decodeMetaData(void* obj, void* data, size_t len) {
-			LOGD(LOG_METHOD);
+			LOGD("%s, %zu", LOG_METHOD, len);
 			AudioPlayer* p = (AudioPlayer*)obj;
 			if (p->meta_active) {
 				p->meta_out.write((const uint8_t*)data, len);

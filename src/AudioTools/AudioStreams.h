@@ -274,7 +274,7 @@ class BufferedStream : public AudioStream {
 
         /// Use this method: write an array
         virtual size_t write(const uint8_t* data, size_t len) {    
-	 		LOGD(LOG_METHOD);
+	 		LOGD("%s: %zu", LOG_METHOD, len);
             flush();
             return writeExt(data, len);
         }
@@ -319,6 +319,11 @@ class BufferedStream : public AudioStream {
                 refill();
             }
             return buffer->available();
+        }
+
+        /// Clears all the data in the buffer
+        void clear() {
+            buffer->reset();
         }
 
     protected:

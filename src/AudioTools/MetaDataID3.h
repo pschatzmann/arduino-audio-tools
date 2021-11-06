@@ -74,7 +74,9 @@ class MetaDataID3Base {
 
     /// find the tag position in the string - if not found we return -1;
     int findTag(const char* tag, const char*str, size_t len){
-        if (len>1600 || str==nullptr || len<=0) return -1;
+		LOGD("=> findTag %s %zu", tag, len);
+        if (str==nullptr || len==0) return -1;
+                
         size_t tag_len = strlen(tag);
         for (size_t j=0;j<=len-tag_len-1;j++){
             if (memcmp(str+j,tag, tag_len)==0){
@@ -83,7 +85,6 @@ class MetaDataID3Base {
         }
         return -1;
     }
-
 };
 
 
@@ -100,6 +101,7 @@ class MetaDataID3V1  : public MetaDataID3Base {
 
     /// (re)starts the processing
     void begin() {
+		LOGD(LOG_METHOD);
         end();
         status = TagNotFound;
         use_bytes_of_next_write = 0;
@@ -108,6 +110,7 @@ class MetaDataID3V1  : public MetaDataID3Base {
 
     /// Ends the processing and releases the memory
     void end() {
+		LOGD(LOG_METHOD);
         if (tag!=nullptr){
             delete tag;
             tag = nullptr;
@@ -121,6 +124,7 @@ class MetaDataID3V1  : public MetaDataID3Base {
     /// provide the (partial) data which might contain the meta data
     size_t write(const uint8_t* data, size_t len){
         if (armed){ 
+    		LOGD("%s: %zu", LOG_METHOD, len);
             switch(status){
                 case TagNotFound:
                     processTagNotFound(data,len);
@@ -149,6 +153,7 @@ class MetaDataID3V1  : public MetaDataID3Base {
 
     /// try to find the metatdata tag in the provided data
     void processTagNotFound(const uint8_t* data, size_t len) {
+		LOGD(LOG_METHOD);
         // find tags
         int pos = findTag("TAG+",(const char*) data, len);
         if (pos>0){
@@ -198,6 +203,7 @@ class MetaDataID3V1  : public MetaDataID3Base {
 
     /// We had part of the start tag at the end of the last write, now we get the full data
     void processPartialTagAtTail(const uint8_t* data, size_t len) {
+		LOGD(LOG_METHOD);
         int tag_len = strlen(tag_str);
         int missing = 5 - tag_len;
         strncat((char*)tag_str, (char*)data, missing);
@@ -216,6 +222,7 @@ class MetaDataID3V1  : public MetaDataID3Base {
 
     /// We have the beginning of the metadata and need to process the remainder
     void processTagFoundPartial(const uint8_t* data, size_t len) {
+		LOGD(LOG_METHOD);
         if (tag!=nullptr){
             int remainder = sizeof(ID3v1) - use_bytes_of_next_write;
             memcpy(tag,data+use_bytes_of_next_write,remainder);
@@ -231,6 +238,7 @@ class MetaDataID3V1  : public MetaDataID3Base {
 
     /// executes the callbacks
     void processNotify() {
+		LOGD(LOG_METHOD);
         if (callback==nullptr) return;
 
         if (tag_ext!=nullptr){
@@ -321,6 +329,7 @@ class MetaDataID3V2 : public MetaDataID3Base  {
 
     /// (re)starts the processing
     void begin() {
+		LOGD(LOG_METHOD);
         status = TagNotFound;
         use_bytes_of_next_write = 0;
         actual_tag = nullptr;
@@ -330,6 +339,7 @@ class MetaDataID3V2 : public MetaDataID3Base  {
 
     /// Ends the processing and releases the memory
     void end() {
+		LOGD(LOG_METHOD);
         status = TagNotFound;
         use_bytes_of_next_write = 0;
         actual_tag = nullptr;
@@ -339,6 +349,7 @@ class MetaDataID3V2 : public MetaDataID3Base  {
     /// provide the (partial) data which might contain the meta data
     size_t write(const uint8_t* data, size_t len){
         if (armed){ 
+    		LOGD("%s: %zu", LOG_METHOD, len);
             switch(status){
                 case TagNotFound:
                     processTagNotFound(data,len);
@@ -364,8 +375,6 @@ class MetaDataID3V2 : public MetaDataID3Base  {
         return frame_header;
     }
 
-
-
   protected:
     ID3v2 tagv2;
     bool tag_active = false;
@@ -389,6 +398,7 @@ class MetaDataID3V2 : public MetaDataID3Base  {
 
     /// try to find the metatdata tag in the provided data
     void processTagNotFound(const uint8_t* data, size_t len) {
+		LOGD(LOG_METHOD);
 
         // activate tag processing when we have an ID3 Tag
         if (!tag_active && !tag_processed){
@@ -462,6 +472,7 @@ class MetaDataID3V2 : public MetaDataID3Base  {
 
     /// We have the beginning of the metadata and need to process the remainder
     void processPartialTagAtTail(const uint8_t* data, size_t len) {
+		LOGD(LOG_METHOD);
         int remainder = calcSize(frame_header.size) - use_bytes_of_next_write;
         memcpy(result+use_bytes_of_next_write, data, remainder);
         processNotify();    
@@ -484,6 +495,7 @@ class MetaDataID3V2 : public MetaDataID3Base  {
     /// executes the callbacks
     void processNotify() {
         if (callback!=nullptr && actual_tag!=nullptr && encodingIsSupported()){
+    		LOGD(LOG_METHOD);
             if (strncmp(actual_tag,"TALB",4)==0)
                 callback(Title, result,strnlen(result, 256));
             else if (strncmp(actual_tag,"TOPE",4)==0)
@@ -521,7 +533,7 @@ class MetaDataID3V2 : public MetaDataID3Base  {
 class MetaDataID3 : public BufferedStream {
   public:
 
-    MetaDataID3(int buffer_size=512):BufferedStream(buffer_size) {
+    MetaDataID3(int buffer_size=1024):BufferedStream(buffer_size) {
     }
     
     ~MetaDataID3(){
@@ -529,16 +541,20 @@ class MetaDataID3 : public BufferedStream {
     }
 
     void setCallback(void (*fn)(MetaDataType info, const char* str, int len)) {
+    	LOGD(LOG_METHOD);
         id3v1.setCallback(fn);        
         id3v2.setCallback(fn);        
     }
 
     void begin() {
+    	LOGD(LOG_METHOD);
         id3v1.begin();
         id3v2.begin();
     }
 
     void end() {
+    	LOGD(LOG_METHOD);
+        clear();
         id3v1.end();
         id3v2.end();
     }
@@ -554,12 +570,11 @@ class MetaDataID3 : public BufferedStream {
 
     /// Provide tha audio data to the API to parse for Meta Data
     virtual size_t writeExt(const uint8_t *data, size_t length){
+		LOGD("%s: %zu", LOG_METHOD, length);
         id3v1.write(data, length);
         id3v2.write(data, length);
         return length;
     }
-
-
 };
 
 } // namespace

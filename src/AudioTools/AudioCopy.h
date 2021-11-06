@@ -84,10 +84,12 @@ class StreamCopyT {
                 notifyMime(buffer, bytes_to_read);
                 is_first = false;
 
-                // callback with unconverted data
-                if (onWrite!=nullptr) onWrite(onWriteObj, buffer, result);
                 // write data
                 result = write(bytes_read, delayCount);
+
+                // callback with unconverted data
+                if (onWrite!=nullptr) onWrite(onWriteObj, buffer, result);
+
                 LOGI("StreamCopy::copy %zu -> %zu -> %zu bytes - in %zu hops", bytes_to_read, bytes_read, result, delayCount);
             } else {
                 // give the processor some time 
