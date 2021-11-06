@@ -52,12 +52,12 @@ namespace audio_tools {
 
 		/// Sets the timeout which is triggering to move to the next stream. - the default value is 500 ms
 		virtual void setTimeoutAutoNext(int millisec) {
-			timeout_value = millisec;
+			timeout_auto_next_value = millisec;
 		}
 
 		/// Provides the timeout which is triggering to move to the next stream.
 		virtual int timeoutAutoNext() {
-			return timeout_value;
+			return timeout_auto_next_value;
 		}
 
 		/// Sets the timeout of Stream in milliseconds
@@ -67,7 +67,7 @@ namespace audio_tools {
 		virtual bool isAutoNext();
 
 	protected:
-		int timeout_value = 500;
+		int timeout_auto_next_value = 500;
 	};
 
 	/**
@@ -282,7 +282,7 @@ namespace audio_tools {
 			this->urlArray = urlArray;
 			this->max = N;
 			this->pos = startPos - 1;
-			this->timeout_value = 20000;
+			this->timeout_auto_next_value = 20000;
 		}
 
 		/// Setup Wifi URL

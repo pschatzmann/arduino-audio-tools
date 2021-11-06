@@ -47,7 +47,7 @@ class AudioEffect  {
 
 class Boost : public AudioEffect {
     public:
-        /// volume 0.1 - 1.0: decrease result; volume >0: increase result 
+        /// Boost Constructor: volume 0.1 - 1.0: decrease result; volume >0: increase result 
         Boost(float &volume){
             p_effect_value = &volume;
         }
@@ -71,7 +71,7 @@ class Boost : public AudioEffect {
 
 class Distortion : public AudioEffect  {
     public:
-        // e.g. use clipThreashold 4990
+        /// Distortion Constructor: e.g. use clipThreashold 4990 and maxInput=6500
         Distortion(int16_t &clipThreashold, int16_t maxInput=6500){
             p_clip_threashold = &clipThreashold;
             max_input = maxInput;   
@@ -98,7 +98,7 @@ class Distortion : public AudioEffect  {
 
 class Fuzz : public AudioEffect  {
     public:
-        // use e.g. effectValue=6.5
+        /// Fuzz Constructor: use e.g. effectValue=6.5; maxOut = 300
         Fuzz(float &fuzzEffectValue, uint16_t maxOut = 300){
             p_effect_value = &fuzzEffectValue;
             max_out = maxOut;
@@ -124,7 +124,7 @@ class Fuzz : public AudioEffect  {
 
 class Tremolo : public AudioEffect  {
     public:
-        // use e.g. duration_ms=2000; depth=0.5
+        /// Tremolo constructor -  use e.g. duration_ms=2000; depth=0.5; sampleRate=44100
         Tremolo(int16_t &duration_ms, float &depth, uint16_t sampleRate) {
             int32_t rate_count = static_cast<int32_t>(duration_ms) * sampleRate / 1000;
             rate_count_half = rate_count / 2;
@@ -177,12 +177,36 @@ class AudioEffects : public SoundGenerator<effect_t>  {
             setInput(in);
         }
 
+        AudioEffects(Stream &in){
+            setInput(in);
+        }
+
+        ~AudioEffects(){
+            if (p_stream_gen!=nullptr) delete p_stream_gen;
+        }
+
+
         /// Defines the input source for the raw guitar input
         void setInput(SoundGenerator &in){
             p_source = &in;
         }
 
-        /// Adds an effect
+        /// Defines the input source for the raw guitar input; MEMORY LEAK WARNING use only once!
+        void setInput(Stream &in){
+            // allocate optional adapter class
+            if (p_stream_gen==nullptr){
+                p_stream_gen = new GeneratorFromStream<int16_t>();
+            } 
+            p_stream_gen->setStream(in);
+            p_source = p_stream_gen;
+        }
+
+        /// Adds an effect object (by reference)
+        void addEffect(AudioEffect &effect){
+            effects.push_back(&effect);
+        }
+
+        /// Adds an effect using a pointer
         void addEffect(AudioEffect *effect){
             effects.push_back(effect);
         }
@@ -198,8 +222,10 @@ class AudioEffects : public SoundGenerator<effect_t>  {
         }
 
     protected:
-        SoundGenerator *p_source;
         Vector<AudioEffect*> effects;
+        SoundGenerator *p_source;
+        // optional adapter class to support streams
+        GeneratorFromStream<int16_t> *p_stream_gen = nullptr;
 
 };
 
