@@ -43,6 +43,13 @@ void printMetaData(MetaDataType type, const char* str, int len){
   Serial.println(str);
 }
 
+void printName() {
+  Serial.print("icy name: ");
+  Serial.println(source.icyName());
+  Serial.print("Url name: ");
+  Serial.println(source.urlName());
+}
+
 void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
@@ -54,7 +61,7 @@ void setup() {
   // setup player
   player.setCallbackMetadata(printMetaData);
   player.begin();
-  Serial.println(source.icyName());
+  printName();
 }
 
 // Sets the volume control from a linear potentiometer input
@@ -72,7 +79,7 @@ void updatePosition() {
       Serial.println("Moving to next url");
       if (nextButtonDebouncer.debounce()){
         player.next();
-        Serial.println(source.icyName());
+        printName();
       }
   }
 }
