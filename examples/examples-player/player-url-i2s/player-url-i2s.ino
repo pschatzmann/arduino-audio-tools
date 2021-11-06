@@ -35,13 +35,6 @@ const int volumePin = A0;
 Debouncer nextButtonDebouncer(2000);
 const int nextButtonPin = 13;
 
-void printMetaData(MetaDataType type, const char* str, int len){
-  Serial.print("==> ");
-  Serial.print(MetaDataTypeStr[type]);
-  Serial.print(": ");
-  Serial.println(str);
-}
-
 void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
@@ -51,7 +44,6 @@ void setup() {
   i2s.begin(cfg);
 
   // setup player
-  player.setCallbackMetadata(printMetaData);
   player.begin();
 }
 
