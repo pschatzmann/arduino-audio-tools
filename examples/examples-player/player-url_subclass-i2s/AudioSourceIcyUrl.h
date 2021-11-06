@@ -27,6 +27,16 @@ class AudioSourceIcyUrl : public AudioSourceURL {
             return icyValue("icy-genre");
         }
 
+        /// Returns the last section of a url: https://22323.live.streamtheworld.com/TOPRETRO.mp3 gives TOPRETRO.mp3
+        const char *urlName(){
+            const char* result = "";
+            Str tmpStr(toStr());
+            int pos = tmpStr.lastIndexOf("/");
+            if (pos>0){
+                result = toStr()+pos+1;
+            } 
+            return result;
+        }
 };
 
 }
