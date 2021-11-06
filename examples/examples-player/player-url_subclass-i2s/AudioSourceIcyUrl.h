@@ -37,6 +37,15 @@ class AudioSourceIcyUrl : public AudioSourceURL {
             } 
             return result;
         }
+
+        /// Returns the icy name if available otherwise we use our custom logic
+        const char* name() {
+            Str reslt(icyName());
+            if (reslt.isEmpty()){
+                reslt.set(urlName());
+            }
+            return reslt.c_str();
+        }
 };
 
 }
