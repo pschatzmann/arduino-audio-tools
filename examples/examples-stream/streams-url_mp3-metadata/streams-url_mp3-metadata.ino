@@ -19,16 +19,25 @@ URLStream url("ssid","password");
 MetaDataPrint out; // final output of decoded stream
 StreamCopy copier(out, url); // copy url to decoder
 
+// callback for meta data
+void printMetaData(MetaDataType type, const char* str, int len){
+  Serial.print("==> ");
+  Serial.print(MetaDataTypeStr[type]);
+  Serial.print(": ");
+  Serial.println(str);
+}
+
 
 void setup(){
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);  
 
 // mp3 radio
+  url.httpRequest().header().put("Icy-MetaData","1");
   url.begin("https://centralcharts.ice.infomaniak.ch/centralcharts-128.mp3","audio/mp3");
 
-  const char* icyMetaInt = url.httpRequest().reply().get("icy-metaint");
-  out.begin(icyMetaInt);
+  out.setCallback(printMetaData);
+  out.begin(url.httpRequest());
 }
 
 void loop(){

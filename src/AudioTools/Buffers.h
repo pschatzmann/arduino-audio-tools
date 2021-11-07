@@ -417,9 +417,6 @@ public:
           resetCurrent();
           result = actual_read_buffer==nullptr? 0 : actual_read_buffer->available();
       }
-      if(actual_read_buffer!=nullptr){
-          result+=write_buffer_count*buffer_size;
-      }
       return result;
   }
 
@@ -438,7 +435,7 @@ public:
           addFilledBuffer(actual_write_buffer);
           actual_write_buffer = getNextAvailableBuffer();
       }
-      return actual_write_buffer->availableToWrite() + (buffer_count - write_buffer_count) *buffer_size;
+      return actual_write_buffer->availableToWrite();
   }
   
   // resets all buffers

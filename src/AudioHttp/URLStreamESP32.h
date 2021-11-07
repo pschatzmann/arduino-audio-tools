@@ -80,12 +80,14 @@ class BufferedTaskStream : public AudioStream {
         
         /// Use this method !!
         size_t readBytes( uint8_t *data, size_t length) { 
-            LOGD(LOG_METHOD);
             if (!ready) return 0;
             size_t result = 0;
             xSemaphoreTake(mutex, portMAX_DELAY);
             result = buffers.readArray(data, length);
             xSemaphoreGive(mutex);
+
+            LOGD("%s: %zu -> %zu", LOG_METHOD, length, result);
+
             return result;
         }
 
@@ -127,8 +129,13 @@ class BufferedTaskStream : public AudioStream {
                     size_t to_read = min(available_to_write, (size_t) 512);
                     size_t avail_read = self->p_stream->readBytes((uint8_t*)buffer, to_read);
                     xSemaphoreTake(self->mutex, portMAX_DELAY);
-                    self->buffers.writeArray(buffer, avail_read);
+                    size_t written = self->buffers.writeArray(buffer, avail_read);
                     xSemaphoreGive(self->mutex);
+
+                    if (written!=avail_read){
+                        LOGE("DATA Lost! %zu reqested, %zu written!",avail_read, written);
+                    }
+
                 } else {
                     delay(100);
                 }
@@ -177,8 +184,9 @@ class URLStream : public AudioStream {
         }
 
         virtual size_t readBytes(uint8_t *buffer, size_t length){
-            LOGD(LOG_METHOD);
-            return taskStream.readBytes(buffer, length);
+            size_t result = taskStream.readBytes(buffer, length);
+            LOGD("%s: %zu -> %zu", LOG_METHOD, length, result);
+            return result;
         }
 
         virtual int read() {

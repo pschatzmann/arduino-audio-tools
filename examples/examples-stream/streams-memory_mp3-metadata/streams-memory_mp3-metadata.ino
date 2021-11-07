@@ -11,7 +11,7 @@
 using namespace audio_tools;  
 
 MemoryStream mp3(sample_12s_mp3, sample_12s_mp3_len);
-MetaDataID3 out;
+MetaDataPrint out;
 StreamCopy copier(out, mp3); // copy in to out
 
 // callback for meta data
@@ -26,9 +26,10 @@ void setup(){
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);  
 
+  mp3.begin();
+
   out.setCallback(printMetaData);
   out.begin();
-  mp3.begin();
 }
 
 void loop(){
@@ -38,4 +39,3 @@ void loop(){
     stop();
   }
 }
-
