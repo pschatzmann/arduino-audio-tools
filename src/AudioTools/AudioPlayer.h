@@ -265,7 +265,7 @@ namespace audio_tools {
 #endif
 
 
-#if defined(ESP32) || defined(ESP8266) || defined(USE_URL_ARDUINO) 
+#if (defined(ESP32) && defined(USE_URL_ARDUINO)) || (defined(ESP8266) || defined(USE_URL_ARDUINO) )
 
 	/**
 	 * @brief Audio Source which provides the data via the network from an URL
