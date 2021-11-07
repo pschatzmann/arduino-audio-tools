@@ -18,7 +18,7 @@ class Str {
     public:
         Str(){}
         
-        // Creates a Str for string constant
+        /// Creates a Str for string constant
         Str(const char* chars){
             if (chars!=nullptr){
                 int len = strlen(chars);
@@ -29,7 +29,7 @@ class Str {
             }
         }
 
-        // Creates a Str with the indicated buffer
+        /// Creates a Str with the indicated buffer
         Str(char chars[], int maxlen, int len=0){
             set(chars,maxlen,len, false);
         }
@@ -39,7 +39,7 @@ class Str {
         Str& operator = (const Str & ) = default;	
         Str& operator = (Str && ) = default;	
 
-        // assigs a value
+        /// assigs a value
         virtual void set(const char *alt){
             if (alt==nullptr){
                 this->len = 0;
@@ -48,27 +48,27 @@ class Str {
                 grow(new_len);
                 this->len = new_len;
                 if (this->isConst()){
-                    // if the Str is a const we replace the pointer
+                    /// if the Str is a const we replace the pointer
                     this->maxlen = this->len;
                     this->chars = (char*) alt;
                 } else {
-                    // if the Str is an external buffer we need to copy
+                    /// if the Str is an external buffer we need to copy
                     strncpy(this->chars,alt,this->maxlen);
                     this->chars[len]=0;
                 }
             }
         }
 
-        // assigs from another Str value
+        /// assigs from another Str value
         virtual void set(const Str &alt){
             grow(alt.len);
             this->len = alt.len;
 
             if (this->isConst()){
-                // if the Str is a const we replace the pointer
+                /// if the Str is a const we replace the pointer
                 this->chars = alt.chars;
             } else {
-                // if the Str is an external buffer we need to copy
+                /// if the Str is an external buffer we need to copy
                 strncpy(this->chars,alt.chars,this->maxlen);
                 this->chars[len]=0;
             }
@@ -107,7 +107,7 @@ class Str {
         }
     
 
-        // assigns a memory buffer
+        /// assigns a memory buffer
         virtual void set(char chars[], int maxlen, int len=0, bool isConst=false){
             this->chars = chars;
             this->maxlen = maxlen;
@@ -118,7 +118,7 @@ class Str {
             }
         }
 
-        // adds a int value
+        /// adds a int value
         virtual void add(int value){
             if (!this->isConst()){
                 grow(this->length()+11);
@@ -127,7 +127,7 @@ class Str {
             }
         }
 
-        // adds a double value
+        /// adds a double value
         virtual void add(double value, int precision=2, int withd=0){
             if (!this->isConst()){
                 grow(this->length()+20);
@@ -136,7 +136,7 @@ class Str {
             }
         }
     
-       // adds a string
+       /// adds a string
        virtual void add(const char* append){
             if (!isConst() && append!=nullptr){
                 int append_len = strlen(append);
@@ -148,7 +148,7 @@ class Str {
             }
         }
     
-        // adds a character
+        /// adds a character
         virtual void add(const char c){
             if (!isConst() && len<maxlen-1){
                 grow(this->length()+1);
@@ -157,42 +157,42 @@ class Str {
             }            
         }
 
-        // checks if the string equals indicated parameter string
+        /// checks if the string equals indicated parameter string
         virtual bool equals(const char* str){
             if (str==nullptr) return false;
             return strcmp(this->chars, str)==0;
         }
 
-        // checks if the string starts with the indicated substring
+        /// checks if the string starts with the indicated substring
         virtual bool startsWith(const char* str){
             if (str==nullptr) return false;
             int len = strlen(str);
             return strncmp(this->chars,str, len)==0;
         }
 
-        // checks if the string ends with the indicated substring
+        /// checks if the string ends with the indicated substring
         virtual bool endsWith(const char* str){
             if (str==nullptr) return false;
             int endlen = strlen(str);
             return strncmp(this->chars+(len-endlen),str, endlen)==0;
         }
     
-        // virtual bool matches(const char* match){
-        //     int m_size = strlen(match);
-        //     if (length() < m_size)
-        //         return false;
-        //     if (strncmp(this->chars,match,m_size-1)!=0)
-        //         return false;
-        //     if (match[m_size-1]=='*' || match[m_size-1]==this->chars[m_size-1] ){
-        //         return true;
-        //     }
-        //     return false;
-        // }
+        /// virtual bool matches(const char* match){
+        ///     int m_size = strlen(match);
+        ///     if (length() < m_size)
+        ///         return false;
+        ///     if (strncmp(this->chars,match,m_size-1)!=0)
+        ///         return false;
+        ///     if (match[m_size-1]=='*' || match[m_size-1]==this->chars[m_size-1] ){
+        ///         return true;
+        ///     }
+        ///     return false;
+        /// }
 
         /// file matching supporting * and ? - replacing regex which is not supported in all environments
         virtual bool matches(const char* pattern)  {
-            // returns 1 (true) if there is a match
-            // returns 0 if the pattern is not whitin the line
+            /// returns 1 (true) if there is a match
+            /// returns 0 if the pattern is not whitin the line
             int wildcard = 0;
             const char* line = this->chars;
 
@@ -208,7 +208,7 @@ class Str {
                     wildcard = 0;
                 }
                 else if (*pattern == '?'){
-                    if(*(line) == '\0') // the line is ended but char was expected
+                    if(*(line) == '\0') /// the line is ended but char was expected
                         return 0;
                     if(wildcard == 1)
                         last_line_start = line + 1;
@@ -241,11 +241,11 @@ class Str {
                     }
                 } else
                 {
-                    if ((*pattern) == '\0' && (*line) == '\0')  // end of mask
-                        return 1; // if the line also ends here then the pattern match
+                    if ((*pattern) == '\0' && (*line) == '\0')  /// end of mask
+                        return 1; /// if the line also ends here then the pattern match
                     else
                     {
-                        if (last_pattern_start != 0) // try to restart the mask on the rest
+                        if (last_pattern_start != 0) /// try to restart the mask on the rest
                         {
                             pattern = last_pattern_start;
                             line = last_line_start;
@@ -270,7 +270,7 @@ class Str {
             
 
 
-        // provides the position of the the indicated character after the indicated start position
+        /// provides the position of the the indicated character after the indicated start position
         virtual int indexOf(const char c, int start=0){
             for (int j=start;j<len;j++){
                 if (c==chars[j]){
@@ -280,12 +280,12 @@ class Str {
             return -1;
         }
     
-        // checks if the string contains a substring
+        /// checks if the string contains a substring
         virtual bool contains(const char *str){
             return indexOf(str)!=-1;
         }
 
-        // provides the position of the the indicated substring after the indicated start position
+        /// provides the position of the the indicated substring after the indicated start position
         virtual int indexOf(const char *cont, int start=0){
             if (chars==nullptr || cont==nullptr) return -1;
             int contLen = strlen(cont);
@@ -298,7 +298,7 @@ class Str {
             return -1;
         }
 
-        // provides the position of the last occurrence of the indicated substring
+        /// provides the position of the last occurrence of the indicated substring
         virtual int lastIndexOf(const char *cont){
             if (cont==nullptr) return -1;
             int contLen = strlen(cont);
@@ -310,32 +310,32 @@ class Str {
             return -1;
         }
     
-        // we can assign a const char*
+        /// we can assign a const char*
         virtual void operator=(const char* str)  {
             set(str);
         }
 
-        // we can assign a char*
+        /// we can assign a char*
         virtual void operator=(char* str)  {
             set(str);
         }
 
-        // we can assign a char
+        /// we can assign a char
         virtual void operator=(char c)  {
             set(c);
         }
   
-        // we can assign a double
+        /// we can assign a double
         virtual void operator=(double val)  {
             set(val);
         }
 
-        // we can assign an int
+        /// we can assign an int
         virtual void operator=(int value)  {
             set(value);
         }
 
-        // shift characters to the right -> we just move the pointer
+        /// shift characters to the right -> we just move the pointer
         virtual void operator<<(int n){
             if (isConst()){
                 this->chars+=n;
@@ -349,70 +349,69 @@ class Str {
             return chars[index];
         }
 
-        // adds a substring at the end of the string
+        /// adds a substring at the end of the string
         virtual void operator+=(const char* str)  {
             add(str);
         }
 
-        // adds a int at the end of the string
+        /// adds a int at the end of the string
         virtual void operator+=(int value)  {
             add(value);
         }
 
-        // adds a double at the end of the string
+        /// adds a double at the end of the string
         virtual void operator+=(double value)  {
             add(value);
         }
 
-        // adds a character
+        /// adds a character
         virtual void operator+=(const char value)  {
             add(value);
         }
 
-        // checks if the indicated string is equal to the current string
+        /// checks if the indicated string is equal to the current string
         virtual bool operator==(const Str &alt) const {
             if (this->len != alt.len)
                 return false;
             return strncmp(this->chars, alt.chars, this->len)==0;
         }
 
-        // checks if the indicated string is equal to the current string
+        /// checks if the indicated string is equal to the current string
         virtual bool operator==(const char *alt) const {
             return strncmp(this->chars, alt, this->len)==0;
         }
 
-        // checks if the indicated string is different from the current string
+        /// checks if the indicated string is different from the current string
         virtual bool operator!=(const Str &alt) const {
             return strncmp(this->chars, alt.chars, this->len)!=0;
         }
 
-        // checks if the indicated string is different from the current string
+        /// checks if the indicated string is different from the current string
         virtual bool operator!=(const char *alt) const {
             return strncmp(this->chars, alt, this->len)!=0;
         }
 
-        // provides the string value as const char* 
+        /// provides the string value as const char* 
         virtual const char* c_str() {
             return chars;
         }
 
-        // provides the current length (filled with characters) of the string - excluding the
-        // terminating 0
+        /// provides the current length (filled with characters) of the string - excluding the terminating 0
         virtual int length() {
             return len;
         }
     
-        // checks if the string is empty
+        /// checks if the string is empty
         virtual bool isEmpty(){
             return len==0;
         }
     
-        // provides the maximum length of the string
+        /// provides the maximum length of the string
         virtual int maxLength() {
             return maxlen;
         }
 
-        // rmoves the indicated substring from the string
+        /// rmoves the indicated substring from the string
         virtual void removeAll(const char* toRemove){
             if (!isConst() && chars!=nullptr){
                 int removeLen = strlen(toRemove);
@@ -427,7 +426,7 @@ class Str {
             }
         }
 
-        // limits the length of the string (by adding a delimiting 0)
+        /// limits the length of the string (by adding a delimiting 0)
         virtual void setLength(int len, bool addZero=true){
             if (!isConst() && addZero){
                 this->savedChar = chars[len];
@@ -437,7 +436,7 @@ class Str {
             }
         }
 
-        // undo the last setLength call
+        /// undo the last setLength call
         virtual void setLengthUndo() {
             if (savedLen>=0){
                 chars[len] = savedChar;
@@ -446,7 +445,7 @@ class Str {
             }
         }
 
-        // copies a substring into the current string
+        /// copies a substring into the current string
         virtual void substring(Str& from, int start, int end){
             if (end>start){
                 int len = end-start;
@@ -460,7 +459,7 @@ class Str {
             }
         }
 
-        // copies a substring into the current string
+        /// copies a substring into the current string
         virtual void substring(const char* from, int start, int end){
             if (end>start){
                 int len = end-start;
@@ -489,7 +488,7 @@ class Str {
             return 0;
         }
 
-        // remove leading spaces
+        /// remove leading spaces
         virtual void ltrim(){
             int n = count(' ',0);
             *this << n;
@@ -505,7 +504,7 @@ class Str {
             }    
         }
 
-        // clears the string by setting the terminating 0 at the beginning
+        /// clears the string by setting the terminating 0 at the beginning
         virtual void clear() {
             if (chars!=nullptr && !isConst()){
                 chars[0] = 0;
@@ -513,17 +512,17 @@ class Str {
             len = 0;
         }
 
-        // checks if the string is on the heap
+        /// checks if the string is on the heap
         virtual bool isOnHeap() {
             return false;
         }
 
-        // checks if the string is a constant that must not be changed
+        /// checks if the string is a constant that must not be changed
         virtual bool isConst() {
             return is_const;
         }
 
-        // inserts a substring into the string
+        /// inserts a substring into the string
         virtual void insert(int pos, const char* str){
             if (!isConst()){
                 int insert_len = strlen(str);
@@ -534,6 +533,7 @@ class Str {
             }
         }
 
+        /// Compares the string ignoring the case
         virtual bool equalsIgnoreCase(const char* alt){
             if ((size_t)len != strlen(alt)){
                 return false;
@@ -545,6 +545,15 @@ class Str {
             return true;
         }
 
+        /// Converts the string to an int
+        int toInt() {
+            int result = 0;
+            if (!isEmpty()){
+                result = atoi(chars);
+            }
+            return result;
+        }
+
     protected:
         char* chars = nullptr;
         bool is_const=false;
@@ -554,7 +563,7 @@ class Str {
         char savedChar;
 
 
-        // only supported in subclasses
+        /// only supported in subclasses
         virtual bool grow(int newMaxLen){
             return false;
         }
@@ -589,7 +598,7 @@ class Str {
             char temp[16];
             int i;
 
-            // compute the rounding factor and fractional multiplier
+            /// compute the rounding factor and fractional multiplier
             double roundingFactor = 0.5;
             unsigned long mult = 1;
             for (i = 0; i < precision; i++)
@@ -610,7 +619,7 @@ class Str {
 
             strcat(outstr, itoa(int(val),temp));  //prints the int part
             if( precision > 0) {
-                strcat(outstr, ".\0"); // print the decimal point
+                strcat(outstr, ".\0"); /// print the decimal point
                 unsigned long frac;
                 unsigned long mult = 1;
                 int padding = precision -1;
@@ -632,7 +641,7 @@ class Str {
                 strcat(outstr,itoa(frac,temp));
             }
 
-            // generate space padding
+            /// generate space padding
             if ((widthp != 0)&&( (size_t)widthp >= strlen(outstr))){
                 int J=0;
                 J = widthp - strlen(outstr);

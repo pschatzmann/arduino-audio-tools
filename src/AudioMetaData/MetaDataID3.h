@@ -19,9 +19,6 @@ const char *genres[] = { "Classic Rock", "Country", "Dance", "Disco", "Funk", "G
 /// current status of the parsing
 enum ParseStatus { TagNotFound, PartialTagAtTail, TagFoundPartial, TagFoundComplete, TagProcessed};
 
-/// Test Description for meta info
-const char* MetaDataTypeStr[] = {"Title", "Artis", "Album", "Genre"};
-
 
 /// ID3 verion 1 TAG (130 bytes)
 struct ID3v1 {

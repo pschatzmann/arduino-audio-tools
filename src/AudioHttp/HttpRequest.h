@@ -116,6 +116,10 @@ class HttpRequest {
             return reply_header;
         }
 
+        virtual HttpRequestHeader &header(){
+            return request_header;
+        }
+
         virtual void setAgent(const char* agent){
             this->agent = agent;
         }

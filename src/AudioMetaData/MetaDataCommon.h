@@ -3,7 +3,11 @@
 #include <stdint.h>
 
 /// Type of meta info
-enum MetaDataType { Title, Artist, Album, Genre};
+enum MetaDataType { Title, Artist, Album, Genre, Name, Description };
+
+/// Test Description for meta info
+const char* MetaDataTypeStr[] = {"Title", "Artist", "Album", "Genre","Name", "Description"};
+
 
 class MetaDataCommon {
     public:
