@@ -66,6 +66,12 @@ namespace audio_tools {
 		/// Returns default setting go to the next
 		virtual bool isAutoNext();
 
+        // only the ICYStream supports this
+        virtual bool setMetadataCallback(void (*fn)(MetaDataType info, const char* str, int len)) {
+            return false;
+        }
+
+
 	protected:
 		int timeout_auto_next_value = 500;
 	};
@@ -265,7 +271,7 @@ namespace audio_tools {
 #endif
 
 
-#if defined(ESP32) || defined(ESP8266) || defined(USE_URL_ARDUINO) 
+#if defined(USE_URL_ARDUINO) && ( defined(ESP32) || defined(ESP8266) )
 
 	/**
 	 * @brief Audio Source which provides the data via the network from an URL
@@ -275,7 +281,7 @@ namespace audio_tools {
 	class AudioSourceURL : public AudioSource {
 	public:
 		template<typename T, size_t N>
-		AudioSourceURL(URLStream& urlStream, T(&urlArray)[N], const char* mime, int startPos = 0) {
+		AudioSourceURL(AbstractURLStream& urlStream, T(&urlArray)[N], const char* mime, int startPos = 0) {
 			LOGD(LOG_METHOD);
 			this->actual_stream = &urlStream;
 			this->mime = mime;
@@ -347,14 +353,20 @@ namespace audio_tools {
 			return true;
 		};
 
+        // only the ICYStream supports this
+        bool setMetadataCallback(void (*fn)(MetaDataType info, const char* str, int len)) {
+			LOGI(LOG_METHOD);
+            return actual_stream->setMetadataCallback(fn);
+        }
+
+
 	protected:
-		URLStream* actual_stream = nullptr;
+		AbstractURLStream* actual_stream = nullptr;
 		const char** urlArray;
 		int pos = 0;
 		int max = 0;
 		const char* mime = nullptr;
 		bool started = false;
-
 	};
 
 #endif
@@ -480,6 +492,8 @@ namespace audio_tools {
 		virtual bool begin(int index=0, bool isActive = true) {
 			LOGD(LOG_METHOD);
 			bool result = false;
+
+			// navigation supoort
 			autonext = p_source->isAutoNext();
 
 			// start dependent objects
@@ -635,10 +649,18 @@ namespace audio_tools {
 		}
 
 		/// Defines the medatadata callback
-		virtual void setCallbackMetadata(void (*callback)(MetaDataType type, const char* str, int len)) {
-			LOGD(LOG_METHOD);
-			meta_active = true;
-			meta_out.setCallback(callback);
+		virtual void setMetadataCallback(void (*callback)(MetaDataType type, const char* str, int len)) {
+			LOGI(LOG_METHOD);
+			// setup metadata. 
+			if (p_source->setMetadataCallback(callback)){
+				// metadata is handled by source
+				LOGI("Using ICY Metadata");
+				meta_active = false;
+			} else {
+				// metadata is handled here
+				meta_out.setCallback(callback);
+				meta_active = true;
+			}
 		}
 
 		/// Change the VolumeControl implementation

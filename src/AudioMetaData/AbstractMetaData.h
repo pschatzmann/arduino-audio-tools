@@ -8,8 +8,11 @@ enum MetaDataType { Title, Artist, Album, Genre, Name, Description };
 /// Test Description for meta info
 const char* MetaDataTypeStr[] = {"Title", "Artist", "Album", "Genre","Name", "Description"};
 
-
-class MetaDataCommon {
+/**
+ * @brief Common Metadata methods
+ * 
+ */
+class AbstractMetaData {
     public:
         virtual void setCallback(void (*fn)(MetaDataType info, const char* str, int len)) = 0 ;
         virtual void begin() = 0;

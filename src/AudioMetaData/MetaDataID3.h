@@ -9,7 +9,7 @@
 #include <string.h>
 #include <stdint.h>
 #include <ctype.h>
-#include "MetaDataCommon.h"
+#include "AbstractMetaData.h"
 
 namespace audio_tools {
 
@@ -511,7 +511,7 @@ class MetaDataID3V2 : public MetaDataID3Base  {
  * @copyright GPLv3
  * 
  */
-class MetaDataID3 : public MetaDataCommon {
+class MetaDataID3 : public AbstractMetaData {
   public:
 
     MetaDataID3() = default;

@@ -8,9 +8,12 @@
 #else 
 #include <WiFiClientSecure.h>
 #endif
+
 #include "AudioHttp/HttpRequest.h"
+#include "AudioHttp/AbstractURLStream.h"
 
 namespace audio_tools {
+
 
 /**
  * @brief Represents the content of a URL as Stream. We use the WiFi.h API
@@ -18,7 +21,7 @@ namespace audio_tools {
  * @copyright GPLv3
  * 
  */
-class URLStreamDefault : public AudioStream {
+class URLStreamDefault : public AbstractURLStream {
     public:
 
         URLStreamDefault(int readBufferSize=DEFAULT_BUFFER_SIZE){
@@ -231,6 +234,12 @@ class URLStreamDefault : public AudioStream {
         }
 };
 #ifndef ESP32
+
+/**
+ * @brief URLStream implementation for all envionments except ESP32
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
 class URLStream : public URLStreamDefault {
     public:
         URLStream(int readBufferSize=DEFAULT_BUFFER_SIZE)
