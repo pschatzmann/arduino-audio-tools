@@ -20,7 +20,7 @@ class ICYStreamDefault : public AbstractURLStream {
     public:
         /// Default constructor
         ICYStreamDefault(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE) {
-			LOGI(LOG_METHOD);
+            LOGI(LOG_METHOD);
             url = new URLStreamDefault(network, password, readBufferSize);
             if (url==nullptr){
                 LOGE("Not enough memory!");
@@ -28,13 +28,13 @@ class ICYStreamDefault : public AbstractURLStream {
         }
 
         ~ICYStreamDefault(){
-			LOGI(LOG_METHOD);
+            LOGI(LOG_METHOD);
             if (url!=nullptr) delete url;
         }
 
         /// Defines the meta data callback function
         virtual bool setMetadataCallback(void (*fn)(MetaDataType info, const char* str, int len)) override {
-			LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             callback = fn;
             icy.setCallback(fn);
             return true;
@@ -42,7 +42,7 @@ class ICYStreamDefault : public AbstractURLStream {
 
         // Icy http get request to the indicated url 
         virtual bool begin(const char* urlStr, const char* acceptMime=nullptr, MethodID action=GET,  const char* reqMime="", const char*reqData="") override {
-			LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             // accept metadata
             url->httpRequest().header().put("Icy-MetaData","1");
             bool result = url->begin(urlStr, acceptMime, action, reqMime, reqData);
@@ -65,7 +65,7 @@ class ICYStreamDefault : public AbstractURLStream {
 
         /// Ends the processing
         virtual void end() override {
-			LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             url->end();
             icy.end();
         }
@@ -97,7 +97,7 @@ class ICYStreamDefault : public AbstractURLStream {
                  // fast access if there is no metadata
                  result = url->readBytes(buffer, len);
             }
-			LOGD("%s: %zu -> %zu", LOG_METHOD, len, result);
+            LOGD("%s: %zu -> %zu", LOG_METHOD, len, result);
             return result;
         }
 

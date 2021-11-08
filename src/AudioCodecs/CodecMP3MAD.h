@@ -24,62 +24,62 @@ class MP3DecoderMAD : public AudioDecoder  {
     public:
 
         MP3DecoderMAD(){
-        	LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             mad = new libmad::MP3DecoderMAD();
         }
 
         MP3DecoderMAD(libmad::MP3DataCallback dataCallback, libmad::MP3InfoCallback infoCB=nullptr){
-        	LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             mad = new libmad::MP3DecoderMAD(dataCallback, infoCB);
         }
 
         MP3DecoderMAD(Print &mad_output_streamput, libmad::MP3InfoCallback infoCB = nullptr){
-        	LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             mad = new libmad::MP3DecoderMAD(mad_output_streamput, infoCB);
         }
 
         ~MP3DecoderMAD(){
-        	LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             delete mad;
         }
 
         void setOutputStream(Print &out){
-        	LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             mad->setOutput(out);
         }
 
         /// Defines the callback which receives the decoded data
         void setDataCallback(libmad::MP3DataCallback cb){
-        	LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             mad->setDataCallback(cb);
         }
 
         /// Defines the callback which receives the Info changes
         void setInfoCallback(libmad::MP3InfoCallback cb){
-        	LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             mad->setInfoCallback(cb);
         }
 
          /// Starts the processing
         void begin(){
-        	LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             mad->begin();
         }
 
         /// Releases the reserved memory
         void end(){
-        	LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             mad->end();
         }
 
         /// Provides the last valid audio information
         libmad::MadAudioInfo audioInfoEx(){
-        	LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             return mad->audioInfo();
         }
 
         AudioBaseInfo audioInfo(){
-        	LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             libmad::MadAudioInfo info = audioInfoEx();
             AudioBaseInfo base;
             base.channels = info.channels;
@@ -90,13 +90,13 @@ class MP3DecoderMAD : public AudioDecoder  {
 
         /// Makes the mp3 data available for decoding: however we recommend to provide the data via a callback or input stream
         size_t write(const void *data, size_t len){
-        	LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             return mad->write(data,len);
         }
 
         /// Makes the mp3 data available for decoding: however we recommend to provide the data via a callback or input stream
         size_t write(void *data, size_t len){
-        	LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             return mad->write(data,len);
         }
 
@@ -109,24 +109,24 @@ class MP3DecoderMAD : public AudioDecoder  {
             return mad;
         }
 
-		static void audioChangeCallback(libmad::MadAudioInfo &info){
-			if (audioChangeMAD!=nullptr){
-            	LOGD(LOG_METHOD);
-				AudioBaseInfo base;
-				base.channels = info.channels;
-				base.sample_rate = info.sample_rate;
-				base.bits_per_sample = info.bits_per_sample;
-				// notify audio change
-				audioChangeMAD->setAudioInfo(base);
-			}
-		}
+        static void audioChangeCallback(libmad::MadAudioInfo &info){
+            if (audioChangeMAD!=nullptr){
+                LOGD(LOG_METHOD);
+                AudioBaseInfo base;
+                base.channels = info.channels;
+                base.sample_rate = info.sample_rate;
+                base.bits_per_sample = info.bits_per_sample;
+                // notify audio change
+                audioChangeMAD->setAudioInfo(base);
+            }
+        }
 
-		virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi) {
-        	LOGD(LOG_METHOD);
-			audioChangeMAD = &bi;
-			// register audio change handler
-			mad->setInfoCallback(audioChangeCallback);
-		}
+        virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi) {
+            LOGD(LOG_METHOD);
+            audioChangeMAD = &bi;
+            // register audio change handler
+            mad->setInfoCallback(audioChangeCallback);
+        }
 
     protected:
         libmad::MP3DecoderMAD *mad;

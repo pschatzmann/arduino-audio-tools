@@ -16,7 +16,7 @@ struct AudioInfoLAME :  AudioBaseInfo  {
     AudioInfoLAME () = default;
     AudioInfoLAME (const AudioInfoLAME  &) = default;
 
-	int quality = 7; // 0..9.  0=best (very slow).  9=worst.
+    int quality = 7; // 0..9.  0=best (very slow).  9=worst.
 };
 
 /**
@@ -28,110 +28,110 @@ struct AudioInfoLAME :  AudioBaseInfo  {
 class MP3EncoderLAME : public AudioEncoder {
 
 public:
-	MP3EncoderLAME(){
-		LOGD(LOG_METHOD);
-		enc = new liblame::MP3EncoderLAME();
-	}
+    MP3EncoderLAME(){
+        LOGD(LOG_METHOD);
+        enc = new liblame::MP3EncoderLAME();
+    }
 
-	MP3EncoderLAME(Stream &out_stream){
-		LOGD(LOG_METHOD);
-		enc = new liblame::MP3EncoderLAME(out_stream);
-	}
+    MP3EncoderLAME(Stream &out_stream){
+        LOGD(LOG_METHOD);
+        enc = new liblame::MP3EncoderLAME(out_stream);
+    }
 
-	~MP3EncoderLAME(){
-		LOGD(LOG_METHOD);
-		 delete enc;
-	 }
+    ~MP3EncoderLAME(){
+        LOGD(LOG_METHOD);
+         delete enc;
+     }
 
-	/// Defines the output stream
-	void setOutputStream(Print &out_stream){
-		LOGD(LOG_METHOD);
+    /// Defines the output stream
+    void setOutputStream(Print &out_stream){
+        LOGD(LOG_METHOD);
         enc->setOutput(out_stream);
     }
 
-	/// Defines the Audio Info
+    /// Defines the Audio Info
     void setAudioInfo(AudioBaseInfo from) {
-		LOGD(LOG_METHOD);
-		liblame::AudioInfo info;
-		info.channels = from.channels;
-		info.sample_rate = from.sample_rate;
-		info.bits_per_sample = from.bits_per_sample;
-		enc->setAudioInfo(info);
+        LOGD(LOG_METHOD);
+        liblame::AudioInfo info;
+        info.channels = from.channels;
+        info.sample_rate = from.sample_rate;
+        info.bits_per_sample = from.bits_per_sample;
+        enc->setAudioInfo(info);
     }
 
-	/// Defines the Audio Info
+    /// Defines the Audio Info
     
     void setAudioInfo(AudioInfoLAME from) {
-		LOGD(LOG_METHOD);
-		liblame::AudioInfo info;
-		info.channels = from.channels;
-		info.sample_rate = from.sample_rate;
-		info.bits_per_sample = from.bits_per_sample;
+        LOGD(LOG_METHOD);
+        liblame::AudioInfo info;
+        info.channels = from.channels;
+        info.sample_rate = from.sample_rate;
+        info.bits_per_sample = from.bits_per_sample;
         info.quality = from.quality;
-		enc->setAudioInfo(info);
+        enc->setAudioInfo(info);
     }
 
-	// starts the processing
-	void begin() {
-		enc->begin();
-	}
-
-	/**
-	 * @brief Opens the encoder  
-	 * 
-	 * @param info 
-	 * @return int 
-	 */
-	void begin(AudioInfoLAME info) {
-		LOGD(LOG_METHOD);
-		setAudioInfo(info);
+    // starts the processing
+    void begin() {
         enc->begin();
-	}
+    }
 
-	void begin(int input_channels, int input_sample_rate, int input_bits_per_sample) {
-		LOGD(LOG_METHOD);
+    /**
+     * @brief Opens the encoder  
+     * 
+     * @param info 
+     * @return int 
+     */
+    void begin(AudioInfoLAME info) {
+        LOGD(LOG_METHOD);
+        setAudioInfo(info);
+        enc->begin();
+    }
+
+    void begin(int input_channels, int input_sample_rate, int input_bits_per_sample) {
+        LOGD(LOG_METHOD);
         enc->begin(input_channels, input_sample_rate, input_bits_per_sample);
     }
 
     liblame::AudioInfo audioInfoEx(){
         return enc->audioInfo();
-	}
+    }
 
     AudioBaseInfo audioInfo(){
         liblame::AudioInfo from = enc->audioInfo();
-		AudioBaseInfo info;
-		info.channels = from.channels;
-		info.sample_rate = from.sample_rate;
-		info.bits_per_sample = from.bits_per_sample;
-		return info;
-	}
-	
-	// convert PCM data to convert into MP3
-	size_t write(const void *in_ptr, size_t in_size){
-		LOGD("write %d bytes", (int) in_size);
-		return enc->write((uint8_t*)in_ptr, in_size);
-	}
+        AudioBaseInfo info;
+        info.channels = from.channels;
+        info.sample_rate = from.sample_rate;
+        info.bits_per_sample = from.bits_per_sample;
+        return info;
+    }
+    
+    // convert PCM data to convert into MP3
+    size_t write(const void *in_ptr, size_t in_size){
+        LOGD("write %d bytes", (int) in_size);
+        return enc->write((uint8_t*)in_ptr, in_size);
+    }
 
-	// release resources
-	void end(){
-		LOGD(LOG_METHOD);
-		enc->end();
-	}
+    // release resources
+    void end(){
+        LOGD(LOG_METHOD);
+        enc->end();
+    }
 
-	liblame::MP3EncoderLAME *driver() {
-		return enc;
-	}
+    liblame::MP3EncoderLAME *driver() {
+        return enc;
+    }
 
-	const char *mime() {
-		return "audio/mp3";
-	}
+    const char *mime() {
+        return "audio/mp3";
+    }
 
-	virtual operator boolean() {
-		return (bool)(*enc);
-	}
+    virtual operator boolean() {
+        return (bool)(*enc);
+    }
 
 protected:
-	liblame::MP3EncoderLAME *enc=nullptr;
+    liblame::MP3EncoderLAME *enc=nullptr;
 
 };
 
