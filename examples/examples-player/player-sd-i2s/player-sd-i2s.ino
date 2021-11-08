@@ -40,7 +40,7 @@ void setup() {
 
   // setup player
   //source.setFileFilter("*Bob Dylan*");
-  player.setCallbackMetadata(printMetaData);
+  player.setMetadataCallback(printMetaData);
   player.begin();
 }
 
