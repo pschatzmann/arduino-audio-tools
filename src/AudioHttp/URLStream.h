@@ -25,25 +25,25 @@ class URLStreamDefault : public AbstractURLStream {
     public:
 
         URLStreamDefault(int readBufferSize=DEFAULT_BUFFER_SIZE){
-			LOGI(LOG_METHOD);
+            LOGI(LOG_METHOD);
             read_buffer = new uint8_t[readBufferSize];
         }
 
         URLStreamDefault(Client &clientPar, int readBufferSize=DEFAULT_BUFFER_SIZE){
-			LOGI(LOG_METHOD);
+            LOGI(LOG_METHOD);
             read_buffer = new uint8_t[readBufferSize];
             client = &clientPar;
         }
 
         URLStreamDefault(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE) {
-			LOGI(LOG_METHOD);
+            LOGI(LOG_METHOD);
             read_buffer = new uint8_t[readBufferSize];
             this->network = (char*)network;
             this->password = (char*)password;            
         }
 
         ~URLStreamDefault(){
-			LOGI(LOG_METHOD);
+            LOGI(LOG_METHOD);
             if (read_buffer!=nullptr){
                 delete[] read_buffer;
                 read_buffer = nullptr;
@@ -228,7 +228,7 @@ class URLStreamDefault : public AbstractURLStream {
                 while(request.available()==0){
                     // stop waiting if we got an error
                     if (request.reply().statusCode()>=300){
-						LOGE("Error code recieved ... stop waiting for reply");
+                        LOGE("Error code recieved ... stop waiting for reply");
                         break;
                     }
                     delay(500);
@@ -249,17 +249,17 @@ class URLStream : public URLStreamDefault {
     public:
         URLStream(int readBufferSize=DEFAULT_BUFFER_SIZE)
         :URLStreamDefault(readBufferSize){
-			LOGI(LOG_METHOD);
+            LOGI(LOG_METHOD);
         }
 
         URLStream(Client &clientPar, int readBufferSize=DEFAULT_BUFFER_SIZE)
         :URLStreamDefault(clientPar, readBufferSize){
-			LOGI(LOG_METHOD);
+            LOGI(LOG_METHOD);
         }
 
         URLStream(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE)
         :URLStreamDefault(network,password,readBufferSize) {            
-			LOGI(LOG_METHOD);
+            LOGI(LOG_METHOD);
         }
 };
 

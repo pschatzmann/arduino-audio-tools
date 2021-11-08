@@ -237,7 +237,7 @@ class WAVDecoder : public AudioDecoder {
          */
 
         WAVDecoder(){
-        	LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             this->audioBaseInfoSupport = nullptr;
         }
 
@@ -247,7 +247,7 @@ class WAVDecoder : public AudioDecoder {
          * @param out_stream Output Stream to which we write the decoded result
          */
         WAVDecoder(Print &out_stream, bool active=true){
-        	LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             this->out = &out_stream;
             this->audioBaseInfoSupport = nullptr;
             this->active = active;
@@ -261,15 +261,15 @@ class WAVDecoder : public AudioDecoder {
          */
 
         WAVDecoder(Print &out_stream, AudioBaseInfoDependent &bi){
-        	LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             this->out = &out_stream;
             this->audioBaseInfoSupport = &bi;
         }
 
         /// Defines the output Stream
-		void setOutputStream(Print &out_stream){
+        void setOutputStream(Print &out_stream){
             this->out = &out_stream;
-		}
+        }
 
         void setNotifyAudioChange(AudioBaseInfoDependent &bi){
             this->audioBaseInfoSupport = &bi;
@@ -277,13 +277,13 @@ class WAVDecoder : public AudioDecoder {
 
 
         void begin() {
-        	LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             isFirst = true;
             active = true;
         }
 
         void end() {
-        	LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             active = false;
         }
 
@@ -300,7 +300,7 @@ class WAVDecoder : public AudioDecoder {
         }
 
         virtual size_t write(const void *in_ptr, size_t in_size) {
-        	LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             size_t result = 0;
             if (active) {
                 if (isFirst){
@@ -352,7 +352,7 @@ class WAVDecoder : public AudioDecoder {
 
         /// Alternative API which provides the data from an input stream
         int readStream(Stream &in){
-        	LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             uint8_t buffer[READ_BUFFER_SIZE];
             int len = in.readBytes(buffer, READ_BUFFER_SIZE);
             return write(buffer, len);

@@ -35,7 +35,7 @@ class AudioPrint : public Print {
 
         // overwrite to do something useful
         virtual void setAudioInfo(AudioBaseInfo info) {
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             info.logInfo();
         }
 
@@ -70,18 +70,18 @@ class CsvStream : public AudioPrint, public AudioBaseInfoDependent {
         }
 
         void begin(){
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             this->active = true;
         }
 
         void begin(AudioBaseInfo info){
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             this->active = true;
             this->channels = info.channels;
         }
 
         void begin(int channels, Print &out=Serial){
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             this->channels = channels;
             this->out_ptr = &out;
             this->active = true;
@@ -89,20 +89,20 @@ class CsvStream : public AudioPrint, public AudioBaseInfoDependent {
 
         /// Sets the CsvStream as inactive 
         void end() {
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             active = false;
         }
 
         /// defines the number of channels
         virtual void setAudioInfo(AudioBaseInfo info) {
-	 		LOGI(LOG_METHOD);
+             LOGI(LOG_METHOD);
             info.logInfo();
             this->channels = info.channels;
         };
 
         virtual size_t write(const uint8_t* data, size_t len) {   
             if (!active) return 0;
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             size_t lenChannels = len / (sizeof(T)*channels); 
             data_ptr = (T*)data;
             for (int j=0;j<lenChannels;j++){
@@ -143,14 +143,14 @@ class HexDumpStream : public AudioPrint {
         }
 
         void begin(){
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             this->active = true;
             pos = 0;
         }
 
         /// Sets the CsvStream as inactive 
         void end() {
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             active = false;
         }
 
@@ -161,7 +161,7 @@ class HexDumpStream : public AudioPrint {
 
         virtual size_t write(const uint8_t* data, size_t len) {   
             if (!active) return 0;
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             for (size_t j=0;j<len;j++){
                 out_ptr->print(data[j], HEX);
                 out_ptr->print(" ");
@@ -198,7 +198,7 @@ class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource {
          * @param decoder 
          */
         EncodedAudioStream(Print &outputStream, AudioDecoder &decoder) {
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             decoder_ptr = &decoder;
             decoder_ptr->setOutputStream(outputStream);
             writer_ptr = decoder_ptr;
@@ -213,7 +213,7 @@ class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource {
          * @param decoder 
          */
         EncodedAudioStream(Print *outputStream, AudioDecoder *decoder) {
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             decoder_ptr = decoder;
             decoder_ptr->setOutputStream(*outputStream);
             writer_ptr = decoder_ptr;
@@ -227,7 +227,7 @@ class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource {
          * @param encoder 
          */
         EncodedAudioStream(Print &outputStream, AudioEncoder &encoder) {
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             encoder_ptr = &encoder;
             encoder_ptr->setOutputStream(outputStream);
             writer_ptr = encoder_ptr;
@@ -241,7 +241,7 @@ class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource {
          * @param encoder 
          */
         EncodedAudioStream(Print *outputStream, AudioEncoder *encoder) {
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             encoder_ptr = encoder;
             encoder_ptr->setOutputStream(*outputStream);
             writer_ptr = encoder_ptr;
@@ -253,7 +253,7 @@ class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource {
          * 
          */
         EncodedAudioStream(){
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             active = false;
         }
 
@@ -269,14 +269,14 @@ class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource {
 
         /// Define object which need to be notified if the basinfo is changing
         void setNotifyAudioChange(AudioBaseInfoDependent &bi) {
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             decoder_ptr->setNotifyAudioChange(bi);
         }
 
 
         /// Starts the processing - sets the status to active
         void begin(Print *outputStream, AudioEncoder *encoder) {
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             encoder_ptr = encoder;
             encoder_ptr->setOutputStream(*outputStream);
             writer_ptr = encoder_ptr;
@@ -285,7 +285,7 @@ class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource {
 
         /// Starts the processing - sets the status to active
         void begin(Print *outputStream, AudioDecoder *decoder) {
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             decoder_ptr = decoder;
             decoder_ptr->setOutputStream(*outputStream);
             writer_ptr = decoder_ptr;
@@ -294,7 +294,7 @@ class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource {
 
         /// Starts the processing - sets the status to active
         void begin() {
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             const CodecNOP *nop =  CodecNOP::instance();
             if (decoder_ptr != nop || encoder_ptr != nop){
                 decoder_ptr->begin();
@@ -307,7 +307,7 @@ class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource {
 
         /// Ends the processing
         void end() {
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             decoder_ptr->end();
             encoder_ptr->end();
             active = false;
@@ -315,7 +315,7 @@ class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource {
         
         /// encode the data
         virtual size_t write(const uint8_t *data, size_t len){
-	 		LOGD("%s: %zu", LOG_METHOD, len);
+             LOGD("%s: %zu", LOG_METHOD, len);
             if(len==0) {
                 return 0;
             }
@@ -375,7 +375,7 @@ class VolumeOutput : public AudioPrint {
 
         /// Assigns the final output 
         void begin(Print &out){
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             p_out = &out;
         }
 
@@ -391,7 +391,7 @@ class VolumeOutput : public AudioPrint {
 
         /// Writes raw PCM audio data, which will be the input for the volume control 
         virtual size_t write(const uint8_t *buffer, size_t size){
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             if (buffer==nullptr || p_out==nullptr){
                 LOGE("NPE");
                 return 0;
@@ -407,7 +407,7 @@ class VolumeOutput : public AudioPrint {
 
         /// Detines the Audio info - The bits_per_sample are critical to work properly!
         void setAudioInfo(AudioBaseInfo info){
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             this->info = info;
         }
 
@@ -429,7 +429,7 @@ class VolumeOutput : public AudioPrint {
             // round to 2 digits
             float value = (int)(vol * 100 + .5);
             volume_value = (float)value / 100;;
-	 		LOGI("setVolume: %f", volume_value);
+             LOGI("setVolume: %f", volume_value);
         }
 
         /// Provides the current volume setting

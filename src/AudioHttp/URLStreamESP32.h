@@ -15,18 +15,18 @@ namespace audio_tools {
 class BufferedTaskStream : public AudioStream {
     public:
         BufferedTaskStream() {
-			LOGI(LOG_METHOD);
+            LOGI(LOG_METHOD);
             createMutex();
         };
 
         BufferedTaskStream(AudioStream &input){
-			LOGI(LOG_METHOD);
+            LOGI(LOG_METHOD);
             createMutex();
             setInput(input);
         }
 
         ~BufferedTaskStream(){
-			LOGI(LOG_METHOD);
+            LOGI(LOG_METHOD);
             stop();
         }
 

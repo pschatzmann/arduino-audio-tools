@@ -185,7 +185,7 @@ class A2DPStream : public AudioStream, public AudioBaseInfoSource {
         /// Writes the data into a temporary send buffer - where it can be picked up by the callback
         virtual size_t write(const uint8_t* data, size_t len) {   
             if (a2dp_buffer==nullptr) return 0;
-	 		LOGD("%s: %zu", LOG_METHOD, len);
+             LOGD("%s: %zu", LOG_METHOD, len);
 
             // blocking write - we wait for space in buffer
             bool isBufferFull = true;
@@ -345,7 +345,7 @@ class A2DPStream : public AudioStream, public AudioBaseInfoSource {
                 delay(3);
 
                 // Priority: 22  on core 0
-			    // LOGI("Priority: %d  on core %d", uxTaskPriorityGet(NULL), xPortGetCoreID());
+                // LOGI("Priority: %d  on core %d", uxTaskPriorityGet(NULL), xPortGetCoreID());
 
             }
 

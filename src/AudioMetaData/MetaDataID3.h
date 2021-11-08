@@ -28,9 +28,9 @@ struct ID3v1 {
     char album[30];
     char year[4];
     char comment[30];
-    char zero_byte[1];	
-    char track[1];	
-    char genre;	
+    char zero_byte[1];    
+    char track[1];    
+    char genre;    
 };
 
 
@@ -41,7 +41,7 @@ struct ID3v1Enhanced {
     char artist[60];
     char album[60];
     char speed;
-    char genre[30];	
+    char genre[30];    
     char start[6];
     char end[6];
 };

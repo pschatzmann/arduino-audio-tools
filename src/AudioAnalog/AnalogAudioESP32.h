@@ -171,7 +171,7 @@ class AnalogAudio  : public AudioStream {
 
     /// updates the sample rate dynamically 
     virtual void setAudioInfo(AudioBaseInfo info) {
-	 		  LOGI(LOG_METHOD);
+               LOGI(LOG_METHOD);
         if (adc_config.sample_rate != info.sample_rate
             || adc_config.channels != info.channels
             || adc_config.bits_per_sample != info.bits_per_sample) {
