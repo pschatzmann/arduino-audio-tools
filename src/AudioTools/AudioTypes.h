@@ -138,9 +138,12 @@ class CodecNOP : public  AudioDecoder, public AudioEncoder {
             return 0; 
         };
 
+        // just output silence
 	      virtual size_t write(const void *in_ptr, size_t in_size) {
-            return 0;           
+            memset((void*)in_ptr,0,in_size);
+            return in_size;           
         }
+
         virtual const char *mime() {
             return nullptr;
         }

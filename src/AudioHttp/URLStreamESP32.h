@@ -1,5 +1,6 @@
 #pragma once
-#ifdef ESP32
+#include "AudioConfig.h"
+#ifdef USE_URLSTREAM_TASK
 #include "AudioTools/AudioStreams.h"
 #include "AudioHttp/URLStream.h"
 
@@ -14,22 +15,22 @@ namespace audio_tools {
 class BufferedTaskStream : public AudioStream {
     public:
         BufferedTaskStream() {
-			LOGD(LOG_METHOD);
+			LOGI(LOG_METHOD);
             createMutex();
         };
 
         BufferedTaskStream(AudioStream &input){
-			LOGD(LOG_METHOD);
+			LOGI(LOG_METHOD);
             createMutex();
             setInput(input);
         }
 
         ~BufferedTaskStream(){
-			LOGD(LOG_METHOD);
+			LOGI(LOG_METHOD);
             stop();
         }
 
-        void begin(bool wait=true) {
+        virtual void begin(bool wait=true) override {
             LOGD(LOG_METHOD);
             active=true;
             ready = false;
@@ -37,54 +38,54 @@ class BufferedTaskStream : public AudioStream {
             if (!wait) ready=true;
         }
 
-        void end() {
+        virtual void end() override {
             LOGD(LOG_METHOD);
             if (xHandle!=NULL) vTaskDelete( xHandle );
             active = false;
             ready = false;
         }
 
-        void setInput(AudioStream &input){
+        virtual void setInput(AudioStream &input) {
             LOGD(LOG_METHOD);
             p_stream = &input;
         }
 
         /// writes a byte to the buffer
-        virtual size_t write(uint8_t c) {
+        virtual size_t write(uint8_t c) override {
             return 0;
         }
 
         /// Use this method: write an array
-        virtual size_t write(const uint8_t* data, size_t len) {    
+        virtual size_t write(const uint8_t* data, size_t len) override {    
             return 0;
         }
 
         /// empties the buffer
-        virtual void flush() {
+        virtual void flush() override {
         }
 
         /// reads a byte - to be avoided
-        virtual int read() {
+        virtual int read() override {
             if (!ready) return -1;
             int result = -1;
-            //xSemaphoreTake(mutex, portMAX_DELAY);
+            xSemaphoreTake(mutex, portMAX_DELAY);
             result = buffers.read();
-            //xSemaphoreGive(mutex);
+            xSemaphoreGive(mutex);
             return result;
         }
 
         /// peeks a byte - to be avoided
-        virtual int peek() {
+        virtual int peek() override {
             if (!ready) return -1;
             int result = -1;
-            //xSemaphoreTake(mutex, portMAX_DELAY);
+            xSemaphoreTake(mutex, portMAX_DELAY);
             result = buffers.peek();
-            //xSemaphoreGive(mutex);
+            xSemaphoreGive(mutex);
             return result;
         };
         
         /// Use this method !!
-        size_t readBytes( uint8_t *data, size_t length) { 
+        virtual size_t readBytes( uint8_t *data, size_t length) override { 
             if (!ready) return 0;
             size_t result = 0;
             xSemaphoreTake(mutex, portMAX_DELAY);
@@ -97,7 +98,7 @@ class BufferedTaskStream : public AudioStream {
         }
 
         /// Returns the available bytes in the buffer: to be avoided
-        virtual int available() {
+        virtual int available() override {
             if (!ready) return 0;
             int result = 0;
             xSemaphoreTake(mutex, portMAX_DELAY);
@@ -185,6 +186,7 @@ class URLStream : public AbstractURLStream {
 
         bool begin(const char* urlStr, const char* acceptMime=nullptr, MethodID action=GET,  const char* reqMime="", const char*reqData="") {
             LOGD(LOG_METHOD);
+            // start real stream
             bool result = p_urlStream->begin(urlStr, acceptMime, action,reqMime, reqData );
             // start buffer task
             taskStream.begin();

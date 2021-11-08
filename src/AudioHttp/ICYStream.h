@@ -1,5 +1,6 @@
 #pragma once
 
+#include "AudioConfig.h"
 #include "AudioHttp/URLStreamESP32.h"
 #include "AudioMetaData/MetaDataICY.h"
 
@@ -19,7 +20,7 @@ class ICYStreamDefault : public AbstractURLStream {
     public:
         /// Default constructor
         ICYStreamDefault(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE) {
-			LOGD(LOG_METHOD);
+			LOGI(LOG_METHOD);
             url = new URLStreamDefault(network, password, readBufferSize);
             if (url==nullptr){
                 LOGE("Not enough memory!");
@@ -27,12 +28,12 @@ class ICYStreamDefault : public AbstractURLStream {
         }
 
         ~ICYStreamDefault(){
-			LOGD(LOG_METHOD);
+			LOGI(LOG_METHOD);
             if (url!=nullptr) delete url;
         }
 
         /// Defines the meta data callback function
-        bool setMetadataCallback(void (*fn)(MetaDataType info, const char* str, int len)) override {
+        virtual bool setMetadataCallback(void (*fn)(MetaDataType info, const char* str, int len)) override {
 			LOGD(LOG_METHOD);
             callback = fn;
             icy.setCallback(fn);
@@ -40,7 +41,7 @@ class ICYStreamDefault : public AbstractURLStream {
         }
 
         // Icy http get request to the indicated url 
-        bool begin(const char* urlStr, const char* acceptMime=nullptr, MethodID action=GET,  const char* reqMime="", const char*reqData="") {
+        virtual bool begin(const char* urlStr, const char* acceptMime=nullptr, MethodID action=GET,  const char* reqMime="", const char*reqData="") override {
 			LOGD(LOG_METHOD);
             // accept metadata
             url->httpRequest().header().put("Icy-MetaData","1");
@@ -63,14 +64,19 @@ class ICYStreamDefault : public AbstractURLStream {
         }
 
         /// Ends the processing
-        void end() {
+        virtual void end() override {
 			LOGD(LOG_METHOD);
             url->end();
             icy.end();
         }
 
+        /// provides the available method from the URLStreamDefault
+        virtual int available() override  {
+            return url->available();
+        }
+
         /// reads the audio bytes
-        size_t readBytes(uint8_t* buffer, size_t len) override {
+        virtual size_t readBytes(uint8_t* buffer, size_t len) override {
             size_t result = 0;
             if (icy.hasMetaData()){
                 // wait for data
@@ -79,7 +85,7 @@ class ICYStreamDefault : public AbstractURLStream {
                 }    
 
                 // access using state engine
-                for (size_t j=0;j<len;j++){
+                for (size_t j=0; j<len; j++){
                     int ch = read();
                     if (ch==-1){
                         break;
@@ -88,29 +94,25 @@ class ICYStreamDefault : public AbstractURLStream {
                     buffer[j] = ch;
                 }
             } else {
-                // fast access if there is no metadata
-                result = url->readBytes(buffer, len);
+                 // fast access if there is no metadata
+                 result = url->readBytes(buffer, len);
             }
 			LOGD("%s: %zu -> %zu", LOG_METHOD, len, result);
             return result;
         }
 
-        /// provides the available method from the URLStreamDefault
-        int available() override  {
-            return url->available();
-        }
 
         /// Not Supported!
-        int peek() override {
+        virtual int peek() override {
             LOGE("not supported");
             return -1;
         }
 
         // Read character and processes using the MetaDataICY state engine
-        int read() override {
-            int ch = 0;
+        virtual int read() override {
+            int ch = -1;
 
-            // get next single data byte 
+            // get next data byte 
             do {
                 ch = url->read();
                 if (ch==-1){
@@ -118,7 +120,7 @@ class ICYStreamDefault : public AbstractURLStream {
                 }
 
                 icy.processChar(ch);
-                yield();
+                //yield();
             } while (!icy.isData());
             return ch;
         }
@@ -133,8 +135,12 @@ class ICYStreamDefault : public AbstractURLStream {
             return 0;
         }
 
+        operator bool() {
+            return *url;
+        }
+
         /// provides access to the HttpRequest
-        HttpRequest &httpRequest(){
+        virtual HttpRequest &httpRequest() override {
             return url->httpRequest();
         }
 
@@ -146,7 +152,7 @@ class ICYStreamDefault : public AbstractURLStream {
 
 };
 
-#ifndef XXESP32
+#ifndef USE_URLSTREAM_TASK
 /**
  * @brief ICYStream for all environment except ESP32
  * @author Phil Schatzmann
@@ -156,6 +162,7 @@ class ICYStream : public ICYStreamDefault {
     public:
         ICYStream(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE)
         :ICYStreamDefault(network,password,readBufferSize) {            
+            LOGI(LOG_METHOD);
         }
 };
 

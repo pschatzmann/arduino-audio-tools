@@ -26,13 +26,14 @@ class MetaDataPrint : public Print {
     }
 
     /// Defines the callback
-    void setCallback(void (*fn)(MetaDataType info, const char* str, int len)) {
+    virtual void setCallback(void (*fn)(MetaDataType info, const char* str, int len)) {
         LOGD(LOG_METHOD);
         callback = fn; 
     }
 
     /// Starts the processing - iceMetaint is determined from the HttpRequest
-    void begin(HttpRequest &http) {
+    virtual void begin(HttpRequest &http) {
+        LOGD(LOG_METHOD);
         ICYUrlSetup icySetup;
         int metaInt = icySetup.setup(http);
         icySetup.executeCallback(callback);
@@ -40,7 +41,7 @@ class MetaDataPrint : public Print {
     }
 
     /// Starts the processing - if iceMetaint is defined we use icecast
-    void begin(int iceMetaint=0) {
+    virtual void begin(int iceMetaint=0) {
         LOGD("%s: %d", LOG_METHOD, iceMetaint);
         if (callback!=nullptr){
             if (meta == nullptr) {
@@ -54,7 +55,7 @@ class MetaDataPrint : public Print {
         }
     }
 
-    void end() {
+    virtual void end() {
         if (callback!=nullptr & meta != nullptr) {
             LOGD(LOG_METHOD);
             meta->end();
