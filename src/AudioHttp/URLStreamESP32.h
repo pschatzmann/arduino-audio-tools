@@ -30,7 +30,7 @@ class BufferedTaskStream : public AudioStream {
             stop();
         }
 
-        virtual void begin(bool wait=true) override {
+        virtual void begin(bool wait=true)  {
             LOGD(LOG_METHOD);
             active=true;
             ready = false;
@@ -38,7 +38,7 @@ class BufferedTaskStream : public AudioStream {
             if (!wait) ready=true;
         }
 
-        virtual void end() override {
+        virtual void end()  {
             LOGD(LOG_METHOD);
             if (xHandle!=NULL) vTaskDelete( xHandle );
             active = false;
