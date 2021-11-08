@@ -46,7 +46,7 @@ class PWMAudioStreamPico : public PWMAudioStreamBase {
 
         /// Ends the output -> resets the timer and the pins
         void end(){
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             if (!cancel_repeating_timer(&timer)){
                 LOGE("cancel_repeating_timer failed")
             }
@@ -64,7 +64,7 @@ class PWMAudioStreamPico : public PWMAudioStreamBase {
 
         // setup pwm config and all pins
         void setupPWM(){
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             pwm_config cfg = setupPWMConfig();
             
             // initialize empty pins
@@ -91,7 +91,7 @@ class PWMAudioStreamPico : public PWMAudioStreamBase {
 
         // defines the pwm_config which will be used to drive the pins
         pwm_config setupPWMConfig() {
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             // setup pwm frequency
             pwm_config pico_pwm_config = pwm_get_default_config();
             int wrap_value = maxOutputValue(); // amplitude of square wave (pwm values -amplitude to amplitude) for one byte
@@ -107,7 +107,7 @@ class PWMAudioStreamPico : public PWMAudioStreamBase {
 
         // set up pwm 
         void setupPWMPin(pwm_config &cfg, PicoChannelOut &pinInfo){
-	 		LOGD("%s for gpio %d",LOG_METHOD, pinInfo.gpio);
+             LOGD("%s for gpio %d",LOG_METHOD, pinInfo.gpio);
             // setup pwm pin  
             int gpio = pinInfo.gpio;
             gpio_set_function(gpio, GPIO_FUNC_PWM);
@@ -120,7 +120,7 @@ class PWMAudioStreamPico : public PWMAudioStreamBase {
         }
 
         void setupTimer(){
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             // setup timer
             uint32_t time = 1000000UL / audio_config.sample_rate;
             LOGI("->Timer value %ld us", time);

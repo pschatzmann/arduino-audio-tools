@@ -75,7 +75,7 @@ enum I2SFormat {
  */
 class AudioWriter {
   public: 
-	    virtual size_t write(const void *in_ptr, size_t in_size) = 0;
+        virtual size_t write(const void *in_ptr, size_t in_size) = 0;
       virtual operator boolean() = 0;
 };
 
@@ -87,7 +87,7 @@ class AudioDecoder : public AudioWriter, public  AudioBaseInfoSource {
   public: 
       AudioDecoder() = default;
       virtual ~AudioDecoder() = default;
-  		virtual void setOutputStream(Print &out_stream) = 0;
+          virtual void setOutputStream(Print &out_stream) = 0;
       virtual void begin() = 0;
       virtual void end() = 0;
       virtual AudioBaseInfo audioInfo() = 0;
@@ -102,7 +102,7 @@ class AudioEncoder : public AudioWriter {
   public: 
       AudioEncoder() = default;
       virtual ~AudioEncoder() = default;
-  		virtual void setOutputStream(Print &out_stream) = 0;
+          virtual void setOutputStream(Print &out_stream) = 0;
       virtual void setAudioInfo(AudioBaseInfo info) = 0;
       virtual void begin() = 0;
       virtual void end() = 0;
@@ -123,7 +123,7 @@ class CodecNOP : public  AudioDecoder, public AudioEncoder {
 
         virtual void begin() {}
         virtual void end() {}
-  	    virtual void setOutputStream(Print &out_stream) {}
+          virtual void setOutputStream(Print &out_stream) {}
         virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi) {}
         virtual void setAudioInfo(AudioBaseInfo info) {}
 
@@ -138,9 +138,12 @@ class CodecNOP : public  AudioDecoder, public AudioEncoder {
             return 0; 
         };
 
-	      virtual size_t write(const void *in_ptr, size_t in_size) {
-            return 0;           
+        // just output silence
+          virtual size_t write(const void *in_ptr, size_t in_size) {
+            memset((void*)in_ptr,0,in_size);
+            return in_size;           
         }
+
         virtual const char *mime() {
             return nullptr;
         }

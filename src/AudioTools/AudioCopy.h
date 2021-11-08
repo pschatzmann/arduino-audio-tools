@@ -245,11 +245,11 @@ class StreamCopyT {
 class StreamCopy : public StreamCopyT<uint8_t> {
     public:
         StreamCopy(int buffer_size=DEFAULT_BUFFER_SIZE): StreamCopyT<uint8_t>(buffer_size) {            
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
         }
 
         StreamCopy(Print &to, Stream &from, int buffer_size=DEFAULT_BUFFER_SIZE) : StreamCopyT<uint8_t>(to, from, buffer_size){
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
         }
 
         /// copies a buffer length of data and applies the converter

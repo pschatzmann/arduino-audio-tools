@@ -37,7 +37,7 @@ public:
     }
 
     int writeArray(const T data[], int len){
-	 	LOGD("writeArray: %d", len);
+         LOGD("writeArray: %d", len);
         int result = 0;
         for (int j=0;j<len;j++){
             if (write(data[j])==0){

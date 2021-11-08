@@ -15,7 +15,7 @@
 
 using namespace audio_tools;  
 
-URLStream url("ssid","password");
+ICYStream url("ssid","password");
 MetaDataPrint out; // final output of decoded stream
 StreamCopy copier(out, url); // copy url to decoder
 
@@ -26,7 +26,6 @@ void printMetaData(MetaDataType type, const char* str, int len){
   Serial.print(": ");
   Serial.println(str);
 }
-
 
 void setup(){
   Serial.begin(115200);

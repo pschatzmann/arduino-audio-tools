@@ -8,9 +8,12 @@
 #else 
 #include <WiFiClientSecure.h>
 #endif
+
 #include "AudioHttp/HttpRequest.h"
+#include "AudioHttp/AbstractURLStream.h"
 
 namespace audio_tools {
+
 
 /**
  * @brief Represents the content of a URL as Stream. We use the WiFi.h API
@@ -18,25 +21,29 @@ namespace audio_tools {
  * @copyright GPLv3
  * 
  */
-class URLStreamDefault : public AudioStream {
+class URLStreamDefault : public AbstractURLStream {
     public:
 
         URLStreamDefault(int readBufferSize=DEFAULT_BUFFER_SIZE){
+            LOGI(LOG_METHOD);
             read_buffer = new uint8_t[readBufferSize];
         }
 
         URLStreamDefault(Client &clientPar, int readBufferSize=DEFAULT_BUFFER_SIZE){
+            LOGI(LOG_METHOD);
             read_buffer = new uint8_t[readBufferSize];
             client = &clientPar;
         }
 
         URLStreamDefault(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE) {
+            LOGI(LOG_METHOD);
             read_buffer = new uint8_t[readBufferSize];
             this->network = (char*)network;
             this->password = (char*)password;            
         }
 
         ~URLStreamDefault(){
+            LOGI(LOG_METHOD);
             if (read_buffer!=nullptr){
                 delete[] read_buffer;
                 read_buffer = nullptr;
@@ -53,8 +60,8 @@ class URLStreamDefault : public AudioStream {
         }
 
 
-        bool begin(const char* urlStr, const char* acceptMime=nullptr, MethodID action=GET,  const char* reqMime="", const char*reqData="") {
-            LOGI( "URLStream.begin %s",urlStr);
+        virtual bool begin(const char* urlStr, const char* acceptMime=nullptr, MethodID action=GET,  const char* reqMime="", const char*reqData="")  override{
+            LOGI( "%s: %s",LOG_METHOD, urlStr);
             
             url.setUrl(urlStr);
             int result = -1;
@@ -78,12 +85,17 @@ class URLStreamDefault : public AudioStream {
             return active;
         }
 
-        virtual int available() {
+        virtual void end() override {
+            active = false;
+            request.stop();
+        }
+
+        virtual int available() override {
             if (!active) return 0;
             return request.available();
         }
 
-        virtual size_t readBytes(uint8_t *buffer, size_t length){
+        virtual size_t readBytes(uint8_t *buffer, size_t length) override {
             if (!active) return -1;
 
             size_t read = request.read((uint8_t*)buffer, length);
@@ -91,7 +103,7 @@ class URLStreamDefault : public AudioStream {
             return read;
         }
 
-        virtual int read() {
+        virtual int read() override {
             if (!active) return -1;
 
             fillBuffer();
@@ -99,28 +111,24 @@ class URLStreamDefault : public AudioStream {
             return isEOS() ? -1 :read_buffer[read_pos++];
         }
 
-        virtual int peek() {
+        virtual int peek() override {
             if (!active) return -1;
 
             fillBuffer();
             return isEOS() ? -1 : read_buffer[read_pos];
         }
 
-        virtual void flush(){
+        virtual void flush() override {
         }
 
-        size_t write(uint8_t) {
+        virtual size_t write(uint8_t) override {
             LOGE("URLStream write - not supported");
             return 0;
         }
 
-        void end(){
-            active = false;
-            request.stop();
-        }
 
         /// provides access to the HttpRequest
-        HttpRequest &httpRequest(){
+        virtual HttpRequest &httpRequest() override {
             return request;
         }
 
@@ -129,9 +137,9 @@ class URLStreamDefault : public AudioStream {
         }
 
         /// Defines the client timeout
-        void setTimeout(int ms){
+        virtual void setTimeout(int ms){
             clientTimeout = ms;
-        }
+         }
 
 
     protected:
@@ -183,11 +191,10 @@ class URLStreamDefault : public AudioStream {
             }
             if (clientInsecure==nullptr){
                 clientInsecure = new WiFiClient();
+                LOGI("WiFiClient");
             }
-            LOGI("WiFiClient");
             return *clientInsecure;
         }
-
 
         inline void fillBuffer() {
             if (isEOS()){
@@ -221,7 +228,7 @@ class URLStreamDefault : public AudioStream {
                 while(request.available()==0){
                     // stop waiting if we got an error
                     if (request.reply().statusCode()>=300){
-						LOGE("Error code recieved ... stop waiting for reply");
+                        LOGE("Error code recieved ... stop waiting for reply");
                         break;
                     }
                     delay(500);
@@ -230,19 +237,29 @@ class URLStreamDefault : public AudioStream {
             return request.available()>0;
         }
 };
-#ifndef ESP32
+
+#ifndef USE_URLSTREAM_TASK
+
+/**
+ * @brief URLStream implementation for all envionments except ESP32
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
 class URLStream : public URLStreamDefault {
     public:
         URLStream(int readBufferSize=DEFAULT_BUFFER_SIZE)
         :URLStreamDefault(readBufferSize){
+            LOGI(LOG_METHOD);
         }
 
         URLStream(Client &clientPar, int readBufferSize=DEFAULT_BUFFER_SIZE)
         :URLStreamDefault(clientPar, readBufferSize){
+            LOGI(LOG_METHOD);
         }
 
         URLStream(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE)
         :URLStreamDefault(network,password,readBufferSize) {            
+            LOGI(LOG_METHOD);
         }
 };
 

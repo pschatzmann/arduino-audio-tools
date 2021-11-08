@@ -33,7 +33,7 @@ class PWMAudioStreamAVR : public PWMAudioStreamBase {
 
         // Ends the output
         virtual void end(){
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             noInterrupts(); 
             // stop timer callback
             TCCR1B = 0;
@@ -46,7 +46,7 @@ class PWMAudioStreamAVR : public PWMAudioStreamBase {
 
         /// Setup AVR timer with callback
         void setupTimer() {
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             // CPU Frequency 16 MHz
             // prescaler 1, 256 or 1024 => no prescaling
             uint32_t steps = F_CPU / 8 / audio_config.sample_rate;  // e.g. (16000000/8/44100=>45)

@@ -18,7 +18,7 @@ class AudioStream : public Stream, public AudioBaseInfoDependent {
     public:
         // overwrite to do something useful
         virtual void setAudioInfo(AudioBaseInfo info) {
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             info.logInfo();
         }
 
@@ -36,14 +36,14 @@ class AudioStream : public Stream, public AudioBaseInfoDependent {
 class MemoryStream : public AudioStream {
     public: 
         MemoryStream(int buffer_size = 512){
-	 		LOGD("MemoryStream: %d", buffer_size);
+             LOGD("MemoryStream: %d", buffer_size);
             this->buffer_size = buffer_size;
             this->buffer = new uint8_t[buffer_size];
             this->owns_buffer = true;
         }
 
         MemoryStream(const uint8_t *buffer, int buffer_size){
-	 		LOGD("MemoryStream: %d", buffer_size);
+             LOGD("MemoryStream: %d", buffer_size);
             this->buffer_size = buffer_size;
             this->write_pos = buffer_size;
             this->buffer = (uint8_t*)buffer;
@@ -51,13 +51,13 @@ class MemoryStream : public AudioStream {
         }
 
         ~MemoryStream(){
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             if (owns_buffer) delete[] buffer;
         }
 
         // resets the read pointer
         void begin() {
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             write_pos = buffer_size;
             read_pos = 0;
         }
@@ -149,7 +149,7 @@ template <class T>
 class GeneratedSoundStream : public AudioStream, public AudioBaseInfoSource {
     public:
         GeneratedSoundStream(SoundGenerator<T> &generator){
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             this->generator_ptr = &generator;
         }
 
@@ -159,7 +159,7 @@ class GeneratedSoundStream : public AudioStream, public AudioBaseInfoSource {
         
         /// start the processing
         void begin() {
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             generator_ptr->begin();
             if (audioBaseInfoDependent!=nullptr) audioBaseInfoDependent->setAudioInfo(generator_ptr->audioInfo());
             active = true;
@@ -167,7 +167,7 @@ class GeneratedSoundStream : public AudioStream, public AudioBaseInfoSource {
 
         /// start the processing
         void begin(AudioBaseInfo cfg) {
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             generator_ptr->begin(cfg);
             if (audioBaseInfoDependent!=nullptr) audioBaseInfoDependent->setAudioInfo(generator_ptr->audioInfo());
             active = true;
@@ -175,7 +175,7 @@ class GeneratedSoundStream : public AudioStream, public AudioBaseInfoSource {
 
         /// stop the processing
         void end() {
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             generator_ptr->stop();
             active = false;
         }
@@ -253,12 +253,12 @@ class GeneratedSoundStream : public AudioStream, public AudioBaseInfoSource {
 class BufferedStream : public AudioStream {
     public:
         BufferedStream(size_t buffer_size){
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             buffer = new SingleBuffer<uint8_t>(buffer_size);
         }
 
         ~BufferedStream() {
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             if (buffer!=nullptr){
                 delete buffer;
             }
@@ -274,7 +274,7 @@ class BufferedStream : public AudioStream {
 
         /// Use this method: write an array
         virtual size_t write(const uint8_t* data, size_t len) {    
-	 		LOGD("%s: %zu", LOG_METHOD, len);
+             LOGD("%s: %zu", LOG_METHOD, len);
             flush();
             return writeExt(data, len);
         }
@@ -435,7 +435,7 @@ class RingBufferStream : public AudioStream {
             return buffer->writeArray(data, len);
         }
         
-        virtual size_t 	write(uint8_t c) {
+        virtual size_t     write(uint8_t c) {
             return buffer->write(c);
         }
 
@@ -454,7 +454,7 @@ class RingBufferStream : public AudioStream {
 class ExternalBufferStream : public AudioStream {
     public:
         ExternalBufferStream() {
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
         }
 
         virtual int available (){
