@@ -93,7 +93,7 @@ class HttpHeader {
                 }
 
                 // log entry
-                LOGI("HttpHeader::put -> '%s' : '%s'", key, value);
+                LOGD("HttpHeader::put -> '%s' : '%s'", key, value);
 
                 hl->value = value;
                 hl->active = true;
@@ -440,7 +440,7 @@ class HttpReplyHeader : public HttpHeader  {
         // we just update the pointers to point to the correct position in the
         // http_status_line
         void parse1stLine(const char *line){
-            LOGI("HttpReplyHeader::parse1stLine: %s",line);
+            LOGD("HttpReplyHeader::parse1stLine: %s",line);
             Str line_str(line);
             int space1 = line_str.indexOf(' ',0);
             int space2 = line_str.indexOf(' ',space1+1);

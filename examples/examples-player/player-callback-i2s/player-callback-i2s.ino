@@ -61,7 +61,7 @@ void setup() {
   i2s.begin(cfg);
 
   // setup player
-  player.setCallbackMetadata(callbackPrintMetaData);
+  player.setMetadataCallback(callbackPrintMetaData);
   player.begin();
 }
 
