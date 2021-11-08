@@ -233,7 +233,7 @@ class NoiseGenerator : public SoundGenerator<T> {
 
         /// Provides a single sample
         T readSample() {
-        	return  ((rand() % (static_cast<T>(2 * scale)) - scale)); // generate number between  -scale / scale
+            return  ((rand() % (static_cast<T>(2 * scale)) - scale)); // generate number between  -scale / scale
         }
 
     protected:
@@ -259,7 +259,7 @@ class SilenceGenerator : public SoundGenerator<T> {
 
         /// Provides a single sample
         T readSample() {
-        	return  0; // return 0
+            return  0; // return 0
         }
 
     protected:

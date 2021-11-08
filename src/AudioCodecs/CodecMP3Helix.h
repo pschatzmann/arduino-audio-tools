@@ -21,7 +21,7 @@ class MP3DecoderHelix : public AudioDecoder  {
     public:
 
         MP3DecoderHelix() {
-        	LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             mp3 = new libhelix::MP3DecoderHelix();
             if (mp3==nullptr){
                 LOGE("Not enough memory for libhelix");
@@ -33,7 +33,7 @@ class MP3DecoderHelix : public AudioDecoder  {
          * @param out_stream 
          */
         MP3DecoderHelix(Print &out_stream){
-        	LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             mp3 = new libhelix::MP3DecoderHelix();
             if (mp3==nullptr){
                 LOGE("Not enough memory for libhelix");
@@ -49,7 +49,7 @@ class MP3DecoderHelix : public AudioDecoder  {
          * @param bi 
          */
         MP3DecoderHelix(Print &out_stream, AudioBaseInfoDependent &bi){
-        	LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             mp3 = new libhelix::MP3DecoderHelix();
             if (mp3==nullptr){
                 LOGE("Not enough memory for libhelix");
@@ -67,13 +67,13 @@ class MP3DecoderHelix : public AudioDecoder  {
         }
 
         /// Defines the output Stream
-		virtual void setOutputStream(Print &outStream){
+        virtual void setOutputStream(Print &outStream){
             if (mp3!=nullptr) mp3->setOutput(outStream);
-		}
+        }
 
         /// Starts the processing
         void begin(){
-        	LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             if (mp3!=nullptr) {
                 mp3->setDelay(CODEC_DELAY_MS);   
                 mp3->begin();
@@ -82,7 +82,7 @@ class MP3DecoderHelix : public AudioDecoder  {
 
         /// Releases the reserved memory
         void end(){
-        	LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             if (mp3!=nullptr) mp3->end();
         }
 
@@ -101,7 +101,7 @@ class MP3DecoderHelix : public AudioDecoder  {
 
         /// Write mp3 data to decoder
         size_t write(const void* mp3Data, size_t len) {
-        	LOGD("%s: %zu", LOG_METHOD, len);
+            LOGD("%s: %zu", LOG_METHOD, len);
             return mp3==nullptr ? 0 : mp3->write(mp3Data, len);
         }
 
@@ -120,7 +120,7 @@ class MP3DecoderHelix : public AudioDecoder  {
 
         /// Defines the callback object to which the Audio information change is provided
         void setNotifyAudioChange(AudioBaseInfoDependent &bi){
-        	LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             audioChangeMP3Helix = &bi;
             if (mp3!=nullptr)  mp3->setInfoCallback(infoCallback);
         }
@@ -128,7 +128,7 @@ class MP3DecoderHelix : public AudioDecoder  {
         /// notifies the subscriber about a change
         static void infoCallback(MP3FrameInfo &i){
             if (audioChangeMP3Helix!=nullptr){
-            	LOGD(LOG_METHOD);
+                LOGD(LOG_METHOD);
                 AudioBaseInfo baseInfo;
                 baseInfo.channels = i.nChans;
                 baseInfo.sample_rate = i.samprate;

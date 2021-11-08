@@ -51,7 +51,7 @@ class TimerAlarmRepeatingAVR : public TimerAlarmRepeatingDef {
 
         // ends the timer and if necessary the task
         bool end() override {
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             noInterrupts(); 
             // end timer callback
             TCCR1B = 0;
@@ -68,7 +68,7 @@ class TimerAlarmRepeatingAVR : public TimerAlarmRepeatingDef {
         repeating_timer_callback_t callback = nullptr;
 
         void setupTimer(uint64_t sample_rate) {
-	 		LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             // CPU Frequency 16 MHz
             // prescaler 1, 256 or 1024 => no prescaling
             uint32_t steps = F_CPU / 8 / sample_rate;  // e.g. (16000000/8/44100=>45)

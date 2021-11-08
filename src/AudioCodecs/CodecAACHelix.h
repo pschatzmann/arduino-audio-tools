@@ -21,7 +21,7 @@ class AACDecoderHelix : public AudioDecoder  {
     public:
 
         AACDecoderHelix() {
-        	LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             aac = new libhelix::AACDecoderHelix();
             if (aac==nullptr){
                 LOGE("Not enough memory for libhelix");
@@ -33,7 +33,7 @@ class AACDecoderHelix : public AudioDecoder  {
          * @param out_stream 
          */
         AACDecoderHelix(Print &out_stream){
-        	LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             aac = new libhelix::AACDecoderHelix(out_stream);
             if (aac==nullptr){
                 LOGE("Not enough memory for libhelix");
@@ -48,7 +48,7 @@ class AACDecoderHelix : public AudioDecoder  {
          * @param bi 
          */
         AACDecoderHelix(Print &out_stream, AudioBaseInfoDependent &bi){
-        	LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             aac = new libhelix::AACDecoderHelix(out_stream);
             if (aac==nullptr){
                 LOGE("Not enough memory for libhelix");
@@ -61,19 +61,19 @@ class AACDecoderHelix : public AudioDecoder  {
          * 
          */
         ~AACDecoderHelix(){
-         	LOGD(LOG_METHOD);
+             LOGD(LOG_METHOD);
             if (aac!=nullptr) delete aac;
         }
 
         /// Defines the output Stream
-		virtual void setOutputStream(Print &out_stream){
-        	LOGD(LOG_METHOD);
+        virtual void setOutputStream(Print &out_stream){
+            LOGD(LOG_METHOD);
             if (aac!=nullptr) aac->setOutput(out_stream);
-		}
+        }
 
         /// Starts the processing
         void begin(){
-        	LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             if (aac!=nullptr) {
                 aac->setDelay(CODEC_DELAY_MS);
                 aac->begin();
@@ -82,7 +82,7 @@ class AACDecoderHelix : public AudioDecoder  {
 
         /// Releases the reserved memory
         virtual void end(){
-        	LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             if (aac!=nullptr) aac->end();
         }
 
@@ -91,12 +91,12 @@ class AACDecoderHelix : public AudioDecoder  {
         }
 
         virtual AudioBaseInfo audioInfo(){
-        	AudioBaseInfo result;
-			auto i = audioInfoEx();
-			result.channels = i.nChans;
-			result.sample_rate = i.sampRateOut;
-			result.bits_per_sample = i.bitsPerSample;
-			return result;
+            AudioBaseInfo result;
+            auto i = audioInfoEx();
+            result.channels = i.nChans;
+            result.sample_rate = i.sampRateOut;
+            result.bits_per_sample = i.bitsPerSample;
+            return result;
         }
 
         /// Write AAC data to decoder
@@ -115,7 +115,7 @@ class AACDecoderHelix : public AudioDecoder  {
 
         /// Defines the callback object to which the Audio information change is provided
         virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi){
-        	LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             audioChangeAACHelix = &bi;
             if (aac!=nullptr) aac->setInfoCallback(infoCallback);
         }
@@ -123,7 +123,7 @@ class AACDecoderHelix : public AudioDecoder  {
         /// notifies the subscriber about a change
         static void infoCallback(_AACFrameInfo &i){
             if (audioChangeAACHelix!=nullptr){
-            	LOGD(LOG_METHOD);
+                LOGD(LOG_METHOD);
                 AudioBaseInfo baseInfo;
                 baseInfo.channels = i.nChans;
                 baseInfo.sample_rate = i.sampRateOut;

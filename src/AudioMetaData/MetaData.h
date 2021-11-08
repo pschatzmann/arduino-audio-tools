@@ -26,47 +26,26 @@ class MetaDataPrint : public Print {
     }
 
     /// Defines the callback
-    void setCallback(void (*fn)(MetaDataType info, const char* str, int len)) {
+    virtual void setCallback(void (*fn)(MetaDataType info, const char* str, int len)) {
         LOGD(LOG_METHOD);
         callback = fn; 
     }
 
     /// Starts the processing - iceMetaint is determined from the HttpRequest
-    void begin(HttpRequest &http) {
-        const char* iceMetaintStr = http.reply().get("icy-metaint");
-        Str value(iceMetaintStr);
-        int iceMetaint = value.toInt();
-        LOGI("iceMetaint: %d", iceMetaint);
-
-        begin(iceMetaint);
-
-        // Callbacks filled from url reply for icy
-        if (callback!=nullptr) {
-            // handle icy parameters
-            Str genre(http.reply().get("icy-genre"));
-            if (!genre.isEmpty()){
-                callback(Genre, genre.c_str(), genre.length());
-            }
-
-            Str descr(http.reply().get("icy-description"));
-            if (!descr.isEmpty()){
-                callback(Description, descr.c_str(), descr.length());
-            }
-
-            Str name(http.reply().get("icy-name"));
-            if (!name.isEmpty()){
-                callback(Name, name.c_str(), name.length());
-            }
-        }
-
+    virtual void begin(HttpRequest &http) {
+        LOGD(LOG_METHOD);
+        ICYUrlSetup icySetup;
+        int metaInt = icySetup.setup(http);
+        icySetup.executeCallback(callback);
+        begin(metaInt);
     }
 
     /// Starts the processing - if iceMetaint is defined we use icecast
-    void begin(int iceMetaint=0) {
+    virtual void begin(int iceMetaint=0) {
         LOGD("%s: %d", LOG_METHOD, iceMetaint);
         if (callback!=nullptr){
             if (meta == nullptr) {
-                meta = (iceMetaint > 0) ? new MetaDataICY() : (MetaDataCommon *)  new MetaDataID3();
+                meta = (iceMetaint > 0) ? new MetaDataICY() : (AbstractMetaData *)  new MetaDataID3();
             }
             meta->setCallback(callback);    
             meta->setIcyMetaInt(iceMetaint);
@@ -76,7 +55,7 @@ class MetaDataPrint : public Print {
         }
     }
 
-    void end() {
+    virtual void end() {
         if (callback!=nullptr & meta != nullptr) {
             LOGD(LOG_METHOD);
             meta->end();
@@ -105,7 +84,7 @@ class MetaDataPrint : public Print {
      }
 
   protected:
-    MetaDataCommon *meta=nullptr;
+    AbstractMetaData *meta=nullptr;
     void (*callback)(MetaDataType info, const char* str, int len)=nullptr;
 
 };

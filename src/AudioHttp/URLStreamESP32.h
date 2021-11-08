@@ -1,30 +1,36 @@
 #pragma once
-#ifdef ESP32
+#include "AudioConfig.h"
+#ifdef USE_URLSTREAM_TASK
 #include "AudioTools/AudioStreams.h"
 #include "AudioHttp/URLStream.h"
 
 namespace audio_tools {
 
 /**
- *  A task is filling the buffer from the indicated stream in a background
- *  task. 
+ * A FreeRTOS task is filling the buffer from the indicated stream.
+ * 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 class BufferedTaskStream : public AudioStream {
     public:
         BufferedTaskStream() {
+            LOGI(LOG_METHOD);
             createMutex();
         };
 
         BufferedTaskStream(AudioStream &input){
+            LOGI(LOG_METHOD);
             createMutex();
             setInput(input);
         }
 
         ~BufferedTaskStream(){
+            LOGI(LOG_METHOD);
             stop();
         }
 
-        void begin(bool wait=true) {
+        virtual void begin(bool wait=true)  {
             LOGD(LOG_METHOD);
             active=true;
             ready = false;
@@ -32,34 +38,34 @@ class BufferedTaskStream : public AudioStream {
             if (!wait) ready=true;
         }
 
-        void end() {
+        virtual void end()  {
             LOGD(LOG_METHOD);
             if (xHandle!=NULL) vTaskDelete( xHandle );
             active = false;
             ready = false;
         }
 
-        void setInput(AudioStream &input){
+        virtual void setInput(AudioStream &input) {
             LOGD(LOG_METHOD);
             p_stream = &input;
         }
 
         /// writes a byte to the buffer
-        virtual size_t write(uint8_t c) {
+        virtual size_t write(uint8_t c) override {
             return 0;
         }
 
         /// Use this method: write an array
-        virtual size_t write(const uint8_t* data, size_t len) {    
+        virtual size_t write(const uint8_t* data, size_t len) override {    
             return 0;
         }
 
         /// empties the buffer
-        virtual void flush() {
+        virtual void flush() override {
         }
 
         /// reads a byte - to be avoided
-        virtual int read() {
+        virtual int read() override {
             if (!ready) return -1;
             int result = -1;
             xSemaphoreTake(mutex, portMAX_DELAY);
@@ -69,7 +75,7 @@ class BufferedTaskStream : public AudioStream {
         }
 
         /// peeks a byte - to be avoided
-        virtual int peek() {
+        virtual int peek() override {
             if (!ready) return -1;
             int result = -1;
             xSemaphoreTake(mutex, portMAX_DELAY);
@@ -79,7 +85,7 @@ class BufferedTaskStream : public AudioStream {
         };
         
         /// Use this method !!
-        size_t readBytes( uint8_t *data, size_t length) { 
+        virtual size_t readBytes( uint8_t *data, size_t length) override { 
             if (!ready) return 0;
             size_t result = 0;
             xSemaphoreTake(mutex, portMAX_DELAY);
@@ -92,7 +98,7 @@ class BufferedTaskStream : public AudioStream {
         }
 
         /// Returns the available bytes in the buffer: to be avoided
-        virtual int available() {
+        virtual int available() override {
             if (!ready) return 0;
             int result = 0;
             xSemaphoreTake(mutex, portMAX_DELAY);
@@ -147,8 +153,13 @@ class BufferedTaskStream : public AudioStream {
         }
 };
 
+/**
+ * @brief URLStream implementation for the ESP32 based on a separate FreeRTOS task 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
 
-class URLStream : public AudioStream {
+class URLStream : public AbstractURLStream {
     public:
         URLStream(int readBufferSize=DEFAULT_BUFFER_SIZE){
             LOGD(LOG_METHOD);
@@ -173,10 +184,13 @@ class URLStream : public AudioStream {
             if (p_urlStream!=nullptr) delete p_urlStream;
         }
 
-        void begin(const char* urlStr, const char* acceptMime=nullptr, MethodID action=GET,  const char* reqMime="", const char*reqData="") {
+        bool begin(const char* urlStr, const char* acceptMime=nullptr, MethodID action=GET,  const char* reqMime="", const char*reqData="") {
             LOGD(LOG_METHOD);
-            p_urlStream->begin(urlStr, acceptMime, action,reqMime, reqData );
+            // start real stream
+            bool result = p_urlStream->begin(urlStr, acceptMime, action,reqMime, reqData );
+            // start buffer task
             taskStream.begin();
+            return result;
         }
 
         virtual int available() {
