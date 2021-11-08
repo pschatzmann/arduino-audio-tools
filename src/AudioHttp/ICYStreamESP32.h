@@ -1,5 +1,6 @@
 #pragma once
-#ifdef XXESP32
+#include "AudioConfig.h"
+#ifdef USE_URLSTREAM_TASK
 
 #include "AudioHttp/ICYStream.h"
 
@@ -15,21 +16,34 @@ class ICYStream : public AbstractURLStream {
     public:
 
         ICYStream(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE) {
-            LOGD(LOG_METHOD);
+            LOGI(LOG_METHOD);
             p_urlStream = new ICYStreamDefault(network, password, readBufferSize);
             taskStream.setInput(*p_urlStream);
         }
 
         ~ICYStream(){
-            LOGD(LOG_METHOD);
+            LOGI(LOG_METHOD);
             if (p_urlStream!=nullptr) delete p_urlStream;
         }
 
-        bool begin(const char* urlStr, const char* acceptMime=nullptr, MethodID action=GET,  const char* reqMime="", const char*reqData="") {
+        virtual bool setMetadataCallback(void (*fn)(MetaDataType info, const char* str, int len)) override {
             LOGD(LOG_METHOD);
+            p_urlStream->setMetadataCallback(fn);
+        }
+
+        virtual bool begin(const char* urlStr, const char* acceptMime=nullptr, MethodID action=GET,  const char* reqMime="", const char*reqData="") override {
+            LOGD(LOG_METHOD);
+            // start real stream
             bool result = p_urlStream->begin(urlStr, acceptMime, action, reqMime, reqData);
+            // start reader task
             taskStream.begin();
             return result;
+        }
+
+        virtual void end() override{
+            LOGD(LOG_METHOD);
+            taskStream.end();
+            p_urlStream->end();
         }
 
         virtual int available() override {
@@ -60,14 +74,8 @@ class ICYStream : public AbstractURLStream {
             return 0;
         }
 
-        void end(){
-            LOGD(LOG_METHOD);
-            taskStream.end();
-            p_urlStream->end();
-        }
-
         /// provides access to the HttpRequest
-        HttpRequest &httpRequest(){
+        virtual HttpRequest &httpRequest() override {
             return p_urlStream->httpRequest();
         }
 

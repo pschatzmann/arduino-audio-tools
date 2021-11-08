@@ -25,7 +25,7 @@ class ICYUrlSetup {
             return iceMetaint;
         }
 
-
+        /// Executes the metadata callbacks with data provided from the http request result parameter
         void executeCallback(void (*callback)(MetaDataType info, const char* str, int len)) {
 			LOGI(LOG_METHOD);
             if (callback==nullptr){
@@ -61,7 +61,7 @@ class ICYUrlSetup {
 
 /**
  * Icecast/Shoutcast Metadata Handling
- * Output Class which splits the data into audio and metadata.
+ * Output Class which splits the data into audio and metadata. The metadata is provided via a callback method.
  * see https://www.codeproject.com/Articles/11308/SHOUTcast-Stream-Ripper
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -83,25 +83,27 @@ class MetaDataICY : public AbstractMetaData {
         }
         
         /// Defines the ICE metaint value which is provided by the web call!
-        void setIcyMetaInt(int value){
+        virtual void setIcyMetaInt(int value){
             this->mp3_blocksize = value;
         }
 
         /// Defines the callback function
-        void setCallback(void (*fn)(MetaDataType info, const char* str, int len))  override {
+        virtual void setCallback(void (*fn)(MetaDataType info, const char* str, int len))  override {
             callback = fn;
         }
 
-        // Resets all counters and restarts the prcessing
-        void begin() override {
+        /// Resets all counters and restarts the prcessing
+        virtual void begin() override {
             clear();
             LOGI("mp3_blocksize: %d", mp3_blocksize);
         }
 
-        void end() override {
+        /// Resets all counters and restarts the prcessing
+        virtual void end() override {
             clear();
         }
 
+        /// Writes the data in order to retrieve the metadata and perform the corresponding callbacks 
         virtual size_t write(const uint8_t *buffer, size_t len) override {
             if (callback!=nullptr){
                 for (int j=0;j<len;j++){
@@ -111,26 +113,34 @@ class MetaDataICY : public AbstractMetaData {
             return len;
         }
 
-        Status status() {
+        /// Returns the actual status of the state engine for the current byte
+        virtual Status status() {
             return currentStatus;
         }
 
-        // returns true if the actual char is a data byte
-        bool isData(){
+        /// returns true if the actual bytes is an audio data byte (e.g.mp3)
+        virtual bool isData(){
             return currentStatus==ProcessData;
         }
 
-        bool hasMetaData() {
+        /// Returns true if the ICY stream contains metadata
+        virtual bool hasMetaData() {
             return this->mp3_blocksize>0;
         }
 
-        // character based state engine
+        /// provides the metaint
+        virtual int metaInt() {
+            return mp3_blocksize;
+        }
+
+        /// character based state engine
         virtual void processChar(char ch){
             switch(nextStatus){
                 case ProcessData:
                     currentStatus = ProcessData;
                     ++totalData;
                     if (totalData>=mp3_blocksize){
+                        LOGI("Data ended")
                         totalData = 0;
                         nextStatus = SetupSize;
                     }   
@@ -141,10 +151,13 @@ class MetaDataICY : public AbstractMetaData {
                     totalData = 0;
                     metaDataPos = 0;
                     metaDataLen = metaSize(ch);
+                    LOGI("metaDataLen: %d", metaDataLen);
                     if (metaDataLen>0){
+                        LOGI("Metadata found");
                         setupMetaData(metaDataLen);
                         nextStatus = ProcessMetaData;
                     } else {
+                        LOGI("Data found");
                         nextStatus = ProcessData;
                     }
                     break;
@@ -154,16 +167,13 @@ class MetaDataICY : public AbstractMetaData {
                     metaData[metaDataPos++]=ch;
                     if (metaDataPos>=metaDataLen){
                         processMetaData(metaData, metaDataLen);
+                        LOGI("Metadata ended")
                         nextStatus = ProcessData;
                     }
                     break;
             }
         }
 
-        /// provides the metaint
-        int metaInt() {
-            return mp3_blocksize;
-        }
 
     protected:
         Status nextStatus = ProcessData;
@@ -177,7 +187,7 @@ class MetaDataICY : public AbstractMetaData {
         int metaDataPos = 0;
         bool is_data; // indicates if the current byte is a data byte
 
-        void clear() {
+        virtual void clear() {
             nextStatus = ProcessData;
             totalData = 0;
             metaDataLen=0;
@@ -221,11 +231,11 @@ class MetaDataICY : public AbstractMetaData {
 
         /// e.g. StreamTitle=' House Bulldogs - But your love (Radio Edit)';StreamUrl='';
         virtual void processMetaData( char* metaData, int len) {
-			LOGD(LOG_METHOD);
+    		LOGD(LOG_METHOD);
             metaData[len]=0;
             if (isAscii(metaData, 12)){
                 LOGI("%s", metaData);
-                Str meta((char*)metaData);
+                Str meta(metaData);
                 int start = meta.indexOf("StreamTitle=");
                 if (start>=0){
                     start+=12;
@@ -236,7 +246,7 @@ class MetaDataICY : public AbstractMetaData {
                     callback(Title, (const char*)metaData+start+1, end-start);
                 }
             } else {
-                LOGW("Unexpected Data");
+                LOGW("Unexpected Data: %s", metaData);
             }
         }
 };
