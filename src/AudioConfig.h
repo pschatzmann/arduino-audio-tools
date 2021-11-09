@@ -27,7 +27,8 @@
 #define LOG_STREAM Serial
 #define LOG_METHOD __PRETTY_FUNCTION__
 
-#define CHECK_MEMORY() checkMemory()
+//#define CHECK_MEMORY() checkMemory()
+#define CHECK_MEMORY() 
 
 /**
  * ------------------------------------------------------------------------- 
