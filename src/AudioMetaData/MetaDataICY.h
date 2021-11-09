@@ -235,15 +235,17 @@ class MetaDataICY : public AbstractMetaData {
             metaData[len]=0;
             if (isAscii(metaData, 12)){
                 LOGI("%s", metaData);
-                Str meta(metaData);
+                Str meta(metaData, len);
                 int start = meta.indexOf("StreamTitle=");
                 if (start>=0){
                     start+=12;
                 }
                 int end = meta.indexOf("';");
                 if (start>=0 && end>start){
+                    CHECK_MEMORY();
                     metaData[end]=0;
                     callback(Title, (const char*)metaData+start+1, end-start);
+                    CHECK_MEMORY();
                 }
             } else {
                 LOGW("Unexpected Data: %s", metaData);

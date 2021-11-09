@@ -68,9 +68,11 @@ class MetaDataPrint : public Print {
 
         if (callback!=nullptr){
             if (meta!=nullptr){
+                CHECK_MEMORY();
                 if (meta->write(data, length)!=length){
                     LOGE("Did not write all data");
                 }
+                CHECK_MEMORY();
             } else {
                 LOGW("meta is null");
             }

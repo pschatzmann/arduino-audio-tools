@@ -20,7 +20,7 @@ template <class T>
 class StreamCopyT {
     public:
         StreamCopyT(Print &to, Stream &from, int buffer_size=DEFAULT_BUFFER_SIZE){
-            LOGD("StreamCopyT")
+            LOGD(LOG_METHOD);
             begin(to, from);
             this->buffer_size = buffer_size;
             buffer = new uint8_t[buffer_size];
@@ -30,7 +30,7 @@ class StreamCopyT {
         }
 
         StreamCopyT(int buffer_size=DEFAULT_BUFFER_SIZE){
-            LOGD("StreamCopyT")
+            LOGD(LOG_METHOD);
             this->buffer_size = buffer_size;
             buffer = new uint8_t[buffer_size];
             if (buffer==nullptr){
@@ -68,6 +68,7 @@ class StreamCopyT {
 
         // copies the data from one channel from the source to 2 channels on the destination - the result is in bytes
         size_t copy(){
+            LOGD(LOG_METHOD);
             size_t result = 0;
             size_t delayCount = 0;
             size_t len = available();
@@ -75,6 +76,7 @@ class StreamCopyT {
             size_t bytes_read=0; 
 
             if (len>0){
+                CHECK_MEMORY();
                 bytes_to_read = min(len, static_cast<size_t>(buffer_size));
                 size_t samples = bytes_to_read / sizeof(T);
                 bytes_to_read = samples * sizeof(T);
@@ -90,6 +92,7 @@ class StreamCopyT {
                 // callback with unconverted data
                 if (onWrite!=nullptr) onWrite(onWriteObj, buffer, result);
 
+                CHECK_MEMORY();
                 LOGI("StreamCopy::copy %zu -> %zu -> %zu bytes - in %zu hops", bytes_to_read, bytes_read, result, delayCount);
             } else {
                 // give the processor some time 
@@ -146,6 +149,7 @@ class StreamCopyT {
 
         /// copies all data
         void copyAll(){
+            LOGD(LOG_METHOD);
             if (from==nullptr || to == nullptr) 
                 return;
 
@@ -162,11 +166,13 @@ class StreamCopyT {
 
         /// Define the callback that will notify about mime changes
         void setMimeCallback(void (*callback)(const char*)){
+            LOGD(LOG_METHOD);
             this->notifyMimeCallback = callback;
         }
 
         /// Defines a callback that is notified with the wirtten data
         void setCallbackOnWrite(void (*onWrite)(void*obj, void*buffer, size_t len), void* obj){
+            LOGD(LOG_METHOD);
             this->onWrite = onWrite;
             this->onWriteObj = obj;
         }

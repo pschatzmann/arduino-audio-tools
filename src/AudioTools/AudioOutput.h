@@ -315,7 +315,7 @@ class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource {
         
         /// encode the data
         virtual size_t write(const uint8_t *data, size_t len){
-             LOGD("%s: %zu", LOG_METHOD, len);
+            LOGD("%s: %zu", LOG_METHOD, len);
             if(len==0) {
                 return 0;
             }
@@ -323,7 +323,11 @@ class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource {
                 LOGE("NPE");
                 return 0;
             }
-            return writer_ptr->write(data, len);
+
+            CHECK_MEMORY();
+            size_t result = writer_ptr->write(data, len);
+            CHECK_MEMORY();
+            return result;
         }
         
 

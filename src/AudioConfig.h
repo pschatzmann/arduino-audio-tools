@@ -118,6 +118,8 @@
 # define I2S_COMM_FORMAT_STAND_MSB (I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_MSB)
 #endif
 
+#define CHECK_MEMORY() heap_caps_check_integrity_all(true)
+
 #endif
 
 //----------------
@@ -208,4 +210,8 @@
 
 #ifdef IS_DESKTOP
 #define USE_URL_ARDUINO
+#endif
+
+#ifndef CHECK_MEMORY
+#define CHECK_MEMORY()
 #endif
