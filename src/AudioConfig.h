@@ -8,6 +8,7 @@
 #include "Arduino.h"
 #include <string.h>
 #include <stdint.h>
+#include "AudioRuntime.h"
 
 #define AUDIOTOOLS_VERSION "0.7.0"
 
@@ -25,6 +26,8 @@
 #define LOG_LEVEL AudioLogger::Warning
 #define LOG_STREAM Serial
 #define LOG_METHOD __PRETTY_FUNCTION__
+
+#define CHECK_MEMORY() checkMemory()
 
 /**
  * ------------------------------------------------------------------------- 
@@ -118,8 +121,6 @@
 # define I2S_COMM_FORMAT_STAND_MSB (I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_MSB)
 #endif
 
-#define CHECK_MEMORY() heap_caps_check_integrity_all(true)
-
 #endif
 
 //----------------
@@ -212,6 +213,3 @@
 #define USE_URL_ARDUINO
 #endif
 
-#ifndef CHECK_MEMORY
-#define CHECK_MEMORY()
-#endif
