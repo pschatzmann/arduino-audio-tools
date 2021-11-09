@@ -552,6 +552,10 @@ struct TimerCallbackAudioStreamInfo : public AudioBaseInfo {
     bool secure_timer = false;
 };
 
+
+// relevant only if use_timer == true
+void IRAM_ATTR timerCallback(void* obj);
+
 /**
  * @brief Callback driven Audio Source (rx_tx_mode==RX_MODE) or Audio Sink (rx_tx_mode==TX_MODE). This class
  * allows to to integrate external libraries in order to consume or generate a data stream which is based on a timer
@@ -560,11 +564,15 @@ struct TimerCallbackAudioStreamInfo : public AudioBaseInfo {
  * 
  */
 class TimerCallbackAudioStream : public BufferedStream, public AudioBaseInfoSource{
+    friend void IRAM_ATTR timerCallback(void* obj);
+
     public:
         TimerCallbackAudioStream():BufferedStream(80) {
+            LOGD(LOG_METHOD);
         }
 
         ~TimerCallbackAudioStream(){
+            LOGD(LOG_METHOD);
             if (timer!=nullptr) delete timer;
             if (buffer!=nullptr) delete buffer;
             if (frame!=nullptr) delete[] frame;
@@ -578,6 +586,7 @@ class TimerCallbackAudioStream : public BufferedStream, public AudioBaseInfoSour
 
         /// updates the audio information 
         virtual void setAudioInfo(AudioBaseInfo info){
+            LOGD(LOG_METHOD);
             if (cfg.sample_rate != info.sample_rate
             || cfg.channels != info.channels
             || cfg.bits_per_sample != info.bits_per_sample){
@@ -600,14 +609,15 @@ class TimerCallbackAudioStream : public BufferedStream, public AudioBaseInfoSour
             return cfg;
         }
 
-        void begin(TimerCallbackAudioStreamInfo cfg, uint16_t (*frameCB)(uint8_t *data, uint16_t len)){
-            this->cfg = cfg; 
+        void begin(TimerCallbackAudioStreamInfo config, uint16_t (*frameCB)(uint8_t *data, uint16_t len)){
+            LOGD("%s:  %s", LOG_METHOD, config.rx_tx_mode==RX_MODE ? "RX_MODE":"TX_MODE");
+            this->cfg = config; 
             this->frameCallback = frameCB;
             if (cfg.use_timer){
                 frameSize = cfg.bits_per_sample * cfg.channels / 8;
                 frame = new uint8_t[frameSize];
-                timer = new TimerAlarmRepeating(cfg.secure_timer, cfg.timer_id);
                 buffer = new RingBuffer<uint8_t>(cfg.buffer_size);
+                timer = new TimerAlarmRepeating(cfg.secure_timer, cfg.timer_id);
                 time = AudioUtils::toTimeUs(cfg.sample_rate);
                 timer->setCallbackParameter(this);
                 timer->begin(timerCallback, time, TimeUnit::US);
@@ -620,6 +630,7 @@ class TimerCallbackAudioStream : public BufferedStream, public AudioBaseInfoSour
 
         /// Restart the processing
         void begin() {
+            LOGD(LOG_METHOD);
             if (this->frameCallback!=nullptr){
                 if (cfg.use_timer){
                     timer->begin(timerCallback, time, TimeUnit::US);
@@ -630,6 +641,7 @@ class TimerCallbackAudioStream : public BufferedStream, public AudioBaseInfoSour
 
         /// Stops the processing
         void end() {
+            LOGD(LOG_METHOD);
             if (cfg.use_timer){
                 timer->end();
             }
@@ -648,27 +660,10 @@ class TimerCallbackAudioStream : public BufferedStream, public AudioBaseInfoSour
         uint16_t frameSize=0;
         uint32_t time=0;
 
-        // relevant only if use_timer == true
-        static void timerCallback(void* obj){
-            TimerCallbackAudioStream *src = (TimerCallbackAudioStream*)obj;
-            if (src->cfg.rx_tx_mode==RX_MODE){
-                // input
-                uint16_t available_bytes = src->frameCallback(src->frame, src->frameSize);
-                if (src->buffer->writeArray(src->frame, available_bytes)!=available_bytes){
-                    LOGE(UNDERFLOW_MSG);
-                }
-            } else {
-                // output
-                uint16_t available_bytes = src->buffer->readArray(src->frame, src->frameSize);
-                if (available_bytes != src->frameCallback(src->frame, available_bytes)){
-                    LOGE(UNDERFLOW_MSG);
-                }
-            }
-        }
-
         // used for audio sink
         virtual size_t writeExt(const uint8_t* data, size_t len) {
             if (!active) return 0;
+            LOGD(LOG_METHOD);
 
             if (!cfg.use_timer){
                 return frameCallback((uint8_t*)data, len);
@@ -680,6 +675,7 @@ class TimerCallbackAudioStream : public BufferedStream, public AudioBaseInfoSour
         // used for audio source
         virtual size_t readExt( uint8_t *data, size_t len) {
             if (!active) return 0;
+            LOGD(LOG_METHOD);
 
             if (!cfg.use_timer){
                 return frameCallback(data, len);
@@ -690,6 +686,36 @@ class TimerCallbackAudioStream : public BufferedStream, public AudioBaseInfoSour
        
 };
 
+
+// relevant only if use_timer == true
+void IRAM_ATTR timerCallback(void* obj){
+    TimerCallbackAudioStream *src = (TimerCallbackAudioStream*)obj;
+    if (src!=nullptr){
+        //LOGD("%s:  %s", LOG_METHOD, src->cfg.rx_tx_mode==RX_MODE ? "RX_MODE":"TX_MODE");
+        if (src->cfg.rx_tx_mode==RX_MODE){
+            // input
+            uint16_t available_bytes = src->frameCallback(src->frame, src->frameSize);
+            uint16_t buffer_available = src->buffer->availableToWrite();
+            if (buffer_available<available_bytes){
+                // if buffer is full make space
+                uint16_t to_clear = available_bytes-buffer_available;
+                uint8_t tmp[to_clear];
+                src->buffer->readArray(tmp,to_clear);
+            }
+            if (src->buffer->writeArray(src->frame, available_bytes)!=available_bytes){
+                //LOGE(UNDERFLOW_MSG);
+            }
+        } else {
+            // output
+            if (src->buffer!=nullptr && src->frame!=nullptr && src->frameSize>0){
+                uint16_t available_bytes = src->buffer->readArray(src->frame, src->frameSize);
+                if (available_bytes != src->frameCallback(src->frame, available_bytes)){
+                    // LOGE(UNDERFLOW_MSG);
+                }
+            }
+        }
+    }
+}
 
 }
 

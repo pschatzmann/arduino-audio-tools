@@ -3,7 +3,7 @@
 
 namespace audio_tools {
 
-typedef void (* repeating_timer_callback_t )(void* obj);
+typedef void (*repeating_timer_callback_t )(void* obj);
 
 /**
  * @brief Common Interface definition for TimerAlarmRepeating 

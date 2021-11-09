@@ -56,7 +56,7 @@ class AudioBaseInfoSource {
       virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi) = 0;
 };
 
-enum RxTxMode  { TX_MODE, RX_MODE };
+enum RxTxMode  { TX_MODE=1, RX_MODE=2 };
 
 
 enum I2SFormat {

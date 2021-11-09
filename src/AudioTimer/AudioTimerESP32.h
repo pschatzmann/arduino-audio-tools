@@ -16,6 +16,7 @@ typedef void (* simple_callback )(void);
 class UserCallback {
   public:
     void setup(repeating_timer_callback_t my_callback, void *user_data ){
+      LOGD(LOG_METHOD);
       this->my_callback = my_callback;
       this->user_data = user_data;
     }
@@ -34,6 +35,19 @@ class UserCallback {
     portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
 } *simpleUserCallback = nullptr;
 
+  static IRAM_ATTR void userCallback0() {
+    simpleUserCallback[0].call();
+  }
+  static IRAM_ATTR void userCallback1() {
+    simpleUserCallback[1].call();
+  }
+  static IRAM_ATTR void userCallback2() {
+    simpleUserCallback[2].call();
+  }
+  static IRAM_ATTR void userCallback3() {
+    simpleUserCallback[3].call();
+  }
+
 
 /**
  * @brief Internal class to manage the different timer callbacks for the 4 hardware timers
@@ -43,15 +57,17 @@ class UserCallback {
 class TimerCallback {
   public:
       TimerCallback() {
+          LOGD(LOG_METHOD);
           timerMux = portMUX_INITIALIZER_UNLOCKED;
           handler_task = nullptr;
       }
 
       void setup(TaskHandle_t handler_task){
+        LOGD(LOG_METHOD);
         this->handler_task = handler_task;
       }
       
-      IRAM_ATTR void onTimerCb() {
+      IRAM_ATTR void call() {
         if (handler_task!=nullptr) {
           // A mutex protects the handler from reentry (which shouldn't happen, but just in case)
           portENTER_CRITICAL_ISR(&timerMux);
@@ -70,6 +86,20 @@ class TimerCallback {
 
 } *timerCallbackArray = nullptr;
 
+  static IRAM_ATTR void timerCallback0() {
+    timerCallbackArray[0].call();
+  }
+  static IRAM_ATTR void timerCallback1() {
+    timerCallbackArray[1].call();
+  }
+  static IRAM_ATTR void timerCallback2() {
+    timerCallbackArray[2].call();
+  }
+  static IRAM_ATTR void timerCallback3() {
+    timerCallbackArray[3].call();
+  }
+
+
 
 /**
  * @brief Repeating Timer functions for simple scheduling of repeated execution.
@@ -83,16 +113,11 @@ class TimerAlarmRepeatingESP32 : public TimerAlarmRepeatingDef {
     public:
     
         TimerAlarmRepeatingESP32(bool withTask=false, int id=0){
+          LOGD(LOG_METHOD);
           if (id>=0 && id<4) {
             this->timer_id = id;
             this->with_task = withTask;
             handler_task = nullptr;
-
-            // setup the callback method
-            if (withTask){
-            } else {
-
-            }
           } else {
             LOGE("Invalid timer id %d", timer_id);
           }
@@ -132,20 +157,22 @@ class TimerAlarmRepeatingESP32 : public TimerAlarmRepeatingDef {
                 if (timerCallbackArray==nullptr){
                   timerCallbackArray = new TimerCallback[4];
                 }
-                // setup the timercallback
-                timerCallbackArray[timer_id].setup(handler_task);
 
-                if (timer_id==0) current_timer_callback = []() {timerCallbackArray[0].onTimerCb();};
-                if (timer_id==1) current_timer_callback = []() {timerCallbackArray[1].onTimerCb();};
-                if (timer_id==2) current_timer_callback = []() {timerCallbackArray[2].onTimerCb();};
-                if (timer_id==3) current_timer_callback = []() {timerCallbackArray[3].onTimerCb();};
+                if (timer_id==0) timerAttachInterrupt(adc_timer, timerCallback0, true); 
+                else if (timer_id==1) timerAttachInterrupt(adc_timer, timerCallback1, true); 
+                else if (timer_id==2) timerAttachInterrupt(adc_timer, timerCallback2, true); 
+                else if (timer_id==3) timerAttachInterrupt(adc_timer, timerCallback3, true); 
 
                 // we record the callback method and user data
                 user_callback.setup(callback_f, object);
-                timerAttachInterrupt(adc_timer, current_timer_callback, true);
                 timerAlarmWrite(adc_timer, timeUs, true);
-                timerAlarmEnable(adc_timer);
+
+                // setup the timercallback
                 xTaskCreate(complexHandler, "TimerAlarmRepeatingTask", configMINIMAL_STACK_SIZE+10000, &user_callback, 1, &handler_task);
+                timerCallbackArray[timer_id].setup(handler_task);
+
+
+                timerAlarmEnable(adc_timer);
 
             } else {
                 // We start the timer which executes the callbacks directly
@@ -153,12 +180,11 @@ class TimerAlarmRepeatingESP32 : public TimerAlarmRepeatingDef {
                   simpleUserCallback = new UserCallback[4];
                 }
                 simpleUserCallback[timer_id].setup(callback_f, object);
-                if (timer_id==0) current_timer_callback = []() {simpleUserCallback[0].call();};
-                if (timer_id==1) current_timer_callback = []() {simpleUserCallback[1].call();};
-                if (timer_id==2) current_timer_callback = []() {simpleUserCallback[2].call();};
-                if (timer_id==3) current_timer_callback = []() {simpleUserCallback[3].call();};
+                if (timer_id==0) timerAttachInterrupt(adc_timer, userCallback0, true); 
+                else if (timer_id==1) timerAttachInterrupt(adc_timer, userCallback1, true); 
+                else if (timer_id==2) timerAttachInterrupt(adc_timer, userCallback2, true); 
+                else if (timer_id==3) timerAttachInterrupt(adc_timer, userCallback3, true); 
 
-                timerAttachInterrupt(adc_timer, current_timer_callback, true);
                 timerAlarmWrite(adc_timer, timeUs, true);
                 timerAlarmEnable(adc_timer);
             }
@@ -181,24 +207,19 @@ class TimerAlarmRepeatingESP32 : public TimerAlarmRepeatingDef {
             return true;
         }
 
-        void testCallback() {
-          if (current_timer_callback!=nullptr){
-            current_timer_callback();
-          }
-        }
 
     protected:
-      int timer_id;
+      int timer_id=0;
+      volatile bool started = false;
       TaskHandle_t handler_task = nullptr;
       hw_timer_t* adc_timer = nullptr; // our timer
       UserCallback user_callback;
-      bool started = false;
       bool with_task = false;
-      void (*current_timer_callback)() = nullptr;   
-      void* object = this;
+
 
       /// We can not do any I2C calls in the interrupt handler so we need to do this in a separate task
       static void complexHandler(void *param) {
+        LOGD(LOG_METHOD);
         UserCallback* cb = (UserCallback*) param;
         uint32_t thread_notification;
 
