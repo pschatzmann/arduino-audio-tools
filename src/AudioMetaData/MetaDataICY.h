@@ -6,6 +6,234 @@
 
 namespace audio_tools {
 
+
+
+/**
+ * Icecast/Shoutcast Metadata Handling
+ * Metadata class which splits the data into audio and metadata. The result is provided via callback methods.
+ * see https://www.codeproject.com/Articles/11308/SHOUTcast-Stream-Ripper
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */ 
+class MetaDataICY : public AbstractMetaData {
+
+    enum Status {ProcessData, ProcessMetaData, SetupSize};
+
+    public:
+        MetaDataICY() = default;
+
+        /// We just process the Metadata and ignore the audio info
+        MetaDataICY(int metaint){
+            setIcyMetaInt(metaint);
+        }
+
+        ~MetaDataICY(){
+            if (metaData!=nullptr) delete[]metaData;
+        }
+        
+        /// Defines the ICE metaint value which is provided by the web call!
+        virtual void setIcyMetaInt(int value){
+            this->mp3_blocksize = value;
+        }
+
+        /// Defines the metadata callback function
+        virtual void setCallback(void (*fn)(MetaDataType info, const char* str, int len))  override {
+            callback = fn;
+        }
+
+        /// Defines the metadata callback function
+        virtual void setDataCallback(void (*fn)(const uint8_t* str, int len), int bufferLen=1024)  {
+            dataBuffer = new uint8_t[bufferLen];
+            dataCallback = fn;
+            dataLen = 0;
+            dataPos = 0;
+        }
+
+        /// Resets all counters and restarts the prcessing
+        virtual void begin() override {
+            clear();
+            LOGI("mp3_blocksize: %d", mp3_blocksize);
+        }
+
+        /// Resets all counters and restarts the prcessing
+        virtual void end() override {
+            clear();
+        }
+
+        /// Writes the data in order to retrieve the metadata and perform the corresponding callbacks 
+        virtual size_t write(const uint8_t *buffer, size_t len) override {
+            if (callback!=nullptr){
+                for (int j=0;j<len;j++){
+                    processChar((char)buffer[j]);
+                }
+            }
+            return len;
+        }
+
+        /// Returns the actual status of the state engine for the current byte
+        virtual Status status() {
+            return currentStatus;
+        }
+
+        /// returns true if the actual bytes is an audio data byte (e.g.mp3)
+        virtual bool isData(){
+            return currentStatus==ProcessData;
+        }
+
+        /// Returns true if the ICY stream contains metadata
+        virtual bool hasMetaData() {
+            return this->mp3_blocksize>0;
+        }
+
+        /// provides the metaint
+        virtual int metaInt() {
+            return mp3_blocksize;
+        }
+
+        /// character based state engine
+        virtual void processChar(char ch){
+            switch(nextStatus){
+                case ProcessData:
+                    currentStatus = ProcessData;
+                    processData(ch);
+
+                    // increment data counter and determine next status
+                    ++totalData; 
+                    if (totalData>=mp3_blocksize){
+                        LOGI("Data ended")
+                        totalData = 0;
+                        nextStatus = SetupSize;
+                    }   
+                    break;
+
+                case SetupSize:
+                    currentStatus = SetupSize;
+                    totalData = 0;
+                    metaDataPos = 0;
+                    metaDataLen = metaSize(ch);
+                    LOGI("metaDataLen: %d", metaDataLen);
+                    if (metaDataLen>0){
+                        LOGI("Metadata found");
+                        setupMetaData(metaDataLen);
+                        nextStatus = ProcessMetaData;
+                    } else {
+                        LOGI("Data found");
+                        nextStatus = ProcessData;
+                    }
+                    break;
+
+                case ProcessMetaData:
+                    currentStatus = ProcessMetaData;
+                    metaData[metaDataPos++]=ch;
+                    if (metaDataPos>=metaDataLen){
+                        processMetaData(metaData, metaDataLen);
+                        LOGI("Metadata ended")
+                        nextStatus = ProcessData;
+                    }
+                    break;
+            }
+        }
+
+
+    protected:
+        Status nextStatus = ProcessData;
+        Status currentStatus = ProcessData;
+        void (*callback)(MetaDataType info, const char* str, int len);
+        char* metaData=nullptr;
+        int totalData = 0;
+        int mp3_blocksize = 0;
+        int metaDataMaxLen = 0;
+        int metaDataLen = 0;
+        int metaDataPos = 0;
+        bool is_data; // indicates if the current byte is a data byte
+        // data
+        uint8_t *dataBuffer=nullptr;
+        void (*dataCallback)(const uint8_t* str, int len) = nullptr;    
+        int dataLen = 0;
+        int dataPos = 0;
+
+        virtual void clear() {
+            nextStatus = ProcessData;
+            totalData = 0;
+            metaDataLen = 0;
+            metaDataPos = 0;
+            dataLen = 0;
+            dataPos = 0;
+        }
+
+        /// determines the meta data size from the size byte
+        virtual int metaSize(uint8_t metaSize){
+            return metaSize*16;
+        }
+
+        /// Make sure that the result is a valid ASCII string
+        virtual bool isAscii(char* result, int l){
+            // check on first 10 characters
+            int m = l < 5 ? l : 10;
+            for (int j=0; j<m; j++){
+                if (!isascii(result[j])) return false;
+            }
+            return true;
+        }
+
+        /// allocates the memory to store the metadata / we support changing sizes
+        virtual void setupMetaData(int meta_size) {
+            LOGD(LOG_METHOD);
+            if (meta_size>0){
+                if (metaData==nullptr){
+                    metaData = new prog_char[meta_size+1];
+                    metaDataMaxLen = meta_size;
+                    LOGD("metaDataMaxLen: %d", metaDataMaxLen);
+                } else {
+                    if (meta_size>metaDataMaxLen){
+                        delete [] metaData; 
+                        metaData = new char[meta_size+1];
+                        metaDataMaxLen = meta_size;
+                        LOGD("metaDataMaxLen: %d", metaDataMaxLen);
+                    }
+                }
+                memset(metaData, 0, meta_size);
+            }
+        }
+
+        /// e.g. StreamTitle=' House Bulldogs - But your love (Radio Edit)';StreamUrl='';
+        virtual void processMetaData( char* metaData, int len) {
+            CHECK_MEMORY();
+            LOGD(LOG_METHOD);
+            metaData[len]=0;
+            if (isAscii(metaData, 12)){
+                LOGI("%s", metaData);
+                Str meta(metaData, len);
+                int start = meta.indexOf("StreamTitle=");
+                if (start>=0){
+                    start+=12;
+                }
+                int end = meta.indexOf("';");
+                if (start>=0 && end>start){
+                    metaData[end]=0;
+                    callback(Title, (const char*)metaData+start+1, end-start);
+                }   
+                CHECK_MEMORY();
+            } else {
+                CHECK_MEMORY();
+                LOGW("Unexpected Data: %s", metaData);
+            }
+        }
+
+        /// Collects the data in a buffer and executes the callback when the buffer is full
+        virtual void processData(char ch){
+            if (dataBuffer!=nullptr){
+                dataBuffer[dataPos++] = ch;
+                // output data via callback
+                if (dataPos>=dataLen){
+                    dataCallback(dataBuffer, dataLen);
+                    dataPos = 0;
+                }
+            }
+        }
+};
+
+
 /**
  * @brief Resolve icy-metaint from HttpRequest and execute metadata callbacks
  * @author Phil Schatzmann
@@ -57,200 +285,6 @@ class ICYUrlSetup {
     protected:
         HttpRequest *p_http = nullptr;
 
-};
-
-/**
- * Icecast/Shoutcast Metadata Handling
- * Output Class which splits the data into audio and metadata. The metadata is provided via a callback method.
- * see https://www.codeproject.com/Articles/11308/SHOUTcast-Stream-Ripper
- * @author Phil Schatzmann
- * @copyright GPLv3
- */ 
-class MetaDataICY : public AbstractMetaData {
-
-    enum Status {ProcessData, ProcessMetaData, SetupSize};
-
-    public:
-        MetaDataICY() = default;
-
-        /// We just process the Metadata and ignore the audio info
-        MetaDataICY(int metaint){
-            setIcyMetaInt(metaint);
-        }
-
-        ~MetaDataICY(){
-            if (metaData!=nullptr) delete[]metaData;
-        }
-        
-        /// Defines the ICE metaint value which is provided by the web call!
-        virtual void setIcyMetaInt(int value){
-            this->mp3_blocksize = value;
-        }
-
-        /// Defines the callback function
-        virtual void setCallback(void (*fn)(MetaDataType info, const char* str, int len))  override {
-            callback = fn;
-        }
-
-        /// Resets all counters and restarts the prcessing
-        virtual void begin() override {
-            clear();
-            LOGI("mp3_blocksize: %d", mp3_blocksize);
-        }
-
-        /// Resets all counters and restarts the prcessing
-        virtual void end() override {
-            clear();
-        }
-
-        /// Writes the data in order to retrieve the metadata and perform the corresponding callbacks 
-        virtual size_t write(const uint8_t *buffer, size_t len) override {
-            if (callback!=nullptr){
-                for (int j=0;j<len;j++){
-                    processChar((char)buffer[j]);
-                }
-            }
-            return len;
-        }
-
-        /// Returns the actual status of the state engine for the current byte
-        virtual Status status() {
-            return currentStatus;
-        }
-
-        /// returns true if the actual bytes is an audio data byte (e.g.mp3)
-        virtual bool isData(){
-            return currentStatus==ProcessData;
-        }
-
-        /// Returns true if the ICY stream contains metadata
-        virtual bool hasMetaData() {
-            return this->mp3_blocksize>0;
-        }
-
-        /// provides the metaint
-        virtual int metaInt() {
-            return mp3_blocksize;
-        }
-
-        /// character based state engine
-        virtual void processChar(char ch){
-            switch(nextStatus){
-                case ProcessData:
-                    currentStatus = ProcessData;
-                    ++totalData;
-                    if (totalData>=mp3_blocksize){
-                        LOGI("Data ended")
-                        totalData = 0;
-                        nextStatus = SetupSize;
-                    }   
-                    break;
-
-                case SetupSize:
-                    currentStatus = SetupSize;
-                    totalData = 0;
-                    metaDataPos = 0;
-                    metaDataLen = metaSize(ch);
-                    LOGI("metaDataLen: %d", metaDataLen);
-                    if (metaDataLen>0){
-                        LOGI("Metadata found");
-                        setupMetaData(metaDataLen);
-                        nextStatus = ProcessMetaData;
-                    } else {
-                        LOGI("Data found");
-                        nextStatus = ProcessData;
-                    }
-                    break;
-
-                case ProcessMetaData:
-                    currentStatus = ProcessMetaData;
-                    metaData[metaDataPos++]=ch;
-                    if (metaDataPos>=metaDataLen){
-                        processMetaData(metaData, metaDataLen);
-                        LOGI("Metadata ended")
-                        nextStatus = ProcessData;
-                    }
-                    break;
-            }
-        }
-
-
-    protected:
-        Status nextStatus = ProcessData;
-        Status currentStatus = ProcessData;
-        void (*callback)(MetaDataType info, const char* str, int len);
-        char* metaData=nullptr;
-        int totalData = 0;
-        int mp3_blocksize = 0;
-        int metaDataMaxLen = 0;
-        int metaDataLen = 0;
-        int metaDataPos = 0;
-        bool is_data; // indicates if the current byte is a data byte
-
-        virtual void clear() {
-            nextStatus = ProcessData;
-            totalData = 0;
-            metaDataLen=0;
-            metaDataPos=0;
-        }
-
-        /// determines the meta data size from the size byte
-        virtual int metaSize(uint8_t metaSize){
-            return metaSize*16;
-        }
-
-        /// Make sure that the result is a valid ASCII string
-        virtual bool isAscii(char* result, int l){
-            // check on first 10 characters
-            int m = l < 5 ? l : 10;
-            for (int j=0; j<m; j++){
-                if (!isascii(result[j])) return false;
-            }
-            return true;
-        }
-
-        /// allocates the memory to store the metadata / we support changing sizes
-        virtual void setupMetaData(int meta_size) {
-            LOGD(LOG_METHOD);
-            if (meta_size>0){
-                if (metaData==nullptr){
-                    metaData = new prog_char[meta_size+1];
-                    metaDataMaxLen = meta_size;
-                    LOGD("metaDataMaxLen: %d", metaDataMaxLen);
-                } else {
-                    if (meta_size>metaDataMaxLen){
-                        delete []metaData; 
-                        metaData = new char[meta_size+1];
-                        metaDataMaxLen = meta_size;
-                        LOGD("metaDataMaxLen: %d", metaDataMaxLen);
-                    }
-                }
-                memset(metaData, 0, meta_size);
-            }
-        }
-
-        /// e.g. StreamTitle=' House Bulldogs - But your love (Radio Edit)';StreamUrl='';
-        virtual void processMetaData( char* metaData, int len) {
-            LOGD(LOG_METHOD);
-            metaData[len]=0;
-            if (isAscii(metaData, 12)){
-                LOGI("%s", metaData);
-                Str meta(metaData, len);
-                int start = meta.indexOf("StreamTitle=");
-                if (start>=0){
-                    start+=12;
-                }
-                int end = meta.indexOf("';");
-                if (start>=0 && end>start){
-                    CHECK_MEMORY();
-                    metaData[end]=0;
-                    callback(Title, (const char*)metaData+start+1, end-start);
-                    CHECK_MEMORY();
-                }
-            } else {
-                LOGW("Unexpected Data: %s", metaData);
-            }
-        }
 };
 
 }

@@ -38,7 +38,7 @@ const int nextButtonPin = 13;
 // Print Audio Metadata
 void printMetaData(MetaDataType type, const char* str, int len){
   Serial.print("==> ");
-  Serial.print(MetaDataTypeStr[type]);
+  Serial.print(toStr(type));
   Serial.print(": ");
   Serial.println(str);
 }

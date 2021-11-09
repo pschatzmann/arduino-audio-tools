@@ -79,6 +79,7 @@ class ICYStreamDefault : public AbstractURLStream {
         virtual size_t readBytes(uint8_t* buffer, size_t len) override {
             size_t result = 0;
             if (icy.hasMetaData()){
+                CHECK_MEMORY();
                 // wait for data
                 while(url->available()<len){
                     delay(100);
@@ -93,12 +94,12 @@ class ICYStreamDefault : public AbstractURLStream {
                     result = j+1;
                     buffer[j] = ch;
                 }
+                CHECK_MEMORY();
             } else {
                  // fast access if there is no metadata
                  result = url->readBytes(buffer, len);
             }
             LOGD("%s: %zu -> %zu", LOG_METHOD, len, result);
-            CHECK_MEMORY();
             return result;
         }
 
