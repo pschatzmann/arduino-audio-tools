@@ -31,10 +31,11 @@ uint16_t IRAM_ATTR getADS1015(uint8_t *data, uint16_t len){
 // Arduino Setup
 void setup(void) {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
 
-  // setup gain for ads1015
+  // setup gain and start ads1015 
   ads1015.setGain(GAIN_SIXTEEN);
+  ads1015.begin();
 
   // Open stream from ads1015  
   auto cfg = in.defaultConfig();
@@ -43,6 +44,7 @@ void setup(void) {
   cfg.channels = channels;
   cfg.bits_per_sample = bits_per_sample;
   cfg.callback = getADS1015;
+  cfg.secure_timer = true;
   in.setNotifyAudioChange(out);
   in.begin(cfg);
  

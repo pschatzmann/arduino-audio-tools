@@ -2,6 +2,7 @@
 
 #ifdef ESP32
 #include "AudioTimer/AudioTimerDef.h"
+#include <esp_task_wdt.h>
 
 namespace audio_tools {
 
@@ -15,17 +16,18 @@ typedef void (* simple_callback )(void);
  */
 class UserCallback {
   public:
-    void setup(repeating_timer_callback_t my_callback, void *user_data ){
+    void setup(repeating_timer_callback_t my_callback, void *user_data, bool critical=true ){
       LOGD(LOG_METHOD);
       this->my_callback = my_callback;
       this->user_data = user_data;
+      this->is_critical = critical; // false when called from Task
     }
     
     IRAM_ATTR void call() {
       if (my_callback!=nullptr){
-        portENTER_CRITICAL_ISR(&timerMux);
+        if (is_critical) portENTER_CRITICAL_ISR(&timerMux);
         my_callback(user_data);
-        portEXIT_CRITICAL_ISR(&timerMux);
+        if (is_critical) portEXIT_CRITICAL_ISR(&timerMux);
       }
     }
 
@@ -33,6 +35,8 @@ class UserCallback {
     repeating_timer_callback_t my_callback = nullptr;
     void *user_data = nullptr;
     portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
+    bool is_critical;
+
 } *simpleUserCallback = nullptr;
 
   static IRAM_ATTR void userCallback0() {
@@ -59,20 +63,20 @@ class TimerCallback {
       TimerCallback() {
           LOGD(LOG_METHOD);
           timerMux = portMUX_INITIALIZER_UNLOCKED;
-          handler_task = nullptr;
+          p_handler_task = nullptr;
       }
 
-      void setup(TaskHandle_t handler_task){
+      void setup(TaskHandle_t &handler_task){
         LOGD(LOG_METHOD);
-        this->handler_task = handler_task;
+        p_handler_task = &handler_task;
       }
       
       IRAM_ATTR void call() {
-        if (handler_task!=nullptr) {
+        if (p_handler_task!=nullptr && *p_handler_task!=nullptr) {
           // A mutex protects the handler from reentry (which shouldn't happen, but just in case)
           portENTER_CRITICAL_ISR(&timerMux);
           BaseType_t xHigherPriorityTaskWoken = pdFALSE;
-          vTaskNotifyGiveFromISR(handler_task, &xHigherPriorityTaskWoken);
+          vTaskNotifyGiveFromISR(*p_handler_task, &xHigherPriorityTaskWoken);
           if (xHigherPriorityTaskWoken) {
             portYIELD_FROM_ISR();
           }
@@ -82,7 +86,7 @@ class TimerCallback {
       
   protected:
       portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
-      TaskHandle_t handler_task=nullptr;
+      TaskHandle_t *p_handler_task=nullptr;
 
 } *timerCallbackArray = nullptr;
 
@@ -164,12 +168,13 @@ class TimerAlarmRepeatingESP32 : public TimerAlarmRepeatingDef {
                 else if (timer_id==3) timerAttachInterrupt(adc_timer, timerCallback3, true); 
 
                 // we record the callback method and user data
-                user_callback.setup(callback_f, object);
+                user_callback.setup(callback_f, object, false);
+                timerCallbackArray[timer_id].setup(handler_task);
                 timerAlarmWrite(adc_timer, timeUs, true);
 
                 // setup the timercallback
-                xTaskCreate(complexHandler, "TimerAlarmRepeatingTask", configMINIMAL_STACK_SIZE+10000, &user_callback, 1, &handler_task);
-                timerCallbackArray[timer_id].setup(handler_task);
+                xTaskCreatePinnedToCore(complexHandler, "TimerAlarmRepeatingTask", configMINIMAL_STACK_SIZE+10000, &user_callback, priority, &handler_task, core);
+                LOGI("Task created on core %d", core);
 
                 timerAlarmEnable(adc_timer);
 
@@ -178,7 +183,7 @@ class TimerAlarmRepeatingESP32 : public TimerAlarmRepeatingDef {
                 if (simpleUserCallback==nullptr){
                   simpleUserCallback = new UserCallback[4];
                 }
-                simpleUserCallback[timer_id].setup(callback_f, object);
+                simpleUserCallback[timer_id].setup(callback_f, object, true);
                 if (timer_id==0) timerAttachInterrupt(adc_timer, userCallback0, true); 
                 else if (timer_id==1) timerAttachInterrupt(adc_timer, userCallback1, true); 
                 else if (timer_id==2) timerAttachInterrupt(adc_timer, userCallback2, true); 
@@ -206,6 +211,10 @@ class TimerAlarmRepeatingESP32 : public TimerAlarmRepeatingDef {
             return true;
         }
 
+        void setCore(int core){
+          this->core = core;
+        }
+
 
     protected:
       int timer_id=0;
@@ -214,6 +223,8 @@ class TimerAlarmRepeatingESP32 : public TimerAlarmRepeatingDef {
       hw_timer_t* adc_timer = nullptr; // our timer
       UserCallback user_callback;
       bool with_task = false;
+      int core = 1;
+      int priority = 4;
 
 
       /// We can not do any I2C calls in the interrupt handler so we need to do this in a separate task
@@ -231,6 +242,7 @@ class TimerAlarmRepeatingESP32 : public TimerAlarmRepeatingDef {
               cb->call();
           }
           yield();
+          esp_task_wdt_reset();
         }
       }
 };
