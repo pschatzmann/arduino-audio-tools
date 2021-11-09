@@ -51,9 +51,11 @@ class AudioLogger {
         }
 
         void println(){
+            CHECK_MEMORY();
             log_stream_ptr->println(print_buffer);
             print_buffer[0]=0;
             unlock();
+            CHECK_MEMORY();
         }
 
         char* str() {

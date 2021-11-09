@@ -37,7 +37,9 @@ public:
     }
 
     int writeArray(const T data[], int len){
-         LOGD("writeArray: %d", len);
+        LOGD("%s: %d", LOG_METHOD, len);
+        CHECK_MEMORY();
+
         int result = 0;
         for (int j=0;j<len;j++){
             if (write(data[j])==0){
@@ -45,17 +47,21 @@ public:
             }
             result = j+1;
         }
+        CHECK_MEMORY();
         return result;
     }
 
     // reads multiple values for array of 2 dimensional frames
     int readFrames(T data[][2], int len) {
+        LOGD("%s: %d", LOG_METHOD, len);
+        CHECK_MEMORY();
         int result = MIN(len, available());
         for (int j=0;j<result;j++){
             T sample = read();
             data[j][0] = sample;
             data[j][1] = sample;
         }
+        CHECK_MEMORY();
         return result;
     }
 
@@ -459,6 +465,7 @@ public:
   T* address() {
       return actual_read_buffer==nullptr ? nullptr : actual_read_buffer->address();
   }
+
   // Alternative interface using address: the current buffer has been filled
   BaseBuffer<T> &writeEnd(){
     if (actual_write_buffer!=nullptr){

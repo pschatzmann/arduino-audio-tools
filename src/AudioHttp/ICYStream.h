@@ -98,6 +98,7 @@ class ICYStreamDefault : public AbstractURLStream {
                  result = url->readBytes(buffer, len);
             }
             LOGD("%s: %zu -> %zu", LOG_METHOD, len, result);
+            CHECK_MEMORY();
             return result;
         }
 
