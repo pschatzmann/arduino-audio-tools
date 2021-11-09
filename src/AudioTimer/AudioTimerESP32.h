@@ -82,7 +82,7 @@ class TimerCallback {
       
   protected:
       portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
-      TaskHandle_t handler_task;
+      TaskHandle_t handler_task=nullptr;
 
 } *timerCallbackArray = nullptr;
 
@@ -113,7 +113,7 @@ class TimerAlarmRepeatingESP32 : public TimerAlarmRepeatingDef {
     public:
     
         TimerAlarmRepeatingESP32(bool withTask=false, int id=0){
-          LOGD(LOG_METHOD);
+          LOGI("%s: %s, id=%d",LOG_METHOD, withTask?"withTask":"noTask", id);
           if (id>=0 && id<4) {
             this->timer_id = id;
             this->with_task = withTask;
@@ -171,7 +171,6 @@ class TimerAlarmRepeatingESP32 : public TimerAlarmRepeatingDef {
                 xTaskCreate(complexHandler, "TimerAlarmRepeatingTask", configMINIMAL_STACK_SIZE+10000, &user_callback, 1, &handler_task);
                 timerCallbackArray[timer_id].setup(handler_task);
 
-
                 timerAlarmEnable(adc_timer);
 
             } else {
@@ -219,7 +218,7 @@ class TimerAlarmRepeatingESP32 : public TimerAlarmRepeatingDef {
 
       /// We can not do any I2C calls in the interrupt handler so we need to do this in a separate task
       static void complexHandler(void *param) {
-        LOGD(LOG_METHOD);
+        LOGI(LOG_METHOD);
         UserCallback* cb = (UserCallback*) param;
         uint32_t thread_notification;
 

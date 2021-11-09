@@ -67,7 +67,8 @@ void setup() {
   config.sample_rate = sample_rate;
   config.bits_per_sample = bits_per_sample;
   config.secure_timer = true;
-  ads1015Stream.begin(config, getADS1015); // start ads1015
+  config.callback = getADS1015;
+  ads1015Stream.begin(config); // start ads1015
 
   // start server
   server.begin(in, config); 

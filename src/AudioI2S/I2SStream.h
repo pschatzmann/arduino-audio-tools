@@ -5,7 +5,7 @@
 #ifdef USE_I2S
 #include "AudioTools/AudioTypes.h"
 #include "AudioTools/AudioStreams.h"
-#include "AudioI2S/I2sConfig.h"
+#include "AudioI2S/I2SConfig.h"
 #include "AudioI2S/I2SESP32.h"
 #include "AudioI2S/I2SESP8266.h"
 #include "AudioI2S/I2SSAMD.h"

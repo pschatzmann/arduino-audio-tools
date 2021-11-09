@@ -24,7 +24,8 @@ void setup(){
     cfg.sample_rate = 5000;
     cfg.bits_per_sample = 16;
     cfg.secure_timer = true; // Use separate Task
-    timerStream.begin(cfg, callback);
+    cfg.callback = callback;
+    timerStream.begin(cfg);
 }
 
 

@@ -550,6 +550,7 @@ struct TimerCallbackAudioStreamInfo : public AudioBaseInfo {
     bool use_timer = true;
     int timer_id = 0;
     bool secure_timer = false;
+    uint16_t (*callback)(uint8_t *data, uint16_t len) = nullptr;
 };
 
 
@@ -595,7 +596,7 @@ class TimerCallbackAudioStream : public BufferedStream, public AudioBaseInfoSour
                 cfg.sample_rate = info.sample_rate;
                 cfg.channels = info.channels;
                 cfg.bits_per_sample = info.bits_per_sample;
-                if (do_restart) begin(cfg, frameCallback);
+                if (do_restart) begin(cfg);
             }
         }
 
@@ -609,10 +610,10 @@ class TimerCallbackAudioStream : public BufferedStream, public AudioBaseInfoSour
             return cfg;
         }
 
-        void begin(TimerCallbackAudioStreamInfo config, uint16_t (*frameCB)(uint8_t *data, uint16_t len)){
+        void begin(TimerCallbackAudioStreamInfo config){
             LOGD("%s:  %s", LOG_METHOD, config.rx_tx_mode==RX_MODE ? "RX_MODE":"TX_MODE");
             this->cfg = config; 
-            this->frameCallback = frameCB;
+            this->frameCallback = config.callback;
             if (cfg.use_timer){
                 frameSize = cfg.bits_per_sample * cfg.channels / 8;
                 frame = new uint8_t[frameSize];

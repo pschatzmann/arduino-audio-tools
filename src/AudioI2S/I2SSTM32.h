@@ -1,7 +1,7 @@
 #pragma once
 
 #ifdef STM32
-#include "AudioI2S/I2sConfig.h"
+#include "AudioI2S/I2SConfig.h"
 
 namespace audio_tools {
 

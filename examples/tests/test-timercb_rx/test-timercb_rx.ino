@@ -25,8 +25,8 @@ void setup(){
     cfg.channels = 1;
     cfg.sample_rate = 5000;
     cfg.bits_per_sample = 16;
-    cfg.
-    timerStream.begin(cfg, callback);
+    cfg.callback = callback;
+    timerStream.begin(cfg);
 
 }
 
