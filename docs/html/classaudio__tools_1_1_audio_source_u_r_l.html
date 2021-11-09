@@ -90,10 +90,10 @@ Inheritance diagram for audio_tools::AudioSourceURL:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa87ad8ea102bf39bd102f073a2260a9c"><td class="memTemplParams" colspan="2"><a id="aa87ad8ea102bf39bd102f073a2260a9c"></a>
+<tr class="memitem:a013876158704be0ee50f302f418ae584"><td class="memTemplParams" colspan="2"><a id="a013876158704be0ee50f302f418ae584"></a>
 template&lt;typename T , size_t N&gt; </td></tr>
-<tr class="memitem:aa87ad8ea102bf39bd102f073a2260a9c"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>AudioSourceURL</b> (<a class="el" href="classaudio__tools_1_1_u_r_l_stream.html">URLStream</a> &amp;urlStream, T(&amp;urlArray)[N], const char *mime, int startPos=0)</td></tr>
-<tr class="separator:aa87ad8ea102bf39bd102f073a2260a9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a013876158704be0ee50f302f418ae584"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>AudioSourceURL</b> (<a class="el" href="classaudio__tools_1_1_abstract_u_r_l_stream.html">AbstractURLStream</a> &amp;urlStream, T(&amp;urlArray)[N], const char *mime, int startPos=0)</td></tr>
+<tr class="separator:a013876158704be0ee50f302f418ae584"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad348ea88c74a4f9a4882f4c877de3d0c"><td class="memItemLeft" align="right" valign="top"><a id="ad348ea88c74a4f9a4882f4c877de3d0c"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_u_r_l.html#ad348ea88c74a4f9a4882f4c877de3d0c">begin</a> () override</td></tr>
 <tr class="memdesc:ad348ea88c74a4f9a4882f4c877de3d0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup Wifi URL. <br /></td></tr>
@@ -117,6 +117,9 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_u_r_l.html#a7c3451e999092d8e394219e2e69b7391">selectStream</a> (int idx) override</td></tr>
 <tr class="memdesc:a7c3451e999092d8e394219e2e69b7391"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens the selected url from the array. <br /></td></tr>
 <tr class="separator:a7c3451e999092d8e394219e2e69b7391"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71b289ff5b4d6b176090387384cec2ca"><td class="memItemLeft" align="right" valign="top"><a id="a71b289ff5b4d6b176090387384cec2ca"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>setMetadataCallback</b> (void(*fn)(<a class="el" href="namespaceaudio__tools.html#a66747a0ba3d8821e3228fd1680106e68">MetaDataType</a> info, const char *str, int len))</td></tr>
+<tr class="separator:a71b289ff5b4d6b176090387384cec2ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaed4a2b2bc31c87441b14cb2990355c8"><td class="memItemLeft" align="right" valign="top"><a id="aaed4a2b2bc31c87441b14cb2990355c8"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_u_r_l.html#aaed4a2b2bc31c87441b14cb2990355c8">setTimeout</a> (int millisec)</td></tr>
 <tr class="memdesc:aaed4a2b2bc31c87441b14cb2990355c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the timeout of the URL <a class="el" href="class_stream.html">Stream</a> in milliseconds. <br /></td></tr>
@@ -140,9 +143,9 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a1a252d3fab118a96b3649c993ced84bb"><td class="memItemLeft" align="right" valign="top"><a id="a1a252d3fab118a96b3649c993ced84bb"></a>
-<a class="el" href="classaudio__tools_1_1_u_r_l_stream.html">URLStream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>actual_stream</b> = nullptr</td></tr>
-<tr class="separator:a1a252d3fab118a96b3649c993ced84bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65541aec0b17dd7a248e869d7ae9c39f"><td class="memItemLeft" align="right" valign="top"><a id="a65541aec0b17dd7a248e869d7ae9c39f"></a>
+<a class="el" href="classaudio__tools_1_1_abstract_u_r_l_stream.html">AbstractURLStream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>actual_stream</b> = nullptr</td></tr>
+<tr class="separator:a65541aec0b17dd7a248e869d7ae9c39f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3cda989f62bc330e0b1b51911cd84a88"><td class="memItemLeft" align="right" valign="top"><a id="a3cda989f62bc330e0b1b51911cd84a88"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>max</b> = 0</td></tr>
 <tr class="separator:a3cda989f62bc330e0b1b51911cd84a88"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -159,9 +162,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>started</b> = false</
 const char **&#160;</td><td class="memItemRight" valign="bottom"><b>urlArray</b></td></tr>
 <tr class="separator:a55cec03df60ed81bacd1f789c66e7ab4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classaudio__tools_1_1_audio_source"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classaudio__tools_1_1_audio_source')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classaudio__tools_1_1_audio_source.html">audio_tools::AudioSource</a></td></tr>
-<tr class="memitem:abdab36077b038b12686adad57d4ff6b0 inherit pro_attribs_classaudio__tools_1_1_audio_source"><td class="memItemLeft" align="right" valign="top"><a id="abdab36077b038b12686adad57d4ff6b0"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_value</b> = 500</td></tr>
-<tr class="separator:abdab36077b038b12686adad57d4ff6b0 inherit pro_attribs_classaudio__tools_1_1_audio_source"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8d05ac41eac84b8cd3a41978e6e4683 inherit pro_attribs_classaudio__tools_1_1_audio_source"><td class="memItemLeft" align="right" valign="top"><a id="ac8d05ac41eac84b8cd3a41978e6e4683"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_auto_next_value</b> = 500</td></tr>
+<tr class="separator:ac8d05ac41eac84b8cd3a41978e6e4683 inherit pro_attribs_classaudio__tools_1_1_audio_source"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Audio Source which provides the data via the network from an URL. </p>

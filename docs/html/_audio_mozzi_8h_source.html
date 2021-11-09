@@ -96,7 +96,7 @@ $(function() {
 <div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_mozzi_generator.html">   40</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_mozzi_generator.html">MozziGenerator</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt;int16_t&gt; {</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <a class="code" href="classaudio__tools_1_1_mozzi_generator.html">MozziGenerator</a>(){   </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            LOGD(LOG_METHOD);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;             LOGD(LOG_METHOD);</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        }</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <a class="code" href="classaudio__tools_1_1_mozzi_generator.html">MozziGenerator</a>(<a class="code" href="structaudio__tools_1_1_mozzi_config.html">MozziConfig</a> <a class="code" href="classaudio__tools_1_1_mozzi_generator.html#a19c98c569cc9923e857135f8c2b8eb07">config</a>){</div>
@@ -198,11 +198,11 @@ $(function() {
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        <a class="code" href="classaudio__tools_1_1_mozzi_stream.html">MozziStream</a>(){</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;            LOGD(LOG_METHOD);</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;             LOGD(LOG_METHOD);</div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        }</div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160; </div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        ~<a class="code" href="classaudio__tools_1_1_mozzi_stream.html">MozziStream</a>(){</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;            LOGD(LOG_METHOD);</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;             LOGD(LOG_METHOD);</div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;            end();</div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;            <span class="keywordflow">if</span> (input_ptr!=<span class="keyword">nullptr</span>){</div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                <span class="keyword">delete</span> input_ptr;</div>
@@ -222,7 +222,7 @@ $(function() {
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        <span class="comment">// Start Mozzi -  if controlRate &gt; 0 we actiavate the sound generation (=&gt;allow reads); the parameters describe the values if the</span></div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        <span class="comment">// provided input stream or resulting output stream;</span></div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_mozzi_stream.html#ad39741bc266a5337695a8a15a2004a9c">begin</a>(<a class="code" href="structaudio__tools_1_1_mozzi_config.html">MozziConfig</a> cfg){</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;            LOGD(LOG_METHOD);</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;              LOGD(LOG_METHOD);</div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;            config = cfg;</div>
 <div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;            Mozzi.setAudioRate(config.sample_rate);</div>
 <div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;            <span class="comment">// in output mode we do not allocate any unnecessary functionality</span></div>
@@ -234,7 +234,7 @@ $(function() {
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        }</div>
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        <span class="keywordtype">void</span> end(){</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;            LOGD(LOG_METHOD);</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;             LOGD(LOG_METHOD);</div>
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;            Mozzi.stop();</div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        }</div>
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; </div>
@@ -342,7 +342,7 @@ $(function() {
 <div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;} <span class="comment">// Namespace</span></div>
 <div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160; </div>
 <div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// USE_MOZZI</span></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_stream.html">audio_tools::AudioStream</a></div><div class="ttdoc">Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...</div><div class="ttdef"><b>Definition:</b> AudioStreams.h:15</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_stream.html">audio_tools::AudioStream</a></div><div class="ttdoc">Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...</div><div class="ttdef"><b>Definition:</b> AudioStreams.h:17</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_mozzi_generator_html"><div class="ttname"><a href="classaudio__tools_1_1_mozzi_generator.html">audio_tools::MozziGenerator</a></div><div class="ttdoc">Support for https://sensorium.github.io/Mozzi/ Define your updateControl() method....</div><div class="ttdef"><b>Definition:</b> AudioMozzi.h:40</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_mozzi_generator_html_a19c98c569cc9923e857135f8c2b8eb07"><div class="ttname"><a href="classaudio__tools_1_1_mozzi_generator.html#a19c98c569cc9923e857135f8c2b8eb07">audio_tools::MozziGenerator::config</a></div><div class="ttdeci">MozziConfig config()</div><div class="ttdoc">Provides some key audio information.</div><div class="ttdef"><b>Definition:</b> AudioMozzi.h:68</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_mozzi_generator_html_a4ebf2dcddf7f51525446c9d3877d5c15"><div class="ttname"><a href="classaudio__tools_1_1_mozzi_generator.html#a4ebf2dcddf7f51525446c9d3877d5c15">audio_tools::MozziGenerator::readSample</a></div><div class="ttdeci">virtual int16_t readSample()</div><div class="ttdoc">Provides a single sample.</div><div class="ttdef"><b>Definition:</b> AudioMozzi.h:73</div></div>
@@ -354,7 +354,7 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_sound_generator_html_a355ddf14fffecaa8538a85310900ca4a"><div class="ttname"><a href="classaudio__tools_1_1_sound_generator.html#a355ddf14fffecaa8538a85310900ca4a">audio_tools::SoundGenerator&lt; int16_t &gt;::end</a></div><div class="ttdeci">virtual void end()</div><div class="ttdoc">ends the processing</div><div class="ttdef"><b>Definition:</b> SoundGenerator.h:99</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_sound_generator_html_a8534989c802aeb687aa13b9a3d6ee781"><div class="ttname"><a href="classaudio__tools_1_1_sound_generator.html#a8534989c802aeb687aa13b9a3d6ee781">audio_tools::SoundGenerator::readBytes</a></div><div class="ttdeci">virtual size_t readBytes(uint8_t *buffer, size_t lengthBytes)</div><div class="ttdoc">Provides the data as byte array with the requested number of channels.</div><div class="ttdef"><b>Definition:</b> SoundGenerator.h:49</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Parser for MP3 ID3 Meta Data: The goal is to implement a simple API which provides the title,...</div><div class="ttdef"><b>Definition:</b> AudioA2DP.h:18</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html_af89661af127c7208d6646c076e5a5111"><div class="ttname"><a href="namespaceaudio__tools.html#af89661af127c7208d6646c076e5a5111">audio_tools::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdoc">stops any further processing by spinning in an endless loop</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:151</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html_af89661af127c7208d6646c076e5a5111"><div class="ttname"><a href="namespaceaudio__tools.html#af89661af127c7208d6646c076e5a5111">audio_tools::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdoc">stops any further processing by spinning in an endless loop</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:154</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_base_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_base_info.html">audio_tools::AudioBaseInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:18</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_mozzi_config_html"><div class="ttname"><a href="structaudio__tools_1_1_mozzi_config.html">audio_tools::MozziConfig</a></div><div class="ttdoc">Mozzi Configuration for input or output stream.</div><div class="ttdef"><b>Definition:</b> AudioMozzi.h:18</div></div>
 </div><!-- fragment --></div><!-- contents -->

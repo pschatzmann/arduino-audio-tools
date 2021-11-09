@@ -91,6 +91,9 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html">AACEncoderFDK</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encodes PCM data to the AAC format and writes the result to a stream This is basically just a wrapper using <a href="https://github.com/pschatzmann/arduino-fdk-aac">https://github.com/pschatzmann/arduino-fdk-aac</a>.  <a href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_abstract_u_r_l_stream.html">AbstractURLStream</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract Base class for all <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="URLStream implementation for all envionments except ESP32.">URLStream</a> implementations.  <a href="classaudio__tools_1_1_abstract_u_r_l_stream.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_audio.html">AnalogAudio</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A very fast ADC and DAC using the ESP32 <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for multiple Architectures that supports the reading and writing with a ...">I2S</a> interface.  <a href="classaudio__tools_1_1_analog_audio.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -186,17 +189,11 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_cached_volume_control.html">CachedVolumeControl</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">In order to optimize the processing time we cache the last input &amp; factor and recalculate the new factor only if the input has changed.  <a href="classaudio__tools_1_1_cached_volume_control.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_callback_audio_stream.html">CallbackAudioStream</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback driven Audio Source (rx_tx_mode==RX_MODE) or Audio Sink (rx_tx_mode==TX_MODE). This class allows to to integrate external libraries in order to consume or generate a data stream.  <a href="classaudio__tools_1_1_callback_audio_stream.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_callback_audio_stream_info.html">CallbackAudioStreamInfo</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_callback_audio_stream.html" title="Callback driven Audio Source (rx_tx_mode==RX_MODE) or Audio Sink (rx_tx_mode==TX_MODE)....">CallbackAudioStream</a> Configuration.  <a href="structaudio__tools_1_1_callback_audio_stream_info.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_callback_buffered_stream.html">CallbackBufferedStream</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">AudioOutput class which stores the data in a temporary buffer. The buffer can be consumed e.g. by a callback function by calling <a class="el" href="classaudio__tools_1_1_buffered_stream.html#a057be5d11995e5454884913f39870a8b" title="reads a byte - to be avoided">read()</a>;.  <a href="classaudio__tools_1_1_callback_buffered_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_callback_converter.html">CallbackConverter</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts e.g. 24bit data to the indicated bigger data type.  <a href="classaudio__tools_1_1_callback_converter.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_callback_stream.html">CallbackStream</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">AudioOutput class which stores the data in a temporary buffer. The buffer can be consumed e.g. by a callback function by calling <a class="el" href="classaudio__tools_1_1_buffered_stream.html#a057be5d11995e5454884913f39870a8b" title="reads a byte - to be avoided">read()</a>;.  <a href="classaudio__tools_1_1_callback_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_callback_volume_control.html">CallbackVolumeControl</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide the volume function as callback method: This is easy to use e.g together with a lamda function!  <a href="classaudio__tools_1_1_callback_volume_control.html#details">More...</a><br /></td></tr>
@@ -256,6 +253,9 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_generated_sound_stream.html">GeneratedSoundStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Source for reading generated tones. Please note.  <a href="classaudio__tools_1_1_generated_sound_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_generator_from_stream.html">GeneratorFromStream</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">An Adapter Class which lets you use any <a class="el" href="class_stream.html">Stream</a> as a Generator.  <a href="classaudio__tools_1_1_generator_from_stream.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_hex_dump_stream.html">HexDumpStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a Hex Dump.  <a href="classaudio__tools_1_1_hex_dump_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -292,6 +292,15 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_stream.html">I2SStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">We support the <a class="el" href="class_stream.html">Stream</a> interface for the <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for multiple Architectures that supports the reading and writing with a ...">I2S</a> access. In addition we allow a separate mute pin which might also be used to drive a LED...  <a href="classaudio__tools_1_1_i2_s_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i_c_y_stream.html">ICYStream</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_i_c_y_stream.html" title="ICYStream for all environment except ESP32.">ICYStream</a> for all environment except ESP32.  <a href="classaudio__tools_1_1_i_c_y_stream.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i_c_y_stream_default.html">ICYStreamDefault</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Icecast/Shoutcast Audio <a class="el" href="class_stream.html">Stream</a> which splits the data into metadata and audio data. The Audio data is provided via the regular stream functions. The metadata is handled with the help of the <a class="el" href="classaudio__tools_1_1_meta_data_i_c_y.html">MetaDataICY</a> state machine and provided via a callback method.  <a href="classaudio__tools_1_1_i_c_y_stream_default.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i_c_y_url_setup.html">ICYUrlSetup</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resolve icy-metaint from <a class="el" href="classaudio__tools_1_1_http_request.html" title="Simple API to process get, put, post, del http requests I tried to use Arduino HttpClient,...">HttpRequest</a> and execute metadata callbacks.  <a href="classaudio__tools_1_1_i_c_y_url_setup.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_i_d3v1.html">ID3v1</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ID3 verion 1 TAG (130 bytes)  <a href="structaudio__tools_1_1_i_d3v1.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -318,6 +327,8 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_memory_stream.html">MemoryStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple <a class="el" href="class_stream.html">Stream</a> implementation which is backed by allocated memory.  <a href="classaudio__tools_1_1_memory_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_meta_data_i_c_y.html">MetaDataICY</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_meta_data_i_d3.html">MetaDataID3</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple ID3 Meta Data Parser which supports ID3 V1 and V2 and implements the <a class="el" href="class_stream.html">Stream</a> interface. You just need to set the callback(s) to receive the result and copy the audio data to this stream.  <a href="classaudio__tools_1_1_meta_data_i_d3.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -329,6 +340,9 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_meta_data_i_d3_v2.html">MetaDataID3V2</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple ID3 Meta Data API which supports ID3 V2: We only support the "TALB", "TOPE", "TIT2", "TCON" tags.  <a href="classaudio__tools_1_1_meta_data_i_d3_v2.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_meta_data_print.html">MetaDataPrint</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ID3 and Icecast/Shoutcast metadata output support.  <a href="classaudio__tools_1_1_meta_data_print.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_mozzi_config.html">MozziConfig</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mozzi Configuration for input or output stream.  <a href="structaudio__tools_1_1_mozzi_config.html#details">More...</a><br /></td></tr>
@@ -478,6 +492,12 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timer_callback.html">TimerCallback</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal class to manage the different timer callbacks for the 4 hardware timers.  <a href="classaudio__tools_1_1_timer_callback.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timer_callback_audio_stream.html">TimerCallbackAudioStream</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback driven Audio Source (rx_tx_mode==RX_MODE) or Audio Sink (rx_tx_mode==TX_MODE). This class allows to to integrate external libraries in order to consume or generate a data stream which is based on a timer.  <a href="classaudio__tools_1_1_timer_callback_audio_stream.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_timer_callback_audio_stream_info.html">TimerCallbackAudioStreamInfo</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_timer_callback_audio_stream.html" title="Callback driven Audio Source (rx_tx_mode==RX_MODE) or Audio Sink (rx_tx_mode==TX_MODE)....">TimerCallbackAudioStream</a> Configuration.  <a href="structaudio__tools_1_1_timer_callback_audio_stream_info.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html">Tremolo</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">EffectTremolo.  <a href="classaudio__tools_1_1_tremolo.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -485,6 +505,7 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">URL parser which breaks a full url string up into its individual parts.  <a href="classaudio__tools_1_1_url.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_r_l_stream.html">URLStream</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="URLStream implementation for all envionments except ESP32.">URLStream</a> implementation for all envionments except ESP32.  <a href="classaudio__tools_1_1_u_r_l_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_r_l_stream_default.html">URLStreamDefault</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the content of a URL as <a class="el" href="class_stream.html">Stream</a>. We use the WiFi.h API.  <a href="classaudio__tools_1_1_u_r_l_stream_default.html#details">More...</a><br /></td></tr>
@@ -600,12 +621,35 @@ Enumerations</h2></td></tr>
 , <b>TagFoundComplete</b>
 , <br />
 &#160;&#160;<b>TagProcessed</b>
+, <b>TagNotFound</b>
+, <b>PartialTagAtTail</b>
+, <b>TagFoundPartial</b>
+, <br />
+&#160;&#160;<b>TagFoundComplete</b>
+, <b>TagProcessed</b>
 <br />
  }</td></tr>
 <tr class="memdesc:a2bf99e743756d972f8f88dc10c2b24d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">current status of the parsing <br /></td></tr>
 <tr class="separator:a2bf99e743756d972f8f88dc10c2b24d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d4e1fe2dd00b263250e9319bcc85946"><td class="memItemLeft" align="right" valign="top"><a id="a0d4e1fe2dd00b263250e9319bcc85946"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>RxTxMode</b> { <b>TX_MODE</b>
-, <b>RX_MODE</b>
+<tr class="memitem:a2bf99e743756d972f8f88dc10c2b24d6"><td class="memItemLeft" align="right" valign="top"><a id="a2bf99e743756d972f8f88dc10c2b24d6"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a2bf99e743756d972f8f88dc10c2b24d6">ParseStatus</a> { <br />
+&#160;&#160;<b>TagNotFound</b>
+, <b>PartialTagAtTail</b>
+, <b>TagFoundPartial</b>
+, <b>TagFoundComplete</b>
+, <br />
+&#160;&#160;<b>TagProcessed</b>
+, <b>TagNotFound</b>
+, <b>PartialTagAtTail</b>
+, <b>TagFoundPartial</b>
+, <br />
+&#160;&#160;<b>TagFoundComplete</b>
+, <b>TagProcessed</b>
+<br />
+ }</td></tr>
+<tr class="memdesc:a2bf99e743756d972f8f88dc10c2b24d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">current status of the parsing <br /></td></tr>
+<tr class="separator:a2bf99e743756d972f8f88dc10c2b24d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d4e1fe2dd00b263250e9319bcc85946"><td class="memItemLeft" align="right" valign="top"><a id="a0d4e1fe2dd00b263250e9319bcc85946"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>RxTxMode</b> { <b>TX_MODE</b> =1
+, <b>RX_MODE</b> =2
  }</td></tr>
 <tr class="separator:a0d4e1fe2dd00b263250e9319bcc85946"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2580860e590a075e7acf4753a09f2331"><td class="memItemLeft" align="right" valign="top"><a id="a2580860e590a075e7acf4753a09f2331"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a2580860e590a075e7acf4753a09f2331">TimeUnit</a> { <b>MS</b>
@@ -665,6 +709,33 @@ static int64_t&#160;</td><td class="memItemRight" valign="bottom"><b>maxValue</b
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#af89661af127c7208d6646c076e5a5111">stop</a> ()</td></tr>
 <tr class="memdesc:af89661af127c7208d6646c076e5a5111"><td class="mdescLeft">&#160;</td><td class="mdescRight">stops any further processing by spinning in an endless loop <br /></td></tr>
 <tr class="separator:af89661af127c7208d6646c076e5a5111"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb8f7988e8bdb93cd8f0c508d45e65a2"><td class="memItemLeft" align="right" valign="top"><a id="adb8f7988e8bdb93cd8f0c508d45e65a2"></a>
+void IRAM_ATTR&#160;</td><td class="memItemRight" valign="bottom"><b>timerCallback</b> (void *obj)</td></tr>
+<tr class="separator:adb8f7988e8bdb93cd8f0c508d45e65a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a9e56986969660a0c1ece83538df510"><td class="memItemLeft" align="right" valign="top"><a id="a2a9e56986969660a0c1ece83538df510"></a>
+static IRAM_ATTR void&#160;</td><td class="memItemRight" valign="bottom"><b>timerCallback0</b> ()</td></tr>
+<tr class="separator:a2a9e56986969660a0c1ece83538df510"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d9db3c24f27aabf480da8dcfa7d669e"><td class="memItemLeft" align="right" valign="top"><a id="a2d9db3c24f27aabf480da8dcfa7d669e"></a>
+static IRAM_ATTR void&#160;</td><td class="memItemRight" valign="bottom"><b>timerCallback1</b> ()</td></tr>
+<tr class="separator:a2d9db3c24f27aabf480da8dcfa7d669e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5e58a5f221a434979c5a1ad43989548"><td class="memItemLeft" align="right" valign="top"><a id="ae5e58a5f221a434979c5a1ad43989548"></a>
+static IRAM_ATTR void&#160;</td><td class="memItemRight" valign="bottom"><b>timerCallback2</b> ()</td></tr>
+<tr class="separator:ae5e58a5f221a434979c5a1ad43989548"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2354db9bd0aa6b2cb87dcb38c8d45736"><td class="memItemLeft" align="right" valign="top"><a id="a2354db9bd0aa6b2cb87dcb38c8d45736"></a>
+static IRAM_ATTR void&#160;</td><td class="memItemRight" valign="bottom"><b>timerCallback3</b> ()</td></tr>
+<tr class="separator:a2354db9bd0aa6b2cb87dcb38c8d45736"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44efd1d1c6ac045c5217eca480cf6057"><td class="memItemLeft" align="right" valign="top"><a id="a44efd1d1c6ac045c5217eca480cf6057"></a>
+static IRAM_ATTR void&#160;</td><td class="memItemRight" valign="bottom"><b>userCallback0</b> ()</td></tr>
+<tr class="separator:a44efd1d1c6ac045c5217eca480cf6057"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89cd3fa5cb38b3f5b7ed6c4adca60bae"><td class="memItemLeft" align="right" valign="top"><a id="a89cd3fa5cb38b3f5b7ed6c4adca60bae"></a>
+static IRAM_ATTR void&#160;</td><td class="memItemRight" valign="bottom"><b>userCallback1</b> ()</td></tr>
+<tr class="separator:a89cd3fa5cb38b3f5b7ed6c4adca60bae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec98d70322db5d483b2648a090495ce3"><td class="memItemLeft" align="right" valign="top"><a id="aec98d70322db5d483b2648a090495ce3"></a>
+static IRAM_ATTR void&#160;</td><td class="memItemRight" valign="bottom"><b>userCallback2</b> ()</td></tr>
+<tr class="separator:aec98d70322db5d483b2648a090495ce3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a673649962278fce007046271c6b597e4"><td class="memItemLeft" align="right" valign="top"><a id="a673649962278fce007046271c6b597e4"></a>
+static IRAM_ATTR void&#160;</td><td class="memItemRight" valign="bottom"><b>userCallback3</b> ()</td></tr>
+<tr class="separator:a673649962278fce007046271c6b597e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -733,21 +804,21 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>DEFAULT_AGENT
 <tr class="separator:a2654e272651eb02d6859e44606f7c78e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c6d8538a477b787d422ef7ea287e1ba"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structaudio__tools_1_1_nano___b_l_e__freq__info.html">Nano_BLE_freq_info</a>&#160;</td><td class="memItemRight" valign="bottom"><b>freq_table</b> []</td></tr>
 <tr class="separator:a2c6d8538a477b787d422ef7ea287e1ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae9d9368ae309f8d73f1651936d4ac33f"><td class="memItemLeft" align="right" valign="top"><a id="ae9d9368ae309f8d73f1651936d4ac33f"></a>
-const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ae9d9368ae309f8d73f1651936d4ac33f">genres</a> [] = { &quot;Classic Rock&quot;, &quot;Country&quot;, &quot;Dance&quot;, &quot;Disco&quot;, &quot;Funk&quot;, &quot;Grunge&quot;, &quot;Hip-Hop&quot;, &quot;Jazz&quot;, &quot;Metal&quot;, &quot;New Age&quot;, &quot;Oldies&quot;, &quot;Other&quot;, &quot;Pop&quot;, &quot;R&amp;B&quot;, &quot;Rap&quot;, &quot;Reggae&quot;, &quot;Rock&quot;, &quot;Techno&quot;, &quot;Industrial&quot;, &quot;Alternative&quot;, &quot;Ska&quot;, &quot;Death Metal&quot;, &quot;Pranks&quot;, &quot;Soundtrack&quot;, &quot;Euro-Techno&quot;, &quot;Ambient&quot;, &quot;Trip-Hop&quot;, &quot;Vocal&quot;, &quot;Jazz+Funk&quot;, &quot;Fusion&quot;, &quot;Trance&quot;, &quot;Classical&quot;, &quot;Instrumental&quot;, &quot;Acid&quot;, &quot;House&quot;, &quot;Game&quot;, &quot;Sound Clip&quot;, &quot;Gospel&quot;, &quot;Noise&quot;, &quot;Alternative Rock&quot;, &quot;Bass&quot;, &quot;Soul&quot;, &quot;Punk&quot;, &quot;Space&quot;, &quot;Meditative&quot;, &quot;Instrumental Pop&quot;, &quot;Instrumental Rock&quot;, &quot;Ethnic&quot;, &quot;Gothic&quot;, &quot;Darkwave&quot;, &quot;Techno-Insdustiral&quot;, &quot;Electronic&quot;, &quot;Pop-Folk&quot;, &quot;Eurodance&quot;, &quot;Dream&quot;, &quot;Southern Rock&quot;, &quot;Comedy&quot;, &quot;Cult&quot;, &quot;Gangsta&quot;, &quot;Top 40&quot;, &quot;Christian Rap&quot;, &quot;Pop/Funk&quot;, &quot;Jungle&quot;, &quot;Native US&quot;, &quot;Cabaret&quot;, &quot;New Wave&quot;, &quot;Psychadelic&quot;, &quot;Rave&quot;, &quot;Showtunes&quot;, &quot;Trailer&quot;, &quot;Lo-Fi&quot;, &quot;Tribal&quot;, &quot;Acid Punk&quot;, &quot;Acid Jazz&quot;, &quot;Polka&quot;, &quot;Retro&quot;, &quot;Musical&quot;, &quot;Rock &amp; Roll&quot;, &quot;Hard Rock&quot;, &quot;Folk&quot;, &quot;Folk-Rock&quot;, &quot;National Folk&quot;, &quot;Swing&quot;, &quot;Fast Fusion&quot;, &quot;Bebob&quot;, &quot;Latin&quot;, &quot;Revival&quot;, &quot;Celtic&quot;, &quot;Bluegrass&quot;, &quot;Avantgarde&quot;, &quot;Gothic Rock&quot;, &quot;Progressive Rock&quot;, &quot;Psychedelic Rock&quot;, &quot;Symphonic Rock&quot;, &quot;Slow Rock&quot;, &quot;Big Band&quot;, &quot;Chorus&quot;, &quot;Easy Listening&quot;, &quot;Acoustic&quot;,&quot;Humour&quot;, &quot;Speech&quot;, &quot;Chanson&quot;, &quot;Opera&quot;, &quot;Chamber Music&quot;, &quot;Sonata&quot;, &quot;Symphony&quot;, &quot;Booty Bass&quot;, &quot;Primus&quot;, &quot;Porn Groove&quot;, &quot;Satire&quot;, &quot;Slow Jam&quot;, &quot;Club&quot;, &quot;Tango&quot;, &quot;Samba&quot;, &quot;Folklore&quot;, &quot;Ballad&quot;, &quot;Power Ballad&quot;, &quot;Rhytmic Soul&quot;, &quot;Freestyle&quot;, &quot;Duet&quot;, &quot;Punk Rock&quot;, &quot;Drum Solo&quot;, &quot;Acapella&quot;, &quot;Euro-House&quot;, &quot;Dance Hall&quot;, &quot;Goa&quot;, &quot;Drum &amp; Bass&quot;, &quot;Club-House&quot;, &quot;Hardcore&quot;, &quot;Terror&quot;, &quot;Indie&quot;, &quot;BritPop&quot;, &quot;Negerpunk&quot;, &quot;Polsk Punk&quot;, &quot;Beat&quot;, &quot;Christian Gangsta&quot;, &quot;Heavy Metal&quot;, &quot;Black Metal&quot;, &quot;Crossover&quot;, &quot;Contemporary C&quot;, &quot;Christian Rock&quot;, &quot;Merengue&quot;, &quot;Salsa&quot;, &quot;Thrash Metal&quot;, &quot;Anime&quot;, &quot;JPop&quot;, &quot;SynthPop&quot; }</td></tr>
-<tr class="memdesc:ae9d9368ae309f8d73f1651936d4ac33f"><td class="mdescLeft">&#160;</td><td class="mdescRight">String array with genres. <br /></td></tr>
-<tr class="separator:ae9d9368ae309f8d73f1651936d4ac33f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b557a69bf723c639c02209bdb1eb4b5"><td class="memItemLeft" align="right" valign="top"><a id="a1b557a69bf723c639c02209bdb1eb4b5"></a>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a1b557a69bf723c639c02209bdb1eb4b5">genres</a> [] = { &quot;Classic Rock&quot;, &quot;Country&quot;, &quot;Dance&quot;, &quot;Disco&quot;, &quot;Funk&quot;, &quot;Grunge&quot;, &quot;Hip-Hop&quot;, &quot;Jazz&quot;, &quot;Metal&quot;, &quot;New Age&quot;, &quot;Oldies&quot;, &quot;Other&quot;, &quot;Pop&quot;, &quot;R&amp;B&quot;, &quot;Rap&quot;, &quot;Reggae&quot;, &quot;Rock&quot;, &quot;Techno&quot;, &quot;Industrial&quot;, &quot;Alternative&quot;, &quot;Ska&quot;, &quot;Death Metal&quot;, &quot;Pranks&quot;, &quot;Soundtrack&quot;, &quot;Euro-Techno&quot;, &quot;Ambient&quot;, &quot;Trip-Hop&quot;, &quot;Vocal&quot;, &quot;Jazz+Funk&quot;, &quot;Fusion&quot;, &quot;Trance&quot;, &quot;Classical&quot;, &quot;Instrumental&quot;, &quot;Acid&quot;, &quot;House&quot;, &quot;Game&quot;, &quot;Sound Clip&quot;, &quot;Gospel&quot;, &quot;Noise&quot;, &quot;Alternative Rock&quot;, &quot;Bass&quot;, &quot;Soul&quot;, &quot;Punk&quot;, &quot;Space&quot;, &quot;Meditative&quot;, &quot;Instrumental Pop&quot;, &quot;Instrumental Rock&quot;, &quot;Ethnic&quot;, &quot;Gothic&quot;, &quot;Darkwave&quot;, &quot;Techno-Insdustiral&quot;, &quot;Electronic&quot;, &quot;Pop-Folk&quot;, &quot;Eurodance&quot;, &quot;Dream&quot;, &quot;Southern Rock&quot;, &quot;Comedy&quot;, &quot;Cult&quot;, &quot;Gangsta&quot;, &quot;Top 40&quot;, &quot;Christian Rap&quot;, &quot;Pop/Funk&quot;, &quot;Jungle&quot;, &quot;Native US&quot;, &quot;Cabaret&quot;, &quot;New Wave&quot;, &quot;Psychadelic&quot;, &quot;Rave&quot;, &quot;Showtunes&quot;, &quot;Trailer&quot;, &quot;Lo-Fi&quot;, &quot;Tribal&quot;, &quot;Acid Punk&quot;, &quot;Acid Jazz&quot;, &quot;Polka&quot;, &quot;Retro&quot;, &quot;Musical&quot;, &quot;Rock &amp; Roll&quot;, &quot;Hard Rock&quot;, &quot;Folk&quot;, &quot;Folk-Rock&quot;, &quot;National Folk&quot;, &quot;Swing&quot;, &quot;Fast Fusion&quot;, &quot;Bebob&quot;, &quot;Latin&quot;, &quot;Revival&quot;, &quot;Celtic&quot;, &quot;Bluegrass&quot;, &quot;Avantgarde&quot;, &quot;Gothic Rock&quot;, &quot;Progressive Rock&quot;, &quot;Psychedelic Rock&quot;, &quot;Symphonic Rock&quot;, &quot;Slow Rock&quot;, &quot;Big Band&quot;, &quot;Chorus&quot;, &quot;Easy Listening&quot;, &quot;Acoustic&quot;,&quot;Humour&quot;, &quot;Speech&quot;, &quot;Chanson&quot;, &quot;Opera&quot;, &quot;Chamber Music&quot;, &quot;Sonata&quot;, &quot;Symphony&quot;, &quot;Booty Bass&quot;, &quot;Primus&quot;, &quot;Porn Groove&quot;, &quot;Satire&quot;, &quot;Slow Jam&quot;, &quot;Club&quot;, &quot;Tango&quot;, &quot;Samba&quot;, &quot;Folklore&quot;, &quot;Ballad&quot;, &quot;Power Ballad&quot;, &quot;Rhytmic Soul&quot;, &quot;Freestyle&quot;, &quot;Duet&quot;, &quot;Punk Rock&quot;, &quot;Drum Solo&quot;, &quot;Acapella&quot;, &quot;Euro-House&quot;, &quot;Dance Hall&quot;, &quot;Goa&quot;, &quot;Drum &amp; Bass&quot;, &quot;Club-House&quot;, &quot;Hardcore&quot;, &quot;Terror&quot;, &quot;Indie&quot;, &quot;BritPop&quot;, &quot;Negerpunk&quot;, &quot;Polsk Punk&quot;, &quot;Beat&quot;, &quot;Christian Gangsta&quot;, &quot;Heavy Metal&quot;, &quot;Black Metal&quot;, &quot;Crossover&quot;, &quot;Contemporary C&quot;, &quot;Christian Rock&quot;, &quot;Merengue&quot;, &quot;Salsa&quot;, &quot;Thrash Metal&quot;, &quot;Anime&quot;, &quot;JPop&quot;, &quot;SynthPop&quot; }</td></tr>
+<tr class="memdesc:a1b557a69bf723c639c02209bdb1eb4b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">String array with genres. <br /></td></tr>
+<tr class="separator:a1b557a69bf723c639c02209bdb1eb4b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5862094ef3c207af221d197671953432"><td class="memItemLeft" align="right" valign="top"><a id="a5862094ef3c207af221d197671953432"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><b>HOST_C</b> = &quot;Host&quot;</td></tr>
 <tr class="separator:a5862094ef3c207af221d197671953432"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8cbed98824a47da99418d2dd6b872c03"><td class="memItemLeft" align="right" valign="top"><a id="a8cbed98824a47da99418d2dd6b872c03"></a>
 const int&#160;</td><td class="memItemRight" valign="bottom"><b>i2s_buffer_size</b> = 1024</td></tr>
 <tr class="separator:a8cbed98824a47da99418d2dd6b872c03"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac1f0f7b458a1d7f22dd48effad5e07b1"><td class="memItemLeft" align="right" valign="top"><a id="ac1f0f7b458a1d7f22dd48effad5e07b1"></a>
-const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ac1f0f7b458a1d7f22dd48effad5e07b1">id3_v2_tags</a> [] = {&quot;TALB&quot;, &quot;TOPE&quot;, &quot;TIT2&quot;, &quot;TCON&quot;}</td></tr>
-<tr class="memdesc:ac1f0f7b458a1d7f22dd48effad5e07b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Relevant v2 Tags <br  />
+<tr class="memitem:ad08e52c58bf7f318154176089dfb1535"><td class="memItemLeft" align="right" valign="top"><a id="ad08e52c58bf7f318154176089dfb1535"></a>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#ad08e52c58bf7f318154176089dfb1535">id3_v2_tags</a> [] = {&quot;TALB&quot;, &quot;TOPE&quot;, &quot;TIT2&quot;, &quot;TCON&quot;}</td></tr>
+<tr class="memdesc:ad08e52c58bf7f318154176089dfb1535"><td class="mdescLeft">&#160;</td><td class="mdescRight">Relevant v2 Tags <br  />
  <br /></td></tr>
-<tr class="separator:ac1f0f7b458a1d7f22dd48effad5e07b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:ad08e52c58bf7f318154176089dfb1535"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ac62949e0ab6a5a3d06feb98aa32db3"><td class="memItemLeft" align="right" valign="top"><a id="a6ac62949e0ab6a5a3d06feb98aa32db3"></a>
 const int&#160;</td><td class="memItemRight" valign="bottom"><b>ID3FrameSize</b> = 11</td></tr>
 <tr class="separator:a6ac62949e0ab6a5a3d06feb98aa32db3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -796,9 +867,9 @@ class <a class="el" href="classaudio__tools_1_1_timer_callback.html">audio_tools
 <tr class="memitem:aaafe058367579b6207d3705ed421e560"><td class="memItemLeft" align="right" valign="top"><a id="aaafe058367579b6207d3705ed421e560"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><b>TRANSFER_ENCODING</b> = &quot;Transfer-Encoding&quot;</td></tr>
 <tr class="separator:aaafe058367579b6207d3705ed421e560"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed8d10cc627c8e6b78a524acb7c7a406"><td class="memItemLeft" align="right" valign="top"><a id="aed8d10cc627c8e6b78a524acb7c7a406"></a>
-const char *&#160;</td><td class="memItemRight" valign="bottom"><b>UNDERFLOW</b> = &quot;data underflow&quot;</td></tr>
-<tr class="separator:aed8d10cc627c8e6b78a524acb7c7a406"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a684801ef09252016dec525788abc9b49"><td class="memItemLeft" align="right" valign="top"><a id="a684801ef09252016dec525788abc9b49"></a>
+static const char *&#160;</td><td class="memItemRight" valign="bottom"><b>UNDERFLOW_MSG</b> = &quot;data underflow&quot;</td></tr>
+<tr class="separator:a684801ef09252016dec525788abc9b49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec215cb1166479cf33765709d01e9e10"><td class="memItemLeft" align="right" valign="top"><a id="aec215cb1166479cf33765709d01e9e10"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><b>USER_AGENT</b> = &quot;User-Agent&quot;</td></tr>
 <tr class="separator:aec215cb1166479cf33765709d01e9e10"><td class="memSeparator" colspan="2">&#160;</td></tr>

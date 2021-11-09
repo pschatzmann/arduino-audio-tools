@@ -103,7 +103,7 @@ $(function() {
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        }</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
 <div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_p_w_m_audio_stream_pico.html#a3388b85fdbb7dddc9d2d80f64d0946d5">   48</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_p_w_m_audio_stream_pico.html#a3388b85fdbb7dddc9d2d80f64d0946d5">end</a>(){</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            LOGD(LOG_METHOD);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;             LOGD(LOG_METHOD);</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <span class="keywordflow">if</span> (!cancel_repeating_timer(&amp;timer)){</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                LOGE(<span class="stringliteral">&quot;cancel_repeating_timer failed&quot;</span>)</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            }</div>
@@ -121,7 +121,7 @@ $(function() {
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="comment">// setup pwm config and all pins</span></div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keywordtype">void</span> setupPWM(){</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            LOGD(LOG_METHOD);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;             LOGD(LOG_METHOD);</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            pwm_config cfg = setupPWMConfig();</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            </div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            <span class="comment">// initialize empty pins</span></div>
@@ -148,7 +148,7 @@ $(function() {
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="comment">// defines the pwm_config which will be used to drive the pins</span></div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        pwm_config setupPWMConfig() {</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            LOGD(LOG_METHOD);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;             LOGD(LOG_METHOD);</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            <span class="comment">// setup pwm frequency</span></div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            pwm_config pico_pwm_config = pwm_get_default_config();</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            <span class="keywordtype">int</span> wrap_value = <a class="code" href="classaudio__tools_1_1_p_w_m_audio_stream_pico.html#ab2e9d4e527fa716fbb18b769413419a7">maxOutputValue</a>(); <span class="comment">// amplitude of square wave (pwm values -amplitude to amplitude) for one byte</span></div>
@@ -164,7 +164,7 @@ $(function() {
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <span class="comment">// set up pwm </span></div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        <span class="keywordtype">void</span> setupPWMPin(pwm_config &amp;cfg, PicoChannelOut &amp;pinInfo){</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            LOGD(<span class="stringliteral">&quot;%s for gpio %d&quot;</span>,LOG_METHOD, pinInfo.gpio);</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;             LOGD(<span class="stringliteral">&quot;%s for gpio %d&quot;</span>,LOG_METHOD, pinInfo.gpio);</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            <span class="comment">// setup pwm pin  </span></div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            <span class="keywordtype">int</span> gpio = pinInfo.gpio;</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            gpio_set_function(gpio, GPIO_FUNC_PWM);</div>
@@ -177,7 +177,7 @@ $(function() {
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        }</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        <span class="keywordtype">void</span> setupTimer(){</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;            LOGD(LOG_METHOD);</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;             LOGD(LOG_METHOD);</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;            <span class="comment">// setup timer</span></div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;            uint32_t time = 1000000UL / audio_config.sample_rate;</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            LOGI(<span class="stringliteral">&quot;-&gt;Timer value %ld us&quot;</span>, time);</div>

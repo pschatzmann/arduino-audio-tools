@@ -297,7 +297,36 @@ $(function() {
 <div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160; </div>
 <div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;};</div>
 <div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160; </div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;}</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00276"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_generator_from_stream.html">  276</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_generator_from_stream.html">GeneratorFromStream</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt;T&gt; {</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;        <a class="code" href="classaudio__tools_1_1_generator_from_stream.html">GeneratorFromStream</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160; </div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;        <a class="code" href="classaudio__tools_1_1_generator_from_stream.html">GeneratorFromStream</a>(<a class="code" href="class_stream.html">Stream</a> &amp;input){</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;            <a class="code" href="classaudio__tools_1_1_generator_from_stream.html#a4c7aef83284b5c480a4edf75b241f381">setStream</a>(input);</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;        }</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160; </div>
+<div class="line"><a name="l00285"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_generator_from_stream.html#a4c7aef83284b5c480a4edf75b241f381">  285</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_generator_from_stream.html#a4c7aef83284b5c480a4edf75b241f381">setStream</a>(<a class="code" href="class_stream.html">Stream</a> &amp;input){</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;            this-&gt;p_stream = &amp;input;</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;        }</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;        </div>
+<div class="line"><a name="l00290"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_generator_from_stream.html#a1ee6fa7f168fad92e8f7ac59c4963b67">  290</a></span>&#160;        T <a class="code" href="classaudio__tools_1_1_generator_from_stream.html#a1ee6fa7f168fad92e8f7ac59c4963b67">readSample</a>() {</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;            T data = 0;</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;            <span class="keywordflow">if</span> (p_stream!=<span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;                p_stream-&gt;readBytes((uint8_t*)&amp;data, <span class="keyword">sizeof</span>(T));</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;            }</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;            <span class="keywordflow">return</span> data;</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;        }</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160; </div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;        <a class="code" href="class_stream.html">Stream</a> *p_stream = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;};</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160; </div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;}</div>
+<div class="ttc" id="aclass_stream_html"><div class="ttname"><a href="class_stream.html">Stream</a></div><div class="ttdef"><b>Definition:</b> Stream.h:49</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_generator_from_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_generator_from_stream.html">audio_tools::GeneratorFromStream</a></div><div class="ttdoc">An Adapter Class which lets you use any Stream as a Generator.</div><div class="ttdef"><b>Definition:</b> SoundGenerator.h:276</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_generator_from_stream_html_a1ee6fa7f168fad92e8f7ac59c4963b67"><div class="ttname"><a href="classaudio__tools_1_1_generator_from_stream.html#a1ee6fa7f168fad92e8f7ac59c4963b67">audio_tools::GeneratorFromStream::readSample</a></div><div class="ttdeci">T readSample()</div><div class="ttdoc">Provides a single sample from the stream.</div><div class="ttdef"><b>Definition:</b> SoundGenerator.h:290</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_generator_from_stream_html_a4c7aef83284b5c480a4edf75b241f381"><div class="ttname"><a href="classaudio__tools_1_1_generator_from_stream.html#a4c7aef83284b5c480a4edf75b241f381">audio_tools::GeneratorFromStream::setStream</a></div><div class="ttdeci">void setStream(Stream &amp;input)</div><div class="ttdoc">(Re-)Assigns a stream to the Adapter class</div><div class="ttdef"><b>Definition:</b> SoundGenerator.h:285</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_noise_generator_html"><div class="ttname"><a href="classaudio__tools_1_1_noise_generator.html">audio_tools::NoiseGenerator</a></div><div class="ttdoc">Generates a random noise sound with the help of rand() function.</div><div class="ttdef"><b>Definition:</b> SoundGenerator.h:227</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_noise_generator_html_acb572e4861b4cfc49244d62607fb409a"><div class="ttname"><a href="classaudio__tools_1_1_noise_generator.html#acb572e4861b4cfc49244d62607fb409a">audio_tools::NoiseGenerator::readSample</a></div><div class="ttdeci">T readSample()</div><div class="ttdoc">Provides a single sample.</div><div class="ttdef"><b>Definition:</b> SoundGenerator.h:235</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_silence_generator_html"><div class="ttname"><a href="classaudio__tools_1_1_silence_generator.html">audio_tools::SilenceGenerator</a></div><div class="ttdoc">Provides 0 as sound data. This can be used e.g. to test the output functionality which should optimal...</div><div class="ttdef"><b>Definition:</b> SoundGenerator.h:253</div></div>

@@ -85,11 +85,12 @@ Inheritance diagram for audio_tools::URLStreamDefault:</div>
  <div class="center">
   <img src="classaudio__tools_1_1_u_r_l_stream_default.png" usemap="#audio_5Ftools::URLStreamDefault_map" alt=""/>
   <map id="audio_5Ftools::URLStreamDefault_map" name="audio_5Ftools::URLStreamDefault_map">
+<area href="classaudio__tools_1_1_abstract_u_r_l_stream.html" title="Abstract Base class for all URLStream implementations." alt="audio_tools::AbstractURLStream" shape="rect" coords="117,168,342,192"/>
 <area href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="audio_tools::AudioStream" shape="rect" coords="117,112,342,136"/>
 <area href="class_stream.html" alt="Stream" shape="rect" coords="0,56,225,80"/>
 <area href="classaudio__tools_1_1_audio_base_info_dependent.html" title="Supports changes to the sampling rate, bits and channels." alt="audio_tools::AudioBaseInfoDependent" shape="rect" coords="235,56,460,80"/>
 <area href="class_print.html" alt="Print" shape="rect" coords="0,0,225,24"/>
-<area href="classaudio__tools_1_1_u_r_l_stream.html" alt="audio_tools::URLStream" shape="rect" coords="117,224,342,248"/>
+<area href="classaudio__tools_1_1_u_r_l_stream.html" title="URLStream implementation for all envionments except ESP32." alt="audio_tools::URLStream" shape="rect" coords="117,280,342,304"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -104,41 +105,45 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:abe32477d6d355eb10633642ba522f18b"><td class="memItemLeft" align="right" valign="top"><a id="abe32477d6d355eb10633642ba522f18b"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>URLStreamDefault</b> (int readBufferSize=DEFAULT_BUFFER_SIZE)</td></tr>
 <tr class="separator:abe32477d6d355eb10633642ba522f18b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab924fe79b1cd1695d952be1b154c1c47"><td class="memItemLeft" align="right" valign="top"><a id="ab924fe79b1cd1695d952be1b154c1c47"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>available</b> ()</td></tr>
-<tr class="separator:ab924fe79b1cd1695d952be1b154c1c47"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4610810eaaf48b6c99f03f51d79b31c"><td class="memItemLeft" align="right" valign="top"><a id="af4610810eaaf48b6c99f03f51d79b31c"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (const char *urlStr, const char *acceptMime=nullptr, MethodID action=GET, const char *reqMime=&quot;&quot;, const char *reqData=&quot;&quot;)</td></tr>
-<tr class="separator:af4610810eaaf48b6c99f03f51d79b31c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6153393280e0bf571cf9f5d315a0b9b"><td class="memItemLeft" align="right" valign="top"><a id="ae6153393280e0bf571cf9f5d315a0b9b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
-<tr class="separator:ae6153393280e0bf571cf9f5d315a0b9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9fba03ba168231363516129c2fc541f5"><td class="memItemLeft" align="right" valign="top"><a id="a9fba03ba168231363516129c2fc541f5"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>flush</b> ()</td></tr>
-<tr class="separator:a9fba03ba168231363516129c2fc541f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88afc7882fff0f27d97b768afeb36f02"><td class="memItemLeft" align="right" valign="top"><a id="a88afc7882fff0f27d97b768afeb36f02"></a>
-<a class="el" href="classaudio__tools_1_1_http_request.html">HttpRequest</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_r_l_stream_default.html#a88afc7882fff0f27d97b768afeb36f02">httpRequest</a> ()</td></tr>
-<tr class="memdesc:a88afc7882fff0f27d97b768afeb36f02"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides access to the <a class="el" href="classaudio__tools_1_1_http_request.html" title="Simple API to process get, put, post, del http requests I tried to use Arduino HttpClient,...">HttpRequest</a> <br /></td></tr>
-<tr class="separator:a88afc7882fff0f27d97b768afeb36f02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68b1b303d57768b7806005fc93b5a804"><td class="memItemLeft" align="right" valign="top"><a id="a68b1b303d57768b7806005fc93b5a804"></a>
+virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>available</b> () override</td></tr>
+<tr class="separator:a68b1b303d57768b7806005fc93b5a804"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbc785c4e3d41331f6d4c793f5cb40a6"><td class="memItemLeft" align="right" valign="top"><a id="acbc785c4e3d41331f6d4c793f5cb40a6"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (const char *urlStr, const char *acceptMime=nullptr, MethodID action=GET, const char *reqMime=&quot;&quot;, const char *reqData=&quot;&quot;) override</td></tr>
+<tr class="separator:acbc785c4e3d41331f6d4c793f5cb40a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d7f4a39d9e663c2e623934b6f6ef7b4"><td class="memItemLeft" align="right" valign="top"><a id="a2d7f4a39d9e663c2e623934b6f6ef7b4"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> () override</td></tr>
+<tr class="separator:a2d7f4a39d9e663c2e623934b6f6ef7b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e2c8c7c84fdfd9752608b4e40c2037f"><td class="memItemLeft" align="right" valign="top"><a id="a4e2c8c7c84fdfd9752608b4e40c2037f"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>flush</b> () override</td></tr>
+<tr class="separator:a4e2c8c7c84fdfd9752608b4e40c2037f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7359555cff1d5964e2f03890e91b3f1d"><td class="memItemLeft" align="right" valign="top"><a id="a7359555cff1d5964e2f03890e91b3f1d"></a>
+virtual <a class="el" href="classaudio__tools_1_1_http_request.html">HttpRequest</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_r_l_stream_default.html#a7359555cff1d5964e2f03890e91b3f1d">httpRequest</a> () override</td></tr>
+<tr class="memdesc:a7359555cff1d5964e2f03890e91b3f1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides access to the <a class="el" href="classaudio__tools_1_1_http_request.html" title="Simple API to process get, put, post, del http requests I tried to use Arduino HttpClient,...">HttpRequest</a> <br /></td></tr>
+<tr class="separator:a7359555cff1d5964e2f03890e91b3f1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4129f9e58bb3940d795702423b89070a"><td class="memItemLeft" align="right" valign="top"><a id="a4129f9e58bb3940d795702423b89070a"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>operator bool</b> ()</td></tr>
 <tr class="separator:a4129f9e58bb3940d795702423b89070a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb669a8b66ab5ba2450ce2eb72d1e797"><td class="memItemLeft" align="right" valign="top"><a id="aeb669a8b66ab5ba2450ce2eb72d1e797"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>peek</b> ()</td></tr>
-<tr class="separator:aeb669a8b66ab5ba2450ce2eb72d1e797"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0cea94bd4d8e8d8e32c89e0d38586a8b"><td class="memItemLeft" align="right" valign="top"><a id="a0cea94bd4d8e8d8e32c89e0d38586a8b"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>read</b> ()</td></tr>
-<tr class="separator:a0cea94bd4d8e8d8e32c89e0d38586a8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a687f6300ffc53dce35848fabc2487e6f"><td class="memItemLeft" align="right" valign="top"><a id="a687f6300ffc53dce35848fabc2487e6f"></a>
-virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>readBytes</b> (uint8_t *buffer, size_t length)</td></tr>
-<tr class="separator:a687f6300ffc53dce35848fabc2487e6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52585ee54268dd9c516afd066d515172"><td class="memItemLeft" align="right" valign="top"><a id="a52585ee54268dd9c516afd066d515172"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_r_l_stream_default.html#a52585ee54268dd9c516afd066d515172">setTimeout</a> (int ms)</td></tr>
-<tr class="memdesc:a52585ee54268dd9c516afd066d515172"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the client timeout. <br /></td></tr>
-<tr class="separator:a52585ee54268dd9c516afd066d515172"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a1c9b4defc7e77a768c6c0f9dc42466"><td class="memItemLeft" align="right" valign="top"><a id="a5a1c9b4defc7e77a768c6c0f9dc42466"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (uint8_t)</td></tr>
-<tr class="separator:a5a1c9b4defc7e77a768c6c0f9dc42466"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a2a5583949bb159a07de5cfe4f89c1d"><td class="memItemLeft" align="right" valign="top"><a id="a1a2a5583949bb159a07de5cfe4f89c1d"></a>
+virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>peek</b> () override</td></tr>
+<tr class="separator:a1a2a5583949bb159a07de5cfe4f89c1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3687b476edaf8c03f540527c3b38fda9"><td class="memItemLeft" align="right" valign="top"><a id="a3687b476edaf8c03f540527c3b38fda9"></a>
+virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>read</b> () override</td></tr>
+<tr class="separator:a3687b476edaf8c03f540527c3b38fda9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a383aa5a9a8d8384e9b4b6db517c1c840"><td class="memItemLeft" align="right" valign="top"><a id="a383aa5a9a8d8384e9b4b6db517c1c840"></a>
+virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>readBytes</b> (uint8_t *buffer, size_t length) override</td></tr>
+<tr class="separator:a383aa5a9a8d8384e9b4b6db517c1c840"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8e9eedcd94f1c5edbfa230519357c46"><td class="memItemLeft" align="right" valign="top"><a id="ae8e9eedcd94f1c5edbfa230519357c46"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_r_l_stream_default.html#ae8e9eedcd94f1c5edbfa230519357c46">setTimeout</a> (int ms)</td></tr>
+<tr class="memdesc:ae8e9eedcd94f1c5edbfa230519357c46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the client timeout. <br /></td></tr>
+<tr class="separator:ae8e9eedcd94f1c5edbfa230519357c46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7271799df88fa2daffa6b15acf9ffd39"><td class="memItemLeft" align="right" valign="top"><a id="a7271799df88fa2daffa6b15acf9ffd39"></a>
+virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (uint8_t) override</td></tr>
+<tr class="separator:a7271799df88fa2daffa6b15acf9ffd39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classaudio__tools_1_1_abstract_u_r_l_stream"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classaudio__tools_1_1_abstract_u_r_l_stream')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classaudio__tools_1_1_abstract_u_r_l_stream.html">audio_tools::AbstractURLStream</a></td></tr>
+<tr class="memitem:a328ebb5136cefcbc449c9bd423744613 inherit pub_methods_classaudio__tools_1_1_abstract_u_r_l_stream"><td class="memItemLeft" align="right" valign="top"><a id="a328ebb5136cefcbc449c9bd423744613"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>setMetadataCallback</b> (void(*fn)(<a class="el" href="namespaceaudio__tools.html#a66747a0ba3d8821e3228fd1680106e68">MetaDataType</a> info, const char *str, int len))</td></tr>
+<tr class="separator:a328ebb5136cefcbc449c9bd423744613 inherit pub_methods_classaudio__tools_1_1_abstract_u_r_l_stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classaudio__tools_1_1_audio_stream"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classaudio__tools_1_1_audio_stream')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classaudio__tools_1_1_audio_stream.html">audio_tools::AudioStream</a></td></tr>
 <tr class="memitem:a1a851437d47b227d3885bb383bbd1e78 inherit pub_methods_classaudio__tools_1_1_audio_stream"><td class="memItemLeft" align="right" valign="top"><a id="a1a851437d47b227d3885bb383bbd1e78"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>operator bool</b> ()</td></tr>

@@ -95,43 +95,43 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2be93114fa84a28f549e5624aa5b590a"><td class="memItemLeft" align="right" valign="top"><a id="a2be93114fa84a28f549e5624aa5b590a"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>BufferedTaskStream</b> (<a class="el" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a> &amp;input)</td></tr>
 <tr class="separator:a2be93114fa84a28f549e5624aa5b590a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61c007f3499c2a2a151cd0f87f97d599"><td class="memItemLeft" align="right" valign="top"><a id="a61c007f3499c2a2a151cd0f87f97d599"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffered_task_stream.html#a61c007f3499c2a2a151cd0f87f97d599">available</a> ()</td></tr>
-<tr class="memdesc:a61c007f3499c2a2a151cd0f87f97d599"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the available bytes in the buffer: to be avoided. <br /></td></tr>
-<tr class="separator:a61c007f3499c2a2a151cd0f87f97d599"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad07564356b0b0241208a143c604601bc"><td class="memItemLeft" align="right" valign="top"><a id="ad07564356b0b0241208a143c604601bc"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (bool wait=true)</td></tr>
-<tr class="separator:ad07564356b0b0241208a143c604601bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47aa21f2482064de9f371276fe0a4560"><td class="memItemLeft" align="right" valign="top"><a id="a47aa21f2482064de9f371276fe0a4560"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
-<tr class="separator:a47aa21f2482064de9f371276fe0a4560"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c564a70db6ee963e079e598418fad08"><td class="memItemLeft" align="right" valign="top"><a id="a3c564a70db6ee963e079e598418fad08"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffered_task_stream.html#a3c564a70db6ee963e079e598418fad08">flush</a> ()</td></tr>
-<tr class="memdesc:a3c564a70db6ee963e079e598418fad08"><td class="mdescLeft">&#160;</td><td class="mdescRight">empties the buffer <br /></td></tr>
-<tr class="separator:a3c564a70db6ee963e079e598418fad08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c5307f6b2970c6e075d33ce548127f7"><td class="memItemLeft" align="right" valign="top"><a id="a9c5307f6b2970c6e075d33ce548127f7"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffered_task_stream.html#a9c5307f6b2970c6e075d33ce548127f7">peek</a> ()</td></tr>
-<tr class="memdesc:a9c5307f6b2970c6e075d33ce548127f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">peeks a byte - to be avoided <br /></td></tr>
-<tr class="separator:a9c5307f6b2970c6e075d33ce548127f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a70e38750a48e217621346f02275501c6"><td class="memItemLeft" align="right" valign="top"><a id="a70e38750a48e217621346f02275501c6"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffered_task_stream.html#a70e38750a48e217621346f02275501c6">read</a> ()</td></tr>
-<tr class="memdesc:a70e38750a48e217621346f02275501c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads a byte - to be avoided <br /></td></tr>
-<tr class="separator:a70e38750a48e217621346f02275501c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa13e66a6e94ee8247486c6b9d35c0722"><td class="memItemLeft" align="right" valign="top"><a id="aa13e66a6e94ee8247486c6b9d35c0722"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffered_task_stream.html#aa13e66a6e94ee8247486c6b9d35c0722">readBytes</a> (uint8_t *data, size_t length)</td></tr>
-<tr class="memdesc:aa13e66a6e94ee8247486c6b9d35c0722"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use this method !! <br /></td></tr>
-<tr class="separator:aa13e66a6e94ee8247486c6b9d35c0722"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2da6215f005ead4b1fb3afe66edd7db4"><td class="memItemLeft" align="right" valign="top"><a id="a2da6215f005ead4b1fb3afe66edd7db4"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setInput</b> (<a class="el" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a> &amp;input)</td></tr>
-<tr class="separator:a2da6215f005ead4b1fb3afe66edd7db4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acdece386e8abbc54d35eb74691b6ca3d"><td class="memItemLeft" align="right" valign="top"><a id="acdece386e8abbc54d35eb74691b6ca3d"></a>
-virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffered_task_stream.html#acdece386e8abbc54d35eb74691b6ca3d">write</a> (const uint8_t *data, size_t len)</td></tr>
-<tr class="memdesc:acdece386e8abbc54d35eb74691b6ca3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use this method: write an array. <br /></td></tr>
-<tr class="separator:acdece386e8abbc54d35eb74691b6ca3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5e7c83ae8cb1af23ae3f50287859a1e"><td class="memItemLeft" align="right" valign="top"><a id="ac5e7c83ae8cb1af23ae3f50287859a1e"></a>
-virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffered_task_stream.html#ac5e7c83ae8cb1af23ae3f50287859a1e">write</a> (uint8_t c)</td></tr>
-<tr class="memdesc:ac5e7c83ae8cb1af23ae3f50287859a1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes a byte to the buffer <br /></td></tr>
-<tr class="separator:ac5e7c83ae8cb1af23ae3f50287859a1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f4accd251ff1f5e6bc73cd713f8571a"><td class="memItemLeft" align="right" valign="top"><a id="a5f4accd251ff1f5e6bc73cd713f8571a"></a>
+virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffered_task_stream.html#a5f4accd251ff1f5e6bc73cd713f8571a">available</a> () override</td></tr>
+<tr class="memdesc:a5f4accd251ff1f5e6bc73cd713f8571a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the available bytes in the buffer: to be avoided. <br /></td></tr>
+<tr class="separator:a5f4accd251ff1f5e6bc73cd713f8571a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e7e9249cb865eb06005bb675e806497"><td class="memItemLeft" align="right" valign="top"><a id="a6e7e9249cb865eb06005bb675e806497"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (bool wait=true)</td></tr>
+<tr class="separator:a6e7e9249cb865eb06005bb675e806497"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afed5f1ea03c508f722930b355e0b678f"><td class="memItemLeft" align="right" valign="top"><a id="afed5f1ea03c508f722930b355e0b678f"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
+<tr class="separator:afed5f1ea03c508f722930b355e0b678f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af80cde183e814dcfaf6673b7030cc0c3"><td class="memItemLeft" align="right" valign="top"><a id="af80cde183e814dcfaf6673b7030cc0c3"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffered_task_stream.html#af80cde183e814dcfaf6673b7030cc0c3">flush</a> () override</td></tr>
+<tr class="memdesc:af80cde183e814dcfaf6673b7030cc0c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">empties the buffer <br /></td></tr>
+<tr class="separator:af80cde183e814dcfaf6673b7030cc0c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4b8b3b1d688e88748cc95683788ccd7"><td class="memItemLeft" align="right" valign="top"><a id="ab4b8b3b1d688e88748cc95683788ccd7"></a>
+virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffered_task_stream.html#ab4b8b3b1d688e88748cc95683788ccd7">peek</a> () override</td></tr>
+<tr class="memdesc:ab4b8b3b1d688e88748cc95683788ccd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">peeks a byte - to be avoided <br /></td></tr>
+<tr class="separator:ab4b8b3b1d688e88748cc95683788ccd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a604318973081696c25146118846204ae"><td class="memItemLeft" align="right" valign="top"><a id="a604318973081696c25146118846204ae"></a>
+virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffered_task_stream.html#a604318973081696c25146118846204ae">read</a> () override</td></tr>
+<tr class="memdesc:a604318973081696c25146118846204ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads a byte - to be avoided <br /></td></tr>
+<tr class="separator:a604318973081696c25146118846204ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bcce810eb21f034db2013a33df0bab3"><td class="memItemLeft" align="right" valign="top"><a id="a7bcce810eb21f034db2013a33df0bab3"></a>
+virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffered_task_stream.html#a7bcce810eb21f034db2013a33df0bab3">readBytes</a> (uint8_t *data, size_t length) override</td></tr>
+<tr class="memdesc:a7bcce810eb21f034db2013a33df0bab3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use this method !! <br /></td></tr>
+<tr class="separator:a7bcce810eb21f034db2013a33df0bab3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa10702bbae414aa35f32fab545bae72c"><td class="memItemLeft" align="right" valign="top"><a id="aa10702bbae414aa35f32fab545bae72c"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setInput</b> (<a class="el" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a> &amp;input)</td></tr>
+<tr class="separator:aa10702bbae414aa35f32fab545bae72c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91294daa8cf30403543ab9e3ec93fe7a"><td class="memItemLeft" align="right" valign="top"><a id="a91294daa8cf30403543ab9e3ec93fe7a"></a>
+virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffered_task_stream.html#a91294daa8cf30403543ab9e3ec93fe7a">write</a> (const uint8_t *data, size_t len) override</td></tr>
+<tr class="memdesc:a91294daa8cf30403543ab9e3ec93fe7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use this method: write an array. <br /></td></tr>
+<tr class="separator:a91294daa8cf30403543ab9e3ec93fe7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44b4066cdac7c964036d8c6020918784"><td class="memItemLeft" align="right" valign="top"><a id="a44b4066cdac7c964036d8c6020918784"></a>
+virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffered_task_stream.html#a44b4066cdac7c964036d8c6020918784">write</a> (uint8_t c) override</td></tr>
+<tr class="memdesc:a44b4066cdac7c964036d8c6020918784"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes a byte to the buffer <br /></td></tr>
+<tr class="separator:a44b4066cdac7c964036d8c6020918784"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classaudio__tools_1_1_audio_stream"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classaudio__tools_1_1_audio_stream')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classaudio__tools_1_1_audio_stream.html">audio_tools::AudioStream</a></td></tr>
 <tr class="memitem:a1a851437d47b227d3885bb383bbd1e78 inherit pub_methods_classaudio__tools_1_1_audio_stream"><td class="memItemLeft" align="right" valign="top"><a id="a1a851437d47b227d3885bb383bbd1e78"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>operator bool</b> ()</td></tr>
@@ -363,7 +363,9 @@ unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b>
 <tr class="separator:aae48f1a926d2e82a452f2c75af0c6a29 inherit pro_attribs_class_stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A task is filling the buffer from the indicated stream in a background task. </p>
+<div class="textblock"><p>A FreeRTOS task is filling the buffer from the indicated stream.</p>
+<dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/AudioHttp/<a class="el" href="_u_r_l_stream_e_s_p32_8h_source.html">URLStreamESP32.h</a></li>
 </ul>

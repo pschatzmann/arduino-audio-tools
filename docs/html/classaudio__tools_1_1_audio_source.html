@@ -112,6 +112,9 @@ virtual <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class=
 virtual <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a34afea2bb051055c609fa0b42906ddcf">selectStream</a> (int index)</td></tr>
 <tr class="memdesc:a34afea2bb051055c609fa0b42906ddcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns audio stream at the indicated index (the index is zero based, so the first value is 0!) <br /></td></tr>
 <tr class="separator:a34afea2bb051055c609fa0b42906ddcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a781f60f7be1abb200c418bb50116ee4f"><td class="memItemLeft" align="right" valign="top"><a id="a781f60f7be1abb200c418bb50116ee4f"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>setMetadataCallback</b> (void(*fn)(<a class="el" href="namespaceaudio__tools.html#a66747a0ba3d8821e3228fd1680106e68">MetaDataType</a> info, const char *str, int len))</td></tr>
+<tr class="separator:a781f60f7be1abb200c418bb50116ee4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a527d24d2618d719b87eff1f40251f2bb"><td class="memItemLeft" align="right" valign="top"><a id="a527d24d2618d719b87eff1f40251f2bb"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a527d24d2618d719b87eff1f40251f2bb">setTimeout</a> (int millisec)</td></tr>
 <tr class="memdesc:a527d24d2618d719b87eff1f40251f2bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the timeout of <a class="el" href="class_stream.html">Stream</a> in milliseconds. <br /></td></tr>
@@ -127,9 +130,9 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:abdab36077b038b12686adad57d4ff6b0"><td class="memItemLeft" align="right" valign="top"><a id="abdab36077b038b12686adad57d4ff6b0"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_value</b> = 500</td></tr>
-<tr class="separator:abdab36077b038b12686adad57d4ff6b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8d05ac41eac84b8cd3a41978e6e4683"><td class="memItemLeft" align="right" valign="top"><a id="ac8d05ac41eac84b8cd3a41978e6e4683"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>timeout_auto_next_value</b> = 500</td></tr>
+<tr class="separator:ac8d05ac41eac84b8cd3a41978e6e4683"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Abstract Audio Data Source which is used by the Audio Players. </p>

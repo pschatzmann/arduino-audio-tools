@@ -113,7 +113,7 @@ $(function() {
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;      <span class="keyword">virtual</span> <span class="keywordtype">void</span> setNotifyAudioChange(<a class="code" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> &amp;bi) = 0;</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;};</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keyword">enum</span> RxTxMode  { TX_MODE, RX_MODE };</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keyword">enum</span> RxTxMode  { TX_MODE=1, RX_MODE=2 };</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">enum</span> I2SFormat {</div>
@@ -136,7 +136,7 @@ $(function() {
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  <span class="keyword">public</span>: </div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;      <a class="code" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a>() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;      <span class="keyword">virtual</span> ~<a class="code" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> setOutputStream(<a class="code" href="class_print.html">Print</a> &amp;out_stream) = 0;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;          <span class="keyword">virtual</span> <span class="keywordtype">void</span> setOutputStream(<a class="code" href="class_print.html">Print</a> &amp;out_stream) = 0;</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;      <span class="keyword">virtual</span> <span class="keywordtype">void</span> begin() = 0;</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;      <span class="keyword">virtual</span> <span class="keywordtype">void</span> end() = 0;</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;      <span class="keyword">virtual</span> <a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> audioInfo() = 0;</div>
@@ -147,7 +147,7 @@ $(function() {
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  <span class="keyword">public</span>: </div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;      <a class="code" href="classaudio__tools_1_1_audio_encoder.html">AudioEncoder</a>() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;      <span class="keyword">virtual</span> ~<a class="code" href="classaudio__tools_1_1_audio_encoder.html">AudioEncoder</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> setOutputStream(<a class="code" href="class_print.html">Print</a> &amp;out_stream) = 0;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;          <span class="keyword">virtual</span> <span class="keywordtype">void</span> setOutputStream(<a class="code" href="class_print.html">Print</a> &amp;out_stream) = 0;</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;      <span class="keyword">virtual</span> <span class="keywordtype">void</span> setAudioInfo(<a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> info) = 0;</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;      <span class="keyword">virtual</span> <span class="keywordtype">void</span> begin() = 0;</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;      <span class="keyword">virtual</span> <span class="keywordtype">void</span> end() = 0;</div>
@@ -164,7 +164,7 @@ $(function() {
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> begin() {}</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> end() {}</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> setOutputStream(<a class="code" href="class_print.html">Print</a> &amp;out_stream) {}</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;          <span class="keyword">virtual</span> <span class="keywordtype">void</span> setOutputStream(<a class="code" href="class_print.html">Print</a> &amp;out_stream) {}</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> setNotifyAudioChange(<a class="code" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> &amp;bi) {}</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> setAudioInfo(<a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> info) {}</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
@@ -179,26 +179,29 @@ $(function() {
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;            <span class="keywordflow">return</span> 0; </div>
 <div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        };</div>
 <div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; </div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;          <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> <span class="keywordtype">void</span> *in_ptr, <span class="keywordtype">size_t</span> in_size) {</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;            <span class="keywordflow">return</span> 0;           </div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        }</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        <span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keywordtype">char</span> *mime() {</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        }</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160; </div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;};</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
-<div class="line"><a name="l00151"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#af89661af127c7208d6646c076e5a5111">  151</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="namespaceaudio__tools.html#af89661af127c7208d6646c076e5a5111">stop</a>() {</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="preprocessor">  #ifdef EXIT_ON_STOP</span></div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;  exit(0);</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="preprocessor">  #else</span></div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;  <span class="keywordflow">while</span>(<span class="keyword">true</span>){</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    delay(1000);</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;  }</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="preprocessor">  #endif</span></div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;}</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;}</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        <span class="comment">// just output silence</span></div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;          <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> <span class="keywordtype">void</span> *in_ptr, <span class="keywordtype">size_t</span> in_size) {</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;            memset((<span class="keywordtype">void</span>*)in_ptr,0,in_size);</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;            <span class="keywordflow">return</span> in_size;           </div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        }</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        <span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keywordtype">char</span> *mime() {</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        }</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;};</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
+<div class="line"><a name="l00154"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#af89661af127c7208d6646c076e5a5111">  154</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="namespaceaudio__tools.html#af89661af127c7208d6646c076e5a5111">stop</a>() {</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="preprocessor">  #ifdef EXIT_ON_STOP</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;  exit(0);</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="preprocessor">  #else</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;  <span class="keywordflow">while</span>(<span class="keyword">true</span>){</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    delay(1000);</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;  }</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="preprocessor">  #endif</span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;}</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;}</div>
 <div class="ttc" id="aclass_print_html"><div class="ttname"><a href="class_print.html">Print</a></div><div class="ttdef"><b>Definition:</b> Print.h:34</div></div>
 <div class="ttc" id="aclass_stream_html"><div class="ttname"><a href="class_stream.html">Stream</a></div><div class="ttdef"><b>Definition:</b> Stream.h:49</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_base_info_dependent_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_base_info_dependent.html">audio_tools::AudioBaseInfoDependent</a></div><div class="ttdoc">Supports changes to the sampling rate, bits and channels.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:42</div></div>
@@ -209,7 +212,7 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_codec_n_o_p_html"><div class="ttname"><a href="classaudio__tools_1_1_codec_n_o_p.html">audio_tools::CodecNOP</a></div><div class="ttdoc">Dummpy no implmentation Codec. This is used so that we can initialize some pointers to decoders and e...</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:117</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Parser for MP3 ID3 Meta Data: The goal is to implement a simple API which provides the title,...</div><div class="ttdef"><b>Definition:</b> AudioA2DP.h:18</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html_a2580860e590a075e7acf4753a09f2331"><div class="ttname"><a href="namespaceaudio__tools.html#a2580860e590a075e7acf4753a09f2331">audio_tools::TimeUnit</a></div><div class="ttdeci">TimeUnit</div><div class="ttdoc">Time Units.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:12</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html_af89661af127c7208d6646c076e5a5111"><div class="ttname"><a href="namespaceaudio__tools.html#af89661af127c7208d6646c076e5a5111">audio_tools::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdoc">stops any further processing by spinning in an endless loop</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:151</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html_af89661af127c7208d6646c076e5a5111"><div class="ttname"><a href="namespaceaudio__tools.html#af89661af127c7208d6646c076e5a5111">audio_tools::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdoc">stops any further processing by spinning in an endless loop</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:154</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_base_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_base_info.html">audio_tools::AudioBaseInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:18</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

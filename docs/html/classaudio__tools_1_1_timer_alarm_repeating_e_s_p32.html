@@ -102,9 +102,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_e_s_p32.html#ae0631b283551a8fdc9603889539a1798">end</a> () override</td></tr>
 <tr class="memdesc:ae0631b283551a8fdc9603889539a1798"><td class="mdescLeft">&#160;</td><td class="mdescRight">ends the timer and if necessary the task <br /></td></tr>
 <tr class="separator:ae0631b283551a8fdc9603889539a1798"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1aa6dd0a11dff2eb18919b3e423f9365"><td class="memItemLeft" align="right" valign="top"><a id="a1aa6dd0a11dff2eb18919b3e423f9365"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>testCallback</b> ()</td></tr>
-<tr class="separator:a1aa6dd0a11dff2eb18919b3e423f9365"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf6007285e47d65f719cf47120338ad6"><td class="memItemLeft" align="right" valign="top"><a id="aaf6007285e47d65f719cf47120338ad6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setCore</b> (int core)</td></tr>
+<tr class="separator:aaf6007285e47d65f719cf47120338ad6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classaudio__tools_1_1_timer_alarm_repeating_def"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classaudio__tools_1_1_timer_alarm_repeating_def')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_def.html">audio_tools::TimerAlarmRepeatingDef</a></td></tr>
 <tr class="memitem:a8c9c6807bf3db988c281cdd405110244 inherit pub_methods_classaudio__tools_1_1_timer_alarm_repeating_def"><td class="memItemLeft" align="right" valign="top"><a id="a8c9c6807bf3db988c281cdd405110244"></a>
 void *&#160;</td><td class="memItemRight" valign="bottom"><b>callbackParameter</b> ()</td></tr>
@@ -125,20 +125,20 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:aee3977dfbfe28ddd4c6994adb51e27a2"><td class="memItemLeft" align="right" valign="top"><a id="aee3977dfbfe28ddd4c6994adb51e27a2"></a>
 hw_timer_t *&#160;</td><td class="memItemRight" valign="bottom"><b>adc_timer</b> = nullptr</td></tr>
 <tr class="separator:aee3977dfbfe28ddd4c6994adb51e27a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f777396f5f6f55943ae8cb4016a3c72"><td class="memItemLeft" align="right" valign="top"><a id="a6f777396f5f6f55943ae8cb4016a3c72"></a>
-void(*&#160;</td><td class="memItemRight" valign="bottom"><b>current_timer_callback</b> )() = nullptr</td></tr>
-<tr class="separator:a6f777396f5f6f55943ae8cb4016a3c72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ca0c7e9f5cb390f0ba14d82f550a587"><td class="memItemLeft" align="right" valign="top"><a id="a5ca0c7e9f5cb390f0ba14d82f550a587"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>core</b> = 1</td></tr>
+<tr class="separator:a5ca0c7e9f5cb390f0ba14d82f550a587"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aabd4993220a68670af037add4ac09d0c"><td class="memItemLeft" align="right" valign="top"><a id="aabd4993220a68670af037add4ac09d0c"></a>
 TaskHandle_t&#160;</td><td class="memItemRight" valign="bottom"><b>handler_task</b> = nullptr</td></tr>
 <tr class="separator:aabd4993220a68670af037add4ac09d0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5c79403575322155cd031cbc18e0e7e2"><td class="memItemLeft" align="right" valign="top"><a id="a5c79403575322155cd031cbc18e0e7e2"></a>
-void *&#160;</td><td class="memItemRight" valign="bottom"><b>object</b> = this</td></tr>
-<tr class="separator:a5c79403575322155cd031cbc18e0e7e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6d5e7ea0fd68aad340b9e74cf368ef6"><td class="memItemLeft" align="right" valign="top"><a id="ae6d5e7ea0fd68aad340b9e74cf368ef6"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>started</b> = false</td></tr>
-<tr class="separator:ae6d5e7ea0fd68aad340b9e74cf368ef6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adcaddca9092cbd7ad101e5a3d98f2dd3"><td class="memItemLeft" align="right" valign="top"><a id="adcaddca9092cbd7ad101e5a3d98f2dd3"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>priority</b> = 4</td></tr>
+<tr class="separator:adcaddca9092cbd7ad101e5a3d98f2dd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2845312afd63a92702d29b9e5011a42d"><td class="memItemLeft" align="right" valign="top"><a id="a2845312afd63a92702d29b9e5011a42d"></a>
+volatile bool&#160;</td><td class="memItemRight" valign="bottom"><b>started</b> = false</td></tr>
+<tr class="separator:a2845312afd63a92702d29b9e5011a42d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f6d1f2b0e44c5488f778a925d3a9fa6"><td class="memItemLeft" align="right" valign="top"><a id="a7f6d1f2b0e44c5488f778a925d3a9fa6"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>timer_id</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>timer_id</b> =0</td></tr>
 <tr class="separator:a7f6d1f2b0e44c5488f778a925d3a9fa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59a68428864b0d261821a1b3f701263e"><td class="memItemLeft" align="right" valign="top"><a id="a59a68428864b0d261821a1b3f701263e"></a>
 <a class="el" href="classaudio__tools_1_1_user_callback.html">UserCallback</a>&#160;</td><td class="memItemRight" valign="bottom"><b>user_callback</b></td></tr>

@@ -85,19 +85,19 @@ Inheritance diagram for audio_tools::BufferedStream:</div>
  <div class="center">
   <img src="classaudio__tools_1_1_buffered_stream.png" usemap="#audio_5Ftools::BufferedStream_map" alt=""/>
   <map id="audio_5Ftools::BufferedStream_map" name="audio_5Ftools::BufferedStream_map">
-<area href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="audio_tools::AudioStream" shape="rect" coords="117,112,342,136"/>
-<area href="class_stream.html" alt="Stream" shape="rect" coords="0,56,225,80"/>
-<area href="classaudio__tools_1_1_audio_base_info_dependent.html" title="Supports changes to the sampling rate, bits and channels." alt="audio_tools::AudioBaseInfoDependent" shape="rect" coords="235,56,460,80"/>
-<area href="class_print.html" alt="Print" shape="rect" coords="0,0,225,24"/>
-<area href="classaudio__tools_1_1_analog_audio_stream.html" title="We support the Stream interface for the AnalogAudio class." alt="audio_tools::AnalogAudioStream" shape="rect" coords="352,224,577,248"/>
-<area href="classaudio__tools_1_1_audio_output_with_callback.html" title="ESP8266Audio AudioOutput class which stores the data in a temporary buffer. The buffer can be consume..." alt="audio_tools::AudioOutputWithCallback" shape="rect" coords="352,280,577,304"/>
-<area href="classaudio__tools_1_1_audio_u_s_b.html" title="Stream support for mbed USBAudio https://os.mbed.com/docs/mbed-os/v6.10/mbed-os-api-doxy/class_u_s_b_..." alt="audio_tools::AudioUSB" shape="rect" coords="352,336,577,360"/>
-<area href="classaudio__tools_1_1_callback_audio_stream.html" title="Callback driven Audio Source (rx_tx_mode==RX_MODE) or Audio Sink (rx_tx_mode==TX_MODE)...." alt="audio_tools::CallbackAudioStream" shape="rect" coords="352,392,577,416"/>
-<area href="classaudio__tools_1_1_callback_stream.html" title="AudioOutput class which stores the data in a temporary buffer. The buffer can be consumed e...." alt="audio_tools::CallbackStream&lt; T &gt;" shape="rect" coords="352,448,577,472"/>
-<area href="classaudio__tools_1_1_i2_s_stream.html" title="We support the Stream interface for the I2S access. In addition we allow a separate mute pin which mi..." alt="audio_tools::I2SStream" shape="rect" coords="352,504,577,528"/>
-<area href="classaudio__tools_1_1_meta_data_i_d3.html" title="Simple ID3 Meta Data Parser which supports ID3 V1 and V2 and implements the Stream interface...." alt="audio_tools::MetaDataID3" shape="rect" coords="352,560,577,584"/>
-<area href="classaudio__tools_1_1_null_stream.html" title="The Arduino Stream which provides silence and simulates a null device when used as audio target." alt="audio_tools::NullStream" shape="rect" coords="352,616,577,640"/>
-<area href="classaudio__tools_1_1_port_audio_stream.html" title="Arduino Audio Stream using PortAudio." alt="audio_tools::PortAudioStream" shape="rect" coords="352,672,577,696"/>
+<area href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="audio_tools::AudioStream" shape="rect" coords="130,112,380,136"/>
+<area href="class_stream.html" alt="Stream" shape="rect" coords="0,56,250,80"/>
+<area href="classaudio__tools_1_1_audio_base_info_dependent.html" title="Supports changes to the sampling rate, bits and channels." alt="audio_tools::AudioBaseInfoDependent" shape="rect" coords="260,56,510,80"/>
+<area href="class_print.html" alt="Print" shape="rect" coords="0,0,250,24"/>
+<area href="classaudio__tools_1_1_analog_audio_stream.html" title="We support the Stream interface for the AnalogAudio class." alt="audio_tools::AnalogAudioStream" shape="rect" coords="390,224,640,248"/>
+<area href="classaudio__tools_1_1_audio_output_with_callback.html" title="ESP8266Audio AudioOutput class which stores the data in a temporary buffer. The buffer can be consume..." alt="audio_tools::AudioOutputWithCallback" shape="rect" coords="390,280,640,304"/>
+<area href="classaudio__tools_1_1_audio_u_s_b.html" title="Stream support for mbed USBAudio https://os.mbed.com/docs/mbed-os/v6.10/mbed-os-api-doxy/class_u_s_b_..." alt="audio_tools::AudioUSB" shape="rect" coords="390,336,640,360"/>
+<area href="classaudio__tools_1_1_callback_buffered_stream.html" title="AudioOutput class which stores the data in a temporary buffer. The buffer can be consumed e...." alt="audio_tools::CallbackBufferedStream&lt; T &gt;" shape="rect" coords="390,392,640,416"/>
+<area href="classaudio__tools_1_1_i2_s_stream.html" title="We support the Stream interface for the I2S access. In addition we allow a separate mute pin which mi..." alt="audio_tools::I2SStream" shape="rect" coords="390,448,640,472"/>
+<area href="classaudio__tools_1_1_meta_data_i_d3.html" title="Simple ID3 Meta Data Parser which supports ID3 V1 and V2 and implements the Stream interface...." alt="audio_tools::MetaDataID3" shape="rect" coords="390,504,640,528"/>
+<area href="classaudio__tools_1_1_null_stream.html" title="The Arduino Stream which provides silence and simulates a null device when used as audio target." alt="audio_tools::NullStream" shape="rect" coords="390,560,640,584"/>
+<area href="classaudio__tools_1_1_port_audio_stream.html" title="Arduino Audio Stream using PortAudio." alt="audio_tools::PortAudioStream" shape="rect" coords="390,616,640,640"/>
+<area href="classaudio__tools_1_1_timer_callback_audio_stream.html" title="Callback driven Audio Source (rx_tx_mode==RX_MODE) or Audio Sink (rx_tx_mode==TX_MODE)...." alt="audio_tools::TimerCallbackAudioStream" shape="rect" coords="390,672,640,696"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -110,6 +110,10 @@ Public Member Functions</h2></td></tr>
 virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffered_stream.html#add7c826932c60e135fe6ae134fb22b3d">available</a> ()</td></tr>
 <tr class="memdesc:add7c826932c60e135fe6ae134fb22b3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the available bytes in the buffer: to be avoided. <br /></td></tr>
 <tr class="separator:add7c826932c60e135fe6ae134fb22b3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f9ea7409349db8f0b55917c400ed177"><td class="memItemLeft" align="right" valign="top"><a id="a9f9ea7409349db8f0b55917c400ed177"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffered_stream.html#a9f9ea7409349db8f0b55917c400ed177">clear</a> ()</td></tr>
+<tr class="memdesc:a9f9ea7409349db8f0b55917c400ed177"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all the data in the buffer. <br /></td></tr>
+<tr class="separator:a9f9ea7409349db8f0b55917c400ed177"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa38aa4596bfd515da483756b7df02aec"><td class="memItemLeft" align="right" valign="top"><a id="aa38aa4596bfd515da483756b7df02aec"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffered_stream.html#aa38aa4596bfd515da483756b7df02aec">flush</a> ()</td></tr>
 <tr class="memdesc:aa38aa4596bfd515da483756b7df02aec"><td class="mdescLeft">&#160;</td><td class="mdescRight">empties the buffer <br /></td></tr>

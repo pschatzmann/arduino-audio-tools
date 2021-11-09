@@ -78,7 +78,7 @@ $(function() {
 <p>ID3 Meta Data Common Functionality.  
  <a href="classaudio__tools_1_1_meta_data_i_d3_base.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_meta_data_i_d3_8h_source.html">MetaDataID3.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_audio_meta_data_2_meta_data_i_d3_8h_source.html">MetaDataID3.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for audio_tools::MetaDataID3Base:</div>
 <div class="dyncontent">
@@ -86,12 +86,17 @@ Inheritance diagram for audio_tools::MetaDataID3Base:</div>
   <img src="classaudio__tools_1_1_meta_data_i_d3_base.png" usemap="#audio_5Ftools::MetaDataID3Base_map" alt=""/>
   <map id="audio_5Ftools::MetaDataID3Base_map" name="audio_5Ftools::MetaDataID3Base_map">
 <area href="classaudio__tools_1_1_meta_data_i_d3_v1.html" title="Simple ID3 Meta Data API which supports ID3 V1." alt="audio_tools::MetaDataID3V1" shape="rect" coords="0,56,183,80"/>
-<area href="classaudio__tools_1_1_meta_data_i_d3_v2.html" title="Simple ID3 Meta Data API which supports ID3 V2: We only support the &quot;TALB&quot;, &quot;TOPE&quot;,..." alt="audio_tools::MetaDataID3V2" shape="rect" coords="193,56,376,80"/>
+<area href="classaudio__tools_1_1_meta_data_i_d3_v1.html" title="Simple ID3 Meta Data API which supports ID3 V1." alt="audio_tools::MetaDataID3V1" shape="rect" coords="193,56,376,80"/>
+<area href="classaudio__tools_1_1_meta_data_i_d3_v2.html" title="Simple ID3 Meta Data API which supports ID3 V2: We only support the &quot;TALB&quot;, &quot;TOPE&quot;,..." alt="audio_tools::MetaDataID3V2" shape="rect" coords="386,56,569,80"/>
+<area href="classaudio__tools_1_1_meta_data_i_d3_v2.html" title="Simple ID3 Meta Data API which supports ID3 V2: We only support the &quot;TALB&quot;, &quot;TOPE&quot;,..." alt="audio_tools::MetaDataID3V2" shape="rect" coords="579,56,762,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a80a0a1d55ca694a160771cb222016bdf"><td class="memItemLeft" align="right" valign="top"><a id="a80a0a1d55ca694a160771cb222016bdf"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setCallback</b> (void(*fn)(<a class="el" href="namespaceaudio__tools.html#a66747a0ba3d8821e3228fd1680106e68">MetaDataType</a> info, const char *str, int len))</td></tr>
+<tr class="separator:a80a0a1d55ca694a160771cb222016bdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80a0a1d55ca694a160771cb222016bdf"><td class="memItemLeft" align="right" valign="top"><a id="a80a0a1d55ca694a160771cb222016bdf"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setCallback</b> (void(*fn)(<a class="el" href="namespaceaudio__tools.html#a66747a0ba3d8821e3228fd1680106e68">MetaDataType</a> info, const char *str, int len))</td></tr>
 <tr class="separator:a80a0a1d55ca694a160771cb222016bdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -102,22 +107,26 @@ Protected Member Functions</h2></td></tr>
 int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_meta_data_i_d3_base.html#a41827ad7db08212f2921b34b5a5af084">findTag</a> (const char *tag, const char *str, size_t len)</td></tr>
 <tr class="memdesc:a41827ad7db08212f2921b34b5a5af084"><td class="mdescLeft">&#160;</td><td class="mdescRight">find the tag position in the string - if not found we return -1; <br /></td></tr>
 <tr class="separator:a41827ad7db08212f2921b34b5a5af084"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41827ad7db08212f2921b34b5a5af084"><td class="memItemLeft" align="right" valign="top"><a id="a41827ad7db08212f2921b34b5a5af084"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_meta_data_i_d3_base.html#a41827ad7db08212f2921b34b5a5af084">findTag</a> (const char *tag, const char *str, size_t len)</td></tr>
+<tr class="memdesc:a41827ad7db08212f2921b34b5a5af084"><td class="mdescLeft">&#160;</td><td class="mdescRight">find the tag position in the string - if not found we return -1; <br /></td></tr>
+<tr class="separator:a41827ad7db08212f2921b34b5a5af084"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:affa472ca762059dd1104eec2a7996d42"><td class="memItemLeft" align="right" valign="top"><a id="affa472ca762059dd1104eec2a7996d42"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>armed</b> = false</td></tr>
 <tr class="separator:affa472ca762059dd1104eec2a7996d42"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43c8a422ebc354f5e86b8c4585b200c3"><td class="memItemLeft" align="right" valign="top"><a id="a43c8a422ebc354f5e86b8c4585b200c3"></a>
+<tr class="memitem:a5531280b1eef11b1ce26c7f89edf9a46"><td class="memItemLeft" align="right" valign="top"><a id="a5531280b1eef11b1ce26c7f89edf9a46"></a>
 void(*&#160;</td><td class="memItemRight" valign="bottom"><b>callback</b> )(<a class="el" href="namespaceaudio__tools.html#a66747a0ba3d8821e3228fd1680106e68">MetaDataType</a> info, const char *title, int len)</td></tr>
-<tr class="separator:a43c8a422ebc354f5e86b8c4585b200c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a5531280b1eef11b1ce26c7f89edf9a46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>ID3 Meta Data Common Functionality. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/<a class="el" href="_meta_data_i_d3_8h_source.html">MetaDataID3.h</a></li>
+<li>src/AudioMetaData/<a class="el" href="_audio_meta_data_2_meta_data_i_d3_8h_source.html">MetaDataID3.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

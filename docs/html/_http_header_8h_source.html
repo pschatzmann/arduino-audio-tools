@@ -150,7 +150,7 @@ $(function() {
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                }</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                <span class="comment">// log entry</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                LOGI(<span class="stringliteral">&quot;HttpHeader::put -&gt; &#39;%s&#39; : &#39;%s&#39;&quot;</span>, key, value);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                LOGD(<span class="stringliteral">&quot;HttpHeader::put -&gt; &#39;%s&#39; : &#39;%s&#39;&quot;</span>, key, value);</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                hl-&gt;value = value;</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                hl-&gt;active = <span class="keyword">true</span>;</div>
@@ -176,14 +176,14 @@ $(function() {
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            <span class="comment">// add value</span></div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            hl-&gt;value = value;</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;            hl-&gt;active = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;            LOGI(<span class="stringliteral">&quot;%s %s&quot;</span>, key, hl-&gt;value.c_str());</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;            LOGI(<span class="stringliteral">&quot;%s %s&quot;</span>, key, hl-&gt;value.<a class="code" href="classaudio__tools_1_1_str.html#af6d4c3a3b935b88ef99fb12fb530fd5c">c_str</a>());</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;            <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        }</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
 <div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_http_header.html#ab497ec1ba82834e820a5da6d076c0a36">  128</a></span>&#160;        <a class="code" href="classaudio__tools_1_1_http_header.html">HttpHeader</a>&amp; <a class="code" href="classaudio__tools_1_1_http_header.html#ab497ec1ba82834e820a5da6d076c0a36">put</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* line){</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;            LOGD(<span class="stringliteral">&quot;HttpHeader::put -&gt; %s&quot;</span>, (<span class="keyword">const</span> <span class="keywordtype">char</span>*) line);</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;            <a class="code" href="classaudio__tools_1_1_str.html">Str</a> keyStr(line);</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;            <span class="keywordtype">int</span> pos = keyStr.indexOf(<span class="stringliteral">&quot;:&quot;</span>);</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;            <span class="keywordtype">int</span> pos = keyStr.<a class="code" href="classaudio__tools_1_1_str.html#ab0eaa43cf723db0131b39534b815f81d">indexOf</a>(<span class="stringliteral">&quot;:&quot;</span>);</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            <span class="keywordtype">char</span> *key = (<span class="keywordtype">char</span>*)line;</div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;            key[pos] = 0;</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
@@ -196,8 +196,8 @@ $(function() {
 <div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;            <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = lines.begin() ; it != lines.end(); ++it){</div>
 <div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;                <a class="code" href="structaudio__tools_1_1_http_header_line.html">HttpHeaderLine</a> *line = *it;</div>
 <div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;                line-&gt;key.<a class="code" href="classaudio__tools_1_1_str.html#af5cd084c377811ee46e7c1d0d8f54bba">trim</a>();</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                <span class="keywordflow">if</span> (<a class="code" href="classaudio__tools_1_1_str.html">Str</a>(line-&gt;key).equalsIgnoreCase(key)){</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">char</span>* result = line-&gt;value.c_str();</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                <span class="keywordflow">if</span> (<a class="code" href="classaudio__tools_1_1_str.html">Str</a>(line-&gt;key).<a class="code" href="classaudio__tools_1_1_str.html#a5de11ccfb8bf83d358da367b7538a817">equalsIgnoreCase</a>(key)){</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">char</span>* result = line-&gt;value.<a class="code" href="classaudio__tools_1_1_str.html#af6d4c3a3b935b88ef99fb12fb530fd5c">c_str</a>();</div>
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;                    <span class="keywordflow">return</span> line-&gt;active ? result : <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;                }</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;            }</div>
@@ -244,11 +244,11 @@ $(function() {
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        }</div>
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        </div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">char</span>* urlPath() {</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;            <span class="keywordflow">return</span> url_path.c_str(); </div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;            <span class="keywordflow">return</span> url_path.<a class="code" href="classaudio__tools_1_1_str.html#af6d4c3a3b935b88ef99fb12fb530fd5c">c_str</a>(); </div>
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;        }</div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; </div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">char</span>* protocol() {</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;            <span class="keywordflow">return</span> protocol_str.c_str(); </div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;            <span class="keywordflow">return</span> protocol_str.<a class="code" href="classaudio__tools_1_1_str.html#af6d4c3a3b935b88ef99fb12fb530fd5c">c_str</a>(); </div>
 <div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        }</div>
 <div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160; </div>
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        MethodID method(){</div>
@@ -260,7 +260,7 @@ $(function() {
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        }</div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; </div>
 <div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">char</span>* statusMessage() {</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;            <span class="keywordflow">return</span> status_msg.c_str();</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;            <span class="keywordflow">return</span> status_msg.<a class="code" href="classaudio__tools_1_1_str.html#af6d4c3a3b935b88ef99fb12fb530fd5c">c_str</a>();</div>
 <div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        }</div>
 <div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; </div>
 <div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        <span class="keywordtype">bool</span> isChunked(){</div>
@@ -287,8 +287,8 @@ $(function() {
 <div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;                    readLine(in, line, MaxHeaderLineLength);</div>
 <div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;                    <span class="keywordflow">if</span> (<a class="code" href="classaudio__tools_1_1_http_header.html#acf5032e36c70b909f820ea5d72152e8c">isValidStatus</a>()){</div>
 <div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                        <a class="code" href="classaudio__tools_1_1_str.html">Str</a> lineStr(line);</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;                        lineStr.ltrim();</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;                        <span class="keywordflow">if</span> (lineStr.isEmpty()){</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;                        lineStr.<a class="code" href="classaudio__tools_1_1_str.html#a62557a335fc87964c69714e0247c4abc">ltrim</a>();</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;                        <span class="keywordflow">if</span> (lineStr.<a class="code" href="classaudio__tools_1_1_str.html#a21c94ddd4b51c94ada8b1fa01150e254">isEmpty</a>()){</div>
 <div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;                            <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;                        }</div>
 <div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;                        put(line); </div>
@@ -391,7 +391,7 @@ $(function() {
 <div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;            this-&gt;method_id = id;</div>
 <div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;            this-&gt;url_path = urlPath;</div>
 <div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;            </div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;            LOGI(<span class="stringliteral">&quot;HttpRequestHeader::setValues - path: %s&quot;</span>,this-&gt;url_path.c_str());</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;            LOGI(<span class="stringliteral">&quot;HttpRequestHeader::setValues - path: %s&quot;</span>,this-&gt;url_path.<a class="code" href="classaudio__tools_1_1_str.html#af6d4c3a3b935b88ef99fb12fb530fd5c">c_str</a>());</div>
 <div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;            <span class="keywordflow">if</span> (protocol!=<span class="keyword">nullptr</span>){</div>
 <div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;                this-&gt;protocol_str = protocol;</div>
 <div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;            }</div>
@@ -407,9 +407,9 @@ $(function() {
 <div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">char</span>* method_str = methods[this-&gt;method_id];</div>
 <div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;            msg_str = method_str;</div>
 <div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;            msg_str += <span class="stringliteral">&quot; &quot;</span>;</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;            msg_str += this-&gt;url_path.c_str();</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;            msg_str += this-&gt;url_path.<a class="code" href="classaudio__tools_1_1_str.html#af6d4c3a3b935b88ef99fb12fb530fd5c">c_str</a>();</div>
 <div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;            msg_str += <span class="stringliteral">&quot; &quot;</span>;</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;            msg_str += this-&gt;protocol_str.c_str();</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;            msg_str += this-&gt;protocol_str.<a class="code" href="classaudio__tools_1_1_str.html#af6d4c3a3b935b88ef99fb12fb530fd5c">c_str</a>();</div>
 <div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;            msg_str += CRLF;</div>
 <div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;            out.print(msg);</div>
 <div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160; </div>
@@ -423,17 +423,17 @@ $(function() {
 <div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;        <span class="keywordtype">void</span> parse1stLine(<span class="keyword">const</span> <span class="keywordtype">char</span> *line){</div>
 <div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;            LOGI(<span class="stringliteral">&quot;HttpRequestHeader::parse1stLine %s&quot;</span>, line);</div>
 <div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;            <a class="code" href="classaudio__tools_1_1_str.html">Str</a> line_str(line);</div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;            <span class="keywordtype">int</span> space1 = line_str.indexOf(<span class="stringliteral">&quot; &quot;</span>);</div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;            <span class="keywordtype">int</span> space2 = line_str.indexOf(<span class="stringliteral">&quot; &quot;</span>, space1+1);</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;            <span class="keywordtype">int</span> space1 = line_str.<a class="code" href="classaudio__tools_1_1_str.html#ab0eaa43cf723db0131b39534b815f81d">indexOf</a>(<span class="stringliteral">&quot; &quot;</span>);</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;            <span class="keywordtype">int</span> space2 = line_str.<a class="code" href="classaudio__tools_1_1_str.html#ab0eaa43cf723db0131b39534b815f81d">indexOf</a>(<span class="stringliteral">&quot; &quot;</span>, space1+1);</div>
 <div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160; </div>
 <div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;            this-&gt;method_id = getMethod(line);</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;            this-&gt;protocol_str.substring(line_str, space2+1, line_str.length());</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;            this-&gt;url_path.substring(line_str,space1+1,space2);</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;            this-&gt;protocol_str.<a class="code" href="classaudio__tools_1_1_str.html#a1dfaf646cab4c77b3100719484d45133">substring</a>(line_str, space2+1, line_str.<a class="code" href="classaudio__tools_1_1_str.html#a06c5d5295851ed22493cb47a00d9d956">length</a>());</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;            this-&gt;url_path.<a class="code" href="classaudio__tools_1_1_str.html#a1dfaf646cab4c77b3100719484d45133">substring</a>(line_str,space1+1,space2);</div>
 <div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;            this-&gt;url_path.<a class="code" href="classaudio__tools_1_1_str.html#af5cd084c377811ee46e7c1d0d8f54bba">trim</a>();</div>
 <div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;  </div>
 <div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;            LOGI(<span class="stringliteral">&quot;-&gt;method %s&quot;</span>, methods[this-&gt;method_id]);</div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;            LOGI(<span class="stringliteral">&quot;-&gt;protocol %s&quot;</span>, protocol_str.c_str());</div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;            LOGI(<span class="stringliteral">&quot;-&gt;url_path %s&quot;</span>, url_path.c_str());</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;            LOGI(<span class="stringliteral">&quot;-&gt;protocol %s&quot;</span>, protocol_str.<a class="code" href="classaudio__tools_1_1_str.html#af6d4c3a3b935b88ef99fb12fb530fd5c">c_str</a>());</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;            LOGI(<span class="stringliteral">&quot;-&gt;url_path %s&quot;</span>, url_path.<a class="code" href="classaudio__tools_1_1_str.html#af6d4c3a3b935b88ef99fb12fb530fd5c">c_str</a>());</div>
 <div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;        }</div>
 <div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160; </div>
 <div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;};</div>
@@ -466,11 +466,11 @@ $(function() {
 <div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;            LOGI(<span class="stringliteral">&quot;HttpReplyHeader::write1stLine&quot;</span>);</div>
 <div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;            <span class="keywordtype">char</span> msg[200];</div>
 <div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;            <a class="code" href="classaudio__tools_1_1_str.html">Str</a> msg_str(msg,200);</div>
-<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;            msg_str = this-&gt;protocol_str.c_str();</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;            msg_str = this-&gt;protocol_str.<a class="code" href="classaudio__tools_1_1_str.html#af6d4c3a3b935b88ef99fb12fb530fd5c">c_str</a>();</div>
 <div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;            msg_str += <span class="stringliteral">&quot; &quot;</span>;</div>
 <div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;            msg_str += this-&gt;status_code;</div>
 <div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;            msg_str += <span class="stringliteral">&quot; &quot;</span>;</div>
-<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;            msg_str += this-&gt;status_msg.c_str();</div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;            msg_str += this-&gt;status_msg.<a class="code" href="classaudio__tools_1_1_str.html#af6d4c3a3b935b88ef99fb12fb530fd5c">c_str</a>();</div>
 <div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;            LOGI(<span class="stringliteral">&quot;-&gt; %s&quot;</span>, msg);</div>
 <div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;            out.print(msg);</div>
 <div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;            crlf(out);</div>
@@ -481,22 +481,22 @@ $(function() {
 <div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;        <span class="comment">// we just update the pointers to point to the correct position in the</span></div>
 <div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;        <span class="comment">// http_status_line</span></div>
 <div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;        <span class="keywordtype">void</span> parse1stLine(<span class="keyword">const</span> <span class="keywordtype">char</span> *line){</div>
-<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;            LOGI(<span class="stringliteral">&quot;HttpReplyHeader::parse1stLine: %s&quot;</span>,line);</div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;            LOGD(<span class="stringliteral">&quot;HttpReplyHeader::parse1stLine: %s&quot;</span>,line);</div>
 <div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;            <a class="code" href="classaudio__tools_1_1_str.html">Str</a> line_str(line);</div>
-<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;            <span class="keywordtype">int</span> space1 = line_str.indexOf(<span class="charliteral">&#39; &#39;</span>,0);</div>
-<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;            <span class="keywordtype">int</span> space2 = line_str.indexOf(<span class="charliteral">&#39; &#39;</span>,space1+1);</div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;            <span class="keywordtype">int</span> space1 = line_str.<a class="code" href="classaudio__tools_1_1_str.html#ab0eaa43cf723db0131b39534b815f81d">indexOf</a>(<span class="charliteral">&#39; &#39;</span>,0);</div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;            <span class="keywordtype">int</span> space2 = line_str.<a class="code" href="classaudio__tools_1_1_str.html#ab0eaa43cf723db0131b39534b815f81d">indexOf</a>(<span class="charliteral">&#39; &#39;</span>,space1+1);</div>
 <div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160; </div>
 <div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;            <span class="comment">// save http version </span></div>
-<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;            protocol_str.substring(line_str,0,space1);</div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;            protocol_str.<a class="code" href="classaudio__tools_1_1_str.html#a1dfaf646cab4c77b3100719484d45133">substring</a>(line_str,0,space1);</div>
 <div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160; </div>
 <div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;            <span class="comment">// find response status code after the first space</span></div>
 <div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;            <span class="keywordtype">char</span> status_c[6];</div>
 <div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;            <a class="code" href="classaudio__tools_1_1_str.html">Str</a> status(status_c,6);</div>
-<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;            status.substring(line_str, space1+1, space2);</div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;            status.<a class="code" href="classaudio__tools_1_1_str.html#a1dfaf646cab4c77b3100719484d45133">substring</a>(line_str, space1+1, space2);</div>
 <div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;            status_code = atoi(status_c);</div>
 <div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160; </div>
 <div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;            <span class="comment">// get reason-phrase after last SP</span></div>
-<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;            status_msg.substring(line_str, space2+1, line_str.length());</div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;            status_msg.<a class="code" href="classaudio__tools_1_1_str.html#a1dfaf646cab4c77b3100719484d45133">substring</a>(line_str, space2+1, line_str.<a class="code" href="classaudio__tools_1_1_str.html#a06c5d5295851ed22493cb47a00d9d956">length</a>());</div>
 <div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160; </div>
 <div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;        }</div>
 <div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160; </div>
@@ -517,7 +517,14 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_http_request_header_html"><div class="ttname"><a href="classaudio__tools_1_1_http_request_header.html">audio_tools::HttpRequestHeader</a></div><div class="ttdoc">Reading and writing of Http Requests.</div><div class="ttdef"><b>Definition:</b> HttpHeader.h:341</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_str_ext_html"><div class="ttname"><a href="classaudio__tools_1_1_str_ext.html">audio_tools::StrExt</a></div><div class="ttdoc">Str which keeps the data on the heap. We grow the allocated memory only if the copy source is not fit...</div><div class="ttdef"><b>Definition:</b> StrExt.h:22</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_str_html"><div class="ttname"><a href="classaudio__tools_1_1_str.html">audio_tools::Str</a></div><div class="ttdoc">A simple wrapper to provide string functions on char*. If the underlying char* is a const we do not a...</div><div class="ttdef"><b>Definition:</b> Str.h:17</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_str_html_af5cd084c377811ee46e7c1d0d8f54bba"><div class="ttname"><a href="classaudio__tools_1_1_str.html#af5cd084c377811ee46e7c1d0d8f54bba">audio_tools::Str::trim</a></div><div class="ttdeci">virtual void trim()</div><div class="ttdoc">remove leading and traling spaces</div><div class="ttdef"><b>Definition:</b> Str.h:477</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_str_html_a06c5d5295851ed22493cb47a00d9d956"><div class="ttname"><a href="classaudio__tools_1_1_str.html#a06c5d5295851ed22493cb47a00d9d956">audio_tools::Str::length</a></div><div class="ttdeci">virtual int length()</div><div class="ttdoc">provides the current length (filled with characters) of the string - excluding the terminating 0</div><div class="ttdef"><b>Definition:</b> Str.h:400</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_str_html_a1dfaf646cab4c77b3100719484d45133"><div class="ttname"><a href="classaudio__tools_1_1_str.html#a1dfaf646cab4c77b3100719484d45133">audio_tools::Str::substring</a></div><div class="ttdeci">virtual void substring(Str &amp;from, int start, int end)</div><div class="ttdoc">copies a substring into the current string</div><div class="ttdef"><b>Definition:</b> Str.h:449</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_str_html_a21c94ddd4b51c94ada8b1fa01150e254"><div class="ttname"><a href="classaudio__tools_1_1_str.html#a21c94ddd4b51c94ada8b1fa01150e254">audio_tools::Str::isEmpty</a></div><div class="ttdeci">virtual bool isEmpty()</div><div class="ttdoc">checks if the string is empty</div><div class="ttdef"><b>Definition:</b> Str.h:405</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_str_html_a5de11ccfb8bf83d358da367b7538a817"><div class="ttname"><a href="classaudio__tools_1_1_str.html#a5de11ccfb8bf83d358da367b7538a817">audio_tools::Str::equalsIgnoreCase</a></div><div class="ttdeci">virtual bool equalsIgnoreCase(const char *alt)</div><div class="ttdoc">Compares the string ignoring the case.</div><div class="ttdef"><b>Definition:</b> Str.h:537</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_str_html_a62557a335fc87964c69714e0247c4abc"><div class="ttname"><a href="classaudio__tools_1_1_str.html#a62557a335fc87964c69714e0247c4abc">audio_tools::Str::ltrim</a></div><div class="ttdeci">virtual void ltrim()</div><div class="ttdoc">remove leading spaces</div><div class="ttdef"><b>Definition:</b> Str.h:492</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_str_html_ab0eaa43cf723db0131b39534b815f81d"><div class="ttname"><a href="classaudio__tools_1_1_str.html#ab0eaa43cf723db0131b39534b815f81d">audio_tools::Str::indexOf</a></div><div class="ttdeci">virtual int indexOf(const char c, int start=0)</div><div class="ttdoc">provides the position of the the indicated character after the indicated start position</div><div class="ttdef"><b>Definition:</b> Str.h:274</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_str_html_af5cd084c377811ee46e7c1d0d8f54bba"><div class="ttname"><a href="classaudio__tools_1_1_str.html#af5cd084c377811ee46e7c1d0d8f54bba">audio_tools::Str::trim</a></div><div class="ttdeci">virtual void trim()</div><div class="ttdoc">remove leading and traling spaces</div><div class="ttdef"><b>Definition:</b> Str.h:476</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_str_html_af6d4c3a3b935b88ef99fb12fb530fd5c"><div class="ttname"><a href="classaudio__tools_1_1_str.html#af6d4c3a3b935b88ef99fb12fb530fd5c">audio_tools::Str::c_str</a></div><div class="ttdeci">virtual const char * c_str()</div><div class="ttdoc">provides the string value as const char*</div><div class="ttdef"><b>Definition:</b> Str.h:395</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_vector_html"><div class="ttname"><a href="classaudio__tools_1_1_vector.html">audio_tools::Vector</a></div><div class="ttdoc">Vector implementation which provides the most important methods as defined by std::vector....</div><div class="ttdef"><b>Definition:</b> Vector.h:14</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Parser for MP3 ID3 Meta Data: The goal is to implement a simple API which provides the title,...</div><div class="ttdef"><b>Definition:</b> AudioA2DP.h:18</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_http_header_line_html"><div class="ttname"><a href="structaudio__tools_1_1_http_header_line.html">audio_tools::HttpHeaderLine</a></div><div class="ttdoc">A individual key - value header line.</div><div class="ttdef"><b>Definition:</b> HttpHeader.h:40</div></div>

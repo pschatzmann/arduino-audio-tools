@@ -85,6 +85,9 @@ $(function() {
 , <a class="el" href="classaudio__tools_1_1_audio_source_sd_fat.html#af53cb33f507dad7baafa2983b283049f">audio_tools::AudioSourceSdFat</a>
 , <a class="el" href="classaudio__tools_1_1_audio_source_u_r_l.html#a7c3451e999092d8e394219e2e69b7391">audio_tools::AudioSourceURL</a>
 </li>
+<li>set()
+: <a class="el" href="classaudio__tools_1_1_str.html#aa25f5434afe29e9104867031e7b24c46">audio_tools::Str</a>
+</li>
 <li>setActive()
 : <a class="el" href="classaudio__tools_1_1_audio_effect.html#ae5e573517e05769c77ebb17f2fe01495">audio_tools::AudioEffect</a>
 </li>
@@ -95,12 +98,12 @@ $(function() {
 : <a class="el" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#a67cabe7386bc292b7e372907c4e6ae83">audio_tools::AACEncoderFDK</a>
 , <a class="el" href="classaudio__tools_1_1_analog_audio.html#afd036e515b705db03868f2eb27bb4b57">audio_tools::AnalogAudio</a>
 , <a class="el" href="classaudio__tools_1_1_audio_player.html#af1921107d88453712d155d8d8fe1e6e3">audio_tools::AudioPlayer</a>
-, <a class="el" href="classaudio__tools_1_1_callback_audio_stream.html#a271d05dbe620795b0c9b7a83672bc1ff">audio_tools::CallbackAudioStream</a>
 , <a class="el" href="classaudio__tools_1_1_csv_stream.html#aa630377823f8aba5db63ddf657d514b1">audio_tools::CsvStream&lt; T &gt;</a>
 , <a class="el" href="classaudio__tools_1_1_i2_s_stream.html#a0b77e75668b8616d52312462f0a30e2e">audio_tools::I2SStream</a>
 , <a class="el" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#acbf250c55d58dc07bbb05a61f696a265">audio_tools::MP3EncoderLAME</a>
 , <a class="el" href="classaudio__tools_1_1_port_audio_stream.html#ac7bf8ff0eb4c1f0607434a359405badf">audio_tools::PortAudioStream</a>
 , <a class="el" href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#a76fb99feead156d38c742a31dd4247e9">audio_tools::PWMAudioStreamBase</a>
+, <a class="el" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a76e70ad0ac49978d5ea6227a8a0456d8">audio_tools::TimerCallbackAudioStream</a>
 , <a class="el" href="classaudio__tools_1_1_volume_output.html#af8a33f26824a3973b4ce3ab246e44b4e">audio_tools::VolumeOutput</a>
 , <a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#ac61bb13de1fcf11bb393eabacc996f8d">audio_tools::WAVEncoder</a>
 </li>
@@ -125,14 +128,16 @@ $(function() {
 <li>setBytesPerSample()
 : <a class="el" href="classaudio__tools_1_1_volume_output.html#a75d566d352b90ad00f80fad4d18656d6">audio_tools::VolumeOutput</a>
 </li>
-<li>setCallbackMetadata()
-: <a class="el" href="classaudio__tools_1_1_audio_player.html#aa88b9bff314c813589120d742a57f454">audio_tools::AudioPlayer</a>
+<li>setCallback()
+: <a class="el" href="classaudio__tools_1_1_meta_data_i_c_y.html#acc5c34118b8adbd4eb630b7867cb3cb6">audio_tools::MetaDataICY</a>
+, <a class="el" href="classaudio__tools_1_1_meta_data_print.html#a5fedef4a30816aee2d9373884848ca92">audio_tools::MetaDataPrint</a>
 </li>
 <li>setCallbackOnWrite()
 : <a class="el" href="classaudio__tools_1_1_stream_copy_t.html#aba98d7f6707f54f7cf19bf1984b37179">audio_tools::StreamCopyT&lt; T &gt;</a>
 </li>
 <li>setDataCallback()
-: <a class="el" href="classaudio__tools_1_1_m_p3_decoder_m_a_d.html#ab0989f7b0fb638cd51c0a8de26f525b8">audio_tools::MP3DecoderMAD</a>
+: <a class="el" href="classaudio__tools_1_1_meta_data_i_c_y.html#a34d5938a8aaf69e8eb7e8b980ceeba4d">audio_tools::MetaDataICY</a>
+, <a class="el" href="classaudio__tools_1_1_m_p3_decoder_m_a_d.html#ab0989f7b0fb638cd51c0a8de26f525b8">audio_tools::MP3DecoderMAD</a>
 </li>
 <li>setDataOffset()
 : <a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#a2f8f923579237f58d7cb43a85cd8be14">audio_tools::WAVEncoder</a>
@@ -149,6 +154,9 @@ $(function() {
 </li>
 <li>setFrequency()
 : <a class="el" href="classaudio__tools_1_1_sine_wave_generator.html#aa74429c5f93d07e2ab0b056af0c90965">audio_tools::SineWaveGenerator&lt; T &gt;</a>
+</li>
+<li>setIcyMetaInt()
+: <a class="el" href="classaudio__tools_1_1_meta_data_i_c_y.html#ab1e6ee5a5df2472d144e1d15c2982da4">audio_tools::MetaDataICY</a>
 </li>
 <li>setIndex()
 : <a class="el" href="classaudio__tools_1_1_audio_player.html#a4e1c07f4abcdd1c1dbaac133500cb589">audio_tools::AudioPlayer</a>
@@ -171,15 +179,25 @@ $(function() {
 <li>setInputPin2()
 : <a class="el" href="classaudio__tools_1_1_analog_config.html#a432317449a15f87655d40e3b52a90128">audio_tools::AnalogConfig</a>
 </li>
+<li>setLength()
+: <a class="el" href="classaudio__tools_1_1_str.html#a24c7ff6f573fc79bb2377db25bdbe306">audio_tools::Str</a>
+</li>
+<li>setLengthUndo()
+: <a class="el" href="classaudio__tools_1_1_str.html#adec9d93ccbaaeeefeb5557203b044dae">audio_tools::Str</a>
+</li>
+<li>setMetadataCallback()
+: <a class="el" href="classaudio__tools_1_1_audio_player.html#a26bee7469c2bb4774c5c518ac6b65566">audio_tools::AudioPlayer</a>
+, <a class="el" href="classaudio__tools_1_1_i_c_y_stream_default.html#a6eb3928453d87ce0938ba16dae8cc00b">audio_tools::ICYStreamDefault</a>
+</li>
 <li>setMimeCallback()
 : <a class="el" href="classaudio__tools_1_1_stream_copy_t.html#a9b56ba6349a67373f5ca084839ad4671">audio_tools::StreamCopyT&lt; T &gt;</a>
 </li>
 <li>setNotifyAudioChange()
 : <a class="el" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a865b7423abea726c09bdc589196053b8">audio_tools::AACDecoderHelix</a>
-, <a class="el" href="classaudio__tools_1_1_callback_audio_stream.html#a72a9364e5f0cdcbb8284f6a6683037bb">audio_tools::CallbackAudioStream</a>
 , <a class="el" href="classaudio__tools_1_1_encoded_audio_stream.html#a947c62be23d19e02c0388f9a18649c26">audio_tools::EncodedAudioStream</a>
 , <a class="el" href="classaudio__tools_1_1_m_p3_decoder_helix.html#a480eacb313a4fc29bb2f7ac35a868433">audio_tools::MP3DecoderHelix</a>
 , <a class="el" href="classaudio__tools_1_1_null_stream.html#a79e0b5b61734d66a18b21a7a4a431715">audio_tools::NullStream</a>
+, <a class="el" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a1866a399e18e42d8df96bdcace288e4c">audio_tools::TimerCallbackAudioStream</a>
 </li>
 <li>setOffset()
 : <a class="el" href="classaudio__tools_1_1_converter_scaler.html#a92b3cc7734789236ccf25d03444e6851">audio_tools::ConverterScaler&lt; T &gt;</a>
@@ -205,14 +223,21 @@ $(function() {
 </li>
 <li>setStream()
 : <a class="el" href="classaudio__tools_1_1_audio_player.html#afeb147740b945d681a53819bc873f31c">audio_tools::AudioPlayer</a>
+, <a class="el" href="classaudio__tools_1_1_generator_from_stream.html#a4c7aef83284b5c480a4edf75b241f381">audio_tools::GeneratorFromStream&lt; T &gt;</a>
 </li>
 <li>setTimeout()
 : <a class="el" href="classaudio__tools_1_1_audio_source.html#a527d24d2618d719b87eff1f40251f2bb">audio_tools::AudioSource</a>
 , <a class="el" href="classaudio__tools_1_1_audio_source_u_r_l.html#aaed4a2b2bc31c87441b14cb2990355c8">audio_tools::AudioSourceURL</a>
-, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_default.html#a52585ee54268dd9c516afd066d515172">audio_tools::URLStreamDefault</a>
+, <a class="el" href="classaudio__tools_1_1_u_r_l_stream_default.html#ae8e9eedcd94f1c5edbfa230519357c46">audio_tools::URLStreamDefault</a>
 </li>
 <li>setTimeoutAutoNext()
 : <a class="el" href="classaudio__tools_1_1_audio_source.html#a94efcff45d9249047df9e8041e4189f3">audio_tools::AudioSource</a>
+</li>
+<li>setup()
+: <a class="el" href="classaudio__tools_1_1_i_c_y_url_setup.html#ac9351809b7058e2d5465ad6bc30410c2">audio_tools::ICYUrlSetup</a>
+</li>
+<li>setupMetaData()
+: <a class="el" href="classaudio__tools_1_1_meta_data_i_c_y.html#add2f00f2c023629a500910f993b5cea9">audio_tools::MetaDataICY</a>
 </li>
 <li>setupPWM()
 : <a class="el" href="classaudio__tools_1_1_p_w_m_audio_stream_a_v_r.html#a0bf8bc83e099de1fa268d22ba2d6fcbe">audio_tools::PWMAudioStreamAVR</a>
@@ -244,15 +269,27 @@ $(function() {
 <li>startStream()
 : <a class="el" href="classaudio__tools_1_1_port_audio_stream.html#af3dd08fd8569d89a6beecaaf338f2082">audio_tools::PortAudioStream</a>
 </li>
+<li>startsWith()
+: <a class="el" href="classaudio__tools_1_1_str.html#a777d0eb122081b5af53fd287df45d8f5">audio_tools::Str</a>
+</li>
 <li>startTimer()
 : <a class="el" href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#a4645c3ba1347cac33a0dae1c1825ec56">audio_tools::PWMAudioStreamBase</a>
 , <a class="el" href="classaudio__tools_1_1_p_w_m_audio_stream_e_s_p32.html#ace09ae8e2e2fc85d743b775cd9fff392">audio_tools::PWMAudioStreamESP32</a>
 , <a class="el" href="classaudio__tools_1_1_p_w_m_audio_stream_m_b_e_d.html#a3a005a61b65adb638c81b47d99be5d7a">audio_tools::PWMAudioStreamMBED</a>
 </li>
+<li>status()
+: <a class="el" href="classaudio__tools_1_1_meta_data_i_c_y.html#a0609822e85e794904a357d163c4e1bf1">audio_tools::MetaDataICY</a>
+</li>
 <li>stop()
 : <a class="el" href="classaudio__tools_1_1_audio_output_with_callback.html#af8c887b9ce6c100722de3e6b8aaf23cf">audio_tools::AudioOutputWithCallback</a>
 , <a class="el" href="classaudio__tools_1_1_audio_player.html#a82cd15efde9e162dcecd77f101dcb031">audio_tools::AudioPlayer</a>
-, <a class="el" href="classaudio__tools_1_1_callback_stream.html#a8fabe3a2416b5273de5c5b352670e30e">audio_tools::CallbackStream&lt; T &gt;</a>
+, <a class="el" href="classaudio__tools_1_1_callback_buffered_stream.html#a7365cc261a7c84720e5d17add66f667f">audio_tools::CallbackBufferedStream&lt; T &gt;</a>
+</li>
+<li>Str()
+: <a class="el" href="classaudio__tools_1_1_str.html#a91948d84901a9e4e176854e9f2996af9">audio_tools::Str</a>
+</li>
+<li>substring()
+: <a class="el" href="classaudio__tools_1_1_str.html#a1dfaf646cab4c77b3100719484d45133">audio_tools::Str</a>
 </li>
 </ul>
 </div><!-- contents -->
