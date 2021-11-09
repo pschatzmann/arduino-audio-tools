@@ -57,24 +57,25 @@ void setup() {
   effects.addEffect(new Fuzz(fuzzEffectValue));
   effects.addEffect(new Tremolo(tremoloDuration, tremoloDepth, sample_rate));
 
-  // setup gain 
+  // setup gain for ads1015
   ads1015.setGain(GAIN_SIXTEEN);
+  ads1015.begin();
 
-  // configure & start cfg1015 Stream
-  auto config = ads1015Stream.defaultConfig();
-  config.rx_tx_mode = RX_MODE;
-  config.channels = channels;
-  config.sample_rate = sample_rate;
-  config.bits_per_sample = bits_per_sample;
-  config.secure_timer = true;
-  config.callback = getADS1015;
-  ads1015Stream.begin(config); // start ads1015
+  // cfgure & start cfg1015 Stream
+  auto cfg = ads1015Stream.defaultConfig();
+  cfg.rx_tx_mode = RX_MODE;
+  cfg.channels = channels;
+  cfg.sample_rate = sample_rate;
+  cfg.bits_per_sample = bits_per_sample;
+  cfg.secure_timer = true;
+  cfg.callback = getADS1015;
+  ads1015Stream.begin(cfg); // start ads1015
 
   // start server
-  server.begin(in, config); 
+  server.begin(in, cfg); 
 
   // start sound generator
-  in.begin(config);
+  in.begin(cfg);
 
 }
 
