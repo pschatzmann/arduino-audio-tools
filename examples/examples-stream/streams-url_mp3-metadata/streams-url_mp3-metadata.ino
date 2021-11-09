@@ -22,7 +22,7 @@ StreamCopy copier(out, url); // copy url to decoder
 // callback for meta data
 void printMetaData(MetaDataType type, const char* str, int len){
   Serial.print("==> ");
-  Serial.print(MetaDataTypeStr[type]);
+  Serial.print(toStr(type));
   Serial.print(": ");
   Serial.println(str);
 }

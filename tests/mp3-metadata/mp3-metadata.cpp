@@ -13,7 +13,7 @@ bool title_printed = false;
 
 void printMetaData(MetaDataType type, const char* str, int len){
   Serial.print("==> ");
-  Serial.print(MetaDataTypeStr[type]);
+  Serial.print(toStr(type));
   Serial.print(": ");
   Serial.println(str);
   title_printed = true;
