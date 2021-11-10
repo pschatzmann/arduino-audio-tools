@@ -494,6 +494,69 @@ class VolumeOutput : public AudioPrint {
 };
 
 /**
+ * @brief Replicates the output to multiple destinations.
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class MultiOutput : public AudioPrint {
+    public:
+
+        MultiOutput() = default;
+
+        MultiOutput(AudioPrint &out){
+            vector.push_back(&out);            
+        }
+
+        MultiOutput(AudioPrint &out1, AudioPrint &out2){
+            vector.push_back(&out1);
+            vector.push_back(&out2);
+        }
+
+        void add(AudioPrint &out){
+            vector.push_back(&out);
+        }
+
+        void flush() {
+            for (int j=0;j<vector.size();j++){
+                vector[j]->flush();
+            }
+        }
+
+        void setAudioInfo (AudioBaseInfo info){
+            for (int j=0;j<vector.size();j++){
+                vector[j]->setAudioInfo(info);
+            }
+        }
+
+        size_t write(const uint8_t *buffer, size_t size){
+            for (int j=0;j<vector.size();j++){
+                int open = size;
+                int start = 0;
+                while(open>0){
+                    int written = vector[j]->write(buffer+start, open);
+                    open -= written;
+                    start += written;
+                }
+            }
+            return size;
+        }
+
+        size_t write(uint8_t ch){
+            for (int j=0;j<vector.size();j++){
+                int open = 1;
+                while(open>0){
+                    open -= vector[j]->write(ch);
+                }
+            }
+            return 1;
+        }
+
+    protected:
+        Vector<AudioPrint*> vector;
+
+};
+
+/**
  * Converts the data from the indicated AudioBaseInfo format to the target AudioBaseInfo format
  * We can change the number of channels and the bits_per sample!
  */
