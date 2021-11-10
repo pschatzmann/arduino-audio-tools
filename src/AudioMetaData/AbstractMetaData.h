@@ -2,6 +2,8 @@
 
 #include <stdint.h>
 
+namespace audio_tools {
+
 /// Type of meta info
 enum MetaDataType { Title, Artist, Album, Genre, Name, Description };
 
@@ -31,3 +33,5 @@ class AbstractMetaData {
         virtual void setIcyMetaInt(int value){}
 
 };
+
+}
