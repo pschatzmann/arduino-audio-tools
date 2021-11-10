@@ -501,17 +501,21 @@ class VolumeOutput : public AudioPrint {
 class MultiOutput : public AudioPrint {
     public:
 
+        /// Defines a MultiOutput with no final output: Define your outputs with add()
         MultiOutput() = default;
 
+        /// Defines a MultiOutput with a single final outputs,
         MultiOutput(AudioPrint &out){
             vector.push_back(&out);            
         }
 
+        /// Defines a MultiOutput with 2 final outputs
         MultiOutput(AudioPrint &out1, AudioPrint &out2){
             vector.push_back(&out1);
             vector.push_back(&out2);
         }
 
+        /// Add an additional AudioPrint output
         void add(AudioPrint &out){
             vector.push_back(&out);
         }
