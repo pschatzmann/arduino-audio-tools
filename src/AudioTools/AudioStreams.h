@@ -550,11 +550,12 @@ struct TimerCallbackAudioStreamInfo : public AudioBaseInfo {
     bool use_timer = true;
     int timer_id = 0;
     bool secure_timer = false;
+    bool adapt_sample_rate = false;
     uint16_t (*callback)(uint8_t *data, uint16_t len) = nullptr;
 };
 
 
-// relevant only if use_timer == true
+// forward declaration: relevant only if use_timer == true
 void IRAM_ATTR timerCallback(void* obj);
 
 /**
@@ -623,9 +624,8 @@ class TimerCallbackAudioStream : public BufferedStream, public AudioBaseInfoSour
                 timer->setCallbackParameter(this);
                 timer->begin(timerCallback, time, TimeUnit::US);
             }
-            if (notifyTarget!=nullptr){
-                notifyTarget->setAudioInfo(cfg);
-            }
+
+            notifyAudioChange();
             active = true;
         }
 
@@ -649,6 +649,10 @@ class TimerCallbackAudioStream : public BufferedStream, public AudioBaseInfoSour
             active = false;
         }
 
+        uint16_t currentSampleRate() {
+            return currentRateValue;
+        }
+
     protected:
         TimerCallbackAudioStreamInfo cfg;
         AudioBaseInfoDependent *notifyTarget=nullptr;
@@ -660,17 +664,23 @@ class TimerCallbackAudioStream : public BufferedStream, public AudioBaseInfoSour
         uint8_t *frame=nullptr;
         uint16_t frameSize=0;
         uint32_t time=0;
+        unsigned long lastTimestamp = 0u;
+        uint16_t currentRateValue = 0;
+        uint32_t lastMs=0;
+        uint32_t samples=0;
 
         // used for audio sink
         virtual size_t writeExt(const uint8_t* data, size_t len) {
             if (!active) return 0;
             LOGD(LOG_METHOD);
-
+            size_t result = 0;
             if (!cfg.use_timer){
-                return frameCallback((uint8_t*)data, len);
+                result = frameCallback((uint8_t*)data, len);
             } else {
-                return buffer->writeArray((uint8_t* )data, len);
+                result = buffer->writeArray((uint8_t* )data, len);
             }
+            calculateSampleRate(result);
+            return result;
         }
 
         // used for audio source
@@ -678,10 +688,55 @@ class TimerCallbackAudioStream : public BufferedStream, public AudioBaseInfoSour
             if (!active) return 0;
             LOGD(LOG_METHOD);
 
+            size_t result = 0;
             if (!cfg.use_timer){
-                return frameCallback(data, len);
+                result = frameCallback(data, len);
             } else {
-                return buffer->readArray(data, len);
+                result = buffer->readArray(data, len);
+            }
+            calculateSampleRate(result);
+            return result;
+        }
+
+        /// calculates the effective sample rate
+        virtual void calculateSampleRate(size_t len) {
+            if (lastTimestamp>0u){
+                if (len>0){
+                    uint32_t ms = millis()-lastTimestamp; 
+                    uint16_t bytes_per_sample = cfg.bits_per_sample/8;
+                    if (ms==0){
+                        // we can get multiple calls for the same ms
+                        samples+= len / cfg.channels / bytes_per_sample;
+                    } else {
+                        if (lastMs>0){
+                            uint16_t rate = samples * 1000 / lastMs; 
+
+                            if (currentRateValue==0){
+                                currentRateValue = rate;
+                            } else {
+                                currentRateValue = (currentRateValue + rate) / 2;
+                                LOGI("effective sample rate: %d - last %d samples", currentRateValue, len);
+                                if (cfg.adapt_sample_rate){
+                                    if (abs(currentRateValue-cfg.sample_rate)>200){
+                                        cfg.sample_rate = currentRateValue;
+                                        notifyAudioChange();
+                                    }
+                                }
+                            }
+                        }
+                        lastMs = ms;
+                        samples = len / cfg.channels / bytes_per_sample;
+                    }
+                }
+            } else {
+                lastTimestamp = millis();
+            }
+            
+        }
+
+        virtual void notifyAudioChange() {
+            if (notifyTarget!=nullptr){
+                notifyTarget->setAudioInfo(cfg);
             }
         }
        
@@ -705,13 +760,14 @@ void IRAM_ATTR timerCallback(void* obj){
             }
             if (src->buffer->writeArray(src->frame, available_bytes)!=available_bytes){
                 //LOGE(UNDERFLOW_MSG);
+                assert(false);
             }
         } else {
             // output
             if (src->buffer!=nullptr && src->frame!=nullptr && src->frameSize>0){
                 uint16_t available_bytes = src->buffer->readArray(src->frame, src->frameSize);
                 if (available_bytes != src->frameCallback(src->frame, available_bytes)){
-                    // LOGE(UNDERFLOW_MSG);
+                    LOGE(UNDERFLOW_MSG);
                 }
             }
         }

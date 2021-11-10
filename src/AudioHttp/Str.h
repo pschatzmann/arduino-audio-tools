@@ -176,7 +176,26 @@ class Str {
             int endlen = strlen(str);
             return strncmp(this->chars+(len-endlen),str, endlen)==0;
         }
-    
+
+        int strncmp_i(const char* s1, const char* s2, int n) {
+            if (n == 0)  return (0);
+            do {
+                if (tolower(*s1) != tolower(*s2++))
+                    return (*(unsigned char *)s1 - *(unsigned char *)--s2);
+                if (*s1++ == 0)
+                    break;
+            } while (--n != 0);
+            return (0);
+        }
+
+        /// checks if the string ends with the indicated substring
+        virtual bool endsWithIgnoreCase(const char* str){
+            if (str==nullptr) return false;
+            int endlen = strlen(str);
+            return strncmp_i(this->chars+(len-endlen),str, endlen)==0;
+        }
+
+
         /// virtual bool matches(const char* match){
         ///     int m_size = strlen(match);
         ///     if (length() < m_size)
@@ -552,6 +571,24 @@ class Str {
                 result = atoi(chars);
             }
             return result;
+        }
+
+        /// Converts the string to lowercase letters
+        void toLowerCase(){
+            if (chars!=nullptr){
+                for (int j=0;j<len;j++){
+                    chars[j] = tolower(chars[j]);
+                }
+            }
+        }
+
+        /// Converts the string to uppercase letters
+        void toUpperCase(){
+             if (chars!=nullptr){
+                for (int j=0;j<len;j++){
+                    chars[j] = toupper(chars[j]);
+                }
+             }
         }
 
     protected:

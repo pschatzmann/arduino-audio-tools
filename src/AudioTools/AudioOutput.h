@@ -522,7 +522,7 @@ class MultiOutput : public AudioPrint {
             }
         }
 
-        void setAudioInfo (AudioBaseInfo info){
+        void setAudioInfo(AudioBaseInfo info){
             for (int j=0;j<vector.size();j++){
                 vector[j]->setAudioInfo(info);
             }

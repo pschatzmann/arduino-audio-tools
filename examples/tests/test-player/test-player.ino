@@ -20,7 +20,7 @@ AudioSourceURL source(urlStream, urls, "audio/mp3");
 
 void testUrl(){
     for (int j=-10;j<10;j++){
-        Stream *out = source.setIndex(j);
+        Stream *out = source.selectStream(j);
         Serial.printf("%d -> %d / %s \n", j, source.index(), source.toStr());
         if (out!=nullptr){
           delay(500);
@@ -30,13 +30,14 @@ void testUrl(){
     Serial.println("--------------------------");
 }
 
-const char *startFilePath="/";
+const char *startFilePath="/test";
 const char* ext="mp3";
 AudioSourceSdFat sdsource(startFilePath, ext);
 
 void testSD() {
+    sdSource.setPath("test")
     for (int j=-5;j<20;j++){
-        Stream *out = sdsource.setIndex(j);
+        Stream *out = sdsource.selectStream(j);
         Serial.printf("%d -> %d / %s \n", j, sdsource.index(), sdsource.toStr());
         if (out!=nullptr){
           assert(out->available()>0);
@@ -46,6 +47,7 @@ void testSD() {
 }
 
 void testSDNext() {
+    sdSource.setPath("test")
     sdsource.begin();
     for (int j=0;j<20;j++){
         Stream *out = sdsource.nextStream(1);
@@ -61,7 +63,7 @@ void testSDNext() {
 void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Error);  
-  testUrl();
+  //testUrl();
   testSD();
   testSDNext();
 }

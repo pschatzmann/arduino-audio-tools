@@ -50,6 +50,11 @@ namespace audio_tools {
             return nullptr;
         }
 
+        /// same as selectStream - I just prefer this name
+        virtual Stream* setIndex(int index) {
+            return selectStream(index);
+        }
+
         /// Sets the timeout which is triggering to move to the next stream. - the default value is 500 ms
         virtual void setTimeoutAutoNext(int millisec) {
             timeout_auto_next_value = millisec;
@@ -178,7 +183,7 @@ namespace audio_tools {
 
         /// Defines the regex filter criteria for selecting files. E.g. ".*Bob Dylan.*" 
         void setFileFilter(const char* filter) {
-            file_name_pattern = filter;
+            file_name_pattern = (char*)filter;
         }
 
         /// Provides the current index position
@@ -203,13 +208,14 @@ namespace audio_tools {
         char file_name[MAX_FILE_LEN];
         const char* exension = nullptr;
         const char* start_path = nullptr;
-        const char* file_name_pattern = "*";
+        char* file_name_pattern = (char*) "*";
 
         /// checks if the file is a valid audio file
         bool isValidAudioFile(AudioFile& file) {
+            char file_name[MAX_FILE_LEN];
             file.getName(file_name, MAX_FILE_LEN);
             Str strFileName(file_name);
-            bool result = strFileName.endsWith(exension) && strFileName.matches(file_name_pattern);
+            bool result = strFileName.endsWithIgnoreCase(exension) && strFileName.matches(file_name_pattern);
             LOGI("-> isValidAudioFile: '%s': %d", file_name, result);
             return result;
         }
@@ -218,6 +224,13 @@ namespace audio_tools {
         AudioFile getFile(const char* dirStr, int pos) {
             AudioFile dir;
             AudioFile result;
+            if (sd.exists(dirStr)){
+                LOGI("directory: %s", dirStr);
+            } else {
+                LOGE("directory: %s does not exist", dirStr);
+                stop();
+            }
+
             dir.open(dirStr);
             size_t count = 0;
             getFileAtIndex(dir, pos, count, result);
@@ -233,36 +246,35 @@ namespace audio_tools {
             AudioFile file;
             if (idx > pos) return;
 
-            while (file.openNext(&dir, O_READ)) {
-                if (idx > pos) return;
+            bool found = false;
+            while (!found && file.openNext(&dir, O_RDONLY )) {
+                //if (idx > pos) return;
+
+                // close all files except result
+                char file_name_act[MAX_FILE_LEN];
+                file.getName(file_name_act, MAX_FILE_LEN);
+                LOGD("-> processing: %s with index %d", file_name_act, idx);
                 if (!file.isHidden()) {
                     if (!file.isDir()) {
                         if (isValidAudioFile(file)) {
-                            idx++;
-                            if (idx - 1 == pos) {
-                                LOGI("-> get: '%s'", file_name);
+                            if (idx == pos) {
+                                found = true;
+                                LOGI("==> found: '%s' at index %d", file_name, idx);
                                 result = file;
                                 result.getName(file_name, MAX_FILE_LEN);
-                                //return;
                             }
+                            idx++;
                         }
-                    }
-                    else {
+                    } else {
+                        // process subdirectory
                         getFileAtIndex(file, pos, idx, result);
                     }
 
-                    // close all files except result
-                    char file_name_act[MAX_FILE_LEN];
-                    file.getName(file_name_act, MAX_FILE_LEN);
-                    //LOGI("-> %s <-> %s", file_name_act, file_name);
                     if (!Str(file_name_act).equals(file_name)) {
                         file.getName(file_name, MAX_FILE_LEN);
                         file.close();
                         LOGI("-> close: '%s'", file_name);
-                    }
-                    else {
-                        return;
-                    }
+                    }  
                 }
             }
         }
