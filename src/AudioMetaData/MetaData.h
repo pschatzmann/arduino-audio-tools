@@ -15,7 +15,7 @@ namespace audio_tools {
  * @copyright GPLv3
  * 
  */
-class MetaDataPrint : public Print {
+class MetaDataPrint : public AudioPrint {
   public:
 
     MetaDataPrint() = default;

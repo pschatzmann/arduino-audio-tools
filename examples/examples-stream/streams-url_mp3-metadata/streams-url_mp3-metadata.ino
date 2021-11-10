@@ -1,7 +1,7 @@
 /**
  * @file streams-url_mp3-out.ino
  * @author Phil Schatzmann
- * @brief read MP3 stream from url and output metadata
+ * @brief read MP3 stream from url and output of metadata only: There is no audio output!
  * @date 2021-11-07
  * 
  * @copyright Copyright (c) 2021

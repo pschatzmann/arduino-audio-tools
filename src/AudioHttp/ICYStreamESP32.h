@@ -28,7 +28,7 @@ class ICYStream : public AbstractURLStream {
 
         virtual bool setMetadataCallback(void (*fn)(MetaDataType info, const char* str, int len)) override {
             LOGD(LOG_METHOD);
-            p_urlStream->setMetadataCallback(fn);
+            return p_urlStream->setMetadataCallback(fn);
         }
 
         virtual bool begin(const char* urlStr, const char* acceptMime=nullptr, MethodID action=GET,  const char* reqMime="", const char*reqData="") override {

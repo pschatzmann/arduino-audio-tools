@@ -319,6 +319,7 @@ class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource {
             if(len==0) {
                 return 0;
             }
+            
             if(writer_ptr==nullptr || data==nullptr){
                 LOGE("NPE");
                 return 0;
