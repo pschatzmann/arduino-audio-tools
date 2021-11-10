@@ -235,7 +235,7 @@ namespace audio_tools {
             size_t count = 0;
             getFileAtIndex(dir, pos, count, result);
             result.getName(file_name, MAX_FILE_LEN);
-            LOGI("-> getFile: '%s': %d", file_name, pos);
+            LOGD("-> getFile: '%s': %d", file_name, pos);
             dir.close();
             return result;
         }
@@ -259,9 +259,9 @@ namespace audio_tools {
                         if (isValidAudioFile(file)) {
                             if (idx == pos) {
                                 found = true;
-                                LOGI("==> found: '%s' at index %d", file_name, idx);
                                 result = file;
                                 result.getName(file_name, MAX_FILE_LEN);
+                                LOGI("==> found: '%s' at index %d", file_name, idx);
                             }
                             idx++;
                         }
@@ -273,7 +273,7 @@ namespace audio_tools {
                     if (!Str(file_name_act).equals(file_name)) {
                         file.getName(file_name, MAX_FILE_LEN);
                         file.close();
-                        LOGI("-> close: '%s'", file_name);
+                        LOGD("-> close: '%s'", file_name);
                     }  
                 }
             }
