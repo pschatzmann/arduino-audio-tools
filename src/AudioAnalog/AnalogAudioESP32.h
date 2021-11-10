@@ -282,18 +282,19 @@ class AnalogAudio  : public AudioStream {
       LOGD(LOG_METHOD);
 
       size_t result = 0;   
-      switch(adc_config.channels){
-        case 1:
-          result = outputMono(src, size_bytes);    
-          break;      
-        case 2:
-          result = outputStereo(src, size_bytes);    
-          break;   
-        default:
-          LOGE("Unsupported number of channels: %d", adc_config.channels);   
-          stop();
+      if (size_bytes>0 && src!=nullptr){
+        switch(adc_config.channels){
+          case 1:
+            result = outputMono(src, size_bytes);    
+            break;      
+          case 2:
+            result = outputStereo(src, size_bytes);    
+            break;   
+          default:
+            LOGE("Unsupported number of channels: %d", adc_config.channels);   
+            stop();
+        }
       }
-   
       return result;
     }   
 
@@ -364,7 +365,7 @@ class AnalogAudio  : public AudioStream {
       }
 
       if (i2s_write(port_no, src, output_size, &result, portMAX_DELAY)!=ESP_OK){
-        LOGE(LOG_METHOD);
+        LOGE("%s: %d", LOG_METHOD, output_size);
       }
 
       LOGD("i2s_write %d -> %d bytes", size_bytes, result);
@@ -384,7 +385,7 @@ class AnalogAudio  : public AudioStream {
                 out[0] = convert8DAC(data[j], adc_config.bits_per_sample);
                 out[1] = out[0];
                 if (i2s_write(port_no, out, 4, &result, portMAX_DELAY)!=ESP_OK){
-                  LOGE(LOG_METHOD);
+                  LOGE("%s: %d", LOG_METHOD, output_size);
                 }
                 resultTotal += result;
             }
@@ -395,7 +396,7 @@ class AnalogAudio  : public AudioStream {
                 out[0] = convert8DAC(data[j], adc_config.bits_per_sample);
                 out[1] = out[0];
                 if (i2s_write(port_no, out, 4, &result, portMAX_DELAY)!=ESP_OK){
-                  LOGE(LOG_METHOD);
+                  LOGE("%s: %d", LOG_METHOD, output_size);
                 }
                 resultTotal += result;
             }
@@ -406,7 +407,7 @@ class AnalogAudio  : public AudioStream {
                 out[0] = convert8DAC(data[j], adc_config.bits_per_sample);
                 out[1] = out[0];
                 if (i2s_write(port_no, out, 4, &result, portMAX_DELAY)!=ESP_OK){
-                  LOGE(LOG_METHOD);
+                  LOGE("%s: %d", LOG_METHOD, output_size);
                 }
                 resultTotal += result;
             }
