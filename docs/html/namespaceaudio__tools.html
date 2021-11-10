@@ -91,6 +91,9 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html">AACEncoderFDK</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encodes PCM data to the AAC format and writes the result to a stream This is basically just a wrapper using <a href="https://github.com/pschatzmann/arduino-fdk-aac">https://github.com/pschatzmann/arduino-fdk-aac</a>.  <a href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_abstract_meta_data.html">AbstractMetaData</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Common Metadata methods.  <a href="classaudio__tools_1_1_abstract_meta_data.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_abstract_u_r_l_stream.html">AbstractURLStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract Base class for all <a class="el" href="classaudio__tools_1_1_u_r_l_stream.html" title="URLStream implementation for all envionments except ESP32.">URLStream</a> implementations.  <a href="classaudio__tools_1_1_abstract_u_r_l_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -610,10 +613,37 @@ Enumerations</h2></td></tr>
 <br />
  }</td></tr>
 <tr class="separator:a4027459e9b7423e070bcda33adf881e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a66747a0ba3d8821e3228fd1680106e68"><td class="memItemLeft" align="right" valign="top"><a id="a66747a0ba3d8821e3228fd1680106e68" name="a66747a0ba3d8821e3228fd1680106e68"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a66747a0ba3d8821e3228fd1680106e68">MetaDataType</a> { <b>Title</b>
+<tr class="memitem:a66747a0ba3d8821e3228fd1680106e68"><td class="memItemLeft" align="right" valign="top"><a id="a66747a0ba3d8821e3228fd1680106e68" name="a66747a0ba3d8821e3228fd1680106e68"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a66747a0ba3d8821e3228fd1680106e68">MetaDataType</a> { <br />
+&#160;&#160;<b>Title</b>
 , <b>Artist</b>
 , <b>Album</b>
 , <b>Genre</b>
+, <br />
+&#160;&#160;<b>Name</b>
+, <b>Description</b>
+, <b>Title</b>
+, <b>Artist</b>
+, <br />
+&#160;&#160;<b>Album</b>
+, <b>Genre</b>
+<br />
+ }</td></tr>
+<tr class="memdesc:a66747a0ba3d8821e3228fd1680106e68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of meta info. <br /></td></tr>
+<tr class="separator:a66747a0ba3d8821e3228fd1680106e68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66747a0ba3d8821e3228fd1680106e68"><td class="memItemLeft" align="right" valign="top"><a id="a66747a0ba3d8821e3228fd1680106e68" name="a66747a0ba3d8821e3228fd1680106e68"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a66747a0ba3d8821e3228fd1680106e68">MetaDataType</a> { <br />
+&#160;&#160;<b>Title</b>
+, <b>Artist</b>
+, <b>Album</b>
+, <b>Genre</b>
+, <br />
+&#160;&#160;<b>Name</b>
+, <b>Description</b>
+, <b>Title</b>
+, <b>Artist</b>
+, <br />
+&#160;&#160;<b>Album</b>
+, <b>Genre</b>
+<br />
  }</td></tr>
 <tr class="memdesc:a66747a0ba3d8821e3228fd1680106e68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of meta info. <br /></td></tr>
 <tr class="separator:a66747a0ba3d8821e3228fd1680106e68"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -727,6 +757,10 @@ static IRAM_ATTR void&#160;</td><td class="memItemRight" valign="bottom"><b>time
 <tr class="memitem:a2354db9bd0aa6b2cb87dcb38c8d45736"><td class="memItemLeft" align="right" valign="top"><a id="a2354db9bd0aa6b2cb87dcb38c8d45736" name="a2354db9bd0aa6b2cb87dcb38c8d45736"></a>
 static IRAM_ATTR void&#160;</td><td class="memItemRight" valign="bottom"><b>timerCallback3</b> ()</td></tr>
 <tr class="separator:a2354db9bd0aa6b2cb87dcb38c8d45736"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7226da9915d850905ab42f79b4a8d60"><td class="memItemLeft" align="right" valign="top"><a id="aa7226da9915d850905ab42f79b4a8d60" name="aa7226da9915d850905ab42f79b4a8d60"></a>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><b>toStr</b> (<a class="el" href="namespaceaudio__tools.html#a66747a0ba3d8821e3228fd1680106e68">MetaDataType</a> t)</td></tr>
+<tr class="memdesc:aa7226da9915d850905ab42f79b4a8d60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts the MetaDataType to a string. <br /></td></tr>
+<tr class="separator:aa7226da9915d850905ab42f79b4a8d60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44efd1d1c6ac045c5217eca480cf6057"><td class="memItemLeft" align="right" valign="top"><a id="a44efd1d1c6ac045c5217eca480cf6057" name="a44efd1d1c6ac045c5217eca480cf6057"></a>
 static IRAM_ATTR void&#160;</td><td class="memItemRight" valign="bottom"><b>userCallback0</b> ()</td></tr>
 <tr class="separator:a44efd1d1c6ac045c5217eca480cf6057"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -837,10 +871,10 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>LOCATION</b> 
 <tr class="memitem:ac36cf79d23b9c9243305ea767a32146e"><td class="memItemLeft" align="right" valign="top"><a id="ac36cf79d23b9c9243305ea767a32146e" name="ac36cf79d23b9c9243305ea767a32146e"></a>
 const int&#160;</td><td class="memItemRight" valign="bottom"><b>MaxHeaderLineLength</b> = 200</td></tr>
 <tr class="separator:ac36cf79d23b9c9243305ea767a32146e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac1ba19eec6b8d105157181ed0ea7254"><td class="memItemLeft" align="right" valign="top"><a id="aac1ba19eec6b8d105157181ed0ea7254" name="aac1ba19eec6b8d105157181ed0ea7254"></a>
-const char *&#160;</td><td class="memItemRight" valign="bottom"><b>MetaDataTypeStr</b> [] = {&quot;Title&quot;, &quot;Artis&quot;, &quot;Album&quot;, &quot;Genre&quot;}</td></tr>
-<tr class="memdesc:aac1ba19eec6b8d105157181ed0ea7254"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test Description for meta info. <br /></td></tr>
-<tr class="separator:aac1ba19eec6b8d105157181ed0ea7254"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30a4579da81ba2c00b604933704885a2"><td class="memItemLeft" align="right" valign="top"><a id="a30a4579da81ba2c00b604933704885a2" name="a30a4579da81ba2c00b604933704885a2"></a>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><b>MetaDataTypeStr</b> [] = {&quot;Title&quot;, &quot;Artist&quot;, &quot;Album&quot;, &quot;Genre&quot;,&quot;Name&quot;, &quot;Description&quot;}</td></tr>
+<tr class="memdesc:a30a4579da81ba2c00b604933704885a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test Description for meta info. <br /></td></tr>
+<tr class="separator:a30a4579da81ba2c00b604933704885a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a197983ed7b1a31c3a9a45980f57a6477"><td class="memItemLeft" align="right" valign="top"><a id="a197983ed7b1a31c3a9a45980f57a6477" name="a197983ed7b1a31c3a9a45980f57a6477"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><b>methods</b> [] = {&quot;?&quot;,&quot;GET&quot;,&quot;HEAD&quot;,&quot;POST&quot;,&quot;PUT&quot;,&quot;DELETE&quot;,&quot;TRACE&quot;,&quot;OPTIONS&quot;,&quot;CONNECT&quot;,&quot;PATCH&quot;,nullptr}</td></tr>
 <tr class="separator:a197983ed7b1a31c3a9a45980f57a6477"><td class="memSeparator" colspan="2">&#160;</td></tr>

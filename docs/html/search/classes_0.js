@@ -5,7 +5,7 @@ var searchData=
   ['aacdecoderfdk_2',['AACDecoderFDK',['../classaudio__tools_1_1_a_a_c_decoder_f_d_k.html',1,'audio_tools']]],
   ['aacdecoderhelix_3',['AACDecoderHelix',['../classaudio__tools_1_1_a_a_c_decoder_helix.html',1,'audio_tools']]],
   ['aacencoderfdk_4',['AACEncoderFDK',['../classaudio__tools_1_1_a_a_c_encoder_f_d_k.html',1,'audio_tools']]],
-  ['abstractmetadata_5',['AbstractMetaData',['../class_abstract_meta_data.html',1,'']]],
+  ['abstractmetadata_5',['AbstractMetaData',['../classaudio__tools_1_1_abstract_meta_data.html',1,'audio_tools']]],
   ['abstracturlstream_6',['AbstractURLStream',['../classaudio__tools_1_1_abstract_u_r_l_stream.html',1,'audio_tools']]],
   ['analogaudio_7',['AnalogAudio',['../classaudio__tools_1_1_analog_audio.html',1,'audio_tools']]],
   ['analogaudiostream_8',['AnalogAudioStream',['../classaudio__tools_1_1_analog_audio_stream.html',1,'audio_tools']]],

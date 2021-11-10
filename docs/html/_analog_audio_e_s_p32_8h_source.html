@@ -240,7 +240,7 @@ $(function() {
 <div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>      adc_config = cfg;</div>
 <div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>      i2s_config_t i2s_config = {</div>
 <div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>          .mode = (i2s_mode_t) cfg.mode_internal,</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>          .sample_rate = cfg.sample_rate,</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>          .sample_rate = (uint32_t)cfg.sample_rate,</div>
 <div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>          .bits_per_sample = (i2s_bits_per_sample_t)16,</div>
 <div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>          .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,</div>
 <div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>          .communication_format = (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_I2S,</div>

@@ -73,29 +73,37 @@ $(function() {
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">enum</span> MetaDataType { Title, Artist, Album, Genre, Name, Description };</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">const</span> <span class="keywordtype">char</span>* MetaDataTypeStr[] = {<span class="stringliteral">&quot;Title&quot;</span>, <span class="stringliteral">&quot;Artist&quot;</span>, <span class="stringliteral">&quot;Album&quot;</span>, <span class="stringliteral">&quot;Genre&quot;</span>,<span class="stringliteral">&quot;Name&quot;</span>, <span class="stringliteral">&quot;Description&quot;</span>};</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">const</span> <span class="keywordtype">char</span> *toStr(MetaDataType t){</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keywordflow">return</span> MetaDataTypeStr[t];</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>}</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="class_abstract_meta_data.html">   20</a></span><span class="keyword">class </span><a class="code hl_class" href="class_abstract_meta_data.html">AbstractMetaData</a> {</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="comment">// defines the callback which provides the metadata information</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> setCallback(<span class="keywordtype">void</span> (*fn)(MetaDataType info, <span class="keyword">const</span> <span class="keywordtype">char</span>* str, <span class="keywordtype">int</span> len)) = 0 ;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <span class="comment">// starts the processing</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> begin() = 0;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <span class="comment">// ends the processing</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> end() = 0;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <span class="comment">// provide audio data which contains the metadata to be extracted</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> length) = 0;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        <span class="comment">// select Icecast/Shoutcast Metadata</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> setIcyMetaInt(<span class="keywordtype">int</span> value){}</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>};</div>
-<div class="ttc" id="aclass_abstract_meta_data_html"><div class="ttname"><a href="class_abstract_meta_data.html">AbstractMetaData</a></div><div class="ttdoc">Common Metadata methods.</div><div class="ttdef"><b>Definition:</b> AbstractMetaData.h:20</div></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceaudio__tools.html">audio_tools</a> {</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#a66747a0ba3d8821e3228fd1680106e68">    8</a></span><span class="keyword">enum</span> <a class="code hl_enumeration" href="namespaceaudio__tools.html#a66747a0ba3d8821e3228fd1680106e68">MetaDataType</a> { Title, Artist, Album, Genre, Name, Description };</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#a30a4579da81ba2c00b604933704885a2">   11</a></span><span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_variable" href="namespaceaudio__tools.html#a30a4579da81ba2c00b604933704885a2">MetaDataTypeStr</a>[] = {<span class="stringliteral">&quot;Title&quot;</span>, <span class="stringliteral">&quot;Artist&quot;</span>, <span class="stringliteral">&quot;Album&quot;</span>, <span class="stringliteral">&quot;Genre&quot;</span>,<span class="stringliteral">&quot;Name&quot;</span>, <span class="stringliteral">&quot;Description&quot;</span>};</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="namespaceaudio__tools.html#aa7226da9915d850905ab42f79b4a8d60">   14</a></span><span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code hl_function" href="namespaceaudio__tools.html#aa7226da9915d850905ab42f79b4a8d60">toStr</a>(<a class="code hl_enumeration" href="namespaceaudio__tools.html#a66747a0ba3d8821e3228fd1680106e68">MetaDataType</a> t){</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="namespaceaudio__tools.html#a30a4579da81ba2c00b604933704885a2">MetaDataTypeStr</a>[t];</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>}</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_abstract_meta_data.html">   22</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_abstract_meta_data.html">AbstractMetaData</a> {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <span class="comment">// defines the callback which provides the metadata information</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> setCallback(<span class="keywordtype">void</span> (*fn)(<a class="code hl_enumeration" href="namespaceaudio__tools.html#a66747a0ba3d8821e3228fd1680106e68">MetaDataType</a> info, <span class="keyword">const</span> <span class="keywordtype">char</span>* str, <span class="keywordtype">int</span> len)) = 0 ;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <span class="comment">// starts the processing</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> begin() = 0;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <span class="comment">// ends the processing</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> end() = 0;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        <span class="comment">// provide audio data which contains the metadata to be extracted</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> length) = 0;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        <span class="comment">// select Icecast/Shoutcast Metadata</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> setIcyMetaInt(<span class="keywordtype">int</span> value){}</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>};</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>}</div>
+<div class="ttc" id="aclassaudio__tools_1_1_abstract_meta_data_html"><div class="ttname"><a href="classaudio__tools_1_1_abstract_meta_data.html">audio_tools::AbstractMetaData</a></div><div class="ttdoc">Common Metadata methods.</div><div class="ttdef"><b>Definition:</b> AbstractMetaData.h:22</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Parser for MP3 ID3 Meta Data: The goal is to implement a simple API which provides the title,...</div><div class="ttdef"><b>Definition:</b> AudioA2DP.h:18</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html_a30a4579da81ba2c00b604933704885a2"><div class="ttname"><a href="namespaceaudio__tools.html#a30a4579da81ba2c00b604933704885a2">audio_tools::MetaDataTypeStr</a></div><div class="ttdeci">const char * MetaDataTypeStr[]</div><div class="ttdoc">Test Description for meta info.</div><div class="ttdef"><b>Definition:</b> AbstractMetaData.h:11</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html_a66747a0ba3d8821e3228fd1680106e68"><div class="ttname"><a href="namespaceaudio__tools.html#a66747a0ba3d8821e3228fd1680106e68">audio_tools::MetaDataType</a></div><div class="ttdeci">MetaDataType</div><div class="ttdoc">Type of meta info.</div><div class="ttdef"><b>Definition:</b> AbstractMetaData.h:8</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html_aa7226da9915d850905ab42f79b4a8d60"><div class="ttname"><a href="namespaceaudio__tools.html#aa7226da9915d850905ab42f79b4a8d60">audio_tools::toStr</a></div><div class="ttdeci">const char * toStr(MetaDataType t)</div><div class="ttdoc">Converts the MetaDataType to a string.</div><div class="ttdef"><b>Definition:</b> AbstractMetaData.h:14</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

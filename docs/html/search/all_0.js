@@ -6,7 +6,7 @@ var searchData=
   ['aacdecoderfdk_3',['AACDecoderFDK',['../classaudio__tools_1_1_a_a_c_decoder_f_d_k.html',1,'audio_tools']]],
   ['aacdecoderhelix_4',['AACDecoderHelix',['../classaudio__tools_1_1_a_a_c_decoder_helix.html#ac4c6d1fdeb6c073058d5e9b2dcb847b9',1,'audio_tools::AACDecoderHelix::AACDecoderHelix(Print &amp;out_stream, AudioBaseInfoDependent &amp;bi)'],['../classaudio__tools_1_1_a_a_c_decoder_helix.html#a921daccfcc009837023a14892e992095',1,'audio_tools::AACDecoderHelix::AACDecoderHelix(Print &amp;out_stream)'],['../classaudio__tools_1_1_a_a_c_decoder_helix.html',1,'audio_tools::AACDecoderHelix']]],
   ['aacencoderfdk_5',['AACEncoderFDK',['../classaudio__tools_1_1_a_a_c_encoder_f_d_k.html',1,'audio_tools']]],
-  ['abstractmetadata_6',['AbstractMetaData',['../class_abstract_meta_data.html',1,'']]],
+  ['abstractmetadata_6',['AbstractMetaData',['../classaudio__tools_1_1_abstract_meta_data.html',1,'audio_tools']]],
   ['abstracturlstream_7',['AbstractURLStream',['../classaudio__tools_1_1_abstract_u_r_l_stream.html',1,'audio_tools']]],
   ['active_8',['active',['../classaudio__tools_1_1_audio_effect.html#ab01def7ad32249fbebcdd00da9a54cc6',1,'audio_tools::AudioEffect']]],
   ['add_9',['add',['../classaudio__tools_1_1_str.html#af845c776a008f5aa6bb16308219b6493',1,'audio_tools::Str::add()'],['../classaudio__tools_1_1_multi_output.html#a0028766857046dde20baeede24184f02',1,'audio_tools::MultiOutput::add()'],['../classaudio__tools_1_1_str.html#a1152fb2be800cc0088a17624c890287e',1,'audio_tools::Str::add(const char c)'],['../classaudio__tools_1_1_str.html#a7b0a1e41bbd9c9829bc24afdb84c5c2d',1,'audio_tools::Str::add(const char *append)'],['../classaudio__tools_1_1_str.html#a7043156cb615108fb5310415f38e0d21',1,'audio_tools::Str::add(int value)']]],

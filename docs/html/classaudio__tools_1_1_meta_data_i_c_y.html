@@ -82,7 +82,7 @@ Inheritance diagram for audio_tools::MetaDataICY:</div>
  <div class="center">
   <img src="classaudio__tools_1_1_meta_data_i_c_y.png" usemap="#audio_5Ftools::MetaDataICY_map" alt=""/>
   <map id="audio_5Ftools::MetaDataICY_map" name="audio_5Ftools::MetaDataICY_map">
-<area href="class_abstract_meta_data.html" title="Common Metadata methods." alt="AbstractMetaData" shape="rect" coords="0,0,157,24"/>
+<area href="classaudio__tools_1_1_abstract_meta_data.html" title="Common Metadata methods." alt="audio_tools::AbstractMetaData" shape="rect" coords="0,0,183,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -114,9 +114,8 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>metaInt</b> ()
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>processChar</b> (char ch)</td></tr>
 <tr class="memdesc:ab752d6326ce1e8d3626b104d19b97e70"><td class="mdescLeft">&#160;</td><td class="mdescRight">character based state engine <br /></td></tr>
 <tr class="separator:ab752d6326ce1e8d3626b104d19b97e70"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc5c34118b8adbd4eb630b7867cb3cb6"><td class="memItemLeft" align="right" valign="top"><a id="acc5c34118b8adbd4eb630b7867cb3cb6" name="acc5c34118b8adbd4eb630b7867cb3cb6"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setCallback</b> (void(*fn)(<a class="el" href="namespaceaudio__tools.html#a66747a0ba3d8821e3228fd1680106e68">MetaDataType</a> info, const char *str, int len)) override</td></tr>
-<tr class="memdesc:acc5c34118b8adbd4eb630b7867cb3cb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the metadata callback function. <br /></td></tr>
+<tr class="memitem:acc5c34118b8adbd4eb630b7867cb3cb6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_meta_data_i_c_y.html#acc5c34118b8adbd4eb630b7867cb3cb6">setCallback</a> (void(*fn)(<a class="el" href="namespaceaudio__tools.html#a66747a0ba3d8821e3228fd1680106e68">MetaDataType</a> info, const char *str, int len)) override</td></tr>
+<tr class="memdesc:acc5c34118b8adbd4eb630b7867cb3cb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the metadata callback function.  <a href="classaudio__tools_1_1_meta_data_i_c_y.html#acc5c34118b8adbd4eb630b7867cb3cb6">More...</a><br /></td></tr>
 <tr class="separator:acc5c34118b8adbd4eb630b7867cb3cb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a34d5938a8aaf69e8eb7e8b980ceeba4d"><td class="memItemLeft" align="right" valign="top"><a id="a34d5938a8aaf69e8eb7e8b980ceeba4d" name="a34d5938a8aaf69e8eb7e8b980ceeba4d"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setDataCallback</b> (void(*fn)(const uint8_t *str, int len), int bufferLen=1024)</td></tr>
@@ -132,10 +131,6 @@ virtual Status&#160;</td><td class="memItemRight" valign="bottom"><b>status</b> 
 <tr class="memitem:a16f0e4e84f054297bf226bd3afe62054"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_meta_data_i_c_y.html#a16f0e4e84f054297bf226bd3afe62054">write</a> (const uint8_t *buffer, size_t len) override</td></tr>
 <tr class="memdesc:a16f0e4e84f054297bf226bd3afe62054"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the data in order to retrieve the metadata and perform the corresponding callbacks.  <a href="classaudio__tools_1_1_meta_data_i_c_y.html#a16f0e4e84f054297bf226bd3afe62054">More...</a><br /></td></tr>
 <tr class="separator:a16f0e4e84f054297bf226bd3afe62054"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_class_abstract_meta_data"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_abstract_meta_data')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_abstract_meta_data.html">AbstractMetaData</a></td></tr>
-<tr class="memitem:a90802c52124698dd832b6239e9128674 inherit pub_methods_class_abstract_meta_data"><td class="memItemLeft" align="right" valign="top"><a id="a90802c52124698dd832b6239e9128674" name="a90802c52124698dd832b6239e9128674"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setCallback</b> (void(*fn)(MetaDataType info, const char *str, int len))=0</td></tr>
-<tr class="separator:a90802c52124698dd832b6239e9128674 inherit pub_methods_class_abstract_meta_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -237,7 +232,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>totalData</b> = 0</td>
 
 <p>Resets all counters and restarts the prcessing. </p>
 
-<p>Implements <a class="el" href="class_abstract_meta_data.html">AbstractMetaData</a>.</p>
+<p>Implements <a class="el" href="classaudio__tools_1_1_abstract_meta_data.html">audio_tools::AbstractMetaData</a>.</p>
 
 </div>
 </div>
@@ -266,7 +261,37 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>totalData</b> = 0</td>
 
 <p>Resets all counters and restarts the prcessing. </p>
 
-<p>Implements <a class="el" href="class_abstract_meta_data.html">AbstractMetaData</a>.</p>
+<p>Implements <a class="el" href="classaudio__tools_1_1_abstract_meta_data.html">audio_tools::AbstractMetaData</a>.</p>
+
+</div>
+</div>
+<a id="acc5c34118b8adbd4eb630b7867cb3cb6" name="acc5c34118b8adbd4eb630b7867cb3cb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc5c34118b8adbd4eb630b7867cb3cb6">&#9670;&nbsp;</a></span>setCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void audio_tools::MetaDataICY::setCallback </td>
+          <td>(</td>
+          <td class="paramtype">void(*)(<a class="el" href="namespaceaudio__tools.html#a66747a0ba3d8821e3228fd1680106e68">MetaDataType</a> info, const char *str, int len)&#160;</td>
+          <td class="paramname"><em>fn</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Defines the metadata callback function. </p>
+
+<p>Implements <a class="el" href="classaudio__tools_1_1_abstract_meta_data.html">audio_tools::AbstractMetaData</a>.</p>
 
 </div>
 </div>
@@ -296,7 +321,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>totalData</b> = 0</td>
 
 <p>Defines the ICE metaint value which is provided by the web call! </p>
 
-<p>Reimplemented from <a class="el" href="class_abstract_meta_data.html">AbstractMetaData</a>.</p>
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_abstract_meta_data.html">audio_tools::AbstractMetaData</a>.</p>
 
 </div>
 </div>
@@ -336,7 +361,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>totalData</b> = 0</td>
 
 <p>Writes the data in order to retrieve the metadata and perform the corresponding callbacks. </p>
 
-<p>Implements <a class="el" href="class_abstract_meta_data.html">AbstractMetaData</a>.</p>
+<p>Implements <a class="el" href="classaudio__tools_1_1_abstract_meta_data.html">audio_tools::AbstractMetaData</a>.</p>
 
 </div>
 </div>
