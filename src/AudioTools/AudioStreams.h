@@ -721,7 +721,7 @@ class TimerCallbackAudioStream : public BufferedStream, public AudioBaseInfoSour
         /// log and update effective sample rate
         virtual void printSampleRate() {
             LOGI("effective sample rate: %d", currentRateValue);
-            if (cfg.adapt_sample_rate && abs(currentRateValue-cfg.sample_rate)>200){
+            if (cfg.adapt_sample_rate && abs((int)currentRateValue-cfg.sample_rate)>200){
                 cfg.sample_rate = currentRateValue;
                 notifyAudioChange();
             }
