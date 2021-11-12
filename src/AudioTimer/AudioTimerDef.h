@@ -5,6 +5,8 @@ namespace audio_tools {
 
 typedef void (*repeating_timer_callback_t )(void* obj);
 
+enum TimerFunction {DirectTimerCallback, TimerCallbackInThread, SimpleThreadLoop };
+
 /**
  * @brief Common Interface definition for TimerAlarmRepeating 
  * 
@@ -34,10 +36,10 @@ class TimerAlarmRepeatingDef {
 class AudioUtils {
     public:
         /// converts sampling rate to delay in microseconds (μs)
-        static uint32_t toTimeUs(uint32_t samplingRate, uint8_t limit=100){
+        static uint32_t toTimeUs(uint32_t samplingRate, uint8_t limit=10){
             uint32_t result = 1000000l / samplingRate;
             if (result <= limit){
-                LOGW("Time for samplingRate %u is < %u μs - we rounded up", samplingRate, limit);
+                LOGW("Time for samplingRate %u -> %u is < %u μs - we rounded up", samplingRate, result, limit);
                 result = limit;
             }
             return result;
@@ -46,7 +48,7 @@ class AudioUtils {
         static uint32_t toTimeMs(uint32_t samplingRate, uint8_t limit=1){
             uint32_t result = 1000l / samplingRate;
             if (result <= limit){
-                LOGW("Time for samplingRate %u is < %d ms - we rounded up",  samplingRate, limit);
+                LOGW("Time for samplingRate %u -> %u is < %u μs - we rounded up", samplingRate, result, limit);
                 result = limit;
             }
             return result;

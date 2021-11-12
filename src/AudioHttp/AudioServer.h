@@ -102,7 +102,7 @@ class AudioServer {
                 // We are connected: copy input from source to wav output
                 if (client_obj){
                     if (callback==nullptr) {
-                        LOGI("copy data...");
+                        LOGD("copy data...");
                         if (converter_ptr==nullptr) {
                             copier.copy();
                         }else {
