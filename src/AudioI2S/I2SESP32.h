@@ -41,7 +41,7 @@ class I2SBase {
 
       i2s_config_t i2s_config_new = {
             .mode = toMode(cfg),
-            .sample_rate = (uint32_t)cfg.sample_rate,
+            .sample_rate = (int)cfg.sample_rate,
             .bits_per_sample = (i2s_bits_per_sample_t) cfg.bits_per_sample,
             .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,
             .communication_format = toCommFormat(cfg.i2s_format),

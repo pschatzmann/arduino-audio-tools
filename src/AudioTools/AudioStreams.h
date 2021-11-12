@@ -549,14 +549,14 @@ struct TimerCallbackAudioStreamInfo : public AudioBaseInfo {
     uint16_t buffer_size = DEFAULT_BUFFER_SIZE;
     bool use_timer = true;
     int timer_id = 0;
-    bool secure_timer = false;
+    TimerFunction timer_function = DirectTimerCallback;
     bool adapt_sample_rate = false;
     uint16_t (*callback)(uint8_t *data, uint16_t len) = nullptr;
 };
 
 
 // forward declaration: relevant only if use_timer == true
-void IRAM_ATTR timerCallback(void* obj);
+//void IRAM_ATTR timerCallback(void* obj);
 
 /**
  * @brief Callback driven Audio Source (rx_tx_mode==RX_MODE) or Audio Sink (rx_tx_mode==TX_MODE). This class
@@ -619,8 +619,9 @@ class TimerCallbackAudioStream : public BufferedStream, public AudioBaseInfoSour
                 frameSize = cfg.bits_per_sample * cfg.channels / 8;
                 frame = new uint8_t[frameSize];
                 buffer = new RingBuffer<uint8_t>(cfg.buffer_size);
-                timer = new TimerAlarmRepeating(cfg.secure_timer, cfg.timer_id);
+                timer = new TimerAlarmRepeating(cfg.timer_function, cfg.timer_id);
                 time = AudioUtils::toTimeUs(cfg.sample_rate);
+                LOGI("sample_rate: %u -> time: %u milliseconds",cfg.sample_rate,time);
                 timer->setCallbackParameter(this);
                 timer->begin(timerCallback, time, TimeUnit::US);
             }
@@ -649,6 +650,7 @@ class TimerCallbackAudioStream : public BufferedStream, public AudioBaseInfoSour
             active = false;
         }
 
+        /// Provides the effective sample rate
         uint16_t currentSampleRate() {
             return currentRateValue;
         }
@@ -665,9 +667,8 @@ class TimerCallbackAudioStream : public BufferedStream, public AudioBaseInfoSour
         uint16_t frameSize=0;
         uint32_t time=0;
         unsigned long lastTimestamp = 0u;
-        uint16_t currentRateValue = 0;
-        uint32_t lastMs=0;
-        uint32_t samples=0;
+        uint32_t currentRateValue = 0;
+        uint32_t printCount=0;
 
         // used for audio sink
         virtual size_t writeExt(const uint8_t* data, size_t len) {
@@ -679,7 +680,7 @@ class TimerCallbackAudioStream : public BufferedStream, public AudioBaseInfoSour
             } else {
                 result = buffer->writeArray((uint8_t* )data, len);
             }
-            calculateSampleRate(result);
+            if (++printCount%10000==0) printSampleRate();
             return result;
         }
 
@@ -694,57 +695,53 @@ class TimerCallbackAudioStream : public BufferedStream, public AudioBaseInfoSour
             } else {
                 result = buffer->readArray(data, len);
             }
-            calculateSampleRate(result);
+            if (++printCount%10000==0) printSampleRate();
             return result;
         }
 
         /// calculates the effective sample rate
-        virtual void calculateSampleRate(size_t len) {
+        virtual void measureSampleRate() {
+            unsigned long  ms = millis();
             if (lastTimestamp>0u){
-                if (len>0){
-                    uint32_t ms = millis()-lastTimestamp; 
+                uint32_t diff = ms-lastTimestamp; 
+                if (diff>0){
                     uint16_t bytes_per_sample = cfg.bits_per_sample/8;
-                    if (ms==0){
-                        // we can get multiple calls for the same ms
-                        samples+= len / cfg.channels / bytes_per_sample;
-                    } else {
-                        if (lastMs>0){
-                            uint16_t rate = samples * 1000 / lastMs; 
+                    uint16_t rate = 1 * 1000 / diff; 
 
-                            if (currentRateValue==0){
-                                currentRateValue = rate;
-                            } else {
-                                currentRateValue = (currentRateValue + rate) / 2;
-                                LOGI("effective sample rate: %d - last %d samples", currentRateValue, len);
-                                if (cfg.adapt_sample_rate){
-                                    if (abs(currentRateValue-cfg.sample_rate)>200){
-                                        cfg.sample_rate = currentRateValue;
-                                        notifyAudioChange();
-                                    }
-                                }
-                            }
-                        }
-                        lastMs = ms;
-                        samples = len / cfg.channels / bytes_per_sample;
-                    }
-                }
-            } else {
-                lastTimestamp = millis();
+                    if (currentRateValue==0){
+                        currentRateValue = rate;
+                    } else {
+                        currentRateValue = (currentRateValue + rate) / 2;
+                    }           
+                }     
             }
-            
+            lastTimestamp = ms;
         }
 
+        /// log and update effective sample rate
+        virtual void printSampleRate() {
+            LOGI("effective sample rate: %d", currentRateValue);
+            if (cfg.adapt_sample_rate && abs(currentRateValue-cfg.sample_rate)>200){
+                cfg.sample_rate = currentRateValue;
+                notifyAudioChange();
+            }
+        }
+
+        /// Update Audio Information in target device
         virtual void notifyAudioChange() {
             if (notifyTarget!=nullptr){
                 notifyTarget->setAudioInfo(cfg);
             }
         }
+
+        static void IRAM_ATTR timerCallback(void* obj); 
+
        
 };
 
 
 // relevant only if use_timer == true
-void IRAM_ATTR timerCallback(void* obj){
+void TimerCallbackAudioStream::timerCallback(void* obj){
     TimerCallbackAudioStream *src = (TimerCallbackAudioStream*)obj;
     if (src!=nullptr){
         //LOGD("%s:  %s", LOG_METHOD, src->cfg.rx_tx_mode==RX_MODE ? "RX_MODE":"TX_MODE");
@@ -771,6 +768,7 @@ void IRAM_ATTR timerCallback(void* obj){
                 }
             }
         }
+        src->measureSampleRate();
     }
 }
 
