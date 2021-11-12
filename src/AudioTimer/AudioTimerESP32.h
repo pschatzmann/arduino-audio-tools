@@ -15,19 +15,20 @@ typedef void (* simple_callback )(void);
  * @copyright GPLv3
  */
 class UserCallback {
+
   public:
-    void setup(repeating_timer_callback_t my_callback, void *user_data, bool critical=true ){
+    void setup(repeating_timer_callback_t my_callback, void *user_data, bool lock ){
       LOGD(LOG_METHOD);
       this->my_callback = my_callback;
       this->user_data = user_data;
-      this->is_critical = critical; // false when called from Task
+      this->lock = lock; // false when called from Task
     }
     
     IRAM_ATTR void call() {
       if (my_callback!=nullptr){
-        if (is_critical) portENTER_CRITICAL_ISR(&timerMux);
+        if (lock) portENTER_CRITICAL_ISR(&timerMux);
         my_callback(user_data);
-        if (is_critical) portEXIT_CRITICAL_ISR(&timerMux);
+        if (lock) portEXIT_CRITICAL_ISR(&timerMux);
       }
     }
 
@@ -35,22 +36,23 @@ class UserCallback {
     repeating_timer_callback_t my_callback = nullptr;
     void *user_data = nullptr;
     portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
-    bool is_critical;
+    bool lock;
 
 } *simpleUserCallback = nullptr;
 
-  static IRAM_ATTR void userCallback0() {
-    simpleUserCallback[0].call();
-  }
-  static IRAM_ATTR void userCallback1() {
-    simpleUserCallback[1].call();
-  }
-  static IRAM_ATTR void userCallback2() {
-    simpleUserCallback[2].call();
-  }
-  static IRAM_ATTR void userCallback3() {
-    simpleUserCallback[3].call();
-  }
+
+static IRAM_ATTR void userCallback0() {
+  simpleUserCallback[0].call();
+}
+static IRAM_ATTR void userCallback1() {
+  simpleUserCallback[1].call();
+}
+static IRAM_ATTR void userCallback2() {
+  simpleUserCallback[2].call();
+}
+static IRAM_ATTR void userCallback3() {
+  simpleUserCallback[3].call();
+}
 
 
 /**
@@ -90,18 +92,19 @@ class TimerCallback {
 
 } *timerCallbackArray = nullptr;
 
-  static IRAM_ATTR void timerCallback0() {
-    timerCallbackArray[0].call();
-  }
-  static IRAM_ATTR void timerCallback1() {
-    timerCallbackArray[1].call();
-  }
-  static IRAM_ATTR void timerCallback2() {
-    timerCallbackArray[2].call();
-  }
-  static IRAM_ATTR void timerCallback3() {
-    timerCallbackArray[3].call();
-  }
+
+static IRAM_ATTR void timerCallback0() {
+  timerCallbackArray[0].call();
+}
+static IRAM_ATTR void timerCallback1() {
+  timerCallbackArray[1].call();
+}
+static IRAM_ATTR void timerCallback2() {
+  timerCallbackArray[2].call();
+}
+static IRAM_ATTR void timerCallback3() {
+  timerCallbackArray[3].call();
+}
 
 
 
@@ -114,13 +117,14 @@ class TimerCallback {
  * 
  */
 class TimerAlarmRepeatingESP32 : public TimerAlarmRepeatingDef {
+   
     public:
     
-        TimerAlarmRepeatingESP32(bool withTask=false, int id=0){
-          LOGI("%s: %s, id=%d",LOG_METHOD, withTask?"withTask":"noTask", id);
+        TimerAlarmRepeatingESP32(TimerFunction function=DirectTimerCallback, int id=0){
+          LOGI("%s: %d, id=%d",LOG_METHOD, function, id);
           if (id>=0 && id<4) {
             this->timer_id = id;
-            this->with_task = withTask;
+            this->function = function;
             handler_task = nullptr;
           } else {
             LOGE("Invalid timer id %d", timer_id);
@@ -141,7 +145,6 @@ class TimerAlarmRepeatingESP32 : public TimerAlarmRepeatingDef {
         /// Starts the alarm timer
         bool begin(repeating_timer_callback_t callback_f, uint32_t time, TimeUnit unit = MS) override {
             LOGD(LOG_METHOD);
-            uint32_t timeUs;
 
             // we determine the time in microseconds
             switch(unit){
@@ -156,46 +159,26 @@ class TimerAlarmRepeatingESP32 : public TimerAlarmRepeatingDef {
             uint32_t cpu_freq = getCpuFrequencyMhz();  // 80 ? 
             adc_timer = timerBegin(0, cpu_freq, true);  // divider=80 -> 1000000 calls per second
 
-            if (with_task) {
-                // we start the timer which runs the callback in a seprate task
-                if (timerCallbackArray==nullptr){
-                  timerCallbackArray = new TimerCallback[4];
-                }
 
-                if (timer_id==0) timerAttachInterrupt(adc_timer, timerCallback0, true); 
-                else if (timer_id==1) timerAttachInterrupt(adc_timer, timerCallback1, true); 
-                else if (timer_id==2) timerAttachInterrupt(adc_timer, timerCallback2, true); 
-                else if (timer_id==3) timerAttachInterrupt(adc_timer, timerCallback3, true); 
+            switch (function) {
+                case DirectTimerCallback:
+                  setupDirectTimerCallback(callback_f);
+                  break;
 
-                // we record the callback method and user data
-                user_callback.setup(callback_f, object, false);
-                timerCallbackArray[timer_id].setup(handler_task);
-                timerAlarmWrite(adc_timer, timeUs, true);
+                case TimerCallbackInThread:
+                  setupTimerCallbackInThread(callback_f);
+                  break;
 
-                // setup the timercallback
-                xTaskCreatePinnedToCore(complexHandler, "TimerAlarmRepeatingTask", configMINIMAL_STACK_SIZE+10000, &user_callback, priority, &handler_task, core);
-                LOGI("Task created on core %d", core);
+                case SimpleThreadLoop:
+                  setupSimpleThreadLoop(callback_f);
+                  break;
 
-                timerAlarmEnable(adc_timer);
-
-            } else {
-                // We start the timer which executes the callbacks directly
-                if (simpleUserCallback==nullptr){
-                  simpleUserCallback = new UserCallback[4];
-                }
-                simpleUserCallback[timer_id].setup(callback_f, object, true);
-                if (timer_id==0) timerAttachInterrupt(adc_timer, userCallback0, true); 
-                else if (timer_id==1) timerAttachInterrupt(adc_timer, userCallback1, true); 
-                else if (timer_id==2) timerAttachInterrupt(adc_timer, userCallback2, true); 
-                else if (timer_id==3) timerAttachInterrupt(adc_timer, userCallback3, true); 
-
-                timerAlarmWrite(adc_timer, timeUs, true);
-                timerAlarmEnable(adc_timer);
             }
 
             started = true;
             return true;
         }
+
 
         /// ends the timer and if necessary the task
         bool end() override {
@@ -215,20 +198,72 @@ class TimerAlarmRepeatingESP32 : public TimerAlarmRepeatingDef {
           this->core = core;
         }
 
-
     protected:
       int timer_id=0;
       volatile bool started = false;
       TaskHandle_t handler_task = nullptr;
       hw_timer_t* adc_timer = nullptr; // our timer
       UserCallback user_callback;
-      bool with_task = false;
+      TimerFunction function;
       int core = 1;
-      int priority = 4;
+      int priority = configMAX_PRIORITIES -1;
+      uint32_t timeUs;
+
+
+      /// direct timer callback 
+      void setupDirectTimerCallback(repeating_timer_callback_t callback_f){
+        LOGD(LOG_METHOD);
+        // we start the timer which runs the callback in a seprate task
+        if (timerCallbackArray==nullptr){
+          timerCallbackArray = new TimerCallback[4];
+        }
+
+        if (timer_id==0) timerAttachInterrupt(adc_timer, timerCallback0, true); 
+        else if (timer_id==1) timerAttachInterrupt(adc_timer, timerCallback1, true); 
+        else if (timer_id==2) timerAttachInterrupt(adc_timer, timerCallback2, true); 
+        else if (timer_id==3) timerAttachInterrupt(adc_timer, timerCallback3, true); 
+
+        // we record the callback method and user data
+        user_callback.setup(callback_f, object, false);
+        timerCallbackArray[timer_id].setup(handler_task);
+        timerAlarmWrite(adc_timer, timeUs, true);
+
+        // setup the timercallback
+        xTaskCreatePinnedToCore(complexTaskHandler, "TimerAlarmRepeatingTask", configMINIMAL_STACK_SIZE+10000, &user_callback, priority, &handler_task, core);
+        LOGI("Task created on core %d", core);
+
+        timerAlarmEnable(adc_timer);
+      }
+
+      // timer callback is notifiying task
+      void setupTimerCallbackInThread(repeating_timer_callback_t callback_f){
+        LOGD(LOG_METHOD);
+        // We start the timer which executes the callbacks directly
+        if (simpleUserCallback==nullptr){
+          simpleUserCallback = new UserCallback[4];
+        }
+        simpleUserCallback[timer_id].setup(callback_f, object, true);
+        if (timer_id==0) timerAttachInterrupt(adc_timer, userCallback0, true); 
+        else if (timer_id==1) timerAttachInterrupt(adc_timer, userCallback1, true); 
+        else if (timer_id==2) timerAttachInterrupt(adc_timer, userCallback2, true); 
+        else if (timer_id==3) timerAttachInterrupt(adc_timer, userCallback3, true); 
+
+        timerAlarmWrite(adc_timer, timeUs, true);
+        timerAlarmEnable(adc_timer);
+
+      }
+
+      /// No timer - just a simple task loop
+      void setupSimpleThreadLoop(repeating_timer_callback_t callback_f){
+        LOGD(LOG_METHOD);
+        user_callback.setup(callback_f, object, false);
+        xTaskCreatePinnedToCore(simpleTaskLoop, "TimerAlarmRepeatingTask", configMINIMAL_STACK_SIZE+10000, this, priority, &handler_task, core);
+        LOGI("Task created on core %d", core);
+      }
 
 
       /// We can not do any I2C calls in the interrupt handler so we need to do this in a separate task
-      static void complexHandler(void *param) {
+      static void complexTaskHandler(void *param) {
         LOGI(LOG_METHOD);
         UserCallback* cb = (UserCallback*) param;
         uint32_t thread_notification;
@@ -237,14 +272,26 @@ class TimerAlarmRepeatingESP32 : public TimerAlarmRepeatingDef {
           // Sleep until the ISR gives us something to do
           thread_notification = ulTaskNotifyTake(pdTRUE, pdMS_TO_TICKS(1000));
           // Do something complex and CPU-intensive
-          //esp_task_wdt_reset();
           if (thread_notification){
               cb->call();
           }
-          yield();
-          esp_task_wdt_reset();
         }
       }
+
+      /// We can not do any I2C calls in the interrupt handler so we need to do this in a separate task. 
+      static void simpleTaskLoop(void *param) {
+        LOGI(LOG_METHOD);
+        TimerAlarmRepeatingESP32* ta = (TimerAlarmRepeatingESP32*) param;
+
+        while (true) {
+            unsigned long end = micros() + ta->timeUs;
+            ta->user_callback.call();
+            long waitUs = end - micros();
+            if (waitUs>0){
+              delayMicroseconds(waitUs);
+            }
+        }
+      }      
 };
 
 // for User API
