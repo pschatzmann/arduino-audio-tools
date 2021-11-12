@@ -10,8 +10,7 @@
 
 #include "AudioTools.h"
 #include "AudioExperiments.h"
-#include <Wire.h>
-#include <Adafruit_ADS1X15.h>
+#include "ADS1X15.h"
 
 using namespace audio_tools;
 
@@ -29,12 +28,12 @@ int16_t tremoloDuration = 200;
 float tremoloDepth = 0.5;
 
 // Audio Format
-const int sample_rate = 3000;
+const int sample_rate = 1640;
 const int channels = 1;
 const int bits_per_sample = 16;
 
 // Audio 
-Adafruit_ADS1015 ads1015; // ads1015 device  
+ADS1115 ads1015(0x48); // ads1015 device  
 TimerCallbackAudioStream ads1015Stream; // Input stream from ads1015
 AudioEffects effects(ads1015Stream); // apply effects on ads1015Stream
 GeneratedSoundStream<int16_t> in(effects); 
@@ -42,7 +41,7 @@ GeneratedSoundStream<int16_t> in(effects);
 
 // Provides the data from the ADS1015
 uint16_t getADS1015(uint8_t *data, uint16_t len){
-    int16_t sample = ads1015.readADC_Differential_0_1();
+    int16_t sample = ads1015.getValue();
     memcpy(data,(void*) &sample, sizeof(int16_t));
     return sizeof(int16_t);
 }
@@ -58,16 +57,19 @@ void setup() {
   effects.addEffect(new Tremolo(tremoloDuration, tremoloDepth, sample_rate));
 
   // setup gain for ads1015
-  ads1015.setGain(GAIN_SIXTEEN);
   ads1015.begin();
-
+  if(!ads1015.isConnected()) LOGE("ads1015 NOT CONNECTED!");
+  ads1015.setGain(4);        // 6.144 volt
+  ads1015.setDataRate(7);    // 0 = slow   4 = medium   7 = fast  
+  ads1015.setMode(0);
+  ads1015.requestADC_Differential_0_1();
   // cfgure & start cfg1015 Stream
   auto cfg = ads1015Stream.defaultConfig();
   cfg.rx_tx_mode = RX_MODE;
   cfg.channels = channels;
   cfg.sample_rate = sample_rate;
   cfg.bits_per_sample = bits_per_sample;
-  cfg.secure_timer = true;
+  cfg.timer_function = SimpleThreadLoop;  //DirectTimerCallback, TimerCallbackInThread, SimpleThreadLoop 
   cfg.callback = getADS1015;
   ads1015Stream.begin(cfg); // start ads1015
 
