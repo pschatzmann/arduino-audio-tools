@@ -128,10 +128,10 @@
 #define USE_A2DP
 #define USE_PWM
 #define USE_URL_ARDUINO
-#define USE_ESP8266_AUDIO
 #define USE_I2S
 #define USE_AUDIO_SERVER
 #define USE_URLSTREAM_TASK
+//#define USE_ESP8266_AUDIO
 
 #define PWM_FREQENCY 30000
 #define PWM_START_PIN 12
@@ -169,10 +169,10 @@
 //----------------
 #ifdef ESP8266
 #define USE_URL_ARDUINO
-#define USE_ESP8266_AUDIO
 #define USE_I2S
 #define USE_PWM
 #define USE_AUDIO_SERVER
+//#define USE_ESP8266_AUDIO
 
 #define PWM_START_PIN 12
 #define PIN_I2S_BCK -1

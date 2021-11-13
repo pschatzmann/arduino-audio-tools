@@ -177,17 +177,6 @@ class Str {
             return strncmp(this->chars+(len-endlen),str, endlen)==0;
         }
 
-        int strncmp_i(const char* s1, const char* s2, int n) {
-            if (n == 0)  return (0);
-            do {
-                if (tolower(*s1) != tolower(*s2++))
-                    return (*(unsigned char *)s1 - *(unsigned char *)--s2);
-                if (*s1++ == 0)
-                    break;
-            } while (--n != 0);
-            return (0);
-        }
-
         /// checks if the string ends with the indicated substring
         virtual bool endsWithIgnoreCase(const char* str){
             if (str==nullptr) return false;
@@ -695,6 +684,17 @@ class Str {
             return outstr;
         }
  
+        static int strncmp_i(const char* s1, const char* s2, int n) {
+            if (n == 0)  return (0);
+            do {
+                if (tolower(*s1) != tolower(*s2++))
+                    return (*(unsigned char *)s1 - *(unsigned char *)--s2);
+                if (*s1++ == 0)
+                    break;
+            } while (--n != 0);
+            return (0);
+        }
+
 
 };
 

@@ -9,8 +9,8 @@ typedef int16_t effect_t;
 
 /**
  * @brief Abstract Base class for Sound Effects
- * 
- * @tparam effect_t 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 
 class AudioEffect  {
@@ -40,9 +40,10 @@ class AudioEffect  {
 };
 
 /**
- * @brief EffectBoost
+ * @brief Boost
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  * 
- * @tparam effect_t 
  */
 
 class Boost : public AudioEffect {
@@ -64,9 +65,10 @@ class Boost : public AudioEffect {
 };
 
 /**
- * @brief EffectDistortion
+ * @brief Distortion
  * 
- * @tparam effect_t 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 
 class Distortion : public AudioEffect  {
@@ -91,9 +93,10 @@ class Distortion : public AudioEffect  {
 };
 
 /**
- * @brief EffectFuzz
+ * @brief Fuzz
  * 
- * @tparam effect_t 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 
 class Fuzz : public AudioEffect  {
@@ -118,8 +121,9 @@ class Fuzz : public AudioEffect  {
 };
 
 /**
- * @brief EffectTremolo
- * @tparam effect_t 
+ * @brief Tremolo
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 
 class Tremolo : public AudioEffect  {
@@ -167,6 +171,8 @@ class Tremolo : public AudioEffect  {
  * @brief Simple GuitarEffects
  * Based on Stratocaster with on-board Electrosmash Arduino UNOR3 pedal electronics CC-by-www.Electrosmash.com
  * Based on OpenMusicLabs previous works.
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 
 class AudioEffects : public SoundGenerator<effect_t>  {
@@ -228,6 +234,34 @@ class AudioEffects : public SoundGenerator<effect_t>  {
         GeneratorFromStream<int16_t> *p_stream_gen = nullptr;
 
 };
+
+#ifdef USE_STK
+
+/**
+ * Use any effect from the STK framework: e.g. Chorus, Echo, FreeVerb, JCRev, PitShift...
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class STKEffect : public AudioEffect {
+    public:
+        STKEffect(stk::Effect &stkEffect){
+            p_effect = &stkEffect;
+        }
+
+        virtual effect_t process(effect_t in) {
+            // just convert between int16 and float
+            float value = static_cast<float>(in) / 32767.0;
+            return p_effect->tick(value)*32767.0;
+        }
+
+    protected:
+        stk::Effect *p_effect=nullptr;
+
+};
+
+
+#endif
+
 
 
 } // namespace
