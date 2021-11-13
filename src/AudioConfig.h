@@ -9,6 +9,9 @@
 #include <string.h>
 #include <stdint.h>
 #include "AudioRuntime.h"
+#if __has_include("AudioConfigLocal.h") 
+#incude "AudioConfigLocal.h"
+#endif
 
 #define AUDIOTOOLS_VERSION "0.7.0"
 
@@ -35,25 +38,64 @@
  * @brief Common Default Settings that can usually be changed in the API
  */
 
+#ifndef DEFAULT_BUFFER_SIZE 
 #define DEFAULT_BUFFER_SIZE 1024 // 2048
+#endif
+
+#ifndef DEFAULT_SAMPLE_RATE 
 #define DEFAULT_SAMPLE_RATE 44100
+#endif
+
+#ifndef DEFAULT_CHANNELS 
 #define DEFAULT_CHANNELS 2
+#endif
+
+#ifndef DEFAULT_BITS_PER_SAMPLE 
 #define DEFAULT_BITS_PER_SAMPLE 16
+#endif
+
+#ifndef I2S_DEFAULT_PORT 
 #define I2S_DEFAULT_PORT 0
+#endif
+
+#ifndef I2S_BUFFER_SIZE 
 #define I2S_BUFFER_SIZE 512
+#endif
+
+#ifndef I2S_BUFFER_COUNT 
 #define I2S_BUFFER_COUNT 5 // 20
+#endif
+
+#ifndef A2DP_BUFFER_SIZE 
 #define A2DP_BUFFER_SIZE 1280
+#endif
+
+#ifndef A2DP_BUFFER_COUNT 
 #define A2DP_BUFFER_COUNT 50
+#endif
+
+#ifndef CODEC_DELAY_MS 
 #define CODEC_DELAY_MS 10
+#endif
+
+#ifndef COPY_DELAY_ON_NODATA 
 #define COPY_DELAY_ON_NODATA 10
+#endif
 /**
  * ------------------------------------------------------------------------- 
  * @brief PWM
  */
+#ifndef PWM_BUFFER_SIZE 
 #define PWM_BUFFER_SIZE 512
-#define PWM_BUFFERS 10
-#define PWM_FREQUENCY 60000
+#endif
 
+#ifndef PWM_BUFFERS 
+#define PWM_BUFFERS 10
+#endif
+
+#ifndef PWM_FREQUENCY 
+#define PWM_FREQUENCY 60000
+#endif
 
 /**
  * ------------------------------------------------------------------------- 
