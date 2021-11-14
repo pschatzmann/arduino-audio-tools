@@ -11,9 +11,9 @@ Some basic __header-only C++ classes__ that can be used for __Audio Processing__
 - Musical Notes (with frequencies of notes)
 - Different [Sound Generators](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_sound_generator.html) (e.g. to generate a sine tone) 
 - Support for [Sound Effects](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_audio_effects.html) with different [Effect Implementations](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_audio_effect.html) (e.g. Boost, Distortion, Echo, Reverb...) 
-- Different buffer implementations 
-- TimerAlarmRepeating (e.g. for sampling audio data using exact times) [ESP32 only]
-- AudioOutputWithCallback class to provide callback integration e.g. with ESP8266Audio
+- Different [buffer implementations](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_base_buffer.html) 
+- A [repeating timer](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_timer_alarm_repeating_def.html) (e.g. for sampling audio data using exact times) 
+- The [AudioOutputWithCallback class](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_audio_output_with_callback.html) to provides callback integration e.g. with ESP8266Audio
 - Desktop Integration: Building of Arduino Audio Sketches to be run on [Linux, Windows and OS/X](https://github.com/pschatzmann/arduino-audio-tools/wiki/Running-an-Audio-Sketch-on-the-Desktop)
 
 This functionality provides the glue which makes different audio processing components and libraries work together.
