@@ -9,6 +9,8 @@
 #include <string.h>
 #include <stdint.h>
 #include "AudioRuntime.h"
+
+// If you don't want to use all the settings from here you can define your own local config settings in AudioConfigLocal.h
 #if __has_include("AudioConfigLocal.h") 
 #incude "AudioConfigLocal.h"
 #endif
@@ -24,14 +26,22 @@
  * However it is recommended to do it in your Sketch e.g with AudioLogger::instance().begin(Serial,AudioLogger::Warning);
  */
  
+#ifndef USE_AUDIO_LOGGING 
 #define USE_AUDIO_LOGGING true
-#define LOG_PRINTF_BUFFER_SIZE 160
+#endif
+
+#ifndef LOG_LEVEL 
 #define LOG_LEVEL AudioLogger::Warning
+#endif
+
+#ifndef LOG_STREAM 
 #define LOG_STREAM Serial
-#define LOG_METHOD __PRETTY_FUNCTION__
+#endif
 
 //#define CHECK_MEMORY() checkMemory()
 #define CHECK_MEMORY() 
+#define LOG_PRINTF_BUFFER_SIZE 160
+#define LOG_METHOD __PRETTY_FUNCTION__
 
 /**
  * ------------------------------------------------------------------------- 
