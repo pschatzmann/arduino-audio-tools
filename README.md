@@ -7,9 +7,10 @@ Some basic __header-only C++ classes__ that can be used for __Audio Processing__
 - a simple PWM class (to write audio data with the help of PWM) 
 - Additional Stream implementations: MemoryStream, URLStream, I2SStream, A2DPStream, PrintStream etc
 - Support for different [Encoders](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_audio_encoder.html) and [Decoders](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_audio_decoder.html) for AAC, MP3 and WAV 
-- Converters
+- Different [Converters](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_base_converter.html)
 - Musical Notes (with frequencies of notes)
-- SineWaveGenerator (to generate a sine tone) and [Mozzi](https://sensorium.github.io/Mozzi/) for more complex scenario 
+- Different [Sound Generators](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_sound_generator.html) (e.g. to generate a sine tone) 
+- Support for [Sound Effects](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_audio_effects.html) with different [Effect Implementations](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_audio_effect.html) (e.g. Boost, Distortion, Echo, Reverb...) 
 - Different buffer implementations 
 - TimerAlarmRepeating (e.g. for sampling audio data using exact times) [ESP32 only]
 - AudioOutputWithCallback class to provide callback integration e.g. with ESP8266Audio
