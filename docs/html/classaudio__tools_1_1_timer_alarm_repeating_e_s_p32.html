@@ -68,6 +68,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_timer_alarm_repeating_e_s_p32-members.html">List of all members</a>  </div>
@@ -91,9 +92,9 @@ Inheritance diagram for audio_tools::TimerAlarmRepeatingESP32:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2343387f428537a5f7f355dc11438ea8"><td class="memItemLeft" align="right" valign="top"><a id="a2343387f428537a5f7f355dc11438ea8" name="a2343387f428537a5f7f355dc11438ea8"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>TimerAlarmRepeatingESP32</b> (bool withTask=false, int id=0)</td></tr>
-<tr class="separator:a2343387f428537a5f7f355dc11438ea8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6ea24d4523973a3ba4956affe89f7d7"><td class="memItemLeft" align="right" valign="top"><a id="ae6ea24d4523973a3ba4956affe89f7d7" name="ae6ea24d4523973a3ba4956affe89f7d7"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>TimerAlarmRepeatingESP32</b> (TimerFunction function=DirectTimerCallback, int id=0)</td></tr>
+<tr class="separator:ae6ea24d4523973a3ba4956affe89f7d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ac584125c13504986f51147964bab45"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_e_s_p32.html#a4ac584125c13504986f51147964bab45">begin</a> (repeating_timer_callback_t callback_f, uint32_t time, <a class="el" href="namespaceaudio__tools.html#a2580860e590a075e7acf4753a09f2331">TimeUnit</a> unit=MS) override</td></tr>
 <tr class="memdesc:a4ac584125c13504986f51147964bab45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the alarm timer.  <a href="classaudio__tools_1_1_timer_alarm_repeating_e_s_p32.html#a4ac584125c13504986f51147964bab45">More...</a><br /></td></tr>
 <tr class="separator:a4ac584125c13504986f51147964bab45"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -111,12 +112,30 @@ void *&#160;</td><td class="memItemRight" valign="bottom"><b>callbackParameter</
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setCallbackParameter</b> (void *obj)</td></tr>
 <tr class="separator:afebecbbd87c9dd6b0f237299e2326284 inherit pub_methods_classaudio__tools_1_1_timer_alarm_repeating_def"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:ac3d6e226533f87a68552e82850c5c196"><td class="memItemLeft" align="right" valign="top"><a id="ac3d6e226533f87a68552e82850c5c196" name="ac3d6e226533f87a68552e82850c5c196"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setupDirectTimerCallback</b> (repeating_timer_callback_t callback_f)</td></tr>
+<tr class="memdesc:ac3d6e226533f87a68552e82850c5c196"><td class="mdescLeft">&#160;</td><td class="mdescRight">direct timer callback <br /></td></tr>
+<tr class="separator:ac3d6e226533f87a68552e82850c5c196"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a615c98a145d58147062a6b08746c49db"><td class="memItemLeft" align="right" valign="top"><a id="a615c98a145d58147062a6b08746c49db" name="a615c98a145d58147062a6b08746c49db"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setupSimpleThreadLoop</b> (repeating_timer_callback_t callback_f)</td></tr>
+<tr class="memdesc:a615c98a145d58147062a6b08746c49db"><td class="mdescLeft">&#160;</td><td class="mdescRight">No timer - just a simple task loop. <br /></td></tr>
+<tr class="separator:a615c98a145d58147062a6b08746c49db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d528f52468a50e6c1b8579cb3a8ffbc"><td class="memItemLeft" align="right" valign="top"><a id="a9d528f52468a50e6c1b8579cb3a8ffbc" name="a9d528f52468a50e6c1b8579cb3a8ffbc"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setupTimerCallbackInThread</b> (repeating_timer_callback_t callback_f)</td></tr>
+<tr class="separator:a9d528f52468a50e6c1b8579cb3a8ffbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
-<tr class="memitem:a43301267b72cfe727fbc3525d2c0abdd"><td class="memItemLeft" align="right" valign="top"><a id="a43301267b72cfe727fbc3525d2c0abdd" name="a43301267b72cfe727fbc3525d2c0abdd"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>complexHandler</b> (void *param)</td></tr>
-<tr class="memdesc:a43301267b72cfe727fbc3525d2c0abdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">We can not do any I2C calls in the interrupt handler so we need to do this in a separate task. <br /></td></tr>
-<tr class="separator:a43301267b72cfe727fbc3525d2c0abdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d4df2ee726a96b24820a1e447ef0a4b"><td class="memItemLeft" align="right" valign="top"><a id="a7d4df2ee726a96b24820a1e447ef0a4b" name="a7d4df2ee726a96b24820a1e447ef0a4b"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>complexTaskHandler</b> (void *param)</td></tr>
+<tr class="memdesc:a7d4df2ee726a96b24820a1e447ef0a4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">We can not do any I2C calls in the interrupt handler so we need to do this in a separate task. <br /></td></tr>
+<tr class="separator:a7d4df2ee726a96b24820a1e447ef0a4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbf9338b19c5582051544222c44e8269"><td class="memItemLeft" align="right" valign="top"><a id="acbf9338b19c5582051544222c44e8269" name="acbf9338b19c5582051544222c44e8269"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>simpleTaskLoop</b> (void *param)</td></tr>
+<tr class="memdesc:acbf9338b19c5582051544222c44e8269"><td class="mdescLeft">&#160;</td><td class="mdescRight">We can not do any I2C calls in the interrupt handler so we need to do this in a separate task. <br /></td></tr>
+<tr class="separator:acbf9338b19c5582051544222c44e8269"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -126,11 +145,14 @@ hw_timer_t *&#160;</td><td class="memItemRight" valign="bottom"><b>adc_timer</b>
 <tr class="memitem:a5ca0c7e9f5cb390f0ba14d82f550a587"><td class="memItemLeft" align="right" valign="top"><a id="a5ca0c7e9f5cb390f0ba14d82f550a587" name="a5ca0c7e9f5cb390f0ba14d82f550a587"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>core</b> = 1</td></tr>
 <tr class="separator:a5ca0c7e9f5cb390f0ba14d82f550a587"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae55493ccef0e8f88a59cd8d572654837"><td class="memItemLeft" align="right" valign="top"><a id="ae55493ccef0e8f88a59cd8d572654837" name="ae55493ccef0e8f88a59cd8d572654837"></a>
+TimerFunction&#160;</td><td class="memItemRight" valign="bottom"><b>function</b></td></tr>
+<tr class="separator:ae55493ccef0e8f88a59cd8d572654837"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aabd4993220a68670af037add4ac09d0c"><td class="memItemLeft" align="right" valign="top"><a id="aabd4993220a68670af037add4ac09d0c" name="aabd4993220a68670af037add4ac09d0c"></a>
 TaskHandle_t&#160;</td><td class="memItemRight" valign="bottom"><b>handler_task</b> = nullptr</td></tr>
 <tr class="separator:aabd4993220a68670af037add4ac09d0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adcaddca9092cbd7ad101e5a3d98f2dd3"><td class="memItemLeft" align="right" valign="top"><a id="adcaddca9092cbd7ad101e5a3d98f2dd3" name="adcaddca9092cbd7ad101e5a3d98f2dd3"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>priority</b> = 4</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>priority</b> = configMAX_PRIORITIES -1</td></tr>
 <tr class="separator:adcaddca9092cbd7ad101e5a3d98f2dd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2845312afd63a92702d29b9e5011a42d"><td class="memItemLeft" align="right" valign="top"><a id="a2845312afd63a92702d29b9e5011a42d" name="a2845312afd63a92702d29b9e5011a42d"></a>
 volatile bool&#160;</td><td class="memItemRight" valign="bottom"><b>started</b> = false</td></tr>
@@ -138,12 +160,12 @@ volatile bool&#160;</td><td class="memItemRight" valign="bottom"><b>started</b> 
 <tr class="memitem:a7f6d1f2b0e44c5488f778a925d3a9fa6"><td class="memItemLeft" align="right" valign="top"><a id="a7f6d1f2b0e44c5488f778a925d3a9fa6" name="a7f6d1f2b0e44c5488f778a925d3a9fa6"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>timer_id</b> =0</td></tr>
 <tr class="separator:a7f6d1f2b0e44c5488f778a925d3a9fa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68b9806b295bb4e405298b20df521dfc"><td class="memItemLeft" align="right" valign="top"><a id="a68b9806b295bb4e405298b20df521dfc" name="a68b9806b295bb4e405298b20df521dfc"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>timeUs</b></td></tr>
+<tr class="separator:a68b9806b295bb4e405298b20df521dfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59a68428864b0d261821a1b3f701263e"><td class="memItemLeft" align="right" valign="top"><a id="a59a68428864b0d261821a1b3f701263e" name="a59a68428864b0d261821a1b3f701263e"></a>
 <a class="el" href="classaudio__tools_1_1_user_callback.html">UserCallback</a>&#160;</td><td class="memItemRight" valign="bottom"><b>user_callback</b></td></tr>
 <tr class="separator:a59a68428864b0d261821a1b3f701263e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95169c34f3730b7bea0e82bde8ff3ae5"><td class="memItemLeft" align="right" valign="top"><a id="a95169c34f3730b7bea0e82bde8ff3ae5" name="a95169c34f3730b7bea0e82bde8ff3ae5"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>with_task</b> = false</td></tr>
-<tr class="separator:a95169c34f3730b7bea0e82bde8ff3ae5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classaudio__tools_1_1_timer_alarm_repeating_def"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classaudio__tools_1_1_timer_alarm_repeating_def')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_def.html">audio_tools::TimerAlarmRepeatingDef</a></td></tr>
 <tr class="memitem:a952aed128221fe2cb3d5bcff3663274d inherit pro_attribs_classaudio__tools_1_1_timer_alarm_repeating_def"><td class="memItemLeft" align="right" valign="top"><a id="a952aed128221fe2cb3d5bcff3663274d" name="a952aed128221fe2cb3d5bcff3663274d"></a>
 void *&#160;</td><td class="memItemRight" valign="bottom"><b>object</b></td></tr>

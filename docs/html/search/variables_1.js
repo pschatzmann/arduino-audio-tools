@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['id3_5fv2_5ftags_0',['id3_v2_tags',['../namespaceaudio__tools.html#ad08e52c58bf7f318154176089dfb1535',1,'audio_tools']]]
+  ['base_0',['base',['../classaudio__tools_1_1_simple_chorus.html#a71542c6e192a4ce40f5e6c358e51df9a',1,'audio_tools::SimpleChorus']]],
+  ['bufferindex_1',['bufferIndex',['../classaudio__tools_1_1_filter_effect_base.html#a7706e303caa1cecf44df35f4061cb334',1,'audio_tools::FilterEffectBase']]]
 ];

@@ -9,8 +9,9 @@ var searchData=
   ['noisegenerator_6',['NoiseGenerator',['../classaudio__tools_1_1_noise_generator.html',1,'audio_tools']]],
   ['nopconverter_7',['NOPConverter',['../classaudio__tools_1_1_n_o_p_converter.html',1,'audio_tools']]],
   ['note_8',['note',['../classaudio__tools_1_1_musical_notes.html#ab443db797e9cb92a6db2860d30699736',1,'audio_tools::MusicalNotes::note(int frequency, int &amp;diff)'],['../classaudio__tools_1_1_musical_notes.html#a94809f184c246c6144361caf2790bf56',1,'audio_tools::MusicalNotes::note(int frequency)']]],
-  ['notifybaseinfo_9',['notifyBaseInfo',['../classaudio__tools_1_1_a2_d_p_stream.html#a9481fdbb92af3ad22f96183ed593cc28',1,'audio_tools::A2DPStream']]],
-  ['notifymime_10',['notifyMime',['../classaudio__tools_1_1_stream_copy_t.html#a3b8b75b96bba66618f06382eceb2e1a8',1,'audio_tools::StreamCopyT']]],
-  ['nullstream_11',['NullStream',['../classaudio__tools_1_1_null_stream.html',1,'audio_tools']]],
-  ['numberreader_12',['NumberReader',['../classaudio__tools_1_1_number_reader.html',1,'audio_tools']]]
+  ['notifyaudiochange_9',['notifyAudioChange',['../classaudio__tools_1_1_timer_callback_audio_stream.html#a9d5369d82975da0cfee730a45feadab1',1,'audio_tools::TimerCallbackAudioStream']]],
+  ['notifybaseinfo_10',['notifyBaseInfo',['../classaudio__tools_1_1_a2_d_p_stream.html#a9481fdbb92af3ad22f96183ed593cc28',1,'audio_tools::A2DPStream']]],
+  ['notifymime_11',['notifyMime',['../classaudio__tools_1_1_stream_copy_t.html#a3b8b75b96bba66618f06382eceb2e1a8',1,'audio_tools::StreamCopyT']]],
+  ['nullstream_12',['NullStream',['../classaudio__tools_1_1_null_stream.html',1,'audio_tools']]],
+  ['numberreader_13',['NumberReader',['../classaudio__tools_1_1_number_reader.html',1,'audio_tools']]]
 ];

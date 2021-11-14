@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['output_5fbits_0',['output_bits',['../classaudio__tools_1_1_d_a_c_info.html#a88b046591d225a7bcae41394a4d10fd4',1,'audio_tools::DACInfo']]],
-  ['oversample_5ffactor_1',['oversample_factor',['../classaudio__tools_1_1_d_a_c_info.html#a5f50c97bedb7ba6687c81c358ba47f17',1,'audio_tools::DACInfo']]]
+  ['envelopefollower_0',['envelopeFollower',['../classaudio__tools_1_1_envelope_filter.html#ad2e4815613f47f6627557be15e11da8f',1,'audio_tools::EnvelopeFilter']]],
+  ['error_1',['error',['../classaudio__tools_1_1_delay_effect_base.html#a1bdce900e4d0de724b5f6f11866796eb',1,'audio_tools::DelayEffectBase']]]
 ];

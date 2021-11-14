@@ -78,17 +78,28 @@ $(function() {
 <p>Abstract Base class for Sound Effects.  
  <a href="classaudio__tools_1_1_audio_effect.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_audio_effects_8h_source.html">AudioEffects.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_audio_effect_8h_source.html">AudioEffect.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for audio_tools::AudioEffect:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="classaudio__tools_1_1_audio_effect.png" usemap="#audio_5Ftools::AudioEffect_map" alt=""/>
   <map id="audio_5Ftools::AudioEffect_map" name="audio_5Ftools::AudioEffect_map">
-<area href="classaudio__tools_1_1_boost.html" title="EffectBoost." alt="audio_tools::Boost" shape="rect" coords="0,56,148,80"/>
-<area href="classaudio__tools_1_1_distortion.html" title="EffectDistortion." alt="audio_tools::Distortion" shape="rect" coords="158,56,306,80"/>
-<area href="classaudio__tools_1_1_fuzz.html" title="EffectFuzz." alt="audio_tools::Fuzz" shape="rect" coords="316,56,464,80"/>
-<area href="classaudio__tools_1_1_tremolo.html" title="EffectTremolo." alt="audio_tools::Tremolo" shape="rect" coords="474,56,622,80"/>
+<area href="classaudio__tools_1_1_boost.html" title="Boost AudioEffect." alt="audio_tools::Boost" shape="rect" coords="212,56,414,80"/>
+<area href="classaudio__tools_1_1_delay_effect_base.html" alt="audio_tools::DelayEffectBase" shape="rect" coords="212,112,414,136"/>
+<area href="classaudio__tools_1_1_distortion.html" title="Distortion AudioEffect." alt="audio_tools::Distortion" shape="rect" coords="212,168,414,192"/>
+<area href="classaudio__tools_1_1_filter_effect_base.html" alt="audio_tools::FilterEffectBase" shape="rect" coords="212,224,414,248"/>
+<area href="classaudio__tools_1_1_fuzz.html" title="Fuzz AudioEffect." alt="audio_tools::Fuzz" shape="rect" coords="212,280,414,304"/>
+<area href="classaudio__tools_1_1_s_t_k_chorus.html" alt="audio_tools::STKChorus" shape="rect" coords="212,336,414,360"/>
+<area href="classaudio__tools_1_1_s_t_k_chowning_reverb.html" alt="audio_tools::STKChowningReverb" shape="rect" coords="212,392,414,416"/>
+<area href="classaudio__tools_1_1_s_t_k_echo.html" alt="audio_tools::STKEcho" shape="rect" coords="212,448,414,472"/>
+<area href="classaudio__tools_1_1_s_t_k_effect.html" alt="audio_tools::STKEffect" shape="rect" coords="212,504,414,528"/>
+<area href="classaudio__tools_1_1_s_t_k_free_verb.html" alt="audio_tools::STKFreeVerb" shape="rect" coords="212,560,414,584"/>
+<area href="classaudio__tools_1_1_s_t_k_lent_pit_shift.html" alt="audio_tools::STKLentPitShift" shape="rect" coords="212,616,414,640"/>
+<area href="classaudio__tools_1_1_s_t_k_n_reverb.html" alt="audio_tools::STKNReverb" shape="rect" coords="212,672,414,696"/>
+<area href="classaudio__tools_1_1_s_t_k_perry_reverb.html" alt="audio_tools::STKPerryReverb" shape="rect" coords="212,728,414,752"/>
+<area href="classaudio__tools_1_1_s_t_k_pit_shift.html" alt="audio_tools::STKPitShift" shape="rect" coords="212,784,414,808"/>
+<area href="classaudio__tools_1_1_tremolo.html" title="Tremolo AudioEffect." alt="audio_tools::Tremolo" shape="rect" coords="212,840,414,864"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -121,12 +132,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>active_flag</b> = tru
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Abstract Base class for Sound Effects. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">effect_t</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
+<dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a4a25e0fd14638e9b4f8c60792111aeb0" name="a4a25e0fd14638e9b4f8c60792111aeb0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4a25e0fd14638e9b4f8c60792111aeb0">&#9670;&nbsp;</a></span>process()</h2>
@@ -154,12 +161,12 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>active_flag</b> = tru
 
 <p>calculates the effect output from the input </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_boost.html#adf0b55385be1fd6450a11016f45a36a9">audio_tools::Boost</a>, <a class="el" href="classaudio__tools_1_1_distortion.html#ac72effd2de3266ba57d8c0d58237b064">audio_tools::Distortion</a>, <a class="el" href="classaudio__tools_1_1_fuzz.html#a3419de8dd542579b9a84567ca9e0defb">audio_tools::Fuzz</a>, and <a class="el" href="classaudio__tools_1_1_tremolo.html#a20e3a4d2eb262b79af8f360e3bc0e73a">audio_tools::Tremolo</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_s_t_k_effect.html#ae206427cf381206e57ee88407b2bbf01">audio_tools::STKEffect</a>, <a class="el" href="classaudio__tools_1_1_s_t_k_chorus.html#abd1e8747e7c24013a26d5924a7c92a27">audio_tools::STKChorus</a>, <a class="el" href="classaudio__tools_1_1_s_t_k_echo.html#abcb45e61925d9fc1ee1ab3c490e73fd3">audio_tools::STKEcho</a>, <a class="el" href="classaudio__tools_1_1_s_t_k_free_verb.html#a3dc077fe1684e333e4cf0d102c09ae2e">audio_tools::STKFreeVerb</a>, <a class="el" href="classaudio__tools_1_1_s_t_k_chowning_reverb.html#ab313cee538032eeee2c6744f33e91fb9">audio_tools::STKChowningReverb</a>, <a class="el" href="classaudio__tools_1_1_s_t_k_n_reverb.html#abec59b7244becc1804d00d0ea4203142">audio_tools::STKNReverb</a>, <a class="el" href="classaudio__tools_1_1_s_t_k_perry_reverb.html#aa9a32709c33f654f2b53fbaf07920bf9">audio_tools::STKPerryReverb</a>, <a class="el" href="classaudio__tools_1_1_s_t_k_lent_pit_shift.html#af89af32c6e808df7f700b477ffa435cf">audio_tools::STKLentPitShift</a>, <a class="el" href="classaudio__tools_1_1_s_t_k_pit_shift.html#a844327046b9d26b60914c06e1e6ddb89">audio_tools::STKPitShift</a>, <a class="el" href="classaudio__tools_1_1_boost.html#adf0b55385be1fd6450a11016f45a36a9">audio_tools::Boost</a>, <a class="el" href="classaudio__tools_1_1_distortion.html#ac72effd2de3266ba57d8c0d58237b064">audio_tools::Distortion</a>, <a class="el" href="classaudio__tools_1_1_fuzz.html#a3419de8dd542579b9a84567ca9e0defb">audio_tools::Fuzz</a>, <a class="el" href="classaudio__tools_1_1_tremolo.html#a20e3a4d2eb262b79af8f360e3bc0e73a">audio_tools::Tremolo</a>, <a class="el" href="classaudio__tools_1_1_delay_effect_base.html#aa3b6921fb7b2382046dd5329f5f94678">audio_tools::DelayEffectBase</a>, and <a class="el" href="classaudio__tools_1_1_filter_effect_base.html#aa0eb0fec4cb788ac117f01a8310e0dc5">audio_tools::FilterEffectBase</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/<a class="el" href="_audio_effects_8h_source.html">AudioEffects.h</a></li>
+<li>src/AudioEffects/<a class="el" href="_audio_effect_8h_source.html">AudioEffect.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

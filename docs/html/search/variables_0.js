@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['genres_0',['genres',['../namespaceaudio__tools.html#a1b557a69bf723c639c02209bdb1eb4b5',1,'audio_tools']]]
+  ['angledelta_0',['angleDelta',['../classaudio__tools_1_1_simple_flanger.html#a66468d5bd348edb318fafbfe3aa4fe83',1,'audio_tools::SimpleFlanger']]]
 ];

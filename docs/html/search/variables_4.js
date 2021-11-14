@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['rx_5ftx_5fmode_0',['rx_tx_mode',['../classaudio__tools_1_1_i2_s_config.html#a79971ed4bb50a6b67c3cf28197ac5a05',1,'audio_tools::I2SConfig']]]
+  ['filterorder_0',['filterOrder',['../classaudio__tools_1_1_filter_effect_base.html#a1a5aca06a7578de2ac0108f5107d508f',1,'audio_tools::FilterEffectBase']]],
+  ['firbuffer_1',['firBuffer',['../classaudio__tools_1_1_filter_effect_base.html#a3ff38c92d539da70fcf84d88b396474c',1,'audio_tools::FilterEffectBase']]],
+  ['fircoefficients_2',['firCoefficients',['../classaudio__tools_1_1_filter_effect_base.html#ac33d0c661016f333e82f8913c4bd72f4',1,'audio_tools::FilterEffectBase']]],
+  ['firtemp_3',['firTemp',['../classaudio__tools_1_1_filter_effect_base.html#ac3477580413541280158420c51efdb07',1,'audio_tools::FilterEffectBase']]]
 ];

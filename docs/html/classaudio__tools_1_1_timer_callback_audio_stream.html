@@ -69,6 +69,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="#friends">Friends</a> &#124;
 <a href="classaudio__tools_1_1_timer_callback_audio_stream-members.html">List of all members</a>  </div>
@@ -110,6 +111,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (<a class="
 <tr class="separator:aee86e9e4593ac0ec3a1837bdb5730f7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb9e16fa72726b70f1cc52a633757c57"><td class="memItemLeft" align="right" valign="top"><a id="abb9e16fa72726b70f1cc52a633757c57" name="abb9e16fa72726b70f1cc52a633757c57"></a>
 uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>currentSampleRate</b> ()</td></tr>
+<tr class="memdesc:abb9e16fa72726b70f1cc52a633757c57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the effective sample rate. <br /></td></tr>
 <tr class="separator:abb9e16fa72726b70f1cc52a633757c57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec24f982a6bd1b8827fda9bdc1f132cb"><td class="memItemLeft" align="right" valign="top"><a id="aec24f982a6bd1b8827fda9bdc1f132cb" name="aec24f982a6bd1b8827fda9bdc1f132cb"></a>
 <a class="el" href="structaudio__tools_1_1_timer_callback_audio_stream_info.html">TimerCallbackAudioStreamInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>defaultConfig</b> ()</td></tr>
@@ -320,13 +322,18 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>validate</b> 
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a23800597fb0fde32c0f13a6283aa3330"><td class="memItemLeft" align="right" valign="top"><a id="a23800597fb0fde32c0f13a6283aa3330" name="a23800597fb0fde32c0f13a6283aa3330"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>calculateSampleRate</b> (size_t len)</td></tr>
-<tr class="memdesc:a23800597fb0fde32c0f13a6283aa3330"><td class="mdescLeft">&#160;</td><td class="mdescRight">calculates the effective sample rate <br /></td></tr>
-<tr class="separator:a23800597fb0fde32c0f13a6283aa3330"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d951ee91bb69231983149f9995883c9"><td class="memItemLeft" align="right" valign="top"><a id="a6d951ee91bb69231983149f9995883c9" name="a6d951ee91bb69231983149f9995883c9"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>measureSampleRate</b> ()</td></tr>
+<tr class="memdesc:a6d951ee91bb69231983149f9995883c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">calculates the effective sample rate <br /></td></tr>
+<tr class="separator:a6d951ee91bb69231983149f9995883c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d5369d82975da0cfee730a45feadab1"><td class="memItemLeft" align="right" valign="top"><a id="a9d5369d82975da0cfee730a45feadab1" name="a9d5369d82975da0cfee730a45feadab1"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>notifyAudioChange</b> ()</td></tr>
+<tr class="memdesc:a9d5369d82975da0cfee730a45feadab1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update Audio Information in target device. <br /></td></tr>
 <tr class="separator:a9d5369d82975da0cfee730a45feadab1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a919e62c74aee668d651122928ff9f9a9"><td class="memItemLeft" align="right" valign="top"><a id="a919e62c74aee668d651122928ff9f9a9" name="a919e62c74aee668d651122928ff9f9a9"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>printSampleRate</b> ()</td></tr>
+<tr class="memdesc:a919e62c74aee668d651122928ff9f9a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">log and update effective sample rate <br /></td></tr>
+<tr class="separator:a919e62c74aee668d651122928ff9f9a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a25e9de60e007a7a0b89a0c4a44945e52"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a25e9de60e007a7a0b89a0c4a44945e52">readExt</a> (uint8_t *data, size_t len)</td></tr>
 <tr class="separator:a25e9de60e007a7a0b89a0c4a44945e52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d815b8d6f320f02cedd6f94a8c3c038"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a5d815b8d6f320f02cedd6f94a8c3c038">writeExt</a> (const uint8_t *data, size_t len)</td></tr>
@@ -359,6 +366,12 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>timedRead</b> ()</td><
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteError</b> (int err=1)</td></tr>
 <tr class="separator:a46656410e23c0ec14d7a01b38b3b6f00 inherit pro_methods_class_print"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
+Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:ab4ea693b55dc7998c8bdfbbfc77ec2ea"><td class="memItemLeft" align="right" valign="top"><a id="ab4ea693b55dc7998c8bdfbbfc77ec2ea" name="ab4ea693b55dc7998c8bdfbbfc77ec2ea"></a>
+static void IRAM_ATTR&#160;</td><td class="memItemRight" valign="bottom"><b>timerCallback</b> (void *obj)</td></tr>
+<tr class="separator:ab4ea693b55dc7998c8bdfbbfc77ec2ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a2d72a389e29b978421dafdc271dea2bd"><td class="memItemLeft" align="right" valign="top"><a id="a2d72a389e29b978421dafdc271dea2bd" name="a2d72a389e29b978421dafdc271dea2bd"></a>
@@ -370,9 +383,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>active</b> =false</td
 <tr class="memitem:a69ba209f730abd44a8a4e7a963d8cd53"><td class="memItemLeft" align="right" valign="top"><a id="a69ba209f730abd44a8a4e7a963d8cd53" name="a69ba209f730abd44a8a4e7a963d8cd53"></a>
 <a class="el" href="structaudio__tools_1_1_timer_callback_audio_stream_info.html">TimerCallbackAudioStreamInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>cfg</b></td></tr>
 <tr class="separator:a69ba209f730abd44a8a4e7a963d8cd53"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7747372110d7d176a41ba6112ee89ccf"><td class="memItemLeft" align="right" valign="top"><a id="a7747372110d7d176a41ba6112ee89ccf" name="a7747372110d7d176a41ba6112ee89ccf"></a>
-uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>currentRateValue</b> = 0</td></tr>
-<tr class="separator:a7747372110d7d176a41ba6112ee89ccf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb6f955db10691c82f5dfefac8d8c444"><td class="memItemLeft" align="right" valign="top"><a id="acb6f955db10691c82f5dfefac8d8c444" name="acb6f955db10691c82f5dfefac8d8c444"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>currentRateValue</b> = 0</td></tr>
+<tr class="separator:acb6f955db10691c82f5dfefac8d8c444"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb3662ea9d2373520da61372803d7cac"><td class="memItemLeft" align="right" valign="top"><a id="abb3662ea9d2373520da61372803d7cac" name="abb3662ea9d2373520da61372803d7cac"></a>
 uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><b>frame</b> =nullptr</td></tr>
 <tr class="separator:abb3662ea9d2373520da61372803d7cac"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -382,18 +395,15 @@ uint16_t(*&#160;</td><td class="memItemRight" valign="bottom"><b>frameCallback</
 <tr class="memitem:adb1be57db69fe8f99c7b0dde3edc5259"><td class="memItemLeft" align="right" valign="top"><a id="adb1be57db69fe8f99c7b0dde3edc5259" name="adb1be57db69fe8f99c7b0dde3edc5259"></a>
 uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>frameSize</b> =0</td></tr>
 <tr class="separator:adb1be57db69fe8f99c7b0dde3edc5259"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3455ae73341f46478be81e425346aac7"><td class="memItemLeft" align="right" valign="top"><a id="a3455ae73341f46478be81e425346aac7" name="a3455ae73341f46478be81e425346aac7"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>lastMs</b> =0</td></tr>
-<tr class="separator:a3455ae73341f46478be81e425346aac7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7f0d57dfc314628764cdf8f95e44d09"><td class="memItemLeft" align="right" valign="top"><a id="ac7f0d57dfc314628764cdf8f95e44d09" name="ac7f0d57dfc314628764cdf8f95e44d09"></a>
 unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>lastTimestamp</b> = 0u</td></tr>
 <tr class="separator:ac7f0d57dfc314628764cdf8f95e44d09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab5f3fc939b17d5768e070aef0f23ce7d"><td class="memItemLeft" align="right" valign="top"><a id="ab5f3fc939b17d5768e070aef0f23ce7d" name="ab5f3fc939b17d5768e070aef0f23ce7d"></a>
 <a class="el" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>notifyTarget</b> =nullptr</td></tr>
 <tr class="separator:ab5f3fc939b17d5768e070aef0f23ce7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6500494e9a96c76ec7669774db3fbc8"><td class="memItemLeft" align="right" valign="top"><a id="ae6500494e9a96c76ec7669774db3fbc8" name="ae6500494e9a96c76ec7669774db3fbc8"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>samples</b> =0</td></tr>
-<tr class="separator:ae6500494e9a96c76ec7669774db3fbc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1672870df03d489820f5581944981bed"><td class="memItemLeft" align="right" valign="top"><a id="a1672870df03d489820f5581944981bed" name="a1672870df03d489820f5581944981bed"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>printCount</b> =0</td></tr>
+<tr class="separator:a1672870df03d489820f5581944981bed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ad5e1dd01f21f29fd1d76a088dae1fb"><td class="memItemLeft" align="right" valign="top"><a id="a4ad5e1dd01f21f29fd1d76a088dae1fb" name="a4ad5e1dd01f21f29fd1d76a088dae1fb"></a>
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>time</b> =0</td></tr>
 <tr class="separator:a4ad5e1dd01f21f29fd1d76a088dae1fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -414,9 +424,9 @@ unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
-<tr class="memitem:af4ebf4c699d693a492bcf498cf0daa38"><td class="memItemLeft" align="right" valign="top"><a id="af4ebf4c699d693a492bcf498cf0daa38" name="af4ebf4c699d693a492bcf498cf0daa38"></a>
+<tr class="memitem:a3cae8a5ca3b7b73c5418195bf24f6e16"><td class="memItemLeft" align="right" valign="top"><a id="a3cae8a5ca3b7b73c5418195bf24f6e16" name="a3cae8a5ca3b7b73c5418195bf24f6e16"></a>
 void IRAM_ATTR&#160;</td><td class="memItemRight" valign="bottom"><b>timerCallback</b> (void *obj)</td></tr>
-<tr class="separator:af4ebf4c699d693a492bcf498cf0daa38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a3cae8a5ca3b7b73c5418195bf24f6e16"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Callback driven Audio Source (rx_tx_mode==RX_MODE) or Audio Sink (rx_tx_mode==TX_MODE). This class allows to to integrate external libraries in order to consume or generate a data stream which is based on a timer. </p>
