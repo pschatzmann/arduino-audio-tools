@@ -37,6 +37,8 @@ static effectsuite_t **interpolationTable = nullptr;
  * preallocated waveforms. These can be used to generate audio in themselves or
  * to modulate The parameters of another effect. Class initialised with sample
  * rate.
+ * @author Matthew Hamilton
+ * @copyright MIT License
  */
 class ModulationBaseClass {
 public:
@@ -314,14 +316,16 @@ public:
 protected:
   static const int order = 4;
   static const int res = 100;
-  effectsuite_t interpTable[order][res] = {1};
+  effectsuite_t interpTable[order][res];// = {1};
 };
 
 /**
  * A Base class for delay based digital effects. Provides the basic methods
  * that are shared amongst Flanger, Delay, Chorus and Phaser
- *  @version 0.1
- *  @see DelayEffectBase
+ * @version 0.1
+ * @see DelayEffectBase
+ * @author Matthew Hamilton
+ * @copyright MIT License
  */
 class DelayEffectBase : public AudioEffect  {
 public:
@@ -568,6 +572,8 @@ protected: // member variables
  * A Base class for filter based effects including methods for simple
  * high, low and band pass filtering
  * @see FilterEffectBase
+ * @author Matthew Hamilton
+ * @copyright MIT License
  */
 class FilterEffectBase : public AudioEffect {
 public:
@@ -930,6 +936,11 @@ protected: // variables
   constexpr static const effectsuite_t pi = 3.141592653589793;
 };
 
+/**
+ * @brief SimpleLPF
+ * @author Matthew Hamilton
+ * @copyright MIT License
+ */
 class SimpleLPF : public FilterEffectBase {
 public:
   /**
@@ -951,6 +962,8 @@ public:
  * Simple Chorus effect with a single delay voice and mono output Chorus is
  * effective between 15 and 20 miliseconds delay of original audio. Requires the
  * sample rate when initialising.
+ * @author Matthew Hamilton
+ * @copyright MIT License
  **/
 class SimpleChorus : public DelayEffectBase,
                      public ModulationBaseClass,
@@ -1074,7 +1087,11 @@ protected:
   }
 };
 
-/** Delay effect that filters the repeat delay */
+/**
+ * Delay effect that filters the repeat delay 
+ * @author Matthew Hamilton
+ * @copyright MIT License
+ */
 class FilteredDelay : public DelayEffectBase, public FilterEffectBase {
 public:
   /** Constructor */
@@ -1141,6 +1158,8 @@ protected:
  * feed back controls
  * Constructor requires internal delay in samples
  * @see process
+ * @author Matthew Hamilton
+ * @copyright MIT License
  */
 class SimpleDelay : public DelayEffectBase {
 public:
@@ -1306,6 +1325,8 @@ protected: // member vairables
  * in this case dleay buffer should be set to sampleRate*3/200
  * Constructor requires internal delay in samples
  * @see process
+ * @author Matthew Hamilton
+ * @copyright MIT License
  */
 class SimpleFlanger : public DelayEffectBase {
 public:
@@ -1430,6 +1451,11 @@ protected:
   effectsuite_t angleDelta = 2 * internal_Pi * timeStep;
 };
 
+/**
+ * @brief EnvelopeFilter
+ * @author Matthew Hamilton
+ * @copyright MIT License
+ */
 class EnvelopeFilter : public FilterEffectBase {
 public:
   /** Constructor */

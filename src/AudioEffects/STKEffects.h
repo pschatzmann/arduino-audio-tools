@@ -40,6 +40,8 @@ protected:
 
 /**
  * Chorus Effect
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 class STKChorus : public AudioEffect, public stk::Chorus {
 public:
@@ -54,6 +56,8 @@ public:
 
 /**
  * Echo Effect
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 class STKEcho : public AudioEffect, public stk::Echo {
 public:
@@ -69,6 +73,8 @@ public:
 
 /**
  * Jezar at Dreampoint's FreeVerb, implemented in STK.
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 class STKFreeVerb : public AudioEffect, public stk::FreeVerb {
 public:
@@ -82,6 +88,8 @@ public:
 
 /**
  * John Chowning's reverberator class.
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 class STKChowningReverb : public AudioEffect, public stk::JCRev {
 public:
@@ -96,6 +104,8 @@ public:
 
 /**
  * CCRMA's NRev reverberator class.
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 class STKNReverb : public AudioEffect, public stk::NRev {
 public:
@@ -109,6 +119,8 @@ public:
 
 /**
  * Perry's simple reverberator class
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 class STKPerryReverb : public AudioEffect, public stk::PRCRev {
 public:
@@ -122,6 +134,8 @@ public:
 
 /**
  * Pitch shifter effect class based on the Lent algorithm
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 class STKLentPitShift : public AudioEffect, public stk::LentPitShift {
 public:
@@ -137,6 +151,8 @@ public:
 
 /**
  * Pitch shifter effect class based on the Lent algorithm
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 class STKPitShift : public AudioEffect, public stk::PitShift {
 public:
