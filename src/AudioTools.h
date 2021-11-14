@@ -27,6 +27,11 @@
 #include "AudioHttp/AudioHttp.h"
 #include "AudioTools/AudioPlayer.h"
 #include "AudioEffects/AudioEffects.h"
+#include "AudioLibs/AudioMozzi.h"
+#include "AudioLibs/AudioSTK.h"
+#include "AudioLibs/AudioESP8266.h"
+#include "AudioLibs/AudioA2DP.h"
+#include "AudioExperiments/AudioExperiments.h"
 
 
 /**

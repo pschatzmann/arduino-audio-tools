@@ -8,14 +8,14 @@
 #include "Arduino.h"
 #include <string.h>
 #include <stdint.h>
-#include "AudioRuntime.h"
+#include "AudioTools/AudioRuntime.h"
 
 // If you don't want to use all the settings from here you can define your own local config settings in AudioConfigLocal.h
 #if __has_include("AudioConfigLocal.h") 
 #incude "AudioConfigLocal.h"
 #endif
 
-#define AUDIOTOOLS_VERSION "0.7.0"
+#define AUDIOTOOLS_VERSION "0.8.0"
 
 /**
  * ------------------------------------------------------------------------- 
