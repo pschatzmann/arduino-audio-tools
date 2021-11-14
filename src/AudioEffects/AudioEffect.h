@@ -1,6 +1,5 @@
 #pragma once
-#include "AudioTools/SoundGenerator.h"
-#include "AudioTools/Vector.h"
+#include <stdint.h> 
 
 namespace audio_tools {
 
@@ -40,7 +39,7 @@ class AudioEffect  {
 };
 
 /**
- * @brief Boost
+ * @brief Boost AudioEffect
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 
@@ -65,7 +64,7 @@ class Boost : public AudioEffect {
 };
 
 /**
- * @brief Distortion
+ * @brief Distortion AudioEffect
  * 
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -93,7 +92,7 @@ class Distortion : public AudioEffect  {
 };
 
 /**
- * @brief Fuzz
+ * @brief Fuzz AudioEffect
  * 
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -121,7 +120,7 @@ class Fuzz : public AudioEffect  {
 };
 
 /**
- * @brief Tremolo
+ * @brief Tremolo AudioEffect
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -166,102 +165,4 @@ class Tremolo : public AudioEffect  {
 
 };
 
-
-/**
- * @brief Simple GuitarEffects
- * Based on Stratocaster with on-board Electrosmash Arduino UNOR3 pedal electronics CC-by-www.Electrosmash.com
- * Based on OpenMusicLabs previous works.
- * @author Phil Schatzmann
- * @copyright GPLv3
- */
-
-class AudioEffects : public SoundGenerator<effect_t>  {
-
-    public:
-        /// Default constructor
-        AudioEffects(SoundGenerator &in){
-            setInput(in);
-        }
-
-        AudioEffects(Stream &in){
-            setInput(in);
-        }
-
-        ~AudioEffects(){
-            if (p_stream_gen!=nullptr) delete p_stream_gen;
-        }
-
-
-        /// Defines the input source for the raw guitar input
-        void setInput(SoundGenerator &in){
-            p_source = &in;
-        }
-
-        /// Defines the input source for the raw guitar input; MEMORY LEAK WARNING use only once!
-        void setInput(Stream &in){
-            // allocate optional adapter class
-            if (p_stream_gen==nullptr){
-                p_stream_gen = new GeneratorFromStream<int16_t>();
-            } 
-            p_stream_gen->setStream(in);
-            p_source = p_stream_gen;
-        }
-
-        /// Adds an effect object (by reference)
-        void addEffect(AudioEffect &effect){
-            effects.push_back(&effect);
-        }
-
-        /// Adds an effect using a pointer
-        void addEffect(AudioEffect *effect){
-            effects.push_back(effect);
-        }
-
-        /// provides the resulting sample
-        virtual  effect_t readSample() {
-            effect_t input = p_source->readSample();
-            int size = effects.size();
-            for (int j=0; j<size; j++){
-                input = effects[j]->process(input);
-            }
-            return input;
-        }
-
-    protected:
-        Vector<AudioEffect*> effects;
-        SoundGenerator *p_source;
-        // optional adapter class to support streams
-        GeneratorFromStream<int16_t> *p_stream_gen = nullptr;
-
-};
-
-#ifdef USE_STK
-
-/**
- * Use any effect from the STK framework: e.g. Chorus, Echo, FreeVerb, JCRev, PitShift...
- * @author Phil Schatzmann
- * @copyright GPLv3
- */
-class STKEffect : public AudioEffect {
-    public:
-        STKEffect(stk::Effect &stkEffect){
-            p_effect = &stkEffect;
-        }
-
-        virtual effect_t process(effect_t in) {
-            // just convert between int16 and float
-            float value = static_cast<float>(in) / 32767.0;
-            return p_effect->tick(value)*32767.0;
-        }
-
-    protected:
-        stk::Effect *p_effect=nullptr;
-
-};
-
-
-#endif
-
-
-
-} // namespace
+}
