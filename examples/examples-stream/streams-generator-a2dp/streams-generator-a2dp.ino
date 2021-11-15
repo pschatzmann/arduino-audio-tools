@@ -26,11 +26,10 @@ StreamCopy copier(out, in); // copy in to out
 // Arduino Setup
 void setup(void) {
   Serial.begin(115200);
+  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
 
-  // We send the test signal via A2DP - so we conect to the MyMusic Bluetooth Speaker
-  out.setVolume(10);
-  out.begin(TX_MODE, "MyMusic");
-  Serial.println("A2DP is connected now...");
+  // set the frequency
+  sineWave.setFrequency(N_B4);
 
   // Setup sine wave
   auto cfg = in.defaultConfig();
@@ -38,13 +37,15 @@ void setup(void) {
   cfg.sample_rate = sample_rate;
   in.setNotifyAudioChange(out);
   in.begin(cfg);
-  
-  // set the frequency
-  sineWave.setFrequency(N_B4);
+
+  // We send the test signal via A2DP - so we conect to the MyMusic Bluetooth Speaker
+  out.setVolume(10);
+  out.begin(TX_MODE, "LEXON MINO L");
+  Serial.println("A2DP is connected now...");
+
 }
 
 // Arduino loop  
 void loop() {
-  if (out)
-    copier.copy();
+  copier.copy();
 }
