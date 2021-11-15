@@ -12,8 +12,6 @@
 #define USE_MOZZI
 
 #include "AudioTools.h"
-#include "AudioA2DP.h"
-#include "AudioMozzi.h"
 #include <Oscil.h>
 #include <tables/cos2048_int8.h> // table for Oscils to play
 #include <mozzi_fixmath.h>

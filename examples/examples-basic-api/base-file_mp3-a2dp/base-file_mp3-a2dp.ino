@@ -15,7 +15,6 @@
 #include <SD.h>
 #include "AudioFileSourceSD.h"
 #include "AudioGeneratorMP3.h"
-#include "AudioESP8266.h"
 #include "BluetoothA2DPSource.h"
 #include "AudioTools.h"
 

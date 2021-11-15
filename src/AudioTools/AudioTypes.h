@@ -6,6 +6,11 @@
 namespace audio_tools {
 
 /**
+ * @brief Audio Source (TX_MODE) or Audio Sink (RX_MODE)
+ */
+enum RxTxMode  { TX_MODE=1, RX_MODE=2 };
+
+/**
  * @brief Time Units
  */
 
@@ -56,17 +61,6 @@ class AudioBaseInfoSource {
       virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi) = 0;
 };
 
-enum RxTxMode  { TX_MODE=1, RX_MODE=2 };
-
-
-enum I2SFormat {
-  I2S_STD_FORMAT,
-  I2S_LSB_FORMAT,
-  I2S_MSB_FORMAT,
-  I2S_PHILIPS_FORMAT,
-  I2S_RIGHT_JUSTIFIED_FORMAT,
-  I2S_LEFT_JUSTIFIED_FORMAT
-};
 
 
 /**
@@ -87,7 +81,7 @@ class AudioDecoder : public AudioWriter, public  AudioBaseInfoSource {
   public: 
       AudioDecoder() = default;
       virtual ~AudioDecoder() = default;
-          virtual void setOutputStream(Print &out_stream) = 0;
+      virtual void setOutputStream(Print &out_stream) = 0;
       virtual void begin() = 0;
       virtual void end() = 0;
       virtual AudioBaseInfo audioInfo() = 0;
@@ -102,7 +96,7 @@ class AudioEncoder : public AudioWriter {
   public: 
       AudioEncoder() = default;
       virtual ~AudioEncoder() = default;
-          virtual void setOutputStream(Print &out_stream) = 0;
+      virtual void setOutputStream(Print &out_stream) = 0;
       virtual void setAudioInfo(AudioBaseInfo info) = 0;
       virtual void begin() = 0;
       virtual void end() = 0;
@@ -150,15 +144,6 @@ class CodecNOP : public  AudioDecoder, public AudioEncoder {
 
 };
 
-/// stops any further processing by spinning in an endless loop
-void stop() {
-  #ifdef EXIT_ON_STOP
-  exit(0);
-  #else
-  while(true){
-    delay(1000);
-  }
-  #endif
-}
+
 
 }
