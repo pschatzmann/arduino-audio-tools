@@ -220,6 +220,11 @@ class I2SBase {
           case I2S_MSB_FORMAT:
           case I2S_LEFT_JUSTIFIED_FORMAT:
             return (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_MSB;
+          case I2S_PCM_LONG:
+            return (i2s_comm_format_t) I2S_COMM_FORMAT_PCM_LONG;
+          case I2S_PCM_SHORT:
+            return (i2s_comm_format_t) I2S_COMM_FORMAT_PCM_SHORT;
+
           default:
             LOGE("unsupported mode");
             return (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_I2S;

@@ -9,7 +9,6 @@
  */
 
 #include "AudioTools.h"
-#include "AudioExperiments.h"
 #include "ADS1X15.h"
 
 using namespace audio_tools;

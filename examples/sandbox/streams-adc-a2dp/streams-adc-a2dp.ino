@@ -11,9 +11,7 @@
 // Add this in your sketch or change the setting in AudioConfig.h
 #define USE_A2DP
 
-#include "Arduino.h"
 #include "AudioTools.h"
-#include "AudioA2DP.h"
 
 using namespace audio_tools;  
 

@@ -4,6 +4,18 @@
 
 namespace audio_tools {
 
+enum I2SFormat {
+  I2S_STD_FORMAT,
+  I2S_LSB_FORMAT,
+  I2S_MSB_FORMAT,
+  I2S_PHILIPS_FORMAT,
+  I2S_RIGHT_JUSTIFIED_FORMAT,
+  I2S_LEFT_JUSTIFIED_FORMAT,
+  I2S_PCM_LONG,
+  I2S_PCM_SHORT
+};
+
+
 /**
  * @brief configuration for all common i2s settings
  * @author Phil Schatzmann

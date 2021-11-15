@@ -12,7 +12,6 @@
 #define USE_SDFAT
 
 #include "AudioTools.h"
-#include "AudioA2DP.h"
 #include "AudioCodecs/CodecMP3Helix.h"
 
 using namespace audio_tools;  

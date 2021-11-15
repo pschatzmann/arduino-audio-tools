@@ -69,17 +69,21 @@ class CsvStream : public AudioPrint, public AudioBaseInfoDependent {
             this->active = active;
         }
 
+        // Starts the processing with 2 channels
         void begin(){
              LOGD(LOG_METHOD);
             this->active = true;
+            this->channels = 2;
         }
 
+        // Starts the processing with the number of channels defined in AudioBaseInfo
         void begin(AudioBaseInfo info){
              LOGD(LOG_METHOD);
             this->active = true;
             this->channels = info.channels;
         }
 
+        // Starts the processing with the defined number of channels 
         void begin(int channels, Print &out=Serial){
              LOGD(LOG_METHOD);
             this->channels = channels;
@@ -102,12 +106,14 @@ class CsvStream : public AudioPrint, public AudioBaseInfoDependent {
 
         virtual size_t write(const uint8_t* data, size_t len) {   
             if (!active) return 0;
-             LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             size_t lenChannels = len / (sizeof(T)*channels); 
             data_ptr = (T*)data;
             for (int j=0;j<lenChannels;j++){
                 for (int ch=0;ch<channels;ch++){
-                    out_ptr->print(*data_ptr);
+                    if (out_ptr!=nullptr && data_ptr!=nullptr){
+                        out_ptr->print(*data_ptr);
+                    }
                     data_ptr++;
                     if (ch<channels-1) Serial.print(", ");
                 }
@@ -140,6 +146,13 @@ class HexDumpStream : public AudioPrint {
         HexDumpStream(Print &out, int buffer_size=DEFAULT_BUFFER_SIZE, bool active=true) {
             this->out_ptr = &out;
             this->active = active;
+        }
+
+        void begin(AudioBaseInfo info){
+            LOGD(LOG_METHOD);
+            info.logInfo();
+            this->active = true;
+            pos = 0;
         }
 
         void begin(){

@@ -10,7 +10,6 @@
 #define USE_A2DP
 
 #include "AudioTools.h"
-#include "AudioA2DP.h"
 
 using namespace audio_tools;  
 

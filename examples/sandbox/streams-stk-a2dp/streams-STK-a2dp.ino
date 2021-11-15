@@ -10,10 +10,7 @@
 #define USE_A2DP
 #define USE_STK
 
-#include "Arduino.h"
 #include "AudioTools.h"
-#include "AudioSTK.h"
-#include "AudioA2DP.h"
 #include "Clarinet.h"
 
 using namespace audio_tools;  

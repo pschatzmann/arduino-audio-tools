@@ -295,6 +295,137 @@ class ConverterToInternalDACFormat : public  BaseConverter<T> {
         }
 };
 
+
+/**
+ * @brief Swap byte order
+ * 
+ * @tparam FromType 
+ * @tparam ToType 
+ */
+template<typename T>
+class ConverterSwapBytes : public BaseConverter<T> {
+    public:
+        ConverterSwapBytes(){
+        }
+
+        // The data is provided as int24_t tgt[][2] but  returned as int24_t
+        void convert(T (*src)[2], size_t size) override {
+            switch(sizeof(T)){
+                case 2:
+                    convert16(src,size);
+                    break;
+                case 3:
+                    convert24(src,size);
+                    break;
+                case 4:
+                    convert32(src,size);
+                    break;
+            }
+        }
+
+    protected:
+
+        // The data is provided as int24_t tgt[][2] but  returned as int24_t
+        void convert32(T (*src)[2], size_t size) {
+            for(int i=0; i < size; i++){
+                src[i][0] = swap32(src[i][0]);
+                src[i][1] = swap32(src[i][1]);
+            }
+        }
+
+        // The data is provided as int24_t tgt[][2] but  returned as int24_t
+        void convert24(T (*src)[2], size_t size) {
+            for(int i=0; i < size; i++){
+                src[i][0] = swap24(src[i][0]);
+                src[i][1] = swap24(src[i][1]);
+            }
+        }
+
+        // The data is provided as int24_t tgt[][2] but  returned as int24_t
+        void convert16(T (*src)[2], size_t size) {
+            for(int i=0; i < size; i++){
+                src[i][0] = swap16(src[i][0]);
+                src[i][1] = swap16(src[i][1]);
+            }
+        }
+
+        int32_t swap32(int32_t value) {
+            return ((value>>24)&0xff) | // move byte 3 to byte 0
+                ((value<<8)&0xff0000) | // move byte 1 to byte 2
+                ((value>>8)&0xff00) | // move byte 2 to byte 1
+                ((value<<24)&0xff000000); // byte 0 to byte 3
+        }
+
+        int24_t swap24(int24_t value) {
+            return ((value>>16)&0xff) | // move byte 2 to byte 0
+                ((value)&0xff00) | // keep byte 2 
+                ((value<<16)&0xff0000); // byte 0 to byte 2
+        }
+
+        int32_t swap16(int16_t value) {
+            return (value>>8) | (value<<8);
+        }
+};
+
+/**
+ * @brief Filter out unexpected values. We store the last 3 samples and if the
+ * 2nd sample is an outlier we replace it with the avarage of sample 1 and 3
+ * 
+ * @tparam T 
+ */
+template<typename T>
+class ConverterOutlierFilter : public BaseConverter<T> {
+    public:
+        ConverterOutlierFilter(uint32_t correctionLimit=100000000){
+            this->correctionLimit = correctionLimit;
+        }
+
+        // The data is provided as int24_t tgt[][2] but  returned as int24_t
+        virtual void convert(T (*src)[2], size_t size) override {
+            for (int j=0;j<size;j++){
+                processFrame(src[j]);
+            }
+        }
+
+    protected:
+        T last[3][2];
+        int8_t lastCount = 0;
+        uint32_t correctionLimit;
+        
+        // The data is provided as int24_t tgt[][2] but  returned as int24_t
+        void processFrame(T src[2]) {
+            if (lastCount<3){
+                // fill history buffer
+                last[lastCount][0] = src[0];
+                last[lastCount][1] = src[1];
+                src[0] = 0;
+                src[1] = 0;
+                lastCount++;
+            } else {
+                // update history buffer
+                last[0][0] = last[1][0];
+                last[0][1] = last[1][1];                
+                last[1][0] = last[2][0];
+                last[1][1] = last[2][1];                
+                last[2][0] = src[0];
+                last[2][1] = src[1];
+
+                // correct unexpected values
+                if (abs(last[1][0]-last[0][0]) > correctionLimit ){
+                    last[1][0] = (last[0][0] + last[2][0]) / 2;
+                }
+                // correct unexpected values
+                if (abs(last[1][1]-last[0][1]) > correctionLimit ){
+                    last[1][1] = (last[0][1] + last[2][1]) / 2;
+                }
+
+                src[0] = last[1][0]; 
+                src[1] = last[1][1]; 
+            }
+        }
+};
+
+
 /**
  * @brief Combines multiple converters
  * 
@@ -306,20 +437,35 @@ class MultiConverter : public BaseConverter<T> {
         MultiConverter(){
         }
 
+        MultiConverter(BaseConverter<T> &c1){
+            add(c1);
+        }
+
+        MultiConverter(BaseConverter<T> &c1, BaseConverter<T> &c2){
+            add(c1);
+            add(c2);
+        }
+
+        MultiConverter(BaseConverter<T> &c1, BaseConverter<T> &c2, BaseConverter<T> &c3){
+            add(c1);
+            add(c2);
+            add(c3);
+        }
+
         // adds a converter
         void add(BaseConverter<T> &converter){
-            converters.push_back(converter);
+            converters.push_back(&converter);
         }
 
         // The data is provided as int24_t tgt[][2] but  returned as int24_t
         void convert(T (*src)[2], size_t size) {
             for(int i=0; i < converters.size(); i++){
-                converters[i].convert(src);
+                converters[i]->convert(src, size);
             }
         }
 
     private:
-        Vector<T> converters;
+        Vector<BaseConverter<T>*> converters;
 
 };
 
@@ -349,7 +495,6 @@ class CallbackConverter {
         ToType (*convert_ptr)(FromType v);
 
 };
-
 
 
 /**
