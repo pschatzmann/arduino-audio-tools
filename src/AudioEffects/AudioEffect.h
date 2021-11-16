@@ -174,7 +174,6 @@ class Delay : public AudioEffect  {
         /// e.g. depthPercent=50, ms=1000, sampleRate=44100
         Delay(uint16_t &duration_ms, uint8_t& depthPercent,  uint32_t sampleRate=44100) {
             this->sampleRate = sampleRate;
-            this->sampleCount = sampleRate * duration_ms / 1000;
             p_percent = &depthPercent;
             p_ms = &duration_ms;
         }
