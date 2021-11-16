@@ -128,7 +128,7 @@ class Fuzz : public AudioEffect  {
 class Tremolo : public AudioEffect  {
     public:
         /// Tremolo constructor -  use e.g. duration_ms=2000; depth=0.5; sampleRate=44100
-        Tremolo(int16_t &duration_ms, float &depth, uint16_t sampleRate) {
+        Tremolo(int16_t &duration_ms, float &depth, uint16_t sampleRate=44100) {
             int32_t rate_count = static_cast<int32_t>(duration_ms) * sampleRate / 1000;
             rate_count_half = rate_count / 2;
             
@@ -162,6 +162,50 @@ class Tremolo : public AudioEffect  {
         float tremolo_depth;
         float signal_depth;
         float tremolo_factor ;
+
+};
+
+/**
+ * @brief Delay AudioEffect. We mix the actual signal with the delayed signal
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class Delay : public AudioEffect  {
+    public:
+        /// e.g. percent=50, ms=1000, sampleRate=44100
+        Delay(uint8_t& percent, uint16_t &ms, uint32_t sampleRate=44100) {
+            this->sampleRate = sampleRate;
+            p_percent = &percent;
+            p_ms = &ms;
+            sampleCount = sampleRate * ms / 1000;
+            p_history = new RingBuffer<effect_t>(sampleCount);
+        }
+
+        effect_t process(effect_t input) {
+            updateBufferSize();
+            // get value from buffer
+            int32_t value = (p_history->available()<sampleCount) ? input : p_history->read();
+            // add actual input value
+            p_history->write(input);
+            // mix input with result
+            return (value * (*p_percent) / 100) + (input * (100-(*p_percent))/100); 
+        }
+
+    protected:
+        RingBuffer<effect_t>* p_history=nullptr;
+        uint8_t* p_percent;
+        uint16_t *p_ms;
+        uint16_t sampleCount;
+        uint32_t sampleRate;
+
+        void updateBufferSize(){
+            uint16_t newSampleCount = sampleRate * (*p_ms) / 1000;
+            if (newSampleCount>sampleCount){
+                delete p_history;
+                sampleCount = newSampleCount;
+                p_history = new RingBuffer<effect_t>(sampleCount);
+            }
+        }
 
 };
 
