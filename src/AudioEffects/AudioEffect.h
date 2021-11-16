@@ -127,18 +127,19 @@ class Fuzz : public AudioEffect  {
 
 class Tremolo : public AudioEffect  {
     public:
-        /// Tremolo constructor -  use e.g. duration_ms=2000; depth=0.5; sampleRate=44100
-        Tremolo(int16_t &duration_ms, float &depth, uint16_t sampleRate=44100) {
-            int32_t rate_count = static_cast<int32_t>(duration_ms) * sampleRate / 1000;
+        /// Tremolo constructor -  use e.g. duration_ms=2000; depthPercent=50; sampleRate=44100
+        Tremolo(int16_t &duration_ms, uint8_t& depthPercent, uint32_t sampleRate=44100) {
+            int32_t rate_count = sampleRate * duration_ms / 1000;
             rate_count_half = rate_count / 2;
-            
-            // limit value to max 1.0
-            tremolo_depth = depth>1.0 ? 1.0 : depth;
-            signal_depth = 1.0 - depth;
+            p_percent = &depthPercent;
         }
 
         effect_t process(effect_t input) {
             if (!active()) return input;
+
+            // limit value to max 100% and calculate factors
+            float tremolo_depth = (*p_percent) > 100 ? 1.0 : 0.01 * (*p_percent);
+            float signal_depth = (100.0 - (*p_percent)) / 100.0;
 
             float tremolo_factor = tremolo_depth / rate_count_half;
             int32_t out = (signal_depth * input) + (tremolo_factor * count * input); 
@@ -159,9 +160,7 @@ class Tremolo : public AudioEffect  {
         int32_t count = 0;
         int16_t inc = 1;
         int32_t rate_count_half; // number of samples for on raise and fall
-        float tremolo_depth;
-        float signal_depth;
-        float tremolo_factor ;
+        uint8_t* p_percent;
 
 };
 
@@ -172,16 +171,17 @@ class Tremolo : public AudioEffect  {
  */
 class Delay : public AudioEffect  {
     public:
-        /// e.g. percent=50, ms=1000, sampleRate=44100
-        Delay(uint8_t& percent, uint16_t &ms, uint32_t sampleRate=44100) {
+        /// e.g. depthPercent=50, ms=1000, sampleRate=44100
+        Delay(uint16_t &duration_ms, uint8_t& depthPercent,  uint32_t sampleRate=44100) {
             this->sampleRate = sampleRate;
-            p_percent = &percent;
-            p_ms = &ms;
-            sampleCount = sampleRate * ms / 1000;
-            p_history = new RingBuffer<effect_t>(sampleCount);
+            this->sampleCount = sampleRate * duration_ms / 1000;
+            p_percent = &depthPercent;
+            p_ms = &duration_ms;
         }
 
         effect_t process(effect_t input) {
+            if (!active()) return input;
+
             updateBufferSize();
             // get value from buffer
             int32_t value = (p_history->available()<sampleCount) ? input : p_history->read();
@@ -195,13 +195,13 @@ class Delay : public AudioEffect  {
         RingBuffer<effect_t>* p_history=nullptr;
         uint8_t* p_percent;
         uint16_t *p_ms;
-        uint16_t sampleCount;
+        uint16_t sampleCount=0;
         uint32_t sampleRate;
 
         void updateBufferSize(){
             uint16_t newSampleCount = sampleRate * (*p_ms) / 1000;
             if (newSampleCount>sampleCount){
-                delete p_history;
+                if (p_history!=nullptr) delete p_history;
                 sampleCount = newSampleCount;
                 p_history = new RingBuffer<effect_t>(sampleCount);
             }
