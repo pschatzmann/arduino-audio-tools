@@ -157,6 +157,9 @@
 #define PIN_ADC1 34 
 #define PIN_ADC2 35
 
+#define I2S_AUTO_CLEAR true
+
+
 // URLStream
 #define URL_STREAM_CORE 0
 #define URL_STREAM_PRIORITY 2
