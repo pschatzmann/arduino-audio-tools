@@ -7,6 +7,7 @@
 
 #include "driver/i2s.h"
 #include "esp_a2dp_api.h"
+#include "esp_system.h"
 
 namespace audio_tools {
 
@@ -35,6 +36,7 @@ class I2SBase {
     /// starts the DAC 
     void begin(I2SConfig cfg) {
       LOGD(LOG_METHOD);
+      cfg.logInfo();
       this->cfg = cfg;
       this->i2s_num = (i2s_port_t) cfg.port_no; 
       setChannels(cfg.channels);
@@ -48,12 +50,13 @@ class I2SBase {
             .intr_alloc_flags = ESP_INTR_FLAG_LEVEL1, // default interrupt priority
             .dma_buf_count = I2S_BUFFER_COUNT,
             .dma_buf_len = I2S_BUFFER_SIZE,
-            .use_apll = I2S_USE_APLL,
-            .tx_desc_auto_clear = true // avoiding noise in case of data unavailability
+            .use_apll = cfg.use_apll,
+            .tx_desc_auto_clear = I2S_AUTO_CLEAR, 
+            .fixed_mclk = cfg.use_apll ? cfg.sample_rate * cfg.apll_frequency_factor : 0 
+
       };
       i2s_config = i2s_config_new;
-      logConfig();
-           
+
       // We make sure that we can reconfigure
       if (is_started) {
           end();
@@ -73,7 +76,6 @@ class I2SBase {
             .data_out_num = cfg.rx_tx_mode == TX_MODE ? cfg.pin_data : I2S_PIN_NO_CHANGE,
             .data_in_num = cfg.rx_tx_mode == RX_MODE ? cfg.pin_data : I2S_PIN_NO_CHANGE
         };
-        logConfigPins(pin_config);
 
         if (i2s_set_pin(i2s_num, &pin_config)!= ESP_OK){
             LOGE("%s - %s", __func__, "i2s_set_pin");
@@ -242,22 +244,6 @@ class I2SBase {
         mode = (i2s_mode_t) (cfg.rx_tx_mode ? I2S_MODE_DAC_BUILT_IN : I2S_MODE_ADC_BUILT_IN);
       }
       return mode;
-    }
-
-
-    void logConfig() {
-      LOGI("rx/tx mode: %s", cfg.rx_tx_mode == TX_MODE ? "TX":"RX");
-      LOGI("sample rate: %d", cfg.sample_rate);
-      LOGI("bits per sample: %d", cfg.bits_per_sample);
-      LOGI("number of channels: %d", cfg.channels);
-      LOGI("is_master: %s", cfg.is_master ? "Master":"Slave");
-      LOGI("mode: %d", cfg.i2s_format);
-    }
-
-    void logConfigPins(i2s_pin_config_t pin_config){
-      LOGI("pin bck_io_num: %d", cfg.pin_bck);
-      LOGI("pin ws_io_num: %d", cfg.pin_ws);
-      LOGI("pin data_num: %d", cfg.pin_data);
     }
 
 };
