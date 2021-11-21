@@ -16,7 +16,9 @@
 #include <SdFat.h>
 #endif
 
-
+// SD_FAT_TYPE = 0 for SdFat/File as defined in SdFatConfig.h,
+// 1 for FAT16/FAT32, 2 for exFAT, 3 for FAT16/FAT32 and exFAT.
+#define SD_FAT_TYPE 1
 // Try max SPI clock for an SD. Reduce SPI_CLOCK if errors occur. (40?)
 #define SPI_CLOCK SD_SCK_MHZ(50)
 // Max file name length including directory path
@@ -139,8 +141,24 @@ namespace audio_tools {
     typedef sdfat::FsFile AudioFile;
     typedef sdfat::SdFs AudioFs;
 #else
-    typedef FsFile AudioFile;
-    typedef SdFs AudioFs;
+#if SD_FAT_TYPE == 0
+	typedef SdFat AudioFs;
+	typedef File AudioDir;
+	typedef File AudioFile;
+#elif SD_FAT_TYPE == 1
+	typedef SdFat32 AudioFs;
+	typedef File32 AudioDir;
+	typedef File32 AudioFile;
+#elif SD_FAT_TYPE == 2
+	typedef SdExFat AudioFs;
+	typedef ExFile AudioDir;
+	typedef ExFile AudioFile;
+#elif SD_FAT_TYPE == 3
+	typedef SdFs AudioFs;
+	typedef FsFile AudioDir;
+	typedef FsFile AudioFile;
+#else  // SD_FAT_TYPE
+#endif
 #endif
 
 
