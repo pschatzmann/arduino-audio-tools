@@ -705,7 +705,6 @@ class TimerCallbackAudioStream : public BufferedStream, public AudioBaseInfoSour
             if (lastTimestamp>0u){
                 uint32_t diff = ms-lastTimestamp; 
                 if (diff>0){
-                    uint16_t bytes_per_sample = cfg.bits_per_sample/8;
                     uint16_t rate = 1 * 1000 / diff; 
 
                     if (currentRateValue==0){

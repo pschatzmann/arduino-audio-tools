@@ -78,7 +78,7 @@ class SoundGenerator  {
 
         virtual AudioBaseInfo defaultConfig(){
             AudioBaseInfo def;
-            def.bits_per_sample!=sizeof(T)*8;
+            def.bits_per_sample = sizeof(T)*8;
             def.channels = 1;
             def.sample_rate = 44100;
             return def;

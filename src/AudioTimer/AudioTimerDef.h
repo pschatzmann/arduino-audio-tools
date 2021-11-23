@@ -13,6 +13,7 @@ enum TimerFunction {DirectTimerCallback, TimerCallbackInThread, SimpleThreadLoop
  */
 class TimerAlarmRepeatingDef {
     public:
+        virtual  ~TimerAlarmRepeatingDef() = default;
         virtual bool begin(repeating_timer_callback_t callback_f, uint32_t time, TimeUnit unit = MS) = 0;
         virtual bool end() = 0;
 

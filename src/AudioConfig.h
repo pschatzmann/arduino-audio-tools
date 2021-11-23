@@ -175,6 +175,9 @@
 #if ESP_IDF_VERSION_MAJOR < 4 && !defined(I2S_COMM_FORMAT_STAND_I2S)
 # define I2S_COMM_FORMAT_STAND_I2S (I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_LSB)
 # define I2S_COMM_FORMAT_STAND_MSB (I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_MSB)
+typedef int eps32_i2s_sample_rate_type;
+#else
+typedef uint32_t eps32_i2s_sample_rate_type;
 #endif
 
 #endif
