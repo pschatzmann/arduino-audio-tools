@@ -52,7 +52,7 @@ class I2SBase {
             .dma_buf_len = I2S_BUFFER_SIZE,
             .use_apll = (bool) cfg.use_apll,
             .tx_desc_auto_clear = I2S_AUTO_CLEAR, 
-            .fixed_mclk = (eps32_i2s_sample_rate_type) (cfg.use_apll ? cfg.sample_rate * cfg.apll_frequency_factor : 0 )
+            .fixed_mclk = (int) (cfg.use_apll ? cfg.sample_rate * cfg.apll_frequency_factor : 0 )
 
       };
       i2s_config = i2s_config_new;
@@ -223,9 +223,9 @@ class I2SBase {
           case I2S_LEFT_JUSTIFIED_FORMAT:
             return (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_MSB;
           case I2S_PCM_LONG:
-            return (i2s_comm_format_t) I2S_COMM_FORMAT_PCM_LONG;
+            return (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_PCM_LONG;
           case I2S_PCM_SHORT:
-            return (i2s_comm_format_t) I2S_COMM_FORMAT_PCM_SHORT;
+            return (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_PCM_SHORT;
 
           default:
             LOGE("unsupported mode");
