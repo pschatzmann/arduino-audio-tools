@@ -1,4 +1,5 @@
 #pragma once
+#ifdef USE_URL_ARDUINO
 
 #include "AudioConfig.h"
 #include "AudioHttp/URLStreamESP32.h"
@@ -15,6 +16,8 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
+
+
 class ICYStreamDefault : public AbstractURLStream {
         
     public:
@@ -171,3 +174,4 @@ class ICYStream : public ICYStreamDefault {
 #endif
 
 } // namespace
+#endif
