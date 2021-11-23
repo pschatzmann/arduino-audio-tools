@@ -46,7 +46,7 @@ public:
   ModulationBaseClass() { srand(static_cast<unsigned>(time(0))); }
 
   ModulationBaseClass(effectsuite_t extSampRate) {
-    sampleRate = extSampRate;
+    this->sampleRate = extSampRate;
     timeStep = 1. / extSampRate;
     allocateMemory();
     // setInterpTable();
@@ -975,9 +975,10 @@ public:
    * delay buffer size when initialisi.
    */
   SimpleChorus() : SimpleLPF(0.0001, 4) {}
-  SimpleChorus(int extSampleRate=44100)
-      : ModulationBaseClass(extSampleRate),
-        DelayEffectBase(effectsuite_t(extSampleRate) * .031), SimpleLPF(0.0001, 4) {
+  SimpleChorus(int extSampleRate=44100) :
+        DelayEffectBase(static_cast<int>(0.031 * extSampleRate)), 
+        ModulationBaseClass(extSampleRate),
+        SimpleLPF(0.0001, 4) {
     swing = 0.005 * sampleRate;
     base = 0.015 * sampleRate;
     if (sampleRate != 0)

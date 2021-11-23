@@ -56,7 +56,7 @@ class MetaDataPrint : public AudioPrint {
     }
 
     virtual void end() {
-        if (callback!=nullptr & meta != nullptr) {
+        if (callback!=nullptr && meta != nullptr) {
             LOGD(LOG_METHOD);
             meta->end();
         }

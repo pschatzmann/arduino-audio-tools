@@ -21,6 +21,8 @@ const char *toStr(MetaDataType t){
  */
 class AbstractMetaData {
     public:
+        virtual  ~AbstractMetaData() = default;
+
         // defines the callback which provides the metadata information
         virtual void setCallback(void (*fn)(MetaDataType info, const char* str, int len)) = 0 ;
         // starts the processing
