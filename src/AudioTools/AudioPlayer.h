@@ -18,7 +18,9 @@
 
 // SD_FAT_TYPE = 0 for SdFat/File as defined in SdFatConfig.h,
 // 1 for FAT16/FAT32, 2 for exFAT, 3 for FAT16/FAT32 and exFAT.
+#ifndef SD_FAT_TYPE
 #define SD_FAT_TYPE 1
+#endif
 // Try max SPI clock for an SD. Reduce SPI_CLOCK if errors occur. (40?)
 #define SPI_CLOCK SD_SCK_MHZ(50)
 // Max file name length including directory path
