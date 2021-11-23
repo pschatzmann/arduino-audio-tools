@@ -169,6 +169,7 @@ namespace audio_tools {
      */
     class AudioSourceSdFat : public AudioSource {
     public:
+        /// Default constructor
         AudioSourceSdFat(const char* startFilePath = "/", const char* ext = ".mp3", int chipSelect = PIN_CS, int speedMHz = 2) {
             LOGD(LOG_METHOD);
             LOGI("SD chipSelect: %d", chipSelect);
@@ -180,6 +181,15 @@ namespace audio_tools {
             exension = ext;
         }
 
+        /// Costructor with SdSpiConfig
+        AudioSourceSdFat(const char* startFilePath, const char* ext, SdSpiConfig &config) {
+            LOGD(LOG_METHOD);
+            if (!sd.begin(config)) {
+                LOGE("SD.begin failed");
+            }
+            start_path = startFilePath;
+            exension = ext;
+        }
         virtual void begin() override {
             LOGD(LOG_METHOD);
             idx_pos = 0;
