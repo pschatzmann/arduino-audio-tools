@@ -59,6 +59,11 @@ namespace audio_tools {
             return selectStream(index);
         }
 
+        /// same as selectStream - I just prefer this name
+        virtual Stream* selectStream(char* path, char* fileName) {
+            return selectStream(path,fileName);
+        }
+
         /// Sets the timeout which is triggering to move to the next stream. - the default value is 500 ms
         virtual void setTimeoutAutoNext(int millisec) {
             timeout_auto_next_value = millisec;
@@ -149,7 +154,7 @@ namespace audio_tools {
 	typedef File AudioFile;
 #elif SD_FAT_TYPE == 1
 	typedef SdFat32 AudioFs;
-	typedef File32 AudioDir;
+	//typedef File32 AudioDir;
 	typedef File32 AudioFile;
 #elif SD_FAT_TYPE == 2
 	typedef SdExFat AudioFs;
@@ -205,9 +210,16 @@ namespace audio_tools {
         virtual Stream* selectStream(int index) override {
             idx_pos = index<0 ? 0 : index;
             file.close();
-            file = getFile(start_path, idx_pos);
+            file = getFileByPos(start_path, idx_pos);
             file.getName(file_name, MAX_FILE_LEN);
             LOGW("-> selectStream: %d '%s'", idx_pos, file_name);
+            return file ? &file : nullptr;
+        }
+
+        virtual Stream* selectStream(char* path, char* fileName) override {
+            file.close();
+            file = getFileByPath(path, fileName);
+            LOGW("-> selectStream: %s%s", path, fileName);
             return file ? &file : nullptr;
         }
 
@@ -251,7 +263,7 @@ namespace audio_tools {
         }
 
         /// Determines the file at the indicated index (starting with 0)
-        AudioFile getFile(const char* dirStr, int pos) {
+        AudioFile getFileByPos(const char* dirStr, int pos) {
             AudioFile dir;
             AudioFile result;
             if (sd.exists(dirStr)){
@@ -268,6 +280,31 @@ namespace audio_tools {
             LOGD("-> getFile: '%s': %d", file_name, pos);
             dir.close();
             return result;
+        }
+
+        AudioFile getFileByPath(char* path, char* fileName) {
+            AudioFile dir;
+            if (!dir.open(path)) {//("/21/" , "001.mp3")
+                LOGE("directory: %s not open", path);
+            }
+            else
+            {
+                if (!dir.isDir()) {
+                    LOGE("directory: %s is not dictory", path);
+                }
+                else
+                {
+                    if (!file.open(&dir, fileName, O_RDWR)) {
+                        LOGE("file: %s not open", path);
+                    }
+                    else
+                    {
+                        LOGD("-> getFileByPath: '%s': %d", path, fileName);
+                    }
+                }
+            }
+            dir.close();
+            return file;
         }
 
         /// Recursively walk the directory tree to find the file at the indicated pos.
@@ -308,6 +345,7 @@ namespace audio_tools {
                 }
             }
         }
+
     };
 
 #endif
@@ -605,6 +643,14 @@ namespace audio_tools {
             LOGD(LOG_METHOD);
             previous_stream = false;
             active = setStream(p_source->selectStream(idx));
+            return active;
+        }
+
+        /// moves to selected file
+        virtual bool setPath(char* path, char* fileName) {
+            LOGD(LOG_METHOD);
+            previous_stream = false;
+            active = setStream(p_source->selectStream(path, fileName));
             return active;
         }
 
