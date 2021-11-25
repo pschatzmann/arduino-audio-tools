@@ -202,6 +202,7 @@ class StreamCopyT {
 
         // blocking write - until everything is processed
         size_t write(size_t len, size_t &delayCount ){
+            if (buffer==nullptr) return 0;
             size_t total = 0;
             int retry = 0;
             while(total<len){

@@ -82,25 +82,20 @@ class ICYStreamDefault : public AbstractURLStream {
         virtual size_t readBytes(uint8_t* buffer, size_t len) override {
             size_t result = 0;
             if (icy.hasMetaData()){
-                CHECK_MEMORY();
-                // wait for data
-                while(url->available()<len){
-                    delay(100);
-                }    
-
-                // access using state engine
-                for (size_t j=0; j<len; j++){
-                    int ch = read();
-                    if (ch==-1){
-                        break;
+                // get data
+                int read = url->readBytes(buffer, len);
+                // remove metadata from data
+                int pos = 0;
+                for (int j=0; j<read; j++){
+                    icy.processChar(buffer[j]);
+                    if (icy.isData()){
+                        buffer[pos++] = buffer[j];
                     }
-                    result = j+1;
-                    buffer[j] = ch;
-                }
-                CHECK_MEMORY();
+                }    
+                result = pos;            
             } else {
-                 // fast access if there is no metadata
-                 result = url->readBytes(buffer, len);
+                // fast access if there is no metadata
+                result = url->readBytes(buffer, len);
             }
             LOGD("%s: %zu -> %zu", LOG_METHOD, len, result);
             return result;
@@ -116,6 +111,7 @@ class ICYStreamDefault : public AbstractURLStream {
         // Read character and processes using the MetaDataICY state engine
         virtual int read() override {
             int ch = -1;
+            if (url==nullptr) return -1;
 
             // get next data byte 
             do {
@@ -125,7 +121,6 @@ class ICYStreamDefault : public AbstractURLStream {
                 }
 
                 icy.processChar(ch);
-                //yield();
             } while (!icy.isData());
             return ch;
         }
