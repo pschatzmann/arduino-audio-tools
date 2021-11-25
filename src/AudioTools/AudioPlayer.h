@@ -728,6 +728,10 @@ namespace audio_tools {
                     // reset timeout
                     timeout = millis() + p_source->timeoutAutoNext();
                 }
+                else
+                {
+                    active = false;
+                }
                 // move to next stream after timeout
                 if (p_input_stream == nullptr || millis() > timeout) {
                     if (autonext) {
