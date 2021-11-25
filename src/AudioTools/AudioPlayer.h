@@ -596,19 +596,22 @@ namespace audio_tools {
             p_source->begin();
             meta_out.begin();
             
-            p_input_stream = p_source->selectStream(index);
-            if (p_input_stream != nullptr) {
-                if (meta_active) {
-                    copier.setCallbackOnWrite(decodeMetaData, this);
+            if (index > 0) {
+                p_input_stream = p_source->selectStream(index);
+                if (p_input_stream != nullptr) {
+                    if (meta_active) {
+                        copier.setCallbackOnWrite(decodeMetaData, this);
+                    }
+                    copier.begin(*p_out_decoding, *p_input_stream);
+                    timeout = millis() + p_source->timeoutAutoNext();
+                    active = isActive;
+                    result = true;
                 }
-                copier.begin(*p_out_decoding, *p_input_stream);
-                timeout = millis() + p_source->timeoutAutoNext();
-                active = isActive;
-                result = true;
-            }
-            else {
-                LOGW("-> begin: no data found");
-                active = isActive;
+                else {
+                    LOGW("-> begin: no data found");
+                    active = isActive;
+                    result = false;
+                }
             }
             return result;
         }
