@@ -5,6 +5,7 @@
 #include "AudioHttp/HttpLineReader.h" 
 #include "AudioHttp/Url.h"
 #include "AudioHttp/HttpTypes.h" 
+#include "Client.h"
 
 namespace audio_tools {
 
