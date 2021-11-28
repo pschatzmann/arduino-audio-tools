@@ -1,7 +1,6 @@
 #pragma once
 
 #include "AudioConfig.h"
-#ifdef USE_STK
 #include "AudioEffects/AudioEffect.h"
 #include "Effect.h"
 #include "Stk.h"
@@ -165,5 +164,3 @@ public:
 };
 
 } // namespace audio_tools
-
-#endif

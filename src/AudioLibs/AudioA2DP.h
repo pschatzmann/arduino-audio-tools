@@ -8,7 +8,6 @@
 #pragma once
 
 #include "AudioConfig.h"
-#ifdef USE_A2DP
 
 #include "AudioTools.h"
 #include "BluetoothA2DPSink.h"
@@ -383,9 +382,4 @@ class A2DPStream : public AudioStream, public AudioBaseInfoSource {
 
 };
 
-
-
-
 }
-
-#endif
