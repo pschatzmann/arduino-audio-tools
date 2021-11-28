@@ -222,7 +222,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 
 //----------------
 #ifdef ARDUINO_ARCH_RP2040
-#define USE_ESP8266_AUDIO
+//#define USE_ESP8266_AUDIO
 #define USE_I2S
 #define USE_PWM
 
@@ -234,6 +234,9 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define PIN_I2S_MUTE 4
 #define SOFT_MUTE_VALUE LOW  
 #define PIN_CS PIN_SPI0_SS
+
+#define IRAM_ATTR
+
 #endif
 
 //----------------

@@ -23,7 +23,7 @@ typedef void (* my_repeating_timer_callback_t )(void* obj);
 class TimerAlarmRepeatingRP2040 : public TimerAlarmRepeatingDef{
     public:
     
-        TimerAlarmRepeatingRP2040(){
+        TimerAlarmRepeatingRP2040(TimerFunction function=DirectTimerCallback, int id=0){
             alarm_pool_init_default();
             ap = alarm_pool_get_default();
         }

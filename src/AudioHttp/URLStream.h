@@ -6,6 +6,7 @@
 #ifdef ESP8266
 #include <ESP8266WiFi.h>
 #else 
+#include <Client.h>
 #include <WiFiClientSecure.h>
 #endif
 
