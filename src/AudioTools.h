@@ -27,11 +27,29 @@
 #include "AudioHttp/AudioHttp.h"
 #include "AudioTools/AudioPlayer.h"
 #include "AudioEffects/AudioEffects.h"
-#include "AudioLibs/AudioMozzi.h"
-#include "AudioLibs/AudioSTK.h"
-#include "AudioLibs/AudioESP8266.h"
-#include "AudioLibs/AudioA2DP.h"
 #include "AudioExperiments/AudioExperiments.h"
+
+/**
+ * ------------------------------------------------------------------------- 
+ * @brief Optional external libraries
+ * 
+ */
+
+#ifdef USE_MOZZI
+#include "AudioLibs/AudioMozzi.h"
+#endif
+
+#ifdef USE_STK
+#include "AudioLibs/AudioSTK.h"
+#endif
+
+#ifdef USE_ESP8266_AUDIO
+#include "AudioLibs/AudioESP8266.h"
+#endif
+
+#ifdef USE_A2DP
+#include "AudioLibs/AudioA2DP.h"
+#endif
 
 
 /**

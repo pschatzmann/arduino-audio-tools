@@ -1,7 +1,6 @@
 #pragma once
 
 #include "AudioConfig.h"
-#ifdef USE_ESP8266_AUDIO
 #include "AudioTools.h"
 #include "AudioOutput.h"
 #include "SoundData.h"
@@ -67,4 +66,3 @@ class AudioOutputWithCallback : public AudioOutput, public BufferedStream {
 
 }
 
-#endif
