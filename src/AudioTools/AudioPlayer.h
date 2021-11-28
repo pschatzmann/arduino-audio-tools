@@ -59,9 +59,9 @@ namespace audio_tools {
             return selectStream(index);
         }
 
-        /// same as selectStream - I just prefer this name
-        virtual Stream* selectStream(char* path, char* fileName) {
-            return selectStream(path,fileName);
+        /// Returns audio stream by path
+        virtual Stream* selectStream(char* path) {
+            return selectStream(path);
         }
 
         /// Sets the timeout which is triggering to move to the next stream. - the default value is 500 ms
@@ -216,10 +216,10 @@ namespace audio_tools {
             return file ? &file : nullptr;
         }
 
-        virtual Stream* selectStream(char* path, char* fileName) override {
+        virtual Stream* selectStream(char* path) override {
             file.close();
-            file = getFileByPath(path, fileName);
-            LOGW("-> selectStream: %s%s", path, fileName);
+            file = getFileByPath(path);
+            LOGW("-> selectStream: %s", path);
             return file ? &file : nullptr;
         }
 
@@ -282,9 +282,15 @@ namespace audio_tools {
             return result;
         }
 
-        AudioFile getFileByPath(char* path, char* fileName) {
+        AudioFile getFileByPath(char* path) {
             AudioFile dir;
-            if (!dir.open(path)) {//("/21/" , "001.mp3")
+            Str inPath(path);
+            StrExt strPath;
+            StrExt strfileName;
+            int pos = inPath.lastIndexOf("/") + 1;
+            strPath.substring(path, 0, pos);
+            strfileName.substring(path, pos, inPath.length());
+            if (!dir.open(strPath.c_str())) {//("/21/" , "001.mp3")
                 LOGE("directory: %s not open", path);
             }
             else
@@ -294,12 +300,12 @@ namespace audio_tools {
                 }
                 else
                 {
-                    if (!file.open(&dir, fileName, O_RDWR)) {
+                    if (!file.open(&dir, strfileName.c_str(), O_RDWR)) {
                         LOGE("file: %s not open", path);
                     }
                     else
                     {
-                        LOGD("-> getFileByPath: '%s': %d", path, fileName);
+                        LOGD("-> getFileByPath: '%s': %d", path, strfileName.c_str());
                     }
                 }
             }
@@ -413,6 +419,15 @@ namespace audio_tools {
             }
             LOGI("previousStream: %d/%d -> %s", pos, max-1, urlArray[pos]);
             return selectStream(pos);
+        }
+
+        /// Opens the selected url
+        Stream* selectStream(char* path) override {
+            LOGI("selectStream: %s", path);
+            if (started) actual_stream->end();
+            actual_stream->begin(path, mime);
+            started = true;
+            return actual_stream;
         }
 
         int index() {
@@ -581,19 +596,22 @@ namespace audio_tools {
             p_source->begin();
             meta_out.begin();
             
-            p_input_stream = p_source->selectStream(index);
-            if (p_input_stream != nullptr) {
-                if (meta_active) {
-                    copier.setCallbackOnWrite(decodeMetaData, this);
+            if (index >= 0) {
+                p_input_stream = p_source->selectStream(index);
+                if (p_input_stream != nullptr) {
+                    if (meta_active) {
+                        copier.setCallbackOnWrite(decodeMetaData, this);
+                    }
+                    copier.begin(*p_out_decoding, *p_input_stream);
+                    timeout = millis() + p_source->timeoutAutoNext();
+                    active = isActive;
+                    result = true;
                 }
-                copier.begin(*p_out_decoding, *p_input_stream);
-                timeout = millis() + p_source->timeoutAutoNext();
-                active = isActive;
-                result = true;
-            }
-            else {
-                LOGW("-> begin: no data found");
-                active = isActive;
+                else {
+                    LOGW("-> begin: no data found");
+                    active = isActive;
+                    result = false;
+                }
             }
             return result;
         }
@@ -647,10 +665,10 @@ namespace audio_tools {
         }
 
         /// moves to selected file
-        virtual bool setPath(char* path, char* fileName) {
+        virtual bool setPath(char* path) {
             LOGD(LOG_METHOD);
             previous_stream = false;
-            active = setStream(p_source->selectStream(path, fileName));
+            active = setStream(p_source->selectStream(path));
             return active;
         }
 
@@ -712,6 +730,10 @@ namespace audio_tools {
                 if (copier.copy() || timeout == 0) {
                     // reset timeout
                     timeout = millis() + p_source->timeoutAutoNext();
+                }
+                else
+                {
+                    active = false;
                 }
                 // move to next stream after timeout
                 if (p_input_stream == nullptr || millis() > timeout) {

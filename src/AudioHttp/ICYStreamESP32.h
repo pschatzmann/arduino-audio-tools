@@ -8,6 +8,11 @@ namespace audio_tools {
 
 /**
  * @brief ICYStream implementation for the ESP32 based on a FreeRTOS task 
+ * This is a Icecast/Shoutcast Audio Stream which splits the data into metadata and audio data. The Audio data is provided via the
+ * regular stream functions. The metadata is handled with the help of the MetaDataICY state machine and provided via a callback method.
+ * 
+ * This is basically just a URLStream with the metadata turned on.
+ * 
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
