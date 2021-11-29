@@ -596,7 +596,7 @@ namespace audio_tools {
             p_source->begin();
             meta_out.begin();
             
-            if (index >= 0) {
+            if (index > 0) {
                 p_input_stream = p_source->selectStream(index);
                 if (p_input_stream != nullptr) {
                     if (meta_active) {
