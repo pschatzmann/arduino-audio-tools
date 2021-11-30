@@ -4,7 +4,9 @@
 #include "AudioTools/Vector.h"
 #include "AudioEffects/AudioEffect.h"
 #include "AudioEffects/AudioEffectsSuite.h"
+#ifdef  USE_STK
 #include "AudioEffects/STKEffects.h"
+#endif
 
 namespace audio_tools {
 
