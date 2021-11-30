@@ -290,7 +290,7 @@ namespace audio_tools {
             int pos = inPath.lastIndexOf("/") + 1;
             strPath.substring(path, 0, pos);
             strfileName.substring(path, pos, inPath.length());
-            if (!dir.open(strPath.c_str())) {//("/21/" , "001.mp3")
+            if (!dir.open(strPath.c_str())) {
                 LOGE("directory: %s not open", path);
             }
             else
@@ -305,7 +305,7 @@ namespace audio_tools {
                     }
                     else
                     {
-                        LOGD("-> getFileByPath: '%s': %d", path, strfileName.c_str());
+                        LOGD("-> getFileByPath: %s , %s", strPath.c_str(), strfileName.c_str());
                     }
                 }
             }
@@ -612,6 +612,11 @@ namespace audio_tools {
                     active = isActive;
                     result = false;
                 }
+            }
+            else {
+                LOGW("-> begin: no stream selected");
+                active = isActive;
+                result = false;
             }
             return result;
         }
