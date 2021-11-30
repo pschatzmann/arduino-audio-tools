@@ -290,7 +290,7 @@ namespace audio_tools {
             int pos = inPath.lastIndexOf("/") + 1;
             strPath.substring(path, 0, pos);
             strfileName.substring(path, pos, inPath.length());
-            if (!dir.open(strPath.c_str())) {//("/21/" , "001.mp3")
+            if (!dir.open(strPath.c_str())) {
                 LOGE("directory: %s not open", path);
             }
             else
@@ -305,7 +305,7 @@ namespace audio_tools {
                     }
                     else
                     {
-                        LOGD("-> getFileByPath: '%s': %d", path, strfileName.c_str());
+                        LOGD("-> getFileByPath: %s , %s", strPath.c_str(), strfileName.c_str());
                     }
                 }
             }
@@ -613,6 +613,11 @@ namespace audio_tools {
                     result = false;
                 }
             }
+            else {
+                LOGW("-> begin: no stream selected");
+                active = isActive;
+                result = false;
+            }
             return result;
         }
 
@@ -730,10 +735,6 @@ namespace audio_tools {
                 if (copier.copy() || timeout == 0) {
                     // reset timeout
                     timeout = millis() + p_source->timeoutAutoNext();
-                }
-                else
-                {
-                    active = false;
                 }
                 // move to next stream after timeout
                 if (p_input_stream == nullptr || millis() > timeout) {
