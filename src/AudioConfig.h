@@ -135,13 +135,15 @@
 
 #ifdef ESP32
 #include "esp32-hal-log.h"
-#define USE_A2DP
+// optional libraries
+//#define USE_A2DP
+//#define USE_ESP8266_AUDIO
+
 #define USE_PWM
 #define USE_URL_ARDUINO
 #define USE_I2S
 #define USE_AUDIO_SERVER
 #define USE_URLSTREAM_TASK
-//#define USE_ESP8266_AUDIO
 
 #define PWM_FREQENCY 30000
 #define PWM_START_PIN 12
@@ -158,7 +160,6 @@
 #define PIN_ADC2 35
 
 #define I2S_AUTO_CLEAR true
-
 
 // URLStream
 #define URL_STREAM_CORE 0
