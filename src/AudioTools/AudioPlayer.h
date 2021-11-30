@@ -754,6 +754,10 @@ namespace audio_tools {
                             }
                         }
                     }
+                    else
+                    {
+                        active = false;
+                    }
                     timeout = millis() + p_source->timeoutAutoNext();
                 }
             }
