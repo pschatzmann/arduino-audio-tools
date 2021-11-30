@@ -1,6 +1,6 @@
 #pragma once
 
-#if defined(__arm__)  && __has_include("mbed.h")
+#if defined(__arm__)  && __has_include("mbed.h") 
 #include "AudioTimer/AudioTimerDef.h"
 #include "mbed.h"
 
@@ -8,7 +8,7 @@ namespace audio_tools {
 
 class TimerAlarmRepeatingMBED;
 TimerAlarmRepeatingMBED *timerAlarmRepeating = nullptr;
-typedef void (* repeating_timer_callback_t )(void* obj);
+//typedef void (* repeating_timer_callback_t )(void* obj);
 
 /**
  * @brief Repeating Timer functions for repeated execution: Plaease use the typedef TimerAlarmRepeating
@@ -20,7 +20,7 @@ typedef void (* repeating_timer_callback_t )(void* obj);
 class TimerAlarmRepeatingMBED : public TimerAlarmRepeatingDef {
     public:
     
-        TimerAlarmRepeatingMBED(){
+        TimerAlarmRepeatingRP2040(TimerFunction function=DirectTimerCallback, int id=0){
             timerAlarmRepeating = this;
         }
 
