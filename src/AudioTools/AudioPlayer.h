@@ -142,8 +142,8 @@ namespace audio_tools {
     };
 
 #ifdef USE_SDFAT
-#ifdef ARDUINO_ARCH_RP2040
-    // RP2040 is using the library with a sdfat namespace
+#if defined(ARDUINO_ARCH_RP2040) && !defined(PICO)
+    // only RP2040 from Earle Phil Hower is using the library with a sdfat namespace
     typedef sdfat::SdSpiConfig SdSpiConfig;
     typedef sdfat::FsFile AudioFile;
     typedef sdfat::SdFs AudioFs;
