@@ -181,9 +181,8 @@ namespace audio_tools {
             LOGD(LOG_METHOD);
             LOGI("SD chipSelect: %d", chipSelect);
             LOGI("SD speedMHz: %d", speedMHz);
-            if (!sd.begin(SdSpiConfig(chipSelect, DEDICATED_SPI, SD_SCK_MHZ(speedMHz)))) {
-                LOGE("SD.begin failed");
-            }
+            p_cfg = new SdSpiConfig(chipSelect, DEDICATED_SPI, SD_SCK_MHZ(speedMHz));
+            owns_cfg = true;
             start_path = startFilePath;
             exension = ext;
         }
@@ -191,14 +190,23 @@ namespace audio_tools {
         /// Costructor with SdSpiConfig
         AudioSourceSdFat(const char* startFilePath, const char* ext, SdSpiConfig &config) {
             LOGD(LOG_METHOD);
-            if (!sd.begin(config)) {
-                LOGE("SD.begin failed");
-            }
+            p_cfg = &config;
+            owns_cfg = false;
             start_path = startFilePath;
             exension = ext;
         }
+
+        virtual ~AudioSourceSdFat(){
+            if (p_cfg!=nullptr && owns_cfg){
+                delete p_cfg;
+            }
+        }
+
         virtual void begin() override {
             LOGD(LOG_METHOD);
+            if (!sd.begin(*p_cfg)) {
+                LOGE("SD.begin failed!");
+            }
             idx_pos = 0;
         }
 
@@ -245,6 +253,8 @@ namespace audio_tools {
 
     protected:
         AudioFile file;
+        SdSpiConfig *p_cfg = nullptr;
+        bool owns_cfg=false;
         AudioFs sd;
         size_t idx_pos = 0;
         char file_name[MAX_FILE_LEN];
