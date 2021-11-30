@@ -197,6 +197,7 @@ namespace audio_tools {
         }
 
         virtual ~AudioSourceSdFat(){
+            LOGD(LOG_METHOD);
             if (p_cfg!=nullptr && owns_cfg){
                 delete p_cfg;
             }
