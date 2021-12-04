@@ -307,10 +307,14 @@ namespace audio_tools {
             if (sd.exists(dirStr)){
                 LOGI("directory: '%s'", dirStr);
                 if (dir.open(dirStr)){
-                    size_t count = 0;
-                    getFileAtIndex(dir, pos, count, result);
-                    result.getName(file_name, MAX_FILE_LEN);
-                    LOGD("-> getFile: '%s': %d", file_name, pos);
+                    if (dir.isDir()) {
+                        size_t count = 0;
+                        getFileAtIndex(dir, pos, count, result);
+                        result.getName(file_name, MAX_FILE_LEN);
+                        LOGD("-> getFile: '%s': %d", file_name, pos);
+                    } else {
+                        LOGE("'%s' is not a directory!", dirStr);
+                    }
                 } else {
                     LOGE("Could not open direcotry: '%s'", dirStr);
                 }
@@ -327,10 +331,6 @@ namespace audio_tools {
             char file_name_act[MAX_FILE_LEN];
             dir.getName(file_name_act, MAX_FILE_LEN);
             LOGD("-> processing directory: %s ", file_name_act);
-            if (!dir.isDir()) {
-                LOGE("'%s' is not a directory!", file_name_act);
-                return;
-            }
             AudioFile file;
             dir.rewind();
             while (!result && file.openNext(&dir, O_RDONLY)) {
