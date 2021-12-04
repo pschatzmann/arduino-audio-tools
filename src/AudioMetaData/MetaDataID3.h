@@ -320,6 +320,7 @@ class MetaDataID3V2 : public MetaDataID3Base  {
         use_bytes_of_next_write = 0;
         actual_tag = nullptr;
         tag_active = false;
+        tag_processed = false;
     }
     
 
@@ -329,6 +330,7 @@ class MetaDataID3V2 : public MetaDataID3Base  {
         use_bytes_of_next_write = 0;
         actual_tag = nullptr;
         tag_active = false;
+        tag_processed = false;
     }
 
     /// provide the (partial) data which might contain the meta data
@@ -526,17 +528,20 @@ class MetaDataID3 : public AbstractMetaData {
     }
 
     void begin() {
+        LOGI(LOG_METHOD);
         id3v1.begin();
         id3v2.begin();
     }
 
     void end() {
+        LOGI(LOG_METHOD);
         id3v1.end();
         id3v2.end();
     }
 
     /// Provide tha audio data to the API to parse for Meta Data
     virtual size_t write(const uint8_t *data, size_t length){
+        LOGD(LOG_METHOD);
         id3v1.write(data, length);
         id3v2.write(data, length);
         return length;
@@ -546,7 +551,6 @@ class MetaDataID3 : public AbstractMetaData {
   protected:
     MetaDataID3V1 id3v1;
     MetaDataID3V2 id3v2;
-
 };
 
 } // namespace
