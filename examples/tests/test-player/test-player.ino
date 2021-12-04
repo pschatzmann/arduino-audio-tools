@@ -30,15 +30,17 @@ void testUrl(){
     Serial.println("--------------------------");
 }
 
-const char *startFilePath="/test";
+const char *startFilePath="/";
 const char* ext="mp3";
-AudioSourceSdFat sdsource(startFilePath, ext);
+AudioSourceSdFat sdSource(startFilePath, ext);
 
 void testSD() {
-    sdSource.setPath("test")
+    sdSource.setPath("/");
+    sdSource.begin();
+
     for (int j=-5;j<20;j++){
-        Stream *out = sdsource.selectStream(j);
-        Serial.printf("%d -> %d / %s \n", j, sdsource.index(), sdsource.toStr());
+        Stream *out = sdSource.selectStream(j);
+        Serial.printf("%d -> %d / %s \n", j, sdSource.index(), sdSource.toStr());
         if (out!=nullptr){
           assert(out->available()>0);
         }
@@ -47,11 +49,11 @@ void testSD() {
 }
 
 void testSDNext() {
-    sdSource.setPath("test")
-    sdsource.begin();
+    sdSource.setPath("/");
+    sdSource.begin();
     for (int j=0;j<20;j++){
-        Stream *out = sdsource.nextStream(1);
-        Serial.printf("%d -> %d / %s \n", j, sdsource.index(), sdsource.toStr());
+        Stream *out = sdSource.nextStream(1);
+        Serial.printf("%d -> %d / %s \n", j, sdSource.index(), sdSource.toStr());
         if (out!=nullptr){
           assert(out->available()>0);
         }

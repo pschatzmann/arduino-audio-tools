@@ -145,24 +145,19 @@ namespace audio_tools {
 #if defined(ARDUINO_ARCH_RP2040) && !defined(PICO)
     // only RP2040 from Earle Phil Hower is using the library with a sdfat namespace
     typedef sdfat::SdSpiConfig SdSpiConfig;
-    typedef sdfat::FsFile AudioFile;
     typedef sdfat::SdFs AudioFs;
 #else
 #if SD_FAT_TYPE == 0
 	typedef SdFat AudioFs;
-	typedef File AudioDir;
 	typedef File AudioFile;
 #elif SD_FAT_TYPE == 1
 	typedef SdFat32 AudioFs;
-	//typedef File32 AudioDir;
 	typedef File32 AudioFile;
 #elif SD_FAT_TYPE == 2
 	typedef SdExFat AudioFs;
-	typedef ExFile AudioDir;
 	typedef ExFile AudioFile;
 #elif SD_FAT_TYPE == 3
 	typedef SdFs AudioFs;
-	typedef FsFile AudioDir;
 	typedef FsFile AudioFile;
 #else  // SD_FAT_TYPE
 #endif
@@ -181,6 +176,7 @@ namespace audio_tools {
             LOGD(LOG_METHOD);
             LOGI("SD chipSelect: %d", chipSelect);
             LOGI("SD speedMHz: %d", speedMHz);
+            LOGI("ext: %s", ext);
             p_cfg = new SdSpiConfig(chipSelect, DEDICATED_SPI, SD_SCK_MHZ(speedMHz));
             owns_cfg = true;
             start_path = startFilePath;
@@ -196,6 +192,7 @@ namespace audio_tools {
             exension = ext;
         }
 
+        /// Destructor
         virtual ~AudioSourceSdFat(){
             LOGD(LOG_METHOD);
             if (p_cfg!=nullptr && owns_cfg){
@@ -252,6 +249,11 @@ namespace audio_tools {
             return true;
         };
 
+        /// Allows to "correct" the start path if not defined in the constructor
+        virtual void setPath(const char* p) {
+            start_path = p;
+        }
+
     protected:
         AudioFile file;
         SdSpiConfig *p_cfg = nullptr;
@@ -273,26 +275,6 @@ namespace audio_tools {
             return result;
         }
 
-        /// Determines the file at the indicated index (starting with 0)
-        AudioFile getFileByPos(const char* dirStr, int pos) {
-            AudioFile dir;
-            AudioFile result;
-            if (sd.exists(dirStr)){
-                LOGI("directory: %s", dirStr);
-            } else {
-                LOGE("directory: %s does not exist", dirStr);
-                stop();
-            }
-
-            dir.open(dirStr);
-            size_t count = 0;
-            getFileAtIndex(dir, pos, count, result);
-            result.getName(file_name, MAX_FILE_LEN);
-            LOGD("-> getFile: '%s': %d", file_name, pos);
-            dir.close();
-            return result;
-        }
-
         AudioFile getFileByPath(char* path) {
             AudioFile dir;
             Str inPath(path);
@@ -303,19 +285,13 @@ namespace audio_tools {
             strfileName.substring(path, pos, inPath.length());
             if (!dir.open(strPath.c_str())) {
                 LOGE("directory: %s not open", path);
-            }
-            else
-            {
+            } else {
                 if (!dir.isDir()) {
                     LOGE("directory: %s is not dictory", path);
-                }
-                else
-                {
+                } else {
                     if (!file.open(&dir, strfileName.c_str(), O_RDWR)) {
                         LOGE("file: %s not open", path);
-                    }
-                    else
-                    {
+                    } else{
                         LOGD("-> getFileByPath: %s , %s", strPath.c_str(), strfileName.c_str());
                     }
                 }
@@ -324,47 +300,63 @@ namespace audio_tools {
             return file;
         }
 
-        /// Recursively walk the directory tree to find the file at the indicated pos.
-        void getFileAtIndex(AudioFile dir, size_t pos, size_t& idx, AudioFile& result) {
-            LOGD("%s: %d", LOG_METHOD, idx);
-            AudioFile file;
-            if (idx > pos) return;
-
-            bool found = false;
-            while (!found && file.openNext(&dir, O_RDONLY )) {
-                //if (idx > pos) return;
-
-                // close all files except result
-                char file_name_act[MAX_FILE_LEN];
-                file.getName(file_name_act, MAX_FILE_LEN);
-                LOGD("-> processing: %s with index %d", file_name_act, idx);
-                if (!file.isHidden()) {
-                    if (!file.isDir()) {
-                        if (isValidAudioFile(file)) {
-                            if (idx == pos) {
-                                found = true;
-                                result = file;
-                                result.getName(file_name, MAX_FILE_LEN);
-                                LOGI("==> found: '%s' at index %d", file_name, idx);
-                            }
-                            idx++;
-                        }
-                    } else {
-                        // process subdirectory
-                        getFileAtIndex(file, pos, idx, result);
-                    }
-
-                    if (!Str(file_name_act).equals(file_name)) {
-                        file.getName(file_name, MAX_FILE_LEN);
-                        file.close();
-                        LOGD("-> close: '%s'", file_name);
-                    }  
+        /// Determines the file at the indicated index (starting with 0)
+        AudioFile getFileByPos(const char* dirStr, int pos) {
+            AudioFile dir;
+            AudioFile result;
+            if (sd.exists(dirStr)){
+                LOGI("directory: '%s'", dirStr);
+                if (dir.open(dirStr)){
+                    size_t count = 0;
+                    getFileAtIndex(dir, pos, count, result);
+                    result.getName(file_name, MAX_FILE_LEN);
+                    LOGD("-> getFile: '%s': %d", file_name, pos);
+                } else {
+                    LOGE("Could not open direcotry: '%s'", dirStr);
                 }
+            } else {
+                LOGE("directory: '%s' does not exist", dirStr);
             }
+
+            dir.close();
+            return result;
         }
 
-    };
+        void getFileAtIndex(AudioFile dir, size_t pos, size_t& idx, AudioFile& result) {
+            LOGD("%s: %d", LOG_METHOD, idx);
+            char file_name_act[MAX_FILE_LEN];
+            dir.getName(file_name_act, MAX_FILE_LEN);
+            LOGD("-> processing directory: %s ", file_name_act);
+            if (!dir.isDir()) {
+                LOGE("'%s' is not a directory!", file_name_act);
+                return;
+            }
+            AudioFile file;
+            dir.rewind();
+            while (!result && file.openNext(&dir, O_RDONLY)) {
+                // indent for dir level
+                if (!file.isHidden()) {
+                    file.getName(file_name_act, MAX_FILE_LEN);
+                    LOGD("-> processing: %s with index %d", file_name_act, idx);
 
+                    if (isValidAudioFile(file)){
+                        if (idx == pos) {
+                            result = file;
+                            result.getName(file_name, MAX_FILE_LEN);
+                            LOGI("==> found: '%s' at index %d", file_name, idx);
+                        }
+                        idx++;                        
+                    }
+
+                    if (file.isDir()) {
+                        getFileAtIndex(file, pos, idx, result);
+                    }
+                }
+                file.close();
+            }
+            return;
+        }
+    };
 #endif
 
 
@@ -722,8 +714,7 @@ namespace audio_tools {
                     volume_out.setVolume(volume);
                     current_volume = volume;
                 }
-            }
-            else {
+            } else {
                 LOGE("setVolume value '%f' out of range (0.0 -1.0)", volume);
             }
         }
@@ -756,17 +747,14 @@ namespace audio_tools {
                             if (!next(1)) {
                                 LOGD("stream is null");
                             }
-                        }
-                        else {
+                        } else {
                             LOGW("-> timeout - moving to previous stream");
                             // open previous stream
                             if (!previous(1)) {
                                 LOGD("stream is null");
                             }
                         }
-                    }
-                    else
-                    {
+                    } else {
                         active = false;
                     }
                     timeout = millis() + p_source->timeoutAutoNext();
