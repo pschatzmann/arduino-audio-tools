@@ -339,8 +339,8 @@ struct ConfigES8388 : public I2SConfig {
   int pin_i2c_sda = I2C_MASTER_SDA_IO;
 
   // Define final input or output device
-  es_adc_input_t input_config = ADC_INPUT_MIC1; // or ADC_INPUT_MIC2
-  es_codec_dac_output_t output_config = DAC_OUTPUT_ALL;
+  es_adc_input_t input_device = ADC_INPUT_MIC1; // or ADC_INPUT_MIC2
+  es_codec_dac_output_t output_device = DAC_OUTPUT_ALL;
   es_i2s_clock_t *clock_config = nullptr;
 
   bool is_headphone_detection = false;
@@ -429,11 +429,11 @@ class AudioKitStream : public AudioStream {
       LOGE("Error: setFormat failed");
     }
     if (cfg.rx_tx_mode == RX_MODE) {
-      if (!configAdcInput(cfg.input_config)) {
+      if (!configAdcInput(cfg.input_device)) {
         LOGE("Error: configAdcInput failed");
       }
     } else {
-      if (!configDacOutput(cfg.output_config)) {
+      if (!configDacOutput(cfg.output_device)) {
         LOGE("Error: configDacOutput failed");
       }
     }

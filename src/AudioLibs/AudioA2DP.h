@@ -190,7 +190,7 @@ class A2DPStream : public AudioStream, public AudioBaseInfoSource {
             bool isBufferFull = true;
             while(isBufferFull){
                 lockSemaphore(true);
-                isBufferFull = a2dp_buffer->availableToWrite()<len;
+                isBufferFull = a2dp_buffer->availableForWrite()<len;
                 lockSemaphore(false);
 
                // we wait until the buffer is full
@@ -251,8 +251,8 @@ class A2DPStream : public AudioStream, public AudioBaseInfoSource {
             return a2dp_buffer==nullptr ? 0 : a2dp_buffer->available();
         }
 
-        virtual int availableToWrite() {
-            return a2dp_buffer==nullptr ? 0 : a2dp_buffer->availableToWrite();
+        virtual int availableForWrite() {
+            return a2dp_buffer==nullptr ? 0 : a2dp_buffer->availableForWrite();
         }
 
         virtual void setVolume(float volume){
@@ -311,7 +311,7 @@ class A2DPStream : public AudioStream, public AudioBaseInfoSource {
             if (is_a2dp_active) {
                 if (A2DPStream_self->lockSemaphore(true)) {
                     isAvailable = a2dp_buffer->available()>0;
-                    LOGD("buffer: %d, free %d",a2dp_buffer->available(), a2dp_buffer->availableToWrite() )
+                    LOGD("buffer: %d, free %d",a2dp_buffer->available(), a2dp_buffer->availableForWrite() )
                     isLocked = true;
                 } else {
                     LOGE("lock failed");
