@@ -1,5 +1,9 @@
 var searchData=
 [
-  ['output_5fbits_0',['output_bits',['../classaudio__tools_1_1_d_a_c_info.html#a88b046591d225a7bcae41394a4d10fd4',1,'audio_tools::DACInfo']]],
-  ['oversample_5ffactor_1',['oversample_factor',['../classaudio__tools_1_1_d_a_c_info.html#a5f50c97bedb7ba6687c81c358ba47f17',1,'audio_tools::DACInfo']]]
+  ['maxdelaybuffersize_1171',['maxDelayBufferSize',['../classaudio__tools_1_1_delay_effect_base.html#a36d6978a7086bf5eb839adc38098bf12',1,'audio_tools::DelayEffectBase']]],
+  ['metadatatypestr_1172',['MetaDataTypeStr',['../namespaceaudio__tools.html#aac1ba19eec6b8d105157181ed0ea7254',1,'audio_tools']]],
+  ['modmax_1173',['modMax',['../classaudio__tools_1_1_simple_chorus.html#afc9230308185b8f3c77b8054ebc69f72',1,'audio_tools::SimpleChorus']]],
+  ['modmin_1174',['modMin',['../classaudio__tools_1_1_simple_chorus.html#a252b66995f6489a5188a5d4c2fad2926',1,'audio_tools::SimpleChorus']]],
+  ['modnorm_1175',['modNorm',['../classaudio__tools_1_1_simple_chorus.html#ac77f141bbed6cce9c4cda58baca2879d',1,'audio_tools::SimpleChorus']]],
+  ['modulationconstant_1176',['modulationConstant',['../classaudio__tools_1_1_simple_flanger.html#a38884d1691b2d6331de12a7a46b1d90b',1,'audio_tools::SimpleFlanger']]]
 ];

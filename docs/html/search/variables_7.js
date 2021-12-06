@@ -1,9 +1,4 @@
 var searchData=
 [
-  ['maxdelaybuffersize_0',['maxDelayBufferSize',['../classaudio__tools_1_1_delay_effect_base.html#a36d6978a7086bf5eb839adc38098bf12',1,'audio_tools::DelayEffectBase']]],
-  ['metadatatypestr_1',['MetaDataTypeStr',['../namespaceaudio__tools.html#a30a4579da81ba2c00b604933704885a2',1,'audio_tools']]],
-  ['modmax_2',['modMax',['../classaudio__tools_1_1_simple_chorus.html#afc9230308185b8f3c77b8054ebc69f72',1,'audio_tools::SimpleChorus']]],
-  ['modmin_3',['modMin',['../classaudio__tools_1_1_simple_chorus.html#a252b66995f6489a5188a5d4c2fad2926',1,'audio_tools::SimpleChorus']]],
-  ['modnorm_4',['modNorm',['../classaudio__tools_1_1_simple_chorus.html#ac77f141bbed6cce9c4cda58baca2879d',1,'audio_tools::SimpleChorus']]],
-  ['modulationconstant_5',['modulationConstant',['../classaudio__tools_1_1_simple_flanger.html#a38884d1691b2d6331de12a7a46b1d90b',1,'audio_tools::SimpleFlanger']]]
+  ['lclk_5fdiv_1170',['lclk_div',['../structaudio__tools_1_1es__i2s__clock__t.html#a6fdbf7c5e90d687a27c00772cdf1a438',1,'audio_tools::es_i2s_clock_t']]]
 ];
