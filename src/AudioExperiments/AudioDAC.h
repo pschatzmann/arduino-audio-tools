@@ -320,7 +320,7 @@ class SimpleDAC : public OversamplingDAC {
         }
         size_t availableFramesToWrite() override {
             // 1 sample = 1 byte -> divide by channels
-            return buffer.availableToWrite() / info.channels;
+            return buffer.availableForWrite() / info.channels;
         }
 
         /// updates the buffer with analog value (represented by number of 1)
@@ -384,7 +384,7 @@ class OversamplingDAC32 : public OversamplingDAC {
 
         size_t availableFramesToWrite() override {
             // 1 sample = 4 types -> divede by 4 and channels
-            return buffer.availableToWrite() / (sizeof(int32_t) * info.channels);
+            return buffer.availableForWrite() / (sizeof(int32_t) * info.channels);
         }
 
         /// Default output 
@@ -617,7 +617,7 @@ class PWMDAC : public OversamplingDAC {
 
         virtual size_t availableFramesToWrite() override {
             // 1 sample = 1 byte -> divide by channels
-            return buffer.availableToWrite() / info.channels;
+            return buffer.availableForWrite() / info.channels;
         }
 
         /// updates the buffer with analog value (represented by number of 1)

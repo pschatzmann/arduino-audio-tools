@@ -98,7 +98,7 @@ public:
     virtual int available() = 0;
     
     // provides the number of entries that are available to write
-    virtual int availableToWrite() = 0;
+    virtual int availableForWrite() = 0;
     
     // returns the address of the start of the physical read buffer
     virtual T* address() = 0;
@@ -186,12 +186,12 @@ public:
         return max(result, 0);
     }
     
-    int availableToWrite() {
+    int availableForWrite() {
         return max_size - current_write_pos;
     }
     
     bool isFull(){
-        return availableToWrite()<=0;
+        return availableForWrite()<=0;
     }
     
     T* address() {
@@ -296,7 +296,7 @@ class RingBuffer : public BaseBuffer<T> {
         }
         
         // provides the number of entries that are available to write
-        virtual int availableToWrite() {
+        virtual int availableForWrite() {
             return (max_size - _numElems);
         }
         
@@ -381,7 +381,7 @@ public:
 
   // checks if the buffer is full
   bool isFull() {
-    return availableToWrite()==0;
+    return availableForWrite()==0;
   }
 
   // write add an entry to the buffer
@@ -427,7 +427,7 @@ public:
   }
 
   // deterMINes the available entries for the write buffer
-  int availableToWrite() {
+  int availableForWrite() {
       if (actual_write_buffer==nullptr){
           actual_write_buffer = getNextAvailableBuffer();
       }
@@ -441,7 +441,7 @@ public:
           addFilledBuffer(actual_write_buffer);
           actual_write_buffer = getNextAvailableBuffer();
       }
-      return actual_write_buffer->availableToWrite();
+      return actual_write_buffer->availableForWrite();
   }
   
   // resets all buffers

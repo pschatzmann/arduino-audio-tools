@@ -276,7 +276,11 @@ class AnalogAudio  : public AudioStream {
     AnalogConfig &config() {
       return adc_config;
     }
-    
+
+    size_t write(const uint8_t *src, size_t size_bytes){
+      return writeBytes(src, size_bytes);
+    }
+
      /// writes the data to the I2S interface
     size_t writeBytes(const void *src, size_t size_bytes){
       LOGD(LOG_METHOD);
@@ -297,6 +301,10 @@ class AnalogAudio  : public AudioStream {
       }
       return result;
     }   
+
+    size_t readBytes(uint8_t *dest, size_t size_bytes){
+      return readBytes((void*)dest, size_bytes);
+    }
 
     size_t readBytes(void *dest, size_t size_bytes){
       size_t result = 0;

@@ -20,6 +20,7 @@ ConverterAutoCenter<int16_t> center;          // make sure the avg of the signal
 void setup(void) {  
   // Open Serial 
   Serial.begin(115200);
+  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
 
   AnalogConfig cfg = microphone.defaultConfig(RX_MODE);
   microphone.begin(cfg);

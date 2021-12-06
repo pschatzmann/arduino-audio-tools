@@ -142,6 +142,7 @@ namespace audio_tools {
     };
 
 #ifdef USE_SDFAT
+
 #if defined(ARDUINO_ARCH_RP2040) && !defined(PICO)
     // only RP2040 from Earle Phil Hower is using the library with a sdfat namespace
     typedef sdfat::SdSpiConfig SdSpiConfig;
@@ -204,6 +205,7 @@ namespace audio_tools {
             LOGD(LOG_METHOD);
             if (!sd.begin(*p_cfg)) {
                 LOGE("SD.begin failed!");
+                stop();
             }
             idx_pos = 0;
         }
@@ -254,6 +256,10 @@ namespace audio_tools {
             start_path = p;
         }
 
+        virtual void setTimeout(int ms){
+            timeout = ms;
+        }
+
     protected:
         AudioFile file;
         SdSpiConfig *p_cfg = nullptr;
@@ -264,6 +270,7 @@ namespace audio_tools {
         const char* exension = nullptr;
         const char* start_path = nullptr;
         char* file_name_pattern = (char*) "*";
+        int timeout;
 
         /// checks if the file is a valid audio file
         bool isValidAudioFile(AudioFile& file) {
@@ -271,7 +278,7 @@ namespace audio_tools {
             file.getName(file_name, MAX_FILE_LEN);
             Str strFileName(file_name);
             bool result = strFileName.endsWithIgnoreCase(exension) && strFileName.matches(file_name_pattern);
-            LOGI("-> isValidAudioFile: '%s': %d", file_name, result);
+            LOGD("-> isValidAudioFile: '%s': %d", file_name, result);
             return result;
         }
 
@@ -311,7 +318,8 @@ namespace audio_tools {
                         size_t count = 0;
                         getFileAtIndex(dir, pos, count, result);
                         result.getName(file_name, MAX_FILE_LEN);
-                        LOGD("-> getFile: '%s': %d", file_name, pos);
+                        result.setTimeout(timeout);
+                        LOGI("-> getFile: '%s': %d - %s", file_name, pos, result.isOpen() ? "open":"closed");
                     } else {
                         LOGE("'%s' is not a directory!", dirStr);
                     }
@@ -321,8 +329,8 @@ namespace audio_tools {
             } else {
                 LOGE("directory: '%s' does not exist", dirStr);
             }
-
             dir.close();
+            
             return result;
         }
 
@@ -343,7 +351,7 @@ namespace audio_tools {
                         if (idx == pos) {
                             result = file;
                             result.getName(file_name, MAX_FILE_LEN);
-                            LOGI("==> found: '%s' at index %d", file_name, idx);
+                            LOGD("==> found: '%s' at index %d", file_name, idx);
                         }
                         idx++;                        
                     }
@@ -352,7 +360,11 @@ namespace audio_tools {
                         getFileAtIndex(file, pos, idx, result);
                     }
                 }
-                file.close();
+
+                if (file.dirIndex()!=result.dirIndex()){
+                    LOGD("Close: %s", file_name_act);
+                    file.close();
+                }
             }
             return;
         }
@@ -609,14 +621,12 @@ namespace audio_tools {
                     timeout = millis() + p_source->timeoutAutoNext();
                     active = isActive;
                     result = true;
-                }
-                else {
+                } else {
                     LOGW("-> begin: no data found");
                     active = isActive;
                     result = false;
                 }
-            }
-            else {
+            } else {
                 LOGW("-> begin: no stream selected");
                 active = isActive;
                 result = false;

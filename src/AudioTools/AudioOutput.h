@@ -274,7 +274,7 @@ class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource {
          * @brief Destroy the Encoded Audio Stream object
          * 
          */
-        ~EncodedAudioStream(){
+        virtual ~EncodedAudioStream(){
             if (write_buffer!=nullptr){
                 delete [] write_buffer;
             }

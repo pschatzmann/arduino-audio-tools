@@ -66,10 +66,10 @@ class I2S : public I2SBase {
  * @copyright GPLv3
  */
 
-class I2SStream : public BufferedStream  {
+class I2SStream : public AudioStream {
 
     public:
-        I2SStream(int mute_pin=PIN_I2S_MUTE) : BufferedStream(DEFAULT_BUFFER_SIZE){
+        I2SStream(int mute_pin=PIN_I2S_MUTE) {
             LOGD(LOG_METHOD);
             this->mute_pin = mute_pin;
             if (mute_pin>0) {
@@ -83,6 +83,7 @@ class I2SStream : public BufferedStream  {
             return i2s.defaultConfig(mode);
         }
 
+        /// Starts the I2S interface
         void begin(I2SConfig cfg) {
             LOGD(LOG_METHOD);
             i2s.begin(cfg);
@@ -90,6 +91,7 @@ class I2SStream : public BufferedStream  {
             mute(false);
         }
 
+        /// Stops the I2S interface 
         void end() {
             LOGD(LOG_METHOD);
             mute(true);
@@ -113,6 +115,44 @@ class I2SStream : public BufferedStream  {
             }
         }
 
+        /// Writes the audio data to I2S
+        virtual size_t write(const uint8_t *buffer, size_t size) {
+            LOGD(LOG_METHOD);
+            return i2s.writeBytes(buffer, size);
+        }
+
+        /// Reads the audio data
+        virtual size_t readBytes( uint8_t *data, size_t length) override { 
+            return i2s.readBytes(data, length);
+        }
+
+        /// not supported
+        virtual size_t write(uint8_t){
+            return 0;
+        }
+
+        /// not supported
+        virtual int read() {
+            return -1;
+        }  
+
+        /// not supported
+        virtual int peek() {
+            return -1;
+        }  
+
+        /// Provides the available audio data
+        virtual int available() override {
+            return i2s.available();
+        }
+
+        /// Provides the available audio data
+        virtual int availableForWrite() override {
+            return i2s.availableForWrite();
+        }
+
+        void flush() override {}
+
     protected:
         I2SBase i2s;
         int mute_pin;
@@ -122,15 +162,6 @@ class I2SStream : public BufferedStream  {
             if (mute_pin>0) {
                 digitalWrite(mute_pin, is_mute ? SOFT_MUTE_VALUE : !SOFT_MUTE_VALUE );
             }
-        }
-
-        virtual size_t writeExt(const uint8_t* data, size_t len) {    
-            LOGD(LOG_METHOD);
-            return i2s.writeBytes(data, len);
-        }
-
-        virtual size_t readExt( uint8_t *data, size_t length) { 
-            return i2s.readBytes(data, length);
         }
 
 };

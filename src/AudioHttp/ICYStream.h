@@ -134,6 +134,12 @@ class ICYStreamDefault : public AbstractURLStream {
             LOGE("N/A");
             return 0;
         }
+        
+        /// not implemented
+        virtual size_t write(const uint8_t *buffer, size_t size) {
+            LOGE("N/A");
+            return 0;
+         }
 
         operator bool() {
             return *url;

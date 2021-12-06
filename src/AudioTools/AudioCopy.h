@@ -2,11 +2,11 @@
 
 #include "Arduino.h"
 #include "AudioConfig.h"
-#include "AudioTypes.h"
-#include "Buffers.h"
-#include "Converter.h"
-#include "AudioLogger.h"
-
+#include "AudioTools/AudioTypes.h"
+#include "AudioTools/Buffers.h"
+#include "AudioTools/Converter.h"
+#include "AudioTools/AudioLogger.h"
+#include "AudioTools/AudioStreams.h"
 namespace audio_tools {
 
 /**
@@ -19,6 +19,16 @@ namespace audio_tools {
 template <class T>
 class StreamCopyT {
     public:
+        StreamCopyT(Print &to, AudioStream &from, int buffer_size=DEFAULT_BUFFER_SIZE){
+            LOGD(LOG_METHOD);
+            begin(to, from);
+            this->buffer_size = buffer_size;
+            buffer = new uint8_t[buffer_size];
+            if (buffer==nullptr){
+                LOGE("Could not allocate enough memory for StreamCopy: %d bytes", buffer_size);
+            }
+        }
+
         StreamCopyT(Print &to, Stream &from, int buffer_size=DEFAULT_BUFFER_SIZE){
             LOGD(LOG_METHOD);
             begin(to, from);
@@ -47,8 +57,14 @@ class StreamCopyT {
             this->to = nullptr;
         }
 
-        // assign a new output and input stream
         void begin(Print &to, Stream &from){
+            this->from = new AudioStreamWrapper(from);
+            this->to = &to;
+            is_first = true;
+        }
+
+        // assign a new output and input stream
+        void begin(Print &to, AudioStream &from){
             this->from = &from;
             this->to = &to;
             is_first = true;
@@ -72,15 +88,21 @@ class StreamCopyT {
             size_t result = 0;
             size_t delayCount = 0;
             size_t len = available();
-            size_t bytes_to_read=0;
-            size_t bytes_read=0; 
+            size_t bytes_to_read = buffer_size;
+            size_t bytes_read = 0; 
+            int to_write = to->availableForWrite();
 
             if (len>0){
-                CHECK_MEMORY();
                 bytes_to_read = min(len, static_cast<size_t>(buffer_size));
                 size_t samples = bytes_to_read / sizeof(T);
                 bytes_to_read = samples * sizeof(T);
-                bytes_read = from->readBytes(buffer, bytes_to_read);
+                // don't overflow buffer
+                if (to_write>0){
+                    bytes_to_read = min((int)bytes_to_read, to_write);
+                }
+
+                // get the data now
+                bytes_read = from->readBytes((uint8_t*)buffer, bytes_to_read);
 
                 // determine mime
                 notifyMime(buffer, bytes_to_read);
@@ -92,7 +114,6 @@ class StreamCopyT {
                 // callback with unconverted data
                 if (onWrite!=nullptr) onWrite(onWriteObj, buffer, result);
 
-                CHECK_MEMORY();
                 LOGI("StreamCopy::copy %zu -> %zu -> %zu bytes - in %zu hops", bytes_to_read, bytes_read, result, delayCount);
             } else {
                 // give the processor some time 
@@ -188,7 +209,7 @@ class StreamCopyT {
         }
 
     protected:
-        Stream *from = nullptr;
+        AudioStream *from = nullptr;
         Print *to = nullptr;
         uint8_t *buffer = nullptr;
         int buffer_size;
@@ -255,6 +276,10 @@ class StreamCopy : public StreamCopyT<uint8_t> {
              LOGD(LOG_METHOD);
         }
 
+        StreamCopy(Print &to, AudioStream &from, int buffer_size=DEFAULT_BUFFER_SIZE) : StreamCopyT<uint8_t>(to, from, buffer_size){
+             LOGD(LOG_METHOD);
+        }
+
         StreamCopy(Print &to, Stream &from, int buffer_size=DEFAULT_BUFFER_SIZE) : StreamCopyT<uint8_t>(to, from, buffer_size){
              LOGD(LOG_METHOD);
         }
@@ -268,7 +293,7 @@ class StreamCopy : public StreamCopyT<uint8_t> {
             BaseConverter<T> *coverter_ptr = &converter;
             if (result>0){
                 size_t bytes_to_read = min(result, static_cast<size_t>(buffer_size) );
-                result = from->readBytes(buffer, bytes_to_read);
+                result = from->readBytes((uint8_t*)buffer, bytes_to_read);
 
                 // determine mime
                 notifyMime(buffer, bytes_to_read);

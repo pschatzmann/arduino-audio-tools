@@ -79,6 +79,11 @@ class ICYStream : public AbstractURLStream {
             return 0;
         }
 
+        virtual size_t write(const uint8_t*, size_t) override {
+            LOGE("N/A");
+            return 0;
+        }
+
         /// provides access to the HttpRequest
         virtual HttpRequest &httpRequest() override {
             return p_urlStream->httpRequest();

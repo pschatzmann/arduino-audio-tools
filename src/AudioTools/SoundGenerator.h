@@ -52,12 +52,16 @@ class SoundGenerator  {
             int ch = audioInfo().channels;
             int frame_size = sizeof(T) * ch;
             if (active){
+                int len = lengthBytes / frame_size;
+                if (lengthBytes % frame_size!=0){
+                    len++;
+                }
                 switch (ch){
                     case 1:
-                        result = readSamples((T*) buffer, lengthBytes / frame_size) ;
+                        result = readSamples((T*) buffer, len) ;
                         break;
                     case 2:
-                        result = readSamples((T(*)[2]) buffer, lengthBytes / frame_size);
+                        result = readSamples((T(*)[2]) buffer, len);
                         break;
                     default:
                         LOGE( "SoundGenerator::readBytes -> number of channels %d is not supported (use 1 or 2)", ch);

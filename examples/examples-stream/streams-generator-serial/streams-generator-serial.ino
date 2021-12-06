@@ -22,6 +22,7 @@ StreamCopy copier(printer, sound);                         // copies sound into 
 void setup(void) {  
   // Open Serial 
   Serial.begin(115200);
+  AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
   // Setup sine wave
   sineWave.begin(channels, sample_rate, N_B4);

@@ -54,6 +54,10 @@ class I2SBase {
       return I2S.read(src, size_bytes);
     }
 
+    int available() {
+      return I2S.available();
+    }
+
   protected:
     I2SConfig cfg;
     
