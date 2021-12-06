@@ -22,8 +22,9 @@ StreamCopy copier(out, sound);                             // copies sound into 
 void setup(void) {  
   // Open Serial 
   Serial.begin(115200);
+  AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
-  // start the bluetooth
+  // start I2S
   Serial.println("starting I2S...");
   auto config = out.defaultConfig(TX_MODE);
   config.sample_rate = sample_rate; 
@@ -33,6 +34,7 @@ void setup(void) {
 
   // Setup sine wave
   sineWave.begin(channels, sample_rate, N_B4);
+  Serial.println("started...");
 }
 
 // Arduino loop - copy sound to out 

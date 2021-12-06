@@ -25,7 +25,6 @@ StreamCopy copier(out, wav);    // copy in to out
 
 void setup(){
   Serial.begin(115200);
-  while(!Serial);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);  
 
   auto config = pwm.defaultConfig();

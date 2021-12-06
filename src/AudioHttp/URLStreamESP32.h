@@ -130,7 +130,7 @@ class BufferedTaskStream : public AudioStream {
             static uint8_t buffer[512];
             BufferedTaskStream* self = (BufferedTaskStream*) pvParameters;
             while(true){
-                size_t available_to_write = self->buffers.availableToWrite();
+                size_t available_to_write = self->buffers.availableForWrite();
                 if (*(self->p_stream) && available_to_write>0){
                     size_t to_read = min(available_to_write, (size_t) 512);
                     size_t avail_read = self->p_stream->readBytes((uint8_t*)buffer, to_read);
@@ -215,6 +215,11 @@ class URLStream : public AbstractURLStream {
         }
 
         size_t write(uint8_t) {
+            LOGE("URLStream write - not supported");
+            return 0;
+        }
+    
+        size_t write(const uint8_t *buffer, size_t size){
             LOGE("URLStream write - not supported");
             return 0;
         }

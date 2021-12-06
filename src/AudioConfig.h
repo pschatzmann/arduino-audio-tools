@@ -139,6 +139,8 @@
 //#define USE_A2DP
 //#define USE_ESP8266_AUDIO
 
+// Use ESP32 Audio Kit: lyrat=1, ai-tinker=2
+#define USE_AUDIO_KIT 2
 #define USE_PWM
 #define USE_URL_ARDUINO
 #define USE_I2S

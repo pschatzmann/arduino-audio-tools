@@ -17,8 +17,10 @@ namespace audio_tools {
  * @copyright GPLv3
  */
 class I2SBase {
+
   friend class AnalogAudio;
-  
+  friend class AudioKitStream;
+
   public:
 
     /// Provides the default configuration
@@ -36,61 +38,19 @@ class I2SBase {
     /// starts the DAC 
     void begin(I2SConfig cfg) {
       LOGD(LOG_METHOD);
-      cfg.logInfo();
-      this->cfg = cfg;
-      this->i2s_num = (i2s_port_t) cfg.port_no; 
-      setChannels(cfg.channels);
+      int txPin = cfg.rx_tx_mode == TX_MODE ? cfg.pin_data : I2S_PIN_NO_CHANGE;
+      int rxPin = cfg.rx_tx_mode == RX_MODE ? cfg.pin_data : I2S_PIN_NO_CHANGE;
+      begin(cfg, txPin, rxPin);
+    }
 
-      i2s_config_t i2s_config_new = {
-            .mode = toMode(cfg),
-            .sample_rate = (eps32_i2s_sample_rate_type)cfg.sample_rate,
-            .bits_per_sample = (i2s_bits_per_sample_t) cfg.bits_per_sample,
-            .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,
-            .communication_format = toCommFormat(cfg.i2s_format),
-            .intr_alloc_flags = ESP_INTR_FLAG_LEVEL1, // default interrupt priority
-            .dma_buf_count = I2S_BUFFER_COUNT,
-            .dma_buf_len = I2S_BUFFER_SIZE,
-            .use_apll = (bool) cfg.use_apll,
-            .tx_desc_auto_clear = I2S_AUTO_CLEAR, 
-            .fixed_mclk = (int) (cfg.use_apll ? cfg.sample_rate * cfg.apll_frequency_factor : 0 )
+    /// we assume the data is already available in the buffer
+    int available() {
+      return I2S_BUFFER_COUNT*I2S_BUFFER_SIZE;
+    }
 
-      };
-      i2s_config = i2s_config_new;
-
-      // We make sure that we can reconfigure
-      if (is_started) {
-          end();
-          LOGD("%s", "I2S restarting");
-      }
-
-      // setup config
-      if (i2s_driver_install(i2s_num, &i2s_config, 0, NULL)!=ESP_OK){
-        LOGE("%s - %s", __func__, "i2s_driver_install");
-      }      
-
-      // setup pin config
-      if (this->cfg.is_digital ) {
-        i2s_pin_config_t pin_config = {
-            .bck_io_num = cfg.pin_bck,
-            .ws_io_num = cfg.pin_ws,
-            .data_out_num = cfg.rx_tx_mode == TX_MODE ? cfg.pin_data : I2S_PIN_NO_CHANGE,
-            .data_in_num = cfg.rx_tx_mode == RX_MODE ? cfg.pin_data : I2S_PIN_NO_CHANGE
-        };
-
-        if (i2s_set_pin(i2s_num, &pin_config)!= ESP_OK){
-            LOGE("%s - %s", __func__, "i2s_set_pin");
-        }
-      } else {
-          LOGD("Using built in DAC");
-          //for internal DAC, this will enable both of the internal channels
-          i2s_set_pin(i2s_num, NULL); 
-      }
-
-      // clear initial buffer
-      i2s_zero_dma_buffer(i2s_num);
-
-      is_started = true;
-      LOGD("%s - %s", __func__, "started");
+    /// We limit the write size to the buffer size
+    int availableForWrite() {
+      return I2S_BUFFER_COUNT*I2S_BUFFER_SIZE;
     }
 
     /// stops the I2C and unistalls the driver
@@ -135,6 +95,66 @@ class I2SBase {
     i2s_port_t i2s_num;
     i2s_config_t i2s_config;
     bool is_started = false;
+
+    /// starts the DAC 
+    void begin(I2SConfig cfg, int txPin, int rxPin) {
+      LOGD(LOG_METHOD);
+      cfg.logInfo();
+      this->cfg = cfg;
+      this->i2s_num = (i2s_port_t) cfg.port_no; 
+      setChannels(cfg.channels);
+
+      i2s_config_t i2s_config_new = {
+            .mode = toMode(cfg),
+            .sample_rate = (eps32_i2s_sample_rate_type)cfg.sample_rate,
+            .bits_per_sample = (i2s_bits_per_sample_t) cfg.bits_per_sample,
+            .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,
+            .communication_format = toCommFormat(cfg.i2s_format),
+            .intr_alloc_flags = ESP_INTR_FLAG_LEVEL1, // default interrupt priority
+            .dma_buf_count = I2S_BUFFER_COUNT,
+            .dma_buf_len = I2S_BUFFER_SIZE,
+            .use_apll = (bool) cfg.use_apll,
+            .tx_desc_auto_clear = I2S_AUTO_CLEAR, 
+            .fixed_mclk = (int) (cfg.use_apll ? cfg.sample_rate * cfg.apll_frequency_factor : 0 )
+
+      };
+      i2s_config = i2s_config_new;
+
+      // We make sure that we can reconfigure
+      if (is_started) {
+          end();
+          LOGD("%s", "I2S restarting");
+      }
+
+      // setup config
+      if (i2s_driver_install(i2s_num, &i2s_config, 0, NULL)!=ESP_OK){
+        LOGE("%s - %s", __func__, "i2s_driver_install");
+      }      
+
+      // setup pin config
+      if (this->cfg.is_digital ) {
+        i2s_pin_config_t pin_config = {
+            .bck_io_num = cfg.pin_bck,
+            .ws_io_num = cfg.pin_ws,
+            .data_out_num = txPin,
+            .data_in_num = rxPin
+        };
+
+        if (i2s_set_pin(i2s_num, &pin_config)!= ESP_OK){
+            LOGE("%s - %s", __func__, "i2s_set_pin");
+        }
+      } else {
+          LOGD("Using built in DAC");
+          //for internal DAC, this will enable both of the internal channels
+          i2s_set_pin(i2s_num, NULL); 
+      }
+
+      // clear initial buffer
+      i2s_zero_dma_buffer(i2s_num);
+
+      is_started = true;
+      LOGD("%s - %s", __func__, "started");
+    }
 
     // update the cfg.i2s.channel_format based on the number of channels
     void setChannels(int channels){
@@ -222,10 +242,10 @@ class I2SBase {
           case I2S_MSB_FORMAT:
           case I2S_LEFT_JUSTIFIED_FORMAT:
             return (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_MSB;
-          case I2S_PCM_LONG:
-            return (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_PCM_LONG;
-          case I2S_PCM_SHORT:
-            return (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_PCM_SHORT;
+          // case I2S_PCM_LONG:
+          //   return (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_PCM_LONG;
+          // case I2S_PCM_SHORT:
+          //   return (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_PCM_SHORT;
 
           default:
             LOGE("unsupported mode");

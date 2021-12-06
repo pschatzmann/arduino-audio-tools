@@ -74,8 +74,8 @@ class I2SConfig : public AudioBaseInfo {
       }
 #endif
 
-      LOGI("pin_ws: %d", pin_ws);
       LOGI("pin_bck: %d", pin_bck);
+      LOGI("pin_ws: %d", pin_ws);
       LOGI("pin_data: %d", pin_data);
     }
 

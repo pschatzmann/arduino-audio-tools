@@ -190,7 +190,7 @@ class PWMAudioStreamBase : public AudioPrint, public AudioBaseInfoDependent {
             frames_per_second = 0;     
             
             LOGI("->Buffer available: %d", buffer->available());
-            LOGI("->Buffer available for write: %d", buffer->availableToWrite());
+            LOGI("->Buffer available for write: %d", buffer->availableForWrite());
             LOGI("->is_timer_started: %s ", is_timer_started ? "true" : "false");
             return true;
         } 
@@ -202,7 +202,7 @@ class PWMAudioStreamBase : public AudioPrint, public AudioBaseInfoDependent {
 
 
         virtual int availableForWrite() { 
-            return buffer==nullptr ? 0 : buffer->availableToWrite();
+            return buffer==nullptr ? 0 : buffer->availableForWrite();
         }
 
         virtual void flush() { 
@@ -211,7 +211,7 @@ class PWMAudioStreamBase : public AudioPrint, public AudioBaseInfoDependent {
         // blocking write for a single byte
         virtual size_t write(uint8_t value) {
             size_t result = 0;
-            if (buffer->availableToWrite()>1){
+            if (buffer->availableForWrite()>1){
                 result = buffer->write(value);
                 startTimer();
             }

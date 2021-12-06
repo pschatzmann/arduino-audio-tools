@@ -65,3 +65,12 @@ typedef PortAudioStream DefaultStream;
 #elif defined(ESP32) || defined(ESP8266) || defined(__SAMD21G18A__)
 typedef I2SStream DefaultStream;
 #endif
+
+/// wait for the Output to be ready
+void waitFor(HardwareSerial &out){
+    while(!out);
+}
+/// wait for flag to be active
+void waitFor(bool &flag){
+    while(!flag);
+}

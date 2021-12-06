@@ -18,13 +18,68 @@ class AudioStream : public Stream, public AudioBaseInfoDependent {
     public:
         // overwrite to do something useful
         virtual void setAudioInfo(AudioBaseInfo info) {
-             LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             info.logInfo();
         }
 
+        virtual size_t readBytes(char *buffer, size_t length) {
+            return readBytes((uint8_t*)buffer, length);
+        }
+
+        virtual size_t readBytes( uint8_t *buffer, size_t length) = 0;
+
+        virtual size_t write(const uint8_t *buffer, size_t size) = 0;
+        
         operator bool() {
             return available()>0;
         }
+};
+
+/**
+ * @brief To be used to support implementations where the readBytes is not virtual
+ * 
+ */
+class AudioStreamWrapper : public AudioStream {
+    public:
+        AudioStreamWrapper(Stream &s){
+            p_stream = &s;
+        }
+
+        virtual size_t readBytes( uint8_t *buffer, size_t length) {
+            return p_stream->readBytes(buffer, length);
+        }
+
+        int read(){
+            return p_stream->read();
+        }
+
+        int peek(){
+            return p_stream->peek();
+        }
+
+        int available(){
+            return p_stream->available();
+        }
+
+        virtual size_t write(uint8_t c) {
+            return p_stream->write(c);
+        }
+
+        virtual size_t write(const uint8_t *buffer, size_t size){
+            return p_stream->write(buffer, size);
+        }
+
+        virtual int availableForWrite() { 
+            return p_stream->availableForWrite();
+        }
+
+        virtual void flush() {
+            p_stream->flush();
+        }
+
+    protected:
+        Stream *p_stream;
+
 };
 
 /**
@@ -159,7 +214,7 @@ class GeneratedSoundStream : public AudioStream, public AudioBaseInfoSource {
         
         /// start the processing
         void begin() {
-             LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             generator_ptr->begin();
             if (audioBaseInfoDependent!=nullptr) audioBaseInfoDependent->setAudioInfo(generator_ptr->audioInfo());
             active = true;
@@ -213,13 +268,7 @@ class GeneratedSoundStream : public AudioStream, public AudioBaseInfoSource {
         }
 
         /// privide the data as byte stream
-        size_t readBytes( char *buffer, size_t length) {
-            LOGD("GeneratedSoundStream::readBytes: %zu", length);
-            return generator_ptr->readBytes((uint8_t*)buffer, length);
-        }
-
-        /// privide the data as byte stream
-        size_t readBytes( uint8_t *buffer, size_t length) {
+        size_t readBytes( uint8_t *buffer, size_t length) override {
             LOGD("GeneratedSoundStream::readBytes: %zu", length);
             return generator_ptr->readBytes(buffer, length);
         }
@@ -747,7 +796,7 @@ void TimerCallbackAudioStream::timerCallback(void* obj){
         if (src->cfg.rx_tx_mode==RX_MODE){
             // input
             uint16_t available_bytes = src->frameCallback(src->frame, src->frameSize);
-            uint16_t buffer_available = src->buffer->availableToWrite();
+            uint16_t buffer_available = src->buffer->availableForWrite();
             if (buffer_available<available_bytes){
                 // if buffer is full make space
                 uint16_t to_clear = available_bytes-buffer_available;
