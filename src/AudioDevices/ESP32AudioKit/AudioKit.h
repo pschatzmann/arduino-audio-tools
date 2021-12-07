@@ -383,7 +383,7 @@ class AudioKitStream : public AudioStream {
    * @return true
    * @return false
    */
-  virtual bool begin() { begin(defaultConfig()); }
+  virtual bool begin() { return begin(defaultConfig()); }
 
   /**
    * @brief Starts the processing
@@ -394,6 +394,7 @@ class AudioKitStream : public AudioStream {
    */
   virtual bool begin(ConfigES8388 cfg) {
     LOGI(LOG_METHOD);
+    bool result = true;
     this->cfg = cfg;
     bool isDac = cfg.rx_tx_mode == TX_MODE;
     bool isAdc = cfg.rx_tx_mode == RX_MODE;
@@ -411,23 +412,29 @@ class AudioKitStream : public AudioStream {
     }
 
     if (!initES8388(!cfg.is_master, isDac, isAdc)) {
+      result = false;
       LOGE("Error: initES8388 failed");
     }
     if (!configClock(cfg.clock_config)) {
+      result = false;
       LOGE("Error: configClock failed");
     }
     if (!setBitsPerSample(module_value, cfg.bits_per_sample)) {
+      result = false;
       LOGE("Error: setBitsPerSample failed");
     }
     if (!setFormat(module_value, cfg.i2s_format)) {
+      result = false;
       LOGE("Error: setFormat failed");
     }
     if (cfg.rx_tx_mode == RX_MODE) {
       if (!configAdcInput(cfg.input_device)) {
+        result = false;
         LOGE("Error: configAdcInput failed");
       }
     } else {
       if (!configDacOutput(cfg.output_device)) {
+        result = false;
         LOGE("Error: configDacOutput failed");
       }
     }
@@ -438,6 +445,7 @@ class AudioKitStream : public AudioStream {
     // set initial volume
     actionVolume = cfg.default_volume;
     if (!setVoiceVolume(actionVolume)) {
+      result = false;
       LOGE("setVoiceVolume failed");
     }
 
@@ -451,7 +459,9 @@ class AudioKitStream : public AudioStream {
     // start module
     if (!start(module_value)) {
       LOGE("start failed");
+      result = false;
     }
+    return result;
   }
 
   /**
@@ -616,7 +626,7 @@ class AudioKitStream : public AudioStream {
    * @return true
    * @return false
    */
-  bool incrementVoiceVolume(int inc) {
+  void incrementVoiceVolume(int inc) {
     actionVolume += inc;
     setVoiceVolume(actionVolume);
   }
@@ -1131,6 +1141,7 @@ class AudioKitStream : public AudioStream {
       case I2S_PCM_SHORT:
         return setFormat(module, ES_I2S_DSP);
     }
+    return false;
   }
   /**
    * @brief Configure ES8388 I2S format
