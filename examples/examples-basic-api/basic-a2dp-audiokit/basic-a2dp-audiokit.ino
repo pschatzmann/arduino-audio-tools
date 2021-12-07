@@ -23,4 +23,6 @@ void setup() {
   a2dp_sink.start("AudioKit");
 }
 
-void loop() {}
+void loop() {
+  kit.processActions();
+}

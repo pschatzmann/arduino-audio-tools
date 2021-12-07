@@ -18,9 +18,9 @@ const char *startFilePath="/";
 const char* ext="mp3";
 int speedMz = 10;
 AudioSourceSdFat source(startFilePath, ext, PIN_AUDIO_KIT_SD_CARD_CS, speedMz);
-AudioKitStream i2s;
+AudioKitStream kit;
 MP3DecoderHelix decoder;
-AudioPlayer player(source, i2s, decoder);
+AudioPlayer player(source, kit, decoder);
 
 
 void setup() {
@@ -28,13 +28,15 @@ void setup() {
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
   // setup output
-  auto cfg = i2s.defaultConfig(TX_MODE);
-  i2s.begin(cfg);
+  auto cfg = kit.defaultConfig(TX_MODE);
+  kit.begin(cfg);
   
   // setup player
+  player.setVolume(0.7);`
   player.begin();
 }
 
 void loop() {
   player.copy();
+  kit.processActions();
 }

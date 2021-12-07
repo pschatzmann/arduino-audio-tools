@@ -49,6 +49,8 @@ const uint32_t VUCP_PREAMBLE_W = 0xCCE40000;  // 11001100 11100100
 /**
  * @brief SPDIF configuration
  * We only support 16 bits per sample
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 struct SPDIFConfig {
   int port_no = 0;  // processor dependent port
@@ -59,14 +61,21 @@ struct SPDIFConfig {
 
 /**
  * @brief Output as SPDIF on the data output pin
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  *
  */
-class SPDIFStream : public AudioStream {
+class SPDIFStream : public AudioStreamX {
  public:
   SPDIFStream() = default;
 
+  /// Starting with default settings
+  bool begin() { return begin(defaultConfig()); }
+
+  /// Start with the provided parameters
   bool begin(SPDIFConfig cfg) {
     this->cfg = cfg;
+    I2SConfig i2s_cfg;
     i2s_cfg.sample_rate = cfg.sample_rate * 2;  // 2 x sampling_rate
     i2s_cfg.bits_per_sample = 32;
     i2s_cfg.use_apll = true;
@@ -78,6 +87,25 @@ class SPDIFStream : public AudioStream {
     i2s.begin(i2s_cfg);
     i2sOn = true;
     frame_num = 0;
+    return true;
+  }
+
+  /// Change the audio parameters
+  virtual void setAudioInfo(AudioBaseInfo info) {
+    end();
+    cfg.channels = info.channels;
+    cfg.sample_rate =  info.sample_rate;
+    if (info.bits_per_sample != 16) {
+      LOGE("Unsupported bits per sample: %d - must be 16!",
+           info.bits_per_sample);
+    }
+    begin(cfg);
+  }
+
+  /// Provides the default configuration
+  SPDIFConfig defaultConfig() {
+    SPDIFConfig c;
+    return c;
   }
 
   bool end() {
@@ -87,6 +115,7 @@ class SPDIFStream : public AudioStream {
     return true;
   }
 
+  /// Writes the audio data as SPDIF to the defined output pin
   size_t write(uint8_t *values, size_t len) {
     size_t result = 0;
     int16_t *v = (int16_t *)values;
@@ -107,7 +136,6 @@ class SPDIFStream : public AudioStream {
  protected:
   SPDIFConfig cfg;
   I2SStream i2s;
-  I2SConfig i2s_cfg;
   bool i2sOn;
   uint8_t frame_num = 0;
 

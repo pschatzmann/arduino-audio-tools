@@ -1,18 +1,19 @@
-## Using the AI Thinker ESP32 Audio Kit as SD Player
+# A Simple Icecast Streaming Audio Player
 
-I found some cheap [AI Thinker ESP32 Audio Kit V2.2](https://docs.ai-thinker.com/en/esp32-audio-kit) on AliExpress and because I was tired of all the wires I had to connect to implement my different scenarios that are possible with my [Arduino Audio Tools Library](https://github.com/pschatzmann/arduino-audio-tools), I thought it to be a good idea to buy this board.
+Compared to the regular URLStream, and ICYStream provides audio Metadata.
 
 <img src="https://pschatzmann.github.io/arduino-audio-tools/resources/audio-toolkit.png" alt="Audio Kit" />
 
 You dont need to bother about any wires because everything is on one nice board. Just just need to install the dependencies:
+
+I also demonstrate how to assign your own actions to the buttons of the audio kit.
 
 ### Note
 
 The log level has been set to Info to help you to identify any problems. Please change it to AudioLogger::Warning to get the best sound quality!
 
 
-## Dependencies
+### Dependencies
 
 - https://github.com/pschatzmann/arduino-audio-tools
 - https://github.com/pschatzmann/arduino-libhelix
-- https://github.com/greiman/SdFat
