@@ -81,7 +81,7 @@ namespace audio_tools {
         virtual bool isAutoNext();
 
         // only the ICYStream supports this
-        virtual bool setMetadataCallback(void (*fn)(MetaDataType info, const char* str, int len)) {
+        virtual bool setMetadataCallback(void (*fn)(MetaDataType info, const char* str, int len), ID3TypeSelection sel=SELECT_ICY) {
             return false;
         }
 
@@ -464,7 +464,7 @@ namespace audio_tools {
         };
 
         // only the ICYStream supports this
-        bool setMetadataCallback(void (*fn)(MetaDataType info, const char* str, int len)) {
+        bool setMetadataCallback(void (*fn)(MetaDataType info, const char* str, int len), ID3TypeSelection sel=SELECT_ICY) {
             LOGI(LOG_METHOD);
             return actual_stream->setMetadataCallback(fn);
         }
@@ -773,7 +773,7 @@ namespace audio_tools {
         }
 
         /// Defines the medatadata callback
-        virtual void setMetadataCallback(void (*callback)(MetaDataType type, const char* str, int len)) {
+        virtual void setMetadataCallback(void (*callback)(MetaDataType type, const char* str, int len), ID3TypeSelection sel=SELECT_ID3) {
             LOGI(LOG_METHOD);
             // setup metadata. 
             if (p_source->setMetadataCallback(callback)){
@@ -783,6 +783,7 @@ namespace audio_tools {
             } else {
                 // metadata is handled here
                 meta_out.setCallback(callback);
+                meta_out.setFilter(sel);
                 meta_active = true;
             }
         }

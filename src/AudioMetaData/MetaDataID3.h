@@ -365,6 +365,11 @@ class MetaDataID3V2 : public MetaDataID3Base  {
         return frame_header;
     }
 
+    /// returns true if the tag has been provided
+    bool isProcessed() {
+        return tag_processed;
+    }
+
   protected:
     ID3v2 tagv2;
     bool tag_active = false;
@@ -511,7 +516,6 @@ class MetaDataID3V2 : public MetaDataID3Base  {
 
 };
 
-
 /**
  * @brief Simple ID3 Meta Data Parser which supports ID3 V1 and V2 and implements the Stream interface. You just need to set the callback(s) to receive the result 
  * and copy the audio data to this stream.
@@ -533,6 +537,10 @@ class MetaDataID3 : public AbstractMetaData {
         id3v2.setCallback(fn);        
     }
 
+    void setFilter(ID3TypeSelection sel) {
+        this->filter = sel;
+    }
+
     void begin() {
         LOGI(LOG_METHOD);
         id3v1.begin();
@@ -548,15 +556,17 @@ class MetaDataID3 : public AbstractMetaData {
     /// Provide tha audio data to the API to parse for Meta Data
     virtual size_t write(const uint8_t *data, size_t length){
         LOGD(LOG_METHOD);
-        id3v1.write(data, length);
-        id3v2.write(data, length);
+        if (filter & SELECT_ID3V2) id3v2.write(data, length);
+        if (!id3v2.isProcessed()) {
+            if (filter & SELECT_ID3V1) id3v1.write(data, length);
+        }
         return length;
     }
-
 
   protected:
     MetaDataID3V1 id3v1;
     MetaDataID3V2 id3v2;
+    int filter = SELECT_ID3;
 };
 
 } // namespace
