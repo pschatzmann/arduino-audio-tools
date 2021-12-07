@@ -30,7 +30,6 @@ AudioSourceURL source(urlStream, urls, "audio/mp3");
 AudioKitStream kit;
 MP3DecoderHelix decoder;
 AudioPlayer player(source, kit, decoder);
-bool active;
 
 void next() {
    player.next();
@@ -41,8 +40,7 @@ void previous() {
 }
 
 void stopResume(){
-  active=!active;
-  if (active){
+  if (player.isActive()){
     player.stop();
   } else{
     player.play();
@@ -64,7 +62,7 @@ void setup() {
   kit.begin(cfg);
 
   // setup player
-  player.setVolume(0.7);`
+  player.setVolume(0.7);
   player.begin();
 }
 
