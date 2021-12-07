@@ -36,30 +36,33 @@
 #include <SPI.h>
 #include <string.h>
 
+#include "AudioTools/AudioActions.h"
 #include "AudioI2S/I2SConfig.h"
 #include "AudioI2S/I2SStream.h"
 #include "driver/gpio.h"
 #include "driver/i2c.h"
 #include "driver/i2s.h"
 
+#define KEY_RESPONSE_TIME_MS 10
+
 #define I2C_MASTER_NUM I2C_NUM_0 /*!< I2C port number for master dev */
 #define I2C_MASTER_SCL_IO 32     /*!< gpio number for I2C master clock */
 #define I2C_MASTER_SDA_IO 33     /*!< gpio number for I2C master data  */
 
-
-#if USE_AUDIO_KIT==2
-// ai tinker board pins 
+#if USE_AUDIO_KIT == 2
+// ai tinker board pins
 // https://github.com/Ai-Thinker-Open/ESP32-A1S-AudioKit)
 #include "AudioDevices/ESP32AudioKit/ai-thinker.h"
 #else
-// lyrat pins:  https://docs.espressif.com/projects/esp-adf/en/latest/design-guide/board-esp32-lyrat-mini-v1.2.html#gpio-allocation-summary
+// lyrat pins:
+// https://docs.espressif.com/projects/esp-adf/en/latest/design-guide/board-esp32-lyrat-mini-v1.2.html#gpio-allocation-summary
 #include "AudioDevices/ESP32AudioKit/layrat.h"
 #endif
 
 #define PIN_AUDIO_KIT_SD_CARD_CS 13
 #define PIN_AUDIO_KIT_SD_CARD_MISO 2
 #define PIN_AUDIO_KIT_SD_CARD_MOSI 15
-#define PIN_AUDIO_KIT_SD_CARD_CLK  14
+#define PIN_AUDIO_KIT_SD_CARD_CLK 14
 
 #define SD_CARD_INTR_GPIO GPIO_NUM_34
 #define SD_CARD_INTR_SEL GPIO_SEL_34
@@ -339,24 +342,16 @@ struct ConfigES8388 : public I2SConfig {
   int pin_i2c_sda = I2C_MASTER_SDA_IO;
 
   // Define final input or output device
-  es_adc_input_t input_device = ADC_INPUT_MIC1; // or ADC_INPUT_MIC2
+  es_adc_input_t input_device = ADC_INPUT_MIC1;  // or ADC_INPUT_MIC2
   es_codec_dac_output_t output_device = DAC_OUTPUT_ALL;
   es_i2s_clock_t *clock_config = nullptr;
 
-  bool is_headphone_detection = false;
+  bool headphone_detection_active = true;
+  bool actions_active = true;
 };
 
-// Headphone detector logic
-static xTimerHandle timer_headphone;
+// Access for callbacks
 static AudioKitStream *pt_AudioKitStream = nullptr;
-
-static void IRAM_ATTR headphone_gpio_intr_handler(void *arg) {
-  BaseType_t xHigherPriorityTaskWoken = pdFALSE;
-  xTimerResetFromISR(timer_headphone, &xHigherPriorityTaskWoken);
-  if (xHigherPriorityTaskWoken != pdFALSE) {
-    portYIELD_FROM_ISR();
-  }
-}
 
 /**
  * @brief ESP32 Audio Kit using the ESP8388 DAC and ADC
@@ -364,10 +359,8 @@ static void IRAM_ATTR headphone_gpio_intr_handler(void *arg) {
  */
 class AudioKitStream : public AudioStream {
  public:
- /// Default Constructor
-  AudioKitStream() {
-    pt_AudioKitStream = this;
-  };
+  /// Default Constructor
+  AudioKitStream() { pt_AudioKitStream = this; };
 
   /// Destructor
   ~AudioKitStream() { deinitES8388(); }
@@ -410,10 +403,11 @@ class AudioKitStream : public AudioStream {
     cfg.logInfo();
 
     // prepare SPI for SD support: begin(sck,miso,mosi,ss);
-    SPI.begin(PIN_AUDIO_KIT_SD_CARD_CLK, PIN_AUDIO_KIT_SD_CARD_MISO, PIN_AUDIO_KIT_SD_CARD_MOSI, PIN_AUDIO_KIT_SD_CARD_CS);
+    SPI.begin(PIN_AUDIO_KIT_SD_CARD_CLK, PIN_AUDIO_KIT_SD_CARD_MISO,
+              PIN_AUDIO_KIT_SD_CARD_MOSI, PIN_AUDIO_KIT_SD_CARD_CS);
 
-    if (cfg.is_headphone_detection) {
-      headphone_detect_init(HEADPHONE_DETECT);
+    if (cfg.actions_active || cfg.headphone_detection_active) {
+      setupActions();
     }
 
     if (!initES8388(!cfg.is_master, isDac, isAdc)) {
@@ -442,14 +436,16 @@ class AudioKitStream : public AudioStream {
     i2c_read_all();
 
     // set initial volume
-    if (!setVoiceVolume(cfg.default_volume)) {
+    actionVolume = cfg.default_volume;
+    if (!setVoiceVolume(actionVolume)) {
       LOGE("setVoiceVolume failed");
     }
 
     // start i2s
     i2s.begin(cfg, cfg.pin_data_out, cfg.pin_data_in);
     // if (cfg.clock_config!=nullptr){
-    i2s_mclk_gpio_select((i2s_port_t)cfg.port_no, (gpio_num_t)PIN_I2S_AUDIO_KIT_MCLK);
+    i2s_mclk_gpio_select((i2s_port_t)cfg.port_no,
+                         (gpio_num_t)PIN_I2S_AUDIO_KIT_MCLK);
     //}
 
     // start module
@@ -465,7 +461,6 @@ class AudioKitStream : public AudioStream {
     LOGI(LOG_METHOD);
     setPAPower(false);
     stop(module_value);
-    headphone_detect_deinit();
   }
 
   /// Writes the audio data to I2S
@@ -523,6 +518,7 @@ class AudioKitStream : public AudioStream {
    */
   void setPAPower(bool enable) {
     LOGI("setPAPower: %s", enable ? "true" : "false");
+    actualPower = enable;
     gpio_config_t io_conf;
     memset(&io_conf, 0, sizeof(io_conf));
     io_conf.mode = GPIO_MODE_OUTPUT;
@@ -614,6 +610,18 @@ class AudioKitStream : public AudioStream {
   }
 
   /**
+   * @brief Increments/Decrements the volume
+   *
+   * @param inc
+   * @return true
+   * @return false
+   */
+  bool incrementVoiceVolume(int inc) {
+    actionVolume += inc;
+    setVoiceVolume(actionVolume);
+  }
+
+  /**
    * @brief Configure ES8388 DAC mute or not. Basically you can use this
    * function to mute the output or unmute
    *
@@ -688,13 +696,74 @@ class AudioKitStream : public AudioStream {
     return res == ESP_OK;
   }
 
+  /**
+   * @brief Checks if the headphone is connected
+   *
+   * @return true connected
+   * @return false not connected
+   */
+  bool headphoneStatus() {
+    return !gpio_get_level((gpio_num_t)HEADPHONE_DETECT);
+  }
+
+  /**
+   * @brief Process input keys and pins
+   *
+   */
+  void processActions() {
+    static unsigned long keys_timeout = 0;
+    if (keys_timeout < millis()) {
+      // LOGD(LOG_METHOD);
+      if (cfg.actions_active || cfg.headphone_detection_active) {
+        actions.processActions();
+      }
+      keys_timeout = millis() + KEY_RESPONSE_TIME_MS;
+    }
+    yield();
+  }
+
+  /**
+   * @brief Defines a new action that is executed when the indicated pin is
+   * active
+   *
+   * @param pin
+   * @param action
+   */
+  void addAction(int pin, void (*action)()) {
+    LOGI(LOG_METHOD);
+    actions.add(pin, action);
+  }
+
  protected:
   ConfigES8388 cfg;
   es_module_t module_value;
   I2SBase i2s;
+  bool actualPower;
+  AudioActions actions;
+  int actionVolume = 0;
 
+  /// init i2c with different possible pins
   esp_err_t i2c_init(void) {
+    esp_err_t result = i2c_init(cfg.pin_i2c_sda, cfg.pin_i2c_scl);
+    if (result != ESP_OK) {
+      LOGE("I2C Init failed with configured pins %d/%d", cfg.pin_i2c_sda,
+           cfg.pin_i2c_scl);
+      result = i2c_init(33, 32);
+      if (result == ESP_OK) {
+        LOGW("I2C success with pins %d/%d", 33, 32);
+      } else {
+        result = i2c_init(23, 18);
+        if (result == ESP_OK) {
+          LOGW("I2C success with pins %d/%d", 23, 18);
+        }
+      }
+    }
+    return result;
+  }
+
+  esp_err_t i2c_init(int sda, int scl) {
     LOGD(LOG_METHOD);
+
     i2c_port_t i2c_master_port = cfg.i2c_master;
     i2c_config_t conf;
     conf.mode = I2C_MODE_MASTER;
@@ -882,7 +951,6 @@ class AudioKitStream : public AudioStream {
     res = i2c_write_reg(ES8388_ADDR, ES8388_CHIPPOWER,
                         0xFF);  // reset and stop es8388
     i2c_deinit();
-    // hd.headphone_detect_deinit();
 
     return res == ESP_OK;
   }
@@ -1239,50 +1307,54 @@ class AudioKitStream : public AudioStream {
     return ESP_OK;
   }
 
-  //-----------------
-
-  static void hp_timer_cb(TimerHandle_t xTimer) {
-    int num = (int)pvTimerGetTimerID(xTimer);
-    bool res = gpio_get_level((gpio_num_t)num);
-    if (pt_AudioKitStream != nullptr) {
-      pt_AudioKitStream->setPAPower(res);
+  /**
+   * @brief Setup the supported default actions
+   *
+   */
+  void setupActions() {
+    LOGI(LOG_METHOD);
+    if (cfg.headphone_detection_active) {
+      actions.add(HEADPHONE_DETECT, actionHeadphoneStatus,
+                  AudioActions::ActiveChange);
     }
-    ESP_LOGW(TAG, "Headphone jack %s", res ? "removed" : "inserted");
+    actions.add(PIN_KEY1, actionStartStop);
+    actions.add(PIN_KEY5, volumeDown);
+    actions.add(PIN_KEY6, volumeUp);
   }
 
-  int hp_timer_init(int num) {
-    timer_headphone =
-        xTimerCreate("hp_timer0", HP_DELAY_TIME_MS / portTICK_RATE_MS, pdFALSE,
-                     (void *)num, hp_timer_cb);
-    if (timer_headphone == NULL) {
-      ESP_LOGE(TAG, "hp_timer create err");
-      return ESP_FAIL;
+  static void volumeUp() {
+    LOGI(LOG_METHOD);
+    pt_AudioKitStream->incrementVoiceVolume(+2);
+  }
+
+  static void volumeDown() {
+    LOGI(LOG_METHOD);
+    pt_AudioKitStream->incrementVoiceVolume(-2);
+  }
+
+  static void actionStartStop() {
+    LOGI(LOG_METHOD);
+    pt_AudioKitStream->setPAPower(!pt_AudioKitStream->actualPower);
+  }
+
+  static void actionStart() {
+    LOGI(LOG_METHOD);
+    pt_AudioKitStream->setPAPower(true);
+  }
+
+  static void actionStop() {
+    LOGI(LOG_METHOD);
+    pt_AudioKitStream->setPAPower(false);
+  }
+
+  static void actionHeadphoneStatus() {
+    LOGI("process headphone detection");
+    bool isConnected = pt_AudioKitStream->headphoneStatus();
+    bool powerActive = !isConnected;
+    if (powerActive != pt_AudioKitStream->actualPower) {
+      LOGW("Headphone jack has been %s", isConnected ? "inserted" : "removed");
+      pt_AudioKitStream->setPAPower(powerActive);
     }
-    return ESP_OK;
-  }
-
-  void headphone_detect_deinit() {
-    xTimerDelete(timer_headphone, HP_DELAY_TIME_MS / portTICK_RATE_MS);
-    gpio_uninstall_isr_service();
-    timer_headphone = NULL;
-  }
-
-  int headphone_status_get() { return gpio_get_level((gpio_num_t)0); }
-
-  void headphone_detect_init(int num) {
-    hp_timer_init(num);
-    gpio_config_t io_conf;
-    memset(&io_conf, 0, sizeof(io_conf));
-    io_conf.intr_type = GPIO_INTR_ANYEDGE;
-    io_conf.mode = GPIO_MODE_INPUT;
-    io_conf.pin_bit_mask = BIT64(num);
-    io_conf.pull_down_en = (gpio_pulldown_t)0;
-    io_conf.pull_up_en = (gpio_pullup_t)1;
-    gpio_config(&io_conf);
-
-    gpio_install_isr_service(0);
-    gpio_isr_handler_add((gpio_num_t)num, headphone_gpio_intr_handler,
-                         (void *)num);
   }
 };
 
