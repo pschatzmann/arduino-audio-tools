@@ -1,7 +1,7 @@
 /**
- * @file streams-i2s-csv.ino
+ * @file streams-audiokit-csv.ino
  * @author Phil Schatzmann
- * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-stream/stream-i2s-csv/README.md
+ * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-stream/stream-audiokit-csv/README.md
  * 
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -9,25 +9,22 @@
 
 
 #include "AudioTools.h"
+#include "AudioDevices/ESP32AudioKit/AudioKit.h"
 
 using namespace audio_tools;  
 
-I2SStream i2sStream; // Access I2S as stream
+AudioKitStream kit; // Access I2S as stream
 CsvStream<int32_t> csvStream(Serial);
-StreamCopy copier(csvStream, i2sStream); // copy i2sStream to csvStream
+StreamCopy copier(csvStream, kit); // copy kit to csvStream
 
 // Arduino Setup
 void setup(void) {
     Serial.begin(115200);
     AudioLogger::instance().begin(Serial, AudioLogger::Info);
     
-    auto cfg = i2sStream.defaultConfig(RX_MODE);
-    cfg.bits_per_sample = 32;
-    cfg.channels = 2;
-    cfg.sample_rate = 44100;
-    cfg.is_master = true;
-    cfg.i2s_format = I2S_MSB_FORMAT; // or try with I2S_LSB_FORMAT
-    i2sStream.begin(cfg);
+    auto cfg = kit.defaultConfig(RX_MODE);
+    cfg.input_device = ADC_INPUT_MIC2;
+    kit.begin(cfg);
 
     // make sure that we have the correct channels set up
     csvStream.begin(cfg);
