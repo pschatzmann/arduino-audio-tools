@@ -3,5 +3,7 @@
 I am providing a simple sketch which generates sound data with the Flite text to speach engine.
 You need to install https://github.com/pschatzmann/arduino-flite
 
-In this demo we provide the result as WAV stream which can be listened to in a Web Browser
+The output goes to a ‘AI Thinker Audio Kit’.
+
+<img src="https://pschatzmann.github.io/arduino-audio-tools/resources/audio-toolkit.png" alt="Audio Kit" />
 

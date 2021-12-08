@@ -358,7 +358,7 @@ static AudioKitStream *pt_AudioKitStream = nullptr;
  * @brief ESP32 Audio Kit using the ESP8388 DAC and ADC
  *
  */
-class AudioKitStream : public AudioStream {
+class AudioKitStream : public AudioStreamX {
 public:
   /// Default Constructor
   AudioKitStream() { pt_AudioKitStream = this; };
@@ -462,6 +462,8 @@ public:
       LOGE("start failed");
       result = false;
     }
+
+    active = result;
     return result;
   }
 
@@ -472,27 +474,27 @@ public:
     LOGI(LOG_METHOD);
     setPAPower(false);
     stop(module_value);
+    active = false;
   }
 
   /// Writes the audio data to I2S
   virtual size_t write(const uint8_t *buffer, size_t size) {
     LOGD(LOG_METHOD);
+    if (!active){
+      LOGE("you did not start the AudioKitStream with begin");
+      return 0;
+    }
     return i2s.writeBytes(buffer, size);
   }
 
   /// Reads the audio data
   virtual size_t readBytes(uint8_t *data, size_t length) override {
+    if (!active){
+      LOGE("you did not start the AudioKitStream with begin");
+      return 0;
+    }
     return i2s.readBytes(data, length);
   }
-
-  /// not supported
-  virtual size_t write(uint8_t) { return 0; }
-
-  /// not supported
-  virtual int read() { return -1; }
-
-  /// not supported
-  virtual int peek() { return -1; }
 
   /// Provides the available audio data
   virtual int available() override { return i2s.available(); }
@@ -500,7 +502,6 @@ public:
   /// Provides the available audio data
   virtual int availableForWrite() override { return i2s.availableForWrite(); }
 
-  void flush() override {}
 
   /**
    * @brief Reconfigure audio information
@@ -750,9 +751,10 @@ protected:
   ConfigES8388 cfg;
   es_module_t module_value;
   I2SBase i2s;
-  bool actualPower;
   AudioActions actions;
   int actionVolume = 0;
+  bool actualPower;
+  bool active;
 
   /// init i2c with different possible pins
   esp_err_t i2c_init(void) {
