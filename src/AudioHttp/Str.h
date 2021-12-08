@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "AudioTools/AudioLogger.h"
+#include "AudioHttp/Str.h"
 
 namespace audio_tools {
 
@@ -578,6 +579,23 @@ class Str {
                     chars[j] = toupper(chars[j]);
                 }
              }
+        }
+
+        /// provides a binary string represntation
+        static const char* toBinary(void const * const ptr, size_t const size ){
+            static char result[160];
+            unsigned char *b = (unsigned char*) ptr;
+            unsigned char byte;
+            int i, j, idx=0;
+            
+            for (i = size-1; i >= 0; i--) {
+                for (j = 7; j >= 0; j--) {
+                    byte = (b[i] >> j) & 1;
+                    result[idx++] = byte ? '1' : '0';
+                }
+            }
+            result[idx]=0;
+            return result;
         }
 
     protected:
