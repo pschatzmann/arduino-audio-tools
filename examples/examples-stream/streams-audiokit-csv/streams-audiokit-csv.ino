@@ -14,16 +14,17 @@
 using namespace audio_tools;  
 
 AudioKitStream kit; // Access I2S as stream
-CsvStream<int32_t> csvStream(Serial);
+CsvStream<int16_t> csvStream(Serial);
 StreamCopy copier(csvStream, kit); // copy kit to csvStream
 
 // Arduino Setup
 void setup(void) {
     Serial.begin(115200);
-    AudioLogger::instance().begin(Serial, AudioLogger::Info);
+    AudioLogger::instance().begin(Serial, AudioLogger::Debug);
     
     auto cfg = kit.defaultConfig(RX_MODE);
-    cfg.input_device = ADC_INPUT_MIC2;
+    cfg.input_device = AUDIO_HAL_ADC_INPUT_LINE2;
+    cfg.use_apll = true;
     kit.begin(cfg);
 
     // make sure that we have the correct channels set up

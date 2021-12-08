@@ -1,7 +1,14 @@
 #pragma once
 #include "Arduino.h"
+
+#ifndef ACTIONS_MAX
 #define ACTIONS_MAX 20
+#endif
+
+#ifndef DEBOUNCE_DELAY
 #define DEBOUNCE_DELAY 500
+#endif
+
 /**
  * @brief A simple class to assign Functions to Pins e.g. to implement a simple
  * navigation control or volume control with buttons 

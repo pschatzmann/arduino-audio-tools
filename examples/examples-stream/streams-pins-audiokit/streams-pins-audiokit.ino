@@ -37,10 +37,10 @@ void setup() {
   kit.addAction(PIN_KEY4, button4);
 
   // example with actions using lambda expression
-  auto up = []() { AudioKitStream::actionVolumeDown(); flite.say("Volume down"); };
-  kit.addAction(PIN_KEY5, up);
-  auto down = []() { AudioKitStream::actionVolumeUp(); flite.say("Volume up");   };
-  kit.addAction(PIN_KEY6, down);
+  auto down = []() { AudioKitStream::actionVolumeDown(); flite.say("Volume down"); };
+  kit.addAction(PIN_KEY5, down);
+  auto up = []() { AudioKitStream::actionVolumeUp(); flite.say("Volume up");   };
+  kit.addAction(PIN_KEY6, up);
 
   flite.say("Please push a button");
 }
