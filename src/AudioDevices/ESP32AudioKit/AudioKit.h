@@ -323,7 +323,7 @@ typedef struct {
  *
  */
 struct ConfigES8388 : public I2SConfig {
-public:
+ public:
   ConfigES8388() {
     pin_ws = PIN_I2S_AUDIO_KIT_WS;
     pin_bck = PIN_I2S_AUDIO_KIT_BCK;
@@ -342,7 +342,7 @@ public:
   int pin_i2c_sda = I2C_MASTER_SDA_IO;
 
   // Define final input or output device
-  es_adc_input_t input_device = ADC_INPUT_MIC1; // or ADC_INPUT_MIC2
+  es_adc_input_t input_device = ADC_INPUT_MIC1;  // or ADC_INPUT_MIC2
   es_codec_dac_output_t output_device = DAC_OUTPUT_ALL;
   es_i2s_clock_t *clock_config = nullptr;
 
@@ -359,7 +359,7 @@ static AudioKitStream *pt_AudioKitStream = nullptr;
  *
  */
 class AudioKitStream : public AudioStreamX {
-public:
+ public:
   /// Default Constructor
   AudioKitStream() { pt_AudioKitStream = this; };
 
@@ -480,7 +480,7 @@ public:
   /// Writes the audio data to I2S
   virtual size_t write(const uint8_t *buffer, size_t size) {
     LOGD(LOG_METHOD);
-    if (!active){
+    if (!active) {
       LOGE("you did not start the AudioKitStream with begin");
       return 0;
     }
@@ -489,7 +489,7 @@ public:
 
   /// Reads the audio data
   virtual size_t readBytes(uint8_t *data, size_t length) override {
-    if (!active){
+    if (!active) {
       LOGE("you did not start the AudioKitStream with begin");
       return 0;
     }
@@ -501,7 +501,6 @@ public:
 
   /// Provides the available audio data
   virtual int availableForWrite() override { return i2s.availableForWrite(); }
-
 
   /**
    * @brief Reconfigure audio information
@@ -571,7 +570,7 @@ public:
     if (mode == ES_MODULE_ADC || mode == ES_MODULE_ADC_DAC) {
       res |= i2c_write_reg(ES8388_ADDR, ES8388_ADCCONTROL8, volume);
       res |= i2c_write_reg(ES8388_ADDR, ES8388_ADCCONTROL9,
-                           volume); // ADC Right Volume=0db
+                           volume);  // ADC Right Volume=0db
     }
     if (mode == ES_MODULE_DAC || mode == ES_MODULE_ADC_DAC) {
       res |= i2c_write_reg(ES8388_ADDR, ES8388_DACCONTROL5, volume);
@@ -616,8 +615,7 @@ public:
     } else {
       volume = reg;
       volume *= 3;
-      if (volume == 99)
-        volume = 100;
+      if (volume == 99) volume = 100;
     }
     return volume;
   }
@@ -685,7 +683,7 @@ public:
     esp_err_t res, gain_n;
     gain_n = (int)gain / 3;
     gain_n = (gain_n << 4) + gain_n;
-    res = i2c_write_reg(ES8388_ADDR, ES8388_ADCCONTROL1, gain_n); // MIC PGA
+    res = i2c_write_reg(ES8388_ADDR, ES8388_ADCCONTROL1, gain_n);  // MIC PGA
     return res == ESP_OK;
   }
 
@@ -747,7 +745,66 @@ public:
     actions.add(pin, action);
   }
 
-protected:
+  /**
+   * @brief Increase the volume
+   *
+   */
+  static void actionVolumeUp() {
+    LOGI(LOG_METHOD);
+    pt_AudioKitStream->incrementVoiceVolume(+2);
+  }
+
+  /**
+   * @brief Decrease the volume
+   *
+   */
+  static void actionVolumeDown() {
+    LOGI(LOG_METHOD);
+    pt_AudioKitStream->incrementVoiceVolume(-2);
+  }
+
+  /**
+   * @brief Toggle start stop
+   *
+   */
+  static void actionStartStop() {
+    LOGI(LOG_METHOD);
+    pt_AudioKitStream->setPAPower(!pt_AudioKitStream->actualPower);
+  }
+
+  /**
+   * @brief Start
+   *
+   */
+  static void actionStart() {
+    LOGI(LOG_METHOD);
+    pt_AudioKitStream->setPAPower(true);
+  }
+
+  /**
+   * @brief Stop
+   *
+   */
+  static void actionStop() {
+    LOGI(LOG_METHOD);
+    pt_AudioKitStream->setPAPower(false);
+  }
+
+  /**
+   * @brief Process headphone detection
+   *
+   */
+  static void actionHeadphoneStatus() {
+    LOGI("process headphone detection");
+    bool isConnected = pt_AudioKitStream->headphoneStatus();
+    bool powerActive = !isConnected;
+    if (powerActive != pt_AudioKitStream->actualPower) {
+      LOGW("Headphone jack has been %s", isConnected ? "inserted" : "removed");
+      pt_AudioKitStream->setPAPower(powerActive);
+    }
+  }
+
+ protected:
   ConfigES8388 cfg;
   es_module_t module_value;
   I2SBase i2s;
@@ -867,53 +924,53 @@ protected:
     LOGD(LOG_METHOD);
     int res = 0;
 
-    res = i2c_init(); // ESP32 in master mode
+    res = i2c_init();  // ESP32 in master mode
 
     res |= i2c_write_reg(ES8388_ADDR, ES8388_DACCONTROL3,
-                         0x04); // 0x04 mute/0x00 unmute&ramp;DAC unmute and
-                                // disabled digital volume control soft ramp
+                         0x04);  // 0x04 mute/0x00 unmute&ramp;DAC unmute and
+                                 // disabled digital volume control soft ramp
     /* Chip Control and Power Management */
     res |= i2c_write_reg(ES8388_ADDR, ES8388_CONTROL2, 0x50);
     res |= i2c_write_reg(ES8388_ADDR, ES8388_CHIPPOWER,
-                         0x00); // normal all and power up all
+                         0x00);  // normal all and power up all
 
     // Disable the internal DLL to improve 8K sample rate
     res |= i2c_write_reg(ES8388_ADDR, 0x35, 0xA0);
     res |= i2c_write_reg(ES8388_ADDR, 0x37, 0xD0);
     res |= i2c_write_reg(ES8388_ADDR, 0x39, 0xD0);
 
-    res |= i2c_write_reg(ES8388_ADDR, ES8388_MASTERMODE,
-                         isMaster ? ES_MODE_MASTER
-                                  : ES_MODE_SLAVE); // CODEC IN I2S SLAVE MODE
+    res |= i2c_write_reg(
+        ES8388_ADDR, ES8388_MASTERMODE,
+        isMaster ? ES_MODE_MASTER : ES_MODE_SLAVE);  // CODEC IN I2S SLAVE MODE
 
     /* dac */
     res |= i2c_write_reg(ES8388_ADDR, ES8388_DACPOWER,
-                         0xC0); // disable DAC and disable Lout/Rout/1/2
+                         0xC0);  // disable DAC and disable Lout/Rout/1/2
     res |=
         i2c_write_reg(ES8388_ADDR, ES8388_CONTROL1,
-                      0x12); // Enfr=0,Play&Record Mode,(0x17-both of mic&paly)
+                      0x12);  // Enfr=0,Play&Record Mode,(0x17-both of mic&paly)
     //    res |= i2c_write_reg(ES8388_ADDR, ES8388_CONTROL2, 0);
     //    //LPVrefBuf=0,Pdn_ana=0
     res |= i2c_write_reg(ES8388_ADDR, ES8388_DACCONTROL1,
-                         0x18); // 1a 0x18:16bit iis , 0x00:24
+                         0x18);  // 1a 0x18:16bit iis , 0x00:24
     res |= i2c_write_reg(ES8388_ADDR, ES8388_DACCONTROL2,
-                         0x02); // DACFsMode,SINGLE SPEED; DACFsRatio,256
+                         0x02);  // DACFsMode,SINGLE SPEED; DACFsRatio,256
     if (cfg.input_device = ADC_INPUT_MIC1) {
       res |= i2c_write_reg(ES8388_ADDR, ES8388_DACCONTROL16,
-                           0x00); // 0x00 audio on LIN1&RIN1,
+                           0x00);  // 0x00 audio on LIN1&RIN1,
     } else {
       res |= i2c_write_reg(ES8388_ADDR, ES8388_DACCONTROL16,
-                           0x09); // 0x09 audio on LIN2&RIN2
+                           0x09);  // 0x09 audio on LIN2&RIN2
     }
     res |= i2c_write_reg(ES8388_ADDR, ES8388_DACCONTROL17,
-                         0x90); // only left DAC to left mixer enable 0db
+                         0x90);  // only left DAC to left mixer enable 0db
     res |= i2c_write_reg(ES8388_ADDR, ES8388_DACCONTROL20,
-                         0x90); // only right DAC to right mixer enable 0db
+                         0x90);  // only right DAC to right mixer enable 0db
     res |= i2c_write_reg(ES8388_ADDR, ES8388_DACCONTROL21,
-                         0x80); // set internal ADC and DAC use the same LRCK
-                                // clock, ADC LRCK as internal LRCK
-    res |= i2c_write_reg(ES8388_ADDR, ES8388_DACCONTROL23, 0x00); // vroi=0
-    setVolume(ES_MODULE_DAC, 0, 0);                               // no volume
+                         0x80);  // set internal ADC and DAC use the same LRCK
+                                 // clock, ADC LRCK as internal LRCK
+    res |= i2c_write_reg(ES8388_ADDR, ES8388_DACCONTROL23, 0x00);  // vroi=0
+    setVolume(ES_MODULE_DAC, 0, 0);                                // no volume
     int tmp = 0;
     if (AUDIO_HAL_DAC_OUTPUT_LINE2 == isDac) {
       tmp = DAC_OUTPUT_LOUT1 | DAC_OUTPUT_ROUT1;
@@ -924,11 +981,11 @@ protected:
             DAC_OUTPUT_ROUT2;
     }
     res |= i2c_write_reg(ES8388_ADDR, ES8388_DACPOWER,
-                         tmp); // 0x3c Enable DAC and Enable Lout/Rout/1/2
+                         tmp);  // 0x3c Enable DAC and Enable Lout/Rout/1/2
     /* adc */
     res |= i2c_write_reg(ES8388_ADDR, ES8388_ADCPOWER, 0xFF);
     res |= i2c_write_reg(ES8388_ADDR, ES8388_ADCCONTROL1,
-                         0xbb); // MIC Left and Right channel PGA gain
+                         0xbb);  // MIC Left and Right channel PGA gain
     tmp = 0;
     if (AUDIO_HAL_ADC_INPUT_LINE1 == isAdc) {
       tmp = ADC_INPUT_LINPUT1_RINPUT1;
@@ -938,20 +995,20 @@ protected:
       tmp = ADC_INPUT_DIFFERENCE;
     }
     res |= i2c_write_reg(ES8388_ADDR, ES8388_ADCCONTROL2,
-                         tmp); // 0x00 LINSEL & RINSEL, LIN1/RIN1 as ADC Input;
-                               // DSSEL,use one DS Reg11; DSR, LINPUT1-RINPUT1
+                         tmp);  // 0x00 LINSEL & RINSEL, LIN1/RIN1 as ADC Input;
+                                // DSSEL,use one DS Reg11; DSR, LINPUT1-RINPUT1
     res |= i2c_write_reg(ES8388_ADDR, ES8388_ADCCONTROL3, 0x02);
     res |= i2c_write_reg(ES8388_ADDR, ES8388_ADCCONTROL4,
-                         0x0d); // Left/Right data, Left/Right justified mode,
-                                // Bits length, I2S format
+                         0x0d);  // Left/Right data, Left/Right justified mode,
+                                 // Bits length, I2S format
     res |= i2c_write_reg(ES8388_ADDR, ES8388_ADCCONTROL5,
-                         0x02); // ADCFsMode,singel SPEED,RATIO=256
+                         0x02);  // ADCFsMode,singel SPEED,RATIO=256
 
     // ALC for Microphone
-    setVolume(ES_MODULE_ADC, 0, 0); // no volume
+    setVolume(ES_MODULE_ADC, 0, 0);  // no volume
     res |= i2c_write_reg(ES8388_ADDR, ES8388_ADCPOWER,
-                         0x09); // Power on ADC, Enable LIN&RIN, Power off
-                                // MICBIAS, set int1lp to low power mode
+                         0x09);  // Power on ADC, Enable LIN&RIN, Power off
+                                 // MICBIAS, set int1lp to low power mode
     /* enable es8388 PA */
     setPAPower(cfg.is_amplifier_active);
     ESP_LOGI(ES_TAG, "init,out:%02x, in:%02x", isDac, isAdc);
@@ -969,7 +1026,7 @@ protected:
     LOGD(LOG_METHOD);
     int res = 0;
     res = i2c_write_reg(ES8388_ADDR, ES8388_CHIPPOWER,
-                        0xFF); // reset and stop es8388
+                        0xFF);  // reset and stop es8388
     i2c_deinit();
 
     return res == ESP_OK;
@@ -994,59 +1051,50 @@ protected:
     if (mode == ES_MODULE_LINE) {
       res |= i2c_write_reg(
           ES8388_ADDR, ES8388_DACCONTROL16,
-          0x09); // 0x00 audio on LIN1&RIN1,  0x09 LIN2&RIN2 by pass enable
-      if (res != ESP_OK)
-        LOGE("ES8388_DACCONTROL16")
-      res |=
-          i2c_write_reg(ES8388_ADDR, ES8388_DACCONTROL17,
-                        0x50); // left DAC to left mixer enable  and  LIN signal
-                               // to left mixer enable 0db  : bupass enable
-      if (res != ESP_OK)
-        LOGE("ES8388_DACCONTROL17")
+          0x09);  // 0x00 audio on LIN1&RIN1,  0x09 LIN2&RIN2 by pass enable
+      if (res != ESP_OK) LOGE("ES8388_DACCONTROL16")
+      res |= i2c_write_reg(
+          ES8388_ADDR, ES8388_DACCONTROL17,
+          0x50);  // left DAC to left mixer enable  and  LIN signal
+                  // to left mixer enable 0db  : bupass enable
+      if (res != ESP_OK) LOGE("ES8388_DACCONTROL17")
       res |= i2c_write_reg(
           ES8388_ADDR, ES8388_DACCONTROL20,
-          0x50); // right DAC to right mixer enable  and  LIN signal
-                 // to right mixer enable 0db : bupass enable
-      if (res != ESP_OK)
-        LOGE("ES8388_DACCONTROL20")
+          0x50);  // right DAC to right mixer enable  and  LIN signal
+                  // to right mixer enable 0db : bupass enable
+      if (res != ESP_OK) LOGE("ES8388_DACCONTROL20")
       res |=
-          i2c_write_reg(ES8388_ADDR, ES8388_DACCONTROL21, 0xC0); // enable adc
-      if (res != ESP_OK)
-        LOGE("ES8388_DACCONTROL21-ADC")
+          i2c_write_reg(ES8388_ADDR, ES8388_DACCONTROL21, 0xC0);  // enable adc
+      if (res != ESP_OK) LOGE("ES8388_DACCONTROL21-ADC")
     } else {
       res |=
-          i2c_write_reg(ES8388_ADDR, ES8388_DACCONTROL21, 0x80); // enable dac
-      if (res != ESP_OK)
-        LOGE("ES8388_DACCONTROL21-DAC")
+          i2c_write_reg(ES8388_ADDR, ES8388_DACCONTROL21, 0x80);  // enable dac
+      if (res != ESP_OK) LOGE("ES8388_DACCONTROL21-DAC")
     }
 
     i2c_read_reg(ES8388_DACCONTROL21, &data);
     if (prev_data != data) {
       res |= i2c_write_reg(ES8388_ADDR, ES8388_CHIPPOWER,
-                           0xF0); // start state machine
-      if (res != ESP_OK)
-        LOGE("ES8388_CHIPPOWER-1")
+                           0xF0);  // start state machine
+      if (res != ESP_OK) LOGE("ES8388_CHIPPOWER-1")
 
       // res |= i2c_write_reg(ES8388_ADDR, ES8388_CONTROL1, 0x16);
       // res |= i2c_write_reg(ES8388_ADDR, ES8388_CONTROL2, 0x50);
       res |= i2c_write_reg(ES8388_ADDR, ES8388_CHIPPOWER,
-                           0x00); // start state machine
-      if (res != ESP_OK)
-        LOGE("ES8388_CHIPPOWER-2")
+                           0x00);  // start state machine
+      if (res != ESP_OK) LOGE("ES8388_CHIPPOWER-2")
     }
     if (mode == ES_MODULE_ADC || mode == ES_MODULE_ADC_DAC ||
         mode == ES_MODULE_LINE) {
       res |= i2c_write_reg(ES8388_ADDR, ES8388_ADCPOWER,
-                           0x00); // power up adc and line in
-      if (res != ESP_OK)
-        LOGE("ES8388_ADCPOWER-ADC")
+                           0x00);  // power up adc and line in
+      if (res != ESP_OK) LOGE("ES8388_ADCPOWER-ADC")
     }
     if (mode == ES_MODULE_DAC || mode == ES_MODULE_ADC_DAC ||
         mode == ES_MODULE_LINE) {
       res |= i2c_write_reg(ES8388_ADDR, ES8388_DACPOWER,
-                           0x3c); // power up dac and line out
-      if (res != ESP_OK)
-        LOGE("ES8388_DACPOWER-DAC")
+                           0x3c);  // power up dac and line out
+      if (res != ESP_OK) LOGE("ES8388_DACPOWER-DAC")
 
       setVoiceMute(false);
       ESP_LOGD(ES_TAG, "start default is mode:%d", mode);
@@ -1070,31 +1118,31 @@ protected:
     LOGD(LOG_METHOD);
     esp_err_t res = ESP_OK;
     if (mode == ES_MODULE_LINE) {
-      res |= i2c_write_reg(ES8388_ADDR, ES8388_DACCONTROL21, 0x80); // enable
-                                                                    // dac
+      res |= i2c_write_reg(ES8388_ADDR, ES8388_DACCONTROL21, 0x80);  // enable
+                                                                     // dac
       // res |= i2c_write_reg(ES8388_ADDR, ES8388_DACCONTROL16,
       //                      0x00); // 0x00 audio on LIN1&RIN1,  0x09 LIN2&RIN2
       res |= i2c_write_reg(ES8388_ADDR, ES8388_DACCONTROL17,
-                           0x90); // only left DAC to left mixer enable 0db
+                           0x90);  // only left DAC to left mixer enable 0db
       res |= i2c_write_reg(ES8388_ADDR, ES8388_DACCONTROL20,
-                           0x90); // only right DAC to right mixer enable 0db
+                           0x90);  // only right DAC to right mixer enable 0db
       return res;
     }
     if (mode == ES_MODULE_DAC || mode == ES_MODULE_ADC_DAC) {
       res |= i2c_write_reg(ES8388_ADDR, ES8388_DACPOWER, 0x00);
       res |= setVoiceMute(
-          true); // res |= Es8388SetAdcDacVolume(ES_MODULE_DAC, -96, 5); // 0db
+          true);  // res |= Es8388SetAdcDacVolume(ES_MODULE_DAC, -96, 5); // 0db
       // res |= i2c_write_reg(ES8388_ADDR, ES8388_DACPOWER, 0xC0);  //power down
       // dac and line out
     }
     if (mode == ES_MODULE_ADC || mode == ES_MODULE_ADC_DAC) {
       // res |= Es8388SetAdcDacVolume(ES_MODULE_ADC, -96, 5);      // 0db
       res |= i2c_write_reg(ES8388_ADDR, ES8388_ADCPOWER,
-                           0xFF); // power down adc and line in
+                           0xFF);  // power down adc and line in
     }
     if (mode == ES_MODULE_ADC_DAC) {
       res |= i2c_write_reg(ES8388_ADDR, ES8388_DACCONTROL21,
-                           0x9C); // disable mclk
+                           0x9C);  // disable mclk
       //        res |= i2c_write_reg(ES8388_ADDR, ES8388_CONTROL1, 0x00);
       //        res |= i2c_write_reg(ES8388_ADDR, ES8388_CONTROL2, 0x58);
       //        res |= i2c_write_reg(ES8388_ADDR, ES8388_CHIPPOWER, 0xF3);
@@ -1122,10 +1170,10 @@ protected:
                            (*clock_config).sclk_div);
       res |= i2c_write_reg(
           ES8388_ADDR, ES8388_ADCCONTROL5,
-          (*clock_config).lclk_div); // ADCFsMode,singel SPEED,RATIO=256
+          (*clock_config).lclk_div);  // ADCFsMode,singel SPEED,RATIO=256
       res |= i2c_write_reg(
           ES8388_ADDR, ES8388_DACCONTROL2,
-          (*clock_config).lclk_div); // ADCFsMode,singel SPEED,RATIO=256
+          (*clock_config).lclk_div);  // ADCFsMode,singel SPEED,RATIO=256
     } else {
       LOGD("no clock configured");
     }
@@ -1143,22 +1191,22 @@ protected:
   bool setFormat(es_module_t module, I2SFormat fmt) {
     LOGD(LOG_METHOD);
     switch (fmt) {
-    case I2S_STD_FORMAT:
-      return setFormat(module, ES_I2S_NORMAL);
-    case I2S_LSB_FORMAT:
-      return setFormat(module, ES_I2S_LEFT);
-    case I2S_MSB_FORMAT:
-      return setFormat(module, ES_I2S_RIGHT);
-    case I2S_PHILIPS_FORMAT:
-      return setFormat(module, ES_I2S_NORMAL);
-    case I2S_RIGHT_JUSTIFIED_FORMAT:
-      return setFormat(module, ES_I2S_RIGHT);
-    case I2S_LEFT_JUSTIFIED_FORMAT:
-      return setFormat(module, ES_I2S_LEFT);
-    case I2S_PCM_LONG:
-      return setFormat(module, ES_I2S_DSP);
-    case I2S_PCM_SHORT:
-      return setFormat(module, ES_I2S_DSP);
+      case I2S_STD_FORMAT:
+        return setFormat(module, ES_I2S_NORMAL);
+      case I2S_LSB_FORMAT:
+        return setFormat(module, ES_I2S_LEFT);
+      case I2S_MSB_FORMAT:
+        return setFormat(module, ES_I2S_RIGHT);
+      case I2S_PHILIPS_FORMAT:
+        return setFormat(module, ES_I2S_NORMAL);
+      case I2S_RIGHT_JUSTIFIED_FORMAT:
+        return setFormat(module, ES_I2S_RIGHT);
+      case I2S_LEFT_JUSTIFIED_FORMAT:
+        return setFormat(module, ES_I2S_LEFT);
+      case I2S_PCM_LONG:
+        return setFormat(module, ES_I2S_DSP);
+      case I2S_PCM_SHORT:
+        return setFormat(module, ES_I2S_DSP);
     }
     return false;
   }
@@ -1233,18 +1281,18 @@ protected:
   bool setBitsPerSample(es_module_t module, int bit_length) {
     LOGD(LOG_METHOD);
     switch (bit_length) {
-    case 16:
-      return setBitsPerSample(module, BIT_LENGTH_16BITS);
-    case 18:
-      return setBitsPerSample(module, BIT_LENGTH_18BITS);
-    case 20:
-      return setBitsPerSample(module, BIT_LENGTH_20BITS);
-    case 24:
-      return setBitsPerSample(module, BIT_LENGTH_24BITS);
-    case 32:
-      return setBitsPerSample(module, BIT_LENGTH_32BITS);
-    default:
-      LOGE("Unsupported bits_per_sample: %d", bit_length);
+      case 16:
+        return setBitsPerSample(module, BIT_LENGTH_16BITS);
+      case 18:
+        return setBitsPerSample(module, BIT_LENGTH_18BITS);
+      case 20:
+        return setBitsPerSample(module, BIT_LENGTH_20BITS);
+      case 24:
+        return setBitsPerSample(module, BIT_LENGTH_24BITS);
+      case 32:
+        return setBitsPerSample(module, BIT_LENGTH_32BITS);
+      default:
+        LOGE("Unsupported bits_per_sample: %d", bit_length);
     }
     return false;
   }
@@ -1348,43 +1396,8 @@ protected:
                   AudioActions::ActiveChange);
     }
     actions.add(PIN_KEY1, actionStartStop);
-    actions.add(PIN_KEY5, volumeDown);
-    actions.add(PIN_KEY6, volumeUp);
-  }
-
-  static void volumeUp() {
-    LOGI(LOG_METHOD);
-    pt_AudioKitStream->incrementVoiceVolume(+2);
-  }
-
-  static void volumeDown() {
-    LOGI(LOG_METHOD);
-    pt_AudioKitStream->incrementVoiceVolume(-2);
-  }
-
-  static void actionStartStop() {
-    LOGI(LOG_METHOD);
-    pt_AudioKitStream->setPAPower(!pt_AudioKitStream->actualPower);
-  }
-
-  static void actionStart() {
-    LOGI(LOG_METHOD);
-    pt_AudioKitStream->setPAPower(true);
-  }
-
-  static void actionStop() {
-    LOGI(LOG_METHOD);
-    pt_AudioKitStream->setPAPower(false);
-  }
-
-  static void actionHeadphoneStatus() {
-    LOGI("process headphone detection");
-    bool isConnected = pt_AudioKitStream->headphoneStatus();
-    bool powerActive = !isConnected;
-    if (powerActive != pt_AudioKitStream->actualPower) {
-      LOGW("Headphone jack has been %s", isConnected ? "inserted" : "removed");
-      pt_AudioKitStream->setPAPower(powerActive);
-    }
+    actions.add(PIN_KEY5, actionVolumeDown);
+    actions.add(PIN_KEY6, actionVolumeUp);
   }
 };
 
@@ -1393,4 +1406,4 @@ typedef AudioKitStream AudioKit;
 typedef AudioKitStream ESP32AudioKit;
 typedef AudioKitStream ESP8388Stream;
 
-} // namespace audio_tools
+}  // namespace audio_tools
