@@ -6,7 +6,7 @@
  * @copyright Copyright (c) 2021
  */
 
-#include "AudioDevices/ESP32AudioKit/AudioKit.h"
+#include "AudioDevices/AudioKitESP32/AudioKit.h"
 #include "AudioTools.h"
 #include "flite_arduino.h"
 

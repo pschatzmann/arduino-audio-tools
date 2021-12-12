@@ -2,6 +2,9 @@
 
 // Audio Kit V2.3 
 
+/* ES8388 address */
+#define I2C_MASTER_NUM I2C_NUM_0 /*!< I2C port number for master dev */
+#define I2C_ES8388_ADDR  0x20
 #define I2C_MASTER_SCL_IO 32     
 #define I2C_MASTER_SDA_IO 33    
 
