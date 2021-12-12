@@ -9,7 +9,7 @@
 
 
 #include "AudioTools.h"
-#include "AudioDevices/ESP32AudioKit/AudioKit.h"
+#include "AudioDevices/AudioKitESP32/AudioKit.h"
 
 using namespace audio_tools;  
 

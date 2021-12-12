@@ -1,6 +1,6 @@
 #define USE_A2DP
 #include "AudioTools.h"
-#include "AudioDevices/ESP32AudioKit/AudioKit.h"
+#include "AudioDevices/AudioKitESP32/AudioKit.h"
 
 BluetoothA2DPSink a2dp_sink;
 AudioKitStream kit;

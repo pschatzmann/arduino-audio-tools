@@ -236,12 +236,13 @@ class I2SBase {
         switch(mode){
           case I2S_PHILIPS_FORMAT:
           case I2S_STD_FORMAT:
-          case I2S_LSB_FORMAT:
-          case I2S_RIGHT_JUSTIFIED_FORMAT:
             return (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_I2S;
-          case I2S_MSB_FORMAT:
           case I2S_LEFT_JUSTIFIED_FORMAT:
+          case I2S_MSB_FORMAT:
             return (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_MSB;
+          case I2S_RIGHT_JUSTIFIED_FORMAT:
+          case I2S_LSB_FORMAT:
+            return (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_LSB;
           // case I2S_PCM_LONG:
           //   return (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_PCM_LONG;
           // case I2S_PCM_SHORT:
