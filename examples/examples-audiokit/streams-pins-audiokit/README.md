@@ -12,6 +12,7 @@ You just need to define you __handler methods__ (button1, button2...) and assign
 
 You need to install the following libraries:
 
-- [FLITE](https://github.com/pschatzmann/arduino-flite)
 - [Arduino Audio Tolls](https://github.com/pschatzmann/arduino-audio-tools)
+- [AudioKit](https://github.com/pschatzmann/arduino-audiokit)
+- [FLITE](https://github.com/pschatzmann/arduino-flite)
 
