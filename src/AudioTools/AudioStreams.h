@@ -46,6 +46,7 @@ class AudioStreamX : public Stream, public AudioBaseInfoDependent {
   virtual int read() { return -1; }
   virtual int peek() { return -1; }
   virtual void flush() {}
+  virtual void setAudioInfo(audio_tools::AudioBaseInfo){}
 };
 
 /**

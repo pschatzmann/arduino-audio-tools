@@ -8,7 +8,7 @@ namespace audio_tools {
 /**
  * @brief Audio Source (TX_MODE) or Audio Sink (RX_MODE)
  */
-enum RxTxMode  { TX_MODE=1, RX_MODE=2 };
+enum RxTxMode  {UNDEFINED_MODE=0, TX_MODE=1, RX_MODE=2, RXTX_MODE=3 };
 
 /**
  * @brief Time Units

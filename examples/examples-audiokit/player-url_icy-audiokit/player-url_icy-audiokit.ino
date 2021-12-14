@@ -11,7 +11,7 @@
 
 #include "AudioTools.h"
 #include "AudioCodecs/CodecMP3Helix.h"
-#include "AudioDevices/AudioKitESP32/AudioKit.h"
+#include "AudioLibs/AudioKitHAL.h"
 
 using namespace audio_tools;  
 

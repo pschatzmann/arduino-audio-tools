@@ -6,13 +6,13 @@
  * @copyright Copyright (c) 2021
  */
 
-#include "AudioDevices/AudioKitESP32/AudioKit.h"
 #include "AudioTools.h"
+#include "AudioLibs/AudioKitHAL.h"
 #include "flite_arduino.h"
 
 using namespace audio_tools;
 
-AudioKitStream kit;
+AudioKitStream kit; 
 Flite flite(kit);
 
 void button1() { flite.say("Button One"); }
@@ -23,6 +23,8 @@ void button4() { flite.say("Button Four"); }
 // Arduino setup
 void setup() {
   Serial.begin(115200);
+  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  //AUDIOKIT_LOG_LEVEL = AudioKitDebug; 
 
   auto cfg = kit.defaultConfig();
   cfg.bits_per_sample = 16;

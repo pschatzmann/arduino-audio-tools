@@ -1,6 +1,7 @@
 #define USE_A2DP
 #include "AudioTools.h"
-#include "AudioDevices/AudioKitESP32/AudioKit.h"
+#include "AudioLibs/AudioKitHAL.h"
+
 
 BluetoothA2DPSink a2dp_sink;
 AudioKitStream kit;
@@ -15,7 +16,6 @@ void setup() {
 
   // setup output
   auto cfg = kit.defaultConfig(TX_MODE);
-  cfg.default_volume = 50;
   kit.begin(cfg);
 
   // register callback

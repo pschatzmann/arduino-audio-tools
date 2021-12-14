@@ -231,18 +231,23 @@ class I2SBase {
         return result;
     }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
     // determines the i2s_comm_format_t - by default we use I2S_COMM_FORMAT_STAND_I2S
     i2s_comm_format_t toCommFormat(I2SFormat mode){
+
         switch(mode){
           case I2S_PHILIPS_FORMAT:
           case I2S_STD_FORMAT:
             return (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_I2S;
           case I2S_LEFT_JUSTIFIED_FORMAT:
           case I2S_MSB_FORMAT:
-            return (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_MSB;
+            return (i2s_comm_format_t) I2S_COMM_FORMAT_I2S_MSB;
           case I2S_RIGHT_JUSTIFIED_FORMAT:
           case I2S_LSB_FORMAT:
-            return (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_LSB;
+            return (i2s_comm_format_t) I2S_COMM_FORMAT_I2S_LSB;
+          // this is strange but the docu specifies that 
           // case I2S_PCM_LONG:
           //   return (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_PCM_LONG;
           // case I2S_PCM_SHORT:
@@ -253,6 +258,8 @@ class I2SBase {
             return (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_I2S;
         }
     }
+#pragma GCC diagnostic pop
+
 
     // determines the i2s_format_t
     i2s_mode_t toMode(I2SConfig &cfg) {
