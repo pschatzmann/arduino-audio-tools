@@ -7,3 +7,13 @@ The output goes to a ‘AI Thinker Audio Kit’.
 
 <img src="https://pschatzmann.github.io/arduino-audio-tools/resources/audio-toolkit.png" alt="Audio Kit" />
 
+### Dependencies
+
+You need to install the following libraries:
+
+- [Arduino Audio Tolls](https://github.com/pschatzmann/arduino-audio-tools)
+- [AudioKit](https://github.com/pschatzmann/arduino-audiokit)
+- [FLITE](https://github.com/pschatzmann/arduino-flite)
+
+
+
