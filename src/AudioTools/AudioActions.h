@@ -18,10 +18,14 @@ class AudioActions {
   enum ActiveLogic { ActiveLow, ActiveHigh, ActiveChange };
 
   void add(int pin, void (*action)(), ActiveLogic activeLogicPar = ActiveLow) {
+    LOGI("ActionLogic::add pin: %d", pin);
     if (maxIdx + 1 >= ACTIONS_MAX) {
       LOGE("Too many actions: please increase ACTIONS_MAX")
       return;
     }
+
+    pinMode(pin, INPUT_PULLUP);
+
     int pos = findPin(pin);
     if (pos != -1) {
       actions[pos] = action;
@@ -32,7 +36,6 @@ class AudioActions {
       activeLogic[maxIdx] = activeLogicPar;
       maxIdx++;
     }
-    pinMode(pin, INPUT_PULLUP);
   }
 
   /**
@@ -51,8 +54,7 @@ class AudioActions {
         }
       } else {
         bool active = (activeLogic[j] == ActiveLow) ? !value : value;
-        if (active &&
-            (active != lastState[j] || millis() > debounceTimeout[j])) {
+        if (active && (active != lastState[j] || millis() > debounceTimeout[j])) {
           // execute action
           actions[j]();
           lastState[j] = active;

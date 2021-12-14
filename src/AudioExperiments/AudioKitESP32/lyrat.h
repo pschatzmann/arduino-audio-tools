@@ -4,7 +4,7 @@
 // I do not have any device, so I could not test this
 
 #define I2C_MASTER_NUM I2C_NUM_0 /*!< I2C port number for master dev */
-#define I2C_ES8388_ADDR  0x20
+#define I2C_MASTER_ADDR  0x20
 #define I2C_MASTER_SCL_IO 23     /*!< gpio number for I2C master clock */
 #define I2C_MASTER_SDA_IO 18     /*!< gpio number for I2C master data  */
 

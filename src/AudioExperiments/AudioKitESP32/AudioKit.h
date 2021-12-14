@@ -27,11 +27,11 @@
 #if USE_AUDIO_KIT == 2
 // ai tinker board pins
 // https://github.com/Ai-Thinker-Open/ESP32-A1S-AudioKit)
-#include "AudioDevices/ESP32AudioKit/ai-thinker.h"
+#include "AudioDevices/AudioKitESP32/ai-thinker.h"
 #else
 // lyrat pins:
 // https://docs.espressif.com/projects/esp-adf/en/latest/design-guide/board-esp32-lyrat-mini-v1.2.html#gpio-allocation-summary
-#include "AudioDevices/ESP32AudioKit/layrat.h"
+#include "AudioDevices/AudioKitESP32/layrat.h"
 #endif
 
 #define ACK_CHECK_EN 0x1
@@ -284,8 +284,7 @@ struct ConfigES8388 : public I2SConfig {
   int pin_i2c_sda = I2C_MASTER_SDA_IO;
 
   // Define final input or output device
-  audio_hal_adc_input_t input_device =
-      AUDIO_HAL_ADC_INPUT_LINE2;  // or ADC_INPUT_MIC2
+  audio_hal_adc_input_t input_device = AUDIO_HAL_ADC_INPUT_LINE2;  // or ADC_INPUT_MIC2
   audio_hal_dac_output_t output_device = AUDIO_HAL_DAC_OUTPUT_ALL;
   es_i2s_clock_t *clock_config = nullptr;
 
@@ -520,7 +519,7 @@ class AudioKitStream : public AudioStreamX {
     LOGI("setVolume(%d,%d,%d)", mode, volume, dot);
     int res = 0;
     if (volume < -96 || volume > 0) {
-      ESP_LOGW(ES_TAG, "Warning: volume < -96! or > 0!\n");
+      LOGW("Warning: volume < -96! or > 0!\n");
       if (volume < -96)
         volume = -96;
       else
@@ -663,7 +662,7 @@ class AudioKitStream : public AudioStreamX {
       res = stop(es_mode);
     } else {
       res = start(es_mode);
-      ESP_LOGD(ES_TAG, "start default is decode mode:%d", es_mode);
+      LOGD("start default is decode mode:%d", es_mode);
     }
     return res == ESP_OK;
   }
@@ -776,32 +775,24 @@ class AudioKitStream : public AudioStreamX {
 
   /// init i2c with different possible pins
   esp_err_t i2c_init(void) {
-    esp_err_t result = i2c_init(cfg.pin_i2c_sda, cfg.pin_i2c_scl);
+    LOGI("i2c sda: %d", cfg.pin_i2c_sda);
+    LOGI("i2c scl: %d", cfg.pin_i2c_scl);
+    esp_err_t result = i2c_init(I2C_MASTER_NUM, cfg.pin_i2c_sda, cfg.pin_i2c_scl);
     if (result != ESP_OK) {
-      LOGE("I2C Init failed with configured pins %d/%d", cfg.pin_i2c_sda,
-           cfg.pin_i2c_scl);
-      result = i2c_init(33, 32);
-      if (result == ESP_OK) {
-        LOGW("I2C success with pins %d/%d", 33, 32);
-      } else {
-        result = i2c_init(23, 18);
-        if (result == ESP_OK) {
-          LOGW("I2C success with pins %d/%d", 23, 18);
-        }
-      }
+      LOGE("I2C Init failed with configured pins %d/%d", cfg.pin_i2c_sda, cfg.pin_i2c_scl);
     }
     return result;
   }
 
-  esp_err_t i2c_init(int sda, int scl) {
+  esp_err_t i2c_init(int port, int sda, int scl) {
     LOGD(LOG_METHOD);
 
     i2c_port_t i2c_master_port = cfg.i2c_master;
     i2c_config_t conf;
     conf.mode = I2C_MODE_MASTER;
-    conf.sda_io_num = (gpio_num_t)cfg.pin_i2c_sda;
+    conf.sda_io_num = (gpio_num_t)sda;
     conf.sda_pullup_en = GPIO_PULLUP_ENABLE;
-    conf.scl_io_num = (gpio_num_t)cfg.pin_i2c_scl;
+    conf.scl_io_num = (gpio_num_t)scl;
     conf.scl_pullup_en = GPIO_PULLUP_ENABLE;
     conf.master.clk_speed = 100000;
     i2c_param_config(i2c_master_port, &conf);
@@ -814,11 +805,11 @@ class AudioKitStream : public AudioStreamX {
   }
 
   esp_err_t i2c_write_reg(uint8_t reg_add, uint8_t data) {
-    return i2c_write(I2C_ES8388_ADDR, reg_add, data);
+    return i2c_write(I2C_MASTER_ADDR, reg_add, data);
   }
 
   esp_err_t i2c_read_reg(uint8_t reg_add, uint8_t *p_data) {
-    *p_data = i2c_read(I2C_ES8388_ADDR, reg_add);
+    *p_data = i2c_read(I2C_MASTER_ADDR, reg_add);
     return ESP_OK;
   }
 
@@ -974,7 +965,7 @@ class AudioKitStream : public AudioStreamX {
 
     /* enable es8388 PA */
     setPAPower(cfg.is_amplifier_active);
-    ESP_LOGI(ES_TAG, "init,out:%02x, in:%02x", dac, adc);
+    LOGI("init,out:%02x, in:%02x", dac, adc);
     return res == ESP_OK;
   }
 
@@ -1048,7 +1039,7 @@ class AudioKitStream : public AudioStreamX {
       res |= i2c_write_reg(ES8388_DACPOWER, 0x3c);
 
       setVoiceMute(false);
-      ESP_LOGD(ES_TAG, "start default is mode:%d", mode);
+      LOGD( "start default is mode:%d", mode);
     }
 
     return res == ESP_OK;
@@ -1305,15 +1296,15 @@ class AudioKitStream : public AudioStreamX {
    */
   esp_err_t i2s_mclk_gpio_select(i2s_port_t i2s_num, gpio_num_t gpio_num) {
     if (i2s_num >= I2S_NUM_MAX) {
-      ESP_LOGE(ES_TAG, "Does not support i2s number(%d)", i2s_num);
+      LOGE( "Does not support i2s number(%d)", i2s_num);
       return ESP_ERR_INVALID_ARG;
     }
     if (gpio_num != GPIO_NUM_0 && gpio_num != GPIO_NUM_1 &&
         gpio_num != GPIO_NUM_3) {
-      ESP_LOGE(ES_TAG, "Only support GPIO0/GPIO1/GPIO3, gpio_num:%d", gpio_num);
+      LOGE( "Only support GPIO0/GPIO1/GPIO3, gpio_num:%d", gpio_num);
       return ESP_ERR_INVALID_ARG;
     }
-    ESP_LOGI(ES_TAG, "I2S%d, MCLK output by GPIO%d", i2s_num, gpio_num);
+    LOGI("I2S%d, MCLK output by GPIO%d", i2s_num, gpio_num);
     if (i2s_num == I2S_NUM_0) {
       if (gpio_num == GPIO_NUM_0) {
         PIN_FUNC_SELECT(PERIPHS_IO_MUX_GPIO0_U, FUNC_GPIO0_CLK_OUT1);
@@ -1347,7 +1338,7 @@ class AudioKitStream : public AudioStreamX {
   void setupActions() {
     LOGI(LOG_METHOD);
     if (cfg.headphone_detection_active) {
-      actions.add(HEADPHONE_DETECT, actionHeadphoneStatus,
+      actions.add(HEADPHONE_DETECT, actionHeadphoneDetection,
                   AudioActions::ActiveChange);
     }
     actions.add(PIN_KEY1, actionStartStop);

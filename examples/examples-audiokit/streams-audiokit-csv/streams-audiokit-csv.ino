@@ -9,7 +9,7 @@
 
 
 #include "AudioTools.h"
-#include "AudioDevices/AudioKitESP32/AudioKit.h"
+#include "AudioLibs/AudioKitHAL.h"
 
 using namespace audio_tools;  
 
@@ -23,12 +23,12 @@ void setup(void) {
     AudioLogger::instance().begin(Serial, AudioLogger::Debug);
     
     auto cfg = kit.defaultConfig(RX_MODE);
-    cfg.input_device = AUDIO_HAL_ADC_INPUT_LINE2;
+    cfg.adc_input = AUDIO_HAL_ADC_INPUT_LINE2;
     cfg.use_apll = true;
     kit.begin(cfg);
 
     // make sure that we have the correct channels set up
-    csvStream.begin(cfg);
+    csvStream.begin();
 
 }
 

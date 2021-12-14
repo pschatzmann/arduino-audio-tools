@@ -10,7 +10,7 @@
 #define USE_SDFAT
 #define USE_HELIX
 #include "AudioTools.h"
-#include "AudioDevices/AudioKitESP32/AudioKit.h"
+#include "AudioLibs/AudioKitHAL.h"
 
 using namespace audio_tools;  
 

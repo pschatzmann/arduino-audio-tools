@@ -409,7 +409,7 @@ class VolumeOutput : public AudioPrint {
 
         /// Writes raw PCM audio data, which will be the input for the volume control 
         virtual size_t write(const uint8_t *buffer, size_t size){
-             LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             if (buffer==nullptr || p_out==nullptr){
                 LOGE("NPE");
                 return 0;
@@ -585,6 +585,7 @@ class FormatConverterStream : public AudioPrint {
         int multiply; // copy single to n channels
         int step;
         float factor = 1.0;
+        float format_factor = 1.0;
         int offset = 0;
         int target_bits_per_sample;
         int source_bits_per_sample;
@@ -593,45 +594,49 @@ class FormatConverterStream : public AudioPrint {
     template <class T>
     class AudioArray{
         public:
-            AudioArray(const uint8_t *data, size_t len,  Convert &convert){
-                this->data = (T*)data;
-                this->count_val = len/sizeof(T);
+            AudioArray(Convert &convert){
                 this->p_convert = &convert;
             }
+
             size_t size() {
-                return count_val;
+                return size_val;
             }
 
             T operator[](int pos){
                 return data[pos];
             }
             
-            void write(Print &out){
-                for (int j=0;j<size();j+=p_convert->step){
+            // writes all input samples
+            void write(const uint8_t *dataIn, size_t len, Print &out){
+                this->data = (T*)dataIn;
+                this->size_val = len;
+                // we process all input samples
+                for (int j=0;j<size();j++){
                     T value = data[j];
+                    // convert to output format
                     switch(p_convert->target_bits_per_sample){
                         case 8: {
-                                int8_t out_value8 = static_cast<float>(value) * p_convert->factor * maxValue(p_convert->target_bits_per_sample) / maxValue(p_convert->source_bits_per_sample) + p_convert->offset;
+                                int8_t out_value8 = (p_convert->factor * p_convert->format_factor * value) + p_convert->offset;
                                 byte arr[p_convert->multiply];
-                                memset(arr,out_value8, p_convert->multiply);
+                                memset(arr, out_value8, p_convert->multiply);
                                 out.write((const uint8_t*)arr, p_convert->multiply);
                             } break;
                         case 16: {
-                                int16_t out_value16 = static_cast<int32_t>(value) * p_convert->factor * maxValue(p_convert->target_bits_per_sample) / maxValue(p_convert->source_bits_per_sample) + p_convert->offset;
+                                int16_t out_value16 = (p_convert->factor * p_convert->format_factor * value) + p_convert->offset;
                                 for (int ch=0;ch<p_convert->multiply;ch++){
-                                    out.write((const uint8_t*)&out_value16, 16);
+                                    out.write((const uint8_t*)&out_value16, 2);
                                 }
                             } break;
                         case 24: {
-                                int32_t out_value24 = static_cast<float>(value) * p_convert->factor * maxValue(p_convert->target_bits_per_sample) / maxValue(p_convert->source_bits_per_sample) + p_convert->offset;
+                                int32_t out_value24 = (p_convert->factor * p_convert->format_factor  * value) + p_convert->offset;
                                 for (int ch=0;ch<p_convert->multiply;ch++){
-                                    out.write((const uint8_t*)&out_value24, 24);
+                                    out.write((const uint8_t*)&out_value24, 3);
                                 }
                             } break;
                         case 32: {
-                                int32_t out_value32 = static_cast<float>(value) * p_convert->factor * maxValue(p_convert->target_bits_per_sample) / maxValue(p_convert->source_bits_per_sample) + p_convert->offset;
+                                int32_t out_value32 = (p_convert->factor * p_convert->format_factor * value) + p_convert->offset;
                                 for (int ch=0;ch<p_convert->multiply;ch++){
-                                    out.write((const uint8_t*)&out_value32, 32);
+                                    out.write((const uint8_t*)&out_value32, 4);
                                 }
                             } break;
                     }
@@ -640,52 +645,42 @@ class FormatConverterStream : public AudioPrint {
 
         protected:
             T* data=nullptr;
-            size_t count_val;
-            float factor_value;
-            int target_bits_per_sample;
+            size_t size_val;
+            int target_bits_per_sample=16;
             Convert *p_convert;
     };
 
     public:
+        FormatConverterStream() = default;
+
+        FormatConverterStream(Print &out) {
+            setStream(out);
+        }
+
         FormatConverterStream(Print &out, AudioBaseInfo &infoOut, AudioBaseInfo &infoIn){
             this->p_out = &out;
             p_info_out = &infoOut;
             p_info_in = &infoIn;
 
-            convert.source_bits_per_sample = infoIn.bits_per_sample;
-            convert.target_bits_per_sample = infoOut.bits_per_sample;
+            setup();
+        }
 
-            if (p_info_out->bits_per_sample == p_info_in->bits_per_sample
-            && p_info_out->channels == p_info_in->channels ){
-                no_conversion = true;
-            } else if (p_info_out->channels == p_info_in->channels){
-                // copy 1:1
-                convert.multiply = 1;
-                convert.step = 1;
-            } else if (p_info_in->channels == 1 && p_info_out->channels>1){
-                // generate multiple output channels per frame
-                convert.multiply = p_info_out->channels;
-                convert.step = 1;
-            } else if (p_info_out->channels == 1){
-                convert.multiply = 1;
-                convert.step = p_info_in->channels; // just output 1 channel per frame
-            } else {
-                convert.multiply = 0;
-                LOGE("invalid input vs output channels");
-            }
+        /// (Re-)Assigns a stream to the Adapter class
+        void setStream(Print &out){
+            this->p_out = &out;
         }
 
         /// Defines the output info
         void setInputInfo(AudioBaseInfo &info){
             p_info_in = &info;
-            convert.source_bits_per_sample = info.bits_per_sample;
+            setup();
         }
 
 
         /// Defines the output info
         void setInfo(AudioBaseInfo &info){
             p_info_out = &info;
-            convert.target_bits_per_sample = info.bits_per_sample;
+            setup();
         }
 
         /// multiplies the result with the indicated factor (e.g. to control the volume)
@@ -704,29 +699,23 @@ class FormatConverterStream : public AudioPrint {
             if (no_conversion){
                 result = p_out->write(data, len);
             } else if (convert.multiply>0){
-                //int size = len / p_info_in->bits_per_sample / 8;
-                convert.target_bits_per_sample = p_info_out->bits_per_sample;
                 switch(p_info_in->bits_per_sample) {
-                    case 8:
-                        static AudioArray<int8_t> array8(data, len, convert);
-                        array8.write(*p_out);
+                    case 8: {
+                        array8.write(data, len, *p_out);
                         result = len;
-                        break;
-                    case 16:
-                        static AudioArray<int16_t> array16(data, len, convert);
-                        array16.write(*p_out);
+                        } break;
+                    case 16: {
+                        array16.write(data, len/2, *p_out);
                         result = len;
-                        break;
-                    case 24:
-                        static AudioArray<int24_t> array24(data, len, convert);
-                        array24.write(*p_out);
+                        } break;
+                    case 24: {
+                        array24.write(data, len/3,*p_out);
                         result = len;
-                        break;
-                    case 32:
-                        static AudioArray<int32_t> array32(data, len, convert);
-                        array32.write(*p_out);
+                        } break;
+                    case 32: {
+                        array32.write(data, len/4,*p_out);
                         result = len;
-                        break;
+                        } break;
                 }  
             }
             return result;
@@ -735,8 +724,51 @@ class FormatConverterStream : public AudioPrint {
     protected:
         bool no_conversion = false;
         Print *p_out;
-        AudioBaseInfo *p_info_out,*p_info_in;
+        AudioBaseInfo *p_info_out=nullptr,*p_info_in=nullptr;
         Convert convert;
+        AudioArray<int8_t> array8 = AudioArray<int8_t>(convert);
+        AudioArray<int16_t> array16 = AudioArray<int16_t>(convert);
+        AudioArray<int24_t> array24 = AudioArray<int24_t>(convert);
+        AudioArray<int32_t> array32 = AudioArray<int32_t>(convert);
+
+
+        void setup() {
+            if (p_info_out!=nullptr && p_info_in!=nullptr){
+                LOGI(LOG_METHOD);
+                convert.source_bits_per_sample = p_info_in->bits_per_sample;
+                convert.target_bits_per_sample = p_info_out->bits_per_sample;
+                if (convert.source_bits_per_sample != convert.target_bits_per_sample){
+                    convert.format_factor = maxValue(convert.target_bits_per_sample) / maxValue(convert.source_bits_per_sample);
+                    LOGI("FormatConverterStream: bits %d -> %d - factor %f",convert.source_bits_per_sample, convert.target_bits_per_sample, convert.format_factor);
+                } else {
+                    convert.format_factor = 1.0;
+                }
+
+                if (p_info_out->bits_per_sample == p_info_in->bits_per_sample
+                && p_info_out->channels == p_info_in->channels ){
+                    no_conversion = true;
+                    LOGI("FormatConverterStream: no conversion")
+                } else if (p_info_out->channels == p_info_in->channels){
+                    // copy 1:1
+                    convert.multiply = 1;
+                    convert.step = 1;
+                    LOGI("FormatConverterStream: no channel conversion")
+                } else if (p_info_in->channels == 1 && p_info_out->channels>1){
+                    // generate multiple output channels per frame
+                    convert.multiply = p_info_out->channels;
+                    convert.step = 1;
+                    LOGI("FormatConverterStream: multiply channels by %d", convert.multiply);
+
+                } else if (p_info_out->channels == 1){
+                    convert.multiply = 1;
+                    convert.step = p_info_in->channels; // just output 1 channel per frame
+                    LOGI("FormatConverterStream: no conversion 1 channel")
+                } else {
+                    convert.multiply = 0;
+                    LOGE("invalid input vs output channels");
+                }
+            }
+        }
 
 };
 
