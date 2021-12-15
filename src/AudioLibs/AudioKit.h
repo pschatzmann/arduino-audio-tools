@@ -171,6 +171,7 @@ class AudioKitStream : public AudioStreamX {
     return result;
   }
 
+  /// Starts the processing
   void begin(AudioKitStreamConfig config) {
     LOGD(LOG_METHOD);
     cfg = config;
@@ -190,9 +191,15 @@ class AudioKitStream : public AudioStreamX {
     setVolume(volume_value);
   }
 
+  /// Stops the processing
   void end() {
     LOGD(LOG_METHOD);
     kit.end();
+  }
+
+  /// We get the data via I2S - we expect to fill one buffer size
+  int available() {
+    return cfg.rx_tx_mode == TX_MODE ? 0 :  DEFAULT_BUFFER_SIZE;
   }
 
   virtual size_t write(const uint8_t *buffer, size_t size) override {
@@ -242,8 +249,8 @@ class AudioKitStream : public AudioStreamX {
    *
    */
   void processActions() {
-//    LOGD(LOG_METHOD);
-      actions.processActions();
+//  LOGD(LOG_METHOD);
+    actions.processActions();
     delay(1);
   }
 

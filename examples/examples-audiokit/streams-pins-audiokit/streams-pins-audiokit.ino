@@ -1,7 +1,7 @@
 /**
  * @file stream-pins-audiokit.ino
  * @brief see
- * https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-stream/stream-pins-audiokit/README.md
+ * https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-audiokit/stream-pins-audiokit/README.md
  * @author Phil Schatzmann
  * @copyright Copyright (c) 2021
  */
