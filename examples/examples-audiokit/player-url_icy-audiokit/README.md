@@ -18,3 +18,4 @@ I also demonstrate how to assign your own actions to the buttons of the audio ki
 
 - https://github.com/pschatzmann/arduino-audio-tools
 - https://github.com/pschatzmann/arduino-libhelix
+- https://github.com/pschatzmann/arduino-audiokit

@@ -10,5 +10,8 @@ You dont need to bother about any wires because everything is on one nice board.
 
 ## Dependencies
 
+You need to install the following libraries:
+
 - https://github.com/pschatzmann/arduino-audio-tools
 - https://github.com/pschatzmann/ESP32-A2DP
+- https://github.com/pschatzmann/arduino-audiokit
