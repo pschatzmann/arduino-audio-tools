@@ -37,7 +37,7 @@ class AudioStream : public Stream, public AudioBaseInfoDependent {
  * @brief Same as AudioStream - but we do not have any abstract methods
  *
  */
-class AudioStreamX : public Stream, public AudioBaseInfoDependent {
+class AudioStreamX : public AudioStream {
  public:
   virtual size_t readBytes(uint8_t *buffer, size_t length) { return 0; }
   virtual size_t write(const uint8_t *buffer, size_t size) { return 0; }

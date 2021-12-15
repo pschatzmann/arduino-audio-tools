@@ -1,6 +1,6 @@
 /**
  * @file player-url-kit.ino
- * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-player/player-url-audiokit/README.md
+ * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-audiokit/player-url-audiokit/README.md
  * 
  * @author Phil Schatzmann
  * @copyright GPLv3
