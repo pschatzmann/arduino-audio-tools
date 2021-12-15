@@ -67,8 +67,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
-<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_audio_kit_stream-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -79,17 +79,21 @@ $(function() {
 <p>ESP32 Audio Kit using the ESP8388 DAC and ADC.  
  <a href="classaudio__tools_1_1_audio_kit_stream.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_audio_experiments_2_audio_kit_e_s_p32_2_audio_kit_8h_source.html">AudioKit.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for audio_tools::AudioKitStream:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="classaudio__tools_1_1_audio_kit_stream.png" usemap="#audio_5Ftools::AudioKitStream_map" alt=""/>
   <map id="audio_5Ftools::AudioKitStream_map" name="audio_5Ftools::AudioKitStream_map">
-<area href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="audio_tools::AudioStream" shape="rect" coords="117,112,342,136"/>
+<area href="classaudio__tools_1_1_audio_stream_x.html" title="Same as AudioStream - but we do not have any abstract methods." alt="audio_tools::AudioStreamX" shape="rect" coords="117,112,342,136"/>
+<area href="classaudio__tools_1_1_audio_stream_x.html" title="Same as AudioStream - but we do not have any abstract methods." alt="audio_tools::AudioStreamX" shape="rect" coords="587,112,812,136"/>
 <area href="class_stream.html" alt="Stream" shape="rect" coords="0,56,225,80"/>
 <area href="classaudio__tools_1_1_audio_base_info_dependent.html" title="Supports changes to the sampling rate, bits and channels." alt="audio_tools::AudioBaseInfoDependent" shape="rect" coords="235,56,460,80"/>
+<area href="class_stream.html" alt="Stream" shape="rect" coords="470,56,695,80"/>
+<area href="classaudio__tools_1_1_audio_base_info_dependent.html" title="Supports changes to the sampling rate, bits and channels." alt="audio_tools::AudioBaseInfoDependent" shape="rect" coords="705,56,930,80"/>
 <area href="class_print.html" alt="Print" shape="rect" coords="0,0,225,24"/>
+<area href="class_print.html" alt="Print" shape="rect" coords="470,0,695,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -103,6 +107,12 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#ada4f0fb1d43fe2215ad4894b9b3a297e">~AudioKitStream</a> ()</td></tr>
 <tr class="memdesc:ada4f0fb1d43fe2215ad4894b9b3a297e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. <br /></td></tr>
 <tr class="separator:ada4f0fb1d43fe2215ad4894b9b3a297e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54170fb4805b84014e1a5c46ee762a94"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a54170fb4805b84014e1a5c46ee762a94">addAction</a> (int pin, void(*action)())</td></tr>
+<tr class="memdesc:a54170fb4805b84014e1a5c46ee762a94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a new action that is executed when the indicated pin is active.  <a href="classaudio__tools_1_1_audio_kit_stream.html#a54170fb4805b84014e1a5c46ee762a94">More...</a><br /></td></tr>
+<tr class="separator:a54170fb4805b84014e1a5c46ee762a94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54170fb4805b84014e1a5c46ee762a94"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a54170fb4805b84014e1a5c46ee762a94">addAction</a> (int pin, void(*action)())</td></tr>
+<tr class="memdesc:a54170fb4805b84014e1a5c46ee762a94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a new action that is executed when the indicated pin is active.  <a href="classaudio__tools_1_1_audio_kit_stream.html#a54170fb4805b84014e1a5c46ee762a94">More...</a><br /></td></tr>
+<tr class="separator:a54170fb4805b84014e1a5c46ee762a94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d510d9a6b594e9c29f8181c767900f1"><td class="memItemLeft" align="right" valign="top"><a id="a1d510d9a6b594e9c29f8181c767900f1"></a>
 virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a1d510d9a6b594e9c29f8181c767900f1">available</a> () override</td></tr>
 <tr class="memdesc:a1d510d9a6b594e9c29f8181c767900f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the available audio data. <br /></td></tr>
@@ -114,9 +124,19 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 <tr class="memitem:a7751eadb13f71c201b6945dd1cfb4068"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a7751eadb13f71c201b6945dd1cfb4068">begin</a> ()</td></tr>
 <tr class="memdesc:a7751eadb13f71c201b6945dd1cfb4068"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the output processing.  <a href="classaudio__tools_1_1_audio_kit_stream.html#a7751eadb13f71c201b6945dd1cfb4068">More...</a><br /></td></tr>
 <tr class="separator:a7751eadb13f71c201b6945dd1cfb4068"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87f961bcc07a3ab0092d487a7dd1ce0c"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a87f961bcc07a3ab0092d487a7dd1ce0c">begin</a> (<a class="el" href="structaudio__tools_1_1_config_e_s8388.html">ConfigES8388</a> cfg)</td></tr>
-<tr class="memdesc:a87f961bcc07a3ab0092d487a7dd1ce0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the processing.  <a href="classaudio__tools_1_1_audio_kit_stream.html#a87f961bcc07a3ab0092d487a7dd1ce0c">More...</a><br /></td></tr>
-<tr class="separator:a87f961bcc07a3ab0092d487a7dd1ce0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a090a82a9c29e0a4d27a9a53c68c02347"><td class="memItemLeft" align="right" valign="top"><a id="a090a82a9c29e0a4d27a9a53c68c02347"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (<a class="el" href="classaudio__tools_1_1_audio_kit_stream_config.html">AudioKitStreamConfig</a> config)</td></tr>
+<tr class="separator:a090a82a9c29e0a4d27a9a53c68c02347"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cae833573c1800852914c8170cdffc6"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a3cae833573c1800852914c8170cdffc6">begin</a> (<a class="el" href="structaudio__tools_1_1_config_e_s8388.html">ConfigES8388</a> cfgPar)</td></tr>
+<tr class="memdesc:a3cae833573c1800852914c8170cdffc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the processing.  <a href="classaudio__tools_1_1_audio_kit_stream.html#a3cae833573c1800852914c8170cdffc6">More...</a><br /></td></tr>
+<tr class="separator:a3cae833573c1800852914c8170cdffc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9c747a0828f58d20cdda4ab39fe4349"><td class="memItemLeft" align="right" valign="top"><a id="ae9c747a0828f58d20cdda4ab39fe4349"></a>
+<a class="el" href="classaudio__tools_1_1_audio_kit_stream_config.html">AudioKitStreamConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><b>config</b> ()</td></tr>
+<tr class="separator:ae9c747a0828f58d20cdda4ab39fe4349"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bdb9c4d243f910873ab078f72904143"><td class="memItemLeft" align="right" valign="top"><a id="a4bdb9c4d243f910873ab078f72904143"></a>
+<a class="el" href="classaudio__tools_1_1_audio_kit_stream_config.html">AudioKitStreamConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a4bdb9c4d243f910873ab078f72904143">defaultConfig</a> (<a class="el" href="namespaceaudio__tools.html#a0d4e1fe2dd00b263250e9319bcc85946">RxTxMode</a> mode=RXTX_MODE)</td></tr>
+<tr class="memdesc:a4bdb9c4d243f910873ab078f72904143"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the default configuration. <br /></td></tr>
+<tr class="separator:a4bdb9c4d243f910873ab078f72904143"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4301b8ad94fe200c6f5d7b48f96d6b2c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structaudio__tools_1_1_config_e_s8388.html">ConfigES8388</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a4301b8ad94fe200c6f5d7b48f96d6b2c">defaultConfig</a> (<a class="el" href="namespaceaudio__tools.html#a0d4e1fe2dd00b263250e9319bcc85946">RxTxMode</a> mode=TX_MODE)</td></tr>
 <tr class="memdesc:a4301b8ad94fe200c6f5d7b48f96d6b2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides a default cofiguration object.  <a href="classaudio__tools_1_1_audio_kit_stream.html#a4301b8ad94fe200c6f5d7b48f96d6b2c">More...</a><br /></td></tr>
 <tr class="separator:a4301b8ad94fe200c6f5d7b48f96d6b2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -124,29 +144,97 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a86f63ba924673d53c6a2817f1d486de5">end</a> ()</td></tr>
 <tr class="memdesc:a86f63ba924673d53c6a2817f1d486de5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ends the processing. <br /></td></tr>
 <tr class="separator:a86f63ba924673d53c6a2817f1d486de5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a869873539248aeeee06612b656fb27bc"><td class="memItemLeft" align="right" valign="top"><a id="a869873539248aeeee06612b656fb27bc"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>flush</b> () override</td></tr>
-<tr class="separator:a869873539248aeeee06612b656fb27bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fb01801700cd52ba75dd541b1c97048"><td class="memItemLeft" align="right" valign="top"><a id="a7fb01801700cd52ba75dd541b1c97048"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
+<tr class="separator:a7fb01801700cd52ba75dd541b1c97048"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa78eee831d329c593aa2060e9d446a56"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#aa78eee831d329c593aa2060e9d446a56">headphoneStatus</a> ()</td></tr>
+<tr class="memdesc:aa78eee831d329c593aa2060e9d446a56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the headphone is connected.  <a href="classaudio__tools_1_1_audio_kit_stream.html#aa78eee831d329c593aa2060e9d446a56">More...</a><br /></td></tr>
+<tr class="separator:aa78eee831d329c593aa2060e9d446a56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe20a2a58085387c5c2a6ebd2020b752"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#afe20a2a58085387c5c2a6ebd2020b752">incrementVoiceVolume</a> (int inc)</td></tr>
+<tr class="memdesc:afe20a2a58085387c5c2a6ebd2020b752"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increments/Decrements the volume.  <a href="classaudio__tools_1_1_audio_kit_stream.html#afe20a2a58085387c5c2a6ebd2020b752">More...</a><br /></td></tr>
+<tr class="separator:afe20a2a58085387c5c2a6ebd2020b752"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32c44d9cd615d1467dc55d73d5ffed7d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a32c44d9cd615d1467dc55d73d5ffed7d">incrementVolume</a> (int vol)</td></tr>
+<tr class="memdesc:a32c44d9cd615d1467dc55d73d5ffed7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Relative volume control.  <a href="classaudio__tools_1_1_audio_kit_stream.html#a32c44d9cd615d1467dc55d73d5ffed7d">More...</a><br /></td></tr>
+<tr class="separator:a32c44d9cd615d1467dc55d73d5ffed7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aebabd0d3a2cd699e3990c2ad79cee282"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#aebabd0d3a2cd699e3990c2ad79cee282">isVoiceMute</a> (void)</td></tr>
 <tr class="memdesc:aebabd0d3a2cd699e3990c2ad79cee282"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get ES8388 DAC mute status.  <a href="classaudio__tools_1_1_audio_kit_stream.html#aebabd0d3a2cd699e3990c2ad79cee282">More...</a><br /></td></tr>
 <tr class="separator:aebabd0d3a2cd699e3990c2ad79cee282"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a31b888026263533c00b4b7ae2abab2d2"><td class="memItemLeft" align="right" valign="top"><a id="a31b888026263533c00b4b7ae2abab2d2"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a31b888026263533c00b4b7ae2abab2d2">peek</a> ()</td></tr>
-<tr class="memdesc:a31b888026263533c00b4b7ae2abab2d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">not supported <br /></td></tr>
-<tr class="separator:a31b888026263533c00b4b7ae2abab2d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69d8fa59cf8cd897c56f901a84a6d23e"><td class="memItemLeft" align="right" valign="top"><a id="a69d8fa59cf8cd897c56f901a84a6d23e"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a69d8fa59cf8cd897c56f901a84a6d23e">read</a> ()</td></tr>
-<tr class="memdesc:a69d8fa59cf8cd897c56f901a84a6d23e"><td class="mdescLeft">&#160;</td><td class="mdescRight">not supported <br /></td></tr>
-<tr class="separator:a69d8fa59cf8cd897c56f901a84a6d23e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12eae851767e2021989006c30372a5f9"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a12eae851767e2021989006c30372a5f9">pinAdcDetect</a> ()</td></tr>
+<tr class="memdesc:a12eae851767e2021989006c30372a5f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the gpio number for adc detection.  <a href="classaudio__tools_1_1_audio_kit_stream.html#a12eae851767e2021989006c30372a5f9">More...</a><br /></td></tr>
+<tr class="separator:a12eae851767e2021989006c30372a5f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6a73027fcabaf7e497f867b25d873ef"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#aa6a73027fcabaf7e497f867b25d873ef">pinAuxin</a> ()</td></tr>
+<tr class="memdesc:aa6a73027fcabaf7e497f867b25d873ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the gpio number for auxin detection.  <a href="classaudio__tools_1_1_audio_kit_stream.html#aa6a73027fcabaf7e497f867b25d873ef">More...</a><br /></td></tr>
+<tr class="separator:aa6a73027fcabaf7e497f867b25d873ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5fa0136d092295751c90ee1cb4fc3bf"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#af5fa0136d092295751c90ee1cb4fc3bf">pinBlueLed</a> ()</td></tr>
+<tr class="memdesc:af5fa0136d092295751c90ee1cb4fc3bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get green led gpio number.  <a href="classaudio__tools_1_1_audio_kit_stream.html#af5fa0136d092295751c90ee1cb4fc3bf">More...</a><br /></td></tr>
+<tr class="separator:af5fa0136d092295751c90ee1cb4fc3bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8822a240c4430647d16481d25b1ce59"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#ac8822a240c4430647d16481d25b1ce59">pinEs7243Mclk</a> ()</td></tr>
+<tr class="memdesc:ac8822a240c4430647d16481d25b1ce59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the mclk gpio number of es7243.  <a href="classaudio__tools_1_1_audio_kit_stream.html#ac8822a240c4430647d16481d25b1ce59">More...</a><br /></td></tr>
+<tr class="separator:ac8822a240c4430647d16481d25b1ce59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8745fd390eeb45b457a81537782a022e"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a8745fd390eeb45b457a81537782a022e">pinGreenLed</a> ()</td></tr>
+<tr class="memdesc:a8745fd390eeb45b457a81537782a022e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get DSP reset gpio number.  <a href="classaudio__tools_1_1_audio_kit_stream.html#a8745fd390eeb45b457a81537782a022e">More...</a><br /></td></tr>
+<tr class="separator:a8745fd390eeb45b457a81537782a022e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf2b92908344993f45c489d035909d53"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#acf2b92908344993f45c489d035909d53">pinHeadphoneDetect</a> ()</td></tr>
+<tr class="memdesc:acf2b92908344993f45c489d035909d53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the gpio number for headphone detection.  <a href="classaudio__tools_1_1_audio_kit_stream.html#acf2b92908344993f45c489d035909d53">More...</a><br /></td></tr>
+<tr class="separator:acf2b92908344993f45c489d035909d53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad112e90266b77ba4aedb86bf2cb52f7c"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#ad112e90266b77ba4aedb86bf2cb52f7c">pinInputMode</a> ()</td></tr>
+<tr class="memdesc:ad112e90266b77ba4aedb86bf2cb52f7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number for mode-button.  <a href="classaudio__tools_1_1_audio_kit_stream.html#ad112e90266b77ba4aedb86bf2cb52f7c">More...</a><br /></td></tr>
+<tr class="separator:ad112e90266b77ba4aedb86bf2cb52f7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab503279310b54626dda1bc1f27c24ffa"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#ab503279310b54626dda1bc1f27c24ffa">pinInputPlay</a> ()</td></tr>
+<tr class="memdesc:ab503279310b54626dda1bc1f27c24ffa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get number for play function.  <a href="classaudio__tools_1_1_audio_kit_stream.html#ab503279310b54626dda1bc1f27c24ffa">More...</a><br /></td></tr>
+<tr class="separator:ab503279310b54626dda1bc1f27c24ffa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1705fb2215bf3ffae5212b044263f4f7"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a1705fb2215bf3ffae5212b044263f4f7">pinInputRec</a> ()</td></tr>
+<tr class="memdesc:a1705fb2215bf3ffae5212b044263f4f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the record-button id for adc-button.  <a href="classaudio__tools_1_1_audio_kit_stream.html#a1705fb2215bf3ffae5212b044263f4f7">More...</a><br /></td></tr>
+<tr class="separator:a1705fb2215bf3ffae5212b044263f4f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe61036aebf036957b9fc48e67377dde"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#abe61036aebf036957b9fc48e67377dde">pinInputSet</a> ()</td></tr>
+<tr class="memdesc:abe61036aebf036957b9fc48e67377dde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get number for set function.  <a href="classaudio__tools_1_1_audio_kit_stream.html#abe61036aebf036957b9fc48e67377dde">More...</a><br /></td></tr>
+<tr class="separator:abe61036aebf036957b9fc48e67377dde"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02b69f0c45673ceb7f4c407b2f6872dd"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a02b69f0c45673ceb7f4c407b2f6872dd">pinPaEnable</a> ()</td></tr>
+<tr class="memdesc:a02b69f0c45673ceb7f4c407b2f6872dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the gpio number for PA enable.  <a href="classaudio__tools_1_1_audio_kit_stream.html#a02b69f0c45673ceb7f4c407b2f6872dd">More...</a><br /></td></tr>
+<tr class="separator:a02b69f0c45673ceb7f4c407b2f6872dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a372f4d65c67e31b9e470db4af5439d83"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a372f4d65c67e31b9e470db4af5439d83">pinResetBoard</a> ()</td></tr>
+<tr class="memdesc:a372f4d65c67e31b9e470db4af5439d83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get DSP reset gpio number.  <a href="classaudio__tools_1_1_audio_kit_stream.html#a372f4d65c67e31b9e470db4af5439d83">More...</a><br /></td></tr>
+<tr class="separator:a372f4d65c67e31b9e470db4af5439d83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77dd75efe863a1be553d96f6e337331c"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a77dd75efe863a1be553d96f6e337331c">pinResetCodec</a> ()</td></tr>
+<tr class="memdesc:a77dd75efe863a1be553d96f6e337331c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get green led gpio number.  <a href="classaudio__tools_1_1_audio_kit_stream.html#a77dd75efe863a1be553d96f6e337331c">More...</a><br /></td></tr>
+<tr class="separator:a77dd75efe863a1be553d96f6e337331c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec0953dec3a7fdaa43d1974aa6c86be5"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#aec0953dec3a7fdaa43d1974aa6c86be5">pinVolumeDown</a> ()</td></tr>
+<tr class="memdesc:aec0953dec3a7fdaa43d1974aa6c86be5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get number for volume down function.  <a href="classaudio__tools_1_1_audio_kit_stream.html#aec0953dec3a7fdaa43d1974aa6c86be5">More...</a><br /></td></tr>
+<tr class="separator:aec0953dec3a7fdaa43d1974aa6c86be5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab051b90122c4ab9099f4afdc0e0fe80f"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#ab051b90122c4ab9099f4afdc0e0fe80f">pinVolumeUp</a> ()</td></tr>
+<tr class="memdesc:ab051b90122c4ab9099f4afdc0e0fe80f"><td class="mdescLeft">&#160;</td><td class="mdescRight">number for volume up function  <a href="classaudio__tools_1_1_audio_kit_stream.html#ab051b90122c4ab9099f4afdc0e0fe80f">More...</a><br /></td></tr>
+<tr class="separator:ab051b90122c4ab9099f4afdc0e0fe80f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adef26af1f09011cc309fb893fb65ec99"><td class="memItemLeft" align="right" valign="top"><a id="adef26af1f09011cc309fb893fb65ec99"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#adef26af1f09011cc309fb893fb65ec99">processActions</a> ()</td></tr>
+<tr class="memdesc:adef26af1f09011cc309fb893fb65ec99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process input keys and pins. <br /></td></tr>
+<tr class="separator:adef26af1f09011cc309fb893fb65ec99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adef26af1f09011cc309fb893fb65ec99"><td class="memItemLeft" align="right" valign="top"><a id="adef26af1f09011cc309fb893fb65ec99"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#adef26af1f09011cc309fb893fb65ec99">processActions</a> ()</td></tr>
+<tr class="memdesc:adef26af1f09011cc309fb893fb65ec99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process input keys and pins. <br /></td></tr>
+<tr class="separator:adef26af1f09011cc309fb893fb65ec99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ab1b97119640807b4c43c8fe71108b4"><td class="memItemLeft" align="right" valign="top"><a id="a1ab1b97119640807b4c43c8fe71108b4"></a>
 virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a1ab1b97119640807b4c43c8fe71108b4">readBytes</a> (uint8_t *data, size_t length) override</td></tr>
 <tr class="memdesc:a1ab1b97119640807b4c43c8fe71108b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads the audio data. <br /></td></tr>
 <tr class="separator:a1ab1b97119640807b4c43c8fe71108b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ab1b97119640807b4c43c8fe71108b4"><td class="memItemLeft" align="right" valign="top"><a id="a1ab1b97119640807b4c43c8fe71108b4"></a>
+virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a1ab1b97119640807b4c43c8fe71108b4">readBytes</a> (uint8_t *data, size_t length) override</td></tr>
+<tr class="memdesc:a1ab1b97119640807b4c43c8fe71108b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads the audio data. <br /></td></tr>
+<tr class="separator:a1ab1b97119640807b4c43c8fe71108b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05e065e2040cae2a843dc4ce45f2d656"><td class="memItemLeft" align="right" valign="top"><a id="a05e065e2040cae2a843dc4ce45f2d656"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a05e065e2040cae2a843dc4ce45f2d656">setActive</a> (bool active)</td></tr>
+<tr class="memdesc:a05e065e2040cae2a843dc4ce45f2d656"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the codec active / inactive. <br /></td></tr>
+<tr class="separator:a05e065e2040cae2a843dc4ce45f2d656"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc53a1361626ad6cefd20d02a97940fa"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#acc53a1361626ad6cefd20d02a97940fa">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> info)</td></tr>
 <tr class="memdesc:acc53a1361626ad6cefd20d02a97940fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reconfigure audio information.  <a href="classaudio__tools_1_1_audio_kit_stream.html#acc53a1361626ad6cefd20d02a97940fa">More...</a><br /></td></tr>
 <tr class="separator:acc53a1361626ad6cefd20d02a97940fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc53a1361626ad6cefd20d02a97940fa"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#acc53a1361626ad6cefd20d02a97940fa">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> info)</td></tr>
+<tr class="separator:acc53a1361626ad6cefd20d02a97940fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af7c27c4e2d3acb073b5f764fcd20aae7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#af7c27c4e2d3acb073b5f764fcd20aae7">setMicrophoneGain</a> (es_mic_gain_t gain)</td></tr>
 <tr class="separator:af7c27c4e2d3acb073b5f764fcd20aae7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a541fd4883e273a9c7d7fe7ff454a83b1"><td class="memItemLeft" align="right" valign="top"><a id="a541fd4883e273a9c7d7fe7ff454a83b1"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a541fd4883e273a9c7d7fe7ff454a83b1">setMute</a> (bool mute)</td></tr>
+<tr class="memdesc:a541fd4883e273a9c7d7fe7ff454a83b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mutes the output. <br /></td></tr>
+<tr class="separator:a541fd4883e273a9c7d7fe7ff454a83b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80879a7944f65f0c323bfbaa94eb72f5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a80879a7944f65f0c323bfbaa94eb72f5">setPAPower</a> (bool enable)</td></tr>
 <tr class="memdesc:a80879a7944f65f0c323bfbaa94eb72f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set ES8388 PA power.  <a href="classaudio__tools_1_1_audio_kit_stream.html#a80879a7944f65f0c323bfbaa94eb72f5">More...</a><br /></td></tr>
 <tr class="separator:a80879a7944f65f0c323bfbaa94eb72f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -156,30 +244,43 @@ virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 <tr class="memitem:abaa5eaf14f7c2e15b3f0e12d202e507c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#abaa5eaf14f7c2e15b3f0e12d202e507c">setVoiceMute</a> (bool enable)</td></tr>
 <tr class="memdesc:abaa5eaf14f7c2e15b3f0e12d202e507c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure ES8388 DAC mute or not. Basically you can use this function to mute the output or unmute.  <a href="classaudio__tools_1_1_audio_kit_stream.html#abaa5eaf14f7c2e15b3f0e12d202e507c">More...</a><br /></td></tr>
 <tr class="separator:abaa5eaf14f7c2e15b3f0e12d202e507c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5fbebfcda24a6266f2714b109f00deba"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a5fbebfcda24a6266f2714b109f00deba">setVoiceVolume</a> (int volume)</td></tr>
+<tr class="memitem:a5fbebfcda24a6266f2714b109f00deba"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a5fbebfcda24a6266f2714b109f00deba">setVoiceVolume</a> (int <a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a9e478fc32a4f8d37f2ffe0596736c6fd">volume</a>)</td></tr>
 <tr class="memdesc:a5fbebfcda24a6266f2714b109f00deba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set voice volume.  <a href="classaudio__tools_1_1_audio_kit_stream.html#a5fbebfcda24a6266f2714b109f00deba">More...</a><br /></td></tr>
 <tr class="separator:a5fbebfcda24a6266f2714b109f00deba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae98ce6dbc06ca3c05fab4bb04afd23bf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#ae98ce6dbc06ca3c05fab4bb04afd23bf">setVolume</a> (int mode, int volume, int dot)</td></tr>
+<tr class="memitem:ae98ce6dbc06ca3c05fab4bb04afd23bf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#ae98ce6dbc06ca3c05fab4bb04afd23bf">setVolume</a> (int mode, int <a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a9e478fc32a4f8d37f2ffe0596736c6fd">volume</a>, int dot)</td></tr>
 <tr class="memdesc:ae98ce6dbc06ca3c05fab4bb04afd23bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure ES8388 ADC and DAC volume. Basicly you can consider this as ADC and DAC gain.  <a href="classaudio__tools_1_1_audio_kit_stream.html#ae98ce6dbc06ca3c05fab4bb04afd23bf">More...</a><br /></td></tr>
 <tr class="separator:ae98ce6dbc06ca3c05fab4bb04afd23bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad25e2cdca8162132f44a9a84e839ea69"><td class="memItemLeft" align="right" valign="top"><a id="ad25e2cdca8162132f44a9a84e839ea69"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#ad25e2cdca8162132f44a9a84e839ea69">setVolume</a> (int vol)</td></tr>
+<tr class="memdesc:ad25e2cdca8162132f44a9a84e839ea69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the Volume. <br /></td></tr>
+<tr class="separator:ad25e2cdca8162132f44a9a84e839ea69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abbae9868804acae172b8cf25b116982b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#abbae9868804acae172b8cf25b116982b">voiceVolume</a> ()</td></tr>
 <tr class="memdesc:abbae9868804acae172b8cf25b116982b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get voice volume.  <a href="classaudio__tools_1_1_audio_kit_stream.html#abbae9868804acae172b8cf25b116982b">More...</a><br /></td></tr>
 <tr class="separator:abbae9868804acae172b8cf25b116982b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e478fc32a4f8d37f2ffe0596736c6fd"><td class="memItemLeft" align="right" valign="top"><a id="a9e478fc32a4f8d37f2ffe0596736c6fd"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a9e478fc32a4f8d37f2ffe0596736c6fd">volume</a> ()</td></tr>
+<tr class="memdesc:a9e478fc32a4f8d37f2ffe0596736c6fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the volume. <br /></td></tr>
+<tr class="separator:a9e478fc32a4f8d37f2ffe0596736c6fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af705448db899592007bd34329564c08d"><td class="memItemLeft" align="right" valign="top"><a id="af705448db899592007bd34329564c08d"></a>
 virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#af705448db899592007bd34329564c08d">write</a> (const uint8_t *buffer, size_t size)</td></tr>
 <tr class="memdesc:af705448db899592007bd34329564c08d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the audio data to <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for multiple Architectures that supports the reading and writing with a ...">I2S</a>. <br /></td></tr>
 <tr class="separator:af705448db899592007bd34329564c08d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b7bce12e46893e7de0e3049f1f512ff"><td class="memItemLeft" align="right" valign="top"><a id="a1b7bce12e46893e7de0e3049f1f512ff"></a>
-virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a1b7bce12e46893e7de0e3049f1f512ff">write</a> (uint8_t)</td></tr>
-<tr class="memdesc:a1b7bce12e46893e7de0e3049f1f512ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">not supported <br /></td></tr>
-<tr class="separator:a1b7bce12e46893e7de0e3049f1f512ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classaudio__tools_1_1_audio_stream"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classaudio__tools_1_1_audio_stream')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classaudio__tools_1_1_audio_stream.html">audio_tools::AudioStream</a></td></tr>
-<tr class="memitem:a1a851437d47b227d3885bb383bbd1e78 inherit pub_methods_classaudio__tools_1_1_audio_stream"><td class="memItemLeft" align="right" valign="top"><a id="a1a851437d47b227d3885bb383bbd1e78"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>operator bool</b> ()</td></tr>
-<tr class="separator:a1a851437d47b227d3885bb383bbd1e78 inherit pub_methods_classaudio__tools_1_1_audio_stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a995fb36439145e49722ca1caeab337c4 inherit pub_methods_classaudio__tools_1_1_audio_stream"><td class="memItemLeft" align="right" valign="top"><a id="a995fb36439145e49722ca1caeab337c4"></a>
-virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>readBytes</b> (char *buffer, size_t length)</td></tr>
-<tr class="separator:a995fb36439145e49722ca1caeab337c4 inherit pub_methods_classaudio__tools_1_1_audio_stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4443f625332e2e7a3ef27e9acc678715"><td class="memItemLeft" align="right" valign="top"><a id="a4443f625332e2e7a3ef27e9acc678715"></a>
+virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (const uint8_t *buffer, size_t size) override</td></tr>
+<tr class="separator:a4443f625332e2e7a3ef27e9acc678715"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classaudio__tools_1_1_audio_stream_x"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classaudio__tools_1_1_audio_stream_x')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classaudio__tools_1_1_audio_stream_x.html">audio_tools::AudioStreamX</a></td></tr>
+<tr class="memitem:a6e39cf631e504a8f4f38b887315f384d inherit pub_methods_classaudio__tools_1_1_audio_stream_x"><td class="memItemLeft" align="right" valign="top"><a id="a6e39cf631e504a8f4f38b887315f384d"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>flush</b> ()</td></tr>
+<tr class="separator:a6e39cf631e504a8f4f38b887315f384d inherit pub_methods_classaudio__tools_1_1_audio_stream_x"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08a64dbaaaec09098e0b973d036fbf34 inherit pub_methods_classaudio__tools_1_1_audio_stream_x"><td class="memItemLeft" align="right" valign="top"><a id="a08a64dbaaaec09098e0b973d036fbf34"></a>
+virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>peek</b> ()</td></tr>
+<tr class="separator:a08a64dbaaaec09098e0b973d036fbf34 inherit pub_methods_classaudio__tools_1_1_audio_stream_x"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b6bb6200e1acbe6705a0f57420266db inherit pub_methods_classaudio__tools_1_1_audio_stream_x"><td class="memItemLeft" align="right" valign="top"><a id="a7b6bb6200e1acbe6705a0f57420266db"></a>
+virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>read</b> ()</td></tr>
+<tr class="separator:a7b6bb6200e1acbe6705a0f57420266db inherit pub_methods_classaudio__tools_1_1_audio_stream_x"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6cf845f4ba4a1f2ff91970d88461994 inherit pub_methods_classaudio__tools_1_1_audio_stream_x"><td class="memItemLeft" align="right" valign="top"><a id="aa6cf845f4ba4a1f2ff91970d88461994"></a>
+virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (uint8_t)</td></tr>
+<tr class="separator:aa6cf845f4ba4a1f2ff91970d88461994 inherit pub_methods_classaudio__tools_1_1_audio_stream_x"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_stream"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_stream')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_stream.html">Stream</a></td></tr>
 <tr class="memitem:a4f529a9d7309aedf535fb1a6757a5675 inherit pub_methods_class_stream"><td class="memItemLeft" align="right" valign="top"><a id="a4f529a9d7309aedf535fb1a6757a5675"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>find</b> (char target)</td></tr>
@@ -337,42 +438,81 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (const ch
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>validate</b> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> &amp;info)</td></tr>
 <tr class="separator:a16c99d6218d2dc4574d4d9725d77052a inherit pub_methods_classaudio__tools_1_1_audio_base_info_dependent"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a222d657b4785094964bc266f847f0769"><td class="memItemLeft" align="right" valign="top"><a id="a222d657b4785094964bc266f847f0769"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a222d657b4785094964bc266f847f0769">actionHeadphoneStatus</a> ()</td></tr>
+<tr class="memdesc:a222d657b4785094964bc266f847f0769"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process headphone detection. <br /></td></tr>
+<tr class="separator:a222d657b4785094964bc266f847f0769"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77ed4b5aca9b6cfe1a2ab93e048cd06d"><td class="memItemLeft" align="right" valign="top"><a id="a77ed4b5aca9b6cfe1a2ab93e048cd06d"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a77ed4b5aca9b6cfe1a2ab93e048cd06d">actionStart</a> ()</td></tr>
+<tr class="memdesc:a77ed4b5aca9b6cfe1a2ab93e048cd06d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start. <br /></td></tr>
+<tr class="separator:a77ed4b5aca9b6cfe1a2ab93e048cd06d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77ed4b5aca9b6cfe1a2ab93e048cd06d"><td class="memItemLeft" align="right" valign="top"><a id="a77ed4b5aca9b6cfe1a2ab93e048cd06d"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a77ed4b5aca9b6cfe1a2ab93e048cd06d">actionStart</a> ()</td></tr>
+<tr class="memdesc:a77ed4b5aca9b6cfe1a2ab93e048cd06d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start. <br /></td></tr>
+<tr class="separator:a77ed4b5aca9b6cfe1a2ab93e048cd06d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1deb9f698f2b48b95587c7da65fdb649"><td class="memItemLeft" align="right" valign="top"><a id="a1deb9f698f2b48b95587c7da65fdb649"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a1deb9f698f2b48b95587c7da65fdb649">actionStartStop</a> ()</td></tr>
+<tr class="memdesc:a1deb9f698f2b48b95587c7da65fdb649"><td class="mdescLeft">&#160;</td><td class="mdescRight">Toggle start stop. <br /></td></tr>
+<tr class="separator:a1deb9f698f2b48b95587c7da65fdb649"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1deb9f698f2b48b95587c7da65fdb649"><td class="memItemLeft" align="right" valign="top"><a id="a1deb9f698f2b48b95587c7da65fdb649"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a1deb9f698f2b48b95587c7da65fdb649">actionStartStop</a> ()</td></tr>
+<tr class="memdesc:a1deb9f698f2b48b95587c7da65fdb649"><td class="mdescLeft">&#160;</td><td class="mdescRight">Toggle start stop. <br /></td></tr>
+<tr class="separator:a1deb9f698f2b48b95587c7da65fdb649"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46cd811557f6aaa5a688f131b75039cc"><td class="memItemLeft" align="right" valign="top"><a id="a46cd811557f6aaa5a688f131b75039cc"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a46cd811557f6aaa5a688f131b75039cc">actionStop</a> ()</td></tr>
+<tr class="memdesc:a46cd811557f6aaa5a688f131b75039cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop. <br /></td></tr>
+<tr class="separator:a46cd811557f6aaa5a688f131b75039cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46cd811557f6aaa5a688f131b75039cc"><td class="memItemLeft" align="right" valign="top"><a id="a46cd811557f6aaa5a688f131b75039cc"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a46cd811557f6aaa5a688f131b75039cc">actionStop</a> ()</td></tr>
+<tr class="memdesc:a46cd811557f6aaa5a688f131b75039cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop. <br /></td></tr>
+<tr class="separator:a46cd811557f6aaa5a688f131b75039cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e97d930af008b76d4c36bc69bebab73"><td class="memItemLeft" align="right" valign="top"><a id="a1e97d930af008b76d4c36bc69bebab73"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a1e97d930af008b76d4c36bc69bebab73">actionVolumeDown</a> ()</td></tr>
+<tr class="memdesc:a1e97d930af008b76d4c36bc69bebab73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrease the volume. <br /></td></tr>
+<tr class="separator:a1e97d930af008b76d4c36bc69bebab73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e97d930af008b76d4c36bc69bebab73"><td class="memItemLeft" align="right" valign="top"><a id="a1e97d930af008b76d4c36bc69bebab73"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a1e97d930af008b76d4c36bc69bebab73">actionVolumeDown</a> ()</td></tr>
+<tr class="memdesc:a1e97d930af008b76d4c36bc69bebab73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrease the volume. <br /></td></tr>
+<tr class="separator:a1e97d930af008b76d4c36bc69bebab73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed44e4403dd71f100d78f7263e5ff4ac"><td class="memItemLeft" align="right" valign="top"><a id="aed44e4403dd71f100d78f7263e5ff4ac"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#aed44e4403dd71f100d78f7263e5ff4ac">actionVolumeUp</a> ()</td></tr>
+<tr class="memdesc:aed44e4403dd71f100d78f7263e5ff4ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increase the volume. <br /></td></tr>
+<tr class="separator:aed44e4403dd71f100d78f7263e5ff4ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed44e4403dd71f100d78f7263e5ff4ac"><td class="memItemLeft" align="right" valign="top"><a id="aed44e4403dd71f100d78f7263e5ff4ac"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#aed44e4403dd71f100d78f7263e5ff4ac">actionVolumeUp</a> ()</td></tr>
+<tr class="memdesc:aed44e4403dd71f100d78f7263e5ff4ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increase the volume. <br /></td></tr>
+<tr class="separator:aed44e4403dd71f100d78f7263e5ff4ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:acdbd31087953136fc99f346cb467c119"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#acdbd31087953136fc99f346cb467c119">configAdcInput</a> (es_adc_input_t input)</td></tr>
-<tr class="separator:acdbd31087953136fc99f346cb467c119"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90d695ad0dfd940fc1a98ba04c5c0599"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a90d695ad0dfd940fc1a98ba04c5c0599">configAdcInput</a> (uint8_t input)</td></tr>
+<tr class="separator:a90d695ad0dfd940fc1a98ba04c5c0599"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4258dd603b6dcad620c0da3bf8014794"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a4258dd603b6dcad620c0da3bf8014794">configClock</a> (<a class="el" href="structaudio__tools_1_1es__i2s__clock__t.html">es_i2s_clock_t</a> *clock_config)</td></tr>
 <tr class="memdesc:a4258dd603b6dcad620c0da3bf8014794"><td class="mdescLeft">&#160;</td><td class="mdescRight">Config I2s clock in MSATER mode.  <a href="classaudio__tools_1_1_audio_kit_stream.html#a4258dd603b6dcad620c0da3bf8014794">More...</a><br /></td></tr>
 <tr class="separator:a4258dd603b6dcad620c0da3bf8014794"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79ce0a76e17a44a5f612ab9abac14001"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a79ce0a76e17a44a5f612ab9abac14001">configDacOutput</a> (es_codec_dac_output_t output)</td></tr>
-<tr class="separator:a79ce0a76e17a44a5f612ab9abac14001"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac95b48fd72ffb0c745991e37b8a9fbd7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#ac95b48fd72ffb0c745991e37b8a9fbd7">configDacOutput</a> (uint8_t output)</td></tr>
+<tr class="separator:ac95b48fd72ffb0c745991e37b8a9fbd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33f5bfd73eceabd0cba1a53d2402fcc3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a33f5bfd73eceabd0cba1a53d2402fcc3">deinitES8388</a> (void)</td></tr>
 <tr class="memdesc:a33f5bfd73eceabd0cba1a53d2402fcc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deinitialize ES8388 codec chip.  <a href="classaudio__tools_1_1_audio_kit_stream.html#a33f5bfd73eceabd0cba1a53d2402fcc3">More...</a><br /></td></tr>
 <tr class="separator:a33f5bfd73eceabd0cba1a53d2402fcc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29d24ebd89d850feb75a63cf0f751c0a"><td class="memItemLeft" align="right" valign="top"><a id="a29d24ebd89d850feb75a63cf0f751c0a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>headphone_detect_deinit</b> ()</td></tr>
-<tr class="separator:a29d24ebd89d850feb75a63cf0f751c0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a17368daab4c976067207bf0a563dbc12"><td class="memItemLeft" align="right" valign="top"><a id="a17368daab4c976067207bf0a563dbc12"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>headphone_detect_init</b> (int num)</td></tr>
-<tr class="separator:a17368daab4c976067207bf0a563dbc12"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a369c9028951730ed0f7e30630f81e1a5"><td class="memItemLeft" align="right" valign="top"><a id="a369c9028951730ed0f7e30630f81e1a5"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>headphone_status_get</b> ()</td></tr>
-<tr class="separator:a369c9028951730ed0f7e30630f81e1a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a938bd0b8051a355c516058eb24c1ad3f"><td class="memItemLeft" align="right" valign="top"><a id="a938bd0b8051a355c516058eb24c1ad3f"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>hp_timer_init</b> (int num)</td></tr>
-<tr class="separator:a938bd0b8051a355c516058eb24c1ad3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98d7df40c1e03f22df818fef04b7f703"><td class="memItemLeft" align="right" valign="top"><a id="a98d7df40c1e03f22df818fef04b7f703"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>dumpRegisters</b> ()</td></tr>
+<tr class="separator:a98d7df40c1e03f22df818fef04b7f703"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf0947dc63b84e5f53bbe1c77075145a"><td class="memItemLeft" align="right" valign="top"><a id="abf0947dc63b84e5f53bbe1c77075145a"></a>
 esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><b>i2c_deinit</b> ()</td></tr>
 <tr class="separator:abf0947dc63b84e5f53bbe1c77075145a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf30826baae03ce8d71446a5b0aa34a4"><td class="memItemLeft" align="right" valign="top"><a id="abf30826baae03ce8d71446a5b0aa34a4"></a>
+esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><b>i2c_init</b> (int port, int sda, int scl)</td></tr>
+<tr class="separator:abf30826baae03ce8d71446a5b0aa34a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d15652d2938b34d3a6bcfc0c65b7009"><td class="memItemLeft" align="right" valign="top"><a id="a8d15652d2938b34d3a6bcfc0c65b7009"></a>
-esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><b>i2c_init</b> (void)</td></tr>
+esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a8d15652d2938b34d3a6bcfc0c65b7009">i2c_init</a> (void)</td></tr>
+<tr class="memdesc:a8d15652d2938b34d3a6bcfc0c65b7009"><td class="mdescLeft">&#160;</td><td class="mdescRight">init i2c with different possible pins <br /></td></tr>
 <tr class="separator:a8d15652d2938b34d3a6bcfc0c65b7009"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c7d2abb6d795140a5f576481ae02c83"><td class="memItemLeft" align="right" valign="top"><a id="a0c7d2abb6d795140a5f576481ae02c83"></a>
 uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>i2c_read</b> (uint8_t i2c_bus_addr, uint8_t reg)</td></tr>
 <tr class="separator:a0c7d2abb6d795140a5f576481ae02c83"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6af603698273a653e5c02d07f07af3ff"><td class="memItemLeft" align="right" valign="top"><a id="a6af603698273a653e5c02d07f07af3ff"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>i2c_read_all</b> ()</td></tr>
-<tr class="separator:a6af603698273a653e5c02d07f07af3ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af90d788f5b7a59ba4f90c9492e800a27"><td class="memItemLeft" align="right" valign="top"><a id="af90d788f5b7a59ba4f90c9492e800a27"></a>
 esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><b>i2c_read_reg</b> (uint8_t reg_add, uint8_t *p_data)</td></tr>
 <tr class="separator:af90d788f5b7a59ba4f90c9492e800a27"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -382,15 +522,15 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>i2c_write</b> (uin
 <tr class="memitem:a41940e9c7ffaabeca5e765ec4ed1d713"><td class="memItemLeft" align="right" valign="top"><a id="a41940e9c7ffaabeca5e765ec4ed1d713"></a>
 uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>i2c_write_bulk</b> (uint8_t i2c_bus_addr, uint8_t reg, uint8_t bytes, uint8_t *data)</td></tr>
 <tr class="separator:a41940e9c7ffaabeca5e765ec4ed1d713"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad715b833a88b5b635d79b6a5fa7c2dcd"><td class="memItemLeft" align="right" valign="top"><a id="ad715b833a88b5b635d79b6a5fa7c2dcd"></a>
-esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><b>i2c_write_reg</b> (uint8_t slave_addr, uint8_t reg_add, uint8_t data)</td></tr>
-<tr class="separator:ad715b833a88b5b635d79b6a5fa7c2dcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d2ba46aa8e4cbbe83c81ee53e36a634"><td class="memItemLeft" align="right" valign="top"><a id="a2d2ba46aa8e4cbbe83c81ee53e36a634"></a>
-esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><b>i2s_mclk_gpio_select</b> (i2s_port_t i2s_num, gpio_num_t gpio_num)</td></tr>
+<tr class="memitem:a8390c47cb122f46549dcafd8df6f1e46"><td class="memItemLeft" align="right" valign="top"><a id="a8390c47cb122f46549dcafd8df6f1e46"></a>
+esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><b>i2c_write_reg</b> (uint8_t reg_add, uint8_t data)</td></tr>
+<tr class="separator:a8390c47cb122f46549dcafd8df6f1e46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d2ba46aa8e4cbbe83c81ee53e36a634"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a2d2ba46aa8e4cbbe83c81ee53e36a634">i2s_mclk_gpio_select</a> (i2s_port_t i2s_num, gpio_num_t gpio_num)</td></tr>
+<tr class="memdesc:a2d2ba46aa8e4cbbe83c81ee53e36a634"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set Masterclock GPIO only pin 0,1 and 2 a supported.  <a href="classaudio__tools_1_1_audio_kit_stream.html#a2d2ba46aa8e4cbbe83c81ee53e36a634">More...</a><br /></td></tr>
 <tr class="separator:a2d2ba46aa8e4cbbe83c81ee53e36a634"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa44afed285830faeff09a483b47bc47a"><td class="memItemLeft" align="right" valign="top"><a id="aa44afed285830faeff09a483b47bc47a"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>initES8388</b> (bool isMaster, bool isDac, bool isAdc)</td></tr>
-<tr class="separator:aa44afed285830faeff09a483b47bc47a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a058dbde2407583cb5df69f446c2e0469"><td class="memItemLeft" align="right" valign="top"><a id="a058dbde2407583cb5df69f446c2e0469"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>initES8388</b> (bool isMaster, <a class="el" href="namespaceaudio__tools.html#a3d0375c3c65fd9c364367c504e2a02dd">audio_hal_dac_output_t</a> dac, <a class="el" href="namespaceaudio__tools.html#a544e44298df56c5c63655d114b9b8314">audio_hal_adc_input_t</a> adc)</td></tr>
+<tr class="separator:a058dbde2407583cb5df69f446c2e0469"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af93f913dae01bec5ae67123aaca49838"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#af93f913dae01bec5ae67123aaca49838">setBitsPerSample</a> (es_module_t mode, es_bits_length_t bits_length)</td></tr>
 <tr class="memdesc:af93f913dae01bec5ae67123aaca49838"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure ES8388 data sample bits.  <a href="classaudio__tools_1_1_audio_kit_stream.html#af93f913dae01bec5ae67123aaca49838">More...</a><br /></td></tr>
 <tr class="separator:af93f913dae01bec5ae67123aaca49838"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -406,6 +546,14 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>initES8388</b> (bool 
 <tr class="memitem:afc306bfecd40f0d939ae1d481393a7ba"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#afc306bfecd40f0d939ae1d481393a7ba">setFormat</a> (es_module_t module, I2SFormat fmt)</td></tr>
 <tr class="memdesc:afc306bfecd40f0d939ae1d481393a7ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">setFormat  <a href="classaudio__tools_1_1_audio_kit_stream.html#afc306bfecd40f0d939ae1d481393a7ba">More...</a><br /></td></tr>
 <tr class="separator:afc306bfecd40f0d939ae1d481393a7ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8148ec9ce0cfd693c24093a8641ab03"><td class="memItemLeft" align="right" valign="top"><a id="ad8148ec9ce0cfd693c24093a8641ab03"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#ad8148ec9ce0cfd693c24093a8641ab03">setupActions</a> ()</td></tr>
+<tr class="memdesc:ad8148ec9ce0cfd693c24093a8641ab03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup the supported default actions. <br /></td></tr>
+<tr class="separator:ad8148ec9ce0cfd693c24093a8641ab03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8148ec9ce0cfd693c24093a8641ab03"><td class="memItemLeft" align="right" valign="top"><a id="ad8148ec9ce0cfd693c24093a8641ab03"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#ad8148ec9ce0cfd693c24093a8641ab03">setupActions</a> ()</td></tr>
+<tr class="memdesc:ad8148ec9ce0cfd693c24093a8641ab03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup the supported default actions. <br /></td></tr>
+<tr class="separator:ad8148ec9ce0cfd693c24093a8641ab03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5fe5f2cae2be1c272d52322a9a76260b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a5fe5f2cae2be1c272d52322a9a76260b">start</a> (es_module_t mode)</td></tr>
 <tr class="memdesc:a5fe5f2cae2be1c272d52322a9a76260b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Power Management.  <a href="classaudio__tools_1_1_audio_kit_stream.html#a5fe5f2cae2be1c272d52322a9a76260b">More...</a><br /></td></tr>
 <tr class="separator:a5fe5f2cae2be1c272d52322a9a76260b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -436,23 +584,47 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>timedRead</b> ()</td><
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteError</b> (int err=1)</td></tr>
 <tr class="separator:a46656410e23c0ec14d7a01b38b3b6f00 inherit pro_methods_class_print"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-methods"></a>
-Static Protected Member Functions</h2></td></tr>
-<tr class="memitem:aeda4160f62a00a032ea1c2f6109c77d6"><td class="memItemLeft" align="right" valign="top"><a id="aeda4160f62a00a032ea1c2f6109c77d6"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>hp_timer_cb</b> (TimerHandle_t xTimer)</td></tr>
-<tr class="separator:aeda4160f62a00a032ea1c2f6109c77d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:a2ffeaf0c0c4a51ea9d6cc2d0ca17b6c5"><td class="memItemLeft" align="right" valign="top"><a id="a2ffeaf0c0c4a51ea9d6cc2d0ca17b6c5"></a>
+<a class="el" href="class_audio_actions.html">AudioActions</a>&#160;</td><td class="memItemRight" valign="bottom"><b>actions</b></td></tr>
+<tr class="separator:a2ffeaf0c0c4a51ea9d6cc2d0ca17b6c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6980d64a3406e5e2c8ea8b2d34dd69ec"><td class="memItemLeft" align="right" valign="top"><a id="a6980d64a3406e5e2c8ea8b2d34dd69ec"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>actionVolume</b> = 0</td></tr>
+<tr class="separator:a6980d64a3406e5e2c8ea8b2d34dd69ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b0b1f98123796594cf3e3e4729eac8e"><td class="memItemLeft" align="right" valign="top"><a id="a9b0b1f98123796594cf3e3e4729eac8e"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>active</b> = true</td></tr>
+<tr class="separator:a9b0b1f98123796594cf3e3e4729eac8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0cfb93074838e3e8e4907eb1a6f8c0cc"><td class="memItemLeft" align="right" valign="top"><a id="a0cfb93074838e3e8e4907eb1a6f8c0cc"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>actualPower</b></td></tr>
+<tr class="separator:a0cfb93074838e3e8e4907eb1a6f8c0cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd7cab78cc4bb67f38d313372a4d7cb0"><td class="memItemLeft" align="right" valign="top"><a id="abd7cab78cc4bb67f38d313372a4d7cb0"></a>
 <a class="el" href="structaudio__tools_1_1_config_e_s8388.html">ConfigES8388</a>&#160;</td><td class="memItemRight" valign="bottom"><b>cfg</b></td></tr>
 <tr class="separator:abd7cab78cc4bb67f38d313372a4d7cb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad82db0c6a43952f414c60c5b0e2cbb6"><td class="memItemLeft" align="right" valign="top"><a id="aad82db0c6a43952f414c60c5b0e2cbb6"></a>
+<a class="el" href="classaudio__tools_1_1_audio_kit_stream_config.html">AudioKitStreamConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><b>cfg</b></td></tr>
+<tr class="separator:aad82db0c6a43952f414c60c5b0e2cbb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad79695f7908d89079087192fc6c0725c"><td class="memItemLeft" align="right" valign="top"><a id="ad79695f7908d89079087192fc6c0725c"></a>
+<a class="el" href="classaudio__tools_1_1_format_converter_stream.html">FormatConverterStream</a>&#160;</td><td class="memItemRight" valign="bottom"><b>converter</b> = <a class="el" href="classaudio__tools_1_1_format_converter_stream.html">FormatConverterStream</a>(kit_stream)</td></tr>
+<tr class="separator:ad79695f7908d89079087192fc6c0725c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52979f621851e0cd56c1095bd7720d42"><td class="memItemLeft" align="right" valign="top"><a id="a52979f621851e0cd56c1095bd7720d42"></a>
 <a class="el" href="classaudio__tools_1_1_i2_s_base.html">I2SBase</a>&#160;</td><td class="memItemRight" valign="bottom"><b>i2s</b></td></tr>
 <tr class="separator:a52979f621851e0cd56c1095bd7720d42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69453e0550e843dec631693d0c953d4a"><td class="memItemLeft" align="right" valign="top"><a id="a69453e0550e843dec631693d0c953d4a"></a>
+<a class="el" href="classaudio__tools_1_1_audio_kit_stream.html">AudioKit</a>&#160;</td><td class="memItemRight" valign="bottom"><b>kit</b></td></tr>
+<tr class="separator:a69453e0550e843dec631693d0c953d4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92ab9c29058eeb16a66dfabfa51e4ba0"><td class="memItemLeft" align="right" valign="top"><a id="a92ab9c29058eeb16a66dfabfa51e4ba0"></a>
+<a class="el" href="classaudio__tools_1_1_audio_kit_stream_adapter.html">AudioKitStreamAdapter</a>&#160;</td><td class="memItemRight" valign="bottom"><b>kit_stream</b> = <a class="el" href="classaudio__tools_1_1_audio_kit_stream_adapter.html">AudioKitStreamAdapter</a>(&amp;kit)</td></tr>
+<tr class="separator:a92ab9c29058eeb16a66dfabfa51e4ba0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4278984c024c1a730c2063a69e812495"><td class="memItemLeft" align="right" valign="top"><a id="a4278984c024c1a730c2063a69e812495"></a>
 es_module_t&#160;</td><td class="memItemRight" valign="bottom"><b>module_value</b></td></tr>
 <tr class="separator:a4278984c024c1a730c2063a69e812495"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9221c033f6a1e2c11693935a73103f2"><td class="memItemLeft" align="right" valign="top"><a id="aa9221c033f6a1e2c11693935a73103f2"></a>
+<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>output_config</b></td></tr>
+<tr class="separator:aa9221c033f6a1e2c11693935a73103f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08c62e8e04c183e477537152032e9dc4"><td class="memItemLeft" align="right" valign="top"><a id="a08c62e8e04c183e477537152032e9dc4"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>volume_value</b> = 40</td></tr>
+<tr class="separator:a08c62e8e04c183e477537152032e9dc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_class_stream"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_stream')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_stream.html">Stream</a></td></tr>
 <tr class="memitem:abf61d2006d28d18f2e028285a323fe5a inherit pro_attribs_class_stream"><td class="memItemLeft" align="right" valign="top"><a id="abf61d2006d28d18f2e028285a323fe5a"></a>
 unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>_startMillis</b></td></tr>
@@ -463,7 +635,100 @@ unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>ESP32 Audio Kit using the ESP8388 DAC and ADC. </p>
+<p>AudioKit <a class="el" href="class_stream.html">Stream</a> which uses the <a href="https://github.com/pschatzmann/arduino-audiokit">https://github.com/pschatzmann/arduino-audiokit</a> library.</p>
+<dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a54170fb4805b84014e1a5c46ee762a94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54170fb4805b84014e1a5c46ee762a94">&#9670;&nbsp;</a></span>addAction() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void audio_tools::AudioKitStream::addAction </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void(*)()&#160;</td>
+          <td class="paramname"><em>action</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Defines a new action that is executed when the indicated pin is active. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pin</td><td></td></tr>
+    <tr><td class="paramname">action</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a54170fb4805b84014e1a5c46ee762a94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54170fb4805b84014e1a5c46ee762a94">&#9670;&nbsp;</a></span>addAction() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void audio_tools::AudioKitStream::addAction </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void(*)()&#160;</td>
+          <td class="paramname"><em>action</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Defines a new action that is executed when the indicated pin is active. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pin</td><td></td></tr>
+    <tr><td class="paramname">action</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a7751eadb13f71c201b6945dd1cfb4068"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7751eadb13f71c201b6945dd1cfb4068">&#9670;&nbsp;</a></span>begin() <span class="overload">[1/2]</span></h2>
 
@@ -494,8 +759,8 @@ false </dd></dl>
 
 </div>
 </div>
-<a id="a87f961bcc07a3ab0092d487a7dd1ce0c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a87f961bcc07a3ab0092d487a7dd1ce0c">&#9670;&nbsp;</a></span>begin() <span class="overload">[2/2]</span></h2>
+<a id="a3cae833573c1800852914c8170cdffc6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cae833573c1800852914c8170cdffc6">&#9670;&nbsp;</a></span>begin() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -507,7 +772,7 @@ false </dd></dl>
           <td class="memname">virtual bool audio_tools::AudioKitStream::begin </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structaudio__tools_1_1_config_e_s8388.html">ConfigES8388</a>&#160;</td>
-          <td class="paramname"><em>cfg</em></td><td>)</td>
+          <td class="paramname"><em>cfgPar</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -531,8 +796,8 @@ false </dd></dl>
 
 </div>
 </div>
-<a id="acdbd31087953136fc99f346cb467c119"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acdbd31087953136fc99f346cb467c119">&#9670;&nbsp;</a></span>configAdcInput()</h2>
+<a id="a90d695ad0dfd940fc1a98ba04c5c0599"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90d695ad0dfd940fc1a98ba04c5c0599">&#9670;&nbsp;</a></span>configAdcInput()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -543,7 +808,7 @@ false </dd></dl>
         <tr>
           <td class="memname">bool audio_tools::AudioKitStream::configAdcInput </td>
           <td>(</td>
-          <td class="paramtype">es_adc_input_t&#160;</td>
+          <td class="paramtype">uint8_t&#160;</td>
           <td class="paramname"><em>input</em></td><td>)</td>
           <td></td>
         </tr>
@@ -608,8 +873,8 @@ false </dd></dl>
 
 </div>
 </div>
-<a id="a79ce0a76e17a44a5f612ab9abac14001"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a79ce0a76e17a44a5f612ab9abac14001">&#9670;&nbsp;</a></span>configDacOutput()</h2>
+<a id="ac95b48fd72ffb0c745991e37b8a9fbd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac95b48fd72ffb0c745991e37b8a9fbd7">&#9670;&nbsp;</a></span>configDacOutput()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -620,7 +885,7 @@ false </dd></dl>
         <tr>
           <td class="memname">bool audio_tools::AudioKitStream::configDacOutput </td>
           <td>(</td>
-          <td class="paramtype">es_codec_dac_output_t&#160;</td>
+          <td class="paramtype">uint8_t&#160;</td>
           <td class="paramname"><em>output</em></td><td>)</td>
           <td></td>
         </tr>
@@ -713,6 +978,153 @@ false </dd></dl>
 
 </div>
 </div>
+<a id="aa78eee831d329c593aa2060e9d446a56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa78eee831d329c593aa2060e9d446a56">&#9670;&nbsp;</a></span>headphoneStatus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool audio_tools::AudioKitStream::headphoneStatus </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if the headphone is connected. </p>
+<dl class="section return"><dt>Returns</dt><dd>true connected </dd>
+<dd>
+false not connected </dd></dl>
+
+</div>
+</div>
+<a id="a2d2ba46aa8e4cbbe83c81ee53e36a634"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d2ba46aa8e4cbbe83c81ee53e36a634">&#9670;&nbsp;</a></span>i2s_mclk_gpio_select()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">esp_err_t audio_tools::AudioKitStream::i2s_mclk_gpio_select </td>
+          <td>(</td>
+          <td class="paramtype">i2s_port_t&#160;</td>
+          <td class="paramname"><em>i2s_num</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpio_num_t&#160;</td>
+          <td class="paramname"><em>gpio_num</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set Masterclock GPIO only pin 0,1 and 2 a supported. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i2s_num</td><td></td></tr>
+    <tr><td class="paramname">gpio_num</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t </dd></dl>
+
+</div>
+</div>
+<a id="afe20a2a58085387c5c2a6ebd2020b752"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe20a2a58085387c5c2a6ebd2020b752">&#9670;&nbsp;</a></span>incrementVoiceVolume()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void audio_tools::AudioKitStream::incrementVoiceVolume </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>inc</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Increments/Decrements the volume. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">inc</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true </dd>
+<dd>
+false </dd></dl>
+
+</div>
+</div>
+<a id="a32c44d9cd615d1467dc55d73d5ffed7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32c44d9cd615d1467dc55d73d5ffed7d">&#9670;&nbsp;</a></span>incrementVolume()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void audio_tools::AudioKitStream::incrementVolume </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>vol</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Relative volume control. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vol</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="aebabd0d3a2cd699e3990c2ad79cee282"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aebabd0d3a2cd699e3990c2ad79cee282">&#9670;&nbsp;</a></span>isVoiceMute()</h2>
 
@@ -742,8 +1154,428 @@ false </dd></dl>
 
 </div>
 </div>
+<a id="a12eae851767e2021989006c30372a5f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12eae851767e2021989006c30372a5f9">&#9670;&nbsp;</a></span>pinAdcDetect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t audio_tools::AudioKitStream::pinAdcDetect </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the gpio number for adc detection. </p>
+<dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others gpio number </dd></dl>
+
+</div>
+</div>
+<a id="aa6a73027fcabaf7e497f867b25d873ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6a73027fcabaf7e497f867b25d873ef">&#9670;&nbsp;</a></span>pinAuxin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t audio_tools::AudioKitStream::pinAuxin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the gpio number for auxin detection. </p>
+<dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others gpio number </dd></dl>
+
+</div>
+</div>
+<a id="af5fa0136d092295751c90ee1cb4fc3bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5fa0136d092295751c90ee1cb4fc3bf">&#9670;&nbsp;</a></span>pinBlueLed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t audio_tools::AudioKitStream::pinBlueLed </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get green led gpio number. </p>
+<dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others gpio number </dd></dl>
+
+</div>
+</div>
+<a id="ac8822a240c4430647d16481d25b1ce59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8822a240c4430647d16481d25b1ce59">&#9670;&nbsp;</a></span>pinEs7243Mclk()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t audio_tools::AudioKitStream::pinEs7243Mclk </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the mclk gpio number of es7243. </p>
+<dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others gpio number </dd></dl>
+
+</div>
+</div>
+<a id="a8745fd390eeb45b457a81537782a022e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8745fd390eeb45b457a81537782a022e">&#9670;&nbsp;</a></span>pinGreenLed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t audio_tools::AudioKitStream::pinGreenLed </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get DSP reset gpio number. </p>
+<dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others gpio number </dd></dl>
+
+</div>
+</div>
+<a id="acf2b92908344993f45c489d035909d53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf2b92908344993f45c489d035909d53">&#9670;&nbsp;</a></span>pinHeadphoneDetect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t audio_tools::AudioKitStream::pinHeadphoneDetect </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the gpio number for headphone detection. </p>
+<dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others gpio number </dd></dl>
+
+</div>
+</div>
+<a id="ad112e90266b77ba4aedb86bf2cb52f7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad112e90266b77ba4aedb86bf2cb52f7c">&#9670;&nbsp;</a></span>pinInputMode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t audio_tools::AudioKitStream::pinInputMode </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the number for mode-button. </p>
+<dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others number </dd></dl>
+
+</div>
+</div>
+<a id="ab503279310b54626dda1bc1f27c24ffa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab503279310b54626dda1bc1f27c24ffa">&#9670;&nbsp;</a></span>pinInputPlay()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t audio_tools::AudioKitStream::pinInputPlay </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get number for play function. </p>
+<dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others number </dd></dl>
+
+</div>
+</div>
+<a id="a1705fb2215bf3ffae5212b044263f4f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1705fb2215bf3ffae5212b044263f4f7">&#9670;&nbsp;</a></span>pinInputRec()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t audio_tools::AudioKitStream::pinInputRec </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the record-button id for adc-button. </p>
+<dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others button id </dd></dl>
+
+</div>
+</div>
+<a id="abe61036aebf036957b9fc48e67377dde"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe61036aebf036957b9fc48e67377dde">&#9670;&nbsp;</a></span>pinInputSet()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t audio_tools::AudioKitStream::pinInputSet </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get number for set function. </p>
+<dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others number </dd></dl>
+
+</div>
+</div>
+<a id="a02b69f0c45673ceb7f4c407b2f6872dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02b69f0c45673ceb7f4c407b2f6872dd">&#9670;&nbsp;</a></span>pinPaEnable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t audio_tools::AudioKitStream::pinPaEnable </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the gpio number for PA enable. </p>
+<dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others gpio number </dd></dl>
+
+</div>
+</div>
+<a id="a372f4d65c67e31b9e470db4af5439d83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a372f4d65c67e31b9e470db4af5439d83">&#9670;&nbsp;</a></span>pinResetBoard()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t audio_tools::AudioKitStream::pinResetBoard </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get DSP reset gpio number. </p>
+<dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others gpio number </dd></dl>
+
+</div>
+</div>
+<a id="a77dd75efe863a1be553d96f6e337331c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77dd75efe863a1be553d96f6e337331c">&#9670;&nbsp;</a></span>pinResetCodec()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t audio_tools::AudioKitStream::pinResetCodec </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get green led gpio number. </p>
+<dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others gpio number </dd></dl>
+
+</div>
+</div>
+<a id="aec0953dec3a7fdaa43d1974aa6c86be5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec0953dec3a7fdaa43d1974aa6c86be5">&#9670;&nbsp;</a></span>pinVolumeDown()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t audio_tools::AudioKitStream::pinVolumeDown </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get number for volume down function. </p>
+<dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others number </dd></dl>
+
+</div>
+</div>
+<a id="ab051b90122c4ab9099f4afdc0e0fe80f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab051b90122c4ab9099f4afdc0e0fe80f">&#9670;&nbsp;</a></span>pinVolumeUp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t audio_tools::AudioKitStream::pinVolumeUp </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>number for volume up function </p>
+<dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others number </dd></dl>
+
+</div>
+</div>
 <a id="acc53a1361626ad6cefd20d02a97940fa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acc53a1361626ad6cefd20d02a97940fa">&#9670;&nbsp;</a></span>setAudioInfo()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#acc53a1361626ad6cefd20d02a97940fa">&#9670;&nbsp;</a></span>setAudioInfo() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -774,7 +1606,36 @@ false </dd></dl>
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_stream.html">audio_tools::AudioStream</a>.</p>
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_stream_x.html">audio_tools::AudioStreamX</a>.</p>
+
+</div>
+</div>
+<a id="acc53a1361626ad6cefd20d02a97940fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc53a1361626ad6cefd20d02a97940fa">&#9670;&nbsp;</a></span>setAudioInfo() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void audio_tools::AudioKitStream::setAudioInfo </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a>&#160;</td>
+          <td class="paramname"><em>info</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Update the audio info with new values: e.g. new sample_rate, bits_per_samples or channels </p>
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_audio_stream_x.html">audio_tools::AudioStreamX</a>.</p>
 
 </div>
 </div>
@@ -1362,7 +2223,7 @@ false </dd></dl>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioDevices/ESP32AudioKit/<a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a></li>
+<li>src/AudioExperiments/AudioKitESP32/<a class="el" href="_audio_experiments_2_audio_kit_e_s_p32_2_audio_kit_8h_source.html">AudioKit.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -68,6 +68,7 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_format_converter_stream-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -89,6 +90,9 @@ Inheritance diagram for audio_tools::FormatConverterStream:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a80536e7e65e3867117c8adb5dcdda9e0"><td class="memItemLeft" align="right" valign="top"><a id="a80536e7e65e3867117c8adb5dcdda9e0"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>FormatConverterStream</b> (<a class="el" href="class_print.html">Print</a> &amp;out)</td></tr>
+<tr class="separator:a80536e7e65e3867117c8adb5dcdda9e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad4332963532b3b6a4f3e2a05c06fb53d"><td class="memItemLeft" align="right" valign="top"><a id="ad4332963532b3b6a4f3e2a05c06fb53d"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>FormatConverterStream</b> (<a class="el" href="class_print.html">Print</a> &amp;out, <a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> &amp;infoOut, <a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> &amp;infoIn)</td></tr>
 <tr class="separator:ad4332963532b3b6a4f3e2a05c06fb53d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -108,6 +112,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_format_converter_stream.html#a321798c13a302eface8cfe154d4fa37a">setOffset</a> (int offset)</td></tr>
 <tr class="memdesc:a321798c13a302eface8cfe154d4fa37a"><td class="mdescLeft">&#160;</td><td class="mdescRight">adds the offset to the output result <br /></td></tr>
 <tr class="separator:a321798c13a302eface8cfe154d4fa37a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ef03b57ff41c4df1210d543dfbe72da"><td class="memItemLeft" align="right" valign="top"><a id="a6ef03b57ff41c4df1210d543dfbe72da"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_format_converter_stream.html#a6ef03b57ff41c4df1210d543dfbe72da">setStream</a> (<a class="el" href="class_print.html">Print</a> &amp;out)</td></tr>
+<tr class="memdesc:a6ef03b57ff41c4df1210d543dfbe72da"><td class="mdescLeft">&#160;</td><td class="mdescRight">(Re-)Assigns a stream to the Adapter class <br /></td></tr>
+<tr class="separator:a6ef03b57ff41c4df1210d543dfbe72da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac44994bfc3afa7ed0df7f263c3315664"><td class="memItemLeft" align="right" valign="top"><a id="ac44994bfc3afa7ed0df7f263c3315664"></a>
 virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_format_converter_stream.html#ac44994bfc3afa7ed0df7f263c3315664">write</a> (const uint8_t *data, size_t len)</td></tr>
 <tr class="memdesc:ac44994bfc3afa7ed0df7f263c3315664"><td class="mdescLeft">&#160;</td><td class="mdescRight">encode the data <br /></td></tr>
@@ -220,8 +228,30 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (const ch
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (const char *str)</td></tr>
 <tr class="separator:a5b40e0e9cab1f2fe5bb0cb22ffe5adda inherit pub_methods_class_print"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a9693d35b30bade268cd40debb8d3b22e"><td class="memItemLeft" align="right" valign="top"><a id="a9693d35b30bade268cd40debb8d3b22e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setup</b> ()</td></tr>
+<tr class="separator:a9693d35b30bade268cd40debb8d3b22e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_class_print"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_print')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_print.html">Print</a></td></tr>
+<tr class="memitem:a46656410e23c0ec14d7a01b38b3b6f00 inherit pro_methods_class_print"><td class="memItemLeft" align="right" valign="top"><a id="a46656410e23c0ec14d7a01b38b3b6f00"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteError</b> (int err=1)</td></tr>
+<tr class="separator:a46656410e23c0ec14d7a01b38b3b6f00 inherit pro_methods_class_print"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:a871d2afa2efa346fab501b2a48f01e5a"><td class="memItemLeft" align="right" valign="top"><a id="a871d2afa2efa346fab501b2a48f01e5a"></a>
+AudioArray&lt; int16_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>array16</b> = AudioArray&lt;int16_t&gt;(convert)</td></tr>
+<tr class="separator:a871d2afa2efa346fab501b2a48f01e5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c040b52f8ec396aa046bd19c8537c2b"><td class="memItemLeft" align="right" valign="top"><a id="a6c040b52f8ec396aa046bd19c8537c2b"></a>
+AudioArray&lt; <a class="el" href="classaudio__tools_1_1int24__t.html">int24_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>array24</b> = AudioArray&lt;<a class="el" href="classaudio__tools_1_1int24__t.html">int24_t</a>&gt;(convert)</td></tr>
+<tr class="separator:a6c040b52f8ec396aa046bd19c8537c2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a074a4430d9865851dbd5af873cb3eb72"><td class="memItemLeft" align="right" valign="top"><a id="a074a4430d9865851dbd5af873cb3eb72"></a>
+AudioArray&lt; int32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>array32</b> = AudioArray&lt;int32_t&gt;(convert)</td></tr>
+<tr class="separator:a074a4430d9865851dbd5af873cb3eb72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acaa6c30cf75a7b556d1a40958f4741cc"><td class="memItemLeft" align="right" valign="top"><a id="acaa6c30cf75a7b556d1a40958f4741cc"></a>
+AudioArray&lt; int8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>array8</b> = AudioArray&lt;int8_t&gt;(convert)</td></tr>
+<tr class="separator:acaa6c30cf75a7b556d1a40958f4741cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a00b8d9eae47c4f09a0adb312c1fd433a"><td class="memItemLeft" align="right" valign="top"><a id="a00b8d9eae47c4f09a0adb312c1fd433a"></a>
 Convert&#160;</td><td class="memItemRight" valign="bottom"><b>convert</b></td></tr>
 <tr class="separator:a00b8d9eae47c4f09a0adb312c1fd433a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -229,10 +259,10 @@ Convert&#160;</td><td class="memItemRight" valign="bottom"><b>convert</b></td></
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>no_conversion</b> = false</td></tr>
 <tr class="separator:aef8913d0e5c305a1409a0c6a13e0d9db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a88e3035bb1084005f38e9b8fcd3221b6"><td class="memItemLeft" align="right" valign="top"><a id="a88e3035bb1084005f38e9b8fcd3221b6"></a>
-<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_info_in</b></td></tr>
+<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_info_in</b> =nullptr</td></tr>
 <tr class="separator:a88e3035bb1084005f38e9b8fcd3221b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1026d2045ee90dff5c47a42a69cda96f"><td class="memItemLeft" align="right" valign="top"><a id="a1026d2045ee90dff5c47a42a69cda96f"></a>
-<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_info_out</b></td></tr>
+<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_info_out</b> =nullptr</td></tr>
 <tr class="separator:a1026d2045ee90dff5c47a42a69cda96f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a108c9ff0bbe26899649b8df42e4f5760"><td class="memItemLeft" align="right" valign="top"><a id="a108c9ff0bbe26899649b8df42e4f5760"></a>
 <a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_out</b></td></tr>
@@ -244,13 +274,6 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>tmp</b> [MAX_SINGL
 <tr class="memitem:a9b463ab612e2a848734cf95caf9a7fb8 inherit pro_attribs_classaudio__tools_1_1_audio_print"><td class="memItemLeft" align="right" valign="top"><a id="a9b463ab612e2a848734cf95caf9a7fb8"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>tmpPos</b> =0</td></tr>
 <tr class="separator:a9b463ab612e2a848734cf95caf9a7fb8 inherit pro_attribs_classaudio__tools_1_1_audio_print"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
-<tr class="inherit_header pro_methods_class_print"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_print')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_print.html">Print</a></td></tr>
-<tr class="memitem:a46656410e23c0ec14d7a01b38b3b6f00 inherit pro_methods_class_print"><td class="memItemLeft" align="right" valign="top"><a id="a46656410e23c0ec14d7a01b38b3b6f00"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteError</b> (int err=1)</td></tr>
-<tr class="separator:a46656410e23c0ec14d7a01b38b3b6f00 inherit pro_methods_class_print"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Converts the data from the indicated <a class="el" href="structaudio__tools_1_1_audio_base_info.html" title="Basic Audio information which drives e.g. I2S.">AudioBaseInfo</a> format to the target <a class="el" href="structaudio__tools_1_1_audio_base_info.html" title="Basic Audio information which drives e.g. I2S.">AudioBaseInfo</a> format We can change the number of channels and the bits_per sample! </p>

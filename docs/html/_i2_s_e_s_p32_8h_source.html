@@ -287,48 +287,56 @@ $(function() {
 <div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;        <span class="keywordflow">return</span> result;</div>
 <div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    }</div>
 <div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160; </div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    <span class="comment">// determines the i2s_comm_format_t - by default we use I2S_COMM_FORMAT_STAND_I2S</span></div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    i2s_comm_format_t toCommFormat(I2SFormat mode){</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        <span class="keywordflow">switch</span>(mode){</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;          <span class="keywordflow">case</span> I2S_PHILIPS_FORMAT:</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;          <span class="keywordflow">case</span> I2S_STD_FORMAT:</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;          <span class="keywordflow">case</span> I2S_LSB_FORMAT:</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;          <span class="keywordflow">case</span> I2S_RIGHT_JUSTIFIED_FORMAT:</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;            <span class="keywordflow">return</span> (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_I2S;</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;          <span class="keywordflow">case</span> I2S_MSB_FORMAT:</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;          <span class="keywordflow">case</span> I2S_LEFT_JUSTIFIED_FORMAT:</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;            <span class="keywordflow">return</span> (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_MSB;</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;          <span class="comment">// case I2S_PCM_LONG:</span></div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;          <span class="comment">//   return (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_PCM_LONG;</span></div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;          <span class="comment">// case I2S_PCM_SHORT:</span></div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;          <span class="comment">//   return (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_PCM_SHORT;</span></div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160; </div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;          <span class="keywordflow">default</span>:</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;            LOGE(<span class="stringliteral">&quot;unsupported mode&quot;</span>);</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;            <span class="keywordflow">return</span> (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_I2S;</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        }</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    }</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="preprocessor">#pragma GCC diagnostic push</span></div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="preprocessor">#pragma GCC diagnostic ignored &quot;-Wdeprecated-declarations&quot;</span></div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160; </div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    <span class="comment">// determines the i2s_comm_format_t - by default we use I2S_COMM_FORMAT_STAND_I2S</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    i2s_comm_format_t toCommFormat(I2SFormat mode){</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160; </div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;        <span class="keywordflow">switch</span>(mode){</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;          <span class="keywordflow">case</span> I2S_PHILIPS_FORMAT:</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;          <span class="keywordflow">case</span> I2S_STD_FORMAT:</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;            <span class="keywordflow">return</span> (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_I2S;</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;          <span class="keywordflow">case</span> I2S_LEFT_JUSTIFIED_FORMAT:</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;          <span class="keywordflow">case</span> I2S_MSB_FORMAT:</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;            <span class="keywordflow">return</span> (i2s_comm_format_t) I2S_COMM_FORMAT_I2S_MSB;</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;          <span class="keywordflow">case</span> I2S_RIGHT_JUSTIFIED_FORMAT:</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;          <span class="keywordflow">case</span> I2S_LSB_FORMAT:</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;            <span class="keywordflow">return</span> (i2s_comm_format_t) I2S_COMM_FORMAT_I2S_LSB;</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;          <span class="comment">// this is strange but the docu specifies that </span></div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;          <span class="comment">// case I2S_PCM_LONG:</span></div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;          <span class="comment">//   return (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_PCM_LONG;</span></div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;          <span class="comment">// case I2S_PCM_SHORT:</span></div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;          <span class="comment">//   return (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_PCM_SHORT;</span></div>
 <div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160; </div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    <span class="comment">// determines the i2s_format_t</span></div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    i2s_mode_t toMode(I2SConfig &amp;cfg) {</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;      i2s_mode_t mode;</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;      <span class="keywordflow">if</span> (cfg.is_digital){</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        <span class="keywordtype">int</span> i2s_format = cfg.is_master ? I2S_MODE_MASTER : I2S_MODE_SLAVE;</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;        <span class="keywordtype">int</span> rx_tx = cfg.rx_tx_mode == TX_MODE ? I2S_MODE_TX : I2S_MODE_RX;</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;        mode = (i2s_mode_t) (i2s_format | rx_tx);</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;      } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        mode = (i2s_mode_t) (cfg.rx_tx_mode ? I2S_MODE_DAC_BUILT_IN : I2S_MODE_ADC_BUILT_IN);</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;      }</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;      <span class="keywordflow">return</span> mode;</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    }</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160; </div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;};</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160; </div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;}</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160; </div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;          <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;            LOGE(<span class="stringliteral">&quot;unsupported mode&quot;</span>);</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;            <span class="keywordflow">return</span> (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_I2S;</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        }</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    }</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;<span class="preprocessor">#pragma GCC diagnostic pop</span></div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160; </div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160; </div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    <span class="comment">// determines the i2s_format_t</span></div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    i2s_mode_t toMode(I2SConfig &amp;cfg) {</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;      i2s_mode_t mode;</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;      <span class="keywordflow">if</span> (cfg.is_digital){</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;        <span class="keywordtype">int</span> i2s_format = cfg.is_master ? I2S_MODE_MASTER : I2S_MODE_SLAVE;</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        <span class="keywordtype">int</span> rx_tx = cfg.rx_tx_mode == TX_MODE ? I2S_MODE_TX : I2S_MODE_RX;</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;        mode = (i2s_mode_t) (i2s_format | rx_tx);</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;      } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;        mode = (i2s_mode_t) (cfg.rx_tx_mode ? I2S_MODE_DAC_BUILT_IN : I2S_MODE_ADC_BUILT_IN);</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;      }</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;      <span class="keywordflow">return</span> mode;</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    }</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160; </div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;};</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160; </div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;}</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160; </div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_analog_audio_html"><div class="ttname"><a href="classaudio__tools_1_1_analog_audio.html">audio_tools::AnalogAudio</a></div><div class="ttdoc">A very fast ADC and DAC using the ESP32 I2S interface.</div><div class="ttdef"><b>Definition:</b> AnalogAudioESP32.h:153</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_kit_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_kit_stream.html">audio_tools::AudioKitStream</a></div><div class="ttdoc">ESP32 Audio Kit using the ESP8388 DAC and ADC.</div><div class="ttdef"><b>Definition:</b> AudioKit.h:365</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_kit_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_kit_stream.html">audio_tools::AudioKitStream</a></div><div class="ttdoc">ESP32 Audio Kit using the ESP8388 DAC and ADC.</div><div class="ttdef"><b>Definition:</b> AudioKit.h:303</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_base_html"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_base.html">audio_tools::I2SBase</a></div><div class="ttdoc">Basic I2S API - for the ESP32. If we receive 1 channel, we expand the result to 2 channels.</div><div class="ttdef"><b>Definition:</b> I2SESP32.h:19</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_base_html_a08984251ffdc990da5d9c232485b9cd4"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_base.html#a08984251ffdc990da5d9c232485b9cd4">audio_tools::I2SBase::end</a></div><div class="ttdeci">void end()</div><div class="ttdoc">stops the I2C and unistalls the driver</div><div class="ttdef"><b>Definition:</b> I2SESP32.h:57</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_base_html_a0c6ef9346d946958af02507688564b5f"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_base.html#a0c6ef9346d946958af02507688564b5f">audio_tools::I2SBase::begin</a></div><div class="ttdeci">void begin(RxTxMode mode=TX_MODE)</div><div class="ttdoc">starts the DAC with the default config</div><div class="ttdef"><b>Definition:</b> I2SESP32.h:33</div></div>
