@@ -8,9 +8,10 @@ You dont need to bother about any wires because everything is on one nice board.
 
 I also demonstrate how to assign your own actions to the buttons of the audio kit.
 
-### Note
+### Notes
 
-The log level has been set to Info to help you to identify any problems. Please change it to AudioLogger::Warning to get the best sound quality!
+- Do not forget to set the wifi name and password.
+- The log level has been set to Info to help you to identify any problems. Please change it to AudioLogger::Warning to get the best sound quality!
 
 
 ### Dependencies

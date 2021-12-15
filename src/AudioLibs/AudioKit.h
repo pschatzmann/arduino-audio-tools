@@ -1,9 +1,7 @@
 #pragma once
 
-#include "AudioKit.h"
+#include "AudioKitHAL.h"
 #include "AudioTools/AudioActions.h"
-
-#define KEY_RESPONSE_TIME_MS 10
 
 namespace audio_tools {
 
@@ -231,7 +229,10 @@ class AudioKitStream : public AudioStreamX {
   bool setMute(bool mute) { return kit.setMute(mute); }
 
   /// Defines the Volume
-  bool setVolume(int vol) { return kit.setVolume(vol); }
+  bool setVolume(int vol) { 
+    volume_value = vol;
+    return kit.setVolume(vol);
+  }
 
   /// Determines the volume
   int volume() { return kit.volume(); }
@@ -241,13 +242,8 @@ class AudioKitStream : public AudioStreamX {
    *
    */
   void processActions() {
-//    LOGI(LOG_METHOD);
-//    static unsigned long keys_timeout = 0;
-//    if (keys_timeout < millis()) {
-      // LOGD(LOG_METHOD);
+//    LOGD(LOG_METHOD);
       actions.processActions();
-//      keys_timeout = millis() + KEY_RESPONSE_TIME_MS;
-//    }
     delay(1);
   }
 
@@ -263,7 +259,16 @@ class AudioKitStream : public AudioStreamX {
     actions.add(pin, action);
   }
 
-  void incrementVolume(int vol) { volume_value += vol; }
+  /**
+   * @brief Relative volume control
+   * 
+   * @param vol 
+   */
+  void incrementVolume(int vol) { 
+    volume_value += vol;
+    LOGI("incrementVolume: %d -> %d",vol, volume_value);
+    kit.setVolume(volume_value);
+  }
 
   /**
    * @brief Increase the volume
@@ -437,7 +442,7 @@ class AudioKitStream : public AudioStreamX {
   AudioKit kit;
   AudioKitStreamConfig cfg;
   AudioActions actions;
-  int volume_value = 20;
+  int volume_value = 40;
   bool active = true;
   // channel and sample size conversion support
   AudioKitStreamAdapter kit_stream = AudioKitStreamAdapter(&kit);
