@@ -1,6 +1,6 @@
 #define USE_A2DP
 #include "AudioTools.h"
-#include "AudioLibs/AudioKitHAL.h"
+#include "AudioLibs/AudioKit.h"
 
 
 BluetoothA2DPSink a2dp_sink;
