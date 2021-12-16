@@ -30,7 +30,7 @@ public:
     p_out_stream = &out_stream;
     p_bi = &bi;
   }
-  ~MP3DecoderHelix() {}
+  ~MP3DecoderHelix() { resetDecoder(); }
 
   /// Defines the output Stream
   virtual void setOutputStream(Print &outStream) { p_out_stream = &out_stream; }
