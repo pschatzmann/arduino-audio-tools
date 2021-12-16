@@ -8,7 +8,7 @@
 
 #include "flite_arduino.h"
 #include "AudioTools.h"
-#include "AudioLibs/AudioKitHAL.h"
+#include "AudioLibs/AudioKit.h"
 
 using namespace audio_tools;
 
