@@ -1,6 +1,6 @@
 /**
  * @file player-sd-audiokit.ino
- * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-player/player-sd-audiokit/README.md
+ * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-audiokit/player-sd-audiokit/README.md
  * 
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -10,7 +10,7 @@
 #define USE_SDFAT
 #define USE_HELIX
 #include "AudioTools.h"
-#include "AudioLibs/AudioKitHAL.h"
+#include "AudioLibs/AudioKit.h"
 
 using namespace audio_tools;  
 

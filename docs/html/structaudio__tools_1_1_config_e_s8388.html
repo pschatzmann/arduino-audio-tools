@@ -76,7 +76,7 @@ $(function() {
 <p>Configuratiion for ES8388.  
  <a href="structaudio__tools_1_1_config_e_s8388.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_audio_experiments_2_audio_kit_e_s_p32_2_audio_kit_8h_source.html">AudioKit.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for audio_tools::ConfigES8388:</div>
 <div class="dyncontent">
@@ -90,27 +90,33 @@ Inheritance diagram for audio_tools::ConfigES8388:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
+<tr class="memitem:ad98be62e77aaea6a9b4b9ef30de7dba9"><td class="memItemLeft" align="right" valign="top"><a id="ad98be62e77aaea6a9b4b9ef30de7dba9"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>actions_active</b> = true</td></tr>
+<tr class="separator:ad98be62e77aaea6a9b4b9ef30de7dba9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a940ac707a1cb026c2165e24282f9e5"><td class="memItemLeft" align="right" valign="top"><a id="a4a940ac707a1cb026c2165e24282f9e5"></a>
 <a class="el" href="structaudio__tools_1_1es__i2s__clock__t.html">es_i2s_clock_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>clock_config</b> = nullptr</td></tr>
 <tr class="separator:a4a940ac707a1cb026c2165e24282f9e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8acb4168acf8b63330cac5e9e9abd48"><td class="memItemLeft" align="right" valign="top"><a id="af8acb4168acf8b63330cac5e9e9abd48"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>default_volume</b> = 20</td></tr>
 <tr class="separator:af8acb4168acf8b63330cac5e9e9abd48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa685ad01e124d9d01b171d4f26eee1ef"><td class="memItemLeft" align="right" valign="top"><a id="aa685ad01e124d9d01b171d4f26eee1ef"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>headphone_detection_active</b> = true</td></tr>
+<tr class="separator:aa685ad01e124d9d01b171d4f26eee1ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a88fd484055d225f95193139295bb87c7"><td class="memItemLeft" align="right" valign="top"><a id="a88fd484055d225f95193139295bb87c7"></a>
 i2c_port_t&#160;</td><td class="memItemRight" valign="bottom"><b>i2c_master</b> = I2C_MASTER_NUM</td></tr>
 <tr class="separator:a88fd484055d225f95193139295bb87c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acdd0010e9ba82ddd81a738bdf76a4338"><td class="memItemLeft" align="right" valign="top"><a id="acdd0010e9ba82ddd81a738bdf76a4338"></a>
-es_adc_input_t&#160;</td><td class="memItemRight" valign="bottom"><b>input_config</b> = ADC_INPUT_MIC1</td></tr>
-<tr class="separator:acdd0010e9ba82ddd81a738bdf76a4338"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b1d4c3922b470e86da81978b2282a0e"><td class="memItemLeft" align="right" valign="top"><a id="a0b1d4c3922b470e86da81978b2282a0e"></a>
+<a class="el" href="namespaceaudio__tools.html#a544e44298df56c5c63655d114b9b8314">audio_hal_adc_input_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>input_device</b> = <a class="el" href="namespaceaudio__tools.html#a544e44298df56c5c63655d114b9b8314a585e45f67c6593d3d684eabf52ba3aff">AUDIO_HAL_ADC_INPUT_LINE2</a></td></tr>
+<tr class="separator:a0b1d4c3922b470e86da81978b2282a0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae95ce39b024aabc805e25d9edbac7567"><td class="memItemLeft" align="right" valign="top"><a id="ae95ce39b024aabc805e25d9edbac7567"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_amplifier_active</b> = true</td></tr>
 <tr class="separator:ae95ce39b024aabc805e25d9edbac7567"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abcbf0fd4abd194e08891c7e1712f3855"><td class="memItemLeft" align="right" valign="top"><a id="abcbf0fd4abd194e08891c7e1712f3855"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_headphone_detection</b> = false</td></tr>
-<tr class="separator:abcbf0fd4abd194e08891c7e1712f3855"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8c49b26fe08e62b474e002f11df8f2d"><td class="memItemLeft" align="right" valign="top"><a id="ac8c49b26fe08e62b474e002f11df8f2d"></a>
-es_codec_dac_output_t&#160;</td><td class="memItemRight" valign="bottom"><b>output_config</b> = DAC_OUTPUT_ALL</td></tr>
-<tr class="separator:ac8c49b26fe08e62b474e002f11df8f2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a186a7cb0bff5c629c1f433ead8725560"><td class="memItemLeft" align="right" valign="top"><a id="a186a7cb0bff5c629c1f433ead8725560"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>mic_active</b> = false</td></tr>
+<tr class="separator:a186a7cb0bff5c629c1f433ead8725560"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73bad7f9ad4e37421f9a4af801c46293"><td class="memItemLeft" align="right" valign="top"><a id="a73bad7f9ad4e37421f9a4af801c46293"></a>
+<a class="el" href="namespaceaudio__tools.html#a3d0375c3c65fd9c364367c504e2a02dd">audio_hal_dac_output_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>output_device</b> = <a class="el" href="namespaceaudio__tools.html#a3d0375c3c65fd9c364367c504e2a02ddacfca4b19f2abb712306a0c3edaa3340d">AUDIO_HAL_DAC_OUTPUT_ALL</a></td></tr>
+<tr class="separator:a73bad7f9ad4e37421f9a4af801c46293"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51deb51fb343886a6bb3b370b6823e12"><td class="memItemLeft" align="right" valign="top"><a id="a51deb51fb343886a6bb3b370b6823e12"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>pin_data_in</b> = PIN_I2S_AUDIO_KIT_DATA_IN</td></tr>
 <tr class="separator:a51deb51fb343886a6bb3b370b6823e12"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -194,7 +200,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator==</b> (<a cl
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Configuratiion for ES8388. </p>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
-<li>src/AudioDevices/ESP32AudioKit/<a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a></li>
+<li>src/AudioExperiments/AudioKitESP32/<a class="el" href="_audio_experiments_2_audio_kit_e_s_p32_2_audio_kit_8h_source.html">AudioKit.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

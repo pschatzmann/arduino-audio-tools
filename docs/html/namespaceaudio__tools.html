@@ -136,6 +136,12 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html">AudioKitStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ESP32 Audio Kit using the ESP8388 DAC and ADC.  <a href="classaudio__tools_1_1_audio_kit_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream_adapter.html">AudioKitStreamAdapter</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a AudioKit into a <a class="el" href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...">AudioStream</a>, so that we can pass it to the converter.  <a href="classaudio__tools_1_1_audio_kit_stream_adapter.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream_config.html">AudioKitStreamConfig</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuration for <a class="el" href="classaudio__tools_1_1_audio_kit_stream.html" title="ESP32 Audio Kit using the ESP8388 DAC and ADC.">AudioKitStream</a>: we use as subclass of <a class="el" href="classaudio__tools_1_1_i2_s_config.html" title="configuration for all common i2s settings">I2SConfig</a>.  <a href="classaudio__tools_1_1_audio_kit_stream_config.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_logger.html">AudioLogger</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple Logger that writes messages dependent on the log level.  <a href="classaudio__tools_1_1_audio_logger.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -168,6 +174,9 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_stream_wrapper.html">AudioStreamWrapper</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">To be used to support implementations where the readBytes is not virtual.  <a href="classaudio__tools_1_1_audio_stream_wrapper.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_stream_x.html">AudioStreamX</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <a class="el" href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...">AudioStream</a> - but we do not have any abstract methods.  <a href="classaudio__tools_1_1_audio_stream_x.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_u_s_b.html">AudioUSB</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_stream.html">Stream</a> support for mbed USBAudio <a href="https://os.mbed.com/docs/mbed-os/v6.10/mbed-os-api-doxy/class_u_s_b_audio.html">https://os.mbed.com/docs/mbed-os/v6.10/mbed-os-api-doxy/class_u_s_b_audio.html</a>.  <a href="classaudio__tools_1_1_audio_u_s_b.html#details">More...</a><br /></td></tr>
@@ -218,7 +227,7 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_boost.html" title="Boost AudioEffect.">Boost</a> <a class="el" href="classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects.">AudioEffect</a>.  <a href="classaudio__tools_1_1_boost.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffered_stream.html">BufferedStream</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Arduino <a class="el" href="class_stream.html">Stream</a> supports operations on single characters. This is usually not the best way to push audio information, but we will support it anyway - by using a buffer. On reads: if the buffer is empty it gets refilled - for writes if it is full it gets flushed.  <a href="classaudio__tools_1_1_buffered_stream.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Arduino <a class="el" href="class_stream.html">Stream</a> supports operations on single characters. This is usually not the best way to push audio information, but we will support it anyway - by using a buffer. On reads: if the buffer is empty it gets refilled.  <a href="classaudio__tools_1_1_buffered_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffered_task_stream.html">BufferedTaskStream</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -903,6 +912,16 @@ Enumerations</h2></td></tr>
 <br />
  }</td></tr>
 <tr class="separator:a4027459e9b7423e070bcda33adf881e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa57569aa7d4da440caa6e908d032447"><td class="memItemLeft" align="right" valign="top"><a id="afa57569aa7d4da440caa6e908d032447"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>ID3TypeSelection</b> { <br />
+&#160;&#160;<b>SELECT_ID3V1</b> =0b001
+, <b>SELECT_ID3V2</b> =0b010
+, <b>SELECT_ID3</b> =0b011
+, <b>SELECT_ICY</b> =0b100
+, <br />
+&#160;&#160;<b>SELECT_ANY</b> =0b111
+<br />
+ }</td></tr>
+<tr class="separator:afa57569aa7d4da440caa6e908d032447"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a66747a0ba3d8821e3228fd1680106e68"><td class="memItemLeft" align="right" valign="top"><a id="a66747a0ba3d8821e3228fd1680106e68"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a66747a0ba3d8821e3228fd1680106e68">MetaDataType</a> { <br />
 &#160;&#160;<b>Title</b>
 , <b>Artist</b>
@@ -926,8 +945,10 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:a2bf99e743756d972f8f88dc10c2b24d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">current status of the parsing <br /></td></tr>
 <tr class="separator:a2bf99e743756d972f8f88dc10c2b24d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d4e1fe2dd00b263250e9319bcc85946"><td class="memItemLeft" align="right" valign="top"><a id="a0d4e1fe2dd00b263250e9319bcc85946"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a0d4e1fe2dd00b263250e9319bcc85946">RxTxMode</a> { <b>TX_MODE</b> =1
+<tr class="memitem:a0d4e1fe2dd00b263250e9319bcc85946"><td class="memItemLeft" align="right" valign="top"><a id="a0d4e1fe2dd00b263250e9319bcc85946"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a0d4e1fe2dd00b263250e9319bcc85946">RxTxMode</a> { <b>UNDEFINED_MODE</b> =0
+, <b>TX_MODE</b> =1
 , <b>RX_MODE</b> =2
+, <b>RXTX_MODE</b> =3
  }</td></tr>
 <tr class="memdesc:a0d4e1fe2dd00b263250e9319bcc85946"><td class="mdescLeft">&#160;</td><td class="mdescRight">Audio Source (TX_MODE) or Audio Sink (RX_MODE) <br /></td></tr>
 <tr class="separator:a0d4e1fe2dd00b263250e9319bcc85946"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -977,9 +998,6 @@ static int16_t&#160;</td><td class="memItemRight" valign="bottom"><b>convertFrom
 <tr class="memitem:a83ab10286b3d6f6a8f1f0da0c1d85a4a"><td class="memItemLeft" align="right" valign="top"><a id="a83ab10286b3d6f6a8f1f0da0c1d85a4a"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>defaultPWMAudioOutputCallbackPico</b> (repeating_timer *ptr)</td></tr>
 <tr class="separator:a83ab10286b3d6f6a8f1f0da0c1d85a4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30611d733908857b7006fdb72147bcc1"><td class="memItemLeft" align="right" valign="top"><a id="a30611d733908857b7006fdb72147bcc1"></a>
-static void IRAM_ATTR&#160;</td><td class="memItemRight" valign="bottom"><b>headphone_gpio_intr_handler</b> (void *arg)</td></tr>
-<tr class="separator:a30611d733908857b7006fdb72147bcc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9eb23a2d3147b5b2e345d278a5c837e6"><td class="memItemLeft" align="right" valign="top"><a id="a9eb23a2d3147b5b2e345d278a5c837e6"></a>
 <a class="el" href="classaudio__tools_1_1_n_buffer.html">NBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>i2s_buffer</b> (i2s_buffer_size, 5)</td></tr>
 <tr class="separator:a9eb23a2d3147b5b2e345d278a5c837e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1139,9 +1157,9 @@ volatile uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>output_f
 <tr class="memitem:a8e9dcdb5c94c40a773ee3daf26cf74d2"><td class="memItemLeft" align="right" valign="top"><a id="a8e9dcdb5c94c40a773ee3daf26cf74d2"></a>
 void *&#160;</td><td class="memItemRight" valign="bottom"><b>p_I2S_Instance</b> = nullptr</td></tr>
 <tr class="separator:a8e9dcdb5c94c40a773ee3daf26cf74d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a355b863f7b1800a8ebfb0a0ae678b57f"><td class="memItemLeft" align="right" valign="top"><a id="a355b863f7b1800a8ebfb0a0ae678b57f"></a>
+<tr class="memitem:ae2e6f8a0f915c7df6450e7a791659ef1"><td class="memItemLeft" align="right" valign="top"><a id="ae2e6f8a0f915c7df6450e7a791659ef1"></a>
 static <a class="el" href="classaudio__tools_1_1_audio_kit_stream.html">AudioKitStream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>pt_AudioKitStream</b> = nullptr</td></tr>
-<tr class="separator:a355b863f7b1800a8ebfb0a0ae678b57f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:ae2e6f8a0f915c7df6450e7a791659ef1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af06681278d9215c5ff42eb3e6804db13"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structaudio__tools_1_1_nano___b_l_e__ratio__info.html">Nano_BLE_ratio_info</a>&#160;</td><td class="memItemRight" valign="bottom"><b>ratio_table</b> []</td></tr>
 <tr class="separator:af06681278d9215c5ff42eb3e6804db13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa87f4cd901f5adb306f0f42fbc77d85"><td class="memItemLeft" align="right" valign="top"><a id="afa87f4cd901f5adb306f0f42fbc77d85"></a>
@@ -1153,9 +1171,6 @@ class <a class="el" href="classaudio__tools_1_1_user_callback.html">audio_tools:
 <tr class="memitem:a39517ccd473450adc836daea214cf4a7"><td class="memItemLeft" align="right" valign="top"><a id="a39517ccd473450adc836daea214cf4a7"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><b>SUCCESS</b> = &quot;Success&quot;</td></tr>
 <tr class="separator:a39517ccd473450adc836daea214cf4a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acab57378c46783afd0571135dd5f0aa6"><td class="memItemLeft" align="right" valign="top"><a id="acab57378c46783afd0571135dd5f0aa6"></a>
-static xTimerHandle&#160;</td><td class="memItemRight" valign="bottom"><b>timer_headphone</b></td></tr>
-<tr class="separator:acab57378c46783afd0571135dd5f0aa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d2a03a5e7429138fce9993d1aebd522"><td class="memItemLeft" align="right" valign="top"><a id="a2d2a03a5e7429138fce9993d1aebd522"></a>
 <a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_m_b_e_d.html">TimerAlarmRepeatingMBED</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>timerAlarmRepeating</b> = nullptr</td></tr>
 <tr class="separator:a2d2a03a5e7429138fce9993d1aebd522"><td class="memSeparator" colspan="2">&#160;</td></tr>
