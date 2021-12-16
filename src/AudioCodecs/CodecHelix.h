@@ -71,7 +71,7 @@ public:
   void setNotifyAudioChange(AudioBaseInfoDependent &bi) { p_bi = &bi; }
 
 protected:
-  AudioDecoder *p_decoder = new DecoderNOP();
+  AudioDecoder *p_decoder = nullptr;
   Print *out_stream = nullptr;
   AudioBaseInfoDependent *p_bi = nullptr;
   AudioBaseInfo noInfo;
