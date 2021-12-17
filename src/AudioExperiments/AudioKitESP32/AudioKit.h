@@ -700,7 +700,7 @@ class AudioKitStream : public AudioStreamX {
    * @param pin
    * @param action
    */
-  void addAction(int pin, void (*action)()) {
+  void addAction(int pin, void (*action)(bool,int,void*)) {
     LOGI(LOG_METHOD);
     actions.add(pin, action);
   }
@@ -709,7 +709,7 @@ class AudioKitStream : public AudioStreamX {
    * @brief Increase the volume
    *
    */
-  static void actionVolumeUp() {
+  static void actionVolumeUp(bool,int,void*)) {
     LOGI(LOG_METHOD);
     pt_AudioKitStream->incrementVoiceVolume(+2);
   }
@@ -718,7 +718,7 @@ class AudioKitStream : public AudioStreamX {
    * @brief Decrease the volume
    *
    */
-  static void actionVolumeDown() {
+  static void actionVolumeDown(bool,int,void*)) {
     LOGI(LOG_METHOD);
     pt_AudioKitStream->incrementVoiceVolume(-2);
   }
@@ -727,7 +727,7 @@ class AudioKitStream : public AudioStreamX {
    * @brief Toggle start stop
    *
    */
-  static void actionStartStop() {
+  static void actionStartStop(bool,int,void*)) {
     LOGI(LOG_METHOD);
     pt_AudioKitStream->setPAPower(!pt_AudioKitStream->actualPower);
   }
@@ -736,7 +736,7 @@ class AudioKitStream : public AudioStreamX {
    * @brief Start
    *
    */
-  static void actionStart() {
+  static void actionStart(bool,int,void*)) {
     LOGI(LOG_METHOD);
     pt_AudioKitStream->setPAPower(true);
   }
@@ -745,7 +745,7 @@ class AudioKitStream : public AudioStreamX {
    * @brief Stop
    *
    */
-  static void actionStop() {
+  static void actionStop(bool,int,void*)) {
     LOGI(LOG_METHOD);
     pt_AudioKitStream->setPAPower(false);
   }
@@ -754,7 +754,7 @@ class AudioKitStream : public AudioStreamX {
    * @brief Process headphone detection
    *
    */
-  static void actionHeadphoneStatus() {
+  static void actionHeadphoneStatus(bool,int,void*)) {
     LOGI("process headphone detection");
     bool isConnected = pt_AudioKitStream->headphoneStatus();
     bool powerActive = !isConnected;
@@ -762,6 +762,11 @@ class AudioKitStream : public AudioStreamX {
       LOGW("Headphone jack has been %s", isConnected ? "inserted" : "removed");
       pt_AudioKitStream->setPAPower(powerActive);
     }
+  }
+
+  /// Provides access to the AudioActions
+  AudioActions &audioActions(){
+    actions;
   }
 
  protected:
