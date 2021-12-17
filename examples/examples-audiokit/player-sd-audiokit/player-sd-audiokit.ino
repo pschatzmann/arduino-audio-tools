@@ -22,15 +22,15 @@ AudioKitStream kit;
 MP3DecoderHelix decoder;
 AudioPlayer player(source, kit, decoder);
 
-void next() {
+void next(bool, int, void*) {
    player.next();
 }
 
-void previous() {
+void previous(bool, int, void*) {
    player.previous();
 }
 
-void stopResume(){
+void stopResume(bool, int, void*){
   if (player.isActive()){
     player.stop();
   } else{

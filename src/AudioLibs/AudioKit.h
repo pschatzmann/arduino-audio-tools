@@ -261,9 +261,14 @@ class AudioKitStream : public AudioStreamX {
    * @param pin
    * @param action
    */
-  void addAction(int pin, void (*action)()) {
+  void addAction(int pin, void (*action)(bool,int,void*)) {
     LOGI(LOG_METHOD);
     actions.add(pin, action);
+  }
+
+  /// Provides access to the AudioActions
+  AudioActions &audioActions() {
+    return actions;
   }
 
   /**
@@ -281,7 +286,7 @@ class AudioKitStream : public AudioStreamX {
    * @brief Increase the volume
    *
    */
-  static void actionVolumeUp() {
+  static void actionVolumeUp(bool, int, void*) {
     LOGI(LOG_METHOD);
     pt_AudioKitStream->incrementVolume(+2);
   }
@@ -290,7 +295,7 @@ class AudioKitStream : public AudioStreamX {
    * @brief Decrease the volume
    *
    */
-  static void actionVolumeDown() {
+  static void actionVolumeDown(bool, int, void*) {
     LOGI(LOG_METHOD);
     pt_AudioKitStream->incrementVolume(-2);
   }
@@ -299,7 +304,7 @@ class AudioKitStream : public AudioStreamX {
    * @brief Toggle start stop
    *
    */
-  static void actionStartStop() {
+  static void actionStartStop(bool, int, void*) {
     LOGI(LOG_METHOD);
     pt_AudioKitStream->active = !pt_AudioKitStream->active;
     pt_AudioKitStream->setActive(pt_AudioKitStream->active);
@@ -309,7 +314,7 @@ class AudioKitStream : public AudioStreamX {
    * @brief Start
    *
    */
-  static void actionStart() {
+  static void actionStart(bool, int, void*) {
     LOGI(LOG_METHOD);
     pt_AudioKitStream->active = true;
     pt_AudioKitStream->setActive(pt_AudioKitStream->active);
@@ -319,11 +324,21 @@ class AudioKitStream : public AudioStreamX {
    * @brief Stop
    *
    */
-  static void actionStop() {
+  static void actionStop(bool, int, void*) {
     LOGI(LOG_METHOD);
     pt_AudioKitStream->active = false;
     pt_AudioKitStream->setActive(pt_AudioKitStream->active);
   }
+
+  /**
+   * @brief Switch off the PA if the headphone in plugged in 
+   * and switch it on again if the headphone is unplugged.
+   * This method complies with the
+   */
+  static void actionHeadphoneDetection(bool, int, void*) {
+    AudioKit::actionHeadphoneDetection();
+  }
+
 
   /**
    * @brief  Get the gpio number for auxin detection
@@ -459,7 +474,7 @@ class AudioKitStream : public AudioStreamX {
   /// Setup the supported default actions
   void setupActions() {
     LOGI(LOG_METHOD);
-    actions.add(kit.pinHeadphoneDetect(), AudioKit::actionHeadphoneDetection);
+    actions.add(kit.pinHeadphoneDetect(), actionHeadphoneDetection);
     actions.add(kit.pinPaEnable(), actionStartStop);
     actions.add(kit.pinVolumeDown(), actionVolumeDown);
     actions.add(kit.pinVolumeUp(), actionVolumeUp);

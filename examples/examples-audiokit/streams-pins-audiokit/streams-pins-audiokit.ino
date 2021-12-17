@@ -15,10 +15,10 @@ using namespace audio_tools;
 AudioKitStream kit; 
 Flite flite(kit);
 
-void button1() { flite.say("Button One"); }
-void button2() { flite.say("Button Two"); }
-void button3() { flite.say("Button Three"); }
-void button4() { flite.say("Button Four"); }
+void button1(bool, int, void*) { flite.say("Button One"); }
+void button2(bool, int, void*) { flite.say("Button Two"); }
+void button3(bool, int, void*) { flite.say("Button Three"); }
+void button4(bool, int, void*) { flite.say("Button Four"); }
 
 // Arduino setup
 void setup() {
@@ -39,9 +39,9 @@ void setup() {
   kit.addAction(PIN_KEY4, button4);
 
   // example with actions using lambda expression
-  auto down = []() { AudioKitStream::actionVolumeDown(); flite.say("Volume down"); };
+  auto down = [](bool,int,void*) { AudioKitStream::actionVolumeDown(true, -1, nullptr); flite.say("Volume down"); };
   kit.addAction(PIN_KEY5, down);
-  auto up = []() { AudioKitStream::actionVolumeUp(); flite.say("Volume up");   };
+  auto up = [](bool,int,void*) { AudioKitStream::actionVolumeUp(true, -1, nullptr ); flite.say("Volume up");   };
   kit.addAction(PIN_KEY6, up);
 
   flite.say("Please push a button");
