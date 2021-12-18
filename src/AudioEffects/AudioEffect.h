@@ -1,5 +1,6 @@
 #pragma once
 #include <stdint.h> 
+#include "AudioTools/AudioLogger.h"
 
 namespace audio_tools {
 
@@ -296,12 +297,11 @@ class Delay : public AudioEffect  {
 
 class ADSR : public AudioEffect {
     public:
-        ADSR(float attack=0.001, float decay=0.001, float sustainLevel=0.5, float release= 0.005, bool autoDecay=true){
+        ADSR(float attack=0.001, float decay=0.001, float sustainLevel=0.5, float release= 0.005){
             this->attack = attack;
             this->decay = decay;
             this->sustain = sustainLevel;
             this->release = release;
-            this->is_auto_decay = autoDecay; // decay even if key is pressed
         }
 
         void setAttackRate(float a){
@@ -336,21 +336,17 @@ class ADSR : public AudioEffect {
             return release;
         }
 
-        void setAutoDecay(bool a){
-            is_auto_decay = a;
-        }
-
-        bool isAutoDecay(){
-            return is_auto_decay;
-        }
-
         void keyOn(float tgt=0){
             state = Attack;
             this->target = tgt>0 && tgt<=1.0 ? tgt : sustain;
+            this->value = 0;
         }
 
         void keyOff(){
-            state = Release;
+            if (state!=Idle){
+                state = Release;
+                target = 0;
+            }
         }
 
         effect_t process(effect_t input) {
@@ -363,21 +359,31 @@ class ADSR : public AudioEffect {
 
     protected:
         float attack,  decay,  sustain,  release;
-        enum AdsrPhase {Idle, Attack, Decay, Sustan, Release};
+        enum AdsrPhase {Idle, Attack, Decay, Sustain, Release};
+        const char* adsrNames[5] = {"Idle", "Attack", "Decay", "Sustain", "Release"};
         AdsrPhase state = Idle;
         float value = 0, target = 0;
-        bool is_auto_decay;
+        int zeroCount =  0;
 
         inline effect_t  tick( effect_t in ) {
+
+            if (in==0){
+                zeroCount++;
+            } else {
+                zeroCount=0;
+            }
+
+            if (zeroCount==100){
+                LOGI("ADSR: Imput data is zero");
+            }
+
             switch ( state ) {
                 case Attack:
                     value += attack;
                     if ( value >= target ) {
                         value = target;
                         target = sustain;
-                        if (is_auto_decay){
-                            state = Decay;
-                        }
+                        state = Decay;
                     }
                     break;
 
@@ -386,14 +392,14 @@ class ADSR : public AudioEffect {
                         value -= decay;
                         if ( value <= sustain ) {
                             value = sustain;
-                            state = Sustan;
+                            state = Sustain;
                         }
                     }
                     else {
                         value += decay; // attack target < sustainLevel level
                         if ( value >= sustain ) {
                             value = sustain;
-                            state = Sustan;
+                            state = Sustain;
                         }
                     }
                     break;
@@ -406,7 +412,9 @@ class ADSR : public AudioEffect {
                     }
 
             }
-            return in * value;
+            effect_t result = value * in;
+            LOGD("ADSR %s: %d * %f -> %d", adsrNames[(int)state], in, value, result );
+            return result;
         }
 
 };

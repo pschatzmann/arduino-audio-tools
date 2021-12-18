@@ -154,7 +154,9 @@ class SineWaveGenerator : public SoundGenerator<T>{
         void begin(AudioBaseInfo info, uint16_t frequency=0){
             SoundGenerator<T>::begin(info);
             this->m_deltaTime = 1.0 / SoundGenerator<T>::info.sample_rate;
-            setFrequency(frequency);
+            if (frequency>0){
+                setFrequency(frequency);
+            }
         }
 
         virtual AudioBaseInfo defaultConfig(){
@@ -181,7 +183,7 @@ class SineWaveGenerator : public SoundGenerator<T>{
         }
 
     protected:
-        float m_frequency = 0;
+        volatile float m_frequency = 0;
         float m_time = 0.0;
         float m_amplitude = 1.0;  
         float m_deltaTime = 0.0;
