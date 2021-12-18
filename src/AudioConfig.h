@@ -73,7 +73,7 @@
 #endif
 
 #ifndef I2S_BUFFER_COUNT 
-#define I2S_BUFFER_COUNT 10 // 20
+#define I2S_BUFFER_COUNT 20 // 20
 #endif
 
 #ifndef A2DP_BUFFER_SIZE 

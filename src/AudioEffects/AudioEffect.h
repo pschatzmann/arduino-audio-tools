@@ -283,4 +283,132 @@ class Delay : public AudioEffect  {
         }
 };
 
+/**
+ * @brief ADSR Envelope: Attack, Decay, Sustain and Release.
+ * Attack is the time taken for initial run-up of level from nil to peak, beginning when the key is pressed.
+ * Decay is the time taken for the subsequent run down from the attack level to the designated sustainLevel level.
+ * Sustain is the level during the main sequence of the sound's duration, until the key is released.
+ * Release is the time taken for the level to decay from the sustainLevel level to zero after the key is released.[4]
+
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+
+class ADSR : public AudioEffect {
+    public:
+        ADSR(float attack=0.001, float decay=0.001, float sustainLevel=0.5, float release= 0.005, bool autoDecay=true){
+            this->attack = attack;
+            this->decay = decay;
+            this->sustain = sustainLevel;
+            this->release = release;
+            this->is_auto_decay = autoDecay; // decay even if key is pressed
+        }
+
+        void setAttackRate(float a){
+            attack = a;
+        }
+
+        float attackRate(){
+            return attack;
+        }
+
+        void setDecayRate(float d){
+            decay = d;
+        }
+
+        float decayRate() {
+            return decay;
+        }
+
+        void setSustainLevel(float s){
+            sustain = s;
+        }
+
+        float sustainLevel(){
+            return sustain;
+        }
+        
+        void setReleaseRate(float r){
+            release = r;
+        }
+
+        float releaseRate() {
+            return release;
+        }
+
+        void setAutoDecay(bool a){
+            is_auto_decay = a;
+        }
+
+        bool isAutoDecay(){
+            return is_auto_decay;
+        }
+
+        void keyOn(float tgt=0){
+            state = Attack;
+            this->target = tgt>0 && tgt<=1.0 ? tgt : sustain;
+        }
+
+        void keyOff(){
+            state = Release;
+        }
+
+        effect_t process(effect_t input) {
+            return tick(input);
+        }
+
+        bool isActive(){
+            return state!=Idle;
+        }
+
+    protected:
+        float attack,  decay,  sustain,  release;
+        enum AdsrPhase {Idle, Attack, Decay, Sustan, Release};
+        AdsrPhase state = Idle;
+        float value = 0, target = 0;
+        bool is_auto_decay;
+
+        inline effect_t  tick( effect_t in ) {
+            switch ( state ) {
+                case Attack:
+                    value += attack;
+                    if ( value >= target ) {
+                        value = target;
+                        target = sustain;
+                        if (is_auto_decay){
+                            state = Decay;
+                        }
+                    }
+                    break;
+
+                case Decay:
+                    if ( value > sustain ) {
+                        value -= decay;
+                        if ( value <= sustain ) {
+                            value = sustain;
+                            state = Sustan;
+                        }
+                    }
+                    else {
+                        value += decay; // attack target < sustainLevel level
+                        if ( value >= sustain ) {
+                            value = sustain;
+                            state = Sustan;
+                        }
+                    }
+                    break;
+
+                case Release:
+                    value -= release;
+                    if ( value <= 0.0 ) {
+                        value = 0.0;
+                        state = Idle;
+                    }
+
+            }
+            return in * value;
+        }
+
+};
+
 }

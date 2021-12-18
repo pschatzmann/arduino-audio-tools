@@ -111,6 +111,7 @@ Dependent on the example you might need to install some of the following librari
 - [arduino-libmad](https://github.com/pschatzmann/arduino-libmad) A open source __MP3 Decoder__ from Underbit
 - [arduino-liblame](https://github.com/pschatzmann/arduino-liblame) A open source __MP3 Encoder__ 
 - [arduino-audiokit](https://github.com/pschatzmann/arduino-audiokit) Support for the __ESP32 AudioKit__ and ES7148, ES7210, ES7243, ES8311, ES8347, ES8388, TAS5805m decoder chips 
+- [arduino-midi](https://github.com/pschatzmann/arduino-midi) A simple __MIDI__ message parser and generator
 - [SdFat Library](https://github.com/greiman/SdFat) to read and write files supporting SD cards with FAT16/FAT32 and exFAT
 - [SD Library](https://www.arduino.cc/en/reference/SD) to read and write files supporting SD cards with FAT16 and FAT32
 - [SAM](https://github.com/pschatzmann/arduino-SAM) A Text to Speach Engine

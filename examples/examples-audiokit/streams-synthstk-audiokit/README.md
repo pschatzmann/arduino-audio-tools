@@ -1,8 +1,9 @@
 # Implementing a Synthesizer using the STK Framwork
 
 We can use the STK framework to implement a Synthesizer which receives Midi Messages and translates them 
-into sound. We use a Clarinet...
+into sound. Here we use a Clarinet...
 
+For [further info see my blog](https://www.pschatzmann.ch/home/2021/12/17/ai-thinker-audiokit-a-simple-synthesizer-with-stk/)
 
 ### Dependencies
 

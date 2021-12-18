@@ -1,3 +1,9 @@
+/**
+ * @file streams-synthstk-audiokit.ino
+ * @brief see https://www.pschatzmann.ch/home/2021/12/17/ai-thinker-audiokit-a-simple-synthesizer-with-stk/
+ * @author Phil Schatzmann
+ * @copyright Copyright (c) 2021
+ */
 #include "AudioTools.h"
 #include "AudioLibs/AudioKit.h"
 #include "StkAll.h"
@@ -59,5 +65,4 @@ void setup() {
 void loop() {
   output.tick( action.tick() );
   kit.processActions();
-
 }

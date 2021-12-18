@@ -16,7 +16,7 @@
  */
 class AudioActions {
  public:
-  enum ActiveLogic { ActiveLow, ActiveHigh, ActiveChange };
+  enum ActiveLogic : uint8_t { ActiveLow, ActiveHigh, ActiveChange };
 
   void add(int pin, void (*actionOn)(bool pinStatus,int pin, void*ref), ActiveLogic activeLogic = ActiveLow, void* ref=nullptr) {
     add(pin, actionOn, nullptr, activeLogic, ref );
@@ -29,8 +29,6 @@ class AudioActions {
       return;
     }
 
-    pinMode(pin, INPUT_PULLUP);
-
     int pos = findPin(pin);
     if (pos != -1) {
       actions[pos].actionOn = actionOn;
@@ -38,6 +36,14 @@ class AudioActions {
       actions[pos].activeLogic = activeLogicPar;
       actions[pos].ref = ref;
     } else {
+      if (activeLogicPar==ActiveLow){
+        pinMode(pin, INPUT_PULLUP);
+        LOGI("pin %d -> INPUT_PULLUP", pin);
+      } else {
+        pinMode(pin, INPUT);
+        LOGI("pin %d -> INPUT", pin);
+      }
+
       actions[maxIdx].pin = pin;
       actions[maxIdx].actionOn = actionOn;
       actions[maxIdx].actionOff = actionOff;
@@ -47,19 +53,29 @@ class AudioActions {
     }
   }
 
+  /// enable/disable pin actions
+  void setEnabled(int pin, bool enabled){
+    int pos = findPin(pin);
+    if (pos != -1) {
+      actions[pos].enabled = enabled;
+    }
+  }
+
   /**
    * @brief Execute all actions if the corresponding pin is low
-   *
+   * To minimize the runtime: With each call we process a different pin
    */
   void processActions() {
+    static int pos = 0;
+    
     // execute action
-    for (int j = 0; j < maxIdx; j++) {
-      Action *a = &(actions[j]);
+    Action* a = &(actions[pos]);
+    if (a->enabled){
       bool value = digitalRead(a->pin);
       if (a->actionOn!=nullptr && a->actionOff!=nullptr){
         // we have on and off action defined
         if (value != a->lastState) {
-          LOGD("processActions: case with on and off");
+          LOGI("processActions: case with on and off");
           // execute action -> reports active instead of pin state
           if ((value && a->activeLogic==ActiveHigh)|| (!value && a->activeLogic==ActiveLow) ){
             a->actionOn(true, a->pin, a->ref);
@@ -72,22 +88,27 @@ class AudioActions {
         bool active = (a->activeLogic == ActiveLow) ? !value : value;
         // reports pin state
         if (value != a->lastState) {
-          LOGD("processActions: ActiveChange");
+          //LOGD("processActions: ActiveChange");
           // execute action
           a->actionOn(active, a->pin, a->ref);
           a->lastState = value;
         }
       } else {
-        bool active = (a->activeLogic == ActiveLow) ? !value : value;
-        if (active && (active != a->lastState || millis() > a->debounceTimeout)) {
-          LOGD("processActions: Active");
-          // execute action
-          a->actionOn(active, a->pin, a->ref);
-          a->lastState = active;
-          a->debounceTimeout = millis() + DEBOUNCE_DELAY;
-        }
+          bool active = (a->activeLogic == ActiveLow) ? !value : value;
+          if (active && (active != a->lastState || millis() > a->debounceTimeout)) {
+            LOGI("processActions: %d Active %d - %d",a->pin, value, digitalRead(a->pin));
+            // execute action
+            a->actionOn(active, a->pin, a->ref);
+            a->lastState = active;
+            a->debounceTimeout = millis() + DEBOUNCE_DELAY;
+          }
       }
     }
+    pos++;
+    if (pos>=maxIdx){
+      pos = 0;
+    }
+
   }
 
   /// Defines the debounce delay
@@ -100,15 +121,17 @@ class AudioActions {
   int debounceDelayValue = DEBOUNCE_DELAY;
 
   struct Action {
-    int pin;
-    ActiveLogic activeLogic;
+    int16_t pin;
     void (*actionOn)(bool pinStatus, int pin, void*ref) = nullptr;
     void (*actionOff)(bool pinStatus, int pin, void*ref) = nullptr;
     void *ref=nullptr;
     unsigned long debounceTimeout;
+    ActiveLogic activeLogic;
     bool lastState;
+    bool enabled = true;
   } actions[ACTIONS_MAX];
 
+ 
   int findPin(int pin) {
     for (int j = 0; j < maxIdx; j++) {
       if (actions[j].pin == pin) {

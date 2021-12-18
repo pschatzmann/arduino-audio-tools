@@ -1346,7 +1346,7 @@ class AudioKitStream : public AudioStreamX {
       actions.add(HEADPHONE_DETECT, actionHeadphoneDetection,
                   AudioActions::ActiveChange);
     }
-    actions.add(PIN_KEY1, actionStartStop);
+    //actions.add(PIN_KEY1, actionStartStop);
     actions.add(PIN_KEY5, actionVolumeDown);
     actions.add(PIN_KEY6, actionVolumeUp);
   }

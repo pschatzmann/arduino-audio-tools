@@ -30,27 +30,20 @@ void previous(bool, int, void*) {
    player.previous();
 }
 
-void stopResume(bool, int, void*){
-  if (player.isActive()){
-    player.stop();
-  } else{
-    player.play();
-  }
-}
 
 void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
- // setup additional buttons 
-  kit.addAction(PIN_KEY1, stopResume);
-  kit.addAction(PIN_KEY4, next);
-  kit.addAction(PIN_KEY3, previous);
-
   // setup output
   auto cfg = kit.defaultConfig(TX_MODE);
   kit.begin(cfg);
-  
+
+ // setup additional buttons 
+  kit.addAction(PIN_KEY4, next);
+  kit.addAction(PIN_KEY3, previous);
+
+
   // setup player
   player.setVolume(0.7);
   player.begin();
