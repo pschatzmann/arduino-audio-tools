@@ -6,5 +6,5 @@ A [detailed description can be found in my blog](https://www.pschatzmann.ch/home
 
 You need to install the following libraries:
 
-- [Arduino Audio Tolls](https://github.com/pschatzmann/arduino-audio-tools)
+- [Arduino Audio Tools](https://github.com/pschatzmann/arduino-audio-tools)
 

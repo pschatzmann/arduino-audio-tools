@@ -2,25 +2,48 @@
  * @file streams-synthbasic-audiokit.ino
  * @author Phil Schatzmann
  * @brief see https://www.pschatzmann.ch/home/2021/12/17/ai-thinker-audio-kit-building-a-simple-synthesizer-with-the-audiotools-library/)
+ *        Midi Support
  * @copyright GPLv3
  * 
  */
+
 #include "AudioTools.h"
 #include "AudioLibs/AudioKit.h"
+#include <Midi.h>
 
-AudioKitStream kit;
 SineWaveGenerator<int16_t> sine;
-GeneratedSoundStream<int16_t> in(sine); 
+ADSR adsr(0.0001,0.0001, 0.9 , 0.0002);
+
+class SynthAction : public MidiAction {
+    public:
+        void onNoteOn(uint8_t channel, uint8_t note, uint8_t velocity) {
+           int frq = MidiCommon::noteToFrequency(note);
+           sine.setFrequency(frq);
+           adsr.keyOn();
+        }
+        void onNoteOff(uint8_t channel, uint8_t note, uint8_t velocity) {
+           adsr.keyOff();
+        }
+        void onControlChange(uint8_t channel, uint8_t controller, uint8_t value) {}
+        void onPitchBend(uint8_t channel, uint8_t value) {}
+} action;
+
+MidiBleServer ble("MidiServer", &action);
+AudioKitStream kit;
+AudioEffects effects(sine);
+GeneratedSoundStream<int16_t> in(effects); 
 StreamCopy copier(kit, in); 
 
 void actionKeyOn(bool active, int pin, void* ptr){
+  Serial.println("KeyOn");
   int freq = *((int*)ptr);
   sine.setFrequency(freq);
-  in.begin();
+  adsr.keyOn();
 }
 
 void actionKeyOff(bool active, int pin, void* ptr){
-  in.end();
+  Serial.println("KeyOff");
+  adsr.keyOff();
 }
 
 // We want to play some notes on the AudioKit keys 
@@ -38,18 +61,22 @@ void setupActions(){
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial,AudioLogger::Info);
+  AudioLogger::instance().begin(Serial,AudioLogger::Warning);
+
+  // setup effects
+  effects.addEffect(adsr);
 
   // Setup output
   auto cfg = kit.defaultConfig(TX_MODE);
+  kit.setVolume(80);
   kit.begin(cfg);
 
   // Setup sound generation based on AudioKit settins
+  sine.begin(cfg, 0);
   in.begin(cfg);
 
   // activate keys
   setupActions();
-
 }
 
 // copy the data
