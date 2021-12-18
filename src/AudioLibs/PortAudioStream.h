@@ -4,7 +4,6 @@
  * 
  */
 
-#if defined(__linux__) || defined(_WIN32) || defined(__APPLE__)
 
 #include "AudioTools.h"
 #include "portaudio.h"
@@ -200,6 +199,5 @@ class PortAudioStream : public BufferedStream {
 
 } // namespace
 
-#endif
 
 

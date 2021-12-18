@@ -250,8 +250,9 @@ class AudioKitStream : public AudioStreamX {
    */
   void processActions() {
 //  LOGD(LOG_METHOD);
-    actions.processActions();
-    delay(1);
+      actions.processActions();
+//  delay(1);
+    yield();
   }
 
   /**
@@ -475,7 +476,8 @@ class AudioKitStream : public AudioStreamX {
   void setupActions() {
     LOGI(LOG_METHOD);
     actions.add(kit.pinHeadphoneDetect(), actionHeadphoneDetection);
-    actions.add(kit.pinPaEnable(), actionStartStop);
+    // This clashes with the SD CS pin!
+    //actions.add(kit.pinInputMode(), actionStartStop);
     actions.add(kit.pinVolumeDown(), actionVolumeDown);
     actions.add(kit.pinVolumeUp(), actionVolumeUp);
   }

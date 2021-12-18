@@ -19,6 +19,7 @@ namespace audio_tools {
 class AudioEffects : public SoundGenerator<effect_t>  {
 
     public:
+        
         /// Default constructor
         AudioEffects(SoundGenerator &in){
             setInput(in);
@@ -27,6 +28,8 @@ class AudioEffects : public SoundGenerator<effect_t>  {
         AudioEffects(Stream &in){
             setInput(in);
         }
+
+        AudioEffects() = default;
 
         ~AudioEffects(){
             if (p_stream_gen!=nullptr) delete p_stream_gen;

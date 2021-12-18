@@ -31,6 +31,12 @@ class AudioStream : public Stream, public AudioBaseInfoDependent {
   virtual size_t write(const uint8_t *buffer, size_t size) = 0;
 
   operator bool() { return available() > 0; }
+
+ protected:
+  virtual int not_supported(int out) {
+    LOGE("AudioStreamX: unsupported operation!");
+    return out;
+  }
 };
 
 /**
@@ -39,12 +45,12 @@ class AudioStream : public Stream, public AudioBaseInfoDependent {
  */
 class AudioStreamX : public AudioStream {
  public:
-  virtual size_t readBytes(uint8_t *buffer, size_t length) { return 0; }
-  virtual size_t write(const uint8_t *buffer, size_t size) { return 0; }
-  virtual size_t write(uint8_t) { return 0; }
-  virtual int available() { return 0; };
-  virtual int read() { return -1; }
-  virtual int peek() { return -1; }
+  virtual size_t readBytes(uint8_t *buffer, size_t length) { return not_supported(0); }
+  virtual size_t write(const uint8_t *buffer, size_t size) { return not_supported(0); }
+  virtual size_t write(uint8_t) { return not_supported(0); }
+  virtual int available() { return not_supported(0); };
+  virtual int read() { return not_supported(-1); }
+  virtual int peek() { return not_supported(-1); }
   virtual void flush() {}
   virtual void setAudioInfo(audio_tools::AudioBaseInfo){}
 };
@@ -197,10 +203,16 @@ class MemoryStream : public AudioStream {
  */
 
 template <class T>
-class GeneratedSoundStream : public AudioStream, public AudioBaseInfoSource {
+class GeneratedSoundStream : public AudioStreamX, public AudioBaseInfoSource {
  public:
+  GeneratedSoundStream() = default;
+  
   GeneratedSoundStream(SoundGenerator<T> &generator) {
     LOGD(LOG_METHOD);
+    setInput(generator);
+  }
+
+  void setInput(SoundGenerator<T> &generator){
     this->generator_ptr = &generator;
   }
 
@@ -227,7 +239,7 @@ class GeneratedSoundStream : public AudioStream, public AudioBaseInfoSource {
   /// stop the processing
   void end() {
     LOGD(LOG_METHOD);
-    generator_ptr->stop();
+    generator_ptr->end();
     active = false;
   }
 
@@ -235,21 +247,6 @@ class GeneratedSoundStream : public AudioStream, public AudioBaseInfoSource {
     audioBaseInfoDependent = &bi;
   }
 
-  /// unsupported operations
-  virtual size_t write(uint8_t) { return not_supported(); };
-
-  /// unsupported operations
-  virtual int availableForWrite() { return not_supported(); }
-
-  /// unsupported operations
-  virtual size_t write(const uint8_t *buffer, size_t size) {
-    return not_supported();
-  }
-
-  /// unsupported operations
-  virtual int read() { return -1; }
-  /// unsupported operations
-  virtual int peek() { return -1; }
   /// This is unbounded so we just return the buffer size
   virtual int available() { return DEFAULT_BUFFER_SIZE; }
 
@@ -268,10 +265,6 @@ class GeneratedSoundStream : public AudioStream, public AudioBaseInfoSource {
   bool active = false;
   AudioBaseInfoDependent *audioBaseInfoDependent = nullptr;
 
-  int not_supported() {
-    LOGE("GeneratedSoundStream-unsupported operation!");
-    return 0;
-  }
 };
 
 /**

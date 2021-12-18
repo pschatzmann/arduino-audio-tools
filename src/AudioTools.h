@@ -21,7 +21,6 @@
 #include "AudioTools/AudioStreams.h"
 #include "AudioTools/AudioOutput.h"
 #include "AudioTools/AudioCopy.h"
-#include "AudioTools/PortAudioStream.h"
 #include "AudioMetaData/MetaData.h"
 #include "AudioCodecs/CodecWAV.h"
 #include "AudioHttp/AudioHttp.h"
@@ -34,6 +33,9 @@
  * @brief Optional external libraries
  * 
  */
+#if defined(USE_PORTAUDIO) 
+#include "AudioLibs/PortAudioStream.h"
+#endif
 
 #ifdef USE_MOZZI
 #include "AudioLibs/AudioMozzi.h"
