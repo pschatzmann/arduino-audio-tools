@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['linearvolumecontrol_740',['LinearVolumeControl',['../classaudio__tools_1_1_linear_volume_control.html',1,'audio_tools']]],
-  ['logarithmicvolumecontrol_741',['LogarithmicVolumeControl',['../classaudio__tools_1_1_logarithmic_volume_control.html',1,'audio_tools']]]
+  ['keyparameter_765',['KeyParameter',['../structaudio__tools_1_1_synthesizer_1_1_key_parameter.html',1,'audio_tools::Synthesizer']]]
 ];

@@ -62,6 +62,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
@@ -77,23 +78,39 @@ $(function() {
 
 <p><code>#include &lt;<a class="el" href="_audio_actions_8h_source.html">AudioActions.h</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_audio_actions_1_1_action.html">Action</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:aae8cdd0b781209ec71b2fd2a08233fd5"><td class="memItemLeft" align="right" valign="top"><a id="aae8cdd0b781209ec71b2fd2a08233fd5"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>ActiveLogic</b> { <b>ActiveLow</b>
+<tr class="memitem:aa766ac9a06c65624573cec4d248f2f22"><td class="memItemLeft" align="right" valign="top"><a id="aa766ac9a06c65624573cec4d248f2f22"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>ActiveLogic</b> : uint8_t { <b>ActiveLow</b>
 , <b>ActiveHigh</b>
 , <b>ActiveChange</b>
  }</td></tr>
-<tr class="separator:aae8cdd0b781209ec71b2fd2a08233fd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:aa766ac9a06c65624573cec4d248f2f22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1a00f3489953a28430ffdb4f52d32f4f"><td class="memItemLeft" align="right" valign="top"><a id="a1a00f3489953a28430ffdb4f52d32f4f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>add</b> (int pin, void(*action)(), ActiveLogic activeLogicPar=ActiveLow)</td></tr>
-<tr class="separator:a1a00f3489953a28430ffdb4f52d32f4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab370ccc18a714bc1d07afc32a40e589f"><td class="memItemLeft" align="right" valign="top"><a id="ab370ccc18a714bc1d07afc32a40e589f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>add</b> (int pin, void(*actionOn)(bool pinStatus, int pin, void *ref), ActiveLogic activeLogic=ActiveLow, void *ref=nullptr)</td></tr>
+<tr class="separator:ab370ccc18a714bc1d07afc32a40e589f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54cdd4a11a830bd7391b75a482a19526"><td class="memItemLeft" align="right" valign="top"><a id="a54cdd4a11a830bd7391b75a482a19526"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>add</b> (int pin, void(*actionOn)(bool pinStatus, int pin, void *ref), void(*actionOff)(bool pinStatus, int pin, void *ref), ActiveLogic activeLogicPar=ActiveLow, void *ref=nullptr)</td></tr>
+<tr class="separator:a54cdd4a11a830bd7391b75a482a19526"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aadb3c6cc104fc5bdd3664610a6a10c33"><td class="memItemLeft" align="right" valign="top"><a id="aadb3c6cc104fc5bdd3664610a6a10c33"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_actions.html#aadb3c6cc104fc5bdd3664610a6a10c33">processActions</a> ()</td></tr>
-<tr class="memdesc:aadb3c6cc104fc5bdd3664610a6a10c33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute all actions if the corresponding pin is low. <br /></td></tr>
+<tr class="memdesc:aadb3c6cc104fc5bdd3664610a6a10c33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute all actions if the corresponding pin is low To minimize the runtime: With each call we process a different pin. <br /></td></tr>
 <tr class="separator:aadb3c6cc104fc5bdd3664610a6a10c33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c1c6962a03d485d433a8cf3d7ab494c"><td class="memItemLeft" align="right" valign="top"><a id="a3c1c6962a03d485d433a8cf3d7ab494c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_actions.html#a3c1c6962a03d485d433a8cf3d7ab494c">setDeboundDelay</a> (int value)</td></tr>
+<tr class="memdesc:a3c1c6962a03d485d433a8cf3d7ab494c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the debounce delay. <br /></td></tr>
+<tr class="separator:a3c1c6962a03d485d433a8cf3d7ab494c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfd84eef677373aea2688bfd6391c4bc"><td class="memItemLeft" align="right" valign="top"><a id="acfd84eef677373aea2688bfd6391c4bc"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_actions.html#acfd84eef677373aea2688bfd6391c4bc">setEnabled</a> (int pin, bool enabled)</td></tr>
+<tr class="memdesc:acfd84eef677373aea2688bfd6391c4bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">enable/disable pin actions <br /></td></tr>
+<tr class="separator:acfd84eef677373aea2688bfd6391c4bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -103,24 +120,15 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>findPin</b> (int pin)<
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a812b5215d54264e5c631768bb3d48e5c"><td class="memItemLeft" align="right" valign="top"><a id="a812b5215d54264e5c631768bb3d48e5c"></a>
-void(*&#160;</td><td class="memItemRight" valign="bottom"><b>actions</b> [ACTIONS_MAX])() = {0}</td></tr>
-<tr class="separator:a812b5215d54264e5c631768bb3d48e5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1cf226c32a314eb833b48be14b7b0070"><td class="memItemLeft" align="right" valign="top"><a id="a1cf226c32a314eb833b48be14b7b0070"></a>
-ActiveLogic&#160;</td><td class="memItemRight" valign="bottom"><b>activeLogic</b> [ACTIONS_MAX] = {ActiveLow}</td></tr>
-<tr class="separator:a1cf226c32a314eb833b48be14b7b0070"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb3a52bdee6292ce423e118b21b6a6c8"><td class="memItemLeft" align="right" valign="top"><a id="aeb3a52bdee6292ce423e118b21b6a6c8"></a>
-unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>debounceTimeout</b> [ACTIONS_MAX] = {0}</td></tr>
-<tr class="separator:aeb3a52bdee6292ce423e118b21b6a6c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae08df3e7716749913c2c3a671e1e8a13"><td class="memItemLeft" align="right" valign="top"><a id="ae08df3e7716749913c2c3a671e1e8a13"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>lastState</b> [ACTIONS_MAX] = {0}</td></tr>
-<tr class="separator:ae08df3e7716749913c2c3a671e1e8a13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c852fc7707acbeb8be7519794c45025"><td class="memItemLeft" align="right" valign="top"><a id="a6c852fc7707acbeb8be7519794c45025"></a>
+struct <a class="el" href="struct_audio_actions_1_1_action.html">AudioActions::Action</a>&#160;</td><td class="memItemRight" valign="bottom"><b>actions</b> [ACTIONS_MAX]</td></tr>
+<tr class="separator:a6c852fc7707acbeb8be7519794c45025"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95e657dacca0739485eeb2b56c38d5c9"><td class="memItemLeft" align="right" valign="top"><a id="a95e657dacca0739485eeb2b56c38d5c9"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>debounceDelayValue</b> = DEBOUNCE_DELAY</td></tr>
+<tr class="separator:a95e657dacca0739485eeb2b56c38d5c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe3675b3baa0180df7bf66f6aa5b7f56"><td class="memItemLeft" align="right" valign="top"><a id="afe3675b3baa0180df7bf66f6aa5b7f56"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>maxIdx</b> = 0</td></tr>
 <tr class="separator:afe3675b3baa0180df7bf66f6aa5b7f56"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0cd45c3646fc66a78850da0c2ab03e27"><td class="memItemLeft" align="right" valign="top"><a id="a0cd45c3646fc66a78850da0c2ab03e27"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>pins</b> [ACTIONS_MAX] = {0}</td></tr>
-<tr class="separator:a0cd45c3646fc66a78850da0c2ab03e27"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A simple class to assign Functions to Pins e.g. to implement a simple navigation control or volume control with buttons. </p>

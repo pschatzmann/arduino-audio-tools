@@ -71,6 +71,11 @@ class AudioEffects : public SoundGenerator<effect_t>  {
             return input;
         }
 
+        /// deletes all defined effects
+        virtual void clear() {
+            effects.clear();
+        }
+
     protected:
         Vector<AudioEffect*> effects;
         SoundGenerator *p_source;

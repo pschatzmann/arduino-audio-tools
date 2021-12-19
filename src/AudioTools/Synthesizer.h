@@ -42,47 +42,59 @@ class DefaultSyntheizerChannel : public AbstractSyntheizerChannel {
 
         DefaultSyntheizerChannel(DefaultSyntheizerChannel &ch) = default;
         
-
         DefaultSyntheizerChannel *clone() override {
             return new DefaultSyntheizerChannel(*this);
         }
 
-        void begin(AudioBaseInfo config) override {
-            audio_effects.setInput(sine);
-            audio_effects.addEffect(adsr);
-            sine.begin(config);
+        void setBeginCallback(void (*setup_callback)(AudioBaseInfo config)) {
+            this->setup_callback = setup_callback;
         }
 
-        bool isActive() override{
-            adsr.isActive();
+        virtual void begin(AudioBaseInfo config) override {
+            if (setup_callback==nullptr){
+                audio_effects.setInput(sine);
+                audio_effects.addEffect(adsr);
+                sine.begin(config, N_C3 );
+            } else {
+                setup_callback();
+            }
         }
 
-        void keyOn(int nte, float tgt) override{
+        virtual bool isActive() override{
+            adsr_obj.isActive();
+        }
+
+        virtual void keyOn(int nte, float tgt) override{
             actual_note = nte;
-            adsr.keyOn(tgt);
+            adsr_obj.keyOn(tgt);
         }
 
-        void keyOff() override{
-            adsr.keyOff();
+        virtual void keyOff() override{
+            adsr_obj.keyOff();
         }
 
-        int16_t readSample() override{
+        virtual int16_t readSample() override{
             return audio_effects.readSample();
         }
 
-        int note() override {
+        virtual int note() override {
             return actual_note;
         }
 
-        AudioEffects &audioEffects()override {
+        virtual AudioEffects &audioEffects()override {
             return audio_effects;
+        }
+
+        virtual ADSR &adsr(){
+            return adsr_obj;
         }
 
     protected:
         SineWaveGenerator<int16_t> sine;
-        ADSR adsr = ADSR(0.001, 0.001, 0.5, 0.005);
+        ADSR adsr_obj = ADSR(0.0001, 0.0001, 0.8, 0.0005);
         AudioEffects audio_effects;
         int actual_note = 0;
+        void (*setup_callback)(AudioBaseInfo config) = nullptr;
 
 };
 
