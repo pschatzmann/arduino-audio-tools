@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['rmsbuffer_1305',['rmsBuffer',['../classaudio__tools_1_1_filter_effect_base.html#a18bf31c896e32014601e8ce21d7485fe',1,'audio_tools::FilterEffectBase']]],
-  ['rmsbufferindex_1306',['rmsBufferIndex',['../classaudio__tools_1_1_filter_effect_base.html#a43449e42d8367f5343c8dcd24ce19836',1,'audio_tools::FilterEffectBase']]],
-  ['rmswindowsize_1307',['rmsWindowSize',['../classaudio__tools_1_1_filter_effect_base.html#a6f4e8b9c1726a376f7412d18be6ff08b',1,'audio_tools::FilterEffectBase']]],
-  ['rx_5ftx_5fmode_1308',['rx_tx_mode',['../classaudio__tools_1_1_i2_s_config.html#a79971ed4bb50a6b67c3cf28197ac5a05',1,'audio_tools::I2SConfig']]]
+  ['tableindex_1164',['tableIndex',['../classaudio__tools_1_1_modulation_base_class.html#aa8b064da2262933b4d0a759fab0bbab7',1,'audio_tools::ModulationBaseClass']]],
+  ['timestep_1165',['timeStep',['../classaudio__tools_1_1_modulation_base_class.html#af4517fb83c9a2cb9ad1847475ab254d1',1,'audio_tools::ModulationBaseClass::timeStep()'],['../classaudio__tools_1_1_simple_flanger.html#a571f3ef136648e66f798caae6074b0fd',1,'audio_tools::SimpleFlanger::timeStep()']]]
 ];

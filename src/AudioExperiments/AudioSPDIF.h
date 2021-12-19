@@ -8,6 +8,8 @@
 #define LEFTCHANNEL 0
 #define RIGHTCHANNEL 1
 
+namespace audio_tools {
+
 typedef int16_t frame[2];
 
 // BMC (Biphase Mark Coded) values (bit order reversed, i.e. LSB first)
@@ -201,3 +203,5 @@ class SPDIFStream : public AudioStreamX {
     return len;
   }
 };
+
+}

@@ -75,10 +75,10 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Configuration for <a class="el" href="classaudio__tools_1_1_audio_kit_stream.html" title="ESP32 Audio Kit using the ESP8388 DAC and ADC.">AudioKitStream</a>: we use as subclass of <a class="el" href="classaudio__tools_1_1_i2_s_config.html" title="configuration for all common i2s settings">I2SConfig</a>.  
+<p>Configuration for <a class="el" href="classaudio__tools_1_1_audio_kit_stream.html" title="AudioKit Stream which uses the https://github.com/pschatzmann/arduino-audiokit library.">AudioKitStream</a>: we use as subclass of <a class="el" href="classaudio__tools_1_1_i2_s_config.html" title="configuration for all common i2s settings">I2SConfig</a>.  
  <a href="classaudio__tools_1_1_audio_kit_stream_config.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_audio_libs_2_audio_kit_8h_source.html">AudioKit.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for audio_tools::AudioKitStreamConfig:</div>
 <div class="dyncontent">
@@ -122,13 +122,13 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator==</b> (<a cl
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:aed71fcbcacc89976ec6918b774572d6c"><td class="memItemLeft" align="right" valign="top"><a id="aed71fcbcacc89976ec6918b774572d6c"></a>
-<a class="el" href="namespaceaudio__tools.html#a544e44298df56c5c63655d114b9b8314">audio_hal_adc_input_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>input_device</b> = AUDIOKIT_DEFAULT_INPUT</td></tr>
+audio_hal_adc_input_t&#160;</td><td class="memItemRight" valign="bottom"><b>input_device</b> = AUDIOKIT_DEFAULT_INPUT</td></tr>
 <tr class="separator:aed71fcbcacc89976ec6918b774572d6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2941086e1ffb2e6be8a55d79fabf7bd5"><td class="memItemLeft" align="right" valign="top"><a id="a2941086e1ffb2e6be8a55d79fabf7bd5"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>masterclock_pin</b> = 0</td></tr>
 <tr class="separator:a2941086e1ffb2e6be8a55d79fabf7bd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c7be2cb30794d87d783b4ed60d16d62"><td class="memItemLeft" align="right" valign="top"><a id="a2c7be2cb30794d87d783b4ed60d16d62"></a>
-<a class="el" href="namespaceaudio__tools.html#a3d0375c3c65fd9c364367c504e2a02dd">audio_hal_dac_output_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>output_device</b> = AUDIOKIT_DEFAULT_OUTPUT</td></tr>
+audio_hal_dac_output_t&#160;</td><td class="memItemRight" valign="bottom"><b>output_device</b> = AUDIOKIT_DEFAULT_OUTPUT</td></tr>
 <tr class="separator:a2c7be2cb30794d87d783b4ed60d16d62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_classaudio__tools_1_1_i2_s_config"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classaudio__tools_1_1_i2_s_config')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classaudio__tools_1_1_i2_s_config.html">audio_tools::I2SConfig</a></td></tr>
 <tr class="memitem:ac7ec0aae7de817318cd85bb7f825f29b inherit pub_attribs_classaudio__tools_1_1_i2_s_config"><td class="memItemLeft" align="right" valign="top"><a id="ac7ec0aae7de817318cd85bb7f825f29b"></a>
@@ -194,7 +194,7 @@ audio_hal_iface_samples_t&#160;</td><td class="memItemRight" valign="bottom"><a 
 <tr class="separator:a4de0a0c06e2ba98ac47eb83e9bbd89e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Configuration for <a class="el" href="classaudio__tools_1_1_audio_kit_stream.html" title="ESP32 Audio Kit using the ESP8388 DAC and ADC.">AudioKitStream</a>: we use as subclass of <a class="el" href="classaudio__tools_1_1_i2_s_config.html" title="configuration for all common i2s settings">I2SConfig</a>. </p>
+<div class="textblock"><p>Configuration for <a class="el" href="classaudio__tools_1_1_audio_kit_stream.html" title="AudioKit Stream which uses the https://github.com/pschatzmann/arduino-audiokit library.">AudioKitStream</a>: we use as subclass of <a class="el" href="classaudio__tools_1_1_i2_s_config.html" title="configuration for all common i2s settings">I2SConfig</a>. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
@@ -225,7 +225,7 @@ audio_hal_iface_samples_t&#160;</td><td class="memItemRight" valign="bottom"><a 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioLibs/<a class="el" href="_audio_libs_2_audio_kit_8h_source.html">AudioKit.h</a></li>
+<li>src/AudioLibs/<a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
