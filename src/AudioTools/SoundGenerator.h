@@ -1,7 +1,8 @@
 #pragma once
 
-#include "AudioLogger.h"
-#include "AudioTypes.h"
+#include "AudioTools/AudioLogger.h"
+#include "AudioTools/AudioTypes.h"
+#include "AudioTools/Vector.h"
 
 namespace audio_tools {
 
@@ -16,10 +17,33 @@ template <class T>
 class SoundGenerator  {
     public:
         SoundGenerator() {
+            info.bits_per_sample = sizeof(T)*8;
+            info.channels = 1;
+            info.sample_rate = 44100;
         }
 
         virtual ~SoundGenerator() {
             end();
+        }
+
+        virtual void begin(AudioBaseInfo info) {
+            this->info = info;
+            begin();
+        }
+
+        virtual void begin() {
+            active = true;
+            activeWarningIssued = false;
+            info.bits_per_sample = sizeof(T)*8;
+        }
+
+        /// ends the processing
+        virtual void end(){
+            active = false;
+        }
+
+        virtual bool isActive() {
+            return active;
         }
 
         /// Provides the samples into simple array - which represents 1 channel
@@ -44,10 +68,9 @@ class SoundGenerator  {
         /// Provides a single sample
         virtual  T readSample() = 0;
 
-
         /// Provides the data as byte array with the requested number of channels
         virtual size_t readBytes( uint8_t *buffer, size_t lengthBytes){
-            LOGD("readBytes: %d", (int)lengthBytes);
+            //LOGD("readBytes: %d", (int)lengthBytes);
             size_t result = 0;
             int ch = audioInfo().channels;
             int frame_size = sizeof(T) * ch;
@@ -69,14 +92,10 @@ class SoundGenerator  {
                         break;
                 }
             } else {
-                if (!activeWarningIssued){
-                    LOGE("SoundGenerator::readBytes -> inactive");
-                }
-                activeWarningIssued = true;
-                // when inactive did not generate anything
+                LOGE("SoundGenerator::readBytes -> inactive");
                 result = 0;
             }
-            LOGD( "SoundGenerator::readBytes (channels: %d) %zu bytes -> %zu samples", ch, lengthBytes, result);
+            //LOGD( "SoundGenerator::readBytes (channels: %d) %zu bytes -> %zu samples", ch, lengthBytes, result);
             return result * frame_size;
         }
 
@@ -88,25 +107,10 @@ class SoundGenerator  {
             return def;
         }
 
-        virtual void begin(AudioBaseInfo info) {
-            this->info = info;
-            begin();
+        virtual void setFrequency(uint16_t frequency) {
+            LOGE("setFrequency not supported");
         }
 
-        virtual void begin() {
-            active = true;
-            activeWarningIssued = false;
-            info.bits_per_sample = sizeof(T)*8;
-        }
-
-        /// ends the processing
-        virtual void end(){
-            active = false;
-        }
-
-        virtual bool isActive() {
-            return active;
-        }
 
         virtual AudioBaseInfo audioInfo() {
             return info;
@@ -146,21 +150,25 @@ class SineWaveGenerator : public SoundGenerator<T>{
             m_phase = phase;
         }
 
-        void begin() {
+        void begin() override {
+            LOGI(LOG_METHOD);
             SoundGenerator<T>::begin();
             this->m_deltaTime = 1.0 / SoundGenerator<T>::info.sample_rate;
         }
 
-        void begin(AudioBaseInfo info, uint16_t frequency=0){
+        void begin(AudioBaseInfo info) override {
+            LOGI(LOG_METHOD);
+            SoundGenerator<T>::begin(info);
+            this->m_deltaTime = 1.0 / SoundGenerator<T>::info.sample_rate;
+        }
+
+        void begin(AudioBaseInfo info, uint16_t frequency){
+            LOGI(LOG_METHOD);
             SoundGenerator<T>::begin(info);
             this->m_deltaTime = 1.0 / SoundGenerator<T>::info.sample_rate;
             if (frequency>0){
                 setFrequency(frequency);
             }
-        }
-
-        virtual AudioBaseInfo defaultConfig(){
-            return SoundGenerator<T>::defaultConfig();
         }
 
         void begin(int channels, int sample_rate, uint16_t frequency=0){
@@ -169,13 +177,24 @@ class SineWaveGenerator : public SoundGenerator<T>{
             begin(SoundGenerator<T>::info, frequency);
         }
 
+        // update m_deltaTime
+        virtual void setAudioInfo(AudioBaseInfo info) override {
+            SoundGenerator<T>::setAudioInfo(info);
+            this->m_deltaTime = 1.0 / SoundGenerator<T>::info.sample_rate;
+        }
+
+        virtual AudioBaseInfo defaultConfig() override {
+            return SoundGenerator<T>::defaultConfig();
+        }
+
         /// Defines the frequency - after the processing has been started
-        void setFrequency(uint16_t frequency) {
+        void setFrequency(uint16_t frequency)  override {
+            LOGI("setFrequency: %d", frequency);
             m_frequency = frequency;
         }
 
         /// Provides a single sample
-        virtual T readSample() {
+        virtual T readSample() override {
             float angle = double_Pi * m_frequency * m_time + m_phase;
             T result = m_amplitude * sin(angle);
             m_time += m_deltaTime;
@@ -304,5 +323,49 @@ class GeneratorFromStream : public SoundGenerator<T> {
     protected:
         Stream *p_stream = nullptr;
 };
+
+/**
+ * @brief Mixer which combines multiple sound generators into one output
+ * 
+ * @tparam T 
+ */
+template <class T>
+class GeneratorMixer : public SoundGenerator<T> {
+    public:
+        GeneratorMixer() = default;
+
+        void add(SoundGenerator<T> &generator){
+            vector.push_back(&generator);
+        }
+        void add(SoundGenerator<T> *generator){
+            vector.push_back(generator);
+        }
+
+        void clear() {
+            vector.clear();
+        }
+
+        T readSample() {
+            T result;
+            int count = 0;
+            for (int j=0;j<vector.size();j++){
+                T tmp = vector[j]->readSample();
+                if (j==actualChannel){
+                    result = tmp;
+                }
+            }
+            actualChannel++;
+            if (actualChannel>=vector.size()){
+                actualChannel = 0;
+            }
+            return result;;
+        }
+    protected:
+        Vector<SoundGenerator<T>*> vector;
+        int actualChannel=0;
+
+};
+
+
 
 }

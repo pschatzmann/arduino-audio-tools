@@ -12,7 +12,7 @@
 #include <Midi.h>
 
 SineWaveGenerator<int16_t> sine;
-ADSR adsr(0.0001,0.0001, 0.9 , 0.0002);
+ADSRGain adsr(0.0001,0.0001, 0.9 , 0.0002);
 
 class SynthAction : public MidiAction {
     public:
