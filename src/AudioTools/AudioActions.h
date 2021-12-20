@@ -36,6 +36,8 @@ class AudioActions {
       actions[pos].activeLogic = activeLogicPar;
       actions[pos].ref = ref;
     } else {
+
+      // setup pin mode      
       if (activeLogicPar==ActiveLow){
         pinMode(pin, INPUT_PULLUP);
         LOGI("pin %d -> INPUT_PULLUP", pin);
@@ -88,7 +90,7 @@ class AudioActions {
         bool active = (a->activeLogic == ActiveLow) ? !value : value;
         // reports pin state
         if (value != a->lastState) {
-          //LOGD("processActions: ActiveChange");
+          LOGI("processActions: ActiveChange");
           // execute action
           a->actionOn(active, a->pin, a->ref);
           a->lastState = value;

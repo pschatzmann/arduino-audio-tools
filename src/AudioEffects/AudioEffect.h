@@ -1,6 +1,7 @@
 #pragma once
 #include <stdint.h> 
 #include "AudioTools/AudioLogger.h"
+#include "AudioEffects/AudioParameters.h"
 
 namespace audio_tools {
 
@@ -295,127 +296,69 @@ class Delay : public AudioEffect  {
  * @copyright GPLv3
  */
 
-class ADSR : public AudioEffect {
+class ADSRGain : public AudioEffect {
     public:
-        ADSR(float attack=0.001, float decay=0.001, float sustainLevel=0.5, float release= 0.005){
-            this->attack = attack;
-            this->decay = decay;
-            this->sustain = sustainLevel;
-            this->release = release;
+        ADSRGain(float attack=0.001, float decay=0.001, float sustainLevel=0.5, float release= 0.005, float boostFactor=1.0){
+            this->factor = boostFactor;
+            adsr = new ADSR(attack,decay,sustainLevel,release);
+        }
+
+        ~ADSRGain(){
+            delete adsr;
         }
 
         void setAttackRate(float a){
-            attack = a;
+            adsr->setAttackRate(a);
         }
 
         float attackRate(){
-            return attack;
+            return adsr->attackRate();
         }
 
         void setDecayRate(float d){
-            decay = d;
+            adsr->setDecayRate(d);
         }
 
         float decayRate() {
-            return decay;
+            return adsr->decayRate();
         }
 
         void setSustainLevel(float s){
-            sustain = s;
+            adsr->setSustainLevel(s);
         }
 
         float sustainLevel(){
-            return sustain;
+            return adsr->sustainLevel();
         }
         
         void setReleaseRate(float r){
-            release = r;
+            adsr->setReleaseRate(r);
         }
 
         float releaseRate() {
-            return release;
+            return adsr->releaseRate();
         }
 
         void keyOn(float tgt=0){
-            state = Attack;
-            this->target = tgt>0 && tgt<=1.0 ? tgt : sustain;
-            this->value = 0;
+            adsr->keyOn(tgt);
         }
 
         void keyOff(){
-            if (state!=Idle){
-                state = Release;
-                target = 0;
-            }
+            adsr->keyOff();
         }
 
         effect_t process(effect_t input) {
-            return tick(input);
+            effect_t result = factor * adsr->tick() * input;
+            return result;
         }
 
         bool isActive(){
-            return state!=Idle;
+            return adsr->isActive();
         }
 
     protected:
-        float attack,  decay,  sustain,  release;
-        enum AdsrPhase {Idle, Attack, Decay, Sustain, Release};
-        const char* adsrNames[5] = {"Idle", "Attack", "Decay", "Sustain", "Release"};
-        AdsrPhase state = Idle;
-        float value = 0, target = 0;
-        int zeroCount =  0;
-
-        inline effect_t  tick( effect_t in ) {
-
-            if (in==0){
-                zeroCount++;
-            } else {
-                zeroCount=0;
-            }
-
-            if (zeroCount==100){
-                LOGI("ADSR: Imput data is zero");
-            }
-
-            switch ( state ) {
-                case Attack:
-                    value += attack;
-                    if ( value >= target ) {
-                        value = target;
-                        target = sustain;
-                        state = Decay;
-                    }
-                    break;
-
-                case Decay:
-                    if ( value > sustain ) {
-                        value -= decay;
-                        if ( value <= sustain ) {
-                            value = sustain;
-                            state = Sustain;
-                        }
-                    }
-                    else {
-                        value += decay; // attack target < sustainLevel level
-                        if ( value >= sustain ) {
-                            value = sustain;
-                            state = Sustain;
-                        }
-                    }
-                    break;
-
-                case Release:
-                    value -= release;
-                    if ( value <= 0.0 ) {
-                        value = 0.0;
-                        state = Idle;
-                    }
-
-            }
-            effect_t result = value * in;
-            LOGD("ADSR %s: %d * %f -> %d", adsrNames[(int)state], in, value, result );
-            return result;
-        }
+        ADSR *adsr;
+        float factor;
 
 };
 

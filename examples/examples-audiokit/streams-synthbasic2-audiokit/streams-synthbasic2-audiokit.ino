@@ -12,7 +12,7 @@
 AudioKitStream kit;
 SineWaveGenerator<int16_t> sine;
 AudioEffects effects(sine);
-ADSR adsr(0.0001,0.0001, 0.9 , 0.0002);
+ADSRGain adsr(0.0001,0.0001, 0.9 , 0.0002);
 GeneratedSoundStream<int16_t> in(effects); 
 StreamCopy copier(kit, in); 
 
