@@ -32,6 +32,27 @@ typedef float effectsuite_t;
  */
 static effectsuite_t **interpolationTable = nullptr;
 
+
+class EffectSuiteBase  : public AudioEffect {
+    /**
+   * Main process block for applying audio effect
+   * @param inputSample The input audio sample for the effect to be applied to
+   * @returns an audio sample as a effectsuite_t with effect applied
+   */
+  virtual effectsuite_t processDouble(effectsuite_t inputSample) = 0;
+
+  /**
+   * Main process block for applying audio effect
+   * @param inputSample The int16_t input audio sample for the effect to be applied to
+   * @returns an audio sample as a int16_t with effect applied
+   */
+  virtual effect_t process(effect_t inputSample) override {
+    return active_flag ? 32767.0 * processDouble(static_cast<effectsuite_t>(inputSample)/32767.0) : inputSample;
+  }
+
+};
+
+
 /**
  * Class provides a wave table that can be populated with a number of
  * preallocated waveforms. These can be used to generate audio in themselves or
@@ -44,6 +65,8 @@ class ModulationBaseClass {
 public:
   /** Constructor */
   ModulationBaseClass() { srand(static_cast<unsigned>(time(0))); }
+
+  ModulationBaseClass(ModulationBaseClass &copy) = default; 
 
   ModulationBaseClass(effectsuite_t extSampRate) {
     this->sampleRate = extSampRate;
@@ -327,10 +350,12 @@ protected:
  * @author Matthew Hamilton
  * @copyright MIT License
  */
-class DelayEffectBase : public AudioEffect  {
+class DelayEffectBase  {
 public:
   /** Constructor. */
   DelayEffectBase() = default;
+
+  DelayEffectBase(DelayEffectBase &copy) = default;
 
   DelayEffectBase(int bufferSizeSamples) {
     error = setDelayBuffer(bufferSizeSamples);
@@ -344,22 +369,6 @@ public:
   ~DelayEffectBase() {
     if (delayBuffer != nullptr)
       delete[] delayBuffer;
-  }
-
-  /**
-   * Main process block for applying audio effect
-   * @param inputSample The input audio sample for the effect to be applied to
-   * @returns an audio sample as a effectsuite_t with effect applied
-   */
-  virtual effectsuite_t processDouble(effectsuite_t inputSample) = 0;
-
-  /**
-   * Main process block for applying audio effect
-   * @param inputSample The int16_t input audio sample for the effect to be applied to
-   * @returns an audio sample as a int16_t with effect applied
-   */
-  virtual effect_t process(effect_t inputSample) override {
-    return active_flag ? 32767.0 * processDouble(static_cast<effectsuite_t>(inputSample)/32767.0) : inputSample;
   }
 
   /**
@@ -575,10 +584,13 @@ protected: // member variables
  * @author Matthew Hamilton
  * @copyright MIT License
  */
-class FilterEffectBase : public AudioEffect {
+class FilterEffectBase : public EffectSuiteBase  {
 public:
   /** Constructor. */
   FilterEffectBase() { std::fill(rmsBuffer, rmsBuffer + rmsWindowSize, 0); }
+
+  FilterEffectBase(FilterEffectBase &copy) = default;
+
   /** Destructor. */
   ~FilterEffectBase() = default;
 
@@ -953,9 +965,15 @@ public:
     changeChebyICoefficients(cutoff, false, .1, order);
   };
 
-public:
+  SimpleLPF(SimpleLPF &copy) = default;
+
   /** destructor*/
   ~SimpleLPF() = default;
+
+  SimpleLPF* clone(){
+    return new SimpleLPF(*this);
+  }
+
 };
 
 /**
@@ -967,7 +985,7 @@ public:
  **/
 class SimpleChorus : public DelayEffectBase,
                      public ModulationBaseClass,
-                     public SimpleLPF {
+                     public SimpleLPF{
 public:
   /**
    * Constructor: initialises the effect parameters
@@ -984,6 +1002,8 @@ public:
     if (sampleRate != 0)
       setRandLfo();
   }
+
+  SimpleChorus(SimpleChorus &copy)=default;
 
   ~SimpleChorus() = default;
 
@@ -1031,6 +1051,10 @@ public:
    * @param baseAmount <#baseAmount description#>
    */
   void setBase(effectsuite_t baseAmount) { base = baseAmount * sampleRate; }
+
+  SimpleChorus* clone() {
+    return new SimpleChorus(*this);
+  }
 
 protected:
   /** swing range of delayed audio index in samples
@@ -1100,10 +1124,12 @@ public:
     delayTimeSamples = delayInSamples;
     changeChebyICoefficients(.05, true, .1, 4);
   };
+
+  FilteredDelay(FilteredDelay&copy) = default;
+
   /** Destructor */
   ~FilteredDelay() = default;
 
-public:
   /** setDelayGain: sets the delay gain to a value between 1 and -1
    * @param gainrequired delay gain. Values beyond 1 and -1
    * are capped to the maximum to avoid idiocy.
@@ -1136,6 +1162,10 @@ public:
     return out;
   }
 
+  FilteredDelay *clone(){
+    return new FilteredDelay(*this);
+  }
+
 protected:
   /**
    * capGain: caps gain to a range of 1 and -1;
@@ -1162,7 +1192,7 @@ protected:
  * @author Matthew Hamilton
  * @copyright MIT License
  */
-class SimpleDelay : public DelayEffectBase {
+class SimpleDelay : public DelayEffectBase, public EffectSuiteBase {
 public:
   /**
    * Constructor: DigitalEffect Base Must Be initialised
@@ -1176,6 +1206,8 @@ public:
     targetDelaySamples = maxDelayInSamples;
     setDelayTransitionTime(0.5);
   }
+
+  SimpleDelay(SimpleDelay &copy) = default;
 
   /** Destructor. */
   ~SimpleDelay() = default;
@@ -1263,6 +1295,10 @@ public:
     delayTransitionTimeInSamples = seconds * sampleRate;
   }
 
+  SimpleDelay* clone(){
+    return new SimpleDelay(*this);
+  }
+
 protected:
   /**
    * capGain: caps gain to a range of 1 and -1;
@@ -1329,13 +1365,14 @@ protected: // member vairables
  * @author Matthew Hamilton
  * @copyright MIT License
  */
-class SimpleFlanger : public DelayEffectBase {
+class SimpleFlanger : public DelayEffectBase, public EffectSuiteBase {
 public:
   /**
    * Constructor: DigitalEffect Base Must Be initialised
    * @see DelayEffectBase constructor
    */
   SimpleFlanger() = default;
+  SimpleFlanger(SimpleFlanger&copy) = default;
   SimpleFlanger(effectsuite_t extSampleRate=44100)
       : DelayEffectBase(static_cast<int>(extSampleRate * 0.02)) {}
 
@@ -1395,6 +1432,10 @@ public:
     setupDelayEffectBase(extSampleRate * .02);
     timeStep = 1. / extSampleRate;
     setEffectParams(.707, extSampleRate * .02, .1);
+  }
+
+  SimpleFlanger* clone(){
+    return new SimpleFlanger(*this);
   }
 
 protected:

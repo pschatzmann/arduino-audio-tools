@@ -28,8 +28,27 @@ class AudioEffect  {
         virtual bool active() {
             return active_flag;
         }
+
+        virtual AudioEffect *clone() = 0;
+
+        /// Allows to identify an effect
+        int id() {
+            return id_value;
+        }
+
+        /// Allows to identify an effect
+        void setId(int id){
+            this->id_value = id;
+        }
+
     protected:
         bool active_flag = true;
+        int id_value=-1;
+
+        void copyParent(AudioEffect *copy){
+            id_value = copy->id_value;
+            active_flag = copy->active_flag;
+        }
 
         /// generic clipping method
         int16_t clip(int32_t in, int16_t clipLimit=32767, int16_t resultLimit=32767 ) {
@@ -38,6 +57,8 @@ class AudioEffect  {
             if (result < -clipLimit) {result = -resultLimit;}
             return result;
         }
+
+
 };
 
 /**
@@ -54,6 +75,8 @@ class Boost : public AudioEffect {
             effect_value = volume;
         }
 
+        Boost(const Boost &copy) = default;
+
         float volume() {
             return effect_value;
         }
@@ -67,6 +90,10 @@ class Boost : public AudioEffect {
             int32_t result = effect_value * input;
             // clip to int16_t            
             return clip(result);
+        }
+
+        Boost* clone() {
+            return new Boost(*this);
         }
 
     protected:
@@ -87,6 +114,8 @@ class Distortion : public AudioEffect  {
             p_clip_threashold = clipThreashold;
             max_input = maxInput;   
         }
+
+        Distortion(const Distortion &copy) = default;
 
         void setClipThreashold(int16_t th){
             p_clip_threashold = th;
@@ -111,6 +140,10 @@ class Distortion : public AudioEffect  {
             return clip(input,p_clip_threashold, max_input);
         }
 
+        Distortion* clone() {
+            return new Distortion(*this);
+        }
+
     protected:
         int16_t p_clip_threashold;
         int16_t max_input;
@@ -131,6 +164,8 @@ class Fuzz : public AudioEffect  {
             p_effect_value = fuzzEffectValue;
             max_out = maxOut;
         }
+
+        Fuzz(const Fuzz& copy) = default;
 
         void setFuzzEffectValue(float v){
             p_effect_value = v;
@@ -155,6 +190,10 @@ class Fuzz : public AudioEffect  {
             return map(result * v, -32768, +32767,-max_out, max_out);
         }
 
+        Fuzz *clone() {
+            return new Fuzz(*this);
+        }
+
     protected:
         float p_effect_value;
         uint16_t max_out;
@@ -177,6 +216,8 @@ class Tremolo : public AudioEffect  {
             int32_t rate_count = sampleRate * duration_ms / 1000;
             rate_count_half = rate_count / 2;
         }
+
+        Tremolo(const Tremolo &copy) = default;
 
         void setDuration(int16_t ms){
             int32_t rate_count = sampleRate * ms / 1000;
@@ -216,6 +257,10 @@ class Tremolo : public AudioEffect  {
             return clip(out);
         }
 
+        Tremolo* clone() {
+            return new Tremolo(*this);
+        }
+
     protected:
         int16_t duration_ms;
         uint32_t sampleRate;
@@ -239,6 +284,8 @@ class Delay : public AudioEffect  {
             p_percent = depthPercent;
             p_ms = duration_ms;
         }
+
+        Delay(const Delay &copy) = default;
 
         void setDuration(int16_t ms){
             p_ms = ms;
@@ -266,6 +313,10 @@ class Delay : public AudioEffect  {
             p_history->write(input);
             // mix input with result
             return (value * p_percent / 100) + (input * (100-p_percent)/100); 
+        }
+
+        Delay *clone() {
+            return new Delay(*this);
         }
 
     protected:
@@ -298,10 +349,17 @@ class Delay : public AudioEffect  {
 
 class ADSRGain : public AudioEffect {
     public:
+
         ADSRGain(float attack=0.001, float decay=0.001, float sustainLevel=0.5, float release= 0.005, float boostFactor=1.0){
             this->factor = boostFactor;
             adsr = new ADSR(attack,decay,sustainLevel,release);
         }
+
+        ADSRGain(const ADSRGain &ref) {
+            adsr = new ADSR(*(ref.adsr));
+            factor = ref.factor;
+            copyParent((AudioEffect *)&ref);
+        };
 
         ~ADSRGain(){
             delete adsr;
@@ -354,6 +412,10 @@ class ADSRGain : public AudioEffect {
 
         bool isActive(){
             return adsr->isActive();
+        }
+
+        ADSRGain *clone() {
+            return new ADSRGain(*this);
         }
 
     protected:

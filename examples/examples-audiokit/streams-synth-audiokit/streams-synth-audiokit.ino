@@ -8,7 +8,7 @@
 #define USE_MIDI
 
 #include "AudioTools.h"
-#include "AudioTools/Synthesizer.h"
+#include "AudioEffects/Synthesizer.h"
 #include "AudioLibs/AudioKit.h"
 
 AudioKitStream kit;

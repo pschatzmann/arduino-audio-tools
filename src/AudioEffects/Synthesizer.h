@@ -4,8 +4,8 @@
 #include "AudioTools/AudioTypes.h"
 #include "AudioTools/Vector.h"
 #include "AudioTools/AudioActions.h"
-#include "AudioTools/SoundGenerator.h"
 #include "AudioTools/AudioStreams.h"
+#include "AudioEffects/SoundGenerator.h"
 #include "AudioEffects/AudioEffects.h"
 #ifdef USE_MIDI
 #include "Midi.h"
@@ -37,75 +37,40 @@ class AbstractSynthesizerChannel {
 };
 
 /**
- * @brief Default implementation for a Channel
+ * @brief Default implementation for a Channel. You can provide the Sound Generator as parameter to the effects: e.g.
+ * DefaultSynthesizerChannel<AudioEffects<SineWaveGenerator<int16_t>>> *channel = new DefaultSynthesizerChannel<AudioEffects<SineWaveGenerator<int16_t>>>();
+
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
+template <class EffectsT>
 class DefaultSynthesizerChannel : public AbstractSynthesizerChannel {
     public:
+        /// Default constructor
         DefaultSynthesizerChannel() = default;
 
-        DefaultSynthesizerChannel(DefaultSynthesizerChannel &ch) {
-            begin(ch.config);
-        };
+        /// Copy constructor
+        DefaultSynthesizerChannel(DefaultSynthesizerChannel<EffectsT> &ch) = default;
         
-        virtual ~DefaultSynthesizerChannel() {
+        DefaultSynthesizerChannel<EffectsT> *clone() override {
             LOGD(LOG_METHOD);
-            if (shutdown_callback!=nullptr){
-                shutdown_callback(ref);
-            }
-            if (p_generator!=nullptr){
-                delete p_generator;
-            }
-            if (p_adsr!=nullptr){
-                delete p_adsr;
-            }
-            if (p_audio_effects!=nullptr){
-                delete p_audio_effects;
-            }
-        };
-
-        DefaultSynthesizerChannel *clone() override {
-            LOGD(LOG_METHOD);
-            return new DefaultSynthesizerChannel(*this);
-        }
-
-        void setupCallback(void (*setup_callback)(AudioBaseInfo config), void(*shutdown_callback)(void *)=nullptr, void* ref=nullptr) {
-            LOGI(LOG_METHOD);
-            this->setup_callback = setup_callback;
-            this->shutdown_callback = shutdown_callback;
-            this->ref = ref;
+            auto result = new DefaultSynthesizerChannel<EffectsT>(*this);
+            result->begin(config);
+            return result;
         }
 
         virtual void begin(AudioBaseInfo config) override {
             LOGI(LOG_METHOD);
             this->config = config;
-            if (setup_callback==nullptr){
-                config.logInfo();
-                p_generator = new SineWaveGenerator<int16_t>();
-                p_audio_effects = new AudioEffects();
+            config.logInfo();
+            // find ADSRGain
+            p_adsr = (ADSRGain*) audio_effects.findEffect(1);
+            if (p_adsr==nullptr){
                 p_adsr = new ADSRGain(0.0001, 0.0001, 0.8, 0.0005);
-                p_audio_effects->setInput(*p_generator);
-                p_audio_effects->addEffect(p_adsr);
-            } else {
-                setup_callback(config);
-            }
-
-            // start the generator if not done yet
-            if (p_generator!=nullptr && !p_generator->isActive()){
-                LOGI("Starting generator");
-                p_generator->begin(config);
-            }
-        }
-
-        void setGenerator(SoundGenerator<int16_t> *g){
-            LOGD(LOG_METHOD);
-            p_generator = g;
-        }
-
-        void setAudioEffects(AudioEffects *effects){
-            LOGD(LOG_METHOD);
-            p_audio_effects = effects;
+                p_adsr->setId(1);
+                audio_effects.addEffect(p_adsr);
+            } 
+            audio_effects.generator().begin(config);
         }
 
         virtual bool isActive() override{
@@ -114,9 +79,7 @@ class DefaultSynthesizerChannel : public AbstractSynthesizerChannel {
 
         /// start to play a note - note expects the frequency of the note!
         virtual void keyOn(int note, float tgt) override{
-            if (p_generator!=nullptr){
-                p_generator->setFrequency(note);
-            }
+            audio_effects.generator().setFrequency(note);
             if (p_adsr!=nullptr){
                 actual_note = note;
                 p_adsr->keyOn(tgt);  
@@ -133,22 +96,90 @@ class DefaultSynthesizerChannel : public AbstractSynthesizerChannel {
         }
 
         virtual int16_t readSample() override{
-            return p_audio_effects != nullptr ? p_audio_effects->readSample() : 0;
+            return audio_effects.readSample();
         }
 
         virtual int note() override {
             return actual_note;
         }
 
+        void addEffect(AudioEffect *ptr){
+            audio_effects.addEffect(ptr);
+        }
+
     protected:
         AudioBaseInfo config;
-        int actual_note = 0;
-        SoundGenerator<int16_t>* p_generator=nullptr;
-        AudioEffects* p_audio_effects = nullptr;
+        EffectsT audio_effects;
         ADSRGain *p_adsr = nullptr;
-        void (*setup_callback)(AudioBaseInfo config) = nullptr;
-        void (*shutdown_callback)(void*ref) = nullptr;
-        void *ref = nullptr;
+        int actual_note = 0;
+
+};
+
+/**
+ * @brief Audio Processing Channel based on a Input Stream and an Audio Effects Chain. This can be used todo 
+ * implement a Guitar Amplifier.
+ * 
+ */
+class DefaultGuitarChannel : public DefaultSynthesizerChannel<AudioEffects<GeneratorFromStream<int16_t>>> {
+    public:
+        /// Default constructor
+        DefaultGuitarChannel() = default;
+
+        /// Constructor which defines the input stream
+        DefaultGuitarChannel(Stream &input) {
+            setStream(input);
+        }
+
+        /// Copy constructor
+        DefaultGuitarChannel(DefaultGuitarChannel &ch) = default;
+        
+        /// Creates a copy of the channel
+        DefaultGuitarChannel *clone() override {
+            LOGD(LOG_METHOD);
+            auto result = new DefaultGuitarChannel(*this);
+            result->begin(config);
+            return result;
+        }
+
+        /// Defines the inputStream
+        void setStream(Stream &input){
+            audio_effects.generator().setStream(input);
+        }
+
+        /// Starts the audio generator / audio processing
+        virtual void begin(AudioBaseInfo config) override {
+            LOGI(LOG_METHOD);
+            this->config = config;
+            config.logInfo();
+            audio_effects.generator().begin(config);
+        }
+
+        virtual bool isActive() override{
+            return true;
+        }
+
+        /// start to play a note - note expects the frequency of the note!
+        virtual void keyOn(int note, float tgt) override{
+        }
+
+        virtual void keyOff() override{
+        }
+
+        virtual int16_t readSample() override{
+            return audio_effects.readSample();
+        }
+
+        virtual int note() override {
+            return -1;
+        }
+
+        void addEffect(AudioEffect *ptr){
+            audio_effects.addEffect(ptr);
+        }
+
+    protected:
+        AudioBaseInfo config;
+        AudioEffects<GeneratorFromStream<int16_t>> audio_effects;
 
 };
 
@@ -173,7 +204,7 @@ struct SynthesizerKey {
 class Synthesizer : public SoundGenerator<int16_t> {
     public:
         Synthesizer() {
-            defaultChannel = new DefaultSynthesizerChannel();
+            defaultChannel = new DefaultSynthesizerChannel<AudioEffects<SineWaveGenerator<int16_t>>>();
         }
 
         Synthesizer(AbstractSynthesizerChannel *ch){
