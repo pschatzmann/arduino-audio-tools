@@ -7,35 +7,29 @@
 #include "AudioTools.h"
 #include "AudioLibs/AudioKit.h"
 #include "StkAll.h"
-#include "Midi.h"
-#include "ArdStkMidiAction.h" // needed if midi is deactivated in ArdConfig.h
 
 AudioKitStream kit;
 Clarinet clarinet(440);
-StkMidiAction action;
-MidiBleServer ble("MidiServer", &action);
+Voicer voicer;
 ArdStreamOut output(&kit);
-int midiChannel = 0;
+float noteAmplitude = 128;
+int group = 0;
 
 void actionKeyOn(bool active, int pin, void* ptr){
-  int noteNumber = *((int*)ptr);
-  Serial.print(noteNumber);
-  Serial.println(" on");
-  action.onNoteOn(midiChannel, noteNumber);
+  int note = *((int*)ptr);
+  voicer.noteOn(note, noteAmplitude, group);
 }
 
 void actionKeyOff(bool active, int pin, void* ptr){
-  int noteNumber = *((int*)ptr);
-  Serial.print(noteNumber);
-  Serial.println(" off");
-  action.onNoteOff(midiChannel, noteNumber);
+  int note = *((int*)ptr);
+  voicer.noteOff(note, noteAmplitude, group);
 }
 
 // We want to play some notes on the AudioKit keys 
 void setupActions(){
   // assign buttons to notes
   auto act_low = AudioActions::ActiveLow;
-  static int note[] = {48,50,52,53,55,57};
+  static int note[] = {48,50,52,53,55,57}; // midi keys
   kit.audioActions().add(PIN_KEY1, actionKeyOn, actionKeyOff, act_low, &(note[0])); // C3
   kit.audioActions().add(PIN_KEY2, actionKeyOn, actionKeyOff, act_low, &(note[1])); // D3
   kit.audioActions().add(PIN_KEY3, actionKeyOn, actionKeyOff, act_low, &(note[2])); // E3
@@ -46,7 +40,9 @@ void setupActions(){
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Debug);
+  AudioLogger::instance().begin(Serial,AudioLogger::Warning);
+
+  voicer.addInstrument(&clarinet, group);
 
   // define data format
   auto cfg = kit.defaultConfig(TX_MODE);
@@ -57,12 +53,12 @@ void setup() {
 
   // play notes with keys
   setupActions();
- 
-  action.addInstrument(&clarinet, 1);
-  ble.start();
+
 }
 
 void loop() {
-  output.tick( action.tick() );
-  kit.processActions();
+   for (j=0;j<1024;j++) {
+      output.tick( voicer.tick() );
+   }
+   kit.processActions();
 }
