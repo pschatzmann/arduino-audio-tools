@@ -58,6 +58,8 @@ class ADSR : public  AbstractParameter  {
             this->release = release;
         }
 
+        ADSR(ADSR &copy) = default;
+
         void setAttackRate(float a){
             attack = a;
         }

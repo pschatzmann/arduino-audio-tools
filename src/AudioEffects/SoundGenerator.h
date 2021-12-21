@@ -6,6 +6,7 @@
 
 namespace audio_tools {
 
+
 /**
  * @brief Base class to define the abstract interface for the sound generating classes
  * @author Phil Schatzmann
@@ -32,6 +33,7 @@ class SoundGenerator  {
         }
 
         virtual void begin() {
+            LOGD(LOG_METHOD);
             active = true;
             activeWarningIssued = false;
             info.bits_per_sample = sizeof(T)*8;
@@ -172,6 +174,7 @@ class SineWaveGenerator : public SoundGenerator<T>{
         }
 
         void begin(int channels, int sample_rate, uint16_t frequency=0){
+            LOGD(LOG_METHOD);
             SoundGenerator<T>::info.channels  = channels;
             SoundGenerator<T>::info.sample_rate = sample_rate;
             begin(SoundGenerator<T>::info, frequency);

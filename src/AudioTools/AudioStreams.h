@@ -1,8 +1,10 @@
 #pragma once
 #include "Arduino.h"
 #include "AudioConfig.h"
-#include "AudioTypes.h"
-#include "Buffers.h"
+#include "AudioTools/AudioTypes.h"
+#include "AudioTools/Buffers.h"
+#include "AudioTools/AudioLogger.h"
+#include "AudioEffects/SoundGenerator.h"
 
 namespace audio_tools {
 

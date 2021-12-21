@@ -13,7 +13,6 @@
 #include "AudioTools/Buffers.h"
 #include "AudioTools/Converter.h"
 #include "AudioTools/MusicalNotes.h"
-#include "AudioTools/SoundGenerator.h"
 #include "AudioI2S/I2SStream.h"
 #include "AudioPWM/AudioPWM.h"
 #include "AudioAnalog/AnalogAudio.h"
@@ -25,6 +24,7 @@
 #include "AudioCodecs/CodecWAV.h"
 #include "AudioHttp/AudioHttp.h"
 #include "AudioTools/AudioPlayer.h"
+#include "AudioEffects/SoundGenerator.h"
 #include "AudioEffects/AudioEffects.h"
 #include "AudioExperiments/AudioExperiments.h"
 
