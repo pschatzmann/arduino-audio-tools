@@ -1,0 +1,50 @@
+
+.program i2s_master_out
+.side_set 2 opt
+                    ;        /--- LRCLK
+                    ;        |/-- BCLK
+
+public start_output:
+    jmp !Y start_output      side 0b00
+    mov X, Y         side 0b00
+
+.wrap_target
+outloop1:           ;        ||
+    out pins, 1       side 0b10
+    jmp X-- outloop1  side 0b11
+    out pins, 1       side 0b00
+    mov X, Y         side 0b01
+
+outloop0:
+    out pins, 1       side 0b00
+    jmp X-- outloop0  side 0b01
+    out pins, 1       side 0b10
+
+.wrap
+
+% c-sdk {
+
+static inline void i2s_master_out(PIO pio, uint sm, pio_sm_config sm_config,  uint offset, uint data_pin, uint clock_pin_base, int sample_rate, int bits_per_sample) {
+    // Clock Divider 
+    float div = (float)clock_get_hz(clk_sys) / sample_rate * bits_per_sample;
+    sm_config_set_clkdiv(&sm_config, div);
+
+    // we use 32 bits to communicated except for int24_t
+    int shift = bits_per_sample == 24 ? 24 : 32;
+
+    sm_config_set_out_pins(&sm_config, data_pin, 1);
+    sm_config_set_sideset_pins(&sm_config, clock_pin_base);
+    sm_config_set_out_shift(&sm_config, false, true, shift);
+
+    pio_sm_init(pio, sm, offset, &sm_config);
+
+    uint pin_mask = (1u << data_pin) | (3u << clock_pin_base);
+    pio_sm_set_pindirs_with_mask(pio, sm, pin_mask, pin_mask);
+    pio_sm_set_pins(pio, sm, 0); // clear pins
+
+    pio_sm_put(pio, sm, pio_encode_set(pio_y, bits_per_sample));
+    pio_sm_set_enabled(pio, sm, true);
+}
+
+%}
+

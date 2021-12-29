@@ -2,7 +2,7 @@
 
 #include "AudioConfig.h"
 #ifdef USE_I2S
-#include "AudioI2S/I2SBitBangHandler.h"
+#include "AudioExperiments/I2SBitBangHandler.h"
 
 #define MIN_WRITE_LEN I2S_BUFFER_SIZE/2
 

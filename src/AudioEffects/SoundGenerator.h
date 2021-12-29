@@ -6,7 +6,6 @@
 
 namespace audio_tools {
 
-
 /**
  * @brief Base class to define the abstract interface for the sound generating classes
  * @author Phil Schatzmann
@@ -44,6 +43,7 @@ class SoundGenerator  {
             active = false;
         }
 
+        /// Checks if the begin method has been called - after end() isActive returns false
         virtual bool isActive() {
             return active;
         }

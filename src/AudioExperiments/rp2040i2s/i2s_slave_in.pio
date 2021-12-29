@@ -1,0 +1,29 @@
+; Read I2S as Slave
+; pin 1 = clock
+; pin 2 = word select
+
+.program i2s_slave_in
+
+.wrap_target
+    set x, 1
+    wait 1 pin 2        ; wait for ws to change from 0 to 1
+    wait 0 pin 2        ; 
+    set x, 0            ; x contains 1 
+
+inchannel1:       
+    wait 1 pin 1        ; wait for ws to change from 0 to 1
+    in pins, 1          ; read data pin
+    mov x, pins         ; read ws
+    wait 0 pin 1        ; wait for clock to be low
+    jmp !x inchannel1   ; ws is low
+    push           
+
+inchannel2:     
+    wait 1 pin 1        ; wait for ws to change from 0 to 1
+    in pins, 1          ; read data pin
+    mov y pins          ; read ws
+    wait 0 pin 1        ; wait for clock to be low
+    jmp !y inchannel2    ; ws is high
+    push           
+.wrap
+

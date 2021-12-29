@@ -222,11 +222,10 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define PIN_CS SS
 #endif
 
-
 //----------------
 #ifdef ARDUINO_ARCH_RP2040
 //#define USE_ESP8266_AUDIO
-#define USE_I2S
+#define USE_I2S 1
 #define USE_PWM
 
 #define PWM_START_PIN 6

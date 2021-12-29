@@ -7,6 +7,7 @@
 #include "AudioTools/Converter.h"
 #include "AudioTools/AudioLogger.h"
 #include "AudioTools/AudioStreams.h"
+
 namespace audio_tools {
 
 /**
