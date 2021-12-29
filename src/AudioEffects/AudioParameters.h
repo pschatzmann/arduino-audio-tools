@@ -41,7 +41,7 @@ class Parameter : public AbstractParameter {
         Parameter(float value){
             act_value = value;
         }
-        virtual float update(){}
+        virtual float update(){ return act_value;}
 };
 
 /**

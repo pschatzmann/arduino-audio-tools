@@ -3,7 +3,7 @@
 #ifdef ARDUINO_ARCH_RP2040
 #include "AudioConfig.h"
 #ifdef USE_I2S
-#include "AudioI2S/I2SBitBang.h"
+#include "AudioExperiments/I2SBitBang.h"
 #include "pico/stdlib.h"
 #include "hardware/gpio.h"
 #include "hardware/pwm.h"

@@ -10,6 +10,8 @@
 #define DEBOUNCE_DELAY 500
 #endif
 
+namespace audio_tools {
+
 /**
  * @brief A simple class to assign Functions to Pins e.g. to implement a simple
  * navigation control or volume control with buttons 
@@ -143,3 +145,5 @@ class AudioActions {
     return -1;
   }
 };
+
+} // namespace
