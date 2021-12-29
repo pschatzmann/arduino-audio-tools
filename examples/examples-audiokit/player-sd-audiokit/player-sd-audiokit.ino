@@ -30,7 +30,6 @@ void previous(bool, int, void*) {
    player.previous();
 }
 
-
 void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);

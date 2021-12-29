@@ -203,9 +203,13 @@ namespace audio_tools {
 
         virtual void begin() override {
             LOGD(LOG_METHOD);
-            if (!sd.begin(*p_cfg)) {
-                LOGE("SD.begin failed!");
-                stop();
+            static bool is_sd_setup = false;
+            if (!is_sd_setup){
+                if (!sd.begin(*p_cfg)) {
+                    LOGE("SD.begin failed!");
+                    stop();
+                }
+                is_sd_setup = true;
             }
             idx_pos = 0;
         }
@@ -636,6 +640,7 @@ namespace audio_tools {
 
         virtual void end() {
             LOGD(LOG_METHOD);
+            active = false;
             p_out_decoding->end();
             meta_out.end();
         }
@@ -714,6 +719,11 @@ namespace audio_tools {
         /// determines if the player is active
         virtual bool isActive() {
             return active;
+        }
+
+        /// determines if the player is active
+        operator bool() {
+            return isActive();
         }
 
         /// sets the volume - values need to be between 0.0 and 1.0
