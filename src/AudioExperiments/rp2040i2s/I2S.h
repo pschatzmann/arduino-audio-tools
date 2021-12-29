@@ -8,8 +8,15 @@
 #include "i2s_master_out.h"
 #include "i2s_master_in.h"
 #include <vector>
+#include "Arduino.h"
 
-#define I2S_LOGE printf
+#define I2S_LOGE(...) Serial.print("E:"); Serial.printf(__VA_ARGS__); Serial.println()
+#define I2S_LOGW(...) Serial.print("W:"); Serial.printf(__VA_ARGS__); Serial.println()
+#define I2S_LOGI(...) Serial.print("I:"); Serial.printf(__VA_ARGS__); Serial.println()
+//#define I2S_LOGD(...) Serial.print("D:"); Serial.printf(__VA_ARGS__); Serial.println()
+
+//#define I2S_LOGI(...)
+#define I2S_LOGD(...)
 
 namespace rp2040_i2s {
 
@@ -35,8 +42,8 @@ class I2SBufferEntry {
  */
 class IWriter {
     public:
-        void begin(IBuffer *buffer);
-        size_t write(uint8_t* data, size_t len);
+        virtual void begin(IBuffer *buffer);
+        virtual size_t write(uint8_t* data, size_t len);
 };
 
 /**
@@ -46,9 +53,8 @@ class IWriter {
  */
 class IReader {
     public:
-        void begin(IBuffer *buffer);
-        size_t read(uint8_t* data, size_t len);
-        void setupPIO(PIO pio, uint sm, uint offset, uint data_pin, uint clock_pin_base, uint sample_rate, uint bits_per_sample);
+        virtual void begin(IBuffer *buffer);
+        virtual size_t read(uint8_t* data, size_t len);
 };
 
 /**
@@ -58,6 +64,7 @@ class IReader {
  */
 class IBuffer {
     public:
+        virtual ~IBuffer() = default;
         /// Writes the data using the DMA
         virtual size_t write(uint8_t* data, size_t len);
         virtual size_t read(uint8_t *data, size_t len);
@@ -67,6 +74,8 @@ class IBuffer {
         virtual void addFreeBuffer(I2SBufferEntry *buffer) = 0;
         virtual void addFilledBuffer(I2SBufferEntry *buffer) = 0;
         virtual size_t availableForWrite() = 0;
+        virtual void printStatistics() = 0;
+
 };
 
 
@@ -79,101 +88,42 @@ class I2SDefaultWriter : public IWriter {
     public:
         I2SDefaultWriter() = default;
 
-        void begin(IBuffer *buffer){
+        void begin(IBuffer *buffer) override {
+            I2S_LOGI(__PRETTY_FUNCTION__);
             p_buffer = buffer;
         }
 
-        size_t write(uint8_t* data, size_t len) {
+        size_t write(uint8_t* data, size_t len) override {
             if (len>p_buffer->availableForWrite()){
+                I2S_LOGE("I2SDefaultWriter: len too big: %d use max %d", len, p_buffer->availableForWrite());
                 return 0; 
             }
-            I2SBufferEntry *p_actual_write_buffer = p_buffer->getFreeBuffer();
+
+            if (p_actual_write_buffer!=nullptr && p_actual_write_buffer->audioByteCount+len>=p_buffer->availableForWrite()){
+                // requested write does not fit into the buffer 
+                p_buffer->addFilledBuffer(p_actual_write_buffer);
+                p_actual_write_buffer = nullptr;        
+            }
+
             if (p_actual_write_buffer==nullptr){
-                return 0;
-            }
-            memmove(p_actual_write_buffer->data, data, len);
-            p_actual_write_buffer-> audioByteCount = len;
-            p_buffer->addFilledBuffer(p_actual_write_buffer);
-        }
-
-    protected:
-        IBuffer * p_buffer;
-
-};
-
-
-class MasterWriteWriter;
-MasterWriteWriter *SelfDMAWriter=nullptr;
-
-/**
- * @brief Writing Data to the buffer using the DMA
- * @author Phil Schatzmann
- * @copyright GPLv3
- */
-class MasterWriteWriter : public IWriter {
-    public:
-        MasterWriteWriter() = default;
-
-        void begin(IBuffer *buffer){
-            SelfDMAWriter = this;
-            p_buffer = buffer;
-            // Get a free channel, panic() if there are none
-            dma_write_channel = dma_claim_unused_channel(true);
-
-            // Configure DMA channel
-            dma_write_channel_config = dma_channel_get_default_config(dma_write_channel);
-            channel_config_set_transfer_data_size(&dma_write_channel_config, DMA_SIZE_8);
-            channel_config_set_read_increment(&dma_write_channel_config, true);
-            channel_config_set_write_increment(&dma_write_channel_config, true);
-
-            // enable interrupt
-            irq_set_exclusive_handler(DMA_IRQ_0, dma_write_handler);
-            irq_set_enabled(DMA_IRQ_0, true);
-            dma_channel_set_irq0_enabled(dma_write_channel, true);
-        }
-
-        /// Writes the data using the DMA
-        size_t write(uint8_t* data, size_t len) {
-            if (len>p_buffer->availableForWrite()){
-                return 0; 
-            }
-            p_actual_write_buffer = p_buffer->getFreeBuffer();
-            if (p_actual_write_buffer==nullptr){
-                return 0;
+                p_actual_write_buffer = p_buffer->getFreeBuffer();
+                if (p_actual_write_buffer==nullptr){
+                    LOGI("I2SDefaultWriter: no free buffer");
+                    return 0;
+                }
             }
 
-            p_actual_write_buffer->audioByteCount = len;
-            dma_channel_configure(
-                dma_write_channel,           // Channel to be configured
-                &dma_write_channel_config,   // The configuration we just created
-                p_actual_write_buffer->data, // The initial write address
-                data,                  // The initial read address
-                len,                   // Number of transfers; in this case each is 1 byte.
-                true                   // Start immediately.
-            );
-
+            memmove(p_actual_write_buffer->data+p_actual_write_buffer->audioByteCount, data, len);
+            p_actual_write_buffer->audioByteCount += len;
             return len;
         }
 
     protected:
         IBuffer * p_buffer;
-        int dma_write_channel;
-        dma_channel_config dma_write_channel_config;
         I2SBufferEntry *p_actual_write_buffer = nullptr;
 
-        void writeHandler(){
-            if (p_actual_write_buffer!=nullptr){
-                p_buffer->addFilledBuffer(p_actual_write_buffer);
-            }
-            irq_clear(DMA_IRQ_0);
-        }
-
-        /// Interrupt handler when dma write has finished
-        static void __isr __time_critical_func(dma_write_handler)() {
-            SelfDMAWriter->writeHandler();
-        }
-
 };
+
 
 void * SelfMasterReadWriter = nullptr;
 
@@ -189,7 +139,8 @@ class MasterReadWriter : public IWriter {
             this->state_machine = state_machine;
         };
 
-        void begin(IBuffer *buffer){
+        void begin(IBuffer *buffer) override {
+            I2S_LOGI(__PRETTY_FUNCTION__);
             p_buffer = buffer;
             dma_write_channel = dma_claim_unused_channel(true);
             if (dma_write_channel!=-1){
@@ -207,11 +158,13 @@ class MasterReadWriter : public IWriter {
 
                 irq_add_shared_handler(DMA_IRQ_1 + PICO_AUDIO_I2S_DMA_IRQ, dma_write_handler, PICO_SHARED_IRQ_HANDLER_DEFAULT_ORDER_PRIORITY);
                 dma_irqn_set_channel_enabled(PICO_AUDIO_I2S_DMA_IRQ, dma_write_channel, 1);
+            } else {
+                I2S_LOGE("MasterReadWriter: no free dma available");
             }
-        }
+        } 
 
-        /// not supported
-        size_t read(uint8_t* data, size_t len){
+        /// Not supported
+        size_t write(uint8_t* data, size_t len) override {
             return 0;
         }
 
@@ -226,6 +179,7 @@ class MasterReadWriter : public IWriter {
 
         void writeHandler() {
             uint dma_channel = 1;
+            // DMA_IRQ_N ?
             if (dma_irqn_get_channel_status(PICO_AUDIO_I2S_DMA_IRQ, dma_write_channel)) {
                 dma_irqn_acknowledge_channel(PICO_AUDIO_I2S_DMA_IRQ, dma_write_channel);
                 // make last buffer we just finished available
@@ -266,11 +220,13 @@ class I2SDefaultReader : public IReader {
     public:
         I2SDefaultReader() = default;
 
-        void begin(IBuffer *buffer){
-            p_buffer=buffer;
+        void begin(IBuffer *buffer) override {
+            I2S_LOGI(__PRETTY_FUNCTION__);
+            p_buffer = buffer;
         }
 
-        size_t read(uint8_t* data, size_t len){
+        size_t read(uint8_t* data, size_t len) override{
+            I2S_LOGI(__PRETTY_FUNCTION__);
             size_t result_len = 0;
             if (p_actual_read_buffer == nullptr){
                 // get next buffer
@@ -289,14 +245,16 @@ class I2SDefaultReader : public IReader {
 
             // make buffer available again
             if (actual_read_open<=0){
+                p_actual_read_buffer->audioByteCount=0;
                 p_buffer->addFreeBuffer(p_actual_read_buffer);
                 p_actual_read_buffer = nullptr;
             }
             return result_len;            
         }
 
+
     protected:
-        IBuffer * p_buffer;
+        IBuffer * p_buffer = nullptr;
         // Regular read support
         I2SBufferEntry *p_actual_read_buffer = nullptr;
         size_t actual_read_open;
@@ -319,7 +277,8 @@ class MasterWriteReader : public  IReader {
             this->state_machine = state_machine;
         };
 
-        void begin(IBuffer *buffer){
+        void begin(IBuffer *buffer) override {
+            I2S_LOGI(__PRETTY_FUNCTION__);
             SelfDMARederPIO = this;
             p_buffer = buffer;
             dma_read_channel = dma_claim_unused_channel(true);
@@ -338,11 +297,13 @@ class MasterWriteReader : public  IReader {
 
                 irq_add_shared_handler(DMA_IRQ_1 + PICO_AUDIO_I2S_DMA_IRQ, dma_read_handler, PICO_SHARED_IRQ_HANDLER_DEFAULT_ORDER_PRIORITY);
                 dma_irqn_set_channel_enabled(PICO_AUDIO_I2S_DMA_IRQ, dma_read_channel, 1);
+            } else {
+                I2S_LOGE("MasterWriteReader: no dma channel available");
             }
-        }
+        } 
 
         /// not supported
-        size_t read(uint8_t* data, size_t len){
+        size_t read(uint8_t* data, size_t len) override {
             return 0;
         }
 
@@ -361,6 +322,7 @@ class MasterWriteReader : public  IReader {
                 dma_irqn_acknowledge_channel(PICO_AUDIO_I2S_DMA_IRQ, dma_read_channel);
                 // free the buffer we just finished
                 if (p_actual_read_buffer!=nullptr) {
+                    p_actual_read_buffer->audioByteCount=0;
                     p_buffer->addFreeBuffer(p_actual_read_buffer);
                     p_actual_read_buffer = nullptr;
                 }
@@ -397,6 +359,7 @@ class MasterWriteReader : public  IReader {
 class I2SBuffer : public IBuffer {
     public:
         I2SBuffer(int count, int size) {
+            I2S_LOGI(__PRETTY_FUNCTION__);
             buffer_size = size;       
             buffer_count = count;      
             // allocate buffers
@@ -419,7 +382,8 @@ class I2SBuffer : public IBuffer {
         }
 
         /// begin to support the regular read function
-        void begin(IWriter* writer, IReader *reader = nullptr){
+        void begin(IWriter* writer, IReader *reader = nullptr) override {
+            I2S_LOGI(__PRETTY_FUNCTION__);
             p_reader = reader;
             if (p_reader!=nullptr){
                 p_reader->begin(this);
@@ -432,12 +396,16 @@ class I2SBuffer : public IBuffer {
 
         /// Writes the data using the DMA
         size_t write(uint8_t* data, size_t len) override {
-            return p_writer->write(data, len);
+            size_t result = p_writer->write(data, len);
+            bytes_processed += result;
+            return result;
         }
 
         /// reads data w/o DMA
         size_t read(uint8_t *data, size_t len) override {
-            return p_reader->read(data, len);
+            size_t result = p_reader->read(data, len);
+            bytes_processed += result;
+            return result;
         }
 
         /// Get the next empty buffer entry
@@ -470,11 +438,21 @@ class I2SBuffer : public IBuffer {
             return result;
         }
 
+        /// Print some statistics so that we can monitor the progress
+        void printStatistics(){
+            char msg[120];
+            sprintf(msg, "freeBuffer: %d  - filledBuffer: %d - bytes_processed: %zu ", freeBuffer.size(), filledBuffer.size(), bytes_processed);
+            bytes_processed = 0;
+            Serial.println(msg);
+        }
+
+
     protected:  
         std::vector<I2SBufferEntry*> freeBuffer;
         std::vector<I2SBufferEntry*> filledBuffer;
         size_t buffer_size;
         size_t buffer_count;
+        size_t bytes_processed = 0;
         // DMA support
         IWriter *p_writer = nullptr;
         IReader *p_reader = nullptr;
@@ -500,6 +478,7 @@ class PIOMasterOut : public ISetupPIO {
     public:
         PIOMasterOut() = default;
         void begin(PIO pio, uint state_machine, uint data_pin, uint clock_pin_base, uint sample_rate, uint bits_per_sample) override {
+            I2S_LOGI(__PRETTY_FUNCTION__);
             pio_sm_claim(pio, state_machine);
             uint offset = pio_add_program(pio, &i2s_master_out_program);
             pio_sm_config cfg = i2s_master_out_program_get_default_config(offset);
@@ -517,6 +496,7 @@ class PIOMasterIn : public ISetupPIO {
     public:
         PIOMasterIn() = default;
         void begin(PIO pio, uint state_machine, uint data_pin, uint clock_pin_base, uint sample_rate, uint bits_per_sample) override {
+            I2S_LOGI(__PRETTY_FUNCTION__);
             pio_sm_claim(pio, state_machine);
             uint offset = pio_add_program(pio, &i2s_master_in_program);
             pio_sm_config cfg = i2s_master_in_program_get_default_config(offset);
@@ -534,6 +514,7 @@ class PIOSlaveIn : public ISetupPIO {
     public:
         PIOSlaveIn() = default;
         void begin(PIO pio, uint state_machine, uint data_pin, uint clock_pin_base, uint sample_rate, uint bits_per_sample) override {
+            I2S_LOGI(__PRETTY_FUNCTION__);
         }
 };
 
@@ -587,6 +568,7 @@ class I2SClass  : public Stream {
             buffer_size = size;
             if (p_buffer!=nullptr){
                 delete p_buffer;
+                p_buffer = nullptr;
             }
         }
 
@@ -619,12 +601,12 @@ class I2SClass  : public Stream {
 
         /// Starts the processing
         void begin(I2SOperation mode){
+            I2S_LOGI(__PRETTY_FUNCTION__);
             op_mode = mode;
             if (is_master){
                 switch(mode){
                     case I2SWrite:
                         setup(new PIOMasterOut(), new I2SDefaultWriter(), new MasterWriteReader(pio, state_machine));
-                       // begin(new PIOMasterOut(), new MasterWriteWriter(), new MasterWriteReader(pio, state_machine));
                         break;
                     case I2SRead:
                         setup(new PIOMasterIn(), new MasterReadWriter(pio, state_machine), new I2SDefaultReader());
@@ -668,13 +650,21 @@ class I2SClass  : public Stream {
         /// Write data to the buffer (to the buffer)
         size_t write(uint8_t *data, size_t len){
             if (p_buffer==nullptr) return 0;
+            I2S_LOGD(__PRETTY_FUNCTION__);
             return p_buffer->write(data, len);
         }
 
         /// Read data with filled audio data (from the buffer)
         size_t readBytes(uint8_t *data, size_t len){
             if (p_buffer==nullptr) return 0;
+            I2S_LOGD(__PRETTY_FUNCTION__);
             return p_buffer->read(data, len);
+        }
+
+        void printStatistics(){
+            if (p_buffer!=nullptr){
+                p_buffer->printStatistics();
+            }   
         }
 
     protected:
@@ -692,15 +682,16 @@ class I2SClass  : public Stream {
 
         /// Starts the processing
         void setup(ISetupPIO *pioSetup, IWriter* writer, IReader *reader = nullptr) {
-            if (p_buffer=nullptr){
+            I2S_LOGI(__PRETTY_FUNCTION__);
+            if (p_buffer==nullptr){
                 p_buffer = new I2SBuffer(buffer_count, buffer_size);
+                // setup buffer
+                p_buffer->begin(writer, reader);
             }
 
             // begin(PIO pio, uint state_machine, uint data_pin, uint clock_pin_base, uint sample_rate, uint bits_per_sample) 
             pioSetup->begin(pio, state_machine, data_pin, clock_pin_base, sample_rate, bits_per_sample);
 
-            // setup buffer
-            p_buffer->begin(writer, reader);
         }
 
 };
