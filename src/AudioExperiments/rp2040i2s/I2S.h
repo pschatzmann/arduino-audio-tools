@@ -56,7 +56,6 @@ enum I2SOperation { I2SWrite, I2SRead };
 
 class AudioConfig {
  public:
-  I2SOperation op_mode;
   bool is_master = true;
   uint16_t sample_rate = 44100;
   uint16_t bits_per_sample = 16;
@@ -68,6 +67,7 @@ class AudioConfig {
  protected:
   friend class I2SMasterOut;
   friend class I2SClass;
+  I2SOperation op_mode;
   PIO pio;
   uint8_t state_machine;
   uint8_t dma_channel;
@@ -163,6 +163,23 @@ class I2SMasterOut {
     return true;
   }
 
+  void startCopy() {
+    uint dma_channel = p_config->dma_channel;
+    // get next buffer with data
+    p_actual_playing_buffer = p_buffer->getFilledBuffer();
+    if (p_actual_playing_buffer == nullptr) {
+      p_actual_playing_buffer = &empty;
+    }
+
+    // transfer to PIO
+    dma_channel_config cfg = dma_get_channel_config(dma_channel);
+    channel_config_set_read_increment(&cfg, true);
+    dma_channel_set_config(dma_channel, &cfg, false);
+    dma_channel_transfer_from_buffer_now(
+        dma_channel, p_actual_playing_buffer->data,
+        p_actual_playing_buffer->audioByteCount);
+  }
+
  protected:
   bool audio_enabled = false;
   IBuffer *p_buffer = nullptr;
@@ -182,26 +199,14 @@ class I2SMasterOut {
     uint dma_irq = p_config->dma_irq;
     if (dma_irqn_get_channel_status(dma_irq, dma_channel)) {
       dma_irqn_acknowledge_channel(dma_irq, dma_channel);
-      I2S_LOGI(__PRETTY_FUNCTION__);
+      I2S_LOGD(__PRETTY_FUNCTION__);
       // free the buffer we just finished
       if (p_actual_playing_buffer != nullptr &&
           p_actual_playing_buffer != &empty) {
         p_buffer->addFreeBuffer(p_actual_playing_buffer);
       }
+      startCopy();
 
-      // get next buffer with data
-      p_actual_playing_buffer = p_buffer->getFilledBuffer();
-      if (p_actual_playing_buffer == nullptr) {
-        p_actual_playing_buffer = &empty;
-      }
-
-      // transfer to PIO
-      dma_channel_config cfg = dma_get_channel_config(dma_channel);
-      channel_config_set_read_increment(&cfg, true);
-      dma_channel_set_config(dma_channel, &cfg, false);
-      dma_channel_transfer_from_buffer_now(
-          dma_channel, p_actual_playing_buffer->data,
-          p_actual_playing_buffer->audioByteCount);
     } else {
       I2S_LOGE("invalid channel status");
     }
@@ -228,6 +233,17 @@ class I2SBuffer : public IBuffer {
         freeBuffer.push_back(p_entry);
       }
     }
+  }
+
+  ~I2SBuffer() {
+    for (int j = 0; j < freeBuffer.size(); j++) {
+      delete freeBuffer[j];
+    }
+    filledBuffer.clear();
+    for (int j = 0; j < filledBuffer.size(); j++) {
+      delete filledBuffer[j];
+    }
+    filledBuffer.clear();
   }
 
   /// the max size of an individual buffer entry
@@ -405,15 +421,21 @@ class I2SClass : public Stream {
   bool isMaster() { return cfg.is_master; }
 
   /// Defines the data pin
-  void setDataPin(int pin) { cfg.data_pin = pin; }
+  void setPinData(int pin) { cfg.data_pin = pin; }
 
-  int dataPin() { return cfg.data_pin; }
+  /// provides the data GPIO number
+  int pinData() { return cfg.data_pin; }
 
   /// Defines the clock pin (pin) and ws pin (=pin+1)
-  void setClockBasePin(int pin) { cfg.clock_pin_base = pin; }
+  void setPinClockBase(int pin) { cfg.clock_pin_base = pin; }
 
-  int clockBasePin() { return cfg.clock_pin_base; }
+  /// Base clock GPIO pin
+  int pinClock() { return cfg.clock_pin_base; }
 
+  /// Left right select GPIO pin
+  int pinLR() { return cfg.clock_pin_base + 1; }
+
+  /// Starts the processing
   void begin(AudioConfig config, I2SOperation mode) {
     cfg.is_master = config.is_master;
     cfg.sample_rate = config.sample_rate;
@@ -567,6 +589,11 @@ class I2SClass : public Stream {
     cfg.active = active;
     I2S_LOGI("active: %s", active ? "true" : "false");
     irq_set_enabled(DMA_IRQ_0 + cfg.dma_irq, active);
+
+    if (active) {
+      p_master_out->startCopy();
+    }
+
     pio_sm_set_enabled(cfg.pio, cfg.state_machine, active);
   }
 };
