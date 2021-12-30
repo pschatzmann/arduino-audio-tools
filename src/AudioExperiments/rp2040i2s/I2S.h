@@ -11,6 +11,10 @@
 #include "i2s_master_out.h"
 //#include "i2s_master_in.h"
 
+#ifdef ARDUINO_ARCH_MBED_RP2040
+#include "mbed_hack.h"
+#endif
+
 #define DEFAULT_PICO_AUDIO_STATE_MACHINE 1
 #define DEFAULT_PICO_AUDIO_DMA_CHANNEL 0
 #define DEFAULT_PICO_AUDIO_PIO_NO 0
