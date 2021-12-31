@@ -611,7 +611,7 @@ class FormatConverterStream : public AudioPrint {
                 this->data = (T*)dataIn;
                 this->size_val = len;
                 // we process all input samples
-                for (int j=0;j<size();j++){
+                for (size_t j=0;j<size();j++){
                     T value = data[j];
                     // convert to output format
                     switch(p_convert->target_bits_per_sample){

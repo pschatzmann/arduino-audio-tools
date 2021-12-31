@@ -9,6 +9,8 @@ namespace audio_tools {
  */
 class AbstractParameter {
     public:
+        virtual ~AbstractParameter() = default;
+
         virtual float value() {
             return act_value;
         };
@@ -154,7 +156,11 @@ class ADSR : public  AbstractParameter  {
                         act_value = 0.0;
                         state = Idle;
                     }
+                    break;
 
+                default:
+                    // nothing to be done
+                    break;
             }
             return act_value;
         }

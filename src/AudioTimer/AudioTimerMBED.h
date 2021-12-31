@@ -20,7 +20,7 @@ TimerAlarmRepeatingMBED *timerAlarmRepeating = nullptr;
 class TimerAlarmRepeatingMBED : public TimerAlarmRepeatingDef {
     public:
     
-        TimerAlarmRepeatingRP2040(TimerFunction function=DirectTimerCallback, int id=0){
+        TimerAlarmRepeatingMBED(TimerFunction function=DirectTimerCallback, int id=0){
             timerAlarmRepeating = this;
         }
 
