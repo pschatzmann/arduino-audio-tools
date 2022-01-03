@@ -607,7 +607,7 @@ namespace audio_tools {
             LOGD(LOG_METHOD);
             bool result = false;
 
-            // navigation supoort
+            // navigation support
             autonext = p_source->isAutoNext();
 
             // start dependent objects
@@ -819,6 +819,11 @@ namespace audio_tools {
         uint32_t timeout = 0;
         bool previous_stream = false;
         float current_volume = -1; // illegal value which will trigger an update
+
+        //Default constructur
+        AudioPlayer() {
+            LOGD(LOG_METHOD);
+        }
 
         /// Callback implementation which writes to metadata
         static void decodeMetaData(void* obj, void* data, size_t len) {
