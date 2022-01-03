@@ -29,7 +29,7 @@ VCC  |	5V
 GND  |	GND
 BCK  |	BCK (GPIO14)
 DIN  |	OUT (GPIO22)
-LCK  |	BCK (GPIO15)
+LCK  |	WS (GPIO15)
 FMT  |	GND
 XMT  |	3V (or another GPIO PIN which is set to high)
 
