@@ -1,6 +1,6 @@
 #pragma once
 
-#ifdef ARDUINO_ARCH_RP2040
+#if defined(ARDUINO_ARCH_RP2040) && !defined(ARDUINO_ARCH_MBED)
 #include "AudioTimer/AudioTimerDef.h"
 #include "hardware/timer.h"
 #include "pico/time.h"

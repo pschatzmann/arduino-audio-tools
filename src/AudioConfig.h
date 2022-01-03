@@ -73,7 +73,7 @@
 #endif
 
 #ifndef I2S_BUFFER_COUNT 
-#define I2S_BUFFER_COUNT 20 // 20
+#define I2S_BUFFER_COUNT 10 // 20
 #endif
 
 #ifndef A2DP_BUFFER_SIZE 
@@ -223,9 +223,9 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #endif
 
 //----------------
-#ifdef ARDUINO_ARCH_RP2040
+#if defined(ARDUINO_ARCH_RP2040) 
 //#define USE_ESP8266_AUDIO
-#define USE_I2S 1
+//#define USE_I2S 1
 #define USE_PWM
 
 #define PWM_START_PIN 6
