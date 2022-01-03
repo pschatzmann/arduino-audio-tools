@@ -538,12 +538,6 @@ namespace audio_tools {
 
     public:
         /**
-        * @brief Default constructur
-        */
-        AudioPlayer() {
-            LOGD(LOG_METHOD);
-        }
-        /**
          * @brief Construct a new Audio Player object. The processing chain is
          * AudioSource -> Stream -copy> EncodedAudioStream -> VolumeOutput -> Print
          *
@@ -825,6 +819,11 @@ namespace audio_tools {
         uint32_t timeout = 0;
         bool previous_stream = false;
         float current_volume = -1; // illegal value which will trigger an update
+
+        //Default constructur
+        AudioPlayer() {
+            LOGD(LOG_METHOD);
+        }
 
         /// Callback implementation which writes to metadata
         static void decodeMetaData(void* obj, void* data, size_t len) {
