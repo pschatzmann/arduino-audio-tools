@@ -537,9 +537,6 @@ namespace audio_tools {
     class AudioPlayer : public AudioBaseInfoDependent {
 
     public:
-        AudioPlayer() {
-            LOGD(LOG_METHOD);
-        }
         /**
          * @brief Construct a new Audio Player object. The processing chain is
          * AudioSource -> Stream -copy> EncodedAudioStream -> VolumeOutput -> Print
@@ -598,26 +595,6 @@ namespace audio_tools {
             decoder.setNotifyAudioChange(*this);
         }
 
-        /**
-         * @brief Construct a new Audio Player object. The processing chain is
-         * AudioSource -> Stream -copy> EncodedAudioStream -> VolumeOutput -> Print
-         *
-         * @param SDsource
-         * @param URLsource
-         * @param output
-         * @param decoder
-         */
-        AudioPlayer(AudioSource& SDsource, AudioSource& URLsource, AudioPrint& output, AudioDecoder& decoder) {
-            LOGD(LOG_METHOD);
-            this->p_SDsource = &SDsource;
-            this->p_Urlsource = &URLsource;
-            this->volume_out.begin(output);
-            this->p_out_decoding = new EncodedAudioStream(volume_out, decoder);
-            this->p_final_print = &output;
-            // notification for audio configuration
-            decoder.setNotifyAudioChange(*this);
-        }
-
         /// Default destructor
         virtual ~AudioPlayer() {
             if (p_out_decoding != nullptr) {
@@ -626,14 +603,11 @@ namespace audio_tools {
         }
 
         /// (Re)Starts the playing of the music (from the beginning)
-        virtual bool begin(int index=0, bool isActive = true, bool isUrl=false) {
+        virtual bool begin(int index=0, bool isActive = true) {
             LOGD(LOG_METHOD);
             bool result = false;
 
-            // set source
-            setAudioSource(isUrl);
-
-            // navigation support
+            // navigation supoort
             autonext = p_source->isAutoNext();
 
             // start dependent objects
@@ -664,23 +638,13 @@ namespace audio_tools {
             return result;
         }
 
-        /// Set source (SD or url)
-        virtual void setAudioSource(bool isUrl) {
-            if (isUrl == true) {
-                this->p_source = p_Urlsource;
-            }
-            else
-            {
-                this->p_source = p_SDsource;
-            }
-        }
-
         virtual void end() {
             LOGD(LOG_METHOD);
             active = false;
             p_out_decoding->end();
             meta_out.end();
         }
+
         /// Updates the audio info in the related objects
         virtual void setAudioInfo(AudioBaseInfo info) {
             LOGD(LOG_METHOD);
@@ -843,8 +807,6 @@ namespace audio_tools {
         bool active = false;
         bool autonext = false;
         AudioSource* p_source = nullptr;
-        AudioSource* p_SDsource = nullptr;
-        AudioSource* p_Urlsource = nullptr;
         VolumeOutput volume_out; // Volume control
         MetaDataID3 meta_out; // Metadata parser
         EncodedAudioStream* p_out_decoding = nullptr; // Decoding stream

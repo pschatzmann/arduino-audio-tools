@@ -69,6 +69,8 @@ using namespace audio_tools;
  * 
  */
 
+using namespace audio_tools;
+
 #if defined(__linux__) || defined(_WIN32) || defined(__APPLE__)
 typedef PortAudioStream DefaultStream;
 #elif defined(ESP32) || defined(ESP8266) || defined(__SAMD21G18A__)
