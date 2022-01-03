@@ -538,6 +538,12 @@ namespace audio_tools {
 
     public:
         /**
+        * @brief Default constructur
+        */
+        AudioPlayer() {
+            LOGD(LOG_METHOD);
+        }
+        /**
          * @brief Construct a new Audio Player object. The processing chain is
          * AudioSource -> Stream -copy> EncodedAudioStream -> VolumeOutput -> Print
          *
@@ -607,7 +613,7 @@ namespace audio_tools {
             LOGD(LOG_METHOD);
             bool result = false;
 
-            // navigation supoort
+            // navigation support
             autonext = p_source->isAutoNext();
 
             // start dependent objects
