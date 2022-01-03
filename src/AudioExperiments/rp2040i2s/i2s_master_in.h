@@ -6,65 +6,40 @@
 #include "hardware/pio.h"
 #endif
 
-// ------------- //
-// i2s_master_in //
-// ------------- //
+// ------------------- //
+// audio_i2s_master_in //
+// ------------------- //
 
-#define i2s_master_in_wrap_target 3
-#define i2s_master_in_wrap 9
+#define audio_i2s_master_in_wrap_target 0
+#define audio_i2s_master_in_wrap 7
 
-#define i2s_master_in_offset_start 0u
+#define audio_i2s_master_in_offset_entry_point 7u
 
-static const uint16_t i2s_master_in_program_instructions[] = {
-    0xa022, //  0: mov    x, y            side 0     
-    0x0020, //  1: jmp    !x, 0           side 0     
-    0xb842, //  2: nop                    side 3     
+static const uint16_t audio_i2s_master_in_program_instructions[] = {
             //     .wrap_target
-    0x5001, //  3: in     pins, 1         side 2     
-    0x1843, //  4: jmp    x--, 3          side 3     
-    0x4001, //  5: in     pins, 1         side 0     
-    0xa822, //  6: mov    x, y            side 1     
-    0x4001, //  7: in     pins, 1         side 0     
-    0x0847, //  8: jmp    x--, 7          side 1     
-    0x5001, //  9: in     pins, 1         side 2     
+    0x5001, //  0: in     pins, 1         side 2     
+    0x1840, //  1: jmp    x--, 0          side 3     
+    0x4001, //  2: in     pins, 1         side 0     
+    0xa822, //  3: mov    x, y            side 1     
+    0x4001, //  4: in     pins, 1         side 0     
+    0x0844, //  5: jmp    x--, 4          side 1     
+    0x5001, //  6: in     pins, 1         side 2     
+    0xb822, //  7: mov    x, y            side 3     
             //     .wrap
 };
 
 #if !PICO_NO_HARDWARE
-static const struct pio_program i2s_master_in_program = {
-    .instructions = i2s_master_in_program_instructions,
-    .length = 10,
+static const struct pio_program audio_i2s_master_in_program = {
+    .instructions = audio_i2s_master_in_program_instructions,
+    .length = 8,
     .origin = -1,
 };
 
-static inline pio_sm_config i2s_master_in_program_get_default_config(uint offset) {
+static inline pio_sm_config audio_i2s_master_in_program_get_default_config(uint offset) {
     pio_sm_config c = pio_get_default_sm_config();
-    sm_config_set_wrap(&c, offset + i2s_master_in_wrap_target, offset + i2s_master_in_wrap);
+    sm_config_set_wrap(&c, offset + audio_i2s_master_in_wrap_target, offset + audio_i2s_master_in_wrap);
     sm_config_set_sideset(&c, 2, false, false);
     return c;
 }
-
-static inline void i2s_master_in(PIO pio, uint sm, pio_sm_config sm_config,  uint offset, uint data_pin, uint clock_pin_base, int sample_rate, int bits_per_sample) {
-    // Clock Divider 
-    float div = (float)clock_get_hz(clk_sys) / sample_rate * bits_per_sample;
-    sm_config_set_clkdiv(&sm_config, div);
-    // we use 32 bits to communicated except for int24_t
-    int shift = bits_per_sample == 24 ? 24 : 32;
-    sm_config_set_in_shift(&sm_config, false, true, shift);
-    sm_config_set_in_pins(&sm_config, data_pin);
-    sm_config_set_sideset_pins(&sm_config, clock_pin_base);
-    pio_sm_init(pio, sm, offset, &sm_config);
-    // setup pins
-    pio_gpio_init(pio, data_pin);
-    pio_gpio_init(pio, clock_pin_base);
-    pio_gpio_init(pio, clock_pin_base+1);
-    pio_sm_set_consecutive_pindirs(pio, sm, clock_pin_base, 2, true); // output
-    pio_sm_set_consecutive_pindirs(pio, sm, data_pin, 1, false); // input
-    pio_sm_set_pins(pio, sm, 0); // clear pins
-    // start pio
-    pio_sm_put(pio, sm, pio_encode_set(pio_y, bits_per_sample));
-    pio_sm_set_enabled(pio, sm, true);
-}
-
 #endif
 

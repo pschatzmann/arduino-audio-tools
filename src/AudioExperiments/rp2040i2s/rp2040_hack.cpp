@@ -1,4 +1,5 @@
+#include "i2s_config.h"
 
-#ifndef RP2040_SYNC_OFF
+#if ADD_RP2040_SYNC
 extern "C" void __sync_synchronize(){}
 #endif

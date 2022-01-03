@@ -1,48 +1,25 @@
 #pragma once
 
-#include <vector>
-
-#include "Arduino.h"
+#include <queue>
+#include "i2s_config.h"
 #include "hardware/clocks.h"
 #include "hardware/dma.h"
 #include "hardware/gpio.h"
 #include "hardware/irq.h"
 #include "hardware/pio.h"
+#include "i2s_master_in.h"
 #include "i2s_master_out.h"
-//#include "i2s_master_in.h"
+#include "i2s_slave_in.h"
 
 #ifdef ARDUINO_ARCH_MBED_RP2040
 #include "mbed_hack.h"
 #endif
 
-#define DEFAULT_PICO_AUDIO_STATE_MACHINE 1
-#define DEFAULT_PICO_AUDIO_DMA_CHANNEL 0
-#define DEFAULT_PICO_AUDIO_PIO_NO 0
-#define DEFAULT_PICO_AUDIO_I2S_DMA_IRQ 1
-
-/**
- * @brief Logging Support
- *
- */
-#define I2S_LOGE(...)         \
-  Serial.print("E:");         \
-  Serial.printf(__VA_ARGS__); \
-  Serial.println()
-#define I2S_LOGW(...)         \
-  Serial.print("W:");         \
-  Serial.printf(__VA_ARGS__); \
-  Serial.println()
-#define I2S_LOGI(...)         \
-  Serial.print("I:");         \
-  Serial.printf(__VA_ARGS__); \
-  Serial.println()
-//#define I2S_LOGD(...) Serial.print("D:"); Serial.printf(__VA_ARGS__);
-// Serial.println()
-
-//#define I2S_LOGI(...)
-#define I2S_LOGD(...)
-
 namespace rp2040_i2s {
+
+void *SelfI2SMasterOut = nullptr;
+void *SelfI2SMasterIn = nullptr;
+void *SelfI2SSlaveIn = nullptr;
 
 /**
  * @brief Defines the I2S Operation as either Read or Write
@@ -65,11 +42,12 @@ class AudioConfig {
   uint16_t bits_per_sample = 16;
   uint16_t buffer_count = 10;
   uint16_t buffer_size = 512;
-  uint data_pin = 28;        //
-  uint clock_pin_base = 26;  // pin bclk
+  uint data_pin = DEFAULT_PICO_AUDIO_I2S_DATA_PIN;        
 
  protected:
   friend class I2SMasterOut;
+  friend class I2SMasterIn;
+  friend class I2SSlaveIn;
   friend class I2SClass;
   I2SOperation op_mode;
   PIO pio;
@@ -78,6 +56,8 @@ class AudioConfig {
   uint8_t dma_irq;
   int channels = 2;
   bool active = false;
+  uint clock_pin = 27;  // pin bclk
+  uint ws_pin = 28;  // pin bclk
 };
 
 /**
@@ -112,14 +92,24 @@ class IBuffer {
   virtual void printStatistics() = 0;
 };
 
-void *SelfI2SMasterOut = nullptr;
-
 /**
- * @brief Handle DMA data transfer from buffer to PIO
+ * @brief PIO Managment - abstract class
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class I2SMasterOut {
+class I2SMasterBase {
+ public:
+  virtual boolean begin(IBuffer *buffer, AudioConfig *config);
+  virtual void startCopy();
+  virtual bool clockFromSampleRate(){return true;}
+};
+
+/**
+ * @brief I2S output: Manage DMA data transfer from buffer to PIO
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class I2SMasterOut : public I2SMasterBase {
  public:
   I2SMasterOut() {
     SelfI2SMasterOut = this;
@@ -141,13 +131,14 @@ class I2SMasterOut {
     gpio_function func =
         (p_config->pio == pio0) ? GPIO_FUNC_PIO0 : GPIO_FUNC_PIO1;
     gpio_set_function(config->data_pin, func);
-    gpio_set_function(config->clock_pin_base, func);
-    gpio_set_function(config->clock_pin_base + 1, func);
+    gpio_set_function(config->clock_pin, func);
+    gpio_set_function(config->ws_pin, func);
 
     pio_sm_claim(pio, sm);
-    uint offset = pio_add_program(pio, &audio_i2s_program);
-    audio_i2s_program_init(pio, sm, offset, config->data_pin,
-                           config->clock_pin_base);
+    uint offset = pio_add_program(pio, &audio_i2s_master_out_program);
+    I2S_LOGI("bits_per_sample: %d", config->bits_per_sample);
+    pioInit(pio, sm, offset, config->data_pin, config->clock_pin,
+            config->bits_per_sample);
 
     dma_channel_claim(dma_channel);
     dma_channel_config dma_config = dma_channel_get_default_config(dma_channel);
@@ -197,6 +188,28 @@ class I2SMasterOut {
     static_cast<I2SMasterOut *>(SelfI2SMasterOut)->dmaCopyBufferToPIO();
   }
 
+  void pioInit(PIO pio, uint sm, uint offset, uint data_pin,
+               uint clock_pin, int bits_per_sample) {
+    pio_sm_config sm_config = audio_i2s_master_out_program_get_default_config(offset);
+
+    sm_config_set_out_pins(&sm_config, data_pin, 1);
+    sm_config_set_sideset_pins(&sm_config, clock_pin);
+    sm_config_set_out_shift(&sm_config, false, true, 32);
+    sm_config_set_fifo_join(&sm_config, PIO_FIFO_JOIN_TX);
+
+    pio_sm_init(pio, sm, offset, &sm_config);
+
+    pio_sm_set_consecutive_pindirs(pio, sm, data_pin, 3, true); // 3 pins output
+    pio_sm_set_pins(pio, sm, 0);  // clear pins
+
+    // we do not support 24 bits - we process them as 32 bits
+    int loopMax = bits_per_sample == 24 ? 32 : bits_per_sample;
+
+    pio_sm_exec(pio, sm, pio_encode_set(pio_y, loopMax - 2));
+    pio_sm_exec(pio, sm,
+                pio_encode_jmp(offset + audio_i2s_master_out_offset_entry_point));
+  }
+
   // DMA callback method: move data from buffer to PIO
   void dmaCopyBufferToPIO() {
     uint dma_channel = p_config->dma_channel;
@@ -218,6 +231,296 @@ class I2SMasterOut {
 };
 
 /**
+ * @brief I2S input: Manage DMA data transfer from PIO to the buffer
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class I2SMasterIn : public I2SMasterBase {
+ public:
+  I2SMasterIn() { SelfI2SMasterIn = this; };
+
+  // starts the processing
+  boolean begin(IBuffer *buffer, AudioConfig *config) {
+    I2S_LOGI(__PRETTY_FUNCTION__);
+    p_config = config;
+    p_buffer = buffer;
+
+    uint8_t sm = config->state_machine;
+    uint8_t dma_channel = config->dma_channel;
+    uint8_t dma_irq = config->dma_irq;
+    PIO pio = config->pio;
+
+    gpio_function func =
+        (p_config->pio == pio0) ? GPIO_FUNC_PIO0 : GPIO_FUNC_PIO1;
+    gpio_set_function(config->data_pin, func);
+    gpio_set_function(config->clock_pin, func);
+    gpio_set_function(config->ws_pin, func);
+
+    pio_sm_claim(pio, sm);
+    uint offset = pio_add_program(pio, &audio_i2s_master_in_program);
+    I2S_LOGI("bits_per_sample: %d", config->bits_per_sample);
+    pioInit(pio, sm, offset, config->data_pin, config->clock_pin,
+            config->bits_per_sample);
+
+    dma_channel_claim(dma_channel);
+    dma_channel_config dma_config = dma_channel_get_default_config(dma_channel);
+    uint dreq = pio_get_dreq(pio, sm, false);  // rx => false
+    channel_config_set_dreq(&dma_config, dreq);
+    channel_config_set_transfer_data_size(&dma_config, DMA_SIZE_32);
+    dma_channel_configure(dma_channel, &dma_config,
+                          NULL,           // dest
+                          &pio->rxf[sm],  // src
+                          0,              // count
+                          false           // trigger
+    );
+
+    irq_add_shared_handler(DMA_IRQ_0 + dma_irq, dma_callback,
+                           PICO_SHARED_IRQ_HANDLER_DEFAULT_ORDER_PRIORITY);
+    dma_irqn_set_channel_enabled(dma_irq, dma_channel, true);
+    return true;
+  }
+
+  void startCopy() {
+    uint dma_channel = p_config->dma_channel;
+    // get next empty buffer to fill with data
+    p_actual_available_buffer = p_buffer->getFreeBuffer();
+    if (p_actual_available_buffer == nullptr) {
+      // we reuse the oldest filled audio data
+      p_actual_available_buffer = p_buffer->getFilledBuffer();
+      p_actual_available_buffer->audioByteCount = 0;
+    }
+
+    // transfer to PIO
+    dma_channel_config cfg = dma_get_channel_config(dma_channel);
+    channel_config_set_write_increment(&cfg, true);
+    dma_channel_set_config(dma_channel, &cfg, false);
+    dma_channel_transfer_to_buffer_now(dma_channel,
+                                       p_actual_available_buffer->data,
+                                       p_buffer->availableForWrite());
+  }
+
+ protected:
+  bool audio_enabled = false;
+  IBuffer *p_buffer = nullptr;
+  AudioConfig *p_config = nullptr;
+  I2SBufferEntry *p_actual_available_buffer = nullptr;
+
+  void pioInit(PIO pio, uint sm, uint offset, uint data_pin,
+               uint clock_pin, int bits_per_sample) {
+    pio_sm_config sm_config = audio_i2s_master_in_program_get_default_config(offset);
+
+    sm_config_set_in_pins(&sm_config, data_pin);
+    sm_config_set_sideset_pins(&sm_config, clock_pin);
+    sm_config_set_in_shift(&sm_config, false, true, 32);
+    sm_config_set_fifo_join(&sm_config, PIO_FIFO_JOIN_RX);
+
+    pio_sm_init(pio, sm, offset, &sm_config);
+
+    pio_sm_set_consecutive_pindirs(pio, sm, clock_pin, 2, true); // 3 pins output
+    pio_sm_set_consecutive_pindirs(pio, sm, data_pin, 1, false); // 3 pins input
+    pio_sm_set_pins(pio, sm, 0);  // clear pins
+
+    // we do not support 24 bits - we process them as 32 bits
+    int loopMax = bits_per_sample == 24 ? 32 : bits_per_sample;
+
+    pio_sm_exec(pio, sm, pio_encode_set(pio_y, loopMax - 2));
+    pio_sm_exec(pio, sm,
+                pio_encode_jmp(offset + audio_i2s_master_in_offset_entry_point));
+  }
+
+  // irq handler for DMA
+  static void __isr __time_critical_func(dma_callback)() {
+    static_cast<I2SMasterIn *>(SelfI2SMasterIn)->dmaCopyPIOToBuffer();
+  }
+
+  // DMA callback method: move data from buffer to PIO
+  void dmaCopyPIOToBuffer() {
+    uint dma_channel = p_config->dma_channel;
+    uint dma_irq = p_config->dma_irq;
+    if (dma_irqn_get_channel_status(dma_irq, dma_channel)) {
+      dma_irqn_acknowledge_channel(dma_irq, dma_channel);
+      I2S_LOGD(__PRETTY_FUNCTION__);
+      // free the buffer we just finished
+      if (p_actual_available_buffer != nullptr) {
+        p_actual_available_buffer->audioByteCount =
+            p_buffer->availableForWrite();
+        p_buffer->addFilledBuffer(p_actual_available_buffer);
+      }
+      startCopy();
+
+    } else {
+      I2S_LOGE("invalid channel status");
+    }
+  }
+};
+
+/**
+ * @brief I2S input: Manage DMA data transfer from PIO to the buffer using the DMA functionality.
+ * 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class I2SSlaveIn : public I2SMasterBase {
+ public:
+  I2SSlaveIn() { SelfI2SSlaveIn = this; };
+
+  // we pull data full speed
+  virtual bool clockFromSampleRate() override {return false;}
+
+  // starts the processing
+  boolean begin(IBuffer *buffer, AudioConfig *config) override {
+    I2S_LOGI(__PRETTY_FUNCTION__);
+    p_config = config;
+    p_buffer = buffer;
+
+    uint8_t sm = config->state_machine;
+    uint8_t dma_channel = config->dma_channel;
+    uint8_t dma_irq = config->dma_irq;
+    PIO pio = config->pio;
+
+    // interrupt on ws change
+    gpio_set_irq_enabled_with_callback(config->ws_pin,
+                                       GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL,
+                                       true, ws_callback);
+
+    // pio pins
+    gpio_function func =
+        (p_config->pio == pio0) ? GPIO_FUNC_PIO0 : GPIO_FUNC_PIO1;
+    gpio_set_function(config->data_pin, func);
+    gpio_set_function(config->clock_pin, func);
+
+    pio_sm_claim(pio, sm);
+    uint offset = pio_add_program(pio, &i2s_slave_in_program);
+    I2S_LOGI("bits_per_sample: %d", config->bits_per_sample);
+    pioInit(pio, sm, offset, config->data_pin, config->clock_pin,
+            config->bits_per_sample);
+
+    dma_channel_claim(dma_channel);
+    dma_channel_config dma_config = dma_channel_get_default_config(dma_channel);
+    uint dreq = pio_get_dreq(pio, sm, false);  // rx => false
+    channel_config_set_dreq(&dma_config, dreq);
+    channel_config_set_transfer_data_size(&dma_config, DMA_SIZE_32);
+    dma_channel_configure(dma_channel, &dma_config,
+                          NULL,           // dest
+                          &pio->rxf[sm],  // src
+                          0,              // count
+                          false           // trigger
+    );
+
+    irq_add_shared_handler(DMA_IRQ_0 + dma_irq, dma_callback,
+                           PICO_SHARED_IRQ_HANDLER_DEFAULT_ORDER_PRIORITY);
+    dma_irqn_set_channel_enabled(dma_irq, dma_channel, true);
+    return true;
+  }
+
+  void startCopy() override {
+    uint dma_channel = p_config->dma_channel;
+    // get next empty buffer to fill with data
+    p_actual_available_buffer = p_buffer->getFreeBuffer();
+    if (p_actual_available_buffer == nullptr) {
+      // we reuse the oldest filled audio data
+      p_actual_available_buffer = p_buffer->getFilledBuffer();
+      p_actual_available_buffer->audioByteCount = 0;
+    }
+
+    // transfer to PIO
+    dma_channel_config cfg = dma_get_channel_config(dma_channel);
+    channel_config_set_write_increment(&cfg, true);
+    dma_channel_set_config(dma_channel, &cfg, false);
+    dma_channel_transfer_to_buffer_now(dma_channel,
+                                       p_actual_available_buffer->data,
+                                       p_buffer->availableForWrite());
+  }
+
+ protected:
+  bool audio_enabled = false;
+  IBuffer *p_buffer = nullptr;
+  AudioConfig *p_config = nullptr;
+  I2SBufferEntry *p_actual_available_buffer = nullptr;
+  int offset;
+
+  void pioInit(PIO pio, uint sm, uint offset, uint data_pin,
+               uint clock_pin, int bits_per_sample) {
+    this->offset = offset;
+    pio_sm_config sm_config = audio_i2s_master_in_program_get_default_config(offset);
+
+    sm_config_set_in_pins(&sm_config, data_pin);
+    sm_config_set_sideset_pins(&sm_config, clock_pin);
+    sm_config_set_in_shift(&sm_config, false, true, 32);
+    sm_config_set_fifo_join(&sm_config, PIO_FIFO_JOIN_RX);
+
+    pio_sm_init(pio, sm, offset, &sm_config);
+
+    pio_sm_set_consecutive_pindirs(pio, sm, data_pin, 2, false); // 2 pins input
+    pio_sm_set_pins(pio, sm, 0);  // clear pins
+
+    // we do not support 24 bits - we process them as 32 bits
+    int loopMax = bits_per_sample == 24 ? 32 : bits_per_sample;
+
+    pio_sm_exec(pio, sm, pio_encode_set(pio_y, loopMax - 2));
+    pio_sm_exec(pio, sm,
+                pio_encode_jmp(offset + audio_i2s_master_in_offset_entry_point));
+  }
+
+  // irq handler for DMA
+  static void __isr __time_critical_func(dma_callback)() {
+    static_cast<I2SSlaveIn*>(SelfI2SSlaveIn)->dmaCopyPIOToBuffer();
+  }
+
+  static void __isr __time_critical_func(ws_callback)(unsigned int pin, long unsigned int mask) {
+    static_cast<I2SSlaveIn*>(SelfI2SSlaveIn)->wsChange(pin, mask);
+  }
+
+  /// the state of the ws pin was changing - so we push the data
+  void wsChange(unsigned int pin, long unsigned int mask) {
+    pio_sm_exec(p_config->pio, p_config->state_machine, pio_encode_jmp(offset + i2s_slave_in_offset_write));
+  }
+
+  // DMA callback method: move data from buffer to PIO
+  void dmaCopyPIOToBuffer() {
+    uint dma_channel = p_config->dma_channel;
+    uint dma_irq = p_config->dma_irq;
+    if (dma_irqn_get_channel_status(dma_irq, dma_channel)) {
+      dma_irqn_acknowledge_channel(dma_irq, dma_channel);
+      I2S_LOGD(__PRETTY_FUNCTION__);
+      // free the buffer we just finished
+      if (p_actual_available_buffer != nullptr) {
+        switch(p_config->bits_per_sample){
+          case 8:
+            convert<int8_t>();
+            break;
+          case 16:
+            convert<int16_t>();
+            break;
+          case 32:
+            convert<int32_t>();
+            break;
+        }
+        p_buffer->addFilledBuffer(p_actual_available_buffer);
+      }
+      startCopy();
+
+    } else {
+      I2S_LOGE("invalid channel status");
+    }
+  }
+
+  /// Data is provided as int32 - we need to convert it to the expected size
+  template<typename T>
+  void convert(){
+    int32_t *p_data = (int32_t *)p_actual_available_buffer;
+    T *p_result = (T*)p_actual_available_buffer;
+    size_t max = p_buffer->availableForWrite()/sizeof(int32_t);
+    for (int j=0;j<max;j++){
+      p_result[j] = (T) p_data[j];
+    }
+    p_actual_available_buffer->audioByteCount=max;
+  }
+
+
+};
+
+/**
  * @brief I2SBuffer to write audio data to a buffer and read the audio data back
  * from the buffer.
  * @author Phil Schatzmann
@@ -234,20 +537,22 @@ class I2SBuffer : public IBuffer {
       uint8_t *buffer = new uint8_t[size];
       if (buffer != nullptr) {
         I2SBufferEntry *p_entry = new I2SBufferEntry(buffer);
-        freeBuffer.push_back(p_entry);
+        addFreeBuffer(p_entry);
       }
     }
   }
 
   ~I2SBuffer() {
-    for (int j = 0; j < freeBuffer.size(); j++) {
-      delete freeBuffer[j];
+    I2SBufferEntry *tmp = getFreeBuffer();
+    while (tmp!=nullptr) {
+      delete tmp;
+      tmp = getFreeBuffer();
     }
-    filledBuffer.clear();
-    for (int j = 0; j < filledBuffer.size(); j++) {
-      delete filledBuffer[j];
+    tmp = getFilledBuffer();
+    while (tmp!=nullptr) {
+      delete tmp;
+      tmp = getFreeBuffer();
     }
-    filledBuffer.clear();
   }
 
   /// the max size of an individual buffer entry
@@ -325,20 +630,17 @@ class I2SBuffer : public IBuffer {
     if (freeBuffer.size() == 0) {
       return nullptr;
     }
-    I2SBufferEntry *result = freeBuffer.back();
-    freeBuffer.pop_back();
+    I2SBufferEntry *result = freeBuffer.front();
+    freeBuffer.pop();
     return result;
   }
 
   /// Make entry available again
   void addFreeBuffer(I2SBufferEntry *buffer) {
-    buffer->audioByteCount = 0;
-    freeBuffer.push_back(buffer);
-  }
-
-  /// Add audio data to buffer
-  void addFilledBuffer(I2SBufferEntry *buffer) {
-    filledBuffer.push_back(buffer);
+    if (buffer!=nullptr){
+      buffer->audioByteCount = 0;
+      freeBuffer.push(buffer);
+    }
   }
 
   /// Provides the next buffer with audio data
@@ -346,9 +648,14 @@ class I2SBuffer : public IBuffer {
     if (filledBuffer.size() == 0) {
       return nullptr;
     }
-    I2SBufferEntry *result = filledBuffer.back();
-    filledBuffer.pop_back();
+    I2SBufferEntry *result = filledBuffer.front();
+    filledBuffer.pop();
     return result;
+  }
+
+  /// Add audio data to buffer
+  void addFilledBuffer(I2SBufferEntry *buffer) {
+    filledBuffer.push(buffer);
   }
 
   /// Print some statistics so that we can monitor the progress
@@ -361,8 +668,8 @@ class I2SBuffer : public IBuffer {
   }
 
  protected:
-  std::vector<I2SBufferEntry *> freeBuffer;
-  std::vector<I2SBufferEntry *> filledBuffer;
+  std::queue<I2SBufferEntry *> freeBuffer;
+  std::queue<I2SBufferEntry *> filledBuffer;
   size_t buffer_size;
   size_t buffer_count;
   size_t bytes_processed = 0;
@@ -372,6 +679,21 @@ class I2SBuffer : public IBuffer {
   size_t actual_read_pos = 0;
   int actual_read_open = 0;
 };
+
+
+#ifndef ARDUINO
+class Stream {
+  public: 
+    /// Not supported
+  virtual int available()= 0;
+  virtual int read()= 0;
+  virtual int peek() = 0;
+  virtual size_t write(uint8_t byte) = 0;
+  virtual int availableForWrite()  = 0;
+  size_t write(uint8_t *data, size_t len) = 0;
+  size_t readBytes(uint8_t *data, size_t len) = 0;
+};
+#endif
 
 /**
  * @brief I2S for the RP2040 using the PIO
@@ -397,15 +719,21 @@ class I2SClass : public Stream {
   ~I2SClass() { end(); }
 
   /// Defines the sample rate
-  void setSampleRate(uint16_t sampleRate) {
+  bool setSampleRate(uint16_t sampleRate) {
     cfg.sample_rate = sampleRate;
-    updateSampleRate();
+    return updateSampleRate();
   }
 
   uint16_t sampleRate() { return cfg.sample_rate; }
 
   /// Defines the bits per samples (supported values: 8, 16, 32)
-  void setBitsPerSample(uint16_t bits) { cfg.bits_per_sample = bits; }
+  bool setBitsPerSample(uint16_t bits) {
+    if (bits == 8 || bits == 16 || bits == 32) {
+      cfg.bits_per_sample = bits;
+      return true;
+    }
+    return false;
+  }
 
   uint16_t bitsPerSample() { return cfg.bits_per_sample; }
 
@@ -420,24 +748,36 @@ class I2SClass : public Stream {
   }
 
   /// Defines if the I2S is running as master (default is master)
-  void setMaster(bool master) { cfg.is_master = master; }
+  bool setMaster(bool master) {
+    cfg.is_master = master;
+    return master == true;  // currently we only support master
+  }
 
   bool isMaster() { return cfg.is_master; }
 
   /// Defines the data pin
-  void setPinData(int pin) { cfg.data_pin = pin; }
+  bool setPinData(int pin) {
+    if (isActive()) {
+      LOGE("setPinData failed because I2S is active");
+      return false;
+    }
+    if (pin > 29) {
+      LOGE("setPinData failed for pin %d - use a GPIO <=29", pin);
+      return false;
+    }
+    cfg.data_pin = pin;
+    cfg.clock_pin = pin+1;
+    return true;
+  }
 
-  /// provides the data GPIO number
+  /// provides the data GPIO number of the data pin
   int pinData() { return cfg.data_pin; }
 
-  /// Defines the clock pin (pin) and ws pin (=pin+1)
-  void setPinClockBase(int pin) { cfg.clock_pin_base = pin; }
+  /// Base clock GPIO pin (=data pin + 1)
+  int pinClock() { return cfg.clock_pin; }
 
-  /// Base clock GPIO pin
-  int pinClock() { return cfg.clock_pin_base; }
-
-  /// Left right select GPIO pin
-  int pinLR() { return cfg.clock_pin_base + 1; }
+  /// Left right select GPIO pin (data pin + 2)
+  int pinLR() { return cfg.clock_pin + 1; }
 
   /// Starts the processing
   void begin(AudioConfig config, I2SOperation mode) {
@@ -447,7 +787,7 @@ class I2SClass : public Stream {
     cfg.buffer_count = config.buffer_count;
     cfg.buffer_size = config.buffer_size;
     cfg.data_pin = config.data_pin;              //
-    cfg.clock_pin_base = config.clock_pin_base;  // pin bclk
+    cfg.clock_pin = config.clock_pin;  // pin bclk
     begin(mode);
   }
 
@@ -466,15 +806,13 @@ class I2SClass : public Stream {
       switch (mode) {
         case I2SWrite:
           if (p_master_out == nullptr) {
-            p_master_out = new I2SMasterOut();
-            p_master_out->begin(p_buffer, &cfg);
+            p_master = p_master_out = new I2SMasterOut();
           }
-          updateSampleRate();
-          setActive(true);
           break;
         case I2SRead:
-          // setup(new PIOMasterIn(), new MasterReadWriter(pio, state_machine,
-          // dma_channel), new I2SDefaultReader());
+          if (p_master_in == nullptr) {
+            p_master = p_master_in = new I2SMasterIn();
+          }
           break;
       }
     } else {
@@ -484,10 +822,15 @@ class I2SClass : public Stream {
           I2S_LOGE("Client mode does not support write");
           break;
         case I2SRead:
-          // begin(new PIOSlaveIn(), new MasterWriteWriter(), new
           // MasterWriteReader());
           break;
       }
+    }
+
+    if (p_master != nullptr) {
+      p_master->begin(p_buffer, &cfg);
+      if (p_master->clockFromSampleRate()) updateSampleRate();
+      setActive(true);
     }
   }
 
@@ -510,6 +853,7 @@ class I2SClass : public Stream {
                ? p_buffer->availableForWrite()
                : -1;
   }
+
   /// Not supported
   virtual int read() override { return -1; }
   /// Not supported
@@ -568,24 +912,35 @@ class I2SClass : public Stream {
   /// Provides a copy of the actual configuration
   AudioConfig config() { return cfg; }
 
+  /// Checks if i2s has been started
+  bool isActive() { return cfg.active; }
+
+  /// Checks if i2s has been started
+  operator bool() { return isActive(); }
+
  protected:
   IBuffer *p_buffer = nullptr;
   I2SMasterOut *p_master_out = nullptr;
+  I2SMasterIn *p_master_in = nullptr;
+  I2SMasterBase *p_master = nullptr;
   AudioConfig cfg;
   uint8_t byte_write_temp[8];
   uint8_t byte_write_count = 0;
 
-  void updateSampleRate() {
+  bool updateSampleRate() {
     I2S_LOGI(__PRETTY_FUNCTION__);
     uint32_t system_clock_frequency = clock_get_hz(clk_sys);
-    assert(system_clock_frequency < 0x40000000);
-    int bytes = cfg.bits_per_sample / 8 * cfg.channels;
-    uint32_t divider = system_clock_frequency * bytes /
-                       cfg.sample_rate;  // avoid arithmetic overflow
-    I2S_LOGI("sample_rate %d -> divider %u", cfg.sample_rate, divider);
-    assert(divider < 0x1000000);
-    pio_sm_set_clkdiv_int_frac(cfg.pio, cfg.state_machine, divider >> 8u,
-                               divider & 0xffu);
+    // assert(system_clock_frequency < 0x40000000);
+    float divider =
+        0.25 * system_clock_frequency / (cfg.sample_rate * cfg.bits_per_sample);
+    I2S_LOGI("sample_rate %d -> divider %f", cfg.sample_rate, divider);
+    if (divider >= 1.0) {
+      pio_sm_set_clkdiv(cfg.pio, cfg.state_machine, divider);
+      return true;
+    }
+
+    I2S_LOGE("sample_rate not supported: %d", cfg.sample_rate);
+    return false;
   }
 
   void setActive(bool active) {
@@ -594,8 +949,8 @@ class I2SClass : public Stream {
     I2S_LOGI("active: %s", active ? "true" : "false");
     irq_set_enabled(DMA_IRQ_0 + cfg.dma_irq, active);
 
-    if (active) {
-      p_master_out->startCopy();
+    if (active && p_master != nullptr) {
+      p_master->startCopy();
     }
 
     pio_sm_set_enabled(cfg.pio, cfg.state_machine, active);

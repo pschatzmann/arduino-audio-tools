@@ -56,7 +56,10 @@ class I2SConfig : public AudioBaseInfo {
 #ifdef ESP32
     bool is_digital = true;  // e.g. the ESP32 supports analog input or output
     bool use_apll = I2S_USE_APLL; 
-    uint32_t apll_frequency_factor = 0; // apll frequency = sample_rate * apll_frequency_factor
+    uint32_t fixed_mclk = 0; 
+#if ESP_IDF_VERSION_MAJOR >= 4 
+    int pin_mck = 1;
+#endif
 #endif
 
     void logInfo() {
@@ -70,7 +73,7 @@ class I2SConfig : public AudioBaseInfo {
 #ifdef ESP32
       if (use_apll) {
         LOGI("use_apll: %s", use_apll ? "true" : "false");
-        LOGI("apll_frequency_factor: %d", apll_frequency_factor);
+        LOGI("fixed_mclk: %d", fixed_mclk);
       }
 #endif
 
