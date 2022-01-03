@@ -115,7 +115,7 @@ class I2SBase {
             .dma_buf_len = I2S_BUFFER_SIZE,
             .use_apll = (bool) cfg.use_apll,
             .tx_desc_auto_clear = I2S_AUTO_CLEAR, 
-            .fixed_mclk = (int) (cfg.use_apll ? cfg.sample_rate * cfg.apll_frequency_factor : 0 )
+            .fixed_mclk = (int) (cfg.use_apll ? cfg.fixed_mclk : 0 )
 
       };
       i2s_config = i2s_config_new;
@@ -134,6 +134,9 @@ class I2SBase {
       // setup pin config
       if (this->cfg.is_digital ) {
         i2s_pin_config_t pin_config = {
+#if ESP_IDF_VERSION_MAJOR >= 4 
+            .mck_io_num = cfg.pin_mck,
+#endif
             .bck_io_num = cfg.pin_bck,
             .ws_io_num = cfg.pin_ws,
             .data_out_num = txPin,
