@@ -265,9 +265,9 @@ class AudioKitStream : public AudioStreamX {
    * @param pin
    * @param action
    */
-  void addAction(int pin, void (*action)(bool,int,void*)) {
+  void addAction(int pin, void (*action)(bool,int,void*), AudioActions::ActiveLogic activeLogic = AudioActions::ActiveLow, void* ref=nullptr ) {
     LOGI(LOG_METHOD);
-    actions.add(pin, action);
+    actions.add(pin, action, activeLogic, ref);
   }
 
   /// Provides access to the AudioActions
