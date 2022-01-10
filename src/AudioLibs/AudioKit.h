@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AudioKitHAL.h"
+#include "AudioI2S/I2SConfig.h"
 #include "AudioTools/AudioActions.h"
 
 namespace audio_tools {
@@ -22,6 +23,7 @@ class AudioKitStreamConfig : public I2SConfig {
   // set dac channel 
   audio_hal_dac_output_t output_device = AUDIOKIT_DEFAULT_OUTPUT;
   int masterclock_pin = 0;
+  bool sd_active = true;
 
   /// convert to config object needed by HAL
   AudioKitConfig toAudioKitConfig() {
@@ -36,6 +38,7 @@ class AudioKitStreamConfig : public I2SConfig {
     result.fmt = toFormat();
     result.sample_rate = toSampleRate();
     result.bits_per_sample = toBits();
+    result.sd_active = sd_active;
     return result;
   }
 

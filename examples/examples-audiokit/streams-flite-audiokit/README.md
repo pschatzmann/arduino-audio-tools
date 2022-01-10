@@ -15,5 +15,5 @@ You need to install the following libraries:
 - [AudioKit](https://github.com/pschatzmann/arduino-audiokit)
 - [FLITE](https://github.com/pschatzmann/arduino-flite)
 
-
+FLITE is quite big: you need to set the Partition Schema to Huge APP
 
