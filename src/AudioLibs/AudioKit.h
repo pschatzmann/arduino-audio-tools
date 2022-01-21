@@ -180,7 +180,7 @@ class AudioKitStream : public AudioStreamX {
     cfg = config;
     cfg.logInfo();
     if (!kit.begin(cfg.toAudioKitConfig())){
-      LOGE("begin faild: please verify your AUDIOKIT_BOARD setting");
+      LOGE("begin faild: please verify your AUDIOKIT_BOARD setting: %d", AUDIOKIT_BOARD);
       stop();
     }
 
