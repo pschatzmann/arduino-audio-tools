@@ -1,7 +1,5 @@
 #pragma once
 
-#if defined(USE_HELIX) || defined(USE_DECODERS)
-
 #include "Stream.h"
 #include "AudioTools/AudioTypes.h"
 #include "MP3DecoderHelix.h"
@@ -146,5 +144,4 @@ class MP3DecoderHelix : public AudioDecoder  {
 
 } // namespace
 
-#endif
 

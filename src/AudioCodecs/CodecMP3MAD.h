@@ -1,7 +1,5 @@
 #pragma once
 
-#if defined(USE_MAD) || defined(USE_DECODERS)
-
 #define MINIMP3_IMPLEMENTATION
 #define MINIMP3_NO_STDIO
 #define LOGGING_ACTIVE true
@@ -135,5 +133,4 @@ class MP3DecoderMAD : public AudioDecoder  {
 
 } // namespace
 
-#endif
 

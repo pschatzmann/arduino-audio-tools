@@ -21,7 +21,7 @@
 #include "AudioTools/AudioOutput.h"
 #include "AudioTools/AudioCopy.h"
 #include "AudioMetaData/MetaData.h"
-#include "AudioCodecs/CodecWAV.h"
+#include "AudioCodecs/AudioCodecs.h"
 #include "AudioHttp/AudioHttp.h"
 #include "AudioTools/AudioPlayer.h"
 #include "AudioEffects/SoundGenerator.h"
