@@ -26,7 +26,7 @@ public:
 
   void end() {}
 
-  AudioBaseInfo audioInfo() { AudioBaseInfo dummy return dummy; }
+  AudioBaseInfo audioInfo() { AudioBaseInfo dummy; return dummy; }
 
   size_t write(const void *data, size_t len) { return len; }
 
@@ -37,4 +37,3 @@ public:
 
 } // namespace audio_tools
 
-#endif

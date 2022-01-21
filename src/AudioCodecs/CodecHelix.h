@@ -1,21 +1,20 @@
 #pragma once
 
-#if defined(USE_HELIX) || defined(USE_DECODERS)
-
-#include "AACDecoderHelix.h"
 #include "AudioTools/AudioTypes.h"
-#include "CodecNOP.h"
-#include "CodecWAV.h"
-#include "MP3DecoderHelix.h"
+#include "AudioCodecs/CodecNOP.h"
+#include "AudioCodecs/CodecWAV.h"
+#include "AudioCodecs/CodecMP3Helix.h"
+#include "AudioCodecs/CodecAACHelix.h"
 
 namespace audio_tools {
 
 /**
  * @brief MP3 and AAC Decoder using libhelix:
- * https://github.com/pschatzmann/arduino-libhelix
+ * https://github.com/pschatzmann/arduino-libhelix. We dynamically create a MP3 or AAC decoder dependent on the provided audio format.
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
+
 class DecoderHelix : public AudioDecoder {
 public:
   DecoderHelix() { LOGD(LOG_METHOD); }
@@ -30,10 +29,11 @@ public:
     p_out_stream = &out_stream;
     p_bi = &bi;
   }
-  ~MP3DecoderHelix() { resetDecoder(); }
+
+  ~DecoderHelix() { resetDecoder(); }
 
   /// Defines the output Stream
-  virtual void setOutputStream(Print &outStream) { p_out_stream = &out_stream; }
+  virtual void setOutputStream(Print &outStream) { p_out_stream = &outStream; }
 
   /// Starts the processing
   void begin() {
@@ -57,10 +57,10 @@ public:
   size_t write(const void *data, size_t len) {
     LOGD("%s: %zu", LOG_METHOD, len);
     if (p_decoder == nullptr) {
-      setupDecoder();
+      setupDecoder((const char *)data);
       p_decoder->begin();
     }
-    p_decoder->write(data, len);
+    return p_decoder->write(data, len);
   }
 
   /// checks if the class is active
@@ -72,11 +72,12 @@ public:
 
 protected:
   AudioDecoder *p_decoder = nullptr;
-  Print *out_stream = nullptr;
+  Print *p_out_stream = nullptr;
   AudioBaseInfoDependent *p_bi = nullptr;
   AudioBaseInfo noInfo;
 
-  void setupDecoder() {
+  /// Defines the decoder based on the audio format
+  void setupDecoder(const char *start) {
     if (start[0] == 0xFF && start[1] == 0xF1) {
       p_decoder = new AACDecoderHelix();
     } else if (strncmp(start, "ID3", 3) || start[0] == 0xFF ||
@@ -90,10 +91,11 @@ protected:
       LOGW("Unknown Data Format: Content will be ignored...")
       p_decoder = new DecoderNOP();
     }
-    p_decoder->setOutputStream(*out_stream);
-    p_decoder->setNotifyAudioChange(bi);
+    p_decoder->setOutputStream(*p_out_stream);
+    p_decoder->setNotifyAudioChange(*p_bi);
   }
 
+  /// Deletes the decoder
   void resetDecoder() {
     if (p_decoder != nullptr) {
       delete p_decoder;
@@ -104,4 +106,3 @@ protected:
 
 } // namespace audio_tools
 
-#endif
