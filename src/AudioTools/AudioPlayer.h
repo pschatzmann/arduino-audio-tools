@@ -278,6 +278,10 @@ namespace audio_tools {
 
         /// checks if the file is a valid audio file
         bool isValidAudioFile(AudioFile& file) {
+            if (file.isDir()){
+                LOGD("-> isValidAudioFile: '%s': %d", file_name, false);
+                return false;
+            }
             char file_name[MAX_FILE_LEN];
             file.getName(file_name, MAX_FILE_LEN);
             Str strFileName(file_name);
