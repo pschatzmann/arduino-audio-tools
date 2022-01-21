@@ -572,7 +572,7 @@ namespace audio_tools {
             this->p_decoder = &decoder;
             this->volume_out.begin(output);
             this->p_out_decoding = new EncodedAudioStream(volume_out, decoder);
-            setNotify(notify)
+            setNotify(notify);
         }
 
         /**
