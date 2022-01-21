@@ -179,7 +179,10 @@ class AudioKitStream : public AudioStreamX {
     LOGD(LOG_METHOD);
     cfg = config;
     cfg.logInfo();
-    kit.begin(cfg.toAudioKitConfig());
+    if (!kit.begin(cfg.toAudioKitConfig())){
+      LOGE("begin faild: please verify your AUDIOKIT_BOARD setting");
+      stop();
+    }
 
     // convert format if necessary
     converter.setInputInfo(cfg);
