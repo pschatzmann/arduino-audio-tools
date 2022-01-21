@@ -215,7 +215,7 @@ class AudioKitStream : public AudioStreamX {
     if (cfg.channels == 2) {
       return kit.read(data, length);
     }
-    LOGE("Unsuported number of channels :%", cfg.channels);
+    LOGE("Unsuported number of channels : %d", cfg.channels);
     return 0;
   }
 
