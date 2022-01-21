@@ -482,10 +482,16 @@ class AudioKitStream : public AudioStreamX {
   void setupActions() {
     LOGI(LOG_METHOD);
     actions.add(kit.pinHeadphoneDetect(), actionHeadphoneDetection);
-    // This clashes with the SD CS pin!
-    //actions.add(kit.pinInputMode(), actionStartStop);
-    actions.add(kit.pinVolumeDown(), actionVolumeDown);
-    actions.add(kit.pinVolumeUp(), actionVolumeUp);
+    // This clashes with the SD CS pin for AIThinker
+    if (!cfg.sd_active || (AUDIOKIT_BOARD!=5 && AUDIOKIT_BOARD!=6)){
+      actions.add(kit.pinInputMode(), actionStartStop);
+    }
+
+    // conflicts with SD Lyrat SD CS Pin
+    if (!cfg.sd_active || AUDIOKIT_BOARD==5 || AUDIOKIT_BOARD==6){
+      actions.add(kit.pinVolumeDown(), actionVolumeDown); 
+      actions.add(kit.pinVolumeUp(), actionVolumeUp);
+    }
   }
 };
 
