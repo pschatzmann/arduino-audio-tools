@@ -60,7 +60,7 @@ namespace audio_tools {
         }
 
         /// Returns audio stream by path
-        virtual Stream* selectStream(char* path) {
+        virtual Stream* selectStream(const char* path) {
             return selectStream(path);
         }
 
@@ -228,7 +228,7 @@ namespace audio_tools {
             return file ? &file : nullptr;
         }
 
-        virtual Stream* selectStream(char* path) override {
+        virtual Stream* selectStream(const char* path) override {
             file.close();
             file = getFileByPath(path);
             LOGW("-> selectStream: %s", path);
@@ -286,7 +286,7 @@ namespace audio_tools {
             return result;
         }
 
-        AudioFile getFileByPath(char* path) {
+        AudioFile getFileByPath(const char* path) {
             AudioFile dir;
             Str inPath(path);
             StrExt strPath;
@@ -441,7 +441,7 @@ namespace audio_tools {
         }
 
         /// Opens the selected url
-        Stream* selectStream(char* path) override {
+        Stream* selectStream(const char* path) override {
             LOGI("selectStream: %s", path);
             if (started) actual_stream->end();
             actual_stream->begin(path, mime);
@@ -613,7 +613,7 @@ namespace audio_tools {
             p_out_decoding->begin();
             p_source->begin();
             meta_out.begin();
-            
+
             if (index >= 0) {
                 p_input_stream = p_source->selectStream(index);
                 if (p_input_stream != nullptr) {
@@ -714,7 +714,7 @@ namespace audio_tools {
         }
 
         /// moves to selected file
-        virtual bool setPath(char* path) {
+        virtual bool setPath(const char* path) {
             LOGD(LOG_METHOD);
             previous_stream = false;
             active = setStream(p_source->selectStream(path));
