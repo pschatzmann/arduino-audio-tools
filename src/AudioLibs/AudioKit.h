@@ -23,7 +23,7 @@ class AudioKitStreamConfig : public I2SConfig {
   // set dac channel 
   audio_hal_dac_output_t output_device = AUDIOKIT_DEFAULT_OUTPUT;
   int masterclock_pin = 0;
-  bool sd_active = true;
+  bool sd_active = false;
 
   /// convert to config object needed by HAL
   AudioKitConfig toAudioKitConfig() {
@@ -193,6 +193,7 @@ class AudioKitStream : public AudioStreamX {
 
     // Volume control and headphone detection
     setupActions();
+    
     // set initial volume
     setVolume(volume_value);
   }
@@ -267,8 +268,25 @@ class AudioKitStream : public AudioStreamX {
    *
    * @param pin
    * @param action
+   * @param ref
    */
-  void addAction(int pin, void (*action)(bool,int,void*), AudioActions::ActiveLogic activeLogic = AudioActions::ActiveLow, void* ref=nullptr ) {
+  void addAction(int pin, void (*action)(bool,int,void*), void* ref=nullptr ) {
+    LOGI(LOG_METHOD);
+    // determine logic from config
+    AudioActions::ActiveLogic activeLogic = getActionLogic(pin);
+    actions.add(pin, action, activeLogic, ref);
+  }
+
+  /**
+   * @brief Defines a new action that is executed when the indicated pin is
+   * active
+   *
+   * @param pin
+   * @param action
+   * @param activeLogic
+   * @param ref
+   */
+  void addAction(int pin, void (*action)(bool,int,void*), AudioActions::ActiveLogic activeLogic, void* ref=nullptr ) {
     LOGI(LOG_METHOD);
     actions.add(pin, action, activeLogic, ref);
   }
@@ -478,19 +496,39 @@ class AudioKitStream : public AudioStreamX {
   FormatConverterStream converter = FormatConverterStream(kit_stream);
   AudioBaseInfo output_config;
 
+  /// Determines the action logic (ActiveLow or ActiveTouch) for the pin
+  AudioActions::ActiveLogic getActionLogic(int pin){
+    input_key_service_info_t input_key_info[] = INPUT_KEY_DEFAULT_INFO();
+    int size = sizeof(input_key_info) / sizeof(input_key_info[0]);
+    for (int j=0; j<size; j++){
+      if (pin == input_key_info[j].act_id){
+        switch(input_key_info[j].type){
+          case PERIPH_ID_BUTTON:
+            LOGD("getActionLogic for pin %d -> %d", pin, AudioActions::ActiveLow);
+            return AudioActions::ActiveLow;
+          case PERIPH_ID_TOUCH:
+            LOGD("getActionLogic for pin %d -> %d", pin, AudioActions::ActiveTouch);
+            return AudioActions::ActiveTouch;
+        }
+      }
+    }
+    LOGW("Undefined ActionLogic for pin: %d ",pin);
+    return AudioActions::ActiveLow;
+  }
+
   /// Setup the supported default actions
   void setupActions() {
     LOGI(LOG_METHOD);
     actions.add(kit.pinHeadphoneDetect(), actionHeadphoneDetection);
     // This clashes with the SD CS pin for AIThinker
     if (!cfg.sd_active || (AUDIOKIT_BOARD!=5 && AUDIOKIT_BOARD!=6)){
-      actions.add(kit.pinInputMode(), actionStartStop);
+      addAction(kit.pinInputMode(), actionStartStop);
     }
 
     // conflicts with SD Lyrat SD CS Pin
     if (!cfg.sd_active || AUDIOKIT_BOARD==5 || AUDIOKIT_BOARD==6){
-      actions.add(kit.pinVolumeDown(), actionVolumeDown); 
-      actions.add(kit.pinVolumeUp(), actionVolumeUp);
+      addAction(kit.pinVolumeDown(), actionVolumeDown); 
+      addAction(kit.pinVolumeUp(), actionVolumeUp);
     }
   }
 };
