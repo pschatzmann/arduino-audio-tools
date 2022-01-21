@@ -25,11 +25,13 @@ class AudioActions {
     ActiveTouch
   };
 
+  /// Adds a action
   void add(int pin, void (*actionOn)(bool pinStatus, int pin, void* ref),
            ActiveLogic activeLogic = ActiveLow, void* ref = nullptr) {
     add(pin, actionOn, nullptr, activeLogic, ref);
   }
 
+  /// Adds a action
   void add(int pin, void (*actionOn)(bool pinStatus, int pin, void* ref),
            void (*actionOff)(bool pinStatus, int pin, void* ref),
            ActiveLogic activeLogicPar = ActiveLow, void* ref = nullptr) {
@@ -130,7 +132,7 @@ class AudioActions {
  protected:
   int maxIdx = 0;
   int debounceDelayValue = DEBOUNCE_DELAY;
-  int touchLimit = 25;
+  int touchLimit = 20;
 
   struct Action {
     int16_t pin;

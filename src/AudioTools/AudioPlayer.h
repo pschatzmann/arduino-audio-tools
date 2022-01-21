@@ -206,7 +206,7 @@ namespace audio_tools {
             static bool is_sd_setup = false;
             if (!is_sd_setup){
                 if (!sd.begin(*p_cfg)) {
-                    LOGE("SD.begin failed!");
+                    LOGE("SD.begin failed with cs=%d!", p_cfg->csPin);
                     stop();
                 }
                 is_sd_setup = true;
@@ -548,6 +548,7 @@ namespace audio_tools {
         AudioPlayer(AudioSource& source, AudioPrint& output, AudioDecoder& decoder) {
             LOGD(LOG_METHOD);
             this->p_source = &source;
+            this->p_decoder = &decoder;
             this->volume_out.begin(output);
             this->p_out_decoding = new EncodedAudioStream(volume_out, decoder);
             this->p_final_print = &output;
@@ -568,12 +569,10 @@ namespace audio_tools {
         AudioPlayer(AudioSource& source, Print& output, AudioDecoder& decoder, AudioBaseInfoDependent* notify = nullptr) {
             LOGD(LOG_METHOD);
             this->p_source = &source;
+            this->p_decoder = &decoder;
             this->volume_out.begin(output);
             this->p_out_decoding = new EncodedAudioStream(volume_out, decoder);
-            this->p_final_notify = notify;
-
-            // notification for audio configuration
-            decoder.setNotifyAudioChange(*this);
+            setNotify(notify)
         }
 
         /**
@@ -644,6 +643,33 @@ namespace audio_tools {
             p_out_decoding->end();
             meta_out.end();
         }
+
+        /// (Re)defines the audio source
+        void setAudioSource(AudioSource& source){
+            this->p_source = &source;
+        }
+
+        /// (Re)defines the output
+        void setOutput(Print& output){
+            this->volume_out.begin(output);
+        }
+
+        /// (Re)defines the decoder
+        void setDecoder(AudioDecoder& decoder){
+            if (this->p_out_decoding!=nullptr){
+                delete p_out_decoding;
+            }
+            this->p_out_decoding = new EncodedAudioStream(volume_out, decoder);
+        }
+
+        /// (Re)defines the notify
+        void setNotify(AudioBaseInfoDependent* notify){
+            this->p_final_notify = notify;
+            // notification for audio configuration
+            if (p_decoder!=nullptr){
+                p_decoder->setNotifyAudioChange(*this);
+            }
+        } 
 
         /// Updates the audio info in the related objects
         virtual void setAudioInfo(AudioBaseInfo info) {
@@ -810,6 +836,7 @@ namespace audio_tools {
         VolumeOutput volume_out; // Volume control
         MetaDataID3 meta_out; // Metadata parser
         EncodedAudioStream* p_out_decoding = nullptr; // Decoding stream
+        AudioDecoder* p_decoder = nullptr;
         Stream* p_input_stream = nullptr;
         AudioPrint* p_final_print = nullptr;
         AudioStream* p_final_stream = nullptr;
@@ -820,7 +847,7 @@ namespace audio_tools {
         bool previous_stream = false;
         float current_volume = -1; // illegal value which will trigger an update
 
-        //Default constructur
+        /// Default constructur only allowed in subclasses
         AudioPlayer() {
             LOGD(LOG_METHOD);
         }
