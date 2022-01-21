@@ -626,7 +626,7 @@ namespace audio_tools {
                     result = true;
                 } else {
                     LOGW("-> begin: no data found");
-                    active = isActive;
+                    active = false;
                     result = false;
                 }
             } else {
