@@ -45,7 +45,9 @@ public:
   /// Releases the reserved memory
   void end() {
     LOGD(LOG_METHOD);
-    p_decoder->end();
+    if (p_decoder!=nullptr){
+      p_decoder->end();
+    }
     resetDecoder();
   }
 
@@ -80,11 +82,13 @@ protected:
   void setupDecoder(const char *start) {
     if (start[0] == 0xFF && start[1] == 0xF1) {
       p_decoder = new AACDecoderHelix();
-    } else if (strncmp(start, "ID3", 3) || start[0] == 0xFF ||
-               start[0] == 0xFE) {
+      LOGI("using AACDecoderHelix");
+    } else if (start[0] == 0xFF || start[0] == 0xFE || strncmp("ID3", start, 3)==0) {
       p_decoder = new MP3DecoderHelix();
-    } else if (strncmp(start, "RIFF", 4)) {
+      LOGI("using MP3DecoderHelix");
+    } else if (strncmp("RIFF", start, 4)==0) {
       p_decoder = new WAVDecoder();
+      LOGI("using WAVDecoder");
     }
     // if we do not have a decoder yet we use a dummy to prevent NPE
     if (p_decoder == nullptr) {
