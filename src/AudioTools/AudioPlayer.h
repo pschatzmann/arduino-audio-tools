@@ -205,9 +205,10 @@ namespace audio_tools {
             LOGD(LOG_METHOD);
             static bool is_sd_setup = false;
             if (!is_sd_setup){
-                if (!sd.begin(*p_cfg)) {
+                while (!sd.begin(*p_cfg)) {
                     LOGE("SD.begin failed with cs=%d!", p_cfg->csPin);
-                    stop();
+                    sd.initErrorHalt(&Serial);
+                    delay(500);
                 }
                 is_sd_setup = true;
             }

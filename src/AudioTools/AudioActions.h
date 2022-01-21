@@ -35,7 +35,7 @@ class AudioActions {
   void add(int pin, void (*actionOn)(bool pinStatus, int pin, void* ref),
            void (*actionOff)(bool pinStatus, int pin, void* ref),
            ActiveLogic activeLogicPar = ActiveLow, void* ref = nullptr) {
-    LOGI("ActionLogic::add pin: %d", pin);
+    LOGI("ActionLogic::add pin: %d / logic: %d", pin, activeLogicPar);
     if (maxIdx + 1 >= ACTIONS_MAX) {
       LOGE("Too many actions: please increase ACTIONS_MAX")
       return;

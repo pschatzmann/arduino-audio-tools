@@ -20,6 +20,7 @@ void read_data_stream(const uint8_t *data, uint32_t length) {
 }
 
 void setup() {
+  Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
   // setup output
