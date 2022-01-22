@@ -29,7 +29,7 @@ void setup() {
   config.channels        = channels;
   config.bits_per_sample = 16;
   config.i2s_format      = I2S_MSB_FORMAT;
-  config.is_digital      = false; // use Built-in DAC and GPIO25,26 output
+  config.is_digital      = false; // use Built-in DAC and output GPIO25 and GPIO26
   i2s.begin(config);
 }
 

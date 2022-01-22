@@ -250,7 +250,7 @@ class I2SBase {
           case I2S_RIGHT_JUSTIFIED_FORMAT:
           case I2S_LSB_FORMAT:
             return (i2s_comm_format_t) I2S_COMM_FORMAT_I2S_LSB;
-          // this is strange but the docu specifies that
+          // this is strange but the doc specifies that
           // case I2S_PCM_LONG:
           //   return (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_PCM_LONG;
           // case I2S_PCM_SHORT:
