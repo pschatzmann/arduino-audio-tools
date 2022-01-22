@@ -118,7 +118,7 @@ class SPDIFStream : public AudioStreamX {
   }
 
   /// Writes the audio data as SPDIF to the defined output pin
-  size_t write(uint8_t *values, size_t len) {
+  size_t write(const uint8_t *values, size_t len) {
     size_t result = 0;
     int16_t *v = (int16_t *)values;
     if (cfg.channels == 2) {

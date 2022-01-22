@@ -16,11 +16,11 @@
 using namespace audio_tools;  
 
 const char *urls[] = {
-  "http://centralcharts.ice.infomaniak.ch/centralcharts-128.mp3",
-  "http://centraljazz.ice.infomaniak.ch/centraljazz-128.mp3",
-  "http://centralrock.ice.infomaniak.ch/centralrock-128.mp3",
-  "http://centralcountry.ice.infomaniak.ch/centralcountry-128.mp3",
-  "http://centralfunk.ice.infomaniak.ch/centralfunk-128.mp3"
+  "http://centralcharts.ice.infomaniak.ch/",
+  "http://centraljazz.ice.infomaniak.ch/",
+  "http://centralrock.ice.infomaniak.ch/",
+  "http://centralcountry.ice.infomaniak.ch/",
+  "http://centralfunk.ice.infomaniak.ch/"
 };
 const char *wifi = "wifi";
 const char *password = "password";
