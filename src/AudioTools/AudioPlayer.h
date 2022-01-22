@@ -83,7 +83,7 @@ namespace audio_tools {
         virtual void setTimeout(int millisec) {};
 
         /// Returns default setting go to the next
-        virtual bool isAutoNext() {return true};
+        virtual bool isAutoNext() {return true; }
 
 
     protected:
