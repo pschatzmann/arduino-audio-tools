@@ -1,6 +1,6 @@
 /**
  * @file basic-a2dp-audiospdif.ino
- * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-audiospdif/basic-a2dp-audiospdif/README.md
+ * @brief A2DP Sink with output to SPDIFStream
  * 
  * @author Phil Schatzmann
  * @copyright GPLv3
