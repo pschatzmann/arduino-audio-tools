@@ -74,16 +74,16 @@ namespace audio_tools {
             return timeout_auto_next_value;
         }
 
-        /// Sets the timeout of Stream in milliseconds
-        void setTimeout(int millisec);
-
-        /// Returns default setting go to the next
-        virtual bool isAutoNext();
-
         // only the ICYStream supports this
         virtual bool setMetadataCallback(void (*fn)(MetaDataType info, const char* str, int len), ID3TypeSelection sel=SELECT_ICY) {
             return false;
         }
+
+        /// Sets the timeout of Stream in milliseconds
+        virtual void setTimeout(int millisec) {};
+
+        /// Returns default setting go to the next
+        virtual bool isAutoNext() {return true};
 
 
     protected:
@@ -135,8 +135,17 @@ namespace audio_tools {
             indexStreamCallback = callback;
         }
 
+        virtual bool isAutoNext() {
+            return auto_next;
+        }
+
+        virtual void setAutoNext(bool a){
+            auto_next = a;
+        }
+
     protected:
         void (*onStartCallback)() = nullptr;
+        bool auto_next = true;
         Stream* (*nextStreamCallback)() = nullptr;
         Stream* (*indexStreamCallback)(int index) = nullptr;
     };
