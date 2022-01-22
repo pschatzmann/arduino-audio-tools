@@ -122,15 +122,18 @@ class SPDIFStream : public AudioStreamX {
     size_t result = 0;
     int16_t *v = (int16_t *)values;
     if (cfg.channels == 2) {
-      for (int j = 0; j < len / 32; j++) {
+      int size = len / 4;
+      for (int j = 0; j < size; j+=2) {
         // provide the 2 channels from the data
         result += processFrame(v[j], v[j + 1]);
       }
     } else if (cfg.channels == 1) {
-      for (int j = 0; j < len / 16; j++) {
+      int size = len / 2;
+      for (int j = 0; j < size; j++) {
         // generate 2 channels
         result += processFrame(v[j], v[j]);
       }
+      result = result / 2;
     }
     return result;
   }
