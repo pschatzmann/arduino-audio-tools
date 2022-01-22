@@ -12,15 +12,12 @@ using namespace audio_tools;
 
 AudioWAVServer server("ssid","password");
 int channels = 1;
-int bits_per_sample = 8;
+int bits_per_sample = 16;
 
 // Callback which provides the audio data 
 void outputData(Print *out){
   Serial.print("providing data...");
   SAM sam(*out,  false);
-  sam.setOutputChannels(channels);
-  sam.setOutputBitsPerSample(bits_per_sample);
-
   sam.say("hallo, I am SAM");
 }
 

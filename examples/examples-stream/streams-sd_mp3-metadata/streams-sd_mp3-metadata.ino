@@ -1,5 +1,5 @@
 /**
- * @file streams-url_mp3-metadata2.ino
+ * @file streams-sd_mp3-metadata.ino
  * @author Phil Schatzmann
  * @brief read MP3 stream from a SD drive and output metadata and audio! 
  * The used mp3 file contains ID3 Metadata!
@@ -23,12 +23,12 @@ using namespace audio_tools;
 //                            -> MetaDataPrint
 
 File audioFile;
+SdFs SD;
 MetaDataPrint outMeta; // final output of metadata
 I2SStream i2s; // I2S output
 EncodedAudioStream out2dec(&i2s, new MP3DecoderHelix()); // Decoding stream
 MultiOutput out(outMeta, out2dec);
 StreamCopy copier(out, audioFile); // copy url to decoder
-const int chipSelect=CS;
 
 // callback for meta data
 void printMetaData(MetaDataType type, const char* str, int len){
@@ -49,7 +49,7 @@ void setup(){
 
   // setup metadata
   outMeta.setCallback(printMetaData);
-  outMeta.begin()
+  outMeta.begin();
 
   // setup i2s
   auto config = i2s.defaultConfig(TX_MODE);

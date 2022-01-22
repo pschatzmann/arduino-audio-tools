@@ -6,6 +6,10 @@
 
 */
 
+#include "AudioTools.h"
+#include "AudioLibs/AudioKit.h"
+#include "sam_arduino.h"
+
 using namespace audio_tools;
 
 AudioKitStream kit;
