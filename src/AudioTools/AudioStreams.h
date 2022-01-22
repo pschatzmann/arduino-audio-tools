@@ -156,7 +156,7 @@ class MemoryStream : public AudioStream {
     return result;
   }
 
-  virtual size_t readBytes(char *buffer, size_t length) {
+  virtual size_t readBytes(uint8_t *buffer, size_t length) {
     size_t count = 0;
     while (count < length) {
       int c = read();
@@ -208,7 +208,7 @@ template <class T>
 class GeneratedSoundStream : public AudioStreamX, public AudioBaseInfoSource {
  public:
   GeneratedSoundStream() = default;
-  
+
   GeneratedSoundStream(SoundGenerator<T> &generator) {
     LOGD(LOG_METHOD);
     setInput(generator);
