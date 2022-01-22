@@ -57,7 +57,7 @@ void setup() {
 }
 
 void loop() {
-   for (j=0;j<1024;j++) {
+   for (int j=0;j<1024;j++) {
       output.tick( voicer.tick() );
    }
    kit.processActions();
