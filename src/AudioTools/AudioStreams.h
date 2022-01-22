@@ -125,7 +125,7 @@ class MemoryStream : public AudioStream {
     read_pos = 0;
   }
 
-  virtual size_t write(uint8_t byte) {
+  virtual size_t write(uint8_t byte) override {
     int result = 0;
     if (write_pos < buffer_size) {
       result = 1;
@@ -135,7 +135,7 @@ class MemoryStream : public AudioStream {
     return result;
   }
 
-  virtual size_t write(const uint8_t *buffer, size_t size) {
+  virtual size_t write(const uint8_t *buffer, size_t size) override {
     size_t result = 0;
     for (size_t j = 0; j < size; j++) {
       if (!write(buffer[j])) {
@@ -146,9 +146,9 @@ class MemoryStream : public AudioStream {
     return result;
   }
 
-  virtual int available() { return write_pos - read_pos; }
+  virtual int available() override { return write_pos - read_pos; }
 
-  virtual int read() {
+  virtual int read() override {
     int result = peek();
     if (result >= 0) {
       read_pos++;
@@ -156,7 +156,7 @@ class MemoryStream : public AudioStream {
     return result;
   }
 
-  virtual size_t readBytes(char *buffer, size_t length) {
+  virtual size_t readBytes(uint8_t *buffer, size_t length) override {
     size_t count = 0;
     while (count < length) {
       int c = read();
@@ -167,7 +167,7 @@ class MemoryStream : public AudioStream {
     return count;
   }
 
-  virtual int peek() {
+  virtual int peek() override {
     int result = -1;
     if (available() > 0) {
       result = buffer[read_pos];
@@ -175,7 +175,7 @@ class MemoryStream : public AudioStream {
     return result;
   }
 
-  virtual void flush() {}
+  virtual void flush() override {}
 
   virtual void clear(bool reset = false) {
     write_pos = 0;
@@ -292,7 +292,7 @@ class BufferedStream : public AudioStream {
   }
 
   /// writes a byte to the buffer
-  virtual size_t write(uint8_t c) {
+  virtual size_t write(uint8_t c) override {
     if (buffer->isFull()) {
       flush();
     }
@@ -300,7 +300,7 @@ class BufferedStream : public AudioStream {
   }
 
   /// Use this method: write an array
-  virtual size_t write(const uint8_t *data, size_t len) {
+  virtual size_t write(const uint8_t *data, size_t len) override {
     LOGD("%s: %zu", LOG_METHOD, len);
     flush();
     return writeExt(data, len);
@@ -316,7 +316,7 @@ class BufferedStream : public AudioStream {
   }
 
   /// reads a byte - to be avoided
-  virtual int read() {
+  virtual int read() override {
     if (buffer->isEmpty()) {
       refill();
     }
@@ -324,7 +324,7 @@ class BufferedStream : public AudioStream {
   }
 
   /// peeks a byte - to be avoided
-  virtual int peek() {
+  virtual int peek() override{
     if (buffer->isEmpty()) {
       refill();
     }
@@ -332,7 +332,7 @@ class BufferedStream : public AudioStream {
   };
 
   /// Use this method !!
-  size_t readBytes(uint8_t *data, size_t length) {
+  size_t readBytes(uint8_t *data, size_t length) override {
     if (buffer->isEmpty()) {
       return readExt(data, length);
     } else {
@@ -341,7 +341,7 @@ class BufferedStream : public AudioStream {
   }
 
   /// Returns the available bytes in the buffer: to be avoided
-  virtual int available() {
+  virtual int available() override {
     if (buffer->isEmpty()) {
       refill();
     }
@@ -395,7 +395,7 @@ class NullStream : public BufferedStream {
   unsigned long timeout = 0;
   bool is_measure;
 
-  virtual size_t writeExt(const uint8_t *data, size_t len) {
+  virtual size_t writeExt(const uint8_t *data, size_t len) override {
     if (is_measure) {
       if (millis() < timeout) {
         total += len;
@@ -407,7 +407,7 @@ class NullStream : public BufferedStream {
     }
     return len;
   }
-  virtual size_t readExt(uint8_t *data, size_t len) {
+  virtual size_t readExt(uint8_t *data, size_t len) override {
     memset(data, 0, len);
     return len;
   }
@@ -431,26 +431,26 @@ class RingBufferStream : public AudioStream {
     }
   }
 
-  virtual int available() {
+  virtual int available() override {
     // LOGD("RingBufferStream::available: %zu",buffer->available());
     return buffer->available();
   }
 
   virtual void flush() {}
 
-  virtual int peek() { return buffer->peek(); }
-  virtual int read() { return buffer->read(); }
+  virtual int peek() override { return buffer->peek(); }
+  virtual int read() override { return buffer->read(); }
 
-  virtual size_t readBytes(uint8_t *data, size_t length) {
+  virtual size_t readBytes(uint8_t *data, size_t length) override {
     return buffer->readArray(data, length);
   }
 
-  virtual size_t write(const uint8_t *data, size_t len) {
+  virtual size_t write(const uint8_t *data, size_t len) override {
     // LOGD("RingBufferStream::write: %zu",len);
     return buffer->writeArray(data, len);
   }
 
-  virtual size_t write(uint8_t c) { return buffer->write(c); }
+  virtual size_t write(uint8_t c) override { return buffer->write(c); }
 
  protected:
   RingBuffer<uint8_t> *buffer = nullptr;
@@ -468,24 +468,24 @@ class ExternalBufferStream : public AudioStream {
  public:
   ExternalBufferStream() { LOGD(LOG_METHOD); }
 
-  virtual int available() { return buffer.available(); }
+  virtual int available() override { return buffer.available(); }
 
   virtual void flush() {}
 
-  virtual int peek() { return buffer.peek(); }
+  virtual int peek() override { return buffer.peek(); }
 
-  virtual int read() { return buffer.read(); }
+  virtual int read() override { return buffer.read(); }
 
-  virtual size_t readBytes(uint8_t *data, size_t length) {
+  virtual size_t readBytes(uint8_t *data, size_t length) override {
     return buffer.readArray(data, length);
   }
 
-  virtual size_t write(const uint8_t *data, size_t len) {
+  virtual size_t write(const uint8_t *data, size_t len) override {
     buffer.onExternalBufferRefilled((void *)data, len);
     return len;
   }
 
-  virtual size_t write(uint8_t c) {
+  virtual size_t write(uint8_t c) override {
     LOGE("not implemented: %s", LOG_METHOD);
     return 0;
   }
@@ -528,11 +528,11 @@ class CallbackBufferedStream : public BufferedStream {
   NBuffer<T> *callback_buffer_ptr;
   bool active;
 
-  virtual size_t writeExt(const uint8_t *data, size_t len) {
+  virtual size_t writeExt(const uint8_t *data, size_t len) override {
     return callback_buffer_ptr->writeArray(data, len / sizeof(T));
   }
 
-  virtual size_t readExt(uint8_t *data, size_t len) {
+  virtual size_t readExt(uint8_t *data, size_t len) override {
     return callback_buffer_ptr->readArray(data, len / sizeof(T));
     ;
   }
@@ -664,7 +664,7 @@ class TimerCallbackAudioStream : public BufferedStream,
   uint32_t printCount = 0;
 
   // used for audio sink
-  virtual size_t writeExt(const uint8_t *data, size_t len) {
+  virtual size_t writeExt(const uint8_t *data, size_t len) override {
     if (!active) return 0;
     LOGD(LOG_METHOD);
     size_t result = 0;
@@ -678,7 +678,7 @@ class TimerCallbackAudioStream : public BufferedStream,
   }
 
   // used for audio source
-  virtual size_t readExt(uint8_t *data, size_t len) {
+  virtual size_t readExt(uint8_t *data, size_t len) override {
     if (!active) return 0;
     LOGD(LOG_METHOD);
 
