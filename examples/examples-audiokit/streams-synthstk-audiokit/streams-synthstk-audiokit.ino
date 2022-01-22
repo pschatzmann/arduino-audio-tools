@@ -39,7 +39,7 @@ void setupActions(){
 }
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
   AudioLogger::instance().begin(Serial,AudioLogger::Warning);
 
   voicer.addInstrument(&clarinet, group);
