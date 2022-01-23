@@ -7,7 +7,8 @@
  */
  
 #include "AudioTools.h"
-#include "AudioExperiments/AudioSPDIF.h"
+#include "AudioLibs/AudioESP8266.h"
+#include "AudioOutputSPDIF.h"
 
 using namespace audio_tools;  
 
@@ -16,8 +17,9 @@ uint16_t sample_rate=44100;
 uint8_t channels = 2;                                      // The stream will have 2 channels 
 SineWaveGenerator<sound_t> sineWave(32000);                // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<sound_t> sound(sineWave);             // Stream generated from sine wave
-SPDIFStream out; 
-StreamCopy copier(out, sound);                             // copies sound into i2s
+AudioOutputSPDIF spdif;                                    // ESP8288-Audio SPDIF Output
+ESP3288AudioOutput out(spdif, channels);                             // Stream Adapter
+StreamCopy copier(out, sound, 32);                         // copies sound into i2s
 
 // Arduino Setup
 void setup(void) {  
@@ -27,11 +29,12 @@ void setup(void) {
 
   // start I2S
   Serial.println("starting SPDIF...");
-  auto config = out.defaultConfig();
-  config.sample_rate = sample_rate; 
-  config.channels = channels;
-  config.pin_data = 22;
-  out.begin(config);
+  // setup output
+  spdif.SetPinout(-1, -1, 22);
+  spdif.SetBitsPerSample(16); 
+  spdif.SetChannels(channels); 
+  spdif.SetRate(sample_rate);
+  spdif.begin();
 
   // Setup sine wave
   sineWave.begin(channels, sample_rate, N_B4);

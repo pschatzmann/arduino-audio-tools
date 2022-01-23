@@ -19,7 +19,8 @@ void read_data_stream(const uint8_t *data, uint32_t length) {
     int16_t* samples = (int16_t* ) data;
     int count = length/4;
     for (int j=0; j<count;j+=2){
-      spdif.ConsumeSample(samples+j);
+      while(!spdif.ConsumeSample(samples+j)){
+      }
     }
 }
 
