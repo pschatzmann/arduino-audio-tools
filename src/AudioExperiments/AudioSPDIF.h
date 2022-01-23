@@ -1,16 +1,52 @@
+/**
+ * @file AudioSPDIF.h
+ * @author Phil Schatzmann
+ * @brief S/PDIF output via I2S
+
+      Based on AudioOutputSPDIF from Ivan Kostoski for ESP3288
+      
+      Needs transceiver from CMOS level to either optical or coaxial interface
+      See: https://www.epanorama.net/documents/audio/spdif.html
+
+      Original idea and sources: 
+        Forum thread dicussing implementation
+          https://forum.pjrc.com/threads/28639-S-pdif
+        Teensy Audio Library 
+          https://github.com/PaulStoffregen/Audio/blob/master/output_spdif2.cpp
+      
+      This program is free software: you can redistribute it and/or modify
+      it under the terms of the GNU General Public License as published by
+      the Free Software Foundation, either version 3 of the License, or
+      (at your option) any later version.
+
+      This program is distributed in the hope that it will be useful,
+      but WITHOUT ANY WARRANTY; without even the implied warranty of
+      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+      GNU General Public License for more details.
+
+      You should have received a copy of the GNU General Public License
+      along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+ * @date 2022-01-23
+ * 
+ * @copyright  (C) 2020 Ivan Kostoski, 2022 Phil Schatzmann
+ * 
+ */
+
 #pragma once
 
 #include "AudioConfig.h"
 #include "AudioI2S/I2SConfig.h"
 #include "AudioI2S/I2SStream.h"
 #include "AudioTools/AudioStreams.h"
+#ifdef ESP32
+#include "soc/rtc.h"
+#endif
 
 #define LEFTCHANNEL 0
 #define RIGHTCHANNEL 1
 
 namespace audio_tools {
-
-typedef int16_t frame[2];
 
 // BMC (Biphase Mark Coded) values (bit order reversed, i.e. LSB first)
 static const uint16_t spdif_bmclookup[256] PROGMEM = {
@@ -44,9 +80,9 @@ static const uint16_t spdif_bmclookup[256] PROGMEM = {
     0xacaa, 0x34aa, 0xb4aa, 0xd4aa, 0x54aa, 0x32aa, 0xb2aa, 0xd2aa, 0x52aa,
     0xcaaa, 0x4aaa, 0x2aaa, 0xaaaa};
 
-const uint32_t VUCP_PREAMBLE_B = 0xCCE80000;  // 11001100 11101000
-const uint32_t VUCP_PREAMBLE_M = 0xCCE20000;  // 11001100 11100010
-const uint32_t VUCP_PREAMBLE_W = 0xCCE40000;  // 11001100 11100100
+static const uint32_t VUCP_PREAMBLE_B = 0xCCE80000;  // 11001100 11101000
+static const uint32_t VUCP_PREAMBLE_M = 0xCCE20000;  // 11001100 11100010
+static const uint32_t VUCP_PREAMBLE_W = 0xCCE40000;  // 11001100 11100100
 
 /**
  * @brief SPDIF configuration
@@ -62,7 +98,7 @@ struct SPDIFConfig {
 };
 
 /**
- * @brief Output as SPDIF on the data output pin
+ * @brief Output as 16 bit SPDIF on the I2S data output pin
  * @author Phil Schatzmann
  * @copyright GPLv3
  *
@@ -79,14 +115,26 @@ class SPDIFStream : public AudioStreamX {
     this->cfg = cfg;
     I2SConfig i2s_cfg;
     i2s_cfg.sample_rate = cfg.sample_rate * 2;  // 2 x sampling_rate
+    i2s_cfg.channels = i2s_cfg.channels;
     i2s_cfg.bits_per_sample = 32;
-    i2s_cfg.use_apll = true;
-    i2s_cfg.channels = 2;
     i2s_cfg.pin_ws = -1;
     i2s_cfg.pin_bck = -1;
     i2s_cfg.pin_data = cfg.pin_data;
+    i2s_cfg.use_apll = true;
 
     i2s.begin(i2s_cfg);
+
+#ifdef ESP32
+    // Manually fix the APLL rate for 44100. 
+    // See: https://github.com/espressif/esp-idf/issues/2634
+    // sdm0 = 28, sdm1 = 8, sdm2 = 5, odir = 0 -> 88199.977
+    if (i2s_cfg.sample_rate == 88200) {
+      LOGW("Fix APLL Rate for %d", i2s_cfg.sample_rate);
+      i2s_set_sample_rates((i2s_port_t)i2s_cfg.port_no, i2s_cfg.sample_rate);
+      rtc_clk_apll_enable(1, 28, 8, 5, 0); 
+    }
+#endif
+
     i2sOn = true;
     frame_num = 0;
     return true;
@@ -146,7 +194,7 @@ class SPDIFStream : public AudioStreamX {
 
   // process a single frame
   int processFrame(int16_t left, int16_t right) {
-    if (!i2sOn) return true;  // Sink the data
+    if (!i2sOn) return 0;  // Sink the data
     int16_t ms[2];
     uint16_t hi, lo, aux;
     uint32_t buf[4];
@@ -196,8 +244,14 @@ class SPDIFStream : public AudioStreamX {
 
     // Assume DMA buffers are multiples of 16 bytes. Either we write all bytes
     // or none.
-    int len = 8 * cfg.channels;
+    size_t len = 8 * cfg.channels;
+#ifdef ESP32
+    size_t bytes_written=0;
+    esp_err_t ret = i2s_write((i2s_port_t)cfg.port_no, (const char*)&buf, len, &bytes_written, 0);
+#else
     size_t bytes_written = i2s.write((const uint8_t *)&buf, len);
+#endif
+
     // If we didn't write all bytes, return false early and do not increment
     // frame_num
     if (bytes_written != len) return 0;
