@@ -28,7 +28,7 @@ class AACDecoderFDK : public AudioDecoder  {
             dec = new aac_fdk::AACDecoderFDK(out_stream, output_buffer_size);
         }
 
-        ~AACDecoderFDK(){
+        virtual ~AACDecoderFDK(){
             delete dec;
         }
 
@@ -58,7 +58,7 @@ class AACDecoderFDK : public AudioDecoder  {
         }
 
         // write AAC data to be converted to PCM data
-          virtual size_t write(const void *in_ptr, size_t in_size) {
+        virtual size_t write(const void *in_ptr, size_t in_size) {
             return dec->write(in_ptr, in_size);
         }
 
