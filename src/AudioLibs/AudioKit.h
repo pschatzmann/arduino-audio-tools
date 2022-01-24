@@ -24,6 +24,7 @@ class AudioKitStreamConfig : public I2SConfig {
   audio_hal_dac_output_t output_device = AUDIOKIT_DEFAULT_OUTPUT;
   int masterclock_pin = 0;
   bool sd_active = false;
+  bool default_actions_active = true;
 
   /// convert to config object needed by HAL
   AudioKitConfig toAudioKitConfig() {
@@ -192,7 +193,9 @@ class AudioKitStream : public AudioStreamX {
     converter.setInfo(output_config);
 
     // Volume control and headphone detection
-    setupActions();
+    if (default_actions_active){
+      setupActions();
+    }
     
     // set initial volume
     setVolume(volume_value);
