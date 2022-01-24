@@ -251,6 +251,11 @@ class AnalogAudio  : public AudioStream {
         case TX_MODE:
           i2s_set_pin(port_no, nullptr); 
           break;
+
+        default:
+          LOGE( "Unsupported MODE: %d", cfg.mode);
+          break;
+
       }
       active = true;
       LOGI(ADC_TAG, "%s - %s", __func__,"end");
