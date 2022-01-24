@@ -40,29 +40,32 @@ class AudioActions {
       LOGE("Too many actions: please increase ACTIONS_MAX")
       return;
     }
-
-    int pos = findPin(pin);
-    if (pos != -1) {
-      actions[pos].actionOn = actionOn;
-      actions[pos].actionOff = actionOff;
-      actions[pos].activeLogic = activeLogicPar;
-      actions[pos].ref = ref;
-    } else {
-      // setup pin mode
-      if (activeLogicPar == ActiveLow) {
-        pinMode(pin, INPUT_PULLUP);
-        LOGI("pin %d -> INPUT_PULLUP", pin);
+    if (pin>0) {
+      int pos = findPin(pin);
+      if (pos != -1) {
+        actions[pos].actionOn = actionOn;
+        actions[pos].actionOff = actionOff;
+        actions[pos].activeLogic = activeLogicPar;
+        actions[pos].ref = ref;
       } else {
-        pinMode(pin, INPUT);
-        LOGI("pin %d -> INPUT", pin);
-      }
+        // setup pin mode
+        if (activeLogicPar == ActiveLow) {
+          pinMode(pin, INPUT_PULLUP);
+          LOGI("pin %d -> INPUT_PULLUP", pin);
+        } else {
+          pinMode(pin, INPUT);
+          LOGI("pin %d -> INPUT", pin);
+        }
 
-      actions[maxIdx].pin = pin;
-      actions[maxIdx].actionOn = actionOn;
-      actions[maxIdx].actionOff = actionOff;
-      actions[maxIdx].activeLogic = activeLogicPar;
-      actions[maxIdx].ref = ref;
-      maxIdx++;
+        actions[maxIdx].pin = pin;
+        actions[maxIdx].actionOn = actionOn;
+        actions[maxIdx].actionOff = actionOff;
+        actions[maxIdx].activeLogic = activeLogicPar;
+        actions[maxIdx].ref = ref;
+        maxIdx++;
+      }
+    } else {
+        LOGW("pin %d -> Ignored", pin);
     }
   }
 
