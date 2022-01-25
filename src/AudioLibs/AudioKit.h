@@ -193,7 +193,7 @@ class AudioKitStream : public AudioStreamX {
     converter.setInfo(output_config);
 
     // Volume control and headphone detection
-    if (default_actions_active){
+    if (cfg.default_actions_active){
       setupActions();
     }
     
