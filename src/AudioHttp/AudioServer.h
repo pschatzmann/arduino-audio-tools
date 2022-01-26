@@ -268,7 +268,6 @@ class AudioEncoderServer  : public AudioServer {
          */
         void begin(Stream &in, int sample_rate, int channels, int bits_per_sample=16, BaseConverter<int16_t> *converter=nullptr) {
             LOGD(LOG_METHOD);
-            connectWiFi();
             this->in = &in;
             audio_info.sample_rate = sample_rate;
             audio_info.channels = channels;
@@ -287,7 +286,6 @@ class AudioEncoderServer  : public AudioServer {
          */
         void begin(Stream &in, AudioBaseInfo info, BaseConverter<int16_t> *converter=nullptr) {
             LOGD(LOG_METHOD);
-            connectWiFi();
             this->in = &in;
             this->audio_info = info;
             encoder->setAudioInfo(audio_info);
@@ -305,7 +303,6 @@ class AudioEncoderServer  : public AudioServer {
          */
         void begin(AudioServerDataCallback cb, int sample_rate, int channels, int bits_per_sample=16) {
             LOGD(LOG_METHOD);
-            connectWiFi();
             audio_info.sample_rate = sample_rate;
             audio_info.channels = channels;
             audio_info.bits_per_sample = bits_per_sample;
