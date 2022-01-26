@@ -221,7 +221,21 @@ class AudioKitStream : public AudioStreamX {
   virtual size_t readBytes(uint8_t *data, size_t length) override {
     if (cfg.channels == 2) {
       return kit.read(data, length);
-    }
+    } else if (cfg.channels==1) {
+      // convert 2 channels of int16_t to 1
+      int16_t temp[length];
+      int len_res = kit.read(temp, length*2);
+      int res_count = len_res / 2;
+      int16_t *out = (int16_t*) data;
+      for (int j=0; j<res_count; j+=2){
+          int32_t total = temp[j];
+          total+=temp[j+1];
+          total = total/2;
+          *out = total;
+          out++;
+      }
+      return res_count;
+    }       
     LOGE("Unsuported number of channels : %d", cfg.channels);
     return 0;
   }

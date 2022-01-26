@@ -195,8 +195,8 @@ public:
                     - -1: Use ELD SBR auto configurator (default).
                     - 0: Disable Spectral Band Replication.
                     - 1: Enable Spectral Band Replication. */    
-    virtual void setSpecialBandReplication(int eld_sbr){
-        enc->setSpecialBandReplication(eld_sbr);
+    virtual void setSpectralBandReplication(int eld_sbr){
+        enc->setSpectralBandReplication(eld_sbr);
     }
 
      /*!< Bitrate mode. Configuration can be different
