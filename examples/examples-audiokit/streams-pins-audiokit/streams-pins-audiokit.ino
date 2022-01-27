@@ -30,6 +30,7 @@ void setup() {
   cfg.bits_per_sample = 16;
   cfg.channels = 1;
   cfg.sample_rate = 8000;
+  cfg.sd_active = false;
   kit.begin(cfg);
 
   // Assign pins to methods
