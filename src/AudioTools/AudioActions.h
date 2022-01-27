@@ -95,7 +95,7 @@ class AudioActions {
       if (a->actionOn != nullptr && a->actionOff != nullptr) {
         // we have on and off action defined
         if (value != a->lastState) {
-          LOGI("processActions: case with on and off");
+          // LOGI("processActions: case with on and off");
           // execute action -> reports active instead of pin state
           if ((value && a->activeLogic == ActiveHigh) ||
               (!value && a->activeLogic == ActiveLow)) {
@@ -109,7 +109,7 @@ class AudioActions {
         bool active = (a->activeLogic == ActiveLow) ? !value : value;
         // reports pin state
         if (value != a->lastState) {
-          LOGI("processActions: ActiveChange");
+          //LOGI("processActions: ActiveChange");
           // execute action
           a->actionOn(active, a->pin, a->ref);
           a->lastState = value;
@@ -118,8 +118,7 @@ class AudioActions {
         bool active = (a->activeLogic == ActiveLow) ? !value : value;
         if (active &&
             (active != a->lastState || millis() > a->debounceTimeout)) {
-          LOGI("processActions: %d Active %d - %d", a->pin, value,
-               digitalRead(a->pin));
+          //LOGI("processActions: %d Active %d - %d", a->pin, value,  digitalRead(a->pin));
           // execute action
           a->actionOn(active, a->pin, a->ref);
           a->lastState = active;
