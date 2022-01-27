@@ -6,6 +6,10 @@
 #define ACTIONS_MAX 20
 #endif
 
+#ifndef TOUCH_LIMIT
+#define TOUCH_LIMIT 20
+#endif
+
 #ifndef DEBOUNCE_DELAY
 #define DEBOUNCE_DELAY 500
 #endif
@@ -131,11 +135,12 @@ class AudioActions {
 
   /// Defines the debounce delay
   void setDeboundDelay(int value) { debounceDelayValue = value; }
+  void setTouchLimit(int value) { setTouchLimit = value; }
 
  protected:
   int maxIdx = 0;
   int debounceDelayValue = DEBOUNCE_DELAY;
-  int touchLimit = 20;
+  int touchLimit = TOUCH_LIMIT;
 
   struct Action {
     int16_t pin;
