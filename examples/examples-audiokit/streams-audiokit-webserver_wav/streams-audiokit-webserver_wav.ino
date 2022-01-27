@@ -1,17 +1,16 @@
 /**
- * @file streams-i2s-webserver_aac.ino
+ * @file streams-audiokit-webserver_wav.ino
  *
- *  This sketch reads sound data from the AudioKit. The result is provided as AAC stream which can be listened to in a Web Browser
+ *  This sketch reads sound data from the AudioKit. The result is provided as WAV stream which can be listened to in a Web Browser
  *
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-#define USE_FDK
 
 #include "AudioTools.h"
 #include "AudioLibs/AudioKit.h"
 
-AudioEncoderServer server(new AACEncoderFDK(),"ssid","password");  
+AudioEncoderServer server(new WAVEncoder(),"ssid","password");  
 AudioKitStream kit;    
 
 // Arduino setup
