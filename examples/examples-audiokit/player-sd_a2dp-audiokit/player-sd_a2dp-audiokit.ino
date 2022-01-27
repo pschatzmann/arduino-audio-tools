@@ -8,8 +8,8 @@
 const char *startFilePath="/";
 const char* ext="mp3";
 int speedMz = 10;
-AudioSourceSdFat source(startFilePath, ext, PIN_AUDIO_KIT_SD_CARD_CS, speedMz);
 AudioKitStream kit;
+AudioSourceSdFat source(startFilePath, ext, PIN_AUDIO_KIT_SD_CARD_CS, speedMz);
 MP3DecoderHelix decoder;
 AudioPlayer player(source, kit, decoder);
 BluetoothA2DPSink a2dp_sink;
