@@ -86,6 +86,13 @@ public:
         enc->begin();
     }
 
+    /**
+     * @brief Opens the encoder  
+     * 
+     * @param input_channels 
+     * @param input_sample_rate 
+     * @param input_bits_per_sample 
+     */
     void begin(int input_channels, int input_sample_rate, int input_bits_per_sample) {
         LOGD(LOG_METHOD);
         enc->begin(input_channels, input_sample_rate, input_bits_per_sample);
