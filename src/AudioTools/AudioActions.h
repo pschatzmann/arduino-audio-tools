@@ -135,7 +135,7 @@ class AudioActions {
   /// Defines the debounce delay
   void setDeboundDelay(int value) { debounceDelayValue = value; }
   /// Defines the touch limit (Default 20)
-  void setTouchLimit(int value) { setTouchLimit = value; }
+  void setTouchLimit(int value) { touchLimit = value; }
 
  protected:
   int maxIdx = 0;
