@@ -8,7 +8,7 @@
 
 // set this in AudioConfig.h or here after installing https://github.com/pschatzmann/arduino-libhelix.git
 #define USE_SDFAT
-#define USE_HELIX
+#define USE_HELIX  // or USE_MAD
 #include "AudioTools.h"
 #include "AudioLibs/AudioKit.h"
 
@@ -19,7 +19,7 @@ const char* ext="mp3";
 int speedMz = 10;
 AudioSourceSdFat source(startFilePath, ext, PIN_AUDIO_KIT_SD_CARD_CS, speedMz);
 AudioKitStream kit;
-MP3DecoderHelix decoder;
+MP3DecoderHelix decoder;  // or MP3DecoderMAD
 AudioPlayer player(source, kit, decoder);
 
 void next(bool, int, void*) {
