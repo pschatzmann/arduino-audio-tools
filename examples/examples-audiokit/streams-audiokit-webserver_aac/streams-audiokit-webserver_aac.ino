@@ -11,28 +11,43 @@
 #include "AudioTools.h"
 #include "AudioLibs/AudioKit.h"
 
-AudioEncoderServer server(new AACEncoderFDK(),"ssid","password");  
 AudioKitStream kit;    
+AACEncoderFDK *fdk=nullptr;
+AudioEncoderServer *server=nullptr;  
 
 // Arduino setup
 void setup(){
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  // Defining Loglevels for the different libraries
+  //AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  //LOGLEVEL_FDK = FDKInfo; 
+  //LOGLEVEL_AUDIOKIT = AudioKitInfo;
+  
+  // setup and configure fdk
+  fdk = new AACEncoderFDK();  
+  fdk->setAudioObjectType(2);  // AAC low complexity
+  fdk->setOutputBufferSize(1024); // decrease output buffer size
+  fdk->setVariableBitrateMode(2); // low variable bitrate
+  server = new AudioEncoderServer(fdk,"Phil Schatzmann","sabrina01");  
 
   // start i2s input with default configuration
   Serial.println("starting AudioKit...");
   auto config = kit.defaultConfig(RX_MODE);
-  config.input_device = AUDIO_HAL_ADC_INPUT_LINE1;
-  config.sample_rate = 44100;
+  config.input_device = AUDIO_HAL_ADC_INPUT_LINE2;
+  config.sample_rate = 44100; 
+  config.default_actions_active = false; 
+  config.channels = 2; 
   kit.begin(config);
   Serial.println("AudioKit started");
 
   // start data sink
-  server.begin(kit, config);
+  server->begin(kit, config);
+  Serial.println("Server started");
+
 }
 
 // Arduino loop  
 void loop() {
   // Handle new connections
-  server.doLoop();  
+  server->doLoop();  
 }
