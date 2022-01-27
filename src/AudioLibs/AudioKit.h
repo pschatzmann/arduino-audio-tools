@@ -538,12 +538,12 @@ class AudioKitStream : public AudioStreamX {
     LOGI(LOG_METHOD);
     actions.add(kit.pinHeadphoneDetect(), actionHeadphoneDetection);
     // This clashes with the SD CS pin for AIThinker
-    if (!cfg.sd_active || (AUDIOKIT_BOARD!=5 && AUDIOKIT_BOARD!=6)){
+    if (!cfg.sd_active && (AUDIOKIT_BOARD!=5 && AUDIOKIT_BOARD!=6)){
       addAction(kit.pinInputMode(), actionStartStop);
     }
 
     // conflicts with SD Lyrat SD CS Pin
-    if (!cfg.sd_active || AUDIOKIT_BOARD==5 || AUDIOKIT_BOARD==6){
+    if (!cfg.sd_active && (AUDIOKIT_BOARD==5 || AUDIOKIT_BOARD==6)){
       addAction(kit.pinVolumeDown(), actionVolumeDown); 
       addAction(kit.pinVolumeUp(), actionVolumeUp);
     }
