@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AudioConfig.h"
-#include "AudioCommon/Int24.h"
+#include "AudioBasic/Int24.h"
 
 namespace audio_tools {
 

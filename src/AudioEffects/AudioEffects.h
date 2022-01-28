@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AudioCommon/Vector.h"
+#include "AudioBasic/Vector.h"
 #include "AudioEffects/SoundGenerator.h"
 #include "AudioEffects/AudioEffect.h"
 #include "AudioEffects/AudioEffectsSuite.h"

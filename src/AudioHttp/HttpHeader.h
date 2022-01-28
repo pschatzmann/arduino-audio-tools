@@ -1,7 +1,7 @@
 #pragma once
 
-#include "AudioCommon/Vector.h"
-#include "AudioCommon/StrExt.h"
+#include "AudioBasic/Vector.h"
+#include "AudioBasic/StrExt.h"
 #include "AudioHttp/HttpLineReader.h" 
 #include "AudioHttp/Url.h"
 #include "AudioHttp/HttpTypes.h" 
