@@ -57,7 +57,11 @@ void a2dp_stream_sink_sound_data(const uint8_t* data, uint32_t len);
 enum A2DPStartLogic {StartWhenBufferFull, StartOnConnect};
 enum A2DPNoData {A2DPSilence, A2DPWhoosh};
 
-// Config for A2DP Stream
+/**
+ * @brief Configuration for A2DPStream
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
 class A2DPConfig {
     public:
         A2DPStartLogic startLogic = StartWhenBufferFull;
@@ -73,6 +77,8 @@ class A2DPConfig {
  * The data is in int16_t with 2 channels at 44100 hertz. 
  *
  * Because we support only one instance the class is implemented as singleton!
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 class A2DPStream : public AudioStream, public AudioBaseInfoSource {
 

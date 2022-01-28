@@ -27,15 +27,19 @@ namespace audio_tools {
 typedef float effectsuite_t;
 
 /**
- * Table of interpolation values as a 2D array indexed by
+ * @brief Table of interpolation values as a 2D array indexed by
  * interpolationTable[pointIndex][alphaIndex]
  */
 static effectsuite_t **interpolationTable = nullptr;
 
+/**
+ * @brief Base Class for Effects
+ * 
+ */
 
 class EffectSuiteBase  : public AudioEffect {
-    /**
-   * Main process block for applying audio effect
+  /**
+   * @brief Main process block for applying audio effect
    * @param inputSample The input audio sample for the effect to be applied to
    * @returns an audio sample as a effectsuite_t with effect applied
    */
@@ -54,7 +58,7 @@ class EffectSuiteBase  : public AudioEffect {
 
 
 /**
- * Class provides a wave table that can be populated with a number of
+ * @brief Class provides a wave table that can be populated with a number of
  * preallocated waveforms. These can be used to generate audio in themselves or
  * to modulate The parameters of another effect. Class initialised with sample
  * rate.
@@ -79,7 +83,7 @@ public:
   ~ModulationBaseClass() = default;
 
   /**
-   * setup the class with a given sample rate. Basically reperforming the
+   * @brief setup the class with a given sample rate. Basically reperforming the
    * constructor
    * @param extSampRate External sample rate
    */
@@ -343,7 +347,7 @@ protected:
 };
 
 /**
- * A Base class for delay based digital effects. Provides the basic methods
+ * @brief A Base class for delay based digital effects. Provides the basic methods
  * that are shared amongst Flanger, Delay, Chorus and Phaser
  * @version 0.1
  * @see DelayEffectBase
@@ -578,7 +582,7 @@ protected: // member variables
 };
 
 /**
- * A Base class for filter based effects including methods for simple
+ * @brief A Base class for filter based effects including methods for simple
  * high, low and band pass filtering
  * @see FilterEffectBase
  * @author Matthew Hamilton
@@ -977,7 +981,7 @@ public:
 };
 
 /**
- * Simple Chorus effect with a single delay voice and mono output Chorus is
+ * @brief Simple Chorus effect with a single delay voice and mono output Chorus is
  * effective between 15 and 20 miliseconds delay of original audio. Requires the
  * sample rate when initialising.
  * @author Matthew Hamilton
@@ -1113,7 +1117,7 @@ protected:
 };
 
 /**
- * Delay effect that filters the repeat delay 
+ * @brief Delay effect that filters the repeat delay 
  * @author Matthew Hamilton
  * @copyright MIT License
  */
@@ -1185,7 +1189,7 @@ protected:
 };
 
 /**
- * Simple Delay effect consiting of a single tap delay with Effect Gain and
+ * @brief Simple Delay effect consiting of a single tap delay with Effect Gain and
  * feed back controls
  * Constructor requires internal delay in samples
  * @see process
@@ -1357,7 +1361,7 @@ protected: // member vairables
 };
 
 /**
- * Simple Flanger Effect Consistig of a single voice flanger
+ * @brief Simple Flanger Effect Consistig of a single voice flanger
  * The flanger has an effective range between 0 and 15 miliseconds
  * in this case dleay buffer should be set to sampleRate*3/200
  * Constructor requires internal delay in samples

@@ -17,7 +17,7 @@
 namespace audio_tools {
 
 /**
- * Use any effect from the STK framework: e.g. Chorus, Echo, FreeVerb, JCRev,
+ * @brief Use any effect from the STK framework: e.g. Chorus, Echo, FreeVerb, JCRev,
  * PitShift... https://github.com/pschatzmann/Arduino-STK
  *
  * @author Phil Schatzmann
@@ -38,7 +38,7 @@ protected:
 };
 
 /**
- * Chorus Effect
+ * @brief Chorus Effect
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -54,7 +54,7 @@ public:
 };
 
 /**
- * Echo Effect
+ * @brief Echo Effect
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -71,7 +71,7 @@ public:
 };
 
 /**
- * Jezar at Dreampoint's FreeVerb, implemented in STK.
+ * @brief Jezar at Dreampoint's FreeVerb, implemented in STK.
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -86,7 +86,7 @@ public:
 };
 
 /**
- * John Chowning's reverberator class.
+ * @brief John Chowning's reverberator class.
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -102,7 +102,7 @@ public:
 };
 
 /**
- * CCRMA's NRev reverberator class.
+ * @brief CCRMA's NRev reverberator class.
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -117,7 +117,7 @@ public:
 };
 
 /**
- * Perry's simple reverberator class
+ * @brief Perry's simple reverberator class
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -132,7 +132,7 @@ public:
 };
 
 /**
- * Pitch shifter effect class based on the Lent algorithm
+ * @brief Pitch shifter effect class based on the Lent algorithm
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -149,7 +149,7 @@ public:
 };
 
 /**
- * Pitch shifter effect class based on the Lent algorithm
+ * @brief Pitch shifter effect class based on the Lent algorithm
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
