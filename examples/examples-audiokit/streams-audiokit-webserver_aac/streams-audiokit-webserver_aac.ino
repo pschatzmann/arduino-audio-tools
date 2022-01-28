@@ -37,6 +37,7 @@ void setup(){
   config.sample_rate = 44100; 
   config.default_actions_active = false; 
   config.channels = 2; 
+  config.sd_active = false;
   kit.begin(config);
   Serial.println("AudioKit started");
 

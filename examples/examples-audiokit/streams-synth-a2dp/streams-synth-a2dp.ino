@@ -38,6 +38,7 @@ void setup() {
   auto cfg = in.defaultConfig();
   cfg.channels = 2;
   cfg.sample_rate = 44100;
+  cfg.sd_active = false;
   in.begin(cfg);
 
   a2dp_source.start("LEXON MINO L", get_sound_data);  

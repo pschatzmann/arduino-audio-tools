@@ -25,6 +25,7 @@ void setup() {
 
   // setup output
   auto cfg = kit.defaultConfig(TX_MODE);
+  cfg.sd_active = false;
   kit.begin(cfg);
 
   // register callback

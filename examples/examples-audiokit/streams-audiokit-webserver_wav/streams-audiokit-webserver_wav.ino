@@ -23,6 +23,7 @@ void setup(){
   auto config = kit.defaultConfig(RX_MODE);
   config.input_device = AUDIO_HAL_ADC_INPUT_LINE1;
   config.sample_rate = 44100;
+  config.sd_active = false;
   kit.begin(config);
   Serial.println("AudioKit started");
 
