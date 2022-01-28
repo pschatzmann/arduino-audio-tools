@@ -45,6 +45,8 @@ As “Audio Sinks” we will have e.g:
 - Callback integration e.g. with ESP8266Audio [AudioOutputWithCallback](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_audio_output_with_callback.html) 
 - Any other Arduino Classes implementing Streams: SD, Ethernet etc
 
+### Examples
+
 Here is an simple example which streams a file from the Flash Memory and writes it to I2S: 
 
 ```
@@ -63,7 +65,7 @@ StreamCopy copier(i2s, music); // copies sound into i2s
 void setup(){
     Serial.begin(115200);
 
-    I2SConfig config = i2s.defaultConfig(TX_MODE);
+    auto config = i2s.defaultConfig(TX_MODE);
     config.sample_rate = sample_rate;
     config.channels = channels;
     config.bits_per_sample = 16;
@@ -78,9 +80,8 @@ void loop(){
 }
 
 ```
-
-
-### Examples
+Each stream has it's own configuration object that should be passed to the begin method. The defaultConfig() method is providing a default proposal which will usually "just work". Please consult 
+the class documentation for the available configuration parameters.
 
 Further examples can be found in the [Wiki](https://github.com/pschatzmann/arduino-audio-tools/wiki/Examples). The library also provides a versatile [AudioPlayer](https://github.com/pschatzmann/arduino-audio-tools/wiki/The-Audio-Player-Class).
 
