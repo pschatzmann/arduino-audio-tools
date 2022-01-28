@@ -97,6 +97,10 @@ Public Member Functions</h2></td></tr>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_callback.html#a2f585a271d38e9d38e1016692da4eb51">begin</a> () override</td></tr>
 <tr class="memdesc:a2f585a271d38e9d38e1016692da4eb51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset actual stream and move to root. <br /></td></tr>
 <tr class="separator:a2f585a271d38e9d38e1016692da4eb51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bd7017c94574cb1b1a1091ef47e60f2"><td class="memItemLeft" align="right" valign="top"><a id="a4bd7017c94574cb1b1a1091ef47e60f2"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_callback.html#a4bd7017c94574cb1b1a1091ef47e60f2">isAutoNext</a> () override</td></tr>
+<tr class="memdesc:a4bd7017c94574cb1b1a1091ef47e60f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns default setting go to the next. <br /></td></tr>
+<tr class="separator:a4bd7017c94574cb1b1a1091ef47e60f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b9248c36df510cf2a1afad0e2cd5cb8"><td class="memItemLeft" align="right" valign="top"><a id="a3b9248c36df510cf2a1afad0e2cd5cb8"></a>
 virtual <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_callback.html#a3b9248c36df510cf2a1afad0e2cd5cb8">nextStream</a> (int offset) override</td></tr>
 <tr class="memdesc:a3b9248c36df510cf2a1afad0e2cd5cb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns next (with positive index) or previous stream (with negative index) <br /></td></tr>
@@ -105,6 +109,9 @@ virtual <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class=
 virtual <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_callback.html#a7bf660bd47284120b3967d13c26bb190">selectStream</a> (int index) override</td></tr>
 <tr class="memdesc:a7bf660bd47284120b3967d13c26bb190"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns selected audio stream. <br /></td></tr>
 <tr class="separator:a7bf660bd47284120b3967d13c26bb190"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad18e5aeed95528ec748be0e7bcaa0d5d"><td class="memItemLeft" align="right" valign="top"><a id="ad18e5aeed95528ec748be0e7bcaa0d5d"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setAutoNext</b> (bool a)</td></tr>
+<tr class="separator:ad18e5aeed95528ec748be0e7bcaa0d5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e3d7966c1d1081c4d1e5474fe1eb088"><td class="memItemLeft" align="right" valign="top"><a id="a8e3d7966c1d1081c4d1e5474fe1eb088"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setCallbackNextStream</b> (<a class="el" href="class_stream.html">Stream</a> *(*callback)())</td></tr>
 <tr class="separator:a8e3d7966c1d1081c4d1e5474fe1eb088"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -115,18 +122,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setCallbackOnStart</b
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setCallbackSelectStream</b> (<a class="el" href="class_stream.html">Stream</a> *(*callback)(int idx))</td></tr>
 <tr class="separator:a1c7e27ecf6752bac590f9b84b8b471f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classaudio__tools_1_1_audio_source"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classaudio__tools_1_1_audio_source')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classaudio__tools_1_1_audio_source.html">audio_tools::AudioSource</a></td></tr>
-<tr class="memitem:a432e5e9be171820579c9acbe4429c6df inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="memItemLeft" align="right" valign="top"><a id="a432e5e9be171820579c9acbe4429c6df"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a432e5e9be171820579c9acbe4429c6df">isAutoNext</a> ()</td></tr>
-<tr class="memdesc:a432e5e9be171820579c9acbe4429c6df inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns default setting go to the next. <br /></td></tr>
-<tr class="separator:a432e5e9be171820579c9acbe4429c6df inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59dd587de12ed8aabb4f812dd4dbec37 inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="memItemLeft" align="right" valign="top"><a id="a59dd587de12ed8aabb4f812dd4dbec37"></a>
 virtual <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a59dd587de12ed8aabb4f812dd4dbec37">previousStream</a> (int offset)</td></tr>
 <tr class="memdesc:a59dd587de12ed8aabb4f812dd4dbec37 inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns previous audio stream. <br /></td></tr>
 <tr class="separator:a59dd587de12ed8aabb4f812dd4dbec37 inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf692a944005f8a266af62285c98d1d1 inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="memItemLeft" align="right" valign="top"><a id="acf692a944005f8a266af62285c98d1d1"></a>
-virtual <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#acf692a944005f8a266af62285c98d1d1">selectStream</a> (char *path)</td></tr>
-<tr class="memdesc:acf692a944005f8a266af62285c98d1d1 inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns audio stream by path. <br /></td></tr>
-<tr class="separator:acf692a944005f8a266af62285c98d1d1 inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62fc7a256b9727a5b98350a5b0ddb7e2 inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="memItemLeft" align="right" valign="top"><a id="a62fc7a256b9727a5b98350a5b0ddb7e2"></a>
+virtual <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a62fc7a256b9727a5b98350a5b0ddb7e2">selectStream</a> (const char *path)</td></tr>
+<tr class="memdesc:a62fc7a256b9727a5b98350a5b0ddb7e2 inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns audio stream by path. <br /></td></tr>
+<tr class="separator:a62fc7a256b9727a5b98350a5b0ddb7e2 inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abdb3ed43ead62b79b1fd150338defd93 inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="memItemLeft" align="right" valign="top"><a id="abdb3ed43ead62b79b1fd150338defd93"></a>
 virtual <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#abdb3ed43ead62b79b1fd150338defd93">setIndex</a> (int index)</td></tr>
 <tr class="memdesc:abdb3ed43ead62b79b1fd150338defd93 inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="mdescLeft">&#160;</td><td class="mdescRight">same as selectStream - I just prefer this name <br /></td></tr>
@@ -134,10 +137,10 @@ virtual <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class=
 <tr class="memitem:ac61d481cb9bcdcf3c88f8a1daa303797 inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="memItemLeft" align="right" valign="top"><a id="ac61d481cb9bcdcf3c88f8a1daa303797"></a>
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>setMetadataCallback</b> (void(*fn)(<a class="el" href="namespaceaudio__tools.html#a66747a0ba3d8821e3228fd1680106e68">MetaDataType</a> info, const char *str, int len), ID3TypeSelection sel=SELECT_ICY)</td></tr>
 <tr class="separator:ac61d481cb9bcdcf3c88f8a1daa303797 inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a527d24d2618d719b87eff1f40251f2bb inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="memItemLeft" align="right" valign="top"><a id="a527d24d2618d719b87eff1f40251f2bb"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a527d24d2618d719b87eff1f40251f2bb">setTimeout</a> (int millisec)</td></tr>
-<tr class="memdesc:a527d24d2618d719b87eff1f40251f2bb inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the timeout of <a class="el" href="class_stream.html">Stream</a> in milliseconds. <br /></td></tr>
-<tr class="separator:a527d24d2618d719b87eff1f40251f2bb inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9361c3876b900c7663449eece18a3945 inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="memItemLeft" align="right" valign="top"><a id="a9361c3876b900c7663449eece18a3945"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a9361c3876b900c7663449eece18a3945">setTimeout</a> (int millisec)</td></tr>
+<tr class="memdesc:a9361c3876b900c7663449eece18a3945 inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the timeout of <a class="el" href="class_stream.html">Stream</a> in milliseconds. <br /></td></tr>
+<tr class="separator:a9361c3876b900c7663449eece18a3945 inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a94efcff45d9249047df9e8041e4189f3 inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="memItemLeft" align="right" valign="top"><a id="a94efcff45d9249047df9e8041e4189f3"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a94efcff45d9249047df9e8041e4189f3">setTimeoutAutoNext</a> (int millisec)</td></tr>
 <tr class="memdesc:a94efcff45d9249047df9e8041e4189f3 inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the timeout which is triggering to move to the next stream. - the default value is 500 ms. <br /></td></tr>
@@ -149,6 +152,9 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:a8034c8d408c6410e63401a3ded152780"><td class="memItemLeft" align="right" valign="top"><a id="a8034c8d408c6410e63401a3ded152780"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>auto_next</b> = true</td></tr>
+<tr class="separator:a8034c8d408c6410e63401a3ded152780"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeae03ecb90f058e3c797d6514a7dc26c"><td class="memItemLeft" align="right" valign="top"><a id="aeae03ecb90f058e3c797d6514a7dc26c"></a>
 <a class="el" href="class_stream.html">Stream</a> *(*&#160;</td><td class="memItemRight" valign="bottom"><b>indexStreamCallback</b> )(int index) = nullptr</td></tr>
 <tr class="separator:aeae03ecb90f058e3c797d6514a7dc26c"><td class="memSeparator" colspan="2">&#160;</td></tr>

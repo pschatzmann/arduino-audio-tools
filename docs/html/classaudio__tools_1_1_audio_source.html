@@ -108,10 +108,10 @@ virtual <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class=
 virtual <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a59dd587de12ed8aabb4f812dd4dbec37">previousStream</a> (int offset)</td></tr>
 <tr class="memdesc:a59dd587de12ed8aabb4f812dd4dbec37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns previous audio stream. <br /></td></tr>
 <tr class="separator:a59dd587de12ed8aabb4f812dd4dbec37"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf692a944005f8a266af62285c98d1d1"><td class="memItemLeft" align="right" valign="top"><a id="acf692a944005f8a266af62285c98d1d1"></a>
-virtual <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#acf692a944005f8a266af62285c98d1d1">selectStream</a> (char *path)</td></tr>
-<tr class="memdesc:acf692a944005f8a266af62285c98d1d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns audio stream by path. <br /></td></tr>
-<tr class="separator:acf692a944005f8a266af62285c98d1d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62fc7a256b9727a5b98350a5b0ddb7e2"><td class="memItemLeft" align="right" valign="top"><a id="a62fc7a256b9727a5b98350a5b0ddb7e2"></a>
+virtual <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a62fc7a256b9727a5b98350a5b0ddb7e2">selectStream</a> (const char *path)</td></tr>
+<tr class="memdesc:a62fc7a256b9727a5b98350a5b0ddb7e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns audio stream by path. <br /></td></tr>
+<tr class="separator:a62fc7a256b9727a5b98350a5b0ddb7e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a34afea2bb051055c609fa0b42906ddcf"><td class="memItemLeft" align="right" valign="top"><a id="a34afea2bb051055c609fa0b42906ddcf"></a>
 virtual <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a34afea2bb051055c609fa0b42906ddcf">selectStream</a> (int index)</td></tr>
 <tr class="memdesc:a34afea2bb051055c609fa0b42906ddcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns audio stream at the indicated index (the index is zero based, so the first value is 0!) <br /></td></tr>
@@ -123,10 +123,10 @@ virtual <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class=
 <tr class="memitem:ac61d481cb9bcdcf3c88f8a1daa303797"><td class="memItemLeft" align="right" valign="top"><a id="ac61d481cb9bcdcf3c88f8a1daa303797"></a>
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>setMetadataCallback</b> (void(*fn)(<a class="el" href="namespaceaudio__tools.html#a66747a0ba3d8821e3228fd1680106e68">MetaDataType</a> info, const char *str, int len), ID3TypeSelection sel=SELECT_ICY)</td></tr>
 <tr class="separator:ac61d481cb9bcdcf3c88f8a1daa303797"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a527d24d2618d719b87eff1f40251f2bb"><td class="memItemLeft" align="right" valign="top"><a id="a527d24d2618d719b87eff1f40251f2bb"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a527d24d2618d719b87eff1f40251f2bb">setTimeout</a> (int millisec)</td></tr>
-<tr class="memdesc:a527d24d2618d719b87eff1f40251f2bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the timeout of <a class="el" href="class_stream.html">Stream</a> in milliseconds. <br /></td></tr>
-<tr class="separator:a527d24d2618d719b87eff1f40251f2bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9361c3876b900c7663449eece18a3945"><td class="memItemLeft" align="right" valign="top"><a id="a9361c3876b900c7663449eece18a3945"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a9361c3876b900c7663449eece18a3945">setTimeout</a> (int millisec)</td></tr>
+<tr class="memdesc:a9361c3876b900c7663449eece18a3945"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the timeout of <a class="el" href="class_stream.html">Stream</a> in milliseconds. <br /></td></tr>
+<tr class="separator:a9361c3876b900c7663449eece18a3945"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a94efcff45d9249047df9e8041e4189f3"><td class="memItemLeft" align="right" valign="top"><a id="a94efcff45d9249047df9e8041e4189f3"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a94efcff45d9249047df9e8041e4189f3">setTimeoutAutoNext</a> (int millisec)</td></tr>
 <tr class="memdesc:a94efcff45d9249047df9e8041e4189f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the timeout which is triggering to move to the next stream. - the default value is 500 ms. <br /></td></tr>

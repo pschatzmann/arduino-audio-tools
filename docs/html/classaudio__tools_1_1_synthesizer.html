@@ -101,13 +101,9 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3d4e54dc04bf9ac616b181049eb0218a"><td class="memItemLeft" align="right" valign="top"><a id="a3d4e54dc04bf9ac616b181049eb0218a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Synthesizer</b> (<a class="el" href="classaudio__tools_1_1_abstract_syntheizer_channel.html">AbstractSyntheizerChannel</a> *ch)</td></tr>
-<tr class="separator:a3d4e54dc04bf9ac616b181049eb0218a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa1b0440c1f22acdf7d580b1d480f4f73"><td class="memItemLeft" align="right" valign="top"><a id="aa1b0440c1f22acdf7d580b1d480f4f73"></a>
-<a class="el" href="classaudio__tools_1_1_audio_effects.html">AudioEffects</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_synthesizer.html#aa1b0440c1f22acdf7d580b1d480f4f73">audioEffects</a> ()</td></tr>
-<tr class="memdesc:aa1b0440c1f22acdf7d580b1d480f4f73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides access to the <a class="el" href="classaudio__tools_1_1_audio_effects.html" title="AudioEffects.">AudioEffects</a>. <br /></td></tr>
-<tr class="separator:aa1b0440c1f22acdf7d580b1d480f4f73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbac5dc9b15e401931c5af94ecb1f01f"><td class="memItemLeft" align="right" valign="top"><a id="abbac5dc9b15e401931c5af94ecb1f01f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Synthesizer</b> (<a class="el" href="classaudio__tools_1_1_abstract_synthesizer_channel.html">AbstractSynthesizerChannel</a> *ch)</td></tr>
+<tr class="separator:abbac5dc9b15e401931c5af94ecb1f01f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2fc6f76217cd15e050cb57b451d761ab"><td class="memItemLeft" align="right" valign="top"><a id="a2fc6f76217cd15e050cb57b451d761ab"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> config)</td></tr>
 <tr class="separator:a2fc6f76217cd15e050cb57b451d761ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -117,13 +113,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>keyOff</b> (int note)
 <tr class="memitem:a954d80ea208750908f2c03f821b6eb08"><td class="memItemLeft" align="right" valign="top"><a id="a954d80ea208750908f2c03f821b6eb08"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>keyOn</b> (int note, float tgt=0)</td></tr>
 <tr class="separator:a954d80ea208750908f2c03f821b6eb08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac933390c0ec874f09e6cc61c84ad5ae4"><td class="memItemLeft" align="right" valign="top"><a id="ac933390c0ec874f09e6cc61c84ad5ae4"></a>
-int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_synthesizer.html#ac933390c0ec874f09e6cc61c84ad5ae4">readSample</a> ()</td></tr>
-<tr class="memdesc:ac933390c0ec874f09e6cc61c84ad5ae4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides mixed samples of all channels. <br /></td></tr>
-<tr class="separator:ac933390c0ec874f09e6cc61c84ad5ae4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9507b2542740fdd2a474764d282c0b8f"><td class="memItemLeft" align="right" valign="top"><a id="a9507b2542740fdd2a474764d282c0b8f"></a>
+int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_synthesizer.html#a9507b2542740fdd2a474764d282c0b8f">readSample</a> () override</td></tr>
+<tr class="memdesc:a9507b2542740fdd2a474764d282c0b8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides mixed samples of all channels. <br /></td></tr>
+<tr class="separator:a9507b2542740fdd2a474764d282c0b8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd648238358c7d38ffedd5f750b56992"><td class="memItemLeft" align="right" valign="top"><a id="afd648238358c7d38ffedd5f750b56992"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_synthesizer.html#afd648238358c7d38ffedd5f750b56992">setKeys</a> (<a class="el" href="class_audio_actions.html">AudioActions</a> &amp;actions, <a class="el" href="structaudio__tools_1_1_synthesizer_key.html">SynthesizerKey</a> *p_keys, AudioActions::ActiveLogic activeValue)</td></tr>
-<tr class="memdesc:afd648238358c7d38ffedd5f750b56992"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns pins to notes. <br /></td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_synthesizer.html#afd648238358c7d38ffedd5f750b56992">setKeys</a> (<a class="el" href="classaudio__tools_1_1_audio_actions.html">AudioActions</a> &amp;actions, <a class="el" href="structaudio__tools_1_1_synthesizer_key.html">SynthesizerKey</a> *p_keys, AudioActions::ActiveLogic activeValue)</td></tr>
+<tr class="memdesc:afd648238358c7d38ffedd5f750b56992"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns pins to notes - the last <a class="el" href="structaudio__tools_1_1_synthesizer_key.html" title="Arduino GPIO pin to note assossiation.">SynthesizerKey</a> is marked with an entry containing the note &lt;= 0. <br /></td></tr>
 <tr class="separator:afd648238358c7d38ffedd5f750b56992"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af283aef76dc68c075476e198a4ea655f"><td class="memItemLeft" align="right" valign="top"><a id="af283aef76dc68c075476e198a4ea655f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_synthesizer.html#af283aef76dc68c075476e198a4ea655f">setMidiName</a> (const char *name)</td></tr>
@@ -144,7 +140,8 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="memdesc:a355ddf14fffecaa8538a85310900ca4a inherit pub_methods_classaudio__tools_1_1_sound_generator"><td class="mdescLeft">&#160;</td><td class="mdescRight">ends the processing <br /></td></tr>
 <tr class="separator:a355ddf14fffecaa8538a85310900ca4a inherit pub_methods_classaudio__tools_1_1_sound_generator"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afed4561d3aa22ca8174fa1db47c4083f inherit pub_methods_classaudio__tools_1_1_sound_generator"><td class="memItemLeft" align="right" valign="top"><a id="afed4561d3aa22ca8174fa1db47c4083f"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive</b> ()</td></tr>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#afed4561d3aa22ca8174fa1db47c4083f">isActive</a> ()</td></tr>
+<tr class="memdesc:afed4561d3aa22ca8174fa1db47c4083f inherit pub_methods_classaudio__tools_1_1_sound_generator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the begin method has been called - after <a class="el" href="classaudio__tools_1_1_sound_generator.html#a355ddf14fffecaa8538a85310900ca4a" title="ends the processing">end()</a> isActive returns false. <br /></td></tr>
 <tr class="separator:afed4561d3aa22ca8174fa1db47c4083f inherit pub_methods_classaudio__tools_1_1_sound_generator"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8534989c802aeb687aa13b9a3d6ee781 inherit pub_methods_classaudio__tools_1_1_sound_generator"><td class="memItemLeft" align="right" valign="top"><a id="a8534989c802aeb687aa13b9a3d6ee781"></a>
 virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#a8534989c802aeb687aa13b9a3d6ee781">readBytes</a> (uint8_t *buffer, size_t lengthBytes)</td></tr>
@@ -161,24 +158,27 @@ virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 <tr class="memitem:a7286c6f1c3ee11b6de98bf2b9658d14c inherit pub_methods_classaudio__tools_1_1_sound_generator"><td class="memItemLeft" align="right" valign="top"><a id="a7286c6f1c3ee11b6de98bf2b9658d14c"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setAudioInfo</b> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> info)</td></tr>
 <tr class="separator:a7286c6f1c3ee11b6de98bf2b9658d14c inherit pub_methods_classaudio__tools_1_1_sound_generator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5636078b44c6cd9108754594e38d7e26 inherit pub_methods_classaudio__tools_1_1_sound_generator"><td class="memItemLeft" align="right" valign="top"><a id="a5636078b44c6cd9108754594e38d7e26"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setFrequency</b> (uint16_t frequency)</td></tr>
+<tr class="separator:a5636078b44c6cd9108754594e38d7e26 inherit pub_methods_classaudio__tools_1_1_sound_generator"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:ac35063e34b06cc8f40ab5b15c677ea74"><td class="memItemLeft" align="right" valign="top"><a id="ac35063e34b06cc8f40ab5b15c677ea74"></a>
-<a class="el" href="classaudio__tools_1_1_abstract_syntheizer_channel.html">AbstractSyntheizerChannel</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getFreeChannel</b> ()</td></tr>
-<tr class="separator:ac35063e34b06cc8f40ab5b15c677ea74"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7c5b4d7df6e5b8301db5e2b2419d40f"><td class="memItemLeft" align="right" valign="top"><a id="ab7c5b4d7df6e5b8301db5e2b2419d40f"></a>
-<a class="el" href="classaudio__tools_1_1_abstract_syntheizer_channel.html">AbstractSyntheizerChannel</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getNoteChannel</b> (int note)</td></tr>
-<tr class="separator:ab7c5b4d7df6e5b8301db5e2b2419d40f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ce8a696b3b92bbc816d576dd9791dce"><td class="memItemLeft" align="right" valign="top"><a id="a1ce8a696b3b92bbc816d576dd9791dce"></a>
+<a class="el" href="classaudio__tools_1_1_abstract_synthesizer_channel.html">AbstractSynthesizerChannel</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getFreeChannel</b> ()</td></tr>
+<tr class="separator:a1ce8a696b3b92bbc816d576dd9791dce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a021477845dd33f95d305f3b3abbac0c1"><td class="memItemLeft" align="right" valign="top"><a id="a021477845dd33f95d305f3b3abbac0c1"></a>
+<a class="el" href="classaudio__tools_1_1_abstract_synthesizer_channel.html">AbstractSynthesizerChannel</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getNoteChannel</b> (int note)</td></tr>
+<tr class="separator:a021477845dd33f95d305f3b3abbac0c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
-<tr class="memitem:a1e80295351cc2d79235450435e0c7d50"><td class="memItemLeft" align="right" valign="top"><a id="a1e80295351cc2d79235450435e0c7d50"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>callbackKeyOff</b> (bool active, int pin, void *ptr)</td></tr>
-<tr class="separator:a1e80295351cc2d79235450435e0c7d50"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca738db182298030bd8fbef6272f73b0"><td class="memItemLeft" align="right" valign="top"><a id="aca738db182298030bd8fbef6272f73b0"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>callbackKeyOn</b> (bool active, int pin, void *ptr)</td></tr>
-<tr class="separator:aca738db182298030bd8fbef6272f73b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ea3db70a094c5a6ee2a944a4ef77fc3"><td class="memItemLeft" align="right" valign="top"><a id="a8ea3db70a094c5a6ee2a944a4ef77fc3"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>callbackKeyOff</b> (bool active, int pin, void *ref)</td></tr>
+<tr class="separator:a8ea3db70a094c5a6ee2a944a4ef77fc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b33cfe9bb895bb4baec05ac3291070e"><td class="memItemLeft" align="right" valign="top"><a id="a6b33cfe9bb895bb4baec05ac3291070e"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>callbackKeyOn</b> (bool active, int pin, void *ref)</td></tr>
+<tr class="separator:a6b33cfe9bb895bb4baec05ac3291070e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -188,12 +188,12 @@ MidiBleServer&#160;</td><td class="memItemRight" valign="bottom"><b>ble</b> = Mi
 <tr class="memitem:a610acdc32d3fea1783cef604d76de1e0"><td class="memItemLeft" align="right" valign="top"><a id="a610acdc32d3fea1783cef604d76de1e0"></a>
 <a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>cfg</b></td></tr>
 <tr class="separator:a610acdc32d3fea1783cef604d76de1e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99f1a21ab2cc90993ff45b76c5721006"><td class="memItemLeft" align="right" valign="top"><a id="a99f1a21ab2cc90993ff45b76c5721006"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_abstract_syntheizer_channel.html">AbstractSyntheizerChannel</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b></td></tr>
-<tr class="separator:a99f1a21ab2cc90993ff45b76c5721006"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1ffd347f99ce7c32fd096bda901896ed"><td class="memItemLeft" align="right" valign="top"><a id="a1ffd347f99ce7c32fd096bda901896ed"></a>
-<a class="el" href="classaudio__tools_1_1_abstract_syntheizer_channel.html">AbstractSyntheizerChannel</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>defaultChannel</b></td></tr>
-<tr class="separator:a1ffd347f99ce7c32fd096bda901896ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77d18eb4e3f99768087bb71affba8e34"><td class="memItemLeft" align="right" valign="top"><a id="a77d18eb4e3f99768087bb71affba8e34"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="classaudio__tools_1_1_abstract_synthesizer_channel.html">AbstractSynthesizerChannel</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b></td></tr>
+<tr class="separator:a77d18eb4e3f99768087bb71affba8e34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf2b5f899c75d4fd1b024521bf009e34"><td class="memItemLeft" align="right" valign="top"><a id="aaf2b5f899c75d4fd1b024521bf009e34"></a>
+<a class="el" href="classaudio__tools_1_1_abstract_synthesizer_channel.html">AbstractSynthesizerChannel</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>defaultChannel</b></td></tr>
+<tr class="separator:aaf2b5f899c75d4fd1b024521bf009e34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b38af768a5c4f7908aa04fcec22858d"><td class="memItemLeft" align="right" valign="top"><a id="a8b38af768a5c4f7908aa04fcec22858d"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><b>midi_name</b> = &quot;Synthesizer&quot;</td></tr>
 <tr class="separator:a8b38af768a5c4f7908aa04fcec22858d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -219,7 +219,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>output_channels</b></t
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/<a class="el" href="_synthesizer_8h_source.html">Synthesizer.h</a></li>
+<li>src/AudioEffects/<a class="el" href="_synthesizer_8h_source.html">Synthesizer.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

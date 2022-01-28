@@ -108,7 +108,7 @@ $(function() {
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;};</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_meta_data_i_d3_base.html">   56</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_meta_data_i_d3_base.html">MetaDataID3Base</a> {</div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_meta_data_i_d3_base.html">   56</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_meta_data_i_d3_base.html">MetaDataID3Base</a>  {</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <a class="code" href="classaudio__tools_1_1_meta_data_i_d3_base.html">MetaDataID3Base</a>() = <span class="keywordflow">default</span>;</div>
@@ -524,7 +524,7 @@ $(function() {
 <div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;                    <span class="keywordflow">if</span> (end_pos&gt;0){</div>
 <div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160;                        <span class="comment">// we just use the first entry</span></div>
 <div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160;                        result[end_pos]=0;</div>
-<div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160;                        <span class="keywordtype">size_t</span> idx = atoi(result+1);</div>
+<div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160;                        <span class="keywordtype">int</span> idx = atoi(result+1);</div>
 <div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160;                        <span class="keywordflow">if</span> (idx&gt;=0 &amp;&amp; idx&lt;<span class="keyword">sizeof</span>(<a class="code" href="namespaceaudio__tools.html#ae9d9368ae309f8d73f1651936d4ac33f">genres</a>)){</div>
 <div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160;                            strncpy((<span class="keywordtype">char</span>*)result,<a class="code" href="namespaceaudio__tools.html#ae9d9368ae309f8d73f1651936d4ac33f">genres</a>[idx],256);</div>
 <div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;                        }</div>

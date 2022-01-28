@@ -96,12 +96,15 @@ Inheritance diagram for audio_tools::AudioKitStream:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab63f7b04e45dd632318b13fbd99887bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#ab63f7b04e45dd632318b13fbd99887bc">addAction</a> (int pin, void(*action)(bool, int, void *))</td></tr>
-<tr class="memdesc:ab63f7b04e45dd632318b13fbd99887bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a new action that is executed when the indicated pin is active.  <a href="classaudio__tools_1_1_audio_kit_stream.html#ab63f7b04e45dd632318b13fbd99887bc">More...</a><br /></td></tr>
-<tr class="separator:ab63f7b04e45dd632318b13fbd99887bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32bce42e11ba883f5e7274f1e0f41e31"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a32bce42e11ba883f5e7274f1e0f41e31">addAction</a> (int pin, void(*action)(bool, int, void *), AudioActions::ActiveLogic activeLogic, void *ref=nullptr)</td></tr>
+<tr class="memdesc:a32bce42e11ba883f5e7274f1e0f41e31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a new action that is executed when the indicated pin is active.  <a href="classaudio__tools_1_1_audio_kit_stream.html#a32bce42e11ba883f5e7274f1e0f41e31">More...</a><br /></td></tr>
+<tr class="separator:a32bce42e11ba883f5e7274f1e0f41e31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd945374005fb36eae6d551f90b45fde"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#afd945374005fb36eae6d551f90b45fde">addAction</a> (int pin, void(*action)(bool, int, void *), void *ref=nullptr)</td></tr>
+<tr class="memdesc:afd945374005fb36eae6d551f90b45fde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a new action that is executed when the indicated pin is active.  <a href="classaudio__tools_1_1_audio_kit_stream.html#afd945374005fb36eae6d551f90b45fde">More...</a><br /></td></tr>
+<tr class="separator:afd945374005fb36eae6d551f90b45fde"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a97ba8465e92cfbb3d8ee09e53a6e288f"><td class="memItemLeft" align="right" valign="top"><a id="a97ba8465e92cfbb3d8ee09e53a6e288f"></a>
-<a class="el" href="class_audio_actions.html">AudioActions</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a97ba8465e92cfbb3d8ee09e53a6e288f">audioActions</a> ()</td></tr>
-<tr class="memdesc:a97ba8465e92cfbb3d8ee09e53a6e288f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides access to the <a class="el" href="class_audio_actions.html" title="A simple class to assign Functions to Pins e.g. to implement a simple navigation control or volume co...">AudioActions</a>. <br /></td></tr>
+<a class="el" href="classaudio__tools_1_1_audio_actions.html">AudioActions</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a97ba8465e92cfbb3d8ee09e53a6e288f">audioActions</a> ()</td></tr>
+<tr class="memdesc:a97ba8465e92cfbb3d8ee09e53a6e288f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides access to the <a class="el" href="classaudio__tools_1_1_audio_actions.html" title="A simple class to assign Functions to Pins e.g. to implement a simple navigation control or volume co...">AudioActions</a>. <br /></td></tr>
 <tr class="separator:a97ba8465e92cfbb3d8ee09e53a6e288f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a153ce1c612fea8ce9ecc3cefb4506af7"><td class="memItemLeft" align="right" valign="top"><a id="a153ce1c612fea8ce9ecc3cefb4506af7"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#a153ce1c612fea8ce9ecc3cefb4506af7">available</a> ()</td></tr>
@@ -408,6 +411,10 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:ad570cf7e392d9c742f7b5660735099aa"><td class="memItemLeft" align="right" valign="top"><a id="ad570cf7e392d9c742f7b5660735099aa"></a>
+AudioActions::ActiveLogic&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#ad570cf7e392d9c742f7b5660735099aa">getActionLogic</a> (int pin)</td></tr>
+<tr class="memdesc:ad570cf7e392d9c742f7b5660735099aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the action logic (ActiveLow or ActiveTouch) for the pin. <br /></td></tr>
+<tr class="separator:ad570cf7e392d9c742f7b5660735099aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad8148ec9ce0cfd693c24093a8641ab03"><td class="memItemLeft" align="right" valign="top"><a id="ad8148ec9ce0cfd693c24093a8641ab03"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kit_stream.html#ad8148ec9ce0cfd693c24093a8641ab03">setupActions</a> ()</td></tr>
 <tr class="memdesc:ad8148ec9ce0cfd693c24093a8641ab03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup the supported default actions. <br /></td></tr>
@@ -443,7 +450,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteError</b> (in
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a2ffeaf0c0c4a51ea9d6cc2d0ca17b6c5"><td class="memItemLeft" align="right" valign="top"><a id="a2ffeaf0c0c4a51ea9d6cc2d0ca17b6c5"></a>
-<a class="el" href="class_audio_actions.html">AudioActions</a>&#160;</td><td class="memItemRight" valign="bottom"><b>actions</b></td></tr>
+<a class="el" href="classaudio__tools_1_1_audio_actions.html">AudioActions</a>&#160;</td><td class="memItemRight" valign="bottom"><b>actions</b></td></tr>
 <tr class="separator:a2ffeaf0c0c4a51ea9d6cc2d0ca17b6c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b0b1f98123796594cf3e3e4729eac8e"><td class="memItemLeft" align="right" valign="top"><a id="a9b0b1f98123796594cf3e3e4729eac8e"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>active</b> = true</td></tr>
@@ -479,8 +486,8 @@ unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="ab63f7b04e45dd632318b13fbd99887bc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab63f7b04e45dd632318b13fbd99887bc">&#9670;&nbsp;</a></span>addAction()</h2>
+<a id="a32bce42e11ba883f5e7274f1e0f41e31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32bce42e11ba883f5e7274f1e0f41e31">&#9670;&nbsp;</a></span>addAction() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -498,7 +505,19 @@ unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">void(*)(bool, int, void *)&#160;</td>
-          <td class="paramname"><em>action</em>&#160;</td>
+          <td class="paramname"><em>action</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">AudioActions::ActiveLogic&#160;</td>
+          <td class="paramname"><em>activeLogic</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>ref</em> = <code>nullptr</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -518,6 +537,60 @@ unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b>
   <table class="params">
     <tr><td class="paramname">pin</td><td></td></tr>
     <tr><td class="paramname">action</td><td></td></tr>
+    <tr><td class="paramname">activeLogic</td><td></td></tr>
+    <tr><td class="paramname">ref</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="afd945374005fb36eae6d551f90b45fde"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd945374005fb36eae6d551f90b45fde">&#9670;&nbsp;</a></span>addAction() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void audio_tools::AudioKitStream::addAction </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void(*)(bool, int, void *)&#160;</td>
+          <td class="paramname"><em>action</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>ref</em> = <code>nullptr</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Defines a new action that is executed when the indicated pin is active. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pin</td><td></td></tr>
+    <tr><td class="paramname">action</td><td></td></tr>
+    <tr><td class="paramname">ref</td><td></td></tr>
   </table>
   </dd>
 </dl>

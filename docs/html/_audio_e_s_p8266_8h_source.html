@@ -72,68 +72,90 @@ $(function() {
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;AudioConfig.h&quot;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_audio_tools_8h.html">AudioTools.h</a>&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;AudioOutput.h&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;AudioOutput.h&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_audio_tools_8h.html">AudioTools.h</a>&quot;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;SoundData.h&quot;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaudio__tools.html">audio_tools</a> {</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_output_with_callback.html">   16</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_audio_output_with_callback.html">AudioOutputWithCallback</a> : <span class="keyword">public</span> AudioOutput, <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_buffered_stream.html">BufferedStream</a> {</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="comment">// Default constructor</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <a class="code" href="classaudio__tools_1_1_audio_output_with_callback.html">AudioOutputWithCallback</a>(<span class="keywordtype">int</span> bufferSize, <span class="keywordtype">int</span> bufferCount ):<a class="code" href="classaudio__tools_1_1_buffered_stream.html">BufferedStream</a>(bufferSize) {</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;            callback_buffer_ptr = <span class="keyword">new</span> <a class="code" href="classaudio__tools_1_1_n_buffer.html">NBuffer&lt;Frame&gt;</a>(bufferSize, bufferCount);</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        }</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keyword">virtual</span> ~<a class="code" href="classaudio__tools_1_1_audio_output_with_callback.html">AudioOutputWithCallback</a>() {    </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            <span class="keyword">delete</span> callback_buffer_ptr;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        }</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_output_with_callback.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_audio_output_with_callback.html">AudioOutputWithCallback</a> : <span class="keyword">public</span> AudioOutput, <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_buffered_stream.html">BufferedStream</a> {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <span class="comment">// Default constructor</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <a class="code" href="classaudio__tools_1_1_audio_output_with_callback.html">AudioOutputWithCallback</a>(<span class="keywordtype">int</span> bufferSize, <span class="keywordtype">int</span> bufferCount)</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;      : <a class="code" href="classaudio__tools_1_1_buffered_stream.html">BufferedStream</a>(bufferSize) {</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    callback_buffer_ptr = <span class="keyword">new</span> <a class="code" href="classaudio__tools_1_1_n_buffer.html">NBuffer&lt;Frame&gt;</a>(bufferSize, bufferCount);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  }</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <span class="keyword">virtual</span> ~<a class="code" href="classaudio__tools_1_1_audio_output_with_callback.html">AudioOutputWithCallback</a>() { <span class="keyword">delete</span> callback_buffer_ptr; }</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_output_with_callback.html#adbc03b094993cbe8360f70168ace4853">   28</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_audio_output_with_callback.html#adbc03b094993cbe8360f70168ace4853">begin</a>() { </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            active = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        }</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_output_with_callback.html#adbc03b094993cbe8360f70168ace4853">   28</a></span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_audio_output_with_callback.html#adbc03b094993cbe8360f70168ace4853">begin</a>() {</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    active = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  }</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_output_with_callback.html#a2beb1208ad1e364e80c7cc3117dfd5b1">   34</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_audio_output_with_callback.html#a2beb1208ad1e364e80c7cc3117dfd5b1">ConsumeSample</a>(int16_t sample[2]) {</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            Frame c;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            c.channel1 = sample[0];</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            c.channel2 = sample[1];</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            <span class="keywordflow">return</span> callback_buffer_ptr-&gt;write(c);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        };</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        </div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_output_with_callback.html#af8c887b9ce6c100722de3e6b8aaf23cf">   42</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_audio_output_with_callback.html#af8c887b9ce6c100722de3e6b8aaf23cf">stop</a>() {</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            active = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        };</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_output_with_callback.html#a2beb1208ad1e364e80c7cc3117dfd5b1">   34</a></span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_audio_output_with_callback.html#a2beb1208ad1e364e80c7cc3117dfd5b1">ConsumeSample</a>(int16_t sample[2]) {</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    Frame c;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    c.channel1 = sample[0];</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    c.channel2 = sample[1];</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordflow">return</span> callback_buffer_ptr-&gt;write(c);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  };</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_output_with_callback.html#af8c887b9ce6c100722de3e6b8aaf23cf">   42</a></span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_audio_output_with_callback.html#af8c887b9ce6c100722de3e6b8aaf23cf">stop</a>() {</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    active = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  };</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_output_with_callback.html#ae0eceb1bd7a7ed24d5a80d87473d70f6">   48</a></span>&#160;        <span class="keywordtype">size_t</span> <a class="code" href="classaudio__tools_1_1_audio_output_with_callback.html#ae0eceb1bd7a7ed24d5a80d87473d70f6">read</a>(Frame *src, <span class="keywordtype">size_t</span> len){</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            <span class="keywordflow">return</span> active ? this-&gt;callback_buffer_ptr-&gt;readArray(src, len) : 0;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        }</div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_output_with_callback.html#ae0eceb1bd7a7ed24d5a80d87473d70f6">   48</a></span>&#160;  <span class="keywordtype">size_t</span> <a class="code" href="classaudio__tools_1_1_audio_output_with_callback.html#ae0eceb1bd7a7ed24d5a80d87473d70f6">read</a>(Frame *src, <span class="keywordtype">size_t</span> len) {</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordflow">return</span> active ? this-&gt;callback_buffer_ptr-&gt;readArray(src, len) : 0;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  }</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <a class="code" href="classaudio__tools_1_1_n_buffer.html">NBuffer&lt;Frame&gt;</a> *callback_buffer_ptr;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordtype">bool</span> active;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> writeExt(<span class="keyword">const</span> uint8_t* data, <span class="keywordtype">size_t</span> len) {    </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keywordflow">return</span> callback_buffer_ptr-&gt;writeArray((Frame*)data, len/<span class="keyword">sizeof</span>(Frame));</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        }</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> readExt( uint8_t *data, <span class="keywordtype">size_t</span> len) { </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            <span class="keywordflow">return</span> callback_buffer_ptr-&gt;readArray((Frame*)data, len/<span class="keyword">sizeof</span>(Frame));;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        }</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;};</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;}</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <a class="code" href="classaudio__tools_1_1_n_buffer.html">NBuffer&lt;Frame&gt;</a> *callback_buffer_ptr;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="keywordtype">bool</span> active;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> writeExt(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len) {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordflow">return</span> callback_buffer_ptr-&gt;writeArray((Frame *)data, len / <span class="keyword">sizeof</span>(Frame));</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  }</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> readExt(uint8_t *data, <span class="keywordtype">size_t</span> len) {</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordflow">return</span> callback_buffer_ptr-&gt;readArray((Frame *)data, len / <span class="keyword">sizeof</span>(Frame));</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    ;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  }</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;};</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_e_s_p3288_audio_output.html">   70</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_e_s_p3288_audio_output.html">ESP3288AudioOutput</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_audio_stream_x.html">AudioStreamX</a> {</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <a class="code" href="classaudio__tools_1_1_e_s_p3288_audio_output.html">ESP3288AudioOutput</a>(AudioOutput &amp;out, <span class="keywordtype">int</span> channels) {</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    p_out = &amp;out;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    this-&gt;channels = channels;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  }</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> uint8_t *buffer, <span class="keywordtype">size_t</span> size) {</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">size_t</span> result = 0;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    int16_t *v = (int16_t *)buffer;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordflow">if</span> (channels == 2) {</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;      result = p_out-&gt;ConsumeSamples(v, size / 2);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;      LOGE(<span class="stringliteral">&quot;Only 2 Channels are supported&quot;</span>);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;      result = 0;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    }</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  }</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  AudioOutput *p_out = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <span class="keywordtype">int</span> channels;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;};</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="a_audio_tools_8h_html"><div class="ttname"><a href="_audio_tools_8h.html">AudioTools.h</a></div><div class="ttdoc">Includes all classes.</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_output_with_callback_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_output_with_callback.html">audio_tools::AudioOutputWithCallback</a></div><div class="ttdoc">ESP8266Audio AudioOutput class which stores the data in a temporary buffer. The buffer can be consume...</div><div class="ttdef"><b>Definition:</b> AudioESP8266.h:16</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_output_with_callback_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_output_with_callback.html">audio_tools::AudioOutputWithCallback</a></div><div class="ttdoc">ESP8266Audio AudioOutput class which stores the data in a temporary buffer. The buffer can be consume...</div><div class="ttdef"><b>Definition:</b> AudioESP8266.h:17</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_output_with_callback_html_a2beb1208ad1e364e80c7cc3117dfd5b1"><div class="ttname"><a href="classaudio__tools_1_1_audio_output_with_callback.html#a2beb1208ad1e364e80c7cc3117dfd5b1">audio_tools::AudioOutputWithCallback::ConsumeSample</a></div><div class="ttdeci">virtual bool ConsumeSample(int16_t sample[2])</div><div class="ttdoc">puts the sample into a buffer</div><div class="ttdef"><b>Definition:</b> AudioESP8266.h:34</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_output_with_callback_html_adbc03b094993cbe8360f70168ace4853"><div class="ttname"><a href="classaudio__tools_1_1_audio_output_with_callback.html#adbc03b094993cbe8360f70168ace4853">audio_tools::AudioOutputWithCallback::begin</a></div><div class="ttdeci">virtual bool begin()</div><div class="ttdoc">Activates the output.</div><div class="ttdef"><b>Definition:</b> AudioESP8266.h:28</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_output_with_callback_html_ae0eceb1bd7a7ed24d5a80d87473d70f6"><div class="ttname"><a href="classaudio__tools_1_1_audio_output_with_callback.html#ae0eceb1bd7a7ed24d5a80d87473d70f6">audio_tools::AudioOutputWithCallback::read</a></div><div class="ttdeci">size_t read(Frame *src, size_t len)</div><div class="ttdoc">Provides the data from the internal buffer to the callback.</div><div class="ttdef"><b>Definition:</b> AudioESP8266.h:48</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_output_with_callback_html_af8c887b9ce6c100722de3e6b8aaf23cf"><div class="ttname"><a href="classaudio__tools_1_1_audio_output_with_callback.html#af8c887b9ce6c100722de3e6b8aaf23cf">audio_tools::AudioOutputWithCallback::stop</a></div><div class="ttdeci">virtual bool stop()</div><div class="ttdoc">stops the processing</div><div class="ttdef"><b>Definition:</b> AudioESP8266.h:42</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_buffered_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_buffered_stream.html">audio_tools::BufferedStream</a></div><div class="ttdoc">The Arduino Stream supports operations on single characters. This is usually not the best way to push...</div><div class="ttdef"><b>Definition:</b> AudioStreams.h:278</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_stream_x_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_stream_x.html">audio_tools::AudioStreamX</a></div><div class="ttdoc">Same as AudioStream - but we do not have any abstract methods.</div><div class="ttdef"><b>Definition:</b> AudioStreams.h:53</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_buffered_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_buffered_stream.html">audio_tools::BufferedStream</a></div><div class="ttdoc">The Arduino Stream supports operations on single characters. This is usually not the best way to push...</div><div class="ttdef"><b>Definition:</b> AudioStreams.h:285</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_e_s_p3288_audio_output_html"><div class="ttname"><a href="classaudio__tools_1_1_e_s_p3288_audio_output.html">audio_tools::ESP3288AudioOutput</a></div><div class="ttdoc">Stream Adapter for ESP8288-Audio AudioOutput.</div><div class="ttdef"><b>Definition:</b> AudioESP8266.h:70</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_n_buffer_html"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer.html">audio_tools::NBuffer&lt; Frame &gt;</a></div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AnalogAudioESP32.h:12</div></div>
 </div><!-- fragment --></div><!-- contents -->

@@ -125,7 +125,7 @@ $(function() {
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    }</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
 <div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_meta_data_print.html#a7ff4b456d12b6485b56d0095fb7e6cc8">   66</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> <a class="code" href="classaudio__tools_1_1_meta_data_print.html#a7ff4b456d12b6485b56d0095fb7e6cc8">write</a>(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> length){</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        LOGD(<span class="stringliteral">&quot;%s: %d&quot;</span>, LOG_METHOD, length);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        LOGD(<span class="stringliteral">&quot;%s: %d&quot;</span>, LOG_METHOD, (<span class="keywordtype">int</span>)length);</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keywordflow">if</span> (callback!=<span class="keyword">nullptr</span>){</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            <span class="keywordflow">if</span> (meta!=<span class="keyword">nullptr</span>){</div>

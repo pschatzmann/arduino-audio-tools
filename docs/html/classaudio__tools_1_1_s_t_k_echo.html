@@ -98,10 +98,21 @@ virtual effect_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect.html#ab01def7ad32249fbebcdd00da9a54cc6">active</a> ()</td></tr>
 <tr class="memdesc:ab01def7ad32249fbebcdd00da9a54cc6 inherit pub_methods_classaudio__tools_1_1_audio_effect"><td class="mdescLeft">&#160;</td><td class="mdescRight">determines if the effect is active <br /></td></tr>
 <tr class="separator:ab01def7ad32249fbebcdd00da9a54cc6 inherit pub_methods_classaudio__tools_1_1_audio_effect"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40776bdabceeebf0cb9961314841b9fc inherit pub_methods_classaudio__tools_1_1_audio_effect"><td class="memItemLeft" align="right" valign="top"><a id="a40776bdabceeebf0cb9961314841b9fc"></a>
+virtual <a class="el" href="classaudio__tools_1_1_audio_effect.html">AudioEffect</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>clone</b> ()=0</td></tr>
+<tr class="separator:a40776bdabceeebf0cb9961314841b9fc inherit pub_methods_classaudio__tools_1_1_audio_effect"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3290e4c4a9a73510cf89cf639028e4da inherit pub_methods_classaudio__tools_1_1_audio_effect"><td class="memItemLeft" align="right" valign="top"><a id="a3290e4c4a9a73510cf89cf639028e4da"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect.html#a3290e4c4a9a73510cf89cf639028e4da">id</a> ()</td></tr>
+<tr class="memdesc:a3290e4c4a9a73510cf89cf639028e4da inherit pub_methods_classaudio__tools_1_1_audio_effect"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allows to identify an effect. <br /></td></tr>
+<tr class="separator:a3290e4c4a9a73510cf89cf639028e4da inherit pub_methods_classaudio__tools_1_1_audio_effect"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5e573517e05769c77ebb17f2fe01495 inherit pub_methods_classaudio__tools_1_1_audio_effect"><td class="memItemLeft" align="right" valign="top"><a id="ae5e573517e05769c77ebb17f2fe01495"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect.html#ae5e573517e05769c77ebb17f2fe01495">setActive</a> (bool value)</td></tr>
 <tr class="memdesc:ae5e573517e05769c77ebb17f2fe01495 inherit pub_methods_classaudio__tools_1_1_audio_effect"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the effect active/inactive <br /></td></tr>
 <tr class="separator:ae5e573517e05769c77ebb17f2fe01495 inherit pub_methods_classaudio__tools_1_1_audio_effect"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab84387420f2639e4d8d33f63e2f3d687 inherit pub_methods_classaudio__tools_1_1_audio_effect"><td class="memItemLeft" align="right" valign="top"><a id="ab84387420f2639e4d8d33f63e2f3d687"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect.html#ab84387420f2639e4d8d33f63e2f3d687">setId</a> (int <a class="el" href="classaudio__tools_1_1_audio_effect.html#a3290e4c4a9a73510cf89cf639028e4da">id</a>)</td></tr>
+<tr class="memdesc:ab84387420f2639e4d8d33f63e2f3d687 inherit pub_methods_classaudio__tools_1_1_audio_effect"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allows to identify an effect. <br /></td></tr>
+<tr class="separator:ab84387420f2639e4d8d33f63e2f3d687 inherit pub_methods_classaudio__tools_1_1_audio_effect"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -110,10 +121,16 @@ Additional Inherited Members</h2></td></tr>
 int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect.html#a074cb95034d83ce77744ca8f1d94ccb9">clip</a> (int32_t in, int16_t clipLimit=32767, int16_t resultLimit=32767)</td></tr>
 <tr class="memdesc:a074cb95034d83ce77744ca8f1d94ccb9 inherit pro_methods_classaudio__tools_1_1_audio_effect"><td class="mdescLeft">&#160;</td><td class="mdescRight">generic clipping method <br /></td></tr>
 <tr class="separator:a074cb95034d83ce77744ca8f1d94ccb9 inherit pro_methods_classaudio__tools_1_1_audio_effect"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7efa5d7745161209c2294fabda9b844 inherit pro_methods_classaudio__tools_1_1_audio_effect"><td class="memItemLeft" align="right" valign="top"><a id="aa7efa5d7745161209c2294fabda9b844"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>copyParent</b> (<a class="el" href="classaudio__tools_1_1_audio_effect.html">AudioEffect</a> *copy)</td></tr>
+<tr class="separator:aa7efa5d7745161209c2294fabda9b844 inherit pro_methods_classaudio__tools_1_1_audio_effect"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classaudio__tools_1_1_audio_effect"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classaudio__tools_1_1_audio_effect')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classaudio__tools_1_1_audio_effect.html">audio_tools::AudioEffect</a></td></tr>
 <tr class="memitem:a5baa4e28b5634fa5c6a00198b62562ec inherit pro_attribs_classaudio__tools_1_1_audio_effect"><td class="memItemLeft" align="right" valign="top"><a id="a5baa4e28b5634fa5c6a00198b62562ec"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>active_flag</b> = true</td></tr>
 <tr class="separator:a5baa4e28b5634fa5c6a00198b62562ec inherit pro_attribs_classaudio__tools_1_1_audio_effect"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99d421d310dbd778d6b6fb1a8a670a51 inherit pro_attribs_classaudio__tools_1_1_audio_effect"><td class="memItemLeft" align="right" valign="top"><a id="a99d421d310dbd778d6b6fb1a8a670a51"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>id_value</b> =-1</td></tr>
+<tr class="separator:a99d421d310dbd778d6b6fb1a8a670a51 inherit pro_attribs_classaudio__tools_1_1_audio_effect"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Echo Effect </p><dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>

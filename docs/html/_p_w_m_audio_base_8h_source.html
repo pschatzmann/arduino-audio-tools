@@ -75,7 +75,7 @@ $(function() {
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_audio_tools_8h.html">AudioTools.h</a>&quot;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;AudioTools/AudioLogger.h&quot;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;AudioTools/AudioOutput.h&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;AudioTools/Vector.h&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;AudioBasic/Vector.h&quot;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;Stream.h&quot;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaudio__tools.html">audio_tools</a> {</div>
@@ -344,7 +344,7 @@ $(function() {
 <div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;            int16_t data[channels];</div>
 <div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;            <span class="keywordflow">if</span> (user_callback(channels, data)){</div>
 <div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;                <span class="keywordflow">for</span> (uint8_t j=0;j&lt;audio_config.channels;j++){</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;                    <span class="keywordtype">int</span> value  = map(data[j], -maxValue(16), maxValue(16), 0, 255); </div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;                    <span class="keywordtype">int</span> value  = map(data[j], -<a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(16), <a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(16), 0, 255); </div>
 <div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;                    pwmWrite(j, value);</div>
 <div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;                }</div>
 <div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;                updateStatistics();                </div>
@@ -389,7 +389,7 @@ $(function() {
 <div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;                        LOGE(<span class="stringliteral">&quot;Could not read full data&quot;</span>);</div>
 <div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;                        value = 0;</div>
 <div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;                    }</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;                    result = map(value, -maxValue(8), maxValue(8), 0, maxOutputValue());</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;                    result = map(value, -<a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(8), <a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(8), 0, maxOutputValue());</div>
 <div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;                    <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;                }</div>
 <div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;                <span class="keywordflow">case</span> 16: {</div>
@@ -397,7 +397,7 @@ $(function() {
 <div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;                    <span class="keywordflow">if</span> (buffer-&gt;readArray((uint8_t*)&amp;value,2)!=2){</div>
 <div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;                        LOGE(<span class="stringliteral">&quot;Could not read full data&quot;</span>);</div>
 <div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;                    }</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;                    result = map(value, -maxValue(16), maxValue(16), 0, maxOutputValue());</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;                    result = map(value, -<a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(16), <a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(16), 0, maxOutputValue());</div>
 <div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;                    <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;                }</div>
 <div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;                <span class="keywordflow">case</span> 24: {</div>
@@ -405,7 +405,7 @@ $(function() {
 <div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;                    <span class="keywordflow">if</span> (buffer-&gt;readArray((uint8_t*)&amp;value,3)!=3){</div>
 <div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;                        LOGE(<span class="stringliteral">&quot;Could not read full data&quot;</span>);</div>
 <div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;                    }</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;                    result = map((int32_t)value, -maxValue(24), maxValue(24), 0, maxOutputValue());</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;                    result = map((int32_t)value, -<a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(24), <a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(24), 0, maxOutputValue());</div>
 <div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;                    <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;                }</div>
 <div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;                <span class="keywordflow">case</span> 32: {</div>
@@ -413,7 +413,7 @@ $(function() {
 <div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;                    <span class="keywordflow">if</span> (buffer-&gt;readArray((uint8_t*)&amp;value,4)!=4){</div>
 <div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;                        LOGE(<span class="stringliteral">&quot;Could not read full data&quot;</span>);</div>
 <div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;                    }</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;                    result = map(value, -maxValue(32), maxValue(32), 0, maxOutputValue());</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;                    result = map(value, -<a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(32), <a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(32), 0, maxOutputValue());</div>
 <div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;                    <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;                }</div>
 <div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;            }        </div>
@@ -427,6 +427,7 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_audio_base_info_dependent_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_base_info_dependent.html">audio_tools::AudioBaseInfoDependent</a></div><div class="ttdoc">Supports changes to the sampling rate, bits and channels.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:47</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_print_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_print.html">audio_tools::AudioPrint</a></div><div class="ttdoc">Abstract Audio Ouptut class.</div><div class="ttdef"><b>Definition:</b> AudioOutput.h:19</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_n_buffer_html"><div class="ttname"><a href="classaudio__tools_1_1_n_buffer.html">audio_tools::NBuffer&lt; uint8_t &gt;</a></div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_number_converter_html_a68cfd005536b677f85d29ec75bedce57"><div class="ttname"><a href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">audio_tools::NumberConverter::maxValue</a></div><div class="ttdeci">static int64_t maxValue(int value_bits_per_sample)</div><div class="ttdoc">provides the biggest number for the indicated number of bits</div><div class="ttdef"><b>Definition:</b> Converter.h:38</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_p_w_m_audio_stream_base_html"><div class="ttname"><a href="classaudio__tools_1_1_p_w_m_audio_stream_base.html">audio_tools::PWMAudioStreamBase</a></div><div class="ttdoc">Common functionality for PWM output.</div><div class="ttdef"><b>Definition:</b> PWMAudioBase.h:87</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_p_w_m_audio_stream_base_html_a246c965f26bca25f12bf7b90d5925f4d"><div class="ttname"><a href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#a246c965f26bca25f12bf7b90d5925f4d">audio_tools::PWMAudioStreamBase::begin</a></div><div class="ttdeci">bool begin(PWMConfig config)</div><div class="ttdoc">starts the processing using Streams</div><div class="ttdef"><b>Definition:</b> PWMAudioBase.h:139</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_p_w_m_audio_stream_base_html_a4645c3ba1347cac33a0dae1c1825ec56"><div class="ttname"><a href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#a4645c3ba1347cac33a0dae1c1825ec56">audio_tools::PWMAudioStreamBase::startTimer</a></div><div class="ttdeci">virtual void startTimer()</div><div class="ttdoc">when we get the first write -&gt; we activate the timer to start with the output of data</div><div class="ttdef"><b>Definition:</b> PWMAudioBase.h:263</div></div>

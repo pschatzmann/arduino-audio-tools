@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: src/AudioTools/Synthesizer.h Source File</title>
+<title>arduino-audio-tools: src/AudioEffects/Synthesizer.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,7 +61,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d5cb8525404b047b9954b2bda6b3d0c1.html">AudioTools</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_57a8f696c091792af8c3442d6f926e1e.html">AudioEffects</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -73,10 +73,10 @@ $(function() {
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;AudioTools/AudioLogger.h&quot;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;AudioTools/AudioTypes.h&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;AudioTools/Vector.h&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;AudioBasic/Vector.h&quot;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;AudioTools/AudioActions.h&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;AudioTools/SoundGenerator.h&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;AudioTools/AudioStreams.h&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;AudioTools/AudioStreams.h&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;AudioEffects/SoundGenerator.h&quot;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;AudioEffects/AudioEffects.h&quot;</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#ifdef USE_MIDI</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;Midi.h&quot;</span></div>
@@ -84,266 +84,366 @@ $(function() {
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaudio__tools.html">audio_tools</a> {</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_abstract_syntheizer_channel.html">   22</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_abstract_syntheizer_channel.html">AbstractSyntheizerChannel</a> {</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_abstract_synthesizer_channel.html">   22</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_abstract_synthesizer_channel.html">AbstractSynthesizerChannel</a> {</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keyword">virtual</span> <a class="code" href="classaudio__tools_1_1_abstract_syntheizer_channel.html">AbstractSyntheizerChannel</a>* clone() = 0;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> begin(<a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> config);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> isActive() = 0;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> keyOn(<span class="keywordtype">int</span> nte, <span class="keywordtype">float</span> tgt) = 0;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> keyOff() = 0;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keyword">virtual</span> int16_t readSample()=0;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">int</span> note() = 0 ;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keyword">virtual</span> <a class="code" href="classaudio__tools_1_1_audio_effects.html">AudioEffects</a> &amp;audioEffects();</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;};</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_default_syntheizer_channel.html">   39</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_default_syntheizer_channel.html">DefaultSyntheizerChannel</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_abstract_syntheizer_channel.html">AbstractSyntheizerChannel</a> {</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <a class="code" href="classaudio__tools_1_1_default_syntheizer_channel.html">DefaultSyntheizerChannel</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <a class="code" href="classaudio__tools_1_1_default_syntheizer_channel.html">DefaultSyntheizerChannel</a>(<a class="code" href="classaudio__tools_1_1_default_syntheizer_channel.html">DefaultSyntheizerChannel</a> &amp;ch) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <a class="code" href="classaudio__tools_1_1_default_syntheizer_channel.html">DefaultSyntheizerChannel</a> *clone()<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classaudio__tools_1_1_default_syntheizer_channel.html">DefaultSyntheizerChannel</a>(*<span class="keyword">this</span>);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        }</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordtype">void</span> setBeginCallback(<span class="keywordtype">void</span> (*setup_callback)(<a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> config)) {</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            this-&gt;setup_callback = setup_callback;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        }</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> begin(<a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> config)<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <span class="keywordflow">if</span> (setup_callback==<span class="keyword">nullptr</span>){</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                audio_effects.<a class="code" href="classaudio__tools_1_1_audio_effects.html#a8b7aaaecc31a6f18479892b4d7d78c2b">setInput</a>(sine);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                audio_effects.<a class="code" href="classaudio__tools_1_1_audio_effects.html#a90b1bb6bb8c4fe639a49006f10cdfc05">addEffect</a>(adsr);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                sine.begin(config, N_C3 );</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                setup_callback();</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            }</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        }</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> isActive()<span class="keyword"> override</span>{</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            adsr_obj.isActive();</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        }</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> keyOn(<span class="keywordtype">int</span> nte, <span class="keywordtype">float</span> tgt)<span class="keyword"> override</span>{</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            actual_note = nte;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            adsr_obj.keyOn(tgt);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        }</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> keyOff()<span class="keyword"> override</span>{</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            adsr_obj.keyOff();</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keyword">virtual</span> <a class="code" href="classaudio__tools_1_1_abstract_synthesizer_channel.html">AbstractSynthesizerChannel</a>* clone() = 0;</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_abstract_synthesizer_channel.html#a21002f3922d1614ae3fac29a85cbb2a2">   26</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_abstract_synthesizer_channel.html#a21002f3922d1614ae3fac29a85cbb2a2">begin</a>(<a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> config);</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_abstract_synthesizer_channel.html#afb70bd4f68c1cd1a712126a77ec76f5d">   28</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_abstract_synthesizer_channel.html#afb70bd4f68c1cd1a712126a77ec76f5d">isActive</a>() = 0;</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_abstract_synthesizer_channel.html#aca4034020a1dfd3a5389477ea73634f2">   30</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_abstract_synthesizer_channel.html#aca4034020a1dfd3a5389477ea73634f2">keyOn</a>(<span class="keywordtype">int</span> nte, <span class="keywordtype">float</span> tgt) = 0;</div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_abstract_synthesizer_channel.html#a1967e5ccd307b74c8a632d123ec5ae4f">   32</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_abstract_synthesizer_channel.html#a1967e5ccd307b74c8a632d123ec5ae4f">keyOff</a>() = 0;</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_abstract_synthesizer_channel.html#a5a2ce94c0ae0085205d48602e78ea070">   34</a></span>&#160;        <span class="keyword">virtual</span> int16_t <a class="code" href="classaudio__tools_1_1_abstract_synthesizer_channel.html#a5a2ce94c0ae0085205d48602e78ea070">readSample</a>()=0;</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_abstract_synthesizer_channel.html#a8467200ca3c49367c0886759c720f536">   36</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1_abstract_synthesizer_channel.html#a8467200ca3c49367c0886759c720f536">note</a>() = 0 ;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;};</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> EffectsT&gt;</div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_default_synthesizer_channel.html">   47</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_default_synthesizer_channel.html">DefaultSynthesizerChannel</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_abstract_synthesizer_channel.html">AbstractSynthesizerChannel</a> {</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_default_synthesizer_channel.html#a407ce7c1518c15c3ecdb20aacec45c8a">   50</a></span>&#160;        <a class="code" href="classaudio__tools_1_1_default_synthesizer_channel.html#a407ce7c1518c15c3ecdb20aacec45c8a">DefaultSynthesizerChannel</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_default_synthesizer_channel.html#a26d0e83605df12c1ebdca5c223a409a4">   53</a></span>&#160;        <a class="code" href="classaudio__tools_1_1_default_synthesizer_channel.html#a26d0e83605df12c1ebdca5c223a409a4">DefaultSynthesizerChannel</a>(<a class="code" href="classaudio__tools_1_1_default_synthesizer_channel.html">DefaultSynthesizerChannel&lt;EffectsT&gt;</a> &amp;ch) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <a class="code" href="classaudio__tools_1_1_default_synthesizer_channel.html">DefaultSynthesizerChannel&lt;EffectsT&gt;</a> *clone()<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            LOGD(LOG_METHOD);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <span class="keyword">auto</span> result = <span class="keyword">new</span> <a class="code" href="classaudio__tools_1_1_default_synthesizer_channel.html">DefaultSynthesizerChannel&lt;EffectsT&gt;</a>(*<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            result-&gt;begin(config);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        }</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_default_synthesizer_channel.html#a3b7243befa0a226fcf641b7e6cbc438c">   62</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_default_synthesizer_channel.html#a3b7243befa0a226fcf641b7e6cbc438c">begin</a>(<a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> config)<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            LOGI(LOG_METHOD);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            this-&gt;config = config;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            config.logInfo();</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            <span class="comment">// find ADSRGain</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            p_adsr = (<a class="code" href="classaudio__tools_1_1_a_d_s_r_gain.html">ADSRGain</a>*) audio_effects.findEffect(1);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            <span class="keywordflow">if</span> (p_adsr==<span class="keyword">nullptr</span>){</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                p_adsr = <span class="keyword">new</span> <a class="code" href="classaudio__tools_1_1_a_d_s_r_gain.html">ADSRGain</a>(0.0001, 0.0001, 0.8, 0.0005);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                p_adsr-&gt;<a class="code" href="classaudio__tools_1_1_audio_effect.html#ab84387420f2639e4d8d33f63e2f3d687">setId</a>(1);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                audio_effects.addEffect(p_adsr);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            } </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            audio_effects.generator().begin(config);</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        }</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keyword">virtual</span> int16_t readSample()<span class="keyword"> override</span>{</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            <span class="keywordflow">return</span> audio_effects.<a class="code" href="classaudio__tools_1_1_audio_effects.html#a2bd4690de4e8db94613f0d842c404efe">readSample</a>();</div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_default_synthesizer_channel.html#a29934b22864d56602ede789c2f144646">   76</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_default_synthesizer_channel.html#a29934b22864d56602ede789c2f144646">isActive</a>()<span class="keyword"> override</span>{</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            <span class="keywordflow">return</span> p_adsr != <span class="keyword">nullptr</span> ? p_adsr-&gt;isActive() : <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        }</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">int</span> note()<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            <span class="keywordflow">return</span> actual_note;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        }</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keyword">virtual</span> <a class="code" href="classaudio__tools_1_1_audio_effects.html">AudioEffects</a> &amp;audioEffects()<span class="keyword">override </span>{</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            <span class="keywordflow">return</span> audio_effects;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        }</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="keyword">virtual</span> <a class="code" href="classaudio__tools_1_1_a_d_s_r.html">ADSR</a> &amp;adsr(){</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            <span class="keywordflow">return</span> adsr_obj;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        }</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <a class="code" href="classaudio__tools_1_1_sine_wave_generator.html">SineWaveGenerator&lt;int16_t&gt;</a> sine;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <a class="code" href="classaudio__tools_1_1_a_d_s_r.html">ADSR</a> adsr_obj = <a class="code" href="classaudio__tools_1_1_a_d_s_r.html">ADSR</a>(0.0001, 0.0001, 0.8, 0.0005);</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <a class="code" href="classaudio__tools_1_1_audio_effects.html">AudioEffects</a> audio_effects;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keywordtype">int</span> actual_note = 0;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        void (*setup_callback)(<a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> config) = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;};</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00107"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_synthesizer_key.html">  107</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structaudio__tools_1_1_synthesizer_key.html">SynthesizerKey</a> {</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordtype">int</span> pin;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordtype">int</span> note;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;};</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
-<div class="line"><a name="l00119"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_synthesizer.html">  119</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_synthesizer.html">Synthesizer</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt;int16_t&gt; {</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        <a class="code" href="classaudio__tools_1_1_synthesizer.html">Synthesizer</a>() {</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;            defaultChannel = <span class="keyword">new</span> <a class="code" href="classaudio__tools_1_1_default_syntheizer_channel.html">DefaultSyntheizerChannel</a>();</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        }</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        <a class="code" href="classaudio__tools_1_1_synthesizer.html">Synthesizer</a>(<a class="code" href="classaudio__tools_1_1_abstract_syntheizer_channel.html">AbstractSyntheizerChannel</a> *ch){</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            defaultChannel = ch;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        }</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        ~<a class="code" href="classaudio__tools_1_1_synthesizer.html">Synthesizer</a>(){</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0;j&lt;channels.size();j++){</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                <span class="keyword">delete</span> channels[j];</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                channels[j] = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;            }</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="preprocessor">#ifdef USE_MIDI</span></div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            <span class="keyword">delete</span> p_synth_action;</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;       }</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        <span class="keywordtype">void</span> begin(<a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> config) {</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;            this-&gt;cfg = config;</div>
+<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_default_synthesizer_channel.html#ab9700362545d49b747eee5f096650012">   81</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_default_synthesizer_channel.html#ab9700362545d49b747eee5f096650012">keyOn</a>(<span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1_default_synthesizer_channel.html#a62f4f7f3f1b0cd84bf1e8fa52db44d4a">note</a>, <span class="keywordtype">float</span> tgt)<span class="keyword"> override</span>{</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            audio_effects.generator().setFrequency(<a class="code" href="classaudio__tools_1_1_default_synthesizer_channel.html#a62f4f7f3f1b0cd84bf1e8fa52db44d4a">note</a>);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            <span class="keywordflow">if</span> (p_adsr!=<span class="keyword">nullptr</span>){</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                actual_note = <a class="code" href="classaudio__tools_1_1_default_synthesizer_channel.html#a62f4f7f3f1b0cd84bf1e8fa52db44d4a">note</a>;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                p_adsr-&gt;keyOn(tgt);  </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            } </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        }</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_default_synthesizer_channel.html#ac8de757db3dca4e065ec5ef2bdbd6127">   89</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_default_synthesizer_channel.html#ac8de757db3dca4e065ec5ef2bdbd6127">keyOff</a>()<span class="keyword"> override</span>{</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            LOGD(LOG_METHOD);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            <span class="keywordflow">if</span> (p_adsr!=<span class="keyword">nullptr</span>){</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                p_adsr-&gt;keyOff();</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                LOGE(<span class="stringliteral">&quot;p_adsr is null&quot;</span>)</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            }</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        }</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_default_synthesizer_channel.html#aa2545c8ec494afecf94fa9c947e8cc53">   98</a></span>&#160;        <span class="keyword">virtual</span> int16_t <a class="code" href="classaudio__tools_1_1_default_synthesizer_channel.html#aa2545c8ec494afecf94fa9c947e8cc53">readSample</a>()<span class="keyword"> override</span>{</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            <span class="keywordflow">return</span> audio_effects.readSample();</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        }</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_default_synthesizer_channel.html#a62f4f7f3f1b0cd84bf1e8fa52db44d4a">  102</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1_default_synthesizer_channel.html#a62f4f7f3f1b0cd84bf1e8fa52db44d4a">note</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            <span class="keywordflow">return</span> actual_note;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        }</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        <span class="keywordtype">void</span> addEffect(<a class="code" href="classaudio__tools_1_1_audio_effect.html">AudioEffect</a> *ptr){</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            audio_effects.addEffect(ptr);</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        }</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        AudioBaseInfo config;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        EffectsT audio_effects;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        ADSRGain *p_adsr = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        <span class="keywordtype">int</span> actual_note = 0;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;};</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
+<div class="line"><a name="l00123"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_default_guitar_channel.html">  123</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_default_guitar_channel.html">DefaultGuitarChannel</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_default_synthesizer_channel.html">DefaultSynthesizerChannel</a>&lt;AudioEffects&lt;GeneratorFromStream&lt;int16_t&gt;&gt;&gt; {</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00126"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_default_guitar_channel.html#aeb0287700c4d630064a4d14b7295e54c">  126</a></span>&#160;        <a class="code" href="classaudio__tools_1_1_default_guitar_channel.html#aeb0287700c4d630064a4d14b7295e54c">DefaultGuitarChannel</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
+<div class="line"><a name="l00129"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_default_guitar_channel.html#a617f7599b1da086652fea4d9d31a8264">  129</a></span>&#160;        <a class="code" href="classaudio__tools_1_1_default_guitar_channel.html#a617f7599b1da086652fea4d9d31a8264">DefaultGuitarChannel</a>(<a class="code" href="class_stream.html">Stream</a> &amp;input) {</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;            <a class="code" href="classaudio__tools_1_1_default_guitar_channel.html#acf9459ff652b2b977f430f052679f9f5">setStream</a>(input);</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        }</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
+<div class="line"><a name="l00134"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_default_guitar_channel.html#af7834b9b086098c25e6cd870ff3ae769">  134</a></span>&#160;        <a class="code" href="classaudio__tools_1_1_default_guitar_channel.html#af7834b9b086098c25e6cd870ff3ae769">DefaultGuitarChannel</a>(<a class="code" href="classaudio__tools_1_1_default_guitar_channel.html">DefaultGuitarChannel</a> &amp;ch) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        </div>
+<div class="line"><a name="l00137"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_default_guitar_channel.html#ac1b84ea198aa85f1227aab26f4f42bf7">  137</a></span>&#160;        <a class="code" href="classaudio__tools_1_1_default_guitar_channel.html">DefaultGuitarChannel</a> *<a class="code" href="classaudio__tools_1_1_default_guitar_channel.html#ac1b84ea198aa85f1227aab26f4f42bf7">clone</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;            LOGD(LOG_METHOD);</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            <span class="keyword">auto</span> result = <span class="keyword">new</span> <a class="code" href="classaudio__tools_1_1_default_guitar_channel.html#aeb0287700c4d630064a4d14b7295e54c">DefaultGuitarChannel</a>(*<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;            result-&gt;begin(config);</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;            <span class="keywordflow">return</span> result;</div>
 <div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        }</div>
 <div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        <span class="keywordtype">void</span> keyOn(<span class="keywordtype">int</span> note, <span class="keywordtype">float</span> tgt=0){</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;            LOGI(<span class="stringliteral">&quot;keyOn: %d&quot;</span>, note);</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;            <a class="code" href="classaudio__tools_1_1_abstract_syntheizer_channel.html">AbstractSyntheizerChannel</a> *channel = getFreeChannel();</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;            <span class="keywordflow">if</span> (channel!=<span class="keyword">nullptr</span>){</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;                channel-&gt;keyOn(note, tgt);</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                LOGW(<span class="stringliteral">&quot;No channel available for %d&quot;</span>,note);</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;            }</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        }</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        <span class="keywordtype">void</span> keyOff(<span class="keywordtype">int</span> note){</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;            LOGI(<span class="stringliteral">&quot;keyOff: %d&quot;</span>, note);</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;            <a class="code" href="classaudio__tools_1_1_abstract_syntheizer_channel.html">AbstractSyntheizerChannel</a> *channel = getNoteChannel(note);</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;            <span class="keywordflow">if</span> (channel!=<span class="keyword">nullptr</span>){</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                channel-&gt;keyOff();</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;            }</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        }</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; </div>
-<div class="line"><a name="l00163"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_synthesizer.html#ac933390c0ec874f09e6cc61c84ad5ae4">  163</a></span>&#160;        int16_t <a class="code" href="classaudio__tools_1_1_synthesizer.html#ac933390c0ec874f09e6cc61c84ad5ae4">readSample</a>() {</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;            int64_t total = 0;</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;            uint16_t count = 0;</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0;j&lt;channels.size();j++){</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                <span class="keywordflow">if</span> (!channels[j]-&gt;isActive()){</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                    count++;</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;                    total += channels[j]-&gt;readSample();</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;                }</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;            }</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;            total = total / count;</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            <span class="keywordflow">return</span> total;</div>
+<div class="line"><a name="l00145"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_default_guitar_channel.html#acf9459ff652b2b977f430f052679f9f5">  145</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_default_guitar_channel.html#acf9459ff652b2b977f430f052679f9f5">setStream</a>(<a class="code" href="class_stream.html">Stream</a> &amp;input){</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;            audio_effects.generator().setStream(input);</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        }</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
+<div class="line"><a name="l00150"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_default_guitar_channel.html#aaac42115d11b980c8b36eeab4b756648">  150</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_default_guitar_channel.html#aaac42115d11b980c8b36eeab4b756648">begin</a>(<a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> config)<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;            LOGI(LOG_METHOD);</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;            this-&gt;config = config;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;            config.logInfo();</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;            audio_effects.generator().begin(config);</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        }</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
+<div class="line"><a name="l00157"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_default_guitar_channel.html#a768fc6bddd4bc284e64d2a4c20c63517">  157</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_default_guitar_channel.html#a768fc6bddd4bc284e64d2a4c20c63517">isActive</a>()<span class="keyword"> override</span>{</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        }</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
+<div class="line"><a name="l00162"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_default_guitar_channel.html#acf384918356efce3f69459ad7fc7f7f9">  162</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_default_guitar_channel.html#acf384918356efce3f69459ad7fc7f7f9">keyOn</a>(<span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1_default_guitar_channel.html#aed023290240a73f1d9d535017e126b75">note</a>, <span class="keywordtype">float</span> tgt)<span class="keyword"> override</span>{</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        }</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
+<div class="line"><a name="l00165"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_default_guitar_channel.html#a071adc960b379ee7a67f551db17ad296">  165</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_default_guitar_channel.html#a071adc960b379ee7a67f551db17ad296">keyOff</a>()<span class="keyword"> override</span>{</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        }</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160; </div>
+<div class="line"><a name="l00168"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_default_guitar_channel.html#adbeb440e75436fd9df6908a045a88c9f">  168</a></span>&#160;        <span class="keyword">virtual</span> int16_t <a class="code" href="classaudio__tools_1_1_default_guitar_channel.html#adbeb440e75436fd9df6908a045a88c9f">readSample</a>()<span class="keyword"> override</span>{</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;            <span class="keywordflow">return</span> audio_effects.readSample();</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        }</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
+<div class="line"><a name="l00172"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_default_guitar_channel.html#aed023290240a73f1d9d535017e126b75">  172</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1_default_guitar_channel.html#aed023290240a73f1d9d535017e126b75">note</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            <span class="keywordflow">return</span> -1;</div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        }</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; </div>
-<div class="line"><a name="l00177"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_synthesizer.html#aa1b0440c1f22acdf7d580b1d480f4f73">  177</a></span>&#160;        <a class="code" href="classaudio__tools_1_1_audio_effects.html">AudioEffects</a> &amp;<a class="code" href="classaudio__tools_1_1_synthesizer.html#aa1b0440c1f22acdf7d580b1d480f4f73">audioEffects</a>() {</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;            <span class="keywordflow">return</span> defaultChannel-&gt;audioEffects();</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        }</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
-<div class="line"><a name="l00182"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_synthesizer.html#afd648238358c7d38ffedd5f750b56992">  182</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_synthesizer.html#afd648238358c7d38ffedd5f750b56992">setKeys</a>(<a class="code" href="class_audio_actions.html">AudioActions</a> &amp;actions, <a class="code" href="structaudio__tools_1_1_synthesizer_key.html">SynthesizerKey</a>* p_keys, AudioActions::ActiveLogic activeValue){</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;            <span class="keywordflow">while</span> (p_keys-&gt;note &gt; 0){</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;                actions.add(p_keys-&gt;pin, callbackKeyOn, callbackKeyOff,activeValue ,<span class="keyword">new</span> <a class="code" href="structaudio__tools_1_1_synthesizer_1_1_key_parameter.html">KeyParameter</a>(<span class="keyword">this</span>, p_keys-&gt;note)); </div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;                p_keys++;</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;            }</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        }</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
-<div class="line"><a name="l00190"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_synthesizer.html#af283aef76dc68c075476e198a4ea655f">  190</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_synthesizer.html#af283aef76dc68c075476e198a4ea655f">setMidiName</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* name){</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;            midi_name = name;</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        }</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;        <a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> cfg;</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        <a class="code" href="classaudio__tools_1_1_abstract_syntheizer_channel.html">AbstractSyntheizerChannel</a>* defaultChannel;</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        <a class="code" href="classaudio__tools_1_1_vector.html">Vector&lt;AbstractSyntheizerChannel*&gt;</a> channels;</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">char</span>* midi_name = <span class="stringliteral">&quot;Synthesizer&quot;</span>;</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
-<div class="line"><a name="l00200"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_synthesizer_1_1_key_parameter.html">  200</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="structaudio__tools_1_1_synthesizer_1_1_key_parameter.html">KeyParameter</a> {</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;            <a class="code" href="structaudio__tools_1_1_synthesizer_1_1_key_parameter.html">KeyParameter</a>(<a class="code" href="classaudio__tools_1_1_synthesizer.html">Synthesizer</a>* synth, <span class="keywordtype">int</span> nte){</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;                p_synthesizer=synth;</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;                note = nte;</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;            };</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;            <a class="code" href="classaudio__tools_1_1_synthesizer.html">Synthesizer</a> *p_synthesizer = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;            <span class="keywordtype">int</span> note;</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        };</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160; </div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<span class="preprocessor">#ifdef USE_MIDI</span></div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; </div>
-<div class="line"><a name="l00212"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_synthesizer_1_1_synth_action.html">  212</a></span>&#160;        <span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_synthesizer_1_1_synth_action.html">SynthAction</a> : <span class="keyword">public</span> MidiAction {</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;            <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;                <a class="code" href="classaudio__tools_1_1_synthesizer.html">Synthesizer</a> *synth=<span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;            <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;                <a class="code" href="classaudio__tools_1_1_synthesizer_1_1_synth_action.html">SynthAction</a>(<a class="code" href="classaudio__tools_1_1_synthesizer.html">Synthesizer</a> *synth){</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;                    this-&gt;synth = synth;</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;                }</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;                <span class="keywordtype">void</span> onNoteOn(uint8_t channel, uint8_t note, uint8_t velocity) {</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;                    <span class="keywordtype">float</span> v = 1.0/127.0 * velocity;</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;                    synth-&gt;keyOn(note, v);</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;                }</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;                <span class="keywordtype">void</span> onNoteOff(uint8_t channel, uint8_t note, uint8_t velocity) {</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;                    synth-&gt;keyOff(note);</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;                }</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;                <span class="keywordtype">void</span> onControlChange(uint8_t channel, uint8_t controller, uint8_t value) {}</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;                <span class="keywordtype">void</span> onPitchBend(uint8_t channel, uint8_t value) {}</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;        };</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160; </div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        <a class="code" href="classaudio__tools_1_1_synthesizer_1_1_synth_action.html">SynthAction</a> *p_synth_action = <span class="keyword">new</span> <a class="code" href="classaudio__tools_1_1_synthesizer_1_1_synth_action.html">SynthAction</a>(<span class="keyword">this</span>);</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;        <span class="comment">// Midi BLE Server</span></div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;        MidiBleServer ble = MidiBleServer(midi_name, p_synth_action);</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        <span class="keywordtype">void</span> addEffect(<a class="code" href="classaudio__tools_1_1_audio_effect.html">AudioEffect</a> *ptr){</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;            audio_effects.addEffect(ptr);</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        }</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        AudioBaseInfo config;</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        AudioEffects&lt;GeneratorFromStream&lt;int16_t&gt;&gt; audio_effects;</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160; </div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;};</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160; </div>
+<div class="line"><a name="l00192"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_synthesizer_key.html">  192</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structaudio__tools_1_1_synthesizer_key.html">SynthesizerKey</a> {</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    <span class="keywordtype">int</span> pin;</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    <span class="keywordtype">int</span> note;</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;};</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160; </div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160; </div>
+<div class="line"><a name="l00204"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_synthesizer.html">  204</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_synthesizer.html">Synthesizer</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt;int16_t&gt; {</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;        <a class="code" href="classaudio__tools_1_1_synthesizer.html">Synthesizer</a>() {</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;            defaultChannel = <span class="keyword">new</span> <a class="code" href="classaudio__tools_1_1_default_synthesizer_channel.html">DefaultSynthesizerChannel&lt;AudioEffects&lt;SineWaveGenerator&lt;int16_t&gt;</a>&gt;&gt;();</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;        }</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160; </div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        <a class="code" href="classaudio__tools_1_1_synthesizer.html">Synthesizer</a>(<a class="code" href="classaudio__tools_1_1_abstract_synthesizer_channel.html">AbstractSynthesizerChannel</a> *ch){</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;            defaultChannel = ch;</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        }</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160; </div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        ~<a class="code" href="classaudio__tools_1_1_synthesizer.html">Synthesizer</a>(){</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;            LOGD(LOG_METHOD);</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0;j&lt;channels.size();j++){</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;                <span class="keyword">delete</span> channels[j];</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;                channels[j] = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;            }</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160; </div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="preprocessor">#ifdef USE_MIDI</span></div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;            <span class="keyword">delete</span> p_synth_action;</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;       }</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160; </div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        <span class="keywordtype">void</span> begin(<a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> config) {</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;            LOGI(LOG_METHOD);</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;            this-&gt;cfg = config;</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;            <a class="code" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator&lt;int16_t&gt;::begin</a>(config);</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;            <span class="comment">// provide config to defaut</span></div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;            defaultChannel-&gt;<a class="code" href="classaudio__tools_1_1_abstract_synthesizer_channel.html#a21002f3922d1614ae3fac29a85cbb2a2">begin</a>(config);</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;        }</div>
 <div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160; </div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160; </div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        <span class="comment">// gets the channel for the indicated note</span></div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        <a class="code" href="classaudio__tools_1_1_abstract_syntheizer_channel.html">AbstractSyntheizerChannel</a> *getNoteChannel(<span class="keywordtype">int</span> note){</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0;j&lt;channels.size();j++){</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;                <span class="keywordflow">if</span> (!channels[j]-&gt;note() == note){</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;                    <span class="keywordflow">return</span> channels[j];</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;                }</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;            }</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;        }</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160; </div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;        <span class="comment">// gets a free channel</span></div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;        AbstractSyntheizerChannel *getFreeChannel(){</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0;j&lt;channels.size();j++){</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;                <span class="keywordflow">if</span> (!channels[j]-&gt;isActive()){</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;                    <span class="keywordflow">return</span> channels[j];</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;                }</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;            }</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;            LOGI(<span class="stringliteral">&quot;adding new channel&quot;</span>);</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;            AbstractSyntheizerChannel* ch = defaultChannel-&gt;clone();</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;            ch-&gt;begin(cfg);</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;            channels.push_back(ch);</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;            <span class="keywordflow">return</span> ch;</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;        }</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; </div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> callbackKeyOn(<span class="keywordtype">bool</span> active, <span class="keywordtype">int</span> pin, <span class="keywordtype">void</span>* ptr){</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;            KeyParameter* par = (KeyParameter*)ptr;</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;            <span class="keywordflow">if</span> (par !=<span class="keyword">nullptr</span> &amp;&amp; par-&gt;p_synthesizer!=<span class="keyword">nullptr</span>){</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;                par-&gt;p_synthesizer-&gt;keyOn(par-&gt;note);</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;                LOGE(<span class="stringliteral">&quot;callbackKeyOn: unexpected null&quot;</span>)</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;            }</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        }</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160; </div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> callbackKeyOff(<span class="keywordtype">bool</span> active, <span class="keywordtype">int</span> pin, <span class="keywordtype">void</span>* ptr){</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;            KeyParameter* par = (KeyParameter*)ptr;</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;            <span class="keywordflow">if</span> (par !=<span class="keyword">nullptr</span> &amp;&amp; par-&gt;p_synthesizer!=<span class="keyword">nullptr</span>){</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;                par-&gt;p_synthesizer-&gt;keyOff(par-&gt;note);</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;            } {</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;                LOGE(<span class="stringliteral">&quot;callbackKeyOff: unexpected null&quot;</span>)                </div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;            }</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;        }</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160; </div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;        <span class="keywordtype">void</span> keyOn(<span class="keywordtype">int</span> note, <span class="keywordtype">float</span> tgt=0){</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;            LOGI(<span class="stringliteral">&quot;keyOn: %d&quot;</span>, note);</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;            <a class="code" href="classaudio__tools_1_1_abstract_synthesizer_channel.html">AbstractSynthesizerChannel</a> *channel = getFreeChannel();</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;            <span class="keywordflow">if</span> (channel!=<span class="keyword">nullptr</span>){</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;                channel-&gt;<a class="code" href="classaudio__tools_1_1_abstract_synthesizer_channel.html#aca4034020a1dfd3a5389477ea73634f2">keyOn</a>(note, tgt);</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;                LOGW(<span class="stringliteral">&quot;No channel available for %d&quot;</span>,note);</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;            }</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;        }</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160; </div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;        <span class="keywordtype">void</span> keyOff(<span class="keywordtype">int</span> note){</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;            LOGI(<span class="stringliteral">&quot;keyOff: %d&quot;</span>, note);</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;            <a class="code" href="classaudio__tools_1_1_abstract_synthesizer_channel.html">AbstractSynthesizerChannel</a> *channel = getNoteChannel(note);</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;            <span class="keywordflow">if</span> (channel!=<span class="keyword">nullptr</span>){</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;                channel-&gt;<a class="code" href="classaudio__tools_1_1_abstract_synthesizer_channel.html#a1967e5ccd307b74c8a632d123ec5ae4f">keyOff</a>();</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;            }</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;        }</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160; </div>
+<div class="line"><a name="l00253"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_synthesizer.html#a9507b2542740fdd2a474764d282c0b8f">  253</a></span>&#160;        int16_t <a class="code" href="classaudio__tools_1_1_synthesizer.html#a9507b2542740fdd2a474764d282c0b8f">readSample</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;            <span class="keywordtype">float</span> total = 0;</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;            uint16_t count = 0;</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;            <span class="comment">// calculate sum of all channels</span></div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0;j&lt;channels.size();j++){</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;                <span class="keywordflow">if</span> (channels[j]-&gt;<a class="code" href="classaudio__tools_1_1_sound_generator.html#afed4561d3aa22ca8174fa1db47c4083f">isActive</a>()){</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;                    count++;</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;                    total += channels[j]-&gt;readSample();</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;                }</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;            }</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;            <span class="comment">// prevent divide by zero</span></div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;            int16_t result = 0;</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;            <span class="keywordflow">if</span> (count&gt;0){</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;                result = 0.9 * total / count;</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;            }</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;            <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        }</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160; </div>
+<div class="line"><a name="l00272"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_synthesizer.html#afd648238358c7d38ffedd5f750b56992">  272</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_synthesizer.html#afd648238358c7d38ffedd5f750b56992">setKeys</a>(<a class="code" href="classaudio__tools_1_1_audio_actions.html">AudioActions</a> &amp;actions, <a class="code" href="structaudio__tools_1_1_synthesizer_key.html">SynthesizerKey</a>* p_keys, AudioActions::ActiveLogic activeValue){</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;            <span class="keywordflow">while</span> (p_keys-&gt;note &gt; 0){</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;                actions.<a class="code" href="classaudio__tools_1_1_audio_actions.html#a1b8cf96b70db0aea1d785a593b15d50b">add</a>(p_keys-&gt;pin, callbackKeyOn, callbackKeyOff, activeValue , <span class="keyword">new</span> <a class="code" href="structaudio__tools_1_1_synthesizer_1_1_key_parameter.html">KeyParameter</a>(<span class="keyword">this</span>, p_keys-&gt;note)); </div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;                p_keys++;</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;            }</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        }</div>
 <div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160; </div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;};</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160; </div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;} <span class="comment">// namespace</span></div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160; </div>
-<div class="ttc" id="aclass_audio_actions_html"><div class="ttname"><a href="class_audio_actions.html">AudioActions</a></div><div class="ttdoc">A simple class to assign Functions to Pins e.g. to implement a simple navigation control or volume co...</div><div class="ttdef"><b>Definition:</b> AudioActions.h:17</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a_d_s_r_html"><div class="ttname"><a href="classaudio__tools_1_1_a_d_s_r.html">audio_tools::ADSR</a></div><div class="ttdoc">ADSR Envelope: Attack, Decay, Sustain and Release. Attack is the time taken for initial run-up of lev...</div><div class="ttdef"><b>Definition:</b> AudioEffect.h:298</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_abstract_syntheizer_channel_html"><div class="ttname"><a href="classaudio__tools_1_1_abstract_syntheizer_channel.html">audio_tools::AbstractSyntheizerChannel</a></div><div class="ttdoc">Defines the sound generation for one channel. A channel is used to process an indivudual key so that ...</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:22</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_effects_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_effects.html">audio_tools::AudioEffects</a></div><div class="ttdoc">AudioEffects.</div><div class="ttdef"><b>Definition:</b> AudioEffects.h:19</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_effects_html_a2bd4690de4e8db94613f0d842c404efe"><div class="ttname"><a href="classaudio__tools_1_1_audio_effects.html#a2bd4690de4e8db94613f0d842c404efe">audio_tools::AudioEffects::readSample</a></div><div class="ttdeci">virtual effect_t readSample()</div><div class="ttdoc">provides the resulting sample</div><div class="ttdef"><b>Definition:</b> AudioEffects.h:65</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_effects_html_a8b7aaaecc31a6f18479892b4d7d78c2b"><div class="ttname"><a href="classaudio__tools_1_1_audio_effects.html#a8b7aaaecc31a6f18479892b4d7d78c2b">audio_tools::AudioEffects::setInput</a></div><div class="ttdeci">void setInput(SoundGenerator &amp;in)</div><div class="ttdoc">Defines the input source for the raw guitar input.</div><div class="ttdef"><b>Definition:</b> AudioEffects.h:40</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_effects_html_a90b1bb6bb8c4fe639a49006f10cdfc05"><div class="ttname"><a href="classaudio__tools_1_1_audio_effects.html#a90b1bb6bb8c4fe639a49006f10cdfc05">audio_tools::AudioEffects::addEffect</a></div><div class="ttdeci">void addEffect(AudioEffect &amp;effect)</div><div class="ttdoc">Adds an effect object (by reference)</div><div class="ttdef"><b>Definition:</b> AudioEffects.h:55</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_default_syntheizer_channel_html"><div class="ttname"><a href="classaudio__tools_1_1_default_syntheizer_channel.html">audio_tools::DefaultSyntheizerChannel</a></div><div class="ttdoc">Default implementation for a Channel.</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:39</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_sine_wave_generator_html"><div class="ttname"><a href="classaudio__tools_1_1_sine_wave_generator.html">audio_tools::SineWaveGenerator&lt; int16_t &gt;</a></div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_sound_generator_html"><div class="ttname"><a href="classaudio__tools_1_1_sound_generator.html">audio_tools::SoundGenerator</a></div><div class="ttdoc">Base class to define the abstract interface for the sound generating classes.</div><div class="ttdef"><b>Definition:</b> SoundGenerator.h:16</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_synthesizer_1_1_synth_action_html"><div class="ttname"><a href="classaudio__tools_1_1_synthesizer_1_1_synth_action.html">audio_tools::Synthesizer::SynthAction</a></div><div class="ttdoc">Midi Support.</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:212</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_synthesizer_html"><div class="ttname"><a href="classaudio__tools_1_1_synthesizer.html">audio_tools::Synthesizer</a></div><div class="ttdoc">A simple Synthesizer which can generate sound having multiple keys pressed. The main purpose of this ...</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:119</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_synthesizer_html_aa1b0440c1f22acdf7d580b1d480f4f73"><div class="ttname"><a href="classaudio__tools_1_1_synthesizer.html#aa1b0440c1f22acdf7d580b1d480f4f73">audio_tools::Synthesizer::audioEffects</a></div><div class="ttdeci">AudioEffects &amp; audioEffects()</div><div class="ttdoc">Provides access to the AudioEffects.</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:177</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_synthesizer_html_ac933390c0ec874f09e6cc61c84ad5ae4"><div class="ttname"><a href="classaudio__tools_1_1_synthesizer.html#ac933390c0ec874f09e6cc61c84ad5ae4">audio_tools::Synthesizer::readSample</a></div><div class="ttdeci">int16_t readSample()</div><div class="ttdoc">Provides mixed samples of all channels.</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:163</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_synthesizer_html_af283aef76dc68c075476e198a4ea655f"><div class="ttname"><a href="classaudio__tools_1_1_synthesizer.html#af283aef76dc68c075476e198a4ea655f">audio_tools::Synthesizer::setMidiName</a></div><div class="ttdeci">void setMidiName(const char *name)</div><div class="ttdoc">Defines the midi name.</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:190</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_synthesizer_html_afd648238358c7d38ffedd5f750b56992"><div class="ttname"><a href="classaudio__tools_1_1_synthesizer.html#afd648238358c7d38ffedd5f750b56992">audio_tools::Synthesizer::setKeys</a></div><div class="ttdeci">void setKeys(AudioActions &amp;actions, SynthesizerKey *p_keys, AudioActions::ActiveLogic activeValue)</div><div class="ttdoc">Assigns pins to notes.</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:182</div></div>
+<div class="line"><a name="l00280"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_synthesizer.html#af283aef76dc68c075476e198a4ea655f">  280</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_synthesizer.html#af283aef76dc68c075476e198a4ea655f">setMidiName</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* name){</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;            midi_name = name;</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;        }</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160; </div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        <a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> cfg;</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;        <a class="code" href="classaudio__tools_1_1_abstract_synthesizer_channel.html">AbstractSynthesizerChannel</a>* defaultChannel;</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;        <a class="code" href="classaudio__tools_1_1_vector.html">Vector&lt;AbstractSynthesizerChannel*&gt;</a> channels;</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">char</span>* midi_name = <span class="stringliteral">&quot;Synthesizer&quot;</span>;</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160; </div>
+<div class="line"><a name="l00290"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_synthesizer_1_1_key_parameter.html">  290</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="structaudio__tools_1_1_synthesizer_1_1_key_parameter.html">KeyParameter</a> {</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;            <a class="code" href="structaudio__tools_1_1_synthesizer_1_1_key_parameter.html">KeyParameter</a>(<a class="code" href="classaudio__tools_1_1_synthesizer.html">Synthesizer</a>* synth, <span class="keywordtype">int</span> nte){</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;                p_synthesizer=synth;</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;                note = nte;</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;            };</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;            <a class="code" href="classaudio__tools_1_1_synthesizer.html">Synthesizer</a> *p_synthesizer = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;            <span class="keywordtype">int</span> note;</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;        };</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160; </div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="preprocessor">#ifdef USE_MIDI</span></div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160; </div>
+<div class="line"><a name="l00302"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_synthesizer_1_1_synth_action.html">  302</a></span>&#160;        <span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_synthesizer_1_1_synth_action.html">SynthAction</a> : <span class="keyword">public</span> MidiAction {</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;            <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;                <a class="code" href="classaudio__tools_1_1_synthesizer.html">Synthesizer</a> *synth=<span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;            <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;                <a class="code" href="classaudio__tools_1_1_synthesizer_1_1_synth_action.html">SynthAction</a>(<a class="code" href="classaudio__tools_1_1_synthesizer.html">Synthesizer</a> *synth){</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;                    this-&gt;synth = synth;</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;                }</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;                <span class="keywordtype">void</span> onNoteOn(uint8_t channel, uint8_t note, uint8_t velocity) {</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;                    <span class="keywordtype">int</span> frq = MidiCommon::noteToFrequency(note);</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;                    <span class="keywordtype">float</span> vel = 1.0/127.0 * velocity;</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;                    synth-&gt;keyOn(frq, vel);</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;                }</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;                <span class="keywordtype">void</span> onNoteOff(uint8_t channel, uint8_t note, uint8_t velocity) {</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;                    <span class="keywordtype">int</span> frq = MidiCommon::noteToFrequency(note);</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;                    synth-&gt;keyOff(frq);</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;                }</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;                <span class="keywordtype">void</span> onControlChange(uint8_t channel, uint8_t controller, uint8_t value) {}</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;                <span class="keywordtype">void</span> onPitchBend(uint8_t channel, uint8_t value) {}</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;        };</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160; </div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;        <a class="code" href="classaudio__tools_1_1_synthesizer_1_1_synth_action.html">SynthAction</a> *p_synth_action = <span class="keyword">new</span> <a class="code" href="classaudio__tools_1_1_synthesizer_1_1_synth_action.html">SynthAction</a>(<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;        <span class="comment">// Midi BLE Server</span></div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;        MidiBleServer ble = MidiBleServer(midi_name, p_synth_action);</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160; </div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160; </div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;        <span class="comment">// gets the channel for the indicated note</span></div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;        <a class="code" href="classaudio__tools_1_1_abstract_synthesizer_channel.html">AbstractSynthesizerChannel</a> *getNoteChannel(<span class="keywordtype">int</span> note){</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;            LOGI(<span class="stringliteral">&quot;getNoteChannel: %d&quot;</span>, note);</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0;j&lt;channels.size();j++){</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;                <span class="keywordflow">if</span> (channels[j]-&gt;note() == note){</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;                    <span class="keywordflow">return</span> channels[j];</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;                }</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;            }</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;        }</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160; </div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;        <span class="comment">// gets a free channel</span></div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;        AbstractSynthesizerChannel *getFreeChannel(){</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;            LOGI(<span class="stringliteral">&quot;getFreeChannel&quot;</span>);</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0;j&lt;channels.size();j++){</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;                <span class="keywordflow">if</span> (!channels[j]-&gt;<a class="code" href="classaudio__tools_1_1_sound_generator.html#afed4561d3aa22ca8174fa1db47c4083f">isActive</a>()){</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;                    <span class="keywordflow">return</span> channels[j];</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;                }</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;            }</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;            LOGI(<span class="stringliteral">&quot;No free channel found: Adding new channel&quot;</span>);</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;            AbstractSynthesizerChannel* ch = defaultChannel-&gt;clone();</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;            channels.push_back(ch);</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;            <span class="keywordflow">return</span> ch;</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;        }</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160; </div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> callbackKeyOn(<span class="keywordtype">bool</span> active, <span class="keywordtype">int</span> pin, <span class="keywordtype">void</span>* ref){</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;            LOGI(LOG_METHOD);</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;            KeyParameter* par = (KeyParameter*)ref;</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;            <span class="keywordflow">if</span> (par !=<span class="keyword">nullptr</span> &amp;&amp; par-&gt;p_synthesizer!=<span class="keyword">nullptr</span>){</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;                par-&gt;p_synthesizer-&gt;keyOn(par-&gt;note);</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;                LOGE(<span class="stringliteral">&quot;callbackKeyOn: unexpected null&quot;</span>)</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;            }</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;        }</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160; </div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> callbackKeyOff(<span class="keywordtype">bool</span> active, <span class="keywordtype">int</span> pin, <span class="keywordtype">void</span>* ref){</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;            LOGI(LOG_METHOD);</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;            KeyParameter* par = (KeyParameter*)ref;</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;            <span class="keywordflow">if</span> (par !=<span class="keyword">nullptr</span>){</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;                <span class="keywordflow">if</span> (par-&gt;p_synthesizer!=<span class="keyword">nullptr</span>){</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;                    par-&gt;p_synthesizer-&gt;keyOff(par-&gt;note);</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;                } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;                    LOGE(<span class="stringliteral">&quot;callbackKeyOff: p_synthesizer is null&quot;</span>);               </div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;                }</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;                LOGE(<span class="stringliteral">&quot;callbackKeyOff: ref is null&quot;</span>);               </div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;            }</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;        }</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;};</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160; </div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;} <span class="comment">// namespace</span></div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160; </div>
+<div class="ttc" id="aclass_stream_html"><div class="ttname"><a href="class_stream.html">Stream</a></div><div class="ttdef"><b>Definition:</b> Stream.h:49</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_d_s_r_gain_html"><div class="ttname"><a href="classaudio__tools_1_1_a_d_s_r_gain.html">audio_tools::ADSRGain</a></div><div class="ttdoc">ADSR Envelope: Attack, Decay, Sustain and Release. Attack is the time taken for initial run-up of lev...</div><div class="ttdef"><b>Definition:</b> AudioEffect.h:353</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_abstract_synthesizer_channel_html"><div class="ttname"><a href="classaudio__tools_1_1_abstract_synthesizer_channel.html">audio_tools::AbstractSynthesizerChannel</a></div><div class="ttdoc">Defines the sound generation for one channel. A channel is used to process an indivudual key so that ...</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:22</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_abstract_synthesizer_channel_html_a1967e5ccd307b74c8a632d123ec5ae4f"><div class="ttname"><a href="classaudio__tools_1_1_abstract_synthesizer_channel.html#a1967e5ccd307b74c8a632d123ec5ae4f">audio_tools::AbstractSynthesizerChannel::keyOff</a></div><div class="ttdeci">virtual void keyOff()=0</div><div class="ttdoc">Provides the key off event to ADSR to stop the sound.</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_abstract_synthesizer_channel_html_a21002f3922d1614ae3fac29a85cbb2a2"><div class="ttname"><a href="classaudio__tools_1_1_abstract_synthesizer_channel.html#a21002f3922d1614ae3fac29a85cbb2a2">audio_tools::AbstractSynthesizerChannel::begin</a></div><div class="ttdeci">virtual void begin(AudioBaseInfo config)</div><div class="ttdoc">Start the sound generation.</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_abstract_synthesizer_channel_html_a5a2ce94c0ae0085205d48602e78ea070"><div class="ttname"><a href="classaudio__tools_1_1_abstract_synthesizer_channel.html#a5a2ce94c0ae0085205d48602e78ea070">audio_tools::AbstractSynthesizerChannel::readSample</a></div><div class="ttdeci">virtual int16_t readSample()=0</div><div class="ttdoc">Provides the next sample.</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_abstract_synthesizer_channel_html_a8467200ca3c49367c0886759c720f536"><div class="ttname"><a href="classaudio__tools_1_1_abstract_synthesizer_channel.html#a8467200ca3c49367c0886759c720f536">audio_tools::AbstractSynthesizerChannel::note</a></div><div class="ttdeci">virtual int note()=0</div><div class="ttdoc">Provides the actual midi note that is played.</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_abstract_synthesizer_channel_html_aca4034020a1dfd3a5389477ea73634f2"><div class="ttname"><a href="classaudio__tools_1_1_abstract_synthesizer_channel.html#aca4034020a1dfd3a5389477ea73634f2">audio_tools::AbstractSynthesizerChannel::keyOn</a></div><div class="ttdeci">virtual void keyOn(int nte, float tgt)=0</div><div class="ttdoc">Provides the key on event to ADSR to start the sound.</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_abstract_synthesizer_channel_html_afb70bd4f68c1cd1a712126a77ec76f5d"><div class="ttname"><a href="classaudio__tools_1_1_abstract_synthesizer_channel.html#afb70bd4f68c1cd1a712126a77ec76f5d">audio_tools::AbstractSynthesizerChannel::isActive</a></div><div class="ttdeci">virtual bool isActive()=0</div><div class="ttdoc">Checks if the ADSR is still active - and generating sound.</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_actions_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_actions.html">audio_tools::AudioActions</a></div><div class="ttdoc">A simple class to assign Functions to Pins e.g. to implement a simple navigation control or volume co...</div><div class="ttdef"><b>Definition:</b> AudioActions.h:23</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_actions_html_a1b8cf96b70db0aea1d785a593b15d50b"><div class="ttname"><a href="classaudio__tools_1_1_audio_actions.html#a1b8cf96b70db0aea1d785a593b15d50b">audio_tools::AudioActions::add</a></div><div class="ttdeci">void add(int pin, void(*actionOn)(bool pinStatus, int pin, void *ref), ActiveLogic activeLogic=ActiveLow, void *ref=nullptr)</div><div class="ttdoc">Adds an action.</div><div class="ttdef"><b>Definition:</b> AudioActions.h:33</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_effect_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_effect.html">audio_tools::AudioEffect</a></div><div class="ttdoc">Abstract Base class for Sound Effects.</div><div class="ttdef"><b>Definition:</b> AudioEffect.h:17</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_effect_html_ab84387420f2639e4d8d33f63e2f3d687"><div class="ttname"><a href="classaudio__tools_1_1_audio_effect.html#ab84387420f2639e4d8d33f63e2f3d687">audio_tools::AudioEffect::setId</a></div><div class="ttdeci">void setId(int id)</div><div class="ttdoc">Allows to identify an effect.</div><div class="ttdef"><b>Definition:</b> AudioEffect.h:43</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_default_guitar_channel_html"><div class="ttname"><a href="classaudio__tools_1_1_default_guitar_channel.html">audio_tools::DefaultGuitarChannel</a></div><div class="ttdoc">Audio Processing Channel based on a Input Stream and an Audio Effects Chain. This can be used todo im...</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:123</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_default_guitar_channel_html_a071adc960b379ee7a67f551db17ad296"><div class="ttname"><a href="classaudio__tools_1_1_default_guitar_channel.html#a071adc960b379ee7a67f551db17ad296">audio_tools::DefaultGuitarChannel::keyOff</a></div><div class="ttdeci">virtual void keyOff() override</div><div class="ttdoc">Provides the key off event to ADSR to stop the sound.</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:165</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_default_guitar_channel_html_a617f7599b1da086652fea4d9d31a8264"><div class="ttname"><a href="classaudio__tools_1_1_default_guitar_channel.html#a617f7599b1da086652fea4d9d31a8264">audio_tools::DefaultGuitarChannel::DefaultGuitarChannel</a></div><div class="ttdeci">DefaultGuitarChannel(Stream &amp;input)</div><div class="ttdoc">Constructor which defines the input stream.</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:129</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_default_guitar_channel_html_a768fc6bddd4bc284e64d2a4c20c63517"><div class="ttname"><a href="classaudio__tools_1_1_default_guitar_channel.html#a768fc6bddd4bc284e64d2a4c20c63517">audio_tools::DefaultGuitarChannel::isActive</a></div><div class="ttdeci">virtual bool isActive() override</div><div class="ttdoc">Checks if the ADSR is still active - and generating sound.</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:157</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_default_guitar_channel_html_aaac42115d11b980c8b36eeab4b756648"><div class="ttname"><a href="classaudio__tools_1_1_default_guitar_channel.html#aaac42115d11b980c8b36eeab4b756648">audio_tools::DefaultGuitarChannel::begin</a></div><div class="ttdeci">virtual void begin(AudioBaseInfo config) override</div><div class="ttdoc">Starts the audio generator / audio processing.</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:150</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_default_guitar_channel_html_ac1b84ea198aa85f1227aab26f4f42bf7"><div class="ttname"><a href="classaudio__tools_1_1_default_guitar_channel.html#ac1b84ea198aa85f1227aab26f4f42bf7">audio_tools::DefaultGuitarChannel::clone</a></div><div class="ttdeci">DefaultGuitarChannel * clone() override</div><div class="ttdoc">Creates a copy of the channel.</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:137</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_default_guitar_channel_html_acf384918356efce3f69459ad7fc7f7f9"><div class="ttname"><a href="classaudio__tools_1_1_default_guitar_channel.html#acf384918356efce3f69459ad7fc7f7f9">audio_tools::DefaultGuitarChannel::keyOn</a></div><div class="ttdeci">virtual void keyOn(int note, float tgt) override</div><div class="ttdoc">start to play a note - note expects the frequency of the note!</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:162</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_default_guitar_channel_html_acf9459ff652b2b977f430f052679f9f5"><div class="ttname"><a href="classaudio__tools_1_1_default_guitar_channel.html#acf9459ff652b2b977f430f052679f9f5">audio_tools::DefaultGuitarChannel::setStream</a></div><div class="ttdeci">void setStream(Stream &amp;input)</div><div class="ttdoc">Defines the inputStream.</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:145</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_default_guitar_channel_html_adbeb440e75436fd9df6908a045a88c9f"><div class="ttname"><a href="classaudio__tools_1_1_default_guitar_channel.html#adbeb440e75436fd9df6908a045a88c9f">audio_tools::DefaultGuitarChannel::readSample</a></div><div class="ttdeci">virtual int16_t readSample() override</div><div class="ttdoc">Provides the next sample.</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:168</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_default_guitar_channel_html_aeb0287700c4d630064a4d14b7295e54c"><div class="ttname"><a href="classaudio__tools_1_1_default_guitar_channel.html#aeb0287700c4d630064a4d14b7295e54c">audio_tools::DefaultGuitarChannel::DefaultGuitarChannel</a></div><div class="ttdeci">DefaultGuitarChannel()=default</div><div class="ttdoc">Default constructor.</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_default_guitar_channel_html_aed023290240a73f1d9d535017e126b75"><div class="ttname"><a href="classaudio__tools_1_1_default_guitar_channel.html#aed023290240a73f1d9d535017e126b75">audio_tools::DefaultGuitarChannel::note</a></div><div class="ttdeci">virtual int note() override</div><div class="ttdoc">Provides the actual midi note that is played.</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:172</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_default_guitar_channel_html_af7834b9b086098c25e6cd870ff3ae769"><div class="ttname"><a href="classaudio__tools_1_1_default_guitar_channel.html#af7834b9b086098c25e6cd870ff3ae769">audio_tools::DefaultGuitarChannel::DefaultGuitarChannel</a></div><div class="ttdeci">DefaultGuitarChannel(DefaultGuitarChannel &amp;ch)=default</div><div class="ttdoc">Copy constructor.</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_default_synthesizer_channel_html"><div class="ttname"><a href="classaudio__tools_1_1_default_synthesizer_channel.html">audio_tools::DefaultSynthesizerChannel</a></div><div class="ttdoc">Default implementation for a Channel. You can provide the Sound Generator as parameter to the effects...</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:47</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_default_synthesizer_channel_html_a26d0e83605df12c1ebdca5c223a409a4"><div class="ttname"><a href="classaudio__tools_1_1_default_synthesizer_channel.html#a26d0e83605df12c1ebdca5c223a409a4">audio_tools::DefaultSynthesizerChannel::DefaultSynthesizerChannel</a></div><div class="ttdeci">DefaultSynthesizerChannel(DefaultSynthesizerChannel&lt; EffectsT &gt; &amp;ch)=default</div><div class="ttdoc">Copy constructor.</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_default_synthesizer_channel_html_a29934b22864d56602ede789c2f144646"><div class="ttname"><a href="classaudio__tools_1_1_default_synthesizer_channel.html#a29934b22864d56602ede789c2f144646">audio_tools::DefaultSynthesizerChannel::isActive</a></div><div class="ttdeci">virtual bool isActive() override</div><div class="ttdoc">Checks if the ADSR is still active - and generating sound.</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:76</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_default_synthesizer_channel_html_a3b7243befa0a226fcf641b7e6cbc438c"><div class="ttname"><a href="classaudio__tools_1_1_default_synthesizer_channel.html#a3b7243befa0a226fcf641b7e6cbc438c">audio_tools::DefaultSynthesizerChannel::begin</a></div><div class="ttdeci">virtual void begin(AudioBaseInfo config) override</div><div class="ttdoc">Start the sound generation.</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:62</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_default_synthesizer_channel_html_a407ce7c1518c15c3ecdb20aacec45c8a"><div class="ttname"><a href="classaudio__tools_1_1_default_synthesizer_channel.html#a407ce7c1518c15c3ecdb20aacec45c8a">audio_tools::DefaultSynthesizerChannel::DefaultSynthesizerChannel</a></div><div class="ttdeci">DefaultSynthesizerChannel()=default</div><div class="ttdoc">Default constructor.</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_default_synthesizer_channel_html_a62f4f7f3f1b0cd84bf1e8fa52db44d4a"><div class="ttname"><a href="classaudio__tools_1_1_default_synthesizer_channel.html#a62f4f7f3f1b0cd84bf1e8fa52db44d4a">audio_tools::DefaultSynthesizerChannel::note</a></div><div class="ttdeci">virtual int note() override</div><div class="ttdoc">Provides the actual midi note that is played.</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:102</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_default_synthesizer_channel_html_aa2545c8ec494afecf94fa9c947e8cc53"><div class="ttname"><a href="classaudio__tools_1_1_default_synthesizer_channel.html#aa2545c8ec494afecf94fa9c947e8cc53">audio_tools::DefaultSynthesizerChannel::readSample</a></div><div class="ttdeci">virtual int16_t readSample() override</div><div class="ttdoc">Provides the next sample.</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:98</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_default_synthesizer_channel_html_ab9700362545d49b747eee5f096650012"><div class="ttname"><a href="classaudio__tools_1_1_default_synthesizer_channel.html#ab9700362545d49b747eee5f096650012">audio_tools::DefaultSynthesizerChannel::keyOn</a></div><div class="ttdeci">virtual void keyOn(int note, float tgt) override</div><div class="ttdoc">start to play a note - note expects the frequency of the note!</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:81</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_default_synthesizer_channel_html_ac8de757db3dca4e065ec5ef2bdbd6127"><div class="ttname"><a href="classaudio__tools_1_1_default_synthesizer_channel.html#ac8de757db3dca4e065ec5ef2bdbd6127">audio_tools::DefaultSynthesizerChannel::keyOff</a></div><div class="ttdeci">virtual void keyOff() override</div><div class="ttdoc">Provides the key off event to ADSR to stop the sound.</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:89</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_sound_generator_html"><div class="ttname"><a href="classaudio__tools_1_1_sound_generator.html">audio_tools::SoundGenerator</a></div><div class="ttdoc">Base class to define the abstract interface for the sound generating classes.</div><div class="ttdef"><b>Definition:</b> SoundGenerator.h:17</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_sound_generator_html_afed4561d3aa22ca8174fa1db47c4083f"><div class="ttname"><a href="classaudio__tools_1_1_sound_generator.html#afed4561d3aa22ca8174fa1db47c4083f">audio_tools::SoundGenerator&lt; int16_t &gt;::isActive</a></div><div class="ttdeci">virtual bool isActive()</div><div class="ttdoc">Checks if the begin method has been called - after end() isActive returns false.</div><div class="ttdef"><b>Definition:</b> SoundGenerator.h:47</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_synthesizer_1_1_synth_action_html"><div class="ttname"><a href="classaudio__tools_1_1_synthesizer_1_1_synth_action.html">audio_tools::Synthesizer::SynthAction</a></div><div class="ttdoc">Midi Support.</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:302</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_synthesizer_html"><div class="ttname"><a href="classaudio__tools_1_1_synthesizer.html">audio_tools::Synthesizer</a></div><div class="ttdoc">A simple Synthesizer which can generate sound having multiple keys pressed. The main purpose of this ...</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:204</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_synthesizer_html_a9507b2542740fdd2a474764d282c0b8f"><div class="ttname"><a href="classaudio__tools_1_1_synthesizer.html#a9507b2542740fdd2a474764d282c0b8f">audio_tools::Synthesizer::readSample</a></div><div class="ttdeci">int16_t readSample() override</div><div class="ttdoc">Provides mixed samples of all channels.</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:253</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_synthesizer_html_af283aef76dc68c075476e198a4ea655f"><div class="ttname"><a href="classaudio__tools_1_1_synthesizer.html#af283aef76dc68c075476e198a4ea655f">audio_tools::Synthesizer::setMidiName</a></div><div class="ttdeci">void setMidiName(const char *name)</div><div class="ttdoc">Defines the midi name.</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:280</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_synthesizer_html_afd648238358c7d38ffedd5f750b56992"><div class="ttname"><a href="classaudio__tools_1_1_synthesizer.html#afd648238358c7d38ffedd5f750b56992">audio_tools::Synthesizer::setKeys</a></div><div class="ttdeci">void setKeys(AudioActions &amp;actions, SynthesizerKey *p_keys, AudioActions::ActiveLogic activeValue)</div><div class="ttdoc">Assigns pins to notes - the last SynthesizerKey is marked with an entry containing the note &lt;= 0.</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:272</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_vector_html"><div class="ttname"><a href="classaudio__tools_1_1_vector.html">audio_tools::Vector</a></div><div class="ttdoc">Vector implementation which provides the most important methods as defined by std::vector....</div><div class="ttdef"><b>Definition:</b> Vector.h:14</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AnalogAudioESP32.h:12</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_base_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_base_info.html">audio_tools::AudioBaseInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:23</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_synthesizer_1_1_key_parameter_html"><div class="ttname"><a href="structaudio__tools_1_1_synthesizer_1_1_key_parameter.html">audio_tools::Synthesizer::KeyParameter</a></div><div class="ttdef"><b>Definition:</b> Synthesizer.h:200</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_synthesizer_key_html"><div class="ttname"><a href="structaudio__tools_1_1_synthesizer_key.html">audio_tools::SynthesizerKey</a></div><div class="ttdoc">pin to note assossiation</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:107</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_synthesizer_1_1_key_parameter_html"><div class="ttname"><a href="structaudio__tools_1_1_synthesizer_1_1_key_parameter.html">audio_tools::Synthesizer::KeyParameter</a></div><div class="ttdef"><b>Definition:</b> Synthesizer.h:290</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_synthesizer_key_html"><div class="ttname"><a href="structaudio__tools_1_1_synthesizer_key.html">audio_tools::SynthesizerKey</a></div><div class="ttdoc">Arduino GPIO pin to note assossiation.</div><div class="ttdef"><b>Definition:</b> Synthesizer.h:192</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

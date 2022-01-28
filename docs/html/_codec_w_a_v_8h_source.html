@@ -110,7 +110,7 @@ $(function() {
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            this-&gt;len = len;</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            this-&gt;data_pos = 0l;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            memset(&amp;headerInfo, 0, <span class="keyword">sizeof</span>(<a class="code" href="structaudio__tools_1_1_w_a_v_audio_info.html">WAVAudioInfo</a>));</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            memset((<span class="keywordtype">void</span>*)&amp;headerInfo, 0, <span class="keyword">sizeof</span>(<a class="code" href="structaudio__tools_1_1_w_a_v_audio_info.html">WAVAudioInfo</a>));</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <span class="keywordflow">while</span> (!eof()) {</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                uint32_t tag, tag2, length;</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                tag = read_tag();</div>

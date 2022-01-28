@@ -75,7 +75,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>MP3 and AAC Decoder using libhelix: <a href="https://github.com/pschatzmann/arduino-libhelix">https://github.com/pschatzmann/arduino-libhelix</a>.  
+<p>MP3 and AAC Decoder using libhelix: <a href="https://github.com/pschatzmann/arduino-libhelix">https://github.com/pschatzmann/arduino-libhelix</a>. We dynamically create a MP3 or AAC decoder dependent on the provided audio format.  
  <a href="classaudio__tools_1_1_decoder_helix.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_codec_helix_8h_source.html">CodecHelix.h</a>&gt;</code></p>
@@ -128,29 +128,31 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cl
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a7d5caa77026bc858f8a5b75855eb417f"><td class="memItemLeft" align="right" valign="top"><a id="a7d5caa77026bc858f8a5b75855eb417f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>resetDecoder</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_decoder_helix.html#a7d5caa77026bc858f8a5b75855eb417f">resetDecoder</a> ()</td></tr>
+<tr class="memdesc:a7d5caa77026bc858f8a5b75855eb417f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes the decoder. <br /></td></tr>
 <tr class="separator:a7d5caa77026bc858f8a5b75855eb417f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b1696d18372242a75664dc15f512ec2"><td class="memItemLeft" align="right" valign="top"><a id="a1b1696d18372242a75664dc15f512ec2"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setupDecoder</b> ()</td></tr>
-<tr class="separator:a1b1696d18372242a75664dc15f512ec2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e0f3ce3a27c5148aa292f86ea5d65eb"><td class="memItemLeft" align="right" valign="top"><a id="a0e0f3ce3a27c5148aa292f86ea5d65eb"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_decoder_helix.html#a0e0f3ce3a27c5148aa292f86ea5d65eb">setupDecoder</a> (const byte *start)</td></tr>
+<tr class="memdesc:a0e0f3ce3a27c5148aa292f86ea5d65eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the decoder based on the audio format. <br /></td></tr>
+<tr class="separator:a0e0f3ce3a27c5148aa292f86ea5d65eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a4b935ed17eef072f2de6cc00811b60a0"><td class="memItemLeft" align="right" valign="top"><a id="a4b935ed17eef072f2de6cc00811b60a0"></a>
 <a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>noInfo</b></td></tr>
 <tr class="separator:a4b935ed17eef072f2de6cc00811b60a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ee2d2ad4f066b274dde0e777523dc62"><td class="memItemLeft" align="right" valign="top"><a id="a9ee2d2ad4f066b274dde0e777523dc62"></a>
-<a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>out_stream</b> = nullptr</td></tr>
-<tr class="separator:a9ee2d2ad4f066b274dde0e777523dc62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9afa49e6cca46501b4521b80dba71028"><td class="memItemLeft" align="right" valign="top"><a id="a9afa49e6cca46501b4521b80dba71028"></a>
 <a class="el" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_bi</b> = nullptr</td></tr>
 <tr class="separator:a9afa49e6cca46501b4521b80dba71028"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab398470388b611795b69dad242c92980"><td class="memItemLeft" align="right" valign="top"><a id="ab398470388b611795b69dad242c92980"></a>
 <a class="el" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_decoder</b> = nullptr</td></tr>
 <tr class="separator:ab398470388b611795b69dad242c92980"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a314bd2f38610dca38cce164713c02beb"><td class="memItemLeft" align="right" valign="top"><a id="a314bd2f38610dca38cce164713c02beb"></a>
+<a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_out_stream</b> = nullptr</td></tr>
+<tr class="separator:a314bd2f38610dca38cce164713c02beb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>MP3 and AAC Decoder using libhelix: <a href="https://github.com/pschatzmann/arduino-libhelix">https://github.com/pschatzmann/arduino-libhelix</a>. </p>
+<div class="textblock"><p>MP3 and AAC Decoder using libhelix: <a href="https://github.com/pschatzmann/arduino-libhelix">https://github.com/pschatzmann/arduino-libhelix</a>. We dynamically create a MP3 or AAC decoder dependent on the provided audio format. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>

@@ -85,11 +85,12 @@ Inheritance diagram for audio_tools::SoundGenerator&lt; T &gt;:</div>
   <img src="classaudio__tools_1_1_sound_generator.png" usemap="#audio_5Ftools::SoundGenerator_3C_20T_20_3E_map" alt=""/>
   <map id="audio_5Ftools::SoundGenerator_3C_20T_20_3E_map" name="audio_5Ftools::SoundGenerator_3C_20T_20_3E_map">
 <area href="classaudio__tools_1_1_generator_from_stream.html" title="An Adapter Class which lets you use any Stream as a Generator." alt="audio_tools::GeneratorFromStream&lt; T &gt;" shape="rect" coords="0,56,242,80"/>
-<area href="classaudio__tools_1_1_noise_generator.html" title="Generates a random noise sound with the help of rand() function." alt="audio_tools::NoiseGenerator&lt; T &gt;" shape="rect" coords="252,56,494,80"/>
-<area href="classaudio__tools_1_1_s_t_k_generator.html" title="The Synthesis ToolKit in C++ (STK) is a set of open source audio signal processing and algorithmic sy..." alt="audio_tools::STKGenerator&lt; T &gt;" shape="rect" coords="504,56,746,80"/>
-<area href="classaudio__tools_1_1_silence_generator.html" title="Provides 0 as sound data. This can be used e.g. to test the output functionality which should optimal..." alt="audio_tools::SilenceGenerator&lt; T &gt;" shape="rect" coords="756,56,998,80"/>
-<area href="classaudio__tools_1_1_sine_wave_generator.html" title="Generates a Sound with the help of sin() function." alt="audio_tools::SineWaveGenerator&lt; T &gt;" shape="rect" coords="1008,56,1250,80"/>
-<area href="classaudio__tools_1_1_square_wave_generator.html" title="Generates a square wave sound." alt="audio_tools::SquareWaveGenerator&lt; T &gt;" shape="rect" coords="1008,112,1250,136"/>
+<area href="classaudio__tools_1_1_generator_mixer.html" title="Mixer which combines multiple sound generators into one output." alt="audio_tools::GeneratorMixer&lt; T &gt;" shape="rect" coords="252,56,494,80"/>
+<area href="classaudio__tools_1_1_noise_generator.html" title="Generates a random noise sound with the help of rand() function." alt="audio_tools::NoiseGenerator&lt; T &gt;" shape="rect" coords="504,56,746,80"/>
+<area href="classaudio__tools_1_1_s_t_k_generator.html" title="The Synthesis ToolKit in C++ (STK) is a set of open source audio signal processing and algorithmic sy..." alt="audio_tools::STKGenerator&lt; T &gt;" shape="rect" coords="756,56,998,80"/>
+<area href="classaudio__tools_1_1_silence_generator.html" title="Provides 0 as sound data. This can be used e.g. to test the output functionality which should optimal..." alt="audio_tools::SilenceGenerator&lt; T &gt;" shape="rect" coords="1008,56,1250,80"/>
+<area href="classaudio__tools_1_1_sine_wave_generator.html" title="Generates a Sound with the help of sin() function." alt="audio_tools::SineWaveGenerator&lt; T &gt;" shape="rect" coords="1260,56,1502,80"/>
+<area href="classaudio__tools_1_1_square_wave_generator.html" title="Generates a square wave sound." alt="audio_tools::SquareWaveGenerator&lt; T &gt;" shape="rect" coords="1260,112,1502,136"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -112,7 +113,8 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="memdesc:a355ddf14fffecaa8538a85310900ca4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">ends the processing <br /></td></tr>
 <tr class="separator:a355ddf14fffecaa8538a85310900ca4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afed4561d3aa22ca8174fa1db47c4083f"><td class="memItemLeft" align="right" valign="top"><a id="afed4561d3aa22ca8174fa1db47c4083f"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive</b> ()</td></tr>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#afed4561d3aa22ca8174fa1db47c4083f">isActive</a> ()</td></tr>
+<tr class="memdesc:afed4561d3aa22ca8174fa1db47c4083f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the begin method has been called - after <a class="el" href="classaudio__tools_1_1_sound_generator.html#a355ddf14fffecaa8538a85310900ca4a" title="ends the processing">end()</a> isActive returns false. <br /></td></tr>
 <tr class="separator:afed4561d3aa22ca8174fa1db47c4083f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8534989c802aeb687aa13b9a3d6ee781"><td class="memItemLeft" align="right" valign="top"><a id="a8534989c802aeb687aa13b9a3d6ee781"></a>
 virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html#a8534989c802aeb687aa13b9a3d6ee781">readBytes</a> (uint8_t *buffer, size_t lengthBytes)</td></tr>
@@ -133,6 +135,9 @@ virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 <tr class="memitem:a7286c6f1c3ee11b6de98bf2b9658d14c"><td class="memItemLeft" align="right" valign="top"><a id="a7286c6f1c3ee11b6de98bf2b9658d14c"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setAudioInfo</b> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> info)</td></tr>
 <tr class="separator:a7286c6f1c3ee11b6de98bf2b9658d14c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5636078b44c6cd9108754594e38d7e26"><td class="memItemLeft" align="right" valign="top"><a id="a5636078b44c6cd9108754594e38d7e26"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setFrequency</b> (uint16_t frequency)</td></tr>
+<tr class="separator:a5636078b44c6cd9108754594e38d7e26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -163,7 +168,7 @@ class audio_tools::SoundGenerator&lt; T &gt;</h3>
   </dd>
 </dl>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/<a class="el" href="_sound_generator_8h_source.html">SoundGenerator.h</a></li>
+<li>src/AudioEffects/<a class="el" href="_sound_generator_8h_source.html">SoundGenerator.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

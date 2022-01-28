@@ -119,10 +119,10 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 virtual <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_sd_fat.html#aacbd304a5ba40836fa315795d48e882d">nextStream</a> (int offset) override</td></tr>
 <tr class="memdesc:aacbd304a5ba40836fa315795d48e882d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns next audio stream. <br /></td></tr>
 <tr class="separator:aacbd304a5ba40836fa315795d48e882d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c836efabe821985067cf51e85dbed92"><td class="memItemLeft" align="right" valign="top"><a id="a7c836efabe821985067cf51e85dbed92"></a>
-virtual <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_sd_fat.html#a7c836efabe821985067cf51e85dbed92">selectStream</a> (char *path) override</td></tr>
-<tr class="memdesc:a7c836efabe821985067cf51e85dbed92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns audio stream by path. <br /></td></tr>
-<tr class="separator:a7c836efabe821985067cf51e85dbed92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed4001b1541213aa95bedfc6b4e709e0"><td class="memItemLeft" align="right" valign="top"><a id="aed4001b1541213aa95bedfc6b4e709e0"></a>
+virtual <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_sd_fat.html#aed4001b1541213aa95bedfc6b4e709e0">selectStream</a> (const char *path) override</td></tr>
+<tr class="memdesc:aed4001b1541213aa95bedfc6b4e709e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns audio stream by path. <br /></td></tr>
+<tr class="separator:aed4001b1541213aa95bedfc6b4e709e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af53cb33f507dad7baafa2983b283049f"><td class="memItemLeft" align="right" valign="top"><a id="af53cb33f507dad7baafa2983b283049f"></a>
 virtual <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_sd_fat.html#af53cb33f507dad7baafa2983b283049f">selectStream</a> (int <a class="el" href="classaudio__tools_1_1_audio_source_sd_fat.html#ac8a32465fc908b5836b6807b34a22ffd">index</a>) override</td></tr>
 <tr class="memdesc:af53cb33f507dad7baafa2983b283049f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns audio stream at the indicated index (the index is zero based, so the first value is 0!) <br /></td></tr>
@@ -136,7 +136,8 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="memdesc:a99b8a4ceda59a8c194159add76bb9b1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allows to "correct" the start path if not defined in the constructor. <br /></td></tr>
 <tr class="separator:a99b8a4ceda59a8c194159add76bb9b1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d05db7838a185d6cdcb0c24aa332830"><td class="memItemLeft" align="right" valign="top"><a id="a5d05db7838a185d6cdcb0c24aa332830"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setTimeout</b> (int ms)</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_sd_fat.html#a5d05db7838a185d6cdcb0c24aa332830">setTimeout</a> (int ms)</td></tr>
+<tr class="memdesc:a5d05db7838a185d6cdcb0c24aa332830"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the timeout of <a class="el" href="class_stream.html">Stream</a> in milliseconds. <br /></td></tr>
 <tr class="separator:a5d05db7838a185d6cdcb0c24aa332830"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:addf747f78dd091b0ad682a1bb1012846"><td class="memItemLeft" align="right" valign="top"><a id="addf747f78dd091b0ad682a1bb1012846"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_sd_fat.html#addf747f78dd091b0ad682a1bb1012846">toStr</a> ()</td></tr>
@@ -154,10 +155,6 @@ virtual <a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class=
 <tr class="memitem:ac61d481cb9bcdcf3c88f8a1daa303797 inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="memItemLeft" align="right" valign="top"><a id="ac61d481cb9bcdcf3c88f8a1daa303797"></a>
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>setMetadataCallback</b> (void(*fn)(<a class="el" href="namespaceaudio__tools.html#a66747a0ba3d8821e3228fd1680106e68">MetaDataType</a> info, const char *str, int len), ID3TypeSelection sel=SELECT_ICY)</td></tr>
 <tr class="separator:ac61d481cb9bcdcf3c88f8a1daa303797 inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a527d24d2618d719b87eff1f40251f2bb inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="memItemLeft" align="right" valign="top"><a id="a527d24d2618d719b87eff1f40251f2bb"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a527d24d2618d719b87eff1f40251f2bb">setTimeout</a> (int millisec)</td></tr>
-<tr class="memdesc:a527d24d2618d719b87eff1f40251f2bb inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the timeout of <a class="el" href="class_stream.html">Stream</a> in milliseconds. <br /></td></tr>
-<tr class="separator:a527d24d2618d719b87eff1f40251f2bb inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a94efcff45d9249047df9e8041e4189f3 inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="memItemLeft" align="right" valign="top"><a id="a94efcff45d9249047df9e8041e4189f3"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source.html#a94efcff45d9249047df9e8041e4189f3">setTimeoutAutoNext</a> (int millisec)</td></tr>
 <tr class="memdesc:a94efcff45d9249047df9e8041e4189f3 inherit pub_methods_classaudio__tools_1_1_audio_source"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the timeout which is triggering to move to the next stream. - the default value is 500 ms. <br /></td></tr>
@@ -172,9 +169,9 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a2ce266429510a2702b479b12d58b22e8"><td class="memItemLeft" align="right" valign="top"><a id="a2ce266429510a2702b479b12d58b22e8"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>getFileAtIndex</b> (AudioFile dir, size_t pos, size_t &amp;idx, AudioFile &amp;result)</td></tr>
 <tr class="separator:a2ce266429510a2702b479b12d58b22e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a560a6ad13350c09968f5067d24963c6d"><td class="memItemLeft" align="right" valign="top"><a id="a560a6ad13350c09968f5067d24963c6d"></a>
-AudioFile&#160;</td><td class="memItemRight" valign="bottom"><b>getFileByPath</b> (char *path)</td></tr>
-<tr class="separator:a560a6ad13350c09968f5067d24963c6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee092f57c10997d8cf46cc05a97006f8"><td class="memItemLeft" align="right" valign="top"><a id="aee092f57c10997d8cf46cc05a97006f8"></a>
+AudioFile&#160;</td><td class="memItemRight" valign="bottom"><b>getFileByPath</b> (const char *path)</td></tr>
+<tr class="separator:aee092f57c10997d8cf46cc05a97006f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc88d1e2c73f2ce317019bae8d9aa878"><td class="memItemLeft" align="right" valign="top"><a id="adc88d1e2c73f2ce317019bae8d9aa878"></a>
 AudioFile&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_source_sd_fat.html#adc88d1e2c73f2ce317019bae8d9aa878">getFileByPos</a> (const char *dirStr, int pos)</td></tr>
 <tr class="memdesc:adc88d1e2c73f2ce317019bae8d9aa878"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the file at the indicated index (starting with 0) <br /></td></tr>

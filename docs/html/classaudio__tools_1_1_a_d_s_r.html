@@ -76,22 +76,25 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classaudio__tools_1_1_a_d_s_r.html" title="ADSR Envelope: Attack, Decay, Sustain and Release. Attack is the time taken for initial run-up of lev...">ADSR</a> Envelope: Attack, Decay, Sustain and Release. Attack is the time taken for initial run-up of level from nil to peak, beginning when the key is pressed. Decay is the time taken for the subsequent run down from the attack level to the designated sustainLevel level. Sustain is the level during the main sequence of the sound's duration, until the key is released. Release is the time taken for the level to decay from the sustainLevel level to zero after the key is released.[4].  
+<p>Generates <a class="el" href="classaudio__tools_1_1_a_d_s_r.html" title="Generates ADSR values between 0.0 and 1.0.">ADSR</a> values between 0.0 and 1.0.  
  <a href="classaudio__tools_1_1_a_d_s_r.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_audio_effect_8h_source.html">AudioEffect.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_audio_parameters_8h_source.html">AudioParameters.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for audio_tools::ADSR:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="classaudio__tools_1_1_a_d_s_r.png" usemap="#audio_5Ftools::ADSR_map" alt=""/>
   <map id="audio_5Ftools::ADSR_map" name="audio_5Ftools::ADSR_map">
-<area href="classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects." alt="audio_tools::AudioEffect" shape="rect" coords="0,0,148,24"/>
+<area href="classaudio__tools_1_1_abstract_parameter.html" title="Base class for all parameters." alt="audio_tools::AbstractParameter" shape="rect" coords="0,0,187,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a8aaf6609479276649e73953b0cfc2399"><td class="memItemLeft" align="right" valign="top"><a id="a8aaf6609479276649e73953b0cfc2399"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>ADSR</b> (<a class="el" href="classaudio__tools_1_1_a_d_s_r.html">ADSR</a> &amp;copy)=default</td></tr>
+<tr class="separator:a8aaf6609479276649e73953b0cfc2399"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6bade91b10bb9818ab3815a75472d04d"><td class="memItemLeft" align="right" valign="top"><a id="a6bade91b10bb9818ab3815a75472d04d"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>ADSR</b> (float attack=0.001, float decay=0.001, float sustainLevel=0.5, float release=0.005)</td></tr>
 <tr class="separator:a6bade91b10bb9818ab3815a75472d04d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -110,10 +113,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>keyOff</b> ()</td></t
 <tr class="memitem:a91178d11f8767176eafe6cecd55eeb8e"><td class="memItemLeft" align="right" valign="top"><a id="a91178d11f8767176eafe6cecd55eeb8e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>keyOn</b> (float tgt=0)</td></tr>
 <tr class="separator:a91178d11f8767176eafe6cecd55eeb8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0b925ddeca8b994ec6352aef6e2e87da"><td class="memItemLeft" align="right" valign="top"><a id="a0b925ddeca8b994ec6352aef6e2e87da"></a>
-effect_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_d_s_r.html#a0b925ddeca8b994ec6352aef6e2e87da">process</a> (effect_t input)</td></tr>
-<tr class="memdesc:a0b925ddeca8b994ec6352aef6e2e87da"><td class="mdescLeft">&#160;</td><td class="mdescRight">calculates the effect output from the input <br /></td></tr>
-<tr class="separator:a0b925ddeca8b994ec6352aef6e2e87da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ec7bd405a2542f034343b93e7c39376"><td class="memItemLeft" align="right" valign="top"><a id="a1ec7bd405a2542f034343b93e7c39376"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>releaseRate</b> ()</td></tr>
 <tr class="separator:a1ec7bd405a2542f034343b93e7c39376"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -132,15 +131,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setSustainLevel</b> (
 <tr class="memitem:ad7de319a2b789af6cb296144332bce2c"><td class="memItemLeft" align="right" valign="top"><a id="ad7de319a2b789af6cb296144332bce2c"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>sustainLevel</b> ()</td></tr>
 <tr class="separator:ad7de319a2b789af6cb296144332bce2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classaudio__tools_1_1_audio_effect"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classaudio__tools_1_1_audio_effect')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classaudio__tools_1_1_audio_effect.html">audio_tools::AudioEffect</a></td></tr>
-<tr class="memitem:ab01def7ad32249fbebcdd00da9a54cc6 inherit pub_methods_classaudio__tools_1_1_audio_effect"><td class="memItemLeft" align="right" valign="top"><a id="ab01def7ad32249fbebcdd00da9a54cc6"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect.html#ab01def7ad32249fbebcdd00da9a54cc6">active</a> ()</td></tr>
-<tr class="memdesc:ab01def7ad32249fbebcdd00da9a54cc6 inherit pub_methods_classaudio__tools_1_1_audio_effect"><td class="mdescLeft">&#160;</td><td class="mdescRight">determines if the effect is active <br /></td></tr>
-<tr class="separator:ab01def7ad32249fbebcdd00da9a54cc6 inherit pub_methods_classaudio__tools_1_1_audio_effect"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae5e573517e05769c77ebb17f2fe01495 inherit pub_methods_classaudio__tools_1_1_audio_effect"><td class="memItemLeft" align="right" valign="top"><a id="ae5e573517e05769c77ebb17f2fe01495"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect.html#ae5e573517e05769c77ebb17f2fe01495">setActive</a> (bool value)</td></tr>
-<tr class="memdesc:ae5e573517e05769c77ebb17f2fe01495 inherit pub_methods_classaudio__tools_1_1_audio_effect"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the effect active/inactive <br /></td></tr>
-<tr class="separator:ae5e573517e05769c77ebb17f2fe01495 inherit pub_methods_classaudio__tools_1_1_audio_effect"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classaudio__tools_1_1_abstract_parameter"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classaudio__tools_1_1_abstract_parameter')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classaudio__tools_1_1_abstract_parameter.html">audio_tools::AbstractParameter</a></td></tr>
+<tr class="memitem:ace285ebcef87c9a1c4e1e05b9e796c6e inherit pub_methods_classaudio__tools_1_1_abstract_parameter"><td class="memItemLeft" align="right" valign="top"><a id="ace285ebcef87c9a1c4e1e05b9e796c6e"></a>
+virtual float&#160;</td><td class="memItemRight" valign="bottom"><b>tick</b> ()</td></tr>
+<tr class="separator:ace285ebcef87c9a1c4e1e05b9e796c6e inherit pub_methods_classaudio__tools_1_1_abstract_parameter"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a464608d37368297b6fe935ac04818a92 inherit pub_methods_classaudio__tools_1_1_abstract_parameter"><td class="memItemLeft" align="right" valign="top"><a id="a464608d37368297b6fe935ac04818a92"></a>
+virtual float&#160;</td><td class="memItemRight" valign="bottom"><b>value</b> ()</td></tr>
+<tr class="separator:a464608d37368297b6fe935ac04818a92 inherit pub_methods_classaudio__tools_1_1_abstract_parameter"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-types"></a>
 Protected Types</h2></td></tr>
@@ -157,14 +154,9 @@ Protected Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:aa56211c814bd0f35041d88930b1bbd32"><td class="memItemLeft" align="right" valign="top"><a id="aa56211c814bd0f35041d88930b1bbd32"></a>
-effect_t&#160;</td><td class="memItemRight" valign="bottom"><b>tick</b> (effect_t in)</td></tr>
-<tr class="separator:aa56211c814bd0f35041d88930b1bbd32"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_methods_classaudio__tools_1_1_audio_effect"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classaudio__tools_1_1_audio_effect')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classaudio__tools_1_1_audio_effect.html">audio_tools::AudioEffect</a></td></tr>
-<tr class="memitem:a074cb95034d83ce77744ca8f1d94ccb9 inherit pro_methods_classaudio__tools_1_1_audio_effect"><td class="memItemLeft" align="right" valign="top"><a id="a074cb95034d83ce77744ca8f1d94ccb9"></a>
-int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_effect.html#a074cb95034d83ce77744ca8f1d94ccb9">clip</a> (int32_t in, int16_t clipLimit=32767, int16_t resultLimit=32767)</td></tr>
-<tr class="memdesc:a074cb95034d83ce77744ca8f1d94ccb9 inherit pro_methods_classaudio__tools_1_1_audio_effect"><td class="mdescLeft">&#160;</td><td class="mdescRight">generic clipping method <br /></td></tr>
-<tr class="separator:a074cb95034d83ce77744ca8f1d94ccb9 inherit pro_methods_classaudio__tools_1_1_audio_effect"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af43ef07bb902e7df2b76175108da6893"><td class="memItemLeft" align="right" valign="top"><a id="af43ef07bb902e7df2b76175108da6893"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> ()</td></tr>
+<tr class="separator:af43ef07bb902e7df2b76175108da6893"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -189,23 +181,18 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>sustain</b></td></tr
 <tr class="memitem:afea34551b725ef3920f02c303f98eb4f"><td class="memItemLeft" align="right" valign="top"><a id="afea34551b725ef3920f02c303f98eb4f"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>target</b> = 0</td></tr>
 <tr class="separator:afea34551b725ef3920f02c303f98eb4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a252e0e7ecd17b17ba21f3b12fa1c1aa5"><td class="memItemLeft" align="right" valign="top"><a id="a252e0e7ecd17b17ba21f3b12fa1c1aa5"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>value</b> = 0</td></tr>
-<tr class="separator:a252e0e7ecd17b17ba21f3b12fa1c1aa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7e30e2d84a71401b3f99cd431344b84"><td class="memItemLeft" align="right" valign="top"><a id="ad7e30e2d84a71401b3f99cd431344b84"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>zeroCount</b> = 0</td></tr>
 <tr class="separator:ad7e30e2d84a71401b3f99cd431344b84"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_attribs_classaudio__tools_1_1_audio_effect"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classaudio__tools_1_1_audio_effect')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classaudio__tools_1_1_audio_effect.html">audio_tools::AudioEffect</a></td></tr>
-<tr class="memitem:a5baa4e28b5634fa5c6a00198b62562ec inherit pro_attribs_classaudio__tools_1_1_audio_effect"><td class="memItemLeft" align="right" valign="top"><a id="a5baa4e28b5634fa5c6a00198b62562ec"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>active_flag</b> = true</td></tr>
-<tr class="separator:a5baa4e28b5634fa5c6a00198b62562ec inherit pro_attribs_classaudio__tools_1_1_audio_effect"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classaudio__tools_1_1_abstract_parameter"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classaudio__tools_1_1_abstract_parameter')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classaudio__tools_1_1_abstract_parameter.html">audio_tools::AbstractParameter</a></td></tr>
+<tr class="memitem:aa4435eecdcd9c94df1ad9f826be0337f inherit pro_attribs_classaudio__tools_1_1_abstract_parameter"><td class="memItemLeft" align="right" valign="top"><a id="aa4435eecdcd9c94df1ad9f826be0337f"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>act_value</b> = 0</td></tr>
+<tr class="separator:aa4435eecdcd9c94df1ad9f826be0337f inherit pro_attribs_classaudio__tools_1_1_abstract_parameter"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="classaudio__tools_1_1_a_d_s_r.html" title="ADSR Envelope: Attack, Decay, Sustain and Release. Attack is the time taken for initial run-up of lev...">ADSR</a> Envelope: Attack, Decay, Sustain and Release. Attack is the time taken for initial run-up of level from nil to peak, beginning when the key is pressed. Decay is the time taken for the subsequent run down from the attack level to the designated sustainLevel level. Sustain is the level during the main sequence of the sound's duration, until the key is released. Release is the time taken for the level to decay from the sustainLevel level to zero after the key is released.[4]. </p>
-<dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
-<dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
+<div class="textblock"><p>Generates <a class="el" href="classaudio__tools_1_1_a_d_s_r.html" title="Generates ADSR values between 0.0 and 1.0.">ADSR</a> values between 0.0 and 1.0. </p>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioEffects/<a class="el" href="_audio_effect_8h_source.html">AudioEffect.h</a></li>
+<li>src/AudioEffects/<a class="el" href="_audio_parameters_8h_source.html">AudioParameters.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
