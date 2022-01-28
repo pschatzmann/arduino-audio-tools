@@ -18,7 +18,7 @@ const char* ADC_TAG = "ADC";
 // Output I2S data to built-in DAC, no matter the data format is 16bit or 32 bit, the DAC module will only take the 8bits from MSB
 static int16_t convert8DAC(int value, int value_bits_per_sample){
     // -> convert to positive 
-    int16_t result = (value * maxValue(8) / maxValue(value_bits_per_sample)) + maxValue(8) / 2;
+    int16_t result = (value * NumberConverter::maxValue(8) / NumberConverter::maxValue(value_bits_per_sample)) + NumberConverter::maxValue(8) / 2;
     return result;    
 }
 

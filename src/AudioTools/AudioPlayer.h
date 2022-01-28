@@ -8,7 +8,7 @@
 #include "AudioTools/AudioStreams.h"
 #include "AudioTools/AudioCopy.h"
 #include "AudioHttp/AudioHttp.h"
-#include "AudioHttp/Str.h"
+#include "AudioCommon/Str.h"
 
 #ifdef USE_SDFAT
 #include <SPI.h>

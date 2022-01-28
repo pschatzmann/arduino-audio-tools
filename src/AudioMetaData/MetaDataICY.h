@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AudioMetaData/AbstractMetaData.h"
-#include "AudioHttp/Str.h"
+#include "AudioCommon/Str.h"
 #include "AudioHttp/HttpRequest.h"
 
 namespace audio_tools {
