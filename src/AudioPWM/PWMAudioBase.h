@@ -4,7 +4,7 @@
 #include "AudioTools.h"
 #include "AudioTools/AudioLogger.h"
 #include "AudioTools/AudioOutput.h"
-#include "AudioCommon/Vector.h"
+#include "AudioBasic/Vector.h"
 #include "Stream.h"
 
 namespace audio_tools {

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AudioCommon/StrExt.h"
+#include "AudioBasic/StrExt.h"
 #include "AudioTools/AudioLogger.h"
 
 namespace audio_tools {
