@@ -19,7 +19,7 @@ const char* ext="mp3";
 int speedMz = 10;
 AudioSourceSdFat source(startFilePath, ext, PIN_AUDIO_KIT_SD_CARD_CS, speedMz);
 AudioKitStream kit;
-MP3DecoderHelix decoder;  // or MP3DecoderMAD
+MP3DecoderHelix decoder;  // or change to MP3DecoderMAD
 AudioPlayer player(source, kit, decoder);
 
 void next(bool, int, void*) {

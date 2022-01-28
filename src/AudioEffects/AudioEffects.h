@@ -14,15 +14,22 @@ namespace audio_tools {
  * @brief AudioEffects: the template class describes the input audio to which the effects are applied: 
  * e.g. SineWaveGenerator, SquareWaveGenerator, GeneratorFromStream etc. 
  * We support only one channel of int16_t data!
+ * 
+ * We subclass the AudioEffects from GeneratorT so that we can use this class with the GeneratedSoundStream 
+ * class to output the audio.
+ *   
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 
+
 template <class GeneratorT>
-class AudioEffects  {
+class AudioEffects : public GeneratorT {
     public:
+        /// Default constructor
         AudioEffects() = default;
 
+        /// Copy constructor
         AudioEffects(AudioEffects &copy) {
             LOGI(LOG_METHOD);
             // create a copy of the source and all effects
@@ -33,15 +40,21 @@ class AudioEffects  {
             LOGI("Number of effects %d -> %d", copy.size(), this->size());
         }
 
+        /// Constructor which is assigning a generator
+        AudioEffects(GeneratorT &generator) {
+            setInput(generator);
+        }
+
+        /// Destructor
         ~AudioEffects(){
             LOGD(LOG_METHOD);
             for (int j=0;j<effects.size();j++){
                 delete effects[j];
             }
         }
-
+        
         /// Defines the input source for the raw guitar input
-        void setInput(SoundGenerator<int16_t> &in){
+        void setInput(GeneratorT &in){
             LOGD(LOG_METHOD);
             generator_obj = in;
         }
@@ -60,7 +73,7 @@ class AudioEffects  {
         }
 
         /// provides the resulting sample
-        virtual effect_t readSample() {
+        effect_t readSample() {
             effect_t input = generator_obj.readSample();
             int size = effects.size();
             for (int j=0; j<size; j++){
@@ -70,7 +83,7 @@ class AudioEffects  {
         }
 
         /// deletes all defined effects
-        virtual void clear() {
+        void clear() {
             LOGD(LOG_METHOD);
             effects.clear();
         }
@@ -108,6 +121,8 @@ class AudioEffects  {
         Vector<AudioEffect*> effects;
         GeneratorT generator_obj;
 };
+
+
 
 
 } // namespace
