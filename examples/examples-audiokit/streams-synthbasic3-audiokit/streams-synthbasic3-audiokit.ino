@@ -30,7 +30,7 @@ class SynthAction : public MidiAction {
 
 MidiBleServer ble("MidiServer", &action);
 AudioKitStream kit;
-AudioEffects effects(sine);
+AudioEffects<SineWaveGenerator<int16_t>> effects(sine);
 GeneratedSoundStream<int16_t> in(effects); 
 StreamCopy copier(kit, in); 
 
