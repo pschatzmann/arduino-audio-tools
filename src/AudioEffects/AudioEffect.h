@@ -364,7 +364,7 @@ class ADSRGain : public AudioEffect {
             copyParent((AudioEffect *)&ref);
         };
 
-        ~ADSRGain(){
+        virtual ~ADSRGain(){
             delete adsr;
         }
 
