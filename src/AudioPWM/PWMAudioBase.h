@@ -4,7 +4,7 @@
 #include "AudioTools.h"
 #include "AudioTools/AudioLogger.h"
 #include "AudioTools/AudioOutput.h"
-#include "AudioTools/Vector.h"
+#include "AudioCommon/Vector.h"
 #include "Stream.h"
 
 namespace audio_tools {
@@ -285,7 +285,7 @@ class PWMAudioStreamBase : public AudioPrint, public AudioBaseInfoDependent {
             int16_t data[channels];
             if (user_callback(channels, data)){
                 for (uint8_t j=0;j<audio_config.channels;j++){
-                    int value  = map(data[j], -maxValue(16), maxValue(16), 0, 255); 
+                    int value  = map(data[j], -NumberConverter::maxValue(16), NumberConverter::maxValue(16), 0, 255); 
                     pwmWrite(j, value);
                 }
                 updateStatistics();                
@@ -332,7 +332,7 @@ class PWMAudioStreamBase : public AudioPrint, public AudioBaseInfoDependent {
                         LOGE("Could not read full data");
                         value = 0;
                     }
-                    result = map(value, -maxValue(8), maxValue(8), 0, maxOutputValue());
+                    result = map(value, -NumberConverter::maxValue(8), NumberConverter::maxValue(8), 0, maxOutputValue());
                     break;
                 }
                 case 16: {
@@ -340,7 +340,7 @@ class PWMAudioStreamBase : public AudioPrint, public AudioBaseInfoDependent {
                     if (buffer->readArray((uint8_t*)&value,2)!=2){
                         LOGE("Could not read full data");
                     }
-                    result = map(value, -maxValue(16), maxValue(16), 0, maxOutputValue());
+                    result = map(value, -NumberConverter::maxValue(16), NumberConverter::maxValue(16), 0, maxOutputValue());
                     break;
                 }
                 case 24: {
@@ -348,7 +348,7 @@ class PWMAudioStreamBase : public AudioPrint, public AudioBaseInfoDependent {
                     if (buffer->readArray((uint8_t*)&value,3)!=3){
                         LOGE("Could not read full data");
                     }
-                    result = map((int32_t)value, -maxValue(24), maxValue(24), 0, maxOutputValue());
+                    result = map((int32_t)value, -NumberConverter::maxValue(24), NumberConverter::maxValue(24), 0, maxOutputValue());
                     break;
                 }
                 case 32: {
@@ -356,7 +356,7 @@ class PWMAudioStreamBase : public AudioPrint, public AudioBaseInfoDependent {
                     if (buffer->readArray((uint8_t*)&value,4)!=4){
                         LOGE("Could not read full data");
                     }
-                    result = map(value, -maxValue(32), maxValue(32), 0, maxOutputValue());
+                    result = map(value, -NumberConverter::maxValue(32), NumberConverter::maxValue(32), 0, maxOutputValue());
                     break;
                 }
             }        

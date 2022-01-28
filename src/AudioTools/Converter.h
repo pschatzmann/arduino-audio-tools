@@ -1,50 +1,56 @@
 #pragma once
 #include "AudioTypes.h"
-#include "Vector.h"
+#include "AudioCommon/Vector.h"
 
 namespace audio_tools {
 
+/**
+ * @brief Converts from a source to a target number with a different type
+ * 
+ */
+class NumberConverter {
+    public:
+        static int32_t convertFrom24To32(int24_t value)  {
+            return value.scale32();
+        }
 
-static int32_t convertFrom24To32(int24_t value)  {
-    return value.scale32();
-}
+        static int16_t convertFrom24To16(int24_t value)  {
+            return value.scale16();
+        }
 
-static int16_t convertFrom24To16(int24_t value)  {
-    return value.scale16();
-}
+        static float convertFrom24ToFloat(int24_t value)  {
+            return value.scaleFloat();
+        }
 
-static float convertFrom24ToFloat(int24_t value)  {
-    return value.scaleFloat();
-}
+        static int16_t convertFrom32To16(int32_t value)  {
+            return static_cast<float>(value) / INT32_MAX * INT16_MAX;
+        }
 
-static int16_t convertFrom32To16(int32_t value)  {
-    return static_cast<float>(value) / INT32_MAX * INT16_MAX;
-}
+        static int16_t convert16(int value, int value_bits_per_sample){
+            return value * NumberConverter::maxValue(16) / NumberConverter::maxValue(value_bits_per_sample);
+        }
 
-static int64_t maxValue(int value_bits_per_sample){
-    switch(value_bits_per_sample/8){
-        case 8:
-            return 127;
-        case 16:
+        static int16_t convert8(int value, int value_bits_per_sample){
+            return value * NumberConverter::maxValue(8) / NumberConverter::maxValue(value_bits_per_sample);
+        }
+
+        /// provides the biggest number for the indicated number of bits
+        static int64_t maxValue(int value_bits_per_sample){
+            switch(value_bits_per_sample/8){
+                case 8:
+                    return 127;
+                case 16:
+                    return 32767;
+                case 24:
+                    return 8388607;
+                case 32:
+                    return 2147483647;
+
+            }
             return 32767;
-        case 24:
-            return 8388607;
-        case 32:
-            return 2147483647;
+        }
 
-    }
-    return 32767;
-}
-
-static int16_t convert16(int value, int value_bits_per_sample){
-    return value * maxValue(16) / maxValue(value_bits_per_sample);
-
-}
-
-static int16_t convert8(int value, int value_bits_per_sample){
-    return value * maxValue(8) / maxValue(value_bits_per_sample);
-}
-
+};
 
 
 /**
@@ -559,9 +565,9 @@ class NumberReader {
 
         /// scale the value
         int32_t scale(int32_t value, int inBits, int outBits, bool outSigned=true){
-            int32_t result = static_cast<float>(value) / maxValue(inBits) * maxValue(outBits);
+            int32_t result = static_cast<float>(value) / NumberConverter::maxValue(inBits) * NumberConverter::maxValue(outBits);
             if (!outSigned){
-                result += (maxValue(outBits) / 2);
+                result += (NumberConverter::maxValue(outBits) / 2);
             }
             return result;
         }

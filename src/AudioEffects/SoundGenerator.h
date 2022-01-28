@@ -2,7 +2,7 @@
 
 #include "AudioTools/AudioLogger.h"
 #include "AudioTools/AudioTypes.h"
-#include "AudioTools/Vector.h"
+#include "AudioCommon/Vector.h"
 
 namespace audio_tools {
 

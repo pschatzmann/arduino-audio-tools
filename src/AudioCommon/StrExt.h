@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AudioHttp/Str.h"
+#include "AudioCommon/Str.h"
 
 namespace audio_tools {
 

@@ -4,7 +4,7 @@
 #include "AudioTools/AudioTypes.h"
 #include "AudioTools/Converter.h"
 #include "AudioTools/Buffers.h"
-#include "AudioTools/Int24.h"
+#include "AudioCommon/Int24.h"
 #include "AudioTools/VolumeControl.h"
 
 #define MAX_SINGLE_CHARS 8
@@ -738,7 +738,7 @@ class FormatConverterStream : public AudioPrint {
                 convert.source_bits_per_sample = p_info_in->bits_per_sample;
                 convert.target_bits_per_sample = p_info_out->bits_per_sample;
                 if (convert.source_bits_per_sample != convert.target_bits_per_sample){
-                    convert.format_factor = maxValue(convert.target_bits_per_sample) / maxValue(convert.source_bits_per_sample);
+                    convert.format_factor = NumberConverter::maxValue(convert.target_bits_per_sample) / NumberConverter::maxValue(convert.source_bits_per_sample);
                     LOGI("FormatConverterStream: bits %d -> %d - factor %f",convert.source_bits_per_sample, convert.target_bits_per_sample, convert.format_factor);
                 } else {
                     convert.format_factor = 1.0;
