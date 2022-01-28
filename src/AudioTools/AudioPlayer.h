@@ -134,7 +134,7 @@ namespace audio_tools {
             indexStreamCallback = callback;
         }
 
-        virtual bool isAutoNext() {
+        virtual bool isAutoNext() override {
             return auto_next;
         }
 

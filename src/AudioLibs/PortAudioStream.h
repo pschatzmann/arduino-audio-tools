@@ -16,7 +16,11 @@ namespace audio_tools {
  */
 class PortAudioConfig : public AudioBaseInfo {
     public:
-        PortAudioConfig() = default;
+        PortAudioConfig() {
+            sample_rate = 44100;
+            channels = 2;
+            bits_per_sample = 16;
+        };
         PortAudioConfig(const PortAudioConfig&) = default;
         PortAudioConfig(const AudioBaseInfo& in) {
             sample_rate = in.sample_rate;

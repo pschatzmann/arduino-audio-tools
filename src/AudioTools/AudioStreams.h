@@ -8,6 +8,11 @@
 
 namespace audio_tools {
 
+#ifndef ESP32
+#define IRAM_ATTR
+#endif
+
+
 static const char *UNDERFLOW_MSG = "data underflow";
 
 /**
@@ -245,12 +250,12 @@ class GeneratedSoundStream : public AudioStreamX, public AudioBaseInfoSource {
     active = false;
   }
 
-  virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi) {
+  virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi) override {
     audioBaseInfoDependent = &bi;
   }
 
   /// This is unbounded so we just return the buffer size
-  virtual int available() { return DEFAULT_BUFFER_SIZE; }
+  virtual int available() override { return DEFAULT_BUFFER_SIZE; }
 
   /// privide the data as byte stream
   size_t readBytes(uint8_t *buffer, size_t length) override {
@@ -260,7 +265,7 @@ class GeneratedSoundStream : public AudioStreamX, public AudioBaseInfoSource {
 
   operator bool() { return active; }
 
-  void flush() {}
+  void flush() override {}
 
  protected:
   SoundGenerator<T> *generator_ptr;
@@ -307,7 +312,7 @@ class BufferedStream : public AudioStream {
   }
 
   /// empties the buffer
-  virtual void flush() {
+  virtual void flush() override                                            {
     // just dump the memory of the buffer and clear it
     if (buffer->available() > 0) {
       writeExt(buffer->address(), buffer->available());
@@ -388,7 +393,7 @@ class NullStream : public BufferedStream {
   /// Define object which need to be notified if the basinfo is changing
   void setNotifyAudioChange(AudioBaseInfoDependent &bi) {}
 
-  void setAudioInfo(AudioBaseInfo info) {}
+  void setAudioInfo(AudioBaseInfo info) override {}
 
  protected:
   size_t total = 0;
@@ -436,8 +441,7 @@ class RingBufferStream : public AudioStream {
     return buffer->available();
   }
 
-  virtual void flush() {}
-
+  virtual void flush() override {}
   virtual int peek() override { return buffer->peek(); }
   virtual int read() override { return buffer->read(); }
 
@@ -470,7 +474,7 @@ class ExternalBufferStream : public AudioStream {
 
   virtual int available() override { return buffer.available(); }
 
-  virtual void flush() {}
+  virtual void flush() override {}
 
   virtual int peek() override { return buffer.peek(); }
 
@@ -538,6 +542,7 @@ class CallbackBufferedStream : public BufferedStream {
   }
 };
 
+#ifndef IS_DESKTOP
 /**
  * @brief TimerCallbackAudioStream Configuration
  * @author Phil Schatzmann
@@ -766,5 +771,7 @@ void TimerCallbackAudioStream::timerCallback(void *obj) {
     src->measureSampleRate();
   }
 }
+
+#endif
 
 }  // namespace audio_tools

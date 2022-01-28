@@ -616,7 +616,7 @@ public:
     return outSample;
   }
 
-  virtual effectsuite_t processDouble(effectsuite_t inputSample)  {
+  virtual effectsuite_t processDouble(effectsuite_t inputSample) override {
     return applyFilter(inputSample);
   }
 
@@ -1162,7 +1162,7 @@ public:
     return out;
   }
 
-  FilteredDelay *clone(){
+  FilteredDelay *clone() override {
     return new FilteredDelay(*this);
   }
 
@@ -1295,7 +1295,7 @@ public:
     delayTransitionTimeInSamples = seconds * sampleRate;
   }
 
-  SimpleDelay* clone(){
+  SimpleDelay* clone() override {
     return new SimpleDelay(*this);
   }
 
@@ -1434,7 +1434,7 @@ public:
     setEffectParams(.707, extSampleRate * .02, .1);
   }
 
-  SimpleFlanger* clone(){
+  SimpleFlanger* clone() override {
     return new SimpleFlanger(*this);
   }
 

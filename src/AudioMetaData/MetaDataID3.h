@@ -53,7 +53,7 @@ struct ID3v1Enhanced {
  * @copyright GPLv3
  * 
  */
-class MetaDataID3Base {
+class MetaDataID3Base  {
   public:
 
     MetaDataID3Base() = default;

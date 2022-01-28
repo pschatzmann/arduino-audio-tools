@@ -31,7 +31,7 @@ public:
         enc = new liblame::MP3EncoderLAME();
     }
 
-    MP3EncoderLAME(Stream &out_stream){
+    MP3EncoderLAME(Print &out_stream){
         LOGD(LOG_METHOD);
         enc = new liblame::MP3EncoderLAME(out_stream);
     }

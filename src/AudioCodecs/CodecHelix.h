@@ -59,7 +59,7 @@ public:
   size_t write(const void *data, size_t len) {
     LOGD("%s: %zu", LOG_METHOD, len);
     if (p_decoder == nullptr) {
-      setupDecoder((const char *)data);
+      setupDecoder((const byte *)data);
       p_decoder->begin();
     }
     return p_decoder->write(data, len);
@@ -79,14 +79,14 @@ protected:
   AudioBaseInfo noInfo;
 
   /// Defines the decoder based on the audio format
-  void setupDecoder(const char *start) {
+  void setupDecoder(const byte *start) {
     if (start[0] == 0xFF && start[1] == 0xF1) {
       p_decoder = new AACDecoderHelix();
       LOGI("using AACDecoderHelix");
-    } else if (start[0] == 0xFF || start[0] == 0xFE || strncmp("ID3", start, 3)==0) {
+    } else if (start[0] == 0xFF || start[0] == 0xFE || strncmp("ID3", (const char*)start, 3)==0) {
       p_decoder = new MP3DecoderHelix();
       LOGI("using MP3DecoderHelix");
-    } else if (strncmp("RIFF", start, 4)==0) {
+    } else if (strncmp("RIFF", (const char*)start, 4)==0) {
       p_decoder = new WAVDecoder();
       LOGI("using WAVDecoder");
     }

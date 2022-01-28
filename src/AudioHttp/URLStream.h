@@ -5,6 +5,10 @@
 
 #ifdef ESP8266
 #include <ESP8266WiFi.h>
+#elif defined(IS_DESKTOP)
+#include <Client.h>
+#include <WiFiClient.h>
+typedef WiFiClient WiFiClientSecure;
 #else 
 #include <Client.h>
 #include <WiFiClientSecure.h>
@@ -188,8 +192,12 @@ class URLStreamDefault : public AbstractURLStream {
             if (client!=nullptr) return *client;
             if (isSecure){
                 if (clientSecure==nullptr){
+#ifndef IS_DESKTOP
                     clientSecure = new WiFiClientSecure();
                     clientSecure->setInsecure();
+#else
+                    clientSecure = new WiFiClient();
+#endif
                 } 
                 LOGI("WiFiClientSecure");
                 return *clientSecure;
@@ -214,6 +222,7 @@ class URLStreamDefault : public AbstractURLStream {
         }
 
         void login(){
+#ifndef IS_DESKTOP
             LOGD("connectWiFi");
             if (WiFi.status() != WL_CONNECTED && network!=nullptr && password != nullptr){
                 WiFi.begin(network, password);
@@ -223,7 +232,8 @@ class URLStreamDefault : public AbstractURLStream {
                 }
                 Serial.println();
             }
-            delay(500);            
+            delay(500);  
+#endif          
         }
 
         /// waits for some data - returns fals if the request has failed

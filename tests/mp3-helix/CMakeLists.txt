@@ -22,7 +22,7 @@ endif()
 # build sketch as executable
 add_executable (mp3-helix mp3-helix.cpp)
 # use main() from arduino_emulator
-target_compile_definitions(mp3-helix PUBLIC -DARDUINO -DEXIT_ON_STOP -DUSE_HELIX)
+target_compile_definitions(mp3-helix PUBLIC -DARDUINO -DEXIT_ON_STOP -DUSE_HELIX -DUSE_PORTAUDIO  -DIS_DESKTOP)
 
 # OS/X might need this setting for core audio
 #target_compile_definitions(portaudio PUBLIC -DPA_USE_COREAUDIO=1)

@@ -64,7 +64,7 @@ class MetaDataPrint : public AudioPrint {
 
     /// Provide tha audio data to the API to parse for Meta Data
     virtual size_t write(const uint8_t *data, size_t length){
-        LOGD("%s: %d", LOG_METHOD, length);
+        LOGD("%s: %d", LOG_METHOD, (int)length);
 
         if (callback!=nullptr){
             if (meta!=nullptr){

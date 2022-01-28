@@ -8,7 +8,7 @@ using namespace audio_tools;
 
 MemoryStream mp3(BabyElephantWalk60_mp3, BabyElephantWalk60_mp3_len);
 PortAudioStream portaudio_stream;   // Output of sound on desktop 
-EncodedAudioStream dec(portaudio_stream, new MP3DecoderHelix()); // MP3 data source
+EncodedAudioStream dec(&portaudio_stream, new MP3DecoderHelix()); // MP3 data source
 StreamCopy copier(dec, mp3); // copy in to out
 
 void setup(){
