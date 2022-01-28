@@ -49,6 +49,7 @@ void setup() {
   cfg.channels = 1;
   cfg.bits_per_sample = 16;
   cfg.sample_rate = Stk::sampleRate();
+  cfg.sd_active = false;
   kit.begin(cfg);
 
   // play notes with keys

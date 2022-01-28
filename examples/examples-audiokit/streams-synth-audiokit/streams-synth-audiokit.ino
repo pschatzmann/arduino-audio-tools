@@ -23,8 +23,9 @@ void setup() {
 
   // Setup output
   auto cfg = kit.defaultConfig(TX_MODE);
-  kit.setVolume(80);
+  cfg.sd_active = false;
   kit.begin(cfg);
+  kit.setVolume(80);
 
   // define synthesizer keys for AudioKit
   synthesizer.setKeys(kit.audioActions(), keys, AudioActions::ActiveLow);

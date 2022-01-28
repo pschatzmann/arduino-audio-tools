@@ -22,6 +22,7 @@ void setup(void) {
     AudioLogger::instance().begin(Serial, AudioLogger::Warning);
     
     auto cfg = kit.defaultConfig(RXTX_MODE);
+    cfg.sd_active = false;
     cfg.input_device = AUDIO_HAL_ADC_INPUT_LINE2;
     kit.begin(cfg);
 }

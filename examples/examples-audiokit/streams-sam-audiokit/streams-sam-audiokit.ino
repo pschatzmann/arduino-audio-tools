@@ -24,6 +24,7 @@ void setup(){
   cfg.bits_per_sample = sam.bitsPerSample();
   cfg.channels = sam.channels();
   cfg.sample_rate = sam.sampleRate();
+  cfg.sd_active = false;
   kit.begin(cfg);
 
   sam.say(text);
