@@ -16,6 +16,9 @@ typedef int16_t effect_t;
 
 class AudioEffect  {
     public:
+        AudioEffect() = default;
+        virtual ~AudioEffect() = default;
+
         /// calculates the effect output from the input
         virtual effect_t process(effect_t in) = 0;
 
@@ -361,7 +364,7 @@ class ADSRGain : public AudioEffect {
             copyParent((AudioEffect *)&ref);
         };
 
-        ~ADSRGain(){
+        virtual ~ADSRGain(){
             delete adsr;
         }
 
