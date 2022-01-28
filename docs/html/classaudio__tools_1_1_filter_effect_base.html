@@ -76,6 +76,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>A Base class for filter based effects including methods for simple high, low and band pass filtering.  
+ <a href="classaudio__tools_1_1_filter_effect_base.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_audio_effects_suite_8h_source.html">AudioEffectsSuite.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for audio_tools::FilterEffectBase:</div>
@@ -83,12 +86,12 @@ Inheritance diagram for audio_tools::FilterEffectBase:</div>
  <div class="center">
   <img src="classaudio__tools_1_1_filter_effect_base.png" usemap="#audio_5Ftools::FilterEffectBase_map" alt=""/>
   <map id="audio_5Ftools::FilterEffectBase_map" name="audio_5Ftools::FilterEffectBase_map">
-<area href="classaudio__tools_1_1_effect_suite_base.html" alt="audio_tools::EffectSuiteBase" shape="rect" coords="182,56,354,80"/>
+<area href="classaudio__tools_1_1_effect_suite_base.html" title="Base Class for Effects." alt="audio_tools::EffectSuiteBase" shape="rect" coords="182,56,354,80"/>
 <area href="classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects." alt="audio_tools::AudioEffect" shape="rect" coords="182,0,354,24"/>
 <area href="classaudio__tools_1_1_envelope_filter.html" title="EnvelopeFilter." alt="audio_tools::EnvelopeFilter" shape="rect" coords="0,168,172,192"/>
-<area href="classaudio__tools_1_1_filtered_delay.html" alt="audio_tools::FilteredDelay" shape="rect" coords="182,168,354,192"/>
+<area href="classaudio__tools_1_1_filtered_delay.html" title="Delay effect that filters the repeat delay." alt="audio_tools::FilteredDelay" shape="rect" coords="182,168,354,192"/>
 <area href="classaudio__tools_1_1_simple_l_p_f.html" title="SimpleLPF." alt="audio_tools::SimpleLPF" shape="rect" coords="364,168,536,192"/>
-<area href="classaudio__tools_1_1_simple_chorus.html" alt="audio_tools::SimpleChorus" shape="rect" coords="364,224,536,248"/>
+<area href="classaudio__tools_1_1_simple_chorus.html" title="Simple Chorus effect with a single delay voice and mono output Chorus is effective between 15 and 20 ..." alt="audio_tools::SimpleChorus" shape="rect" coords="364,224,536,248"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -116,6 +119,7 @@ virtual effect_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el
 <tr class="memdesc:aa0eb0fec4cb788ac117f01a8310e0dc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">see applyFilter <br /></td></tr>
 <tr class="separator:aa0eb0fec4cb788ac117f01a8310e0dc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad05aa035923f7cb882d35fd73723726c"><td class="memItemLeft" align="right" valign="top">virtual effectsuite_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_filter_effect_base.html#ad05aa035923f7cb882d35fd73723726c">processDouble</a> (effectsuite_t inputSample) override</td></tr>
+<tr class="memdesc:ad05aa035923f7cb882d35fd73723726c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main process block for applying audio effect.  <a href="classaudio__tools_1_1_filter_effect_base.html#ad05aa035923f7cb882d35fd73723726c">More...</a><br /></td></tr>
 <tr class="separator:ad05aa035923f7cb882d35fd73723726c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ae0052e99c7fd2cc6f951d16e909eed"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_filter_effect_base.html#a1ae0052e99c7fd2cc6f951d16e909eed">setChebyICoefficients</a> (effectsuite_t cutFreq, bool shelfType, effectsuite_t ripple)</td></tr>
 <tr class="separator:a1ae0052e99c7fd2cc6f951d16e909eed"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -205,7 +209,8 @@ constexpr static const effectsuite_t&#160;</td><td class="memItemRight" valign="
 <tr class="separator:a20255d43d465afca6108289c0666f7a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A Base class for filter based effects including methods for simple high, low and band pass filtering </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="classaudio__tools_1_1_filter_effect_base.html">FilterEffectBase</a> </dd></dl>
+<div class="textblock"><p>A Base class for filter based effects including methods for simple high, low and band pass filtering. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classaudio__tools_1_1_filter_effect_base.html" title="A Base class for filter based effects including methods for simple high, low and band pass filtering.">FilterEffectBase</a> </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Matthew Hamilton </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>MIT License </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -478,7 +483,9 @@ constexpr static const effectsuite_t&#160;</td><td class="memItemRight" valign="
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Main process block for applying audio effect </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>Main process block for applying audio effect. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">inputSample</td><td>The input audio sample for the effect to be applied to </td></tr>
   </table>

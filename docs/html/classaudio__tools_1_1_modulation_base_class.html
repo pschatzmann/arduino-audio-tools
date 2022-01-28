@@ -77,6 +77,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Class provides a wave table that can be populated with a number of preallocated waveforms. These can be used to generate audio in themselves or to modulate The parameters of another effect. Class initialised with sample rate.  
+ <a href="classaudio__tools_1_1_modulation_base_class.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_audio_effects_suite_8h_source.html">AudioEffectsSuite.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for audio_tools::ModulationBaseClass:</div>
@@ -84,7 +87,7 @@ Inheritance diagram for audio_tools::ModulationBaseClass:</div>
  <div class="center">
   <img src="classaudio__tools_1_1_modulation_base_class.png" usemap="#audio_5Ftools::ModulationBaseClass_map" alt=""/>
   <map id="audio_5Ftools::ModulationBaseClass_map" name="audio_5Ftools::ModulationBaseClass_map">
-<area href="classaudio__tools_1_1_simple_chorus.html" alt="audio_tools::SimpleChorus" shape="rect" coords="0,56,203,80"/>
+<area href="classaudio__tools_1_1_simple_chorus.html" title="Simple Chorus effect with a single delay voice and mono output Chorus is effective between 15 and 20 ..." alt="audio_tools::SimpleChorus" shape="rect" coords="0,56,203,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -126,6 +129,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>printInterpTable</b> 
 <tr class="memitem:ad7a5543260075a10ac2ca6534c4bc4dc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_modulation_base_class.html#ad7a5543260075a10ac2ca6534c4bc4dc">setTriangle</a> ()</td></tr>
 <tr class="separator:ad7a5543260075a10ac2ca6534c4bc4dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2952c1a4532471871b328b36c1844727"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_modulation_base_class.html#a2952c1a4532471871b328b36c1844727">setupModulationBaseClass</a> (effectsuite_t extSampRate)</td></tr>
+<tr class="memdesc:a2952c1a4532471871b328b36c1844727"><td class="mdescLeft">&#160;</td><td class="mdescRight">setup the class with a given sample rate. Basically reperforming the constructor  <a href="classaudio__tools_1_1_modulation_base_class.html#a2952c1a4532471871b328b36c1844727">More...</a><br /></td></tr>
 <tr class="separator:a2952c1a4532471871b328b36c1844727"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -164,7 +168,8 @@ static const int&#160;</td><td class="memItemRight" valign="bottom"><b>res</b> =
 <tr class="separator:ac9a9c4ccbeb7aebccdd7863e588faf2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Class provides a wave table that can be populated with a number of preallocated waveforms. These can be used to generate audio in themselves or to modulate The parameters of another effect. Class initialised with sample rate. </p><dl class="section author"><dt>Author</dt><dd>Matthew Hamilton </dd></dl>
+<div class="textblock"><p>Class provides a wave table that can be populated with a number of preallocated waveforms. These can be used to generate audio in themselves or to modulate The parameters of another effect. Class initialised with sample rate. </p>
+<dl class="section author"><dt>Author</dt><dd>Matthew Hamilton </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>MIT License </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a59d8518e928630ed37aaa107ded920d7"></a>
@@ -648,7 +653,9 @@ static const int&#160;</td><td class="memItemRight" valign="bottom"><b>res</b> =
   </tr>
 </table>
 </div><div class="memdoc">
-<p>setup the class with a given sample rate. Basically reperforming the constructor </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>setup the class with a given sample rate. Basically reperforming the constructor </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">extSampRate</td><td>External sample rate </td></tr>
   </table>
