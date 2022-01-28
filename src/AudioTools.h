@@ -69,16 +69,19 @@ using namespace audio_tools;
  * 
  */
 
-#if defined(__linux__) || defined(_WIN32) || defined(__APPLE__)
+#if defined(IS_DESKTOP) && defined(USE_PORTAUDIO)
 typedef PortAudioStream DefaultStream;
 #elif defined(ESP32) || defined(ESP8266) || defined(__SAMD21G18A__)
 typedef I2SStream DefaultStream;
 #endif
 
+#ifndef IS_DESKTOP
 /// wait for the Output to be ready
 void waitFor(HardwareSerial &out){
     while(!out);
 }
+#endif
+
 /// wait for flag to be active
 void waitFor(bool &flag){
     while(!flag);

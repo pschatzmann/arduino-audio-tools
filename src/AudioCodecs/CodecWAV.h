@@ -52,7 +52,7 @@ class WAVHeader  {
             this->len = len;
             this->data_pos = 0l;
             
-            memset(&headerInfo, 0, sizeof(WAVAudioInfo));
+            memset((void*)&headerInfo, 0, sizeof(WAVAudioInfo));
             while (!eof()) {
                 uint32_t tag, tag2, length;
                 tag = read_tag();

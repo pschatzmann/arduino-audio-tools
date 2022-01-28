@@ -270,11 +270,6 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 
 
 //----------------
-#if defined(__linux__) || defined(_WIN32) || defined(__APPLE__)
-#define USE_URL_ARDUINO
-#define IS_DESKTOP
-#endif
-
 
 #ifdef IS_DESKTOP
 #define USE_URL_ARDUINO

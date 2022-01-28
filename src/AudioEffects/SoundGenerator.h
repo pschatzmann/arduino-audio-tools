@@ -35,7 +35,7 @@ class SoundGenerator  {
             LOGD(LOG_METHOD);
             active = true;
             activeWarningIssued = false;
-            info.bits_per_sample = sizeof(T)*8;
+            //info.bits_per_sample = sizeof(T)*8;
         }
 
         /// ends the processing
@@ -75,6 +75,10 @@ class SoundGenerator  {
             //LOGD("readBytes: %d", (int)lengthBytes);
             size_t result = 0;
             int ch = audioInfo().channels;
+            if (ch==0){
+                LOGE("Undefine number of channels: %d",ch);
+                ch = 1;
+            }
             int frame_size = sizeof(T) * ch;
             if (active){
                 int len = lengthBytes / frame_size;

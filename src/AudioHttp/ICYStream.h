@@ -136,7 +136,7 @@ class ICYStreamDefault : public AbstractURLStream {
         }
         
         /// not implemented
-        virtual size_t write(const uint8_t *buffer, size_t size) {
+        virtual size_t write(const uint8_t *buffer, size_t size) override {
             LOGE("N/A");
             return 0;
          }

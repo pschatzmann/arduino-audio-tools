@@ -32,7 +32,7 @@ class MetaDataICY : public AbstractMetaData {
         }
         
         /// Defines the ICE metaint value which is provided by the web call!
-        virtual void setIcyMetaInt(int value){
+        virtual void setIcyMetaInt(int value) override {
             this->mp3_blocksize = value;
         }
 

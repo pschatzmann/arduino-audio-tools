@@ -46,7 +46,7 @@ class AudioEffects : public SoundGenerator<effect_t> {
         }
 
         /// Destructor
-        ~AudioEffects(){
+        virtual ~AudioEffects(){
             LOGD(LOG_METHOD);
             for (int j=0;j<effects.size();j++){
                 delete effects[j];
@@ -58,7 +58,10 @@ class AudioEffects : public SoundGenerator<effect_t> {
             LOGD(LOG_METHOD);
             generator_obj = in;
             // automatically activate this object
-            begin();
+            AudioBaseInfo info;
+            info.channels = 1;
+            info.bits_per_sample = sizeof(effect_t)*8;
+            begin(info);
         }
 
         /// Adds an effect object (by reference)
