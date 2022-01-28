@@ -24,7 +24,7 @@ namespace audio_tools {
 
 
 template <class GeneratorT>
-class AudioEffects : public GeneratorT {
+class AudioEffects : public SoundGenerator<effect_t> {
     public:
         /// Default constructor
         AudioEffects() = default;
@@ -57,6 +57,8 @@ class AudioEffects : public GeneratorT {
         void setInput(GeneratorT &in){
             LOGD(LOG_METHOD);
             generator_obj = in;
+            // automatically activate this object
+            begin();
         }
 
         /// Adds an effect object (by reference)
@@ -73,13 +75,13 @@ class AudioEffects : public GeneratorT {
         }
 
         /// provides the resulting sample
-        effect_t readSample() {
-            effect_t input = generator_obj.readSample();
+        effect_t readSample() override {
+            effect_t sample = generator_obj.readSample();
             int size = effects.size();
             for (int j=0; j<size; j++){
-                input = effects[j]->process(input);
+                sample = effects[j]->process(sample);
             }
-            return input;
+            return sample;
         }
 
         /// deletes all defined effects

@@ -94,7 +94,10 @@ class SoundGenerator  {
                         break;
                 }
             } else {
-                LOGE("SoundGenerator::readBytes -> inactive");
+                if (!activeWarningIssued) {
+                    LOGE("SoundGenerator::readBytes -> inactive");
+                    activeWarningIssued=true;
+                }
                 result = 0;
             }
             //LOGD( "SoundGenerator::readBytes (channels: %d) %zu bytes -> %zu samples", ch, lengthBytes, result);
