@@ -22,7 +22,7 @@ using namespace audio_tools;
 
 BluetoothA2DPSource a2dp_source;
 I2S<int32_t> i2s;
-ChannelConverter<int32_t> converter(&convertFrom32To16);
+ChannelConverter<int32_t> converter(&NumberConverter::convertFrom32To16);
 ConverterFillLeftAndRight<int32_t> bothChannels;
 const size_t max_buffer_len = 1024;
 int32_t buffer[max_buffer_len][2];

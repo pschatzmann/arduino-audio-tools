@@ -2,7 +2,9 @@
 #!/bin/bash
 ##
 # We compile all examples using arduino-cli in order to identify compile errors 
-# The return code is made available in the build-examples-log.txt file.
+# The return codes are made available in the build-examples-log.txt file. 
+# -> rc=0: success
+# -> rc=1: error
 ##
 #arduino-cli lib upgrade
 #arduino-cli lib linstall 
