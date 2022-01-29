@@ -23,7 +23,7 @@ class AudioKitStreamConfig : public I2SConfig {
   // set dac channel 
   audio_hal_dac_output_t output_device = AUDIOKIT_DEFAULT_OUTPUT;
   int masterclock_pin = 0;
-  bool sd_active = false;
+  bool sd_active = true;
   bool default_actions_active = true;
 
   /// convert to config object needed by HAL
@@ -40,6 +40,7 @@ class AudioKitStreamConfig : public I2SConfig {
     result.sample_rate = toSampleRate();
     result.bits_per_sample = toBits();
     result.sd_active = sd_active;
+    LOGW("sd_active = %s", sd_active ? "true" : "false" );
     return result;
   }
 
@@ -536,8 +537,14 @@ class AudioKitStream : public AudioStreamX {
   /// Setup the supported default actions
   void setupActions() {
     LOGI(LOG_METHOD);
+    // SPI might have been activated 
+    if (!cfg.sd_active){
+      LOGW("Deactivating SPI because SD is not active");
+      SPI.end();
+    }
+
     // pin conflicts with AIThinker A101 and headphone detection
-    if (! (cfg.sd_active && AUDIOKIT_BOARD==6)) {
+    if (! (cfg.sd_active && AUDIOKIT_BOARD==6)) {  
       actions.add(kit.pinHeadphoneDetect(), actionHeadphoneDetection);
     } else {
       LOGW("Headphone detection ignored because of conflict: %d ",kit.pinHeadphoneDetect());
