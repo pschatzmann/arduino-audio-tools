@@ -200,6 +200,7 @@ class SineWaveGenerator : public SoundGenerator<T>{
         /// Defines the frequency - after the processing has been started
         void setFrequency(uint16_t frequency)  override {
             LOGI("setFrequency: %d", frequency);
+            LOGI( "active: %s", SoundGenerator<T>::active ? "true" : "false" );
             m_frequency = frequency;
         }
 
