@@ -33,7 +33,7 @@ class AudioEffects : public SoundGenerator<effect_t> {
         AudioEffects(AudioEffects &copy) {
             LOGI(LOG_METHOD);
             // create a copy of the source and all effects
-            generator_obj = copy.generator_obj;
+            p_generator = copy.p_generator;
             for (int j=0;j<copy.size();j++){
                 effects.push_back(copy[j]->clone());
             }
@@ -56,7 +56,7 @@ class AudioEffects : public SoundGenerator<effect_t> {
         /// Defines the input source for the raw guitar input
         void setInput(GeneratorT &in){
             LOGD(LOG_METHOD);
-            generator_obj = in;
+            p_generator = &in;
             // automatically activate this object
             AudioBaseInfo info;
             info.channels = 1;
@@ -79,10 +79,13 @@ class AudioEffects : public SoundGenerator<effect_t> {
 
         /// provides the resulting sample
         effect_t readSample() override {
-            effect_t sample = generator_obj.readSample();
-            int size = effects.size();
-            for (int j=0; j<size; j++){
-                sample = effects[j]->process(sample);
+            effect_t sample;
+            if (p_generator!=nullptr){
+                sample  = p_generator->readSample();
+                int size = effects.size();
+                for (int j=0; j<size; j++){
+                    sample = effects[j]->process(sample);
+                }
             }
             return sample;
         }
@@ -100,7 +103,7 @@ class AudioEffects : public SoundGenerator<effect_t> {
 
         /// Provides access to the sound generator
         GeneratorT &generator(){
-            return generator_obj;
+            return p_generator;
         }
 
         /// gets an effect by index
@@ -124,7 +127,7 @@ class AudioEffects : public SoundGenerator<effect_t> {
 
     protected:
         Vector<AudioEffect*> effects;
-        GeneratorT generator_obj;
+        GeneratorT *p_generator=nullptr;
 };
 
 
