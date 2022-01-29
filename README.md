@@ -81,7 +81,7 @@ void loop(){
 
 ```
 Each stream has it's own configuration object that should be passed to the begin method. The defaultConfig() method is providing a default proposal which will usually "just work". Please consult 
-the class documentation for the available configuration parameters.
+the class documentation for the available configuration parameters. You can also easily adapt any provided examples: If you e.g. replace the I2SStream with the AnalogAudioStream class, you will get analog instead of digital output.
 
 Further examples can be found in the [Wiki](https://github.com/pschatzmann/arduino-audio-tools/wiki/Examples). The library also provides a versatile [AudioPlayer](https://github.com/pschatzmann/arduino-audio-tools/wiki/The-Audio-Player-Class).
 
