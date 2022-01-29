@@ -138,7 +138,8 @@ You can download the library as zip and call include Library -> zip library. Or 
 ```
 cd  ~/Documents/Arduino/libraries
 git clone pschatzmann/arduino-audio-tools.git
-
 ```
+
+I recommend to use git because you can easily update to the latest version just by executing the ```git pull``` command in the project folder.
 
 If you want to use the library in PlatformIO, you can find a [detailed description in the Wiki](https://github.com/pschatzmann/arduino-audio-tools/wiki/Working-with-PlatformIO).
