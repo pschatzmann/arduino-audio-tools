@@ -536,16 +536,26 @@ class AudioKitStream : public AudioStreamX {
   /// Setup the supported default actions
   void setupActions() {
     LOGI(LOG_METHOD);
-    actions.add(kit.pinHeadphoneDetect(), actionHeadphoneDetection);
-    // This clashes with the SD CS pin for AIThinker
-    if (!cfg.sd_active && (AUDIOKIT_BOARD!=5 && AUDIOKIT_BOARD!=6)){
-      addAction(kit.pinInputMode(), actionStartStop);
+    // pin conflicts with AIThinker A101 and headphone detection
+    if (! (cfg.sd_active && AUDIOKIT_BOARD==6)) {
+      actions.add(kit.pinHeadphoneDetect(), actionHeadphoneDetection);
+    } else {
+      LOGW("Headphone detection ignored because of conflict: %d ",kit.pinHeadphoneDetect());
     }
 
-    // conflicts with SD Lyrat SD CS Pin
-    if (!cfg.sd_active && (AUDIOKIT_BOARD==5 || AUDIOKIT_BOARD==6)){
+    // pin conflicts with the SD CS pin for AIThinker and buttons
+    if (! (cfg.sd_active && (AUDIOKIT_BOARD==5 || AUDIOKIT_BOARD==6))){
+      addAction(kit.pinInputMode(), actionStartStop);
+    } else {
+      LOGW("Mode Button ignored because of conflict: %d ",kit.pinInputMode());
+    }
+
+    // pin conflicts with SD Lyrat SD CS Pin and buttons
+    if (! (cfg.sd_active && AUDIOKIT_BOARD==1)){
       addAction(kit.pinVolumeDown(), actionVolumeDown); 
       addAction(kit.pinVolumeUp(), actionVolumeUp);
+    } else {
+      LOGW("Volume Buttons ignored because of conflict: %d ",kit.pinVolumeDown());
     }
   }
 };
