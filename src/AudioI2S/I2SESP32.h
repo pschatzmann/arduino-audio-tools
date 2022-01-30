@@ -104,6 +104,10 @@ class I2SBase {
       this->i2s_num = (i2s_port_t) cfg.port_no; 
       setChannels(cfg.channels);
 
+      LOGI("I2S_BUFFER_COUNT=%d",I2S_BUFFER_COUNT);
+      LOGI("I2S_BUFFER_SIZE=%d",I2S_BUFFER_SIZE);
+      LOGI("I2S_AUTO_CLEAR=%d",I2S_AUTO_CLEAR);
+
       i2s_config_t i2s_config_new = {
             .mode = toMode(cfg),
             .sample_rate = (eps32_i2s_sample_rate_type)cfg.sample_rate,
@@ -116,7 +120,6 @@ class I2SBase {
             .use_apll = (bool) cfg.use_apll,
             .tx_desc_auto_clear = I2S_AUTO_CLEAR, 
             .fixed_mclk = (int) (cfg.use_apll ? cfg.fixed_mclk : 0 )
-
       };
       i2s_config = i2s_config_new;
 

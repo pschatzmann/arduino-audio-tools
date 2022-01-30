@@ -147,7 +147,7 @@ class SPDIFOutI2S : public SPDIFOut {
     I2SConfig i2s_cfg;
     i2s_cfg.sample_rate = sample_rate;
     i2s_cfg.channels = cfg.channels;
-    i2s_cfg.bits_per_sample = 32;
+    i2s_cfg.bits_per_sample = I2S_BITS_PER_SAMPLE;
     i2s_cfg.pin_ws = -1;
     i2s_cfg.pin_bck = -1;
     i2s_cfg.pin_data = cfg.pin_data;
@@ -394,8 +394,10 @@ class SPDIFStream : public AudioStreamX {
     // Define output class if not yet defined
     if (spdif_out == nullptr) {
 #if USE_ESP32_I2S == 1
+      LOGI("USE_ESP32_I2S=1 -> using SPDFOutI2SESP32()");
       spdif_out = new SPDFOutI2SESP32();
 #else
+      LOGI("USE_ESP32_I2S==%d -> using SPDIFOutI2S()",USE_ESP32_I2S);
       spdif_out = new SPDIFOutI2S();
 #endif
       spdif.setOutput(spdif_out);
