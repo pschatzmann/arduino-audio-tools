@@ -1,7 +1,7 @@
 /**
  * @file AudioSPDIF.h
  * @author amedes / Phil Schatzmann
- * @brief S/PDIF output via I2S
+ * @brief S/PDIF output
 
     This example code is in the Public Domain (or CC0 licensed, at your option.)
     Unless required by applicable law or agreed to in writing, this
@@ -9,7 +9,7 @@
     CONDITIONS OF ANY KIND, either express or implied.
 
 
- * @date 2022-01-23
+ * @date 2022-01-30
  *
  * @copyright  (C) 2020 AMEDES, 2022 Phil Schatzmann
  *
@@ -23,7 +23,7 @@
 // Set USE_ESP32_I2S to 1 if you want to use the explicit ESP32 implementation.
 // 0 for generic implementation
 #ifndef USE_ESP32_I2S
-#define USE_ESP32_I2S 1
+#define USE_ESP32_I2S 0
 #endif
 
 // Default Data Pin
@@ -150,9 +150,10 @@ class SPDIFOutI2S : public SPDIFOut {
     i2s_cfg.pin_ws = -1;
     i2s_cfg.pin_bck = -1;
     i2s_cfg.pin_data = cfg.pin_data;
+#ifdef ESP32
     i2s_cfg.use_apll = true;
     i2s_cfg.fixed_mclk = mclk;
-
+#endif
     i2s.begin(i2s_cfg);
   }
 
@@ -169,6 +170,7 @@ class SPDIFOutI2S : public SPDIFOut {
   I2SStream i2s;
 };
 
+#ifdef ESP32
 /**
  * @brief ESP32 specific Output 
  * 
@@ -218,6 +220,8 @@ class SPDFOutI2SESP32 : public SPDIFOut {
     return i2s_write_len;
   }
 };
+
+#endif
 
 /**
  * @brief Generic output of SPDIF to Arduino Stream
@@ -381,7 +385,7 @@ class SPDIFStream : public AudioStreamX {
    }
 
   /// start SPDIF with default configuration
-  bool begin() { spdif.begin(); }
+  bool begin() { return spdif.begin(); }
   /// start SPDIF with the indicated configuration
   bool begin(SPDIFConfig cfg) {
     this->cfg = cfg;
@@ -398,7 +402,8 @@ class SPDIFStream : public AudioStreamX {
     targetSpdifConfig.channels = 2;
     targetSpdifConfig.bits_per_sample = 16;
     targetSpdifConfig.sample_rate = cfg.sample_rate;
-    spdif.begin(targetSpdifConfig);
+    return spdif.begin(targetSpdifConfig);
+    
   }
 
   /// Close the SPDIF processing
