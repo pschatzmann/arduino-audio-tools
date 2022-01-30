@@ -213,7 +213,7 @@ class SPDFOutI2SESP32 : public SPDIFOut {
   bool end() { return i2s_driver_uninstall(I2S_NUM) == ESP_OK; }
 
   size_t write(uint8_t *spdif_buf, size_t len) {
-    size_t i2s_write_len;
+    size_t i2s_write_len=0;
     i2s_write(I2S_NUM, spdif_buf, len, &i2s_write_len, portMAX_DELAY);
     return i2s_write_len;
   }
@@ -333,7 +333,7 @@ class SPDIFStream16Bit2Channels : public AudioStreamX {
       }
     }
 
-    return result / 2;
+    return result / 4;
   }
 
  protected:
@@ -402,6 +402,7 @@ class SPDIFStream : public AudioStreamX {
 #endif
       spdif.setOutput(spdif_out);
     }
+    LOGI("SPDIF_BUF_SIZE=%d",SPDIF_BUF_SIZE);
 
     // define source format
     converter.setInputInfo(cfg);
