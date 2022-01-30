@@ -15,6 +15,7 @@
  */
 
 #define USE_A2DP
+#include "AudioConfigLocal.h"
 #include "AudioTools.h"
 #include "AudioExperiments/AudioSPDIF.h"
 
