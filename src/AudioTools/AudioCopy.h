@@ -50,7 +50,8 @@ class StreamCopyT {
         }
 
         void begin(){     
-            is_first = true;       
+            is_first = true;   
+            LOG("buffer_size=%d",buffer_size);    
         }
 
         void end() {
@@ -62,6 +63,7 @@ class StreamCopyT {
             this->from = new AudioStreamWrapper(from);
             this->to = &to;
             is_first = true;
+            LOG("buffer_size=%d",buffer_size);    
         }
 
         // assign a new output and input stream
@@ -69,6 +71,7 @@ class StreamCopyT {
             this->from = &from;
             this->to = &to;
             is_first = true;
+            LOG("buffer_size=%d",buffer_size);    
         }
 
         Stream *getFrom(){
