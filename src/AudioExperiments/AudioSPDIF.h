@@ -19,9 +19,6 @@
 
 #include "AudioConfig.h"
 #include "AudioTools/AudioStreams.h"
-#ifdef ESP32
-#include "soc/rtc.h"
-#endif
 
 // Set USE_ESP32_I2S to 1 if you want to use the explicit ESP32 implementation.
 // 0 for generic implementation
@@ -59,6 +56,7 @@
 #define SYNC_OFFSET 2  // byte offset of SYNC
 #define SYNC_FLIP ((BMC_B ^ BMC_M) >> (SYNC_OFFSET * 8))
 
+// Include I2S based on configuration
 #if defined(ESP32) && USE_ESP32_I2S == 1
 #include "driver/i2s.h"
 #include "freertos/FreeRTOS.h"
@@ -122,7 +120,7 @@ struct SPDIFConfig : public AudioBaseInfo {
 };
 
 /**
- * @brief Output as 16 bit SPDIF on the I2S data output pin
+ * @brief Output as 16 bit stereo SPDIF on the I2S data output pin
  * @author Phil Schatzmann
  * @copyright GPLv3
  *
@@ -153,6 +151,10 @@ class SPDIFStream16Bit2Channels : public AudioStreamX {
     if (info.bits_per_sample != 16) {
       LOGE("Unsupported bits per sample: %d - must be 16!",
            info.bits_per_sample);
+    }
+    if (info.channels != 2) {
+      LOGE("Unsupported number of channels: %d - must be 2!",
+           info.channels);
     }
     begin(cfg);
   }
@@ -191,10 +193,12 @@ class SPDIFStream16Bit2Channels : public AudioStreamX {
   }
 
 #if USE_ESP32_I2S == 1
+
   bool end() {
     i2sOn = false;
     return i2s_driver_uninstall(I2S_NUM) == ESP_OK;
   }
+
 #else
 
   bool end() {
@@ -298,7 +302,9 @@ class SPDIFStream16Bit2Channels : public AudioStreamX {
 class SPDIFStream : public AudioStreamX {
  public:
   SPDIFStream() = default;
+  /// start SPDIF with default configuration
   bool begin() { spdif.begin(); }
+  /// start SPDIF with the indicated configuration
   bool begin(SPDIFConfig cfg) {
     this->cfg = cfg;
     // define source format
@@ -317,14 +323,18 @@ class SPDIFStream : public AudioStreamX {
     spdif.begin(targetSpdifConfig);
   }
 
+  /// Close the SPDIF processing
   bool end() { return spdif.end(); }
 
+  /// Provide audio data to SPDIF
   size_t write(const uint8_t *src, size_t size) {
     return converter.write(src, size);
   }
 
+  /// Provides the default configuration
   SPDIFConfig defaultConfig() { return spdif.defaultConfig(); }
 
+  /// Updates the audio information (channels, bits_per_sample, sample_rate)
   virtual void setAudioInfo(AudioBaseInfo info) {
     // update input info
     converter.setInputInfo(info);
