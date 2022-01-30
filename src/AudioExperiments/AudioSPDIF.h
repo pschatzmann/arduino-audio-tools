@@ -260,13 +260,6 @@ class SPDIFStream16Bit2Channels : public AudioStreamX {
 
   /// Start with the provided parameters
   bool begin(SPDIFConfig cfg) {
-    if (out == nullptr) {
-#if USE_ESP32_I2S == 1
-      out = new SPDFOutI2SESP32();
-#else
-      out = new SPDIFOutI2S();
-#endif
-    }
     if (i2sOn){
       out->end();
     }
@@ -284,8 +277,6 @@ class SPDIFStream16Bit2Channels : public AudioStreamX {
     bool result = true;
     if (out != nullptr) {
       result = out->end();
-      delete out;
-      out = nullptr;
     }
     i2sOn = false;
     return result;
@@ -389,6 +380,16 @@ class SPDIFStream : public AudioStreamX {
   /// start SPDIF with the indicated configuration
   bool begin(SPDIFConfig cfg) {
     this->cfg = cfg;
+    // Define output class if not yet defined
+    if (spdif_out == nullptr) {
+#if USE_ESP32_I2S == 1
+      spdif_out = new SPDFOutI2SESP32();
+#else
+      spdif_out = new SPDIFOutI2S();
+#endif
+      spdif.setOutput(spdif_out);
+    }
+
     // define source format
     converter.setInputInfo(cfg);
     // define target format for converter
@@ -430,7 +431,7 @@ class SPDIFStream : public AudioStreamX {
   SPDIFConfig cfg;
   SPDIFStream16Bit2Channels spdif;
   FormatConverterStream converter{spdif};
-  SPDIFOutGeneric *spdif_out=nullptr;
+  SPDIFOut *spdif_out=nullptr;
 };
 
 }  // namespace audio_tools
