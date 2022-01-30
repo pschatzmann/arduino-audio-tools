@@ -30,7 +30,7 @@ void setup(void) {
   auto config = out.defaultConfig();
   config.sample_rate = sample_rate; 
   config.channels = channels;
-  config.pin_data = 22;
+  config.pin_data = 23;
   out.begin(config);
 
   // Setup sine wave
