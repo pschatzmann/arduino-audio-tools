@@ -320,6 +320,7 @@ class SPDIFStream16Bit2Channels : public AudioStreamX {
           (uint32_t)(((bmc_tab[*p] << 16) ^ bmc_tab[*(p + 1)]) << 1) >> 1;
 
       p += 2;
+      result +=2;
       spdif_ptr += 2;  // advance to next audio data
 
       if (spdif_ptr >= &spdif_buf[SPDIF_BUF_ARRAY_SIZE]) {
@@ -328,12 +329,12 @@ class SPDIFStream16Bit2Channels : public AudioStreamX {
         // set block start preamble
         ((uint8_t *)spdif_buf)[SYNC_OFFSET] ^= SYNC_FLIP;
 
-        result += out->write((uint8_t *)spdif_buf, sizeof(spdif_buf));
+        out->write((uint8_t *)spdif_buf, sizeof(spdif_buf));
         spdif_ptr = spdif_buf;
       }
     }
 
-    return result / 4;
+    return result;
   }
 
  protected:
