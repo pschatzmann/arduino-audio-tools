@@ -28,7 +28,7 @@ void setup(){
   fdk->setAudioObjectType(2);  // AAC low complexity
   fdk->setOutputBufferSize(1024); // decrease output buffer size
   fdk->setVariableBitrateMode(2); // low variable bitrate
-  server = new AudioEncoderServer(fdk,"Phil Schatzmann","sabrina01");  
+  server = new AudioEncoderServer(fdk,"WIFI","password");  
 
   // start i2s input with default configuration
   Serial.println("starting AudioKit...");
