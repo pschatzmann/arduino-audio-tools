@@ -111,12 +111,130 @@ static uint32_t *spdif_ptr;
  * @copyright GPLv3
  */
 struct SPDIFConfig : public AudioBaseInfo {
-  SPDIFConfig(){
+  SPDIFConfig() {
     bits_per_sample = 16;
     channels = 2;
   }
   int port_no = 0;  // processor dependent port
   int pin_data = SPDIF_DATA_PIN;
+};
+
+/**
+ * @brief Interface definition for SPDIF output class
+ * 
+ */
+class SPDIFOut {
+ public:
+  virtual void begin(SPDIFConfig &cfg);
+  virtual bool end();
+  virtual size_t write(uint8_t *spdif_buf, size_t len);
+};
+
+/**
+ * @brief Generic I2S Output 
+ * 
+ */
+class SPDIFOutI2S : public SPDIFOut {
+ public:
+  SPDIFOutI2S() = default;
+
+  void begin(SPDIFConfig &cfg) {
+    int sample_rate = cfg.sample_rate * BMC_BITS_FACTOR;
+    int bclk = sample_rate * I2S_BITS_PER_SAMPLE * I2S_CHANNELS;
+    int mclk = (I2S_BUG_MAGIC / bclk) * bclk;  // use mclk for avoiding I2S bug
+
+    I2SConfig i2s_cfg;
+    i2s_cfg.sample_rate = sample_rate;
+    i2s_cfg.channels = cfg.channels;
+    i2s_cfg.bits_per_sample = 32;
+    i2s_cfg.pin_ws = -1;
+    i2s_cfg.pin_bck = -1;
+    i2s_cfg.pin_data = cfg.pin_data;
+    i2s_cfg.use_apll = true;
+    i2s_cfg.fixed_mclk = mclk;
+
+    i2s.begin(i2s_cfg);
+  }
+
+  bool end() {
+    i2s.end();
+    return true;
+  }
+
+  size_t write(uint8_t *spdif_buf, size_t len) {
+    return i2s.write(spdif_buf, len);
+  }
+
+ protected:
+  I2SStream i2s;
+};
+
+/**
+ * @brief ESP32 specific Output 
+ * 
+ */
+class SPDFOutI2SESP32 : public SPDIFOut {
+ public:
+  SPDFOutI2SESP32() = default;
+
+  // initialize I2S for S/PDIF transmission
+  void begin(SPDIFConfig &cfg) {
+    // uninstall and reinstall I2S driver for avoiding I2S bug
+    int sample_rate = cfg.sample_rate * BMC_BITS_FACTOR;
+    int bclk = sample_rate * I2S_BITS_PER_SAMPLE * I2S_CHANNELS;
+    int mclk = (I2S_BUG_MAGIC / bclk) * bclk;  // use mclk for avoiding I2S bug
+
+    i2s_config_t i2s_config = {
+        .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_TX),
+        .sample_rate = sample_rate,
+        .bits_per_sample = (i2s_bits_per_sample_t)I2S_BITS_PER_SAMPLE,
+        .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,
+        .communication_format = (i2s_comm_format_t)I2S_COMM_FORMAT_STAND_I2S,
+        .intr_alloc_flags = 0,
+        .dma_buf_count = DMA_BUF_COUNT,
+        .dma_buf_len = DMA_BUF_LEN,
+        .use_apll = true,
+        .tx_desc_auto_clear = true,
+        .fixed_mclk = mclk,  // avoiding I2S bug
+    };
+    i2s_pin_config_t pin_config = {
+        .bck_io_num = -1,
+        .ws_io_num = -1,
+        .data_out_num = cfg.pin_data,
+        .data_in_num = -1,
+    };
+
+    ESP_ERROR_CHECK(i2s_driver_install(I2S_NUM, &i2s_config, 0, NULL));
+    ESP_ERROR_CHECK(i2s_set_pin(I2S_NUM, &pin_config));
+  }
+
+  bool end() {
+    return i2s_driver_uninstall(I2S_NUM) == ESP_OK;
+  }
+
+  size_t write(uint8_t *spdif_buf, size_t len) {
+    size_t i2s_write_len;
+    i2s_write(I2S_NUM, spdif_buf, len, &i2s_write_len, portMAX_DELAY);
+    return i2s_write_len;
+  }
+};
+
+/**
+ * @brief Generic output of SPDIF to Arduino Stream
+ *
+ */
+class SPDIFOutGeneric : public SPDIFOut {
+ public:
+  SPDIFOutGeneric(Print &out) { this->out = &out; }
+  virtual void begin(SPDIFConfig &cfg) { }
+  virtual bool end() {return true;}
+
+  virtual size_t write(uint8_t *data, size_t len) {
+    return out->write(data, len);
+  }
+
+ protected:
+  Print *out = nullptr;
 };
 
 /**
@@ -127,21 +245,50 @@ struct SPDIFConfig : public AudioBaseInfo {
  */
 class SPDIFStream16Bit2Channels : public AudioStreamX {
  public:
+  /// default constructor
   SPDIFStream16Bit2Channels() = default;
+
+  /// destructor
+  ~SPDIFStream16Bit2Channels() { end(); }
 
   /// Starting with default settings
   bool begin() { return begin(defaultConfig()); }
 
   /// Start with the provided parameters
   bool begin(SPDIFConfig cfg) {
+    if (out == nullptr) {
+#if USE_ESP32_I2S == 1
+      out = new SPDFOutI2SESP32();
+#else
+      out = new SPDIFOutI2S();
+#endif
+    }
+    if (i2sOn){
+      out->end();
+    }
+
     // initialize S/PDIF buffer
     spdif_buf_init();
     spdif_ptr = spdif_buf;
+    out->begin(cfg);
 
-    spdif_init(cfg);
     i2sOn = true;
     return true;
   }
+
+  bool end() {
+    bool result = true;
+    if (out != nullptr) {
+      result = out->end();
+      delete out;
+      out = nullptr;
+    }
+    i2sOn = false;
+    return result;
+  }
+
+  /// Defines the Output
+  void setOutput(SPDIFOut *out_ptr) { this->out = out_ptr; }
 
   /// Change the audio parameters
   virtual void setAudioInfo(AudioBaseInfo info) {
@@ -153,8 +300,7 @@ class SPDIFStream16Bit2Channels : public AudioStreamX {
            info.bits_per_sample);
     }
     if (info.channels != 2) {
-      LOGE("Unsupported number of channels: %d - must be 2!",
-           info.channels);
+      LOGE("Unsupported number of channels: %d - must be 2!", info.channels);
     }
     begin(cfg);
   }
@@ -184,7 +330,7 @@ class SPDIFStream16Bit2Channels : public AudioStreamX {
         // set block start preamble
         ((uint8_t *)spdif_buf)[SYNC_OFFSET] ^= SYNC_FLIP;
 
-        result += spdif_write((uint8_t *)spdif_buf, sizeof(spdif_buf));
+        result += out->write((uint8_t *)spdif_buf, sizeof(spdif_buf));
         spdif_ptr = spdif_buf;
       }
     }
@@ -192,29 +338,10 @@ class SPDIFStream16Bit2Channels : public AudioStreamX {
     return result / 2;
   }
 
-#if USE_ESP32_I2S == 1
-
-  bool end() {
-    i2sOn = false;
-    return i2s_driver_uninstall(I2S_NUM) == ESP_OK;
-  }
-
-#else
-
-  bool end() {
-    i2s.end();
-    i2sOn = false;
-    return true;
-  }
-
-#endif
-
  protected:
-  bool i2sOn;
+  bool i2sOn = false;
   SPDIFConfig cfg;
-#if USE_ESP32_I2S != 1
-  I2SStream i2s;
-#endif
+  SPDIFOut *out = nullptr;
 
   // initialize S/PDIF buffer
   static void spdif_buf_init(void) {
@@ -225,83 +352,34 @@ class SPDIFStream16Bit2Channels : public AudioStreamX {
       spdif_buf[i] = bmc_mw ^= BMC_MW_DIF;
     }
   }
-
-#if USE_ESP32_I2S == 1
-  // initialize I2S for S/PDIF transmission
-  void spdif_init(SPDIFConfig &cfg) {
-    // uninstall and reinstall I2S driver for avoiding I2S bug
-    if (i2sOn) {
-      end();
-    }
-    int sample_rate = cfg.sample_rate * BMC_BITS_FACTOR;
-    int bclk = sample_rate * I2S_BITS_PER_SAMPLE * I2S_CHANNELS;
-    int mclk = (I2S_BUG_MAGIC / bclk) * bclk;  // use mclk for avoiding I2S bug
-
-    i2s_config_t i2s_config = {
-        .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_TX),
-        .sample_rate = sample_rate,
-        .bits_per_sample = (i2s_bits_per_sample_t)I2S_BITS_PER_SAMPLE,
-        .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,
-        .communication_format = (i2s_comm_format_t)I2S_COMM_FORMAT_STAND_I2S,
-        .intr_alloc_flags = 0,
-        .dma_buf_count = DMA_BUF_COUNT,
-        .dma_buf_len = DMA_BUF_LEN,
-        .use_apll = true,
-        .tx_desc_auto_clear = true,
-        .fixed_mclk = mclk,  // avoiding I2S bug
-    };
-    i2s_pin_config_t pin_config = {
-        .bck_io_num = -1,
-        .ws_io_num = -1,
-        .data_out_num = cfg.pin_data,
-        .data_in_num = -1,
-    };
-
-    ESP_ERROR_CHECK(i2s_driver_install(I2S_NUM, &i2s_config, 0, NULL));
-    ESP_ERROR_CHECK(i2s_set_pin(I2S_NUM, &pin_config));
-  }
-
-  size_t spdif_write(uint8_t *spdif_buf, size_t len) {
-    size_t i2s_write_len;
-    i2s_write(I2S_NUM, spdif_buf, len, &i2s_write_len, portMAX_DELAY);
-    return i2s_write_len;
-  }
-
-#else
-  void spdif_init(SPDIFConfig &cfg) {
-    int sample_rate = cfg.sample_rate * BMC_BITS_FACTOR;
-    int bclk = sample_rate * I2S_BITS_PER_SAMPLE * I2S_CHANNELS;
-    int mclk = (I2S_BUG_MAGIC / bclk) * bclk;  // use mclk for avoiding I2S bug
-
-    I2SConfig i2s_cfg;
-    i2s_cfg.sample_rate = sample_rate;
-    i2s_cfg.channels = cfg.channels;
-    i2s_cfg.bits_per_sample = 32;
-    i2s_cfg.pin_ws = -1;
-    i2s_cfg.pin_bck = -1;
-    i2s_cfg.pin_data = cfg.pin_data;
-    i2s_cfg.use_apll = true;
-    i2s_cfg.fixed_mclk = mclk;
-
-    i2s.begin(i2s_cfg);
-  }
-
-  size_t spdif_write(uint8_t *spdif_buf, size_t len) {
-    return i2s.write(spdif_buf, len);
-  }
-
-#endif
 };
 
 /**
  * @brief SPDIF Stream
- * We only support the output of different bits_per_sample and mono output
+ * We support the output of different bits_per_sample and mono output
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 class SPDIFStream : public AudioStreamX {
  public:
+  /// Default Constructor
   SPDIFStream() = default;
+
+  /// Constructor which is defining a specific output class
+  SPDIFStream(Print &out){
+    spdif_out = new SPDIFOutGeneric(out);
+    spdif.setOutput(spdif_out);
+  }
+
+  ///Destructor
+  ~SPDIFStream() { 
+    end();
+    if (spdif_out!=nullptr){
+      delete spdif_out;
+      spdif_out = nullptr;
+    }
+   }
+
   /// start SPDIF with default configuration
   bool begin() { spdif.begin(); }
   /// start SPDIF with the indicated configuration
@@ -346,7 +424,8 @@ class SPDIFStream : public AudioStreamX {
  protected:
   SPDIFConfig cfg;
   SPDIFStream16Bit2Channels spdif;
-  FormatConverterStream converter {spdif};
+  FormatConverterStream converter{spdif};
+  SPDIFOutGeneric *spdif_out=nullptr;
 };
 
 }  // namespace audio_tools
