@@ -70,7 +70,7 @@ namespace audio_tools {
 /*
  * 8bit PCM to 16bit BMC conversion table, LSb first, 1 end
  */
-static const uint16_t bmc_tab[256] = {
+static const uint16_t bmc_tab_uint[256] = {
     0x3333, 0xb333, 0xd333, 0x5333, 0xcb33, 0x4b33, 0x2b33, 0xab33, 0xcd33,
     0x4d33, 0x2d33, 0xad33, 0x3533, 0xb533, 0xd533, 0x5533, 0xccb3, 0x4cb3,
     0x2cb3, 0xacb3, 0x34b3, 0xb4b3, 0xd4b3, 0x54b3, 0x32b3, 0xb2b3, 0xd2b3,
@@ -101,6 +101,8 @@ static const uint16_t bmc_tab[256] = {
     0x5355, 0xcb55, 0x4b55, 0x2b55, 0xab55, 0xcd55, 0x4d55, 0x2d55, 0xad55,
     0x3555, 0xb555, 0xd555, 0x5555,
 };
+static const int16_t *bmc_tab = (int16_t*) bmc_tab_uint;
+
 
 static uint32_t spdif_buf[SPDIF_BUF_ARRAY_SIZE];
 static uint32_t *spdif_ptr;
@@ -186,6 +188,9 @@ class SPDFOutI2SESP32 : public SPDIFOut {
     int sample_rate = cfg.sample_rate * BMC_BITS_FACTOR;
     int bclk = sample_rate * I2S_BITS_PER_SAMPLE * I2S_CHANNELS;
     int mclk = (I2S_BUG_MAGIC / bclk) * bclk;  // use mclk for avoiding I2S bug
+
+    LOGI("DMA_BUF_COUNT=%d",DMA_BUF_COUNT);
+    LOGI("DMA_BUF_LEN=%d",DMA_BUF_LEN);
 
     i2s_config_t i2s_config = {
         .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_TX),
