@@ -144,6 +144,7 @@ class SPDIFStream : public AudioStreamX {
     if (cfg.bits_per_sample != 16) {
       LOGE("Unsupported bits per sample: %d - must be 16!",
            cfg.bits_per_sample);
+      return false;
     }
 
     if (i2sOn) {
