@@ -137,13 +137,14 @@ class SPDIFStream : public AudioStreamX {
   bool begin(SPDIFConfig cfg) {
     LOGD(LOG_METHOD);
     // Some validations to make sure that the config is valid
-    if (!(cfg.channels == 1 | cfg.channels == 2)) {
+    if (!(cfg.channels == 1 || cfg.channels == 2)) {
       LOGE("Unsupported number of channels: %d", cfg.channels);
       return false;
     }
-    if (info.bits_per_sample != 16) {
+    if (cfg.bits_per_sample != 16) {
       LOGE("Unsupported bits per sample: %d - must be 16!",
-           info.bits_per_sample);
+           cfg.bits_per_sample);
+      return false;
     }
 
     if (i2sOn) {
@@ -224,8 +225,6 @@ class SPDIFStream : public AudioStreamX {
       spdif_ptr += 2;  // advance to next audio data
 
       if (spdif_ptr >= &spdif_buf[SPDIF_BUF_ARRAY_SIZE]) {
-        size_t i2s_write_len;
-
         // set block start preamble
         ((uint8_t *)spdif_buf)[SYNC_OFFSET] ^= SYNC_FLIP;
 
