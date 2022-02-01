@@ -78,7 +78,7 @@ class PWMAudioStreamPico : public PWMAudioStreamBase {
                 if (audio_config.pins!=nullptr){
                     gpio = audio_config.pins[j];
                 }
-                LOGD("-> defining pin %d",gpio);
+                LOGI("PWM pin %d",gpio);
 
                 pins[channel].slice = pwm_gpio_to_slice_num(gpio);
                 pins[channel].channel = pwm_gpio_to_channel(gpio);
