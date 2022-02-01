@@ -136,9 +136,14 @@ class SPDIFStream : public AudioStreamX {
   /// Start with the provided parameters
   bool begin(SPDIFConfig cfg) {
     LOGD(LOG_METHOD);
+    // Some validations to make sure that the config is valid
     if (!(cfg.channels == 1 | cfg.channels == 2)) {
       LOGE("Unsupported number of channels: %d", cfg.channels);
       return false;
+    }
+    if (info.bits_per_sample != 16) {
+      LOGE("Unsupported bits per sample: %d - must be 16!",
+           info.bits_per_sample);
     }
 
     if (i2sOn) {
@@ -148,6 +153,8 @@ class SPDIFStream : public AudioStreamX {
     // initialize S/PDIF buffer
     spdif_buf_init();
     spdif_ptr = spdif_buf;
+
+    // Setup I2S
     int sample_rate = cfg.sample_rate * BMC_BITS_FACTOR;
     int bclk = sample_rate * I2S_BITS_PER_SAMPLE * I2S_CHANNELS;
     int mclk = (I2S_BUG_MAGIC / bclk) * bclk;  // use mclk for avoiding I2S bug
@@ -185,9 +192,6 @@ class SPDIFStream : public AudioStreamX {
     if (info.bits_per_sample != 16) {
       LOGE("Unsupported bits per sample: %d - must be 16!",
            info.bits_per_sample);
-    }
-    if (info.channels != 2) {
-      LOGE("Unsupported number of channels: %d - must be 2!", info.channels);
     }
     begin(cfg);
   }
