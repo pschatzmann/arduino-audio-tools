@@ -224,8 +224,11 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 
 //----------------
 #if defined(ARDUINO_ARCH_RP2040) 
-//#define USE_ESP8266_AUDIO
+#if defined(ARDUINO_ARCH_MBED)
 //#define USE_I2S 1
+#else
+#define USE_I2S 1
+#endif
 #define USE_PWM
 
 #define PWM_START_PIN 6
@@ -240,6 +243,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 // fix missing __sync_synchronize symbol
 #define FIX_SYNC_SYNCHRONIZE
 #define IRAM_ATTR
+//#define USE_ESP8266_AUDIO
 
 #endif
 
