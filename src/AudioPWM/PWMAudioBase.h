@@ -324,7 +324,7 @@ class PWMAudioStreamBase : public AudioPrint, public AudioBaseInfoDependent {
 
         /// determines the next scaled value
         virtual int nextValue() {
-            int result;
+            int result = 0;
             switch(audio_config.bits_per_sample ){
                 case 8: {
                     int16_t value = buffer->read();

@@ -118,7 +118,7 @@ class StreamCopyT {
                 // callback with unconverted data
                 if (onWrite!=nullptr) onWrite(onWriteObj, buffer, result);
                 #ifndef COPY_LOG_OFF
-                LOGI("StreamCopy::copy %zu -> %zu -> %zu bytes - in %zu hops", bytes_to_read, bytes_read, result, delayCount);
+                LOGI("StreamCopy::copy %u -> %u -> %u bytes - in %u hops", (unsigned int)bytes_to_read,(unsigned int) bytes_read, (unsigned int)result, (unsigned int)delayCount);
                 #endif
             } else {
                 // give the processor some time 
@@ -157,7 +157,7 @@ class StreamCopyT {
                 }
                 result = write(samples * sizeof(T)*2, delayCount);
                 #ifndef COPY_LOG_OFF
-                    LOGI("StreamCopy::copy %zu -> %zu bytes - in %d hops", bytes_to_read, result, delayCount);
+                    LOGI("StreamCopy::copy %u -> %u bytes - in %d hops", (unsigned int)bytes_to_read, (unsigned int)result, delayCount);
                 #endif
             } else {
                 delay(delay_on_no_data);
@@ -313,7 +313,7 @@ class StreamCopy : public StreamCopyT<uint8_t> {
                 coverter_ptr->convert((T(*)[2])buffer,  result / (sizeof(T)*2) );
                 write(result, delayCount);
                 #ifndef COPY_LOG_OFF
-                    LOGI("StreamCopy::copy %zu bytes - in %zu hops", result, delayCount);
+                    LOGI("StreamCopy::copy %u bytes - in %u hops", (unsigned int)result,(unsigned int) delayCount);
                 #endif
             } else {
                 // give the processor some time 
