@@ -137,7 +137,7 @@ class SPDIFStream : public AudioStreamX {
   bool begin(SPDIFConfig cfg) {
     LOGD(LOG_METHOD);
     // Some validations to make sure that the config is valid
-    if (!(cfg.channels == 1 | cfg.channels == 2)) {
+    if (!(cfg.channels == 1 || cfg.channels == 2)) {
       LOGE("Unsupported number of channels: %d", cfg.channels);
       return false;
     }
