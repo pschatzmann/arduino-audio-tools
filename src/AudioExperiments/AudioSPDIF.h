@@ -141,9 +141,9 @@ class SPDIFStream : public AudioStreamX {
       LOGE("Unsupported number of channels: %d", cfg.channels);
       return false;
     }
-    if (info.bits_per_sample != 16) {
+    if (cfg.bits_per_sample != 16) {
       LOGE("Unsupported bits per sample: %d - must be 16!",
-           info.bits_per_sample);
+           cfg.bits_per_sample);
     }
 
     if (i2sOn) {
