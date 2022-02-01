@@ -108,6 +108,8 @@ $(function() {
 <li>Callback integration e.g. with ESP8266Audio <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_audio_output_with_callback.html">AudioOutputWithCallback</a></li>
 <li>Any other Arduino Classes implementing Streams: SD, Ethernet etc</li>
 </ul>
+<h2><a class="anchor" id="autotoc_md1"></a>
+Examples</h2>
 <p>Here is an simple example which streams a file from the Flash Memory and writes it to I2S:</p>
 <div class="fragment"><div class="line">#include &quot;AudioTools.h&quot;</div>
 <div class="line">#include &quot;StarWars30.h&quot;</div>
@@ -124,7 +126,7 @@ $(function() {
 <div class="line">void setup(){</div>
 <div class="line">    Serial.begin(115200);</div>
 <div class="line"> </div>
-<div class="line">    I2SConfig config = i2s.defaultConfig(TX_MODE);</div>
+<div class="line">    auto config = i2s.defaultConfig(TX_MODE);</div>
 <div class="line">    config.sample_rate = sample_rate;</div>
 <div class="line">    config.channels = channels;</div>
 <div class="line">    config.bits_per_sample = 16;</div>
@@ -137,8 +139,7 @@ $(function() {
 <div class="line">      stop();</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1"></a>
-Examples</h2>
+</div><!-- fragment --><p> Each stream has it's own configuration object that should be passed to the begin method. The defaultConfig() method is providing a default proposal which will usually "just work". Please consult the class documentation for the available configuration parameters. You can also easily adapt any provided examples: If you e.g. replace the I2SStream with the AnalogAudioStream class, you will get analog instead of digital output.</p>
 <p>Further examples can be found in the <a href="https://github.com/pschatzmann/arduino-audio-tools/wiki/Examples">Wiki</a>. The library also provides a versatile <a href="https://github.com/pschatzmann/arduino-audio-tools/wiki/The-Audio-Player-Class">AudioPlayer</a>.</p>
 <h2><a class="anchor" id="autotoc_md2"></a>
 Logging</h2>
@@ -181,7 +182,8 @@ Installation in Arduino</h2>
 <p>You can download the library as zip and call include Library -&gt; zip library. Or you can git clone this project into the Arduino libraries folder e.g. with</p>
 <div class="fragment"><div class="line">cd  ~/Documents/Arduino/libraries</div>
 <div class="line">git clone pschatzmann/arduino-audio-tools.git</div>
-</div><!-- fragment --><p>If you want to use the library in PlatformIO, you can find a <a href="https://github.com/pschatzmann/arduino-audio-tools/wiki/Working-with-PlatformIO">detailed description in the Wiki</a>. </p>
+</div><!-- fragment --><p>I recommend to use git because you can easily update to the latest version just by executing the <code>git pull</code> command in the project folder.</p>
+<p>If you want to use the library in PlatformIO, you can find a <a href="https://github.com/pschatzmann/arduino-audio-tools/wiki/Working-with-PlatformIO">detailed description in the Wiki</a>. </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->

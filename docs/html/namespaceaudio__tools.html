@@ -531,6 +531,12 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class to define the abstract interface for the sound generating classes.  <a href="classaudio__tools_1_1_sound_generator.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_s_p_d_i_f_config.html">SPDIFConfig</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">SPDIF configuration.  <a href="structaudio__tools_1_1_s_p_d_i_f_config.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_s_p_d_i_f_stream.html">SPDIFStream</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output as 16 bit stereo SPDIF on the <a class="el" href="classaudio__tools_1_1_i2_s.html" title="A Simple I2S interface class for multiple Architectures that supports the reading and writing with a ...">I2S</a> data output pin.  <a href="classaudio__tools_1_1_s_p_d_i_f_stream.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_square_wave_generator.html">SquareWaveGenerator</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a square wave sound.  <a href="classaudio__tools_1_1_square_wave_generator.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -871,6 +877,12 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>ADC_TAG</b> =
 <tr class="memitem:a5d492a36795a9573c7217330de9cb176"><td class="memItemLeft" align="right" valign="top"><a id="a5d492a36795a9573c7217330de9cb176"></a>
 <a class="el" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>audioChangeMP3Helix</b> =nullptr</td></tr>
 <tr class="separator:a5d492a36795a9573c7217330de9cb176"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adab82c00fb51617fea38e69c0c0bb4c0"><td class="memItemLeft" align="right" valign="top"><a id="adab82c00fb51617fea38e69c0c0bb4c0"></a>
+static const int16_t *&#160;</td><td class="memItemRight" valign="bottom"><b>bmc_tab</b> = (int16_t *)bmc_tab_uint</td></tr>
+<tr class="separator:adab82c00fb51617fea38e69c0c0bb4c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2406d5be34466ec92fbd8624fb5cc51"><td class="memItemLeft" align="right" valign="top"><a id="ae2406d5be34466ec92fbd8624fb5cc51"></a>
+static const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>bmc_tab_uint</b> [256]</td></tr>
+<tr class="separator:ae2406d5be34466ec92fbd8624fb5cc51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac08dcd9cd0cedbb927f97698f0bf6518"><td class="memItemLeft" align="right" valign="top"><a id="ac08dcd9cd0cedbb927f97698f0bf6518"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><b>CHUNKED</b> = &quot;chunked&quot;</td></tr>
 <tr class="separator:ac08dcd9cd0cedbb927f97698f0bf6518"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -955,6 +967,12 @@ static portMUX_TYPE&#160;</td><td class="memItemRight" valign="bottom"><b>mutex_
 <tr class="memitem:adeb1a207fdd9dcef33a2d331f686e5fb"><td class="memItemLeft" align="right" valign="top"><a id="adeb1a207fdd9dcef33a2d331f686e5fb"></a>
 class <a class="el" href="classaudio__tools_1_1_user_callback.html">audio_tools::UserCallback</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>simpleUserCallback</b> = nullptr</td></tr>
 <tr class="separator:adeb1a207fdd9dcef33a2d331f686e5fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9baee7337fc3783353b093e2fd0f9bd3"><td class="memItemLeft" align="right" valign="top"><a id="a9baee7337fc3783353b093e2fd0f9bd3"></a>
+static uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>spdif_buf</b> [SPDIF_BUF_ARRAY_SIZE]</td></tr>
+<tr class="separator:a9baee7337fc3783353b093e2fd0f9bd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff6dc09941b209795dd64f2456925221"><td class="memItemLeft" align="right" valign="top"><a id="aff6dc09941b209795dd64f2456925221"></a>
+static uint32_t *&#160;</td><td class="memItemRight" valign="bottom"><b>spdif_ptr</b></td></tr>
+<tr class="separator:aff6dc09941b209795dd64f2456925221"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a39517ccd473450adc836daea214cf4a7"><td class="memItemLeft" align="right" valign="top"><a id="a39517ccd473450adc836daea214cf4a7"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><b>SUCCESS</b> = &quot;Success&quot;</td></tr>
 <tr class="separator:a39517ccd473450adc836daea214cf4a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
