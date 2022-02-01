@@ -237,6 +237,8 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define SOFT_MUTE_VALUE LOW  
 #define PIN_CS PIN_SPI0_SS
 
+// fix missing __sync_synchronize symbol
+#define FIX_SYNC_SYNCHRONIZE
 #define IRAM_ATTR
 
 #endif

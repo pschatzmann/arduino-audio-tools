@@ -7,7 +7,7 @@
 
 
 /// stops any further processing by spinning in an endless loop
-void stop() {
+inline void stop() {
   #ifdef EXIT_ON_STOP
     exit(0);
   #else
@@ -24,3 +24,5 @@ inline static void checkMemory(bool stackCheck=false) {
         if (stackCheck) printf("stack available: %d \n'", uxTaskGetStackHighWaterMark(NULL));
     #endif    
 }
+
+
