@@ -1,6 +1,6 @@
 #pragma once
 
-#ifdef ARDUINO_ARCH_RP2040
+#if defined(ARDUINO_ARCH_RP2040) 
 #include "AudioConfig.h"
 #ifdef USE_I2S
 #include "AudioExperiments/I2SBitBang.h"
