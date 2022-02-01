@@ -224,8 +224,6 @@ class SPDIFStream : public AudioStreamX {
       spdif_ptr += 2;  // advance to next audio data
 
       if (spdif_ptr >= &spdif_buf[SPDIF_BUF_ARRAY_SIZE]) {
-        size_t i2s_write_len;
-
         // set block start preamble
         ((uint8_t *)spdif_buf)[SYNC_OFFSET] ^= SYNC_FLIP;
 
