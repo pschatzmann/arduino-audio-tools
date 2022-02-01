@@ -12,7 +12,7 @@
 
 #include "AudioTools.h"
 
-using namespace audio_tools;  
+
 
 /**
  * @brief We use a ADS1015 I2S microphone as input and send the data to A2DP

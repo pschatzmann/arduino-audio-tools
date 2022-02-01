@@ -13,7 +13,7 @@
 #include "AudioTools.h"
 #include "Clarinet.h"
 
-using namespace audio_tools;  
+
 
 stk::Clarinet clarinet(440); // the stk clarinet instrument
 STKGenerator<int16_t> generator(clarinet);    // subclass of SoundGenerator

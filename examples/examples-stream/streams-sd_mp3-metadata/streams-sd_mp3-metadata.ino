@@ -16,7 +16,7 @@
 #include <SPI.h>
 #include <SdFat.h>
 
-using namespace audio_tools;  
+
 
 //                            -> EncodedAudioStream -> I2SStream
 // URLStream -> MultiOutput -|

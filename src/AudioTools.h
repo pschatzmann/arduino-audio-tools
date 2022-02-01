@@ -26,7 +26,6 @@
 #include "AudioTools/AudioPlayer.h"
 #include "AudioEffects/SoundGenerator.h"
 #include "AudioEffects/AudioEffects.h"
-//#include "AudioExperiments/AudioExperiments.h"
 
 /**
  * ------------------------------------------------------------------------- 
@@ -53,15 +52,18 @@
 #include "AudioLibs/AudioA2DP.h"
 #endif
 
+#ifdef USE_EXPERIMENTS
+#include "AudioExperiments/AudioExperiments.h"
+#endif
 
 /**
  * ------------------------------------------------------------------------- 
  * @brief Set namespace
  * 
  */
-
+#ifndef NO_AUDIOTOOLS_NS
 using namespace audio_tools;  
-
+#endif
 
 /**
  * ------------------------------------------------------------------------- 

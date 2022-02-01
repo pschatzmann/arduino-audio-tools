@@ -11,8 +11,6 @@
 #include "AudioTools.h"
 #include "AudioLibs/AudioKit.h"
 
-using namespace audio_tools;  
-
 AudioKitStream kit; // Access I2S as stream
 CsvStream<int16_t> csvStream(Serial);
 StreamCopy copier(csvStream, kit); // copy kit to csvStream

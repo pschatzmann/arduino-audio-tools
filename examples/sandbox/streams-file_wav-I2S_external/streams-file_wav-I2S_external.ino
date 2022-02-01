@@ -1,7 +1,7 @@
 #include "WiFi.h"
 #include "AudioTools.h"
 
-using namespace audio_tools;  
+
 
 I2SStream i2s;                  // WAVDecoder neads I2S Output as stream
 WAVDecoder decoder(i2s_stream); // Decoder writing to I2S Stream 

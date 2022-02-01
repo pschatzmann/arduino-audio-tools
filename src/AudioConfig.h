@@ -232,10 +232,10 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define USE_PWM
 
 #define PWM_START_PIN 6
-#define PIN_I2S_BCK 1
+#define PIN_I2S_BCK 26
 #define PIN_I2S_WS PIN_I2S_BCK+1
-#define PIN_I2S_DATA_IN 3
-#define PIN_I2S_DATA_OUT 3
+#define PIN_I2S_DATA_IN 28
+#define PIN_I2S_DATA_OUT 28
 #define PIN_I2S_MUTE 4
 #define SOFT_MUTE_VALUE LOW  
 #define PIN_CS PIN_SPI0_SS

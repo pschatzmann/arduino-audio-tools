@@ -15,7 +15,7 @@
 #include "AudioCodecs/CodecAACHelix.h"
 #include "audio.h"
 
-using namespace audio_tools;  
+
 
 //recorded with 2 channels at 44100 hz
 MemoryStream in(gs_16b_2c_44100hz_aac, gs_16b_2c_44100hz_aac_len);
