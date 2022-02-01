@@ -20,6 +20,8 @@
 #include "AudioConfig.h"
 #include "AudioTools/AudioLogger.h"
 #include "AudioTools/AudioStreams.h"
+#include "AudioI2S/I2SConfig.h"
+#include "AudioI2S/I2SStream.h"
 
 // Set USE_ESP32_I2S to 1 if you want to use the explicit ESP32 implementation.
 // 0 for generic implementation
@@ -57,14 +59,6 @@
 #define SYNC_OFFSET 2  // byte offset of SYNC
 #define SYNC_FLIP ((BMC_B ^ BMC_M) >> (SYNC_OFFSET * 8))
 
-// Include I2S based on configuration
-#if defined(ESP32) && USE_ESP32_I2S == 1
-#include "driver/i2s.h"
-#include "freertos/FreeRTOS.h"
-#else
-#include "AudioI2S/I2SConfig.h"
-#include "AudioI2S/I2SStream.h"
-#endif
 
 namespace audio_tools {
 
@@ -142,13 +136,13 @@ class SPDIFStream : public AudioStreamX {
   /// Start with the provided parameters
   bool begin(SPDIFConfig cfg) {
     LOGD(LOG_METHOD);
-    if (i2sOn) {
-      i2s.end();
-    }
-
     if (!(cfg.channels == 1 | cfg.channels == 2)) {
       LOGE("Unsupported number of channels: %d", cfg.channels);
       return false;
+    }
+
+    if (i2sOn) {
+      i2s.end();
     }
 
     // initialize S/PDIF buffer
