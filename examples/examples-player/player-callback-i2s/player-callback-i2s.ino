@@ -16,7 +16,7 @@
 #include <SPI.h>
 #include <SD.h>
 
-using namespace audio_tools;  
+
 
 // forward declarations
 void callbackInit();

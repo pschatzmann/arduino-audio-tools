@@ -12,8 +12,6 @@
 #include "AudioTools.h"
 #include "AudioLibs/AudioKit.h"
 
-using namespace audio_tools;  
-
 const char *startFilePath="/";
 const char* ext="mp3";
 int speedMz = 10;

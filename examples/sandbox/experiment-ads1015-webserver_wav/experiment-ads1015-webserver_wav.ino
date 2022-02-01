@@ -9,7 +9,7 @@
 #include "AudioTools.h"
 #include "ADS1X15.h"
 
-using namespace audio_tools;  
+
 
 const int sample_rate = 1640;
 const int channels = 1;

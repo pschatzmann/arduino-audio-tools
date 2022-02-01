@@ -9,7 +9,7 @@
 #include "flite_arduino.h"
 #include "AudioTools.h"
 
-using namespace audio_tools;  
+
 
 AudioWAVServer server("ssid","password");
 

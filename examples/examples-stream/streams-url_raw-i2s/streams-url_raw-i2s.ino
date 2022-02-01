@@ -9,7 +9,7 @@
 #include "WiFi.h"
 #include "AudioTools.h"
 
-using namespace audio_tools;  
+
 
 URLStream music;    // Music Stream
 I2SStream i2s;// I2S as Stream

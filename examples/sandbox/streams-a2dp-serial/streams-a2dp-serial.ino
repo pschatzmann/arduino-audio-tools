@@ -12,7 +12,7 @@
 
 #include "AudioTools.h"
 
-using namespace audio_tools;  
+
 
 A2DPStream in = A2DPStream::instance() ; // A2DP input - A2DPStream is a singleton!
 CsvStream<int16_t> out(Serial, 2); // ASCII stream as csv 

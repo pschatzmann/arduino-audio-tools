@@ -9,7 +9,7 @@
  * => Available heap 140980-151484
  */
 
-using namespace audio_tools;  
+
 
 URLStream url("SSID","password");
 I2SStream i2s; // final output of decoded stream

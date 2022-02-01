@@ -12,7 +12,7 @@
 //#include "knghtsng.h"
 #include "alice.h"
 
-using namespace audio_tools;  
+
 
 //Data Flow: MemoryStream -> EncodedAudioStream  -> PWMAudioStream
 

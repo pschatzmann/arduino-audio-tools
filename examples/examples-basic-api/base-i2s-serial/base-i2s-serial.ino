@@ -10,7 +10,7 @@
 #include "Arduino.h"
 #include "AudioTools.h"
 
-using namespace audio_tools;  
+
 
 /**
  * @brief We use I2S as input 

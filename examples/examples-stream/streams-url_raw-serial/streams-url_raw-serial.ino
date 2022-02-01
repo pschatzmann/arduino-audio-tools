@@ -9,7 +9,7 @@
 #include "WiFi.h"
 #include "AudioTools.h"
 
-using namespace audio_tools;  
+
 
 URLStream music;  // Music Stream
 int channels = 2; // The stream has 2 channels 
