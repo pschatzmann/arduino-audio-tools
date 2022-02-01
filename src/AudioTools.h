@@ -20,6 +20,7 @@
 #include "AudioTools/AudioStreams.h"
 #include "AudioTools/AudioOutput.h"
 #include "AudioTools/AudioCopy.h"
+#include "AudioTools/AudioSPDIF.h"
 #include "AudioMetaData/MetaData.h"
 #include "AudioCodecs/AudioCodecs.h"
 #include "AudioHttp/AudioHttp.h"
