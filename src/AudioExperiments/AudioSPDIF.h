@@ -18,6 +18,7 @@
 #pragma once
 
 #include "AudioConfig.h"
+#include "AudioTools/AudioLogger.h"
 #include "AudioTools/AudioStreams.h"
 
 // Set USE_ESP32_I2S to 1 if you want to use the explicit ESP32 implementation.
@@ -101,8 +102,7 @@ static const uint16_t bmc_tab_uint[256] = {
     0x5355, 0xcb55, 0x4b55, 0x2b55, 0xab55, 0xcd55, 0x4d55, 0x2d55, 0xad55,
     0x3555, 0xb555, 0xd555, 0x5555,
 };
-static const int16_t *bmc_tab = (int16_t*) bmc_tab_uint;
-
+static const int16_t *bmc_tab = (int16_t *)bmc_tab_uint;
 
 static uint32_t spdif_buf[SPDIF_BUF_ARRAY_SIZE];
 static uint32_t *spdif_ptr;
@@ -123,25 +123,37 @@ struct SPDIFConfig : public AudioBaseInfo {
 };
 
 /**
- * @brief Interface definition for SPDIF output class
+ * @brief Output as 16 bit stereo SPDIF on the I2S data output pin
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  *
  */
-class SPDIFOut {
+class SPDIFStream : public AudioStreamX {
  public:
-  virtual void begin(SPDIFConfig &cfg);
-  virtual bool end();
-  virtual size_t write(uint8_t *spdif_buf, size_t len);
-};
+  /// default constructor
+  SPDIFStream() = default;
 
-/**
- * @brief Generic I2S Output
- *
- */
-class SPDIFOutI2S : public SPDIFOut {
- public:
-  SPDIFOutI2S() = default;
+  /// destructor
+  virtual ~SPDIFStream() { end(); }
 
-  void begin(SPDIFConfig &cfg) {
+  /// Starting with default settings
+  bool begin() { return begin(defaultConfig()); }
+
+  /// Start with the provided parameters
+  bool begin(SPDIFConfig cfg) {
+    LOGD(LOG_METHOD);
+    if (i2sOn) {
+      i2s.end();
+    }
+
+    if (!(cfg.channels == 1 | cfg.channels == 2)) {
+      LOGE("Unsupported number of channels: %d", cfg.channels);
+      return false;
+    }
+
+    // initialize S/PDIF buffer
+    spdif_buf_init();
+    spdif_ptr = spdif_buf;
     int sample_rate = cfg.sample_rate * BMC_BITS_FACTOR;
     int bclk = sample_rate * I2S_BITS_PER_SAMPLE * I2S_CHANNELS;
     int mclk = (I2S_BUG_MAGIC / bclk) * bclk;  // use mclk for avoiding I2S bug
@@ -149,6 +161,7 @@ class SPDIFOutI2S : public SPDIFOut {
     I2SConfig i2s_cfg;
     i2s_cfg.sample_rate = sample_rate;
     i2s_cfg.channels = cfg.channels;
+    i2s_cfg.i2s_format = I2S_STD_FORMAT;
     i2s_cfg.bits_per_sample = I2S_BITS_PER_SAMPLE;
     i2s_cfg.pin_ws = -1;
     i2s_cfg.pin_bck = -1;
@@ -158,142 +171,20 @@ class SPDIFOutI2S : public SPDIFOut {
     i2s_cfg.fixed_mclk = mclk;
 #endif
     i2s.begin(i2s_cfg);
-  }
-
-  bool end() {
-    i2s.end();
-    return true;
-  }
-
-  size_t write(uint8_t *spdif_buf, size_t len) {
-    return i2s.write(spdif_buf, len);
-  }
-
- protected:
-  I2SStream i2s;
-};
-
-#ifdef ESP32
-/**
- * @brief ESP32 specific Output
- *
- */
-class SPDFOutI2SESP32 : public SPDIFOut {
- public:
-  SPDFOutI2SESP32() = default;
-
-  // initialize I2S for S/PDIF transmission
-  void begin(SPDIFConfig &cfg) {
-    // uninstall and reinstall I2S driver for avoiding I2S bug
-    int sample_rate = cfg.sample_rate * BMC_BITS_FACTOR;
-    int bclk = sample_rate * I2S_BITS_PER_SAMPLE * I2S_CHANNELS;
-    int mclk = (I2S_BUG_MAGIC / bclk) * bclk;  // use mclk for avoiding I2S bug
-
-    LOGI("DMA_BUF_COUNT=%d",DMA_BUF_COUNT);
-    LOGI("DMA_BUF_LEN=%d",DMA_BUF_LEN);
-
-    i2s_config_t i2s_config = {
-        .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_TX),
-        .sample_rate = sample_rate,
-        .bits_per_sample = (i2s_bits_per_sample_t)I2S_BITS_PER_SAMPLE,
-        .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,
-        .communication_format = (i2s_comm_format_t)I2S_COMM_FORMAT_STAND_I2S,
-        .intr_alloc_flags = 0,
-        .dma_buf_count = DMA_BUF_COUNT,
-        .dma_buf_len = DMA_BUF_LEN,
-        .use_apll = true,
-        .tx_desc_auto_clear = true,
-        .fixed_mclk = mclk,  // avoiding I2S bug
-    };
-    i2s_pin_config_t pin_config = {
-        .bck_io_num = -1,
-        .ws_io_num = -1,
-        .data_out_num = cfg.pin_data,
-        .data_in_num = -1,
-    };
-    ESP_ERROR_CHECK(i2s_driver_install(I2S_NUM, &i2s_config, 0, NULL));
-    ESP_ERROR_CHECK(i2s_set_pin(I2S_NUM, &pin_config));
-  }
-
-  bool end() { return i2s_driver_uninstall(I2S_NUM) == ESP_OK; }
-
-  size_t write(uint8_t *spdif_buf, size_t len) {
-    size_t i2s_write_len=0;
-    i2s_write(I2S_NUM, spdif_buf, len, &i2s_write_len, portMAX_DELAY);
-    return i2s_write_len;
-  }
-};
-
-#endif
-
-/**
- * @brief Generic output of SPDIF to Arduino Stream
- *
- */
-class SPDIFOutGeneric : public SPDIFOut {
- public:
-  SPDIFOutGeneric(Print &out) { this->out = &out; }
-  virtual void begin(SPDIFConfig &cfg) {}
-  virtual bool end() { return true; }
-
-  virtual size_t write(uint8_t *data, size_t len) {
-    return out->write(data, len);
-  }
-
- protected:
-  Print *out = nullptr;
-};
-
-/**
- * @brief Output as 16 bit stereo SPDIF on the I2S data output pin
- * @author Phil Schatzmann
- * @copyright GPLv3
- *
- */
-class SPDIFStream16Bit2Channels : public AudioStreamX {
- public:
-  /// default constructor
-  SPDIFStream16Bit2Channels() = default;
-
-  /// destructor
-  virtual ~SPDIFStream16Bit2Channels() { end(); }
-
-  /// Starting with default settings
-  bool begin() { return begin(defaultConfig()); }
-
-  /// Start with the provided parameters
-  bool begin(SPDIFConfig cfg) {
-    if (i2sOn) {
-      out->end();
-    }
-
-    // initialize S/PDIF buffer
-    spdif_buf_init();
-    spdif_ptr = spdif_buf;
-    if (out != nullptr) {
-      out->begin(cfg);
-      i2sOn = true;
-    } else {
-      LOGE("out is null - please call setOutput() ");
-    }
-
+    i2sOn = true;
     return i2sOn;
   }
 
   bool end() {
-    bool result = true;
-    if (out != nullptr) {
-      result = out->end();
-    }
+    LOGD(LOG_METHOD);
+    i2s.end();
     i2sOn = false;
-    return result;
+    return true;
   }
-
-  /// Defines the Output
-  void setOutput(SPDIFOut *out_ptr) { this->out = out_ptr; }
 
   /// Change the audio parameters
   void setAudioInfo(AudioBaseInfo info) {
+    LOGD(LOG_METHOD);
     cfg.bits_per_sample = info.bits_per_sample;
     cfg.channels = info.channels;
     cfg.sample_rate = info.sample_rate;
@@ -315,17 +206,23 @@ class SPDIFStream16Bit2Channels : public AudioStreamX {
 
   /// Writes the audio data as SPDIF to the defined output pin
   size_t write(const uint8_t *src, size_t size) {
-    if (out == nullptr) return 0;
+    if (!i2sOn) return 0;
     const uint8_t *p = src;
     size_t result = 0;
 
     while (p < (uint8_t *)src + size) {
       // convert PCM 16bit data to BMC 32bit pulse pattern
-      *(spdif_ptr + 1) =
-          (uint32_t)(((bmc_tab[*p] << 16) ^ bmc_tab[*(p + 1)]) << 1) >> 1;
-
-      p += 2;
-      result +=2;
+      if (cfg.channels == 2) {
+        *(spdif_ptr + 1) =
+            (uint32_t)(((bmc_tab[*p] << 16) ^ bmc_tab[*(p + 1)]) << 1) >> 1;
+        p += 2;
+      } else {
+        // must be one channels -> use the same value for both
+        *(spdif_ptr + 1) =
+            (uint32_t)(((bmc_tab[*p] << 16) ^ bmc_tab[*(p)]) << 1) >> 1;
+        p++;
+      }
+      result += 2;
       spdif_ptr += 2;  // advance to next audio data
 
       if (spdif_ptr >= &spdif_buf[SPDIF_BUF_ARRAY_SIZE]) {
@@ -334,7 +231,7 @@ class SPDIFStream16Bit2Channels : public AudioStreamX {
         // set block start preamble
         ((uint8_t *)spdif_buf)[SYNC_OFFSET] ^= SYNC_FLIP;
 
-        out->write((uint8_t *)spdif_buf, sizeof(spdif_buf));
+        i2s.write((uint8_t *)spdif_buf, sizeof(spdif_buf));
         spdif_ptr = spdif_buf;
       }
     }
@@ -345,10 +242,11 @@ class SPDIFStream16Bit2Channels : public AudioStreamX {
  protected:
   bool i2sOn = false;
   SPDIFConfig cfg;
-  SPDIFOut *out = nullptr;
+  I2SStream i2s;
 
   // initialize S/PDIF buffer
-  static void spdif_buf_init(void) {
+  void spdif_buf_init(void) {
+    LOGD(LOG_METHOD);
     int i;
     uint32_t bmc_mw = BMC_W;
 
@@ -356,101 +254,6 @@ class SPDIFStream16Bit2Channels : public AudioStreamX {
       spdif_buf[i] = bmc_mw ^= BMC_MW_DIF;
     }
   }
-};
-
-/**
- * @brief SPDIF Stream
- * We support the output of different bits_per_sample and mono output
- * @author Phil Schatzmann
- * @copyright GPLv3
- */
-class SPDIFStream : public AudioStreamX {
- public:
-  /// Default Constructor
-  SPDIFStream() = default;
-
-  /// Constructor which is defining a specific output class
-  SPDIFStream(Print &out) {
-    spdif_out = new SPDIFOutGeneric(out);
-    spdif.setOutput(spdif_out);
-  }
-
-  /// Destructor
-  virtual ~SPDIFStream() {
-    end();
-    if (spdif_out != nullptr) {
-      delete spdif_out;
-      spdif_out = nullptr;
-    }
-  }
-
-  /// start SPDIF with default configuration
-  bool begin() { return spdif.begin(); }
-  /// start SPDIF with the indicated configuration
-  bool begin(SPDIFConfig cfg) {
-    this->cfg = cfg;
-    if (cfg.sample_rate == 0) {
-      LOGE("sample_rate must not be 0")
-      return false;
-    }
-    if (cfg.channels == 0) {
-      LOGE("channels must not be 0")
-      return false;
-    }
-    // Define output class if not yet defined
-    if (spdif_out == nullptr) {
-#if USE_ESP32_I2S == 1
-      LOGI("USE_ESP32_I2S=1 -> using SPDFOutI2SESP32()");
-      spdif_out = new SPDFOutI2SESP32();
-#else
-      LOGI("USE_ESP32_I2S==%d -> using SPDIFOutI2S()",USE_ESP32_I2S);
-      spdif_out = new SPDIFOutI2S();
-#endif
-      spdif.setOutput(spdif_out);
-    }
-    LOGI("SPDIF_BUF_SIZE=%d",SPDIF_BUF_SIZE);
-
-    // define source format
-    converter.setInputInfo(cfg);
-    // define target format for converter
-    AudioBaseInfo targetCfg;
-    targetCfg.channels = 2;
-    targetCfg.bits_per_sample = 16;
-    targetCfg.sample_rate = cfg.sample_rate;
-    converter.setInfo(targetCfg);
-    // define format for spdif
-    SPDIFConfig targetSpdifConfig = cfg;
-    targetSpdifConfig.channels = 2;
-    targetSpdifConfig.bits_per_sample = 16;
-    targetSpdifConfig.sample_rate = cfg.sample_rate;
-    return spdif.begin(targetSpdifConfig);
-  }
-
-  /// Close the SPDIF processing
-  bool end() { return spdif.end(); }
-
-  /// Provide audio data to SPDIF
-  size_t write(const uint8_t *src, size_t size) override {
-    return converter.write(src, size);
-  }
-
-  /// Provides the default configuration
-  SPDIFConfig defaultConfig() { return spdif.defaultConfig(); }
-
-  /// Updates the audio information (channels, bits_per_sample, sample_rate)
-  virtual void setAudioInfo(AudioBaseInfo info) {
-    // update input info
-    converter.setInputInfo(info);
-    // we just need to inform sample rate changes
-    cfg.sample_rate = info.sample_rate;
-    spdif.begin(cfg);
-  }
-
- protected:
-  SPDIFConfig cfg;
-  SPDIFStream16Bit2Channels spdif;
-  FormatConverterStream converter{spdif};
-  SPDIFOut *spdif_out = nullptr;
 };
 
 }  // namespace audio_tools
