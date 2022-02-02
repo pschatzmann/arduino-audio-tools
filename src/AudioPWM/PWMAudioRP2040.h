@@ -1,6 +1,6 @@
 
 #pragma once
-#if defined(ARDUINO_ARCH_RP2040) && !__has_include("mbed.h") 
+#if defined(ARDUINO_ARCH_RP2040) 
 #include "AudioPWM/PWMAudioBase.h"
 #include "hardware/gpio.h"
 #include "hardware/adc.h"
