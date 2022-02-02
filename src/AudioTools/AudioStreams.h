@@ -621,7 +621,7 @@ class TimerCallbackAudioStream : public BufferedStream,
       buffer = new RingBuffer<uint8_t>(cfg.buffer_size);
       timer = new TimerAlarmRepeating(cfg.timer_function, cfg.timer_id);
       time = AudioUtils::toTimeUs(cfg.sample_rate);
-      LOGI("sample_rate: %u -> time: %u milliseconds", cfg.sample_rate, time);
+      LOGI("sample_rate: %u -> time: %lu milliseconds", cfg.sample_rate, time);
       timer->setCallbackParameter(this);
       timer->begin(timerCallback, time, TimeUnit::US);
     }
@@ -717,7 +717,7 @@ class TimerCallbackAudioStream : public BufferedStream,
 
   /// log and update effective sample rate
   virtual void printSampleRate() {
-    LOGI("effective sample rate: %d", currentRateValue);
+    LOGI("effective sample rate: %u", (unsigned int)currentRateValue);
     if (cfg.adapt_sample_rate &&
         abs((int)currentRateValue - cfg.sample_rate) > 200) {
       cfg.sample_rate = currentRateValue;
