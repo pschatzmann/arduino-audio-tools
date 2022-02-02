@@ -1,6 +1,6 @@
 #include "AudioTools.h"
 
-using namespace audio_tools;  
+
 
 uint32_t sampling_rate = 44100;
 uint32_t delay_us = AudioUtils::toTimeUs(sampling_rate);

@@ -12,7 +12,7 @@
 #include "AudioTools.h"
 #include "AudioCodecs/CodecMP3LAME.h"
 
-using namespace audio_tools;  
+
 
 AudioEncoderServer server(new MP3EncoderLAME(),"ssid","password");  
 

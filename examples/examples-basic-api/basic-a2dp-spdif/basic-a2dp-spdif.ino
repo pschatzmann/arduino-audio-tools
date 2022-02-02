@@ -17,24 +17,24 @@
 #define USE_A2DP
 #include "AudioConfigLocal.h"
 #include "AudioTools.h"
-#include "AudioExperiments/AudioSPDIF.h"
-
 
 BluetoothA2DPSink a2dp_sink;
 SPDIFStream spdif;
 
-// Write data to AudioKit in callback
+// Write data to SPDIF in callback
 void read_data_stream(const uint8_t *data, uint32_t length) {
     spdif.write(data, length);
 }
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
   
   // register callback
-  a2dp_sink.set_auto_reconnect(false);
   a2dp_sink.set_stream_reader(read_data_stream, false);
+
+  // Start Bluetooth Audio Receiver
+  a2dp_sink.set_auto_reconnect(false);
   a2dp_sink.start("a2dp-spdif");
 
   // setup output

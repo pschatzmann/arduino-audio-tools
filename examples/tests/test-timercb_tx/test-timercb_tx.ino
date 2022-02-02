@@ -1,7 +1,7 @@
 
 #include "AudioTools.h"
 
-using namespace audio_tools;  
+
 
 TimerCallbackAudioStream timerStream;
 

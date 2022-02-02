@@ -16,7 +16,7 @@
 #include "AudioCodecs/CodecMP3Helix.h"
 #include "BabyElephantWalk60_mp3.h"
 
-using namespace audio_tools;  
+
 
 MemoryStream mp3(BabyElephantWalk60_mp3, BabyElephantWalk60_mp3_len);
 AnalogAudioStream out;  // Analog output 

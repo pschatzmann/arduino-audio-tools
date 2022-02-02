@@ -59,6 +59,7 @@ struct PWMConfig : public AudioBaseInfo {
         }
         pins = array;
         start_pin = -1; // mark start pin as invalid
+        LOGI("start_pin: %d", PWM_START_PIN);
     }
 
 #endif

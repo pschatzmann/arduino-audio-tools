@@ -19,7 +19,7 @@
 #include <mozzi_rand.h>
 #include <mozzi_midi.h>
 
-using namespace audio_tools;  
+
 
 MozziStream in;                              // Stream generated with mozzi
 A2DPStream out = A2DPStream::instance() ;    // A2DP output - A2DPStream is a singleton!

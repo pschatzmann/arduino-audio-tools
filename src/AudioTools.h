@@ -26,13 +26,16 @@
 #include "AudioTools/AudioPlayer.h"
 #include "AudioEffects/SoundGenerator.h"
 #include "AudioEffects/AudioEffects.h"
-//#include "AudioExperiments/AudioExperiments.h"
 
 /**
  * ------------------------------------------------------------------------- 
  * @brief Optional external libraries
  * 
  */
+#if defined(USE_I2S)
+#include "AudioTools/AudioSPDIF.h"
+#endif
+
 #if defined(USE_PORTAUDIO) 
 #include "AudioLibs/PortAudioStream.h"
 #endif
@@ -53,15 +56,18 @@
 #include "AudioLibs/AudioA2DP.h"
 #endif
 
+#ifdef USE_EXPERIMENTS
+#include "AudioExperiments/AudioExperiments.h"
+#endif
 
 /**
  * ------------------------------------------------------------------------- 
  * @brief Set namespace
  * 
  */
-
+#ifndef NO_AUDIOTOOLS_NS
 using namespace audio_tools;  
-
+#endif
 
 /**
  * ------------------------------------------------------------------------- 

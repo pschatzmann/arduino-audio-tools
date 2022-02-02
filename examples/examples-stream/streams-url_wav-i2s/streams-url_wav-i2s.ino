@@ -10,7 +10,7 @@
  */
 #include "AudioTools.h"
 
-using namespace audio_tools;  
+
 
 // UrlStream -copy-> EncodedAudioStream -> I2S
 

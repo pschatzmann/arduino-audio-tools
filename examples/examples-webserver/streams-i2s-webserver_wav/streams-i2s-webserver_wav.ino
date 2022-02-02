@@ -9,7 +9,7 @@
 
 #include "AudioTools.h"
 
-using namespace audio_tools;  
+
 
 //AudioEncoderServer server(new WAVEncoder(),"ssid","password");  
 AudioWAVServer server("ssid","password"); // the same a above

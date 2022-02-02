@@ -18,7 +18,7 @@
 #include "Undertale_Megalovania.h" // midi
 #include "mgm1.h" // 1mgm_sf2 soundfont file
 
-using namespace audio_tools;  
+
 
 const int sd_ss_pin = 5;
 BluetoothA2DPSource a2dp_source;

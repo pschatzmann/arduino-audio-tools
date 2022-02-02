@@ -10,7 +10,7 @@
 
 #include "AudioTools.h"
 
-using namespace audio_tools;  
+
 
 I2SStream i2sStream; // Access I2S as stream
 CsvStream<int32_t> csvStream(Serial);

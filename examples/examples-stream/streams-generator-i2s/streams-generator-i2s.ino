@@ -8,7 +8,7 @@
  
 #include "AudioTools.h"
 
-using namespace audio_tools;  
+
 
 typedef int16_t sound_t;                                   // sound will be represented as int16_t (with 2 bytes)
 uint16_t sample_rate=44100;

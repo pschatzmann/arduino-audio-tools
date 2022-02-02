@@ -11,7 +11,7 @@
 #include "Arduino.h"
 #include "AudioTools.h"
 
-using namespace audio_tools;  
+
 
 const uint16_t sample_rate = 44100;
 AnalogAudioStream in; 

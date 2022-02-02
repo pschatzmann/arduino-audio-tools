@@ -12,7 +12,7 @@
 #include "AudioTools.h"
 #include "AudioCodecs/CodecMP3Helix.h"
 
-using namespace audio_tools;  
+
 
 const char *urls[] = {
   "http://centralcharts.ice.infomaniak.ch/centralcharts-128.mp3",

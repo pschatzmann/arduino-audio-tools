@@ -8,7 +8,7 @@
 #include "AudioTools.h"
 #include "sam_arduino.h"
 
-using namespace audio_tools;  
+
 
 AudioWAVServer server("ssid","password");
 int channels = 1;

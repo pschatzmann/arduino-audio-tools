@@ -223,16 +223,15 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #endif
 
 //----------------
-#if defined(ARDUINO_ARCH_RP2040) 
-//#define USE_ESP8266_AUDIO
-//#define USE_I2S 1
+#if defined(DARDUINO_ARCH_MBED_RP2040)
+#define USE_I2S 1
 #define USE_PWM
 
 #define PWM_START_PIN 6
-#define PIN_I2S_BCK 1
+#define PIN_I2S_BCK 26
 #define PIN_I2S_WS PIN_I2S_BCK+1
-#define PIN_I2S_DATA_IN 3
-#define PIN_I2S_DATA_OUT 3
+#define PIN_I2S_DATA_IN 28
+#define PIN_I2S_DATA_OUT 28
 #define PIN_I2S_MUTE 4
 #define SOFT_MUTE_VALUE LOW  
 #define PIN_CS PIN_SPI0_SS
@@ -240,6 +239,25 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 // fix missing __sync_synchronize symbol
 #define FIX_SYNC_SYNCHRONIZE
 #define IRAM_ATTR
+//#define USE_ESP8266_AUDIO
+
+#elif defined(DARDUINO_ARCH_RP2040)
+#define USE_I2S 1
+#define USE_PWM
+
+#define PWM_START_PIN 6
+#define PIN_I2S_BCK 26
+#define PIN_I2S_WS PIN_I2S_BCK+1
+#define PIN_I2S_DATA_IN 28
+#define PIN_I2S_DATA_OUT 28
+#define PIN_I2S_MUTE 4
+#define SOFT_MUTE_VALUE LOW  
+#define PIN_CS PIN_SPI0_SS
+
+// fix missing __sync_synchronize symbol
+#define FIX_SYNC_SYNCHRONIZE
+#define IRAM_ATTR
+//#define USE_ESP8266_AUDIO
 
 #endif
 

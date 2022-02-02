@@ -69,21 +69,30 @@ class CsvStream : public AudioPrint, public AudioBaseInfoDependent {
             this->active = active;
         }
 
-        // Starts the processing with 2 channels
+        /// Starts the processing with 2 channels
         void begin(){
              LOGD(LOG_METHOD);
             this->active = true;
             this->channels = 2;
         }
 
-        // Starts the processing with the number of channels defined in AudioBaseInfo
+        /// Provides the default configuration
+        AudioBaseInfo defaultConfig(){
+            AudioBaseInfo info;
+            info.channels = 2;
+            info.sample_rate = 44100;
+            info.bits_per_sample = sizeof(T)*8;
+            return info;
+        }
+
+        /// Starts the processing with the number of channels defined in AudioBaseInfo
         void begin(AudioBaseInfo info){
              LOGD(LOG_METHOD);
             this->active = true;
             this->channels = info.channels;
         }
 
-        // Starts the processing with the defined number of channels 
+        /// Starts the processing with the defined number of channels 
         void begin(int channels, Print &out=Serial){
              LOGD(LOG_METHOD);
             this->channels = channels;
@@ -104,6 +113,7 @@ class CsvStream : public AudioPrint, public AudioBaseInfoDependent {
             this->channels = info.channels;
         };
 
+        /// Writes the data - formatted as CSV -  to the output stream
         virtual size_t write(const uint8_t* data, size_t len) {   
             if (!active) return 0;
             LOGD(LOG_METHOD);

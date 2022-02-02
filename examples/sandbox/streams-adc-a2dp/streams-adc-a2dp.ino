@@ -13,7 +13,7 @@
 
 #include "AudioTools.h"
 
-using namespace audio_tools;  
+
 
 AnalogAudioStream in; // analog mic
 A2DPStream out = A2DPStream::instance() ; // A2DP output - A2DPStream is a singleton!
