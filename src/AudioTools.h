@@ -20,7 +20,6 @@
 #include "AudioTools/AudioStreams.h"
 #include "AudioTools/AudioOutput.h"
 #include "AudioTools/AudioCopy.h"
-#include "AudioTools/AudioSPDIF.h"
 #include "AudioMetaData/MetaData.h"
 #include "AudioCodecs/AudioCodecs.h"
 #include "AudioHttp/AudioHttp.h"
@@ -33,6 +32,10 @@
  * @brief Optional external libraries
  * 
  */
+#if defined(USE_I2S)
+#include "AudioTools/AudioSPDIF.h"
+#endif
+
 #if defined(USE_PORTAUDIO) 
 #include "AudioLibs/PortAudioStream.h"
 #endif
