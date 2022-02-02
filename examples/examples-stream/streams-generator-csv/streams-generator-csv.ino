@@ -24,6 +24,7 @@ void setup(void) {
   // start the bluetooth
   auto config = out.defaultConfig();
   config.sample_rate = sample_rate; 
+  config.channels = channels;
   out.begin(config);
 
   // Setup sine wave

@@ -79,6 +79,9 @@ class CsvStream : public AudioPrint, public AudioBaseInfoDependent {
         /// Provides the default configuration
         AudioBaseInfo defaultConfig(){
             AudioBaseInfo info;
+            info.channels = 2;
+            info.sample_rate = 44100;
+            info.bits_per_sample = sizeof(T)*8;
             return info;
         }
 
