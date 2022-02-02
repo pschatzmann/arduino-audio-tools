@@ -17,7 +17,7 @@ namespace audio_tools {
 
 class Str {
     public:
-        Str(){}
+        Str() = default;
         
         /// Creates a Str for string constant
         Str(const char* chars){

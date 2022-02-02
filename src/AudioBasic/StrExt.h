@@ -22,8 +22,7 @@ namespace audio_tools {
 class StrExt : public Str {
 
     public:
-        StrExt(){            
-        }
+        StrExt() = default;
 
         StrExt(int initialAllocatedLength){
             maxlen = initialAllocatedLength;

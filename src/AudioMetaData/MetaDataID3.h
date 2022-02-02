@@ -504,7 +504,7 @@ class MetaDataID3V2 : public MetaDataID3Base  {
                         // we just use the first entry
                         result[end_pos]=0;
                         int idx = atoi(result+1);
-                        if (idx>=0 && idx<sizeof(genres)){
+                        if (idx>=0 && idx< (int)sizeof(genres)){
                             strncpy((char*)result,genres[idx],256);
                         }
                     }
