@@ -96,11 +96,11 @@
  * @brief PWM
  */
 #ifndef PWM_BUFFER_SIZE 
-#define PWM_BUFFER_SIZE 512
+#define PWM_BUFFER_SIZE 1024
 #endif
 
 #ifndef PWM_BUFFERS 
-#define PWM_BUFFERS 10
+#define PWM_BUFFERS 50
 #endif
 
 #ifndef PWM_FREQUENCY 
@@ -223,8 +223,8 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #endif
 
 //----------------
-#if defined(DARDUINO_ARCH_MBED_RP2040)
-#define USE_I2S 1
+#if defined(ARDUINO_ARCH_MBED_RP2040)
+//#define USE_I2S 1
 #define USE_PWM
 
 #define PWM_START_PIN 6
@@ -241,7 +241,8 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define IRAM_ATTR
 //#define USE_ESP8266_AUDIO
 
-#elif defined(DARDUINO_ARCH_RP2040)
+//----------------
+#elif defined(ARDUINO_ARCH_RP2040)
 #define USE_I2S 1
 #define USE_PWM
 

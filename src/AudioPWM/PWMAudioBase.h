@@ -70,7 +70,7 @@ struct PWMConfig : public AudioBaseInfo {
         LOGI("bits_per_sample: %d", bits_per_sample);
         LOGI("buffer_size: %u", buffer_size);
         LOGI("pwm_frequency: %lu", pwm_frequency);
-        //LOGI("resolution: %d", resolution);
+        LOGI("resolution: %d", resolution);
         //LOGI("timer_id: %d", timer_id);
     }
 
@@ -201,7 +201,6 @@ class PWMAudioStreamBase : public AudioPrint, public AudioBaseInfoDependent {
             is_timer_started = false;
         }
 
-
         virtual int availableForWrite() { 
             return buffer==nullptr ? 0 : buffer->availableForWrite();
         }
@@ -297,7 +296,7 @@ class PWMAudioStreamBase : public AudioPrint, public AudioBaseInfoDependent {
         /// writes the next frame to the output pins 
         void playNextFrameStream(){
             if (is_timer_started){
-                 //LOGD(LOG_METHOD);
+                //LOGD(LOG_METHOD);
                 int required = (audio_config.bits_per_sample / 8) * audio_config.channels;
                 if (buffer->available() >= required){
                     for (int j=0;j<audio_config.channels;j++){
@@ -308,20 +307,17 @@ class PWMAudioStreamBase : public AudioPrint, public AudioBaseInfoDependent {
                     underflow_count++;
                 }
                 updateStatistics();
-            } else {
-                //LOGE("is_timer_started is false");
-            }
+            } 
         } 
 
         void playNextFrame(){
-             //LOGD(LOG_METHOD);
+            // LOGD(LOG_METHOD);
             if (user_callback!=nullptr){
                 playNextFrameCallback();
             } else {
                 playNextFrameStream();
             }
         }
-
 
         /// determines the next scaled value
         virtual int nextValue() {
