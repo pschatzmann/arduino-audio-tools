@@ -1,8 +1,8 @@
 #pragma once
 
-#if defined(ARDUINO_ARCH_RP2040) 
+#if defined(ARDUINO_ARCH_RP2040) && !defined(ARDUINO_ARCH_MBED_RP2040)
 #include "AudioI2S/I2SConfig.h"
-#include "AudioExperiments/I2SBitBangRP2040.h"
+//#include "AudioExperiments/I2SBitBangRP2040.h"
 #include <I2S.h>
 namespace audio_tools {
 

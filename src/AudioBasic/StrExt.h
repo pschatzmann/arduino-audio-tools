@@ -24,19 +24,19 @@ class StrExt : public Str {
     public:
         StrExt() = default;
 
-        StrExt(int initialAllocatedLength){
+        StrExt(int initialAllocatedLength) : Str() {
             maxlen = initialAllocatedLength;
         }
 
-        StrExt(Str &source){
+        StrExt(Str &source) : Str() {
             set(source);
         }
         
-        StrExt(StrExt &source){
+        StrExt(StrExt &source) : Str(){
             set(source);
         }
 
-        StrExt(const char* str){
+        StrExt(const char* str) : Str() {
             if (str!=nullptr){
                 len = strlen(str);
                 maxlen = len; 
