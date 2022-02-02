@@ -16,7 +16,7 @@
 #include <mozzi_rand.h>
 #include <mozzi_midi.h>
 
-using namespace audio_tools;  
+
 
 MozziStream mozzi;
 AudioWAVServer server("ssid","password");

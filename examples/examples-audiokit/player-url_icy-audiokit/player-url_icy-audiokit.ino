@@ -13,8 +13,6 @@
 #include "AudioCodecs/CodecMP3Helix.h"
 #include "AudioLibs/AudioKit.h"
 
-using namespace audio_tools;  
-
 const char *urls[] = {
   "http://centralcharts.ice.infomaniak.ch/",
   "http://centraljazz.ice.infomaniak.ch/",

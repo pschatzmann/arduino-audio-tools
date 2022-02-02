@@ -13,7 +13,7 @@
 #include "AudioTools.h"
 #include "AudioCodecs/CodecMP3Helix.h"
 
-using namespace audio_tools;  
+
 
 ICYStream url("ssid","password");
 MetaDataPrint out; // final output of decoded stream

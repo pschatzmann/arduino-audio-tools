@@ -103,7 +103,7 @@ class AudioEffects : public SoundGenerator<effect_t> {
 
         /// Provides access to the sound generator
         GeneratorT &generator(){
-            return p_generator;
+            return *p_generator;
         }
 
         /// gets an effect by index

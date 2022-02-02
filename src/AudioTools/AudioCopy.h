@@ -149,7 +149,7 @@ class StreamCopyT {
                 if (onWrite!=nullptr) onWrite(onWriteObj, temp_data, bytes_read);
 
                 T* bufferT = (T*) buffer;
-                for (int j=0;j<samples;j++){
+                for (size_t j=0;j<samples;j++){
                     *bufferT = temp_data[j];
                     bufferT++;
                     *bufferT = temp_data[j];

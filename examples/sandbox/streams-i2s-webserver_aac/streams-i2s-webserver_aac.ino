@@ -13,7 +13,7 @@
 #include "AudioTools.h"
 #include "AudioCodecs/CodecAACFDK.h"
 
-using namespace audio_tools;  
+
 
 AudioEncoderServer server(new AACEncoderFDK(),"ssid","password");  
 

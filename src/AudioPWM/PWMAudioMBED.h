@@ -73,6 +73,7 @@ class PWMAudioStreamMBED : public PWMAudioStreamBase {
                     gpio = audio_config.pins[j];
                 }
                 mbed::PwmOut* pin = new mbed::PwmOut(digitalPinToPinName(gpio));
+                LOGI("PWM Pin: %d", gpio);
                 pin->period_us(period);  
                 pin->write(0.0f);  // 0% duty cycle ->  
                 pin->resume(); // in case it was suspended before

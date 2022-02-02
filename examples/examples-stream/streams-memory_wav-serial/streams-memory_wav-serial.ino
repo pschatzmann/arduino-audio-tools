@@ -11,7 +11,7 @@
 #include "AudioTools.h"
 #include "knghtsng.h"
 
-using namespace audio_tools;  
+
 
 // MemoryStream -> EncodedAudioStream -> CsvStream
 MemoryStream wav(knghtsng_wav, knghtsng_wav_len);

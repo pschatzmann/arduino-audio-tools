@@ -1,16 +1,14 @@
 /**
  * @file streams-generator-i2s.ino
  * @author Phil Schatzmann
- * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-stream/streams-generator-i2s/README.md 
+ * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-stream/streams-generator-spdif/README.md 
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
  
 #include "AudioConfigLocal.h"
 #include "AudioTools.h"
-#include "AudioExperiments/AudioSPDIF.h"
 
-using namespace audio_tools;  
 
 typedef int16_t sound_t;                                   // sound will be represented as int16_t (with 2 bytes)
 uint16_t sample_rate=44100;

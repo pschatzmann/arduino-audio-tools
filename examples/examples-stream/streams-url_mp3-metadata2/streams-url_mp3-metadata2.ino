@@ -14,7 +14,7 @@
 #include "AudioTools.h"
 #include "AudioCodecs/CodecMP3Helix.h"
 
-using namespace audio_tools;  
+
 
 //                            -> EncodedAudioStream -> I2SStream
 // URLStream -> MultiOutput -|
