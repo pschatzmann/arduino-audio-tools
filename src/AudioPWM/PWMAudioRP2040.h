@@ -12,7 +12,6 @@ namespace audio_tools {
 // forwrd declaratioin of callback
 class PWMAudioStreamPico;
 typedef PWMAudioStreamPico PWMAudioStream;
-//bool defaultPWMAudioOutputCallbackPico(repeating_timer* ptr);
 
 /**
  * @brief Rasperry Pico Channel to pin assignments
@@ -47,10 +46,8 @@ class PWMAudioStreamPico : public PWMAudioStreamBase {
         /// Ends the output -> resets the timer and the pins
         void end() override {
             LOGD(LOG_METHOD);
+            ticker.end(); // it does not hurt to call this even if it has not been started
             is_timer_started = false;
-            if (!cancel_repeating_timer(&timer)){
-                LOGE("cancel_repeating_timer failed")
-            }
             for(auto pin : pins) {
                 if (pin.gpio!=-1){
                     pwm_set_enabled(pin.slice, false);
@@ -60,10 +57,16 @@ class PWMAudioStreamPico : public PWMAudioStreamBase {
 
     protected:
         Vector<PicoChannelOut> pins;      
-        repeating_timer_t timer;
+        TimerAlarmRepeating ticker;
 
         virtual void startTimer() override {
-            //LOGI(LOG_METHOD);
+            if (!is_timer_started){
+                LOGD(LOG_METHOD);
+                long wait_time = 1000000l / audio_config.sample_rate;
+                ticker.setCallbackParameter(this);
+                ticker.begin(defaultPWMAudioOutputCallbackPico, wait_time, US);
+                is_timer_started = true;
+            }
             is_timer_started = true;
         }
 
@@ -128,15 +131,6 @@ class PWMAudioStreamPico : public PWMAudioStreamBase {
         }
 
         void setupTimer() override {
-            LOGD(LOG_METHOD);
-            // setup timer
-            uint32_t time = 1000000UL / audio_config.sample_rate;
-            LOGI("->Timer value %ld us", time);
-            if (!add_repeating_timer_us(-time, &defaultPWMAudioOutputCallbackPico, this, &timer)){
-                LOGE("Error: alarm_pool_add_repeating_timer_us failed; no alarm slots available");
-            } else {
-                LOGI("repeating timer has started");
-            }
         }
 
         /// The pico supports max 16 pwm pins
@@ -155,12 +149,9 @@ class PWMAudioStreamPico : public PWMAudioStreamBase {
         }
 
         // timed output executed at the sampleRate
-        static bool defaultPWMAudioOutputCallbackPico(repeating_timer* ptr) {
-            PWMAudioStreamPico *self = (PWMAudioStreamPico*)  ptr->user_data;
-            //if (self!=nullptr){
-                self->playNextFrame();
-            //}
-            return true;
+        inline static void defaultPWMAudioOutputCallbackPico(void* ptr) {
+            PWMAudioStreamPico *self = (PWMAudioStreamPico*)  ptr;
+            self->playNextFrame();
         }
 
 };
