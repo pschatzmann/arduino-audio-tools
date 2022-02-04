@@ -5,7 +5,7 @@
  * @copyright GPLv3
  */
  
-uint16_t sample_rate=44100;
+uint16_t sample_rate=96000;
 uint16_t channels = 2;
 I2SStream in;
 I2SStream out; 
@@ -25,12 +25,13 @@ void setup(void) {
   config_in.sample_rate = sample_rate; 
   config_in.bits_per_sample = 16;
   config_in.i2s_format = I2S_STD_FORMAT;
-  config_in.is_master = true;
   config_in.port_no = 0;
   config_in.pin_ws = 12;
   config_in.pin_bck = 13;
   config_in.pin_data = 14;
-
+  config_in.is_master = false;
+  //config.pin_mck = 2; // wenn ESP master
+  //config.fixed_mclk = ? //wenn ESP master 
   in.begin(config_in);
 
   // start I2S out
