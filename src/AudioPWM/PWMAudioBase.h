@@ -46,7 +46,7 @@ struct PWMConfig : public AudioBaseInfo {
     uint8_t timer_id = 0;       // Only used by ESP32 must be between 0 and 3
     
 #ifndef __AVR__
-    uint16_t start_pin = PWM_START_PIN; 
+    uint16_t start_pin = PIN_PWM_START; 
 
     // define all pins by passing an array and updates the channels by the number of pins
     template<size_t N> 
@@ -59,7 +59,7 @@ struct PWMConfig : public AudioBaseInfo {
         }
         pins = array;
         start_pin = -1; // mark start pin as invalid
-        LOGI("start_pin: %d", PWM_START_PIN);
+        LOGI("start_pin: %d", PIN_PWM_START);
     }
 
 #endif

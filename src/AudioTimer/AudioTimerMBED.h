@@ -19,15 +19,14 @@ TimerAlarmRepeatingMBED *timerAlarmRepeating = nullptr;
  */
 class TimerAlarmRepeatingMBED : public TimerAlarmRepeatingDef {
     public:
-    
-        TimerAlarmRepeatingMBED(TimerFunction function=DirectTimerCallback, int id=0){
+
+        TimerAlarmRepeatingMBED(TimerFunction function=DirectTimerCallback, int id=0) :  TimerAlarmRepeatingDef(){
             timerAlarmRepeating = this;
         }
 
         ~TimerAlarmRepeatingMBED(){
             end();
         }
-
 
         /**
          * Starts the alarm timer
@@ -38,10 +37,10 @@ class TimerAlarmRepeatingMBED : public TimerAlarmRepeatingDef {
             // we determine the time in microseconds
             switch(unit){
                 case MS:
-                    ticker.attach(tickerCallback, time * 1000);
+                    ticker.attach_us(tickerCallback, (us_timestamp_t) time * 1000);
                     break;
                 case US:
-                    ticker.attach(tickerCallback, time);
+                    ticker.attach_us(tickerCallback,(us_timestamp_t) time);
                     break;
             }
             return true;
@@ -57,8 +56,8 @@ class TimerAlarmRepeatingMBED : public TimerAlarmRepeatingDef {
         mbed::Ticker ticker;
         repeating_timer_callback_t callback;
 
-        static void tickerCallback(){
-            timerAlarmRepeating->callback(timerAlarmRepeating);
+        inline static void tickerCallback(){
+            timerAlarmRepeating->callback(timerAlarmRepeating->object);
         }
 
 };

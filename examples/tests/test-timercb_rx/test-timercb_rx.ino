@@ -2,8 +2,6 @@
 #include "AudioTools.h"
 
 
-
-
 TimerCallbackAudioStream timerStream;
 
 uint16_t IRAM_ATTR callback(uint8_t *data, uint16_t len){

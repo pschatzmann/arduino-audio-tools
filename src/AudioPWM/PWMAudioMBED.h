@@ -29,7 +29,7 @@ class PWMAudioStreamMBED : public PWMAudioStreamBase {
 
         // Ends the output
         virtual void end(){
-             LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             ticker.detach(); // it does not hurt to call this even if it has not been started
             is_timer_started = false;
 
