@@ -2,6 +2,7 @@
 #pragma once
 #if defined(__arm__)  && __has_include("mbed.h")
 #include "AudioPWM/PWMAudioBase.h"
+#include "AudioTimer/AudioTimer.h"
 #include "mbed.h"
 
 namespace audio_tools {
@@ -9,7 +10,6 @@ namespace audio_tools {
 // forward declaration
 class PWMAudioStreamMBED;
 typedef PWMAudioStreamMBED PWMAudioStream;
-static PWMAudioStreamMBED *accessAudioPWM = nullptr; 
 
 /**
  * @brief Audio output to PWM pins for MBED based Arduino implementations
@@ -18,19 +18,17 @@ static PWMAudioStreamMBED *accessAudioPWM = nullptr;
  */
 
 class PWMAudioStreamMBED : public PWMAudioStreamBase {
-    friend void defaultPWMAudioOutputCallback();
 
     public:
 
         PWMAudioStreamMBED(){
             LOGD("PWMAudioStreamMBED");
-            accessAudioPWM = this;
         }
 
         // Ends the output
-        virtual void end(){
+        virtual void end() override {
             LOGD(LOG_METHOD);
-            ticker.detach(); // it does not hurt to call this even if it has not been started
+            ticker.end(); // it does not hurt to call this even if it has not been started
             is_timer_started = false;
 
             // stop and release pins
@@ -48,14 +46,15 @@ class PWMAudioStreamMBED : public PWMAudioStreamBase {
 
     protected:
         Vector<mbed::PwmOut*> pins;      
-        mbed::Ticker ticker; // calls a callback repeatedly with a timeout
+        TimerAlarmRepeating ticker; // calls a callback repeatedly with a timeout
 
         /// when we get the first write -> we activate the timer to start with the output of data
-        virtual void startTimer(){
+        virtual void startTimer() override {
             if (!is_timer_started){
                 LOGD(LOG_METHOD);
                 long wait_time = 1000000l / audio_config.sample_rate;
-                ticker.attach_us(defaultPWMAudioOutputCallback, wait_time);
+                ticker.setCallbackParameter(this);
+                ticker.begin(defaultPWMAudioOutputCallback, wait_time, US);
                 is_timer_started = true;
             }
         }
@@ -99,15 +98,17 @@ class PWMAudioStreamMBED : public PWMAudioStreamBase {
             float float_value = static_cast<float>(value) / maxOutputValue();
             pins[channel]->write(float_value);    // pwm the value is between 0.0 and 1.0 
         }
-      
+
+        /// timer callback: write the next frame to the pins
+        static inline void  defaultPWMAudioOutputCallback(void *obj) {
+            PWMAudioStreamMBED* accessAudioPWM = (PWMAudioStreamMBED*) obj;
+            if (accessAudioPWM!=nullptr){
+                accessAudioPWM->playNextFrame();
+            }
+        }
+
 };
 
-/// timer callback: write the next frame to the pins
-void  defaultPWMAudioOutputCallback() {
-    if (accessAudioPWM!=nullptr){
-        accessAudioPWM->playNextFrame();
-    }
-}
 
 } // Namespace
 

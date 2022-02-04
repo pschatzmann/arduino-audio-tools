@@ -69,11 +69,10 @@ class TimerAlarmRepeatingRP2040 : public TimerAlarmRepeatingDef{
     protected:
         alarm_pool_t *ap = nullptr;
         repeating_timer_t timer;
-        my_repeating_timer_callback_t instanceCallback;
+        my_repeating_timer_callback_t instanceCallback=nullptr;
 };
 
 typedef  TimerAlarmRepeatingRP2040 TimerAlarmRepeating;
-
 
 }
 

@@ -259,7 +259,7 @@ class GeneratedSoundStream : public AudioStreamX, public AudioBaseInfoSource {
 
   /// privide the data as byte stream
   size_t readBytes(uint8_t *buffer, size_t length) override {
-    LOGD("GeneratedSoundStream::readBytes: %zu", length);
+    LOGD("GeneratedSoundStream::readBytes: %u", (unsigned int)length);
     return generator_ptr->readBytes(buffer, length);
   }
 
