@@ -148,7 +148,7 @@
 #define USE_URLSTREAM_TASK
 
 #define PWM_FREQENCY 30000
-#define PWM_START_PIN 12
+#define PIN_PWM_START 12
 #define PIN_I2S_BCK 14
 #define PIN_I2S_WS 15
 #define PIN_I2S_DATA_IN 32
@@ -196,7 +196,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define USE_AUDIO_SERVER
 //#define USE_ESP8266_AUDIO
 
-#define PWM_START_PIN 12
+#define PIN_PWM_START 12
 #define PIN_I2S_BCK -1
 #define PIN_I2S_WS -1
 #define PIN_I2S_DATA_IN -1
@@ -212,7 +212,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define USE_I2S
 #define USE_PWM
 
-#define PWM_START_PIN 6
+#define PIN_PWM_START 6
 #define PIN_I2S_BCK 2
 #define PIN_I2S_WS 1
 #define PIN_I2S_DATA_IN 3
@@ -226,8 +226,10 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #if defined(ARDUINO_ARCH_MBED_RP2040)
 //#define USE_I2S 1
 #define USE_PWM
+#define USE_ADC_ARDUINO
 
-#define PWM_START_PIN 6
+#define PIN_ADC_START 26
+#define PIN_PWM_START 6
 #define PIN_I2S_BCK 26
 #define PIN_I2S_WS PIN_I2S_BCK+1
 #define PIN_I2S_DATA_IN 28
@@ -239,14 +241,24 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 // fix missing __sync_synchronize symbol
 #define FIX_SYNC_SYNCHRONIZE
 #define IRAM_ATTR
+#ifndef ADC_BUFFER_SIZE 
+#define ADC_BUFFER_SIZE 1024
+#endif
+
+#ifndef ADC_BUFFERS 
+#define ADC_BUFFERS 50
+#endif
+
 //#define USE_ESP8266_AUDIO
 
 //----------------
 #elif defined(ARDUINO_ARCH_RP2040)
 #define USE_I2S 1
 #define USE_PWM
+#define USE_ADC_ARDUINO
 
-#define PWM_START_PIN 6
+#define PIN_ADC_START 26
+#define PIN_PWM_START 6
 #define PIN_I2S_BCK 26
 #define PIN_I2S_WS PIN_I2S_BCK+1
 #define PIN_I2S_DATA_IN 28
@@ -258,6 +270,15 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 // fix missing __sync_synchronize symbol
 #define FIX_SYNC_SYNCHRONIZE
 #define IRAM_ATTR
+
+#ifndef ADC_BUFFER_SIZE 
+#define ADC_BUFFER_SIZE 256
+#endif
+
+#ifndef ADC_BUFFERS 
+#define ADC_BUFFERS 100
+#endif
+
 //#define USE_ESP8266_AUDIO
 
 #endif
@@ -266,7 +287,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #ifdef __AVR__
 #define USE_PWM
 
-#define PWM_START_PIN 6
+#define PIN_PWM_START 6
 #define PIN_CS CS
 #endif
 
@@ -279,7 +300,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define USE_I2S
 #define USE_PWM
 
-#define PWM_START_PIN 6
+#define PIN_PWM_START 6
 #define PIN_I2S_BCK 1
 #define PIN_I2S_WS PIN_I2S_BCK+1
 #define PIN_I2S_DATA_IN 3

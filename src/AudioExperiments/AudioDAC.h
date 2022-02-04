@@ -30,7 +30,7 @@ class DACInfo : public AudioBaseInfo {
         int oversample_factor = 1;
 
         /// Defines the pins: channel 0 is start_pin, channel 1 is start_pin+1 etc.
-        int start_pin = PWM_START_PIN;
+        int start_pin = PIN_PWM_START;
 
         /// Max number of bits used to output signal 
         int output_bits = 64;

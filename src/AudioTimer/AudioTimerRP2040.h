@@ -22,8 +22,8 @@ typedef void (* my_repeating_timer_callback_t )(void* obj);
  */
 class TimerAlarmRepeatingRP2040 : public TimerAlarmRepeatingDef{
     public:
-    
-        TimerAlarmRepeatingRP2040(TimerFunction function=DirectTimerCallback, int id=0){
+
+        TimerAlarmRepeatingRP2040(TimerFunction function=DirectTimerCallback, int id=0) : TimerAlarmRepeatingDef(){
             alarm_pool_init_default();
             ap = alarm_pool_get_default();
         }
@@ -37,24 +37,27 @@ class TimerAlarmRepeatingRP2040 : public TimerAlarmRepeatingDef{
          */
         bool begin(const my_repeating_timer_callback_t callback_f, uint32_t time, TimeUnit unit = MS) override {
             bool result = false;
+            LOGI("timer time: %u %s",time, unit==MS ? "ms": "us");
             this->instanceCallback = callback_f;
 
             // we determine the time in microseconds
             switch(unit){
                 case MS:
-                    result = alarm_pool_add_repeating_timer_ms(ap, time, staticCallback, this,  &timer);
+                    result = alarm_pool_add_repeating_timer_ms(ap, time, &staticCallback, this,  &timer);
                     break;
                 case US:
-                    result = alarm_pool_add_repeating_timer_us(ap, time, staticCallback, this, &timer);
+                    result = alarm_pool_add_repeating_timer_us(ap, time, &staticCallback, this, &timer);
                     break;
+                default:
+                    LOGE("Undefined Unit");
             }
             
             return result;
         }
 
-        static bool staticCallback(repeating_timer *ptr)  {
+        inline static bool staticCallback(repeating_timer *ptr)  {
             TimerAlarmRepeatingRP2040 *self = (TimerAlarmRepeatingRP2040 *)ptr->user_data; 
-            self->instanceCallback(self);
+            self->instanceCallback(self->object);
             return true;
         }
 

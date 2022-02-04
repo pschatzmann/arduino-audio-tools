@@ -26,4 +26,4 @@ The pins depend on the Processor:
 | Right      |  GPI3        | GPIO3         | GPI3         |
 | GND        |  GND         | GND           | GND          |
 
-To verify check the PWM_START_PIN in AudioConfig.h or you can set the pins by calling setPins() method on the PWMConfig object.
+To verify check the PIN_PWM_START in AudioConfig.h or you can set the pins by calling setPins() method on the PWMConfig object.

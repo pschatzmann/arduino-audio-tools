@@ -112,7 +112,7 @@ $(function() {
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    uint8_t timer_id = 0;       <span class="comment">// Only used by ESP32 must be between 0 and 3</span></div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    </div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#ifndef __AVR__</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    uint16_t start_pin = PWM_START_PIN; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    uint16_t start_pin = PIN_PWM_START; </div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="comment">// define all pins by passing an array and updates the channels by the number of pins</span></div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">template</span>&lt;<span class="keywordtype">size_t</span> N&gt; </div>
@@ -125,7 +125,7 @@ $(function() {
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        }</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        pins = array;</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        start_pin = -1; <span class="comment">// mark start pin as invalid</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        LOGI(<span class="stringliteral">&quot;start_pin: %d&quot;</span>, PWM_START_PIN);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        LOGI(<span class="stringliteral">&quot;start_pin: %d&quot;</span>, PIN_PWM_START);</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    }</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">#endif</span></div>

@@ -119,7 +119,7 @@ class CsvStream : public AudioPrint, public AudioBaseInfoDependent {
             LOGD(LOG_METHOD);
             size_t lenChannels = len / (sizeof(T)*channels); 
             data_ptr = (T*)data;
-            for (int j=0;j<lenChannels;j++){
+            for (size_t j=0;j<lenChannels;j++){
                 for (int ch=0;ch<channels;ch++){
                     if (out_ptr!=nullptr && data_ptr!=nullptr){
                         out_ptr->print(*data_ptr);
