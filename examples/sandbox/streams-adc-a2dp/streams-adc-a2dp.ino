@@ -3,9 +3,8 @@
  * @author Phil Schatzmann
  * @brief We use a mcp6022 analog microphone as input and send the data to A2DP
  * see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-stream/streams-adc-a2dp/README.md
- * 
- * @author Phil Schatzmann
  * @copyright GPLv3
+ * #TODO retest is outstanding
  * 
  */
 // Add this in your sketch or change the setting in AudioConfig.h
@@ -18,7 +17,7 @@
 AnalogAudioStream in; // analog mic
 A2DPStream out = A2DPStream::instance() ; // A2DP output - A2DPStream is a singleton!
 StreamCopy copier(out, in); // copy in to out
-ConverterAutoCenter<int16_t> center; // The data has a center of around 26427, so we we need to shift it down to bring the center to 0
+ConverterAutoCenter<int16_t> center(2); // The data has a center of around 26427, so we we need to shift it down to bring the center to 0
 
 // Arduino Setup
 void setup(void) {

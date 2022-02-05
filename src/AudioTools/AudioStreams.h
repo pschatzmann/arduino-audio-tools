@@ -772,6 +772,91 @@ void TimerCallbackAudioStream::timerCallback(void *obj) {
   }
 }
 
+/**
+ * @brief Construct a new Converted Stream object. Both the data of the read and write
+ * operations will be converted with the help of the indicated converter.
+ * 
+ * @tparam T 
+ * @param out 
+ * @param converter 
+ */
+template<typename T, class ConverterT>
+class ConvertedStream : public AudioStreamX {
+
+    public:
+        ConvertedStream(Stream &stream, ConverterT &converter) : AudioStreamX() {
+            p_converter = &converter;
+            p_stream = &stream;
+        }
+
+        virtual int availableForWrite() { return p_stream->availableForWrite(); }
+
+        virtual size_t write(const uint8_t *buffer, size_t size) { 
+           p_converter->convert((uint8_t *)buffer, size); 
+           return p_stream->write(buffer, size);
+        }
+
+        size_t readBytes(uint8_t *data, size_t length) override {
+           size_t result; p_stream->readBytes(data, length);
+           p_converter->convert(data, result); 
+           return result;
+        }
+
+        /// Returns the available bytes in the buffer: to be avoided
+        virtual int available() override {
+          return p_stream->available();
+        }
+
+    protected:
+        Stream *p_stream;
+        ConverterT *p_converter;
+
+};
+
+/**
+ * Stream to which we can apply Filters for each channel
+ * 
+ */
+template<typename T, class TF>
+class FilteredStream : public AudioStreamX {
+  public:
+        FilteredStream(Stream &stream, int channels=2) : AudioStreamX() {
+          this->channels = channels;
+          p_stream = &stream;
+          p_converter = new ConverterNChannels<T,TF>(channels);
+        }
+
+        virtual size_t write(const uint8_t *buffer, size_t size) { 
+           p_converter->convert((uint8_t *)buffer, size); 
+           return p_stream->write(buffer, size);
+        }
+
+        size_t readBytes(uint8_t *data, size_t length) override {
+           size_t result; p_stream->readBytes(data, length);
+           p_converter->convert(data, result); 
+           return result;
+        }
+
+        virtual int available() override {
+          return p_stream->available();
+        }
+
+        virtual int availableForWrite() { return p_stream->availableForWrite(); }
+
+        /// defines the filter for an individual channel - the first channel is 0
+        void setFilter(int channel, Filter<TF> *filter) {
+          p_converter->setFilter(channel, filter);
+        }
+
+    protected:
+        int channels;
+        Stream *p_stream;
+        ConverterNChannels<T,TF> *p_converter;
+
+};
+
+
+
 #endif
 
 }  // namespace audio_tools

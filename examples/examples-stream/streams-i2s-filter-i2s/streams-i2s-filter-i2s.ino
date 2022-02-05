@@ -11,7 +11,14 @@ uint16_t sample_rate=44100;
 uint16_t channels = 2;
 I2SStream in;
 I2SStream out; 
-StreamCopy copier(out, in); // copies sound into i2s
+
+// copy filtered values
+ConverterNChannels<int16_t> converter(channels);  // Defiles the filter as BaseConverter
+FilteredStream<int16_t, float> inFiltered(in);    // 
+StreamCopy copier(out, inFiltered);               // copies sound into i2s
+
+// define FIR filter parameters
+float coef[] = { 0.021, 0.096, 0.146, 0.096, 0.021};
 
 
 // Arduino Setup
@@ -20,6 +27,10 @@ void setup(void) {
   Serial.begin(115200);
   // change to Warning to improve the quality
   AudioLogger::instance().begin(Serial, AudioLogger::Info); 
+
+  // setup filters for all available channels
+  inFiltered.setFilter(0, new FIR<float>(coef));
+  inFiltered.setFilter(1, new FIR<float>(coef));
 
   // start I2S in
   Serial.println("starting I2S...");
@@ -34,6 +45,7 @@ void setup(void) {
   config_in.pin_data = 16;
   // config_in.fixed_mclk = sample_rate * 256
   // config_in.pin_mck = 2
+
   in.begin(config_in);
 
   // start I2S out

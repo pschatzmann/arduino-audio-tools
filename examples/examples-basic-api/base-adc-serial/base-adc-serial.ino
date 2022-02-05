@@ -5,6 +5,7 @@
  * 
  * @author Phil Schatzmann
  * @copyright GPLv3
+ * #TODO retest is outstanding
  */
  
 // Add this in your sketch or change the setting in AudioConfig.h
@@ -19,8 +20,8 @@
  */ 
 
 AnalogAudio adc;
-const int32_t max_buffer_len = 512;
-int16_t buffer[max_buffer_len][2];
+const int32_t max_buffer_len = 1024;
+uint8_t buffer[max_buffer_len];
 // The data has a center of around 26427, so we we need to shift it down to bring the center to 0
 ConverterScaler<int16_t> scaler(1.0, -26427, 32700 );
 
@@ -36,13 +37,15 @@ void setup(void) {
 
 // Arduino loop - repeated processing 
 void loop() {
-  size_t len = adc.read(buffer, max_buffer_len); 
+  size_t len = adc.readBytes(buffer, max_buffer_len); 
   // move center to 0 and scale the values
   scaler.convert(buffer, len);
 
-  for (int j=0;j<len;j++){
-    Serial.print(buffer[j][0]);
+  int16_t *sample = (int16_t*) buffer; 
+  int size = len / 4;
+  for (int j=0; j<size; j++){
+    Serial.print(*sample++);
     Serial.print(", ");
-    Serial.println(buffer[j][1]);
+    Serial.println(*sample++);
   }
 }

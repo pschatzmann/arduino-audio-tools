@@ -24,11 +24,15 @@
 ../examples/examples-stream/streams-analog-serial -> rc=0
 ../examples/examples-stream/streams-generator-a2dp -> rc=0
 ../examples/examples-stream/streams-generator-analog -> rc=0
+../examples/examples-stream/streams-generator-csv -> rc=0
 ../examples/examples-stream/streams-generator-i2s -> rc=0
 ../examples/examples-stream/streams-generator-pwm -> rc=0
 ../examples/examples-stream/streams-generator-serial -> rc=0
+../examples/examples-stream/streams-generator-spdif -> rc=0
 ../examples/examples-stream/streams-i2s-a2dp -> rc=0
 ../examples/examples-stream/streams-i2s-csv -> rc=0
+../examples/examples-stream/streams-i2s-filter-i2s -> rc=0
+../examples/examples-stream/streams-i2s-i2s -> rc=0
 ../examples/examples-stream/streams-memory_mp3-analog -> rc=0
 ../examples/examples-stream/streams-memory_mp3-metadata -> rc=0
 ../examples/examples-stream/streams-memory_mp3-pwm -> rc=0

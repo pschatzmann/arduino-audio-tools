@@ -2,10 +2,9 @@
  * @file base-i2s-a2dp.ino
  * @author Phil Schatzmann
  * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/base-i2s-a2dp/README.md
- * 
- * @author Phil Schatzmann
- * @copyright GPLv3
- */
+  * @copyright GPLv3
+  * #TODO retest is outstanding
+*/
 
 // Add this in your sketch or change the setting in AudioConfig.h
 #define USE_A2DP
@@ -29,18 +28,14 @@ int32_t buffer[max_buffer_len][2];
 
 // callback used by A2DP to provide the sound data
 int32_t get_sound_data(Frame* data, int32_t len) {
-   size_t req_len = min(max_buffer_len,(size_t) len);
-
-   // the microphone provides data in int32_t -> we read it into the buffer of int32_t data
-   size_t result_len = i2s.read(buffer, req_len);
-
+   uint8_t* data8 = (uint8_t*)data;
+   int bytes = len * 4;
+   size_t result_len = i2s.readBytes(data8, bytes);
    // we have data only in 1 channel but we want to fill both
-   bothChannels.convert(buffer, result_len);
-   
-   // convert buffer to int16 for A2DP
-   converter.convert(buffer, data, result_len);
-   return result_len;
+   bothChannels.convert(data8, bytes);
+   return result_len / 4;
 }
+
 
 // Arduino Setup
 void setup(void) {
