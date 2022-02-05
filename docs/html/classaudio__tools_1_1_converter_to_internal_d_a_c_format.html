@@ -67,6 +67,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_converter_to_internal_d_a_c_format-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">audio_tools::ConverterToInternalDACFormat&lt; T &gt; Class Template Reference</div>  </div>
@@ -89,9 +90,18 @@ Inheritance diagram for audio_tools::ConverterToInternalDACFormat&lt; T &gt;:</d
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a345d72b4b7fd440e6fbc708d9b6fc8d7"><td class="memItemLeft" align="right" valign="top"><a id="a345d72b4b7fd440e6fbc708d9b6fc8d7"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>convert</b> (T(*src)[2], size_t size)</td></tr>
-<tr class="separator:a345d72b4b7fd440e6fbc708d9b6fc8d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad39214dfe98ccc8eb1b0bbe942c11dcc"><td class="memItemLeft" align="right" valign="top"><a id="ad39214dfe98ccc8eb1b0bbe942c11dcc"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>ConverterToInternalDACFormat</b> (int channels=2)</td></tr>
+<tr class="separator:ad39214dfe98ccc8eb1b0bbe942c11dcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab37d4b0373cd81f73423304186e042c1"><td class="memItemLeft" align="right" valign="top"><a id="ab37d4b0373cd81f73423304186e042c1"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>convert</b> (uint8_t *src, size_t byte_count)</td></tr>
+<tr class="separator:ab37d4b0373cd81f73423304186e042c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a24afa0707592e15a112d1630f2456b53"><td class="memItemLeft" align="right" valign="top"><a id="a24afa0707592e15a112d1630f2456b53"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b></td></tr>
+<tr class="separator:a24afa0707592e15a112d1630f2456b53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename T&gt;<br />

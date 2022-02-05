@@ -77,10 +77,10 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>ESP32 specific configuration for i2s input via adc. The default input pin is GPIO34. We always use int16_t values. The default output pins are GPIO25 and GPIO26!  
+<p>Configuration for Analog Reader.  
  <a href="classaudio__tools_1_1_analog_config.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_analog_audio_e_s_p32_8h_source.html">AnalogAudioESP32.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_analog_audio_arduino_8h_source.html">AnalogAudioArduino.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for audio_tools::AnalogConfig:</div>
 <div class="dyncontent">
@@ -88,6 +88,7 @@ Inheritance diagram for audio_tools::AnalogConfig:</div>
   <img src="classaudio__tools_1_1_analog_config.png" usemap="#audio_5Ftools::AnalogConfig_map" alt=""/>
   <map id="audio_5Ftools::AnalogConfig_map" name="audio_5Ftools::AnalogConfig_map">
 <area href="structaudio__tools_1_1_audio_base_info.html" title="Basic Audio information which drives e.g. I2S." alt="audio_tools::AudioBaseInfo" shape="rect" coords="0,0,164,24"/>
+<area href="structaudio__tools_1_1_audio_base_info.html" title="Basic Audio information which drives e.g. I2S." alt="audio_tools::AudioBaseInfo" shape="rect" coords="174,0,338,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -125,6 +126,12 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator==</b> (<a cl
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
+<tr class="memitem:ab82988102ea84abad5071232c834886f"><td class="memItemLeft" align="right" valign="top"><a id="ab82988102ea84abad5071232c834886f"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_size</b> = ADC_BUFFER_SIZE</td></tr>
+<tr class="separator:ab82988102ea84abad5071232c834886f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31dad0d2413ebf099a199ddb7dd0d5b2"><td class="memItemLeft" align="right" valign="top"><a id="a31dad0d2413ebf099a199ddb7dd0d5b2"></a>
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>buffers</b> = ADC_BUFFERS</td></tr>
+<tr class="separator:a31dad0d2413ebf099a199ddb7dd0d5b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a443c6126253785d1df643e0f60fdcc96"><td class="memItemLeft" align="right" valign="top"><a id="a443c6126253785d1df643e0f60fdcc96"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>dma_buf_count</b> = I2S_BUFFER_COUNT</td></tr>
 <tr class="separator:a443c6126253785d1df643e0f60fdcc96"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -140,6 +147,9 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>mode_internal</b></td>
 <tr class="memitem:a104e39bc77779a40c224afc5c0c7df72"><td class="memItemLeft" align="right" valign="top"><a id="a104e39bc77779a40c224afc5c0c7df72"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>port_no</b> = I2S_NUM_0</td></tr>
 <tr class="separator:a104e39bc77779a40c224afc5c0c7df72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af895527afdac3262d0ae65d51b4b03ba"><td class="memItemLeft" align="right" valign="top"><a id="af895527afdac3262d0ae65d51b4b03ba"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>start_pin</b> = PIN_ADC_START</td></tr>
+<tr class="separator:af895527afdac3262d0ae65d51b4b03ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8230beb2dd6d32d46f0f8a6a05acc49e"><td class="memItemLeft" align="right" valign="top"><a id="a8230beb2dd6d32d46f0f8a6a05acc49e"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>use_apll</b> = false</td></tr>
 <tr class="separator:a8230beb2dd6d32d46f0f8a6a05acc49e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -180,10 +190,12 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>AnalogAudio</b></td>
 <tr class="separator:a0134c04e4b722a44cf093839f2ca10d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>ESP32 specific configuration for i2s input via adc. The default input pin is GPIO34. We always use int16_t values. The default output pins are GPIO25 and GPIO26! </p>
+<div class="textblock"><p>Configuration for Analog Reader. </p>
+<p>ESP32 specific configuration for i2s input via adc. The default input pin is GPIO34. We always use int16_t values. The default output pins are GPIO25 and GPIO26!</p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><hr/>The documentation for this class was generated from the following files:<ul>
+<li>src/AudioAnalog/<a class="el" href="_analog_audio_arduino_8h_source.html">AnalogAudioArduino.h</a></li>
 <li>src/AudioAnalog/<a class="el" href="_analog_audio_e_s_p32_8h_source.html">AnalogAudioESP32.h</a></li>
 </ul>
 </div><!-- contents -->

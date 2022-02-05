@@ -80,51 +80,58 @@ $(function() {
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
 <div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_timer_alarm_repeating_def.html">   14</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_timer_alarm_repeating_def.html">TimerAlarmRepeatingDef</a> {</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <span class="keyword">virtual</span>  ~<a class="code" href="classaudio__tools_1_1_timer_alarm_repeating_def.html">TimerAlarmRepeatingDef</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> begin(repeating_timer_callback_t callback_f, uint32_t time, <a class="code" href="namespaceaudio__tools.html#a2580860e590a075e7acf4753a09f2331">TimeUnit</a> unit = MS) = 0;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> end() = 0;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="keywordtype">void</span> setCallbackParameter(<span class="keywordtype">void</span>* obj){</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;          <span class="keywordtype">object</span> = obj;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        }</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keywordtype">void</span> *callbackParameter(){</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            <span class="keywordflow">return</span> object;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        }</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keywordtype">void</span>* object;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;};</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_utils.html">   37</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_audio_utils.html">AudioUtils</a> {</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_utils.html#a694ecb0907ccdc49d9c18222303bc4a9">   40</a></span>&#160;        <span class="keyword">static</span> uint32_t <a class="code" href="classaudio__tools_1_1_audio_utils.html#a694ecb0907ccdc49d9c18222303bc4a9">toTimeUs</a>(uint32_t samplingRate, uint8_t limit=10){</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            uint32_t result = 1000000l / samplingRate;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            <span class="keywordflow">if</span> (result &lt;= limit){</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                LOGW(<span class="stringliteral">&quot;Time for samplingRate %u -&gt; %u is &lt; %u μs - we rounded up&quot;</span>, samplingRate, result, limit);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                result = limit;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <a class="code" href="classaudio__tools_1_1_timer_alarm_repeating_def.html">TimerAlarmRepeatingDef</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="keyword">virtual</span>  ~<a class="code" href="classaudio__tools_1_1_timer_alarm_repeating_def.html">TimerAlarmRepeatingDef</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> begin(repeating_timer_callback_t callback_f, uint32_t time, <a class="code" href="namespaceaudio__tools.html#a2580860e590a075e7acf4753a09f2331">TimeUnit</a> unit = MS) = 0;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> end() = 0;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <span class="keywordtype">void</span> setCallbackParameter(<span class="keywordtype">void</span>* obj){</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;          <span class="keywordtype">object</span> = obj;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        }</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keywordtype">void</span> *callbackParameter(){</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            <span class="keywordflow">return</span> object;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        }</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keywordtype">void</span>* <span class="keywordtype">object</span>=<span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;};</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_utils.html">   38</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_audio_utils.html">AudioUtils</a> {</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_utils.html#a694ecb0907ccdc49d9c18222303bc4a9">   41</a></span>&#160;        <span class="keyword">static</span> uint32_t <a class="code" href="classaudio__tools_1_1_audio_utils.html#a694ecb0907ccdc49d9c18222303bc4a9">toTimeUs</a>(uint32_t samplingRate, uint8_t limit=10){</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            uint32_t result = 1000000l / samplingRate;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            <span class="keywordflow">if</span> (1000000l % samplingRate!=0){</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                result++;</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            }</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        }</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keyword">static</span> uint32_t toTimeMs(uint32_t samplingRate, uint8_t limit=1){</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            uint32_t result = 1000l / samplingRate;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <span class="keywordflow">if</span> (result &lt;= limit){</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                LOGW(<span class="stringliteral">&quot;Time for samplingRate %u -&gt; %u is &lt; %u μs - we rounded up&quot;</span>, samplingRate, result, limit);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                result = limit;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            }</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        }</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;};</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;}</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_utils_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_utils.html">audio_tools::AudioUtils</a></div><div class="ttdoc">Tools for calculating timer values.</div><div class="ttdef"><b>Definition:</b> AudioTimerDef.h:37</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_audio_utils_html_a694ecb0907ccdc49d9c18222303bc4a9"><div class="ttname"><a href="classaudio__tools_1_1_audio_utils.html#a694ecb0907ccdc49d9c18222303bc4a9">audio_tools::AudioUtils::toTimeUs</a></div><div class="ttdeci">static uint32_t toTimeUs(uint32_t samplingRate, uint8_t limit=10)</div><div class="ttdoc">converts sampling rate to delay in microseconds (μs)</div><div class="ttdef"><b>Definition:</b> AudioTimerDef.h:40</div></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            <span class="keywordflow">if</span> (result &lt;= limit){</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                LOGW(<span class="stringliteral">&quot;Time for samplingRate %u -&gt; %lu is &lt; %u μs - we rounded up&quot;</span>, (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>)samplingRate, result, limit);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                result = limit;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            }</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        }</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keyword">static</span> uint32_t toTimeMs(uint32_t samplingRate, uint8_t limit=1){</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            uint32_t result = 1000l / samplingRate;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <span class="keywordflow">if</span> (1000000l % samplingRate!=0){</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                result++;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            }</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keywordflow">if</span> (result &lt;= limit){</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                LOGW(<span class="stringliteral">&quot;Time for samplingRate %u -&gt; %lu is &lt; %u μs - we rounded up&quot;</span>, (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>)samplingRate, result, limit);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                result = limit;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            }</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        }</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;};</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;}</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_utils_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_utils.html">audio_tools::AudioUtils</a></div><div class="ttdoc">Tools for calculating timer values.</div><div class="ttdef"><b>Definition:</b> AudioTimerDef.h:38</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_audio_utils_html_a694ecb0907ccdc49d9c18222303bc4a9"><div class="ttname"><a href="classaudio__tools_1_1_audio_utils.html#a694ecb0907ccdc49d9c18222303bc4a9">audio_tools::AudioUtils::toTimeUs</a></div><div class="ttdeci">static uint32_t toTimeUs(uint32_t samplingRate, uint8_t limit=10)</div><div class="ttdoc">converts sampling rate to delay in microseconds (μs)</div><div class="ttdef"><b>Definition:</b> AudioTimerDef.h:41</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_timer_alarm_repeating_def_html"><div class="ttname"><a href="classaudio__tools_1_1_timer_alarm_repeating_def.html">audio_tools::TimerAlarmRepeatingDef</a></div><div class="ttdoc">Common Interface definition for TimerAlarmRepeating.</div><div class="ttdef"><b>Definition:</b> AudioTimerDef.h:14</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AnalogAudioESP32.h:12</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AnalogAudioArduino.h:10</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html_a2580860e590a075e7acf4753a09f2331"><div class="ttname"><a href="namespaceaudio__tools.html#a2580860e590a075e7acf4753a09f2331">audio_tools::TimeUnit</a></div><div class="ttdeci">TimeUnit</div><div class="ttdoc">Time Units.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:17</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

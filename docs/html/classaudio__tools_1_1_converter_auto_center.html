@@ -91,18 +91,24 @@ Inheritance diagram for audio_tools::ConverterAutoCenter&lt; T &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a7f5c5a13fbe04719cc87097340d35f28"><td class="memItemLeft" align="right" valign="top"><a id="a7f5c5a13fbe04719cc87097340d35f28"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>convert</b> (T(*src)[2], size_t size)</td></tr>
-<tr class="separator:a7f5c5a13fbe04719cc87097340d35f28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65a1ca7c9bd44dac8331d1e57036565b"><td class="memItemLeft" align="right" valign="top"><a id="a65a1ca7c9bd44dac8331d1e57036565b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>ConverterAutoCenter</b> (int channels=2)</td></tr>
+<tr class="separator:a65a1ca7c9bd44dac8331d1e57036565b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac91aa3e6b3ae04b8cc4ef2699d3b674d"><td class="memItemLeft" align="right" valign="top"><a id="ac91aa3e6b3ae04b8cc4ef2699d3b674d"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>convert</b> (uint8_t(*src), size_t byte_count)</td></tr>
+<tr class="separator:ac91aa3e6b3ae04b8cc4ef2699d3b674d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a923815f732efbb825086413032faa24d"><td class="memItemLeft" align="right" valign="top"><a id="a923815f732efbb825086413032faa24d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setup</b> (T(*src)[2], size_t size)</td></tr>
-<tr class="separator:a923815f732efbb825086413032faa24d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae14be28688cfe000ffd5543544eaca96"><td class="memItemLeft" align="right" valign="top"><a id="ae14be28688cfe000ffd5543544eaca96"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setup</b> (T *src, size_t size)</td></tr>
+<tr class="separator:ae14be28688cfe000ffd5543544eaca96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:a8402426aa568410a65785360d6466833"><td class="memItemLeft" align="right" valign="top"><a id="a8402426aa568410a65785360d6466833"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b></td></tr>
+<tr class="separator:a8402426aa568410a65785360d6466833"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab88872be8531f7b7011a62ead2c9220"><td class="memItemLeft" align="right" valign="top"><a id="aab88872be8531f7b7011a62ead2c9220"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_setup</b> = false</td></tr>
 <tr class="separator:aab88872be8531f7b7011a62ead2c9220"><td class="memSeparator" colspan="2">&#160;</td></tr>

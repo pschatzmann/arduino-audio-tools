@@ -565,7 +565,7 @@ constexpr static const effectsuite_t&#160;</td><td class="memItemRight" valign="
   </tr>
 </table>
 </div><div class="memdoc">
-<p>changes the current Chebyshev type 1 coefficients without altering the filter order. This allows for use in an audio process thread as it avoids dynamic allocation of memory. Filter sample and coefficient buffers are unaltered for initialising a chebyshev type 1 filter </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="classaudio__tools_1_1_filter_effect_base.html#a1ae0052e99c7fd2cc6f951d16e909eed">setChebyICoefficients</a> @params cutFreq normalised cutoff frequency (0 &lt; x &lt; .5) @params shelfType bool filter shelf type, false = low pass, true = high pass @params ripple percentage ripple (&lt;.2929) </dd></dl>
+<p>changes the current Chebyshev type 1 coefficients without altering the filter order. This allows for use in an audio process thread as it avoids dynamic allocation of memory. <a class="el" href="classaudio__tools_1_1_filter.html" title="Abstract filter interface definition;.">Filter</a> sample and coefficient buffers are unaltered for initialising a chebyshev type 1 filter </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="classaudio__tools_1_1_filter_effect_base.html#a1ae0052e99c7fd2cc6f951d16e909eed">setChebyICoefficients</a> @params cutFreq normalised cutoff frequency (0 &lt; x &lt; .5) @params shelfType bool filter shelf type, false = low pass, true = high pass @params ripple percentage ripple (&lt;.2929) </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>boolean false on error and true on success </dd></dl>
 
 </div>

@@ -84,7 +84,7 @@ $(function() {
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// Callback for user</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">typedef</span> bool (*PWMCallbackType)(uint8_t channels, int16_t* data);</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">// Callback used by system</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keywordtype">void</span> <a class="code" href="namespaceaudio__tools.html#a6d3366afe95c009b2a445ebcc5eeccac">defaultPWMAudioOutputCallback</a>();</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keywordtype">void</span> <a class="code" href="namespaceaudio__tools.html#a09bdc57d65f79893a74d86aca71bdebf">defaultPWMAudioOutputCallback</a>();</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">// Stream classes</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">class </span>PWMAudioStreamESP32;</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">class </span>PWMAudioStreamPico;</div>
@@ -135,8 +135,8 @@ $(function() {
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        LOGI(<span class="stringliteral">&quot;channels: %d&quot;</span>, channels);</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        LOGI(<span class="stringliteral">&quot;bits_per_sample: %d&quot;</span>, bits_per_sample);</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        LOGI(<span class="stringliteral">&quot;buffer_size: %u&quot;</span>, buffer_size);</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        LOGI(<span class="stringliteral">&quot;pwm_frequency: %u&quot;</span>, pwm_frequency);</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="comment">//LOGI(&quot;resolution: %d&quot;, resolution);</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        LOGI(<span class="stringliteral">&quot;pwm_frequency: %lu&quot;</span>, pwm_frequency);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        LOGI(<span class="stringliteral">&quot;resolution: %d&quot;</span>, resolution);</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="comment">//LOGI(&quot;timer_id: %d&quot;, timer_id);</span></div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    }</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
@@ -261,169 +261,165 @@ $(function() {
 <div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;            is_timer_started = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;        }</div>
 <div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160; </div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160; </div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">int</span> availableForWrite() { </div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;            <span class="keywordflow">return</span> buffer==<span class="keyword">nullptr</span> ? 0 : buffer-&gt;availableForWrite();</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        }</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160; </div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> flush() { </div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        }</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160; </div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        <span class="comment">// blocking write for a single byte</span></div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(uint8_t value) {</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;            <span class="keywordtype">size_t</span> result = 0;</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;            <span class="keywordflow">if</span> (buffer-&gt;availableForWrite()&gt;1){</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;                result = buffer-&gt;write(value);</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;                <a class="code" href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#a4645c3ba1347cac33a0dae1c1825ec56">startTimer</a>();</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;            }</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;            <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;        }</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160; </div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;        <span class="comment">// blocking write for an array: we expect a singed value and convert it into a unsigned </span></div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> uint8_t *wrt_buffer, <span class="keywordtype">size_t</span> size){</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;            <span class="keywordtype">size_t</span> available = min((<span class="keywordtype">size_t</span>)availableForWrite(),size);</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;            LOGD(<span class="stringliteral">&quot;write: %zu bytes -&gt; %zu&quot;</span>, size, available);</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;            <span class="keywordtype">size_t</span> result = buffer-&gt;writeArray(wrt_buffer, available);</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;            <span class="keywordflow">if</span> (result!=available){</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;                LOGW(<span class="stringliteral">&quot;Could not write all data: %d -&gt; %d&quot;</span>, size, result);</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;            }</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;            <span class="comment">// activate the timer now - if not already done</span></div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;            <a class="code" href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#a4645c3ba1347cac33a0dae1c1825ec56">startTimer</a>();</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;            <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;        }</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160; </div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        <span class="comment">// When the timer does not have enough data we increase the underflow_count;</span></div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        uint32_t underflowsPerSecond(){</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;            <span class="keywordflow">return</span> underflow_per_second;</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;        }</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;        <span class="comment">// provides the effectivly measured output frames per second</span></div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;        uint32_t framesPerSecond(){</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;            <span class="keywordflow">return</span> frames_per_second;</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;        }</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160; </div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> pwmWrite(<span class="keywordtype">int</span> channel, <span class="keywordtype">int</span> value) = 0;</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160; </div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;        PWMConfig audio_config;</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;        NBuffer&lt;uint8_t&gt; *buffer = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        PWMCallbackType user_callback = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;        uint32_t underflow_count = 0;</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;        uint32_t underflow_per_second = 0;</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;        uint32_t frame_count = 0;</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        uint32_t frames_per_second = 0;</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;        uint32_t time_1_sec;</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;        <span class="keywordtype">bool</span> is_timer_started = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160; </div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> setupPWM() = 0;</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> setupTimer() = 0;</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">int</span> maxChannels() = 0;</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">int</span> maxOutputValue() = 0;</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">int</span> availableForWrite() { </div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;            <span class="keywordflow">return</span> buffer==<span class="keyword">nullptr</span> ? 0 : buffer-&gt;availableForWrite();</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;        }</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160; </div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> flush() { </div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        }</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; </div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        <span class="comment">// blocking write for a single byte</span></div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(uint8_t value) {</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;            <span class="keywordtype">size_t</span> result = 0;</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;            <span class="keywordflow">if</span> (buffer-&gt;availableForWrite()&gt;1){</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;                result = buffer-&gt;write(value);</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;                <a class="code" href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#a4645c3ba1347cac33a0dae1c1825ec56">startTimer</a>();</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;            }</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;            <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;        }</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160; </div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;        <span class="comment">// blocking write for an array: we expect a singed value and convert it into a unsigned </span></div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> uint8_t *wrt_buffer, <span class="keywordtype">size_t</span> size){</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;            <span class="keywordtype">size_t</span> available = min((<span class="keywordtype">size_t</span>)availableForWrite(),size);</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;            LOGD(<span class="stringliteral">&quot;write: %u bytes -&gt; %u&quot;</span>, (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>)size, (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>)available);</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;            <span class="keywordtype">size_t</span> result = buffer-&gt;writeArray(wrt_buffer, available);</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;            <span class="keywordflow">if</span> (result!=available){</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;                LOGW(<span class="stringliteral">&quot;Could not write all data: %u -&gt; %d&quot;</span>, (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>) size, result);</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;            }</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;            <span class="comment">// activate the timer now - if not already done</span></div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;            <a class="code" href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#a4645c3ba1347cac33a0dae1c1825ec56">startTimer</a>();</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;            <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;        }</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160; </div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;        <span class="comment">// When the timer does not have enough data we increase the underflow_count;</span></div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        uint32_t underflowsPerSecond(){</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;            <span class="keywordflow">return</span> underflow_per_second;</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        }</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;        <span class="comment">// provides the effectivly measured output frames per second</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;        uint32_t framesPerSecond(){</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;            <span class="keywordflow">return</span> frames_per_second;</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;        }</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160; </div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> pwmWrite(<span class="keywordtype">int</span> channel, <span class="keywordtype">int</span> value) = 0;</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160; </div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;        PWMConfig audio_config;</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;        NBuffer&lt;uint8_t&gt; *buffer = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;        PWMCallbackType user_callback = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        uint32_t underflow_count = 0;</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;        uint32_t underflow_per_second = 0;</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;        uint32_t frame_count = 0;</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;        uint32_t frames_per_second = 0;</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        uint32_t time_1_sec;</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;        <span class="keywordtype">bool</span> is_timer_started = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160; </div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> setupPWM() = 0;</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> setupTimer() = 0;</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">int</span> maxChannels() = 0;</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">int</span> maxOutputValue() = 0;</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160; </div>
 <div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160; </div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160; </div>
-<div class="line"><a name="l00264"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#a4645c3ba1347cac33a0dae1c1825ec56">  264</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#a4645c3ba1347cac33a0dae1c1825ec56">startTimer</a>(){</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;            <span class="keywordflow">if</span> (!is_timer_started){</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;                 LOGD(LOG_METHOD);</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;                is_timer_started = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;            }</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        }</div>
+<div class="line"><a name="l00263"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#a4645c3ba1347cac33a0dae1c1825ec56">  263</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#a4645c3ba1347cac33a0dae1c1825ec56">startTimer</a>(){</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;            <span class="keywordflow">if</span> (!is_timer_started){</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;                 LOGD(LOG_METHOD);</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;                is_timer_started = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;            }</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;        }</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160; </div>
 <div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160; </div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160; </div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">void</span> updateStatistics(){</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;            frame_count++;</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;            <span class="keywordflow">if</span> (millis()&gt;=time_1_sec){</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;                time_1_sec = millis()+1000;</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;                frames_per_second = frame_count;</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;                underflow_per_second = underflow_count;</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;                underflow_count = 0;</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;                frame_count = 0;</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;            }</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;        }</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160; </div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;        <span class="keywordtype">void</span> playNextFrameCallback(){</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;             <span class="comment">//LOGD(LOG_METHOD);</span></div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;            uint8_t channels = audio_config.channels;</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;            int16_t data[channels];</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;            <span class="keywordflow">if</span> (user_callback(channels, data)){</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;                <span class="keywordflow">for</span> (uint8_t j=0;j&lt;audio_config.channels;j++){</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;                    <span class="keywordtype">int</span> value  = map(data[j], -<a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(16), <a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(16), 0, 255); </div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;                    pwmWrite(j, value);</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;                }</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;                updateStatistics();                </div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;            }</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;        }</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">void</span> updateStatistics(){</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;            frame_count++;</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;            <span class="keywordflow">if</span> (millis()&gt;=time_1_sec){</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;                time_1_sec = millis()+1000;</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;                frames_per_second = frame_count;</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;                underflow_per_second = underflow_count;</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;                underflow_count = 0;</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;                frame_count = 0;</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;            }</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;        }</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160; </div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;        <span class="keywordtype">void</span> playNextFrameCallback(){</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;             <span class="comment">//LOGD(LOG_METHOD);</span></div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;            uint8_t channels = audio_config.channels;</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;            int16_t data[channels];</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;            <span class="keywordflow">if</span> (user_callback(channels, data)){</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;                <span class="keywordflow">for</span> (uint8_t j=0;j&lt;audio_config.channels;j++){</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;                    <span class="keywordtype">int</span> value  = map(data[j], -<a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(16), <a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(16), 0, 255); </div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;                    pwmWrite(j, value);</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;                }</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;                updateStatistics();                </div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;            }</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;        }</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160; </div>
 <div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160; </div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160; </div>
-<div class="line"><a name="l00298"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#abe51f92fdb30f5bf2c79f6af7887227d">  298</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#abe51f92fdb30f5bf2c79f6af7887227d">playNextFrameStream</a>(){</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;            <span class="keywordflow">if</span> (is_timer_started){</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;                 <span class="comment">//LOGD(LOG_METHOD);</span></div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;                <span class="keywordtype">int</span> required = (audio_config.bits_per_sample / 8) * audio_config.channels;</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;                if (buffer-&gt;available() &gt;= required){</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;                    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0;j&lt;audio_config.channels;j++){</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;                        <span class="keywordtype">int</span> value  = <a class="code" href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#a52908d290349c998e4077bd811e9e300">nextValue</a>();</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;                        pwmWrite(j, value);</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;                    }</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;                } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;                    underflow_count++;</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;                }</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;                updateStatistics();</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;                <span class="comment">//LOGE(&quot;is_timer_started is false&quot;);</span></div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;            }</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;        } </div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160; </div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;        <span class="keywordtype">void</span> playNextFrame(){</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;             <span class="comment">//LOGD(LOG_METHOD);</span></div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;            <span class="keywordflow">if</span> (user_callback!=<span class="keyword">nullptr</span>){</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;                playNextFrameCallback();</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;                <a class="code" href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#abe51f92fdb30f5bf2c79f6af7887227d">playNextFrameStream</a>();</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;            }</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;        }</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160; </div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160; </div>
-<div class="line"><a name="l00327"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#a52908d290349c998e4077bd811e9e300">  327</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#a52908d290349c998e4077bd811e9e300">nextValue</a>() {</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;            <span class="keywordtype">int</span> result = 0;</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;            <span class="keywordflow">switch</span>(audio_config.bits_per_sample ){</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;                <span class="keywordflow">case</span> 8: {</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;                    int16_t value = buffer-&gt;read();</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;                    <span class="keywordflow">if</span> (value&lt;0){</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;                        LOGE(<span class="stringliteral">&quot;Could not read full data&quot;</span>);</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;                        value = 0;</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;                    }</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;                    result = map(value, -<a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(8), <a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(8), 0, maxOutputValue());</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;                }</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;                <span class="keywordflow">case</span> 16: {</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;                    int16_t value;</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;                    <span class="keywordflow">if</span> (buffer-&gt;readArray((uint8_t*)&amp;value,2)!=2){</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;                        LOGE(<span class="stringliteral">&quot;Could not read full data&quot;</span>);</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;                    }</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;                    result = map(value, -<a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(16), <a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(16), 0, maxOutputValue());</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;                }</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;                <span class="keywordflow">case</span> 24: {</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;                    <a class="code" href="classaudio__tools_1_1int24__t.html">int24_t</a> value;</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;                    <span class="keywordflow">if</span> (buffer-&gt;readArray((uint8_t*)&amp;value,3)!=3){</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;                        LOGE(<span class="stringliteral">&quot;Could not read full data&quot;</span>);</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;                    }</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;                    result = map((int32_t)value, -<a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(24), <a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(24), 0, maxOutputValue());</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;                }</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;                <span class="keywordflow">case</span> 32: {</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;                    int32_t value;</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;                    <span class="keywordflow">if</span> (buffer-&gt;readArray((uint8_t*)&amp;value,4)!=4){</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;                        LOGE(<span class="stringliteral">&quot;Could not read full data&quot;</span>);</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;                    }</div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;                    result = map(value, -<a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(32), <a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(32), 0, maxOutputValue());</div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;                }</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;            }        </div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;            <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;        }      </div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;};</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160; </div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;} <span class="comment">// ns</span></div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160; </div>
+<div class="line"><a name="l00297"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#abe51f92fdb30f5bf2c79f6af7887227d">  297</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#abe51f92fdb30f5bf2c79f6af7887227d">playNextFrameStream</a>(){</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;            <span class="keywordflow">if</span> (is_timer_started){</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;                <span class="comment">//LOGD(LOG_METHOD);</span></div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;                <span class="keywordtype">int</span> required = (audio_config.bits_per_sample / 8) * audio_config.channels;</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;                if (buffer-&gt;available() &gt;= required){</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;                    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0;j&lt;audio_config.channels;j++){</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;                        <span class="keywordtype">int</span> value  = <a class="code" href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#a52908d290349c998e4077bd811e9e300">nextValue</a>();</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;                        pwmWrite(j, value);</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;                    }</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;                } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;                    underflow_count++;</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;                }</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;                updateStatistics();</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;            } </div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;        } </div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160; </div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;        <span class="keywordtype">void</span> playNextFrame(){</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;            <span class="comment">// LOGD(LOG_METHOD);</span></div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;            <span class="keywordflow">if</span> (user_callback!=<span class="keyword">nullptr</span>){</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;                playNextFrameCallback();</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;                <a class="code" href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#abe51f92fdb30f5bf2c79f6af7887227d">playNextFrameStream</a>();</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;            }</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;        }</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160; </div>
+<div class="line"><a name="l00323"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#a52908d290349c998e4077bd811e9e300">  323</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#a52908d290349c998e4077bd811e9e300">nextValue</a>() {</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;            <span class="keywordtype">int</span> result = 0;</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;            <span class="keywordflow">switch</span>(audio_config.bits_per_sample ){</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;                <span class="keywordflow">case</span> 8: {</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;                    int16_t value = buffer-&gt;read();</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;                    <span class="keywordflow">if</span> (value&lt;0){</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;                        LOGE(<span class="stringliteral">&quot;Could not read full data&quot;</span>);</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;                        value = 0;</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;                    }</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;                    result = map(value, -<a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(8), <a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(8), 0, maxOutputValue());</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;                }</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;                <span class="keywordflow">case</span> 16: {</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;                    int16_t value;</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;                    <span class="keywordflow">if</span> (buffer-&gt;readArray((uint8_t*)&amp;value,2)!=2){</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;                        LOGE(<span class="stringliteral">&quot;Could not read full data&quot;</span>);</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;                    }</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;                    result = map(value, -<a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(16), <a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(16), 0, maxOutputValue());</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;                }</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;                <span class="keywordflow">case</span> 24: {</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;                    <a class="code" href="classaudio__tools_1_1int24__t.html">int24_t</a> value;</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;                    <span class="keywordflow">if</span> (buffer-&gt;readArray((uint8_t*)&amp;value,3)!=3){</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;                        LOGE(<span class="stringliteral">&quot;Could not read full data&quot;</span>);</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;                    }</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;                    result = map((int32_t)value, -<a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(24), <a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(24), 0, maxOutputValue());</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;                }</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;                <span class="keywordflow">case</span> 32: {</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;                    int32_t value;</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;                    <span class="keywordflow">if</span> (buffer-&gt;readArray((uint8_t*)&amp;value,4)!=4){</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;                        LOGE(<span class="stringliteral">&quot;Could not read full data&quot;</span>);</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;                    }</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;                    result = map(value, -<a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(32), <a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(32), 0, maxOutputValue());</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;                }</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;            }        </div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;            <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;        }      </div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;};</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160; </div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;} <span class="comment">// ns</span></div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160; </div>
 <div class="ttc" id="a_audio_tools_8h_html"><div class="ttname"><a href="_audio_tools_8h.html">AudioTools.h</a></div><div class="ttdoc">Includes all classes.</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_base_info_dependent_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_base_info_dependent.html">audio_tools::AudioBaseInfoDependent</a></div><div class="ttdoc">Supports changes to the sampling rate, bits and channels.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:47</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_print_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_print.html">audio_tools::AudioPrint</a></div><div class="ttdoc">Abstract Audio Ouptut class.</div><div class="ttdef"><b>Definition:</b> AudioOutput.h:19</div></div>
@@ -431,16 +427,16 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_number_converter_html_a68cfd005536b677f85d29ec75bedce57"><div class="ttname"><a href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">audio_tools::NumberConverter::maxValue</a></div><div class="ttdeci">static int64_t maxValue(int value_bits_per_sample)</div><div class="ttdoc">provides the biggest number for the indicated number of bits</div><div class="ttdef"><b>Definition:</b> Converter.h:38</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_p_w_m_audio_stream_base_html"><div class="ttname"><a href="classaudio__tools_1_1_p_w_m_audio_stream_base.html">audio_tools::PWMAudioStreamBase</a></div><div class="ttdoc">Common functionality for PWM output.</div><div class="ttdef"><b>Definition:</b> PWMAudioBase.h:88</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_p_w_m_audio_stream_base_html_a246c965f26bca25f12bf7b90d5925f4d"><div class="ttname"><a href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#a246c965f26bca25f12bf7b90d5925f4d">audio_tools::PWMAudioStreamBase::begin</a></div><div class="ttdeci">bool begin(PWMConfig config)</div><div class="ttdoc">starts the processing using Streams</div><div class="ttdef"><b>Definition:</b> PWMAudioBase.h:140</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_p_w_m_audio_stream_base_html_a4645c3ba1347cac33a0dae1c1825ec56"><div class="ttname"><a href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#a4645c3ba1347cac33a0dae1c1825ec56">audio_tools::PWMAudioStreamBase::startTimer</a></div><div class="ttdeci">virtual void startTimer()</div><div class="ttdoc">when we get the first write -&gt; we activate the timer to start with the output of data</div><div class="ttdef"><b>Definition:</b> PWMAudioBase.h:264</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_p_w_m_audio_stream_base_html_a52908d290349c998e4077bd811e9e300"><div class="ttname"><a href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#a52908d290349c998e4077bd811e9e300">audio_tools::PWMAudioStreamBase::nextValue</a></div><div class="ttdeci">virtual int nextValue()</div><div class="ttdoc">determines the next scaled value</div><div class="ttdef"><b>Definition:</b> PWMAudioBase.h:327</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_p_w_m_audio_stream_base_html_a4645c3ba1347cac33a0dae1c1825ec56"><div class="ttname"><a href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#a4645c3ba1347cac33a0dae1c1825ec56">audio_tools::PWMAudioStreamBase::startTimer</a></div><div class="ttdeci">virtual void startTimer()</div><div class="ttdoc">when we get the first write -&gt; we activate the timer to start with the output of data</div><div class="ttdef"><b>Definition:</b> PWMAudioBase.h:263</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_p_w_m_audio_stream_base_html_a52908d290349c998e4077bd811e9e300"><div class="ttname"><a href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#a52908d290349c998e4077bd811e9e300">audio_tools::PWMAudioStreamBase::nextValue</a></div><div class="ttdeci">virtual int nextValue()</div><div class="ttdoc">determines the next scaled value</div><div class="ttdef"><b>Definition:</b> PWMAudioBase.h:323</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_p_w_m_audio_stream_base_html_a76fb99feead156d38c742a31dd4247e9"><div class="ttname"><a href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#a76fb99feead156d38c742a31dd4247e9">audio_tools::PWMAudioStreamBase::setAudioInfo</a></div><div class="ttdeci">virtual void setAudioInfo(AudioBaseInfo info)</div><div class="ttdoc">updates the sample rate dynamically</div><div class="ttdef"><b>Definition:</b> PWMAudioBase.h:124</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_p_w_m_audio_stream_base_html_abe51f92fdb30f5bf2c79f6af7887227d"><div class="ttname"><a href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#abe51f92fdb30f5bf2c79f6af7887227d">audio_tools::PWMAudioStreamBase::playNextFrameStream</a></div><div class="ttdeci">void playNextFrameStream()</div><div class="ttdoc">writes the next frame to the output pins</div><div class="ttdef"><b>Definition:</b> PWMAudioBase.h:298</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_p_w_m_audio_stream_base_html_abe51f92fdb30f5bf2c79f6af7887227d"><div class="ttname"><a href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#abe51f92fdb30f5bf2c79f6af7887227d">audio_tools::PWMAudioStreamBase::playNextFrameStream</a></div><div class="ttdeci">void playNextFrameStream()</div><div class="ttdoc">writes the next frame to the output pins</div><div class="ttdef"><b>Definition:</b> PWMAudioBase.h:297</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_p_w_m_audio_stream_e_s_p32_html"><div class="ttname"><a href="classaudio__tools_1_1_p_w_m_audio_stream_e_s_p32.html">audio_tools::PWMAudioStreamESP32</a></div><div class="ttdoc">Audio output to PWM pins for the ESP32. The ESP32 supports up to 16 channels.</div><div class="ttdef"><b>Definition:</b> PWMAudioESP32.h:33</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_p_w_m_audio_stream_m_b_e_d_html"><div class="ttname"><a href="classaudio__tools_1_1_p_w_m_audio_stream_m_b_e_d.html">audio_tools::PWMAudioStreamMBED</a></div><div class="ttdoc">Audio output to PWM pins for MBED based Arduino implementations.</div><div class="ttdef"><b>Definition:</b> PWMAudioMBED.h:20</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_p_w_m_audio_stream_pico_html"><div class="ttname"><a href="classaudio__tools_1_1_p_w_m_audio_stream_pico.html">audio_tools::PWMAudioStreamPico</a></div><div class="ttdoc">Audio output for the Rasperry Pico to PWM pins. The Raspberry Pi Pico has 8 PWM blocks/slices(1-8) an...</div><div class="ttdef"><b>Definition:</b> PWMAudioRP2040.h:38</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_p_w_m_audio_stream_pico_html"><div class="ttname"><a href="classaudio__tools_1_1_p_w_m_audio_stream_pico.html">audio_tools::PWMAudioStreamPico</a></div><div class="ttdoc">Audio output for the Rasperry Pico to PWM pins. The Raspberry Pi Pico has 8 PWM blocks/slices(1-8) an...</div><div class="ttdef"><b>Definition:</b> PWMAudioRP2040.h:37</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1int24__t_html"><div class="ttname"><a href="classaudio__tools_1_1int24__t.html">audio_tools::int24_t</a></div><div class="ttdoc">24bit integer which is used for I2S sound processing. It works only on little endian machines!</div><div class="ttdef"><b>Definition:</b> Int24.h:15</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AnalogAudioESP32.h:12</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html_a6d3366afe95c009b2a445ebcc5eeccac"><div class="ttname"><a href="namespaceaudio__tools.html#a6d3366afe95c009b2a445ebcc5eeccac">audio_tools::defaultPWMAudioOutputCallback</a></div><div class="ttdeci">void defaultPWMAudioOutputCallback()</div><div class="ttdoc">separate method that can be defined as friend so that we can access protected information</div><div class="ttdef"><b>Definition:</b> PWMAudioAVR.h:130</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AnalogAudioArduino.h:10</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html_a09bdc57d65f79893a74d86aca71bdebf"><div class="ttname"><a href="namespaceaudio__tools.html#a09bdc57d65f79893a74d86aca71bdebf">audio_tools::defaultPWMAudioOutputCallback</a></div><div class="ttdeci">void defaultPWMAudioOutputCallback()</div><div class="ttdoc">separate method that can be defined as friend so that we can access protected information</div><div class="ttdef"><b>Definition:</b> PWMAudioAVR.h:130</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_base_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_base_info.html">audio_tools::AudioBaseInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:23</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_p_w_m_config_html"><div class="ttname"><a href="structaudio__tools_1_1_p_w_m_config.html">audio_tools::PWMConfig</a></div><div class="ttdoc">Configuration data for PWM audio output.</div><div class="ttdef"><b>Definition:</b> PWMAudioBase.h:27</div></div>
 </div><!-- fragment --></div><!-- contents -->

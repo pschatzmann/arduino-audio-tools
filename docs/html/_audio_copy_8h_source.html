@@ -151,7 +151,7 @@ $(function() {
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        }</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="comment">// copies the data from one channel from the source to 2 channels on the destination - the result is in bytes</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keywordtype">size_t</span> copy(){</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">size_t</span> copy(){</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            LOGD(LOG_METHOD);</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            <span class="keywordtype">size_t</span> result = 0;</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            <span class="keywordtype">size_t</span> delayCount = 0;</div>
@@ -358,8 +358,8 @@ $(function() {
 <div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;                <span class="comment">// callback with unconverted data</span></div>
 <div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;                <span class="keywordflow">if</span> (onWrite!=<span class="keyword">nullptr</span>) onWrite(onWriteObj, buffer, result);</div>
 <div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160; </div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;                <span class="comment">// convert to pointer to array of 2</span></div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;                coverter_ptr-&gt;convert((T(*)[2])buffer,  result / (<span class="keyword">sizeof</span>(T)*2) );</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;                <span class="comment">// convert data</span></div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;                coverter_ptr-&gt;convert((uint8_t*)buffer,  result );</div>
 <div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;                write(result, delayCount);</div>
 <div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;<span class="preprocessor">                #ifndef COPY_LOG_OFF</span></div>
 <div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;                    LOGI(<span class="stringliteral">&quot;StreamCopy::copy %u bytes - in %u hops&quot;</span>, (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>)result,(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>) delayCount);</div>
@@ -371,7 +371,7 @@ $(function() {
 <div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;            <span class="keywordflow">return</span> result;</div>
 <div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;        }</div>
 <div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;        </div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;        <span class="keywordtype">size_t</span> copy() {</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">size_t</span> copy() {</div>
 <div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="classaudio__tools_1_1_stream_copy_t.html">StreamCopyT&lt;uint8_t&gt;::copy</a>();</div>
 <div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;        }</div>
 <div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160; </div>
@@ -398,7 +398,7 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_stream_copy_t_html_aba98d7f6707f54f7cf19bf1984b37179"><div class="ttname"><a href="classaudio__tools_1_1_stream_copy_t.html#aba98d7f6707f54f7cf19bf1984b37179">audio_tools::StreamCopyT::setCallbackOnWrite</a></div><div class="ttdeci">void setCallbackOnWrite(void(*onWrite)(void *obj, void *buffer, size_t len), void *obj)</div><div class="ttdoc">Defines a callback that is notified with the wirtten data.</div><div class="ttdef"><b>Definition:</b> AudioCopy.h:202</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_stream_copy_t_html_ac3627d8a96ba24b3e72e53b39cee90a7"><div class="ttname"><a href="classaudio__tools_1_1_stream_copy_t.html#ac3627d8a96ba24b3e72e53b39cee90a7">audio_tools::StreamCopyT::bufferSize</a></div><div class="ttdeci">int bufferSize()</div><div class="ttdoc">Provides the buffer size.</div><div class="ttdef"><b>Definition:</b> AudioCopy.h:214</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_stream_copy_t_html_ad91332b65066ca248438d4db7f55a62c"><div class="ttname"><a href="classaudio__tools_1_1_stream_copy_t.html#ad91332b65066ca248438d4db7f55a62c">audio_tools::StreamCopyT::setDelayOnNoData</a></div><div class="ttdeci">void setDelayOnNoData(int delayMs)</div><div class="ttdoc">Defines the dealy that is used if no data is available.</div><div class="ttdef"><b>Definition:</b> AudioCopy.h:174</div></div>
-<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AnalogAudioESP32.h:12</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AnalogAudioArduino.h:10</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

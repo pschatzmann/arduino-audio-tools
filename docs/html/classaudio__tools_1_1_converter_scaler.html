@@ -90,12 +90,12 @@ Inheritance diagram for audio_tools::ConverterScaler&lt; T &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a5ceecf18ec13a3ff43f49139eda96b4a"><td class="memItemLeft" align="right" valign="top"><a id="a5ceecf18ec13a3ff43f49139eda96b4a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ConverterScaler</b> (float <a class="el" href="classaudio__tools_1_1_converter_scaler.html#a3eeb57b2789b0ea7cb9ef951c6c938b3">factor</a>, T <a class="el" href="classaudio__tools_1_1_converter_scaler.html#abd01950f76aae1d1797af5b55bbd5b34">offset</a>, T maxValue)</td></tr>
-<tr class="separator:a5ceecf18ec13a3ff43f49139eda96b4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a063d3a8129df3b7ec914a22efdbf3ed0"><td class="memItemLeft" align="right" valign="top"><a id="a063d3a8129df3b7ec914a22efdbf3ed0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>convert</b> (T(*src)[2], size_t size)</td></tr>
-<tr class="separator:a063d3a8129df3b7ec914a22efdbf3ed0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf8eab0d0fc66e41b6aa240746f816a5"><td class="memItemLeft" align="right" valign="top"><a id="acf8eab0d0fc66e41b6aa240746f816a5"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>ConverterScaler</b> (float <a class="el" href="classaudio__tools_1_1_converter_scaler.html#a3eeb57b2789b0ea7cb9ef951c6c938b3">factor</a>, T <a class="el" href="classaudio__tools_1_1_converter_scaler.html#abd01950f76aae1d1797af5b55bbd5b34">offset</a>, T maxValue, int channels=2)</td></tr>
+<tr class="separator:acf8eab0d0fc66e41b6aa240746f816a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc089206195935f701dafdcfa21e42ab"><td class="memItemLeft" align="right" valign="top"><a id="afc089206195935f701dafdcfa21e42ab"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>convert</b> (uint8_t *src, size_t byte_count)</td></tr>
+<tr class="separator:afc089206195935f701dafdcfa21e42ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3eeb57b2789b0ea7cb9ef951c6c938b3"><td class="memItemLeft" align="right" valign="top"><a id="a3eeb57b2789b0ea7cb9ef951c6c938b3"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_converter_scaler.html#a3eeb57b2789b0ea7cb9ef951c6c938b3">factor</a> ()</td></tr>
 <tr class="memdesc:a3eeb57b2789b0ea7cb9ef951c6c938b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the actual factor (volume) <br /></td></tr>
@@ -115,6 +115,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:ad53958b6dea0a7bbec69ed8cf4bee74a"><td class="memItemLeft" align="right" valign="top"><a id="ad53958b6dea0a7bbec69ed8cf4bee74a"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b></td></tr>
+<tr class="separator:ad53958b6dea0a7bbec69ed8cf4bee74a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad46585b0e5d38ccae11c3d26ded9bc4e"><td class="memItemLeft" align="right" valign="top"><a id="ad46585b0e5d38ccae11c3d26ded9bc4e"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>factor_value</b></td></tr>
 <tr class="separator:ad46585b0e5d38ccae11c3d26ded9bc4e"><td class="memSeparator" colspan="2">&#160;</td></tr>

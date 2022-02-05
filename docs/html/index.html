@@ -98,6 +98,7 @@ $(function() {
 <li>external DAC – <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_i2_s_stream.html">I2SStream</a></li>
 <li>Analog output e.g. with an Amplifier – <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_analog_audio_stream.html">AnalogAudioStream</a></li>
 <li>with a Piezo Electric Element – <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_p_w_m_audio_stream_base.html">PWMAudioStream</a></li>
+<li>external SPDIF/TOSLINK Amplifier - <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_s_p_d_i_f_stream.html">SPDIFStream</a></li>
 <li>Bluetooth Speakers – <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_a2_d_p_stream.html">A2DPStream</a></li>
 <li>Serial to display the data as CSV – <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_csv_stream.html">CsvStream</a></li>
 <li>Encoding and Decoding of Audio <a href="https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_encoded_audio_stream.html">EncodedAudioStream</a></li>
@@ -113,8 +114,6 @@ Examples</h2>
 <p>Here is an simple example which streams a file from the Flash Memory and writes it to I2S:</p>
 <div class="fragment"><div class="line">#include &quot;AudioTools.h&quot;</div>
 <div class="line">#include &quot;StarWars30.h&quot;</div>
-<div class="line"> </div>
-<div class="line">using namespace audio_tools;  </div>
 <div class="line"> </div>
 <div class="line">uint8_t channels = 2;</div>
 <div class="line">uint16_t sample_rate = 22050;</div>
