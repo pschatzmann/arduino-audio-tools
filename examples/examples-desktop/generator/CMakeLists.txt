@@ -36,7 +36,7 @@ endif()
 add_executable (generator generator.cpp)
 
 # use main() from arduino_emulator
-target_compile_definitions(arduino_emulator PUBLIC -DDEFINE_MAIN)
+target_compile_definitions(arduino_emulator PUBLIC -©)
 
 # OS/X might need this setting for core audio
 #target_compile_definitions(portaudio PUBLIC -DPA_USE_COREAUDIO=1)

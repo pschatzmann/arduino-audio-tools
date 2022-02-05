@@ -8,6 +8,7 @@
  * @copyright Copyright (c) 2022
  * 
  */
+#include "Arduino.h"
 #include "AudioConfig.h"
 #include "AudioTools/AudioLogger.h"
 
@@ -16,3 +17,4 @@ extern "C" void __sync_synchronize(){
     LOGE("__sync_synchronize not implemented")
 }
 #endif
+

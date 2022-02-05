@@ -11,8 +11,6 @@
 
 #include "AudioTools.h"
 
-
-
 /**
  * @brief We use a ADS1015 I2S microphone as input and send the data to A2DP
  * Unfortunatly the data type from the microphone (int32_t)  does not match with the required data type by A2DP (int16_t),
@@ -21,7 +19,6 @@
 
 BluetoothA2DPSource a2dp_source;
 I2S<int32_t> i2s;
-ChannelConverter<int32_t> converter(&NumberConverter::convertFrom32To16);
 ConverterFillLeftAndRight<int32_t> bothChannels;
 const size_t max_buffer_len = 1024;
 int32_t buffer[max_buffer_len][2];

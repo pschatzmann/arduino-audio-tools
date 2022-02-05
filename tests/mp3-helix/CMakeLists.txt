@@ -20,7 +20,7 @@ if(NOT helix_POPULATED)
 endif()
 
 # build sketch as executable
-add_executable (mp3-helix mp3-helix.cpp)
+add_executable (mp3-helix mp3-helix.cpp ../main.cpp)
 # use main() from arduino_emulator
 target_compile_definitions(mp3-helix PUBLIC -DARDUINO -DEXIT_ON_STOP -DUSE_HELIX -DUSE_PORTAUDIO  -DIS_DESKTOP)
 

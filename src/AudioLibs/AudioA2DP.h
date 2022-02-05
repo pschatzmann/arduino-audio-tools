@@ -25,9 +25,9 @@ namespace audio_tools {
  */
 
 template<typename T>
-class ChannelConverter {
+class A2DPChannelConverter {
     public:
-        ChannelConverter( int16_t (*convert_ptr)(T from)){
+        A2DPChannelConverter( int16_t (*convert_ptr)(T from)){
             this->convert_ptr = convert_ptr;
         }
 

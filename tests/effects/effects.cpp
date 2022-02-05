@@ -53,8 +53,3 @@ void loop() {
   copier.copy();
 }
 
-
-int main(){
-  setup();
-  while(true) loop();
-}

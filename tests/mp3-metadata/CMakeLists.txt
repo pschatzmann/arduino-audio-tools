@@ -11,7 +11,7 @@ endif()
 
 
 # build sketch as executable
-add_executable (mp3-metadata mp3-metadata.cpp)
+add_executable (mp3-metadata mp3-metadata.cpp ../main.cpp)
 
 # use main() from arduino_emulator
 target_compile_definitions(mp3-metadata PUBLIC -DEXIT_ON_STOP -DIS_DESKTOP)
