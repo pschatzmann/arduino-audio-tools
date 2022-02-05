@@ -13,7 +13,7 @@ endif()
 # build sketch as executable
 add_executable (generator generator.cpp ../main.cpp)
 
-# use main() from arduino_emulator
+# set preprocessor defines
 target_compile_definitions(generator PUBLIC -DUSE_PORTAUDIO -DEXIT_ON_STOP -DIS_DESKTOP)
 
 # specify libraries

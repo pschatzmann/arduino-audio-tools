@@ -21,7 +21,7 @@ endif()
 
 # build sketch as executable
 add_executable (mp3-mad mp3-mad.cpp ../main.cpp)
-# use main() from arduino_emulator
+# set preprocessor defines
 target_compile_definitions(mp3-mad PUBLIC -DARDUINO -DEXIT_ON_STOP -DUSE_MAD -DUSE_PORTAUDIO -DIS_DESKTOP)
 
 # specify libraries
