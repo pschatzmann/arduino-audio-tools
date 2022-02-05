@@ -35,7 +35,7 @@ endif()
 # build sketch as executable
 add_executable (generator generator.cpp)
 
-# use main() from arduino_emulator
+# set preprocessor defines
 target_compile_definitions(arduino_emulator PUBLIC -©)
 
 # OS/X might need this setting for core audio

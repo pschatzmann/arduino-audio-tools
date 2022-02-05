@@ -35,7 +35,7 @@ endif()
 # build sketch as executable
 add_executable (mp3 mp3.cpp)
 
-# use main() from arduino_emulator
+# set preprocessor defines
 target_compile_definitions(arduino_emulator PUBLIC -DDEFINE_MAIN)
 target_compile_definitions(mp3 PUBLIC -DEXIT_ON_STOP)
 

@@ -13,7 +13,7 @@ endif()
 # build sketch as executable
 add_executable (filter filter.cpp ../main.cpp)
 
-# use main() from arduino_emulator
+# set preprocessor defines
 target_compile_definitions(filter PUBLIC -DEXIT_ON_STOP -DIS_DESKTOP)
 
 # specify libraries

@@ -11,7 +11,7 @@ endif()
 
 # build sketch as executable
 add_executable (effects effects.cpp ../main.cpp)
-# use main() from arduino_emulator
+# set preprocessor defines
 target_compile_definitions(effects PUBLIC -DARDUINO -DEXIT_ON_STOP -DIS_DESKTOP)
 
 # specify libraries
