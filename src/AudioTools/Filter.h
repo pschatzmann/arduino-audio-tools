@@ -12,6 +12,7 @@ class Filter {
  public:
   // construct without coefs
   Filter() = default;
+  virtual ~Filter() = default;
   virtual float process(float in) = 0;
 };
 
@@ -302,6 +303,36 @@ class SOSFilter : public Filter<T>
         for (size_t i = 0; i < M; i++)
             dest[i] = src[i];
     }
+};
+
+/**
+ * @brief FilterChain - A Cascade of multiple filters
+ * 
+ * @tparam T 
+ * @tparam N 
+ */
+template <typename T, size_t N>
+class FilterChain : public Filter<T> {
+  public:
+    FilterChain(Filter<T> * (&&filters)[N])
+    {
+        for (size_t i = 0; i < N; i++) {
+            this->filters[i] = filters[i];
+        }
+    }
+
+    T process(T value)
+    {
+        for (Filter<T> *&filter : filters) {
+            if (filter!=nullptr){
+              value = filter->process(value);
+            }
+        }
+        return value;
+    }
+
+  private:
+    Filter<T> *filters[N] = {0};
 };
 
 
