@@ -12,6 +12,7 @@
 #include "AudioTools/AudioTypes.h"
 #include "AudioTools/Buffers.h"
 #include "AudioTools/Converter.h"
+#include "AudioTools/Filter.h"
 #include "AudioTools/MusicalNotes.h"
 #include "AudioI2S/I2SStream.h"
 #include "AudioPWM/AudioPWM.h"

@@ -54,8 +54,6 @@ Here is an simple example which streams a file from the Flash Memory and writes 
 #include "AudioTools.h"
 #include "StarWars30.h"
 
-using namespace audio_tools;  
-
 uint8_t channels = 2;
 uint16_t sample_rate = 22050;
 

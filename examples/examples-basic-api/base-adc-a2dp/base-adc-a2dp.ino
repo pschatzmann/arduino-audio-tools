@@ -5,7 +5,8 @@
  * 
  * @author Phil Schatzmann
  * @copyright GPLv3
- * 
+* #TODO retest is outstanding
+* 
  */
 // Add this in your sketch or change the setting in AudioConfig.h
 #define USE_A2DP
@@ -24,11 +25,13 @@ BluetoothA2DPSource a2dp_source;
 ConverterScaler<int16_t> scaler(1.0, -26427, 32700 );
 
 // callback used by A2DP to provide the sound data
-int32_t get_sound_data(Frame* data, int32_t len) {
-    arrayOf2int16_t *data_arrays = (arrayOf2int16_t *) data;
+int32_t get_sound_data(Frame* frames, int32_t count) {
+    uint8_t *data = (uint8_t*)frames;
+    int channels = 2;
+    size_t len = count * channels * sizeof(int16_t);
    // the ADC provides data in 16 bits
-    size_t result_len = adc.read(data_arrays, len);   
-    scaler.convert(data_arrays, result_len);
+    size_t result_len = adc.readBytes(data, len);   
+    scaler.convert(data, result_len);
     return result_len;
 }
 

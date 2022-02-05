@@ -87,7 +87,7 @@ class StreamCopyT {
         }
 
         // copies the data from one channel from the source to 2 channels on the destination - the result is in bytes
-        size_t copy(){
+        inline size_t copy(){
             LOGD(LOG_METHOD);
             size_t result = 0;
             size_t delayCount = 0;
@@ -309,8 +309,8 @@ class StreamCopy : public StreamCopyT<uint8_t> {
                 // callback with unconverted data
                 if (onWrite!=nullptr) onWrite(onWriteObj, buffer, result);
 
-                // convert to pointer to array of 2
-                coverter_ptr->convert((T(*)[2])buffer,  result / (sizeof(T)*2) );
+                // convert data
+                coverter_ptr->convert((uint8_t*)buffer,  result );
                 write(result, delayCount);
                 #ifndef COPY_LOG_OFF
                     LOGI("StreamCopy::copy %u bytes - in %u hops", (unsigned int)result,(unsigned int) delayCount);
@@ -322,7 +322,7 @@ class StreamCopy : public StreamCopyT<uint8_t> {
             return result;
         }
         
-        size_t copy() {
+        inline size_t copy() {
             return StreamCopyT<uint8_t>::copy();
         }
 
