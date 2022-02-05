@@ -343,6 +343,49 @@ class ConverterToInternalDACFormat : public  BaseConverter<T> {
         int channels;
 };
 
+/**
+ * @brief We combine a datastream which consists of multiple channels into less channels. E.g. 2 to 1
+ * The last target channel will contain the combined values of the exceeding source channels.
+ * 
+ * @tparam T 
+ */
+template<typename T>
+class ChannelReducer : public BaseConverter<T> {
+    public:
+        ChannelReducer(int channelCountOfSource, int channelCountOfTarget=1){
+            from_channels = channelCountOfSource;
+            to_channels = channelCountOfTarget;
+        }
+        
+        size_t convert(uint8_t*src, size_t size) {
+            int frame_count = size/(sizeof(T)*from_channels);
+            size_t result_size=0;
+            T* result = (T*)src;
+            T* source = (T*)src;
+            int reduceDiv = from_channels-to_channels+1;
+
+            for(int i=0; i < frame_count; i++){
+                // copy first to_channels-1 
+                for (int j=0;j<to_channels-1;j++){
+                    *result++ = *source++;
+                    result_size += sizeof(T);
+                }
+                // commbined last channels
+                T total = 0;
+                for (int j=to_channels-1;j<from_channels;j++){
+                    total += *source++ / reduceDiv;
+                }                
+                *result++ = total;
+                result_size += sizeof(T);
+            }
+            return result_size;
+        }
+
+    protected:
+        int from_channels;
+        int to_channels;
+};
+
 
 /**
  * @brief Combines multiple converters

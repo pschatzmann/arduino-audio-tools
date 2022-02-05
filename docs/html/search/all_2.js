@@ -7,7 +7,7 @@ var searchData=
   ['callbackvolumecontrol_88',['CallbackVolumeControl',['../classaudio__tools_1_1_callback_volume_control.html',1,'audio_tools']]],
   ['capgain_89',['capGain',['../classaudio__tools_1_1_simple_flanger.html#ae8313fe0d5c0cd5ccffccb2d2297e265',1,'audio_tools::SimpleFlanger::capGain()'],['../classaudio__tools_1_1_simple_delay.html#ab807c6b9ece494e795248f05691754c2',1,'audio_tools::SimpleDelay::capGain()'],['../classaudio__tools_1_1_filtered_delay.html#abad8e030845aef2d840d5daedcb141ec',1,'audio_tools::FilteredDelay::capGain()']]],
   ['changechebyicoefficients_90',['changeChebyICoefficients',['../classaudio__tools_1_1_filter_effect_base.html#ab091cba2046674c895032075785f7fc2',1,'audio_tools::FilterEffectBase']]],
-  ['channelconverter_91',['ChannelConverter',['../classaudio__tools_1_1_channel_converter.html',1,'audio_tools']]],
+  ['channelconverter_91',['A2DPChannelConverter',['../classaudio__tools_1_1_channel_converter.html',1,'audio_tools']]],
   ['clear_92',['clear',['../classaudio__tools_1_1_buffered_stream.html#a9f9ea7409349db8f0b55917c400ed177',1,'audio_tools::BufferedStream::clear()'],['../classaudio__tools_1_1_str.html#a1cf49e783acd33e22352e534ee40e765',1,'audio_tools::Str::clear()'],['../classaudio__tools_1_1_audio_effects.html#ae966202c53710981930e661d4f537086',1,'audio_tools::AudioEffects::clear()'],['../classaudio__tools_1_1_http_header.html#a7d2555d1372a463e2f994bfdf67d955e',1,'audio_tools::HttpHeader::clear()']]],
   ['clearmemory_93',['clearMemory',['../classaudio__tools_1_1_filter_effect_base.html#aa0322b2bbee3bffa4e33a12678e5ca0e',1,'audio_tools::FilterEffectBase']]],
   ['clip_94',['clip',['../classaudio__tools_1_1_audio_effect.html#a074cb95034d83ce77744ca8f1d94ccb9',1,'audio_tools::AudioEffect']]],

@@ -10,7 +10,7 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
 endif()
 
 # build sketch as executable
-add_executable (effects effects.cpp)
+add_executable (effects effects.cpp ../main.cpp)
 # use main() from arduino_emulator
 target_compile_definitions(effects PUBLIC -DARDUINO -DEXIT_ON_STOP -DIS_DESKTOP)
 

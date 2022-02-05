@@ -19,7 +19,7 @@ if(NOT fdk_aac_POPULATED)
 endif()
 
 # build sketch as executable
-add_executable (aac-fdk aac-fdk.cpp)
+add_executable (aac-fdk aac-fdk.cpp ../main.cpp)
 
 # use main() from arduino_emulator
 target_compile_definitions(aac-fdk PUBLIC -DARDUINO -DEXIT_ON_STOP -DUSE_FDK -DUSE_PORTAUDIO -DIS_DESKTOP)

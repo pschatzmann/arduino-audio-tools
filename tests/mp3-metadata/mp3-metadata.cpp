@@ -36,8 +36,3 @@ void loop(){
     exit(0);
   }
 }
-
-int main(){
-  setup();
-  while(true) loop();
-}

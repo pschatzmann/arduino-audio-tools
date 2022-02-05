@@ -31,8 +31,3 @@ void loop() {
         Serial.println("512 samples of random data written");
     }
 }
-
-int main(){
-  setup();
-  while(true) loop();
-}

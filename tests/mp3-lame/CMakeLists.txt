@@ -20,10 +20,10 @@ if(NOT arduino_liblame_POPULATED)
 endif()
 
 # build sketch as executable
-add_executable (mp3-lame mp3-lame.cpp)
+add_executable (mp3-lame mp3-lame.cpp ../main.cpp)
 # use main() from arduino_emulator
 target_compile_definitions(mp3-lame PUBLIC -DARDUINO -DEXIT_ON_STOP -DUSE_LAME -DUSE_PORTAUDIO -DIS_DESKTOP)
 
 # specify libraries
-target_link_libraries(mp3-lame arduino_emulator arduino_liblame arduino-audio-tools)
+target_link_libraries(mp3-lame portaudio arduino_emulator arduino_liblame arduino-audio-tools)
 

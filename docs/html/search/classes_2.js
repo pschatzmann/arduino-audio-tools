@@ -3,7 +3,7 @@ var searchData=
   ['cachedvolumecontrol_672',['CachedVolumeControl',['../classaudio__tools_1_1_cached_volume_control.html',1,'audio_tools']]],
   ['callbackbufferedstream_673',['CallbackBufferedStream',['../classaudio__tools_1_1_callback_buffered_stream.html',1,'audio_tools']]],
   ['callbackvolumecontrol_674',['CallbackVolumeControl',['../classaudio__tools_1_1_callback_volume_control.html',1,'audio_tools']]],
-  ['channelconverter_675',['ChannelConverter',['../classaudio__tools_1_1_channel_converter.html',1,'audio_tools']]],
+  ['channelconverter_675',['A2DPChannelConverter',['../classaudio__tools_1_1_channel_converter.html',1,'audio_tools']]],
   ['codecnop_676',['CodecNOP',['../classaudio__tools_1_1_codec_n_o_p.html',1,'audio_tools']]],
   ['convertedstream_677',['ConvertedStream',['../classaudio__tools_1_1_converted_stream.html',1,'audio_tools']]],
   ['converter1channel_678',['Converter1Channel',['../classaudio__tools_1_1_converter1_channel.html',1,'audio_tools']]],

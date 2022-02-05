@@ -12,7 +12,7 @@ endif()
 include(FetchContent)
 
 # build sketch as executable
-add_executable (url-test url-test.cpp)
+add_executable (url-test url-test.cpp ../main.cpp)
 # use main() from arduino_emulator
 target_compile_definitions(url-test PUBLIC -DARDUINO -DEXIT_ON_STOP -DIS_DESKTOP)
 
