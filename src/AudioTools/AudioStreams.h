@@ -56,6 +56,8 @@ class AudioStreamX : public AudioStream {
   virtual size_t write(const uint8_t *buffer, size_t size) { return not_supported(0); }
   virtual size_t write(uint8_t) { return not_supported(0); }
   virtual int available() { return not_supported(0); };
+  virtual int availableForWrite() override { return DEFAULT_BUFFER_SIZE; }
+
   virtual int read() { return not_supported(-1); }
   virtual int peek() { return not_supported(-1); }
   virtual void flush() {}
