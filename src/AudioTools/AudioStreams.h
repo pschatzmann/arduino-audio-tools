@@ -564,15 +564,16 @@ class ConvertedStream : public AudioStreamX {
         virtual int availableForWrite() { return p_stream->availableForWrite(); }
 
         virtual size_t write(const uint8_t *buffer, size_t size) { 
-           p_converter->convert((uint8_t *)buffer, size); 
-           return p_stream->write(buffer, size);
+          size_t result = p_converter->convert((uint8_t *)buffer, size); 
+          size_t result_written = p_stream->write(buffer, result);
+          return size * result_written / result;
         }
 
         size_t readBytes(uint8_t *data, size_t length) override {
            size_t result; p_stream->readBytes(data, length);
-           p_converter->convert(data, result); 
-           return result;
+           return p_converter->convert(data, result); 
         }
+
 
         /// Returns the available bytes in the buffer: to be avoided
         virtual int available() override {
