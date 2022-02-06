@@ -352,8 +352,18 @@ class ConverterToInternalDACFormat : public  BaseConverter<T> {
 template<typename T>
 class ChannelReducer : public BaseConverter<T> {
     public:
+        ChannelReducer() = default;
+
         ChannelReducer(int channelCountOfSource, int channelCountOfTarget=1){
             from_channels = channelCountOfSource;
+            to_channels = channelCountOfTarget;
+        }
+
+        void setSourceChannels(int channelCountOfSource) {
+            from_channels = channelCountOfSource;
+        }
+
+        void setTargetChannels(int channelCountOfTarget) {
             to_channels = channelCountOfTarget;
         }
         
