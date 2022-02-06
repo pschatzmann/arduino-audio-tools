@@ -47,7 +47,7 @@ class MP3DecoderMAD : public AudioDecoder  {
         }
 
         /// Defines the callback which receives the decoded data
-        void setDataCallback(libmad::MP3DataCallback cb){
+        void setAudioDataCallback(libmad::MP3DataCallback cb){
             LOGD(LOG_METHOD);
             mad->setDataCallback(cb);
         }

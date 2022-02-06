@@ -1,4 +1,3 @@
-
 ../examples/examples-basic-api/base-adc-a2dp -> rc=0
 ../examples/examples-basic-api/base-adc-serial -> rc=0
 ../examples/examples-basic-api/base-file_mp3-a2dp -> rc=0
@@ -54,6 +53,7 @@
 ../examples/examples-audiokit/player-url_icy-audiokit -> rc=0
 ../examples/examples-audiokit/streams-audiokit-audiokit -> rc=0
 ../examples/examples-audiokit/streams-audiokit-csv -> rc=0
+../examples/examples-audiokit/streams-audiokit-filter-audiokit -> rc=0
 ../examples/examples-audiokit/streams-audiokit-webserver_aac -> rc=0
 ../examples/examples-audiokit/streams-audiokit-webserver_wav -> rc=0
 ../examples/examples-audiokit/streams-flite-audiokit -> rc=0

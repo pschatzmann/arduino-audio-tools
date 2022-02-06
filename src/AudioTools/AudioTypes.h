@@ -69,7 +69,7 @@ class AudioBaseInfoSource {
  */
 class AudioWriter {
   public: 
-        virtual size_t write(const void *in_ptr, size_t in_size) = 0;
+      virtual size_t write(const void *in_ptr, size_t in_size) = 0;
       virtual operator boolean() = 0;
 };
 
