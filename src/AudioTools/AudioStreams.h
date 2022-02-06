@@ -52,16 +52,16 @@ class AudioStream : public Stream, public AudioBaseInfoDependent {
  */
 class AudioStreamX : public AudioStream {
  public:
-  virtual size_t readBytes(uint8_t *buffer, size_t length) { return not_supported(0); }
-  virtual size_t write(const uint8_t *buffer, size_t size) { return not_supported(0); }
-  virtual size_t write(uint8_t) { return not_supported(0); }
-  virtual int available() { return not_supported(0); };
+  virtual size_t readBytes(uint8_t *buffer, size_t length) override { return not_supported(0); }
+  virtual size_t write(const uint8_t *buffer, size_t size) override{ return not_supported(0); }
+  virtual size_t write(uint8_t) override { return not_supported(0); }
+  virtual int available() override { return not_supported(0); };
   virtual int availableForWrite() override { return DEFAULT_BUFFER_SIZE; }
 
-  virtual int read() { return not_supported(-1); }
-  virtual int peek() { return not_supported(-1); }
-  virtual void flush() {}
-  virtual void setAudioInfo(audio_tools::AudioBaseInfo){}
+  virtual int read() override { return not_supported(-1); }
+  virtual int peek() override { return not_supported(-1); }
+  virtual void flush() override {}
+  virtual void setAudioInfo(audio_tools::AudioBaseInfo) override {}
 };
 
 /**

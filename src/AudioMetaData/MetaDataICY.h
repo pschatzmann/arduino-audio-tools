@@ -41,8 +41,8 @@ class MetaDataICY : public AbstractMetaData {
             callback = fn;
         }
 
-        /// Defines the metadata callback function
-        virtual void setDataCallback(void (*fn)(const uint8_t* str, int len), int bufferLen=1024)  {
+        /// Defines the audio callback function
+        virtual void setAudioDataCallback(void (*fn)(const uint8_t* str, int len), int bufferLen=1024)  {
             dataBuffer = new uint8_t[bufferLen];
             dataCallback = fn;
             dataLen = 0;

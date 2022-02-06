@@ -13,9 +13,8 @@ I2SStream in;
 I2SStream out; 
 
 // copy filtered values
-ConverterNChannels<int16_t> converter(channels);  // Defiles the filter as BaseConverter
-FilteredStream<int16_t, float> inFiltered(in);    // 
-StreamCopy copier(out, inFiltered);               // copies sound into i2s
+FilteredStream<int16_t, float> filtered(in, channels);  // Defiles the filter as BaseConverter
+StreamCopy copier(out, filtered);               // copies sound into i2s
 
 // define FIR filter parameters
 float coef[] = { 0.021, 0.096, 0.146, 0.096, 0.021};
@@ -29,8 +28,8 @@ void setup(void) {
   AudioLogger::instance().begin(Serial, AudioLogger::Info); 
 
   // setup filters for all available channels
-  inFiltered.setFilter(0, new FIR<float>(coef));
-  inFiltered.setFilter(1, new FIR<float>(coef));
+  filtered.setFilter(0, new FIR<float>(coef));
+  filtered.setFilter(1, new FIR<float>(coef));
 
   // start I2S in
   Serial.println("starting I2S...");

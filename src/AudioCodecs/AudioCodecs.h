@@ -2,6 +2,7 @@
 
 #include "AudioCodecs/CodecWAV.h"
 #include "AudioCodecs/CodecNOP.h"
+#include "AudioCodecs/CodecRAW.h"
 
 #if defined(USE_HELIX) || defined(USE_DECODERS)
 #include "AudioCodecs/CodecHelix.h"
