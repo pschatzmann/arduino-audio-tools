@@ -3,7 +3,6 @@
  * @brief Copy audio from I2S to I2S using an FIR filter
  * @author Phil Schatzmann
  * @copyright GPLv3
- * #TODO testing is outstanding
  */
 
 #include "AudioTools.h"
@@ -14,8 +13,8 @@ uint16_t channels = 2;
 AudioKitStream kit;
 
 // copy filtered values
-FilteredStream<int16_t, float> inFiltered(kit, channels);  // Defiles the filter as BaseConverter
-StreamCopy copier(kit, inFiltered);               // copies sound into i2s
+FilteredStream<int16_t, float> filtered(kit, channels);  // Defiles the filter as BaseConverter
+StreamCopy copier(filtered, kit); // copies sound into i2s (both from kit to filtered or filered to kit are supported)
 
 // define FIR filter
 float coef[] = { 0.021, 0.096, 0.146, 0.096, 0.021};
@@ -28,13 +27,14 @@ void setup(void) {
   AudioLogger::instance().begin(Serial, AudioLogger::Info); 
 
   // setup filters for all available channels
-  inFiltered.setFilter(0, new FIR<float>(coef));
-  inFiltered.setFilter(1, new FIR<float>(coef));
+  filtered.setFilter(0, new FIR<float>(coef));
+  filtered.setFilter(1, new FIR<float>(coef));
 
   // start I2S in
   Serial.println("starting KIT...");
-  auto config = kit.defaultConfig(RX_TX_MODE);
+  auto config = kit.defaultConfig(RXTX_MODE);
   config.sample_rate = sample_rate; 
+  config.channels = channels;
   config.sd_active = false;
   config.input_device = AUDIO_HAL_ADC_INPUT_LINE2;
   kit.begin(config);
