@@ -159,7 +159,12 @@ class AudioActions {
     if (a->activeLogic == ActiveTouch) {
       int value = touchRead(a->pin);
       result = value <= touchLimit;
-      //LOGD("touch pin: %d value %d -> %s", a->pin, value, result ? "true":"false");
+      if (result){
+        // retry to confirm reading
+        value = touchRead(a->pin);
+        result = value <= touchLimit;
+        LOGI("touch pin: %d value %d (limit: %d) -> %s", a->pin, value, touchLimit, result ? "true":"false");
+      }
     } else {
       result = digitalRead(a->pin);
     }
