@@ -176,13 +176,13 @@ class StreamCopyT {
         }
 
         /// copies all data
-        void copyAll(int delay=5){
+        void copyAll(int delayMs=5){
             LOGD(LOG_METHOD);
             if (from==nullptr || to == nullptr) 
                 return;
 
             while(copy()){
-                delay(delay);
+                delay(delayMs);
             }
         }
 
