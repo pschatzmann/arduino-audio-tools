@@ -404,7 +404,7 @@ class ConverterNChannels : public BaseConverter<T> {
     int count = size / channels;
     T *sample = (T *)src;
     for (size_t j = 0; j < count; j++) {
-      for (int channel = 0; j < channels; j++) {
+      for (int channel = 0; channel < channels; channel++) {
         if (filters[channel]!=nullptr){
           *sample = filters[channel]->process(*sample);
         }
