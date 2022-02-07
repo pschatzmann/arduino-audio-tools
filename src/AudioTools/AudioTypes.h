@@ -58,7 +58,7 @@ class AudioBaseInfoDependent {
  */
 class AudioBaseInfoSource {
     public:
-      virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi) = 0;
+      virtual void  setNotifyAudioChange(AudioBaseInfoDependent &bi) = 0;
 };
 
 

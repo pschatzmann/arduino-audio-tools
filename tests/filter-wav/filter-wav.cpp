@@ -5,7 +5,21 @@
 #include "SdFat.h"
 
 // define FIR filter
-float coef[] = { 0.021, 0.096, 0.146, 0.096, 0.021};
+float coef[] = { 
+-0.018296746249137946,
+-0.056723974384224739,
+0.018540799820324621,
+0.097644454515593698,
+-0.018688161556077588,
+-0.297627121039396536,
+0.550301497785836702,
+-0.297627121039396536,
+-0.018688161556077588,
+0.097644454515593698,
+0.018540799820324621,
+-0.056723974384224739,
+-0.018296746249137946
+};
 // 
 uint16_t sample_rate=44100;
 uint8_t channels = 2;                                             // The stream will have 2 channels 
@@ -15,7 +29,7 @@ FilteredStream<int16_t, float> in_filtered(in_stream, channels);  // Defiles the
 SdFat sd;
 SdFile file;
 EncodedAudioStream out(&file, new WAVEncoder());                  // encode as wav file
-StreamCopy copier(out, in_stream);                                // copies sound to out
+StreamCopy copier(out, in_filtered);                                // copies sound to out
 
 void setup(){
   Serial.begin(115200);
