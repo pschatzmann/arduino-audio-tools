@@ -605,7 +605,7 @@ class FilteredStream : public AudioStreamX {
         }
 
         size_t readBytes(uint8_t *data, size_t length) override {
-           size_t result; p_stream->readBytes(data, length);
+           size_t result = p_stream->readBytes(data, length);
            p_converter->convert(data, result); 
            return result;
         }

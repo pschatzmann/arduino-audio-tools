@@ -18,9 +18,9 @@ namespace audio_tools {
  */
 class AudioPrint : public Print {
     public:
-        virtual size_t write(const uint8_t *buffer, size_t size) = 0;
+        virtual size_t write(const uint8_t *buffer, size_t size) override = 0;
 
-        virtual size_t write(uint8_t ch) {
+        virtual size_t write(uint8_t ch) override {
             tmp[tmpPos++] = ch;
             if (tmpPos>MAX_SINGLE_CHARS){
                 flush();
@@ -222,6 +222,7 @@ class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource {
          */
         EncodedAudioStream(Print &outputStream, AudioDecoder &decoder) {
             LOGD(LOG_METHOD);
+            ptr_out = &outputStream;
             decoder_ptr = &decoder;
             decoder_ptr->setOutputStream(outputStream);
             writer_ptr = decoder_ptr;
@@ -237,6 +238,7 @@ class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource {
          */
         EncodedAudioStream(Print *outputStream, AudioDecoder *decoder) {
             LOGD(LOG_METHOD);
+            ptr_out = outputStream;
             decoder_ptr = decoder;
             decoder_ptr->setOutputStream(*outputStream);
             writer_ptr = decoder_ptr;
@@ -251,6 +253,7 @@ class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource {
          */
         EncodedAudioStream(Print &outputStream, AudioEncoder &encoder) {
             LOGD(LOG_METHOD);
+            ptr_out = &outputStream;
             encoder_ptr = &encoder;
             encoder_ptr->setOutputStream(outputStream);
             writer_ptr = encoder_ptr;
@@ -265,6 +268,7 @@ class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource {
          */
         EncodedAudioStream(Print *outputStream, AudioEncoder *encoder) {
             LOGD(LOG_METHOD);
+            ptr_out = outputStream;
             encoder_ptr = encoder;
             encoder_ptr->setOutputStream(*outputStream);
             writer_ptr = encoder_ptr;
@@ -276,7 +280,7 @@ class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource {
          * 
          */
         EncodedAudioStream(){
-             LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             active = false;
         }
 
@@ -291,7 +295,7 @@ class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource {
         }
 
         /// Define object which need to be notified if the basinfo is changing
-        void setNotifyAudioChange(AudioBaseInfoDependent &bi) {
+        void setNotifyAudioChange(AudioBaseInfoDependent &bi) override {
              LOGD(LOG_METHOD);
             decoder_ptr->setNotifyAudioChange(bi);
         }
@@ -299,7 +303,8 @@ class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource {
 
         /// Starts the processing - sets the status to active
         void begin(Print *outputStream, AudioEncoder *encoder) {
-             LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
+            ptr_out = outputStream;
             encoder_ptr = encoder;
             encoder_ptr->setOutputStream(*outputStream);
             writer_ptr = encoder_ptr;
@@ -309,6 +314,7 @@ class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource {
         /// Starts the processing - sets the status to active
         void begin(Print *outputStream, AudioDecoder *decoder) {
              LOGD(LOG_METHOD);
+            ptr_out = outputStream;
             decoder_ptr = decoder;
             decoder_ptr->setOutputStream(*outputStream);
             writer_ptr = decoder_ptr;
@@ -350,7 +356,7 @@ class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource {
         }
         
         /// encode the data
-        virtual size_t write(const uint8_t *data, size_t len){
+        virtual size_t write(const uint8_t *data, size_t len) override {
             LOGD("%s: %zu", LOG_METHOD, len);
             if(len==0) {
                 return 0;
@@ -365,6 +371,10 @@ class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource {
             size_t result = writer_ptr->write(data, len);
             CHECK_MEMORY();
             return result;
+        }
+
+        int availableForWrite() override {
+            return ptr_out->availableForWrite();
         }
         
 
@@ -388,8 +398,8 @@ class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource {
         AudioDecoder *decoder_ptr = CodecNOP::instance();  // decoder
         AudioEncoder *encoder_ptr = CodecNOP::instance();  // decoder
         AudioWriter *writer_ptr = nullptr ;
+        Print *ptr_out=nullptr;
 
-        Stream *input_ptr; // data source for encoded data
         uint8_t *write_buffer = nullptr;
         int write_buffer_pos = 0;
         const int write_buffer_size = 256;
