@@ -11,7 +11,8 @@ endif()
 
 
 # build sketch as executable
-add_executable (filter-wav filter-wav.cpp ../main.cpp)
+add_executable (filter-wav filter-wav.cpp ../main.cpp )
+target_include_directories(filter-wav PRIVATE "${arduino_emulator_SOURCE_DIR}/ArduinoCore-Linux/libraries/SdFat" )
 
 # set preprocessor defines
 target_compile_definitions(filter-wav PUBLIC -DEXIT_ON_STOP -DIS_DESKTOP)
