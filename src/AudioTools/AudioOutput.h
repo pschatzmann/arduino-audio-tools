@@ -221,7 +221,7 @@ class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource {
          * @param decoder 
          */
         EncodedAudioStream(Print &outputStream, AudioDecoder &decoder) {
-             LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             decoder_ptr = &decoder;
             decoder_ptr->setOutputStream(outputStream);
             writer_ptr = decoder_ptr;
@@ -236,7 +236,7 @@ class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource {
          * @param decoder 
          */
         EncodedAudioStream(Print *outputStream, AudioDecoder *decoder) {
-             LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             decoder_ptr = decoder;
             decoder_ptr->setOutputStream(*outputStream);
             writer_ptr = decoder_ptr;
@@ -250,7 +250,7 @@ class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource {
          * @param encoder 
          */
         EncodedAudioStream(Print &outputStream, AudioEncoder &encoder) {
-             LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             encoder_ptr = &encoder;
             encoder_ptr->setOutputStream(outputStream);
             writer_ptr = encoder_ptr;
@@ -264,7 +264,7 @@ class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource {
          * @param encoder 
          */
         EncodedAudioStream(Print *outputStream, AudioEncoder *encoder) {
-             LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             encoder_ptr = encoder;
             encoder_ptr->setOutputStream(*outputStream);
             writer_ptr = encoder_ptr;
@@ -317,7 +317,7 @@ class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource {
 
         /// Starts the processing - sets the status to active
         void begin() {
-             LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             const CodecNOP *nop =  CodecNOP::instance();
             if (decoder_ptr != nop || encoder_ptr != nop){
                 decoder_ptr->begin();
@@ -328,6 +328,19 @@ class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource {
             }
         }
 
+        /// Starts the processing - sets the status to active
+        void begin(AudioBaseInfo info) {
+            LOGD(LOG_METHOD);
+            const CodecNOP *nop =  CodecNOP::instance();
+            if (decoder_ptr != nop || encoder_ptr != nop){
+                decoder_ptr->begin();
+                encoder_ptr->setAudioInfo(info);
+                encoder_ptr->begin();
+                active = true;
+            } else {
+                LOGW("no decoder or encoder defined");
+            }
+        }
         /// Ends the processing
         void end() {
              LOGD(LOG_METHOD);
