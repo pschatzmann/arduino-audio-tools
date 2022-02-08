@@ -13,7 +13,7 @@ class Filter {
   // construct without coefs
   Filter() = default;
   virtual ~Filter() = default;
-  virtual float process(float in) = 0;
+  virtual T process(T in) = 0;
 };
 
 /**
@@ -27,7 +27,7 @@ class NoFilter : Filter<T> {
  public:
   // construct without coefs
   NoFilter() = default;
-  virtual float process(float in){return in;}
+  virtual T process(T in){return in;}
 };
 
 /**
