@@ -128,15 +128,19 @@ public:
     /// Determines the frequency of the indicate note and octave (0-8)
     int frequency(MusicalNotesEnum note, uint8_t octave){
         if (note>11) return 0;
-        if (octave>7) return 0;
+        if (octave>8) return 0;
         return notes[octave][note];
     }
 
     /// Determines the frequency of the indicate note index from 0 to 107
     int frequency(uint16_t idx){
         MusicalNotesEnum mainNote = (MusicalNotesEnum) (idx % 12);
-        uint8_t level = idx / 12;
-        return frequency(mainNote, level);
+        uint8_t octave = idx / 12;
+        return frequency(mainNote, octave);
+    }
+
+    int frequencyCount() {
+        return 108;
     }
     
     /// Determines the frequency of the indicate main note index (0-6)  and octave (0-8)
