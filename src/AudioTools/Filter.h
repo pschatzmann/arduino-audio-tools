@@ -45,7 +45,7 @@ class FIR : public Filter<T> {
     FIR(const T (&b)[B], const T factor=1.0) : lenB(B), factor(factor) {
       x = new T[lenB]();
       coeff_b = new T[2*lenB-1];
-      for (uint8_t i = 0; i < 2*lenB-1; i++) {
+      for (uint16_t i = 0; i < 2*lenB-1; i++) {
         coeff_b[i] = b[(2*lenB - 1 - i)%lenB];
       } 
     }
@@ -92,10 +92,10 @@ class IIR : public Filter<T> {
     coeff_a = new T[2 * lenA - 1];
     T a0 = _a[0];
     const T *a = &_a[1];
-    for (uint8_t i = 0; i < 2 * lenB - 1; i++) {
+    for (uint16_t i = 0; i < 2 * lenB - 1; i++) {
       coeff_b[i] = b[(2 * lenB - 1 - i) % lenB] / a0;
     }
-    for (uint8_t i = 0; i < 2 * lenA - 1; i++) {
+    for (uint16_t i = 0; i < 2 * lenA - 1; i++) {
       coeff_a[i] = a[(2 * lenA - 2 - i) % lenA] / a0;
     }
   }
