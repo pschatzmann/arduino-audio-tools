@@ -42,7 +42,7 @@ template <typename T>
 class FIR : public Filter<T> {
   public:
     template  <size_t B>
-    FIR(const T (&b)[B]) : lenB(B) {
+    FIR(const T (&b)[B], const T factor=1.0) : lenB(B), factor(factor) {
       x = new T[lenB]();
       coeff_b = new T[2*lenB-1];
       for (uint8_t i = 0; i < 2*lenB-1; i++) {
@@ -58,7 +58,7 @@ class FIR : public Filter<T> {
       T b_terms = 0;
       T *b_shift = &coeff_b[lenB - i_b - 1];
       for (uint8_t i = 0; i < lenB; i++) {
-        b_terms += x[i] * b_shift[i];
+        b_terms += b_shift[i] * x[i] / factor; 
       }
       i_b++;
       if(i_b == lenB)
@@ -70,6 +70,7 @@ class FIR : public Filter<T> {
     uint8_t i_b = 0;
     T *x;
     T *coeff_b;
+    T factor;
 };
 
 
@@ -84,7 +85,7 @@ template <typename T>
 class IIR : public Filter<T> {
  public:
   template <size_t B, size_t A>
-  IIR(const T (&b)[B], const T (&_a)[A]) : lenB(B), lenA(A - 1) {
+  IIR(const T (&b)[B], const T (&_a)[A], T factor=1.0) : factor(factor), lenB(B), lenA(A - 1) {
     x = new T[lenB]();
     y = new T[lenA]();
     coeff_b = new T[2 * lenB - 1];
@@ -111,12 +112,12 @@ class IIR : public Filter<T> {
     T b_terms = 0;
     T *b_shift = &coeff_b[lenB - i_b - 1];
     for (uint8_t i = 0; i < lenB; i++) {
-      b_terms += x[i] * b_shift[i];
+      b_terms += x[i] * b_shift[i] / factor;
     }
     T a_terms = 0;
     T *a_shift = &coeff_a[lenA - i_a - 1];
     for (uint8_t i = 0; i < lenA; i++) {
-      a_terms += y[i] * a_shift[i];
+      a_terms += y[i] * a_shift[i] / factor;
     }
     T filtered = b_terms - a_terms;
     y[i_a] = filtered;
@@ -128,6 +129,7 @@ class IIR : public Filter<T> {
   }
 
  private:
+  T factor;
   const uint8_t lenB, lenA;
   uint8_t i_b = 0, i_a = 0;
   T *x;
@@ -139,12 +141,13 @@ class IIR : public Filter<T> {
 /**
  * @brief Biquad DF1 Filter. 
  * converted from https://github.com/tttapa/Filters/blob/master/src/BiQuad.h
+ * Use float or double (and not a integer type) as type parameter
  * @author Pieter P tttapa  / pschatzmann
  * @copyright GNU General Public License v3.0
  * @tparam T 
  */
 template <typename T>
-class BiQuadDF1 : public Filter<T> {
+class BiQuadDF1 : public Filter<float> {
  public:
   BiQuadDF1(const T (&b)[3], const T (&a)[3])
       : b_0(b[0] / a[0]),
@@ -196,6 +199,7 @@ class BiQuadDF1 : public Filter<T> {
  * @brief Biquad DF2 Filter. When dealing with high-order IIR filters, they can get unstable.
  * To prevent this, BiQuadratic filters (second order) are used.
  * Converted from https://github.com/tttapa/Filters/blob/master/src/BiQuad.h
+ * Use float or double (and not a integer type) as type parameter
  * @author Pieter P tttapa  / pschatzmann
  * @copyright GNU General Public License v3.0
  * @tparam T 
@@ -246,6 +250,7 @@ class BiQuadDF2 : public Filter<T> {
 /**
  * Second Order Filter: Instead of manually cascading BiQuad filters, you can use a Second Order Sections filter (SOS).
  * converted from https://github.com/tttapa/Filters/blob/master/src/SOSFilter.h
+ * Use float or double (and not a integer type) as type parameter
  * @author Pieter P tttapa  / pschatzmann
  * @copyright GNU General Public License v3.0
  */
