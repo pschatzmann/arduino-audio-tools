@@ -66,7 +66,7 @@ class FIR : public Filter<T> {
         i_b = 0;
 
       if (!(std::is_same<T, float>::value || std::is_same<T, double>::value)) {
-        b_terms = b_terms / factor);
+        b_terms = b_terms / factor;
       }
 
       return b_terms;
@@ -133,10 +133,10 @@ class IIR : public Filter<T> {
     i_b++;
     if (i_b == lenB) i_b = 0;
     i_a++;
-    if (i_a == lenA) i_a = 0
+    if (i_a == lenA) i_a = 0;
 
     if (!(std::is_same<T, float>::value || std::is_same<T, double>::value)) {
-      filtered = filtered / factor);
+      filtered = filtered / factor;
     }
     return filtered;
   }
