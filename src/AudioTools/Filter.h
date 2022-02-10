@@ -58,18 +58,17 @@ class FIR : public Filter<T> {
       x[i_b] = value;
       T b_terms = 0;
       T *b_shift = &coeff_b[lenB - i_b - 1];
-      if (std::is_same<T, float>::value || std::is_same<T, double>::value) {
-        for (uint8_t i = 0; i < lenB; i++) {
-          b_terms += b_shift[i] * x[i] ; 
-        }
-      } else {
-        for (uint8_t i = 0; i < lenB; i++) {
-          b_terms += b_shift[i] * x[i] / factor; 
-        }
+      for (uint8_t i = 0; i < lenB; i++) {
+        b_terms += b_shift[i] * x[i] ; 
       }
       i_b++;
       if(i_b == lenB)
         i_b = 0;
+
+      if (!(std::is_same<T, float>::value || std::is_same<T, double>::value)) {
+        b_terms = b_terms / factor);
+      }
+
       return b_terms;
     }
   private:
@@ -122,20 +121,11 @@ class IIR : public Filter<T> {
     T a_terms = 0;
     T *a_shift = &coeff_a[lenA - i_a - 1];
 
-    if (std::is_same<T, float>::value || std::is_same<T, double>::value) {
-      for (uint8_t i = 0; i < lenB; i++) {
-        b_terms += x[i] * b_shift[i];
-      }
-      for (uint8_t i = 0; i < lenA; i++) {
-        a_terms += y[i] * a_shift[i];
-      }
-    } else {
-      for (uint8_t i = 0; i < lenB; i++) {
-        b_terms += x[i] * b_shift[i] / factor;
-      }
-      for (uint8_t i = 0; i < lenA; i++) {
-        a_terms += y[i] * a_shift[i] / factor;
-      }
+    for (uint8_t i = 0; i < lenB; i++) {
+      b_terms += x[i] * b_shift[i];
+    }
+    for (uint8_t i = 0; i < lenA; i++) {
+      a_terms += y[i] * a_shift[i];
     }
 
     T filtered = b_terms - a_terms;
@@ -143,7 +133,11 @@ class IIR : public Filter<T> {
     i_b++;
     if (i_b == lenB) i_b = 0;
     i_a++;
-    if (i_a == lenA) i_a = 0;
+    if (i_a == lenA) i_a = 0
+
+    if (!(std::is_same<T, float>::value || std::is_same<T, double>::value)) {
+      filtered = filtered / factor);
+    }
     return filtered;
   }
 
