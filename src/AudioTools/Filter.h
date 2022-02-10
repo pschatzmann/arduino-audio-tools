@@ -1,5 +1,6 @@
 #pragma once
 #include "AudioTools/Converter.h"
+#include <type_traits>
 
 namespace audio_tools {
 
@@ -57,8 +58,14 @@ class FIR : public Filter<T> {
       x[i_b] = value;
       T b_terms = 0;
       T *b_shift = &coeff_b[lenB - i_b - 1];
-      for (uint8_t i = 0; i < lenB; i++) {
-        b_terms += b_shift[i] * x[i] / factor; 
+      if (std::is_same<T, float>::value || std::is_same<T, double>::value) {
+        for (uint8_t i = 0; i < lenB; i++) {
+          b_terms += b_shift[i] * x[i] ; 
+        }
+      } else {
+        for (uint8_t i = 0; i < lenB; i++) {
+          b_terms += b_shift[i] * x[i] / factor; 
+        }
       }
       i_b++;
       if(i_b == lenB)
@@ -111,14 +118,26 @@ class IIR : public Filter<T> {
     x[i_b] = value;
     T b_terms = 0;
     T *b_shift = &coeff_b[lenB - i_b - 1];
-    for (uint8_t i = 0; i < lenB; i++) {
-      b_terms += x[i] * b_shift[i] / factor;
-    }
+
     T a_terms = 0;
     T *a_shift = &coeff_a[lenA - i_a - 1];
-    for (uint8_t i = 0; i < lenA; i++) {
-      a_terms += y[i] * a_shift[i] / factor;
+
+    if (std::is_same<T, float>::value || std::is_same<T, double>::value) {
+      for (uint8_t i = 0; i < lenB; i++) {
+        b_terms += x[i] * b_shift[i];
+      }
+      for (uint8_t i = 0; i < lenA; i++) {
+        a_terms += y[i] * a_shift[i];
+      }
+    } else {
+      for (uint8_t i = 0; i < lenB; i++) {
+        b_terms += x[i] * b_shift[i] / factor;
+      }
+      for (uint8_t i = 0; i < lenA; i++) {
+        a_terms += y[i] * a_shift[i] / factor;
+      }
     }
+
     T filtered = b_terms - a_terms;
     y[i_a] = filtered;
     i_b++;
