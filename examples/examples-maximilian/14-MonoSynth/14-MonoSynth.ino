@@ -1,6 +1,7 @@
 //This shows how to use maximilian to build a monophonic synth
 
-#include "MaximilianDSP.h"
+#include "AudioTools.h"
+#include "AudioLibs/MaximilianDSP.h"
 
 // Define Arduino output
 I2SStream out;
@@ -28,7 +29,7 @@ void setup() {//some inits
     // setup audio output
     auto cfg = out.defaultConfig(TX_MODE);
     out.begin(cfg);
-    maxiSettings::setup(cfg.sample_rate, cfg.channels, 512);
+    maximilian.begin(cfg);
 
     // setup maximilian   
     
@@ -73,5 +74,5 @@ void play(double *output) {
 
 // Arduino loop
 void loop() {
-    maximilian.loop();
+    maximilian.copy();
 }
