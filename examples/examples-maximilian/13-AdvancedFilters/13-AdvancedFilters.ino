@@ -1,7 +1,8 @@
 //Using BPF equation from http://www.musicdsp.org/files/Audio-EQ-Cookbook.txt
 //Example contributed by Rebecca Fiebrink
 
-#include "MaximilianDSP.h"
+#include "AudioTools.h"
+#include "AudioLibs/MaximilianDSP.h"
 
 // Define Arduino output
 I2SStream out;
@@ -23,7 +24,7 @@ void setup() {//some inits
     // setup audio output
     auto cfg = out.defaultConfig(TX_MODE);
     out.begin(cfg);
-    maxiSettings::setup(cfg.sample_rate, cfg.channels, 512);
+    maximilian.begin(cfg);
 
     // setup maximilian   
     double w0 = 2*PI*f0/44100;
@@ -66,5 +67,5 @@ void play(double *output) {
 
 // Arduino loop
 void loop() {
-    maximilian.loop();
+    maximilian.copy();
 }

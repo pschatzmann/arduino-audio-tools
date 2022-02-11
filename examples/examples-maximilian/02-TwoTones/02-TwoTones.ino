@@ -1,6 +1,7 @@
 //This examples shows another fundamental building block of digital audio - adding two sine waves together. When you add waves together they create a new wave whose amplitude at any time is computed by adding the current amplitudes of each wave together. So, if one wave has an amplitude of 1, and the other has an amplitude of 1, the new wave will be equal to 2 at that point in time. Whereas, later, if one wave has an amplitude of -1, and the other has an amplitude of 1, the new wave - the one you hear - will equal 0. This can create some interesting effects, including 'beating', when the waves interact to create a single wave that fades up and down based on the frequencies of the two interacting waves. The frequency of the 'beating' i.e. the fading in and out, is equal to the difference in frequency between the two waves.
 
-#include "MaximilianDSP.h"
+#include "AudioTools.h"
+#include "AudioLibs/MaximilianDSP.h"
 
 // Define output
 I2SStream out;
@@ -16,7 +17,7 @@ void setup() {//some inits
   // setup Aduio output
   auto cfg = out.defaultConfig(TX_MODE);
   out.begin(cfg);
-  maxiSettings::setup(cfg.sample_rate, cfg.channels, 512);
+  maximilian.begin(cfg);
 }
 
 void play(double *output) {//this is where the magic happens. Very slow magic.
@@ -28,5 +29,5 @@ void play(double *output) {//this is where the magic happens. Very slow magic.
 
 // Arduino loop
 void loop() {
-    maximilian.loop();
+    maximilian.copy();
 }
