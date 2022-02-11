@@ -120,6 +120,7 @@ Dependent on the example you might need to install some of the following librari
 - [TTS](https://github.com/pschatzmann/TTS) A Text to Speach Engine
 - [flite](https://github.com/pschatzmann/arduino-flite) A Text to Speach Engine
 - [arduino-stk](https://github.com/pschatzmann/Arduino-STK) Synthesis ToolKit in C++ (STK) 
+- [Maximilian](https://github.com/pschatzmann/Maximilian) cross-platform and multi-target audio synthesis and signal processing library
 - [Mozzi](https://github.com/pschatzmann/Mozzi) A sound synthesis library for Arduino
 - [ESP8266Audio](https://github.com/earlephilhower/ESP8266Audio) to play different audio Formats
 
