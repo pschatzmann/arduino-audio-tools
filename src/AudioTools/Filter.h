@@ -160,7 +160,7 @@ class IIR : public Filter<T> {
  * @tparam T 
  */
 template <typename T>
-class BiQuadDF1 : public Filter<float> {
+class BiQuadDF1 : public Filter<T> {
  public:
   BiQuadDF1(const T (&b)[3], const T (&a)[3])
       : b_0(b[0] / a[0]),

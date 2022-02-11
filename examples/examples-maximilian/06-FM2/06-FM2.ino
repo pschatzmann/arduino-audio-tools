@@ -1,0 +1,31 @@
+// Nothing much to say about this other than I like it.
+
+#include "MaximilianDSP.h"
+
+// Define Arduino output
+I2SStream out;
+Maximilian maximilian(out);
+// Maximilian 
+maxiOsc mySine,myOtherSine,myLastSine,myPhasor;//Three oscillators
+
+
+void setup() {//some inits
+  // setup logging
+  Serial.begin(115200);
+  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+
+  // setup Aduio output
+  auto cfg = out.defaultConfig(TX_MODE);
+  out.begin(cfg);
+  maxiSettings::setup(cfg.sample_rate, cfg.channels, 512);
+}
+
+void play(double *output) {
+    output[0]=mySine.sinewave(myOtherSine.sinewave(myLastSine.sinewave(0.1)*30)*440);//awesome bassline
+    output[1]=output[0];
+}
+
+// Arduino loop
+void loop() {
+    maximilian.loop();
+}
