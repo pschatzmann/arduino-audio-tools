@@ -33,7 +33,9 @@ void setup() {
 
   // setup output
   auto cfg = i2s.defaultConfig();
-  cfg.pin_data = 23;
+  cfg.pin_bck = 26;
+  cfg.pin_ws = 25;
+  cfg.pin_data = 22;
   cfg.sample_rate = a2dp_sink.sample_rate()*2;
   cfg.channels = 2;
   cfg.bits_per_sample = 16;
