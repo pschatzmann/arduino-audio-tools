@@ -1,6 +1,7 @@
 #pragma once
 #include "AudioConfig.h"
 #include "maximilian.h"
+#include "libs/maxiClock.h"
 
 // Maximilian play function - return an array of 2 channels
 void play(double *channels);//run dac! 
@@ -26,6 +27,7 @@ class Maximilian {
 
         /// Setup Maximilian with audio parameters
         void begin(AudioBaseInfo cfg){
+            this->cfg = cfg;
             maxiSettings::setup(cfg.sample_rate, cfg.channels, DEFAULT_BUFFER_SIZE);
         }
 
@@ -43,14 +45,15 @@ class Maximilian {
         /// Copies the audio data from maximilian to the audio sink, Call this method from the Arduino Loop. 
         void copy() {
             // fill buffer with data
-            double out[2];
+            double out[cfg.channels];
             uint16_t samples = buffer_size / sizeof(uint16_t);
             int16_t *p_samples = (int16_t *)p_buffer;
-            for (uint16_t j=0;j<samples;j+=2){
+            for (uint16_t j=0;j<samples;j+=cfg.channels){
                 play(out);
-                // convert to int16
-                p_samples[j] = out[0]*32767*volume;
-                p_samples[j+1] = out[1]*32767*volume;
+                // convert all channels to int16
+                for (int ch=0;ch<cfg.channels;ch++){
+                    p_samples[j+ch] = out[ch]*32767*volume;
+                }
             }
             // write buffer to audio sink
             unsigned int result = p_sink->write(p_buffer, buffer_size);
@@ -62,6 +65,7 @@ class Maximilian {
         float volume=1.0;
         int buffer_size=256;
         Print *p_sink=nullptr;
+        AudioBaseInfo cfg;
 };
 
 

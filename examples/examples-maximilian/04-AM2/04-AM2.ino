@@ -31,7 +31,7 @@ void play(double *output) {
     //The frequency of the second new wave is the difference of the two original waves.
     //So you hear two new waves, one going up, one going down.
     
-    output[0]=mySine.sinewave(440)*myOtherSine.sinewave(myPhasor.phasor(0.01,0,440));
+    output[0]=mySine.sinewave(440)*myOtherSine.sinewave(myPhasor.phasorBetween(0.01,0,440));
     output[1]=output[0];
    
 }
