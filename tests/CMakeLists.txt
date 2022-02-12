@@ -28,6 +28,7 @@ if(NOT arduino_emulator_POPULATED)
     add_subdirectory(${arduino_emulator_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/emulator)
 endif()
 
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/resample ${CMAKE_CURRENT_BINARY_DIR}/resample)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/generator ${CMAKE_CURRENT_BINARY_DIR}/generator)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/effects ${CMAKE_CURRENT_BINARY_DIR}/effects)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/filter ${CMAKE_CURRENT_BINARY_DIR}/filter)

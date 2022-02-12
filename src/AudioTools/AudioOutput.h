@@ -63,7 +63,7 @@ class CsvStream : public AudioPrint, public AudioBaseInfoDependent {
         }
 
         /// Constructor
-        CsvStream(Print &out, int channels, int buffer_size=DEFAULT_BUFFER_SIZE, bool active=true) {
+        CsvStream(Print &out, int channels=2, int buffer_size=DEFAULT_BUFFER_SIZE, bool active=true) {
             this->channels = channels;
             this->out_ptr = &out;
             this->active = active;
@@ -73,7 +73,6 @@ class CsvStream : public AudioPrint, public AudioBaseInfoDependent {
         void begin(){
              LOGD(LOG_METHOD);
             this->active = true;
-            this->channels = 2;
         }
 
         /// Provides the default configuration
@@ -135,7 +134,7 @@ class CsvStream : public AudioPrint, public AudioBaseInfoDependent {
     protected:
         T *data_ptr;
         Print *out_ptr = &Serial;
-        int channels = 1;
+        int channels = 2;
         bool active = false;
 
 };
