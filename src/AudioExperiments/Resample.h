@@ -66,23 +66,26 @@ class Resample : public AudioStreamX {
             if (length%channels!=0){
                 length = length / channels * channels;
             }
-            size_t bytes = 0;
-            int size = length / channels / sizeof(T);
+            size_t byte_count = 0;
             if (factor>1){
                 int read_len = length/factor;
-                allocateBuffer(read_len);
+                int sample_count = read_len / sizeof(T);
+                allocateBuffer(sample_count);
                 read_len = p_in->readBytes((uint8_t*)buffer, read_len);
-                bytes = upsample(buffer,(T*)src, read_len, channels, factor) * sizeof(T);
+                sample_count = read_len / sizeof(T);
+                byte_count = upsample(buffer,(T*)src, sample_count, channels, factor) * sizeof(T);
             } else if (factor<1){
                 int abs_factor = abs(factor);
-                int read_len = length*factor;
-                allocateBuffer(read_len);
+                int read_len = length * abs_factor;
+                int sample_count = read_len / sizeof(T);
+                allocateBuffer(sample_count);
                 read_len = p_in->readBytes((uint8_t*)buffer, read_len);
-                bytes = downsample(buffer,(T*)src, read_len, channels, abs_factor) * sizeof(T);
+                sample_count = read_len / sizeof(T);
+                byte_count = downsample(buffer,(T*)src, sample_count, channels, abs_factor) * sizeof(T);
             } else {
-                bytes = p_in->readBytes(src, length);
+                byte_count = p_in->readBytes(src, length);
             }
-            return bytes;
+            return byte_count;
         }
    
 
@@ -95,6 +98,7 @@ class Resample : public AudioStreamX {
         int factor = 1;
         int buffer_size = 0;
 
+        // allocates a buffer; len is specified in samples
         void allocateBuffer(int len) {
             if (len>buffer_size){
                 if (buffer!=nullptr) delete []buffer;
@@ -112,6 +116,7 @@ class Resample : public AudioStreamX {
                 LOGE("Incompatible buffer length for down sampling. If must be a factor of %d", factor);
                 return 0;
             }
+            int to_pos=0;
             int frame_count = sample_count / channels;
             size_t result = 0;
             for (int16_t j=0; j<frame_count; j+=factor){
@@ -122,7 +127,8 @@ class Resample : public AudioStreamX {
                     for (int16_t f=0; f<factor; f++){
                         total[ch] += *p_data(j+f, ch, from); 
                     }
-                    *p_data(j/factor, ch, to) = total[ch] / factor;
+                    to_pos = j/factor;
+                    *p_data(to_pos, ch, to) = total[ch] / factor;
                     result++;
                 }
             }
@@ -145,7 +151,8 @@ class Resample : public AudioStreamX {
                     result++;
                     for (int16_t f=1;f<factor;f++){
                         pos = ((frame_pos+1)*factor)+f; 
-                        *p_data(pos, ch, to) = actual_data + (diff*f); 
+                        T tmp = actual_data + (diff*f);
+                        *p_data(pos, ch, to) = tmp; 
                         result++;
                     }
                 }
