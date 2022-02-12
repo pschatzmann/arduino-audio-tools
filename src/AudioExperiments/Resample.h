@@ -40,23 +40,27 @@ class Resample : public AudioStreamX {
                 return 0;
             }
             size_t bytes = 0;
+            size_t result = 0;
             int sample_count = byte_count / sizeof(T);
             if (factor>1){
                 allocateBuffer(sample_count*factor);
                 bytes = upsample((T*)src, buffer, sample_count, channels, factor) * sizeof(T);
-                p_out->write((uint8_t*)buffer, bytes);
+                result = p_out->write((uint8_t*)buffer, bytes) / factor;
             } else if (factor<1){
-                allocateBuffer(sample_count/abs(factor));
-                bytes = downsample((T*)src, buffer , sample_count, channels, abs(factor)) * sizeof(T);
-                p_out->write((uint8_t*)buffer, bytes);
+                int abs_factor = abs(factor);
+                allocateBuffer(sample_count/abs_factor);
+                bytes = downsample((T*)src, buffer , sample_count, channels, abs_factor) * sizeof(T);
+                result = p_out->write((uint8_t*)buffer, bytes) * abs_factor;
             } else {
-                bytes = p_out->write(src, byte_count);
+                result = p_out->write(src, byte_count);
             }
-            return bytes;
+            return result;
         }
 
+        /// Determines the available bytes from the final source stream 
         int available() override { return p_in!=nullptr ? p_in->available() : 0; }
 
+        /// Reads the up/downsampled bytes
         size_t readBytes(uint8_t *src, size_t length) override { 
             if (p_in==nullptr) return 0;
             if (length%channels!=0){
@@ -95,30 +99,37 @@ class Resample : public AudioStreamX {
             if (len>buffer_size){
                 if (buffer!=nullptr) delete []buffer;
                 buffer = new T[len];
+                buffer_size = len;
             }
             if (last_end==nullptr){
                 last_end = new T[channels];
             }
         }
 
-        size_t downsample(T *from,T *to, int size, int channels, int factor ){
-            if (size%factor!=0){
+        // reduces the sampes by the indicated factor. 
+        size_t downsample(T *from,T *to, int sample_count, int channels, int factor ){
+            if (sample_count%factor!=0){
                 LOGE("Incompatible buffer length for down sampling. If must be a factor of %d", factor);
                 return 0;
             }
-            for (int16_t j=0; j<size-factor; j+=channels){
+            int frame_count = sample_count / channels;
+            size_t result = 0;
+            for (int16_t j=0; j<frame_count; j+=factor){
                 long total[channels];
                 for (int8_t ch=0; ch<channels; ch++){
-                    for (int16_t f=0;f<factor;f++){
-                        total[j+ch] += from[j+ch+(f*channels)];
+                    total[ch]=0;
+                    int pos = j+ch;
+                    for (int16_t f=0; f<factor; f++){
+                        total[ch] += *p_data(j+f, ch, from); 
                     }
-                    to[j+ch] = total[j+ch] / factor;
+                    *p_data(j/factor, ch, to) = total[ch] / factor;
+                    result++;
                 }
             }
-            return size/factor;
+            return result;
         }
 
-        /// We interpolate the missing samples
+        /// Increases the samples by the indicated factor: We interpolate the missing samples
         size_t upsample(T *from, T* to, int sample_count, int channels, int factor ){
             int frame_count = sample_count/channels;
             size_t result = 0;
