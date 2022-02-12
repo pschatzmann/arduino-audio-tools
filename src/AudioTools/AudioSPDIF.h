@@ -23,12 +23,6 @@
 #include "AudioI2S/I2SConfig.h"
 #include "AudioI2S/I2SStream.h"
 
-// Set USE_ESP32_I2S to 1 if you want to use the explicit ESP32 implementation.
-// 0 for generic implementation
-#ifndef USE_ESP32_I2S
-#define USE_ESP32_I2S 0
-#endif
-
 // Default Data Pin
 #ifndef SPDIF_DATA_PIN
 #define SPDIF_DATA_PIN 23
