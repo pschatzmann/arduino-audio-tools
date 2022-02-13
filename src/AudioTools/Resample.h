@@ -300,7 +300,8 @@ struct ResampleConfig : public AudioBaseInfo {
 };
 
 /**
- * @brief Stream class which can be used to resample between different sample rates.
+ * @brief Flexible Stream class which can be used to resample audio data between
+ * different sample rates.
  * @author Phil Schatzmann
  * @copyright GPLv3
  * @tparam T data type of audio data
@@ -308,16 +309,36 @@ struct ResampleConfig : public AudioBaseInfo {
 template<typename T>
 class ResampleStream : public AudioStreamX, AudioBaseInfoDependent {
     public:
+        /**
+         * @brief Construct a new Resample Stream object which supports resampling
+         * on it's write operations
+         * 
+         * @param out 
+         * @param precision 
+         */
         ResampleStream(Print &out, ResamplePrecision precision = Medium){
             this->precision = precision;
             up.setOut(down); // we upsample first
             down.setOut(out); // so that we can downsample to the requested rate
         }
 
+        /**
+         * @brief Construct a new Resample Stream object which supports resampling
+         * both on read and write.
+         * 
+         * @param out 
+         * @param precision 
+         */
         ResampleStream(Stream &in, ResamplePrecision precision = Medium){
             this->precision = precision;
             up.seIn(down); // we upsample first
             down.setIn(in); // so that we can downsample to the requested rate
+        }
+
+        /// Returns an empty configuration object
+        ResampleConfig defaultConfig() {
+            ResampleConfig cfg;
+            return cfg;
         }
 
         // Recalculates the up and downsamplers
@@ -348,23 +369,19 @@ class ResampleStream : public AudioStreamX, AudioBaseInfoDependent {
             return begin();
         }
 
-        /// Handle Change of audio rate or channels 
+        /// Defines the channels and sample rates from the AudioBaseInfo. Please call setFromInfo() or setFromSampleRate() before
+        bool begin(ResampleConfig info){
+            channels = info.channels;
+            from_rate = info.sample_rate_from;
+            to_rate = info.sample_rate;
+            return begin();
+        }
+
+        /// Handle Change of the source sampling rate - and channels!
         void setAudioInfo(AudioBaseInfo info) override {
             from_rate = info.sample_rate;
             channels = info.channels;
             begin();
-        }
-
-        /// Returns an empty configuration object
-        ResampleConfig defaultConfig() {
-            ResampleConfig cfg;
-            return cfg;
-        }
-
-        /// Defines the channels and sample rates from the AudioBaseInfo. Please call setFromInfo() or setFromSampleRate() before
-        void begin(ResampleConfig info){
-            from_rate = info.sample_rate_from;
-            setAudioInfo(info);
         }
 
         /// Determines the number of bytes which are available for write 
