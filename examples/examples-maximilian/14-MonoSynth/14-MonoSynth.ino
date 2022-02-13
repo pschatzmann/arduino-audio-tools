@@ -10,7 +10,7 @@ Maximilian maximilian(out);
 //These are the synthesiser bits
 maxiOsc VCO1,VCO2,LFO1,LFO2;
 maxiFilter VCF;
-maxiEnv ADSR;
+maxiEnv V_ADSR;
 
 //This is a bunch of control signals so that we can hear something
 maxiOsc timer;//this is the metronome
@@ -33,10 +33,10 @@ void setup() {//some inits
 
     // setup maximilian   
     
-    ADSR.setAttack(1000);
-    ADSR.setDecay(1);
-    ADSR.setSustain(1);
-    ADSR.setRelease(1000);
+    V_ADSR.setAttack(1000);
+    V_ADSR.setDecay(1);
+    V_ADSR.setSustain(1);
+    V_ADSR.setRelease(1000);
 }
 
 void play(double *output) {
@@ -47,7 +47,7 @@ void play(double *output) {
     
     
     if (lastCount!=currentCount) {//if we have a new timer int this sample, play the sound
-        ADSR.trigger=1;
+        V_ADSR.trigger=1;
         
         cout << "tick\n";//the clock ticks
         
@@ -56,7 +56,7 @@ void play(double *output) {
     
     //and this is where we build the synth
     
-    ADSRout=ADSR.adsr(1.0,ADSR.trigger);
+    ADSRout=V_ADSR.adsr(1.0,V_ADSR.trigger);
     
     LFO1out=LFO1.sinebuf(0.2);//this lfo is a sinewave at 0.2 hz
     
@@ -64,10 +64,10 @@ void play(double *output) {
     VCO2out=VCO2.pulse(110+LFO1out,0.2);//here's VCO2. it's a pulse wave at 110hz with LFO modulation on the frequency, and width of 0.2
     
     
-    VCFout=VCF.lores((VCO1out+VCO2out)*0.5, ADSRout*10000, 10);//now we stick the VCO's into the VCF, using the ADSR as the filter cutoff
+    VCFout=VCF.lores((VCO1out+VCO2out)*0.5, ADSRout*10000, 10);//now we stick the VCO's into the VCF, using the V_ADSR as the filter cutoff
     
-    double finalSound=VCFout*ADSRout;//finally we add the ADSR as an amplitude modulator
-    ADSR.trigger=0;
+    double finalSound=VCFout*ADSRout;//finally we add the V_ADSR as an amplitude modulator
+    V_ADSR.trigger=0;
     output[0]=finalSound;
     output[1]=finalSound;
 }

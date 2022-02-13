@@ -24,7 +24,7 @@ void setup() {
     maximilian.begin(cfg);
 
     // setup maximilian       
-    myFFT.setup(1024, 512, 256);
+    myFFT.setup(512, 512, 256);
     
 }
 

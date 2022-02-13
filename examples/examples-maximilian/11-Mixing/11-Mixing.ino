@@ -7,7 +7,7 @@ Maximilian maximilian(out);
 
 // Maximilian
 maxiOsc myOsc,myAutoPanner;//
-double myStereoOutput[2];
+vector<double> myStereoOutput(2,0);
 maxiMix myOutputs;//this is the stereo mixer channel.
 
 void setup() {//some inits
