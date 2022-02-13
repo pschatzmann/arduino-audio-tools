@@ -1,17 +1,26 @@
 #pragma once
 
 #include "AudioTools/AudioStreams.h"
+
+namespace audio_tools {
+
 /**
- * @brief A simple implementation which changes the sample rate by the indicated factor. 
+ * @brief A simple implementation which changes the sample rate by the indicated integer factor. 
  * To downlample we calculate the avarage of n (=factor) samples. To upsample we interpolate
  * the missing samples. If the indicated factor is positive we upsample if it is negative
  * we downsample.
- * 
- * @tparam T 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ * @tparam T data type of audio data
  */
 template<typename T>
 class Resample : public AudioStreamX {
     public:
+        /**
+         * @brief Construct a new Resample object
+         * call setOut and begin to setup the required parameters
+         */
+        Resample() = default;
         /**
          * @brief Construct a new Converter Resample object
          * 
@@ -19,14 +28,31 @@ class Resample : public AudioStreamX {
          * @param factor use a negative value to downsample
          */
         Resample(Print &out, int channels=2, int factor=2 ){
+            setOut(out);
+            begin(channels, factor);
+        }
+        /**
+         * @brief Construct a new Resample object
+         * 
+         * @param in 
+         * @param channels 
+         * @param factor 
+         */
+        Resample(Stream &in, int channels=2, int factor=2 ){
+            setIn(in);
+            begin(channels, factor);
+        }
+
+        void begin(int channels=2, int factor=2) {
             this->channels = channels;
             this->factor = factor;
+        }
+
+        void setOut(Print &out){
             this->p_out = &out;
         }
 
-        Resample(Stream &in, int channels=2, int factor=2 ){
-            this->channels = channels;
-            this->factor = factor;
+        void setIn(Stream &in){
             this->p_out = &in;
             this->p_in = &in;
         }
@@ -88,7 +114,6 @@ class Resample : public AudioStreamX {
             return byte_count;
         }
    
-
     protected:
         Print *p_out=nullptr;
         Stream *p_in=nullptr;
@@ -170,5 +195,152 @@ class Resample : public AudioStreamX {
         T* p_data(int frame_pos, int channel, T*start){
             return frame_pos>=0 ? start+(frame_pos*channels)+channel : last_end+channel;
         }
+};
+
+enum ResamplePrecision { Low, Medium, High, VeryHigh};
+
+/**
+ * @brief Class to determine a combination of upsample and downsample rates to achieve any ratio
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class ResampleParameterEstimator {
+    public:
+
+        ResampleParameterEstimator() = default;
+
+        ResampleParameterEstimator(int fromRate, int toRate, ResamplePrecision precision = Medium){
+            begin(fromRate, toRate, precision);
+        }
+
+        void begin(int fromRate, int toRate, ResamplePrecision precision = Medium){
+            this->from_rate = fromRate;
+            this->to_rate = toRate;
+            this->precision = precision;
+            // update result values
+            calculate();
+        }
+
+        /// prposed factor for upsampling
+        int factor() {
+            return fact;
+        }
+
+        /// propose divisor for downsampling
+        int divisor() {
+            return div;
+        }
+
+        /// original sample rate
+        int fromRate(){
+            return from_rate;
+        }
+
+        /// target sample rate
+        int toRate(){
+            return to_rate;
+        }
+
+        /// effective target sample rate by upsampling and then downsampling at different factors
+        float toRateEffective() {
+            return to_rate_eff;
+        }
+
+        /// same as factor
+        int upsample() {
+            return factor();
+        }
+
+        /// same as division but provides negative number to indicate that we need to downsample
+        int downsample() {
+            return - divisor();
+        }
+
+        /// Determines a supported downsampling write size
+        size_t supportedSize(size_t len){
+            return (len / div) * div;
+        }
+
+    protected:
+        int fact=0, div=0;
+        int from_rate=0, to_rate=0;
+        float diff=10000000.0;
+        float to_rate_eff=0;
+        int div_array[28] = {1, 2, 3, 5, 7, 10, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 100};
+        int limits[4] = {6, 12, 18, 27 }; 
+        int precision=1;
+
+        // find the parameters with the lowest difference
+        void calculate() {
+            int limit_max = limits[precision];
+            for (int j=0;j<limit_max;j++){
+                int tmp_div = div_array[j];
+                int tmp_fact = rintf(static_cast<float>(to_rate) * tmp_div / from_rate);
+                float tmp_diff = static_cast<float>(to_rate) - (static_cast<float>(from_rate) * tmp_fact / tmp_div);
+                LOGD("div: %d, fact %d -> diff: %f", tmp_div,tmp_fact,tmp_diff);
+                if (abs(tmp_diff)<abs(diff)){
+                    fact = tmp_fact;
+                    div = tmp_div;
+                    diff = tmp_diff;
+                    if (diff==0.0){
+                        break; 
+                    }
+                }
+            }
+            to_rate_eff = static_cast<float>(from_rate)  * fact / div;
+            LOGI("div: %d, fact %d -> rate: %d, rate_eff: %f", div,fact,to_rate, to_rate_eff);
+        }
+};
+
+/**
+ * @brief Stream class which can be used to resample between different sample rates.
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ * @tparam T data type of audio data
+ */
+template<typename T>
+class ResampleStream : public AudioStreamX {
+    public:
+        ResampleStream(Print &out, ResamplePrecision precision = Medium){
+            this->precision = precision;
+            up.setOut(down); // we upsample first
+            down.setOut(out); // so that we can downsample to the requested rate
+        }
+
+        ResampleStream(Stream &in, ResamplePrecision precision = Medium){
+            this->precision = precision;
+            up.seIn(down); // we upsample first
+            down.setIn(in); // so that we can downsample to the requested rate
+        }
+
+        /// Defines the channels and sample rates
+        void begin(int channels, int fromRate, int toRate){
+            calc.begin(fromRate, toRate, precision);
+            up.begin(channels, calc.upsample());
+            down.begin(channels, calc.downsample());
+        }
+
+        /// Determines the number of bytes which are available for write 
+        int availableForWrite() override { return up.availableForWrite(); }
+
+        /// Writes the data up or downsampled to the final destination
+        size_t write(const uint8_t *src, size_t byte_count) override {
+            return up.write(src, byte_count);
+        }
+        /// Determines the available bytes from the final source stream 
+        int available() override { up.available(); }
+
+        /// Reads the up/downsampled bytes
+        size_t readBytes(uint8_t *src, size_t byte_count) override { 
+            return up.readBytes(src, byte_count);
+        }
+
+    protected:
+        ResampleParameterEstimator calc;
+        Resample<T> up;
+        Resample<T> down;
+        ResamplePrecision precision;
 
 };
+
+} // namespace

@@ -12,7 +12,7 @@ NoiseGenerator<int16_t> noise(32000);                             // subclass of
 GeneratedSoundStream<int16_t> in_stream(noise);                   // Stream generated from sine wave
 FilteredStream<int16_t, float> in_filtered(in_stream, channels);  // Defiles the filter as BaseConverter
 PortAudioStream out;                                              // Output to Desktop
-StreamCopy copier(out, in_stream);                              // copies sound to out
+StreamCopy copier(out, in_stream, 1012);                              // copies sound to out
 
 
 void setup(){
