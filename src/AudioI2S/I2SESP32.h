@@ -114,7 +114,7 @@ class I2SBase {
             .bits_per_sample = (i2s_bits_per_sample_t) cfg.bits_per_sample,
             .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,
             .communication_format = toCommFormat(cfg.i2s_format),
-            .intr_alloc_flags = ESP_INTR_FLAG_LEVEL1, // default interrupt priority
+            .intr_alloc_flags = 0, // default interrupt priority
             .dma_buf_count = I2S_BUFFER_COUNT,
             .dma_buf_len = I2S_BUFFER_SIZE,
             .use_apll = (bool) cfg.use_apll,
