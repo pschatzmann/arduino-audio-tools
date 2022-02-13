@@ -59,7 +59,7 @@
 #endif
 
 #ifdef USE_EXPERIMENTS
-#include "AudioExperiments/AudioExperiments.h"
+#include "Experiments/Experiments.h"
 #endif
 
 /**
