@@ -42,7 +42,7 @@ void play(double *output) {
     //notice that we feed in a value of 1. to create an envelope shape we can apply later.
     myCurrentVolume=myEnvelope.adsr(1.,myEnvelope.trigger);
     
-    CurrentCount=myCounter.phasor(1, 1, 9);//phasor can take three arguments; frequency, start value and end value.
+    CurrentCount=myCounter.phasorBetween(1, 1, 9);//phasor can take three arguments; frequency, start value and end value.
     
     // You'll notice that these 'if' statements don't require curly braces "{}".
     // This is because there is only one outcome if the statement is true.
