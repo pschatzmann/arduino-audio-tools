@@ -11,7 +11,7 @@ Maximilian maximilian(out);
 //These are the synthesiser bits
 maxiOsc VCO1[6],VCO2[6],LFO1[6],LFO2[6];
 maxiFilter VCF[6];
-maxiEnv ADSR[6];
+maxiEnv V_ADSR[6];
 
 //This is a bunch of control signals so that we can hear something
 maxiOsc timer;//this is the metronome
@@ -33,10 +33,10 @@ void setup() {//some inits
 
     // setup maximilian       
     for (int i=0;i<6;i++) {
-        ADSR[i].setAttack(0);
-        ADSR[i].setDecay(200);
-        ADSR[i].setSustain(0.2);
-        ADSR[i].setRelease(2000);
+        V_ADSR[i].setAttack(0);
+        V_ADSR[i].setDecay(200);
+        V_ADSR[i].setSustain(0.2);
+        V_ADSR[i].setRelease(2000);
     }
 }
 
@@ -54,7 +54,7 @@ void play(double *output) {
             voice=0;
         }
         
-        ADSR[voice].trigger=1;//trigger the envelope from the start
+        V_ADSR[voice].trigger=1;//trigger the envelope from the start
         pitch[voice]=voice+1;
         voice++;
         
@@ -65,7 +65,7 @@ void play(double *output) {
     for (int i=0; i<6; i++) {
         
         
-        ADSRout[i]=ADSR[i].adsr(1.,ADSR[i].trigger);//our ADSR env is passed a constant signal of 1 to generate the transient.
+        ADSRout[i]=V_ADSR[i].adsr(1.,V_ADSR[i].trigger);//our V_ADSR env is passed a constant signal of 1 to generate the transient.
         
         LFO1out[i]=LFO1[i].sinebuf(0.2);//this lfo is a sinewave at 0.2 hz
         
@@ -73,9 +73,9 @@ void play(double *output) {
         VCO2out[i]=VCO2[i].pulse((110*pitch[i])+LFO1out[i],0.2);//here's VCO2. it's a pulse wave at 110hz with LFO modulation on the frequency, and width of 0.2
         
         
-        VCFout[i]=VCF[i].lores((VCO1out[i]+VCO2out[i])*0.5, 250+((pitch[i]+LFO1out[i])*1000), 10);//now we stick the VCO's into the VCF, using the ADSR as the filter cutoff
+        VCFout[i]=VCF[i].lores((VCO1out[i]+VCO2out[i])*0.5, 250+((pitch[i]+LFO1out[i])*1000), 10);//now we stick the VCO's into the VCF, using the V_ADSR as the filter cutoff
         
-        mix+=VCFout[i]*ADSRout[i]/6;//finally we add the ADSR as an amplitude modulator
+        mix+=VCFout[i]*ADSRout[i]/6;//finally we add the V_ADSR as an amplitude modulator
         
         
     }
@@ -86,7 +86,7 @@ void play(double *output) {
     
     // This just sends note-off messages.
     for (int i=0; i<6; i++) {
-        ADSR[i].trigger=0;
+        V_ADSR[i].trigger=0;
     }
     
 }

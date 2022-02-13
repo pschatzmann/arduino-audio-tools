@@ -12,7 +12,7 @@ Maximilian maximilian(out);
 maxiOsc sound,bass,timer,mod,lead,lead2,leadmod;//here are the synth bits
 maxiEnv envelope, leadenvelope;//some envelopes
 maxiFilter filter, filter2;//some filters
-maxiDelayline delay;//a delay
+maxiDelayline delay_value;//a delay_value
 convert mtof;//a method for converting midi notes to frequency
 double bassout,leadout, delayout;//some variables to hold the data and pass it around
 int trigger, trigger2, newnote;//some control variables
@@ -65,7 +65,7 @@ void play(double *output) {//this is where the magic happens. Very slow magic.
     bassout=filter2.lores(envelope.adsr(bass.saw(currentPitch*0.5)+sound.pulse(currentPitch*0.5,mod.phasor(1)),1,0.9995, 0.25, 0.9995, 1, trigger),9250,2);//new, simple ADSR.
     leadout=filter.lores(leadenvelope.ar(lead2.saw(leadPitch*4)+lead.pulse(leadPitch+(leadmod.sinebuf(1.9)*1.5), 0.6), 0.00005, 0.999975, 50000, trigger2),5900,10);//leadline
     
-    delayout=(leadout+(delay.dl(leadout, 14000, 0.8)*0.5))/2;//add some delay
+    delayout=(leadout+(delay_value.dl(leadout, 14000, 0.8)*0.5))/2;//add some delay_value
     
     if(trigger!=0)trigger=0;//set the trigger to off if you want it to trigger immediately next time.
     
