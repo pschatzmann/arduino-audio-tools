@@ -9,7 +9,6 @@
 #define USE_A2DP
 #include "AudioConfigLocal.h"
 #include "AudioTools.h"
-#include "AudioExperiments/Resample.h"
 
 BluetoothA2DPSink a2dp_sink;
 I2SStream i2s;
