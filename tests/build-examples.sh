@@ -28,6 +28,7 @@ function compile_example {
   done
 }
 
+compile_example "esp32:esp32:esp32" "../examples/examples-maximilian/*"
 compile_example "esp32:esp32:esp32" "../examples/examples-basic-api/base*"
 compile_example "esp32:esp32:esp32" "../examples/examples-player/player*"
 compile_example "esp32:esp32:esp32" "../examples/examples-webserver/str*"

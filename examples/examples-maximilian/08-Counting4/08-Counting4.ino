@@ -24,7 +24,7 @@ void setup() {//some inits
 
 void play(double *output) {
     
-    CurrentCount=myCounter.phasor(1*((another.sawn(0.1)+1)/2), 1, 9);//phasor can take three arguments; frequency, start value and end value.
+    CurrentCount=myCounter.phasorBetween(1*((another.sawn(0.1)+1)/2), 1, 9);//phasor can take three arguments; frequency, start value and end value.
     
     if (CurrentCount<5) {//simple if statement
         

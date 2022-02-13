@@ -37,7 +37,7 @@ void play(double *output) {
     // Once every second, CurrentCount counts from 1 until it gets to 9, then resets itself.
     // When it reaches 9 it resets, so the values you get are 1-8.
     
-    CurrentCount=myCounter.phasor(1.0, 1.0, 9.0);//phasor can take three arguments; frequency, start value and end value.
+    CurrentCount=myCounter.phasorBetween(1.0, 1.0, 9.0);//phasor can take three arguments; frequency, start value and end value.
     
     // If we multiply the output of CurrentCount by 100, we get 100,200,300,400,500,600,700,800 in that order.
     // These become the frequency of the oscillator.

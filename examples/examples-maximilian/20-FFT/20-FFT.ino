@@ -31,7 +31,7 @@ void setup() {
 void play(double *output) {
     
     
-    float myOut=mySine.sinewave(myPhasor.phasor(0.2,100,5000));
+    float myOut=mySine.sinewave(myPhasor.phasorBetween(0.2,100,5000));
     //output[0] is the left output. output[1] is the right output
     
     if (myFFT.process(myOut)) {
