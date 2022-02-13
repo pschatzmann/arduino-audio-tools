@@ -291,6 +291,13 @@ class ResampleParameterEstimator {
             LOGI("div: %d, fact %d -> rate: %d, rate_eff: %f", div,fact,to_rate, to_rate_eff);
         }
 };
+/**
+ * @brief Configuration for ResampleStream
+ * 
+ */
+struct ResampleConfig : public AudioBaseInfo {
+    int sample_rate_from=0;
+};
 
 /**
  * @brief Stream class which can be used to resample between different sample rates.
@@ -299,7 +306,7 @@ class ResampleParameterEstimator {
  * @tparam T data type of audio data
  */
 template<typename T>
-class ResampleStream : public AudioStreamX {
+class ResampleStream : public AudioStreamX, AudioBaseInfoDependent {
     public:
         ResampleStream(Print &out, ResamplePrecision precision = Medium){
             this->precision = precision;
@@ -313,11 +320,51 @@ class ResampleStream : public AudioStreamX {
             down.setIn(in); // so that we can downsample to the requested rate
         }
 
-        /// Defines the channels and sample rates
-        void begin(int channels, int fromRate, int toRate){
-            calc.begin(fromRate, toRate, precision);
+        // Recalculates the up and downsamplers
+        bool begin() {
+            if (channels==0){
+                LOGE("channels are not defined")
+                return false;
+            }
+            if (from_rate==0){
+                LOGE("from_rate is not defined")
+                return false;
+            }
+            if (to_rate==0){
+                LOGE("to_rate is not defined")
+                return false;
+            }
+            calc.begin(from_rate, to_rate, precision);
             up.begin(channels, calc.upsample());
             down.begin(channels, calc.downsample());
+            return true;
+        }
+
+        /// Defines the channels and sample rates
+        bool begin(int channels, int fromRate, int toRate){
+            this->channels = channels;
+            this->from_rate = fromRate;
+            this->to_rate = toRate;
+            return begin();
+        }
+
+        /// Handle Change of audio rate or channels 
+        void setAudioInfo(AudioBaseInfo info) override {
+            from_rate = info.sample_rate;
+            channels = info.channels;
+            begin();
+        }
+
+        /// Returns an empty configuration object
+        ResampleConfig defaultConfig() {
+            ResampleConfig cfg;
+            return cfg;
+        }
+
+        /// Defines the channels and sample rates from the AudioBaseInfo. Please call setFromInfo() or setFromSampleRate() before
+        void begin(ResampleConfig info){
+            from_rate = info.sample_rate_from;
+            setAudioInfo(info);
         }
 
         /// Determines the number of bytes which are available for write 
@@ -336,6 +383,7 @@ class ResampleStream : public AudioStreamX {
         }
 
     protected:
+        int channels, from_rate, to_rate;
         ResampleParameterEstimator calc;
         Resample<T> up;
         Resample<T> down;
