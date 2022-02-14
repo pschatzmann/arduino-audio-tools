@@ -53,7 +53,6 @@ class I2SConfig : public AudioBaseInfo {
             pin_data_rx = PIN_I2S_DATA_IN;
             break;
         }
-        pin_data = rx_tx_mode == TX_MODE ? PIN_I2S_DATA_OUT : PIN_I2S_DATA_IN;
     }
 
     /// public settings
