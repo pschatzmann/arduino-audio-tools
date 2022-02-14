@@ -40,7 +40,19 @@ class I2SConfig : public AudioBaseInfo {
         channels = DEFAULT_CHANNELS;
         sample_rate = DEFAULT_SAMPLE_RATE; 
         bits_per_sample = DEFAULT_BITS_PER_SAMPLE;
-        this->rx_tx_mode = mode;
+        rx_tx_mode = mode;
+        switch(mode){
+          case RX_MODE:
+            pin_data = PIN_I2S_DATA_IN;
+            break;
+          case TX_MODE:
+            pin_data = PIN_I2S_DATA_OUT;
+            break;
+          default: 
+            pin_data = PIN_I2S_DATA_OUT;
+            pin_data_rx = PIN_I2S_DATA_IN;
+            break;
+        }
         pin_data = rx_tx_mode == TX_MODE ? PIN_I2S_DATA_OUT : PIN_I2S_DATA_IN;
     }
 
@@ -50,7 +62,8 @@ class I2SConfig : public AudioBaseInfo {
     int port_no = 0;  // processor dependent port
     int pin_ws = PIN_I2S_WS;
     int pin_bck = PIN_I2S_BCK;
-    int pin_data = PIN_I2S_DATA_OUT;
+    int pin_data; // rx or tx pin dependent on mode: tx pin for RXTX_MODE
+    int pin_data_rx; // rx pin for RXTX_MODE
     I2SFormat i2s_format = I2S_STD_FORMAT;
 
 #ifdef ESP32
@@ -80,6 +93,9 @@ class I2SConfig : public AudioBaseInfo {
       LOGI("pin_bck: %d", pin_bck);
       LOGI("pin_ws: %d", pin_ws);
       LOGI("pin_data: %d", pin_data);
+      if (rx_tx_mode==RXTX_MODE){
+        LOGI("pin_data_rx: %d", pin_data_rx);
+      }
     }
 
 };

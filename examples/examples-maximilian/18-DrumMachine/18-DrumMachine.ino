@@ -1,7 +1,14 @@
-#include "maximilian.h"
+#include "AudioTools.h"
+#include "AudioLibs/MaximilianDSP.h"
+#include <FS.h>
+#include <SD_MMC.h>
 
+// Arduino output
+I2SStream out;
+Maximilian maximilian(out);
+
+// Maximilian def
 maxiSample kick,snare; //we've got two sampleplayers
-
 maxiOsc timer; //and a timer
 
 int currentCount,lastCount,playHead,hit[16]={1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1}; //This is the sequence for the kick
@@ -12,11 +19,24 @@ int kicktrigger,snaretrigger;
 double sampleOut;
 
 void setup() {//some inits
+    // setup logging
+    Serial.begin(115200);
+    AudioLogger::instance().begin(Serial, AudioLogger::Info);
+
+    // setup audio output
+    auto cfg = out.defaultConfig(TX_MODE);
+    out.begin(cfg);
+    maximilian.begin(cfg);
+
+    // setup SD to allow file operations
+    if(!SD_MMC.begin()){
+        Serial.println("Card Mount Failed");
+        return;
+    }
 	
-    //YOU HAVE TO PROVIDE THE SAMPLES....
-    
-	kick.load("/Users/yourusername/somewhere/kick.wav");//load in your samples. Provide the full path to a wav file.
-	snare.load("/Users/yourusername/somewhere/snare.wav");//load in your samples. Provide the full path to a wav file.
+    //YOU HAVE TO PROVIDE THE SAMPLES....    
+	kick.load("/sdcard/Maximilian/kick.wav");//load in your samples. Provide the full path to a wav file.
+    snare.load("/sdcard/Maximilian/snare.wav");
 	
 	
 	printf("Summary:\n%s", kick.getSummary());//get info on samples if you like.
