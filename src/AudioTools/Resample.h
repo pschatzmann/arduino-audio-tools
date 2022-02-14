@@ -392,7 +392,7 @@ class ResampleStream : public AudioStreamX, AudioBaseInfoDependent {
             return up.write(src, byte_count);
         }
         /// Determines the available bytes from the final source stream 
-        int available() override { up.available(); }
+        int available() override { return up.available(); }
 
         /// Reads the up/downsampled bytes
         size_t readBytes(uint8_t *src, size_t byte_count) override { 
