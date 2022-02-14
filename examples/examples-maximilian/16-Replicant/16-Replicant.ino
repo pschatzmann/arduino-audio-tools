@@ -1,4 +1,6 @@
 
+// WARNNG: This sketch is too big to fit on an ESP32 !
+
 //Bizarelly, this sounds a little bit like Kraftwerk's 'Metropolis', although it isn't. Funny that.
 
 #include "AudioTools.h"

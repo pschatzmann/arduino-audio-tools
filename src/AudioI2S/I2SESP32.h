@@ -38,6 +38,18 @@ class I2SBase {
     /// starts the DAC 
     void begin(I2SConfig cfg) {
       LOGD(LOG_METHOD);
+      switch(cfg.rx_tx_mode){
+        case TX_MODE:
+          begin(cfg, cfg.pin_data, I2S_PIN_NO_CHANGE);
+          break;
+        case RX_MODE:
+          begin(cfg, cfg.pin_data, I2S_PIN_NO_CHANGE);
+          break;
+        default:
+          begin(cfg, cfg.pin_data, cfg.pin_data_rx);
+          break;
+
+      }
       int txPin = cfg.rx_tx_mode == TX_MODE ? cfg.pin_data : I2S_PIN_NO_CHANGE;
       int rxPin = cfg.rx_tx_mode == RX_MODE ? cfg.pin_data : I2S_PIN_NO_CHANGE;
       begin(cfg, txPin, rxPin);
@@ -88,7 +100,6 @@ class I2SBase {
       }
       return result;
     }
-
 
   protected:
     I2SConfig cfg;
@@ -272,8 +283,21 @@ class I2SBase {
       i2s_mode_t mode;
       if (cfg.is_digital){
         int i2s_format = cfg.is_master ? I2S_MODE_MASTER : I2S_MODE_SLAVE;
-        int rx_tx = cfg.rx_tx_mode == TX_MODE ? I2S_MODE_TX : I2S_MODE_RX;
-        mode = (i2s_mode_t) (i2s_format | rx_tx);
+        int i2s_rx_tx = 0;
+        switch(cfg.rx_tx_mode){
+          case TX_MODE:
+            i2s_rx_tx = I2S_MODE_TX;
+            break;
+          case RX_MODE:
+            i2s_rx_tx = I2S_MODE_RX;
+            break;
+          case RXTX_MODE:
+            i2s_rx_tx = I2S_MODE_RX | I2S_MODE_TX;
+            break;
+          default:
+            LOGE("Undefined rx_tx_mode: %d", cfg.rx_tx_mode);
+        }
+        mode = (i2s_mode_t) (i2s_format | i2s_rx_tx);
       } else {
         mode = (i2s_mode_t) (cfg.rx_tx_mode ? I2S_MODE_DAC_BUILT_IN : I2S_MODE_ADC_BUILT_IN);
       }
