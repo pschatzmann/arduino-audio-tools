@@ -23,7 +23,7 @@ void setup() {//some inits
   maximilian.begin(cfg);
 }
 
-void play(double *output) {
+void play(float *output) {
     
     //Using the phasor we can create a ramp, and use this ramp to set the frequency of one of the waves.
     //When the frequency of the lower waveform passes over the threshold of 20hz, we start to hear two new waveforms.

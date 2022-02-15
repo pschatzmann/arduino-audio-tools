@@ -27,7 +27,7 @@ void setup() {
     freq=20; // Here we initialise the variable
 }
 
-void play(double *output) {
+void play(float *output) {
     
     myClock.ticker(); // This makes the clock object count at the current samplerate
     

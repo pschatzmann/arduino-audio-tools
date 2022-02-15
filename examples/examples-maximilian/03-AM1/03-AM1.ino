@@ -20,7 +20,7 @@ void setup() {//some inits
   maximilian.begin(cfg);
 }
 
-void play(double *output) {
+void play(float *output) {
     
     // This form of amplitude modulation is straightforward multiplication of two waveforms.
     // Notice that the maths is different to when you add waves.

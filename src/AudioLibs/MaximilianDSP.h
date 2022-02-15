@@ -4,7 +4,7 @@
 #include "libs/maxiClock.h"
 
 // Maximilian play function - return an array of 2 channels
-void play(double *channels);//run dac! 
+void play(maxi_float_t *channels);//run dac! 
 
 namespace audio_tools {
 
@@ -45,7 +45,7 @@ class Maximilian {
         /// Copies the audio data from maximilian to the audio sink, Call this method from the Arduino Loop. 
         void copy() {
             // fill buffer with data
-            double out[cfg.channels];
+            maxi_float_t out[cfg.channels];
             uint16_t samples = buffer_size / sizeof(uint16_t);
             int16_t *p_samples = (int16_t *)p_buffer;
             for (uint16_t j=0;j<samples;j+=cfg.channels){

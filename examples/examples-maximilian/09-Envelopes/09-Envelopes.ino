@@ -37,7 +37,7 @@ void setup() {//some inits
     
 }
 
-void play(double *output) {
+void play(float *output) {
     
     //notice that we feed in a value of 1. to create an envelope shape we can apply later.
     myCurrentVolume=myEnvelope.adsr(1.,myEnvelope.trigger);
