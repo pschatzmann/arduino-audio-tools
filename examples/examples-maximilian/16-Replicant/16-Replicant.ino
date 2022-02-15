@@ -41,7 +41,7 @@ void setup() {//some inits
     
 }
 
-void play(double *output) {//this is where the magic happens. Very slow magic.
+void play(float *output) {//this is where the magic happens. Very slow magic.
     
     currentCount=(int)timer.phasor(9);//this sets up a metronome that ticks every so often
     

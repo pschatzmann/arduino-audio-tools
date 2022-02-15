@@ -39,7 +39,7 @@ void setup() {//some inits
     V_ADSR.setRelease(1000);
 }
 
-void play(double *output) {
+void play(float *output) {
     
     //so this first bit is just a basic metronome so we can hear what we're doing.
     

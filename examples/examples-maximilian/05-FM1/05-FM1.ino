@@ -27,7 +27,7 @@ void setup() {//some inits
   maximilian.begin(cfg);
 }
 
-void play(double *output) {
+void play(float *output) {
     
     // In this example, the 'myOtherSine.sinewave' is at an amplitude of 1, it's original amplitude.
     // This is pretty simple and not too useful.

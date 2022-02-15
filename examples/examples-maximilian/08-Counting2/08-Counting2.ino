@@ -28,7 +28,7 @@ void setup() {//some inits
     maximilian.begin(cfg);
 }
 
-void play(double *output) {
+void play(float *output) {
     
     // Here you can see that CurrentCount is an int. It's taking the continuous output of the phasor and convering it.
     // You don't need to explicityly 'cast' (i.e. change) the value from a float to an int.

@@ -1,7 +1,7 @@
 #include "AudioTools.h"
 #include "AudioLibs/MaximilianDSP.h"
-#include <FS.h>
-#include <SD_MMC.h>
+#include "audio/kick.h"
+#include "audio/snare.h"
 
 // Arduino output
 I2SStream out;
@@ -27,26 +27,21 @@ void setup() {//some inits
     auto cfg = out.defaultConfig(TX_MODE);
     out.begin(cfg);
     maximilian.begin(cfg);
-
-    // setup SD to allow file operations
-    if(!SD_MMC.begin()){
-        Serial.println("Card Mount Failed");
-        return;
-    }
 	
-    //YOU HAVE TO PROVIDE THE SAMPLES....    
-	kick.load("/sdcard/Maximilian/kick.wav");//load in your samples. Provide the full path to a wav file.
-    snare.load("/sdcard/Maximilian/snare.wav");
+    //YOU HAVE TO PROVIDE THE SAMPLES: we assign data in progmem    
+	//kick.load("/sdcard/Maximilian/kick.wav");//load in your samples. Provide the full path to a wav file.
+    //snare.load("/sdcard/Maximilian/snare.wav");
+	kick.setSample(kick_vector);
+	snare.setSample(snare_vector);
 	
 	
 	printf("Summary:\n%s", kick.getSummary());//get info on samples if you like.
 	//beats.getLength();
 }
 
-void play(double *output) {//this is where the magic happens. Very slow magic.
+void play(float *output) {//this is where the magic happens. Very slow magic.
 	
 	currentCount=(int)timer.phasor(8);//this sets up a metronome that ticks 8 times a second
-	
 	
 	if (lastCount!=currentCount) {//if we have a new timer int this sample, play the sound
 		
@@ -57,15 +52,11 @@ void play(double *output) {//this is where the magic happens. Very slow magic.
 	}
 	
 	if (kicktrigger==1) {//if the sequence has a 1 in it
-		
 		kick.trigger();//reset the playback position of the sample to 0 (the beginning)
-		
 	}
 	
 	if (snaretrigger==1) {
-		
 		snare.trigger();//likewise for the snare
-		
 	}
 	
 	sampleOut=kick.playOnce()+snare.playOnce();//just play the file. No looping.
@@ -76,3 +67,9 @@ void play(double *output) {//this is where the magic happens. Very slow magic.
 	kicktrigger = 0;//set trigger to 0 at the end of each sample to guarantee retriggering.
 	snaretrigger = 0;
 }
+
+// Arduino loop
+void loop() {
+    maximilian.copy();
+}
+

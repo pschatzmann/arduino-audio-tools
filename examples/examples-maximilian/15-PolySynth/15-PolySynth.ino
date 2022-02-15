@@ -40,7 +40,7 @@ void setup() {//some inits
     }
 }
 
-void play(double *output) {
+void play(float *output) {
     
     mix=0;//we're adding up the samples each update and it makes sense to clear them each time first.
     

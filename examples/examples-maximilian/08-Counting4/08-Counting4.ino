@@ -22,7 +22,7 @@ void setup() {//some inits
     maximilian.begin(cfg);
 }
 
-void play(double *output) {
+void play(float *output) {
     
     CurrentCount=myCounter.phasorBetween(1*((another.sawn(0.1)+1)/2), 1, 9);//phasor can take three arguments; frequency, start value and end value.
     

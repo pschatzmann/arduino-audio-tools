@@ -29,7 +29,7 @@ void setup() {
     
 }
 
-void play(double *output) {    
+void play(float *output) {    
     float myOut=mySine.sinewave(myPhasor.phasorBetween(0.2,100,5000));
     //output[0] is the left output. output[1] is the right output
     

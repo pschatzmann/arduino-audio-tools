@@ -44,7 +44,7 @@ void setup() {//some inits
     
 }
 
-void play(double *output) {//this is where the magic happens. Very slow magic.
+void play(float *output) {//this is where the magic happens. Very slow magic.
     //here, we're just compressing the file in real-time
     //arguments are input,ratio,threshold,attack,release
     fout=compressor.compress(beats.play());

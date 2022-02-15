@@ -21,7 +21,7 @@ void setup() {//some inits
   maximilian.begin(cfg);
 }
 
-void play(double *output) {
+void play(float *output) {
     output[0]=mySine.sinewave(myOtherSine.sinewave(myLastSine.sinewave(0.1)*30)*440);//awesome bassline
     output[1]=output[0];
 }

@@ -27,8 +27,8 @@ void setup() {//some inits
     maximilian.begin(cfg);
 
     // setup maximilian   
-    double w0 = 2*PI*f0/44100;
-    double alpha = sin(w0)/(2*Q);
+    float w0 = 2*PI*f0/44100;
+    float alpha = sin(w0)/(2*Q);
     //Band-pass reson:
     //    b0 =   alpha;
     //     b1 =   0;
@@ -54,7 +54,7 @@ void setup() {//some inits
     //    a2 =   1 - alpha;
 }
 
-void play(double *output) {
+void play(float *output) {
     xs[0] = mySwitchableOsc.sawn(400);
     ys[0] = (b0/a0)*xs[0] + (b1/a0)*xs[1] + (b2/a0)*xs[2]
     - (a1/a0)*ys[1] - (a2/a0)*ys[2];

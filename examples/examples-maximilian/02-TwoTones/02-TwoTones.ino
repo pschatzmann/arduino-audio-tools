@@ -20,7 +20,7 @@ void setup() {//some inits
   maximilian.begin(cfg);
 }
 
-void play(double *output) {//this is where the magic happens. Very slow magic.
+void play(float *output) {//this is where the magic happens. Very slow magic.
     //output[0] is the left output. output[1] is the right output
     output[0]=mySine.sinewave(440)+myOtherSine.sinewave(441);//these two sines will beat together. They're now a bit too loud though..
     output[1]=output[0];

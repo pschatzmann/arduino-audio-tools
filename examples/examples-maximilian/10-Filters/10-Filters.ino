@@ -35,7 +35,7 @@ void setup() {//some inits
     
 }
 
-void play(double *output) {
+void play(float *output) {
     
     myCurrentVolume=myEnvelope.adsr(1.,myEnvelope.trigger);
     
