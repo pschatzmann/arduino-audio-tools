@@ -216,24 +216,29 @@ $(function() {
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    <span class="keywordflow">if</span> (a-&gt;activeLogic == ActiveTouch) {</div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;      <span class="keywordtype">int</span> value = touchRead(a-&gt;pin);</div>
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;      result = value &lt;= touchLimit;</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;      <span class="comment">//LOGD(&quot;touch pin: %d value %d -&gt; %s&quot;, a-&gt;pin, value, result ? &quot;true&quot;:&quot;false&quot;);</span></div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;      result = digitalRead(a-&gt;pin);</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    }</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;  }</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;  <span class="keywordtype">int</span> findPin(<span class="keywordtype">int</span> pin) {</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; maxIdx; j++) {</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;      <span class="keywordflow">if</span> (actions[j].pin == pin) {</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;        <span class="keywordflow">return</span> j;</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;      }</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    }</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;  }</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;};</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;      <span class="keywordflow">if</span> (result){</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        <span class="comment">// retry to confirm reading</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        value = touchRead(a-&gt;pin);</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        result = value &lt;= touchLimit;</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        LOGI(<span class="stringliteral">&quot;touch pin: %d value %d (limit: %d) -&gt; %s&quot;</span>, a-&gt;pin, value, touchLimit, result ? <span class="stringliteral">&quot;true&quot;</span>:<span class="stringliteral">&quot;false&quot;</span>);</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;      }</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;      result = digitalRead(a-&gt;pin);</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    }</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;  }</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; </div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;  <span class="keywordtype">int</span> findPin(<span class="keywordtype">int</span> pin) {</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; maxIdx; j++) {</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;      <span class="keywordflow">if</span> (actions[j].pin == pin) {</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        <span class="keywordflow">return</span> j;</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;      }</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    }</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;  }</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;};</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160; </div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_actions_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_actions.html">audio_tools::AudioActions</a></div><div class="ttdoc">A simple class to assign Functions to Pins e.g. to implement a simple navigation control or volume co...</div><div class="ttdef"><b>Definition:</b> AudioActions.h:23</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_actions_html_a1b8cf96b70db0aea1d785a593b15d50b"><div class="ttname"><a href="classaudio__tools_1_1_audio_actions.html#a1b8cf96b70db0aea1d785a593b15d50b">audio_tools::AudioActions::add</a></div><div class="ttdeci">void add(int pin, void(*actionOn)(bool pinStatus, int pin, void *ref), ActiveLogic activeLogic=ActiveLow, void *ref=nullptr)</div><div class="ttdoc">Adds an action.</div><div class="ttdef"><b>Definition:</b> AudioActions.h:33</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_actions_html_a29117d4482c36c6805bd1e9eba9e08d6"><div class="ttname"><a href="classaudio__tools_1_1_audio_actions.html#a29117d4482c36c6805bd1e9eba9e08d6">audio_tools::AudioActions::setEnabled</a></div><div class="ttdeci">void setEnabled(int pin, bool enabled)</div><div class="ttdoc">enable/disable pin actions</div><div class="ttdef"><b>Definition:</b> AudioActions.h:77</div></div>

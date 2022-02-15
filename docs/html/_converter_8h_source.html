@@ -357,146 +357,195 @@ $(function() {
 <div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;        <span class="keywordtype">int</span> channels;</div>
 <div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;};</div>
 <div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160; </div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160; </div>
 <div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00353"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_multi_converter.html">  353</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_multi_converter.html">MultiConverter</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_base_converter.html">BaseConverter</a>&lt;T&gt; {</div>
+<div class="line"><a name="l00353"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_channel_reducer.html">  353</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_channel_reducer.html">ChannelReducer</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_base_converter.html">BaseConverter</a>&lt;T&gt; {</div>
 <div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;        <a class="code" href="classaudio__tools_1_1_multi_converter.html">MultiConverter</a>(){</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;        }</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160; </div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;        <a class="code" href="classaudio__tools_1_1_multi_converter.html">MultiConverter</a>(<a class="code" href="classaudio__tools_1_1_base_converter.html">BaseConverter&lt;T&gt;</a> &amp;c1){</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;            add(c1);</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;        <a class="code" href="classaudio__tools_1_1_channel_reducer.html">ChannelReducer</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160; </div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;        <a class="code" href="classaudio__tools_1_1_channel_reducer.html">ChannelReducer</a>(<span class="keywordtype">int</span> channelCountOfSource, <span class="keywordtype">int</span> channelCountOfTarget=1){</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;            from_channels = channelCountOfSource;</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;            to_channels = channelCountOfTarget;</div>
 <div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;        }</div>
 <div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160; </div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;        <a class="code" href="classaudio__tools_1_1_multi_converter.html">MultiConverter</a>(<a class="code" href="classaudio__tools_1_1_base_converter.html">BaseConverter&lt;T&gt;</a> &amp;c1, <a class="code" href="classaudio__tools_1_1_base_converter.html">BaseConverter&lt;T&gt;</a> &amp;c2){</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;            add(c1);</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;            add(c2);</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;        }</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160; </div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;        <a class="code" href="classaudio__tools_1_1_multi_converter.html">MultiConverter</a>(<a class="code" href="classaudio__tools_1_1_base_converter.html">BaseConverter&lt;T&gt;</a> &amp;c1, <a class="code" href="classaudio__tools_1_1_base_converter.html">BaseConverter&lt;T&gt;</a> &amp;c2, <a class="code" href="classaudio__tools_1_1_base_converter.html">BaseConverter&lt;T&gt;</a> &amp;c3){</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;            add(c1);</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;            add(c2);</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;            add(c3);</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;        }</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160; </div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;        <span class="comment">// adds a converter</span></div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;        <span class="keywordtype">void</span> add(<a class="code" href="classaudio__tools_1_1_base_converter.html">BaseConverter&lt;T&gt;</a> &amp;converter){</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;            converters.push_back(&amp;converter);</div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;        }</div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160; </div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;        <span class="comment">// The data is provided as int24_t tgt[][2] but  returned as int24_t</span></div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;        <span class="keywordtype">size_t</span> convert(uint8_t*src, <span class="keywordtype">size_t</span> size) {</div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0; i &lt; converters.size(); i++){</div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;                converters[i]-&gt;convert(src, size);</div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;            }</div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;            <span class="keywordflow">return</span> size;</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;        }</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160; </div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;        <a class="code" href="classaudio__tools_1_1_vector.html">Vector&lt;BaseConverter&lt;T&gt;</a>*&gt; converters;</div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160; </div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;};</div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160; </div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> FromType, <span class="keyword">typename</span> ToType&gt;</div>
-<div class="line"><a name="l00399"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_format_converter.html">  399</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_format_converter.html">FormatConverter</a> {</div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;        <a class="code" href="classaudio__tools_1_1_format_converter.html">FormatConverter</a>(ToType (*converter)(FromType v)){</div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;            this-&gt;convert_ptr = converter;</div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;        }</div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160; </div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;        <span class="comment">// The data is provided as int24_t tgt[][2] but  returned as int24_t</span></div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;        <span class="keywordtype">size_t</span> convert(uint8_t *src, ToType *target, <span class="keywordtype">size_t</span> byte_count_src) {</div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;            <span class="keywordflow">return</span> convert((FromType *)src, target, byte_count_src );</div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;        }</div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160; </div>
-<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;        <span class="comment">// The data is provided as int24_t tgt[][2] but  returned as int24_t</span></div>
-<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;        <span class="keywordtype">size_t</span> convert(FromType *src, ToType *target, <span class="keywordtype">size_t</span> byte_count_src) {</div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;            <span class="keywordtype">int</span> size = byte_count_src / <span class="keyword">sizeof</span>(FromType);</div>
-<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;            FromType *s = src;</div>
-<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;            ToType *t = target;</div>
-<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=size; i&gt;0; i--) {</div>
-<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;                *t = (*convert_ptr)(*s);</div>
-<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;                t++;</div>
-<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;                s++;</div>
-<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;            }</div>
-<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;            <span class="keywordflow">return</span> size*<span class="keyword">sizeof</span>(ToType);</div>
-<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;        }</div>
-<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160; </div>
-<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;        ToType (*convert_ptr)(FromType v);</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;        <span class="keywordtype">void</span> setSourceChannels(<span class="keywordtype">int</span> channelCountOfSource) {</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;            from_channels = channelCountOfSource;</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;        }</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160; </div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;        <span class="keywordtype">void</span> setTargetChannels(<span class="keywordtype">int</span> channelCountOfTarget) {</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;            to_channels = channelCountOfTarget;</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;        }</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;        </div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;        <span class="keywordtype">size_t</span> convert(uint8_t*src, <span class="keywordtype">size_t</span> size) {</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;            <span class="keywordtype">int</span> frame_count = size/(<span class="keyword">sizeof</span>(T)*from_channels);</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;            <span class="keywordtype">size_t</span> result_size=0;</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;            T* result = (T*)src;</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;            T* source = (T*)src;</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;            <span class="keywordtype">int</span> reduceDiv = from_channels-to_channels+1;</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160; </div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0; i &lt; frame_count; i++){</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;                <span class="comment">// copy first to_channels-1 </span></div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0;j&lt;to_channels-1;j++){</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;                    *result++ = *source++;</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;                    result_size += <span class="keyword">sizeof</span>(T);</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;                }</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;                <span class="comment">// commbined last channels</span></div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;                T total = 0;</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=to_channels-1;j&lt;from_channels;j++){</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;                    total += *source++ / reduceDiv;</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;                }                </div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;                *result++ = total;</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;                result_size += <span class="keyword">sizeof</span>(T);</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;            }</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;            <span class="keywordflow">return</span> result_size;</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;        }</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160; </div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;        <span class="keywordtype">int</span> from_channels;</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;        <span class="keywordtype">int</span> to_channels;</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;};</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160; </div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160; </div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00406"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_multi_converter.html">  406</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_multi_converter.html">MultiConverter</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_base_converter.html">BaseConverter</a>&lt;T&gt; {</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;        <a class="code" href="classaudio__tools_1_1_multi_converter.html">MultiConverter</a>(){</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;        }</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160; </div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;        <a class="code" href="classaudio__tools_1_1_multi_converter.html">MultiConverter</a>(<a class="code" href="classaudio__tools_1_1_base_converter.html">BaseConverter&lt;T&gt;</a> &amp;c1){</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;            add(c1);</div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;        }</div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160; </div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;        <a class="code" href="classaudio__tools_1_1_multi_converter.html">MultiConverter</a>(<a class="code" href="classaudio__tools_1_1_base_converter.html">BaseConverter&lt;T&gt;</a> &amp;c1, <a class="code" href="classaudio__tools_1_1_base_converter.html">BaseConverter&lt;T&gt;</a> &amp;c2){</div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;            add(c1);</div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;            add(c2);</div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;        }</div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160; </div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;        <a class="code" href="classaudio__tools_1_1_multi_converter.html">MultiConverter</a>(<a class="code" href="classaudio__tools_1_1_base_converter.html">BaseConverter&lt;T&gt;</a> &amp;c1, <a class="code" href="classaudio__tools_1_1_base_converter.html">BaseConverter&lt;T&gt;</a> &amp;c2, <a class="code" href="classaudio__tools_1_1_base_converter.html">BaseConverter&lt;T&gt;</a> &amp;c3){</div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;            add(c1);</div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;            add(c2);</div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;            add(c3);</div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;        }</div>
 <div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160; </div>
-<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;};</div>
-<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160; </div>
-<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160; </div>
-<div class="line"><a name="l00433"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_number_reader.html">  433</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_number_reader.html">NumberReader</a> {</div>
-<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;        <a class="code" href="classaudio__tools_1_1_number_reader.html">NumberReader</a>(<a class="code" href="class_stream.html">Stream</a> &amp;in) {</div>
-<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;            stream_ptr = &amp;in;</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;        <span class="comment">// adds a converter</span></div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;        <span class="keywordtype">void</span> add(<a class="code" href="classaudio__tools_1_1_base_converter.html">BaseConverter&lt;T&gt;</a> &amp;converter){</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;            converters.push_back(&amp;converter);</div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;        }</div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160; </div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;        <span class="comment">// The data is provided as int24_t tgt[][2] but  returned as int24_t</span></div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;        <span class="keywordtype">size_t</span> convert(uint8_t*src, <span class="keywordtype">size_t</span> size) {</div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0; i &lt; converters.size(); i++){</div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;                converters[i]-&gt;convert(src, size);</div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;            }</div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;            <span class="keywordflow">return</span> size;</div>
 <div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;        }</div>
 <div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160; </div>
-<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;        <a class="code" href="classaudio__tools_1_1_number_reader.html">NumberReader</a>() {</div>
-<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;        }</div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;        <a class="code" href="classaudio__tools_1_1_vector.html">Vector&lt;BaseConverter&lt;T&gt;</a>*&gt; converters;</div>
 <div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160; </div>
-<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;        <span class="keywordtype">bool</span> read(<span class="keywordtype">int</span> inBits, <span class="keywordtype">int</span> outBits, <span class="keywordtype">bool</span> outSigned, <span class="keywordtype">int</span> n, int32_t *result){</div>
-<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;            <span class="keywordtype">bool</span> result_bool = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;            <span class="keywordtype">int</span> len = inBits/8 * n;</div>
-<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;            <span class="keywordflow">if</span> (stream_ptr!=<span class="keyword">nullptr</span> &amp;&amp; stream_ptr-&gt;available()&gt;len){</div>
-<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;                uint8_t buffer[len];</div>
-<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;                stream_ptr-&gt;readBytes((uint8_t*)buffer, n * len);</div>
-<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;                result_bool = <a class="code" href="classaudio__tools_1_1_number_reader.html#aeabc211ca9adbc65c880cee94dcb1c6e">toNumbers</a>((<span class="keywordtype">void</span>*)buffer, inBits, outBits, outSigned, n, result);</div>
-<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;            }</div>
-<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;            <span class="keywordflow">return</span> result_bool;</div>
-<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;        }</div>
-<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160; </div>
-<div class="line"><a name="l00454"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_number_reader.html#aeabc211ca9adbc65c880cee94dcb1c6e">  454</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_number_reader.html#aeabc211ca9adbc65c880cee94dcb1c6e">toNumbers</a>(<span class="keywordtype">void</span> *bufferIn, <span class="keywordtype">int</span> inBits, <span class="keywordtype">int</span> outBits, <span class="keywordtype">bool</span> outSigned, <span class="keywordtype">int</span> n, int32_t *result){</div>
-<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;            <span class="keywordtype">bool</span> result_bool = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;            <span class="keywordflow">switch</span>(inBits){</div>
-<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;                <span class="keywordflow">case</span> 8: {</div>
-<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;                        int8_t *buffer=(int8_t *)bufferIn;</div>
-<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0;j&lt;n;j++){</div>
-<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;                            result[j] = <a class="code" href="classaudio__tools_1_1_number_reader.html#aa53edbb8eaa9a1f76edb4ed77ad8da47">scale</a>(buffer[j],inBits,outBits,outSigned);</div>
-<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;                        }</div>
-<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;                        result_bool = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;                    }</div>
-<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;                <span class="keywordflow">case</span> 16: {</div>
-<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;                        int16_t *buffer=(int16_t *)bufferIn;</div>
-<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0;j&lt;n;j++){</div>
-<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;                            result[j] = <a class="code" href="classaudio__tools_1_1_number_reader.html#aa53edbb8eaa9a1f76edb4ed77ad8da47">scale</a>(buffer[j],inBits,outBits,outSigned);</div>
-<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;                        }</div>
-<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;                        result_bool = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;                    }</div>
-<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;                <span class="keywordflow">case</span> 32: {</div>
-<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;                        int32_t *buffer=(int32_t*)bufferIn;</div>
-<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0;j&lt;n;j++){</div>
-<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;                            result[j] = <a class="code" href="classaudio__tools_1_1_number_reader.html#aa53edbb8eaa9a1f76edb4ed77ad8da47">scale</a>(buffer[j],inBits,outBits,outSigned);</div>
-<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;                        }</div>
-<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;                        result_bool = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;                    }</div>
-<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;            }</div>
-<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;            <span class="keywordflow">return</span> result_bool;</div>
-<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160; </div>
-<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;        }</div>
-<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160; </div>
-<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;        <a class="code" href="class_stream.html">Stream</a> *stream_ptr=<span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160; </div>
-<div class="line"><a name="l00490"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_number_reader.html#aa53edbb8eaa9a1f76edb4ed77ad8da47">  490</a></span>&#160;        int32_t <a class="code" href="classaudio__tools_1_1_number_reader.html#aa53edbb8eaa9a1f76edb4ed77ad8da47">scale</a>(int32_t value, <span class="keywordtype">int</span> inBits, <span class="keywordtype">int</span> outBits, <span class="keywordtype">bool</span> outSigned=<span class="keyword">true</span>){</div>
-<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;            int32_t result = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(value) / <a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(inBits) * <a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(outBits);</div>
-<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;            <span class="keywordflow">if</span> (!outSigned){</div>
-<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;                result += (<a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(outBits) / 2);</div>
-<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;            }</div>
-<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;            <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;        }</div>
-<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160; </div>
-<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;};</div>
-<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160; </div>
-<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160; </div>
-<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;}</div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;};</div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160; </div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> FromType, <span class="keyword">typename</span> ToType&gt;</div>
+<div class="line"><a name="l00452"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_format_converter.html">  452</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_format_converter.html">FormatConverter</a> {</div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;        <a class="code" href="classaudio__tools_1_1_format_converter.html">FormatConverter</a>(ToType (*converter)(FromType v)){</div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;            this-&gt;convert_ptr = converter;</div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;        }</div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160; </div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;        <span class="comment">// The data is provided as int24_t tgt[][2] but  returned as int24_t</span></div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;        <span class="keywordtype">size_t</span> convert(uint8_t *src, ToType *target, <span class="keywordtype">size_t</span> byte_count_src) {</div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;            <span class="keywordflow">return</span> convert((FromType *)src, target, byte_count_src );</div>
+<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;        }</div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160; </div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;        <span class="comment">// The data is provided as int24_t tgt[][2] but  returned as int24_t</span></div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;        <span class="keywordtype">size_t</span> convert(FromType *src, ToType *target, <span class="keywordtype">size_t</span> byte_count_src) {</div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;            <span class="keywordtype">int</span> size = byte_count_src / <span class="keyword">sizeof</span>(FromType);</div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;            FromType *s = src;</div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;            ToType *t = target;</div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=size; i&gt;0; i--) {</div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;                *t = (*convert_ptr)(*s);</div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;                t++;</div>
+<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;                s++;</div>
+<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;            }</div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;            <span class="keywordflow">return</span> size*<span class="keyword">sizeof</span>(ToType);</div>
+<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;        }</div>
+<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160; </div>
+<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;        ToType (*convert_ptr)(FromType v);</div>
+<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160; </div>
+<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;};</div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160; </div>
+<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160; </div>
+<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160; </div>
+<div class="line"><a name="l00487"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_number_reader.html">  487</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_number_reader.html">NumberReader</a> {</div>
+<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;        <a class="code" href="classaudio__tools_1_1_number_reader.html">NumberReader</a>(<a class="code" href="class_stream.html">Stream</a> &amp;in) {</div>
+<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;            stream_ptr = &amp;in;</div>
+<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;        }</div>
+<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160; </div>
+<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;        <a class="code" href="classaudio__tools_1_1_number_reader.html">NumberReader</a>() {</div>
+<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;        }</div>
+<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160; </div>
+<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;        <span class="keywordtype">bool</span> read(<span class="keywordtype">int</span> inBits, <span class="keywordtype">int</span> outBits, <span class="keywordtype">bool</span> outSigned, <span class="keywordtype">int</span> n, int32_t *result){</div>
+<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;            <span class="keywordtype">bool</span> result_bool = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;            <span class="keywordtype">int</span> len = inBits/8 * n;</div>
+<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;            <span class="keywordflow">if</span> (stream_ptr!=<span class="keyword">nullptr</span> &amp;&amp; stream_ptr-&gt;available()&gt;len){</div>
+<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;                uint8_t buffer[len];</div>
+<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;                stream_ptr-&gt;readBytes((uint8_t*)buffer, n * len);</div>
+<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;                result_bool = <a class="code" href="classaudio__tools_1_1_number_reader.html#aeabc211ca9adbc65c880cee94dcb1c6e">toNumbers</a>((<span class="keywordtype">void</span>*)buffer, inBits, outBits, outSigned, n, result);</div>
+<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;            }</div>
+<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160;            <span class="keywordflow">return</span> result_bool;</div>
+<div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160;        }</div>
+<div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160; </div>
+<div class="line"><a name="l00508"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_number_reader.html#aeabc211ca9adbc65c880cee94dcb1c6e">  508</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_number_reader.html#aeabc211ca9adbc65c880cee94dcb1c6e">toNumbers</a>(<span class="keywordtype">void</span> *bufferIn, <span class="keywordtype">int</span> inBits, <span class="keywordtype">int</span> outBits, <span class="keywordtype">bool</span> outSigned, <span class="keywordtype">int</span> n, int32_t *result){</div>
+<div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;            <span class="keywordtype">bool</span> result_bool = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;            <span class="keywordflow">switch</span>(inBits){</div>
+<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;                <span class="keywordflow">case</span> 8: {</div>
+<div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160;                        int8_t *buffer=(int8_t *)bufferIn;</div>
+<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0;j&lt;n;j++){</div>
+<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160;                            result[j] = <a class="code" href="classaudio__tools_1_1_number_reader.html#aa53edbb8eaa9a1f76edb4ed77ad8da47">scale</a>(buffer[j],inBits,outBits,outSigned);</div>
+<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;                        }</div>
+<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;                        result_bool = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;                    }</div>
+<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;                <span class="keywordflow">case</span> 16: {</div>
+<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;                        int16_t *buffer=(int16_t *)bufferIn;</div>
+<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0;j&lt;n;j++){</div>
+<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;                            result[j] = <a class="code" href="classaudio__tools_1_1_number_reader.html#aa53edbb8eaa9a1f76edb4ed77ad8da47">scale</a>(buffer[j],inBits,outBits,outSigned);</div>
+<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;                        }</div>
+<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;                        result_bool = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;                    }</div>
+<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;                <span class="keywordflow">case</span> 32: {</div>
+<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;                        int32_t *buffer=(int32_t*)bufferIn;</div>
+<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0;j&lt;n;j++){</div>
+<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;                            result[j] = <a class="code" href="classaudio__tools_1_1_number_reader.html#aa53edbb8eaa9a1f76edb4ed77ad8da47">scale</a>(buffer[j],inBits,outBits,outSigned);</div>
+<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;                        }</div>
+<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;                        result_bool = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;                    }</div>
+<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;            }</div>
+<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;            <span class="keywordflow">return</span> result_bool;</div>
+<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160; </div>
+<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;        }</div>
+<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160; </div>
+<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160;        <a class="code" href="class_stream.html">Stream</a> *stream_ptr=<span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160; </div>
+<div class="line"><a name="l00544"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_number_reader.html#aa53edbb8eaa9a1f76edb4ed77ad8da47">  544</a></span>&#160;        int32_t <a class="code" href="classaudio__tools_1_1_number_reader.html#aa53edbb8eaa9a1f76edb4ed77ad8da47">scale</a>(int32_t value, <span class="keywordtype">int</span> inBits, <span class="keywordtype">int</span> outBits, <span class="keywordtype">bool</span> outSigned=<span class="keyword">true</span>){</div>
+<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;            int32_t result = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(value) / <a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(inBits) * <a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(outBits);</div>
+<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;            <span class="keywordflow">if</span> (!outSigned){</div>
+<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;                result += (<a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(outBits) / 2);</div>
+<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;            }</div>
+<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;            <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;        }</div>
+<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160; </div>
+<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;};</div>
+<div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160; </div>
+<div class="line"><a name="l00554"></a><span class="lineno">  554</span>&#160; </div>
+<div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160;}</div>
 <div class="ttc" id="aclass_stream_html"><div class="ttname"><a href="class_stream.html">Stream</a></div><div class="ttdef"><b>Definition:</b> Stream.h:49</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_base_converter_html"><div class="ttname"><a href="classaudio__tools_1_1_base_converter.html">audio_tools::BaseConverter</a></div><div class="ttdoc">Abstract Base class for Converters A converter is processing the data in the indicated array.</div><div class="ttdef"><b>Definition:</b> Converter.h:64</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_channel_reducer_html"><div class="ttname"><a href="classaudio__tools_1_1_channel_reducer.html">audio_tools::ChannelReducer</a></div><div class="ttdoc">We combine a datastream which consists of multiple channels into less channels. E....</div><div class="ttdef"><b>Definition:</b> Converter.h:353</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_converter_auto_center_html"><div class="ttname"><a href="classaudio__tools_1_1_converter_auto_center.html">audio_tools::ConverterAutoCenter</a></div><div class="ttdoc">Makes sure that the avg of the signal is set to 0.</div><div class="ttdef"><b>Definition:</b> Converter.h:148</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_converter_fill_left_and_right_html"><div class="ttname"><a href="classaudio__tools_1_1_converter_fill_left_and_right.html">audio_tools::ConverterFillLeftAndRight</a></div><div class="ttdoc">Make sure that both channels contain any data.</div><div class="ttdef"><b>Definition:</b> Converter.h:241</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_converter_scaler_html"><div class="ttname"><a href="classaudio__tools_1_1_converter_scaler.html">audio_tools::ConverterScaler</a></div><div class="ttdoc">Multiplies the values with the indicated factor adds the offset and clips at maxValue....</div><div class="ttdef"><b>Definition:</b> Converter.h:89</div></div>
@@ -506,14 +555,14 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_converter_scaler_html_abd01950f76aae1d1797af5b55bbd5b34"><div class="ttname"><a href="classaudio__tools_1_1_converter_scaler.html#abd01950f76aae1d1797af5b55bbd5b34">audio_tools::ConverterScaler::offset</a></div><div class="ttdeci">T offset()</div><div class="ttdoc">Determines the offset value.</div><div class="ttdef"><b>Definition:</b> Converter.h:131</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_converter_switch_left_and_right_html"><div class="ttname"><a href="classaudio__tools_1_1_converter_switch_left_and_right.html">audio_tools::ConverterSwitchLeftAndRight</a></div><div class="ttdoc">Switches the left and right channel.</div><div class="ttdef"><b>Definition:</b> Converter.h:205</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_converter_to_internal_d_a_c_format_html"><div class="ttname"><a href="classaudio__tools_1_1_converter_to_internal_d_a_c_format.html">audio_tools::ConverterToInternalDACFormat</a></div><div class="ttdoc">special case for internal DAC output, the incomming PCM buffer needs to be converted from signed 16bi...</div><div class="ttdef"><b>Definition:</b> Converter.h:325</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_format_converter_html"><div class="ttname"><a href="classaudio__tools_1_1_format_converter.html">audio_tools::FormatConverter</a></div><div class="ttdoc">Converts e.g. 24bit data to the indicated smaller or bigger data type.</div><div class="ttdef"><b>Definition:</b> Converter.h:399</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_multi_converter_html"><div class="ttname"><a href="classaudio__tools_1_1_multi_converter.html">audio_tools::MultiConverter</a></div><div class="ttdoc">Combines multiple converters.</div><div class="ttdef"><b>Definition:</b> Converter.h:353</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_format_converter_html"><div class="ttname"><a href="classaudio__tools_1_1_format_converter.html">audio_tools::FormatConverter</a></div><div class="ttdoc">Converts e.g. 24bit data to the indicated smaller or bigger data type.</div><div class="ttdef"><b>Definition:</b> Converter.h:452</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_multi_converter_html"><div class="ttname"><a href="classaudio__tools_1_1_multi_converter.html">audio_tools::MultiConverter</a></div><div class="ttdoc">Combines multiple converters.</div><div class="ttdef"><b>Definition:</b> Converter.h:406</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_n_o_p_converter_html"><div class="ttname"><a href="classaudio__tools_1_1_n_o_p_converter.html">audio_tools::NOPConverter</a></div><div class="ttdoc">Dummy converter which does nothing.</div><div class="ttdef"><b>Definition:</b> Converter.h:76</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_number_converter_html"><div class="ttname"><a href="classaudio__tools_1_1_number_converter.html">audio_tools::NumberConverter</a></div><div class="ttdoc">Converts from a source to a target number with a different type.</div><div class="ttdef"><b>Definition:</b> Converter.h:11</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_number_converter_html_a68cfd005536b677f85d29ec75bedce57"><div class="ttname"><a href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">audio_tools::NumberConverter::maxValue</a></div><div class="ttdeci">static int64_t maxValue(int value_bits_per_sample)</div><div class="ttdoc">provides the biggest number for the indicated number of bits</div><div class="ttdef"><b>Definition:</b> Converter.h:38</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_number_reader_html"><div class="ttname"><a href="classaudio__tools_1_1_number_reader.html">audio_tools::NumberReader</a></div><div class="ttdoc">Reads n numbers from an Arduino Stream.</div><div class="ttdef"><b>Definition:</b> Converter.h:433</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_number_reader_html_aa53edbb8eaa9a1f76edb4ed77ad8da47"><div class="ttname"><a href="classaudio__tools_1_1_number_reader.html#aa53edbb8eaa9a1f76edb4ed77ad8da47">audio_tools::NumberReader::scale</a></div><div class="ttdeci">int32_t scale(int32_t value, int inBits, int outBits, bool outSigned=true)</div><div class="ttdoc">scale the value</div><div class="ttdef"><b>Definition:</b> Converter.h:490</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_number_reader_html_aeabc211ca9adbc65c880cee94dcb1c6e"><div class="ttname"><a href="classaudio__tools_1_1_number_reader.html#aeabc211ca9adbc65c880cee94dcb1c6e">audio_tools::NumberReader::toNumbers</a></div><div class="ttdeci">bool toNumbers(void *bufferIn, int inBits, int outBits, bool outSigned, int n, int32_t *result)</div><div class="ttdoc">converts a buffer to a number array</div><div class="ttdef"><b>Definition:</b> Converter.h:454</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_number_reader_html"><div class="ttname"><a href="classaudio__tools_1_1_number_reader.html">audio_tools::NumberReader</a></div><div class="ttdoc">Reads n numbers from an Arduino Stream.</div><div class="ttdef"><b>Definition:</b> Converter.h:487</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_number_reader_html_aa53edbb8eaa9a1f76edb4ed77ad8da47"><div class="ttname"><a href="classaudio__tools_1_1_number_reader.html#aa53edbb8eaa9a1f76edb4ed77ad8da47">audio_tools::NumberReader::scale</a></div><div class="ttdeci">int32_t scale(int32_t value, int inBits, int outBits, bool outSigned=true)</div><div class="ttdoc">scale the value</div><div class="ttdef"><b>Definition:</b> Converter.h:544</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_number_reader_html_aeabc211ca9adbc65c880cee94dcb1c6e"><div class="ttname"><a href="classaudio__tools_1_1_number_reader.html#aeabc211ca9adbc65c880cee94dcb1c6e">audio_tools::NumberReader::toNumbers</a></div><div class="ttdeci">bool toNumbers(void *bufferIn, int inBits, int outBits, bool outSigned, int n, int32_t *result)</div><div class="ttdoc">converts a buffer to a number array</div><div class="ttdef"><b>Definition:</b> Converter.h:508</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_vector_html"><div class="ttname"><a href="classaudio__tools_1_1_vector.html">audio_tools::Vector</a></div><div class="ttdoc">Vector implementation which provides the most important methods as defined by std::vector....</div><div class="ttdef"><b>Definition:</b> Vector.h:14</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1int24__t_html"><div class="ttname"><a href="classaudio__tools_1_1int24__t.html">audio_tools::int24_t</a></div><div class="ttdoc">24bit integer which is used for I2S sound processing. It works only on little endian machines!</div><div class="ttdef"><b>Definition:</b> Int24.h:15</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1int24__t_html_a3298ae3a80ee055b725e2e4ee0bf8662"><div class="ttname"><a href="classaudio__tools_1_1int24__t.html#a3298ae3a80ee055b725e2e4ee0bf8662">audio_tools::int24_t::scaleFloat</a></div><div class="ttdeci">float scaleFloat() const</div><div class="ttdoc">provides value between -1.0 and 1.0</div><div class="ttdef"><b>Definition:</b> Int24.h:69</div></div>
