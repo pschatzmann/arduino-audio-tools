@@ -22,18 +22,23 @@ class I2SBase {
     }
 
     /// starts the DAC with the default config
-    void begin(RxTxMode mode = TX_MODE) {
-      begin(defaultConfig())
+    bool begin(RxTxMode mode = TX_MODE) {
+      return begin(defaultConfig())
     }
 
     /// starts the DAC 
-    void begin(I2SConfig cfg) {
+    bool begin(I2SConfig cfg) {
         I2S.begin(cfg.i2s_format, cfg.sample_rate, cfg.bits_per_sample, cfg.is_master);
         if (cfg.mode = TX_MODE){
             I2S.enableTransmitter();
         } else {
             I2S.enableReceiver();
         }
+        return true;
+    }
+
+    bool begin() {
+      return begin(cfg);
     }
 
     /// stops the I2C and unistalls the driver

@@ -34,11 +34,11 @@ class I2S : public I2SBase {
       end();
     }
 
-    void begin(I2SConfig cfg) {
+    bool begin(I2SConfig cfg) {
       LOGD(LOG_METHOD);
       // define bits per sampe from data type
       cfg.bits_per_sample = sizeof(T) * 8;
-      I2SBase::begin(cfg);
+      return I2SBase::begin(cfg);
     }
 
     /// writes the data to the I2S interface
@@ -81,6 +81,10 @@ class I2SStream : public AudioStream {
         /// Provides the default configuration
         I2SConfig defaultConfig(RxTxMode mode=TX_MODE) {
             return i2s.defaultConfig(mode);
+        }
+
+        bool begin() {
+            return i2s.begin();
         }
 
         /// Starts the I2S interface

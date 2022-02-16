@@ -30,13 +30,13 @@ class I2SBase {
     }
 
     /// starts the DAC with the default config
-    void begin(RxTxMode mode = TX_MODE) {
-        begin(defaultConfig(mode));
+    bool begin(RxTxMode mode = TX_MODE) {
+        return begin(defaultConfig(mode));
     }
 
 
     /// starts the DAC 
-    void begin(I2SConfig cfg) {
+    bool begin(I2SConfig cfg) {
       LOGD(LOG_METHOD);
       switch(cfg.rx_tx_mode){
         case TX_MODE:
@@ -52,7 +52,7 @@ class I2SBase {
       }
       int txPin = cfg.rx_tx_mode == TX_MODE ? cfg.pin_data : I2S_PIN_NO_CHANGE;
       int rxPin = cfg.rx_tx_mode == RX_MODE ? cfg.pin_data : I2S_PIN_NO_CHANGE;
-      begin(cfg, txPin, rxPin);
+      return begin(cfg, txPin, rxPin);
     }
 
     /// we assume the data is already available in the buffer
@@ -108,7 +108,7 @@ class I2SBase {
     bool is_started = false;
 
     /// starts the DAC 
-    void begin(I2SConfig cfg, int txPin, int rxPin) {
+    bool begin(I2SConfig cfg, int txPin, int rxPin) {
       LOGD(LOG_METHOD);
       cfg.logInfo();
       this->cfg = cfg;
@@ -171,6 +171,7 @@ class I2SBase {
 
       is_started = true;
       LOGD("%s - %s", __func__, "started");
+      return true;
     }
 
     // update the cfg.i2s.channel_format based on the number of channels
