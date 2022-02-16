@@ -23,6 +23,9 @@ static const char *UNDERFLOW_MSG = "data underflow";
  */
 class AudioStream : public Stream, public AudioBaseInfoDependent {
  public:
+  virtual bool begin();
+  virtual void end();
+
   // overwrite to do something useful
   virtual void setAudioInfo(AudioBaseInfo info) {
     LOGD(LOG_METHOD);
@@ -52,6 +55,8 @@ class AudioStream : public Stream, public AudioBaseInfoDependent {
  */
 class AudioStreamX : public AudioStream {
  public:
+  virtual bool begin(){return true;}
+  virtual void end(){}
   virtual size_t readBytes(uint8_t *buffer, size_t length) override { return not_supported(0); }
   virtual size_t write(const uint8_t *buffer, size_t size) override{ return not_supported(0); }
   virtual size_t write(uint8_t) override { return not_supported(0); }
@@ -126,10 +131,11 @@ class MemoryStream : public AudioStream {
   }
 
   // resets the read pointer
-  void begin() {
+  bool begin() override {
     LOGD(LOG_METHOD);
     write_pos = buffer_size;
     read_pos = 0;
+    return true;
   }
 
   virtual size_t write(uint8_t byte) override {
@@ -183,6 +189,10 @@ class MemoryStream : public AudioStream {
   }
 
   virtual void flush() override {}
+
+  virtual void end() {
+    read_pos = 0;
+  }
 
   virtual void clear(bool reset = false) {
     write_pos = 0;
@@ -383,9 +393,7 @@ class NullStream : public BufferedStream {
     is_measure = measureWrite;
   }
 
-  void begin(AudioBaseInfo info, int opt = 0) {}
-
-  void begin() {}
+  bool begin(AudioBaseInfo info, int opt = 0) {return true;}
 
   AudioBaseInfo defaultConfig(int opt = 0) {
     AudioBaseInfo info;
@@ -720,7 +728,7 @@ class TimerCallbackAudioStream : public BufferedStream,
   }
 
   /// Restart the processing
-  void begin() {
+  bool begin() {
     LOGD(LOG_METHOD);
     if (this->frameCallback != nullptr) {
       if (cfg.use_timer) {
@@ -728,6 +736,7 @@ class TimerCallbackAudioStream : public BufferedStream,
       }
       active = true;
     }
+    return active;
   }
 
   /// Stops the processing

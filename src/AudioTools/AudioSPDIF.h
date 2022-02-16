@@ -171,11 +171,10 @@ class SPDIFStream : public AudioStreamX {
     return i2sOn;
   }
 
-  bool end() {
+  void end() {
     LOGD(LOG_METHOD);
     i2s.end();
     i2sOn = false;
-    return true;
   }
 
   /// Change the audio parameters
