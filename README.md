@@ -119,6 +119,7 @@ Dependent on the example you might need to install some of the following librari
 - [SAM](https://github.com/pschatzmann/arduino-SAM) A Text to Speach Engine
 - [TTS](https://github.com/pschatzmann/TTS) A Text to Speach Engine
 - [flite](https://github.com/pschatzmann/arduino-flite) A Text to Speach Engine
+- [simple-tts](https://github.com/pschatzmann/arduino-simple-tts) A Simple TTS engine which is based on prerecorded audio (Talking Clock, Talking Numbers)
 - [arduino-stk](https://github.com/pschatzmann/Arduino-STK) Synthesis ToolKit in C++ (STK) 
 - [Maximilian](https://github.com/pschatzmann/Maximilian) cross-platform and multi-target audio synthesis and signal processing library
 - [Mozzi](https://github.com/pschatzmann/Mozzi) A sound synthesis library for Arduino
