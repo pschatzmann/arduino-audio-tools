@@ -420,7 +420,54 @@ class Str {
             return maxlen;
         }
 
-        /// rmoves the indicated substring from the string
+        /// Replaces the first instance of toReplace with  replaced
+        virtual bool replace(const char* toReplace, const char* replaced){
+            bool result = false;
+            if (toReplace==nullptr||replaced==nullptr){
+                return result;
+            }
+             if (!isConst()){
+                int pos = indexOf(toReplace);
+                int old_len = length();
+                int insert_len =0;
+                if (pos>=0){
+                    int len_replaced = strlen(replaced);
+                    int len_to_replace = strlen(toReplace);
+                    insert_len = len_replaced-len_to_replace;
+                    grow(this->length()+insert_len);
+                    // save remainder and create gap
+                    memmove(this->chars+pos+len_replaced, this->chars+pos+len_to_replace, old_len-pos+len_to_replace+1);
+                    // move new string into gap
+                    memmove(this->chars+pos,replaced,len_replaced);
+                    result = true;
+                    len += insert_len;
+                }
+             }
+            return result;
+        }
+
+        /// Replaces all instances of toReplace with  replaced
+        virtual bool replaceAll(const char* toReplace, const char* replaced){
+            if (indexOf(toReplace)==-1){
+                return false;
+            }
+            while(replace(toReplace,replaced));
+            return true;
+        }
+
+        /// removes the indicated substring from the string
+        virtual void remove(const char* toRemove){
+            if (!isConst() && chars!=nullptr){
+                int removeLen = strlen(toRemove);
+                int pos = indexOf(toRemove);
+                if (pos>=0){
+                    memmove((void*) (chars+pos), (void*) (chars+pos+removeLen), len - (pos + removeLen)+1);
+                    len -= removeLen;
+                }
+            }
+        }
+
+        /// removes the indicated substring from the string
         virtual void removeAll(const char* toRemove){
             if (!isConst() && chars!=nullptr){
                 int removeLen = strlen(toRemove);
