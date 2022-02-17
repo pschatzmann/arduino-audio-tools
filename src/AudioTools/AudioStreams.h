@@ -244,21 +244,23 @@ class GeneratedSoundStream : public AudioStreamX, public AudioBaseInfoSource {
   AudioBaseInfo defaultConfig() { return this->generator_ptr->defaultConfig(); }
 
   /// start the processing
-  void begin() {
+  bool begin() {
     LOGD(LOG_METHOD);
     generator_ptr->begin();
     if (audioBaseInfoDependent != nullptr)
       audioBaseInfoDependent->setAudioInfo(generator_ptr->audioInfo());
     active = true;
+    return active;
   }
 
   /// start the processing
-  void begin(AudioBaseInfo cfg) {
+  bool begin(AudioBaseInfo cfg) {
     LOGD(LOG_METHOD);
     generator_ptr->begin(cfg);
     if (audioBaseInfoDependent != nullptr)
       audioBaseInfoDependent->setAudioInfo(generator_ptr->audioInfo());
     active = true;
+    return active;
   }
 
   /// stop the processing
