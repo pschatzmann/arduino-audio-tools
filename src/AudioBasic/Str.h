@@ -436,7 +436,7 @@ class Str {
                     insert_len = len_replaced-len_to_replace;
                     grow(this->length()+insert_len);
                     // save remainder and create gap
-                    memmove(this->chars+pos+len_replaced, this->chars+pos+len_to_replace, old_len-pos+len_to_replace+1);
+                    memmove(this->chars+pos+len_replaced, this->chars+pos+len_to_replace, old_len-pos-len_to_replace+1);
                     // move new string into gap
                     memmove(this->chars+pos,replaced,len_replaced);
                     result = true;
