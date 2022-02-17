@@ -78,6 +78,9 @@ class AudioStreamWrapper : public AudioStream {
  public:
   AudioStreamWrapper(Stream &s) { p_stream = &s; }
 
+  virtual bool begin(){return true;}
+  virtual void end(){}
+
   virtual size_t readBytes(uint8_t *buffer, size_t length) {
     return p_stream->readBytes(buffer, length);
   }
