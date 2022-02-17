@@ -419,7 +419,7 @@ class ConverterNChannels : public BaseConverter<T> {
 
   // convert all samples for each channel separately
   size_t convert(uint8_t *src, size_t size) {
-    int count = size / channels;
+    int count = size / channels / sizeof(T);
     T *sample = (T *)src;
     for (size_t j = 0; j < count; j++) {
       for (int channel = 0; channel < channels; channel++) {
