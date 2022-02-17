@@ -23,9 +23,12 @@ static const char *UNDERFLOW_MSG = "data underflow";
  */
 class AudioStream : public Stream, public AudioBaseInfoDependent {
  public:
-  virtual bool begin();
-  virtual void end();
+  AudioStream() = default;
+  virtual ~AudioStream() = default;
 
+  virtual bool begin(){return true;}
+  virtual void end(){}
+  
   // overwrite to do something useful
   virtual void setAudioInfo(AudioBaseInfo info) {
     LOGD(LOG_METHOD);
@@ -55,8 +58,8 @@ class AudioStream : public Stream, public AudioBaseInfoDependent {
  */
 class AudioStreamX : public AudioStream {
  public:
-  virtual bool begin(){return true;}
-  virtual void end(){}
+  AudioStreamX() = default;
+  virtual ~AudioStreamX() = default;
   virtual size_t readBytes(uint8_t *buffer, size_t length) override { return not_supported(0); }
   virtual size_t write(const uint8_t *buffer, size_t size) override{ return not_supported(0); }
   virtual size_t write(uint8_t) override { return not_supported(0); }
