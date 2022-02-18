@@ -44,7 +44,7 @@ class AudioUtils {
                 result++;
             }
             if (result <= limit){
-                LOGW("Time for samplingRate %u -> %lu is < %u μs - we rounded up", (unsigned int)samplingRate, result, limit);
+                LOGW("Time for samplingRate %u -> %u is < %u μs - we rounded up", (unsigned int)samplingRate,  (unsigned int)result,  (unsigned int)limit);
                 result = limit;
             }
             return result;
@@ -56,7 +56,7 @@ class AudioUtils {
                 result++;
             }
             if (result <= limit){
-                LOGW("Time for samplingRate %u -> %lu is < %u μs - we rounded up", (unsigned int)samplingRate, result, limit);
+                LOGW("Time for samplingRate %u -> %u is < %u μs - we rounded up", (unsigned int)samplingRate,  (unsigned int)result,  (unsigned int)limit);
                 result = limit;
             }
             return result;

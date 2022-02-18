@@ -18,8 +18,8 @@ typedef void (* repeating_timer_callback_t )(void* obj);
  */
 class TimerAlarmRepeatingSTM32 : public TimerAlarmRepeatingDef {
     public:
-    
-        TimerAlarmRepeatingSTM32(int timerIdx=1){
+
+        TimerAlarmRepeatingSTM32(TimerFunction function=DirectTimerCallback, int timerIdx=1){
             this->timer = new HardwareTimer(timers[timerIdx]);
             timer->pause();
         }

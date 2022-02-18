@@ -28,7 +28,7 @@ class AudioPrint : public Print {
             return 1;
         }
 
-        void flush() {
+        void flush() FLUSH_OVERRIDE {
             write((const uint8_t*)tmp, tmpPos-1);
             tmpPos=0;
         }

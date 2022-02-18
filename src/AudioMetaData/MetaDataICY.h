@@ -181,7 +181,7 @@ class MetaDataICY : public AbstractMetaData {
             LOGD(LOG_METHOD);
             if (meta_size>0){
                 if (metaData==nullptr){
-                    metaData = new prog_char[meta_size+1];
+                    metaData = new char[meta_size+1];
                     metaDataMaxLen = meta_size;
                     LOGD("metaDataMaxLen: %d", metaDataMaxLen);
                 } else {

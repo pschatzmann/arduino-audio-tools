@@ -8,7 +8,7 @@
 
 namespace audio_tools {
 
-#ifndef ESP32
+#ifndef IRAM_ATTR
 #define IRAM_ATTR
 #endif
 
@@ -68,7 +68,7 @@ class AudioStreamX : public AudioStream {
 
   virtual int read() override { return not_supported(-1); }
   virtual int peek() override { return not_supported(-1); }
-  virtual void flush() override {}
+  virtual void flush() FLUSH_OVERRIDE {}
   virtual void setAudioInfo(audio_tools::AudioBaseInfo) override {}
 };
 
@@ -726,7 +726,7 @@ class TimerCallbackAudioStream : public BufferedStream,
       buffer = new RingBuffer<uint8_t>(cfg.buffer_size);
       timer = new TimerAlarmRepeating(cfg.timer_function, cfg.timer_id);
       time = AudioUtils::toTimeUs(cfg.sample_rate);
-      LOGI("sample_rate: %u -> time: %lu milliseconds", cfg.sample_rate, time);
+      LOGI("sample_rate: %u -> time: %u milliseconds",  (unsigned int)cfg.sample_rate,  (unsigned int)time);
       timer->setCallbackParameter(this);
       timer->begin(timerCallback, time, TimeUnit::US);
     }
