@@ -296,9 +296,24 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 //----------------
 #ifdef __AVR__
 #define USE_PWM
-
+#define assert(T)
+#define rintf(F) static_cast<int>(F)
 #define PIN_PWM_START 6
 #define PIN_CS CS
+
+#undef PWM_BUFFER_SIZE
+#define PWM_BUFFER_SIZE 125
+
+#undef DEFAULT_BUFFER_SIZE
+#define DEFAULT_BUFFER_SIZE 125
+
+// logging is using too much memory
+#undef LOG_PRINTF_BUFFER_SIZE 
+#define LOG_PRINTF_BUFFER_SIZE 80
+
+#undef USE_AUDIO_LOGGING
+#define USE_AUDIO_LOGGING false
+
 #endif
 
 //----------------

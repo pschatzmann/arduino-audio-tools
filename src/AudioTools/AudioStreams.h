@@ -69,7 +69,7 @@ class AudioStreamX : public AudioStream {
   virtual int read() override { return not_supported(-1); }
   virtual int peek() override { return not_supported(-1); }
   virtual void flush() FLUSH_OVERRIDE {}
-  virtual void setAudioInfo(audio_tools::AudioBaseInfo) override {}
+  virtual void setAudioInfo(AudioBaseInfo) override {}
 };
 
 /**
