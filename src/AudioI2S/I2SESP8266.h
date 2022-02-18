@@ -24,22 +24,34 @@ class I2SBase {
     }
 
     /// starts the DAC with the default config
-    void begin(RxTxMode mode = TX_MODE) {
-      begin(defaultConfig(mode));
+    bool begin(RxTxMode mode = TX_MODE) {
+      return begin(defaultConfig(mode));
     }
 
     /// starts the DAC 
-    void begin(I2SConfig cfg) {
+    bool begin(I2SConfig cfg) {
       i2s_set_rate(cfg.sample_rate);
       cfg.bits_per_sample = 16;
       if(!i2s_rxtx_begin(cfg.rx_tx_mode == RX_MODE, cfg.rx_tx_mode == TX_MODE)){
           LOGE("i2s_rxtx_begin failed");
+          return false;
       }
+      return true;
     }
 
     /// stops the I2C and unistalls the driver
     void end(){
       i2s_end();
+    }
+
+    /// we assume the data is already available in the buffer
+    int available() {
+      return I2S_BUFFER_COUNT*I2S_BUFFER_SIZE;
+    }
+
+    /// We limit the write size to the buffer size
+    int availableForWrite() {
+      return I2S_BUFFER_COUNT*I2S_BUFFER_SIZE;
     }
 
     /// provides the actual configuration

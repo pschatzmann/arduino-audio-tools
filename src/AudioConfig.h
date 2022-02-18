@@ -146,6 +146,8 @@
 #define USE_I2S
 #define USE_AUDIO_SERVER
 #define USE_URLSTREAM_TASK
+#define USE_TYPETRAITS
+#define USE_EFFECTS_SUITE
 
 #define PWM_FREQENCY 30000
 #define PIN_PWM_START 12
@@ -190,10 +192,12 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 
 //----------------
 #ifdef ESP8266
-#define USE_URL_ARDUINO
+//#define USE_URL_ARDUINO // commented out because of compile errors
 #define USE_I2S
 #define USE_PWM
 #define USE_AUDIO_SERVER
+#define USE_TYPETRAITS
+#define USE_EFFECTS_SUITE
 //#define USE_ESP8266_AUDIO
 
 #define PIN_PWM_START 12
@@ -211,6 +215,8 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #ifdef ARDUINO_ARDUINO_NANO33BLE
 #define USE_I2S
 #define USE_PWM
+#define USE_TYPETRAITS
+#define USE_EFFECTS_SUITE
 
 #define PIN_PWM_START 6
 #define PIN_I2S_BCK 2
@@ -227,6 +233,8 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 //#define USE_I2S 1
 #define USE_PWM
 #define USE_ADC_ARDUINO
+#define USE_TYPETRAITS
+#define USE_EFFECTS_SUITE
 
 #define PIN_ADC_START 26
 #define PIN_PWM_START 6
@@ -256,6 +264,8 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define USE_I2S 1
 #define USE_PWM
 #define USE_ADC_ARDUINO
+#define USE_TYPETRAITS
+#define USE_EFFECTS_SUITE
 
 #define PIN_ADC_START 26
 #define PIN_PWM_START 6
@@ -315,5 +325,9 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 
 #ifdef IS_DESKTOP
 #define USE_URL_ARDUINO
+#define FLUSH_OVERRIDE override
 #endif
 
+#ifndef OVERRIDE
+#define FLUSH_OVERRIDE 
+#endif

@@ -3,7 +3,9 @@
 #include "AudioBasic/Vector.h"
 #include "AudioEffects/SoundGenerator.h"
 #include "AudioEffects/AudioEffect.h"
+#ifdef  USE_EFFECTS_SUITE
 #include "AudioEffects/AudioEffectsSuite.h"
+#endif
 #ifdef  USE_STK
 #include "AudioEffects/STKEffects.h"
 #endif

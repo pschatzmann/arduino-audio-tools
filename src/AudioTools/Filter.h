@@ -1,7 +1,9 @@
 #pragma once
 #include "AudioTools/Converter.h"
+#include "AudioConfig.h"
+#ifdef USE_TYPETRAITS
 #include <type_traits>
-
+#endif
 namespace audio_tools {
 
 /**
@@ -65,10 +67,15 @@ class FIR : public Filter<T> {
       if(i_b == lenB)
         i_b = 0;
 
+#ifdef USE_TYPETRAITS
       if (!(std::is_same<T, float>::value || std::is_same<T, double>::value)) {
         b_terms = b_terms / factor;
       }
-
+#else
+      if (factor!=1.0) {
+        b_terms = b_terms / factor;
+      }
+#endif
       return b_terms;
     }
   private:
@@ -135,9 +142,15 @@ class IIR : public Filter<T> {
     i_a++;
     if (i_a == lenA) i_a = 0;
 
+#ifdef USE_TYPETRAITS
     if (!(std::is_same<T, float>::value || std::is_same<T, double>::value)) {
       filtered = filtered / factor;
     }
+#else
+    if (factor!=1.0) {
+      filtered = filtered / factor;
+    }
+#endif
     return filtered;
   }
 

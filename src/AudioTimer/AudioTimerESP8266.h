@@ -20,8 +20,12 @@ TimerAlarmRepeatingESP8266 *self;
  */
 class TimerAlarmRepeatingESP8266 : public TimerAlarmRepeatingDef {
     public:
-    
+
         TimerAlarmRepeatingESP8266(){
+            self = this;
+        }
+
+        TimerAlarmRepeatingESP8266(TimerFunction function=DirectTimerCallback, int id=0){
             self = this;
         }
 

@@ -69,7 +69,7 @@ struct PWMConfig : public AudioBaseInfo {
         LOGI("channels: %d", channels);
         LOGI("bits_per_sample: %d", bits_per_sample);
         LOGI("buffer_size: %u", buffer_size);
-        LOGI("pwm_frequency: %lu", pwm_frequency);
+        LOGI("pwm_frequency: %u",  (unsigned int)pwm_frequency);
         LOGI("resolution: %d", resolution);
         //LOGI("timer_id: %d", timer_id);
     }
