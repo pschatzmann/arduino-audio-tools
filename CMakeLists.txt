@@ -15,4 +15,4 @@ install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/src/" # source directory
     PATTERN "*.h" # select header files
 )
 
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests EXCLUDE_FROM_ALL)
