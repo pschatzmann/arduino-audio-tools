@@ -196,7 +196,7 @@ class MemoryStream : public AudioStream {
 
   virtual void flush() override {}
 
-  virtual void end() {
+  virtual void end() override {
     read_pos = 0;
   }
 

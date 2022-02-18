@@ -328,6 +328,6 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define FLUSH_OVERRIDE override
 #endif
 
-#ifndef OVERRIDE
+#ifndef FLUSH_OVERRIDE
 #define FLUSH_OVERRIDE 
 #endif
