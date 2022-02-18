@@ -64,12 +64,12 @@ class PortAudioStream : public BufferedStream {
         };
 
         // start with default configuration
-        void begin() {
-            begin(defaultConfig());
+        bool begin() {
+            return begin(defaultConfig());
         }
 
         // start with the indicated configuration
-        void begin(PortAudioConfig info) {
+        bool begin(PortAudioConfig info) {
             LOGD(LOG_METHOD);
             this->info = info;
 
@@ -79,7 +79,7 @@ class PortAudioStream : public BufferedStream {
                 LOGD("Pa_Initialize - done");
                 if( err != paNoError ) {
                     LOGE(  "PortAudio error: %s\n", Pa_GetErrorText( err ) );
-                    return;
+                    return false;
                 }
 
                 // calculate frames
@@ -99,11 +99,13 @@ class PortAudioStream : public BufferedStream {
                 LOGD("Pa_OpenDefaultStream - done");
                 if( err != paNoError ) {
                     LOGE(  "PortAudio error: %s\n", Pa_GetErrorText( err ) );
+                    return false;
                 }
             } else {
                 LOGI("basic audio information is missing...");
+                return false;
             }
-
+            return true;
         }
 
         void end() {
