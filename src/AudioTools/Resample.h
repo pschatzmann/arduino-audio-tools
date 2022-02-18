@@ -307,7 +307,7 @@ struct ResampleConfig : public AudioBaseInfo {
  * @tparam T data type of audio data
  */
 template<typename T>
-class ResampleStream : public AudioStreamX, AudioBaseInfoDependent {
+class ResampleStream : public AudioStreamX {
     public:
         /**
          * @brief Construct a new Resample Stream object which supports resampling
