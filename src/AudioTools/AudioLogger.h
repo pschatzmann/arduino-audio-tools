@@ -129,12 +129,12 @@ class AudioLogger {
 
 }    
 
-#define LOG_OUT(level, ...) snprintf(audio_tools::AudioLogger::instance().prefix(__FILE__,__LINE__, level).str(),LOG_PRINTF_BUFFER_SIZE,__VA_ARGS__); audio_tools::AudioLogger::instance().println();
+#define LOG_OUT(level, ...) snprintf(AudioLogger::instance().prefix(__FILE__,__LINE__, level).str(),LOG_PRINTF_BUFFER_SIZE,__VA_ARGS__); AudioLogger::instance().println();
 
-#define LOGD(...) if (audio_tools::AudioLogger::instance().level()<=audio_tools::AudioLogger::Debug) { LOG_OUT(audio_tools::AudioLogger::Debug, __VA_ARGS__);}
-#define LOGI(...) if (audio_tools::AudioLogger::instance().level()<=audio_tools::AudioLogger::Info) { LOG_OUT(audio_tools::AudioLogger::Info, __VA_ARGS__);}
-#define LOGW(...) if (audio_tools::AudioLogger::instance().level()<=audio_tools::AudioLogger::Warning) { LOG_OUT(audio_tools::AudioLogger::Warning, __VA_ARGS__);}
-#define LOGE(...) if (audio_tools::AudioLogger::instance().level()<=audio_tools::AudioLogger::Error) { LOG_OUT(audio_tools::AudioLogger::Error, __VA_ARGS__);}
+#define LOGD(...) if (AudioLogger::instance().level()<=AudioLogger::Debug) { LOG_OUT(AudioLogger::Debug, __VA_ARGS__);}
+#define LOGI(...) if (AudioLogger::instance().level()<=AudioLogger::Info) { LOG_OUT(AudioLogger::Info, __VA_ARGS__);}
+#define LOGW(...) if (AudioLogger::instance().level()<=AudioLogger::Warning) { LOG_OUT(AudioLogger::Warning, __VA_ARGS__);}
+#define LOGE(...) if (AudioLogger::instance().level()<=AudioLogger::Error) { LOG_OUT(AudioLogger::Error, __VA_ARGS__);}
 
 #else
 

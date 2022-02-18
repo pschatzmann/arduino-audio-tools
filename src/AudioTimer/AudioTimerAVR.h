@@ -6,8 +6,8 @@
 namespace audio_tools {
 
 typedef void (* repeating_timer_callback_t )(void* obj);
-class TimerAlarmRepeating;
-TimerAlarmRepeating *timerAlarmRepeatingRef = nullptr;
+class TimerAlarmRepeatingAVR;
+TimerAlarmRepeatingAVR *timerAlarmRepeatingRef = nullptr;
 
 
 /**
@@ -19,6 +19,10 @@ TimerAlarmRepeating *timerAlarmRepeatingRef = nullptr;
  */
 class TimerAlarmRepeatingAVR : public TimerAlarmRepeatingDef {
     public:
+
+        TimerAlarmRepeatingAVR(TimerFunction function=DirectTimerCallback, int id=0) : TimerAlarmRepeatingDef(){
+            timerAlarmRepeatingRef = this;
+        }
 
         TimerAlarmRepeatingAVR(){
             timerAlarmRepeatingRef = this;
@@ -95,5 +99,6 @@ class TimerAlarmRepeatingAVR : public TimerAlarmRepeatingDef {
 
 typedef  TimerAlarmRepeatingAVR TimerAlarmRepeating;
 
+} // namespace
 
 #endif

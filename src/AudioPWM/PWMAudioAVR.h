@@ -33,7 +33,7 @@ class PWMAudioStreamAVR : public PWMAudioStreamBase {
 
         // Ends the output
         virtual void end(){
-             LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             noInterrupts(); 
             // stop timer callback
             TCCR1B = 0;
@@ -136,7 +136,7 @@ void defaultPWMAudioOutputCallback(){
 /// timer callback: write the next frame to the pins
 ISR(TIMER1_COMPA_vect){
     defaultPWMAudioOutputCallback();
-    TimerAlarmRepeating::tickerCallback();
+    TimerAlarmRepeatingAVR::tickerCallback();
 
 }
 
