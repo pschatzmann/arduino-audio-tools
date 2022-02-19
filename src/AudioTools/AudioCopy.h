@@ -175,15 +175,18 @@ class StreamCopyT {
             delay_on_no_data = delayMs;
         }
 
-        /// copies all data
-        void copyAll(int delayMs=5){
+        /// copies all data - returns true if we copied anything
+        bool copyAll(int delayMs=5){
             LOGD(LOG_METHOD);
+            bool result = false;
             if (from==nullptr || to == nullptr) 
-                return;
+                return result;
 
             while(copy()){
+                result = true;
                 delay(delayMs);
             }
+            return result;
         }
 
         /// Provides the actual mime type, that was determined from the first available data
