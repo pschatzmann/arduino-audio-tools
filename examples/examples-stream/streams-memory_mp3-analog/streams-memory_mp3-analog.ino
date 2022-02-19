@@ -19,32 +19,32 @@
 
 
 MemoryStream mp3(BabyElephantWalk60_mp3, BabyElephantWalk60_mp3_len);
-AnalogAudioStream out;  // Analog output 
-EncodedAudioStream decoded(&out, new MP3DecoderHelix()); // output to decoder
-StreamCopy copier(decoded, mp3);    // copy in to out
+AnalogAudioStream analog;  // Analog output 
+EncodedAudioStream out(&analog, new MP3DecoderHelix()); // output to decoder
+StreamCopy copier(out, mp3);    // copy in to analog
 
 void setup(){
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);  
 
   // update audio info with info from decoder
-  decoded.setNotifyAudioChange(out);
+  out.setNotifyAudioChange(analog);
 
   // begin processing
-  auto cfg = out.defaultConfig();
-  out.begin(cfg);
+  auto cfg = analog.defaultConfig();
+  analog.begin(cfg);
 
-  decoded.begin();
+  out.begin();
 }
 
 void loop(){
   if (mp3) {
     copier.copy();
   } else {
-    auto info = decoded.decoder().audioInfo();
+    auto info = out.decoder().audioInfo();
     LOGI("The audio rate from the mp3 file is %d", info.sample_rate);
     LOGI("The channels from the mp3 file is %d", info.channels);
-    out.end();
+    analog.end();
     stop();
   }
 }
