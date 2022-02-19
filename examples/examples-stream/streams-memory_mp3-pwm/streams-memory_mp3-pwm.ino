@@ -17,7 +17,6 @@
 #include "BabyElephantWalk60_mp3.h"
 
 
-
 MemoryStream mp3(BabyElephantWalk60_mp3, BabyElephantWalk60_mp3_len);
 PWMAudioStream out;  // PWM output 
 EncodedAudioStream decoded(&out, new MP3DecoderHelix()); // output to decoder
