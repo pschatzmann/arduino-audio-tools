@@ -37,6 +37,7 @@ void setup(){
 
 void sayWord() {
   Serial.println("Saying word...");
+  mp3.begin(); // restart source 
   helix.begin(); // so that we can repeatedly call this method
   copier.copyAll();
   helix.end(); // flush output
