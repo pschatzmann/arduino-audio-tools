@@ -176,15 +176,22 @@ class StreamCopyT {
         }
 
         /// copies all data - returns true if we copied anything
-        bool copyAll(int delayMs=5){
+        bool copyAll(int delayWithDataMs=5, int delayNoDataMs=1000){
             LOGD(LOG_METHOD);
             bool result = false;
             if (from==nullptr || to == nullptr) 
                 return result;
 
-            while(copy()){
-                result = true;
-                delay(delayMs);
+            // copy whily source has data available
+            size_t available = 1024;
+            while(available){
+                if (copy()) {
+                    result = true;
+                    delay(delayWithDataMs);
+                } else {
+                    delay(delayNoDataMs);
+                }
+                available = from->available();
             }
             return result;
         }
