@@ -66,7 +66,7 @@ class BufferedTaskStream : public AudioStream {
 
         /// reads a byte - to be avoided
         virtual int read() override {
-            if (!ready) return -1;
+            //if (!ready) return -1;
             int result = -1;
             xSemaphoreTake(mutex, portMAX_DELAY);
             result = buffers.read();
@@ -76,7 +76,7 @@ class BufferedTaskStream : public AudioStream {
 
         /// peeks a byte - to be avoided
         virtual int peek() override {
-            if (!ready) return -1;
+            //if (!ready) return -1;
             int result = -1;
             xSemaphoreTake(mutex, portMAX_DELAY);
             result = buffers.peek();
@@ -86,7 +86,7 @@ class BufferedTaskStream : public AudioStream {
         
         /// Use this method !!
         virtual size_t readBytes( uint8_t *data, size_t length) override { 
-            if (!ready) return 0;
+            //if (!ready) return 0;
             size_t result = 0;
             xSemaphoreTake(mutex, portMAX_DELAY);
             result = buffers.readArray(data, length);
@@ -99,7 +99,7 @@ class BufferedTaskStream : public AudioStream {
 
         /// Returns the available bytes in the buffer: to be avoided
         virtual int available() override {
-            if (!ready) return 0;
+            //if (!ready) return 0;
             int result = 0;
             xSemaphoreTake(mutex, portMAX_DELAY);
             result = buffers.available();
