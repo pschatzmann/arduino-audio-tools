@@ -12,7 +12,7 @@
 #include "AudioTools.h"
 
 /**
- * @brief We use a ADS1015 I2S microphone as input and send the data to A2DP
+ * @brief We use a INMP441 I2S microphone as input and send the data to A2DP
  * Unfortunatly the data type from the microphone (int32_t)  does not match with the required data type by A2DP (int16_t),
  * so we need to convert.
  */ 
