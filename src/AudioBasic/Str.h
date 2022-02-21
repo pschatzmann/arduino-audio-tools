@@ -114,7 +114,7 @@ class Str {
             this->maxlen = maxlen;
             this->len = len;
             this->is_const = isConst;
-            if (len==0){
+            if (len==0 && !isConst){
                 this->chars[0] = 0;
             }
         }
@@ -606,6 +606,15 @@ class Str {
             int result = 0;
             if (!isEmpty()){
                 result = atoi(chars);
+            }
+            return result;
+        }
+
+        /// Converts the string to an long
+        long toLong() {
+            long result = 0;
+            if (!isEmpty()){
+                result = atol(chars);
             }
             return result;
         }
