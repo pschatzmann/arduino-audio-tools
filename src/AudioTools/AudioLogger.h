@@ -123,11 +123,8 @@ class AudioLogger {
                 portEXIT_CRITICAL(&mutex_logger);
             #endif
         }
-
-
 };
 
-}    
 
 #define LOG_OUT(level, ...) snprintf(AudioLogger::instance().prefix(__FILE__,__LINE__, level).str(),LOG_PRINTF_BUFFER_SIZE,__VA_ARGS__); AudioLogger::instance().println();
 
@@ -144,3 +141,5 @@ class AudioLogger {
 #define LOGE(...) 
 
 #endif
+
+}    

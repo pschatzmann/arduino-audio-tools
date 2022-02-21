@@ -10,11 +10,9 @@
  */
 #include "Arduino.h"
 #include "AudioConfig.h"
-#include "AudioTools/AudioLogger.h"
 
 #if defined(ARDUINO_ARCH_RP2040) && defined(FIX_SYNC_SYNCHRONIZE)
 extern "C" void __sync_synchronize(){
-    LOGE("__sync_synchronize not implemented")
 }
 #endif
 
