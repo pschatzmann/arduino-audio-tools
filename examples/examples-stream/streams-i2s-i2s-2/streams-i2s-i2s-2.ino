@@ -1,6 +1,6 @@
 /**
- * @file streams-i2s-filter-i2s-2.ino
- * @brief Copy audio from I2S to I2S using an FIR filter - We use 2 different i2s ports!
+ * @file streams-i2s-i2s-2.ino
+ * @brief Copy audio from I2S to I2S: We use 2 different i2s ports!
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
