@@ -1,6 +1,6 @@
 /**
  * @file streams-i2s-filter-i2s.ino
- * @brief Copy audio from I2S to I2S using an FIR filter
+ * @brief Copy audio from I2S to I2S using an FIR filter - I2S uses 1 i2s port
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -9,9 +9,8 @@
  
 uint16_t sample_rate=44100;
 uint16_t channels = 2;
-I2SStream in;
-I2SStream out; 
-StreamCopy copier(out, in); // copies sound into i2s
+I2SStream i2s;
+StreamCopy copier(i2s, i2s); // copies sound into i2s
 
 
 // Arduino Setup
@@ -23,30 +22,18 @@ void setup(void) {
 
   // start I2S in
   Serial.println("starting I2S...");
-  auto config_in = in.defaultConfig(RX_MODE);
-  config_in.sample_rate = sample_rate; 
-  config_in.bits_per_sample = 16;
-  config_in.i2s_format = I2S_STD_FORMAT;
-  config_in.is_master = true;
-  config_in.port_no = 0;
-  config_in.pin_ws = 14;
-  config_in.pin_bck = 15;
-  config_in.pin_data = 16;
-  // config_in.fixed_mclk = sample_rate * 256
-  // config_in.pin_mck = 2
-  in.begin(config_in);
-
-  // start I2S out
-  auto config_out = out.defaultConfig(TX_MODE);
-  config_out.sample_rate = sample_rate; 
-  config_out.bits_per_sample = 16;
-  config_out.i2s_format = I2S_STD_FORMAT;
-  config_out.is_master = true;
-  config_out.port_no = 1;
-  config_out.pin_ws = 17;
-  config_out.pin_bck = 18;
-  config_out.pin_data = 19;
-  out.begin(config_out);
+  auto config = i2s.defaultConfig(RXTX_MODE);
+  config.sample_rate = sample_rate; 
+  config.bits_per_sample = 16;
+  config.channels = 2;
+  config.i2s_format = I2S_STD_FORMAT;
+  config.pin_ws = 14;
+  config.pin_bck = 15;
+  config.pin_data = 16;
+  config.pin_data_in = 17;
+  config.fixed_mclk = sample_rate * 256
+  config.pin_mck = 2
+  i2s.begin(config);
 
   Serial.println("I2S started...");
 }
