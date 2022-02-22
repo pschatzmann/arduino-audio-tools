@@ -8,8 +8,6 @@
  
 #include "AudioTools.h"
 
-
-
 //int pins[] = {22, 23};
 int channels = 1;
 uint16_t sample_rate=22000;

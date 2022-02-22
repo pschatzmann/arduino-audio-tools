@@ -1,14 +1,12 @@
 /**
- * @file streams-generator-dac.ino
+ * @file streams-generator-analog.ino
  * @author Phil Schatzmann
- * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-stream/streams-generator-dac/README.md 
+ * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-stream/streams-generator-analog/README.md 
  * @author Phil Schatzmann
  * @copyright GPLv3
  **/
  
 #include "AudioTools.h"
-
-
 
 typedef int16_t sound_t;                                   // sound will be represented as int16_t (with 2 bytes)
 uint16_t sample_rate=44100;
@@ -24,8 +22,7 @@ void setup(void) {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
-
-  // start the bluetooth
+  // start the analog output
   AnalogConfig config = out.defaultConfig(TX_MODE);
   config.sample_rate = sample_rate; 
   out.begin(config);
