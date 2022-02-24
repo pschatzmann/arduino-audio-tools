@@ -679,17 +679,17 @@ class VolumeStream : public AudioStreamX {
         }
 
         /// Provides the nubmer of bytes we can write
-        virtual int availableForWrite() { 
+        virtual int availableForWrite() override { 
             return p_out==nullptr? 0 : p_out->availableForWrite();
         }
 
         /// Provides the nubmer of bytes we can write
-        virtual int available() { 
+        virtual int available() override { 
             return p_in==nullptr? 0 : p_in->available();
         }
 
         /// Detines the Audio info - The bits_per_sample are critical to work properly!
-        void setAudioInfo(AudioBaseInfo info){
+        void setAudioInfo(AudioBaseInfo info) override {
             LOGD(LOG_METHOD);
             this->info = info;
             max_value = NumberConverter::maxValue(info.bits_per_sample);
