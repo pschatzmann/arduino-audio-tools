@@ -44,6 +44,7 @@ class AnalogConfig : public AudioBaseInfo {
     int mode_internal; 
     int port_no = I2S_NUM_0; // Analog input and output only supports 0!
     bool use_apll = false;
+    bool uninstall_driver_on_end = true;
 
     AnalogConfig() {
         sample_rate = 44100;
@@ -185,81 +186,97 @@ class AnalogAudioStream  : public AudioStreamX {
         }
     }
 
+    /// Reopen with last config
+    bool begin() override {
+      return begin(adc_config);
+    }
+
     /// starts the DAC 
     bool begin(AnalogConfig cfg) {
       LOGI(LOG_METHOD);
       cfg.logInfo();
-      port_no = (i2s_port_t) cfg.port_no;
 
-      adc_config = cfg;
-      i2s_config_t i2s_config = {
-          .mode                   = (i2s_mode_t)cfg.mode_internal,
-          .sample_rate            = cfg.sample_rate,
-          .bits_per_sample        = (i2s_bits_per_sample_t)cfg.bits_per_sample,
-          .channel_format         = I2S_CHANNEL_FMT_RIGHT_LEFT,
-          .communication_format   = I2S_COMM_FORMAT_I2S_MSB,
-          .intr_alloc_flags       = 0,
-          .dma_buf_count          = cfg.dma_buf_count,
-          .dma_buf_len            = cfg.dma_buf_len,
-          .use_apll               = cfg.use_apll,
-          .tx_desc_auto_clear = false
-        //   //  .fixed_mclk = 0
-      };
+      if (!is_driver_installed){
+        port_no = (i2s_port_t) cfg.port_no;
+
+        adc_config = cfg;
+        i2s_config_t i2s_config = {
+            .mode                   = (i2s_mode_t)cfg.mode_internal,
+            .sample_rate            = cfg.sample_rate,
+            .bits_per_sample        = (i2s_bits_per_sample_t)cfg.bits_per_sample,
+            .channel_format         = I2S_CHANNEL_FMT_RIGHT_LEFT,
+            .communication_format   = I2S_COMM_FORMAT_I2S_MSB,
+            .intr_alloc_flags       = 0,
+            .dma_buf_count          = cfg.dma_buf_count,
+            .dma_buf_len            = cfg.dma_buf_len,
+            .use_apll               = cfg.use_apll,
+            .tx_desc_auto_clear = false
+          //   //  .fixed_mclk = 0
+        };
 
 
-      // setup config
-      if (i2s_driver_install(port_no, &i2s_config, 0, nullptr)!=ESP_OK){
-        LOGE( "%s - %s", __func__, "i2s_driver_install");
-        return false;
-      }      
+        // setup config
+        if (i2s_driver_install(port_no, &i2s_config, 0, nullptr)!=ESP_OK){
+          LOGE( "%s - %s", __func__, "i2s_driver_install");
+          return false;
+        }    
 
-      // clear i2s buffer
-      if (i2s_zero_dma_buffer(port_no)!=ESP_OK) {
-        LOGE( "%s - %s", __func__, "i2s_zero_dma_buffer");
-        return false;
-      }
+        // record driver as installed
+        is_driver_installed = true;  
 
-      switch (cfg.mode) {
-        case RX_MODE:
-          LOGI("RX_MODE");
+        // clear i2s buffer
+        if (i2s_zero_dma_buffer(port_no)!=ESP_OK) {
+          LOGE( "%s - %s", __func__, "i2s_zero_dma_buffer");
+          return false;
+        }
 
-          if (i2s_set_adc_mode(cfg.adc_unit[0], cfg.adc_channel[0])!=ESP_OK) {
-            LOGE( "%s - %s", __func__, "i2s_driver_install");
-            return false;
-          }
+        switch (cfg.mode) {
+          case RX_MODE:
+            LOGI("RX_MODE");
 
-          if (cfg.channels>1){
-            if (i2s_set_adc_mode(cfg.adc_unit[1], cfg.adc_channel[1])!=ESP_OK) {
+            if (i2s_set_adc_mode(cfg.adc_unit[0], cfg.adc_channel[0])!=ESP_OK) {
               LOGE( "%s - %s", __func__, "i2s_driver_install");
               return false;
             }
-          }
 
-          // enable the ADC
-          if (i2s_adc_enable(port_no)!=ESP_OK) {
-            LOGE( "%s - %s", __func__, "i2s_adc_enable");
+            if (cfg.channels>1){
+              if (i2s_set_adc_mode(cfg.adc_unit[1], cfg.adc_channel[1])!=ESP_OK) {
+                LOGE( "%s - %s", __func__, "i2s_driver_install");
+                return false;
+              }
+            }
+
+            // enable the ADC
+            if (i2s_adc_enable(port_no)!=ESP_OK) {
+              LOGE( "%s - %s", __func__, "i2s_adc_enable");
+              return false;
+            }
+
+            // if (adc1_config_channel_atten(ADC1_CHANNEL_6,ADC_ATTEN_DB_11)!=ESP_OK){
+            //   LOGE( "%s - %s", __func__, "adc1_config_channel_atten");
+            // }
+            // if (adc1_config_channel_atten(ADC1_CHANNEL_7,ADC_ATTEN_DB_11)!=ESP_OK){
+            //   LOGE( "%s - %s", __func__, "adc1_config_channel_atten");
+            // }
+            break;
+
+          case TX_MODE:
+            LOGI("TX_MODE");
+            if (i2s_set_pin(port_no, nullptr) != ESP_OK) LOGE("i2s_set_pin");
+            if (i2s_set_dac_mode( I2S_DAC_CHANNEL_BOTH_EN) != ESP_OK) LOGE("i2s_set_dac_mode");
+            break;
+
+          default:
+            LOGE( "Unsupported MODE: %d", cfg.mode);
             return false;
-          }
+            break;
 
-          // if (adc1_config_channel_atten(ADC1_CHANNEL_6,ADC_ATTEN_DB_11)!=ESP_OK){
-          //   LOGE( "%s - %s", __func__, "adc1_config_channel_atten");
-          // }
-          // if (adc1_config_channel_atten(ADC1_CHANNEL_7,ADC_ATTEN_DB_11)!=ESP_OK){
-          //   LOGE( "%s - %s", __func__, "adc1_config_channel_atten");
-          // }
-          break;
-
-        case TX_MODE:
-          LOGI("TX_MODE");
-          if(i2s_set_pin(port_no, nullptr)!=ESP_OK) LOGE("i2s_set_pin");
-          if (i2s_set_dac_mode( I2S_DAC_CHANNEL_BOTH_EN )!= ESP_OK) LOGE("i2s_set_dac_mode");
-          break;
-
-        default:
-          LOGE( "Unsupported MODE: %d", cfg.mode);
-          return false;
-          break;
-
+        }
+      } else {
+        i2s_start(port_no);
+        if (adc_config.mode == RX_MODE){
+          i2s_adc_enable(port_no); 
+        } 
       }
       active = true;
       return true;
@@ -268,8 +285,18 @@ class AnalogAudioStream  : public AudioStreamX {
     /// stops the I2C and unistalls the driver
     void end() override {
         LOGI(__func__);
-        i2s_adc_disable(port_no); 
-        i2s_driver_uninstall(port_no); 
+        i2s_zero_dma_buffer(port_no);
+
+        // close ADC
+        if (adc_config.mode == RX_MODE){
+          i2s_adc_disable(port_no); 
+        } 
+        if (adc_config.uninstall_driver_on_end){
+          i2s_driver_uninstall(port_no); 
+          is_driver_installed = false;
+        } else {
+          i2s_stop(port_no);
+        }
         active = false;   
     }
 
@@ -327,6 +354,7 @@ class AnalogAudioStream  : public AudioStreamX {
     AnalogConfig adc_config;
     i2s_port_t port_no;
     bool active = false;
+    bool is_driver_installed = false;
     size_t result=0;
 
 
