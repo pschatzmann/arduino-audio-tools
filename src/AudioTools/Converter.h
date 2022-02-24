@@ -1,6 +1,7 @@
 #pragma once
 #include "AudioTypes.h"
 #include "AudioBasic/Vector.h"
+#include "AudioTools/Filter.h"
 
 namespace audio_tools {
 
@@ -549,6 +550,168 @@ class NumberReader {
             return result;
         }
 
+};
+
+
+/**
+ * @brief Converter for 1 Channel which applies the indicated Filter
+ * @author pschatzmann
+ * @tparam T
+ */
+template <typename T>
+class Converter1Channel : public BaseConverter<T> {
+ public:
+  Converter1Channel(Filter<T> &filter) { this->p_filter = &filter; }
+
+  size_t convert(uint8_t *src, size_t size) {
+    T *data = (T *)src;
+    for (size_t j = 0; j < size; j++) {
+      data[j] = p_filter->process(data[j]);
+    }
+    return size;
+  }
+
+ protected:
+  Filter<T> *p_filter = nullptr;
+};
+
+/**
+ * @brief Converter for n Channels which applies the indicated Filter
+ * @author pschatzmann
+ * @tparam T
+ */
+template <typename T, typename FT>
+class ConverterNChannels : public BaseConverter<T> {
+ public:
+  /// Default Constructor
+  ConverterNChannels(int channels) {
+    this->channels = channels;
+    filters = new Filter<FT> *[channels];
+    // make sure that we have 1 filter per channel
+    for (int j = 0; j < channels; j++) {
+      filters[j] = nullptr;
+    }
+  }
+
+  /// Destrucotr
+  ~ConverterNChannels() {
+    for (int j = 0; j < channels; j++) {
+      if (filters[j]!=nullptr){
+        delete filters[j];
+      }
+    }
+    delete[] filters;
+    filters = 0;
+  }
+
+  /// defines the filter for an individual channel - the first channel is 0
+  void setFilter(int channel, Filter<FT> *filter) {
+    if (channel<channels){
+      if (filters[channel]!=nullptr){
+        delete filters[channel];
+      }
+      filters[channel] = filter;
+    } else {
+      LOGE("Invalid channel nummber %d - max channel is %d", channel, channels-1);
+    }
+  }
+
+  // convert all samples for each channel separately
+  size_t convert(uint8_t *src, size_t size) {
+    int count = size / channels / sizeof(T);
+    T *sample = (T *)src;
+    for (size_t j = 0; j < count; j++) {
+      for (int channel = 0; channel < channels; channel++) {
+        if (filters[channel]!=nullptr){
+          *sample = filters[channel]->process(*sample);
+        }
+        sample++;
+      }
+    }
+    return size;
+  }
+
+ protected:
+  Filter<FT> **filters = nullptr;
+  int channels;
+};
+
+/**
+ * @brief Removes any silence from the buffer that is longer then n samples with a amplitude
+ * below the indicated threshhold. If you process multiple channels you need to multiply the
+ * channels with the number of samples to indicate n
+ * 
+ * @tparam T 
+ */
+
+template <typename T>
+class SilenceRemovalConverter : public BaseConverter<T>  {
+ public:
+
+  SilenceRemovalConverter(int n = 8, int aplidudeLimit = 2) { 
+  	set(n, aplidudeLimit);
+  }
+
+  virtual size_t convert(uint8_t *data, size_t size) override {
+    if (!active) {
+      // no change to the data
+      return size;
+    }
+    size_t sample_count = size / sizeof(T);
+    size_t write_count = 0;
+    T *audio = (T *)data;
+
+    // find relevant data
+    T *p_buffer = (T *)data;
+    for (int j = 0; j < sample_count; j++) {
+      int pos = findLastAudioPos(audio, j);
+      if (pos < n) {
+        write_count++;
+        *p_buffer++ = audio[j];
+      }
+    }
+    
+    // write audio data w/o silence
+    size_t write_size = write_count * sizeof(T);
+    LOGI("filtered silence from %d -> %d", (int)size, (int)write_size);
+
+    // number of empty samples of prior buffer
+    priorLastAudioPos =  findLastAudioPos(audio, sample_count - 1);
+
+    // return new data size
+    return write_size;
+  }
+  
+ protected:
+  bool active = false;
+  const uint8_t *buffer = nullptr;
+  int n;
+  int priorLastAudioPos = 0;
+  int amplidude_limit = 0;
+
+  void set(int n = 5, int aplidudeLimit = 2) {
+    LOGI("begin(n=%d, aplidudeLimit=%d", n, aplidudeLimit);
+    this->n = n;
+    this->amplidude_limit = aplidudeLimit;
+    this->priorLastAudioPos = n+1;  // ignore first values
+    this->active = n > 0;
+  }
+
+
+  // find last position which contains audible data
+  int findLastAudioPos(T *audio, int pos) {
+    for (int j = 0; j < n; j++) {
+      // we are before the start of the current buffer
+      if (pos - j <= 0) {
+        return priorLastAudioPos;
+      }
+      // we are in the current buffer
+      if (abs(audio[pos - j]) > amplidude_limit) {
+        return j;
+      }
+    }
+    return n + 1;
+  }
 };
 
 

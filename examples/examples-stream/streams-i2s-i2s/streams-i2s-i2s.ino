@@ -30,9 +30,9 @@ void setup(void) {
   config.pin_ws = 14;
   config.pin_bck = 15;
   config.pin_data = 16;
-  config.pin_data_in = 17;
-  config.fixed_mclk = sample_rate * 256
-  config.pin_mck = 2
+  config.pin_data_rx = 17;
+  //config.fixed_mclk = sample_rate * 256;
+  // config.pin_mck = 2; // must be 0,1 or 2 - only for ESP_IDF_VERSION_MAJOR >= 4
   i2s.begin(config);
 
   Serial.println("I2S started...");

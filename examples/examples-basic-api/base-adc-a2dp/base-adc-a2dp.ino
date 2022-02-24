@@ -19,7 +19,7 @@
  * @brief We use a mcp6022 analog microphone as input and send the data to A2DP
  */ 
 
-AnalogAudio adc;
+AnalogAudioStream adc;
 BluetoothA2DPSource a2dp_source;
 // The data has a center of around 26427, so we we need to shift it down to bring the center to 0
 ConverterScaler<int16_t> scaler(1.0, -26427, 32700 );

@@ -23,7 +23,7 @@ void setup(void) {
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
   // start the analog output
-  AnalogConfig config = out.defaultConfig(TX_MODE);
+  auto config = out.defaultConfig(TX_MODE);
   config.sample_rate = sample_rate; 
   out.begin(config);
 

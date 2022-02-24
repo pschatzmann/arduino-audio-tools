@@ -1,5 +1,4 @@
 #pragma once
-#include "AudioTools/Converter.h"
 #include "AudioConfig.h"
 #ifdef USE_TYPETRAITS
 #include <type_traits>
@@ -366,88 +365,5 @@ class FilterChain : public Filter<T> {
     Filter<T> *filters[N] = {0};
 };
 
-
-/**
- * @brief Converter for 1 Channel which applies the indicated Filter
- * @author pschatzmann
- * @tparam T
- */
-template <typename T>
-class Converter1Channel : public BaseConverter<T> {
- public:
-  Converter1Channel(Filter<T> &filter) { this->p_filter = &filter; }
-
-  size_t convert(uint8_t *src, size_t size) {
-    T *data = (T *)src;
-    for (size_t j = 0; j < size; j++) {
-      data[j] = p_filter->process(data[j]);
-    }
-    return size;
-  }
-
- protected:
-  Filter<T> *p_filter = nullptr;
-};
-
-/**
- * @brief Converter for n Channels which applies the indicated Filter
- * @author pschatzmann
- * @tparam T
- */
-template <typename T, typename FT>
-class ConverterNChannels : public BaseConverter<T> {
- public:
-  /// Default Constructor
-  ConverterNChannels(int channels) {
-    this->channels = channels;
-    filters = new Filter<FT> *[channels];
-    // make sure that we have 1 filter per channel
-    for (int j = 0; j < channels; j++) {
-      filters[j] = nullptr;
-    }
-  }
-
-  /// Destrucotr
-  ~ConverterNChannels() {
-    for (int j = 0; j < channels; j++) {
-      if (filters[j]!=nullptr){
-        delete filters[j];
-      }
-    }
-    delete[] filters;
-    filters = 0;
-  }
-
-  /// defines the filter for an individual channel - the first channel is 0
-  void setFilter(int channel, Filter<FT> *filter) {
-    if (channel<channels){
-      if (filters[channel]!=nullptr){
-        delete filters[channel];
-      }
-      filters[channel] = filter;
-    } else {
-      LOGE("Invalid channel nummber %d - max channel is %d", channel, channels-1);
-    }
-  }
-
-  // convert all samples for each channel separately
-  size_t convert(uint8_t *src, size_t size) {
-    int count = size / channels / sizeof(T);
-    T *sample = (T *)src;
-    for (size_t j = 0; j < count; j++) {
-      for (int channel = 0; channel < channels; channel++) {
-        if (filters[channel]!=nullptr){
-          *sample = filters[channel]->process(*sample);
-        }
-        sample++;
-      }
-    }
-    return size;
-  }
-
- protected:
-  Filter<FT> **filters = nullptr;
-  int channels;
-};
 
 }  // namespace audio_tools
