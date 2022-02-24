@@ -846,7 +846,7 @@ namespace audio_tools {
         bool active = false;
         bool autonext = false;
         AudioSource* p_source = nullptr;
-        VolumeOutput volume_out; // Volume control
+        VolumeStream volume_out; // Volume control
         MetaDataID3 meta_out; // Metadata parser
         EncodedAudioStream* p_out_decoding = nullptr; // Decoding stream
         AudioDecoder* p_decoder = nullptr;

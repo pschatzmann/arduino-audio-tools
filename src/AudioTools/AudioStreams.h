@@ -5,6 +5,7 @@
 #include "AudioTools/Buffers.h"
 #include "AudioTools/AudioLogger.h"
 #include "AudioEffects/SoundGenerator.h"
+#include "AudioTools/VolumeControl.h"
 
 namespace audio_tools {
 
@@ -581,8 +582,11 @@ class ConvertedStream : public AudioStreamX {
 
         virtual size_t write(const uint8_t *buffer, size_t size) { 
           size_t result = p_converter->convert((uint8_t *)buffer, size); 
-          size_t result_written = p_stream->write(buffer, result);
-          return size * result_written / result;
+          if (result>0) {
+            size_t result_written = p_stream->write(buffer, result);
+            return size * result_written / result;
+          }
+          return 0;
         }
 
         size_t readBytes(uint8_t *data, size_t length) override {
@@ -603,7 +607,196 @@ class ConvertedStream : public AudioStreamX {
 };
 
 /**
- * Stream to which we can apply Filters for each channel
+ * @brief Output PWM object on which we can apply some volume settings. To work properly the class needs to know the 
+ * bits per sample. If nothing is defined we assume 16 bits!
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+//class VolumeOutput : public AudioPrint {
+class VolumeStream : public AudioStreamX {
+    public:
+        /// Default Constructor
+        VolumeStream() = default;
+
+        VolumeStream(Print &out, bool allowBoost=false) {
+            begin(out, allowBoost);
+        }
+
+        /// Constructor which automatically calls begin(Print out)!
+        VolumeStream(Stream &out, bool allowBoost=false) {
+            begin(out, allowBoost);
+        }
+
+        /// Assigns the final output 
+        bool begin(Print &out, bool allowBoost=true){
+            LOGD(LOG_METHOD);
+            p_out = &out;
+            allow_boost = allowBoost;
+            return true;
+        }
+
+        /// Assigns the final output 
+        bool begin(Stream &in, bool allowBoost=false){
+            LOGD(LOG_METHOD);
+            p_in = &in;
+            p_out = p_in;
+            allow_boost = allowBoost;
+            return true;
+        }
+
+        /// Defines the volume control logic
+        void setVolumeControl(VolumeControl &vc){
+            cached_volume.setVolumeControl(vc);
+        }
+
+        /// Resets the volume control to use the standard logic
+        void resetVolumeControl(){
+            cached_volume.setVolumeControl(default_volume);
+        }
+
+        /// Read raw PCM audio data, which will be the input for the volume control 
+        virtual size_t readBytes(uint8_t *buffer, size_t length) override { 
+            LOGD(LOG_METHOD);
+            if (buffer==nullptr || p_in==nullptr){
+                LOGE("NPE");
+                return 0;
+            }
+            size_t result = p_in->readBytes(buffer, length);
+            if (volume_value != 1.0) applyVolume(buffer, result);
+            return result;
+        }
+
+
+        /// Writes raw PCM audio data, which will be the input for the volume control 
+        virtual size_t write(const uint8_t *buffer, size_t size) override {
+            LOGD(LOG_METHOD);
+            if (buffer==nullptr || p_out==nullptr){
+                LOGE("NPE");
+                return 0;
+            }
+            if (volume_value != 1.0) applyVolume(buffer,size);
+            return p_out->write(buffer, size);
+        }
+
+        /// Provides the nubmer of bytes we can write
+        virtual int availableForWrite() { 
+            return p_out==nullptr? 0 : p_out->availableForWrite();
+        }
+
+        /// Provides the nubmer of bytes we can write
+        virtual int available() { 
+            return p_in==nullptr? 0 : p_in->available();
+        }
+
+        /// Detines the Audio info - The bits_per_sample are critical to work properly!
+        void setAudioInfo(AudioBaseInfo info){
+            LOGD(LOG_METHOD);
+            this->info = info;
+            max_value = NumberConverter::maxValue(info.bits_per_sample);
+        }
+
+        /// Shortcut method to define the sample size (alternative to setAudioInfo())
+        void setBitsPerSample(int bits_per_sample){
+            info.bits_per_sample = bits_per_sample;
+            max_value = NumberConverter::maxValue(info.bits_per_sample);
+        }
+
+        /// Shortcut method to define the sample size (alternative to setAudioInfo())
+        void setBytesPerSample(int bytes_per_sample){
+            info.bits_per_sample = bytes_per_sample * 8;
+            max_value = NumberConverter::maxValue(info.bits_per_sample);
+        }
+
+        /// Decreases the volume:  needs to be in the range of 0 to 1.0
+        void setVolume(float vol){
+            if (!allow_boost && vol>1.0) vol = 1.0;
+            if (vol<0.0) vol = 0.0;
+
+            // round to 2 digits
+            float value = (int)(vol * 100 + .5);
+            volume_value = (float)value / 100;;
+            LOGI("setVolume: %f", volume_value);
+        }
+
+        /// Provides the current volume setting
+        float volume() {
+            return volume_value;
+        }
+
+    protected:
+        Print *p_out=nullptr;
+        Stream *p_in=nullptr;
+        AudioBaseInfo info;
+        float volume_value=1.0;
+        SimulatedAudioPot default_volume;
+        CachedVolumeControl cached_volume = CachedVolumeControl(default_volume);
+        bool allow_boost = false; // allows a factor > 1.0
+        float max_value = NumberConverter::maxValue(info.bits_per_sample); // max value for clippint
+
+        VolumeControl &volumeControl(){
+            return cached_volume;
+        }
+
+        void applyVolume(const uint8_t *buffer, size_t size){
+            switch(info.bits_per_sample){
+                case 16:
+                    applyVolume16((int16_t*)buffer, size/2);
+                    break;
+                case 24:
+                    applyVolume24((int24_t*)buffer, size/3);
+                    break;
+                case 32:
+                    applyVolume32((int32_t*)buffer, size/4);
+                    break;
+                default:
+                    LOGE("Unsupported bits_per_sample: %d", info.bits_per_sample);
+            }
+        }
+
+        void applyVolume16(int16_t* data, size_t size){
+            float factor = volumeControl().getVolumeFactor(volume_value);
+            for (size_t j=0;j<size;j++){
+                float result = factor * data[j];
+                if (allow_boost){
+                    if (result>max_value) result = max_value;
+                    if (result<-max_value) result = -max_value;
+                } 
+                data[j]= static_cast<int16_t>(result);
+            }
+        }
+
+        void applyVolume24(int24_t* data, size_t size) {
+            float factor = volumeControl().getVolumeFactor(volume_value);
+            for (size_t j=0;j<size;j++){
+                float result = factor * data[j];
+                if (allow_boost){
+                    if (result>max_value) result = max_value;
+                    if (result<-max_value) result = -max_value;
+                } 
+                int32_t result1 = result;
+                data[j]= static_cast<int24_t>(result1);
+            }
+        }
+
+        void applyVolume32(int32_t* data, size_t size) {
+            float factor = volumeControl().getVolumeFactor(volume_value);
+            for (size_t j=0;j<size;j++){
+                float result = factor * data[j];
+                if (allow_boost){
+                    if (result>max_value) result = max_value;
+                    if (result<-max_value) result = -max_value;
+                } 
+                data[j]= static_cast<int32_t>(result);
+            }
+        }
+};
+
+// support legicy VolumeOutput
+//typedef VolumeStream VolumeOutput;
+
+/**
+ * Stream to which we can apply Filters for each channel. The filter 
+ * might change the result size!
  * 
  */
 template<typename T, class TF>
@@ -616,13 +809,13 @@ class FilteredStream : public AudioStreamX {
         }
 
         virtual size_t write(const uint8_t *buffer, size_t size) override { 
-           p_converter->convert((uint8_t *)buffer, size); 
-           return p_stream->write(buffer, size);
+           size_t result = p_converter->convert((uint8_t *)buffer, size); 
+           return p_stream->write(buffer, result);
         }
 
         size_t readBytes(uint8_t *data, size_t length) override {
            size_t result = p_stream->readBytes(data, length);
-           p_converter->convert(data, result); 
+           result = p_converter->convert(data, result); 
            return result;
         }
 

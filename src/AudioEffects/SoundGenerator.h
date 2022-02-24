@@ -141,7 +141,6 @@ class SoundGenerator  {
 };
 
 
-
 /**
  * @brief Generates a Sound with the help of sin() function.
  * @author Phil Schatzmann
@@ -166,13 +165,13 @@ class SineWaveGenerator : public SoundGenerator<T>{
         }
 
         void begin(AudioBaseInfo info) override {
-            LOGI(LOG_METHOD);
+            LOGI("%s::begin(channels=%d, sample_rate=%d)","SineWaveGenerator", info.channels, info.sample_rate);
             SoundGenerator<T>::begin(info);
             this->m_deltaTime = 1.0 / SoundGenerator<T>::info.sample_rate;
         }
 
         void begin(AudioBaseInfo info, uint16_t frequency){
-            LOGI(LOG_METHOD);
+            LOGI("%s::begin(channels=%d, sample_rate=%d, frequency=%d)","SineWaveGenerator",info.channels, info.sample_rate,frequency);
             SoundGenerator<T>::begin(info);
             this->m_deltaTime = 1.0 / SoundGenerator<T>::info.sample_rate;
             if (frequency>0){
@@ -181,7 +180,6 @@ class SineWaveGenerator : public SoundGenerator<T>{
         }
 
         void begin(int channels, int sample_rate, uint16_t frequency=0){
-            LOGD(LOG_METHOD);
             SoundGenerator<T>::info.channels  = channels;
             SoundGenerator<T>::info.sample_rate = sample_rate;
             begin(SoundGenerator<T>::info, frequency);

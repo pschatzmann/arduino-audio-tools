@@ -11,17 +11,19 @@
 
 namespace audio_tools {
 
-typedef int16_t arrayOf2int16_t[2];
-
-const char* ADC_TAG = "ADC";
 
 // Output I2S data to built-in DAC, no matter the data format is 16bit or 32 bit, the DAC module will only take the 8bits from MSB
-static int16_t convert8DAC(int value, int value_bits_per_sample){
-    // -> convert to positive 
-    int16_t result = (value * NumberConverter::maxValue(8) / NumberConverter::maxValue(value_bits_per_sample)) + NumberConverter::maxValue(8) / 2;
+// so we convet it to a singed 16 bit value
+static inline uint16_t convert8DAC(int64_t value, int value_bits_per_sample){
+    uint16_t result = value;
+    if (value_bits_per_sample!=16){
+      // convert to 16 bit value
+      result = (value * NumberConverter::maxValue(16) / NumberConverter::maxValue(value_bits_per_sample));
+    }
+    // uint_t positive range
+    result+= 32768;
     return result;    
 }
-
 
 /**
  * @brief ESP32 specific configuration for i2s input via adc. The default input pin is GPIO34. We always use int16_t values. The default
@@ -29,13 +31,11 @@ static int16_t convert8DAC(int value, int value_bits_per_sample){
  * 
  * @author Phil Schatzmann
  * @copyright GPLv3
- * 
- * 
  */
 class AnalogConfig : public AudioBaseInfo {
   public:
     // allow ADC to access the protected methods
-    friend class AnalogAudio;
+    friend class AnalogAudioStream;
 
     // public config parameters
     RxTxMode mode;
@@ -51,7 +51,7 @@ class AnalogConfig : public AudioBaseInfo {
         channels = 2;
         this->mode = TX_MODE;
         // enable both channels
-        mode_internal = (I2S_MODE_MASTER | I2S_MODE_RX | I2S_MODE_DAC_BUILT_IN);
+        mode_internal = (I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_DAC_BUILT_IN);
     }
 
     /// Default constructor
@@ -64,8 +64,10 @@ class AnalogConfig : public AudioBaseInfo {
         mode_internal = (I2S_MODE_MASTER | I2S_MODE_RX | I2S_MODE_ADC_BUILT_IN);
         setInputPin1(PIN_ADC1);
         setInputPin2(PIN_ADC2);
+        LOGI("I2S_MODE_ADC_BUILT_IN");
       } else {
         mode_internal = (I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_DAC_BUILT_IN);
+        LOGI("I2S_MODE_DAC_BUILT_IN");
       }
     }
 
@@ -150,15 +152,14 @@ class AnalogConfig : public AudioBaseInfo {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AnalogAudio  : public AudioStream {
-
+class AnalogAudioStream  : public AudioStreamX {
   public:
     /// Default constructor
-    AnalogAudio() {
+    AnalogAudioStream() {
     }
 
     /// Destructor
-    ~AnalogAudio() {
+    ~AnalogAudioStream() {
       end();
     }
 
@@ -171,7 +172,7 @@ class AnalogAudio  : public AudioStream {
 
     /// updates the sample rate dynamically 
     virtual void setAudioInfo(AudioBaseInfo info) {
-               LOGI(LOG_METHOD);
+        LOGI(LOG_METHOD);
         if (adc_config.sample_rate != info.sample_rate
             || adc_config.channels != info.channels
             || adc_config.bits_per_sample != info.bits_per_sample) {
@@ -185,59 +186,59 @@ class AnalogAudio  : public AudioStream {
     }
 
     /// starts the DAC 
-    void begin(AnalogConfig cfg) {
+    bool begin(AnalogConfig cfg) {
       LOGI(LOG_METHOD);
       cfg.logInfo();
       port_no = (i2s_port_t) cfg.port_no;
 
       adc_config = cfg;
       i2s_config_t i2s_config = {
-          .mode = (i2s_mode_t) cfg.mode_internal,
-          .sample_rate = (eps32_i2s_sample_rate_type)cfg.sample_rate,
-          .bits_per_sample = (i2s_bits_per_sample_t)16,
-          .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,
-          .communication_format = (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_I2S,
-          .intr_alloc_flags = ESP_INTR_FLAG_LEVEL1,
-          .dma_buf_count = cfg.dma_buf_count,
-          .dma_buf_len = cfg.dma_buf_len,
-          .use_apll = cfg.use_apll,
+          .mode                   = (i2s_mode_t)cfg.mode_internal,
+          .sample_rate            = cfg.sample_rate,
+          .bits_per_sample        = (i2s_bits_per_sample_t)cfg.bits_per_sample,
+          .channel_format         = I2S_CHANNEL_FMT_RIGHT_LEFT,
+          .communication_format   = I2S_COMM_FORMAT_I2S_MSB,
+          .intr_alloc_flags       = 0,
+          .dma_buf_count          = cfg.dma_buf_count,
+          .dma_buf_len            = cfg.dma_buf_len,
+          .use_apll               = cfg.use_apll,
           .tx_desc_auto_clear = false
-        //  .fixed_mclk = 0
-        };
+        //   //  .fixed_mclk = 0
+      };
 
 
       // setup config
       if (i2s_driver_install(port_no, &i2s_config, 0, nullptr)!=ESP_OK){
         LOGE( "%s - %s", __func__, "i2s_driver_install");
-        return;
+        return false;
       }      
 
       // clear i2s buffer
       if (i2s_zero_dma_buffer(port_no)!=ESP_OK) {
         LOGE( "%s - %s", __func__, "i2s_zero_dma_buffer");
-        return;
+        return false;
       }
 
       switch (cfg.mode) {
         case RX_MODE:
-          //init ADC pad
+          LOGI("RX_MODE");
 
           if (i2s_set_adc_mode(cfg.adc_unit[0], cfg.adc_channel[0])!=ESP_OK) {
             LOGE( "%s - %s", __func__, "i2s_driver_install");
-            return;
+            return false;
           }
 
           if (cfg.channels>1){
             if (i2s_set_adc_mode(cfg.adc_unit[1], cfg.adc_channel[1])!=ESP_OK) {
               LOGE( "%s - %s", __func__, "i2s_driver_install");
-              return;
+              return false;
             }
           }
 
           // enable the ADC
           if (i2s_adc_enable(port_no)!=ESP_OK) {
             LOGE( "%s - %s", __func__, "i2s_adc_enable");
-            return;
+            return false;
           }
 
           // if (adc1_config_channel_atten(ADC1_CHANNEL_6,ADC_ATTEN_DB_11)!=ESP_OK){
@@ -246,48 +247,39 @@ class AnalogAudio  : public AudioStream {
           // if (adc1_config_channel_atten(ADC1_CHANNEL_7,ADC_ATTEN_DB_11)!=ESP_OK){
           //   LOGE( "%s - %s", __func__, "adc1_config_channel_atten");
           // }
-
           break;
+
         case TX_MODE:
-          i2s_set_pin(port_no, nullptr); 
+          LOGI("TX_MODE");
+          if(i2s_set_pin(port_no, nullptr)!=ESP_OK) LOGE("i2s_set_pin");
+          if (i2s_set_dac_mode( I2S_DAC_CHANNEL_BOTH_EN )!= ESP_OK) LOGE("i2s_set_dac_mode");
           break;
 
         default:
           LOGE( "Unsupported MODE: %d", cfg.mode);
+          return false;
           break;
 
       }
       active = true;
-      LOGI(ADC_TAG, "%s - %s", __func__,"end");
-
+      return true;
     }
 
     /// stops the I2C and unistalls the driver
-    void end(){
-        LOGD( "%s", __func__);
+    void end() override {
+        LOGI(__func__);
         i2s_adc_disable(port_no); 
         i2s_driver_uninstall(port_no); 
         active = false;   
     }
 
-    /// Reads data from I2S
-    size_t read(int16_t (*src)[2], size_t sizeFrames){
-      size_t len = readBytes(src, sizeFrames * sizeof(int16_t)*2); // 2 bytes * 2 channels     
-      size_t result = len / (sizeof(int16_t) * 2); 
-      LOGD( "%s - len: %d -> %d", __func__,sizeFrames, result);
-      return result;
-    }
 
     AnalogConfig &config() {
       return adc_config;
     }
 
-    size_t write(const uint8_t *src, size_t size_bytes){
-      return writeBytes(src, size_bytes);
-    }
-
      /// writes the data to the I2S interface
-    size_t writeBytes(const void *src, size_t size_bytes){
+    virtual size_t write(const uint8_t *src, size_t size_bytes) override { 
       LOGD(LOG_METHOD);
 
       size_t result = 0;   
@@ -303,82 +295,75 @@ class AnalogAudio  : public AudioStream {
             LOGE("Unsupported number of channels: %d", adc_config.channels);   
             stop();
         }
+        LOGD("converted write size: %d",result);
       }
-      return result;
+      return size_bytes;
     }   
 
-    size_t readBytes(uint8_t *dest, size_t size_bytes){
-      return readBytes((void*)dest, size_bytes);
-    }
-
-    size_t readBytes(void *dest, size_t size_bytes){
+    size_t readBytes(uint8_t *dest, size_t size_bytes) override {
+      LOGD(LOG_METHOD);
       size_t result = 0;
       if (i2s_read(port_no, dest, size_bytes, &result, portMAX_DELAY)!=ESP_OK){
         LOGE(LOG_METHOD);
       }
       LOGD( "%s - len: %d -> %d", __func__, size_bytes, result);
-      //vTaskDelay(1);
       return result;
     }
 
-    virtual size_t write(uint8_t c) {
-      return 0;
+        /// Reads data from I2S
+    size_t read(int16_t (*src)[2], size_t sizeFrames)  {
+      size_t len = readBytes((uint8_t*)src, sizeFrames * sizeof(int16_t)*2); // 2 bytes * 2 channels     
+      size_t result = len / (sizeof(int16_t) * 2); 
+      LOGD( "%s - len: %d -> %d", __func__,sizeFrames, result);
+      return result;
     }
 
-    virtual int available() {
+
+    virtual int available() override {
       return active ? adc_config.dma_buf_len*adc_config.dma_buf_count : 0;
-    }
-
-    virtual int read() {
-       return -1;
-    }    
-    
-    virtual int peek() {
-       return -1;
-    }
-
-    virtual void flush() {  
     }
 
   protected:
     AnalogConfig adc_config;
     i2s_port_t port_no;
     bool active = false;
-    size_t result;
-    size_t resultTotal = 0;
+    size_t result=0;
 
 
     // The internal DAC only supports 8 bit values - so we need to convert the data
     size_t outputStereo(const void *src, size_t size_bytes) {
+      LOGD(LOG_METHOD);
       size_t output_size = 0;   
       size_t result;
-
+      uint16_t *dst = (uint16_t *)src;
       switch(adc_config.bits_per_sample){
         case 16: {
             int16_t *data=(int16_t *)src;
-            output_size = (size_bytes/2) * 2;
+            output_size = size_bytes;
             for (int j=0;j<size_bytes/2;j++){
-              data[j] = convert8DAC(data[j], adc_config.bits_per_sample);
+              dst[j] = convert8DAC(data[j], adc_config.bits_per_sample);
             }
           } break;
         case 24: {
             int24_t *data=(int24_t *)src;
-            output_size = (size_bytes/3) * 3;
+            output_size = (size_bytes/3) * 2;
             for (int j=0;j<size_bytes/3;j++){
-              data[j] = convert8DAC(data[j], adc_config.bits_per_sample);
+              dst[j] = (uint32_t)convert8DAC(data[j], adc_config.bits_per_sample);
             }
           } break;
         case 32: {
             int32_t *data=(int32_t *)src;
-            output_size = (size_bytes/4) * 4;
+            output_size = (size_bytes/4) * 2;
             for (int j=0;j<size_bytes/4;j++){
-              data[j] = convert8DAC(data[j], adc_config.bits_per_sample);
+              dst[j] = convert8DAC(data[j], adc_config.bits_per_sample);
             }
           } break;        
       }
 
-      if (i2s_write(port_no, src, output_size, &result, portMAX_DELAY)!=ESP_OK){
-        LOGE("%s: %d", LOG_METHOD, output_size);
+      if (output_size>0){
+        if (i2s_write(port_no, src, output_size, &result, portMAX_DELAY)!=ESP_OK){
+          LOGE("%s: %d", LOG_METHOD, output_size);
+        }
       }
 
       LOGD("i2s_write %d -> %d bytes", size_bytes, result);
@@ -388,9 +373,10 @@ class AnalogAudio  : public AudioStream {
 
     // I2S requires stereo so we convert mono to stereo
     size_t outputMono(const void *src, size_t size_bytes) {
+      LOGD(LOG_METHOD);
       size_t output_size = 0;   
-      int16_t out[2];
-
+      uint16_t out[2];
+      size_t resultTotal = 0;
       switch(adc_config.bits_per_sample){
         case 16: {
             int16_t *data=(int16_t *)src;
@@ -430,68 +416,8 @@ class AnalogAudio  : public AudioStream {
       LOGD("i2s_write %d -> %d bytes", size_bytes, resultTotal);
       return resultTotal;
     }
-
-    
 };
 
-/**
- * @brief We support the Stream interface for the AnalogAudio class
- * 
- * @tparam T 
- * @author Phil Schatzmann
- * @copyright GPLv3
- */
-
-class AnalogAudioStream : public BufferedStream  {
-
-    public:
-        AnalogAudioStream() : BufferedStream(DEFAULT_BUFFER_SIZE){
-        }
-
-        /// Provides the default configuration
-        AnalogConfig defaultConfig(RxTxMode mode = TX_MODE) {
-            return adc.defaultConfig(mode);
-        }
-
-        void setAudioInfo(AudioBaseInfo info){
-          LOGI(LOG_METHOD);
-          adc.setAudioInfo(info);
-        }
-
-
-        void begin(AnalogConfig cfg) {
-          config = cfg;
-            adc.begin(cfg);
-            // unmute
-            mute(false);
-        }
-
-        void end() {
-            mute(true);
-            adc.end();
-        }
-
-    protected:
-        AnalogAudio adc;
-        int mute_pin;
-        AnalogConfig config;
-
-        /// set mute pin on or off
-        void mute(bool is_mute){
-            if (mute_pin>0) {
-                digitalWrite(mute_pin, is_mute ? SOFT_MUTE_VALUE : !SOFT_MUTE_VALUE );
-            }
-        }
-
-        virtual size_t writeExt(const uint8_t* data, size_t len) {
-            return adc.writeBytes(data, len);
-        }
-
-        virtual size_t readExt( uint8_t *data, size_t length) { 
-            return adc.readBytes(data, length);
-        }
-
-};
 
 } // namespace
 

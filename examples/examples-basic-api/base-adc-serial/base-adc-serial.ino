@@ -19,7 +19,7 @@
  * @brief We use a mcp6022 analog microphone on GPIO34 and write it to Serial
  */ 
 
-AnalogAudio adc;
+AnalogAudioStream adc;
 const int32_t max_buffer_len = 1024;
 uint8_t buffer[max_buffer_len];
 // The data has a center of around 26427, so we we need to shift it down to bring the center to 0

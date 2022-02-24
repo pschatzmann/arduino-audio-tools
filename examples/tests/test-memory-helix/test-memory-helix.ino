@@ -13,7 +13,7 @@
 
 URLStream url("SSID","password");
 I2SStream i2s; // final output of decoded stream
-VolumeOutput volume(i2s);
+VolumeStream volume(i2s);
 LogarithmicVolumeControl lvc(0.1);
 EncodedAudioStream dec(&volume,new MP3DecoderHelix()); // Decoding stream
 StreamCopy copier(dec, url); // copy url to decoder
