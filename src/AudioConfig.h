@@ -91,6 +91,12 @@
 #ifndef COPY_DELAY_ON_NODATA 
 #define COPY_DELAY_ON_NODATA 10
 #endif
+
+#ifndef COPY_RETRY_LIMIT 
+#define COPY_RETRY_LIMIT 20
+#endif
+
+
 /**
  * ------------------------------------------------------------------------- 
  * @brief PWM
