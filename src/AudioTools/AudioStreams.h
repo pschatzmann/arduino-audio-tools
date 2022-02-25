@@ -245,7 +245,7 @@ class GeneratedSoundStream : public AudioStreamX, public AudioBaseInfoSource {
   AudioBaseInfo defaultConfig() { return this->generator_ptr->defaultConfig(); }
 
   /// start the processing
-  bool begin() {
+  bool begin() override {
     LOGD(LOG_METHOD);
     generator_ptr->begin();
     if (audioBaseInfoDependent != nullptr)
@@ -265,7 +265,7 @@ class GeneratedSoundStream : public AudioStreamX, public AudioBaseInfoSource {
   }
 
   /// stop the processing
-  void end() {
+  void end() override {
     LOGD(LOG_METHOD);
     generator_ptr->end();
     active = false;

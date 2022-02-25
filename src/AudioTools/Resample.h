@@ -293,6 +293,8 @@ class ResampleParameterEstimator {
 };
 /**
  * @brief Configuration for ResampleStream
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  * 
  */
 struct ResampleConfig : public AudioBaseInfo {
@@ -342,7 +344,7 @@ class ResampleStream : public AudioStreamX {
         }
 
         // Recalculates the up and downsamplers
-        bool begin() {
+        bool begin() override {
             if (channels==0){
                 LOGE("channels are not defined")
                 return false;
