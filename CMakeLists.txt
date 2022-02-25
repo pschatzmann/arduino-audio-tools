@@ -5,6 +5,9 @@ project(arduino-audio-tools)
 
 add_library(arduino-audio-tools INTERFACE)
 
+option(BUILD_TESTS "Build all tests automatically" OFF)
+
+
 # make include directory available to calling projects 
 target_include_directories (arduino-audio-tools INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
@@ -15,4 +18,8 @@ install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/src/" # source directory
     PATTERN "*.h" # select header files
 )
 
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests EXCLUDE_FROM_ALL)
+if (BUILD_TESTS)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests)
+else()
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests EXCLUDE_FROM_ALL)
+endif()
