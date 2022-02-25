@@ -1,3 +1,4 @@
+
 ../examples/examples-basic-api/base-adc-a2dp -> rc=0
 ../examples/examples-basic-api/base-adc-serial -> rc=0
 ../examples/examples-basic-api/base-file_mp3-a2dp -> rc=0
@@ -31,7 +32,7 @@
 ../examples/examples-stream/streams-i2s-a2dp -> rc=0
 ../examples/examples-stream/streams-i2s-csv -> rc=0
 ../examples/examples-stream/streams-i2s-filter-i2s -> rc=0
-../examples/examples-stream/streams-i2s-i2s -> rc=1
+../examples/examples-stream/streams-i2s-i2s -> rc=0
 ../examples/examples-stream/streams-i2s-i2s-2 -> rc=0
 ../examples/examples-stream/streams-memory_mp3-analog -> rc=0
 ../examples/examples-stream/streams-memory_mp3-metadata -> rc=0
