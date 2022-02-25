@@ -234,7 +234,7 @@ class StreamCopyT {
         void *onWriteObj = nullptr;
         bool is_first = false;
         const char* actual_mime = nullptr;
-        int retryLimit = 20;
+        int retryLimit = COPY_RETRY_LIMIT;
         int delay_on_no_data = COPY_DELAY_ON_NODATA;
 
         // blocking write - until everything is processed

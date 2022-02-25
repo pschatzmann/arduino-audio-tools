@@ -7,11 +7,10 @@
  
 #include "AudioTools.h"
 
-typedef int16_t sound_t;                                   // sound will be represented as int16_t (with 2 bytes)
 uint16_t sample_rate=44100;
 uint8_t channels = 2;                                      // The stream will have 2 channels 
-SineWaveGenerator<sound_t> sineWave(32000);                // subclass of SoundGenerator with max amplitude of 32000
-GeneratedSoundStream<sound_t> sound(sineWave);             // Stream generated from sine wave
+SineWaveGenerator<int16_t> sineWave(32000);                // subclass of SoundGenerator with max amplitude of 32000
+GeneratedSoundStream<int16_t> sound(sineWave);             // Stream generated from sine wave
 I2SStream out; 
 StreamCopy copier(out, sound);                             // copies sound into i2s
 
@@ -19,7 +18,8 @@ StreamCopy copier(out, sound);                             // copies sound into 
 void setup(void) {  
   // Open Serial 
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  while(!Serial);
+  AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
   // start I2S
   Serial.println("starting I2S...");
