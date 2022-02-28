@@ -146,12 +146,29 @@ class Vector {
       data[len] = value;
       len++;
     }
-    
+
+    inline void push_front(T value){
+      resize_internal(len+1, true);
+      memmove(data,data+1,len*sizeof(T));
+      data[0] = value;
+      len++;
+    }
+
     inline void pop_back(){
         if (len>0) {
           len--;
         }
     }
+
+    inline void pop_front(){
+        if (len>0) {
+          len--;
+          if (len>0){
+            memmove(data, data+1,len*sizeof(T));
+          }
+        }
+    }
+
 
     inline void assign(iterator v1, iterator v2) {
         size_t newLen = v2 - v1; 

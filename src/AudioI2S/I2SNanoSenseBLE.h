@@ -96,12 +96,12 @@ class I2SBase {
     }
 
     /// starts the DAC with the default config in TX Mode
-    void begin(RxTxMode mode = TX_MODE) {
-        begin(defaultConfig(mode));
+    bool begin(RxTxMode mode = TX_MODE) {
+        return begin(defaultConfig(mode));
     }
 
     /// starts the DAC 
-    void begin(I2SConfig cfg) {
+    bool begin(I2SConfig cfg) {
         LOGD(__func__);
         setupRxTx(cfg);
         setupClock(cfg);
@@ -118,6 +118,15 @@ class I2SBase {
         NRF_I2S->ENABLE = 1;
         // start task
         NRF_I2S->TASKS_START = 1;
+        return true;
+    }
+
+    int available() {
+      return i2s_buffer.available();
+    }
+
+    int availableForWrite() {
+      return i2s_buffer.availableForWrite();
     }
 
     /// stops the I2C and unistalls the driver
