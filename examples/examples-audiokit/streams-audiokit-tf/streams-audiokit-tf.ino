@@ -1,6 +1,7 @@
+
+#include "AudioTools.h"
 #include "AudioLibs/AudioKit.h"
 #include "AudioLibs/TfLiteAudioOutput.h"
-#include "AudioTools.h"
 #include "model.h"  // tensorflow model
 
 AudioKitStream kit;  // Audio source
