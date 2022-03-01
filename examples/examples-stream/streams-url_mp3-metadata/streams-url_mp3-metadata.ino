@@ -33,7 +33,7 @@ void setup(){
 
 // mp3 radio
   url.httpRequest().header().put("Icy-MetaData","1");
-  url.begin("https://centralcharts.ice.infomaniak.ch/centralcharts-128.mp3","audio/mp3");
+  url.begin("http://stream.srg-ssr.ch/m/rsj/mp3_128","audio/mp3");
 
   out.setCallback(printMetaData);
   out.begin(url.httpRequest());

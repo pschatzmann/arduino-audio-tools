@@ -282,7 +282,7 @@ class AnalogAudioStream  : public AudioStreamX {
       return true;
     }
 
-    /// stops the I2C and unistalls the driver
+    /// stops the I2S and unistalls the driver
     void end() override {
         LOGI(__func__);
         i2s_zero_dma_buffer(port_no);
