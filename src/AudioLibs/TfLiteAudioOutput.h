@@ -360,7 +360,7 @@ class TfLiteAudioFeatureProvider {
   // the frequency information. This has to be a power of two, and since
   // we're dealing with 30ms of 16KHz inputs, which means 480 samples, this
   // is the next value.
-  int kMaxAudioSampleSize = 512;
+  int kMaxAudioSampleSize = 480;
   int kAudioSampleFrequency = 16000;
   int kAudioChannels = 1;
 

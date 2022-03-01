@@ -7,11 +7,11 @@
 
 
 const char *urls[] = {
-  "http://centralcharts.ice.infomaniak.ch/centralcharts-128.mp3",
-  "http://centraljazz.ice.infomaniak.ch/centraljazz-128.mp3",
-  "http://centralrock.ice.infomaniak.ch/centralrock-128.mp3",
-  "http://centralcountry.ice.infomaniak.ch/centralcountry-128.mp3",
-  "http://centralfunk.ice.infomaniak.ch/centralfunk-128.mp3"
+  "http://stream.srg-ssr.ch/m/rsj/mp3_128",
+  "http://stream.srg-ssr.ch/m/drs3/mp3_128",
+  "http://stream.srg-ssr.ch/m/rr/mp3_128",
+  "http://sunshineradio.ice.infomaniak.ch/sunshineradio-128.mp3",
+  "http://streaming.swisstxt.ch/m/drsvirus/mp3_128"
 };
 
 URLStream urlStream("SSID","password");
