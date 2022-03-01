@@ -113,9 +113,14 @@ class MetaDataICY : public AbstractMetaData {
                     metaDataLen = metaSize(ch);
                     LOGI("metaDataLen: %d", metaDataLen);
                     if (metaDataLen>0){
-                        LOGI("Metadata found");
-                        setupMetaData(metaDataLen);
-                        nextStatus = ProcessMetaData;
+                        if (metaDataLen>200){
+                            LOGI("Unexpected metaDataLen -> processed as data");
+                            nextStatus = ProcessData;
+                        } else {
+                            LOGI("Metadata found");
+                            setupMetaData(metaDataLen);
+                            nextStatus = ProcessMetaData;
+                        }
                     } else {
                         LOGI("Data found");
                         nextStatus = ProcessData;

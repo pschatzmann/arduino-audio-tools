@@ -14,11 +14,11 @@
 #include "AudioLibs/AudioKit.h"
 
 const char *urls[] = {
-  "http://centralcharts.ice.infomaniak.ch/",
-  "http://centraljazz.ice.infomaniak.ch/",
-  "http://centralrock.ice.infomaniak.ch/",
-  "http://centralcountry.ice.infomaniak.ch/",
-  "http://centralfunk.ice.infomaniak.ch/"
+  "http://stream.srg-ssr.ch/m/rsj/mp3_128",
+  "http://stream.srg-ssr.ch/m/drs3/mp3_128",
+  "http://stream.srg-ssr.ch/m/rr/mp3_128",
+  "http://sunshineradio.ice.infomaniak.ch/sunshineradio-128.mp3",
+  "http://streaming.swisstxt.ch/m/drsvirus/mp3_128"
 };
 const char *wifi = "wifi";
 const char *password = "password";

@@ -133,7 +133,11 @@ class HttpHeader {
             char *key = (char*)line;
             key[pos] = 0;
 
-            const char *value = line+pos+2;
+            // usually there is a leading space - but unfurtunately not always
+            const char *value = line+pos+1;
+            if (value[0]==' '){
+                value = line+pos+2;
+            }
             return put((const char*)key,value);
         }
 
