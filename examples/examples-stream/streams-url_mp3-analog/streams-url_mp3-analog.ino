@@ -35,7 +35,7 @@ void setup(){
   dec.begin();
 
 // mp3 radio
-  url.begin("https://centralcharts.ice.infomaniak.ch/centralcharts-128.mp3","audio/mp3");
+  url.begin("http://stream.srg-ssr.ch/m/rsj/mp3_128","audio/mp3");
 
 }
 
