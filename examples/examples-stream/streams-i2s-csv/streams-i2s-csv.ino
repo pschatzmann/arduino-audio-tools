@@ -11,7 +11,6 @@
 #include "AudioTools.h"
 
 
-
 I2SStream i2sStream; // Access I2S as stream
 CsvStream<int32_t> csvStream(Serial);
 StreamCopy copier(csvStream, i2sStream); // copy i2sStream to csvStream

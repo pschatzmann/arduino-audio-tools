@@ -2,7 +2,8 @@
 # Stream I2S Input to CSV Output
 
 ## General Description:
-We implement a A2DP source: We stream the sound input which we read in from the I2S interface and displays it on the Arduino Serial Plotter. 
+
+We implement a I2S source: We stream the sound input which we read in from the I2S interface and displays it on the Arduino Serial Plotter. 
 
 We can use any device which provides the sound data via I2S. In this case it is a 'I2S ADC Audio I2S Capture Card Module'
 
