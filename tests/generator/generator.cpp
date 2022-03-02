@@ -20,7 +20,7 @@ void setup(){
   
   auto cfg1 = out.defaultConfig();
   cfg1.sample_rate = sample_rate;
-  cfg1.channels = 1;
+  cfg1.channels = channels;
   cfg1.bits_per_sample = 16;
   out.begin(cfg1);
 }

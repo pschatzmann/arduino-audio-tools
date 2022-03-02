@@ -374,10 +374,10 @@ class TfLiteAudioFeatureProvider {
   // Variables for the model's output categories.
   int kSilenceIndex = 0;
   int kUnknownIndex = 1;
-  
+
   // Callback method for result
-  void(*respondToCommand)(const char* found_command, uint8_t score,
-                          bool is_new_command) = nullptr;
+  void (*respondToCommand)(const char* found_command, uint8_t score,
+                           bool is_new_command) = nullptr;
 
  private:
   // int feature_size_;
@@ -561,6 +561,7 @@ class TfLiteAudioOutput : public AudioPrint {
     }
 
     // Allocate memory from the tensor_arena for the model's tensors.
+    LOGI("AllocateTensors");
     TfLiteStatus allocate_status = interpreter->AllocateTensors();
     if (allocate_status != kTfLiteOk) {
       LOGE("AllocateTensors() failed");
@@ -568,6 +569,7 @@ class TfLiteAudioOutput : public AudioPrint {
     }
 
     // Get information about the memory area to use for the model's input.
+    LOGI("Get Input");
     model_input = interpreter->input(0);
     if ((model_input->dims->size != 2) || (model_input->dims->data[0] != 1) ||
         (model_input->dims->data[1] != (feature_provider->kFeatureSliceCount *
@@ -576,8 +578,10 @@ class TfLiteAudioOutput : public AudioPrint {
       LOGE("Bad input tensor parameters in model");
       return false;
     }
+
+    LOGI("Get Buffer");
     model_input_buffer = model_input->data.int8;
-    if (model_input_buffer==nullptr){
+    if (model_input_buffer == nullptr) {
       LOGE("model_input_buffer is null");
       return false;
     }
@@ -588,6 +592,7 @@ class TfLiteAudioOutput : public AudioPrint {
 
     // all good if we made it here
     is_setup = true;
+    LOGI("done");
     return true;
   }
 
@@ -653,37 +658,26 @@ class TfLiteAudioOutput : public AudioPrint {
   //
   bool setupInterpreter() {
     LOGD(LOG_METHOD);
-    tflite::AllOpsResolver resolver;
+    // tflite::AllOpsResolver resolver;
 
-    // // NOLINTNEXTLINE(runtime-global-variables)
-    // static tflite::MicroMutableOpResolver<4>
-    // micro_op_resolver(error_reporter); if (micro_op_resolver.AddBuiltin(
-    //         tflite::BuiltinOperator_DEPTHWISE_CONV_2D,
-    //         tflite::ops::micro::Register_DEPTHWISE_CONV_2D()) != kTfLiteOk)
-    //         {
-    //   return false;
-    // }
-    // if (micro_op_resolver.AddBuiltin(
-    //         tflite::BuiltinOperator_FULLY_CONNECTED,
-    //         tflite::ops::micro::Register_FULLY_CONNECTED()) != kTfLiteOk) {
-    //   return false;
-    // }
-    // if (micro_op_resolver.AddBuiltin(tflite::BuiltinOperator_SOFTMAX,
-    //                                  tflite::ops::micro::Register_SOFTMAX())
-    //                                  !=
-    //     kTfLiteOk) {
-    //   return false;
-    // }
-    // if (micro_op_resolver.AddBuiltin(tflite::BuiltinOperator_RESHAPE,
-    //                                  tflite::ops::micro::Register_RESHAPE())
-    //                                  !=
-    //     kTfLiteOk) {
-    //   return false;
-    // }
-
+    // NOLINTNEXTLINE(runtime-global-variables)
+    static tflite::MicroMutableOpResolver<4> micro_op_resolver(error_reporter);
+    if (micro_op_resolver.AddDepthwiseConv2D() != kTfLiteOk) {
+      return false;
+    }
+    if (micro_op_resolver.AddFullyConnected() != kTfLiteOk) {
+      return false;
+    }
+    if (micro_op_resolver.AddSoftmax() != kTfLiteOk) {
+      return false;
+    }
+    if (micro_op_resolver.AddReshape() != kTfLiteOk) {
+      return false;
+    }
     // Build an interpreter to run the model with.
     static tflite::MicroInterpreter static_interpreter(
-        p_model, resolver, tensor_arena, kTensorArenaSize, error_reporter);
+        p_model, micro_op_resolver, tensor_arena, kTensorArenaSize,
+        error_reporter);
     interpreter = &static_interpreter;
     return true;
   }
@@ -739,7 +733,7 @@ class TfLiteAudioOutput : public AudioPrint {
   /// Overwrite this method to implement your own handler or provide callback
   virtual void respondToCommand(const char* found_command, uint8_t score,
                                 bool is_new_command) {
-    if (feature_provider->respondToCommand!=nullptr) {
+    if (feature_provider->respondToCommand != nullptr) {
       feature_provider->respondToCommand(found_command, score, is_new_command);
     } else {
       LOGD(LOG_METHOD);

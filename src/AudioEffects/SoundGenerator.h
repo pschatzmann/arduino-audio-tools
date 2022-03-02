@@ -207,6 +207,7 @@ class SineWaveGenerator : public SoundGenerator<T>{
             float angle = double_Pi * m_frequency * m_time + m_phase;
             T result = m_amplitude * sin(angle);
             m_time += m_deltaTime;
+            if (m_time > divisor) m_time -= divisor;
             return result;
         }
 
@@ -217,6 +218,8 @@ class SineWaveGenerator : public SoundGenerator<T>{
         float m_deltaTime = 0.0;
         float m_phase = 0.0;
         float double_Pi = PI * 2.0;
+        float divisor = 1000000;
+
 
         void logStatus() {
             SoundGenerator<T>::info.logStatus();
