@@ -21,13 +21,13 @@ void setup(void) {
     AudioLogger::instance().begin(Serial, AudioLogger::Info);
     
     auto cfg = i2sStream.defaultConfig(RX_MODE);
+    cfg.i2s_format = I2S_STD_FORMAT; // or try with I2S_LSB_FORMAT
     cfg.bits_per_sample = 32;
     cfg.channels = 2;
     cfg.sample_rate = 44100;
     cfg.is_master = true;
-    cfg.i2s_format = I2S_MSB_FORMAT; // or try with I2S_LSB_FORMAT
-    cfg.use_apll = true;
      // this module nees a master clock if the ESP32 is master
+    cfg.use_apll = false;
     cfg.pin_mck = 3; 
     i2sStream.begin(cfg);
 
