@@ -26,6 +26,9 @@ void setup(void) {
     cfg.sample_rate = 44100;
     cfg.is_master = true;
     cfg.i2s_format = I2S_MSB_FORMAT; // or try with I2S_LSB_FORMAT
+    cfg.use_apll = true;
+     // this module nees a master clock if the ESP32 is master
+    cfg.pin_mck = 3; 
     i2sStream.begin(cfg);
 
     // make sure that we have the correct channels set up

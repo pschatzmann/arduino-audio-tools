@@ -6,20 +6,22 @@
 We implement a I2S source: We stream the sound input which we read in from the I2S interface and displays it on the Arduino Serial Plotter. 
 
 We can use any device which provides the sound data via I2S. In this case it is a 'I2S ADC Audio I2S Capture Card Module'
-
+Usually you do not need any master clock, but unfortunatly we need to feed this module with a master clock signal from the ESP32, if
+the ESP32 is acting as master.
 
 ## Pins
 
 ![i2s-adc](https://pschatzmann.github.io/arduino-audio-tools/resources/I2S-ADC.jpg)
 
 
-| i2s-ADC |  ESP32
-| --------| ---------------
-| VDD     |  3.3
-| GND     |  GND
-| SD      |  IN (GPIO32)
-| WS      |  WS (GPIO15)
-| SCK     |  BCK (GPIO14)
+| i2s-ADC  |  ESP32
+| ---------| ---------------
+| VDD      |  3.3
+| GND      |  GND
+| SD       |  IN (GPIO32)
+| WS       |  WS (GPIO15)
+| SCK      |  BCK (GPIO14)
+| MCCLK_IN |  RX_0 (GPIO3)
 
 
 - SCK: Serial data clock for I²S interface
