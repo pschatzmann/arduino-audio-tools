@@ -205,7 +205,7 @@ class AnalogAudioStream  : public AudioStreamX {
             .sample_rate            = (eps32_i2s_sample_rate_type)cfg.sample_rate,
             .bits_per_sample        = (i2s_bits_per_sample_t)cfg.bits_per_sample,
             .channel_format         = I2S_CHANNEL_FMT_RIGHT_LEFT,
-//            .communication_format   = I2S_COMM_FORMAT_I2S_MSB,
+            .communication_format   = I2S_COMM_FORMAT_I2S_MSB,
             .intr_alloc_flags       = 0,
             .dma_buf_count          = cfg.dma_buf_count,
             .dma_buf_len            = cfg.dma_buf_len,

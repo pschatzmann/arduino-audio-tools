@@ -130,7 +130,7 @@ class I2SBase {
             .dma_buf_len = I2S_BUFFER_SIZE,
             .use_apll = (bool) cfg.use_apll,
             .tx_desc_auto_clear = cfg.auto_clear, 
-            .fixed_mclk = (int) (cfg.use_apll ? cfg.fixed_mclk : 0 )
+            .fixed_mclk = (int) (cfg.fixed_mclk>0 ? cfg.fixed_mclk : 0 )
       };
       i2s_config = i2s_config_new;
 
