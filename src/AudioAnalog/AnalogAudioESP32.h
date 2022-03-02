@@ -209,7 +209,7 @@ class AnalogAudioStream  : public AudioStreamX {
             .intr_alloc_flags       = 0,
             .dma_buf_count          = cfg.dma_buf_count,
             .dma_buf_len            = cfg.dma_buf_len,
-            .use_apll               = cfg.use_apll,
+            .use_apll               = false,
             .tx_desc_auto_clear = false
           //   //  .fixed_mclk = 0
         };

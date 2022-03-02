@@ -27,7 +27,7 @@ void setup(void) {
     cfg.sample_rate = 44100;
     cfg.is_master = true;
      // this module nees a master clock if the ESP32 is master
-    cfg.use_apll = false;
+    cfg.use_apll = false;  // try with yes
     cfg.pin_mck = 3; 
     i2sStream.begin(cfg);
 
