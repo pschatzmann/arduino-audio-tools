@@ -22,7 +22,7 @@ the ESP32 is acting as master.
 | RLCLK    |  WS (GPIO15)
 | GND      |  GND
 | MUTE     |  -
-| VCC      |  3.3
+| VCC      |  VIN 5V
 
 
 ## Additional Comments
