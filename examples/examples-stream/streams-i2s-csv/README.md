@@ -16,20 +16,11 @@ the ESP32 is acting as master.
 
 | i2s-ADC  |  ESP32
 | ---------| ---------------
-| VDD      |  3.3
-| GND      |  GND
-| SD       |  IN (GPIO32)
-| WS       |  WS (GPIO15)
-| SCK      |  BCK (GPIO14)
 | MCCLK_IN |  RX_0 (GPIO3)
-
-
-- SCK: Serial data clock for I²S interface
-- WS: Select serial data words for the I²S interface
-- L/R: Left / right channel selection
-        When set to low, the microphone emits signals on the left channel of the I²S frame.
-        When the high level is set, the microphone will send signals on the right channel.
-- ExSD: Serial data output of the I²S interface
-- VCC: input power 1.8V to 3.3V
-- GND: Power groundHigh PSR: -75 dBFS.
+| BICK     |  BCK (GPIO14)
+| DATA     |  IN (GPIO32)
+| RLCLK    |  WS (GPIO15)
+| GND      |  GND
+| MUTE     |  -
+| VCC      |  3.3
 
