@@ -40,19 +40,13 @@ class I2SBase {
       LOGD(LOG_METHOD);
       switch(cfg.rx_tx_mode){
         case TX_MODE:
-          begin(cfg, cfg.pin_data, I2S_PIN_NO_CHANGE);
-          break;
+          return begin(cfg, cfg.pin_data, I2S_PIN_NO_CHANGE);
         case RX_MODE:
-          begin(cfg, cfg.pin_data, I2S_PIN_NO_CHANGE);
-          break;
+          return begin(cfg, cfg.pin_data, I2S_PIN_NO_CHANGE);
         default:
-          begin(cfg, cfg.pin_data, cfg.pin_data_rx);
-          break;
-
+          return begin(cfg, cfg.pin_data, cfg.pin_data_rx);
       }
-      int txPin = cfg.rx_tx_mode == TX_MODE ? cfg.pin_data : I2S_PIN_NO_CHANGE;
-      int rxPin = cfg.rx_tx_mode == RX_MODE ? cfg.pin_data : I2S_PIN_NO_CHANGE;
-      return begin(cfg, txPin, rxPin);
+      LOGE("Did not expect go get here");
     }
 
     /// we assume the data is already available in the buffer
@@ -141,6 +135,7 @@ class I2SBase {
       }
 
       // setup config
+      LOGD("i2s_driver_install");
       if (i2s_driver_install(i2s_num, &i2s_config, 0, NULL)!=ESP_OK){
         LOGE("%s - %s", __func__, "i2s_driver_install");
       }      
@@ -157,6 +152,7 @@ class I2SBase {
             .data_in_num = rxPin
         };
 
+        LOGD("i2s_set_pin");
         if (i2s_set_pin(i2s_num, &pin_config)!= ESP_OK){
             LOGE("%s - %s", __func__, "i2s_set_pin");
         }
@@ -167,6 +163,7 @@ class I2SBase {
       }
 
       // clear initial buffer
+      LOGD("i2s_zero_dma_buffer");
       i2s_zero_dma_buffer(i2s_num);
 
       is_started = true;

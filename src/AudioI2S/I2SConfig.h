@@ -73,7 +73,7 @@ class I2SConfig : public AudioBaseInfo {
     bool use_apll = I2S_USE_APLL; 
     uint32_t fixed_mclk = 0; 
 #if ESP_IDF_VERSION_MAJOR >= 4 
-    int pin_mck = 1;
+    int pin_mck = -1;
 #endif
 #endif
 
