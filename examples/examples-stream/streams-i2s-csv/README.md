@@ -24,3 +24,11 @@ the ESP32 is acting as master.
 | MUTE     |  -
 | VCC      |  3.3
 
+
+## Additional Comments
+
+I recommend this sketch as a starting point for all I2S input. Just leave the masterclock out, because this is not needed for most input devices.
+If it is working with 32 bit you can try to change it to 16bits which most of the time works as well:
+
+- CsvStream<int16_t> csvStream(Serial);
+- cfg.bits_per_sample = 16;
