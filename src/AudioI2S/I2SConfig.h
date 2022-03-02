@@ -44,9 +44,11 @@ class I2SConfig : public AudioBaseInfo {
         switch(mode){
           case RX_MODE:
             pin_data = PIN_I2S_DATA_IN;
+            auto_clear = false;
             break;
           case TX_MODE:
             pin_data = PIN_I2S_DATA_OUT;
+            auto_clear = I2S_AUTO_CLEAR;
             break;
           default: 
             pin_data = PIN_I2S_DATA_OUT;
@@ -67,6 +69,7 @@ class I2SConfig : public AudioBaseInfo {
 
 #ifdef ESP32
     bool is_digital = true;  // e.g. the ESP32 supports analog input or output
+    bool auto_clear;
     bool use_apll = I2S_USE_APLL; 
     uint32_t fixed_mclk = 0; 
 #if ESP_IDF_VERSION_MAJOR >= 4 
