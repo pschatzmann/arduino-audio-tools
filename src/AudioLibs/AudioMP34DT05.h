@@ -15,7 +15,7 @@ struct AudioMP34DT05Config : public AudioBaseInfo {
   }
   int gain = 20;  // value of DEFAULT_PDM_GAIN
   int buffer_size = 512;
-  int buffer_count = 4;
+  int buffer_count = 2;
   // define pins
   // int pin_data = PIN_PDM_DIN;
   // int pin_clk = PIN_PDM_CLK;
