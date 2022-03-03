@@ -1,7 +1,7 @@
 /**
  * @file streams-i2s-csv.ino
  * @author Phil Schatzmann
- * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-stream/stream-i2s-csv/README.md
+ * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-stream/streams-i2s-csv/README.md
  * 
  * @author Phil Schatzmann
  * @copyright GPLv3
