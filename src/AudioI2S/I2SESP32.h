@@ -42,7 +42,8 @@ class I2SBase {
         case TX_MODE:
           return begin(cfg, cfg.pin_data, I2S_PIN_NO_CHANGE);
         case RX_MODE:
-          return begin(cfg, cfg.pin_data, I2S_PIN_NO_CHANGE);
+          // usually we expet cfg.pin_data but if the used assinged rx we might consider this one
+          return begin(cfg, I2S_PIN_NO_CHANGE, cfg.pin_data!=I2S_PIN_NO_CHANGE?cfg.pin_data:cfg.pin_data_rx );
         default:
           return begin(cfg, cfg.pin_data, cfg.pin_data_rx);
       }
@@ -111,7 +112,6 @@ class I2SBase {
 
       LOGI("I2S_BUFFER_COUNT=%d",I2S_BUFFER_COUNT);
       LOGI("I2S_BUFFER_SIZE=%d",I2S_BUFFER_SIZE);
-      LOGI("I2S_AUTO_CLEAR=%d",I2S_AUTO_CLEAR);
 
       i2s_config_t i2s_config_new = {
             .mode = toMode(cfg),
