@@ -44,11 +44,15 @@ class I2SConfig : public AudioBaseInfo {
         switch(mode){
           case RX_MODE:
             pin_data = PIN_I2S_DATA_IN;
-            auto_clear = false;
+            #ifdef ESP32
+               auto_clear = false;
+            #endif
             break;
           case TX_MODE:
             pin_data = PIN_I2S_DATA_OUT;
-            auto_clear = I2S_AUTO_CLEAR;
+            #ifdef ESP32
+                auto_clear = I2S_AUTO_CLEAR;
+            #endif
             break;
           default: 
             pin_data = PIN_I2S_DATA_OUT;
@@ -86,8 +90,12 @@ class I2SConfig : public AudioBaseInfo {
       LOGI("number of channels: %d", channels);
       LOGI("i2s_format: %s", i2s_formats[i2s_format]);
 #ifdef ESP32
+      LOGI("I2S_AUTO_CLEAR=%d",auto_clear);
+
       if (use_apll) {
         LOGI("use_apll: %s", use_apll ? "true" : "false");
+      }
+      if (fixed_mclk){
         LOGI("fixed_mclk: %d", fixed_mclk);
       }
 #endif
