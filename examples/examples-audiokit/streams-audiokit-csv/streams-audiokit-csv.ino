@@ -1,7 +1,7 @@
 /**
  * @file streams-audiokit-csv.ino
  * @author Phil Schatzmann
- * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-audiokit/stream-audiokit-csv/README.md
+ * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-audiokit/streams-audiokit-csv/README.md
  * 
  * @author Phil Schatzmann
  * @copyright GPLv3
