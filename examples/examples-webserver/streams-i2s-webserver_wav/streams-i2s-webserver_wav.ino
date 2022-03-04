@@ -9,13 +9,11 @@
 
 #include "AudioTools.h"
 
-
-
-//AudioEncoderServer server(new WAVEncoder(),"ssid","password");  
+//AudioEncodedServer server(new WAVEncoder(),"ssid","password");  
 AudioWAVServer server("ssid","password"); // the same a above
 
 I2SStream i2sStream;    // Access I2S as stream
-ConverterFillLeftAndRight<int16_t> filler(RightIsEmpty); // fill both channels
+ConverterFillLeftAndRight<int16_t> filler(LeftIsEmpty); // fill both channels - or change to RightIsEmpty
 
 void setup(){
   Serial.begin(115200);
@@ -24,7 +22,7 @@ void setup(){
   // start i2s input with default configuration
   Serial.println("starting I2S...");
   auto config = i2sStream.defaultConfig(RX_MODE);
-  config.i2s_format = I2S_LSB_FORMAT; // if quality is bad change to I2S_MSB_FORMAT https://github.com/pschatzmann/arduino-audio-tools/issues/23
+  config.i2s_format = I2S_STD_FORMAT; // if quality is bad change to I2S_LSB_FORMAT https://github.com/pschatzmann/arduino-audio-tools/issues/23
   config.sample_rate = 22050;
   config.channels = 2;
   config.bits_per_sample = 16;
