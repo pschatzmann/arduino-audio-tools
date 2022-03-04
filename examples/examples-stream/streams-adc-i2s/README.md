@@ -10,9 +10,9 @@ Since the ADC via I2S is using the i2s port 0, we use port 1 for the output.
 
 | ADC     |  ESP32
 | --------| ---------------
+| VCC     |  3.3V
 | GND     |  GND
-| Left    |  GPIO34
-| Right   |  GPIO35
+| OUT     |  GPIO34
 
 
 ### External DAC:
