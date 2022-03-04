@@ -23,8 +23,8 @@ The INMP441 is a high-performance, low power, digital-output, omnidirectional ME
 SCK: Serial data clock for I²S interface
 WS: Select serial data words for the I²S interface
 L/R: Left / right channel selection
-        When set to low, the microphone emits signals on the left channel of the I²S frame.
-        When the high level is set, the microphone will send signals on the right channel.
+        When set to low, the microphone emits signals on one channel of the I²S frame.
+        When the high level is set, the microphone will send signals on the other channel.
 ExSD: Serial data output of the I²S interface
 VCC: input power 1.8V to 3.3V
 GND: Power groundHigh PSR: -75 dBFS.

@@ -1,34 +1,37 @@
 /**
- * @file streams-adc-serial.ino
+ * @file streams-analog-serial.ino
  * @author Phil Schatzmann
- * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-stream/streams-adc-serial/README.md 
- * @author Phil Schatzmann
+ * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-stream/streams-adc-serial/README.md
  * @copyright GPLv3
  * #TODO retest is outstanding
  */
- 
+
+#include "Arduino.h"
 #include "AudioTools.h"
 
-
-
-uint8_t channels = 2;
-AnalogAudioStream microphone;                  // analog microphone
-CsvStream<int16_t> printer(Serial, channels);  // ASCII output stream 
-StreamCopy copier(printer, microphone);        // copies microphone into printer
-ConverterAutoCenter<int16_t> center(channels); // make sure the avg of the signal is 0
+const uint16_t sample_rate = 44100;
+const uint8_t channels = 2;
+AnalogAudioStream in; 
+CsvStream<int16_t> out(Serial, channels); // ASCII output stream 
+StreamCopy copier(out, in); // copy i2sStream to CsvStream
+ConverterAutoCenter<int16_t> center(channels); // set avg to 0
 
 // Arduino Setup
-void setup(void) {  
-  // Open Serial 
+void setup(void) {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
-  AnalogConfig cfg = microphone.defaultConfig(RX_MODE);
-  microphone.begin(cfg);
+  // RX automatically uses port 0 with pins GPIO34,GPIO35
+  auto cfgRx = in.defaultConfig(RX_MODE);
+  cfgRx.sample_rate = sample_rate;
+  in.begin(cfgRx);
+
+  // open output
+  out.begin();
+
 }
 
-
-// Arduino loop - repeated processing 
+// Arduino loop - copy data 
 void loop() {
   copier.copy(center);
 }

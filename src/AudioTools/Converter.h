@@ -268,13 +268,13 @@ class ConverterFillLeftAndRight : public  BaseConverter<T> {
                     T *sample = (T*)src;
                     for (size_t j=0;j<size;j++){
                         *sample = *(sample+1);
-                        sample++;
+                        sample+=2;
                     }
                 } else if (!left_empty && right_empty) {
                     T *sample = (T*)src;
                     for (size_t j=0;j<size;j++){
                         *(sample+1) = *sample;
-                        sample++;
+                        sample+=2;
                     }
                 }
             }
@@ -456,9 +456,14 @@ class FormatConverter {
             this->convert_ptr = converter;
         }
 
+        FormatConverter( float factor, float clip){
+            this->factor = factor;
+            this->clip = clip;
+        }
+
         // The data is provided as int24_t tgt[][2] but  returned as int24_t
-        size_t convert(uint8_t *src, ToType *target, size_t byte_count_src) {
-            return convert((FromType *)src, target, byte_count_src );
+        size_t convert(uint8_t *src, uint8_t *target, size_t byte_count_src) {
+            return convert((FromType *)src, (ToType*)target, byte_count_src );
         }
 
         // The data is provided as int24_t tgt[][2] but  returned as int24_t
@@ -466,16 +471,34 @@ class FormatConverter {
             int size = byte_count_src / sizeof(FromType);
             FromType *s = src;
             ToType *t = target;
-            for (int i=size; i>0; i--) {
-                *t = (*convert_ptr)(*s);
-                t++;
-                s++;
+            if (convert_ptr!=nullptr){
+                // standard conversion
+                for (int i=size; i>0; i--) {
+                    *t = (*convert_ptr)(*s);
+                    t++;
+                    s++;
+                }
+            } else {
+                // conversion using indicated factor
+                for (int i=size; i>0; i--) {
+                    float tmp = factor * *s;
+                    if (tmp>clip){
+                        tmp=clip;
+                    } else if (tmp<-clip){
+                        tmp = -clip;
+                    }
+                    *t = tmp;
+                    t++;
+                    s++;
+                }
             }
             return size*sizeof(ToType);
         }
 
     private:
-        ToType (*convert_ptr)(FromType v);
+        ToType (*convert_ptr)(FromType v) = nullptr;
+        float factor=0;
+        float clip=0;
 
 };
 
