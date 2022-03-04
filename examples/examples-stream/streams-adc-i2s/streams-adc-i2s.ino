@@ -1,7 +1,7 @@
 /**
  * @file streams-analog-i2s.ino
  * @author Phil Schatzmann
- * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-stream/streams-analog-i2s/README.md
+ * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-stream/streams-adc-i2s/README.md
  * 
  * @author Phil Schatzmann
  * @copyright GPLv3
