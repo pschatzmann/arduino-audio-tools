@@ -10,11 +10,11 @@
 #include "AudioTools.h"
 
 const uint16_t sample_rate = 44100;
-const uint8_t channels = 2;
 AnalogAudioStream in; 
+int channels = 1;
 CsvStream<int16_t> out(Serial, channels); // ASCII output stream 
 StreamCopy copier(out, in); // copy i2sStream to CsvStream
-ConverterAutoCenter<int16_t> center(channels); // set avg to 0
+ConverterAutoCenter<int16_t> center(2); // set avg to 0
 
 // Arduino Setup
 void setup(void) {
@@ -24,6 +24,7 @@ void setup(void) {
   // RX automatically uses port 0 with pins GPIO34,GPIO35
   auto cfgRx = in.defaultConfig(RX_MODE);
   cfgRx.sample_rate = sample_rate;
+  cfgRx.channels = channels;
   in.begin(cfgRx);
 
   // open output

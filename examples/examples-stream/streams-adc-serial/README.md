@@ -22,9 +22,9 @@ We sample the sound signal with the help of the ESP32 I2S ADC input functionalit
 
 | ADC     |  ESP32
 | --------| ---------------
+| VCC     |  3.3V
 | GND     |  GND
-| Left    |  GPIO34
-| Right   |  GPIO35
+| OUT     |  GPIO34
 
 Here is the result on the Arduino Serial Plotter:
 
