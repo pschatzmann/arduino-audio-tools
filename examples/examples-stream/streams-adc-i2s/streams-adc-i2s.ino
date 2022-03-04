@@ -7,16 +7,12 @@
  * @copyright GPLv3
  */
 
-
-#include "Arduino.h"
 #include "AudioTools.h"
-
-
 
 const uint16_t sample_rate = 44100;
 AnalogAudioStream in; 
 I2SStream out;                        
-StreamCopy copier(out, in); // copy i2sStream to a2dpStream
+StreamCopy copier(out, in); // copy in to out
 ConverterAutoCenter<int16_t> converter;
 
 // Arduino Setup
@@ -24,9 +20,8 @@ void setup(void) {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
-  // RX automatically uses port 0 with pins GPIO34,GPIO35
+  // RX automatically uses port 0 with pin GPIO34
   auto cfgRx = in.defaultConfig(RX_MODE);
-  cfgTx.channels = 1;
   cfgRx.sample_rate = sample_rate;
   in.begin(cfgRx);
  
@@ -34,9 +29,7 @@ void setup(void) {
   auto cfgTx = out.defaultConfig(TX_MODE);
   cfgTx.port_no = 1;
   cfgTx.sample_rate = sample_rate;
-  cfgTx.channels = 1;
   out.begin(cfgTx);
-
 }
 
 // Arduino loop - copy data 
