@@ -6,17 +6,9 @@
  * @copyright GPLv3
  */
 
-/**
- * @file basic-a2dp-audiospdif.ino
- * @brief A2DP Sink with output to SPDIFStream
- * 
- * @author Phil Schatzmann
- * @copyright GPLv3
- */
-
 #define USE_A2DP
-#include "AudioConfigLocal.h"
 #include "AudioTools.h"
+#include "AudioConfigLocal.h"
 
 BluetoothA2DPSink a2dp_sink;
 SPDIFStream spdif;
