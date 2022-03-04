@@ -7,37 +7,40 @@
  * @copyright GPLv3
  */
 
+// Add this in your sketch or change the setting in AudioConfig.h
+#define USE_A2DP
+
 #include "AudioTools.h"
-#include "AudioLibs/AudioA2DP.h"
+
 I2SStream i2sStream;                            // Access I2S as stream
 A2DPStream a2dpStream = A2DPStream::instance(); // access A2DP as stream
-StreamCopy copier(a2dpStream, i2sStream); // copy i2sStream to a2dpStream
-ConverterFillLeftAndRight<int32_t> filler(RightIsEmpty); // fill both channels
-int bits_per_sample = 32;
+VolumeStream volume(a2dpStream);
+StreamCopy copier(volume, i2sStream); // copy i2sStream to a2dpStream
+ConverterFillLeftAndRight<int16_t> filler(LeftIsEmpty); // fill both channels
 
 // Arduino Setup
 void setup(void) {
     Serial.begin(115200);
     AudioLogger::instance().begin(Serial, AudioLogger::Info);
+
+    // set intial volume
+    volume.setVolume(0.3);
     
     // start bluetooth
     Serial.println("starting A2DP...");
     auto cfgA2DP = a2dpStream.defaultConfig(TX_MODE);
-    cfgA2DP.bits_per_sample = bits_per_sample;
     cfgA2DP.name = "LEXON MINO L";
     a2dpStream.begin(cfgA2DP);
-    a2dpStream.setNotifyAudioChange(i2sStream); // i2s is updating sample rate
 
     // start i2s input with default configuration
     Serial.println("starting I2S...");
-    auto cfgI2S = i2sStream.defaultConfig(RX_MODE);
-    cfgI2S.bits_per_sample = bits_per_sample;  // not all INMP441 work with 16 bit
-    i2sStream.begin(cfgI2S);
-
+    a2dpStream.setNotifyAudioChange(i2sStream); // i2s is using the info from a2dp
+    i2sStream.begin(i2sStream.defaultConfig(RX_MODE));
 
 }
 
 // Arduino loop - copy data
 void loop() {
-    copier.copy(filler);
+   // copier.copy(filler);
+    copier.copy();
 }

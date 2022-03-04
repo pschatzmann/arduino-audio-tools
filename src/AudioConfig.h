@@ -165,7 +165,7 @@
 #define SOFT_MUTE_VALUE LOW  
 #define PIN_CS SS
 #define PIN_ADC1 34 
-#define PIN_ADC2 35
+#define PIN_ADC2 14
 
 #define I2S_AUTO_CLEAR true
 

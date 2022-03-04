@@ -64,7 +64,7 @@ class AnalogConfig : public AudioBaseInfo {
       if (mode == RX_MODE) {
         mode_internal = (I2S_MODE_MASTER | I2S_MODE_RX | I2S_MODE_ADC_BUILT_IN);
         setInputPin1(PIN_ADC1);
-        setInputPin2(PIN_ADC2);
+//        setInputPin2(PIN_ADC2);
         LOGI("I2S_MODE_ADC_BUILT_IN");
       } else {
         mode_internal = (I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_DAC_BUILT_IN);
@@ -80,10 +80,10 @@ class AnalogConfig : public AudioBaseInfo {
       setInputPin1(pin,0);
     }
 
-    /// Defines an alternative input pin for the right channel
-    void setInputPin2(int pin=PIN_ADC2){
-      setInputPin1(pin,1);
-    }
+    // /// Defines an alternative input pin for the right channel
+    // void setInputPin2(int pin=PIN_ADC2){
+    //   setInputPin1(pin,1);
+    // }
 
     void logInfo() {
       AudioBaseInfo::logInfo();
@@ -239,12 +239,12 @@ class AnalogAudioStream  : public AudioStreamX {
               return false;
             }
 
-            if (cfg.channels>1){
-              if (i2s_set_adc_mode(cfg.adc_unit[1], cfg.adc_channel[1])!=ESP_OK) {
-                LOGE( "%s - %s", __func__, "i2s_driver_install");
-                return false;
-              }
-            }
+            // if (cfg.channels>1){
+            //   if (i2s_set_adc_mode(cfg.adc_unit[1], cfg.adc_channel[1])!=ESP_OK) {
+            //     LOGE( "%s - %s", __func__, "i2s_driver_install");
+            //     return false;
+            //   }
+            // }
 
             // enable the ADC
             if (i2s_adc_enable(port_no)!=ESP_OK) {
