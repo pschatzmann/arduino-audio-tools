@@ -26,6 +26,7 @@ void setup(void) {
 
   // RX automatically uses port 0 with pins GPIO34,GPIO35
   auto cfgRx = in.defaultConfig(RX_MODE);
+  cfgTx.channels = 1;
   cfgRx.sample_rate = sample_rate;
   in.begin(cfgRx);
  
@@ -33,6 +34,7 @@ void setup(void) {
   auto cfgTx = out.defaultConfig(TX_MODE);
   cfgTx.port_no = 1;
   cfgTx.sample_rate = sample_rate;
+  cfgTx.channels = 1;
   out.begin(cfgTx);
 
 }
