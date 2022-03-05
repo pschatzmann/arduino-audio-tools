@@ -31,6 +31,7 @@ void setup() {
   // setup output - We send the test signal via A2DP - so we conect to the "LEXON MINO L" Bluetooth Speaker
   auto cfg = out.defaultConfig(TX_MODE);
   cfg.name = "LEXON MINO L";
+  //cfg.auto_reconnect = true;  // if this is use we just quickly connect to the last device ignoring cfg.name
   out.begin(cfg);
 
   // setup player
