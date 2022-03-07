@@ -106,8 +106,8 @@ class Resample : public AudioStreamX {
                     }  break;
                 case DOWNSAMPLE_SKIP_EVERY_NTH: {
                     allocateBuffer(sample_count);
-                    int skip_ever_nth = factor;
-                    bytes = downsampleSkip((T*)src, buffer , sample_count, channels, skip_ever_nth) * sizeof(T);
+                    int skip_every_nth = factor;
+                    bytes = downsampleSkip((T*)src, buffer , sample_count, channels, skip_every_nth) * sizeof(T);
                     result = p_out->write((uint8_t*)buffer, bytes) * factor;
                     } break;
 
@@ -388,11 +388,11 @@ class ResampleParameterEstimator {
  */
 struct ResampleConfig : public AudioBaseInfo {
     int sample_rate_from=0;
-    int skip_ever_nth=0; // small scale resampling
+    int skip_every_nth=0; // small scale resampling
 
     void logInfo(){
-        if (skip_ever_nth!=0){
-            LOGI("skip_ever_nth: %d", skip_ever_nth);
+        if (skip_every_nth!=0){
+            LOGI("skip_every_nth: %d", skip_every_nth);
 
         } else {
             AudioBaseInfo::logInfo();
@@ -463,12 +463,12 @@ class ResampleStream : public AudioStreamX {
                 LOGE("channels are not defined")
                 return false;
             }
-            if (cfg.skip_ever_nth!=0){
+            if (cfg.skip_every_nth!=0){
                 // small scale resampling
                 if (up.begin(cfg.channels, 1.0, UP_SAMLE)){
                     LOGI("up active");
                 }
-                if (down.begin(cfg.channels, cfg.skip_ever_nth, DOWNSAMPLE_SKIP_EVERY_NTH)){
+                if (down.begin(cfg.channels, cfg.skip_every_nth, DOWNSAMPLE_SKIP_EVERY_NTH)){
                     LOGI("down active");
                 }
             } else {
