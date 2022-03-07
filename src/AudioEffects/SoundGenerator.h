@@ -337,7 +337,7 @@ class GeneratorFromStream : public SoundGenerator<T> {
 };
 
 /**
- * @brief We generate the samples from an array which is provided 
+ * @brief We generate the samples from an array which is provided in the constructor
  * 
  * @tparam T 
  */
@@ -376,7 +376,7 @@ class GeneratorFromArray : public SoundGenerator<T> {
     T readSample() override {
       // at end deactivate output
       if (soundIndex >= tableLength) {
-        LOGD("reset index - soundIndex: %d, tableLength: %d",soundIndex,tableLength);
+        // LOGD("reset index - soundIndex: %d, tableLength: %d",soundIndex,tableLength);
         soundIndex = 0;
         // deactivate when count has been used up
         if (maxRepeat>=1 && ++repeatCounter>=maxRepeat){
@@ -385,7 +385,7 @@ class GeneratorFromArray : public SoundGenerator<T> {
         }
       }
 
-      LOGD("index: %d - active: %d", soundIndex, this->active);
+      //LOGD("index: %d - active: %d", soundIndex, this->active);
       T result = 0;
       if (this->active) {
         result = table[soundIndex];
