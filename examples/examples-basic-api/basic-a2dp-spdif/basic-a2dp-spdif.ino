@@ -7,8 +7,8 @@
  */
 
 #define USE_A2DP
-#include "AudioTools.h"
 #include "AudioConfigLocal.h"
+#include "AudioTools.h"
 
 BluetoothA2DPSink a2dp_sink;
 SPDIFStream spdif;

@@ -1,4 +1,4 @@
-# I2S Analog Output Test
+# Serial Output Test as CSV
 
 This is a simple basic test for any processor type
 
