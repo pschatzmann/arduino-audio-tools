@@ -1,8 +1,7 @@
 #pragma once
 
-#if defined(ESP32) 
+#if defined(ESP32) && !defined(ARDUINO_ESP32S2_DEV)
 #include "AudioConfig.h"
-#include "esp_a2dp_api.h"
 #include "driver/i2s.h"
 #include "driver/adc.h"
 #include "soc/dac_channel.h"

@@ -4,9 +4,7 @@
 
 #include "AudioConfig.h"
 #include "AudioI2S/I2SConfig.h"
-
 #include "driver/i2s.h"
-#include "esp_a2dp_api.h"
 #include "esp_system.h"
 
 namespace audio_tools {
@@ -297,7 +295,11 @@ class I2SBase {
         }
         mode = (i2s_mode_t) (i2s_format | i2s_rx_tx);
       } else {
+#ifdef ARDUINO_ESP32S2_DEV    
+        LOGE("Not supported by S2");
+#else    
         mode = (i2s_mode_t) (cfg.rx_tx_mode ? I2S_MODE_DAC_BUILT_IN : I2S_MODE_ADC_BUILT_IN);
+#endif
       }
       return mode;
     }
