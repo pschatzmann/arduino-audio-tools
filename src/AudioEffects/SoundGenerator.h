@@ -337,6 +337,76 @@ class GeneratorFromStream : public SoundGenerator<T> {
 };
 
 /**
+ * @brief We generate the samples from an array which is provided 
+ * 
+ * @tparam T 
+ */
+template <class T>
+class GeneratorFromArray : public SoundGenerator<T> {
+  public:
+
+    template  <size_t arrayLen> 
+    GeneratorFromArray(T(&array)[arrayLen], int repeat=0) {
+        LOGD(LOG_METHOD);
+        this->maxRepeat = repeat;
+        setArray(array, arrayLen);
+    }
+
+    template  <int arrayLen> 
+    void setArray(T(&array)[arrayLen]){
+        LOGD(LOG_METHOD);
+        setArray(array, arrayLen);
+    }
+
+    void setArray(T*array, size_t size){
+      this->tableLength = size;
+      this->table = array;
+      LOGI("tableLength: %d", (int)size);
+    }
+
+    /// Starts the generation of samples
+    void begin() override {
+      LOGI(LOG_METHOD);
+      SoundGenerator<T>::begin();
+      soundIndex = 0;
+      repeatCounter = 0;
+    }
+
+    /// Provides a single sample
+    T readSample() override {
+      // at end deactivate output
+      if (soundIndex >= tableLength) {
+        LOGD("reset index - soundIndex: %d, tableLength: %d",soundIndex,tableLength);
+        soundIndex = 0;
+        // deactivate when count has been used up
+        if (maxRepeat>=1 && ++repeatCounter>=maxRepeat){
+            this->active = false;
+            LOGD("active: false");
+        }
+      }
+
+      LOGD("index: %d - active: %d", soundIndex, this->active);
+      T result = 0;
+      if (this->active) {
+        result = table[soundIndex];
+        soundIndex++;
+      }
+
+      return result;
+    }
+
+
+  protected:
+    int soundIndex = 0;
+    int maxRepeat = 0;
+    int repeatCounter = 0;
+    T *table;
+    size_t tableLength = 0;
+
+};
+
+
+/**
  * @brief Mixer which combines multiple sound generators into one output
  * 
  * @tparam T 

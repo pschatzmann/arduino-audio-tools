@@ -284,7 +284,9 @@ class GeneratedSoundStream : public AudioStreamX, public AudioBaseInfoSource {
     return generator_ptr->readBytes(buffer, length);
   }
 
-  operator bool() { return active; }
+  bool isActive() {return active && generator_ptr->isActive();}
+
+  operator bool() { return isActive(); }
 
   void flush() override {}
 
