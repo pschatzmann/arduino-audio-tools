@@ -243,7 +243,8 @@ class Resample : public AudioStreamX {
                 }
             }
             LOGI("frames: %d, skipped frames: %d", frame_count, skipped);
-            return result;
+            // return processed samples
+            return sample_count;
         }
 
 
