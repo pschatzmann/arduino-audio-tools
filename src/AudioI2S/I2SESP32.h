@@ -295,8 +295,8 @@ class I2SBase {
         }
         mode = (i2s_mode_t) (i2s_format | i2s_rx_tx);
       } else {
-#ifdef ARDUINO_ESP32S2_DEV    
-        LOGE("Not supported by S2");
+#if defined(ARDUINO_ESP32S2_DEV) || defined(ARDUINO_ESP32C3_DEV)   
+        LOGE("Not supported");
 #else    
         mode = (i2s_mode_t) (cfg.rx_tx_mode ? I2S_MODE_DAC_BUILT_IN : I2S_MODE_ADC_BUILT_IN);
 #endif
