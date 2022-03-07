@@ -1,5 +1,5 @@
 /**
- * @file streams-i2s-csv.ino
+ * @file streams-i2s-serial.ino
  * @author Phil Schatzmann
  * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-stream/streams-i2s-serial/README.md
  * 

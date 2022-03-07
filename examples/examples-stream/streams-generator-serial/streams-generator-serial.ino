@@ -1,7 +1,7 @@
 /**
- * @file streams-generator-csv.ino
+ * @file streams-generator-serial.ino
  * @author Phil Schatzmann
- * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-stream/streams-generator-csv/README.md 
+ * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-stream/streams-generator-serial/README.md 
  * @copyright GPLv3
  **/
  
