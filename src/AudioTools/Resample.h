@@ -4,6 +4,9 @@
 
 namespace audio_tools {
 
+enum ResampleScenario {UP_SAMLE, DOWNSAMPLE_FACTOR, DOWNSAMPLE_SKIP_EVERY_NTH};
+enum ResamplePrecision { Low, Medium, High, VeryHigh};
+
 /**
  * @brief A simple implementation which changes the sample rate by the indicated integer factor. 
  * To downlample we calculate the avarage of n (=factor) samples. To upsample we interpolate
@@ -27,9 +30,9 @@ class Resample : public AudioStreamX {
          * @param channels number of channels (default 2)
          * @param factor use a negative value to downsample
          */
-        Resample(Print &out, int channels=2, int factor=2 ){
+        Resample(Print &out, int channels, int factor , ResampleScenario scenario){
             setOut(out);
-            begin(channels, factor);
+            begin(channels, factor, scenario);
         }
         /**
          * @brief Construct a new Resample object
@@ -38,14 +41,26 @@ class Resample : public AudioStreamX {
          * @param channels 
          * @param factor 
          */
-        Resample(Stream &in, int channels=2, int factor=2 ){
+        Resample(Stream &in, int channels, int factor, ResampleScenario scenario){
             setIn(in);
-            begin(channels, factor);
+            begin(channels, factor, scenario);
         }
 
-        void begin(int channels=2, int factor=2) {
+        bool begin(int channels, int factor, ResampleScenario scenario) {
             this->channels = channels;
             this->factor = factor;
+            this->scenario = scenario;
+
+            if (this->scenario==DOWNSAMPLE_SKIP_EVERY_NTH){
+                is_active = (factor != 0);
+            } else {
+                is_active = (factor != 1);
+            }
+            
+            downsample_start_offset = 0;
+            downsample_skip_counter = 0;
+            //LOGD("is_active: %d for factor %d", is_active, factor);
+            return is_active;
         }
 
         void setOut(Print &out){
@@ -61,24 +76,44 @@ class Resample : public AudioStreamX {
 
         /// Writes the data up or downsampled to the final destination
         size_t write(const uint8_t *src, size_t byte_count) override {
+            if (p_out==nullptr) return 0;
+            // no change
+            if (!is_active){
+                return p_out->write(src, byte_count);
+            }
+
+            // validate size
             if (byte_count%channels!=0){
                 LOGE("Invalid buffer size: It must be multiple of %d", channels);
                 return 0;
             }
+            
+            // convert
             size_t bytes = 0;
             size_t result = 0;
             int sample_count = byte_count / sizeof(T);
-            if (factor>1){
-                allocateBuffer(sample_count*factor);
-                bytes = upsample((T*)src, buffer, sample_count, channels, factor) * sizeof(T);
-                result = p_out->write((uint8_t*)buffer, bytes) / factor;
-            } else if (factor<1){
-                int abs_factor = abs(factor);
-                allocateBuffer(sample_count/abs_factor);
-                bytes = downsample((T*)src, buffer , sample_count, channels, abs_factor) * sizeof(T);
-                result = p_out->write((uint8_t*)buffer, bytes) * abs_factor;
-            } else {
-                result = p_out->write(src, byte_count);
+
+            switch(scenario){
+                case UP_SAMLE: {
+                    allocateBuffer(sample_count*factor);
+                    bytes = upsample((T*)src, buffer, sample_count, channels, factor) * sizeof(T);
+                    result = p_out->write((uint8_t*)buffer, bytes) / factor;
+                     } break;
+                case DOWNSAMPLE_FACTOR: {
+                    allocateBuffer(sample_count/factor);
+                    bytes = downsample((T*)src, buffer , sample_count, channels, factor) * sizeof(T);
+                    result = p_out->write((uint8_t*)buffer, bytes) * factor;
+                    }  break;
+                case DOWNSAMPLE_SKIP_EVERY_NTH: {
+                    allocateBuffer(sample_count);
+                    int skip_ever_nth = factor;
+                    bytes = downsampleSkip((T*)src, buffer , sample_count, channels, skip_ever_nth) * sizeof(T);
+                    result = p_out->write((uint8_t*)buffer, bytes) * factor;
+                    } break;
+
+                default:
+                    LOGE("Not supported");
+                    break;
             }
             return result;
         }
@@ -89,32 +124,53 @@ class Resample : public AudioStreamX {
         /// Reads the up/downsampled bytes
         size_t readBytes(uint8_t *src, size_t length) override { 
             if (p_in==nullptr) return 0;
+            if (!is_active){
+                return p_in->readBytes(src, length);
+            }
+
+            // validate length
             if (length%channels!=0){
                 length = length / channels * channels;
             }
+
+            // result
             size_t byte_count = 0;
-            if (factor>1){
-                int read_len = length/factor;
-                int sample_count = read_len / sizeof(T);
-                allocateBuffer(sample_count);
-                read_len = p_in->readBytes((uint8_t*)buffer, read_len);
-                sample_count = read_len / sizeof(T);
-                byte_count = upsample(buffer,(T*)src, sample_count, channels, factor) * sizeof(T);
-            } else if (factor<1){
-                int abs_factor = abs(factor);
-                int read_len = length * abs_factor;
-                int sample_count = read_len / sizeof(T);
-                allocateBuffer(sample_count);
-                read_len = p_in->readBytes((uint8_t*)buffer, read_len);
-                sample_count = read_len / sizeof(T);
-                byte_count = downsample(buffer,(T*)src, sample_count, channels, abs_factor) * sizeof(T);
-            } else {
-                byte_count = p_in->readBytes(src, length);
+
+            switch(scenario){
+                case UP_SAMLE: {
+                    int read_len = length / factor;
+                    int sample_count = read_len / sizeof(T);
+                    allocateBuffer(sample_count);
+                    read_len = p_in->readBytes((uint8_t*)buffer, read_len);
+                    sample_count = read_len / sizeof(T);
+                    byte_count = upsample(buffer,(T*)src, sample_count, channels, factor) * sizeof(T);
+                    } break;
+                case DOWNSAMPLE_FACTOR: {
+                    int read_len = length * factor;
+                    int sample_count = read_len / sizeof(T);
+                    allocateBuffer(sample_count);
+                    read_len = p_in->readBytes((uint8_t*)buffer, read_len);
+                    sample_count = read_len / sizeof(T);
+                    byte_count = downsample(buffer,(T*)src, sample_count, channels, factor) * sizeof(T);
+                    } break;
+                case DOWNSAMPLE_SKIP_EVERY_NTH: {
+                    int read_len = length +  (length / factor);
+                    int sample_count = read_len / sizeof(T);
+                    allocateBuffer(sample_count);
+                    read_len = p_in->readBytes((uint8_t*)buffer, read_len);
+                    sample_count = read_len / sizeof(T);
+                    byte_count = downsampleSkip(buffer,(T*)src, sample_count, channels,factor) * sizeof(T);
+                    } break;
+                default:
+                    LOGE("Not supported");
+                    break;
             }
+
             return byte_count;
         }
    
     protected:
+        ResampleScenario scenario;
         Print *p_out=nullptr;
         Stream *p_in=nullptr;
         T *buffer=nullptr;
@@ -122,6 +178,9 @@ class Resample : public AudioStreamX {
         int channels = 2;
         int factor = 1;
         int buffer_size = 0;
+        int downsample_start_offset = 0;
+        int downsample_skip_counter = 0;
+        bool is_active = false;
 
         // allocates a buffer; len is specified in samples
         void allocateBuffer(int len) {
@@ -135,7 +194,7 @@ class Resample : public AudioStreamX {
             }
         }
 
-        // reduces the sampes by the indicated factor. 
+        // reduces the sampes by the indicated factor - returns the number of samples
         size_t downsample(T *from,T *to, int sample_count, int channels, int factor ){
             if (sample_count%factor!=0){
                 LOGE("Incompatible buffer length for down sampling. If must be a factor of %d", factor);
@@ -147,18 +206,46 @@ class Resample : public AudioStreamX {
             for (int16_t j=0; j<frame_count; j+=factor){
                 long total[channels];
                 for (int8_t ch=0; ch<channels; ch++){
-                    total[ch]=0;
-                    int pos = j+ch;
-                    for (int16_t f=0; f<factor; f++){
-                        total[ch] += *p_data(j+f, ch, from); 
-                    }
                     to_pos = j/factor;
-                    *p_data(to_pos, ch, to) = total[ch] / factor;
+                    *p_data(to_pos, ch, to) = *p_data(j, ch, from);
+
                     result++;
                 }
             }
             return result;
         }
+
+
+        // reduces the sampes by the indicated factor - returns the number of samples
+        size_t downsampleSkip(T *from,T *to, int sample_count, int channels, int skip_every_nth ){
+            if (sample_count%channels!=0){
+                LOGE("Incompatible buffer length for down sampling. If must be a factor of %d", factor);
+                return 0;
+            }
+            int to_pos=0;
+            int frame_count = sample_count / channels;
+            int skipped = 0;
+            size_t result = 0;
+            to_pos = 0;
+            // copy data using every factor entries 
+            for (int16_t j=downsample_start_offset; j<frame_count; j++){
+                if (downsample_skip_counter++==skip_every_nth){
+                    // value will be ignored, restart counter
+                    downsample_skip_counter = 0;
+                    skipped++;
+                } else {
+                    // copy channels data
+                    for (int8_t ch=0; ch<channels; ch++){
+                        *p_data(to_pos, ch, to) = *p_data(j, ch, from);
+                        result++;
+                    }
+                    to_pos++;
+                }
+            }
+            LOGI("frames: %d, skipped frames: %d", frame_count, skipped);
+            return result;
+        }
+
 
         /// Increases the samples by the indicated factor: We interpolate the missing samples
         size_t upsample(T *from, T* to, int sample_count, int channels, int factor ){
@@ -196,8 +283,6 @@ class Resample : public AudioStreamX {
             return frame_pos>=0 ? start+(frame_pos*channels)+channel : last_end+channel;
         }
 };
-
-enum ResamplePrecision { Low, Medium, High, VeryHigh};
 
 /**
  * @brief Class to determine a combination of upsample and downsample rates to achieve any ratio
@@ -251,9 +336,13 @@ class ResampleParameterEstimator {
             return factor();
         }
 
-        /// same as division but provides negative number to indicate that we need to downsample
+        /// same as division 
         int downsample() {
-            return - divisor();
+            return divisor();
+        }
+
+        ResampleScenario downsampleScenario() {
+            return DOWNSAMPLE_FACTOR;
         }
 
         /// Determines a supported downsampling write size
@@ -288,7 +377,7 @@ class ResampleParameterEstimator {
                 }
             }
             to_rate_eff = static_cast<float>(from_rate)  * fact / div;
-            LOGI("div: %d, fact %d -> rate: %d, rate_eff: %f", div,fact,to_rate, to_rate_eff);
+            LOGI("div: %d, fact %d -> rate: %d, rate_eff: %f", div, fact, to_rate, to_rate_eff);
         }
 };
 /**
@@ -299,6 +388,17 @@ class ResampleParameterEstimator {
  */
 struct ResampleConfig : public AudioBaseInfo {
     int sample_rate_from=0;
+    int skip_ever_nth=0; // small scale resampling
+
+    void logInfo(){
+        if (skip_ever_nth!=0){
+            LOGI("skip_ever_nth: %d", skip_ever_nth);
+
+        } else {
+            AudioBaseInfo::logInfo();
+            LOGI("sample_rate_from: %d", sample_rate_from);
+        }
+    }
 };
 
 /**
@@ -333,7 +433,7 @@ class ResampleStream : public AudioStreamX {
          */
         ResampleStream(Stream &in, ResamplePrecision precision = Medium){
             this->precision = precision;
-            up.seIn(down); // we upsample first
+            up.setIn(down); // we upsample first
             down.setIn(in); // so that we can downsample to the requested rate
         }
 
@@ -343,46 +443,62 @@ class ResampleStream : public AudioStreamX {
             return cfg;
         }
 
-        // Recalculates the up and downsamplers
-        bool begin() override {
-            if (channels==0){
-                LOGE("channels are not defined")
-                return false;
-            }
-            if (from_rate==0){
-                LOGE("from_rate is not defined")
-                return false;
-            }
-            if (to_rate==0){
-                LOGE("to_rate is not defined")
-                return false;
-            }
-            calc.begin(from_rate, to_rate, precision);
-            up.begin(channels, calc.upsample());
-            down.begin(channels, calc.downsample());
-            return true;
-        }
-
         /// Defines the channels and sample rates
         bool begin(int channels, int fromRate, int toRate){
-            this->channels = channels;
-            this->from_rate = fromRate;
-            this->to_rate = toRate;
+            cfg.channels = channels;
+            cfg.sample_rate_from = fromRate;
+            cfg.sample_rate = toRate;
             return begin();
         }
 
         /// Defines the channels and sample rates from the AudioBaseInfo. Please call setFromInfo() or setFromSampleRate() before
         bool begin(ResampleConfig info){
-            channels = info.channels;
-            from_rate = info.sample_rate_from;
-            to_rate = info.sample_rate;
+            cfg = info;
             return begin();
+        }
+
+        // Recalculates the up and downsamplers
+        bool begin() override {
+            if (cfg.channels==0){
+                LOGE("channels are not defined")
+                return false;
+            }
+            if (cfg.skip_ever_nth!=0){
+                // small scale resampling
+                if (up.begin(cfg.channels, 1.0, UP_SAMLE)){
+                    LOGI("up active");
+                }
+                if (down.begin(cfg.channels, cfg.skip_ever_nth, DOWNSAMPLE_SKIP_EVERY_NTH)){
+                    LOGI("down active");
+                }
+            } else {
+                // regular resamping with up and downsampling
+                if (cfg.sample_rate_from==0){
+                    LOGE("from_rate is not defined")
+                    return false;
+                }
+                if (cfg.sample_rate==0){
+                    LOGE("to_rate is not defined")
+                    return false;
+                }
+                // calculate up and downsample rates
+                calc.begin(cfg.sample_rate_from, cfg.sample_rate, precision);
+
+                // initialize resamplers
+                if (up.begin(cfg.channels, calc.upsample(), UP_SAMLE)){
+                    LOGI("up active");
+                }
+                if (down.begin(cfg.channels, calc.downsample(), calc.downsampleScenario())){
+                    LOGI("down active");
+                }
+            }
+            return true;
         }
 
         /// Handle Change of the source sampling rate - and channels!
         void setAudioInfo(AudioBaseInfo info) override {
-            from_rate = info.sample_rate;
-            channels = info.channels;
+            cfg.sample_rate_from = info.sample_rate;
+            cfg.channels = info.channels;
             begin();
         }
 
@@ -402,7 +518,7 @@ class ResampleStream : public AudioStreamX {
         }
 
     protected:
-        int channels, from_rate, to_rate;
+        ResampleConfig cfg;
         ResampleParameterEstimator calc;
         Resample<T> up;
         Resample<T> down;
