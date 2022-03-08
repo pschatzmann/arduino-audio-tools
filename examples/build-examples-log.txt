@@ -1,7 +1,7 @@
 
 ../examples/examples-basic-api/base-adc-a2dp -> rc=0
 ../examples/examples-basic-api/base-adc-serial -> rc=0
-../examples/examples-basic-api/base-file_mp3-a2dp -> rc=0
+../examples/examples-basic-api/base-file_mp3-a2dp -> rc=1
 ../examples/examples-basic-api/base-file_raw-a2dp -> rc=0
 ../examples/examples-basic-api/base-file_raw-serial -> rc=0
 ../examples/examples-basic-api/base-i2s-a2dp -> rc=0
@@ -19,21 +19,19 @@
 ../examples/examples-webserver/streams-i2s-webserver_wav -> rc=0
 ../examples/examples-webserver/streams-sam-webserver_wav -> rc=0
 ../examples/examples-webserver/streams-tts-webserver_wav -> rc=0
+../examples/examples-stream/streams-adc-i2s -> rc=0
 ../examples/examples-stream/streams-adc-serial -> rc=0
-../examples/examples-stream/streams-analog-i2s -> rc=0
-../examples/examples-stream/streams-analog-serial -> rc=0
 ../examples/examples-stream/streams-generator-a2dp -> rc=0
 ../examples/examples-stream/streams-generator-analog -> rc=0
-../examples/examples-stream/streams-generator-csv -> rc=0
 ../examples/examples-stream/streams-generator-i2s -> rc=0
 ../examples/examples-stream/streams-generator-pwm -> rc=0
 ../examples/examples-stream/streams-generator-serial -> rc=0
 ../examples/examples-stream/streams-generator-spdif -> rc=0
 ../examples/examples-stream/streams-i2s-a2dp -> rc=0
-../examples/examples-stream/streams-i2s-csv -> rc=0
 ../examples/examples-stream/streams-i2s-filter-i2s -> rc=0
 ../examples/examples-stream/streams-i2s-i2s -> rc=0
 ../examples/examples-stream/streams-i2s-i2s-2 -> rc=0
+../examples/examples-stream/streams-i2s-serial -> rc=0
 ../examples/examples-stream/streams-memory_mp3-analog -> rc=0
 ../examples/examples-stream/streams-memory_mp3-metadata -> rc=0
 ../examples/examples-stream/streams-memory_mp3-pwm -> rc=0
@@ -42,6 +40,7 @@
 ../examples/examples-stream/streams-memory_raw-i2s -> rc=0
 ../examples/examples-stream/streams-memory_wav-pwm -> rc=0
 ../examples/examples-stream/streams-memory_wav-serial -> rc=0
+../examples/examples-stream/streams-mp34dt05-serial -> rc=1
 ../examples/examples-stream/streams-sd_mp3-i2s -> rc=0
 ../examples/examples-stream/streams-sd_mp3-metadata -> rc=0
 ../examples/examples-stream/streams-url_mp3-analog -> rc=0
@@ -56,8 +55,8 @@
 ../examples/examples-audiokit/player-sd_a2dp-audiokit -> rc=0
 ../examples/examples-audiokit/player-url_icy-audiokit -> rc=0
 ../examples/examples-audiokit/streams-audiokit-audiokit -> rc=0
-../examples/examples-audiokit/streams-audiokit-csv -> rc=0
 ../examples/examples-audiokit/streams-audiokit-filter-audiokit -> rc=0
+../examples/examples-audiokit/streams-audiokit-serial -> rc=0
 ../examples/examples-audiokit/streams-audiokit-webserver_aac -> rc=0
 ../examples/examples-audiokit/streams-audiokit-webserver_wav -> rc=0
 ../examples/examples-audiokit/streams-flite-audiokit -> rc=0

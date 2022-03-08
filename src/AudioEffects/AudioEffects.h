@@ -47,9 +47,19 @@ class AudioEffects : public SoundGenerator<effect_t> {
             setInput(generator);
         }
 
+        /// Constructor which is assigning a Stream as input. The stream must consist of int16_t values 
+        /// with the indicated number of channels
+        AudioEffects(Stream &input, int channels=2, float volume=1.0) {
+            setInput(* (new GeneratorFromStream<effect_t>(input, channels, volume)));
+            owns_generator = true;
+        }
+
         /// Destructor
         virtual ~AudioEffects(){
             LOGD(LOG_METHOD);
+            if (owns_generator && p_generator!=nullptr){
+                delete p_generator;
+            }
             for (int j=0;j<effects.size();j++){
                 delete effects[j];
             }
@@ -130,6 +140,7 @@ class AudioEffects : public SoundGenerator<effect_t> {
     protected:
         Vector<AudioEffect*> effects;
         GeneratorT *p_generator=nullptr;
+        bool owns_generator = false;
 };
 
 

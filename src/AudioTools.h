@@ -79,7 +79,7 @@ using namespace audio_tools;
 
 #if defined(IS_DESKTOP) && defined(USE_PORTAUDIO)
 typedef PortAudioStream DefaultStream;
-#elif defined(ESP32) || defined(ESP8266) || defined(__SAMD21G18A__)
+#elif defined(USE_I2S) 
 typedef I2SStream DefaultStream;
 #endif
 
