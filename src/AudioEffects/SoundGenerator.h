@@ -379,10 +379,18 @@ class GeneratorFromStream : public SoundGenerator<T> {
  * 
  * @tparam T 
  */
-
+ 
 template <class T>
 class GeneratorFromArray : public SoundGenerator<T> {
   public:
+
+    /**
+     * @brief Construct a new Generator From Array object
+     * 
+     * @tparam array array of audio data of the the type defined as class template parameter 
+     * @param repeat number of repetions the array should be played (default 1)
+     * @param setInactiveAtEnd  defines if the generator is set inactive when the array has played fully. Default is true.
+     */
 
     template  <size_t arrayLen> 
     GeneratorFromArray(T(&array)[arrayLen], int repeat=0, bool setInactiveAtEnd=true) {
@@ -439,7 +447,7 @@ class GeneratorFromArray : public SoundGenerator<T> {
       return result;
     }
 
-    // Similar like  
+    // Similar like is active to check if the array is still playing.  
     bool isRunning() {
         return is_running;
     }
