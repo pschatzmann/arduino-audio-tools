@@ -355,7 +355,7 @@ class ChannelReducer : public BaseConverter<T> {
     public:
         ChannelReducer() = default;
 
-        ChannelReducer(int channelCountOfSource, int channelCountOfTarget=1){
+        ChannelReducer(int channelCountOfTarget, int channelCountOfSource){
             from_channels = channelCountOfSource;
             to_channels = channelCountOfTarget;
         }
@@ -367,11 +367,15 @@ class ChannelReducer : public BaseConverter<T> {
         void setTargetChannels(int channelCountOfTarget) {
             to_channels = channelCountOfTarget;
         }
-        
+
         size_t convert(uint8_t*src, size_t size) {
+            return convert(src,src,size);
+        }
+
+        size_t convert(uint8_t*target, uint8_t*src, size_t size) {
             int frame_count = size/(sizeof(T)*from_channels);
             size_t result_size=0;
-            T* result = (T*)src;
+            T* result = (T*)target;
             T* source = (T*)src;
             int reduceDiv = from_channels-to_channels+1;
 
@@ -396,6 +400,7 @@ class ChannelReducer : public BaseConverter<T> {
         int from_channels;
         int to_channels;
 };
+
 
 
 /**
