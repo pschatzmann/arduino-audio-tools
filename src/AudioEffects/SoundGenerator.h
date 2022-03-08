@@ -385,9 +385,10 @@ class GeneratorFromArray : public SoundGenerator<T> {
   public:
 
     template  <size_t arrayLen> 
-    GeneratorFromArray(T(&array)[arrayLen], int repeat=0) {
+    GeneratorFromArray(T(&array)[arrayLen], int repeat=0, bool setInactiveAtEnd=true) {
         LOGD(LOG_METHOD);
-        this->maxRepeat = repeat;
+        this->max_repeat = repeat;
+        this->inactive_at_end = setInactiveAtEnd;
         setArray(array, arrayLen);
     }
 
@@ -398,49 +399,60 @@ class GeneratorFromArray : public SoundGenerator<T> {
     }
 
     void setArray(T*array, size_t size){
-      this->tableLength = size;
+      this->table_length = size;
       this->table = array;
-      LOGI("tableLength: %d", (int)size);
+      LOGI("table_length: %d", (int)size);
     }
 
     /// Starts the generation of samples
     void begin() override {
       LOGI(LOG_METHOD);
       SoundGenerator<T>::begin();
-      soundIndex = 0;
-      repeatCounter = 0;
+      sound_index = 0;
+      repeat_counter = 0;
+      is_running = true;
     }
 
     /// Provides a single sample
     T readSample() override {
       // at end deactivate output
-      if (soundIndex >= tableLength) {
-        // LOGD("reset index - soundIndex: %d, tableLength: %d",soundIndex,tableLength);
-        soundIndex = 0;
+      if (sound_index >= table_length) {
+        // LOGD("reset index - sound_index: %d, table_length: %d",sound_index,table_length);
+        sound_index = 0;
         // deactivate when count has been used up
-        if (maxRepeat>=1 && ++repeatCounter>=maxRepeat){
-            this->active = false;
-            LOGD("active: false");
+        if (max_repeat>=1 && ++repeat_counter>=max_repeat){
+            LOGD("atEnd");
+            this->is_running = false;
+            if (inactive_at_end){
+                this->active = false;
+            }
         }
       }
 
-      //LOGD("index: %d - active: %d", soundIndex, this->active);
+      //LOGD("index: %d - active: %d", sound_index, this->active);
       T result = 0;
-      if (this->active) {
-        result = table[soundIndex];
-        soundIndex++;
+      if (this->is_running) {
+        result = table[sound_index];
+        sound_index++;
       }
 
       return result;
     }
 
+    // Similar like  
+    bool isRunning() {
+        return is_running;
+    }
+
 
   protected:
-    int soundIndex = 0;
-    int maxRepeat = 0;
-    int repeatCounter = 0;
+    int sound_index = 0;
+    int max_repeat = 0;
+    int repeat_counter = 0;
+    bool inactive_at_end;
+    bool is_running = false;
     T *table;
-    size_t tableLength = 0;
+    size_t table_length = 0;
 
 };
 
