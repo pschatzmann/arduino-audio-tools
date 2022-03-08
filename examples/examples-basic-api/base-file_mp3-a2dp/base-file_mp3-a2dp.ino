@@ -9,7 +9,6 @@
 
 // Add this in your sketch or change the setting in AudioConfig.h
 #define USE_A2DP
-#define USE_ESP8266_AUDIO
 
 #include <SPI.h>
 #include <SD.h>

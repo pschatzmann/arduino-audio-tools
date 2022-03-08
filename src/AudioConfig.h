@@ -152,6 +152,7 @@
 #define USE_URLSTREAM_TASK
 #define USE_TYPETRAITS
 #define USE_EFFECTS_SUITE
+#define USE_TIMER
 
 #define PWM_FREQENCY 30000
 #define PIN_PWM_START 12
@@ -202,6 +203,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define USE_AUDIO_SERVER
 #define USE_TYPETRAITS
 #define USE_EFFECTS_SUITE
+#define USE_TIMER
 //#define USE_ESP8266_AUDIO
 
 #define PIN_PWM_START 12
@@ -221,6 +223,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define USE_PWM
 #define USE_TYPETRAITS
 #define USE_EFFECTS_SUITE
+#define USE_TIMER
 
 #define PIN_PWM_START 6
 #define PIN_I2S_BCK 2
@@ -239,6 +242,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define USE_ADC_ARDUINO
 #define USE_TYPETRAITS
 #define USE_EFFECTS_SUITE
+#define USE_TIMER
 
 #define PIN_ADC_START 26
 #define PIN_PWM_START 6
@@ -270,6 +274,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define USE_ADC_ARDUINO
 #define USE_TYPETRAITS
 #define USE_EFFECTS_SUITE
+#define USE_TIMER
 
 #define PIN_ADC_START 26
 #define PIN_PWM_START 6
@@ -300,6 +305,8 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 //----------------
 #ifdef __AVR__
 #define USE_PWM
+#define USE_TIMER
+
 #define assert(T)
 #define rintf(F) static_cast<int>(F)
 #define PIN_PWM_START 6
@@ -328,6 +335,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #ifdef STM32
 #define USE_I2S
 #define USE_PWM
+#define USE_TIMER
 
 #define PIN_PWM_START 6
 #define PIN_I2S_BCK 1
@@ -339,8 +347,20 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define PIN_CS 10
 #endif
 
+//----------------
+
+#ifdef ARDUINO_ARCH_SAMD
+#define USE_I2S
+#define PIN_I2S_BCK 1
+#define PIN_I2S_WS PIN_I2S_BCK+1
+#define PIN_I2S_DATA_IN 3
+#define PIN_I2S_DATA_OUT 3
+#define PIN_I2S_MUTE 4
+#define SOFT_MUTE_VALUE LOW  
+#endif
 
 //----------------
+
 
 #ifdef IS_DESKTOP
 #define USE_URL_ARDUINO

@@ -1,7 +1,8 @@
 #pragma once
 
-#ifdef __SAMD21G18A__
+#if defined(ARDUINO_ARCH_SAMD) 
 #include "AudioI2S/I2SConfig.h"
+#include <I2S.h>
 
 namespace audio_tools {
 
@@ -22,19 +23,13 @@ class I2SBase {
     }
 
     /// starts the DAC with the default config
-    bool begin(RxTxMode mode = TX_MODE) {
-      return begin(defaultConfig())
+    bool begin(RxTxMode mode) {
+      return begin(defaultConfig(mode));
     }
 
     /// starts the DAC 
     bool begin(I2SConfig cfg) {
-        I2S.begin(cfg.i2s_format, cfg.sample_rate, cfg.bits_per_sample, cfg.is_master);
-        if (cfg.mode = TX_MODE){
-            I2S.enableTransmitter();
-        } else {
-            I2S.enableReceiver();
-        }
-        return true;
+        return I2S.begin(cfg.i2s_format, cfg.sample_rate, cfg.bits_per_sample);
     }
 
     bool begin() {
@@ -55,12 +50,16 @@ class I2SBase {
       return I2S.write((const uint8_t *)src, size_bytes);
     }
 
-    size_t readBytes(void *dest, size_t size_bytes){
+    size_t readBytes(void *src, size_t size_bytes){
       return I2S.read(src, size_bytes);
     }
 
     int available() {
       return I2S.available();
+    }
+
+    int availableForWrite() {
+      return I2S.availableForWrite();
     }
 
   protected:
@@ -69,5 +68,6 @@ class I2SBase {
 
 };
 
+}
 
 #endif

@@ -842,7 +842,7 @@ class FilteredStream : public AudioStreamX {
 };
 
 
-#ifndef IS_DESKTOP
+#ifdef USE_TIMER
 /**
  * @brief TimerCallbackAudioStream Configuration
  * @author Phil Schatzmann

@@ -312,28 +312,66 @@ class SilenceGenerator : public SoundGenerator<T> {
 template <class T>
 class GeneratorFromStream : public SoundGenerator<T> {
     public:
-        GeneratorFromStream() = default;
+        GeneratorFromStream() {
+            maxValue = NumberConverter::maxValue(sizeof(T)*8);
+        };
 
-        GeneratorFromStream(Stream &input){
+        /**
+         * @brief Constructs a new Generator from a Stream object that can be used e.g. as input for AudioEffectss.
+         * 
+         * @param input Stream
+         * @param channels number of channels of the Stream
+         * @param volume factor my which the sample value is multiplied - default 1.0; Use it e.g. to reduce the volume (e.g. with 0.5)
+         */
+        GeneratorFromStream(Stream &input, int channels=1, float volume=1.0){
+            maxValue = NumberConverter::maxValue(sizeof(T)*8);
             setStream(input);
+            setVolume(volume);
+            setChannels(channels);
         }
 
         /// (Re-)Assigns a stream to the Adapter class
         void setStream(Stream &input){
             this->p_stream = &input;
         }
+
+        void setChannels(int channels){
+            this->channels = channels;
+        }
+
+        /// Multiplies the input with the indicated factor (e.g. )
+        void setVolume(float factor){
+            this->volume = factor;
+        }
+        
         
         /// Provides a single sample from the stream
         T readSample() {
             T data = 0;
+            float total = 0;
             if (p_stream!=nullptr) {
-                p_stream->readBytes((uint8_t*)&data, sizeof(T));
+                for (int j=0;j<channels;j++){
+                    p_stream->readBytes((uint8_t*)&data, sizeof(T));
+                    total += data;
+                }
+                float avg = (total / channels) * volume;
+                if (avg>maxValue){
+                    data = maxValue;
+                } else if (avg < -maxValue){
+                    data = -maxValue;
+                } else {
+                    data = avg;
+                }
             }
             return data;
         }
 
     protected:
         Stream *p_stream = nullptr;
+        int channels=1;
+        int volume=1.0;
+        float maxValue;
+
 };
 
 /**
@@ -341,6 +379,7 @@ class GeneratorFromStream : public SoundGenerator<T> {
  * 
  * @tparam T 
  */
+
 template <class T>
 class GeneratorFromArray : public SoundGenerator<T> {
   public:
