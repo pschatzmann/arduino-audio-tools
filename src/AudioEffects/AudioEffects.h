@@ -50,7 +50,7 @@ class AudioEffects : public SoundGenerator<effect_t> {
         /// Constructor which is assigning a Stream as input. The stream must consist of int16_t values 
         /// with the indicated number of channels
         AudioEffects(Stream &input, int channels=2, float volume=1.0) {
-            setInput(* (new GeneratorFromStream<effect_t>(input, channels, volume)));
+            setInput(* (new GeneratorT(input, channels, volume)));
             owns_generator = true;
         }
 
