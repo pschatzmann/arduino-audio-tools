@@ -3,8 +3,8 @@
 int channels = 2;
 int sample_rate = 5000;
 int16_t array[] = {-16000, 0, 16000, 0 };
-int repeat = 1; // 0= endless
-GeneratorFromArray<int16_t> generator(array,  repeat);      // generator from table
+int repeat = 10; // 0= endless
+GeneratorFromArray<int16_t> generator(array,  repeat, false);      // generator from table
 GeneratedSoundStream<int16_t> sound(generator);             // Stream
 CsvStream<int16_t> out(Serial);                             // Output
 StreamCopy copier(out, sound);                              // copies sound to out
@@ -23,17 +23,17 @@ void setup() {
   auto cfgGen = sound.defaultConfig();
   cfgGen.channels = channels;
   sound.begin(cfgGen); // setup channels
-  sound.end(); // end to wait for start event in loop
-  timeout = millis() + 5000;
+  //timeout = millis() + 1000;
 }
 
 void loop() {
   copier.copy();
 
   // trigger a singal every 5 seconds
-  if (millis()>timeout && !sound.isActive()){
-     sound.begin();
-     timeout = millis() + 5000;   
+  if (millis()>timeout && !generator.isRunning()){
+    // reset generator
+     generator.begin();
+     timeout = millis() + 1000;   
 
   }
 }
