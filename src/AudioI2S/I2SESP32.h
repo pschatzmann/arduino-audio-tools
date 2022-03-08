@@ -88,8 +88,36 @@ class I2SBase {
 
     size_t readBytes(void *dest, size_t size_bytes){
       size_t result = 0;
-      if (i2s_read(i2s_num, dest, size_bytes, &result, portMAX_DELAY)!=ESP_OK){
-        LOGE(LOG_METHOD);
+      if (cfg.channels==2){
+        if (i2s_read(i2s_num, dest, size_bytes, &result, portMAX_DELAY)!=ESP_OK){
+          LOGE(LOG_METHOD);
+        }
+      } else if (cfg.channels==1){
+        // I2S has always 2 channels. We support to reduce it to 1
+        uint8_t temp[size_bytes*2];
+        if (i2s_read(i2s_num, temp, size_bytes*2, &result, portMAX_DELAY)!=ESP_OK){
+          LOGE(LOG_METHOD);
+        }
+        // convert to 1 channel
+        switch(cfg.bits_per_sample){
+          case 16: {
+            ChannelReducer<int16_t> reducer16(1, 2);
+            result = reducer16.convert((uint8_t*)dest,temp, result);
+            } break;
+          // case 24: {
+          //   ChannelReducer<int24_t> reducer24(1,2);
+          //   result = reducer24.convert((uint8_t*)dest,temp,result);
+          //   } break;
+          case 32: {
+            ChannelReducer<int32_t> reducer32(1, 2);
+            result = reducer32.convert((uint8_t*)dest, temp, result);
+            } break;
+          default:
+            LOGE("invalid bits_per_sample: %d", cfg.bits_per_sample);
+            break;
+        }
+      } else {
+        LOGE("Invalid channels: %d", cfg.channels);
       }
       return result;
     }
