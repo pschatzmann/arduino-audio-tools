@@ -11,22 +11,23 @@
  */
 
 #include "AudioTools.h"
-
-#define RXD2 16
-#define TXD2 17
+#include <WiFi.h>
 
 uint16_t sample_rate = 44100;
 uint8_t channels = 2;  // The stream will have 2 channels
+WiFiServer server(80);
+WiFiClient client; 
 I2SStream out; 
-StreamCopy copier(out, Serial2);     
+StreamCopy copier(out, client);     
+const char* ssid     = "yourssid";
+const char* password = "yourpasswd";
 
 void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
-  // Note the format for setting a serial port is as follows:
-  // Serial2.begin(baud-rate, protocol, RX pin, TX pin);
-  Serial2.begin(115200, SERIAL_8N1, RXD2, TXD2);
+  // start server
+  server.begin();
 
   // start I2S
   Serial.println("starting I2S...");
@@ -40,5 +41,12 @@ void setup() {
 }
 
 void loop() { 
+  // get a new connection
+  if (!client){
+    client = server.available();  
+  }
+  // copy data if we are connected
+  if (client.connected()){
     copier.copy();
+  }
 }

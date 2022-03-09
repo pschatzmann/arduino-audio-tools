@@ -7,7 +7,11 @@
  *
  * @copyright Copyright (c) 2022
  *
+ * ATTENTION: DRAFT - not tested yet
  */
+
+#include "AudioTools.h"
+#include "AudioLibs/Communication.h"
 
 uint16_t sample_rate = 44100;
 uint8_t channels = 2;  // The stream will have 2 channels
@@ -17,12 +21,13 @@ ESPNowStream now;
 StreamCopy copier(now, sound);  // copies sound into i2s
 const char *ssd = "ssid";
 const char *password = "password";
+const char *peers[] = {"A8:48:FA:0B:93:40"}
 
 void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
-  now.add
+  now.addPeers(peers);
   now.begin(ssid, pasword);
 
   // Setup sine wave
