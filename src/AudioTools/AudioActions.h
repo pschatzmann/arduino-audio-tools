@@ -108,11 +108,12 @@ class AudioActions {
       } else if (a->activeLogic == ActiveChange) {
         bool active = (a->activeLogic == ActiveLow) ? !value : value;
         // reports pin state
-        if (value != a->lastState) {
+        if (value != a->lastState && millis() > a->debounceTimeout) {
           //LOGI("processActions: ActiveChange");
           // execute action
           a->actionOn(active, a->pin, a->ref);
           a->lastState = value;
+          a->debounceTimeout = millis() + DEBOUNCE_DELAY;
         }
       } else {
         bool active = (a->activeLogic == ActiveLow) ? !value : value;
