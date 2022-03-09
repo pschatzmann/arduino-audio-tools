@@ -150,10 +150,10 @@ class ESPNowStream : public AudioStreamX {
     // we use the first confirming mac_addr for further confirmations and ignore
     // others
     if (first_mac[0] == 0) {
-      strcpy(first_mac, mac_addr);
+      strcpy((char*)first_mac,(char*) mac_addr);
     }
     LOGI("%s:%d", mac_addr, status);
-    if (strcmp(first_mac, mac_addr) == 0 && status == ESP_NOW_SEND_SUCCESS) {
+    if (strcmp((char*)first_mac, (char*)mac_addr) == 0 && status == ESP_NOW_SEND_SUCCESS) {
       ESPNowStreamSelf->available_to_write = ESP_NOW_MAX_DATA_LEN;
     }
   }

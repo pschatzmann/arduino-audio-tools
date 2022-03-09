@@ -18,16 +18,16 @@ uint8_t channels = 2;  // The stream will have 2 channels
 ESPNowStream now;
 I2SStream out; 
 StreamCopy copier(out, now);     
-const char *ssd = "ssid";
+const char *ssid = "ssid";
 const char *password = "password";
-const char *peers[] = {"A8:48:FA:0B:93:40"}
+const char *peers[] = {"A8:48:FA:0B:93:40"};
 
 void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
   now.addPeers(peers);
-  now.begin(ssid, pasword);
+  now.begin(ssid, password);
 
   // start I2S
   Serial.println("starting I2S...");
