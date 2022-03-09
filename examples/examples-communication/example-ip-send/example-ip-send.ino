@@ -11,23 +11,33 @@
  */
 
 #include "AudioTools.h"
-
-#define RXD2 16
-#define TXD2 17
+#include <WiFi.h>
 
 uint16_t sample_rate = 44100;
 uint8_t channels = 2;  // The stream will have 2 channels
 SineWaveGenerator<sound_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
-GeneratedSoundStream<sound_t> sound( sineWave);                      // Stream generated from sine wave
-StreamCopy copier(Serial2, sound);  // copies sound into i2s
+GeneratedSoundStream<sound_t> sound( sineWave);  // Stream generated from sine wave
+WiFiClient client;                  
+StreamCopy copier(client, sound);  // copies sound into i2s
+const char *ssid = "ssid";
 
 void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
-  // Note the format for setting a serial port is as follows:
-  // Serial2.begin(baud-rate, protocol, RX pin, TX pin);
-  Serial2.begin(115200, SERIAL_8N1, RXD2, TXD2);
+  // connect to WIFI
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+      delay(500);
+      Serial.print(".");
+  }
+  Serial.println();
+
+  // Try to connect to ip / port
+  while (!client.connect("134.209.234.6", 80)) {
+    Serial.println("trying to connect...");
+    delay(5000);
+  }
 
   // Setup sine wave
   sineWave.begin(channels, sample_rate, N_B4);

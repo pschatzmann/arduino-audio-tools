@@ -31,6 +31,18 @@ class ESPNowStream : public AudioStreamX {
     return result == ESP_OK;
   }
 
+  /// Adds an array of
+  template<size_t size>
+  bool addPeers(const char*(&array)[size]) {
+    bool result = true;
+    for (int j=0;j<size;j++){
+      if(!addPeer(array[j])){
+        result = false;
+      }
+    }
+    return result;
+  }
+
   /// Adds a peer to which we can send info or from which we can receive info
   bool addPeer(const char *address) {
     esp_now_peer_info_t peer;

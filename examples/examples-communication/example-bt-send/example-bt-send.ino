@@ -7,8 +7,10 @@
  *
  * @copyright Copyright (c) 2022
  *
+ * ATTENTION: DRAFT - not tested yet
  */
 
+#include "AudioTools.h"
 #include "BluetoothSerial.h"
 
 uint16_t sample_rate = 44100;

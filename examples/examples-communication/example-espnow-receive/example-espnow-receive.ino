@@ -1,7 +1,7 @@
 /**
  * @file example-serial-receive.ino
  * @author Phil Schatzmann
- * @brief Receiving audio via serial
+ * @brief Receiving audio via ESPNow
  * @version 0.1
  * @date 2022-03-09
  * 
@@ -11,22 +11,23 @@
  */
 
 #include "AudioTools.h"
-
-#define RXD2 16
-#define TXD2 17
+#include "AudioLibs/Communication.h"
 
 uint16_t sample_rate = 44100;
 uint8_t channels = 2;  // The stream will have 2 channels
+ESPNowStream now;
 I2SStream out; 
-StreamCopy copier(out, Serial2);     
+StreamCopy copier(out, now);     
+const char *ssd = "ssid";
+const char *password = "password";
+const char *peers[] = {"A8:48:FA:0B:93:40"}
 
 void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
-  // Note the format for setting a serial port is as follows:
-  // Serial2.begin(baud-rate, protocol, RX pin, TX pin);
-  Serial2.begin(115200, SERIAL_8N1, RXD2, TXD2);
+  now.addPeers(peers);
+  now.begin(ssid, pasword);
 
   // start I2S
   Serial.println("starting I2S...");
