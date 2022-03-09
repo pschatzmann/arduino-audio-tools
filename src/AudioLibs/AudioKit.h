@@ -543,14 +543,6 @@ class AudioKitStream : public AudioStreamX {
       SPI.end();
     }
 
-    // pin conflicts with AIThinker A101 and headphone detection
-    if (! (cfg.sd_active && AUDIOKIT_BOARD==6)) {  
-      LOGD("actionHeadphoneDetection pin:%d",kit.pinHeadphoneDetect())
-      actions.add(kit.pinHeadphoneDetect(), actionHeadphoneDetection, AudioActions::ActiveChange);
-    } else {
-      LOGW("Headphone detection ignored because of conflict: %d ",kit.pinHeadphoneDetect());
-    }
-
     // pin conflicts with the SD CS pin for AIThinker and buttons
     if (! (cfg.sd_active && (AUDIOKIT_BOARD==5 || AUDIOKIT_BOARD==6))){
       LOGD("actionStartStop")
@@ -559,8 +551,16 @@ class AudioKitStream : public AudioStreamX {
       LOGW("Mode Button ignored because of conflict: %d ",kit.pinInputMode());
     }
 
-    // pin conflicts with SD Lyrat SD CS Pin and buttons
-    if (! (cfg.sd_active && AUDIOKIT_BOARD==1)){
+    // pin conflicts with AIThinker A101 and headphone detection
+    if (! (cfg.sd_active && AUDIOKIT_BOARD==6)) {  
+      LOGD("actionHeadphoneDetection pin:%d",kit.pinHeadphoneDetect())
+      actions.add(kit.pinHeadphoneDetect(), actionHeadphoneDetection, AudioActions::ActiveChange);
+    } else {
+      LOGW("Headphone detection ignored because of conflict: %d ",kit.pinHeadphoneDetect());
+    }
+
+    // pin conflicts with SD Lyrat SD CS Pin and buttons / Conflict on Audiokit V. 2957
+    if (! (cfg.sd_active && AUDIOKIT_BOARD==1 || AUDIOKIT_BOARD==7)){
       LOGD("actionVolumeDown")
       addAction(kit.pinVolumeDown(), actionVolumeDown); 
       LOGD("actionVolumeUp")
