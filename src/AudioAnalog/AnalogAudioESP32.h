@@ -263,6 +263,7 @@ class AnalogAudioStream  : public AudioStreamX {
             LOGI("TX_MODE");
             if (i2s_set_pin(port_no, nullptr) != ESP_OK) LOGE("i2s_set_pin");
             if (i2s_set_dac_mode( I2S_DAC_CHANNEL_BOTH_EN) != ESP_OK) LOGE("i2s_set_dac_mode");
+            if (i2s_set_sample_rates(port_no, cfg.sample_rate)  != ESP_OK) LOGE("i2s_set_sample_rates");
             break;
 
           default:

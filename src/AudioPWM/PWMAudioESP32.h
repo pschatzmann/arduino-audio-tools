@@ -104,10 +104,10 @@ class PWMAudioStreamESP32 : public PWMAudioStreamBase {
              LOGD(LOG_METHOD);
 
             // Attach timer int at sample rate
-            int prescale = 1;
+            int prescale = 2;
             bool rising_edge = true;
-            timer = timerBegin(audio_config.timer_id, prescale, rising_edge); // Timer at full 40Mhz, no prescaling
-            uint32_t counter = 40000000 / audio_config.sample_rate;
+            timer = timerBegin(audio_config.timer_id, prescale, rising_edge); // Timer at full 40Mhz,  prescaling 2
+            uint32_t counter = 20000000 / audio_config.sample_rate;
             LOGI("-> timer counter is %zu", counter);
             LOGD("-> timerAttachInterrupt");
             bool interrupt_edge_type = true;
