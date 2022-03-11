@@ -72,10 +72,14 @@ class I2SConfig : public AudioBaseInfo {
     I2SFormat i2s_format = I2S_STD_FORMAT;
 
 #ifdef ESP32
+    int buffer_count = I2S_BUFFER_COUNT;
+    int buffer_size = I2S_BUFFER_SIZE;
+
     bool is_digital = true;  // e.g. the ESP32 supports analog input or output
     bool auto_clear;
     bool use_apll = I2S_USE_APLL; 
     uint32_t fixed_mclk = 0; 
+
 #if ESP_IDF_VERSION_MAJOR >= 4 
     int pin_mck = -1;
 #endif
@@ -90,14 +94,16 @@ class I2SConfig : public AudioBaseInfo {
       LOGI("number of channels: %d", channels);
       LOGI("i2s_format: %s", i2s_formats[i2s_format]);
 #ifdef ESP32
-      LOGI("I2S_AUTO_CLEAR=%d",auto_clear);
-
+      LOGI("auto_clear:%d",auto_clear);
       if (use_apll) {
         LOGI("use_apll: %s", use_apll ? "true" : "false");
       }
       if (fixed_mclk){
         LOGI("fixed_mclk: %d", fixed_mclk);
       }
+      LOGI("buffer_count:%d",buffer_count);
+      LOGI("buffer_size:%d",buffer_size);
+
 #endif
 
       LOGI("pin_bck: %d", pin_bck);
