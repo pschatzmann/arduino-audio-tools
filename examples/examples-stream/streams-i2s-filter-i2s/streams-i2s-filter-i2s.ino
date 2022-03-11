@@ -43,7 +43,7 @@ void setup(void) {
   config_in.pin_bck = 15;
   config_in.pin_data = 16;
   // config_in.fixed_mclk = sample_rate * 256
-  // config_in.pin_mck = 2
+  // config_in.pin_mck = 3
 
   in.begin(config_in);
 

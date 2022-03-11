@@ -136,9 +136,6 @@ class I2SBase {
       this->i2s_num = (i2s_port_t) cfg.port_no; 
       setChannels(cfg.channels);
 
-      LOGI("I2S_BUFFER_COUNT=%d",I2S_BUFFER_COUNT);
-      LOGI("I2S_BUFFER_SIZE=%d",I2S_BUFFER_SIZE);
-
       i2s_config_t i2s_config_new = {
             .mode = toMode(cfg),
             .sample_rate = (eps32_i2s_sample_rate_type)cfg.sample_rate,
@@ -146,8 +143,8 @@ class I2SBase {
             .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,
             .communication_format = toCommFormat(cfg.i2s_format),
             .intr_alloc_flags = 0, // default interrupt priority
-            .dma_buf_count = I2S_BUFFER_COUNT,
-            .dma_buf_len = I2S_BUFFER_SIZE,
+            .dma_buf_count = cfg.buffer_count,
+            .dma_buf_len = cfg.buffer_size,
             .use_apll = (bool) cfg.use_apll,
             .tx_desc_auto_clear = cfg.auto_clear, 
             .fixed_mclk = (int) (cfg.fixed_mclk>0 ? cfg.fixed_mclk : 0 )
