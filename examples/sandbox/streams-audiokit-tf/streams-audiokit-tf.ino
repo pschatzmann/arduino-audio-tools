@@ -14,7 +14,7 @@ const char* kCategoryLabels[4] = {
     "no",
 };
 StreamCopy copier(tfl, kit);  // copy mic to tfl
-int channels = 2;
+int channels = 1;
 int samples_per_second = 16000;
 
 void respondToCommand(const char* found_command, uint8_t score,
@@ -36,6 +36,10 @@ void setup() {
   cfg.input_device = AUDIO_HAL_ADC_INPUT_LINE2;
   cfg.channels = channels;
   cfg.sample_rate = samples_per_second;
+  cfg.use_apll = false;
+  cfg.auto_clear = false;
+  cfg.buffer_size = 512;
+  cfg.buffer_count = 16;
   kit.begin(cfg);
 
   // Setup tensorflow
