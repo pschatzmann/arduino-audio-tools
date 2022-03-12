@@ -371,9 +371,8 @@ class TfLiteAudioFeatureProvider {
   int kFeatureSliceStrideMs = 20;
   int kFeatureSliceDurationMs = 30;
 
-  // Variables for the model's output categories.
-  int kSilenceIndex = 0;
-  int kUnknownIndex = 1;
+  // number of new slices to collect before evaluating the model
+  int kSlicesToProcess = 2;
 
   // Callback method for result
   void (*respondToCommand)(const char* found_command, uint8_t score,
@@ -535,11 +534,22 @@ class TfLiteAudioOutput : public AudioPrint {
  public:
   TfLiteAudioOutput() {}
 
-  // The name of this function is important for Arduino compatibility.
+  /// Optionally define your own recognizer
+  void setRecognizer(RecognizeCommands<N>* p_recognizer) {
+    recognizer = p_recognizer;
+  }
+
+  /// Optionally define your own interpreter
+  void setInterpreter(tflite::MicroInterpreter* p_interpreter) {
+    this->interpreter = p_interpreter;
+  }
+
+  /// Start the processing
   virtual bool begin(const unsigned char* model,
                      TfLiteAudioFeatureProvider& featureProvider,
-                     const char** labels, int tensorArenaSize = 10 * 1024) {
+                     const char** labels, int tensorArenaSize = 10 * 1024, bool all_ops_resolver=false) {
     LOGD(LOG_METHOD);
+    this->use_all_ops_resolver = all_ops_resolver;
     this->kTensorArenaSize = tensorArenaSize;
 
     // setup the feature provider
@@ -552,12 +562,15 @@ class TfLiteAudioOutput : public AudioPrint {
 
     // Map the model into a usable data structure. This doesn't involve any
     // copying or parsing, it's a very lightweight operation.
-    if (!setupModel(model)) {
+    if (!setModel(model)) {
       return false;
     }
 
-    if (!setupInterpreter()) {
-      return false;
+    // setup default interpreter if not assigned yet
+    if (interpreter == nullptr) {
+      if (!setupInterpreter()) {
+        return false;
+      }
     }
 
     // Allocate memory from the tensor_arena for the model's tensors.
@@ -586,9 +599,12 @@ class TfLiteAudioOutput : public AudioPrint {
       return false;
     }
 
-    static RecognizeCommands<N> static_recognizer;
-    recognizer = &static_recognizer;
-    recognizer->setLabels(labels);
+    // setup default recognizer if not defined
+    if (recognizer == nullptr) {
+      static RecognizeCommands<N> static_recognizer;
+      recognizer = &static_recognizer;
+      recognizer->setLabels(labels);
+    }
 
     // all good if we made it here
     is_setup = true;
@@ -597,7 +613,7 @@ class TfLiteAudioOutput : public AudioPrint {
   }
 
   /// How many bytes can we write next
-  int availableForWrite() { return feature_provider->availableForWrite(); }
+  int availableForWrite() { return DEFAULT_BUFFER_SIZE; }
 
   /// process the data in batches of max kMaxAudioSampleSize.
   size_t write(const uint8_t* audio, size_t bytes) {
@@ -609,8 +625,7 @@ class TfLiteAudioOutput : public AudioPrint {
     // we submit int16 data which will be reduced to 8bits so we can send
     // double the amount - 2 channels will be recuced to 1 so we multiply by
     // number of channels
-    int maxBytes = feature_provider->kMaxAudioSampleSize * 2 *
-                   feature_provider->kAudioChannels;
+    int maxBytes = feature_provider->kMaxAudioSampleSize * 2 * feature_provider->kAudioChannels;
     while (open > 0) {
       int len = min(open, maxBytes);
       result += process(audio + pos, len);
@@ -626,8 +641,11 @@ class TfLiteAudioOutput : public AudioPrint {
   TfLiteTensor* model_input = nullptr;
   TfLiteAudioFeatureProvider* feature_provider = nullptr;
   RecognizeCommands<N>* recognizer = nullptr;
-  int32_t previous_time = 0;
+  int32_t current_time = 0;
+  int16_t total_slice_count = 0;
   bool is_setup = false;
+  bool use_all_ops_resolver = false;
+  
 
   // Create an area of memory to use for input, output, and intermediate
   // arrays. The size of this will depend on the model you're using, and may
@@ -637,7 +655,7 @@ class TfLiteAudioOutput : public AudioPrint {
   int8_t* feature_buffer = nullptr;
   int8_t* model_input_buffer = nullptr;
 
-  bool setupModel(const unsigned char* model) {
+  bool setModel(const unsigned char* model) {
     LOGD(LOG_METHOD);
     p_model = tflite::GetModel(model);
     if (p_model->version() != TFLITE_SCHEMA_VERSION) {
@@ -658,27 +676,33 @@ class TfLiteAudioOutput : public AudioPrint {
   //
   bool setupInterpreter() {
     LOGD(LOG_METHOD);
-    // tflite::AllOpsResolver resolver;
-
-    // NOLINTNEXTLINE(runtime-global-variables)
-    static tflite::MicroMutableOpResolver<4> micro_op_resolver(error_reporter);
-    if (micro_op_resolver.AddDepthwiseConv2D() != kTfLiteOk) {
-      return false;
+    if (use_all_ops_resolver){
+       tflite::AllOpsResolver resolver;
+      static tflite::MicroInterpreter static_interpreter(
+          p_model, resolver, tensor_arena, kTensorArenaSize,
+          error_reporter);
+      interpreter = &static_interpreter;
+    } else {
+      // NOLINTNEXTLINE(runtime-global-variables)
+      static tflite::MicroMutableOpResolver<4> micro_op_resolver(error_reporter);
+      if (micro_op_resolver.AddDepthwiseConv2D() != kTfLiteOk) {
+        return false;
+      }
+      if (micro_op_resolver.AddFullyConnected() != kTfLiteOk) {
+        return false;
+      }
+      if (micro_op_resolver.AddSoftmax() != kTfLiteOk) {
+        return false;
+      }
+      if (micro_op_resolver.AddReshape() != kTfLiteOk) {
+        return false;
+      }
+      // Build an interpreter to run the model with.
+      static tflite::MicroInterpreter static_interpreter(
+          p_model, micro_op_resolver, tensor_arena, kTensorArenaSize,
+          error_reporter);
+      interpreter = &static_interpreter;
     }
-    if (micro_op_resolver.AddFullyConnected() != kTfLiteOk) {
-      return false;
-    }
-    if (micro_op_resolver.AddSoftmax() != kTfLiteOk) {
-      return false;
-    }
-    if (micro_op_resolver.AddReshape() != kTfLiteOk) {
-      return false;
-    }
-    // Build an interpreter to run the model with.
-    static tflite::MicroInterpreter static_interpreter(
-        p_model, micro_op_resolver, tensor_arena, kTensorArenaSize,
-        error_reporter);
-    interpreter = &static_interpreter;
     return true;
   }
 
@@ -686,15 +710,15 @@ class TfLiteAudioOutput : public AudioPrint {
   // the number of bytes
   size_t process(const uint8_t* audio, size_t bytes) {
     LOGD("process: %u", (unsigned)bytes);
-    // Fetch the spectrogram for the current time.
-    int how_many_new_slices = feature_provider->write(audio, bytes);
+    // Update the spectrogram
+    total_slice_count += feature_provider->write(audio, bytes);
 
-    // If no new audio samples have been received since last time, don't
-    // bother running the network model.
-    if (how_many_new_slices == 0) {
+    // run network model only if we have the necessary slices
+    if (total_slice_count <= feature_provider->kSlicesToProcess) {
       return bytes;
     }
-    LOGI("->slices: %d", how_many_new_slices);
+
+    LOGI("->slices: %d", total_slice_count);
     // Copy feature buffer to input tensor
     for (int i = 0; i < feature_provider->featureElementCount(); i++) {
       model_input_buffer[i] = feature_buffer[i];
@@ -709,12 +733,15 @@ class TfLiteAudioOutput : public AudioPrint {
 
     // Obtain a pointer to the output tensor
     TfLiteTensor* output = interpreter->output(0);
+
+    // determine time
+    current_time += feature_provider->kFeatureSliceStrideMs * total_slice_count;
     // Determine whether a command was recognized based on the output of
     // inference
     const char* found_command = nullptr;
     uint8_t score = 0;
     bool is_new_command = false;
-    unsigned long current_time = millis();
+
     TfLiteStatus process_status = recognizer->ProcessLatestResults(
         output, current_time, &found_command, &score, &is_new_command);
     if (process_status != kTfLiteOk) {
@@ -725,7 +752,7 @@ class TfLiteAudioOutput : public AudioPrint {
     // implementation just prints to the error console, but you should replace
     // this with your own function for a real application.
     respondToCommand(found_command, score, is_new_command);
-
+    total_slice_count = 0;
     // all processed
     return bytes;
   }
