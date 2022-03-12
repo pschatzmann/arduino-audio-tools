@@ -5,7 +5,6 @@
 #include "model.h"  // tensorflow model
 
 AudioKitStream kit;  // Audio source
-TfLiteAudioFeatureProvider fp;
 TfLiteAudioOutput<4> tfl;  // Audio sink
 const char* kCategoryLabels[4] = {
     "silence",
@@ -29,7 +28,7 @@ void respondToCommand(const char* found_command, uint8_t score,
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
 
   // setup Audiokit
   auto cfg = kit.defaultConfig(RX_MODE);
@@ -43,10 +42,14 @@ void setup() {
   kit.begin(cfg);
 
   // Setup tensorflow
-  fp.kAudioChannels = channels;
-  fp.kAudioSampleFrequency = samples_per_second;
-  fp.respondToCommand = respondToCommand;
-  tfl.begin(g_model, fp, kCategoryLabels, 10 * 1024);
+  auto tcfg = tfl.defaultConfig();
+  tcfg.kAudioChannels = channels;
+  tcfg.kAudioSampleFrequency = samples_per_second;
+  tcfg.kTensorArenaSize = 10 * 1024;
+  tcfg.respondToCommand = respondToCommand;
+  tcfg.model = g_model;
+  tcfg.labels = kCategoryLabels;
+  tfl.begin(tcfg);
 }
 
 void loop() { copier.copy(); }
