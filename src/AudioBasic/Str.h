@@ -619,6 +619,16 @@ class Str {
             return result;
         }
 
+        /// Converts the string to a double
+        double toDouble() {
+            double result = 0;
+            char *eptr;
+            if (!isEmpty()){
+                result = strtod(chars, &eptr);
+            }
+            return result;
+        }
+
         /// Converts the string to lowercase letters
         void toLowerCase(){
             if (chars!=nullptr){
@@ -651,6 +661,85 @@ class Str {
                 }
             }
             result[idx]=0;
+            return result;
+        }
+
+        bool containsNumber() {
+            for (int j=0;j<len;j++){
+                if (isdigit(chars[j])){
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /// Returns true if the string is an integer
+        bool isInteger() {
+            bool result = containsNumber();
+            int dot_count = 0;
+            int minus_count = 0;
+            for (int j=0;j<len;j++){
+                char c = chars[j];
+                if(!isdigit(c)){
+                    switch(c){
+                        case '-':
+                            minus_count++;
+                            if (minus_count>1){
+                                result = false;
+                            }
+                            break;
+                        default:
+                            result = false;
+                            break;
+                    }
+                } 
+            }
+            return result;
+        }
+
+        /// Determines the number of decimals in the number string
+        int numberOfDecimals() {
+            int result = 0;
+            int pos = indexOf(".");
+            if (pos>=0){
+                for (int j=pos+1;j<len;j++){
+                    if (isdigit(chars[j])){
+                        pos++;
+                    } else {
+                        break;
+                    }
+                }
+            }
+            return result;
+        }
+
+        // Returns true if the string is a number
+        bool isNumber() {
+            bool result = containsNumber();
+            int dot_count = 0;
+            int minus_count = 0;
+            for (int j=0;j<len;j++){
+                char c = chars[j];
+                if(!isdigit(c)){
+                    switch(c){
+                        case '-':
+                            minus_count++;
+                            if (minus_count>1){
+                                result = false;
+                            }
+                            break;
+                        case '.':
+                            dot_count++;
+                            if (dot_count>1){
+                                result = false;
+                            }
+                            break;
+                        default:
+                            result = false;
+                            break;
+                    }
+                } 
+            }
             return result;
         }
 
