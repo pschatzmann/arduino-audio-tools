@@ -1,7 +1,5 @@
 #pragma once
 
-#undef DEFAULT
-
 #include <TensorFlowLite.h>
 
 #include <cmath>
@@ -19,7 +17,6 @@
 #include "tensorflow/lite/micro/system_setup.h"
 #include "tensorflow/lite/schema/schema_generated.h"
 
-#undef TF_LITE_STATIC_MEMORY
 #include "tensorflow/lite/micro/micro_error_reporter.h"
 //#include "tensorflow/lite/version.h"
 
@@ -32,9 +29,9 @@ class TfLiteAudioFeatureProvider;
  * @author Phil Schatzmann
  * @copyright GPLv3 
  */
-class AudioErrorReporter : public tflite::ErrorReporter {
+class TfLiteAudioErrorReporter : public tflite::ErrorReporter {
  public:
-  virtual ~AudioErrorReporter() {}
+  virtual ~TfLiteAudioErrorReporter() {}
   virtual int Report(const char* format, va_list args) override {
     int result = snprintf(msg, 200, format, args);
     LOGE(msg);
@@ -48,7 +45,7 @@ tflite::ErrorReporter* error_reporter = &my_error_reporter;
 
 
 /**
- * @brief Configuration for TF Lite TfLiteAudioOutput
+ * @brief Configuration settings for TfLiteAudioOutput
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -61,7 +58,11 @@ struct TfLiteConfig {
     void (*respondToCommand)(const char* found_command, uint8_t score,
                            bool is_new_command) = nullptr;
 
+  // Create an area of memory to use for input, output, and intermediate arrays.
+  // The size of this will depend on the model you’re using, and may need to be
+  // determined by experimentation.
     int kTensorArenaSize = 10 * 1024;
+
   // Keeping these as constant expressions allow us to allocate fixed-sized
   // arrays on the stack for our working memory.
 
@@ -71,6 +72,8 @@ struct TfLiteConfig {
   // is the next value.
   int kMaxAudioSampleSize = 480;
   int kAudioSampleFrequency = 16000;
+
+  // Number of audio channels - is usually 1. If 2 we reduce it to 1 by averaging the 2 channels
   int kAudioChannels = 1;
 
   // The following values are derived from values used during model training.
@@ -81,10 +84,18 @@ struct TfLiteConfig {
   int kFeatureSliceDurationMs = 30;
 
   // number of new slices to collect before evaluating the model
-  int kSlicesToProcess = 2;
+  int kSlicesToProcess = 3;
+
+  int featureElementCount() { return kFeatureSliceSize * kFeatureSliceCount; }
+
+  // Parameters for RecognizeCommands
+  int32_t  = 1000;
+  uint8_t detection_threshold = 200;
+  int32_t suppression_ms = 1500;
+  int32_t minimum_count = 3;
 
 };
-
+average_window_duration_ms
 
 // Partial implementation of std::dequeue, just providing the functionality
 // that's needed to keep a record of previous neural network results over a
@@ -93,9 +104,9 @@ struct TfLiteConfig {
 // so it's a better fit for microcontroller applications, but this does mean
 // there are hard limits on the number of results it can store.
 template <int N>
-class PreviousResultsQueue {
+class TfLiteResultsQueue {
  public:
-  PreviousResultsQueue() : front_index_(0), size_(0) {}
+  TfLiteResultsQueue() : front_index_(0), size_(0) {}
 
   // Data structure that holds an inference result, and the time when it
   // was recorded.
@@ -175,14 +186,14 @@ class PreviousResultsQueue {
  * @tparam N 
  */
 template <int N>
-class AbstractRecognizeCommands {
+class TfLiteAbstractRecognizeCommands {
  public:
   virtual TfLiteStatus ProcessLatestResults(const TfLiteTensor* latest_results,
                                     const int32_t current_time_ms,
                                     const char** found_command, uint8_t* score,
                                     bool* is_new_command)  = 0;
 
-  virtual void setLabels(const char** labels) = 0;
+  virtual bool begin(TfLiteConfig cfg) = 0;
 };
 
 /**
@@ -199,7 +210,7 @@ class AbstractRecognizeCommands {
  */
 
 template <int N>
-class RecognizeCommands : public AbstractRecognizeCommands<N> {
+class TfLiteRecognizeCommands : public TfLiteAbstractRecognizeCommands<N> {
  public:
   // labels should be a list of the strings associated with each one-hot score.
   // The window duration controls the smoothing. Longer durations will give a
@@ -212,24 +223,31 @@ class RecognizeCommands : public AbstractRecognizeCommands<N> {
   // further recognitions for a set time after one has been triggered, which can
   // help reduce spurious recognitions.
 
-  explicit RecognizeCommands(int32_t average_window_duration_ms = 1000,
-                             uint8_t detection_threshold = 200,
-                             int32_t suppression_ms = 1500,
-                             int32_t minimum_count = 3) {
-    average_window_duration_ms_ = average_window_duration_ms;
-    detection_threshold_ = detection_threshold;
-    suppression_ms_ = suppression_ms;
-    minimum_count_ = minimum_count;
+  explicit TfLiteRecognizeCommands() {
     previous_top_label_ = "silence";
     previous_top_label_time_ = std::numeric_limits<int32_t>::min();
     kCategoryCount = N;
+  }
+
+  /// Setup parameters from config
+  bool begin(TfLiteConfig cfg) override {
+    average_window_duration_ms_ = cfg.average_window_duration_ms;
+    detection_threshold_ = cfg.detection_threshold;
+    suppression_ms_ = cfg.suppression_ms;
+    minimum_count_ = cfg.minimum_count;
+    kCategoryLabels = cfg.labels;
+    if (cfg.labels==0){
+      LOGW("config.labels not defined");
+      return false;
+    }
+    return true;
   }
 
   // Call this with the results of running a model on sample data.
   virtual TfLiteStatus ProcessLatestResults(const TfLiteTensor* latest_results,
                                     const int32_t current_time_ms,
                                     const char** found_command, uint8_t* score,
-                                    bool* is_new_command) {
+                                    bool* is_new_command) override {
     LOGD(LOG_METHOD);
     if ((latest_results->dims->size != 2) ||
         (latest_results->dims->data[0] != 1) ||
@@ -331,12 +349,7 @@ class RecognizeCommands : public AbstractRecognizeCommands<N> {
     return kTfLiteOk;
   }
 
-  virtual void setLabels(const char** labels) {
-    LOGD(LOG_METHOD);
-    kCategoryLabels = labels;
-  }
-
- private:
+ protected:
   // Configuration
   int32_t average_window_duration_ms_;
   uint8_t detection_threshold_;
@@ -346,7 +359,7 @@ class RecognizeCommands : public AbstractRecognizeCommands<N> {
   const char** kCategoryLabels = nullptr;
 
   // Working variables
-  PreviousResultsQueue<N> previous_results_;
+  TfLiteResultsQueue<N> previous_results_;
   const char* previous_top_label_;
   int32_t previous_top_label_time_;
 };
@@ -376,7 +389,7 @@ class TfLiteAudioFeatureProvider {
     }
     // Initialize the feature data to default values.
     if (feature_data_ == nullptr) {
-      feature_data_ = new int8_t[featureElementCount()]{};  // initialzed array
+      feature_data_ = new int8_t[cfg.featureElementCount()]{};  // initialzed array
     }
 
     TfLiteStatus init_status = initializeMicroFeatures();
@@ -410,8 +423,6 @@ class TfLiteAudioFeatureProvider {
     }
     return slice_count;
   }
-
-  int featureElementCount() { return cfg.kFeatureSliceSize * cfg.kFeatureSliceCount; }
 
  protected:
   TfLiteConfig cfg;
@@ -572,7 +583,7 @@ class TfLiteAudioOutput : public AudioPrint {
   TfLiteAudioOutput() {}
 
   /// Optionally define your own recognizer
-  void setRecognizer(AbstractRecognizeCommands<N>* p_recognizer) {
+  void setRecognizer(TfLiteAbstractRecognizeCommands<N>* p_recognizer) {
     recognizer = p_recognizer;
   }
 
@@ -582,7 +593,7 @@ class TfLiteAudioOutput : public AudioPrint {
   }
 
   // Provides the default configuration
-  TfLiteConfig defaultConfig() {
+  virtual TfLiteConfig defaultConfig() {
      TfLiteConfig def;
      return def;
   }
@@ -592,15 +603,20 @@ class TfLiteAudioOutput : public AudioPrint {
     LOGD(LOG_METHOD);
     cfg = config;
 
+    // alloatme memory
+    tensor_arena = new uint8_t[cfg.kTensorArenaSize];
+    feature_buffer = new int8_t[cfg.featureElementCount()];
+
+    if (!setupRecognizer()){
+      LOGE("setupRecognizer");
+      return false;
+    }
+
     // setup the feature provider
     if (!setupFeatureProvider()){
       LOGE("setupFeatureProvider");
       return false;
     }
-
-    // alloatme memory
-    tensor_arena = new uint8_t[cfg.kTensorArenaSize];
-    feature_buffer = new int8_t[feature_provider->featureElementCount()];
 
     // Map the model into a usable data structure. This doesn't involve any
     // copying or parsing, it's a very lightweight operation.
@@ -608,11 +624,8 @@ class TfLiteAudioOutput : public AudioPrint {
       return false;
     }
 
-    // setup default interpreter if not assigned yet
-    if (interpreter == nullptr) {
-      if (!setupInterpreter()) {
-        return false;
-      }
+    if (!setupInterpreter()) {
+      return false;
     }
 
     // Allocate memory from the tensor_arena for the model's tensors.
@@ -641,13 +654,6 @@ class TfLiteAudioOutput : public AudioPrint {
       return false;
     }
 
-    // setup default recognizer if not defined
-    if (recognizer == nullptr) {
-      static RecognizeCommands<N> static_recognizer;
-      recognizer = &static_recognizer;
-      recognizer->setLabels(cfg.labels);
-    }
-
     // all good if we made it here
     is_setup = true;
     LOGI("done");
@@ -670,7 +676,7 @@ class TfLiteAudioOutput : public AudioPrint {
     int maxBytes = cfg.kMaxAudioSampleSize * 2 * cfg.kAudioChannels;
     while (open > 0) {
       int len = min(open, maxBytes);
-      result += process(audio + pos, len);
+      result += processAudio(audio + pos, len);
       open -= len;
       pos += len;
     }
@@ -682,7 +688,7 @@ class TfLiteAudioOutput : public AudioPrint {
   tflite::MicroInterpreter* interpreter = nullptr;
   TfLiteTensor* model_input = nullptr;
   TfLiteAudioFeatureProvider* feature_provider = nullptr;
-  RecognizeCommands<N>* recognizer = nullptr;
+  TfLiteAbstractRecognizeCommands<N>* recognizer = nullptr;
   int32_t current_time = 0;
   int16_t total_slice_count = 0;
   bool is_setup = false;
@@ -708,6 +714,15 @@ class TfLiteAudioOutput : public AudioPrint {
     return true;
   }
 
+  bool setupRecognizer() {
+    // setup default recognizer if not defined
+    if (recognizer == nullptr) {
+      static TfLiteRecognizeCommands<N> static_recognizer;
+      recognizer = &static_recognizer;
+    }
+    return recognizer->begin(cfg);
+  }
+
   bool setupFeatureProvider() {
     if (cfg.featureProvider!=nullptr){
       feature_provider = cfg.featureProvider;
@@ -725,53 +740,56 @@ class TfLiteAudioOutput : public AudioPrint {
   // needed by this graph.
   //
   bool setupInterpreter() {
-    LOGI(LOG_METHOD);
-    if (cfg.useAllOpsResolver){
-       tflite::AllOpsResolver resolver;
-      static tflite::MicroInterpreter static_interpreter(
-          p_model, resolver, tensor_arena, cfg.kTensorArenaSize,
-          error_reporter);
-      interpreter = &static_interpreter;
-    } else {
-      // NOLINTNEXTLINE(runtime-global-variables)
-      static tflite::MicroMutableOpResolver<4> micro_op_resolver(error_reporter);
-      if (micro_op_resolver.AddDepthwiseConv2D() != kTfLiteOk) {
-        return false;
+    if (interpreter == nullptr) {
+      LOGI(LOG_METHOD);
+      if (cfg.useAllOpsResolver){
+        tflite::AllOpsResolver resolver;
+        static tflite::MicroInterpreter static_interpreter(
+            p_model, resolver, tensor_arena, cfg.kTensorArenaSize,
+            error_reporter);
+        interpreter = &static_interpreter;
+      } else {
+        // NOLINTNEXTLINE(runtime-global-variables)
+        static tflite::MicroMutableOpResolver<4> micro_op_resolver(error_reporter);
+        if (micro_op_resolver.AddDepthwiseConv2D() != kTfLiteOk) {
+          return false;
+        }
+        if (micro_op_resolver.AddFullyConnected() != kTfLiteOk) {
+          return false;
+        }
+        if (micro_op_resolver.AddSoftmax() != kTfLiteOk) {
+          return false;
+        }
+        if (micro_op_resolver.AddReshape() != kTfLiteOk) {
+          return false;
+        }
+        // Build an interpreter to run the model with.
+        static tflite::MicroInterpreter static_interpreter(
+            p_model, micro_op_resolver, tensor_arena, cfg.kTensorArenaSize,
+            error_reporter);
+        interpreter = &static_interpreter;
       }
-      if (micro_op_resolver.AddFullyConnected() != kTfLiteOk) {
-        return false;
-      }
-      if (micro_op_resolver.AddSoftmax() != kTfLiteOk) {
-        return false;
-      }
-      if (micro_op_resolver.AddReshape() != kTfLiteOk) {
-        return false;
-      }
-      // Build an interpreter to run the model with.
-      static tflite::MicroInterpreter static_interpreter(
-          p_model, micro_op_resolver, tensor_arena, cfg.kTensorArenaSize,
-          error_reporter);
-      interpreter = &static_interpreter;
     }
     return true;
   }
 
   // Process a slince of audio data - returns the number of bytes
-  size_t process(const uint8_t* audio, size_t bytes) {
+  size_t processAudio(const uint8_t* audio, size_t bytes) {
     LOGD("process: %u", (unsigned)bytes);
     // Update the spectrogram
     total_slice_count += feature_provider->write(audio, bytes);
 
     // run network model only if we have the necessary slices
-    if (total_slice_count <= cfg.kSlicesToProcess) {
+    if (total_slice_count < cfg.kSlicesToProcess) {
       return bytes;
     }
 
     LOGI("->slices: %d", total_slice_count);
     // Copy feature buffer to input tensor
-    for (int i = 0; i < feature_provider->featureElementCount(); i++) {
-      model_input_buffer[i] = feature_buffer[i];
-    }
+    // for (int i = 0; i < cfg.featureElementCount(); i++) {
+    //   model_input_buffer[i] = feature_buffer[i];
+    // }
+    memcpy(model_input_buffer, feature_buffer, cfg.featureElementCount());
 
     // Run the model on the spectrogram input and make sure it succeeds.
     TfLiteStatus invoke_status = interpreter->Invoke();
@@ -785,8 +803,7 @@ class TfLiteAudioOutput : public AudioPrint {
 
     // determine time
     current_time += cfg.kFeatureSliceStrideMs * total_slice_count;
-    // Determine whether a command was recognized based on the output of
-    // inference
+    // Determine whether a command was recognized 
     const char* found_command = nullptr;
     uint8_t score = 0;
     bool is_new_command = false;
@@ -794,15 +811,18 @@ class TfLiteAudioOutput : public AudioPrint {
     TfLiteStatus process_status = recognizer->ProcessLatestResults(
         output, current_time, &found_command, &score, &is_new_command);
     if (process_status != kTfLiteOk) {
-      LOGE("RecognizeCommands::ProcessLatestResults() failed");
+      LOGE("TfLiteRecognizeCommands::ProcessLatestResults() failed");
       return 0;
     }
     // Do something based on the recognized command. The default
     // implementation just prints to the error console, but you should replace
     // this with your own function for a real application.
     respondToCommand(found_command, score, is_new_command);
+
+    // reset total_slice_count
     total_slice_count = 0;
-    // all processed
+
+    // all bytes processed successfully
     return bytes;
   }
 

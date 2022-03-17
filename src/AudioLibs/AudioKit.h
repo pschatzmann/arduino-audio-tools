@@ -244,6 +244,7 @@ class AudioKitStream : public AudioStreamX {
   /// Update the audio info with new values: e.g. new sample_rate,
   /// bits_per_samples or channels
   virtual void setAudioInfo(AudioBaseInfo info) {
+    LOGI(LOG_METHOD);
     cfg.sample_rate = info.sample_rate;
     cfg.bits_per_sample = info.bits_per_sample;
     cfg.channels = info.channels;
