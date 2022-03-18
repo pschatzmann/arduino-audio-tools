@@ -10,7 +10,7 @@
 namespace audio_tools {
 
 // Class Configuration
-const int MaxHeaderLineLength = 200;
+const int MaxHeaderLineLength = 240;
 
 // Define relevant header content
 const char* CONTENT_TYPE = "Content-Type";
@@ -87,6 +87,7 @@ class HttpHeader {
 
         HttpHeader& put(const char* key, const char* value){
             if (value!=nullptr && strlen(value)>0){
+                LOGD("HttpHeader::put %s %s", key, value);
                 HttpHeaderLine *hl = headerLine(key);
                 if (hl==nullptr){
                     LOGE("HttpHeader::put - did not add HttpHeaderLine for %s", key);
@@ -138,7 +139,7 @@ class HttpHeader {
             if (value[0]==' '){
                 value = line+pos+2;
             }
-            return put((const char*)key,value);
+            return put((const char*)key, value);
         }
 
         // determines a header value with the key
@@ -146,7 +147,7 @@ class HttpHeader {
             for (auto it = lines.begin() ; it != lines.end(); ++it){
                 HttpHeaderLine *line = *it;
                 line->key.trim();
-                if (Str(line->key).equalsIgnoreCase(key)){
+                if (line->key.equalsIgnoreCase(key)){
                     const char* result = line->value.c_str();
                     return line->active ? result : nullptr;
                 }
@@ -236,7 +237,7 @@ class HttpHeader {
                 parse1stLine(line);
                 while (in.available()){
                     readLine(in, line, MaxHeaderLineLength);
-                    if (isValidStatus()){
+                    if (isValidStatus() || isRedirectStatus()){
                         Str lineStr(line);
                         lineStr.ltrim();
                         if (lineStr.isEmpty()){
@@ -271,6 +272,9 @@ class HttpHeader {
             return status_code >= 200 && status_code < 300;
         }
 
+        bool isRedirectStatus() {
+            return status_code >= 300 && status_code < 400;
+        }
 
     protected:
         int status_code = UNDEFINED;
@@ -299,7 +303,7 @@ class HttpHeader {
                 for (auto it = lines.begin() ; it != lines.end(); ++it){
                     HttpHeaderLine *pt = (*it);
                     if (pt!=nullptr && pt->key.c_str()!=nullptr){
-                        if (strcmp(pt->key.c_str(),key)==0){
+                        if (pt->key.equalsIgnoreCase(key)){
                             pt->active = true;
                             return pt;
                         }
