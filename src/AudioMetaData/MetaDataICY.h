@@ -143,7 +143,7 @@ class MetaDataICY : public AbstractMetaData {
     protected:
         Status nextStatus = ProcessData;
         Status currentStatus = ProcessData;
-        void (*callback)(MetaDataType info, const char* str, int len);
+        void (*callback)(MetaDataType info, const char* str, int len) = nullptr;
         char* metaData=nullptr;
         int totalData = 0;
         int mp3_blocksize = 0;
