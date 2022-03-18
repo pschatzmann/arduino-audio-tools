@@ -177,12 +177,19 @@ class URLStreamDefault : public AbstractURLStream {
             getClient(url.isSecure()).setTimeout(clientTimeout);
             int status_code = request.process(action, url, reqMime, reqData, len);
             // redirect
-            if (status_code>=300 && status_code<400){
+            while (request.reply().isRedirectStatus()){
                 const char *redirect_url = request.reply().get(LOCATION);
-                LOGW("Rederected to: %s", redirect_url);
-                url.setUrl(redirect_url);
-                request.setClient(getClient(url.isSecure()));
-                status_code = request.process(action, url, reqMime, reqData, len);
+                if (redirect_url!=nullptr) {
+                    LOGW("Redirected to: %s", redirect_url);
+                    url.setUrl(redirect_url);
+                    Client* p_client =  &getClient(url.isSecure()); 
+                    p_client->stop();
+                    request.setClient(*p_client);
+                    status_code = request.process(action, url, reqMime, reqData, len);
+                } else {
+                    LOGE("Location is null");
+                    break;
+                }
             }
             return status_code;
         }
