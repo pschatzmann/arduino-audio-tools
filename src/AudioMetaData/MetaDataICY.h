@@ -207,8 +207,8 @@ class MetaDataICY : public AbstractMetaData {
             LOGD(LOG_METHOD);
             metaData[len]=0;
             if (isAscii(metaData, 12)){
-                LOGI("%s", metaData);
-                Str meta(metaData, len);
+                LOGI("%s: %d", metaData);
+                Str meta(metaData,len+1, len);
                 int start = meta.indexOf("StreamTitle=");
                 if (start>=0){
                     start+=12;
@@ -252,7 +252,11 @@ class ICYUrlSetup {
             LOGD(LOG_METHOD);
             p_http = &http;
             const char* iceMetaintStr = http.reply().get("icy-metaint");
-            LOGI("icy-metaint: %s", iceMetaintStr);
+            if (iceMetaintStr){
+                LOGI("icy-metaint: %s", iceMetaintStr);
+            } else {
+                LOGE("icy-metaint not defined");
+            }
             Str value(iceMetaintStr);
             int iceMetaint = value.toInt();
             return iceMetaint;

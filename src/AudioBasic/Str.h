@@ -32,7 +32,7 @@ class Str {
 
         /// Creates a Str with the indicated buffer
         Str(char chars[], int maxlen, int len=0){
-            set(chars,maxlen,len, false);
+            set(chars, maxlen, len, false);
         }
 
         Str (const Str & ) = default;    
