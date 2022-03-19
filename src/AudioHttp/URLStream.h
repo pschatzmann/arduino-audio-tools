@@ -173,6 +173,9 @@ class URLStreamDefault : public AbstractURLStream {
         /// Process the Http request and handle redirects
         int process(MethodID action, Url &url, const char* reqMime, const char *reqData, int len=-1) {
             request.setClient(getClient(url.isSecure()));
+            // keep icy across redirect requests ?
+            const char* icy = request.header().get("Icy-MetaData");
+
             // set timeout
             getClient(url.isSecure()).setTimeout(clientTimeout);
             int status_code = request.process(action, url, reqMime, reqData, len);
@@ -185,6 +188,9 @@ class URLStreamDefault : public AbstractURLStream {
                     Client* p_client =  &getClient(url.isSecure()); 
                     p_client->stop();
                     request.setClient(*p_client);
+                    if (icy){
+                        request.header().put("Icy-MetaData", icy);
+                    }
                     status_code = request.process(action, url, reqMime, reqData, len);
                 } else {
                     LOGE("Location is null");

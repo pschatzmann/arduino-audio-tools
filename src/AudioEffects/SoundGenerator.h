@@ -306,7 +306,8 @@ class SilenceGenerator : public SoundGenerator<T> {
 
 /**
  * @brief An Adapter Class which lets you use any Stream as a Generator
- * 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  * @tparam T 
  */
 template <class T>
@@ -376,7 +377,8 @@ class GeneratorFromStream : public SoundGenerator<T> {
 
 /**
  * @brief We generate the samples from an array which is provided in the constructor
- * 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  * @tparam T 
  */
  
@@ -384,6 +386,7 @@ template <class T>
 class GeneratorFromArray : public SoundGenerator<T> {
   public:
 
+    GeneratorFromArray() = default;
     /**
      * @brief Construct a new Generator From Array object
      * 
@@ -464,10 +467,68 @@ class GeneratorFromArray : public SoundGenerator<T> {
 
 };
 
+/**
+ * @brief A sine generator based on a table. The table is created based using degress where one full wave is 360 degrees
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+template <class T>
+class SineFromTable  : public SoundGenerator<T> {
+    public:
+        SineFromTable(float amplitude = 32767.0){
+            this->amplitude = amplitude;
+        }
+
+        T readSample() {
+            // update angle
+            angle += step;
+            if (angle >= 360){
+               angle -= 360; 
+            }
+            return amplitude * interpolate(angle);
+        }
+
+        bool begin() {
+            GeneratorFromArray<float>::begin();
+            base_frequency = SoundGenerator<T>::audioInfo().sample_rate / 360.0; //122.5 hz (at 44100); 61 hz (at 22050)
+            return true;
+        }
+
+        bool begin(AudioBaseInfo info, float frequency) {
+            SoundGenerator<T>::begin(info);
+            setFrequency(frequency);
+            return true;
+        }
+
+        void setFrequency(float freq) {
+            step = freq / base_frequency;
+            LOGI("step: %f", step);
+        }
+
+    protected:
+        float amplitude;
+        float base_frequency;
+        float step = 1.0; 
+        float angle = 0;
+        const float values[181] = {0, 0.0174524, 0.0348995, 0.052336, 0.0697565, 0.0871557, 0.104528, 0.121869, 0.139173, 0.156434, 0.173648, 0.190809, 0.207912, 0.224951, 0.241922, 0.258819, 0.275637, 0.292372, 0.309017, 0.325568, 0.34202, 0.358368, 0.374607, 0.390731, 0.406737, 0.422618, 0.438371, 0.45399, 0.469472, 0.48481, 0.5, 0.515038, 0.529919, 0.544639, 0.559193, 0.573576, 0.587785, 0.601815, 0.615661, 0.62932, 0.642788, 0.656059, 0.669131, 0.681998, 0.694658, 0.707107, 0.71934, 0.731354, 0.743145, 0.75471, 0.766044, 0.777146, 0.788011, 0.798636, 0.809017, 0.819152, 0.829038, 0.838671, 0.848048, 0.857167, 0.866025, 0.87462, 0.882948, 0.891007, 0.898794, 0.906308, 0.913545, 0.920505, 0.927184, 0.93358, 0.939693, 0.945519, 0.951057, 0.956305, 0.961262, 0.965926, 0.970296, 0.97437, 0.978148, 0.981627, 0.984808, 0.987688, 0.990268, 0.992546, 0.994522, 0.996195, 0.997564, 0.99863, 0.999391, 0.999848, 1, 0.999848, 0.999391, 0.99863, 0.997564, 0.996195, 0.994522, 0.992546, 0.990268, 0.987688, 0.984808, 0.981627, 0.978148, 0.97437, 0.970296, 0.965926, 0.961262, 0.956305, 0.951057, 0.945519, 0.939693, 0.93358, 0.927184, 0.920505, 0.913545, 0.906308, 0.898794, 0.891007, 0.882948, 0.87462, 0.866025, 0.857167, 0.848048, 0.838671, 0.829038, 0.819152, 0.809017, 0.798636, 0.788011, 0.777146, 0.766044, 0.75471, 0.743145, 0.731354, 0.71934, 0.707107, 0.694658, 0.681998, 0.669131, 0.656059, 0.642788, 0.62932, 0.615661, 0.601815, 0.587785, 0.573576, 0.559193, 0.544639, 0.529919, 0.515038, 0.5, 0.48481, 0.469472, 0.45399, 0.438371, 0.422618, 0.406737, 0.390731, 0.374607, 0.358368, 0.34202, 0.325568, 0.309017, 0.292372, 0.275637, 0.258819, 0.241922, 0.224951, 0.207912, 0.190809, 0.173648, 0.156434, 0.139173, 0.121869, 0.104528, 0.0871557, 0.0697565, 0.052336, 0.0348995, 0.0174524, 0}; 
+
+        float interpolate(float angle){
+            bool positive = (angle<=180);
+            float angle_positive = positive ? angle : angle - 180;
+            int angle_int1 = angle_positive;
+            int angle_int2 = angle_int1+1;
+            float v1 = values[angle_int1];
+            float v2 = values[angle_int2];
+            float result = map(angle,angle_int1,angle_int2,v1, v2);
+            return positive ? result : -result;
+        }
+
+};
 
 /**
  * @brief Mixer which combines multiple sound generators into one output
- * 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  * @tparam T 
  */
 template <class T>
@@ -501,6 +562,7 @@ class GeneratorMixer : public SoundGenerator<T> {
             }
             return result;;
         }
+
     protected:
         Vector<SoundGenerator<T>*> vector;
         int actualChannel=0;
