@@ -415,6 +415,10 @@ class GeneratorFromArray : public SoundGenerator<T> {
       LOGI("table_length: %d", (int)size);
     }
 
+    virtual void begin(AudioBaseInfo info) {
+        SoundGenerator<T>::begin(info);
+    }
+
     /// Starts the generation of samples
     void begin() override {
       LOGI(LOG_METHOD);
