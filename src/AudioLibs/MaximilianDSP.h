@@ -6,6 +6,7 @@
 // Maximilian play function - return an array of 2 channels
 void play(maxi_float_t *channels);//run dac! 
 void play1(maxi_float_t *channels);//run dac! 
+void play2(maxi_float_t *channels);//run dac! 
 
 namespace audio_tools {
 
