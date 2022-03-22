@@ -32,11 +32,11 @@ class ESPNowStream : public AudioStreamX {
   }
 
   /// Adds an array of
-  template<size_t size>
-  bool addPeers(const char*(&array)[size]) {
+  template <size_t size>
+  bool addPeers(const char *(&array)[size]) {
     bool result = true;
-    for (int j=0;j<size;j++){
-      if(!addPeer(array[j])){
+    for (int j = 0; j < size; j++) {
+      if (!addPeer(array[j])) {
         result = false;
       }
     }
@@ -150,10 +150,11 @@ class ESPNowStream : public AudioStreamX {
     // we use the first confirming mac_addr for further confirmations and ignore
     // others
     if (first_mac[0] == 0) {
-      strcpy((char*)first_mac,(char*) mac_addr);
+      strcpy((char *)first_mac, (char *)mac_addr);
     }
     LOGI("%s:%d", mac_addr, status);
-    if (strcmp((char*)first_mac, (char*)mac_addr) == 0 && status == ESP_NOW_SEND_SUCCESS) {
+    if (strcmp((char *)first_mac, (char *)mac_addr) == 0 &&
+        status == ESP_NOW_SEND_SUCCESS) {
       ESPNowStreamSelf->available_to_write = ESP_NOW_MAX_DATA_LEN;
     }
   }
@@ -181,15 +182,40 @@ class UDPStream : public WiFiUDP {
     return size;
   }
 
+  /// Starts to send data to the indicated address / port
+  uint8_t begin(IPAddress a, uint16_t port) {
+    remote_address_ext = a;
+    remote_port_ext = port;
+    return WiFiUDP::begin(port);
+  }
+
+  /// We use the same remote port as defined in begin for write
+  uint16_t remotePort() {
+    uint16_t result = WiFiUDP::remotePort();
+    return result != 0 ? result : remote_port_ext;
+  }
+
+  /// We use the same remote ip as defined in begin for write
+  IPAddress remoteIP() {
+    // IPAddress result = WiFiUDP::remoteIP();
+    // LOGI("ip: %u", result);
+    return remote_address_ext;
+  }
+
   /**
    *  Replys will be sent to the initial remote caller
    */
   size_t write(const uint8_t *buffer, size_t size) override {
+    LOGD(LOG_METHOD);
     beginPacket(remoteIP(), remotePort());
     size_t result = WiFiUDP::write(buffer, size);
     endPacket();
     return result;
   }
+
+ protected:
+  uint16_t remote_port_ext;
+  IPAddress remote_address_ext;
 };
 
 }  // namespace audio_tools
