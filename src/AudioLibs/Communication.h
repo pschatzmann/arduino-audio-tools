@@ -19,7 +19,7 @@ ESPNowStream *ESPNowStreamSelf = nullptr;
  */
 
 class ESPNowStream : public AudioStreamX {
- public:
+public:
   ESPNowStream() { ESPNowStreamSelf = this; };
 
   /// Adds a peer to which we can send info or from which we can receive info
@@ -32,8 +32,7 @@ class ESPNowStream : public AudioStreamX {
   }
 
   /// Adds an array of
-  template <size_t size>
-  bool addPeers(const char *(&array)[size]) {
+  template <size_t size> bool addPeers(const char *(&array)[size]) {
     bool result = true;
     for (int j = 0; j < size; j++) {
       if (!addPeer(array[j])) {
@@ -133,7 +132,7 @@ class ESPNowStream : public AudioStreamX {
   /// Returns the mac address of the current ESP32
   const char *address() { return WiFi.macAddress().c_str(); }
 
- protected:
+protected:
   RingBuffer<uint8_t> buffer{1024 * 5};
   esp_now_recv_cb_t receive = default_recv_cb;
   esp_now_send_cb_t send = default_send_cb;
@@ -168,7 +167,7 @@ class ESPNowStream : public AudioStreamX {
  */
 
 class UDPStream : public WiFiUDP {
- public:
+public:
   /**
    * Provides the available size of the current package and if this is used up
    * of the next package
@@ -213,9 +212,53 @@ class UDPStream : public WiFiUDP {
     return result;
   }
 
- protected:
+protected:
   uint16_t remote_port_ext;
   IPAddress remote_address_ext;
 };
 
-}  // namespace audio_tools
+
+struct ThrottleConfig : public AudioBaseInfo {
+  ThrottleConfig(){
+    sample_rate = 44100;
+    bits_per_sample = 16;
+    channels = 2;
+  }
+  int correction_ms = 0;
+}
+
+/**
+ * @brief Throttle Sending to follow the the indicated sample rate
+ *
+ */
+class Throttle {
+public:
+  Throttle() = default;
+
+  void begin(ThrottleConfig info) {
+    this->info = info;
+    bytesPerSample = info.bits_per_sample / 8 * info.channels;
+  }
+
+  // starts the timing
+  void start() { start_time = millis(); }
+
+  // delay
+  void throttle(size_t bytes) { throttleSamples(bytes / bytesPerSample); }
+
+  // delay
+  void throttleSamples(size_t samples) {
+    int durationMsEff = millis() - start_time;
+    int durationToBe = (samples * 1000) / info.sample_rate;
+    int waitMs = durationToBe - durationMsEff + correction_ms;
+    if (waitMs > 0) {
+      delay(waitMs);
+    }
+  }
+
+protected:
+  unsigned long start_time;
+  AudioBaseInfo info;
+  int bytesPerSample;
+
+} // namespace audio_tools
