@@ -5,6 +5,7 @@
 
 // Maximilian play function - return an array of 2 channels
 void play(maxi_float_t *channels);//run dac! 
+void play1(maxi_float_t *channels);//run dac! 
 
 namespace audio_tools {
 
@@ -15,10 +16,11 @@ namespace audio_tools {
 class Maximilian {
     public:
 
-        Maximilian(Print &out, int bufferSize=DEFAULT_BUFFER_SIZE){
+        Maximilian(Print &out, int bufferSize=DEFAULT_BUFFER_SIZE, void (*callback)(maxi_float_t *channels)=play){
             buffer_size = bufferSize;
             p_buffer = new uint8_t[bufferSize];
             p_sink = &out;
+            this->callback = callback;
         }
 
         ~Maximilian() {
@@ -49,7 +51,7 @@ class Maximilian {
             uint16_t samples = buffer_size / sizeof(uint16_t);
             int16_t *p_samples = (int16_t *)p_buffer;
             for (uint16_t j=0;j<samples;j+=cfg.channels){
-                play(out);
+                callback(out);
                 // convert all channels to int16
                 for (int ch=0;ch<cfg.channels;ch++){
                     p_samples[j+ch] = out[ch]*32767*volume;
@@ -66,6 +68,7 @@ class Maximilian {
         int buffer_size=256;
         Print *p_sink=nullptr;
         AudioBaseInfo cfg;
+        void (*callback)(maxi_float_t *channels);
 };
 
 
