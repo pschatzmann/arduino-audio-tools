@@ -207,7 +207,7 @@ class MetaDataICY : public AbstractMetaData {
             LOGD(LOG_METHOD);
             metaData[len]=0;
             if (isAscii(metaData, 12)){
-                LOGI("%s: %d", metaData);
+                LOGI("%s", metaData);
                 Str meta(metaData,len+1, len);
                 int start = meta.indexOf("StreamTitle=");
                 if (start>=0){
