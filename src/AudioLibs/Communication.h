@@ -241,13 +241,13 @@ public:
   }
 
   // starts the timing
-  void start() { start_time = millis(); }
+  void startDelay() { start_time = millis(); }
 
   // delay
-  void throttle(size_t bytes) { throttleSamples(bytes / bytesPerSample); }
+  void delayBytes(size_t bytes) { throttleSamples(bytes / bytesPerSample); }
 
   // delay
-  void throttleSamples(size_t samples) {
+  void delaySamples(size_t samples) {
     int durationMsEff = millis() - start_time;
     int durationToBe = (samples * 1000) / info.sample_rate;
     int waitMs = durationToBe - durationMsEff + correction_ms;

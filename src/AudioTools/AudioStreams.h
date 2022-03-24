@@ -633,15 +633,17 @@ class VolumeStream : public AudioStreamX {
         /// Default Constructor
         VolumeStream() = default;
 
+        /// Destructor
         ~VolumeStream() {
-          cleanup();
+            cleanup();
         };
 
+        /// Constructor which assigns Print output
         VolumeStream(Print &out) {
             setTarget(out);
         }
 
-        /// Constructor which automatically calls begin(Print out)!
+        /// Constructor which assigns Stream input or output
         VolumeStream(Stream &in) {
             setTarget(in);
         }

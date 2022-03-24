@@ -18,6 +18,7 @@ uint8_t channels = 2;  // The stream will have 2 channels
 SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound( sineWave);  // Stream generated from sine wave
 UDPStream udp; 
+Throttle throttle;
 IPAddress udpAddress(192, 168, 1, 255);
 const int udpPort = 7000;
 StreamCopy copier(udp, sound);  // copies sound into i2s
@@ -41,6 +42,10 @@ void setup() {
 
   // Define udp address and port
   udp.begin(udpAddress, udpPort);
+  auto cfg = throttle.defaultConfig();
+  cfg.channels = channels;
+  cfg.sample_rate = sample_rate;
+  throttle.begin(cfg);
 
   // Setup sine wave
   sineWave.begin(channels, sample_rate, N_B4);
@@ -48,5 +53,7 @@ void setup() {
 }
 
 void loop() { 
-    copier.copy();
+    throttle.startDelay();
+    int bytes = copier.copy();
+    throttle.delayBytes(bytes);
 }

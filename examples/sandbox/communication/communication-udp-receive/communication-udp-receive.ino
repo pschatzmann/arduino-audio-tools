@@ -26,7 +26,6 @@ void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
-
   // connect to WIFI
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
