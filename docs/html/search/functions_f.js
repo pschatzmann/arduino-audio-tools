@@ -17,7 +17,7 @@ var searchData=
   ['resamplestream_1148',['ResampleStream',['../classaudio__tools_1_1_resample_stream.html#a4c23e465827e52066f09e8e3651e85cd',1,'audio_tools::ResampleStream::ResampleStream(Print &amp;out, ResamplePrecision precision=Medium)'],['../classaudio__tools_1_1_resample_stream.html#a4b4c72bd03d58c077c5257278a5a6ea2',1,'audio_tools::ResampleStream::ResampleStream(Stream &amp;in, ResamplePrecision precision=Medium)']]],
   ['resetdecoder_1149',['resetDecoder',['../classaudio__tools_1_1_decoder_helix.html#a7d5caa77026bc858f8a5b75855eb417f',1,'audio_tools::DecoderHelix']]],
   ['resetvolumecontrol_1150',['resetVolumeControl',['../classaudio__tools_1_1_volume_stream.html#a49ca1aa25415a4b05c51b5e935fee871',1,'audio_tools::VolumeStream']]],
-  ['respondtocommand_1151',['respondToCommand',['../class_tf_lite_audio_output.html#a109332e86e8c4964467087e90f223199',1,'TfLiteAudioOutput']]],
+  ['respondtocommand_1151',['respondToCommand',['../classaudio__tools_1_1_tf_lite_audio_output.html#a18616db1db6233c3c6878d4bfee6781a',1,'audio_tools::TfLiteAudioOutput']]],
   ['rms_1152',['rms',['../classaudio__tools_1_1_filter_effect_base.html#ae1caea193b9fb772893bae2cee163ed0',1,'audio_tools::FilterEffectBase']]],
   ['rtrim_1153',['rtrim',['../classaudio__tools_1_1_str.html#ab573a6fdc8ff3b5c9bf7d47508574f7c',1,'audio_tools::Str']]]
 ];

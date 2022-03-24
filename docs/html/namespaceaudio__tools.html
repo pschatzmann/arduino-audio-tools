@@ -647,6 +647,26 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_synthesizer_key.html">SynthesizerKey</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Arduino GPIO pin to note assossiation.  <a href="structaudio__tools_1_1_synthesizer_key.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tf_lite_abstract_recognize_commands.html">TfLiteAbstractRecognizeCommands</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for implementing different primitive decoding models on top of the instantaneous results from running an audio recognition model on a single window of samples.  <a href="classaudio__tools_1_1_tf_lite_abstract_recognize_commands.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tf_lite_audio_error_reporter.html">TfLiteAudioErrorReporter</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Error Reporter using the Audio Tools Logger.  <a href="classaudio__tools_1_1_tf_lite_audio_error_reporter.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tf_lite_audio_feature_provider.html">TfLiteAudioFeatureProvider</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">FeatureProvider for Audio Data.  <a href="classaudio__tools_1_1_tf_lite_audio_feature_provider.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tf_lite_audio_output.html">TfLiteAudioOutput</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_tf_lite_audio_output.html" title="TfLiteAudioOutput which uses Tensorflow Light to analyze the data.">TfLiteAudioOutput</a> which uses Tensorflow Light to analyze the data.  <a href="classaudio__tools_1_1_tf_lite_audio_output.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_tf_lite_config.html">TfLiteConfig</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuration settings for <a class="el" href="classaudio__tools_1_1_tf_lite_audio_output.html" title="TfLiteAudioOutput which uses Tensorflow Light to analyze the data.">TfLiteAudioOutput</a>.  <a href="structaudio__tools_1_1_tf_lite_config.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tf_lite_recognize_commands.html">TfLiteRecognizeCommands</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This class is designed to apply a very primitive decoding model on top of the instantaneous results from running an audio recognition model on a single window of samples. It applies smoothing over time so that noisy individual label scores are averaged, increasing the confidence that apparent matches are real. To use it, you should create a class object with the configuration you want, and then feed results from running a TensorFlow model into the processing method. The timestamp for each subsequent call should be increasing from the previous, since the class is designed to process a stream of data over time.  <a href="classaudio__tools_1_1_tf_lite_recognize_commands.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tf_lite_results_queue.html">TfLiteResultsQueue</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_a_v_r.html">TimerAlarmRepeatingAVR</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Repeating Timer functions for repeated execution: Plaease use the typedef TimerAlarmRepeating.  <a href="classaudio__tools_1_1_timer_alarm_repeating_a_v_r.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -970,6 +990,9 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>DEFAULT_AGENT
 <tr class="memitem:a2654e272651eb02d6859e44606f7c78e"><td class="memItemLeft" align="right" valign="top"><a id="a2654e272651eb02d6859e44606f7c78e"></a>
 <a class="el" href="structaudio__tools_1_1_p_w_m_config.html">audio_tools::PWMConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><b>default_config</b></td></tr>
 <tr class="separator:a2654e272651eb02d6859e44606f7c78e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb54e11782976c41849c3fe16c98d14f"><td class="memItemLeft" align="right" valign="top"><a id="acb54e11782976c41849c3fe16c98d14f"></a>
+tflite::ErrorReporter *&#160;</td><td class="memItemRight" valign="bottom"><b>error_reporter</b> = &amp;my_error_reporter</td></tr>
+<tr class="separator:acb54e11782976c41849c3fe16c98d14f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c6d8538a477b787d422ef7ea287e1ba"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structaudio__tools_1_1_nano___b_l_e__freq__info.html">Nano_BLE_freq_info</a>&#160;</td><td class="memItemRight" valign="bottom"><b>freq_table</b> []</td></tr>
 <tr class="separator:a2c6d8538a477b787d422ef7ea287e1ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9d9368ae309f8d73f1651936d4ac33f"><td class="memItemLeft" align="right" valign="top"><a id="ae9d9368ae309f8d73f1651936d4ac33f"></a>
@@ -1019,6 +1042,9 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>methods</b> [
 <tr class="memitem:a38bf0cac6f2d298b34f8545d3a2a90b6"><td class="memItemLeft" align="right" valign="top"><a id="a38bf0cac6f2d298b34f8545d3a2a90b6"></a>
 static portMUX_TYPE&#160;</td><td class="memItemRight" valign="bottom"><b>mutex_logger</b> = portMUX_INITIALIZER_UNLOCKED</td></tr>
 <tr class="separator:a38bf0cac6f2d298b34f8545d3a2a90b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b8fd172303b3cb52b3105730fd09c52"><td class="memItemLeft" align="right" valign="top"><a id="a7b8fd172303b3cb52b3105730fd09c52"></a>
+<a class="el" href="classaudio__tools_1_1_tf_lite_audio_error_reporter.html">audio_tools::TfLiteAudioErrorReporter</a>&#160;</td><td class="memItemRight" valign="bottom"><b>my_error_reporter</b></td></tr>
+<tr class="separator:a7b8fd172303b3cb52b3105730fd09c52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a355b863f7b1800a8ebfb0a0ae678b57f"><td class="memItemLeft" align="right" valign="top"><a id="a355b863f7b1800a8ebfb0a0ae678b57f"></a>
 <a class="el" href="classaudio__tools_1_1_audio_kit_stream.html">AudioKitStream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>pt_AudioKitStream</b> = nullptr</td></tr>
 <tr class="separator:a355b863f7b1800a8ebfb0a0ae678b57f"><td class="memSeparator" colspan="2">&#160;</td></tr>

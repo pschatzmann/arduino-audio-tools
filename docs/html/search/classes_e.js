@@ -6,7 +6,7 @@ var searchData=
   ['resampleconfig_832',['ResampleConfig',['../structaudio__tools_1_1_resample_config.html',1,'audio_tools']]],
   ['resampleparameterestimator_833',['ResampleParameterEstimator',['../classaudio__tools_1_1_resample_parameter_estimator.html',1,'audio_tools']]],
   ['resamplestream_834',['ResampleStream',['../classaudio__tools_1_1_resample_stream.html',1,'audio_tools']]],
-  ['result_835',['Result',['../struct_tf_lite_results_queue_1_1_result.html',1,'TfLiteResultsQueue']]],
+  ['result_835',['Result',['../structaudio__tools_1_1_tf_lite_results_queue_1_1_result.html',1,'audio_tools::TfLiteResultsQueue']]],
   ['ringbuffer_836',['RingBuffer',['../classaudio__tools_1_1_ring_buffer.html',1,'audio_tools']]],
   ['ringbuffer_3c_20effect_5ft_20_3e_837',['RingBuffer&lt; effect_t &gt;',['../classaudio__tools_1_1_ring_buffer.html',1,'audio_tools']]],
   ['ringbuffer_3c_20int16_5ft_20_3e_838',['RingBuffer&lt; int16_t &gt;',['../classaudio__tools_1_1_ring_buffer.html',1,'audio_tools']]],

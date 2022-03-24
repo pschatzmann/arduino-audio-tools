@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: audio_tools::AudioPrint Class Reference</title>
+<title>arduino-audio-tools: audio_tools::TfLiteAudioOutput&lt; N &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,59 +61,71 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_audio_print.html">AudioPrint</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_tf_lite_audio_output.html">TfLiteAudioOutput</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="classaudio__tools_1_1_audio_print-members.html">List of all members</a>  </div>
+<a href="classaudio__tools_1_1_tf_lite_audio_output-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">audio_tools::AudioPrint Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+<div class="title">audio_tools::TfLiteAudioOutput&lt; N &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Abstract Audio Ouptut class.  
- <a href="classaudio__tools_1_1_audio_print.html#details">More...</a></p>
+<p><a class="el" href="classaudio__tools_1_1_tf_lite_audio_output.html" title="TfLiteAudioOutput which uses Tensorflow Light to analyze the data.">TfLiteAudioOutput</a> which uses Tensorflow Light to analyze the data.  
+ <a href="classaudio__tools_1_1_tf_lite_audio_output.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_audio_output_8h_source.html">AudioOutput.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_tf_lite_audio_output_8h_source.html">TfLiteAudioOutput.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for audio_tools::AudioPrint:</div>
+Inheritance diagram for audio_tools::TfLiteAudioOutput&lt; N &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classaudio__tools_1_1_audio_print.png" usemap="#audio_5Ftools::AudioPrint_map" alt=""/>
-  <map id="audio_5Ftools::AudioPrint_map" name="audio_5Ftools::AudioPrint_map">
-<area href="class_print.html" alt="Print" shape="rect" coords="0,0,217,24"/>
-<area href="classaudio__tools_1_1_csv_stream.html" title="Stream Wrapper which can be used to print the values as readable ASCII to the screen to be analyzed i..." alt="audio_tools::CsvStream&lt; T &gt;" shape="rect" coords="227,112,444,136"/>
-<area href="classaudio__tools_1_1_encoded_audio_stream.html" title="A more natural Stream class to process encoded data (aac, wav, mp3...)." alt="audio_tools::EncodedAudioStream" shape="rect" coords="227,168,444,192"/>
-<area href="classaudio__tools_1_1_format_converter_stream.html" alt="audio_tools::FormatConverterStream" shape="rect" coords="227,224,444,248"/>
-<area href="classaudio__tools_1_1_hex_dump_stream.html" title="Creates a Hex Dump." alt="audio_tools::HexDumpStream" shape="rect" coords="227,280,444,304"/>
-<area href="classaudio__tools_1_1_meta_data_print.html" title="ID3 and Icecast/Shoutcast metadata output support." alt="audio_tools::MetaDataPrint" shape="rect" coords="227,336,444,360"/>
-<area href="classaudio__tools_1_1_multi_output.html" title="Replicates the output to multiple destinations." alt="audio_tools::MultiOutput" shape="rect" coords="227,392,444,416"/>
-<area href="classaudio__tools_1_1_p_w_m_audio_stream_base.html" title="Common functionality for PWM output." alt="audio_tools::PWMAudioStreamBase" shape="rect" coords="227,448,444,472"/>
-<area href="classaudio__tools_1_1_tf_lite_audio_output.html" title="TfLiteAudioOutput which uses Tensorflow Light to analyze the data." alt="audio_tools::TfLiteAudioOutput&lt; N &gt;" shape="rect" coords="227,504,444,528"/>
+  <img src="classaudio__tools_1_1_tf_lite_audio_output.png" usemap="#audio_5Ftools::TfLiteAudioOutput_3C_20N_20_3E_map" alt=""/>
+  <map id="audio_5Ftools::TfLiteAudioOutput_3C_20N_20_3E_map" name="audio_5Ftools::TfLiteAudioOutput_3C_20N_20_3E_map">
+<area href="classaudio__tools_1_1_audio_print.html" title="Abstract Audio Ouptut class." alt="audio_tools::AudioPrint" shape="rect" coords="0,56,216,80"/>
+<area href="class_print.html" alt="Print" shape="rect" coords="0,0,216,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1b389ee8d8f3cf82d37590ca808044e5"><td class="memItemLeft" align="right" valign="top"><a id="a1b389ee8d8f3cf82d37590ca808044e5"></a>
+<tr class="memitem:a2aff7646ec617c84ed137ad7edf80abd"><td class="memItemLeft" align="right" valign="top"><a id="a2aff7646ec617c84ed137ad7edf80abd"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tf_lite_audio_output.html#a2aff7646ec617c84ed137ad7edf80abd">availableForWrite</a> ()</td></tr>
+<tr class="memdesc:a2aff7646ec617c84ed137ad7edf80abd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constant streaming. <br /></td></tr>
+<tr class="separator:a2aff7646ec617c84ed137ad7edf80abd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30d1cd4ee68be8488f9faef3bafe58c0"><td class="memItemLeft" align="right" valign="top"><a id="a30d1cd4ee68be8488f9faef3bafe58c0"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tf_lite_audio_output.html#a30d1cd4ee68be8488f9faef3bafe58c0">begin</a> (<a class="el" href="structaudio__tools_1_1_tf_lite_config.html">TfLiteConfig</a> config)</td></tr>
+<tr class="memdesc:a30d1cd4ee68be8488f9faef3bafe58c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the processing. <br /></td></tr>
+<tr class="separator:a30d1cd4ee68be8488f9faef3bafe58c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58c17a19f0aa51a3a0052b531894b81e"><td class="memItemLeft" align="right" valign="top"><a id="a58c17a19f0aa51a3a0052b531894b81e"></a>
+virtual <a class="el" href="structaudio__tools_1_1_tf_lite_config.html">TfLiteConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><b>defaultConfig</b> ()</td></tr>
+<tr class="separator:a58c17a19f0aa51a3a0052b531894b81e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a370029e1e9588b2af558090eec62dfb1"><td class="memItemLeft" align="right" valign="top"><a id="a370029e1e9588b2af558090eec62dfb1"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tf_lite_audio_output.html#a370029e1e9588b2af558090eec62dfb1">setInterpreter</a> (tflite::MicroInterpreter *p_interpreter)</td></tr>
+<tr class="memdesc:a370029e1e9588b2af558090eec62dfb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optionally define your own interpreter. <br /></td></tr>
+<tr class="separator:a370029e1e9588b2af558090eec62dfb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76a37de2787a1736fe2ed4516d47d690"><td class="memItemLeft" align="right" valign="top"><a id="a76a37de2787a1736fe2ed4516d47d690"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tf_lite_audio_output.html#a76a37de2787a1736fe2ed4516d47d690">setRecognizer</a> (<a class="el" href="classaudio__tools_1_1_tf_lite_abstract_recognize_commands.html">TfLiteAbstractRecognizeCommands</a>&lt; N &gt; *p_recognizer)</td></tr>
+<tr class="memdesc:a76a37de2787a1736fe2ed4516d47d690"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optionally define your own recognizer. <br /></td></tr>
+<tr class="separator:a76a37de2787a1736fe2ed4516d47d690"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf9a8259b5f2b020c5fc38fa8ea9d911"><td class="memItemLeft" align="right" valign="top"><a id="adf9a8259b5f2b020c5fc38fa8ea9d911"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tf_lite_audio_output.html#adf9a8259b5f2b020c5fc38fa8ea9d911">write</a> (const uint8_t *audio, size_t bytes)</td></tr>
+<tr class="memdesc:adf9a8259b5f2b020c5fc38fa8ea9d911"><td class="mdescLeft">&#160;</td><td class="mdescRight">process the data in batches of max kMaxAudioSampleSize. <br /></td></tr>
+<tr class="separator:adf9a8259b5f2b020c5fc38fa8ea9d911"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classaudio__tools_1_1_audio_print"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classaudio__tools_1_1_audio_print')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classaudio__tools_1_1_audio_print.html">audio_tools::AudioPrint</a></td></tr>
+<tr class="memitem:a1b389ee8d8f3cf82d37590ca808044e5 inherit pub_methods_classaudio__tools_1_1_audio_print"><td class="memItemLeft" align="right" valign="top"><a id="a1b389ee8d8f3cf82d37590ca808044e5"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>flush</b> () FLUSH_OVERRIDE</td></tr>
-<tr class="separator:a1b389ee8d8f3cf82d37590ca808044e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaba3cf5b3fb48b37d180241d8b12f886"><td class="memItemLeft" align="right" valign="top"><a id="aaba3cf5b3fb48b37d180241d8b12f886"></a>
+<tr class="separator:a1b389ee8d8f3cf82d37590ca808044e5 inherit pub_methods_classaudio__tools_1_1_audio_print"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaba3cf5b3fb48b37d180241d8b12f886 inherit pub_methods_classaudio__tools_1_1_audio_print"><td class="memItemLeft" align="right" valign="top"><a id="aaba3cf5b3fb48b37d180241d8b12f886"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setAudioInfo</b> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> info)</td></tr>
-<tr class="separator:aaba3cf5b3fb48b37d180241d8b12f886"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a352a03fc48bd1ac00871c9cb35c6cb2a"><td class="memItemLeft" align="right" valign="top"><a id="a352a03fc48bd1ac00871c9cb35c6cb2a"></a>
-virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (const uint8_t *buffer, size_t size) override=0</td></tr>
-<tr class="separator:a352a03fc48bd1ac00871c9cb35c6cb2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afcbf4a4cb92b942922cb90fd9a3c73d5"><td class="memItemLeft" align="right" valign="top"><a id="afcbf4a4cb92b942922cb90fd9a3c73d5"></a>
+<tr class="separator:aaba3cf5b3fb48b37d180241d8b12f886 inherit pub_methods_classaudio__tools_1_1_audio_print"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcbf4a4cb92b942922cb90fd9a3c73d5 inherit pub_methods_classaudio__tools_1_1_audio_print"><td class="memItemLeft" align="right" valign="top"><a id="afcbf4a4cb92b942922cb90fd9a3c73d5"></a>
 virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (uint8_t ch) override</td></tr>
-<tr class="separator:afcbf4a4cb92b942922cb90fd9a3c73d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:afcbf4a4cb92b942922cb90fd9a3c73d5 inherit pub_methods_classaudio__tools_1_1_audio_print"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_print"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_print')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_print.html">Print</a></td></tr>
-<tr class="memitem:ae278602698f895c25820f18da4e765be inherit pub_methods_class_print"><td class="memItemLeft" align="right" valign="top"><a id="ae278602698f895c25820f18da4e765be"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>availableForWrite</b> ()</td></tr>
-<tr class="separator:ae278602698f895c25820f18da4e765be inherit pub_methods_class_print"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec9ecf84cc6d9087a650def3cefc459e inherit pub_methods_class_print"><td class="memItemLeft" align="right" valign="top"><a id="aec9ecf84cc6d9087a650def3cefc459e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>clearWriteError</b> ()</td></tr>
 <tr class="separator:aec9ecf84cc6d9087a650def3cefc459e inherit pub_methods_class_print"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -208,28 +220,87 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (const ch
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (const char *str)</td></tr>
 <tr class="separator:a5b40e0e9cab1f2fe5bb0cb22ffe5adda inherit pub_methods_class_print"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:aecd362b3af57a0815b9547f8797512ae"><td class="memItemLeft" align="right" valign="top"><a id="aecd362b3af57a0815b9547f8797512ae"></a>
-uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>tmp</b> [MAX_SINGLE_CHARS]</td></tr>
-<tr class="separator:aecd362b3af57a0815b9547f8797512ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b463ab612e2a848734cf95caf9a7fb8"><td class="memItemLeft" align="right" valign="top"><a id="a9b463ab612e2a848734cf95caf9a7fb8"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>tmpPos</b> =0</td></tr>
-<tr class="separator:a9b463ab612e2a848734cf95caf9a7fb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a1b6c10621e7a3e757b7303fdbdbd1971"><td class="memItemLeft" align="right" valign="top"><a id="a1b6c10621e7a3e757b7303fdbdbd1971"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>processAudio</b> (const uint8_t *audio, size_t bytes)</td></tr>
+<tr class="separator:a1b6c10621e7a3e757b7303fdbdbd1971"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18616db1db6233c3c6878d4bfee6781a"><td class="memItemLeft" align="right" valign="top"><a id="a18616db1db6233c3c6878d4bfee6781a"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tf_lite_audio_output.html#a18616db1db6233c3c6878d4bfee6781a">respondToCommand</a> (const char *found_command, uint8_t score, bool is_new_command)</td></tr>
+<tr class="memdesc:a18616db1db6233c3c6878d4bfee6781a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overwrite this method to implement your own handler or provide callback. <br /></td></tr>
+<tr class="separator:a18616db1db6233c3c6878d4bfee6781a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a619f6b03b26be55565ff736803b4320f"><td class="memItemLeft" align="right" valign="top"><a id="a619f6b03b26be55565ff736803b4320f"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>setModel</b> (const unsigned char *model)</td></tr>
+<tr class="separator:a619f6b03b26be55565ff736803b4320f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b94af358d52e872cd7c5e9a55c0e396"><td class="memItemLeft" align="right" valign="top"><a id="a8b94af358d52e872cd7c5e9a55c0e396"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>setupFeatureProvider</b> ()</td></tr>
+<tr class="separator:a8b94af358d52e872cd7c5e9a55c0e396"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd6208de538e65efa6e45079ef2d1d3c"><td class="memItemLeft" align="right" valign="top"><a id="acd6208de538e65efa6e45079ef2d1d3c"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>setupInterpreter</b> ()</td></tr>
+<tr class="separator:acd6208de538e65efa6e45079ef2d1d3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d0d9e96f7a8228f73fd9fc812ce8608"><td class="memItemLeft" align="right" valign="top"><a id="a2d0d9e96f7a8228f73fd9fc812ce8608"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>setupRecognizer</b> ()</td></tr>
+<tr class="separator:a2d0d9e96f7a8228f73fd9fc812ce8608"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_class_print"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_print')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_print.html">Print</a></td></tr>
 <tr class="memitem:a46656410e23c0ec14d7a01b38b3b6f00 inherit pro_methods_class_print"><td class="memItemLeft" align="right" valign="top"><a id="a46656410e23c0ec14d7a01b38b3b6f00"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteError</b> (int err=1)</td></tr>
 <tr class="separator:a46656410e23c0ec14d7a01b38b3b6f00 inherit pro_methods_class_print"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a5f7fd5a349960761ddab79af21c2e9aa"><td class="memItemLeft" align="right" valign="top"><a id="a5f7fd5a349960761ddab79af21c2e9aa"></a>
+<a class="el" href="structaudio__tools_1_1_tf_lite_config.html">TfLiteConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><b>cfg</b></td></tr>
+<tr class="separator:a5f7fd5a349960761ddab79af21c2e9aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13d1eb75b9132906deaeddbb14b0fcee"><td class="memItemLeft" align="right" valign="top"><a id="a13d1eb75b9132906deaeddbb14b0fcee"></a>
+int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>current_time</b> = 0</td></tr>
+<tr class="separator:a13d1eb75b9132906deaeddbb14b0fcee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a899b73ec4c4335f4ade9ac4721292f21"><td class="memItemLeft" align="right" valign="top"><a id="a899b73ec4c4335f4ade9ac4721292f21"></a>
+int8_t *&#160;</td><td class="memItemRight" valign="bottom"><b>feature_buffer</b> = nullptr</td></tr>
+<tr class="separator:a899b73ec4c4335f4ade9ac4721292f21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa11b25bcaf0fc39b549705145233d70f"><td class="memItemLeft" align="right" valign="top"><a id="aa11b25bcaf0fc39b549705145233d70f"></a>
+<a class="el" href="classaudio__tools_1_1_tf_lite_audio_feature_provider.html">TfLiteAudioFeatureProvider</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>feature_provider</b> = nullptr</td></tr>
+<tr class="separator:aa11b25bcaf0fc39b549705145233d70f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94424c7b75ece1c9e5ce1efbab19dad1"><td class="memItemLeft" align="right" valign="top"><a id="a94424c7b75ece1c9e5ce1efbab19dad1"></a>
+tflite::MicroInterpreter *&#160;</td><td class="memItemRight" valign="bottom"><b>interpreter</b> = nullptr</td></tr>
+<tr class="separator:a94424c7b75ece1c9e5ce1efbab19dad1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24aa707bc5f5938cc9f7f8e900ddd5aa"><td class="memItemLeft" align="right" valign="top"><a id="a24aa707bc5f5938cc9f7f8e900ddd5aa"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_setup</b> = false</td></tr>
+<tr class="separator:a24aa707bc5f5938cc9f7f8e900ddd5aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a819044b587ae8cad36427f2448ad45"><td class="memItemLeft" align="right" valign="top"><a id="a1a819044b587ae8cad36427f2448ad45"></a>
+TfLiteTensor *&#160;</td><td class="memItemRight" valign="bottom"><b>model_input</b> = nullptr</td></tr>
+<tr class="separator:a1a819044b587ae8cad36427f2448ad45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98ab139724c3199868c8ee4fec183052"><td class="memItemLeft" align="right" valign="top"><a id="a98ab139724c3199868c8ee4fec183052"></a>
+int8_t *&#160;</td><td class="memItemRight" valign="bottom"><b>model_input_buffer</b> = nullptr</td></tr>
+<tr class="separator:a98ab139724c3199868c8ee4fec183052"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab871152b48a38f7855ba5d8f9ede7d3f"><td class="memItemLeft" align="right" valign="top"><a id="ab871152b48a38f7855ba5d8f9ede7d3f"></a>
+const tflite::Model *&#160;</td><td class="memItemRight" valign="bottom"><b>p_model</b> = nullptr</td></tr>
+<tr class="separator:ab871152b48a38f7855ba5d8f9ede7d3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f76683f8de22e9f75e4f2249621c3b0"><td class="memItemLeft" align="right" valign="top"><a id="a5f76683f8de22e9f75e4f2249621c3b0"></a>
+<a class="el" href="classaudio__tools_1_1_tf_lite_abstract_recognize_commands.html">TfLiteAbstractRecognizeCommands</a>&lt; N &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>recognizer</b> = nullptr</td></tr>
+<tr class="separator:a5f76683f8de22e9f75e4f2249621c3b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab394afc0afe5afcf12b52cf9ef16aafa"><td class="memItemLeft" align="right" valign="top"><a id="ab394afc0afe5afcf12b52cf9ef16aafa"></a>
+uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><b>tensor_arena</b> = nullptr</td></tr>
+<tr class="separator:ab394afc0afe5afcf12b52cf9ef16aafa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adeb30b093a77f86cba8a62ce8e88487a"><td class="memItemLeft" align="right" valign="top"><a id="adeb30b093a77f86cba8a62ce8e88487a"></a>
+int16_t&#160;</td><td class="memItemRight" valign="bottom"><b>total_slice_count</b> = 0</td></tr>
+<tr class="separator:adeb30b093a77f86cba8a62ce8e88487a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classaudio__tools_1_1_audio_print"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classaudio__tools_1_1_audio_print')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classaudio__tools_1_1_audio_print.html">audio_tools::AudioPrint</a></td></tr>
+<tr class="memitem:aecd362b3af57a0815b9547f8797512ae inherit pro_attribs_classaudio__tools_1_1_audio_print"><td class="memItemLeft" align="right" valign="top"><a id="aecd362b3af57a0815b9547f8797512ae"></a>
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>tmp</b> [MAX_SINGLE_CHARS]</td></tr>
+<tr class="separator:aecd362b3af57a0815b9547f8797512ae inherit pro_attribs_classaudio__tools_1_1_audio_print"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b463ab612e2a848734cf95caf9a7fb8 inherit pro_attribs_classaudio__tools_1_1_audio_print"><td class="memItemLeft" align="right" valign="top"><a id="a9b463ab612e2a848734cf95caf9a7fb8"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>tmpPos</b> =0</td></tr>
+<tr class="separator:a9b463ab612e2a848734cf95caf9a7fb8 inherit pro_attribs_classaudio__tools_1_1_audio_print"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Abstract Audio Ouptut class. </p>
+<div class="textblock"><h3>template&lt;int N&gt;<br />
+class audio_tools::TfLiteAudioOutput&lt; N &gt;</h3>
+
+<p><a class="el" href="classaudio__tools_1_1_tf_lite_audio_output.html" title="TfLiteAudioOutput which uses Tensorflow Light to analyze the data.">TfLiteAudioOutput</a> which uses Tensorflow Light to analyze the data. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/<a class="el" href="_audio_output_8h_source.html">AudioOutput.h</a></li>
+<li>src/AudioLibs/<a class="el" href="_tf_lite_audio_output_8h_source.html">TfLiteAudioOutput.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
