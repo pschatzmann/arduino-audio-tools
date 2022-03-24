@@ -2,6 +2,8 @@
 #include "AudioTools/AudioStreams.h"
 #include "PDM.h"
 
+namespace audio_tools {
+
 /**
  * @brief Config for MP34DT05 Microphone. Supported sample rates 16000, 41667,
  * Supported bits_per_sample only 16
@@ -107,3 +109,5 @@ class AudioMP34DT05 : public AudioStreamX {
 
   static void onReceiveStatic() { selfAudioMP34DT05->onReceive(); }
 };
+
+} // namespace
