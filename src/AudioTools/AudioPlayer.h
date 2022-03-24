@@ -562,7 +562,7 @@ namespace audio_tools {
             LOGD(LOG_METHOD);
             this->p_source = &source;
             this->p_decoder = &decoder;
-            this->volume_out.begin(output);
+            this->volume_out.setTarget(output);
             this->p_out_decoding = new EncodedAudioStream(volume_out, decoder);
             this->p_final_print = &output;
 
@@ -583,7 +583,7 @@ namespace audio_tools {
             LOGD(LOG_METHOD);
             this->p_source = &source;
             this->p_decoder = &decoder;
-            this->volume_out.begin(output);
+            this->volume_out.setTarget(output);
             this->p_out_decoding = new EncodedAudioStream(volume_out, decoder);
             setNotify(notify);
         }
@@ -599,7 +599,7 @@ namespace audio_tools {
         AudioPlayer(AudioSource& source, AudioStream& output, AudioDecoder& decoder) {
             LOGD(LOG_METHOD);
             this->p_source = &source;
-            this->volume_out.begin(output);
+            this->volume_out.setTarget(output);
             this->p_out_decoding = new EncodedAudioStream(volume_out, decoder);
             this->p_final_stream = &output;
 
@@ -664,7 +664,7 @@ namespace audio_tools {
 
         /// (Re)defines the output
         void setOutput(Print& output){
-            this->volume_out.begin(output);
+            this->volume_out.setTarget(output);
         }
 
         /// (Re)defines the decoder
