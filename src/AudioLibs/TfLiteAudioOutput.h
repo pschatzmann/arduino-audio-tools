@@ -20,6 +20,9 @@
 #include "tensorflow/lite/micro/micro_error_reporter.h"
 //#include "tensorflow/lite/version.h"
 
+namespace audio_tools {
+
+
 // Forward Declarations
 class TfLiteAudioFeatureProvider;
 
@@ -842,3 +845,5 @@ class TfLiteAudioOutput : public AudioPrint {
     }
   };
 };
+
+} // namespace
