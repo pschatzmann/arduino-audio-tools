@@ -216,7 +216,9 @@ class MetaDataICY : public AbstractMetaData {
                 int end = meta.indexOf("';");
                 if (start>=0 && end>start){
                     metaData[end]=0;
-                    callback(Title, (const char*)metaData+start+1, end-start);
+                    if (callback!=nullptr){
+                        callback(Title, (const char*)metaData+start+1, end-start);
+                    }
                 }   
                 CHECK_MEMORY();
             } else {
