@@ -41,7 +41,7 @@ void setup(void) {
   // We send the test signal via A2DP - so we conect to the MyMusic Bluetooth Speaker
   auto cfgA2DP = out.defaultConfig(TX_MODE);
   cfgA2DP.name = "LEXON MINO L";
-  //cfg1.auto_reconnect = false;
+  //cfgA2DP.auto_reconnect = false;
   out.begin(cfgA2DP);
   out.setVolume(0.3);
   Serial.println("A2DP is connected now...");
