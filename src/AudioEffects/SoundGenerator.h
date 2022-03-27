@@ -265,18 +265,18 @@ class SquareWaveGenerator : public SineWaveGenerator<T> {
 template <class T>
 class NoiseGenerator : public SoundGenerator<T> {
     public:
-        // the scale defines the max value which is generated
-        NoiseGenerator(double scale=1.0) {
-            this->scale = scale;
+        /// the scale defines the max value which is generated
+        NoiseGenerator(T amplitude = 32767) {
+            this->amplitude = amplitude;
         }
 
         /// Provides a single sample
         T readSample() {
-            return  ((rand() % (static_cast<T>(2 * scale)) - scale)); // generate number between  -scale / scale
+            return (random(-amplitude, amplitude));
         }
 
     protected:
-        double scale;
+        T amplitude;
 
 };
 
