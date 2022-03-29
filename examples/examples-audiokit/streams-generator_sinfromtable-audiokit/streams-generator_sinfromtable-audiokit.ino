@@ -42,6 +42,7 @@ void setup(void) {
 
 // Arduino loop - copy sound to out 
 void loop() {
+  // the length is defined by sound_len
   copier.copy();
   // increase frequency
   freq += 10;
