@@ -36,7 +36,7 @@ void setup(void) {
   auto cfg = sineWave.defaultConfig();
   cfg.channels = channels;
   cfg.sample_rate = sample_rate;
-  sineWave.begin(cfg, N_B4);
+  sineWave.begin(cfg, freq);
   Serial.println("started...");
 }
 
