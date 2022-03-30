@@ -133,6 +133,8 @@ class AudioLogger {
 #define LOGW(...) if (AudioLogger::instance().level()<=AudioLogger::Warning) { LOG_OUT(AudioLogger::Warning, __VA_ARGS__);}
 #define LOGE(...) if (AudioLogger::instance().level()<=AudioLogger::Error) { LOG_OUT(AudioLogger::Error, __VA_ARGS__);}
 
+}
+    
 #else
 
 #define LOGD(...) 
@@ -141,5 +143,3 @@ class AudioLogger {
 #define LOGE(...) 
 
 #endif
-
-}    
