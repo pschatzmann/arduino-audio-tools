@@ -129,7 +129,7 @@ After installing a library, you might need to activate it's usage in the ```Audi
 
 ## Show and Tell
 
-Get some inspiration [from projects that were using this library](https://github.com/pschatzmann/arduino-audio-tools/discussions/categories/show-and-tell) and share your projects with the community.
+Get some inspiration [from projects that were using this library](https://github.com/pschatzmann/arduino-audio-tools/discussions/categories/show-and-tell) or share your projects with the community.
 
 
 ### Documentation
