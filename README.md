@@ -127,6 +127,11 @@ Dependent on the example you might need to install some of the following librari
 
 After installing a library, you might need to activate it's usage in the ```AudioConfig.h``` file!
 
+## Show and Tell
+
+Get some inspiration [from projects that were using this library](https://github.com/pschatzmann/arduino-audio-tools/discussions/categories/show-and-tell) and share your projects with the community.
+
+
 ### Documentation
 
 - Here is the generated [Class Documentation](https://pschatzmann.github.io/arduino-audio-tools/html/annotated.html). 
