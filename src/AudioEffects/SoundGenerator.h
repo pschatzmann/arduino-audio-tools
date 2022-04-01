@@ -35,7 +35,9 @@ class SoundGenerator  {
             LOGD(LOG_METHOD);
             active = true;
             activeWarningIssued = false;
-            //info.bits_per_sample = sizeof(T)*8;
+            LOGI("bits_per_sample: %d", info.bits_per_sample);
+            LOGI("channels: %d", info.channels);
+            LOGI("sample_rate: %d", info.sample_rate);
             return true;
         }
 
@@ -478,7 +480,7 @@ class GeneratorFromArray : public SoundGenerator<T> {
 };
 
 /**
- * @brief A sine generator based on a table. The table is created based using degress where one full wave is 360 degrees
+ * @brief A sine generator based on a table. The table is created based using degress where one full wave is 360 degrees.
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
