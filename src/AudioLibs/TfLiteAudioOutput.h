@@ -92,13 +92,12 @@ struct TfLiteConfig {
   int featureElementCount() { return kFeatureSliceSize * kFeatureSliceCount; }
 
   // Parameters for RecognizeCommands
-  int32_t  = 1000;
+  int32_t average_window_duration_ms = 1000;
   uint8_t detection_threshold = 200;
   int32_t suppression_ms = 1500;
   int32_t minimum_count = 3;
 
 };
-average_window_duration_ms
 
 // Partial implementation of std::dequeue, just providing the functionality
 // that's needed to keep a record of previous neural network results over a
