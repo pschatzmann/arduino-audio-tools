@@ -234,8 +234,7 @@ template<typename T>
 class RingBuffer : public BaseBuffer<T> {
     public:
         RingBuffer(int size){
-            this->max_size = size;
-            _aucBuffer = new T[max_size];
+            resize(size);
             reset();
         }
         
@@ -247,7 +246,7 @@ class RingBuffer : public BaseBuffer<T> {
             if (isEmpty())
                 return -1;
 
-            uint8_t value = _aucBuffer[_iTail];
+            T value = _aucBuffer[_iTail];
             _iTail = nextIndex(_iTail);
             _numElems--;
 
@@ -304,14 +303,23 @@ class RingBuffer : public BaseBuffer<T> {
         virtual T* address() {
             return _aucBuffer;
         }
+
+        virtual void resize(int len){
+            if (_aucBuffer!=nullptr){
+                delete []_aucBuffer;
+            }
+            this->max_size = len;
+            _aucBuffer = new T[max_size];
+            reset();
+        }
         
 
     protected:
-        T *_aucBuffer ;
+        T *_aucBuffer=nullptr;
         int _iHead ;
         int _iTail ;
         int _numElems;
-        int max_size;
+        int max_size=0;
 
         int nextIndex(int index){
             return (uint32_t)(index + 1) % max_size;
