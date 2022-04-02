@@ -331,7 +331,7 @@ class Delay : public AudioEffect  {
 
         void updateBufferSize(){
             uint16_t newSampleCount = sampleRate * p_ms / 1000;
-            if (newSampleCount>sampleCount){
+            if (newSampleCount!=sampleCount){
                 if (p_history!=nullptr) delete p_history;
                 sampleCount = newSampleCount;
                 p_history = new RingBuffer<effect_t>(sampleCount);
