@@ -43,8 +43,8 @@ void setup() {
 
   // Setup tensorflow
   auto tcfg = tfl.defaultConfig();
-  tcfg.kAudioChannels = channels;
-  tcfg.kAudioSampleFrequency = samples_per_second;
+  tcfg.channels = channels;
+  tcfg.sample_rate = samples_per_second;
   tcfg.kTensorArenaSize = 10 * 1024;
   tcfg.respondToCommand = respondToCommand;
   tcfg.model = g_model;
