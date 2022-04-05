@@ -36,7 +36,7 @@ void setup() {
   cfg.channels = channels;
   cfg.sample_rate = samples_per_second;
   cfg.use_apll = false;
-  cfg.auto_clear = false;
+  cfg.auto_clear = true;
   cfg.buffer_size = 512;
   cfg.buffer_count = 16;
   kit.begin(cfg);
