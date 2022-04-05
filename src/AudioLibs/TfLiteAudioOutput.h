@@ -56,6 +56,7 @@ struct TfLiteConfig {
   TfLiteAudioFeatureProvider* featureProvider = nullptr;
   const char** labels = nullptr;
   bool useAllOpsResolver = false;
+  // callback for command handler
   void (*respondToCommand)(const char* found_command, uint8_t score,
                            bool is_new_command) = nullptr;
 
@@ -86,21 +87,40 @@ struct TfLiteConfig {
   int kFeatureSliceDurationMs = 30;
 
   // number of new slices to collect before evaluating the model
-  int kSlicesToProcess = 3;
-
-  int featureElementCount() { return kFeatureSliceSize * kFeatureSliceCount; }
-  int audioSampleSize() {
-    return kFeatureSliceDurationMs * (sample_rate / 1000);
-  }
-  int strideSampleSize() {
-    return kFeatureSliceStrideMs * (sample_rate / 1000);
-  }
+  int kSlicesToProcess = 2;
 
   // Parameters for RecognizeCommands
   int32_t average_window_duration_ms = 1000;
   uint8_t detection_threshold = 200;
   int32_t suppression_ms = 1500;
   int32_t minimum_count = 3;
+
+  // input for FrontendConfig
+  float filterbank_lower_band_limit = 125.0;
+  float filterbank_upper_band_limit = 7500.0;
+  float noise_reduction_smoothing_bits = 10;
+  float noise_reduction_even_smoothing = 0.025;
+  float noise_reduction_odd_smoothing = 0.06;
+  float noise_reduction_min_signal_remaining = 0.05;
+  bool pcan_gain_control_enable_pcan = 1;
+  float pcan_gain_control_strength = 0.95;
+  float pcan_gain_control_offset = 80.0;
+  float pcan_gain_control_gain_bits = 21;
+  bool log_scale_enable_log = 1;
+  uint8_t log_scale_scale_shift = 6;
+
+  int featureElementCount() { 
+    return kFeatureSliceSize * kFeatureSliceCount;
+  }
+
+  int audioSampleSize() {
+    return kFeatureSliceDurationMs * (sample_rate / 1000);
+  }
+
+  int strideSampleSize() {
+    return kFeatureSliceStrideMs * (sample_rate / 1000);
+  }
+
 };
 
 // Partial implementation of std::dequeue, just providing the functionality
@@ -512,20 +532,19 @@ class TfLiteAudioFeatureProvider {
     LOGD(LOG_METHOD);
     config.window.size_ms = cfg.kFeatureSliceDurationMs;
     config.window.step_size_ms = cfg.kFeatureSliceStrideMs;
-    config.noise_reduction.smoothing_bits = 10;
     config.filterbank.num_channels = cfg.kFeatureSliceSize;
-    config.filterbank.lower_band_limit = 125.0;
-    config.filterbank.upper_band_limit = 7500.0;
-    config.noise_reduction.smoothing_bits = 10;
-    config.noise_reduction.even_smoothing = 0.025;
-    config.noise_reduction.odd_smoothing = 0.06;
-    config.noise_reduction.min_signal_remaining = 0.05;
-    config.pcan_gain_control.enable_pcan = 1;
-    config.pcan_gain_control.strength = 0.95;
-    config.pcan_gain_control.offset = 80.0;
-    config.pcan_gain_control.gain_bits = 21;
-    config.log_scale.enable_log = 1;
-    config.log_scale.scale_shift = 6;
+    config.filterbank.lower_band_limit = cfg.filterbank_lower_band_limit;
+    config.filterbank.upper_band_limit = cfg.filterbank_upper_band_limit;
+    config.noise_reduction.smoothing_bits = cfg.noise_reduction_smoothing_bits;
+    config.noise_reduction.even_smoothing = cfg.noise_reduction_even_smoothing;
+    config.noise_reduction.odd_smoothing = cfg.noise_reduction_odd_smoothing;
+    config.noise_reduction.min_signal_remaining = cfg.noise_reduction_min_signal_remaining;
+    config.pcan_gain_control.enable_pcan = cfg.pcan_gain_control_enable_pcan;
+    config.pcan_gain_control.strength = cfg.pcan_gain_control_strength;
+    config.pcan_gain_control.offset = cfg.pcan_gain_control_offset ;
+    config.pcan_gain_control.gain_bits = cfg.pcan_gain_control_gain_bits;
+    config.log_scale.enable_log = cfg.log_scale_enable_log;
+    config.log_scale.scale_shift = cfg.log_scale_scale_shift;
     if (!FrontendPopulateState(&config, &g_micro_features_state,
                                cfg.sample_rate)) {
       LOGE("frontendPopulateState() failed");
@@ -715,6 +734,7 @@ class TfLiteAudioOutput : public AudioPrint {
         current_time += cfg.kFeatureSliceStrideMs;
         // determine slice
         total_slice_count++;
+        
         int8_t* feature_buffer = feature_provider->addSlice();
         if (total_slice_count >= cfg.kSlicesToProcess) {
           processSlices(feature_buffer);
