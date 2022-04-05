@@ -92,10 +92,10 @@ Inheritance diagram for audio_tools::TfLiteAudioOutput&lt; N &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2aff7646ec617c84ed137ad7edf80abd"><td class="memItemLeft" align="right" valign="top"><a id="a2aff7646ec617c84ed137ad7edf80abd"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tf_lite_audio_output.html#a2aff7646ec617c84ed137ad7edf80abd">availableForWrite</a> ()</td></tr>
-<tr class="memdesc:a2aff7646ec617c84ed137ad7edf80abd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constant streaming. <br /></td></tr>
-<tr class="separator:a2aff7646ec617c84ed137ad7edf80abd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5662c99acc45d1b89217ca3a0bb96219"><td class="memItemLeft" align="right" valign="top"><a id="a5662c99acc45d1b89217ca3a0bb96219"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tf_lite_audio_output.html#a5662c99acc45d1b89217ca3a0bb96219">availableToWrite</a> ()</td></tr>
+<tr class="memdesc:a5662c99acc45d1b89217ca3a0bb96219"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constant streaming. <br /></td></tr>
+<tr class="separator:a5662c99acc45d1b89217ca3a0bb96219"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a30d1cd4ee68be8488f9faef3bafe58c0"><td class="memItemLeft" align="right" valign="top"><a id="a30d1cd4ee68be8488f9faef3bafe58c0"></a>
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tf_lite_audio_output.html#a30d1cd4ee68be8488f9faef3bafe58c0">begin</a> (<a class="el" href="structaudio__tools_1_1_tf_lite_config.html">TfLiteConfig</a> config)</td></tr>
 <tr class="memdesc:a30d1cd4ee68be8488f9faef3bafe58c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the processing. <br /></td></tr>
@@ -126,6 +126,9 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setAudioInfo<
 virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (uint8_t ch) override</td></tr>
 <tr class="separator:afcbf4a4cb92b942922cb90fd9a3c73d5 inherit pub_methods_classaudio__tools_1_1_audio_print"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_print"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_print')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_print.html">Print</a></td></tr>
+<tr class="memitem:ae278602698f895c25820f18da4e765be inherit pub_methods_class_print"><td class="memItemLeft" align="right" valign="top"><a id="ae278602698f895c25820f18da4e765be"></a>
+virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>availableForWrite</b> ()</td></tr>
+<tr class="separator:ae278602698f895c25820f18da4e765be inherit pub_methods_class_print"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec9ecf84cc6d9087a650def3cefc459e inherit pub_methods_class_print"><td class="memItemLeft" align="right" valign="top"><a id="aec9ecf84cc6d9087a650def3cefc459e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>clearWriteError</b> ()</td></tr>
 <tr class="separator:aec9ecf84cc6d9087a650def3cefc459e inherit pub_methods_class_print"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -222,9 +225,9 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (const ch
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a1b6c10621e7a3e757b7303fdbdbd1971"><td class="memItemLeft" align="right" valign="top"><a id="a1b6c10621e7a3e757b7303fdbdbd1971"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>processAudio</b> (const uint8_t *audio, size_t bytes)</td></tr>
-<tr class="separator:a1b6c10621e7a3e757b7303fdbdbd1971"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d2269d8207d957a5bb5e640141ea259"><td class="memItemLeft" align="right" valign="top"><a id="a6d2269d8207d957a5bb5e640141ea259"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>processSlices</b> (int8_t *feature_buffer)</td></tr>
+<tr class="separator:a6d2269d8207d957a5bb5e640141ea259"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a18616db1db6233c3c6878d4bfee6781a"><td class="memItemLeft" align="right" valign="top"><a id="a18616db1db6233c3c6878d4bfee6781a"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tf_lite_audio_output.html#a18616db1db6233c3c6878d4bfee6781a">respondToCommand</a> (const char *found_command, uint8_t score, bool is_new_command)</td></tr>
 <tr class="memdesc:a18616db1db6233c3c6878d4bfee6781a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overwrite this method to implement your own handler or provide callback. <br /></td></tr>
@@ -254,9 +257,6 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a13d1eb75b9132906deaeddbb14b0fcee"><td class="memItemLeft" align="right" valign="top"><a id="a13d1eb75b9132906deaeddbb14b0fcee"></a>
 int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>current_time</b> = 0</td></tr>
 <tr class="separator:a13d1eb75b9132906deaeddbb14b0fcee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a899b73ec4c4335f4ade9ac4721292f21"><td class="memItemLeft" align="right" valign="top"><a id="a899b73ec4c4335f4ade9ac4721292f21"></a>
-int8_t *&#160;</td><td class="memItemRight" valign="bottom"><b>feature_buffer</b> = nullptr</td></tr>
-<tr class="separator:a899b73ec4c4335f4ade9ac4721292f21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa11b25bcaf0fc39b549705145233d70f"><td class="memItemLeft" align="right" valign="top"><a id="aa11b25bcaf0fc39b549705145233d70f"></a>
 <a class="el" href="classaudio__tools_1_1_tf_lite_audio_feature_provider.html">TfLiteAudioFeatureProvider</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>feature_provider</b> = nullptr</td></tr>
 <tr class="separator:aa11b25bcaf0fc39b549705145233d70f"><td class="memSeparator" colspan="2">&#160;</td></tr>

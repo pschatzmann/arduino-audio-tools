@@ -94,27 +94,18 @@ Public Member Functions</h2></td></tr>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tf_lite_recognize_commands.html#a56e5422169e977fca4870b41d3e3c81a">begin</a> (<a class="el" href="structaudio__tools_1_1_tf_lite_config.html">TfLiteConfig</a> cfg) override</td></tr>
 <tr class="memdesc:a56e5422169e977fca4870b41d3e3c81a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup parameters from config. <br /></td></tr>
 <tr class="separator:a56e5422169e977fca4870b41d3e3c81a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9387f7f321ec2061e95166443027f78c"><td class="memItemLeft" align="right" valign="top"><a id="a9387f7f321ec2061e95166443027f78c"></a>
-virtual TfLiteStatus&#160;</td><td class="memItemRight" valign="bottom"><b>ProcessLatestResults</b> (const TfLiteTensor *latest_results, const int32_t current_time_ms, const char **found_command, uint8_t *score, bool *is_new_command) override</td></tr>
-<tr class="separator:a9387f7f321ec2061e95166443027f78c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a628e40d991e5410927dd26bba3f0595a"><td class="memItemLeft" align="right" valign="top"><a id="a628e40d991e5410927dd26bba3f0595a"></a>
+virtual TfLiteStatus&#160;</td><td class="memItemRight" valign="bottom"><b>processLatestResults</b> (const TfLiteTensor *latest_results, const int32_t current_time_ms, const char **found_command, uint8_t *score, bool *is_new_command) override</td></tr>
+<tr class="separator:a628e40d991e5410927dd26bba3f0595a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a8cf6151b17673b38323297d943a9bd42"><td class="memItemLeft" align="right" valign="top"><a id="a8cf6151b17673b38323297d943a9bd42"></a>
-int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>average_window_duration_ms_</b></td></tr>
-<tr class="separator:a8cf6151b17673b38323297d943a9bd42"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4bea95a31b80ea8986af8c70778b9c52"><td class="memItemLeft" align="right" valign="top"><a id="a4bea95a31b80ea8986af8c70778b9c52"></a>
-uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>detection_threshold_</b></td></tr>
-<tr class="separator:a4bea95a31b80ea8986af8c70778b9c52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a22e8dd2fdd9658f959694a86aa99eb"><td class="memItemLeft" align="right" valign="top"><a id="a7a22e8dd2fdd9658f959694a86aa99eb"></a>
+<a class="el" href="structaudio__tools_1_1_tf_lite_config.html">TfLiteConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><b>cfg</b></td></tr>
+<tr class="separator:a7a22e8dd2fdd9658f959694a86aa99eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ad5e4daae16018d48bfabe11b9e873e"><td class="memItemLeft" align="right" valign="top"><a id="a3ad5e4daae16018d48bfabe11b9e873e"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>kCategoryCount</b></td></tr>
 <tr class="separator:a3ad5e4daae16018d48bfabe11b9e873e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae87550e9fbbb19e6a336ae52aa621d02"><td class="memItemLeft" align="right" valign="top"><a id="ae87550e9fbbb19e6a336ae52aa621d02"></a>
-const char **&#160;</td><td class="memItemRight" valign="bottom"><b>kCategoryLabels</b> = nullptr</td></tr>
-<tr class="separator:ae87550e9fbbb19e6a336ae52aa621d02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a60e1ce85021dd3051698bc9bf980c09f"><td class="memItemLeft" align="right" valign="top"><a id="a60e1ce85021dd3051698bc9bf980c09f"></a>
-int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>minimum_count_</b></td></tr>
-<tr class="separator:a60e1ce85021dd3051698bc9bf980c09f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e56c7a68d8114dd5ff3e3a2ae90b7e4"><td class="memItemLeft" align="right" valign="top"><a id="a0e56c7a68d8114dd5ff3e3a2ae90b7e4"></a>
 <a class="el" href="classaudio__tools_1_1_tf_lite_results_queue.html">TfLiteResultsQueue</a>&lt; N &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>previous_results_</b></td></tr>
 <tr class="separator:a0e56c7a68d8114dd5ff3e3a2ae90b7e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -124,9 +115,9 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>previous_top_
 <tr class="memitem:a28914de6c8e32b9a431c3557d97c284f"><td class="memItemLeft" align="right" valign="top"><a id="a28914de6c8e32b9a431c3557d97c284f"></a>
 int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>previous_top_label_time_</b></td></tr>
 <tr class="separator:a28914de6c8e32b9a431c3557d97c284f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1fbf81be8f2b374af515769523b6cac8"><td class="memItemLeft" align="right" valign="top"><a id="a1fbf81be8f2b374af515769523b6cac8"></a>
-int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>suppression_ms_</b></td></tr>
-<tr class="separator:a1fbf81be8f2b374af515769523b6cac8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a06018891d6d76de5cc115eb49114fc"><td class="memItemLeft" align="right" valign="top"><a id="a8a06018891d6d76de5cc115eb49114fc"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>started</b> = false</td></tr>
+<tr class="separator:a8a06018891d6d76de5cc115eb49114fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;int N&gt;<br />

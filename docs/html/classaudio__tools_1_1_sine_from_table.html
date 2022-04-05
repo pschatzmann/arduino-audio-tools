@@ -111,9 +111,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setFrequency</b> (flo
 <tr class="memitem:a6b74e532d81cfc4a0e1529eea6f684e2 inherit pub_methods_classaudio__tools_1_1_sound_generator"><td class="memItemLeft" align="right" valign="top"><a id="a6b74e532d81cfc4a0e1529eea6f684e2"></a>
 virtual <a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>audioInfo</b> ()</td></tr>
 <tr class="separator:a6b74e532d81cfc4a0e1529eea6f684e2 inherit pub_methods_classaudio__tools_1_1_sound_generator"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a42d7a52e7f0ea7d41d539737b3dd09 inherit pub_methods_classaudio__tools_1_1_sound_generator"><td class="memItemLeft" align="right" valign="top"><a id="a8a42d7a52e7f0ea7d41d539737b3dd09"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> info)</td></tr>
-<tr class="separator:a8a42d7a52e7f0ea7d41d539737b3dd09 inherit pub_methods_classaudio__tools_1_1_sound_generator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3476e7ea0f2f4f1117ccd565c49ccde8 inherit pub_methods_classaudio__tools_1_1_sound_generator"><td class="memItemLeft" align="right" valign="top"><a id="a3476e7ea0f2f4f1117ccd565c49ccde8"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> info)</td></tr>
+<tr class="separator:a3476e7ea0f2f4f1117ccd565c49ccde8 inherit pub_methods_classaudio__tools_1_1_sound_generator"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a70ca14e7aa6e8041f164f2b3c8cef77a inherit pub_methods_classaudio__tools_1_1_sound_generator"><td class="memItemLeft" align="right" valign="top"><a id="a70ca14e7aa6e8041f164f2b3c8cef77a"></a>
 virtual <a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>defaultConfig</b> ()</td></tr>
 <tr class="separator:a70ca14e7aa6e8041f164f2b3c8cef77a inherit pub_methods_classaudio__tools_1_1_sound_generator"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -149,6 +149,9 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a8a26d87d1a4f53257449e66f73887ea6"><td class="memItemLeft" align="right" valign="top"><a id="a8a26d87d1a4f53257449e66f73887ea6"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>interpolate</b> (float angle)</td></tr>
 <tr class="separator:a8a26d87d1a4f53257449e66f73887ea6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50fe4ef900936d32fc12b6caee481dfc"><td class="memItemLeft" align="right" valign="top"><a id="a50fe4ef900936d32fc12b6caee481dfc"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>map</b> (float x, float in_min, float in_max, float out_min, float out_max)</td></tr>
+<tr class="separator:a50fe4ef900936d32fc12b6caee481dfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -159,11 +162,17 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>amplitude</b></td></
 float&#160;</td><td class="memItemRight" valign="bottom"><b>angle</b> = 0</td></tr>
 <tr class="separator:a6216b813d6100ef37574aec47a17c726"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade2d7105b0dbc36a9a56d3ae13086cdb"><td class="memItemLeft" align="right" valign="top"><a id="ade2d7105b0dbc36a9a56d3ae13086cdb"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>base_frequency</b></td></tr>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>base_frequency</b> = 1.0</td></tr>
 <tr class="separator:ade2d7105b0dbc36a9a56d3ae13086cdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5362255257ca1584ef92d4757aa5f720"><td class="memItemLeft" align="right" valign="top"><a id="a5362255257ca1584ef92d4757aa5f720"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_first</b> = true</td></tr>
+<tr class="separator:a5362255257ca1584ef92d4757aa5f720"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a94101729fdb038b44bde9252153f6147"><td class="memItemLeft" align="right" valign="top"><a id="a94101729fdb038b44bde9252153f6147"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>step</b> = 1.0</td></tr>
 <tr class="separator:a94101729fdb038b44bde9252153f6147"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a156abf3ff381ee4618d040079c2aa0b7"><td class="memItemLeft" align="right" valign="top"><a id="a156abf3ff381ee4618d040079c2aa0b7"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>step_new</b> = 1.0</td></tr>
+<tr class="separator:a156abf3ff381ee4618d040079c2aa0b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aebd17dc759d394a26752531e3ba0768e"><td class="memItemLeft" align="right" valign="top"><a id="aebd17dc759d394a26752531e3ba0768e"></a>
 const float&#160;</td><td class="memItemRight" valign="bottom"><b>values</b> [181] = {0, 0.0174524, 0.0348995, 0.052336, 0.0697565, 0.0871557, 0.104528, 0.121869, 0.139173, 0.156434, 0.173648, 0.190809, 0.207912, 0.224951, 0.241922, 0.258819, 0.275637, 0.292372, 0.309017, 0.325568, 0.34202, 0.358368, 0.374607, 0.390731, 0.406737, 0.422618, 0.438371, 0.45399, 0.469472, 0.48481, 0.5, 0.515038, 0.529919, 0.544639, 0.559193, 0.573576, 0.587785, 0.601815, 0.615661, 0.62932, 0.642788, 0.656059, 0.669131, 0.681998, 0.694658, 0.707107, 0.71934, 0.731354, 0.743145, 0.75471, 0.766044, 0.777146, 0.788011, 0.798636, 0.809017, 0.819152, 0.829038, 0.838671, 0.848048, 0.857167, 0.866025, 0.87462, 0.882948, 0.891007, 0.898794, 0.906308, 0.913545, 0.920505, 0.927184, 0.93358, 0.939693, 0.945519, 0.951057, 0.956305, 0.961262, 0.965926, 0.970296, 0.97437, 0.978148, 0.981627, 0.984808, 0.987688, 0.990268, 0.992546, 0.994522, 0.996195, 0.997564, 0.99863, 0.999391, 0.999848, 1, 0.999848, 0.999391, 0.99863, 0.997564, 0.996195, 0.994522, 0.992546, 0.990268, 0.987688, 0.984808, 0.981627, 0.978148, 0.97437, 0.970296, 0.965926, 0.961262, 0.956305, 0.951057, 0.945519, 0.939693, 0.93358, 0.927184, 0.920505, 0.913545, 0.906308, 0.898794, 0.891007, 0.882948, 0.87462, 0.866025, 0.857167, 0.848048, 0.838671, 0.829038, 0.819152, 0.809017, 0.798636, 0.788011, 0.777146, 0.766044, 0.75471, 0.743145, 0.731354, 0.71934, 0.707107, 0.694658, 0.681998, 0.669131, 0.656059, 0.642788, 0.62932, 0.615661, 0.601815, 0.587785, 0.573576, 0.559193, 0.544639, 0.529919, 0.515038, 0.5, 0.48481, 0.469472, 0.45399, 0.438371, 0.422618, 0.406737, 0.390731, 0.374607, 0.358368, 0.34202, 0.325568, 0.309017, 0.292372, 0.275637, 0.258819, 0.241922, 0.224951, 0.207912, 0.190809, 0.173648, 0.156434, 0.139173, 0.121869, 0.104528, 0.0871557, 0.0697565, 0.052336, 0.0348995, 0.0174524, 0}</td></tr>
 <tr class="separator:aebd17dc759d394a26752531e3ba0768e"><td class="memSeparator" colspan="2">&#160;</td></tr>

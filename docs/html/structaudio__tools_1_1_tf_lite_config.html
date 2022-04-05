@@ -81,27 +81,36 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a727064eafab17e5c65a262763fd61231"><td class="memItemLeft" align="right" valign="top"><a id="a727064eafab17e5c65a262763fd61231"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>audioSampleSize</b> ()</td></tr>
+<tr class="separator:a727064eafab17e5c65a262763fd61231"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3afde3dce5891298619f53a2cc61fed1"><td class="memItemLeft" align="right" valign="top"><a id="a3afde3dce5891298619f53a2cc61fed1"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>featureElementCount</b> ()</td></tr>
 <tr class="separator:a3afde3dce5891298619f53a2cc61fed1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1179437b16e3c7d3a98791eb1a1b65fe"><td class="memItemLeft" align="right" valign="top"><a id="a1179437b16e3c7d3a98791eb1a1b65fe"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>strideSampleSize</b> ()</td></tr>
+<tr class="separator:a1179437b16e3c7d3a98791eb1a1b65fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
+<tr class="memitem:a5e5bc51c3dc80d6ec8dc7a57ba5c7b0f"><td class="memItemLeft" align="right" valign="top"><a id="a5e5bc51c3dc80d6ec8dc7a57ba5c7b0f"></a>
+int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>average_window_duration_ms</b> = 1000</td></tr>
+<tr class="separator:a5e5bc51c3dc80d6ec8dc7a57ba5c7b0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19757a2806350716065d4321a85f9103"><td class="memItemLeft" align="right" valign="top"><a id="a19757a2806350716065d4321a85f9103"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b> = 1</td></tr>
+<tr class="separator:a19757a2806350716065d4321a85f9103"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a38df4fb12e0ee6bf9f1127312be435a0"><td class="memItemLeft" align="right" valign="top"><a id="a38df4fb12e0ee6bf9f1127312be435a0"></a>
 uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>detection_threshold</b> = 200</td></tr>
 <tr class="separator:a38df4fb12e0ee6bf9f1127312be435a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa12b0ee36417d7d256be6e3bc89c7560"><td class="memItemLeft" align="right" valign="top"><a id="aa12b0ee36417d7d256be6e3bc89c7560"></a>
-<a class="el" href="classaudio__tools_1_1_tf_lite_audio_feature_provider.html">TfLiteAudioFeatureProvider</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>featureProvider</b> =nullptr</td></tr>
+<a class="el" href="classaudio__tools_1_1_tf_lite_audio_feature_provider.html">TfLiteAudioFeatureProvider</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>featureProvider</b> = nullptr</td></tr>
 <tr class="separator:aa12b0ee36417d7d256be6e3bc89c7560"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aad5587fa9abdcd149e7b9331e7276c2b"><td class="memItemLeft" align="right" valign="top"><a id="aad5587fa9abdcd149e7b9331e7276c2b"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>int32_t</b> = 1000</td></tr>
-<tr class="separator:aad5587fa9abdcd149e7b9331e7276c2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a07644c0147fd69035a7657478087305f"><td class="memItemLeft" align="right" valign="top"><a id="a07644c0147fd69035a7657478087305f"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>kAudioChannels</b> = 1</td></tr>
-<tr class="separator:a07644c0147fd69035a7657478087305f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ce47a699df70dfb3b69830ba8b0b8ed"><td class="memItemLeft" align="right" valign="top"><a id="a7ce47a699df70dfb3b69830ba8b0b8ed"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>kAudioSampleFrequency</b> = 16000</td></tr>
-<tr class="separator:a7ce47a699df70dfb3b69830ba8b0b8ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ced3041a84d3a75b73282352de5a8f9"><td class="memItemLeft" align="right" valign="top"><a id="a4ced3041a84d3a75b73282352de5a8f9"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>filterbank_lower_band_limit</b> = 125.0</td></tr>
+<tr class="separator:a4ced3041a84d3a75b73282352de5a8f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a518f383d253c7b5cd71193be1a23d32d"><td class="memItemLeft" align="right" valign="top"><a id="a518f383d253c7b5cd71193be1a23d32d"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>filterbank_upper_band_limit</b> = 7500.0</td></tr>
+<tr class="separator:a518f383d253c7b5cd71193be1a23d32d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08937530839663fc2441230cf8934498"><td class="memItemLeft" align="right" valign="top"><a id="a08937530839663fc2441230cf8934498"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>kFeatureSliceCount</b> = 49</td></tr>
 <tr class="separator:a08937530839663fc2441230cf8934498"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -114,32 +123,62 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>kFeatureSliceSize</b> 
 <tr class="memitem:a35d10edfc029d8589115387e10109f01"><td class="memItemLeft" align="right" valign="top"><a id="a35d10edfc029d8589115387e10109f01"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>kFeatureSliceStrideMs</b> = 20</td></tr>
 <tr class="separator:a35d10edfc029d8589115387e10109f01"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3eca48e5238b9bb4268a3cfd0d60c747"><td class="memItemLeft" align="right" valign="top"><a id="a3eca48e5238b9bb4268a3cfd0d60c747"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>kMaxAudioSampleSize</b> = 480</td></tr>
-<tr class="separator:a3eca48e5238b9bb4268a3cfd0d60c747"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3673156a5b535c2d1173cd0c118a22ce"><td class="memItemLeft" align="right" valign="top"><a id="a3673156a5b535c2d1173cd0c118a22ce"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>kSlicesToProcess</b> = 3</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>kSlicesToProcess</b> = 2</td></tr>
 <tr class="separator:a3673156a5b535c2d1173cd0c118a22ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af22b0f62002248b936bf047f165c7609"><td class="memItemLeft" align="right" valign="top"><a id="af22b0f62002248b936bf047f165c7609"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>kTensorArenaSize</b> = 10 * 1024</td></tr>
 <tr class="separator:af22b0f62002248b936bf047f165c7609"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a969102cf9651eecac249a35ff432ff0b"><td class="memItemLeft" align="right" valign="top"><a id="a969102cf9651eecac249a35ff432ff0b"></a>
-const char **&#160;</td><td class="memItemRight" valign="bottom"><b>labels</b> =nullptr</td></tr>
+const char **&#160;</td><td class="memItemRight" valign="bottom"><b>labels</b> = nullptr</td></tr>
 <tr class="separator:a969102cf9651eecac249a35ff432ff0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c6aeb91b8802492cafbc32376e43a05"><td class="memItemLeft" align="right" valign="top"><a id="a8c6aeb91b8802492cafbc32376e43a05"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>log_scale_enable_log</b> = 1</td></tr>
+<tr class="separator:a8c6aeb91b8802492cafbc32376e43a05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fc0802c4064b6afa4468d26a3e4a291"><td class="memItemLeft" align="right" valign="top"><a id="a6fc0802c4064b6afa4468d26a3e4a291"></a>
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>log_scale_scale_shift</b> = 6</td></tr>
+<tr class="separator:a6fc0802c4064b6afa4468d26a3e4a291"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e642a439099288328d5a581fc6877ce"><td class="memItemLeft" align="right" valign="top"><a id="a1e642a439099288328d5a581fc6877ce"></a>
 int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>minimum_count</b> = 3</td></tr>
 <tr class="separator:a1e642a439099288328d5a581fc6877ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4747f989c2205721c200b5ce0d14fb9d"><td class="memItemLeft" align="right" valign="top"><a id="a4747f989c2205721c200b5ce0d14fb9d"></a>
-const unsigned char *&#160;</td><td class="memItemRight" valign="bottom"><b>model</b> =nullptr</td></tr>
+const unsigned char *&#160;</td><td class="memItemRight" valign="bottom"><b>model</b> = nullptr</td></tr>
 <tr class="separator:a4747f989c2205721c200b5ce0d14fb9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43f5800cb7a62f57a4706eb970f8f75f"><td class="memItemLeft" align="right" valign="top"><a id="a43f5800cb7a62f57a4706eb970f8f75f"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>noise_reduction_even_smoothing</b> = 0.025</td></tr>
+<tr class="separator:a43f5800cb7a62f57a4706eb970f8f75f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3d5c69b3c0280aa1522e78df982f793"><td class="memItemLeft" align="right" valign="top"><a id="af3d5c69b3c0280aa1522e78df982f793"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>noise_reduction_min_signal_remaining</b> = 0.05</td></tr>
+<tr class="separator:af3d5c69b3c0280aa1522e78df982f793"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe0abbe1861d4b0437505f62b737ea61"><td class="memItemLeft" align="right" valign="top"><a id="abe0abbe1861d4b0437505f62b737ea61"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>noise_reduction_odd_smoothing</b> = 0.06</td></tr>
+<tr class="separator:abe0abbe1861d4b0437505f62b737ea61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acefcae03e10305879f4c9d1648329056"><td class="memItemLeft" align="right" valign="top"><a id="acefcae03e10305879f4c9d1648329056"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>noise_reduction_smoothing_bits</b> = 10</td></tr>
+<tr class="separator:acefcae03e10305879f4c9d1648329056"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb089f75a374bc3bd258b853f28d5b47"><td class="memItemLeft" align="right" valign="top"><a id="aeb089f75a374bc3bd258b853f28d5b47"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>pcan_gain_control_enable_pcan</b> = 1</td></tr>
+<tr class="separator:aeb089f75a374bc3bd258b853f28d5b47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96e320f3e7da15ab5d7ff525543112e7"><td class="memItemLeft" align="right" valign="top"><a id="a96e320f3e7da15ab5d7ff525543112e7"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>pcan_gain_control_gain_bits</b> = 21</td></tr>
+<tr class="separator:a96e320f3e7da15ab5d7ff525543112e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a861a31c838764a9c1159e62c1fb26bcd"><td class="memItemLeft" align="right" valign="top"><a id="a861a31c838764a9c1159e62c1fb26bcd"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>pcan_gain_control_offset</b> = 80.0</td></tr>
+<tr class="separator:a861a31c838764a9c1159e62c1fb26bcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a853633bf9f1e38d6367a3989df695a5c"><td class="memItemLeft" align="right" valign="top"><a id="a853633bf9f1e38d6367a3989df695a5c"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>pcan_gain_control_strength</b> = 0.95</td></tr>
+<tr class="separator:a853633bf9f1e38d6367a3989df695a5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57a5c83dd04535205743ffab4651cfba"><td class="memItemLeft" align="right" valign="top"><a id="a57a5c83dd04535205743ffab4651cfba"></a>
 void(*&#160;</td><td class="memItemRight" valign="bottom"><b>respondToCommand</b> )(const char *found_command, uint8_t score, bool is_new_command) = nullptr</td></tr>
 <tr class="separator:a57a5c83dd04535205743ffab4651cfba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e2e3d2ffc9c3091451ef8f142ea8a28"><td class="memItemLeft" align="right" valign="top"><a id="a1e2e3d2ffc9c3091451ef8f142ea8a28"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>sample_rate</b> = 16000</td></tr>
+<tr class="separator:a1e2e3d2ffc9c3091451ef8f142ea8a28"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c9af32aefd31868be87bf06b8769f8d"><td class="memItemLeft" align="right" valign="top"><a id="a2c9af32aefd31868be87bf06b8769f8d"></a>
 int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>suppression_ms</b> = 1500</td></tr>
 <tr class="separator:a2c9af32aefd31868be87bf06b8769f8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a692b480ec8e7dc6b1f6496441c68dd6c"><td class="memItemLeft" align="right" valign="top"><a id="a692b480ec8e7dc6b1f6496441c68dd6c"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>useAllOpsResolver</b> =false</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>useAllOpsResolver</b> = false</td></tr>
 <tr class="separator:a692b480ec8e7dc6b1f6496441c68dd6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>

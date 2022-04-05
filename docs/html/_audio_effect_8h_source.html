@@ -353,7 +353,7 @@ $(function() {
 <div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160; </div>
 <div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;        <span class="keywordtype">void</span> updateBufferSize(){</div>
 <div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;            uint16_t newSampleCount = sampleRate * p_ms / 1000;</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;            <span class="keywordflow">if</span> (newSampleCount&gt;sampleCount){</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;            <span class="keywordflow">if</span> (newSampleCount!=sampleCount){</div>
 <div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;                <span class="keywordflow">if</span> (p_history!=<span class="keyword">nullptr</span>) <span class="keyword">delete</span> p_history;</div>
 <div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;                sampleCount = newSampleCount;</div>
 <div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;                p_history = <span class="keyword">new</span> RingBuffer&lt;effect_t&gt;(sampleCount);</div>
