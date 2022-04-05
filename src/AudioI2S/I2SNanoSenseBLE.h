@@ -1,8 +1,8 @@
 #pragma once
 
-#if defined(ARDUINO_ARDUINO_NANO33BLE) 
-
 #include "AudioConfig.h"
+#if defined(USE_NANO33BLE) 
+
 #include "AudioTools/AudioTypes.h"
 #include "AudioTools/Buffers.h"
 #include "AudioTools/AudioLogger.h"

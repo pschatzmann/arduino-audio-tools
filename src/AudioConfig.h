@@ -218,7 +218,14 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #endif
 
 //----------------
-#ifdef ARDUINO_ARDUINO_NANO33BLE
+#ifdef ARDUINO_SEEED_XIAO_NRF52840_SENSE
+#define USE_NANO33BLE 
+#endif 
+#ifdef ARDUINO_ARDUINO_NANO33BLE 
+#define USE_NANO33BLE 
+#endif
+
+#ifdef USE_NANO33BLE 
 #define USE_I2S
 #define USE_PWM
 #define USE_TYPETRAITS
