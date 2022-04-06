@@ -9,5 +9,7 @@ RUN mkdir /content
 WORKDIR /content
 VOLUME /content
 ADD micro_speech_with_lstm_op.ipynb /content
+ADD train_micro_speech_model.ipynb /content
+RUN apt-get update && apt-get install git -y && apt-get upgrade -y
 EXPOSE 8888
 CMD ["jupyter", "lab", "--no-browser", "--allow-root", "--ip=0.0.0.0" ]
