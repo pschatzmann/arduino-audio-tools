@@ -718,10 +718,10 @@ class TfLiteAudioOutput : public AudioPrint {
   }
 
   /// Constant streaming
-  int availableToWrite() { return DEFAULT_BUFFER_SIZE; }
+  virtual int availableToWrite() { return DEFAULT_BUFFER_SIZE; }
 
   /// process the data in batches of max kMaxAudioSampleSize.
-  size_t write(const uint8_t* audio, size_t bytes) {
+  virtual size_t write(const uint8_t* audio, size_t bytes) {
     LOGD(LOG_METHOD);
     if (feature_provider==nullptr){
       LOGE("feature_provider is null");
@@ -763,7 +763,7 @@ class TfLiteAudioOutput : public AudioPrint {
   uint8_t* tensor_arena = nullptr;
   int8_t* model_input_buffer = nullptr;
 
-  bool setModel(const unsigned char* model) {
+  virtual bool setModel(const unsigned char* model) {
     LOGD(LOG_METHOD);
     p_model = tflite::GetModel(model);
     if (p_model->version() != TFLITE_SCHEMA_VERSION) {
@@ -776,7 +776,7 @@ class TfLiteAudioOutput : public AudioPrint {
     return true;
   }
 
-  bool setupRecognizer() {
+  virtual bool setupRecognizer() {
     // setup default recognizer if not defined
     if (recognizer == nullptr) {
       static TfLiteRecognizeCommands<N> static_recognizer;
@@ -785,7 +785,7 @@ class TfLiteAudioOutput : public AudioPrint {
     return recognizer->begin(cfg);
   }
 
-  bool setupFeatureProvider() {
+  virtual bool setupFeatureProvider() {
     if (cfg.featureProvider != nullptr) {
       feature_provider = cfg.featureProvider;
     } else {
@@ -801,7 +801,7 @@ class TfLiteAudioOutput : public AudioPrint {
   // incur some penalty in code space for op implementations that are not
   // needed by this graph.
   //
-  bool setupInterpreter() {
+  virtual bool setupInterpreter() {
     if (interpreter == nullptr) {
       LOGI(LOG_METHOD);
       if (cfg.useAllOpsResolver) {
@@ -837,7 +837,7 @@ class TfLiteAudioOutput : public AudioPrint {
   }
 
   // Process multiple slice of audio data 
-  bool processSlices(int8_t* feature_buffer) {
+  virtual bool processSlices(int8_t* feature_buffer) {
     LOGI("->slices: %d", total_slice_count);
     // Copy feature buffer to input tensor
     // int8_t *feature_buffer = feature_provider->featureData();
