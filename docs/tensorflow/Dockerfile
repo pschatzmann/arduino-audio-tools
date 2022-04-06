@@ -1,7 +1,8 @@
-FROM tensorflow/tensorflow:latest-jupyter
+FROM snowzach/tensorflow-multiarch
+#FROM tensorflow/tensorflow:latest-jupyter
 LABEL maintainer="phil schatzmann"
 RUN /usr/bin/python3 -m pip install --upgrade pip
-RUN pip3 install seaborn matplotlib
+RUN pip3 install seaborn matplotlib jupyterlab
 
 # Working directory
 RUN mkdir /home/tensorflow
