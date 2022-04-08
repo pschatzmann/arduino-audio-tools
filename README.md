@@ -29,6 +29,7 @@ As “Audio Sources” we will have e.g.:
 - A Timer based Source - [TimerCallbackAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_timer_callback_audio_stream.html)
 - ESP32 AudioKit - [AudioKitStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_audio_kit_stream.html)
 - Filtered Input - [FilteredStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_filtered_stream.html)
+- Tensorflow Lite - [TfLiteAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_tf_lite_audio_stream.html)
 - Any other Arduino Classes implementing Streams: SD, Ethernet etc
 
 As “Audio Sinks” we will have e.g:
@@ -46,7 +47,7 @@ As “Audio Sinks” we will have e.g:
 - ESP32 AudioKit - [AudioKitStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_audio_kit_stream.html)
 - Callback integration e.g. with ESP8266Audio [AudioOutputWithCallback](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_audio_output_with_callback.html) 
 - Filtered Output - [FilteredStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_filtered_stream.html)
-- Tensorflow Lite - [TfLiteAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_tf_lite_audio_output.html)
+- Tensorflow Lite - [TfLiteAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_tf_lite_audio_stream.html)
 - Any other Arduino Classes implementing Streams: SD, Ethernet etc
 
 ### Examples
