@@ -871,6 +871,60 @@ class VolumeStream : public AudioStreamX {
         }
 };
 
+/**
+ * @brief MixerStream is mixing the input from Multiple Input Streams.
+ * All streams must have the same audo format (sample rate, channels, bits per sample) 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+
+template<typename T>
+class Mixer : public AudioStreamX {
+  public:
+    Mixer() = default;
+
+    /// Adds a new input stream
+    void add(Stream &in, float weight=1.0){
+      streams.push_back(&in);
+      weights.push_back(weight);
+      total_weights += weight;
+    }
+
+    /// Removes all input stream
+    void clear() {
+      streams.clear();
+      total_weights = 0.0;
+    }
+
+    /// Provides the mixed 
+    size_t readBytes(uint8_t* data, size_t len){
+      int sample_count = len / sizeof(T);
+      T* samples_result = (T*)data;
+      memset(data,0, len); // clear data so that we can add values
+      buffer.resize(len); // usually does only something the first time
+      memset(&buffer[0],0, len); // if no data is read we have an array of 0
+      T* samples_in = (T*)&buffer[0];
+      for (int j=0;j<size();j++){
+        streams[j]->readBytes(&buffer[0], len);
+        for (int i=0;i<sample_count; i++){
+          samples_result[i] =+ weights[j] * samples_in[i] / total_weights;
+        }
+      }
+      return len;
+    }
+
+    int size() {
+      return streams.size();
+    }
+
+  protected:
+    Vector<Stream*> streams;
+    Vector<uint8_t> buffer;
+    Vector<float> weights; 
+    float total_weights = 0;
+
+};
+
 // support legicy VolumeOutput
 //typedef VolumeStream VolumeOutput;
 
