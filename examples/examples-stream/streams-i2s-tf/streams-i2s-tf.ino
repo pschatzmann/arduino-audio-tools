@@ -1,10 +1,19 @@
+/**
+ * @file streams-i2s-tf.ino
+ * @author Phil Schatzmann
+ * @brief We read audio data from a I2S Microphone and send it to Tensorflow Lite to recognize the words yes and no
+ * @version 0.1
+ * @date 2022-04-07
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
 #include "AudioLibs/TfLiteAudioStream.h"
 #include "model.h"  // tensorflow model
 
-AudioKitStream kit;  // Audio source
+I2SStream i2s;  // Audio source
 TfLiteAudioStream tfl;  // Audio sink
 const char* kCategoryLabels[4] = {
     "silence",
@@ -12,7 +21,7 @@ const char* kCategoryLabels[4] = {
     "yes",
     "no",
 };
-StreamCopy copier(tfl, kit);  // copy mic to tfl
+StreamCopy copier(tfl, i2s);  // copy mic to tfl
 int channels = 1;
 int samples_per_second = 16000;
 
@@ -30,8 +39,8 @@ void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Warning);
 
-  // setup Audiokit
-  auto cfg = kit.defaultConfig(RX_MODE);
+  // setup Audioi2s input
+  auto cfg = i2s.defaultConfig(RX_MODE);
   cfg.input_device = AUDIO_HAL_ADC_INPUT_LINE2;
   cfg.channels = channels;
   cfg.sample_rate = samples_per_second;
@@ -39,9 +48,9 @@ void setup() {
   cfg.auto_clear = true;
   cfg.buffer_size = 512;
   cfg.buffer_count = 16;
-  kit.begin(cfg);
+  i2s.begin(cfg);
 
-  // Setup tensorflow
+  // Setup tensorflow output
   auto tcfg = tfl.defaultConfig();
   tcfg.setCategories(kCategoryLabels);
   tcfg.channels = channels;

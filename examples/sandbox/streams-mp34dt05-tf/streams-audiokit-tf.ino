@@ -10,12 +10,12 @@
  */
 #include "AudioTools.h"
 #include "AudioLibs/AudioMP34DT05.h"
-#include "AudioLibs/TfLiteAudioOutput.h"
+#include "AudioLibs/TfLiteAudioStream.h"
 #include "model.h"  // tensorflow model
 
 AudioMP34DT05 mic; // Access I2S as stream
 TfLiteAudioFeatureProvider fp;
-TfLiteAudioOutput<4> tfl;  // Audio sink
+TfLiteAudioStream tfl;  // Audio sink
 const char* kCategoryLabels[4] = {
     "silence",
     "unknown",
