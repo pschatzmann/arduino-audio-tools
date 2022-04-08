@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: audio_tools::TfLiteRecognizeCommands&lt; N &gt; Class Template Reference</title>
+<title>arduino-audio-tools: audio_tools::TfLiteRecognizeCommands Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -70,62 +70,59 @@ $(function() {
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_tf_lite_recognize_commands-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">audio_tools::TfLiteRecognizeCommands&lt; N &gt; Class Template Reference</div>  </div>
+<div class="title">audio_tools::TfLiteRecognizeCommands Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>This class is designed to apply a very primitive decoding model on top of the instantaneous results from running an audio recognition model on a single window of samples. It applies smoothing over time so that noisy individual label scores are averaged, increasing the confidence that apparent matches are real. To use it, you should create a class object with the configuration you want, and then feed results from running a TensorFlow model into the processing method. The timestamp for each subsequent call should be increasing from the previous, since the class is designed to process a stream of data over time.  
  <a href="classaudio__tools_1_1_tf_lite_recognize_commands.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_tf_lite_audio_output_8h_source.html">TfLiteAudioOutput.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_tf_lite_audio_stream_8h_source.html">TfLiteAudioStream.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for audio_tools::TfLiteRecognizeCommands&lt; N &gt;:</div>
+Inheritance diagram for audio_tools::TfLiteRecognizeCommands:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classaudio__tools_1_1_tf_lite_recognize_commands.png" usemap="#audio_5Ftools::TfLiteRecognizeCommands_3C_20N_20_3E_map" alt=""/>
-  <map id="audio_5Ftools::TfLiteRecognizeCommands_3C_20N_20_3E_map" name="audio_5Ftools::TfLiteRecognizeCommands_3C_20N_20_3E_map">
-<area href="classaudio__tools_1_1_tf_lite_abstract_recognize_commands.html" title="Base class for implementing different primitive decoding models on top of the instantaneous results f..." alt="audio_tools::TfLiteAbstractRecognizeCommands&lt; N &gt;" shape="rect" coords="0,0,313,24"/>
+  <img src="classaudio__tools_1_1_tf_lite_recognize_commands.png" usemap="#audio_5Ftools::TfLiteRecognizeCommands_map" alt=""/>
+  <map id="audio_5Ftools::TfLiteRecognizeCommands_map" name="audio_5Ftools::TfLiteRecognizeCommands_map">
+<area href="classaudio__tools_1_1_tf_lite_abstract_recognize_commands.html" title="Base class for implementing different primitive decoding models on top of the instantaneous results f..." alt="audio_tools::TfLiteAbstractRecognizeCommands" shape="rect" coords="0,0,280,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a56e5422169e977fca4870b41d3e3c81a"><td class="memItemLeft" align="right" valign="top"><a id="a56e5422169e977fca4870b41d3e3c81a"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tf_lite_recognize_commands.html#a56e5422169e977fca4870b41d3e3c81a">begin</a> (<a class="el" href="structaudio__tools_1_1_tf_lite_config.html">TfLiteConfig</a> cfg) override</td></tr>
-<tr class="memdesc:a56e5422169e977fca4870b41d3e3c81a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup parameters from config. <br /></td></tr>
-<tr class="separator:a56e5422169e977fca4870b41d3e3c81a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a628e40d991e5410927dd26bba3f0595a"><td class="memItemLeft" align="right" valign="top"><a id="a628e40d991e5410927dd26bba3f0595a"></a>
+<tr class="memitem:ad60dddcac4f78946d7c3a01bfa8c2f8c"><td class="memItemLeft" align="right" valign="top"><a id="ad60dddcac4f78946d7c3a01bfa8c2f8c"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tf_lite_recognize_commands.html#ad60dddcac4f78946d7c3a01bfa8c2f8c">begin</a> (<a class="el" href="structaudio__tools_1_1_tf_lite_config.html">TfLiteConfig</a> cfg) override</td></tr>
+<tr class="memdesc:ad60dddcac4f78946d7c3a01bfa8c2f8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup parameters from config. <br /></td></tr>
+<tr class="separator:ad60dddcac4f78946d7c3a01bfa8c2f8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28b00a7cec258ea71ac6bf15e0634538"><td class="memItemLeft" align="right" valign="top"><a id="a28b00a7cec258ea71ac6bf15e0634538"></a>
 virtual TfLiteStatus&#160;</td><td class="memItemRight" valign="bottom"><b>processLatestResults</b> (const TfLiteTensor *latest_results, const int32_t current_time_ms, const char **found_command, uint8_t *score, bool *is_new_command) override</td></tr>
-<tr class="separator:a628e40d991e5410927dd26bba3f0595a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a28b00a7cec258ea71ac6bf15e0634538"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a7a22e8dd2fdd9658f959694a86aa99eb"><td class="memItemLeft" align="right" valign="top"><a id="a7a22e8dd2fdd9658f959694a86aa99eb"></a>
+<tr class="memitem:a9bfa086f8cc15e87175ec7eea7163703"><td class="memItemLeft" align="right" valign="top"><a id="a9bfa086f8cc15e87175ec7eea7163703"></a>
 <a class="el" href="structaudio__tools_1_1_tf_lite_config.html">TfLiteConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><b>cfg</b></td></tr>
-<tr class="separator:a7a22e8dd2fdd9658f959694a86aa99eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ad5e4daae16018d48bfabe11b9e873e"><td class="memItemLeft" align="right" valign="top"><a id="a3ad5e4daae16018d48bfabe11b9e873e"></a>
+<tr class="separator:a9bfa086f8cc15e87175ec7eea7163703"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefab61d4f9313bf69e33c81570955e6d"><td class="memItemLeft" align="right" valign="top"><a id="aefab61d4f9313bf69e33c81570955e6d"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>kCategoryCount</b></td></tr>
-<tr class="separator:a3ad5e4daae16018d48bfabe11b9e873e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0e56c7a68d8114dd5ff3e3a2ae90b7e4"><td class="memItemLeft" align="right" valign="top"><a id="a0e56c7a68d8114dd5ff3e3a2ae90b7e4"></a>
-<a class="el" href="classaudio__tools_1_1_tf_lite_results_queue.html">TfLiteResultsQueue</a>&lt; N &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>previous_results_</b></td></tr>
-<tr class="separator:a0e56c7a68d8114dd5ff3e3a2ae90b7e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d1dd20d09adeaef5251c6a7f109e9d9"><td class="memItemLeft" align="right" valign="top"><a id="a4d1dd20d09adeaef5251c6a7f109e9d9"></a>
+<tr class="separator:aefab61d4f9313bf69e33c81570955e6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b3443975ae77c0dafbf398e1763db37"><td class="memItemLeft" align="right" valign="top"><a id="a5b3443975ae77c0dafbf398e1763db37"></a>
+<a class="el" href="classaudio__tools_1_1_tf_lite_results_queue.html">TfLiteResultsQueue</a>&#160;</td><td class="memItemRight" valign="bottom"><b>previous_results_</b></td></tr>
+<tr class="separator:a5b3443975ae77c0dafbf398e1763db37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad31e47a4e2c65f170fe3f4ede2ca9b59"><td class="memItemLeft" align="right" valign="top"><a id="ad31e47a4e2c65f170fe3f4ede2ca9b59"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><b>previous_top_label_</b></td></tr>
-<tr class="separator:a4d1dd20d09adeaef5251c6a7f109e9d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28914de6c8e32b9a431c3557d97c284f"><td class="memItemLeft" align="right" valign="top"><a id="a28914de6c8e32b9a431c3557d97c284f"></a>
+<tr class="separator:ad31e47a4e2c65f170fe3f4ede2ca9b59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc4b9edc01a7c2e389f7e94f7f1d0951"><td class="memItemLeft" align="right" valign="top"><a id="adc4b9edc01a7c2e389f7e94f7f1d0951"></a>
 int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>previous_top_label_time_</b></td></tr>
-<tr class="separator:a28914de6c8e32b9a431c3557d97c284f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a06018891d6d76de5cc115eb49114fc"><td class="memItemLeft" align="right" valign="top"><a id="a8a06018891d6d76de5cc115eb49114fc"></a>
+<tr class="separator:adc4b9edc01a7c2e389f7e94f7f1d0951"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c4fdac9106eff50c18f86f8def910b5"><td class="memItemLeft" align="right" valign="top"><a id="a6c4fdac9106eff50c18f86f8def910b5"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>started</b> = false</td></tr>
-<tr class="separator:a8a06018891d6d76de5cc115eb49114fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a6c4fdac9106eff50c18f86f8def910b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;int N&gt;<br />
-class audio_tools::TfLiteRecognizeCommands&lt; N &gt;</h3>
-
-<p>This class is designed to apply a very primitive decoding model on top of the instantaneous results from running an audio recognition model on a single window of samples. It applies smoothing over time so that noisy individual label scores are averaged, increasing the confidence that apparent matches are real. To use it, you should create a class object with the configuration you want, and then feed results from running a TensorFlow model into the processing method. The timestamp for each subsequent call should be increasing from the previous, since the class is designed to process a stream of data over time. </p>
+<div class="textblock"><p>This class is designed to apply a very primitive decoding model on top of the instantaneous results from running an audio recognition model on a single window of samples. It applies smoothing over time so that noisy individual label scores are averaged, increasing the confidence that apparent matches are real. To use it, you should create a class object with the configuration you want, and then feed results from running a TensorFlow model into the processing method. The timestamp for each subsequent call should be increasing from the previous, since the class is designed to process a stream of data over time. </p>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioLibs/<a class="el" href="_tf_lite_audio_output_8h_source.html">TfLiteAudioOutput.h</a></li>
+<li>src/AudioLibs/<a class="el" href="_tf_lite_audio_stream_8h_source.html">TfLiteAudioStream.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

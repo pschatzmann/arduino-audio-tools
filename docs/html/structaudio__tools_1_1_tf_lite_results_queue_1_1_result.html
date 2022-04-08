@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: audio_tools::TfLiteResultsQueue&lt; N &gt;::Result Struct Reference</title>
+<title>arduino-audio-tools: audio_tools::TfLiteResultsQueue::Result Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -70,27 +70,36 @@ $(function() {
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="structaudio__tools_1_1_tf_lite_results_queue_1_1_result-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">audio_tools::TfLiteResultsQueue&lt; N &gt;::Result Struct Reference</div>  </div>
+<div class="title">audio_tools::TfLiteResultsQueue::Result Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa0daf080dfdbb39959f3008b399f9903"><td class="memItemLeft" align="right" valign="top"><a id="aa0daf080dfdbb39959f3008b399f9903"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Result</b> (int32_t time, int8_t *input_scores)</td></tr>
-<tr class="separator:aa0daf080dfdbb39959f3008b399f9903"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95ad026a8cb97679e39c51112b7f6af4"><td class="memItemLeft" align="right" valign="top"><a id="a95ad026a8cb97679e39c51112b7f6af4"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Result</b> (const <a class="el" href="structaudio__tools_1_1_tf_lite_results_queue_1_1_result.html">Result</a> &amp;old_obj)</td></tr>
+<tr class="separator:a95ad026a8cb97679e39c51112b7f6af4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c3ccb37e434051ebf1543dc40729810"><td class="memItemLeft" align="right" valign="top"><a id="a0c3ccb37e434051ebf1543dc40729810"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Result</b> (int categoryCount, int32_t time, int8_t *input_scores)</td></tr>
+<tr class="separator:a0c3ccb37e434051ebf1543dc40729810"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8244e0c22e67f1b3231d5fc77cb31c3"><td class="memItemLeft" align="right" valign="top"><a id="ae8244e0c22e67f1b3231d5fc77cb31c3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setCategoryCount</b> (int count)</td></tr>
+<tr class="separator:ae8244e0c22e67f1b3231d5fc77cb31c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a9d68d90de658befaa97e0e985423c079"><td class="memItemLeft" align="right" valign="top"><a id="a9d68d90de658befaa97e0e985423c079"></a>
-int8_t&#160;</td><td class="memItemRight" valign="bottom"><b>scores</b> [N]</td></tr>
-<tr class="separator:a9d68d90de658befaa97e0e985423c079"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a931647358244a7e1434a7354392b2aeb"><td class="memItemLeft" align="right" valign="top"><a id="a931647358244a7e1434a7354392b2aeb"></a>
-int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>time_</b></td></tr>
-<tr class="separator:a931647358244a7e1434a7354392b2aeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a70a7684018ba2951d335dce1a20fd8"><td class="memItemLeft" align="right" valign="top"><a id="a9a70a7684018ba2951d335dce1a20fd8"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>kCategoryCount</b> =0</td></tr>
+<tr class="separator:a9a70a7684018ba2951d335dce1a20fd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf5ed429c32288b9b13efff1abb1c48f"><td class="memItemLeft" align="right" valign="top"><a id="abf5ed429c32288b9b13efff1abb1c48f"></a>
+int8_t *&#160;</td><td class="memItemRight" valign="bottom"><b>scores</b> =nullptr</td></tr>
+<tr class="separator:abf5ed429c32288b9b13efff1abb1c48f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a2b7e1b5d2c92013a803c24df0a78ae"><td class="memItemLeft" align="right" valign="top"><a id="a5a2b7e1b5d2c92013a803c24df0a78ae"></a>
+int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>time_</b> =0</td></tr>
+<tr class="separator:a5a2b7e1b5d2c92013a803c24df0a78ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>src/AudioLibs/<a class="el" href="_tf_lite_audio_output_8h_source.html">TfLiteAudioOutput.h</a></li>
+<li>src/AudioLibs/<a class="el" href="_tf_lite_audio_stream_8h_source.html">TfLiteAudioStream.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

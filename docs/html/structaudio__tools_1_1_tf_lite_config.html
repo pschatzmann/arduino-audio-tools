@@ -68,25 +68,34 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
 <a href="structaudio__tools_1_1_tf_lite_config-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">audio_tools::TfLiteConfig Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Configuration settings for <a class="el" href="classaudio__tools_1_1_tf_lite_audio_output.html" title="TfLiteAudioOutput which uses Tensorflow Light to analyze the data.">TfLiteAudioOutput</a>.  
+<p>Configuration settings for <a class="el" href="classaudio__tools_1_1_tf_lite_audio_stream.html" title="TfLiteAudioStream which uses Tensorflow Light to analyze the data. If it is used as a generator (wher...">TfLiteAudioStream</a>.  
  <a href="structaudio__tools_1_1_tf_lite_config.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_tf_lite_audio_output_8h_source.html">TfLiteAudioOutput.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_tf_lite_audio_stream_8h_source.html">TfLiteAudioStream.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a727064eafab17e5c65a262763fd61231"><td class="memItemLeft" align="right" valign="top"><a id="a727064eafab17e5c65a262763fd61231"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>audioSampleSize</b> ()</td></tr>
 <tr class="separator:a727064eafab17e5c65a262763fd61231"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af406102142184e26b7e13811d6d16dab"><td class="memItemLeft" align="right" valign="top"><a id="af406102142184e26b7e13811d6d16dab"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>categoryCount</b> ()</td></tr>
+<tr class="separator:af406102142184e26b7e13811d6d16dab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3afde3dce5891298619f53a2cc61fed1"><td class="memItemLeft" align="right" valign="top"><a id="a3afde3dce5891298619f53a2cc61fed1"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>featureElementCount</b> ()</td></tr>
 <tr class="separator:a3afde3dce5891298619f53a2cc61fed1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc55277c4335fcf89ee8d2ecb583320f"><td class="memTemplParams" colspan="2"><a id="acc55277c4335fcf89ee8d2ecb583320f"></a>
+template&lt;int N&gt; </td></tr>
+<tr class="memitem:acc55277c4335fcf89ee8d2ecb583320f"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_tf_lite_config.html#acc55277c4335fcf89ee8d2ecb583320f">setCategories</a> (const char *(&amp;array)[N])</td></tr>
+<tr class="memdesc:acc55277c4335fcf89ee8d2ecb583320f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the labels. <br /></td></tr>
+<tr class="separator:acc55277c4335fcf89ee8d2ecb583320f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1179437b16e3c7d3a98791eb1a1b65fe"><td class="memItemLeft" align="right" valign="top"><a id="a1179437b16e3c7d3a98791eb1a1b65fe"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>strideSampleSize</b> ()</td></tr>
 <tr class="separator:a1179437b16e3c7d3a98791eb1a1b65fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -111,6 +120,9 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>filterbank_lower_ban
 <tr class="memitem:a518f383d253c7b5cd71193be1a23d32d"><td class="memItemLeft" align="right" valign="top"><a id="a518f383d253c7b5cd71193be1a23d32d"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>filterbank_upper_band_limit</b> = 7500.0</td></tr>
 <tr class="separator:a518f383d253c7b5cd71193be1a23d32d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00e739dbeb6a2f02b81d65452ce290aa"><td class="memItemLeft" align="right" valign="top"><a id="a00e739dbeb6a2f02b81d65452ce290aa"></a>
+<a class="el" href="classaudio__tools_1_1_tf_lite_reader.html">TfLiteReader</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>input</b> = nullptr</td></tr>
+<tr class="separator:a00e739dbeb6a2f02b81d65452ce290aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08937530839663fc2441230cf8934498"><td class="memItemLeft" align="right" valign="top"><a id="a08937530839663fc2441230cf8934498"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>kFeatureSliceCount</b> = 49</td></tr>
 <tr class="separator:a08937530839663fc2441230cf8934498"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -129,9 +141,6 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>kSlicesToProcess</b> =
 <tr class="memitem:af22b0f62002248b936bf047f165c7609"><td class="memItemLeft" align="right" valign="top"><a id="af22b0f62002248b936bf047f165c7609"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>kTensorArenaSize</b> = 10 * 1024</td></tr>
 <tr class="separator:af22b0f62002248b936bf047f165c7609"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a969102cf9651eecac249a35ff432ff0b"><td class="memItemLeft" align="right" valign="top"><a id="a969102cf9651eecac249a35ff432ff0b"></a>
-const char **&#160;</td><td class="memItemRight" valign="bottom"><b>labels</b> = nullptr</td></tr>
-<tr class="separator:a969102cf9651eecac249a35ff432ff0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c6aeb91b8802492cafbc32376e43a05"><td class="memItemLeft" align="right" valign="top"><a id="a8c6aeb91b8802492cafbc32376e43a05"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>log_scale_enable_log</b> = 1</td></tr>
 <tr class="separator:a8c6aeb91b8802492cafbc32376e43a05"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -180,13 +189,19 @@ int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>suppression_ms</b>
 <tr class="memitem:a692b480ec8e7dc6b1f6496441c68dd6c"><td class="memItemLeft" align="right" valign="top"><a id="a692b480ec8e7dc6b1f6496441c68dd6c"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>useAllOpsResolver</b> = false</td></tr>
 <tr class="separator:a692b480ec8e7dc6b1f6496441c68dd6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:aaab10248dc0c3e154578f2c0e7c409e0"><td class="memItemLeft" align="right" valign="top"><a id="aaab10248dc0c3e154578f2c0e7c409e0"></a>
+class&#160;</td><td class="memItemRight" valign="bottom"><b>TfLiteRecognizeCommands</b></td></tr>
+<tr class="separator:aaab10248dc0c3e154578f2c0e7c409e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Configuration settings for <a class="el" href="classaudio__tools_1_1_tf_lite_audio_output.html" title="TfLiteAudioOutput which uses Tensorflow Light to analyze the data.">TfLiteAudioOutput</a>. </p>
+<div class="textblock"><p>Configuration settings for <a class="el" href="classaudio__tools_1_1_tf_lite_audio_stream.html" title="TfLiteAudioStream which uses Tensorflow Light to analyze the data. If it is used as a generator (wher...">TfLiteAudioStream</a>. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
-<li>src/AudioLibs/<a class="el" href="_tf_lite_audio_output_8h_source.html">TfLiteAudioOutput.h</a></li>
+<li>src/AudioLibs/<a class="el" href="_tf_lite_audio_stream_8h_source.html">TfLiteAudioStream.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
