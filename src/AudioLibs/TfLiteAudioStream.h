@@ -25,6 +25,17 @@ namespace audio_tools {
 
 // Forward Declarations
 class TfLiteAudioFeatureProvider;
+class TfLiteAudioStream;
+
+/**
+ * @brief Input class which provides the next value if the TfLiteAudioStream is treated as an audio sourcce
+ * 
+ */
+class TfLiteReader {
+  public:
+    virtual int read(TfLiteAudioStream *parent, int16_t*data, int len) = 0;
+};
+
 
 /**
  * @brief Error Reporter using the Audio Tools Logger
@@ -46,15 +57,17 @@ class TfLiteAudioErrorReporter : public tflite::ErrorReporter {
 tflite::ErrorReporter* error_reporter = &my_error_reporter;
 
 /**
- * @brief Configuration settings for TfLiteAudioOutput
+ * @brief Configuration settings for TfLiteAudioStream
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 
 struct TfLiteConfig {
+  friend class TfLiteRecognizeCommands;
   const unsigned char* model = nullptr;
   TfLiteAudioFeatureProvider* featureProvider = nullptr;
-  const char** labels = nullptr;
+  TfLiteReader *input = nullptr;
+
   bool useAllOpsResolver = false;
   // callback for command handler
   void (*respondToCommand)(const char* found_command, uint8_t score,
@@ -109,6 +122,17 @@ struct TfLiteConfig {
   bool log_scale_enable_log = 1;
   uint8_t log_scale_scale_shift = 6;
 
+  /// Defines the labels
+  template<int N>
+  void setCategories(const char* (&array)[N]){
+    labels = array;
+    kCategoryCount = N;
+  }
+ 
+  int categoryCount() {
+    return kCategoryCount;
+  }
+
   int featureElementCount() { 
     return kFeatureSliceSize * kFeatureSliceCount;
   }
@@ -121,6 +145,11 @@ struct TfLiteConfig {
     return kFeatureSliceStrideMs * (sample_rate / 1000);
   }
 
+  private:
+    int  kCategoryCount = 0;
+    const char** labels = nullptr;
+
+
 };
 
 // Partial implementation of std::dequeue, just providing the functionality
@@ -129,22 +158,45 @@ struct TfLiteConfig {
 // accurate overall prediction. This doesn't use any dynamic memory allocation
 // so it's a better fit for microcontroller applications, but this does mean
 // there are hard limits on the number of results it can store.
-template <int N>
 class TfLiteResultsQueue {
  public:
-  TfLiteResultsQueue() : front_index_(0), size_(0) {}
+  TfLiteResultsQueue()  = default;
+
+  void begin(int categoryCount){
+    LOGD(LOG_METHOD);
+    kCategoryCount = categoryCount;
+    for (int j=0;j<kMaxResults;j++){
+      results_[j].setCategoryCount(categoryCount);
+    }
+  }
 
   // Data structure that holds an inference result, and the time when it
   // was recorded.
   struct Result {
-    Result() : time_(0), scores() {}
-    Result(int32_t time, int8_t* input_scores) : time_(time) {
-      for (int i = 0; i < N; ++i) {
+    Result()  = default;
+    // Copy constructor to prevent multi heap poisoning
+    Result (const Result &old_obj){
+      setCategoryCount(old_obj.kCategoryCount);
+      time_ = old_obj.time_;
+      memmove(scores,old_obj.scores,kCategoryCount);
+    }
+    ~Result()  {
+      if (scores!=nullptr) delete []scores;
+      scores = nullptr;
+    }
+    Result(int categoryCount, int32_t time, int8_t* input_scores) : time_(time) {
+      setCategoryCount(categoryCount);
+      for (int i = 0; i < kCategoryCount; ++i) {
         scores[i] = input_scores[i];
       }
     }
-    int32_t time_;
-    int8_t scores[N];
+    void setCategoryCount(int count){
+      kCategoryCount = count;
+      this->scores = new int8_t[count];
+    }
+    int kCategoryCount=0;
+    int32_t time_=0;
+    int8_t *scores=nullptr;
   };
 
   int size() { return size_; }
@@ -199,19 +251,16 @@ class TfLiteResultsQueue {
  private:
   static constexpr int kMaxResults = 50;
   Result results_[kMaxResults];
-
-  int front_index_;
-  int size_;
+  int kCategoryCount=0;
+  int front_index_=0;
+  int size_=0;
 };
 
 /**
  * @brief Base class for implementing different primitive decoding models on top
  * of the instantaneous results from running an audio recognition model on a
  * single window of samples.
- *
- * @tparam N
  */
-template <int N>
 class TfLiteAbstractRecognizeCommands {
  public:
   virtual TfLiteStatus processLatestResults(const TfLiteTensor* latest_results,
@@ -235,8 +284,7 @@ class TfLiteAbstractRecognizeCommands {
  * of data over time.
  */
 
-template <int N>
-class TfLiteRecognizeCommands : public TfLiteAbstractRecognizeCommands<N> {
+class TfLiteRecognizeCommands : public TfLiteAbstractRecognizeCommands {
  public:
   // labels should be a list of the strings associated with each one-hot score.
   // The window duration controls the smoothing. Longer durations will give a
@@ -252,12 +300,13 @@ class TfLiteRecognizeCommands : public TfLiteAbstractRecognizeCommands<N> {
   TfLiteRecognizeCommands() {
     previous_top_label_ = "silence";
     previous_top_label_time_ = std::numeric_limits<int32_t>::min();
-    kCategoryCount = N;
   }
 
   /// Setup parameters from config
   bool begin(TfLiteConfig cfg) override {
+    LOGD(LOG_METHOD);
     this->cfg = cfg;
+    kCategoryCount = cfg.categoryCount();
     if (kCategoryCount == 0) {
       LOGE("kCategoryCount must not be 0");
       return false;
@@ -266,6 +315,7 @@ class TfLiteRecognizeCommands : public TfLiteAbstractRecognizeCommands<N> {
       LOGE("config.labels not defined");
       return false;
     }
+    previous_results_.begin(kCategoryCount);
     started = true;
     return true;
   }
@@ -307,7 +357,7 @@ class TfLiteRecognizeCommands : public TfLiteAbstractRecognizeCommands<N> {
     }
 
     // Add the latest results to the head of the queue.
-    previous_results_.push_back({current_time_ms, latest_results->data.int8});
+    previous_results_.push_back({kCategoryCount, current_time_ms, latest_results->data.int8});
 
     // Prune any earlier results that are too old for the averaging window.
     const int64_t time_limit = current_time_ms - cfg.average_window_duration_ms;
@@ -388,7 +438,7 @@ class TfLiteRecognizeCommands : public TfLiteAbstractRecognizeCommands<N> {
   bool started = false;
 
   // Working variables
-  TfLiteResultsQueue<N> previous_results_;
+  TfLiteResultsQueue previous_results_;
   const char* previous_top_label_;
   int32_t previous_top_label_time_;
 };
@@ -626,27 +676,29 @@ class TfLiteAudioFeatureProvider {
   }
 };
 
+
 /**
- * @brief TfLiteAudioOutput which uses Tensorflow Light to analyze the data
+ * @brief TfLiteAudioStream which uses Tensorflow Light to analyze the data. If it is used as a generator (where we read audio data) 
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-template <int N>
-class TfLiteAudioOutput : public AudioPrint {
+class TfLiteAudioStream : public AudioStreamX {
  public:
-  TfLiteAudioOutput() {}
-  ~TfLiteAudioOutput() {
+  TfLiteAudioStream() {}
+  ~TfLiteAudioStream() {
     if (tensor_arena != nullptr) delete[] tensor_arena;
   }
 
   /// Optionally define your own recognizer
-  void setRecognizer(TfLiteAbstractRecognizeCommands<N>* p_recognizer) {
+  void setRecognizer(TfLiteAbstractRecognizeCommands* p_recognizer) {
+    LOGD(LOG_METHOD);
     recognizer = p_recognizer;
   }
 
-  /// Optionally define your own interpreter
+  /// Optionally define your own p_interpreter
   void setInterpreter(tflite::MicroInterpreter* p_interpreter) {
-    this->interpreter = p_interpreter;
+    LOGD(LOG_METHOD);
+    this->p_interpreter = p_interpreter;
   }
 
   // Provides the default configuration
@@ -664,15 +716,19 @@ class TfLiteAudioOutput : public AudioPrint {
     // alloatme memory
     tensor_arena = new uint8_t[cfg.kTensorArenaSize];
 
-    if (!setupRecognizer()) {
-      LOGE("setupRecognizer");
-      return false;
-    }
+    if (cfg.categoryCount()>0){
+      if (!setupRecognizer()) {
+        LOGE("setupRecognizer");
+        return false;
+      }
 
-    // setup the feature provider
-    if (!setupFeatureProvider()) {
-      LOGE("setupFeatureProvider");
-      return false;
+      // setup the feature provider
+      if (!setupFeatureProvider()) {
+        LOGE("setupFeatureProvider");
+        return false;
+      }
+    } else {
+      LOGW("categoryCount=%d", cfg.categoryCount());
     }
 
     // Map the model into a usable data structure. This doesn't involve any
@@ -687,7 +743,7 @@ class TfLiteAudioOutput : public AudioPrint {
 
     // Allocate memory from the tensor_arena for the model's tensors.
     LOGI("AllocateTensors");
-    TfLiteStatus allocate_status = interpreter->AllocateTensors();
+    TfLiteStatus allocate_status = p_interpreter->AllocateTensors();
     if (allocate_status != kTfLiteOk) {
       LOGE("AllocateTensors() failed");
       return false;
@@ -695,13 +751,15 @@ class TfLiteAudioOutput : public AudioPrint {
 
     // Get information about the memory area to use for the model's input.
     LOGI("Get Input");
-    model_input = interpreter->input(0);
-    if ((model_input->dims->size != 2) || (model_input->dims->data[0] != 1) ||
-        (model_input->dims->data[1] !=
-         (cfg.kFeatureSliceCount * cfg.kFeatureSliceSize)) ||
-        (model_input->type != kTfLiteInt8)) {
-      LOGE("Bad input tensor parameters in model");
-      return false;
+    model_input = p_interpreter->input(0);
+    if (cfg.categoryCount()>0){
+      if ((model_input->dims->size != 2) || (model_input->dims->data[0] != 1) ||
+          (model_input->dims->data[1] !=
+          (cfg.kFeatureSliceCount * cfg.kFeatureSliceSize)) ||
+          (model_input->type != kTfLiteInt8)) {
+        LOGE("Bad input tensor parameters in model");
+        return false;
+      }
     }
 
     LOGI("Get Buffer");
@@ -746,12 +804,35 @@ class TfLiteAudioOutput : public AudioPrint {
     return bytes;
   }
 
+  /// We can provide only some audio data when cfg.input is defined
+  virtual int available() override { return cfg.input != nullptr ? DEFAULT_BUFFER_SIZE : 0; }
+
+  /// provide audio data with cfg.input 
+  virtual size_t readBytes(uint8_t *data, size_t len) override {
+    LOGD(LOG_METHOD);
+    if (cfg.input!=nullptr){
+      return cfg.input->read(this, (int16_t*)data, (int) len/sizeof(int16_t)) * sizeof(int16_t);
+    }else {
+      return 0;
+    }
+  }
+
+  /// Provides the tf lite interpreter
+  tflite::MicroInterpreter*  interpreter() {
+    return p_interpreter;
+  }
+
+  /// Provides the TfLiteConfig information
+  TfLiteConfig &config() {
+    return cfg;
+  }
+
  protected:
   const tflite::Model* p_model = nullptr;
-  tflite::MicroInterpreter* interpreter = nullptr;
+  tflite::MicroInterpreter* p_interpreter = nullptr;
   TfLiteTensor* model_input = nullptr;
   TfLiteAudioFeatureProvider* feature_provider = nullptr;
-  TfLiteAbstractRecognizeCommands<N>* recognizer = nullptr;
+  TfLiteAbstractRecognizeCommands* recognizer = nullptr;
   int32_t current_time = 0;
   int16_t total_slice_count = 0;
   bool is_setup = false;
@@ -777,12 +858,12 @@ class TfLiteAudioOutput : public AudioPrint {
   }
 
   virtual bool setupRecognizer() {
-    // setup default recognizer if not defined
-    if (recognizer == nullptr) {
-      static TfLiteRecognizeCommands<N> static_recognizer;
-      recognizer = &static_recognizer;
-    }
-    return recognizer->begin(cfg);
+      // setup default recognizer if not defined
+      if (recognizer == nullptr) {
+        static TfLiteRecognizeCommands static_recognizer;
+        recognizer = &static_recognizer;
+      }
+      return recognizer->begin(cfg);
   }
 
   virtual bool setupFeatureProvider() {
@@ -802,14 +883,14 @@ class TfLiteAudioOutput : public AudioPrint {
   // needed by this graph.
   //
   virtual bool setupInterpreter() {
-    if (interpreter == nullptr) {
+    if (p_interpreter == nullptr) {
       LOGI(LOG_METHOD);
       if (cfg.useAllOpsResolver) {
         tflite::AllOpsResolver resolver;
-        static tflite::MicroInterpreter static_interpreter(
+        static tflite::MicroInterpreter static_p_interpreter(
             p_model, resolver, tensor_arena, cfg.kTensorArenaSize,
             error_reporter);
-        interpreter = &static_interpreter;
+        p_interpreter = &static_p_interpreter;
       } else {
         // NOLINTNEXTLINE(runtime-global-variables)
         static tflite::MicroMutableOpResolver<4> micro_op_resolver(
@@ -826,11 +907,11 @@ class TfLiteAudioOutput : public AudioPrint {
         if (micro_op_resolver.AddReshape() != kTfLiteOk) {
           return false;
         }
-        // Build an interpreter to run the model with.
-        static tflite::MicroInterpreter static_interpreter(
+        // Build an p_interpreter to run the model with.
+        static tflite::MicroInterpreter static_p_interpreter(
             p_model, micro_op_resolver, tensor_arena, cfg.kTensorArenaSize,
             error_reporter);
-        interpreter = &static_interpreter;
+        p_interpreter = &static_p_interpreter;
       }
     }
     return true;
@@ -844,14 +925,14 @@ class TfLiteAudioOutput : public AudioPrint {
     memcpy(model_input_buffer, feature_buffer, cfg.featureElementCount());
 
     // Run the model on the spectrogram input and make sure it succeeds.
-    TfLiteStatus invoke_status = interpreter->Invoke();
+    TfLiteStatus invoke_status = p_interpreter->Invoke();
     if (invoke_status != kTfLiteOk) {
       LOGE("Invoke failed");
       return false;
     }
 
     // Obtain a pointer to the output tensor
-    TfLiteTensor* output = interpreter->output(0);
+    TfLiteTensor* output = p_interpreter->output(0);
 
     // Determine whether a command was recognized
     const char* found_command = nullptr;
@@ -886,6 +967,102 @@ class TfLiteAudioOutput : public AudioPrint {
       }
     }
   }
+};
+
+/**
+ * @brief Quantizer that helps to quantize and dequantize between float and int8
+ * 
+ */
+class TfQuantizer {
+  public:
+    // convert float to int8
+    static int8_t quantize(float value, float scale, float zero_point){
+      if(scale==0.0&&zero_point==0) return value;
+      return value / scale + zero_point;
+    }
+    // convert int8 to float
+    static float dequantize(int8_t value, float scale, float zero_point){
+      if(scale==0.0&&zero_point==0) return value;
+      return (value - zero_point) * scale;
+    }
+
+    static float dequantizeToNewRange(int8_t value, float scale, float zero_point, float new_range){
+      float deq = (static_cast<float>(value) - zero_point) * scale;
+      return clip(deq * new_range, new_range);
+    }
+
+    static float clip(float value, float range){
+      if (value>=0.0){
+        return value > range ? range : value;
+      } else {
+        return -value < -range ? -range : value;
+      }
+    }
+};
+
+/**
+ * @brief Generate a sine output from a model that was trained on the sine method.
+ * (=hello_world)
+ */
+class TfLiteSineReader : public TfLiteReader {
+  public: TfLiteSineReader(int16_t range=32767, float increment=0.01 ){
+    this->increment = increment;
+    this->range = range;
+  }
+  
+  virtual int read(TfLiteAudioStream *parent, int16_t*data, int sampleCount) {
+    LOGD(LOG_METHOD);
+    int channels = parent->config().channels;
+    float two_pi = 2 * PI;
+    // setup on first call
+    if (p_interpreter==nullptr){
+      p_interpreter = parent->interpreter();
+      input = p_interpreter->input(0);
+      output = p_interpreter->output(0);
+    }
+    for (int j=0; j<sampleCount; j+=channels){
+      // Quantize the input from floating-point to integer
+      input->data.int8[0] = TfQuantizer::quantize(actX,input->params.scale, input->params.zero_point);
+      
+      // Invoke TF Model
+      TfLiteStatus invoke_status = p_interpreter->Invoke();
+
+      // Check the result
+      if(kTfLiteOk!= invoke_status){
+        LOGE("invoke_status not ok");
+        return j;
+      }
+      if(kTfLiteInt8 != output->type){
+        LOGE("Output type is not kTfLiteInt8");
+        return j;
+      }
+
+      // Dequantize the output and convet it to int32 range
+      data[j] = TfQuantizer::dequantizeToNewRange(output->data.int8[0], output->params.scale, output->params.zero_point, range);
+      // printf("%d\n", data[j]);  // for debugging using the Serial Plotter
+      LOGD("%f->%d / %d->%d",actX, input->data.int8[0], output->data.int8[0], data[j]);
+      for (int i=1;i<channels;i++){
+          data[j+i] = data[j];
+          LOGD("generate data for channels");
+      }
+      // Increment X
+      actX += increment;
+      if (actX>two_pi){
+        actX-=two_pi;
+      }
+    }
+
+    return sampleCount;
+  }
+
+  protected:
+    float actX=0;
+    float increment=0.1;
+    int16_t range=0;
+    TfLiteTensor* input = nullptr;
+    TfLiteTensor* output = nullptr;
+    tflite::MicroInterpreter* p_interpreter = nullptr;
+
 };
 
 
