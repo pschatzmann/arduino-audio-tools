@@ -126,7 +126,7 @@ Dependent on the example you might need to install some of the following librari
 - [Maximilian](https://github.com/pschatzmann/Maximilian) cross-platform and multi-target audio synthesis and signal processing library
 - [Mozzi](https://github.com/pschatzmann/Mozzi) A sound synthesis library for Arduino
 - [ESP8266Audio](https://github.com/earlephilhower/ESP8266Audio) to play different audio Formats
-- [Tensorflow Lite](https://github.com/pschatzmann/tflite-micro-arduino-examples)
+- [Tensorflow Lite](https://github.com/pschatzmann/tflite-micro-arduino-examples) Machine Learning for Arduino
 
 
 After installing a library, you might need to activate it's usage in the ```AudioConfig.h``` file!
