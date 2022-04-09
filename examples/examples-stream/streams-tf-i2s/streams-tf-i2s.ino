@@ -30,7 +30,7 @@ void setup() {
   tcfg.sample_rate = samples_per_second;
   tcfg.kTensorArenaSize = 2 * 1024;
   tcfg.model = g_model;
-  tcfg.input = &tf_reader;
+  tcfg.reader = &tf_reader;
   tf_stream.begin(tcfg);
 
   // setup Audioi2s output
