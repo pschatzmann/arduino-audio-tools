@@ -111,18 +111,12 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b> = 1</td><
 <tr class="memitem:a38df4fb12e0ee6bf9f1127312be435a0"><td class="memItemLeft" align="right" valign="top"><a id="a38df4fb12e0ee6bf9f1127312be435a0"></a>
 uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>detection_threshold</b> = 200</td></tr>
 <tr class="separator:a38df4fb12e0ee6bf9f1127312be435a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa12b0ee36417d7d256be6e3bc89c7560"><td class="memItemLeft" align="right" valign="top"><a id="aa12b0ee36417d7d256be6e3bc89c7560"></a>
-<a class="el" href="classaudio__tools_1_1_tf_lite_audio_feature_provider.html">TfLiteAudioFeatureProvider</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>featureProvider</b> = nullptr</td></tr>
-<tr class="separator:aa12b0ee36417d7d256be6e3bc89c7560"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ced3041a84d3a75b73282352de5a8f9"><td class="memItemLeft" align="right" valign="top"><a id="a4ced3041a84d3a75b73282352de5a8f9"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>filterbank_lower_band_limit</b> = 125.0</td></tr>
 <tr class="separator:a4ced3041a84d3a75b73282352de5a8f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a518f383d253c7b5cd71193be1a23d32d"><td class="memItemLeft" align="right" valign="top"><a id="a518f383d253c7b5cd71193be1a23d32d"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>filterbank_upper_band_limit</b> = 7500.0</td></tr>
 <tr class="separator:a518f383d253c7b5cd71193be1a23d32d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00e739dbeb6a2f02b81d65452ce290aa"><td class="memItemLeft" align="right" valign="top"><a id="a00e739dbeb6a2f02b81d65452ce290aa"></a>
-<a class="el" href="classaudio__tools_1_1_tf_lite_reader.html">TfLiteReader</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>input</b> = nullptr</td></tr>
-<tr class="separator:a00e739dbeb6a2f02b81d65452ce290aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08937530839663fc2441230cf8934498"><td class="memItemLeft" align="right" valign="top"><a id="a08937530839663fc2441230cf8934498"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>kFeatureSliceCount</b> = 49</td></tr>
 <tr class="separator:a08937530839663fc2441230cf8934498"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -177,6 +171,12 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>pcan_gain_control_of
 <tr class="memitem:a853633bf9f1e38d6367a3989df695a5c"><td class="memItemLeft" align="right" valign="top"><a id="a853633bf9f1e38d6367a3989df695a5c"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>pcan_gain_control_strength</b> = 0.95</td></tr>
 <tr class="separator:a853633bf9f1e38d6367a3989df695a5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7e1752e21b492555a7a049576c49b00"><td class="memItemLeft" align="right" valign="top"><a id="ad7e1752e21b492555a7a049576c49b00"></a>
+<a class="el" href="classaudio__tools_1_1_tf_lite_reader.html">TfLiteReader</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>reader</b> = nullptr</td></tr>
+<tr class="separator:ad7e1752e21b492555a7a049576c49b00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3cc28af8cc276103803b0abd3ea90fc"><td class="memItemLeft" align="right" valign="top"><a id="ab3cc28af8cc276103803b0abd3ea90fc"></a>
+<a class="el" href="classaudio__tools_1_1_tf_lite_abstract_recognize_commands.html">TfLiteAbstractRecognizeCommands</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>recognizeCommands</b> =nullptr</td></tr>
+<tr class="separator:ab3cc28af8cc276103803b0abd3ea90fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57a5c83dd04535205743ffab4651cfba"><td class="memItemLeft" align="right" valign="top"><a id="a57a5c83dd04535205743ffab4651cfba"></a>
 void(*&#160;</td><td class="memItemRight" valign="bottom"><b>respondToCommand</b> )(const char *found_command, uint8_t score, bool is_new_command) = nullptr</td></tr>
 <tr class="separator:a57a5c83dd04535205743ffab4651cfba"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -189,12 +189,15 @@ int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>suppression_ms</b>
 <tr class="memitem:a692b480ec8e7dc6b1f6496441c68dd6c"><td class="memItemLeft" align="right" valign="top"><a id="a692b480ec8e7dc6b1f6496441c68dd6c"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>useAllOpsResolver</b> = false</td></tr>
 <tr class="separator:a692b480ec8e7dc6b1f6496441c68dd6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac695b16c47e71d22f8bed884dfb0ba1"><td class="memItemLeft" align="right" valign="top"><a id="aac695b16c47e71d22f8bed884dfb0ba1"></a>
+<a class="el" href="classaudio__tools_1_1_tf_lite_writer.html">TfLiteWriter</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>writer</b> = nullptr</td></tr>
+<tr class="separator:aac695b16c47e71d22f8bed884dfb0ba1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
-<tr class="memitem:aaab10248dc0c3e154578f2c0e7c409e0"><td class="memItemLeft" align="right" valign="top"><a id="aaab10248dc0c3e154578f2c0e7c409e0"></a>
-class&#160;</td><td class="memItemRight" valign="bottom"><b>TfLiteRecognizeCommands</b></td></tr>
-<tr class="separator:aaab10248dc0c3e154578f2c0e7c409e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf3712bf7976e20180b4fb8b42988837"><td class="memItemLeft" align="right" valign="top"><a id="abf3712bf7976e20180b4fb8b42988837"></a>
+class&#160;</td><td class="memItemRight" valign="bottom"><b>TfLiteMicroSpeechRecognizeCommands</b></td></tr>
+<tr class="separator:abf3712bf7976e20180b4fb8b42988837"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Configuration settings for <a class="el" href="classaudio__tools_1_1_tf_lite_audio_stream.html" title="TfLiteAudioStream which uses Tensorflow Light to analyze the data. If it is used as a generator (wher...">TfLiteAudioStream</a>. </p>

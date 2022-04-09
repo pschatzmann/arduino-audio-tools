@@ -7,7 +7,7 @@
 namespace audio_tools {
 
 /**
- * A FreeRTOS task is filling the buffer from the indicated stream.
+ * @brief A FreeRTOS task is filling the buffer from the indicated stream.
  * 
  * @author Phil Schatzmann
  * @copyright GPLv3

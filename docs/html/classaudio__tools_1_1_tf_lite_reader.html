@@ -89,12 +89,17 @@ Inheritance diagram for audio_tools::TfLiteReader:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac5b67bb69868c75af8030d710263d220"><td class="memItemLeft" align="right" valign="top"><a id="ac5b67bb69868c75af8030d710263d220"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>read</b> (<a class="el" href="classaudio__tools_1_1_tf_lite_audio_stream.html">TfLiteAudioStream</a> *parent, int16_t *data, int len)=0</td></tr>
-<tr class="separator:ac5b67bb69868c75af8030d710263d220"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afddc3ca7d4a41985ce209a7fc7eb580d"><td class="memItemLeft" align="right" valign="top"><a id="afddc3ca7d4a41985ce209a7fc7eb580d"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (<a class="el" href="classaudio__tools_1_1_tf_lite_audio_stream_base.html">TfLiteAudioStreamBase</a> *parent)=0</td></tr>
+<tr class="separator:afddc3ca7d4a41985ce209a7fc7eb580d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a669a0d21e24361ce6a0812e476f4f13a"><td class="memItemLeft" align="right" valign="top"><a id="a669a0d21e24361ce6a0812e476f4f13a"></a>
+virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>read</b> (int16_t *data, int len)=0</td></tr>
+<tr class="separator:a669a0d21e24361ce6a0812e476f4f13a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Input class which provides the next value if the <a class="el" href="classaudio__tools_1_1_tf_lite_audio_stream.html" title="TfLiteAudioStream which uses Tensorflow Light to analyze the data. If it is used as a generator (wher...">TfLiteAudioStream</a> is treated as an audio sourcce. </p>
+<dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/AudioLibs/<a class="el" href="_tf_lite_audio_stream_8h_source.html">TfLiteAudioStream.h</a></li>
 </ul>

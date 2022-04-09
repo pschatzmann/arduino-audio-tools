@@ -73,10 +73,16 @@ $(function() {
 <div class="title">audio_tools::TfLiteResultsQueue Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Partial implementation of std::dequeue. Just providing the functionality that's needed to keep a record of previous neural network results over a short time period, so they can be averaged together to produce a more accurate overall prediction. This doesn't use any dynamic memory allocation so it's a better fit for microcontroller applications, but this does mean there are hard limits on the number of results it can store.  
+ <a href="classaudio__tools_1_1_tf_lite_results_queue.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_tf_lite_audio_stream_8h_source.html">TfLiteAudioStream.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_tf_lite_results_queue_1_1_result.html">Result</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data structure that holds an inference result, and the time when it was recorded.  <a href="structaudio__tools_1_1_tf_lite_results_queue_1_1_result.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -106,7 +112,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>push_back</b> (const 
 int&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> ()</td></tr>
 <tr class="separator:a23d156170b1798d56364df6d85f7ab4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Partial implementation of std::dequeue. Just providing the functionality that's needed to keep a record of previous neural network results over a short time period, so they can be averaged together to produce a more accurate overall prediction. This doesn't use any dynamic memory allocation so it's a better fit for microcontroller applications, but this does mean there are hard limits on the number of results it can store. </p>
+</div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/AudioLibs/<a class="el" href="_tf_lite_audio_stream_8h_source.html">TfLiteAudioStream.h</a></li>
 </ul>
 </div><!-- contents -->

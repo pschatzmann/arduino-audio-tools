@@ -14,7 +14,7 @@ const int i2s_buffer_size = 1024;
 NBuffer<uint8_t> i2s_buffer(i2s_buffer_size, 5);
 
 /**
- *  Mapping Frequency constants to available frequencies
+ *  @brief Mapping Frequency constants to available frequencies
  */
 struct Nano_BLE_freq_info {
   int id;
@@ -38,7 +38,7 @@ const Nano_BLE_freq_info freq_table[] = {
 };
 
 /**
- *  Mapping from Ratio Constants to frequency ratios
+ *  @brief Mapping from Ratio Constants to frequency ratios
  */
 struct Nano_BLE_ratio_info {
   int id;

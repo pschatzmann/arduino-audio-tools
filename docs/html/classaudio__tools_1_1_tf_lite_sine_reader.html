@@ -93,15 +93,21 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a18cd95219282c3cd5b6395aba0bd0280"><td class="memItemLeft" align="right" valign="top"><a id="a18cd95219282c3cd5b6395aba0bd0280"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>TfLiteSineReader</b> (int16_t range=32767, float increment=0.01)</td></tr>
 <tr class="separator:a18cd95219282c3cd5b6395aba0bd0280"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe618d389df2c4d318d20af5726cc41d"><td class="memItemLeft" align="right" valign="top"><a id="afe618d389df2c4d318d20af5726cc41d"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>read</b> (<a class="el" href="classaudio__tools_1_1_tf_lite_audio_stream.html">TfLiteAudioStream</a> *parent, int16_t *data, int sampleCount)</td></tr>
-<tr class="separator:afe618d389df2c4d318d20af5726cc41d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c9a76622db0d505b4bd0df8501a0b1d"><td class="memItemLeft" align="right" valign="top"><a id="a7c9a76622db0d505b4bd0df8501a0b1d"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (<a class="el" href="classaudio__tools_1_1_tf_lite_audio_stream_base.html">TfLiteAudioStreamBase</a> *parent) override</td></tr>
+<tr class="separator:a7c9a76622db0d505b4bd0df8501a0b1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2a73e8861ad11434635dbe79ab026d8"><td class="memItemLeft" align="right" valign="top"><a id="ae2a73e8861ad11434635dbe79ab026d8"></a>
+virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>read</b> (int16_t *data, int sampleCount) override</td></tr>
+<tr class="separator:ae2a73e8861ad11434635dbe79ab026d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a7b461d97cacbce53dc6e8d23b4acf8ac"><td class="memItemLeft" align="right" valign="top"><a id="a7b461d97cacbce53dc6e8d23b4acf8ac"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>actX</b> =0</td></tr>
 <tr class="separator:a7b461d97cacbce53dc6e8d23b4acf8ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bd91f5eddff283427a65ab120c683ef"><td class="memItemLeft" align="right" valign="top"><a id="a0bd91f5eddff283427a65ab120c683ef"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>channels</b></td></tr>
+<tr class="separator:a0bd91f5eddff283427a65ab120c683ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1bcf4b7c2340773cf929fad87ef7b880"><td class="memItemLeft" align="right" valign="top"><a id="a1bcf4b7c2340773cf929fad87ef7b880"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>increment</b> =0.1</td></tr>
 <tr class="separator:a1bcf4b7c2340773cf929fad87ef7b880"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -120,6 +126,8 @@ int16_t&#160;</td><td class="memItemRight" valign="bottom"><b>range</b> =0</td><
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Generate a sine output from a model that was trained on the sine method. (=hello_world) </p>
+<dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/AudioLibs/<a class="el" href="_tf_lite_audio_stream_8h_source.html">TfLiteAudioStream.h</a></li>
 </ul>

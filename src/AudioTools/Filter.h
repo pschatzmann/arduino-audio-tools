@@ -273,7 +273,7 @@ class BiQuadDF2 : public Filter<T> {
 };
 
 /**
- * Second Order Filter: Instead of manually cascading BiQuad filters, you can use a Second Order Sections filter (SOS).
+ * @brief Second Order Filter: Instead of manually cascading BiQuad filters, you can use a Second Order Sections filter (SOS).
  * converted from https://github.com/tttapa/Filters/blob/master/src/SOSFilter.h
  * Use float or double (and not a integer type) as type parameter
  * @author Pieter P tttapa  / pschatzmann
