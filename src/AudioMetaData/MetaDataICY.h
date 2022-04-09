@@ -9,7 +9,7 @@ namespace audio_tools {
 
 
 /**
- * Icecast/Shoutcast Metadata Handling
+ * @brief Icecast/Shoutcast Metadata Handling.
  * Metadata class which splits the data into audio and metadata. The result is provided via callback methods.
  * see https://www.codeproject.com/Articles/11308/SHOUTcast-Stream-Ripper
  * @author Phil Schatzmann

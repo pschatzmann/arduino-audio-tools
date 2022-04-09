@@ -68,7 +68,7 @@ class CachedVolumeControl : public VolumeControl {
 
 
 /**
- * Parametric Logarithmic volume control. Using the formula pow(b,input) * a - a, where b is b = pow(((1/ym)-1), 2) and a is a = 1.0 / (b - 1.0). 
+ * @brief Parametric Logarithmic volume control. Using the formula pow(b,input) * a - a, where b is b = pow(((1/ym)-1), 2) and a is a = 1.0 / (b - 1.0). 
  * The parameter ym is determining the steepness.
  * See https://electronics.stackexchange.com/questions/304692/formula-for-logarithmic-audio-taper-pot
  * @author Phil Schatzmann
@@ -93,7 +93,7 @@ class LogarithmicVolumeControl : public VolumeControl {
 };
 
 /**
- * Simple exponentional volume control using the formula pow(2.0, input) - 1.0;
+ * @brief Simple exponentional volume control using the formula pow(2.0, input) - 1.0;
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -107,7 +107,7 @@ class ExponentialVolumeControl : public VolumeControl {
 };
 
 /**
- * Simple simulated audio pot volume control inspired by https://eepower.com/resistor-guide/resistor-types/potentiometer-taper/#
+ * @brief Simple simulated audio pot volume control inspired by https://eepower.com/resistor-guide/resistor-types/potentiometer-taper/#
  * We split up the input/output curve into 2 linear pieces with a slow and a fast raising part. 
  * The slow raising part goes from (0,0) to (x,y).
  * The fast raising part goes from (x,y) to (1,1).

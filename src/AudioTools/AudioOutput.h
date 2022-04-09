@@ -473,8 +473,10 @@ class MultiOutput : public AudioPrint {
 };
 
 /**
- * Converts the data from the indicated AudioBaseInfo format to the target AudioBaseInfo format
+ * @brief Converts the data from the indicated AudioBaseInfo format to the target AudioBaseInfo format
  * We can change the number of channels and the bits_per sample!
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 
 class FormatConverterStream : public AudioPrint {

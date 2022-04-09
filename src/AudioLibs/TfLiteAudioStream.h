@@ -164,7 +164,7 @@ struct TfLiteConfig {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class TfQuantizer {
+class TfLiteQuantizer {
   public:
     // convert float to int8
     static int8_t quantize(float value, float scale, float zero_point){
@@ -192,7 +192,7 @@ class TfQuantizer {
 };
 
 /** 
- * @brief Partial implementation of std::dequeue, just providing the functionality
+ * @brief Partial implementation of std::dequeue. Just providing the functionality
  * that's needed to keep a record of previous neural network results over a
  * short time period, so they can be averaged together to produce a more
  * accurate overall prediction. This doesn't use any dynamic memory allocation
@@ -211,8 +211,9 @@ class TfLiteResultsQueue {
     }
   }
 
-  // Data structure that holds an inference result, and the time when it
-  // was recorded.
+  /**
+   * @brief Data structure that holds an inference result, and the time when it was recorded.
+   **/ 
   struct Result {
     Result()  = default;
     // Copy constructor to prevent multi heap poisoning
@@ -841,7 +842,7 @@ class TfLiteSineReader : public TfLiteReader {
     float two_pi = 2 * PI;
     for (int j=0; j<sampleCount; j+=channels){
       // Quantize the input from floating-point to integer
-      input->data.int8[0] = TfQuantizer::quantize(actX,input->params.scale, input->params.zero_point);
+      input->data.int8[0] = TfLiteQuantizer::quantize(actX,input->params.scale, input->params.zero_point);
       
       // Invoke TF Model
       TfLiteStatus invoke_status = p_interpreter->Invoke();
@@ -857,7 +858,7 @@ class TfLiteSineReader : public TfLiteReader {
       }
 
       // Dequantize the output and convet it to int32 range
-      data[j] = TfQuantizer::dequantizeToNewRange(output->data.int8[0], output->params.scale, output->params.zero_point, range);
+      data[j] = TfLiteQuantizer::dequantizeToNewRange(output->data.int8[0], output->params.scale, output->params.zero_point, range);
       // printf("%d\n", data[j]);  // for debugging using the Serial Plotter
       LOGD("%f->%d / %d->%d",actX, input->data.int8[0], output->data.int8[0], data[j]);
       for (int i=1;i<channels;i++){

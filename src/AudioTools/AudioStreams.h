@@ -890,38 +890,68 @@ class Mixer : public AudioStreamX {
       total_weights += weight;
     }
 
-    /// Removes all input stream
-    void clear() {
+    /// Defines a new weight for the indicated channel: If you set it to 0 it is muted.
+    void setWeight(int channel, float weight){
+      if (channel<size()){
+        weights[channel] = weight;
+        float total = 0;
+        for (int j=0;j<weights.size();j++){
+          total += weights[j];
+        }
+        total_weights = total;
+      } else {
+        LOGE("Invalid channel %d - max is %d", channel, size()-1);
+      }
+    }
+
+    /// Remove all input streams
+    void end() {
       streams.clear();
+      weights.clear();
       total_weights = 0.0;
     }
 
-    /// Provides the mixed 
-    size_t readBytes(uint8_t* data, size_t len){
+    /// Number of stremams to which are mixed together
+    int size() {
+      return streams.size();
+    }
+
+    /// Provides the data from all streams mixed together 
+    size_t readBytes(uint8_t* data, size_t len) override {
+      LOGD("readBytes: %d",len);
       int sample_count = len / sizeof(T);
       T* samples_result = (T*)data;
       memset(data,0, len); // clear data so that we can add values
       buffer.resize(len); // usually does only something the first time
-      memset(&buffer[0],0, len); // if no data is read we have an array of 0
-      T* samples_in = (T*)&buffer[0];
+      T* buffer_in = (T*)&buffer[0];
       for (int j=0;j<size();j++){
+        float weight = weights[j];
+        LOGD("adding stream %d with len %d with weight %f",j, len, weight);
+        memset(&buffer[0],0, len); // if no data is read we have an array of 0
         streams[j]->readBytes(&buffer[0], len);
         for (int i=0;i<sample_count; i++){
-          samples_result[i] =+ weights[j] * samples_in[i] / total_weights;
+          samples_result[i] += weight * buffer_in[i] / total_weights;
         }
       }
       return len;
     }
 
-    int size() {
-      return streams.size();
+    /// Provides the available bytes from the first stream with data
+    int available()  override {
+      int result = 0;
+      for (int j=0;j<size();j++){
+        result = streams[j]->available();
+        if (result>0) 
+          break;
+      }
+      return result;
     }
 
   protected:
-    Vector<Stream*> streams;
-    Vector<uint8_t> buffer;
-    Vector<float> weights; 
-    float total_weights = 0;
+    Vector<Stream*> streams{10};
+    Vector<uint8_t> buffer{DEFAULT_BUFFER_SIZE};
+    Vector<float> weights{10}; 
+    float total_weights = 0.0;
 
 };
 
@@ -929,9 +959,10 @@ class Mixer : public AudioStreamX {
 //typedef VolumeStream VolumeOutput;
 
 /**
- * Stream to which we can apply Filters for each channel. The filter 
+ * @brief  Stream to which we can apply Filters for each channel. The filter 
  * might change the result size!
- * 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 template<typename T, class TF>
 class FilteredStream : public AudioStreamX {
