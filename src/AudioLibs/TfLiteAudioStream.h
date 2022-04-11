@@ -113,7 +113,7 @@ struct TfLiteConfig {
 
   // Parameters for RecognizeCommands
   int32_t average_window_duration_ms = 1000;
-  uint8_t detection_threshold = 200;
+  uint8_t detection_threshold = 50;
   int32_t suppression_ms = 1500;
   int32_t minimum_count = 3;
 
@@ -191,113 +191,6 @@ class TfLiteQuantizer {
     }
 };
 
-/** 
- * @brief Partial implementation of std::dequeue. Just providing the functionality
- * that's needed to keep a record of previous neural network results over a
- * short time period, so they can be averaged together to produce a more
- * accurate overall prediction. This doesn't use any dynamic memory allocation
- * so it's a better fit for microcontroller applications, but this does mean
- * there are hard limits on the number of results it can store.
- */
-class TfLiteResultsQueue {
- public:
-  TfLiteResultsQueue()  = default;
-
-  void begin(int categoryCount){
-    LOGD(LOG_METHOD);
-    kCategoryCount = categoryCount;
-    for (int j=0;j<kMaxResults;j++){
-      results_[j].setCategoryCount(categoryCount);
-    }
-  }
-
-  /**
-   * @brief Data structure that holds an inference result, and the time when it was recorded.
-   **/ 
-  struct Result {
-    Result()  = default;
-    // Copy constructor to prevent multi heap poisoning
-    Result (const Result &old_obj){
-      setCategoryCount(old_obj.kCategoryCount);
-      time_ = old_obj.time_;
-      memmove(scores,old_obj.scores,kCategoryCount);
-    }
-    ~Result()  {
-      if (scores!=nullptr) delete []scores;
-      scores = nullptr;
-    }
-    Result(int categoryCount, int32_t time, int8_t* input_scores) : time_(time) {
-      setCategoryCount(categoryCount);
-      for (int i = 0; i < kCategoryCount; ++i) {
-        scores[i] = input_scores[i];
-      }
-    }
-    void setCategoryCount(int count){
-      kCategoryCount = count;
-      this->scores = new int8_t[count];
-    }
-    int kCategoryCount=0;
-    int32_t time_=0;
-    int8_t *scores=nullptr;
-  };
-
-  int size() { return size_; }
-  bool empty() { return size_ == 0; }
-  Result& front() { return results_[front_index_]; }
-  Result& back() {
-    int back_index = front_index_ + (size_ - 1);
-    if (back_index >= kMaxResults) {
-      back_index -= kMaxResults;
-    }
-    return results_[back_index];
-  }
-
-  void push_back(const Result& entry) {
-    if (size() >= kMaxResults) {
-      LOGE("Couldn't push_back latest result, too many already!");
-      return;
-    }
-    size_ += 1;
-    back() = entry;
-  }
-
-  Result pop_front() {
-    if (size() <= 0) {
-      LOGE("Couldn't pop_front result, none present!");
-      return Result();
-    }
-    Result result = front();
-    front_index_ += 1;
-    if (front_index_ >= kMaxResults) {
-      front_index_ = 0;
-    }
-    size_ -= 1;
-    return result;
-  }
-
-  // Most of the functions are duplicates of dequeue containers, but this
-  // is a helper that makes it easy to iterate through the contents of the
-  // queue.
-  Result& from_front(int offset) {
-    if ((offset < 0) || (offset >= size_)) {
-      LOGE("Attempt to read beyond the end of the queue!");
-      offset = size_ - 1;
-    }
-    int index = front_index_ + offset;
-    if (index >= kMaxResults) {
-      index -= kMaxResults;
-    }
-    return results_[index];
-  }
-
- private:
-  static constexpr int kMaxResults = 50;
-  Result results_[kMaxResults];
-  int kCategoryCount=0;
-  int front_index_=0;
-  int size_=0;
-};
-
 /**
  * @brief Base class for implementing different primitive decoding models on top
  * of the instantaneous results from running an audio recognition model on a
@@ -305,13 +198,10 @@ class TfLiteResultsQueue {
  */
 class TfLiteAbstractRecognizeCommands {
  public:
-  virtual TfLiteStatus processLatestResults(const TfLiteTensor* latest_results,
-                                            const int32_t current_time_ms,
-                                            const char** found_command,
-                                            uint8_t* score,
-                                            bool* is_new_command) = 0;
-
   virtual bool begin(TfLiteConfig cfg) = 0;
+  virtual TfLiteStatus getCommand(const TfLiteTensor* latest_results, const int32_t current_time_ms,
+                                  const char** found_command,uint8_t* score,bool* is_new_command) = 0;
+
 };
 
 /**
@@ -328,162 +218,166 @@ class TfLiteAbstractRecognizeCommands {
 
 class TfLiteMicroSpeechRecognizeCommands : public TfLiteAbstractRecognizeCommands {
  public:
-  // labels should be a list of the strings associated with each one-hot score.
-  // The window duration controls the smoothing. Longer durations will give a
-  // higher confidence that the results are correct, but may miss some commands.
-  // The detection threshold has a similar effect, with high values increasing
-  // the precision at the cost of recall. The minimum count controls how many
-  // results need to be in the averaging window before it's seen as a reliable
-  // average. This prevents erroneous results when the averaging window is
-  // initially being populated for example. The suppression argument disables
-  // further recognitions for a set time after one has been triggered, which can
-  // help reduce spurious recognitions.
 
   TfLiteMicroSpeechRecognizeCommands() {
-    previous_top_label_ = "silence";
-    previous_top_label_time_ = std::numeric_limits<int32_t>::min();
   }
 
   /// Setup parameters from config
   bool begin(TfLiteConfig cfg) override {
     LOGD(LOG_METHOD);
     this->cfg = cfg;
-    kCategoryCount = cfg.categoryCount();
-    if (kCategoryCount == 0) {
-      LOGE("kCategoryCount must not be 0");
-      return false;
-    }
     if (cfg.labels == nullptr) {
       LOGE("config.labels not defined");
       return false;
     }
-    previous_results_.begin(kCategoryCount);
-    started = true;
     return true;
   }
 
   // Call this with the results of running a model on sample data.
-  virtual TfLiteStatus processLatestResults(const TfLiteTensor* latest_results,
+  virtual TfLiteStatus getCommand(const TfLiteTensor* latest_results,
                                             const int32_t current_time_ms,
                                             const char** found_command,
                                             uint8_t* score,
                                             bool* is_new_command) override {
+                                            
     LOGD(LOG_METHOD);
-    if (!started) {
-      LOGE("TfLiteMicroSpeechRecognizeCommands not started");
-      return kTfLiteError;
-    }
-    if ((latest_results->dims->size != 2) ||
-        (latest_results->dims->data[0] != 1) ||
-        (latest_results->dims->data[1] != kCategoryCount)) {
-      LOGE(
-          "The results for recognition should contain %d "
-          "elements, but there are "
-          "%d in an %d-dimensional shape",
-          kCategoryCount, (int)latest_results->dims->data[1],
-          (int)latest_results->dims->size);
-      return kTfLiteError;
-    }
+    this->current_time_ms = current_time_ms;
+    this->time_since_last_top =  current_time_ms - previous_time_ms;
 
-    if (latest_results->type != kTfLiteInt8) {
-      LOGE("The results for recognition should be int8 elements, but are %d",
-           (int)latest_results->type);
-      return kTfLiteError;
-    }
+    deleteOldRecords(current_time_ms - cfg.average_window_duration_ms);
+    int idx = resultCategoryIdx(latest_results->data.int8);
+    Result row(current_time_ms, idx, latest_results->data.int8[idx]);
+    result_queue.push_back(row);
 
-    if ((!previous_results_.empty()) &&
-        (current_time_ms < previous_results_.front().time_)) {
-      LOGE("Results must be in increasing time order: timestamp  %d < %d",
-           (int)current_time_ms, (int)previous_results_.front().time_);
-      return kTfLiteError;
+    TfLiteStatus result = validate(latest_results);
+    if (result!=kTfLiteOk){
+      return result;
     }
-
-    // Add the latest results to the head of the queue.
-    previous_results_.push_back({kCategoryCount, current_time_ms, latest_results->data.int8});
-
-    // Prune any earlier results that are too old for the averaging window.
-    const int64_t time_limit = current_time_ms - cfg.average_window_duration_ms;
-    while ((!previous_results_.empty()) &&
-           previous_results_.front().time_ < time_limit) {
-      previous_results_.pop_front();
-    }
-
-    // If there are too few results, assume the result will be unreliable
-    // and bail.
-    const int64_t how_many_results = previous_results_.size();
-    const int64_t earliest_time = previous_results_.front().time_;
-    const int64_t samples_duration = current_time_ms - earliest_time;
-    if ((how_many_results < cfg.minimum_count) ||
-        (samples_duration < (cfg.average_window_duration_ms / 4))) {
-      *found_command = previous_top_label_;
-      *score = 0;
-      *is_new_command = false;
-      return kTfLiteOk;
-    }
-
-    // Calculate the average score across all the results in the window.
-    int32_t average_scores[kCategoryCount];
-    for (int offset = 0; offset < previous_results_.size(); ++offset) {
-      auto previous_result = previous_results_.from_front(offset);
-      const int8_t* scores = previous_result.scores;
-      for (int i = 0; i < kCategoryCount; ++i) {
-        if (offset == 0) {
-          average_scores[i] = scores[i] + 128;
-        } else {
-          average_scores[i] += scores[i] + 128;
-        }
-      }
-    }
-    for (int i = 0; i < kCategoryCount; ++i) {
-      average_scores[i] /= how_many_results;
-    }
-
-    // Find the current highest scoring category.
-    int current_top_index = 0;
-    int32_t current_top_score = 0;
-    for (int i = 0; i < kCategoryCount; ++i) {
-      if (average_scores[i] > current_top_score) {
-        current_top_score = average_scores[i];
-        current_top_index = i;
-      }
-    }
-    const char* current_top_label = cfg.labels[current_top_index];
-
-    // If we've recently had another label trigger, assume one that occurs
-    // too soon afterwards is a bad result.
-    int64_t time_since_last_top;
-    if ((previous_top_label_ == cfg.labels[0]) ||
-        (previous_top_label_time_ == std::numeric_limits<int32_t>::min())) {
-      time_since_last_top = std::numeric_limits<int32_t>::max();
-    } else {
-      time_since_last_top = current_time_ms - previous_top_label_time_;
-    }
-    if ((current_top_score > cfg.detection_threshold) &&
-        ((current_top_label != previous_top_label_) ||
-         (time_since_last_top > cfg.suppression_ms))) {
-      previous_top_label_ = current_top_label;
-      previous_top_label_time_ = current_time_ms;
-      *is_new_command = true;
-    } else {
-      *is_new_command = false;
-    }
-    *found_command = current_top_label;
-    *score = current_top_score;
-
-    return kTfLiteOk;
+    return evaluate(found_command, score, is_new_command);
   }
 
- protected:
-  // Configuration
-  TfLiteConfig cfg;
-  int kCategoryCount=0;
-  bool started = false;
+  protected:
+      struct Result {
+        int32_t time_ms;
+        int category=0;
+        int8_t score=0;
 
-  // Working variables
-  TfLiteResultsQueue previous_results_;
-  const char* previous_top_label_;
-  int32_t previous_top_label_time_;
+        Result() = default;
+        Result(int32_t time_ms,int category, int8_t score){
+          this->time_ms = time_ms;
+          this->category = category;
+          this->score = score;
+        }
+      };
+
+      TfLiteConfig cfg;
+      Vector <Result> result_queue;
+      int previous_cateogory=-1;
+      int32_t current_time_ms=0;
+      int32_t previous_time_ms=0;
+      int32_t time_since_last_top=0;
+
+      /// finds the category with the biggest score
+      int resultCategoryIdx(int8_t* score) {
+        int result = -1;
+        uint8_t top_score = std::numeric_limits<uint8_t>::min();
+        for (int j=0;j<categoryCount();j++){
+          if (score[j]>top_score){
+            result = j;
+          }
+        }
+        return result;
+      }
+
+      /// Determines the number of categories
+      int categoryCount() {
+        return cfg.categoryCount();
+      }
+
+      /// Removes obsolete records from the queue
+      void deleteOldRecords(int32_t limit) {
+        while (result_queue[0].time_ms<limit){
+          result_queue.pop_front();
+        }
+      }
+
+      /// Finds the result
+      TfLiteStatus evaluate(const char** found_command, uint8_t* result_score, bool* is_new_command) {
+        LOGD(LOG_METHOD);
+        float totals[categoryCount()]={0};
+        int count[categoryCount()]={0};
+        // calculate totals
+        for (int j=0;j<result_queue.size();j++){
+          int idx = result_queue[j].category;
+          totals[idx] += result_queue[j].score;
+          count[idx]++;
+        }
+
+        // find max
+        int maxIdx = -1;
+        float max = -100000;
+        for (int j=0;j<categoryCount();j++){
+          if (totals[j]>max){
+            max = totals[j];
+            maxIdx = j;
+          }
+        }    
+
+        if (maxIdx==-1){
+          LOGE("Could not find max category")
+          return kTfLiteError;
+        }
+
+        // determine result
+        *result_score =  totals[maxIdx] / count[maxIdx];
+        *found_command = cfg.labels[maxIdx];
+
+        if (previous_cateogory!=maxIdx
+        && *result_score > cfg.detection_threshold
+        && time_since_last_top > cfg.suppression_ms){
+          previous_time_ms = current_time_ms;
+          previous_cateogory = maxIdx;
+          *is_new_command = true;
+        } else {
+          *is_new_command = false;
+        }
+
+        LOGD("Category: %s, score: %d, is_new: %d",*found_command, *result_score, *is_new_command);
+
+        return kTfLiteOk;
+      }
+
+      /// Checks the input data
+      TfLiteStatus validate(const TfLiteTensor* latest_results) {
+          if ((latest_results->dims->size != 2) ||
+              (latest_results->dims->data[0] != 1) ||
+              (latest_results->dims->data[1] != categoryCount())) {
+            LOGE(
+                "The results for recognition should contain %d "
+                "elements, but there are "
+                "%d in an %d-dimensional shape",
+                categoryCount(), (int)latest_results->dims->data[1],
+                (int)latest_results->dims->size);
+            return kTfLiteError;
+          }
+
+          if (latest_results->type != kTfLiteInt8) {
+            LOGE("The results for recognition should be int8 elements, but are %d",
+                (int)latest_results->type);
+            return kTfLiteError;
+          }
+
+          if ((!result_queue.empty()) &&
+              (current_time_ms < result_queue[0].time_ms)) {
+            LOGE("Results must be in increasing time order: timestamp  %d < %d",
+                (int)current_time_ms, (int)result_queue[0].time_ms);
+            return kTfLiteError;
+          }
+          return kTfLiteOk;
+      }
+
 };
+
 
 /**
  * @brief Astract TfLiteAudioStream to provide access to TfLiteAudioStream for
@@ -689,10 +583,10 @@ class TfLiteMicroSpeachWriter : public TfLiteWriter {
     uint8_t score = 0;
     bool is_new_command = false;
 
-    TfLiteStatus process_status = cfg.recognizeCommands->processLatestResults(
+    TfLiteStatus process_status = cfg.recognizeCommands->getCommand(
         output, current_time, &found_command, &score, &is_new_command);
     if (process_status != kTfLiteOk) {
-      LOGE("TfLiteMicroSpeechRecognizeCommands::processLatestResults() failed");
+      LOGE("TfLiteMicroSpeechRecognizeCommands::getCommand() failed");
       return false;
     }
     // Do something based on the recognized command. The default
