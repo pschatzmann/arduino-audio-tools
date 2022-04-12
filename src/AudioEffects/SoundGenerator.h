@@ -489,6 +489,11 @@ class SineFromTable  : public SoundGenerator<T> {
     public:
         SineFromTable(float amplitude = 32767.0){
             this->amplitude = amplitude;
+            this->amplitude_to_be = amplitude;
+        }
+
+        void setAmplitude(float amplitude){
+            this->amplitude_to_be = amplitude;
         }
 
         T readSample() {
@@ -498,6 +503,7 @@ class SineFromTable  : public SoundGenerator<T> {
                angle -= 360; 
                // update frequency at start of circle (near 0 degrees)
                step = step_new;
+               amplitude = amplitude_to_be;
             }
             return amplitude * interpolate(angle);
         }
@@ -528,6 +534,7 @@ class SineFromTable  : public SoundGenerator<T> {
     protected:
         bool is_first = true;
         float amplitude;
+        float amplitude_to_be;
         float base_frequency = 1.0;
         float step = 1.0; 
         float step_new = 1.0; 
