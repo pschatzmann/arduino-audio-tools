@@ -469,8 +469,8 @@ class MultiOutput : public AudioPrint {
 
         ~MultiOutput() {
             for (int j=0;j<vector.size();j++){
-                if (vector[0]->doRelease()){
-                    delete vector[0];
+                if (vector[j]->doRelease()){
+                    delete vector[j];
                 }
             }
         }
