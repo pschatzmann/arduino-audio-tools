@@ -2,6 +2,7 @@
 
 #include "Stream.h"
 #include "AudioTools/AudioTypes.h"
+#include "AudioMetaData/MetaDataFilter.h"
 #include "MP3DecoderHelix.h"
 
 namespace audio_tools {
@@ -21,6 +22,7 @@ class MP3DecoderHelix : public AudioDecoder  {
         MP3DecoderHelix() {
             LOGD(LOG_METHOD);
             mp3 = new libhelix::MP3DecoderHelix();
+            filter.setDecoder(mp3);
             if (mp3==nullptr){
                 LOGE("Not enough memory for libhelix");
             }
@@ -33,6 +35,7 @@ class MP3DecoderHelix : public AudioDecoder  {
         MP3DecoderHelix(Print &out_stream){
             LOGD(LOG_METHOD);
             mp3 = new libhelix::MP3DecoderHelix();
+            filter.setDecoder(mp3);
             if (mp3==nullptr){
                 LOGE("Not enough memory for libhelix");
             }
@@ -49,6 +52,7 @@ class MP3DecoderHelix : public AudioDecoder  {
         MP3DecoderHelix(Print &out_stream, AudioBaseInfoDependent &bi){
             LOGD(LOG_METHOD);
             mp3 = new libhelix::MP3DecoderHelix();
+            filter.setDecoder(mp3);
             if (mp3==nullptr){
                 LOGE("Not enough memory for libhelix");
             }
@@ -75,6 +79,7 @@ class MP3DecoderHelix : public AudioDecoder  {
             if (mp3!=nullptr) {
                 mp3->setDelay(CODEC_DELAY_MS);   
                 mp3->begin();
+                filter.begin();
             } 
         }
 
@@ -100,7 +105,7 @@ class MP3DecoderHelix : public AudioDecoder  {
         /// Write mp3 data to decoder
         size_t write(const void* mp3Data, size_t len) {
             LOGD("%s: %zu", LOG_METHOD, len);
-            return mp3==nullptr ? 0 : mp3->write(mp3Data, len);
+            return mp3==nullptr ? 0 : filter.write((uint8_t*)mp3Data, len);
         }
 
         /// checks if the class is active 
@@ -138,6 +143,7 @@ class MP3DecoderHelix : public AudioDecoder  {
 
     protected:
         libhelix::MP3DecoderHelix *mp3=nullptr;
+        MetaDataFilter<libhelix::MP3DecoderHelix> filter;
 
 };
 
