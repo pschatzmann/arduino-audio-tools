@@ -872,6 +872,63 @@ class VolumeStream : public AudioStreamX {
 };
 
 /**
+ * @brief Replicates the output to multiple .
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class MultiStream : public AudioStreamX {
+    public:
+destinations
+        /// Defines a MultiStream with no final output: Define your outputs with add()
+        MultiStream() = default;
+
+        /// Defines a MultiStream with a single final outputs,
+        MultiStream(AudioStream &out){
+            vector.push_back(&out);            
+        }
+
+        /// Defines a MultiStream with 2 final outputs
+        MultiStream(AudioStream &out1, AudioStream &out2){
+            vector.push_back(&out1);
+            vector.push_back(&out2);
+        }
+
+        /// Add an additional AudioStream output
+        void add(AudioStream &out){
+            vector.push_back(&out);
+        }
+
+        void flush() {
+            for (int j=0;j<vector.size();j++){
+                vector[j]->flush();
+            }
+        }
+
+        void setAudioInfo(AudioBaseInfo info){
+            for (int j=0;j<vector.size();j++){
+                vector[j]->setAudioInfo(info);
+            }
+        }
+
+        size_t write(const uint8_t *buffer, size_t size) override {
+            for (int j=0;j<vector.size();j++){
+                int open = size;
+                int start = 0;
+                while(open>0){
+                    int written = vector[j]->write(buffer+start, open);
+                    open -= written;
+                    start += written;
+                }
+            }
+            return size;
+        }
+
+    protected:
+        Vector<AudioStream*> vector;
+
+};
+
+/**
  * @brief MixerStream is mixing the input from Multiple Input Streams.
  * All streams must have the same audo format (sample rate, channels, bits per sample) 
  * @author Phil Schatzmann
