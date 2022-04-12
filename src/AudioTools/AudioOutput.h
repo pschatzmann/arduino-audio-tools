@@ -542,6 +542,7 @@ class VolumePrint : public AudioPrint {
 
         ~VolumePrint() {
             if (volumes!=nullptr) delete volumes;
+            if (volumes_tmp!=nullptr) delete volumes_tmp;
         }
      
         bool begin(AudioBaseInfo info){
@@ -553,13 +554,14 @@ class VolumePrint : public AudioPrint {
             this->info = info;
             if (info.channels){
                 volumes = new float[info.channels];
+                volumes_tmp = new float[info.channels];
             }
         }
 
         size_t write(const uint8_t *buffer, size_t size){
-            float f_volume = 0;
+            float f_volume_tmp = 0;
             for (int j=0;j<info.channels;j++){
-                volumes[j]=0;
+                volumes_tmp[j]=0;
             }
             switch(info.bits_per_sample){
                 case 16: {
@@ -569,6 +571,7 @@ class VolumePrint : public AudioPrint {
                             float tmp = static_cast<float>(abs(buffer16[j]));
                             updateVolume(tmp,j);
                         }
+                        commit();
                     } break;
                 case 32: {
                         int32_t *buffer32 = (int32_t*)buffer;
@@ -577,6 +580,7 @@ class VolumePrint : public AudioPrint {
                             float tmp = static_cast<float>(abs(buffer32[j]))/samples32;
                             updateVolume(tmp,j);
                         }
+                        commit();
                     }break;
 
                 default:
@@ -597,18 +601,26 @@ class VolumePrint : public AudioPrint {
             return channel<info.channels ? volumes[channel]:0.0;
         }
 
-
     protected:
         AudioBaseInfo info;
+        float f_volume_tmp = 0;
         float f_volume = 0;
         float *volumes=nullptr;
+        float *volumes_tmp=nullptr;
 
         void updateVolume(float tmp, int j) {
             if (tmp>f_volume){
-                f_volume = tmp;
+                f_volume_tmp = tmp;
             }
-            if (volumes!=nullptr && tmp>volumes[j%info.channels]){
-                volumes[j%info.channels] = tmp;
+            if (volumes_tmp!=nullptr && tmp>volumes_tmp[j%info.channels]){
+                volumes_tmp[j%info.channels] = tmp;
+            }
+        }
+
+        void commit(){
+            f_volume = f_volume_tmp;
+            for (int j=0;j<info.channels;j++){
+                volumes[j] = volumes_tmp[j];
             }
         }
 };
