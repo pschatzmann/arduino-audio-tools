@@ -64,6 +64,7 @@ class MetaDataFilter {
 
     protected:
         Decoder *p_decoder=nullptr;
+        enum MetaType {TAG, TAG_PLUS, ID3};
         int start = 0;
         /// ID3 verion 2 TAG Header (10 bytes)
         struct ID3v2 {
@@ -75,24 +76,25 @@ class MetaDataFilter {
 
         /// determines if the data conatins a ID3v1 or ID3v2 tag
         bool findTag(uint8_t* data, size_t len, int &pos_tag, int &meta_len){
-            bool metadata_found = false;
-            if (find("TAG", (const char*)data, len, pos_tag)){
-                LOGD("TAG");
-                // ID3v1
-                if (data[pos_tag+3]=='+'){
-                    meta_len = 227;
-                } else {
-                    meta_len = 128;
+            MetaType tag_type;
+            if (find((const char*)data, len, pos_tag, tag_type)){
+                switch(tag_type){
+                    case TAG:
+                        LOGD("TAG");
+                        meta_len = 128;
+                        break;
+                    case TAG_PLUS:
+                        LOGD("TAG+");
+                        meta_len = 227;
+                        break;
+                    case ID3:
+                        LOGD("ID3");
+                        memcpy(&tagv2, data+pos_tag, sizeof(ID3v2));   
+                        meta_len = calcSizeID3v2(tagv2.size);
+                        break;
+
                 }
                 return true;
-            } else {
-                // ID3v2
-                if (find("ID3", (const char*)data, len, pos_tag)){
-                    LOGD("ID3");
-                    memcpy(&tagv2, data+pos_tag, sizeof(ID3v2));   
-                    meta_len = calcSizeID3v2(tagv2.size);
-                    return true;
-                } 
             }
             return false;
         }
@@ -107,12 +109,14 @@ class MetaDataFilter {
         }
 
         /// find the tag position in the string;
-        bool find(const char* tag, const char*str, size_t len, int &pos){
+        bool find(const char*str, size_t len, int &pos, MetaType &type){
             if (str==nullptr || len<=0) return false;
-            size_t meta_len = strlen(tag);
-            for (size_t j=0;j<=len-meta_len-1;j++){
-                if (memcmp(str+j,tag, meta_len)==0){
-                    pos = j;
+            for (size_t j=0;j<=len-3;j++){
+                if (str[j]=='T' && str[j+1]=='A' && str[j+2]=='G'){
+                    type = str[j+3]=='+' ? TAG_PLUS : TAG;
+                    return true;
+                } else if (str[j]=='I' && str[j+1]=='D' && str[j+2]=='3'){
+                    type = ID3;
                     return true;
                 }
             }
