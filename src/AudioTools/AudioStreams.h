@@ -878,7 +878,6 @@ class VolumeStream : public AudioStreamX {
  */
 class MultiStream : public AudioStreamX {
     public:
-destinations
         /// Defines a MultiStream with no final output: Define your outputs with add()
         MultiStream() = default;
 
