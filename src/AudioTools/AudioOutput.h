@@ -539,6 +539,11 @@ class MultiOutput : public AudioPrint {
 class VolumePrint : public AudioPrint {
     public:
         VolumePrint() = default;
+
+        ~VolumePrint() {
+            if (volumes!=nullptr) delete volumes;
+        }
+     
         bool begin(AudioBaseInfo info){
             setAudioInfo(info);
             return true;
@@ -546,6 +551,9 @@ class VolumePrint : public AudioPrint {
 
         void setAudioInfo(AudioBaseInfo info){
             this->info = info;
+            if (info.channels){
+                volumes = new float[info.channels];
+            }
         }
 
         size_t write(const uint8_t *buffer, size_t size){
@@ -555,14 +563,22 @@ class VolumePrint : public AudioPrint {
                         int16_t *buffer16 = (int16_t*)buffer;
                         int samples16 = size/2;
                         for (int j=0;j<samples16;j++){
-                            f_volume += static_cast<float>(abs(buffer16[j]))/samples16;
+                            float tmp = static_cast<float>(abs(buffer16[j]))/samples16;
+                            f_volume += tmp;
+                            if (volumes!=nullptr){
+                                volumes[j%info.channels]+=tmp;
+                            }
                         }
                     } break;
                 case 32: {
                         int32_t *buffer32 = (int32_t*)buffer;
                         int samples32 = size/4;
                         for (int j=0;j<samples32;j++){
-                            f_volume += static_cast<float>(abs(buffer32[j]))/samples32;
+                            float tmp = static_cast<float>(abs(buffer32[j]))/samples32;
+                            f_volume += tmp;
+                            if (volumes!=nullptr){
+                                volumes[j%info.channels]+=tmp;
+                            }
                         }
                     }break;
 
@@ -578,11 +594,17 @@ class VolumePrint : public AudioPrint {
         float volume() {
             return f_volume;
         }
+        
+        /// Determines the volume for the indicated channel
+        float volume(int channel) {
+            return channel<info.channels ? volumes[channel]:0.0;
+        }
 
 
     protected:
         AudioBaseInfo info;
         float f_volume = 0;
+        float *volumes=nullptr;
 };
 
 /**
