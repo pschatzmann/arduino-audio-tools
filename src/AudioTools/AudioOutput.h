@@ -558,16 +558,16 @@ class VolumePrint : public AudioPrint {
 
         size_t write(const uint8_t *buffer, size_t size){
             float f_volume = 0;
+            for (int j=0;j<info.channels;j++){
+                volumes[j]=0;
+            }
             switch(info.bits_per_sample){
                 case 16: {
                         int16_t *buffer16 = (int16_t*)buffer;
                         int samples16 = size/2;
                         for (int j=0;j<samples16;j++){
-                            float tmp = static_cast<float>(abs(buffer16[j]))/samples16;
-                            f_volume += tmp;
-                            if (volumes!=nullptr){
-                                volumes[j%info.channels]+=tmp;
-                            }
+                            float tmp = static_cast<float>(abs(buffer16[j]));
+                            updateVolume(tmp,j);
                         }
                     } break;
                 case 32: {
@@ -575,10 +575,7 @@ class VolumePrint : public AudioPrint {
                         int samples32 = size/4;
                         for (int j=0;j<samples32;j++){
                             float tmp = static_cast<float>(abs(buffer32[j]))/samples32;
-                            f_volume += tmp;
-                            if (volumes!=nullptr){
-                                volumes[j%info.channels]+=tmp;
-                            }
+                            updateVolume(tmp,j);
                         }
                     }break;
 
@@ -594,7 +591,7 @@ class VolumePrint : public AudioPrint {
         float volume() {
             return f_volume;
         }
-        
+
         /// Determines the volume for the indicated channel
         float volume(int channel) {
             return channel<info.channels ? volumes[channel]:0.0;
@@ -605,6 +602,15 @@ class VolumePrint : public AudioPrint {
         AudioBaseInfo info;
         float f_volume = 0;
         float *volumes=nullptr;
+
+        void updateVolume(float tmp, int j) {
+            if (tmp>f_volume){
+                f_volume = tmp;
+            }
+            if (volumes!=nullptr && tmp>volumes[j%info.channels]){
+                volumes[j%info.channels] = tmp;
+            }
+        }
 };
 
 /**
