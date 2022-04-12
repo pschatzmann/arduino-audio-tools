@@ -38,6 +38,11 @@ class AudioPrint : public Print {
             info.logInfo();
         }
 
+        /// If true we need to release the related memory
+        virtual bool doRelease() {
+            return false;
+        }
+
     protected:
         uint8_t tmp[MAX_SINGLE_CHARS];
         int tmpPos=0;
@@ -404,6 +409,31 @@ class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource {
         bool active;        
 };
 
+/**
+ * @brief Wrapper which converts a AudioStream to a AudioPrint
+ * 
+ */
+class AudioStreamToPrint : public AudioPrint {
+    public: 
+        AudioStreamToPrint(AudioStream &stream){
+            p_stream = &stream;
+        }
+        void setAudioInfo(AudioBaseInfo info){
+            p_stream->setAudioInfo(info);
+        }
+        size_t write(const uint8_t *buffer, size_t size){
+            return p_stream->write(buffer,size);
+        }
+
+        virtual bool doRelease() {
+            return true;
+        }
+       
+    protected:
+        AudioStream *p_stream=nullptr;
+
+
+};
 
 /**
  * @brief Replicates the output to multiple destinations.
@@ -418,18 +448,47 @@ class MultiOutput : public AudioPrint {
 
         /// Defines a MultiOutput with a single final outputs,
         MultiOutput(AudioPrint &out){
-            vector.push_back(&out);            
+            add(out);            
+        }
+
+        MultiOutput(AudioStream &out){
+            add(out);            
         }
 
         /// Defines a MultiOutput with 2 final outputs
         MultiOutput(AudioPrint &out1, AudioPrint &out2){
-            vector.push_back(&out1);
-            vector.push_back(&out2);
+            add(out1);
+            add(out2);
+        }
+
+        /// Defines a MultiOutput with 2 final outputs
+        MultiOutput(AudioStream &out1, AudioStream &out2){
+            add(out1);
+            add(out2);
+        }
+
+        ~MultiOutput() {
+            for (int j=0;j<vector.size();j++){
+                if (vector[0]->doRelease()){
+                    delete vector[0];
+                }
+            }
+        }
+
+        bool begin(AudioBaseInfo info){
+            setAudioInfo(info);
+            return true;
         }
 
         /// Add an additional AudioPrint output
         void add(AudioPrint &out){
             vector.push_back(&out);
+        }
+
+        /// Add an AudioStream to the output
+        void add(AudioStream &stream){
+            AudioStreamToPrint* out = new AudioStreamToPrint(stream);
+            vector.push_back(out);
         }
 
         void flush() {
@@ -470,6 +529,60 @@ class MultiOutput : public AudioPrint {
     protected:
         Vector<AudioPrint*> vector;
 
+};
+
+/**
+ * @brief A simple class to determine the volume
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class VolumePrint : public AudioPrint {
+    public:
+        VolumePrint() = default;
+        bool begin(AudioBaseInfo info){
+            setAudioInfo(info);
+            return true;
+        }
+
+        void setAudioInfo(AudioBaseInfo info){
+            this->info = info;
+        }
+
+        size_t write(const uint8_t *buffer, size_t size){
+            float f_volume = 0;
+            switch(info.bits_per_sample){
+                case 16: {
+                        int16_t *buffer16 = (int16_t*)buffer;
+                        int samples16 = size/2;
+                        for (int j=0;j<samples16;j++){
+                            f_volume += static_cast<float>(abs(buffer16[j]))/samples16;
+                        }
+                    } break;
+                case 32: {
+                        int32_t *buffer32 = (int32_t*)buffer;
+                        int samples32 = size/4;
+                        for (int j=0;j<samples32;j++){
+                            f_volume += static_cast<float>(abs(buffer32[j]))/samples32;
+                        }
+                    }break;
+
+                default:
+                    LOGE("Unsupported bits_per_sample: %d", info.bits_per_sample);
+                    f_volume = 0;
+                    break;
+            }
+            return size;
+        }
+
+        /// Determines the volume (the range depends on the bits_per_sample)
+        float volume() {
+            return f_volume;
+        }
+
+
+    protected:
+        AudioBaseInfo info;
+        float f_volume = 0;
 };
 
 /**
