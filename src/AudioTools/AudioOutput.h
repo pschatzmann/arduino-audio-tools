@@ -413,9 +413,9 @@ class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource {
  * @brief Wrapper which converts a AudioStream to a AudioPrint
  * 
  */
-class AudioStreamToPrint : public AudioPrint {
+class AudioStreamToAudioPrint : public AudioPrint {
     public: 
-        AudioStreamToPrint(AudioStream &stream){
+        AudioStreamToAudioPrint(AudioStream &stream){
             p_stream = &stream;
         }
         void setAudioInfo(AudioBaseInfo info){
@@ -431,9 +431,29 @@ class AudioStreamToPrint : public AudioPrint {
        
     protected:
         AudioStream *p_stream=nullptr;
-
-
 };
+
+/**
+ * @brief Wrapper which converts a Print to a AudioPrint
+ * 
+ */
+class PrintToAudioPrint : public AudioPrint {
+    public: 
+        PrintToAudioPrint(Print &print){
+            p_print = &print;
+        }
+        void setAudioInfo(AudioBaseInfo info){
+        }
+        size_t write(const uint8_t *buffer, size_t size){
+            return p_print->write(buffer,size);
+        }
+        virtual bool doRelease() {
+            return true;
+        }
+    protected:
+        Print *p_print=nullptr;
+};
+
 
 /**
  * @brief Replicates the output to multiple destinations.
@@ -487,7 +507,12 @@ class MultiOutput : public AudioPrint {
 
         /// Add an AudioStream to the output
         void add(AudioStream &stream){
-            AudioStreamToPrint* out = new AudioStreamToPrint(stream);
+            AudioStreamToAudioPrint* out = new AudioStreamToAudioPrint(stream);
+            vector.push_back(out);
+        }
+
+        void add(Print &print){
+            PrintToAudioPrint* out = new PrintToAudioPrint(print);
             vector.push_back(out);
         }
 
