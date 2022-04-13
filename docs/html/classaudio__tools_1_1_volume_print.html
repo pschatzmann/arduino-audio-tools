@@ -68,6 +68,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_volume_print-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">audio_tools::VolumePrint Class Reference</div></div>
@@ -221,17 +222,36 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (const ch
 <tr class="memitem:a5be30d49adae2406a270c29ba9a3e0a3 inherit pub_methods_class_print"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_print.html#a5be30d49adae2406a270c29ba9a3e0a3">write</a> (uint8_t)=0</td></tr>
 <tr class="separator:a5be30d49adae2406a270c29ba9a3e0a3 inherit pub_methods_class_print"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a987cf963c0b2ae0be2b854cf490dd287"><td class="memItemLeft" align="right" valign="top"><a id="a987cf963c0b2ae0be2b854cf490dd287" name="a987cf963c0b2ae0be2b854cf490dd287"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>commit</b> ()</td></tr>
+<tr class="separator:a987cf963c0b2ae0be2b854cf490dd287"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bbd7d6185b0e25ee1e4120eeff028cf"><td class="memItemLeft" align="right" valign="top"><a id="a2bbd7d6185b0e25ee1e4120eeff028cf" name="a2bbd7d6185b0e25ee1e4120eeff028cf"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>updateVolume</b> (float tmp, int j)</td></tr>
+<tr class="separator:a2bbd7d6185b0e25ee1e4120eeff028cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_class_print"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_print')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_print.html">Print</a></td></tr>
+<tr class="memitem:a46656410e23c0ec14d7a01b38b3b6f00 inherit pro_methods_class_print"><td class="memItemLeft" align="right" valign="top"><a id="a46656410e23c0ec14d7a01b38b3b6f00" name="a46656410e23c0ec14d7a01b38b3b6f00"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteError</b> (int err=1)</td></tr>
+<tr class="separator:a46656410e23c0ec14d7a01b38b3b6f00 inherit pro_methods_class_print"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a2d313533992a3da500df49c91a98de9b"><td class="memItemLeft" align="right" valign="top"><a id="a2d313533992a3da500df49c91a98de9b" name="a2d313533992a3da500df49c91a98de9b"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>f_volume</b> = 0</td></tr>
 <tr class="separator:a2d313533992a3da500df49c91a98de9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebd7e1c1296be7928ddfa986f51307ee"><td class="memItemLeft" align="right" valign="top"><a id="aebd7e1c1296be7928ddfa986f51307ee" name="aebd7e1c1296be7928ddfa986f51307ee"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>f_volume_tmp</b> = 0</td></tr>
+<tr class="separator:aebd7e1c1296be7928ddfa986f51307ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad07a545fb0065918a318d8ef35f03ae3"><td class="memItemLeft" align="right" valign="top"><a id="ad07a545fb0065918a318d8ef35f03ae3" name="ad07a545fb0065918a318d8ef35f03ae3"></a>
 <a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>info</b></td></tr>
 <tr class="separator:ad07a545fb0065918a318d8ef35f03ae3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1dacaacb3129d298a788f145b1c33c6"><td class="memItemLeft" align="right" valign="top"><a id="ae1dacaacb3129d298a788f145b1c33c6" name="ae1dacaacb3129d298a788f145b1c33c6"></a>
 float *&#160;</td><td class="memItemRight" valign="bottom"><b>volumes</b> =nullptr</td></tr>
 <tr class="separator:ae1dacaacb3129d298a788f145b1c33c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b1401b064c4314a2fec6144f0b72174"><td class="memItemLeft" align="right" valign="top"><a id="a2b1401b064c4314a2fec6144f0b72174" name="a2b1401b064c4314a2fec6144f0b72174"></a>
+float *&#160;</td><td class="memItemRight" valign="bottom"><b>volumes_tmp</b> =nullptr</td></tr>
+<tr class="separator:a2b1401b064c4314a2fec6144f0b72174"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classaudio__tools_1_1_audio_print"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classaudio__tools_1_1_audio_print')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classaudio__tools_1_1_audio_print.html">audio_tools::AudioPrint</a></td></tr>
 <tr class="memitem:aecd362b3af57a0815b9547f8797512ae inherit pro_attribs_classaudio__tools_1_1_audio_print"><td class="memItemLeft" align="right" valign="top"><a id="aecd362b3af57a0815b9547f8797512ae" name="aecd362b3af57a0815b9547f8797512ae"></a>
 uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>tmp</b> [MAX_SINGLE_CHARS]</td></tr>
@@ -239,13 +259,6 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>tmp</b> [MAX_SINGL
 <tr class="memitem:a9b463ab612e2a848734cf95caf9a7fb8 inherit pro_attribs_classaudio__tools_1_1_audio_print"><td class="memItemLeft" align="right" valign="top"><a id="a9b463ab612e2a848734cf95caf9a7fb8" name="a9b463ab612e2a848734cf95caf9a7fb8"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>tmpPos</b> =0</td></tr>
 <tr class="separator:a9b463ab612e2a848734cf95caf9a7fb8 inherit pro_attribs_classaudio__tools_1_1_audio_print"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
-<tr class="inherit_header pro_methods_class_print"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_print')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_print.html">Print</a></td></tr>
-<tr class="memitem:a46656410e23c0ec14d7a01b38b3b6f00 inherit pro_methods_class_print"><td class="memItemLeft" align="right" valign="top"><a id="a46656410e23c0ec14d7a01b38b3b6f00" name="a46656410e23c0ec14d7a01b38b3b6f00"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteError</b> (int err=1)</td></tr>
-<tr class="separator:a46656410e23c0ec14d7a01b38b3b6f00 inherit pro_methods_class_print"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >A simple class to determine the volume. </p>

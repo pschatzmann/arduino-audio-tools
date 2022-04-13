@@ -14,6 +14,6 @@ var searchData=
   ['distortion_11',['Distortion',['../classaudio__tools_1_1_distortion.html#a42d0f19d06c517b8369748ef60ebc3f1',1,'audio_tools::Distortion']]],
   ['divisor_12',['divisor',['../classaudio__tools_1_1_resample_parameter_estimator.html#affb6137e7d2e1492b17f6e9f6ab97b3d',1,'audio_tools::ResampleParameterEstimator']]],
   ['doloop_13',['doLoop',['../classaudio__tools_1_1_audio_server.html#afda20b39daed47ea702fb5b22f71d160',1,'audio_tools::AudioServer']]],
-  ['dorelease_14',['doRelease',['../classaudio__tools_1_1_audio_print.html#ac743f1721f1ca3399098c90255986eaa',1,'audio_tools::AudioPrint::doRelease()'],['../classaudio__tools_1_1_audio_stream_to_print.html#aba7b888a85b8f6d84fb19395b9f86e90',1,'audio_tools::AudioStreamToPrint::doRelease()']]],
+  ['dorelease_14',['doRelease',['../classaudio__tools_1_1_audio_print.html#ac743f1721f1ca3399098c90255986eaa',1,'audio_tools::AudioPrint::doRelease()'],['../classaudio__tools_1_1_adapter_audio_stream_to_audio_print.html#a9ef397dedf74ab0bf686991f74d0e4d5',1,'audio_tools::AdapterAudioStreamToAudioPrint::doRelease()'],['../classaudio__tools_1_1_adapter_print_to_audio_print.html#a553541fd51f57c2beaf1cdd27e8cb1a5',1,'audio_tools::AdapterPrintToAudioPrint::doRelease()']]],
   ['downsample_15',['downsample',['../classaudio__tools_1_1_resample_parameter_estimator.html#ad32421ebe50a171761f3e70b8d542968',1,'audio_tools::ResampleParameterEstimator']]]
 ];

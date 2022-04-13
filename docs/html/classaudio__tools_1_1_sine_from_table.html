@@ -104,10 +104,15 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (<a class="
 <tr class="separator:a2b5148f1151cac7eea53a37817796c3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31591edede6be93c47508fde5b067c32"><td class="memItemLeft" align="right" valign="top"><a id="a31591edede6be93c47508fde5b067c32" name="a31591edede6be93c47508fde5b067c32"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setAmplitude</b> (float amplitude)</td></tr>
+<tr class="memdesc:a31591edede6be93c47508fde5b067c32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the new amplitude (volume) <br /></td></tr>
 <tr class="separator:a31591edede6be93c47508fde5b067c32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad8f0fe088c07b0874a543aa3f35a4cc4"><td class="memItemLeft" align="right" valign="top"><a id="ad8f0fe088c07b0874a543aa3f35a4cc4" name="ad8f0fe088c07b0874a543aa3f35a4cc4"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setFrequency</b> (float freq)</td></tr>
 <tr class="separator:ad8f0fe088c07b0874a543aa3f35a4cc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1155dcdc8c9211c55c26482d364935d"><td class="memItemLeft" align="right" valign="top"><a id="ab1155dcdc8c9211c55c26482d364935d" name="ab1155dcdc8c9211c55c26482d364935d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setMaxAmplitudeStep</b> (float step)</td></tr>
+<tr class="memdesc:ab1155dcdc8c9211c55c26482d364935d"><td class="mdescLeft">&#160;</td><td class="mdescRight">To avoid pops we do not allow to big amplitude changes at once and spread them over time. <br /></td></tr>
+<tr class="separator:ab1155dcdc8c9211c55c26482d364935d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classaudio__tools_1_1_sound_generator"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classaudio__tools_1_1_sound_generator')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classaudio__tools_1_1_sound_generator.html">audio_tools::SoundGenerator&lt; T &gt;</a></td></tr>
 <tr class="memitem:a6b74e532d81cfc4a0e1529eea6f684e2 inherit pub_methods_classaudio__tools_1_1_sound_generator"><td class="memItemLeft" align="right" valign="top"><a id="a6b74e532d81cfc4a0e1529eea6f684e2" name="a6b74e532d81cfc4a0e1529eea6f684e2"></a>
 virtual <a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>audioInfo</b> ()</td></tr>
@@ -155,6 +160,9 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>interpolate</b> (flo
 <tr class="memitem:a50fe4ef900936d32fc12b6caee481dfc"><td class="memItemLeft" align="right" valign="top"><a id="a50fe4ef900936d32fc12b6caee481dfc" name="a50fe4ef900936d32fc12b6caee481dfc"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>map</b> (float x, float in_min, float in_max, float out_min, float out_max)</td></tr>
 <tr class="separator:a50fe4ef900936d32fc12b6caee481dfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a5b1008e94cd7702dbe3c0766011257"><td class="memItemLeft" align="right" valign="top"><a id="a1a5b1008e94cd7702dbe3c0766011257" name="a1a5b1008e94cd7702dbe3c0766011257"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>updateAmplitudeInSteps</b> ()</td></tr>
+<tr class="separator:a1a5b1008e94cd7702dbe3c0766011257"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -173,6 +181,9 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>base_frequency</b> =
 <tr class="memitem:a5362255257ca1584ef92d4757aa5f720"><td class="memItemLeft" align="right" valign="top"><a id="a5362255257ca1584ef92d4757aa5f720" name="a5362255257ca1584ef92d4757aa5f720"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_first</b> = true</td></tr>
 <tr class="separator:a5362255257ca1584ef92d4757aa5f720"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae8117df984d1a1b9aa27fe9beda27fe"><td class="memItemLeft" align="right" valign="top"><a id="aae8117df984d1a1b9aa27fe9beda27fe" name="aae8117df984d1a1b9aa27fe9beda27fe"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>max_amplitude_step</b> = 50</td></tr>
+<tr class="separator:aae8117df984d1a1b9aa27fe9beda27fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a94101729fdb038b44bde9252153f6147"><td class="memItemLeft" align="right" valign="top"><a id="a94101729fdb038b44bde9252153f6147" name="a94101729fdb038b44bde9252153f6147"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>step</b> = 1.0</td></tr>
 <tr class="separator:a94101729fdb038b44bde9252153f6147"><td class="memSeparator" colspan="2">&#160;</td></tr>
