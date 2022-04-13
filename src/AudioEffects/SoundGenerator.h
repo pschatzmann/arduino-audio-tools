@@ -145,7 +145,8 @@ class SoundGenerator  {
 
 
 /**
- * @brief Generates a Sound with the help of sin() function.
+ * @brief Generates a Sound with the help of sin() function. If you plan to change the amplitude or frequency (incrementally),
+ * I suggest to use SineFromTable instead.
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 
