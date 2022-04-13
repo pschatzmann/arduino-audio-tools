@@ -492,8 +492,14 @@ class SineFromTable  : public SoundGenerator<T> {
             this->amplitude_to_be = amplitude;
         }
 
+        /// Defines the new amplitude (volume)
         void setAmplitude(float amplitude){
             this->amplitude_to_be = amplitude;
+        }
+
+        /// To avoid pops we do not allow to big amplitude changes at once and spread them over time
+        void setMaxAmplitudeStep(float step){
+            max_amplitude_step = step;
         }
 
         T readSample() {
@@ -503,7 +509,9 @@ class SineFromTable  : public SoundGenerator<T> {
                angle -= 360; 
                // update frequency at start of circle (near 0 degrees)
                step = step_new;
-               amplitude = amplitude_to_be;
+
+               updateAmplitudeInSteps();
+               //amplitude = amplitude_to_be;
             }
             return amplitude * interpolate(angle);
         }
@@ -535,6 +543,7 @@ class SineFromTable  : public SoundGenerator<T> {
         bool is_first = true;
         float amplitude;
         float amplitude_to_be;
+        float max_amplitude_step = 50;
         float base_frequency = 1.0;
         float step = 1.0; 
         float step_new = 1.0; 
@@ -556,6 +565,16 @@ class SineFromTable  : public SoundGenerator<T> {
 
         float map(float x, float in_min, float in_max, float out_min, float out_max) {
           return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+        }
+
+        void updateAmplitudeInSteps() {
+            float diff = amplitude_to_be - amplitude; 
+            if (abs(diff) > max_amplitude_step){
+                diff = (diff<0) ? -max_amplitude_step : max_amplitude_step;
+            } 
+            if (diff>=1.0){
+                amplitude += diff;
+            }
         }
 };
 
