@@ -1,6 +1,7 @@
 #pragma once
 #include <math.h>
 #include "AudioTools/AudioOutput.h"
+#include "AudioBasic/Int24.h"
 
 namespace audio_tools {
 
@@ -17,12 +18,11 @@ struct ConfigEquilizer3Bands : public AudioBaseInfo {
     int lowfreq=880;
     int highfreq=5000;
 };
+
 /**
  * @brief 3 Band Equilizer inspired from https://www.musicdsp.org/en/latest/Filters/236-3-band-equaliser.html
  * @author pschatzmann
- * @tparam T 
  */
-template <typename T>
 class Equilizer3Bands : public AudioPrint {
     public:
 
@@ -35,27 +35,22 @@ class Equilizer3Bands : public AudioPrint {
         }
 
         ConfigEquilizer3Bands defaultConfig() {
-            Equilizer3Bands v;
+            ConfigEquilizer3Bands v;
             return v;
         }
 
         bool begin(ConfigEquilizer3Bands config){
             cfg = config;
-            cfg.bits_per_sample = sizeof(T)*8;
 
             p_out->setAudioInfo(cfg);
             // setup state for each channel
             if (cfg.channels>max_state_count){
                 if (state!=nullptr) delete[]state;
-                state = new EQSTATE(cfg.channels);
+                state = new EQSTATE[cfg.channels];
                 max_state_count = cfg.channels;
             }
             // Clear state
             memset(&state[0],0,sizeof(EQSTATE));
-            // Set Low/Mid/High gains to unity
-            state[0].lg = 1.0;
-            state[0].mg = 1.0;
-            state[0].hg = 1.0;
 
             // Calculate filter cutoff frequencies
             state[0].lf = 2 * sin(M_PI * ((float)cfg.lowfreq / (float)cfg.sample_rate));
@@ -76,30 +71,47 @@ class Equilizer3Bands : public AudioPrint {
         }
 
         void setGainLow(float v){
-            for (int j=0;j<cfg.channels;j++){
-                state[j].lg = v;
-            }
+            lg = v;
         }
 
         void setGainMid(float v){
-            for (int j=0;j<cfg.channels;j++){
-                state[j].mg = v;
-            }
+            mg = v;
         }
 
         void setGainHigh(float v){
-            for (int j=0;j<cfg.channels;j++){
-                state[j].hg = v;
-            }
+            hg = v;
         }
 
-        size_t write(uint8_t *data, size_t len) override {
-            T* p_dataT = (T*)data;
-            size_t sample_count = len / sizeof(T);
-            for (int j=0; j<sample_count; j+=cfg.channels){
-                for (int ch=0; ch<cfg.channels; ch++){
-                    p_dataT[j+ch] = sample(state[ch], p_dataT[j+ch]);
-                }
+        size_t write(const uint8_t *data, size_t len) override {
+            switch(cfg.bits_per_sample){
+                case 16: {
+                        int16_t* p_dataT = (int16_t*)data;
+                        size_t sample_count = len / sizeof(int16_t);
+                        for (int j=0; j<sample_count; j+=cfg.channels){
+                            for (int ch=0; ch<cfg.channels; ch++){
+                                p_dataT[j+ch] = sample(state[ch], p_dataT[j+ch]);
+                            }
+                        }
+                    }
+                case 24: {
+                        int24_t* p_dataT = (int24_t*)data;
+                        size_t sample_count = len / sizeof(int24_t);
+                        for (int j=0; j<sample_count; j+=cfg.channels){
+                            for (int ch=0; ch<cfg.channels; ch++){
+                                int32_t tmp_i = sample(state[ch],p_dataT[j+ch].toFloat());
+                                p_dataT[j+ch] = tmp_i;
+                            }
+                        }
+                    }
+                case 32: {
+                        int32_t* p_dataT = (int32_t*)data;
+                        size_t sample_count = len / sizeof(int32_t);
+                        for (int j=0; j<sample_count; j+=cfg.channels){
+                            for (int ch=0; ch<cfg.channels; ch++){
+                                p_dataT[j+ch] = (const int32_t)sample(state[ch], p_dataT[j+ch]);
+                            }
+                        }
+                    }
             }
             return p_out->write(data, len);
         }
@@ -113,6 +125,10 @@ class Equilizer3Bands : public AudioPrint {
         AudioPrint *p_out=nullptr;
         ConfigEquilizer3Bands cfg;
         int max_state_count=0;
+        // Gain Controls
+        float  lg = 1.0;       // low  gain
+        float  mg = 1.0;       // mid  gain
+        float  hg = 1.0;       // high gain
 
         struct EQSTATE {
             // Filter #1 (Low band)
@@ -134,10 +150,6 @@ class Equilizer3Bands : public AudioPrint {
             float  sdm2;     //                   2
             float  sdm3;     //                   3
 
-            // Gain Controls
-            float  lg;       // low  gain
-            float  mg;       // mid  gain
-            float  hg;       // high gain
         } *state=nullptr;
 
         // calculates a single sample using the indicated state 
@@ -162,9 +174,9 @@ class Equilizer3Bands : public AudioPrint {
             // Calculate midrange (signal - (low + high))
             m          = es.sdm3 - (h + l);
             // Scale, Combine and store
-            l         *= es.lg;
-            m         *= es.mg;
-            h         *= es.hg;
+            l         *= lg;
+            m         *= mg;
+            h         *= hg;
 
             // Shuffle history buffer
             es.sdm3   = es.sdm2;
