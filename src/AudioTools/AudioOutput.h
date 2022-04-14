@@ -4,6 +4,7 @@
 #include "AudioTools/AudioTypes.h"
 #include "AudioTools/Converter.h"
 #include "AudioTools/Buffers.h"
+#include "AudioTools/AudioStreams.h"
 #include "AudioBasic/Int24.h"
 
 #define MAX_SINGLE_CHARS 8
