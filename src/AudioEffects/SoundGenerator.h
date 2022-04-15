@@ -531,6 +531,12 @@ class SineFromTable  : public SoundGenerator<T> {
             return true;
         }
 
+        bool begin(int channels, int sample_rate, uint16_t frequency=0){
+            SoundGenerator<T>::info.channels  = channels;
+            SoundGenerator<T>::info.sample_rate = sample_rate;
+            return begin(SoundGenerator<T>::info, frequency);
+        }
+
         void setFrequency(float freq) {
             step_new = freq / base_frequency;
             if (is_first){
