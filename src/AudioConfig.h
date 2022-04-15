@@ -139,7 +139,9 @@
  * @brief Platform specific Settings
  */
 
-#ifdef ESP32
+//-------ESP32---------
+
+#if defined(ESP32)  && !defined(ARDUINO_ESP32C3_DEV)
 #include "esp32-hal-log.h"
 // optional libraries
 //#define USE_A2DP
@@ -195,7 +197,55 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 
 #endif
 
-//----------------
+//-------ESP32C3---------
+
+#if defined(ESP32)  && defined(ARDUINO_ESP32C3_DEV)
+#include "esp32-hal-log.h"
+// optional libraries
+//#define USE_A2DP
+//#define USE_ESP8266_AUDIO
+
+#define USE_PWM
+#define USE_URL_ARDUINO
+#define USE_I2S
+#define USE_AUDIO_SERVER
+#define USE_URLSTREAM_TASK
+#define USE_TYPETRAITS
+#define USE_EFFECTS_SUITE
+#define USE_TIMER
+
+#define PWM_FREQENCY 30000
+#define PIN_PWM_START 1
+#define PIN_I2S_BCK 6
+#define PIN_I2S_WS 7
+#define PIN_I2S_DATA_OUT 8
+#define PIN_I2S_DATA_IN 9
+#define I2S_USE_APLL false  
+// Default Setting: The mute pin can be switched off by setting it to -1. Or you could drive the LED by assigning LED_BUILTIN
+#define PIN_I2S_MUTE 5
+#define SOFT_MUTE_VALUE LOW  
+#define PIN_CS SS SPICS0
+#define PIN_ADC1 21 
+#define PIN_ADC2 22
+
+#define I2S_AUTO_CLEAR true
+
+// URLStream
+#define URL_STREAM_CORE 0
+#define URL_STREAM_PRIORITY 2
+#define URL_STREAM_BUFFER_COUNT 10
+#define STACK_SIZE 30000
+
+// Default LED
+#ifndef LED_BUILTIN
+# define LED_BUILTIN 13 // pin number is specific to your esp32 board
+#endif
+
+typedef uint32_t eps32_i2s_sample_rate_type;
+
+#endif
+
+//----- ESP8266 -----------
 #ifdef ESP8266
 //#define USE_URL_ARDUINO // commented out because of compile errors
 #define USE_I2S
@@ -217,7 +267,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define PIN_CS SS
 #endif
 
-//----------------
+//------ NANO33BLE ----------
 #if defined(ARDUINO_SEEED_XIAO_NRF52840_SENSE) || defined(ARDUINO_ARDUINO_NANO33BLE)
 #define USE_NANO33BLE 
 #define USE_I2S
@@ -236,7 +286,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define PIN_CS SS
 #endif
 
-//----------------
+//----- MBED -----------
 #if defined(ARDUINO_ARCH_MBED_RP2040)
 //#define USE_I2S 1
 #define USE_PWM
@@ -268,7 +318,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 
 //#define USE_ESP8266_AUDIO
 
-//----------------
+//----- RP2040 -----------
 #elif defined(ARDUINO_ARCH_RP2040)
 #define USE_I2S 1
 #define USE_PWM
@@ -303,7 +353,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 
 #endif
 
-//----------------
+//----- AVR -----------
 #ifdef __AVR__
 #define USE_PWM
 #define USE_TIMER
@@ -328,7 +378,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 
 #endif
 
-//----------------
+//---- STM32 ------------
 #ifdef ARDUINO_ARCH_STM32F4
 #define STM32
 #endif
@@ -348,7 +398,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define PIN_CS 10
 #endif
 
-//----------------
+//---- SAMD ------------
 
 #ifdef ARDUINO_ARCH_SAMD
 #define USE_I2S
