@@ -15,8 +15,13 @@ struct ConfigEquilizer3Bands : public AudioBaseInfo {
         bits_per_sample = 16;
         sample_rate = 44100;
     }
-    int lowfreq=880;
-    int highfreq=5000;
+    // Frequencies
+    int freq_low=880;
+    int freq_high=5000;
+    // Gain Controls
+    float  gain_low = 1.0;       // low  gain
+    float  gain_medium = 1.0;       // mid  gain
+    float  gain_high = 1.0;       // high gain
 };
 
 /**
@@ -53,8 +58,8 @@ class Equilizer3Bands : public AudioPrint {
             memset(&state[0],0,sizeof(EQSTATE));
 
             // Calculate filter cutoff frequencies
-            state[0].lf = 2 * sin(M_PI * ((float)cfg.lowfreq / (float)cfg.sample_rate));
-            state[0].hf = 2 * sin(M_PI * ((float)cfg.highfreq / (float)cfg.sample_rate));
+            state[0].lf = 2 * sin(M_PI * ((float)cfg.freq_low / (float)cfg.sample_rate));
+            state[0].hf = 2 * sin(M_PI * ((float)cfg.freq_high / (float)cfg.sample_rate));
 
             // setup state for all channels
             for (int j=1;j<cfg.channels;j++){
@@ -70,17 +75,6 @@ class Equilizer3Bands : public AudioPrint {
             begin(cfg);
         }
 
-        void setGainLow(float v){
-            lg = v;
-        }
-
-        void setGainMid(float v){
-            mg = v;
-        }
-
-        void setGainHigh(float v){
-            hg = v;
-        }
 
         size_t write(const uint8_t *data, size_t len) override {
             switch(cfg.bits_per_sample){
@@ -125,10 +119,6 @@ class Equilizer3Bands : public AudioPrint {
         AudioPrint *p_out=nullptr;
         ConfigEquilizer3Bands cfg;
         int max_state_count=0;
-        // Gain Controls
-        float  lg = 1.0;       // low  gain
-        float  mg = 1.0;       // mid  gain
-        float  hg = 1.0;       // high gain
 
         struct EQSTATE {
             // Filter #1 (Low band)
@@ -174,9 +164,9 @@ class Equilizer3Bands : public AudioPrint {
             // Calculate midrange (signal - (low + high))
             m          = es.sdm3 - (h + l);
             // Scale, Combine and store
-            l         *= lg;
-            m         *= mg;
-            h         *= hg;
+            l         *= cfg.gain_low;
+            m         *= cfg.gain_medium;
+            h         *= cfg.gain_high;
 
             // Shuffle history buffer
             es.sdm3   = es.sdm2;
