@@ -45,45 +45,45 @@ class Equilizer3Bands : public AudioPrint {
             return v;
         }
 
-        bool begin(ConfigEquilizer3Bands config){
-            cfg = config;
+        bool begin(ConfigEquilizer3Bands &config){
+            p_cfg = &config;
 
-            p_out->setAudioInfo(cfg);
+            p_out->setAudioInfo(*p_cfg);
             // setup state for each channel
-            if (cfg.channels>max_state_count){
+            if (p_cfg->channels>max_state_count){
                 if (state!=nullptr) delete[]state;
-                state = new EQSTATE[cfg.channels];
-                max_state_count = cfg.channels;
+                state = new EQSTATE[p_cfg->channels];
+                max_state_count = p_cfg->channels;
             }
             // Clear state
             memset(&state[0],0,sizeof(EQSTATE));
 
             // Calculate filter cutoff frequencies
-            state[0].lf = 2 * sin(M_PI * ((float)cfg.freq_low / (float)cfg.sample_rate));
-            state[0].hf = 2 * sin(M_PI * ((float)cfg.freq_high / (float)cfg.sample_rate));
+            state[0].lf = 2 * sin(M_PI * ((float)p_cfg->freq_low / (float)p_cfg->sample_rate));
+            state[0].hf = 2 * sin(M_PI * ((float)p_cfg->freq_high / (float)p_cfg->sample_rate));
 
             // setup state for all channels
-            for (int j=1;j<cfg.channels;j++){
+            for (int j=1;j<p_cfg->channels;j++){
                 state[j]=state[0];
             }
             return true;
         }
 
         virtual void setAudioInfo(AudioBaseInfo info) override {
-            cfg.sample_rate = info.sample_rate;
-            cfg.channels = info.channels;
-            cfg.bits_per_sample = info.bits_per_sample;
-            begin(cfg);
+            p_cfg->sample_rate = info.sample_rate;
+            p_cfg->channels = info.channels;
+            p_cfg->bits_per_sample = info.bits_per_sample;
+            begin(*p_cfg);
         }
 
 
         size_t write(const uint8_t *data, size_t len) override {
-            switch(cfg.bits_per_sample){
+            switch(p_cfg->bits_per_sample){
                 case 16: {
                         int16_t* p_dataT = (int16_t*)data;
                         size_t sample_count = len / sizeof(int16_t);
-                        for (int j=0; j<sample_count; j+=cfg.channels){
-                            for (int ch=0; ch<cfg.channels; ch++){
+                        for (int j=0; j<sample_count; j+=p_cfg->channels){
+                            for (int ch=0; ch<p_cfg->channels; ch++){
                                 p_dataT[j+ch] = sample(state[ch], p_dataT[j+ch]);
                             }
                         }
@@ -91,8 +91,8 @@ class Equilizer3Bands : public AudioPrint {
                 case 24: {
                         int24_t* p_dataT = (int24_t*)data;
                         size_t sample_count = len / sizeof(int24_t);
-                        for (int j=0; j<sample_count; j+=cfg.channels){
-                            for (int ch=0; ch<cfg.channels; ch++){
+                        for (int j=0; j<sample_count; j+=p_cfg->channels){
+                            for (int ch=0; ch<p_cfg->channels; ch++){
                                 int32_t tmp_i = sample(state[ch],p_dataT[j+ch].toFloat());
                                 p_dataT[j+ch] = tmp_i;
                             }
@@ -101,8 +101,8 @@ class Equilizer3Bands : public AudioPrint {
                 case 32: {
                         int32_t* p_dataT = (int32_t*)data;
                         size_t sample_count = len / sizeof(int32_t);
-                        for (int j=0; j<sample_count; j+=cfg.channels){
-                            for (int ch=0; ch<cfg.channels; ch++){
+                        for (int j=0; j<sample_count; j+=p_cfg->channels){
+                            for (int ch=0; ch<p_cfg->channels; ch++){
                                 p_dataT[j+ch] = (const int32_t)sample(state[ch], p_dataT[j+ch]);
                             }
                         }
@@ -118,7 +118,7 @@ class Equilizer3Bands : public AudioPrint {
     protected:
         const float vsa = (1.0 / 4294967295.0);   // Very small amount (Denormal Fix)
         AudioPrint *p_out=nullptr;
-        ConfigEquilizer3Bands cfg;
+        ConfigEquilizer3Bands *p_cfg=nullptr;
         int max_state_count=0;
 
         struct EQSTATE {
@@ -165,9 +165,9 @@ class Equilizer3Bands : public AudioPrint {
             // Calculate midrange (signal - (low + high))
             m          = es.sdm3 - (h + l);
             // Scale, Combine and store
-            l         *= cfg.gain_low;
-            m         *= cfg.gain_medium;
-            h         *= cfg.gain_high;
+            l         *= p_cfg->gain_low;
+            m         *= p_cfg->gain_medium;
+            h         *= p_cfg->gain_high;
 
             // Shuffle history buffer
             es.sdm3   = es.sdm2;
