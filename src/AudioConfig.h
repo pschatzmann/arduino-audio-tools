@@ -209,7 +209,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define USE_URL_ARDUINO
 #define USE_I2S
 #define USE_AUDIO_SERVER
-#define USE_URLSTREAM_TASK
+//#define USE_URLSTREAM_TASK
 #define USE_TYPETRAITS
 #define USE_EFFECTS_SUITE
 #define USE_TIMER
