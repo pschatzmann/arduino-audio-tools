@@ -18,10 +18,11 @@ struct ConfigEquilizer3Bands : public AudioBaseInfo {
     // Frequencies
     int freq_low=880;
     int freq_high=5000;
+    
     // Gain Controls
-    float  gain_low = 1.0;       // low  gain
-    float  gain_medium = 1.0;       // mid  gain
-    float  gain_high = 1.0;       // high gain
+    float  gain_low = 1.0;
+    float  gain_medium = 1.0;
+    float  gain_high = 1.0;
 };
 
 /**
