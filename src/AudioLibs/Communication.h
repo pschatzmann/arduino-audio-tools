@@ -12,6 +12,7 @@ namespace audio_tools {
 class ESPNowStream;
 ESPNowStream *ESPNowStreamSelf = nullptr;
 
+
 /**
  * @brief ESPNow as Stream
  * @author Phil Schatzmann
@@ -117,6 +118,8 @@ public:
         delay(100);
       }
     }
+    // reset available to write and we wait for the confirmation
+    available_to_write = 0;
     return result;
   }
 
@@ -154,10 +157,12 @@ protected:
     LOGI("%s:%d", mac_addr, status);
     if (strcmp((char *)first_mac, (char *)mac_addr) == 0 &&
         status == ESP_NOW_SEND_SUCCESS) {
+        // 
       ESPNowStreamSelf->available_to_write = ESP_NOW_MAX_DATA_LEN;
     }
   }
 };
+
 
 /**
  * A Simple exension of the WiFiUDP class which makes sure that the basic Stream
@@ -188,6 +193,13 @@ public:
     return WiFiUDP::begin(port);
   }
 
+  /// Starts to receive data from/with the indicated port
+  uint8_t begin(uint16_t port, uint16_t port_ext=0) {
+    remote_address_ext = 0u;
+    remote_port_ext = port_ext!=0 ? port_ext : port;
+    return WiFiUDP::begin(port);
+  }
+
   /// We use the same remote port as defined in begin for write
   uint16_t remotePort() {
     uint16_t result = WiFiUDP::remotePort();
@@ -196,6 +208,10 @@ public:
 
   /// We use the same remote ip as defined in begin for write
   IPAddress remoteIP() {
+    // Determine address if it has not been specified 
+    if ((uint32_t)remote_address_ext==0){
+      remote_address_ext = WiFiUDP::remoteIP(); 
+    }
     // IPAddress result = WiFiUDP::remoteIP();
     // LOGI("ip: %u", result);
     return remote_address_ext;
@@ -218,6 +234,244 @@ protected:
 };
 
 
+enum RecordType:uint8_t {Undefined, Begin,Send,Receive,End};
+enum AudioType:uint8_t {PCM,MP3,AAC, WAV};
+enum TransmitRole:uint8_t {Sender, Receiver};
+
+/// Common Header for all records
+struct AudioHeader  {
+  AudioHeader() = default;
+  uint8_t app = 123;
+  RecordType rec = Undefined;
+  uint16_t seq = 0;
+  // record counter
+  void increment() {
+    static uint16_t static_count = 0;
+    seq = static_count++;
+  }
+};
+
+/// Protocal Record To Start
+struct AudioDataBegin : public AudioHeader {
+  AudioDataBegin(){
+    rec = Begin;
+  }
+  AudioBaseInfo info;
+  AudioType type = PCM;
+};
+
+/// Protocol Record for Data
+struct AudioSendData : public AudioHeader{
+  AudioSendData(){
+    rec = Send;;
+  }
+  uint16_t size = 0;
+};
+
+/// Protocol Record for Request
+struct AudioConfirmDataToReceive : public AudioHeader {
+  AudioConfirmDataToReceive(){
+    rec = Receive;
+  }
+  uint16_t size = 0;
+};
+
+/// Protocol Record for End
+struct AudioDataEnd : public AudioHeader {
+  AudioDataEnd(){
+    rec = End;
+  }
+};
+
+/**
+ * @brief Audio Writer which is synchronizing the amount of data
+ * that can be processed with the AudioReceiver
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class AudioSyncWriter : public AudioPrint {
+
+  public:
+    AudioSyncWriter(Stream &dest){
+      p_dest = &dest;
+    }
+
+    bool begin(AudioBaseInfo &info, AudioType type){
+      is_sync = sync;
+      AudioDataBegin begin;
+      begin.info = info;
+      begin.type = type;
+      begin.increment();
+      int write_len = sizeof(begin);
+      int len = p_dest->write((const uint8_t*)&begin, write_len);
+      return len==write_len;
+    }
+
+    size_t write(const uint8_t* data, size_t len) override {
+      int written_len = 0;
+      int open_len = len;
+      AudioSendData send;
+      while(written_len<len){
+        int available_to_write = waitForRequest();
+        size_t to_write_len = DEFAULT_BUFFER_SIZE;
+        to_write_len = min(open_len, available_to_write);
+        send.increment();
+        send.size = to_write_len;
+        p_dest->write((const uint8_t*) &send, sizeof(send));
+        int w = p_dest->write(data+written_len, to_write_len);
+        written_len += w;
+        open_len -= w;
+      }
+      return written_len;
+    }
+
+    int availableForWrite() override {
+      return available_to_write;
+    }
+
+    void end() {
+      AudioDataEnd end;
+      end.increment();
+      p_dest->write((const uint8_t*)&end, sizeof(end));
+    }
+
+  protected:
+    Stream *p_dest;
+    int available_to_write = 1024;
+    bool is_sync;
+
+    /// Waits for the data to be available
+    void waitFor(int size){
+        while(p_dest->available()<size){
+          delay(10);
+        }
+    }
+
+    int waitForRequest(){
+      AudioConfirmDataToReceive rcv;
+        size_t rcv_len = sizeof(rcv);
+        waitFor(rcv_len);
+        p_dest->readBytes((uint8_t*)&rcv, rcv_len);
+        return rcv.size;
+    }
+
+};
+
+
+
+/**
+ * @brief Receving Audio Data over the wire and requesting for more data when done to
+ * synchronize the processing with the sender. The audio data is processed by the 
+ * EncodedAudioStream; If you have multiple readers, only one receiver should be used as confirmer!
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class AudioSyncReader: public AudioStreamX {
+  public:
+    AudioSyncReader(Stream &in, EncodedAudioStream &out, bool isConfirmer=true){
+      p_in = &in;
+      p_out = &out;
+      is_confirmer = isConfirmer;
+    }
+
+    size_t copy() {
+      int processed = 0;
+      int header_size = sizeof(header);
+      waitFor(header_size);
+      readBytes((uint8_t*)&header,header_size);
+
+      switch(header.rec){
+        case Begin: 
+            audioDataBegin();
+            break;
+        case End: 
+            audioDataEnd();
+            break;
+        case Send: 
+            processed = receiveData();
+            break;
+      }
+      return processed;
+    }
+
+  protected: 
+    Stream *p_in;
+    EncodedAudioStream *p_out;
+    AudioConfirmDataToReceive req;
+    AudioHeader header;
+    AudioDataBegin begin;
+    size_t available = 0; // initial value
+    bool is_started = false;
+    bool is_confirmer;
+    int last_seq=0;
+
+    /// Starts the processing
+    void audioDataBegin() {
+        readProtocol(&begin, sizeof(begin));
+        p_out->begin();
+        p_out->setAudioInfo(begin.info);
+        requestData();
+    }
+
+    /// Ends the processing
+    void audioDataEnd() {
+        AudioDataEnd end;
+        readProtocol(&end, sizeof(end));
+        p_out->end();
+    }
+
+    // Receives audio data
+    int receiveData() {
+        AudioSendData data;
+        readProtocol(&data, sizeof(data));
+        available = data.size;
+        // receive and process audio data
+        waitFor(available);
+        int max_gap = 10;
+        if (data.seq>last_seq || (data.seq<max_gap && last_seq>=(32767-max_gap))){
+          uint8_t buffer[available];
+          p_in->readBytes((uint8_t*)buffer, available);
+          p_out->write((const uint8_t*)buffer,available);
+          // only one reader should be used as confirmer
+          if (is_confirmer){
+            requestData();
+          }
+          last_seq = data.seq;
+        }
+        return available;
+    }
+
+    /// Waits for the data to be available
+    void waitFor(int size){
+        while(p_in->available()<size){
+          delay(10);
+        }
+    }
+
+    /// Request new data from writer
+    void requestData() {
+        req.size = p_out->availableForWrite();
+        req.increment();
+        p_in->write((const uint8_t*)&req, sizeof(req));
+        p_in->flush();
+    }
+
+    /// Reads the protocol record
+    void readProtocol(AudioHeader*data, int len){
+        const static int header_size = sizeof(header);
+        memcpy(data, &header, header_size);
+        int read_size = len-header_size;
+        waitFor(read_size);
+        readBytes((uint8_t*)data+header_size, read_size);
+    }
+};
+
+
+/**
+ * @brief Configure Throttle setting
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
 struct ThrottleConfig : public AudioBaseInfo {
   ThrottleConfig(){
     sample_rate = 44100;
@@ -225,11 +479,12 @@ struct ThrottleConfig : public AudioBaseInfo {
     channels = 2;
   }
   int correction_ms = 0;
-}
+};
 
 /**
- * @brief Throttle Sending to follow the the indicated sample rate
- *
+ * @brief Throttle the sending of the audio data to limit it to the indicated sample rate.
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 class Throttle {
 public:
@@ -244,13 +499,13 @@ public:
   void startDelay() { start_time = millis(); }
 
   // delay
-  void delayBytes(size_t bytes) { throttleSamples(bytes / bytesPerSample); }
+  void delayBytes(size_t bytes) { delaySamples(bytes / bytesPerSample); }
 
   // delay
   void delaySamples(size_t samples) {
     int durationMsEff = millis() - start_time;
     int durationToBe = (samples * 1000) / info.sample_rate;
-    int waitMs = durationToBe - durationMsEff + correction_ms;
+    int waitMs = durationToBe - durationMsEff + info.correction_ms;
     if (waitMs > 0) {
       delay(waitMs);
     }
@@ -258,7 +513,8 @@ public:
 
 protected:
   unsigned long start_time;
-  AudioBaseInfo info;
+  ThrottleConfig info;
   int bytesPerSample;
+};
 
 } // namespace audio_tools
