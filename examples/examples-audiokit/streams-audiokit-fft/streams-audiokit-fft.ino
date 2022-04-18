@@ -14,10 +14,7 @@ float value=0;
 // display fft result
 void fftResult(AudioFFT &fft){
   auto result = fft.result();
-  if (result.frequency<20000 && result.frequency>100) {
     Serial.print(result.frequency);
-    Serial.print(" ");
-    Serial.println(result.result);
   }
 }
 
