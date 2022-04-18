@@ -91,16 +91,17 @@ class AudioFFT : public AudioPrint {
             return cfg.bits_per_sample/8*len;
         }
 
-        /// Provides the input data
+        /// Provides the raw input array which was used by the FFT to determine the result
         float* dataArray() {
             return p_x;
         }
 
-        /// Provides the result array
+        /// Provides the raw result array returned by the FFT  
         float *resultArray() {
             return p_f;
         }
 
+        /// The number of bins used by the FFT 
         int size() {
             return len;
         }
@@ -110,7 +111,7 @@ class AudioFFT : public AudioPrint {
             return static_cast<float>(bin) * cfg.sample_rate / len;
         }
 
-        /// Returns the frequency in the max bin
+        /// Determines the result values in the max bin
         AudioFFTResult result() {
             AudioFFTResult ret_value;
             ret_value.result = 0;
@@ -131,7 +132,7 @@ class AudioFFT : public AudioPrint {
             return timestamp;
         }
 
-        /// Determines the N biggest values
+        /// Determines the N biggest result values
         template<int N>
         void fftResult(AudioFFTResult (&result)[N]){
             // initialize to negative value
