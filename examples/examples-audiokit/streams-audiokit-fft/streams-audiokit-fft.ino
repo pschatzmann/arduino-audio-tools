@@ -13,8 +13,10 @@ float value=0;
 
 // display fft result
 void fftResult(AudioFFT &fft){
-  auto result = fft.result();
+    auto result = fft.result();
     Serial.print(result.frequency);
+    Serial.print(" ");
+    Serial.println(result.magnitude);
   }
 }
 

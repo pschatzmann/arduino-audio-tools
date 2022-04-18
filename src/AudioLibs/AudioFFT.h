@@ -9,7 +9,7 @@ class AudioFFT;
 
 struct AudioFFTResult {
     int bin;
-    float result;
+    float magnitude;
     float frequency;
 };
 
@@ -114,13 +114,13 @@ class AudioFFT : public AudioPrint {
         /// Determines the result values in the max bin
         AudioFFTResult result() {
             AudioFFTResult ret_value;
-            ret_value.result = 0;
+            ret_value.magnitude = 0;
             ret_value.bin = 0;
             // find max value and index
             for (int j=1;j<len/2;j++){
                 float m = magnitude(j);
-                if (m>ret_value.result){
-                    ret_value.result = m;
+                if (m>ret_value.magnitude){
+                    ret_value.magnitude = m;
                     ret_value.bin = j;
                 }
             }
@@ -143,7 +143,7 @@ class AudioFFT : public AudioPrint {
             // find top n values
             AudioFFTResult act;
             for (int j=1;j<len/2;j++){
-                act.result = magnitude(j);
+                act.magnitude = magnitude(j);
                 act.bin = j;
                 act.frequency = frequency(j);
                 insertSorted(result, act);
@@ -193,7 +193,7 @@ class AudioFFT : public AudioPrint {
         template<int N>
         bool InsertSorted(AudioFFTResult(&result)[N], AudioFFTResult tmp){
             for (int j=0;j<N;j++){
-                if (tmp.result>result[j].result){
+                if (tmp.magnitude>result[j].magnitude){
                     // shift existing values right
                     for (int i=N-2;i>=j;i--){
                         result[i+1] = result[i];
