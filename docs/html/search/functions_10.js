@@ -109,7 +109,7 @@ var searchData=
   ['simpletaskloop_1410',['simpleTaskLoop',['../classaudio__tools_1_1_timer_alarm_repeating_e_s_p32.html#acbf9338b19c5582051544222c44e8269',1,'audio_tools::TimerAlarmRepeatingESP32']]],
   ['singlebuffer_1411',['SingleBuffer',['../classaudio__tools_1_1_single_buffer.html#a77d72fb81b055d21a214bfe6349b72ba',1,'audio_tools::SingleBuffer::SingleBuffer(int size)'],['../classaudio__tools_1_1_single_buffer.html#a346c292f4e91cb627c5da086e980cb82',1,'audio_tools::SingleBuffer::SingleBuffer()']]],
   ['sink_1412',['sink',['../classaudio__tools_1_1_a2_d_p_stream.html#a62ff1438dbe441759910ea4d134e54c2',1,'audio_tools::A2DPStream']]],
-  ['size_1413',['size',['../classaudio__tools_1_1_audio_effects.html#a711e74f6bf29280de8ba6a11d59c8b02',1,'audio_tools::AudioEffects::size()'],['../classaudio__tools_1_1_mixer.html#a58ea6ea6aee01b46b0df19d7018b3074',1,'audio_tools::Mixer::size()']]],
+  ['size_1413',['size',['../classaudio__tools_1_1_audio_effects.html#a711e74f6bf29280de8ba6a11d59c8b02',1,'audio_tools::AudioEffects::size()'],['../classaudio__tools_1_1_audio_f_f_t.html#a6a890c088b1991eaea6fd9c5d16c0854',1,'audio_tools::AudioFFT::size()'],['../classaudio__tools_1_1_mixer.html#a58ea6ea6aee01b46b0df19d7018b3074',1,'audio_tools::Mixer::size()']]],
   ['source_1414',['source',['../classaudio__tools_1_1_a2_d_p_stream.html#a5675d25c4d6dda7352410be5c33ad8df',1,'audio_tools::A2DPStream']]],
   ['spdifstream_1415',['SPDIFStream',['../classaudio__tools_1_1_s_p_d_i_f_stream.html#a503bda4246c9443852b79348546d707d',1,'audio_tools::SPDIFStream']]],
   ['startstream_1416',['startStream',['../classaudio__tools_1_1_port_audio_stream.html#af3dd08fd8569d89a6beecaaf338f2082',1,'audio_tools::PortAudioStream']]],
