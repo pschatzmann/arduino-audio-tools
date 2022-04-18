@@ -117,9 +117,10 @@ class AudioFFT : public AudioPrint {
             ret_value.result = 0;
             ret_value.bin = 0;
             // find max value and index
-            for (int j=0;j<len;j++){
-                if (p_f[j]>ret_value.result){
-                    ret_value.result = p_f[j];
+            for (int j=1;j<len/2;j++){
+                float m = magnitude(j);
+                if (m>ret_value.result){
+                    ret_value.result = m;
                     ret_value.bin = j;
                 }
             }
@@ -141,13 +142,14 @@ class AudioFFT : public AudioPrint {
             }
             // find top n values
             AudioFFTResult act;
-            for (int j=0;j<len;j++){
-                act.result = p_f[j];
+            for (int j=1;j<len/2;j++){
+                act.result = magnitude(j);
                 act.bin = j;
                 act.frequency = frequency(j);
                 insertSorted(result, act);
             }
         }
+
 
     protected:
         ffft::FFTReal <float> *p_fft_object=nullptr;
@@ -158,6 +160,11 @@ class AudioFFT : public AudioPrint {
         int channel_no = 0;
         AudioFFTConfig cfg;
         unsigned long timestamp=0l;
+
+        // calculate the magnitued of the fft result to determine the max value
+        float magnitude(int idx){
+            return sqrt(p_x[idx] * p_x[idx] + p_f[idx] * p_f[idx]);
+        }
 
         // Add samples to input data p_x - and process them if full
         template<typename T>
