@@ -6,12 +6,23 @@ namespace audio_tools {
 
 // forward declaration
 class AudioFFTBase;
+MusicalNotes AudioFFTNotes;
 
 /// Result of the FFT
 struct AudioFFTResult {
     int bin;
     float magnitude;
     float frequency;
+
+    int frequncyAsInt(){
+        return round(frequency);
+    }
+    const char* frequencyAsNote() {
+        return AudioFFTNotes.note(frequncyAsInt());
+    }
+    const char* frequencyAsNote(int &diff) {
+        return AudioFFTNotes.note(frequncyAsInt(), diff);
+    }
 };
 
 /// Configuration for AudioFFT
