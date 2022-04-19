@@ -16,8 +16,7 @@ void fftResult(AudioFFT &fft){
     auto result = fft.result();
     Serial.print(result.frequency);
     Serial.print(" ");
-    Serial.println(result.magnitude);
-  }
+    Serial.println(result.magnitude);  
 }
 
 void setup() {
