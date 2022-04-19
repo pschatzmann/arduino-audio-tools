@@ -25,8 +25,8 @@ struct AudioFFTConfig : public  AudioBaseInfo {
  */
 class AudioFFT : public AudioPrint {
     public:
-        /// Default Constructor
-        AudioFFT(int fft_len, int channelNo=0){
+        /// Default Constructor. The len needs to be of the power of 2 (e.g. 512, 1024, 2048, 4096, 8192)
+        AudioFFT(uint16_t fft_len, int channelNo=0){
             len = fft_len;
             channel_no = channelNo;
         }
@@ -46,6 +46,10 @@ class AudioFFT : public AudioPrint {
         /// starts the processing
         bool begin(AudioFFTConfig info) {
             cfg = info;
+            if (isPowerOfTwo(len)){
+                LOGE("Len must be of the power of 2: %d", len);
+                return false;
+            }
             if (p_fft_object==nullptr) p_fft_object = new ffft::FFTReal<float>(len);
             if (p_x==nullptr) p_x = new float[len];
             if (p_f==nullptr) p_f = new float[len];
@@ -69,21 +73,25 @@ class AudioFFT : public AudioPrint {
 
         /// Provide the audio data as FFT input
         size_t write(const uint8_t*data, size_t len) override {
-            switch(cfg.bits_per_sample){
-                case 16:
-                    processSamples<int16_t>(data, len);
-                    break;
-                case 24:
-                    processSamples<int24_t>(data, len);
-                    break;
-                case 32:
-                    processSamples<int32_t>(data, len);
-                    break;
-                default:
-                    LOGE("Unsupported bits_per_sample: %d",cfg.bits_per_sample);
-                    break;
+            size_t result = 0;
+            if (p_fft_object!=nullptr){
+                result = len;
+                switch(cfg.bits_per_sample){
+                    case 16:
+                        processSamples<int16_t>(data, len);
+                        break;
+                    case 24:
+                        processSamples<int24_t>(data, len);
+                        break;
+                    case 32:
+                        processSamples<int32_t>(data, len);
+                        break;
+                    default:
+                        LOGE("Unsupported bits_per_sample: %d",cfg.bits_per_sample);
+                        break;
+                }
             }
-            return len;
+            return result;
         }
 
         /// We try to fill the buffer at once
@@ -204,6 +212,10 @@ class AudioFFT : public AudioPrint {
                 }
             }
             return false;
+        }
+
+        bool isPowerOfTwo(uint16_t x) {
+            return (x & (x - 1)) == 0;
         }
 
 };

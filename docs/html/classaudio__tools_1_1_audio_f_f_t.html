@@ -92,10 +92,10 @@ Inheritance diagram for audio_tools::AudioFFT:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:abd7ce144494dab384838a639efcd4365"><td class="memItemLeft" align="right" valign="top"><a id="abd7ce144494dab384838a639efcd4365"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t.html#abd7ce144494dab384838a639efcd4365">AudioFFT</a> (int fft_len, int channelNo=0)</td></tr>
-<tr class="memdesc:abd7ce144494dab384838a639efcd4365"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Constructor. <br /></td></tr>
-<tr class="separator:abd7ce144494dab384838a639efcd4365"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa22cc5aa22d24af8e8570a5b5c626bc9"><td class="memItemLeft" align="right" valign="top"><a id="aa22cc5aa22d24af8e8570a5b5c626bc9"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t.html#aa22cc5aa22d24af8e8570a5b5c626bc9">AudioFFT</a> (uint16_t fft_len, int channelNo=0)</td></tr>
+<tr class="memdesc:aa22cc5aa22d24af8e8570a5b5c626bc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Constructor. The len needs to be of the power of 2 (e.g. 512, 1024, 2048, 4096, 8192) <br /></td></tr>
+<tr class="separator:aa22cc5aa22d24af8e8570a5b5c626bc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae331d39e7d78dca40fafef90bc2b1d95"><td class="memItemLeft" align="right" valign="top"><a id="ae331d39e7d78dca40fafef90bc2b1d95"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t.html#ae331d39e7d78dca40fafef90bc2b1d95">availableForWrite</a> ()</td></tr>
 <tr class="memdesc:ae331d39e7d78dca40fafef90bc2b1d95"><td class="mdescLeft">&#160;</td><td class="mdescRight">We try to fill the buffer at once. <br /></td></tr>
@@ -264,6 +264,9 @@ template&lt;int N&gt; </td></tr>
 <tr class="memitem:a1fec2d42d14d4ae91b2a7b47dacf09fd"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t.html#a1fec2d42d14d4ae91b2a7b47dacf09fd">InsertSorted</a> (<a class="el" href="structaudio__tools_1_1_audio_f_f_t_result.html">AudioFFTResult</a>(&amp;<a class="el" href="classaudio__tools_1_1_audio_f_f_t.html#a80ce76f4f11d164b5e55e4d1f809785d">result</a>)[N], <a class="el" href="structaudio__tools_1_1_audio_f_f_t_result.html">AudioFFTResult</a> tmp)</td></tr>
 <tr class="memdesc:a1fec2d42d14d4ae91b2a7b47dacf09fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">make sure that we do not reuse already found results <br /></td></tr>
 <tr class="separator:a1fec2d42d14d4ae91b2a7b47dacf09fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59cb03a84bd028519633c54424d6421d"><td class="memItemLeft" align="right" valign="top"><a id="a59cb03a84bd028519633c54424d6421d"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isPowerOfTwo</b> (uint16_t x)</td></tr>
+<tr class="separator:a59cb03a84bd028519633c54424d6421d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae37ca635b5ee8cb1906b5c87e5be17a5"><td class="memItemLeft" align="right" valign="top"><a id="ae37ca635b5ee8cb1906b5c87e5be17a5"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>magnitude</b> (int idx)</td></tr>
 <tr class="separator:ae37ca635b5ee8cb1906b5c87e5be17a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
