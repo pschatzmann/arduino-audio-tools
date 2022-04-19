@@ -127,6 +127,7 @@ Dependent on the example you might need to install some of the following librari
 - [Mozzi](https://github.com/pschatzmann/Mozzi) A sound synthesis library for Arduino
 - [ESP8266Audio](https://github.com/earlephilhower/ESP8266Audio) to play different audio Formats
 - [Tensorflow Lite](https://github.com/pschatzmann/tflite-micro-arduino-examples) Machine Learning for Arduino
+- [KissFFT](https://github.com/pschatzmann/kissfft) Fast Fourier Transform FFT Library
 
 
 After installing a library, you might need to activate it's usage in the ```AudioConfig.h``` file!
