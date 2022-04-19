@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['factor_1135',['factor',['../classaudio__tools_1_1_converter_scaler.html#a3eeb57b2789b0ea7cb9ef951c6c938b3',1,'audio_tools::ConverterScaler::factor()'],['../classaudio__tools_1_1_resample_parameter_estimator.html#a0d8c74bb1df1fc8852960edd618f7cb3',1,'audio_tools::ResampleParameterEstimator::factor()']]],
-  ['fftresult_1136',['fftResult',['../classaudio__tools_1_1_audio_f_f_t.html#a78cbd96d81e68eaecc0b5bb9c8068c23',1,'audio_tools::AudioFFT']]],
+  ['factor_1136',['factor',['../classaudio__tools_1_1_converter_scaler.html#a3eeb57b2789b0ea7cb9ef951c6c938b3',1,'audio_tools::ConverterScaler::factor()'],['../classaudio__tools_1_1_resample_parameter_estimator.html#a0d8c74bb1df1fc8852960edd618f7cb3',1,'audio_tools::ResampleParameterEstimator::factor()']]],
   ['filtereddelay_1137',['FilteredDelay',['../classaudio__tools_1_1_filtered_delay.html#a7486ac178617d395c6385ba6965f5341',1,'audio_tools::FilteredDelay']]],
   ['filtereffectbase_1138',['FilterEffectBase',['../classaudio__tools_1_1_filter_effect_base.html#a811d8f80b27209fb2ec823f86928c90c',1,'audio_tools::FilterEffectBase']]],
   ['find_1139',['find',['../classaudio__tools_1_1_meta_data_filter.html#a2e4a3da7004c0b2bea0061ca54932826',1,'audio_tools::MetaDataFilter']]],

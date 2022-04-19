@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['envelopefollower_1486',['envelopeFollower',['../classaudio__tools_1_1_envelope_filter.html#ad2e4815613f47f6627557be15e11da8f',1,'audio_tools::EnvelopeFilter']]],
-  ['error_1487',['error',['../classaudio__tools_1_1_delay_effect_base.html#a1bdce900e4d0de724b5f6f11866796eb',1,'audio_tools::DelayEffectBase']]]
+  ['delaybuffer_1485',['delayBuffer',['../classaudio__tools_1_1_delay_effect_base.html#a288479f051c183508109ce24ed7f8f22',1,'audio_tools::DelayEffectBase']]],
+  ['delayincrement_1486',['delayIncrement',['../classaudio__tools_1_1_simple_delay.html#aa477e6ca9620b380e7bfbd3f14f0925d',1,'audio_tools::SimpleDelay']]],
+  ['delaytimesamples_1487',['delayTimeSamples',['../classaudio__tools_1_1_delay_effect_base.html#ad0b3d8941e1f5b35ba61092e8e194cca',1,'audio_tools::DelayEffectBase']]],
+  ['delaytransitiontime_1488',['delayTransitionTime',['../classaudio__tools_1_1_simple_delay.html#a4007a4d9f7e87cc9629ac859496cb023',1,'audio_tools::SimpleDelay']]]
 ];

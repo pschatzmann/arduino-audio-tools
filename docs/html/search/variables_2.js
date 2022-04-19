@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['delaybuffer_1482',['delayBuffer',['../classaudio__tools_1_1_delay_effect_base.html#a288479f051c183508109ce24ed7f8f22',1,'audio_tools::DelayEffectBase']]],
-  ['delayincrement_1483',['delayIncrement',['../classaudio__tools_1_1_simple_delay.html#aa477e6ca9620b380e7bfbd3f14f0925d',1,'audio_tools::SimpleDelay']]],
-  ['delaytimesamples_1484',['delayTimeSamples',['../classaudio__tools_1_1_delay_effect_base.html#ad0b3d8941e1f5b35ba61092e8e194cca',1,'audio_tools::DelayEffectBase']]],
-  ['delaytransitiontime_1485',['delayTransitionTime',['../classaudio__tools_1_1_simple_delay.html#a4007a4d9f7e87cc9629ac859496cb023',1,'audio_tools::SimpleDelay']]]
+  ['callback_1483',['callback',['../structaudio__tools_1_1_audio_f_f_t_config.html#a54f029fe248ef026f7ab21c11bc699e7',1,'audio_tools::AudioFFTConfig']]],
+  ['channel_5fused_1484',['channel_used',['../structaudio__tools_1_1_audio_f_f_t_config.html#a32af528d9e1b156e40338a87f76bdcc0',1,'audio_tools::AudioFFTConfig']]]
 ];

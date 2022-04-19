@@ -7,14 +7,19 @@ namespace audio_tools {
 // forward declaration
 class AudioFFT;
 
+/// Result of the FFT
 struct AudioFFTResult {
     int bin;
     float magnitude;
     float frequency;
 };
 
+/// Configuration for AudioFFT
 struct AudioFFTConfig : public  AudioBaseInfo {
+    /// Callback method which is called after we got a new result
     void (*callback)(AudioFFT &fft) = nullptr;
+    /// Channel which is used as input
+    uint8_t channel_used = 0; 
 };
 
 
@@ -26,9 +31,8 @@ struct AudioFFTConfig : public  AudioBaseInfo {
 class AudioFFT : public AudioPrint {
     public:
         /// Default Constructor. The len needs to be of the power of 2 (e.g. 512, 1024, 2048, 4096, 8192)
-        AudioFFT(uint16_t fft_len, int channelNo=0){
+        AudioFFT(uint16_t fft_len){
             len = fft_len;
-            channel_no = channelNo;
         }
 
         ~AudioFFT() {
@@ -144,7 +148,7 @@ class AudioFFT : public AudioPrint {
 
         /// Determines the N biggest result values
         template<int N>
-        void fftResult(AudioFFTResult (&result)[N]){
+        void resultArray(AudioFFTResult (&result)[N]){
             // initialize to negative value
             for (int j=0;j<N;j++){
                 result[j].fft = -1000000;
@@ -166,7 +170,6 @@ class AudioFFT : public AudioPrint {
         float *p_f = nullptr; // complex
         int len;
         int current_pos = 0;
-        int channel_no = 0;
         AudioFFTConfig cfg;
         unsigned long timestamp=0l;
 
@@ -181,7 +184,7 @@ class AudioFFT : public AudioPrint {
             T *dataT = (T*) data;
             int samples = byteCount/sizeof(T);
             for (int j=0; j<samples; j+=cfg.channels){
-                p_x[current_pos] = dataT[j+channel_no];
+                p_x[current_pos] = dataT[j+cfg.channel_used];
                 if (++current_pos>=len){
                     fft();
                 }

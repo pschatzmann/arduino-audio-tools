@@ -72,6 +72,11 @@ $(function() {
 <div class="title">audio_tools::AudioFFTConfig Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Configuration for <a class="el" href="classaudio__tools_1_1_audio_f_f_t.html" title="Executes FFT using audio data. We use the FFTReal library see https://github.com/cyrilcode/fft-real.">AudioFFT</a>.  
+ <a href="structaudio__tools_1_1_audio_f_f_t_config.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_audio_f_f_t_8h_source.html">AudioFFT.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for audio_tools::AudioFFTConfig:</div>
 <div class="dyncontent">
@@ -85,8 +90,13 @@ Inheritance diagram for audio_tools::AudioFFTConfig:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a54f029fe248ef026f7ab21c11bc699e7"><td class="memItemLeft" align="right" valign="top"><a id="a54f029fe248ef026f7ab21c11bc699e7"></a>
-void(*&#160;</td><td class="memItemRight" valign="bottom"><b>callback</b> )(<a class="el" href="classaudio__tools_1_1_audio_f_f_t.html">AudioFFT</a> &amp;fft) = nullptr</td></tr>
+void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_audio_f_f_t_config.html#a54f029fe248ef026f7ab21c11bc699e7">callback</a> )(<a class="el" href="classaudio__tools_1_1_audio_f_f_t.html">AudioFFT</a> &amp;fft) = nullptr</td></tr>
+<tr class="memdesc:a54f029fe248ef026f7ab21c11bc699e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback method which is called after we got a new result. <br /></td></tr>
 <tr class="separator:a54f029fe248ef026f7ab21c11bc699e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32af528d9e1b156e40338a87f76bdcc0"><td class="memItemLeft" align="right" valign="top"><a id="a32af528d9e1b156e40338a87f76bdcc0"></a>
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_audio_f_f_t_config.html#a32af528d9e1b156e40338a87f76bdcc0">channel_used</a> = 0</td></tr>
+<tr class="memdesc:a32af528d9e1b156e40338a87f76bdcc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Channel which is used as input. <br /></td></tr>
+<tr class="separator:a32af528d9e1b156e40338a87f76bdcc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_structaudio__tools_1_1_audio_base_info"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_structaudio__tools_1_1_audio_base_info')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="structaudio__tools_1_1_audio_base_info.html">audio_tools::AudioBaseInfo</a></td></tr>
 <tr class="memitem:a3656e1572c91c5cde3d538637a2267a5 inherit pub_attribs_structaudio__tools_1_1_audio_base_info"><td class="memItemLeft" align="right" valign="top"><a id="a3656e1572c91c5cde3d538637a2267a5"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>bits_per_sample</b> =16</td></tr>
@@ -114,7 +124,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator!=</b> (<a cl
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator==</b> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> alt)</td></tr>
 <tr class="separator:a7e724d3c17a6f5f8e5d1c2d09cee426f inherit pub_methods_structaudio__tools_1_1_audio_base_info"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this struct was generated from the following file:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Configuration for <a class="el" href="classaudio__tools_1_1_audio_f_f_t.html" title="Executes FFT using audio data. We use the FFTReal library see https://github.com/cyrilcode/fft-real.">AudioFFT</a>. </p>
+</div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li>src/AudioLibs/<a class="el" href="_audio_f_f_t_8h_source.html">AudioFFT.h</a></li>
 </ul>
 </div><!-- contents -->

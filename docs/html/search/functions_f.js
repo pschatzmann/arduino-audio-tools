@@ -24,8 +24,9 @@ var searchData=
   ['resetvolumecontrol_1297',['resetVolumeControl',['../classaudio__tools_1_1_volume_stream.html#a49ca1aa25415a4b05c51b5e935fee871',1,'audio_tools::VolumeStream']]],
   ['respondtocommand_1298',['respondToCommand',['../classaudio__tools_1_1_tf_lite_micro_speach_writer.html#aeef245fb085f435d7869c8783fb362e9',1,'audio_tools::TfLiteMicroSpeachWriter']]],
   ['result_1299',['result',['../classaudio__tools_1_1_audio_f_f_t.html#a80ce76f4f11d164b5e55e4d1f809785d',1,'audio_tools::AudioFFT']]],
-  ['resultcategoryidx_1300',['resultCategoryIdx',['../classaudio__tools_1_1_tf_lite_micro_speech_recognize_commands.html#add25d387c7dd7ebe71648de49da46a4b',1,'audio_tools::TfLiteMicroSpeechRecognizeCommands']]],
-  ['resulttime_1301',['resultTime',['../classaudio__tools_1_1_audio_f_f_t.html#a7365eb911c317e02a8155dc7c42f11b9',1,'audio_tools::AudioFFT']]],
-  ['rms_1302',['rms',['../classaudio__tools_1_1_filter_effect_base.html#ae1caea193b9fb772893bae2cee163ed0',1,'audio_tools::FilterEffectBase']]],
-  ['rtrim_1303',['rtrim',['../classaudio__tools_1_1_str.html#ab573a6fdc8ff3b5c9bf7d47508574f7c',1,'audio_tools::Str']]]
+  ['resultarray_1300',['resultArray',['../classaudio__tools_1_1_audio_f_f_t.html#a103d17df1e8aba725694bd3a4e2fc8cd',1,'audio_tools::AudioFFT']]],
+  ['resultcategoryidx_1301',['resultCategoryIdx',['../classaudio__tools_1_1_tf_lite_micro_speech_recognize_commands.html#add25d387c7dd7ebe71648de49da46a4b',1,'audio_tools::TfLiteMicroSpeechRecognizeCommands']]],
+  ['resulttime_1302',['resultTime',['../classaudio__tools_1_1_audio_f_f_t.html#a7365eb911c317e02a8155dc7c42f11b9',1,'audio_tools::AudioFFT']]],
+  ['rms_1303',['rms',['../classaudio__tools_1_1_filter_effect_base.html#ae1caea193b9fb772893bae2cee163ed0',1,'audio_tools::FilterEffectBase']]],
+  ['rtrim_1304',['rtrim',['../classaudio__tools_1_1_str.html#ab573a6fdc8ff3b5c9bf7d47508574f7c',1,'audio_tools::Str']]]
 ];

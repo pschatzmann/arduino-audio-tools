@@ -1,9 +1,10 @@
 var searchData=
 [
-  ['maxdelaybuffersize_1500',['maxDelayBufferSize',['../classaudio__tools_1_1_delay_effect_base.html#a36d6978a7086bf5eb839adc38098bf12',1,'audio_tools::DelayEffectBase']]],
-  ['metadatatypestr_1501',['MetaDataTypeStr',['../namespaceaudio__tools.html#aac1ba19eec6b8d105157181ed0ea7254',1,'audio_tools']]],
-  ['modmax_1502',['modMax',['../classaudio__tools_1_1_simple_chorus.html#afc9230308185b8f3c77b8054ebc69f72',1,'audio_tools::SimpleChorus']]],
-  ['modmin_1503',['modMin',['../classaudio__tools_1_1_simple_chorus.html#a252b66995f6489a5188a5d4c2fad2926',1,'audio_tools::SimpleChorus']]],
-  ['modnorm_1504',['modNorm',['../classaudio__tools_1_1_simple_chorus.html#ac77f141bbed6cce9c4cda58baca2879d',1,'audio_tools::SimpleChorus']]],
-  ['modulationconstant_1505',['modulationConstant',['../classaudio__tools_1_1_simple_flanger.html#a38884d1691b2d6331de12a7a46b1d90b',1,'audio_tools::SimpleFlanger']]]
+  ['id3_5fv2_5ftags_1496',['id3_v2_tags',['../namespaceaudio__tools.html#ac1f0f7b458a1d7f22dd48effad5e07b1',1,'audio_tools']]],
+  ['iirbuffer_1497',['iirBuffer',['../classaudio__tools_1_1_filter_effect_base.html#a2675fbd2c8af45f5aae1fe7fdb185fe3',1,'audio_tools::FilterEffectBase']]],
+  ['iircoefficients_1498',['iirCoefficients',['../classaudio__tools_1_1_filter_effect_base.html#a51d7c74411099272978bbe8fefb33b34',1,'audio_tools::FilterEffectBase']]],
+  ['iirtemp_1499',['iirTemp',['../classaudio__tools_1_1_filter_effect_base.html#aeae6e9944747550d27d6085d0da7f675',1,'audio_tools::FilterEffectBase']]],
+  ['internal_5fpi_1500',['internal_Pi',['../classaudio__tools_1_1_simple_flanger.html#a60f8e706f217f90cdb71918dab2b7c18',1,'audio_tools::SimpleFlanger']]],
+  ['interpolationtable_1501',['interpolationTable',['../namespaceaudio__tools.html#a424ce2a93eb3e556936b3089d93bc217',1,'audio_tools']]],
+  ['invdelayincrement_1502',['invDelayIncrement',['../classaudio__tools_1_1_simple_delay.html#a352d0ef4d2ca039a141f504eb1cfe7cf',1,'audio_tools::SimpleDelay']]]
 ];

@@ -6,7 +6,7 @@ I found some cheap [AI Thinker ESP32 Audio Kit V2.2](https://docs.ai-thinker.com
 
 You dont need to bother about any wires because everything is on one nice board. Just just need to install the dependencies
 
-The fast Fourier transform (FFT) can be used to determine the frequencies of a singal.
+The fast Fourier transform (FFT) can be used to determine the frequencies of a singal. More [details can be found in the Wiki](https://github.com/pschatzmann/arduino-audio-tools/wiki/FFT)
 
 ### Note
 

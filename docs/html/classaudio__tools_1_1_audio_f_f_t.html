@@ -92,10 +92,10 @@ Inheritance diagram for audio_tools::AudioFFT:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa22cc5aa22d24af8e8570a5b5c626bc9"><td class="memItemLeft" align="right" valign="top"><a id="aa22cc5aa22d24af8e8570a5b5c626bc9"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t.html#aa22cc5aa22d24af8e8570a5b5c626bc9">AudioFFT</a> (uint16_t fft_len, int channelNo=0)</td></tr>
-<tr class="memdesc:aa22cc5aa22d24af8e8570a5b5c626bc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Constructor. The len needs to be of the power of 2 (e.g. 512, 1024, 2048, 4096, 8192) <br /></td></tr>
-<tr class="separator:aa22cc5aa22d24af8e8570a5b5c626bc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1154f81a59959931d127817868f0826"><td class="memItemLeft" align="right" valign="top"><a id="ae1154f81a59959931d127817868f0826"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t.html#ae1154f81a59959931d127817868f0826">AudioFFT</a> (uint16_t fft_len)</td></tr>
+<tr class="memdesc:ae1154f81a59959931d127817868f0826"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Constructor. The len needs to be of the power of 2 (e.g. 512, 1024, 2048, 4096, 8192) <br /></td></tr>
+<tr class="separator:ae1154f81a59959931d127817868f0826"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae331d39e7d78dca40fafef90bc2b1d95"><td class="memItemLeft" align="right" valign="top"><a id="ae331d39e7d78dca40fafef90bc2b1d95"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t.html#ae331d39e7d78dca40fafef90bc2b1d95">availableForWrite</a> ()</td></tr>
 <tr class="memdesc:ae331d39e7d78dca40fafef90bc2b1d95"><td class="mdescLeft">&#160;</td><td class="mdescRight">We try to fill the buffer at once. <br /></td></tr>
@@ -116,11 +116,6 @@ float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t.html#ac506c0d8177fd45ddc518de8b8a54f81">end</a> ()</td></tr>
 <tr class="memdesc:ac506c0d8177fd45ddc518de8b8a54f81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Release the allocated memory. <br /></td></tr>
 <tr class="separator:ac506c0d8177fd45ddc518de8b8a54f81"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a78cbd96d81e68eaecc0b5bb9c8068c23"><td class="memTemplParams" colspan="2"><a id="a78cbd96d81e68eaecc0b5bb9c8068c23"></a>
-template&lt;int N&gt; </td></tr>
-<tr class="memitem:a78cbd96d81e68eaecc0b5bb9c8068c23"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t.html#a78cbd96d81e68eaecc0b5bb9c8068c23">fftResult</a> (<a class="el" href="structaudio__tools_1_1_audio_f_f_t_result.html">AudioFFTResult</a>(&amp;<a class="el" href="classaudio__tools_1_1_audio_f_f_t.html#a80ce76f4f11d164b5e55e4d1f809785d">result</a>)[N])</td></tr>
-<tr class="memdesc:a78cbd96d81e68eaecc0b5bb9c8068c23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the N biggest result values. <br /></td></tr>
-<tr class="separator:a78cbd96d81e68eaecc0b5bb9c8068c23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab1707dbd0b7521ecc501dfa73ad9e916"><td class="memItemLeft" align="right" valign="top"><a id="ab1707dbd0b7521ecc501dfa73ad9e916"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t.html#ab1707dbd0b7521ecc501dfa73ad9e916">frequency</a> (int bin)</td></tr>
 <tr class="memdesc:ab1707dbd0b7521ecc501dfa73ad9e916"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the frequency of the indicated bin. <br /></td></tr>
@@ -133,6 +128,11 @@ float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <a class="el" href="structaudio__tools_1_1_audio_f_f_t_result.html">AudioFFTResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t.html#a80ce76f4f11d164b5e55e4d1f809785d">result</a> ()</td></tr>
 <tr class="memdesc:a80ce76f4f11d164b5e55e4d1f809785d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the result values in the max magnitude bin. <br /></td></tr>
 <tr class="separator:a80ce76f4f11d164b5e55e4d1f809785d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a103d17df1e8aba725694bd3a4e2fc8cd"><td class="memTemplParams" colspan="2"><a id="a103d17df1e8aba725694bd3a4e2fc8cd"></a>
+template&lt;int N&gt; </td></tr>
+<tr class="memitem:a103d17df1e8aba725694bd3a4e2fc8cd"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t.html#a103d17df1e8aba725694bd3a4e2fc8cd">resultArray</a> (<a class="el" href="structaudio__tools_1_1_audio_f_f_t_result.html">AudioFFTResult</a>(&amp;<a class="el" href="classaudio__tools_1_1_audio_f_f_t.html#a80ce76f4f11d164b5e55e4d1f809785d">result</a>)[N])</td></tr>
+<tr class="memdesc:a103d17df1e8aba725694bd3a4e2fc8cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the N biggest result values. <br /></td></tr>
+<tr class="separator:a103d17df1e8aba725694bd3a4e2fc8cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7365eb911c317e02a8155dc7c42f11b9"><td class="memItemLeft" align="right" valign="top"><a id="a7365eb911c317e02a8155dc7c42f11b9"></a>
 unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t.html#a7365eb911c317e02a8155dc7c42f11b9">resultTime</a> ()</td></tr>
 <tr class="memdesc:a7365eb911c317e02a8155dc7c42f11b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">time when the last result was provided - you can poll this to check if we have a new result <br /></td></tr>
@@ -284,9 +284,6 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a7a4ca391714d46658eb4e40caa09d05f"><td class="memItemLeft" align="right" valign="top"><a id="a7a4ca391714d46658eb4e40caa09d05f"></a>
 <a class="el" href="structaudio__tools_1_1_audio_f_f_t_config.html">AudioFFTConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><b>cfg</b></td></tr>
 <tr class="separator:a7a4ca391714d46658eb4e40caa09d05f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afbef686d8c0ad736360f716ab5db0ec5"><td class="memItemLeft" align="right" valign="top"><a id="afbef686d8c0ad736360f716ab5db0ec5"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>channel_no</b> = 0</td></tr>
-<tr class="separator:afbef686d8c0ad736360f716ab5db0ec5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e627d40130318b659c453ad0a68333b"><td class="memItemLeft" align="right" valign="top"><a id="a3e627d40130318b659c453ad0a68333b"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>current_pos</b> = 0</td></tr>
 <tr class="separator:a3e627d40130318b659c453ad0a68333b"><td class="memSeparator" colspan="2">&#160;</td></tr>
