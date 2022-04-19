@@ -1,11 +1,11 @@
 #pragma once
 
-#include "FFTReal/FFTReal.h"
+#include "AudioTools/AudioOutput.h"
 
 namespace audio_tools {
 
 // forward declaration
-class AudioFFT;
+class AudioFFTBase;
 
 /// Result of the FFT
 struct AudioFFTResult {
@@ -16,34 +16,51 @@ struct AudioFFTResult {
 
 /// Configuration for AudioFFT
 struct AudioFFTConfig : public  AudioBaseInfo {
+    AudioFFTConfig(){
+        channels = 2;
+        bits_per_sample = 16;
+        sample_rate = 44100;
+    }
     /// Callback method which is called after we got a new result
-    void (*callback)(AudioFFT &fft) = nullptr;
+    void (*callback)(AudioFFTBase &fft) = nullptr;
     /// Channel which is used as input
     uint8_t channel_used = 0; 
 };
 
-
 /**
- * @brief Executes FFT using audio data. We use the FFTReal library see https://github.com/cyrilcode/fft-real
+ * @brief Abstract Class which defines the basic FFT functionality 
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioFFT : public AudioPrint {
+class FFTDriver {
+    public:
+        virtual void begin(int len) =0;
+        virtual void end() =0;
+        virtual void setValue(int pos, int value) =0;
+        virtual void fft() = 0;
+        virtual float magnitude(int idx) = 0;
+        virtual bool isValid() = 0;
+};
+
+/**
+ * @brief Executes FFT using audio data. The Driver which is passed in the constructor selects a specifc FFT implementation
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class AudioFFTBase : public AudioPrint {
     public:
         /// Default Constructor. The len needs to be of the power of 2 (e.g. 512, 1024, 2048, 4096, 8192)
-        AudioFFT(uint16_t fft_len){
+        AudioFFTBase(uint16_t fft_len, FFTDriver* driver){
             len = fft_len;
+            p_driver = driver;
         }
 
-        ~AudioFFT() {
+        ~AudioFFTBase() {
             end();
         }
 
         AudioFFTConfig defaultConfig() {
             AudioFFTConfig info;
-            info.channels = 2;
-            info.bits_per_sample = 16;
-            info.sample_rate = 44100;
             return info;
         }
 
@@ -54,11 +71,9 @@ class AudioFFT : public AudioPrint {
                 LOGE("Len must be of the power of 2: %d", len);
                 return false;
             }
-            if (p_fft_object==nullptr) p_fft_object = new ffft::FFTReal<float>(len);
-            if (p_x==nullptr) p_x = new float[len];
-            if (p_f==nullptr) p_f = new float[len];
+            p_driver->begin(len);
             current_pos = 0;
-            return p_f!=nullptr;
+            return p_driver->isValid();
         }
 
         void setAudioInfo(AudioBaseInfo info) override {
@@ -70,15 +85,13 @@ class AudioFFT : public AudioPrint {
 
         /// Release the allocated memory
         void end() {
-            if (p_fft_object!=nullptr) delete p_fft_object;
-            if (p_x!=nullptr) delete[] p_x;
-            if (p_f!=nullptr) delete[] p_f;
+            p_driver->end();
         }
 
         /// Provide the audio data as FFT input
         size_t write(const uint8_t*data, size_t len) override {
             size_t result = 0;
-            if (p_fft_object!=nullptr){
+            if (p_driver->isValid()){
                 result = len;
                 switch(cfg.bits_per_sample){
                     case 16:
@@ -101,16 +114,6 @@ class AudioFFT : public AudioPrint {
         /// We try to fill the buffer at once
         int availableForWrite() {
             return cfg.bits_per_sample/8*len;
-        }
-
-        /// Provides the real array returned by the FFT
-        float* realArray() {
-            return p_x;
-        }
-
-        /// Provides the complex array returned by the FFT  
-        float *complexArray() {
-            return p_f;
         }
 
         /// The number of bins used by the FFT 
@@ -163,11 +166,12 @@ class AudioFFT : public AudioPrint {
             }
         }
 
+        FFTDriver *driver() {
+            return p_driver;
+        }
 
     protected:
-        ffft::FFTReal <float> *p_fft_object=nullptr;
-        float *p_x = nullptr; // real
-        float *p_f = nullptr; // complex
+        FFTDriver *p_driver=nullptr;
         int len;
         int current_pos = 0;
         AudioFFTConfig cfg;
@@ -175,7 +179,7 @@ class AudioFFT : public AudioPrint {
 
         // calculate the magnitued of the fft result to determine the max value
         float magnitude(int idx){
-            return sqrt(p_x[idx] * p_x[idx] + p_f[idx] * p_f[idx]);
+            return p_driver->magnitude(idx);
         }
 
         // Add samples to input data p_x - and process them if full
@@ -184,7 +188,7 @@ class AudioFFT : public AudioPrint {
             T *dataT = (T*) data;
             int samples = byteCount/sizeof(T);
             for (int j=0; j<samples; j+=cfg.channels){
-                p_x[current_pos] = dataT[j+cfg.channel_used];
+                p_driver->setValue(current_pos, dataT[j+cfg.channel_used]);
                 if (++current_pos>=len){
                     fft();
                 }
@@ -192,7 +196,7 @@ class AudioFFT : public AudioPrint {
         }
 
         void fft() {
-            p_fft_object->do_fft (p_f, p_x);    
+            p_driver->fft();
             current_pos = 0;
             timestamp = millis();
 
@@ -222,5 +226,7 @@ class AudioFFT : public AudioPrint {
         }
 
 };
+
+
 
 }

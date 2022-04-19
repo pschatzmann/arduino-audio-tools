@@ -1,10 +1,10 @@
 
 #include "AudioTools.h"
 #include "AudioLibs/AudioKit.h"
-#include "AudioLibs/AudioFFT.h"
+#include "AudioLibs/AudioRealFFT.h" // or AudioKissFFT
 
 AudioKitStream kit;  // Audio source
-AudioFFT fft(8192);
+AudioRealFFT fft(8192); // or AudioKissFFT
 StreamCopy copier(fft, kit);  // copy mic to tfl
 int channels = 2;
 int samples_per_second = 44100;
