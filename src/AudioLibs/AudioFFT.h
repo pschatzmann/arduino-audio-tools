@@ -46,7 +46,7 @@ class AudioFFT : public AudioPrint {
         /// starts the processing
         bool begin(AudioFFTConfig info) {
             cfg = info;
-            if (isPowerOfTwo(len)){
+            if (!isPowerOfTwo(len)){
                 LOGE("Len must be of the power of 2: %d", len);
                 return false;
             }
