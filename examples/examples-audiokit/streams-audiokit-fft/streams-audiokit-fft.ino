@@ -13,10 +13,17 @@ float value=0;
 
 // display fft result
 void fftResult(AudioFFT &fft){
+    int diff;
     auto result = fft.result();
-    Serial.print(result.frequency);
-    Serial.print(" ");
-    Serial.println(result.magnitude);  
+    if (result.magnitude>100){
+        Serial.print(result.frequency);
+        Serial.print(" ");
+        Serial.print(result.magnitude);  
+        Serial.print(" => ");
+        Serial.print(result.frequencyAsNote(diff));
+        Serial.print( " diff: ");
+        Serial.println(diff);
+    }
 }
 
 void setup() {
