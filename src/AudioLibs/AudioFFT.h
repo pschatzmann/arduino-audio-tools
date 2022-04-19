@@ -91,13 +91,13 @@ class AudioFFT : public AudioPrint {
             return cfg.bits_per_sample/8*len;
         }
 
-        /// Provides the raw input array which was used by the FFT to determine the result
-        float* dataArray() {
+        /// Provides the real array returned by the FFT
+        float* realArray() {
             return p_x;
         }
 
-        /// Provides the raw result array returned by the FFT  
-        float *resultArray() {
+        /// Provides the complex array returned by the FFT  
+        float *complexArray() {
             return p_f;
         }
 
@@ -106,12 +106,17 @@ class AudioFFT : public AudioPrint {
             return len;
         }
 
+        /// time when the last result was provided - you can poll this to check if we have a new result
+        unsigned long resultTime() {
+            return timestamp;
+        }
+
         /// Determines the frequency of the indicated bin
         float frequency(int bin){
             return static_cast<float>(bin) * cfg.sample_rate / len;
         }
 
-        /// Determines the result values in the max bin
+        /// Determines the result values in the max magnitude bin
         AudioFFTResult result() {
             AudioFFTResult ret_value;
             ret_value.magnitude = 0;
@@ -128,10 +133,6 @@ class AudioFFT : public AudioPrint {
             return ret_value;
         }
 
-        /// time when the last result was provided - you can poll this to check if we have a new result
-        unsigned long resultTime() {
-            return timestamp;
-        }
 
         /// Determines the N biggest result values
         template<int N>
@@ -153,8 +154,8 @@ class AudioFFT : public AudioPrint {
 
     protected:
         ffft::FFTReal <float> *p_fft_object=nullptr;
-        float *p_x = nullptr; // input data
-        float *p_f = nullptr; // result
+        float *p_x = nullptr; // real
+        float *p_f = nullptr; // complex
         int len;
         int current_pos = 0;
         int channel_no = 0;

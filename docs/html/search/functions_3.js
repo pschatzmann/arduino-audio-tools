@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['dataarray_1106',['dataArray',['../classaudio__tools_1_1_audio_f_f_t.html#acc86b4b7d060f862803703e9f580c2cc',1,'audio_tools::AudioFFT']]],
   ['debounce_1107',['debounce',['../classaudio__tools_1_1_debouncer.html#a43fd37a4b4e674a78f6a624552eef70e',1,'audio_tools::Debouncer']]],
   ['decodemetadata_1108',['decodeMetaData',['../classaudio__tools_1_1_audio_player.html#a77b9baaaa82fa01c4e6cd224b602644f',1,'audio_tools::AudioPlayer']]],
   ['decoder_1109',['decoder',['../classaudio__tools_1_1_encoded_audio_stream.html#ae3a1bed7646aa7d1bd407524a539ff58',1,'audio_tools::EncodedAudioStream']]],

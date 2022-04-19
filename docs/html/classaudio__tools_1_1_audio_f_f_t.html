@@ -104,10 +104,11 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t.html#a75afd8405f756acb4d382498b1ec0031">begin</a> (<a class="el" href="structaudio__tools_1_1_audio_f_f_t_config.html">AudioFFTConfig</a> info)</td></tr>
 <tr class="memdesc:a75afd8405f756acb4d382498b1ec0031"><td class="mdescLeft">&#160;</td><td class="mdescRight">starts the processing <br /></td></tr>
 <tr class="separator:a75afd8405f756acb4d382498b1ec0031"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc86b4b7d060f862803703e9f580c2cc"><td class="memItemLeft" align="right" valign="top"><a id="acc86b4b7d060f862803703e9f580c2cc"></a>
-float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t.html#acc86b4b7d060f862803703e9f580c2cc">dataArray</a> ()</td></tr>
-<tr class="memdesc:acc86b4b7d060f862803703e9f580c2cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the raw input array which was used by the FFT to determine the result. <br /></td></tr>
-<tr class="separator:acc86b4b7d060f862803703e9f580c2cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a680659a2c85e80183fbf403e9c53553d"><td class="memItemLeft" align="right" valign="top"><a id="a680659a2c85e80183fbf403e9c53553d"></a>
+float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t.html#a680659a2c85e80183fbf403e9c53553d">complexArray</a> ()</td></tr>
+<tr class="memdesc:a680659a2c85e80183fbf403e9c53553d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the complex array returned by the FFT <br  />
+ <br /></td></tr>
+<tr class="separator:a680659a2c85e80183fbf403e9c53553d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a90d9f97e18b3c4aab2f7b0166d8f5e09"><td class="memItemLeft" align="right" valign="top"><a id="a90d9f97e18b3c4aab2f7b0166d8f5e09"></a>
 <a class="el" href="structaudio__tools_1_1_audio_f_f_t_config.html">AudioFFTConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><b>defaultConfig</b> ()</td></tr>
 <tr class="separator:a90d9f97e18b3c4aab2f7b0166d8f5e09"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -124,15 +125,14 @@ template&lt;int N&gt; </td></tr>
 float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t.html#ab1707dbd0b7521ecc501dfa73ad9e916">frequency</a> (int bin)</td></tr>
 <tr class="memdesc:ab1707dbd0b7521ecc501dfa73ad9e916"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the frequency of the indicated bin. <br /></td></tr>
 <tr class="separator:ab1707dbd0b7521ecc501dfa73ad9e916"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58d0bdcc44b5b46c947451a253d2c028"><td class="memItemLeft" align="right" valign="top"><a id="a58d0bdcc44b5b46c947451a253d2c028"></a>
+float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t.html#a58d0bdcc44b5b46c947451a253d2c028">realArray</a> ()</td></tr>
+<tr class="memdesc:a58d0bdcc44b5b46c947451a253d2c028"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the real array returned by the FFT. <br /></td></tr>
+<tr class="separator:a58d0bdcc44b5b46c947451a253d2c028"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80ce76f4f11d164b5e55e4d1f809785d"><td class="memItemLeft" align="right" valign="top"><a id="a80ce76f4f11d164b5e55e4d1f809785d"></a>
 <a class="el" href="structaudio__tools_1_1_audio_f_f_t_result.html">AudioFFTResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t.html#a80ce76f4f11d164b5e55e4d1f809785d">result</a> ()</td></tr>
-<tr class="memdesc:a80ce76f4f11d164b5e55e4d1f809785d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the result values in the max bin. <br /></td></tr>
+<tr class="memdesc:a80ce76f4f11d164b5e55e4d1f809785d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the result values in the max magnitude bin. <br /></td></tr>
 <tr class="separator:a80ce76f4f11d164b5e55e4d1f809785d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb7767af1d16dc4afc4cb2dee1543f6c"><td class="memItemLeft" align="right" valign="top"><a id="abb7767af1d16dc4afc4cb2dee1543f6c"></a>
-float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t.html#abb7767af1d16dc4afc4cb2dee1543f6c">resultArray</a> ()</td></tr>
-<tr class="memdesc:abb7767af1d16dc4afc4cb2dee1543f6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the raw result array returned by the FFT <br  />
- <br /></td></tr>
-<tr class="separator:abb7767af1d16dc4afc4cb2dee1543f6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7365eb911c317e02a8155dc7c42f11b9"><td class="memItemLeft" align="right" valign="top"><a id="a7365eb911c317e02a8155dc7c42f11b9"></a>
 unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t.html#a7365eb911c317e02a8155dc7c42f11b9">resultTime</a> ()</td></tr>
 <tr class="memdesc:a7365eb911c317e02a8155dc7c42f11b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">time when the last result was provided - you can poll this to check if we have a new result <br /></td></tr>
@@ -264,6 +264,9 @@ template&lt;int N&gt; </td></tr>
 <tr class="memitem:a1fec2d42d14d4ae91b2a7b47dacf09fd"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t.html#a1fec2d42d14d4ae91b2a7b47dacf09fd">InsertSorted</a> (<a class="el" href="structaudio__tools_1_1_audio_f_f_t_result.html">AudioFFTResult</a>(&amp;<a class="el" href="classaudio__tools_1_1_audio_f_f_t.html#a80ce76f4f11d164b5e55e4d1f809785d">result</a>)[N], <a class="el" href="structaudio__tools_1_1_audio_f_f_t_result.html">AudioFFTResult</a> tmp)</td></tr>
 <tr class="memdesc:a1fec2d42d14d4ae91b2a7b47dacf09fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">make sure that we do not reuse already found results <br /></td></tr>
 <tr class="separator:a1fec2d42d14d4ae91b2a7b47dacf09fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae37ca635b5ee8cb1906b5c87e5be17a5"><td class="memItemLeft" align="right" valign="top"><a id="ae37ca635b5ee8cb1906b5c87e5be17a5"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>magnitude</b> (int idx)</td></tr>
+<tr class="separator:ae37ca635b5ee8cb1906b5c87e5be17a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48c1578c771456174507591605129250"><td class="memTemplParams" colspan="2"><a id="a48c1578c771456174507591605129250"></a>
 template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a48c1578c771456174507591605129250"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>processSamples</b> (const void *data, size_t byteCount)</td></tr>
