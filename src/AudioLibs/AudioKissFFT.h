@@ -45,7 +45,7 @@ class FFTDriverKissFFT : public FFTDriver {
  */
 class AudioKissFFT : public AudioFFTBase {
     public:
-        AudioKissFFT(uint16_t fft_len ):AudioFFTBase(fft_len, new FFTDriverKissFFT()) {}
+        AudioKissFFT():AudioFFTBase(new FFTDriverKissFFT()) {}
 
         /// Provides the complex array returned by the FFT  
         kiss_fft_cpx *dataArray() {

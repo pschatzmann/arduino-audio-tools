@@ -36,6 +36,8 @@ struct AudioFFTConfig : public  AudioBaseInfo {
     void (*callback)(AudioFFTBase &fft) = nullptr;
     /// Channel which is used as input
     uint8_t channel_used = 0; 
+    int length=8192;
+    int stride=0;
 };
 
 /**
@@ -61,8 +63,7 @@ class FFTDriver {
 class AudioFFTBase : public AudioPrint {
     public:
         /// Default Constructor. The len needs to be of the power of 2 (e.g. 512, 1024, 2048, 4096, 8192)
-        AudioFFTBase(uint16_t fft_len, FFTDriver* driver){
-            len = fft_len;
+        AudioFFTBase(FFTDriver* driver){
             p_driver = driver;
         }
 
@@ -78,11 +79,14 @@ class AudioFFTBase : public AudioPrint {
         /// starts the processing
         bool begin(AudioFFTConfig info) {
             cfg = info;
-            if (!isPowerOfTwo(len)){
-                LOGE("Len must be of the power of 2: %d", len);
+            if (!isPowerOfTwo(cfg.length)){
+                LOGE("Len must be of the power of 2: %d", cfg.length);
                 return false;
             }
-            p_driver->begin(len);
+            if (!createStrideBuffer()){
+                return false;
+            }
+            p_driver->begin(cfg.length);
             current_pos = 0;
             return p_driver->isValid();
         }
@@ -97,6 +101,7 @@ class AudioFFTBase : public AudioPrint {
         /// Release the allocated memory
         void end() {
             p_driver->end();
+            if (p_stridebuffer!=nullptr) delete p_stridebuffer;
         }
 
         /// Provide the audio data as FFT input
@@ -124,12 +129,12 @@ class AudioFFTBase : public AudioPrint {
 
         /// We try to fill the buffer at once
         int availableForWrite() {
-            return cfg.bits_per_sample/8*len;
+            return cfg.bits_per_sample/8*cfg.length;
         }
 
         /// The number of bins used by the FFT 
         int size() {
-            return len;
+            return cfg.length;
         }
 
         /// time when the last result was provided - you can poll this to check if we have a new result
@@ -139,7 +144,7 @@ class AudioFFTBase : public AudioPrint {
 
         /// Determines the frequency of the indicated bin
         float frequency(int bin){
-            return static_cast<float>(bin) * cfg.sample_rate / len;
+            return static_cast<float>(bin) * cfg.sample_rate / cfg.length;
         }
 
         /// Determines the result values in the max magnitude bin
@@ -148,7 +153,7 @@ class AudioFFTBase : public AudioPrint {
             ret_value.magnitude = 0;
             ret_value.bin = 0;
             // find max value and index
-            for (int j=1;j<len/2;j++){
+            for (int j=1;j<cfg.length/2;j++){
                 float m = magnitude(j);
                 if (m>ret_value.magnitude){
                     ret_value.magnitude = m;
@@ -169,7 +174,7 @@ class AudioFFTBase : public AudioPrint {
             }
             // find top n values
             AudioFFTResult act;
-            for (int j=1;j<len/2;j++){
+            for (int j=1;j<cfg.length/2;j++){
                 act.magnitude = magnitude(j);
                 act.bin = j;
                 act.frequency = frequency(j);
@@ -183,10 +188,28 @@ class AudioFFTBase : public AudioPrint {
 
     protected:
         FFTDriver *p_driver=nullptr;
-        int len;
         int current_pos = 0;
         AudioFFTConfig cfg;
         unsigned long timestamp=0l;
+        RingBuffer<uint8_t> *p_stridebuffer = nullptr;
+
+        /// Allocates the stride buffer if necessary
+        bool createStrideBuffer() {
+            bool result = true;
+            if (p_stridebuffer!=nullptr) delete p_stridebuffer;
+            p_stridebuffer = nullptr;
+            if (cfg.stride>0){
+                // calculate the number of last bytes that we need to reprocess 
+                int size = cfg.length - cfg.stride;
+                if (size>0){
+                    p_stridebuffer = new RingBuffer<uint8_t>(size*bytesPerSample());
+                } else {
+                    LOGE("stride>length not supported");
+                    result = false;
+                }
+            }
+            return result;
+        }
 
         // calculate the magnitued of the fft result to determine the max value
         float magnitude(int idx){
@@ -197,10 +220,13 @@ class AudioFFTBase : public AudioPrint {
         template<typename T>
         void processSamples(const void *data, size_t byteCount) {
             T *dataT = (T*) data;
+            T sample;
             int samples = byteCount/sizeof(T);
             for (int j=0; j<samples; j+=cfg.channels){
-                p_driver->setValue(current_pos, dataT[j+cfg.channel_used]);
-                if (++current_pos>=len){
+                sample = dataT[j+cfg.channel_used];
+                p_driver->setValue(current_pos, sample);
+                writeStrideBuffer((uint8_t*)&sample, sizeof(T));
+                if (++current_pos>=cfg.length){
                     fft();
                 }
             }
@@ -208,12 +234,26 @@ class AudioFFTBase : public AudioPrint {
 
         void fft() {
             p_driver->fft();
-            current_pos = 0;
             timestamp = millis();
-
             if (cfg.callback!=nullptr){
                 cfg.callback(*this);
             }
+
+            // reprocess data in stride buffer
+            if (p_stridebuffer!=nullptr){
+                // rewrite data in stride buffer
+                int byte_count = p_stridebuffer->available();
+                uint8_t buffer[byte_count];
+                p_stridebuffer->readArray(buffer, byte_count);
+                write(buffer, byte_count);
+                current_pos = byte_count / bytesPerSample();
+            } else {
+                current_pos = 0;
+            }
+        }
+
+        int bytesPerSample() {
+            return cfg.bits_per_sample / 8;
         }
 
         /// make sure that we do not reuse already found results
@@ -230,6 +270,20 @@ class AudioFFTBase : public AudioPrint {
                 }
             }
             return false;
+        }
+
+        void writeStrideBuffer(uint8_t* buffer, size_t len){
+            if (p_stridebuffer!=nullptr){
+                int available = p_stridebuffer->availableForWrite();
+                if (len>available){
+                    // clear oldest values to make space
+                    int diff = len-available;
+                    for(int j=0;j<diff;j++){
+                        p_stridebuffer->read();
+                    }
+                }
+                p_stridebuffer->writeArray(buffer, len);
+            }
         }
 
         bool isPowerOfTwo(uint16_t x) {

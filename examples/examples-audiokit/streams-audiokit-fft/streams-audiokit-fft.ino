@@ -4,7 +4,7 @@
 #include "AudioLibs/AudioRealFFT.h" // or AudioKissFFT
 
 AudioKitStream kit;  // Audio source
-AudioRealFFT fft(8192); // or AudioKissFFT
+AudioRealFFT fft; // or AudioKissFFT
 StreamCopy copier(fft, kit);  // copy mic to tfl
 int channels = 2;
 int samples_per_second = 44100;
@@ -40,6 +40,7 @@ void setup() {
 
   // Setup FFT
   auto tcfg = fft.defaultConfig();
+  tcfg.length = 8192;
   tcfg.channels = channels;
   tcfg.sample_rate = samples_per_second;
   tcfg.bits_per_sample = bits_per_sample;
