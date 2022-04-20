@@ -11,8 +11,7 @@ namespace audio_tools {
  */
 class BitVector {
   public:
-    BitVector(){
-    }
+    BitVector() = default;
 
     inline bool operator[](int index) {
         bool result = false;
