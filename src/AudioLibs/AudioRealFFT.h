@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AudioFFT.h"
-#include "FFTReal/FFTReal.h"
+#include "FFT/FFTReal.h"
 
 namespace audio_tools {
 
