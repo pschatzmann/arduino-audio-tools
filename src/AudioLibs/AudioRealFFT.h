@@ -52,7 +52,7 @@ class FFTDriverRealFFT : public FFTDriver {
  */
 class AudioRealFFT : public AudioFFTBase {
     public:
-        AudioRealFFT(uint16_t fft_len ):AudioFFTBase(fft_len, new FFTDriverRealFFT()) {}
+        AudioRealFFT():AudioFFTBase(new FFTDriverRealFFT()) {}
 
         /// Provides the real array returned by the FFT
         float* realArray() {
