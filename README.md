@@ -48,6 +48,7 @@ As “Audio Sinks” we will have e.g:
 - Callback integration e.g. with ESP8266Audio [AudioOutputWithCallback](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_audio_output_with_callback.html) 
 - Filtered Output - [FilteredStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_filtered_stream.html)
 - Tensorflow Lite - [TfLiteAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_tf_lite_audio_stream.html)
+- FFT - [AudioRealFFT](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_audio_real_f_f_t.html) and [AudioKissFFT](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_audio_kiss_f_f_t.html)
 - Any other Arduino Classes implementing Streams: SD, Ethernet etc
 
 ### Examples
