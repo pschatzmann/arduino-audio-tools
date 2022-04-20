@@ -56,7 +56,7 @@ var searchData=
   ['audioeffects_3c_20audio_5ftools_3a_3ageneratorfromstream_3c_20int16_5ft_20_3e_20_3e_53',['AudioEffects&lt; audio_tools::GeneratorFromStream&lt; int16_t &gt; &gt;',['../classaudio__tools_1_1_audio_effects.html',1,'audio_tools']]],
   ['audioencoder_54',['AudioEncoder',['../classaudio__tools_1_1_audio_encoder.html',1,'audio_tools']]],
   ['audioencoderserver_55',['AudioEncoderServer',['../classaudio__tools_1_1_audio_encoder_server.html',1,'audio_tools::AudioEncoderServer'],['../classaudio__tools_1_1_audio_encoder_server.html#a78f0ea545696555cda78585be3a14e9e',1,'audio_tools::AudioEncoderServer::AudioEncoderServer(AudioEncoder *encoder)'],['../classaudio__tools_1_1_audio_encoder_server.html#a5faa004897782b807a357083a90e4cc8',1,'audio_tools::AudioEncoderServer::AudioEncoderServer(AudioEncoder *encoder, const char *network, const char *password)']]],
-  ['audiofftbase_56',['AudioFFTBase',['../classaudio__tools_1_1_audio_f_f_t_base.html',1,'audio_tools::AudioFFTBase'],['../classaudio__tools_1_1_audio_f_f_t_base.html#ace9bc22aadc78963463670a095a86ca0',1,'audio_tools::AudioFFTBase::AudioFFTBase()']]],
+  ['audiofftbase_56',['AudioFFTBase',['../classaudio__tools_1_1_audio_f_f_t_base.html',1,'audio_tools::AudioFFTBase'],['../classaudio__tools_1_1_audio_f_f_t_base.html#ae921679e7a74626fae05808edac19bd1',1,'audio_tools::AudioFFTBase::AudioFFTBase()']]],
   ['audiofftconfig_57',['AudioFFTConfig',['../structaudio__tools_1_1_audio_f_f_t_config.html',1,'audio_tools']]],
   ['audiofftresult_58',['AudioFFTResult',['../structaudio__tools_1_1_audio_f_f_t_result.html',1,'audio_tools']]],
   ['audioheader_59',['AudioHeader',['../structaudio__tools_1_1_audio_header.html',1,'audio_tools']]],

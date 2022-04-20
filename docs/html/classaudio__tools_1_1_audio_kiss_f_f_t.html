@@ -91,9 +91,6 @@ Inheritance diagram for audio_tools::AudioKissFFT:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a5d636f74596632f67820e3bbf6717ef1"><td class="memItemLeft" align="right" valign="top"><a id="a5d636f74596632f67820e3bbf6717ef1"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>AudioKissFFT</b> (uint16_t fft_len)</td></tr>
-<tr class="separator:a5d636f74596632f67820e3bbf6717ef1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e823102cd0c45e379c581c25a3fb4c6"><td class="memItemLeft" align="right" valign="top"><a id="a2e823102cd0c45e379c581c25a3fb4c6"></a>
 kiss_fft_cpx *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_kiss_f_f_t.html#a2e823102cd0c45e379c581c25a3fb4c6">dataArray</a> ()</td></tr>
 <tr class="memdesc:a2e823102cd0c45e379c581c25a3fb4c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the complex array returned by the FFT <br  />
@@ -103,10 +100,10 @@ kiss_fft_cpx *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 <a class="el" href="classaudio__tools_1_1_f_f_t_driver_kiss_f_f_t.html">FFTDriverKissFFT</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>driverEx</b> ()</td></tr>
 <tr class="separator:ad2b8cc4dcb97a6e96ae6f7e642f9727b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classaudio__tools_1_1_audio_f_f_t_base"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classaudio__tools_1_1_audio_f_f_t_base')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html">audio_tools::AudioFFTBase</a></td></tr>
-<tr class="memitem:ace9bc22aadc78963463670a095a86ca0 inherit pub_methods_classaudio__tools_1_1_audio_f_f_t_base"><td class="memItemLeft" align="right" valign="top"><a id="ace9bc22aadc78963463670a095a86ca0"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#ace9bc22aadc78963463670a095a86ca0">AudioFFTBase</a> (uint16_t fft_len, <a class="el" href="classaudio__tools_1_1_f_f_t_driver.html">FFTDriver</a> *driver)</td></tr>
-<tr class="memdesc:ace9bc22aadc78963463670a095a86ca0 inherit pub_methods_classaudio__tools_1_1_audio_f_f_t_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Constructor. The len needs to be of the power of 2 (e.g. 512, 1024, 2048, 4096, 8192) <br /></td></tr>
-<tr class="separator:ace9bc22aadc78963463670a095a86ca0 inherit pub_methods_classaudio__tools_1_1_audio_f_f_t_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae921679e7a74626fae05808edac19bd1 inherit pub_methods_classaudio__tools_1_1_audio_f_f_t_base"><td class="memItemLeft" align="right" valign="top"><a id="ae921679e7a74626fae05808edac19bd1"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#ae921679e7a74626fae05808edac19bd1">AudioFFTBase</a> (<a class="el" href="classaudio__tools_1_1_f_f_t_driver.html">FFTDriver</a> *driver)</td></tr>
+<tr class="memdesc:ae921679e7a74626fae05808edac19bd1 inherit pub_methods_classaudio__tools_1_1_audio_f_f_t_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Constructor. The len needs to be of the power of 2 (e.g. 512, 1024, 2048, 4096, 8192) <br /></td></tr>
+<tr class="separator:ae921679e7a74626fae05808edac19bd1 inherit pub_methods_classaudio__tools_1_1_audio_f_f_t_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a897a15291f7bb1c3b1fe4379e989bf40 inherit pub_methods_classaudio__tools_1_1_audio_f_f_t_base"><td class="memItemLeft" align="right" valign="top"><a id="a897a15291f7bb1c3b1fe4379e989bf40"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#a897a15291f7bb1c3b1fe4379e989bf40">availableForWrite</a> ()</td></tr>
 <tr class="memdesc:a897a15291f7bb1c3b1fe4379e989bf40 inherit pub_methods_classaudio__tools_1_1_audio_f_f_t_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">We try to fill the buffer at once. <br /></td></tr>
@@ -262,6 +259,13 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (const ch
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_methods_classaudio__tools_1_1_audio_f_f_t_base"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classaudio__tools_1_1_audio_f_f_t_base')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html">audio_tools::AudioFFTBase</a></td></tr>
+<tr class="memitem:ac5f3797a669fa210474b22d8d1d89fc1 inherit pro_methods_classaudio__tools_1_1_audio_f_f_t_base"><td class="memItemLeft" align="right" valign="top"><a id="ac5f3797a669fa210474b22d8d1d89fc1"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>bytesPerSample</b> ()</td></tr>
+<tr class="separator:ac5f3797a669fa210474b22d8d1d89fc1 inherit pro_methods_classaudio__tools_1_1_audio_f_f_t_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a657a22a6ccfe690b2d5a7f9220133487 inherit pro_methods_classaudio__tools_1_1_audio_f_f_t_base"><td class="memItemLeft" align="right" valign="top"><a id="a657a22a6ccfe690b2d5a7f9220133487"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#a657a22a6ccfe690b2d5a7f9220133487">createStrideBuffer</a> ()</td></tr>
+<tr class="memdesc:a657a22a6ccfe690b2d5a7f9220133487 inherit pro_methods_classaudio__tools_1_1_audio_f_f_t_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocates the stride buffer if necessary. <br /></td></tr>
+<tr class="separator:a657a22a6ccfe690b2d5a7f9220133487 inherit pro_methods_classaudio__tools_1_1_audio_f_f_t_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a70e02161c5231878cb2ff1f64285b2dd inherit pro_methods_classaudio__tools_1_1_audio_f_f_t_base"><td class="memItemLeft" align="right" valign="top"><a id="a70e02161c5231878cb2ff1f64285b2dd"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>fft</b> ()</td></tr>
 <tr class="separator:a70e02161c5231878cb2ff1f64285b2dd inherit pro_methods_classaudio__tools_1_1_audio_f_f_t_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -280,6 +284,9 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>magnitude</b> (int i
 template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a80d3cab3096f3a76bd2451da1c9de6d8 inherit pro_methods_classaudio__tools_1_1_audio_f_f_t_base"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>processSamples</b> (const void *data, size_t byteCount)</td></tr>
 <tr class="separator:a80d3cab3096f3a76bd2451da1c9de6d8 inherit pro_methods_classaudio__tools_1_1_audio_f_f_t_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2915536a6dc5a8953b29ba4baf544c01 inherit pro_methods_classaudio__tools_1_1_audio_f_f_t_base"><td class="memItemLeft" align="right" valign="top"><a id="a2915536a6dc5a8953b29ba4baf544c01"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>writeStrideBuffer</b> (uint8_t *buffer, size_t len)</td></tr>
+<tr class="separator:a2915536a6dc5a8953b29ba4baf544c01 inherit pro_methods_classaudio__tools_1_1_audio_f_f_t_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_class_print"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_print')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_print.html">Print</a></td></tr>
 <tr class="memitem:a46656410e23c0ec14d7a01b38b3b6f00 inherit pro_methods_class_print"><td class="memItemLeft" align="right" valign="top"><a id="a46656410e23c0ec14d7a01b38b3b6f00"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteError</b> (int err=1)</td></tr>
@@ -291,12 +298,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteError</b> (in
 <tr class="memitem:a88f9c72a033db0c531a1fe78b37fc609 inherit pro_attribs_classaudio__tools_1_1_audio_f_f_t_base"><td class="memItemLeft" align="right" valign="top"><a id="a88f9c72a033db0c531a1fe78b37fc609"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>current_pos</b> = 0</td></tr>
 <tr class="separator:a88f9c72a033db0c531a1fe78b37fc609 inherit pro_attribs_classaudio__tools_1_1_audio_f_f_t_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5885235d774f87340bd3578f5e78cda2 inherit pro_attribs_classaudio__tools_1_1_audio_f_f_t_base"><td class="memItemLeft" align="right" valign="top"><a id="a5885235d774f87340bd3578f5e78cda2"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>len</b></td></tr>
-<tr class="separator:a5885235d774f87340bd3578f5e78cda2 inherit pro_attribs_classaudio__tools_1_1_audio_f_f_t_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89cd3db82167edc20cbb58c5196572d5 inherit pro_attribs_classaudio__tools_1_1_audio_f_f_t_base"><td class="memItemLeft" align="right" valign="top"><a id="a89cd3db82167edc20cbb58c5196572d5"></a>
 <a class="el" href="classaudio__tools_1_1_f_f_t_driver.html">FFTDriver</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_driver</b> =nullptr</td></tr>
 <tr class="separator:a89cd3db82167edc20cbb58c5196572d5 inherit pro_attribs_classaudio__tools_1_1_audio_f_f_t_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee0757f0faf555743f251a509449c199 inherit pro_attribs_classaudio__tools_1_1_audio_f_f_t_base"><td class="memItemLeft" align="right" valign="top"><a id="aee0757f0faf555743f251a509449c199"></a>
+<a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>p_stridebuffer</b> = nullptr</td></tr>
+<tr class="separator:aee0757f0faf555743f251a509449c199 inherit pro_attribs_classaudio__tools_1_1_audio_f_f_t_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a873faf17908c4e6c705880a7a3e26c inherit pro_attribs_classaudio__tools_1_1_audio_f_f_t_base"><td class="memItemLeft" align="right" valign="top"><a id="a5a873faf17908c4e6c705880a7a3e26c"></a>
 unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>timestamp</b> =0l</td></tr>
 <tr class="separator:a5a873faf17908c4e6c705880a7a3e26c inherit pro_attribs_classaudio__tools_1_1_audio_f_f_t_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
