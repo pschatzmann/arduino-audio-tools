@@ -190,6 +190,17 @@ public:
         return note(frequency, diff);
     }
 
+    /// Determine frequency of MIDI note
+    float  midiNoteToFrequency(uint8_t x) {
+        int a = 440; //frequency of A (coomon value is 440Hz)
+        return (a / 32) * pow(2, ((x - 9) / 12));
+    }
+
+    /// Provide MIDI note for frequency
+    uint8_t frequencyToMidiNote(float freq) {
+        return log(freq/440.0)/log(2) * 12 + 69;
+    }
+
 protected:
 
     uint16_t notes[9][12] = {
