@@ -28,16 +28,16 @@ As “Audio Sources” we will have e.g.:
 - Desktop Integration - [PortAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_port_audio_stream.html)
 - A Timer based Source - [TimerCallbackAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_timer_callback_audio_stream.html)
 - ESP32 AudioKit - [AudioKitStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_audio_kit_stream.html)
-- Filtered Input - [FilteredStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_filtered_stream.html)
+- Input using FIR, IIR Filters - [FilteredStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_filtered_stream.html)
 - Tensorflow Lite - [TfLiteAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_tf_lite_audio_stream.html)
 - Any other Arduino Classes implementing Streams: SD, Ethernet etc
 
 As “Audio Sinks” we will have e.g:
 
 - external DAC – [I2SStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_i2_s_stream.html)
-- Analog output e.g. with an Amplifier – [AnalogAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_analog_audio_stream.html)
-- with a Piezo Electric Element – [PWMAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_p_w_m_audio_stream_base.html)
-- external SPDIF/TOSLINK Amplifier - [SPDIFStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_s_p_d_i_f_stream.html)
+- Analog output e.g. to an Amplifier – [AnalogAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_analog_audio_stream.html)
+- Output using PWM – [PWMAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_p_w_m_audio_stream_base.html)
+- Output to SPDIF/TOSLINK - [SPDIFStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_s_p_d_i_f_stream.html)
 - Bluetooth Speakers – [A2DPStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_a2_d_p_stream.html)
 - Serial to display the data as CSV – [CsvStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_csv_stream.html)
 - Encoding and Decoding of Audio [EncodedAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_encoded_audio_stream.html)
@@ -46,9 +46,12 @@ As “Audio Sinks” we will have e.g:
 - A Timer based Sink - [TimerCallbackAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_timer_callback_audio_stream.html)
 - ESP32 AudioKit - [AudioKitStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_audio_kit_stream.html)
 - Callback integration e.g. with ESP8266Audio [AudioOutputWithCallback](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_audio_output_with_callback.html) 
-- Filtered Output - [FilteredStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_filtered_stream.html)
-- Tensorflow Lite - [TfLiteAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_tf_lite_audio_stream.html)
+- Output using FIR, IRR Filters - [FilteredStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_filtered_stream.html)
+- Determine the Volume - [VolumePrint](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_volume_print.html)
+- Split the Output to different Destinations - [MultiOutput](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_multi_output.html)
+- 3 Band Equilizer - [Equilizer3Bands](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_equilizer3_bands.html)
 - FFT - [AudioRealFFT](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_audio_real_f_f_t.html) and [AudioKissFFT](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_audio_kiss_f_f_t.html)
+- Tensorflow Lite - [TfLiteAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_tf_lite_audio_stream.html)
 - Any other Arduino Classes implementing Streams: SD, Ethernet etc
 
 ### Examples
