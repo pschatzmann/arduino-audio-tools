@@ -168,7 +168,17 @@ class URLStreamDefault : public AbstractURLStream {
         Client *client=nullptr;
         WiFiClient *clientInsecure=nullptr;
         WiFiClientSecure *clientSecure=nullptr;
-        int clientTimeout = 60000;
+        int clientTimeout = URL_CLIENT_TIMEOUT; // 60000;
+        unsigned long handshakeTimeout = URL_HANDSHAKE_TIMEOUT; //120000
+
+        void setTimeouts() {
+            // set regular timeout
+            getClient(url.isSecure()).setTimeout(clientTimeout);
+            // There is a bug in IDF 4!
+            if (clientSecure!=nullptr){
+                clientSecure->setHandshakeTimeout(handshakeTimeout);
+            }
+        }
 
         /// Process the Http request and handle redirects
         int process(MethodID action, Url &url, const char* reqMime, const char *reqData, int len=-1) {
@@ -177,7 +187,7 @@ class URLStreamDefault : public AbstractURLStream {
             const char* icy = request.header().get("Icy-MetaData");
 
             // set timeout
-            getClient(url.isSecure()).setTimeout(clientTimeout);
+            setTimeouts();
             int status_code = request.process(action, url, reqMime, reqData, len);
             // redirect
             while (request.reply().isRedirectStatus()){
