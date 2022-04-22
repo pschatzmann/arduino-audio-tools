@@ -6,8 +6,10 @@
 #define FAUSTFLOAT float
 #endif 
 
+
 // forward declarations
 class UI;
+
 
 /**
  * @brief minimal dsp base class needed by Faust
@@ -140,3 +142,5 @@ class UI {
         }
 
 };
+
+
