@@ -8,14 +8,13 @@
  * @copyright Copyright (c) 2021
  */
 
-// set this in AudioConfig.h or here after installing https://github.com/pschatzmann/arduino-libhelix.git
-#define USE_HELIX 
+// install https://github.com/pschatzmann/arduino-libhelix.git
+// install https://github.com/greiman/SdFat.git
 
-#include "AudioTools.h"
-#include "AudioCodecs/CodecMP3Helix.h"
 #include <SPI.h>
 #include <SdFat.h>
-
+#include "AudioTools.h"
+#include "AudioCodecs/CodecMP3Helix.h"
 
 
 //                            -> EncodedAudioStream -> I2SStream

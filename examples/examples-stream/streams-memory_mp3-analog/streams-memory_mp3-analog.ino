@@ -9,13 +9,11 @@
  
  */
 
-// set this in AudioConfig.h or here after installing https://github.com/pschatzmann/arduino-libhelix.git
-#define USE_HELIX 
+// install https://github.com/pschatzmann/arduino-libhelix.git
 
 #include "AudioTools.h"
 #include "AudioCodecs/CodecMP3Helix.h"
 #include "BabyElephantWalk60_mp3.h"
-
 
 
 MemoryStream mp3(BabyElephantWalk60_mp3, BabyElephantWalk60_mp3_len);

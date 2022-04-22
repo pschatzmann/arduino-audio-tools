@@ -8,8 +8,6 @@
  * 
  */
 
-// set this in AudioConfig.h or here after installing https://github.com/pschatzmann/arduino-libhelix.git
-#define USE_HELIX 
 
 #include "AudioTools.h"
 #include "AudioCodecs/CodecAACHelix.h"

@@ -7,10 +7,8 @@
  * @copyright GPLv3
  */
 
-// Add this in your sketch or change the setting in AudioConfig.h
-#define USE_A2DP
-
 #include "AudioTools.h"
+#include "AudioLibs/AudioA2DP.h"
 
 I2SStream i2sStream;                            // Access I2S as stream
 A2DPStream a2dpStream = A2DPStream::instance(); // access A2DP as stream

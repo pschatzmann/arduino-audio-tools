@@ -6,8 +6,8 @@
  * @copyright GPLv3
  */
 
-#define USE_A2DP
 #include "AudioConfigLocal.h"
+#include "BluetoothA2DPSink.h"
 #include "AudioTools.h"
 
 BluetoothA2DPSink a2dp_sink;

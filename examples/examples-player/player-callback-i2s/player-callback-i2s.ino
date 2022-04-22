@@ -7,15 +7,13 @@
  */
 
 
-// set this in AudioConfig.h or here after installing https://github.com/pschatzmann/arduino-libhelix.git
-#define USE_HELIX 
+// Install https://github.com/pschatzmann/arduino-libhelix.git
 
 #include "Arduino.h"
 #include "AudioTools.h"
 #include "AudioCodecs/CodecMP3Helix.h"
 #include <SPI.h>
 #include <SD.h>
-
 
 
 // forward declarations

@@ -8,12 +8,8 @@
  * 
  */
 
-// Add this in your sketch or change the setting in AudioConfig.h
-#define USE_A2DP
-
 #include "AudioTools.h"
-
-
+#include "AudioLibs/AudioA2DP.h"
 
 typedef int16_t sound_t;                                  // sound will be represented as int16_t (with 2 bytes)
 uint16_t sample_rate=44100;

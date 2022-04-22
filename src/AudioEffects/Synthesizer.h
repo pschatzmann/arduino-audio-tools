@@ -223,12 +223,13 @@ class Synthesizer : public SoundGenerator<int16_t> {
 #endif
        }
 
-        void begin(AudioBaseInfo config) {
+        bool begin(AudioBaseInfo config) {
             LOGI(LOG_METHOD);
             this->cfg = config;
             SoundGenerator<int16_t>::begin(config);
             // provide config to defaut
             defaultChannel->begin(config);
+            return true;
         }
 
         void keyOn(int note, float tgt=0){

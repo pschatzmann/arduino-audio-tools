@@ -12,7 +12,7 @@ int bits_per_sample = 16;
 float value=0;
 
 // display fft result
-void fftResult(AudioFFT &fft){
+void fftResult(AudioFFTBase &fft){
     int diff;
     auto result = fft.result();
     if (result.magnitude>100){

@@ -7,18 +7,16 @@
  * @copyright GPLv3
  * 
  */
-// Add this in your sketch or change the setting in AudioConfig.h
-#define USE_A2DP
 #define USE_MOZZI
 
 #include "AudioTools.h"
+#include "AudioLibs/AudioA2DP.h"
 #include <Oscil.h>
 #include <tables/cos2048_int8.h> // table for Oscils to play
 #include <mozzi_fixmath.h>
 #include <EventDelay.h>
 #include <mozzi_rand.h>
 #include <mozzi_midi.h>
-
 
 
 MozziStream in;                              // Stream generated with mozzi

@@ -16,4 +16,8 @@ We sample the sound signal with the help of the ESP32 I2S ADC input functionalit
 | GND     | GND
 | OUT     | GPIO34
 
+### Dependencies
+
+- https://github.com/pschatzmann/ESP32-A2DP.git
+
 
