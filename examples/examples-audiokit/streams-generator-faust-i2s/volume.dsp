@@ -1,0 +1,16 @@
+declare compilation_options    "-single -scal -inpl -fx -I /Users/pschatzmann/.FaustLive-CurrentSession-2.0/Libs -I /Users/pschatzmann/.FaustLive-CurrentSession-2.0/Examples";
+declare library_path "volume";
+declare library_path "/Users/pschatzmann/.FaustLive-CurrentSession-2.0/Libs/stdfaust.lib";
+declare library_path "/Users/pschatzmann/.FaustLive-CurrentSession-2.0/Libs/basics.lib";
+declare library_path "/Users/pschatzmann/.FaustLive-CurrentSession-2.0/Libs/signals.lib";
+declare author "Grame";
+declare basics_lib_name "Faust Basic Element Library";
+declare basics_lib_version "0.1";
+declare copyright "(c)GRAME 2006";
+declare filename "volume";
+declare license "BSD";
+declare name "volume";
+declare signals_lib_name "Faust Signal Routing Library";
+declare signals_lib_version "0.0";
+declare version "1.0";
+process = _,(vslider("[1]", 0.0f, -70.0f, 4.0f, 0.10000000000000001f) : \(x1).(10.0f,(x1,20.0f : /) : pow) : _,0.0010000000000000009f : * : +~(_,0.999f : *)) : *;
