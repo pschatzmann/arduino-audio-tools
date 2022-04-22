@@ -5,9 +5,8 @@
   * @copyright GPLv3
 */
 
-#define USE_A2DP
-
 #include "AudioTools.h"
+#include "AudioLibs/AudioA2DP.h"
 
 /**
  * @brief We use a INMP441 I2S microphone as input and send the data to A2DP

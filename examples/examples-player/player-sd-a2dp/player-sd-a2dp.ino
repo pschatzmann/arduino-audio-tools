@@ -6,14 +6,11 @@
  * @copyright GPLv3
  */
 
-// set this in AudioConfig.h or here after installing https://github.com/pschatzmann/arduino-libhelix.git
-#define USE_HELIX 
-#define USE_A2DP
+
 #define USE_SDFAT
-
 #include "AudioTools.h"
+#include "AudioLibs/AudioA2DP.h"
 #include "AudioCodecs/CodecMP3Helix.h"
-
 
 
 const char *startFilePath="/";

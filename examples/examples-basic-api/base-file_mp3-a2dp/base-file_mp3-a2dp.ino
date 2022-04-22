@@ -1,14 +1,11 @@
 /**
  * @file file_mp3-a2dp.ino
  * @author Phil Schatzmann
- * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/file_mp3-a2dp/README.md
+ * @brief We read some audio with the ESP8266-Audio Library and send it to a Bluetooth Speaker
  * 
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-
-// Add this in your sketch or change the setting in AudioConfig.h
-#define USE_A2DP
 
 #include <SPI.h>
 #include <SD.h>
@@ -16,7 +13,7 @@
 #include "AudioGeneratorMP3.h"
 #include "BluetoothA2DPSource.h"
 #include "AudioTools.h"
-
+#include "AudioLibs/AudioESP8266.h"
 
 
 const int sd_ss_pin = 5;

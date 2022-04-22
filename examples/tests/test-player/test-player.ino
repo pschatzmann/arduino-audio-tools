@@ -1,9 +1,18 @@
+/**
+ * @file test-player.ino
+ * @author Phil Schatzmann
+ * @brief 
+ * @version 0.1
+ * @date 2022-04-21
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
+
+// install https://github.com/greiman/SdFat.git
+
 #define USE_SDFAT
-
-#include <SPI.h>
-#include <SD.h>
 #include "AudioTools.h"
-
 
 
 const char *urls[] = {

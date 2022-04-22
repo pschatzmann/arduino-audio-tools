@@ -7,11 +7,9 @@
  * #TODO retest is outstanding
  * 
  */
-// Add this in your sketch or change the setting in AudioConfig.h
-#define USE_A2DP
 
 #include "AudioTools.h"
-
+#include "AudioLibs/AudioA2DP.h"
 
 
 AnalogAudioStream in; // analog mic

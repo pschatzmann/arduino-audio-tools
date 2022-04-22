@@ -6,11 +6,11 @@
  * @copyright GPLv3
  */
 
-// set this in AudioConfig.h or here after installing https://github.com/pschatzmann/arduino-libhelix.git
+
 #define USE_SDFAT
-#define USE_HELIX  // or USE_MAD
 #include "AudioTools.h"
 #include "AudioLibs/AudioKit.h"
+#include "AudioCodecs/CodecMP3Helix.h"
 
 const char *startFilePath="/";
 const char* ext="mp3";

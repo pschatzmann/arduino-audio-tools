@@ -29,3 +29,7 @@ ExSD: Serial data output of the I²S interface
 VCC: input power 1.8V to 3.3V
 GND: Power groundHigh PSR: -75 dBFS.
 
+### Dependencies
+
+- https://github.com/pschatzmann/ESP32-A2DP.git
+

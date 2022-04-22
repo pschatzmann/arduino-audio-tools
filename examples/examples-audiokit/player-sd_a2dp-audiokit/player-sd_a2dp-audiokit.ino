@@ -1,9 +1,21 @@
+/**
+ * @file player-sd_a2dp-audiokit.ino
+ * @author Phil Schatzmann
+ * @brief Swithcing between Player and A2DP
+ * @version 0.1
+ * @date 2022-04-21
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
+
+// install https://github.com/greiman/SdFat.git
 #define USE_SDFAT
-#define USE_HELIX
-#define USE_A2DP
 
 #include "AudioTools.h"
+#include "AudioLibs/AudioA2DP.h"
 #include "AudioLibs/AudioKit.h"
+#include "AudioCodecs/CodecMP3Helix.h"
 
 const char *startFilePath="/";
 const char* ext="mp3";

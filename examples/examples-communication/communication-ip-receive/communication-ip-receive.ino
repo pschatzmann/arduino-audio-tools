@@ -13,9 +13,10 @@
 #include "AudioTools.h"
 #include <WiFi.h>
 
-uint16_t sample_rate = 44100;
+uint16_t sample_rate = 22050;
+uint16_t port = 80;
 uint8_t channels = 2;  // The stream will have 2 channels
-WiFiServer server(80);
+WiFiServer server(port);
 WiFiClient client; 
 I2SStream out; 
 StreamCopy copier(out, client);     
@@ -26,6 +27,15 @@ void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
+  // connect to WIFI
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+      delay(500);
+      Serial.print(".");
+  }
+  Serial.println();
+  Serial.println(WiFi. localIP());
+
   // start server
   server.begin();
 
@@ -35,13 +45,15 @@ void setup() {
   config.sample_rate = sample_rate; 
   config.channels = channels;
   config.bits_per_sample = 16;
+  config.buffer_size = 512;
+  config.buffer_count = 6;
   out.begin(config);
 
   Serial.println("started...");
 }
 
 void loop() { 
-  // get a new connection
+  // get a new connection if necessary
   if (!client){
     client = server.available();  
   }

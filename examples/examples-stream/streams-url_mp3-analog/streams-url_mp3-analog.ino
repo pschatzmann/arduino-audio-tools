@@ -8,12 +8,10 @@
  * @copyright Copyright (c) 2021
  */
 
-// set this in AudioConfig.h or here after installing https://github.com/pschatzmann/arduino-libhelix.git
-#define USE_HELIX 
+// install https://github.com/pschatzmann/arduino-libhelix.git
 
 #include "AudioTools.h"
 #include "AudioCodecs/CodecMP3Helix.h"
-
 
 
 URLStream url("ssid","password");
