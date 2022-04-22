@@ -45,13 +45,14 @@ class FaustStream : public AudioStreamX {
         return ui.getValue(label);
     }
 
-    /// Defines the value of a parameter
+    /// Defines the value of a parameter 
     virtual bool setLabelValue(const char*label, FAUSTFLOAT value){
         bool result = ui.setValue(label, value);
         LOGI("setLabelValue('%s',%f) -> %s", label, value, result?"true":"false");
         return result;
     }
 
+    /// Checks the parameters and starts the processing
     bool begin(AudioBaseInfo cfg){
         LOGD(LOG_METHOD);
         bool result = true;
@@ -76,6 +77,7 @@ class FaustStream : public AudioStreamX {
         return result;
     }
 
+    /// Ends the processing
     void end() {
         LOGD(LOG_METHOD);
         is_read = false;
