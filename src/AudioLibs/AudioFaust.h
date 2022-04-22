@@ -6,16 +6,19 @@ namespace audio_tools {
 
 /**
  * @brief Integration into Faust DSP see https://faust.grame.fr/
- * To generate code select src and cpp
- * 
+ * To generate code from faust, select src and cpp
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 class FaustStream : public AudioStreamX {
   public:
     FaustStream(dsp &dsp) {
         p_dsp = &dsp;
+        p_dsp->buildUserInterface(&ui);
     }
 
     FaustStream(dsp &dsp, AudioStream &out){
+        p_dsp->buildUserInterface(&ui);
     }
 
     ~FaustStream(){
@@ -30,6 +33,17 @@ class FaustStream : public AudioStreamX {
         def.sample_rate = 44100;
         return def;
     }
+
+    /// Determines the value of a parameter
+    virtual FAUSTFLOAT getLabelValue(const char*label) {
+        return ui.getValue(label);
+    }
+
+    /// Defines the value of a parameter
+    virtual bool setLabelValue(const char*label, FAUSTFLOAT value){
+        return ui.setValue(label, value);
+    }
+
 
     bool begin(AudioBaseInfo cfg){
         bool result = true;
@@ -99,6 +113,7 @@ class FaustStream : public AudioStreamX {
     }
 
   protected:
+    bool is_init = false;
     bool is_read = false;
     bool is_write = false;
     int bytes_per_sample;
@@ -107,6 +122,7 @@ class FaustStream : public AudioStreamX {
     AudioBaseInfo cfg;
     AudioStream *p_out=nullptr;
     float** p_buffer=nullptr;
+    UI ui;
 
     /// Checks the input and output channels and updates the is_write or is_read scenario flags
     bool checkChannels() {
