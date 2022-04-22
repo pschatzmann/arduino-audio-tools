@@ -368,6 +368,9 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_external_buffer_stream.html">ExternalBufferStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A <a class="el" href="class_stream.html">Stream</a> backed by a SingleBufferStream. We assume that the memory is externally allocated and that we can submit only full buffer records, which are then available for reading.  <a href="classaudio__tools_1_1_external_buffer_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_faust_stream.html">FaustStream</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integration into Faust DSP see <a href="https://faust.grame.fr/">https://faust.grame.fr/</a> To generate code from faust, select src and cpp.  <a href="classaudio__tools_1_1_faust_stream.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_f_t_driver.html">FFTDriver</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract Class which defines the basic FFT functionality.  <a href="classaudio__tools_1_1_f_f_t_driver.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -504,16 +507,16 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Icecast/Shoutcast Metadata Handling. Metadata class which splits the data into audio and metadata. The result is provided via callback methods. see <a href="https://www.codeproject.com/Articles/11308/SHOUTcast-Stream-Ripper">https://www.codeproject.com/Articles/11308/SHOUTcast-Stream-Ripper</a>.  <a href="classaudio__tools_1_1_meta_data_i_c_y.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_meta_data_i_d3.html">MetaDataID3</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple ID3 Meta Data Parser which supports ID3 V1 and V2 and implements the <a class="el" href="class_stream.html">Stream</a> interface. You just need to set the callback(s) to receive the result and copy the audio data to this stream.  <a href="classaudio__tools_1_1_meta_data_i_d3.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple ID3 <a class="el" href="class_meta.html" title="minimial implementtion of Meta which just ignores the data">Meta</a> Data Parser which supports ID3 V1 and V2 and implements the <a class="el" href="class_stream.html">Stream</a> interface. You just need to set the callback(s) to receive the result and copy the audio data to this stream.  <a href="classaudio__tools_1_1_meta_data_i_d3.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_meta_data_i_d3_base.html">MetaDataID3Base</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ID3 Meta Data Common Functionality.  <a href="classaudio__tools_1_1_meta_data_i_d3_base.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ID3 <a class="el" href="class_meta.html" title="minimial implementtion of Meta which just ignores the data">Meta</a> Data Common Functionality.  <a href="classaudio__tools_1_1_meta_data_i_d3_base.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_meta_data_i_d3_v1.html">MetaDataID3V1</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple ID3 Meta Data API which supports ID3 V1.  <a href="classaudio__tools_1_1_meta_data_i_d3_v1.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple ID3 <a class="el" href="class_meta.html" title="minimial implementtion of Meta which just ignores the data">Meta</a> Data API which supports ID3 V1.  <a href="classaudio__tools_1_1_meta_data_i_d3_v1.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_meta_data_i_d3_v2.html">MetaDataID3V2</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple ID3 Meta Data API which supports ID3 V2: We only support the "TALB", "TOPE", "TIT2", "TCON" tags.  <a href="classaudio__tools_1_1_meta_data_i_d3_v2.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple ID3 <a class="el" href="class_meta.html" title="minimial implementtion of Meta which just ignores the data">Meta</a> Data API which supports ID3 V2: We only support the "TALB", "TOPE", "TIT2", "TCON" tags.  <a href="classaudio__tools_1_1_meta_data_i_d3_v2.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_meta_data_print.html">MetaDataPrint</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ID3 and Icecast/Shoutcast metadata output support.  <a href="classaudio__tools_1_1_meta_data_print.html#details">More...</a><br /></td></tr>
@@ -1230,7 +1233,7 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>wav_mime</b> 
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Generic Implementation of sound input and output for desktop environments using portaudio. </p>
-<p>Parser for MP3 ID3 Meta Data: The goal is to implement a simple API which provides the title, artist, albmum and the Genre.</p>
+<p>Parser for MP3 ID3 <a class="el" href="class_meta.html" title="minimial implementtion of Meta which just ignores the data">Meta</a> Data: The goal is to implement a simple API which provides the title, artist, albmum and the Genre.</p>
 <p>A Suite of C++ Audio Effects Classes Adapted from <a href="https://github.com/mhamilt/AudioEffectsSuite">https://github.com/mhamilt/AudioEffectsSuite</a></p>
 <p>This implementation collects together a set of Audio DSP Effects with heavy emphasis on modularity and class inheritance coded in a modern C++ style. </p><dl class="section author"><dt>Author</dt><dd>Matthew Hamilton </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>MIT License</dd></dl>

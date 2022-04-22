@@ -339,6 +339,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>login</b> ()</td></tr
 int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_r_l_stream_default.html#a6fd684c52ab989aa4810c36789c1031c">process</a> (MethodID action, <a class="el" href="classaudio__tools_1_1_url.html">Url</a> &amp;url, const char *reqMime, const char *reqData, int len=-1)</td></tr>
 <tr class="memdesc:a6fd684c52ab989aa4810c36789c1031c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process the Http request and handle redirects. <br /></td></tr>
 <tr class="separator:a6fd684c52ab989aa4810c36789c1031c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17ab353680720ba9d76980aa55d48654"><td class="memItemLeft" align="right" valign="top"><a id="a17ab353680720ba9d76980aa55d48654"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setTimeouts</b> ()</td></tr>
+<tr class="separator:a17ab353680720ba9d76980aa55d48654"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95ba73b22a289402e0e78190f539d3cb"><td class="memItemLeft" align="right" valign="top"><a id="a95ba73b22a289402e0e78190f539d3cb"></a>
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_r_l_stream_default.html#a95ba73b22a289402e0e78190f539d3cb">waitForData</a> ()</td></tr>
 <tr class="memdesc:a95ba73b22a289402e0e78190f539d3cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">waits for some data - returns fals if the request has failed <br /></td></tr>
@@ -386,8 +389,11 @@ WiFiClient *&#160;</td><td class="memItemRight" valign="bottom"><b>clientInsecur
 WiFiClientSecure *&#160;</td><td class="memItemRight" valign="bottom"><b>clientSecure</b> =nullptr</td></tr>
 <tr class="separator:a9c39b4844c03d1d481343b9da4031926"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e89739b9b4a5ad7038482be8a9de661"><td class="memItemLeft" align="right" valign="top"><a id="a9e89739b9b4a5ad7038482be8a9de661"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>clientTimeout</b> = 60000</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>clientTimeout</b> = URL_CLIENT_TIMEOUT</td></tr>
 <tr class="separator:a9e89739b9b4a5ad7038482be8a9de661"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f784f44bd7136c2fdf468fdd1033bc2"><td class="memItemLeft" align="right" valign="top"><a id="a8f784f44bd7136c2fdf468fdd1033bc2"></a>
+unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>handshakeTimeout</b> = URL_HANDSHAKE_TIMEOUT</td></tr>
+<tr class="separator:a8f784f44bd7136c2fdf468fdd1033bc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8325185dff6cf7787050e92077d993f"><td class="memItemLeft" align="right" valign="top"><a id="ac8325185dff6cf7787050e92077d993f"></a>
 char *&#160;</td><td class="memItemRight" valign="bottom"><b>network</b> =nullptr</td></tr>
 <tr class="separator:ac8325185dff6cf7787050e92077d993f"><td class="memSeparator" colspan="2">&#160;</td></tr>
