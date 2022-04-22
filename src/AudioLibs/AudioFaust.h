@@ -13,16 +13,18 @@ namespace audio_tools {
 class FaustStream : public AudioStreamX {
   public:
     /// Constructor for Faust as Audio Source
-    FaustStream(dsp &dsp) {
+    FaustStream(dsp &dsp, bool useSeparateOutputBuffer=true) {
         p_dsp = &dsp;
         p_dsp->buildUserInterface(&ui);
+        with_output_buffer = useSeparateOutputBuffer;
     }
 
     /// Constructor for Faust as Singal Processor - changing an input signal and sending it to out
-    FaustStream(dsp &dsp, AudioStream &out){
+    FaustStream(dsp &dsp, AudioStream &out, bool useSeparateOutputBuffer=true){
         p_out = &out;
         p_dsp = &dsp;
         p_dsp->buildUserInterface(&ui);
+        with_output_buffer = useSeparateOutputBuffer;
     }
 
     ~FaustStream(){
@@ -64,6 +66,9 @@ class FaustStream : public AudioStreamX {
         if (p_buffer==nullptr){
             p_buffer = new float*[cfg.channels]();
         }
+        if (with_output_buffer && p_buffer_out==nullptr){
+            p_buffer_out = new float*[cfg.channels]();
+        }
 
         LOGI("is_read: %s", is_read?"true":"false");
         LOGI("is_write: %s", is_write?"true":"false");
@@ -85,10 +90,10 @@ class FaustStream : public AudioStreamX {
             LOGD(LOG_METHOD);
             result = len;
             int samples = len / bytes_per_sample;
-            allocateFloatBuffer(samples);
-            p_dsp->compute(samples, p_buffer, p_buffer);
+            allocateFloatBuffer(samples, false);
+            p_dsp->compute(samples, nullptr, p_buffer);
             // convert from float to int16
-            convertFloatBufferToInt16(samples, data);
+            convertFloatBufferToInt16(samples, data, p_buffer);
         }
         return result;
     }
@@ -99,7 +104,7 @@ class FaustStream : public AudioStreamX {
         if (is_write){
             LOGD(LOG_METHOD);
             int samples = len / bytes_per_sample;
-            allocateFloatBuffer(samples);
+            allocateFloatBuffer(samples, with_output_buffer);
             int16_t *data16 = (int16_t*) write_data;
             // convert to float
             for(int j=0;j<samples;j+=cfg.channels){
@@ -107,9 +112,10 @@ class FaustStream : public AudioStreamX {
                     p_buffer[i][j] =  static_cast<float>(data16[j+i])/32767.0;
                 }
             }
-            p_dsp->compute(samples, p_buffer, p_buffer);
+            float** p_float_out = with_output_buffer ? p_buffer_out : p_buffer; 
+            p_dsp->compute(samples, p_buffer, p_float_out);
             // update buffer with data from faust
-            convertFloatBufferToInt16(samples,(void*) write_data);
+            convertFloatBufferToInt16(samples,(void*) write_data, p_float_out);
             // write data to final output
             result = p_out->write(write_data, len);
         }
@@ -128,12 +134,14 @@ class FaustStream : public AudioStreamX {
     bool is_init = false;
     bool is_read = false;
     bool is_write = false;
+    bool with_output_buffer;
     int bytes_per_sample;
     int buffer_allocated;
     dsp *p_dsp = nullptr;
     AudioBaseInfo cfg;
     AudioStream *p_out=nullptr;
     float** p_buffer=nullptr;
+    float** p_buffer_out=nullptr;
     UI ui;
 
     /// Checks the input and output channels and updates the is_write or is_read scenario flags
@@ -163,22 +171,28 @@ class FaustStream : public AudioStreamX {
     }
 
     /// Converts the float buffer to int16 values
-    void convertFloatBufferToInt16(int samples, void *data){
+    void convertFloatBufferToInt16(int samples, void *data, float**p_float_out){
         int16_t *data16 = (int16_t*) data;
         for (int j=0;j<samples;j+=cfg.channels){
             for (int i=0;i<cfg.channels;i++){
-                data16[j+i]=p_buffer[i][j]*32767;
+                data16[j+i]=p_float_out[i][j]*32767;
             }
         }
     }
 
     /// Allocate the buffer that is needed by faust
-    void allocateFloatBuffer(int samples){
+    void allocateFloatBuffer(int samples, bool allocate_out){
         if (samples>buffer_allocated){
             if (p_buffer[0]!=nullptr){
                 for (int j=0;j<cfg.channels;j++){
                     delete[]p_buffer[j];
                     p_buffer[j] = nullptr;
+                }
+            }
+            if (p_buffer_out!=nullptr && p_buffer_out[0]!=nullptr){
+                for (int j=0;j<cfg.channels;j++){
+                    delete[]p_buffer_out[j];
+                    p_buffer_out[j] = nullptr;
                 }
             }
         }
@@ -189,6 +203,14 @@ class FaustStream : public AudioStreamX {
             }
             buffer_allocated = samples;
         }
+        if (allocate_out){
+            if (p_buffer_out[0]==nullptr){
+                const int ch = cfg.channels;
+                for (int j=0;j<cfg.channels;j++){
+                    p_buffer_out[j] = new float[samples];
+                }
+            }
+        }
     }
 
     void deleteFloatBuffer() {
@@ -198,6 +220,13 @@ class FaustStream : public AudioStreamX {
             }
             delete[] p_buffer;
             p_buffer = nullptr;
+        } 
+        if (p_buffer_out!=nullptr) {
+            for (int j=0;j<cfg.channels;j++){
+                if (p_buffer_out[j]!=nullptr) delete p_buffer_out[j];
+            }
+            delete[] p_buffer_out;
+            p_buffer_out = nullptr;
         } 
     }
 };
