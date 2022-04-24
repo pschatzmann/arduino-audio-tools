@@ -667,6 +667,8 @@ class VolumeStream : public AudioStreamX {
           cfg1.channels = cfg.channels;
           cfg1.sample_rate = cfg.sample_rate;
           cfg1.bits_per_sample = cfg.bits_per_sample;
+          // keep volume which might habe been defined befor calling begin
+          cfg1.volume = info.volume;  
           return begin(cfg1);
         }
 
@@ -738,6 +740,8 @@ class VolumeStream : public AudioStreamX {
 
         /// Defines the volume for all channels:  needs to be in the range of 0 to 1.0
         void setVolume(float vol){
+            // just to make sure that we have a valid start volume before begin
+            info.volume = vol; 
             for (int j=0;j<info.channels;j++){
               setVolume(vol, j);
             }
