@@ -157,7 +157,7 @@ class A2DPStream : public AudioStream, public AudioBaseInfoSource {
                 case RX_MODE:
                     LOGI("Starting a2dp_sink...");
                     sink(); // allocate object
-                    a2dp_source->set_auto_reconnect(cfg.auto_reconnect);
+                    a2dp_sink->set_auto_reconnect(cfg.auto_reconnect);
                     a2dp_sink->set_stream_reader(&a2dp_stream_sink_sound_data, false);
                     a2dp_sink->set_volume(volume * 100);
                     a2dp_sink->set_on_connection_state_changed(a2dpStateCallback, this);
