@@ -46,20 +46,21 @@ class AudioActions {
     }
     if (pin>0) {
       int pos = findPin(pin);
+      // setup pin mode
+      if (activeLogicPar == ActiveLow) {
+        pinMode(pin, INPUT_PULLUP);
+        LOGI("pin %d -> INPUT_PULLUP", pin);
+      } else {
+        pinMode(pin, INPUT);
+        LOGI("pin %d -> INPUT", pin);
+      }
+
       if (pos != -1) {
         actions[pos].actionOn = actionOn;
         actions[pos].actionOff = actionOff;
         actions[pos].activeLogic = activeLogicPar;
         actions[pos].ref = ref;
       } else {
-        // setup pin mode
-        if (activeLogicPar == ActiveLow) {
-          pinMode(pin, INPUT_PULLUP);
-          LOGI("pin %d -> INPUT_PULLUP", pin);
-        } else {
-          pinMode(pin, INPUT);
-          LOGI("pin %d -> INPUT", pin);
-        }
 
         actions[maxIdx].pin = pin;
         actions[maxIdx].actionOn = actionOn;
