@@ -875,6 +875,71 @@ class VolumeStream : public AudioStreamX {
         }
 };
 
+/**
+ * @brief Class which measure the trughput
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ * 
+ */
+class TimedStream : public AudioStreamX {
+  public:
+  
+    TimedStream(Stream &stream, int count=10){
+      this->count = count;
+      this->max_count = count;
+      p_stream =&stream;
+      start_time = millis();
+    }
+
+        /// Provides the data from all streams mixed together 
+    size_t readBytes(uint8_t* data, size_t len) override {
+      return measure(p_stream->readBytes(data, len));
+    }
+
+    int available()  override {
+      return p_stream->available();
+    }
+
+    /// Writes raw PCM audio data, which will be the input for the volume control 
+    virtual size_t write(const uint8_t *buffer, size_t size) override {
+      return measure(p_stream->write(buffer, size));
+    }
+
+    /// Provides the nubmer of bytes we can write
+    virtual int availableForWrite() override { 
+      return p_stream->availableForWrite();
+    }
+
+    /// Returns the actual thrughput in bytes per second
+    int bytesPerSecond() {
+      return bytes_per_second;
+    }
+
+  protected:
+    int max_count=0;
+    int count=0;
+    Stream *p_stream=nullptr;
+    uint64_t start_time;
+    int total_bytes = 0;
+    int bytes_per_second = 0;
+
+    size_t measure(size_t len) {
+      count--;
+      total_bytes+=len;
+
+      if (count<0){
+        uint64_t end_time = millis();
+        int time_diff = end_time - start_time; // in ms
+        bytes_per_second = total_bytes / time_diff * 1000;
+        LOGI("Bytes per second: %d", bytes_per_second);
+        count = max_count;
+        total_bytes = 0;
+        start_time = end_time;
+      }
+      return len;
+    }
+
+};
 
 /**
  * @brief MixerStream is mixing the input from Multiple Input Streams.
