@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['factor_203',['factor',['../classaudio__tools_1_1_resample_parameter_estimator.html#a0d8c74bb1df1fc8852960edd618f7cb3',1,'audio_tools::ResampleParameterEstimator::factor()'],['../classaudio__tools_1_1_converter_scaler.html#a3eeb57b2789b0ea7cb9ef951c6c938b3',1,'audio_tools::ConverterScaler::factor()']]],
-  ['faust_204',['Faust',['../group___faust.html',1,'']]],
-  ['fauststream_205',['FaustStream',['../classaudio__tools_1_1_faust_stream.html',1,'audio_tools::FaustStream'],['../classaudio__tools_1_1_faust_stream.html#af6c339ed2b0aaa2e3829fd8c0c15b566',1,'audio_tools::FaustStream::FaustStream(dsp &amp;dsp, AudioStream &amp;out, bool useSeparateOutputBuffer=true)'],['../classaudio__tools_1_1_faust_stream.html#a324938df0dfe2f95d8fccfa3d66696b7',1,'audio_tools::FaustStream::FaustStream(dsp &amp;dsp, bool useSeparateOutputBuffer=true)']]],
+  ['factor_204',['factor',['../classaudio__tools_1_1_resample_parameter_estimator.html#a0d8c74bb1df1fc8852960edd618f7cb3',1,'audio_tools::ResampleParameterEstimator::factor()'],['../classaudio__tools_1_1_converter_scaler.html#a3eeb57b2789b0ea7cb9ef951c6c938b3',1,'audio_tools::ConverterScaler::factor()']]],
+  ['fauststream_205',['FaustStream',['../classaudio__tools_1_1_faust_stream.html',1,'audio_tools::FaustStream'],['../classaudio__tools_1_1_faust_stream.html#a324938df0dfe2f95d8fccfa3d66696b7',1,'audio_tools::FaustStream::FaustStream(dsp &amp;dsp, bool useSeparateOutputBuffer=true)'],['../classaudio__tools_1_1_faust_stream.html#af6c339ed2b0aaa2e3829fd8c0c15b566',1,'audio_tools::FaustStream::FaustStream(dsp &amp;dsp, AudioStream &amp;out, bool useSeparateOutputBuffer=true)']]],
   ['fftdriver_206',['FFTDriver',['../classaudio__tools_1_1_f_f_t_driver.html',1,'audio_tools']]],
   ['fftdriverkissfft_207',['FFTDriverKissFFT',['../classaudio__tools_1_1_f_f_t_driver_kiss_f_f_t.html',1,'audio_tools']]],
   ['fftdriverrealfft_208',['FFTDriverRealFFT',['../classaudio__tools_1_1_f_f_t_driver_real_f_f_t.html',1,'audio_tools']]],

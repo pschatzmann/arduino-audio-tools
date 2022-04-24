@@ -9,8 +9,7 @@ var indexSectionsWithContent =
   6: "ad",
   7: "lmprt",
   8: "d",
-  9: "f",
-  10: "a"
+  9: "a"
 };
 
 var indexSectionNames =
@@ -24,8 +23,7 @@ var indexSectionNames =
   6: "typedefs",
   7: "enums",
   8: "related",
-  9: "groups",
-  10: "pages"
+  9: "pages"
 };
 
 var indexSectionLabels =
@@ -39,7 +37,6 @@ var indexSectionLabels =
   6: "Typedefs",
   7: "Enumerations",
   8: "Friends",
-  9: "Modules",
-  10: "Pages"
+  9: "Pages"
 };
 
