@@ -42,7 +42,13 @@ class AnalogAudioStream : public AudioStreamX {
     return cfg;
   }
 
-  void setAudioInfo(AudioBaseInfo info) { LOGW("setAudioInfo() not supported") }
+  void setAudioInfo(AudioBaseInfo info) {             
+    AudioStream::setAudioInfo(info);
+    config.channels = info.channels;
+    config.bits_per_sample = info.bits_per_sample;
+    config.sample_rate = info.sample_rate;
+    begin(config)
+ }
 
   bool begin(AnalogConfig cfg) {
     LOGD("%s", __func__);

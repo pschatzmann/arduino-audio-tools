@@ -22,7 +22,7 @@ static const char *UNDERFLOW_MSG = "data underflow";
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioStream : public Stream, public AudioBaseInfoDependent {
+class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBaseInfoSource {
  public:
   AudioStream() = default;
   virtual ~AudioStream() = default;
@@ -32,8 +32,15 @@ class AudioStream : public Stream, public AudioBaseInfoDependent {
   
   // overwrite to do something useful
   virtual void setAudioInfo(AudioBaseInfo info) {
-    LOGD(LOG_METHOD);
-    info.logInfo();
+      LOGD(LOG_METHOD);
+      info.logInfo();
+      if (p_notify!=nullptr){
+          p_notify->setAudioInfo(info);
+      }
+  }
+
+  virtual void  setNotifyAudioChange(AudioBaseInfoDependent &bi) {
+      p_notify = &bi;
   }
 
   virtual size_t readBytes(char *buffer, size_t length) {
@@ -47,6 +54,8 @@ class AudioStream : public Stream, public AudioBaseInfoDependent {
   operator bool() { return available() > 0; }
 
  protected:
+  AudioBaseInfoDependent *p_notify=nullptr;
+
   virtual int not_supported(int out) {
     LOGE("AudioStreamX: unsupported operation!");
     return out;
@@ -70,7 +79,6 @@ class AudioStreamX : public AudioStream {
   virtual int read() override { return not_supported(-1); }
   virtual int peek() override { return not_supported(-1); }
   virtual void flush() FLUSH_OVERRIDE {}
-  virtual void setAudioInfo(AudioBaseInfo) override {}
 };
 
 /**
