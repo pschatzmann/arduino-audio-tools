@@ -16,7 +16,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioPrint : public Print {
+class AudioPrint : public Print, public AudioBaseInfoDependent, public AudioBaseInfoSource {
     public:
         virtual size_t write(const uint8_t *buffer, size_t size) override = 0;
 
@@ -35,8 +35,15 @@ class AudioPrint : public Print {
 
         // overwrite to do something useful
         virtual void setAudioInfo(AudioBaseInfo info) {
-             LOGD(LOG_METHOD);
+            LOGD(LOG_METHOD);
             info.logInfo();
+            if (p_notify!=nullptr){
+                p_notify->setAudioInfo(info);
+            }
+        }
+
+        virtual void  setNotifyAudioChange(AudioBaseInfoDependent &bi) {
+            p_notify = &bi;
         }
 
         /// If true we need to release the related memory
@@ -44,9 +51,12 @@ class AudioPrint : public Print {
             return false;
         }
 
+
+
     protected:
         uint8_t tmp[MAX_SINGLE_CHARS];
         int tmpPos=0;
+        AudioBaseInfoDependent *p_notify=nullptr;
 
 };
 

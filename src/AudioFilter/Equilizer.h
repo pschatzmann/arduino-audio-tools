@@ -43,12 +43,14 @@ class Equilizer3Bands : public AudioStream {
         Equilizer3Bands(AudioPrint &out) {
             p_out = &out;
             p_print = &out;
+            out.setNotifyAudioChange(*this);
         }
 
         Equilizer3Bands(AudioStream &stream) {
             p_in = &stream;
             p_stream = &stream;
             p_print = &stream;
+            stream.setNotifyAudioChange(*this);
         }
 
         ~Equilizer3Bands(){
@@ -62,13 +64,6 @@ class Equilizer3Bands : public AudioStream {
 
         bool begin(ConfigEquilizer3Bands &config){
             p_cfg = &config;
-
-            if (p_in!=nullptr){
-                p_in->setAudioInfo(*p_cfg);
-            } else if (p_out!=nullptr) {
-                p_out->setAudioInfo(*p_cfg);
-            }
-            // setup state for each channel
             if (p_cfg->channels>max_state_count){
                 if (state!=nullptr) delete[]state;
                 state = new EQSTATE[p_cfg->channels];
