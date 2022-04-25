@@ -237,7 +237,7 @@ class MemoryStream : public AudioStream {
  */
 
 template <class T>
-class GeneratedSoundStream : public AudioStreamX, public AudioBaseInfoSource {
+class GeneratedSoundStream : public AudioStreamX {
  public:
   GeneratedSoundStream() = default;
   

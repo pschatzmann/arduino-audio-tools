@@ -18,7 +18,8 @@ uint8_t channels = 2;  // The stream will have 2 channels
 SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound( sineWave);  // Stream generated from sine wave
 WiFiClient client;                  
-StreamCopy copier(client, sound, 256);  // copies sound into i2s
+TimedStream clientTimed(client);
+StreamCopy copier(clientTimed, sound, 256);  // copies sound into i2s
 const char *ssid = "ssid";
 const char *password = "password";
 const char *client_address = "192.168.1.39"; // update based on your receive ip
