@@ -186,6 +186,11 @@ class AudioFFTBase : public AudioPrint {
             return p_driver;
         }
 
+        // calculate the magnitued of the fft result to determine the max value
+        float magnitude(int idx){
+            return p_driver->magnitude(idx);
+        }
+
     protected:
         FFTDriver *p_driver=nullptr;
         int current_pos = 0;
@@ -211,10 +216,6 @@ class AudioFFTBase : public AudioPrint {
             return result;
         }
 
-        // calculate the magnitued of the fft result to determine the max value
-        float magnitude(int idx){
-            return p_driver->magnitude(idx);
-        }
 
         // Add samples to input data p_x - and process them if full
         template<typename T>
