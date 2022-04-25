@@ -895,14 +895,22 @@ class MeasuringStream : public AudioStreamX {
       this->count = count;
       this->max_count = count;
       p_stream = &null;
+      p_print = &null;
       start_time = millis();
     }
 
+    MeasuringStream(Print &print, int count=10){
+      this->count = count;
+      this->max_count = count;
+      p_print =&print;
+      start_time = millis();
+    }
 
     MeasuringStream(Stream &stream, int count=10){
       this->count = count;
       this->max_count = count;
       p_stream =&stream;
+      p_print = &stream;
       start_time = millis();
     }
 
@@ -917,12 +925,12 @@ class MeasuringStream : public AudioStreamX {
 
     /// Writes raw PCM audio data, which will be the input for the volume control 
     virtual size_t write(const uint8_t *buffer, size_t size) override {
-      return measure(p_stream->write(buffer, size));
+      return measure(p_print->write(buffer, size));
     }
 
     /// Provides the nubmer of bytes we can write
     virtual int availableForWrite() override { 
-      return p_stream->availableForWrite();
+      return p_print->availableForWrite();
     }
 
     /// Returns the actual thrughput in bytes per second
@@ -934,6 +942,7 @@ class MeasuringStream : public AudioStreamX {
     int max_count=0;
     int count=0;
     Stream *p_stream=nullptr;
+    Print *p_print=nullptr;
     uint64_t start_time;
     int total_bytes = 0;
     int bytes_per_second = 0;
