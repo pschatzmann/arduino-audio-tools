@@ -1,7 +1,7 @@
 /**
  * @file example-serial-send.ino
  * @author Phil Schatzmann
- * @brief Sending audio over serial
+ * @brief Sending audio over IP
  * @version 0.1
  * @date 2022-03-09
  *
@@ -18,11 +18,11 @@ uint8_t channels = 2;  // The stream will have 2 channels
 SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound( sineWave);  // Stream generated from sine wave
 WiFiClient client;                  
-TimedStream clientTimed(client);
+MeasuringStream clientTimed(client);
 StreamCopy copier(clientTimed, sound, 256);  // copies sound into i2s
 const char *ssid = "ssid";
 const char *password = "password";
-const char *client_address = "192.168.1.39"; // update based on your receive ip
+const char *client_address = "192.168.1.33"; // update based on your receive ip
 uint16_t port = 80;
 
 

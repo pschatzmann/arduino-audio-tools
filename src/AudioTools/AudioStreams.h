@@ -884,15 +884,22 @@ class VolumeStream : public AudioStreamX {
 };
 
 /**
- * @brief Class which measure the trughput
+ * @brief Class which measures the truput
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 
  */
-class TimedStream : public AudioStreamX {
+class MeasuringStream : public AudioStreamX {
   public:
-  
-    TimedStream(Stream &stream, int count=10){
+    MeasuringStream(int count=10){
+      this->count = count;
+      this->max_count = count;
+      p_stream = &null;
+      start_time = millis();
+    }
+
+
+    MeasuringStream(Stream &stream, int count=10){
       this->count = count;
       this->max_count = count;
       p_stream =&stream;
@@ -930,6 +937,7 @@ class TimedStream : public AudioStreamX {
     uint64_t start_time;
     int total_bytes = 0;
     int bytes_per_second = 0;
+    NullStream null;
 
     size_t measure(size_t len) {
       count--;
