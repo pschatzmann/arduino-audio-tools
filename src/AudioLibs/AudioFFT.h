@@ -102,6 +102,7 @@ class AudioFFTBase : public AudioPrint {
         void end() {
             p_driver->end();
             if (p_stridebuffer!=nullptr) delete p_stridebuffer;
+            if (p_magnitudes!=nullptr) delete []p_magnitudes;
         }
 
         /// Provide the audio data as FFT input
@@ -191,12 +192,24 @@ class AudioFFTBase : public AudioPrint {
             return p_driver->magnitude(idx);
         }
 
+        // Provides the magnitudes as array of size size(). Please note that this method is allocating additinal memory!
+        float* magnitudes() {
+            if (p_magnitudes==nullptr){
+                p_magnitudes = new float[size()];
+            }
+            for (int j=0;j<size();j++){
+                p_magnitudes[j]= magnitude(j);
+            }
+            return p_magnitudes;
+        }
+
     protected:
         FFTDriver *p_driver=nullptr;
         int current_pos = 0;
         AudioFFTConfig cfg;
         unsigned long timestamp=0l;
         RingBuffer<uint8_t> *p_stridebuffer = nullptr;
+        float *p_magnitudes = nullptr;
 
         /// Allocates the stride buffer if necessary
         bool createStrideBuffer() {
