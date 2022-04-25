@@ -71,6 +71,7 @@ class AudioFFTBase : public AudioPrint {
             end();
         }
 
+        /// Provides the default configuration
         AudioFFTConfig defaultConfig() {
             AudioFFTConfig info;
             return info;
@@ -91,6 +92,7 @@ class AudioFFTBase : public AudioPrint {
             return p_driver->isValid();
         }
 
+        /// Notify change of audio information
         void setAudioInfo(AudioBaseInfo info) override {
             cfg.bits_per_sample = info.bits_per_sample;
             cfg.sample_rate = info.sample_rate;
@@ -183,16 +185,17 @@ class AudioFFTBase : public AudioPrint {
             }
         }
 
+        /// provides access to the FFTDriver which implements the basic FFT functionality
         FFTDriver *driver() {
             return p_driver;
         }
 
-        // calculate the magnitued of the fft result to determine the max value
-        float magnitude(int idx){
-            return p_driver->magnitude(idx);
+        /// Calculates the magnitude of the fft result to determine the max value (bin is 0 to size())
+        float magnitude(int bin){
+            return p_driver->magnitude(bin);
         }
 
-        // Provides the magnitudes as array of size size(). Please note that this method is allocating additinal memory!
+        /// Provides the magnitudes as array of size size(). Please note that this method is allocating additinal memory!
         float* magnitudes() {
             if (p_magnitudes==nullptr){
                 p_magnitudes = new float[size()];
@@ -203,6 +206,7 @@ class AudioFFTBase : public AudioPrint {
             return p_magnitudes;
         }
 
+        /// Provides the actual configuration
         AudioFFTConfig config() {
             return cfg;
         }

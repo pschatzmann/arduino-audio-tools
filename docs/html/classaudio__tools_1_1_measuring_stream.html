@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-audio-tools: audio_tools::AudioStreamX Class Reference</title>
+<title>arduino-audio-tools: audio_tools::MeasuringStream Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,81 +61,82 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_audio_stream_x.html">AudioStreamX</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceaudio__tools.html">audio_tools</a></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_measuring_stream.html">MeasuringStream</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="classaudio__tools_1_1_audio_stream_x-members.html">List of all members</a>  </div>
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="classaudio__tools_1_1_measuring_stream-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">audio_tools::AudioStreamX Class Reference</div>  </div>
+<div class="title">audio_tools::MeasuringStream Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Same as <a class="el" href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...">AudioStream</a> - but we do not have any abstract methods.  
- <a href="classaudio__tools_1_1_audio_stream_x.html#details">More...</a></p>
+<p>Class which measures the truput.  
+ <a href="classaudio__tools_1_1_measuring_stream.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_audio_streams_8h_source.html">AudioStreams.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for audio_tools::AudioStreamX:</div>
+Inheritance diagram for audio_tools::MeasuringStream:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classaudio__tools_1_1_audio_stream_x.png" usemap="#audio_5Ftools::AudioStreamX_map" alt=""/>
-  <map id="audio_5Ftools::AudioStreamX_map" name="audio_5Ftools::AudioStreamX_map">
-<area href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="audio_tools::AudioStream" shape="rect" coords="294,112,578,136"/>
-<area href="class_stream.html" alt="Stream" shape="rect" coords="0,56,284,80"/>
-<area href="classaudio__tools_1_1_audio_base_info_dependent.html" title="Supports changes to the sampling rate, bits and channels." alt="audio_tools::AudioBaseInfoDependent" shape="rect" coords="294,56,578,80"/>
-<area href="classaudio__tools_1_1_audio_base_info_source.html" title="Supports the subscription to audio change notifications." alt="audio_tools::AudioBaseInfoSource" shape="rect" coords="588,56,872,80"/>
-<area href="class_print.html" alt="Print" shape="rect" coords="0,0,284,24"/>
-<area href="classaudio__tools_1_1_analog_audio_stream.html" title="Reading Analog Data using a timer and the Arduino analogRead() method." alt="audio_tools::AnalogAudioStream" shape="rect" coords="588,224,872,248"/>
-<area href="classaudio__tools_1_1_analog_audio_stream.html" title="Reading Analog Data using a timer and the Arduino analogRead() method." alt="audio_tools::AnalogAudioStream" shape="rect" coords="588,280,872,304"/>
-<area href="classaudio__tools_1_1_audio_kit_stream.html" title="AudioKit Stream which uses the https://github.com/pschatzmann/arduino-audiokit library." alt="audio_tools::AudioKitStream" shape="rect" coords="588,336,872,360"/>
-<area href="classaudio__tools_1_1_audio_kit_stream_adapter.html" title="Converts a AudioKit into a AudioStream, so that we can pass it to the converter." alt="audio_tools::AudioKitStreamAdapter" shape="rect" coords="588,392,872,416"/>
-<area href="classaudio__tools_1_1_audio_m_p34_d_t05.html" title="MP34DT05 Microphone of Nano BLE Sense. We provide a proper Stream implementation. See https://github...." alt="audio_tools::AudioMP34DT05" shape="rect" coords="588,448,872,472"/>
-<area href="classaudio__tools_1_1_audio_sync_reader.html" title="Receving Audio Data over the wire and requesting for more data when done to synchronize the processin..." alt="audio_tools::AudioSyncReader" shape="rect" coords="588,504,872,528"/>
-<area href="classaudio__tools_1_1_converted_stream.html" title="Construct a new Converted Stream object. Both the data of the read and write operations will be conve..." alt="audio_tools::ConvertedStream&lt; T, ConverterT &gt;" shape="rect" coords="588,560,872,584"/>
-<area href="classaudio__tools_1_1_e_s_p3288_audio_output.html" title="Stream Adapter for ESP8288-Audio AudioOutput." alt="audio_tools::ESP3288AudioOutput" shape="rect" coords="588,616,872,640"/>
-<area href="classaudio__tools_1_1_e_s_p_now_stream.html" title="ESPNow as Stream." alt="audio_tools::ESPNowStream" shape="rect" coords="588,672,872,696"/>
-<area href="classaudio__tools_1_1_faust_stream.html" title="Integration into Faust DSP see https://faust.grame.fr/ To generate code from faust,..." alt="audio_tools::FaustStream" shape="rect" coords="588,728,872,752"/>
-<area href="classaudio__tools_1_1_filtered_stream.html" title="Stream to which we can apply Filters for each channel. The filter might change the result size!" alt="audio_tools::FilteredStream&lt; T, TF &gt;" shape="rect" coords="588,784,872,808"/>
-<area href="classaudio__tools_1_1_generated_sound_stream.html" title="Source for reading generated tones. Please note." alt="audio_tools::GeneratedSoundStream&lt; T &gt;" shape="rect" coords="588,840,872,864"/>
-<area href="classaudio__tools_1_1_measuring_stream.html" title="Class which measures the truput." alt="audio_tools::MeasuringStream" shape="rect" coords="588,896,872,920"/>
-<area href="classaudio__tools_1_1_mixer.html" title="MixerStream is mixing the input from Multiple Input Streams. All streams must have the same audo form..." alt="audio_tools::Mixer&lt; T &gt;" shape="rect" coords="588,952,872,976"/>
-<area href="classaudio__tools_1_1_resample.html" title="A simple implementation which changes the sample rate by the indicated integer factor...." alt="audio_tools::Resample&lt; T &gt;" shape="rect" coords="588,1008,872,1032"/>
-<area href="classaudio__tools_1_1_resample_stream.html" title="Flexible Stream class which can be used to resample audio data between different sample rates." alt="audio_tools::ResampleStream&lt; T &gt;" shape="rect" coords="588,1064,872,1088"/>
-<area href="classaudio__tools_1_1_s_p_d_i_f_stream.html" title="Output as 16 bit stereo SPDIF on the I2S data output pin." alt="audio_tools::SPDIFStream" shape="rect" coords="588,1120,872,1144"/>
-<area href="classaudio__tools_1_1_tf_lite_audio_stream_base.html" title="Astract TfLiteAudioStream to provide access to TfLiteAudioStream for Reader and Writers." alt="audio_tools::TfLiteAudioStreamBase" shape="rect" coords="588,1176,872,1200"/>
-<area href="classaudio__tools_1_1_volume_stream.html" title="Output PWM object on which we can apply some volume settings. To work properly the class needs to kno..." alt="audio_tools::VolumeStream" shape="rect" coords="588,1232,872,1256"/>
+  <img src="classaudio__tools_1_1_measuring_stream.png" usemap="#audio_5Ftools::MeasuringStream_map" alt=""/>
+  <map id="audio_5Ftools::MeasuringStream_map" name="audio_5Ftools::MeasuringStream_map">
+<area href="classaudio__tools_1_1_audio_stream_x.html" title="Same as AudioStream - but we do not have any abstract methods." alt="audio_tools::AudioStreamX" shape="rect" coords="235,168,460,192"/>
+<area href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="audio_tools::AudioStream" shape="rect" coords="235,112,460,136"/>
+<area href="class_stream.html" alt="Stream" shape="rect" coords="0,56,225,80"/>
+<area href="classaudio__tools_1_1_audio_base_info_dependent.html" title="Supports changes to the sampling rate, bits and channels." alt="audio_tools::AudioBaseInfoDependent" shape="rect" coords="235,56,460,80"/>
+<area href="classaudio__tools_1_1_audio_base_info_source.html" title="Supports the subscription to audio change notifications." alt="audio_tools::AudioBaseInfoSource" shape="rect" coords="470,56,695,80"/>
+<area href="class_print.html" alt="Print" shape="rect" coords="0,0,225,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:acaa2033042112f919a5991fc4fd8adf2"><td class="memItemLeft" align="right" valign="top"><a id="acaa2033042112f919a5991fc4fd8adf2"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>available</b> () override</td></tr>
-<tr class="separator:acaa2033042112f919a5991fc4fd8adf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f1304d64cd335e8fc7a0a24299ee1ef"><td class="memItemLeft" align="right" valign="top"><a id="a1f1304d64cd335e8fc7a0a24299ee1ef"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>availableForWrite</b> () override</td></tr>
-<tr class="separator:a1f1304d64cd335e8fc7a0a24299ee1ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9d0aa7e13217f00ea534641f59e16d4"><td class="memItemLeft" align="right" valign="top"><a id="ab9d0aa7e13217f00ea534641f59e16d4"></a>
+<tr class="memitem:a637fd69f4ec5deed0ca3c3c6160e3cd0"><td class="memItemLeft" align="right" valign="top"><a id="a637fd69f4ec5deed0ca3c3c6160e3cd0"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>MeasuringStream</b> (int count=10)</td></tr>
+<tr class="separator:a637fd69f4ec5deed0ca3c3c6160e3cd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe63bb28b5dfff5e210819eb7565a9f7"><td class="memItemLeft" align="right" valign="top"><a id="afe63bb28b5dfff5e210819eb7565a9f7"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>MeasuringStream</b> (<a class="el" href="class_print.html">Print</a> &amp;print, int count=10)</td></tr>
+<tr class="separator:afe63bb28b5dfff5e210819eb7565a9f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06221e3f59a3d4d897c10528b5aa599d"><td class="memItemLeft" align="right" valign="top"><a id="a06221e3f59a3d4d897c10528b5aa599d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>MeasuringStream</b> (<a class="el" href="class_stream.html">Stream</a> &amp;stream, int count=10)</td></tr>
+<tr class="separator:a06221e3f59a3d4d897c10528b5aa599d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97d50c70143487f6734c85807dfcd9aa"><td class="memItemLeft" align="right" valign="top"><a id="a97d50c70143487f6734c85807dfcd9aa"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>available</b> () override</td></tr>
+<tr class="separator:a97d50c70143487f6734c85807dfcd9aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae671a6a8d664eedb369b02bb5e194eb8"><td class="memItemLeft" align="right" valign="top"><a id="ae671a6a8d664eedb369b02bb5e194eb8"></a>
+virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_measuring_stream.html#ae671a6a8d664eedb369b02bb5e194eb8">availableForWrite</a> () override</td></tr>
+<tr class="memdesc:ae671a6a8d664eedb369b02bb5e194eb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the nubmer of bytes we can write. <br /></td></tr>
+<tr class="separator:ae671a6a8d664eedb369b02bb5e194eb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa859ad4bf7e54e5a25b48a7f0a588649"><td class="memItemLeft" align="right" valign="top"><a id="aa859ad4bf7e54e5a25b48a7f0a588649"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_measuring_stream.html#aa859ad4bf7e54e5a25b48a7f0a588649">bytesPerSecond</a> ()</td></tr>
+<tr class="memdesc:aa859ad4bf7e54e5a25b48a7f0a588649"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the actual thrughput in bytes per second. <br /></td></tr>
+<tr class="separator:aa859ad4bf7e54e5a25b48a7f0a588649"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae97bf6e8c4715537ce9edb0c92be63f0"><td class="memItemLeft" align="right" valign="top"><a id="ae97bf6e8c4715537ce9edb0c92be63f0"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_measuring_stream.html#ae97bf6e8c4715537ce9edb0c92be63f0">readBytes</a> (uint8_t *data, size_t len) override</td></tr>
+<tr class="memdesc:ae97bf6e8c4715537ce9edb0c92be63f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the data from all streams mixed together. <br /></td></tr>
+<tr class="separator:ae97bf6e8c4715537ce9edb0c92be63f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8abf999880c29bdec6fc66ff64e28ca"><td class="memItemLeft" align="right" valign="top"><a id="af8abf999880c29bdec6fc66ff64e28ca"></a>
+virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_measuring_stream.html#af8abf999880c29bdec6fc66ff64e28ca">write</a> (const uint8_t *buffer, size_t size) override</td></tr>
+<tr class="memdesc:af8abf999880c29bdec6fc66ff64e28ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes raw PCM audio data, which will be the input for the volume control. <br /></td></tr>
+<tr class="separator:af8abf999880c29bdec6fc66ff64e28ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classaudio__tools_1_1_audio_stream_x"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classaudio__tools_1_1_audio_stream_x')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classaudio__tools_1_1_audio_stream_x.html">audio_tools::AudioStreamX</a></td></tr>
+<tr class="memitem:ab9d0aa7e13217f00ea534641f59e16d4 inherit pub_methods_classaudio__tools_1_1_audio_stream_x"><td class="memItemLeft" align="right" valign="top"><a id="ab9d0aa7e13217f00ea534641f59e16d4"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>flush</b> () FLUSH_OVERRIDE</td></tr>
-<tr class="separator:ab9d0aa7e13217f00ea534641f59e16d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad7639e06b7010fc44c50068d73e9514f"><td class="memItemLeft" align="right" valign="top"><a id="ad7639e06b7010fc44c50068d73e9514f"></a>
+<tr class="separator:ab9d0aa7e13217f00ea534641f59e16d4 inherit pub_methods_classaudio__tools_1_1_audio_stream_x"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7639e06b7010fc44c50068d73e9514f inherit pub_methods_classaudio__tools_1_1_audio_stream_x"><td class="memItemLeft" align="right" valign="top"><a id="ad7639e06b7010fc44c50068d73e9514f"></a>
 virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>peek</b> () override</td></tr>
-<tr class="separator:ad7639e06b7010fc44c50068d73e9514f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e4e09764a0d546f1509e50416d50438"><td class="memItemLeft" align="right" valign="top"><a id="a7e4e09764a0d546f1509e50416d50438"></a>
+<tr class="separator:ad7639e06b7010fc44c50068d73e9514f inherit pub_methods_classaudio__tools_1_1_audio_stream_x"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e4e09764a0d546f1509e50416d50438 inherit pub_methods_classaudio__tools_1_1_audio_stream_x"><td class="memItemLeft" align="right" valign="top"><a id="a7e4e09764a0d546f1509e50416d50438"></a>
 virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>read</b> () override</td></tr>
-<tr class="separator:a7e4e09764a0d546f1509e50416d50438"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a98af2a371848ba7afc3dc841fbac527d"><td class="memItemLeft" align="right" valign="top"><a id="a98af2a371848ba7afc3dc841fbac527d"></a>
-virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>readBytes</b> (uint8_t *buffer, size_t length) override</td></tr>
-<tr class="separator:a98af2a371848ba7afc3dc841fbac527d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acde124652605dcde21309c9b74d2aa88"><td class="memItemLeft" align="right" valign="top"><a id="acde124652605dcde21309c9b74d2aa88"></a>
-virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (const uint8_t *buffer, size_t size) override</td></tr>
-<tr class="separator:acde124652605dcde21309c9b74d2aa88"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aece3a867145413aa5d6b14be5cab2afc"><td class="memItemLeft" align="right" valign="top"><a id="aece3a867145413aa5d6b14be5cab2afc"></a>
+<tr class="separator:a7e4e09764a0d546f1509e50416d50438 inherit pub_methods_classaudio__tools_1_1_audio_stream_x"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aece3a867145413aa5d6b14be5cab2afc inherit pub_methods_classaudio__tools_1_1_audio_stream_x"><td class="memItemLeft" align="right" valign="top"><a id="aece3a867145413aa5d6b14be5cab2afc"></a>
 virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (uint8_t) override</td></tr>
-<tr class="separator:aece3a867145413aa5d6b14be5cab2afc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:aece3a867145413aa5d6b14be5cab2afc inherit pub_methods_classaudio__tools_1_1_audio_stream_x"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classaudio__tools_1_1_audio_stream"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classaudio__tools_1_1_audio_stream')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classaudio__tools_1_1_audio_stream.html">audio_tools::AudioStream</a></td></tr>
 <tr class="memitem:abd994991a498fb6626181807df2a7761 inherit pub_methods_classaudio__tools_1_1_audio_stream"><td class="memItemLeft" align="right" valign="top"><a id="abd994991a498fb6626181807df2a7761"></a>
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> ()</td></tr>
@@ -312,8 +313,11 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (const ch
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>validate</b> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> &amp;info)</td></tr>
 <tr class="separator:a16c99d6218d2dc4574d4d9725d77052a inherit pub_methods_classaudio__tools_1_1_audio_base_info_dependent"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:abab4b59cbce152e30bbe636d419c0e58"><td class="memItemLeft" align="right" valign="top"><a id="abab4b59cbce152e30bbe636d419c0e58"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>measure</b> (size_t len)</td></tr>
+<tr class="separator:abab4b59cbce152e30bbe636d419c0e58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classaudio__tools_1_1_audio_stream"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classaudio__tools_1_1_audio_stream')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classaudio__tools_1_1_audio_stream.html">audio_tools::AudioStream</a></td></tr>
 <tr class="memitem:a89d8a6426c844635c7503c9baf4ded25 inherit pro_methods_classaudio__tools_1_1_audio_stream"><td class="memItemLeft" align="right" valign="top"><a id="a89d8a6426c844635c7503c9baf4ded25"></a>
 virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>not_supported</b> (int out)</td></tr>
@@ -341,6 +345,33 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>timedRead</b> ()</td><
 <tr class="memitem:a46656410e23c0ec14d7a01b38b3b6f00 inherit pro_methods_class_print"><td class="memItemLeft" align="right" valign="top"><a id="a46656410e23c0ec14d7a01b38b3b6f00"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteError</b> (int err=1)</td></tr>
 <tr class="separator:a46656410e23c0ec14d7a01b38b3b6f00 inherit pro_methods_class_print"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a20a1616c594f8141864610450347f9e4"><td class="memItemLeft" align="right" valign="top"><a id="a20a1616c594f8141864610450347f9e4"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>bytes_per_second</b> = 0</td></tr>
+<tr class="separator:a20a1616c594f8141864610450347f9e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52decf8bd87ddcd10cddd1b4bbf7bea5"><td class="memItemLeft" align="right" valign="top"><a id="a52decf8bd87ddcd10cddd1b4bbf7bea5"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>count</b> =0</td></tr>
+<tr class="separator:a52decf8bd87ddcd10cddd1b4bbf7bea5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb8cd3d49b21ed6af1dfc380d2e008c3"><td class="memItemLeft" align="right" valign="top"><a id="acb8cd3d49b21ed6af1dfc380d2e008c3"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>max_count</b> =0</td></tr>
+<tr class="separator:acb8cd3d49b21ed6af1dfc380d2e008c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a77539f4246c5c0719bfcc598945c75"><td class="memItemLeft" align="right" valign="top"><a id="a0a77539f4246c5c0719bfcc598945c75"></a>
+<a class="el" href="classaudio__tools_1_1_null_stream.html">NullStream</a>&#160;</td><td class="memItemRight" valign="bottom"><b>null</b></td></tr>
+<tr class="separator:a0a77539f4246c5c0719bfcc598945c75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9d316d15c763ed4f1c07115bac7e113"><td class="memItemLeft" align="right" valign="top"><a id="ae9d316d15c763ed4f1c07115bac7e113"></a>
+<a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_print</b> =nullptr</td></tr>
+<tr class="separator:ae9d316d15c763ed4f1c07115bac7e113"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f73e362ea6a774ac53aecf8f7cc809f"><td class="memItemLeft" align="right" valign="top"><a id="a2f73e362ea6a774ac53aecf8f7cc809f"></a>
+<a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_stream</b> =nullptr</td></tr>
+<tr class="separator:a2f73e362ea6a774ac53aecf8f7cc809f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ae8a5ec49b030754e400ca7f44f6a7c"><td class="memItemLeft" align="right" valign="top"><a id="a1ae8a5ec49b030754e400ca7f44f6a7c"></a>
+uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>start_time</b></td></tr>
+<tr class="separator:a1ae8a5ec49b030754e400ca7f44f6a7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55f93cb6cdb7480c43e9103362a11d25"><td class="memItemLeft" align="right" valign="top"><a id="a55f93cb6cdb7480c43e9103362a11d25"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>total_bytes</b> = 0</td></tr>
+<tr class="separator:a55f93cb6cdb7480c43e9103362a11d25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classaudio__tools_1_1_audio_stream"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classaudio__tools_1_1_audio_stream')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classaudio__tools_1_1_audio_stream.html">audio_tools::AudioStream</a></td></tr>
 <tr class="memitem:aa26deda7d5a7fb139372f6f707e91bb9 inherit pro_attribs_classaudio__tools_1_1_audio_stream"><td class="memItemLeft" align="right" valign="top"><a id="aa26deda7d5a7fb139372f6f707e91bb9"></a>
 <a class="el" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_notify</b> =nullptr</td></tr>
@@ -354,7 +385,9 @@ unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b>
 <tr class="separator:aae48f1a926d2e82a452f2c75af0c6a29 inherit pro_attribs_class_stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Same as <a class="el" href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...">AudioStream</a> - but we do not have any abstract methods. </p>
+<div class="textblock"><p>Class which measures the truput. </p>
+<dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/AudioTools/<a class="el" href="_audio_streams_8h_source.html">AudioStreams.h</a></li>
 </ul>

@@ -14,5 +14,5 @@ var searchData=
   ['bufferedtaskstream_107',['BufferedTaskStream',['../classaudio__tools_1_1_buffered_task_stream.html',1,'audio_tools']]],
   ['bufferindex_108',['bufferIndex',['../classaudio__tools_1_1_filter_effect_base.html#a7706e303caa1cecf44df35f4061cb334',1,'audio_tools::FilterEffectBase']]],
   ['buffersize_109',['bufferSize',['../classaudio__tools_1_1_stream_copy_t.html#ac3627d8a96ba24b3e72e53b39cee90a7',1,'audio_tools::StreamCopyT']]],
-  ['bytespersecond_110',['bytesPerSecond',['../classaudio__tools_1_1_timed_stream.html#ae91148325d94c53d9f82e59efa368cd9',1,'audio_tools::MeasuringStream']]]
+  ['bytespersecond_110',['bytesPerSecond',['../classaudio__tools_1_1_measuring_stream.html#aa859ad4bf7e54e5a25b48a7f0a588649',1,'audio_tools::MeasuringStream']]]
 ];
