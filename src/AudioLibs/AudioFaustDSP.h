@@ -24,9 +24,8 @@ class dsp {
     	virtual int getNumInputs() = 0;
 	    virtual int getNumOutputs() = 0;
         virtual void buildUserInterface(UI* ui_interface) = 0;
-
-	
 };
+
 /**
  * @brief minimial implementtion of Meta which just ignores the data
  * @author Phil Schatzmann
