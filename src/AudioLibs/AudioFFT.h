@@ -133,9 +133,9 @@ class AudioFFTBase : public AudioPrint {
             return cfg.bits_per_sample/8*cfg.length;
         }
 
-        /// The number of bins used by the FFT 
+        /// The number of bins used by the FFT which are relevant for the result
         int size() {
-            return cfg.length;
+            return cfg.length/2;
         }
 
         /// time when the last result was provided - you can poll this to check if we have a new result
@@ -154,7 +154,7 @@ class AudioFFTBase : public AudioPrint {
             ret_value.magnitude = 0;
             ret_value.bin = 0;
             // find max value and index
-            for (int j=1;j<cfg.length/2;j++){
+            for (int j=1;j<size();j++){
                 float m = magnitude(j);
                 if (m>ret_value.magnitude){
                     ret_value.magnitude = m;
@@ -175,7 +175,7 @@ class AudioFFTBase : public AudioPrint {
             }
             // find top n values
             AudioFFTResult act;
-            for (int j=1;j<cfg.length/2;j++){
+            for (int j=1;j<size();j++){
                 act.magnitude = magnitude(j);
                 act.bin = j;
                 act.frequency = frequency(j);
