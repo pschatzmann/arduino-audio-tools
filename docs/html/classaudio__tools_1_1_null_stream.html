@@ -85,10 +85,11 @@ Inheritance diagram for audio_tools::NullStream:</div>
  <div class="center">
   <img src="classaudio__tools_1_1_null_stream.png" usemap="#audio_5Ftools::NullStream_map" alt=""/>
   <map id="audio_5Ftools::NullStream_map" name="audio_5Ftools::NullStream_map">
-<area href="classaudio__tools_1_1_buffered_stream.html" title="The Arduino Stream supports operations on single characters. This is usually not the best way to push..." alt="audio_tools::BufferedStream" shape="rect" coords="117,168,342,192"/>
-<area href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="audio_tools::AudioStream" shape="rect" coords="117,112,342,136"/>
+<area href="classaudio__tools_1_1_buffered_stream.html" title="The Arduino Stream supports operations on single characters. This is usually not the best way to push..." alt="audio_tools::BufferedStream" shape="rect" coords="235,168,460,192"/>
+<area href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with..." alt="audio_tools::AudioStream" shape="rect" coords="235,112,460,136"/>
 <area href="class_stream.html" alt="Stream" shape="rect" coords="0,56,225,80"/>
 <area href="classaudio__tools_1_1_audio_base_info_dependent.html" title="Supports changes to the sampling rate, bits and channels." alt="audio_tools::AudioBaseInfoDependent" shape="rect" coords="235,56,460,80"/>
+<area href="classaudio__tools_1_1_audio_base_info_source.html" title="Supports the subscription to audio change notifications." alt="audio_tools::AudioBaseInfoSource" shape="rect" coords="470,56,695,80"/>
 <area href="class_print.html" alt="Print" shape="rect" coords="0,0,225,24"/>
   </map>
 </div></div>
@@ -375,6 +376,10 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>total</b> = 0</td><
 <tr class="memitem:ab250fac4485d6badb4d53c755639d855 inherit pro_attribs_classaudio__tools_1_1_buffered_stream"><td class="memItemLeft" align="right" valign="top"><a id="ab250fac4485d6badb4d53c755639d855"></a>
 <a class="el" href="classaudio__tools_1_1_single_buffer.html">SingleBuffer</a>&lt; uint8_t &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b> = nullptr</td></tr>
 <tr class="separator:ab250fac4485d6badb4d53c755639d855 inherit pro_attribs_classaudio__tools_1_1_buffered_stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classaudio__tools_1_1_audio_stream"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classaudio__tools_1_1_audio_stream')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classaudio__tools_1_1_audio_stream.html">audio_tools::AudioStream</a></td></tr>
+<tr class="memitem:aa26deda7d5a7fb139372f6f707e91bb9 inherit pro_attribs_classaudio__tools_1_1_audio_stream"><td class="memItemLeft" align="right" valign="top"><a id="aa26deda7d5a7fb139372f6f707e91bb9"></a>
+<a class="el" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_notify</b> =nullptr</td></tr>
+<tr class="separator:aa26deda7d5a7fb139372f6f707e91bb9 inherit pro_attribs_classaudio__tools_1_1_audio_stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_class_stream"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_stream')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_stream.html">Stream</a></td></tr>
 <tr class="memitem:abf61d2006d28d18f2e028285a323fe5a inherit pro_attribs_class_stream"><td class="memItemLeft" align="right" valign="top"><a id="abf61d2006d28d18f2e028285a323fe5a"></a>
 unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>_startMillis</b></td></tr>

@@ -84,9 +84,10 @@ Inheritance diagram for audio_tools::EncodedAudioStream:</div>
  <div class="center">
   <img src="classaudio__tools_1_1_encoded_audio_stream.png" usemap="#audio_5Ftools::EncodedAudioStream_map" alt=""/>
   <map id="audio_5Ftools::EncodedAudioStream_map" name="audio_5Ftools::EncodedAudioStream_map">
-<area href="classaudio__tools_1_1_audio_print.html" title="Abstract Audio Ouptut class." alt="audio_tools::AudioPrint" shape="rect" coords="0,56,205,80"/>
-<area href="classaudio__tools_1_1_audio_base_info_source.html" title="Supports the subscription to audio change notifications." alt="audio_tools::AudioBaseInfoSource" shape="rect" coords="215,56,420,80"/>
-<area href="class_print.html" alt="Print" shape="rect" coords="0,0,205,24"/>
+<area href="classaudio__tools_1_1_audio_print.html" title="Abstract Audio Ouptut class." alt="audio_tools::AudioPrint" shape="rect" coords="235,56,460,80"/>
+<area href="class_print.html" alt="Print" shape="rect" coords="0,0,225,24"/>
+<area href="classaudio__tools_1_1_audio_base_info_dependent.html" title="Supports changes to the sampling rate, bits and channels." alt="audio_tools::AudioBaseInfoDependent" shape="rect" coords="235,0,460,24"/>
+<area href="classaudio__tools_1_1_audio_base_info_source.html" title="Supports the subscription to audio change notifications." alt="audio_tools::AudioBaseInfoSource" shape="rect" coords="470,0,695,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -263,6 +264,10 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (const ch
 <tr class="memitem:a5b40e0e9cab1f2fe5bb0cb22ffe5adda inherit pub_methods_class_print"><td class="memItemLeft" align="right" valign="top"><a id="a5b40e0e9cab1f2fe5bb0cb22ffe5adda"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (const char *str)</td></tr>
 <tr class="separator:a5b40e0e9cab1f2fe5bb0cb22ffe5adda inherit pub_methods_class_print"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classaudio__tools_1_1_audio_base_info_dependent"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classaudio__tools_1_1_audio_base_info_dependent')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classaudio__tools_1_1_audio_base_info_dependent.html">audio_tools::AudioBaseInfoDependent</a></td></tr>
+<tr class="memitem:a16c99d6218d2dc4574d4d9725d77052a inherit pub_methods_classaudio__tools_1_1_audio_base_info_dependent"><td class="memItemLeft" align="right" valign="top"><a id="a16c99d6218d2dc4574d4d9725d77052a"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>validate</b> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> &amp;info)</td></tr>
+<tr class="separator:a16c99d6218d2dc4574d4d9725d77052a inherit pub_methods_classaudio__tools_1_1_audio_base_info_dependent"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -291,6 +296,9 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>write_buffer_siz
 <a class="el" href="classaudio__tools_1_1_audio_writer.html">AudioWriter</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>writer_ptr</b> = nullptr</td></tr>
 <tr class="separator:af9a98158a6dd41d3a8c7aa91ec59ef48"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classaudio__tools_1_1_audio_print"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classaudio__tools_1_1_audio_print')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classaudio__tools_1_1_audio_print.html">audio_tools::AudioPrint</a></td></tr>
+<tr class="memitem:a9085174df9d1d8b7f94326d1b145d315 inherit pro_attribs_classaudio__tools_1_1_audio_print"><td class="memItemLeft" align="right" valign="top"><a id="a9085174df9d1d8b7f94326d1b145d315"></a>
+<a class="el" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_notify</b> =nullptr</td></tr>
+<tr class="separator:a9085174df9d1d8b7f94326d1b145d315 inherit pro_attribs_classaudio__tools_1_1_audio_print"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aecd362b3af57a0815b9547f8797512ae inherit pro_attribs_classaudio__tools_1_1_audio_print"><td class="memItemLeft" align="right" valign="top"><a id="aecd362b3af57a0815b9547f8797512ae"></a>
 uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>tmp</b> [MAX_SINGLE_CHARS]</td></tr>
 <tr class="separator:aecd362b3af57a0815b9547f8797512ae inherit pro_attribs_classaudio__tools_1_1_audio_print"><td class="memSeparator" colspan="2">&#160;</td></tr>

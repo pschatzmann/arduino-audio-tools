@@ -86,10 +86,11 @@ Inheritance diagram for audio_tools::PWMAudioStreamESP32:</div>
  <div class="center">
   <img src="classaudio__tools_1_1_p_w_m_audio_stream_e_s_p32.png" usemap="#audio_5Ftools::PWMAudioStreamESP32_map" alt=""/>
   <map id="audio_5Ftools::PWMAudioStreamESP32_map" name="audio_5Ftools::PWMAudioStreamESP32_map">
-<area href="classaudio__tools_1_1_p_w_m_audio_stream_base.html" title="Common functionality for PWM output." alt="audio_tools::PWMAudioStreamBase" shape="rect" coords="117,112,342,136"/>
-<area href="classaudio__tools_1_1_audio_print.html" title="Abstract Audio Ouptut class." alt="audio_tools::AudioPrint" shape="rect" coords="0,56,225,80"/>
-<area href="classaudio__tools_1_1_audio_base_info_dependent.html" title="Supports changes to the sampling rate, bits and channels." alt="audio_tools::AudioBaseInfoDependent" shape="rect" coords="235,56,460,80"/>
+<area href="classaudio__tools_1_1_p_w_m_audio_stream_base.html" title="Common functionality for PWM output." alt="audio_tools::PWMAudioStreamBase" shape="rect" coords="235,112,460,136"/>
+<area href="classaudio__tools_1_1_audio_print.html" title="Abstract Audio Ouptut class." alt="audio_tools::AudioPrint" shape="rect" coords="235,56,460,80"/>
 <area href="class_print.html" alt="Print" shape="rect" coords="0,0,225,24"/>
+<area href="classaudio__tools_1_1_audio_base_info_dependent.html" title="Supports changes to the sampling rate, bits and channels." alt="audio_tools::AudioBaseInfoDependent" shape="rect" coords="235,0,460,24"/>
+<area href="classaudio__tools_1_1_audio_base_info_source.html" title="Supports the subscription to audio change notifications." alt="audio_tools::AudioBaseInfoSource" shape="rect" coords="470,0,695,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -145,6 +146,9 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="memitem:a1b389ee8d8f3cf82d37590ca808044e5 inherit pub_methods_classaudio__tools_1_1_audio_print"><td class="memItemLeft" align="right" valign="top"><a id="a1b389ee8d8f3cf82d37590ca808044e5"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>flush</b> () FLUSH_OVERRIDE</td></tr>
 <tr class="separator:a1b389ee8d8f3cf82d37590ca808044e5 inherit pub_methods_classaudio__tools_1_1_audio_print"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe5b5f182d607236072abbe3ed2648bc inherit pub_methods_classaudio__tools_1_1_audio_print"><td class="memItemLeft" align="right" valign="top"><a id="afe5b5f182d607236072abbe3ed2648bc"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setNotifyAudioChange</b> (<a class="el" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> &amp;bi)</td></tr>
+<tr class="separator:afe5b5f182d607236072abbe3ed2648bc inherit pub_methods_classaudio__tools_1_1_audio_print"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_print"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_print')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_print.html">Print</a></td></tr>
 <tr class="memitem:aec9ecf84cc6d9087a650def3cefc459e inherit pub_methods_class_print"><td class="memItemLeft" align="right" valign="top"><a id="aec9ecf84cc6d9087a650def3cefc459e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>clearWriteError</b> ()</td></tr>
@@ -343,6 +347,9 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>underflow_per_sec
 PWMCallbackType&#160;</td><td class="memItemRight" valign="bottom"><b>user_callback</b> = nullptr</td></tr>
 <tr class="separator:a4cd452b5ac0cfff5bda0077ba0c4353f inherit pro_attribs_classaudio__tools_1_1_p_w_m_audio_stream_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classaudio__tools_1_1_audio_print"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classaudio__tools_1_1_audio_print')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classaudio__tools_1_1_audio_print.html">audio_tools::AudioPrint</a></td></tr>
+<tr class="memitem:a9085174df9d1d8b7f94326d1b145d315 inherit pro_attribs_classaudio__tools_1_1_audio_print"><td class="memItemLeft" align="right" valign="top"><a id="a9085174df9d1d8b7f94326d1b145d315"></a>
+<a class="el" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_notify</b> =nullptr</td></tr>
+<tr class="separator:a9085174df9d1d8b7f94326d1b145d315 inherit pro_attribs_classaudio__tools_1_1_audio_print"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aecd362b3af57a0815b9547f8797512ae inherit pro_attribs_classaudio__tools_1_1_audio_print"><td class="memItemLeft" align="right" valign="top"><a id="aecd362b3af57a0815b9547f8797512ae"></a>
 uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>tmp</b> [MAX_SINGLE_CHARS]</td></tr>
 <tr class="separator:aecd362b3af57a0815b9547f8797512ae inherit pro_attribs_classaudio__tools_1_1_audio_print"><td class="memSeparator" colspan="2">&#160;</td></tr>
