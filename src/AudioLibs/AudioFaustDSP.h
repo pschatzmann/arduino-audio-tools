@@ -137,6 +137,9 @@ class UI {
             if (withLimits){
                 e.min = min;
                 e.max = max;
+                LOGI("Label: %s value: %f range: %f - %f", label, *zone, min, max);
+            } else {
+                LOGI("Label: %s value: %f", label, *zone);
             }
             entries.push_back(e);
         }
