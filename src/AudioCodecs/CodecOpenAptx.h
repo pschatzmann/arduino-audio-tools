@@ -21,7 +21,7 @@ namespace audio_tools {
  */
 class OpenAptxDecoder : public AudioDecoder {
  public:
-  OpenAptxEncoder(bool IsHd) {
+  OpenAptxDecoder(bool isHd=false) {
     is_hd = isHd;
     info.sample_rate = 44100;
     info.channels = 2;
@@ -30,7 +30,7 @@ class OpenAptxDecoder : public AudioDecoder {
   virtual AudioBaseInfo audioInfo() { return info; }
 
   virtual void begin() {
-    ctx = aptx_init(hd);
+    ctx = aptx_init(is_hd);
     is_first_write = true;
     if (notify != nullptr) {
       notify->setAudioInfo(info);
@@ -60,7 +60,7 @@ class OpenAptxDecoder : public AudioDecoder {
     }
 
     processed =
-        aptx_decode_sync(ctx, input_buffer, length, output_buffer,
+        aptx_decode_sync(ctx, (const uint8_t*)input_buffer, length, output_buffer,
                          sizeof(output_buffer), &written, &synced, &dropped);
 
     /* Check all possible states of synced, syncing and dropped status */
@@ -71,7 +71,7 @@ class OpenAptxDecoder : public AudioDecoder {
         ret = 1;
       }
       if (dropped) {
-        LOGE("aptX synchronization successful, dropped %lu byte%s", argv[0],
+        LOGE("aptX synchronization successful, dropped %lu byte%s",
              (unsigned long)dropped, (dropped != 1) ? "s" : "");
         syncing = 0;
         ret = 1;
@@ -83,13 +83,13 @@ class OpenAptxDecoder : public AudioDecoder {
       }
     } else {
       if (dropped) {
-        if (!syncing) LOGE("aptX decoding failed, synchronizing", );
-        LOGE("aptX synchronization successful, dropped %lu byte%s", argv[0],
+        if (!syncing) LOGE("aptX decoding failed, synchronizing");
+        LOGE("aptX synchronization successful, dropped %lu byte%s", 
              (unsigned long)dropped, (dropped != 1) ? "s" : "");
         syncing = 0;
         ret = 1;
       } else if (syncing) {
-        LOGE("aptX synchronization successful", );
+        LOGE("aptX synchronization successful" );
         syncing = 0;
         ret = 1;
       }
@@ -100,21 +100,18 @@ class OpenAptxDecoder : public AudioDecoder {
     if (processed != length) {
       LOGE("aptX decoding failed");
       ret = 1;
-      break;
     }
 
     if (written > 0) {
       if (p_print->write(output_buffer, written) != written) {
         LOGE("aptX decoding failed to write decoded data");
         ret = 1;
-        break;
       }
     }
 
     return ret == 1 ? 0 : length;
   }
 
-  void setNotifyAudioChange(AudioBaseInfoDependent &bi) {}
 
  protected:
   Print *p_print = nullptr;
@@ -122,10 +119,8 @@ class OpenAptxDecoder : public AudioDecoder {
   struct aptx_context *ctx = nullptr;
   AudioBaseInfoDependent *notify = nullptr;
   bool is_first_write = true;
-  unsigned char output_buffer[512 * 3 * 2 * 6 + 3 * 2 * 4];
-  int i;
-  int hd;
-  size_t length;
+  uint8_t output_buffer[512 * 3 * 2 * 6 + 3 * 2 * 4];
+  bool is_hd;
   size_t processed;
   size_t written;
   size_t dropped;
@@ -135,13 +130,13 @@ class OpenAptxDecoder : public AudioDecoder {
   bool checkPrefix(const void *input_buffer, size_t length) {
     bool result = true;
     if (length >= 4 && memcmp(input_buffer, "\x4b\xbf\x4b\xbf", 4) == 0) {
-      if (hd) {
+      if (is_hd) {
         LOGE("aptX audio stream (not aptX HD)");
         result = false;
       }
     } else if (length >= 6 &&
                memcmp(input_buffer, "\x73\xbe\xff\x73\xbe\xff", 6) == 0) {
-      if (!hd) {
+      if (!is_hd) {
         LOGE("aptX HD audio stream");
         result = false;
       }
@@ -173,12 +168,12 @@ class OpenAptxEncoder : public AudioEncoder {
     info.bits_per_sample = isHd ? 24 : 16;
   }
 
-  void begin() { ctx = aptx_init(hd); }
+  void begin() { ctx = aptx_init(is_hd); }
 
   virtual void end() {
     size_t written;
-    int aptx_encode_finish(ctx, output_buffer, sizeof(output_buffer), &written);
-    printf->write(output_buffer, written);
+    aptx_encode_finish(ctx, output_buffer, sizeof(output_buffer), &written);
+    p_print->write((const uint8_t*)output_buffer, written);
     aptx_finish(ctx);
     ctx = nullptr;
   }
@@ -194,9 +189,9 @@ class OpenAptxEncoder : public AudioEncoder {
   virtual size_t write(const void *in_ptr, size_t in_size) {
     size_t written;
 
-    siz_t result = aptx_encode(ctx, in_ptr, in_size, output_buffer,
+    size_t result = aptx_encode(ctx, (const uint8_t*) in_ptr, in_size, output_buffer,
                                sizeof(output_buffer), &written);
-    p_print->write(output_buffer, written);
+    p_print->write((const uint8_t*)output_buffer, written);
     return result;
   }
 
@@ -205,7 +200,7 @@ class OpenAptxEncoder : public AudioEncoder {
   AudioBaseInfo info;
   Print *p_print = nullptr;
   struct aptx_context *ctx = nullptr;
-  unsigned char output_buffer[512 * 6];
+  uint8_t output_buffer[512 * 6];
 };
 
 }  // namespace audio_tools
