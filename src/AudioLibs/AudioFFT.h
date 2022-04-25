@@ -203,6 +203,10 @@ class AudioFFTBase : public AudioPrint {
             return p_magnitudes;
         }
 
+        AudioFFTConfig config() {
+            return cfg;
+        }
+
     protected:
         FFTDriver *p_driver=nullptr;
         int current_pos = 0;
