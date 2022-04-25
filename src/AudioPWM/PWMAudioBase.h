@@ -85,7 +85,7 @@ struct PWMConfig : public AudioBaseInfo {
  * @brief Common functionality for PWM output
  * 
  */
-class PWMAudioStreamBase : public AudioPrint, public AudioBaseInfoDependent {
+class PWMAudioStreamBase : public AudioPrint {
     public:
         ~PWMAudioStreamBase(){
             if (is_timer_started){

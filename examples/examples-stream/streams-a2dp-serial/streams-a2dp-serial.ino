@@ -23,7 +23,9 @@ void setup(void) {
 
   // start the bluetooth audio receiver
   Serial.println("starting A2DP...");
-  in.begin(RX_MODE, "MyReceiver");  
+  auto cfg = in.defaultConfig(RX_MODE);
+  cfg.name = "MyReceiver";
+  in.begin(cfg);  
 }
 
 // Arduino loop  
