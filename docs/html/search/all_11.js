@@ -14,7 +14,7 @@ var searchData=
   ['tflitewriter_665',['TfLiteWriter',['../classaudio__tools_1_1_tf_lite_writer.html',1,'audio_tools']]],
   ['throttle_666',['Throttle',['../classaudio__tools_1_1_throttle.html',1,'audio_tools']]],
   ['throttleconfig_667',['ThrottleConfig',['../structaudio__tools_1_1_throttle_config.html',1,'audio_tools']]],
-  ['timedstream_668',['TimedStream',['../classaudio__tools_1_1_timed_stream.html',1,'audio_tools']]],
+  ['timedstream_668',['MeasuringStream',['../classaudio__tools_1_1_timed_stream.html',1,'audio_tools']]],
   ['timeoutautonext_669',['timeoutAutoNext',['../classaudio__tools_1_1_audio_source.html#ae884e74dd3b63caffbdf6bf31fedb792',1,'audio_tools::AudioSource']]],
   ['timeralarmrepeatingavr_670',['TimerAlarmRepeatingAVR',['../classaudio__tools_1_1_timer_alarm_repeating_a_v_r.html',1,'audio_tools']]],
   ['timeralarmrepeatingdef_671',['TimerAlarmRepeatingDef',['../classaudio__tools_1_1_timer_alarm_repeating_def.html',1,'audio_tools']]],

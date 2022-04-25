@@ -13,7 +13,7 @@ var searchData=
   ['tflitewriter_1037',['TfLiteWriter',['../classaudio__tools_1_1_tf_lite_writer.html',1,'audio_tools']]],
   ['throttle_1038',['Throttle',['../classaudio__tools_1_1_throttle.html',1,'audio_tools']]],
   ['throttleconfig_1039',['ThrottleConfig',['../structaudio__tools_1_1_throttle_config.html',1,'audio_tools']]],
-  ['timedstream_1040',['TimedStream',['../classaudio__tools_1_1_timed_stream.html',1,'audio_tools']]],
+  ['timedstream_1040',['MeasuringStream',['../classaudio__tools_1_1_timed_stream.html',1,'audio_tools']]],
   ['timeralarmrepeatingavr_1041',['TimerAlarmRepeatingAVR',['../classaudio__tools_1_1_timer_alarm_repeating_a_v_r.html',1,'audio_tools']]],
   ['timeralarmrepeatingdef_1042',['TimerAlarmRepeatingDef',['../classaudio__tools_1_1_timer_alarm_repeating_def.html',1,'audio_tools']]],
   ['timeralarmrepeatingesp32_1043',['TimerAlarmRepeatingESP32',['../classaudio__tools_1_1_timer_alarm_repeating_e_s_p32.html',1,'audio_tools']]],

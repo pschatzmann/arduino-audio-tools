@@ -1,7 +1,7 @@
 /**
  * @file example-serial-receive.ino
  * @author Phil Schatzmann
- * @brief Receiving audio via IP and writing to I2S
+ * @brief Receiving audio via IP and just measuring the thruput
  * @version 0.1
  * @date 2022-03-09
  * 
@@ -18,9 +18,8 @@ uint16_t port = 8000;
 uint8_t channels = 1;  // The stream will have 2 channels
 WiFiServer server(port);
 WiFiClient client; 
-I2SStream out; 
-MeasuringStream outTimed(out);
-StreamCopy copier(outTimed, client);     
+MeasuringStream out;
+StreamCopy copier(out, client);     
 const char* ssid     = "yourssid";
 const char* password = "yourpasswd";
 
@@ -40,15 +39,8 @@ void setup() {
   // start server
   server.begin();
 
-  // start I2S
-  Serial.println("starting I2S...");
-  auto config = out.defaultConfig(TX_MODE);
-  config.sample_rate = sample_rate; 
-  config.channels = channels;
-  config.bits_per_sample = 16;
-  config.buffer_size = 512;
-  config.buffer_count = 6;
-  out.begin(config);
+  // start out
+  out.begin();
 
   Serial.println("started...");
 }
