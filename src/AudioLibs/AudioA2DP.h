@@ -81,7 +81,7 @@ class A2DPConfig {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class A2DPStream : public AudioStream, public AudioBaseInfoSource {
+class A2DPStream : public AudioStream {
 
     public:
         // Release the allocate a2dp_source or a2dp_sink

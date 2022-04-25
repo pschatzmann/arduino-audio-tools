@@ -70,7 +70,7 @@ class AudioPrint : public Print, public AudioBaseInfoDependent, public AudioBase
  * @copyright GPLv3
 */
 template<typename T>
-class CsvStream : public AudioPrint, public AudioBaseInfoDependent {
+class CsvStream : public AudioPrint {
 
     public:
         CsvStream(int buffer_size=DEFAULT_BUFFER_SIZE, bool active=true) {
@@ -226,7 +226,7 @@ class HexDumpStream : public AudioPrint {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class EncodedAudioStream : public AudioPrint, public AudioBaseInfoSource { 
+class EncodedAudioStream : public AudioPrint { 
     public: 
         /**
          * @brief Construct a new Encoded Stream object - used for decoding

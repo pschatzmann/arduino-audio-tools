@@ -1111,8 +1111,7 @@ struct TimerCallbackAudioStreamInfo : public AudioBaseInfo {
  * @copyright GPLv3
  *
  */
-class TimerCallbackAudioStream : public BufferedStream,
-                                 public AudioBaseInfoSource {
+class TimerCallbackAudioStream : public BufferedStream {
   friend void IRAM_ATTR timerCallback(void *obj);
 
  public:
