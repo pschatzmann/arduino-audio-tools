@@ -3,7 +3,9 @@
 #include "AudioConfig.h"
 #ifdef USE_AUDIO_SERVER
 
+#ifdef ESP32
 #include <WiFi.h>
+#endif
 #include "AudioCodecs/CodecWAV.h"
 #include "AudioTools.h"
 

@@ -12,47 +12,39 @@ namespace audio_tools {
 class ESPNowStream;
 ESPNowStream *ESPNowStreamSelf = nullptr;
 
+// typedef byte mac[6] macaddr_t;
+
+struct ESPNowStreamConfig {
+  wifi_mode_t wifi_mode = WIFI_STA;
+  const char *mac_address = nullptr;
+  int channel = 0;
+  const char *ssid = nullptr;
+  const char *password = nullptr;
+  bool use_send_ack = true; // we wait for 
+  uint16_t delay_after_write_ms = 2;
+  uint16_t delay_after_failed_write_ms = 2000;
+  uint16_t buffer_size = ESP_NOW_MAX_DATA_LEN;
+  uint16_t buffer_count = 20;
+  void (*recveive_cb)(const uint8_t *mac_addr, const uint8_t *data, int data_len)=nullptr;
+
+};
 
 /**
  * @brief ESPNow as Stream
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-
 class ESPNowStream : public AudioStreamX {
-public:
+ public:
   ESPNowStream() { ESPNowStreamSelf = this; };
 
-  /// Adds a peer to which we can send info or from which we can receive info
-  bool addPeer(esp_now_peer_info_t &peer) {
-    esp_err_t result = esp_now_add_peer(&peer);
-    if (result != ESP_OK) {
-      LOGE("addPeer: %d", result);
-    }
-    return result == ESP_OK;
-  }
-
-  /// Adds an array of
-  template <size_t size> bool addPeers(const char *(&array)[size]) {
-    bool result = true;
-    for (int j = 0; j < size; j++) {
-      if (!addPeer(array[j])) {
-        result = false;
-      }
-    }
+  ESPNowStreamConfig defaultConfig() {
+    ESPNowStreamConfig result;
     return result;
   }
 
-  /// Adds a peer to which we can send info or from which we can receive info
-  bool addPeer(const char *address) {
-    esp_now_peer_info_t peer;
-    strncpy((char *)peer.peer_addr, address, ESP_NOW_ETH_ALEN);
-    esp_err_t result = esp_now_add_peer(&peer);
-    if (result != ESP_OK) {
-      LOGE("addPeer: %d", result);
-    }
-    return result == ESP_OK;
-  }
+  /// Returns the mac address of the current ESP32
+  const char *macAddress() { return WiFi.macAddress().c_str(); }
 
   /// Defines an alternative send callback
   void setSendCallback(esp_now_send_cb_t cb) { send = cb; }
@@ -61,34 +53,36 @@ public:
   /// methods!
   void setReceiveCallback(esp_now_recv_cb_t cb) { receive = cb; }
 
-  /// Initialization incl WIFI
-  bool begin(const char *ssid, const char *password,
-             wifi_mode_t mode = WIFI_STA) {
-    WiFi.mode(mode);
-    WiFi.begin(ssid, password);
-    while (WiFi.status() != WL_CONNECTED) {
-      Serial.print('.');
-      delay(1000);
-    }
-    Serial.println();
-    return begin();
+  /// Initialization of ESPNow
+  bool begin() {
+    begin(cfg);
   }
 
-  /// Initialization
-  bool begin() {
-    if (WiFi.status() != WL_CONNECTED) {
-      LOGE("Wifi not connected");
-      return false;
+  /// Initialization of ESPNow incl WIFI
+  bool begin(ESPNowStreamConfig cfg) {
+    this->cfg = cfg;
+
+    // set mac address
+    if (cfg.mac_address!=nullptr){
+      byte mac[ESP_NOW_KEY_LEN];
+      str2mac(cfg.mac_address, mac);
+      esp_base_mac_addr_set(mac);
+      available_to_write = cfg.buffer_size;
+      LOGI("setting %s", cfg.mac_address);
     }
-    esp_err_t result = esp_now_init();
-    if (result != ESP_OK) {
-      LOGE("esp_now_init");
-    } else {
-      LOGI("esp_now_init: %s", address());
+
+    WiFi.mode(cfg.wifi_mode);
+    if (cfg.ssid != nullptr && cfg.password != nullptr) {
+      WiFi.begin(cfg.ssid, cfg.password);
+      while (WiFi.status() != WL_CONNECTED) {
+        Serial.print('.');
+        delay(1000);
+      }
     }
-    esp_now_register_recv_cb(receive);
-    esp_now_register_send_cb(send);
-    return result == ESP_OK;
+    Serial.println();
+    Serial.print("mac: ");
+    Serial.println(WiFi.macAddress());
+    return setup();
   }
 
   /// DeInitialization
@@ -96,30 +90,87 @@ public:
     if (esp_now_deinit() != ESP_OK) {
       LOGE("esp_now_deinit");
     }
+    is_init = false;
+  }
+
+  /// Adds a peer to which we can send info or from which we can receive info
+  bool addPeer(esp_now_peer_info_t &peer) {
+    if (!is_init) {
+      LOGE("addPeer before begin");
+      return false;
+    }
+    esp_err_t result = esp_now_add_peer(&peer);
+    if (result == ESP_OK) {
+      LOGI("addPeer: %s", mac2str(peer.peer_addr));
+    } else {
+      LOGE("addPeer: %d", result);
+    }
+    return result == ESP_OK;
+  }
+
+  /// Adds an array of
+  template <size_t size>
+  bool addPeers(const char *(&array)[size]) {
+    bool result = true;
+    for (int j = 0; j < size; j++) {
+      const char *peer = array[j];
+      if (peer!=nullptr){
+        if (!addPeer(peer)) {
+          result = false;
+        }
+      }
+    }
+    return result;
+  }
+
+  /// Adds a peer to which we can send info or from which we can receive info
+  bool addPeer(const char *address) {
+    esp_now_peer_info_t peer;
+    peer.channel = 0;
+    peer.ifidx = ESP_IF_WIFI_STA;
+    peer.encrypt = false;
+
+    if (!str2mac(address, peer.peer_addr)) {
+      LOGE("addPeer - Invalid address: %s", address);
+      return false;
+    }
+    return addPeer(peer);
   }
 
   /// Writes the data - sends it to all the peers
-  size_t write(uint8_t *data, size_t len) {
+  size_t write(const uint8_t *data, size_t len) override {
     int open = len;
     size_t result = 0;
     while (open > 0) {
       if (available_to_write > 0) {
+        resetAvailableToWrite();
         size_t send_len = min(open, ESP_NOW_MAX_DATA_LEN);
-        esp_err_t result = esp_now_send(nullptr, data + result, send_len);
-        available_to_write = 0;
-        if (result == ESP_OK) {
+        esp_err_t rc = esp_now_send(nullptr, data + result, send_len);
+        // wait for confirmation
+        if (cfg.use_send_ack){
+          while(available_to_write==0){
+            delay(1);
+          }
+        } else {
+          is_write_ok = true; 
+        }
+        // check status
+        if (rc == ESP_OK && is_write_ok) {
           open -= send_len;
           result += send_len;
         } else {
-          LOGE("%d", result);
-          break;
+          LOGE("Write error");
         }
+        // if we do have no partner to write we stall and retry later
       } else {
-        delay(100);
+        delay(cfg.delay_after_write_ms);
+      }
+
+      // Wait some time before we retry 
+      if (!is_write_ok){
+        delay(cfg.delay_after_failed_write_ms);
       }
     }
-    // reset available to write and we wait for the confirmation
-    available_to_write = 0;
     return result;
   }
 
@@ -130,19 +181,70 @@ public:
 
   int available() override { return buffer.available(); }
 
-  int availableForWrite() { return available_to_write; }
+  int availableForWrite() override { return cfg.use_send_ack ? available_to_write : cfg.buffer_size; }
 
-  /// Returns the mac address of the current ESP32
-  const char *address() { return WiFi.macAddress().c_str(); }
-
-protected:
-  RingBuffer<uint8_t> buffer{1024 * 5};
+ protected:
+  ESPNowStreamConfig cfg;
+  RingBuffer<uint8_t> buffer{1024 * 10};
   esp_now_recv_cb_t receive = default_recv_cb;
   esp_now_send_cb_t send = default_send_cb;
-  size_t available_to_write = ESP_NOW_MAX_DATA_LEN;
+  volatile size_t available_to_write;
+  bool is_init = false;
+  bool is_write_ok = false;
+  inline void resetAvailableToWrite() {
+    if (cfg.use_send_ack){
+      available_to_write = 0;
+    }
+  }
+
+  /// Initialization
+  bool setup() {
+    esp_err_t result = esp_now_init();
+    if (result == ESP_OK) {
+      LOGI("esp_now_init: %s", macAddress());
+    } else {
+      LOGE("esp_now_init: %d", result);
+    }
+    if (cfg.recveive_cb!=nullptr){
+      esp_now_register_recv_cb(cfg.recveive_cb);
+    } else {
+      esp_now_register_recv_cb(receive);
+    }
+    if (cfg.use_send_ack){
+      esp_now_register_send_cb(send);
+    }
+    is_init = result == ESP_OK;
+    return is_init;
+  }
+
+  bool str2mac(const char *mac, uint8_t *values) {
+    sscanf(mac, "%hhx:%hhx:%hhx:%hhx:%hhx:%hhx", &values[0], &values[1],
+           &values[2], &values[3], &values[4], &values[5]);
+    return strlen(mac) == 17;
+  }
+
+  const char *mac2str(const uint8_t *array) {
+    static char macStr[18];
+    memset(macStr, 0, 18);
+    snprintf(macStr, 18, "%02x:%02x:%02x:%02x:%02x:%02x", array[0], array[1],
+             array[2], array[3], array[4], array[5]);
+    return (const char *)macStr;
+  }
 
   static void default_recv_cb(const uint8_t *mac_addr, const uint8_t *data,
                               int data_len) {
+    LOGD("rec_cb: %d", data_len);
+    while (ESPNowStreamSelf->buffer.availableForWrite()<data_len){
+      delay(1);
+    }
+    // if (data_len>available) {
+    //   LOGE("Buffer overflow");
+    //   int overflow = data_len-available;
+    //   // make space in buffer
+    //   for (int j=0;j<overflow;j++){
+    //     ESPNowStreamSelf->buffer.read();
+    //   }
+    // } 
     ESPNowStreamSelf->buffer.writeArray(data, data_len);
   }
 
@@ -154,15 +256,15 @@ protected:
     if (first_mac[0] == 0) {
       strcpy((char *)first_mac, (char *)mac_addr);
     }
-    LOGI("%s:%d", mac_addr, status);
-    if (strcmp((char *)first_mac, (char *)mac_addr) == 0 &&
-        status == ESP_NOW_SEND_SUCCESS) {
-        // 
-      ESPNowStreamSelf->available_to_write = ESP_NOW_MAX_DATA_LEN;
+    LOGD("default_send_cb - %s -> %s", ESPNowStreamSelf->mac2str(mac_addr), status==ESP_NOW_SEND_SUCCESS?"+":"-");
+    ESPNowStreamSelf->available_to_write = ESPNowStreamSelf->cfg.buffer_size;
+    if (status == ESP_NOW_SEND_SUCCESS) {
+      ESPNowStreamSelf->is_write_ok = true;
+    } else {
+      ESPNowStreamSelf->is_write_ok = false;
     }
   }
 };
-
 
 /**
  * A Simple exension of the WiFiUDP class which makes sure that the basic Stream
@@ -172,7 +274,7 @@ protected:
  */
 
 class UDPStream : public WiFiUDP {
-public:
+ public:
   /**
    * Provides the available size of the current package and if this is used up
    * of the next package
@@ -194,9 +296,9 @@ public:
   }
 
   /// Starts to receive data from/with the indicated port
-  uint8_t begin(uint16_t port, uint16_t port_ext=0) {
+  uint8_t begin(uint16_t port, uint16_t port_ext = 0) {
     remote_address_ext = 0u;
-    remote_port_ext = port_ext!=0 ? port_ext : port;
+    remote_port_ext = port_ext != 0 ? port_ext : port;
     return WiFiUDP::begin(port);
   }
 
@@ -208,9 +310,9 @@ public:
 
   /// We use the same remote ip as defined in begin for write
   IPAddress remoteIP() {
-    // Determine address if it has not been specified 
-    if ((uint32_t)remote_address_ext==0){
-      remote_address_ext = WiFiUDP::remoteIP(); 
+    // Determine address if it has not been specified
+    if ((uint32_t)remote_address_ext == 0) {
+      remote_address_ext = WiFiUDP::remoteIP();
     }
     // IPAddress result = WiFiUDP::remoteIP();
     // LOGI("ip: %u", result);
@@ -228,18 +330,17 @@ public:
     return result;
   }
 
-protected:
+ protected:
   uint16_t remote_port_ext;
   IPAddress remote_address_ext;
 };
 
-
-enum RecordType:uint8_t {Undefined, Begin,Send,Receive,End};
-enum AudioType:uint8_t {PCM,MP3,AAC, WAV};
-enum TransmitRole:uint8_t {Sender, Receiver};
+enum RecordType : uint8_t { Undefined, Begin, Send, Receive, End };
+enum AudioType : uint8_t { PCM, MP3, AAC, WAV };
+enum TransmitRole : uint8_t { Sender, Receiver };
 
 /// Common Header for all records
-struct AudioHeader  {
+struct AudioHeader {
   AudioHeader() = default;
   uint8_t app = 123;
   RecordType rec = Undefined;
@@ -253,34 +354,29 @@ struct AudioHeader  {
 
 /// Protocal Record To Start
 struct AudioDataBegin : public AudioHeader {
-  AudioDataBegin(){
-    rec = Begin;
-  }
+  AudioDataBegin() { rec = Begin; }
   AudioBaseInfo info;
   AudioType type = PCM;
 };
 
 /// Protocol Record for Data
-struct AudioSendData : public AudioHeader{
-  AudioSendData(){
-    rec = Send;;
+struct AudioSendData : public AudioHeader {
+  AudioSendData() {
+    rec = Send;
+    ;
   }
   uint16_t size = 0;
 };
 
 /// Protocol Record for Request
 struct AudioConfirmDataToReceive : public AudioHeader {
-  AudioConfirmDataToReceive(){
-    rec = Receive;
-  }
+  AudioConfirmDataToReceive() { rec = Receive; }
   uint16_t size = 0;
 };
 
 /// Protocol Record for End
 struct AudioDataEnd : public AudioHeader {
-  AudioDataEnd(){
-    rec = End;
-  }
+  AudioDataEnd() { rec = End; }
 };
 
 /**
@@ -290,182 +386,176 @@ struct AudioDataEnd : public AudioHeader {
  * @copyright GPLv3
  */
 class AudioSyncWriter : public AudioPrint {
+ public:
+  AudioSyncWriter(Stream &dest) { p_dest = &dest; }
 
-  public:
-    AudioSyncWriter(Stream &dest){
-      p_dest = &dest;
+  bool begin(AudioBaseInfo &info, AudioType type) {
+    is_sync = true;
+    AudioDataBegin begin;
+    begin.info = info;
+    begin.type = type;
+    begin.increment();
+    int write_len = sizeof(begin);
+    int len = p_dest->write((const uint8_t *)&begin, write_len);
+    return len == write_len;
+  }
+
+  size_t write(const uint8_t *data, size_t len) override {
+    int written_len = 0;
+    int open_len = len;
+    AudioSendData send;
+    while (written_len < len) {
+      int available_to_write = waitForRequest();
+      size_t to_write_len = DEFAULT_BUFFER_SIZE;
+      to_write_len = min(open_len, available_to_write);
+      send.increment();
+      send.size = to_write_len;
+      p_dest->write((const uint8_t *)&send, sizeof(send));
+      int w = p_dest->write(data + written_len, to_write_len);
+      written_len += w;
+      open_len -= w;
     }
+    return written_len;
+  }
 
-    bool begin(AudioBaseInfo &info, AudioType type){
-      is_sync = sync;
-      AudioDataBegin begin;
-      begin.info = info;
-      begin.type = type;
-      begin.increment();
-      int write_len = sizeof(begin);
-      int len = p_dest->write((const uint8_t*)&begin, write_len);
-      return len==write_len;
+  int availableForWrite() override { return available_to_write; }
+
+  void end() {
+    AudioDataEnd end;
+    end.increment();
+    p_dest->write((const uint8_t *)&end, sizeof(end));
+  }
+
+ protected:
+  Stream *p_dest;
+  int available_to_write = 1024;
+  bool is_sync;
+
+  /// Waits for the data to be available
+  void waitFor(int size) {
+    while (p_dest->available() < size) {
+      delay(10);
     }
+  }
 
-    size_t write(const uint8_t* data, size_t len) override {
-      int written_len = 0;
-      int open_len = len;
-      AudioSendData send;
-      while(written_len<len){
-        int available_to_write = waitForRequest();
-        size_t to_write_len = DEFAULT_BUFFER_SIZE;
-        to_write_len = min(open_len, available_to_write);
-        send.increment();
-        send.size = to_write_len;
-        p_dest->write((const uint8_t*) &send, sizeof(send));
-        int w = p_dest->write(data+written_len, to_write_len);
-        written_len += w;
-        open_len -= w;
-      }
-      return written_len;
-    }
-
-    int availableForWrite() override {
-      return available_to_write;
-    }
-
-    void end() {
-      AudioDataEnd end;
-      end.increment();
-      p_dest->write((const uint8_t*)&end, sizeof(end));
-    }
-
-  protected:
-    Stream *p_dest;
-    int available_to_write = 1024;
-    bool is_sync;
-
-    /// Waits for the data to be available
-    void waitFor(int size){
-        while(p_dest->available()<size){
-          delay(10);
-        }
-    }
-
-    int waitForRequest(){
-      AudioConfirmDataToReceive rcv;
-        size_t rcv_len = sizeof(rcv);
-        waitFor(rcv_len);
-        p_dest->readBytes((uint8_t*)&rcv, rcv_len);
-        return rcv.size;
-    }
-
+  int waitForRequest() {
+    AudioConfirmDataToReceive rcv;
+    size_t rcv_len = sizeof(rcv);
+    waitFor(rcv_len);
+    p_dest->readBytes((uint8_t *)&rcv, rcv_len);
+    return rcv.size;
+  }
 };
 
-
-
 /**
- * @brief Receving Audio Data over the wire and requesting for more data when done to
- * synchronize the processing with the sender. The audio data is processed by the 
- * EncodedAudioStream; If you have multiple readers, only one receiver should be used as confirmer!
+ * @brief Receving Audio Data over the wire and requesting for more data when
+ * done to synchronize the processing with the sender. The audio data is
+ * processed by the EncodedAudioStream; If you have multiple readers, only one
+ * receiver should be used as confirmer!
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioSyncReader: public AudioStreamX {
-  public:
-    AudioSyncReader(Stream &in, EncodedAudioStream &out, bool isConfirmer=true){
-      p_in = &in;
-      p_out = &out;
-      is_confirmer = isConfirmer;
+class AudioSyncReader : public AudioStreamX {
+ public:
+  AudioSyncReader(Stream &in, EncodedAudioStream &out,
+                  bool isConfirmer = true) {
+    p_in = &in;
+    p_out = &out;
+    is_confirmer = isConfirmer;
+  }
+
+  size_t copy() {
+    int processed = 0;
+    int header_size = sizeof(header);
+    waitFor(header_size);
+    readBytes((uint8_t *)&header, header_size);
+
+    switch (header.rec) {
+      case Begin:
+        audioDataBegin();
+        break;
+      case End:
+        audioDataEnd();
+        break;
+      case Send:
+        processed = receiveData();
+        break;
     }
+    return processed;
+  }
 
-    size_t copy() {
-      int processed = 0;
-      int header_size = sizeof(header);
-      waitFor(header_size);
-      readBytes((uint8_t*)&header,header_size);
+ protected:
+  Stream *p_in;
+  EncodedAudioStream *p_out;
+  AudioConfirmDataToReceive req;
+  AudioHeader header;
+  AudioDataBegin begin;
+  size_t available = 0;  // initial value
+  bool is_started = false;
+  bool is_confirmer;
+  int last_seq = 0;
 
-      switch(header.rec){
-        case Begin: 
-            audioDataBegin();
-            break;
-        case End: 
-            audioDataEnd();
-            break;
-        case Send: 
-            processed = receiveData();
-            break;
-      }
-      return processed;
-    }
+  /// Starts the processing
+  void audioDataBegin() {
+    readProtocol(&begin, sizeof(begin));
+    p_out->begin();
+    p_out->setAudioInfo(begin.info);
+    requestData();
+  }
 
-  protected: 
-    Stream *p_in;
-    EncodedAudioStream *p_out;
-    AudioConfirmDataToReceive req;
-    AudioHeader header;
-    AudioDataBegin begin;
-    size_t available = 0; // initial value
-    bool is_started = false;
-    bool is_confirmer;
-    int last_seq=0;
+  /// Ends the processing
+  void audioDataEnd() {
+    AudioDataEnd end;
+    readProtocol(&end, sizeof(end));
+    p_out->end();
+  }
 
-    /// Starts the processing
-    void audioDataBegin() {
-        readProtocol(&begin, sizeof(begin));
-        p_out->begin();
-        p_out->setAudioInfo(begin.info);
+  // Receives audio data
+  int receiveData() {
+    AudioSendData data;
+    readProtocol(&data, sizeof(data));
+    available = data.size;
+    // receive and process audio data
+    waitFor(available);
+    int max_gap = 10;
+    if (data.seq > last_seq ||
+        (data.seq < max_gap && last_seq >= (32767 - max_gap))) {
+      uint8_t buffer[available];
+      p_in->readBytes((uint8_t *)buffer, available);
+      p_out->write((const uint8_t *)buffer, available);
+      // only one reader should be used as confirmer
+      if (is_confirmer) {
         requestData();
+      }
+      last_seq = data.seq;
     }
+    return available;
+  }
 
-    /// Ends the processing
-    void audioDataEnd() {
-        AudioDataEnd end;
-        readProtocol(&end, sizeof(end));
-        p_out->end();
+  /// Waits for the data to be available
+  void waitFor(int size) {
+    while (p_in->available() < size) {
+      delay(10);
     }
+  }
 
-    // Receives audio data
-    int receiveData() {
-        AudioSendData data;
-        readProtocol(&data, sizeof(data));
-        available = data.size;
-        // receive and process audio data
-        waitFor(available);
-        int max_gap = 10;
-        if (data.seq>last_seq || (data.seq<max_gap && last_seq>=(32767-max_gap))){
-          uint8_t buffer[available];
-          p_in->readBytes((uint8_t*)buffer, available);
-          p_out->write((const uint8_t*)buffer,available);
-          // only one reader should be used as confirmer
-          if (is_confirmer){
-            requestData();
-          }
-          last_seq = data.seq;
-        }
-        return available;
-    }
+  /// Request new data from writer
+  void requestData() {
+    req.size = p_out->availableForWrite();
+    req.increment();
+    p_in->write((const uint8_t *)&req, sizeof(req));
+    p_in->flush();
+  }
 
-    /// Waits for the data to be available
-    void waitFor(int size){
-        while(p_in->available()<size){
-          delay(10);
-        }
-    }
-
-    /// Request new data from writer
-    void requestData() {
-        req.size = p_out->availableForWrite();
-        req.increment();
-        p_in->write((const uint8_t*)&req, sizeof(req));
-        p_in->flush();
-    }
-
-    /// Reads the protocol record
-    void readProtocol(AudioHeader*data, int len){
-        const static int header_size = sizeof(header);
-        memcpy(data, &header, header_size);
-        int read_size = len-header_size;
-        waitFor(read_size);
-        readBytes((uint8_t*)data+header_size, read_size);
-    }
+  /// Reads the protocol record
+  void readProtocol(AudioHeader *data, int len) {
+    const static int header_size = sizeof(header);
+    memcpy(data, &header, header_size);
+    int read_size = len - header_size;
+    waitFor(read_size);
+    readBytes((uint8_t *)data + header_size, read_size);
+  }
 };
-
 
 /**
  * @brief Configure Throttle setting
@@ -473,7 +563,7 @@ class AudioSyncReader: public AudioStreamX {
  * @copyright GPLv3
  */
 struct ThrottleConfig : public AudioBaseInfo {
-  ThrottleConfig(){
+  ThrottleConfig() {
     sample_rate = 44100;
     bits_per_sample = 16;
     channels = 2;
@@ -482,12 +572,13 @@ struct ThrottleConfig : public AudioBaseInfo {
 };
 
 /**
- * @brief Throttle the sending of the audio data to limit it to the indicated sample rate.
+ * @brief Throttle the sending of the audio data to limit it to the indicated
+ * sample rate.
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 class Throttle {
-public:
+ public:
   Throttle() = default;
 
   void begin(ThrottleConfig info) {
@@ -511,10 +602,10 @@ public:
     }
   }
 
-protected:
+ protected:
   unsigned long start_time;
   ThrottleConfig info;
   int bytesPerSample;
 };
 
-} // namespace audio_tools
+}  // namespace audio_tools

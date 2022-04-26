@@ -3,15 +3,16 @@
 #include "AudioConfig.h"
 #ifdef USE_URL_ARDUINO
 
-#ifdef ESP8266
+#if defined(ESP32)
+#include <Client.h>
+#include <WiFiClientSecure.h>
+#include <esp_wifi.h>
+#elif defined(ESP8266)
 #include <ESP8266WiFi.h>
 #elif defined(IS_DESKTOP)
 #include <Client.h>
 #include <WiFiClient.h>
 typedef WiFiClient WiFiClientSecure;
-#else 
-#include <Client.h>
-#include <WiFiClientSecure.h>
 #endif
 
 #include "AudioHttp/HttpRequest.h"
@@ -148,7 +149,11 @@ class URLStreamDefault : public AbstractURLStream {
         /// Defines the client timeout
         virtual void setTimeout(int ms){
             clientTimeout = ms;
-         }
+        }
+
+        void setPowerSave(bool ps){
+            is_power_save = ps;
+        }
 
 
     protected:
@@ -170,14 +175,11 @@ class URLStreamDefault : public AbstractURLStream {
         WiFiClientSecure *clientSecure=nullptr;
         int clientTimeout = URL_CLIENT_TIMEOUT; // 60000;
         unsigned long handshakeTimeout = URL_HANDSHAKE_TIMEOUT; //120000
+        bool is_power_save = false;
 
         void setTimeouts() {
             // set regular timeout
             getClient(url.isSecure()).setTimeout(clientTimeout);
-            // There is a bug in IDF 4!
-            if (clientSecure!=nullptr){
-                clientSecure->setHandshakeTimeout(handshakeTimeout);
-            }
         }
 
         /// Process the Http request and handle redirects
@@ -188,6 +190,18 @@ class URLStreamDefault : public AbstractURLStream {
 
             // set timeout
             setTimeouts();
+            // Performance optimization for ESP32
+#ifdef ESP32
+            // There is a bug in IDF 4!
+            if (clientSecure!=nullptr){
+                clientSecure->setHandshakeTimeout(handshakeTimeout);
+            }
+
+            if (!is_power_save){
+                esp_wifi_set_ps(WIFI_PS_NONE);
+            }
+#endif
+
             int status_code = request.process(action, url, reqMime, reqData, len);
             // redirect
             while (request.reply().isRedirectStatus()){
