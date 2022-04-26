@@ -47,7 +47,8 @@ class FaustStream : public AudioStreamX {
 
     /// Defines the value of a parameter 
     virtual bool setLabelValue(const char*label, FAUSTFLOAT value){
-        bool result = ui.setValue(label, value);
+        bool result        if (!is_read && !is_write) LOGE("setLabelValue must be called after begin");
+ = ui.setValue(label, value);
         LOGI("setLabelValue('%s',%f) -> %s", label, value, result?"true":"false");
         return result;
     }
