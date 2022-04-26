@@ -629,4 +629,33 @@ class GeneratorMixer : public SoundGenerator<T> {
 
 };
 
+/**
+ * @brief Generates a test signal which is easy to check because the values are incremented or decremented by 1
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ * @tparam T 
+ */
+template <class T>
+class TestGenerator : public SoundGenerator<T>{
+    public:
+        TestGenerator(T max=1000, T inc=1){
+            this->max=max;
+        }
+
+        T readSample() override {
+            value += inc;
+            if (abs(value)>=max){
+                inc = -inc;
+                value += (inc * 2);
+            }
+            return value;
+        }
+
+    protected:
+        T max;
+        T value=0;
+        T inc=1;
+
+};
+
 }

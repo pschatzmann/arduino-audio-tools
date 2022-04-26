@@ -258,6 +258,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define USE_TYPETRAITS
 #define USE_EFFECTS_SUITE
 #define USE_TIMER
+#define USE_URL_ARDUINO
 //#define USE_ESP8266_AUDIO
 
 #define PIN_PWM_START 12
@@ -269,6 +270,10 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define PIN_I2S_MUTE 23
 #define SOFT_MUTE_VALUE LOW  
 #define PIN_CS SS
+
+#define URL_CLIENT_TIMEOUT 60000;
+#define URL_HANDSHAKE_TIMEOUT 120000
+
 #endif
 
 //------ NANO33BLE ----------
