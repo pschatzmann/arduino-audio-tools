@@ -29,8 +29,8 @@ void setup(void) {
 
   // Setup Faust volume control
   auto cfg = faust.defaultConfig();
-  faust.setLabelValue("0x00", 0.5);
   faust.begin(cfg);
+  faust.setLabelValue("0x00", 0.5);
 
   // Setup sine wave generator
   sineWave.begin(cfg.channels, cfg.sample_rate, N_B4);
