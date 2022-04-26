@@ -190,13 +190,13 @@ class URLStreamDefault : public AbstractURLStream {
 
             // set timeout
             setTimeouts();
-            // Performance optimization for ESP32
 #ifdef ESP32
             // There is a bug in IDF 4!
             if (clientSecure!=nullptr){
                 clientSecure->setHandshakeTimeout(handshakeTimeout);
             }
-
+            
+            // Performance optimization for ESP32
             if (!is_power_save){
                 esp_wifi_set_ps(WIFI_PS_NONE);
             }
