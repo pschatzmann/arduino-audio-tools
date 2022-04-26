@@ -21,8 +21,8 @@ WiFiClient client;
 I2SStream out; 
 MeasuringStream outTimed(out);
 StreamCopy copier(outTimed, client);     
-const char* ssid     = "yourssid";
-const char* password = "yourpasswd";
+const char* ssid     = "Phil Schatzmann";
+const char* password = "sabrina01";
 
 void setup() {
   Serial.begin(115200);
@@ -36,6 +36,9 @@ void setup() {
   }
   Serial.println();
   Serial.println(WiFi. localIP());
+
+  // Performance Hack              
+  esp_wifi_set_ps(WIFI_PS_NONE);
 
   // start server
   server.begin();

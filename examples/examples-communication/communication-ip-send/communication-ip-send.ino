@@ -23,7 +23,7 @@ StreamCopy copier(clientTimed, sound, 256);  // copies sound into i2s
 const char *ssid = "ssid";
 const char *password = "password";
 const char *client_address = "192.168.1.33"; // update based on your receive ip
-uint16_t port = 80;
+uint16_t port = 8000;
 
 
 void setup() {
@@ -39,8 +39,11 @@ void setup() {
   Serial.println();
   Serial.println(WiFi. localIP());
 
-  // Try to connect to ip / port
+  // Performance Hack              
   client.setNoDelay(true);
+  esp_wifi_set_ps(WIFI_PS_NONE);
+
+  // Try to connect to ip / port
   while (!client.connect(client_address, port)) {
     Serial.println("trying to connect...");
     delay(5000);

@@ -36,6 +36,9 @@ void setup() {
   Serial.println();
   Serial.println(WiFi. localIP());
 
+  // Performance Hack              
+  esp_wifi_set_ps(WIFI_PS_NONE);
+
   // start server
   server.begin();
 
