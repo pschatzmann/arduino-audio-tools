@@ -21,13 +21,23 @@ namespace audio_tools {
 class ICYStreamDefault : public AbstractURLStream {
         
     public:
+        ICYStreamDefault(int readBufferSize=DEFAULT_BUFFER_SIZE){
+            LOGI(LOG_METHOD);
+            url = new URLStreamDefault(readBufferSize);
+            checkUrl();
+        }
+
+        ICYStreamDefault(Client &clientPar, int readBufferSize=DEFAULT_BUFFER_SIZE){
+            LOGI(LOG_METHOD);
+            url = new URLStreamDefault(clientPar, readBufferSize);
+            checkUrl();
+        }
+
         /// Default constructor
         ICYStreamDefault(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE) {
             LOGI(LOG_METHOD);
             url = new URLStreamDefault(network, password, readBufferSize);
-            if (url==nullptr){
-                LOGE("Not enough memory!");
-            }
+            checkUrl();
         }
 
         ~ICYStreamDefault(){
@@ -156,6 +166,12 @@ class ICYStreamDefault : public AbstractURLStream {
         MetaDataICY icy; // icy state machine
         void (*callback)(MetaDataType info, const char* str, int len)=nullptr;
 
+        void checkUrl() {
+            if (url==nullptr){
+                LOGE("Not enough memory!");
+            }
+        }
+
 };
 
 #ifndef USE_URLSTREAM_TASK
@@ -166,6 +182,15 @@ class ICYStreamDefault : public AbstractURLStream {
  */
 class ICYStream : public ICYStreamDefault {
     public:
+        ICYStream(int readBufferSize=DEFAULT_BUFFER_SIZE)
+        :ICYStreamDefault(readBufferSize){
+            LOGI(LOG_METHOD);
+        }
+        ICYStream(Client &clientPar, int readBufferSize=DEFAULT_BUFFER_SIZE)
+        :ICYStreamDefault(clientPar, readBufferSize){
+            LOGI(LOG_METHOD);
+        }
+
         ICYStream(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE)
         :ICYStreamDefault(network,password,readBufferSize) {            
             LOGI(LOG_METHOD);
