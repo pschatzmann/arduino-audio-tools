@@ -26,7 +26,6 @@ struct ESPNowStreamConfig {
   uint16_t buffer_size = ESP_NOW_MAX_DATA_LEN;
   uint16_t buffer_count = 20;
   void (*recveive_cb)(const uint8_t *mac_addr, const uint8_t *data, int data_len)=nullptr;
-
 };
 
 /**
@@ -55,23 +54,31 @@ class ESPNowStream : public AudioStreamX {
 
   /// Initialization of ESPNow
   bool begin() {
-    begin(cfg);
+    return begin(cfg);
   }
 
   /// Initialization of ESPNow incl WIFI
   bool begin(ESPNowStreamConfig cfg) {
     this->cfg = cfg;
+    WiFi.mode(cfg.wifi_mode);
 
     // set mac address
     if (cfg.mac_address!=nullptr){
+      LOGI("setting mac %s", cfg.mac_address);
       byte mac[ESP_NOW_KEY_LEN];
       str2mac(cfg.mac_address, mac);
-      esp_base_mac_addr_set(mac);
-      available_to_write = cfg.buffer_size;
-      LOGI("setting %s", cfg.mac_address);
+      if (esp_wifi_set_mac((wifi_interface_t) getInterface() , mac)!= ESP_OK){
+        LOGE("Could not set mac address");
+        return false;
+      }
+      // checking if address has been updated
+      const char* addr = macAddress();
+      if (strcmp(addr,cfg.mac_address)!=0){
+        LOGE("Wrong mac address: %s", addr);
+        return false;
+      }
     }
 
-    WiFi.mode(cfg.wifi_mode);
     if (cfg.ssid != nullptr && cfg.password != nullptr) {
       WiFi.begin(cfg.ssid, cfg.password);
       while (WiFi.status() != WL_CONNECTED) {
@@ -127,7 +134,7 @@ class ESPNowStream : public AudioStreamX {
   bool addPeer(const char *address) {
     esp_now_peer_info_t peer;
     peer.channel = 0;
-    peer.ifidx = ESP_IF_WIFI_STA;
+    peer.ifidx = getInterface();
     peer.encrypt = false;
 
     if (!str2mac(address, peer.peer_addr)) {
@@ -197,6 +204,23 @@ class ESPNowStream : public AudioStreamX {
     }
   }
 
+  wifi_interface_t getInterface() {
+    // define wifi_interface_t
+    wifi_interface_t result;
+    switch(cfg.wifi_mode){
+      case WIFI_STA:
+        result = (wifi_interface_t)ESP_IF_WIFI_STA;
+        break;
+      case WIFI_AP:
+        result = (wifi_interface_t)ESP_IF_WIFI_AP;
+        break;
+      default:
+        result = (wifi_interface_t)0;
+        break;
+    }
+    return result;
+  }
+
   /// Initialization
   bool setup() {
     esp_err_t result = esp_now_init();
@@ -213,6 +237,7 @@ class ESPNowStream : public AudioStreamX {
     if (cfg.use_send_ack){
       esp_now_register_send_cb(send);
     }
+    available_to_write = cfg.buffer_size;
     is_init = result == ESP_OK;
     return is_init;
   }
