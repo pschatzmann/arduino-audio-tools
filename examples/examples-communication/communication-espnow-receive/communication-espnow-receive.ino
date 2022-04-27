@@ -16,8 +16,10 @@
 uint16_t sample_rate = 10000;
 uint8_t channels = 1;  // The stream will have 2 channels
 ESPNowStream now;
+MeasuringStream now1(now);
+
 I2SStream out; 
-StreamCopy copier(out, now);     
+StreamCopy copier(out, now1);     
 const char *peers[] = {"A8:48:FA:0B:93:02"};
 
 void setup() {
@@ -37,9 +39,9 @@ void setup() {
   config.bits_per_sample = 16;
   out.begin(config);
 
-  Serial.println("started...");
+  Serial.println("Receiver started...");
 }
 
 void loop() { 
-    copier.copy();
+  copier.copy();
 }

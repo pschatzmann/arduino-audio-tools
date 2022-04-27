@@ -32,9 +32,9 @@ void setup() {
 
   // Setup sine wave
   sineWave.begin(channels, sample_rate, N_B4);
-  Serial.println("started...");
+  Serial.println("Sender started...");
 }
 
 void loop() { 
-    copier.copy();
+  copier.copy();
 }
