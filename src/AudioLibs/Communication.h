@@ -79,7 +79,7 @@ class ESPNowStream : public AudioStreamX {
       }
     }
 
-    if (cfg.ssid != nullptr && cfg.password != nullptr) {
+    if (WiFi.status() != WL_CONNECTED && cfg.ssid != nullptr && cfg.password != nullptr) {
       WiFi.begin(cfg.ssid, cfg.password);
       while (WiFi.status() != WL_CONNECTED) {
         Serial.print('.');
