@@ -12,8 +12,11 @@ namespace audio_tools {
 class ESPNowStream;
 ESPNowStream *ESPNowStreamSelf = nullptr;
 
-// typedef byte mac[6] macaddr_t;
-
+/**
+ * @brief Configuration for ESP-NOW protocol
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
 struct ESPNowStreamConfig {
   wifi_mode_t wifi_mode = WIFI_STA;
   const char *mac_address = nullptr;
@@ -26,10 +29,13 @@ struct ESPNowStreamConfig {
   uint16_t buffer_size = ESP_NOW_MAX_DATA_LEN;
   uint16_t buffer_count = 20;
   void (*recveive_cb)(const uint8_t *mac_addr, const uint8_t *data, int data_len)=nullptr;
+  // to encrypt set primary_master_key and local_master_key to 16 byte strings
+  const char* primary_master_key = nullptr;
+  const char* local_master_key = nullptr;
 };
 
 /**
- * @brief ESPNow as Stream
+ * @brief ESPNow as Arduino Stream
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -137,6 +143,11 @@ class ESPNowStream : public AudioStreamX {
     peer.ifidx = getInterface();
     peer.encrypt = false;
 
+    if (isEncrypted()){
+      peer.encrypt = true;
+      strncpy((char*)peer.lmk, cfg.local_master_key, 16);
+    }
+
     if (!str2mac(address, peer.peer_addr)) {
       LOGE("addPeer - Invalid address: %s", address);
       return false;
@@ -204,6 +215,10 @@ class ESPNowStream : public AudioStreamX {
     }
   }
 
+  bool isEncrypted() {
+    return cfg.primary_master_key != nullptr && cfg.local_master_key!=nullptr;
+  }
+
   wifi_interface_t getInterface() {
     // define wifi_interface_t
     wifi_interface_t result;
@@ -229,6 +244,12 @@ class ESPNowStream : public AudioStreamX {
     } else {
       LOGE("esp_now_init: %d", result);
     }
+
+    // encryption is optional
+    if (isEncrypted()){
+      esp_now_set_pmk((uint8_t *)cfg.primary_master_key);
+    }
+
     if (cfg.recveive_cb!=nullptr){
       esp_now_register_recv_cb(cfg.recveive_cb);
     } else {
@@ -259,34 +280,31 @@ class ESPNowStream : public AudioStreamX {
   static void default_recv_cb(const uint8_t *mac_addr, const uint8_t *data,
                               int data_len) {
     LOGD("rec_cb: %d", data_len);
+    // blocking write
     while (ESPNowStreamSelf->buffer.availableForWrite()<data_len){
       delay(1);
     }
-    // if (data_len>available) {
-    //   LOGE("Buffer overflow");
-    //   int overflow = data_len-available;
-    //   // make space in buffer
-    //   for (int j=0;j<overflow;j++){
-    //     ESPNowStreamSelf->buffer.read();
-    //   }
-    // } 
     ESPNowStreamSelf->buffer.writeArray(data, data_len);
   }
 
   static void default_send_cb(const uint8_t *mac_addr,
                               esp_now_send_status_t status) {
-    static uint8_t first_mac[8] = {0};
+    static uint8_t first_mac[ESP_NOW_KEY_LEN] = {0};
     // we use the first confirming mac_addr for further confirmations and ignore
     // others
     if (first_mac[0] == 0) {
-      strcpy((char *)first_mac, (char *)mac_addr);
+      strncpy((char *)first_mac, (char *)mac_addr, ESP_NOW_KEY_LEN);
     }
     LOGD("default_send_cb - %s -> %s", ESPNowStreamSelf->mac2str(mac_addr), status==ESP_NOW_SEND_SUCCESS?"+":"-");
-    ESPNowStreamSelf->available_to_write = ESPNowStreamSelf->cfg.buffer_size;
-    if (status == ESP_NOW_SEND_SUCCESS) {
-      ESPNowStreamSelf->is_write_ok = true;
-    } else {
-      ESPNowStreamSelf->is_write_ok = false;
+    
+    // ignore others
+    if (strncmp((char*)mac_addr, (char*)first_mac, ESP_NOW_KEY_LEN)==0){
+      ESPNowStreamSelf->available_to_write = ESPNowStreamSelf->cfg.buffer_size;
+      if (status == ESP_NOW_SEND_SUCCESS) {
+        ESPNowStreamSelf->is_write_ok = true;
+      } else {
+        ESPNowStreamSelf->is_write_ok = false;
+      }
     }
   }
 };
