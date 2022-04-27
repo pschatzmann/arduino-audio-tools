@@ -21,13 +21,10 @@ WiFiClient client;
 I2SStream out; 
 MeasuringStream outTimed(out);
 StreamCopy copier(outTimed, client);     
-const char* ssid     = "Phil Schatzmann";
-const char* password = "sabrina01";
+const char *ssid = "ssid";
+const char *password = "password";
 
-void setup() {
-  Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
-
+void connectWifi(){
   // connect to WIFI
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
@@ -39,6 +36,13 @@ void setup() {
 
   // Performance Hack              
   esp_wifi_set_ps(WIFI_PS_NONE);
+}
+
+void setup() {
+  Serial.begin(115200);
+  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+
+  connectWifi();
 
   // start server
   server.begin();
@@ -60,7 +64,6 @@ void loop() {
   // get a new connection if necessary
   if (!client){
     client = server.available();  
-    client.setNoDelay(true);
   }
   // copy data if we are connected
   if (client.connected()){
