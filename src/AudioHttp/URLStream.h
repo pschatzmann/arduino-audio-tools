@@ -151,6 +151,7 @@ class URLStreamDefault : public AbstractURLStream {
             clientTimeout = ms;
         }
 
+        /// if set to true, it activates the power save mode which comes at the cost of porformance! - By default this is deactivated.
         void setPowerSave(bool ps){
             is_power_save = ps;
         }
@@ -195,7 +196,7 @@ class URLStreamDefault : public AbstractURLStream {
             if (clientSecure!=nullptr){
                 clientSecure->setHandshakeTimeout(handshakeTimeout);
             }
-            
+
             // Performance optimization for ESP32
             if (!is_power_save){
                 esp_wifi_set_ps(WIFI_PS_NONE);
