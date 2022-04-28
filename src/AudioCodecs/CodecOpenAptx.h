@@ -187,7 +187,7 @@ class OpenAptxEncoder : public AudioEncoder {
   operator boolean() { return ctx != nullptr; }
 
   virtual size_t write(const void *in_ptr, size_t in_size) {
-    size_t written;
+    size_t written=0;
 
     size_t result = aptx_encode(ctx, (const uint8_t*) in_ptr, in_size, output_buffer,
                                sizeof(output_buffer), &written);
