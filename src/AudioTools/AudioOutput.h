@@ -310,7 +310,7 @@ class EncodedAudioStream : public AudioPrint {
 
         /// Define object which need to be notified if the basinfo is changing
         void setNotifyAudioChange(AudioBaseInfoDependent &bi) override {
-             LOGD(LOG_METHOD);
+            LOGI(LOG_METHOD);
             decoder_ptr->setNotifyAudioChange(bi);
         }
 
@@ -363,7 +363,7 @@ class EncodedAudioStream : public AudioPrint {
         }
         /// Ends the processing
         void end() {
-             LOGD(LOG_METHOD);
+             LOGI(LOG_METHOD);
             decoder_ptr->end();
             encoder_ptr->end();
             active = false;
@@ -373,6 +373,7 @@ class EncodedAudioStream : public AudioPrint {
         virtual size_t write(const uint8_t *data, size_t len) override {
             LOGD("%s: %zu", LOG_METHOD, len);
             if(len==0) {
+                LOGI("write: %d",0);
                 return 0;
             }
             
@@ -391,7 +392,6 @@ class EncodedAudioStream : public AudioPrint {
             return ptr_out->availableForWrite();
         }
         
-
         /// Returns true if status is active and we still have data to be processed
         operator bool() {
             return active;

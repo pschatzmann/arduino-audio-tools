@@ -20,6 +20,18 @@ namespace audio_tools {
 class ICYStream : public AbstractURLStream {
     public:
 
+        ICYStream(int readBufferSize=DEFAULT_BUFFER_SIZE){
+            LOGI(LOG_METHOD);
+            p_urlStream = new ICYStreamDefault(readBufferSize);
+            taskStream.setInput(*p_urlStream);
+        }
+        
+        ICYStream(Client &clientPar, int readBufferSize=DEFAULT_BUFFER_SIZE){
+            LOGI(LOG_METHOD);
+            p_urlStream = new ICYStreamDefault(clientPar, readBufferSize);
+            taskStream.setInput(*p_urlStream);
+        }
+
         ICYStream(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE) {
             LOGI(LOG_METHOD);
             p_urlStream = new ICYStreamDefault(network, password, readBufferSize);
