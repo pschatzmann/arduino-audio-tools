@@ -289,6 +289,28 @@ class EncodedAudioStream : public AudioPrint {
             active = false;
         }
 
+        /// Constructor for AudioStream with automatic notification of audio changes 
+        EncodedAudioStream(AudioStream *outputStream, AudioEncoder *encoder) {
+            LOGD(LOG_METHOD);
+            ptr_out = outputStream;
+            encoder_ptr = encoder;
+            encoder_ptr->setOutputStream(*outputStream);
+            setNotifyAudioChange(*outputStream);
+            writer_ptr = encoder_ptr;
+            active = false;
+        }
+
+        /// Constructor for AudioPrint with automatic notification of audio changes 
+        EncodedAudioStream(AudioPrint *outputStream, AudioEncoder *encoder) {
+            LOGD(LOG_METHOD);
+            ptr_out = outputStream;
+            encoder_ptr = encoder;
+            encoder_ptr->setOutputStream(*outputStream);
+            setNotifyAudioChange(*outputStream);
+            writer_ptr = encoder_ptr;
+            active = false;
+        }
+
         /**
          * @brief Construct a new Encoded Audio Stream object - the Output and Encoder/Decoder needs to be defined with the begin method
          * 
