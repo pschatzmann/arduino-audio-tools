@@ -101,7 +101,7 @@ class Vector {
     inline Vector(int size, T value) {
       resize(size);
       for (int j=0;j< size;j++){
-        data[j] = value;
+        p_data[j] = value;
       }
     }
 
@@ -109,7 +109,7 @@ class Vector {
     inline Vector( Vector<T> &copyFrom) {
       resize_internal(copyFrom.size(), false);
       for (int j=0;j<copyFrom.size();j++){
-        data[j] = copyFrom[j];
+        p_data[j] = copyFrom[j];
       }
       this->len = copyFrom.size();
     }
@@ -119,14 +119,14 @@ class Vector {
       this->len = to - from; 
       resize_internal(this->len, false);
       for (size_t j=0;j<this->len;j++){
-        data[j] = from[j];
+        p_data[j] = from[j];
       }
     }
 
     inline  ~Vector() {
       clear();
       shrink_to_fit();
-      delete [] this->data;
+      delete [] this->p_data;
     }
 
     inline void clear() {
@@ -143,14 +143,14 @@ class Vector {
 
     inline void push_back(T value){
       resize_internal(len+1, true);
-      data[len] = value;
+      p_data[len] = value;
       len++;
     }
 
     inline void push_front(T value){
       resize_internal(len+1, true);
-      memmove(data,data+1,len*sizeof(T));
-      data[0] = value;
+      memmove(p_data,p_data+1,len*sizeof(T));
+      p_data[0] = value;
       len++;
     }
 
@@ -164,7 +164,7 @@ class Vector {
         if (len>0) {
           len--;
           if (len>0){
-            memmove(data, data+1,len*sizeof(T));
+            memmove(p_data, p_data+1,len*sizeof(T));
           }
         }
     }
@@ -176,7 +176,7 @@ class Vector {
         this->len = newLen;
         int pos = 0;
         for (auto ptr = v1; ptr != v2; ptr++) {
-            data[pos++] = *ptr;
+            p_data[pos++] = *ptr;
         }    
     }
 
@@ -184,45 +184,45 @@ class Vector {
         resize_internal(number, false);
         this->len = number;
         for (int j=0;j<number;j++){
-            data[j]=value;
+            p_data[j]=value;
         }
     }
 
     inline void swap(Vector<T> &in){
       // save data
-      T *dataCpy = data;
+      T *dataCpy = p_data;
       int bufferLenCpy = bufferLen;
       int lenCpy = len;
       // swap this
-      data = in.data;
+      p_data = in.p_data;
       len = in.len;
       bufferLen = in.bufferLen;
       // swp in
-      in.data = dataCpy;
+      in.p_data = dataCpy;
       in.len = lenCpy;
       in.bufferLen = bufferLenCpy;
     }
 
     inline T &operator[](int index) {
-      return data[index];
+      return p_data[index];
     }
 
     inline Vector<T> &operator=(Vector<T> &copyFrom) {
       resize_internal(copyFrom.size(), false);
       for (int j=0;j<copyFrom.size();j++){
-        data[j] = copyFrom[j];
+        p_data[j] = copyFrom[j];
       }
       this->len = copyFrom.size();
     }
 
     inline T &operator[] (const int index) const {
-      return data[index];
+      return p_data[index];
     }
 
     inline bool resize(int newSize, T value){
       if (resize(newSize)){
         for (int j=0;j<newSize;j++){
-          data[j]=value;
+          p_data[j]=value;
         }
         return true;
       }
@@ -245,15 +245,15 @@ class Vector {
     }
                        
     inline iterator begin(){
-      return iterator(data, 0);
+      return iterator(p_data, 0);
     }
 
     inline T& back(){
-      return *iterator(data+(len-1), len-1);
+      return *iterator(p_data+(len-1), len-1);
     }
 
     inline iterator end(){
-      return iterator(data+len, len);
+      return iterator(p_data+len, len);
     }
 
     // removes a single element
@@ -262,31 +262,35 @@ class Vector {
       if (pos<len){
           int lenToEnd = len - pos - 1;
           // call destructor on data to be erased
-          data[pos].~T();
+          p_data[pos].~T();
           // shift values by 1 position
-          memmove((void*) &data[pos],(void*)(&data[pos+1]),lenToEnd*sizeof(T));
+          memmove((void*) &p_data[pos],(void*)(&p_data[pos+1]),lenToEnd*sizeof(T));
           // make sure that we have a valid object at the end
-          data[len-1] = T();
+          p_data[len-1] = T();
           len--;
       }
+    }
+
+    T* data(){
+      return p_data;
     }
 
   protected:
     int bufferLen;
     int len = 0;
-    T *data = nullptr;
+    T *p_data = nullptr;
 
     inline void resize_internal(int newSize, bool copy, bool shrink=false)  {
       //bool withNewSize = false;
-      if (newSize>bufferLen || this->data==nullptr ||shrink){
+      if (newSize>bufferLen || this->p_data==nullptr ||shrink){
         //withNewSize = true;            
-        T* oldData = data;
+        T* oldData = p_data;
         int oldBufferLen = this->bufferLen;
-        this->data = new T[newSize+1];
+        this->p_data = new T[newSize+1];
         this->bufferLen = newSize;  
         if (oldData != nullptr) {
           if(copy && this->len > 0){
-              memcpy((void*)data,(void*) oldData, this->len*sizeof(T));
+              memcpy((void*)p_data,(void*) oldData, this->len*sizeof(T));
           }
           if (shrink){
             cleanup(oldData, newSize, oldBufferLen);
@@ -296,9 +300,9 @@ class Vector {
       }
     }
 
-    void cleanup(T*data, int from, int to){
+    void cleanup(T*p_data, int from, int to){
       for (int j=from;j<to;j++){
-        data[j].~T();
+        p_data[j].~T();
       }
     }
 };

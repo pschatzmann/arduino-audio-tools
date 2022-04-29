@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AudioTools/AudioOutput.h"
+#include "AudioLibs/FFT/FFTWindows.h"
 
 namespace audio_tools {
 
@@ -38,6 +39,8 @@ struct AudioFFTConfig : public  AudioBaseInfo {
     uint8_t channel_used = 0; 
     int length=8192;
     int stride=0;
+    /// Optional window function
+    WindowFunction *window_function = nullptr;  
 };
 
 /**
@@ -88,6 +91,10 @@ class AudioFFTBase : public AudioPrint {
                 return false;
             }
             p_driver->begin(cfg.length);
+            if (cfg.window_function!=nullptr){
+                cfg.window_function->begin(cfg.length);
+            }
+
             current_pos = 0;
             return p_driver->isValid();
         }
@@ -243,10 +250,16 @@ class AudioFFTBase : public AudioPrint {
         void processSamples(const void *data, size_t byteCount) {
             T *dataT = (T*) data;
             T sample;
+            float sample_windowed;
             int samples = byteCount/sizeof(T);
             for (int j=0; j<samples; j+=cfg.channels){
                 sample = dataT[j+cfg.channel_used];
-                p_driver->setValue(current_pos, sample);
+                sample_windowed = sample;
+                // optionally apply window function
+                if (cfg.window_function!=nullptr){
+                    sample_windowed = cfg.window_function->factor(current_pos) * sample;
+                }
+                p_driver->setValue(current_pos, sample_windowed);
                 writeStrideBuffer((uint8_t*)&sample, sizeof(T));
                 if (++current_pos>=cfg.length){
                     fft();
