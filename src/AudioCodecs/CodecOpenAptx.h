@@ -10,6 +10,7 @@
  */
 #pragma once
 #include "openaptx.h"
+#include "AudioTools/AudioTypes.h"
 
 namespace audio_tools {
 
