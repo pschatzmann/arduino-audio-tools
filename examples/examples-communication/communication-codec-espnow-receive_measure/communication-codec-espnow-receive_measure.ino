@@ -11,17 +11,17 @@
 
 #include "AudioTools.h"
 #include "AudioLibs/Communication.h"
-#include "AudioCodecs/CodecOpenAptx.h"
+#include "AudioCodecs/CodecSBC.h"
 
 ESPNowStream now;
-MeasuringStream out;
-EncodedAudioStream decoder(&out, new OpenAptxDecoder()); // decode and write to I2S
+MeasuringStream out(1000, &Serial);
+EncodedAudioStream decoder(&out, new SBCDecoder()); // decode and write to I2S
 StreamCopy copier(decoder, now);     
 const char *peers[] = {"A8:48:FA:0B:93:02"};
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
 
   // start esp-now
   auto cfg = now.defaultConfig();
