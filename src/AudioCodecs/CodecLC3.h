@@ -1,7 +1,7 @@
 /**
  * @file CodecLC3.h
  * @author Phil Schatzmann
- * @brief Codec for aptx using https://github.com/pschatzmann/arduino-liblc3
+ * @brief Codec for lc3 using https://github.com/pschatzmann/arduino-liblc3
  * @version 0.1
  * @date 2022-04-24
  *
@@ -16,7 +16,7 @@
 namespace audio_tools {
 
 /**
- * @brief Decoder for OpenAptx. Depends on
+ * @brief Decoder for LC3. Depends on
  * https://github.com/pschatzmann/arduino-liblc3
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -28,6 +28,15 @@ class LC3Decoder : public AudioDecoder {
     this->dt_us = dt_us;
     this->info = info;
     this->input_byte_count = inputByteCount;
+  }
+
+  LC3Decoder(int dt_us = 1000,
+             uint16_t inputByteCount = 20) {
+    this->dt_us = dt_us;
+    this->input_byte_count = inputByteCount;
+    info.sample_rate = 44100;
+    info.bits_per_sample = 16;
+    info.channels = 2;
   }
 
   virtual AudioBaseInfo audioInfo() { return info; }
@@ -106,7 +115,7 @@ class LC3Decoder : public AudioDecoder {
 };
 
 /**
- * @brief Encoder for OpenAptx - Depends on
+ * @brief Encoder for LC3 - Depends on
  * https://github.com/pschatzmann/arduino-liblc3
  * @author Phil Schatzmann
  * @copyright GPLv3
