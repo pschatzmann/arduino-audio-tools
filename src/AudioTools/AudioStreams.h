@@ -891,27 +891,30 @@ class VolumeStream : public AudioStreamX {
  */
 class MeasuringStream : public AudioStreamX {
   public:
-    MeasuringStream(int count=10){
+    MeasuringStream(int count=10, Print *logOut=nullptr){
       this->count = count;
       this->max_count = count;
       p_stream = &null;
       p_print = &null;
       start_time = millis();
+      p_logout = logOut;
     }
 
-    MeasuringStream(Print &print, int count=10){
+    MeasuringStream(Print &print, int count=10, Print *logOut=nullptr){
       this->count = count;
       this->max_count = count;
       p_print =&print;
       start_time = millis();
+      p_logout = logOut;
     }
 
-    MeasuringStream(Stream &stream, int count=10){
+    MeasuringStream(Stream &stream, int count=10, Print *logOut=nullptr){
       this->count = count;
       this->max_count = count;
       p_stream =&stream;
       p_print = &stream;
       start_time = millis();
+      p_logout = logOut;
     }
 
         /// Provides the data from all streams mixed together 
@@ -938,6 +941,11 @@ class MeasuringStream : public AudioStreamX {
       return bytes_per_second;
     }
 
+    /// Provides the time when the last measurement was started
+    uint64_t startTime() {
+      return start_time;
+    }
+
   protected:
     int max_count=0;
     int count=0;
@@ -947,6 +955,7 @@ class MeasuringStream : public AudioStreamX {
     int total_bytes = 0;
     int bytes_per_second = 0;
     NullStream null;
+    Print *p_logout=nullptr;
 
     size_t measure(size_t len) {
       count--;
@@ -955,13 +964,25 @@ class MeasuringStream : public AudioStreamX {
       if (count<0){
         uint64_t end_time = millis();
         int time_diff = end_time - start_time; // in ms
-        bytes_per_second = total_bytes / time_diff * 1000;
-        LOGI("Bytes per second: %d", bytes_per_second);
-        count = max_count;
-        total_bytes = 0;
-        start_time = end_time;
+        if (time_diff>0){
+          bytes_per_second = total_bytes / time_diff * 1000;
+          printResult();
+          count = max_count;
+          total_bytes = 0;
+          start_time = end_time;
+        }
       }
       return len;
+    }
+
+    void printResult() {
+        char msg[70];
+        sprintf(msg, "==> Bytes per second: %d", bytes_per_second);
+        if (p_logout!=nullptr){
+          p_logout->println(msg);
+        } else {
+          LOGI(msg);
+        }
     }
 
 };

@@ -36,13 +36,15 @@ class SBCDecoder : public AudioDecoder {
   virtual AudioBaseInfo audioInfo() { return info; }
 
   virtual void begin() {
+    LOGI(LOG_METHOD);
     is_first = true;
     is_active = true;
     sbc_init(&sbc, 0L);
-    sbc.endian = SBC_BE;
+    //sbc.endian = SBC_LE;  
   }
 
   virtual void end() {
+    LOGI(LOG_METHOD);
     sbc_finish(&sbc);
     is_active = false;
   }
@@ -56,27 +58,19 @@ class SBCDecoder : public AudioDecoder {
   operator boolean() { return is_active; }
 
   virtual size_t write(const void *data, size_t length) {
+    LOGD("write: %d",length);
+    if (!is_active) {
+      LOGE("inactive");
+      return 0;
+    }
+
     uint8_t *start = (uint8_t *)data;
     int count = length;
     if (is_first) {
-      size_t result_len = 0;
-      framelen = sbc_decode(&sbc, data, length, result_buffer,
-                            result_buffer_size, &result_len);
-
-      // setup input buffer for subsequent decoding stpes
-      if (input_buffer != nullptr) delete[] input_buffer;
-      input_buffer = new uint8_t[framelen];
-      is_first = false;
+      framelen = firstWrite(data, length);
       start = start + framelen;
       count = length - framelen;
-
-      // audio info
-      setup();
-
-      // provide first decoding result
-      if (result_len > 0) {
-        p_print->write(result_buffer, result_len);
-      }
+      is_first = false;
     }
 
     for (int j = 0; j < count; j++) {
@@ -100,9 +94,10 @@ class SBCDecoder : public AudioDecoder {
   int input_pos = 0;
 
   /// Process audio info
-  void setup() {
+  void setupAudioInfo() {
     info.bits_per_sample = 16;
     info.channels = sbc.mode == SBC_MODE_MONO ? 1 : 2;
+    LOGI("channels: %d", info.channels);
     switch (sbc.frequency) {
       case SBC_FREQ_16000:
         info.sample_rate = 16000;
@@ -121,9 +116,30 @@ class SBCDecoder : public AudioDecoder {
         info.sample_rate = 0;
         break;
     }
+    LOGI("sample_rate: %d", info.sample_rate);
     if (p_notify != nullptr) {
       p_notify->setAudioInfo(info);
     }
+  }
+
+  /// Determines the framelen
+  int firstWrite(const void *data, size_t length) {
+      size_t result_len = 0;
+      int frame_len = sbc_parse(&sbc, data, length);
+
+      // setup audio info
+      setupAudioInfo();
+
+      // setup input buffer for subsequent decoding stpes
+      setupInputBuffer(frame_len);
+
+      return frame_len;
+  }
+
+  void setupInputBuffer(int len) {
+    LOGI("input_buffer: %d", len);
+    if (input_buffer != nullptr) delete[] input_buffer;
+    input_buffer = new uint8_t[len];
   }
 
   /// Build decoding buffer and decode when frame is full
@@ -153,12 +169,13 @@ class SBCDecoder : public AudioDecoder {
  */
 class SBCEncoder : public AudioEncoder {
  public:
-  SBCEncoder(int resultBufferSize = 512, int subbands = 4, int blocks = 4,
+  SBCEncoder(int resultBufferSize = 1024, int subbands = SBC_SB_8, int blocks = SBC_BLK_16,
              int bitpool = 32, int snr = SBC_AM_LOUDNESS) {
     this->subbands = subbands;
     this->blocks = blocks;
     this->bitpool = bitpool;
     this->snr = snr;
+    this->result_buffer_size = resultBufferSize;
     result_buffer = new uint8_t[resultBufferSize];
   }
 
@@ -167,17 +184,25 @@ class SBCEncoder : public AudioEncoder {
     if (buffer != nullptr) delete[] buffer;
   }
 
+  void begin(AudioBaseInfo bi) {
+    setAudioInfo(bi);
+    begin();
+  }
+
   void begin() {
-    if (sizeof(au_hdr) != 24) {
-      /* Sanity check just in case */
-      LOGE("FIXME: sizeof(au_hdr) != 24");
-      return;
-    }
+    LOGI(LOG_METHOD);
     is_first = true;
-    is_active = true;
+    is_active = setup();
+    int codesize = sbc_get_codesize(&sbc);
+    if (codesize != current_codesize) {
+      if (buffer != nullptr) delete[] buffer;
+      buffer = new uint8_t[codesize];
+      current_codesize = codesize;
+    }
   }
 
   virtual void end() {
+    LOGI(LOG_METHOD);
     sbc_finish(&sbc);
     is_active = false;
   }
@@ -188,37 +213,18 @@ class SBCEncoder : public AudioEncoder {
 
   virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
 
-  operator boolean() { is_active; }
+  operator boolean() { return is_active; }
 
   virtual size_t write(const void *in_ptr, size_t in_size) {
+    LOGD("write: %d",in_size);
     if (!is_active) {
+      LOGE("inactive");
       return 0;
     }
-
     const uint8_t *start = (const uint8_t *)in_ptr;
-    int size = in_size;
-
-    /// setup from info in header
-    if (is_first) {
-      is_first = false;
-      start = start + sizeof(au_hdr);
-      size = in_size - sizeof(au_hdr);
-
-      if (!setup(in_ptr, in_size)) {
-        is_active = false;
-        return 0;
-      }
-
-      int codesize = sbc_get_codesize(&sbc);
-      if (codesize != current_codesize) {
-        if (buffer != nullptr) delete[] buffer;
-        buffer = new uint8_t[codesize];
-        current_codesize = codesize;
-      }
-    }
 
     // encode bytes
-    for (int j = 0; j < size; j++) {
+    for (int j = 0; j < in_size; j++) {
       processByte(start[j]);
     }
 
@@ -228,7 +234,6 @@ class SBCEncoder : public AudioEncoder {
  protected:
   AudioBaseInfo info;
   Print *p_print = nullptr;
-  struct au_header au_hdr;
   sbc_t sbc;
   bool is_first = true;
   bool is_active = false;
@@ -236,28 +241,19 @@ class SBCEncoder : public AudioEncoder {
   uint8_t *buffer = nullptr;
   int buffer_pos = 0;
   uint8_t *result_buffer = nullptr;
+  int result_buffer_size = 0;
+  int result_size=0;
   int subbands = 4;
   int blocks = 4;
   int bitpool = 32;
   int snr;
 
   /// Determines audio information and calls sbc_init;
-  bool setup(const void *in_ptr, size_t len) {
-    if (len < (ssize_t)sizeof(au_hdr)) {
-      return false;
-    }
-
-    memmove(&au_hdr, in_ptr, sizeof(au_hdr));
-    if (au_hdr.magic != AU_MAGIC || BE_INT(au_hdr.hdr_size) > 128 ||
-        BE_INT(au_hdr.hdr_size) < sizeof(au_hdr) ||
-        BE_INT(au_hdr.encoding) != AU_FMT_LIN16) {
-      LOGE("Not in Sun/NeXT audio S16_BE format");
-      return false;
-    }
+  bool setup() {
 
     sbc_init(&sbc, 0L);
 
-    switch (BE_INT(info.sample_rate)) {
+    switch (info.sample_rate) {
       case 16000:
         sbc.frequency = SBC_FREQ_16000;
         break;
@@ -271,11 +267,11 @@ class SBCEncoder : public AudioEncoder {
         sbc.frequency = SBC_FREQ_48000;
         break;
       default:
-        LOGE("Invalid sample_rate")
+        LOGE("Invalid sample_rate: %d", info.sample_rate);
         return false;
     }
 
-    switch (BE_INT(info.channels)) {
+    switch (info.channels) {
       case 1:
         sbc.mode = SBC_MODE_MONO;
         break;
@@ -283,12 +279,12 @@ class SBCEncoder : public AudioEncoder {
         sbc.mode = SBC_MODE_STEREO;
         break;
       default:
-        LOGE("Invalid channels")
+        LOGE("Invalid channels: %d", info.channels);
         return false;
     }
 
     sbc.subbands = subbands == 4 ? SBC_SB_4 : SBC_SB_8;
-    sbc.endian = SBC_BE;
+    //sbc.endian = SBC_LE;
 
     sbc.bitpool = bitpool;
     sbc.allocation = snr ? SBC_AM_SNR : SBC_AM_LOUDNESS;
@@ -308,9 +304,12 @@ class SBCEncoder : public AudioEncoder {
       // Encodes ONE input block into ONE output block */
       // ssize_t sbc_encode(sbc_t *sbc, const void *input, size_t input_len,
       // void *output, size_t output_len, ssize_t *written);
-      sbc_encode(&sbc, buffer, current_codesize, result_buffer, 512, &written);
-      if (written > 0) {
-        p_print->write(result_buffer, written);
+      sbc_encode(&sbc, buffer, current_codesize, result_buffer+result_size, result_buffer_size-result_size, &written);
+      result_size+=written;
+      if (result_size+written >= result_buffer_size) {
+        LOGI("result_size: %d (%d)", result_size, written);
+        p_print->write(result_buffer, result_size);
+        result_size = 0;
       }
       buffer_pos = 0;
     }

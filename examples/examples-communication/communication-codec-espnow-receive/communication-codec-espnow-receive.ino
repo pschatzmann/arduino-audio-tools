@@ -10,18 +10,17 @@
 
 #include "AudioTools.h"
 #include "AudioLibs/Communication.h"
-#include "AudioCodecs/CodecOpenAptx.h"
+#include "AudioCodecs/CodecSBC.h"
 
 ESPNowStream now;
-MeasuringStream now1(now);
 I2SStream out; 
-EncodedAudioStream decoder(&out, new OpenAptxDecoder()); // decode and write to I2S
-StreamCopy copier(decoder, now1);     
+EncodedAudioStream decoder(&out, new SBCDecoder(256)); // decode and write to I2S - ESP Now is limited to 256 bytes
+StreamCopy copier(decoder, now);     
 const char *peers[] = {"A8:48:FA:0B:93:02"};
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
 
   // setup esp-now
   auto cfg = now.defaultConfig();
