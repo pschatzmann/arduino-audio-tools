@@ -119,6 +119,9 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>capacity</b> ()</td></
 <tr class="memitem:a87ae43ef9bf093b7a0a28e0b9c0cef4a"><td class="memItemLeft" align="right" valign="top"><a id="a87ae43ef9bf093b7a0a28e0b9c0cef4a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr>
 <tr class="separator:a87ae43ef9bf093b7a0a28e0b9c0cef4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae122a3354c0f6027df004e02d1e10b35"><td class="memItemLeft" align="right" valign="top"><a id="ae122a3354c0f6027df004e02d1e10b35"></a>
+T *&#160;</td><td class="memItemRight" valign="bottom"><b>data</b> ()</td></tr>
+<tr class="separator:ae122a3354c0f6027df004e02d1e10b35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a942518e9ffd604618aa912afbf1378fc"><td class="memItemLeft" align="right" valign="top"><a id="a942518e9ffd604618aa912afbf1378fc"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>empty</b> ()</td></tr>
 <tr class="separator:a942518e9ffd604618aa912afbf1378fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -167,9 +170,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>swap</b> (<a class="e
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a602e134be00260299ed553c872237f70"><td class="memItemLeft" align="right" valign="top"><a id="a602e134be00260299ed553c872237f70"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>cleanup</b> (T *data, int from, int to)</td></tr>
-<tr class="separator:a602e134be00260299ed553c872237f70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8df5ecd240454902b84bb2801f23567f"><td class="memItemLeft" align="right" valign="top"><a id="a8df5ecd240454902b84bb2801f23567f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>cleanup</b> (T *p_data, int from, int to)</td></tr>
+<tr class="separator:a8df5ecd240454902b84bb2801f23567f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb481b067c350fcd0a993788858f549c"><td class="memItemLeft" align="right" valign="top"><a id="acb481b067c350fcd0a993788858f549c"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>resize_internal</b> (int newSize, bool copy, bool shrink=false)</td></tr>
 <tr class="separator:acb481b067c350fcd0a993788858f549c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -179,12 +182,12 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:afe2ec43bc248ea36d36a5aa0497ae216"><td class="memItemLeft" align="right" valign="top"><a id="afe2ec43bc248ea36d36a5aa0497ae216"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>bufferLen</b></td></tr>
 <tr class="separator:afe2ec43bc248ea36d36a5aa0497ae216"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a46d6eb61b808ef5809b5b78f556fc866"><td class="memItemLeft" align="right" valign="top"><a id="a46d6eb61b808ef5809b5b78f556fc866"></a>
-T *&#160;</td><td class="memItemRight" valign="bottom"><b>data</b> = nullptr</td></tr>
-<tr class="separator:a46d6eb61b808ef5809b5b78f556fc866"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a307ac2ad76a382adffe8907ffc020848"><td class="memItemLeft" align="right" valign="top"><a id="a307ac2ad76a382adffe8907ffc020848"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>len</b> = 0</td></tr>
 <tr class="separator:a307ac2ad76a382adffe8907ffc020848"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14db25f109753b897b0f0e908f574112"><td class="memItemLeft" align="right" valign="top"><a id="a14db25f109753b897b0f0e908f574112"></a>
+T *&#160;</td><td class="memItemRight" valign="bottom"><b>p_data</b> = nullptr</td></tr>
+<tr class="separator:a14db25f109753b897b0f0e908f574112"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class T&gt;<br />
