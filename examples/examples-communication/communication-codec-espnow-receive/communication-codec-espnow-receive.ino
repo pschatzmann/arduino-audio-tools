@@ -11,9 +11,11 @@
 #include "AudioTools.h"
 #include "AudioLibs/Communication.h"
 #include "AudioCodecs/CodecSBC.h"
+// #include "AudioLibs/AudioKit.h"
+
 
 ESPNowStream now;
-I2SStream out; 
+I2SStream out;  // or AudioKitStream
 EncodedAudioStream decoder(&out, new SBCDecoder(256)); // decode and write to I2S - ESP Now is limited to 256 bytes
 StreamCopy copier(decoder, now);     
 const char *peers[] = {"A8:48:FA:0B:93:02"};
@@ -25,16 +27,19 @@ void setup() {
   // setup esp-now
   auto cfg = now.defaultConfig();
   cfg.mac_address = "A8:48:FA:0B:93:01";
+  cfg.buffer_count = 50; // encoded buffer
   now.begin(cfg);
   now.addPeers(peers);
-
-  // start decoder
-  decoder.begin();
 
   // start I2S
   Serial.println("starting I2S...");
   auto config = out.defaultConfig(TX_MODE);
+  config.buffer_count = 1; // decoded buffer
   out.begin(config);
+
+  // start decoder
+  decoder.begin();
+
 
   Serial.println("Receiver started...");
 }
