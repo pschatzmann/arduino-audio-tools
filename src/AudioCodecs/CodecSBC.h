@@ -8,9 +8,9 @@
 
 #pragma once
 
+#include "AudioTools/AudioTypes.h"
 #include "sbc.h"
 #include "sbc/formats.h"
-#include "AudioTools/AudioTypes.h"
 
 namespace audio_tools {
 
@@ -40,7 +40,6 @@ class SBCDecoder : public AudioDecoder {
     is_first = true;
     is_active = true;
     sbc_init(&sbc, 0L);
-    //sbc.endian = SBC_LE;  
   }
 
   virtual void end() {
@@ -58,7 +57,7 @@ class SBCDecoder : public AudioDecoder {
   operator boolean() { return is_active; }
 
   virtual size_t write(const void *data, size_t length) {
-    LOGD("write: %d",length);
+    LOGD("write: %d", length);
     if (!is_active) {
       LOGE("inactive");
       return 0;
@@ -68,13 +67,18 @@ class SBCDecoder : public AudioDecoder {
     int count = length;
     if (is_first) {
       framelen = firstWrite(data, length);
-      start = start + framelen;
-      count = length - framelen;
-      is_first = false;
+      // check if we have a valid frame length
+      if (isValidFrameLen(framelen)) {
+        start = start + framelen;
+        count = length - framelen;
+        is_first = false;
+      }
     }
 
-    for (int j = 0; j < count; j++) {
-      processByte(start[j]);
+    if (!is_first){
+      for (int j = 0; j < count; j++) {
+        processByte(start[j]);
+      }
     }
 
     return length;
@@ -122,18 +126,24 @@ class SBCDecoder : public AudioDecoder {
     }
   }
 
+  bool isValidFrameLen(int len){
+    return len > 0 && len < 256;
+  }
+
   /// Determines the framelen
   int firstWrite(const void *data, size_t length) {
-      size_t result_len = 0;
-      int frame_len = sbc_parse(&sbc, data, length);
+    size_t result_len = 0;
+    int frame_len = sbc_parse(&sbc, data, length);
+    if (isValidFrameLen(frame_len)){
 
       // setup audio info
       setupAudioInfo();
 
       // setup input buffer for subsequent decoding stpes
       setupInputBuffer(frame_len);
+    }
 
-      return frame_len;
+    return frame_len;
   }
 
   void setupInputBuffer(int len) {
@@ -169,8 +179,9 @@ class SBCDecoder : public AudioDecoder {
  */
 class SBCEncoder : public AudioEncoder {
  public:
-  SBCEncoder(int resultBufferSize = 1024, int subbands = SBC_SB_8, int blocks = SBC_BLK_16,
-             int bitpool = 32, int snr = SBC_AM_LOUDNESS) {
+  SBCEncoder(int resultBufferSize = 1024, int subbands = SBC_SB_8,
+             int blocks = SBC_BLK_16, int bitpool = 32,
+             int snr = SBC_AM_LOUDNESS) {
     this->subbands = subbands;
     this->blocks = blocks;
     this->bitpool = bitpool;
@@ -216,7 +227,7 @@ class SBCEncoder : public AudioEncoder {
   operator boolean() { return is_active; }
 
   virtual size_t write(const void *in_ptr, size_t in_size) {
-    LOGD("write: %d",in_size);
+    LOGD("write: %d", in_size);
     if (!is_active) {
       LOGE("inactive");
       return 0;
@@ -242,7 +253,7 @@ class SBCEncoder : public AudioEncoder {
   int buffer_pos = 0;
   uint8_t *result_buffer = nullptr;
   int result_buffer_size = 0;
-  int result_size=0;
+  int result_size = 0;
   int subbands = 4;
   int blocks = 4;
   int bitpool = 32;
@@ -250,7 +261,6 @@ class SBCEncoder : public AudioEncoder {
 
   /// Determines audio information and calls sbc_init;
   bool setup() {
-
     sbc_init(&sbc, 0L);
 
     switch (info.sample_rate) {
@@ -284,7 +294,7 @@ class SBCEncoder : public AudioEncoder {
     }
 
     sbc.subbands = subbands == 4 ? SBC_SB_4 : SBC_SB_8;
-    //sbc.endian = SBC_LE;
+    // sbc.endian = SBC_LE;
 
     sbc.bitpool = bitpool;
     sbc.allocation = snr ? SBC_AM_SNR : SBC_AM_LOUDNESS;
@@ -304,9 +314,10 @@ class SBCEncoder : public AudioEncoder {
       // Encodes ONE input block into ONE output block */
       // ssize_t sbc_encode(sbc_t *sbc, const void *input, size_t input_len,
       // void *output, size_t output_len, ssize_t *written);
-      sbc_encode(&sbc, buffer, current_codesize, result_buffer+result_size, result_buffer_size-result_size, &written);
-      result_size+=written;
-      if (result_size+written >= result_buffer_size) {
+      sbc_encode(&sbc, buffer, current_codesize, result_buffer + result_size,
+                 result_buffer_size - result_size, &written);
+      result_size += written;
+      if (result_size + written >= result_buffer_size) {
         LOGI("result_size: %d (%d)", result_size, written);
         p_print->write(result_buffer, result_size);
         result_size = 0;

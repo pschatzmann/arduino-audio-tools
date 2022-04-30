@@ -200,12 +200,14 @@ class AudioKitStream : public AudioStreamX {
     
     // set initial volume
     setVolume(volume_value);
+    is_started = true;
   }
 
   /// Stops the processing
   void end() {
     LOGD(LOG_METHOD);
     kit.end();
+    is_started = false;
   }
 
   /// We get the data via I2S - we expect to fill one buffer size
@@ -245,12 +247,22 @@ class AudioKitStream : public AudioStreamX {
   /// bits_per_samples or channels
   virtual void setAudioInfo(AudioBaseInfo info) {
     LOGI(LOG_METHOD);
-    cfg.sample_rate = info.sample_rate;
-    cfg.bits_per_sample = info.bits_per_sample;
-    cfg.channels = info.channels;
-    kit.begin(cfg.toAudioKitConfig());
-    // update input format
-    converter.setInputInfo(cfg);
+    if (cfg.sample_rate != info.sample_rate
+    || cfg.bits_per_sample != info.bits_per_sample
+    || cfg.channels != info.channels
+    || !is_started) {
+      cfg.sample_rate = info.sample_rate;
+      cfg.bits_per_sample = info.bits_per_sample;
+      cfg.channels = info.channels;
+
+      if(is_started){
+        kit.end();
+      }
+      // update input format
+      converter.setInputInfo(cfg);
+      // start kit with new config
+      kit.begin(cfg.toAudioKitConfig());
+    }
   }
 
   AudioKitStreamConfig config() { return cfg; }
@@ -514,6 +526,7 @@ class AudioKitStream : public AudioStreamX {
   AudioKitStreamAdapter kit_stream = AudioKitStreamAdapter(&kit);
   FormatConverterStream converter = FormatConverterStream(kit_stream);
   AudioBaseInfo output_config;
+  bool is_started = false;
 
   /// Determines the action logic (ActiveLow or ActiveTouch) for the pin
   AudioActions::ActiveLogic getActionLogic(int pin){

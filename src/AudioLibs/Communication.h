@@ -5,8 +5,33 @@
 
 #include "AudioTools/AudioStreams.h"
 #include "AudioTools/Buffers.h"
+#include "esp_private/wifi.h"
+
+#ifdef FAST_ESP_NOW_HACK
+//#undef CONFIG_ESP32_WIFI_AMPDU_TX_ENABLED
+//#undef CONFIG_ESP32_WIFI_AMPDU_RX_ENABLED
+#define CONFIG_ESP32_WIFI_AMPDU_TX_ENABLED 0
+#define CONFIG_ESP32_WIFI_AMPDU_RX_ENABLED 0
+#endif
 
 namespace audio_tools {
+
+/**
+ * @brief A simple RIA locking class for the ESP32
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class Lock {
+ public:
+  Lock(_lock_t &lock) {
+    this->p_lock = &lock;
+    _lock_acquire(p_lock);
+  }
+  ~Lock() { _lock_release(p_lock); }
+
+ protected:
+  _lock_t *p_lock = nullptr;
+};
 
 // forward declarations
 class ESPNowStream;
@@ -23,15 +48,20 @@ struct ESPNowStreamConfig {
   int channel = 0;
   const char *ssid = nullptr;
   const char *password = nullptr;
-  bool use_send_ack = true; // we wait for 
+  bool use_send_ack = true;  // we wait for
   uint16_t delay_after_write_ms = 2;
   uint16_t delay_after_failed_write_ms = 2000;
   uint16_t buffer_size = ESP_NOW_MAX_DATA_LEN;
   uint16_t buffer_count = 20;
-  void (*recveive_cb)(const uint8_t *mac_addr, const uint8_t *data, int data_len)=nullptr;
+  void (*recveive_cb)(const uint8_t *mac_addr, const uint8_t *data,
+                      int data_len) = nullptr;
   // to encrypt set primary_master_key and local_master_key to 16 byte strings
-  const char* primary_master_key = nullptr;
-  const char* local_master_key = nullptr;
+  const char *primary_master_key = nullptr;
+  const char *local_master_key = nullptr;
+
+#ifdef FAST_ESP_NOW_HACK
+  wifi_phy_rate_t rate = WIFI_PHY_RATE_2M_S;
+#endif
 };
 
 /**
@@ -42,6 +72,10 @@ struct ESPNowStreamConfig {
 class ESPNowStream : public AudioStreamX {
  public:
   ESPNowStream() { ESPNowStreamSelf = this; };
+
+  ~ESPNowStream() {
+    if (p_buffer != nullptr) delete p_buffer;
+  }
 
   ESPNowStreamConfig defaultConfig() {
     ESPNowStreamConfig result;
@@ -59,39 +93,52 @@ class ESPNowStream : public AudioStreamX {
   void setReceiveCallback(esp_now_recv_cb_t cb) { receive = cb; }
 
   /// Initialization of ESPNow
-  bool begin() {
-    return begin(cfg);
-  }
+  bool begin() { return begin(cfg); }
 
   /// Initialization of ESPNow incl WIFI
   bool begin(ESPNowStreamConfig cfg) {
     this->cfg = cfg;
     WiFi.mode(cfg.wifi_mode);
+    // setup receive buffer
+    if (p_buffer == nullptr && cfg.buffer_count > 0) {
+      // p_buffer = new NBuffer<uint8_t>(cfg.buffer_size , cfg.buffer_count);
+      p_buffer = new RingBuffer<uint8_t>(cfg.buffer_size * cfg.buffer_count);
+    }
 
     // set mac address
-    if (cfg.mac_address!=nullptr){
+    if (cfg.mac_address != nullptr) {
       LOGI("setting mac %s", cfg.mac_address);
       byte mac[ESP_NOW_KEY_LEN];
       str2mac(cfg.mac_address, mac);
-      if (esp_wifi_set_mac((wifi_interface_t) getInterface() , mac)!= ESP_OK){
+      if (esp_wifi_set_mac((wifi_interface_t)getInterface(), mac) != ESP_OK) {
         LOGE("Could not set mac address");
         return false;
       }
       // checking if address has been updated
-      const char* addr = macAddress();
-      if (strcmp(addr,cfg.mac_address)!=0){
+      const char *addr = macAddress();
+      if (strcmp(addr, cfg.mac_address) != 0) {
         LOGE("Wrong mac address: %s", addr);
         return false;
       }
     }
 
-    if (WiFi.status() != WL_CONNECTED && cfg.ssid != nullptr && cfg.password != nullptr) {
+    if (WiFi.status() != WL_CONNECTED && cfg.ssid != nullptr &&
+        cfg.password != nullptr) {
       WiFi.begin(cfg.ssid, cfg.password);
       while (WiFi.status() != WL_CONNECTED) {
         Serial.print('.');
         delay(1000);
       }
     }
+
+#ifdef FAST_ESP_NOW_HACK
+    LOGI("Setting ESP-NEW rate");
+    if (esp_wifi_internal_set_fix_rate(getInterface(), true, cfg.rate) !=
+        ESP_OK) {
+      LOGW("Could not set rate");
+    }
+#endif
+
     Serial.println();
     Serial.print("mac: ");
     Serial.println(WiFi.macAddress());
@@ -127,7 +174,7 @@ class ESPNowStream : public AudioStreamX {
     bool result = true;
     for (int j = 0; j < size; j++) {
       const char *peer = array[j];
-      if (peer!=nullptr){
+      if (peer != nullptr) {
         if (!addPeer(peer)) {
           result = false;
         }
@@ -143,9 +190,9 @@ class ESPNowStream : public AudioStreamX {
     peer.ifidx = getInterface();
     peer.encrypt = false;
 
-    if (isEncrypted()){
+    if (isEncrypted()) {
       peer.encrypt = true;
-      strncpy((char*)peer.lmk, cfg.local_master_key, 16);
+      strncpy((char *)peer.lmk, cfg.local_master_key, 16);
     }
 
     if (!str2mac(address, peer.peer_addr)) {
@@ -165,12 +212,12 @@ class ESPNowStream : public AudioStreamX {
         size_t send_len = min(open, ESP_NOW_MAX_DATA_LEN);
         esp_err_t rc = esp_now_send(nullptr, data + result, send_len);
         // wait for confirmation
-        if (cfg.use_send_ack){
-          while(available_to_write==0){
+        if (cfg.use_send_ack) {
+          while (available_to_write == 0) {
             delay(1);
           }
         } else {
-          is_write_ok = true; 
+          is_write_ok = true;
         }
         // check status
         if (rc == ESP_OK && is_write_ok) {
@@ -184,8 +231,8 @@ class ESPNowStream : public AudioStreamX {
         delay(cfg.delay_after_write_ms);
       }
 
-      // Wait some time before we retry 
-      if (!is_write_ok){
+      // Wait some time before we retry
+      if (!is_write_ok) {
         delay(cfg.delay_after_failed_write_ms);
       }
     }
@@ -194,35 +241,43 @@ class ESPNowStream : public AudioStreamX {
 
   /// Reeds the data from the peers
   size_t readBytes(uint8_t *data, size_t len) override {
-    return buffer.readArray(data, len);
+    if (p_buffer == nullptr) return 0;
+    Lock lock(write_lock);
+    return p_buffer->readArray(data, len);
   }
 
-  int available() override { return buffer.available(); }
+  int available() override {
+    return p_buffer == nullptr ? 0 : p_buffer->available();
+  }
 
-  int availableForWrite() override { return cfg.use_send_ack ? available_to_write : cfg.buffer_size; }
+  int availableForWrite() override {
+    return cfg.use_send_ack ? available_to_write : cfg.buffer_size;
+  }
 
  protected:
   ESPNowStreamConfig cfg;
-  RingBuffer<uint8_t> buffer{1024 * 10};
+  BaseBuffer<uint8_t> *p_buffer = nullptr;
   esp_now_recv_cb_t receive = default_recv_cb;
   esp_now_send_cb_t send = default_send_cb;
   volatile size_t available_to_write;
   bool is_init = false;
   bool is_write_ok = false;
+  _lock_t write_lock;
+
   inline void resetAvailableToWrite() {
-    if (cfg.use_send_ack){
+    if (cfg.use_send_ack) {
       available_to_write = 0;
     }
   }
 
   bool isEncrypted() {
-    return cfg.primary_master_key != nullptr && cfg.local_master_key!=nullptr;
+    return cfg.primary_master_key != nullptr && cfg.local_master_key != nullptr;
   }
 
   wifi_interface_t getInterface() {
     // define wifi_interface_t
     wifi_interface_t result;
-    switch(cfg.wifi_mode){
+    switch (cfg.wifi_mode) {
       case WIFI_STA:
         result = (wifi_interface_t)ESP_IF_WIFI_STA;
         break;
@@ -246,16 +301,16 @@ class ESPNowStream : public AudioStreamX {
     }
 
     // encryption is optional
-    if (isEncrypted()){
+    if (isEncrypted()) {
       esp_now_set_pmk((uint8_t *)cfg.primary_master_key);
     }
 
-    if (cfg.recveive_cb!=nullptr){
+    if (cfg.recveive_cb != nullptr) {
       esp_now_register_recv_cb(cfg.recveive_cb);
     } else {
       esp_now_register_recv_cb(receive);
     }
-    if (cfg.use_send_ack){
+    if (cfg.use_send_ack) {
       esp_now_register_send_cb(send);
     }
     available_to_write = cfg.buffer_size;
@@ -277,14 +332,20 @@ class ESPNowStream : public AudioStreamX {
     return (const char *)macStr;
   }
 
+  static int bufferAvailableForWrite() {
+    Lock lock(ESPNowStreamSelf->write_lock);
+    return ESPNowStreamSelf->p_buffer->availableForWrite();
+  }
+
   static void default_recv_cb(const uint8_t *mac_addr, const uint8_t *data,
                               int data_len) {
     LOGD("rec_cb: %d", data_len);
     // blocking write
-    while (ESPNowStreamSelf->buffer.availableForWrite()<data_len){
-      delay(1);
+    while (bufferAvailableForWrite() < data_len) {
+      delay(5);
     }
-    ESPNowStreamSelf->buffer.writeArray(data, data_len);
+    Lock lock(ESPNowStreamSelf->write_lock);
+    ESPNowStreamSelf->p_buffer->writeArray(data, data_len);
   }
 
   static void default_send_cb(const uint8_t *mac_addr,
@@ -295,10 +356,11 @@ class ESPNowStream : public AudioStreamX {
     if (first_mac[0] == 0) {
       strncpy((char *)first_mac, (char *)mac_addr, ESP_NOW_KEY_LEN);
     }
-    LOGD("default_send_cb - %s -> %s", ESPNowStreamSelf->mac2str(mac_addr), status==ESP_NOW_SEND_SUCCESS?"+":"-");
-    
+    LOGD("default_send_cb - %s -> %s", ESPNowStreamSelf->mac2str(mac_addr),
+         status == ESP_NOW_SEND_SUCCESS ? "+" : "-");
+
     // ignore others
-    if (strncmp((char*)mac_addr, (char*)first_mac, ESP_NOW_KEY_LEN)==0){
+    if (strncmp((char *)mac_addr, (char *)first_mac, ESP_NOW_KEY_LEN) == 0) {
       ESPNowStreamSelf->available_to_write = ESPNowStreamSelf->cfg.buffer_size;
       if (status == ESP_NOW_SEND_SUCCESS) {
         ESPNowStreamSelf->is_write_ok = true;
