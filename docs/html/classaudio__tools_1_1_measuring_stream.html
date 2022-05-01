@@ -96,15 +96,15 @@ Inheritance diagram for audio_tools::MeasuringStream:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a637fd69f4ec5deed0ca3c3c6160e3cd0"><td class="memItemLeft" align="right" valign="top"><a id="a637fd69f4ec5deed0ca3c3c6160e3cd0"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>MeasuringStream</b> (int count=10)</td></tr>
-<tr class="separator:a637fd69f4ec5deed0ca3c3c6160e3cd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe63bb28b5dfff5e210819eb7565a9f7"><td class="memItemLeft" align="right" valign="top"><a id="afe63bb28b5dfff5e210819eb7565a9f7"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>MeasuringStream</b> (<a class="el" href="class_print.html">Print</a> &amp;print, int count=10)</td></tr>
-<tr class="separator:afe63bb28b5dfff5e210819eb7565a9f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a06221e3f59a3d4d897c10528b5aa599d"><td class="memItemLeft" align="right" valign="top"><a id="a06221e3f59a3d4d897c10528b5aa599d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>MeasuringStream</b> (<a class="el" href="class_stream.html">Stream</a> &amp;stream, int count=10)</td></tr>
-<tr class="separator:a06221e3f59a3d4d897c10528b5aa599d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade53ac1d3adfacb6b419fe3320468998"><td class="memItemLeft" align="right" valign="top"><a id="ade53ac1d3adfacb6b419fe3320468998"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>MeasuringStream</b> (int count=10, <a class="el" href="class_print.html">Print</a> *logOut=nullptr)</td></tr>
+<tr class="separator:ade53ac1d3adfacb6b419fe3320468998"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e51a7e0278512c38221f190e369a489"><td class="memItemLeft" align="right" valign="top"><a id="a2e51a7e0278512c38221f190e369a489"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>MeasuringStream</b> (<a class="el" href="class_print.html">Print</a> &amp;print, int count=10, <a class="el" href="class_print.html">Print</a> *logOut=nullptr)</td></tr>
+<tr class="separator:a2e51a7e0278512c38221f190e369a489"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54893ee481a37b738d68b12a8aa0b4eb"><td class="memItemLeft" align="right" valign="top"><a id="a54893ee481a37b738d68b12a8aa0b4eb"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>MeasuringStream</b> (<a class="el" href="class_stream.html">Stream</a> &amp;stream, int count=10, <a class="el" href="class_print.html">Print</a> *logOut=nullptr)</td></tr>
+<tr class="separator:a54893ee481a37b738d68b12a8aa0b4eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a97d50c70143487f6734c85807dfcd9aa"><td class="memItemLeft" align="right" valign="top"><a id="a97d50c70143487f6734c85807dfcd9aa"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>available</b> () override</td></tr>
 <tr class="separator:a97d50c70143487f6734c85807dfcd9aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -120,6 +120,10 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_measuring_stream.html#ae97bf6e8c4715537ce9edb0c92be63f0">readBytes</a> (uint8_t *data, size_t len) override</td></tr>
 <tr class="memdesc:ae97bf6e8c4715537ce9edb0c92be63f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the data from all streams mixed together. <br /></td></tr>
 <tr class="separator:ae97bf6e8c4715537ce9edb0c92be63f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b983c065dae5c856dc28c243883cb4d"><td class="memItemLeft" align="right" valign="top"><a id="a3b983c065dae5c856dc28c243883cb4d"></a>
+uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_measuring_stream.html#a3b983c065dae5c856dc28c243883cb4d">startTime</a> ()</td></tr>
+<tr class="memdesc:a3b983c065dae5c856dc28c243883cb4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the time when the last measurement was started. <br /></td></tr>
+<tr class="separator:a3b983c065dae5c856dc28c243883cb4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8abf999880c29bdec6fc66ff64e28ca"><td class="memItemLeft" align="right" valign="top"><a id="af8abf999880c29bdec6fc66ff64e28ca"></a>
 virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_measuring_stream.html#af8abf999880c29bdec6fc66ff64e28ca">write</a> (const uint8_t *buffer, size_t size) override</td></tr>
 <tr class="memdesc:af8abf999880c29bdec6fc66ff64e28ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes raw PCM audio data, which will be the input for the volume control. <br /></td></tr>
@@ -318,6 +322,9 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:abab4b59cbce152e30bbe636d419c0e58"><td class="memItemLeft" align="right" valign="top"><a id="abab4b59cbce152e30bbe636d419c0e58"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>measure</b> (size_t len)</td></tr>
 <tr class="separator:abab4b59cbce152e30bbe636d419c0e58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af93092e411a1fbc97cd654b6458ee6d6"><td class="memItemLeft" align="right" valign="top"><a id="af93092e411a1fbc97cd654b6458ee6d6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>printResult</b> ()</td></tr>
+<tr class="separator:af93092e411a1fbc97cd654b6458ee6d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classaudio__tools_1_1_audio_stream"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classaudio__tools_1_1_audio_stream')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classaudio__tools_1_1_audio_stream.html">audio_tools::AudioStream</a></td></tr>
 <tr class="memitem:a89d8a6426c844635c7503c9baf4ded25 inherit pro_methods_classaudio__tools_1_1_audio_stream"><td class="memItemLeft" align="right" valign="top"><a id="a89d8a6426c844635c7503c9baf4ded25"></a>
 virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>not_supported</b> (int out)</td></tr>
@@ -360,6 +367,9 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>max_count</b> =0</td><
 <tr class="memitem:a0a77539f4246c5c0719bfcc598945c75"><td class="memItemLeft" align="right" valign="top"><a id="a0a77539f4246c5c0719bfcc598945c75"></a>
 <a class="el" href="classaudio__tools_1_1_null_stream.html">NullStream</a>&#160;</td><td class="memItemRight" valign="bottom"><b>null</b></td></tr>
 <tr class="separator:a0a77539f4246c5c0719bfcc598945c75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0efe6df8a84831194f9e951c533419b6"><td class="memItemLeft" align="right" valign="top"><a id="a0efe6df8a84831194f9e951c533419b6"></a>
+<a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_logout</b> =nullptr</td></tr>
+<tr class="separator:a0efe6df8a84831194f9e951c533419b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9d316d15c763ed4f1c07115bac7e113"><td class="memItemLeft" align="right" valign="top"><a id="ae9d316d15c763ed4f1c07115bac7e113"></a>
 <a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_print</b> =nullptr</td></tr>
 <tr class="separator:ae9d316d15c763ed4f1c07115bac7e113"><td class="memSeparator" colspan="2">&#160;</td></tr>

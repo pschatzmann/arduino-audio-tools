@@ -92,12 +92,15 @@ Inheritance diagram for audio_tools::SBCEncoder:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:abad4f03e48d6f20a19ebd0d29af93285"><td class="memItemLeft" align="right" valign="top"><a id="abad4f03e48d6f20a19ebd0d29af93285"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>SBCEncoder</b> (int resultBufferSize=512, int subbands=4, int blocks=4, int bitpool=32, int snr=SBC_AM_LOUDNESS)</td></tr>
-<tr class="separator:abad4f03e48d6f20a19ebd0d29af93285"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb8611e652e904e0f2d3d5e4afcb035f"><td class="memItemLeft" align="right" valign="top"><a id="afb8611e652e904e0f2d3d5e4afcb035f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>SBCEncoder</b> (int resultBufferSize=1024, int subbands=SBC_SB_8, int blocks=SBC_BLK_16, int bitpool=32, int snr=SBC_AM_LOUDNESS)</td></tr>
+<tr class="separator:afb8611e652e904e0f2d3d5e4afcb035f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8a40b4a5c5e15797b979c0c8594072f9"><td class="memItemLeft" align="right" valign="top"><a id="a8a40b4a5c5e15797b979c0c8594072f9"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> ()</td></tr>
 <tr class="separator:a8a40b4a5c5e15797b979c0c8594072f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafad7488358fb95b99472f894f4dfb0b"><td class="memItemLeft" align="right" valign="top"><a id="aafad7488358fb95b99472f894f4dfb0b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> bi)</td></tr>
+<tr class="separator:aafad7488358fb95b99472f894f4dfb0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aade0ff46723a176677bac8de67435a37"><td class="memItemLeft" align="right" valign="top"><a id="aade0ff46723a176677bac8de67435a37"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
 <tr class="separator:aade0ff46723a176677bac8de67435a37"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -113,7 +116,8 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setAudioInfo<
 <tr class="memitem:a6f1ee80d184391ffdd523f5d71d619f6"><td class="memItemLeft" align="right" valign="top"><a id="a6f1ee80d184391ffdd523f5d71d619f6"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setOutputStream</b> (<a class="el" href="class_print.html">Print</a> &amp;out_stream)</td></tr>
 <tr class="separator:a6f1ee80d184391ffdd523f5d71d619f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43f13a66d6378cb397cedf1d1a106b33"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_s_b_c_encoder.html#a43f13a66d6378cb397cedf1d1a106b33">write</a> (const void *in_ptr, size_t in_size)</td></tr>
+<tr class="memitem:a43f13a66d6378cb397cedf1d1a106b33"><td class="memItemLeft" align="right" valign="top"><a id="a43f13a66d6378cb397cedf1d1a106b33"></a>
+virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (const void *in_ptr, size_t in_size)</td></tr>
 <tr class="separator:a43f13a66d6378cb397cedf1d1a106b33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
@@ -121,16 +125,13 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a70e9332450589af45b5c2915baca521b"><td class="memItemLeft" align="right" valign="top"><a id="a70e9332450589af45b5c2915baca521b"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>processByte</b> (uint8_t byte)</td></tr>
 <tr class="separator:a70e9332450589af45b5c2915baca521b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8657e0b2ef4e6fe2a3765ff6d4aad641"><td class="memItemLeft" align="right" valign="top"><a id="a8657e0b2ef4e6fe2a3765ff6d4aad641"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_s_b_c_encoder.html#a8657e0b2ef4e6fe2a3765ff6d4aad641">setup</a> (const void *in_ptr, size_t len)</td></tr>
-<tr class="memdesc:a8657e0b2ef4e6fe2a3765ff6d4aad641"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines audio information and calls sbc_init;. <br /></td></tr>
-<tr class="separator:a8657e0b2ef4e6fe2a3765ff6d4aad641"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04ecb69f302f246c97e5f9e19d44fd83"><td class="memItemLeft" align="right" valign="top"><a id="a04ecb69f302f246c97e5f9e19d44fd83"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_s_b_c_encoder.html#a04ecb69f302f246c97e5f9e19d44fd83">setup</a> ()</td></tr>
+<tr class="memdesc:a04ecb69f302f246c97e5f9e19d44fd83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines audio information and calls sbc_init;. <br /></td></tr>
+<tr class="separator:a04ecb69f302f246c97e5f9e19d44fd83"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a01a1d91986901fc9c7384f560d60daf7"><td class="memItemLeft" align="right" valign="top"><a id="a01a1d91986901fc9c7384f560d60daf7"></a>
-struct au_header&#160;</td><td class="memItemRight" valign="bottom"><b>au_hdr</b></td></tr>
-<tr class="separator:a01a1d91986901fc9c7384f560d60daf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4ad507c3e8e615092b0c5c01efc4d0a"><td class="memItemLeft" align="right" valign="top"><a id="ab4ad507c3e8e615092b0c5c01efc4d0a"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>bitpool</b> = 32</td></tr>
 <tr class="separator:ab4ad507c3e8e615092b0c5c01efc4d0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -161,6 +162,12 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_first</b> = true</
 <tr class="memitem:aba7163749b25f55eb8183bf95a616319"><td class="memItemLeft" align="right" valign="top"><a id="aba7163749b25f55eb8183bf95a616319"></a>
 uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><b>result_buffer</b> = nullptr</td></tr>
 <tr class="separator:aba7163749b25f55eb8183bf95a616319"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b10b591329b6b45a858342c01c212bd"><td class="memItemLeft" align="right" valign="top"><a id="a9b10b591329b6b45a858342c01c212bd"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>result_buffer_size</b> = 0</td></tr>
+<tr class="separator:a9b10b591329b6b45a858342c01c212bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaff57dc20b1e1934576f6db404ea54ac"><td class="memItemLeft" align="right" valign="top"><a id="aaff57dc20b1e1934576f6db404ea54ac"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>result_size</b> = 0</td></tr>
+<tr class="separator:aaff57dc20b1e1934576f6db404ea54ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba8f5f229d24455f834e4ffd4631124e"><td class="memItemLeft" align="right" valign="top"><a id="aba8f5f229d24455f834e4ffd4631124e"></a>
 sbc_t&#160;</td><td class="memItemRight" valign="bottom"><b>sbc</b></td></tr>
 <tr class="separator:aba8f5f229d24455f834e4ffd4631124e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -175,47 +182,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>subbands</b> = 4</td><
 <div class="textblock"><p>Encoder for SBC - Depends on <a href="https://github.com/pschatzmann/arduino-libsbc">https://github.com/pschatzmann/arduino-libsbc</a>. Inspired by sbcenc.c. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a43f13a66d6378cb397cedf1d1a106b33"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a43f13a66d6378cb397cedf1d1a106b33">&#9670;&nbsp;</a></span>write()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual size_t audio_tools::SBCEncoder::write </td>
-          <td>(</td>
-          <td class="paramtype">const void *&#160;</td>
-          <td class="paramname"><em>in_ptr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>in_size</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>setup from info in header</p>
-
-<p>Implements <a class="el" href="classaudio__tools_1_1_audio_writer.html">audio_tools::AudioWriter</a>.</p>
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+</div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/AudioCodecs/<a class="el" href="_codec_s_b_c_8h_source.html">CodecSBC.h</a></li>
 </ul>
 </div><!-- contents -->

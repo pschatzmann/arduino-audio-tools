@@ -67,6 +67,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_l_c3_decoder-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -92,18 +93,21 @@ Inheritance diagram for audio_tools::LC3Decoder:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a7c80bbff1ecd48e0f6d97ba4086e4043"><td class="memItemLeft" align="right" valign="top"><a id="a7c80bbff1ecd48e0f6d97ba4086e4043"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>LC3Decoder</b> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> info, int dt_us=1000, uint16_t inputByteCount=20)</td></tr>
-<tr class="separator:a7c80bbff1ecd48e0f6d97ba4086e4043"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4660642278352cf651785648569d3155"><td class="memItemLeft" align="right" valign="top"><a id="a4660642278352cf651785648569d3155"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>LC3Decoder</b> (int dt_us=1000, uint16_t inputByteCount=20)</td></tr>
-<tr class="separator:a4660642278352cf651785648569d3155"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe8c105e5362d0ce5d2076b512c65384"><td class="memItemLeft" align="right" valign="top"><a id="afe8c105e5362d0ce5d2076b512c65384"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>LC3Decoder</b> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> info, int dt_us=LC3_DEFAULT_DT_US, uint16_t inputByteCount=DEFAULT_BYTE_COUNT)</td></tr>
+<tr class="separator:afe8c105e5362d0ce5d2076b512c65384"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5346515b5b5170d890a66e7b131b19a9"><td class="memItemLeft" align="right" valign="top"><a id="a5346515b5b5170d890a66e7b131b19a9"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>LC3Decoder</b> (int dt_us=LC3_DEFAULT_DT_US, uint16_t inputByteCount=DEFAULT_BYTE_COUNT)</td></tr>
+<tr class="separator:a5346515b5b5170d890a66e7b131b19a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f548051f1f3f4088c03573943958973"><td class="memItemLeft" align="right" valign="top"><a id="a4f548051f1f3f4088c03573943958973"></a>
 virtual <a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>audioInfo</b> ()</td></tr>
 <tr class="separator:a4f548051f1f3f4088c03573943958973"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad450a299ff1afc3864e4711a702b4416"><td class="memItemLeft" align="right" valign="top"><a id="ad450a299ff1afc3864e4711a702b4416"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> ()</td></tr>
 <tr class="separator:ad450a299ff1afc3864e4711a702b4416"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a603c2c3ac1536a2cdabb50ed8dadb15f"><td class="memItemLeft" align="right" valign="top"><a id="a603c2c3ac1536a2cdabb50ed8dadb15f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> bi)</td></tr>
+<tr class="separator:a603c2c3ac1536a2cdabb50ed8dadb15f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a88ebc91f725f1ff809a965e918b4f7a9"><td class="memItemLeft" align="right" valign="top"><a id="a88ebc91f725f1ff809a965e918b4f7a9"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
 <tr class="separator:a88ebc91f725f1ff809a965e918b4f7a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -120,8 +124,20 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setOutputStre
 virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (const void *input, size_t length)</td></tr>
 <tr class="separator:a2e2e2cceef9b8f59b03b04b23be95c13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a91db829b9a97beb9c2def28376940ab8"><td class="memItemLeft" align="right" valign="top"><a id="a91db829b9a97beb9c2def28376940ab8"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>checkValues</b> ()</td></tr>
+<tr class="separator:a91db829b9a97beb9c2def28376940ab8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:a3d16c199ba21a747c305af1357582e93"><td class="memItemLeft" align="right" valign="top"><a id="a3d16c199ba21a747c305af1357582e93"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>active</b> = false</td></tr>
+<tr class="separator:a3d16c199ba21a747c305af1357582e93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a351eb314a98c718c95d96cf1487f1d6a"><td class="memItemLeft" align="right" valign="top"><a id="a351eb314a98c718c95d96cf1487f1d6a"></a>
+unsigned&#160;</td><td class="memItemRight" valign="bottom"><b>dec_size</b></td></tr>
+<tr class="separator:a351eb314a98c718c95d96cf1487f1d6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad09a86f40524e75b748142219f1581e9"><td class="memItemLeft" align="right" valign="top"><a id="ad09a86f40524e75b748142219f1581e9"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>dt_us</b></td></tr>
 <tr class="separator:ad09a86f40524e75b748142219f1581e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -140,9 +156,9 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>input_pos</b> = 0</
 <tr class="memitem:ab9987c5436737e39becea0f4e4740515"><td class="memItemLeft" align="right" valign="top"><a id="ab9987c5436737e39becea0f4e4740515"></a>
 lc3_decoder_t&#160;</td><td class="memItemRight" valign="bottom"><b>lc3_decoder</b> = nullptr</td></tr>
 <tr class="separator:ab9987c5436737e39becea0f4e4740515"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac0f60f5f686068e493dc178003e89322"><td class="memItemLeft" align="right" valign="top"><a id="ac0f60f5f686068e493dc178003e89322"></a>
-<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>lc3_decoder_mem</b></td></tr>
-<tr class="separator:ac0f60f5f686068e493dc178003e89322"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd0be6f34b92c173d8ca41345ef19d72"><td class="memItemLeft" align="right" valign="top"><a id="afd0be6f34b92c173d8ca41345ef19d72"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>lc3_decoder_memory</b></td></tr>
+<tr class="separator:afd0be6f34b92c173d8ca41345ef19d72"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a69dd29edda7cca851efa07fe632a5484"><td class="memItemLeft" align="right" valign="top"><a id="a69dd29edda7cca851efa07fe632a5484"></a>
 uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>num_frames</b></td></tr>
 <tr class="separator:a69dd29edda7cca851efa07fe632a5484"><td class="memSeparator" colspan="2">&#160;</td></tr>

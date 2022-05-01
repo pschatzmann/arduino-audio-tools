@@ -40,7 +40,7 @@ void setup() {
   cfgs.sample_rate = sample_rate;
   cfgs.channels = channels;
   cfgs.bits_per_sample = 16;
-  sineWave.begin(cfgs, N_B4);
+  sineWave.begin(cfgs, 400);
 
   // start decoder
   decoder.begin(cfgs);// LC3 does not provide audio info from source

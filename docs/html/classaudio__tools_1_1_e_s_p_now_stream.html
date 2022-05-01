@@ -383,6 +383,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteError</b> (in
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:a020a8fc785fb417f0191fe1344e7d92b"><td class="memItemLeft" align="right" valign="top"><a id="a020a8fc785fb417f0191fe1344e7d92b"></a>
+static int&#160;</td><td class="memItemRight" valign="bottom"><b>bufferAvailableForWrite</b> ()</td></tr>
+<tr class="separator:a020a8fc785fb417f0191fe1344e7d92b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2cd613e949b7ea6d2b356ed2b0e5643b"><td class="memItemLeft" align="right" valign="top"><a id="a2cd613e949b7ea6d2b356ed2b0e5643b"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>default_recv_cb</b> (const uint8_t *mac_addr, const uint8_t *data, int data_len)</td></tr>
 <tr class="separator:a2cd613e949b7ea6d2b356ed2b0e5643b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -395,9 +398,6 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a2b55af836b57133aaf1de86de0c2f570"><td class="memItemLeft" align="right" valign="top"><a id="a2b55af836b57133aaf1de86de0c2f570"></a>
 volatile size_t&#160;</td><td class="memItemRight" valign="bottom"><b>available_to_write</b></td></tr>
 <tr class="separator:a2b55af836b57133aaf1de86de0c2f570"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4db0570e936a2c12025dc82877968fe8"><td class="memItemLeft" align="right" valign="top"><a id="a4db0570e936a2c12025dc82877968fe8"></a>
-<a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b> {1024 * 10}</td></tr>
-<tr class="separator:a4db0570e936a2c12025dc82877968fe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca03b8a1c278d22c71c0fc0a419ce7f2"><td class="memItemLeft" align="right" valign="top"><a id="aca03b8a1c278d22c71c0fc0a419ce7f2"></a>
 <a class="el" href="structaudio__tools_1_1_e_s_p_now_stream_config.html">ESPNowStreamConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><b>cfg</b></td></tr>
 <tr class="separator:aca03b8a1c278d22c71c0fc0a419ce7f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -407,12 +407,18 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_init</b> = false</
 <tr class="memitem:a16e853a08bd71ccb69e2c6f2a3b0fef5"><td class="memItemLeft" align="right" valign="top"><a id="a16e853a08bd71ccb69e2c6f2a3b0fef5"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_write_ok</b> = false</td></tr>
 <tr class="separator:a16e853a08bd71ccb69e2c6f2a3b0fef5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61aa52a4d0881c9b9b12f7f503cb2923"><td class="memItemLeft" align="right" valign="top"><a id="a61aa52a4d0881c9b9b12f7f503cb2923"></a>
+<a class="el" href="classaudio__tools_1_1_base_buffer.html">BaseBuffer</a>&lt; uint8_t &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>p_buffer</b> = nullptr</td></tr>
+<tr class="separator:a61aa52a4d0881c9b9b12f7f503cb2923"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e8cdc32f5fb1b9febe66d876cf79124"><td class="memItemLeft" align="right" valign="top"><a id="a6e8cdc32f5fb1b9febe66d876cf79124"></a>
 esp_now_recv_cb_t&#160;</td><td class="memItemRight" valign="bottom"><b>receive</b> = default_recv_cb</td></tr>
 <tr class="separator:a6e8cdc32f5fb1b9febe66d876cf79124"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a736419c444e895ea51186bdc983415fb"><td class="memItemLeft" align="right" valign="top"><a id="a736419c444e895ea51186bdc983415fb"></a>
 esp_now_send_cb_t&#160;</td><td class="memItemRight" valign="bottom"><b>send</b> = default_send_cb</td></tr>
 <tr class="separator:a736419c444e895ea51186bdc983415fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a276d2fb7d5fc95705eb14ae3f55f62"><td class="memItemLeft" align="right" valign="top"><a id="a9a276d2fb7d5fc95705eb14ae3f55f62"></a>
+_lock_t&#160;</td><td class="memItemRight" valign="bottom"><b>write_lock</b></td></tr>
+<tr class="separator:a9a276d2fb7d5fc95705eb14ae3f55f62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classaudio__tools_1_1_audio_stream"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classaudio__tools_1_1_audio_stream')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classaudio__tools_1_1_audio_stream.html">audio_tools::AudioStream</a></td></tr>
 <tr class="memitem:aa26deda7d5a7fb139372f6f707e91bb9 inherit pro_attribs_classaudio__tools_1_1_audio_stream"><td class="memItemLeft" align="right" valign="top"><a id="aa26deda7d5a7fb139372f6f707e91bb9"></a>
 <a class="el" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_notify</b> =nullptr</td></tr>
