@@ -9,18 +9,18 @@
  * 
  */
 #include "AudioTools.h"
-#include "AudioCodecs/CodecLC3.h"
+#include "AudioCodecs/CodecAPTX.h"
 #include "AudioLibs/AudioKit.h"
 
-uint16_t sample_rate = 24000; // (must be 8000,16000,24000,32000,48000)
-uint8_t channels = 1;  // The stream will have 2 channels
+uint16_t sample_rate = 44100;
+uint8_t channels = 2;  // The stream will have 2 channels
 SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound( sineWave); // Stream generated from sine wave
-AudioKitStream out;
+//AudioKitStream out; 
 //I2SStream out; 
-//CsvStream<int16_t> out(Serial,channels);
-EncodedAudioStream decoder(&out, new LC3Decoder()); // encode and write to ESP-now
-EncodedAudioStream encoder(&decoder, new LC3Encoder()); // encode and write to ESP-now
+AudioKitStream out; 
+EncodedAudioStream decoder(&out, new APTXDecoder()); // encode and write to ESP-now
+EncodedAudioStream encoder(&decoder, new APTXEncoder()); // encode and write to ESP-now
 StreamCopy copier(encoder, sound);     
 
 void setup() {
@@ -30,9 +30,6 @@ void setup() {
   // start I2S
   Serial.println("starting I2S...");
   auto config = out.defaultConfig(TX_MODE);
-  config.channels = channels;
-  config.sample_rate = sample_rate;
-  config.buffer_count = 50;
   out.begin(config);
 
   // Setup sine wave
@@ -40,14 +37,13 @@ void setup() {
   cfgs.sample_rate = sample_rate;
   cfgs.channels = channels;
   cfgs.bits_per_sample = 16;
-  sineWave.begin(cfgs, 400);
+  sineWave.begin(cfgs, N_B4);
 
   // start decoder
-  decoder.begin(cfgs);// LC3 does not provide audio info from source
+  decoder.begin();
 
   // start encoder
   encoder.begin(cfgs);
-
 
   Serial.println("Test started...");
 }

@@ -43,7 +43,6 @@ void setup() {
   // start encoder
   encoder.begin(cfgs);
 
-
   Serial.println("Test started...");
 }
 
