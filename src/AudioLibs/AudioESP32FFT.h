@@ -41,6 +41,7 @@ class FFTDriverESP32FFT : public FFTDriver {
 /**
  * @brief AudioFFT using RealFFT
  * @author Phil Schatzmann
+ * Warning: This does not work as expected yet: I did not get the expected results...
  * @copyright GPLv3
  */
 class AudioESP32FFT : public AudioFFTBase {

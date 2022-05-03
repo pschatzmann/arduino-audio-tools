@@ -30,9 +30,10 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
   virtual bool begin(){return true;}
   virtual void end(){}
   
-  // overwrite to do something useful
+  // Call from subclass or overwrite to do something useful
   virtual void setAudioInfo(AudioBaseInfo info) {
       LOGD(LOG_METHOD);
+      this->info = info;
       info.logInfo();
       if (p_notify!=nullptr){
           p_notify->setAudioInfo(info);
@@ -53,8 +54,13 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
 
   operator bool() { return available() > 0; }
 
+  virtual AudioBaseInfo audioInfo() {
+    return info;
+  }
+
  protected:
   AudioBaseInfoDependent *p_notify=nullptr;
+  AudioBaseInfo info;
 
   virtual int not_supported(int out) {
     LOGE("AudioStreamX: unsupported operation!");
@@ -283,6 +289,10 @@ class GeneratedSoundStream : public AudioStreamX {
     audioBaseInfoDependent = &bi;
   }
 
+  AudioBaseInfo audioInfo() override {
+    return generator_ptr->audioInfo();
+  }
+
   /// This is unbounded so we just return the buffer size
   virtual int available() override { return DEFAULT_BUFFER_SIZE; }
 
@@ -299,8 +309,8 @@ class GeneratedSoundStream : public AudioStreamX {
   void flush() override {}
 
  protected:
-  SoundGenerator<T> *generator_ptr;
   bool active = false;
+  SoundGenerator<T> *generator_ptr;
   AudioBaseInfoDependent *audioBaseInfoDependent = nullptr;
 
 };
@@ -412,7 +422,9 @@ class NullStream : public BufferedStream {
     is_measure = measureWrite;
   }
 
-  bool begin(AudioBaseInfo info, int opt = 0) {return true;}
+  bool begin(AudioBaseInfo info, int opt = 0) {    
+    return true;
+  }
 
   AudioBaseInfo defaultConfig(int opt = 0) {
     AudioBaseInfo info;
@@ -547,12 +559,14 @@ class CallbackBufferedStream : public BufferedStream {
 
   /// Activates the output
   virtual bool begin() {
+    LOGI(LOG_METHOD);
     active = true;
     return true;
   }
 
   /// stops the processing
   virtual bool stop() {
+    LOGI(LOG_METHOD);
     active = false;
     return true;
   };
@@ -1186,7 +1200,8 @@ class TimerCallbackAudioStream : public BufferedStream {
   void setNotifyAudioChange(AudioBaseInfoDependent &bi) { notifyTarget = &bi; }
 
   /// Provides the current audio information
-  TimerCallbackAudioStreamInfo audioInfo() { return cfg; }
+  TimerCallbackAudioStreamInfo audioInfoExt() { return cfg; }
+  AudioBaseInfo audioInfo() { return cfg; }
 
   void begin(TimerCallbackAudioStreamInfo config) {
     LOGD("%s:  %s", LOG_METHOD,
