@@ -28,7 +28,7 @@ class I2SBase {
 
     /// starts the DAC 
     void begin(I2SConfig cfg) {
-
+      this->cfg = cfg;
     }
 
     /// stops the I2C and unistalls the driver
