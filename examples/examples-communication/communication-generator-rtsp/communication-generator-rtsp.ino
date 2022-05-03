@@ -19,8 +19,8 @@ int port = 554;
 int channels = 1;
 int sample_rate = 16000;
 int bits_per_sample = 16;
-const char* wifi = "Phil Schatzmann";
-const char* password = "sabrina01";
+const char* wifi = "ssid";
+const char* password = "password";
 
 SineFromTable<int16_t> sineWave(32000);                // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound(sineWave);             // Stream generated from sine wave
