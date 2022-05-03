@@ -1,7 +1,7 @@
 /**
- * @file communication-audiokit-rtsp.ino
+ * @file communication-generator-rtsp.ino
  * @author Phil Schatzmann
- * @brief Provide Microphone from AudioKit via RTSP. Depends on https://github.com/pschatzmann/Micro-RTSP-Audio
+ * @brief Provide generated sine tone via RTSP. Depends on https://github.com/pschatzmann/Micro-RTSP-Audio
  * @version 0.1
  * @date 2022-05-02
  * 
