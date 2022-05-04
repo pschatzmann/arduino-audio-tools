@@ -34,7 +34,7 @@ class HttpRequest {
 
         void setClient(Client &client){
             this->client_ptr = &client;
-            this->client_ptr->setTimeout(20000);
+            this->client_ptr->setTimeout(clientTimeout);
         }
 
         // the requests usually need a host. This needs to be set if we did not provide a URL
@@ -164,11 +164,14 @@ class HttpRequest {
         const char *accept = ACCEPT_ALL;
         const char *accept_encoding = nullptr;
         bool is_ready = false;
+        int32_t clientTimeout = URL_CLIENT_TIMEOUT; // 60000;
 
         // opens a connection to the indicated host
-        virtual int connect(const char *ip, uint16_t port) {
+        virtual int connect(const char *ip, uint16_t port, int32_t timeout) {
             LOGI("connect %s", ip);
-            return this->client_ptr->connect(ip, port);
+            Serial.println("try to connect");
+            return this->client_ptr->connect(ip, port, timeout);
+            
         }
 
         // sends request and reads the reply_header from the server
@@ -180,7 +183,7 @@ class HttpRequest {
             }
             if (!this->connected()){
                 LOGI("process connecting to host %s port %d", url.host(), url.port());
-                bool is_connected = connect(url.host(), url.port());
+                bool is_connected = connect(url.host(), url.port(), clientTimeout);
                 if (!is_connected){
                     LOGE("Connect failed");
                     return -1;
@@ -205,7 +208,6 @@ class HttpRequest {
             request_header.put(ACCEPT_ENCODING, accept_encoding);
             request_header.put(ACCEPT, accept);
             request_header.put(CONTENT_TYPE, mime);
-            
             request_header.write(*client_ptr);
 
             if (len>0){
