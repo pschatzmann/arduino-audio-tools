@@ -170,7 +170,11 @@ class HttpRequest {
         virtual int connect(const char *ip, uint16_t port, int32_t timeout) {
             LOGI("connect %s", ip);
             Serial.println("try to connect");
+#ifdef CONNECT_WITH_TIMEOUT
             return this->client_ptr->connect(ip, port, timeout);
+#else
+            return this->client_ptr->connect(ip, port);
+#endif
             
         }
 
