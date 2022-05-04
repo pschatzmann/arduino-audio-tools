@@ -80,7 +80,7 @@ class RAWDecoder : public AudioDecoder {
         }
 
         virtual size_t write(const void *in_ptr, size_t in_size) override {
-            if (p_print!=nullptr)  return 0;
+            if (p_print==nullptr)  return 0;
             return p_print->write((uint8_t*)in_ptr, in_size);
         }
 
@@ -145,7 +145,7 @@ class RAWEncoder : public AudioEncoder {
 
         /// Writes PCM data to be encoded as RAW
         virtual size_t write(const void *in_ptr, size_t in_size) override {
-            if (p_print!=nullptr)  return 0;
+            if (p_print==nullptr)  return 0;
             return p_print->write((uint8_t*)in_ptr, in_size);
         }
 
