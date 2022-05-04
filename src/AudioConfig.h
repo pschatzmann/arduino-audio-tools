@@ -297,7 +297,8 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 
 //----- MBED -----------
 #if defined(ARDUINO_ARCH_MBED_RP2040)
-//#define USE_I2S 1
+// install https://github.com/pschatzmann/rp2040-i2s
+#define USE_I2S 1
 #define USE_PWM
 #define USE_ADC_ARDUINO
 #define USE_TYPETRAITS

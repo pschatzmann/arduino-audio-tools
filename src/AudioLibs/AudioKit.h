@@ -179,6 +179,7 @@ class AudioKitStream : public AudioStreamX {
   /// Starts the processing
   void begin(AudioKitStreamConfig config) {
     LOGD(LOG_METHOD);
+    AudioStream::setAudioInfo(config);
     cfg = config;
     cfg.logInfo();
     if (!kit.begin(cfg.toAudioKitConfig())){
