@@ -94,12 +94,18 @@ class AudioStreamX : public AudioStream {
  */
 class AudioStreamWrapper : public AudioStream {
  public:
-  AudioStreamWrapper(Stream &s) { p_stream = &s; }
+     AudioStreamWrapper(Stream& s) { 
+         p_stream = &s; 
+         p_stream->setTimeout(clientTimeout);
+         Serial.println("set timeout in stream audiostreamwrapper");
+     }
 
   virtual bool begin(){return true;}
   virtual void end(){}
 
   virtual size_t readBytes(uint8_t *buffer, size_t length) {
+      //Serial.print("Timeout audiostream: ");
+      //Serial.println(p_stream->getTimeout());
     return p_stream->readBytes(buffer, length);
   }
 
@@ -121,6 +127,7 @@ class AudioStreamWrapper : public AudioStream {
 
  protected:
   Stream *p_stream;
+  int32_t clientTimeout = URL_CLIENT_TIMEOUT; // 60000;
 };
 
 /**
