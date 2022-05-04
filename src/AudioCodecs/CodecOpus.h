@@ -42,14 +42,14 @@ struct OpusSettings : public AudioBaseInfo {
     channels = 2;
     bits_per_sample = 16;
   }
-  int application = Opus_APPLICATION_AUDIO;
-  int bitrate = Opus_AUTO;
-  int force_channel = Opus_AUTO;
+  int application = OPUS_APPLICATION_AUDIO;
+  int bitrate = OPUS_AUTO;
+  int force_channel = OPUS_AUTO;
   int vbr = 0;
   int vbr_constraint = 0;
   int complexity = 0;
-  int max_bandwidth = Opus_BANDWIDTH_MEDIUMBAND;
-  int singal = Opus_SIGNAL_MUSIC;
+  int max_bandwidth = OPUS_BANDWIDTH_MEDIUMBAND;
+  int singal = OPUS_SIGNAL_MUSIC;
   int inband_fec = 0;
   int packet_loss_perc = 1;
   int lsb_depth = 8;
@@ -63,19 +63,19 @@ struct OpusSettings : public AudioBaseInfo {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class OpusDecoder : public AudioDecoder {
+class OpusAudioDecoder : public AudioDecoder {
 public:
   /**
    * @brief Construct a new OpusDecoder object
    */
-  OpusDecoder() { LOGD(LOG_METHOD); }
+  OpusAudioDecoder() { LOGD(LOG_METHOD); }
 
   /**
    * @brief Construct a new OpusDecoder object
    *
    * @param out_stream Output Stream to which we write the decoded result
    */
-  OpusDecoder(Print &out_stream) {
+  OpusAudioDecoder(Print &out_stream) {
     LOGD(LOG_METHOD);
     p_print = &out_stream;
   }
@@ -104,7 +104,7 @@ public:
     LOGD(LOG_METHOD);
     int err;
     dec = opus_decoder_create(cfg.sample_rate, cfg.channels, &err);
-    if (err != Opus_OK) {
+    if (err != OPUS_OK) {
       LOGE("opus_decoder_create");
       return;
     }
@@ -149,13 +149,13 @@ protected:
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class OpusEncoder : public AudioEncoder {
+class OpusAudioEncoder : public AudioEncoder {
 public:
   // Empty Constructor - the output stream must be provided with begin()
-  OpusEncoder() {}
+  OpusAudioEncoder() {}
 
   // Constructor providing the output stream
-  OpusEncoder(Print &out) { p_print = &out; }
+  OpusAudioEncoder(Print &out) { p_print = &out; }
 
   /// Defines the output Stream
   void setOutputStream(Print &out_stream) override { p_print = &out_stream; }
@@ -175,7 +175,7 @@ public:
     int err;
     enc = opus_encoder_create(cfg.sample_rate, cfg.channels, cfg.application,
                               &err);
-    if (err != Opus_OK) {
+    if (err != OPUS_OK) {
       LOGE("opus_encoder_create");
       return;
     }
@@ -220,62 +220,62 @@ protected:
 
   bool settings() {
     bool ok = true;
-    if (opus_encoder_ctl(enc, Opus_SET_BITRATE(cfg.bitrate)) != Opus_OK) {
+    if (opus_encoder_ctl(enc, OPUS_SET_BITRATE(cfg.bitrate)) != OPUS_OK) {
       LOGE("invalid bitrate");
       ok = false;
     }
-    if (opus_encoder_ctl(enc, Opus_SET_FORCE_CHANNELS(cfg.force_channel)) !=
-        Opus_OK) {
+    if (opus_encoder_ctl(enc, OPUS_SET_FORCE_CHANNELS(cfg.force_channel)) !=
+        OPUS_OK) {
       LOGE("invalid force_channel");
       ok = false;
     };
-    if (opus_encoder_ctl(enc, Opus_SET_VBR(cfg.vbr)) != Opus_OK) {
+    if (opus_encoder_ctl(enc, OPUS_SET_VBR(cfg.vbr)) != OPUS_OK) {
       LOGE("invalid vbr");
       ok = false;
     }
-    if (opus_encoder_ctl(enc, Opus_SET_VBR_CONSTRAINT(cfg.vbr_constraint)) !=
-        Opus_OK) {
+    if (opus_encoder_ctl(enc, OPUS_SET_VBR_CONSTRAINT(cfg.vbr_constraint)) !=
+        OPUS_OK) {
       LOGE("invalid vbr_constraint");
       ok = false;
     }
-    if (opus_encoder_ctl(enc, Opus_SET_COMPLEXITY(cfg.complexity)) != Opus_OK) {
+    if (opus_encoder_ctl(enc, OPUS_SET_COMPLEXITY(cfg.complexity)) != OPUS_OK) {
       LOGE("invalid complexity");
       ok = false;
     }
-    if (opus_encoder_ctl(enc, Opus_SET_MAX_BANDWIDTH(cfg.max_bandwidth)) !=
-        Opus_OK) {
+    if (opus_encoder_ctl(enc, OPUS_SET_MAX_BANDWIDTH(cfg.max_bandwidth)) !=
+        OPUS_OK) {
       LOGE("invalid max_bandwidth");
       ok = false;
     }
-    if (opus_encoder_ctl(enc, Opus_SET_SIGNAL(cfg.singal)) != Opus_OK) {
+    if (opus_encoder_ctl(enc, OPUS_SET_SIGNAL(cfg.singal)) != OPUS_OK) {
       LOGE("invalid singal");
       ok = false;
     }
-    if (opus_encoder_ctl(enc, Opus_SET_INBAND_FEC(cfg.inband_fec)) != Opus_OK) {
+    if (opus_encoder_ctl(enc, OPUS_SET_INBAND_FEC(cfg.inband_fec)) != OPUS_OK) {
       LOGE("invalid inband_fec");
       ok = false;
     }
     if (opus_encoder_ctl(
-            enc, Opus_SET_PACKET_LOSS_PERC(cfg.packet_loss_perc)) != Opus_OK) {
+            enc, OPUS_SET_PACKET_LOSS_PERC(cfg.packet_loss_perc)) != OPUS_OK) {
       LOGE("invalid pkt_loss");
       ok = false;
     }
-    if (opus_encoder_ctl(enc, Opus_SET_LSB_DEPTH(cfg.lsb_depth)) != Opus_OK) {
+    if (opus_encoder_ctl(enc, OPUS_SET_LSB_DEPTH(cfg.lsb_depth)) != OPUS_OK) {
       LOGE("invalid lsb_depth");
       ok = false;
     }
-    if (opus_encoder_ctl(enc, Opus_SET_PREDICTION_DISABLED(
-                                  cfg.prediction_disabled)) != Opus_OK) {
+    if (opus_encoder_ctl(enc, OPUS_SET_PREDICTION_DISABLED(
+                                  cfg.prediction_disabled)) != OPUS_OK) {
       LOGE("invalid pred_disabled");
       ok = false;
     }
-    if (opus_encoder_ctl(enc, Opus_SET_DTX(cfg.use_dtx)) != Opus_OK) {
+    if (opus_encoder_ctl(enc, OPUS_SET_DTX(cfg.use_dtx)) != OPUS_OK) {
       LOGE("invalid use_dtx");
       ok = false;
     }
     /**
-    if (opus_encoder_ctl(enc, Opus_SET_EXPERT_FRAME_DURATION(
-                                  cfg.frame_sizes_ms_x2)) != Opus_OK) {
+    if (opus_encoder_ctl(enc, OPUS_SET_EXPERT_FRAME_DURATION(
+                                  cfg.frame_sizes_ms_x2)) != OPUS_OK) {
       LOGE("invalid frame_sizes_ms_x2");
       ok = false;
     }
