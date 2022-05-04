@@ -32,7 +32,7 @@ void setup() {
 
   // setup Audiokit
   auto cfg = kit.defaultConfig(RX_MODE);
-  cfg.input_device = AUDIO_HAL_ADC_INPUT_LINE1;
+  cfg.input_device = AUDIO_HAL_ADC_INPUT_LINE2;
   cfg.channels = channels;
   cfg.sample_rate = samples_per_second;
   cfg.bits_per_sample = bits_per_sample;
