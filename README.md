@@ -130,9 +130,10 @@ Dependent on the example you might need to install some of the following librari
 - [Maximilian](https://github.com/pschatzmann/Maximilian) cross-platform and multi-target audio synthesis and signal processing library
 - [Mozzi](https://github.com/pschatzmann/Mozzi) A sound synthesis library for Arduino
 - [ESP8266Audio](https://github.com/earlephilhower/ESP8266Audio) to play different audio Formats
+- [rp2040-i2s](https://github.com/pschatzmann/rp2040-i2s) I2S library for RP2040 (mbed)
 - [Tensorflow Lite](https://github.com/pschatzmann/tflite-micro-arduino-examples) Machine Learning for Arduino
 - [KissFFT](https://github.com/pschatzmann/kissfft) Fast Fourier Transform FFT Library
-- [rp2040-i2s](https://github.com/pschatzmann/rp2040-i2s) I2S library for RP2040 (mbed)
+- [esp32-fft](https://github.com/pschatzmann/esp32-fft) Another FFT library (not only for the ESP32)
 
 
 After installing a library, you might need to activate it's usage in the ```AudioConfig.h``` file!
