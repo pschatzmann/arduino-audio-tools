@@ -19,8 +19,8 @@ GeneratedSoundStream<int16_t> sound( sineWave); // Stream generated from sine wa
 AudioKitStream out;
 //I2SStream out; 
 //CsvStream<int16_t> out(Serial,channels);
-EncodedAudioStream decoder(&out, new LC3Decoder()); // encode and write to ESP-now
-EncodedAudioStream encoder(&decoder, new LC3Encoder()); // encode and write to ESP-now
+EncodedAudioStream decoder(&out, new LC3Decoder()); // encode and write
+EncodedAudioStream encoder(&decoder, new LC3Encoder()); // encode and write
 StreamCopy copier(encoder, sound);     
 
 void setup() {
