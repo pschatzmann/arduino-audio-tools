@@ -1,6 +1,6 @@
 
 #pragma once
-#if defined(ARDUINO_ARCH_RP2040) && !defined(ARDUINO_ARCH_MBED_RP2040)
+#if defined(ARDUINO_ARCH_RP2040) || defined(ARDUINO_ARCH_MBED_RP2040)
 #include "AudioPWM/PWMAudioBase.h"
 #include "hardware/gpio.h"
 #include "hardware/adc.h"
