@@ -17,8 +17,8 @@ uint8_t channels = 2;  // The stream will have 2 channels
 SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound( sineWave); // Stream generated from sine wave
 AudioKitStream out; 
-EncodedAudioStream decoder(&out, new OpusDecoder()); // encode and write 
-EncodedAudioStream encoder(&decoder, new OpusEncoder()); // encode and write 
+EncodedAudioStream decoder(&out, new OpusAudioDecoder()); // encode and write 
+EncodedAudioStream encoder(&decoder, new OpusAudioEncoder()); // encode and write 
 StreamCopy copier(encoder, sound);     
 
 void setup() {
