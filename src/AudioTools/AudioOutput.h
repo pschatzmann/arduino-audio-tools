@@ -336,6 +336,12 @@ class EncodedAudioStream : public AudioPrint {
             decoder_ptr->setNotifyAudioChange(bi);
         }
 
+        virtual void setAudioInfo(AudioBaseInfo info) {
+            LOGD(LOG_METHOD);
+            AudioPrint::setAudioInfo(info);
+            decoder_ptr->setAudioInfo(info);
+            encoder_ptr->setAudioInfo(info);
+        }
 
         /// Starts the processing - sets the status to active
         void begin(Print *outputStream, AudioEncoder *encoder) {
@@ -375,6 +381,8 @@ class EncodedAudioStream : public AudioPrint {
             LOGD(LOG_METHOD);
             const CodecNOP *nop =  CodecNOP::instance();
             if (decoder_ptr != nop || encoder_ptr != nop){
+                // some decoders need this - e.g. opus
+                decoder_ptr->setAudioInfo(info);
                 decoder_ptr->begin();
                 encoder_ptr->setAudioInfo(info);
                 encoder_ptr->begin();
