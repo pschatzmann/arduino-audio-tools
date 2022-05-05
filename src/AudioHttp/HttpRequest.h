@@ -168,14 +168,10 @@ class HttpRequest {
 
         // opens a connection to the indicated host
         virtual int connect(const char *ip, uint16_t port, int32_t timeout) {
-            LOGI("connect %s", ip);
-            Serial.println("try to connect");
-#ifdef CONNECT_WITH_TIMEOUT
-            return this->client_ptr->connect(ip, port, timeout);
-#else
-            return this->client_ptr->connect(ip, port);
-#endif
-            
+            client_ptr->setTimeout(timeout);
+            int is_connected = this->client_ptr->connect(ip, port);
+            LOGI("connected %s timeout %d", is_connected, timeout);
+            return is_connected;
         }
 
         // sends request and reads the reply_header from the server
@@ -187,8 +183,8 @@ class HttpRequest {
             }
             if (!this->connected()){
                 LOGI("process connecting to host %s port %d", url.host(), url.port());
-                bool is_connected = connect(url.host(), url.port(), clientTimeout);
-                if (!is_connected){
+                int is_connected = connect(url.host(), url.port(), clientTimeout);
+                if (is_connected!=1){
                     LOGE("Connect failed");
                     return -1;
                 }
