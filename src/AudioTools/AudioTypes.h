@@ -33,6 +33,16 @@ struct AudioBaseInfo {
     bool operator!=(AudioBaseInfo alt){
         return !(*this == alt);
     } 
+    void setAudioInfo(AudioBaseInfo info){
+      sample_rate = info.sample_rate;
+      channels = info.channels;
+      bits_per_sample = info.bits_per_sample;
+    }
+
+    AudioBaseInfo& operator= (const AudioBaseInfo& info){
+      setAudioInfo(info);
+      return *this;      
+    }
 
     virtual void logInfo() {
       LOGI("sample_rate: %d", sample_rate);
@@ -70,6 +80,8 @@ class AudioBaseInfoSource {
 class AudioWriter {
   public: 
       virtual size_t write(const void *in_ptr, size_t in_size) = 0;
+      virtual void setAudioInfo(AudioBaseInfo from) = 0;
+      virtual void setOutputStream(Print &out_stream) = 0;
       virtual operator boolean() = 0;
 };
 
@@ -81,11 +93,11 @@ class AudioDecoder : public AudioWriter, public  AudioBaseInfoSource {
   public: 
       AudioDecoder() = default;
       virtual ~AudioDecoder() = default;
-      virtual void setOutputStream(Print &out_stream) = 0;
       virtual void begin() = 0;
       virtual void end() = 0;
       virtual AudioBaseInfo audioInfo() = 0;
-      virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi) = 0;
+      // for most decoder this is not needed
+      virtual void setAudioInfo(AudioBaseInfo from) override {}
 };
 
 /**
@@ -96,8 +108,6 @@ class AudioEncoder : public AudioWriter {
   public: 
       AudioEncoder() = default;
       virtual ~AudioEncoder() = default;
-      virtual void setOutputStream(Print &out_stream) = 0;
-      virtual void setAudioInfo(AudioBaseInfo info) = 0;
       virtual void begin() = 0;
       virtual void end() = 0;
       virtual const char *mime() = 0;

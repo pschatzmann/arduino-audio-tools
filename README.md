@@ -40,6 +40,7 @@ As “Audio Sinks” we will have e.g:
 - Output to SPDIF/TOSLINK - [SPDIFStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_s_p_d_i_f_stream.html)
 - Bluetooth Speakers – [A2DPStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_a2_d_p_stream.html)
 - Serial to display the data as CSV – [CsvStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_csv_stream.html)
+- Serial to display the data as hex dump - [HexDumpStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_hex_dump_stream.html)
 - Encoding and Decoding of Audio [EncodedAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_encoded_audio_stream.html)
 - Desktop Integration - [PortAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_port_audio_stream.html)
 - ID3 Metadata for MP3 - [MetaDataID3](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_meta_data_i_d3.html)
