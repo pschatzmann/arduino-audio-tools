@@ -95,9 +95,9 @@ class AudioStreamX : public AudioStream {
 class AudioStreamWrapper : public AudioStream {
  public:
      AudioStreamWrapper(Stream& s) { 
+         LOGD(LOG_METHOD);
          p_stream = &s; 
          p_stream->setTimeout(clientTimeout);
-         Serial.println("set timeout in stream audiostreamwrapper");
      }
 
   virtual bool begin(){return true;}
