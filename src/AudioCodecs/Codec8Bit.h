@@ -6,20 +6,18 @@ namespace audio_tools {
 
 
 /**
- * @brief RAWDecoder - Actually this class does no encoding or decoding at all. It just passes on the 
- * data. The reason that this class exists is that we can use the same processing chain for different
- * file types and just replace the decoder.
+ * @brief Decoder8Bit - Converts an 8 Bit Stream into 16Bits
  * 
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class RAWDecoder : public AudioDecoder {
+class Decoder8Bit : public AudioDecoder {
     public:
         /**
          * @brief Construct a new RAWDecoder object
          */
 
-        RAWDecoder(){
+        Decoder8Bit(){
             LOGD(LOG_METHOD);
         }
 
@@ -28,7 +26,7 @@ class RAWDecoder : public AudioDecoder {
          * 
          * @param out_stream Output Stream to which we write the decoded result
          */
-        RAWDecoder(Print &out_stream, bool active=true){
+        Decoder8Bit(Print &out_stream, bool active=true){
             LOGD(LOG_METHOD);
             p_print = &out_stream;
             this->active = active;
@@ -41,7 +39,7 @@ class RAWDecoder : public AudioDecoder {
          * @param bi Object that will be notified about the Audio Formt (Changes)
          */
 
-        RAWDecoder(Print &out_stream, AudioBaseInfoDependent &bi){
+        Decoder8Bit(Print &out_stream, AudioBaseInfoDependent &bi){
             LOGD(LOG_METHOD);
             p_print = &out_stream;
         }
@@ -80,7 +78,12 @@ class RAWDecoder : public AudioDecoder {
 
         virtual size_t write(const void *in_ptr, size_t in_size) override {
             if (p_print==nullptr)  return 0;
-            return p_print->write((uint8_t*)in_ptr, in_size);
+            buffer.resize(in_size);
+            int8_t* pt8 = (int8_t*) in_ptr;
+            for (int j=0;j<in_size;j++){
+                buffer[j] = pt8[j]*258;
+            }
+            return p_print->write((uint8_t*)buffer.data(), in_size*sizeof(int16_t));
         }
 
         virtual operator boolean() override {
@@ -92,23 +95,24 @@ class RAWDecoder : public AudioDecoder {
         AudioBaseInfoDependent *bid=nullptr;
         AudioBaseInfo cfg;
         bool active;
+        Vector<int16_t> buffer;
 
 };
 
 /**
- * @brief RAWDecoder - Actually this class does no encoding or decoding at all. It just passes on the 
+ * @brief Encoder8Bits - Condenses 16 bit PCM data stream to 8 bits
  * data. 
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class RAWEncoder : public AudioEncoder {
+class Encoder8Bit : public AudioEncoder {
     public: 
         // Empty Constructor - the output stream must be provided with begin()
-        RAWEncoder(){
+        Encoder8Bit(){
         }        
 
         // Constructor providing the output stream
-        RAWEncoder(Print &out){
+        Encoder8Bit(Print &out){
             p_print = &out;
         }
 
@@ -145,7 +149,14 @@ class RAWEncoder : public AudioEncoder {
         /// Writes PCM data to be encoded as RAW
         virtual size_t write(const void *in_ptr, size_t in_size) override {
             if (p_print==nullptr)  return 0;
-            return p_print->write((uint8_t*)in_ptr, in_size);
+            int16_t *pt16 = (int16_t*)in_ptr;
+            buffer.resize(in_size);
+            size_t samples = in_size/2;
+            for (int j=0;j<samples;j++){
+                buffer[j] = pt16[j] / 258;
+            }
+
+            return p_print->write((uint8_t*)buffer.data(), samples);
         }
 
         operator boolean() override {
@@ -159,6 +170,9 @@ class RAWEncoder : public AudioEncoder {
     protected:
         Print* p_print=nullptr;;
         volatile bool is_open;
+        Vector<int8_t> buffer;
+        
+
 };
 
 }

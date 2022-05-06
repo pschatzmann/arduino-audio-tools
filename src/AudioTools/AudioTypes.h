@@ -154,6 +154,7 @@ class CodecNOP : public  AudioDecoder, public AudioEncoder {
 
 };
 
+const char* mime_pcm = "audio/pcm";
 
 
 }
