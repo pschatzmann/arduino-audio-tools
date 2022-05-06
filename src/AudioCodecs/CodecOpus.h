@@ -4,7 +4,9 @@
 #include "Print.h"
 #include "opus.h"
 
-#define MAX_BUFFER_SIZE (5760)
+#ifndef OPUS_MAX_BUFFER_SIZE
+#define OPUS_MAX_BUFFER_SIZE (5760)
+#endif
 
 namespace audio_tools {
 
@@ -22,7 +24,7 @@ struct OpusSettings : public AudioBaseInfo {
     /// must be 16!
     bits_per_sample = 16;
   }
-  int max_buffer_size = MAX_BUFFER_SIZE;
+  int max_buffer_size = OPUS_MAX_BUFFER_SIZE;
 };
 
 
@@ -61,7 +63,8 @@ struct OpusSettings : public AudioBaseInfo {
 
 struct OpusEncoderSettings : public OpusSettings {
   OpusEncoderSettings() : OpusSettings() {}
-  int max_buffer_size = MAX_BUFFER_SIZE;
+  /// Default is 5760
+  int max_buffer_size = OPUS_MAX_BUFFER_SIZE;
   /// OPUS_APPLICATION_AUDIO, OPUS_APPLICATION_VOIP, OPUS_APPLICATION_RESTRICTED_LOWDELAY
   int application = OPUS_APPLICATION_AUDIO;
   /// 6000,  12000, 16000,  24000, 32000, 48000,  64000, 96000, 510000, OPUS_AUTO, OPUS_BITRATE_MAX
