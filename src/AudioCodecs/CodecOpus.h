@@ -4,60 +4,91 @@
 #include "Print.h"
 #include "opus.h"
 
-#define MAX_PACKET (4000)
-#define MAX_FRAME_SAMP (5760)
+#define MAX_BUFFER_SIZE (5760)
 
 namespace audio_tools {
 
 /**
- * @brief OpusSettings where the following values are valid:
- *
-  int channels[2] = {1, 2};
-  int applications[3] = {OPUS_APPLICATION_AUDIO, OPUS_APPLICATION_VOIP,
-                         OPUS_APPLICATION_RESTRICTED_LOWDELAY};
+ * @brief Setting for Opus Decoder
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+struct OpusSettings : public AudioBaseInfo {
+  OpusSettings() {
+    /// 8000,12000,16000 ,24000,48000
+    sample_rate = 48000;
+    /// 1 or 2
+    channels = 2;
+    /// must be 16!
+    bits_per_sample = 16;
+  }
+  int max_buffer_size = MAX_BUFFER_SIZE;
+};
 
-  int sample_rates[] = {8000,12000,16000 ,24000,48000}
+
+/**
+ * @brief Setting for Opus Encoder where the following values are valid:
+ * -1 indicates that the default value should be used and that this codec is not setting the value.
+ *
+  int channels[2] = {1, 2};<br>
+  int applications[3] = {OPUS_APPLICATION_AUDIO, OPUS_APPLICATION_VOIP,
+                         OPUS_APPLICATION_RESTRICTED_LOWDELAY};<br>
+
+  int sample_rates[] = {8000,12000,16000 ,24000,48000}<br>
 
   int bitrates[11] = {6000,  12000, 16000,  24000,     32000,           48000,
-                      64000, 96000, 510000, OPUS_AUTO, OPUS_BITRATE_MAX};
-  int force_channels[4] = {OPUS_AUTO, OPUS_AUTO, 1, 2};
-  int use_vbr[3] = {0, 1, 1};
-  int vbr_constraints[3] = {0, 1, 1};
-  int complexities[11] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+                      64000, 96000, 510000, OPUS_AUTO, OPUS_BITRATE_MAX};<br>
+  int force_channels[4] = {OPUS_AUTO, OPUS_AUTO, 1, 2};<br>
+  int use_vbr[3] = {0, 1, 1};<br>
+  int vbr_constraints[3] = {0, 1, 1};<br>
+  int complexities[11] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};<br>
   int max_bandwidths[6] = {
       OPUS_BANDWIDTH_NARROWBAND, OPUS_BANDWIDTH_MEDIUMBAND,
       OPUS_BANDWIDTH_WIDEBAND,   OPUS_BANDWIDTH_SUPERWIDEBAND,
-      OPUS_BANDWIDTH_FULLBAND,   OPUS_BANDWIDTH_FULLBAND};
+      OPUS_BANDWIDTH_FULLBAND,   OPUS_BANDWIDTH_FULLBAND};<br>
 
-  int signals[4] = {OPUS_AUTO, OPUS_AUTO, OPUS_SIGNAL_VOICE, OPUS_SIGNAL_MUSIC};
-  int inband_fecs[3] = {0, 0, 1};
-  int packet_loss_perc[4] = {0, 1, 2, 5};
-  int lsb_depths[2] = {8, 24};
-  int prediction_disabled[3] = {0, 0, 1};
-  int use_dtx[2] = {0, 1};
+  int signals[4] = {OPUS_AUTO, OPUS_AUTO, OPUS_SIGNAL_VOICE, OPUS_SIGNAL_MUSIC};<br>
+  int inband_fecs[3] = {0, 0, 1};<br>
+  int packet_loss_perc[4] = {0, 1, 2, 5};<br>
+  int lsb_depths[2] = {8, 24};<br>
+  int prediction_disabled[3] = {0, 0, 1};<br>
+  int use_dtx[2] = {0, 1};<br>
   int frame_sizes_ms_x2[9] = {5,   10,  20,  40, 80,
-                              120, 160, 200, 240}; /* x2 to avoid 2.5 ms
+                              120, 160, 200, 240}; /* x2 to avoid 2.5 ms <br>
+ * @author Phil Schatzmann
+ * @copyright GPLv3
 **/
 
-struct OpusSettings : public AudioBaseInfo {
-  OpusSettings() {
-    sample_rate = 48000;
-    channels = 2;
-    bits_per_sample = 16;
-  }
+struct OpusEncoderSettings : public OpusSettings {
+  OpusEncoderSettings() : OpusSettings() {}
+  int max_buffer_size = MAX_BUFFER_SIZE;
+  /// OPUS_APPLICATION_AUDIO, OPUS_APPLICATION_VOIP, OPUS_APPLICATION_RESTRICTED_LOWDELAY
   int application = OPUS_APPLICATION_AUDIO;
+  /// 6000,  12000, 16000,  24000, 32000, 48000,  64000, 96000, 510000, OPUS_AUTO, OPUS_BITRATE_MAX
   int bitrate = -1;
+  /// OPUS_AUTO, OPUS_AUTO, 1, 2
   int force_channel = -1;
+  /// 0, 1
   int vbr = -1;
+  /// 0, 1
   int vbr_constraint = -1;
+  /// 0 to 10
   int complexity = -1;
+  /// OPUS_BANDWIDTH_NARROWBAND, OPUS_BANDWIDTH_MEDIUMBAND,OPUS_BANDWIDTH_WIDEBAND,   OPUS_BANDWIDTH_SUPERWIDEBAND, OPUS_BANDWIDTH_FULLBAND,   OPUS_BANDWIDTH_FULLBAND
   int max_bandwidth = -1;
+  /// OPUS_AUTO, OPUS_AUTO, OPUS_SIGNAL_VOICE, OPUS_SIGNAL_MUSIC
   int singal = -1;
+  ///  0, 1
   int inband_fec = -1;
+  /// 0, 1, 2, 5
   int packet_loss_perc = -1;
+  /// 8, 24
   int lsb_depth = -1;
+  /// 0, 1
   int prediction_disabled = -1;
+  /// 0, 1
   int use_dtx = -1;
+  /// 5,   10,  20,  40, 80, 120, 160, 200, 240
   int frame_sizes_ms_x2 = -1; /* x2 to avoid 2.5 ms */
 };
 
@@ -93,9 +124,9 @@ class OpusAudioDecoder : public AudioDecoder {
   AudioBaseInfo audioInfo() override { return cfg; }
 
   /// Provides access to the configuration
-  AudioBaseInfo &config() { return cfg; }
+  OpusSettings &config() { return cfg; }
 
-  void begin(AudioBaseInfo info) {
+  void begin(OpusSettings info) {
     LOGD(LOG_METHOD);
     cfg = info;
     if (bid != nullptr) {
@@ -106,7 +137,7 @@ class OpusAudioDecoder : public AudioDecoder {
 
   void begin() override {
     LOGD(LOG_METHOD);
-    outbuf.resize(MAX_FRAME_SAMP);
+    outbuf.resize(cfg.max_buffer_size);
     int err;
     dec = opus_decoder_create(cfg.sample_rate, cfg.channels, &err);
     if (err != OPUS_OK) {
@@ -126,8 +157,11 @@ class OpusAudioDecoder : public AudioDecoder {
     active = false;
   }
 
-  /// We actually do nothing with this
-  void setAudioInfo(AudioBaseInfo from) override { cfg = from; }
+  void setAudioInfo(AudioBaseInfo from) override {
+    cfg.sample_rate = from.sample_rate;
+    cfg.channels = from.channels;
+    cfg.bits_per_sample = from.bits_per_sample;
+  }
 
   size_t write(const void *in_ptr, size_t in_size) {
     if (!active || p_print == nullptr) return 0;
@@ -135,7 +169,7 @@ class OpusAudioDecoder : public AudioDecoder {
     LOGD("opus_decode - bytes: %d", in_size);
     int in_band_forware_error_correction = 0;
     int out_samples = opus_decode(dec, (uint8_t *)in_ptr, in_size,
-         (opus_int16 *)outbuf.data(), MAX_FRAME_SAMP, in_band_forware_error_correction);
+         (opus_int16 *)outbuf.data(), cfg.max_buffer_size, in_band_forware_error_correction);
     if (out_samples < 0) {
       LOGE("opus_decode: %s",opus_strerror(out_samples));
     } else if (out_samples > 0) {
@@ -153,7 +187,7 @@ class OpusAudioDecoder : public AudioDecoder {
  protected:
   Print *p_print = nullptr;
   AudioBaseInfoDependent *bid = nullptr;
-  AudioBaseInfo cfg;
+  OpusSettings cfg;
   ::OpusDecoder *dec;
   bool active;
   Vector<uint8_t> outbuf;
@@ -190,7 +224,7 @@ class OpusAudioEncoder : public AudioEncoder {
   /// starts the processing using the actual OpusAudioInfo
   void begin() override {
     int err;
-    packet.resize(MAX_PACKET + 257);
+    packet.resize(cfg.max_buffer_size);
     frame.resize(getFrameSizeSamples(cfg.sample_rate) * 2);
     assert(frame.data() != nullptr);
     assert(packet.data() != nullptr);
@@ -206,9 +240,9 @@ class OpusAudioEncoder : public AudioEncoder {
   }
 
   /// Provides access to the configuration
-  OpusSettings &config() { return cfg; }
+  OpusEncoderSettings &config() { return cfg; }
 
-  void begin(OpusSettings settings) {
+  void begin(OpusEncoderSettings settings) {
     cfg = settings;
     begin();
   }
@@ -240,7 +274,7 @@ class OpusAudioEncoder : public AudioEncoder {
  protected:
   Print *p_print = nullptr;
   ::OpusEncoder *enc = nullptr;
-  OpusSettings cfg;
+  OpusEncoderSettings cfg;
   bool is_open = false;
   Vector<uint8_t> packet;
   Vector<uint8_t> frame;
@@ -265,10 +299,10 @@ class OpusAudioEncoder : public AudioEncoder {
       int frames = lenBytes / cfg.channels / sizeof(int16_t);
       LOGD("opus_encode - frame_size: %d", frames);
       int len = opus_encode(enc, (opus_int16 *)frame.data(), frames, packet.data(),
-                            MAX_PACKET);
+                            cfg.max_buffer_size);
       if (len < 0) {
         LOGE("opus_encode: %s", opus_strerror(len));
-      } else if (len > 0 && len <= MAX_PACKET) {
+      } else if (len > 0 && len <= cfg.max_buffer_size) {
         p_print->write(packet.data(), len);
       }
     }

@@ -153,9 +153,9 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>stop</b> ()</
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:ace87b0c9179cd15fae5ce321b12aa181"><td class="memItemLeft" align="right" valign="top"><a id="ace87b0c9179cd15fae5ce321b12aa181"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>connect</b> (const char *ip, uint16_t port)</td></tr>
-<tr class="separator:ace87b0c9179cd15fae5ce321b12aa181"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab65e9b3d3669f98fda025baeebeee947"><td class="memItemLeft" align="right" valign="top"><a id="ab65e9b3d3669f98fda025baeebeee947"></a>
+virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>connect</b> (const char *ip, uint16_t port, int32_t timeout)</td></tr>
+<tr class="separator:ab65e9b3d3669f98fda025baeebeee947"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b9061cc63873026b43a292e99f4c336"><td class="memItemLeft" align="right" valign="top"><a id="a3b9061cc63873026b43a292e99f4c336"></a>
 virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (MethodID action, <a class="el" href="classaudio__tools_1_1_url.html">Url</a> &amp;url, const char *mime, const char *data, int len=-1)</td></tr>
 <tr class="separator:a3b9061cc63873026b43a292e99f4c336"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -177,6 +177,9 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>agent</b> = n
 <tr class="memitem:a9c4aa75029bd822279b0bf05a9b331a3"><td class="memItemLeft" align="right" valign="top"><a id="a9c4aa75029bd822279b0bf05a9b331a3"></a>
 Client *&#160;</td><td class="memItemRight" valign="bottom"><b>client_ptr</b></td></tr>
 <tr class="separator:a9c4aa75029bd822279b0bf05a9b331a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac432b1828e30d631d639c8f7bcd40a99"><td class="memItemLeft" align="right" valign="top"><a id="ac432b1828e30d631d639c8f7bcd40a99"></a>
+int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>clientTimeout</b> = URL_CLIENT_TIMEOUT</td></tr>
+<tr class="separator:ac432b1828e30d631d639c8f7bcd40a99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0154e89af0adcf6ee453c0ec55b3c611"><td class="memItemLeft" align="right" valign="top"><a id="a0154e89af0adcf6ee453c0ec55b3c611"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><b>connection</b> = CON_CLOSE</td></tr>
 <tr class="separator:a0154e89af0adcf6ee453c0ec55b3c611"><td class="memSeparator" colspan="2">&#160;</td></tr>

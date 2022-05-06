@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['wavetable_1645',['waveTable',['../classaudio__tools_1_1_modulation_base_class.html#a5812cc2aa6ececef9d5087f036166dcb',1,'audio_tools::ModulationBaseClass']]],
-  ['window_5ffunction_1646',['window_function',['../structaudio__tools_1_1_audio_f_f_t_config.html#a379001b90446e9cf1ed1c39f758067bd',1,'audio_tools::AudioFFTConfig']]]
+  ['samplerate_1718',['sampleRate',['../classaudio__tools_1_1_modulation_base_class.html#a480dda18b58f394004dff4733f5a182a',1,'audio_tools::ModulationBaseClass']]],
+  ['singal_1719',['singal',['../structaudio__tools_1_1_opus_encoder_settings.html#a97444e7496187bae81bac1d05532ebf0',1,'audio_tools::OpusEncoderSettings']]],
+  ['swing_1720',['swing',['../classaudio__tools_1_1_simple_chorus.html#a17e7b346dd8d8cc19c8b46908fadb118',1,'audio_tools::SimpleChorus']]]
 ];
