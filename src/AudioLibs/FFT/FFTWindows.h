@@ -81,12 +81,22 @@ class BufferedWindow : public WindowFunction {
   int len;
 };
 
+/**
+ * @brief Rectange FFT Window function
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
 class Rectange : public WindowFunction {
  public:
   Rectange() = default;
   float factor(int idx) { return 1.0; }
 };
 
+/**
+ * @brief Hamming FFT Window function
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
 class Hamming : public WindowFunction {
  public:
   Hamming() = default;
@@ -95,6 +105,11 @@ class Hamming : public WindowFunction {
   }
 };
 
+/**
+ * @brief Hann FFT Window function
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
 class Hann : public WindowFunction {
  public:
   Hann() = default;
@@ -103,6 +118,11 @@ class Hann : public WindowFunction {
   }
 };
 
+/**
+ * @brief Triangle FFT Window function
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
 class Triangle : public WindowFunction {
  public:
   Triangle() = default;
@@ -112,6 +132,12 @@ class Triangle : public WindowFunction {
                   samples_minus_1);
   }
 };
+
+/**
+ * @brief Nuttall FFT Window function
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
 
 class Nuttall : public WindowFunction {
  public:
@@ -123,6 +149,12 @@ class Nuttall : public WindowFunction {
   }
 };
 
+/**
+ * @brief Blackman FFT Window function
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+
 class Blackman : public WindowFunction {
  public:
   Blackman() = default;
@@ -133,6 +165,11 @@ class Blackman : public WindowFunction {
   }
 };
 
+/**
+ * @brief BlackmanNuttall FFT Window function
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
 class BlackmanNuttall : public WindowFunction {
  public:
   BlackmanNuttall() = default;
@@ -143,6 +180,11 @@ class BlackmanNuttall : public WindowFunction {
   }
 };
 
+/**
+ * @brief BlackmanHarris FFT Window function
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
 class BlackmanHarris : public WindowFunction {
  public:
   BlackmanHarris() = default;
@@ -153,6 +195,11 @@ class BlackmanHarris : public WindowFunction {
   }
 };
 
+/**
+ * @brief FlatTop FFT Window function
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
 class FlatTop : public WindowFunction {
  public:
   FlatTop() = default;
@@ -163,6 +210,11 @@ class FlatTop : public WindowFunction {
   }
 };
 
+/**
+ * @brief Welch FFT Window function
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
 class Welch : public WindowFunction {
  public:
   Welch() = default;
