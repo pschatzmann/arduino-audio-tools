@@ -67,6 +67,18 @@ class int24_t  {
   /// provides value between -1.0 and 1.0
   float scaleFloat() const { return toFloat() / INT24_MAX; }
 
+
+  void setAndScale16(int16_t i16) {
+    value[0] = 0;  // clear trailing byte
+    int16_t *p16 = (int16_t *)&value[1];
+    *p16 = i16;
+  }
+  int16_t getAndScale16() {
+    int16_t *p16 = (int16_t *)&value[1];
+    return *p16;
+  }
+
+
  private:
   uint8_t value[3];
 };
