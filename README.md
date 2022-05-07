@@ -135,6 +135,7 @@ Dependent on the example you might need to install some of the following librari
 - [Tensorflow Lite](https://github.com/pschatzmann/tflite-micro-arduino-examples) Machine Learning for Arduino
 - [KissFFT](https://github.com/pschatzmann/kissfft) Fast Fourier Transform FFT Library
 - [esp32-fft](https://github.com/pschatzmann/esp32-fft) Another FFT library (not only for the ESP32)
+- [rp2040-i2s](https://github.com/pschatzmann/rp2040-i2s) I2S for MBED RP2040
 
 
 After installing a library, you might need to activate it's usage in the ```AudioConfig.h``` file!

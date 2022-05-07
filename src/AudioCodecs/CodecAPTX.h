@@ -14,21 +14,6 @@
 
 namespace audio_tools {
 
-class i24_t {
- public:
-  byte value[3] = {0};
-
-  void set16(int16_t i16) {
-    value[0]=0; // clear trailing byte
-    int16_t *p16 = (int16_t *)&value[1];
-    *p16 = i16;
-  }
-  int16_t get16() {
-    int16_t *p16 = (int16_t *)&value[1];
-    return *p16;
-  }
-};
-
 /**
  * @brief Decoder for OpenAptx. Depends on
  * https://github.com/pschatzmann/libopenaptx
@@ -83,8 +68,13 @@ class APTXDecoder : public AudioDecoder {
       }
     }
 
-    output_buffer.resize(length*6);
+    // output_buffer.resize(length*10);
+    // processed = aptx_decode(ctx,(const uint8_t *) input_buffer, length,
+    // output_buffer.data(),
+    //                         output_buffer.size(), &written);
 
+    output_buffer.resize(length * 10);
+    memset(output_buffer.data(), 0, output_buffer.size());
     processed = aptx_decode_sync(ctx, (const uint8_t *)input_buffer, length,
                                  output_buffer.data(), output_buffer.size(),
                                  &written, &synced, &dropped);
@@ -121,10 +111,10 @@ class APTXDecoder : public AudioDecoder {
       int samples = written / 3;
       LOGI("written: %d", written);
       LOGI("samples: %d", samples);
-      i24_t *p_int24 = (i24_t *)output_buffer.data();
+      int24_t *p_int24 = (int24_t *)output_buffer.data();
       int16_t *p_int16 = (int16_t *)output_buffer.data();
       for (int j = 0; j < samples; j++) {
-        p_int16[j] = p_int24[j].get16();
+        p_int16[j] = p_int24[j].getAndScale16();
       }
 
       if (p_print->write((uint8_t *)output_buffer.data(), samples * 2) !=
@@ -219,7 +209,7 @@ class APTXEncoder : public AudioEncoder {
 
   void begin() {
     LOGI(LOG_METHOD);
-    input_buffer.resize(4 * 2 * 3);
+    input_buffer.resize(4 * 2);
     output_buffer.resize(100 * (is_hd ? 6 : 4));
 
     LOGI("input_buffer.size: %d", input_buffer.size());
@@ -274,20 +264,22 @@ class APTXEncoder : public AudioEncoder {
 
     // process all bytes
     int16_t *in_ptr16 = (int16_t *)in_ptr;
-    for (int j = 0; j < in_size; j++) {
-      input_buffer[input_pos++].set16(in_ptr16[j]);
+    int in_samples = in_size / 2;
+    for (int j = 0; j < in_samples; j++) {
+      input_buffer[input_pos++].setAndScale16(in_ptr16[j]);
 
       // if input_buffer is full we encode
       if (input_pos >= input_buffer.size()) {
-        size_t result =
-            aptx_encode(ctx, (const uint8_t *)input_buffer.data(),
-                        input_buffer.size(), output_buffer.data() + output_pos,
-                        output_buffer.size() - output_pos, &output_written);
+        size_t result = aptx_encode(
+            ctx, (const uint8_t *)input_buffer.data(), input_buffer.size() * 3,
+            output_buffer.data() + output_pos,
+            output_buffer.size() - output_pos, &output_written);
 
         output_pos += output_written;
 
-        if (result != input_buffer.size()) {
-          LOGW("encode requested: %d, eff: %d", input_buffer.size(), result);
+        if (result != input_buffer.size() * 3) {
+          LOGW("encode requested: %d, eff: %d", input_buffer.size() * 3,
+               result);
         }
 
         // if output buffer is full we write the result
@@ -311,7 +303,7 @@ class APTXEncoder : public AudioEncoder {
  protected:
   bool is_hd;
   AudioBaseInfo info;
-  Vector<i24_t> input_buffer{4 * 2 * 3};
+  Vector<int24_t> input_buffer{4 * 2};
   Vector<uint8_t> output_buffer;
   int input_pos = 0;
   int output_pos = 0;

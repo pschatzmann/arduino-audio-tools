@@ -27,10 +27,10 @@ struct OpusSettings : public AudioBaseInfo {
   int max_buffer_size = OPUS_MAX_BUFFER_SIZE;
 };
 
-
 /**
  * @brief Setting for Opus Encoder where the following values are valid:
- * -1 indicates that the default value should be used and that this codec is not setting the value.
+ * -1 indicates that the default value should be used and that this codec is not
+setting the value.
  *
   int channels[2] = {1, 2};<br>
   int applications[3] = {OPUS_APPLICATION_AUDIO, OPUS_APPLICATION_VOIP,
@@ -49,14 +49,12 @@ struct OpusSettings : public AudioBaseInfo {
       OPUS_BANDWIDTH_WIDEBAND,   OPUS_BANDWIDTH_SUPERWIDEBAND,
       OPUS_BANDWIDTH_FULLBAND,   OPUS_BANDWIDTH_FULLBAND};<br>
 
-  int signals[4] = {OPUS_AUTO, OPUS_AUTO, OPUS_SIGNAL_VOICE, OPUS_SIGNAL_MUSIC};<br>
-  int inband_fecs[3] = {0, 0, 1};<br>
-  int packet_loss_perc[4] = {0, 1, 2, 5};<br>
-  int lsb_depths[2] = {8, 24};<br>
-  int prediction_disabled[3] = {0, 0, 1};<br>
-  int use_dtx[2] = {0, 1};<br>
-  int frame_sizes_ms_x2[9] = {5,   10,  20,  40, 80,
-                              120, 160, 200, 240}; /* x2 to avoid 2.5 ms <br>
+  int signals[4] = {OPUS_AUTO, OPUS_AUTO, OPUS_SIGNAL_VOICE,
+OPUS_SIGNAL_MUSIC};<br> int inband_fecs[3] = {0, 0, 1};<br> int
+packet_loss_perc[4] = {0, 1, 2, 5};<br> int lsb_depths[2] = {8, 24};<br> int
+prediction_disabled[3] = {0, 0, 1};<br> int use_dtx[2] = {0, 1};<br> int
+frame_sizes_ms_x2[9] = {5,   10,  20,  40, 80, 120, 160, 200, 240}; /* x2 to
+avoid 2.5 ms <br>
  * @author Phil Schatzmann
  * @copyright GPLv3
 **/
@@ -65,9 +63,11 @@ struct OpusEncoderSettings : public OpusSettings {
   OpusEncoderSettings() : OpusSettings() {}
   /// Default is 5760
   int max_buffer_size = OPUS_MAX_BUFFER_SIZE;
-  /// OPUS_APPLICATION_AUDIO, OPUS_APPLICATION_VOIP, OPUS_APPLICATION_RESTRICTED_LOWDELAY
+  /// OPUS_APPLICATION_AUDIO, OPUS_APPLICATION_VOIP,
+  /// OPUS_APPLICATION_RESTRICTED_LOWDELAY
   int application = OPUS_APPLICATION_AUDIO;
-  /// 6000,  12000, 16000,  24000, 32000, 48000,  64000, 96000, 510000, OPUS_AUTO, OPUS_BITRATE_MAX
+  /// 6000,  12000, 16000,  24000, 32000, 48000,  64000, 96000, 510000,
+  /// OPUS_AUTO, OPUS_BITRATE_MAX
   int bitrate = -1;
   /// OPUS_AUTO, OPUS_AUTO, 1, 2
   int force_channel = -1;
@@ -77,7 +77,10 @@ struct OpusEncoderSettings : public OpusSettings {
   int vbr_constraint = -1;
   /// 0 to 10
   int complexity = -1;
-  /// OPUS_BANDWIDTH_NARROWBAND, OPUS_BANDWIDTH_MEDIUMBAND,OPUS_BANDWIDTH_WIDEBAND,   OPUS_BANDWIDTH_SUPERWIDEBAND, OPUS_BANDWIDTH_FULLBAND,   OPUS_BANDWIDTH_FULLBAND
+  /// OPUS_BANDWIDTH_NARROWBAND,
+  /// OPUS_BANDWIDTH_MEDIUMBAND,OPUS_BANDWIDTH_WIDEBAND,
+  /// OPUS_BANDWIDTH_SUPERWIDEBAND, OPUS_BANDWIDTH_FULLBAND,
+  /// OPUS_BANDWIDTH_FULLBAND
   int max_bandwidth = -1;
   /// OPUS_AUTO, OPUS_AUTO, OPUS_SIGNAL_VOICE, OPUS_SIGNAL_MUSIC
   int singal = -1;
@@ -114,7 +117,7 @@ class OpusAudioDecoder : public AudioDecoder {
    */
   OpusAudioDecoder(Print &out_stream) {
     LOGD(LOG_METHOD);
-    p_print = &out_stream;
+    setOutputStream(out_stream);
   }
 
   /// Defines the output Stream
@@ -171,10 +174,11 @@ class OpusAudioDecoder : public AudioDecoder {
     // decode data
     LOGD("opus_decode - bytes: %d", in_size);
     int in_band_forware_error_correction = 0;
-    int out_samples = opus_decode(dec, (uint8_t *)in_ptr, in_size,
-         (opus_int16 *)outbuf.data(), cfg.max_buffer_size, in_band_forware_error_correction);
+    int out_samples = opus_decode(
+        dec, (uint8_t *)in_ptr, in_size, (opus_int16 *)outbuf.data(),
+        cfg.max_buffer_size, in_band_forware_error_correction);
     if (out_samples < 0) {
-      LOGE("opus_decode: %s",opus_strerror(out_samples));
+      LOGE("opus_decode: %s", opus_strerror(out_samples));
     } else if (out_samples > 0) {
       // convert to little endian
 
@@ -194,7 +198,6 @@ class OpusAudioDecoder : public AudioDecoder {
   ::OpusDecoder *dec;
   bool active;
   Vector<uint8_t> outbuf;
-
 };
 
 /**
@@ -209,7 +212,7 @@ class OpusAudioEncoder : public AudioEncoder {
   OpusAudioEncoder() {}
 
   // Constructor providing the output stream
-  OpusAudioEncoder(Print &out) { p_print = &out; }
+  OpusAudioEncoder(Print &out) { setOutputStream(out); }
 
   /// Defines the output Stream
   void setOutputStream(Print &out_stream) override { p_print = &out_stream; }
@@ -290,7 +293,6 @@ class OpusAudioEncoder : public AudioEncoder {
     // if frame is complete -> encode
     int frame_size = frame.size();
     if (frame_pos >= frame_size) {
-
       encodeFrame(frame_size);
       frame_pos = 0;
     }
@@ -298,11 +300,10 @@ class OpusAudioEncoder : public AudioEncoder {
 
   void encodeFrame(int lenBytes) {
     if (lenBytes > 0) {
-
       int frames = lenBytes / cfg.channels / sizeof(int16_t);
       LOGD("opus_encode - frame_size: %d", frames);
-      int len = opus_encode(enc, (opus_int16 *)frame.data(), frames, packet.data(),
-                            cfg.max_buffer_size);
+      int len = opus_encode(enc, (opus_int16 *)frame.data(), frames,
+                            packet.data(), cfg.max_buffer_size);
       if (len < 0) {
         LOGE("opus_encode: %s", opus_strerror(len));
       } else if (len > 0 && len <= cfg.max_buffer_size) {
