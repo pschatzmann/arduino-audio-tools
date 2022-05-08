@@ -11,6 +11,11 @@
 #include "AudioTools/AudioTypes.h"
 #include "g722_codec.h"
 
+// size in bytes
+#define G722_PCM_SIZE 80
+#define G722_ENC_SIZE 40
+
+
 namespace audio_tools {
 
 /**
@@ -101,16 +106,14 @@ class G722Decoder : public AudioDecoder {
 
     // decode if buffer is full
     if (input_pos >= input_buffer.size()) {
-      g722_decode(g722_dctx, input_buffer.data(), input_buffer.size(),
+      int result_samples = g722_decode(g722_dctx, input_buffer.data(), input_buffer.size(),
                   (int16_t *)result_buffer.data());
 
-      // // scale to 13 to 16-bit samples
-      // int16_t *pt16 = (int16_t *)result_buffer.data();
-      // for (int j = 0; j < result_buffer.size() / 2; j++) {
-      //   pt16[j] = htole16(pt16[j]);
-      // }
+      if (result_samples*2>result_buffer.size()){
+        LOGE("Decoder:Result buffer too small: %d -> %d",result_buffer.size(),result_samples*2);
+      }
 
-      p_print->write(result_buffer.data(), result_buffer.size());
+      p_print->write(result_buffer.data(), result_samples);
       input_pos = 0;
     }
   }
@@ -149,8 +152,8 @@ class G722Encoder : public AudioEncoder {
       return;
     }
 
-    input_buffer.resize(40);
-    result_buffer.resize(10);
+    input_buffer.resize(G722_PCM_SIZE);
+    result_buffer.resize(G722_ENC_SIZE);
     is_active = true;
   }
 
@@ -198,14 +201,13 @@ class G722Encoder : public AudioEncoder {
     if (buffer_pos >= input_buffer.size()) {
       // convert for little endian
       int samples = input_buffer.size() / 2;
-      // int16_t *pt16 = (int16_t *)input_buffer.data();
-      // for (int j = 0; j < samples; j++) {
-      //   pt16[j] = le16toh(pt16[j]);
-      // }
       // encode
-      g722_encode(g722_ectx,(const int16_t*) input_buffer.data(), samples,
+     int result_len = g722_encode(g722_ectx,(const int16_t*) input_buffer.data(), samples,
                   result_buffer.data());
-      p_print->write(result_buffer.data(), result_buffer.size());
+      if (result_len>result_buffer.size()){
+        LOGE("Encoder:Result buffer too small: %d -> %d",result_buffer.size(),result_len);
+      }
+      p_print->write(result_buffer.data(), result_len);
       buffer_pos = 0;
     }
   }
