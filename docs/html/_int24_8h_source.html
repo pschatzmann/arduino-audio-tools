@@ -126,12 +126,24 @@ $(function() {
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
 <div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1int24__t.html#a3298ae3a80ee055b725e2e4ee0bf8662">   68</a></span>&#160;  <span class="keywordtype">float</span> <a class="code" href="classaudio__tools_1_1int24__t.html#a3298ae3a80ee055b725e2e4ee0bf8662">scaleFloat</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="classaudio__tools_1_1int24__t.html#aca7d64ffb1a224536f60729c39737213">toFloat</a>() / INT24_MAX; }</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  uint8_t value[3];</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;};</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="keywordtype">void</span> setAndScale16(int16_t i16) {</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    value[0] = 0;  <span class="comment">// clear trailing byte</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    int16_t *p16 = (int16_t *)&amp;value[1];</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    *p16 = i16;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  }</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  int16_t getAndScale16() {</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    int16_t *p16 = (int16_t *)&amp;value[1];</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">return</span> *p16;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  }</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  uint8_t value[3];</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;};</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1int24__t_html"><div class="ttname"><a href="classaudio__tools_1_1int24__t.html">audio_tools::int24_t</a></div><div class="ttdoc">24bit integer which is used for I2S sound processing. It works only on little endian machines!</div><div class="ttdef"><b>Definition:</b> Int24.h:15</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1int24__t_html_a3298ae3a80ee055b725e2e4ee0bf8662"><div class="ttname"><a href="classaudio__tools_1_1int24__t.html#a3298ae3a80ee055b725e2e4ee0bf8662">audio_tools::int24_t::scaleFloat</a></div><div class="ttdeci">float scaleFloat() const</div><div class="ttdoc">provides value between -1.0 and 1.0</div><div class="ttdef"><b>Definition:</b> Int24.h:68</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1int24__t_html_a941c9375328b5593619c16fe81c9a1c8"><div class="ttname"><a href="classaudio__tools_1_1int24__t.html#a941c9375328b5593619c16fe81c9a1c8">audio_tools::int24_t::scale32</a></div><div class="ttdeci">int32_t scale32() const</div><div class="ttdoc">provides value between -2,147,483,647 and 2,147,483,647</div><div class="ttdef"><b>Definition:</b> Int24.h:63</div></div>

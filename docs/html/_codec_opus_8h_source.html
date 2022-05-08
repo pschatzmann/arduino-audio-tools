@@ -75,366 +75,366 @@ $(function() {
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;Print.h&quot;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;opus.h&quot;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#define MAX_BUFFER_SIZE (5760)</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaudio__tools.html">audio_tools</a> {</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#ifndef OPUS_MAX_BUFFER_SIZE</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#define OPUS_MAX_BUFFER_SIZE (5760)</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_opus_settings.html">   16</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structaudio__tools_1_1_opus_settings.html">OpusSettings</a> : <span class="keyword">public</span> <a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> {</div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_opus_settings.html#a8ab0da13e2196fca0f219e9d39cef8d9">   17</a></span>&#160;  <a class="code" href="structaudio__tools_1_1_opus_settings.html#a8ab0da13e2196fca0f219e9d39cef8d9">OpusSettings</a>() {</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    sample_rate = 48000;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    channels = 2;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    bits_per_sample = 16;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  }</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <span class="keywordtype">int</span> max_buffer_size = MAX_BUFFER_SIZE;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;};</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaudio__tools.html">audio_tools</a> {</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_opus_settings.html">   18</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structaudio__tools_1_1_opus_settings.html">OpusSettings</a> : <span class="keyword">public</span> <a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> {</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_opus_settings.html#a8ab0da13e2196fca0f219e9d39cef8d9">   19</a></span>&#160;  <a class="code" href="structaudio__tools_1_1_opus_settings.html#a8ab0da13e2196fca0f219e9d39cef8d9">OpusSettings</a>() {</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    sample_rate = 48000;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    channels = 2;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    bits_per_sample = 16;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  }</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <span class="keywordtype">int</span> max_buffer_size = OPUS_MAX_BUFFER_SIZE;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;};</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
 <div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_opus_encoder_settings.html">   62</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html">OpusEncoderSettings</a> : <span class="keyword">public</span> <a class="code" href="structaudio__tools_1_1_opus_settings.html">OpusSettings</a> {</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html">OpusEncoderSettings</a>() : <a class="code" href="structaudio__tools_1_1_opus_settings.html#a8ab0da13e2196fca0f219e9d39cef8d9">OpusSettings</a>() {}</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="keywordtype">int</span> max_buffer_size = MAX_BUFFER_SIZE;</div>
-<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_opus_encoder_settings.html#a531aba2a8cd3e0d1d458fee6c4d345f4">   66</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html#a531aba2a8cd3e0d1d458fee6c4d345f4">application</a> = OPUS_APPLICATION_AUDIO;</div>
-<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_opus_encoder_settings.html#a2cc70c0f91f69d0d96b7344ca62eb759">   68</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html#a2cc70c0f91f69d0d96b7344ca62eb759">bitrate</a> = -1;</div>
-<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_opus_encoder_settings.html#a1dde3ddbfc6b062204235b0e3a21dbfb">   70</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html#a1dde3ddbfc6b062204235b0e3a21dbfb">force_channel</a> = -1;</div>
-<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_opus_encoder_settings.html#a13d8c0a9b093e0d18c2024ed4c6ce0e9">   72</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html#a13d8c0a9b093e0d18c2024ed4c6ce0e9">vbr</a> = -1;</div>
-<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_opus_encoder_settings.html#a6bda2a01ad0f7095fed752741880c4e2">   74</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html#a6bda2a01ad0f7095fed752741880c4e2">vbr_constraint</a> = -1;</div>
-<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_opus_encoder_settings.html#a83eb74ea95ed3e1e23d77fb01b6038f7">   76</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html#a83eb74ea95ed3e1e23d77fb01b6038f7">complexity</a> = -1;</div>
-<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_opus_encoder_settings.html#a42c15bb81eb638772f64b9256967434a">   78</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html#a42c15bb81eb638772f64b9256967434a">max_bandwidth</a> = -1;</div>
-<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_opus_encoder_settings.html#a97444e7496187bae81bac1d05532ebf0">   80</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html#a97444e7496187bae81bac1d05532ebf0">singal</a> = -1;</div>
-<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_opus_encoder_settings.html#a2f8c37490c23d3996e8ca8bc5158b094">   82</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html#a2f8c37490c23d3996e8ca8bc5158b094">inband_fec</a> = -1;</div>
-<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_opus_encoder_settings.html#add21a1ac1fc96b1ccb42c323e80b245c">   84</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html#add21a1ac1fc96b1ccb42c323e80b245c">packet_loss_perc</a> = -1;</div>
-<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_opus_encoder_settings.html#ad55336ac70280ecdeffd4c3f18257a55">   86</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html#ad55336ac70280ecdeffd4c3f18257a55">lsb_depth</a> = -1;</div>
-<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_opus_encoder_settings.html#a31d048c24b46fcb0eda4e67974a8c689">   88</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html#a31d048c24b46fcb0eda4e67974a8c689">prediction_disabled</a> = -1;</div>
-<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_opus_encoder_settings.html#ad5151084a24344a8c02b0ce22a792661">   90</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html#ad5151084a24344a8c02b0ce22a792661">use_dtx</a> = -1;</div>
-<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_opus_encoder_settings.html#a74792c1c4e5f31b36a2cad7564c2a592">   92</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html#a74792c1c4e5f31b36a2cad7564c2a592">frame_sizes_ms_x2</a> = -1; <span class="comment">/* x2 to avoid 2.5 ms */</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;};</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
-<div class="line"><a name="l00100"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_opus_audio_decoder.html">  100</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_opus_audio_decoder.html">OpusAudioDecoder</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> {</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_opus_audio_decoder.html#ae3ce01c7774ac286597364c4e9ba2fbd">  105</a></span>&#160;  <a class="code" href="classaudio__tools_1_1_opus_audio_decoder.html#ae3ce01c7774ac286597364c4e9ba2fbd">OpusAudioDecoder</a>() { LOGD(LOG_METHOD); }</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
-<div class="line"><a name="l00112"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_opus_audio_decoder.html#a3c68658fb8d45b6c7e7c23f38ae6911c">  112</a></span>&#160;  <a class="code" href="classaudio__tools_1_1_opus_audio_decoder.html#a3c68658fb8d45b6c7e7c23f38ae6911c">OpusAudioDecoder</a>(<a class="code" href="class_print.html">Print</a> &amp;out_stream) {</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    LOGD(LOG_METHOD);</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    p_print = &amp;out_stream;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  }</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
-<div class="line"><a name="l00118"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_opus_audio_decoder.html#a8025d09699aa43cf74558f4db5d333e7">  118</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_opus_audio_decoder.html#a8025d09699aa43cf74558f4db5d333e7">setOutputStream</a>(<a class="code" href="class_print.html">Print</a> &amp;out_stream)<span class="keyword"> override </span>{ p_print = &amp;out_stream; }</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  <span class="keywordtype">void</span> setNotifyAudioChange(<a class="code" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> &amp;bi)<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    this-&gt;bid = &amp;bi;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;  }</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  AudioBaseInfo audioInfo()<span class="keyword"> override </span>{ <span class="keywordflow">return</span> cfg; }</div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_opus_encoder_settings.html#a56d26b06ed05bc0fcd48a58308b1da09">   65</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html#a56d26b06ed05bc0fcd48a58308b1da09">max_buffer_size</a> = OPUS_MAX_BUFFER_SIZE;</div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_opus_encoder_settings.html#a531aba2a8cd3e0d1d458fee6c4d345f4">   68</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html#a531aba2a8cd3e0d1d458fee6c4d345f4">application</a> = OPUS_APPLICATION_AUDIO;</div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_opus_encoder_settings.html#a2cc70c0f91f69d0d96b7344ca62eb759">   71</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html#a2cc70c0f91f69d0d96b7344ca62eb759">bitrate</a> = -1;</div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_opus_encoder_settings.html#a1dde3ddbfc6b062204235b0e3a21dbfb">   73</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html#a1dde3ddbfc6b062204235b0e3a21dbfb">force_channel</a> = -1;</div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_opus_encoder_settings.html#a13d8c0a9b093e0d18c2024ed4c6ce0e9">   75</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html#a13d8c0a9b093e0d18c2024ed4c6ce0e9">vbr</a> = -1;</div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_opus_encoder_settings.html#a6bda2a01ad0f7095fed752741880c4e2">   77</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html#a6bda2a01ad0f7095fed752741880c4e2">vbr_constraint</a> = -1;</div>
+<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_opus_encoder_settings.html#a83eb74ea95ed3e1e23d77fb01b6038f7">   79</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html#a83eb74ea95ed3e1e23d77fb01b6038f7">complexity</a> = -1;</div>
+<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_opus_encoder_settings.html#a42c15bb81eb638772f64b9256967434a">   84</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html#a42c15bb81eb638772f64b9256967434a">max_bandwidth</a> = -1;</div>
+<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_opus_encoder_settings.html#a97444e7496187bae81bac1d05532ebf0">   86</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html#a97444e7496187bae81bac1d05532ebf0">singal</a> = -1;</div>
+<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_opus_encoder_settings.html#a2f8c37490c23d3996e8ca8bc5158b094">   88</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html#a2f8c37490c23d3996e8ca8bc5158b094">inband_fec</a> = -1;</div>
+<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_opus_encoder_settings.html#add21a1ac1fc96b1ccb42c323e80b245c">   90</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html#add21a1ac1fc96b1ccb42c323e80b245c">packet_loss_perc</a> = -1;</div>
+<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_opus_encoder_settings.html#ad55336ac70280ecdeffd4c3f18257a55">   92</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html#ad55336ac70280ecdeffd4c3f18257a55">lsb_depth</a> = -1;</div>
+<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_opus_encoder_settings.html#a31d048c24b46fcb0eda4e67974a8c689">   94</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html#a31d048c24b46fcb0eda4e67974a8c689">prediction_disabled</a> = -1;</div>
+<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_opus_encoder_settings.html#ad5151084a24344a8c02b0ce22a792661">   96</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html#ad5151084a24344a8c02b0ce22a792661">use_dtx</a> = -1;</div>
+<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="structaudio__tools_1_1_opus_encoder_settings.html#a74792c1c4e5f31b36a2cad7564c2a592">   98</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html#a74792c1c4e5f31b36a2cad7564c2a592">frame_sizes_ms_x2</a> = -1; <span class="comment">/* x2 to avoid 2.5 ms */</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;};</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_opus_audio_decoder.html">  106</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_opus_audio_decoder.html">OpusAudioDecoder</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_audio_decoder.html">AudioDecoder</a> {</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_opus_audio_decoder.html#ae3ce01c7774ac286597364c4e9ba2fbd">  111</a></span>&#160;  <a class="code" href="classaudio__tools_1_1_opus_audio_decoder.html#ae3ce01c7774ac286597364c4e9ba2fbd">OpusAudioDecoder</a>() { LOGD(LOG_METHOD); }</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
+<div class="line"><a name="l00118"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_opus_audio_decoder.html#a3c68658fb8d45b6c7e7c23f38ae6911c">  118</a></span>&#160;  <a class="code" href="classaudio__tools_1_1_opus_audio_decoder.html#a3c68658fb8d45b6c7e7c23f38ae6911c">OpusAudioDecoder</a>(<a class="code" href="class_print.html">Print</a> &amp;out_stream) {</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    LOGD(LOG_METHOD);</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <a class="code" href="classaudio__tools_1_1_opus_audio_decoder.html#a8025d09699aa43cf74558f4db5d333e7">setOutputStream</a>(out_stream);</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  }</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
+<div class="line"><a name="l00124"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_opus_audio_decoder.html#a8025d09699aa43cf74558f4db5d333e7">  124</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_opus_audio_decoder.html#a8025d09699aa43cf74558f4db5d333e7">setOutputStream</a>(<a class="code" href="class_print.html">Print</a> &amp;out_stream)<span class="keyword"> override </span>{ p_print = &amp;out_stream; }</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
-<div class="line"><a name="l00127"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_opus_audio_decoder.html#a73a67976514aad72e0718ee6d95787e3">  127</a></span>&#160;  <a class="code" href="structaudio__tools_1_1_opus_settings.html">OpusSettings</a> &amp;<a class="code" href="classaudio__tools_1_1_opus_audio_decoder.html#a73a67976514aad72e0718ee6d95787e3">config</a>() { <span class="keywordflow">return</span> cfg; }</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;  <span class="keywordtype">void</span> begin(<a class="code" href="structaudio__tools_1_1_opus_settings.html">OpusSettings</a> info) {</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    LOGD(LOG_METHOD);</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    cfg = info;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <span class="keywordflow">if</span> (bid != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;      bid-&gt;setAudioInfo(cfg);</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    }</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    begin();</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;  }</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;  <span class="keywordtype">void</span> begin()<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    LOGD(LOG_METHOD);</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    outbuf.resize(cfg.max_buffer_size);</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    <span class="keywordtype">int</span> err;</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    dec = opus_decoder_create(cfg.sample_rate, cfg.channels, &amp;err);</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    <span class="keywordflow">if</span> (err != OPUS_OK) {</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;      LOGE(<span class="stringliteral">&quot;opus_decoder_create: %s for sample_rate: %d, channels:%d&quot;</span>,</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;           opus_strerror(err), cfg.sample_rate, cfg.channels);</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;      <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    }</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    active = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;  }</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;  <span class="keywordtype">void</span> end()<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    LOGD(LOG_METHOD);</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="keywordflow">if</span> (dec) {</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;      opus_decoder_destroy(dec);</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;      dec = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    }</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    active = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;  }</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;  <span class="keywordtype">void</span> setAudioInfo(AudioBaseInfo from)<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    cfg.sample_rate = from.sample_rate;</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    cfg.channels = from.channels;</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    cfg.bits_per_sample = from.bits_per_sample;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  <span class="keywordtype">void</span> setNotifyAudioChange(<a class="code" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> &amp;bi)<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    this-&gt;bid = &amp;bi;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  }</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;  AudioBaseInfo audioInfo()<span class="keyword"> override </span>{ <span class="keywordflow">return</span> cfg; }</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
+<div class="line"><a name="l00133"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_opus_audio_decoder.html#a73a67976514aad72e0718ee6d95787e3">  133</a></span>&#160;  <a class="code" href="structaudio__tools_1_1_opus_settings.html">OpusSettings</a> &amp;<a class="code" href="classaudio__tools_1_1_opus_audio_decoder.html#a73a67976514aad72e0718ee6d95787e3">config</a>() { <span class="keywordflow">return</span> cfg; }</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;  <span class="keywordtype">void</span> begin(<a class="code" href="structaudio__tools_1_1_opus_settings.html">OpusSettings</a> info) {</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    LOGD(LOG_METHOD);</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    cfg = info;</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="keywordflow">if</span> (bid != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;      bid-&gt;setAudioInfo(cfg);</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    }</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    begin();</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;  }</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;  <span class="keywordtype">void</span> begin()<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    LOGD(LOG_METHOD);</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    outbuf.resize(cfg.max_buffer_size);</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    <span class="keywordtype">int</span> err;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    dec = opus_decoder_create(cfg.sample_rate, cfg.channels, &amp;err);</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    <span class="keywordflow">if</span> (err != OPUS_OK) {</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;      LOGE(<span class="stringliteral">&quot;opus_decoder_create: %s for sample_rate: %d, channels:%d&quot;</span>,</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;           opus_strerror(err), cfg.sample_rate, cfg.channels);</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;      <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    }</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    active = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;  }</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;  <span class="keywordtype">void</span> end()<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    LOGD(LOG_METHOD);</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    <span class="keywordflow">if</span> (dec) {</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;      opus_decoder_destroy(dec);</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;      dec = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    }</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    active = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;  }</div>
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160; </div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;  <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> <span class="keywordtype">void</span> *in_ptr, <span class="keywordtype">size_t</span> in_size) {</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    <span class="keywordflow">if</span> (!active || p_print == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    <span class="comment">// decode data</span></div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    LOGD(<span class="stringliteral">&quot;opus_decode - bytes: %d&quot;</span>, in_size);</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    <span class="keywordtype">int</span> in_band_forware_error_correction = 0;</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    <span class="keywordtype">int</span> out_samples = opus_decode(dec, (uint8_t *)in_ptr, in_size,</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;         (opus_int16 *)outbuf.data(), cfg.max_buffer_size, in_band_forware_error_correction);</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    <span class="keywordflow">if</span> (out_samples &lt; 0) {</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;      LOGE(<span class="stringliteral">&quot;opus_decode: %s&quot;</span>,opus_strerror(out_samples));</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (out_samples &gt; 0) {</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;      <span class="comment">// convert to little endian</span></div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;      <span class="comment">// write data to final destination</span></div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;      <span class="keywordtype">int</span> out_bytes = out_samples * cfg.channels * <span class="keyword">sizeof</span>(int16_t);</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;      p_print-&gt;write(outbuf.data(), out_bytes);</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    }</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    <span class="keywordflow">return</span> in_size;</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;  }</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;  <span class="keywordtype">void</span> setAudioInfo(AudioBaseInfo from)<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    cfg.sample_rate = from.sample_rate;</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    cfg.channels = from.channels;</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    cfg.bits_per_sample = from.bits_per_sample;</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;  }</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;  <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> <span class="keywordtype">void</span> *in_ptr, <span class="keywordtype">size_t</span> in_size) {</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    <span class="keywordflow">if</span> (!active || p_print == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    <span class="comment">// decode data</span></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    LOGD(<span class="stringliteral">&quot;opus_decode - bytes: %d&quot;</span>, in_size);</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    <span class="keywordtype">int</span> in_band_forware_error_correction = 0;</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    <span class="keywordtype">int</span> out_samples = opus_decode(</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        dec, (uint8_t *)in_ptr, in_size, (opus_int16 *)outbuf.data(),</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        cfg.max_buffer_size, in_band_forware_error_correction);</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    <span class="keywordflow">if</span> (out_samples &lt; 0) {</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;      LOGE(<span class="stringliteral">&quot;opus_decode: %s&quot;</span>, opus_strerror(out_samples));</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (out_samples &gt; 0) {</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;      <span class="comment">// convert to little endian</span></div>
 <div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160; </div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;  <span class="keyword">operator</span> boolean()<span class="keyword"> override </span>{ <span class="keywordflow">return</span> active; }</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;  <a class="code" href="class_print.html">Print</a> *p_print = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;  AudioBaseInfoDependent *bid = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;  OpusSettings cfg;</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;  ::OpusDecoder *dec;</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;  <span class="keywordtype">bool</span> active;</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;  Vector&lt;uint8_t&gt; outbuf;</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; </div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;};</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160; </div>
-<div class="line"><a name="l00203"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_opus_audio_encoder.html">  203</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_opus_audio_encoder.html">OpusAudioEncoder</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_audio_encoder.html">AudioEncoder</a> {</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;  <span class="comment">// Empty Constructor - the output stream must be provided with begin()</span></div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;  <a class="code" href="classaudio__tools_1_1_opus_audio_encoder.html">OpusAudioEncoder</a>() {}</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160; </div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;  <span class="comment">// Constructor providing the output stream</span></div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;  <a class="code" href="classaudio__tools_1_1_opus_audio_encoder.html">OpusAudioEncoder</a>(<a class="code" href="class_print.html">Print</a> &amp;out) { p_print = &amp;out; }</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; </div>
-<div class="line"><a name="l00212"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_opus_audio_encoder.html#aaa89a2f471accf3884f0751bcafa07fb">  212</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_opus_audio_encoder.html#aaa89a2f471accf3884f0751bcafa07fb">setOutputStream</a>(<a class="code" href="class_print.html">Print</a> &amp;out_stream)<span class="keyword"> override </span>{ p_print = &amp;out_stream; }</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;      <span class="comment">// write data to final destination</span></div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;      <span class="keywordtype">int</span> out_bytes = out_samples * cfg.channels * <span class="keyword">sizeof</span>(int16_t);</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;      p_print-&gt;write(outbuf.data(), out_bytes);</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    }</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    <span class="keywordflow">return</span> in_size;</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;  }</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;  <span class="keyword">operator</span> boolean()<span class="keyword"> override </span>{ <span class="keywordflow">return</span> active; }</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;  <a class="code" href="class_print.html">Print</a> *p_print = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;  AudioBaseInfoDependent *bid = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;  OpusSettings cfg;</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;  ::OpusDecoder *dec;</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;  <span class="keywordtype">bool</span> active;</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;  Vector&lt;uint8_t&gt; outbuf;</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;};</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; </div>
+<div class="line"><a name="l00209"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_opus_audio_encoder.html">  209</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_opus_audio_encoder.html">OpusAudioEncoder</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_audio_encoder.html">AudioEncoder</a> {</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;  <span class="comment">// Empty Constructor - the output stream must be provided with begin()</span></div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;  <a class="code" href="classaudio__tools_1_1_opus_audio_encoder.html">OpusAudioEncoder</a>() {}</div>
 <div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160; </div>
-<div class="line"><a name="l00215"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_opus_audio_encoder.html#a25e6c989c105908df08d2bc57ac80d5a">  215</a></span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="classaudio__tools_1_1_opus_audio_encoder.html#a25e6c989c105908df08d2bc57ac80d5a">mime</a>() { <span class="keywordflow">return</span> <span class="stringliteral">&quot;audio/opus&quot;</span>; }</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;  <span class="comment">// Constructor providing the output stream</span></div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;  <a class="code" href="classaudio__tools_1_1_opus_audio_encoder.html">OpusAudioEncoder</a>(<a class="code" href="class_print.html">Print</a> &amp;out) { <a class="code" href="classaudio__tools_1_1_opus_audio_encoder.html#aaa89a2f471accf3884f0751bcafa07fb">setOutputStream</a>(out); }</div>
 <div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160; </div>
-<div class="line"><a name="l00218"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_opus_audio_encoder.html#ab9ed2282686319bff14278ff9900258c">  218</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_opus_audio_encoder.html#ab9ed2282686319bff14278ff9900258c">setAudioInfo</a>(<a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> from)<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    cfg.sample_rate = from.sample_rate;</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    cfg.channels = from.channels;</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    cfg.bits_per_sample = from.bits_per_sample;</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;  }</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160; </div>
-<div class="line"><a name="l00225"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_opus_audio_encoder.html#a666ca678bcbbd6a3dfa284025423d3cd">  225</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_opus_audio_encoder.html#a666ca678bcbbd6a3dfa284025423d3cd">begin</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    <span class="keywordtype">int</span> err;</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    packet.resize(cfg.max_buffer_size);</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    frame.resize(<a class="code" href="classaudio__tools_1_1_opus_audio_encoder.html#ae6abfd3fa82e63d7a021b0a27ec46c86">getFrameSizeSamples</a>(cfg.sample_rate) * 2);</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    assert(frame.data() != <span class="keyword">nullptr</span>);</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    assert(packet.data() != <span class="keyword">nullptr</span>);</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160; </div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    enc = opus_encoder_create(cfg.sample_rate, cfg.channels, cfg.<a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html#a531aba2a8cd3e0d1d458fee6c4d345f4">application</a>,</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;                              &amp;err);</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    <span class="keywordflow">if</span> (err != OPUS_OK) {</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;      LOGE(<span class="stringliteral">&quot;opus_encoder_create: %s for sample_rate: %d, channels:%d&quot;</span>,</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;           opus_strerror(err), cfg.sample_rate, cfg.channels);</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;      <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    }</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    is_open = settings();</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;  }</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160; </div>
-<div class="line"><a name="l00243"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_opus_audio_encoder.html#ab295ac4b850be622e7e3b43e9f1d80dc">  243</a></span>&#160;  <a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html">OpusEncoderSettings</a> &amp;<a class="code" href="classaudio__tools_1_1_opus_audio_encoder.html#ab295ac4b850be622e7e3b43e9f1d80dc">config</a>() { <span class="keywordflow">return</span> cfg; }</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160; </div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_opus_audio_encoder.html#a666ca678bcbbd6a3dfa284025423d3cd">begin</a>(<a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html">OpusEncoderSettings</a> settings) {</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    cfg = settings;</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    <a class="code" href="classaudio__tools_1_1_opus_audio_encoder.html#a666ca678bcbbd6a3dfa284025423d3cd">begin</a>();</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;  }</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160; </div>
-<div class="line"><a name="l00251"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_opus_audio_encoder.html#a08e6e0c15da6dd0d6ae4a805f5ff31e8">  251</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_opus_audio_encoder.html#a08e6e0c15da6dd0d6ae4a805f5ff31e8">end</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    <span class="comment">// flush buffered data</span></div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    encodeFrame(frame_pos);</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    <span class="comment">// release memory</span></div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    opus_encoder_destroy(enc);</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    is_open = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;  }</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160; </div>
-<div class="line"><a name="l00260"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_opus_audio_encoder.html#aa2081e047ead396fdafec2ecd71a1ee4">  260</a></span>&#160;  <span class="keywordtype">size_t</span> <a class="code" href="classaudio__tools_1_1_opus_audio_encoder.html#aa2081e047ead396fdafec2ecd71a1ee4">write</a>(<span class="keyword">const</span> <span class="keywordtype">void</span> *in_ptr, <span class="keywordtype">size_t</span> in_size) {</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    <span class="keywordflow">if</span> (!is_open || p_print == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160; </div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    uint8_t *p_byte = (uint8_t *)in_ptr;</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; in_size; j++) {</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;      encodeByte(p_byte[j]);</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    }</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    <span class="keywordflow">return</span> in_size;</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;  }</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160; </div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;  <span class="keyword">operator</span> boolean()<span class="keyword"> override </span>{ <span class="keywordflow">return</span> is_open; }</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160; </div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;  <span class="keywordtype">bool</span> isOpen() { <span class="keywordflow">return</span> is_open; }</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160; </div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;  <a class="code" href="class_print.html">Print</a> *p_print = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;  ::OpusEncoder *enc = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;  OpusEncoderSettings cfg;</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;  <span class="keywordtype">bool</span> is_open = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;  Vector&lt;uint8_t&gt; packet;</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;  Vector&lt;uint8_t&gt; frame;</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;  <span class="keywordtype">int</span> frame_pos = 0;</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160; </div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;  <span class="keywordtype">void</span> encodeByte(uint8_t data) {</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    <span class="comment">// add byte to frame</span></div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    frame[frame_pos++] = data;</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160; </div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    <span class="comment">// if frame is complete -&gt; encode</span></div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    <span class="keywordtype">int</span> frame_size = frame.size();</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    <span class="keywordflow">if</span> (frame_pos &gt;= frame_size) {</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160; </div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;      encodeFrame(frame_size);</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;      frame_pos = 0;</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    }</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;  }</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160; </div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;  <span class="keywordtype">void</span> encodeFrame(<span class="keywordtype">int</span> lenBytes) {</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    <span class="keywordflow">if</span> (lenBytes &gt; 0) {</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160; </div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;      <span class="keywordtype">int</span> frames = lenBytes / cfg.channels / <span class="keyword">sizeof</span>(int16_t);</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;      LOGD(<span class="stringliteral">&quot;opus_encode - frame_size: %d&quot;</span>, frames);</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;      <span class="keywordtype">int</span> len = opus_encode(enc, (opus_int16 *)frame.data(), frames, packet.data(),</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;                            cfg.max_buffer_size);</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;      <span class="keywordflow">if</span> (len &lt; 0) {</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;        LOGE(<span class="stringliteral">&quot;opus_encode: %s&quot;</span>, opus_strerror(len));</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;      } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (len &gt; 0 &amp;&amp; len &lt;= cfg.max_buffer_size) {</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;        p_print-&gt;write(packet.data(), len);</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;      }</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    }</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;  }</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160; </div>
-<div class="line"><a name="l00312"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_opus_audio_encoder.html#ae6abfd3fa82e63d7a021b0a27ec46c86">  312</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1_opus_audio_encoder.html#ae6abfd3fa82e63d7a021b0a27ec46c86">getFrameSizeSamples</a>(<span class="keywordtype">int</span> sampling_rate) {</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    <span class="keywordflow">switch</span> (cfg.frame_sizes_ms_x2) {</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;      <span class="keywordflow">case</span> OPUS_FRAMESIZE_2_5_MS:</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;        <span class="keywordflow">return</span> sampling_rate / 400;</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;      <span class="keywordflow">case</span> OPUS_FRAMESIZE_5_MS:</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;        <span class="keywordflow">return</span> sampling_rate / 200;</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;      <span class="keywordflow">case</span> OPUS_FRAMESIZE_10_MS:</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;        <span class="keywordflow">return</span> sampling_rate / 100;</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;      <span class="keywordflow">case</span> OPUS_FRAMESIZE_20_MS:</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;        <span class="keywordflow">return</span> sampling_rate / 50;</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;      <span class="keywordflow">case</span> OPUS_FRAMESIZE_40_MS:</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;        <span class="keywordflow">return</span> sampling_rate / 25;</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;      <span class="keywordflow">case</span> OPUS_FRAMESIZE_60_MS:</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;        <span class="keywordflow">return</span> 3 * sampling_rate / 50;</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;      <span class="keywordflow">case</span> OPUS_FRAMESIZE_80_MS:</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;        <span class="keywordflow">return</span> 4 * sampling_rate / 50;</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;      <span class="keywordflow">case</span> OPUS_FRAMESIZE_100_MS:</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;        <span class="keywordflow">return</span> 5 * sampling_rate / 50;</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;      <span class="keywordflow">case</span> OPUS_FRAMESIZE_120_MS:</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;        <span class="keywordflow">return</span> 6 * sampling_rate / 50;</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    }</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    <span class="keywordflow">return</span> sampling_rate / 100;</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;  }</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160; </div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;  <span class="keywordtype">bool</span> settings() {</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    <span class="keywordtype">bool</span> ok = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    <span class="keywordflow">if</span> (cfg.bitrate &gt;= 0 &amp;&amp;</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;        opus_encoder_ctl(enc, OPUS_SET_BITRATE(cfg.bitrate)) != OPUS_OK) {</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;      LOGE(<span class="stringliteral">&quot;invalid bitrate: %d&quot;</span>, cfg.bitrate);</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;      ok = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;    }</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    <span class="keywordflow">if</span> (cfg.force_channel &gt;= 0 &amp;&amp;</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;        opus_encoder_ctl(enc, OPUS_SET_FORCE_CHANNELS(cfg.force_channel)) !=</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;            OPUS_OK) {</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;      LOGE(<span class="stringliteral">&quot;invalid force_channel: %d&quot;</span>, cfg.force_channel);</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;      ok = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;    };</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;    <span class="keywordflow">if</span> (cfg.vbr &gt;= 0 &amp;&amp;</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;        opus_encoder_ctl(enc, OPUS_SET_VBR(cfg.vbr)) != OPUS_OK) {</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;      LOGE(<span class="stringliteral">&quot;invalid vbr: %d&quot;</span>, cfg.vbr);</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;      ok = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;    }</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;    <span class="keywordflow">if</span> (cfg.vbr_constraint &gt;= 0 &amp;&amp;</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;        opus_encoder_ctl(enc, OPUS_SET_VBR_CONSTRAINT(cfg.vbr_constraint)) !=</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;            OPUS_OK) {</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;      LOGE(<span class="stringliteral">&quot;invalid vbr_constraint: %d&quot;</span>, cfg.vbr_constraint);</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;      ok = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;    }</div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;    <span class="keywordflow">if</span> (cfg.complexity &gt;= 0 &amp;&amp;</div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;        opus_encoder_ctl(enc, OPUS_SET_COMPLEXITY(cfg.complexity)) != OPUS_OK) {</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;      LOGE(<span class="stringliteral">&quot;invalid complexity: %d&quot;</span>, cfg.complexity);</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;      ok = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;    }</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    <span class="keywordflow">if</span> (cfg.max_bandwidth &gt;= 0 &amp;&amp;</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;        opus_encoder_ctl(enc, OPUS_SET_MAX_BANDWIDTH(cfg.max_bandwidth)) !=</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;            OPUS_OK) {</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;      LOGE(<span class="stringliteral">&quot;invalid max_bandwidth: %d&quot;</span>, cfg.max_bandwidth);</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;      ok = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;    }</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;    <span class="keywordflow">if</span> (cfg.singal &gt;= 0 &amp;&amp;</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;        opus_encoder_ctl(enc, OPUS_SET_SIGNAL(cfg.singal)) != OPUS_OK) {</div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;      LOGE(<span class="stringliteral">&quot;invalid singal: %d&quot;</span>, cfg.singal);</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;      ok = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;    }</div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;    <span class="keywordflow">if</span> (cfg.inband_fec &gt;= 0 &amp;&amp;</div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;        opus_encoder_ctl(enc, OPUS_SET_INBAND_FEC(cfg.inband_fec)) != OPUS_OK) {</div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;      LOGE(<span class="stringliteral">&quot;invalid inband_fec: %d&quot;</span>, cfg.inband_fec);</div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;      ok = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;    }</div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;    <span class="keywordflow">if</span> (cfg.packet_loss_perc &gt;= 0 &amp;&amp;</div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;        opus_encoder_ctl(</div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;            enc, OPUS_SET_PACKET_LOSS_PERC(cfg.packet_loss_perc)) != OPUS_OK) {</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;      LOGE(<span class="stringliteral">&quot;invalid pkt_loss: %d&quot;</span>, cfg.packet_loss_perc);</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;      ok = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;    }</div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;    <span class="keywordflow">if</span> (cfg.lsb_depth &gt;= 0 &amp;&amp;</div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;        opus_encoder_ctl(enc, OPUS_SET_LSB_DEPTH(cfg.lsb_depth)) != OPUS_OK) {</div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;      LOGE(<span class="stringliteral">&quot;invalid lsb_depth: %d&quot;</span>, cfg.lsb_depth);</div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;      ok = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;    }</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;    <span class="keywordflow">if</span> (cfg.prediction_disabled &gt;= 0 &amp;&amp;</div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;        opus_encoder_ctl(enc, OPUS_SET_PREDICTION_DISABLED(</div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;                                  cfg.prediction_disabled)) != OPUS_OK) {</div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;      LOGE(<span class="stringliteral">&quot;invalid pred_disabled: %d&quot;</span>, cfg.prediction_disabled);</div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;      ok = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;    }</div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;    <span class="keywordflow">if</span> (cfg.use_dtx &gt;= 0 &amp;&amp;</div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;        opus_encoder_ctl(enc, OPUS_SET_DTX(cfg.use_dtx)) != OPUS_OK) {</div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;      LOGE(<span class="stringliteral">&quot;invalid use_dtx: %d&quot;</span>, cfg.use_dtx);</div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;      ok = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;    }</div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;    <span class="keywordflow">if</span> (cfg.frame_sizes_ms_x2 &gt; 0 &amp;&amp;</div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;        opus_encoder_ctl(enc, OPUS_SET_EXPERT_FRAME_DURATION(</div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;                                  cfg.frame_sizes_ms_x2)) != OPUS_OK) {</div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;      LOGE(<span class="stringliteral">&quot;invalid frame_sizes_ms_x2: %d&quot;</span>, cfg.frame_sizes_ms_x2);</div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;      ok = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;    }</div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;    <span class="keywordflow">return</span> ok;</div>
-<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;  }</div>
-<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;};</div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160; </div>
-<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a name="l00218"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_opus_audio_encoder.html#aaa89a2f471accf3884f0751bcafa07fb">  218</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_opus_audio_encoder.html#aaa89a2f471accf3884f0751bcafa07fb">setOutputStream</a>(<a class="code" href="class_print.html">Print</a> &amp;out_stream)<span class="keyword"> override </span>{ p_print = &amp;out_stream; }</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160; </div>
+<div class="line"><a name="l00221"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_opus_audio_encoder.html#a25e6c989c105908df08d2bc57ac80d5a">  221</a></span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="classaudio__tools_1_1_opus_audio_encoder.html#a25e6c989c105908df08d2bc57ac80d5a">mime</a>() { <span class="keywordflow">return</span> <span class="stringliteral">&quot;audio/opus&quot;</span>; }</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160; </div>
+<div class="line"><a name="l00224"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_opus_audio_encoder.html#ab9ed2282686319bff14278ff9900258c">  224</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_opus_audio_encoder.html#ab9ed2282686319bff14278ff9900258c">setAudioInfo</a>(<a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> from)<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    cfg.sample_rate = from.sample_rate;</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    cfg.channels = from.channels;</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    cfg.bits_per_sample = from.bits_per_sample;</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;  }</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160; </div>
+<div class="line"><a name="l00231"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_opus_audio_encoder.html#a666ca678bcbbd6a3dfa284025423d3cd">  231</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_opus_audio_encoder.html#a666ca678bcbbd6a3dfa284025423d3cd">begin</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    <span class="keywordtype">int</span> err;</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    packet.resize(cfg.<a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html#a56d26b06ed05bc0fcd48a58308b1da09">max_buffer_size</a>);</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    frame.resize(<a class="code" href="classaudio__tools_1_1_opus_audio_encoder.html#ae6abfd3fa82e63d7a021b0a27ec46c86">getFrameSizeSamples</a>(cfg.sample_rate) * 2);</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    assert(frame.data() != <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    assert(packet.data() != <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160; </div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    enc = opus_encoder_create(cfg.sample_rate, cfg.channels, cfg.<a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html#a531aba2a8cd3e0d1d458fee6c4d345f4">application</a>,</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;                              &amp;err);</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    <span class="keywordflow">if</span> (err != OPUS_OK) {</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;      LOGE(<span class="stringliteral">&quot;opus_encoder_create: %s for sample_rate: %d, channels:%d&quot;</span>,</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;           opus_strerror(err), cfg.sample_rate, cfg.channels);</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;      <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    }</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    is_open = settings();</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;  }</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160; </div>
+<div class="line"><a name="l00249"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_opus_audio_encoder.html#ab295ac4b850be622e7e3b43e9f1d80dc">  249</a></span>&#160;  <a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html">OpusEncoderSettings</a> &amp;<a class="code" href="classaudio__tools_1_1_opus_audio_encoder.html#ab295ac4b850be622e7e3b43e9f1d80dc">config</a>() { <span class="keywordflow">return</span> cfg; }</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160; </div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_opus_audio_encoder.html#a666ca678bcbbd6a3dfa284025423d3cd">begin</a>(<a class="code" href="structaudio__tools_1_1_opus_encoder_settings.html">OpusEncoderSettings</a> settings) {</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    cfg = settings;</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    <a class="code" href="classaudio__tools_1_1_opus_audio_encoder.html#a666ca678bcbbd6a3dfa284025423d3cd">begin</a>();</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;  }</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160; </div>
+<div class="line"><a name="l00257"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_opus_audio_encoder.html#a08e6e0c15da6dd0d6ae4a805f5ff31e8">  257</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_opus_audio_encoder.html#a08e6e0c15da6dd0d6ae4a805f5ff31e8">end</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    <span class="comment">// flush buffered data</span></div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    encodeFrame(frame_pos);</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    <span class="comment">// release memory</span></div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    opus_encoder_destroy(enc);</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    is_open = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;  }</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160; </div>
+<div class="line"><a name="l00266"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_opus_audio_encoder.html#aa2081e047ead396fdafec2ecd71a1ee4">  266</a></span>&#160;  <span class="keywordtype">size_t</span> <a class="code" href="classaudio__tools_1_1_opus_audio_encoder.html#aa2081e047ead396fdafec2ecd71a1ee4">write</a>(<span class="keyword">const</span> <span class="keywordtype">void</span> *in_ptr, <span class="keywordtype">size_t</span> in_size) {</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    <span class="keywordflow">if</span> (!is_open || p_print == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160; </div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    uint8_t *p_byte = (uint8_t *)in_ptr;</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; in_size; j++) {</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;      encodeByte(p_byte[j]);</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    }</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    <span class="keywordflow">return</span> in_size;</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;  }</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160; </div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;  <span class="keyword">operator</span> boolean()<span class="keyword"> override </span>{ <span class="keywordflow">return</span> is_open; }</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160; </div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;  <span class="keywordtype">bool</span> isOpen() { <span class="keywordflow">return</span> is_open; }</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160; </div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;  <a class="code" href="class_print.html">Print</a> *p_print = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;  ::OpusEncoder *enc = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;  OpusEncoderSettings cfg;</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;  <span class="keywordtype">bool</span> is_open = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;  Vector&lt;uint8_t&gt; packet;</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;  Vector&lt;uint8_t&gt; frame;</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;  <span class="keywordtype">int</span> frame_pos = 0;</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160; </div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;  <span class="keywordtype">void</span> encodeByte(uint8_t data) {</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    <span class="comment">// add byte to frame</span></div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    frame[frame_pos++] = data;</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160; </div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    <span class="comment">// if frame is complete -&gt; encode</span></div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    <span class="keywordtype">int</span> frame_size = frame.size();</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    <span class="keywordflow">if</span> (frame_pos &gt;= frame_size) {</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;      encodeFrame(frame_size);</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;      frame_pos = 0;</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    }</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;  }</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160; </div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;  <span class="keywordtype">void</span> encodeFrame(<span class="keywordtype">int</span> lenBytes) {</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    <span class="keywordflow">if</span> (lenBytes &gt; 0) {</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;      <span class="keywordtype">int</span> frames = lenBytes / cfg.channels / <span class="keyword">sizeof</span>(int16_t);</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;      LOGD(<span class="stringliteral">&quot;opus_encode - frame_size: %d&quot;</span>, frames);</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;      <span class="keywordtype">int</span> len = opus_encode(enc, (opus_int16 *)frame.data(), frames,</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;                            packet.data(), cfg.max_buffer_size);</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;      <span class="keywordflow">if</span> (len &lt; 0) {</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;        LOGE(<span class="stringliteral">&quot;opus_encode: %s&quot;</span>, opus_strerror(len));</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;      } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (len &gt; 0 &amp;&amp; len &lt;= cfg.max_buffer_size) {</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;        p_print-&gt;write(packet.data(), len);</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;      }</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    }</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;  }</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160; </div>
+<div class="line"><a name="l00316"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_opus_audio_encoder.html#ae6abfd3fa82e63d7a021b0a27ec46c86">  316</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1_opus_audio_encoder.html#ae6abfd3fa82e63d7a021b0a27ec46c86">getFrameSizeSamples</a>(<span class="keywordtype">int</span> sampling_rate) {</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    <span class="keywordflow">switch</span> (cfg.frame_sizes_ms_x2) {</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;      <span class="keywordflow">case</span> OPUS_FRAMESIZE_2_5_MS:</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;        <span class="keywordflow">return</span> sampling_rate / 400;</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;      <span class="keywordflow">case</span> OPUS_FRAMESIZE_5_MS:</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;        <span class="keywordflow">return</span> sampling_rate / 200;</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;      <span class="keywordflow">case</span> OPUS_FRAMESIZE_10_MS:</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;        <span class="keywordflow">return</span> sampling_rate / 100;</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;      <span class="keywordflow">case</span> OPUS_FRAMESIZE_20_MS:</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;        <span class="keywordflow">return</span> sampling_rate / 50;</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;      <span class="keywordflow">case</span> OPUS_FRAMESIZE_40_MS:</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;        <span class="keywordflow">return</span> sampling_rate / 25;</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;      <span class="keywordflow">case</span> OPUS_FRAMESIZE_60_MS:</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;        <span class="keywordflow">return</span> 3 * sampling_rate / 50;</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;      <span class="keywordflow">case</span> OPUS_FRAMESIZE_80_MS:</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;        <span class="keywordflow">return</span> 4 * sampling_rate / 50;</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;      <span class="keywordflow">case</span> OPUS_FRAMESIZE_100_MS:</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;        <span class="keywordflow">return</span> 5 * sampling_rate / 50;</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;      <span class="keywordflow">case</span> OPUS_FRAMESIZE_120_MS:</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;        <span class="keywordflow">return</span> 6 * sampling_rate / 50;</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;    }</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    <span class="keywordflow">return</span> sampling_rate / 100;</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;  }</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160; </div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;  <span class="keywordtype">bool</span> settings() {</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;    <span class="keywordtype">bool</span> ok = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;    <span class="keywordflow">if</span> (cfg.bitrate &gt;= 0 &amp;&amp;</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;        opus_encoder_ctl(enc, OPUS_SET_BITRATE(cfg.bitrate)) != OPUS_OK) {</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;      LOGE(<span class="stringliteral">&quot;invalid bitrate: %d&quot;</span>, cfg.bitrate);</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;      ok = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;    }</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;    <span class="keywordflow">if</span> (cfg.force_channel &gt;= 0 &amp;&amp;</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;        opus_encoder_ctl(enc, OPUS_SET_FORCE_CHANNELS(cfg.force_channel)) !=</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;            OPUS_OK) {</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;      LOGE(<span class="stringliteral">&quot;invalid force_channel: %d&quot;</span>, cfg.force_channel);</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;      ok = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;    };</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;    <span class="keywordflow">if</span> (cfg.vbr &gt;= 0 &amp;&amp;</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;        opus_encoder_ctl(enc, OPUS_SET_VBR(cfg.vbr)) != OPUS_OK) {</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;      LOGE(<span class="stringliteral">&quot;invalid vbr: %d&quot;</span>, cfg.vbr);</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;      ok = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;    }</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;    <span class="keywordflow">if</span> (cfg.vbr_constraint &gt;= 0 &amp;&amp;</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;        opus_encoder_ctl(enc, OPUS_SET_VBR_CONSTRAINT(cfg.vbr_constraint)) !=</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;            OPUS_OK) {</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;      LOGE(<span class="stringliteral">&quot;invalid vbr_constraint: %d&quot;</span>, cfg.vbr_constraint);</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;      ok = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;    }</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;    <span class="keywordflow">if</span> (cfg.complexity &gt;= 0 &amp;&amp;</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;        opus_encoder_ctl(enc, OPUS_SET_COMPLEXITY(cfg.complexity)) != OPUS_OK) {</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;      LOGE(<span class="stringliteral">&quot;invalid complexity: %d&quot;</span>, cfg.complexity);</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;      ok = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;    }</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;    <span class="keywordflow">if</span> (cfg.max_bandwidth &gt;= 0 &amp;&amp;</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;        opus_encoder_ctl(enc, OPUS_SET_MAX_BANDWIDTH(cfg.max_bandwidth)) !=</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;            OPUS_OK) {</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;      LOGE(<span class="stringliteral">&quot;invalid max_bandwidth: %d&quot;</span>, cfg.max_bandwidth);</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;      ok = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;    }</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;    <span class="keywordflow">if</span> (cfg.singal &gt;= 0 &amp;&amp;</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;        opus_encoder_ctl(enc, OPUS_SET_SIGNAL(cfg.singal)) != OPUS_OK) {</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;      LOGE(<span class="stringliteral">&quot;invalid singal: %d&quot;</span>, cfg.singal);</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;      ok = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;    }</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;    <span class="keywordflow">if</span> (cfg.inband_fec &gt;= 0 &amp;&amp;</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;        opus_encoder_ctl(enc, OPUS_SET_INBAND_FEC(cfg.inband_fec)) != OPUS_OK) {</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;      LOGE(<span class="stringliteral">&quot;invalid inband_fec: %d&quot;</span>, cfg.inband_fec);</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;      ok = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;    }</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;    <span class="keywordflow">if</span> (cfg.packet_loss_perc &gt;= 0 &amp;&amp;</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;        opus_encoder_ctl(</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;            enc, OPUS_SET_PACKET_LOSS_PERC(cfg.packet_loss_perc)) != OPUS_OK) {</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;      LOGE(<span class="stringliteral">&quot;invalid pkt_loss: %d&quot;</span>, cfg.packet_loss_perc);</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;      ok = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;    }</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;    <span class="keywordflow">if</span> (cfg.lsb_depth &gt;= 0 &amp;&amp;</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;        opus_encoder_ctl(enc, OPUS_SET_LSB_DEPTH(cfg.lsb_depth)) != OPUS_OK) {</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;      LOGE(<span class="stringliteral">&quot;invalid lsb_depth: %d&quot;</span>, cfg.lsb_depth);</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;      ok = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;    }</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;    <span class="keywordflow">if</span> (cfg.prediction_disabled &gt;= 0 &amp;&amp;</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;        opus_encoder_ctl(enc, OPUS_SET_PREDICTION_DISABLED(</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;                                  cfg.prediction_disabled)) != OPUS_OK) {</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;      LOGE(<span class="stringliteral">&quot;invalid pred_disabled: %d&quot;</span>, cfg.prediction_disabled);</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;      ok = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;    }</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;    <span class="keywordflow">if</span> (cfg.use_dtx &gt;= 0 &amp;&amp;</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;        opus_encoder_ctl(enc, OPUS_SET_DTX(cfg.use_dtx)) != OPUS_OK) {</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;      LOGE(<span class="stringliteral">&quot;invalid use_dtx: %d&quot;</span>, cfg.use_dtx);</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;      ok = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;    }</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;    <span class="keywordflow">if</span> (cfg.frame_sizes_ms_x2 &gt; 0 &amp;&amp;</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;        opus_encoder_ctl(enc, OPUS_SET_EXPERT_FRAME_DURATION(</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;                                  cfg.frame_sizes_ms_x2)) != OPUS_OK) {</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;      LOGE(<span class="stringliteral">&quot;invalid frame_sizes_ms_x2: %d&quot;</span>, cfg.frame_sizes_ms_x2);</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;      ok = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;    }</div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;    <span class="keywordflow">return</span> ok;</div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;  }</div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;};</div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160; </div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="aclass_print_html"><div class="ttname"><a href="class_print.html">Print</a></div><div class="ttdef"><b>Definition:</b> Print.h:34</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_base_info_dependent_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_base_info_dependent.html">audio_tools::AudioBaseInfoDependent</a></div><div class="ttdoc">Supports changes to the sampling rate, bits and channels.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:57</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_decoder.html">audio_tools::AudioDecoder</a></div><div class="ttdoc">Docoding of encoded audio into PCM data.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:92</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_encoder_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_encoder.html">audio_tools::AudioEncoder</a></div><div class="ttdoc">Encoding of PCM data.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:107</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_opus_audio_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_opus_audio_decoder.html">audio_tools::OpusAudioDecoder</a></div><div class="ttdoc">OpusDecoder.</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:100</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_opus_audio_decoder_html_a3c68658fb8d45b6c7e7c23f38ae6911c"><div class="ttname"><a href="classaudio__tools_1_1_opus_audio_decoder.html#a3c68658fb8d45b6c7e7c23f38ae6911c">audio_tools::OpusAudioDecoder::OpusAudioDecoder</a></div><div class="ttdeci">OpusAudioDecoder(Print &amp;out_stream)</div><div class="ttdoc">Construct a new OpusDecoder object.</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:112</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_opus_audio_decoder_html_a73a67976514aad72e0718ee6d95787e3"><div class="ttname"><a href="classaudio__tools_1_1_opus_audio_decoder.html#a73a67976514aad72e0718ee6d95787e3">audio_tools::OpusAudioDecoder::config</a></div><div class="ttdeci">OpusSettings &amp; config()</div><div class="ttdoc">Provides access to the configuration.</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:127</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_opus_audio_decoder_html_a8025d09699aa43cf74558f4db5d333e7"><div class="ttname"><a href="classaudio__tools_1_1_opus_audio_decoder.html#a8025d09699aa43cf74558f4db5d333e7">audio_tools::OpusAudioDecoder::setOutputStream</a></div><div class="ttdeci">void setOutputStream(Print &amp;out_stream) override</div><div class="ttdoc">Defines the output Stream.</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:118</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_opus_audio_decoder_html_ae3ce01c7774ac286597364c4e9ba2fbd"><div class="ttname"><a href="classaudio__tools_1_1_opus_audio_decoder.html#ae3ce01c7774ac286597364c4e9ba2fbd">audio_tools::OpusAudioDecoder::OpusAudioDecoder</a></div><div class="ttdeci">OpusAudioDecoder()</div><div class="ttdoc">Construct a new OpusDecoder object.</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:105</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_opus_audio_encoder_html"><div class="ttname"><a href="classaudio__tools_1_1_opus_audio_encoder.html">audio_tools::OpusAudioEncoder</a></div><div class="ttdoc">OpusDecoder - Actually this class does no encoding or decoding at all. It just passes on the data.</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:203</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_opus_audio_encoder_html_a08e6e0c15da6dd0d6ae4a805f5ff31e8"><div class="ttname"><a href="classaudio__tools_1_1_opus_audio_encoder.html#a08e6e0c15da6dd0d6ae4a805f5ff31e8">audio_tools::OpusAudioEncoder::end</a></div><div class="ttdeci">void end() override</div><div class="ttdoc">stops the processing</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:251</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_opus_audio_encoder_html_a25e6c989c105908df08d2bc57ac80d5a"><div class="ttname"><a href="classaudio__tools_1_1_opus_audio_encoder.html#a25e6c989c105908df08d2bc57ac80d5a">audio_tools::OpusAudioEncoder::mime</a></div><div class="ttdeci">const char * mime()</div><div class="ttdoc">Provides &quot;audio/pcm&quot;.</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:215</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_opus_audio_encoder_html_a666ca678bcbbd6a3dfa284025423d3cd"><div class="ttname"><a href="classaudio__tools_1_1_opus_audio_encoder.html#a666ca678bcbbd6a3dfa284025423d3cd">audio_tools::OpusAudioEncoder::begin</a></div><div class="ttdeci">void begin() override</div><div class="ttdoc">starts the processing using the actual OpusAudioInfo</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:225</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_opus_audio_encoder_html_aa2081e047ead396fdafec2ecd71a1ee4"><div class="ttname"><a href="classaudio__tools_1_1_opus_audio_encoder.html#aa2081e047ead396fdafec2ecd71a1ee4">audio_tools::OpusAudioEncoder::write</a></div><div class="ttdeci">size_t write(const void *in_ptr, size_t in_size)</div><div class="ttdoc">Writes PCM data to be encoded as Opus.</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:260</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_opus_audio_encoder_html_aaa89a2f471accf3884f0751bcafa07fb"><div class="ttname"><a href="classaudio__tools_1_1_opus_audio_encoder.html#aaa89a2f471accf3884f0751bcafa07fb">audio_tools::OpusAudioEncoder::setOutputStream</a></div><div class="ttdeci">void setOutputStream(Print &amp;out_stream) override</div><div class="ttdoc">Defines the output Stream.</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:212</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_opus_audio_encoder_html_ab295ac4b850be622e7e3b43e9f1d80dc"><div class="ttname"><a href="classaudio__tools_1_1_opus_audio_encoder.html#ab295ac4b850be622e7e3b43e9f1d80dc">audio_tools::OpusAudioEncoder::config</a></div><div class="ttdeci">OpusEncoderSettings &amp; config()</div><div class="ttdoc">Provides access to the configuration.</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:243</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_opus_audio_encoder_html_ab9ed2282686319bff14278ff9900258c"><div class="ttname"><a href="classaudio__tools_1_1_opus_audio_encoder.html#ab9ed2282686319bff14278ff9900258c">audio_tools::OpusAudioEncoder::setAudioInfo</a></div><div class="ttdeci">void setAudioInfo(AudioBaseInfo from) override</div><div class="ttdoc">We actually do nothing with this.</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:218</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_opus_audio_encoder_html_ae6abfd3fa82e63d7a021b0a27ec46c86"><div class="ttname"><a href="classaudio__tools_1_1_opus_audio_encoder.html#ae6abfd3fa82e63d7a021b0a27ec46c86">audio_tools::OpusAudioEncoder::getFrameSizeSamples</a></div><div class="ttdeci">int getFrameSizeSamples(int sampling_rate)</div><div class="ttdoc">Returns the frame size in samples.</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:312</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_opus_audio_decoder_html"><div class="ttname"><a href="classaudio__tools_1_1_opus_audio_decoder.html">audio_tools::OpusAudioDecoder</a></div><div class="ttdoc">OpusDecoder.</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:106</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_opus_audio_decoder_html_a3c68658fb8d45b6c7e7c23f38ae6911c"><div class="ttname"><a href="classaudio__tools_1_1_opus_audio_decoder.html#a3c68658fb8d45b6c7e7c23f38ae6911c">audio_tools::OpusAudioDecoder::OpusAudioDecoder</a></div><div class="ttdeci">OpusAudioDecoder(Print &amp;out_stream)</div><div class="ttdoc">Construct a new OpusDecoder object.</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:118</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_opus_audio_decoder_html_a73a67976514aad72e0718ee6d95787e3"><div class="ttname"><a href="classaudio__tools_1_1_opus_audio_decoder.html#a73a67976514aad72e0718ee6d95787e3">audio_tools::OpusAudioDecoder::config</a></div><div class="ttdeci">OpusSettings &amp; config()</div><div class="ttdoc">Provides access to the configuration.</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:133</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_opus_audio_decoder_html_a8025d09699aa43cf74558f4db5d333e7"><div class="ttname"><a href="classaudio__tools_1_1_opus_audio_decoder.html#a8025d09699aa43cf74558f4db5d333e7">audio_tools::OpusAudioDecoder::setOutputStream</a></div><div class="ttdeci">void setOutputStream(Print &amp;out_stream) override</div><div class="ttdoc">Defines the output Stream.</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:124</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_opus_audio_decoder_html_ae3ce01c7774ac286597364c4e9ba2fbd"><div class="ttname"><a href="classaudio__tools_1_1_opus_audio_decoder.html#ae3ce01c7774ac286597364c4e9ba2fbd">audio_tools::OpusAudioDecoder::OpusAudioDecoder</a></div><div class="ttdeci">OpusAudioDecoder()</div><div class="ttdoc">Construct a new OpusDecoder object.</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:111</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_opus_audio_encoder_html"><div class="ttname"><a href="classaudio__tools_1_1_opus_audio_encoder.html">audio_tools::OpusAudioEncoder</a></div><div class="ttdoc">OpusDecoder - Actually this class does no encoding or decoding at all. It just passes on the data.</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:209</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_opus_audio_encoder_html_a08e6e0c15da6dd0d6ae4a805f5ff31e8"><div class="ttname"><a href="classaudio__tools_1_1_opus_audio_encoder.html#a08e6e0c15da6dd0d6ae4a805f5ff31e8">audio_tools::OpusAudioEncoder::end</a></div><div class="ttdeci">void end() override</div><div class="ttdoc">stops the processing</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:257</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_opus_audio_encoder_html_a25e6c989c105908df08d2bc57ac80d5a"><div class="ttname"><a href="classaudio__tools_1_1_opus_audio_encoder.html#a25e6c989c105908df08d2bc57ac80d5a">audio_tools::OpusAudioEncoder::mime</a></div><div class="ttdeci">const char * mime()</div><div class="ttdoc">Provides &quot;audio/pcm&quot;.</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:221</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_opus_audio_encoder_html_a666ca678bcbbd6a3dfa284025423d3cd"><div class="ttname"><a href="classaudio__tools_1_1_opus_audio_encoder.html#a666ca678bcbbd6a3dfa284025423d3cd">audio_tools::OpusAudioEncoder::begin</a></div><div class="ttdeci">void begin() override</div><div class="ttdoc">starts the processing using the actual OpusAudioInfo</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:231</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_opus_audio_encoder_html_aa2081e047ead396fdafec2ecd71a1ee4"><div class="ttname"><a href="classaudio__tools_1_1_opus_audio_encoder.html#aa2081e047ead396fdafec2ecd71a1ee4">audio_tools::OpusAudioEncoder::write</a></div><div class="ttdeci">size_t write(const void *in_ptr, size_t in_size)</div><div class="ttdoc">Writes PCM data to be encoded as Opus.</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:266</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_opus_audio_encoder_html_aaa89a2f471accf3884f0751bcafa07fb"><div class="ttname"><a href="classaudio__tools_1_1_opus_audio_encoder.html#aaa89a2f471accf3884f0751bcafa07fb">audio_tools::OpusAudioEncoder::setOutputStream</a></div><div class="ttdeci">void setOutputStream(Print &amp;out_stream) override</div><div class="ttdoc">Defines the output Stream.</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:218</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_opus_audio_encoder_html_ab295ac4b850be622e7e3b43e9f1d80dc"><div class="ttname"><a href="classaudio__tools_1_1_opus_audio_encoder.html#ab295ac4b850be622e7e3b43e9f1d80dc">audio_tools::OpusAudioEncoder::config</a></div><div class="ttdeci">OpusEncoderSettings &amp; config()</div><div class="ttdoc">Provides access to the configuration.</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:249</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_opus_audio_encoder_html_ab9ed2282686319bff14278ff9900258c"><div class="ttname"><a href="classaudio__tools_1_1_opus_audio_encoder.html#ab9ed2282686319bff14278ff9900258c">audio_tools::OpusAudioEncoder::setAudioInfo</a></div><div class="ttdeci">void setAudioInfo(AudioBaseInfo from) override</div><div class="ttdoc">We actually do nothing with this.</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:224</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_opus_audio_encoder_html_ae6abfd3fa82e63d7a021b0a27ec46c86"><div class="ttname"><a href="classaudio__tools_1_1_opus_audio_encoder.html#ae6abfd3fa82e63d7a021b0a27ec46c86">audio_tools::OpusAudioEncoder::getFrameSizeSamples</a></div><div class="ttdeci">int getFrameSizeSamples(int sampling_rate)</div><div class="ttdoc">Returns the frame size in samples.</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:316</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AnalogAudioArduino.h:10</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_base_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_base_info.html">audio_tools::AudioBaseInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:23</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_opus_encoder_settings_html"><div class="ttname"><a href="structaudio__tools_1_1_opus_encoder_settings.html">audio_tools::OpusEncoderSettings</a></div><div class="ttdoc">Setting for Opus Encoder where the following values are valid: -1 indicates that the default value sh...</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:62</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_opus_encoder_settings_html_a13d8c0a9b093e0d18c2024ed4c6ce0e9"><div class="ttname"><a href="structaudio__tools_1_1_opus_encoder_settings.html#a13d8c0a9b093e0d18c2024ed4c6ce0e9">audio_tools::OpusEncoderSettings::vbr</a></div><div class="ttdeci">int vbr</div><div class="ttdoc">0, 1</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:72</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_opus_encoder_settings_html_a1dde3ddbfc6b062204235b0e3a21dbfb"><div class="ttname"><a href="structaudio__tools_1_1_opus_encoder_settings.html#a1dde3ddbfc6b062204235b0e3a21dbfb">audio_tools::OpusEncoderSettings::force_channel</a></div><div class="ttdeci">int force_channel</div><div class="ttdoc">OPUS_AUTO, OPUS_AUTO, 1, 2.</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:70</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_opus_encoder_settings_html_a2cc70c0f91f69d0d96b7344ca62eb759"><div class="ttname"><a href="structaudio__tools_1_1_opus_encoder_settings.html#a2cc70c0f91f69d0d96b7344ca62eb759">audio_tools::OpusEncoderSettings::bitrate</a></div><div class="ttdeci">int bitrate</div><div class="ttdoc">6000, 12000, 16000, 24000, 32000, 48000, 64000, 96000, 510000, OPUS_AUTO, OPUS_BITRATE_MAX</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:68</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_opus_encoder_settings_html_a2f8c37490c23d3996e8ca8bc5158b094"><div class="ttname"><a href="structaudio__tools_1_1_opus_encoder_settings.html#a2f8c37490c23d3996e8ca8bc5158b094">audio_tools::OpusEncoderSettings::inband_fec</a></div><div class="ttdeci">int inband_fec</div><div class="ttdoc">0, 1</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:82</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_opus_encoder_settings_html_a31d048c24b46fcb0eda4e67974a8c689"><div class="ttname"><a href="structaudio__tools_1_1_opus_encoder_settings.html#a31d048c24b46fcb0eda4e67974a8c689">audio_tools::OpusEncoderSettings::prediction_disabled</a></div><div class="ttdeci">int prediction_disabled</div><div class="ttdoc">0, 1</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:88</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_opus_encoder_settings_html_a42c15bb81eb638772f64b9256967434a"><div class="ttname"><a href="structaudio__tools_1_1_opus_encoder_settings.html#a42c15bb81eb638772f64b9256967434a">audio_tools::OpusEncoderSettings::max_bandwidth</a></div><div class="ttdeci">int max_bandwidth</div><div class="ttdoc">OPUS_BANDWIDTH_NARROWBAND, OPUS_BANDWIDTH_MEDIUMBAND,OPUS_BANDWIDTH_WIDEBAND, OPUS_BANDWIDTH_SUPERWID...</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:78</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_opus_encoder_settings_html_a531aba2a8cd3e0d1d458fee6c4d345f4"><div class="ttname"><a href="structaudio__tools_1_1_opus_encoder_settings.html#a531aba2a8cd3e0d1d458fee6c4d345f4">audio_tools::OpusEncoderSettings::application</a></div><div class="ttdeci">int application</div><div class="ttdoc">OPUS_APPLICATION_AUDIO, OPUS_APPLICATION_VOIP, OPUS_APPLICATION_RESTRICTED_LOWDELAY.</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:66</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_opus_encoder_settings_html_a6bda2a01ad0f7095fed752741880c4e2"><div class="ttname"><a href="structaudio__tools_1_1_opus_encoder_settings.html#a6bda2a01ad0f7095fed752741880c4e2">audio_tools::OpusEncoderSettings::vbr_constraint</a></div><div class="ttdeci">int vbr_constraint</div><div class="ttdoc">0, 1</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:74</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_opus_encoder_settings_html_a74792c1c4e5f31b36a2cad7564c2a592"><div class="ttname"><a href="structaudio__tools_1_1_opus_encoder_settings.html#a74792c1c4e5f31b36a2cad7564c2a592">audio_tools::OpusEncoderSettings::frame_sizes_ms_x2</a></div><div class="ttdeci">int frame_sizes_ms_x2</div><div class="ttdoc">5, 10, 20, 40, 80, 120, 160, 200, 240</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:92</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_opus_encoder_settings_html_a83eb74ea95ed3e1e23d77fb01b6038f7"><div class="ttname"><a href="structaudio__tools_1_1_opus_encoder_settings.html#a83eb74ea95ed3e1e23d77fb01b6038f7">audio_tools::OpusEncoderSettings::complexity</a></div><div class="ttdeci">int complexity</div><div class="ttdoc">0 to 10</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:76</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_opus_encoder_settings_html_a97444e7496187bae81bac1d05532ebf0"><div class="ttname"><a href="structaudio__tools_1_1_opus_encoder_settings.html#a97444e7496187bae81bac1d05532ebf0">audio_tools::OpusEncoderSettings::singal</a></div><div class="ttdeci">int singal</div><div class="ttdoc">OPUS_AUTO, OPUS_AUTO, OPUS_SIGNAL_VOICE, OPUS_SIGNAL_MUSIC.</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:80</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_opus_encoder_settings_html_ad5151084a24344a8c02b0ce22a792661"><div class="ttname"><a href="structaudio__tools_1_1_opus_encoder_settings.html#ad5151084a24344a8c02b0ce22a792661">audio_tools::OpusEncoderSettings::use_dtx</a></div><div class="ttdeci">int use_dtx</div><div class="ttdoc">0, 1</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:90</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_opus_encoder_settings_html_ad55336ac70280ecdeffd4c3f18257a55"><div class="ttname"><a href="structaudio__tools_1_1_opus_encoder_settings.html#ad55336ac70280ecdeffd4c3f18257a55">audio_tools::OpusEncoderSettings::lsb_depth</a></div><div class="ttdeci">int lsb_depth</div><div class="ttdoc">8, 24</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:86</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_opus_encoder_settings_html_add21a1ac1fc96b1ccb42c323e80b245c"><div class="ttname"><a href="structaudio__tools_1_1_opus_encoder_settings.html#add21a1ac1fc96b1ccb42c323e80b245c">audio_tools::OpusEncoderSettings::packet_loss_perc</a></div><div class="ttdeci">int packet_loss_perc</div><div class="ttdoc">0, 1, 2, 5</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:84</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_opus_settings_html"><div class="ttname"><a href="structaudio__tools_1_1_opus_settings.html">audio_tools::OpusSettings</a></div><div class="ttdoc">Setting for Opus Decoder.</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:16</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_opus_settings_html_a8ab0da13e2196fca0f219e9d39cef8d9"><div class="ttname"><a href="structaudio__tools_1_1_opus_settings.html#a8ab0da13e2196fca0f219e9d39cef8d9">audio_tools::OpusSettings::OpusSettings</a></div><div class="ttdeci">OpusSettings()</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:17</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_opus_encoder_settings_html_a13d8c0a9b093e0d18c2024ed4c6ce0e9"><div class="ttname"><a href="structaudio__tools_1_1_opus_encoder_settings.html#a13d8c0a9b093e0d18c2024ed4c6ce0e9">audio_tools::OpusEncoderSettings::vbr</a></div><div class="ttdeci">int vbr</div><div class="ttdoc">0, 1</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:75</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_opus_encoder_settings_html_a1dde3ddbfc6b062204235b0e3a21dbfb"><div class="ttname"><a href="structaudio__tools_1_1_opus_encoder_settings.html#a1dde3ddbfc6b062204235b0e3a21dbfb">audio_tools::OpusEncoderSettings::force_channel</a></div><div class="ttdeci">int force_channel</div><div class="ttdoc">OPUS_AUTO, OPUS_AUTO, 1, 2.</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:73</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_opus_encoder_settings_html_a2cc70c0f91f69d0d96b7344ca62eb759"><div class="ttname"><a href="structaudio__tools_1_1_opus_encoder_settings.html#a2cc70c0f91f69d0d96b7344ca62eb759">audio_tools::OpusEncoderSettings::bitrate</a></div><div class="ttdeci">int bitrate</div><div class="ttdoc">6000, 12000, 16000, 24000, 32000, 48000, 64000, 96000, 510000, OPUS_AUTO, OPUS_BITRATE_MAX</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:71</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_opus_encoder_settings_html_a2f8c37490c23d3996e8ca8bc5158b094"><div class="ttname"><a href="structaudio__tools_1_1_opus_encoder_settings.html#a2f8c37490c23d3996e8ca8bc5158b094">audio_tools::OpusEncoderSettings::inband_fec</a></div><div class="ttdeci">int inband_fec</div><div class="ttdoc">0, 1</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:88</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_opus_encoder_settings_html_a31d048c24b46fcb0eda4e67974a8c689"><div class="ttname"><a href="structaudio__tools_1_1_opus_encoder_settings.html#a31d048c24b46fcb0eda4e67974a8c689">audio_tools::OpusEncoderSettings::prediction_disabled</a></div><div class="ttdeci">int prediction_disabled</div><div class="ttdoc">0, 1</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:94</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_opus_encoder_settings_html_a42c15bb81eb638772f64b9256967434a"><div class="ttname"><a href="structaudio__tools_1_1_opus_encoder_settings.html#a42c15bb81eb638772f64b9256967434a">audio_tools::OpusEncoderSettings::max_bandwidth</a></div><div class="ttdeci">int max_bandwidth</div><div class="ttdoc">OPUS_BANDWIDTH_NARROWBAND, OPUS_BANDWIDTH_MEDIUMBAND,OPUS_BANDWIDTH_WIDEBAND, OPUS_BANDWIDTH_SUPERWID...</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:84</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_opus_encoder_settings_html_a531aba2a8cd3e0d1d458fee6c4d345f4"><div class="ttname"><a href="structaudio__tools_1_1_opus_encoder_settings.html#a531aba2a8cd3e0d1d458fee6c4d345f4">audio_tools::OpusEncoderSettings::application</a></div><div class="ttdeci">int application</div><div class="ttdoc">OPUS_APPLICATION_AUDIO, OPUS_APPLICATION_VOIP, OPUS_APPLICATION_RESTRICTED_LOWDELAY.</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:68</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_opus_encoder_settings_html_a56d26b06ed05bc0fcd48a58308b1da09"><div class="ttname"><a href="structaudio__tools_1_1_opus_encoder_settings.html#a56d26b06ed05bc0fcd48a58308b1da09">audio_tools::OpusEncoderSettings::max_buffer_size</a></div><div class="ttdeci">int max_buffer_size</div><div class="ttdoc">Default is 5760.</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:65</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_opus_encoder_settings_html_a6bda2a01ad0f7095fed752741880c4e2"><div class="ttname"><a href="structaudio__tools_1_1_opus_encoder_settings.html#a6bda2a01ad0f7095fed752741880c4e2">audio_tools::OpusEncoderSettings::vbr_constraint</a></div><div class="ttdeci">int vbr_constraint</div><div class="ttdoc">0, 1</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:77</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_opus_encoder_settings_html_a74792c1c4e5f31b36a2cad7564c2a592"><div class="ttname"><a href="structaudio__tools_1_1_opus_encoder_settings.html#a74792c1c4e5f31b36a2cad7564c2a592">audio_tools::OpusEncoderSettings::frame_sizes_ms_x2</a></div><div class="ttdeci">int frame_sizes_ms_x2</div><div class="ttdoc">5, 10, 20, 40, 80, 120, 160, 200, 240</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:98</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_opus_encoder_settings_html_a83eb74ea95ed3e1e23d77fb01b6038f7"><div class="ttname"><a href="structaudio__tools_1_1_opus_encoder_settings.html#a83eb74ea95ed3e1e23d77fb01b6038f7">audio_tools::OpusEncoderSettings::complexity</a></div><div class="ttdeci">int complexity</div><div class="ttdoc">0 to 10</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:79</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_opus_encoder_settings_html_a97444e7496187bae81bac1d05532ebf0"><div class="ttname"><a href="structaudio__tools_1_1_opus_encoder_settings.html#a97444e7496187bae81bac1d05532ebf0">audio_tools::OpusEncoderSettings::singal</a></div><div class="ttdeci">int singal</div><div class="ttdoc">OPUS_AUTO, OPUS_AUTO, OPUS_SIGNAL_VOICE, OPUS_SIGNAL_MUSIC.</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:86</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_opus_encoder_settings_html_ad5151084a24344a8c02b0ce22a792661"><div class="ttname"><a href="structaudio__tools_1_1_opus_encoder_settings.html#ad5151084a24344a8c02b0ce22a792661">audio_tools::OpusEncoderSettings::use_dtx</a></div><div class="ttdeci">int use_dtx</div><div class="ttdoc">0, 1</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:96</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_opus_encoder_settings_html_ad55336ac70280ecdeffd4c3f18257a55"><div class="ttname"><a href="structaudio__tools_1_1_opus_encoder_settings.html#ad55336ac70280ecdeffd4c3f18257a55">audio_tools::OpusEncoderSettings::lsb_depth</a></div><div class="ttdeci">int lsb_depth</div><div class="ttdoc">8, 24</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:92</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_opus_encoder_settings_html_add21a1ac1fc96b1ccb42c323e80b245c"><div class="ttname"><a href="structaudio__tools_1_1_opus_encoder_settings.html#add21a1ac1fc96b1ccb42c323e80b245c">audio_tools::OpusEncoderSettings::packet_loss_perc</a></div><div class="ttdeci">int packet_loss_perc</div><div class="ttdoc">0, 1, 2, 5</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:90</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_opus_settings_html"><div class="ttname"><a href="structaudio__tools_1_1_opus_settings.html">audio_tools::OpusSettings</a></div><div class="ttdoc">Setting for Opus Decoder.</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:18</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_opus_settings_html_a8ab0da13e2196fca0f219e9d39cef8d9"><div class="ttname"><a href="structaudio__tools_1_1_opus_settings.html#a8ab0da13e2196fca0f219e9d39cef8d9">audio_tools::OpusSettings::OpusSettings</a></div><div class="ttdeci">OpusSettings()</div><div class="ttdef"><b>Definition:</b> CodecOpus.h:19</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
