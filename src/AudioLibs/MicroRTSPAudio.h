@@ -121,6 +121,9 @@ class RTSPSourceAudioStream : public IAudioSource {
     p_audiostream->end();
   };
 
+  void setFragmentSize(int fragmentSize) { format.setFragmentSize(fragmentSize); }
+  void setTimerPeriod(int period) { format.setTimerPeriod(period); }
+
  protected:
   AudioStream* p_audiostream = nullptr;
   bool active = true;
@@ -203,6 +206,9 @@ class RTSPSourceStream : public IAudioSource {
     LOGI(LOG_METHOD);
     active = false;
   };
+
+  void setFragmentSize(int fragmentSize) { format.setFragmentSize(fragmentSize); }
+  void setTimerPeriod(int period) { format.setTimerPeriod(period); }
 
  protected:
   Stream* p_stream = nullptr;
