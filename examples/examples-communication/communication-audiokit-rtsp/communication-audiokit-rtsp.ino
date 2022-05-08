@@ -17,8 +17,8 @@
 
 int port = 554;
 AudioKitStream kit;  // Audio source
-RTSPSourceAudioStream source(kit);
-AudioStreamer streamer = AudioStreamer(&source);
+RTSPSourceAudioStream source(kit); // IAudioSource for RTSP
+AudioStreamer streamer = AudioStreamer(&source); // Stream audio via RTSP
 RTSPServer rtsp = RTSPServer(&streamer, port);
 
 const char* wifi = "wifi";
