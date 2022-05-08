@@ -6,7 +6,7 @@
 #include "oggz/oggz.h"
 
 #define OGG_DEFAULT_BUFFER_SIZE (2048)
-
+#define OGG_DEFAULT_PAGE_SIZE (512)
 namespace audio_tools {
 
 /**
@@ -73,7 +73,7 @@ class OggDecoder : public AudioDecoder {
 
     // Read all bytes into oggz, calling any read callbacks on the fly.
     LOGD("oggz_read...");
-    while ((oggz_read(p_oggz, 1024)) > 0)
+    while ((oggz_read(p_oggz, OGG_DEFAULT_PAGE_SIZE)) > 0)
       ;
 
     return result;
@@ -214,7 +214,7 @@ class OggEncoder : public AudioEncoder {
 
     op.packet = (uint8_t *)in_ptr;
     op.bytes = in_size;
-    op.granulepos = granulepos += in_size;
+    op.granulepos = granulepos += in_size/sizeof(int16_t)/cfg.channels; // sample
     op.b_o_s = false;
     op.e_o_s = false;
     op.packetno = packetno++;
@@ -238,16 +238,16 @@ class OggEncoder : public AudioEncoder {
   long serialno = -1;
   AudioBaseInfo cfg;
 
-  virtual bool writePacket(int in_size) {
+  virtual bool writePacket(int in_size, int flag=0) {
     LOGD("oggz_write_feed: %u", in_size);
     long result =
-        oggz_write_feed(p_oggz, &op, serialno, OGGZ_FLUSH_AFTER, NULL);
+        oggz_write_feed(p_oggz, &op, serialno, flag, NULL);
     if (result < 0) {
       LOGE("oggz_write_feed: %d", result);
       return 0;
     }
     int len = 20000;
-    while ((oggz_write(p_oggz, 512)) > 0)
+    while ((oggz_write(p_oggz, OGG_DEFAULT_PAGE_SIZE)) > 0)
       ;
     return true;
   }
@@ -269,7 +269,7 @@ class OggEncoder : public AudioEncoder {
     op.packetno = packetno++;
     op.b_o_s = false;
     op.e_o_s = true;
-    writePacket(0);
+    writePacket(0, OGGZ_FLUSH_AFTER);
   }
 
   // Final Stream Callback
