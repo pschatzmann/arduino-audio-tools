@@ -79,33 +79,34 @@ class OpusOggEncoder : public OggEncoder {
  public:
   OpusOggEncoder() = default;
 
- protected:
-  OpusOggHeader header;
-  OpusOggCommentHeader comment;
-  OpusAudioDecoder dec;
-  EncodedAudioStream opus{(Print*)nullptr, &dec};
-
   /// Defines the output Stream
   void setOutputStream(Print &out_stream) override {
-    dec.setOutputStream(out_stream);
+    enc.setOutputStream(out_stream);
     p_print = &opus;
   }
 
   void begin() {
       OggEncoder::begin();
-      dec.begin();
+      enc.begin();
   }
 
   void end() {
       OggEncoder::begin();
-      dec.end();
+      enc.end();
   }
 
   /// Provides "audio/pcm"
   const char *mime() { return "audio/opus"; }
 
   /// Provides access to the Opus configuration
-  OpusSettings &config() { return dec.config(); }
+  OpusEncoderSettings &config() { return enc.config(); }
+
+
+ protected:
+  OpusOggHeader header;
+  OpusOggCommentHeader comment;
+  OpusAudioEncoder enc;
+  EncodedAudioStream opus{(Print*)nullptr, &enc};
 
   void writeHeader() {
     header.sample_rate = cfg.sample_rate;
