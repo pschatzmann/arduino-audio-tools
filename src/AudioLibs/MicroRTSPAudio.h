@@ -16,12 +16,13 @@ namespace audio_tools {
  */
 class RTPStreamPCMInfo : public PCMInfo {
  public:
-
   RTPStreamPCMInfo() = default;
   virtual void begin(AudioStream& stream) { p_stream = &stream; }
   int getSampleRate() override { return p_stream->audioInfo().sample_rate; }
-  int getChannels() override{ return p_stream->audioInfo().channels; }
-  int getSampleSizeBytes() override { return p_stream->audioInfo().bits_per_sample / 8; };
+  int getChannels() override { return p_stream->audioInfo().channels; }
+  int getSampleSizeBytes() override {
+    return p_stream->audioInfo().bits_per_sample / 8;
+  };
   virtual void setAudioInfo(AudioBaseInfo ai) { p_stream->setAudioInfo(ai); }
 
  protected:
@@ -159,7 +160,7 @@ class RTSPSourceAudioStream : public IAudioSource {
    * @param maxSamples maximum number of samples to be copied
    * @return actual number of samples that were copied
    */
-  virtual int readBytes(void* dest, int byteCount) {
+  virtual int readBytes(void* dest, int byteCount) override {
     int result = 0;
     LOGD("readDataTo: %d", byteCount);
     if (active) {
@@ -167,18 +168,22 @@ class RTSPSourceAudioStream : public IAudioSource {
     }
     return result;
   }
+  // Provides the Audio Information 
+  virtual RTSPFormat* getFormat() override { return &format; }
+
   /**
    * Start preparing data in order to provide it for the stream
    */
-  virtual void start() {
+  virtual void start() override {
     LOGI(LOG_METHOD);
+
     p_audiostream->begin();
     active = true;
   };
   /**
    * Stop preparing data as the stream has ended
    */
-  virtual void stop() {
+  virtual void stop() override {
     LOGI(LOG_METHOD);
     active = false;
     p_audiostream->end();
@@ -188,6 +193,7 @@ class RTSPSourceAudioStream : public IAudioSource {
   AudioStream* p_audiostream = nullptr;
   bool active = true;
   RTPStreamPCMInfo pcmInfo;
+  RTSPFormatPCM format{pcmInfo};
 };
 
 /**
@@ -234,13 +240,16 @@ class RTSPSourceStream : public IAudioSource {
     rtp_info.setAudioInfo(info);
   }
 
+  // Provides the Audio Information 
+  virtual RTSPFormat* getFormat() override { return &format; }
+
   /**
    * (Reads and) Copies up to maxSamples samples into the given buffer
    * @param dest Buffer into which the samples are to be copied
    * @param maxSamples maximum number of samples to be copied
    * @return actual number of samples that were copied
    */
-  virtual int readBytes(void* dest, int byteCount) {
+  virtual int readBytes(void* dest, int byteCount) override {
     int result = 0;
     LOGD("readDataTo: %d", byteCount);
     if (active) {
@@ -251,14 +260,14 @@ class RTSPSourceStream : public IAudioSource {
   /**
    * Start preparing data in order to provide it for the stream
    */
-  virtual void start() {
+  virtual void start() override {
     LOGI(LOG_METHOD);
     active = true;
   };
   /**
    * Stop preparing data as the stream has ended
    */
-  virtual void stop() {
+  virtual void stop() override {
     LOGI(LOG_METHOD);
     active = false;
   };
@@ -267,6 +276,7 @@ class RTSPSourceStream : public IAudioSource {
   Stream* p_stream = nullptr;
   bool active = true;
   RTPPCMAudioInfo rtp_info;
+  RTSPFormatPCM format{rtp_info};
 };
 
 }  // namespace audio_tools

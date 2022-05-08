@@ -32,7 +32,7 @@ void setup() {
   auto cfg = kit.defaultConfig(RX_MODE);
   cfg.input_device = AUDIO_HAL_ADC_INPUT_LINE2;
   cfg.channels = 1;
-  cfg.sample_rate = 16000;
+  cfg.sample_rate = 8000;
   cfg.bits_per_sample = 16;
   kit.begin(cfg);
 

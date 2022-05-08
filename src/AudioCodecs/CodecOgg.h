@@ -222,6 +222,11 @@ class OggEncoder : public AudioEncoder {
     if (!writePacket(in_size)) {
       return 0;
     }
+
+    // trigger pysical write
+    while ((oggz_write(p_oggz, in_size)) > 0)
+      ;
+
     return in_size;
   }
 
@@ -244,10 +249,8 @@ class OggEncoder : public AudioEncoder {
     long result = oggz_write_feed(p_oggz, &op, serialno, flag, NULL);
     if (result < 0) {
       LOGE("oggz_write_feed: %d", result);
-      return 0;
+      return false;
     }
-    while ((oggz_write(p_oggz, in_size)) > 0)
-      ;
     return true;
   }
 
@@ -264,7 +267,7 @@ class OggEncoder : public AudioEncoder {
   virtual void writeFooter() {
     op.packet = (uint8_t *)nullptr;
     op.bytes = 0;
-    op.granulepos = granulepos += 1;
+    op.granulepos = granulepos;
     op.packetno = packetno++;
     op.b_o_s = false;
     op.e_o_s = true;
