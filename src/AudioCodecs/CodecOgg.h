@@ -6,14 +6,14 @@
 #include "oggz/oggz.h"
 
 #define OGG_DEFAULT_BUFFER_SIZE (2048)
-#define OGG_DEFAULT_PAGE_SIZE (512)
+
 namespace audio_tools {
 
 /**
  * @brief OggDecoder - Ogg Container. Decodes a packet from an Ogg container.
- * The Ogg begin segment contains the AudioBaseInfo structure. You can subclass and overwrite the 
- * beginOfSegment() method to implement your own headers
- * 
+ * The Ogg begin segment contains the AudioBaseInfo structure. You can subclass
+ * and overwrite the beginOfSegment() method to implement your own headers
+ *
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -73,7 +73,7 @@ class OggDecoder : public AudioDecoder {
 
     // Read all bytes into oggz, calling any read callbacks on the fly.
     LOGD("oggz_read...");
-    while ((oggz_read(p_oggz, OGG_DEFAULT_PAGE_SIZE)) > 0)
+    while ((oggz_read(p_oggz, in_size)) > 0)
       ;
 
     return result;
@@ -152,7 +152,7 @@ class OggDecoder : public AudioDecoder {
  * @brief OggEncoder - Ogg Container. Encodes a packet for an Ogg container.
  * The Ogg begin segment contains the AudioBaseInfo structure. You can subclass
  * ond overwrite the writeHeader() method to implement your own header logic.
- * 
+ *
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -214,7 +214,8 @@ class OggEncoder : public AudioEncoder {
 
     op.packet = (uint8_t *)in_ptr;
     op.bytes = in_size;
-    op.granulepos = granulepos += in_size/sizeof(int16_t)/cfg.channels; // sample
+    op.granulepos = granulepos +=
+        in_size / sizeof(int16_t) / cfg.channels;  // sample
     op.b_o_s = false;
     op.e_o_s = false;
     op.packetno = packetno++;
@@ -238,16 +239,14 @@ class OggEncoder : public AudioEncoder {
   long serialno = -1;
   AudioBaseInfo cfg;
 
-  virtual bool writePacket(int in_size, int flag=0) {
+  virtual bool writePacket(int in_size, int flag = 0) {
     LOGD("oggz_write_feed: %u", in_size);
-    long result =
-        oggz_write_feed(p_oggz, &op, serialno, flag, NULL);
+    long result = oggz_write_feed(p_oggz, &op, serialno, flag, NULL);
     if (result < 0) {
       LOGE("oggz_write_feed: %d", result);
       return 0;
     }
-    int len = 20000;
-    while ((oggz_write(p_oggz, OGG_DEFAULT_PAGE_SIZE)) > 0)
+    while ((oggz_write(p_oggz, in_size)) > 0)
       ;
     return true;
   }
