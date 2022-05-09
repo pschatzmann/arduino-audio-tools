@@ -540,29 +540,35 @@ template <typename T>
 class BufferedArray {
  public:
   BufferedArray(Stream &input, int len) {
+    LOGI("BufferedArray(%d)", len);
     array.resize(len);
     p_stream = &input;
   }
   // access values, the offset and length are specified in samples of type <T>
   int16_t *getValues(size_t offset, size_t length) {
+      LOGD("getValues(%d,%d) - max %d", offset, length, array.size());
     if (offset == 0) {
+      // we restart at the beginning
       last_end = 0;
       actual_end = length;
     } else {
-      last_end = actual_end;
+      // if first position is at end we do not want to read the full buffer
+      last_end = actual_end>=0 ? actual_end :  offset;
       // increase actual end if bigger then old
       actual_end = offset + length > actual_end ? offset + length : actual_end;
     }
     int size = actual_end - last_end;
     if (size > 0) {
       LOGD("readBytes(%d,%d)", last_end, size);
+      assert(last_end+size<=array.size());
       p_stream->readBytes((uint8_t *)(&array[last_end]), size * 2);
     }
+    assert(offset<actual_end);
     return &array[offset];
   }
 
  protected:
-  int actual_end = 0;
+  int actual_end = -1;
   int last_end = 0;
   Vector<T> array;
   Stream *p_stream = nullptr;
