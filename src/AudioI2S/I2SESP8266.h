@@ -30,6 +30,7 @@ class I2SBase {
 
     /// starts the DAC 
     bool begin(I2SConfig cfg) {
+      this->cfg = cfg;
       i2s_set_rate(cfg.sample_rate);
       cfg.bits_per_sample = 16;
       if(!i2s_rxtx_begin(cfg.rx_tx_mode == RX_MODE, cfg.rx_tx_mode == TX_MODE)){

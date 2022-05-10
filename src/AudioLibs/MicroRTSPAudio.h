@@ -180,8 +180,6 @@ class RTSPSourceStream : public IAudioSource {
 
   /**
    * (Reads and) Copies up to maxSamples samples into the given buffer
-   * @param dest Buffer into which the samples are to be copied
-   * @param maxSamples maximum number of samples to be copied
    * @return actual number of samples that were copied
    */
   virtual int readBytes(void* dest, int byteCount) override {

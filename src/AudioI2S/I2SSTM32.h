@@ -28,6 +28,7 @@ class I2SBase {
 
     /// starts the DAC 
     void begin(I2SConfig cfg) {
+      this->cfg = cfg;
       i2s.Instance = SPI2;
       if (cfg.channels=!2){
         LOGE("Unsupported channels %d - must be 2", cfg.channels);

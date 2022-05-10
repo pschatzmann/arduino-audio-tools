@@ -28,14 +28,19 @@ class I2SBase {
     }
 
     /// starts the DAC with the default config
-    bool begin(RxTxMode mode = TX_MODE) {
+    bool begin(RxTxMode mode) {
         return begin(defaultConfig(mode));
     }
 
+    /// starts the DAC with the current config - if not started yet. If I2S has been started there is no action and we return true
+    bool begin() {
+        return !is_started ? begin(cfg) : true;
+    }
 
     /// starts the DAC 
     bool begin(I2SConfig cfg) {
       LOGD(LOG_METHOD);
+      this->cfg = cfg;
       switch(cfg.rx_tx_mode){
         case TX_MODE:
           return begin(cfg, cfg.pin_data, I2S_PIN_NO_CHANGE);
@@ -123,7 +128,7 @@ class I2SBase {
     }
 
   protected:
-    I2SConfig cfg;
+    I2SConfig cfg = defaultConfig(RX_MODE);
     i2s_port_t i2s_num;
     i2s_config_t i2s_config;
     bool is_started = false;
