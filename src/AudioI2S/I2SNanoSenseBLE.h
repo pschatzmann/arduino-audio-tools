@@ -103,6 +103,7 @@ class I2SBase {
     /// starts the DAC 
     bool begin(I2SConfig cfg) {
         LOGD(__func__);
+        this->cfg = cfg;
         setupRxTx(cfg);
         setupClock(cfg);
         setupBitWidth(cfg);

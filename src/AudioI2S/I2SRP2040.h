@@ -41,6 +41,7 @@ class I2SBasePIO {
     /// starts the DAC 
     bool begin(I2SConfig cfg) {
       LOGI(LOG_METHOD);
+      this->cfg = cfg;
       cfg.logInfo();
       if (cfg.rx_tx_mode != TX_MODE ){
           LOGE("Unsupported mode: only TX_MODE is supported");

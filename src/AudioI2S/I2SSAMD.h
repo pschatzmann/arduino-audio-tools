@@ -29,6 +29,7 @@ class I2SBase {
 
     /// starts the DAC 
     bool begin(I2SConfig cfg) {
+        this->cfg = cfg;
         return I2S.begin(cfg.i2s_format, cfg.sample_rate, cfg.bits_per_sample);
     }
 
