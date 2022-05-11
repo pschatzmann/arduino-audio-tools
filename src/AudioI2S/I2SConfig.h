@@ -15,6 +15,12 @@ enum I2SFormat {
   I2S_PCM_SHORT
 };
 
+enum I2SSignalType {
+  Digital,
+  Analog,
+  PDM
+};
+
 const char* i2s_formats[] = {"I2S_STD_FORMAT","I2S_LSB_FORMAT","I2S_MSB_FORMAT","I2S_PHILIPS_FORMAT","I2S_RIGHT_JUSTIFIED_FORMAT","I2S_LEFT_JUSTIFIED_FORMAT","I2S_PCM_LONG","I2S_PCM_SHORT"};
 
 
@@ -75,7 +81,7 @@ class I2SConfig : public AudioBaseInfo {
     int buffer_count = I2S_BUFFER_COUNT;
     int buffer_size = I2S_BUFFER_SIZE;
 
-    bool is_digital = true;  // e.g. the ESP32 supports analog input or output
+    I2SSignalType signal_type = Digital;  // e.g. the ESP32 supports analog input or output or PDM picrophones
     bool auto_clear;
     bool use_apll = I2S_USE_APLL; 
     uint32_t fixed_mclk = 0; 

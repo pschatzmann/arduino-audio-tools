@@ -169,7 +169,7 @@ class I2SBase {
       }      
 
       // setup pin config
-      if (this->cfg.is_digital ) {
+      if (this->cfg.signal_type == Digital || this->cfg.signal_type == PDM  ) {
         i2s_pin_config_t pin_config = {
 #if ESP_IDF_VERSION_MAJOR >= 4 
             .mck_io_num = cfg.pin_mck,
@@ -303,11 +303,7 @@ class I2SBase {
     }
 #pragma GCC diagnostic pop
 
-
-    // determines the i2s_format_t
-    i2s_mode_t toMode(I2SConfig &cfg) {
-      i2s_mode_t mode;
-      if (cfg.is_digital){
+    int getModeDigital(I2SConfig &cfg) {
         int i2s_format = cfg.is_master ? I2S_MODE_MASTER : I2S_MODE_SLAVE;
         int i2s_rx_tx = 0;
         switch(cfg.rx_tx_mode){
@@ -323,13 +319,28 @@ class I2SBase {
           default:
             LOGE("Undefined rx_tx_mode: %d", cfg.rx_tx_mode);
         }
-        mode = (i2s_mode_t) (i2s_format | i2s_rx_tx);
-      } else {
+        return (i2s_format | i2s_rx_tx);
+    }
+
+    // determines the i2s_format_t
+    i2s_mode_t toMode(I2SConfig &cfg) {
+      i2s_mode_t mode;
+      switch (cfg.signal_type){
+        case Digital:
+          mode = (i2s_mode_t) getModeDigital(cfg);
+          break;
+
+        case PDM:
+          mode = (i2s_mode_t) (getModeDigital(cfg) | I2S_MODE_PDM);
+          break;        
+
+        case Analog:
 #if defined(ARDUINO_ESP32S2_DEV) || defined(ARDUINO_ESP32C3_DEV)   
-        LOGE("Not supported");
+          LOGE("Not supported");
 #else    
-        mode = (i2s_mode_t) (cfg.rx_tx_mode ? I2S_MODE_DAC_BUILT_IN : I2S_MODE_ADC_BUILT_IN);
+          mode = (i2s_mode_t) (cfg.rx_tx_mode ? I2S_MODE_DAC_BUILT_IN : I2S_MODE_ADC_BUILT_IN);
 #endif
+          break;
       }
       return mode;
     }
