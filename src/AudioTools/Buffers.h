@@ -37,7 +37,7 @@ class BaseBuffer {
 
   int writeArray(const T data[], int len) {
     LOGD("%s: %d", LOG_METHOD, len);
-    CHECK_MEMORY();
+    //CHECK_MEMORY();
 
     int result = 0;
     for (int j = 0; j < len; j++) {
@@ -46,21 +46,21 @@ class BaseBuffer {
       }
       result = j + 1;
     }
-    CHECK_MEMORY();
+    //CHECK_MEMORY();
     return result;
   }
 
   // reads multiple values for array of 2 dimensional frames
   int readFrames(T data[][2], int len) {
     LOGD("%s: %d", LOG_METHOD, len);
-    CHECK_MEMORY();
+    //CHECK_MEMORY();
     int result = MIN(len, available());
     for (int j = 0; j < result; j++) {
       T sample = read();
       data[j][0] = sample;
       data[j][1] = sample;
     }
-    CHECK_MEMORY();
+    //CHECK_MEMORY();
     return result;
   }
 

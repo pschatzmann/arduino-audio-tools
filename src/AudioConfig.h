@@ -38,8 +38,8 @@
 #define LOG_STREAM Serial
 #endif
 
-//#define CHECK_MEMORY() checkMemory()
 #define CHECK_MEMORY() 
+// #define CHECK_MEMORY() checkMemory(true)
 #define LOG_PRINTF_BUFFER_SIZE 160
 #define LOG_METHOD __PRETTY_FUNCTION__
 

@@ -105,7 +105,8 @@ class MP3DecoderHelix : public AudioDecoder  {
         /// Write mp3 data to decoder
         size_t write(const void* mp3Data, size_t len) {
             LOGD("%s: %zu", LOG_METHOD, len);
-            return mp3==nullptr ? 0 : filter.write((uint8_t*)mp3Data, len);
+            if (mp3==nullptr) return 0;
+            return use_filter ? filter.write((uint8_t*)mp3Data, len): mp3->write((uint8_t*)mp3Data, len);
         }
 
         /// checks if the class is active 
@@ -116,10 +117,6 @@ class MP3DecoderHelix : public AudioDecoder  {
         libhelix::MP3DecoderHelix *driver() {
             return mp3;
         }
-
-        // void flush(){
-        //     mp3->flush();
-        // }
 
         /// Defines the callback object to which the Audio information change is provided
         void setNotifyAudioChange(AudioBaseInfoDependent &bi){
@@ -140,10 +137,21 @@ class MP3DecoderHelix : public AudioDecoder  {
             }
         }
 
+        /// Activates a filter that makes sure that helix does not get any metadata segments
+        void setFilterMetaData(bool filter){
+            use_filter = filter;
+        }
+        
+        /// Check if the metadata filter is active
+        bool isFilterMetaData() {
+            return use_filter;
+        }
+
 
     protected:
         libhelix::MP3DecoderHelix *mp3=nullptr;
         MetaDataFilter<libhelix::MP3DecoderHelix> filter;
+        bool use_filter = false;
 
 };
 

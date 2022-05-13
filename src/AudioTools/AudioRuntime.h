@@ -18,10 +18,10 @@ inline void stop() {
 }
 
 /// Executes heap_caps_check_integrity_all()
-inline static void checkMemory(bool stackCheck=false) {
+inline static void checkMemory(bool memoryCheck=false) {
     #ifdef ESP32
         assert(heap_caps_check_integrity_all(true)); 
-        if (stackCheck) printf("stack available: %d \n'", uxTaskGetStackHighWaterMark(NULL));
+        if (memoryCheck) printf("==> Available stack: %d - heap: %d\n", uxTaskGetStackHighWaterMark(NULL), ESP.getFreeHeap());
     #endif    
 }
 
