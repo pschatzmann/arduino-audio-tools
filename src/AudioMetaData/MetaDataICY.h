@@ -203,7 +203,7 @@ class MetaDataICY : public AbstractMetaData {
 
         /// e.g. StreamTitle=' House Bulldogs - But your love (Radio Edit)';StreamUrl='';
         virtual void processMetaData( char* metaData, int len) {
-            CHECK_MEMORY();
+            //CHECK_MEMORY();
             LOGD(LOG_METHOD);
             metaData[len]=0;
             if (isAscii(metaData, 12)){
@@ -220,9 +220,9 @@ class MetaDataICY : public AbstractMetaData {
                         callback(Title, (const char*)metaData+start+1, end-start);
                     }
                 }   
-                CHECK_MEMORY();
+               // CHECK_MEMORY();
             } else {
-                CHECK_MEMORY();
+               // CHECK_MEMORY();
                 LOGW("Unexpected Data: %s", metaData);
             }
         }

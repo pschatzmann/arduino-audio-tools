@@ -412,9 +412,7 @@ class EncodedAudioStream : public AudioPrint {
                 return 0;
             }
 
-            CHECK_MEMORY();
             size_t result = writer_ptr->write(data, len);
-            CHECK_MEMORY();
             return result;
         }
 

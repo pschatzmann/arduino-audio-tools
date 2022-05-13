@@ -68,11 +68,11 @@ class MetaDataPrint : public AudioPrint {
 
         if (callback!=nullptr){
             if (meta!=nullptr){
-                CHECK_MEMORY();
+                //CHECK_MEMORY();
                 if (meta->write(data, length)!=length){
                     LOGE("Did not write all data");
                 }
-                CHECK_MEMORY();
+                //CHECK_MEMORY();
             } else {
                 LOGW("meta is null");
             }

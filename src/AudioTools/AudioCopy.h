@@ -120,6 +120,7 @@ class StreamCopyT {
                 #ifndef COPY_LOG_OFF
                 LOGI("StreamCopy::copy %u -> %u -> %u bytes - in %u hops", (unsigned int)bytes_to_read,(unsigned int) bytes_read, (unsigned int)result, (unsigned int)delayCount);
                 #endif
+                CHECK_MEMORY();
             } else {
                 // give the processor some time 
                 delay(delay_on_no_data);
@@ -159,6 +160,7 @@ class StreamCopyT {
                 #ifndef COPY_LOG_OFF
                     LOGI("StreamCopy::copy %u -> %u bytes - in %d hops", (unsigned int)bytes_to_read, (unsigned int)result, delayCount);
                 #endif
+                CHECK_MEMORY();
             } else {
                 delay(delay_on_no_data);
             }
@@ -256,7 +258,7 @@ class StreamCopyT {
                     delay(5);
                     LOGI("try write - %d ",retry);
                 }
-
+                CHECK_MEMORY();
             }
             return total;
         }
