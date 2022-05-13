@@ -80,12 +80,9 @@ class MP3DecoderMini : public AudioDecoder {
 
   /// Decodes the last outstanding data
   void flush() {
-    int samples = mp3dec_decode_frame(&mp3d, buffer.data(), buffer_pos,
-                                      pcm.data(), &mp3dec_info);
+    // decode the full buffer
+    decode(0);
     buffer_pos = 0;
-    if (samples > 0) {
-      provideResult(samples);
-    }
   }
 
   /// checks if the class is active
