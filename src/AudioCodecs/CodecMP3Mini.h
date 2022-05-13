@@ -7,7 +7,7 @@
 //#define MINIMP3_FLOAT_OUTPUT
 
 #ifndef MINIMP3_MAX_SAMPLE_RATE
-#define MINIMP3_MAX_SAMPLE_RATE 32000
+#define MINIMP3_MAX_SAMPLE_RATE 44100
 #endif
 
 #include "AudioTools/AudioTypes.h"
