@@ -46,17 +46,27 @@ class OggDecoder : public AudioDecoder {
   void begin() override {
     LOGD(LOG_METHOD);
     if (p_oggz == nullptr) {
-      p_oggz = oggz_new(OGGZ_READ | OGGZ_AUTO);
-      // Callback to Replace standard IO
-      oggz_io_set_read(p_oggz, ogg_io_read, this);
-      oggz_io_set_seek(p_oggz, ogg_io_seek, this);
-      oggz_io_set_tell(p_oggz, ogg_io_tell, this);
-
+      p_oggz = oggz_new(OGGZ_READ | OGGZ_NONSTRICT);
+      is_open = true;
       // Callback
-      oggz_set_read_callback(p_oggz, -1, read_packet, this);
+      if (oggz_set_read_callback(p_oggz, -1, read_packet, this)!=0){
+        LOGE("oggz_set_read_callback");
+        is_open = false;
+      }
+      // Callback to Replace standard IO
+      if (oggz_io_set_read(p_oggz, ogg_io_read, this)!=0){
+        LOGE("oggz_io_set_read");
+        is_open = false;
+      }
+      if (oggz_io_set_seek(p_oggz, ogg_io_seek, this)!=0){
+        LOGE("oggz_io_set_seek");
+        is_open = false;
+      }
+      if (oggz_io_set_tell(p_oggz, ogg_io_tell, this)!=0){
+        LOGE("oggz_io_set_tell");
+        is_open = false;
+      }
     }
-
-    is_open = true;
   }
 
   void end() override {
@@ -100,7 +110,7 @@ class OggDecoder : public AudioDecoder {
   }
   static int ogg_io_seek(void *user_handle, long offset, int whence) {
     LOGI("ogg_io_seek: %u", offset);
-    return -1;
+    return OGGZ_ERR_INVALID;
   }
 
   static long ogg_io_tell(void *user_handle) {
@@ -112,10 +122,10 @@ class OggDecoder : public AudioDecoder {
   // Process full packet
   static int read_packet(OGGZ *oggz, oggz_packet *zp, long serialno,
                          void *user_data) {
+    LOGI("read_packet: %u", zp->op.bytes);
     OggDecoder *self = (OggDecoder *)user_data;
     ogg_packet *op = &zp->op;
     int result = op->bytes;
-    LOGI("read_packet: %u", result);
     if (op->b_o_s) {
       self->beginOfSegment(op);
     } else if (op->e_o_s) {
@@ -180,13 +190,15 @@ class OggEncoder : public AudioEncoder {
     LOGD(LOG_METHOD);
     is_open = true;
     if (p_oggz == nullptr) {
-      p_oggz = oggz_new(OGGZ_WRITE);
+      p_oggz = oggz_new(OGGZ_WRITE | OGGZ_NONSTRICT);
       serialno = oggz_serialno_new(p_oggz);
       oggz_io_set_write(p_oggz, ogg_io_write, this);
       packetno = 0;
       granulepos = 0;
 
-      writeHeader();
+      if (!writeHeader()){
+        is_open = false;
+      }
     }
   }
 
@@ -219,7 +231,7 @@ class OggEncoder : public AudioEncoder {
     op.b_o_s = false;
     op.e_o_s = false;
     op.packetno = packetno++;
-    if (!writePacket(in_size)) {
+    if (!writePacket(op)) {
       return 0;
     }
 
@@ -239,13 +251,14 @@ class OggEncoder : public AudioEncoder {
   volatile bool is_open;
   OGGZ *p_oggz = nullptr;
   ogg_packet op;
+  ogg_packet oh;
   size_t granulepos = 0;
   size_t packetno = 0;
   long serialno = -1;
   AudioBaseInfo cfg;
 
-  virtual bool writePacket(int in_size, int flag = 0) {
-    LOGD("oggz_write_feed: %u", in_size);
+  virtual bool writePacket(ogg_packet &op, int flag = 0) {
+    LOGD("writePacket: %u", op.bytes);
     long result = oggz_write_feed(p_oggz, &op, serialno, flag, NULL);
     if (result < 0) {
       LOGE("oggz_write_feed: %d", result);
@@ -254,31 +267,41 @@ class OggEncoder : public AudioEncoder {
     return true;
   }
 
-  virtual void writeHeader() {
-    op.packet = (uint8_t *)&cfg;
-    op.bytes = sizeof(cfg);
-    op.granulepos = 0;
-    op.packetno = packetno++;
-    op.b_o_s = true;
-    op.e_o_s = false;
-    writePacket(op.bytes);
+  virtual bool writeHeader() {
+    LOGD(LOG_METHOD);
+    oh.packet = (uint8_t *)&cfg;
+    oh.bytes = sizeof(cfg);
+    oh.granulepos = 0;
+    oh.packetno = packetno++;
+    oh.b_o_s = true;
+    oh.e_o_s = false;
+    return writePacket(oh);
   }
 
-  virtual void writeFooter() {
+  virtual bool writeFooter() {
+    LOGD(LOG_METHOD);
     op.packet = (uint8_t *)nullptr;
     op.bytes = 0;
     op.granulepos = granulepos;
     op.packetno = packetno++;
     op.b_o_s = false;
     op.e_o_s = true;
-    writePacket(0, OGGZ_FLUSH_AFTER);
+    return writePacket(op, OGGZ_FLUSH_AFTER);
   }
 
   // Final Stream Callback
   static size_t ogg_io_write(void *user_handle, void *buf, size_t n) {
     LOGD("ogg_io_write: %u", n);
     OggEncoder *self = (OggEncoder *)user_handle;
-    self->p_print->write((uint8_t *)buf, n);
+    if (self == nullptr) {
+      LOGE("self is null");
+      return 0;
+    }
+    if (self->p_print == nullptr) {
+      LOGE("p_print is null");
+      return 0;
+    }
+    return self->p_print->write((uint8_t *)buf, n);
   }
 };
 

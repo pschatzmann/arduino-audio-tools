@@ -3,6 +3,12 @@
 #define MINIMP3_NO_STDIO
 //#define MINIMP3_NO_SIMD
 //#define MINIMP3_IMPLEMENTATION
+//#define MINIMP3_ONLY_MP3  
+//#define MINIMP3_FLOAT_OUTPUT
+
+#ifndef MINIMP3_MAX_SAMPLE_RATE
+#define MINIMP3_MAX_SAMPLE_RATE 32000
+#endif
 
 #include "AudioTools/AudioTypes.h"
 #include "minimp3.h"
@@ -10,227 +16,168 @@
 namespace audio_tools {
 
 /**
- * @brief Audio Info provided by the decoder 
- */
-typedef AudioBaseInfo MP3MiniAudioInfo;
-typedef void (*MP3InfoCallback)(MP3MiniAudioInfo &info);
-typedef void (*MP3DataCallback)(MP3MiniAudioInfo &info,int16_t *pwm_buffer, size_t len);
-
-/**
  * @brief MP3 Decoder using https://github.com/pschatzmann/minimp3
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class MP3DecoderMini : public AudioDecoder  {
-    public:
+class MP3DecoderMini : public AudioDecoder {
+ public:
+  MP3DecoderMini() = default;
 
-        MP3DecoderMini() = default;
+  /// Destroy the MP3DecoderMini object
+  ~MP3DecoderMini() {
+    if (active) {
+      end();
+    }
+  }
 
-        /// Destroy the MP3DecoderMini object
-        ~MP3DecoderMini(){
-            if (active){
-                end();
-            }
-        }
+  void setBufferLength(int len) { buffer_size = len; }
 
-        /// Defines the callback which provides the Audio information
-        void setMP3InfoCallback(MP3InfoCallback cb){
-            this->infoCallback = cb;
-        }    
+  void setNotifyAudioChange(AudioBaseInfoDependent &bi) {
+    audioBaseInfoSupport = &bi;
+  }
 
-        /// Defines the callback which provides the Audio data
-        void setMP3DataCallback(MP3DataCallback cb){
-            this->pwmCallback = cb;
-        }   
+  /// Starts the processing
+  void begin() {
+    LOGD(LOG_METHOD);
+    esp_task_wdt_delete(nullptr);
+    mp3dec_init(&mp3d);
+    buffer.resize(buffer_size);
+    pcm.resize(MINIMP3_MAX_SAMPLES_PER_FRAME);
+    buffer_pos = 0;
+    active = true;
+  }
 
-        void setBufferLength(int len) {
-            buffer_len = len;
-        }  
+  /// Releases the reserved memory
+  void end() {
+    LOGD(LOG_METHOD);
+    flush();
+    active = false;
+  }
 
-        void setNotifyAudioChange(AudioBaseInfoDependent &bi) {
-            audioBaseInfoSupport = &bi;
-        }
+  /// Defines the output Stream
+  void setOutputStream(Print &outStream) { this->out = &outStream; }
 
-        /// Starts the processing
-        void begin(){
-        	LOGD(__FUNCTION__);
-            flush();
-            mp3dec_init(&mp3d);
-            active = true;
-        }
+  /// Provides the last available MP3FrameInfo
+  AudioBaseInfo audioInfo() { return audio_info; }
 
-        /// Releases the reserved memory
-        void end(){
-        	LOGD(__FUNCTION__);
-            flush();
-            active = false;
-            // release buffer
-            delete[] buffer;
-            buffer = nullptr;
-        }
+  /// Write mp3 data to decoder
+  size_t write(const void *data, size_t len) {
+    LOGD("write: %zu", len);
+    if (active) {
+      if (buffer_pos+len>=buffer.size()){
+        decode(len);
+      }
+      assert(buffer_pos+len<buffer.size());   
+      memcpy(buffer.data()+buffer_pos, data, len);
+      buffer_pos += len;   
+    }
+    return len;
+  }
 
-        /// Defines the output Stream
-        void setOutputStream(Print &outStream){
-            this->out = &outStream;
-        }
+  /// Decodes the last outstanding data
+  void flush() {
+    int samples = mp3dec_decode_frame(&mp3d, buffer.data(), buffer_pos,
+                                      pcm.data(), &mp3dec_info);
+    buffer_pos = 0;
+    if (samples > 0) {
+      provideResult(samples);
+    }
+  }
 
-        /// Provides the last available MP3FrameInfo
-        MP3MiniAudioInfo audioInfo(){
-            return audio_info;
-        }
+  /// checks if the class is active
+  virtual operator boolean() { return active; }
 
-        /// Write mp3 data to decoder
-        size_t write(const void* fileData, size_t len) {
-        	LOGD("write: %zu",len);
-            size_t result = 0;
-            if (active){
-                if (len>buffer_len){
-                    writeBuffer((uint8_t*)fileData, len);
-                    result = len;
-                } else if (len==0) {
-                    flush();
-                } else {
-                    result = writePart((uint8_t*)fileData, len);
-                }
-            }
-            return len;
-        }
+  void setSampleRateLimit(int limit){
+    sample_rate_limit = limit;
+  }
 
-        /// Decodes the last outstanding data
-        void flush() {
-            if (buffer_pos>0 && buffer!=nullptr){
-             	LOGD(__FUNCTION__);
-                size_t consumed = writeBuffer(buffer, buffer_pos);
-                buffer_pos -= consumed;
-                // move not consumed bytes to the head
-                memmove(buffer, buffer+consumed, buffer_pos);
-            }
-        }
+ protected:
+  AudioBaseInfo audio_info;
+  AudioBaseInfoDependent *audioBaseInfoSupport = nullptr;
+  Print *out = nullptr;
+  mp3dec_t mp3d;
+  mp3dec_frame_info_t mp3dec_info;
+  size_t buffer_size = 5 * 1024;
+  size_t buffer_pos = 0;
+  Vector<uint8_t> buffer;
+  Vector<mp3d_sample_t> pcm;
+  #ifdef MINIMP3_FLOAT_OUTPUT
+  Vector<int16_t> pcm16;
+  #endif
+  bool active;
+  int sample_rate_limit = MINIMP3_MAX_SAMPLE_RATE; //32000;
 
-        /// checks if the class is active 
-        virtual operator boolean(){
-            return active;
-        }
+  /// Process single bytes so that we can decode a full frame when it is available
+  void decode(int write_len) {
+    LOGD("decode: %d ", buffer_pos);
+    int open = buffer_pos;
+    int processed = 0;
+    int samples;
+    do {
+      // decode data
+      samples = mp3dec_decode_frame(&mp3d, buffer.data()+processed, open,
+                                        pcm.data(), &mp3dec_info);
+      LOGD("frame_offset: %d - frame_bytes: %d -> samples %d", mp3dec_info.frame_offset, mp3dec_info.frame_bytes, samples);
+      open -= mp3dec_info.frame_bytes;
+      processed += mp3dec_info.frame_bytes;
+      // output decoding result
+      if (samples > 0) {
+        provideResult(samples);
+      }            
+      // process until we have space for the next write
+    } while(processed < write_len);
 
-    protected:
-        MP3MiniAudioInfo audio_info;
-        MP3DataCallback pwmCallback = nullptr;
-        MP3InfoCallback infoCallback = nullptr;
-        Print *out = nullptr;
-        AudioBaseInfoDependent *audioBaseInfoSupport = nullptr;
-        mp3dec_t mp3d;
-        mp3dec_frame_info_t mp3dec_info;
-        size_t buffer_len = 16*1024;
-        size_t buffer_pos = 0;
-        uint8_t *buffer=nullptr;
-        short pcm[MINIMP3_MAX_SAMPLES_PER_FRAME];
-        bool active;
-        bool is_output_valid;
+    // save unprocessed data
+    buffer_pos = open;
+    memmove(buffer.data(),buffer.data()+processed, open);
+  }
 
+  /// Provides Metadata and PCM data
+  void provideResult(int samples) {
+    LOGD("provideResult: %d samples", samples);
+    AudioBaseInfo info;
+    info.sample_rate = mp3dec_info.hz>sample_rate_limit ? sample_rate_limit : mp3dec_info.hz;
+    info.channels = mp3dec_info.channels;
+    info.bits_per_sample = 16;
 
-        // Splits the data up into individual parts - Returns the successfully consumed number of bytes
-        int writeBuffer(uint8_t* fileData, size_t len){
-        	LOGD(__FUNCTION__);
-            // split into
-            size_t remaining_bytes = len;
-            buffer_pos = 0;
-            while(true){
-                LOGI("-> mp3dec_decode_frame: %zu -> %zu ", buffer_pos, remaining_bytes);
-                int samples = mp3dec_decode_frame(&mp3d, fileData+buffer_pos, remaining_bytes, pcm, &mp3dec_info);
-                buffer_pos+= mp3dec_info.frame_bytes;
-                remaining_bytes-=mp3dec_info.frame_bytes;
-                if (samples>0){
-                    provideResult(samples);
-                } 
-                if(remaining_bytes==0) {
-                    LOGD("-> ended with remaining_bytes: %zu", remaining_bytes);
-                    break;
-                }
-            }
-            return buffer_pos;
-        }
+    // notify about audio changes
+    if (audioBaseInfoSupport != nullptr && info != audio_info) {
+      info.logInfo();
+      audioBaseInfoSupport->setAudioInfo(info);
+    }
+    // store last audio_info so that we can detect any changes
+    audio_info = info;
 
-        // Writes the data in small pieces: the api recommends to combine 16 frames before calling mp3dec_decode_frame
-        int writePart(uint8_t* fileData, size_t len){
-        	LOGD(__FUNCTION__);
-            // allocate buffer if it does not exist 
-            if (buffer==nullptr){
-                LOGI("Allocating buffer with %zu bytes", buffer_len);
-                buffer = new uint8_t[buffer_len];
-            }
+    // provide result pwm data
+    if (out != nullptr) {
+      #ifdef MINIMP3_FLOAT_OUTPUT
+        pcm16.resize(samples);
+        f32_to_s16(pcm.data(), pcm16.data(), samples);
+        out->write((uint8_t *)pcm16.data(), samples * sizeof(int16_t));
+      #else
+        out->write((uint8_t *)pcm.data(), samples * sizeof(mp3d_sample_t));
+      #endif
+    }
+  }
 
-            // check allocated buffer
-            if (buffer==nullptr){
-                LOGE("Could not allocate buffer");
-                return 0;
-            }
-
-            // add data to buffer
-            size_t write_len = std::min(len, buffer_len-buffer_pos);
-            memmove(buffer+buffer_pos, fileData, write_len);
-            buffer_pos += write_len;
-            // if buffer has been filled to 90% we flush
-            if (buffer_pos > buffer_len*90/100){
-                // calling mp3dec_decode_frame
-                flush();
-            }
-
-            // write reminder
-            if (len!=write_len){
-                int diff = len - write_len;
-                memmove(buffer, fileData+write_len, diff);
-                buffer_pos = diff;
-            }
-            return len;
-        }
-
-        void provideResult(int samples){
-            LOGI("provideResult: %d samples", samples);
-            MP3MiniAudioInfo info;
-            info.sample_rate = mp3dec_info.hz;
-            info.channels = mp3dec_info.channels;
-            info.bits_per_sample = 16;
-            provideResultCallback(info, samples);
-            provideResultStream(info, samples);
-            // store last audio_info so that we can detect any changes
-            audio_info = info;
-        }
+  void f32_to_s16(float *in, int16_t *out, int num_samples) {
+      int i = 0;
+      for(; i < num_samples; i++){
+          float sample = in[i] * 32768.0f;
+          if (sample >=  32766.5)
+              out[i] = (int16_t) 32767;
+          else if (sample <= -32767.5)
+              out[i] = (int16_t)-32768;
+          else {
+              int16_t s = (int16_t)(sample + .5f);
+              s -= (s < 0);   /* away from zero, to be compliant */
+              out[i] = s;
+          }
+      }
+  }
 
 
-        // return the result PWM data
-        void provideResultCallback(MP3MiniAudioInfo &info, int samples){
-        	LOGD(__FUNCTION__);
-            // audio has changed
-            if (infoCallback != nullptr && audio_info != info){
-                infoCallback(info);
-            }
-
-            // provide result pwm data
-            if(pwmCallback!=nullptr){
-                // output via callback
-                pwmCallback(info, (int16_t*) pcm, samples);
-            } 
-        }
-
-        // return the result PWM data
-        void provideResultStream(MP3MiniAudioInfo &info, int samples){
-        	LOGD(__FUNCTION__);
-            // audio has changed
-            if (audioBaseInfoSupport!=nullptr){
-                is_output_valid = audioBaseInfoSupport->validate(info);
-                if (is_output_valid){
-                    audioBaseInfoSupport->setAudioInfo(info); 
-                }
-            } else {
-                is_output_valid = true;
-            }
-
-            // provide result pwm data
-            if(out!=nullptr && is_output_valid){
-                // output via callback
-                out->write((uint8_t*)pcm, samples);
-            } 
-        }
 };
 
-} // namespace
+}  // namespace audio_tools
