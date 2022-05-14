@@ -180,7 +180,7 @@ class URLStreamDefault : public AbstractURLStream {
 
         void setTimeouts() {
             // set regular timeout
-            getClient(url.isSecure()).setTimeout(clientTimeout);
+            getClient(url.isSecure()).setTimeout(clientTimeout/1000); // this is in seconds
         }
 
         /// Process the Http request and handle redirects

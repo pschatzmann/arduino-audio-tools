@@ -280,8 +280,15 @@ class RingBuffer : public BaseBuffer<T> {
       delete[] _aucBuffer;
     }
     this->max_size = len;
-    _aucBuffer = new T[max_size];
+    if (len>0){
+      _aucBuffer = new T[max_size];
+    }
     reset();
+  }
+
+  /// Returns the maximum capacity of the buffer
+  virtual int size() {
+    return max_size;
   }
 
  protected:
