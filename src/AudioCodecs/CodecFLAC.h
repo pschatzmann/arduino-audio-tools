@@ -33,8 +33,8 @@ namespace audio_tools {
  */
 class FLACDecoder : public AudioDecoder {
  public:
-  FLACDecoder(bool isOgg=false) {
-    is_ogg = isOgg;
+  FLACDecoder(bool isFLAC=false) {
+    is_ogg = isFLAC;
   }
 
   ~FLACDecoder() {}
@@ -316,4 +316,174 @@ class FLACDecoder : public AudioDecoder {
 
 };
 
+
+
+/**
+ * @brief FLACEncoder
+ *
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class FLACEncoder : public AudioEncoder {
+ public:
+  // Empty Constructor - the output stream must be provided with begin()
+  FLACEncoder() {}
+
+  void setOgg(bool isOgg) {
+    is_ogg = isOgg;
+  }
+
+  bool isOgg() {return is_ogg;}
+
+  void setBlockSize(int size){
+    flac_block_size = size;
+  }
+
+  int blockSize() {return flac_block_size; }
+
+  void setCompressionLevel(int level){
+    flac_compression_level = level;
+  }
+
+  int compressionLevel() {return flac_compression_level;}
+
+  /// Defines the output Stream
+  void setOutputStream(Print &out_stream) override { p_print = &out_stream; }
+
+  /// Provides "audio/pcm"
+  const char *mime() override { return "audio/flac"; }
+
+  /// We update the audio information which will be used in the begin method
+  virtual void setAudioInfo(AudioBaseInfo from) override { 
+    cfg = from; 
+    cfg.logInfo(); 
+  }
+
+  virtual void begin(AudioBaseInfo from) {
+    setAudioInfo(from);
+    begin();
+  }
+
+  /// starts the processing using the actual AudioInfo
+  virtual void begin() override {
+    LOGD(LOG_METHOD);
+    is_open = false;
+    if (p_encoder==nullptr){
+      p_encoder = FLAC__stream_encoder_new();
+      if (p_encoder==nullptr){
+        LOGE("FLAC__stream_encoder_new");
+        return;
+      }
+    }
+
+    FLAC__stream_encoder_set_channels(p_encoder, cfg.channels);
+    FLAC__stream_encoder_set_bits_per_sample(p_encoder, cfg.bits_per_sample);
+    FLAC__stream_encoder_set_sample_rate(p_encoder, cfg.sample_rate);
+    FLAC__stream_encoder_set_blocksize(p_encoder, flac_block_size);
+    FLAC__stream_encoder_set_compression_level(p_encoder, flac_compression_level);
+
+    // setup stream
+    FLAC__StreamEncoderInitStatus status;
+    if (is_ogg){
+      status = FLAC__stream_encoder_init_ogg_stream(p_encoder, nullptr, write_callback, nullptr, nullptr, nullptr, this);
+    } else {
+      status = FLAC__stream_encoder_init_stream(p_encoder, write_callback, nullptr, nullptr, nullptr, this);
+    }
+    if (status != FLAC__STREAM_ENCODER_INIT_STATUS_OK) {
+      LOGE("ERROR: initializing decoder: %s", FLAC__StreamEncoderInitStatusString[status]);
+      if (status==FLAC__STREAM_ENCODER_INIT_STATUS_ENCODER_ERROR){
+        LOGE(" -> %s", FLAC__StreamEncoderStateString[FLAC__stream_encoder_get_state(p_encoder)]);
+      }
+      return;
+    }
+    is_open = true;
+  }
+
+  /// starts the processing
+  void begin(Print &out) {
+    p_print = &out;
+    begin();
+  }
+
+  /// stops the processing
+  void end() override {
+    LOGD(LOG_METHOD);
+    FLAC__stream_encoder_delete(p_encoder);
+    p_encoder = nullptr;
+    is_open = false;
+  }
+
+  /// Writes FLAC Packet
+  virtual size_t write(const void *in_ptr, size_t in_size) override {
+    if (!is_open || p_print == nullptr) return 0;
+    LOGD("write: %u", in_size);
+    size_t result = 0;
+    int samples=0;
+    int frames=0;
+    int32_t *data=nullptr;
+    switch(cfg.bits_per_sample){
+      case 16:
+        samples = in_size / sizeof(int16_t); 
+        frames = samples / cfg.channels;
+        writeBuffer((int16_t*)in_ptr, samples);
+        data = buffer.data();
+        break;
+
+      case 32:
+        samples = in_size / sizeof(int32_t);
+        frames = samples / cfg.channels;
+        data = (int32_t*) in_ptr;
+        break;
+
+      default:
+        LOGE("bits_per_sample not supported: %d", cfg.bits_per_sample);
+        break;
+    }
+
+    if (frames>0){
+      if (FLAC__stream_encoder_process_interleaved(p_encoder, data, frames)){
+        result = in_size;
+      } else {
+        LOGE("FLAC__stream_encoder_process_interleaved");
+      }
+    }
+
+    return result;
+  }
+
+  operator boolean() override { return is_open; }
+
+  bool isOpen() { return is_open; }
+
+ protected:
+  AudioBaseInfo cfg;
+  Vector<FLAC__int32> buffer;
+  Print *p_print = nullptr;
+  FLAC__StreamEncoder *p_encoder=nullptr;
+  bool is_open;
+  bool is_ogg;
+  int flac_block_size = 512; // small value to minimize allocated memory
+  int flac_compression_level = 8;
+
+  static FLAC__StreamEncoderWriteStatus write_callback(const FLAC__StreamEncoder *encoder, const FLAC__byte buffer[], size_t bytes, uint32_t samples, uint32_t current_frame, void *client_data){
+    FLACEncoder *self = (FLACEncoder *)client_data;
+    if (self->p_print!=nullptr){
+      size_t written = self->p_print->write((uint8_t*)buffer, bytes);
+      if (written!=bytes){
+        LOGE("write_callback %d -> %d", bytes, written);
+        return FLAC__STREAM_ENCODER_WRITE_STATUS_FATAL_ERROR;
+      }
+    }
+    return FLAC__STREAM_ENCODER_WRITE_STATUS_OK;
+  }
+
+  void writeBuffer(int16_t * data, size_t samples) {
+    buffer.resize(samples);
+    for (int j=0;j<samples;j++){
+      buffer[j] = data[j];
+    }
+  }
+};
+
 }  // namespace audio_tools
+
