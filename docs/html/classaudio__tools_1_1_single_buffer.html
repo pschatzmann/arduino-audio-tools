@@ -122,9 +122,7 @@ T&#160;</td><td class="memItemRight" valign="bottom"><b>read</b> ()</td></tr>
 <tr class="memitem:aa1b9797b2313ec8379467ad99580215f"><td class="memItemLeft" align="right" valign="top"><a id="aa1b9797b2313ec8379467ad99580215f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>reset</b> ()</td></tr>
 <tr class="separator:aa1b9797b2313ec8379467ad99580215f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1777687cba0e73e71d25ca19d5851c16"><td class="memItemLeft" align="right" valign="top"><a id="a1777687cba0e73e71d25ca19d5851c16"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_single_buffer.html#a1777687cba0e73e71d25ca19d5851c16">setAvailable</a> (size_t available_size)</td></tr>
-<tr class="memdesc:a1777687cba0e73e71d25ca19d5851c16"><td class="mdescLeft">&#160;</td><td class="mdescRight">If we load values directly into the address we need to set the avialeble size. <br /></td></tr>
+<tr class="memitem:a1777687cba0e73e71d25ca19d5851c16"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_single_buffer.html#a1777687cba0e73e71d25ca19d5851c16">setAvailable</a> (size_t available_size)</td></tr>
 <tr class="separator:a1777687cba0e73e71d25ca19d5851c16"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c02a022634a2d1a515c0fa6b4370d7c"><td class="memItemLeft" align="right" valign="top"><a id="a4c02a022634a2d1a515c0fa6b4370d7c"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> ()</td></tr>
@@ -166,13 +164,13 @@ Protected Attributes</h2></td></tr>
 T *&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b> = nullptr</td></tr>
 <tr class="separator:ad49fec19a451e2df62f936712be0a3c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab9c00ce636d54ca408959c2d9893b4f9"><td class="memItemLeft" align="right" valign="top"><a id="ab9c00ce636d54ca408959c2d9893b4f9"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>current_read_pos</b> =0</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>current_read_pos</b> = 0</td></tr>
 <tr class="separator:ab9c00ce636d54ca408959c2d9893b4f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae34258537a458c9a475d70a33895d02f"><td class="memItemLeft" align="right" valign="top"><a id="ae34258537a458c9a475d70a33895d02f"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>current_write_pos</b> =0</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>current_write_pos</b> = 0</td></tr>
 <tr class="separator:ae34258537a458c9a475d70a33895d02f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e20fd0533012cfce4e3e674ffa08213"><td class="memItemLeft" align="right" valign="top"><a id="a6e20fd0533012cfce4e3e674ffa08213"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>max_size</b> =0</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>max_size</b> = 0</td></tr>
 <tr class="separator:a6e20fd0533012cfce4e3e674ffa08213"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9fce429bbd843001e36c81463acbd56f"><td class="memItemLeft" align="right" valign="top"><a id="a9fce429bbd843001e36c81463acbd56f"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>owns_buffer</b> = true</td></tr>
@@ -260,6 +258,36 @@ template&lt;typename T &gt; </div>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a1777687cba0e73e71d25ca19d5851c16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1777687cba0e73e71d25ca19d5851c16">&#9670;&nbsp;</a></span>setAvailable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classaudio__tools_1_1_single_buffer.html">audio_tools::SingleBuffer</a>&lt; T &gt;::setAvailable </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>available_size</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>If we load values directly into the address we need to set the avialeble size </p>
 
 </div>
 </div>

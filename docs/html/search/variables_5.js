@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['filterorder_1711',['filterOrder',['../classaudio__tools_1_1_filter_effect_base.html#a1a5aca06a7578de2ac0108f5107d508f',1,'audio_tools::FilterEffectBase']]],
-  ['firbuffer_1712',['firBuffer',['../classaudio__tools_1_1_filter_effect_base.html#a3ff38c92d539da70fcf84d88b396474c',1,'audio_tools::FilterEffectBase']]],
-  ['fircoefficients_1713',['firCoefficients',['../classaudio__tools_1_1_filter_effect_base.html#ac33d0c661016f333e82f8913c4bd72f4',1,'audio_tools::FilterEffectBase']]],
-  ['firtemp_1714',['firTemp',['../classaudio__tools_1_1_filter_effect_base.html#ac3477580413541280158420c51efdb07',1,'audio_tools::FilterEffectBase']]],
-  ['force_5fchannel_1715',['force_channel',['../structaudio__tools_1_1_opus_encoder_settings.html#a1dde3ddbfc6b062204235b0e3a21dbfb',1,'audio_tools::OpusEncoderSettings']]],
-  ['frame_5fsizes_5fms_5fx2_1716',['frame_sizes_ms_x2',['../structaudio__tools_1_1_opus_encoder_settings.html#a74792c1c4e5f31b36a2cad7564c2a592',1,'audio_tools::OpusEncoderSettings']]]
+  ['filterorder_1749',['filterOrder',['../classaudio__tools_1_1_filter_effect_base.html#a1a5aca06a7578de2ac0108f5107d508f',1,'audio_tools::FilterEffectBase']]],
+  ['firbuffer_1750',['firBuffer',['../classaudio__tools_1_1_filter_effect_base.html#a3ff38c92d539da70fcf84d88b396474c',1,'audio_tools::FilterEffectBase']]],
+  ['fircoefficients_1751',['firCoefficients',['../classaudio__tools_1_1_filter_effect_base.html#ac33d0c661016f333e82f8913c4bd72f4',1,'audio_tools::FilterEffectBase']]],
+  ['firtemp_1752',['firTemp',['../classaudio__tools_1_1_filter_effect_base.html#ac3477580413541280158420c51efdb07',1,'audio_tools::FilterEffectBase']]],
+  ['force_5fchannel_1753',['force_channel',['../structaudio__tools_1_1_opus_encoder_settings.html#a1dde3ddbfc6b062204235b0e3a21dbfb',1,'audio_tools::OpusEncoderSettings']]],
+  ['frame_5fsizes_5fms_5fx2_1754',['frame_sizes_ms_x2',['../structaudio__tools_1_1_opus_encoder_settings.html#a74792c1c4e5f31b36a2cad7564c2a592',1,'audio_tools::OpusEncoderSettings']]]
 ];

@@ -287,6 +287,9 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_boost.html">Boost</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_boost.html" title="Boost AudioEffect.">Boost</a> <a class="el" href="classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects.">AudioEffect</a>.  <a href="classaudio__tools_1_1_boost.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffered_array.html">BufferedArray</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class which is usfull ot provide incremental data access e.g. for EdgeImpulse which request data with an offset and length starting from 0 up to the buffer length, restarting at 0 again.  <a href="classaudio__tools_1_1_buffered_array.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_buffered_stream.html">BufferedStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Arduino <a class="el" href="class_stream.html">Stream</a> supports operations on single characters. This is usually not the best way to push audio information, but we will support it anyway - by using a buffer. On reads: if the buffer is empty it gets refilled.  <a href="classaudio__tools_1_1_buffered_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -431,6 +434,12 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_i_r.html">FIR</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_f_i_r.html" title="FIR Filter Converted from https://github.com/sebnil/FIR-filter-Arduino-Library/tree/master/src You ca...">FIR</a> <a class="el" href="classaudio__tools_1_1_filter.html" title="Abstract filter interface definition;.">Filter</a> Converted from <a href="https://github.com/sebnil/FIR-filter-Arduino-Library/tree/master/src">https://github.com/sebnil/FIR-filter-Arduino-Library/tree/master/src</a> You can use <a href="https://www.arc.id.au/FilterDesign.html">https://www.arc.id.au/FilterDesign.html</a> to design the filter.  <a href="classaudio__tools_1_1_f_i_r.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_l_a_c_decoder.html">FLACDecoder</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decoder for FLAC. Depends on <a href="https://github.com/pschatzmann/arduino-libflac">https://github.com/pschatzmann/arduino-libflac</a>. We support an efficient streaming API and an very memory intensitiv standard interface. So you should prefer the streaming interface where you call setOutputStream() before the begin and <a class="el" href="classaudio__tools_1_1_f_l_a_c_decoder.html#a499154c518e76daafd3f06069fb4e437" title="Stream Interface: Process a single frame - only relevant when input stream has been defined.">copy()</a> in the loop. Validated with <a href="http://www.2l.no/hires/">http://www.2l.no/hires/</a>.  <a href="classaudio__tools_1_1_f_l_a_c_decoder.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_l_a_c_encoder.html">FLACEncoder</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_f_l_a_c_encoder.html" title="FLACEncoder.">FLACEncoder</a>.  <a href="classaudio__tools_1_1_f_l_a_c_encoder.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_flat_top.html">FlatTop</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_flat_top.html" title="FlatTop FFT Window function.">FlatTop</a> FFT Window function.  <a href="classaudio__tools_1_1_flat_top.html#details">More...</a><br /></td></tr>
@@ -608,6 +617,9 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_m_a_d.html">MP3DecoderMAD</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">MP3 Decoder using <a href="https://github.com/pschatzmann/arduino-libmad">https://github.com/pschatzmann/arduino-libmad</a>.  <a href="classaudio__tools_1_1_m_p3_decoder_m_a_d.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html">MP3DecoderMini</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">MP3 Decoder using <a href="https://github.com/pschatzmann/minimp3">https://github.com/pschatzmann/minimp3</a>. This decoder does not provide any good results and it is not suited to decode any audio above 32000 on an ESP32. So the sample rate is limited by the MINIMP3_MAX_SAMPLE_RATE variable.  <a href="classaudio__tools_1_1_m_p3_decoder_mini.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html">MP3EncoderLAME</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encodes PCM data to the MP3 format and writes the result to a stream This is basically just a wrapper using <a href="https://github.com/pschatzmann/arduino-liblame">https://github.com/pschatzmann/arduino-liblame</a>.  <a href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#details">More...</a><br /></td></tr>
@@ -1066,6 +1078,11 @@ Enumerations</h2></td></tr>
 <br />
  }</td></tr>
 <tr class="separator:a4027459e9b7423e070bcda33adf881e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa84ae8e55ee9700ca319e5d22d5bc4eb"><td class="memItemLeft" align="right" valign="top"><a id="aa84ae8e55ee9700ca319e5d22d5bc4eb"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>I2SSignalType</b> { <b>Digital</b>
+, <b>Analog</b>
+, <b>PDM</b>
+ }</td></tr>
+<tr class="separator:aa84ae8e55ee9700ca319e5d22d5bc4eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa57569aa7d4da440caa6e908d032447"><td class="memItemLeft" align="right" valign="top"><a id="afa57569aa7d4da440caa6e908d032447"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>ID3TypeSelection</b> { <br />
 &#160;&#160;<b>SELECT_ID3V1</b> =0b001
 , <b>SELECT_ID3V2</b> =0b010

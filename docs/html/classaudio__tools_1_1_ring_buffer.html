@@ -92,7 +92,7 @@ Inheritance diagram for audio_tools::RingBuffer&lt; T &gt;:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a26edb9575a2af1c5d01351050e29a565"><td class="memItemLeft" align="right" valign="top"><a id="a26edb9575a2af1c5d01351050e29a565"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>RingBuffer</b> (int size)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>RingBuffer</b> (int <a class="el" href="classaudio__tools_1_1_ring_buffer.html#a87c041bd2ac072d54b6a027fd4e19fdb">size</a>)</td></tr>
 <tr class="separator:a26edb9575a2af1c5d01351050e29a565"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92e369bb2eafed9806952f1583021ce5"><td class="memItemLeft" align="right" valign="top"><a id="a92e369bb2eafed9806952f1583021ce5"></a>
 virtual T *&#160;</td><td class="memItemRight" valign="bottom"><b>address</b> ()</td></tr>
@@ -121,6 +121,10 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>reset</b> ()<
 <tr class="memitem:a6ccff97e224f3b5ff18f7c85b88fe41e"><td class="memItemLeft" align="right" valign="top"><a id="a6ccff97e224f3b5ff18f7c85b88fe41e"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>resize</b> (int len)</td></tr>
 <tr class="separator:a6ccff97e224f3b5ff18f7c85b88fe41e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87c041bd2ac072d54b6a027fd4e19fdb"><td class="memItemLeft" align="right" valign="top"><a id="a87c041bd2ac072d54b6a027fd4e19fdb"></a>
+virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_ring_buffer.html#a87c041bd2ac072d54b6a027fd4e19fdb">size</a> ()</td></tr>
+<tr class="memdesc:a87c041bd2ac072d54b6a027fd4e19fdb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the maximum capacity of the buffer. <br /></td></tr>
+<tr class="separator:a87c041bd2ac072d54b6a027fd4e19fdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a82e4bbe7e99a9b519d03da9be6280bbf"><td class="memItemLeft" align="right" valign="top"><a id="a82e4bbe7e99a9b519d03da9be6280bbf"></a>
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (T data)</td></tr>
 <tr class="separator:a82e4bbe7e99a9b519d03da9be6280bbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -155,7 +159,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setWritePos</b> (int 
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a826306bd855d66f02e41e66fee8a1608"><td class="memItemLeft" align="right" valign="top"><a id="a826306bd855d66f02e41e66fee8a1608"></a>
-T *&#160;</td><td class="memItemRight" valign="bottom"><b>_aucBuffer</b> =nullptr</td></tr>
+T *&#160;</td><td class="memItemRight" valign="bottom"><b>_aucBuffer</b> = nullptr</td></tr>
 <tr class="separator:a826306bd855d66f02e41e66fee8a1608"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe747c7872cbbca12d1b58f16abe56ad"><td class="memItemLeft" align="right" valign="top"><a id="afe747c7872cbbca12d1b58f16abe56ad"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>_iHead</b></td></tr>
@@ -167,7 +171,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>_iTail</b></td></tr>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>_numElems</b></td></tr>
 <tr class="separator:a177d0e7d482747a862c081479a620ed4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6992e3784a66ac43adfc95b5f1c3a25d"><td class="memItemLeft" align="right" valign="top"><a id="a6992e3784a66ac43adfc95b5f1c3a25d"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>max_size</b> =0</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>max_size</b> = 0</td></tr>
 <tr class="separator:a6992e3784a66ac43adfc95b5f1c3a25d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classaudio__tools_1_1_base_buffer"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classaudio__tools_1_1_base_buffer')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classaudio__tools_1_1_base_buffer.html">audio_tools::BaseBuffer&lt; T &gt;</a></td></tr>
 <tr class="memitem:ac8fc5b0ee59ed8dbf3cb8cda33cf3f3b inherit pro_attribs_classaudio__tools_1_1_base_buffer"><td class="memItemLeft" align="right" valign="top"><a id="ac8fc5b0ee59ed8dbf3cb8cda33cf3f3b"></a>

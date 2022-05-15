@@ -88,60 +88,61 @@ $(function() {
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    }</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
 <div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_base.html#a57b408fe09128aca8449d8dca1926219">   26</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_i2_s_base.html#a57b408fe09128aca8449d8dca1926219">begin</a>(<a class="code" href="namespaceaudio__tools.html#a0d4e1fe2dd00b263250e9319bcc85946">RxTxMode</a> mode) {</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="classaudio__tools_1_1_i2_s_base.html#a53ab6c08c0468ece1cb03ab02a17fda3">begin</a>(<a class="code" href="classaudio__tools_1_1_i2_s_base.html#aa5996b640516a91a449ae4cddb24a129">defaultConfig</a>(mode));</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="classaudio__tools_1_1_i2_s_base.html#ae83082062da3ada3decc8305040cbe1a">begin</a>(<a class="code" href="classaudio__tools_1_1_i2_s_base.html#aa5996b640516a91a449ae4cddb24a129">defaultConfig</a>(mode));</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    }</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
 <div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_base.html#a029912ddc5b5954186b250f5d1869ba5">   31</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_i2_s_base.html#a029912ddc5b5954186b250f5d1869ba5">begin</a>(<a class="code" href="classaudio__tools_1_1_i2_s_config.html">I2SConfig</a> cfg) {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classaudio__tools_1_1_i2_s.html">I2S</a>.begin(cfg.i2s_format, cfg.sample_rate, cfg.bits_per_sample);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    }</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">bool</span> begin() {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;      <span class="keywordflow">return</span> begin(cfg);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    }</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_base.html#a08984251ffdc990da5d9c232485b9cd4">   40</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_i2_s_base.html#a08984251ffdc990da5d9c232485b9cd4">end</a>(){</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <a class="code" href="classaudio__tools_1_1_i2_s.html">I2S</a>.<a class="code" href="classaudio__tools_1_1_i2_s_base.html#a08984251ffdc990da5d9c232485b9cd4">end</a>();</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    }</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_base.html#a2345e7444407b13d1140662dcb899177">   45</a></span>&#160;    <a class="code" href="classaudio__tools_1_1_i2_s_config.html">I2SConfig</a> <a class="code" href="classaudio__tools_1_1_i2_s_base.html#a2345e7444407b13d1140662dcb899177">config</a>() {</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;      <span class="keywordflow">return</span> cfg;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    }</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="classaudio__tools_1_1_i2_s_base.html#a5c6b4fb3347110d753e8674718212530">writeBytes</a>(<span class="keyword">const</span> <span class="keywordtype">void</span> *src, <span class="keywordtype">size_t</span> size_bytes){</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="classaudio__tools_1_1_i2_s.html">I2S</a>.<a class="code" href="classaudio__tools_1_1_i2_s.html#a9a474765e4e4b2c0b8e753a0da969d36">write</a>((<span class="keyword">const</span> uint8_t *)src, size_bytes);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    }</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">size_t</span> readBytes(<span class="keywordtype">void</span> *src, <span class="keywordtype">size_t</span> size_bytes){</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;      <span class="keywordflow">return</span> I2S.read(src, size_bytes);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    }</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1_i2_s_base.html#a34913cddd56b80afe3dd5277245f669f">available</a>() {</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;      <span class="keywordflow">return</span> I2S.available();</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    }</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1_i2_s_base.html#a31b71d892d9af1ad66c7d73d8f5b319a">availableForWrite</a>() {</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;      <span class="keywordflow">return</span> I2S.availableForWrite();</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    }</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    I2SConfig cfg;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;};</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;}</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        this-&gt;cfg = cfg;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classaudio__tools_1_1_i2_s.html">I2S</a>.begin(cfg.i2s_format, cfg.sample_rate, cfg.bits_per_sample);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    }</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_i2_s_base.html#ae83082062da3ada3decc8305040cbe1a">begin</a>() {</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="classaudio__tools_1_1_i2_s_base.html#ae83082062da3ada3decc8305040cbe1a">begin</a>(cfg);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    }</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_base.html#a08984251ffdc990da5d9c232485b9cd4">   41</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_i2_s_base.html#a08984251ffdc990da5d9c232485b9cd4">end</a>(){</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <a class="code" href="classaudio__tools_1_1_i2_s.html">I2S</a>.<a class="code" href="classaudio__tools_1_1_i2_s_base.html#a08984251ffdc990da5d9c232485b9cd4">end</a>();</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    }</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_i2_s_base.html#a2345e7444407b13d1140662dcb899177">   46</a></span>&#160;    <a class="code" href="classaudio__tools_1_1_i2_s_config.html">I2SConfig</a> <a class="code" href="classaudio__tools_1_1_i2_s_base.html#a2345e7444407b13d1140662dcb899177">config</a>() {</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;      <span class="keywordflow">return</span> cfg;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    }</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="classaudio__tools_1_1_i2_s_base.html#a5c6b4fb3347110d753e8674718212530">writeBytes</a>(<span class="keyword">const</span> <span class="keywordtype">void</span> *src, <span class="keywordtype">size_t</span> size_bytes){</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="classaudio__tools_1_1_i2_s.html">I2S</a>.<a class="code" href="classaudio__tools_1_1_i2_s.html#a9a474765e4e4b2c0b8e753a0da969d36">write</a>((<span class="keyword">const</span> uint8_t *)src, size_bytes);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    }</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">size_t</span> readBytes(<span class="keywordtype">void</span> *src, <span class="keywordtype">size_t</span> size_bytes){</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;      <span class="keywordflow">return</span> I2S.read(src, size_bytes);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    }</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1_i2_s_base.html#a34913cddd56b80afe3dd5277245f669f">available</a>() {</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;      <span class="keywordflow">return</span> I2S.available();</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    }</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1_i2_s_base.html#a31b71d892d9af1ad66c7d73d8f5b319a">availableForWrite</a>() {</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;      <span class="keywordflow">return</span> I2S.availableForWrite();</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    }</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    I2SConfig cfg;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;};</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;}</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_base_html_a029912ddc5b5954186b250f5d1869ba5"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_base.html#a029912ddc5b5954186b250f5d1869ba5">audio_tools::I2SBase::begin</a></div><div class="ttdeci">bool begin(I2SConfig cfg)</div><div class="ttdoc">starts the DAC</div><div class="ttdef"><b>Definition:</b> I2SSAMD.h:31</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_i2_s_base_html_a08984251ffdc990da5d9c232485b9cd4"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_base.html#a08984251ffdc990da5d9c232485b9cd4">audio_tools::I2SBase::end</a></div><div class="ttdeci">void end()</div><div class="ttdoc">stops the I2C and unistalls the driver</div><div class="ttdef"><b>Definition:</b> I2SSAMD.h:40</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_i2_s_base_html_a2345e7444407b13d1140662dcb899177"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_base.html#a2345e7444407b13d1140662dcb899177">audio_tools::I2SBase::config</a></div><div class="ttdeci">I2SConfig config()</div><div class="ttdoc">provides the actual configuration</div><div class="ttdef"><b>Definition:</b> I2SSAMD.h:45</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_i2_s_base_html_a31b71d892d9af1ad66c7d73d8f5b319a"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_base.html#a31b71d892d9af1ad66c7d73d8f5b319a">audio_tools::I2SBase::availableForWrite</a></div><div class="ttdeci">int availableForWrite()</div><div class="ttdoc">We limit the write size to the buffer size.</div><div class="ttdef"><b>Definition:</b> I2SESP32.h:57</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_i2_s_base_html_a34913cddd56b80afe3dd5277245f669f"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_base.html#a34913cddd56b80afe3dd5277245f669f">audio_tools::I2SBase::available</a></div><div class="ttdeci">int available()</div><div class="ttdoc">we assume the data is already available in the buffer</div><div class="ttdef"><b>Definition:</b> I2SESP32.h:52</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_i2_s_base_html_a53ab6c08c0468ece1cb03ab02a17fda3"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_base.html#a53ab6c08c0468ece1cb03ab02a17fda3">audio_tools::I2SBase::begin</a></div><div class="ttdeci">bool begin(RxTxMode mode=TX_MODE)</div><div class="ttdoc">starts the DAC with the default config</div><div class="ttdef"><b>Definition:</b> I2SESP32.h:31</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_i2_s_base_html_a08984251ffdc990da5d9c232485b9cd4"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_base.html#a08984251ffdc990da5d9c232485b9cd4">audio_tools::I2SBase::end</a></div><div class="ttdeci">void end()</div><div class="ttdoc">stops the I2C and unistalls the driver</div><div class="ttdef"><b>Definition:</b> I2SSAMD.h:41</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_i2_s_base_html_a2345e7444407b13d1140662dcb899177"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_base.html#a2345e7444407b13d1140662dcb899177">audio_tools::I2SBase::config</a></div><div class="ttdeci">I2SConfig config()</div><div class="ttdoc">provides the actual configuration</div><div class="ttdef"><b>Definition:</b> I2SSAMD.h:46</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_i2_s_base_html_a31b71d892d9af1ad66c7d73d8f5b319a"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_base.html#a31b71d892d9af1ad66c7d73d8f5b319a">audio_tools::I2SBase::availableForWrite</a></div><div class="ttdeci">int availableForWrite()</div><div class="ttdoc">We limit the write size to the buffer size.</div><div class="ttdef"><b>Definition:</b> I2SESP32.h:62</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_i2_s_base_html_a34913cddd56b80afe3dd5277245f669f"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_base.html#a34913cddd56b80afe3dd5277245f669f">audio_tools::I2SBase::available</a></div><div class="ttdeci">int available()</div><div class="ttdoc">we assume the data is already available in the buffer</div><div class="ttdef"><b>Definition:</b> I2SESP32.h:57</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_base_html_a57b408fe09128aca8449d8dca1926219"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_base.html#a57b408fe09128aca8449d8dca1926219">audio_tools::I2SBase::begin</a></div><div class="ttdeci">bool begin(RxTxMode mode)</div><div class="ttdoc">starts the DAC with the default config</div><div class="ttdef"><b>Definition:</b> I2SSAMD.h:26</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_i2_s_base_html_a5c6b4fb3347110d753e8674718212530"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_base.html#a5c6b4fb3347110d753e8674718212530">audio_tools::I2SBase::writeBytes</a></div><div class="ttdeci">size_t writeBytes(const void *src, size_t size_bytes)</div><div class="ttdoc">writes the data to the I2S interface</div><div class="ttdef"><b>Definition:</b> I2SESP32.h:74</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_i2_s_base_html_a5c6b4fb3347110d753e8674718212530"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_base.html#a5c6b4fb3347110d753e8674718212530">audio_tools::I2SBase::writeBytes</a></div><div class="ttdeci">size_t writeBytes(const void *src, size_t size_bytes)</div><div class="ttdoc">writes the data to the I2S interface</div><div class="ttdef"><b>Definition:</b> I2SESP32.h:79</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_base_html_aa5996b640516a91a449ae4cddb24a129"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_base.html#aa5996b640516a91a449ae4cddb24a129">audio_tools::I2SBase::defaultConfig</a></div><div class="ttdeci">I2SConfig defaultConfig(RxTxMode mode)</div><div class="ttdoc">Provides the default configuration.</div><div class="ttdef"><b>Definition:</b> I2SSAMD.h:20</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_i2_s_config_html"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_config.html">audio_tools::I2SConfig</a></div><div class="ttdoc">configuration for all common i2s settings</div><div class="ttdef"><b>Definition:</b> I2SConfig.h:26</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_i2_s_base_html_ae83082062da3ada3decc8305040cbe1a"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_base.html#ae83082062da3ada3decc8305040cbe1a">audio_tools::I2SBase::begin</a></div><div class="ttdeci">bool begin()</div><div class="ttdoc">starts the DAC with the current config - if not started yet. If I2S has been started there is no acti...</div><div class="ttdef"><b>Definition:</b> I2SESP32.h:36</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_i2_s_config_html"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_config.html">audio_tools::I2SConfig</a></div><div class="ttdoc">configuration for all common i2s settings</div><div class="ttdef"><b>Definition:</b> I2SConfig.h:32</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_html"><div class="ttname"><a href="classaudio__tools_1_1_i2_s.html">audio_tools::I2S</a></div><div class="ttdoc">A Simple I2S interface class for multiple Architectures that supports the reading and writing with a ...</div><div class="ttdef"><b>Definition:</b> I2SStream.h:24</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_html_a9a474765e4e4b2c0b8e753a0da969d36"><div class="ttname"><a href="classaudio__tools_1_1_i2_s.html#a9a474765e4e4b2c0b8e753a0da969d36">audio_tools::I2S::write</a></div><div class="ttdeci">size_t write(T(*src)[2], size_t frameCount)</div><div class="ttdoc">writes the data to the I2S interface</div><div class="ttdef"><b>Definition:</b> I2SStream.h:45</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AnalogAudioArduino.h:10</div></div>

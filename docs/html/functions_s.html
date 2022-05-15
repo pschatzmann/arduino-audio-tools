@@ -116,6 +116,7 @@ $(function() {
 , <a class="el" href="classaudio__tools_1_1_audio_player.html#af1921107d88453712d155d8d8fe1e6e3">audio_tools::AudioPlayer</a>
 , <a class="el" href="classaudio__tools_1_1_csv_stream.html#aa630377823f8aba5db63ddf657d514b1">audio_tools::CsvStream&lt; T &gt;</a>
 , <a class="el" href="classaudio__tools_1_1_encoder8_bit.html#a3b7f6c236d913929d23141bd5fd7d715">audio_tools::Encoder8Bit</a>
+, <a class="el" href="classaudio__tools_1_1_f_l_a_c_encoder.html#ab92423b9b55c97b7794bfbb00df8024b">audio_tools::FLACEncoder</a>
 , <a class="el" href="classaudio__tools_1_1_i2_s_stream.html#a0b77e75668b8616d52312462f0a30e2e">audio_tools::I2SStream</a>
 , <a class="el" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#acbf250c55d58dc07bbb05a61f696a265">audio_tools::MP3EncoderLAME</a>
 , <a class="el" href="classaudio__tools_1_1_ogg_encoder.html#a2abdbaad6e0e6f824871fccc674e3aaa">audio_tools::OggEncoder</a>
@@ -227,6 +228,9 @@ $(function() {
 : <a class="el" href="classaudio__tools_1_1_converter_n_channels.html#a34f27a1c6af73d88acf328fda9dc4292">audio_tools::ConverterNChannels&lt; T, FT &gt;</a>
 , <a class="el" href="classaudio__tools_1_1_filtered_stream.html#accbef5a4b0019e54c6cc761af643c8c4">audio_tools::FilteredStream&lt; T, TF &gt;</a>
 </li>
+<li>setFilterMetaData()
+: <a class="el" href="classaudio__tools_1_1_m_p3_decoder_helix.html#ae39a208ebfc3c023ad2bbdb572ebe6cd">audio_tools::MP3DecoderHelix</a>
+</li>
 <li>setFrequency()
 : <a class="el" href="classaudio__tools_1_1_sine_wave_generator.html#a13242e5bcf75189f2c708bbf29067b2e">audio_tools::SineWaveGenerator&lt; T &gt;</a>
 </li>
@@ -254,6 +258,9 @@ $(function() {
 </li>
 <li>setInputPin1()
 : <a class="el" href="classaudio__tools_1_1_analog_config.html#a9ca657478e77bffc358f26d78febf23a">audio_tools::AnalogConfig</a>
+</li>
+<li>setInputStream()
+: <a class="el" href="classaudio__tools_1_1_f_l_a_c_decoder.html#a0d98675261e850986878cb243754508a">audio_tools::FLACDecoder</a>
 </li>
 <li>setInterpolationTable()
 : <a class="el" href="classaudio__tools_1_1_delay_effect_base.html#af50b1a89a6ecb9243cb1f73e4dc46535">audio_tools::DelayEffectBase</a>
@@ -327,7 +334,9 @@ $(function() {
 , <a class="el" href="classaudio__tools_1_1_decoder8_bit.html#a5b8312d17c47b71fb1897fe1262dfafe">audio_tools::Decoder8Bit</a>
 , <a class="el" href="classaudio__tools_1_1_decoder_helix.html#a067201746c12b9a1612934d27440c05a">audio_tools::DecoderHelix</a>
 , <a class="el" href="classaudio__tools_1_1_encoder8_bit.html#a2030e480a4799f93f25d57df501ed115">audio_tools::Encoder8Bit</a>
+, <a class="el" href="classaudio__tools_1_1_f_l_a_c_encoder.html#a4facc57b69053275cd6cfd469dcdb468">audio_tools::FLACEncoder</a>
 , <a class="el" href="classaudio__tools_1_1_m_p3_decoder_helix.html#aa3a44b7494589d1bf48cf6fafddfe224">audio_tools::MP3DecoderHelix</a>
+, <a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html#ab419ec9e94017bafd9afdeb99370c305">audio_tools::MP3DecoderMini</a>
 , <a class="el" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#a535702cb7c5e71f5b0bcd1cff8d8a071">audio_tools::MP3EncoderLAME</a>
 , <a class="el" href="classaudio__tools_1_1_ogg_decoder.html#a986ee33c5a3785c47cec2575448c9e03">audio_tools::OggDecoder</a>
 , <a class="el" href="classaudio__tools_1_1_ogg_encoder.html#ac427e6a47d36ff39a834e3db363bf02f">audio_tools::OggEncoder</a>
@@ -491,6 +500,7 @@ $(function() {
 : <a class="el" href="classaudio__tools_1_1_audio_effects.html#a711e74f6bf29280de8ba6a11d59c8b02">audio_tools::AudioEffects&lt; GeneratorT &gt;</a>
 , <a class="el" href="classaudio__tools_1_1_audio_f_f_t_base.html#accaa2a6e8a9a0557dd7a5ae77d13c9f8">audio_tools::AudioFFTBase</a>
 , <a class="el" href="classaudio__tools_1_1_mixer.html#a58ea6ea6aee01b46b0df19d7018b3074">audio_tools::Mixer&lt; T &gt;</a>
+, <a class="el" href="classaudio__tools_1_1_ring_buffer.html#a87c041bd2ac072d54b6a027fd4e19fdb">audio_tools::RingBuffer&lt; T &gt;</a>
 </li>
 <li>source()
 : <a class="el" href="classaudio__tools_1_1_a2_d_p_stream.html#a5675d25c4d6dda7352410be5c33ad8df">audio_tools::A2DPStream</a>
@@ -499,8 +509,8 @@ $(function() {
 : <a class="el" href="classaudio__tools_1_1_s_p_d_i_f_stream.html#a503bda4246c9443852b79348546d707d">audio_tools::SPDIFStream</a>
 </li>
 <li>start()
-: <a class="el" href="classaudio__tools_1_1_r_t_s_p_source_audio_stream.html#a2bd0602694fa1c648dca2ec4e18224a2">audio_tools::RTSPSourceAudioStream</a>
-, <a class="el" href="classaudio__tools_1_1_r_t_s_p_source_stream.html#aa7f184034e25c4a0568fdbf4dded087d">audio_tools::RTSPSourceStream</a>
+: <a class="el" href="classaudio__tools_1_1_r_t_s_p_source_audio_stream.html#a93ba6008a080851477c7b05c3850a067">audio_tools::RTSPSourceAudioStream</a>
+, <a class="el" href="classaudio__tools_1_1_r_t_s_p_source_stream.html#a7c22ae2083376d5faa865e0b3b88907b">audio_tools::RTSPSourceStream</a>
 </li>
 <li>startStream()
 : <a class="el" href="classaudio__tools_1_1_port_audio_stream.html#af3dd08fd8569d89a6beecaaf338f2082">audio_tools::PortAudioStream</a>
@@ -524,8 +534,8 @@ $(function() {
 : <a class="el" href="classaudio__tools_1_1_audio_output_with_callback.html#af8c887b9ce6c100722de3e6b8aaf23cf">audio_tools::AudioOutputWithCallback</a>
 , <a class="el" href="classaudio__tools_1_1_audio_player.html#a82cd15efde9e162dcecd77f101dcb031">audio_tools::AudioPlayer</a>
 , <a class="el" href="classaudio__tools_1_1_callback_buffered_stream.html#a7365cc261a7c84720e5d17add66f667f">audio_tools::CallbackBufferedStream&lt; T &gt;</a>
-, <a class="el" href="classaudio__tools_1_1_r_t_s_p_source_audio_stream.html#ab13b1d8b8bcaa5a6530023b62628cf0f">audio_tools::RTSPSourceAudioStream</a>
-, <a class="el" href="classaudio__tools_1_1_r_t_s_p_source_stream.html#a3605900e89f0b32811f53ad0d8017f76">audio_tools::RTSPSourceStream</a>
+, <a class="el" href="classaudio__tools_1_1_r_t_s_p_source_audio_stream.html#a810d551eff9d7eb5ddfa22361a5e7df9">audio_tools::RTSPSourceAudioStream</a>
+, <a class="el" href="classaudio__tools_1_1_r_t_s_p_source_stream.html#a5a38cdc8c353b66d3db8489b14a84643">audio_tools::RTSPSourceStream</a>
 </li>
 <li>storeSample()
 : <a class="el" href="classaudio__tools_1_1_delay_effect_base.html#a49e755103d4b3ba13d3eb49491a09f89">audio_tools::DelayEffectBase</a>

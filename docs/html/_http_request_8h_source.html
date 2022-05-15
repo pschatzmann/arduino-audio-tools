@@ -230,7 +230,7 @@ $(function() {
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">int</span> connect(<span class="keyword">const</span> <span class="keywordtype">char</span> *ip, uint16_t port, int32_t timeout) {</div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;            client_ptr-&gt;setTimeout(timeout);</div>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;            <span class="keywordtype">int</span> is_connected = this-&gt;client_ptr-&gt;connect(ip, port);</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            LOGI(<span class="stringliteral">&quot;connected %s timeout %d&quot;</span>, is_connected, timeout);</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            LOGI(<span class="stringliteral">&quot;connected %d timeout %d&quot;</span>, is_connected, timeout);</div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;            <span class="keywordflow">return</span> is_connected;</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        }</div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>

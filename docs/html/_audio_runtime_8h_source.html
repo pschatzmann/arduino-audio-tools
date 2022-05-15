@@ -80,10 +80,10 @@ $(function() {
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">  #endif</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;}</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">inline</span> <span class="keyword">static</span> <span class="keywordtype">void</span> checkMemory(<span class="keywordtype">bool</span> stackCheck=<span class="keyword">false</span>) {</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">inline</span> <span class="keyword">static</span> <span class="keywordtype">void</span> checkMemory(<span class="keywordtype">bool</span> memoryCheck=<span class="keyword">false</span>) {</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">    #ifdef ESP32</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        assert(heap_caps_check_integrity_all(<span class="keyword">true</span>)); </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keywordflow">if</span> (stackCheck) printf(<span class="stringliteral">&quot;stack available: %d \n&#39;&quot;</span>, uxTaskGetStackHighWaterMark(NULL));</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keywordflow">if</span> (memoryCheck) printf(<span class="stringliteral">&quot;==&gt; Available stack: %d - heap: %d\n&quot;</span>, uxTaskGetStackHighWaterMark(NULL), ESP.getFreeHeap());</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">    #endif    </span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;}</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
