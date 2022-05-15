@@ -3,7 +3,7 @@
 Some basic __header-only C++ classes__ that can be used for __Audio Processing__ provided as __Arduino Library__:
 
 - We provide different "Audio Sources" and "Audio Sinks" (see next section)
-- Support for different [Encoders](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_audio_encoder.html) and [Decoders](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_audio_decoder.html) for AAC, MP3 and WAV 
+- Support for different [Encoders](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_audio_encoder.html) and [Decoders](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_audio_decoder.html) for MP3, AAC, WAV, FLAC, etc 
 - Different [Sound Generators](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_sound_generator.html) (e.g. to generate a sine tone) 
 - Support for [Sound Effects](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_audio_effects.html) with different [Effect Implementations](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_audio_effect.html) (e.g. Boost, Distortion, Echo, Reverb...) 
 - Different [Buffer Implementations](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_base_buffer.html) 
@@ -17,8 +17,8 @@ We also provide plenty of examples that demonstrate how to implement the differe
 
 As “Audio Sources” we will have e.g.:
 
-- Analog Microphones – [AnalogAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_analog_audio_stream.html)
 - Digital Microphones – [I2SStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_i2_s_stream.html)
+- Analog Microphones – [AnalogAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_analog_audio_stream.html)
 - Files on the Internet – [URLStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_u_r_l_stream.html)
 - Streaming Internet Radios - [ICYStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_i_c_y_stream.html)
 - Generated Sound – [GeneratedSoundStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_generated_sound_stream.html)
@@ -116,10 +116,8 @@ Dependent on the example you might need to install some of the following librari
 
 - [ESP32-A2DP Library](https://github.com/pschatzmann/ESP32-A2DP) to support A2DP Bluetooth Audio
 - [Many Codec Libraries](https://github.com/pschatzmann/arduino-audio-tools/wiki/Encoding-and-Decoding-of-Audio) which are described in the Wiki
-- [arduino-audiokit](https://github.com/pschatzmann/arduino-audiokit) Support for the __ESP32 AudioKit__ and ES7148, ES7210, ES7243, ES8311, ES8347, ES8388, TAS5805m decoder chips 
+- [arduino-audiokit](https://github.com/pschatzmann/arduino-audiokit) Support for the __ESP32 AudioKit__ and decoder chips (ES8388, A1S, etc) 
 - [arduino-midi](https://github.com/pschatzmann/arduino-midi) A simple __MIDI__ message parser and generator
-- [SdFat Library](https://github.com/greiman/SdFat) to read and write files supporting SD cards with FAT16/FAT32 and exFAT
-- [SD Library](https://www.arduino.cc/en/reference/SD) to read and write files supporting SD cards with FAT16 and FAT32
 - [SAM](https://github.com/pschatzmann/arduino-SAM) A Text to Speach Engine
 - [TTS](https://github.com/pschatzmann/TTS) A Text to Speach Engine
 - [flite](https://github.com/pschatzmann/arduino-flite) A Text to Speach Engine
@@ -127,13 +125,13 @@ Dependent on the example you might need to install some of the following librari
 - [arduino-stk](https://github.com/pschatzmann/Arduino-STK) Synthesis ToolKit in C++ (STK) 
 - [Maximilian](https://github.com/pschatzmann/Maximilian) cross-platform and multi-target audio synthesis and signal processing library
 - [Mozzi](https://github.com/pschatzmann/Mozzi) A sound synthesis library for Arduino
-- [ESP8266Audio](https://github.com/earlephilhower/ESP8266Audio) to play different audio Formats
 - [rp2040-i2s](https://github.com/pschatzmann/rp2040-i2s) I2S library for RP2040 (mbed)
 - [Tensorflow Lite](https://github.com/pschatzmann/tflite-micro-arduino-examples) Machine Learning for Arduino
 - [KissFFT](https://github.com/pschatzmann/kissfft) Fast Fourier Transform FFT Library
 - [esp32-fft](https://github.com/pschatzmann/esp32-fft) Another FFT library (not only for the ESP32)
 - [rp2040-i2s](https://github.com/pschatzmann/rp2040-i2s) I2S for MBED RP2040
-
+- [SdFat Library](https://github.com/greiman/SdFat) to read and write files supporting SD cards with FAT16/FAT32 and exFAT
+- [SD Library](https://www.arduino.cc/en/reference/SD) to read and write files supporting SD cards with FAT16 and FAT32
 
 After installing a library, you might need to activate it's usage in the ```AudioConfig.h``` file!
 
