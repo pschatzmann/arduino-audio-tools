@@ -1,7 +1,7 @@
 /**
  * @file CodecCodec2.h
  * @author Phil Schatzmann
- * @brief Codec2 Codec using  https://github.com/pschatzmann/arduino-libcodec2
+ * @brief Codec2 Codec using  https://github.com/pschatzmann/arduino-codec2
  * The codec was developed by David Grant Rowe, with support and cooperation of other researchers 
  * (e.g., Jean-Marc Valin from Opus).
  * Codec 2 consists of 3200, 2400, 1600, 1400, 1300, 1200, 700 and 450 bit/s codec modes. 
@@ -23,7 +23,7 @@
 namespace audio_tools {
 
 
-
+/// Convert bits per sample to Codec2 mode
 int getCodec2Mode(int bits_per_second) {
   switch (bits_per_second) {
     case 3200:
@@ -59,10 +59,15 @@ public:
   Codec2Decoder() {
     cfg.sample_rate = 8000;
     cfg.channels = 1;
+    cfg.bits_per_sample = 16;
   }
-
+  /// sets bits per second: 3200, 2400, 1600, 1400, 1300, 1200, 700 and 450 bit/s
   virtual void setBitsPerSecond(int bps){
     bits_per_second = bps;
+  }
+
+  int bitsPerSecond() {
+    return bits_per_second;
   }
 
   virtual void setAudioInfo(AudioBaseInfo cfg) { this->cfg = cfg; }
@@ -173,10 +178,16 @@ public:
   Codec2Encoder() {
     cfg.sample_rate = 8000;
     cfg.channels = 1;
+    cfg.bits_per_sample = 16;
   }
 
+  /// sets bits per second: 3200, 2400, 1600, 1400, 1300, 1200, 700 and 450 bit/s
   virtual void setBitsPerSecond(int bps){
     bits_per_second = bps;
+  }
+
+  int bitsPerSecond() {
+    return bits_per_second;
   }
 
   void begin(AudioBaseInfo bi) {
@@ -209,7 +220,7 @@ public:
       return;
     }
 
-    input_buffer.resize(codec2_samples_per_frame(p_codec2));
+    input_buffer.resize(codec2_samples_per_frame(p_codec2)*sizeof(int16_t));
     result_buffer.resize(codec2_bytes_per_frame(p_codec2));
     is_active = true;
   }
@@ -248,7 +259,7 @@ protected:
   struct CODEC2 *p_codec2;
   bool is_active = false;
   int buffer_pos = 0;
-  Vector<int16_t> input_buffer;
+  Vector<uint8_t> input_buffer;
   Vector<uint8_t> result_buffer;
   int bits_per_second=2400;
 
@@ -257,7 +268,7 @@ protected:
     input_buffer[buffer_pos++] = byte;
     if (buffer_pos >= input_buffer.size()) {
       // encode
-      codec2_encode(p_codec2, result_buffer.data(),input_buffer.data());
+      codec2_encode(p_codec2, result_buffer.data(),(int16_t*)input_buffer.data());
       p_print->write(result_buffer.data(), result_buffer.size());
       buffer_pos = 0;
     }
