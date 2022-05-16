@@ -7,12 +7,20 @@
 #include "AudioEffects/SoundGenerator.h"
 #include "AudioTools/VolumeControl.h"
 
-namespace audio_tools {
+#ifndef URL_CLIENT_TIMEOUT
+#define URL_CLIENT_TIMEOUT 60000
+#endif
+
+#ifndef URL_HANDSHAKE_TIMEOUT
+#define URL_HANDSHAKE_TIMEOUT 120000
+#endif
 
 #ifndef IRAM_ATTR
 #define IRAM_ATTR
 #endif
 
+
+namespace audio_tools {
 
 static const char *UNDERFLOW_MSG = "data underflow";
 
