@@ -44,6 +44,7 @@ endif()
 add_executable (ogg ogg.cpp)
 
 # set preprocessor defines
+target_compile_definitions(arduino_audio_tools PUBLIC -DIS_DESKTOP)
 target_compile_definitions(arduino_emulator PUBLIC -DDEFINE_MAIN -DIS_DESKTOP)
 target_compile_definitions(ogg PUBLIC -DEXIT_ON_STOP)
 

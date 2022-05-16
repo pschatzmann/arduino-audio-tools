@@ -5,8 +5,6 @@ project(arduino-audio-tools)
 
 add_library(arduino-audio-tools INTERFACE)
 
-target_compile_options(arduino-audio-tools PRIVATE -DIS_DESKTOP)
-
 option(BUILD_TESTS "Build all tests automatically" OFF)
 
 
