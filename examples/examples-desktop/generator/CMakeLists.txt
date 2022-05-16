@@ -36,7 +36,8 @@ endif()
 add_executable (generator generator.cpp)
 
 # set preprocessor defines
-target_compile_definitions(arduino_emulator PUBLIC -©)
+target_compile_definitions(arduino_emulator PUBLIC -DDEFINE_MAIN)
+target_compile_definitions(generator PUBLIC -DEXIT_ON_STOP -DIS_DESKTOP)
 
 # OS/X might need this setting for core audio
 #target_compile_definitions(portaudio PUBLIC -DPA_USE_COREAUDIO=1)

@@ -37,7 +37,7 @@ add_executable (mp3 mp3.cpp)
 
 # set preprocessor defines
 target_compile_definitions(arduino_emulator PUBLIC -DDEFINE_MAIN)
-target_compile_definitions(mp3 PUBLIC -DEXIT_ON_STOP)
+target_compile_definitions(mp3 PUBLIC -DEXIT_ON_STOP -DIS_DESKTOP)
 
 # OS/X might need this setting for core audio
 #target_compile_definitions(portaudio PUBLIC -DPA_USE_COREAUDIO=1)

@@ -38,7 +38,7 @@ class PortAudioConfig : public AudioBaseInfo {
  */
 class PortAudioStream : public AudioStreamX {
     public:
-        PortAudioStream(int buffer_size=DEFAULT_BUFFER_SIZE):BufferedStream(buffer_size) {
+        PortAudioStream() {
             LOGD(LOG_METHOD);
             this->buffer_size = buffer_size;
         }
@@ -64,7 +64,7 @@ class PortAudioStream : public AudioStreamX {
         };
 
         // start with default configuration
-        bool begin() {
+        bool begin() override {
             return begin(defaultConfig());
         }
 
@@ -108,7 +108,7 @@ class PortAudioStream : public AudioStreamX {
             return true;
         }
 
-        void end()  {
+        void end() override {
             LOGD(LOG_METHOD);
             err = Pa_StopStream( stream );
             if( err != paNoError ) {
@@ -166,7 +166,7 @@ class PortAudioStream : public AudioStreamX {
             return len;            
         }
 
-        int available() {
+        int available() override {
             return DEFAULT_BUFFER_SIZE;
         }
 
