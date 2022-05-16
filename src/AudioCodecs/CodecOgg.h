@@ -46,7 +46,7 @@ class OggDecoder : public AudioDecoder {
   void begin() override {
     LOGD(LOG_METHOD);
     if (p_oggz == nullptr) {
-      p_oggz = oggz_new(OGGZ_READ | OGGZ_NONSTRICT);
+      p_oggz = oggz_new(OGGZ_READ | OGGZ_NONSTRICT | OGGZ_AUTO);
       is_open = true;
       // Callback
       if (oggz_set_read_callback(p_oggz, -1, read_packet, this)!=0){

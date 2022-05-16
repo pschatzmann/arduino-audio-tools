@@ -36,7 +36,7 @@ class PortAudioConfig : public AudioBaseInfo {
  * @brief Arduino Audio Stream using PortAudio
  * 
  */
-class PortAudioStream : public BufferedStream {
+class PortAudioStream : public AudioStreamX {
     public:
         PortAudioStream(int buffer_size=DEFAULT_BUFFER_SIZE):BufferedStream(buffer_size) {
             LOGD(LOG_METHOD);
@@ -55,7 +55,7 @@ class PortAudioStream : public BufferedStream {
         }
 
         /// notification of audio info change
-        virtual void setAudioInfo(AudioBaseInfo in) {
+        void setAudioInfo(AudioBaseInfo in) override {
             LOGI(LOG_METHOD);
             info.channels = in.channels;
             info.sample_rate = in.sample_rate;
@@ -108,7 +108,7 @@ class PortAudioStream : public BufferedStream {
             return true;
         }
 
-        void end() {
+        void end()  {
             LOGD(LOG_METHOD);
             err = Pa_StopStream( stream );
             if( err != paNoError ) {
@@ -126,15 +126,8 @@ class PortAudioStream : public BufferedStream {
             return err == paNoError;
         }
 
-    protected:
-        PaStream *stream = nullptr;
-        PaError err = paNoError;
-        PortAudioConfig info;
-        bool stream_started = false;
-        int buffer_size;
-
-        virtual size_t writeExt(const uint8_t* data, size_t len) {  
-            LOGD("writeExt: %zu", len);
+        size_t write(const uint8_t* data, size_t len) override {  
+            LOGD("write: %zu", len);
 
             startStream();
 
@@ -155,8 +148,8 @@ class PortAudioStream : public BufferedStream {
             return result;
         }
 
-        virtual size_t readExt( uint8_t *data, size_t len) { 
-            LOGD("writeExt: %zu", len);
+        size_t readBytes( uint8_t *data, size_t len) override { 
+            LOGD("readBytes: %zu", len);
             size_t result = 0;
             if (stream!=nullptr){
                 int bytes = info.bits_per_sample / 8;
@@ -172,6 +165,19 @@ class PortAudioStream : public BufferedStream {
             }
             return len;            
         }
+
+        int available() {
+            return DEFAULT_BUFFER_SIZE;
+        }
+
+
+    protected:
+        PaStream *stream = nullptr;
+        PaError err = paNoError;
+        PortAudioConfig info;
+        bool stream_started = false;
+        int buffer_size;
+
 
         PaSampleFormat getFormat(int bitLength){
             switch(bitLength){

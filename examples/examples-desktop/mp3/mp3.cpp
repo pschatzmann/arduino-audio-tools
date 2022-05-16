@@ -2,8 +2,7 @@
 #include "Arduino.h"
 #include "AudioTools.h"
 #include "BabyElephantWalk60_mp3.h"
-
-using namespace audio_tools;  
+#include "AudioLibs/PortAudioStream.h"
 
 
 MemoryStream mp3(BabyElephantWalk60_mp3, BabyElephantWalk60_mp3_len);
