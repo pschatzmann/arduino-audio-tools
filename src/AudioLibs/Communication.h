@@ -5,9 +5,9 @@
 
 #include "AudioTools/AudioStreams.h"
 #include "AudioTools/Buffers.h"
-#include "esp_private/wifi.h"
 
 #ifdef FAST_ESP_NOW_HACK
+#include "esp_private/wifi.h"
 //#undef CONFIG_ESP32_WIFI_AMPDU_TX_ENABLED
 //#undef CONFIG_ESP32_WIFI_AMPDU_RX_ENABLED
 #define CONFIG_ESP32_WIFI_AMPDU_TX_ENABLED 0
