@@ -42,7 +42,7 @@ class OpusOggDecoder : public OggDecoder {
   }
 
   /// Provides access to the Opus configuration
-  OpusSettings &config() override { return dec.config(); }
+  OpusSettings &config()  { return dec.config(); }
 
   void begin() override {
     LOGD(LOG_METHOD);
