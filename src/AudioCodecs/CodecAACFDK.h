@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AudioTools/AudioTypes.h"
+#include "AudioTools/AudioEncoded.h"
 #include "AACDecoderFDK.h"
 #include "AACEncoderFDK.h"
 

@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "AudioTools/AudioTypes.h"
+#include "AudioTools/AudioEncoded.h"
 #include "gsm.h"
 
 namespace audio_tools {

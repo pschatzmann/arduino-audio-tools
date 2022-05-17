@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Stream.h"
-#include "AudioTools/AudioTypes.h"
+#include "AudioTools/AudioEncoded.h"
 #include "AudioMetaData/MetaDataFilter.h"
 #include "MP3DecoderHelix.h"
 

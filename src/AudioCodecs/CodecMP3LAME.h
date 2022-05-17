@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AudioTools/AudioTypes.h"
+#include "AudioTools/AudioEncoded.h"
 #include "MP3EncoderLAME.h"
 
 namespace audio_tools {

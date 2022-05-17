@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Stream.h"
-#include "AudioTools/AudioTypes.h"
+#include "AudioTools/AudioEncoded.h"
 #include "AACDecoderHelix.h"
 
 namespace audio_tools {
