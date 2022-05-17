@@ -6,6 +6,7 @@
 #include "oggz/oggz.h"
 
 #define OGG_DEFAULT_BUFFER_SIZE (2048)
+#define OGG_READ_SIZE 1024
 
 namespace audio_tools {
 
@@ -71,22 +72,33 @@ class OggDecoder : public AudioDecoder {
 
   void end() override {
     LOGD(LOG_METHOD);
+    flush();
     is_open = false;
     oggz_close(p_oggz);
     p_oggz = nullptr;
   }
 
+  void flush() {
+      LOGD("oggz_read...");
+      while ((oggz_read(p_oggz, OGG_READ_SIZE)) > 0)
+        ;
+  }
+
   virtual size_t write(const void *in_ptr, size_t in_size) override {
     LOGI("write: %u", in_size);
     if (p_print == nullptr) return 0;
-    size_t result = buffer.writeArray((uint8_t *)in_ptr, in_size);
 
-    // Read all bytes into oggz, calling any read callbacks on the fly.
-    LOGD("oggz_read...");
-    while ((oggz_read(p_oggz, in_size)) > 0)
-      ;
-
-    return result;
+    // fill buffer
+    size_t size_consumed = buffer.writeArray((uint8_t *)in_ptr, in_size);
+    if (buffer.availableForWrite()==0){
+      // Read all bytes into oggz, calling any read callbacks on the fly.
+      flush();
+    }
+    // write remaining bytes
+    if (size_consumed<in_size){
+      size_consumed += buffer.writeArray((uint8_t *)in_ptr+size_consumed, in_size-size_consumed);
+    }
+    return size_consumed;
   }
 
   virtual operator boolean() override { return is_open; }
