@@ -12,7 +12,7 @@
  *
  */
 #pragma once
-#include "AudioTools/AudioEncoded.h"
+#include "AudioCodecs/AudioEncoded.h"
 #include "Stream.h"
 
 namespace audio_tools {

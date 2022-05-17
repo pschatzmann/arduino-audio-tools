@@ -17,7 +17,7 @@
 
 #pragma once
 
-#include "AudioTools/AudioEncoded.h"
+#include "AudioCodecs/AudioEncoded.h"
 #include "codec2.h"
 
 namespace audio_tools {

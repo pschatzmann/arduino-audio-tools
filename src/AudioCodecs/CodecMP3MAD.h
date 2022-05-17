@@ -5,7 +5,7 @@
 #define LOGGING_ACTIVE true
 
 #include "Stream.h"
-#include "AudioTools/AudioEncoded.h"
+#include "AudioCodecs/AudioEncoded.h"
 #include "MP3DecoderMAD.h"
 
 namespace audio_tools {

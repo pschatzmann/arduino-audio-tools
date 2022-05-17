@@ -10,7 +10,7 @@
  */
 #pragma once
 
-#include "AudioTools/AudioEncoded.h"
+#include "AudioCodecs/AudioEncoded.h"
 #include "lc3.h"
 
 namespace audio_tools {

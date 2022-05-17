@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "AudioTools/AudioEncoded.h"
+#include "AudioCodecs/AudioEncoded.h"
 #include "g722_codec.h"
 
 // size in bytes

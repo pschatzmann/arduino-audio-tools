@@ -9,7 +9,7 @@
  *
  */
 #pragma once
-#include "AudioTools/AudioEncoded.h"
+#include "AudioCodecs/AudioEncoded.h"
 #include "openaptx.h"
 
 namespace audio_tools {
