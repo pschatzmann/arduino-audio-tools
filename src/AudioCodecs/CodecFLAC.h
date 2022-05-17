@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "AudioTools/AudioTypes.h"
+#include "AudioTools/AudioEncoded.h"
 #include "AudioTools/Buffers.h"
 #include "flac.h"
 
