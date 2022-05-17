@@ -60,6 +60,7 @@ class PortAudioStream : public AudioStreamX {
             info.channels = in.channels;
             info.sample_rate = in.sample_rate;
             info.bits_per_sample = in.bits_per_sample;
+            info.logInfo();
             begin(info);
         };
 
@@ -84,20 +85,20 @@ class PortAudioStream : public AudioStreamX {
 
                 // calculate frames
                 int bytes = info.bits_per_sample / 8;
-                int buffer_frames = buffer_size / bytes / info.channels;
+                int buffer_frames = paFramesPerBufferUnspecified; //buffer_size / bytes / info.channels;
 
                 // Open an audio I/O stream. 
                 LOGD("Pa_OpenDefaultStream");
                 err = Pa_OpenDefaultStream( &stream,
                     info.is_input ? info.channels : 0,    // no input channels 
-                    info.is_output ? info.channels : 0,   // stereo output 
+                    info.is_output ? info.channels : 0,   // no output 
                     getFormat(info.bits_per_sample),      // format  
                     info.sample_rate,                     // sample rate
                     buffer_frames,                        // frames per buffer 
                     nullptr,   
                     nullptr ); 
                 LOGD("Pa_OpenDefaultStream - done");
-                if( err != paNoError ) {
+                if( err != paNoError && err!= paOutputUnderflow ) {
                     LOGE(  "PortAudio error: %s\n", Pa_GetErrorText( err ) );
                     return false;
                 }
@@ -176,7 +177,7 @@ class PortAudioStream : public AudioStreamX {
         PaError err = paNoError;
         PortAudioConfig info;
         bool stream_started = false;
-        int buffer_size;
+        int buffer_size = 10*1024;
 
 
         PaSampleFormat getFormat(int bitLength){

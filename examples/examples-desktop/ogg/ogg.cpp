@@ -4,21 +4,42 @@
 #include "AudioLibs/PortAudioStream.h"
 #include "AudioCodecs/CodecOpusOgg.h"
 
+int sample_rate = 24000;
+int channels = 2;  // The stream will have 2 channels
+int application = OPUS_APPLICATION_AUDIO; // Opus application
 
-URLStream url("ssid","pwd");
-PortAudioStream portaudio_stream;   // Output of sound on desktop 
-EncodedAudioStream dec(&portaudio_stream, new OpusOggDecoder()); // MP3 data source
-StreamCopy copier(dec, url); // copy in to out
+SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
+GeneratedSoundStream<int16_t> sound( sineWave); // Stream generated from sine wave
+HexDumpStream out(Serial); 
+OpusOggEncoder enc;
+EncodedAudioStream decoder(&out, new OpusOggDecoder()); // encode and write 
+EncodedAudioStream encoder(&decoder, &enc); // encode and write 
+StreamCopy copier(encoder, sound);     
 
-void setup(){
+void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);  
+  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
 
-  url.begin("http://st1.urbanrevolution.es:8000/zonaelectronica","audio/opus");
-  dec.begin();
-  portaudio_stream.begin();
+  out.begin();
+
+  // Setup sine wave
+  auto cfgs = sineWave.defaultConfig();
+  cfgs.sample_rate = sample_rate;
+  cfgs.channels = channels;
+  cfgs.bits_per_sample = 16;
+  sineWave.begin(cfgs, N_B4);
+
+  // Opus decoder needs to know the audio info
+  decoder.begin(cfgs);
+
+  // configure and start encoder
+  enc.config().application = application;
+  encoder.begin(cfgs);
+
+  Serial.println("Test started...");
 }
 
-void loop(){
-copier.copy();
+
+void loop() { 
+  copier.copy();
 }

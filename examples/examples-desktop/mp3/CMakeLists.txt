@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.20)
 
 # set the project name
-project(mp3)
+project(mp3_dt)
 set (CMAKE_CXX_STANDARD 11)
 set (DCMAKE_CXX_FLAGS "-Werror")
 
@@ -32,16 +32,18 @@ if(NOT arduino_audio_tools_POPULATED)
     add_subdirectory(${arduino_audio_tools_SOURCE_DIR})
 endif()
 
+
 # build sketch as executable
-add_executable (mp3 mp3.cpp)
+add_executable (mp3_dt mp3.cpp)
 
 # set preprocessor defines
 target_compile_definitions(arduino_emulator PUBLIC -DDEFINE_MAIN)
-target_compile_definitions(mp3 PUBLIC -DEXIT_ON_STOP -DIS_DESKTOP)
+#target_compile_definitions(arduino_helix PUBLIC -DARDUINO)
+target_compile_definitions(mp3_dt PUBLIC -DARDUINO -DIS_DESKTOP -DEXIT_ON_STOP)
 
 # OS/X might need this setting for core audio
 #target_compile_definitions(portaudio PUBLIC -DPA_USE_COREAUDIO=1)
 
 # specify libraries
-target_link_libraries(mp3 portaudio_static arduino_emulator arduino-audio-tools)
+target_link_libraries(mp3_dt portaudio arduino_emulator arduino-audio-tools arduino_helix)
 
