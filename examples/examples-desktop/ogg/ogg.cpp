@@ -1,7 +1,6 @@
 // Simple wrapper for Arduino sketch to compilable with cpp in cmake
 #include "Arduino.h"
 #include "AudioTools.h"
-#include "AudioLibs/PortAudioStream.h"
 #include "AudioCodecs/CodecOpusOgg.h"
 
 int sample_rate = 24000;
