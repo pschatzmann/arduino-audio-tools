@@ -218,7 +218,7 @@ class OpusAudioEncoder : public AudioEncoder {
   void setOutputStream(Print &out_stream) override { p_print = &out_stream; }
 
   /// Provides "audio/pcm"
-  const char *mime() { return "audio/opus"; }
+  const char *mime() override { return "audio/opus"; }
 
   /// We actually do nothing with this
   void setAudioInfo(AudioBaseInfo from) override {

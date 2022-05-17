@@ -37,11 +37,11 @@ add_executable (generator generator.cpp)
 
 # set preprocessor defines
 target_compile_definitions(arduino_emulator PUBLIC -DDEFINE_MAIN)
-target_compile_definitions(generator PUBLIC -DEXIT_ON_STOP -DIS_DESKTOP)
+target_compile_definitions(generator PUBLIC -DARDUINO -DIS_DESKTOP -DEXIT_ON_STOP)
 
 # OS/X might need this setting for core audio
 #target_compile_definitions(portaudio PUBLIC -DPA_USE_COREAUDIO=1)
 
 # specify libraries
-target_link_libraries(generator portaudio_static arduino_emulator arduino-audio-tools)
+target_link_libraries(generator portaudio arduino_emulator arduino-audio-tools)
 

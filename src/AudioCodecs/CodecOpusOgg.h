@@ -42,15 +42,15 @@ class OpusOggDecoder : public OggDecoder {
   }
 
   /// Provides access to the Opus configuration
-  OpusSettings &config() { return dec.config(); }
+  OpusSettings &config() override { return dec.config(); }
 
-  void begin() {
+  void begin() override {
     LOGD(LOG_METHOD);
     OggDecoder::begin();
     dec.begin();
   }
 
-  void end() {
+  void end() override {
     LOGD(LOG_METHOD);
     OggDecoder::begin();
     dec.end();
@@ -91,20 +91,20 @@ class OpusOggEncoder : public OggEncoder {
     p_print = &opus;
   }
 
-  void begin() {
+  void begin() override {
     LOGD(LOG_METHOD);
     OggEncoder::begin();
     enc.begin();
   }
 
-  void end() {
+  void end() override {
     LOGD(LOG_METHOD);
     OggEncoder::begin();
     enc.end();
   }
 
-  /// Provides "audio/pcm"
-  const char *mime() { return "audio/opus"; }
+  /// Provides "audio/opus"
+  const char *mime() override { return "audio/opus"; }
 
   /// Provides access to the Opus configuration
   OpusEncoderSettings &config() { return enc.config(); }
@@ -116,7 +116,7 @@ class OpusOggEncoder : public OggEncoder {
   EncodedAudioStream opus{(Print *)nullptr, &enc};
   ogg_packet oh1;
 
-  bool writeHeader() {
+  bool writeHeader() override {
     LOGI("writeHeader");
     bool result = true;
     header.sampleRate = cfg.sample_rate;

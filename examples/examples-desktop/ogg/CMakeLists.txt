@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.21)
 
 # set the project name
 project(ogg)
@@ -8,13 +8,6 @@ set (DCMAKE_CXX_FLAGS "-Werror")
 include(FetchContent)
 option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
 
-# Build with Portaudio 
-FetchContent_Declare(portaudio GIT_REPOSITORY "https://github.com/PortAudio/portaudio.git" GIT_TAG master )
-FetchContent_GetProperties(portaudio)
-if(NOT portaudio_POPULATED)
-    FetchContent_Populate(portaudio)
-    add_subdirectory(${portaudio_SOURCE_DIR})
-endif()
 
 # Build with Linux Arduino Emulator
 FetchContent_Declare(arduino_emulator GIT_REPOSITORY "https://github.com/pschatzmann/Arduino-Emulator.git" GIT_TAG main )
@@ -45,11 +38,11 @@ add_executable (ogg ogg.cpp)
 
 # set preprocessor defines
 target_compile_definitions(arduino_emulator PUBLIC -DDEFINE_MAIN -DIS_DESKTOP)
-target_compile_definitions(ogg PUBLIC -DEXIT_ON_STOP -DIS_DESKTOP)
+target_compile_definitions(ogg PUBLIC -DARDUINO -DEXIT_ON_STOP -DIS_DESKTOP)
 
 # OS/X might need this setting for core audio
 #target_compile_definitions(portaudio PUBLIC -DPA_USE_COREAUDIO=1)
 
 # specify libraries
-target_link_libraries(ogg portaudio_static arduino_emulator arduino-audio-tools arduino_libopus)
+target_link_libraries(ogg arduino_emulator arduino-audio-tools arduino_libopus)
 

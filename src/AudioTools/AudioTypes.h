@@ -83,6 +83,8 @@ class AudioWriter {
       virtual void setAudioInfo(AudioBaseInfo from) = 0;
       virtual void setOutputStream(Print &out_stream) = 0;
       virtual operator boolean() = 0;
+      virtual void begin() = 0;
+      virtual void end() = 0;
 };
 
 /**
@@ -93,11 +95,21 @@ class AudioDecoder : public AudioWriter, public  AudioBaseInfoSource {
   public: 
       AudioDecoder() = default;
       virtual ~AudioDecoder() = default;
-      virtual void begin() = 0;
-      virtual void end() = 0;
       virtual AudioBaseInfo audioInfo() = 0;
       // for most decoder this is not needed
       virtual void setAudioInfo(AudioBaseInfo from) override {}
+      virtual void setOutputStream(AudioStream &out_stream) {
+        Print *p_print= &out_stream;
+        setOutputStream(*p_print);
+        setNotifyAudioChange(out_stream);
+      }
+      virtual void setOutputStream(AudioPrint &out_stream) {
+        Print *p_print= &out_stream;
+        setOutputStream(*p_print);
+        setNotifyAudioChange(out_stream);
+      }
+      virtual void setOutputStream(Print &out_stream) = 0;
+
 };
 
 /**
@@ -108,8 +120,6 @@ class AudioEncoder : public AudioWriter {
   public: 
       AudioEncoder() = default;
       virtual ~AudioEncoder() = default;
-      virtual void begin() = 0;
-      virtual void end() = 0;
       virtual const char *mime() = 0;
 };
 
@@ -127,7 +137,7 @@ class CodecNOP : public  AudioDecoder, public AudioEncoder {
 
         virtual void begin() {}
         virtual void end() {}
-          virtual void setOutputStream(Print &out_stream) {}
+        virtual void setOutputStream(Print &out_stream) {}
         virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi) {}
         virtual void setAudioInfo(AudioBaseInfo info) {}
 
