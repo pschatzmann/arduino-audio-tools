@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AudioTools/AudioEncoded.h"
+#include "AudioCodecs/AudioEncoded.h"
 #include "AudioCodecs/CodecNOP.h"
 #include "AudioCodecs/CodecWAV.h"
 #include "AudioCodecs/CodecMP3Helix.h"

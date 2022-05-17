@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AudioCodecs/CodecOpus.h"
-#include "AudioTools/AudioEncoded.h"
+#include "AudioCodecs/AudioEncoded.h"
 #include "AudioTools/Buffers.h"
 #include "oggz/oggz.h"
 
@@ -59,14 +59,14 @@ class OggDecoder : public AudioDecoder {
         LOGE("oggz_io_set_read");
         is_open = false;
       }
-      if (oggz_io_set_seek(p_oggz, ogg_io_seek, this)!=0){
-        LOGE("oggz_io_set_seek");
-        is_open = false;
-      }
-      if (oggz_io_set_tell(p_oggz, ogg_io_tell, this)!=0){
-        LOGE("oggz_io_set_tell");
-        is_open = false;
-      }
+      // if (oggz_io_set_seek(p_oggz, ogg_io_seek, this)!=0){
+      //   LOGE("oggz_io_set_seek");
+      //   is_open = false;
+      // }
+      // if (oggz_io_set_tell(p_oggz, ogg_io_tell, this)!=0){
+      //   LOGE("oggz_io_set_tell");
+      //   is_open = false;
+      // }
     }
   }
 
@@ -120,16 +120,17 @@ class OggDecoder : public AudioDecoder {
     self->pos += len;
     return len;
   }
-  static int ogg_io_seek(void *user_handle, long offset, int whence) {
-    LOGI("ogg_io_seek: %u", offset);
-    return OGGZ_ERR_INVALID;
-  }
+  
+  // static int ogg_io_seek(void *user_handle, long offset, int whence) {
+  //   LOGI("ogg_io_seek: %u", offset);
+  //   return OGGZ_ERR_INVALID;
+  // }
 
-  static long ogg_io_tell(void *user_handle) {
-    LOGI(LOG_METHOD);
-    OggDecoder *self = (OggDecoder *)user_handle;
-    return self->pos;
-  }
+  // static long ogg_io_tell(void *user_handle) {
+  //   LOGI(LOG_METHOD);
+  //   OggDecoder *self = (OggDecoder *)user_handle;
+  //   return self->pos;
+  // }
 
   // Process full packet
   static int read_packet(OGGZ *oggz, oggz_packet *zp, long serialno,
