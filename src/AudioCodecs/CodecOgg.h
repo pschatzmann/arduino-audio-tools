@@ -41,7 +41,7 @@ class OggDecoder : public AudioDecoder {
     if (bid != nullptr) {
       bid->setAudioInfo(cfg);
     }
-    is_open = true;
+    begin();
   }
 
   void begin() override {
