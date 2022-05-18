@@ -152,7 +152,7 @@ class SimpleContainerDecoder : public AudioDecoder {
     return len;
   }
 
-  AudioBaseInfo audioInfo() { cfg.info; }
+  AudioBaseInfo audioInfo() { return cfg.info; }
 
  protected:
   SimpleContainerConfig cfg;
