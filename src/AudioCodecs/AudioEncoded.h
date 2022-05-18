@@ -139,6 +139,29 @@ protected:
  */
 class EncodedAudioStream : public AudioPrint {
 public:
+  /// Constructor for AudioStream with automatic notification of audio changes
+  EncodedAudioStream(AudioStream *outputStream, AudioDecoder *decoder) {
+    LOGD(LOG_METHOD);
+    ptr_out = outputStream;
+    decoder_ptr = decoder;
+    decoder_ptr->setOutputStream(*outputStream);
+    decoder_ptr->setNotifyAudioChange(*outputStream);
+    writer_ptr = decoder_ptr;
+    active = false;
+  }
+
+  /// Constructor for AudioPrint with automatic notification of audio changes
+  EncodedAudioStream(AudioPrint *outputStream, AudioDecoder *decoder) {
+    LOGD(LOG_METHOD);
+    ptr_out = outputStream;
+    decoder_ptr = decoder;
+    decoder_ptr->setOutputStream(*outputStream);
+    decoder_ptr->setNotifyAudioChange(*outputStream);
+    writer_ptr = decoder_ptr;
+    active = false;
+  }
+
+
   /**
    * @brief Construct a new Encoded Stream object - used for decoding
    *
@@ -199,27 +222,6 @@ public:
     active = false;
   }
 
-  /// Constructor for AudioStream with automatic notification of audio changes
-  EncodedAudioStream(AudioStream *outputStream, AudioEncoder *encoder) {
-    LOGD(LOG_METHOD);
-    ptr_out = outputStream;
-    encoder_ptr = encoder;
-    encoder_ptr->setOutputStream(*outputStream);
-    setNotifyAudioChange(*outputStream);
-    writer_ptr = encoder_ptr;
-    active = false;
-  }
-
-  /// Constructor for AudioPrint with automatic notification of audio changes
-  EncodedAudioStream(AudioPrint *outputStream, AudioEncoder *encoder) {
-    LOGD(LOG_METHOD);
-    ptr_out = outputStream;
-    encoder_ptr = encoder;
-    encoder_ptr->setOutputStream(*outputStream);
-    setNotifyAudioChange(*outputStream);
-    writer_ptr = encoder_ptr;
-    active = false;
-  }
 
   /**
    * @brief Construct a new Encoded Audio Stream object - the Output and

@@ -3,6 +3,8 @@
 #include "AudioCodecs/CodecWAV.h"
 #include "AudioCodecs/CodecNOP.h"
 #include "AudioCodecs/CodecRAW.h"
+#include "AudioCodecs/Codec8Bit.h"
+#include "AudioCodecs/CodecSimpleContainer.h"
 
 #if defined(USE_HELIX) || defined(USE_DECODERS)
 #include "AudioCodecs/CodecHelix.h"
