@@ -7,6 +7,10 @@
 
 namespace audio_tools {
 
+#ifndef VARBIS_MAX_READ_SIZE
+#define VARBIS_MAX_READ_SIZE 512
+#endif
+
 /**
  * @brief Vorbis Streaming Decoder using
  * https://github.com/pschatzmann/arduino-libvorbis-idec
@@ -14,12 +18,12 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class VorbisDecoderTremor : public StreamingDecoder {
+class VorbisDecoder : public StreamingDecoder {
 public:
-  VorbisDecoderTremor() = default;
+  VorbisDecoder() = default;
 
-  /// Destroy the VorbisDecoderTremor object
-  ~VorbisDecoderTremor() {
+  /// Destroy the VorbisDecoder object
+  ~VorbisDecoder() {
     if (active) {
       end();
     }
@@ -31,7 +35,7 @@ public:
 
   /// Starts the processing
   void begin() override {
-    LOGD(LOG_METHOD);
+    LOGI("begin");
 
     callbacks.read_func = read_func;
     callbacks.seek_func = seek_func;
@@ -40,13 +44,15 @@ public:
 
     int rc = ov_open_callbacks(this, &file, nullptr, 0, callbacks);
 
-    pcm.resize(1024);
+    pcm.resize(VARBIS_MAX_READ_SIZE);
+
     active = true;
+    is_first = true;
   }
 
   /// Releases the reserved memory
   void end() override {
-    LOGD(LOG_METHOD);
+    LOGI("end");
     active = false;
     ov_clear(&file);
   }
@@ -63,17 +69,36 @@ public:
   /// checks if the class is active
   virtual operator boolean() override { return active; }
 
-  virtual long copy() override {
+  virtual bool copy() override {
+    LOGI("copy");
+
+    if (is_first){
+          // wait for some data
+      while(p_in->available()==0){
+        delay(1);
+      }
+      is_first = false;
+    }
+
+
     long result = ov_read(&file, (char *)pcm.data(), pcm.size(), &bitstream);
     if (result > 0) {
       AudioBaseInfo current = currentInfo();
       if (current != cfg) {
         cfg = current;
-        p_notify->setAudioInfo(cfg);
+        cfg.logInfo();
+        if (p_notify!=nullptr){
+          p_notify->setAudioInfo(cfg);
+        } else {
+          LOGW("p_notify is null");
+        }
       }
       p_out->write(pcm.data(), result);
+      return true;
+    } else {
+      LOGE("copy: %ld - %s", result, readError(result));
+      return false;
     }
-    return result;
   }
 
 protected:
@@ -86,6 +111,7 @@ protected:
   ov_callbacks callbacks;
   bool active;
   int bitstream;
+  bool is_first = true;
 
   AudioBaseInfo currentInfo() {
     AudioBaseInfo result;
@@ -96,27 +122,48 @@ protected:
     return result;
   }
 
+  virtual size_t readBytes(uint8_t *ptr, size_t size) override {
+    size_t read_size =  min(size,(size_t)VARBIS_MAX_READ_SIZE);
+    size_t result = p_in->readBytes((uint8_t *)ptr, read_size);
+    LOGD("readBytes: %ld",result);
+    return result;
+  }
+
   static size_t read_func(void *ptr, size_t size, size_t nmemb,
                           void *datasource) {
-    VorbisDecoderTremor *self = (VorbisDecoderTremor *)datasource;
-    return self->p_in->readBytes((uint8_t *)ptr, size);
+    VorbisDecoder *self = (VorbisDecoder *)datasource;
+    return self->readBytes((uint8_t *)ptr, size);
   }
 
   static int seek_func(void *datasource, ogg_int64_t offset, int whence) {
-    VorbisDecoderTremor *self = (VorbisDecoderTremor *)datasource;
+    VorbisDecoder *self = (VorbisDecoder *)datasource;
     return -1;
   }
 
   static long tell_func(void *datasource) {
-    VorbisDecoderTremor *self = (VorbisDecoderTremor *)datasource;
+    VorbisDecoder *self = (VorbisDecoder *)datasource;
     return -1;
   }
 
   static int close_func(void *datasource) {
-    VorbisDecoderTremor *self = (VorbisDecoderTremor *)datasource;
+    VorbisDecoder *self = (VorbisDecoder *)datasource;
     self->end();
     return 0;
   }
+
+  const char* readError(long error){
+    switch(error){
+      case OV_HOLE:
+        return "Interruption in the data";
+      case OV_EBADLINK:
+        return "Invalid stream section ";
+      case OV_EINVAL:
+        return "Invalid header";
+      default:
+        return "N/A";
+    }
+  }
+
 };
 
 } // namespace audio_tools

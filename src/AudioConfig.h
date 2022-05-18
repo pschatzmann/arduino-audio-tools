@@ -151,7 +151,6 @@
 #define USE_URL_ARDUINO
 #define USE_I2S
 #define USE_AUDIO_SERVER
-#define USE_URLSTREAM_TASK
 #define USE_TYPETRAITS
 #define USE_EFFECTS_SUITE
 #define USE_TIMER
@@ -173,6 +172,7 @@
 #define I2S_AUTO_CLEAR true
 
 // URLStream
+//#define USE_URLSTREAM_TASK
 #define URL_STREAM_CORE 0
 #define URL_STREAM_PRIORITY 2
 #define URL_STREAM_BUFFER_COUNT 10

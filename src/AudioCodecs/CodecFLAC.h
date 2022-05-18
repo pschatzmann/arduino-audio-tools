@@ -31,7 +31,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class FLACDecoder : public AudioDecoder {
+class FLACDecoder : public StreamingDecoder {
  public:
   FLACDecoder(bool isFLAC=false) {
     is_ogg = isFLAC;
@@ -45,9 +45,6 @@ class FLACDecoder : public AudioDecoder {
   void setOgg(bool isOgg) {
     is_ogg = isOgg;
   }
-  void setBufferSize(int size) {
-    buffer_size = size;
-  }
 
   AudioBaseInfo audioInfo() { 
     AudioBaseInfo info;
@@ -60,12 +57,6 @@ class FLACDecoder : public AudioDecoder {
   void begin() {
     LOGI(LOG_METHOD);
     is_active = true;
-
-    // used buffered stream
-    if (!isInputFromStream()) {
-      LOGW("This uses a lot of RAM - Consider to use the stream interface!");
-      buffer.resize(buffer_size);
-    }
 
     if (decoder == nullptr) {
       if ((decoder = FLAC__stream_decoder_new()) == NULL) {
@@ -116,62 +107,25 @@ class FLACDecoder : public AudioDecoder {
 
   virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
 
-  virtual void setOutputStream(AudioStream &out_stream) {
-    p_print = &out_stream;
-    setNotifyAudioChange(out_stream);
-  }
-  virtual void setOutputStream(AudioPrint &out_stream) {
-    p_print = &out_stream;
-    setNotifyAudioChange(out_stream);
-  }
-
   operator boolean() { return is_active; }
 
-  /// We write the data into a buffer from where we process individual frames
-  /// one by one
-  size_t write(const void *data, size_t length) {
-    LOGI("write: %d", length);
-    size_t result = length;
-    if (!is_active) {
-      LOGE("inactive");
-      return 0;
-    }
-
-    // consume data if enough space is available in the buffer
-    if (buffer.availableForWrite()>=length){
-      buffer.writeArray((uint8_t*)data, length);
-    } else {
-      // data was not consumed
-      result = 0;
-    }
-
-    // start decoding
-    if (buffer.available() > buffer.size()-length){
-      LOGI("decoding...");
-      if (!FLAC__stream_decoder_process_single(decoder)) {
-        LOGE("FLAC__stream_decoder_process_single");
-        result = 0;
-      }
-    }
-
-    return length;
-  }
 
   /// Stream Interface: Process a single frame - only relevant when input stream has been defined
-  void copy() {
+  bool copy() {
     LOGI("copy");
     if (!is_active) {
       LOGE("not active");
-      return;
+      return false;
     }
     if (p_input == nullptr) {
       LOGE("setInputStream was not called");
-      return;
+      return false;
     }
     if (!FLAC__stream_decoder_process_single(decoder)) {
       LOGE("FLAC__stream_decoder_process_single");
-      return;
+      return false;
     }
+    return true;
   }
 
  protected:
@@ -181,9 +135,6 @@ class FLACDecoder : public AudioDecoder {
   AudioBaseInfoDependent *p_notify = nullptr;
   FLAC__StreamDecoder *decoder = nullptr;
   FLAC__StreamDecoderInitStatus init_status;
-  RingBuffer<uint8_t> buffer{0};
-  int buffer_size = FLAC_BUFFER_SIZE;
-  int buffer_pos = 0;
   Print *p_print = nullptr;
   Stream *p_input = nullptr;
   uint64_t time_last_read = 0;
@@ -200,6 +151,9 @@ class FLACDecoder : public AudioDecoder {
     LOGE(FLAC__StreamDecoderErrorStatusString[status]);
   }
 
+  size_t readBytes(uint8_t *buffer, size_t len) override {
+      return p_input->readBytes(buffer, len);
+  }
 
   /// Callback which reads from stream
   static FLAC__StreamDecoderReadStatus read_callback(const FLAC__StreamDecoder *decoder, FLAC__byte result_buffer[],size_t *bytes, void *client_data) {
@@ -210,26 +164,12 @@ class FLACDecoder : public AudioDecoder {
       return FLAC__STREAM_DECODER_READ_STATUS_ABORT;
     }
 
-    if (self->isInputFromStream()) {
-      // get data directly from stream
-      *bytes = self->p_input->readBytes(result_buffer, *bytes);
-      LOGD("-> %d", *bytes);
-      if (self->isEof(*bytes)){
-         result = FLAC__STREAM_DECODER_READ_STATUS_END_OF_STREAM;
-         self->is_active = false;
-      }
-    } else {
-      // get data from  buffer
-      size_t count = min(*bytes, (size_t)self->buffer.available());
-      count = min(count, (size_t)1024);
-      self->buffer.readArray(result_buffer, count);
-      *bytes = count;
-
-      // if the buffer is empty we asume the stream is at it's end
-      if (count==0){
-        LOGI("EOS");
+    // get data directly from stream
+    *bytes = self->readBytes(result_buffer, *bytes);
+    LOGD("-> %d", *bytes);
+    if (self->isEof(*bytes)){
         result = FLAC__STREAM_DECODER_READ_STATUS_END_OF_STREAM;
-      }
+        self->is_active = false;
     }
     return result;
   }
