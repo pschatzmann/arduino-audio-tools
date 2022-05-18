@@ -94,16 +94,16 @@ Inheritance diagram for audio_tools::OpusOggDecoder:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4fd2fce7652ee94005e60ba753558bdb"><td class="memItemLeft" align="right" valign="top"><a id="a4fd2fce7652ee94005e60ba753558bdb"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> ()</td></tr>
-<tr class="separator:a4fd2fce7652ee94005e60ba753558bdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80da2d0f6f3501374bf22de6a1e838ec"><td class="memItemLeft" align="right" valign="top"><a id="a80da2d0f6f3501374bf22de6a1e838ec"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> () override</td></tr>
+<tr class="separator:a80da2d0f6f3501374bf22de6a1e838ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7cbc9a30421d1ba362c1bedab6f46d9b"><td class="memItemLeft" align="right" valign="top"><a id="a7cbc9a30421d1ba362c1bedab6f46d9b"></a>
 <a class="el" href="structaudio__tools_1_1_opus_settings.html">OpusSettings</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_opus_ogg_decoder.html#a7cbc9a30421d1ba362c1bedab6f46d9b">config</a> ()</td></tr>
 <tr class="memdesc:a7cbc9a30421d1ba362c1bedab6f46d9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides access to the Opus configuration. <br /></td></tr>
 <tr class="separator:a7cbc9a30421d1ba362c1bedab6f46d9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6fd87fcf970c0292fa5067c42b1754c1"><td class="memItemLeft" align="right" valign="top"><a id="a6fd87fcf970c0292fa5067c42b1754c1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
-<tr class="separator:a6fd87fcf970c0292fa5067c42b1754c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1dbbbe0b7cfcf4610b5c7d326506a140"><td class="memItemLeft" align="right" valign="top"><a id="a1dbbbe0b7cfcf4610b5c7d326506a140"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> () override</td></tr>
+<tr class="separator:a1dbbbe0b7cfcf4610b5c7d326506a140"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a503a354c3b2cad8ca1fdd65ad07c95a4"><td class="memItemLeft" align="right" valign="top"><a id="a503a354c3b2cad8ca1fdd65ad07c95a4"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_opus_ogg_decoder.html#a503a354c3b2cad8ca1fdd65ad07c95a4">setOutputStream</a> (<a class="el" href="class_print.html">Print</a> &amp;out_stream) override</td></tr>
 <tr class="memdesc:a503a354c3b2cad8ca1fdd65ad07c95a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the output <a class="el" href="class_stream.html">Stream</a>. <br /></td></tr>
@@ -119,6 +119,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a9cfb96b1357e47f18cc619da3d698583 inherit pub_methods_classaudio__tools_1_1_ogg_decoder"><td class="memItemLeft" align="right" valign="top"><a id="a9cfb96b1357e47f18cc619da3d698583"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> info)</td></tr>
 <tr class="separator:a9cfb96b1357e47f18cc619da3d698583 inherit pub_methods_classaudio__tools_1_1_ogg_decoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5619e87cec3c160e911894a0a4f2cf08 inherit pub_methods_classaudio__tools_1_1_ogg_decoder"><td class="memItemLeft" align="right" valign="top"><a id="a5619e87cec3c160e911894a0a4f2cf08"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>flush</b> ()</td></tr>
+<tr class="separator:a5619e87cec3c160e911894a0a4f2cf08 inherit pub_methods_classaudio__tools_1_1_ogg_decoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6341fc77119457ed441a3eda65c25889 inherit pub_methods_classaudio__tools_1_1_ogg_decoder"><td class="memItemLeft" align="right" valign="top"><a id="a6341fc77119457ed441a3eda65c25889"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><b>operator boolean</b> () override</td></tr>
 <tr class="separator:a6341fc77119457ed441a3eda65c25889 inherit pub_methods_classaudio__tools_1_1_ogg_decoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -132,6 +135,12 @@ virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (
 <tr class="memitem:ae939cf72a3fd1ee159224da517d4e7e7 inherit pub_methods_classaudio__tools_1_1_audio_decoder"><td class="memItemLeft" align="right" valign="top"><a id="ae939cf72a3fd1ee159224da517d4e7e7"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setAudioInfo</b> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> from) override</td></tr>
 <tr class="separator:ae939cf72a3fd1ee159224da517d4e7e7 inherit pub_methods_classaudio__tools_1_1_audio_decoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c7ba32c922ef5467dddce2662ac91ad inherit pub_methods_classaudio__tools_1_1_audio_decoder"><td class="memItemLeft" align="right" valign="top"><a id="a7c7ba32c922ef5467dddce2662ac91ad"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setOutputStream</b> (<a class="el" href="classaudio__tools_1_1_audio_print.html">AudioPrint</a> &amp;out_stream)</td></tr>
+<tr class="separator:a7c7ba32c922ef5467dddce2662ac91ad inherit pub_methods_classaudio__tools_1_1_audio_decoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2d3a81a36c12813f64377d50fda32c2 inherit pub_methods_classaudio__tools_1_1_audio_decoder"><td class="memItemLeft" align="right" valign="top"><a id="af2d3a81a36c12813f64377d50fda32c2"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setOutputStream</b> (<a class="el" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a> &amp;out_stream)</td></tr>
+<tr class="separator:af2d3a81a36c12813f64377d50fda32c2 inherit pub_methods_classaudio__tools_1_1_audio_decoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -186,12 +195,6 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:aa008f3ee5046b92bb6946ed9f5e74fcb inherit pro_static_methods_classaudio__tools_1_1_ogg_decoder"><td class="memItemLeft" align="right" valign="top"><a id="aa008f3ee5046b92bb6946ed9f5e74fcb"></a>
 static size_t&#160;</td><td class="memItemRight" valign="bottom"><b>ogg_io_read</b> (void *user_handle, void *buf, size_t n)</td></tr>
 <tr class="separator:aa008f3ee5046b92bb6946ed9f5e74fcb inherit pro_static_methods_classaudio__tools_1_1_ogg_decoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa9cf7aec562d8d35a0ff5d043676b8b6 inherit pro_static_methods_classaudio__tools_1_1_ogg_decoder"><td class="memItemLeft" align="right" valign="top"><a id="aa9cf7aec562d8d35a0ff5d043676b8b6"></a>
-static int&#160;</td><td class="memItemRight" valign="bottom"><b>ogg_io_seek</b> (void *user_handle, long offset, int whence)</td></tr>
-<tr class="separator:aa9cf7aec562d8d35a0ff5d043676b8b6 inherit pro_static_methods_classaudio__tools_1_1_ogg_decoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b7c0ed13fe33e220864a9e82ed7f92d inherit pro_static_methods_classaudio__tools_1_1_ogg_decoder"><td class="memItemLeft" align="right" valign="top"><a id="a6b7c0ed13fe33e220864a9e82ed7f92d"></a>
-static long&#160;</td><td class="memItemRight" valign="bottom"><b>ogg_io_tell</b> (void *user_handle)</td></tr>
-<tr class="separator:a6b7c0ed13fe33e220864a9e82ed7f92d inherit pro_static_methods_classaudio__tools_1_1_ogg_decoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4008f9144346eeeb7a696b393b270d78 inherit pro_static_methods_classaudio__tools_1_1_ogg_decoder"><td class="memItemLeft" align="right" valign="top"><a id="a4008f9144346eeeb7a696b393b270d78"></a>
 static int&#160;</td><td class="memItemRight" valign="bottom"><b>read_packet</b> (OGGZ *oggz, oggz_packet *zp, long serialno, void *user_data)</td></tr>
 <tr class="separator:a4008f9144346eeeb7a696b393b270d78 inherit pro_static_methods_classaudio__tools_1_1_ogg_decoder"><td class="memSeparator" colspan="2">&#160;</td></tr>

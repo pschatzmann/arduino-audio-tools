@@ -118,10 +118,10 @@ $(function() {
 , <a class="el" href="classaudio__tools_1_1_encoder8_bit.html#a3b7f6c236d913929d23141bd5fd7d715">audio_tools::Encoder8Bit</a>
 , <a class="el" href="classaudio__tools_1_1_f_l_a_c_encoder.html#ab92423b9b55c97b7794bfbb00df8024b">audio_tools::FLACEncoder</a>
 , <a class="el" href="classaudio__tools_1_1_i2_s_stream.html#a0b77e75668b8616d52312462f0a30e2e">audio_tools::I2SStream</a>
-, <a class="el" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#acbf250c55d58dc07bbb05a61f696a265">audio_tools::MP3EncoderLAME</a>
+, <a class="el" href="classaudio__tools_1_1_m_p3_encoder_l_a_m_e.html#acdf63074534f758fc6207e23489ce765">audio_tools::MP3EncoderLAME</a>
 , <a class="el" href="classaudio__tools_1_1_ogg_encoder.html#a2abdbaad6e0e6f824871fccc674e3aaa">audio_tools::OggEncoder</a>
 , <a class="el" href="classaudio__tools_1_1_opus_audio_encoder.html#ab9ed2282686319bff14278ff9900258c">audio_tools::OpusAudioEncoder</a>
-, <a class="el" href="classaudio__tools_1_1_port_audio_stream.html#ac7bf8ff0eb4c1f0607434a359405badf">audio_tools::PortAudioStream</a>
+, <a class="el" href="classaudio__tools_1_1_port_audio_stream.html#aba8a6906e3ee047b191d4905036e1d2d">audio_tools::PortAudioStream</a>
 , <a class="el" href="classaudio__tools_1_1_p_w_m_audio_stream_base.html#a76fb99feead156d38c742a31dd4247e9">audio_tools::PWMAudioStreamBase</a>
 , <a class="el" href="classaudio__tools_1_1_r_a_w_encoder.html#a0a2b7ded7e1215458141a528d1448581">audio_tools::RAWEncoder</a>
 , <a class="el" href="classaudio__tools_1_1_resample_stream.html#a6ee95953bbdf651c1ca1e4ea86eaeece">audio_tools::ResampleStream&lt; T &gt;</a>
@@ -152,6 +152,10 @@ $(function() {
 </li>
 <li>setBitrate()
 : <a class="el" href="classaudio__tools_1_1_a_a_c_encoder_f_d_k.html#aa8bdd433d7b6f6c431d210177179728d">audio_tools::AACEncoderFDK</a>
+</li>
+<li>setBitsPerSecond()
+: <a class="el" href="classaudio__tools_1_1_codec2_decoder.html#a96774ee1f7196370fbc847ac1e4e2e20">audio_tools::Codec2Decoder</a>
+, <a class="el" href="classaudio__tools_1_1_codec2_encoder.html#aa238768b338aa7ba16958d8382c1561b">audio_tools::Codec2Encoder</a>
 </li>
 <li>setCallback()
 : <a class="el" href="classaudio__tools_1_1_meta_data_i_c_y.html#acc5c34118b8adbd4eb630b7867cb3cb6">audio_tools::MetaDataICY</a>
@@ -261,6 +265,8 @@ $(function() {
 </li>
 <li>setInputStream()
 : <a class="el" href="classaudio__tools_1_1_f_l_a_c_decoder.html#a0d98675261e850986878cb243754508a">audio_tools::FLACDecoder</a>
+, <a class="el" href="classaudio__tools_1_1_streaming_decoder.html#ae52a31861c3a4b69368d799597fb20fa">audio_tools::StreamingDecoder</a>
+, <a class="el" href="classaudio__tools_1_1_vorbis_decoder.html#a62c0da34142410167cc24553af2b974d">audio_tools::VorbisDecoder</a>
 </li>
 <li>setInterpolationTable()
 : <a class="el" href="classaudio__tools_1_1_delay_effect_base.html#af50b1a89a6ecb9243cb1f73e4dc46535">audio_tools::DelayEffectBase</a>
@@ -306,9 +312,12 @@ $(function() {
 : <a class="el" href="classaudio__tools_1_1_a_a_c_decoder_helix.html#a865b7423abea726c09bdc589196053b8">audio_tools::AACDecoderHelix</a>
 , <a class="el" href="classaudio__tools_1_1_decoder_helix.html#a34e436e3dc67955d2cd671834fc47a7f">audio_tools::DecoderHelix</a>
 , <a class="el" href="classaudio__tools_1_1_encoded_audio_stream.html#ac27650c0ea29f5de09c8f5f00de2b5c2">audio_tools::EncodedAudioStream</a>
+, <a class="el" href="classaudio__tools_1_1_f_l_a_c_decoder.html#aa567616663fdb5e7fdf1e9aab331a6c2">audio_tools::FLACDecoder</a>
 , <a class="el" href="classaudio__tools_1_1_m_p3_decoder_helix.html#a480eacb313a4fc29bb2f7ac35a868433">audio_tools::MP3DecoderHelix</a>
 , <a class="el" href="classaudio__tools_1_1_null_stream.html#a79e0b5b61734d66a18b21a7a4a431715">audio_tools::NullStream</a>
+, <a class="el" href="classaudio__tools_1_1_streaming_decoder.html#aaaf9768e5c5ae3e9a493ddee78f336b0">audio_tools::StreamingDecoder</a>
 , <a class="el" href="classaudio__tools_1_1_timer_callback_audio_stream.html#a1866a399e18e42d8df96bdcace288e4c">audio_tools::TimerCallbackAudioStream</a>
+, <a class="el" href="classaudio__tools_1_1_vorbis_decoder.html#a9fc04197c2f85df56731abbb37498746">audio_tools::VorbisDecoder</a>
 </li>
 <li>setOffset()
 : <a class="el" href="classaudio__tools_1_1_converter_scaler.html#a92b3cc7734789236ccf25d03444e6851">audio_tools::ConverterScaler&lt; T &gt;</a>
@@ -334,6 +343,7 @@ $(function() {
 , <a class="el" href="classaudio__tools_1_1_decoder8_bit.html#a5b8312d17c47b71fb1897fe1262dfafe">audio_tools::Decoder8Bit</a>
 , <a class="el" href="classaudio__tools_1_1_decoder_helix.html#a067201746c12b9a1612934d27440c05a">audio_tools::DecoderHelix</a>
 , <a class="el" href="classaudio__tools_1_1_encoder8_bit.html#a2030e480a4799f93f25d57df501ed115">audio_tools::Encoder8Bit</a>
+, <a class="el" href="classaudio__tools_1_1_f_l_a_c_decoder.html#a62a8d468890aa00a9cf96df2088129d6">audio_tools::FLACDecoder</a>
 , <a class="el" href="classaudio__tools_1_1_f_l_a_c_encoder.html#a4facc57b69053275cd6cfd469dcdb468">audio_tools::FLACEncoder</a>
 , <a class="el" href="classaudio__tools_1_1_m_p3_decoder_helix.html#aa3a44b7494589d1bf48cf6fafddfe224">audio_tools::MP3DecoderHelix</a>
 , <a class="el" href="classaudio__tools_1_1_m_p3_decoder_mini.html#ab419ec9e94017bafd9afdeb99370c305">audio_tools::MP3DecoderMini</a>
@@ -346,6 +356,8 @@ $(function() {
 , <a class="el" href="classaudio__tools_1_1_opus_ogg_encoder.html#a4874b90a76e2b14ae76488bd6745a6cf">audio_tools::OpusOggEncoder</a>
 , <a class="el" href="classaudio__tools_1_1_r_a_w_decoder.html#ab4a6993f1acf13e247b1911e7c55c12a">audio_tools::RAWDecoder</a>
 , <a class="el" href="classaudio__tools_1_1_r_a_w_encoder.html#a16fe83f2aa3dd521d56da784b93b3272">audio_tools::RAWEncoder</a>
+, <a class="el" href="classaudio__tools_1_1_streaming_decoder.html#a480f045e9a3447e4592067aa5d878a3b">audio_tools::StreamingDecoder</a>
+, <a class="el" href="classaudio__tools_1_1_vorbis_decoder.html#a15263d72f27ea2459161fbff58864bfd">audio_tools::VorbisDecoder</a>
 , <a class="el" href="classaudio__tools_1_1_w_a_v_decoder.html#a95e1a04ad2f0cc08cf228846d37409fd">audio_tools::WAVDecoder</a>
 , <a class="el" href="classaudio__tools_1_1_w_a_v_encoder.html#ac383645fc94e295cdfa9d007ffee049d">audio_tools::WAVEncoder</a>
 </li>

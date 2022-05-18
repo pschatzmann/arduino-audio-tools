@@ -111,6 +111,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (<a class="
 <tr class="memitem:a72a278d986d104ba885ce33c3efa9f2a"><td class="memItemLeft" align="right" valign="top"><a id="a72a278d986d104ba885ce33c3efa9f2a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> () override</td></tr>
 <tr class="separator:a72a278d986d104ba885ce33c3efa9f2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5619e87cec3c160e911894a0a4f2cf08"><td class="memItemLeft" align="right" valign="top"><a id="a5619e87cec3c160e911894a0a4f2cf08"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>flush</b> ()</td></tr>
+<tr class="separator:a5619e87cec3c160e911894a0a4f2cf08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6341fc77119457ed441a3eda65c25889"><td class="memItemLeft" align="right" valign="top"><a id="a6341fc77119457ed441a3eda65c25889"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><b>operator boolean</b> () override</td></tr>
 <tr class="separator:a6341fc77119457ed441a3eda65c25889"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -128,6 +131,12 @@ virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (
 <tr class="memitem:ae939cf72a3fd1ee159224da517d4e7e7 inherit pub_methods_classaudio__tools_1_1_audio_decoder"><td class="memItemLeft" align="right" valign="top"><a id="ae939cf72a3fd1ee159224da517d4e7e7"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setAudioInfo</b> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> from) override</td></tr>
 <tr class="separator:ae939cf72a3fd1ee159224da517d4e7e7 inherit pub_methods_classaudio__tools_1_1_audio_decoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c7ba32c922ef5467dddce2662ac91ad inherit pub_methods_classaudio__tools_1_1_audio_decoder"><td class="memItemLeft" align="right" valign="top"><a id="a7c7ba32c922ef5467dddce2662ac91ad"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setOutputStream</b> (<a class="el" href="classaudio__tools_1_1_audio_print.html">AudioPrint</a> &amp;out_stream)</td></tr>
+<tr class="separator:a7c7ba32c922ef5467dddce2662ac91ad inherit pub_methods_classaudio__tools_1_1_audio_decoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2d3a81a36c12813f64377d50fda32c2 inherit pub_methods_classaudio__tools_1_1_audio_decoder"><td class="memItemLeft" align="right" valign="top"><a id="af2d3a81a36c12813f64377d50fda32c2"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setOutputStream</b> (<a class="el" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a> &amp;out_stream)</td></tr>
+<tr class="separator:af2d3a81a36c12813f64377d50fda32c2 inherit pub_methods_classaudio__tools_1_1_audio_decoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -146,12 +155,6 @@ Static Protected Member Functions</h2></td></tr>
 <tr class="memitem:aa008f3ee5046b92bb6946ed9f5e74fcb"><td class="memItemLeft" align="right" valign="top"><a id="aa008f3ee5046b92bb6946ed9f5e74fcb"></a>
 static size_t&#160;</td><td class="memItemRight" valign="bottom"><b>ogg_io_read</b> (void *user_handle, void *buf, size_t n)</td></tr>
 <tr class="separator:aa008f3ee5046b92bb6946ed9f5e74fcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa9cf7aec562d8d35a0ff5d043676b8b6"><td class="memItemLeft" align="right" valign="top"><a id="aa9cf7aec562d8d35a0ff5d043676b8b6"></a>
-static int&#160;</td><td class="memItemRight" valign="bottom"><b>ogg_io_seek</b> (void *user_handle, long offset, int whence)</td></tr>
-<tr class="separator:aa9cf7aec562d8d35a0ff5d043676b8b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b7c0ed13fe33e220864a9e82ed7f92d"><td class="memItemLeft" align="right" valign="top"><a id="a6b7c0ed13fe33e220864a9e82ed7f92d"></a>
-static long&#160;</td><td class="memItemRight" valign="bottom"><b>ogg_io_tell</b> (void *user_handle)</td></tr>
-<tr class="separator:a6b7c0ed13fe33e220864a9e82ed7f92d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4008f9144346eeeb7a696b393b270d78"><td class="memItemLeft" align="right" valign="top"><a id="a4008f9144346eeeb7a696b393b270d78"></a>
 static int&#160;</td><td class="memItemRight" valign="bottom"><b>read_packet</b> (OGGZ *oggz, oggz_packet *zp, long serialno, void *user_data)</td></tr>
 <tr class="separator:a4008f9144346eeeb7a696b393b270d78"><td class="memSeparator" colspan="2">&#160;</td></tr>
