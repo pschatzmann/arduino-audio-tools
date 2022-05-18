@@ -9,12 +9,12 @@
  * 
  */
 #include "AudioTools.h"
-#include "AudioCodecs/CodecFLAC.h"
+#include "AudioCodecs/CodecVorbis.h"
 
 const char* ssid = "ssid";
 const char* pwd = "password";
 URLStream url(ssid, pwd);
-FLACDecoder dec;
+VorbisDecoder dec;
 I2SStream i2s;
 
 void setup() {
@@ -23,9 +23,9 @@ void setup() {
 
   i2s.begin(i2s.defaultConfig(TX_MODE));
 
-  url.begin("http://www.lindberg.no/hires/test/2L-145_01_stereo_01.cd.flac");
-  dec.setOutputStream(i2s);
+  url.begin("http://marmalade.scenesat.com:8086/bitjam.ogg","application/ogg");
   dec.setInputStream(url);
+  dec.setOutputStream(i2s);
   dec.begin();
 }
 

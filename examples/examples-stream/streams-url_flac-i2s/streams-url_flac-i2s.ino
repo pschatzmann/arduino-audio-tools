@@ -1,7 +1,7 @@
 /**
  * @file streams-url_flac-i2s.ino
  * @author Phil Schatzmann
- * @brief The FLAC decoder using our regular interface logic
+ * @brief The FLAC decoder supports a streaming interface where we can directly assign a source stream
  * @version 0.1
  * @date 2022-05-13
  * 
@@ -14,19 +14,21 @@
 const char* ssid = "ssid";
 const char* pwd = "password";
 URLStream url(ssid, pwd);
+FLACDecoder dec;
 I2SStream i2s;
-EncodedAudioStream dec(&i2s, new FLACDecoder()); // Decoding stream
-StreamCopy copier(dec, url); // copy url to decoder
 
 void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);  
 
   i2s.begin(i2s.defaultConfig(TX_MODE));
-  dec.begin();
+
   url.begin("http://www.lindberg.no/hires/test/2L-145_01_stereo_01.cd.flac");
+  dec.setInputStream(url);
+  dec.setOutputStream(i2s);
+  dec.begin();
 }
 
 void loop() {
-  copier.copy();
+  dec.copy();
 }

@@ -88,7 +88,7 @@ public:
  * @copyright GPLv3
  */
 class StreamingDecoder {
-
+public:
   /// Starts the processing
   virtual void begin() = 0;
 
@@ -125,7 +125,10 @@ class StreamingDecoder {
   virtual operator boolean() = 0;
 
   /// Process a single read operation - to be called in the loop
-  virtual long copy() = 0;
+  virtual bool copy() = 0;
+
+protected:
+  virtual size_t readBytes(uint8_t *buffer, size_t len) = 0;
 };
 
 /**
