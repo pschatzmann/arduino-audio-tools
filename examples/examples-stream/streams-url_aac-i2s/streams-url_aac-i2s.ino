@@ -1,5 +1,5 @@
 /**
- * @file streams-url_mp3-i2s.ino
+ * @file streams-url_aac-i2s.ino
  * @author Phil Schatzmann
  * @brief decode MP3 stream from url and output it on I2S
  * @version 0.1
@@ -9,7 +9,6 @@
  */
 
 // install https://github.com/pschatzmann/arduino-libhelix.git
-// compile with partition scheme: Hugh App
 
 #include "AudioTools.h"
 #include "AudioCodecs/CodecAACHelix.h"
@@ -34,7 +33,8 @@ void setup(){
   //config.mode = I2S_STD_FORMAT;
   i2s.begin(config);
 
-  // mp3 radio
+  // aac radio
+  dec.setNotifyAudioChange(i2s);
   url.begin("http://mscp3.live-streams.nl:8340/jazz-high.aac","audio/aac");
 
   // initialize decoder
