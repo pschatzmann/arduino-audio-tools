@@ -1,6 +1,7 @@
 # Streaming Radio Player
 
 We just play a streamed radio station which provides the audio as mp3 and output the result via I2S to an external DAC
+To decode the data we use the libhelix library.
 
 An ESP32 was used to test this sketch.
 
@@ -26,5 +27,8 @@ XMT  |	3V (or another GPIO PIN which is set to high)
 - FMT - Audio format selection : I2S (Low) / Left justified (High)
 - XMT - Soft mute control(1): Soft mute (Low) / soft un-mute (High)
 
+### Dependencies
+
+- https://github.com/pschatzmann/arduino-libhelix
 
 
