@@ -369,6 +369,99 @@ class MultiOutput : public AudioPrint {
 };
 
 /**
+ * @brief Mixing of multiple outputs to one final output
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ * @tparam T 
+ */
+template<typename T>
+class OutputMixer : public Print {
+  public:
+    OutputMixer(Print &finalOutput, int outputStreamCount) {
+      p_final_output = &finalOutput;
+      output_count = outputStreamCount;
+      for (int i=0;i<output_count;i++){
+          weights.push_back(1.0);
+      }
+    };
+
+    /// Defines a new weight for the indicated channel: If you set it to 0 it is muted.
+    void setWeight(int channel, float weight){
+      if (channel<size()){
+        weights[channel] = weight;
+      } else {
+        LOGE("Invalid channel %d - max is %d", channel, size()-1);
+      }
+    }
+
+    void begin(int copy_buffer_size=DEFAULT_BUFFER_SIZE) {
+      is_active = true;
+      total_weights = 0;
+      for (int j=0;j<weights.size();j++){
+        total_weights += weights[j];
+      }
+      size_bytes = copy_buffer_size;
+      // clear final data so that we can add values
+      result.resize(size_bytes);
+      memset(result.data(), 0, size_bytes); 
+    }
+
+    /// Remove all input streams
+    void end() {
+      weights.clear();
+      total_weights = 0.0;
+      is_active = false;
+    }
+
+    /// Number of stremams to which are mixed together
+    int size() {
+      return output_count;
+    }
+
+    /// Write the data from multiple streams mixed together 
+    size_t write(const uint8_t *buffer_c, size_t size){
+        if (!is_active) return 0;
+        LOGD("write: %d", size);
+        int sample_size = min(size, (size_t)size_bytes);
+        int sample_count = sample_size / sizeof(T);
+        T* samples_result = (T*)result.data();
+        float weight = weights[stream_idx];
+        // sum up input samples to result samples 
+        T *buffer = (T*) buffer_c;
+        for (int i=0;i<sample_count; i++){
+            result[i] += weight * buffer[i] / total_weights;
+        }
+        stream_idx++;
+        if (stream_idx>=output_count){
+            flush();
+        }
+        return sample_size;
+    }
+    
+    int availableForWrite() { return is_active ? size_bytes : 0; }
+
+    /// Force output to final destination
+    void flush() {
+        p_final_output->write(result.data(), size_bytes);
+        stream_idx = 0;
+        // clear final data so that we can add values
+        memset(result.data(), 0, size_bytes); 
+    }
+
+  protected:
+    Vector<uint8_t> result{0};
+    Vector<float> weights{10}; 
+    Print *p_final_output=nullptr;
+    float total_weights = 0.0;
+    bool is_active = false;
+    int stream_idx = 0;
+    int size_bytes;
+    int output_count;
+
+};
+
+
+/**
  * @brief A simple class to determine the volume
  * @author Phil Schatzmann
  * @copyright GPLv3
