@@ -192,28 +192,31 @@ class GSMEncoder : public AudioEncoder {
   void processByte(uint8_t byte) {
     input_buffer[buffer_pos++] = byte;
     if (buffer_pos >= input_buffer.size()) {
-      if (scaling_active){
-        // scale to 16 to 13-bit samples
-        int16_t *pt16 = (int16_t *)input_buffer.data();
-        for (int j = 0; j < input_buffer.size() / 2; j++) {
-          pt16[j] = pt16[j] / 8;
-        }
-      } else {
-        // clip value to 13-bits
-        int16_t *pt16 = (int16_t *)input_buffer.data();
-        for (int j = 0; j < input_buffer.size() / 2; j++) {
-          if ( pt16[j]>4095){
-            pt16[j] = 4095;
-          }
-          if ( pt16[j]<-4095){
-            pt16[j] = -4095;
-          }
-        }
-      }
+      scaleValues();
       // encode
       gsm_encode(v_gsm, (gsm_signal*)input_buffer.data(), result_buffer.data());
       p_print->write(result_buffer.data(), result_buffer.size());
       buffer_pos = 0;
+    }
+  }
+
+  void scaleValues() {
+    int16_t *pt16 = (int16_t *)input_buffer.data();
+    if (scaling_active){
+      // scale to 16 to 13-bit samples
+      for (int j = 0; j < input_buffer.size() / 2; j++) {
+        pt16[j] = pt16[j] / 8;
+      }
+    } else {
+      // clip value to 13-bits
+      for (int j = 0; j < input_buffer.size() / 2; j++) {
+        if ( pt16[j]>4095){
+          pt16[j] = 4095;
+        }
+        if ( pt16[j]<-4095){
+          pt16[j] = -4095;
+        }
+      }
     }
   }
 };
