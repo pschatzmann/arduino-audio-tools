@@ -121,9 +121,10 @@ class GSMDecoder : public AudioDecoder {
  */
 class GSMEncoder : public AudioEncoder {
  public:
-  GSMEncoder() {
+  GSMEncoder(bool scaling=true) {
     cfg.sample_rate = 8000;
     cfg.channels = 1;
+    scaling_active = scaling;
   }
 
   void begin(AudioBaseInfo bi) {
@@ -183,6 +184,7 @@ class GSMEncoder : public AudioEncoder {
   gsm v_gsm;
   bool is_active = false;
   int buffer_pos = 0;
+  bool scaling_active;
   Vector<uint8_t> input_buffer;
   Vector<uint8_t> result_buffer;
 
@@ -190,10 +192,23 @@ class GSMEncoder : public AudioEncoder {
   void processByte(uint8_t byte) {
     input_buffer[buffer_pos++] = byte;
     if (buffer_pos >= input_buffer.size()) {
-      // scale to 16 to 13-bit samples
-      int16_t *pt16 = (int16_t *)input_buffer.data();
-      for (int j = 0; j < input_buffer.size() / 2; j++) {
-        pt16[j] = pt16[j] / 8;
+      if (scaling_active){
+        // scale to 16 to 13-bit samples
+        int16_t *pt16 = (int16_t *)input_buffer.data();
+        for (int j = 0; j < input_buffer.size() / 2; j++) {
+          pt16[j] = pt16[j] / 8;
+        }
+      } else {
+        // clip value to 13-bits
+        int16_t *pt16 = (int16_t *)input_buffer.data();
+        for (int j = 0; j < input_buffer.size() / 2; j++) {
+          if ( pt16[j]>4095){
+            pt16[j] = 4095;
+          }
+          if ( pt16[j]<-4095){
+            pt16[j] = -4095;
+          }
+        }
       }
       // encode
       gsm_encode(v_gsm, (gsm_signal*)input_buffer.data(), result_buffer.data());
