@@ -1024,9 +1024,9 @@ class MeasuringStream : public AudioStreamX {
  */
 
 template<typename T>
-class Mixer : public AudioStreamX {
+class InputMixer : public AudioStreamX {
   public:
-    Mixer() = default;
+    InputMixer() = default;
 
     /// Adds a new input stream
     void add(Stream &in, float weight=1.0){
@@ -1099,6 +1099,7 @@ class Mixer : public AudioStreamX {
     float total_weights = 0.0;
 
 };
+
 
 // support legicy VolumeOutput
 //typedef VolumeStream VolumeOutput;
