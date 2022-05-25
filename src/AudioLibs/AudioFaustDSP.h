@@ -61,7 +61,7 @@ class UI {
         }
         return e!=nullptr ? *(e->zone) : 0.0;
     }
-    virtual bool setValue(const char*label, FAUSTFLOAT value){
+    virtual bool setValue(const char* label, FAUSTFLOAT value){
         bool result = false;
         Entry* e = findEntry(label);
         if (e!=nullptr){
@@ -77,7 +77,7 @@ class UI {
                 result = true;
             }
         } else {
-            LOGE("Label '%s' not found", e->label);
+            LOGE("Label '%s' not found", label);
         }
         return result;
     }
