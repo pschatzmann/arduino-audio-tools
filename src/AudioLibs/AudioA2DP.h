@@ -264,10 +264,11 @@ class A2DPStream : public AudioStream {
             return a2dp_buffer==nullptr ? 0 : a2dp_buffer->availableForWrite();
         }
 
-        // Define the volme (values between 0 and 1)
+        // Define the volme (values between 0.0 and 1.0)
         virtual void setVolume(float volume){
             this->volume = volume;
-            if (a2dp!=nullptr) a2dp->set_volume(volume * 100);
+            // 128 is max volume
+            if (a2dp!=nullptr) a2dp->set_volume(volume * 128);
         }
 
         virtual void setNotifyAudioChange (AudioBaseInfoDependent &bi) {
