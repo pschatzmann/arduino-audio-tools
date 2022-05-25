@@ -120,7 +120,7 @@ class UI {
 
         Entry *findEntry(const char* name){
             Str nameStr(name);
-            for (int j; j<entries.size();j++){
+            for (int j=0; j<entries.size();j++){
                 if (nameStr.equals(entries[j].label)){
                     return &entries[j];
                 }
