@@ -53,6 +53,7 @@ struct ESPNowStreamConfig {
   uint16_t delay_after_failed_write_ms = 2000;
   uint16_t buffer_size = ESP_NOW_MAX_DATA_LEN;
   uint16_t buffer_count = 20;
+  int write_retry_count = -1; // -1 endless
   void (*recveive_cb)(const uint8_t *mac_addr, const uint8_t *data,
                       int data_len) = nullptr;
   // to encrypt set primary_master_key and local_master_key to 16 byte strings
@@ -206,6 +207,7 @@ class ESPNowStream : public AudioStreamX {
   size_t write(const uint8_t *data, size_t len) override {
     int open = len;
     size_t result = 0;
+    int retry_count = 0;
     while (open > 0) {
       if (available_to_write > 0) {
         resetAvailableToWrite();
@@ -225,6 +227,11 @@ class ESPNowStream : public AudioStreamX {
           result += send_len;
         } else {
           LOGE("Write error");
+          retry_count++;
+          if (cfg.write_retry_count>0 && retry_count>=cfg.write_retry_count){
+            // break loop
+            return 0;
+          }
         }
         // if we do have no partner to write we stall and retry later
       } else {
