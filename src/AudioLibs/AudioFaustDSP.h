@@ -82,6 +82,44 @@ class UI {
         return result;
     }
 
+    bool setMidiNote(int note){
+        int frq = MidiCommon::noteToFrequency(note);
+        setFrequency(frq);
+    }
+
+    bool setFrequency(FAUSTFLOAT freq){
+        return setValue("freq", freq);
+    }
+
+    FAUSTFLOAT frequency() {
+        return getValue("freq");
+    }
+
+    bool setBend(FAUSTFLOAT bend){
+        return setValue("bend", freq);
+    }
+
+    FAUSTFLOAT bend() {
+        return getValue("bend");
+    }
+
+    bool setGain(FAUSTFLOAT gain){
+        return setValue("gain", gain);
+    }
+
+    FAUSTFLOAT gain() {
+        return getValue("gain");
+    }
+
+    bool midiOn(int note, FAUSTFLOAT gain){
+        return setMidiNote(note) && setGain(gain);
+    }
+
+    bool midiOff(int note){
+        return setMidiNote(note) && setGain(0.0);
+    }
+    
+
     // -- widget's layouts
     virtual void openTabBox(const char* label) {}
     virtual void openHorizontalBox(const char* label) {}
