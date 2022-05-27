@@ -1,7 +1,7 @@
 /**
- * @file streams-i2s-serial.ino
+ * @file streams-i2s-serial_16bit.ino
  * @author Phil Schatzmann
- * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-stream/streams-i2s-serial/README.md
+ * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-stream/streams-i2s-serial_16bit/README.md
  * 
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -28,7 +28,7 @@ void setup(void) {
     cfg.is_master = true;
      // this module nees a master clock if the ESP32 is master
     cfg.use_apll = false;  // try with yes
-    cfg.pin_mck = 3; 
+    //cfg.pin_mck = 3; 
     i2sStream.begin(cfg);
 
     // make sure that we have the correct channels set up
