@@ -24,13 +24,13 @@ void setup(void) {
   Serial.println("starting I2S...");
   auto config = i2s.defaultConfig(RXTX_MODE);
   config.sample_rate = sample_rate; 
-  config.bits_per_sample = 16;
+  config.bits_per_sample = 16; // or try with 32
   config.channels = 2;
   config.i2s_format = I2S_STD_FORMAT;
   config.pin_ws = 14;
   config.pin_bck = 15;
-  config.pin_data = 16;
-  config.pin_data_rx = 17;
+  config.pin_data = 18;
+  config.pin_data_rx = 19;
   //config.fixed_mclk = sample_rate * 256;
   // config.pin_mck = 3; // must be 0,1 or 3 - only for ESP_IDF_VERSION_MAJOR >= 4
   i2s.begin(config);
