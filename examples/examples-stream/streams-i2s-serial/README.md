@@ -32,3 +32,5 @@ If it is working with 32 bit you can try to change it to 16bits which most of th
 
 - CsvStream<int16_t> csvStream(Serial);
 - cfg.bits_per_sample = 16;
+
+see streams-12s-serial_16_bit

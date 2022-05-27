@@ -9,6 +9,7 @@
  
 uint16_t sample_rate=44100;
 uint16_t channels = 2;
+uint16_t bits_per_sample = 16; // or try with 24 or 32
 I2SStream i2s;
 StreamCopy copier(i2s, i2s); // copies sound into i2s
 
@@ -24,7 +25,7 @@ void setup(void) {
   Serial.println("starting I2S...");
   auto config = i2s.defaultConfig(RXTX_MODE);
   config.sample_rate = sample_rate; 
-  config.bits_per_sample = 16; // or try with 32
+  config.bits_per_sample = bits_per_sample; 
   config.channels = 2;
   config.i2s_format = I2S_STD_FORMAT;
   config.pin_ws = 14;
