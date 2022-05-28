@@ -10,6 +10,11 @@
 #define PSRAM_LIMIT 1024
 #endif
 
+#ifndef PSRAM_TOTAL_LIMIT
+#define PSRAM_TOTAL_LIMIT 2048
+#endif
+
+
 // forward declarations
 class UI;
 
@@ -191,7 +196,7 @@ public:
     * to possibly start a 'compute the best allocation strategy' step.
     */
     virtual void end(){
-        is_psram = total>2000 && ESP.getFreePsram()>0;
+        is_psram = total>=PSRAM_TOTAL_LIMIT && ESP.getFreePsram()>0;
         LOGI("use PSRAM: %s", is_psram?"true":"false");
     }
 
