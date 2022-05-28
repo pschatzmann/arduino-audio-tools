@@ -1,5 +1,5 @@
 /**
- * @file streams-faust-i2s.ino
+ * @file streams-faust_noise-i2s.ino
  * @author Phil Schatzmann
  * @brief Example how to use Faust as Audio Source
  * @version 0.1

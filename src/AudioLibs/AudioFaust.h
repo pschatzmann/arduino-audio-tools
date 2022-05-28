@@ -12,11 +12,14 @@ namespace audio_tools {
  */
 class FaustStream : public AudioStreamX {
   public:
+
     /// Constructor for Faust as Audio Source
     FaustStream(dsp &dsp, bool useSeparateOutputBuffer=true) {
         p_dsp = &dsp;
-        p_dsp->buildUserInterface(&ui);
-        with_output_buffer = useSeparateOutputBuffer;
+        if (p_dsp!=nullptr){
+            p_dsp->buildUserInterface(&ui);
+            with_output_buffer = useSeparateOutputBuffer;
+        } 
     }
 
     /// Constructor for Faust as Singal Processor - changing an input signal and sending it to out
@@ -34,7 +37,9 @@ class FaustStream : public AudioStreamX {
 
     AudioBaseInfo defaultConfig() {
         AudioBaseInfo def;
-        def.channels = p_dsp->getNumOutputs();
+        if (p_dsp!=nullptr){
+            def.channels = p_dsp->getNumOutputs();
+        }
         def.bits_per_sample = 16;
         def.sample_rate = 44100;
         return def;
@@ -56,9 +61,20 @@ class FaustStream : public AudioStreamX {
     /// Checks the parameters and starts the processing
     bool begin(AudioBaseInfo cfg){
         LOGD(LOG_METHOD);
+        if (p_dsp==nullptr){
+            LOGE("dsp is null");
+            return false;
+        }
+
+#ifdef USE_MEMORY_MANAGER
+        p_dsp->fManager = new dsp_memory_manager();
+        memoryInfo();
+#endif
+
         bool result = true;
         this->cfg = cfg;
         bytes_per_sample = cfg.bits_per_sample/8;
+
         p_dsp->init(cfg.sample_rate);
 
         // we do expect an output
@@ -133,6 +149,43 @@ class FaustStream : public AudioStreamX {
         return DEFAULT_BUFFER_SIZE / 4; // we limit the write size to 
     }
 
+    bool setMidiNote(int note){
+        float frq = noteToFrequency(note);
+        setFrequency(frq);
+    }
+
+    bool setFrequency(FAUSTFLOAT freq){
+        return setLabelValue("freq", freq);
+    }
+
+    FAUSTFLOAT frequency() {
+        return getLabelValue("freq");
+    }
+
+    bool setBend(FAUSTFLOAT bend){
+        return setLabelValue("bend", bend);
+    }
+
+    FAUSTFLOAT bend() {
+        return getLabelValue("bend");
+    }
+
+    bool setGain(FAUSTFLOAT gain){
+        return setLabelValue("gain", gain);
+    }
+
+    FAUSTFLOAT gain() {
+        return getLabelValue("gain");
+    }
+
+    bool midiOn(int note, FAUSTFLOAT gain){
+        return setMidiNote(note) && setGain(gain);
+    }
+
+    bool midiOff(int note){
+        return setMidiNote(note) && setGain(0.0);
+    }
+    
   protected:
     bool is_init = false;
     bool is_read = false;
@@ -232,7 +285,14 @@ class FaustStream : public AudioStreamX {
             p_buffer_out = nullptr;
         } 
     }
+
+    float noteToFrequency(uint8_t x) {
+        float note = x;
+        return 440.0 * pow(2.0f, (note-69)/12);
+    }
+
 };
+
 
 } // namespace
 
