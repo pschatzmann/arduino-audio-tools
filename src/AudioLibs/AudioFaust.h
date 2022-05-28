@@ -10,72 +10,69 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
+template<class DSP>
 class FaustStream : public AudioStreamX {
   public:
 
     /// Constructor for Faust as Audio Source
-    FaustStream(dsp &dsp, bool useSeparateOutputBuffer=true) {
-        p_dsp = &dsp;
-        if (p_dsp!=nullptr){
-            p_dsp->buildUserInterface(&ui);
-            with_output_buffer = useSeparateOutputBuffer;
-        } 
+    FaustStream(bool useSeparateOutputBuffer=true) {
+        with_output_buffer = useSeparateOutputBuffer;
     }
 
     /// Constructor for Faust as Singal Processor - changing an input signal and sending it to out
-    FaustStream(dsp &dsp, AudioStream &out, bool useSeparateOutputBuffer=true){
+    FaustStream(AudioStream &out, bool useSeparateOutputBuffer=true){
         p_out = &out;
-        p_dsp = &dsp;
-        p_dsp->buildUserInterface(&ui);
         with_output_buffer = useSeparateOutputBuffer;
     }
 
     ~FaustStream(){
         end();
         deleteFloatBuffer();
+        delete p_dsp;
+        DSP::classDestroy();
+    }
+
+
+    /// Provides a pointer to the actual dsp object
+    dsp *getDSP(){
+        return p_dsp;
     }
 
     AudioBaseInfo defaultConfig() {
         AudioBaseInfo def;
-        if (p_dsp!=nullptr){
-            def.channels = p_dsp->getNumOutputs();
-        }
+        def.channels = 2;
         def.bits_per_sample = 16;
         def.sample_rate = 44100;
         return def;
     }
 
-    /// Determines the value of a parameter
-    virtual FAUSTFLOAT getLabelValue(const char*label) {
-        return ui.getValue(label);
-    }
-
-    /// Defines the value of a parameter 
-    virtual bool setLabelValue(const char*label, FAUSTFLOAT value){
-        if (!is_read && !is_write) LOGE("setLabelValue must be called after begin");
-        bool result = ui.setValue(label, value);
-        LOGI("setLabelValue('%s',%f) -> %s", label, value, result?"true":"false");
-        return result;
-    }
 
     /// Checks the parameters and starts the processing
     bool begin(AudioBaseInfo cfg){
         LOGD(LOG_METHOD);
+        bool result = true;
+        this->cfg = cfg;
+        this->bytes_per_sample = cfg.bits_per_sample/8;
+
+        if (p_dsp==nullptr){
+#ifdef USE_MEMORY_MANAGER
+            DSP::fManager = new dsp_memory_manager();
+            DSP::memoryInfo();
+            p_dsp = DSP::create();
+#else
+            p_dsp = new DSP();
+#endif
+        }
+
         if (p_dsp==nullptr){
             LOGE("dsp is null");
             return false;
         }
 
-#ifdef USE_MEMORY_MANAGER
-        p_dsp->fManager = new dsp_memory_manager();
-        memoryInfo();
-#endif
-
-        bool result = true;
-        this->cfg = cfg;
-        bytes_per_sample = cfg.bits_per_sample/8;
-
+        DSP::classInit(cfg.sample_rate);
+        p_dsp->buildUserInterface(&ui);
         p_dsp->init(cfg.sample_rate);
+        p_dsp->instanceInit(cfg.sample_rate);
 
         // we do expect an output
         result = checkChannels();
@@ -90,9 +87,12 @@ class FaustStream : public AudioStreamX {
 
         LOGI("is_read: %s", is_read?"true":"false");
         LOGI("is_write: %s", is_write?"true":"false");
+        gate_exists = ui.exists("gate");
+        LOGI("gate_exists: %s", gate_exists?"true":"false");
 
         return result;
     }
+
 
     /// Ends the processing
     void end() {
@@ -100,6 +100,11 @@ class FaustStream : public AudioStreamX {
         is_read = false;
         is_write = false;
         p_dsp->instanceClear();
+#ifdef USE_MEMORY_MANAGER
+        DSP::destroy(p_dsp);
+        p_dsp = nullptr;
+#endif
+
     }
 
     /// Used if FaustStream is used as audio source 
@@ -149,40 +154,55 @@ class FaustStream : public AudioStreamX {
         return DEFAULT_BUFFER_SIZE / 4; // we limit the write size to 
     }
 
-    bool setMidiNote(int note){
+    /// Determines the value of a parameter
+    virtual FAUSTFLOAT labelValue(const char*label) {
+        return ui.getValue(label);
+    }
+
+    /// Defines the value of a parameter 
+    virtual bool setLabelValue(const char*label, FAUSTFLOAT value){
+        if (!is_read && !is_write) LOGE("setLabelValue must be called after begin");
+        bool result = ui.setValue(label, value);
+        LOGI("setLabelValue('%s',%f) -> %s", label, value, result?"true":"false");
+        return result;
+    }
+
+    virtual bool setMidiNote(int note){
         float frq = noteToFrequency(note);
         setFrequency(frq);
     }
 
-    bool setFrequency(FAUSTFLOAT freq){
+    virtual bool setFrequency(FAUSTFLOAT freq){
         return setLabelValue("freq", freq);
     }
 
-    FAUSTFLOAT frequency() {
-        return getLabelValue("freq");
+    virtual FAUSTFLOAT frequency() {
+        return labelValue("freq");
     }
 
-    bool setBend(FAUSTFLOAT bend){
+    virtual bool setBend(FAUSTFLOAT bend){
         return setLabelValue("bend", bend);
     }
 
-    FAUSTFLOAT bend() {
-        return getLabelValue("bend");
+    virtual FAUSTFLOAT bend() {
+        return labelValue("bend");
     }
 
-    bool setGain(FAUSTFLOAT gain){
+    virtual bool setGain(FAUSTFLOAT gain){
         return setLabelValue("gain", gain);
     }
 
-    FAUSTFLOAT gain() {
-        return getLabelValue("gain");
+    virtual FAUSTFLOAT gain() {
+        return labelValue("gain");
     }
 
-    bool midiOn(int note, FAUSTFLOAT gain){
+    virtual bool midiOn(int note, FAUSTFLOAT gain){
+        if (gate_exists) setLabelValue("gate",1.0);
         return setMidiNote(note) && setGain(gain);
     }
 
-    bool midiOff(int note){
+    virtual bool midiOff(int note){
+        if (gate_exists) setLabelValue("gate",0.0);
         return setMidiNote(note) && setGain(0.0);
     }
     
@@ -190,10 +210,11 @@ class FaustStream : public AudioStreamX {
     bool is_init = false;
     bool is_read = false;
     bool is_write = false;
+    bool gate_exists = false;
     bool with_output_buffer;
     int bytes_per_sample;
     int buffer_allocated;
-    dsp *p_dsp = nullptr;
+    DSP *p_dsp = nullptr;
     AudioBaseInfo cfg;
     AudioStream *p_out=nullptr;
     float** p_buffer=nullptr;
@@ -203,11 +224,19 @@ class FaustStream : public AudioStreamX {
     /// Checks the input and output channels and updates the is_write or is_read scenario flags
     bool checkChannels() {
         bool result = true;
-        if (p_dsp->getNumOutputs()>0){
-            if (p_dsp->getNumOutputs()==cfg.channels){
+
+        // update channels
+        int num_outputs = p_dsp->getNumOutputs();
+        if (cfg.channels!=num_outputs){
+            cfg.channels = num_outputs;
+            LOGW("Updating channels to %d", num_outputs);
+        }
+
+        if (num_outputs>0){
+            if (num_outputs==cfg.channels){
                 is_read = true;
             } else {
-                LOGE("NumOutputs is not matching with number of channels");
+                LOGE("NumOutputs %d is not matching with number of channels %d", num_outputs, cfg.channels);
                 result = false;
             }
             if (p_dsp->getNumInputs()!=0 && p_dsp->getNumInputs()!=cfg.channels){
