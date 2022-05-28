@@ -1,5 +1,5 @@
 
-// WARNNG: This sketch is too big to fit on an ESP32 !
+// WARNNG: This sketch is too big to fit on an ESP32 w/o PSRAM !
 
 
 #include "AudioTools.h"

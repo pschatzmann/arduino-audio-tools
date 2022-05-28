@@ -82,43 +82,7 @@ class UI {
         return result;
     }
 
-    bool setMidiNote(int note){
-        int frq = MidiCommon::noteToFrequency(note);
-        setFrequency(frq);
-    }
 
-    bool setFrequency(FAUSTFLOAT freq){
-        return setValue("freq", freq);
-    }
-
-    FAUSTFLOAT frequency() {
-        return getValue("freq");
-    }
-
-    bool setBend(FAUSTFLOAT bend){
-        return setValue("bend", freq);
-    }
-
-    FAUSTFLOAT bend() {
-        return getValue("bend");
-    }
-
-    bool setGain(FAUSTFLOAT gain){
-        return setValue("gain", gain);
-    }
-
-    FAUSTFLOAT gain() {
-        return getValue("gain");
-    }
-
-    bool midiOn(int note, FAUSTFLOAT gain){
-        return setMidiNote(note) && setGain(gain);
-    }
-
-    bool midiOff(int note){
-        return setMidiNote(note) && setGain(0.0);
-    }
-    
 
     // -- widget's layouts
     virtual void openTabBox(const char* label) {}
@@ -182,5 +146,65 @@ class UI {
         }
 
 };
+
+/**
+ * @brief Memory manager which uses psram when it is available
+ * 
+ */
+class dsp_memory_manager {
+public:
+    virtual ~dsp_memory_manager() {}
+
+    /**
+    * Inform the Memory Manager with the number of expected memory zones.
+    * @param count - the number of memory zones
+    */
+    virtual void begin(size_t count){
+        this->count = count;
+        total = 0;
+    }
+
+    /**
+    * Give the Memory Manager information on a given memory zone.
+    * @param size - the size in bytes of the memory zone
+    * @param reads - the number of Read access to the zone used to compute one frame
+    * @param writes - the number of Write access to the zone used to compute one frame
+    */
+    virtual void info(size_t size, size_t reads, size_t writes) {
+        total+=size;
+    }
+
+    /**
+    * Inform the Memory Manager that all memory zones have been described, 
+    * to possibly start a 'compute the best allocation strategy' step.
+    */
+    virtual void end(){
+        is_psram = total>2000 && ESP.getFreePsram()>0;
+    }
+
+    /**
+    * Allocate a memory zone.
+    * @param size - the memory zone size in bytes
+    */
+    virtual void* allocate(size_t size) {
+        return is_psram ? ps_malloc(size) : malloc(size);
+    };
+
+    /**
+    * Destroy a memory zone.
+    * @param ptr - the memory zone pointer to be deallocated
+    */
+    virtual void destroy(void* ptr) {
+        free(ptr);
+    };
+
+private:
+    size_t count;
+    size_t total;
+    bool is_psram = false;
+
+
+};
+
 
 
