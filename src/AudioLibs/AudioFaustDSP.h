@@ -6,6 +6,9 @@
 #define FAUSTFLOAT float
 #endif 
 
+#ifndef PSRAM_LIMIT
+#define PSRAM_LIMIT 1024
+#endif
 
 // forward declarations
 class UI;
@@ -70,7 +73,7 @@ class UI {
                     *(e->zone) = value;
                     result = true;
                 } else {
-                    LOGE("Value %s outsde limits", e->label);
+                    LOGE("Value '%s' outsde limits %f (%f-%f)", e->label, value, e->min, e->max);
                 }
             } else {
                 *(e->zone) = value;
@@ -105,7 +108,10 @@ class UI {
         addEntry(label, zone, true, min, max);
         *zone = init;
     }
-    virtual void addNumEntry(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT min, FAUSTFLOAT max, FAUSTFLOAT step) {}
+    virtual void addNumEntry(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT min, FAUSTFLOAT max, FAUSTFLOAT step) {
+        addEntry(label, zone, true, min, max);
+        *zone = init;
+    }
 
     // -- passive widgets
     virtual void addHorizontalBargraph(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT min, FAUSTFLOAT max) {}
@@ -116,6 +122,11 @@ class UI {
 
     // -- metadata declarations
     virtual void declare(FAUSTFLOAT* zone, const char* key, const char* val) {}
+
+    /// checks if a label exists
+    virtual bool exists(const char*label){
+        return findEntry(label)!=nullptr;
+    }
 
     protected:
         Vector<Entry> entries;
@@ -171,6 +182,7 @@ public:
     * @param writes - the number of Write access to the zone used to compute one frame
     */
     virtual void info(size_t size, size_t reads, size_t writes) {
+        LOGD("info %d", size);
         total+=size;
     }
 
@@ -180,6 +192,7 @@ public:
     */
     virtual void end(){
         is_psram = total>2000 && ESP.getFreePsram()>0;
+        LOGI("use PSRAM: %s", is_psram?"true":"false");
     }
 
     /**
@@ -187,14 +200,23 @@ public:
     * @param size - the memory zone size in bytes
     */
     virtual void* allocate(size_t size) {
-        return is_psram ? ps_malloc(size) : malloc(size);
+        LOGD("allocate %d", size);
+        void* result = is_psram && size > PSRAM_LIMIT ? ps_malloc(size) : malloc(size);
+        if (result!=nullptr){
+            memset(result, size, 0);
+        } else {
+            LOGE("allocate %u bytes - failed", (unsigned) size);
+        }
+        return result;
     };
+    
 
     /**
     * Destroy a memory zone.
     * @param ptr - the memory zone pointer to be deallocated
     */
     virtual void destroy(void* ptr) {
+        LOGD("destroy");
         free(ptr);
     };
 
