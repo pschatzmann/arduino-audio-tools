@@ -47,7 +47,7 @@ class AnalogAudioStream : public AudioStreamX {
     config.channels = info.channels;
     config.bits_per_sample = info.bits_per_sample;
     config.sample_rate = info.sample_rate;
-    begin(config)
+    begin(config);
  }
 
   bool begin(AnalogConfig cfg) {
