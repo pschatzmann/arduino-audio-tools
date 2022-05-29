@@ -81,10 +81,10 @@ class FaustStream : public AudioStreamX {
 
         // allocate array of channel data
         if (p_buffer==nullptr){
-            p_buffer = new float*[cfg.channels]();
+            p_buffer = new FAUSTFLOAT*[cfg.channels]();
         }
         if (with_output_buffer && p_buffer_out==nullptr){
-            p_buffer_out = new float*[cfg.channels]();
+            p_buffer_out = new FAUSTFLOAT*[cfg.channels]();
         }
 
         LOGI("is_read: %s", is_read?"true":"false");
@@ -135,10 +135,10 @@ class FaustStream : public AudioStreamX {
             // convert to float
             for(int j=0;j<samples;j+=cfg.channels){
                 for(int i=0;i<cfg.channels;i++){
-                    p_buffer[i][j] =  static_cast<float>(data16[j+i])/32767.0;
+                    p_buffer[i][j] =  static_cast<FAUSTFLOAT>(data16[j+i])/32767.0;
                 }
             }
-            float** p_float_out = with_output_buffer ? p_buffer_out : p_buffer; 
+            FAUSTFLOAT** p_float_out = with_output_buffer ? p_buffer_out : p_buffer; 
             p_dsp->compute(samples, p_buffer, p_float_out);
             // update buffer with data from faust
             convertFloatBufferToInt16(samples,(void*) write_data, p_float_out);
@@ -170,7 +170,7 @@ class FaustStream : public AudioStreamX {
     }
 
     virtual bool setMidiNote(int note){
-        float frq = noteToFrequency(note);
+        FAUSTFLOAT frq = noteToFrequency(note);
         return setFrequency(frq);
     }
 
@@ -219,8 +219,8 @@ class FaustStream : public AudioStreamX {
     DSP *p_dsp = nullptr;
     AudioBaseInfo cfg;
     AudioStream *p_out=nullptr;
-    float** p_buffer=nullptr;
-    float** p_buffer_out=nullptr;
+    FAUSTFLOAT** p_buffer=nullptr;
+    FAUSTFLOAT** p_buffer_out=nullptr;
     UI ui;
 
     /// Checks the input and output channels and updates the is_write or is_read scenario flags
@@ -258,7 +258,7 @@ class FaustStream : public AudioStreamX {
     }
 
     /// Converts the float buffer to int16 values
-    void convertFloatBufferToInt16(int samples, void *data, float**p_float_out){
+    void convertFloatBufferToInt16(int samples, void *data, FAUSTFLOAT**p_float_out){
         int16_t *data16 = (int16_t*) data;
         for (int j=0;j<samples;j+=cfg.channels){
             for (int i=0;i<cfg.channels;i++){
@@ -286,7 +286,7 @@ class FaustStream : public AudioStreamX {
         if (p_buffer[0]==nullptr){
             const int ch = cfg.channels;
             for (int j=0;j<ch;j++){
-                p_buffer[j] = new float[samples];
+                p_buffer[j] = new FAUSTFLOAT[samples];
             }
             buffer_allocated = samples;
         }
@@ -294,7 +294,7 @@ class FaustStream : public AudioStreamX {
             if (p_buffer_out[0]==nullptr){
                 const int ch = cfg.channels;
                 for (int j=0;j<ch;j++){
-                    p_buffer_out[j] = new float[samples];
+                    p_buffer_out[j] = new FAUSTFLOAT[samples];
                 }
             }
         }
@@ -317,8 +317,8 @@ class FaustStream : public AudioStreamX {
         } 
     }
 
-    float noteToFrequency(uint8_t x) {
-        float note = x;
+    FAUSTFLOAT noteToFrequency(uint8_t x) {
+        FAUSTFLOAT note = x;
         return 440.0 * pow(2.0f, (note-69)/12);
     }
 
