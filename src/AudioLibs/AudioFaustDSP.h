@@ -1,6 +1,8 @@
 #pragma once 
 
+#include "AudioConfig.h"
 #include "AudioBasic/Vector.h"
+#include "AudioBasic/Float16.h"
 
 #ifndef FAUSTFLOAT
 #define FAUSTFLOAT float
@@ -62,7 +64,7 @@ class UI {
         if (e==nullptr){
             LOGE("Label '%s' not found", label);
         }
-        return e!=nullptr ? *(e->zone) : 0.0;
+        return e!=nullptr ? *(e->zone) :(FAUSTFLOAT) 0.0;
     }
     virtual bool setValue(const char* label, FAUSTFLOAT value){
         bool result = false;
