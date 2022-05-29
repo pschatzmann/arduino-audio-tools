@@ -203,9 +203,6 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 
 #if defined(ESP32)  && defined(ARDUINO_ESP32C3_DEV)
 #include "esp32-hal-log.h"
-// optional libraries
-//#define USE_A2DP
-//#define USE_ESP8266_AUDIO
 
 #define USE_PWM
 #define USE_URL_ARDUINO
@@ -233,6 +230,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define I2S_AUTO_CLEAR true
 
 // URLStream
+//#define USE_ESP8266_AUDIO
 #define URL_STREAM_CORE 0
 #define URL_STREAM_PRIORITY 2
 #define URL_STREAM_BUFFER_COUNT 10
