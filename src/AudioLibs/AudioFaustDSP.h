@@ -128,6 +128,19 @@ class UI {
         return findEntry(label)!=nullptr;
     }
 
+    /// Returns the number of label entries
+    virtual size_t size() {
+        return entries.size();
+    }
+    
+    /// Returns the label at the indicated position. nullptr is returned if the index is too big
+    const char* label(int idx){
+        if (idx<size()){
+            return entries[idx].label;
+        }
+        return nullptr;
+    }
+
     protected:
         Vector<Entry> entries;
 
@@ -191,7 +204,9 @@ public:
     * to possibly start a 'compute the best allocation strategy' step.
     */
     virtual void end(){
+#ifdef ESP32
         is_psram = total>2000 && ESP.getFreePsram()>0;
+#endif
         LOGI("use PSRAM: %s", is_psram?"true":"false");
     }
 
@@ -201,7 +216,11 @@ public:
     */
     virtual void* allocate(size_t size) {
         LOGD("allocate %d", size);
+#ifdef ESP32
         void* result = is_psram && size > PSRAM_LIMIT ? ps_malloc(size) : malloc(size);
+#else
+        void* result = malloc(size);
+#endif
         if (result!=nullptr){
             memset(result, size, 0);
         } else {

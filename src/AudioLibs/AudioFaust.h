@@ -29,7 +29,9 @@ class FaustStream : public AudioStreamX {
         end();
         deleteFloatBuffer();
         delete p_dsp;
+#ifdef USE_MEMORY_MANAGER
         DSP::classDestroy();
+#endif
     }
 
 
@@ -169,7 +171,7 @@ class FaustStream : public AudioStreamX {
 
     virtual bool setMidiNote(int note){
         float frq = noteToFrequency(note);
-        setFrequency(frq);
+        return setFrequency(frq);
     }
 
     virtual bool setFrequency(FAUSTFLOAT freq){
@@ -283,7 +285,7 @@ class FaustStream : public AudioStreamX {
         }
         if (p_buffer[0]==nullptr){
             const int ch = cfg.channels;
-            for (int j=0;j<cfg.channels;j++){
+            for (int j=0;j<ch;j++){
                 p_buffer[j] = new float[samples];
             }
             buffer_allocated = samples;
@@ -291,7 +293,7 @@ class FaustStream : public AudioStreamX {
         if (allocate_out){
             if (p_buffer_out[0]==nullptr){
                 const int ch = cfg.channels;
-                for (int j=0;j<cfg.channels;j++){
+                for (int j=0;j<ch;j++){
                     p_buffer_out[j] = new float[samples];
                 }
             }
