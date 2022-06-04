@@ -16,6 +16,9 @@ AudioKitStream *pt_AudioKitStream = nullptr;
  */
 
 class AudioKitStreamConfig : public I2SConfig {
+
+friend class AudioKitStream;
+
  public:
   AudioKitStreamConfig() = default;
   // set adc channel with audio_hal_adc_input_t
@@ -245,17 +248,30 @@ class AudioKitStream : public AudioStreamX {
   }
 
   /// Update the audio info with new values: e.g. new sample_rate,
-  /// bits_per_samples or channels
+  /// bits_per_samples or channels. 
   virtual void setAudioInfo(AudioBaseInfo info) {
     LOGI(LOG_METHOD);
+
     if (cfg.sample_rate != info.sample_rate
+    && cfg.bits_per_sample == info.bits_per_sample
+    && cfg.channels == info.channels
+    && is_started) {
+      // update sample rate only
+      cfg.sample_rate = info.sample_rate;
+      cfg.logInfo();
+      converter.setInputInfo(cfg);
+      kit.setSampleRate(cfg.toSampleRate());
+    } else if (cfg.sample_rate != info.sample_rate
     || cfg.bits_per_sample != info.bits_per_sample
     || cfg.channels != info.channels
     || !is_started) {
+      // more has changed and we need to start the processing
       cfg.sample_rate = info.sample_rate;
       cfg.bits_per_sample = info.bits_per_sample;
       cfg.channels = info.channels;
+      cfg.logInfo();
 
+      // Stop first
       if(is_started){
         kit.end();
       }
@@ -263,6 +279,7 @@ class AudioKitStream : public AudioStreamX {
       converter.setInputInfo(cfg);
       // start kit with new config
       kit.begin(cfg.toAudioKitConfig());
+      is_started = true;
     }
   }
 
