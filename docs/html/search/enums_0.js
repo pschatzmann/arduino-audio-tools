@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['loglevel_1807',['LogLevel',['../classaudio__tools_1_1_audio_logger.html#a514bd8ffbf484d01cb439a4c82c305e0',1,'audio_tools::AudioLogger']]]
+  ['g7xxcodec_5fe_1868',['G7xxCODEC_e',['../namespaceaudio__tools.html#a69aecf151447208484a6805c7282a848',1,'audio_tools']]]
 ];

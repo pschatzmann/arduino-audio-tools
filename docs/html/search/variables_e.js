@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['use_5fdtx_1800',['use_dtx',['../structaudio__tools_1_1_opus_encoder_settings.html#ad5151084a24344a8c02b0ce22a792661',1,'audio_tools::OpusEncoderSettings']]]
+  ['use_5fdtx_1861',['use_dtx',['../structaudio__tools_1_1_opus_encoder_settings.html#ad5151084a24344a8c02b0ce22a792661',1,'audio_tools::OpusEncoderSettings']]]
 ];
