@@ -1,5 +1,5 @@
 /**
- * @file streams-url_mp3-audiokit.ino
+ * @file streams-url_aac-audiokit.ino
  * @author Phil Schatzmann
  * @brief decode MP3 stream from url and output it on I2S on audiokit
  * @version 0.1
@@ -11,13 +11,13 @@
 // install https://github.com/pschatzmann/arduino-libhelix.git
 
 #include "AudioTools.h"
-#include "AudioCodecs/CodecMP3Helix.h"
+#include "AudioCodecs/CodecAACHelix.h"
 #include "AudioLibs/AudioKit.h"
 
 
 URLStream url("ssid","password");  // or replace with ICYStream to get metadata
 AudioKitStream i2s; // final output of decoded stream
-EncodedAudioStream dec(&i2s, new MP3DecoderHelix()); // Decoding stream
+EncodedAudioStream dec(&i2s, new AACDecoderHelix()); // Decoding stream
 StreamCopy copier(dec, url); // copy url to decoder
 
 
@@ -32,8 +32,8 @@ void setup(){
   // setup I2S based on sampling rate provided by decoder
   dec.begin();
 
-  // mp3 radio
-  url.begin("http://stream.srg-ssr.ch/m/rsj/mp3_128","audio/mp3");
+  // aac radio
+  url.begin("http://mscp3.live-streams.nl:8340/jazz-high.aac","audio/aac");
 
 }
 
