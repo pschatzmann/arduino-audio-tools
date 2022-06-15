@@ -149,22 +149,18 @@ class MemoryStream : public AudioStream {
   MemoryStream(int buffer_size = 512) {
     LOGD("MemoryStream: %d", buffer_size);
     this->buffer_size = buffer_size;
-    this->buffer = new uint8_t[buffer_size];
     this->owns_buffer = true;
+    this->buffer.resize(buffer_size);
   }
 
   MemoryStream(const uint8_t *buffer, int buffer_size) {
     LOGD("MemoryStream: %d", buffer_size);
     this->buffer_size = buffer_size;
     this->write_pos = buffer_size;
-    this->buffer = (uint8_t *)buffer;
     this->owns_buffer = false;
+    this->buffer.resize(buffer_size);
   }
 
-  ~MemoryStream() {
-    LOGD(LOG_METHOD);
-    if (owns_buffer) delete[] buffer;
-  }
 
   // resets the read pointer
   bool begin() override {
@@ -172,6 +168,10 @@ class MemoryStream : public AudioStream {
     write_pos = buffer_size;
     read_pos = 0;
     return true;
+  }
+
+  void resize(int buffer_size){
+    this->buffer.resize(buffer_size);
   }
 
   virtual size_t write(uint8_t byte) override {
@@ -235,15 +235,19 @@ class MemoryStream : public AudioStream {
     read_pos = 0;
     if (reset) {
       // we clear the buffer data
-      memset(buffer, 0, buffer_size);
+      memset(buffer.data(), 0, buffer_size);
     }
+  }
+
+  uint8_t* data() {
+    return buffer.data();
   }
 
  protected:
   int write_pos = 0;
   int read_pos = 0;
   int buffer_size = 0;
-  uint8_t *buffer = nullptr;
+  Vector<uint8_t> buffer{0};
   bool owns_buffer = false;
 };
 

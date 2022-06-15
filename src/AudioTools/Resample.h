@@ -4,7 +4,7 @@
 
 namespace audio_tools {
 
-enum ResampleScenario {UP_SAMLE, DOWNSAMPLE_FACTOR, DOWNSAMPLE_SKIP_EVERY_NTH};
+enum ResampleScenario {UP_SAMPLE, DOWNSAMPLE_FACTOR, DOWNSAMPLE_SKIP_EVERY_NTH};
 enum ResamplePrecision { Low, Medium, High, VeryHigh};
 
 /**
@@ -89,12 +89,12 @@ class Resample : public AudioStreamX {
             }
             
             // convert
-            size_t bytes = 0;
             size_t result = 0;
             int sample_count = byte_count / sizeof(T);
+            bytes = 0;
 
             switch(scenario){
-                case UP_SAMLE: {
+                case UP_SAMPLE: {
                     allocateBuffer(sample_count*factor);
                     bytes = upsample((T*)src, buffer, sample_count, channels, factor) * sizeof(T);
                     result = p_out->write((uint8_t*)buffer, bytes) / factor;
@@ -137,7 +137,7 @@ class Resample : public AudioStreamX {
             size_t byte_count = 0;
 
             switch(scenario){
-                case UP_SAMLE: {
+                case UP_SAMPLE: {
                     int read_len = length / factor;
                     int sample_count = read_len / sizeof(T);
                     allocateBuffer(sample_count);
@@ -168,7 +168,12 @@ class Resample : public AudioStreamX {
 
             return byte_count;
         }
-   
+
+        size_t lastBytesWritten() {
+            return bytes;
+        }
+
+
     protected:
         ResampleScenario scenario;
         Print *p_out=nullptr;
@@ -181,6 +186,7 @@ class Resample : public AudioStreamX {
         int downsample_start_offset = 0;
         int downsample_skip_counter = 0;
         bool is_active = false;
+        size_t bytes = 0;
 
         // allocates a buffer; len is specified in samples
         void allocateBuffer(int len) {
@@ -262,7 +268,7 @@ class Resample : public AudioStreamX {
                     pos =(frame_pos+1)*factor; 
                     *p_data(pos, ch, to) = actual_data; 
                     result++;
-                    for (int16_t f=1;f<factor;f++){
+                    for (int16_t f=1;f<=factor;f++){
                         pos = ((frame_pos+1)*factor)+f; 
                         T tmp = actual_data + (diff*f);
                         *p_data(pos, ch, to) = tmp; 
@@ -466,7 +472,7 @@ class ResampleStream : public AudioStreamX {
             }
             if (cfg.skip_every_nth!=0){
                 // small scale resampling
-                if (up.begin(cfg.channels, 1.0, UP_SAMLE)){
+                if (up.begin(cfg.channels, 1.0, UP_SAMPLE)){
                     LOGI("up active");
                 }
                 if (down.begin(cfg.channels, cfg.skip_every_nth, DOWNSAMPLE_SKIP_EVERY_NTH)){
@@ -486,7 +492,7 @@ class ResampleStream : public AudioStreamX {
                 calc.begin(cfg.sample_rate_from, cfg.sample_rate, precision);
 
                 // initialize resamplers
-                if (up.begin(cfg.channels, calc.upsample(), UP_SAMLE)){
+                if (up.begin(cfg.channels, calc.upsample(), UP_SAMPLE)){
                     LOGI("up active");
                 }
                 if (down.begin(cfg.channels, calc.downsample(), calc.downsampleScenario())){
