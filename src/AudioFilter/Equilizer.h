@@ -29,7 +29,7 @@ struct ConfigEquilizer3Bands : public AudioBaseInfo {
  * @brief 3 Band Equilizer inspired from https://www.musicdsp.org/en/latest/Filters/236-3-band-equaliser.html
  * @author pschatzmann
  */
-class Equilizer3Bands : public AudioStream {
+class Equilizer3Bands : public AudioStreamX {
     public:
 
         Equilizer3Bands(Print &out) {
