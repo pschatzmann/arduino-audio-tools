@@ -31,6 +31,8 @@ void setup(void) {
   config.channels = channels;
   config.bits_per_sample = 16;
   config.rf_frequency = 835000; // carrier frequency
+  // config.modulation = MOD_AM;
+  // config.resample_scenario = UPSAMPLE;
   out.begin(config);
 
   // Setup sine wave

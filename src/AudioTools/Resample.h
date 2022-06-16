@@ -4,7 +4,7 @@
 
 namespace audio_tools {
 
-enum ResampleScenario {UPSAMPLE, UPSAMPLE_FACTOR, DOWNSAMPLE_FACTOR, DOWNSAMPLE_SKIP_EVERY_NTH};
+enum ResampleScenario {UPSAMPLE, UPSAMPLE_EXACT, DOWNSAMPLE, DOWNSAMPLE_EXACT };
 enum ResamplePrecision { Low, Medium, High, VeryHigh};
 
 /**
@@ -30,9 +30,9 @@ class Resample : public AudioStreamX {
          * @param channels number of channels (default 2)
          * @param factor use a negative value to downsample
          */
-        Resample(Print &out, int channels, int factor , ResampleScenario scenario){
+        bool begin(Print &out, int channels, int factor , ResampleScenario scenario){
             setOut(out);
-            begin(channels, factor, scenario);
+            return begin(channels, factor, scenario);
         }
         /**
          * @brief Construct a new Resample object
@@ -41,9 +41,9 @@ class Resample : public AudioStreamX {
          * @param channels 
          * @param factor 
          */
-        Resample(Stream &in, int channels, int factor, ResampleScenario scenario){
+        bool begin(Stream &in, int channels, int factor, ResampleScenario scenario){
             setIn(in);
-            begin(channels, factor, scenario);
+            return begin(channels, factor, scenario);
         }
 
         bool begin(int channels, int factor, ResampleScenario scenario) {
@@ -52,7 +52,7 @@ class Resample : public AudioStreamX {
             this->scenario = scenario;
             LOGI("Resample factor: %d for %d channels", factor, channels);
 
-            if (this->scenario==DOWNSAMPLE_SKIP_EVERY_NTH){
+            if (this->scenario==DOWNSAMPLE){
                 is_active = (factor != 0);
             } else {
                 is_active = (factor != 1);
@@ -95,22 +95,22 @@ class Resample : public AudioStreamX {
             bytes = 0;
 
             switch(scenario){
-                case UPSAMPLE: {
+                case UPSAMPLE_EXACT: {
                     allocateBuffer(sample_count*factor);
                     bytes = upsample((T*)src, buffer, sample_count, channels, factor) * sizeof(T);
                     result = p_out->write((uint8_t*)buffer, bytes) / factor;
                      } break;
-                case UPSAMPLE_FACTOR: {
+                case UPSAMPLE: {
                     allocateBuffer(sample_count*factor);
                     bytes = upsampleMultiply((T*)src, buffer, sample_count, channels, factor) * sizeof(T);
                     result = p_out->write((uint8_t*)buffer, bytes) / factor;
                      } break;
-                case DOWNSAMPLE_FACTOR: {
+                case DOWNSAMPLE_EXACT: {
                     allocateBuffer(sample_count/factor);
                     bytes = downsample((T*)src, buffer , sample_count, channels, factor) * sizeof(T);
                     result = p_out->write((uint8_t*)buffer, bytes) * factor;
                     }  break;
-                case DOWNSAMPLE_SKIP_EVERY_NTH: {
+                case DOWNSAMPLE: {
                     allocateBuffer(sample_count);
                     int skip_every_nth = factor;
                     bytes = downsampleSkip((T*)src, buffer , sample_count, channels, skip_every_nth) * sizeof(T);
@@ -143,7 +143,7 @@ class Resample : public AudioStreamX {
             size_t byte_count = 0;
 
             switch(scenario){
-                case UPSAMPLE: {
+                case UPSAMPLE_EXACT: {
                     int read_len = length / factor;
                     int sample_count = read_len / sizeof(T);
                     allocateBuffer(sample_count);
@@ -151,7 +151,7 @@ class Resample : public AudioStreamX {
                     sample_count = read_len / sizeof(T);
                     byte_count = upsample(buffer,(T*)src, sample_count, channels, factor) * sizeof(T);
                     } break;
-                case UPSAMPLE_FACTOR: {
+                case UPSAMPLE: {
                     int read_len = length / factor;
                     int sample_count = read_len / sizeof(T);
                     allocateBuffer(sample_count);
@@ -159,7 +159,7 @@ class Resample : public AudioStreamX {
                     sample_count = read_len / sizeof(T);
                     byte_count = upsampleMultiply(buffer,(T*)src, sample_count, channels, factor) * sizeof(T);
                     } break;
-                case DOWNSAMPLE_FACTOR: {
+                case DOWNSAMPLE_EXACT: {
                     int read_len = length * factor;
                     int sample_count = read_len / sizeof(T);
                     allocateBuffer(sample_count);
@@ -167,7 +167,7 @@ class Resample : public AudioStreamX {
                     sample_count = read_len / sizeof(T);
                     byte_count = downsample(buffer,(T*)src, sample_count, channels, factor) * sizeof(T);
                     } break;
-                case DOWNSAMPLE_SKIP_EVERY_NTH: {
+                case DOWNSAMPLE: {
                     int read_len = length +  (length / factor);
                     int sample_count = read_len / sizeof(T);
                     allocateBuffer(sample_count);
@@ -211,6 +211,7 @@ class Resample : public AudioStreamX {
             }
             if (last_end==nullptr){
                 last_end = new T[channels];
+                memset(last_end,0, sizeof(T)*channels);
             }
         }
 
@@ -268,9 +269,10 @@ class Resample : public AudioStreamX {
         }
 
 
-        /// Increases the samples by the indicated factor: We repeat the input samples
+        /// Increases the samples by the indicated factor: We repeat the input samples.
         size_t upsampleMultiply(T *from, T* to, int sample_count, int channels, int factor ){
             int frame_count = sample_count/channels;
+            memset(to,0, sample_count*factor*2);
             // just repeat each frame facor times
             int idx = 0;
             for (int j=0;j<frame_count;j++){
@@ -280,7 +282,6 @@ class Resample : public AudioStreamX {
                     }
                 }
             }
-
             return sample_count*channels*factor;
         }
 
@@ -308,12 +309,11 @@ class Resample : public AudioStreamX {
                 }
             }
             // save last frame_pos data
-            pos = frame_count*factor;
             for (int8_t ch=0; ch<channels; ch++){
                 T tmp = *p_data(frame_count-1, ch, from); 
                 last_end[ch] = tmp;
             }
-            return pos*channels;
+            return frame_count*factor*channels;
         }
 
 
@@ -321,7 +321,9 @@ class Resample : public AudioStreamX {
         T* p_data(int frame_pos, int channel, T*start){
             return frame_pos>=0 ? start+(frame_pos*channels)+channel : last_end+channel;
         }
+
 };
+
 
 /**
  * @brief Class to determine a combination of upsample and downsample rates to achieve any ratio
@@ -381,7 +383,7 @@ class ResampleParameterEstimator {
         }
 
         ResampleScenario downsampleScenario() {
-            return DOWNSAMPLE_FACTOR;
+            return DOWNSAMPLE_EXACT;
         }
 
         /// Determines a supported downsampling write size
@@ -507,7 +509,7 @@ class ResampleStream : public AudioStreamX {
                 if (up.begin(cfg.channels, 1.0, UPSAMPLE)){
                     LOGI("up active");
                 }
-                if (down.begin(cfg.channels, cfg.skip_every_nth, DOWNSAMPLE_SKIP_EVERY_NTH)){
+                if (down.begin(cfg.channels, cfg.skip_every_nth, DOWNSAMPLE)){
                     LOGI("down active");
                 }
             } else {
@@ -564,5 +566,72 @@ class ResampleStream : public AudioStreamX {
         ResamplePrecision precision;
 
 };
+
+/**
+ * @brief Resampler which uses an internal buffer. We can write the original data and then access the data
+ * as array
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ * @tparam T 
+ */
+template<typename T>
+class ResampleBuffer  {
+  public:
+    ResampleBuffer() = default;
+
+    bool begin(int channels, int factor , ResampleScenario scenario)  {
+        resampler.begin(resampled_data, channels, factor, scenario);
+        this->factor = factor;
+        return true;
+    }
+
+    /// Writes the data up or downsampled to the final destination
+    size_t write(const uint8_t *src, size_t byte_count)  {
+        resampled_byte_count = byte_count * factor;
+        resampled_data.resize(resampled_byte_count);
+        resampled_data.clear();
+        size_t result = resampler.write(src, byte_count); 
+        if (result!=byte_count){
+            LOGE("Could not write all %d bytes: %d", byte_count, result);
+        }
+        return result;
+    }
+
+    /// Writes the data up or downsampled to the final destination
+    size_t write(const T *src, size_t sample_count)  {
+        return write((uint8_t *)src, sample_count*sizeof(T)) / sizeof(T); 
+    }
+
+    /// privides the size in bytes
+    size_t size() {
+        return resampled_byte_count;
+    }
+
+    /// Provides the number of avilable samples
+    size_t samples() {
+        return resampled_byte_count / sizeof(T);
+    }
+
+    T operator [](int idx){
+        if (idx>=samples()) return 0;
+        T *ptr =  (T *)resampled_data.data();
+        return ptr[idx];
+    }
+
+    T* data() {
+        return  (T *)resampled_data.data();
+    }
+
+    uint8_t* dataBytes() {
+        return  resampled_data.data();
+    }
+
+   protected:
+     MemoryStream resampled_data;
+     Resample<T> resampler;
+     int factor;
+     int resampled_byte_count;
+};
+
 
 } // namespace
