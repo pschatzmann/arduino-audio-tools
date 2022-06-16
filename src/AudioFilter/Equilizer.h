@@ -155,15 +155,34 @@ class Equilizer3Bands : public AudioStreamX {
                         size_t sample_count = len / sizeof(int16_t);
                         for (int j=0; j<sample_count; j+=p_cfg->channels){
                             for (int ch=0; ch<p_cfg->channels; ch++){
-                                p_dataT[j+ch] = sample(state[ch], 1.0 / 32767.0 * p_dataT[j+ch]) * 32767;
+                                //p_dataT[j+ch] = sample(state[ch], 1.0 / 32767.0 * p_dataT[j+ch]) * 32767;
+                                p_dataT[j+ch] = toInt16(sample(state[ch], toFloat(p_dataT[j+ch])));
                             }
                         }
                     }
+                    break;
+
                 default: 
-                    LOGE("Only 16 bits supported");
+                    LOGE("Only 16 bits supported: %d", p_cfg->bits_per_sample);
                     break;
             }
+        }
 
+        /// convert float in the range -1 to 1 to a int16 and clip the values that are out of range
+        inline int16_t toInt16(float v){
+            float result = v * 32767.0;
+            // clip result
+            if (result>32767){
+                result = 32767;
+            } else if (result<-32767){
+                result = -32767;
+            }
+            return result;
+        }
+
+        /// convert float in the range -1 to 1 to a int16 and clip the values that are out of range
+        inline float toFloat(int16_t v){
+            return  static_cast<float>(v) / 32767.0;
         }
 
         // calculates a single sample using the indicated state 
