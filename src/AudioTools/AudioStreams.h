@@ -146,11 +146,13 @@ class AudioStreamWrapper : public AudioStream {
  */
 class MemoryStream : public AudioStream {
  public:
-  MemoryStream(int buffer_size = 512) {
+  MemoryStream(int buffer_size = 0) {
     LOGD("MemoryStream: %d", buffer_size);
     this->buffer_size = buffer_size;
     this->owns_buffer = true;
-    this->buffer.resize(buffer_size);
+    if (buffer_size>0){
+      this->buffer.resize(buffer_size);
+    }
   }
 
   MemoryStream(const uint8_t *buffer, int buffer_size) {
@@ -160,7 +162,6 @@ class MemoryStream : public AudioStream {
     this->owns_buffer = false;
     this->buffer.resize(buffer_size);
   }
-
 
   // resets the read pointer
   bool begin() override {
@@ -172,6 +173,7 @@ class MemoryStream : public AudioStream {
 
   void resize(int buffer_size){
     this->buffer.resize(buffer_size);
+    this->buffer_size = buffer_size;
   }
 
   virtual size_t write(uint8_t byte) override {
@@ -185,17 +187,14 @@ class MemoryStream : public AudioStream {
   }
 
   virtual size_t write(const uint8_t *buffer, size_t size) override {
-    size_t result = 0;
-    for (size_t j = 0; j < size; j++) {
-      if (!write(buffer[j])) {
-        break;
-      }
-      result = j;
-    }
+    size_t result = min(size, buffer_size);
+    memcpy(this->buffer.data(),buffer, result);
     return result;
   }
 
   virtual int available() override { return write_pos - read_pos; }
+
+  virtual int availableForWrite() override { return size() - available(); }
 
   virtual int read() override {
     int result = peek();
@@ -243,10 +242,14 @@ class MemoryStream : public AudioStream {
     return buffer.data();
   }
 
+  size_t size() {
+    return buffer.size();
+  }
+
  protected:
   int write_pos = 0;
   int read_pos = 0;
-  int buffer_size = 0;
+  size_t buffer_size = 0;
   Vector<uint8_t> buffer{0};
   bool owns_buffer = false;
 };

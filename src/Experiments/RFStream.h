@@ -29,6 +29,7 @@ struct RFConfig : public AnalogConfig {
     int output_channels = 1;
     int output_sample_rate = MAX_SAMPLE_RATE;
     RFModulation modulation = MOD_AM;
+    ResampleScenario resample_scenario = UPSAMPLE;
     float fm_width = 100.0;
 };
 
@@ -53,16 +54,15 @@ public:
             return false;
         }
 
-        reducer.setSourceChannels(cfg.channels);
-        reducer.setTargetChannels(cfg.output_channels);
+        if (cfg.channels>cfg.output_channels){
+            LOGW("Combining channels to 1");
+            reducer.setSourceChannels(cfg.channels);
+            reducer.setTargetChannels(cfg.output_channels);
+        } 
 
         // setup resampler
         resample_factor = cfg.output_sample_rate/cfg.sample_rate;
-        if (p_resample!=nullptr){
-            delete p_resample;
-        }
-        p_resample = new Resample<int16_t>(resampled_data, cfg.output_channels, resample_factor, UPSAMPLE_FACTOR);
-
+        resampler.begin(cfg.output_channels, resample_factor, cfg.resample_scenario);
 
         // setup analog output via i2s
         auto ocfg = AnalogAudioStream::defaultConfig();
@@ -75,13 +75,12 @@ public:
             LOGI("setting max sample rate");
             cfg.output_sample_rate = MAX_SAMPLE_RATE;
             setMaxSampleRate();
+
+            // setup carrier
+            float rate = carrier.setupSine(cfg.output_sample_rate,cfg.rf_frequency);
+            LOGW("Effecting rf frequency: %d for requested %d",rate, cfg.rf_frequency);
+            carrier.begin();
         }
-
-        // setup carrier
-        float rate = carrier.setupSine(cfg.output_sample_rate,cfg.rf_frequency);
-        LOGW("Effecting rf frequency: %d for requested %d",rate, cfg.rf_frequency);
-        carrier.begin();
-
 
         return true;
     }
@@ -89,13 +88,15 @@ public:
 
     /// Writes the audio data to I2S
     virtual size_t write(const uint8_t *buffer, size_t size) override {
-        if (resample_factor==0 || p_resample==nullptr) return 0;
+        if (resample_factor==0) return 0;
 
         // convert number of channels if necessary
         size_t bytes = size;
         if (cfg.channels>cfg.output_channels){
+            LOGW("Combining channels to 1");
             bytes = reducer.convert((uint8_t*)buffer, size);
         }
+        size_t input_samples = bytes / sizeof(int16_t); 
 
         int16_t* resampled_data16 = nullptr;
         size_t resampled_samples = bytes/2;
@@ -104,11 +105,10 @@ public:
             // resample buffer
             resampled_bytes = bytes*resample_factor;
             resampled_samples = resampled_bytes / 2;
-            resampled_data.resize(resampled_bytes);
-            p_resample->write((uint8_t*)buffer, bytes);
-            resampled_data16 = (int16_t*)resampled_data.data();
-            // final result
+            resampler.write(buffer, bytes);
+            resampled_data16 = resampler.data();
         }
+        
         out_data.resize(resampled_samples);
 
         switch(cfg.modulation){
@@ -127,13 +127,14 @@ public:
 
         }
 
-        // output to analog pins
-        AnalogAudioStream::write((uint8_t*)out_data.data(), resampled_bytes);
-
+#ifdef DEBUG_RFDATA
         int16_t* pt16 = (int16_t*) out_data.data();
         for (int j=0;j<resampled_samples;j++){
             Serial.println(pt16[j]);
         }
+#endif
+        // output to analog pins
+        AnalogAudioStream::write((uint8_t*)out_data.data(), resampled_bytes);
 
 
         return size;
@@ -143,7 +144,7 @@ public:
         return cfg;
     }
 
-    inline void modulateAM(Vector<int16_t> out_data, int16_t* resampled_data16, size_t resampled_samples ){
+    inline void modulateAM(Vector<int16_t> &out_data, int16_t* resampled_data16, size_t resampled_samples ){
         // fm modulate
         for (uint32_t i=0; i<resampled_samples; i+=cfg.output_channels) {
             float carrier_sample = carrier.readSample();
@@ -153,7 +154,7 @@ public:
         }
     }
 
-    inline void outputCarrierOnly(Vector<int16_t> out_data, int16_t* resampled_data16, size_t resampled_samples ){
+    inline void outputCarrierOnly(Vector<int16_t> &out_data, int16_t* resampled_data16, size_t resampled_samples ){
         // fm modulate
         for (uint32_t i=0; i<resampled_samples; i+=cfg.output_channels) {
             float carrier_sample = carrier.readSample();
@@ -163,7 +164,7 @@ public:
         }
     }
 
-    inline void outputSignalOnly(Vector<int16_t> out_data, int16_t* resampled_data16, size_t resampled_samples ){
+    inline void outputSignalOnly(Vector<int16_t> &out_data, int16_t* resampled_data16, size_t resampled_samples ){
         // fm modulate
         for (uint32_t i=0; i<resampled_samples; i+=cfg.output_channels) {
             for (int ch = 0;ch<cfg.output_channels;ch++){
@@ -179,11 +180,10 @@ public:
 protected:
     RFConfig cfg;
     GeneratorFromArray<float> carrier;                // subclass of SoundGenerator with max amplitude of 32000
-    MemoryStream resampled_data;
-    AnalogAudioStream out; 
-    Resample<int16_t> *p_resample = nullptr;
+    ResampleBuffer<int16_t> resampler;
     Vector<int16_t> out_data{0};
     ChannelReducer<int16_t> reducer;
+    AnalogAudioStream out; 
     int resample_factor = 0;
 
 };
