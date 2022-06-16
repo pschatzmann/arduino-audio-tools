@@ -10,11 +10,13 @@
 
 namespace audio_tools {
 
+#define MAX_SAMPLE_RATE 10006483
+
 /**
  * @brief Modulation: for the time beeing only Amplitude Modulation (AM) is supported
  * 
  */
-enum RFModulation {MOD_AM, MOD_FM, MOD_CARRIER_ONLY, MOD_SIGNAL_ONLY};
+enum RFModulation {MOD_AM, MOD_FM, OUT_CARRIER_ONLY,  OUT_SIGNAL_ONLY,OUT_SIGNAL_RESAMPLED } ;
 
 /**
  * @brief Configuration for RfStream
@@ -25,14 +27,14 @@ struct RFConfig : public AnalogConfig {
     }
     int rf_frequency = 835000;
     int output_channels = 1;
-    int output_sample_rate = 13000000;
+    int output_sample_rate = MAX_SAMPLE_RATE;
     RFModulation modulation = MOD_AM;
     float fm_width = 100.0;
 };
 
 
 /**
- * @brief RFStream which uses AM Modulation of 835kHz. The output is on the ESP32 Internal DAC pins
+ * @brief Radio Frequency Stream which uses AM Modulation of 835kHz (as default). The output is on the ESP32 Internal DAC pins
  * inspired by https://github.com/bitluni/ESP32AMRadioTransmitter
  * 
  */
@@ -59,22 +61,27 @@ public:
         if (p_resample!=nullptr){
             delete p_resample;
         }
-        p_resample = new Resample<int16_t>(resampled_data, cfg.output_channels, resample_factor, UP_SAMPLE);
+        p_resample = new Resample<int16_t>(resampled_data, cfg.output_channels, resample_factor, UPSAMPLE_FACTOR);
 
-        // carrier tone
-        auto cfgc = carrier.defaultConfig();
-        cfgc.sample_rate = cfg.output_sample_rate;
-        cfgc.channels = cfg.output_channels;
-        carrier.begin(cfgc, cfg.rf_frequency);
 
         // setup analog output via i2s
         auto ocfg = AnalogAudioStream::defaultConfig();
         ocfg.setAudioInfo(cfg);
         ocfg.channels = cfg.output_channels;
+        ocfg.sample_rate = cfg.sample_rate;
         AnalogAudioStream::begin(cfg);
-        if (cfg.output_sample_rate>=10000000){
+    
+        if (cfg.modulation!=OUT_SIGNAL_ONLY  && cfg.output_sample_rate>=10000000){
+            LOGI("setting max sample rate");
+            cfg.output_sample_rate = MAX_SAMPLE_RATE;
             setMaxSampleRate();
         }
+
+        // setup carrier
+        float rate = carrier.setupSine(cfg.output_sample_rate,cfg.rf_frequency);
+        LOGW("Effecting rf frequency: %d for requested %d",rate, cfg.rf_frequency);
+        carrier.begin();
+
 
         return true;
     }
@@ -90,34 +97,44 @@ public:
             bytes = reducer.convert((uint8_t*)buffer, size);
         }
 
-        // resample buffer
-        size_t resampled_bytes = bytes*resample_factor;
-        resampled_data.resize(resampled_bytes);
-        p_resample->write((uint8_t*)buffer, bytes);
-        // resampling result
-        int16_t* resampled_data16 = (int16_t*)resampled_data.data();
-        resampled_bytes = p_resample->lastBytesWritten();
-        size_t resampled_samples = resampled_bytes / sizeof(int16_t);
+        int16_t* resampled_data16 = nullptr;
+        size_t resampled_samples = bytes/2;
+        size_t resampled_bytes = bytes;
+        if (cfg.modulation != OUT_SIGNAL_ONLY){
+            // resample buffer
+            resampled_bytes = bytes*resample_factor;
+            resampled_samples = resampled_bytes / 2;
+            resampled_data.resize(resampled_bytes);
+            p_resample->write((uint8_t*)buffer, bytes);
+            resampled_data16 = (int16_t*)resampled_data.data();
+            // final result
+        }
         out_data.resize(resampled_samples);
 
         switch(cfg.modulation){
             case MOD_AM:
-                modulateAM(resampled_data16, resampled_samples);
+                modulateAM(out_data, resampled_data16, resampled_samples);
                 break;
-            case MOD_FM:
-                modulateFM(resampled_data16, resampled_samples);
+            case OUT_CARRIER_ONLY:
+                outputCarrierOnly(out_data, resampled_data16, resampled_samples);
                 break;
-            case MOD_CARRIER_ONLY:
-                modulateCarrierOnly(resampled_data16, resampled_samples);
+            case OUT_SIGNAL_ONLY:
+                outputSignalOnly(out_data, (int16_t*)buffer, resampled_samples);
                 break;
-            case MOD_SIGNAL_ONLY:
-                modulateSignalOnly(resampled_data16, resampled_samples);
+            case OUT_SIGNAL_RESAMPLED:
+                outputSignalOnly(out_data, resampled_data16, resampled_samples);
                 break;
 
         }
 
         // output to analog pins
         AnalogAudioStream::write((uint8_t*)out_data.data(), resampled_bytes);
+
+        int16_t* pt16 = (int16_t*) out_data.data();
+        for (int j=0;j<resampled_samples;j++){
+            Serial.println(pt16[j]);
+        }
+
 
         return size;
     }
@@ -126,30 +143,17 @@ public:
         return cfg;
     }
 
-    inline void modulateAM( int16_t* resampled_data16, size_t resampled_samples ){
+    inline void modulateAM(Vector<int16_t> out_data, int16_t* resampled_data16, size_t resampled_samples ){
         // fm modulate
         for (uint32_t i=0; i<resampled_samples; i+=cfg.output_channels) {
             float carrier_sample = carrier.readSample();
             for (int ch = 0;ch<cfg.output_channels;ch++){
-                out_data[i+ch] =  carrier_sample/32000.0 * resampled_data16[i+ch];
+                out_data[i+ch] =  carrier_sample * resampled_data16[i+ch];
             }
         }
     }
 
-
-    inline void modulateFM( int16_t* resampled_data16, size_t resampled_samples ){
-        // fm modulate
-        for (uint32_t i=0; i<resampled_samples; i+=cfg.output_channels) {
-            float width = static_cast<float>(resampled_data16[i])/32767.0 * cfg.fm_width;
-            carrier.setFrequency(getCarrierFrequncy() + width);
-            float carrier_sample = carrier.readSample();
-            for (int ch = 0;ch<cfg.output_channels;ch++){
-                out_data[i+ch] =  carrier_sample;
-            }
-        }
-    }
-
-    inline void modulateCarrierOnly( int16_t* resampled_data16, size_t resampled_samples ){
+    inline void outputCarrierOnly(Vector<int16_t> out_data, int16_t* resampled_data16, size_t resampled_samples ){
         // fm modulate
         for (uint32_t i=0; i<resampled_samples; i+=cfg.output_channels) {
             float carrier_sample = carrier.readSample();
@@ -159,7 +163,7 @@ public:
         }
     }
 
-    inline void modulateSignalOnly( int16_t* resampled_data16, size_t resampled_samples ){
+    inline void outputSignalOnly(Vector<int16_t> out_data, int16_t* resampled_data16, size_t resampled_samples ){
         // fm modulate
         for (uint32_t i=0; i<resampled_samples; i+=cfg.output_channels) {
             for (int ch = 0;ch<cfg.output_channels;ch++){
@@ -174,7 +178,7 @@ public:
 
 protected:
     RFConfig cfg;
-    SineFromTable<int16_t> carrier{32000};                // subclass of SoundGenerator with max amplitude of 32000
+    GeneratorFromArray<float> carrier;                // subclass of SoundGenerator with max amplitude of 32000
     MemoryStream resampled_data;
     AnalogAudioStream out; 
     Resample<int16_t> *p_resample = nullptr;

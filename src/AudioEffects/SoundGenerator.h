@@ -411,6 +411,12 @@ class GeneratorFromArray : public SoundGenerator<T> {
         setArray(array, arrayLen);
     }
 
+    ~GeneratorFromArray(){
+        if (owns_data){
+            delete[] table;
+        }
+    }
+
     template  <int arrayLen> 
     void setArray(T(&array)[arrayLen]){
         LOGD(LOG_METHOD);
@@ -463,11 +469,24 @@ class GeneratorFromArray : public SoundGenerator<T> {
       return result;
     }
 
+    // Sets up a sine table - returns
+    int setupSine(int sampleRate, int reqFrequency, float amplitude=1.0){
+        int sample_count = sampleRate / reqFrequency  ; // e.g.  44100 / 300hz = 147 samples per wave
+        float angle = 2.0*PI / sample_count; 
+        table = new T[sample_count];
+        for (int j=0;j<sample_count;j++){
+            table[j] = sin(j*angle) * amplitude;
+        }
+        owns_data = true;
+        table_length = sample_count;
+        // calculate effective frequency
+        return sampleRate / sample_count;
+    }
+
     // Similar like is active to check if the array is still playing.  
     bool isRunning() {
         return is_running;
     }
-
 
   protected:
     int sound_index = 0;
@@ -475,9 +494,55 @@ class GeneratorFromArray : public SoundGenerator<T> {
     int repeat_counter = 0;
     bool inactive_at_end;
     bool is_running = false;
+    bool owns_data = false;
     T *table;
     size_t table_length = 0;
 
+};
+
+/**
+ * @brief Just returns a constant value
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ * @tparam T 
+ */
+template <class T>
+class GeneratorFixedValue : public SoundGenerator<T> {
+  public:
+
+    GeneratorFixedValue() = default;
+
+    virtual bool begin(AudioBaseInfo info) {
+        return SoundGenerator<T>::begin(info);
+    }
+
+    void setValue(T value){
+        value_set = value;
+    }
+
+    /// Starts the generation of samples
+    bool begin() override {
+      LOGI(LOG_METHOD);
+      SoundGenerator<T>::begin();
+      is_running = true;
+      value_return = value_set;
+      return true;
+    }
+
+    /// Provides a single sample
+    T readSample() override {
+        return value_return;
+    }
+
+    // Similar like is active to check if the array is still playing.  
+    bool isRunning() {
+        return is_running;
+    }
+
+  protected:
+    T value_set = 0;
+    T value_return = 0;
+    bool is_running = false;
 };
 
 /**
