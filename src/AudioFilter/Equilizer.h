@@ -57,9 +57,13 @@ class Equilizer3Bands : public AudioStreamX {
             if (state!=nullptr) delete[]state;
         }
 
-        ConfigEquilizer3Bands defaultConfig() {
-            ConfigEquilizer3Bands v;
-            return v;
+        ConfigEquilizer3Bands &config() {
+            return cfg;
+        }
+
+
+        ConfigEquilizer3Bands &defaultConfig() {
+            return config();
         }
 
         bool begin(ConfigEquilizer3Bands &config){
@@ -69,16 +73,14 @@ class Equilizer3Bands : public AudioStreamX {
                 state = new EQSTATE[p_cfg->channels];
                 max_state_count = p_cfg->channels;
             }
-            // Clear state
-            memset(&state[0],0,sizeof(EQSTATE));
 
-            // Calculate filter cutoff frequencies
-            state[0].lf = 2 * sin(M_PI * ((float)p_cfg->freq_low / (float)p_cfg->sample_rate));
-            state[0].hf = 2 * sin(M_PI * ((float)p_cfg->freq_high / (float)p_cfg->sample_rate));
+            // Setup state
+            for (int j=0;j<max_state_count;j++){
+                memset(&state[j],0,sizeof(EQSTATE));
 
-            // setup state for all channels
-            for (int j=1;j<p_cfg->channels;j++){
-                state[j]=state[0];
+                // Calculate filter cutoff frequencies
+                state[j].lf = 2 * sin(M_PI * ((float)p_cfg->freq_low / (float)p_cfg->sample_rate));
+                state[j].hf = 2 * sin(M_PI * ((float)p_cfg->freq_high / (float)p_cfg->sample_rate));
             }
             return true;
         }
@@ -115,12 +117,13 @@ class Equilizer3Bands : public AudioStreamX {
 
 
     protected:
+        ConfigEquilizer3Bands cfg;
+        ConfigEquilizer3Bands *p_cfg=&cfg;
         const float vsa = (1.0 / 4294967295.0);   // Very small amount (Denormal Fix)
         Print *p_print = nullptr; // support for write
         Stream *p_stream = nullptr; // support for write
         AudioPrint *p_out=nullptr; // support for write
         AudioStream *p_in=nullptr; // support for readBytes
-        ConfigEquilizer3Bands *p_cfg=nullptr;
         int max_state_count=0;
 
         struct EQSTATE {
@@ -152,29 +155,13 @@ class Equilizer3Bands : public AudioStreamX {
                         size_t sample_count = len / sizeof(int16_t);
                         for (int j=0; j<sample_count; j+=p_cfg->channels){
                             for (int ch=0; ch<p_cfg->channels; ch++){
-                                p_dataT[j+ch] = sample(state[ch], p_dataT[j+ch]);
+                                p_dataT[j+ch] = sample(state[ch], 1.0 / 32767.0 * p_dataT[j+ch]) * 32767;
                             }
                         }
                     }
-                case 24: {
-                        int24_t* p_dataT = (int24_t*)data;
-                        size_t sample_count = len / sizeof(int24_t);
-                        for (int j=0; j<sample_count; j+=p_cfg->channels){
-                            for (int ch=0; ch<p_cfg->channels; ch++){
-                                int32_t tmp_i = sample(state[ch],p_dataT[j+ch].toFloat());
-                                p_dataT[j+ch] = tmp_i;
-                            }
-                        }
-                    }
-                case 32: {
-                        int32_t* p_dataT = (int32_t*)data;
-                        size_t sample_count = len / sizeof(int32_t);
-                        for (int j=0; j<sample_count; j+=p_cfg->channels){
-                            for (int ch=0; ch<p_cfg->channels; ch++){
-                                p_dataT[j+ch] = (const int32_t)sample(state[ch], p_dataT[j+ch]);
-                            }
-                        }
-                    }
+                default: 
+                    LOGE("Only 16 bits supported");
+                    break;
             }
 
         }

@@ -33,9 +33,10 @@ void setup() {
 
   // setup equilizer
   cfg_eq = eq.defaultConfig();
-  cfg_eq.gain_low = 0.5
-  cfg_eq.gain_medium = 0.5
-  cfg_eq.gain_high = 1.0
+  cfg_eq.setAudioInfo(kit); // use channels, bits_per_sample and sample_rate from kit
+  cfg_eq.gain_low = 0.5;
+  cfg_eq.gain_medium = 0.5;
+  cfg_eq.gain_high = 1.0;
   eq.begin(cfg_eq);
 
   // register callback

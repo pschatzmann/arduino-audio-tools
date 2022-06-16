@@ -4,7 +4,7 @@
 
 namespace audio_tools {
 
-enum ResampleScenario {UP_SAMPLE, DOWNSAMPLE_FACTOR, DOWNSAMPLE_SKIP_EVERY_NTH};
+enum ResampleScenario {UPSAMPLE, UPSAMPLE_FACTOR, DOWNSAMPLE_FACTOR, DOWNSAMPLE_SKIP_EVERY_NTH};
 enum ResamplePrecision { Low, Medium, High, VeryHigh};
 
 /**
@@ -50,6 +50,7 @@ class Resample : public AudioStreamX {
             this->channels = channels;
             this->factor = factor;
             this->scenario = scenario;
+            LOGI("Resample factor: %d for %d channels", factor, channels);
 
             if (this->scenario==DOWNSAMPLE_SKIP_EVERY_NTH){
                 is_active = (factor != 0);
@@ -94,9 +95,14 @@ class Resample : public AudioStreamX {
             bytes = 0;
 
             switch(scenario){
-                case UP_SAMPLE: {
+                case UPSAMPLE: {
                     allocateBuffer(sample_count*factor);
                     bytes = upsample((T*)src, buffer, sample_count, channels, factor) * sizeof(T);
+                    result = p_out->write((uint8_t*)buffer, bytes) / factor;
+                     } break;
+                case UPSAMPLE_FACTOR: {
+                    allocateBuffer(sample_count*factor);
+                    bytes = upsampleMultiply((T*)src, buffer, sample_count, channels, factor) * sizeof(T);
                     result = p_out->write((uint8_t*)buffer, bytes) / factor;
                      } break;
                 case DOWNSAMPLE_FACTOR: {
@@ -137,13 +143,21 @@ class Resample : public AudioStreamX {
             size_t byte_count = 0;
 
             switch(scenario){
-                case UP_SAMPLE: {
+                case UPSAMPLE: {
                     int read_len = length / factor;
                     int sample_count = read_len / sizeof(T);
                     allocateBuffer(sample_count);
                     read_len = p_in->readBytes((uint8_t*)buffer, read_len);
                     sample_count = read_len / sizeof(T);
                     byte_count = upsample(buffer,(T*)src, sample_count, channels, factor) * sizeof(T);
+                    } break;
+                case UPSAMPLE_FACTOR: {
+                    int read_len = length / factor;
+                    int sample_count = read_len / sizeof(T);
+                    allocateBuffer(sample_count);
+                    read_len = p_in->readBytes((uint8_t*)buffer, read_len);
+                    sample_count = read_len / sizeof(T);
+                    byte_count = upsampleMultiply(buffer,(T*)src, sample_count, channels, factor) * sizeof(T);
                     } break;
                 case DOWNSAMPLE_FACTOR: {
                     int read_len = length * factor;
@@ -254,6 +268,23 @@ class Resample : public AudioStreamX {
         }
 
 
+        /// Increases the samples by the indicated factor: We repeat the input samples
+        size_t upsampleMultiply(T *from, T* to, int sample_count, int channels, int factor ){
+            int frame_count = sample_count/channels;
+            // just repeat each frame facor times
+            int idx = 0;
+            for (int j=0;j<frame_count;j++){
+                for (int f=0;f<factor;f++){
+                    for (int ch=0;ch<channels;ch++){
+                        to[idx++] = from[j+ch];
+                    }
+                }
+            }
+
+            return sample_count*channels*factor;
+        }
+
+
         /// Increases the samples by the indicated factor: We interpolate the missing samples
         size_t upsample(T *from, T* to, int sample_count, int channels, int factor ){
             int frame_count = sample_count/channels;
@@ -284,6 +315,7 @@ class Resample : public AudioStreamX {
             }
             return pos*channels;
         }
+
 
         // provide access to data
         T* p_data(int frame_pos, int channel, T*start){
@@ -472,7 +504,7 @@ class ResampleStream : public AudioStreamX {
             }
             if (cfg.skip_every_nth!=0){
                 // small scale resampling
-                if (up.begin(cfg.channels, 1.0, UP_SAMPLE)){
+                if (up.begin(cfg.channels, 1.0, UPSAMPLE)){
                     LOGI("up active");
                 }
                 if (down.begin(cfg.channels, cfg.skip_every_nth, DOWNSAMPLE_SKIP_EVERY_NTH)){
@@ -492,7 +524,7 @@ class ResampleStream : public AudioStreamX {
                 calc.begin(cfg.sample_rate_from, cfg.sample_rate, precision);
 
                 // initialize resamplers
-                if (up.begin(cfg.channels, calc.upsample(), UP_SAMPLE)){
+                if (up.begin(cfg.channels, calc.upsample(), UPSAMPLE)){
                     LOGI("up active");
                 }
                 if (down.begin(cfg.channels, calc.downsample(), calc.downsampleScenario())){
