@@ -1157,6 +1157,94 @@ class FilteredStream : public AudioStreamX {
 
 };
 
+/**
+ * @brief Converter for reducing or increasing the number of Channels
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+template<typename T>
+class ChannelFormatConverterStream : public AudioStreamX {
+  public:
+        ChannelFormatConverterStream(Stream &stream){
+          p_stream = &stream;
+          p_print = &stream;
+        }
+        ChannelFormatConverterStream(Print &print){
+          p_print = &print;
+        }
+
+        bool begin(int fromChannels, int toChannels){
+          from_channels = fromChannels;
+          to_channels = toChannels;
+          factor = static_cast<float>(toChannels) / static_cast<float>(fromChannels);
+          return true;
+        }
+
+        virtual size_t write(const uint8_t *data, size_t size) override { 
+           if (from_channels==to_channels){
+              return p_stream->write(data, size);
+           }
+           size_t resultBytes = convert(data, size);
+           assert(resultBytes = factor*size);
+           p_print->write((uint8_t*)buffer.data(), resultBytes);
+           return size;
+        }
+
+        size_t readBytes(uint8_t *data, size_t size) override {
+           if (p_stream==nullptr) return 0;
+           if (from_channels==to_channels){
+              return p_stream->readBytes(data, size);
+           }
+           size_t in_bytes = 1.0 / factor * size;
+           bufferTmp.resize(in_bytes);
+           p_stream->readBytes(bufferTmp.data(), in_bytes);
+           size_t resultBytes = convert(bufferTmp.data(), in_bytes);
+           assert(size==resultBytes);
+           memcpy(data, (uint8_t*)buffer.data(),  size);
+           return size;
+        }
+
+        virtual int available() override {
+          return p_stream!=nullptr ? factor * p_stream->available() : 0;
+        }
+
+        virtual int availableForWrite() override { 
+          return 1.0 / factor * p_print->availableForWrite();
+        }
+
+  protected:
+    Stream *p_stream=nullptr;
+    Print *p_print=nullptr;
+    int from_channels = 2;
+    int to_channels = 2;
+    float factor = 1;
+    Vector<T> buffer;
+    Vector<uint8_t> bufferTmp;
+
+    size_t convert(const uint8_t *in_data, size_t size){
+        size_t result;
+        size_t result_samples = size/sizeof(T)*factor;
+        buffer.resize(result_samples);
+        memset(buffer.data(),0, size*factor);
+        if (from_channels>to_channels){
+          ChannelReducer<T> reducer;
+          reducer.setSourceChannels(from_channels);
+          reducer.setTargetChannels(to_channels);
+          result = reducer.convert((uint8_t*)buffer.data(),(uint8_t*) in_data, size);
+        } else {
+          ChannelEnhancer<T> enhancer;
+          enhancer.setSourceChannels(from_channels);
+          enhancer.setTargetChannels(to_channels);
+          result = enhancer.convert((uint8_t*)buffer.data(),(uint8_t*) in_data, size);
+        }
+        if (result!=result_samples*sizeof(T)){
+          LOGE("size %d -> result: %d - expeced: %d", size, result, result_samples*sizeof(T));
+        }
+        return result;
+    }
+
+};
+
 
 #ifdef USE_TIMER
 /**

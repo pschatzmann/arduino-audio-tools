@@ -401,6 +401,60 @@ class ChannelReducer : public BaseConverter<T> {
         int to_channels;
 };
 
+/**
+ * @brief Increases the channel count
+ * 
+ * @tparam T 
+ */
+template<typename T>
+class ChannelEnhancer : public BaseConverter<T> {
+    public:
+        ChannelEnhancer() = default;
+
+        ChannelEnhancer(int channelCountOfTarget, int channelCountOfSource){
+            from_channels = channelCountOfSource;
+            to_channels = channelCountOfTarget;
+        }
+
+        void setSourceChannels(int channelCountOfSource) {
+            from_channels = channelCountOfSource;
+        }
+
+        void setTargetChannels(int channelCountOfTarget) {
+            to_channels = channelCountOfTarget;
+        }
+
+        size_t convert(uint8_t*src, size_t size) {
+            // not supported becase the output size is bigger then the input size
+            return 0;
+        }
+
+        size_t convert(uint8_t*target, uint8_t*src, size_t size) {
+            int frame_count = size/(sizeof(T)*from_channels);
+            size_t result_size=0;
+            T* result = (T*)target;
+            T* source = (T*)src;
+            T value = 0;
+            for(int i=0; i < frame_count; i++){
+                // copy available channels
+                for (int j=0;j<from_channels;j++){
+                    value = *source++;
+                    *result++ = value;
+                    result_size += sizeof(T);
+                }
+                // repeat last value
+                for (int j=from_channels;j<to_channels;j++){
+                    *result++ = value;
+                    result_size += sizeof(T);
+                }                
+            }
+            return result_size;
+        }
+
+    protected:
+        int from_channels;
+        int to_channels;
+};
 
 
 /**
