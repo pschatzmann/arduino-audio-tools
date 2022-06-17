@@ -592,7 +592,7 @@ class ResampleBuffer  {
 
     bool begin(int channels, int factor , ResampleScenario scenario)  {
         resampler.begin(resampled_data, channels, factor, scenario);
-        this->factor = factor;
+        this->fact = factor;
         return true;
     }
 
@@ -637,7 +637,7 @@ class ResampleBuffer  {
         return  resampled_data.data();
     }
 
-        /// prposed factor for upsampling
+    /// prposed factor for upsampling
     int factor() {
         return fact;
     }
@@ -646,7 +646,7 @@ class ResampleBuffer  {
    protected:
      MemoryStream resampled_data;
      Resample<T> resampler;
-     int factor;
+     int fact;
      int resampled_byte_count;
 };
 
