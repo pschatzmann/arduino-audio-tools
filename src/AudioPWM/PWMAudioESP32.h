@@ -85,7 +85,7 @@ class PWMAudioStreamESP32 : public PWMAudioStreamBase {
                     LOGD("-> defining pin %d",audio_config.pins[j]);
                     pins[j].gpio = audio_config.pins[j];
                 }
-                LOGD("-> ledcSetup:  frequency=%d / resolution=%d", freq, audio_config.resolution);
+                LOGI("-> ledcSetup:  frequency=%d / resolution=%d", freq, audio_config.resolution);
                 ledcSetup(pwmChannel, freq, audio_config.resolution);
                 LOGD("-> ledcAttachPin: %d", pins[j].gpio);
                 ledcAttachPin(pins[j].gpio, pwmChannel);
