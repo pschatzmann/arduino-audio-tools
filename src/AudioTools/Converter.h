@@ -407,7 +407,7 @@ class ChannelReducer : public BaseConverter<T> {
  * @tparam T 
  */
 template<typename T>
-class ChannelEnhancer : public BaseConverter<T> {
+class ChannelEnhancer  {
     public:
         ChannelEnhancer() = default;
 
@@ -422,11 +422,6 @@ class ChannelEnhancer : public BaseConverter<T> {
 
         void setTargetChannels(int channelCountOfTarget) {
             to_channels = channelCountOfTarget;
-        }
-
-        size_t convert(uint8_t*src, size_t size) {
-            // not supported becase the output size is bigger then the input size
-            return 0;
         }
 
         size_t convert(uint8_t*target, uint8_t*src, size_t size) {
@@ -451,11 +446,68 @@ class ChannelEnhancer : public BaseConverter<T> {
             return result_size;
         }
 
+        /// Determine the size of the conversion result
+        size_t resultSize(size_t inSize){
+            return inSize * to_channels / from_channels;
+        }
+
     protected:
         int from_channels;
         int to_channels;
 };
 
+/**
+ * @brief Increasing or decreasing the number of channels
+ * 
+ * @tparam T 
+ */
+template<typename T>
+class ChannelConverter {
+    public:
+        ChannelConverter() = default;
+
+        ChannelConverter(int channelCountOfTarget, int channelCountOfSource){
+            from_channels = channelCountOfSource;
+            to_channels = channelCountOfTarget;
+        }
+
+        void setSourceChannels(int channelCountOfSource) {
+            from_channels = channelCountOfSource;
+        }
+
+        void setTargetChannels(int channelCountOfTarget) {
+            to_channels = channelCountOfTarget;
+        }
+
+        size_t convert(uint8_t*target, uint8_t*src, size_t size) {
+            if (from_channels==to_channels){
+                memcpy(target,src,size);
+                return size;
+            }
+            // setup channels
+            if (from_channels>to_channels){
+                reducer.setSourceChannels(from_channels);
+                reducer.setTargetChannels(to_channels);
+            } else {
+                enhancer.setSourceChannels(from_channels);
+                enhancer.setTargetChannels(to_channels);
+            }
+
+            // execute conversion
+            if (from_channels>to_channels){
+                return reducer.convert(target, src, size);
+            } else {
+                return enhancer.convert(target, src, size);
+            }
+        }
+
+    protected:
+        ChannelEnhancer<T> enhancer;
+        ChannelReducer<T> reducer;
+        int from_channels;
+        int to_channels;
+
+};
 
 /**
  * @brief Combines multiple converters

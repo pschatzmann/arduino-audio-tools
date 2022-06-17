@@ -1177,6 +1177,10 @@ class ChannelFormatConverterStream : public AudioStreamX {
           from_channels = fromChannels;
           to_channels = toChannels;
           factor = static_cast<float>(toChannels) / static_cast<float>(fromChannels);
+
+          converter.setSourceChannels(from_channels);
+          converter.setTargetChannels(to_channels);
+
           return true;
         }
 
@@ -1220,23 +1224,13 @@ class ChannelFormatConverterStream : public AudioStreamX {
     float factor = 1;
     Vector<T> buffer;
     Vector<uint8_t> bufferTmp;
+    ChannelConverter<T> converter;
 
     size_t convert(const uint8_t *in_data, size_t size){
         size_t result;
         size_t result_samples = size/sizeof(T)*factor;
         buffer.resize(result_samples);
-        memset(buffer.data(),0, size*factor);
-        if (from_channels>to_channels){
-          ChannelReducer<T> reducer;
-          reducer.setSourceChannels(from_channels);
-          reducer.setTargetChannels(to_channels);
-          result = reducer.convert((uint8_t*)buffer.data(),(uint8_t*) in_data, size);
-        } else {
-          ChannelEnhancer<T> enhancer;
-          enhancer.setSourceChannels(from_channels);
-          enhancer.setTargetChannels(to_channels);
-          result = enhancer.convert((uint8_t*)buffer.data(),(uint8_t*) in_data, size);
-        }
+        result = converter.convert((uint8_t*)buffer.data(),(uint8_t*) in_data, size);
         if (result!=result_samples*sizeof(T)){
           LOGE("size %d -> result: %d - expeced: %d", size, result, result_samples*sizeof(T));
         }
