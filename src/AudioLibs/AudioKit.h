@@ -542,7 +542,7 @@ class AudioKitStream : public AudioStreamX {
   bool active = true;
   // channel and sample size conversion support
   AudioKitStreamAdapter kit_stream = AudioKitStreamAdapter(&kit);
-  FormatConverterStream converter = FormatConverterStream(kit_stream);
+  FormatConverterPrint converter = FormatConverterPrint(kit_stream);
   AudioBaseInfo output_config;
   bool is_started = false;
 

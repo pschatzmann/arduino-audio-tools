@@ -562,7 +562,7 @@ class VolumePrint : public AudioPrint {
  * @copyright GPLv3
  */
 
-class FormatConverterStream : public AudioPrint {
+class FormatConverterPrint : public AudioPrint {
     /// conversion input values
     struct Convert {
         int multiply; // copy single to n channels
@@ -634,13 +634,13 @@ class FormatConverterStream : public AudioPrint {
     };
 
     public:
-        FormatConverterStream() = default;
+        FormatConverterPrint() = default;
 
-        FormatConverterStream(Print &out) {
+        FormatConverterPrint(Print &out) {
             setStream(out);
         }
 
-        FormatConverterStream(Print &out, AudioBaseInfo &infoOut, AudioBaseInfo &infoIn){
+        FormatConverterPrint(Print &out, AudioBaseInfo &infoOut, AudioBaseInfo &infoIn){
             this->p_out = &out;
             p_info_out = &infoOut;
             p_info_in = &infoIn;
@@ -722,7 +722,7 @@ class FormatConverterStream : public AudioPrint {
                 convert.target_bits_per_sample = p_info_out->bits_per_sample;
                 if (convert.source_bits_per_sample != convert.target_bits_per_sample){
                     convert.format_factor = NumberConverter::maxValue(convert.target_bits_per_sample) / NumberConverter::maxValue(convert.source_bits_per_sample);
-                    LOGI("FormatConverterStream: bits %d -> %d - factor %f",convert.source_bits_per_sample, convert.target_bits_per_sample, convert.format_factor);
+                    LOGI("FormatConverterPrint: bits %d -> %d - factor %f",convert.source_bits_per_sample, convert.target_bits_per_sample, convert.format_factor);
                 } else {
                     convert.format_factor = 1.0;
                 }
@@ -730,22 +730,22 @@ class FormatConverterStream : public AudioPrint {
                 if (p_info_out->bits_per_sample == p_info_in->bits_per_sample
                 && p_info_out->channels == p_info_in->channels ){
                     no_conversion = true;
-                    LOGI("FormatConverterStream: no conversion")
+                    LOGI("FormatConverterPrint: no conversion")
                 } else if (p_info_out->channels == p_info_in->channels){
                     // copy 1:1
                     convert.multiply = 1;
                     convert.step = 1;
-                    LOGI("FormatConverterStream: no channel conversion")
+                    LOGI("FormatConverterPrint: no channel conversion")
                 } else if (p_info_in->channels == 1 && p_info_out->channels>1){
                     // generate multiple output channels per frame
                     convert.multiply = p_info_out->channels;
                     convert.step = 1;
-                    LOGI("FormatConverterStream: multiply channels by %d", convert.multiply);
+                    LOGI("FormatConverterPrint: multiply channels by %d", convert.multiply);
 
                 } else if (p_info_out->channels == 1){
                     convert.multiply = 1;
                     convert.step = p_info_in->channels; // just output 1 channel per frame
-                    LOGI("FormatConverterStream: no conversion 1 channel")
+                    LOGI("FormatConverterPrint: no conversion 1 channel")
                 } else {
                     convert.multiply = 0;
                     LOGE("invalid input vs output channels");

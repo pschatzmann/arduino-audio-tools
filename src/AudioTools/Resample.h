@@ -187,6 +187,11 @@ class Resample : public AudioStreamX {
             return bytes;
         }
 
+        // provide sthe resample Factor
+        size_t resampleFactor() {
+            return factor;
+        }
+
 
     protected:
         ResampleScenario scenario;
@@ -489,6 +494,7 @@ class ResampleStream : public AudioStreamX {
             cfg.channels = channels;
             cfg.sample_rate_from = fromRate;
             cfg.sample_rate = toRate;
+            factor = fromRate>0 ? static_cast<float>(toRate) / static_cast<float>(fromRate) : 0;
             return begin();
         }
 
@@ -558,12 +564,17 @@ class ResampleStream : public AudioStreamX {
             return up.readBytes(src, byte_count);
         }
 
+        float resampleFactor() {
+            return factor;
+        }
+
     protected:
         ResampleConfig cfg;
         ResampleParameterEstimator calc;
         Resample<T> up;
         Resample<T> down;
         ResamplePrecision precision;
+        float factor;
 
 };
 
@@ -625,6 +636,12 @@ class ResampleBuffer  {
     uint8_t* dataBytes() {
         return  resampled_data.data();
     }
+
+        /// prposed factor for upsampling
+    int factor() {
+        return fact;
+    }
+
 
    protected:
      MemoryStream resampled_data;
