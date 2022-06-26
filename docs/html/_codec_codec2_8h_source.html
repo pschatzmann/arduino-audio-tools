@@ -172,7 +172,7 @@ $(function() {
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> setOutputStream(<a class="code" href="class_print.html">Print</a> &amp;out_stream) { p_print = &amp;out_stream; }</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  <span class="keyword">operator</span> boolean() { <span class="keywordflow">return</span> is_active; }</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  <span class="keyword">operator</span> bool() { <span class="keywordflow">return</span> is_active; }</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> <span class="keywordtype">void</span> *data, <span class="keywordtype">size_t</span> length) {</div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    LOGD(<span class="stringliteral">&quot;write: %d&quot;</span>, length);</div>
@@ -276,7 +276,7 @@ $(function() {
 <div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160; </div>
 <div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> setOutputStream(<a class="code" href="class_print.html">Print</a> &amp;out_stream) { p_print = &amp;out_stream; }</div>
 <div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160; </div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;  <span class="keyword">operator</span> boolean() { <span class="keywordflow">return</span> is_active; }</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;  <span class="keyword">operator</span> bool() { <span class="keywordflow">return</span> is_active; }</div>
 <div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160; </div>
 <div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> <span class="keywordtype">void</span> *in_ptr, <span class="keywordtype">size_t</span> in_size) {</div>
 <div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    LOGD(<span class="stringliteral">&quot;write: %d&quot;</span>, in_size);</div>

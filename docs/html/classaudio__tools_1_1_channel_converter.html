@@ -74,33 +74,46 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Covnerts the data from T src[][2] to a Frame array.  
+<p>Increasing or decreasing the number of channels.  
  <a href="classaudio__tools_1_1_channel_converter.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_audio_a2_d_p_8h_source.html">AudioA2DP.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_converter_8h_source.html">Converter.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a5d9099564f4109303983fc5cec67ea9d"><td class="memItemLeft" align="right" valign="top"><a id="a5d9099564f4109303983fc5cec67ea9d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ChannelConverter</b> (int16_t(*convert_ptr)(T from))</td></tr>
-<tr class="separator:a5d9099564f4109303983fc5cec67ea9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d985dbd688162b067f60998d6f7a396"><td class="memItemLeft" align="right" valign="top"><a id="a4d985dbd688162b067f60998d6f7a396"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>convert</b> (T src[][2], Frame *channels, size_t size)</td></tr>
-<tr class="separator:a4d985dbd688162b067f60998d6f7a396"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1812a7948850ec9edc8753483b05a3d"><td class="memItemLeft" align="right" valign="top"><a id="af1812a7948850ec9edc8753483b05a3d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>ChannelConverter</b> (int channelCountOfTarget, int channelCountOfSource)</td></tr>
+<tr class="separator:af1812a7948850ec9edc8753483b05a3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e759941610933acc8208aa8608d8b41"><td class="memItemLeft" align="right" valign="top"><a id="a9e759941610933acc8208aa8608d8b41"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>convert</b> (uint8_t *target, uint8_t *src, size_t size)</td></tr>
+<tr class="separator:a9e759941610933acc8208aa8608d8b41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea3a57387a2d20d7dcd52ec90917307e"><td class="memItemLeft" align="right" valign="top"><a id="aea3a57387a2d20d7dcd52ec90917307e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setSourceChannels</b> (int channelCountOfSource)</td></tr>
+<tr class="separator:aea3a57387a2d20d7dcd52ec90917307e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab37fac3a8622679510df10735d72b13c"><td class="memItemLeft" align="right" valign="top"><a id="ab37fac3a8622679510df10735d72b13c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setTargetChannels</b> (int channelCountOfTarget)</td></tr>
+<tr class="separator:ab37fac3a8622679510df10735d72b13c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a46e4d47d254d0caf79df88b2bf629873"><td class="memItemLeft" align="right" valign="top"><a id="a46e4d47d254d0caf79df88b2bf629873"></a>
-int16_t(*&#160;</td><td class="memItemRight" valign="bottom"><b>convert_ptr</b> )(T from)</td></tr>
-<tr class="separator:a46e4d47d254d0caf79df88b2bf629873"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bc956659eeefb0c68b85879b43d3649"><td class="memItemLeft" align="right" valign="top"><a id="a8bc956659eeefb0c68b85879b43d3649"></a>
+<a class="el" href="classaudio__tools_1_1_channel_enhancer.html">ChannelEnhancer</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>enhancer</b></td></tr>
+<tr class="separator:a8bc956659eeefb0c68b85879b43d3649"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3090cdbb29482d7ee0d76e303b34f5f"><td class="memItemLeft" align="right" valign="top"><a id="ab3090cdbb29482d7ee0d76e303b34f5f"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>from_channels</b></td></tr>
+<tr class="separator:ab3090cdbb29482d7ee0d76e303b34f5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21751ff046fdd1c0bfcd37d66e4e6853"><td class="memItemLeft" align="right" valign="top"><a id="a21751ff046fdd1c0bfcd37d66e4e6853"></a>
+<a class="el" href="classaudio__tools_1_1_channel_reducer.html">ChannelReducer</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>reducer</b></td></tr>
+<tr class="separator:a21751ff046fdd1c0bfcd37d66e4e6853"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f87980aba3f85bdb3ad505b472459bf"><td class="memItemLeft" align="right" valign="top"><a id="a0f87980aba3f85bdb3ad505b472459bf"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>to_channels</b></td></tr>
+<tr class="separator:a0f87980aba3f85bdb3ad505b472459bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename T&gt;<br />
 class audio_tools::ChannelConverter&lt; T &gt;</h3>
 
-<p>Covnerts the data from T src[][2] to a Frame array. </p>
-<dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
-<dl class="section copyright"><dt>Copyright</dt><dd>GPLv3</dd></dl>
+<p>Increasing or decreasing the number of channels. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td></td></tr>
@@ -108,7 +121,7 @@ class audio_tools::ChannelConverter&lt; T &gt;</h3>
   </dd>
 </dl>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioLibs/<a class="el" href="_audio_a2_d_p_8h_source.html">AudioA2DP.h</a></li>
+<li>src/AudioTools/<a class="el" href="_converter_8h_source.html">Converter.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

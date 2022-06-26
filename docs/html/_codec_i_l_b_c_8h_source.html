@@ -126,7 +126,7 @@ $(function() {
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> setOutputStream(<a class="code" href="class_print.html">Print</a> &amp;out_stream) { p_print = &amp;out_stream; }</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  <span class="keyword">operator</span> boolean() { <span class="keywordflow">return</span> p_ilbc != <span class="keyword">nullptr</span>; }</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  <span class="keyword">operator</span> bool() { <span class="keywordflow">return</span> p_ilbc != <span class="keyword">nullptr</span>; }</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> <span class="keywordtype">void</span> *input_buffer, <span class="keywordtype">size_t</span> length) {</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordflow">if</span> (p_ilbc==<span class="keyword">nullptr</span>) <span class="keywordflow">return</span> 0;</div>
@@ -218,7 +218,7 @@ $(function() {
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> setOutputStream(<a class="code" href="class_print.html">Print</a> &amp;out_stream) { p_print = &amp;out_stream; }</div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;  <span class="keyword">operator</span> boolean() { <span class="keywordflow">return</span> p_ilbc != <span class="keyword">nullptr</span>; }</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;  <span class="keyword">operator</span> bool() { <span class="keywordflow">return</span> p_ilbc != <span class="keyword">nullptr</span>; }</div>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> <span class="keywordtype">void</span> *in_data, <span class="keywordtype">size_t</span> in_size) {</div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    <span class="keywordflow">if</span> (p_ilbc==<span class="keyword">nullptr</span>) <span class="keywordflow">return</span> 0;</div>

@@ -308,6 +308,18 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_callback_volume_control.html">CallbackVolumeControl</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide the volume function as callback method: This is easy to use e.g together with a lamda function!  <a href="classaudio__tools_1_1_callback_volume_control.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_channel_converter.html">ChannelConverter</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increasing or decreasing the number of channels.  <a href="classaudio__tools_1_1_channel_converter.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_channel_enhancer.html">ChannelEnhancer</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increases the channel count.  <a href="classaudio__tools_1_1_channel_enhancer.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_channel_format_converter_stream.html">ChannelFormatConverterStream</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Channel converter which does not use a template.  <a href="classaudio__tools_1_1_channel_format_converter_stream.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_channel_format_converter_stream_t.html">ChannelFormatConverterStreamT</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converter for reducing or increasing the number of Channels.  <a href="classaudio__tools_1_1_channel_format_converter_stream_t.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_channel_reducer.html">ChannelReducer</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">We combine a datastream which consists of multiple channels into less channels. E.g. 2 to 1 The last target channel will contain the combined values of the exceeding source channels.  <a href="classaudio__tools_1_1_channel_reducer.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -457,7 +469,7 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts e.g. 24bit data to the indicated smaller or bigger data type.  <a href="classaudio__tools_1_1_format_converter.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_format_converter_stream.html">FormatConverterStream</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts the data from the indicated <a class="el" href="structaudio__tools_1_1_audio_base_info.html" title="Basic Audio information which drives e.g. I2S.">AudioBaseInfo</a> format to the target <a class="el" href="structaudio__tools_1_1_audio_base_info.html" title="Basic Audio information which drives e.g. I2S.">AudioBaseInfo</a> format We can change the number of channels and the bits_per sample!  <a href="classaudio__tools_1_1_format_converter_stream.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converter which converts bits_per_sample and channels.  <a href="classaudio__tools_1_1_format_converter_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_fuzz.html">Fuzz</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_fuzz.html" title="Fuzz AudioEffect.">Fuzz</a> <a class="el" href="classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects.">AudioEffect</a>.  <a href="classaudio__tools_1_1_fuzz.html#details">More...</a><br /></td></tr>
@@ -512,6 +524,9 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_generated_sound_stream.html">GeneratedSoundStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Source for reading generated tones. Please note.  <a href="classaudio__tools_1_1_generated_sound_stream.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_generator_fixed_value.html">GeneratorFixedValue</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Just returns a constant value.  <a href="classaudio__tools_1_1_generator_fixed_value.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_generator_from_array.html">GeneratorFromArray</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">We generate the samples from an array which is provided in the constructor.  <a href="classaudio__tools_1_1_generator_from_array.html#details">More...</a><br /></td></tr>
@@ -714,6 +729,12 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_number_converter.html">NumberConverter</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts from a source to a target number with a different type.  <a href="classaudio__tools_1_1_number_converter.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_number_format_converter_stream.html">NumberFormatConverterStream</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converter which converts between bits_per_sample and 16 bits.  <a href="classaudio__tools_1_1_number_format_converter_stream.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_number_format_converter_stream_t.html">NumberFormatConverterStreamT</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converter which converts from source bits_per_sample to target bits_per_sample.  <a href="classaudio__tools_1_1_number_format_converter_stream_t.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_number_reader.html">NumberReader</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads n numbers from an Arduino <a class="el" href="class_stream.html">Stream</a>.  <a href="classaudio__tools_1_1_number_reader.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -791,6 +812,9 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_resample.html">Resample</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple implementation which changes the sample rate by the indicated integer factor. To downlample we calculate the avarage of n (=factor) samples. To upsample we interpolate the missing samples. If the indicated factor is positive we upsample if it is negative we downsample.  <a href="classaudio__tools_1_1_resample.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_resample_buffer.html">ResampleBuffer</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resampler which uses an internal buffer. We can write the original data and then access the data as array.  <a href="classaudio__tools_1_1_resample_buffer.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudio__tools_1_1_resample_config.html">ResampleConfig</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuration for <a class="el" href="classaudio__tools_1_1_resample_stream.html" title="Flexible Stream class which can be used to resample audio data between different sample rates.">ResampleStream</a>.  <a href="structaudio__tools_1_1_resample_config.html#details">More...</a><br /></td></tr>
@@ -1205,9 +1229,10 @@ Enumerations</h2></td></tr>
 , <b>VeryHigh</b>
  }</td></tr>
 <tr class="separator:a9f0ca08656936aca7b62ec4144e56896"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6dc5d167f75b0ecf0ca879d385296412"><td class="memItemLeft" align="right" valign="top"><a id="a6dc5d167f75b0ecf0ca879d385296412"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>ResampleScenario</b> { <b>UP_SAMLE</b>
-, <b>DOWNSAMPLE_FACTOR</b>
-, <b>DOWNSAMPLE_SKIP_EVERY_NTH</b>
+<tr class="memitem:a6dc5d167f75b0ecf0ca879d385296412"><td class="memItemLeft" align="right" valign="top"><a id="a6dc5d167f75b0ecf0ca879d385296412"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>ResampleScenario</b> { <b>UPSAMPLE</b>
+, <b>UPSAMPLE_EXACT</b>
+, <b>DOWNSAMPLE</b>
+, <b>DOWNSAMPLE_EXACT</b>
  }</td></tr>
 <tr class="separator:a6dc5d167f75b0ecf0ca879d385296412"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d4e1fe2dd00b263250e9319bcc85946"><td class="memItemLeft" align="right" valign="top"><a id="a0d4e1fe2dd00b263250e9319bcc85946"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a0d4e1fe2dd00b263250e9319bcc85946">RxTxMode</a> { <b>UNDEFINED_MODE</b> =0
@@ -1479,9 +1504,9 @@ static uint32_t *&#160;</td><td class="memItemRight" valign="bottom"><b>spdif_pt
 <tr class="memitem:a39517ccd473450adc836daea214cf4a7"><td class="memItemLeft" align="right" valign="top"><a id="a39517ccd473450adc836daea214cf4a7"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><b>SUCCESS</b> = &quot;Success&quot;</td></tr>
 <tr class="separator:a39517ccd473450adc836daea214cf4a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d2a03a5e7429138fce9993d1aebd522"><td class="memItemLeft" align="right" valign="top"><a id="a2d2a03a5e7429138fce9993d1aebd522"></a>
+<tr class="memitem:a1715283a1697faa1c54e30b895e4f57e"><td class="memItemLeft" align="right" valign="top"><a id="a1715283a1697faa1c54e30b895e4f57e"></a>
 <a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_m_b_e_d.html">TimerAlarmRepeatingMBED</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>timerAlarmRepeating</b> = nullptr</td></tr>
-<tr class="separator:a2d2a03a5e7429138fce9993d1aebd522"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a1715283a1697faa1c54e30b895e4f57e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7416e73e61964ca70ff0ac3a0dd0918e"><td class="memItemLeft" align="right" valign="top"><a id="a7416e73e61964ca70ff0ac3a0dd0918e"></a>
 <a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_a_v_r.html">TimerAlarmRepeatingAVR</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>timerAlarmRepeatingRef</b> = nullptr</td></tr>
 <tr class="separator:a7416e73e61964ca70ff0ac3a0dd0918e"><td class="memSeparator" colspan="2">&#160;</td></tr>

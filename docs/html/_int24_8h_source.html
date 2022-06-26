@@ -95,61 +95,87 @@ $(function() {
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  }</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <a class="code" href="classaudio__tools_1_1int24__t.html">int24_t</a>(<span class="keyword">const</span> int32_t &amp;in) {</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    value[2] = (in &gt;&gt; 16) &amp; 0xFF;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    value[1] = (in &gt;&gt; 8) &amp; 0xFF;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    value[0] = in &amp; 0xFF;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  }</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    set(in);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  }</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#ifdef STM32</span></div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="keyword">operator</span> int()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classaudio__tools_1_1int24__t.html#ae7423f4e79c020713f4bbe78354de2d8">toInt</a>();</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  }  </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <a class="code" href="classaudio__tools_1_1int24__t.html">int24_t</a>(<span class="keyword">const</span> <span class="keywordtype">int</span> &amp;in) {</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    set(in);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  }</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1int24__t.html#ae7423f4e79c020713f4bbe78354de2d8">   44</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1int24__t.html#ae7423f4e79c020713f4bbe78354de2d8">toInt</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">int</span> newInt = (((0xFF &amp; value[0]) &lt;&lt; 16) | ((0xFF &amp; value[1]) &lt;&lt; 8) | (0xFF &amp; value[2]));</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordflow">if</span> ((newInt &amp; 0x00800000) &gt; 0) {</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;      newInt |= 0xFF000000;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;      newInt &amp;= 0x00FFFFFF;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    }</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordflow">return</span> newInt;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  }  </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1int24__t.html#aca7d64ffb1a224536f60729c39737213">   55</a></span>&#160;  <span class="keywordtype">float</span> <a class="code" href="classaudio__tools_1_1int24__t.html#aca7d64ffb1a224536f60729c39737213">toFloat</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> int(); }</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1int24__t.html#afecd445388a55e48c5bb4860f28a0042">   58</a></span>&#160;  int16_t <a class="code" href="classaudio__tools_1_1int24__t.html#afecd445388a55e48c5bb4860f28a0042">scale16</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classaudio__tools_1_1int24__t.html#ae7423f4e79c020713f4bbe78354de2d8">toInt</a>() * INT16_MAX / INT24_MAX;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <span class="keywordtype">void</span> set(<span class="keyword">const</span> int32_t &amp;in) {</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    value[2] = (in &gt;&gt; 16) &amp; 0xFF;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    value[1] = (in &gt;&gt; 8) &amp; 0xFF;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    value[0] = in &amp; 0xFF;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  }</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <span class="keyword">operator</span> int()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classaudio__tools_1_1int24__t.html#ae7423f4e79c020713f4bbe78354de2d8">toInt</a>();</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  }  </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <a class="code" href="classaudio__tools_1_1int24__t.html">int24_t</a>&amp; operator +=(int32_t value){</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    int32_t temp = <a class="code" href="classaudio__tools_1_1int24__t.html#ae7423f4e79c020713f4bbe78354de2d8">toInt</a>();</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    temp += value;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    set(temp);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  }</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1int24__t.html#a941c9375328b5593619c16fe81c9a1c8">   63</a></span>&#160;  int32_t <a class="code" href="classaudio__tools_1_1int24__t.html#a941c9375328b5593619c16fe81c9a1c8">scale32</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classaudio__tools_1_1int24__t.html#ae7423f4e79c020713f4bbe78354de2d8">toInt</a>()  *  (INT32_MAX / INT24_MAX); </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  }</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1int24__t.html#a3298ae3a80ee055b725e2e4ee0bf8662">   68</a></span>&#160;  <span class="keywordtype">float</span> <a class="code" href="classaudio__tools_1_1int24__t.html#a3298ae3a80ee055b725e2e4ee0bf8662">scaleFloat</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="classaudio__tools_1_1int24__t.html#aca7d64ffb1a224536f60729c39737213">toFloat</a>() / INT24_MAX; }</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="keywordtype">void</span> setAndScale16(int16_t i16) {</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    value[0] = 0;  <span class="comment">// clear trailing byte</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    int16_t *p16 = (int16_t *)&amp;value[1];</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    *p16 = i16;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  }</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  int16_t getAndScale16() {</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    int16_t *p16 = (int16_t *)&amp;value[1];</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">return</span> *p16;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  }</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  uint8_t value[3];</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;};</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;}  <span class="comment">// namespace audio_tools</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <a class="code" href="classaudio__tools_1_1int24__t.html">int24_t</a>&amp; operator -=(int32_t value){</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    int32_t temp = <a class="code" href="classaudio__tools_1_1int24__t.html#ae7423f4e79c020713f4bbe78354de2d8">toInt</a>();</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    temp -= value;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    set(temp);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  }</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1int24__t.html#ae7423f4e79c020713f4bbe78354de2d8">   70</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="classaudio__tools_1_1int24__t.html#ae7423f4e79c020713f4bbe78354de2d8">toInt</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordtype">int</span> newInt = (((0xFF &amp; value[0]) &lt;&lt; 16) | ((0xFF &amp; value[1]) &lt;&lt; 8) | (0xFF &amp; value[2]));</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordflow">if</span> ((newInt &amp; 0x00800000) &gt; 0) {</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;      newInt |= 0xFF000000;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;      newInt &amp;= 0x00FFFFFF;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    }</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordflow">return</span> newInt;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  }  </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1int24__t.html#aca7d64ffb1a224536f60729c39737213">   81</a></span>&#160;  <span class="keywordtype">float</span> <a class="code" href="classaudio__tools_1_1int24__t.html#aca7d64ffb1a224536f60729c39737213">toFloat</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> int(); }</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1int24__t.html#afecd445388a55e48c5bb4860f28a0042">   84</a></span>&#160;  int16_t <a class="code" href="classaudio__tools_1_1int24__t.html#afecd445388a55e48c5bb4860f28a0042">scale16</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classaudio__tools_1_1int24__t.html#ae7423f4e79c020713f4bbe78354de2d8">toInt</a>() * INT16_MAX / INT24_MAX;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  }</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1int24__t.html#a941c9375328b5593619c16fe81c9a1c8">   89</a></span>&#160;  int32_t <a class="code" href="classaudio__tools_1_1int24__t.html#a941c9375328b5593619c16fe81c9a1c8">scale32</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classaudio__tools_1_1int24__t.html#ae7423f4e79c020713f4bbe78354de2d8">toInt</a>()  *  (INT32_MAX / INT24_MAX); </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  }</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1int24__t.html#a3298ae3a80ee055b725e2e4ee0bf8662">   94</a></span>&#160;  <span class="keywordtype">float</span> <a class="code" href="classaudio__tools_1_1int24__t.html#a3298ae3a80ee055b725e2e4ee0bf8662">scaleFloat</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="classaudio__tools_1_1int24__t.html#aca7d64ffb1a224536f60729c39737213">toFloat</a>() / INT24_MAX; }</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  <span class="keywordtype">void</span> setAndScale16(int16_t i16) {</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    value[0] = 0;  <span class="comment">// clear trailing byte</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    int16_t *p16 = (int16_t *)&amp;value[1];</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    *p16 = i16;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  }</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  int16_t getAndScale16() {</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    int16_t *p16 = (int16_t *)&amp;value[1];</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordflow">return</span> *p16;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  }</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  uint8_t value[3];</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;};</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;}  <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1int24__t_html"><div class="ttname"><a href="classaudio__tools_1_1int24__t.html">audio_tools::int24_t</a></div><div class="ttdoc">24bit integer which is used for I2S sound processing. It works only on little endian machines!</div><div class="ttdef"><b>Definition:</b> Int24.h:15</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1int24__t_html_a3298ae3a80ee055b725e2e4ee0bf8662"><div class="ttname"><a href="classaudio__tools_1_1int24__t.html#a3298ae3a80ee055b725e2e4ee0bf8662">audio_tools::int24_t::scaleFloat</a></div><div class="ttdeci">float scaleFloat() const</div><div class="ttdoc">provides value between -1.0 and 1.0</div><div class="ttdef"><b>Definition:</b> Int24.h:68</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1int24__t_html_a941c9375328b5593619c16fe81c9a1c8"><div class="ttname"><a href="classaudio__tools_1_1int24__t.html#a941c9375328b5593619c16fe81c9a1c8">audio_tools::int24_t::scale32</a></div><div class="ttdeci">int32_t scale32() const</div><div class="ttdoc">provides value between -2,147,483,647 and 2,147,483,647</div><div class="ttdef"><b>Definition:</b> Int24.h:63</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1int24__t_html_aca7d64ffb1a224536f60729c39737213"><div class="ttname"><a href="classaudio__tools_1_1int24__t.html#aca7d64ffb1a224536f60729c39737213">audio_tools::int24_t::toFloat</a></div><div class="ttdeci">float toFloat() const</div><div class="ttdoc">convert to float</div><div class="ttdef"><b>Definition:</b> Int24.h:55</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1int24__t_html_ae7423f4e79c020713f4bbe78354de2d8"><div class="ttname"><a href="classaudio__tools_1_1int24__t.html#ae7423f4e79c020713f4bbe78354de2d8">audio_tools::int24_t::toInt</a></div><div class="ttdeci">int toInt() const</div><div class="ttdoc">Standard Conversion to Int.</div><div class="ttdef"><b>Definition:</b> Int24.h:44</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1int24__t_html_afecd445388a55e48c5bb4860f28a0042"><div class="ttname"><a href="classaudio__tools_1_1int24__t.html#afecd445388a55e48c5bb4860f28a0042">audio_tools::int24_t::scale16</a></div><div class="ttdeci">int16_t scale16() const</div><div class="ttdoc">provides value between -32767 and 32767</div><div class="ttdef"><b>Definition:</b> Int24.h:58</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1int24__t_html_a3298ae3a80ee055b725e2e4ee0bf8662"><div class="ttname"><a href="classaudio__tools_1_1int24__t.html#a3298ae3a80ee055b725e2e4ee0bf8662">audio_tools::int24_t::scaleFloat</a></div><div class="ttdeci">float scaleFloat() const</div><div class="ttdoc">provides value between -1.0 and 1.0</div><div class="ttdef"><b>Definition:</b> Int24.h:94</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1int24__t_html_a941c9375328b5593619c16fe81c9a1c8"><div class="ttname"><a href="classaudio__tools_1_1int24__t.html#a941c9375328b5593619c16fe81c9a1c8">audio_tools::int24_t::scale32</a></div><div class="ttdeci">int32_t scale32() const</div><div class="ttdoc">provides value between -2,147,483,647 and 2,147,483,647</div><div class="ttdef"><b>Definition:</b> Int24.h:89</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1int24__t_html_aca7d64ffb1a224536f60729c39737213"><div class="ttname"><a href="classaudio__tools_1_1int24__t.html#aca7d64ffb1a224536f60729c39737213">audio_tools::int24_t::toFloat</a></div><div class="ttdeci">float toFloat() const</div><div class="ttdoc">convert to float</div><div class="ttdef"><b>Definition:</b> Int24.h:81</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1int24__t_html_ae7423f4e79c020713f4bbe78354de2d8"><div class="ttname"><a href="classaudio__tools_1_1int24__t.html#ae7423f4e79c020713f4bbe78354de2d8">audio_tools::int24_t::toInt</a></div><div class="ttdeci">int toInt() const</div><div class="ttdoc">Standard Conversion to Int.</div><div class="ttdef"><b>Definition:</b> Int24.h:70</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1int24__t_html_afecd445388a55e48c5bb4860f28a0042"><div class="ttname"><a href="classaudio__tools_1_1int24__t.html#afecd445388a55e48c5bb4860f28a0042">audio_tools::int24_t::scale16</a></div><div class="ttdeci">int16_t scale16() const</div><div class="ttdoc">provides value between -32767 and 32767</div><div class="ttdef"><b>Definition:</b> Int24.h:84</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AnalogAudioArduino.h:10</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

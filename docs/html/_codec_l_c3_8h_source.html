@@ -150,7 +150,7 @@ $(function() {
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> setOutputStream(<a class="code" href="class_print.html">Print</a> &amp;out_stream) { p_print = &amp;out_stream; }</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  <span class="keyword">operator</span> boolean() { <span class="keywordflow">return</span> active; }</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  <span class="keyword">operator</span> bool() { <span class="keywordflow">return</span> active; }</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> <span class="keywordtype">void</span> *input, <span class="keywordtype">size_t</span> length) {</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordflow">if</span> (!active) <span class="keywordflow">return</span> 0;</div>
@@ -291,7 +291,7 @@ $(function() {
 <div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160; </div>
 <div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> setOutputStream(<a class="code" href="class_print.html">Print</a> &amp;out_stream) { p_print = &amp;out_stream; }</div>
 <div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160; </div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;  <span class="keyword">operator</span> boolean() { <span class="keywordflow">return</span> lc3_encoder != <span class="keyword">nullptr</span>; }</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;  <span class="keyword">operator</span> bool() { <span class="keywordflow">return</span> lc3_encoder != <span class="keyword">nullptr</span>; }</div>
 <div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160; </div>
 <div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> <span class="keywordtype">void</span> *in_ptr, <span class="keywordtype">size_t</span> in_size) {</div>
 <div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    <span class="keywordflow">if</span> (!active) <span class="keywordflow">return</span> 0;</div>
