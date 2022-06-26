@@ -36,12 +36,13 @@ class I2SBase {
       }
 
       i2s.Init.Mode = getMode(cfg);
+      i2s.Init.Standard = getStandard(cfg);
       i2s.Init.DataFormat = getDataFormat(cfg);
       i2s.Init.MCLKOutput = I2S_MCLKOUTPUT_ENABLE;
       i2s.Init.AudioFreq = cfg.sample_rate;
       i2s.Init.CPOL = I2S_CPOL_LOW;
-      //i2s.Init.ClockSource = I2S_CLOCK_PLL;
-      i2s.Init.FullDuplexMode = I2S_FULLDUPLEXMODE_DISABLE;
+      i2s.Init.ClockSource = I2S_CLOCK_PLL;
+      i2s.Init.FullDuplexMode = cfg.rx_tx_mode==RXTX_MODE? I2S_FULLDUPLEXMODE_ENABLE: I2S_FULLDUPLEXMODE_DISABLE;
       if (HAL_I2S_Init(&i2s) != HAL_OK){
         LOGE("HAL_I2S_Init failed");
         result = false;
@@ -99,8 +100,33 @@ class I2SBase {
   protected:
     I2SConfig cfg;
     I2S_HandleTypeDef i2s;
-    
+
     uint32_t getMode(I2SConfig &cfg){
+      if (cfg.is_master) {
+        switch(cfg.rx_tx_mode){
+          case RX_MODE:
+            return I2S_MODE_MASTER_RX;
+          case TX_MODE:
+            return I2S_MODE_MASTER_TX;
+          default:
+            LOGE("RXTX_MODE not supported");
+            return I2S_MODE_MASTER_TX;
+        }
+      } else {
+        switch(cfg.rx_tx_mode){
+          case RX_MODE:
+            return I2S_MODE_SLAVE_RX;
+          case TX_MODE:
+            return I2S_MODE_SLAVE_TX;
+          default:
+            LOGE("RXTX_MODE not supported");
+            return I2S_MODE_SLAVE_TX;
+        }
+      }
+    }
+
+    
+    uint32_t getStandard(I2SConfig &cfg){
       uint32_t result;
       switch(cfg.i2s_format) {
           case I2S_PHILIPS_FORMAT:
@@ -122,10 +148,8 @@ class I2SBase {
           return I2S_DATAFORMAT_16B;
         case 24:
           return I2S_DATAFORMAT_24B;
-          break;
         case 32:
           return I2S_DATAFORMAT_32B;
-          break;
       }
       return I2S_DATAFORMAT_16B;
 
