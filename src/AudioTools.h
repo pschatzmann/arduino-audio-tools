@@ -20,6 +20,7 @@
 #include "AudioAnalog/AnalogAudio.h"
 #include "AudioTools/AudioLogger.h"
 #include "AudioTools/AudioStreams.h"
+#include "AudioTools/AudioStreamsConverter.h"
 #include "AudioTools/AudioOutput.h"
 #include "AudioTools/Resample.h"
 #include "AudioTools/AudioCopy.h"

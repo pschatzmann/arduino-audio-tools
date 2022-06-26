@@ -335,10 +335,10 @@ class I2SBase {
           break;        
 
         case Analog:
-#if defined(ARDUINO_ESP32S2_DEV) || defined(ARDUINO_ESP32C3_DEV) || defined(ARDUINO_ESP32S3_DEV)   
-          LOGE("Not supported");
-#else    
+#if defined(USE_I2S_ANALOG) 
           mode = (i2s_mode_t) (cfg.rx_tx_mode ? I2S_MODE_DAC_BUILT_IN : I2S_MODE_ADC_BUILT_IN);
+#else    
+          LOGE("Not supported");
 #endif
           break;
       }

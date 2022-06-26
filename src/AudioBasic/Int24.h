@@ -31,6 +31,18 @@ class int24_t  {
   }
 
   int24_t(const int32_t &in) {
+    set(in);
+  }
+
+#ifdef STM32
+
+  int24_t(const int &in) {
+    set(in);
+  }
+
+#endif
+
+  void set(const int32_t &in) {
     value[2] = (in >> 16) & 0xFF;
     value[1] = (in >> 8) & 0xFF;
     value[0] = in & 0xFF;
@@ -39,6 +51,20 @@ class int24_t  {
   operator int() const {
     return toInt();
   }  
+
+  int24_t& operator +=(int32_t value){
+    int32_t temp = toInt();
+    temp += value;
+    set(temp);
+    return *this;
+  }
+
+  int24_t& operator -=(int32_t value){
+    int32_t temp = toInt();
+    temp -= value;
+    set(temp);
+    return *this;
+  }
 
   /// Standard Conversion to Int
   int toInt() const {

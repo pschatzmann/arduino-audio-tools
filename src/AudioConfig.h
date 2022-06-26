@@ -8,6 +8,7 @@
 #include "Arduino.h"
 #include <string.h>
 #include <stdint.h>
+#include <assert.h>
 #include "AudioTools/AudioRuntime.h"
 
 // If you don't want to use all the settings from here you can define your own local config settings in AudioConfigLocal.h
@@ -140,8 +141,21 @@
  */
 
 //-------ESP32---------
+#if defined(ESP32)  && defined(ARDUINO_ESP32C3_DEV)
+#define ESP32C3
+#define ESP32X
+#endif
+#if defined(ESP32)  && defined(ARDUINO_ESP32S2_DEV)
+#define ESP32S2
+#define ESP32X
+#endif
+#if defined(ESP32)  && defined(ARDUINO_ESP32S3_DEV)
+#define ESP32S3
+#define ESP32X
+#endif
 
-#if defined(ESP32)  && !defined(ARDUINO_ESP32C3_DEV)
+// ----- Regular ESP32 -----
+#if defined(ESP32)  && !defined(ESP32X)
 #include "esp32-hal-log.h"
 // optional libraries
 //#define USE_A2DP
@@ -154,6 +168,7 @@
 #define USE_TYPETRAITS
 #define USE_EFFECTS_SUITE
 #define USE_TIMER
+#define USE_I2S_ANALOG
 
 #define PWM_FREQENCY 30000
 #define PIN_PWM_START 12
@@ -201,7 +216,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 
 //-------ESP32C3---------
 
-#if defined(ESP32)  && defined(ARDUINO_ESP32C3_DEV)
+#if defined(ESP32)  && defined(ESP32S3)
 #include "esp32-hal-log.h"
 
 #define USE_PWM
@@ -387,7 +402,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #endif
 
 //---- STM32 ------------
-#ifdef ARDUINO_ARCH_STM32F4
+#if defined(ARDUINO_ARCH_STM32F4) || defined(ARDUINO_ARCH_STM32)
 #define STM32
 #endif
 

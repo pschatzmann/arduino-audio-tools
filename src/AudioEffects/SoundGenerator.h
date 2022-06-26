@@ -644,7 +644,7 @@ class SineFromTable  : public SoundGenerator<T> {
             if (abs(diff) > max_amplitude_step){
                 diff = (diff<0) ? -max_amplitude_step : max_amplitude_step;
             } 
-            if (diff>=1.0){
+            if (abs(diff)>=1.0){
                 amplitude += diff;
             }
         }

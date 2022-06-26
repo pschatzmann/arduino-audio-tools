@@ -190,12 +190,9 @@ class AudioKitStream : public AudioStreamX {
       stop();
     }
 
-    // convert format if necessary
-    converter.setInputInfo(cfg);
-    output_config = cfg;
-    output_config.channels = 2;
-    LOGI("Channels %d->%d", cfg.channels, output_config.channels);
-    converter.setInfo(output_config);
+    // convert channels if necessary
+    LOGI("Channels %d->%d", cfg.channels, 2);
+    converter.begin(cfg.channels, 2, cfg.bits_per_sample);
 
     // Volume control and headphone detection
     if (cfg.default_actions_active){
@@ -259,7 +256,7 @@ class AudioKitStream : public AudioStreamX {
       // update sample rate only
       cfg.sample_rate = info.sample_rate;
       cfg.logInfo();
-      converter.setInputInfo(cfg);
+      converter.setAudioInfo(cfg);
       kit.setSampleRate(cfg.toSampleRate());
     } else if (cfg.sample_rate != info.sample_rate
     || cfg.bits_per_sample != info.bits_per_sample
@@ -276,7 +273,7 @@ class AudioKitStream : public AudioStreamX {
         kit.end();
       }
       // update input format
-      converter.setInputInfo(cfg);
+      converter.setAudioInfo(cfg);
       // start kit with new config
       kit.begin(cfg.toAudioKitConfig());
       is_started = true;
@@ -291,11 +288,26 @@ class AudioKitStream : public AudioStreamX {
   /// Mutes the output
   bool setMute(bool mute) { return kit.setMute(mute); }
 
-  /// Defines the Volume
+  /// Defines the Volume: Range 0 to 100
   bool setVolume(int vol) { 
+    if (vol>100) LOGW("Volume is > 100: %d",vol);
+    // update variable, so if called before begin we set the default value
     volume_value = vol;
     return kit.setVolume(vol);
   }
+
+  /// Defines the Volume: Range 0 to 1.0
+  bool setVolume(float vol) { 
+    if (vol>1.0) LOGW("Volume is > 1.0: %f",vol);
+    // update variable, so if called before begin we set the default value
+    volume_value = 100.0 * vol;
+    return kit.setVolume(volume_value);
+  }
+
+  /// Defines the Volume: Range 0 to 1.0
+  bool setVolume(double vol) {
+    return setVolume((float)vol);
+  } 
 
   /// Determines the volume
   int volume() { return kit.volume(); }
@@ -542,8 +554,7 @@ class AudioKitStream : public AudioStreamX {
   bool active = true;
   // channel and sample size conversion support
   AudioKitStreamAdapter kit_stream = AudioKitStreamAdapter(&kit);
-  FormatConverterPrint converter = FormatConverterPrint(kit_stream);
-  AudioBaseInfo output_config;
+  ChannelFormatConverterStream converter = ChannelFormatConverterStream(kit_stream);
   bool is_started = false;
 
   /// Determines the action logic (ActiveLow or ActiveTouch) for the pin

@@ -6,7 +6,7 @@ uint8_t to_channels = 1;                                             // The stre
 SineWaveGenerator<int16_t> sine_wave(32000);                         // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> in_stream(sine_wave);                  // Stream generated from sine wave
 CsvStream<int16_t> out(Serial, to_channels);                         // Output to Serial
-ChannelFormatConverterStream<int16_t> conv(in_stream);
+ChannelFormatConverterStream conv(in_stream);
 StreamCopy copier(out, conv);                                  // copies sound to out
 
 void setup(){
