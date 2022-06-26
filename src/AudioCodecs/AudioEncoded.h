@@ -69,7 +69,7 @@ public:
     AudioBaseInfo info;
     return info;
   }
-  virtual operator boolean() { return false; }
+  virtual operator bool() { return false; }
   virtual int readStream(Stream &in) { return 0; };
 
   // just output silence
@@ -122,7 +122,7 @@ public:
   virtual AudioBaseInfo audioInfo() = 0;
 
   /// checks if the class is active
-  virtual operator boolean() = 0;
+  virtual operator bool() = 0;
 
   /// Process a single read operation - to be called in the loop
   virtual bool copy() = 0;

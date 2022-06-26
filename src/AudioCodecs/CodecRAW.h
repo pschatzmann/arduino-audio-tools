@@ -83,7 +83,7 @@ class RAWDecoder : public AudioDecoder {
             return p_print->write((uint8_t*)in_ptr, in_size);
         }
 
-        virtual operator boolean() override {
+        virtual operator bool() override {
             return active;
         }
 
@@ -148,7 +148,7 @@ class RAWEncoder : public AudioEncoder {
             return p_print->write((uint8_t*)in_ptr, in_size);
         }
 
-        operator boolean() override {
+        operator bool() override {
             return is_open;
         }
 

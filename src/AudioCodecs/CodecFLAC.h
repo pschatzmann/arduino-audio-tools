@@ -107,7 +107,7 @@ class FLACDecoder : public StreamingDecoder {
 
   virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
 
-  operator boolean() { return is_active; }
+  operator bool() { return is_active; }
 
 
   /// Stream Interface: Process a single frame - only relevant when input stream has been defined
@@ -391,7 +391,7 @@ class FLACEncoder : public AudioEncoder {
     return result;
   }
 
-  operator boolean() override { return is_open; }
+  operator bool() override { return is_open; }
 
   bool isOpen() { return is_open; }
 

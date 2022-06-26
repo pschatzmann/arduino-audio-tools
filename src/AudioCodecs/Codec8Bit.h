@@ -86,7 +86,7 @@ class Decoder8Bit : public AudioDecoder {
             return p_print->write((uint8_t*)buffer.data(), in_size*sizeof(int16_t));
         }
 
-        virtual operator boolean() override {
+        virtual operator bool() override {
             return active;
         }
 
@@ -159,7 +159,7 @@ class Encoder8Bit : public AudioEncoder {
             return p_print->write((uint8_t*)buffer.data(), samples);
         }
 
-        operator boolean() override {
+        operator bool() override {
             return is_open;
         }
 

@@ -131,7 +131,7 @@ public:
         return "audio/mp3";
     }
 
-    virtual operator boolean() {
+    virtual operator bool() {
         return (bool)(*enc);
     }
 

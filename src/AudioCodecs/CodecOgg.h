@@ -101,7 +101,7 @@ class OggDecoder : public AudioDecoder {
     return size_consumed;
   }
 
-  virtual operator boolean() override { return is_open; }
+  virtual operator bool() override { return is_open; }
 
  protected:
   RingBuffer<uint8_t> buffer{OGG_DEFAULT_BUFFER_SIZE};
@@ -255,7 +255,7 @@ class OggEncoder : public AudioEncoder {
     return in_size;
   }
 
-  operator boolean() override { return is_open; }
+  operator bool() override { return is_open; }
 
   bool isOpen() { return is_open; }
 

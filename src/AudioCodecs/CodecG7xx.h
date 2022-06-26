@@ -85,7 +85,7 @@ class G7xxDecoder : public AudioDecoder {
 
   void setOutputStream(Print &out_stream) override { p_print = &out_stream; }
 
-  operator boolean() { return is_active; }
+  operator bool() { return is_active; }
 
   size_t write(const void *data, size_t length) override {
     LOGD("write: %d", length);
@@ -190,7 +190,7 @@ class G7xxEncoder : public AudioEncoder {
 
   void setOutputStream(Print &out_stream) override { p_print = &out_stream; }
 
-  operator boolean() { return is_active; }
+  operator bool() { return is_active; }
 
    size_t write(const void *in_ptr, size_t byte_count) override {
     LOGD("write: %d", byte_count);

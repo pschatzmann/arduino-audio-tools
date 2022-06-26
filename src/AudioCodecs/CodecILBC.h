@@ -70,7 +70,7 @@ class ILBCDecoder : public AudioDecoder {
 
   virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
 
-  operator boolean() { return p_ilbc != nullptr; }
+  operator bool() { return p_ilbc != nullptr; }
 
   virtual size_t write(const void *input_buffer, size_t length) {
     if (p_ilbc==nullptr) return 0;
@@ -168,7 +168,7 @@ class ILBCEncoder : public AudioEncoder {
 
   virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
 
-  operator boolean() { return p_ilbc != nullptr; }
+  operator bool() { return p_ilbc != nullptr; }
 
   virtual size_t write(const void *in_data, size_t in_size) {
     if (p_ilbc==nullptr) return 0;

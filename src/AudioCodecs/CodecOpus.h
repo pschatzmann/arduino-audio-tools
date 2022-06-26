@@ -189,7 +189,7 @@ class OpusAudioDecoder : public AudioDecoder {
     return in_size;
   }
 
-  operator boolean() override { return active; }
+  operator bool() override { return active; }
 
  protected:
   Print *p_print = nullptr;
@@ -273,7 +273,7 @@ class OpusAudioEncoder : public AudioEncoder {
     return in_size;
   }
 
-  operator boolean() override { return is_open; }
+  operator bool() override { return is_open; }
 
   bool isOpen() { return is_open; }
 
