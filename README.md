@@ -118,9 +118,9 @@ Dependent on the example you might need to install some of the following librari
 - [Many Codec Libraries](https://github.com/pschatzmann/arduino-audio-tools/wiki/Encoding-and-Decoding-of-Audio) which are described in the Wiki
 - [arduino-audiokit](https://github.com/pschatzmann/arduino-audiokit) Support for the __ESP32 AudioKit__ and decoder chips (ES8388, A1S, etc) 
 - [arduino-midi](https://github.com/pschatzmann/arduino-midi) A simple __MIDI__ message parser and generator
-- [SAM](https://github.com/pschatzmann/arduino-SAM) A Text to Speach Engine
-- [TTS](https://github.com/pschatzmann/TTS) A Text to Speach Engine
-- [flite](https://github.com/pschatzmann/arduino-flite) A Text to Speach Engine
+- [SAM](https://github.com/pschatzmann/arduino-SAM) A Text to Speech Engine
+- [TTS](https://github.com/pschatzmann/TTS) A Text to Speech Engine
+- [flite](https://github.com/pschatzmann/arduino-flite) A Text to Speech Engine
 - [simple-tts](https://github.com/pschatzmann/arduino-simple-tts) A Simple TTS engine which is based on prerecorded audio (Talking Clock, Talking Numbers)
 - [arduino-stk](https://github.com/pschatzmann/Arduino-STK) Synthesis ToolKit in C++ (STK) 
 - [Maximilian](https://github.com/pschatzmann/Maximilian) cross-platform and multi-target audio synthesis and signal processing library
