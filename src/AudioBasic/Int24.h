@@ -34,7 +34,7 @@ class int24_t  {
     set(in);
   }
 
-#ifdef STM32
+#if defined(STM32) || defined(ESP32X)
 
   int24_t(const int &in) {
     set(in);
