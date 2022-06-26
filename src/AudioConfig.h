@@ -214,9 +214,9 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 
 #endif
 
-//-------ESP32C3---------
+//-------ESP32C3, ESP32S3, ESP32S2---------
 
-#if defined(ESP32)  && defined(ESP32S3)
+#if defined(ESP32)  && defined(ESP32X)
 #include "esp32-hal-log.h"
 
 #define USE_PWM
