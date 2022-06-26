@@ -123,7 +123,7 @@ class PortAudioStream : public AudioStreamX {
             stream_started = false;
         }
 
-        operator boolean() {
+        operator bool() {
             return err == paNoError;
         }
 

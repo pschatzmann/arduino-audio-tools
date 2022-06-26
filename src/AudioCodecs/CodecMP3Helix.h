@@ -110,7 +110,7 @@ class MP3DecoderHelix : public AudioDecoder  {
         }
 
         /// checks if the class is active 
-        operator boolean(){
+        operator bool(){
             return mp3!=nullptr && (bool) *mp3;
         }
 

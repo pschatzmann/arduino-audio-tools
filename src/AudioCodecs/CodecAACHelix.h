@@ -103,7 +103,7 @@ class AACDecoderHelix : public AudioDecoder  {
         }
 
         /// checks if the class is active 
-        virtual operator boolean(){
+        virtual operator bool(){
             return aac!=nullptr && (bool)*aac;
         }
 

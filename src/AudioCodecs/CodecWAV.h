@@ -358,7 +358,7 @@ class WAVDecoder : public AudioDecoder {
             return write(buffer, len);
         }
 
-        virtual operator boolean() {
+        virtual operator bool() {
             return active;
         }
 
@@ -501,7 +501,7 @@ class WAVEncoder : public AudioEncoder {
             return result;
         }
 
-        operator boolean() {
+        operator bool() {
             return is_open;
         }
 

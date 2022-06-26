@@ -66,7 +66,7 @@ public:
   }
 
   /// checks if the class is active
-  operator boolean() { return p_decoder == nullptr ? false : *p_decoder; }
+  operator bool() { return p_decoder == nullptr ? false : *p_decoder; }
 
   /// Defines the callback object to which the Audio information change is
   /// provided

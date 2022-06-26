@@ -125,7 +125,7 @@ public:
 
   virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
 
-  operator boolean() { return is_active; }
+  operator bool() { return is_active; }
 
   virtual size_t write(const void *data, size_t length) {
     LOGD("write: %d", length);
@@ -237,7 +237,7 @@ public:
 
   virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
 
-  operator boolean() { return is_active; }
+  operator bool() { return is_active; }
 
   virtual size_t write(const void *in_ptr, size_t in_size) {
     LOGD("write: %d", in_size);

@@ -30,7 +30,7 @@ public:
 
   size_t write(const void *data, size_t len) { return len; }
 
-  operator boolean() { return true; }
+  operator bool() { return true; }
 
   void setNotifyAudioChange(AudioBaseInfoDependent &bi) {}
 };

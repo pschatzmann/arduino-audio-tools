@@ -86,7 +86,7 @@ class MP3DecoderMini : public AudioDecoder {
   }
 
   /// checks if the class is active
-  virtual operator boolean() { return active; }
+  virtual operator bool() { return active; }
 
   void setSampleRateLimit(int limit){
     sample_rate_limit = limit;

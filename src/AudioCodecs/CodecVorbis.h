@@ -67,7 +67,7 @@ public:
   AudioBaseInfo audioInfo() override { return cfg; }
 
   /// checks if the class is active
-  virtual operator boolean() override { return active; }
+  virtual operator bool() override { return active; }
 
   virtual bool copy() override {
     LOGI("copy");

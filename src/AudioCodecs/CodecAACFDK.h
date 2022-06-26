@@ -297,7 +297,7 @@ public:
         return "audio/aac";
     }
 
-    operator boolean(){
+    operator bool(){
         return (bool) *enc;
     }
 

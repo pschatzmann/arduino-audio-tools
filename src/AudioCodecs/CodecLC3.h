@@ -94,7 +94,7 @@ class LC3Decoder : public AudioDecoder {
 
   virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
 
-  operator boolean() { return active; }
+  operator bool() { return active; }
 
   virtual size_t write(const void *input, size_t length) {
     if (!active) return 0;
@@ -241,7 +241,7 @@ class LC3Encoder : public AudioEncoder {
 
   virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
 
-  operator boolean() { return lc3_encoder != nullptr; }
+  operator bool() { return lc3_encoder != nullptr; }
 
   virtual size_t write(const void *in_ptr, size_t in_size) {
     if (!active) return 0;

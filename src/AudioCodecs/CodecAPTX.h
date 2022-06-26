@@ -53,7 +53,7 @@ class APTXDecoder : public AudioDecoder {
 
   virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
 
-  operator boolean() { return ctx != nullptr; }
+  operator bool() { return ctx != nullptr; }
 
   virtual size_t write(const void *input_buffer, size_t length) {
     LOGI("write: %d", length);
@@ -255,7 +255,7 @@ class APTXEncoder : public AudioEncoder {
 
   virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
 
-  operator boolean() { return ctx != nullptr; }
+  operator bool() { return ctx != nullptr; }
 
   virtual size_t write(const void *in_ptr, size_t in_size) {
     LOGI("write: %d", in_size);
