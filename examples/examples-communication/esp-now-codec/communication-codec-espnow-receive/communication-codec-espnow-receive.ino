@@ -27,14 +27,12 @@ void setup() {
   // setup esp-now
   auto cfg = now.defaultConfig();
   cfg.mac_address = "A8:48:FA:0B:93:01";
-  cfg.buffer_count = 50; // encoded buffer
   now.begin(cfg);
   now.addPeers(peers);
 
   // start I2S
   Serial.println("starting I2S...");
   auto config = out.defaultConfig(TX_MODE);
-  config.buffer_count = 1; // decoded buffer
   out.begin(config);
 
   // start decoder
