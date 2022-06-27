@@ -226,9 +226,10 @@ class ESPNowStream : public AudioStreamX {
           open -= send_len;
           result += send_len;
         } else {
-          LOGE("Write error");
+          LOGW("Write failed - retrying again");
           retry_count++;
           if (cfg.write_retry_count>0 && retry_count>=cfg.write_retry_count){
+            LOGE("Write error after %d retries", cfg.write_retry_count);
             // break loop
             return 0;
           }
@@ -378,6 +379,7 @@ class ESPNowStream : public AudioStreamX {
   }
 };
 
+
 /**
  * A Simple exension of the WiFiUDP class which makes sure that the basic Stream
  * functioinaltiy which is used as AudioSource and AudioSink
@@ -387,6 +389,13 @@ class ESPNowStream : public AudioStreamX {
 
 class UDPStream : public WiFiUDP {
  public:
+  UDPStream() = default;
+
+  UDPStream(const char *ssid, const char* password){
+    this.ssid = ssid;
+    this.password = password;
+  }
+
   /**
    * Provides the available size of the current package and if this is used up
    * of the next package
@@ -402,6 +411,7 @@ class UDPStream : public WiFiUDP {
 
   /// Starts to send data to the indicated address / port
   uint8_t begin(IPAddress a, uint16_t port) {
+    connect();
     remote_address_ext = a;
     remote_port_ext = port;
     return WiFiUDP::begin(port);
@@ -409,6 +419,7 @@ class UDPStream : public WiFiUDP {
 
   /// Starts to receive data from/with the indicated port
   uint8_t begin(uint16_t port, uint16_t port_ext = 0) {
+    connect();
     remote_address_ext = 0u;
     remote_port_ext = port_ext != 0 ? port_ext : port;
     return WiFiUDP::begin(port);
@@ -445,6 +456,23 @@ class UDPStream : public WiFiUDP {
  protected:
   uint16_t remote_port_ext;
   IPAddress remote_address_ext;
+  const char* ssid = nullptr;
+  const char* password = nullptr;
+
+  void connect() {
+    // connect to WIFI
+    if (WiFi.status() != WL_CONNECTED && ssid!=nullptr && password!=nullptr) {
+      WiFi.begin(ssid, password);
+      while (WiFi.status() != WL_CONNECTED) {
+          delay(500);
+      }
+    }
+  
+    // Performance Hack              
+    //client.setNoDelay(true);
+    esp_wifi_set_ps(WIFI_PS_NONE);
+
+  }
 };
 
 enum RecordType : uint8_t { Undefined, Begin, Send, Receive, End };
