@@ -11,7 +11,7 @@
 #include "AudioTools.h"
 #include "AudioLibs/Communication.h"
 
-uint16_t sample_rate = 10000;
+uint16_t sample_rate = 8000;
 uint8_t channels = 1;  // The stream will have 2 channels
 ESPNowStream now;
 MeasuringStream now1(now);

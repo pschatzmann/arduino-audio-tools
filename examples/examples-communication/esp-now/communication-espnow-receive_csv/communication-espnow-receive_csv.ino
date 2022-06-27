@@ -11,27 +11,24 @@
 #include "AudioTools.h"
 #include "AudioLibs/Communication.h"
 
-uint16_t sample_rate = 10000;
-uint8_t channels = 1;  // The stream will have 2 channels
 ESPNowStream now;
-CsvStream<int16_t> out(Serial1, channels); 
-StreamCopy copier(out, now1);     
 const char *peers[] = {"A8:48:FA:0B:93:02"};
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
 
   auto cfg = now.defaultConfig();
   cfg.mac_address = "A8:48:FA:0B:93:01";
   now.begin(cfg);
   now.addPeers(peers);
 
-  out.begin();
-
   Serial.println("Receiver started...");
 }
 
 void loop() { 
-  copier.copy();
+  int16_t sample;
+  if (now.readBytes((uint8_t*)&sample,2)){
+    Serial.println(sample); 
+  }  
 }

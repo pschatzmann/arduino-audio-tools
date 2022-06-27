@@ -52,7 +52,7 @@ struct ESPNowStreamConfig {
   uint16_t delay_after_write_ms = 2;
   uint16_t delay_after_failed_write_ms = 2000;
   uint16_t buffer_size = ESP_NOW_MAX_DATA_LEN;
-  uint16_t buffer_count = 20;
+  uint16_t buffer_count = 400;
   int write_retry_count = -1; // -1 endless
   void (*recveive_cb)(const uint8_t *mac_addr, const uint8_t *data,
                       int data_len) = nullptr;
@@ -350,10 +350,13 @@ class ESPNowStream : public AudioStreamX {
     LOGD("rec_cb: %d", data_len);
     // blocking write
     while (bufferAvailableForWrite() < data_len) {
-      delay(5);
+      delay(2);
     }
     Lock lock(ESPNowStreamSelf->write_lock);
-    ESPNowStreamSelf->p_buffer->writeArray(data, data_len);
+    size_t result = ESPNowStreamSelf->p_buffer->writeArray(data, data_len);
+    if (result!=data_len){
+      LOGE("writeArray %d -> %d", data_len, result);
+    }
   }
 
   static void default_send_cb(const uint8_t *mac_addr,
@@ -392,8 +395,8 @@ class UDPStream : public WiFiUDP {
   UDPStream() = default;
 
   UDPStream(const char *ssid, const char* password){
-    this.ssid = ssid;
-    this.password = password;
+    this->ssid = ssid;
+    this->password = password;
   }
 
   /**
