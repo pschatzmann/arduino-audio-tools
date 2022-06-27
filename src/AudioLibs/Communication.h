@@ -100,12 +100,6 @@ class ESPNowStream : public AudioStreamX {
   bool begin(ESPNowStreamConfig cfg) {
     this->cfg = cfg;
     WiFi.mode(cfg.wifi_mode);
-    // setup receive buffer
-    if (p_buffer == nullptr && cfg.buffer_count > 0) {
-      // p_buffer = new NBuffer<uint8_t>(cfg.buffer_size , cfg.buffer_count);
-      p_buffer = new RingBuffer<uint8_t>(cfg.buffer_size * cfg.buffer_count);
-    }
-
     // set mac address
     if (cfg.mac_address != nullptr) {
       LOGI("setting mac %s", cfg.mac_address);
@@ -272,6 +266,14 @@ class ESPNowStream : public AudioStreamX {
   bool is_write_ok = false;
   _lock_t write_lock;
 
+  inline void setupReceiveBuffer(){
+    // setup receive buffer
+    if (p_buffer == nullptr && cfg.buffer_count > 0) {
+      // p_buffer = new NBuffer<uint8_t>(cfg.buffer_size , cfg.buffer_count);
+      p_buffer = new RingBuffer<uint8_t>(cfg.buffer_size * cfg.buffer_count);
+    }
+  }
+
   inline void resetAvailableToWrite() {
     if (cfg.use_send_ack) {
       available_to_write = 0;
@@ -346,8 +348,10 @@ class ESPNowStream : public AudioStreamX {
   }
 
   static void default_recv_cb(const uint8_t *mac_addr, const uint8_t *data,
-                              int data_len) {
+                              int data_len) {                                
     LOGD("rec_cb: %d", data_len);
+    // make sure that the receive buffer is available - moved from begin to make sure that it is only allocated when needed
+    ESPNowStreamSelf->setupReceiveBuffer();
     // blocking write
     while (bufferAvailableForWrite() < data_len) {
       delay(2);
