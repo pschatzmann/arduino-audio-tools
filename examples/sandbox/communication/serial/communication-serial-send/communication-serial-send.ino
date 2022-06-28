@@ -15,10 +15,10 @@
 #define RXD2 16
 #define TXD2 17
 
-uint16_t sample_rate = 28800;
-uint8_t channels = 2;  // The stream will have 2 channels
+uint16_t sample_rate = 44100;
+uint8_t channels = 1;  // The stream will have 1 channel
 SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
-GeneratedSoundStream<int16_t> sound( sineWave);                      // Stream generated from sine wave
+GeneratedSoundStream<int16_t> sound(sineWave);                      // Stream generated from sine wave
 StreamCopy copier(Serial2, sound);  // copies sound into i2s
 
 void setup() {
@@ -27,7 +27,7 @@ void setup() {
 
   // Note the format for setting a serial port is as follows:
   // Serial2.begin(baud-rate, protocol, RX pin, TX pin);
-  Serial2.begin(115200, SERIAL_8N1, RXD2, TXD2);
+  Serial2.begin(1000000, SERIAL_8N1, RXD2, TXD2);
 
   // Setup sine wave
   sineWave.begin(channels, sample_rate, N_B4);
