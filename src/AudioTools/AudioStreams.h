@@ -138,6 +138,9 @@ class AudioStreamWrapper : public AudioStream {
   int32_t clientTimeout = URL_CLIENT_TIMEOUT; // 60000;
 };
 
+
+enum MemoryType {RAM, PS_RAM, FLASH_RAM};
+
 /**
  * @brief A simple Stream implementation which is backed by allocated memory
  * @author Phil Schatzmann
@@ -146,34 +149,34 @@ class AudioStreamWrapper : public AudioStream {
  */
 class MemoryStream : public AudioStream {
  public:
-  MemoryStream(int buffer_size = 0) {
+  MemoryStream(int buffer_size = 512, MemoryType memoryType = RAM) {
     LOGD("MemoryStream: %d", buffer_size);
     this->buffer_size = buffer_size;
-    this->owns_buffer = true;
-    if (buffer_size>0){
-      this->buffer.resize(buffer_size);
-    }
+    this->memory_type = memoryType;
   }
 
-  MemoryStream(const uint8_t *buffer, int buffer_size) {
+  MemoryStream(const uint8_t *buffer, int buffer_size, MemoryType memoryType = FLASH_RAM) {
     LOGD("MemoryStream: %d", buffer_size);
     this->buffer_size = buffer_size;
     this->write_pos = buffer_size;
-    this->owns_buffer = false;
-    this->buffer.resize(buffer_size);
+    this->buffer = (uint8_t *)buffer;
+    this->memory_type = memoryType;
+  }
+
+  ~MemoryStream() {
+    LOGD(LOG_METHOD);
+    if (memoryCanChange() && buffer!=nullptr) free(buffer);
   }
 
   // resets the read pointer
   bool begin() override {
     LOGD(LOG_METHOD);
-    write_pos = buffer_size;
+    write_pos = memoryCanChange() ? 0 : buffer_size;
+    if (this->buffer==nullptr){
+      resize(buffer_size);
+    }
     read_pos = 0;
     return true;
-  }
-
-  void resize(int buffer_size){
-    this->buffer.resize(buffer_size);
-    this->buffer_size = buffer_size;
   }
 
   virtual size_t write(uint8_t byte) override {
@@ -187,14 +190,26 @@ class MemoryStream : public AudioStream {
   }
 
   virtual size_t write(const uint8_t *buffer, size_t size) override {
-    size_t result = min(size, buffer_size);
-    memcpy(this->buffer.data(),buffer, result);
+    size_t result = 0;
+    for (size_t j = 0; j < size; j++) {
+      if (!write(buffer[j])) {
+        break;
+      }
+      result = j;
+    }
     return result;
   }
 
-  virtual int available() override { return write_pos - read_pos; }
-
-  virtual int availableForWrite() override { return size() - available(); }
+  virtual int available() override { 
+    if (buffer==nullptr) return 0;
+    int result = write_pos - read_pos;
+    if (result<=0 && is_loop){
+      // rewind to start
+      read_pos = 0;
+      result = write_pos - read_pos;
+    }
+    return result;
+  }
 
   virtual int read() override {
     int result = peek();
@@ -229,29 +244,56 @@ class MemoryStream : public AudioStream {
     read_pos = 0;
   }
 
+  /// clears the audio data: sets all values to 0
   virtual void clear(bool reset = false) {
-    write_pos = 0;
-    read_pos = 0;
-    if (reset) {
-      // we clear the buffer data
-      memset(buffer.data(), 0, buffer_size);
+    if (memoryCanChange()){
+      write_pos = 0;
+      read_pos = 0;
+      if (reset) {
+        // we clear the buffer data
+        memset(buffer, 0, buffer_size);
+      }
+    } else {
+      LOGE("data is read only");
     }
   }
 
-  uint8_t* data() {
-    return buffer.data();
+  virtual void setLoop(bool loop){
+    is_loop = loop;
   }
 
-  size_t size() {
-    return buffer.size();
+  virtual void resize(size_t size){
+    if (memoryCanChange()){      
+      buffer_size = size;
+      switch(memory_type){
+  #ifdef ESP32
+        PS_RAM:
+          buffer = (buffer==nullptr) ? (uint8_t*)ps_calloc(size,1) : (uint8_t*)ps_realloc(buffer, size);
+          break;
+  #endif
+        default:
+          buffer = (buffer==nullptr) ? (uint8_t*)calloc(size,1) : (uint8_t*)realloc(buffer, size);
+          break;
+      }
+    }
   }
+
+  virtual uint8_t* data(){
+    return buffer;
+  }
+
 
  protected:
   int write_pos = 0;
   int read_pos = 0;
-  size_t buffer_size = 0;
-  Vector<uint8_t> buffer{0};
-  bool owns_buffer = false;
+  int buffer_size = 0;
+  uint8_t *buffer = nullptr;
+  MemoryType memory_type = RAM;
+  bool is_loop = false;
+
+  bool memoryCanChange() {
+    return memory_type!=FLASH_RAM;
+  }
 };
 
 /**
