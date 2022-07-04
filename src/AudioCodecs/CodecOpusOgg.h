@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AudioCodecs/CodecOgg.h"
+#include "AudioCodecs/ContainerOgg.h"
 #include "AudioCodecs/CodecOpus.h"
 
 namespace audio_tools {
@@ -26,11 +26,12 @@ struct __attribute__((packed)) OpusOggCommentHeader {
 
 /**
  * @brief Opus Decoder which uses the Ogg Container. See
- * https://datatracker.ietf.org/doc/html/rfc7845
+ * https://datatracker.ietf.org/doc/html/rfc7845. The audio data is transmitted in frames and the
+ * header information contains the sampler rate, channels and other critical info.
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class OpusOggDecoder : public OggDecoder {
+class OpusOggDecoder : public OggContainerDecoder {
  public:
   OpusOggDecoder() = default;
 
@@ -46,13 +47,13 @@ class OpusOggDecoder : public OggDecoder {
 
   void begin() override {
     LOGD(LOG_METHOD);
-    OggDecoder::begin();
+    OggContainerDecoder::begin();
     dec.begin();
   }
 
   void end() override {
     LOGD(LOG_METHOD);
-    OggDecoder::begin();
+    OggContainerDecoder::begin();
     dec.end();
   }
 
@@ -80,7 +81,7 @@ class OpusOggDecoder : public OggDecoder {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class OpusOggEncoder : public OggEncoder {
+class OpusOggEncoder : public OggContainerEncoder {
  public:
   OpusOggEncoder() = default;
 
@@ -93,13 +94,13 @@ class OpusOggEncoder : public OggEncoder {
 
   void begin() override {
     LOGD(LOG_METHOD);
-    OggEncoder::begin();
+    OggContainerEncoder::begin();
     enc.begin();
   }
 
   void end() override {
     LOGD(LOG_METHOD);
-    OggEncoder::begin();
+    OggContainerEncoder::begin();
     enc.end();
   }
 
