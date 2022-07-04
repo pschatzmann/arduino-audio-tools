@@ -95,7 +95,7 @@ struct OpusEncoderSettings : public OpusSettings {
   /// 0, 1
   int use_dtx = -1;
   /// 5,   10,  20,  40, 80, 120, 160, 200, 240
-  int frame_sizes_ms_x2 = -1; /* x2 to avoid 2.5 ms */
+  int frame_sizes_ms_x2 = 10; /* x2 to avoid 2.5 ms */
 };
 
 /**
@@ -131,6 +131,7 @@ class OpusAudioDecoder : public AudioDecoder {
 
   /// Provides access to the configuration
   OpusSettings &config() { return cfg; }
+  OpusSettings &defaultConfig() { return cfg; }
 
   void begin(OpusSettings info) {
     LOGD(LOG_METHOD);
@@ -180,8 +181,6 @@ class OpusAudioDecoder : public AudioDecoder {
     if (out_samples < 0) {
       LOGE("opus_decode: %s", opus_strerror(out_samples));
     } else if (out_samples > 0) {
-      // convert to little endian
-
       // write data to final destination
       int out_bytes = out_samples * cfg.channels * sizeof(int16_t);
       p_print->write(outbuf.data(), out_bytes);
@@ -247,6 +246,7 @@ class OpusAudioEncoder : public AudioEncoder {
 
   /// Provides access to the configuration
   OpusEncoderSettings &config() { return cfg; }
+  OpusEncoderSettings &defaultConfig() { return cfg; }
 
   void begin(OpusEncoderSettings settings) {
     cfg = settings;

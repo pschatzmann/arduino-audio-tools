@@ -11,23 +11,42 @@
 namespace audio_tools {
 
 /**
- * @brief OggDecoder - Ogg Container. Decodes a packet from an Ogg container.
+ * @brief OggContainerDecoder - Ogg Container. Decodes a packet from an Ogg container.
  * The Ogg begin segment contains the AudioBaseInfo structure. You can subclass
  * and overwrite the beginOfSegment() method to implement your own headers
  *
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class OggDecoder : public AudioDecoder {
+class OggContainerDecoder : public AudioDecoder {
  public:
   /**
-   * @brief Construct a new OggDecoder object
+   * @brief Construct a new OggContainerDecoder object
    */
 
-  OggDecoder() { LOGD(LOG_METHOD); }
+  OggContainerDecoder() { LOGD(LOG_METHOD); }
+
+  OggContainerDecoder(AudioDecoder *decoder) {
+    p_codec = decoder;
+  }
+
+  OggContainerDecoder(AudioDecoder &decoder) {
+    p_codec = &decoder;
+  }
+  ~OggContainerDecoder(){
+    if (p_codec!=nullptr) delete p_print;
+  }
 
   /// Defines the output Stream
-  void setOutputStream(Print &out_stream) override { p_print = &out_stream; }
+  void setOutputStream(Print &out_stream) override { 
+    if (p_codec==nullptr) {
+      p_print = &out_stream;
+    } else {
+      EncodedAudioStream* eas = new EncodedAudioStream();
+      eas->begin(&out_stream, p_codec);
+      p_print = eas;
+    }
+  }
 
   void setNotifyAudioChange(AudioBaseInfoDependent &bi) override {
     this->bid = &bi;
@@ -59,20 +78,13 @@ class OggDecoder : public AudioDecoder {
         LOGE("oggz_io_set_read");
         is_open = false;
       }
-      // if (oggz_io_set_seek(p_oggz, ogg_io_seek, this)!=0){
-      //   LOGE("oggz_io_set_seek");
-      //   is_open = false;
-      // }
-      // if (oggz_io_set_tell(p_oggz, ogg_io_tell, this)!=0){
-      //   LOGE("oggz_io_set_tell");
-      //   is_open = false;
-      // }
     }
   }
 
   void end() override {
     LOGD(LOG_METHOD);
     flush();
+    if (p_codec!=nullptr) p_codec->end();
     is_open = false;
     oggz_close(p_oggz);
     p_oggz = nullptr;
@@ -104,6 +116,7 @@ class OggDecoder : public AudioDecoder {
   virtual operator bool() override { return is_open; }
 
  protected:
+  AudioDecoder *p_codec = nullptr;
   RingBuffer<uint8_t> buffer{OGG_DEFAULT_BUFFER_SIZE};
   Print *p_print = nullptr;
   OGGZ *p_oggz = nullptr;
@@ -115,28 +128,17 @@ class OggDecoder : public AudioDecoder {
   // Final Stream Callback
   static size_t ogg_io_read(void *user_handle, void *buf, size_t n) {
     LOGI("ogg_io_read: %u", n);
-    OggDecoder *self = (OggDecoder *)user_handle;
+    OggContainerDecoder *self = (OggContainerDecoder *)user_handle;
     int len = self->buffer.readArray((uint8_t *)buf, n);
     self->pos += len;
     return len;
   }
   
-  // static int ogg_io_seek(void *user_handle, long offset, int whence) {
-  //   LOGI("ogg_io_seek: %u", offset);
-  //   return OGGZ_ERR_INVALID;
-  // }
-
-  // static long ogg_io_tell(void *user_handle) {
-  //   LOGI(LOG_METHOD);
-  //   OggDecoder *self = (OggDecoder *)user_handle;
-  //   return self->pos;
-  // }
-
   // Process full packet
   static int read_packet(OGGZ *oggz, oggz_packet *zp, long serialno,
                          void *user_data) {
     LOGI("read_packet: %u", zp->op.bytes);
-    OggDecoder *self = (OggDecoder *)user_data;
+    OggContainerDecoder *self = (OggContainerDecoder *)user_data;
     ogg_packet *op = &zp->op;
     int result = op->bytes;
     if (op->b_o_s) {
@@ -144,7 +146,7 @@ class OggDecoder : public AudioDecoder {
     } else if (op->e_o_s) {
       self->endOfSegment(op);
     } else {
-      LOGD("audio");
+      LOGI("process audio packet");
       self->p_print->write(op->packet, op->bytes);
     }
     return result;
@@ -172,20 +174,40 @@ class OggDecoder : public AudioDecoder {
 };
 
 /**
- * @brief OggEncoder - Ogg Container. Encodes a packet for an Ogg container.
+ * @brief OggContainerEncoder - Ogg Container. Encodes a packet for an Ogg container.
  * The Ogg begin segment contains the AudioBaseInfo structure. You can subclass
  * ond overwrite the writeHeader() method to implement your own header logic.
  *
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class OggEncoder : public AudioEncoder {
+class OggContainerEncoder : public AudioEncoder {
  public:
   // Empty Constructor - the output stream must be provided with begin()
-  OggEncoder() {}
+  OggContainerEncoder() {}
+
+  OggContainerEncoder(AudioEncoder *encoder) {
+    p_codec = encoder;
+  }
+
+  OggContainerEncoder(AudioEncoder &encoder) {
+    p_codec = &encoder;
+  }
+
+  ~OggContainerEncoder(){
+    if (p_codec!=nullptr) delete p_print;
+  }
 
   /// Defines the output Stream
-  void setOutputStream(Print &out_stream) override { p_print = &out_stream; }
+  void setOutputStream(Print &out_stream) override { 
+    if (p_codec==nullptr) {
+      p_print = &out_stream;
+    } else {
+      EncodedAudioStream* eas = new EncodedAudioStream();
+      eas->begin(&out_stream, p_codec);
+      p_print = eas;
+    }
+  }
 
   /// Provides "audio/pcm"
   const char *mime() override { return mime_pcm; }
@@ -260,6 +282,7 @@ class OggEncoder : public AudioEncoder {
   bool isOpen() { return is_open; }
 
  protected:
+  AudioEncoder* p_codec = nullptr;
   Print *p_print = nullptr;
   volatile bool is_open;
   OGGZ *p_oggz = nullptr;
@@ -305,7 +328,7 @@ class OggEncoder : public AudioEncoder {
   // Final Stream Callback
   static size_t ogg_io_write(void *user_handle, void *buf, size_t n) {
     LOGD("ogg_io_write: %u", n);
-    OggEncoder *self = (OggEncoder *)user_handle;
+    OggContainerEncoder *self = (OggContainerEncoder *)user_handle;
     if (self == nullptr) {
       LOGE("self is null");
       return 0;
