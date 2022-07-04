@@ -386,7 +386,7 @@ class ChannelReducer : public BaseConverter<T> {
                     result_size += sizeof(T);
                 }
                 // commbined last channels
-                T total = 0;
+                T total = (int16_t)0;
                 for (int j=to_channels-1;j<from_channels;j++){
                     total += *source++ / reduceDiv;
                 }                
@@ -429,7 +429,7 @@ class ChannelEnhancer  {
             size_t result_size=0;
             T* result = (T*)target;
             T* source = (T*)src;
-            T value = 0;
+            T value = (int16_t)0;
             for(int i=0; i < frame_count; i++){
                 // copy available channels
                 for (int j=0;j<from_channels;j++){
