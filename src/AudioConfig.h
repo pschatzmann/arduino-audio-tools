@@ -41,7 +41,7 @@
 
 #define CHECK_MEMORY() 
 // #define CHECK_MEMORY() checkMemory(true)
-#define LOG_PRINTF_BUFFER_SIZE 160
+#define LOG_PRINTF_BUFFER_SIZE 256
 #define LOG_METHOD __PRETTY_FUNCTION__
 
 /**
