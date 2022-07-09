@@ -129,7 +129,6 @@ class ChannelFormatConverterStream : public AudioStreamX {
         }
 
         bool begin(int fromChannels, int toChannels, int bits_per_sample=16){
-          bool result = true;
           this->bits_per_sample = bits_per_sample;
           return setupConverter(fromChannels, toChannels);
         }

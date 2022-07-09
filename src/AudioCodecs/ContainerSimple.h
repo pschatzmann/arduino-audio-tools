@@ -136,7 +136,7 @@ class SimpleContainerDecoder : public AudioDecoder {
         char *start = parsed[j];
         char *end = parsed[j + 1];
         if (strncmp(start, "CFG", 3)==0) {
-          memmove(&cfg, start, sizeof(cfg));
+          memmove((void*)&cfg,(void*) start, sizeof(cfg));
           if (p_inform != nullptr) {
             p_inform->setAudioInfo(cfg.info);
           }
