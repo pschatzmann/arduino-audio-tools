@@ -676,7 +676,6 @@ class Str {
         /// Returns true if the string is an integer
         bool isInteger() {
             bool result = containsNumber();
-            int dot_count = 0;
             int minus_count = 0;
             for (int j=0;j<len;j++){
                 char c = chars[j];

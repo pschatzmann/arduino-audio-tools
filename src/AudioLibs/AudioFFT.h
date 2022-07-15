@@ -147,6 +147,11 @@ class AudioFFTBase : public AudioPrint {
             return cfg.length/2;
         }
 
+        /// The number of samples
+        int length() {
+            return cfg.length;
+        }
+
         /// time when the last result was provided - you can poll this to check if we have a new result
         unsigned long resultTime() {
             return timestamp;

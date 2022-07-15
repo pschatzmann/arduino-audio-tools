@@ -60,8 +60,43 @@ class AudioRealFFT : public AudioFFTBase {
         }
 
         /// Provides the complex array returned by the FFT  
-        float *complexArray() {
+        float *imgArray() {
             return driverEx()->p_f;
+        }
+
+        /// Inverse fft - convert fft result back to time domain (samples)
+        float* ifft(float *real, float* complex){
+           // update mirrored values
+           int len = length();
+           for (int j=0;j<size();j++){
+               real[len-j] = real[j]; 
+               complex[len-j] = complex[j]; 
+           }
+           static_cast<FFTDriverRealFFT*>(driver())->p_fft_object->do_ifft(real, complex);
+           return real;
+        }
+
+        /// Shift the values in the array up or down
+        void shiftValues(float *values, int n){
+            if (n>0){
+                // shift values up
+                for (int j=n;j<size();j++){
+                    values[j]=values[j-n];
+                }
+                // clear beginning
+                for (int j=0;j<n;j++){
+                    values[j]=0;
+                }   
+            } else {
+                // shift values down
+                for (int j=size();j>=0;j--){
+                    values[j+n]=values[j];
+                }
+                // clear end
+                for (int j=0;j<abs(n);j++){
+                    values[size()-j]=0;
+                }   
+            }
         }
 
         FFTDriverRealFFT* driverEx() {
