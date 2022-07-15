@@ -78,7 +78,7 @@ class StreamCopyT {
             return from;
         }
 
-        Stream *getTo() {
+        Print *getTo() {
             return to;
         }
 

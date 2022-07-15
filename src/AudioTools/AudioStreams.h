@@ -207,6 +207,8 @@ class MemoryStream : public AudioStream {
       // rewind to start
       read_pos = 0;
       result = write_pos - read_pos;
+      // call callback
+      if (rewind!=nullptr) rewind();
     }
     return result;
   }
@@ -282,6 +284,10 @@ class MemoryStream : public AudioStream {
     return buffer;
   }
 
+  void setRewindCallback(void (*cb)()){
+    this->rewind = cb;
+  }
+
 
  protected:
   int write_pos = 0;
@@ -290,6 +296,7 @@ class MemoryStream : public AudioStream {
   uint8_t *buffer = nullptr;
   MemoryType memory_type = RAM;
   bool is_loop = false;
+  void (*rewind)() = nullptr;
 
   bool memoryCanChange() {
     return memory_type!=FLASH_RAM;
