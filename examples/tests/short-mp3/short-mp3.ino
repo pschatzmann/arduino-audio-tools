@@ -11,15 +11,14 @@
 // install https://github.com/pschatzmann/arduino-libhelix.git
 
 #include "AudioTools.h"
-#include "AudioCodecs/CodecMP3Helix.h"
-//#include "AudioCodecs/CodecMP3MAD.h"
-
+//#include "AudioCodecs/CodecMP3Helix.h"
+#include "AudioCodecs/CodecMP3MAD.h"
 #include "AudioLibs/AudioKit.h"
 
 
 URLStream url("ssid","password");  // or replace with ICYStream to get metadata
 AudioKitStream i2s; // final output of decoded stream
-MP3DecoderHelix decoder; // or MP3DecoderMAD
+MP3DecoderMAD decoder; // or MP3DecoderHelix
 EncodedAudioStream dec_stream(&i2s, &decoder); // Decoding stream
 StreamCopy copier(dec_stream, url); // copy url to decoder
 
@@ -46,7 +45,7 @@ void loop(){
   if (copier.available()) { // have tried copier.available and audioFile.available
     copier.copy();
   } else {
-
+    delay(1000);
     decoder.end(); // flush output
     i2s.end();
     stop();
