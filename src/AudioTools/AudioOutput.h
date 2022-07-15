@@ -384,10 +384,15 @@ class OutputMixer : public Print {
     OutputMixer(Print &finalOutput, int outputStreamCount) {
       p_final_output = &finalOutput;
       output_count = outputStreamCount;
+      setOutputCount(outputStreamCount);
+    };
+
+    void setOutputCount(int count){
+      weights.clear();
       for (int i=0;i<output_count;i++){
           weights.push_back(1.0);
       }
-    };
+    }
 
     /// Defines a new weight for the indicated channel: If you set it to 0 it is muted.
     void setWeight(int channel, float weight){
@@ -400,14 +405,20 @@ class OutputMixer : public Print {
 
     void begin(int copy_buffer_size=DEFAULT_BUFFER_SIZE) {
       is_active = true;
-      total_weights = 0;
+      total_weights = 0.0;
       for (int j=0;j<weights.size();j++){
         total_weights += weights[j];
       }
+
       size_bytes = copy_buffer_size;
-      // clear final data so that we can add values
-      result.resize(size_bytes);
-      memset(result.data(), 0, size_bytes); 
+   
+      // allocate ringbuffers for each output
+      buffers.resize(output_count);
+      for (int j=0;j<output_count;j++){
+        //if (buffers[j]==nullptr){
+            buffers[j] = new RingBuffer<T>(copy_buffer_size);
+        //}
+      }
     }
 
     /// Remove all input streams
@@ -422,39 +433,59 @@ class OutputMixer : public Print {
       return output_count;
     }
 
+    size_t write(uint8_t) {
+        return 0;
+    }
+
     /// Write the data from multiple streams mixed together 
     size_t write(const uint8_t *buffer_c, size_t size){
-        if (!is_active) return 0;
-        LOGD("write: %d", size);
-        int sample_size = min(size, (size_t)size_bytes);
-        int sample_count = sample_size / sizeof(T);
-        T* samples_result = (T*)result.data();
-        float weight = weights[stream_idx];
-        // sum up input samples to result samples 
-        T *buffer = (T*) buffer_c;
-        for (int i=0;i<sample_count; i++){
-            result[i] += weight * buffer[i] / total_weights;
+        LOGI("write %d: %d",stream_idx, size);
+        size_t result = 0;
+        RingBuffer<T>* p_buffer = buffers[stream_idx];
+        assert(p_buffer!=nullptr);
+        size_t samples = size/sizeof(T);
+        if (p_buffer->availableForWrite()>=samples){
+            result = p_buffer->writeArray((T*)buffer_c, samples) * sizeof(T);
         }
         stream_idx++;
         if (stream_idx>=output_count){
             flush();
         }
-        return sample_size;
+        return result;
     }
     
     int availableForWrite() { return is_active ? size_bytes : 0; }
 
     /// Force output to final destination
     void flush() {
-        p_final_output->write(result.data(), size_bytes);
+        LOGD("flush");
+
+        // determine ringbuffer with mininum available data
+        size_t samples = size_bytes/sizeof(T);
+        for (int j=0;j<output_count;j++){
+            samples = min(samples, (size_t) buffers[j]->available());            
+        }
+
+        // mix data from ringbuffers to output
+        output.resize(samples);
+        memset(output.data(),0, samples*sizeof(T));
+        for (int j=0;j<output_count;j++) {
+            float weight = weights[j];
+            // sum up input samples to result samples 
+            for (int i=0;i<samples; i++){
+                output[i] += weight * buffers[j]->read() / total_weights;
+            }
+        }
+
+        // write output
+        p_final_output->write((uint8_t*)output.data(), samples*sizeof(T));
         stream_idx = 0;
-        // clear final data so that we can add values
-        memset(result.data(), 0, size_bytes); 
     }
 
   protected:
-    Vector<uint8_t> result{0};
-    Vector<float> weights{10}; 
+    Vector<RingBuffer<T>*> buffers{0};
+    Vector<T> output{0};
+    Vector<float> weights{0}; 
     Print *p_final_output=nullptr;
     float total_weights = 0.0;
     bool is_active = false;
