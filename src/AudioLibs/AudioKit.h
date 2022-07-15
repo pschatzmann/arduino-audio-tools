@@ -564,6 +564,9 @@ class AudioKitStream : public AudioStreamX {
     for (int j=0; j<size; j++){
       if (pin == input_key_info[j].act_id){
         switch(input_key_info[j].type){
+          case PERIPH_ID_ADC_BTN:
+            LOGD("getActionLogic for pin %d -> %d", pin, AudioActions::ActiveHigh);
+            return AudioActions::ActiveHigh;
           case PERIPH_ID_BUTTON:
             LOGD("getActionLogic for pin %d -> %d", pin, AudioActions::ActiveLow);
             return AudioActions::ActiveLow;
@@ -603,7 +606,7 @@ class AudioKitStream : public AudioStreamX {
     }
 
     // pin conflicts with SD Lyrat SD CS Pin and buttons / Conflict on Audiokit V. 2957
-    if (! (cfg.sd_active && AUDIOKIT_BOARD==1 || AUDIOKIT_BOARD==7)){
+    if (! (cfg.sd_active && (AUDIOKIT_BOARD==1 || AUDIOKIT_BOARD==7))){
       LOGD("actionVolumeDown")
       addAction(kit.pinVolumeDown(), actionVolumeDown); 
       LOGD("actionVolumeUp")
