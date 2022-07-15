@@ -12,15 +12,16 @@
 
 #include "AudioTools.h"
 #include "AudioCodecs/CodecMP3Helix.h"
-#include "AudioCodecs/CodecMP3MAD.h"
+//#include "AudioCodecs/CodecMP3MAD.h"
 
 #include "AudioLibs/AudioKit.h"
 
 
 URLStream url("ssid","password");  // or replace with ICYStream to get metadata
 AudioKitStream i2s; // final output of decoded stream
-EncodedAudioStream dec(&i2s, new MP3DecoderHelix()); // Decoding stream
-StreamCopy copier(dec, url); // copy url to decoder
+MP3DecoderHelix decoder; // or MP3DecoderMAD
+EncodedAudioStream dec_stream(&i2s, &decoder); // Decoding stream
+StreamCopy copier(dec_stream, url); // copy url to decoder
 
 
 void setup(){
@@ -34,7 +35,7 @@ void setup(){
   i2s.begin(config);
 
   // setup I2S based on sampling rate provided by decoder
-  dec.begin();
+  dec_stream.begin();
 
   // mp3 radio
   url.begin("https://pschatzmann.github.io/arduino-audio-tools/resources/short-mp3.mp3","audio/mp3");
@@ -46,7 +47,7 @@ void loop(){
     copier.copy();
   } else {
 
-    helix.end(); // flush output
+    decoder.end(); // flush output
     i2s.end();
     stop();
   }
