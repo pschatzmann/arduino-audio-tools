@@ -1,6 +1,6 @@
 /**
- * @file streams-generator-audiokit.ino
- * @brief Tesing I2S output on audiokit
+ * @file streams-generator_inputmixer-audiokit.ino
+ * @brief Tesing input mixer
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
