@@ -383,14 +383,18 @@ class OutputMixer : public Print {
   public:
     OutputMixer(Print &finalOutput, int outputStreamCount) {
       p_final_output = &finalOutput;
-      output_count = outputStreamCount;
       setOutputCount(outputStreamCount);
     };
 
     void setOutputCount(int count){
-      weights.clear();
-      for (int i=0;i<output_count;i++){
-          weights.push_back(1.0);
+      output_count = count;
+      buffers.resize(count);
+      for (int i=0;i<count;i++){
+          buffers[i] = nullptr;
+      }
+      weights.resize(count);
+      for (int i=0;i<count;i++){
+          weights[i] = 1.0;
       }
     }
 
@@ -403,27 +407,26 @@ class OutputMixer : public Print {
       }
     }
 
-    void begin(int copy_buffer_size=DEFAULT_BUFFER_SIZE) {
+    void begin(int copy_buffer_size_bytes=DEFAULT_BUFFER_SIZE) {
       is_active = true;
       total_weights = 0.0;
       for (int j=0;j<weights.size();j++){
         total_weights += weights[j];
       }
 
-      size_bytes = copy_buffer_size;
+      size_bytes = copy_buffer_size_bytes;
    
       // allocate ringbuffers for each output
-      buffers.resize(output_count);
       for (int j=0;j<output_count;j++){
-        //if (buffers[j]==nullptr){
-            buffers[j] = new RingBuffer<T>(copy_buffer_size);
-        //}
+        if (buffers[j]!=nullptr){
+            delete buffers[j];
+        }
+        buffers[j] = new RingBuffer<T>(copy_buffer_size_bytes/sizeof(T));
       }
     }
 
     /// Remove all input streams
     void end() {
-      weights.clear();
       total_weights = 0.0;
       is_active = false;
     }
@@ -438,18 +441,20 @@ class OutputMixer : public Print {
     }
 
     /// Write the data from multiple streams mixed together 
-    size_t write(const uint8_t *buffer_c, size_t size){
-        LOGI("write %d: %d",stream_idx, size);
+    size_t write(const uint8_t *buffer_c, size_t bytes){
+        LOGI("write idx %d: %d",stream_idx, bytes);
         size_t result = 0;
         RingBuffer<T>* p_buffer = buffers[stream_idx];
         assert(p_buffer!=nullptr);
-        size_t samples = size/sizeof(T);
-        if (p_buffer->availableForWrite()>=samples){
+        size_t samples = bytes/sizeof(T);
+        if (p_buffer->availableForWrite()<samples){
+            LOGW("Available Buffer too small %d: requested: %d -> increase the buffer size", p_buffer->availableForWrite(),  samples);
+        } else {
             result = p_buffer->writeArray((T*)buffer_c, samples) * sizeof(T);
-        }
-        stream_idx++;
-        if (stream_idx>=output_count){
-            flush();
+            stream_idx++;
+            if (stream_idx>=output_count){
+                flush();
+            }
         }
         return result;
     }
@@ -458,7 +463,7 @@ class OutputMixer : public Print {
 
     /// Force output to final destination
     void flush() {
-        LOGD("flush");
+        LOGI("flush");
 
         // determine ringbuffer with mininum available data
         size_t samples = size_bytes/sizeof(T);
@@ -478,6 +483,7 @@ class OutputMixer : public Print {
         }
 
         // write output
+        LOGI("write to final out: %d", samples*sizeof(T));
         p_final_output->write((uint8_t*)output.data(), samples*sizeof(T));
         stream_idx = 0;
     }
