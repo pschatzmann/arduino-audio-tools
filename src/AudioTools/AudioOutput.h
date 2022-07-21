@@ -396,6 +396,8 @@ class OutputMixer : public Print {
       for (int i=0;i<count;i++){
           weights[i] = 1.0;
       }
+      
+      update_total_weights();
     }
 
     /// Defines a new weight for the indicated channel: If you set it to 0 it is muted.
@@ -405,30 +407,22 @@ class OutputMixer : public Print {
       } else {
         LOGE("Invalid channel %d - max is %d", channel, size()-1);
       }
+      update_total_weights();
     }
 
     void begin(int copy_buffer_size_bytes=DEFAULT_BUFFER_SIZE) {
       is_active = true;
-      total_weights = 0.0;
-      for (int j=0;j<weights.size();j++){
-        total_weights += weights[j];
-      }
-
       size_bytes = copy_buffer_size_bytes;
-   
-      // allocate ringbuffers for each output
-      for (int j=0;j<output_count;j++){
-        if (buffers[j]!=nullptr){
-            delete buffers[j];
-        }
-        buffers[j] = new RingBuffer<T>(copy_buffer_size_bytes/sizeof(T));
-      }
+      stream_idx = 0;
+      allocate_buffers();
     }
 
     /// Remove all input streams
     void end() {
       total_weights = 0.0;
       is_active = false;
+      // release memory for buffers
+      free_buffers();
     }
 
     /// Number of stremams to which are mixed together
@@ -436,34 +430,50 @@ class OutputMixer : public Print {
       return output_count;
     }
 
-    size_t write(uint8_t) {
+    size_t write(uint8_t) override{
         return 0;
     }
 
-    /// Write the data from multiple streams mixed together 
-    size_t write(const uint8_t *buffer_c, size_t bytes){
-        LOGI("write idx %d: %d",stream_idx, bytes);
+    /// Write the data from a simgle stream which will be mixed together (the stream idx is increased)
+    size_t write(const uint8_t *buffer_c, size_t bytes) override {
+        size_t result = write(stream_idx, buffer_c, bytes);
+        // after writing the last stream we flush
+        stream_idx++;
+        if (stream_idx>=output_count){
+            flush();
+        }
+        return result;
+    }
+
+    /// Write the data for an individual stream idx which will be mixed together 
+    size_t write(int idx, const uint8_t *buffer_c, size_t bytes)  {
+        LOGD("write idx %d: %d",stream_idx, bytes);
         size_t result = 0;
-        RingBuffer<T>* p_buffer = buffers[stream_idx];
+        RingBuffer<T>* p_buffer = idx<output_count ? buffers[idx] : nullptr;
         assert(p_buffer!=nullptr);
         size_t samples = bytes/sizeof(T);
         if (p_buffer->availableForWrite()<samples){
             LOGW("Available Buffer too small %d: requested: %d -> increase the buffer size", p_buffer->availableForWrite(),  samples);
         } else {
             result = p_buffer->writeArray((T*)buffer_c, samples) * sizeof(T);
-            stream_idx++;
-            if (stream_idx>=output_count){
-                flush();
-            }
         }
         return result;
     }
     
-    int availableForWrite() { return is_active ? size_bytes : 0; }
+    /// Provides the bytes available to write for the current stream buffer
+    int availableForWrite() override { return is_active ? availableForWrite(stream_idx) : 0; }
+
+    /// Provides the bytes available to write for the indicated stream index
+    int availableForWrite(int idx) { 
+        RingBuffer<T>* p_buffer = buffers[idx];
+        if (p_buffer == nullptr) return 0;
+        return p_buffer->availableForWrite();
+     }
 
     /// Force output to final destination
-    void flush() {
-        LOGI("flush");
+    void flush() override {
+        LOGD("flush");
+        bool result = false;
 
         // determine ringbuffer with mininum available data
         size_t samples = size_bytes/sizeof(T);
@@ -471,21 +481,25 @@ class OutputMixer : public Print {
             samples = min(samples, (size_t) buffers[j]->available());            
         }
 
-        // mix data from ringbuffers to output
-        output.resize(samples);
-        memset(output.data(),0, samples*sizeof(T));
-        for (int j=0;j<output_count;j++) {
-            float weight = weights[j];
-            // sum up input samples to result samples 
-            for (int i=0;i<samples; i++){
-                output[i] += weight * buffers[j]->read() / total_weights;
+        if (samples>0){
+            result = true;
+            // mix data from ringbuffers to output
+            output.resize(samples);
+            memset(output.data(),0, samples*sizeof(T));
+            for (int j=0;j<output_count;j++) {
+                float weight = weights[j];
+                // sum up input samples to result samples 
+                for (int i=0;i<samples; i++){
+                    output[i] += weight * buffers[j]->read() / total_weights;
+                }
             }
-        }
 
-        // write output
-        LOGI("write to final out: %d", samples*sizeof(T));
-        p_final_output->write((uint8_t*)output.data(), samples*sizeof(T));
+            // write output
+            LOGD("write to final out: %d", samples*sizeof(T));
+            p_final_output->write((uint8_t*)output.data(), samples*sizeof(T));
+        }
         stream_idx = 0;
+        return;
     }
 
   protected:
@@ -498,6 +512,33 @@ class OutputMixer : public Print {
     int stream_idx = 0;
     int size_bytes;
     int output_count;
+
+    void update_total_weights() {
+        total_weights = 0.0;
+        for (int j=0;j<weights.size();j++){
+            total_weights += weights[j];
+        }
+    }
+
+    void allocate_buffers() {
+      // allocate ringbuffers for each output
+      for (int j=0;j<output_count;j++){
+        if (buffers[j]!=nullptr){
+            delete buffers[j];
+        }
+        buffers[j] = new RingBuffer<T>(size_bytes/sizeof(T));
+      }
+    }
+
+    void free_buffers() {
+      // allocate ringbuffers for each output
+      for (int j=0;j<output_count;j++){
+        if (buffers[j]!=nullptr){
+            delete buffers[j];
+            buffers[j] = nullptr;
+        }
+      }
+    }
 
 };
 
