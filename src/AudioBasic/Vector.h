@@ -204,6 +204,7 @@ class Vector {
     }
 
     inline T &operator[](int index) {
+      assert(p_data!=nullptr);
       return p_data[index];
     }
 
