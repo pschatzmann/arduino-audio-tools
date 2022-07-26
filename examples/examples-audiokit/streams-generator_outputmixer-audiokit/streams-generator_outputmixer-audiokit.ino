@@ -51,6 +51,6 @@ void loop() {
   copier2.copy();
 
   // We could flush to force the output but this is not necessary because we were already writing all streams
-  //mixer.flush();
+  //mixer.flushMixer();
 
 }
