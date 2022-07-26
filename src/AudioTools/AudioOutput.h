@@ -441,7 +441,7 @@ class OutputMixer : public Print {
         // after writing the last stream we flush
         stream_idx++;
         if (stream_idx>=output_count){
-            flush();
+            flushMixer();
         }
         return result;
     }
@@ -472,7 +472,7 @@ class OutputMixer : public Print {
      }
 
     /// Force output to final destination
-    void flush() override {
+    void flushMixer() {
         LOGD("flush");
         bool result = false;
 
