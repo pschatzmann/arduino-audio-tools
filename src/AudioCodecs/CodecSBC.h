@@ -180,7 +180,7 @@ class SBCDecoder : public AudioDecoder {
 class SBCEncoder : public AudioEncoder {
  public:
   SBCEncoder(int resultBufferSize = 1024, int subbands = SBC_SB_8,
-             int blocks = SBC_BLK_16, int bitpool = 32,
+             int blocks = 16, int bitpool = 32,
              int snr = SBC_AM_LOUDNESS) {
     this->subbands = subbands;
     this->blocks = blocks;
