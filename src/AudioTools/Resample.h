@@ -223,7 +223,7 @@ class Resample : public AudioStreamX {
         // reduces the sampes by the indicated factor - returns the number of samples
         size_t downsample(T *from,T *to, int sample_count, int channels, int factor ){
             if (sample_count%factor!=0){
-                LOGE("Incompatible buffer length for down sampling. If must be a factor of %d", factor);
+                LOGE("Incompatible buffer length %d for down sampling. It must be a factor of %d", sample_count, factor);
                 return 0;
             }
             int to_pos=0;
@@ -245,7 +245,7 @@ class Resample : public AudioStreamX {
         // reduces the sampes by the indicated factor - returns the number of samples
         size_t downsampleSkip(T *from,T *to, int sample_count, int channels, int skip_every_nth ){
             if (sample_count%channels!=0){
-                LOGE("Incompatible buffer length for down sampling. If must be a factor of %d", factor);
+                LOGE("Incompatible buffer length for down sampling (skip). It must be a factor of %d", factor);
                 return 0;
             }
             int to_pos=0;
