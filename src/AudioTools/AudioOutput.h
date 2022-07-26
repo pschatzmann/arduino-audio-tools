@@ -410,10 +410,11 @@ class OutputMixer : public Print {
       update_total_weights();
     }
 
-    void begin(int copy_buffer_size_bytes=DEFAULT_BUFFER_SIZE) {
+    void begin(int copy_buffer_size_bytes=DEFAULT_BUFFER_SIZE, MemoryType memoryType=PS_RAM) {
       is_active = true;
       size_bytes = copy_buffer_size_bytes;
       stream_idx = 0;
+      memory_type = memoryType;
       allocate_buffers();
     }
 
@@ -512,6 +513,8 @@ class OutputMixer : public Print {
     int stream_idx = 0;
     int size_bytes;
     int output_count;
+    MemoryType memory_type;
+    void *p_memory=nullptr;
 
     void update_total_weights() {
         total_weights = 0.0;
@@ -526,7 +529,22 @@ class OutputMixer : public Print {
         if (buffers[j]!=nullptr){
             delete buffers[j];
         }
+#ifdef ESP32
+        if (memory_type==PS_RAM && ESP.getFreePsram()>=size_bytes){
+            p_memory = ps_malloc(size_bytes);
+            LOGI("Buffer %d allocated %d bytes in PS_RAM",j, size_bytes);
+        } else {
+            p_memory = malloc(size_bytes);
+            LOGI("Buffer %d allocated %d bytes in RAM",j, size_bytes);
+        }
+        if (p_memory!=nullptr){
+            buffers[j] = new(p_memory) RingBuffer<T>(size_bytes/sizeof(T));
+        } else {
+            LOGE("Not enough memory to allocate %d bytes",size_bytes);
+        }
+#else
         buffers[j] = new RingBuffer<T>(size_bytes/sizeof(T));
+#endif
       }
     }
 
@@ -535,6 +553,11 @@ class OutputMixer : public Print {
       for (int j=0;j<output_count;j++){
         if (buffers[j]!=nullptr){
             delete buffers[j];
+#ifdef ESP32
+            if (p_memory!=nullptr){
+                free(p_memory);
+            }
+#endif
             buffers[j] = nullptr;
         }
       }
