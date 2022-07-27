@@ -728,6 +728,11 @@ class Throttle {
  public:
   Throttle() = default;
 
+  ThrottleConfig defaultConfig() {
+    ThrottleConfig c;
+    return c;
+  }
+
   void begin(ThrottleConfig info) {
     this->info = info;
     bytesPerSample = info.bits_per_sample / 8 * info.channels;
