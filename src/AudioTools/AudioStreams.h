@@ -611,19 +611,20 @@ class ExternalBufferStream : public AudioStream {
 };
 
 /**
- * @brief AudioOutput class which stores the data in a temporary buffer.
- * The buffer can be consumed e.g. by a callback function by calling read();
+ * @brief AudioOutput class which stores the data in a temporary queue buffer.
+ * The queue can be consumed e.g. by a callback function by calling readBytes();
 
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 template <class T>
-class CallbackBufferedStream : public BufferedStream {
+class CallbackBufferedStream : public AudioStreamX {
  public:
   // Default constructor
-  CallbackBufferedStream(int bufferSize, int bufferCount)
-      : BufferedStream(bufferSize) {
+  CallbackBufferedStream(int bufferSize, int bufferCount, bool autoRemoveOldestDataIfFull=false)
+      : AudioStreamX() {
     callback_buffer_ptr = new NBuffer<T>(bufferSize, bufferCount);
+    remove_oldest_data = autoRemoveOldestDataIfFull;
   }
 
   virtual ~CallbackBufferedStream() { delete callback_buffer_ptr; }
@@ -636,24 +637,44 @@ class CallbackBufferedStream : public BufferedStream {
   }
 
   /// stops the processing
-  virtual bool stop() {
+  virtual void end() {
     LOGI(LOG_METHOD);
     active = false;
-    return true;
   };
+
+  int available() {
+    return callback_buffer_ptr->available()*sizeof(T);
+  }
+
+  int availableForWrite() {
+    return callback_buffer_ptr->availableForWrite()*sizeof(T);
+  }
+
+  virtual size_t write(const uint8_t *data, size_t len) override {
+    if (!active) return len;
+
+    // make space by deleting oldest entries
+    int available_bytes = callback_buffer_ptr->availableForWrite()*sizeof(T);
+    if (remove_oldest_data && len>available_bytes){
+      int gap = len-available_bytes;
+      uint8_t tmp[gap];
+      readBytes(tmp, gap);
+    }
+
+    return callback_buffer_ptr->writeArray(data, len / sizeof(T));
+  }
+
+  virtual size_t readBytes(uint8_t *data, size_t len) override {
+    if (!active) return 0;
+    return callback_buffer_ptr->readArray(data, len / sizeof(T));
+    ;
+  }
 
  protected:
   NBuffer<T> *callback_buffer_ptr;
   bool active;
+  bool remove_oldest_data;
 
-  virtual size_t writeExt(const uint8_t *data, size_t len) override {
-    return callback_buffer_ptr->writeArray(data, len / sizeof(T));
-  }
-
-  virtual size_t readExt(uint8_t *data, size_t len) override {
-    return callback_buffer_ptr->readArray(data, len / sizeof(T));
-    ;
-  }
 };
 
 /**
