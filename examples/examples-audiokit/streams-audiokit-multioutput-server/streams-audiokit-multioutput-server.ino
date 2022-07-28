@@ -16,7 +16,7 @@ const int buffer_count = 10;
 const int buffer_size = 1024;
 AudioKitStream kit; // input & output
 CallbackBufferedStream<uint8_t> queue(buffer_size, buffer_count, true); 
-AudioEncoderServer server(new WAVEncoder(),"Phil Schatzmann","sabrina01");  
+AudioEncoderServer server(new WAVEncoder(),"WIFI","password");  
 MultiOutput out(queue, kit);
 StreamCopy copier(out, kit); // copy kit to kit
 
