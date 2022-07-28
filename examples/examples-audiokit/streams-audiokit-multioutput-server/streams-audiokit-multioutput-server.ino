@@ -1,7 +1,7 @@
 /**
  * @file streams-audiokit-multioutput-server.ino
  * @author Phil Schatzmann
- * @brief MultiOutput Example using add - output to speaker and webserver
+ * @brief MultiOutput Example using output to speaker and webserver
  * @version 0.1
  * @date 2022-07-26
  * 
