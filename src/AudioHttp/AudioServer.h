@@ -188,7 +188,7 @@ class AudioServer {
                 client_obj.stop();
             } else if (in!=nullptr){
                 // provide data for stream
-                LOGI("sendReply - Returning WAV stream...");
+                LOGI("sendReply - Returning audio stream...");
                 copier.begin(client_obj, *in);
             }
         }
@@ -337,7 +337,7 @@ class AudioEncoderServer  : public AudioServer {
                 client_obj.stop();
             } else if (in!=nullptr){
                 // provide data for stream: in -copy>  encoded_stream -> out
-                LOGI("sendReply - Returning WAV stream...");
+                LOGI("sendReply - Returning encoded stream...");
                 encoded_stream.begin(out_ptr(), encoder);
                 copier.begin(encoded_stream, *in);
             }
