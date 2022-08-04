@@ -25,7 +25,7 @@ public:
   /// Activate the PSRAM for allocated memory > limit 
   bool begin(int limit = 10000) {
 #ifdef ESP32
-    LOGI("Activate PSRAM from %d", limit);
+    LOGI("Activate PSRAM from %d bytes", limit);
     heap_caps_malloc_extmem_enable(limit);
     return true;
 #else
