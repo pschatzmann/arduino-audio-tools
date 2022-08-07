@@ -2,7 +2,7 @@
 
 #include "AudioTools/AudioLogger.h"
 #include "AudioTools/AudioTypes.h"
-#include "AudioBasic/Vector.h"
+#include "AudioBasic/Collections.h"
 #include "AudioTools/AudioActions.h"
 #include "AudioTools/AudioStreams.h"
 #include "AudioEffects/SoundGenerator.h"

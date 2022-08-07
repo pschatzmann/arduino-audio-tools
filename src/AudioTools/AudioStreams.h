@@ -308,7 +308,145 @@ class MemoryStream : public AudioStream {
   }
 };
 
+/**
+ * @brief MemoryStream which is written and read using the internal RAM. For each write the data is allocated
+ * on the heap.
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class DynamicMemoryStream : public AudioStreamX {
+public:
+  struct DataNode {
+    int len=0;
+    uint8_t* data=nullptr;
+    DataNode() = default;
+    /// Constructor
+    DataNode(void*data, int len){
+      this->len = len;
+      this->data = new uint8_t[len];
+      memcpy(this->data, data, len);
+    }
 
+    ~DataNode(){
+      if (data!=nullptr) delete[]data;
+    }
+  };
+
+  DynamicMemoryStream() = default;
+  DynamicMemoryStream(bool isLoop, int defaultBufferSize=DEFAULT_BUFFER_SIZE ) {
+    this->default_buffer_size = defaultBufferSize;
+    is_loop = isLoop;
+  }
+  // Assign values from ref, clearing the original ref
+  void assign(DynamicMemoryStream &ref){
+    audio_list.swap(ref.audio_list);
+    it = ref.it;
+    total_available=ref.total_available;
+    default_buffer_size = ref.default_buffer_size;
+    alloc_failed = ref.alloc_failed;;
+    is_loop = ref.is_loop;
+    ref.clear();
+  }
+
+  /// Intializes the processing
+  virtual bool begin(){
+    clear();
+    temp_audio.resize(default_buffer_size);
+    return true;
+  }
+
+  virtual void end() {
+    clear();
+  }
+
+  virtual void setLoop(bool loop){
+    is_loop = loop;
+  }
+
+  void clear() {
+    audio_list.clear();
+    temp_audio.reset();
+    total_available = 0;
+    alloc_failed = false;
+    rewind();
+  }
+
+  size_t size(){
+    return total_available;
+  }
+
+  /// Sets the read position to the beginning
+  void rewind() {
+    it = audio_list.begin();
+  }
+
+  virtual size_t write(const uint8_t *buffer, size_t size) override {
+    DataNode node((void*)buffer, size);
+    if (node.data!=nullptr){
+      alloc_failed = false;
+      total_available += size;
+      audio_list.push_back(node);
+
+      // setup interator to point to first record
+      if (it == audio_list.end()){
+        it = audio_list.begin();
+      }
+
+      return size;
+    } 
+    alloc_failed = true;
+    return 0;
+  }
+
+  virtual int availableForWrite() override {
+    return alloc_failed ? 0 : default_buffer_size;
+  } 
+
+  virtual int available() override {
+    return it == audio_list.end() ? 0 : (*it).len;
+  }
+
+  virtual size_t readBytes(uint8_t *buffer, size_t length) override {
+    // provide unprocessed data
+    if (temp_audio.available()>0){
+      return temp_audio.readArray(buffer, length);
+    }
+
+    // We have no more data
+    if (it==audio_list.end()){
+      if (is_loop){
+        rewind();
+      } else {
+        // stop the processing
+        return 0;
+      }
+    }
+
+    // provide data from next node
+    DataNode node = *it;
+    int result_len = min(length, (size_t) node.len);
+    memcpy(buffer, node.data, result_len);
+    // save unprocessed data to temp buffer
+    if (node.len>length){
+      uint8_t *start = node.data+result_len;
+      int uprocessed_len = node.len - length; 
+      temp_audio.writeArray(start, uprocessed_len);
+    }
+    //move to next pos
+    ++it;
+    return result_len;
+  }
+
+protected:
+  List<DataNode> audio_list;
+  List<DataNode>::Iterator it = audio_list.end();
+  size_t total_available=0;
+  int default_buffer_size=DEFAULT_BUFFER_SIZE;
+  bool alloc_failed = false;
+  RingBuffer<uint8_t> temp_audio{DEFAULT_BUFFER_SIZE};
+  bool is_loop = false;
+
+};
 
 /**
  * @brief Source for reading generated tones. Please note
@@ -1117,6 +1255,11 @@ class InputMixer : public AudioStreamX {
       streams.push_back(&in);
       weights.push_back(weight);
       total_weights += weight;
+    }
+
+    virtual bool begin(AudioBaseInfo info) {
+  	  setAudioInfo(info);
+  	  return true;
     }
 
     /// Defines a new weight for the indicated channel: If you set it to 0 it is muted.

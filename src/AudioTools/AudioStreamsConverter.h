@@ -1,3 +1,4 @@
+#pragma once
 #include "AudioTools/AudioStreams.h"
 
 namespace audio_tools {

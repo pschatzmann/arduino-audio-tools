@@ -1,6 +1,6 @@
 #pragma once
 #include "AudioTypes.h"
-#include "AudioBasic/Vector.h"
+#include "AudioBasic/Collections.h"
 #include "AudioFilter/Filter.h"
 
 namespace audio_tools {
