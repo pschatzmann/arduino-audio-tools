@@ -1,7 +1,7 @@
 #pragma once 
 
 #include "AudioConfig.h"
-#include "AudioBasic/Vector.h"
+#include "AudioBasic/Collections.h"
 #include "AudioBasic/Float16.h"
 
 #ifndef FAUSTFLOAT

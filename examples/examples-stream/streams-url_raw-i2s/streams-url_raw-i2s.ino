@@ -9,8 +9,6 @@
 #include "WiFi.h"
 #include "AudioTools.h"
 
-
-
 URLStream music;    // Music Stream
 I2SStream i2s;// I2S as Stream
 StreamCopy copier(i2s, music, 1024); // copy music to i2s
@@ -46,6 +44,6 @@ void loop() {
   } else {
       i2s.end();
       Serial.println("\nCopy ended");
-      delay(10000);
+      stop();
   }
 }

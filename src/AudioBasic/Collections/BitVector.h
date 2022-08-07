@@ -13,7 +13,11 @@ class BitVector {
   public:
     BitVector() = default;
 
-    inline bool operator[](int index) {
+    inline bool operator[](size_t index) {
+        return get(index);
+    }
+
+    bool get(size_t index){
         bool result = false;
         int offset = index / sizeof(uint64_t);
         int bit = index % sizeof(uint64_t);
@@ -25,10 +29,11 @@ class BitVector {
         return result;
     }
 
-    void set(int index, bool value){
+    void set(size_t index, bool value){
+        max_idx = max(max_idx, index+1);
         int offset = index / sizeof(uint64_t);
         int bit = index % sizeof(uint64_t);
-        while(offset>vector.size()){
+        while(offset>=vector.size()){
             vector.push_back(0l);
         }
         // check if we need to updte the value
@@ -49,12 +54,13 @@ class BitVector {
     }
 
     void clear() {
+        max_idx = 0;
         vector.clear();
         vector.shrink_to_fit();
     }
 
     size_t size() {
-        return vector.size() * sizeof(uint64_t);
+        return max_idx;
     }
 
     /// Defines a callback method which is called when a value is updated
@@ -67,6 +73,7 @@ class BitVector {
     Vector<uint64_t> vector;
     void (*changeHandler)(int idx, bool value, void*ref) = nullptr;
     void *ref;
+    size_t max_idx=0;
 
 };
 

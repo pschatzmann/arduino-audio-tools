@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include "AudioBasic/Vector.h"
+#include "AudioBasic/Collections.h"
 #include "AudioTools/AudioLogger.h"
 
 #undef MIN
