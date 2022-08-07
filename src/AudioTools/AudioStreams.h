@@ -213,6 +213,11 @@ class MemoryStream : public AudioStream {
     return result;
   }
 
+  virtual int availableForWrite() override {
+    return buffer_size - write_pos;
+  } 
+
+
   virtual int read() override {
     int result = peek();
     if (result >= 0) {
@@ -302,6 +307,8 @@ class MemoryStream : public AudioStream {
     return memory_type!=FLASH_RAM;
   }
 };
+
+
 
 /**
  * @brief Source for reading generated tones. Please note
