@@ -44,6 +44,11 @@ void setup() {
   // setup player
   player.setVolume(0.7);
   player.begin();
+
+  // select file
+  //player.setPath("/ZZ Top/Unknown Album/Lowrider.mp3");
+  //player.setIndex(1); // 2nd file
+
 }
 
 void loop() {
