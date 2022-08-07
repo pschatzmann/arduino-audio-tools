@@ -59,9 +59,7 @@ namespace audio_tools {
         }
 
         /// Returns audio stream by path
-        virtual Stream* selectStream(const char* path) {
-            return selectStream(path);
-        }
+        virtual Stream* selectStream(const char* path) = 0;
 
         /// Sets the timeout which is triggering to move to the next stream. - the default value is 500 ms
         virtual void setTimeoutAutoNext(int millisec) {
@@ -121,6 +119,11 @@ namespace audio_tools {
         virtual Stream* selectStream(int index) override {
             return indexStreamCallback == nullptr ? nullptr : indexStreamCallback(index);
         }
+        /// Returns audio stream by path
+        virtual Stream* selectStream(const char* path) {
+            this->path = path;
+            return indexStreamCallback == nullptr ? nullptr : indexStreamCallback(-1);
+        };
 
         void setCallbackOnStart(void (*callback)()) {
             onStartCallback = callback;
@@ -142,11 +145,17 @@ namespace audio_tools {
             auto_next = a;
         }
 
+        // returns the requested path: relevant when provided idx in callback is -1
+        virtual const char* getPath() {
+            return path;
+        }
+
     protected:
         void (*onStartCallback)() = nullptr;
         bool auto_next = true;
         Stream* (*nextStreamCallback)() = nullptr;
         Stream* (*indexStreamCallback)(int index) = nullptr;
+        const char*path=nullptr;
     };
 
 #ifdef USE_SDFAT
