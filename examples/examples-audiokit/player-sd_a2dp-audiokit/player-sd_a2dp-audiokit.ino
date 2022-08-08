@@ -10,11 +10,11 @@
  */
 
 // install https://github.com/greiman/SdFat.git
-#define USE_SDFAT
 
 #include "AudioTools.h"
 #include "AudioLibs/AudioA2DP.h"
 #include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioSourceSdFat.h"
 #include "AudioCodecs/CodecMP3Helix.h"
 
 const char *startFilePath="/";

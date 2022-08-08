@@ -7,8 +7,8 @@
  */
 
 
-#define USE_SDFAT
 #include "AudioTools.h"
+#include "AudioLibs/AudioSourceSdFat.h"
 #include "AudioCodecs/CodecMP3Helix.h"
 
 
