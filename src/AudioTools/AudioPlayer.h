@@ -627,6 +627,12 @@ namespace audio_tools {
         virtual bool begin(int index=0, bool isActive = true) {
             LOGD(LOG_METHOD);
             bool result = false;
+            // initilaize volume
+            if (current_volume==-1){
+                setVolume(1.0);
+            } else {
+                setVolume(current_volume);
+            }
 
             // navigation support
             autonext = p_source->isAutoNext();
@@ -789,7 +795,7 @@ namespace audio_tools {
 
         /// Determines the actual volume
         virtual float volume() {
-            return volume_out.volume();
+            return current_volume;
         }
 
         /// Set move to next
@@ -867,7 +873,7 @@ namespace audio_tools {
         bool meta_active = false;
         uint32_t timeout = 0;
         bool previous_stream = false;
-        float current_volume = -1; // illegal value which will trigger an update
+        float current_volume = -1.0; // illegal value which will trigger an update
 
         /// Default constructur only allowed in subclasses
         AudioPlayer() {
