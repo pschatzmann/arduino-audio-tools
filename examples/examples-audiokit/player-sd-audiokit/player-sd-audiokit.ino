@@ -7,9 +7,9 @@
  */
 
 
-#define USE_SDFAT
 #include "AudioTools.h"
 #include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioSourceSdFat.h"
 #include "AudioCodecs/CodecMP3Helix.h"
 
 const char *startFilePath="/";
