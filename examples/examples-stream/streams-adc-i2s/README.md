@@ -14,6 +14,7 @@ Since the ADC via I2S is using the i2s port 0, we use port 1 for the output.
 | GND     |  GND
 | OUT     |  GPIO34
 
+For the input I was using a cjmcu-622 Microphone Sensor.
 Plaese note that the signal that we receive from the ADC needs to be adjusted so that it is oscillating around 0.
 
 ### External DAC:
