@@ -1,5 +1,5 @@
 /**
- * @file player-sd_a2dp-audiokit.ino
+ * @file player-sdfat_a2dp-audiokit.ino
  * @author Phil Schatzmann
  * @brief Swithcing between Player and A2DP
  * @version 0.1

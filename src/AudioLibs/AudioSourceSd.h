@@ -4,40 +4,41 @@
 #include "AudioLogger.h"
 #include "AudioTools/AudioSource.h"
 #include "FS.h"
-#include "SD_MMC.h"
+#include "SD.h"
+#include "SPI.h"
 
 namespace audio_tools {
 
 /**
  * @brief ESP32 AudioSource for AudioPlayer using an SD card as data source.
- * This class is based on the Arduino SD_MMC implementation
+ * This class is based on the Arduino SD implementation
  * Connect the SD card to the following pins:
  *
  * SD Card | ESP32
- *    D2       12
- *    D3       13
- *    CMD      15
+ *    D2       -
+ *    D3       SS
+ *    CMD      MOSI
  *    VSS      GND
  *    VDD      3.3V
- *    CLK      14
+ *    CLK      SCK
  *    VSS      GND
- *    D0       2  (add 1K pull up after flashing)
- *    D1       4
+ *    D0       MISO
+ *    D1       -
  *
  *  On the AI Thinker boards the pin settings should be On, On, On, On, On,
  *
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioSourceSdMmc : public AudioSource {
+class AudioSourceSd : public AudioSource {
 protected:
   /**
    * @brief We store all the relevant file names in an sequential index
    * file
    */
-  class MMCFileIndex {
+  class SDFileIndex {
   public:
-    MMCFileIndex() = default;
+    SDFileIndex() = default;
     void begin(bool setupIndex, const char *startDir, const char *extension,
                const char *file_name_pattern) {
       this->ext = extension;
@@ -49,7 +50,7 @@ protected:
       String keyNew = String(startDir) + "|" + extension + "|" + file_name_pattern;
       String keyOld = getIndexDef();
       if (setupIndex && (keyNew != keyOld || idx_file_size==0)) {
-        File idxfile = SD_MMC.open(idx_path.c_str(), FILE_WRITE);
+        File idxfile = SD.open(idx_path.c_str(), FILE_WRITE);
         LOGW("Creating index file");
         listDir(idxfile, startDir);
         LOGI("Indexing completed");
@@ -67,7 +68,7 @@ protected:
         return nullptr;
       }
       // find record
-      File idxfile = SD_MMC.open(idx_path.c_str());
+      File idxfile = SD.open(idx_path.c_str());
       int count=0;
 
       if (idxfile.available()==0){
@@ -102,7 +103,7 @@ protected:
 
     /// Writes the index file
     void listDir(File &idxfile, const char *dirname) {
-      File root = SD_MMC.open(dirname);
+      File root = SD.open(dirname);
       if (!root) {
         return;
       }
@@ -139,19 +140,19 @@ protected:
     }
 
     String getIndexDef() {
-      File idxdef = SD_MMC.open(idx_defpath.c_str());
+      File idxdef = SD.open(idx_defpath.c_str());
       String key1 = idxdef.readString();
       idxdef.close();
       return key1;
     }
     void saveIndexDef(String keyNew){
-        File idxdef = SD_MMC.open(idx_defpath.c_str(), FILE_WRITE);
+        File idxdef = SD.open(idx_defpath.c_str(), FILE_WRITE);
         idxdef.write((const uint8_t *)keyNew.c_str(), keyNew.length());
         idxdef.close();
     }
 
     size_t indexFileSize() {
-        File idxfile = SD_MMC.open(idx_path.c_str());
+        File idxfile = SD.open(idx_path.c_str());
         size_t result = idxfile.size();
         idxfile.close();
         return result;
@@ -160,18 +161,19 @@ protected:
 
 public:
   /// Default constructor
-  AudioSourceSdMmc(const char *startFilePath = "/", const char *ext = ".mp3", bool setupIndex=true) {
+  AudioSourceSd(const char *startFilePath = "/", const char *ext = ".mp3", int chipSelect = PIN_CS, bool setupIndex=true) {
     start_path = startFilePath;
     exension = ext;
     setup_index = setupIndex;
+    cs = chipSelect;
   }
 
   virtual void begin() override {
     LOGD(LOG_METHOD);
     static bool is_sd_setup = false;
     if (!is_sd_setup) {
-      if (!SD_MMC.begin("/sdcard", true)) {
-        LOGE("SD_MMC.begin failed");
+      if (!SD.begin(cs)) {
+        LOGE("SD.begin failed");
         return;
       }
       is_sd_setup = true;
@@ -191,13 +193,13 @@ public:
     file_name = idx[index];
     if (file_name==nullptr) return nullptr;
     LOGI("Using file %s", file_name);
-    file = SD_MMC.open(file_name);
+    file = SD.open(file_name);
     return file ? &file : nullptr;
   }
 
   virtual Stream *selectStream(const char *path) override {
     file.close();
-    file = SD_MMC.open(path);
+    file = SD.open(path);
     file_name = file.name();
     LOGI("-> selectStream: %s", path);
     return file ? &file : nullptr;
@@ -220,8 +222,9 @@ public:
   virtual void setPath(const char *p) { start_path = p; }
 
 protected:
+  int cs;
   File file;
-  MMCFileIndex idx;
+  SDFileIndex idx;
   size_t idx_pos = 0;
   const char *file_name;
   const char *exension = nullptr;

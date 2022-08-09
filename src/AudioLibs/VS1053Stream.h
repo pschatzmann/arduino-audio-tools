@@ -6,7 +6,7 @@
 namespace audio_tools {
 
 /**
- * @brief VS1053 Interface Class based on https://github.com/baldram/ESP_VS1053_Library
+ * @brief VS1053 Output Interface Class based on https://github.com/baldram/ESP_VS1053_Library
  * 
  */
 class VS1053Stream : public AudioStreamX {

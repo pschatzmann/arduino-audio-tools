@@ -1,6 +1,6 @@
 /**
- * @file player-sd-i2s.ino
- * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-player/player-sd-i2s/README.md
+ * @file player-sdfat-i2s.ino
+ * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-player/player-sdfat-i2s/README.md
  * 
  * @author Phil Schatzmann
  * @copyright GPLv3
