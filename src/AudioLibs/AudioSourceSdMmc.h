@@ -11,8 +11,20 @@
 namespace audio_tools {
 
 /**
- * @brief AudioSource for AudioPlayer using an SD card as data source.
- * This class is based on https://github.com/greiman/SdFat
+ * @brief ESP32 AudioSource for AudioPlayer using an SD card as data source.
+ * This class is based on the Arduino SD_MMC implementation
+ * Connect the SD card to the following pins:
+ *
+ * SD Card | ESP32
+ *    D2       12
+ *    D3       13
+ *    CMD      15
+ *    VSS      GND
+ *    VDD      3.3V
+ *    CLK      14
+ *    VSS      GND
+ *    D0       2  (add 1K pull up after flashing)
+ *    D1       4
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -25,32 +37,45 @@ protected:
   class MMCFileIndex {
   public:
     MMCFileIndex() = default;
-    void begin(const char *startDir, const char *extension,
+    void begin(bool setupIndex, const char *startDir, const char *extension,
                const char *file_name_pattern) {
       this->ext = extension;
       this->file_name_pattern = file_name_pattern;
-      idxfile = SD_MMC.open("/idx.txt", FILE_WRITE);
-      String key = String(startDir) + "|" + extension + "|" + file_name_pattern;
+      Stirng path = String(startDir)+"/idx.txt";
+      idxfile = SD_MMC.open(path.c_str(), FILE_WRITE);
 
-      File idxdef = SD_MMC.open("/idx-def.txt");
-      String key1 = idxdef.readString();
-      if (key != key) {
+      String keyNew = String(startDir) + "|" + extension + "|" + file_name_pattern;
+      String keyOld = getIndexDef();
+      if (setupIndex && keyNew != keyOld) {
         LOGW("Creating index file");
         listDir(startDir);
         // update index definition file
-        idxdef = SD_MMC.open("/idx-def.txt", FILE_WRITE);
-        idxdef.write((const uint8_t *)key.c_str(), key.length());
-        idxdef.close();
-      }
+        saveIndexDef(keyNew);
+      } 
     }
 
+    /// Access file name by index
     const char *operator[](int idx) {
+      // return null when inx too big
+      if (count>=0 && idx>=count) return nullptr;
+
+      // find record
       File idxfile = SD_MMC.open("/idx.txt");
-      for (int j = 0; j < idx && idxfile.available(); j++) {
+      int count=0;
+      bool found = false;
+      while (idxfile.available()&&!found) {
         result = idxfile.readStringUntil('\n');
+        if (count==idx) {
+          found=true;
+        }
+        count++;
+      }
+      if (!found){
+        size = count;
       }
       idxfile.close();
-      return result.c_str();
+
+      return found ? result.c_str(): nullptr;
     }
 
   protected:
@@ -58,7 +83,9 @@ protected:
     File idxfile;
     const char *ext = nullptr;
     const char *file_name_pattern = nullptr;
+    size_t size=-1;
 
+    /// Writes the index file
     void listDir(const char *dirname) {
       File root = SD_MMC.open(dirname);
       if (!root) {
@@ -74,6 +101,7 @@ protected:
           listDir(file.name());
         } else {
           if (isValidAudioFile(file)) {
+            LOGI("Adding file to index: %s", file.name());
             idxfile.println(file.name());
           }
         }
@@ -95,13 +123,26 @@ protected:
       LOGD("-> isValidAudioFile: '%s': %d", file_name, result);
       return result;
     }
+
+    String getIndexDef() {
+      File idxdef = SD_MMC.open("/idx-def.txt");
+      String key1 = idxdef.readString();
+      idxdef.close();
+      return key1;
+    }
+    void saveIndexDef(String keyNew){
+        File idxdef = SD_MMC.open("/idx-def.txt", FILE_WRITE);
+        idxdef.write((const uint8_t *)keyNew.c_str(), keyNew.length());
+        idxdef.close();
+    }
   };
 
 public:
   /// Default constructor
-  AudioSourceSdMmc(const char *startFilePath = "/", const char *ext = ".mp3") {
+  AudioSourceSdMmc(const char *startFilePath = "/", const char *ext = ".mp3", bool setupIndex=true) {
     start_path = startFilePath;
     exension = ext;
+    setup_index = setupIndex;
   }
 
   virtual void begin() override {
@@ -114,7 +155,7 @@ public:
       }
       is_sd_setup = true;
     }
-    idx.begin(start_path, exension, file_name_pattern);
+    idx.begin(setup_index, start_path, exension, file_name_pattern);
     idx_pos = 0;
   }
 
@@ -127,6 +168,8 @@ public:
     LOGW("selectStream: %d", index);
     idx_pos = index;
     file_name = idx[index];
+    if (file_name==nullptr) return nullptr;
+    LOGI("Using file %s", file_name);
     file = SD_MMC.open(file_name);
     return file ? &file : nullptr;
   }
@@ -163,6 +206,7 @@ protected:
   const char *exension = nullptr;
   const char *start_path = nullptr;
   const char *file_name_pattern = "*";
+  bool setup_index = true;
 };
 
 } // namespace audio_tools
