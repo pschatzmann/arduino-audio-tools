@@ -1,6 +1,6 @@
 /**
- * @file player-sd-analog.ino
- * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-player/player-sd-analog/README.md
+ * @file player-sdfat-analog.ino
+ * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-player/player-sdfat-analog/README.md
  * 
  * @author Phil Schatzmann
  * @copyright GPLv3
