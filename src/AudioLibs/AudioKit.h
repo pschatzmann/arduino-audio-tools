@@ -42,7 +42,12 @@ friend class AudioKitStream;
     result.fmt = toFormat();
     result.sample_rate = toSampleRate();
     result.bits_per_sample = toBits();
+#if AUDIOKIT_SETUP_SD
     result.sd_active = sd_active;
+#else
+//  SD has been deactivated in the AudioKitConfig.h file
+    result.sd_active = false;
+#endif  
     LOGW("sd_active = %s", sd_active ? "true" : "false" );
     return result;
   }
