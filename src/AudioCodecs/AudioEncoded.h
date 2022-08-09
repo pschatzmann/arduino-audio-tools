@@ -249,6 +249,14 @@ public:
     decoder_ptr->setNotifyAudioChange(bi);
   }
 
+  AudioBaseInfo defaultConfig() {
+    AudioBaseInfo cfg;
+    cfg.channels = 2;
+    cfg.sample_rate = 44100;
+    cfg.bits_per_sample = 16;
+    return cfg;
+  }
+
   virtual void setAudioInfo(AudioBaseInfo info) {
     LOGD(LOG_METHOD);
     AudioPrint::setAudioInfo(info);
