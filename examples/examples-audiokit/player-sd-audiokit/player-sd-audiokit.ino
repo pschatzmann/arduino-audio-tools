@@ -1,7 +1,7 @@
 /**
  * @file player-sd-audiokit.ino
  * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-audiokit/player-sd-audiokit/README.md
- * 
+ * Make sure that the pins are set to off, on, on, off, off
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
