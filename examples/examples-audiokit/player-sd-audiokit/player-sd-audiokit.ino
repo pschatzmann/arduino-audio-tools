@@ -25,6 +25,8 @@ void setup() {
 
   // setup output
   auto cfg = kit.defaultConfig(TX_MODE);
+  // sd_active is setting up SPI with the right SD pins by calling 
+  // SPI.begin(PIN_AUDIO_KIT_SD_CARD_CLK, PIN_AUDIO_KIT_SD_CARD_MISO, PIN_AUDIO_KIT_SD_CARD_MOSI, PIN_AUDIO_KIT_SD_CARD_CS);
   cfg.sd_active = true;
   kit.begin(cfg);
 
