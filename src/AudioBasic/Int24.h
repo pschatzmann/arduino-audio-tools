@@ -68,7 +68,7 @@ class int24_t  {
 
   /// Standard Conversion to Int
   int toInt() const {
-    int newInt = (((0xFF & value[0]) << 16) | ((0xFF & value[1]) << 8) | (0xFF & value[2]));
+    int newInt = ((((int32_t)0xFF & value[0]) << 16) | (((int32_t)0xFF & value[1]) << 8) | ((int32_t)0xFF & value[2]));
     if ((newInt & 0x00800000) > 0) {
       newInt |= 0xFF000000;
     } else {

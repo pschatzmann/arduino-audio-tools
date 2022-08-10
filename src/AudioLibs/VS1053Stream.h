@@ -19,8 +19,16 @@ public:
 
     bool begin() {
         p_vs1053 = new VS1053(_cs_pin,_dcs_pin,_dreq_pin );
+        // initialize SPI
+        SPI.begin();
+
         p_vs1053->begin();
         p_vs1053->startSong();
+        p_vs1053->switchToMp3Mode(); // optional, some boards require this    
+        if (p_vs1053->getChipVersion() == 4) { // Only perform an update if we really are using a VS1053, not. eg. VS1003
+            p_vs1053->loadDefaultVs1053Patches(); 
+        }
+        setVolume(vol);
         return true;
     }
 
@@ -32,11 +40,11 @@ public:
     /// value from 0 to 1.0
     void setVolume(float volume){
         // make sure that value is between 0 and 1
-        float v = volume;
-        if (v>1.0) v = 1.0;
-        if (v<0) v = 0.0;
+        vol = volume;
+        if (vol>1.0) vol = 1.0;
+        if (vol<0) vol = 0.0;
         // Set the player volume.Level from 0-100, higher is louder
-        p_vs1053->setVolume(v*100);
+        p_vs1053->setVolume(vol*100);
     }
 
     virtual size_t write(const uint8_t *buffer, size_t size) override{ 
@@ -53,6 +61,7 @@ public:
 protected:
     VS1053 *p_vs1053 = nullptr;
     uint8_t _cs_pin,  _dcs_pin,  _dreq_pin;
+    float vol=1.0;
 
 };
 

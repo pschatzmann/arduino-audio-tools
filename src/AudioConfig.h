@@ -381,7 +381,9 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define USE_PWM
 #define USE_TIMER
 
+#ifndef assert
 #define assert(T)
+#endif
 #define rintf(F) static_cast<int>(F)
 #define PIN_PWM_START 6
 #define PIN_CS CS
@@ -394,7 +396,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 
 // logging is using too much memory
 #undef LOG_PRINTF_BUFFER_SIZE 
-#define LOG_PRINTF_BUFFER_SIZE 80
+#define LOG_PRINTF_BUFFER_SIZE 40
 
 #undef USE_AUDIO_LOGGING
 #define USE_AUDIO_LOGGING false
