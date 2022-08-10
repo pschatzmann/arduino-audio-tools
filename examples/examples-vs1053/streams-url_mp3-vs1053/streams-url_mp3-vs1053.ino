@@ -13,6 +13,7 @@
 #include "AudioTools.h"
 #include "AudioLibs/VS1053Stream.h"
 
+// example pins for an ESP32
 #define VS1053_CS     5
 #define VS1053_DCS    16
 #define VS1053_DREQ   4
