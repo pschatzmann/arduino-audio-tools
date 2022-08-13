@@ -42,6 +42,7 @@ void loop() {
   if (len){
       Serial.print(".");
   } else {
+      delay(5000);
       i2s.end();
       Serial.println("\nCopy ended");
       stop();
