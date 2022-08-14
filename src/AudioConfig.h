@@ -97,6 +97,9 @@
 #define COPY_RETRY_LIMIT 20
 #endif
 
+#ifndef MAX_HTTP_HEADER_LINE_LENGTH
+#define MAX_HTTP_HEADER_LINE_LENGTH 240
+#endif
 
 /**
  * ------------------------------------------------------------------------- 
@@ -114,9 +117,6 @@
 #define PWM_FREQUENCY 60000
 #endif
 
-#ifndef MAX_HTTP_HEADER_LINE_LENGTH
-#define MAX_HTTP_HEADER_LINE_LENGTH 240
-#endif
 
 /**
  * ------------------------------------------------------------------------- 
