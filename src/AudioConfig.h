@@ -114,16 +114,9 @@
 #define PWM_FREQUENCY 60000
 #endif
 
-/**
- * ------------------------------------------------------------------------- 
- * @brief Activate decoders - only after installing them !
- */
-
-//#define USE_HELIX
-//#define USE_FDK
-//#define USE_LAME
-//#define USE_MAD
-
+#ifndef MAX_HTTP_HEADER_LINE_LENGTH
+#define MAX_HTTP_HEADER_LINE_LENGTH 240
+#endif
 
 /**
  * ------------------------------------------------------------------------- 
