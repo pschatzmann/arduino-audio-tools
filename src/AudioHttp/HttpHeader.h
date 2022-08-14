@@ -2,6 +2,7 @@
 
 #include "AudioBasic/Collections.h"
 #include "AudioBasic/StrExt.h"
+#include "AudioConfig.h"
 #include "AudioHttp/HttpLineReader.h" 
 #include "AudioHttp/Url.h"
 #include "AudioHttp/HttpTypes.h" 
@@ -10,7 +11,6 @@
 namespace audio_tools {
 
 // Class Configuration
-const int MaxHeaderLineLength = 240;
 
 // Define relevant header content
 const char* CONTENT_TYPE = "Content-Type";
@@ -225,7 +225,7 @@ class HttpHeader {
             // remove all existing value
             clear();
 
-            char line[MaxHeaderLineLength];   
+            char line[MAX_HTTP_HEADER_LINE_LENGTH];   
             if (in.connected()){
                 if (in.available()==0) {
                     LOGW("Waiting for data...");
@@ -233,10 +233,10 @@ class HttpHeader {
                         delay(500);
                     }
                 }
-                readLine(in, line, MaxHeaderLineLength);
+                readLine(in, line, MAX_HTTP_HEADER_LINE_LENGTH);
                 parse1stLine(line);
                 while (in.available()){
-                    readLine(in, line, MaxHeaderLineLength);
+                    readLine(in, line, MAX_HTTP_HEADER_LINE_LENGTH);
                     if (isValidStatus() || isRedirectStatus()){
                         Str lineStr(line);
                         lineStr.ltrim();
@@ -421,11 +421,11 @@ class HttpReplyHeader : public HttpHeader  {
         // reads the final chunked reply headers 
         void readExt(Client &in) {
             LOGI("HttpReplyHeader::readExt");
-            char line[MaxHeaderLineLength];   
-            readLine(in, line, MaxHeaderLineLength);
+            char line[MAX_HTTP_HEADER_LINE_LENGTH];   
+            readLine(in, line, MAX_HTTP_HEADER_LINE_LENGTH);
             while(strlen(line)!=0){
                 put(line);                
-                readLine(in, line, MaxHeaderLineLength);
+                readLine(in, line, MAX_HTTP_HEADER_LINE_LENGTH);
             }
         }
 
