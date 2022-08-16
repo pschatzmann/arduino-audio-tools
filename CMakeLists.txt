@@ -22,4 +22,12 @@ if (BUILD_TESTS)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests)
 else()
 #    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests EXCLUDE_FROM_ALL)
+    # Build with Portaudio 
+    FetchContent_Declare(portaudio GIT_REPOSITORY "https://github.com/PortAudio/portaudio.git" GIT_TAG master )
+    FetchContent_GetProperties(portaudio)
+    if(NOT portaudio_POPULATED)
+        FetchContent_Populate(portaudio)
+        add_subdirectory(${portaudio_SOURCE_DIR})
+    endif()
+
 endif()
