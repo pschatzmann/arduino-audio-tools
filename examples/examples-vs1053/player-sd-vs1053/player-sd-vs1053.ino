@@ -6,37 +6,38 @@
  * @copyright GPLv3
  */
 
-// install https://github.com/baldram/ESP_VS1053_Library.git
+// install https://github.com/pschatzmann/arduino-vs1053.git
 
 #include "AudioTools.h"
 #include "AudioLibs/VS1053Stream.h"
 #include "AudioLibs/AudioSourceSdFat.h"
 #include "AudioCodecs/CodecCopy.h"
 
-#define VS1053_CS     5
-#define VS1053_DCS    16
-#define VS1053_DREQ   4
-#define SD_CARD_CS    13
-#define SD_CARD_MISO 2
-#define SD_CARD_MOSI 15
-#define SD_CARD_CLK  14
+#define SD_CARD_CS  13
 
 const char *startFilePath="/";
 const char* ext="mp3";
 SdSpiConfig sdcfg(SD_CARD_CS, DEDICATED_SPI, SD_SCK_MHZ(10) , &SPI);
 AudioSourceSdFat source(startFilePath, ext, sdcfg);
-VS1053Stream vs1053(VS1053_CS,VS1053_DCS, VS1053_DREQ); // final output
-AudioPlayer player(source, vs1053, *new CodecCopy());
+VS1053Stream vs1053; // final output
+AudioPlayer player(source, vs1053, *new CopyDecoder());
 
 
 void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
-  SPI.begin(SD_CARD_CLK, SD_CARD_MISO, SD_CARD_MOSI, SD_CARD_CS);
+  SPI.begin(SD_CARD_CS);
 
   // setup output
-  vs1053.begin();
+  auto cfg = vs1053.defaultConfig();
+  cfg.is_encoded_data = true; // vs1053 is accepting encoded data
+  // Use your custom pins
+  //cfg.cs_pin = VS1053_CS; 
+  //cfg.dcs_pin = VS1053_DCS;
+  //cfg.dreq_pin = VS1053_DREQ;
+  //cfg.reset_pin = VS1053_RESET;
+  vs1053.begin(cfg);
 
   // setup player
   player.setVolume(0.7);

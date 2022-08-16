@@ -428,10 +428,18 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define SOFT_MUTE_VALUE LOW  
 #endif
 
+//------ VS1053 ----------
+
+#define VS1053_CS 27
+#define VS1053_DCS 14
+#define VS1053_DREQ 26
+#define VS1053_RESET -1  
+#define VS1053_CS_SD 13
+
+
 //----------------
 
-
-#ifdef IS_DESKTOP
+#ifdef IS_DESKTO
 #define USE_URL_ARDUINO
 #define FLUSH_OVERRIDE override
 #endif

@@ -7,21 +7,14 @@
  * @copyright GPLv3
  */
 
-// install https://github.com/baldram/ESP_VS1053_Library.git
+// install https://github.com/pschatzmann/arduino-vs1053.git
 
 #include "AudioTools.h"
 #include "AudioLibs/VS1053Stream.h"
 #include "BluetoothA2DPSink.h"
 
-// example pins for an ESP32
-#define VS1053_CS     5
-#define VS1053_DCS    16
-#define VS1053_DREQ   4
-
-
 BluetoothA2DPSink a2dp_sink;
-VS1053Stream vs1053(VS1053_CS,VS1053_DCS, VS1053_DREQ); // final output
-EncodedAudioStream out(&vs1053, new WAVEncoder()); // output is WAV file
+VS1053Stream out; // final output
 
 // Write data to SPDIF in callback
 void read_data_stream(const uint8_t *data, uint32_t length) {
@@ -44,9 +37,13 @@ void setup() {
   cfg.sample_rate = a2dp_sink.sample_rate();
   cfg.channels = 2;
   cfg.bits_per_sample = 16;
-  out.begin(cfg);
+  // Use your custom pins
+  //cfg.cs_pin = VS1053_CS; 
+  //cfg.dcs_pin = VS1053_DCS;
+  //cfg.dreq_pin = VS1053_DREQ;
+  //cfg.reset_pin = VS1053_RESET;
 
-  vs1053.begin();
+  out.begin(cfg);
 }
 
 void loop() { delay(1000); }
