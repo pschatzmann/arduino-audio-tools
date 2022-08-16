@@ -21,5 +21,5 @@ install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/src/" # source directory
 if (BUILD_TESTS)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests)
 else()
-    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests EXCLUDE_FROM_ALL)
+#    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests EXCLUDE_FROM_ALL)
 endif()

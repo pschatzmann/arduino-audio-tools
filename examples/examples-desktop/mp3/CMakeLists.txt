@@ -32,13 +32,20 @@ if(NOT arduino_audio_tools_POPULATED)
     add_subdirectory(${arduino_audio_tools_SOURCE_DIR})
 endif()
 
+# Build with libhelix
+FetchContent_Declare(arduino_helix GIT_REPOSITORY "https://github.com/pschatzmann/arduino-libhelix.git" GIT_TAG main )
+FetchContent_GetProperties(arduino_helix)
+if(NOT arduino_helix_POPULATED)
+    FetchContent_Populate(arduino_helix)
+    add_subdirectory(${arduino_helix_SOURCE_DIR})
+endif()
 
 # build sketch as executable
 add_executable (mp3_dt mp3.cpp)
 
 # set preprocessor defines
 target_compile_definitions(arduino_emulator PUBLIC -DDEFINE_MAIN)
-#target_compile_definitions(arduino_helix PUBLIC -DARDUINO)
+target_compile_definitions(arduino_helix PUBLIC -DARDUINO)
 target_compile_definitions(mp3_dt PUBLIC -DARDUINO -DIS_DESKTOP -DEXIT_ON_STOP)
 
 # OS/X might need this setting for core audio
