@@ -598,7 +598,7 @@ class ResampleBuffer  {
 
     /// Writes the data up or downsampled to the final destination
     size_t write(const uint8_t *src, size_t byte_count)  {
-        resampled_byte_count = byte_count * factor;
+        resampled_byte_count = byte_count * fact;
         resampled_data.resize(resampled_byte_count);
         resampled_data.clear();
         size_t result = resampler.write(src, byte_count); 
