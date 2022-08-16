@@ -283,6 +283,11 @@ class NoiseGenerator : public SoundGenerator<T> {
 
     protected:
         T amplitude;
+        // //range : [min, max]
+        int random(int min, int max)  {
+            return min + rand() % (( max + 1 ) - min);
+        }
+
 
 };
 
