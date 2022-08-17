@@ -28,6 +28,7 @@ public:
     bool begin() {
         LOGD(LOG_METHOD);
         if (_reset_pin!=-1){
+            LOGI("Setting reset pin to high: %d", _reset_pin);
             pinMode(_reset_pin, OUTPUT);
             digitalWrite(_reset_pin, HIGH);
         }
