@@ -436,7 +436,9 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define VS1053_RESET -1  
 #define VS1053_CS_SD 13
 
-
+// use 0 for https://github.com/baldram/ESP_VS1053_Library
+// use 1 for https://github.com/pschatzmann/arduino-vs1053
+#define VS1053_EXT 0
 //----------------
 
 #ifdef IS_DESKTO

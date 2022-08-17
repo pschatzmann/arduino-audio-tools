@@ -3,6 +3,7 @@
 #include "AudioTools/AudioStreams.h"
 #include "VS1053.h"
 #include "AudioCodecs/CodecCopy.h"
+
 namespace audio_tools {
 
 /**
@@ -22,7 +23,11 @@ public:
 
     bool begin() {
         LOGD(LOG_METHOD);
-        p_vs1053 = new VS1053(_cs_pin,_dcs_pin,_dreq_pin, _reset_pin);
+        if (_reset_pin!=-1){
+            pinMode(_reset_pin, OUTPUT);
+            digitalWrite(_reset_pin, HIGH);
+        }
+        p_vs1053 = new VS1053(_cs_pin,_dcs_pin,_dreq_pin);
         // initialize SPI
         SPI.begin();
 
@@ -81,6 +86,21 @@ public:
         return static_cast<float>(p_vs1053->getBalance())/100.0;
     }
 
+
+    /// Write encoded (mp3, aac, wav etc) data
+    virtual size_t write(const uint8_t *buffer, size_t size) override{ 
+        if (p_vs1053==nullptr) return 0;
+        p_vs1053->playChunk((uint8_t*)buffer, size);
+        return size;
+    }
+
+    VS1053 &getVS1053() {
+        LOGD(LOG_METHOD);
+        if (p_vs1053==nullptr) begin();
+        return *p_vs1053;
+    }
+
+#if VS1053_EXT
     /// Provides the treble amplitude value
     float treble() {
         LOGD(LOG_METHOD);
@@ -128,19 +148,7 @@ public:
             p_vs1053->setBassFrequencyLimit(value);
         }
     }
-
-    /// Write encoded (mp3, aac, wav etc) data
-    virtual size_t write(const uint8_t *buffer, size_t size) override{ 
-        if (p_vs1053==nullptr) return 0;
-        p_vs1053->playChunk((uint8_t*)buffer, size);
-        return size;
-    }
-
-    VS1053 &getVS1053() {
-        LOGD(LOG_METHOD);
-        if (p_vs1053==nullptr) begin();
-        return *p_vs1053;
-    }
+#endif
 
 protected:
     VS1053 *p_vs1053 = nullptr;
@@ -267,6 +275,34 @@ public:
         return p_driver->balance();
     }
 
+    /// Write audio data
+    virtual size_t write(const uint8_t *buffer, size_t size) override{ 
+        if (p_out==nullptr) return 0;
+        return p_out->write(buffer, size);
+    }
+
+    /// returns the VS1053 object
+    VS1053 &getVS1053() {
+        LOGD(LOG_METHOD);
+        return p_driver->getVS1053();
+    }
+
+    /// Defines an alternative encoder that will be used (e.g. MP3Encoder). It must be allocated on the heap!
+    bool setEncoder(AudioEncoder *enc){
+        LOGI(LOG_METHOD);
+        if (p_out!=nullptr){
+            logError("setEncoder");
+            return false;
+        }
+        if (p_encoder!=nullptr){
+            delete p_encoder;
+            p_encoder = enc;
+        }
+        return true;
+    }
+
+#if VS1053_EXT
+
     /// Provides the treble amplitude value
     float treble() {
         LOGD(LOG_METHOD);
@@ -325,32 +361,7 @@ public:
         }
         p_driver->setBassFrequencyLimit(value);
     }
-
-    /// Write audio data
-    virtual size_t write(const uint8_t *buffer, size_t size) override{ 
-        if (p_out==nullptr) return 0;
-        return p_out->write(buffer, size);
-    }
-
-    /// returns the VS1053 object
-    VS1053 &getVS1053() {
-        LOGD(LOG_METHOD);
-        return p_driver->getVS1053();
-    }
-
-    /// Defines an alternative encoder that will be used (e.g. MP3Encoder). It must be allocated on the heap!
-    bool setEncoder(AudioEncoder *enc){
-        LOGI(LOG_METHOD);
-        if (p_out!=nullptr){
-            logError("setEncoder");
-            return false;
-        }
-        if (p_encoder!=nullptr){
-            delete p_encoder;
-            p_encoder = enc;
-        }
-        return true;
-    }
+#endif
 
 protected:
     VS1053Config cfg;
