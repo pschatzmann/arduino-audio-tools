@@ -209,7 +209,8 @@ public:
     /// Starts with the indicated configuration
     bool begin(VS1053Config cfg) {
         LOGI(LOG_METHOD);
-        cfg.logInfo();
+        this->cfg = cfg;
+        setAudioInfo(cfg);
         LOGI("is_encoded_data: %s", cfg.is_encoded_data?"true":"false");
         LOGI("cs_pin: %d", cfg.cs_pin);
         LOGI("dcs_pin: %d", cfg.dcs_pin);
@@ -217,8 +218,6 @@ public:
         LOGI("reset_pin: %d", cfg.reset_pin);
         LOGI("cs_sd_pin: %d", cfg.cs_sd_pin);
 
-        this->cfg = cfg;
-        setAudioInfo(cfg);
         if (p_driver==nullptr){
             p_driver = new VS1053BaseStream(cfg.cs_pin,cfg.dcs_pin,cfg.dreq_pin, cfg.reset_pin);
         }
