@@ -35,7 +35,7 @@ void setup(){
   cfg.sample_rate = sample_rate;
   cfg.channels = channels;
   cfg.bits_per_sample = bits_per_sample;
-  // Use your custom pins
+  // Use your custom pins or define in AudioCodnfig.h
   //cfg.cs_pin = VS1053_CS; 
   //cfg.dcs_pin = VS1053_DCS;
   //cfg.dreq_pin = VS1053_DREQ;
