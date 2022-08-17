@@ -24,7 +24,7 @@ void setup(){
   // setup vs1053
   auto cfg = vs1053.defaultConfig();
   cfg.is_encoded_data = true; // vs1053 is accepting encoded data
-  // Use your custom pins
+  // Use your custom pins or define in AudioCodnfig.h
   //cfg.cs_pin = VS1053_CS; 
   //cfg.dcs_pin = VS1053_DCS;
   //cfg.dreq_pin = VS1053_DREQ;
