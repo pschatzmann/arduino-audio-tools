@@ -439,10 +439,10 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 
 // use 0 for https://github.com/baldram/ESP_VS1053_Library
 // use 1 for https://github.com/pschatzmann/arduino-vs1053
-#define VS1053_EXT 0
+#define VS1053_EXT 1
 //----------------
 
-#ifdef IS_DESKTO
+#ifdef IS_DESKTOP
 #define USE_URL_ARDUINO
 #define FLUSH_OVERRIDE override
 #endif

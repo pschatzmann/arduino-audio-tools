@@ -180,6 +180,7 @@ class VS1053Config : public AudioBaseInfo {
     uint8_t dreq_pin = VS1053_DREQ;
     int16_t reset_pin = VS1053_RESET; // -1 is undefined
     uint8_t cs_sd_pin = VS1053_CS_SD; 
+    RxTxMode mode;
 };
 
 /**
@@ -193,9 +194,10 @@ public:
     VS1053Stream(){
     }
 
-    VS1053Config defaultConfig() {
+    VS1053Config defaultConfig(RxTxMode mode=TX_MODE) {
         LOGD(LOG_METHOD);
         VS1053Config c;
+        c.mode = mode;
         return c;
     }
 
@@ -224,8 +226,21 @@ public:
             AudioEncoder *p_enc = cfg.is_encoded_data ? p_encoder :&copy;
             p_out = new EncodedAudioStream(p_driver, p_enc);   
         }
-        p_out->begin(cfg);      
-        p_driver->begin();
+
+        switch(cfg.mode){
+            case TX_MODE:
+                p_out->begin(cfg);      
+                p_driver->begin();
+                return true;
+#if VS1053_EXT
+            case RX_MODE:
+                getVS1053().beginInput(cfg.is_encoded_data);
+                return true;
+#endif
+            default:
+                LOGE("Mode not supported");
+                return false;
+        }
     }
 
     /// Stops the processing and releases the memory
@@ -307,6 +322,12 @@ public:
     }
 
 #if VS1053_EXT
+    int available() override {
+        return getVS1053().available();
+    }
+    size_t readBytes(uint8_t* data, size_t len) override {
+        return getVS1053().readBytes(data, len);
+    }
 
     /// Provides the treble amplitude value
     float treble() {
