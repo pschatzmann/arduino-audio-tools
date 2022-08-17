@@ -161,6 +161,8 @@ protected:
     int16_t _reset_pin=-1;
 };
 
+enum VS1053Mode {ENCODED_MODE, PCM_MODE, MIDI_MODE };
+
 /**
  * @brief Configuration for VS1053Stream
  * @author Phil Schatzmann
@@ -174,13 +176,14 @@ class VS1053Config : public AudioBaseInfo {
         bits_per_sample = 16;
     }
     /// set to false if it is a pcm stream
-    bool is_encoded_data = false;
     uint8_t cs_pin = VS1053_CS; 
     uint8_t dcs_pin = VS1053_DCS;
     uint8_t dreq_pin = VS1053_DREQ;
     int16_t reset_pin = VS1053_RESET; // -1 is undefined
     uint8_t cs_sd_pin = VS1053_CS_SD; 
     RxTxMode mode;
+    bool is_encoded_data = false;
+    bool is_midi_mode = false;
 };
 
 /**
@@ -209,6 +212,10 @@ public:
     /// Starts with the indicated configuration
     bool begin(VS1053Config cfg) {
         LOGI(LOG_METHOD);
+        // enfornce encoded data for midi mode
+        if (cfg.is_midi_mode){
+            cfg.is_encoded_data = true;
+        }
         this->cfg = cfg;
         setAudioInfo(cfg);
         LOGI("is_encoded_data: %s", cfg.is_encoded_data?"true":"false");
@@ -226,7 +233,18 @@ public:
             p_out = new EncodedAudioStream(p_driver, p_enc);   
         }
 
+        // hack to treat midi as separate mode
+        const int MIDI_MODE = 100;
+        int mode = cfg.mode;
+        if (cfg.is_midi_mode){
+            mode = MIDI_MODE;
+        }
+
         switch(cfg.mode){
+            case MIDI_MODE:
+                getVS1053().beginMIDI();
+                return true;
+
             case TX_MODE:
                 p_out->begin(cfg);      
                 p_driver->begin();
