@@ -13,6 +13,7 @@ namespace audio_tools {
 class VS1053BaseStream : public AudioStreamX {
 public:
     VS1053BaseStream(uint8_t _cs_pin, uint8_t _dcs_pin, uint8_t _dreq_pin,int16_t _reset_pin=-1){
+        LOGD(LOG_METHOD);
         this->_cs_pin = _cs_pin;
         this->_dcs_pin = _dcs_pin;
         this->_dreq_pin = _dreq_pin;
@@ -20,6 +21,7 @@ public:
     }
 
     bool begin() {
+        LOGD(LOG_METHOD);
         p_vs1053 = new VS1053(_cs_pin,_dcs_pin,_dreq_pin, _reset_pin);
         // initialize SPI
         SPI.begin();
@@ -35,6 +37,7 @@ public:
 
     void end(){
         if (p_vs1053!=nullptr){
+            LOGD(LOG_METHOD);
             p_vs1053->stopSong();
             delete p_vs1053;
             p_vs1053 = nullptr;
@@ -43,6 +46,7 @@ public:
 
     /// value from 0 to 1.0
     void setVolume(float vol){
+        LOGD(LOG_METHOD);
         // make sure that value is between 0 and 1
         float volume = vol;
         if (volume>1.0) volume = 1.0;
@@ -55,12 +59,14 @@ public:
 
     /// provides the volume
     float volume() {
+        LOGD(LOG_METHOD);
         if (p_vs1053==nullptr) return -1.0;
         return p_vs1053->getVolume()/100.0;;
     }
 
     /// Adjusting the left and right volume balance, higher to enhance the right side, lower to enhance the left side.
     void setBalance(float bal){
+        LOGD(LOG_METHOD);
         float balance = bal;
         if (balance<-1.0) balance = -1;
         if (balance>1.0) balance = 1;
@@ -70,18 +76,21 @@ public:
     }
     /// Get the currenet balance setting (-1.0..1.0)
     float balance(){
+        LOGD(LOG_METHOD);
         if (p_vs1053==nullptr) return -1.0;
         return static_cast<float>(p_vs1053->getBalance())/100.0;
     }
 
     /// Provides the treble amplitude value
     float treble() {
+        LOGD(LOG_METHOD);
         if (p_vs1053==nullptr) return -1.0;
         return static_cast<float>(p_vs1053->treble())/100.0;
     }
 
     /// Sets the treble amplitude value (range 0 to 1.0)
     void setTreble(float val){
+        LOGD(LOG_METHOD);
         float value = val;
         if (value<0.0) value = 0.0;
         if (value>1.0) value = 1.0;
@@ -92,12 +101,14 @@ public:
 
     /// Provides the Bass amplitude value 
     float bass() {
+        LOGD(LOG_METHOD);
         if (p_vs1053==nullptr) return -1;
         return static_cast<float>(p_vs1053->bass())/100.0;
     }
 
     /// Sets the bass amplitude value (range 0 to 1.0)
     void setBass(float value){
+        LOGD(LOG_METHOD);
         if (p_vs1053!=nullptr){
             p_vs1053->setBass(value*100.0);
         }
@@ -105,12 +116,14 @@ public:
 
     /// Sets the treble frequency limit in hz (range 0 to 15000)
     void setTrebleFrequencyLimit(uint16_t value){
+        LOGD(LOG_METHOD);
         if (p_vs1053!=nullptr){
             p_vs1053->setTrebleFrequencyLimit(value);
         }
     }
     /// Sets the bass frequency limit in hz (range 0 to 15000)
     void setBassFrequencyLimit(uint16_t value){
+        LOGD(LOG_METHOD);
         if (p_vs1053!=nullptr){
             p_vs1053->setBassFrequencyLimit(value);
         }
@@ -124,6 +137,7 @@ public:
     }
 
     VS1053 &getVS1053() {
+        LOGD(LOG_METHOD);
         if (p_vs1053==nullptr) begin();
         return *p_vs1053;
     }
@@ -167,6 +181,7 @@ public:
     }
 
     VS1053Config defaultConfig() {
+        LOGD(LOG_METHOD);
         VS1053Config c;
         return c;
     }
@@ -178,6 +193,15 @@ public:
 
     /// Starts with the indicated configuration
     bool begin(VS1053Config cfg) {
+        LOGI(LOG_METHOD);
+        cfg.logInfo();
+        LOGI("is_encoded_data: %s", cfg.is_encoded_data?"true":"false");
+        LOGI("cs_pin: %d", cfg.cs_pin);
+        LOGI("dcs_pin: %d", cfg.dcs_pin);
+        LOGI("dreq_pin: %d", cfg.dreq_pin);
+        LOGI("reset_pin: %d", cfg.reset_pin);
+        LOGI("cs_sd_pin: %d", cfg.cs_sd_pin);
+
         this->cfg = cfg;
         setAudioInfo(cfg);
         if (p_driver==nullptr){
@@ -193,6 +217,7 @@ public:
 
     /// Stops the processing and releases the memory
     void end(){
+        LOGI(LOG_METHOD);
         if (p_out!=nullptr){
             delete p_out;
             p_out = nullptr;
@@ -206,6 +231,7 @@ public:
 
     /// Sets the volume: value from 0 to 1.0
     void setVolume(float volume){
+        LOGI(LOG_METHOD);
         if (p_driver==nullptr) {
             logError(__FUNCTION__);
             return;
@@ -214,6 +240,7 @@ public:
     }
     /// provides the volume
     float volume() {
+        LOGI(LOG_METHOD);
         if (p_driver==nullptr) {
             logError(__FUNCTION__);
             return -1;
@@ -223,6 +250,7 @@ public:
 
     /// Adjusting the left and right volume balance, higher to enhance the right side, lower to enhance the left side.
     void setBalance(float balance){
+        LOGI(LOG_METHOD);
         if (p_driver==nullptr) {
             logError(__FUNCTION__);
             return;
@@ -231,6 +259,7 @@ public:
     }
     /// Get the currenet balance setting (-1.0..1.0)
     float balance(){
+        LOGD(LOG_METHOD);
         if (p_driver==nullptr) {
             logError(__FUNCTION__);
             return -1;
@@ -240,6 +269,7 @@ public:
 
     /// Provides the treble amplitude value
     float treble() {
+        LOGD(LOG_METHOD);
         if (p_driver==nullptr) {
             logError(__FUNCTION__);
             return -1;
@@ -249,6 +279,7 @@ public:
 
     /// Sets the treble amplitude value (range 0 to 1.0)
     void setTreble(float value){
+        LOGI(LOG_METHOD);
         if (p_driver==nullptr) {
             logError(__FUNCTION__);
             return;
@@ -258,6 +289,7 @@ public:
 
     /// Provides the Bass amplitude value 
     float bass() {
+        LOGD(LOG_METHOD);
         if (p_driver==nullptr) {
             logError(__FUNCTION__);
             return -1;
@@ -267,6 +299,7 @@ public:
 
     /// Sets the bass amplitude value (range 0 to 1.0)
     void setBass(float value){
+        LOGI(LOG_METHOD);
         if (p_driver==nullptr) {
             logError(__FUNCTION__);
             return;
@@ -276,6 +309,7 @@ public:
 
     /// Sets the treble frequency limit in hz (range 0 to 15000)
     void setTrebleFrequencyLimit(uint16_t value){
+        LOGI(LOG_METHOD);
         if (p_driver==nullptr) {
             logError(__FUNCTION__);
             return;
@@ -284,6 +318,7 @@ public:
     }
     /// Sets the bass frequency limit in hz (range 0 to 15000)
     void setBassFrequencyLimit(uint16_t value){
+        LOGI(LOG_METHOD);
         if (p_driver==nullptr) {
             logError(__FUNCTION__);
             return;
@@ -299,23 +334,27 @@ public:
 
     /// returns the VS1053 object
     VS1053 &getVS1053() {
+        LOGD(LOG_METHOD);
         return p_driver->getVS1053();
     }
 
     /// Defines an alternative encoder that will be used (e.g. MP3Encoder). It must be allocated on the heap!
     bool setEncoder(AudioEncoder *enc){
+        LOGI(LOG_METHOD);
         if (p_out!=nullptr){
             logError("setEncoder");
             return false;
         }
-        delete p_encoder;
-        p_encoder = enc;
+        if (p_encoder!=nullptr){
+            delete p_encoder;
+            p_encoder = enc;
+        }
         return true;
     }
 
 protected:
     VS1053Config cfg;
-    VS1053BaseStream *p_driver=nullptr;
+    VS1053BaseStream *p_driver = nullptr;
     EncodedAudioStream *p_out = nullptr;
     AudioEncoder *p_encoder = new WAVEncoder(); // by default we send wav data 
     CopyEncoder copy;  // used when is_encoded_data == true
