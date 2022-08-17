@@ -1,8 +1,12 @@
 #pragma once
 
 #include "AudioTools/AudioStreams.h"
-#include "VS1053.h"
 #include "AudioCodecs/CodecCopy.h"
+#if VS1053_EXT
+# include "VS1053Driver.h"
+#else
+# include "VS1053.h"
+#endif
 
 namespace audio_tools {
 

@@ -430,6 +430,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 
 //------ VS1053 ----------
 
+// Default Pins for VS1053
 #define VS1053_CS 27
 #define VS1053_DCS 14
 #define VS1053_DREQ 26
