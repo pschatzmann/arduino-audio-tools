@@ -31,6 +31,7 @@ public:
             LOGI("Setting reset pin to high: %d", _reset_pin);
             pinMode(_reset_pin, OUTPUT);
             digitalWrite(_reset_pin, HIGH);
+            delay(200);
         }
         p_vs1053 = new VS1053(_cs_pin,_dcs_pin,_dreq_pin);
         // initialize SPI
@@ -56,11 +57,11 @@ public:
 
     /// value from 0 to 1.0
     void setVolume(float vol){
-        LOGD("setVolume: %f", vol);
         // make sure that value is between 0 and 1
         float volume = vol;
         if (volume>1.0) volume = 1.0;
         if (volume<0.0) volume = 0.0;
+        LOGD("setVolume: %f", volume);
         if (p_vs1053!=nullptr){
             // Set the player volume.Level from 0-100, higher is louder
             p_vs1053->setVolume(volume*100.0);
@@ -76,10 +77,10 @@ public:
 
     /// Adjusting the left and right volume balance, higher to enhance the right side, lower to enhance the left side.
     void setBalance(float bal){
-        LOGD("setBalance: %f", vol);
         float balance = bal;
         if (balance<-1.0) balance = -1;
         if (balance>1.0) balance = 1;
+        LOGD("setBalance: %f", balance);
         if (p_vs1053!=nullptr){
             p_vs1053->setBalance(balance*100.0);
         }
@@ -115,10 +116,10 @@ public:
 
     /// Sets the treble amplitude value (range 0 to 1.0)
     void setTreble(float val){
-        LOGD("setTreble: %f", vol);
         float value = val;
         if (value<0.0) value = 0.0;
         if (value>1.0) value = 1.0;
+        LOGD("setTreble: %f", value);
         if (p_vs1053!=nullptr){
             p_vs1053->setTreble(value*100);
         }
@@ -132,8 +133,11 @@ public:
     }
 
     /// Sets the bass amplitude value (range 0 to 1.0)
-    void setBass(float value){
-        LOGD("setBass: %f", vol);
+    void setBass(float val){
+        float value = val;
+        if (value<0.0) value = 0.0;
+        if (value>1.0) value = 1.0;
+        LOGD("setBass: %f", value);
         if (p_vs1053!=nullptr){
             p_vs1053->setBass(value*100.0);
         }
@@ -141,14 +145,14 @@ public:
 
     /// Sets the treble frequency limit in hz (range 0 to 15000)
     void setTrebleFrequencyLimit(uint16_t value){
-        LOGD("setTrebleFrequencyLimit: %u", vol);
+        LOGD("setTrebleFrequencyLimit: %u", value);
         if (p_vs1053!=nullptr){
             p_vs1053->setTrebleFrequencyLimit(value);
         }
     }
     /// Sets the bass frequency limit in hz (range 0 to 15000)
     void setBassFrequencyLimit(uint16_t value){
-        LOGD("setBassFrequencyLimit: %u", vol);
+        LOGD("setBassFrequencyLimit: %u", value);
         if (p_vs1053!=nullptr){
             p_vs1053->setBassFrequencyLimit(value);
         }
@@ -246,12 +250,14 @@ public:
             case TX_MODE:
                 p_out->begin(cfg);      
                 p_driver->begin();
+                delay(100);
                 setVolume(VS1053_DEFAULT_VOLUME);   
                 result = true;
                 break;
 #if VS1053_EXT
             case MIDI_MODE:
                 getVS1053().beginMIDI();
+                delay(100);
                 setVolume(VS1053_DEFAULT_VOLUME);   
                 result = true;
                 break;
@@ -262,7 +268,7 @@ public:
                 break;
 #endif
             default:
-                LOGE("Mode not supported");
+                LOGD("Mode not supported");
                 result = false;
                 break;
         }
