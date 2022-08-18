@@ -56,7 +56,7 @@ public:
 
     /// value from 0 to 1.0
     void setVolume(float vol){
-        LOGD(LOG_METHOD);
+        LOGD("setVolume: %f", vol);
         // make sure that value is between 0 and 1
         float volume = vol;
         if (volume>1.0) volume = 1.0;
@@ -76,7 +76,7 @@ public:
 
     /// Adjusting the left and right volume balance, higher to enhance the right side, lower to enhance the left side.
     void setBalance(float bal){
-        LOGD(LOG_METHOD);
+        LOGD("setBalance: %f", vol);
         float balance = bal;
         if (balance<-1.0) balance = -1;
         if (balance>1.0) balance = 1;
@@ -115,7 +115,7 @@ public:
 
     /// Sets the treble amplitude value (range 0 to 1.0)
     void setTreble(float val){
-        LOGD(LOG_METHOD);
+        LOGD("setTreble: %f", vol);
         float value = val;
         if (value<0.0) value = 0.0;
         if (value>1.0) value = 1.0;
@@ -133,7 +133,7 @@ public:
 
     /// Sets the bass amplitude value (range 0 to 1.0)
     void setBass(float value){
-        LOGD(LOG_METHOD);
+        LOGD("setBass: %f", vol);
         if (p_vs1053!=nullptr){
             p_vs1053->setBass(value*100.0);
         }
@@ -141,14 +141,14 @@ public:
 
     /// Sets the treble frequency limit in hz (range 0 to 15000)
     void setTrebleFrequencyLimit(uint16_t value){
-        LOGD(LOG_METHOD);
+        LOGD("setTrebleFrequencyLimit: %u", vol);
         if (p_vs1053!=nullptr){
             p_vs1053->setTrebleFrequencyLimit(value);
         }
     }
     /// Sets the bass frequency limit in hz (range 0 to 15000)
     void setBassFrequencyLimit(uint16_t value){
-        LOGD(LOG_METHOD);
+        LOGD("setBassFrequencyLimit: %u", vol);
         if (p_vs1053!=nullptr){
             p_vs1053->setBassFrequencyLimit(value);
         }
@@ -212,6 +212,7 @@ public:
     /// Starts with the indicated configuration
     bool begin(VS1053Config cfg) {
         LOGI(LOG_METHOD);
+        bool result = true;
         // enfornce encoded data for midi mode
         if (cfg.is_midi_mode){
             cfg.is_encoded_data = true;
@@ -245,20 +246,27 @@ public:
             case TX_MODE:
                 p_out->begin(cfg);      
                 p_driver->begin();
-                return true;
+                setVolume(VS1053_DEFAULT_VOLUME);   
+                result = true;
+                break;
 #if VS1053_EXT
             case MIDI_MODE:
                 getVS1053().beginMIDI();
-                return true;
+                setVolume(VS1053_DEFAULT_VOLUME);   
+                result = true;
+                break;
 
             case RX_MODE:
                 getVS1053().beginInput(cfg.is_encoded_data);
-                return true;
+                result = true;
+                break;
 #endif
             default:
                 LOGE("Mode not supported");
-                return false;
+                result = false;
+                break;
         }
+        return result;
     }
 
     /// Stops the processing and releases the memory
