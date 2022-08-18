@@ -241,15 +241,16 @@ public:
         }
 
         switch(cfg.mode){
-            case MIDI_MODE:
-                getVS1053().beginMIDI();
-                return true;
 
             case TX_MODE:
                 p_out->begin(cfg);      
                 p_driver->begin();
                 return true;
 #if VS1053_EXT
+            case MIDI_MODE:
+                getVS1053().beginMIDI();
+                return true;
+
             case RX_MODE:
                 getVS1053().beginInput(cfg.is_encoded_data);
                 return true;
