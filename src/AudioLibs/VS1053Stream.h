@@ -51,6 +51,10 @@ public:
         if (p_vs1053->getChipVersion() == 4) { // Only perform an update if we really are using a VS1053, not. eg. VS1003
             p_vs1053->loadDefaultVs1053Patches(); 
         }
+
+        delay(100);
+        setVolume(VS1053_DEFAULT_VOLUME);   
+
         return true;
     }
 
@@ -260,8 +264,6 @@ public:
             case TX_MODE:
                 p_out->begin(cfg);      
                 p_driver->begin();
-                delay(100);
-                setVolume(VS1053_DEFAULT_VOLUME);   
                 result = true;
                 break;
 #if VS1053_EXT
