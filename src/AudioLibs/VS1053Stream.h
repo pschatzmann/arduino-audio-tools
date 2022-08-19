@@ -17,25 +17,33 @@ namespace audio_tools {
  */
 class VS1053BaseStream : public AudioStreamX {
 public:
-    VS1053BaseStream(uint8_t _cs_pin, uint8_t _dcs_pin, uint8_t _dreq_pin,int16_t _reset_pin=-1){
+    VS1053BaseStream(uint8_t _cs_pin, uint8_t _dcs_pin, uint8_t _dreq_pin,int16_t _reset_pin=-1, bool startSPI=true){
         LOGD(LOG_METHOD);
         this->_cs_pin = _cs_pin;
         this->_dcs_pin = _dcs_pin;
         this->_dreq_pin = _dreq_pin;
         this->_reset_pin = _reset_pin;
+        this->_start_SPI = startSPI;
     }
 
     bool begin() {
         LOGD(LOG_METHOD);
+        p_vs1053 = new VS1053(_cs_pin,_dcs_pin,_dreq_pin);
+
+        // initialize SPI
+        if (_start_SPI) {
+            LOGI("SPI.begin()")
+            SPI.begin();
+        } else {
+            LOGI("SPI not started");
+        }
+
         if (_reset_pin!=-1){
             LOGI("Setting reset pin to high: %d", _reset_pin);
             pinMode(_reset_pin, OUTPUT);
             digitalWrite(_reset_pin, HIGH);
             delay(200);
         }
-        p_vs1053 = new VS1053(_cs_pin,_dcs_pin,_dreq_pin);
-        // initialize SPI
-        SPI.begin();
 
         p_vs1053->begin();
         p_vs1053->startSong();
@@ -163,6 +171,7 @@ protected:
     VS1053 *p_vs1053 = nullptr;
     uint8_t _cs_pin,  _dcs_pin,  _dreq_pin;
     int16_t _reset_pin=-1;
+    bool _start_SPI;
 };
 
 enum VS1053Mode {ENCODED_MODE, PCM_MODE, MIDI_MODE };
@@ -188,6 +197,7 @@ class VS1053Config : public AudioBaseInfo {
     RxTxMode mode;
     bool is_encoded_data = false;
     bool is_midi_mode = false;
+    bool is_start_spi = true; 
 };
 
 /**
@@ -231,7 +241,7 @@ public:
         LOGI("cs_sd_pin: %d", cfg.cs_sd_pin);
 
         if (p_driver==nullptr){
-            p_driver = new VS1053BaseStream(cfg.cs_pin,cfg.dcs_pin,cfg.dreq_pin, cfg.reset_pin);
+            p_driver = new VS1053BaseStream(cfg.cs_pin,cfg.dcs_pin,cfg.dreq_pin, cfg.reset_pin, cfg.is_start_spi);
         }
         if (p_out==nullptr){
             AudioEncoder *p_enc = cfg.is_encoded_data ? p_encoder :&copy;
