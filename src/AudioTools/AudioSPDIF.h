@@ -237,10 +237,10 @@ class SPDIFStream : public AudioStreamX {
   // initialize S/PDIF buffer
   void spdif_buf_init(void) {
     LOGD(LOG_METHOD);
-    int i;
+    size_t i;
     uint32_t bmc_mw = BMC_W;
 
-    for (i = 0; i < SPDIF_BUF_ARRAY_SIZE; i += 2) {
+    for (i = 0; i < (size_t)SPDIF_BUF_ARRAY_SIZE; i += 2) {
       spdif_buf[i] = bmc_mw ^= BMC_MW_DIF;
     }
   }

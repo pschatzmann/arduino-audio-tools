@@ -9,12 +9,12 @@
 
 #include "AudioTools.h"
 #include "AudioLibs/AudioKit.h"
-#include "AudioLibs/AudioSourceSd.h"
+#include "AudioLibs/AudioSourceSD.h"
 #include "AudioCodecs/CodecMP3Helix.h"
 
 const char *startFilePath="/";
 const char* ext="mp3";
-AudioSourceSd source(startFilePath, ext, PIN_AUDIO_KIT_SD_CARD_CS);
+AudioSourceSD source(startFilePath, ext, PIN_AUDIO_KIT_SD_CARD_CS);
 AudioKitStream kit;
 MP3DecoderHelix decoder;  // or change to MP3DecoderMAD
 AudioPlayer player(source, kit, decoder);

@@ -3,9 +3,9 @@
 #include "AudioBasic/StrExt.h"
 #include "AudioLogger.h"
 #include "AudioTools/AudioSource.h"
-#include "AudioLibs/AudioSourceIndex.h"
 #include "FS.h"
 #include "SD_MMC.h"
+#include "AudioLibs/SDDirect.h"
 
 namespace audio_tools {
 
@@ -30,10 +30,10 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioSourceSdMmc : public AudioSource {
+class AudioSourceSDMMC : public AudioSource {
 public:
   /// Default constructor
-  AudioSourceSdMmc(const char *startFilePath = "/", const char *ext = ".mp3", bool setupIndex=true) {
+  AudioSourceSDMMC(const char *startFilePath = "/", const char *ext = ".mp3", bool setupIndex=true) {
     start_path = startFilePath;
     exension = ext;
     setup_index = setupIndex;
@@ -49,7 +49,7 @@ public:
       }
       is_sd_setup = true;
     }
-    idx.begin(setup_index, start_path, exension, file_name_pattern);
+    idx.begin(start_path, exension, file_name_pattern);
     idx_pos = 0;
   }
 
@@ -93,7 +93,7 @@ public:
   virtual void setPath(const char *p) { start_path = p; }
 
 protected:
-  AudioSourceIndex<fs::SDMMCFS,fs::File> idx{SD_MMC};
+  SDDirect<fs::SDMMCFS,fs::File> idx{SD_MMC};
   File file;
   size_t idx_pos = 0;
   const char *file_name;

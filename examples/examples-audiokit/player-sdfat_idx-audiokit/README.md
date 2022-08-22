@@ -7,6 +7,8 @@ I found some cheap [AI Thinker ESP32 Audio Kit V2.2](https://docs.ai-thinker.com
 You dont need to bother about any wires because everything is on one nice board. Just just need to install the dependencies
 To access the files we use the greiman/SdFat library.
 
+This example is using the indexed version which creates an index file on the sd.
+
 ### Note
 
 The log level has been set to Info to help you to identify any problems. Please change it to AudioLogger::Warning to get the best sound quality!

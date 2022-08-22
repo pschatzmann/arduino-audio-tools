@@ -1,12 +1,11 @@
 #pragma once
-
-#include "AudioBasic/StrExt.h"
+#include <SPI.h>
+#include <FS.h>
+#include <SD.h>
 #include "AudioLogger.h"
+#include "AudioBasic/StrExt.h"
 #include "AudioTools/AudioSource.h"
-#include "AudioLibs/SDDirect.h"
-#include "FS.h"
-#include "SD.h"
-#include "SPI.h"
+#include "AudioLibs/SDIndex.h"
 
 namespace audio_tools {
 
@@ -27,7 +26,7 @@ namespace audio_tools {
  *    D1       -
  *
  *  On the AI Thinker boards the pin settings should be On, On, On, On, On,
- *
+ *  
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -46,12 +45,12 @@ public:
     static bool is_sd_setup = false;
     if (!is_sd_setup) {
       if (!SD.begin(cs)) {
-        LOGE("SD.begin cs=%d failed",cs);
+        LOGE("SD.begin cs=%d failed", cs);
         return;
       }
       is_sd_setup = true;
     }
-    idx.begin(start_path, exension, file_name_pattern);
+    idx.begin(start_path, exension, file_name_pattern, setup_index);
     idx_pos = 0;
   }
 
@@ -95,7 +94,7 @@ public:
   virtual void setPath(const char *p) { start_path = p; }
 
 protected:
-  SDDirect<fs::SDFS,fs::File> idx{SD};
+  SDIndex<fs::SDFS,fs::File> idx{SD};
   File file;
   size_t idx_pos = 0;
   const char *file_name;
