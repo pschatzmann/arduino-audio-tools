@@ -1,13 +1,13 @@
 #pragma once
 
-#include "AudioBasic/StrExt.h"
-#include "AudioLogger.h"
-#include "AudioTools/AudioSource.h"
-
 #include <SPI.h>
 #include <SdFat.h>
+#include "AudioLogger.h"
+#include "AudioBasic/StrExt.h"
+#include "AudioTools/AudioSource.h"
+
 #define USE_SDFAT
-#include "AudioLibs/SDDirect.h"
+#include "AudioLibs/SDIndex.h"
 
 #ifndef USE_UTF8_LONG_NAMES
 #define USE_UTF8_LONG_NAMES 1
@@ -89,7 +89,7 @@ public:
       }
       is_sd_setup = true;
     }
-    idx.begin(start_path, exension, file_name_pattern);
+    idx.begin(start_path, exension, file_name_pattern, setup_index);
     idx_pos = 0;
   }
 
@@ -113,7 +113,7 @@ public:
 
     AudioFile new_file;
     if (!new_file.open(path, O_RDONLY)){
-       LOGE("Open error: '%s'", path);
+      LOGE("Open error: '%s'", path);
     }
 
     LOGI("-> selectStream: %s", path);
@@ -141,7 +141,7 @@ protected:
   SdSpiConfig *p_cfg = nullptr;
   AudioFs sd;
   AudioFile file;
-  SDDirect<AudioFs,AudioFile> idx{sd};
+  SDIndex<AudioFs,AudioFile> idx{sd};
   size_t idx_pos = 0;
   char file_name[MAX_FILE_LEN];
   const char *exension = nullptr;
@@ -156,6 +156,7 @@ protected:
        file.getName(name,MAX_FILE_LEN);
        return name;
   }
+
 
 };
 

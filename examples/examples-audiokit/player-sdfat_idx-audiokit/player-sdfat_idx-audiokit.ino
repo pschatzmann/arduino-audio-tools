@@ -1,22 +1,32 @@
 /**
  * @file player-sd-audiokit.ino
- * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-audiokit/player-sdmmc-audiokit/README.md
- * Make sure that the pins are set to on, on, on, on, on
+ * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-audiokit/player-sdfat-audiokit/README.md
+ * Make sure that the pins are set to off, on, on, off, off
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 
+
 #include "AudioTools.h"
 #include "AudioLibs/AudioKit.h"
-#include "AudioLibs/AudioSourceSDMMC.h"
+#include "AudioLibs/AudioSourceIdxSDFAT.h"
 #include "AudioCodecs/CodecMP3Helix.h"
 
 const char *startFilePath="/";
 const char* ext="mp3";
-AudioSourceSDMMC source(startFilePath, ext);
+SdSpiConfig sdcfg(PIN_AUDIO_KIT_SD_CARD_CS, DEDICATED_SPI, SD_SCK_MHZ(10) , &AUDIOKIT_SD_SPI);
+AudioSourceSDFAT source(startFilePath, ext, sdcfg);
 AudioKitStream kit;
 MP3DecoderHelix decoder;  // or change to MP3DecoderMAD
 AudioPlayer player(source, kit, decoder);
+
+void next(bool, int, void*) {
+   player.next();
+}
+
+void previous(bool, int, void*) {
+   player.previous();
+}
 
 void setup() {
   Serial.begin(115200);
@@ -24,8 +34,11 @@ void setup() {
 
   // setup output
   auto cfg = kit.defaultConfig(TX_MODE);
-  cfg.sd_active = false;
   kit.begin(cfg);
+
+ // setup additional buttons 
+  kit.addAction(PIN_KEY4, next);
+  kit.addAction(PIN_KEY3, previous);
 
 
   // setup player
@@ -40,4 +53,5 @@ void setup() {
 
 void loop() {
   player.copy();
+  kit.processActions();
 }

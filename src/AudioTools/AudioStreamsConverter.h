@@ -289,7 +289,7 @@ class NumberFormatConverterStreamT : public AudioStreamX {
            size_t result_size = 0;
            T *data_source = (T *)data;
            
-           for (int j=0;j<samples;j++){
+           for (size_t j=0;j<samples;j++){
              TArg value = static_cast<float>(data_source[j]) * NumberConverter::maxValue(sizeof(TArg)*8) / NumberConverter::maxValue(sizeof(T)*8);
              result_size += p_print->write((uint8_t*)&value, sizeof(TArg));
            }
@@ -301,7 +301,7 @@ class NumberFormatConverterStreamT : public AudioStreamX {
            size_t samples = size / sizeof(T);
            T *data_target = (T *)data;
            TArg source;
-           for (int j=0;j<samples;j++){
+           for (size_t j=0;j<samples;j++){
              source = 0;
              p_stream->readBytes((uint8_t*)&source, sizeof(TArg));
              data_target[j]= static_cast<float>(source) * NumberConverter::maxValue(sizeof(T)*8) / NumberConverter::maxValue(sizeof(TArg)*8);

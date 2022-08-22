@@ -14,14 +14,14 @@
 #include "AudioTools.h"
 #include "AudioLibs/AudioA2DP.h"
 #include "AudioLibs/AudioKit.h"
-#include "AudioLibs/AudioSourceSdFat.h"
+#include "AudioLibs/AudioSourceSDFAT.h"
 #include "AudioCodecs/CodecMP3Helix.h"
 
 const char *startFilePath="/";
 const char* ext="mp3";
 AudioKitStream kit;
 SdSpiConfig sdcfg(PIN_AUDIO_KIT_SD_CARD_CS, DEDICATED_SPI, SD_SCK_MHZ(10) , &AUDIOKIT_SD_SPI);
-AudioSourceSdFat source(startFilePath, ext, sdcfg);
+AudioSourceSDFAT source(startFilePath, ext, sdcfg);
 MP3DecoderHelix decoder;
 AudioPlayer player(source, kit, decoder);
 BluetoothA2DPSink a2dp_sink;

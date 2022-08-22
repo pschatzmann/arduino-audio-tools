@@ -12,7 +12,7 @@
 #include "AudioTools/AudioSource.h"
 // support for legacy USE_SDFAT
 #ifdef USE_SDFAT
-#include "AudioLibs/AudioSourceSdFat.h"
+#include "AudioLibs/AudioSourceSDFAT.h"
 #endif
 
 

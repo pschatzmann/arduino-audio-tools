@@ -8,13 +8,13 @@
 
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioSourceSdFat.h"
+#include "AudioLibs/AudioSourceSDFAT.h"
 #include "AudioCodecs/CodecMP3Helix.h"
 
 
 const char *startFilePath="/";
 const char* ext="mp3";
-AudioSourceSdFat source(startFilePath, ext);
+AudioSourceSDFAT source(startFilePath, ext);
 I2SStream i2s;
 MP3DecoderHelix decoder;
 AudioPlayer player(source, i2s, decoder);

@@ -5,7 +5,9 @@ I found some cheap [AI Thinker ESP32 Audio Kit V2.2](https://docs.ai-thinker.com
 <img src="https://pschatzmann.github.io/arduino-audio-tools/resources/audio-toolkit.png" alt="Audio Kit" />
 
 You dont need to bother about any wires because everything is on one nice board. Just just need to install the dependencies
-To access the files we use the greiman/SdFat library.
+To access the files we use the SD library.
+
+This example is using the indexed version which creates an index file on the sd.
 
 ### Note
 
@@ -19,4 +21,3 @@ You need to install the following libraries:
 - https://github.com/pschatzmann/arduino-audio-tools
 - https://github.com/pschatzmann/arduino-libhelix
 - https://github.com/pschatzmann/arduino-audiokit
-- https://github.com/greiman/SdFat
