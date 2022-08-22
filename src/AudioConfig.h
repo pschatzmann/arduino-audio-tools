@@ -431,11 +431,11 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 //------ VS1053 ----------
 
 // Default Pins for VS1053
-#define VS1053_CS 27
-#define VS1053_DCS 14
-#define VS1053_DREQ 26
+#define VS1053_CS 5
+#define VS1053_DCS 16
+#define VS1053_DREQ 4
 #define VS1053_RESET -1  
-#define VS1053_CS_SD 13
+#define VS1053_CS_SD -1
 
 // use 0 for https://github.com/baldram/ESP_VS1053_Library
 // use 1 for https://github.com/pschatzmann/arduino-vs1053

@@ -248,7 +248,7 @@ public:
             p_driver = new VS1053BaseStream(cfg.cs_pin,cfg.dcs_pin,cfg.dreq_pin, cfg.reset_pin, cfg.is_start_spi);
         }
         if (p_out==nullptr){
-            AudioEncoder *p_enc = cfg.is_encoded_data ? p_encoder :&copy;
+            AudioEncoder *p_enc = cfg.is_encoded_data ? &copy:p_encoder;
             p_out = new EncodedAudioStream(p_driver, p_enc);   
         }
 
