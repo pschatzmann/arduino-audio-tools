@@ -21,12 +21,28 @@ void read_data_stream(const uint8_t *data, uint32_t length) {
   out.write(data, length);
 }
 
+// Start and Stop VS1053Stream to make sure that WAV header is generated
+void audio_state_changed(esp_a2d_audio_state_t state, void *ptr){
+  Serial.println(a2dp_sink.to_str(state));
+    switch(state){
+      case ESP_A2D_AUDIO_STATE_STARTED:
+        out.begin();
+        break;
+      case ESP_A2D_AUDIO_STATE_STOPPED:
+      case ESP_A2D_AUDIO_STATE_REMOTE_SUSPEND:
+        out.end();
+        break;
+    }
+}
+
+
 void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Warning);
 
-  // register callback
+  // register callbacks
   a2dp_sink.set_stream_reader(read_data_stream, false);
+  a2dp_sink.set_on_audio_state_changed(audio_state_changed);
 
   // Start Bluetooth Audio Receiver
   a2dp_sink.set_auto_reconnect(false);
