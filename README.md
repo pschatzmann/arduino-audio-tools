@@ -122,7 +122,7 @@ Dependent on the example you might need to install some of the following librari
 - [ESP32-A2DP Library](https://github.com/pschatzmann/ESP32-A2DP) to support A2DP Bluetooth Audio
 - [Many Codec Libraries](https://github.com/pschatzmann/arduino-audio-tools/wiki/Encoding-and-Decoding-of-Audio) which are described in the Wiki
 - [arduino-audiokit](https://github.com/pschatzmann/arduino-audiokit) Support for the __ESP32 AudioKit__ and decoder chips (ES8388, A1S, etc) 
-- [arduino-vs1053](https://github.com/pschatzmann/arduino-vs1053) Support for the VS1053 audio module
+- [arduino-vs1053](https://github.com/pschatzmann/arduino-vs1053) Support for __VS1053 audio modules__
 - [arduino-midi](https://github.com/pschatzmann/arduino-midi) A simple __MIDI__ message parser and generator
 - [SAM](https://github.com/pschatzmann/arduino-SAM) A Text to Speech Engine
 - [TTS](https://github.com/pschatzmann/TTS) A Text to Speech Engine
