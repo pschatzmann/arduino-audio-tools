@@ -1,7 +1,7 @@
 /**
  * @file streams-memory_midi-vs1953.ino
  * @author Phil Schatzmann
- * @brief The module can play Midi Files: Compile with Partition Scheme Hughe APP.
+ * @brief The module can play Midi Files: Compile with Partition Scheme Hughe APP. The midi file was converted with xxd to a header file.
  * It seems that only midi files type 0 are supported.
  * @version 0.1
  * @date 2021-01-24
