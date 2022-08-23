@@ -44,6 +44,7 @@ public:
             digitalWrite(_reset_pin, HIGH);
             delay(200);
         }
+    
 
         p_vs1053->begin();
         p_vs1053->startSong();
@@ -200,7 +201,7 @@ class VS1053Config : public AudioBaseInfo {
     uint8_t cs_sd_pin = VS1053_CS_SD; 
     RxTxMode mode;
     bool is_encoded_data = false;
-    bool is_midi_mode = false;
+    bool is_midi = false;
     bool is_start_spi = true; 
 };
 
@@ -237,12 +238,13 @@ public:
         LOGI(LOG_METHOD);
         bool result = true;
         // enfornce encoded data for midi mode
-        if (cfg.is_midi_mode){
+        if (cfg.is_midi){
             cfg.is_encoded_data = true;
         }
         this->cfg = cfg;
         setAudioInfo(cfg);
         LOGI("is_encoded_data: %s", cfg.is_encoded_data?"true":"false");
+        LOGI("is_midi: %s", cfg.is_midi?"true":"false");
         LOGI("cs_pin: %d", cfg.cs_pin);
         LOGI("dcs_pin: %d", cfg.dcs_pin);
         LOGI("dreq_pin: %d", cfg.dreq_pin);
@@ -260,11 +262,11 @@ public:
         // hack to treat midi as separate mode
         const int MIDI_MODE = 100;
         int mode = cfg.mode;
-        if (cfg.is_midi_mode){
+        if (cfg.is_midi){
             mode = MIDI_MODE;
         }
 
-        switch(cfg.mode){
+        switch(mode){
 
             case TX_MODE:
                 p_out->begin(cfg);      
@@ -273,6 +275,8 @@ public:
                 break;
 #if VS1053_EXT
             case MIDI_MODE:
+                LOGI("Using MIDI")
+                p_out->begin(cfg);      
                 getVS1053().beginMIDI();
                 delay(100);
                 setVolume(VS1053_DEFAULT_VOLUME);   
@@ -310,7 +314,7 @@ public:
 
     /// Sets the volume: value from 0 to 1.0
     void setVolume(float volume){
-        LOGI(LOG_METHOD);
+        LOGI("setVolume: %f", volume);
         if (p_driver==nullptr) {
             logError(__FUNCTION__);
             return;
@@ -438,6 +442,21 @@ public:
         }
         p_driver->setBassFrequencyLimit(value);
     }
+
+    /// Sends a midi message to the VS1053
+    void sendMidiMessage(uint8_t cmd, uint8_t data1, uint8_t data2) {
+        LOGI(LOG_METHOD);
+        if (!cfg.is_midi){
+            LOGE("start with is_midi=true");
+            return;
+        }
+        if (p_driver==nullptr) {
+            logError(__FUNCTION__);
+            return;
+        }
+        getVS1053().sendMidiMessage(cmd, data1, data2);
+    }
+
 #endif
 
 protected:
