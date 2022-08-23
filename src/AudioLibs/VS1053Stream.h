@@ -222,6 +222,11 @@ public:
         return c;
     }
 
+    /// defines the default configuration that is used with the next begin()
+    void setConfig(VS1053Config c){
+        cfg = c;
+    }
+
     /// Starts with the default config or restarts
     bool begin() {
         return begin(cfg);
@@ -295,7 +300,9 @@ public:
             p_out = nullptr;
         }
         if (p_driver!=nullptr){
-            p_driver->end();
+            //p_driver->end();
+            p_driver->getVS1053().stopSong();
+            p_driver->getVS1053().softReset();
             delete p_driver;
             p_driver = nullptr;
         }
