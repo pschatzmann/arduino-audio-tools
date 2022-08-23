@@ -1,7 +1,8 @@
 /**
  * @file streams-memory_midi-vs1953.ino
  * @author Phil Schatzmann
- * @brief The module can play Midi Files: Compile with Partition Scheme Hughe APP!
+ * @brief The module can play Midi Files: Compile with Partition Scheme Hughe APP.
+ * It seems that only midi files type 0 are supported.
  * @version 0.1
  * @date 2021-01-24
  * 
@@ -10,11 +11,11 @@
  */
 #include "AudioTools.h"
 #include "AudioLibs/VS1053Stream.h"
-#include "BohemianRhapsody.h"
+#include "bora0.h"
 
 
 VS1053Stream out; // output
-MemoryStream music(QueenBohemianRhapsody_midi, QueenBohemianRhapsody_len);
+MemoryStream music(bora0_midi, bora0_midi_len);
 StreamCopyT<int16_t> copier(out, music); // copies sound into i2s
 
 void setup(){
@@ -28,7 +29,7 @@ void setup(){
 
 void loop(){
     if (!copier.copy()){
-      delay(10000);
+      delay(60000);  // 
       out.end();
       stop();
     }
