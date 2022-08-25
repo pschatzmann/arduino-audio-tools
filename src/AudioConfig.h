@@ -379,7 +379,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #endif
 #define rintf(F) static_cast<int>(F)
 #define PIN_PWM_START 6
-#define PIN_CS CS
+#define PIN_CS SS
 
 #undef PWM_BUFFER_SIZE
 #define PWM_BUFFER_SIZE 125
@@ -434,7 +434,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define VS1053_CS 5
 #define VS1053_DCS 16
 #define VS1053_DREQ 4
-#define VS1053_RESET -1  
+#define VS1053_RESET 15  
 #define VS1053_CS_SD -1
 
 // use 0 for https://github.com/baldram/ESP_VS1053_Library
