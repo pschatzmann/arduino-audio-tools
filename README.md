@@ -48,6 +48,7 @@ As “Audio Sinks” we will have e.g:
 - ID3 Metadata for MP3 - [MetaDataID3](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_meta_data_i_d3.html)
 - A Timer based Sink - [TimerCallbackAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_timer_callback_audio_stream.html)
 - ESP32 AudioKit - [AudioKitStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_audio_kit_stream.html)
+- VS1053 Codec Module - [VS1053Stream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_v_s1053_stream.html)
 - Callback integration e.g. with ESP8266Audio [AudioOutputWithCallback](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_audio_output_with_callback.html) 
 - Output using FIR, IRR Filters - [FilteredStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_filtered_stream.html)
 - Determine the Volume - [VolumePrint](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_volume_print.html)
@@ -121,6 +122,7 @@ Dependent on the example you might need to install some of the following librari
 - [ESP32-A2DP Library](https://github.com/pschatzmann/ESP32-A2DP) to support A2DP Bluetooth Audio
 - [Many Codec Libraries](https://github.com/pschatzmann/arduino-audio-tools/wiki/Encoding-and-Decoding-of-Audio) which are described in the Wiki
 - [arduino-audiokit](https://github.com/pschatzmann/arduino-audiokit) Support for the __ESP32 AudioKit__ and decoder chips (ES8388, A1S, etc) 
+- [arduino-vs1053](https://github.com/pschatzmann/arduino-vs1053) Support for __VS1053 audio modules__
 - [arduino-midi](https://github.com/pschatzmann/arduino-midi) A simple __MIDI__ message parser and generator
 - [SAM](https://github.com/pschatzmann/arduino-SAM) A Text to Speech Engine
 - [TTS](https://github.com/pschatzmann/TTS) A Text to Speech Engine
