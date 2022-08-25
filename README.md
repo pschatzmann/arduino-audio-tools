@@ -127,15 +127,14 @@ Dependent on the example you might need to install some of the following librari
 - [SAM](https://github.com/pschatzmann/arduino-SAM) A Text to Speech Engine
 - [TTS](https://github.com/pschatzmann/TTS) A Text to Speech Engine
 - [flite](https://github.com/pschatzmann/arduino-flite) A Text to Speech Engine
-- [simple-tts](https://github.com/pschatzmann/arduino-simple-tts) A Simple TTS engine which is based on prerecorded audio (Talking Clock, Talking Numbers)
+- [simple-tts](https://github.com/pschatzmann/arduino-simple-tts) A Simple TTS engine using prerecorded audio (e.g. to implement Talking Clock, Talking Numbers)
 - [arduino-stk](https://github.com/pschatzmann/Arduino-STK) Synthesis ToolKit in C++ (STK) 
 - [Maximilian](https://github.com/pschatzmann/Maximilian) cross-platform and multi-target audio synthesis and signal processing library
 - [Mozzi](https://github.com/pschatzmann/Mozzi) A sound synthesis library for Arduino
-- [rp2040-i2s](https://github.com/pschatzmann/rp2040-i2s) I2S library for RP2040 (mbed)
 - [Tensorflow Lite](https://github.com/pschatzmann/tflite-micro-arduino-examples) Machine Learning for Arduino
 - [KissFFT](https://github.com/pschatzmann/kissfft) Fast Fourier Transform FFT Library
 - [esp32-fft](https://github.com/pschatzmann/esp32-fft) Another FFT library (not only for the ESP32)
-- [rp2040-i2s](https://github.com/pschatzmann/rp2040-i2s) I2S for MBED RP2040
+- [rp2040-i2s](https://github.com/pschatzmann/rp2040-i2s) I2S library for MBED RP2040
 - [SdFat Library](https://github.com/greiman/SdFat) to read and write files supporting SD cards with FAT16/FAT32 and exFAT
 - [SD Library](https://www.arduino.cc/en/reference/SD) to read and write files supporting SD cards with FAT16 and FAT32
 
