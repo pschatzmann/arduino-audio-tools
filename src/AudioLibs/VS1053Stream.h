@@ -460,6 +460,7 @@ protected:
         LOGI(LOG_METHOD);
         VS1053Recording rec;
         rec.setSampleRate(cfg.sample_rate);
+        rec.setChannels(cfg.channels);
         rec.setInput(cfg.input_device);
         p_vs1053->beginInput(rec);
         return true;
