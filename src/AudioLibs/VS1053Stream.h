@@ -447,7 +447,7 @@ protected:
         p_vs1053->startSong();
         p_vs1053->switchToMp3Mode(); // optional, some boards require this    
         if (p_vs1053->getChipVersion() == 4) { // Only perform an update if we really are using a VS1053, not. eg. VS1003
-           // p_vs1053->loadDefaultVs1053Patches(); 
+            p_vs1053->loadDefaultVs1053Patches(); 
         }
         delay(500);
         setVolume(VS1053_DEFAULT_VOLUME);   
@@ -458,9 +458,10 @@ protected:
 
     bool beginRx() {
         LOGI(LOG_METHOD);
-        p_vs1053->setRecordingSampleRate(cfg.sample_rate);
-        p_vs1053->setRecordingDevice(cfg.input_device);
-        p_vs1053->beginInput(cfg.is_encoded_data);
+        VS1053Recording rec;
+        rec.setSampleRate(cfg.sample_rate);
+        rec.setInput(cfg.input_device);
+        p_vs1053->beginInput(rec);
         return true;
     }
 
