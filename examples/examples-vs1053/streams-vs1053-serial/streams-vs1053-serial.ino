@@ -11,7 +11,7 @@
 #include "AudioTools.h"
 #include "AudioLibs/VS1053Stream.h"
 
-VS1053Stream in; // Access I2S as stream
+VS1053Stream in; // Access VS1053/VS1003 as stream
 CsvStream<int16_t> csvStream(Serial);
 StreamCopy copier(csvStream, in); // copy in to csvStream
 
@@ -21,6 +21,8 @@ void setup(void) {
     AudioLogger::instance().begin(Serial, AudioLogger::Warning);
     
     auto cfg = in.defaultConfig(RX_MODE);
+    cfg.sample_rate = 16000;
+    cfg.channels = 1;
     cfg.input_device = VS1053_MIC; // or VS1053_AUX
     in.begin(cfg);
 
