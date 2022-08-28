@@ -37,7 +37,7 @@ class NumberConverter {
 
         /// provides the biggest number for the indicated number of bits
         static int64_t maxValue(int value_bits_per_sample){
-            switch(value_bits_per_sample/8){
+            switch(value_bits_per_sample){
                 case 8:
                     return 127;
                 case 16:

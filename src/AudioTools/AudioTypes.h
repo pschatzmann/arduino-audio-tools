@@ -33,10 +33,15 @@ struct AudioBaseInfo {
     bool operator!=(AudioBaseInfo alt){
         return !(*this == alt);
     } 
+    
     void setAudioInfo(AudioBaseInfo info){
       sample_rate = info.sample_rate;
       channels = info.channels;
       bits_per_sample = info.bits_per_sample;
+    }
+
+    void copyFrom(AudioBaseInfo info){
+      setAudioInfo(info);
     }
 
     AudioBaseInfo& operator= (const AudioBaseInfo& info){
