@@ -943,8 +943,17 @@ class VolumeStream : public AudioStreamX {
             if (info.channels>max_channels){
               max_channels = info.channels;
             }
+
+            // usually we use a exponential volume control - except if we allow values > 1.0
+            if (cfg.allow_boost){
+              setVolumeControl(linear_vc);
+            } else {
+              setVolumeControl(pot_vc);
+            }
+
             // set start volume
             setVolume(cfg.volume); 
+
             return true;
         }
 
@@ -955,7 +964,7 @@ class VolumeStream : public AudioStreamX {
 
         /// Resets the volume control to use the standard logic
         void resetVolumeControl(){
-            cached_volume.setVolumeControl(default_volume);
+            cached_volume.setVolumeControl(pot_vc);
         }
 
         /// Read raw PCM audio data, which will be the input for the volume control 
@@ -1033,8 +1042,9 @@ class VolumeStream : public AudioStreamX {
         Print *p_out=nullptr;
         Stream *p_in=nullptr;
         VolumeStreamConfig info;
-        SimulatedAudioPot default_volume;
-        CachedVolumeControl cached_volume = CachedVolumeControl(default_volume);
+        LinearVolumeControl linear_vc{true};
+        SimulatedAudioPot pot_vc;
+        CachedVolumeControl cached_volume{pot_vc};
         float *volume_values = nullptr;
         float *factor_for_channel = nullptr;
         bool is_active = false;
@@ -1102,7 +1112,7 @@ class VolumeStream : public AudioStreamX {
         void applyVolume16(int16_t* data, size_t size){
             for (size_t j=0;j<size;j++){
                 float result = factorForChannel(j%info.channels) * data[j];
-                if (info.allow_boost){
+                if (!info.allow_boost){
                     if (result>max_value) result = max_value;
                     if (result<-max_value) result = -max_value;
                 } 
@@ -1113,7 +1123,7 @@ class VolumeStream : public AudioStreamX {
         void applyVolume24(int24_t* data, size_t size) {
             for (size_t j=0;j<size;j++){
                 float result = factorForChannel(j%info.channels) * data[j];
-                if (info.allow_boost){
+                if (!info.allow_boost){
                     if (result>max_value) result = max_value;
                     if (result<-max_value) result = -max_value;
                 } 
@@ -1125,7 +1135,7 @@ class VolumeStream : public AudioStreamX {
         void applyVolume32(int32_t* data, size_t size) {
             for (size_t j=0;j<size;j++){
                 float result = factorForChannel(j%info.channels) * data[j];
-                if (info.allow_boost){
+                if (!info.allow_boost){
                     if (result>max_value) result = max_value;
                     if (result<-max_value) result = -max_value;
                 } 
