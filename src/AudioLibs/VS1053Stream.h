@@ -10,127 +10,6 @@
 
 namespace audio_tools {
 
-// /**
-//  * @brief VS1053 Output Interface Class based on https://github.com/baldram/ESP_VS1053_Library
-//  * The write is expecting encoded data.
-//  * @copyright GPLv3
-//  */
-// class VS1053BaseStream : public AudioStreamX {
-// public:
-//     VS1053BaseStream(uint8_t _cs_pin, uint8_t _dcs_pin, uint8_t _dreq_pin,int16_t _reset_pin=-1, bool startSPI=true){
-//         LOGD(LOG_METHOD);
-//         this->_cs_pin = _cs_pin;
-//         this->_dcs_pin = _dcs_pin;
-//         this->_dreq_pin = _dreq_pin;
-//         this->_reset_pin = _reset_pin;
-//         this->_start_SPI = startSPI;
-//     }
-
-//     bool begin(bool mp3Mode=true) {
-//         LOGD(LOG_METHOD);
-//         p_vs1053 = new VS1053(_cs_pin,_dcs_pin,_dreq_pin);
-
-//         // initialize SPI
-//         if (_start_SPI) {
-//             LOGI("SPI.begin()")
-//             SPI.begin();
-//         } else {
-//             LOGI("SPI not started");
-//         }
-
-//         if (_reset_pin!=-1){
-//             LOGI("Setting reset pin to high: %d", _reset_pin);
-//             pinMode(_reset_pin, OUTPUT);
-//             digitalWrite(_reset_pin, HIGH);
-//             delay(200);
-//         }
-
-//         p_vs1053->begin();
-
-//         if (mp3Mode){
-//             p_vs1053->startSong();
-//             p_vs1053->switchToMp3Mode(); // optional, some boards require this    
-//             if (p_vs1053->getChipVersion() == 4) { // Only perform an update if we really are using a VS1053, not. eg. VS1003
-//                 p_vs1053->loadDefaultVs1053Patches(); 
-//             }
-
-//             delay(100);
-//             setVolume(VS1053_DEFAULT_VOLUME);   
-//         }
-
-//         return true;
-//     }
-
-//     void end(){
-//         if (p_vs1053!=nullptr){
-//             LOGD(LOG_METHOD);
-//             p_vs1053->stopSong();
-//             delete p_vs1053;
-//             p_vs1053 = nullptr;
-//         }
-//     }
-
-//     /// value from 0 to 1.0
-//     void setVolume(float vol){
-//         // make sure that value is between 0 and 1
-//         float volume = vol;
-//         if (volume>1.0) volume = 1.0;
-//         if (volume<0.0) volume = 0.0;
-//         LOGD("setVolume: %f", volume);
-//         if (p_vs1053!=nullptr){
-//             // Set the player volume.Level from 0-100, higher is louder
-//             p_vs1053->setVolume(volume*100.0);
-//         } 
-//     }
-
-//     /// provides the volume
-//     float volume() {
-//         LOGD(LOG_METHOD);
-//         if (p_vs1053==nullptr) return -1.0;
-//         return p_vs1053->getVolume()/100.0;;
-//     }
-
-//     /// Adjusting the left and right volume balance, higher to enhance the right side, lower to enhance the left side.
-//     void setBalance(float bal){
-//         float balance = bal;
-//         if (balance<-1.0) balance = -1;
-//         if (balance>1.0) balance = 1;
-//         LOGD("setBalance: %f", balance);
-//         if (p_vs1053!=nullptr){
-//             p_vs1053->setBalance(balance*100.0);
-//         }
-//     }
-//     /// Get the currenet balance setting (-1.0..1.0)
-//     float balance(){
-//         LOGD(LOG_METHOD);
-//         if (p_vs1053==nullptr) return -1.0;
-//         return static_cast<float>(p_vs1053->getBalance())/100.0;
-//     }
-
-
-//     /// Write encoded (mp3, aac, wav etc) data
-//     virtual size_t write(const uint8_t *buffer, size_t size) override{ 
-//         if (p_vs1053==nullptr) return 0;
-//         p_vs1053->playChunk((uint8_t*)buffer, size);
-//         return size;
-//     }
-
-//     VS1053 &getVS1053() {
-//         LOGD(LOG_METHOD);
-//         if (p_vs1053==nullptr) {
-//             begin(false);
-//         };
-//         return *p_vs1053;
-//     }
-
-
-// protected:
-//     VS1053 *p_vs1053 = nullptr;
-//     uint8_t _cs_pin,  _dcs_pin,  _dreq_pin;
-//     int16_t _reset_pin=-1;
-//     bool _start_SPI;
-// };
-
 enum VS1053Mode {ENCODED_MODE, PCM_MODE, MIDI_MODE };
 
 /**
@@ -246,7 +125,7 @@ public:
                 LOGI("Setting reset pin to high: %d", cfg.reset_pin);
                 pinMode(cfg.reset_pin, OUTPUT);
                 digitalWrite(cfg.reset_pin, HIGH);
-                delay(200);
+                delay(800);
             }
         }
 

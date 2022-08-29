@@ -17,7 +17,7 @@
 
 const char *startFilePath="/";
 const char* ext="mp3";
-SdSpiConfig sdcfg(SD_CARD_CS, SHARED_SPI, SD_SCK_MHZ(5) , &SPI);
+SdSpiConfig sdcfg(SD_CARD_CS, SHARED_SPI, SD_SCK_MHZ(2) , &SPI);
 AudioSourceSdFat source(startFilePath, ext, sdcfg);
 VS1053Stream vs1053; // final output
 AudioPlayer player(source, vs1053, *new CopyDecoder());
