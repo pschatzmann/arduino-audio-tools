@@ -11,8 +11,9 @@
 #include "AudioTools.h"
 #include "AudioLibs/VS1053Stream.h"
 
+int channels = 1;
 VS1053Stream in; // Access VS1053/VS1003 as stream
-CsvStream<int16_t> csvStream(Serial);
+CsvStream<int16_t> csvStream(Serial, channels);
 StreamCopy copier(csvStream, in); // copy in to csvStream
 
 // Arduino Setup
@@ -22,7 +23,7 @@ void setup(void) {
     
     auto cfg = in.defaultConfig(RX_MODE);
     cfg.sample_rate = 16000;
-    cfg.channels = 1;
+    cfg.channels = channels;
     cfg.input_device = VS1053_MIC; // or VS1053_AUX
     in.begin(cfg);
 
