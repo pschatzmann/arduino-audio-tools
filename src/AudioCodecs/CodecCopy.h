@@ -34,6 +34,9 @@ public:
 
   void setNotifyAudioChange(AudioBaseInfoDependent &bi) {}
 
+  // The result is encoded data
+  virtual bool isResultPCM() { return false;} 
+
 protected:
   Print *pt_print=nullptr;
 };

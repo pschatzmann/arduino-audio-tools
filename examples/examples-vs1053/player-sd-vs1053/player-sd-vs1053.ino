@@ -39,7 +39,6 @@ void setup() {
   vs1053.setVolume(1.0); // full volume 
 
   // setup player
-  player.setVolume(0.7); // we use volume control of the player
   player.begin();
 
   // select file with setPath() or setIndex()
