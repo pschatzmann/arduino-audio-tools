@@ -83,8 +83,12 @@ namespace audio_tools {
             LOGD(LOG_METHOD);
             this->p_source = &source;
             this->p_decoder = &decoder;
-            this->volume_out.setTarget(output);
-            this->p_out_decoding = new EncodedAudioStream(volume_out, decoder);
+            if (decoder.isResultPCM()){
+                this->volume_out.setTarget(output);
+                this->p_out_decoding = new EncodedAudioStream(volume_out, decoder);
+            } else {
+                this->p_out_decoding = new EncodedAudioStream(output, decoder);
+            }
             this->p_final_print = &output;
 
             // notification for audio configuration
@@ -104,8 +108,12 @@ namespace audio_tools {
             LOGD(LOG_METHOD);
             this->p_source = &source;
             this->p_decoder = &decoder;
-            this->volume_out.setTarget(output);
-            this->p_out_decoding = new EncodedAudioStream(volume_out, decoder);
+            if (decoder.isResultPCM()){
+                this->volume_out.setTarget(output);
+                this->p_out_decoding = new EncodedAudioStream(volume_out, decoder);
+            } else {
+                this->p_out_decoding = new EncodedAudioStream(output, decoder);
+            }
             setNotify(notify);
         }
 
@@ -120,8 +128,12 @@ namespace audio_tools {
         AudioPlayer(AudioSource& source, AudioStream& output, AudioDecoder& decoder) {
             LOGD(LOG_METHOD);
             this->p_source = &source;
-            this->volume_out.setTarget(output);
-            this->p_out_decoding = new EncodedAudioStream(volume_out, decoder);
+            if (decoder.isResultPCM()){
+                this->volume_out.setTarget(output);
+                this->p_out_decoding = new EncodedAudioStream(volume_out, decoder);
+            } else {
+                this->p_out_decoding = new EncodedAudioStream(output, decoder);
+            }
             this->p_final_stream = &output;
 
             // notification for audio configuration
