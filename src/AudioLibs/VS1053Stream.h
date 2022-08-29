@@ -469,7 +469,7 @@ protected:
     bool beginMidi(){
         LOGI(LOG_METHOD);
         p_out->begin(cfg);      
-        p_vs1053->beginMIDI();
+        p_vs1053->beginMidi();
         delay(500);
         setVolume(VS1053_DEFAULT_VOLUME);   
         return true;
