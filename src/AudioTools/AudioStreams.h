@@ -815,6 +815,18 @@ class CallbackBufferedStream : public AudioStreamX {
     ;
   }
 
+  /// Clears the data in the buffer
+  void clear() {
+    if (active){
+      callback_buffer_ptr->reset();
+    }
+  }
+
+  /// Returns true if active
+  operator bool(){
+    return active;
+  }
+
  protected:
   NBuffer<T> *callback_buffer_ptr;
   bool active;
