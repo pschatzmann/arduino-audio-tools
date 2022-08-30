@@ -15,21 +15,23 @@
 
 BluetoothA2DPSink a2dp_sink;
 VS1053Stream out; // final output
-
+bool active = false;
 // Write data to SPDIF in callback
 void read_data_stream(const uint8_t *data, uint32_t length) {
-  out.write(data, length);
+  if (active) out.write(data, length);
 }
 
-// Start and Stop VS1053Stream to make sure that WAV header is generated
+// for esp_a2d_audio_state_t see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp_a2dp.html#_CPPv421esp_a2d_audio_state_t
 void audio_state_changed(esp_a2d_audio_state_t state, void *ptr){
   Serial.println(a2dp_sink.to_str(state));
     switch(state){
       case ESP_A2D_AUDIO_STATE_STARTED:
         out.begin();
+        active = true;
         break;
       case ESP_A2D_AUDIO_STATE_STOPPED:
       case ESP_A2D_AUDIO_STATE_REMOTE_SUSPEND:
+        active = false;
         out.end();
         break;
     }
@@ -38,7 +40,7 @@ void audio_state_changed(esp_a2d_audio_state_t state, void *ptr){
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
   // register callbacks
   a2dp_sink.set_stream_reader(read_data_stream, false);
@@ -48,7 +50,7 @@ void setup() {
   a2dp_sink.set_auto_reconnect(false);
   a2dp_sink.start("a2dp-vs1053");
 
-  // setup output
+  // setup VS1053
   auto cfg = out.defaultConfig();
   cfg.sample_rate = a2dp_sink.sample_rate();
   cfg.channels = 2;
@@ -60,6 +62,7 @@ void setup() {
   //cfg.reset_pin = VS1053_RESET;
 
   out.begin(cfg);
+  out.end();
 }
 
 void loop() { delay(1000); }

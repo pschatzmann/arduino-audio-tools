@@ -24,7 +24,7 @@ class VS1053Config : public AudioBaseInfo {
         channels = 2;
         bits_per_sample = 16;
     }
-    RxTxMode mode;
+    RxTxMode mode = TX_MODE;
     /// set to false if it is a pcm stream
     uint8_t cs_pin = VS1053_CS; 
     uint8_t dcs_pin = VS1053_DCS;
@@ -83,8 +83,12 @@ public:
     }
 
     /// defines the default configuration that is used with the next begin()
-    void setConfig(VS1053Config c){
+    void setAudioInfo(VS1053Config c){
         cfg = c;
+    }
+
+    void setAudioInfo(AudioBaseInfo c){
+        cfg.copyFrom(c);
     }
 
     /// Starts with the default config or restarts
@@ -102,6 +106,7 @@ public:
         }
         this->cfg = cfg;
         setAudioInfo(cfg);
+        cfg.logInfo();
         LOGI("is_encoded_data: %s", cfg.is_encoded_data?"true":"false");
         LOGI("is_midi: %s", cfg.is_midi?"true":"false");
         LOGI("cs_pin: %d", cfg.cs_pin);
