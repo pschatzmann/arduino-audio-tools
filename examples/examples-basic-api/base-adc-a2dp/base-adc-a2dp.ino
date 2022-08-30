@@ -22,14 +22,13 @@ BluetoothA2DPSource a2dp_source;
 ConverterScaler<int16_t> scaler(1.0, -26427, 32700 );
 
 // callback used by A2DP to provide the sound data
-int32_t get_sound_data(Frame* frames, int32_t count) {
+int32_t get_sound_data(Frame* frames, int32_t frameCount) {
     uint8_t *data = (uint8_t*)frames;
-    int channels = 2;
+    int frameSize = 4;
     size_t len = count * channels * sizeof(int16_t);
-   // the ADC provides data in 16 bits
-    size_t result_len = adc.readBytes(data, len);   
-    scaler.convert(data, result_len);
-    return result_len;
+    size_t resultBytes = adc.readBytes(data, frameCount*frameSize);   
+    scaler.convert(data, resultBytes);
+    return resultBytes/frameSize;
 }
 
 // Arduino Setup
@@ -42,6 +41,7 @@ void setup(void) {
 
   // start the bluetooth
   Serial.println("starting A2DP...");
+  a2dp_source.set_auto_reconnect(false); 
   a2dp_source.start("MyMusic", get_sound_data);  
 }
 
