@@ -81,7 +81,7 @@ struct OpusEncoderSettings : public OpusSettings {
   /// OPUS_BANDWIDTH_SUPERWIDEBAND, OPUS_BANDWIDTH_FULLBAND,
   /// OPUS_BANDWIDTH_FULLBAND
   int max_bandwidth = -1;
-  /// OPUS_AUTO, OPUS_AUTO, OPUS_SIGNAL_VOICE, OPUS_SIGNAL_MUSIC
+  /// OPUS_AUTO,  OPUS_SIGNAL_VOICE, OPUS_SIGNAL_MUSIC
   int singal = -1;
   ///  0, 1
   int inband_fec = -1;
@@ -93,7 +93,7 @@ struct OpusEncoderSettings : public OpusSettings {
   int prediction_disabled = -1;
   /// 0, 1
   int use_dtx = -1;
-  /// 5,   10,  20,  40, 80, 120, 160, 200, 240
+  /// OPUS_FRAMESIZE_2_5_MS,OPUS_FRAMESIZE_5_MS,OPUS_FRAMESIZE_10_MS,OPUS_FRAMESIZE_20_MS,OPUS_FRAMESIZE_40_MS,OPUS_FRAMESIZE_60_MS,OPUS_FRAMESIZE_80_MS,OPUS_FRAMESIZE_100_MS,OPUS_FRAMESIZE_120_MS
   int frame_sizes_ms_x2 = -1; /* x2 to avoid 2.5 ms */
 };
 
@@ -306,7 +306,10 @@ class OpusAudioEncoder : public AudioEncoder {
       if (len < 0) {
         LOGE("opus_encode: %s", opus_strerror(len));
       } else if (len > 0 && len <= cfg.max_buffer_size) {
-        p_print->write(packet.data(), len);
+        int eff = p_print->write(packet.data(), len);
+        if (eff!=len){
+          LOGE("encodeFrame data lost");
+        }
       }
     }
   }

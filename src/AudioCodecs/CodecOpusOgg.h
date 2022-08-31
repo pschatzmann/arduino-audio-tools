@@ -64,12 +64,14 @@ class OpusOggDecoder : public OggContainerDecoder {
 
   virtual void beginOfSegment(ogg_packet *op) {
     LOGD("bos");
-    if (strncmp((char *)op->bytes, "OpusHead", 8) == 0) {
+    if (op->packet==nullptr) return;
+    if (strncmp("OpusHead", (char *)op->packet, 8) == 0) {
       memmove(&header, (char *)op->packet, sizeof(header));
       cfg.sample_rate = header.sampleRate;
       cfg.channels = header.channelCount;
+      LOGI("sample rate: %d", cfg.sample_rate);
       notify();
-    } else if (strncmp((char *)op->bytes, "OpusTags", 8) == 0) {
+    } else if (strncmp("OpusTags",(char *)op->packet , 8) == 0) {
       // not processed
     }
   }

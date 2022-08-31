@@ -66,16 +66,21 @@ class OggContainerDecoder : public AudioDecoder {
   void begin() override {
     LOGD(LOG_METHOD);
     if (p_oggz == nullptr) {
-      p_oggz = oggz_new(OGGZ_READ | OGGZ_NONSTRICT | OGGZ_AUTO);
+      p_oggz = oggz_new(OGGZ_READ |  OGGZ_AUTO); // OGGZ_NONSTRICT
       is_open = true;
+      // Callback to Replace standard IO
+      if (oggz_io_set_read(p_oggz, ogg_io_read, this)!=0){
+        LOGE("oggz_io_set_read");
+        is_open = false;
+      }
       // Callback
       if (oggz_set_read_callback(p_oggz, -1, read_packet, this)!=0){
         LOGE("oggz_set_read_callback");
         is_open = false;
       }
-      // Callback to Replace standard IO
-      if (oggz_io_set_read(p_oggz, ogg_io_read, this)!=0){
-        LOGE("oggz_io_set_read");
+
+      if (oggz_set_read_page(p_oggz, -1, read_page, this)!=0){
+        LOGE("oggz_set_read_page");
         is_open = false;
       }
     }
@@ -125,13 +130,14 @@ class OggContainerDecoder : public AudioDecoder {
   bool is_open = false;
   long pos = 0;
 
-  // Final Stream Callback
+  // Final Stream Callback -> write data to requested output destination
   static size_t ogg_io_read(void *user_handle, void *buf, size_t n) {
     LOGI("ogg_io_read: %u", n);
     OggContainerDecoder *self = (OggContainerDecoder *)user_handle;
     int len = self->buffer.readArray((uint8_t *)buf, n);
     self->pos += len;
     return len;
+    //return self->p_print->write((uint8_t *)buf, n);
   }
   
   // Process full packet
@@ -147,10 +153,19 @@ class OggContainerDecoder : public AudioDecoder {
       self->endOfSegment(op);
     } else {
       LOGI("process audio packet");
-      self->p_print->write(op->packet, op->bytes);
+      int eff = self->p_print->write(op->packet, op->bytes);
+      if (eff!=result){
+        LOGE("Incomplere write");
+      }
     }
     return result;
   }
+
+
+ static int read_page(OGGZ *oggz, const ogg_page *og, long serialno, void *user_data){
+    LOGI("read_page: %u", og->body_len);
+    return og->body_len;
+ }
 
   virtual void beginOfSegment(ogg_packet *op) {
     LOGD("bos");
@@ -225,7 +240,7 @@ class OggContainerEncoder : public AudioEncoder {
     LOGD(LOG_METHOD);
     is_open = true;
     if (p_oggz == nullptr) {
-      p_oggz = oggz_new(OGGZ_WRITE | OGGZ_NONSTRICT);
+      p_oggz = oggz_new(OGGZ_WRITE | OGGZ_NONSTRICT | OGGZ_AUTO);
       serialno = oggz_serialno_new(p_oggz);
       oggz_io_set_write(p_oggz, ogg_io_write, this);
       packetno = 0;
@@ -266,7 +281,7 @@ class OggContainerEncoder : public AudioEncoder {
     op.b_o_s = false;
     op.e_o_s = false;
     op.packetno = packetno++;
-    if (!writePacket(op)) {
+    if (!writePacket(op, OGGZ_FLUSH_AFTER)) {
       return 0;
     }
 
