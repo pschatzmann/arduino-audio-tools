@@ -40,7 +40,6 @@ class PortAudioStream : public AudioStreamX {
     public:
         PortAudioStream() {
             LOGD(LOG_METHOD);
-            this->buffer_size = buffer_size;
         }
 
         ~PortAudioStream(){

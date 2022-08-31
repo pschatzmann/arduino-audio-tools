@@ -95,7 +95,7 @@ struct OpusEncoderSettings : public OpusSettings {
   /// 0, 1
   int use_dtx = -1;
   /// 5,   10,  20,  40, 80, 120, 160, 200, 240
-  int frame_sizes_ms_x2 = 10; /* x2 to avoid 2.5 ms */
+  int frame_sizes_ms_x2 = -1; /* x2 to avoid 2.5 ms */
 };
 
 /**

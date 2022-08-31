@@ -25,11 +25,8 @@ option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
 # endif()
 
 # Build with arduino-audio-tools
-FetchContent_Declare(arduino_audio_tools GIT_REPOSITORY "https://github.com/pschatzmann/arduino-audio-tools.git" GIT_TAG main )
-FetchContent_GetProperties(arduino_audio_tools)
-if(NOT arduino_audio_tools_POPULATED)
-    FetchContent_Populate(arduino_audio_tools)
-    add_subdirectory(${arduino_audio_tools_SOURCE_DIR})
+if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../../.. ${CMAKE_CURRENT_BINARY_DIR}/arduino-audio-tools )
 endif()
 
 # build sketch as executable

@@ -257,7 +257,7 @@ class OggContainerEncoder : public AudioEncoder {
   /// Writes Ogg Packet
   virtual size_t write(const void *in_ptr, size_t in_size) override {
     if (!is_open || p_print == nullptr) return 0;
-    LOGD("write: %u", in_size);
+    LOGD("write: %d", (int) in_size);
 
     op.packet = (uint8_t *)in_ptr;
     op.bytes = in_size;
@@ -294,10 +294,10 @@ class OggContainerEncoder : public AudioEncoder {
   AudioBaseInfo cfg;
 
   virtual bool writePacket(ogg_packet &op, int flag = 0) {
-    LOGD("writePacket: %u", op.bytes);
+    LOGD("writePacket: %d", (int) op.bytes);
     long result = oggz_write_feed(p_oggz, &op, serialno, flag, NULL);
     if (result < 0) {
-      LOGE("oggz_write_feed: %d", result);
+      LOGE("oggz_write_feed: %d", (int) result);
       return false;
     }
     return true;
@@ -327,7 +327,7 @@ class OggContainerEncoder : public AudioEncoder {
 
   // Final Stream Callback
   static size_t ogg_io_write(void *user_handle, void *buf, size_t n) {
-    LOGD("ogg_io_write: %u", n);
+    LOGD("ogg_io_write: %d", (int) n);
     OggContainerEncoder *self = (OggContainerEncoder *)user_handle;
     if (self == nullptr) {
       LOGE("self is null");
