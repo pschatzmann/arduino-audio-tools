@@ -19,8 +19,9 @@ SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with
 GeneratedSoundStream<int16_t> sound( sineWave); // Stream generated from sine wave
 CsvStream<int16_t> out(Serial, 2);   // Output of sound on desktop 
 OpusAudioEncoder enc;
-EncodedAudioStream decoder(&out, new OpusAudioDecoder()); // encode and write 
-EncodedAudioStream encoder(&decoder, &enc); // encode and write 
+OpusAudioDecoder dec;
+EncodedAudioStream decoder(out, dec); // encode and write 
+EncodedAudioStream encoder(decoder, enc); // encode and write 
 StreamCopy copier(encoder, sound);     
 
 void setup() {
