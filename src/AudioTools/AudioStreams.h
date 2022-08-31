@@ -772,6 +772,10 @@ class CallbackBufferedStream : public AudioStreamX {
     remove_oldest_data = autoRemoveOldestDataIfFull;
   }
 
+  CallbackBufferedStream(BaseBuffer<T> &buffer){
+    callback_buffer_ptr = &buffer;
+  }
+
   virtual ~CallbackBufferedStream() { delete callback_buffer_ptr; }
 
   /// Activates the output
@@ -828,7 +832,7 @@ class CallbackBufferedStream : public AudioStreamX {
   }
 
  protected:
-  NBuffer<T> *callback_buffer_ptr;
+  BaseBuffer<T> *callback_buffer_ptr;
   bool active;
   bool remove_oldest_data;
 
