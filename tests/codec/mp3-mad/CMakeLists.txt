@@ -4,10 +4,6 @@ cmake_minimum_required(VERSION 3.20)
 project(mp3-mad)
 set (CMAKE_CXX_STANDARD 11)
 set (DCMAKE_CXX_FLAGS "-Werror")
-#if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-#    set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
-#    set (CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
-#endif()
 
 include(FetchContent)
 
@@ -33,5 +29,5 @@ target_compile_definitions(mp3-mad PUBLIC -DARDUINO -DEXIT_ON_STOP -DUSE_MAD -DU
 # specify libraries
 target_link_libraries(mp3-mad portaudio arduino_emulator arduino_libmad arduino-audio-tools )
 # ESP32: CONFIG_ARDUINO_LOOP_STACK_SIZE 8192 -> so we test it with this setting "-Wl,-z,stack-size=8192"
-add_link_options("-z,stack-size=8192")
+#add_link_options("-z,stack-size=8192")
 

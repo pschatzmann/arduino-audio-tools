@@ -28,12 +28,12 @@ void setup() {
   AudioLogger::instance().begin(Serial, AudioLogger::Debug);
 
   // start I2S
-  Serial.println("starting I2S...");
-  auto cfgi = out.defaultConfig(TX_MODE);
-  cfgi.sample_rate = sample_rate;
-  cfgi.channels = channels;
-  cfgi.bits_per_sample = 16;
-  out.begin(cfgi);
+  // Serial.println("starting I2S...");
+  // auto cfgi = out.defaultConfig(TX_MODE);
+  // cfgi.sample_rate = sample_rate;
+  // cfgi.channels = channels;
+  // cfgi.bits_per_sample = 16;
+  // out.begin(cfgi);
 
   // Setup sine wave
   auto cfgs = sineWave.defaultConfig();
