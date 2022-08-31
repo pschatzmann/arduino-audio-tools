@@ -21,7 +21,8 @@ if(NOT arduino_helix_POPULATED)
 endif()
 
 # build sketch as executable
-add_executable (mp3_dt mp3.cpp)
+set_source_files_properties(mp3.ino PROPERTIES LANGUAGE CXX)
+add_executable (mp3_dt mp3.ino)
 
 # set preprocessor defines
 target_compile_definitions(arduino_emulator PUBLIC -DDEFINE_MAIN)

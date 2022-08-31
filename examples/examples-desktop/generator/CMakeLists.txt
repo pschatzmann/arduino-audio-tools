@@ -8,29 +8,14 @@ set (DCMAKE_CXX_FLAGS "-Werror")
 include(FetchContent)
 option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
 
-# # Build with Portaudio 
-# FetchContent_Declare(portaudio GIT_REPOSITORY "https://github.com/PortAudio/portaudio.git" GIT_TAG master )
-# FetchContent_GetProperties(portaudio)
-# if(NOT portaudio_POPULATED)
-#     FetchContent_Populate(portaudio)
-#     add_subdirectory(${portaudio_SOURCE_DIR})
-# endif()
-
-# # Build with Linux Arduino Emulator
-# FetchContent_Declare(arduino_emulator GIT_REPOSITORY "https://github.com/pschatzmann/Arduino-Emulator.git" GIT_TAG main )
-# FetchContent_GetProperties(arduino_emulator)
-# if(NOT arduino_emulator_POPULATED)
-#     FetchContent_Populate(arduino_emulator)
-#     add_subdirectory(${arduino_emulator_SOURCE_DIR})
-# endif()
-
 # Build with arduino-audio-tools
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../../.. ${CMAKE_CURRENT_BINARY_DIR}/arduino-audio-tools )
 endif()
 
 # build sketch as executable
-add_executable (generator generator.cpp)
+set_source_files_properties(generator.ino PROPERTIES LANGUAGE CXX)
+add_executable (generator generator.ino)
 
 # set preprocessor defines
 target_compile_definitions(arduino_emulator PUBLIC -DDEFINE_MAIN)
