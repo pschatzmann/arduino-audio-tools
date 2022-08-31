@@ -349,13 +349,13 @@ public:
   }
 
   /// Intializes the processing
-  virtual bool begin(){
+  virtual bool begin() override {
     clear();
     temp_audio.resize(default_buffer_size);
     return true;
   }
 
-  virtual void end() {
+  virtual void end() override {
     clear();
   }
 
@@ -648,7 +648,7 @@ class NullStream : public BufferedStream {
   }
 
   /// Define object which need to be notified if the basinfo is changing
-  void setNotifyAudioChange(AudioBaseInfoDependent &bi) {}
+  void setNotifyAudioChange(AudioBaseInfoDependent &bi) override {}
 
   void setAudioInfo(AudioBaseInfo info) override {}
 
@@ -933,7 +933,7 @@ class VolumeStream : public AudioStreamX {
             return c;
         }
 
-        bool begin(AudioBaseInfo cfg){
+        bool begin(AudioBaseInfo cfg)  {
           VolumeStreamConfig cfg1;
           cfg1.channels = cfg.channels;
           cfg1.sample_rate = cfg.sample_rate;
@@ -943,7 +943,7 @@ class VolumeStream : public AudioStreamX {
           return begin(cfg1);
         }
 
-        void end() {
+        void end() override {
             is_active = false;
         }
 

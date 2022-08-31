@@ -10,6 +10,11 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
 endif()
 include(FetchContent)
 
+# Build with arduino-audio-tools
+if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../../.. ${CMAKE_CURRENT_BINARY_DIR}/arduino-audio-tools )
+endif()
+
 # Build with libhelix
 FetchContent_Declare(helix GIT_REPOSITORY "https://github.com/pschatzmann/arduino-libhelix.git" GIT_TAG main )
 FetchContent_GetProperties(helix)
@@ -19,7 +24,7 @@ if(NOT helix_POPULATED)
 endif()
 
 # build sketch as executable
-add_executable (aac-helix aac-helix.cpp ../main.cpp)
+add_executable (aac-helix aac-helix.cpp ../../main.cpp)
 
 # set preprocessor defines
 target_compile_definitions(aac-helix PUBLIC -DARDUINO -DEXIT_ON_STOP -DUSE_HELIX -DUSE_PORTAUDIO -DIS_DESKTOP)

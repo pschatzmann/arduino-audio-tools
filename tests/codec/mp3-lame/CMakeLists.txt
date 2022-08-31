@@ -4,12 +4,17 @@ cmake_minimum_required(VERSION 3.20)
 project(mp3-lame)
 set (CMAKE_CXX_STANDARD 11)
 set (DCMAKE_CXX_FLAGS "-Werror")
-if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
-    set (CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
-endif()
+#if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+#    set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
+#    set (CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
+#endif()
 
 include(FetchContent)
+
+# Build with arduino-audio-tools
+if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../../.. ${CMAKE_CURRENT_BINARY_DIR}/arduino-audio-tools )
+endif()
 
 # Build with liblame 
 FetchContent_Declare(arduino_liblame GIT_REPOSITORY "https://github.com/pschatzmann/arduino-liblame.git" GIT_TAG main )
@@ -20,7 +25,7 @@ if(NOT arduino_liblame_POPULATED)
 endif()
 
 # build sketch as executable
-add_executable (mp3-lame mp3-lame.cpp ../main.cpp)
+add_executable (mp3-lame mp3-lame.cpp ../../main.cpp)
 # set preprocessor defines
 target_compile_definitions(mp3-lame PUBLIC -DARDUINO -DEXIT_ON_STOP -DUSE_LAME -DUSE_PORTAUDIO -DIS_DESKTOP)
 

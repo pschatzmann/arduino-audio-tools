@@ -11,6 +11,11 @@ endif()
 
 include(FetchContent)
 
+# Build with arduino-audio-tools
+if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../../.. ${CMAKE_CURRENT_BINARY_DIR}/arduino-audio-tools )
+endif()
+
 # Build with arduino-fdk-aac
 FetchContent_Declare(fdk_aac GIT_REPOSITORY "https://github.com/pschatzmann/arduino-fdk-aac.git" GIT_TAG main )
 FetchContent_GetProperties(fdk_aac)
@@ -20,7 +25,7 @@ if(NOT fdk_aac_POPULATED)
 endif()
 
 # build sketch as executable
-add_executable (aac-fdk-encode aac-fdk-encode.cpp ../main.cpp)
+add_executable (aac-fdk-encode aac-fdk-encode.cpp ../../main.cpp)
 # set preprocessor defines
 target_compile_definitions(aac-fdk-encode PUBLIC -DARDUINO -DEXIT_ON_STOP -DUSE_FDK -DIS_DESKTOP)
 
