@@ -33,17 +33,17 @@ struct __attribute__((packed)) OpusOggCommentHeader {
  */
 class OpusOggDecoder : public OggContainerDecoder {
  public:
-  OpusOggDecoder() = default;
-
-  /// Defines the output Stream
-  void setOutputStream(Print &out_stream) override {
-    LOGD(LOG_METHOD);
-    dec.setOutputStream(out_stream);
-    p_print = &opus;
-  }
+  OpusOggDecoder() {
+    p_codec = &dec; // OpusAudioDecoder
+  };
 
   /// Provides access to the Opus configuration
   OpusSettings &config()  { return dec.config(); }
+
+  void begin(OpusSettings settings) {
+    OggContainerDecoder::begin();
+    dec.begin(settings);
+  }
 
   void begin() override {
     LOGD(LOG_METHOD);
@@ -60,7 +60,7 @@ class OpusOggDecoder : public OggContainerDecoder {
  protected:
   OpusOggHeader header;
   OpusAudioDecoder dec;
-  EncodedAudioStream opus{(Print *)nullptr, &dec};
+  //EncodedAudioStream opus{(Print *)nullptr, &dec};
 
   virtual void beginOfSegment(ogg_packet *op) {
     LOGD("bos");
@@ -85,13 +85,17 @@ class OpusOggDecoder : public OggContainerDecoder {
  */
 class OpusOggEncoder : public OggContainerEncoder {
  public:
-  OpusOggEncoder() = default;
+  OpusOggEncoder() {
+    p_codec = &enc; // OpusAudioEncoder
+  };
 
-  /// Defines the output Stream
-  void setOutputStream(Print &out_stream) override {
-    LOGD(LOG_METHOD);
-    enc.setOutputStream(out_stream);
-    p_print = &opus;
+  /// Provides access to the configuration
+  OpusEncoderSettings &config() { return enc.config(); }
+  OpusEncoderSettings &defaultConfig() { return enc.config(); }
+
+  void begin(OpusEncoderSettings settings) {
+    cfg = settings;
+    begin();
   }
 
   void begin() override {
@@ -109,14 +113,10 @@ class OpusOggEncoder : public OggContainerEncoder {
   /// Provides "audio/opus"
   const char *mime() override { return "audio/opus"; }
 
-  /// Provides access to the Opus configuration
-  OpusEncoderSettings &config() { return enc.config(); }
-
  protected:
   OpusOggHeader header;
   OpusOggCommentHeader comment;
   OpusAudioEncoder enc;
-  EncodedAudioStream opus{(Print *)nullptr, &enc};
   ogg_packet oh1;
 
   bool writeHeader() override {

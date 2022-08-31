@@ -293,7 +293,7 @@ class NoiseGenerator : public SoundGenerator<T> {
 
 
 /**
- * @brief Provides 0 as sound data. This can be used e.g. to test the output functionality which should optimally just output
+ * @brief Provides a fixed value (e.g. 0) as sound data. This can be used e.g. to test the output functionality which should optimally just output
  * silence and no artifacts.
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -303,17 +303,17 @@ template <class T>
 class SilenceGenerator : public SoundGenerator<T> {
     public:
         // the scale defines the max value which is generated
-        SilenceGenerator(double scale=1.0) {
-            this->scale = scale;
+        SilenceGenerator(T value=0) {
+            this->value = value;
         }
 
         /// Provides a single sample
         T readSample() {
-            return  0; // return 0
+            return  value; // return 0
         }
 
     protected:
-        double scale;
+        T value;
 
 };
 
