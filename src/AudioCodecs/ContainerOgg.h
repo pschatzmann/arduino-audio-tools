@@ -5,8 +5,8 @@
 #include "AudioTools/Buffers.h"
 #include "oggz/oggz.h"
 
-#define OGG_DEFAULT_BUFFER_SIZE (2048)
-#define OGG_READ_SIZE 1024
+#define OGG_DEFAULT_BUFFER_SIZE (246)
+#define OGG_READ_SIZE (512)
 
 namespace audio_tools {
 
@@ -102,7 +102,7 @@ class OggContainerDecoder : public AudioDecoder {
   }
 
   virtual size_t write(const void *in_ptr, size_t in_size) override {
-    LOGI("write: %u", in_size);
+    LOGD("write: %u", in_size);
     if (p_print == nullptr) return 0;
 
     // fill buffer

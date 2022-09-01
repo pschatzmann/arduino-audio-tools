@@ -13,7 +13,7 @@
 #include "AudioCodecs/CodecOpus.h"
 
 int sample_rate = 24000;
-int channels = 1;  // The stream will have 2 channels
+int channels = 1;  
 
 SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound( sineWave); // Stream generated from sine wave
@@ -42,16 +42,14 @@ void setup() {
   cfgs.bits_per_sample = 16;
   sineWave.begin(cfgs, N_B4);
 
-  // Opus decoder needs to know the audio info
+  // Opus encoder and decoder need to know the audio info
   decoder.begin(cfgs);
+  encoder.begin(cfgs);
 
-  // configure and start encoder
-  auto encfg = enc.config();
-  encfg.copyFrom(cfgs); // use sample rate, channels ...
-  //encfg.application = OPUS_APPLICATION_RESTRICTED_LOWDELAY;
-  //encfg.frame_sizes_ms_x2 = OPUS_FRAMESIZE_20_MS;
-  //encfg.complexity = 5;
-  encoder.begin(encfg);
+  // configure additinal parameters
+  //enc.config().application = OPUS_APPLICATION_RESTRICTED_LOWDELAY;
+  //enc.config().frame_sizes_ms_x2 = OPUS_FRAMESIZE_20_MS;
+  //enc.config().complexity = 5;
 
   Serial.println("Test started...");
 }
