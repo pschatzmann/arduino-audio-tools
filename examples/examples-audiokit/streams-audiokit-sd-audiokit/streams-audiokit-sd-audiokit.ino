@@ -64,7 +64,7 @@ void setup(){
   kit.setVolume(1.0);
 
   // record when key 1 is pressed
-  actions.add(PIN_KEY1, record_start, record_end);
+  kit.audioActions().add(PIN_KEY1, record_start, record_end);
   Serial.println("Press Key 1 to record");
 
 }
