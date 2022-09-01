@@ -89,6 +89,9 @@ class StreamCopyT {
         // copies the data from one channel from the source to 2 channels on the destination - the result is in bytes
         inline size_t copy(){
             LOGD(LOG_METHOD);
+            // if not initialized we do nothing
+            if (from==nullptr || to==nullptr) return 0;
+            
             size_t result = 0;
             size_t delayCount = 0;
             size_t len = available();
