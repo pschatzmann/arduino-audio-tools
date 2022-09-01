@@ -45,7 +45,7 @@ void record_end(bool pinStatus, int pin, void* ref){
 void setup(){
   Serial.begin(115200);
   while(!Serial); // wait for serial to be ready
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);  
+  AudioLogger::instance().begin(Serial, AudioLogger::Warning);  
 
   // Open SD drive
   if (!SD.begin(PIN_AUDIO_KIT_SD_CARD_CS)) {
