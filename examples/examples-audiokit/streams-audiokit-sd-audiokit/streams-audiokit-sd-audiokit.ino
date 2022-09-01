@@ -2,6 +2,7 @@
  * @file streams-audiokit-sd-audiokit.ino
  * @author Phil Schatzmann
  * @brief We record the input from the microphone to a file and constantly repeat to play the file
+ * The input is triggered by pressing key 1. Recording stops when key 1 is released!
  * @version 0.1
  * @date 2022-09-01
  * 
@@ -23,7 +24,7 @@ bool recording = false;  // flag to make sure that close is only executed one
 uint64_t end_time; // trigger to call endRecord
  
 
-void startRecord() {
+void record_start(bool pinStatus, int pin, void* ref){
   Serial.println("Recording...");
   // open the output file
   file = SD.open(file_name, FILE_WRITE);
@@ -31,7 +32,7 @@ void startRecord() {
   recording = true; 
 }
 
-void endRecord() {
+void record_end(bool pinStatus, int pin, void* ref){
   if (recording == true){
     Serial.println("Playing...");
     file.close();
@@ -48,10 +49,10 @@ void setup(){
 
   // Open SD drive
   if (!SD.begin(PIN_AUDIO_KIT_SD_CARD_CS)) {
-    Serial.println("initialization failed!");
+    Serial.println("Initialization failed!");
     while (1); // stop
   }
-  Serial.println("initialization done.");
+  Serial.println("Initialization done.");
 
   // setup input and output
   auto cfg = kit.defaultConfig(RXTX_MODE);
@@ -62,23 +63,24 @@ void setup(){
   kit.begin(cfg);
   kit.setVolume(1.0);
 
-  startRecord();
-  end_time = millis()+5000; // record for 5 seconds
+  // record when key 1 is pressed
+  actions.add(PIN_KEY1, record_start, record_end);
+  Serial.println("Press Key 1 to record");
 
 }
 
 void loop(){
-  // time based stop recording
-  if (recording && millis()>end_time){
-    endRecord();
-  }
 
   // record or play file
   copier.copy();  
 
   // while playing: at end of file -> reposition to beginning 
-  if (file.size()>0 && file.available()==0){
+  if (!recording && file.size()>0 && file.available()==0){
       file.seek(0);
       Serial.println("Replay...");
   }
+
+  // Process keys
+  kit.processActions();
+
 }
