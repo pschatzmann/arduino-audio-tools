@@ -324,6 +324,7 @@ public:
     DataNode(void*data, int len){
       this->len = len;
       this->data = new uint8_t[len];
+      assert(this->data!=nullptr);
       memcpy(this->data, data, len);
     }
 
