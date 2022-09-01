@@ -319,17 +319,21 @@ public:
   struct DataNode {
     int len=0;
     uint8_t* data=nullptr;
+
     DataNode() = default;
     /// Constructor
-    DataNode(void*data, int len){
+    DataNode(void*inData, int len){
       this->len = len;
-      this->data = new uint8_t[len];
+      this->data = (uint8_t*) malloc(len);
       assert(this->data!=nullptr);
-      memcpy(this->data, data, len);
+      memcpy(this->data, inData, len);
     }
 
     ~DataNode(){
-      if (data!=nullptr) delete[]data;
+      if (data!=nullptr) {
+         free(data);
+         data = nullptr;
+      }
     }
   };
 
@@ -365,7 +369,15 @@ public:
   }
 
   void clear() {
-    audio_list.clear();
+    DataNode *p_node;
+    bool ok;
+    do{
+        ok = audio_list.pop_front(p_node);
+        if (ok){
+          delete p_node;
+        }
+    } while (ok);
+
     temp_audio.reset();
     total_available = 0;
     alloc_failed = false;
@@ -382,11 +394,11 @@ public:
   }
 
   virtual size_t write(const uint8_t *buffer, size_t size) override {
-    DataNode node((void*)buffer, size);
-    if (node.data!=nullptr){
+    DataNode *p_node = new DataNode((void*)buffer, size);
+    if (p_node->data!=nullptr){
       alloc_failed = false;
       total_available += size;
-      audio_list.push_back(node);
+      audio_list.push_back(p_node);
 
       // setup interator to point to first record
       if (it == audio_list.end()){
@@ -404,7 +416,7 @@ public:
   } 
 
   virtual int available() override {
-    return it == audio_list.end() ? 0 : (*it).len;
+    return it == audio_list.end() ? 0 : (*it)->len;
   }
 
   virtual size_t readBytes(uint8_t *buffer, size_t length) override {
@@ -424,13 +436,13 @@ public:
     }
 
     // provide data from next node
-    DataNode node = *it;
-    int result_len = min(length, (size_t) node.len);
-    memcpy(buffer, node.data, result_len);
+    DataNode *p_node = *it;
+    int result_len = min(length, (size_t) p_node->len);
+    memcpy(buffer, p_node->data, result_len);
     // save unprocessed data to temp buffer
-    if (node.len>length){
-      uint8_t *start = node.data+result_len;
-      int uprocessed_len = node.len - length; 
+    if (p_node->len>length){
+      uint8_t *start = p_node->data+result_len;
+      int uprocessed_len = p_node->len - length; 
       temp_audio.writeArray(start, uprocessed_len);
     }
     //move to next pos
@@ -439,8 +451,8 @@ public:
   }
 
 protected:
-  List<DataNode> audio_list;
-  List<DataNode>::Iterator it = audio_list.end();
+  List<DataNode*> audio_list;
+  List<DataNode*>::Iterator it = audio_list.end();
   size_t total_available=0;
   int default_buffer_size=DEFAULT_BUFFER_SIZE;
   bool alloc_failed = false;
