@@ -941,7 +941,7 @@ class SmoothTransition : public BaseConverter<T> {
                 if (factor>=0.8){
                     break;
                 } else {
-                    values[j]*=factor;
+                    values[j]=factor*values[j];
                 }
                 factor += inc;
             }
@@ -953,7 +953,7 @@ class SmoothTransition : public BaseConverter<T> {
                 if (factor>=0.8){
                     break;
                 } else {
-                    values[j]*=factor;
+                    values[j]=factor*values[j];
                 }
             }
         }

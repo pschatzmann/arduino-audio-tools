@@ -338,6 +338,7 @@ public:
   };
 
   DynamicMemoryStream() = default;
+  
   DynamicMemoryStream(bool isLoop, int defaultBufferSize=DEFAULT_BUFFER_SIZE ) {
     this->default_buffer_size = defaultBufferSize;
     is_loop = isLoop;
@@ -459,6 +460,37 @@ public:
   List<DataNode*> &list() {
     return audio_list;
   }
+
+  /// @brief  Post processing after the recording. We add a smooth transition at the beginning and at the end
+  /// @tparam T 
+  /// @param factor 
+  template<typename T>
+  void postProcessSmoothTransition(int channels, int remove, float factor = 0.01){
+      if (remove>0){
+        for (int j=0;j<remove;j++){
+          DataNode* node = nullptr;
+          audio_list.pop_front(node);
+          if (node!=nullptr) delete node;
+          node = nullptr;
+          audio_list.pop_back(node);
+          if (node!=nullptr) delete node;
+        }
+      }
+
+      // Remove popping noise
+      SmoothTransition<T> clean_start(channels, true, false, factor);
+      auto first = *list().begin();   
+      if (first!=nullptr){ 
+        clean_start.convert(first->data,first->len);
+      }
+
+      SmoothTransition<T> clean_end(channels, false, true, factor);
+      auto last = * (--(list().end()));
+      if (last!=nullptr){
+        clean_end.convert(last->data,last->len);  
+      }  
+  }
+
 
 protected:
   List<DataNode*> audio_list;
