@@ -1,7 +1,7 @@
 /**
  * @file streams-audiokit-sd-audiokit.ino
  * @author Phil Schatzmann
- * @brief We record the input from the microphone to a file and constantly repeat to play the file
+ * @brief We record the input from the microphone to SPI RAM and constantly repeat to play the file
  * The input is triggered by pressing key 1. Recording stops when key 1 is released!
  * @version 0.1
  * @date 2022-09-01
@@ -16,7 +16,7 @@
 uint16_t sample_rate = 16000;
 uint8_t channels = 1;  // The stream will have 2 channels 
 AudioKitStream kit;
-MemoryManager memory(500); // Activate PSRAM for objects > 500 bytes
+MemoryManager memory(500); // Activate SPI RAM for objects > 500 bytes
 DynamicMemoryStream recording(true); // Audio Stored on heap (PSRAM)
 StreamCopy copier; // copies data
 bool is_recording = false;  // flag to make sure that close is only executed one
