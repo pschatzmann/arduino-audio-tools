@@ -17,25 +17,19 @@ uint16_t sample_rate = 16000;
 uint8_t channels = 1;  // The stream will have 2 channels 
 AudioKitStream kit;
 MemoryManager memory(500); // Activate SPI RAM for objects > 500 bytes
-DynamicMemoryStream recording(true); // Audio Stored on heap (PSRAM)
+DynamicMemoryStream recording(true); // Audio stored on heap 
 StreamCopy copier; // copies data
-bool is_recording = false;  // flag to make sure that close is only executed one
-uint64_t end_time; // trigger to call endRecord
  
 
 void record_start(bool pinStatus, int pin, void* ref){
   Serial.println("Recording...");
   recording.begin();
   copier.begin(recording, kit);  
-  is_recording = true; 
 }
 
 void record_end(bool pinStatus, int pin, void* ref){
-  if (recording == true){
-    Serial.println("Playing...");
-    is_recording = false;
-    copier.begin(kit, recording);  // start playback
-  }
+  Serial.println("Playing...");
+  copier.begin(kit, recording);  // start playback
 }
 
 void setup(){
