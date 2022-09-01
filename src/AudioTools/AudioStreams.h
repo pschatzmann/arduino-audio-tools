@@ -338,7 +338,7 @@ public:
   };
 
   DynamicMemoryStream() = default;
-  
+
   DynamicMemoryStream(bool isLoop, int defaultBufferSize=DEFAULT_BUFFER_SIZE ) {
     this->default_buffer_size = defaultBufferSize;
     is_loop = isLoop;
@@ -465,7 +465,7 @@ public:
   /// @tparam T 
   /// @param factor 
   template<typename T>
-  void postProcessSmoothTransition(int channels, int remove, float factor = 0.01){
+  void postProcessSmoothTransition(int channels, float factor = 0.01, int remove=0){
       if (remove>0){
         for (int j=0;j<remove;j++){
           DataNode* node = nullptr;
