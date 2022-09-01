@@ -416,7 +416,13 @@ public:
   } 
 
   virtual int available() override {
-    return it == audio_list.end() ? 0 : (*it)->len;
+    if (it == audio_list.end()){
+      if (is_loop) rewind();
+      if (it == audio_list.end()) {
+        return 0;
+      }
+    }
+    return (*it)->len;
   }
 
   virtual size_t readBytes(uint8_t *buffer, size_t length) override {
@@ -448,6 +454,10 @@ public:
     //move to next pos
     ++it;
     return result_len;
+  }
+
+  List<DataNode*> &list() {
+    return audio_list;
   }
 
 protected:

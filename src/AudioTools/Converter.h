@@ -848,5 +848,117 @@ class SilenceRemovalConverter : public BaseConverter<T>  {
   }
 };
 
+/**
+ * @brief Big value gaps (at the beginning and the end of a recording) can lead to some popping sounds.
+ * We will try to set the values to 0 until the first transition thru 0 of the audio curve
+ * 
+ * @tparam T 
+ */
+template<typename T>
+class PoppingSoundRemover : public BaseConverter<T> {
+    public:
+        PoppingSoundRemover(int channels, bool fromBeginning, bool fromEnd){
+            this->channels = channels;
+            from_beginning = fromBeginning;
+            from_end = fromEnd; 
+        }
+        virtual size_t convert(uint8_t *src, size_t size) {
+            for (int ch=0;ch<channels;ch++){
+                if (from_beginning)
+                    clearUpTo1stTransition(channels, ch, (T*) src, size/sizeof(T));
+                if (from_end)
+                    clearAfterLastTransition(channels, ch, (T*) src, size/sizeof(T));
+            }
+            return size;
+        }
+        
+    protected:
+        bool from_beginning;
+        bool from_end;
+        int channels;
+
+        void clearUpTo1stTransition(int channels, int channel, T* values, int sampleCount){
+            T first = values[channel];
+            for (int j=0;j<sampleCount;j+=channels){
+                T act = values[j];
+                if (first <= 0.0 && act >= 0.0 || first>=0.0 && act <= 0.0){
+                    // we found the last transition so we are done
+                    break;
+                } else {
+                    values[j] = 0;
+                }
+            }
+        }
+
+        void clearAfterLastTransition(int channels, int channel, T* values, int sampleCount){
+            int lastPos = sampleCount - channels + channel;
+            T last = values[lastPos];
+            for (int j=lastPos;j>=0;j-=channels){
+                T act = values[j];
+                if (last <= 0.0 && act >= 0.0 || last>=0.0 && act <= 0.0){
+                    // we found the last transition so we are done
+                    break;
+                } else {
+                    values[j] = 0;
+                }
+            }
+        }
+};
+
+/**
+ * @brief Changes the samples at the beginning or at the end to slowly ramp up the volume
+ * 
+ * @tparam T 
+ */
+template<typename T>
+class SmoothTransition : public BaseConverter<T> {
+    public:
+        SmoothTransition(int channels, bool fromBeginning, bool fromEnd, float inc=0.01){
+            this->channels = channels;
+            this->inc = inc;
+            from_beginning = fromBeginning;
+            from_end = fromEnd; 
+        }
+        virtual size_t convert(uint8_t *src, size_t size) {
+            for (int ch=0;ch<channels;ch++){
+                if (from_beginning)
+                    processStart(channels, ch, (T*) src, size/sizeof(T));
+                if (from_end)
+                    processEnd(channels, ch, (T*) src, size/sizeof(T));
+            }
+            return size;
+        }
+        
+    protected:
+        bool from_beginning;
+        bool from_end;
+        int channels;
+        float inc=0.01;
+        float factor = 0;
+
+        void processStart(int channels, int channel, T* values, int sampleCount){
+            for (int j=0;j<sampleCount;j+=channels){
+                if (factor>=0.8){
+                    break;
+                } else {
+                    values[j]*=factor;
+                }
+                factor += inc;
+            }
+        }
+
+        void processEnd(int channels, int channel, T* values, int sampleCount){
+            int lastPos = sampleCount - channels + channel;
+            for (int j=lastPos;j>=0;j-=channels){
+                if (factor>=0.8){
+                    break;
+                } else {
+                    values[j]*=factor;
+                }
+            }
+        }
+};
+
+
 
 }
