@@ -12,8 +12,7 @@
 #include "AudioCodecs/CodecOpus.h"
 
 int sample_rate = 24000;
-int channels = 2;  // The stream will have 2 channels
-int application = OPUS_APPLICATION_AUDIO; // Opus application
+int channels = 1;  // The stream will have 2 channels
 
 SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound( sineWave); // Stream generated from sine wave
@@ -28,13 +27,6 @@ void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Debug);
 
-  // start I2S
-  // Serial.println("starting I2S...");
-  // auto cfgi = out.defaultConfig(TX_MODE);
-  // cfgi.sample_rate = sample_rate;
-  // cfgi.channels = channels;
-  // cfgi.bits_per_sample = 16;
-  // out.begin(cfgi);
 
   // Setup sine wave
   auto cfgs = sineWave.defaultConfig();
@@ -47,7 +39,7 @@ void setup() {
   decoder.begin(cfgs);
 
   // configure and start encoder
-  enc.config().application = application;
+  enc.config().application = OPUS_APPLICATION_AUDIO;
   encoder.begin(cfgs);
 
   Serial.println("Test started...");
