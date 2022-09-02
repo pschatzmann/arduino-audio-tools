@@ -14,7 +14,7 @@
 #include "AudioLibs/VS1053Stream.h"
 
 URLStream url("ssid","password");  // or replace with ICYStream to get metadata
-VS1053Stream vs1053(VS1053_CS,VS1053_DCS, VS1053_DREQ); // final output
+VS1053Stream vs1053; // final output
 StreamCopy copier(vs1053, url); // copy url to decoder
 
 void setup(){

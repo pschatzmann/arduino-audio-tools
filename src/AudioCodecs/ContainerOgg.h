@@ -5,8 +5,8 @@
 #include "AudioTools/Buffers.h"
 #include "oggz/oggz.h"
 
-#define OGG_DEFAULT_BUFFER_SIZE (2048)
-#define OGG_READ_SIZE 1024
+#define OGG_DEFAULT_BUFFER_SIZE (246)
+#define OGG_READ_SIZE (512)
 
 namespace audio_tools {
 
@@ -66,16 +66,21 @@ class OggContainerDecoder : public AudioDecoder {
   void begin() override {
     LOGD(LOG_METHOD);
     if (p_oggz == nullptr) {
-      p_oggz = oggz_new(OGGZ_READ | OGGZ_NONSTRICT | OGGZ_AUTO);
+      p_oggz = oggz_new(OGGZ_READ |  OGGZ_AUTO); // OGGZ_NONSTRICT
       is_open = true;
+      // Callback to Replace standard IO
+      if (oggz_io_set_read(p_oggz, ogg_io_read, this)!=0){
+        LOGE("oggz_io_set_read");
+        is_open = false;
+      }
       // Callback
       if (oggz_set_read_callback(p_oggz, -1, read_packet, this)!=0){
         LOGE("oggz_set_read_callback");
         is_open = false;
       }
-      // Callback to Replace standard IO
-      if (oggz_io_set_read(p_oggz, ogg_io_read, this)!=0){
-        LOGE("oggz_io_set_read");
+
+      if (oggz_set_read_page(p_oggz, -1, read_page, this)!=0){
+        LOGE("oggz_set_read_page");
         is_open = false;
       }
     }
@@ -97,7 +102,7 @@ class OggContainerDecoder : public AudioDecoder {
   }
 
   virtual size_t write(const void *in_ptr, size_t in_size) override {
-    LOGI("write: %u", in_size);
+    LOGD("write: %u", in_size);
     if (p_print == nullptr) return 0;
 
     // fill buffer
@@ -125,13 +130,14 @@ class OggContainerDecoder : public AudioDecoder {
   bool is_open = false;
   long pos = 0;
 
-  // Final Stream Callback
+  // Final Stream Callback -> write data to requested output destination
   static size_t ogg_io_read(void *user_handle, void *buf, size_t n) {
     LOGI("ogg_io_read: %u", n);
     OggContainerDecoder *self = (OggContainerDecoder *)user_handle;
     int len = self->buffer.readArray((uint8_t *)buf, n);
     self->pos += len;
     return len;
+    //return self->p_print->write((uint8_t *)buf, n);
   }
   
   // Process full packet
@@ -147,10 +153,19 @@ class OggContainerDecoder : public AudioDecoder {
       self->endOfSegment(op);
     } else {
       LOGI("process audio packet");
-      self->p_print->write(op->packet, op->bytes);
+      int eff = self->p_print->write(op->packet, op->bytes);
+      if (eff!=result){
+        LOGE("Incomplere write");
+      }
     }
     return result;
   }
+
+
+ static int read_page(OGGZ *oggz, const ogg_page *og, long serialno, void *user_data){
+    LOGI("read_page: %u", og->body_len);
+    return og->body_len;
+ }
 
   virtual void beginOfSegment(ogg_packet *op) {
     LOGD("bos");
@@ -204,8 +219,9 @@ class OggContainerEncoder : public AudioEncoder {
       p_print = &out_stream;
     } else {
       EncodedAudioStream* eas = new EncodedAudioStream();
-      eas->begin(&out_stream, p_codec);
-      p_print = eas;
+      eas->begin(&codec_buffer, p_codec);
+      p_encoded_audio_stream = eas;
+      p_print = &out_stream;
     }
   }
 
@@ -224,8 +240,9 @@ class OggContainerEncoder : public AudioEncoder {
   virtual void begin() override {
     LOGD(LOG_METHOD);
     is_open = true;
+    codec_buffer.begin();
     if (p_oggz == nullptr) {
-      p_oggz = oggz_new(OGGZ_WRITE | OGGZ_NONSTRICT);
+      p_oggz = oggz_new(OGGZ_WRITE | OGGZ_NONSTRICT | OGGZ_AUTO);
       serialno = oggz_serialno_new(p_oggz);
       oggz_io_set_write(p_oggz, ogg_io_write, this);
       packetno = 0;
@@ -254,22 +271,39 @@ class OggContainerEncoder : public AudioEncoder {
     p_oggz = nullptr;
   }
 
-  /// Writes Ogg Packet
+  /// Writes raw data to be encoded and packaged
   virtual size_t write(const void *in_ptr, size_t in_size) override {
     if (!is_open || p_print == nullptr) return 0;
-    LOGD("write: %u", in_size);
+    LOGD("write: %d", (int) in_size);
 
-    op.packet = (uint8_t *)in_ptr;
-    op.bytes = in_size;
-    op.granulepos = granulepos +=
-        in_size / sizeof(int16_t) / cfg.channels;  // sample
-    op.b_o_s = false;
-    op.e_o_s = false;
-    op.packetno = packetno++;
-    if (!writePacket(op)) {
-      return 0;
+    if (p_codec!=nullptr){
+      // encode the data
+      size_t eff = p_encoded_audio_stream->write((uint8_t*)in_ptr, in_size);
+      if (eff!=in_size){
+        LOGE("Write overflow");
+      }
+      // get the result from the buffer
+      void *encoded_data = buffer.address();
+      int enoded_size = buffer.available();
+
+      op.packet = (uint8_t *)encoded_data;
+      op.bytes = enoded_size;
+    } else {
+      op.packet = (uint8_t *)in_ptr;
+      op.bytes = in_size;
     }
-
+    if (op.bytes>0){
+      buffer.reset();
+      op.granulepos = granulepos +=
+          in_size / sizeof(int16_t) / cfg.channels;  // sample
+      op.b_o_s = false;
+      op.e_o_s = false;
+      op.packetno = packetno++;
+      is_audio = true;
+      if (!writePacket(op, OGGZ_FLUSH_AFTER)) {
+        return 0;
+      }
+    }
     // trigger pysical write
     while ((oggz_write(p_oggz, in_size)) > 0)
       ;
@@ -282,8 +316,11 @@ class OggContainerEncoder : public AudioEncoder {
   bool isOpen() { return is_open; }
 
  protected:
-  AudioEncoder* p_codec = nullptr;
   Print *p_print = nullptr;
+  Print *p_encoded_audio_stream = nullptr;
+  SingleBuffer<uint8_t> buffer{1024};
+  CallbackBufferedStream<uint8_t> codec_buffer{buffer};
+  AudioEncoder* p_codec = nullptr;
   volatile bool is_open;
   OGGZ *p_oggz = nullptr;
   ogg_packet op;
@@ -292,12 +329,13 @@ class OggContainerEncoder : public AudioEncoder {
   size_t packetno = 0;
   long serialno = -1;
   AudioBaseInfo cfg;
+  bool is_audio = false;
 
   virtual bool writePacket(ogg_packet &op, int flag = 0) {
-    LOGD("writePacket: %u", op.bytes);
+    LOGD("writePacket: %d", (int) op.bytes);
     long result = oggz_write_feed(p_oggz, &op, serialno, flag, NULL);
     if (result < 0) {
-      LOGE("oggz_write_feed: %d", result);
+      LOGE("oggz_write_feed: %d", (int) result);
       return false;
     }
     return true;
@@ -311,6 +349,7 @@ class OggContainerEncoder : public AudioEncoder {
     oh.packetno = packetno++;
     oh.b_o_s = true;
     oh.e_o_s = false;
+    is_audio = false;
     return writePacket(oh);
   }
 
@@ -322,12 +361,13 @@ class OggContainerEncoder : public AudioEncoder {
     op.packetno = packetno++;
     op.b_o_s = false;
     op.e_o_s = true;
+    is_audio = false;
     return writePacket(op, OGGZ_FLUSH_AFTER);
   }
 
   // Final Stream Callback
   static size_t ogg_io_write(void *user_handle, void *buf, size_t n) {
-    LOGD("ogg_io_write: %u", n);
+    LOGD("ogg_io_write: %d", (int) n);
     OggContainerEncoder *self = (OggContainerEncoder *)user_handle;
     if (self == nullptr) {
       LOGE("self is null");

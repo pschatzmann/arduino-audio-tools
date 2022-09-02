@@ -9,6 +9,12 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
     set (CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
 endif()
 
+# Build with arduino-audio-tools
+if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../.. ${CMAKE_CURRENT_BINARY_DIR}/arduino-audio-tools )
+endif()
+
+
 # build sketch as executable
 add_executable (effects effects.cpp ../main.cpp)
 # set preprocessor defines

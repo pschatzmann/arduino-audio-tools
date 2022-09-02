@@ -4,8 +4,12 @@
 #include "Print.h"
 #include "opus.h"
 
-#ifndef OPUS_MAX_BUFFER_SIZE
-#define OPUS_MAX_BUFFER_SIZE (5760)
+#ifndef OPUS_ENC_MAX_BUFFER_SIZE 
+#define OPUS_ENC_MAX_BUFFER_SIZE 2048
+#endif
+
+#ifndef OPUS_DEC_MAX_BUFFER_SIZE
+#define OPUS_DEC_MAX_BUFFER_SIZE 1024
 #endif
 
 namespace audio_tools {
@@ -24,7 +28,7 @@ struct OpusSettings : public AudioBaseInfo {
     /// must be 16!
     bits_per_sample = 16;
   }
-  int max_buffer_size = OPUS_MAX_BUFFER_SIZE;
+  int max_buffer_size = OPUS_DEC_MAX_BUFFER_SIZE;
 };
 
 /**
@@ -53,16 +57,16 @@ setting the value.
 OPUS_SIGNAL_MUSIC};<br> int inband_fecs[3] = {0, 0, 1};<br> int
 packet_loss_perc[4] = {0, 1, 2, 5};<br> int lsb_depths[2] = {8, 24};<br> int
 prediction_disabled[3] = {0, 0, 1};<br> int use_dtx[2] = {0, 1};<br> int
-frame_sizes_ms_x2[9] = {5,   10,  20,  40, 80, 120, 160, 200, 240}; /* x2 to
-avoid 2.5 ms <br>
+frame_sizes_ms_x2[9] = {OPUS_FRAMESIZE_2_5_MS,OPUS_FRAMESIZE_5_MS,OPUS_FRAMESIZE_10_MS,OPUS_FRAMESIZE_20_MS,OPUS_FRAMESIZE_40_MS,OPUS_FRAMESIZE_60_MS,OPUS_FRAMESIZE_80_MS,OPUS_FRAMESIZE_100_MS,OPUS_FRAMESIZE_120_MS}/* x2 to avoid 2.5 ms <br>
  * @author Phil Schatzmann
  * @copyright GPLv3
 **/
 
 struct OpusEncoderSettings : public OpusSettings {
-  OpusEncoderSettings() : OpusSettings() {}
+  OpusEncoderSettings() : OpusSettings() {
   /// Default is 5760
-  int max_buffer_size = OPUS_MAX_BUFFER_SIZE;
+    max_buffer_size = OPUS_ENC_MAX_BUFFER_SIZE;
+  }
   /// OPUS_APPLICATION_AUDIO, OPUS_APPLICATION_VOIP,
   /// OPUS_APPLICATION_RESTRICTED_LOWDELAY
   int application = OPUS_APPLICATION_AUDIO;
@@ -82,7 +86,7 @@ struct OpusEncoderSettings : public OpusSettings {
   /// OPUS_BANDWIDTH_SUPERWIDEBAND, OPUS_BANDWIDTH_FULLBAND,
   /// OPUS_BANDWIDTH_FULLBAND
   int max_bandwidth = -1;
-  /// OPUS_AUTO, OPUS_AUTO, OPUS_SIGNAL_VOICE, OPUS_SIGNAL_MUSIC
+  /// OPUS_AUTO,  OPUS_SIGNAL_VOICE, OPUS_SIGNAL_MUSIC
   int singal = -1;
   ///  0, 1
   int inband_fec = -1;
@@ -94,8 +98,8 @@ struct OpusEncoderSettings : public OpusSettings {
   int prediction_disabled = -1;
   /// 0, 1
   int use_dtx = -1;
-  /// 5,   10,  20,  40, 80, 120, 160, 200, 240
-  int frame_sizes_ms_x2 = 10; /* x2 to avoid 2.5 ms */
+  /// OPUS_FRAMESIZE_2_5_MS,OPUS_FRAMESIZE_5_MS,OPUS_FRAMESIZE_10_MS,OPUS_FRAMESIZE_20_MS,OPUS_FRAMESIZE_40_MS,OPUS_FRAMESIZE_60_MS,OPUS_FRAMESIZE_80_MS,OPUS_FRAMESIZE_100_MS,OPUS_FRAMESIZE_120_MS
+  int frame_sizes_ms_x2 = -1; /* x2 to avoid 2.5 ms */
 };
 
 /**
@@ -145,6 +149,8 @@ class OpusAudioDecoder : public AudioDecoder {
   void begin() override {
     LOGD(LOG_METHOD);
     outbuf.resize(cfg.max_buffer_size);
+    assert(outbuf.data() != nullptr);
+    
     int err;
     dec = opus_decoder_create(cfg.sample_rate, cfg.channels, &err);
     if (err != OPUS_OK) {
@@ -194,9 +200,9 @@ class OpusAudioDecoder : public AudioDecoder {
   Print *p_print = nullptr;
   AudioBaseInfoDependent *bid = nullptr;
   OpusSettings cfg;
-  ::OpusDecoder *dec;
+  OpusDecoder *dec;
   bool active;
-  Vector<uint8_t> outbuf;
+  Vector<uint8_t> outbuf{0};
 };
 
 /**
@@ -229,13 +235,10 @@ class OpusAudioEncoder : public AudioEncoder {
   /// starts the processing using the actual OpusAudioInfo
   void begin() override {
     int err;
-    packet.resize(cfg.max_buffer_size);
-    frame.resize(getFrameSizeSamples(cfg.sample_rate) * 2);
+    int size = getFrameSizeSamples(cfg.sample_rate) * 2;
+    frame.resize(size);
     assert(frame.data() != nullptr);
-    assert(packet.data() != nullptr);
-
-    enc = opus_encoder_create(cfg.sample_rate, cfg.channels, cfg.application,
-                              &err);
+    enc = opus_encoder_create(cfg.sample_rate, cfg.channels, cfg.application, &err);
     if (err != OPUS_OK) {
       LOGE("opus_encoder_create: %s for sample_rate: %d, channels:%d",
            opus_strerror(err), cfg.sample_rate, cfg.channels);
@@ -256,7 +259,7 @@ class OpusAudioEncoder : public AudioEncoder {
   /// stops the processing
   void end() override {
     // flush buffered data
-    encodeFrame(frame_pos);
+    encodeFrame();
     // release memory
     opus_encoder_destroy(enc);
     is_open = false;
@@ -266,6 +269,7 @@ class OpusAudioEncoder : public AudioEncoder {
   size_t write(const void *in_ptr, size_t in_size) {
     if (!is_open || p_print == nullptr) return 0;
 
+    // fill frame
     uint8_t *p_byte = (uint8_t *)in_ptr;
     for (int j = 0; j < in_size; j++) {
       encodeByte(p_byte[j]);
@@ -279,11 +283,10 @@ class OpusAudioEncoder : public AudioEncoder {
 
  protected:
   Print *p_print = nullptr;
-  ::OpusEncoder *enc = nullptr;
+  OpusEncoder *enc = nullptr;
   OpusEncoderSettings cfg;
   bool is_open = false;
-  Vector<uint8_t> packet;
-  Vector<uint8_t> frame;
+  Vector<uint8_t> frame{0};
   int frame_pos = 0;
 
   void encodeByte(uint8_t data) {
@@ -291,23 +294,29 @@ class OpusAudioEncoder : public AudioEncoder {
     frame[frame_pos++] = data;
 
     // if frame is complete -> encode
-    int frame_size = frame.size();
-    if (frame_pos >= frame_size) {
-      encodeFrame(frame_size);
+    if (frame_pos >= frame.size()) {
+      encodeFrame();
       frame_pos = 0;
     }
   }
 
-  void encodeFrame(int lenBytes) {
-    if (lenBytes > 0) {
-      int frames = lenBytes / cfg.channels / sizeof(int16_t);
+  void encodeFrame() {
+    if (frame.size() > 0) {
+      // allocate temp buffer on stack
+      int packet_len = OPUS_ENC_MAX_BUFFER_SIZE > 0 ? OPUS_ENC_MAX_BUFFER_SIZE : 512;
+      uint8_t packet[packet_len];
+
+      int frames = frame.size() / cfg.channels / sizeof(int16_t);
       LOGD("opus_encode - frame_size: %d", frames);
       int len = opus_encode(enc, (opus_int16 *)frame.data(), frames,
-                            packet.data(), cfg.max_buffer_size);
+                            packet, packet_len);
       if (len < 0) {
         LOGE("opus_encode: %s", opus_strerror(len));
-      } else if (len > 0 && len <= cfg.max_buffer_size) {
-        p_print->write(packet.data(), len);
+      } else if (len > 0) {
+        int eff = p_print->write(packet, len);
+        if (eff!=len){
+          LOGE("encodeFrame data lost");
+        }
       }
     }
   }

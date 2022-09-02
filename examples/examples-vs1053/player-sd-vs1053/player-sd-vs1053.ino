@@ -1,6 +1,6 @@
 /**
  * @file player-sd-vs1053.ino
- * @brief Audio player which sends the output to a VS1053 module
+ * @brief Audio player which sends the output to a VS1053 module. Using a module with built in SD card
  * 
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -13,7 +13,7 @@
 #include "AudioLibs/AudioSourceSDFAT.h"
 #include "AudioCodecs/CodecCopy.h"
 
-#define SD_CARD_CS  13
+#define SD_CARD_CS  22
 
 const char *startFilePath="/";
 const char* ext="mp3";
@@ -27,8 +27,6 @@ void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
-  SPI.begin(SD_CARD_CS);
-
   // setup output
   auto cfg = vs1053.defaultConfig();
   cfg.is_encoded_data = true; // vs1053 is accepting encoded data
@@ -38,9 +36,9 @@ void setup() {
   //cfg.dreq_pin = VS1053_DREQ;
   //cfg.reset_pin = VS1053_RESET;
   vs1053.begin(cfg);
+  vs1053.setVolume(1.0); // full volume 
 
   // setup player
-  player.setVolume(0.7);
   player.begin();
 
   // select file with setPath() or setIndex()
