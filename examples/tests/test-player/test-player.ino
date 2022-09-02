@@ -12,7 +12,7 @@
 // install https://github.com/greiman/SdFat.git
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioSourceSdFat.h"
+#include "AudioLibs/AudioSourceSDFAT.h"
 
 
 const char *urls[] = {
@@ -41,7 +41,7 @@ void testUrl(){
 
 const char *startFilePath="/";
 const char* ext="mp3";
-AudioSourceSdFat sdSource(startFilePath, ext);
+AudioSourceSDFAT sdSource(startFilePath, ext);
 
 void testSD() {
     sdSource.setPath("/");
