@@ -9,13 +9,13 @@
 
 #include "AudioTools.h"
 #include "AudioLibs/AudioKit.h"
-#include "AudioLibs/AudioSourceSdFat.h"
+#include "AudioLibs/AudioSourceSDFAT.h" // or AudioSourceIdxSDFAT.h
 #include "AudioCodecs/CodecMP3Helix.h"
 
 const char *startFilePath="/";
 const char* ext="mp3";
 SdSpiConfig sdcfg(PIN_AUDIO_KIT_SD_CARD_CS, DEDICATED_SPI, SD_SCK_MHZ(10) , &AUDIOKIT_SD_SPI);
-AudioSourceSdFat source(startFilePath, ext, sdcfg);
+AudioSourceSDFAT source(startFilePath, ext, sdcfg);
 AudioKitStream kit;
 MP3DecoderHelix decoder;  // or change to MP3DecoderMAD
 AudioPlayer player(source, kit, decoder);

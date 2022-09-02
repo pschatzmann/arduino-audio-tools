@@ -9,12 +9,12 @@
 
 #include "AudioTools.h"
 #include "AudioLibs/AudioA2DP.h"
-#include "AudioLibs/AudioSourceSdFat.h"
+#include "AudioLibs/AudioSourceSDFAT.h"
 #include "AudioCodecs/CodecMP3Helix.h"
 
 const char *startFilePath="/";
 const char* ext="mp3";
-AudioSourceSdFat source(startFilePath, ext);
+AudioSourceSDFAT source(startFilePath, ext);
 A2DPStream out = A2DPStream::instance();  // A2DP input - A2DPStream is a singleton!
 MP3DecoderHelix decoder;
 AudioPlayer player(source, out, decoder);

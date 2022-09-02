@@ -18,5 +18,5 @@ You need to install the following libraries:
 
 - https://github.com/pschatzmann/arduino-audio-tools
 - https://github.com/pschatzmann/arduino-libhelix
-- https://github.com/greiman/SdFat
 - https://github.com/pschatzmann/arduino-audiokit
+- https://github.com/greiman/SdFat

@@ -1,0 +1,241 @@
+#pragma once
+
+#define MAX_FILE_LEN 256
+
+// Special logic for SDTFAT
+#ifdef SDT_FAT_VERSION
+#define USE_SDFAT
+#endif
+
+namespace audio_tools {
+
+/**
+ * @brief We access the files directy with an index. The index is determined by a recurseve
+ * tree walk thru the directory. Unfortunatly the SDTFAT library has it's own API which is
+ * incompatible with the SDT API
+ */
+template<class SDT, class FileT>
+class SDDirect {
+  public:
+    SDDirect(SDT &sd) {
+        p_sd = &sd;
+    };
+    
+    void begin(const char *startDir, const char *extension,
+               const char *file_name_pattern) {
+      LOGD(LOG_METHOD);
+      this->start_dir = startDir;
+      this->ext = extension;
+      this->file_name_pattern = file_name_pattern;
+    }
+
+
+    /// Access file name by index
+    const char *operator[](int idx) {
+      if (max_idx!=-1 && idx>=max_idx){
+        return nullptr;
+      }
+
+      requested_idx = idx;
+      actual_idx = -1;
+      found = false;
+      listDir(start_dir);
+      if (!found) return nullptr;
+      return result.c_str();
+    }
+
+  protected:
+    String result;
+    const char* start_dir;    
+    SDT *p_sd = nullptr;
+    int32_t actual_idx;
+    size_t requested_idx;
+    long max_idx=-1;
+    bool found = false;
+#ifdef USE_SDFAT
+    List<String> file_path_stack;
+    String file_path_str;
+#endif
+    
+    const char *ext = nullptr;
+    const char *file_name_pattern = nullptr;
+    long size=-1;
+
+    /// Writes the index file
+    void listDir(const char *dirname) {
+      LOGD("listDir: %s", dirname);
+      FileT root = open(dirname);
+      if (!root) {
+        LOGE("Open failed: %s", dirname);
+        popPath();
+        return;
+      }
+      if (!isDirectory(root)) {
+        LOGD("Is not directory: %s", dirname);
+        popPath();
+        return;
+      }
+      if (Str(dirname).startsWith(".")) {
+        LOGD("Invalid file: %s", dirname);
+        popPath();
+        return;
+      }
+      if (isDirectory(root)){
+        rewind(root);
+      }
+      found = false;
+      FileT file = openNext(root);
+      while (file && !found) {
+        if (isDirectory(file)) {
+          String name = String(fileNamePath(file));
+          LOGD("name: %s", name.c_str());
+          pushPath(fileName(file));
+          // recurseve call to get all files of this directory
+          listDir(name.c_str());
+        } else {
+          const char* fn = fileNamePath(file);
+          if (isValidAudioFile(file)) {
+            LOGD("Adding file to index: %s", fn);
+            actual_idx++;
+            if (actual_idx==requested_idx){
+              result = String(fn);
+              found = true;
+            }
+          } else {
+            LOGD("Ignoring %s",fn);
+          }
+        }
+        file = openNext(root);
+      }
+      if (!found){
+        max_idx = actual_idx;
+      }
+      popPath();
+    }
+
+    void rewind(FileT f){
+      LOGD(LOG_METHOD);
+#ifdef USE_SDFAT
+      f.rewind();
+#else
+      f.rewindDirectory();
+#endif
+    }
+
+    bool isDirectory(FileT f) {
+      bool result;
+#ifdef USE_SDFAT
+      result = f.isDir();
+#else
+      result = f.isDirectory();
+#endif
+      LOGD("isDirectory %s: %d", fileName(f), result);
+      return result;
+    }
+
+    FileT openNext(FileT &dir) {
+      LOGD(LOG_METHOD);
+#ifdef USE_SDFAT
+      FileT result;
+      if (!result.openNext(&dir, O_READ)){
+        LOGD("No next file");
+      } 
+      return result;      
+#else
+      return dir.openNextFile();
+#endif
+    }
+
+    void pushPath(const char* name){
+        LOGD(LOG_METHOD);
+#ifdef USE_SDFAT
+        LOGD("pushPath: %s", name);
+        String nameStr(name);
+        file_path_stack.push_back(nameStr);
+#endif
+    }
+
+    void popPath(){
+       LOGD(LOG_METHOD);
+#ifdef USE_SDFAT
+      String str;
+      file_path_stack.pop_back(str);
+      LOGD("popPath: %s", str.c_str());
+#endif
+    }
+
+    /// checks if the file is a valid audio file
+    bool isValidAudioFile(FileT &file) {
+      const char *file_name = fileName(file);
+      if (file.isDirectory()) {
+        LOGD("-> isValidAudioFile: '%s': %d", file_name, false);
+        return false;
+      }
+      Str strFileTName(file_name);
+      bool result = strFileTName.endsWithIgnoreCase(ext) 
+                    && strFileTName.matches(file_name_pattern)
+                    && !isHidden(file);
+      LOGD("-> isValidAudioFile: '%s': %d", file_name, result);
+      return result;
+    }
+
+
+    /// Returns the filename w/o path
+    const char* fileName(FileT&file){
+#ifdef USE_SDFAT
+       // add name
+       static char name[MAX_FILE_LEN];
+       file.getName(name,MAX_FILE_LEN);        
+       return name;
+#else
+      return file.name();
+#endif
+  }
+
+    /// Returns the filename including the path
+    const char* fileNamePath(FileT &file){
+#ifdef USE_SDFAT
+      LOGD("-> fileNamePath: %s", fileName(file));
+      file_path_str.clear();
+      file_path_str += "/";
+      for (int j=0; j<file_path_stack.size(); j++){
+         file_path_str += file_path_stack[j]+"/";
+      } 
+
+       // add name
+      static char name[MAX_FILE_LEN];
+      file.getName(name,MAX_FILE_LEN);
+      file_path_str += name;
+      const char* result = file_path_str.c_str();
+      LOGD("<- fileNamePath: %s", result);
+      return result;
+#else
+      return file.name();
+#endif
+  }  
+
+    bool isHidden(FileT f){
+#ifdef USE_SDFAT
+       return f.isHidden();
+#else
+      return Str(f.name()).contains("/.");
+#endif
+
+    }
+
+    FileT open(const char* name){
+       LOGD(LOG_METHOD);
+#ifdef USE_SDFAT
+      FileT result;
+      if (!result.open(name)){
+        LOGE("FileT open error: %s", name);
+      }
+      return result;
+#else
+      return p_sd->open(name);
+#endif
+    }
+
+};
+
+}

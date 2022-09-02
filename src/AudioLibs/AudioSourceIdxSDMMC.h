@@ -1,57 +1,55 @@
 #pragma once
 
-#include "AudioBasic/StrExt.h"
+#include <FS.h>
+#include <SD_MMC.h>
 #include "AudioLogger.h"
+#include "AudioBasic/StrExt.h"
 #include "AudioTools/AudioSource.h"
-#include "AudioLibs/SDDirect.h"
-#include "FS.h"
-#include "SD.h"
-#include "SPI.h"
+#include "AudioLibs/SDIndex.h"
 
 namespace audio_tools {
 
 /**
  * @brief ESP32 AudioSource for AudioPlayer using an SD card as data source.
- * This class is based on the Arduino SD implementation
+ * This class is based on the Arduino SD_MMC implementation
  * Connect the SD card to the following pins:
  *
  * SD Card | ESP32
- *    D2       -
- *    D3       SS
- *    CMD      MOSI
+ *    D2       12
+ *    D3       13
+ *    CMD      15
  *    VSS      GND
  *    VDD      3.3V
- *    CLK      SCK
+ *    CLK      14
  *    VSS      GND
- *    D0       MISO
- *    D1       -
+ *    D0       2  (add 1K pull up after flashing)
+ *    D1       4
  *
  *  On the AI Thinker boards the pin settings should be On, On, On, On, On,
  *
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioSourceSD : public AudioSource {
+class AudioSourceSDMMC : public AudioSource {
 public:
   /// Default constructor
-  AudioSourceSD(const char *startFilePath = "/", const char *ext = ".mp3", int chipSelect = PIN_CS, bool setupIndex=true) {
+  AudioSourceSDMMC(const char *startFilePath = "/", const char *ext = ".mp3", bool setupIndex=true) {
     start_path = startFilePath;
     exension = ext;
     setup_index = setupIndex;
-    cs = chipSelect;
   }
 
   virtual void begin() override {
     LOGD(LOG_METHOD);
     static bool is_sd_setup = false;
     if (!is_sd_setup) {
-      if (!SD.begin(cs)) {
-        LOGE("SD.begin cs=%d failed",cs);
+      if (!SD_MMC.begin("/sdcard", true)) {
+        LOGE("SD_MMC.begin failed");
         return;
       }
       is_sd_setup = true;
     }
-    idx.begin(start_path, exension, file_name_pattern);
+    idx.begin(start_path, exension, file_name_pattern, setup_index);
     idx_pos = 0;
   }
 
@@ -66,13 +64,13 @@ public:
     file_name = idx[index];
     if (file_name==nullptr) return nullptr;
     LOGI("Using file %s", file_name);
-    file = SD.open(file_name);
+    file = SD_MMC.open(file_name);
     return file ? &file : nullptr;
   }
 
   virtual Stream *selectStream(const char *path) override {
     file.close();
-    file = SD.open(path);
+    file = SD_MMC.open(path);
     file_name = file.name();
     LOGI("-> selectStream: %s", path);
     return file ? &file : nullptr;
@@ -95,7 +93,7 @@ public:
   virtual void setPath(const char *p) { start_path = p; }
 
 protected:
-  SDDirect<fs::SDFS,fs::File> idx{SD};
+  SDIndex<fs::SDMMCFS,fs::File> idx{SD_MMC};
   File file;
   size_t idx_pos = 0;
   const char *file_name;
@@ -103,9 +101,6 @@ protected:
   const char *start_path = nullptr;
   const char *file_name_pattern = "*";
   bool setup_index = true;
-  int cs;
-
-
 };
 
 } // namespace audio_tools

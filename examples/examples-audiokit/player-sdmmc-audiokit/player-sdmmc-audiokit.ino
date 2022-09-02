@@ -8,12 +8,12 @@
 
 #include "AudioTools.h"
 #include "AudioLibs/AudioKit.h"
-#include "AudioLibs/AudioSourceSdMmc.h"
+#include "AudioLibs/AudioSourceSDMMC.h" // or AudioSourceIdxSDMMC.h
 #include "AudioCodecs/CodecMP3Helix.h"
 
 const char *startFilePath="/";
 const char* ext="mp3";
-AudioSourceSdMmc source(startFilePath, ext);
+AudioSourceSDMMC source(startFilePath, ext);
 AudioKitStream kit;
 MP3DecoderHelix decoder;  // or change to MP3DecoderMAD
 AudioPlayer player(source, kit, decoder);
