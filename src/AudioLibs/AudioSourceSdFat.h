@@ -1,17 +1,19 @@
 #pragma once
 
-#include "AudioBasic/StrExt.h"
-#include "AudioLogger.h"
-#include "AudioTools/AudioSource.h"
-
-#include <SPI.h>
-#include <SdFat.h>
-#define USE_SDFAT
-#include "AudioLibs/SDDirect.h"
+#include "AudioConfig.h"
 
 #ifndef USE_UTF8_LONG_NAMES
 #define USE_UTF8_LONG_NAMES 1
 #endif  // USE_UTF8_LONG_NAMES
+
+#include <SPI.h>
+#include <SdFat.h>
+#include "AudioBasic/StrExt.h"
+#include "AudioLogger.h"
+#include "AudioTools/AudioSource.h"
+
+#define USE_SDFAT
+#include "AudioLibs/SDDirect.h"
 
 
 // SD_FAT_TYPE = 0 for SdFat/File as defined in SdFatConfig.h,

@@ -9,7 +9,7 @@
 
 #include "AudioTools.h"
 #include "AudioLibs/AudioKit.h"
-#include "AudioLibs/AudioSourceSD.h"
+#include "AudioLibs/AudioSourceSD.h" // or AudioSourceIdxSD.h
 #include "AudioCodecs/CodecMP3Helix.h"
 
 const char *startFilePath="/";

@@ -73,7 +73,16 @@ class SDIndex {
       bool found = false;
       while (idxfile.available()>0 && !found) {
         result = idxfile.readStringUntil('\n');
-        LOGD("%d -> %s", count, result.c_str());
+
+        // result c-string
+        char *c_str = (char*)result.c_str();
+        // remove potential cr character - hax to avoid any allocations
+        int lastPos = result.length()-1;
+        if (c_str[lastPos]==13){
+          c_str[lastPos] = 0;
+        }
+        
+        LOGD("%d -> %s", count, c_str);
         if (count==idx) {
           found=true;
         }

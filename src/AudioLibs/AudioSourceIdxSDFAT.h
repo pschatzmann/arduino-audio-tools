@@ -1,5 +1,10 @@
 #pragma once
 
+#include "AudioConfig.h"
+#ifndef USE_UTF8_LONG_NAMES
+#define USE_UTF8_LONG_NAMES 1
+#endif  // USE_UTF8_LONG_NAMES
+
 #include <SPI.h>
 #include <SdFat.h>
 #include "AudioLogger.h"
@@ -9,9 +14,6 @@
 #define USE_SDFAT
 #include "AudioLibs/SDIndex.h"
 
-#ifndef USE_UTF8_LONG_NAMES
-#define USE_UTF8_LONG_NAMES 1
-#endif  // USE_UTF8_LONG_NAMES
 
 
 // SD_FAT_TYPE = 0 for SdFat/File as defined in SdFatConfig.h,
