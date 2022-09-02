@@ -379,7 +379,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #endif
 #define rintf(F) static_cast<int>(F)
 #define PIN_PWM_START 6
-#define PIN_CS CS
+#define PIN_CS SS
 
 #undef PWM_BUFFER_SIZE
 #define PWM_BUFFER_SIZE 125
@@ -431,18 +431,21 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 //------ VS1053 ----------
 
 // Default Pins for VS1053
-#define VS1053_CS 27
-#define VS1053_DCS 14
-#define VS1053_DREQ 26
-#define VS1053_RESET -1  
-#define VS1053_CS_SD 13
+#define VS1053_CS 5
+#define VS1053_DCS 16
+#define VS1053_DREQ 4
+#define VS1053_RESET 15  
+#define VS1053_CS_SD -1
 
 // use 0 for https://github.com/baldram/ESP_VS1053_Library
 // use 1 for https://github.com/pschatzmann/arduino-vs1053
-#define VS1053_EXT 0
+#define VS1053_EXT 1
+#define VS1053_DEFAULT_VOLUME 0.7
+
+
 //----------------
 
-#ifdef IS_DESKTO
+#ifdef IS_DESKTOP
 #define USE_URL_ARDUINO
 #define FLUSH_OVERRIDE override
 #endif

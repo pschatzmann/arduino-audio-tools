@@ -31,6 +31,8 @@ public:
     setNotifyAudioChange(out_stream);
   }
   virtual void setOutputStream(Print &out_stream) = 0;
+  // Th decoding result is PCM data
+  virtual bool isResultPCM() { return true;} 
 };
 
 /**

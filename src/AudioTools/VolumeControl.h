@@ -142,10 +142,15 @@ class SimulatedAudioPot : public VolumeControl {
  */
 class LinearVolumeControl : public VolumeControl {
     public:
+        LinearVolumeControl(bool allowBoost=false){
+            is_limited = !allowBoost;
+        }
         // provides a factor in the range of 0.0 to 1.0
         virtual float getVolumeFactor(float volume) {
-            return limit(volume);
+            return is_limited ? limit(volume) : volume;
         }
+    protected:
+        bool is_limited;
 };
 
 

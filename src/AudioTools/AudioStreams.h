@@ -319,20 +319,26 @@ public:
   struct DataNode {
     int len=0;
     uint8_t* data=nullptr;
+
     DataNode() = default;
     /// Constructor
-    DataNode(void*data, int len){
+    DataNode(void*inData, int len){
       this->len = len;
-      this->data = new uint8_t[len];
-      memcpy(this->data, data, len);
+      this->data = (uint8_t*) malloc(len);
+      assert(this->data!=nullptr);
+      memcpy(this->data, inData, len);
     }
 
     ~DataNode(){
-      if (data!=nullptr) delete[]data;
+      if (data!=nullptr) {
+         free(data);
+         data = nullptr;
+      }
     }
   };
 
   DynamicMemoryStream() = default;
+
   DynamicMemoryStream(bool isLoop, int defaultBufferSize=DEFAULT_BUFFER_SIZE ) {
     this->default_buffer_size = defaultBufferSize;
     is_loop = isLoop;
@@ -349,13 +355,13 @@ public:
   }
 
   /// Intializes the processing
-  virtual bool begin(){
+  virtual bool begin() override {
     clear();
     temp_audio.resize(default_buffer_size);
     return true;
   }
 
-  virtual void end() {
+  virtual void end() override {
     clear();
   }
 
@@ -364,7 +370,15 @@ public:
   }
 
   void clear() {
-    audio_list.clear();
+    DataNode *p_node;
+    bool ok;
+    do{
+        ok = audio_list.pop_front(p_node);
+        if (ok){
+          delete p_node;
+        }
+    } while (ok);
+
     temp_audio.reset();
     total_available = 0;
     alloc_failed = false;
@@ -381,11 +395,11 @@ public:
   }
 
   virtual size_t write(const uint8_t *buffer, size_t size) override {
-    DataNode node((void*)buffer, size);
-    if (node.data!=nullptr){
+    DataNode *p_node = new DataNode((void*)buffer, size);
+    if (p_node->data!=nullptr){
       alloc_failed = false;
       total_available += size;
-      audio_list.push_back(node);
+      audio_list.push_back(p_node);
 
       // setup interator to point to first record
       if (it == audio_list.end()){
@@ -403,7 +417,13 @@ public:
   } 
 
   virtual int available() override {
-    return it == audio_list.end() ? 0 : (*it).len;
+    if (it == audio_list.end()){
+      if (is_loop) rewind();
+      if (it == audio_list.end()) {
+        return 0;
+      }
+    }
+    return (*it)->len;
   }
 
   virtual size_t readBytes(uint8_t *buffer, size_t length) override {
@@ -423,13 +443,13 @@ public:
     }
 
     // provide data from next node
-    DataNode node = *it;
-    int result_len = min(length, (size_t) node.len);
-    memcpy(buffer, node.data, result_len);
+    DataNode *p_node = *it;
+    int result_len = min(length, (size_t) p_node->len);
+    memcpy(buffer, p_node->data, result_len);
     // save unprocessed data to temp buffer
-    if (node.len>length){
-      uint8_t *start = node.data+result_len;
-      int uprocessed_len = node.len - length; 
+    if (p_node->len>length){
+      uint8_t *start = p_node->data+result_len;
+      int uprocessed_len = p_node->len - length; 
       temp_audio.writeArray(start, uprocessed_len);
     }
     //move to next pos
@@ -437,9 +457,44 @@ public:
     return result_len;
   }
 
+  List<DataNode*> &list() {
+    return audio_list;
+  }
+
+  /// @brief  Post processing after the recording. We add a smooth transition at the beginning and at the end
+  /// @tparam T 
+  /// @param factor 
+  template<typename T>
+  void postProcessSmoothTransition(int channels, float factor = 0.01, int remove=0){
+      if (remove>0){
+        for (int j=0;j<remove;j++){
+          DataNode* node = nullptr;
+          audio_list.pop_front(node);
+          if (node!=nullptr) delete node;
+          node = nullptr;
+          audio_list.pop_back(node);
+          if (node!=nullptr) delete node;
+        }
+      }
+
+      // Remove popping noise
+      SmoothTransition<T> clean_start(channels, true, false, factor);
+      auto first = *list().begin();   
+      if (first!=nullptr){ 
+        clean_start.convert(first->data,first->len);
+      }
+
+      SmoothTransition<T> clean_end(channels, false, true, factor);
+      auto last = * (--(list().end()));
+      if (last!=nullptr){
+        clean_end.convert(last->data,last->len);  
+      }  
+  }
+
+
 protected:
-  List<DataNode> audio_list;
-  List<DataNode>::Iterator it = audio_list.end();
+  List<DataNode*> audio_list;
+  List<DataNode*>::Iterator it = audio_list.end();
   size_t total_available=0;
   int default_buffer_size=DEFAULT_BUFFER_SIZE;
   bool alloc_failed = false;
@@ -648,7 +703,7 @@ class NullStream : public BufferedStream {
   }
 
   /// Define object which need to be notified if the basinfo is changing
-  void setNotifyAudioChange(AudioBaseInfoDependent &bi) {}
+  void setNotifyAudioChange(AudioBaseInfoDependent &bi) override {}
 
   void setAudioInfo(AudioBaseInfo info) override {}
 
@@ -772,6 +827,10 @@ class CallbackBufferedStream : public AudioStreamX {
     remove_oldest_data = autoRemoveOldestDataIfFull;
   }
 
+  CallbackBufferedStream(BaseBuffer<T> &buffer){
+    callback_buffer_ptr = &buffer;
+  }
+
   virtual ~CallbackBufferedStream() { delete callback_buffer_ptr; }
 
   /// Activates the output
@@ -815,8 +874,20 @@ class CallbackBufferedStream : public AudioStreamX {
     ;
   }
 
+  /// Clears the data in the buffer
+  void clear() {
+    if (active){
+      callback_buffer_ptr->reset();
+    }
+  }
+
+  /// Returns true if active
+  operator bool(){
+    return active;
+  }
+
  protected:
-  NBuffer<T> *callback_buffer_ptr;
+  BaseBuffer<T> *callback_buffer_ptr;
   bool active;
   bool remove_oldest_data;
 
@@ -921,7 +992,7 @@ class VolumeStream : public AudioStreamX {
             return c;
         }
 
-        bool begin(AudioBaseInfo cfg){
+        bool begin(AudioBaseInfo cfg)  {
           VolumeStreamConfig cfg1;
           cfg1.channels = cfg.channels;
           cfg1.sample_rate = cfg.sample_rate;
@@ -931,7 +1002,7 @@ class VolumeStream : public AudioStreamX {
           return begin(cfg1);
         }
 
-        void end() {
+        void end() override {
             is_active = false;
         }
 
@@ -943,8 +1014,17 @@ class VolumeStream : public AudioStreamX {
             if (info.channels>max_channels){
               max_channels = info.channels;
             }
+
+            // usually we use a exponential volume control - except if we allow values > 1.0
+            if (cfg.allow_boost){
+              setVolumeControl(linear_vc);
+            } else {
+              setVolumeControl(pot_vc);
+            }
+
             // set start volume
             setVolume(cfg.volume); 
+
             return true;
         }
 
@@ -955,7 +1035,7 @@ class VolumeStream : public AudioStreamX {
 
         /// Resets the volume control to use the standard logic
         void resetVolumeControl(){
-            cached_volume.setVolumeControl(default_volume);
+            cached_volume.setVolumeControl(pot_vc);
         }
 
         /// Read raw PCM audio data, which will be the input for the volume control 
@@ -1033,8 +1113,9 @@ class VolumeStream : public AudioStreamX {
         Print *p_out=nullptr;
         Stream *p_in=nullptr;
         VolumeStreamConfig info;
-        SimulatedAudioPot default_volume;
-        CachedVolumeControl cached_volume = CachedVolumeControl(default_volume);
+        LinearVolumeControl linear_vc{true};
+        SimulatedAudioPot pot_vc;
+        CachedVolumeControl cached_volume{pot_vc};
         float *volume_values = nullptr;
         float *factor_for_channel = nullptr;
         bool is_active = false;
@@ -1102,7 +1183,7 @@ class VolumeStream : public AudioStreamX {
         void applyVolume16(int16_t* data, size_t size){
             for (size_t j=0;j<size;j++){
                 float result = factorForChannel(j%info.channels) * data[j];
-                if (info.allow_boost){
+                if (!info.allow_boost){
                     if (result>max_value) result = max_value;
                     if (result<-max_value) result = -max_value;
                 } 
@@ -1113,7 +1194,7 @@ class VolumeStream : public AudioStreamX {
         void applyVolume24(int24_t* data, size_t size) {
             for (size_t j=0;j<size;j++){
                 float result = factorForChannel(j%info.channels) * data[j];
-                if (info.allow_boost){
+                if (!info.allow_boost){
                     if (result>max_value) result = max_value;
                     if (result<-max_value) result = -max_value;
                 } 
@@ -1125,7 +1206,7 @@ class VolumeStream : public AudioStreamX {
         void applyVolume32(int32_t* data, size_t size) {
             for (size_t j=0;j<size;j++){
                 float result = factorForChannel(j%info.channels) * data[j];
-                if (info.allow_boost){
+                if (!info.allow_boost){
                     if (result>max_value) result = max_value;
                     if (result<-max_value) result = -max_value;
                 } 

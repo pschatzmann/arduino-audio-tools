@@ -40,7 +40,6 @@ class PortAudioStream : public AudioStreamX {
     public:
         PortAudioStream() {
             LOGD(LOG_METHOD);
-            this->buffer_size = buffer_size;
         }
 
         ~PortAudioStream(){
@@ -48,6 +47,27 @@ class PortAudioStream : public AudioStreamX {
             Pa_Terminate();
         }
 
+        PortAudioConfig defaultConfig(RxTxMode mode) {
+            LOGD(LOG_METHOD);
+            PortAudioConfig result;
+            switch(mode){
+                case RX_MODE:
+                    result.is_input = true;
+                    result.is_output = false;
+                    break;
+                case TX_MODE:
+                    result.is_input = false;
+                    result.is_output = true;
+                    break;
+                case RXTX_MODE:
+                    result.is_input = true;
+                    result.is_output = true;
+                    break;
+            }
+
+            return result;
+        }
+        
         PortAudioConfig defaultConfig() {
             LOGD(LOG_METHOD);
             PortAudioConfig default_info;
