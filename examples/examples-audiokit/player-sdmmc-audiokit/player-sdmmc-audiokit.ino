@@ -8,7 +8,7 @@
 
 #include "AudioTools.h"
 #include "AudioLibs/AudioKit.h"
-#include "AudioLibs/AudioSourceSDMMC.h"
+#include "AudioLibs/AudioSourceSDMMC.h" // or AudioSourceIdxSDMMC.h
 #include "AudioCodecs/CodecMP3Helix.h"
 
 const char *startFilePath="/";
