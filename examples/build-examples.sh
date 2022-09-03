@@ -36,6 +36,6 @@ compile_example "esp32:esp32:esp32" "../examples/examples-audiokit/*"
 compile_example "esp32:esp32:esp32" "../examples/examples-maximilian/*"
 compile_example "esp32:esp32:esp32" "../examples/examples-tts/streams*"
 compile_example "esp32:esp32:esp32" "../examples/examples-faust/streams*"
-compile_example "esp32:esp32:esp32" "../examples/examples-communication/communication*"
+#compile_example "esp32:esp32:esp32" "../examples/examples-communication/*"
 #compile_example "esp32:esp32:esp32" "../examples/tests/test*"
 

@@ -18,7 +18,7 @@ SineWaveGenerator<int16_t> sineWave(32000);                // subclass of SoundG
 GeneratedSoundStream<int16_t> sound(sineWave);             // Stream generated from sine wave
 mydsp dsp;
 AudioKitStream out; 
-FaustStream faust(dsp, out);
+FaustStream<mydsp> faust(out);
 StreamCopy copier(faust, sound);  // copy mic to tfl
 
 // Arduino Setup

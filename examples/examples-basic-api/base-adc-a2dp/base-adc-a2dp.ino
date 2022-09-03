@@ -25,7 +25,6 @@ ConverterScaler<int16_t> scaler(1.0, -26427, 32700 );
 int32_t get_sound_data(Frame* frames, int32_t frameCount) {
     uint8_t *data = (uint8_t*)frames;
     int frameSize = 4;
-    size_t len = count * channels * sizeof(int16_t);
     size_t resultBytes = adc.readBytes(data, frameCount*frameSize);   
     scaler.convert(data, resultBytes);
     return resultBytes/frameSize;
