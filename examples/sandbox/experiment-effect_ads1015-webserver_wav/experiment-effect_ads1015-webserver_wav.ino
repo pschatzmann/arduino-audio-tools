@@ -11,8 +11,6 @@
 #include "AudioTools.h"
 #include "ADS1X15.h"
 
-using namespace audio_tools;
-
 // WIFI
 const char *ssid = "ssid";
 const char *password = "password";

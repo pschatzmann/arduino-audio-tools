@@ -7,7 +7,6 @@
 #include <SDPSensors.h> //https://github.com/UT2UH/SDP3x-Arduino/tree/SDP8x
 #include <AudioTools.h>
 
-using namespace audio_tools;
 typedef int16_t sound_t; // sound will be represented as int16_t
 
 const int sample_rate = 1024;
