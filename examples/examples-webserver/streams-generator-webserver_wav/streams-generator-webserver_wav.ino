@@ -10,8 +10,6 @@
 
 #include "AudioTools.h"
 
-using namespace audio_tools;
-
 // WIFI
 const char *ssid = "ssid";
 const char *password = "password";

@@ -10,8 +10,6 @@
 #include "AudioLibs/AudioKit.h"
 #include "flite_arduino.h"
 
-using namespace audio_tools;
-
 AudioKitStream kit; 
 Flite flite(kit);
 
