@@ -9,8 +9,6 @@
 #include "AudioTools.h"
 #include "TTS.h"
 
-
-
 AudioWAVServer server("ssid","password");
 
 // Callback which provides the audio data 
@@ -27,8 +25,6 @@ void setup(){
   TTSInfo info = TTS::getInfo();
   server.begin(outputData, info.sample_rate, info.channels, info.bits_per_sample);
 }
-
-
 
 // Arduino loop  
 void loop() {
