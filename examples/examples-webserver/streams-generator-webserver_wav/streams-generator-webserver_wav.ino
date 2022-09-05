@@ -39,5 +39,5 @@ void setup() {
 
 // copy the data
 void loop() {
-  server.doLoop();
+  server.copy();
 }

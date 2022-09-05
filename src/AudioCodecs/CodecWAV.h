@@ -478,9 +478,7 @@ class WAVEncoder : public AudioEncoder {
             }
             if (!header_written){
                 LOGI("Writing Header");
-                writeRiffHeader();
-                writeFMT();
-                writeDataHeader();
+                writeHeader(stream_ptr);
                 header_written = true;
             }
 
@@ -514,6 +512,12 @@ class WAVEncoder : public AudioEncoder {
             this->offset = offset;
         }
 
+        void writeHeader(Print *out) {
+            writeRiffHeader(out);
+            writeFMT(out);
+            writeDataHeader(out);
+        }
+
     protected:
         Print* stream_ptr;
         WAVAudioInfo audioInfo = defaultConfig();
@@ -522,13 +526,14 @@ class WAVEncoder : public AudioEncoder {
         volatile bool is_open;
         uint32_t offset=0; //adds n empty bytes at the beginning of the data
 
-        void writeRiffHeader(){
+
+        void writeRiffHeader(Print *stream_ptr){
             stream_ptr->write("RIFF",4);
             write32(*stream_ptr, audioInfo.file_size-8);
             stream_ptr->write("WAVE",4);
         }
 
-        void writeFMT(){
+        void writeFMT(Print *stream_ptr){
             uint16_t fmt_len = 16;
             uint32_t byteRate = audioInfo.sample_rate * audioInfo.bits_per_sample * audioInfo.channels / 8;
             uint32_t frame_size = audioInfo.channels * audioInfo.bits_per_sample / 8;
@@ -550,7 +555,7 @@ class WAVEncoder : public AudioEncoder {
             stream.write((uint8_t *) &value, 2);
         }
 
-        void writeDataHeader() {
+        void writeDataHeader(Print *stream_ptr) {
             stream_ptr->write("data",4);
             audioInfo.file_size -=44;
             write32(*stream_ptr, audioInfo.file_size);
@@ -559,7 +564,6 @@ class WAVEncoder : public AudioEncoder {
                 memset(empty,0, offset);
                 stream_ptr->write(empty,offset);  // resolve issue with wrong aligment
             }
-
         }
 
 };
