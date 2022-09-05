@@ -44,23 +44,23 @@ class AudioServerEx : public AudioPrint {
         info.password = pwd;
     }
 
-    AudioServerExConfig defaultConfig() {
+    virtual AudioServerExConfig defaultConfig() {
         AudioServerExConfig cfg;
         return cfg;
     }
 
-    bool begin(AudioServerExConfig cfg) {
+    virtual bool begin(AudioServerExConfig cfg) {
         info = cfg;
         return begin();
     }
 
-    bool begin(Stream &in, const char* contentType) {
+    virtual bool begin(Stream &in, const char* contentType) {
         info.input = &in;
         info.mime = contentType;
         return begin();
     }
 
-    bool begin() {
+    virtual bool begin() {
         end(); // we (re) start with  a clean state
         if (info.input==nullptr){
             p_stream = new ExtensionStream(info.path,tinyhttp::GET, info.mime );
@@ -73,7 +73,7 @@ class AudioServerEx : public AudioPrint {
         return p_server->begin(info.port, info.ssid, info.password);
     }
 
-    void end() {
+    virtual void end() {
         if (p_stream!=nullptr) {
             delete p_stream;
             p_stream = nullptr;
@@ -96,7 +96,7 @@ class AudioServerEx : public AudioPrint {
     }
 
     /// Needs to be called if the data was provided as input Stream in the AudioServerExConfig
-    void copy() {
+    virtual void copy() {
         if (p_server!=nullptr){
             p_server->copy();
         }
@@ -130,6 +130,12 @@ class AudioWAVServerEx : public AudioServerEx {
         /// To be compatible with legacy API
         AudioWAVServerEx(const char *ssid, const char* pwd):AudioServerEx(ssid, pwd){}
 
+        AudioServerExConfig defaultConfig() override {
+            AudioServerExConfig cfg;
+            cfg.mime = "audio/wav";
+            return cfg;
+        }
+
         /// Legacy API support
         bool begin(Stream &in, int sample_rate, int channels, int bits_per_sample=16) {
             info.input = &in;
@@ -140,10 +146,8 @@ class AudioWAVServerEx : public AudioServerEx {
             return AudioServerEx::begin();
         }
 
-        AudioServerExConfig defaultConfig() {
-            AudioServerExConfig cfg;
-            cfg.mime = "audio/wav";
-            return cfg;
+        bool begin(AudioServerExConfig cfg) override{
+            return AudioServerEx::begin(cfg);
         }
 
     protected:
