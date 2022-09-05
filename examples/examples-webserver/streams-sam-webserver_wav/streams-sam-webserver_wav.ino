@@ -28,5 +28,5 @@ void setup(){
 // Arduino loop  
 void loop() {
   // Handle new connections
-  server.doLoop();  
+  server.copy();  
 }
