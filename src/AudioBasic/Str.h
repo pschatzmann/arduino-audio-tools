@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <string.h>
 #include "AudioTools/AudioLogger.h"
-#include "AudioBasic/Str.h"
 
 namespace audio_tools {
 
