@@ -9,8 +9,6 @@
 #include "flite_arduino.h"
 #include "AudioTools.h"
 
-
-
 AudioWAVServer server("ssid","password");
 
 // Callback which provides the audio data 
@@ -34,5 +32,5 @@ void setup(){
 // Arduino loop  
 void loop() {
   // Handle new connections
-  server.doLoop();  
+  server.copy();  
 }

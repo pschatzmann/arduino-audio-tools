@@ -9,17 +9,15 @@
  */
 
 #include "AudioTools.h"
+#include "AudioLibs/AudioServerEx.h"
 
 // WIFI
 const char *ssid = "ssid";
 const char *password = "password";
-
-AudioWAVServer server(ssid, password);
-
+AudioWAVServerEx server;
 // Sound Generation
 const int sample_rate = 10000;
 const int channels = 1;
-
 SineWaveGenerator<int16_t> sineWave;            // Subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> in(sineWave);     // Stream generated from sine wave
 
@@ -29,7 +27,13 @@ void setup() {
   AudioLogger::instance().begin(Serial,AudioLogger::Info);
 
   // start server
-  server.begin(in, sample_rate, channels);
+  auto cfg = server.defaultConfig();
+  cfg.sample_rate = sample_rate;
+  cfg.channels = channels;
+  cfg.ssid = ssid;
+  cfg.password = password; 
+  cfg.input = &in;
+  server.begin(cfg);
 
   // start generation of sound
   sineWave.begin(channels, sample_rate, N_B4);
