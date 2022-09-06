@@ -10,8 +10,6 @@
 #include "AudioTools.h"
 #include "AudioLibs/AudioKit.h"
 
-using namespace audio_tools;
-
 AudioKitStream kit;
 Flite flite(kit);
 

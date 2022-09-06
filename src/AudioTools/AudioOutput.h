@@ -28,6 +28,10 @@ class AudioPrint : public Print, public AudioBaseInfoDependent, public AudioBase
             return 1;
         }
 
+        virtual int availableForWrtie() {
+            return 0;
+        }
+
         void flush() FLUSH_OVERRIDE {
             write((const uint8_t*)tmp, tmpPos-1);
             tmpPos=0;
@@ -657,6 +661,41 @@ class VolumePrint : public AudioPrint {
                 volumes[j] = volumes_tmp[j];
             }
         }
+};
+
+/**
+ * @brief Prints to a preallocated memory
+ */
+class MemoryPrint : public AudioPrint {
+    public:
+        MemoryPrint(uint8_t*start, int len){
+            p_start = start;
+            p_next = start;
+            size = len;
+        }
+
+        size_t write(const uint8_t *buffer, size_t len) override {
+            if (pos+len<=size){
+                memcpy(p_next, buffer,len);
+                pos+=len;
+                p_next+=len;
+                return len;
+            } else {
+                LOGE("Buffer too small");
+                return 0;
+            }
+        }
+
+        int availableForWrite() {
+            return size-pos;
+        }
+        
+    protected:
+        int pos;
+        uint8_t* p_start;
+        uint8_t *p_next;
+        size_t size;
+
 };
 
 

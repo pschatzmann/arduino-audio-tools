@@ -10,8 +10,6 @@
 
 #include "AudioTools.h"
 
-using namespace audio_tools;
-
 // WIFI
 const char *ssid = "ssid";
 const char *password = "password";
@@ -57,5 +55,5 @@ void setup() {
 
 // copy the data
 void loop() {
-  server.doLoop();
+  server.copy();
 }

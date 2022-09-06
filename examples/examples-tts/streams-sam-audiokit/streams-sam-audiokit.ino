@@ -10,8 +10,6 @@
 #include "AudioLibs/AudioKit.h"
 #include "sam_arduino.h"
 
-using namespace audio_tools;
-
 AudioKitStream kit;
 SAM sam(kit);
 

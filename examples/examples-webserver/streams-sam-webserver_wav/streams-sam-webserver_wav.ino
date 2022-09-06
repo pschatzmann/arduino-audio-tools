@@ -8,8 +8,6 @@
 #include "AudioTools.h"
 #include "sam_arduino.h"
 
-
-
 AudioWAVServer server("ssid","password");
 int channels = 1;
 int bits_per_sample = 16;
@@ -27,9 +25,8 @@ void setup(){
   server.begin(outputData, SAM::sampleRate(), channels, bits_per_sample);
 }
 
-
 // Arduino loop  
 void loop() {
   // Handle new connections
-  server.doLoop();  
+  server.copy();  
 }
