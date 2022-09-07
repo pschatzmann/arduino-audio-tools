@@ -181,25 +181,28 @@ class StreamCopyT {
         }
 
         /// copies all data - returns true if we copied anything
-        bool copyAll(int retryCount=2, int retryWaitMs=2000){
+        size_t copyAll(int retryCount=2, int retryWaitMs=2000){
             LOGD(LOG_METHOD);
-            bool result = false;
+            size_t result = 0;
+            int retry = 0;
+
             if (from==nullptr || to == nullptr) 
                 return result;
 
-            int retry = 0;
-            // copy whily source has data available
+            // copy while source has data available
+            int count=0;
             while (true){
-                int count = copy();
+                count = copy();
+                result += count;
                 if (count==0){
                     // wait for more data
                     retry++;
                     delay(retryWaitMs);
                 } else {
                     result = true; // we have some data
-                    retry = 0;
+                    retry = 0; // after we got new data we restart the counting
                 }
-                // stop the processing
+                // stop the processing if we passed the retry limit
                 if (retry>retryCount){
                     break;
                 }
