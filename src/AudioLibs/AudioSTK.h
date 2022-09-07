@@ -1,13 +1,10 @@
 #pragma once
 
 #include "AudioConfig.h"
-#ifdef USE_STK
 
 #include "Arduino.h"
 #include "freertos/FreeRTOS.h"
-#include "Stk.h"
-#include "Voicer.h"
-#include "Instrmnt.h"
+#include "StkAll.h"
 
 namespace audio_tools {
 
@@ -28,6 +25,8 @@ namespace audio_tools {
 template <class T>
 class STKGenerator : public SoundGenerator<T> {
     public:
+        STKGenerator() = default;
+
         // Creates an STKGenerator for an instrument
         STKGenerator(stk::Instrmnt &instrument) : SoundGenerator<T>() {
             this->p_instrument = &instrument;
@@ -35,6 +34,14 @@ class STKGenerator : public SoundGenerator<T> {
 
         // Creates an STKGenerator for a voicer (combination of multiple instruments)
         STKGenerator(stk::Voicer  &voicer) : SoundGenerator<T>() {
+            this->p_voicer = &voicer;
+        }
+
+        void setInput(stk::Instrmnt &instrument){
+            this->p_instrument = &instrument;
+        }
+
+        void setInput(stk::Voicer &voicer){            
             this->p_voicer = &voicer;
         }
 
@@ -48,12 +55,13 @@ class STKGenerator : public SoundGenerator<T> {
         }
 
         /// Starts the processing
-        void begin(AudioBaseInfo cfg){
+        bool begin(AudioBaseInfo cfg){
              LOGI(LOG_METHOD);
             cfg.logInfo();
             SoundGenerator<T>::begin(cfg);
             max_value = NumberConverter::maxValue(sizeof(T)*8);
             stk::Stk::setSampleRate(SoundGenerator<T>::info.sample_rate);
+            return true;
         }
 
         /// Provides a single sample
@@ -74,7 +82,27 @@ class STKGenerator : public SoundGenerator<T> {
 
 };
 
+/**
+ * @brief STK Stream for Instrument or Voicer
+ * 
+ * @tparam T 
+ */
+template <class T>
+class STKStream : public GeneratedSoundStream<T> {
+    public:
+        STKStream(Instrmnt &instrument){
+            generator.setInput(instrument);
+            GeneratedSoundStream<T>::setInput(generator);
+        }
+        STKStream(Voicer &voicer){
+            generator.setInput(voicer);
+            GeneratedSoundStream<T>::setInput(generator);
+        }
+    protected:
+        STKGenerator<T> generator;
+
+};
+
 
 }
 
-#endif

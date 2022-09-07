@@ -20,7 +20,7 @@ class FaustStream : public AudioStreamX {
     }
 
     /// Constructor for Faust as Singal Processor - changing an input signal and sending it to out
-    FaustStream(AudioStream &out, bool useSeparateOutputBuffer=true){
+    FaustStream(Print &out, bool useSeparateOutputBuffer=true){
         p_out = &out;
         with_output_buffer = useSeparateOutputBuffer;
     }
@@ -218,7 +218,7 @@ class FaustStream : public AudioStreamX {
     int buffer_allocated;
     DSP *p_dsp = nullptr;
     AudioBaseInfo cfg;
-    AudioStream *p_out=nullptr;
+    Print *p_out=nullptr;
     FAUSTFLOAT** p_buffer=nullptr;
     FAUSTFLOAT** p_buffer_out=nullptr;
     UI ui;
