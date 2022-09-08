@@ -348,7 +348,7 @@ class ESPNowStream : public AudioStreamX {
   }
 
   static void default_recv_cb(const uint8_t *mac_addr, const uint8_t *data,
-                              int data_len) {                                
+                              int data_len) {
     LOGD("rec_cb: %d", data_len);
     // make sure that the receive buffer is available - moved from begin to make sure that it is only allocated when needed
     ESPNowStreamSelf->setupReceiveBuffer();
@@ -474,8 +474,8 @@ class UDPStream : public WiFiUDP {
           delay(500);
       }
     }
-  
-    // Performance Hack              
+
+    // Performance Hack
     //client.setNoDelay(true);
     esp_wifi_set_ps(WIFI_PS_NONE);
 
