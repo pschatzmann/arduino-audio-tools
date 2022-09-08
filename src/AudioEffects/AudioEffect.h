@@ -282,7 +282,7 @@ class Tremolo : public AudioEffect  {
 class Delay : public AudioEffect  {
     public:
         /// e.g. depthPercent=50, ms=1000, sampleRate=44100
-        Delay(uint16_t duration_ms=1000, uint8_t depthPercent=50,  uint32_t sampleRate=44100) {
+        Delay(uint16_t duration_ms=1000, float depthPercent=0.5,  uint32_t sampleRate=44100) {
             this->sampleRate = sampleRate;
             p_percent = depthPercent;
             p_ms = duration_ms;
@@ -298,11 +298,11 @@ class Delay : public AudioEffect  {
             return p_ms;
         }
 
-        void setDepth(uint8_t percent){
+        void setDepth(float percent){
             p_percent = percent;
         }
 
-        uint8_t depth() {
+        float depth() {
             return p_percent;
         }
 
@@ -315,7 +315,7 @@ class Delay : public AudioEffect  {
             // add actual input value
             p_history->write(input);
             // mix input with result
-            return (value * p_percent / 100) + (input * (100-p_percent)/100);
+            return (value * p_percent) + (input * (1.0-p_percent));
         }
 
         Delay *clone() {
@@ -324,7 +324,7 @@ class Delay : public AudioEffect  {
 
     protected:
         RingBuffer<effect_t>* p_history=nullptr;
-        uint8_t  p_percent;
+        float p_percent;
         uint16_t p_ms;
         uint16_t sampleCount=0;
         uint32_t sampleRate;
