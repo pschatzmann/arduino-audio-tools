@@ -283,50 +283,63 @@ class Delay : public AudioEffect  {
     public:
         /// e.g. depthPercent=50, ms=1000, sampleRate=44100
         Delay(uint16_t duration_ms=1000, float depthPercent=0.3, float feedbackAmount=0.3, uint32_t sampleRate=44100) {
-            this->sampleRate = sampleRate;
-            p_feedback = feedbackAmount;
-            p_percent = depthPercent;
-            p_ms = duration_ms;
+          delayLine = new DelayLine(duration_ms,depthPercent,feedbackAmount,sampleRate);
         }
 
-        Delay(const Delay &copy) = default;
+        Delay(const Delay &ref) {
+            delayLine = new DelayLine(*(ref.delayLine));
+            copyParent((AudioEffect *)&ref);
+        };
 
-        void setDuration(int16_t ms){
-            p_ms = ms;
+        virtual ~Delay(){
+            delete delayLine;
         }
 
-        int16_t duration(){
-            return p_ms;
+        void setDuration(int16_t m){
+          delayLine->setDuration(m);
         }
 
-        void setDepth(float percent){
-            p_percent = percent;
+        int16_t getDuration(){
+            return delayLine->getDuration();
         }
 
-        uint8_t depth() {
-            return p_percent;
+        void setDepth(float p){
+            delayLine->setDepth(p);
         }
 
-        void setFeedback(float feedback){
-            p_feedback = feedback;
+        float getDepth() {
+            return delayLine->getDepth();
         }
 
-        float feedback() {
-            return p_feedback;
+        void setFeedback(float f){
+            delayLine->setFeedback(f);
+        }
+
+        float getFeedback() {
+            return delayLine->getFeedback();
+        }
+
+        void setSampleRate(int32_t s){
+            delayLine->setSampleRate(s);
+        }
+
+        float getSampleRate() {
+            return delayLine->getSampleRate();
         }
 
         effect_t process(effect_t input) {
             if (!active()) return input;
 
+            delayLine->tick();
             updateBufferSize();
             // get value from buffer
             int32_t value = (p_history->available()<sampleCount) ? input : p_history->read();
             // add feedback decay
-            int32_t delayValue = (value*p_feedback);
+            int32_t delayValue = (value*delayLine->getFeedback());
             // add input and delay to the buffer
             p_history->write(input+delayValue);
             // mix input with result
-            return (delayValue * p_percent) + (input * (1.0 - p_percent));
+            return (delayValue * delayLine->getDepth()) + (input * (1.0 - delayLine->getDepth()));
         }
 
         Delay *clone() {
@@ -335,14 +348,11 @@ class Delay : public AudioEffect  {
 
     protected:
         RingBuffer<effect_t>* p_history=nullptr;
-        float p_percent;
-        float p_feedback;
-        uint16_t p_ms;
+        DelayLine *delayLine;
         uint16_t sampleCount=0;
-        uint32_t sampleRate;
 
         void updateBufferSize(){
-            uint16_t newSampleCount = sampleRate * p_ms / 1000;
+            uint16_t newSampleCount = delayLine->getSampleRate() * delayLine->getDuration() / 1000;
             if (newSampleCount!=sampleCount){
                 if (p_history!=nullptr) delete p_history;
                 sampleCount = newSampleCount;
