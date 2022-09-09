@@ -35,6 +35,10 @@ void play() {
     if (active){
       // play note for 800 ms
       freq = notes_array[random(sizeof(notes_array)/sizeof(uint16_t))];
+
+      Serial.print("playing ");
+      Serial.println(freq);
+
       p_instrument->noteOn(freq, note_amplitude);
       timeout = millis()+800;
       active = false;
