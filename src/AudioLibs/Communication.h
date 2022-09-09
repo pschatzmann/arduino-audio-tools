@@ -348,7 +348,7 @@ class ESPNowStream : public AudioStreamX {
   }
 
   static void default_recv_cb(const uint8_t *mac_addr, const uint8_t *data,
-                              int data_len) {                                
+                              int data_len) {
     LOGD("rec_cb: %d", data_len);
     // make sure that the receive buffer is available - moved from begin to make sure that it is only allocated when needed
     ESPNowStreamSelf->setupReceiveBuffer();
@@ -459,6 +459,17 @@ class UDPStream : public WiFiUDP {
     endPacket();
     return result;
   }
+  // Reads bytes using WiFi::readBytes
+  size_t readBytes(uint8_t *buffer, size_t length) override {
+    LOGD(LOG_METHOD);
+    size_t len = available();
+    size_t bytes_read = 0;
+    if (len>0){
+      // get the data now
+      bytes_read = WiFiUDP::readBytes((uint8_t*)buffer, length);
+    }
+  return bytes_read;
+}
 
  protected:
   uint16_t remote_port_ext;
@@ -474,8 +485,8 @@ class UDPStream : public WiFiUDP {
           delay(500);
       }
     }
-  
-    // Performance Hack              
+
+    // Performance Hack
     //client.setNoDelay(true);
     esp_wifi_set_ps(WIFI_PS_NONE);
 
