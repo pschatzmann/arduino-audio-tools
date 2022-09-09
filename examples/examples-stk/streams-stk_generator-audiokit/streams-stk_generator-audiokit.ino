@@ -11,7 +11,7 @@
 #include "AudioLibs/AudioSTK.h"
 
 Clarinet clarinet(440); // the stk clarinet instrument
-STKGenerator<int16_t> generator(clarinet);    // subclass of SoundGenerator
+STKGenerator<Instrmnt, int16_t> generator(clarinet);    // subclass of SoundGenerator
 GeneratedSoundStream<int16_t> in(generator);  // Stream generated from sine wave
 AudioKitStream out;
 StreamCopy copier(out, in); // copy stkStream to a2dpStream
