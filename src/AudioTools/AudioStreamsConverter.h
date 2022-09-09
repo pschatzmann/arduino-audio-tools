@@ -84,7 +84,7 @@ class ChannelFormatConverterStreamT : public AudioStreamX {
         buffer.resize(result_samples);
         result = converter.convert((uint8_t*)buffer.data(),(uint8_t*) in_data, size);
         if (result!=result_samples*sizeof(T)){
-          LOGE("size %d -> result: %d - expeced: %d", (int) size, (int) result, (int) result_samples*sizeof(T));
+          LOGE("size %d -> result: %d - expeced: %d", (int) size, (int) result, static_cast<int>(result_samples*sizeof(T)));
         }
         return result;
     }
@@ -280,7 +280,7 @@ class NumberFormatConverterStreamT : public AudioStreamX {
           p_print = &print;
         }
 
-        bool begin(){
+        bool begin() override {
           return true;
         }
 
