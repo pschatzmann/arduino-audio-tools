@@ -6,25 +6,21 @@
  * @copyright GPLv3
  */
 
-// Add this in your sketch or change the setting in AudioConfig.h
-#define USE_STK
-
 #include "AudioTools.h"
-#include "Clarinet.h"
+#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioSTK.h"
 
-
-
-stk::Clarinet clarinet(440); // the stk clarinet instrument
+Clarinet clarinet(440); // the stk clarinet instrument
 STKGenerator<int16_t> generator(clarinet);    // subclass of SoundGenerator
 GeneratedSoundStream<int16_t> in(generator);  // Stream generated from sine wave
-AnalogAudioStream out; // Output stream
+AudioKitStream out;
 StreamCopy copier(out, in); // copy stkStream to a2dpStream
 MusicalNotes notes; // notes with frequencies
 
 // Arduino Setup
 void setup(void) {
     Serial.begin(115200);
-    AudioLogger::instance().begin(Serial, AudioLogger::Info);
+    AudioLogger::instance().begin(Serial, AudioLogger::Warning);
     
     // start Output
     Serial.println("starting Analog Output...");
