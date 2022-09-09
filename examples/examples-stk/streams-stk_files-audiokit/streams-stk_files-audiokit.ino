@@ -8,20 +8,15 @@
  * @copyright Copyright (c) 2021
  */
 
-#ifdef IS_DESKTOP
-# define AudioKitStream PortAudioStream
-#else
-# include "SD_MMC.h"
-#endif
+#include "SD_MMC.h"
 #include "AudioTools.h"
 #include "AudioLibs/AudioSTK.h"
 #include "AudioLibs/AudioKit.h"
 
 
-
 STKStream<Instrmnt> in;
 AudioKitStream out;
-StreamCopy copier;
+StreamCopy copier(out, in);
 MusicalNotes notes;
 Instrmnt* p_instrument=nullptr; // instrument depends on file system
 

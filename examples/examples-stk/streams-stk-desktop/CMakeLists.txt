@@ -30,8 +30,8 @@ target_compile_definitions(stk_example PUBLIC -DARDUINO -DIS_DESKTOP -DEXIT_ON_S
 target_compile_definitions(arduino-stk PUBLIC -DIS_DESKTOP)
 
 # OS/X might need this setting for core audio
-#target_compile_definitions(arduino-stk PUBLIC -DPA_USE_COREAUDIO=1)
+target_compile_options(portaudio PRIVATE -Wno-deprecated)
 
 # specify libraries
-target_link_libraries(stk_example arduino-stk portaudio_static arduino_emulator arduino-audio-tools )
+target_link_libraries(stk_example arduino-stk portaudio arduino_emulator arduino-audio-tools )
 

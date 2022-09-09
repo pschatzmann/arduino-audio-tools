@@ -10,11 +10,11 @@
 #include "AudioLibs/AudioSTK.h"
 #include "AudioLibs/PortAudioStream.h"
 
-STKStream<Instrmnt> in;
+Flute insturment(50);
+STKStream<Instrmnt> in(insturment);
 PortAudioStream out;
-StreamCopy copier;
+StreamCopy copier(out, in);
 MusicalNotes notes;
-Instrmnt* p_instrument=nullptr; // instrument depends on file system
 
 float note_amplitude = 0.5;
 static uint16_t notes_array[] = { // frequencies aleatoric C-scale
@@ -36,12 +36,12 @@ void play() {
       Serial.print("playing ");
       Serial.println(freq);
 
-      p_instrument->noteOn(freq, note_amplitude);
+      insturment.noteOn(freq, note_amplitude);
       timeout = millis()+800;
       active = false;
     } else {
       // silence for 100 ms
-      p_instrument->noteOff(note_amplitude);
+      insturment.noteOff(note_amplitude);
       timeout = millis()+100;
       active = true;
     }
@@ -51,10 +51,6 @@ void play() {
 void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial,AudioLogger::Warning);
-
-  // We can allocate the incstument only after SD_M
-  p_instrument = new BeeThree();
-  in.setInput(p_instrument);;
 
   // setup input
   auto icfg = in.defaultConfig();

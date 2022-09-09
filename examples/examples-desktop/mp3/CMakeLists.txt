@@ -30,7 +30,7 @@ target_compile_definitions(arduino_helix PUBLIC -DARDUINO)
 target_compile_definitions(mp3_dt PUBLIC -DARDUINO -DIS_DESKTOP -DEXIT_ON_STOP)
 
 # OS/X might need this setting for core audio
-#target_compile_definitions(portaudio PUBLIC -DPA_USE_COREAUDIO=1)
+target_compile_options(portaudio PRIVATE -Wno-deprecated)
 
 # specify libraries
 target_link_libraries(mp3_dt portaudio arduino_emulator arduino-audio-tools arduino_helix)
