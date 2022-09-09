@@ -532,6 +532,10 @@ class GeneratedSoundStream : public AudioStreamX {
   /// start the processing
   bool begin() override {
     LOGD(LOG_METHOD);
+    if (generator_ptr==nullptr){
+      LOGE(source_not_defined_error);
+      return false;
+    }
     generator_ptr->begin();
     if (audioBaseInfoDependent != nullptr)
       audioBaseInfoDependent->setAudioInfo(generator_ptr->audioInfo());
@@ -543,7 +547,7 @@ class GeneratedSoundStream : public AudioStreamX {
   bool begin(AudioBaseInfo cfg) {
     LOGD(LOG_METHOD);
     if (generator_ptr==nullptr){
-      LOGE("Source not defined");
+      LOGE(source_not_defined_error);
       return false;
     }
     generator_ptr->begin(cfg);
@@ -558,6 +562,7 @@ class GeneratedSoundStream : public AudioStreamX {
     LOGD(LOG_METHOD);
     generator_ptr->end();
     active = false;
+    const char* source_not_defined_error = "Source not defined";
   }
 
   virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi) override {
