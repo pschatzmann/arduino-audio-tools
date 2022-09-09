@@ -1,5 +1,5 @@
 #pragma once
-#include <stdint.h> 
+#include <stdint.h>
 #include "AudioTools/AudioLogger.h"
 #include "AudioEffects/AudioParameters.h"
 
@@ -18,7 +18,7 @@ class AudioEffect  {
     public:
         AudioEffect() = default;
         virtual ~AudioEffect() = default;
-        
+
         /// calculates the effect output from the input
         virtual effect_t process(effect_t in) = 0;
 
@@ -68,12 +68,12 @@ class AudioEffect  {
  * @brief Boost AudioEffect
  * @author Phil Schatzmann
  * @copyright GPLv3
- * 
+ *
  */
 
 class Boost : public AudioEffect {
     public:
-        /// Boost Constructor: volume 0.1 - 1.0: decrease result; volume >0: increase result 
+        /// Boost Constructor: volume 0.1 - 1.0: decrease result; volume >0: increase result
         Boost(float volume=1.0){
             effect_value = volume;
         }
@@ -91,7 +91,7 @@ class Boost : public AudioEffect {
         effect_t process(effect_t input){
             if (!active()) return input;
             int32_t result = effect_value * input;
-            // clip to int16_t            
+            // clip to int16_t
             return clip(result);
         }
 
@@ -105,7 +105,7 @@ class Boost : public AudioEffect {
 
 /**
  * @brief Distortion AudioEffect
- * 
+ *
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -115,7 +115,7 @@ class Distortion : public AudioEffect  {
         /// Distortion Constructor: e.g. use clipThreashold 4990 and maxInput=6500
         Distortion(int16_t clipThreashold=4990, int16_t maxInput=6500){
             p_clip_threashold = clipThreashold;
-            max_input = maxInput;   
+            max_input = maxInput;
         }
 
         Distortion(const Distortion &copy) = default;
@@ -134,12 +134,12 @@ class Distortion : public AudioEffect  {
 
         int16_t maxInput(){
             return max_input;
-        } 
+        }
 
         effect_t process(effect_t input){
             if (!active()) return input;
             //the input signal is 16bits (values from -32768 to +32768
-            //the value of input is clipped to the distortion_threshold value      
+            //the value of input is clipped to the distortion_threshold value
             return clip(input,p_clip_threashold, max_input);
         }
 
@@ -155,7 +155,7 @@ class Distortion : public AudioEffect  {
 
 /**
  * @brief Fuzz AudioEffect
- * 
+ *
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -247,7 +247,7 @@ class Tremolo : public AudioEffect  {
             float signal_depth = (100.0 - p_percent) / 100.0;
 
             float tremolo_factor = tremolo_depth / rate_count_half;
-            int32_t out = (signal_depth * input) + (tremolo_factor * count * input); 
+            int32_t out = (signal_depth * input) + (tremolo_factor * count * input);
 
             //saw tooth shaped counter
             count+=inc;
@@ -282,8 +282,9 @@ class Tremolo : public AudioEffect  {
 class Delay : public AudioEffect  {
     public:
         /// e.g. depthPercent=50, ms=1000, sampleRate=44100
-        Delay(uint16_t duration_ms=1000, uint8_t depthPercent=50,  uint32_t sampleRate=44100) {
+        Delay(uint16_t duration_ms=1000, float depthPercent=50, float feedbackAmount=0.3, uint32_t sampleRate=44100) {
             this->sampleRate = sampleRate;
+            p_feedback = feedbackAmount;
             p_percent = depthPercent;
             p_ms = duration_ms;
         }
@@ -298,12 +299,20 @@ class Delay : public AudioEffect  {
             return p_ms;
         }
 
-        void setDepth(uint8_t percent){
+        void setDepth(float percent){
             p_percent = percent;
         }
 
         uint8_t depth() {
             return p_percent;
+        }
+
+        void setFeedback(float feedback){
+            p_feedback = feedback;
+        }
+
+        uint8_t feedback() {
+            return p_feedback;
         }
 
         effect_t process(effect_t input) {
@@ -312,10 +321,12 @@ class Delay : public AudioEffect  {
             updateBufferSize();
             // get value from buffer
             int32_t value = (p_history->available()<sampleCount) ? input : p_history->read();
-            // add actual input value
-            p_history->write(input);
+            // add feedback decay
+            int32_t delayValue = (value*p_feedback);
+            // add input and delay to the buffer
+            p_history->write(input+delayValue);
             // mix input with result
-            return (value * p_percent / 100) + (input * (100-p_percent)/100); 
+            return (delayValue * p_percent) + (input * (1.0 - p_percent));
         }
 
         Delay *clone() {
@@ -324,7 +335,8 @@ class Delay : public AudioEffect  {
 
     protected:
         RingBuffer<effect_t>* p_history=nullptr;
-        uint8_t  p_percent;
+        float p_percent;
+        float p_feedback;
         uint16_t p_ms;
         uint16_t sampleCount=0;
         uint32_t sampleRate;
@@ -391,7 +403,7 @@ class ADSRGain : public AudioEffect {
         float sustainLevel(){
             return adsr->sustainLevel();
         }
-        
+
         void setReleaseRate(float r){
             adsr->setReleaseRate(r);
         }
