@@ -282,7 +282,7 @@ class Tremolo : public AudioEffect  {
 class Delay : public AudioEffect  {
     public:
         /// e.g. depthPercent=50, ms=1000, sampleRate=44100
-        Delay(uint16_t duration_ms=1000, float depthPercent=50, float feedbackAmount=0.3, uint32_t sampleRate=44100) {
+        Delay(uint16_t duration_ms=1000, float depthPercent=0.3, float feedbackAmount=0.3, uint32_t sampleRate=44100) {
             this->sampleRate = sampleRate;
             p_feedback = feedbackAmount;
             p_percent = depthPercent;
@@ -311,7 +311,7 @@ class Delay : public AudioEffect  {
             p_feedback = feedback;
         }
 
-        uint8_t feedback() {
+        float feedback() {
             return p_feedback;
         }
 
