@@ -542,6 +542,10 @@ class GeneratedSoundStream : public AudioStreamX {
   /// start the processing
   bool begin(AudioBaseInfo cfg) {
     LOGD(LOG_METHOD);
+    if (generator_ptr==nullptr){
+      LOGE("Source not defined");
+      return false;
+    }
     generator_ptr->begin(cfg);
     if (audioBaseInfoDependent != nullptr)
       audioBaseInfoDependent->setAudioInfo(generator_ptr->audioInfo());
