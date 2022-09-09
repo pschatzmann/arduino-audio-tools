@@ -84,22 +84,25 @@ class STKGenerator : public SoundGenerator<T> {
 
 /**
  * @brief STK Stream for Instrument or Voicer
- * 
- * @tparam T 
  */
-template <class T>
-class STKStream : public GeneratedSoundStream<T> {
+class STKStream : public GeneratedSoundStream<int16_t> {
     public:
         STKStream(Instrmnt &instrument){
             generator.setInput(instrument);
-            GeneratedSoundStream<T>::setInput(generator);
+            GeneratedSoundStream<int16_t>::setInput(generator);
         }
         STKStream(Voicer &voicer){
             generator.setInput(voicer);
-            GeneratedSoundStream<T>::setInput(generator);
+            GeneratedSoundStream<int16_t>::setInput(generator);
+        }
+        void setInput(Instrmnt &instrument){
+            generator.setInput(instrument);
+        }
+        void setInput(Voicer &voicer){
+            generator.setInput(voicer);
         }
     protected:
-        STKGenerator<T> generator;
+        STKGenerator<int16_t> generator;
 
 };
 
