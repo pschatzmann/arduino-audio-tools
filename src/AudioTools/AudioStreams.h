@@ -533,7 +533,7 @@ class GeneratedSoundStream : public AudioStreamX {
   bool begin() override {
     LOGD(LOG_METHOD);
     if (generator_ptr==nullptr){
-      LOGE(source_not_defined_error);
+      LOGE("%s",source_not_defined_error);
       return false;
     }
     generator_ptr->begin();
@@ -547,7 +547,7 @@ class GeneratedSoundStream : public AudioStreamX {
   bool begin(AudioBaseInfo cfg) {
     LOGD(LOG_METHOD);
     if (generator_ptr==nullptr){
-      LOGE(source_not_defined_error);
+      LOGE("%s",source_not_defined_error);
       return false;
     }
     generator_ptr->begin(cfg);
@@ -1322,7 +1322,7 @@ class MeasuringStream : public AudioStreamX {
         if (p_logout!=nullptr){
           p_logout->println(msg);
         } else {
-          LOGI(msg);
+          LOGI("%s",msg);
         }
     }
 

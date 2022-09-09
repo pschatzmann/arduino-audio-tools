@@ -94,7 +94,7 @@ public:
         return indexStreamCallback == nullptr ? nullptr : indexStreamCallback(index);
     }
     /// Returns audio stream by path
-    virtual Stream* selectStream(const char* path) {
+    virtual Stream* selectStream(const char* path) override {
         this->path = path;
         return indexStreamCallback == nullptr ? nullptr : indexStreamCallback(-1);
     };

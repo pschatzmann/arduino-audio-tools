@@ -63,6 +63,9 @@ class PortAudioStream : public AudioStreamX {
                     result.is_input = true;
                     result.is_output = true;
                     break;
+                default:
+                    LOGE("Unsupported Mode")
+                    break;
             }
 
             return result;

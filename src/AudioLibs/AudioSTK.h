@@ -1,9 +1,10 @@
 #pragma once
 
 #include "AudioConfig.h"
-
 #include "Arduino.h"
-#include "freertos/FreeRTOS.h"
+#ifdef ESP32
+#  include "freertos/FreeRTOS.h"
+#endif
 #include "StkAll.h"
 
 namespace audio_tools {

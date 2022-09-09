@@ -38,7 +38,7 @@ class AudioPrint : public Print, public AudioBaseInfoDependent, public AudioBase
         }
 
         // overwrite to do something useful
-        virtual void setAudioInfo(AudioBaseInfo info) {
+        virtual void setAudioInfo(AudioBaseInfo info) override {
             LOGD(LOG_METHOD);
             cfg = info;
             info.logInfo();
@@ -47,7 +47,7 @@ class AudioPrint : public Print, public AudioBaseInfoDependent, public AudioBase
             }
         }
 
-        virtual void  setNotifyAudioChange(AudioBaseInfoDependent &bi) {
+        virtual void  setNotifyAudioChange(AudioBaseInfoDependent &bi) override {
             p_notify = &bi;
         }
 
@@ -686,7 +686,7 @@ class MemoryPrint : public AudioPrint {
             }
         }
 
-        int availableForWrite() {
+        int availableForWrite() override {
             return size-pos;
         }
         
