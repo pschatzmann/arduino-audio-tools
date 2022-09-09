@@ -181,7 +181,7 @@ class StreamCopyT {
         }
 
         /// copies all data - returns true if we copied anything
-        size_t copyAll(int retryCount=2, int retryWaitMs=2000){
+        size_t copyAll(int retryCount=5, int retryWaitMs=200){
             LOGD(LOG_METHOD);
             size_t result = 0;
             int retry = 0;
