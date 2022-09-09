@@ -1,6 +1,11 @@
 /**
  * @file streams-stk-desktop.ino
  * @brief Build and run on desktop using PortAudio
+ * build with 
+ * - mkdir build
+ * - cd build
+ * - cmake -DCMAKE_BUILD_TYPE=Debug ..
+ * - make
  * @author Phil Schatzmann
  * @copyright Copyright (c) 2021
  */
