@@ -72,71 +72,83 @@ $(function() {
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;AudioConfig.h&quot;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#ifdef USE_STK</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;Arduino.h&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;freertos/FreeRTOS.h&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;Stk.h&quot;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;Voicer.h&quot;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;Instrmnt.h&quot;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaudio__tools.html">audio_tools</a> {</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_s_t_k_generator.html">   29</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_s_t_k_generator.html">STKGenerator</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt;T&gt; {</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="comment">// Creates an STKGenerator for an instrument</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <a class="code" href="classaudio__tools_1_1_s_t_k_generator.html">STKGenerator</a>(stk::Instrmnt &amp;instrument) : <a class="code" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator&lt;T&gt;</a>() {</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            this-&gt;p_instrument = &amp;instrument;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        }</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="comment">// Creates an STKGenerator for a voicer (combination of multiple instruments)</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <a class="code" href="classaudio__tools_1_1_s_t_k_generator.html">STKGenerator</a>(stk::Voicer  &amp;voicer) : <a class="code" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator&lt;T&gt;</a>() {</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            this-&gt;p_voicer = &amp;voicer;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        }</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_s_t_k_generator.html#a4d5a35aa60f20b73dc6d92a2f82dedc8">   42</a></span>&#160;        <a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> <a class="code" href="classaudio__tools_1_1_s_t_k_generator.html#a4d5a35aa60f20b73dc6d92a2f82dedc8">defaultConfig</a>() {</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            <a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> info;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            info.channels = 1;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            info.bits_per_sample = <span class="keyword">sizeof</span>(T) * 8;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            info.sample_rate = stk::Stk::sampleRate();</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            <span class="keywordflow">return</span> info;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        }</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_s_t_k_generator.html#a4f3249fa6be6fe0b9f229cfe93b5bbf0">   51</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_s_t_k_generator.html#a4f3249fa6be6fe0b9f229cfe93b5bbf0">begin</a>(<a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> cfg){</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;             LOGI(LOG_METHOD);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            cfg.logInfo();</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <a class="code" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator&lt;T&gt;::begin</a>(cfg);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            max_value = <a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(<span class="keyword">sizeof</span>(T)*8);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            stk::Stk::setSampleRate(<a class="code" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator&lt;T&gt;::info</a>.sample_rate);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        }</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_s_t_k_generator.html#a4291d872889c609c16ded679d409f0f7">   60</a></span>&#160;        T <a class="code" href="classaudio__tools_1_1_s_t_k_generator.html#a4291d872889c609c16ded679d409f0f7">readSample</a>() {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            T result = 0;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            <span class="keywordflow">if</span> (p_instrument!=<span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                result = p_instrument-&gt;tick()*max_value;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (p_voicer!=<span class="keyword">nullptr</span>){</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                result = p_voicer-&gt;tick()*max_value;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            }</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        }</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        stk::Instrmnt *p_instrument=<span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        stk::Voicer *p_voicer=<span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        T max_value;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;};</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;}</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;Arduino.h&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;freertos/FreeRTOS.h&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;StkAll.h&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaudio__tools.html">audio_tools</a> {</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> StkCls, <span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_s_t_k_generator.html">   26</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_s_t_k_generator.html">STKGenerator</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator</a>&lt;T&gt; {</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <a class="code" href="classaudio__tools_1_1_s_t_k_generator.html">STKGenerator</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="comment">// Creates an STKGenerator for an instrument</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <a class="code" href="classaudio__tools_1_1_s_t_k_generator.html">STKGenerator</a>(StkCls &amp;instrument) : <a class="code" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator&lt;T&gt;</a>() {</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            this-&gt;p_instrument = &amp;instrument;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        }</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keywordtype">void</span> setInput(StkCls &amp;instrument){</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            this-&gt;p_instrument = &amp;instrument;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        }</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_s_t_k_generator.html#a596135d81052f2bfd5a5181d65aec909">   40</a></span>&#160;        <a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> <a class="code" href="classaudio__tools_1_1_s_t_k_generator.html#a596135d81052f2bfd5a5181d65aec909">defaultConfig</a>() {</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            <a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> info;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            info.channels = 1;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            info.bits_per_sample = <span class="keyword">sizeof</span>(T) * 8;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            info.sample_rate = stk::Stk::sampleRate();</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            <span class="keywordflow">return</span> info;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        }</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_s_t_k_generator.html#ae3a621230962a9879a677ef47765441d">   49</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="classaudio__tools_1_1_s_t_k_generator.html#ae3a621230962a9879a677ef47765441d">begin</a>(<a class="code" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> cfg){</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;             LOGI(LOG_METHOD);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            cfg.logInfo();</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <a class="code" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator&lt;T&gt;::begin</a>(cfg);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            max_value = <a class="code" href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">NumberConverter::maxValue</a>(<span class="keyword">sizeof</span>(T)*8);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            stk::Stk::setSampleRate(<a class="code" href="classaudio__tools_1_1_sound_generator.html">SoundGenerator&lt;T&gt;::info</a>.sample_rate);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        }</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_s_t_k_generator.html#a3c17728f2832073e3d54300f41e3ac02">   59</a></span>&#160;        T <a class="code" href="classaudio__tools_1_1_s_t_k_generator.html#a3c17728f2832073e3d54300f41e3ac02">readSample</a>() {</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            T result = 0;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            <span class="keywordflow">if</span> (p_instrument!=<span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                result = p_instrument-&gt;tick()*max_value;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            }</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        }</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        StkCls *p_instrument=<span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        T max_value;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;};</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> StkCls&gt;</div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_s_t_k_stream.html">   77</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_s_t_k_stream.html">STKStream</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_generated_sound_stream.html">GeneratedSoundStream</a>&lt;int16_t&gt; {</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <a class="code" href="classaudio__tools_1_1_s_t_k_stream.html">STKStream</a>(StkCls &amp;instrument){</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            generator.setInput(instrument);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            <a class="code" href="classaudio__tools_1_1_generated_sound_stream.html">GeneratedSoundStream&lt;int16_t&gt;::setInput</a>(generator);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        }</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keywordtype">void</span> setInput(StkCls &amp;instrument){</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            generator.setInput(instrument);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        }</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <a class="code" href="classaudio__tools_1_1_s_t_k_generator.html">STKGenerator&lt;StkCls,int16_t&gt;</a> generator;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;};</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;}</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="ttc" id="aclassaudio__tools_1_1_generated_sound_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_generated_sound_stream.html">audio_tools::GeneratedSoundStream</a></div><div class="ttdoc">Source for reading generated tones. Please note.</div><div class="ttdef"><b>Definition:</b> AudioStreams.h:517</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_number_converter_html_a68cfd005536b677f85d29ec75bedce57"><div class="ttname"><a href="classaudio__tools_1_1_number_converter.html#a68cfd005536b677f85d29ec75bedce57">audio_tools::NumberConverter::maxValue</a></div><div class="ttdeci">static int64_t maxValue(int value_bits_per_sample)</div><div class="ttdoc">provides the biggest number for the indicated number of bits</div><div class="ttdef"><b>Definition:</b> Converter.h:39</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_s_t_k_generator_html"><div class="ttname"><a href="classaudio__tools_1_1_s_t_k_generator.html">audio_tools::STKGenerator</a></div><div class="ttdoc">The Synthesis ToolKit in C++ (STK) is a set of open source audio signal processing and algorithmic sy...</div><div class="ttdef"><b>Definition:</b> AudioSTK.h:29</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_s_t_k_generator_html_a4291d872889c609c16ded679d409f0f7"><div class="ttname"><a href="classaudio__tools_1_1_s_t_k_generator.html#a4291d872889c609c16ded679d409f0f7">audio_tools::STKGenerator::readSample</a></div><div class="ttdeci">T readSample()</div><div class="ttdoc">Provides a single sample.</div><div class="ttdef"><b>Definition:</b> AudioSTK.h:60</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_s_t_k_generator_html_a4d5a35aa60f20b73dc6d92a2f82dedc8"><div class="ttname"><a href="classaudio__tools_1_1_s_t_k_generator.html#a4d5a35aa60f20b73dc6d92a2f82dedc8">audio_tools::STKGenerator::defaultConfig</a></div><div class="ttdeci">AudioBaseInfo defaultConfig()</div><div class="ttdoc">provides the default configuration</div><div class="ttdef"><b>Definition:</b> AudioSTK.h:42</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_s_t_k_generator_html_a4f3249fa6be6fe0b9f229cfe93b5bbf0"><div class="ttname"><a href="classaudio__tools_1_1_s_t_k_generator.html#a4f3249fa6be6fe0b9f229cfe93b5bbf0">audio_tools::STKGenerator::begin</a></div><div class="ttdeci">void begin(AudioBaseInfo cfg)</div><div class="ttdoc">Starts the processing.</div><div class="ttdef"><b>Definition:</b> AudioSTK.h:51</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_s_t_k_generator_html"><div class="ttname"><a href="classaudio__tools_1_1_s_t_k_generator.html">audio_tools::STKGenerator</a></div><div class="ttdoc">The Synthesis ToolKit in C++ (STK) is a set of open source audio signal processing and algorithmic sy...</div><div class="ttdef"><b>Definition:</b> AudioSTK.h:26</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_s_t_k_generator_html_a3c17728f2832073e3d54300f41e3ac02"><div class="ttname"><a href="classaudio__tools_1_1_s_t_k_generator.html#a3c17728f2832073e3d54300f41e3ac02">audio_tools::STKGenerator::readSample</a></div><div class="ttdeci">T readSample()</div><div class="ttdoc">Provides a single sample.</div><div class="ttdef"><b>Definition:</b> AudioSTK.h:59</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_s_t_k_generator_html_a596135d81052f2bfd5a5181d65aec909"><div class="ttname"><a href="classaudio__tools_1_1_s_t_k_generator.html#a596135d81052f2bfd5a5181d65aec909">audio_tools::STKGenerator::defaultConfig</a></div><div class="ttdeci">AudioBaseInfo defaultConfig()</div><div class="ttdoc">provides the default configuration</div><div class="ttdef"><b>Definition:</b> AudioSTK.h:40</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_s_t_k_generator_html_ae3a621230962a9879a677ef47765441d"><div class="ttname"><a href="classaudio__tools_1_1_s_t_k_generator.html#ae3a621230962a9879a677ef47765441d">audio_tools::STKGenerator::begin</a></div><div class="ttdeci">bool begin(AudioBaseInfo cfg)</div><div class="ttdoc">Starts the processing.</div><div class="ttdef"><b>Definition:</b> AudioSTK.h:49</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_s_t_k_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_s_t_k_stream.html">audio_tools::STKStream</a></div><div class="ttdoc">STK Stream for Instrument or Voicer.</div><div class="ttdef"><b>Definition:</b> AudioSTK.h:77</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_sound_generator_html"><div class="ttname"><a href="classaudio__tools_1_1_sound_generator.html">audio_tools::SoundGenerator</a></div><div class="ttdoc">Base class to define the abstract interface for the sound generating classes.</div><div class="ttdef"><b>Definition:</b> SoundGenerator.h:17</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AnalogAudioArduino.h:10</div></div>
 <div class="ttc" id="astructaudio__tools_1_1_audio_base_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_base_info.html">audio_tools::AudioBaseInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:23</div></div>

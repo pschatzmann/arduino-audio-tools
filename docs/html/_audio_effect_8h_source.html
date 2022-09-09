@@ -70,7 +70,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span> </div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;AudioTools/AudioLogger.h&quot;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;AudioEffects/AudioParameters.h&quot;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
@@ -83,7 +83,7 @@ $(function() {
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <a class="code" href="classaudio__tools_1_1_audio_effect.html">AudioEffect</a>() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="keyword">virtual</span> ~<a class="code" href="classaudio__tools_1_1_audio_effect.html">AudioEffect</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
 <div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_effect.html#a4a25e0fd14638e9b4f8c60792111aeb0">   23</a></span>&#160;        <span class="keyword">virtual</span> effect_t <a class="code" href="classaudio__tools_1_1_audio_effect.html#a4a25e0fd14638e9b4f8c60792111aeb0">process</a>(effect_t in) = 0;</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
 <div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_audio_effect.html#ae5e573517e05769c77ebb17f2fe01495">   26</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1_audio_effect.html#ae5e573517e05769c77ebb17f2fe01495">setActive</a>(<span class="keywordtype">bool</span> value){</div>
@@ -142,7 +142,7 @@ $(function() {
 <div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_boost.html#adf0b55385be1fd6450a11016f45a36a9">   91</a></span>&#160;        effect_t <a class="code" href="classaudio__tools_1_1_boost.html#adf0b55385be1fd6450a11016f45a36a9">process</a>(effect_t input){</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            <span class="keywordflow">if</span> (!<a class="code" href="classaudio__tools_1_1_audio_effect.html#ab01def7ad32249fbebcdd00da9a54cc6">active</a>()) <span class="keywordflow">return</span> input;</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            int32_t result = effect_value * input;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            <span class="comment">// clip to int16_t            </span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            <span class="comment">// clip to int16_t</span></div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="classaudio__tools_1_1_audio_effect.html#a074cb95034d83ce77744ca8f1d94ccb9">clip</a>(result);</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        }</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
@@ -158,7 +158,7 @@ $(function() {
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00116"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_distortion.html#a42d0f19d06c517b8369748ef60ebc3f1">  116</a></span>&#160;        <a class="code" href="classaudio__tools_1_1_distortion.html#a42d0f19d06c517b8369748ef60ebc3f1">Distortion</a>(int16_t clipThreashold=4990, int16_t maxInput=6500){</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            p_clip_threashold = clipThreashold;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            max_input = maxInput;   </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            max_input = maxInput;</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        }</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        <a class="code" href="classaudio__tools_1_1_distortion.html#a42d0f19d06c517b8369748ef60ebc3f1">Distortion</a>(<span class="keyword">const</span> <a class="code" href="classaudio__tools_1_1_distortion.html">Distortion</a> &amp;copy) = <span class="keywordflow">default</span>;</div>
@@ -177,12 +177,12 @@ $(function() {
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        int16_t maxInput(){</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            <span class="keywordflow">return</span> max_input;</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        } </div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        }</div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; </div>
 <div class="line"><a name="l00139"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_distortion.html#ac72effd2de3266ba57d8c0d58237b064">  139</a></span>&#160;        effect_t <a class="code" href="classaudio__tools_1_1_distortion.html#ac72effd2de3266ba57d8c0d58237b064">process</a>(effect_t input){</div>
 <div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;            <span class="keywordflow">if</span> (!<a class="code" href="classaudio__tools_1_1_audio_effect.html#ab01def7ad32249fbebcdd00da9a54cc6">active</a>()) <span class="keywordflow">return</span> input;</div>
 <div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;            <span class="comment">//the input signal is 16bits (values from -32768 to +32768</span></div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;            <span class="comment">//the value of input is clipped to the distortion_threshold value      </span></div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;            <span class="comment">//the value of input is clipped to the distortion_threshold value</span></div>
 <div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="classaudio__tools_1_1_audio_effect.html#a074cb95034d83ce77744ca8f1d94ccb9">clip</a>(input,p_clip_threashold, max_input);</div>
 <div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        }</div>
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
@@ -275,7 +275,7 @@ $(function() {
 <div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;            <span class="keywordtype">float</span> signal_depth = (100.0 - p_percent) / 100.0;</div>
 <div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160; </div>
 <div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;            <span class="keywordtype">float</span> tremolo_factor = tremolo_depth / rate_count_half;</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;            int32_t out = (signal_depth * input) + (tremolo_factor * count * input); </div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;            int32_t out = (signal_depth * input) + (tremolo_factor * count * input);</div>
 <div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160; </div>
 <div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;            <span class="comment">//saw tooth shaped counter</span></div>
 <div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;            count+=inc;</div>
@@ -304,143 +304,155 @@ $(function() {
 <div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160; </div>
 <div class="line"><a name="l00282"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_delay.html">  282</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_delay.html">Delay</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_audio_effect.html">AudioEffect</a>  {</div>
 <div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00285"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_delay.html#a7ff65a7a66c9bc36ba74a71d6dafe3e6">  285</a></span>&#160;        <a class="code" href="classaudio__tools_1_1_delay.html#a7ff65a7a66c9bc36ba74a71d6dafe3e6">Delay</a>(uint16_t duration_ms=1000, uint8_t depthPercent=50,  uint32_t sampleRate=44100) {</div>
+<div class="line"><a name="l00285"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_delay.html#adaf2f6add4d76e876e65ad9e0ec88e63">  285</a></span>&#160;        <a class="code" href="classaudio__tools_1_1_delay.html#adaf2f6add4d76e876e65ad9e0ec88e63">Delay</a>(uint16_t duration_ms=1000, <span class="keywordtype">float</span> depthPercent=50, <span class="keywordtype">float</span> feedbackAmount=0.3, uint32_t sampleRate=44100) {</div>
 <div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;            this-&gt;sampleRate = sampleRate;</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;            p_percent = depthPercent;</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;            p_ms = duration_ms;</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;        }</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160; </div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;        <a class="code" href="classaudio__tools_1_1_delay.html#a7ff65a7a66c9bc36ba74a71d6dafe3e6">Delay</a>(<span class="keyword">const</span> <a class="code" href="classaudio__tools_1_1_delay.html">Delay</a> &amp;copy) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160; </div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;        <span class="keywordtype">void</span> setDuration(int16_t ms){</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;            p_ms = ms;</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;        }</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160; </div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;        int16_t duration(){</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;            <span class="keywordflow">return</span> p_ms;</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;        }</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160; </div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;        <span class="keywordtype">void</span> setDepth(uint8_t percent){</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;            p_percent = percent;</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;        }</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160; </div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;        uint8_t depth() {</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;            <span class="keywordflow">return</span> p_percent;</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;        }</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160; </div>
-<div class="line"><a name="l00309"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_delay.html#a804d16dd25ee9c15b61cebf2fae31823">  309</a></span>&#160;        effect_t <a class="code" href="classaudio__tools_1_1_delay.html#a804d16dd25ee9c15b61cebf2fae31823">process</a>(effect_t input) {</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;            <span class="keywordflow">if</span> (!<a class="code" href="classaudio__tools_1_1_audio_effect.html#ab01def7ad32249fbebcdd00da9a54cc6">active</a>()) <span class="keywordflow">return</span> input;</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160; </div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;            updateBufferSize();</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;            <span class="comment">// get value from buffer</span></div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;            int32_t value = (p_history-&gt;available()&lt;sampleCount) ? input : p_history-&gt;read();</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;            <span class="comment">// add actual input value</span></div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;            p_history-&gt;write(input);</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;            <span class="comment">// mix input with result</span></div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;            <span class="keywordflow">return</span> (value * p_percent / 100) + (input * (100-p_percent)/100); </div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;        }</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;            p_feedback = feedbackAmount;</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;            p_percent = depthPercent;</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;            p_ms = duration_ms;</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;        }</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160; </div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;        <a class="code" href="classaudio__tools_1_1_delay.html#adaf2f6add4d76e876e65ad9e0ec88e63">Delay</a>(<span class="keyword">const</span> <a class="code" href="classaudio__tools_1_1_delay.html">Delay</a> &amp;copy) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160; </div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;        <span class="keywordtype">void</span> setDuration(int16_t ms){</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;            p_ms = ms;</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;        }</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160; </div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;        int16_t duration(){</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;            <span class="keywordflow">return</span> p_ms;</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;        }</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160; </div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;        <span class="keywordtype">void</span> setDepth(<span class="keywordtype">float</span> percent){</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;            p_percent = percent;</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;        }</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160; </div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;        uint8_t depth() {</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;            <span class="keywordflow">return</span> p_percent;</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;        }</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160; </div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;        <span class="keywordtype">void</span> setFeedback(<span class="keywordtype">float</span> feedback){</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;            p_feedback = feedback;</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;        }</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160; </div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;        uint8_t feedback() {</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;            <span class="keywordflow">return</span> p_feedback;</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;        }</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160; </div>
+<div class="line"><a name="l00318"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_delay.html#a804d16dd25ee9c15b61cebf2fae31823">  318</a></span>&#160;        effect_t <a class="code" href="classaudio__tools_1_1_delay.html#a804d16dd25ee9c15b61cebf2fae31823">process</a>(effect_t input) {</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;            <span class="keywordflow">if</span> (!<a class="code" href="classaudio__tools_1_1_audio_effect.html#ab01def7ad32249fbebcdd00da9a54cc6">active</a>()) <span class="keywordflow">return</span> input;</div>
 <div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160; </div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;        <a class="code" href="classaudio__tools_1_1_delay.html">Delay</a> *clone() {</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classaudio__tools_1_1_delay.html#a7ff65a7a66c9bc36ba74a71d6dafe3e6">Delay</a>(*<span class="keyword">this</span>);</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;        }</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160; </div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;        RingBuffer&lt;effect_t&gt;* p_history=<span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;        uint8_t  p_percent;</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;        uint16_t p_ms;</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;        uint16_t sampleCount=0;</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;        uint32_t sampleRate;</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;            updateBufferSize();</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;            <span class="comment">// get value from buffer</span></div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;            int32_t value = (p_history-&gt;available()&lt;sampleCount) ? input : p_history-&gt;read();</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;            <span class="comment">// add feedback decay</span></div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;            int32_t delayValue = (value*p_feedback);</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;            <span class="comment">// add input and delay to the buffer</span></div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;            p_history-&gt;write(input+delayValue);</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;            <span class="comment">// mix input with result</span></div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;            <span class="keywordflow">return</span> (delayValue * p_percent) + (input * (1.0 - p_percent));</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;        }</div>
 <div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160; </div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;        <span class="keywordtype">void</span> updateBufferSize(){</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;            uint16_t newSampleCount = sampleRate * p_ms / 1000;</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;            <span class="keywordflow">if</span> (newSampleCount!=sampleCount){</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;                <span class="keywordflow">if</span> (p_history!=<span class="keyword">nullptr</span>) <span class="keyword">delete</span> p_history;</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;                sampleCount = newSampleCount;</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;                p_history = <span class="keyword">new</span> RingBuffer&lt;effect_t&gt;(sampleCount);</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;            }</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;        }</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;};</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160; </div>
-<div class="line"><a name="l00353"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_d_s_r_gain.html">  353</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_a_d_s_r_gain.html">ADSRGain</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_audio_effect.html">AudioEffect</a> {</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160; </div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;        <a class="code" href="classaudio__tools_1_1_a_d_s_r_gain.html">ADSRGain</a>(<span class="keywordtype">float</span> attack=0.001, <span class="keywordtype">float</span> decay=0.001, <span class="keywordtype">float</span> sustainLevel=0.5, <span class="keywordtype">float</span> release= 0.005, <span class="keywordtype">float</span> boostFactor=1.0){</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;            this-&gt;factor = boostFactor;</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;            adsr = <span class="keyword">new</span> <a class="code" href="classaudio__tools_1_1_a_d_s_r.html">ADSR</a>(attack,decay,sustainLevel,release);</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;        }</div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160; </div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;        <a class="code" href="classaudio__tools_1_1_a_d_s_r_gain.html">ADSRGain</a>(<span class="keyword">const</span> <a class="code" href="classaudio__tools_1_1_a_d_s_r_gain.html">ADSRGain</a> &amp;ref) {</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;            adsr = <span class="keyword">new</span> <a class="code" href="classaudio__tools_1_1_a_d_s_r.html">ADSR</a>(*(ref.adsr));</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;            factor = ref.factor;</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;            copyParent((<a class="code" href="classaudio__tools_1_1_audio_effect.html">AudioEffect</a> *)&amp;ref);</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;        };</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160; </div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;        <span class="keyword">virtual</span> ~<a class="code" href="classaudio__tools_1_1_a_d_s_r_gain.html">ADSRGain</a>(){</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;            <span class="keyword">delete</span> adsr;</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;        }</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160; </div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;        <span class="keywordtype">void</span> setAttackRate(<span class="keywordtype">float</span> a){</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;            adsr-&gt;setAttackRate(a);</div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;        }</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160; </div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;        <span class="keywordtype">float</span> attackRate(){</div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;            <span class="keywordflow">return</span> adsr-&gt;attackRate();</div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;        }</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;        <a class="code" href="classaudio__tools_1_1_delay.html">Delay</a> *clone() {</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classaudio__tools_1_1_delay.html#adaf2f6add4d76e876e65ad9e0ec88e63">Delay</a>(*<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;        }</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160; </div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;        RingBuffer&lt;effect_t&gt;* p_history=<span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;        <span class="keywordtype">float</span> p_percent;</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;        <span class="keywordtype">float</span> p_feedback;</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;        uint16_t p_ms;</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;        uint16_t sampleCount=0;</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;        uint32_t sampleRate;</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160; </div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;        <span class="keywordtype">void</span> updateBufferSize(){</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;            uint16_t newSampleCount = sampleRate * p_ms / 1000;</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;            <span class="keywordflow">if</span> (newSampleCount!=sampleCount){</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;                <span class="keywordflow">if</span> (p_history!=<span class="keyword">nullptr</span>) <span class="keyword">delete</span> p_history;</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;                sampleCount = newSampleCount;</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;                p_history = <span class="keyword">new</span> RingBuffer&lt;effect_t&gt;(sampleCount);</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;            }</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;        }</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;};</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160; </div>
+<div class="line"><a name="l00365"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_d_s_r_gain.html">  365</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1_a_d_s_r_gain.html">ADSRGain</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1_audio_effect.html">AudioEffect</a> {</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160; </div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;        <a class="code" href="classaudio__tools_1_1_a_d_s_r_gain.html">ADSRGain</a>(<span class="keywordtype">float</span> attack=0.001, <span class="keywordtype">float</span> decay=0.001, <span class="keywordtype">float</span> sustainLevel=0.5, <span class="keywordtype">float</span> release= 0.005, <span class="keywordtype">float</span> boostFactor=1.0){</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;            this-&gt;factor = boostFactor;</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;            adsr = <span class="keyword">new</span> <a class="code" href="classaudio__tools_1_1_a_d_s_r.html">ADSR</a>(attack,decay,sustainLevel,release);</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;        }</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160; </div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;        <a class="code" href="classaudio__tools_1_1_a_d_s_r_gain.html">ADSRGain</a>(<span class="keyword">const</span> <a class="code" href="classaudio__tools_1_1_a_d_s_r_gain.html">ADSRGain</a> &amp;ref) {</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;            adsr = <span class="keyword">new</span> <a class="code" href="classaudio__tools_1_1_a_d_s_r.html">ADSR</a>(*(ref.adsr));</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;            factor = ref.factor;</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;            copyParent((<a class="code" href="classaudio__tools_1_1_audio_effect.html">AudioEffect</a> *)&amp;ref);</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;        };</div>
 <div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160; </div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;        <span class="keywordtype">void</span> setDecayRate(<span class="keywordtype">float</span> d){</div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;            adsr-&gt;setDecayRate(d);</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;        <span class="keyword">virtual</span> ~<a class="code" href="classaudio__tools_1_1_a_d_s_r_gain.html">ADSRGain</a>(){</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;            <span class="keyword">delete</span> adsr;</div>
 <div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;        }</div>
 <div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160; </div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;        <span class="keywordtype">float</span> decayRate() {</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;            <span class="keywordflow">return</span> adsr-&gt;decayRate();</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;        <span class="keywordtype">void</span> setAttackRate(<span class="keywordtype">float</span> a){</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;            adsr-&gt;setAttackRate(a);</div>
 <div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;        }</div>
 <div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160; </div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;        <span class="keywordtype">void</span> setSustainLevel(<span class="keywordtype">float</span> s){</div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;            adsr-&gt;setSustainLevel(s);</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;        <span class="keywordtype">float</span> attackRate(){</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;            <span class="keywordflow">return</span> adsr-&gt;attackRate();</div>
 <div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;        }</div>
 <div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160; </div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;        <span class="keywordtype">float</span> sustainLevel(){</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;            <span class="keywordflow">return</span> adsr-&gt;sustainLevel();</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;        <span class="keywordtype">void</span> setDecayRate(<span class="keywordtype">float</span> d){</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;            adsr-&gt;setDecayRate(d);</div>
 <div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;        }</div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;        </div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;        <span class="keywordtype">void</span> setReleaseRate(<span class="keywordtype">float</span> r){</div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;            adsr-&gt;setReleaseRate(r);</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160; </div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;        <span class="keywordtype">float</span> decayRate() {</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;            <span class="keywordflow">return</span> adsr-&gt;decayRate();</div>
 <div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;        }</div>
 <div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160; </div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;        <span class="keywordtype">float</span> releaseRate() {</div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;            <span class="keywordflow">return</span> adsr-&gt;releaseRate();</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;        <span class="keywordtype">void</span> setSustainLevel(<span class="keywordtype">float</span> s){</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;            adsr-&gt;setSustainLevel(s);</div>
 <div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;        }</div>
 <div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160; </div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;        <span class="keywordtype">void</span> keyOn(<span class="keywordtype">float</span> tgt=0){</div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;            adsr-&gt;keyOn(tgt);</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;        <span class="keywordtype">float</span> sustainLevel(){</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;            <span class="keywordflow">return</span> adsr-&gt;sustainLevel();</div>
 <div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;        }</div>
 <div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160; </div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;        <span class="keywordtype">void</span> keyOff(){</div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;            adsr-&gt;keyOff();</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;        <span class="keywordtype">void</span> setReleaseRate(<span class="keywordtype">float</span> r){</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;            adsr-&gt;setReleaseRate(r);</div>
 <div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;        }</div>
 <div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160; </div>
-<div class="line"><a name="l00411"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_d_s_r_gain.html#a1b091d0e3e8000ee4fb9f6e19ddec8c1">  411</a></span>&#160;        effect_t <a class="code" href="classaudio__tools_1_1_a_d_s_r_gain.html#a1b091d0e3e8000ee4fb9f6e19ddec8c1">process</a>(effect_t input) {</div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;            effect_t result = factor * adsr-&gt;tick() * input;</div>
-<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;            <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;        }</div>
-<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160; </div>
-<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;        <span class="keywordtype">bool</span> isActive(){</div>
-<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;            <span class="keywordflow">return</span> adsr-&gt;isActive();</div>
-<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;        }</div>
-<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160; </div>
-<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;        ADSRGain *clone() {</div>
-<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">new</span> ADSRGain(*<span class="keyword">this</span>);</div>
-<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;        }</div>
-<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160; </div>
-<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;        ADSR *adsr;</div>
-<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;        <span class="keywordtype">float</span> factor;</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;        <span class="keywordtype">float</span> releaseRate() {</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;            <span class="keywordflow">return</span> adsr-&gt;releaseRate();</div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;        }</div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160; </div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;        <span class="keywordtype">void</span> keyOn(<span class="keywordtype">float</span> tgt=0){</div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;            adsr-&gt;keyOn(tgt);</div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;        }</div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160; </div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;        <span class="keywordtype">void</span> keyOff(){</div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;            adsr-&gt;keyOff();</div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;        }</div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160; </div>
+<div class="line"><a name="l00423"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_a_d_s_r_gain.html#a1b091d0e3e8000ee4fb9f6e19ddec8c1">  423</a></span>&#160;        effect_t <a class="code" href="classaudio__tools_1_1_a_d_s_r_gain.html#a1b091d0e3e8000ee4fb9f6e19ddec8c1">process</a>(effect_t input) {</div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;            effect_t result = factor * adsr-&gt;tick() * input;</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;            <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;        }</div>
 <div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160; </div>
-<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;};</div>
-<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160; </div>
-<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;}</div>
-<div class="ttc" id="aclassaudio__tools_1_1_a_d_s_r_gain_html"><div class="ttname"><a href="classaudio__tools_1_1_a_d_s_r_gain.html">audio_tools::ADSRGain</a></div><div class="ttdoc">ADSR Envelope: Attack, Decay, Sustain and Release. Attack is the time taken for initial run-up of lev...</div><div class="ttdef"><b>Definition:</b> AudioEffect.h:353</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_a_d_s_r_gain_html_a1b091d0e3e8000ee4fb9f6e19ddec8c1"><div class="ttname"><a href="classaudio__tools_1_1_a_d_s_r_gain.html#a1b091d0e3e8000ee4fb9f6e19ddec8c1">audio_tools::ADSRGain::process</a></div><div class="ttdeci">effect_t process(effect_t input)</div><div class="ttdoc">calculates the effect output from the input</div><div class="ttdef"><b>Definition:</b> AudioEffect.h:411</div></div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;        <span class="keywordtype">bool</span> isActive(){</div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;            <span class="keywordflow">return</span> adsr-&gt;isActive();</div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;        }</div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160; </div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;        ADSRGain *clone() {</div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">new</span> ADSRGain(*<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;        }</div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160; </div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;        ADSR *adsr;</div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;        <span class="keywordtype">float</span> factor;</div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160; </div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;};</div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160; </div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;}</div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_d_s_r_gain_html"><div class="ttname"><a href="classaudio__tools_1_1_a_d_s_r_gain.html">audio_tools::ADSRGain</a></div><div class="ttdoc">ADSR Envelope: Attack, Decay, Sustain and Release. Attack is the time taken for initial run-up of lev...</div><div class="ttdef"><b>Definition:</b> AudioEffect.h:365</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_a_d_s_r_gain_html_a1b091d0e3e8000ee4fb9f6e19ddec8c1"><div class="ttname"><a href="classaudio__tools_1_1_a_d_s_r_gain.html#a1b091d0e3e8000ee4fb9f6e19ddec8c1">audio_tools::ADSRGain::process</a></div><div class="ttdeci">effect_t process(effect_t input)</div><div class="ttdoc">calculates the effect output from the input</div><div class="ttdef"><b>Definition:</b> AudioEffect.h:423</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_a_d_s_r_html"><div class="ttname"><a href="classaudio__tools_1_1_a_d_s_r.html">audio_tools::ADSR</a></div><div class="ttdoc">Generates ADSR values between 0.0 and 1.0.</div><div class="ttdef"><b>Definition:</b> AudioParameters.h:53</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_effect_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_effect.html">audio_tools::AudioEffect</a></div><div class="ttdoc">Abstract Base class for Sound Effects.</div><div class="ttdef"><b>Definition:</b> AudioEffect.h:17</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_effect_html_a074cb95034d83ce77744ca8f1d94ccb9"><div class="ttname"><a href="classaudio__tools_1_1_audio_effect.html#a074cb95034d83ce77744ca8f1d94ccb9">audio_tools::AudioEffect::clip</a></div><div class="ttdeci">int16_t clip(int32_t in, int16_t clipLimit=32767, int16_t resultLimit=32767)</div><div class="ttdoc">generic clipping method</div><div class="ttdef"><b>Definition:</b> AudioEffect.h:57</div></div>
@@ -453,8 +465,8 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_boost_html_ab2b90830ff443d5d253e5f0c892c19c5"><div class="ttname"><a href="classaudio__tools_1_1_boost.html#ab2b90830ff443d5d253e5f0c892c19c5">audio_tools::Boost::Boost</a></div><div class="ttdeci">Boost(float volume=1.0)</div><div class="ttdoc">Boost Constructor: volume 0.1 - 1.0: decrease result; volume &gt;0: increase result.</div><div class="ttdef"><b>Definition:</b> AudioEffect.h:77</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_boost_html_adf0b55385be1fd6450a11016f45a36a9"><div class="ttname"><a href="classaudio__tools_1_1_boost.html#adf0b55385be1fd6450a11016f45a36a9">audio_tools::Boost::process</a></div><div class="ttdeci">effect_t process(effect_t input)</div><div class="ttdoc">calculates the effect output from the input</div><div class="ttdef"><b>Definition:</b> AudioEffect.h:91</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_delay_html"><div class="ttname"><a href="classaudio__tools_1_1_delay.html">audio_tools::Delay</a></div><div class="ttdoc">Delay AudioEffect. We mix the actual signal with the delayed signal.</div><div class="ttdef"><b>Definition:</b> AudioEffect.h:282</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_delay_html_a7ff65a7a66c9bc36ba74a71d6dafe3e6"><div class="ttname"><a href="classaudio__tools_1_1_delay.html#a7ff65a7a66c9bc36ba74a71d6dafe3e6">audio_tools::Delay::Delay</a></div><div class="ttdeci">Delay(uint16_t duration_ms=1000, uint8_t depthPercent=50, uint32_t sampleRate=44100)</div><div class="ttdoc">e.g. depthPercent=50, ms=1000, sampleRate=44100</div><div class="ttdef"><b>Definition:</b> AudioEffect.h:285</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_delay_html_a804d16dd25ee9c15b61cebf2fae31823"><div class="ttname"><a href="classaudio__tools_1_1_delay.html#a804d16dd25ee9c15b61cebf2fae31823">audio_tools::Delay::process</a></div><div class="ttdeci">effect_t process(effect_t input)</div><div class="ttdoc">calculates the effect output from the input</div><div class="ttdef"><b>Definition:</b> AudioEffect.h:309</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_delay_html_a804d16dd25ee9c15b61cebf2fae31823"><div class="ttname"><a href="classaudio__tools_1_1_delay.html#a804d16dd25ee9c15b61cebf2fae31823">audio_tools::Delay::process</a></div><div class="ttdeci">effect_t process(effect_t input)</div><div class="ttdoc">calculates the effect output from the input</div><div class="ttdef"><b>Definition:</b> AudioEffect.h:318</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_delay_html_adaf2f6add4d76e876e65ad9e0ec88e63"><div class="ttname"><a href="classaudio__tools_1_1_delay.html#adaf2f6add4d76e876e65ad9e0ec88e63">audio_tools::Delay::Delay</a></div><div class="ttdeci">Delay(uint16_t duration_ms=1000, float depthPercent=50, float feedbackAmount=0.3, uint32_t sampleRate=44100)</div><div class="ttdoc">e.g. depthPercent=50, ms=1000, sampleRate=44100</div><div class="ttdef"><b>Definition:</b> AudioEffect.h:285</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_distortion_html"><div class="ttname"><a href="classaudio__tools_1_1_distortion.html">audio_tools::Distortion</a></div><div class="ttdoc">Distortion AudioEffect.</div><div class="ttdef"><b>Definition:</b> AudioEffect.h:113</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_distortion_html_a42d0f19d06c517b8369748ef60ebc3f1"><div class="ttname"><a href="classaudio__tools_1_1_distortion.html#a42d0f19d06c517b8369748ef60ebc3f1">audio_tools::Distortion::Distortion</a></div><div class="ttdeci">Distortion(int16_t clipThreashold=4990, int16_t maxInput=6500)</div><div class="ttdoc">Distortion Constructor: e.g. use clipThreashold 4990 and maxInput=6500.</div><div class="ttdef"><b>Definition:</b> AudioEffect.h:116</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_distortion_html_ac72effd2de3266ba57d8c0d58237b064"><div class="ttname"><a href="classaudio__tools_1_1_distortion.html#ac72effd2de3266ba57d8c0d58237b064">audio_tools::Distortion::process</a></div><div class="ttdeci">effect_t process(effect_t input)</div><div class="ttdoc">calculates the effect output from the input</div><div class="ttdef"><b>Definition:</b> AudioEffect.h:139</div></div>

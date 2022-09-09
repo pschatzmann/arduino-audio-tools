@@ -123,6 +123,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr
 <tr class="memitem:a33e855ebee55f71e5303c586d3c5f817"><td class="memItemLeft" align="right" valign="top"><a id="a33e855ebee55f71e5303c586d3c5f817"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> () override</td></tr>
 <tr class="separator:a33e855ebee55f71e5303c586d3c5f817"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ec31054628a66c2e64b0f0c77c77b94"><td class="memItemLeft" align="right" valign="top"><a id="a0ec31054628a66c2e64b0f0c77c77b94"></a>
+<a class="el" href="classaudio__tools_1_1_list.html">List</a>&lt; <a class="el" href="structaudio__tools_1_1_dynamic_memory_stream_1_1_data_node.html">DataNode</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>list</b> ()</td></tr>
+<tr class="separator:a0ec31054628a66c2e64b0f0c77c77b94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9038823db2da1665e063aa9eed26915c"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a9038823db2da1665e063aa9eed26915c"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_dynamic_memory_stream.html#a9038823db2da1665e063aa9eed26915c">postProcessSmoothTransition</a> (int channels, float factor=0.01, int remove=0)</td></tr>
+<tr class="memdesc:a9038823db2da1665e063aa9eed26915c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Post processing after the recording. We add a smooth transition at the beginning and at the end.  <a href="classaudio__tools_1_1_dynamic_memory_stream.html#a9038823db2da1665e063aa9eed26915c">More...</a><br /></td></tr>
+<tr class="separator:a9038823db2da1665e063aa9eed26915c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3b9fb7af65598c99a460acfb192cdc1"><td class="memItemLeft" align="right" valign="top"><a id="ad3b9fb7af65598c99a460acfb192cdc1"></a>
 virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>readBytes</b> (uint8_t *buffer, size_t length) override</td></tr>
 <tr class="separator:ad3b9fb7af65598c99a460acfb192cdc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -330,18 +337,18 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a85b26435a004f3e9fab18e453c46a636"><td class="memItemLeft" align="right" valign="top"><a id="a85b26435a004f3e9fab18e453c46a636"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>alloc_failed</b> = false</td></tr>
 <tr class="separator:a85b26435a004f3e9fab18e453c46a636"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2c289e7f5eec3e83d09f0f408fdde48e"><td class="memItemLeft" align="right" valign="top"><a id="a2c289e7f5eec3e83d09f0f408fdde48e"></a>
-<a class="el" href="classaudio__tools_1_1_list.html">List</a>&lt; <a class="el" href="structaudio__tools_1_1_dynamic_memory_stream_1_1_data_node.html">DataNode</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>audio_list</b></td></tr>
-<tr class="separator:a2c289e7f5eec3e83d09f0f408fdde48e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac679ce0a3ffa7518da61c4f1302d75ba"><td class="memItemLeft" align="right" valign="top"><a id="ac679ce0a3ffa7518da61c4f1302d75ba"></a>
+<a class="el" href="classaudio__tools_1_1_list.html">List</a>&lt; <a class="el" href="structaudio__tools_1_1_dynamic_memory_stream_1_1_data_node.html">DataNode</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>audio_list</b></td></tr>
+<tr class="separator:ac679ce0a3ffa7518da61c4f1302d75ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aebf31f185cfbffeb2de7a21b2de9d985"><td class="memItemLeft" align="right" valign="top"><a id="aebf31f185cfbffeb2de7a21b2de9d985"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>default_buffer_size</b> =DEFAULT_BUFFER_SIZE</td></tr>
 <tr class="separator:aebf31f185cfbffeb2de7a21b2de9d985"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02add6e6c5556b8f837dae7748b79651"><td class="memItemLeft" align="right" valign="top"><a id="a02add6e6c5556b8f837dae7748b79651"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_loop</b> = false</td></tr>
 <tr class="separator:a02add6e6c5556b8f837dae7748b79651"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2c9ecb4fd1dcb9f1e1e4b521f31d49b"><td class="memItemLeft" align="right" valign="top"><a id="aa2c9ecb4fd1dcb9f1e1e4b521f31d49b"></a>
-<a class="el" href="classaudio__tools_1_1_list.html">List</a>&lt; <a class="el" href="structaudio__tools_1_1_dynamic_memory_stream_1_1_data_node.html">DataNode</a> &gt;::Iterator&#160;</td><td class="memItemRight" valign="bottom"><b>it</b> = audio_list.end()</td></tr>
-<tr class="separator:aa2c9ecb4fd1dcb9f1e1e4b521f31d49b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab24b8e4ee14032c58d489a41f5fcf9b1"><td class="memItemLeft" align="right" valign="top"><a id="ab24b8e4ee14032c58d489a41f5fcf9b1"></a>
+<a class="el" href="classaudio__tools_1_1_list.html">List</a>&lt; <a class="el" href="structaudio__tools_1_1_dynamic_memory_stream_1_1_data_node.html">DataNode</a> * &gt;::Iterator&#160;</td><td class="memItemRight" valign="bottom"><b>it</b> = audio_list.end()</td></tr>
+<tr class="separator:ab24b8e4ee14032c58d489a41f5fcf9b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79caa6374688709ec68000c69d81936f"><td class="memItemLeft" align="right" valign="top"><a id="a79caa6374688709ec68000c69d81936f"></a>
 <a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>temp_audio</b> {DEFAULT_BUFFER_SIZE}</td></tr>
 <tr class="separator:a79caa6374688709ec68000c69d81936f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -397,7 +404,67 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteError</b> (in
 <div class="textblock"><p><a class="el" href="classaudio__tools_1_1_memory_stream.html" title="A simple Stream implementation which is backed by allocated memory.">MemoryStream</a> which is written and read using the internal RAM. For each write the data is allocated on the heap. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a9038823db2da1665e063aa9eed26915c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9038823db2da1665e063aa9eed26915c">&#9670;&nbsp;</a></span>postProcessSmoothTransition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void audio_tools::DynamicMemoryStream::postProcessSmoothTransition </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>channels</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>factor</em> = <code>0.01</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>remove</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Post processing after the recording. We add a smooth transition at the beginning and at the end. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">factor</td><td><br  />
+ </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/AudioTools/<a class="el" href="_audio_streams_8h_source.html">AudioStreams.h</a></li>
 </ul>
 </div><!-- contents -->
