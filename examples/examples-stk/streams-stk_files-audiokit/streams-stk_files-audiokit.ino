@@ -8,10 +8,16 @@
  * @copyright Copyright (c) 2021
  */
 
-#include "SD_MMC.h"
+#ifdef IS_DESKTOP
+# define AudioKitStream PortAudioStream
+#else
+# include "SD_MMC.h"
+#endif
 #include "AudioTools.h"
 #include "AudioLibs/AudioSTK.h"
 #include "AudioLibs/AudioKit.h"
+
+
 
 STKStream<Instrmnt> in;
 AudioKitStream out;

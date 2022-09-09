@@ -562,7 +562,6 @@ class GeneratedSoundStream : public AudioStreamX {
     LOGD(LOG_METHOD);
     generator_ptr->end();
     active = false;
-    const char* source_not_defined_error = "Source not defined";
   }
 
   virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi) override {
@@ -592,6 +591,7 @@ class GeneratedSoundStream : public AudioStreamX {
   bool active = false;
   SoundGenerator<T> *generator_ptr;
   AudioBaseInfoDependent *audioBaseInfoDependent = nullptr;
+  const char* source_not_defined_error = "Source not defined";
 
 };
 
