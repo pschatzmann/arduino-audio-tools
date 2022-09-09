@@ -1,5 +1,5 @@
 #pragma once
-#include <stdint.h> 
+#include <stdint.h>
 #include "AudioTools/AudioLogger.h"
 #include "AudioEffects/AudioParameters.h"
 
@@ -18,7 +18,7 @@ class AudioEffect  {
     public:
         AudioEffect() = default;
         virtual ~AudioEffect() = default;
-        
+
         /// calculates the effect output from the input
         virtual effect_t process(effect_t in) = 0;
 
@@ -68,12 +68,12 @@ class AudioEffect  {
  * @brief Boost AudioEffect
  * @author Phil Schatzmann
  * @copyright GPLv3
- * 
+ *
  */
 
 class Boost : public AudioEffect {
     public:
-        /// Boost Constructor: volume 0.1 - 1.0: decrease result; volume >0: increase result 
+        /// Boost Constructor: volume 0.1 - 1.0: decrease result; volume >0: increase result
         Boost(float volume=1.0){
             effect_value = volume;
         }
@@ -91,7 +91,7 @@ class Boost : public AudioEffect {
         effect_t process(effect_t input){
             if (!active()) return input;
             int32_t result = effect_value * input;
-            // clip to int16_t            
+            // clip to int16_t
             return clip(result);
         }
 
@@ -105,7 +105,7 @@ class Boost : public AudioEffect {
 
 /**
  * @brief Distortion AudioEffect
- * 
+ *
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -115,7 +115,7 @@ class Distortion : public AudioEffect  {
         /// Distortion Constructor: e.g. use clipThreashold 4990 and maxInput=6500
         Distortion(int16_t clipThreashold=4990, int16_t maxInput=6500){
             p_clip_threashold = clipThreashold;
-            max_input = maxInput;   
+            max_input = maxInput;
         }
 
         Distortion(const Distortion &copy) = default;
@@ -134,12 +134,12 @@ class Distortion : public AudioEffect  {
 
         int16_t maxInput(){
             return max_input;
-        } 
+        }
 
         effect_t process(effect_t input){
             if (!active()) return input;
             //the input signal is 16bits (values from -32768 to +32768
-            //the value of input is clipped to the distortion_threshold value      
+            //the value of input is clipped to the distortion_threshold value
             return clip(input,p_clip_threashold, max_input);
         }
 
@@ -155,7 +155,7 @@ class Distortion : public AudioEffect  {
 
 /**
  * @brief Fuzz AudioEffect
- * 
+ *
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -247,7 +247,7 @@ class Tremolo : public AudioEffect  {
             float signal_depth = (100.0 - p_percent) / 100.0;
 
             float tremolo_factor = tremolo_depth / rate_count_half;
-            int32_t out = (signal_depth * input) + (tremolo_factor * count * input); 
+            int32_t out = (signal_depth * input) + (tremolo_factor * count * input);
 
             //saw tooth shaped counter
             count+=inc;
@@ -315,7 +315,7 @@ class Delay : public AudioEffect  {
             // add actual input value
             p_history->write(input);
             // mix input with result
-            return (value * p_percent / 100) + (input * (100-p_percent)/100); 
+            return (value * p_percent / 100) + (input * (100-p_percent)/100);
         }
 
         Delay *clone() {
@@ -391,7 +391,7 @@ class ADSRGain : public AudioEffect {
         float sustainLevel(){
             return adsr->sustainLevel();
         }
-        
+
         void setReleaseRate(float r){
             adsr->setReleaseRate(r);
         }
