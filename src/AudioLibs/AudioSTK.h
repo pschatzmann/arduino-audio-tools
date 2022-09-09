@@ -22,27 +22,18 @@ namespace audio_tools {
  * @tparam T 
  */
 
-template <class T>
+template <class StkCls, class T>
 class STKGenerator : public SoundGenerator<T> {
     public:
         STKGenerator() = default;
 
         // Creates an STKGenerator for an instrument
-        STKGenerator(stk::Instrmnt &instrument) : SoundGenerator<T>() {
+        STKGenerator(StkCls &instrument) : SoundGenerator<T>() {
             this->p_instrument = &instrument;
         }
 
-        // Creates an STKGenerator for a voicer (combination of multiple instruments)
-        STKGenerator(stk::Voicer  &voicer) : SoundGenerator<T>() {
-            this->p_voicer = &voicer;
-        }
-
-        void setInput(stk::Instrmnt &instrument){
+        void setInput(StkCls &instrument){
             this->p_instrument = &instrument;
-        }
-
-        void setInput(stk::Voicer &voicer){            
-            this->p_voicer = &voicer;
         }
 
         /// provides the default configuration
@@ -69,15 +60,12 @@ class STKGenerator : public SoundGenerator<T> {
             T result = 0;
             if (p_instrument!=nullptr) {
                 result = p_instrument->tick()*max_value;
-            } else if (p_voicer!=nullptr){
-                result = p_voicer->tick()*max_value;
             }
             return result;
         }
 
     protected:
-        stk::Instrmnt *p_instrument=nullptr;
-        stk::Voicer *p_voicer=nullptr;
+        StkCls *p_instrument=nullptr;
         T max_value;
 
 };
@@ -85,24 +73,18 @@ class STKGenerator : public SoundGenerator<T> {
 /**
  * @brief STK Stream for Instrument or Voicer
  */
+template <class StkCls>
 class STKStream : public GeneratedSoundStream<int16_t> {
     public:
-        STKStream(Instrmnt &instrument){
+        STKStream(StkCls &instrument){
             generator.setInput(instrument);
             GeneratedSoundStream<int16_t>::setInput(generator);
         }
-        STKStream(Voicer &voicer){
-            generator.setInput(voicer);
-            GeneratedSoundStream<int16_t>::setInput(generator);
-        }
-        void setInput(Instrmnt &instrument){
+        void setInput(StkCls &instrument){
             generator.setInput(instrument);
-        }
-        void setInput(Voicer &voicer){
-            generator.setInput(voicer);
         }
     protected:
-        STKGenerator<int16_t> generator;
+        STKGenerator<StkCls,int16_t> generator;
 
 };
 

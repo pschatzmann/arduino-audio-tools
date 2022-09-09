@@ -1,22 +1,23 @@
 /**
- * @file streams-stk-audioout.ino
- * @brief Plays random notes on instrument. For available instruments
- * see https://pschatzmann.github.io/Arduino-STK/html/classstk_1_1Instrmnt.html
- * I used an AudioKitStream to test the output, but you can replace it with any other output class (e.g. I2SStream)
+ * @file streams-stk_loop-audiokit.ino
  * @author Phil Schatzmann
- * @copyright Copyright (c) 2021
+ * @brief We can use a MemoryLoop as input
+ * @version 0.1
+ * @date 2022-09-09
+ * 
+ * @copyright Copyright (c) 2022
+ * 
  */
 #include "AudioTools.h"
-#include "AudioLibs/AudioSTK.h"
 #include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioSTK.h"
 
-Sitar instrument(440);
-STKStream<Instrmnt> in(instrument);
+MemoryLoop mloop("sinewave.raw", sinewave_raw, sinewave_raw_len);
+STKStream<MemoryLoop> in(mloop);
 AudioKitStream out;
 StreamCopy copier(out, in);
 MusicalNotes notes;
 
-float note_amplitude = 0.5;
 static uint16_t notes_array[] = { // frequencies aleatoric C-scale
     N_C3, N_D3, N_E3, N_F3, N_G3, N_A3, N_B3,
     N_C4, N_D4, N_E4, N_F4, N_G4, N_A4, N_B4,
@@ -32,12 +33,12 @@ void play() {
     if (active){
       // play note for 800 ms
       freq = notes_array[random(sizeof(notes_array)/sizeof(uint16_t))];
-      instrument.noteOn(freq, note_amplitude);
+      mloop.setFrequency(freq);
       timeout = millis()+800;
       active = false;
     } else {
       // silence for 100 ms
-      instrument.noteOff(note_amplitude);
+      mloop.setFrequency(0);
       timeout = millis()+100;
       active = true;
     }
