@@ -6,9 +6,6 @@
 #ifdef  USE_EFFECTS_SUITE
 #include "AudioEffects/AudioEffectsSuite.h"
 #endif
-#ifdef  USE_STK
-#include "AudioEffects/STKEffects.h"
-#endif
 
 namespace audio_tools {
 
