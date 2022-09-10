@@ -49,7 +49,7 @@ class STKGenerator : public SoundGenerator<T> {
 
         /// Starts the processing
         bool begin(AudioBaseInfo cfg){
-             LOGI(LOG_METHOD);
+            LOGI(LOG_METHOD);
             cfg.logInfo();
             SoundGenerator<T>::begin(cfg);
             max_value = NumberConverter::maxValue(sizeof(T)*8);
@@ -95,7 +95,7 @@ class STKStream : public GeneratedSoundStream<int16_t> {
 
         AudioBaseInfo defaultConfig() {
             AudioBaseInfo info;
-            info.channels = 2;
+            info.channels = 1;
             info.bits_per_sample = 16;
             info.sample_rate = stk::Stk::sampleRate();
             return info;
