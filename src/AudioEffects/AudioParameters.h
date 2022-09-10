@@ -5,7 +5,7 @@ namespace audio_tools {
 
 /**
  * @brief Base class for all parameters
- * 
+ *
  */
 class AbstractParameter {
     public:
@@ -36,7 +36,7 @@ class AbstractParameter {
 
 /**
  * @brief A constant value
- * 
+ *
  */
 class Parameter : public AbstractParameter {
     public:
@@ -48,7 +48,7 @@ class Parameter : public AbstractParameter {
 
 /**
  * @brief Generates ADSR values between 0.0 and 1.0
- * 
+ *
  */
 class ADSR : public  AbstractParameter  {
     public:
@@ -85,7 +85,7 @@ class ADSR : public  AbstractParameter  {
         float sustainLevel(){
             return sustain;
         }
-        
+
         void setReleaseRate(float r){
             release = r;
         }
@@ -168,8 +168,65 @@ class ADSR : public  AbstractParameter  {
 };
 
 /**
+ * @brief Generates DelayLines
+ *
+ */
+class DelayLine : public  AbstractParameter  {
+    public:
+
+      DelayLine(uint16_t duration_ms=1000, float depthPercent=0.3, float feedbackAmount=0.3, uint32_t sampleRate=44100) {
+            this->sampleRate = sampleRate;
+            this->duration = duration_ms;
+            this->feedback = feedbackAmount;
+            this->depth = depthPercent;
+        }
+
+        DelayLine(DelayLine &copy) = default;
+
+        void setDuration(int16_t dur){
+            duration = dur;
+        }
+
+        int16_t getDuration(){
+            return duration;
+        }
+
+        void setDepth(float per){
+            depth = per;
+        }
+
+        float getDepth() {
+            return depth;
+        }
+
+        void setFeedback(float feed){
+            feedback = feed;
+        }
+
+        float getFeedback() {
+            return feedback;
+        }
+
+        void setSampleRate(int32_t sample){
+            sampleRate = sample;
+        }
+
+        float getSampleRate() {
+            return sampleRate;
+        }
+
+    protected:
+        float depth,feedback,duration,sampleRate;
+
+        inline float update( ) {
+          return 0;
+        }
+};
+
+
+/**
  * @brief Scales a dynamic parameter to the indicated range
- * 
+ *
  */
 class ScaledParameter : public AbstractParameter {
     public:
