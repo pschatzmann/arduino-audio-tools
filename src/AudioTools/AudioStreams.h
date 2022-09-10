@@ -66,6 +66,8 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
     return info;
   }
 
+  virtual void flush() {}
+
  protected:
   AudioBaseInfoDependent *p_notify=nullptr;
   AudioBaseInfo info;
@@ -92,7 +94,6 @@ class AudioStreamX : public AudioStream {
 
   virtual int read() override { return not_supported(-1); }
   virtual int peek() override { return not_supported(-1); }
-  virtual void flush() FLUSH_OVERRIDE {}
 };
 
 /**

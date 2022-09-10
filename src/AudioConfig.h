@@ -447,9 +447,5 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 
 #ifdef IS_DESKTOP
 #define USE_URL_ARDUINO
-#define FLUSH_OVERRIDE override
 #endif
 
-#ifndef FLUSH_OVERRIDE
-#define FLUSH_OVERRIDE 
-#endif

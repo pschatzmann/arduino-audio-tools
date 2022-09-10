@@ -32,7 +32,7 @@ class AudioPrint : public Print, public AudioBaseInfoDependent, public AudioBase
             return 0;
         }
 
-        void flush() FLUSH_OVERRIDE {
+        void flush()  {
             write((const uint8_t*)tmp, tmpPos-1);
             tmpPos=0;
         }
