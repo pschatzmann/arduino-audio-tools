@@ -199,7 +199,6 @@ class StreamCopyT {
                     retry++;
                     delay(retryWaitMs);
                 } else {
-                    result = true; // we have some data
                     retry = 0; // after we got new data we restart the counting
                 }
                 // stop the processing if we passed the retry limit
