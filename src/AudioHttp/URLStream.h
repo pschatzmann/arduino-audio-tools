@@ -105,12 +105,12 @@ class URLStreamDefault : public AbstractURLStream {
         }
 
         virtual int available() override {
-            if (!active) return 0;
+            if (!active || !request) return 0;
             return request.available();
         }
 
         virtual size_t readBytes(uint8_t *buffer, size_t length) override {
-            if (!active) return -1;
+            if (!active || !request) return 0;
 
             size_t read = request.read((uint8_t*)buffer, length);
             total_read+=read;
