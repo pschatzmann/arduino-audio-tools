@@ -109,7 +109,10 @@ class StreamCopyT {
                 }
 
                 // get the data now
-                bytes_read = from->readBytes((uint8_t*)buffer, bytes_to_read);
+                bytes_read = 0;
+                if (bytes_to_read>0){
+                    bytes_read = from->readBytes((uint8_t*)buffer, bytes_to_read);
+                }
 
                 // determine mime
                 notifyMime(buffer, bytes_to_read);
@@ -120,9 +123,11 @@ class StreamCopyT {
 
                 // callback with unconverted data
                 if (onWrite!=nullptr) onWrite(onWriteObj, buffer, result);
+
                 #ifndef COPY_LOG_OFF
                 LOGI("StreamCopy::copy %u -> %u -> %u bytes - in %u hops", (unsigned int)bytes_to_read,(unsigned int) bytes_read, (unsigned int)result, (unsigned int)delayCount);
                 #endif
+
                 CHECK_MEMORY();
             } else {
                 // give the processor some time 
@@ -252,23 +257,26 @@ class StreamCopyT {
 
         // blocking write - until everything is processed
         size_t write(size_t len, size_t &delayCount ){
-            if (buffer==nullptr) return 0;
+            if (buffer==nullptr || len==0) return 0;
             size_t total = 0;
+            long open = len;
             int retry = 0;
-            while(total<len){
-                size_t written = to->write((const uint8_t*)buffer+total, len-total);
+            while(open>0){
+                size_t written = to->write((const uint8_t*)buffer+total, open);
                 total += written;
+                open -= written;
                 delayCount++;
 
                 if (retry++ > retryLimit){
-                    LOGE("write to target has failed!");
+                    LOGE("write to target has failed! (%ld bytes)", open);
                     break;
                 }
                 
                 if (retry>1) {
                     delay(5);
-                    LOGI("try write - %d ",retry);
+                    LOGI("try write - %d (open %ld bytes) ",retry, open);
                 }
+
                 CHECK_MEMORY();
             }
             return total;
