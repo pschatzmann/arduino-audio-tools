@@ -62,13 +62,16 @@ class AudioServerEx : public AudioPrint {
 
     virtual bool begin() {
         end(); // we (re) start with  a clean state
+
         if (info.input==nullptr){
             p_stream = new ExtensionStream(info.path,tinyhttp::GET, info.mime );
         } else {
             p_stream = new ExtensionStream(info.path, info.mime, *info.input);
         }
         p_stream->setReplyHeader(*getReplyHeader()); 
-        p_server = new HttpServer(wifi);
+        p_server = new tinyhttp::HttpServer(wifi);
+        
+        // handling of WAV
         p_server->addExtension(*p_stream);
         return p_server->begin(info.port, info.ssid, info.password);
     }
@@ -153,21 +156,25 @@ class AudioWAVServerEx : public AudioServerEx {
     protected:
         // wav files start with a 44 bytes header
         virtual tinyhttp::Str* getReplyHeader() {
-            MemoryPrint mp{(uint8_t*)header.c_str(), header.length()};
+            header.allocate(44);
+            MemoryPrint mp{(uint8_t*)header.c_str(), 44};
             WAVEncoder enc;
             WAVAudioInfo wi;
+            wi.format = WAV_FORMAT_PCM;
             wi.sample_rate = info.sample_rate;
             wi.bits_per_sample = info.bits_per_sample;
             wi.channels = info.channels;
             enc.setAudioInfo(wi);
             // fill header with data
             enc.writeHeader(&mp);
+            // make sure that the length is 44
+            assert(header.length() == 44);
 
             return &header;
         }
 
-        // Allocate memory for 44 bytes header
-        tinyhttp::StrExt header{44};
+        // Dynamic memory
+            tinyhttp::StrExt header;
 
 };
 

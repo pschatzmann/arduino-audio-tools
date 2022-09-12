@@ -12,8 +12,8 @@
 #include "AudioLibs/AudioServerEx.h"
 
 // WIFI
-const char *ssid = "ssid";
-const char *password = "password";
+const char *ssid = "Phil Schatzmann";
+const char *password = "sabrina01";
 AudioWAVServerEx server;
 // Sound Generation
 const int sample_rate = 10000;
@@ -25,6 +25,7 @@ GeneratedSoundStream<int16_t> in(sineWave);     // Stream generated from sine wa
 void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial,AudioLogger::Info);
+  HttpLogger.setLevel(tinyhttp::Info);
 
   // start server
   auto cfg = server.defaultConfig();

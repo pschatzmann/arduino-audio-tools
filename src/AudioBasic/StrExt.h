@@ -99,6 +99,13 @@ class StrExt : public Str {
             grow(newLen);
         }
     
+        // make sure that the max size is allocated
+        void allocate(int len=-1) {
+            int new_size = len<0?maxlen:len;
+            grow(new_size);
+            this->len = new_size;
+        }
+
     protected:
 
         bool grow(int newMaxLen){
