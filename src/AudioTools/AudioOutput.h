@@ -671,30 +671,38 @@ class MemoryPrint : public AudioPrint {
         MemoryPrint(uint8_t*start, int len){
             p_start = start;
             p_next = start;
-            size = len;
+            max_size = len;
+            if (p_next==nullptr){
+                LOGE("start must not be null");
+            }
         }
 
         size_t write(const uint8_t *buffer, size_t len) override {
-            if (pos+len<=size){
+            if (p_next==nullptr) return 0;
+            if (pos+len<=max_size){
                 memcpy(p_next, buffer,len);
                 pos+=len;
                 p_next+=len;
                 return len;
             } else {
-                LOGE("Buffer too small");
+                LOGE("Buffer too small: pos:%d, size: %lu ", pos, max_size);
                 return 0;
             }
         }
 
         int availableForWrite() override {
-            return size-pos;
+            return max_size-pos;
+        }
+
+        int size() {
+            return max_size;
         }
         
     protected:
-        int pos;
-        uint8_t* p_start;
-        uint8_t *p_next;
-        size_t size;
+        int pos=0;
+        uint8_t* p_start=nullptr;
+        uint8_t *p_next=nullptr;
+        size_t max_size;
 
 };
 

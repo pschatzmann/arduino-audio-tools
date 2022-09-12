@@ -1,6 +1,8 @@
 #pragma once
 
 #include "AudioConfig.h"
+#include "AudioBasic/Str.h"
+#include "AudioBasic/Debouncer.h"
 #include "AudioTools/AudioTypes.h"
 #include "AudioTools/Buffers.h"
 #include "AudioTools/Converter.h"
@@ -8,7 +10,6 @@
 #include "AudioTools/AudioStreams.h"
 #include "AudioTools/AudioCopy.h"
 #include "AudioHttp/AudioHttp.h"
-#include "AudioBasic/Str.h"
 #include "AudioTools/AudioSource.h"
 // support for legacy USE_SDFAT
 #ifdef USE_SDFAT
@@ -17,46 +18,6 @@
 
 
 namespace audio_tools {
-
-
-    /**
-     * @brief Helper class to debounce user input from a push button
-     *
-     */
-    class Debouncer {
-
-    public:
-        Debouncer(uint16_t timeoutMs = 5000, void* ref = nullptr) {
-            setDebounceTimeout(timeoutMs);
-            p_ref = ref;
-        }
-
-        void setDebounceTimeout(uint16_t timeoutMs) {
-            ms = timeoutMs;
-        }
-
-        /// Prevents that the same method is executed multiple times within the indicated time limit
-        bool debounce(void(*cb)(void* ref) = nullptr) {
-            bool result = false;
-            if (millis() > debounce_ms) {
-                LOGI("accpted");
-                if (cb != nullptr) cb(p_ref);
-                // new time limit
-                debounce_ms = millis() + ms;
-                result = true;
-            }
-            else {
-                LOGI("rejected");
-            }
-            return result;
-        }
-
-    protected:
-        unsigned long debounce_ms = 0; // Debounce sensitive touch
-        uint16_t ms;
-        void* p_ref = nullptr;
-
-    };
 
     /**
      * @brief Implements a simple audio player which supports the following commands:
@@ -331,6 +292,11 @@ namespace audio_tools {
         virtual void copy() {
             if (active) {
                 LOGD(LOG_METHOD);
+                if (p_final_print!=nullptr && p_final_print->availableForWrite()==0){
+                    // not ready to do anything - so we wait a bit
+                    delay(100);
+                    return;
+                }
                 // handle sound
                 if (copier.copy() || timeout == 0) {
                     // reset timeout

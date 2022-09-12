@@ -29,6 +29,7 @@ AudioPlayer player(source, out, *new CopyDecoder());
 void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  HttpLogger.setLevel(tinyhttp::Warning);
 
   // setup SPI for SD card
   SPI.begin(PIN_AUDIO_KIT_SD_CARD_CLK, PIN_AUDIO_KIT_SD_CARD_MISO, PIN_AUDIO_KIT_SD_CARD_MOSI, PIN_AUDIO_KIT_SD_CARD_CS);

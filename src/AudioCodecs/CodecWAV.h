@@ -22,13 +22,13 @@ struct WAVAudioInfo : AudioBaseInfo {
         bits_per_sample=from.bits_per_sample; 
     }
 
-    int format;
-    int byte_rate;
-    int block_align;
-    bool is_streamed;
-    bool is_valid;
-    uint32_t data_length;
-    uint32_t file_size;
+    int format=WAV_FORMAT_PCM;
+    int byte_rate=0;
+    int block_align=0;
+    bool is_streamed=true;
+    bool is_valid=false;
+    uint32_t data_length=0;
+    uint32_t file_size=0;
 };
 
 const char* wav_mime = "audio/wav";
