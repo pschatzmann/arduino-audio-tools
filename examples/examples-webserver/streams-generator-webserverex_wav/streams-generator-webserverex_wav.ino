@@ -12,8 +12,8 @@
 #include "AudioLibs/AudioServerEx.h"
 
 // WIFI
-const char *ssid = "Phil Schatzmann";
-const char *password = "sabrina01";
+const char *ssid = "SSID";
+const char *password = "password";
 const int sample_rate = 10000;
 const int channels = 1;
 
@@ -44,5 +44,6 @@ void setup() {
 
 // copy the data
 void loop() {
-  copier.copy();
+  copier.copy(); // copy data to server
+  server.copy(); // from server to client
 }

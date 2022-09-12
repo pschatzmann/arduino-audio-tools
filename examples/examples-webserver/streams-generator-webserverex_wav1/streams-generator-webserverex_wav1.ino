@@ -12,8 +12,8 @@
 #include "AudioLibs/AudioServerEx.h"
 
 // WIFI
-const char *ssid = "Phil Schatzmann";
-const char *password = "sabrina01";
+const char *ssid = "SSID";
+const char *password = "password";
 const int sample_rate = 10000;
 const int channels = 1;
 

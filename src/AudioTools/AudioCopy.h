@@ -91,13 +91,20 @@ class StreamCopyT {
             LOGD(LOG_METHOD);
             // if not initialized we do nothing
             if (from==nullptr || to==nullptr) return 0;
-            
+
+            // If we try to write to a server we might not have any output destination yet
+            int to_write = to->availableForWrite();
+            if (to_write<=0){
+                delay(500);
+                return 0;
+            }
+
+
             size_t result = 0;
             size_t delayCount = 0;
             size_t len = available();
             size_t bytes_to_read = buffer_size;
             size_t bytes_read = 0; 
-            int to_write = to->availableForWrite();
 
             if (len>0){
                 bytes_to_read = min(len, static_cast<size_t>(buffer_size));
