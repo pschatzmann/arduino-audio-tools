@@ -20,7 +20,6 @@ const int channels = 1;
 SineWaveGenerator<int16_t> sineWave;            // Subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> in(sineWave);     // Stream generated from sine wave
 AudioWAVServerEx server;
-StreamCopy copier(server, in);  // copy mic to tfl
 
 
 void setup() {
@@ -34,6 +33,7 @@ void setup() {
   cfg.channels = channels;
   cfg.ssid = ssid;
   cfg.password = password; 
+  cfg.input = &in; // Define input
   server.begin(cfg);
 
   // start generation of sound
@@ -44,5 +44,5 @@ void setup() {
 
 // copy the data
 void loop() {
-  copier.copy();
+  server.copy();
 }
