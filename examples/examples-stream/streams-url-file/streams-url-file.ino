@@ -44,8 +44,9 @@ void setup(void) {
 
     // copy file
     file = SD.open("/audio-8000.raw", FILE_WRITE);
+    file.seek(0); // overwirte from beginning
     copier.begin(file, url);
-    copier.copyAll(retryCount);
+    copier.copyAll();
     file.close();
 
     file = SD.open("/audio-8000.raw");
