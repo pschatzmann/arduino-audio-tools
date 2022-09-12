@@ -58,6 +58,7 @@ As “Audio Sinks” we will have e.g:
 - Tensorflow Lite - [TfLiteAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_tf_lite_audio_stream.html)
 - Converting Streams - [VolumeStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_volume_stream.html), [ResampleStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_resample_stream.html), [FormatConverterStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_format_converter_stream.html), [NumberFormatConverterStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_number_format_converter_stream.html), [ChannelFormatConverterStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_channel_format_converter_stream.html), [ConvertedStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_converted_stream.html)
 - Communication - [ESPNowStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_e_s_p_now_stream.html), [UDPStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_u_d_p_stream.html)
+- Multiuser-Webserver for PCM Output - [AudioWAVServerEx](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_audio_w_a_v_server_ex.html)
 - Any other Arduino Classes implementing Streams: SD, Ethernet etc
 
 ### Examples
@@ -137,8 +138,8 @@ Dependent on the example you might need to install some of the following librari
 - [rp2040-i2s](https://github.com/pschatzmann/rp2040-i2s) I2S library for MBED RP2040
 - [SdFat Library](https://github.com/greiman/SdFat) to read and write files supporting SD cards with FAT16/FAT32 and exFAT
 - [SD Library](https://www.arduino.cc/en/reference/SD) to read and write files supporting SD cards with FAT16 and FAT32
+- [TinyHttp](https://github.com/pschatzmann/TinyHttp) a http server that also supports audio for multiple users
 
-After installing a library, you might need to activate it's usage in the ```AudioConfig.h``` file!
 
 ## Show and Tell
 
