@@ -11,7 +11,7 @@
 #include "AudioCodecs/CodecMP3LAME.h"
 #include "AudioLibs/AudioKit.h"
 
-AudioEncoderServer server(new MP3EncoderLAME(),"Phil Schatzmann","sabrina01");  
+AudioEncoderServer server(new MP3EncoderLAME(),"SSID","password");  
 AudioKitStream i2sStream;    // Access I2S as stream
 
 void setup(){
