@@ -24,7 +24,7 @@ class MyFirstInstrument : public Instrmnt  {
     }
 
     float tick() {
-       return echo.tick(wave.tick())*adsr.tick();
+       return echo.tick(wave.tick()) * adsr.tick();
     }
 
   protected:
