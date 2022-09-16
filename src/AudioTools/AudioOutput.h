@@ -56,7 +56,7 @@ class AudioPrint : public Print, public AudioBaseInfoDependent, public AudioBase
             return false;
         }
 
-        virtual AudioBaseInfo audioInfo() {
+        virtual AudioBaseInfo audioInfo() override {
             return cfg;
         }
 

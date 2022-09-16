@@ -63,6 +63,7 @@ class AudioBaseInfoDependent {
     public:
       virtual ~AudioBaseInfoDependent(){}
       virtual void setAudioInfo(AudioBaseInfo info)=0;
+      virtual AudioBaseInfo audioInfo() = 0;
       virtual bool validate(AudioBaseInfo &info){
         return true;
       }

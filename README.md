@@ -95,7 +95,7 @@ void loop(){
 
 ```
 Each stream has it's own [configuration object](https://pschatzmann.github.io/arduino-audio-tools/html/structaudio__tools_1_1_audio_base_info.html) that should be passed to the begin method. The defaultConfig() method is providing a default proposal which will usually "just work". Please consult 
-the class documentation for the available configuration parameters. You can also easily adapt any provided examples: If you e.g. replace the I2SStream with the AnalogAudioStream class, you will get analog instead of digital output.
+the class documentation for the available configuration parameters. You can also __easily adapt__ any provided examples: If you e.g. replace the I2SStream with the AnalogAudioStream class, you will get analog instead of digital output.
 
 Further examples can be found in the [Wiki](https://github.com/pschatzmann/arduino-audio-tools/wiki/Examples). 
 
