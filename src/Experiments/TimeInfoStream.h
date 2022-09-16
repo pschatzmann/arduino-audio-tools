@@ -27,10 +27,12 @@ class TimeInfoStream : public AudioStreamX {
             end_time = endSeconds;
         }
 
+        /// Defines the start time in seconds. The audio before the start time will be skipped
         void setStartTime(long startSeconds){
             start_time = startSeconds;
         }
 
+        /// Defines (an optional) the end time in seconds. After the end time no audio is played and available() will return 0
         void setEndTime(long endSeconds){
             end_time = endSeconds;
         }
@@ -63,18 +65,30 @@ class TimeInfoStream : public AudioStreamX {
             return isActive();
         }
 
+        /// Provides only data for the indicated start and end time
         size_t readBytes(uint8_t *buffer, size_t length) override { 
             if (p_stream==nullptr) return 0;
             calculateTime(length); 
-            return isPlaying()?p_stream->readBytes(buffer, length):length; 
+            size_t result = p_stream->readBytes(buffer, length);
+            return isPlaying()?result : 0; 
         }
 
+        /// Plays only data for the indiated start and end time
         size_t write(const uint8_t *buffer, size_t length) override{ 
             calculateTime(length); 
             return isPlaying()?p_print->write(buffer, length):length;  
         }
 
-        int available() override { return p_stream!=nullptr ? p_stream->available():0; };
+        /// Provides the available bytes until the end time has reached 
+        int available() override { 
+            if (p_stream==nullptr) return 0;
+            return isActive() ? p_stream->available() : 0; 
+        }
+
+        void setAudioInfo(AudioBaseInfo info) override {
+            p_info->setAudioInfo(info);
+        }
+
         int availableForWrite() override { return p_print->availableForWrite(); }
 
     protected:    
