@@ -67,6 +67,7 @@ class SBCDecoder : public AudioDecoder {
     int count = length;
     if (is_first) {
       framelen = firstWrite(data, length);
+      LOGI("framelen: %d", framelen);
       // check if we have a valid frame length
       if (isValidFrameLen(framelen)) {
         start = start + framelen;
