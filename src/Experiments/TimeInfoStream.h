@@ -6,6 +6,8 @@ namespace audio_tools {
 
 /**
  * @brief Wrapper class that can define a start and (an optional) stop time
+ * Usually it is used to wrap an Audio Sink (e.g. I2SStream), but wrapping an Audio Source is
+ * supported as well.
  * Only wrap classes which represent PCM data!
  * @author Phil Schatzmann
  * @copyright GPLv3
