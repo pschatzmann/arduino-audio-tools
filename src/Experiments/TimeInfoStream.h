@@ -69,9 +69,17 @@ class TimeInfoStream : public AudioStreamX {
 
         /// Provides only data for the indicated start and end time
         size_t readBytes(uint8_t *buffer, size_t length) override { 
+            // if reading is not supported we stop
             if (p_stream==nullptr) return 0;
-            size_t result = p_stream->readBytes(buffer, length);
-            calculateTime(result); 
+            // if we are past the end we stop
+            if (!isActive()) return 0;
+            // read the data now
+            size_t result=0;
+            do {
+                result = p_stream->readBytes(buffer, length);
+                calculateTime(result); 
+                // ignore data before start time
+            } while(result>0 && current_time<start_time);
             return isPlaying()?result : 0; 
         }
 
