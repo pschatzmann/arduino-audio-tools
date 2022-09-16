@@ -67,7 +67,8 @@ class TimeInfoStream : public AudioStreamX {
             return isActive();
         }
 
-        /// Provides only data for the indicated start and end time
+        /// Provides only data for the indicated start and end time. Only supported for 
+        /// data which does not contain any heder information: so PCM, mp3 should work!
         size_t readBytes(uint8_t *buffer, size_t length) override { 
             // if reading is not supported we stop
             if (p_stream==nullptr) return 0;
@@ -101,7 +102,8 @@ class TimeInfoStream : public AudioStreamX {
 
         int availableForWrite() override { return p_print->availableForWrite(); }
 
-        /// Experimental: if used on mp3 you can set the ratio e.g. to 11
+        /// Experimental: if used on mp3 you can set the compression ratio e.g. to 11 which will
+        /// be used to approximate the time
         void setCompressionRatio(float ratio){
             compression_ratio = ratio;
         }
