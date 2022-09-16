@@ -62,7 +62,7 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
 
   operator bool() { return available() > 0; }
 
-  virtual AudioBaseInfo audioInfo() {
+  virtual AudioBaseInfo audioInfo() override {
     return info;
   }
 
