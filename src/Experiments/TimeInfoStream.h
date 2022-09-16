@@ -70,8 +70,8 @@ class TimeInfoStream : public AudioStreamX {
         /// Provides only data for the indicated start and end time
         size_t readBytes(uint8_t *buffer, size_t length) override { 
             if (p_stream==nullptr) return 0;
-            calculateTime(length); 
             size_t result = p_stream->readBytes(buffer, length);
+            calculateTime(result); 
             return isPlaying()?result : 0; 
         }
 
@@ -93,6 +93,11 @@ class TimeInfoStream : public AudioStreamX {
 
         int availableForWrite() override { return p_print->availableForWrite(); }
 
+        /// Experimental: if used on mp3 you can set the ratio e.g. to 11
+        void setCompressionRatio(float ratio){
+            compression_ratio = ratio;
+        }
+
     protected:    
         Stream *p_stream=nullptr;
         Print *p_print=nullptr;
@@ -101,6 +106,7 @@ class TimeInfoStream : public AudioStreamX {
         long end_time = -1;
         double current_time = 0; 
         double bytes_per_second = -1.0;
+        float compression_ratio = 1.0;
 
         void calculateTime(int bytes){
             if (bytes_per_second<0.0){
@@ -109,7 +115,7 @@ class TimeInfoStream : public AudioStreamX {
                 int bytes_per_sample = p_info->audioInfo().bits_per_sample / 8;
                 bytes_per_second =  sample_rate * channels * bytes_per_sample;
             }
-            current_time = static_cast<double>(bytes) / bytes_per_second;
+            current_time = (static_cast<double>(bytes) / bytes_per_second) * compression_ratio;
         }
 
 };
