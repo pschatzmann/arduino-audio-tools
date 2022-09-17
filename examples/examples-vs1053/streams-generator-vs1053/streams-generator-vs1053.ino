@@ -40,7 +40,10 @@ void setup(){
   //cfg.dcs_pin = VS1053_DCS;
   //cfg.dreq_pin = VS1053_DREQ;
   //cfg.reset_pin = VS1053_RESET;
-  out.begin(cfg);
+  if (!out.begin(cfg)){
+      Serial.println("SPI Error");
+      stop();
+  }
 
 }
 

@@ -201,6 +201,10 @@ public:
         return log(freq/440.0)/log(2) * 12.0 + 69.0;
     }
 
+    float stkNoteToFrequency(int noteNumber){
+        return  220.0f * pow( 2.0f, (noteNumber - 57.0f) / 12.0f );
+    }
+
 protected:
 
     uint16_t notes[9][12] = {

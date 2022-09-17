@@ -92,7 +92,7 @@ class I2SConfig : public AudioBaseInfo {
 #endif
 
     void logInfo() {
-      LOGI("rx/tx mode: %s", rx_tx_mode == TX_MODE ? "TX":"RX");
+      LOGI("rx/tx mode: %s", RxTxModeNames[rx_tx_mode]);
       LOGI("port_no: %d", port_no);
       LOGI("is_master: %s", is_master ? "Master":"Slave");
       LOGI("sample rate: %d", sample_rate);

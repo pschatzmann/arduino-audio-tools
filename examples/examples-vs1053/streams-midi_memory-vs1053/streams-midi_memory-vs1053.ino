@@ -24,6 +24,10 @@ void setup(){
 
     auto config = out.defaultConfig(TX_MODE);
     config.is_encoded_data = true; // vs1053 is accepting encoded midi data
+  //config.cs_pin = VS1053_CS; 
+  //config.dcs_pin = VS1053_DCS;
+  //config.dreq_pin = VS1053_DREQ;
+  //config.reset_pin = VS1053_RESET;
     out.begin(config);
 }
 
