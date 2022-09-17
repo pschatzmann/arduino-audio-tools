@@ -327,7 +327,7 @@ protected:
     bool beginTx() {
         LOGI(LOG_METHOD);
         p_out->begin(cfg);      
-        p_vs1053->begin();
+        bool result = p_vs1053->begin();
         p_vs1053->startSong();
         p_vs1053->switchToMp3Mode(); // optional, some boards require this    
         if (p_vs1053->getChipVersion() == 4) { // Only perform an update if we really are using a VS1053, not. eg. VS1003
@@ -335,7 +335,7 @@ protected:
         }
         delay(500);
         setVolume(VS1053_DEFAULT_VOLUME);   
-        return true;
+        return result;
     }
 
 #if VS1053_EXT
@@ -346,17 +346,16 @@ protected:
         rec.setSampleRate(cfg.sample_rate);
         rec.setChannels(cfg.channels);
         rec.setInput(cfg.input_device);
-        p_vs1053->beginInput(rec);
-        return true;
+        return p_vs1053->beginInput(rec);
     }
 
     bool beginMidi(){
         LOGI(LOG_METHOD);
         p_out->begin(cfg);      
-        p_vs1053->beginMidi();
+        bool result = p_vs1053->beginMidi();
         delay(500);
         setVolume(VS1053_DEFAULT_VOLUME);   
-        return true;
+        return result;
     }
 
 #endif

@@ -19,6 +19,10 @@ class AbstractURLStream : public AudioStream  {
         virtual bool setMetadataCallback(void (*fn)(MetaDataType info, const char* str, int len)) {
             return false;
         }
+        /// Writes are not supported
+        int availableForWrite() {
+            return 0;
+        }
 
 };
 

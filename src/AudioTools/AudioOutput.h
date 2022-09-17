@@ -154,6 +154,10 @@ class CsvStream : public AudioPrint {
             return len;
         }
 
+        int availableForWrite() {
+            return 1024;
+        }
+
     protected:
         T *data_ptr;
         Print *out_ptr = &Serial;

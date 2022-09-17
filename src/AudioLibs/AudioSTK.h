@@ -78,7 +78,9 @@ class STKGenerator : public SoundGenerator<T> {
 template <class StkCls>
 class STKStream : public GeneratedSoundStream<int16_t> {
     public:
-        STKStream() = default;
+        STKStream() {
+            GeneratedSoundStream<int16_t>::setInput(generator);          
+        };
 
         STKStream(StkCls &instrument){
             generator.setInput(instrument);

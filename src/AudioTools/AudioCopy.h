@@ -94,10 +94,10 @@ class StreamCopyT {
 
             // // If we try to write to a server we might not have any output destination yet
             int to_write = to->availableForWrite();
-            // if (to_write<=0){
-            //     delay(500);
-            //     return 0;
-            // }
+            if (to_write==0){
+                 delay(500);
+                 return 0;
+            }
 
 
             size_t result = 0;
