@@ -21,7 +21,7 @@
 #include "AudioTools/AudioLogger.h"
 #include "AudioTools/AudioStreams.h"
 #include "AudioTools/AudioStreamsConverter.h"
-#include "AudioTools/AudioOutput.h"
+#include "AudioTools/AudioPrint.h"
 #include "AudioTools/Resample.h"
 #include "AudioTools/AudioCopy.h"
 #include "AudioMetaData/MetaData.h"

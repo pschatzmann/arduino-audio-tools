@@ -92,7 +92,7 @@ class StreamCopyT {
             // if not initialized we do nothing
             if (from==nullptr || to==nullptr) return 0;
 
-            // // If we try to write to a server we might not have any output destination yet
+            // E.g. if we try to write to a server we might not have any output destination yet
             int to_write = to->availableForWrite();
             if (to_write==0){
                  delay(500);

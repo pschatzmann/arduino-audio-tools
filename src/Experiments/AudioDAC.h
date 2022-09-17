@@ -3,7 +3,7 @@
 #include "AudioTools/AudioLogger.h"
 #include "AudioTools/Buffers.h"
 #include "AudioTimer/AudioTimer.h"
-#include "AudioTools/AudioOutput.h"
+#include "AudioTools/AudioPrint.h"
 
 namespace audio_tools {
 
