@@ -198,6 +198,10 @@ namespace audio_tools {
             if (p_final_notify != nullptr) p_final_notify->setAudioInfo(info);
         };
 
+        virtual AudioBaseInfo audioInfo() override {
+            return volume_out.audioInfo();
+        }
+
         /// starts / resumes the playing of a matching song
         virtual void play() {
             LOGD(LOG_METHOD);
