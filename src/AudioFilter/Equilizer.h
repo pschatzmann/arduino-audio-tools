@@ -79,8 +79,8 @@ class Equilizer3Bands : public AudioStreamX {
                 memset(&state[j],0,sizeof(EQSTATE));
 
                 // Calculate filter cutoff frequencies
-                state[j].lf = 2 * sin(M_PI * ((float)p_cfg->freq_low / (float)p_cfg->sample_rate));
-                state[j].hf = 2 * sin(M_PI * ((float)p_cfg->freq_high / (float)p_cfg->sample_rate));
+                state[j].lf = 2 * sin((float)M_PI * ((float)p_cfg->freq_low / (float)p_cfg->sample_rate));
+                state[j].hf = 2 * sin((float)M_PI * ((float)p_cfg->freq_high / (float)p_cfg->sample_rate));
             }
             return true;
         }
@@ -170,7 +170,7 @@ class Equilizer3Bands : public AudioStreamX {
 
         /// convert float in the range -1 to 1 to a int16 and clip the values that are out of range
         inline int16_t toInt16(float v){
-            float result = v * 32767.0;
+            float result = v * 32767.0f;
             // clip result
             if (result>32767){
                 result = 32767;
@@ -182,7 +182,7 @@ class Equilizer3Bands : public AudioStreamX {
 
         /// convert float in the range -1 to 1 to a int16 and clip the values that are out of range
         inline float toFloat(int16_t v){
-            return  static_cast<float>(v) / 32767.0;
+            return  static_cast<float>(v) / 32767.0f;
         }
 
         // calculates a single sample using the indicated state 

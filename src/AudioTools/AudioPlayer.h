@@ -267,8 +267,8 @@ namespace audio_tools {
 
         /// sets the volume - values need to be between 0.0 and 1.0
         virtual void setVolume(float volume) {
-            if (volume >= 0 && volume <= 1.0) {
-                if (abs(volume - current_volume) > 0.01) {
+            if (volume >= 0.0f && volume <= 1.0f) {
+                if (abs(volume - current_volume) > 0.01f) {
                     LOGI("setVolume(%f)", volume);
                     volume_out.setVolume(volume);
                     current_volume = volume;

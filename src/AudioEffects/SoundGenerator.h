@@ -630,7 +630,7 @@ class SineFromTable  : public SoundGenerator<T> {
 
         float interpolate(float angle){
             bool positive = (angle<=180);
-            float angle_positive = positive ? angle : angle - 180.0;
+            float angle_positive = positive ? angle : angle - 180.0f;
             int angle_int1 = angle_positive;
             int angle_int2 = angle_int1+1;
             float v1 = values[angle_int1];
@@ -649,7 +649,7 @@ class SineFromTable  : public SoundGenerator<T> {
             if (abs(diff) > max_amplitude_step){
                 diff = (diff<0) ? -max_amplitude_step : max_amplitude_step;
             } 
-            if (abs(diff)>=1.0){
+            if (abs(diff)>=1.0f){
                 amplitude += diff;
             }
         }

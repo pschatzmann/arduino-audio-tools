@@ -1134,7 +1134,7 @@ class VolumeStream : public AudioStreamX {
         int max_channels=0;
 
         void setup(float vol) {
-            is_active = vol!=1.0;
+            is_active = vol!=1.0f;
             if (info.channels>max_channels){
               cleanup();
             }
@@ -1158,11 +1158,11 @@ class VolumeStream : public AudioStreamX {
         }
 
         float volumeValue(float vol){
-            if (!info.allow_boost && vol>1.0) vol = 1.0;
-            if (vol<0.0) vol = 0.0;
+            if (!info.allow_boost && vol>1.0f) vol = 1.0;
+            if (vol<0.0f) vol = 0.0;
 
             // round to 2 digits
-            float value = (int)(vol * 100 + .5);
+            float value = (int)(vol * 100 + .5f);
             float volume_value = (float)value / 100;
             return volume_value;
         }

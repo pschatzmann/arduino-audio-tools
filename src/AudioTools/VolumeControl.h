@@ -22,8 +22,8 @@ class VolumeControl {
         /// limits the output to the range of 0 to 1.0
         virtual float limit(float in){
             float result = in;
-            if (result<0) result = 0;
-            if (result>1.0) result = 1;
+            if (result<0.0f) result = 0;
+            if (result>1.0f) result = 1;
             return result;
         }
 
@@ -50,8 +50,8 @@ class CachedVolumeControl : public VolumeControl {
 
         /// determines a multiplication factor (0.0 to 1.0) from an input value (0.0 to 1.0).
         virtual float getVolumeFactor(float volume) {
-            if (p_vc==nullptr) return 1.0; // prevent NPE
-            if (abs(volume-in)<0.01){
+            if (p_vc==nullptr) return 1.0f; // prevent NPE
+            if (abs(volume-in)<0.01f){
                 return out;
             } else {
                 in = volume;
@@ -83,7 +83,7 @@ class LogarithmicVolumeControl : public VolumeControl {
         // provides a factor in the range of 0.0 to 1.0
         virtual float getVolumeFactor(float input) {
             float b = pow(((1/ym)-1), 2);
-            float a = 1.0 / (b - 1.0);
+            float a = 1.0f / (b - 1.0f);
             float volumeFactor = pow(b,input) * a - a;
             return limit(volumeFactor);
         }

@@ -417,7 +417,7 @@ class ResampleParameterEstimator {
                     fact = tmp_fact;
                     div = tmp_div;
                     diff = tmp_diff;
-                    if (diff==0.0){
+                    if (diff==0.0f){
                         break; 
                     }
                 }
