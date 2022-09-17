@@ -339,7 +339,7 @@ class Delay : public AudioEffect  {
             // add input and delay to the buffer
             p_history->write(input+delayValue);
             // mix input with result
-            return (delayValue * delayLine->getDepth()) + (input * (1.0 - delayLine->getDepth()));
+            return (delayValue * delayLine->getDepth()) + (input * (1.0f - delayLine->getDepth()));
         }
 
         Delay *clone() {

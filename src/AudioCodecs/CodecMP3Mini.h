@@ -43,8 +43,8 @@ class MP3DecoderMini : public AudioDecoder {
   /// Starts the processing
   void begin() {
     LOGD(LOG_METHOD);
-    esp_task_wdt_delete(nullptr);
-    mp3dec_init(&mp3d);
+    //esp_task_wdt_delete(nullptr);
+    ::mp3dec_init(&mp3d);
     buffer.resize(buffer_size);
     pcm.resize(MINIMP3_MAX_SAMPLES_PER_FRAME);
     buffer_pos = 0;
@@ -110,13 +110,13 @@ class MP3DecoderMini : public AudioDecoder {
 
   /// Process single bytes so that we can decode a full frame when it is available
   void decode(int write_len) {
-    LOGD("decode: %d ", buffer_pos);
+    LOGD("decode: %zd ", buffer_pos);
     int open = buffer_pos;
     int processed = 0;
     int samples;
     do {
       // decode data
-      samples = mp3dec_decode_frame(&mp3d, buffer.data()+processed, open,
+      samples = ::mp3dec_decode_frame(&mp3d, buffer.data()+processed, open,
                                         pcm.data(), &mp3dec_info);
       LOGD("frame_offset: %d - frame_bytes: %d -> samples %d", mp3dec_info.frame_offset, mp3dec_info.frame_bytes, samples);
       open -= mp3dec_info.frame_bytes;
@@ -165,9 +165,9 @@ class MP3DecoderMini : public AudioDecoder {
       int i = 0;
       for(; i < num_samples; i++){
           float sample = in[i] * 32768.0f;
-          if (sample >=  32766.5)
+          if (sample >=  32766.5f)
               out[i] = (int16_t) 32767;
-          else if (sample <= -32767.5)
+          else if (sample <= -32767.5f)
               out[i] = (int16_t)-32768;
           else {
               int16_t s = (int16_t)(sample + .5f);

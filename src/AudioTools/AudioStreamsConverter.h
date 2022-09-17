@@ -46,7 +46,7 @@ class ChannelFormatConverterStreamT : public AudioStreamX {
            if (from_channels==to_channels){
               return p_stream->readBytes(data, size);
            }
-           size_t in_bytes = 1.0 / factor * size;
+           size_t in_bytes = 1.0f / factor * size;
            bufferTmp.resize(in_bytes);
            p_stream->readBytes(bufferTmp.data(), in_bytes);
            size_t resultBytes = convert(bufferTmp.data(), in_bytes);
@@ -65,7 +65,7 @@ class ChannelFormatConverterStreamT : public AudioStreamX {
         }
 
         virtual int availableForWrite() override { 
-          return 1.0 / factor * p_print->availableForWrite();
+          return 1.0f / factor * p_print->availableForWrite();
         }
 
   protected:

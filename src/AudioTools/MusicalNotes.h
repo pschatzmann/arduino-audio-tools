@@ -193,12 +193,12 @@ public:
     /// Determine frequency of MIDI note
     float  midiNoteToFrequency(int x) {
         float a = 440; //frequency of A (coomon value is 440Hz)
-        return (a / 32) * pow(2, ((x - 9) / 12.0));
+        return (a / 32) * pow(2, ((x - 9) / 12.0f));
     }
 
     /// Provide MIDI note for frequency
     int frequencyToMidiNote(float freq) {
-        return log(freq/440.0)/log(2) * 12.0 + 69.0;
+        return log(freq/440.0f)/log(2) * 12.0f + 69.0f;
     }
 
     float stkNoteToFrequency(int noteNumber){

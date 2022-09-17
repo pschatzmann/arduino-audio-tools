@@ -97,7 +97,7 @@ class ADSR : public  AbstractParameter  {
         void keyOn(float tgt=0){
             LOGI("%s: %f", LOG_METHOD, tgt);
             state = Attack;
-            this->target = tgt>0 && tgt<=1.0 ? tgt : sustain;
+            this->target = tgt>0.0f && tgt<=1.0f ? tgt : sustain;
             this->act_value = 0;
         }
 
@@ -152,7 +152,7 @@ class ADSR : public  AbstractParameter  {
 
                 case Release:
                     act_value -= release;
-                    if ( act_value <= 0.0 ) {
+                    if ( act_value <= 0.0f ) {
                         act_value = 0.0;
                         state = Idle;
                     }

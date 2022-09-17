@@ -881,7 +881,7 @@ class PoppingSoundRemover : public BaseConverter<T> {
             T first = values[channel];
             for (int j=0;j<sampleCount;j+=channels){
                 T act = values[j];
-                if (first <= 0.0 && act >= 0.0 || first>=0.0 && act <= 0.0){
+                if ((first <= 0.0 && act >= 0.0) || (first>=0.0 && act <= 0.0)){
                     // we found the last transition so we are done
                     break;
                 } else {
@@ -895,7 +895,7 @@ class PoppingSoundRemover : public BaseConverter<T> {
             T last = values[lastPos];
             for (int j=lastPos;j>=0;j-=channels){
                 T act = values[j];
-                if (last <= 0.0 && act >= 0.0 || last>=0.0 && act <= 0.0){
+                if ((last <= 0.0 && act >= 0.0) || (last>=0.0 && act <= 0.0)){
                     // we found the last transition so we are done
                     break;
                 } else {
