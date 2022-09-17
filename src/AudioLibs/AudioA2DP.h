@@ -257,11 +257,16 @@ class A2DPStream : public AudioStream {
         }
        
         virtual int available() {
-            return a2dp_buffer==nullptr ? 0 : a2dp_buffer->available();
+            // only supported in tx mode
+            if (config.mode!=RX_MODE || a2dp_buffer==nullptr ) return 0;
+            return a2dp_buffer->available();
         }
 
         virtual int availableForWrite() {
-            return a2dp_buffer==nullptr ? 0 : a2dp_buffer->availableForWrite();
+            // only supported in tx mode
+            if (config.mode!=TX_MODE || a2dp_buffer==nullptr ) return 0;
+            // return infor from buffer
+            return a2dp_buffer->availableForWrite();
         }
 
         // Define the volme (values between 0.0 and 1.0)

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AudioConfig.h"
-#include "AudioTools/AudioOutput.h"
+#include "AudioTools/AudioPrint.h"
 #include "AudioCodecs/CodecWAV.h"
 #include "HttpServer.h"
 #include "HttpExtensions.h"

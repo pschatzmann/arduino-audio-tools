@@ -66,6 +66,8 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
     return info;
   }
 
+  virtual int availableForWrite() override { return DEFAULT_BUFFER_SIZE; }
+
   virtual void flush() {}
 
  protected:
@@ -90,7 +92,6 @@ class AudioStreamX : public AudioStream {
   virtual size_t write(const uint8_t *buffer, size_t size) override{ return not_supported(0); }
   virtual size_t write(uint8_t) override { return not_supported(0); }
   virtual int available() override { return not_supported(0); };
-  virtual int availableForWrite() override { return DEFAULT_BUFFER_SIZE; }
 
   virtual int read() override { return not_supported(-1); }
   virtual int peek() override { return not_supported(-1); }

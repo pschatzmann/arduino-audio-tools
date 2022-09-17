@@ -3,7 +3,7 @@
 #include "AudioConfig.h"
 #include "AudioTools.h"
 #include "AudioTools/AudioLogger.h"
-#include "AudioTools/AudioOutput.h"
+#include "AudioTools/AudioPrint.h"
 #include "AudioBasic/Collections.h"
 #include "Stream.h"
 

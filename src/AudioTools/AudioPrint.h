@@ -1,4 +1,4 @@
-pw#pragma once
+#pragma once
 #include "Arduino.h"
 #include "AudioConfig.h"
 #include "AudioTools/AudioTypes.h"
@@ -29,7 +29,7 @@ class AudioPrint : public Print, public AudioBaseInfoDependent, public AudioBase
         }
 
         virtual int availableForWrtie() {
-            return 0;
+            return DEFAULT_BUFFER_SIZE;
         }
 
         void flush()  {

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AudioTools/AudioOutput.h"
+#include "AudioTools/AudioPrint.h"
 #include "AudioLibs/FFT/FFTWindows.h"
 
 namespace audio_tools {
