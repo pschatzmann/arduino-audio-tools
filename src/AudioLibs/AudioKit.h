@@ -31,7 +31,7 @@ friend class AudioKitStream;
 
   /// convert to config object needed by HAL
   AudioKitConfig toAudioKitConfig() {
-    LOGD(LOG_METHOD);
+    TRACED();
     AudioKitConfig result;
     result.i2s_num = (i2s_port_t)port_no;
     result.mclk_gpio = (gpio_num_t)masterclock_pin;
@@ -55,7 +55,7 @@ friend class AudioKitStream;
  protected:
   // convert to audio_hal_iface_samples_t
   audio_hal_iface_bits_t toBits() {
-    LOGD(LOG_METHOD);
+    TRACED();
     const static int ia[] = {16, 24, 32};
     const static audio_hal_iface_bits_t oa[] = {AUDIO_HAL_BIT_LENGTH_16BITS,
                                                 AUDIO_HAL_BIT_LENGTH_24BITS,
@@ -72,7 +72,7 @@ friend class AudioKitStream;
 
   /// Convert to audio_hal_iface_samples_t
   audio_hal_iface_samples_t toSampleRate() {
-    LOGD(LOG_METHOD);
+    TRACED();
     const static int ia[] = {8000,  11025, 16000, 22050,
                              24000, 32000, 44100, 48000};
     const static audio_hal_iface_samples_t oa[] = {
@@ -99,7 +99,7 @@ friend class AudioKitStream;
 
   /// Convert to audio_hal_iface_format_t
   audio_hal_iface_format_t toFormat() {
-    LOGD(LOG_METHOD);
+    TRACED();
     const static int ia[] = {I2S_STD_FORMAT,
                              I2S_LSB_FORMAT,
                              I2S_MSB_FORMAT,
@@ -154,11 +154,11 @@ class AudioKitStreamAdapter : public AudioStreamX {
  public:
   AudioKitStreamAdapter(AudioKit *kit) { this->kit = kit; }
   size_t write(const uint8_t *data, size_t len) override {
-//    LOGD(LOG_METHOD);
+//    TRACED();
     return kit->write(data, len);
   }
   size_t readBytes(uint8_t *data, size_t len) override {
-//    LOGD(LOG_METHOD);
+//    TRACED();
     return kit->read(data, len);
   }
 
@@ -178,7 +178,7 @@ class AudioKitStream : public AudioStreamX {
 
   /// Provides the default configuration
   AudioKitStreamConfig defaultConfig(RxTxMode mode = RXTX_MODE) {
-    LOGD(LOG_METHOD);
+    TRACED();
     AudioKitStreamConfig result;
     result.rx_tx_mode = mode;
     return result;
@@ -186,7 +186,7 @@ class AudioKitStream : public AudioStreamX {
 
   /// Starts the processing
   void begin(AudioKitStreamConfig config) {
-    LOGD(LOG_METHOD);
+    TRACED();
     AudioStream::setAudioInfo(config);
     cfg = config;
     cfg.logInfo();
@@ -211,7 +211,7 @@ class AudioKitStream : public AudioStreamX {
 
   /// Stops the processing
   void end() {
-    LOGD(LOG_METHOD);
+    TRACED();
     kit.end();
     is_started = false;
   }
@@ -252,7 +252,7 @@ class AudioKitStream : public AudioStreamX {
   /// Update the audio info with new values: e.g. new sample_rate,
   /// bits_per_samples or channels. 
   virtual void setAudioInfo(AudioBaseInfo info) {
-    LOGI(LOG_METHOD);
+    TRACEI();
 
     if (cfg.sample_rate != info.sample_rate
     && cfg.bits_per_sample == info.bits_per_sample
@@ -322,7 +322,7 @@ class AudioKitStream : public AudioStreamX {
    *
    */
   void processActions() {
-//  LOGD(LOG_METHOD);
+//  TRACED();
       actions.processActions();
 //  delay(1);
     yield();
@@ -337,7 +337,7 @@ class AudioKitStream : public AudioStreamX {
    * @param ref
    */
   void addAction(int pin, void (*action)(bool,int,void*), void* ref=nullptr ) {
-    LOGI(LOG_METHOD);
+    TRACEI();
     // determine logic from config
     AudioActions::ActiveLogic activeLogic = getActionLogic(pin);
     actions.add(pin, action, activeLogic, ref);
@@ -353,7 +353,7 @@ class AudioKitStream : public AudioStreamX {
    * @param ref
    */
   void addAction(int pin, void (*action)(bool,int,void*), AudioActions::ActiveLogic activeLogic, void* ref=nullptr ) {
-    LOGI(LOG_METHOD);
+    TRACEI();
     actions.add(pin, action, activeLogic, ref);
   }
 
@@ -378,7 +378,7 @@ class AudioKitStream : public AudioStreamX {
    *
    */
   static void actionVolumeUp(bool, int, void*) {
-    LOGI(LOG_METHOD);
+    TRACEI();
     pt_AudioKitStream->incrementVolume(+2);
   }
 
@@ -387,7 +387,7 @@ class AudioKitStream : public AudioStreamX {
    *
    */
   static void actionVolumeDown(bool, int, void*) {
-    LOGI(LOG_METHOD);
+    TRACEI();
     pt_AudioKitStream->incrementVolume(-2);
   }
 
@@ -396,7 +396,7 @@ class AudioKitStream : public AudioStreamX {
    *
    */
   static void actionStartStop(bool, int, void*) {
-    LOGI(LOG_METHOD);
+    TRACEI();
     pt_AudioKitStream->active = !pt_AudioKitStream->active;
     pt_AudioKitStream->setActive(pt_AudioKitStream->active);
   }
@@ -406,7 +406,7 @@ class AudioKitStream : public AudioStreamX {
    *
    */
   static void actionStart(bool, int, void*) {
-    LOGI(LOG_METHOD);
+    TRACEI();
     pt_AudioKitStream->active = true;
     pt_AudioKitStream->setActive(pt_AudioKitStream->active);
   }
@@ -416,7 +416,7 @@ class AudioKitStream : public AudioStreamX {
    *
    */
   static void actionStop(bool, int, void*) {
-    LOGI(LOG_METHOD);
+    TRACEI();
     pt_AudioKitStream->active = false;
     pt_AudioKitStream->setActive(pt_AudioKitStream->active);
   }
@@ -587,7 +587,7 @@ class AudioKitStream : public AudioStreamX {
 
   /// Setup the supported default actions
   void setupActions() {
-    LOGI(LOG_METHOD);
+    TRACEI();
     // SPI might have been activated 
     if (!cfg.sd_active){
       LOGW("Deactivating SPI because SD is not active");

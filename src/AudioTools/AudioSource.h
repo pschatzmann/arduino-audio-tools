@@ -72,20 +72,20 @@ public:
     }
 
     AudioSourceCallback(Stream* (*nextStreamCallback)(), void (*onStartCallback)() = nullptr) {
-        LOGD(LOG_METHOD);
+        TRACED();
         this->onStartCallback = onStartCallback;
         this->nextStreamCallback = nextStreamCallback;
     }
 
     /// Reset actual stream and move to root
     virtual void begin() override {
-        LOGD(LOG_METHOD);
+        TRACED();
         if (onStartCallback != nullptr) onStartCallback();
     };
 
     /// Returns next (with positive index) or previous stream (with negative index)
     virtual Stream* nextStream(int offset) override {
-        LOGD(LOG_METHOD);
+        TRACED();
         return nextStreamCallback == nullptr ? nullptr : nextStreamCallback();
     }
 
@@ -143,7 +143,7 @@ class AudioSourceURL : public AudioSource {
 public:
     template<typename T, size_t N>
     AudioSourceURL(AbstractURLStream& urlStream, T(&urlArray)[N], const char* mime, int startPos = 0) {
-        LOGD(LOG_METHOD);
+        TRACED();
         this->actual_stream = &urlStream;
         this->mime = mime;
         this->urlArray = urlArray;
@@ -154,7 +154,7 @@ public:
 
     /// Setup Wifi URL
     virtual void begin() override {
-        LOGD(LOG_METHOD);
+        TRACED();
         this->pos = 0;
     }
 
@@ -225,7 +225,7 @@ public:
 
     // only the ICYStream supports this
     bool setMetadataCallback(void (*fn)(MetaDataType info, const char* str, int len), ID3TypeSelection sel=SELECT_ICY) {
-        LOGI(LOG_METHOD);
+        TRACEI();
         return actual_stream->setMetadataCallback(fn);
     }
 

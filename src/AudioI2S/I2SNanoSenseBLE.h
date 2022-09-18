@@ -160,12 +160,12 @@ class I2SBase {
     }
 
     void setupIRQ() {
-        LOGD(LOG_METHOD);
+        TRACED();
         NVIC_EnableIRQ(I2S_IRQn);      
     }
 
     void setupRxTx(I2SConfig cfg) {
-        LOGD(LOG_METHOD);
+        TRACED();
         if (cfg.rx_tx_mode == TX_MODE) { 
           // Enable transmission
           NRF_I2S->CONFIG.TXEN = (I2S_CONFIG_TXEN_TXEN_Enabled << I2S_CONFIG_TXEN_TXEN_Pos);
@@ -176,7 +176,7 @@ class I2SBase {
     }
 
     void setupClock(I2SConfig cfg){
-        LOGD(LOG_METHOD);
+        TRACED();
         // Enable MCK generator if in master mode
         if (cfg.is_master){
           NRF_I2S->CONFIG.MCKEN = (I2S_CONFIG_MCKEN_MCKEN_Enabled << I2S_CONFIG_MCKEN_MCKEN_Pos);
@@ -201,7 +201,7 @@ class I2SBase {
     }
 
     void setupBitWidth(I2SConfig cfg) {
-        LOGD(LOG_METHOD);
+        TRACED();
         uint16_t swidth = I2S_CONFIG_SWIDTH_SWIDTH_16Bit;
         switch(cfg.bits_per_sample){
           case 8:
@@ -219,7 +219,7 @@ class I2SBase {
     }
 
     void setupMode(I2SConfig cfg){
-        LOGD(LOG_METHOD);
+        TRACED();
         // setup mode
         switch(cfg.i2s_format){
           case I2S_STD_FORMAT:
@@ -241,7 +241,7 @@ class I2SBase {
 
     // setup pins
     void setupPins(I2SConfig cfg){
-        LOGD(LOG_METHOD);
+        TRACED();
         // MCK routed to pin 0
         // if (cfg.is_master){
         //   NRF_I2S->PSEL.MCK = (0 << I2S_PSEL_MCK_PIN_Pos) | (I2S_PSEL_MCK_CONNECT_Connected << I2S_PSEL_MCK_CONNECT_Pos);
@@ -261,7 +261,7 @@ class I2SBase {
 
     // setup initial data pointers
     void setupData(I2SConfig cfg) {
-        LOGD(LOG_METHOD);
+        TRACED();
         NRF_I2S->TXD.PTR = (uint32_t) i2s_buffer.readEnd().address(); // last buffer was processed
         NRF_I2S->RXD.PTR = (uint32_t) i2s_buffer.writeEnd().address(); // last buffer was processed
         NRF_I2S->RXTXD.MAXCNT = i2s_buffer_size;

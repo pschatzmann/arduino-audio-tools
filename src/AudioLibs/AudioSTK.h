@@ -49,7 +49,7 @@ class STKGenerator : public SoundGenerator<T> {
 
         /// Starts the processing
         bool begin(AudioBaseInfo cfg){
-            LOGI(LOG_METHOD);
+            TRACEI();
             cfg.logInfo();
             SoundGenerator<T>::begin(cfg);
             max_value = NumberConverter::maxValue(sizeof(T)*8);

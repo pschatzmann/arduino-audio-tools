@@ -102,7 +102,7 @@ class ADSR : public  AbstractParameter  {
         }
 
         void keyOff(){
-            LOGI(LOG_METHOD);
+            TRACEI();
             if (state!=Idle){
                 state = Release;
                 target = 0;

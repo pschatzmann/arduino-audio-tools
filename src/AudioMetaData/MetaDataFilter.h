@@ -26,13 +26,13 @@ class MetaDataFilter {
 
         /// (Re)starts the processing
         void begin() {
-            LOGD(LOG_METHOD);
+            TRACED();
             start = 0;
         }
 
         /// Writes the data to the decoder 
         size_t write(uint8_t* data, size_t len){
-            LOGD(LOG_METHOD);
+            TRACED();
             if (p_decoder==nullptr) return 0;
             int pos=0; int meta_len=0;
             if (findTag(data, len, pos, meta_len)){

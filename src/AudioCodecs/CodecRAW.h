@@ -20,7 +20,7 @@ class RAWDecoder : public AudioDecoder {
          */
 
         RAWDecoder(){
-            LOGD(LOG_METHOD);
+            TRACED();
         }
 
         /**
@@ -29,7 +29,7 @@ class RAWDecoder : public AudioDecoder {
          * @param out_stream Output Stream to which we write the decoded result
          */
         RAWDecoder(Print &out_stream, bool active=true){
-            LOGD(LOG_METHOD);
+            TRACED();
             p_print = &out_stream;
             this->active = active;
         }
@@ -42,7 +42,7 @@ class RAWDecoder : public AudioDecoder {
          */
 
         RAWDecoder(Print &out_stream, AudioBaseInfoDependent &bi){
-            LOGD(LOG_METHOD);
+            TRACED();
             p_print = &out_stream;
         }
 
@@ -60,7 +60,7 @@ class RAWDecoder : public AudioDecoder {
         }
 
         void begin(AudioBaseInfo info) {
-            LOGD(LOG_METHOD);
+            TRACED();
             cfg = info;
             if (bid!=nullptr){
                 bid->setAudioInfo(cfg);
@@ -69,12 +69,12 @@ class RAWDecoder : public AudioDecoder {
         }
 
         void begin() override {
-            LOGD(LOG_METHOD);
+            TRACED();
             active = true;
         }
 
         void end() override {
-            LOGD(LOG_METHOD);
+            TRACED();
             active = false;
         }
 

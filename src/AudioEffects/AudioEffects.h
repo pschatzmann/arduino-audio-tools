@@ -30,7 +30,7 @@ class AudioEffects : public SoundGenerator<effect_t> {
 
         /// Copy constructor
         AudioEffects(AudioEffects &copy) {
-            LOGI(LOG_METHOD);
+            TRACEI();
             // create a copy of the source and all effects
             p_generator = copy.p_generator;
             for (int j=0;j<copy.size();j++){
@@ -53,7 +53,7 @@ class AudioEffects : public SoundGenerator<effect_t> {
 
         /// Destructor
         virtual ~AudioEffects(){
-            LOGD(LOG_METHOD);
+            TRACED();
             if (owns_generator && p_generator!=nullptr){
                 delete p_generator;
             }
@@ -64,7 +64,7 @@ class AudioEffects : public SoundGenerator<effect_t> {
         
         /// Defines the input source for the raw guitar input
         void setInput(GeneratorT &in){
-            LOGD(LOG_METHOD);
+            TRACED();
             p_generator = &in;
             // automatically activate this object
             AudioBaseInfo info;
@@ -75,13 +75,13 @@ class AudioEffects : public SoundGenerator<effect_t> {
 
         /// Adds an effect object (by reference)
         void addEffect(AudioEffect &effect){
-            LOGD(LOG_METHOD);
+            TRACED();
             effects.push_back(&effect);
         }
 
         /// Adds an effect using a pointer
         void addEffect(AudioEffect *effect){
-            LOGD(LOG_METHOD);
+            TRACED();
             effects.push_back(effect);
             LOGI("addEffect -> Number of effects: %d", size());
         }
@@ -101,7 +101,7 @@ class AudioEffects : public SoundGenerator<effect_t> {
 
         /// deletes all defined effects
         void clear() {
-            LOGD(LOG_METHOD);
+            TRACED();
             effects.clear();
         }
 

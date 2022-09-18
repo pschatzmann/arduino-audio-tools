@@ -40,7 +40,7 @@ class SimpleContainerEncoder : public AudioEncoder {
   void setOutputStream(Print &outStream) { p_codec->setOutputStream(outStream);}
 
   void begin(AudioBaseInfo info) {
-    LOGD(LOG_METHOD);
+    TRACED();
     setAudioInfo(info);
     p_codec->begin();
   }

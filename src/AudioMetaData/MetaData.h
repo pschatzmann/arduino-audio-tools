@@ -27,13 +27,13 @@ class MetaDataPrint : public AudioPrint {
 
     /// Defines the callback
     virtual void setCallback(void (*fn)(MetaDataType info, const char* str, int len)) {
-        LOGD(LOG_METHOD);
+        TRACED();
         callback = fn; 
     }
 
     /// Starts the processing - iceMetaint is determined from the HttpRequest
     virtual void begin(HttpRequest &http) {
-        LOGD(LOG_METHOD);
+        TRACED();
         ICYUrlSetup icySetup;
         int metaInt = icySetup.setup(http);
         icySetup.executeCallback(callback);
@@ -57,7 +57,7 @@ class MetaDataPrint : public AudioPrint {
 
     virtual void end() {
         if (callback!=nullptr && meta != nullptr) {
-            LOGD(LOG_METHOD);
+            TRACED();
             meta->end();
         }
     }

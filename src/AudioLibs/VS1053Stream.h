@@ -72,7 +72,7 @@ public:
     VS1053Stream() = default;
 
     VS1053Config defaultConfig(RxTxMode mode=TX_MODE) {
-        LOGD(LOG_METHOD);
+        TRACED();
         VS1053Config c;
         // recording is rather inefficient so we use a low sample rate as default
         if (mode==RX_MODE){
@@ -98,7 +98,7 @@ public:
 
     /// Starts with the indicated configuration
     bool begin(VS1053Config cfg) {
-        LOGI(LOG_METHOD);
+        TRACEI();
         bool result = true;
         // enfornce encoded data for midi mode
         if (cfg.is_midi){
@@ -171,7 +171,7 @@ public:
 
     /// Stops the processing and releases the memory
     void end(){
-        LOGI(LOG_METHOD);
+        TRACEI();
         if (p_out!=nullptr){
             delete p_out;
             p_out = nullptr;
@@ -200,7 +200,7 @@ public:
 
     /// provides the volume
     float volume() {
-        LOGD(LOG_METHOD);
+        TRACED();
         if (p_vs1053==nullptr) return -1.0;
         return p_vs1053->getVolume()/100.0;;
     }
@@ -217,7 +217,7 @@ public:
     }
     /// Get the currenet balance setting (-1.0..1.0)
     float balance(){
-        LOGD(LOG_METHOD);
+        TRACED();
         if (p_vs1053==nullptr) return -1.0;
         return static_cast<float>(p_vs1053->getBalance())/100.0;
     }
@@ -230,13 +230,13 @@ public:
 
     /// returns the VS1053 object
     VS1053 &getVS1053() {
-        LOGD(LOG_METHOD);
+        TRACED();
         return *p_vs1053;
     }
 
     /// Defines an alternative encoder that will be used (e.g. MP3Encoder). It must be allocated on the heap!
     bool setEncoder(AudioEncoder *enc){
-        LOGI(LOG_METHOD);
+        TRACEI();
         if (p_out!=nullptr){
             logError("setEncoder");
             return false;
@@ -255,13 +255,13 @@ public:
         return result;
     }
     size_t readBytes(uint8_t* data, size_t len) override {
-        LOGD(LOG_METHOD);
+        TRACED();
         return getVS1053().readBytes(data, len);
     }
 
     /// Provides the treble amplitude value
     float treble() {
-        LOGD(LOG_METHOD);
+        TRACED();
         return static_cast<float>(getVS1053().treble())/100.0;
     }
 
@@ -276,7 +276,7 @@ public:
 
     /// Provides the Bass amplitude value 
     float bass() {
-        LOGD(LOG_METHOD);
+        TRACED();
         return static_cast<float>(getVS1053().bass())/100.0;
     }
 
@@ -302,7 +302,7 @@ public:
 
     /// Sends a midi message to the VS1053
     void sendMidiMessage(uint8_t cmd, uint8_t data1, uint8_t data2) {
-        LOGI(LOG_METHOD);
+        TRACEI();
         if (!cfg.is_midi){
             LOGE("start with is_midi=true");
             return;
@@ -325,7 +325,7 @@ protected:
     CopyEncoder copy;  // used when is_encoded_data == true
 
     bool beginTx() {
-        LOGI(LOG_METHOD);
+        TRACEI();
         p_out->begin(cfg);      
         bool result = p_vs1053->begin();
         p_vs1053->startSong();
@@ -341,7 +341,7 @@ protected:
 #if VS1053_EXT
 
     bool beginRx() {
-        LOGI(LOG_METHOD);
+        TRACEI();
         VS1053Recording rec;
         rec.setSampleRate(cfg.sample_rate);
         rec.setChannels(cfg.channels);
@@ -350,7 +350,7 @@ protected:
     }
 
     bool beginMidi(){
-        LOGI(LOG_METHOD);
+        TRACEI();
         p_out->begin(cfg);      
         bool result = p_vs1053->beginMidi();
         delay(500);

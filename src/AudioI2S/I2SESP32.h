@@ -39,7 +39,7 @@ class I2SBase {
 
     /// starts the DAC 
     bool begin(I2SConfig cfg) {
-      LOGD(LOG_METHOD);
+      TRACED();
       this->cfg = cfg;
       switch(cfg.rx_tx_mode){
         case TX_MODE:
@@ -65,7 +65,7 @@ class I2SBase {
 
     /// stops the I2C and unistalls the driver
     void end(){
-        LOGD(LOG_METHOD);
+        TRACED();
         i2s_driver_uninstall(i2s_num);   
         is_started = false; 
     }
@@ -77,12 +77,12 @@ class I2SBase {
 
     /// writes the data to the I2S interface
     size_t writeBytes(const void *src, size_t size_bytes){
-      LOGD(LOG_METHOD);
+      TRACED();
 
       size_t result = 0;   
       if (cfg.channels==2){
         if (i2s_write(i2s_num, src, size_bytes, &result, portMAX_DELAY)!=ESP_OK){
-          LOGE(LOG_METHOD);
+          TRACEE();
         }
         LOGD("i2s_write %d -> %d bytes", size_bytes, result);
       } else {
@@ -95,13 +95,13 @@ class I2SBase {
       size_t result = 0;
       if (cfg.channels==2){
         if (i2s_read(i2s_num, dest, size_bytes, &result, portMAX_DELAY)!=ESP_OK){
-          LOGE(LOG_METHOD);
+          TRACEE();
         }
       } else if (cfg.channels==1){
         // I2S has always 2 channels. We support to reduce it to 1
         uint8_t temp[size_bytes*2];
         if (i2s_read(i2s_num, temp, size_bytes*2, &result, portMAX_DELAY)!=ESP_OK){
-          LOGE(LOG_METHOD);
+          TRACEE();
         }
         // convert to 1 channel
         switch(cfg.bits_per_sample){
@@ -135,7 +135,7 @@ class I2SBase {
 
     /// starts the DAC 
     bool begin(I2SConfig cfg, int txPin, int rxPin) {
-      LOGD(LOG_METHOD);
+      TRACED();
       cfg.logInfo();
       this->cfg = cfg;
       this->i2s_num = (i2s_port_t) cfg.port_no; 
@@ -219,7 +219,7 @@ class I2SBase {
               frame[1]=data[j];
               size_t result_call = 0;   
               if (i2s_write(i2s_num, frame, sizeof(int8_t)*2, &result_call, portMAX_DELAY)!=ESP_OK){
-                LOGE(LOG_METHOD);
+                TRACEE();
               } else {
                 result += result_call;
               }
@@ -234,7 +234,7 @@ class I2SBase {
               frame[1]=data[j];
               size_t result_call = 0;   
               if (i2s_write(i2s_num, frame, sizeof(int16_t)*2, &result_call, portMAX_DELAY)!=ESP_OK){
-                LOGE(LOG_METHOD);
+                TRACEE();
               } else {
                 result += result_call;
               }
@@ -249,7 +249,7 @@ class I2SBase {
               frame[1]=data[j];
               size_t result_call = 0;   
               if (i2s_write(i2s_num, frame, sizeof(int24_t)*2, &result_call, portMAX_DELAY)!=ESP_OK){
-                LOGE(LOG_METHOD);
+                TRACEE();
               } else {
                 result += result_call;
               }
@@ -264,7 +264,7 @@ class I2SBase {
               frame[1]=data[j];
               size_t result_call = 0;   
               if (i2s_write(i2s_num, frame, sizeof(int32_t)*2, &result_call, portMAX_DELAY)!=ESP_OK){
-                LOGE(LOG_METHOD);
+                TRACEE();
               } else {
                 result += result_call;
               }

@@ -46,13 +46,13 @@ class OpusOggDecoder : public OggContainerDecoder {
   }
 
   void begin() override {
-    LOGD(LOG_METHOD);
+    TRACED();
     OggContainerDecoder::begin();
     dec.begin();
   }
 
   void end() override {
-    LOGD(LOG_METHOD);
+    TRACED();
     OggContainerDecoder::begin();
     dec.end();
   }
@@ -99,13 +99,13 @@ class OpusOggEncoder : public OggContainerEncoder {
   }
 
   void begin() override {
-    LOGD(LOG_METHOD);
+    TRACED();
     OggContainerEncoder::begin();
     enc.begin();
   }
 
   void end() override {
-    LOGD(LOG_METHOD);
+    TRACED();
     OggContainerEncoder::begin();
     enc.end();
   }
@@ -145,7 +145,7 @@ class OpusOggEncoder : public OggContainerEncoder {
     if (!writePacket(oh1, OGGZ_FLUSH_AFTER)){
       result = false;
     }
-    LOGD(LOG_METHOD);
+    TRACED();
     return result;
   }
 };

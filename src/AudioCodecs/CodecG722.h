@@ -43,7 +43,7 @@ class G722Decoder : public AudioDecoder {
   }
 
   virtual void begin() {
-    LOGI(LOG_METHOD);
+    TRACEI();
     input_buffer.resize(10);
     result_buffer.resize(40);
 
@@ -60,7 +60,7 @@ class G722Decoder : public AudioDecoder {
   }
 
   virtual void end() {
-    LOGI(LOG_METHOD);
+    TRACEI();
     g722_decoder_destroy(g722_dctx);
     is_active = false;
   }
@@ -141,7 +141,7 @@ class G722Encoder : public AudioEncoder {
   }
 
   void begin() {
-    LOGI(LOG_METHOD);
+    TRACEI();
     if (cfg.channels != 1) {
       LOGW("1 channel expected, was: %d", cfg.channels);
     }
@@ -158,7 +158,7 @@ class G722Encoder : public AudioEncoder {
   }
 
   virtual void end() {
-    LOGI(LOG_METHOD);
+    TRACEI();
     g722_encoder_destroy(g722_ectx);
     is_active = false;
   }

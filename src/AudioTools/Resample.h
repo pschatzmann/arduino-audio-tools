@@ -410,7 +410,7 @@ class ResampleParameterEstimator {
             int limit_max = limits[precision];
             for (int j=0;j<limit_max;j++){
                 int tmp_div = div_array[j];
-                int tmp_fact = rintf(static_cast<float>(to_rate) * tmp_div / from_rate);
+                int tmp_fact = static_cast<float>(to_rate) * tmp_div / from_rate;
                 float tmp_diff = static_cast<float>(to_rate) - (static_cast<float>(from_rate) * tmp_fact / tmp_div);
                 LOGD("div: %d, fact %d -> diff: %f", tmp_div,tmp_fact,tmp_diff);
                 if (abs(tmp_diff)<abs(diff)){

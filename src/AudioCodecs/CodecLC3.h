@@ -51,7 +51,7 @@ class LC3Decoder : public AudioDecoder {
   }
 
   virtual void begin() {
-    LOGI(LOG_METHOD);
+    TRACEI();
     num_frames = lc3_frame_samples(dt_us, info.sample_rate);
     dec_size = lc3_decoder_size(dt_us, info.sample_rate);
 
@@ -83,12 +83,12 @@ class LC3Decoder : public AudioDecoder {
   }
 
   virtual void end() {
-    LOGI(LOG_METHOD);
+    TRACEI();
     active = false;
   }
 
   virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi) {
-    LOGI(LOG_METHOD);
+    TRACEI();
     p_notify = &bi;
   }
 
@@ -202,7 +202,7 @@ class LC3Encoder : public AudioEncoder {
   }
 
   void begin() {
-    LOGI(LOG_METHOD);
+    TRACEI();
     unsigned enc_size = lc3_encoder_size(dt_us, info.sample_rate);
     num_frames = lc3_frame_samples(dt_us, info.sample_rate);
 
@@ -231,7 +231,7 @@ class LC3Encoder : public AudioEncoder {
   }
 
   virtual void end() {
-    LOGI(LOG_METHOD);
+    TRACEI();
     active = false;
   }
 

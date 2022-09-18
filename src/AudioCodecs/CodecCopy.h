@@ -12,9 +12,9 @@ namespace audio_tools {
  */
 class CopyDecoder : public AudioDecoder {
 public:
-  CopyDecoder() { LOGD(LOG_METHOD); }
+  CopyDecoder() { TRACED(); }
 
-  CopyDecoder(Print &out_stream) { LOGD(LOG_METHOD); pt_print=&out_stream; }
+  CopyDecoder(Print &out_stream) { TRACED(); pt_print=&out_stream; }
 
   CopyDecoder(Print &out_stream, AudioBaseInfoDependent &bi) {pt_print=&out_stream;}
 
@@ -48,9 +48,9 @@ protected:
  */
 class CopyEncoder : public AudioEncoder {
 public:
-  CopyEncoder() { LOGD(LOG_METHOD); }
+  CopyEncoder() { TRACED(); }
 
-  CopyEncoder(Print &out_stream) { LOGD(LOG_METHOD); pt_print=&out_stream; }
+  CopyEncoder(Print &out_stream) { TRACED(); pt_print=&out_stream; }
 
   CopyEncoder(Print &out_stream, AudioBaseInfoDependent &bi) {pt_print=&out_stream;}
 

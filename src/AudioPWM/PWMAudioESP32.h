@@ -41,7 +41,7 @@ class PWMAudioStreamESP32 : public PWMAudioStreamBase {
 
         // Ends the output
         virtual void end(){
-            LOGD(LOG_METHOD);
+            TRACED();
             timerAlarmDisable(timer);
             for (int j=0;j<audio_config.channels;j++){
                 ledcDetachPin(pins[j].gpio);
@@ -66,7 +66,7 @@ class PWMAudioStreamESP32 : public PWMAudioStreamBase {
 
         /// Setup LED PWM
         virtual void setupPWM(){
-            LOGD(LOG_METHOD);
+            TRACED();
             // frequency is driven by selected resolution
             uint32_t freq = frequency(audio_config.resolution)*1000;
             audio_config.pwm_frequency = freq;
@@ -101,7 +101,7 @@ class PWMAudioStreamESP32 : public PWMAudioStreamBase {
 
         /// Setup ESP32 timer with callback
         virtual void setupTimer() {
-             LOGD(LOG_METHOD);
+             TRACED();
 
             // Attach timer int at sample rate
             int prescale = 2;

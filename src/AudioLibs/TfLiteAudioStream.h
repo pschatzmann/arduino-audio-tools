@@ -224,7 +224,7 @@ class TfLiteMicroSpeechRecognizeCommands : public TfLiteAbstractRecognizeCommand
 
   /// Setup parameters from config
   bool begin(TfLiteConfig cfg) override {
-    LOGD(LOG_METHOD);
+    TRACED();
     this->cfg = cfg;
     if (cfg.labels == nullptr) {
       LOGE("config.labels not defined");
@@ -240,7 +240,7 @@ class TfLiteMicroSpeechRecognizeCommands : public TfLiteAbstractRecognizeCommand
                                             uint8_t* score,
                                             bool* is_new_command) override {
                                             
-    LOGD(LOG_METHOD);
+    TRACED();
     this->current_time_ms = current_time_ms;
     this->time_since_last_top =  current_time_ms - previous_time_ms;
 
@@ -303,7 +303,7 @@ class TfLiteMicroSpeechRecognizeCommands : public TfLiteAbstractRecognizeCommand
 
       /// Finds the result
       TfLiteStatus evaluate(const char** found_command, uint8_t* result_score, bool* is_new_command) {
-        LOGD(LOG_METHOD);
+        TRACED();
         float totals[categoryCount()]={0};
         int count[categoryCount()]={0};
         // calculate totals
@@ -419,7 +419,7 @@ class TfLiteMicroSpeachWriter : public TfLiteWriter {
 
   /// Call begin before starting the processing
   virtual bool begin(TfLiteAudioStreamBase *parent) {
-    LOGD(LOG_METHOD);
+    TRACED();
     this->parent = parent;
     cfg = parent->config();
     current_time = 0;
@@ -460,7 +460,7 @@ class TfLiteMicroSpeachWriter : public TfLiteWriter {
   }
 
   virtual bool write(int16_t sample) {
-    LOGD(LOG_METHOD);
+    TRACED();
     if (!write1(sample)){
       // determine time
       current_time += cfg.kFeatureSliceStrideMs;
@@ -531,7 +531,7 @@ class TfLiteMicroSpeachWriter : public TfLiteWriter {
   // | data@80ms | --          |  <empty>  |
   // +-----------+             +-----------+
   virtual int8_t* addSlice() {
-    LOGD(LOG_METHOD);
+    TRACED();
     // shift p_feature_data by one slice one one
     memmove(p_feature_data, p_feature_data + cfg.kFeatureSliceSize,
             (cfg.kFeatureSliceCount - 1) * cfg.kFeatureSliceSize);
@@ -609,7 +609,7 @@ class TfLiteMicroSpeachWriter : public TfLiteWriter {
   }
 
   virtual TfLiteStatus initializeMicroFeatures() {
-    LOGD(LOG_METHOD);
+    TRACED();
     config.window.size_ms = cfg.kFeatureSliceDurationMs;
     config.window.step_size_ms = cfg.kFeatureSliceStrideMs;
     config.filterbank.num_channels = cfg.kFeatureSliceSize;
@@ -637,7 +637,7 @@ class TfLiteMicroSpeachWriter : public TfLiteWriter {
                                              int input_size, int8_t* output,
                                              int output_size,
                                              size_t* num_samples_read) {
-    LOGD(LOG_METHOD);
+    TRACED();
     const int16_t* frontend_input = input;
 
     // Apply FFT
@@ -699,7 +699,7 @@ class TfLiteMicroSpeachWriter : public TfLiteWriter {
     if (cfg.respondToCommand != nullptr) {
       cfg.respondToCommand(found_command, score, is_new_command);
     } else {
-      LOGD(LOG_METHOD);
+      TRACED();
       if (is_new_command) {
         char buffer[80];
         sprintf(buffer, "Result: %s, score: %d, is_new: %s", found_command,
@@ -732,7 +732,7 @@ class TfLiteSineReader : public TfLiteReader {
   }
 
   virtual int read(int16_t*data, int sampleCount) override {
-    LOGD(LOG_METHOD);
+    TRACED();
     float two_pi = 2 * PI;
     for (int j=0; j<sampleCount; j+=channels){
       // Quantize the input from floating-point to integer
@@ -793,7 +793,7 @@ class TfLiteAudioStream : public TfLiteAudioStreamBase {
 
   /// Optionally define your own p_interpreter
   void setInterpreter(tflite::MicroInterpreter* p_interpreter) {
-    LOGD(LOG_METHOD);
+    TRACED();
     this->p_interpreter = p_interpreter;
   }
 
@@ -805,7 +805,7 @@ class TfLiteAudioStream : public TfLiteAudioStreamBase {
 
   /// Start the processing
   virtual bool begin(TfLiteConfig config) override {
-    LOGD(LOG_METHOD);
+    TRACED();
     cfg = config;
    
     // alloatme memory
@@ -876,7 +876,7 @@ class TfLiteAudioStream : public TfLiteAudioStreamBase {
 
   /// process the data in batches of max kMaxAudioSampleSize.
   virtual size_t write(const uint8_t* audio, size_t bytes) override {
-    LOGD(LOG_METHOD);
+    TRACED();
     if (cfg.writer==nullptr){
       LOGE("cfg.output is null");
       return 0;
@@ -894,7 +894,7 @@ class TfLiteAudioStream : public TfLiteAudioStreamBase {
 
   /// provide audio data with cfg.input 
   virtual size_t readBytes(uint8_t *data, size_t len) override {
-    LOGD(LOG_METHOD);
+    TRACED();
     if (cfg.reader!=nullptr){
       return cfg.reader->read((int16_t*)data, (int) len/sizeof(int16_t)) * sizeof(int16_t);
     }else {
@@ -930,7 +930,7 @@ class TfLiteAudioStream : public TfLiteAudioStreamBase {
   int8_t* p_tensor_buffer = nullptr;
 
   virtual bool setModel(const unsigned char* model) {
-    LOGD(LOG_METHOD);
+    TRACED();
     p_model = tflite::GetModel(model);
     if (p_model->version() != TFLITE_SCHEMA_VERSION) {
       LOGE(
@@ -958,7 +958,7 @@ class TfLiteAudioStream : public TfLiteAudioStreamBase {
   //
   virtual bool setupInterpreter() {
     if (p_interpreter == nullptr) {
-      LOGI(LOG_METHOD);
+      TRACEI();
       if (cfg.useAllOpsResolver) {
         tflite::AllOpsResolver resolver;
         static tflite::MicroInterpreter static_interpreter(

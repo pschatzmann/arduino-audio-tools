@@ -96,7 +96,7 @@ class OversamplingDAC : public AudioPrint {
 
         /// starts the Delta Sigma DAC
         virtual bool begin(DACInfo cfg){
-            LOGD(LOG_METHOD);
+            TRACED();
 
             // reset if already running     
             if (active){       
@@ -131,7 +131,7 @@ class OversamplingDAC : public AudioPrint {
 
         /// Stops the output 
         virtual void end() {
-            LOGD(LOG_METHOD);
+            TRACED();
             active = false;
             reset();
             timer_object.end();
@@ -155,7 +155,7 @@ class OversamplingDAC : public AudioPrint {
 
         /// Writes the audio data to the output buffer
         virtual size_t write(const uint8_t *data, size_t size){
-            LOGD(LOG_METHOD);
+            TRACED();
             if (size==0) return 0;
             int16_t *ptr = (int16_t *)data;
 
@@ -258,7 +258,7 @@ class SimpleDAC : public OversamplingDAC {
         }
 
         bool begin(DACInfo cfg) override {
-            LOGD(LOG_METHOD);
+            TRACED();
             cfg.logInfo(true);
             // default processing
             return OversamplingDAC::begin(cfg);
@@ -273,7 +273,7 @@ class SimpleDAC : public OversamplingDAC {
 
 
         virtual void startTimer() {
-            LOGD(LOG_METHOD);
+            TRACED();
             // start (optional) timer
             if (outputRate()>0){
                 uint32_t timeUs = AudioUtils::toTimeUs(outputRate());
@@ -349,7 +349,7 @@ class OversamplingDAC32 : public OversamplingDAC {
         }
 
         bool begin(DACInfo cfg) override {
-            LOGD(LOG_METHOD);
+            TRACED();
             cfg.logInfo(true);
             // default processing
             return OversamplingDAC::begin(cfg);
@@ -360,7 +360,7 @@ class OversamplingDAC32 : public OversamplingDAC {
         }
 
         virtual void startTimer() {
-            LOGD(LOG_METHOD);
+            TRACED();
             // start (optional) timer
             if (outputRate()>0){
                 uint32_t timeUs = AudioUtils::toTimeUs(outputRate());
@@ -453,7 +453,7 @@ class SerialDAC : public OversamplingDAC32 {
         }
 
         bool begin(DACInfo info) override {
-            LOGD(LOG_METHOD);
+            TRACED();
             info.logInfo(false);
             this->cfg = &info;
             // setup baud rate in the uart
@@ -470,7 +470,7 @@ class SerialDAC : public OversamplingDAC32 {
 
         /// just write the data to the UART w/o buffering
         virtual size_t write(const uint8_t *data, size_t size) override {
-            LOGD(LOG_METHOD);
+            TRACED();
             return serial->write(data, size);
         }
 
@@ -529,7 +529,7 @@ class DeltaSigmaDAC : public OversamplingDAC32 {
         }
 
         bool begin(DACInfo cfg) override {
-            LOGD(LOG_METHOD);
+            TRACED();
             cfg.logInfo(true);
             // default processing
             return OversamplingDAC::begin(cfg);
@@ -594,7 +594,7 @@ class PWMDAC : public OversamplingDAC {
         }
 
         virtual bool begin(DACInfo cfg) override {
-            LOGD(LOG_METHOD);
+            TRACED();
             cfg.logInfo(true);
             // default processing
             bool result = OversamplingDAC::begin(cfg);
@@ -628,7 +628,7 @@ class PWMDAC : public OversamplingDAC {
         }
 
         void setupPins() {
-            LOGD(LOG_METHOD);
+            TRACED();
             LOGI("pmw_frequency: %u", pmw_frequency)
             LOGI("max_pwm_value: %u", max_pwm_value)
             for (int ch=0;ch<info.channels;ch++){
@@ -648,7 +648,7 @@ class PWMDAC : public OversamplingDAC {
         }
 
         virtual void startTimer() override {
-            LOGD(LOG_METHOD);
+            TRACED();
             // start (optional) timer
             if (outputRate()>0){
                 uint32_t timeUs = AudioUtils::toTimeUs(outputRate());

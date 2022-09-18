@@ -24,7 +24,7 @@ class OggContainerDecoder : public AudioDecoder {
    * @brief Construct a new OggContainerDecoder object
    */
 
-  OggContainerDecoder() { LOGD(LOG_METHOD); }
+  OggContainerDecoder() { TRACED(); }
 
   OggContainerDecoder(AudioDecoder *decoder) {
     p_codec = decoder;
@@ -55,7 +55,7 @@ class OggContainerDecoder : public AudioDecoder {
   AudioBaseInfo audioInfo() override { return cfg; }
 
   void begin(AudioBaseInfo info) {
-    LOGD(LOG_METHOD);
+    TRACED();
     cfg = info;
     if (bid != nullptr) {
       bid->setAudioInfo(cfg);
@@ -64,7 +64,7 @@ class OggContainerDecoder : public AudioDecoder {
   }
 
   void begin() override {
-    LOGD(LOG_METHOD);
+    TRACED();
     if (p_oggz == nullptr) {
       p_oggz = oggz_new(OGGZ_READ |  OGGZ_AUTO); // OGGZ_NONSTRICT
       is_open = true;
@@ -87,7 +87,7 @@ class OggContainerDecoder : public AudioDecoder {
   }
 
   void end() override {
-    LOGD(LOG_METHOD);
+    TRACED();
     flush();
     if (p_codec!=nullptr) p_codec->end();
     is_open = false;
@@ -238,7 +238,7 @@ class OggContainerEncoder : public AudioEncoder {
 
   /// starts the processing using the actual AudioInfo
   virtual void begin() override {
-    LOGD(LOG_METHOD);
+    TRACED();
     is_open = true;
     codec_buffer.begin();
     if (p_oggz == nullptr) {
@@ -262,7 +262,7 @@ class OggContainerEncoder : public AudioEncoder {
 
   /// stops the processing
   void end() override {
-    LOGD(LOG_METHOD);
+    TRACED();
 
     writeFooter();
 
@@ -342,7 +342,7 @@ class OggContainerEncoder : public AudioEncoder {
   }
 
   virtual bool writeHeader() {
-    LOGD(LOG_METHOD);
+    TRACED();
     oh.packet = (uint8_t *)&cfg;
     oh.bytes = sizeof(cfg);
     oh.granulepos = 0;
@@ -354,7 +354,7 @@ class OggContainerEncoder : public AudioEncoder {
   }
 
   virtual bool writeFooter() {
-    LOGD(LOG_METHOD);
+    TRACED();
     op.packet = (uint8_t *)nullptr;
     op.bytes = 0;
     op.granulepos = granulepos;

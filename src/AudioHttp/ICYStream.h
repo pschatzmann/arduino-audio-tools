@@ -22,32 +22,32 @@ class ICYStreamDefault : public AbstractURLStream {
         
     public:
         ICYStreamDefault(int readBufferSize=DEFAULT_BUFFER_SIZE){
-            LOGI(LOG_METHOD);
+            TRACEI();
             url = new URLStreamDefault(readBufferSize);
             checkUrl();
         }
 
         ICYStreamDefault(Client &clientPar, int readBufferSize=DEFAULT_BUFFER_SIZE){
-            LOGI(LOG_METHOD);
+            TRACEI();
             url = new URLStreamDefault(clientPar, readBufferSize);
             checkUrl();
         }
 
         /// Default constructor
         ICYStreamDefault(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE) {
-            LOGI(LOG_METHOD);
+            TRACEI();
             url = new URLStreamDefault(network, password, readBufferSize);
             checkUrl();
         }
 
         ~ICYStreamDefault(){
-            LOGI(LOG_METHOD);
+            TRACEI();
             if (url!=nullptr) delete url;
         }
 
         /// Defines the meta data callback function
         virtual bool setMetadataCallback(void (*fn)(MetaDataType info, const char* str, int len)) override {
-            LOGD(LOG_METHOD);
+            TRACED();
             callback = fn;
             icy.setCallback(fn);
             return true;
@@ -55,7 +55,7 @@ class ICYStreamDefault : public AbstractURLStream {
 
         // Icy http get request to the indicated url 
         virtual bool begin(const char* urlStr, const char* acceptMime=nullptr, MethodID action=GET,  const char* reqMime="", const char*reqData="") override {
-            LOGD(LOG_METHOD);
+            TRACED();
             // accept metadata
             url->httpRequest().header().put("Icy-MetaData","1");
             bool result = url->begin(urlStr, acceptMime, action, reqMime, reqData);
@@ -78,7 +78,7 @@ class ICYStreamDefault : public AbstractURLStream {
 
         /// Ends the processing
         virtual void end() override {
-            LOGD(LOG_METHOD);
+            TRACED();
             url->end();
             icy.end();
         }
@@ -184,16 +184,16 @@ class ICYStream : public ICYStreamDefault {
     public:
         ICYStream(int readBufferSize=DEFAULT_BUFFER_SIZE)
         :ICYStreamDefault(readBufferSize){
-            LOGI(LOG_METHOD);
+            TRACEI();
         }
         ICYStream(Client &clientPar, int readBufferSize=DEFAULT_BUFFER_SIZE)
         :ICYStreamDefault(clientPar, readBufferSize){
-            LOGI(LOG_METHOD);
+            TRACEI();
         }
 
         ICYStream(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE)
         :ICYStreamDefault(network,password,readBufferSize) {            
-            LOGI(LOG_METHOD);
+            TRACEI();
         }
 };
 

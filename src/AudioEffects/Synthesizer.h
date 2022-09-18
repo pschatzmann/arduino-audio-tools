@@ -53,14 +53,14 @@ class DefaultSynthesizerChannel : public AbstractSynthesizerChannel {
         DefaultSynthesizerChannel(DefaultSynthesizerChannel<EffectsT> &ch) = default;
         
         DefaultSynthesizerChannel<EffectsT> *clone() override {
-            LOGD(LOG_METHOD);
+            TRACED();
             auto result = new DefaultSynthesizerChannel<EffectsT>(*this);
             result->begin(config);
             return result;
         }
 
         virtual void begin(AudioBaseInfo config) override {
-            LOGI(LOG_METHOD);
+            TRACEI();
             this->config = config;
             config.logInfo();
             // find ADSRGain
@@ -87,7 +87,7 @@ class DefaultSynthesizerChannel : public AbstractSynthesizerChannel {
         }
 
         virtual void keyOff() override{
-            LOGD(LOG_METHOD);
+            TRACED();
             if (p_adsr!=nullptr){
                 p_adsr->keyOff();
             } else {
@@ -135,7 +135,7 @@ class DefaultGuitarChannel : public DefaultSynthesizerChannel<AudioEffects<Gener
         
         /// Creates a copy of the channel
         DefaultGuitarChannel *clone() override {
-            LOGD(LOG_METHOD);
+            TRACED();
             auto result = new DefaultGuitarChannel(*this);
             result->begin(config);
             return result;
@@ -148,7 +148,7 @@ class DefaultGuitarChannel : public DefaultSynthesizerChannel<AudioEffects<Gener
 
         /// Starts the audio generator / audio processing
         virtual void begin(AudioBaseInfo config) override {
-            LOGI(LOG_METHOD);
+            TRACEI();
             this->config = config;
             config.logInfo();
             audio_effects.generator().begin(config);
@@ -212,7 +212,7 @@ class Synthesizer : public SoundGenerator<int16_t> {
         }
 
         ~Synthesizer(){
-            LOGD(LOG_METHOD);
+            TRACED();
             for (int j=0;j<channels.size();j++){
                 delete channels[j];
                 channels[j] = nullptr;
@@ -224,7 +224,7 @@ class Synthesizer : public SoundGenerator<int16_t> {
        }
 
         bool begin(AudioBaseInfo config) {
-            LOGI(LOG_METHOD);
+            TRACEI();
             this->cfg = config;
             SoundGenerator<int16_t>::begin(config);
             // provide config to defaut
@@ -352,7 +352,7 @@ class Synthesizer : public SoundGenerator<int16_t> {
         }
 
         static void callbackKeyOn(bool active, int pin, void* ref){
-            LOGI(LOG_METHOD);
+            TRACEI();
             KeyParameter* par = (KeyParameter*)ref;
             if (par !=nullptr && par->p_synthesizer!=nullptr){
                 par->p_synthesizer->keyOn(par->note);
@@ -362,7 +362,7 @@ class Synthesizer : public SoundGenerator<int16_t> {
         }
 
         static void callbackKeyOff(bool active, int pin, void* ref){
-            LOGI(LOG_METHOD);
+            TRACEI();
             KeyParameter* par = (KeyParameter*)ref;
             if (par !=nullptr){
                 if (par->p_synthesizer!=nullptr){

@@ -12,9 +12,9 @@ namespace audio_tools {
  */
 class DecoderNOP : public AudioDecoder {
 public:
-  DecoderNOP() { LOGD(LOG_METHOD); }
+  DecoderNOP() { TRACED(); }
 
-  DecoderNOP(Print &out_stream) { LOGD(LOG_METHOD); }
+  DecoderNOP(Print &out_stream) { TRACED(); }
 
   DecoderNOP(Print &out_stream, AudioBaseInfoDependent &bi) {}
 

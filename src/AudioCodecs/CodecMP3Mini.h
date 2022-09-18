@@ -42,7 +42,7 @@ class MP3DecoderMini : public AudioDecoder {
 
   /// Starts the processing
   void begin() {
-    LOGD(LOG_METHOD);
+    TRACED();
     //esp_task_wdt_delete(nullptr);
     ::mp3dec_init(&mp3d);
     buffer.resize(buffer_size);
@@ -53,7 +53,7 @@ class MP3DecoderMini : public AudioDecoder {
 
   /// Releases the reserved memory
   void end() {
-    LOGD(LOG_METHOD);
+    TRACED();
     flush();
     active = false;
   }

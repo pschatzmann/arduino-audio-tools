@@ -34,22 +34,22 @@ class MP3EncoderLAME : public AudioEncoder {
 
 public:
     MP3EncoderLAME(){
-        LOGD(LOG_METHOD);
+        TRACED();
     }
 
     MP3EncoderLAME(Print &out_stream){
-        LOGD(LOG_METHOD);
+        TRACED();
         p_print = &out_stream;
     }
 
     ~MP3EncoderLAME(){
-        LOGD(LOG_METHOD);
+        TRACED();
         end();
      }
 
     /// Defines the output stream
     void setOutputStream(Print &out_stream){
-        LOGD(LOG_METHOD);
+        TRACED();
         p_print = &out_stream;
         if (enc!=nullptr){
             enc->setOutput(out_stream);
@@ -58,7 +58,7 @@ public:
 
     /// Defines the Audio Info
     void setAudioInfo(AudioBaseInfo from) {
-        LOGD(LOG_METHOD);
+        TRACED();
         info.channels = from.channels;
         info.sample_rate = from.sample_rate;
         info.bits_per_sample = from.bits_per_sample;
@@ -66,7 +66,7 @@ public:
 
     /// Defines the Audio Info
     void setAudioInfo(AudioInfoLAME from) {
-        LOGD(LOG_METHOD);
+        TRACED();
         info = from;
     }
 
@@ -83,7 +83,7 @@ public:
      * @return int 
      */
     void begin(AudioInfoLAME info) {
-        LOGD(LOG_METHOD);
+        TRACED();
         createEnc();
         setAudioInfo(info);
         enc->begin();
@@ -97,7 +97,7 @@ public:
     //  * @param input_bits_per_sample 
     //  */
     // void begin(int input_channels, int input_sample_rate, int input_bits_per_sample) {
-    //     LOGD(LOG_METHOD);
+    //     TRACED();
     //     createEnc();
     //     enc->begin(input_channels, input_sample_rate, input_bits_per_sample);
     // }
@@ -121,7 +121,7 @@ public:
 
     // release resources
     void end(){
-        LOGD(LOG_METHOD);
+        TRACED();
         if (enc!=nullptr){
             enc->end();
             delete enc;

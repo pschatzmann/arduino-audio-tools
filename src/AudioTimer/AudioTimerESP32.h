@@ -18,7 +18,7 @@ class UserCallback {
 
   public:
     void setup(repeating_timer_callback_t my_callback, void *user_data, bool lock ){
-      LOGD(LOG_METHOD);
+      TRACED();
       this->my_callback = my_callback;
       this->user_data = user_data;
       this->lock = lock; // false when called from Task
@@ -63,13 +63,13 @@ static IRAM_ATTR void userCallback3() {
 class TimerCallback {
   public:
       TimerCallback() {
-          LOGD(LOG_METHOD);
+          TRACED();
           timerMux = portMUX_INITIALIZER_UNLOCKED;
           p_handler_task = nullptr;
       }
 
       void setup(TaskHandle_t &handler_task){
-        LOGD(LOG_METHOD);
+        TRACED();
         p_handler_task = &handler_task;
       }
       
@@ -144,7 +144,7 @@ class TimerAlarmRepeatingESP32 : public TimerAlarmRepeatingDef {
 
         /// Starts the alarm timer
         bool begin(repeating_timer_callback_t callback_f, uint32_t time, TimeUnit unit = MS) override {
-            LOGD(LOG_METHOD);
+            TRACED();
 
             // we determine the time in microseconds
             switch(unit){
@@ -182,7 +182,7 @@ class TimerAlarmRepeatingESP32 : public TimerAlarmRepeatingDef {
 
         /// ends the timer and if necessary the task
         bool end() override {
-            LOGD(LOG_METHOD);
+            TRACED();
             if (started){
               timerEnd(adc_timer);
               if (handler_task!=nullptr){
@@ -212,7 +212,7 @@ class TimerAlarmRepeatingESP32 : public TimerAlarmRepeatingDef {
 
       /// direct timer callback 
       void setupDirectTimerCallback(repeating_timer_callback_t callback_f){
-        LOGD(LOG_METHOD);
+        TRACED();
         // we start the timer which runs the callback in a seprate task
         if (timerCallbackArray==nullptr){
           timerCallbackArray = new TimerCallback[4];
@@ -237,7 +237,7 @@ class TimerAlarmRepeatingESP32 : public TimerAlarmRepeatingDef {
 
       // timer callback is notifiying task
       void setupTimerCallbackInThread(repeating_timer_callback_t callback_f){
-        LOGD(LOG_METHOD);
+        TRACED();
         // We start the timer which executes the callbacks directly
         if (simpleUserCallback==nullptr){
           simpleUserCallback = new UserCallback[4];
@@ -255,7 +255,7 @@ class TimerAlarmRepeatingESP32 : public TimerAlarmRepeatingDef {
 
       /// No timer - just a simple task loop
       void setupSimpleThreadLoop(repeating_timer_callback_t callback_f){
-        LOGD(LOG_METHOD);
+        TRACED();
         user_callback.setup(callback_f, object, false);
         xTaskCreatePinnedToCore(simpleTaskLoop, "TimerAlarmRepeatingTask", configMINIMAL_STACK_SIZE+10000, this, priority, &handler_task, core);
         LOGI("Task created on core %d", core);
@@ -264,7 +264,7 @@ class TimerAlarmRepeatingESP32 : public TimerAlarmRepeatingDef {
 
       /// We can not do any I2C calls in the interrupt handler so we need to do this in a separate task
       static void complexTaskHandler(void *param) {
-        LOGI(LOG_METHOD);
+        TRACEI();
         UserCallback* cb = (UserCallback*) param;
         uint32_t thread_notification;
 
@@ -280,7 +280,7 @@ class TimerAlarmRepeatingESP32 : public TimerAlarmRepeatingDef {
 
       /// We can not do any I2C calls in the interrupt handler so we need to do this in a separate task. 
       static void simpleTaskLoop(void *param) {
-        LOGI(LOG_METHOD);
+        TRACEI();
         TimerAlarmRepeatingESP32* ta = (TimerAlarmRepeatingESP32*) param;
 
         while (true) {

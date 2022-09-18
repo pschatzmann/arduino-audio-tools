@@ -45,7 +45,7 @@ class PWMAudioStreamPico : public PWMAudioStreamBase {
 
         /// Ends the output -> resets the timer and the pins
         void end() override {
-            LOGD(LOG_METHOD);
+            TRACED();
             ticker.end(); // it does not hurt to call this even if it has not been started
             is_timer_started = false;
             for(auto pin : pins) {
@@ -61,7 +61,7 @@ class PWMAudioStreamPico : public PWMAudioStreamBase {
 
         virtual void startTimer() override {
             if (!is_timer_started){
-                LOGD(LOG_METHOD);
+                TRACED();
                 long wait_time = 1000000l / audio_config.sample_rate;
                 ticker.setCallbackParameter(this);
                 ticker.begin(defaultPWMAudioOutputCallbackPico, wait_time, US);
@@ -72,7 +72,7 @@ class PWMAudioStreamPico : public PWMAudioStreamBase {
 
         // setup pwm config and all pins
         void setupPWM() override {
-            LOGD(LOG_METHOD);
+            TRACED();
             pwm_config cfg = setupPWMConfig();
             
             // initialize empty pins
@@ -99,7 +99,7 @@ class PWMAudioStreamPico : public PWMAudioStreamBase {
 
         // defines the pwm_config which will be used to drive the pins
         pwm_config setupPWMConfig() {
-             LOGD(LOG_METHOD);
+             TRACED();
             // setup pwm frequency
             pwm_config pico_pwm_config = pwm_get_default_config();
             int wrap_value = maxOutputValue(); // amplitude of square wave (pwm values -amplitude to amplitude) for one byte

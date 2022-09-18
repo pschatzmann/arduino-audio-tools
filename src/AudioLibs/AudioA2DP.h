@@ -292,14 +292,14 @@ class A2DPStream : public AudioStream {
         SemaphoreHandle_t xSemaphore = NULL;
 
         A2DPStream() {
-            LOGD(LOG_METHOD);
+            TRACED();
             xSemaphore = xSemaphoreCreateMutex();
 
             A2DPStream_self = this;
         }
 
         static void a2dpStateCallback(esp_a2d_connection_state_t state, void *caller){
-            LOGD(LOG_METHOD);
+            TRACED();
             A2DPStream *self = (A2DPStream*)caller;
             if (state==ESP_A2D_CONNECTION_STATE_CONNECTED && self->config.startLogic==StartOnConnect){
                  is_a2dp_active = true;

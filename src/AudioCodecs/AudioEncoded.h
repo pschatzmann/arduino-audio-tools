@@ -143,7 +143,7 @@ class EncodedAudioStream : public AudioPrint {
 public:
   /// Constructor for AudioStream with automatic notification of audio changes
   EncodedAudioStream(AudioStream *outputStream, AudioDecoder *decoder) {
-    LOGD(LOG_METHOD);
+    TRACED();
     ptr_out = outputStream;
     decoder_ptr = decoder;
     decoder_ptr->setOutputStream(*outputStream);
@@ -154,7 +154,7 @@ public:
 
   /// Constructor for AudioPrint with automatic notification of audio changes
   EncodedAudioStream(AudioPrint *outputStream, AudioDecoder *decoder) {
-    LOGD(LOG_METHOD);
+    TRACED();
     ptr_out = outputStream;
     decoder_ptr = decoder;
     decoder_ptr->setOutputStream(*outputStream);
@@ -171,7 +171,7 @@ public:
    * @param decoder
    */
   EncodedAudioStream(Print &outputStream, AudioDecoder &decoder) {
-    LOGD(LOG_METHOD);
+    TRACED();
     ptr_out = &outputStream;
     decoder_ptr = &decoder;
     decoder_ptr->setOutputStream(outputStream);
@@ -186,7 +186,7 @@ public:
    * @param decoder
    */
   EncodedAudioStream(Print *outputStream, AudioDecoder *decoder) {
-    LOGD(LOG_METHOD);
+    TRACED();
     ptr_out = outputStream;
     decoder_ptr = decoder;
     decoder_ptr->setOutputStream(*outputStream);
@@ -201,7 +201,7 @@ public:
    * @param encoder
    */
   EncodedAudioStream(Print &outputStream, AudioEncoder &encoder) {
-    LOGD(LOG_METHOD);
+    TRACED();
     ptr_out = &outputStream;
     encoder_ptr = &encoder;
     encoder_ptr->setOutputStream(outputStream);
@@ -216,7 +216,7 @@ public:
    * @param encoder
    */
   EncodedAudioStream(Print *outputStream, AudioEncoder *encoder) {
-    LOGD(LOG_METHOD);
+    TRACED();
     ptr_out = outputStream;
     encoder_ptr = encoder;
     encoder_ptr->setOutputStream(*outputStream);
@@ -231,7 +231,7 @@ public:
    *
    */
   EncodedAudioStream() {
-    LOGD(LOG_METHOD);
+    TRACED();
     active = false;
   }
 
@@ -247,7 +247,7 @@ public:
 
   /// Define object which need to be notified if the basinfo is changing
   void setNotifyAudioChange(AudioBaseInfoDependent &bi) override {
-    LOGI(LOG_METHOD);
+    TRACEI();
     decoder_ptr->setNotifyAudioChange(bi);
   }
 
@@ -260,7 +260,7 @@ public:
   }
 
   virtual void setAudioInfo(AudioBaseInfo info) override {
-    LOGD(LOG_METHOD);
+    TRACED();
     AudioPrint::setAudioInfo(info);
     decoder_ptr->setAudioInfo(info);
     encoder_ptr->setAudioInfo(info);
@@ -268,7 +268,7 @@ public:
 
   /// Starts the processing - sets the status to active
   void begin(Print *outputStream, AudioEncoder *encoder) {
-    LOGD(LOG_METHOD);
+    TRACED();
     ptr_out = outputStream;
     encoder_ptr = encoder;
     encoder_ptr->setOutputStream(*outputStream);
@@ -278,7 +278,7 @@ public:
 
   /// Starts the processing - sets the status to active
   void begin(Print *outputStream, AudioDecoder *decoder) {
-    LOGD(LOG_METHOD);
+    TRACED();
     ptr_out = outputStream;
     decoder_ptr = decoder;
     decoder_ptr->setOutputStream(*outputStream);
@@ -288,7 +288,7 @@ public:
 
   /// Starts the processing - sets the status to active
   void begin() {
-    LOGD(LOG_METHOD);
+    TRACED();
     const CodecNOP *nop = CodecNOP::instance();
     if (decoder_ptr != nop || encoder_ptr != nop) {
       decoder_ptr->begin();
@@ -301,7 +301,7 @@ public:
 
   /// Starts the processing - sets the status to active
   void begin(AudioBaseInfo info) {
-    LOGD(LOG_METHOD);
+    TRACED();
     const CodecNOP *nop = CodecNOP::instance();
     if (decoder_ptr != nop || encoder_ptr != nop) {
       // some decoders need this - e.g. opus
@@ -316,7 +316,7 @@ public:
   }
   /// Ends the processing
   void end() {
-    LOGI(LOG_METHOD);
+    TRACEI();
     decoder_ptr->end();
     encoder_ptr->end();
     active = false;
