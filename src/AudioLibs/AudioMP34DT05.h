@@ -54,7 +54,7 @@ class AudioMP34DT05 : public AudioStreamX {
   bool begin() { return begin(config); }
 
   bool begin(AudioMP34DT05Config cfg) {
-    LOGI(LOG_METHOD);
+    TRACEI();
     config = cfg;
     cfg.logInfo();
     if (p_buffer == nullptr) {
@@ -73,7 +73,7 @@ class AudioMP34DT05 : public AudioStreamX {
   }
 
   void end() {
-    LOGI(LOG_METHOD);
+    TRACEI();
     if (p_mic != nullptr) {
       p_mic->end();
     }

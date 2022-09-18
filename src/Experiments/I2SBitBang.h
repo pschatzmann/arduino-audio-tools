@@ -44,7 +44,7 @@ class BitBangI2SBase {
          * 
          */
         void end() {
-            LOGD(LOG_METHOD);
+            TRACED();
             active = false;
         }
 
@@ -192,7 +192,7 @@ class BitBangI2SToCore : public BitBangI2SBase {
          * @param cfg 
          */
         virtual bool begin(I2SConfig cfg) {
-            LOGD(LOG_METHOD);
+            TRACED();
             this->cfg = cfg;
             cfg.logInfo();
             if (i2sHandler==nullptr){
@@ -255,7 +255,7 @@ class BitBangI2SToCore : public BitBangI2SBase {
 
         /// Process output in endless loop
         void runLoop() {
-            LOGD(LOG_METHOD);
+            TRACED();
             while(active) {
                 int64_t end1 = micros()+bitTimeUs;
                 int64_t end2 = end1+bitTimeUs;
@@ -288,7 +288,7 @@ class BitBangI2SWithInterrupts : public BitBangI2SBase {
         }
 
         bool begin(I2SConfig cfg) {
-            LOGD(LOG_METHOD);
+            TRACED();
             cfg.logInfo();
             if (i2sHandler==nullptr){
                 LOGE("The i2sHandler is null");

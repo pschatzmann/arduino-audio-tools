@@ -59,7 +59,7 @@ class AudioSourceSDFAT : public AudioSource {
 public:
   /// Default constructor
   AudioSourceSDFAT(const char* startFilePath = "/", const char* ext = ".mp3", int chipSelect = PIN_CS, int speedMHz = 2, bool setupIndex=true) {
-        LOGD(LOG_METHOD);
+        TRACED();
         LOGI("SD chipSelect: %d", chipSelect);
         LOGI("SD speedMHz: %d", speedMHz);
         LOGI("ext: %s", ext);
@@ -72,7 +72,7 @@ public:
 
     /// Costructor with SdSpiConfig
   AudioSourceSDFAT(const char* startFilePath, const char* ext, SdSpiConfig &config, bool setupIndex=true) {
-        LOGD(LOG_METHOD);
+        TRACED();
         p_cfg = &config;
         owns_cfg = false;
         start_path = startFilePath;
@@ -82,7 +82,7 @@ public:
 
 
   virtual void begin() override {
-    LOGD(LOG_METHOD);
+    TRACED();
     static bool is_sd_setup = false;
     if (!is_sd_setup) {
         if (!sd.begin(*p_cfg)) {

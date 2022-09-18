@@ -453,7 +453,7 @@ class UDPStream : public WiFiUDP {
    *  Replys will be sent to the initial remote caller
    */
   size_t write(const uint8_t *buffer, size_t size) override {
-    LOGD(LOG_METHOD);
+    TRACED();
     beginPacket(remoteIP(), remotePort());
     size_t result = WiFiUDP::write(buffer, size);
     endPacket();
@@ -461,7 +461,7 @@ class UDPStream : public WiFiUDP {
   }
   // Reads bytes using WiFi::readBytes
   size_t readBytes(uint8_t *buffer, size_t length) override {
-    LOGD(LOG_METHOD);
+    TRACED();
     size_t len = available();
     size_t bytes_read = 0;
     if (len>0){

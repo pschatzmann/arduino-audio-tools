@@ -36,14 +36,14 @@ class SBCDecoder : public AudioDecoder {
   virtual AudioBaseInfo audioInfo() { return info; }
 
   virtual void begin() {
-    LOGI(LOG_METHOD);
+    TRACEI();
     is_first = true;
     is_active = true;
     sbc_init(&sbc, 0L);
   }
 
   virtual void end() {
-    LOGI(LOG_METHOD);
+    TRACEI();
     sbc_finish(&sbc);
     is_active = false;
   }
@@ -202,7 +202,7 @@ class SBCEncoder : public AudioEncoder {
   }
 
   void begin() {
-    LOGI(LOG_METHOD);
+    TRACEI();
     is_first = true;
     is_active = setup();
     int codesize = sbc_get_codesize(&sbc);
@@ -214,7 +214,7 @@ class SBCEncoder : public AudioEncoder {
   }
 
   virtual void end() {
-    LOGI(LOG_METHOD);
+    TRACEI();
     sbc_finish(&sbc);
     is_active = false;
   }

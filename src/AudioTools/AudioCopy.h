@@ -21,7 +21,7 @@ template <class T>
 class StreamCopyT {
     public:
         StreamCopyT(Print &to, AudioStream &from, int buffer_size=DEFAULT_BUFFER_SIZE){
-            LOGD(LOG_METHOD);
+            TRACED();
             begin(to, from);
             this->buffer_size = buffer_size;
             buffer = new uint8_t[buffer_size];
@@ -31,7 +31,7 @@ class StreamCopyT {
         }
 
         StreamCopyT(Print &to, Stream &from, int buffer_size=DEFAULT_BUFFER_SIZE){
-            LOGD(LOG_METHOD);
+            TRACED();
             begin(to, from);
             this->buffer_size = buffer_size;
             buffer = new uint8_t[buffer_size];
@@ -41,7 +41,7 @@ class StreamCopyT {
         }
 
         StreamCopyT(int buffer_size=DEFAULT_BUFFER_SIZE){
-            LOGD(LOG_METHOD);
+            TRACED();
             this->buffer_size = buffer_size;
             buffer = new uint8_t[buffer_size];
             if (buffer==nullptr){
@@ -88,7 +88,7 @@ class StreamCopyT {
 
         // copies the data from one channel from the source to 2 channels on the destination - the result is in bytes
         inline size_t copy(){
-            LOGD(LOG_METHOD);
+            TRACED();
             // if not initialized we do nothing
             if (from==nullptr || to==nullptr) return 0;
 
@@ -194,7 +194,7 @@ class StreamCopyT {
 
         /// copies all data - returns true if we copied anything
         size_t copyAll(int retryCount=5, int retryWaitMs=200){
-            LOGD(LOG_METHOD);
+            TRACED();
             size_t result = 0;
             int retry = 0;
 
@@ -228,13 +228,13 @@ class StreamCopyT {
 
         /// Define the callback that will notify about mime changes
         void setMimeCallback(void (*callback)(const char*)){
-            LOGD(LOG_METHOD);
+            TRACED();
             this->notifyMimeCallback = callback;
         }
 
         /// Defines a callback that is notified with the wirtten data
         void setCallbackOnWrite(void (*onWrite)(void*obj, void*buffer, size_t len), void* obj){
-            LOGD(LOG_METHOD);
+            TRACED();
             this->onWrite = onWrite;
             this->onWriteObj = obj;
         }
@@ -317,15 +317,15 @@ class StreamCopyT {
 class StreamCopy : public StreamCopyT<uint8_t> {
     public:
         StreamCopy(int buffer_size=DEFAULT_BUFFER_SIZE): StreamCopyT<uint8_t>(buffer_size) {            
-             LOGD(LOG_METHOD);
+             TRACED();
         }
 
         StreamCopy(Print &to, AudioStream &from, int buffer_size=DEFAULT_BUFFER_SIZE) : StreamCopyT<uint8_t>(to, from, buffer_size){
-             LOGD(LOG_METHOD);
+             TRACED();
         }
 
         StreamCopy(Print &to, Stream &from, int buffer_size=DEFAULT_BUFFER_SIZE) : StreamCopyT<uint8_t>(to, from, buffer_size){
-             LOGD(LOG_METHOD);
+             TRACED();
         }
 
         /// copies a buffer length of data and applies the converter

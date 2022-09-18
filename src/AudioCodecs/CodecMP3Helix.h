@@ -20,7 +20,7 @@ class MP3DecoderHelix : public AudioDecoder  {
     public:
 
         MP3DecoderHelix() {
-            LOGD(LOG_METHOD);
+            TRACED();
             mp3 = new libhelix::MP3DecoderHelix();
             filter.setDecoder(mp3);
             if (mp3==nullptr){
@@ -33,7 +33,7 @@ class MP3DecoderHelix : public AudioDecoder  {
          * @param out_stream 
          */
         MP3DecoderHelix(Print &out_stream){
-            LOGD(LOG_METHOD);
+            TRACED();
             mp3 = new libhelix::MP3DecoderHelix();
             filter.setDecoder(mp3);
             if (mp3==nullptr){
@@ -50,7 +50,7 @@ class MP3DecoderHelix : public AudioDecoder  {
          * @param bi 
          */
         MP3DecoderHelix(Print &out_stream, AudioBaseInfoDependent &bi){
-            LOGD(LOG_METHOD);
+            TRACED();
             mp3 = new libhelix::MP3DecoderHelix();
             filter.setDecoder(mp3);
             if (mp3==nullptr){
@@ -75,7 +75,7 @@ class MP3DecoderHelix : public AudioDecoder  {
 
         /// Starts the processing
         void begin(){
-            LOGD(LOG_METHOD);
+            TRACED();
             if (mp3!=nullptr) {
                 mp3->setDelay(CODEC_DELAY_MS);   
                 mp3->begin();
@@ -85,7 +85,7 @@ class MP3DecoderHelix : public AudioDecoder  {
 
         /// Releases the reserved memory
         void end(){
-            LOGD(LOG_METHOD);
+            TRACED();
             if (mp3!=nullptr) mp3->end();
         }
 
@@ -120,7 +120,7 @@ class MP3DecoderHelix : public AudioDecoder  {
 
         /// Defines the callback object to which the Audio information change is provided
         void setNotifyAudioChange(AudioBaseInfoDependent &bi){
-            LOGD(LOG_METHOD);
+            TRACED();
             audioChangeMP3Helix = &bi;
             if (mp3!=nullptr)  mp3->setInfoCallback(infoCallback);
         }
@@ -128,7 +128,7 @@ class MP3DecoderHelix : public AudioDecoder  {
         /// notifies the subscriber about a change
         static void infoCallback(MP3FrameInfo &i){
             if (audioChangeMP3Helix!=nullptr){
-                LOGD(LOG_METHOD);
+                TRACED();
                 AudioBaseInfo baseInfo;
                 baseInfo.channels = i.nChans;
                 baseInfo.sample_rate = i.samprate;

@@ -22,8 +22,6 @@
 
 namespace audio_tools {
 
-static const char *UNDERFLOW_MSG = "data underflow";
-
 /**
  * @brief Base class for all Audio Streams. It support the boolean operator to
  * test if the object is ready with data
@@ -40,7 +38,7 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
   
   // Call from subclass or overwrite to do something useful
   virtual void setAudioInfo(AudioBaseInfo info) {
-      LOGD(LOG_METHOD);
+      TRACED();
       this->info = info;
       info.logInfo();
       if (p_notify!=nullptr){
@@ -105,7 +103,7 @@ class AudioStreamX : public AudioStream {
 class AudioStreamWrapper : public AudioStream {
  public:
      AudioStreamWrapper(Stream& s) { 
-         LOGD(LOG_METHOD);
+         TRACED();
          p_stream = &s; 
          p_stream->setTimeout(clientTimeout);
      }
@@ -166,13 +164,13 @@ class MemoryStream : public AudioStream {
   }
 
   ~MemoryStream() {
-    LOGD(LOG_METHOD);
+    TRACED();
     if (memoryCanChange() && buffer!=nullptr) free(buffer);
   }
 
   // resets the read pointer
   bool begin() override {
-    LOGD(LOG_METHOD);
+    TRACED();
     write_pos = memoryCanChange() ? 0 : buffer_size;
     if (this->buffer==nullptr){
       resize(buffer_size);
@@ -521,7 +519,7 @@ class GeneratedSoundStream : public AudioStreamX {
   GeneratedSoundStream() = default;
   
   GeneratedSoundStream(SoundGenerator<T> &generator) {
-    LOGD(LOG_METHOD);
+    TRACED();
     setInput(generator);
   }
 
@@ -533,7 +531,7 @@ class GeneratedSoundStream : public AudioStreamX {
 
   /// start the processing
   bool begin() override {
-    LOGD(LOG_METHOD);
+    TRACED();
     if (generator_ptr==nullptr){
       LOGE("%s",source_not_defined_error);
       return false;
@@ -547,7 +545,7 @@ class GeneratedSoundStream : public AudioStreamX {
 
   /// start the processing
   bool begin(AudioBaseInfo cfg) {
-    LOGD(LOG_METHOD);
+    TRACED();
     if (generator_ptr==nullptr){
       LOGE("%s",source_not_defined_error);
       return false;
@@ -561,7 +559,7 @@ class GeneratedSoundStream : public AudioStreamX {
 
   /// stop the processing
   void end() override {
-    LOGD(LOG_METHOD);
+    TRACED();
     generator_ptr->end();
     active = false;
   }
@@ -608,12 +606,12 @@ class GeneratedSoundStream : public AudioStreamX {
 class BufferedStream : public AudioStream {
  public:
   BufferedStream(size_t buffer_size) {
-    LOGD(LOG_METHOD);
+    TRACED();
     buffer = new SingleBuffer<uint8_t>(buffer_size);
   }
 
   ~BufferedStream() {
-    LOGD(LOG_METHOD);
+    TRACED();
     if (buffer != nullptr) {
       delete buffer;
     }
@@ -793,7 +791,7 @@ class RingBufferStream : public AudioStream {
  */
 class ExternalBufferStream : public AudioStream {
  public:
-  ExternalBufferStream() { LOGD(LOG_METHOD); }
+  ExternalBufferStream() { TRACED(); }
 
   virtual int available() override { return buffer.available(); }
 
@@ -846,14 +844,14 @@ class CallbackBufferedStream : public AudioStreamX {
 
   /// Activates the output
   virtual bool begin() {
-    LOGI(LOG_METHOD);
+    TRACEI();
     active = true;
     return true;
   }
 
   /// stops the processing
   virtual void end() {
-    LOGI(LOG_METHOD);
+    TRACEI();
     active = false;
   };
 
@@ -1019,7 +1017,7 @@ class VolumeStream : public AudioStreamX {
 
         /// starts the processing 
         bool begin(VolumeStreamConfig cfg){
-            LOGD(LOG_METHOD);
+            TRACED();
             info = cfg;
             max_value = NumberConverter::maxValue(info.bits_per_sample);
             if (info.channels>max_channels){
@@ -1051,7 +1049,7 @@ class VolumeStream : public AudioStreamX {
 
         /// Read raw PCM audio data, which will be the input for the volume control 
         virtual size_t readBytes(uint8_t *buffer, size_t length) override { 
-            LOGD(LOG_METHOD);
+            TRACED();
             if (buffer==nullptr || p_in==nullptr){
                 LOGE("NPE");
                 return 0;
@@ -1063,7 +1061,7 @@ class VolumeStream : public AudioStreamX {
 
         /// Writes raw PCM audio data, which will be the input for the volume control 
         virtual size_t write(const uint8_t *buffer, size_t size) override {
-            LOGD(LOG_METHOD);
+            TRACED();
             if (buffer==nullptr || p_out==nullptr){
                 LOGE("NPE");
                 return 0;
@@ -1084,7 +1082,7 @@ class VolumeStream : public AudioStreamX {
 
         /// Detines the Audio info - The bits_per_sample are critical to work properly!
         void setAudioInfo(AudioBaseInfo cfg) override {
-            LOGD(LOG_METHOD);
+            TRACED();
             begin(cfg);
         }
 
@@ -1503,10 +1501,10 @@ class TimerCallbackAudioStream : public BufferedStream {
   friend void IRAM_ATTR timerCallback(void *obj);
 
  public:
-  TimerCallbackAudioStream() : BufferedStream(80) { LOGD(LOG_METHOD); }
+  TimerCallbackAudioStream() : BufferedStream(80) { TRACED(); }
 
   ~TimerCallbackAudioStream() {
-    LOGD(LOG_METHOD);
+    TRACED();
     if (timer != nullptr) delete timer;
     if (buffer != nullptr) delete buffer;
     if (frame != nullptr) delete[] frame;
@@ -1520,7 +1518,7 @@ class TimerCallbackAudioStream : public BufferedStream {
 
   /// updates the audio information
   virtual void setAudioInfo(AudioBaseInfo info) {
-    LOGD(LOG_METHOD);
+    TRACED();
     if (cfg.sample_rate != info.sample_rate || cfg.channels != info.channels ||
         cfg.bits_per_sample != info.bits_per_sample) {
       bool do_restart = active;
@@ -1561,7 +1559,7 @@ class TimerCallbackAudioStream : public BufferedStream {
 
   /// Restart the processing
   bool begin() {
-    LOGD(LOG_METHOD);
+    TRACED();
     if (this->frameCallback != nullptr) {
       if (cfg.use_timer) {
         timer->begin(timerCallback, time, TimeUnit::US);
@@ -1573,7 +1571,7 @@ class TimerCallbackAudioStream : public BufferedStream {
 
   /// Stops the processing
   void end() {
-    LOGD(LOG_METHOD);
+    TRACED();
     if (cfg.use_timer) {
       timer->end();
     }
@@ -1601,7 +1599,7 @@ class TimerCallbackAudioStream : public BufferedStream {
   // used for audio sink
   virtual size_t writeExt(const uint8_t *data, size_t len) override {
     if (!active) return 0;
-    LOGD(LOG_METHOD);
+    TRACED();
     size_t result = 0;
     if (!cfg.use_timer) {
       result = frameCallback((uint8_t *)data, len);
@@ -1615,7 +1613,7 @@ class TimerCallbackAudioStream : public BufferedStream {
   // used for audio source
   virtual size_t readExt(uint8_t *data, size_t len) override {
     if (!active) return 0;
-    LOGD(LOG_METHOD);
+    TRACED();
 
     size_t result = 0;
     if (!cfg.use_timer) {
@@ -1683,7 +1681,6 @@ void TimerCallbackAudioStream::timerCallback(void *obj) {
       }
       if (src->buffer->writeArray(src->frame, available_bytes) !=
           available_bytes) {
-        // LOGE(UNDERFLOW_MSG);
         assert(false);
       }
     } else {
@@ -1694,7 +1691,7 @@ void TimerCallbackAudioStream::timerCallback(void *obj) {
             src->buffer->readArray(src->frame, src->frameSize);
         if (available_bytes !=
             src->frameCallback(src->frame, available_bytes)) {
-          LOGE(UNDERFLOW_MSG);
+          LOGE("data underflow");
         }
       }
     }

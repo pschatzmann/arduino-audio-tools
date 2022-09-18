@@ -15,23 +15,23 @@ namespace audio_tools {
 class BufferedTaskStream : public AudioStream {
     public:
         BufferedTaskStream() {
-            LOGI(LOG_METHOD);
+            TRACEI();
             createMutex();
         };
 
         BufferedTaskStream(AudioStream &input){
-            LOGI(LOG_METHOD);
+            TRACEI();
             createMutex();
             setInput(input);
         }
 
         ~BufferedTaskStream(){
-            LOGI(LOG_METHOD);
+            TRACEI();
             stop();
         }
 
         virtual void begin(bool wait=true)  {
-            LOGD(LOG_METHOD);
+            TRACED();
             active=true;
             ready = false;
             xTaskCreatePinnedToCore(task, "BufferedTaskStream", STACK_SIZE, this, URL_STREAM_PRIORITY, &xHandle, URL_STREAM_CORE);
@@ -39,14 +39,14 @@ class BufferedTaskStream : public AudioStream {
         }
 
         virtual void end()  {
-            LOGD(LOG_METHOD);
+            TRACED();
             if (xHandle!=NULL) vTaskDelete( xHandle );
             active = false;
             ready = false;
         }
 
         virtual void setInput(AudioStream &input) {
-            LOGD(LOG_METHOD);
+            TRACED();
             p_stream = &input;
         }
 
@@ -116,7 +116,7 @@ class BufferedTaskStream : public AudioStream {
         bool ready = false;
 
         void createMutex() {
-            LOGD(LOG_METHOD);
+            TRACED();
             if (mutex == NULL){
                 mutex = xSemaphoreCreateMutex();
                 if (mutex==NULL){
@@ -126,7 +126,7 @@ class BufferedTaskStream : public AudioStream {
         }
 
         static void task(void * pvParameters){
-            LOGD(LOG_METHOD);
+            TRACED();
             static uint8_t buffer[512];
             BufferedTaskStream* self = (BufferedTaskStream*) pvParameters;
             while(true){
@@ -162,30 +162,30 @@ class BufferedTaskStream : public AudioStream {
 class URLStream : public AbstractURLStream {
     public:
         URLStream(int readBufferSize=DEFAULT_BUFFER_SIZE){
-            LOGD(LOG_METHOD);
+            TRACED();
             p_urlStream = new URLStreamDefault(readBufferSize);
             taskStream.setInput(*p_urlStream);
         }
 
         URLStream(Client &clientPar, int readBufferSize=DEFAULT_BUFFER_SIZE){
-            LOGD(LOG_METHOD);
+            TRACED();
             p_urlStream = new URLStreamDefault(clientPar, readBufferSize);
             taskStream.setInput(*p_urlStream);
         }
 
         URLStream(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE) {
-            LOGD(LOG_METHOD);
+            TRACED();
             p_urlStream = new URLStreamDefault(network, password, readBufferSize);
             taskStream.setInput(*p_urlStream);
         }
 
         ~URLStream(){
-            LOGD(LOG_METHOD);
+            TRACED();
             if (p_urlStream!=nullptr) delete p_urlStream;
         }
 
         bool begin(const char* urlStr, const char* acceptMime=nullptr, MethodID action=GET,  const char* reqMime="", const char*reqData="") {
-            LOGD(LOG_METHOD);
+            TRACED();
             // start real stream
             bool result = p_urlStream->begin(urlStr, acceptMime, action,reqMime, reqData );
             // start buffer task
@@ -225,7 +225,7 @@ class URLStream : public AbstractURLStream {
         }
 
         void end(){
-            LOGD(LOG_METHOD);
+            TRACED();
             taskStream.end();
             p_urlStream->end();
         }

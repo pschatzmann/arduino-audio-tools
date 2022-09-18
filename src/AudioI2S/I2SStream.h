@@ -26,7 +26,7 @@ class I2S : public I2SBase {
   public:
     /// Default Constructor
     I2S() {
-      LOGD(LOG_METHOD);
+      TRACED();
     }
 
     /// Destructor
@@ -35,7 +35,7 @@ class I2S : public I2SBase {
     }
 
     bool begin(I2SConfig cfg) {
-      LOGD(LOG_METHOD);
+      TRACED();
       // define bits per sampe from data type
       cfg.bits_per_sample = sizeof(T) * 8;
       return I2SBase::begin(cfg);
@@ -43,7 +43,7 @@ class I2S : public I2SBase {
 
     /// writes the data to the I2S interface
     size_t write(T (*src)[2], size_t frameCount){
-      LOGD(LOG_METHOD);
+      TRACED();
       return writeBytes(src, frameCount * sizeof(T) * 2); // 2 bytes * 2 channels      
     }
     
@@ -70,7 +70,7 @@ class I2SStream : public AudioStream {
 
     public:
         I2SStream(int mute_pin=PIN_I2S_MUTE) {
-            LOGD(LOG_METHOD);
+            TRACED();
             this->mute_pin = mute_pin;
             if (mute_pin>0) {
                 pinMode(mute_pin, OUTPUT);
@@ -89,7 +89,7 @@ class I2SStream : public AudioStream {
 
         /// Starts the I2S interface
         void begin(I2SConfig cfg) {
-            LOGD(LOG_METHOD);
+            TRACED();
             i2s.begin(cfg);
             // unmute
             mute(false);
@@ -97,14 +97,14 @@ class I2SStream : public AudioStream {
 
         /// Stops the I2S interface 
         void end() {
-            LOGD(LOG_METHOD);
+            TRACED();
             mute(true);
             i2s.end();
         }
 
         /// updates the sample rate dynamically 
         virtual void setAudioInfo(AudioBaseInfo info) {
-            LOGI(LOG_METHOD);
+            TRACEI();
             AudioStream::setAudioInfo(info);
             I2SConfig cfg = i2s.config();
             if (cfg.sample_rate != info.sample_rate
@@ -122,7 +122,7 @@ class I2SStream : public AudioStream {
 
         /// Writes the audio data to I2S
         virtual size_t write(const uint8_t *buffer, size_t size) {
-            LOGD(LOG_METHOD);
+            TRACED();
             return i2s.writeBytes(buffer, size);
         }
 

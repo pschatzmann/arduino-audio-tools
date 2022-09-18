@@ -38,7 +38,7 @@ class ILBCDecoder : public AudioDecoder {
   virtual AudioBaseInfo audioInfo() { return info; }
 
   virtual void begin() {
-    LOGI(LOG_METHOD);
+    TRACEI();
     if (p_print==nullptr){
       LOGE("Output not defined");
       return;
@@ -59,7 +59,7 @@ class ILBCDecoder : public AudioDecoder {
   }
 
   virtual void end() {
-    LOGI(LOG_METHOD);
+    TRACEI();
     delete p_ilbc;
     p_ilbc = nullptr;
   }
@@ -133,7 +133,7 @@ class ILBCEncoder : public AudioEncoder {
   }
 
   void begin() {
-    LOGI(LOG_METHOD);
+    TRACEI();
     if (p_print==nullptr){
       LOGE("Output not defined");
       return;
@@ -157,7 +157,7 @@ class ILBCEncoder : public AudioEncoder {
   }
 
   virtual void end() {
-    LOGI(LOG_METHOD);
+    TRACEI();
     if (p_ilbc != nullptr) {
       delete p_ilbc;
       p_ilbc = nullptr;

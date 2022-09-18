@@ -22,7 +22,7 @@ class SDIndex {
     };
     void begin(const char *startDir, const char *extension,
                const char *file_name_pattern, bool setupIndex=true) {
-      LOGD(LOG_METHOD);
+      TRACED();
       this->ext = extension;
       this->file_name_pattern = file_name_pattern;
       idx_path = String(startDir)+"/idx.txt";
@@ -44,7 +44,7 @@ class SDIndex {
 
     void ls(Print &p, const char *startDir, const char *extension,
                const char *file_name_pattern="*"){
-      LOGD(LOG_METHOD);
+      TRACED();
       this->ext = extension;
       this->file_name_pattern = file_name_pattern;
       listDir(p, startDir);
@@ -164,7 +164,7 @@ class SDIndex {
     }
 
     FileT openNext(FileT &dir) {
-      LOGD(LOG_METHOD);
+      TRACED();
 #ifdef USE_SDFAT
       FileT result;
       if (!result.openNext(&dir, O_READ)){
@@ -186,7 +186,7 @@ class SDIndex {
     }
 
     void popPath(){
-      LOGD(LOG_METHOD);
+      TRACED();
 #ifdef USE_SDFAT
       String str;
       file_path_stack.pop_back(str);
@@ -196,7 +196,7 @@ class SDIndex {
 
     /// checks if the file is a valid audio file
     bool isValidAudioFile(FileT &file) {
-      LOGD(LOG_METHOD);
+      TRACED();
       const char *file_name = fileName(file);
       if (file.isDirectory()) {
         LOGD("-> isValidAudioFile: '%s': %d", file_name, false);
@@ -230,7 +230,7 @@ class SDIndex {
     }
 
     void rewind(FileT f){
-      LOGD(LOG_METHOD);
+      TRACED();
 #ifdef USE_SDFAT
       f.rewind();
 #else
@@ -282,7 +282,7 @@ class SDIndex {
     }
 
     FileT open(const char* name){
-       LOGD(LOG_METHOD);
+       TRACED();
 #ifdef USE_SDFAT
       FileT result;
       if (!result.open(name)){

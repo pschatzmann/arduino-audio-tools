@@ -23,7 +23,7 @@ class SDDirect {
     
     void begin(const char *startDir, const char *extension,
                const char *file_name_pattern) {
-      LOGD(LOG_METHOD);
+      TRACED();
       this->start_dir = startDir;
       this->ext = extension;
       this->file_name_pattern = file_name_pattern;
@@ -114,7 +114,7 @@ class SDDirect {
     }
 
     void rewind(FileT f){
-      LOGD(LOG_METHOD);
+      TRACED();
 #ifdef USE_SDFAT
       f.rewind();
 #else
@@ -134,7 +134,7 @@ class SDDirect {
     }
 
     FileT openNext(FileT &dir) {
-      LOGD(LOG_METHOD);
+      TRACED();
 #ifdef USE_SDFAT
       FileT result;
       if (!result.openNext(&dir, O_READ)){
@@ -147,7 +147,7 @@ class SDDirect {
     }
 
     void pushPath(const char* name){
-        LOGD(LOG_METHOD);
+        TRACED();
 #ifdef USE_SDFAT
         LOGD("pushPath: %s", name);
         String nameStr(name);
@@ -156,7 +156,7 @@ class SDDirect {
     }
 
     void popPath(){
-       LOGD(LOG_METHOD);
+       TRACED();
 #ifdef USE_SDFAT
       String str;
       file_path_stack.pop_back(str);
@@ -224,7 +224,7 @@ class SDDirect {
     }
 
     FileT open(const char* name){
-       LOGD(LOG_METHOD);
+       TRACED();
 #ifdef USE_SDFAT
       FileT result;
       if (!result.open(name)){

@@ -37,7 +37,7 @@ class GSMDecoder : public AudioDecoder {
   }
 
   virtual void begin() {
-    LOGI(LOG_METHOD);
+    TRACEI();
     // 160 13-bit samples
     result_buffer.resize(160 * sizeof(int16_t));
     // gsm_frame of 33 bytes
@@ -51,7 +51,7 @@ class GSMDecoder : public AudioDecoder {
   }
 
   virtual void end() {
-    LOGI(LOG_METHOD);
+    TRACEI();
     gsm_destroy(v_gsm);
     is_active = false;
   }
@@ -133,7 +133,7 @@ class GSMEncoder : public AudioEncoder {
   }
 
   void begin() {
-    LOGI(LOG_METHOD);
+    TRACEI();
 
     if (cfg.sample_rate != 8000) {
       LOGW("Sample rate is supposed to be 8000 - it was %d", cfg.sample_rate);
@@ -151,7 +151,7 @@ class GSMEncoder : public AudioEncoder {
   }
 
   virtual void end() {
-    LOGI(LOG_METHOD);
+    TRACEI();
     gsm_destroy(v_gsm);
     is_active = false;
   }

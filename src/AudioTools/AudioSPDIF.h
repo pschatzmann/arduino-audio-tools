@@ -129,7 +129,7 @@ class SPDIFStream : public AudioStreamX {
 
   /// Start with the provided parameters
   bool begin(SPDIFConfig cfg) {
-    LOGD(LOG_METHOD);
+    TRACED();
     // Some validations to make sure that the config is valid
     if (!(cfg.channels == 1 || cfg.channels == 2)) {
       LOGE("Unsupported number of channels: %d", cfg.channels);
@@ -172,14 +172,14 @@ class SPDIFStream : public AudioStreamX {
   }
 
   void end() {
-    LOGD(LOG_METHOD);
+    TRACED();
     i2s.end();
     i2sOn = false;
   }
 
   /// Change the audio parameters
   void setAudioInfo(AudioBaseInfo info) {
-    LOGD(LOG_METHOD);
+    TRACED();
     cfg.bits_per_sample = info.bits_per_sample;
     cfg.channels = info.channels;
     cfg.sample_rate = info.sample_rate;
@@ -236,7 +236,7 @@ class SPDIFStream : public AudioStreamX {
 
   // initialize S/PDIF buffer
   void spdif_buf_init(void) {
-    LOGD(LOG_METHOD);
+    TRACED();
     size_t i;
     uint32_t bmc_mw = BMC_W;
 

@@ -183,7 +183,7 @@ class MetaDataICY : public AbstractMetaData {
 
         /// allocates the memory to store the metadata / we support changing sizes
         virtual void setupMetaData(int meta_size) {
-            LOGD(LOG_METHOD);
+            TRACED();
             if (meta_size>0){
                 if (metaData==nullptr){
                     metaData = new char[meta_size+1];
@@ -204,7 +204,7 @@ class MetaDataICY : public AbstractMetaData {
         /// e.g. StreamTitle=' House Bulldogs - But your love (Radio Edit)';StreamUrl='';
         virtual void processMetaData( char* metaData, int len) {
             //CHECK_MEMORY();
-            LOGD(LOG_METHOD);
+            TRACED();
             metaData[len]=0;
             if (isAscii(metaData, 12)){
                 LOGI("%s", metaData);
@@ -251,7 +251,7 @@ class ICYUrlSetup {
     public:
         /// Fills the metaint from the Http Request and executes metadata callbacks on http reply parameters
         int setup(HttpRequest &http ) {
-            LOGD(LOG_METHOD);
+            TRACED();
             p_http = &http;
             const char* iceMetaintStr = http.reply().get("icy-metaint");
             if (iceMetaintStr){
@@ -266,7 +266,7 @@ class ICYUrlSetup {
 
         /// Executes the metadata callbacks with data provided from the http request result parameter
         void executeCallback(void (*callback)(MetaDataType info, const char* str, int len)) {
-            LOGI(LOG_METHOD);
+            TRACEI();
             if (callback==nullptr){
                 LOGW("callback not defined")
             }

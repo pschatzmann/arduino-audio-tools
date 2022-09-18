@@ -39,7 +39,7 @@ class AudioPrint : public Print, public AudioBaseInfoDependent, public AudioBase
 
         // overwrite to do something useful
         virtual void setAudioInfo(AudioBaseInfo info) override {
-            LOGD(LOG_METHOD);
+            TRACED();
             cfg = info;
             info.logInfo();
             if (p_notify!=nullptr){
@@ -94,7 +94,7 @@ class CsvStream : public AudioPrint {
 
         /// Starts the processing with 2 channels
         void begin(){
-             LOGD(LOG_METHOD);
+             TRACED();
             this->active = true;
         }
 
@@ -109,14 +109,14 @@ class CsvStream : public AudioPrint {
 
         /// Starts the processing with the number of channels defined in AudioBaseInfo
         void begin(AudioBaseInfo info){
-             LOGD(LOG_METHOD);
+             TRACED();
             this->active = true;
             this->channels = info.channels;
         }
 
         /// Starts the processing with the defined number of channels 
         void begin(int channels, Print &out=Serial){
-             LOGD(LOG_METHOD);
+             TRACED();
             this->channels = channels;
             this->out_ptr = &out;
             this->active = true;
@@ -124,13 +124,13 @@ class CsvStream : public AudioPrint {
 
         /// Sets the CsvStream as inactive 
         void end() {
-             LOGD(LOG_METHOD);
+             TRACED();
             active = false;
         }
 
         /// defines the number of channels
         virtual void setAudioInfo(AudioBaseInfo info) {
-             LOGI(LOG_METHOD);
+             TRACEI();
             info.logInfo();
             this->channels = info.channels;
         };
@@ -138,7 +138,7 @@ class CsvStream : public AudioPrint {
         /// Writes the data - formatted as CSV -  to the output stream
         virtual size_t write(const uint8_t* data, size_t len) {   
             if (!active) return 0;
-            LOGD(LOG_METHOD);
+            TRACED();
             size_t lenChannels = len / (sizeof(T)*channels); 
             data_ptr = (T*)data;
             for (size_t j=0;j<lenChannels;j++){
@@ -185,21 +185,21 @@ class HexDumpStream : public AudioPrint {
         }
 
         void begin(AudioBaseInfo info){
-            LOGD(LOG_METHOD);
+            TRACED();
             info.logInfo();
             this->active = true;
             pos = 0;
         }
 
         void begin(){
-             LOGD(LOG_METHOD);
+             TRACED();
             this->active = true;
             pos = 0;
         }
 
         /// Sets the CsvStream as inactive 
         void end() {
-             LOGD(LOG_METHOD);
+             TRACED();
             active = false;
         }
 
@@ -210,7 +210,7 @@ class HexDumpStream : public AudioPrint {
 
         virtual size_t write(const uint8_t* data, size_t len) {   
             if (!active) return 0;
-             LOGD(LOG_METHOD);
+             TRACED();
             for (size_t j=0;j<len;j++){
                 out_ptr->print(data[j], HEX);
                 out_ptr->print(" ");

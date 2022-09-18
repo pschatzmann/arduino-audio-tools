@@ -17,15 +17,15 @@ namespace audio_tools {
 
 class DecoderHelix : public AudioDecoder {
 public:
-  DecoderHelix() { LOGD(LOG_METHOD); }
+  DecoderHelix() { TRACED(); }
 
   DecoderHelix(Print &out_stream) {
-    LOGD(LOG_METHOD);
+    TRACED();
     p_out_stream = &out_stream;
   }
 
   DecoderHelix(Print &out_stream, AudioBaseInfoDependent &bi) {
-    LOGD(LOG_METHOD);
+    TRACED();
     p_out_stream = &out_stream;
     p_bi = &bi;
   }
@@ -37,14 +37,14 @@ public:
 
   /// Starts the processing
   void begin() {
-    LOGD(LOG_METHOD);
+    TRACED();
     // reset actual decoder so that we start a new determination
     resetDecoder();
   }
 
   /// Releases the reserved memory
   void end() {
-    LOGD(LOG_METHOD);
+    TRACED();
     if (p_decoder!=nullptr){
       p_decoder->end();
     }

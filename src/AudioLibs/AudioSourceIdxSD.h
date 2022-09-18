@@ -41,7 +41,7 @@ public:
   }
 
   virtual void begin() override {
-    LOGD(LOG_METHOD);
+    TRACED();
     static bool is_sd_setup = false;
     if (!is_sd_setup) {
       if (!SD.begin(cs)) {

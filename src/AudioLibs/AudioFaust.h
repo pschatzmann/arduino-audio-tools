@@ -51,7 +51,7 @@ class FaustStream : public AudioStreamX {
 
     /// Checks the parameters and starts the processing
     bool begin(AudioBaseInfo cfg){
-        LOGD(LOG_METHOD);
+        TRACED();
         bool result = true;
         this->cfg = cfg;
         this->bytes_per_sample = cfg.bits_per_sample/8;
@@ -98,7 +98,7 @@ class FaustStream : public AudioStreamX {
 
     /// Ends the processing
     void end() {
-        LOGD(LOG_METHOD);
+        TRACED();
         is_read = false;
         is_write = false;
         p_dsp->instanceClear();
@@ -113,7 +113,7 @@ class FaustStream : public AudioStreamX {
     size_t readBytes(uint8_t *data, size_t len) override {
         size_t result = 0;
         if (is_read){
-            LOGD(LOG_METHOD);
+            TRACED();
             result = len;
             int samples = len / bytes_per_sample;
             allocateFloatBuffer(samples, false);
@@ -128,7 +128,7 @@ class FaustStream : public AudioStreamX {
     size_t write(const uint8_t *write_data, size_t len) override {
         size_t result = 0;
         if (is_write){
-            LOGD(LOG_METHOD);
+            TRACED();
             int samples = len / bytes_per_sample;
             allocateFloatBuffer(samples, with_output_buffer);
             int16_t *data16 = (int16_t*) write_data;

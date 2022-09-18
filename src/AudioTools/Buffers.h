@@ -427,7 +427,7 @@ class NBuffer : public BaseBuffer<T> {
 
   // resets all buffers
   void reset() {
-    LOGD(LOG_METHOD);
+    TRACED();
     while (actual_read_buffer != nullptr) {
       actual_read_buffer->reset();
       addAvailableBuffer(actual_read_buffer);

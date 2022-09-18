@@ -32,7 +32,7 @@ class APTXDecoder : public AudioDecoder {
   virtual AudioBaseInfo audioInfo() { return info; }
 
   virtual void begin() {
-    LOGI(LOG_METHOD);
+    TRACEI();
     ctx = aptx_init(is_hd);
     is_first_write = true;
     if (notify != nullptr) {
@@ -41,7 +41,7 @@ class APTXDecoder : public AudioDecoder {
   }
 
   virtual void end() {
-    LOGI(LOG_METHOD);
+    TRACEI();
     bool dropped = aptx_decode_sync_finish(ctx);
     aptx_finish(ctx);
     ctx = nullptr;
@@ -208,7 +208,7 @@ class APTXEncoder : public AudioEncoder {
   }
 
   void begin() {
-    LOGI(LOG_METHOD);
+    TRACEI();
     input_buffer.resize(4 * 2);
     output_buffer.resize(100 * (is_hd ? 6 : 4));
 
@@ -219,7 +219,7 @@ class APTXEncoder : public AudioEncoder {
   }
 
   virtual void end() {
-    LOGI(LOG_METHOD);
+    TRACEI();
     if (ctx != nullptr) {
       size_t output_written = 0;
       aptx_encode_finish(ctx, output_buffer.data(), output_buffer.size(),

@@ -34,13 +34,13 @@ class I2SBasePIO {
 
     /// starts the DAC with the default config in TX Mode
     bool begin(RxTxMode mode = TX_MODE)  {
-      LOGD(LOG_METHOD);
+      TRACED();
       return begin(defaultConfig(mode));
     }
 
     /// starts the DAC 
     bool begin(I2SConfig cfg) {
-      LOGI(LOG_METHOD);
+      TRACEI();
       this->cfg = cfg;
       cfg.logInfo();
       if (cfg.rx_tx_mode != TX_MODE ){
@@ -89,7 +89,7 @@ class I2SBasePIO {
 
     /// writes the data to the I2S interface 
     size_t writeBytes(const void *src, size_t size_bytes)  {
-      LOGD(LOG_METHOD);
+      TRACED();
       size_t result = 0;
       int16_t *p16 = (int16_t *)src;
       
@@ -109,7 +109,7 @@ class I2SBasePIO {
     }
 
     size_t readBytes(void *dest, size_t size_bytes)  {
-      LOGE(LOG_METHOD);
+      TRACEE();
       size_t result = 0;
       return result;
     }

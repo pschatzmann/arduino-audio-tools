@@ -41,7 +41,7 @@ namespace audio_tools {
          * @param decoder
          */
         AudioPlayer(AudioSource& source, AudioPrint& output, AudioDecoder& decoder) {
-            LOGD(LOG_METHOD);
+            TRACED();
             this->p_source = &source;
             this->p_decoder = &decoder;
             if (decoder.isResultPCM()){
@@ -66,7 +66,7 @@ namespace audio_tools {
          * @param notify
          */
         AudioPlayer(AudioSource& source, Print& output, AudioDecoder& decoder, AudioBaseInfoDependent* notify = nullptr) {
-            LOGD(LOG_METHOD);
+            TRACED();
             this->p_source = &source;
             this->p_decoder = &decoder;
             if (decoder.isResultPCM()){
@@ -87,7 +87,7 @@ namespace audio_tools {
          * @param decoder
          */
         AudioPlayer(AudioSource& source, AudioStream& output, AudioDecoder& decoder) {
-            LOGD(LOG_METHOD);
+            TRACED();
             this->p_source = &source;
             if (decoder.isResultPCM()){
                 this->volume_out.setTarget(output);
@@ -110,7 +110,7 @@ namespace audio_tools {
 
         /// (Re)Starts the playing of the music (from the beginning)
         virtual bool begin(int index=0, bool isActive = true) {
-            LOGD(LOG_METHOD);
+            TRACED();
             bool result = false;
             // initilaize volume
             if (current_volume==-1){
@@ -151,7 +151,7 @@ namespace audio_tools {
         }
 
         virtual void end() {
-            LOGD(LOG_METHOD);
+            TRACED();
             active = false;
             p_out_decoding->end();
             meta_out.end();
@@ -186,7 +186,7 @@ namespace audio_tools {
 
         /// Updates the audio info in the related objects
         virtual void setAudioInfo(AudioBaseInfo info) {
-            LOGD(LOG_METHOD);
+            TRACED();
             LOGI("sample_rate: %d", info.sample_rate);
             LOGI("bits_per_sample: %d", info.bits_per_sample);
             LOGI("channels: %d", info.channels);
@@ -204,19 +204,19 @@ namespace audio_tools {
 
         /// starts / resumes the playing of a matching song
         virtual void play() {
-            LOGD(LOG_METHOD);
+            TRACED();
             active = true;
         }
 
         /// halts the playing
         virtual void stop() {
-            LOGD(LOG_METHOD);
+            TRACED();
             active = false;
         }
 
         /// moves to next file
         virtual bool next(int offset=1) {
-            LOGD(LOG_METHOD);
+            TRACED();
             previous_stream = false;
             active = setStream(p_source->nextStream(offset));
             return active;
@@ -224,7 +224,7 @@ namespace audio_tools {
 
         /// moves to selected file
         virtual bool setIndex(int idx) {
-            LOGD(LOG_METHOD);
+            TRACED();
             previous_stream = false;
             active = setStream(p_source->selectStream(idx));
             return active;
@@ -232,7 +232,7 @@ namespace audio_tools {
 
         /// moves to selected file
         virtual bool setPath(const char* path) {
-            LOGD(LOG_METHOD);
+            TRACED();
             previous_stream = false;
             active = setStream(p_source->selectStream(path));
             return active;
@@ -240,7 +240,7 @@ namespace audio_tools {
 
         /// moves to previous file
         virtual bool previous(int offset=1) {
-            LOGD(LOG_METHOD);
+            TRACED();
             previous_stream = true;
             active = setStream(p_source->previousStream(offset));
             return active;
@@ -295,7 +295,7 @@ namespace audio_tools {
         /// Call this method in the loop. 
         virtual void copy() {
             if (active) {
-                LOGD(LOG_METHOD);
+                TRACED();
                 if (p_final_print!=nullptr && p_final_print->availableForWrite()==0){
                     // not ready to do anything - so we wait a bit
                     delay(100);
@@ -332,7 +332,7 @@ namespace audio_tools {
 
         /// Defines the medatadata callback
         virtual void setMetadataCallback(void (*callback)(MetaDataType type, const char* str, int len), ID3TypeSelection sel=SELECT_ID3) {
-            LOGI(LOG_METHOD);
+            TRACEI();
             // setup metadata. 
             if (p_source->setMetadataCallback(callback)){
                 // metadata is handled by source
@@ -371,7 +371,7 @@ namespace audio_tools {
 
         /// Default constructur only allowed in subclasses
         AudioPlayer() {
-            LOGD(LOG_METHOD);
+            TRACED();
         }
 
         /// Callback implementation which writes to metadata

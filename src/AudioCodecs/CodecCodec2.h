@@ -80,7 +80,7 @@ public:
   }
 
   virtual void begin() {
-    LOGI(LOG_METHOD);
+    TRACEI();
 
     int mode = getCodec2Mode(bits_per_second);
     if (mode==-1){
@@ -114,7 +114,7 @@ public:
   }
 
   virtual void end() {
-    LOGI(LOG_METHOD);
+    TRACEI();
     codec2_destroy(p_codec2);
     is_active = false;
   }
@@ -196,7 +196,7 @@ public:
   }
 
   void begin() {
-    LOGI(LOG_METHOD);
+    TRACEI();
 
     int mode = getCodec2Mode(bits_per_second);
     if (mode==-1){
@@ -226,7 +226,7 @@ public:
   }
 
   virtual void end() {
-    LOGI(LOG_METHOD);
+    TRACEI();
     codec2_destroy(p_codec2);
     is_active = false;
   }

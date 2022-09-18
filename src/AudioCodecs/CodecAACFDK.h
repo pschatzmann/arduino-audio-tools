@@ -19,12 +19,12 @@ AudioBaseInfoDependent *audioChangeFDK = nullptr;
 class AACDecoderFDK : public AudioDecoder  {
     public:
         AACDecoderFDK(){
-            LOGD(LOG_METHOD);
+            TRACED();
             dec = new aac_fdk::AACDecoderFDK();
         }
 
         AACDecoderFDK(Print &out_stream, int output_buffer_size=2048){
-            LOGD(LOG_METHOD);
+            TRACED();
             dec = new aac_fdk::AACDecoderFDK(out_stream, output_buffer_size);
         }
 
@@ -79,7 +79,7 @@ class AACDecoderFDK : public AudioDecoder  {
 
         // release the resources
         void end(){
-             LOGD(LOG_METHOD);
+             TRACED();
             dec->end();
         }
 
@@ -232,7 +232,7 @@ public:
 
     /// Defines the Audio Info
     virtual void setAudioInfo(AudioBaseInfo from) {
-        LOGD(LOG_METHOD);
+        TRACED();
         aac_fdk::AudioInfo info;
         info.channels = from.channels;
         info.sample_rate = from.sample_rate;
@@ -247,7 +247,7 @@ public:
      * @return int 
      */
     virtual void begin(AudioBaseInfo info) {
-        LOGD(LOG_METHOD);
+        TRACED();
         enc->begin(info.channels,info.sample_rate, info.bits_per_sample);
     }
 
@@ -260,7 +260,7 @@ public:
      * @return int 0 => ok; error with negative number
      */
     virtual void begin(int input_channels=2, int input_sample_rate=44100, int input_bits_per_sample=16) {
-        LOGD(LOG_METHOD);
+        TRACED();
         enc->begin(input_channels,input_sample_rate, input_bits_per_sample);
     }
 
@@ -277,7 +277,7 @@ public:
 
     // release resources
     void end(){
-        LOGD(LOG_METHOD);
+        TRACED();
         enc->end();
     }
 

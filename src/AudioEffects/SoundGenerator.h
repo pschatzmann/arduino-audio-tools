@@ -32,7 +32,7 @@ class SoundGenerator  {
         }
 
         virtual bool begin() {
-            LOGD(LOG_METHOD);
+            TRACED();
             active = true;
             activeWarningIssued = false;
             LOGI("bits_per_sample: %d", info.bits_per_sample);
@@ -163,7 +163,7 @@ class SineWaveGenerator : public SoundGenerator<T>{
         }
 
         bool begin() override {
-            LOGI(LOG_METHOD);
+            TRACEI();
             SoundGenerator<T>::begin();
             this->m_deltaTime = 1.0 / SoundGenerator<T>::info.sample_rate;
             return true;
@@ -410,7 +410,7 @@ class GeneratorFromArray : public SoundGenerator<T> {
 
     template  <size_t arrayLen> 
     GeneratorFromArray(T(&array)[arrayLen], int repeat=0, bool setInactiveAtEnd=true) {
-        LOGD(LOG_METHOD);
+        TRACED();
         this->max_repeat = repeat;
         this->inactive_at_end = setInactiveAtEnd;
         setArray(array, arrayLen);
@@ -424,7 +424,7 @@ class GeneratorFromArray : public SoundGenerator<T> {
 
     template  <int arrayLen> 
     void setArray(T(&array)[arrayLen]){
-        LOGD(LOG_METHOD);
+        TRACED();
         setArray(array, arrayLen);
     }
 
@@ -440,7 +440,7 @@ class GeneratorFromArray : public SoundGenerator<T> {
 
     /// Starts the generation of samples
     bool begin() override {
-      LOGI(LOG_METHOD);
+      TRACEI();
       SoundGenerator<T>::begin();
       sound_index = 0;
       repeat_counter = 0;
@@ -527,7 +527,7 @@ class GeneratorFixedValue : public SoundGenerator<T> {
 
     /// Starts the generation of samples
     bool begin() override {
-      LOGI(LOG_METHOD);
+      TRACEI();
       SoundGenerator<T>::begin();
       is_running = true;
       value_return = value_set;

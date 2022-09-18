@@ -55,7 +55,7 @@ class FLACDecoder : public StreamingDecoder {
   }
 
   void begin() {
-    LOGI(LOG_METHOD);
+    TRACEI();
     is_active = true;
 
     if (decoder == nullptr) {
@@ -84,7 +84,7 @@ class FLACDecoder : public StreamingDecoder {
   }
 
   void end() {
-    LOGI(LOG_METHOD);
+    TRACEI();
     flush();
     FLAC__stream_decoder_delete(decoder);
     is_active = false;
@@ -306,7 +306,7 @@ class FLACEncoder : public AudioEncoder {
 
   /// starts the processing using the actual AudioInfo
   virtual void begin() override {
-    LOGD(LOG_METHOD);
+    TRACED();
     is_open = false;
     if (p_encoder==nullptr){
       p_encoder = FLAC__stream_encoder_new();
@@ -347,7 +347,7 @@ class FLACEncoder : public AudioEncoder {
 
   /// stops the processing
   void end() override {
-    LOGD(LOG_METHOD);
+    TRACED();
     FLAC__stream_encoder_delete(p_encoder);
     p_encoder = nullptr;
     is_open = false;

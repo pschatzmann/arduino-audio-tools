@@ -82,7 +82,7 @@ class RTSPSourceAudioStream : public IAudioSource {
    * @param info
    */
   virtual void setAudioInfo(AudioBaseInfo info) {
-    LOGI(LOG_METHOD);
+    TRACEI();
     p_audiostream->setAudioInfo(info);
   }
 
@@ -107,7 +107,7 @@ class RTSPSourceAudioStream : public IAudioSource {
    * Start preparing data in order to provide it for the stream
    */
   virtual void start() override {
-    LOGI(LOG_METHOD);
+    TRACEI();
 
     p_audiostream->begin();
     active = true;
@@ -116,7 +116,7 @@ class RTSPSourceAudioStream : public IAudioSource {
    * Stop preparing data as the stream has ended
    */
   virtual void stop() override {
-    LOGI(LOG_METHOD);
+    TRACEI();
     active = false;
     p_audiostream->end();
   };
@@ -171,7 +171,7 @@ class RTSPSourceStream : public IAudioSource {
    * @param info
    */
   virtual void setAudioInfo(AudioBaseInfo info) {
-    LOGI(LOG_METHOD);
+    TRACEI();
     rtp_info.setAudioInfo(info);
   }
 
@@ -194,14 +194,14 @@ class RTSPSourceStream : public IAudioSource {
    * Start preparing data in order to provide it for the stream
    */
   virtual void start() override {
-    LOGI(LOG_METHOD);
+    TRACEI();
     active = true;
   };
   /**
    * Stop preparing data as the stream has ended
    */
   virtual void stop() override {
-    LOGI(LOG_METHOD);
+    TRACEI();
     active = false;
   };
 

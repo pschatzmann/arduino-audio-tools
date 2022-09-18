@@ -21,35 +21,35 @@ class ICYStream : public AbstractURLStream {
     public:
 
         ICYStream(int readBufferSize=DEFAULT_BUFFER_SIZE){
-            LOGI(LOG_METHOD);
+            TRACEI();
             p_urlStream = new ICYStreamDefault(readBufferSize);
             taskStream.setInput(*p_urlStream);
         }
         
         ICYStream(Client &clientPar, int readBufferSize=DEFAULT_BUFFER_SIZE){
-            LOGI(LOG_METHOD);
+            TRACEI();
             p_urlStream = new ICYStreamDefault(clientPar, readBufferSize);
             taskStream.setInput(*p_urlStream);
         }
 
         ICYStream(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE) {
-            LOGI(LOG_METHOD);
+            TRACEI();
             p_urlStream = new ICYStreamDefault(network, password, readBufferSize);
             taskStream.setInput(*p_urlStream);
         }
 
         ~ICYStream(){
-            LOGI(LOG_METHOD);
+            TRACEI();
             if (p_urlStream!=nullptr) delete p_urlStream;
         }
 
         virtual bool setMetadataCallback(void (*fn)(MetaDataType info, const char* str, int len)) override {
-            LOGD(LOG_METHOD);
+            TRACED();
             return p_urlStream->setMetadataCallback(fn);
         }
 
         virtual bool begin(const char* urlStr, const char* acceptMime=nullptr, MethodID action=GET,  const char* reqMime="", const char*reqData="") override {
-            LOGD(LOG_METHOD);
+            TRACED();
             // start real stream
             bool result = p_urlStream->begin(urlStr, acceptMime, action, reqMime, reqData);
             // start reader task
@@ -58,7 +58,7 @@ class ICYStream : public AbstractURLStream {
         }
 
         virtual void end() override{
-            LOGD(LOG_METHOD);
+            TRACED();
             taskStream.end();
             p_urlStream->end();
         }

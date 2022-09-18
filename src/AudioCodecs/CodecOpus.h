@@ -112,7 +112,7 @@ class OpusAudioDecoder : public AudioDecoder {
   /**
    * @brief Construct a new OpusDecoder object
    */
-  OpusAudioDecoder() { LOGD(LOG_METHOD); }
+  OpusAudioDecoder() { TRACED(); }
 
   /**
    * @brief Construct a new OpusDecoder object
@@ -120,7 +120,7 @@ class OpusAudioDecoder : public AudioDecoder {
    * @param out_stream Output Stream to which we write the decoded result
    */
   OpusAudioDecoder(Print &out_stream) {
-    LOGD(LOG_METHOD);
+    TRACED();
     setOutputStream(out_stream);
   }
 
@@ -138,7 +138,7 @@ class OpusAudioDecoder : public AudioDecoder {
   OpusSettings &defaultConfig() { return cfg; }
 
   void begin(OpusSettings info) {
-    LOGD(LOG_METHOD);
+    TRACED();
     cfg = info;
     if (bid != nullptr) {
       bid->setAudioInfo(cfg);
@@ -147,7 +147,7 @@ class OpusAudioDecoder : public AudioDecoder {
   }
 
   void begin() override {
-    LOGD(LOG_METHOD);
+    TRACED();
     outbuf.resize(cfg.max_buffer_size);
     assert(outbuf.data() != nullptr);
     
@@ -162,7 +162,7 @@ class OpusAudioDecoder : public AudioDecoder {
   }
 
   void end() override {
-    LOGD(LOG_METHOD);
+    TRACED();
     if (dec) {
       opus_decoder_destroy(dec);
       dec = nullptr;

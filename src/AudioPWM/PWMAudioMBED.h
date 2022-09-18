@@ -27,7 +27,7 @@ class PWMAudioStreamMBED : public PWMAudioStreamBase {
 
         // Ends the output
         virtual void end() override {
-            LOGD(LOG_METHOD);
+            TRACED();
             ticker.end(); // it does not hurt to call this even if it has not been started
             is_timer_started = false;
 
@@ -51,7 +51,7 @@ class PWMAudioStreamMBED : public PWMAudioStreamBase {
         /// when we get the first write -> we activate the timer to start with the output of data
         virtual void startTimer() override {
             if (!is_timer_started){
-                LOGD(LOG_METHOD);
+                TRACED();
                 long wait_time = 1000000l / audio_config.sample_rate;
                 ticker.setCallbackParameter(this);
                 ticker.begin(defaultPWMAudioOutputCallback, wait_time, US);
@@ -61,7 +61,7 @@ class PWMAudioStreamMBED : public PWMAudioStreamBase {
 
         /// Setup PWM Pins
         virtual void setupPWM(){
-            LOGD(LOG_METHOD);
+            TRACED();
             unsigned long period = 1000000l / audio_config.pwm_frequency;  // -> 30.517578125 microseconds
             pins.resize(audio_config.channels);
             for (int j=0;j<audio_config.channels;j++){

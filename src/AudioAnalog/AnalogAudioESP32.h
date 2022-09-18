@@ -173,7 +173,7 @@ class AnalogAudioStream  : public AudioStreamX {
 
     /// updates the sample rate dynamically 
     virtual void setAudioInfo(AudioBaseInfo info) {
-        LOGI(LOG_METHOD);
+        TRACEI();
         if (adc_config.sample_rate != info.sample_rate
             || adc_config.channels != info.channels
             || adc_config.bits_per_sample != info.bits_per_sample) {
@@ -193,7 +193,7 @@ class AnalogAudioStream  : public AudioStreamX {
 
     /// starts the DAC 
     bool begin(AnalogConfig cfg) {
-      LOGI(LOG_METHOD);
+      TRACEI();
       cfg.logInfo();
 
       if (!is_driver_installed){
@@ -318,7 +318,7 @@ class AnalogAudioStream  : public AudioStreamX {
 
      /// writes the data to the I2S interface
     virtual size_t write(const uint8_t *src, size_t size_bytes) override { 
-      LOGD(LOG_METHOD);
+      TRACED();
 
       size_t result = 0;   
       if (size_bytes>0 && src!=nullptr){
@@ -339,10 +339,10 @@ class AnalogAudioStream  : public AudioStreamX {
     }   
 
     size_t readBytes(uint8_t *dest, size_t size_bytes) override {
-      LOGD(LOG_METHOD);
+      TRACED();
       size_t result = 0;
       if (i2s_read(port_no, dest, size_bytes, &result, portMAX_DELAY)!=ESP_OK){
-        LOGE(LOG_METHOD);
+        TRACEE();
       }
       LOGD( "%s - len: %d -> %d", __func__, size_bytes, result);
       return result;
@@ -371,7 +371,7 @@ class AnalogAudioStream  : public AudioStreamX {
 
     // The internal DAC only supports 8 bit values - so we need to convert the data
     size_t outputStereo(const void *src, size_t size_bytes) {
-      LOGD(LOG_METHOD);
+      TRACED();
       size_t output_size = 0;   
       size_t result;
       uint16_t *dst = (uint16_t *)src;
@@ -412,7 +412,7 @@ class AnalogAudioStream  : public AudioStreamX {
 
     // I2S requires stereo so we convert mono to stereo
     size_t outputMono(const void *src, size_t size_bytes) {
-      LOGD(LOG_METHOD);
+      TRACED();
       size_t output_size = 0;   
       uint16_t out[2];
       size_t resultTotal = 0;

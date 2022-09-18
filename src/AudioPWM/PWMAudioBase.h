@@ -51,7 +51,7 @@ struct PWMConfig : public AudioBaseInfo {
     // define all pins by passing an array and updates the channels by the number of pins
     template<size_t N> 
     void setPins(int (&array)[N]) {
-         LOGD(LOG_METHOD);
+         TRACED();
         int new_channels = sizeof(array)/sizeof(int);
         if (channels!=new_channels) {
             LOGI("channels updated to %d", new_channels); 
@@ -103,7 +103,7 @@ class PWMAudioStreamBase : public AudioPrint {
 
         // /// Starts the PWMAudio using callbacks
         bool begin(uint16_t sampleRate, uint8_t channels, PWMCallbackType cb) {
-             LOGD(LOG_METHOD);
+             TRACED();
             if (channels>maxChannels()){
                 LOGE("Only max %d channels are supported!",maxChannels());
                 return false;
@@ -122,7 +122,7 @@ class PWMAudioStreamBase : public AudioPrint {
 
         /// updates the sample rate dynamically 
         virtual void setAudioInfo(AudioBaseInfo info) {
-             LOGI(LOG_METHOD);
+             TRACEI();
             PWMConfig cfg = audio_config;
             if (cfg.sample_rate != info.sample_rate
                 || cfg.channels != info.channels
@@ -138,7 +138,7 @@ class PWMAudioStreamBase : public AudioPrint {
 
         /// starts the processing using Streams
         bool begin(PWMConfig config ){
-             LOGD(LOG_METHOD);
+             TRACED();
             this->audio_config = config;
             if (config.channels>maxChannels()){
                 LOGE("Only max %d channels are supported!",maxChannels());
@@ -166,7 +166,7 @@ class PWMAudioStreamBase : public AudioPrint {
 
         // restart with prior definitions
         bool begin(){
-             LOGD(LOG_METHOD);
+             TRACED();
             // allocate buffer if necessary
             if (user_callback==nullptr) {
                 if (buffer==nullptr) {
@@ -197,7 +197,7 @@ class PWMAudioStreamBase : public AudioPrint {
         } 
 
         virtual void end(){
-             LOGD(LOG_METHOD);
+             TRACED();
             is_timer_started = false;
         }
 
@@ -262,7 +262,7 @@ class PWMAudioStreamBase : public AudioPrint {
         /// when we get the first write -> we activate the timer to start with the output of data
         virtual void startTimer(){
             if (!is_timer_started){
-                 LOGD(LOG_METHOD);
+                 TRACED();
                 is_timer_started = true;
             }
         }
@@ -280,7 +280,7 @@ class PWMAudioStreamBase : public AudioPrint {
         }
 
         void playNextFrameCallback(){
-             //LOGD(LOG_METHOD);
+             //TRACED();
             uint8_t channels = audio_config.channels;
             int16_t data[channels];
             if (user_callback(channels, data)){
@@ -296,7 +296,7 @@ class PWMAudioStreamBase : public AudioPrint {
         /// writes the next frame to the output pins 
         void playNextFrameStream(){
             if (is_timer_started){
-                //LOGD(LOG_METHOD);
+                //TRACED();
                 int required = (audio_config.bits_per_sample / 8) * audio_config.channels;
                 if (buffer->available() >= required){
                     for (int j=0;j<audio_config.channels;j++){
@@ -311,7 +311,7 @@ class PWMAudioStreamBase : public AudioPrint {
         } 
 
         void playNextFrame(){
-            // LOGD(LOG_METHOD);
+            // TRACED();
             if (user_callback!=nullptr){
                 playNextFrameCallback();
             } else {

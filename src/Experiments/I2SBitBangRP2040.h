@@ -81,7 +81,7 @@ class RPDriver : public I2SDriver {
         }
 
         bool startCore(void(*runLoop)()) override {
-            LOGD(LOG_METHOD);
+            TRACED();
             multicore_launch_core1(runLoop);
             return true;
         }
@@ -141,7 +141,7 @@ class RP2040BitBangI2SWithInterrupts : public BitBangI2SWithInterrupts {
         };
 
         virtual bool begin(I2SConfig cfg) override {
-            LOGI(LOG_METHOD);
+            TRACEI();
             // setup the reader
             LOGI("The sample rate is %d hz", cfg.sample_rate);
             // call begin in parent class
@@ -149,7 +149,7 @@ class RP2040BitBangI2SWithInterrupts : public BitBangI2SWithInterrupts {
         }
 
         void end() {
-            LOGI(LOG_METHOD);
+            TRACEI();
             BitBangI2SWithInterrupts::end();
             pwm_set_enabled(slice_num, false);
             gpio_set_irq_enabled_with_callback(cfg.pin_bck, GPIO_IRQ_EDGE_RISE, false, &gpio_callback);
@@ -162,7 +162,7 @@ class RP2040BitBangI2SWithInterrupts : public BitBangI2SWithInterrupts {
 
         // We use a 50% pwm signal to generate the output for the pin_bck
         virtual void startClockOutSignal(unsigned long frequency) override {
-            LOGI(LOG_METHOD);
+            TRACEI();
             slice_num = pwm_gpio_to_slice_num(cfg.pin_bck);
             uint channel_num = pwm_gpio_to_channel(cfg.pin_bck);
             int max_counter = 10;
@@ -182,7 +182,7 @@ class RP2040BitBangI2SWithInterrupts : public BitBangI2SWithInterrupts {
         }
 
         virtual void startPinInterrupt() override {
-            LOGI(LOG_METHOD);
+            TRACEI();
             if (cfg.is_master){
                 pwm_clear_irq(slice_num);
                 pwm_set_irq_enabled(slice_num, true);

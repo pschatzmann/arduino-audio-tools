@@ -65,7 +65,7 @@ class G7xxDecoder : public AudioDecoder {
   }
 
   void begin() override {
-    LOGI(LOG_METHOD);
+    TRACEI();
     in_buffer = 0;
     in_bits = 0;
     out_size = sizeof(int16_t);
@@ -75,7 +75,7 @@ class G7xxDecoder : public AudioDecoder {
   }
 
   void end() override {
-    LOGI(LOG_METHOD);
+    TRACEI();
     is_active = false;
   }
 
@@ -161,7 +161,7 @@ class G7xxEncoder : public AudioEncoder {
   }
 
   void begin() override {
-    LOGI(LOG_METHOD);
+    TRACEI();
     g72x_init_state(&state);
     out_buffer = 0;
     out_bits = 0;
@@ -170,7 +170,7 @@ class G7xxEncoder : public AudioEncoder {
   }
 
   void end() override {
-    LOGI(LOG_METHOD);
+    TRACEI();
     is_active = false;
   }
 
