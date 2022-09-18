@@ -1,6 +1,3 @@
-
-
-
 ../examples/examples-basic-api/base-adc-a2dp -> rc=0
 ../examples/examples-basic-api/base-adc-serial -> rc=0
 ../examples/examples-basic-api/base-file_raw-serial -> rc=1/0
@@ -15,6 +12,8 @@
 ../examples/examples-webserver/streams-effect-webserver_wav -> rc=0
 ../examples/examples-webserver/streams-flite-webserver_wav -> rc=0
 ../examples/examples-webserver/streams-generator-webserver_wav -> rc=0
+../examples/examples-webserver/streams-generator-webserverex_wav -> rc=1/1
+../examples/examples-webserver/streams-generator-webserverex_wav1 -> rc=1/1
 ../examples/examples-webserver/streams-i2s-webserver_wav -> rc=0
 ../examples/examples-webserver/streams-sam-webserver_wav -> rc=0
 ../examples/examples-webserver/streams-tts-webserver_wav -> rc=0
@@ -33,7 +32,7 @@
 ../examples/examples-stream/streams-i2s-filter-i2s -> rc=0
 ../examples/examples-stream/streams-i2s-i2s -> rc=0
 ../examples/examples-stream/streams-i2s-i2s-2 -> rc=0
-../examples/examples-stream/streams-i2s-serial -> rc=1/0
+../examples/examples-stream/streams-i2s-serial -> rc=1/1
 ../examples/examples-stream/streams-i2s-serial_16bit -> rc=0
 ../examples/examples-stream/streams-i2s-tf -> rc=0
 ../examples/examples-stream/streams-memory_mp3-analog -> rc=0
@@ -48,6 +47,7 @@
 ../examples/examples-stream/streams-sd_mp3-i2s -> rc=1
 ../examples/examples-stream/streams-sdfat_mp3-metadata -> rc=0
 ../examples/examples-stream/streams-tf-i2s -> rc=0
+../examples/examples-stream/streams-url-file -> rc=1/0
 ../examples/examples-stream/streams-url_aac-i2s -> rc=0
 ../examples/examples-stream/streams-url_flac-i2s -> rc=0
 ../examples/examples-stream/streams-url_mp3-analog -> rc=0
