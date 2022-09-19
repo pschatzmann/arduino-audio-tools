@@ -42,6 +42,8 @@ friend class AudioKitStream;
     result.fmt = toFormat();
     result.sample_rate = toSampleRate();
     result.bits_per_sample = toBits();
+    result.buffer_size = buffer_size;
+    result.buffer_count = buffer_count;
 #if AUDIOKIT_SETUP_SD
     result.sd_active = sd_active;
 #else
