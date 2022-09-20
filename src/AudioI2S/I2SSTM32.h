@@ -38,7 +38,7 @@ class I2SBase {
         LOGE("Bits per second not supported: %d", cfg.bits_per_sample);
         return false;
       }
-      if (cfg.channels!=2){
+      if (cfg.channels>2 || cfg.channels<=0){
         LOGE("Channels not supported: %d", cfg.channels);
         return false;
       }
@@ -90,11 +90,48 @@ class I2SBase {
 
     /// writes the data to the I2S interface
     size_t writeBytes(const void *src, size_t size_bytes){
-      return p_tx_buffer->writeArray((uint8_t*)src, size_bytes);
+      size_t result = 0;
+      if (cfg.channels == 2){
+        result = p_tx_buffer->writeArray((uint8_t*)src, size_bytes);
+      } else {
+        // write each sample 2 times 
+        int samples = size_bytes / 2;
+        int16_t *src_16 = (int16_t *)src;
+        int16_t tmp[2];
+        int result = 0;
+        for (int j=0;j<samples;j++){
+          tmp[0]=src_16[j];
+          tmp[1]=src_16[j];
+          if (p_tx_buffer->availableForWrite()>=4){
+            p_tx_buffer->writeArray((uint8_t*)tmp, 4);
+            result = j*2;
+          } else {
+            // abort if the buffer is full
+            break;
+          }
+        } 
+      }
+      return result;
     }
 
     size_t readBytes(void *dest, size_t size_bytes){
-      return p_rx_buffer->readArray((uint8_t*)dest, size_bytes);
+      if (cfg.channels == 2){
+        return p_rx_buffer->readArray((uint8_t*)dest, size_bytes);
+      } else {
+        // combine two channels to 1: so request double the amout
+        int req_bytes = size_bytes*2;
+        uint8_t tmp[req_bytes];
+        int16_t *tmp_16 = (int16_t*) tmp;
+        int eff_bytes = p_rx_buffer->readArray((uint8_t*)tmp, req_bytes);
+        // add 2 channels together
+        int16_t *dest_16 = (int16_t *)dest; 
+        int16_t eff_samples = eff_bytes / 2;
+        int16_t idx = 0;
+        for (int j=0;j<eff_samples;j+=2){
+          dest_16[idx++] = static_cast<float>(tmp_16[j])+tmp_16[j+1] / 2.0;
+        }
+        return eff_bytes / 2;
+      }
     }
 
     static void writeFromReceive(uint8_t *buffer, uint16_t byteCount){
