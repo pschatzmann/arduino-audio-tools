@@ -77,7 +77,10 @@ class I2SConfig : public AudioBaseInfo {
     int pin_data_rx; // rx pin for RXTX_MODE
     I2SFormat i2s_format = I2S_STD_FORMAT;
 
-#ifdef ESP32
+#if defined(STM32)
+    int buffer_count = I2S_BUFFER_COUNT;
+    int buffer_size = I2S_BUFFER_SIZE;
+#elif defined(ESP32)
     int buffer_count = I2S_BUFFER_COUNT;
     int buffer_size = I2S_BUFFER_SIZE;
 
