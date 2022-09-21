@@ -48,15 +48,15 @@ class I2SBase {
       switch(cfg.rx_tx_mode){
         case RX_MODE:
           p_rx_buffer = new NBuffer<uint8_t>(cfg.buffer_size, cfg.buffer_count);
-        	startI2SReceive(&hi2s3, writeFromReceive, cfg.buffer_size);
+        	startI2SReceive(&i2s_stm32, writeFromReceive, cfg.buffer_size);
           break;
         case TX_MODE:
           p_tx_buffer = new NBuffer<uint8_t>(cfg.buffer_size, cfg.buffer_count);
-      	  startI2STransmit(&hi2s3, readToTransmit, cfg.buffer_size);
+      	  startI2STransmit(&i2s_stm32, readToTransmit, cfg.buffer_size);
           break;
         case RXTX_MODE:
           p_tx_buffer = new NBuffer<uint8_t>(cfg.buffer_size, cfg.buffer_count);
-	        startI2STransmitReceive(&hi2s3, readToTransmit, writeFromReceive, cfg.buffer_size);
+	        startI2STransmitReceive(&i2s_stm32, readToTransmit, writeFromReceive, cfg.buffer_size);
           break;
         default:
           LOGE("Unsupported mode");
@@ -145,6 +145,7 @@ class I2SBase {
 
   protected:
     I2SConfig cfg;
+    I2SSettingsSTM32 i2s_stm32;
     inline static NBuffer<uint8_t> *p_tx_buffer=nullptr;
     inline static NBuffer<uint8_t> *p_rx_buffer=nullptr;
 
@@ -160,10 +161,11 @@ class I2SBase {
     }
 
     void setupDefaultI2SParameters() {
-      i2s_default_samplerate = getSampleRate(cfg);
-      i2s_default_mode = getMode(cfg);
-      i2s_default_standard = getStandard(cfg);
-      i2s_default_fullduplexmode = cfg.rx_tx_mode == RXTX_MODE ? I2S_FULLDUPLEXMODE_ENABLE : I2S_FULLDUPLEXMODE_DISABLE;
+      i2s_stm32.sample_rate = getSampleRate(cfg);
+      i2s_stm32.mode = getMode(cfg);
+      i2s_stm32.standard = getStandard(cfg);
+      i2s_stm32.fullduplexmode = cfg.rx_tx_mode == RXTX_MODE ? I2S_FULLDUPLEXMODE_ENABLE : I2S_FULLDUPLEXMODE_DISABLE;
+      i2s_stm32.i2s = &hi2s3;
     }
 
     uint32_t getMode(I2SConfig &cfg){
