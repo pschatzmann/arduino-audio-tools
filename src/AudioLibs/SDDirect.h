@@ -105,7 +105,8 @@ class SDDirect {
         }
         file = openNext(root);
       }
-      if (!found){
+      // stop processing and record maximum index
+      if (!found && file_path_stack.size()==0){
         max_idx = actual_idx;
       }
       popPath();
