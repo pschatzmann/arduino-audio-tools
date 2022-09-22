@@ -217,7 +217,7 @@ class SDDirect {
 #ifdef USE_SDFAT
       return f.isHidden();
 #else
-      return Str(f.name()).contains("/.");
+      return Str(fileNamePath(f)).contains("/.");
 #endif
 
     }
