@@ -1,7 +1,8 @@
 /**
  * @file base-audiokit-a2dp.ino
  * @author Phil Schatzmann
- * @brief We use the built in microphone as input and send the data to A2DP
+ * @brief We play mp4 files to an A2DP speaker
+ * make sure that you compile with partition scheme: huge app
  * @copyright GPLv3
  */
 
