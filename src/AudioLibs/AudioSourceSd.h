@@ -45,9 +45,9 @@ public:
     TRACED();
     static bool is_sd_setup = false;
     if (!is_sd_setup) {
-      if (!SD.begin(cs)) {
+      while (!SD.begin(cs)) {
         LOGE("SD.begin cs=%d failed",cs);
-        return;
+        delay(1000);
       }
       is_sd_setup = true;
     }
