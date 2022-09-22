@@ -52,10 +52,8 @@ class SDDirect {
     size_t requested_idx;
     long max_idx=-1;
     bool found = false;
-#ifdef USE_SDFAT
     List<String> file_path_stack;
     String file_path_str;
-#endif
     
     const char *ext = nullptr;
     const char *file_name_pattern = nullptr;
@@ -148,20 +146,16 @@ class SDDirect {
 
     void pushPath(const char* name){
         TRACED();
-#ifdef USE_SDFAT
         LOGD("pushPath: %s", name);
         String nameStr(name);
         file_path_stack.push_back(nameStr);
-#endif
     }
 
     void popPath(){
        TRACED();
-#ifdef USE_SDFAT
-      String str;
-      file_path_stack.pop_back(str);
-      LOGD("popPath: %s", str.c_str());
-#endif
+       String str;
+       file_path_stack.pop_back(str);
+       LOGD("popPath: %s", str.c_str());
     }
 
     /// checks if the file is a valid audio file
@@ -182,29 +176,34 @@ class SDDirect {
 
     /// Returns the filename w/o path
     const char* fileName(FileT&file){
-#ifdef USE_SDFAT
+#ifdef USE_SDFAT 
        // add name
        static char name[MAX_FILE_LEN];
        file.getName(name,MAX_FILE_LEN);        
        return name;
 #else
-      return file.name();
+      Str tmp(file.name());
+      int pos=0;
+      // remove directories
+      if (tmp.contains("/")){
+        pos = tmp.lastIndexOf("/")+1;
+      }
+      return file.name()+pos;
 #endif
   }
 
     /// Returns the filename including the path
     const char* fileNamePath(FileT &file){
-#ifdef USE_SDFAT
+#if defined(USE_SDFAT) || ESP_IDF_VERSION_MAJOR >= 4 
       LOGD("-> fileNamePath: %s", fileName(file));
       file_path_str.clear();
       file_path_str += "/";
       for (int j=0; j<file_path_stack.size(); j++){
          file_path_str += file_path_stack[j]+"/";
       } 
-
        // add name
       static char name[MAX_FILE_LEN];
-      file.getName(name,MAX_FILE_LEN);
+      strncpy(name, fileName(file), MAX_FILE_LEN);
       file_path_str += name;
       const char* result = file_path_str.c_str();
       LOGD("<- fileNamePath: %s", result);
@@ -216,7 +215,7 @@ class SDDirect {
 
     bool isHidden(FileT f){
 #ifdef USE_SDFAT
-       return f.isHidden();
+      return f.isHidden();
 #else
       return Str(f.name()).contains("/.");
 #endif
