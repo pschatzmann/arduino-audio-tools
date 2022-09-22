@@ -4,7 +4,7 @@
 #define USE_SDFAT
 #include <SPI.h>
 #include <SdFat.h>
-#include "AudioLibs/AudioSourceIndex.h"
+#include "AudioLibs/SDIndex.h"
 #define SD_FAT_TYPE 3
 
 #if SD_FAT_TYPE == 0
@@ -27,7 +27,8 @@ AudioFs sd;
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Debug);
+  while(!Serial);
+  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
 
   SdSpiConfig cfg(PIN_AUDIO_KIT_SD_CARD_CS, DEDICATED_SPI, SD_SCK_MHZ(2));
   SPI.begin(PIN_AUDIO_KIT_SD_CARD_CLK, PIN_AUDIO_KIT_SD_CARD_MISO, PIN_AUDIO_KIT_SD_CARD_MOSI, PIN_AUDIO_KIT_SD_CARD_CS);  
@@ -35,13 +36,11 @@ void setup() {
        Serial.println("sd.begin failed");
        delay(1000);
   }
-  // put your setup code here, to run once:
-  AudioSourceSDFAT<AudioFs,AudioFile> idx(sd);
+  SDIndex<AudioFs,AudioFile> idx(sd);
   idx.ls(Serial, "/", "mp3","*");
 
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-
+  delay(1000);
 }
