@@ -24,7 +24,7 @@ class AnalogConfig : public AudioBaseInfo {
   }
   int start_pin = PIN_ADC_START;
   uint16_t buffer_size = ADC_BUFFER_SIZE;
-  uint8_t buffers = ADC_BUFFERS;
+  uint16_t buffers = ADC_BUFFERS;
 };
 
 /**
@@ -37,7 +37,7 @@ class AnalogAudioStream : public AudioStreamX {
  public:
   AnalogAudioStream() = default;
 
-  AnalogConfig defaultConfig() {
+  AnalogConfig defaultConfig(RxTxMode mode=RX_MODE) {
     AnalogConfig cfg;
     return cfg;
   }
@@ -51,7 +51,7 @@ class AnalogAudioStream : public AudioStreamX {
  }
 
   bool begin(AnalogConfig cfg) {
-    LOGD("%s", __func__);
+    TRACED();
     config = cfg;
     if (buffer == nullptr) {
       // allocate buffers
@@ -59,10 +59,7 @@ class AnalogAudioStream : public AudioStreamX {
       if (buffer==nullptr){
         LOGE("Not enough memory for buffer");
         return false;
-      } else {
-        LOGI("buffer: %d", (int) buffer);
-        LOGI("self: %d", (int) this);
-      }
+      } 
       // setup pins
       setupPins();
     } else {
@@ -77,7 +74,7 @@ class AnalogAudioStream : public AudioStreamX {
     return timer.begin(callback, time, TimeUnit::US);
   }
 
-  virtual int available() { return buffer==nullptr ? 0 : buffer->available(); };
+  virtual int available() { return buffer==nullptr ? 0 : buffer->available()*2; };
 
   /// Provides the sampled audio data
   size_t readBytes(uint8_t *values, size_t len) {
@@ -90,6 +87,7 @@ class AnalogAudioStream : public AudioStreamX {
   AnalogConfig config;
   TimerAlarmRepeating timer;
   BaseBuffer<int16_t> *buffer = nullptr;
+  int16_t avg_value=0;
 
   /// Sample data and write to buffer
   static void callback(void *arg) {
@@ -98,11 +96,9 @@ class AnalogAudioStream : public AudioStreamX {
     if (self->buffer != nullptr) {
       int channels = self->config.channels;
       for (int j = 0; j < channels; j++) {
-        //Serial.print("+"); 
         // provides value in range 0…4095
         value = analogRead(self->config.start_pin + j);
-        //Serial.print("-");
-        value = (value-2048)*15;
+        value = (value - self->avg_value) * 16;
         self->buffer->write(value);
       }
     } 
@@ -110,7 +106,7 @@ class AnalogAudioStream : public AudioStreamX {
 
   /// pinmode input for defined analog pins
   void setupPins() {
-    LOGD("%s", __func__);
+    TRACED();
     LOGI("start_pin: %d", config.start_pin);
     // setup pins for read
     for (int j = 0; j < config.channels; j++) {
@@ -118,6 +114,14 @@ class AnalogAudioStream : public AudioStreamX {
       pinMode(pin, INPUT);
       LOGD("pinMode(%d, INPUT)",pin);
     }
+    // calculate the avarage value to center the signal
+    float total=0;
+    for (int j=0;j<200;j++){
+      total += analogRead(config.start_pin);
+    }
+    avg_value = total / 200.0;
+    LOGI("Avg Signal was %d", avg_value);
+
   }
 };
 

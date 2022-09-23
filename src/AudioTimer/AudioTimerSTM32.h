@@ -33,7 +33,8 @@ class TimerAlarmRepeatingSTM32 : public TimerAlarmRepeatingDef {
          * Starts the alarm timer
          */
         bool begin(repeating_timer_callback_t callback_f, uint32_t time, TimeUnit unit = MS) override {
-            timer->attachInterrupt(std::bind(callback_f, this)); 
+            TRACEI();
+            timer->attachInterrupt(std::bind(callback_f, object)); 
           
             // we determine the time in microseconds
             switch(unit){
@@ -50,6 +51,7 @@ class TimerAlarmRepeatingSTM32 : public TimerAlarmRepeatingDef {
 
         // ends the timer and if necessary the task
         bool end() override {
+            TRACEI();
             timer->pause();
             return true;
         }
