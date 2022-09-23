@@ -405,7 +405,11 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define USE_I2S
 #define USE_PWM
 #define USE_TIMER
+#define USE_ADC_ARDUINO
+#define ADC_BUFFER_SIZE 1024
+#define ADC_BUFFERS 20
 
+#define PIN_ADC_START PA0
 #define PIN_PWM_START 6
 #define PIN_I2S_BCK 1
 #define PIN_I2S_WS PIN_I2S_BCK+1

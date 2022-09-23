@@ -8,7 +8,7 @@ namespace audio_tools {
 
 /**
  * @brief Basic I2S API - for the STM32
- * Depends on https://github.com/pschatzmann/STM32F411-i2s-prototype
+ * Depends on https://github.com/pschatzmann/stm32f411-i2s
  * We just add a write and read buffer and pass some parameters to the STM32 API!
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -27,11 +27,14 @@ class I2SBase {
 
     /// starts the DAC with the default config in TX Mode
     bool begin(RxTxMode mode = TX_MODE) {
+      TRACED();
       return begin(defaultConfig(mode));
     }
 
     /// starts the DAC 
     bool begin(I2SConfig cfg) {
+      TRACED();
+      bool result = false;
       deleteBuffers();
 
       if (cfg.bits_per_sample!=16){
@@ -48,15 +51,15 @@ class I2SBase {
       switch(cfg.rx_tx_mode){
         case RX_MODE:
           p_rx_buffer = new NBuffer<uint8_t>(cfg.buffer_size, cfg.buffer_count);
-        	startI2SReceive(&i2s_stm32, writeFromReceive, cfg.buffer_size);
+        	result = startI2SReceive(&i2s_stm32, writeFromReceive, cfg.buffer_size);
           break;
         case TX_MODE:
           p_tx_buffer = new NBuffer<uint8_t>(cfg.buffer_size, cfg.buffer_count);
-      	  startI2STransmit(&i2s_stm32, readToTransmit, cfg.buffer_size);
+      	  result =  startI2STransmit(&i2s_stm32, readToTransmit, cfg.buffer_size);
           break;
         case RXTX_MODE:
           p_tx_buffer = new NBuffer<uint8_t>(cfg.buffer_size, cfg.buffer_count);
-	        startI2STransmitReceive(&i2s_stm32, readToTransmit, writeFromReceive, cfg.buffer_size);
+	        result = startI2STransmitReceive(&i2s_stm32, readToTransmit, writeFromReceive, cfg.buffer_size);
           break;
         default:
           LOGE("Unsupported mode");
@@ -64,11 +67,12 @@ class I2SBase {
 
       }
 
-      return true;
+      return result;
     }
 
     /// stops the I2C and unistalls the driver
     void end(){
+      TRACED();
       stopI2S();
       deleteBuffers();
     }
@@ -80,7 +84,7 @@ class I2SBase {
 
     /// We limit the write size to the buffer size
     int availableForWrite() {
-      return I2S_BUFFER_COUNT*I2S_BUFFER_SIZE;
+      return I2S_BUFFER_SIZE;
     }
 
     /// provides the actual configuration
@@ -88,34 +92,25 @@ class I2SBase {
       return cfg;
     }
 
-    /// writes the data to the I2S interface
+    /// blocking writes for the data to the I2S interface
     size_t writeBytes(const void *src, size_t size_bytes){
+      TRACED();
       size_t result = 0;
-      if (cfg.channels == 2){
-        result = p_tx_buffer->writeArray((uint8_t*)src, size_bytes);
-      } else {
-        // write each sample 2 times 
-        int samples = size_bytes / 2;
-        int16_t *src_16 = (int16_t *)src;
-        int16_t tmp[2];
-        int result = 0;
-        for (int j=0;j<samples;j++){
-          tmp[0]=src_16[j];
-          tmp[1]=src_16[j];
-          if (p_tx_buffer->availableForWrite()>=4){
-            p_tx_buffer->writeArray((uint8_t*)tmp, 4);
-            result = j*2;
-          } else {
-            // abort if the buffer is full
-            break;
-          }
-        } 
+      int open = size_bytes;
+      while(open>0){
+        int actual_written = writeBytesExt(src, size_bytes);
+        result+= actual_written;
+        open -= actual_written;
+        if (open>0){
+          delay(10);
+        }
       }
       return result;
     }
 
     size_t readBytes(void *dest, size_t size_bytes){
-      if (cfg.channels == 2){
+       TRACED();
+     if (cfg.channels == 2){
         return p_rx_buffer->readArray((uint8_t*)dest, size_bytes);
       } else {
         // combine two channels to 1: so request double the amout
@@ -134,10 +129,12 @@ class I2SBase {
       }
     }
 
+    /// @brief Callback function used by https://github.com/pschatzmann/stm32f411-i2s 
     static void writeFromReceive(uint8_t *buffer, uint16_t byteCount){
       p_rx_buffer->writeArray(buffer, byteCount);
     }
 
+    /// @brief Callback function used by https://github.com/pschatzmann/stm32f411-i2s 
     static void readToTransmit(uint8_t *buffer, uint16_t byteCount) {
       memset(buffer,0,byteCount);
       p_tx_buffer->readArray(buffer, byteCount);
@@ -227,7 +224,31 @@ class I2SBase {
       }
     }
 
-
+    size_t writeBytesExt(const void *src, size_t size_bytes){
+      size_t result = 0;
+      if (cfg.channels == 2){
+        result = p_tx_buffer->writeArray((uint8_t*)src, size_bytes);
+      } else {
+        // write each sample 2 times 
+        int samples = size_bytes / 2;
+        int16_t *src_16 = (int16_t *)src;
+        int16_t tmp[2];
+        int result = 0;
+        for (int j=0;j<samples;j++){
+          tmp[0]=src_16[j];
+          tmp[1]=src_16[j];
+          if (p_tx_buffer->availableForWrite()>=4){
+            p_tx_buffer->writeArray((uint8_t*)tmp, 4);
+            result = j*2;
+          } else {
+            // abort if the buffer is full
+            break;
+          }
+        } 
+      }
+      LOGD("writeBytesExt: %u", result)
+      return result;
+    }
 };
 
 }
