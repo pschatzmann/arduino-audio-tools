@@ -110,11 +110,11 @@
 #endif
 
 #ifndef PWM_BUFFERS 
-#define PWM_BUFFERS 50
+#define PWM_BUFFERS 40
 #endif
 
-#ifndef PWM_FREQUENCY 
-#define PWM_FREQUENCY 60000
+#ifndef PWM_AUDIO_FREQUENCY 
+#define PWM_AUDIO_FREQUENCY 30000
 #endif
 
 
@@ -410,12 +410,12 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define ADC_BUFFERS 20
 
 #define PIN_ADC_START PA0
-#define PIN_PWM_START 6
-#define PIN_I2S_BCK 1
-#define PIN_I2S_WS PIN_I2S_BCK+1
-#define PIN_I2S_DATA_IN 3
-#define PIN_I2S_DATA_OUT 3
-#define PIN_I2S_MUTE 4
+#define PIN_PWM_START PA6
+#define PIN_I2S_BCK -1
+#define PIN_I2S_WS -1
+#define PIN_I2S_DATA_IN -1
+#define PIN_I2S_DATA_OUT -1
+#define PIN_I2S_MUTE -1
 #define SOFT_MUTE_VALUE LOW  
 #define PIN_CS 10
 #endif

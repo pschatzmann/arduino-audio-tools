@@ -9,7 +9,7 @@
 #include "Arduino.h"
 #include "AudioTools.h"
 
-const uint16_t sample_rate = 44100;
+const uint16_t sample_rate = 8000;
 AnalogAudioStream in; 
 int channels = 1;
 CsvStream<int16_t> out(Serial, channels); // ASCII output stream 
