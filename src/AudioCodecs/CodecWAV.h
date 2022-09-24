@@ -44,7 +44,7 @@ class WAVHeader  {
     public:
         WAVHeader() = default;
 
-        /// Call begin when header data is complete
+        /// Call begin when header data is complete to parse the data
         void begin(){
             LOGI("WAVHeader::begin: %u",(unsigned) len);
             this->data_pos = 0l;            
@@ -125,12 +125,12 @@ class WAVHeader  {
             len = 0;
         }
 
-        /// Resetss the len
+        /// Resets the len
         void end(){
             len = 0;
         }
 
-        /// Adds data to the 44 byte wav header data buffer
+        /// Adds data to the 44 byte wav header data buffer, returns the index at which the audio starts
         int write(uint8_t* data, size_t data_len){
             int write_len = min(data_len, 44 - len);
             memmove(buffer, data+len, write_len);
