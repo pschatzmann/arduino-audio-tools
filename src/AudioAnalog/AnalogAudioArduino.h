@@ -9,7 +9,6 @@
 
 namespace audio_tools {
 
-
 /**
  * @brief Configuration for Analog Reader
  * @author Phil Schatzmann
@@ -39,6 +38,9 @@ class AnalogAudioStream : public AudioStreamX {
 
   AnalogConfig defaultConfig(RxTxMode mode=RX_MODE) {
     AnalogConfig cfg;
+    if (mode!=RX_MODE){
+      LOGE("mode not supported");
+    }
     return cfg;
   }
 
