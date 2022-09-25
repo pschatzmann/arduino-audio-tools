@@ -141,6 +141,7 @@ Dependent on the example you might need to install some of the following librari
 - [KissFFT](https://github.com/pschatzmann/kissfft) Fast Fourier Transform FFT Library
 - [esp32-fft](https://github.com/pschatzmann/esp32-fft) Another FFT library (not only for the ESP32)
 - [rp2040-i2s](https://github.com/pschatzmann/rp2040-i2s) I2S library for MBED RP2040
+- [stm32f411-i2s](https://github.com/pschatzmann/stm32f411-i2s) I2S library for the stm32f411
 - [SdFat Library](https://github.com/greiman/SdFat) to read and write files supporting SD cards with FAT16/FAT32 and exFAT
 - [SD Library](https://www.arduino.cc/en/reference/SD) to read and write files supporting SD cards with FAT16 and FAT32
 - [TinyHttp](https://github.com/pschatzmann/TinyHttp) a http server that also supports audio for multiple users
