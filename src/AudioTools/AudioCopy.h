@@ -94,7 +94,7 @@ class StreamCopyT {
 
             // E.g. if we try to write to a server we might not have any output destination yet
             int to_write = to->availableForWrite();
-            if (to_write==0){
+            if (check_available_for_write && to_write==0){
                  delay(500);
                  return 0;
             }
@@ -249,6 +249,16 @@ class StreamCopyT {
             return buffer_size;
         }
 
+        /// Activates the check that we copy only if available for write returns a value
+        void setCheckAvailableForWrite(bool flag){
+            check_available_for_write = flag;
+        }
+
+        /// Is Available for Write check activated ?
+        bool isCheckAvailableForWrite() {
+            return check_available_for_write;
+        }
+
     protected:
         AudioStream *from = nullptr;
         Print *to = nullptr;
@@ -258,6 +268,7 @@ class StreamCopyT {
         void (*notifyMimeCallback)(const char*mime) = nullptr;
         void *onWriteObj = nullptr;
         bool is_first = false;
+        bool check_available_for_write = true;
         const char* actual_mime = nullptr;
         int retryLimit = COPY_RETRY_LIMIT;
         int delay_on_no_data = COPY_DELAY_ON_NODATA;
