@@ -31,7 +31,11 @@ class AudioServer {
          * @brief Construct a new Audio W A V Server object
          * We assume that the WiFi is already connected
          */
-        AudioServer() = default;
+        AudioServer() {
+            // the client returns 0 for avialableForWrite()
+            copier.setCheckAvailableForWrite(false);
+        }
+
 
         /**
          * @brief Construct a new Audio W A V Server object
@@ -42,6 +46,8 @@ class AudioServer {
         AudioServer(const char* network, const char *password) {
             this->network = (char*)network;
             this->password = (char*)password;
+            // the client returns 0 for avialableForWrite()
+            copier.setCheckAvailableForWrite(false);
         }
 
         /**
