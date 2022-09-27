@@ -1,6 +1,8 @@
 #pragma once
 #include "AudioFFT.h"
+//#ifdef STM32
 #include "CMSIS_DSP.h"
+//#endif
 
 namespace audio_tools {
 
@@ -12,6 +14,7 @@ namespace audio_tools {
 class FFTDriverCmsisFFT : public FFTDriver {
     public:
         void begin(int len) override {
+            TRACEI();
             this->len = len;
             input = new float[len];
             output = new float[len*2];
@@ -22,6 +25,7 @@ class FFTDriverCmsisFFT : public FFTDriver {
             }
         }
         void end()override{
+            TRACEI();
             if (input!=nullptr) delete input;
             if (output!=nullptr) delete output;
             if (output_magn!=nullptr) delete output_magn;
@@ -35,10 +39,12 @@ class FFTDriverCmsisFFT : public FFTDriver {
         }
 
         void fft() override {
+            TRACED();
 		    arm_rfft_fast_f32(&fft_instance, input, output, ifft);
-		    arm_cmplx_mag_f32(output, output_magn, len);
+		    arm_cmplx_mag_f32(output, output_magn, len / 2);
             /* Calculates maxValue and returns corresponding BIN value */
-            arm_max_f32(output_magn, len, &result_max_value, &result_index);
+            arm_max_f32(output_magn, len / 2, &result_max_value, &result_index);
+            TRACED();
         };
 
         float magnitude(int idx) override {
