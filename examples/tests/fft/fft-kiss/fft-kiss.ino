@@ -1,5 +1,5 @@
 #include "AudioTools.h"
-#include "AudioLibs/AudioKissFFT.h" // or AudioKissFFT
+#include "AudioLibs/AudioKissFFT.h" // Using KissFFT
 
 AudioKissFFT fft; // or AudioKissFFT
 SineWaveGenerator<int16_t> sineWave(32000);
