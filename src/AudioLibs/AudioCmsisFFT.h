@@ -17,6 +17,9 @@ class FFTDriverCmsisFFT : public FFTDriver {
             output = new float[len*2];
             output_magn = new float[len];
 	        status = arm_rfft_fast_init_f32(&fft_instance, len);
+            if (status!=ARM_MATH_SUCCESS){
+                LOGE("arm_rfft_fast_init_f32: %d", status);
+            }
         }
         void end()override{
             if (input!=nullptr) delete input;

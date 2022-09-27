@@ -1,20 +1,19 @@
 #include "AudioTools.h"
 #include "AudioLibs/AudioESP32FFT.h" // or AudioKissFFT
 
-AudioESP32FFT fft; // or AudioKissFFT
-SineFromTable<int16_t> sineWave(32000);
+AudioESP32FFT fftc; // or AudioKissFFT
+SineWaveGenerator<int16_t> sineWave(32000);
 GeneratedSoundStream<int16_t> in(sineWave);
-StreamCopy copier(fft, in);
+StreamCopy copier(fftc, in);
 uint16_t sample_rate = 44100;
 int bits_per_sample = 16;
 int channels = 1;
 float value = 0;
-uint64_t timestamp;
 
-// display fft result
-void fftResult(AudioFFTBase &fft) {
+// display fftc result
+void fftcResult(AudioFFTBase &fftc) {
   int diff;
-  auto result = fft.result();
+  auto result = fftc.result();
   if (result.magnitude > 100) {
     Serial.print(result.frequency);
     Serial.print(" ");
@@ -24,11 +23,10 @@ void fftResult(AudioFFTBase &fft) {
     Serial.print(" diff: ");
     Serial.print(diff);
     Serial.print(" - time ms ");
-    Serial.print(millis()-timestamp);
+    Serial.print(fftc.resultTime() - fftc.resultTimeBegin());
     Serial.println();
 
   }
-  timestamp = millis();
 }
 
 void setup() {
@@ -45,11 +43,11 @@ void setup() {
   in.begin(cfg);
 
   // Setup FFT
-  auto tcfg = fft.defaultConfig();
+  auto tcfg = fftc.defaultConfig();
   tcfg.copyFrom(cfg);
-  tcfg.length = 8192;
-  tcfg.callback = &fftResult;
-  fft.begin(tcfg);
+  tcfg.length = 4096;
+  tcfg.callback = &fftcResult;
+  fftc.begin(tcfg);
 }
 
 void loop() { copier.copy(); }
