@@ -2,14 +2,13 @@
 #include "AudioLibs/AudioRealFFT.h" // or AudioKissFFT
 
 AudioRealFFT fft; // or AudioKissFFT
-SineFromTable<int16_t> sineWave(32000);
+SineWaveGenerator<int16_t> sineWave(32000);
 GeneratedSoundStream<int16_t> in(sineWave);
 StreamCopy copier(fft, in);
 uint16_t sample_rate = 44100;
 int bits_per_sample = 16;
 int channels = 1;
 float value = 0;
-uint64_t timestamp;
 
 // display fft result
 void fftResult(AudioFFTBase &fft) {
@@ -24,11 +23,9 @@ void fftResult(AudioFFTBase &fft) {
     Serial.print(" diff: ");
     Serial.print(diff);
     Serial.print(" - time ms ");
-    Serial.print(millis() - timestamp);
+    Serial.print(fft.resultTime() - fft.resultTimeBegin());
     Serial.println();
   }
-    timestamp = millis();
-
 }
 
 void setup() {
@@ -47,7 +44,7 @@ void setup() {
   // Setup FFT
   auto tcfg = fft.defaultConfig();
   tcfg.copyFrom(cfg);
-  tcfg.length = 8192;
+  tcfg.length = 4096;
   tcfg.callback = &fftResult;
   fft.begin(tcfg);
 }

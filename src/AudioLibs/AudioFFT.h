@@ -152,9 +152,13 @@ class AudioFFTBase : public AudioPrint {
             return cfg.length;
         }
 
-        /// time when the last result was provided - you can poll this to check if we have a new result
+        /// time after the fft: time when the last result was provided - you can poll this to check if we have a new result
         unsigned long resultTime() {
             return timestamp;
+        }
+        /// time before the fft 
+        unsigned long resultTimeBegin() {
+            return timestamp_begin;
         }
 
         /// Determines the frequency of the indicated bin
@@ -227,6 +231,7 @@ class AudioFFTBase : public AudioPrint {
         FFTDriver *p_driver=nullptr;
         int current_pos = 0;
         AudioFFTConfig cfg;
+        unsigned long timestamp_begin=0l;
         unsigned long timestamp=0l;
         RingBuffer<uint8_t> *p_stridebuffer = nullptr;
         float *p_magnitudes = nullptr;
@@ -273,6 +278,7 @@ class AudioFFTBase : public AudioPrint {
         }
 
         void fft() {
+            timestamp_begin = millis();
             p_driver->fft();
             timestamp = millis();
             if (cfg.callback!=nullptr){
