@@ -39,7 +39,7 @@ void setup(){
   i2s.begin(config);
 
   // aac radio
-  url.begin("http://mscp3.live-streams.nl:8340/jazz-high.aac","audio/aac");
+  url.begin("http://peacefulpiano.stream.publicradio.org/peacefulpiano.aac","audio/aac");
 
   int stack = 100000;
   xTaskCreate(loop1,"loopTask", stack, nullptr,1, nullptr);

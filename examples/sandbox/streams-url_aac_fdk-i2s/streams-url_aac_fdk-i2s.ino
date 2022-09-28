@@ -34,7 +34,7 @@ void setup(){
   i2s.begin(config);
 
   // mp3 radio
-  url.begin("http://mscp3.live-streams.nl:8340/jazz-high.aac","audio/aac");
+  url.begin("http://peacefulpiano.stream.publicradio.org/peacefulpiano.aac","audio/aac");
 
   // initialize decoder
   dec.begin();

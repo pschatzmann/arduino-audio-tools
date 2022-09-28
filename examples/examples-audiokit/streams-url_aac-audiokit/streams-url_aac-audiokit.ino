@@ -33,7 +33,7 @@ void setup(){
   dec.begin();
 
   // aac radio
-  url.begin("http://mscp3.live-streams.nl:8340/jazz-high.aac","audio/aac");
+  url.begin("http://peacefulpiano.stream.publicradio.org/peacefulpiano.aac","audio/aac");
 
 }
 
