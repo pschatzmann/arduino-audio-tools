@@ -35,7 +35,7 @@ void setup(){
 
   // aac radio
   dec.setNotifyAudioChange(i2s);
-  url.begin("http://mscp3.live-streams.nl:8340/jazz-high.aac","audio/aac");
+  url.begin("http://peacefulpiano.stream.publicradio.org/peacefulpiano.aac","audio/aac");
 
   // initialize decoder
   dec.begin();
