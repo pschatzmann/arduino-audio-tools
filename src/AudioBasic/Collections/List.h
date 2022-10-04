@@ -1,4 +1,5 @@
 #pragma once
+#include "InitializerList.h" 
 #include <stddef.h>
 
 namespace audio_tools {
@@ -97,6 +98,7 @@ class List {
         List() { link(); };
         /// copy constructor
         List(const List&ref) = default;
+
         /// Constructor using array
         template<size_t N>
         List(const T (&a)[N]) {
@@ -104,7 +106,11 @@ class List {
             for(int i = 0; i < N; ++i) 
   	    	    push_back(a[i]);
      	}
-
+        List(std::initializer_list<T> iniList) {
+            link();
+            for(auto &obj : iniList) 
+  	    	    push_back(obj);
+        } 
         
         bool swap(List<T>&ref){
             List<T> tmp(*this);

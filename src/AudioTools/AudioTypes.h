@@ -78,7 +78,6 @@ class AudioBaseInfoSource {
 };
 
 
-
 /**
  * @brief E.g. used by Encoders and Decoders
  * 

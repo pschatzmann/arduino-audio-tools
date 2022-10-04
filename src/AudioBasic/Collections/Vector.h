@@ -1,4 +1,5 @@
 #pragma once
+#include "InitializerList.h" 
 
 namespace audio_tools {
 
@@ -92,12 +93,12 @@ class Vector {
 
     };
 
-    // default constructor
+    /// default constructor
     inline Vector(int len = 20) {
       resize_internal(len, false);
     }
 
-    // allocate size and initialize array
+    /// allocate size and initialize array
     inline Vector(int size, T value) {
       resize(size);
       for (int j=0;j< size;j++){
@@ -105,7 +106,7 @@ class Vector {
       }
     }
 
-    // copy constructor
+    /// copy constructor
     inline Vector( Vector<T> &copyFrom) {
       resize_internal(copyFrom.size(), false);
       for (int j=0;j<copyFrom.size();j++){
@@ -113,8 +114,17 @@ class Vector {
       }
       this->len = copyFrom.size();
     }
-    
-    // legacy constructor with pointer range
+
+    /// support for initializer_list
+    inline Vector(std::initializer_list<T> iniList) {
+      resize(iniList.size());
+      int pos = 0;
+      for (auto &obj : iniList){
+        p_data[pos++] = obj;
+      }
+    } 
+
+    /// legacy constructor with pointer range
     inline Vector(T *from, T *to) {
       this->len = to - from; 
       resize_internal(this->len, false);
@@ -123,6 +133,7 @@ class Vector {
       }
     }
 
+    /// Destructor
     inline  ~Vector() {
       clear();
       shrink_to_fit();
