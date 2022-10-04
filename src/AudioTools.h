@@ -97,3 +97,6 @@ void waitFor(HardwareSerial &out){
 void waitFor(bool &flag){
     while(!flag);
 }
+
+/// Pins
+using Pins = Vector<int>;

@@ -13,6 +13,7 @@ template <class T>
 class Stack {
     public:
         Stack() = default;
+        
         bool push(T& data){
             return l.push_back(data);
         }
