@@ -21,6 +21,7 @@ class TimerAlarmRepeatingSTM32 : public TimerAlarmRepeatingDef {
 
         TimerAlarmRepeatingSTM32(TimerFunction function=DirectTimerCallback, int timerIdx=1){
             this->timer = new HardwareTimer(timers[timerIdx]);
+            timer_index = timerIdx;
             timer->pause();
         }
 
@@ -34,6 +35,7 @@ class TimerAlarmRepeatingSTM32 : public TimerAlarmRepeatingDef {
          */
         bool begin(repeating_timer_callback_t callback_f, uint32_t time, TimeUnit unit = MS) override {
             TRACEI();
+            LOGI("Using timer TIM%d", timer_index+1);
             timer->attachInterrupt(std::bind(callback_f, object)); 
           
             // we determine the time in microseconds
@@ -58,6 +60,7 @@ class TimerAlarmRepeatingSTM32 : public TimerAlarmRepeatingDef {
 
     protected:
         HardwareTimer *timer; 
+        int timer_index;
         TIM_TypeDef *timers[3] = {TIM1, TIM2, TIM3 };
 
 };
