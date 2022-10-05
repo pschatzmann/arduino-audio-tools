@@ -93,6 +93,7 @@ class Vector {
 
     };
 
+
     /// default constructor
     inline Vector(int len = 20) {
       resize_internal(len, false);
@@ -106,8 +107,11 @@ class Vector {
       }
     }
 
+    inline Vector(Vector<T> &&moveFrom) = default;
+
+
     /// copy constructor
-    inline Vector( Vector<T> &copyFrom) {
+    inline Vector(Vector<T> &copyFrom) {
       resize_internal(copyFrom.size(), false);
       for (int j=0;j<copyFrom.size();j++){
         p_data[j] = copyFrom[j];
@@ -225,6 +229,7 @@ class Vector {
         p_data[j] = copyFrom[j];
       }
       this->len = copyFrom.size();
+      return *this;
     }
 
     inline T &operator[] (const int index) const {

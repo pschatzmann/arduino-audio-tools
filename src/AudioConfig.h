@@ -410,7 +410,10 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define ADC_BUFFERS 20
 
 #define PIN_ADC_START PA0
-#define PIN_PWM_START PA6
+#define PIN_PWM_START PA0
+#define PWM_DEFAULT_TIMER TIM2
+#define PWM_FREQ_TIMER_NO 3
+
 #define PIN_I2S_BCK -1
 #define PIN_I2S_WS -1
 #define PIN_I2S_DATA_IN -1

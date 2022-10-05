@@ -66,11 +66,7 @@ class PWMAudioStreamMBED : public PWMAudioStreamBase {
             pins.resize(audio_config.channels);
             for (int j=0;j<audio_config.channels;j++){
                 LOGD("Processing channel %d", j);
-                int gpio = audio_config.start_pin + j;
-                if (audio_config.pins!=nullptr){
-                    // use defined pins
-                    gpio = audio_config.pins[j];
-                }
+                gpio = audio_config.pins()[j];
                 mbed::PwmOut* pin = new mbed::PwmOut(digitalPinToPinName(gpio));
                 LOGI("PWM Pin: %d", gpio);
                 pin->period_us(period);  

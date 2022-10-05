@@ -2,6 +2,7 @@
 
 #include "AudioConfig.h"
 #include "AudioBasic/Int24.h"
+#include "AudioBasic/Collections.h"
 
 namespace audio_tools {
 
@@ -94,6 +95,22 @@ class AudioWriter {
 
 
 const char* mime_pcm = "audio/pcm";
+
+
+#ifndef IS_DESKTOP
+/// wait for the Output to be ready
+void waitFor(HardwareSerial &out){
+    while(!out);
+}
+#endif
+
+/// wait for flag to be active
+void waitFor(bool &flag){
+    while(!flag);
+}
+
+/// Pins
+using Pins = Vector<int>;
 
 
 }
