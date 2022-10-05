@@ -8,7 +8,7 @@
  
 #include "AudioTools.h"
 
-//int pins[] = {22, 23};
+//Pins pins = {22, 23};
 int channels = 1;
 uint16_t sample_rate=8000;
 SineWaveGenerator<int16_t> sineWave(32000); // subclass of SoundGenerator with max amplitude of 32000

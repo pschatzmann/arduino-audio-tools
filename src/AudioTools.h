@@ -74,29 +74,3 @@
 using namespace audio_tools;  
 #endif
 
-/**
- * ------------------------------------------------------------------------- 
- * @brief typedefs for Default
- * 
- */
-
-#if defined(IS_DESKTOP) && defined(USE_PORTAUDIO)
-typedef PortAudioStream DefaultStream;
-#elif defined(USE_I2S) 
-typedef I2SStream DefaultStream;
-#endif
-
-#ifndef IS_DESKTOP
-/// wait for the Output to be ready
-void waitFor(HardwareSerial &out){
-    while(!out);
-}
-#endif
-
-/// wait for flag to be active
-void waitFor(bool &flag){
-    while(!flag);
-}
-
-/// Pins
-using Pins = Vector<int>;

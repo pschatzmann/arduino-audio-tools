@@ -61,7 +61,7 @@ class TimerAlarmRepeatingSTM32 : public TimerAlarmRepeatingDef {
     protected:
         HardwareTimer *timer; 
         int timer_index;
-        TIM_TypeDef *timers[3] = {TIM1, TIM2, TIM3 };
+        TIM_TypeDef *timers[6] = {TIM1, TIM2, TIM3, TIM4, TIM5 };
 
 };
 
