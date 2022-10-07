@@ -231,7 +231,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 // Default Setting: The mute pin can be switched off by setting it to -1. Or you could drive the LED by assigning LED_BUILTIN
 #define PIN_I2S_MUTE 5
 #define SOFT_MUTE_VALUE LOW  
-#define PIN_CS SS SPICS0
+#define PIN_CS SS
 #define PIN_ADC1 21 
 #define PIN_ADC2 22
 
