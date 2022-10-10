@@ -1,19 +1,21 @@
 #pragma once
 
-#if defined(ARDUINO_ARCH_RP2040) && !defined(ARDUINO_ARCH_MBED_RP2040)
+#if defined(ARDUINO_ARCH_RP2040) 
 #include "AudioI2S/I2SConfig.h"
-//#include "Experiments/I2SBitBangRP2040.h"
-#include <I2S.h>
+#if defined(ARDUINO_ARCH_MBED_RP2040)
+#  include "RP2040-I2S.h"
+#else
+#  include <I2S.h>
+#endif
 namespace audio_tools {
 
-class I2SBasePIO;
-#if USE_I2S==2
-typedef RP2040BitBangI2SCore1 I2SBase;
-#elif USE_I2S==3
-typedef RP2040BitBangI2SWithInterrupts I2SBase;
-#else
-typedef I2SBasePIO I2SBase;
+#if !defined(ARDUINO_ARCH_MBED_RP2040)
+inline ::I2S I2S;
 #endif
+
+
+class I2SBasePIO;
+typedef I2SBasePIO I2SBase;
 
 
 /**
@@ -51,7 +53,7 @@ class I2SBasePIO {
           LOGE("Could not set bck pin: %d", cfg.pin_bck);
           return false;
       }
-      if (!I2S.setDOUT(cfg.pin_data)){
+      if (!I2S.setDATA(cfg.pin_data)){
           LOGE("Could not set data pin: %d", cfg.pin_data);
           return false;
       }

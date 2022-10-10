@@ -1,6 +1,6 @@
 
 #pragma once
-#if defined(__arm__)  && __has_include("mbed.h")
+#if defined(__arm__)  && __has_include("mbed.h") && !defined(ARDUINO_ARCH_MBED_RP2040)
 #include "AudioPWM/PWMAudioBase.h"
 #include "AudioTimer/AudioTimer.h"
 #include "mbed.h"
@@ -66,7 +66,7 @@ class PWMAudioStreamMBED : public PWMAudioStreamBase {
             pins.resize(audio_config.channels);
             for (int j=0;j<audio_config.channels;j++){
                 LOGD("Processing channel %d", j);
-                gpio = audio_config.pins()[j];
+                auto gpio = audio_config.pins()[j];
                 mbed::PwmOut* pin = new mbed::PwmOut(digitalPinToPinName(gpio));
                 LOGI("PWM Pin: %d", gpio);
                 pin->period_us(period);  
