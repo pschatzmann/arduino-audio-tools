@@ -336,7 +336,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 
 //----- RP2040 -----------
 #elif defined(ARDUINO_ARCH_RP2040)
-#define USE_I2S 1
+#define USE_I2S 
 #define USE_PWM
 #define USE_ADC_ARDUINO
 #define USE_TYPETRAITS

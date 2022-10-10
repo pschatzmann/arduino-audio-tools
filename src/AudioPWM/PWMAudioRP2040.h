@@ -6,6 +6,9 @@
 #include "hardware/adc.h"
 #include "hardware/pwm.h"
 #include "pico/time.h"
+#include "hardware/structs/clocks.h"
+#include "hardware/clocks.h"
+#include "hardware/structs/clocks.h"
 
 namespace audio_tools {
 
