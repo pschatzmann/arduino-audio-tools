@@ -322,7 +322,7 @@ class SOSFilter : public Filter<T>
     T process(T value)
     {
         for (Filter<T> *&filter : filters)
-            value = filter->filter(value);
+            value = filter->process(value);
         return value;
     }
 
