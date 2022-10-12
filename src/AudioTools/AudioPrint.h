@@ -28,7 +28,7 @@ class AudioPrint : public Print, public AudioBaseInfoDependent, public AudioBase
             return 1;
         }
 
-        virtual int availableForWrtie() {
+        virtual int availableForWrite() {
             return DEFAULT_BUFFER_SIZE;
         }
 
