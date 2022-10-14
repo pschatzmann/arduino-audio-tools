@@ -1,13 +1,3 @@
-/**
- * @file audiokit-effects-audiokit.ino
- * @author Phil Schatzmann
- * @brief Some Guitar Effects that can be controlled via a Web Gui. 
- * @version 0.1
- * @date 2022-10-14
- * 
- * @copyright Copyright (c) 2022
- * 
- */
 #include <ArduinoJson.h>
 #include "HttpServer.h"
 #include "AudioTools.h"
@@ -16,8 +6,8 @@
 // Server
 WiFiServer wifi;
 HttpServer server(wifi);
-const char *ssid = "SSID";
-const char *password = "PASSWORD";
+const char *ssid = "Phil Schatzmann";
+const char *password = "sabrina01";
 
 // Audio Format
 const int sample_rate = 44100;
@@ -79,7 +69,6 @@ void getJson(HttpServer * server, const char*requestPath, HttpRequestHandlerLine
   server->reply("text/json", parameters2Json, 200);
 };
 
-// Update values in effects
 void updateValues(){
   // update values in controls
   boost.setVolume(volumeControl);
@@ -92,6 +81,7 @@ void updateValues(){
   tremolo.setDepth(tremoloDepth);
   tremolo.setDuration(tremoloDuration);
   tremolo.setActive(tremoloDuration>0);
+
 }
 
 // Post Json
