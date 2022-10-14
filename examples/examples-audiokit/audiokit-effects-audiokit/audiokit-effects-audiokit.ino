@@ -44,7 +44,22 @@ AudioEffects<GeneratorFromStream<effect_t>> effects(kit, channels , 1.0); // app
 GeneratedSoundStream<int16_t> in(effects);
 StreamCopy copier(kit, in); // copy in to kit
 
-// provide JSON 
+// Update values in effects
+void updateValues(){
+  // update values in controls
+  boost.setVolume(volumeControl);
+  boost.setActive(volumeControl>0);
+  distortion.setClipThreashold(clipThreashold);
+  distortion.setActive(clipThreashold>0);
+  fuzz.setFuzzEffectValue(fuzzEffectValue);
+  fuzz.setMaxOut(fuzzMaxValue);
+  fuzz.setActive(fuzzEffectValue>0);
+  tremolo.setDepth(tremoloDepth);
+  tremolo.setDuration(tremoloDuration);
+  tremolo.setActive(tremoloDuration>0);
+}
+
+// provide JSON as webservice
 void getJson(HttpServer * server, const char*requestPath, HttpRequestHandlerLine * hl) {
   auto parameters2Json = [](Stream & out) {
     DynamicJsonDocument doc(1024);
@@ -79,22 +94,8 @@ void getJson(HttpServer * server, const char*requestPath, HttpRequestHandlerLine
   server->reply("text/json", parameters2Json, 200);
 };
 
-// Update values in effects
-void updateValues(){
-  // update values in controls
-  boost.setVolume(volumeControl);
-  boost.setActive(volumeControl>0);
-  distortion.setClipThreashold(clipThreashold);
-  distortion.setActive(clipThreashold>0);
-  fuzz.setFuzzEffectValue(fuzzEffectValue);
-  fuzz.setMaxOut(fuzzMaxValue);
-  fuzz.setActive(fuzzEffectValue>0);
-  tremolo.setDepth(tremoloDepth);
-  tremolo.setDuration(tremoloDuration);
-  tremolo.setActive(tremoloDuration>0);
-}
 
-// Post Json
+// Poroces Posted Json
 void postJson(HttpServer *server, const char*requestPath, HttpRequestHandlerLine *hl) {
   // post json to server
   DynamicJsonDocument doc(1024);
