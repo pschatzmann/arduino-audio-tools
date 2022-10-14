@@ -133,6 +133,8 @@ void setup(void) {
   auto cfg = kit.defaultConfig(RXTX_MODE);
   cfg.sd_active = false;
   cfg.input_device = AUDIO_HAL_ADC_INPUT_LINE2;
+  cfg.sample_rate = sample_rate;
+  cfg.channels = channels;
   // minimize lag
   cfg.buffer_count = 2;
   cfg.buffer_size = 256;
