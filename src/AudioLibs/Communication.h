@@ -6,13 +6,6 @@
 #include "AudioTools/AudioStreams.h"
 #include "AudioTools/Buffers.h"
 
-#ifdef FAST_ESP_NOW_HACK
-#include "esp_private/wifi.h"
-//#undef CONFIG_ESP32_WIFI_AMPDU_TX_ENABLED
-//#undef CONFIG_ESP32_WIFI_AMPDU_RX_ENABLED
-#define CONFIG_ESP32_WIFI_AMPDU_TX_ENABLED 0
-#define CONFIG_ESP32_WIFI_AMPDU_RX_ENABLED 0
-#endif
 
 namespace audio_tools {
 
@@ -128,7 +121,7 @@ class ESPNowStream : public AudioStreamX {
 
 #ifdef FAST_ESP_NOW_HACK
     LOGI("Setting ESP-NEW rate");
-    if (esp_wifi_internal_set_fix_rate(getInterface(), true, cfg.rate) !=
+    if (esp_wifi_config_espnow_rate(getInterface(), true, cfg.rate) !=
         ESP_OK) {
       LOGW("Could not set rate");
     }
