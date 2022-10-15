@@ -121,7 +121,7 @@ class ESPNowStream : public AudioStreamX {
 
 #ifdef FAST_ESP_NOW_HACK
     LOGI("Setting ESP-NEW rate");
-    if (esp_wifi_config_espnow_rate(getInterface(), true, cfg.rate) !=
+    if (esp_wifi_config_espnow_rate(getInterface(), cfg.rate) !=
         ESP_OK) {
       LOGW("Could not set rate");
     }
