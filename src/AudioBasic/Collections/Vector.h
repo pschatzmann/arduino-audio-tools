@@ -1,6 +1,7 @@
 #pragma once
+#ifdef USE_INITIALIZER_LIST
 #include "InitializerList.h" 
-
+#endif
 namespace audio_tools {
 
 /**
@@ -93,9 +94,21 @@ class Vector {
 
     };
 
+#ifdef USE_INITIALIZER_LIST
+
+    /// support for initializer_list
+    inline Vector(std::initializer_list<T> iniList) {
+      resize(iniList.size());
+      int pos = 0;
+      for (auto &obj : iniList){
+        p_data[pos++] = obj;
+      }
+    } 
+
+#endif
 
     /// default constructor
-    inline Vector(int len = 20) {
+    inline Vector(size_t len = 20) {
       resize_internal(len, false);
     }
 
@@ -118,15 +131,6 @@ class Vector {
       }
       this->len = copyFrom.size();
     }
-
-    /// support for initializer_list
-    inline Vector(std::initializer_list<T> iniList) {
-      resize(iniList.size());
-      int pos = 0;
-      for (auto &obj : iniList){
-        p_data[pos++] = obj;
-      }
-    } 
 
     /// legacy constructor with pointer range
     inline Vector(T *from, T *to) {
