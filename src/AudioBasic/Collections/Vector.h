@@ -297,11 +297,12 @@ class Vector {
     }
 
   protected:
-    int bufferLen;
+    int bufferLen=0;
     int len = 0;
     T *p_data = nullptr;
 
     inline void resize_internal(int newSize, bool copy, bool shrink=false)  {
+      if (newSize<=0) return;
       //bool withNewSize = false;
       if (newSize>bufferLen || this->p_data==nullptr ||shrink){
         //withNewSize = true;            
