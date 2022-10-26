@@ -33,7 +33,7 @@ class ChannelFormatConverterStreamT : public AudioStreamX {
 
         virtual size_t write(const uint8_t *data, size_t size) override { 
            if (from_channels==to_channels){
-              return p_stream->write(data, size);
+              return p_print->write(data, size);
            }
            size_t resultBytes = convert(data, size);
            assert(resultBytes = factor*size);
