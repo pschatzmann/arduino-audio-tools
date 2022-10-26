@@ -26,7 +26,7 @@ struct AudioFFTResult {
     }
 };
 
-/// Configuration for AudioFFT
+/// Configuration for AudioFFT. If there are more then 1 channel the channel_used is defining which channel is used to perform the fft on.
 struct AudioFFTConfig : public  AudioBaseInfo {
     AudioFFTConfig(){
         channels = 2;
@@ -59,7 +59,7 @@ class FFTDriver {
 };
 
 /**
- * @brief Executes FFT using audio data. The Driver which is passed in the constructor selects a specifc FFT implementation
+ * @brief Executes FFT using audio data. The Driver which is passed in the constructor selects a specifc FFT implementation. 
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
