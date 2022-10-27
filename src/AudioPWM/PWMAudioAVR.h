@@ -127,14 +127,14 @@ class PWMAudioStreamAVR : public PWMAudioStreamBase {
 };
 
 /// separate method that can be defined as friend so that we can access protected information
-void defaultPWMAudioOutputCallback(){
+inline void defaultPWMAudioOutputCallback(){
     if (accessAudioPWM!=nullptr && accessAudioPWM->is_timer_started){
         accessAudioPWM->playNextFrame();
     }
 }
 
 /// timer callback: write the next frame to the pins
-ISR(TIMER1_COMPA_vect){
+inline ISR(TIMER1_COMPA_vect){
     defaultPWMAudioOutputCallback();
     TimerAlarmRepeatingAVR::tickerCallback();
 

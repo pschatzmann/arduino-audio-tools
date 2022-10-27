@@ -142,7 +142,7 @@ class PWMAudioStreamESP32 : public PWMAudioStreamBase {
 };
 
 /// timer callback: write the next frame to the pins
-void IRAM_ATTR defaultPWMAudioOutputCallback() {
+inline void IRAM_ATTR defaultPWMAudioOutputCallback() {
     if (accessAudioPWM!=nullptr){
         portENTER_CRITICAL_ISR(&(accessAudioPWM->timerMux));
         accessAudioPWM->playNextFrame();
