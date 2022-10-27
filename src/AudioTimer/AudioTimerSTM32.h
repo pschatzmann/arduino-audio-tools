@@ -6,7 +6,7 @@
 namespace audio_tools {
 
 class TimerAlarmRepeatingSTM32;
-TimerAlarmRepeatingSTM32 *timerAlarmRepeating = nullptr;
+inline TimerAlarmRepeatingSTM32 *timerAlarmRepeating = nullptr;
 typedef void (* repeating_timer_callback_t )(void* obj);
 
 /**
