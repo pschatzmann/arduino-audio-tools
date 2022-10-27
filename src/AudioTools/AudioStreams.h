@@ -1660,11 +1660,11 @@ class TimerCallbackAudioStream : public BufferedStream {
     }
   }
 
-  static void IRAM_ATTR timerCallback(void *obj);
+  inline static void IRAM_ATTR timerCallback(void *obj);
 };
 
 // relevant only if use_timer == true
-void TimerCallbackAudioStream::timerCallback(void *obj) {
+inline void TimerCallbackAudioStream::timerCallback(void *obj) {
   TimerCallbackAudioStream *src = (TimerCallbackAudioStream *)obj;
   if (src != nullptr) {
     // LOGD("%s:  %s", LOG_METHOD, src->cfg.rx_tx_mode==RX_MODE ?

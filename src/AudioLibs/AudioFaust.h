@@ -133,9 +133,10 @@ class FaustStream : public AudioStreamX {
             allocateFloatBuffer(samples, with_output_buffer);
             int16_t *data16 = (int16_t*) write_data;
             // convert to float
-            for(int j=0;j<samples;j+=cfg.channels){
+            int frameCount = samples/cfg.channels;
+            for(int j=0;j<frameCount;j++){
                 for(int i=0;i<cfg.channels;i++){
-                    p_buffer[i][j] =  static_cast<FAUSTFLOAT>(data16[j+i])/32767.0;
+                    p_buffer[i][j] =  static_cast<FAUSTFLOAT>(data16[(j*cfg.channels)+i])/32767.0;
                 }
             }
             FAUSTFLOAT** p_float_out = with_output_buffer ? p_buffer_out : p_buffer; 
@@ -260,9 +261,10 @@ class FaustStream : public AudioStreamX {
     /// Converts the float buffer to int16 values
     void convertFloatBufferToInt16(int samples, void *data, FAUSTFLOAT**p_float_out){
         int16_t *data16 = (int16_t*) data;
-        for (int j=0;j<samples;j+=cfg.channels){
+        int frameCount = samples/cfg.channels;
+        for (int j=0;j<frameCount;j++){
             for (int i=0;i<cfg.channels;i++){
-                data16[j+i]=p_float_out[i][j]*32767;
+                data16[(j*cfg.channels)+i]=p_float_out[i][j]*32767;
             }
         }
     }

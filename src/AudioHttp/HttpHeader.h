@@ -13,26 +13,26 @@ namespace audio_tools {
 // Class Configuration
 
 // Define relevant header content
-const char* CONTENT_TYPE = "Content-Type";
-const char* CONTENT_LENGTH = "Content-Length";
-const char* CONNECTION = "Connection";
-const char* CON_CLOSE = "close";
-const char* CON_KEEP_ALIVE = "keep-alive";
-const char* TRANSFER_ENCODING = "Transfer-Encoding";
-const char* CHUNKED = "chunked";
-const char* ACCEPT = "Accept";
-const char* ACCEPT_ALL = "*/*";
-const char* SUCCESS = "Success";
-const char* USER_AGENT = "User-Agent";
-const char* DEFAULT_AGENT = "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)";
-const char* HOST_C = "Host";
-const char* ACCEPT_ENCODING = "Accept-Encoding";
-const char* IDENTITY = "identity";
-const char* LOCATION = "Location";
+inline const char* CONTENT_TYPE = "Content-Type";
+inline const char* CONTENT_LENGTH = "Content-Length";
+inline const char* CONNECTION = "Connection";
+inline const char* CON_CLOSE = "close";
+inline const char* CON_KEEP_ALIVE = "keep-alive";
+inline const char* TRANSFER_ENCODING = "Transfer-Encoding";
+inline const char* CHUNKED = "chunked";
+inline const char* ACCEPT = "Accept";
+inline const char* ACCEPT_ALL = "*/*";
+inline const char* SUCCESS = "Success";
+inline const char* USER_AGENT = "User-Agent";
+inline const char* DEFAULT_AGENT = "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)";
+inline const char* HOST_C = "Host";
+inline const char* ACCEPT_ENCODING = "Accept-Encoding";
+inline const char* IDENTITY = "identity";
+inline const char* LOCATION = "Location";
 
 
 // Http methods
-const char* methods[] = {"?","GET","HEAD","POST","PUT","DELETE","TRACE","OPTIONS","CONNECT","PATCH",nullptr};
+inline const char* methods[] = {"?","GET","HEAD","POST","PUT","DELETE","TRACE","OPTIONS","CONNECT","PATCH",nullptr};
 
 /**
  * @brief A individual key - value header line 

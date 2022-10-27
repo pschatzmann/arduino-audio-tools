@@ -38,7 +38,7 @@ class UserCallback {
     portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
     bool lock;
 
-} *simpleUserCallback = nullptr;
+} inline *simpleUserCallback = nullptr;
 
 
 static IRAM_ATTR void userCallback0() {
@@ -90,7 +90,7 @@ class TimerCallback {
       portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
       TaskHandle_t *p_handler_task=nullptr;
 
-} *timerCallbackArray = nullptr;
+} inline *timerCallbackArray = nullptr;
 
 
 static IRAM_ATTR void timerCallback0() {
