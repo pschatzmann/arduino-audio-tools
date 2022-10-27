@@ -7,7 +7,7 @@ namespace audio_tools {
 
 typedef void (* repeating_timer_callback_t )(void* obj);
 class TimerAlarmRepeatingAVR;
-TimerAlarmRepeatingAVR *timerAlarmRepeatingRef = nullptr;
+inline TimerAlarmRepeatingAVR *timerAlarmRepeatingRef = nullptr;
 
 
 /**

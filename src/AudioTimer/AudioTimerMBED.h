@@ -7,7 +7,7 @@
 namespace audio_tools {
 
 class TimerAlarmRepeatingMBED;
-TimerAlarmRepeatingMBED *timerAlarmRepeating = nullptr;
+inline TimerAlarmRepeatingMBED *timerAlarmRepeating = nullptr;
 //typedef void (* repeating_timer_callback_t )(void* obj);
 
 /**
