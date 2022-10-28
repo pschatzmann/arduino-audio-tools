@@ -169,7 +169,7 @@ class URLStreamDefault : public AbstractURLStream {
         Url url;
         long size;
         long total_read;
-        // buffered read
+        // buffered single byte read
         Vector<uint8_t> read_buffer{0};
         uint16_t read_buffer_size;
         uint16_t read_pos;
