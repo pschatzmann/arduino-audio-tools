@@ -40,28 +40,24 @@ class URLStreamDefault : public AbstractURLStream {
 
         URLStreamDefault(int readBufferSize=DEFAULT_BUFFER_SIZE){
             TRACEI();
-            read_buffer = new uint8_t[readBufferSize];
+            read_buffer_size = readBufferSize;
         }
 
         URLStreamDefault(Client &clientPar, int readBufferSize=DEFAULT_BUFFER_SIZE){
             TRACEI();
-            read_buffer = new uint8_t[readBufferSize];
+            read_buffer_size = readBufferSize;
             client = &clientPar;
         }
 
         URLStreamDefault(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE) {
             TRACEI();
-            read_buffer = new uint8_t[readBufferSize];
+            read_buffer_size = readBufferSize;
             this->network = (char*)network;
             this->password = (char*)password;            
         }
 
         ~URLStreamDefault(){
             TRACEI();
-            if (read_buffer!=nullptr){
-                delete[] read_buffer;
-                read_buffer = nullptr;
-            }
             if (clientSecure!=nullptr){
                 delete clientSecure;
                 clientSecure = nullptr;
@@ -72,7 +68,6 @@ class URLStreamDefault : public AbstractURLStream {
             }
             end();
         }
-
 
         virtual bool begin(const char* urlStr, const char* acceptMime=nullptr, MethodID action=GET,  const char* reqMime="", const char*reqData="")  override{
             LOGI( "%s: %s",LOG_METHOD, urlStr);
@@ -112,13 +107,15 @@ class URLStreamDefault : public AbstractURLStream {
         virtual size_t readBytes(uint8_t *buffer, size_t length) override {
             if (!active || !request) return 0;
 
-            size_t read = request.read((uint8_t*)buffer, length);
+            size_t read = request.read((uint8_t*)&buffer[0], length);
             total_read+=read;
             return read;
         }
 
         virtual int read() override {
             if (!active) return -1;
+            // lazy allocation since this is rarely used
+            read_buffer.resize(read_buffer_size);
 
             fillBuffer();
             total_read++;
@@ -127,6 +124,8 @@ class URLStreamDefault : public AbstractURLStream {
 
         virtual int peek() override {
             if (!active) return -1;
+            // lazy allocation since this is rarely used
+            read_buffer.resize(read_buffer_size);
 
             fillBuffer();
             return isEOS() ? -1 : read_buffer[read_pos];
@@ -171,7 +170,7 @@ class URLStreamDefault : public AbstractURLStream {
         long size;
         long total_read;
         // buffered read
-        uint8_t *read_buffer=nullptr;
+        Vector<uint8_t> read_buffer{0};
         uint16_t read_buffer_size;
         uint16_t read_pos;
         uint16_t read_size;
@@ -258,7 +257,7 @@ class URLStreamDefault : public AbstractURLStream {
         inline void fillBuffer() {
             if (isEOS()){
                 // if we consumed all bytes we refill the buffer
-                read_size = readBytes(read_buffer,read_buffer_size);
+                read_size = readBytes(&read_buffer[0],read_buffer_size);
                 read_pos = 0;
             }
         }
