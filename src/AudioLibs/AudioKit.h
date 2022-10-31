@@ -1,5 +1,6 @@
 #pragma once
 
+#include "AudioTools.h"
 #include "AudioKitHAL.h"
 #include "AudioI2S/I2SConfig.h"
 #include "AudioTools/AudioActions.h"
