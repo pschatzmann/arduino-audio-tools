@@ -276,8 +276,8 @@ class FastSineGenerator : public SineWaveGenerator<T> {
         }
 
         virtual T readSample() override {
-            float angle = double_Pi * SineWaveGenerator<T>::m_cycles +
-                                    SineWaveGenerator<T>::m_phase;
+            float angle = SineWaveGenerator<T>::m_cycles +
+                          SineWaveGenerator<T>::m_phase;
             T result = SineWaveGenerator<T>::m_amplitude * sine(angle);
             SineWaveGenerator<T>::m_cycles += SineWaveGenerator<T>::m_frequency *
                                                 SineWaveGenerator<T>::m_deltaTime;
