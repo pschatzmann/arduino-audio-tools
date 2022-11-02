@@ -216,8 +216,8 @@ class SineWaveGenerator : public SoundGenerator<T>{
 
         /// Provides a single sample
         virtual T readSample() override {
-            float angle =  double_Pi * m_cycles + m_phase;
-            T result = m_amplitude * sinf(angle);
+            float angle = m_cycles + m_phase;
+            T result = m_amplitude * sine(angle);
             m_cycles += m_frequency * m_deltaTime;
             if (m_cycles > 1.0) {
                 m_cycles -= 1.0;
