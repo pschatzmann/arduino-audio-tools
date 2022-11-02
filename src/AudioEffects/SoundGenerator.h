@@ -211,8 +211,8 @@ class SineWaveGenerator : public SoundGenerator<T>{
 
         /// Provides a single sample
         virtual T readSample() override {
-            float angle = m_cycles + m_phase;
-            T result = m_amplitude * sine(angle);
+            float angle = double_Pi * m_cycles + m_phase;
+            T result = m_amplitude * sinf(angle);
             m_cycles += m_frequency * m_deltaTime;
             if (m_cycles > 1.0) {
                 m_cycles -= 1.0;
@@ -261,6 +261,32 @@ class SquareWaveGenerator : public SineWaveGenerator<T> {
         }
 };
 
+/// sine approximation.
+float sine(float t) {
+  float p = (t - (int)t) - 0.5f; // 0 <= p <= 1
+  float pp = p * p;
+  return (p - 6.283211f * pp * p + 9.132843f * pp * pp * p) * -6.221086f;
+}
+
+template <class T>
+class FastSineGenerator : public SineWaveGenerator<T> {
+    public:
+        FastSineGenerator(float amplitude = 32767.0, float phase = 0.0) : SineWaveGenerator<T>(amplitude, phase) {
+            LOGD("FastSineGenerator");
+        }
+
+        virtual T readSample() override {
+            float angle = double_Pi * SineWaveGenerator<T>::m_cycles +
+                                    SineWaveGenerator<T>::m_phase;
+            T result = SineWaveGenerator<T>::m_amplitude * sine(angle);
+            SineWaveGenerator<T>::m_cycles += SineWaveGenerator<T>::m_frequency *
+                                                SineWaveGenerator<T>::m_deltaTime;
+            if (SineWaveGenerator<T>::m_cycles > 1.0) {
+                SineWaveGenerator<T>::m_cycles -= 1.0;
+            }
+            return result;
+        }
+};
 
 /**
  * @brief Generates a random noise sound with the help of rand() function.
