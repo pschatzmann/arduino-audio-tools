@@ -5,7 +5,12 @@
 #include "AudioBasic/Collections.h"
 
 namespace audio_tools {
-
+// sine approximation.
+float sine(float t) {
+  float p = (t - (int)t) - 0.5f; // 0 <= p <= 1
+  float pp = p * p;
+  return (p - 6.283211f * pp * p + 9.132843f * pp * pp * p) * -6.221086f;
+}
 /**
  * @brief Base class to define the abstract interface for the sound generating classes
  * @author Phil Schatzmann
