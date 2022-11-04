@@ -10,8 +10,8 @@
 
 namespace audio_tools {
 
-inline const int i2s_buffer_size = 1024;
-inline NBuffer<uint8_t> i2s_buffer(i2s_buffer_size, 5);
+INLINE_VAR const int i2s_buffer_size = 1024;
+INLINE_VAR NBuffer<uint8_t> i2s_buffer(i2s_buffer_size, 5);
 
 /**
  *  @brief Mapping Frequency constants to available frequencies
@@ -21,7 +21,7 @@ struct Nano_BLE_freq_info {
   double freq; // in mhz
 };
 
-inline const Nano_BLE_freq_info freq_table[] = {
+INLINE_VAR const Nano_BLE_freq_info freq_table[] = {
   { I2S_CONFIG_MCKFREQ_MCKFREQ_32MDIV8, 32.0 / 8 },
   { I2S_CONFIG_MCKFREQ_MCKFREQ_32MDIV10, 32 / 10  },
   { I2S_CONFIG_MCKFREQ_MCKFREQ_32MDIV11, 32.0 / 11 },
@@ -45,7 +45,7 @@ struct Nano_BLE_ratio_info {
   double ratio;
 };
 
-inline const Nano_BLE_ratio_info ratio_table[] = {
+INLINE_VAR const Nano_BLE_ratio_info ratio_table[] = {
   { I2S_CONFIG_RATIO_RATIO_32X, 32.0  },
   { I2S_CONFIG_RATIO_RATIO_48X, 48.0  },
   { I2S_CONFIG_RATIO_RATIO_64X, 64.0 },
@@ -61,7 +61,7 @@ inline const Nano_BLE_ratio_info ratio_table[] = {
  *  I2S Event handler
  */
 
-extern "C" inline void I2S_IRQHandler(void) {
+extern "C" INLINE_VAR void I2S_IRQHandler(void) {
     if(NRF_I2S->EVENTS_TXPTRUPD != 0) {
       // reading from buffer to pins
       NRF_I2S->TXD.PTR = (uint32_t) i2s_buffer.readEnd().address(); // last buffer was processed

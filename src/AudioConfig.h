@@ -39,10 +39,24 @@
 #define LOG_STREAM Serial
 #endif
 
-#define CHECK_MEMORY() 
-// #define CHECK_MEMORY() checkMemory(true)
 #define LOG_PRINTF_BUFFER_SIZE 256
 #define LOG_METHOD __PRETTY_FUNCTION__
+
+// cheange USE_CHECK_MEMORY to 1 to activate memory checks
+#define USE_CHECK_MEMORY 0
+#if USE_CHECK_MEMORY
+#  define CHECK_MEMORY() 
+#else
+#  define CHECK_MEMORY() checkMemory(true)
+#endif
+
+// Change USE_INLINE_VARS to 0 if inline variables are not supported
+#define USE_INLINE_VARS 1
+#if USE_INLINE_VARS
+#  define INLINE_VAR inline
+#else
+#  define INLINE_VAR 
+#endif
 
 /**
  * ------------------------------------------------------------------------- 

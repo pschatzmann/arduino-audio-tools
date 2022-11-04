@@ -143,8 +143,8 @@ class I2SBase {
   protected:
     I2SConfig cfg;
     I2SSettingsSTM32 i2s_stm32;
-    inline static NBuffer<uint8_t> *p_tx_buffer=nullptr;
-    inline static NBuffer<uint8_t> *p_rx_buffer=nullptr;
+    INLINE_VAR static NBuffer<uint8_t> *p_tx_buffer=nullptr;
+    INLINE_VAR static NBuffer<uint8_t> *p_rx_buffer=nullptr;
 
     void deleteBuffers() {
       if (p_rx_buffer!=nullptr) {
