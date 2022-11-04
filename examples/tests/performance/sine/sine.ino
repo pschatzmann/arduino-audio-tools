@@ -7,7 +7,7 @@ FastSineGenerator<int16_t> sine_fast(32000);
 int sec = 5;
 
 size_t measure(int sec, SoundGenerator<int16_t> *gen){
-    uint64_t end = millis()+(1000*sec); // 10 seconds
+    uint64_t end = millis()+(1000*sec); 
     size_t count;
     while(millis()<end){
         int16_t s = gen->readSample();
@@ -31,14 +31,10 @@ void setup(){
 }
 
 void loop(){
-    size_t result1 = measure(sec, &sine_wave);
-    size_t result2 = measure(sec, &sine_table);
-    size_t result3 = measure(sec, &sine_fast);
-
-    Serial.print(resultStr("SineWaveGenerator", result1));
+    Serial.print(resultStr("SineWaveGenerator", measure(sec, &sine_wave)));
     Serial.print(" - ");
-    Serial.print(resultStr("SineFromTable", result2));
+    Serial.print(resultStr("SineFromTable", measure(sec, &sine_table)));
     Serial.print(" - ");
-    Serial.print(resultStr("FastSineGenerator", result3));
+    Serial.print(resultStr("FastSineGenerator", measure(sec, &sine_fast)));
     Serial.println();
 }
