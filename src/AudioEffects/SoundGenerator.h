@@ -268,6 +268,12 @@ float sine(float t) {
   return (p - 6.283211f * pp * p + 9.132843f * pp * pp * p) * -6.221086f;
 }
 
+/**
+ * @brief Sine wave which is based on a fast approximation function. 
+ * @author Vivian Leigh Stewart
+ * @copyright GPLv3
+ * @tparam T 
+ */
 template <class T>
 class FastSineGenerator : public SineWaveGenerator<T> {
     public:
