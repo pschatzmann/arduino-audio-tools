@@ -52,7 +52,7 @@
 
 // Change USE_INLINE_VARS to 0 if inline variables are not supported
 #define USE_INLINE_VARS 1
-#if USE_INLINE_VARS
+#if USE_INLINE_VARS && !defined(INGNORE_INLINE_VARS)
 #  define INLINE_VAR inline
 #else
 #  define INLINE_VAR 
