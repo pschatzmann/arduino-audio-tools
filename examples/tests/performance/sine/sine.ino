@@ -24,10 +24,9 @@ const char* resultStr(const char* name, size_t count){
 
 void setup(){
     Serial.begin(115200);
-    Serial.print("Number of call in ");
+    Serial.print("Number of calls in ");
     Serial.print(sec);
     Serial.println(" seconds:");
-    Serial.println();
 }
 
 void loop(){
