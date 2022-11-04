@@ -8,12 +8,12 @@ int sec = 5;
 
 size_t measure(int sec, SoundGenerator<int16_t> *gen){
     uint64_t end = millis()+(1000*sec); 
-    size_t count;
+    size_t count = 0;
     while(millis()<end){
         int16_t s = gen->readSample();
         count++;
     }
-    return count;
+    return count / sec;
 }
 
 const char* resultStr(const char* name, size_t count){
@@ -24,7 +24,7 @@ const char* resultStr(const char* name, size_t count){
 
 void setup(){
     Serial.begin(115200);
-    Serial.print("Number of calls in ");
+    Serial.print("Number of samples per sec during ");
     Serial.print(sec);
     Serial.println(" seconds:");
 }
