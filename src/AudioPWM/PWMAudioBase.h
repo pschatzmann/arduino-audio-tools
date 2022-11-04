@@ -90,7 +90,7 @@ struct PWMConfig : public AudioBaseInfo {
         Pins pins_data;
 
 
-} inline default_config;
+} INLINE_VAR default_config;
 
 
 /**

@@ -31,7 +31,7 @@ struct WAVAudioInfo : AudioBaseInfo {
     uint32_t file_size=0;
 };
 
-inline const char* wav_mime = "audio/wav";
+INLINE_VAR const char* wav_mime = "audio/wav";
 
 /**
  * @brief Parser for Wav header data

@@ -10,7 +10,7 @@ namespace audio_tools {
  * @brief Audio Source (TX_MODE) or Audio Sink (RX_MODE)
  */
 enum RxTxMode  {UNDEFINED_MODE=0, TX_MODE=1, RX_MODE=2, RXTX_MODE=3 };
-inline const char* RxTxModeNames[]={"UNDEFINED_MODE","TX_MODE","RX_MODE","RXTX_MODE" };
+INLINE_VAR const char* RxTxModeNames[]={"UNDEFINED_MODE","TX_MODE","RX_MODE","RXTX_MODE" };
 /**
  * @brief Time Units
  */
@@ -94,7 +94,7 @@ class AudioWriter {
 };
 
 
-inline const char* mime_pcm = "audio/pcm";
+INLINE_VAR const char* mime_pcm = "audio/pcm";
 
 
 #ifndef IS_DESKTOP

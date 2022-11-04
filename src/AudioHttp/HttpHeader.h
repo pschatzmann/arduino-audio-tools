@@ -13,26 +13,26 @@ namespace audio_tools {
 // Class Configuration
 
 // Define relevant header content
-inline const char* CONTENT_TYPE = "Content-Type";
-inline const char* CONTENT_LENGTH = "Content-Length";
-inline const char* CONNECTION = "Connection";
-inline const char* CON_CLOSE = "close";
-inline const char* CON_KEEP_ALIVE = "keep-alive";
-inline const char* TRANSFER_ENCODING = "Transfer-Encoding";
-inline const char* CHUNKED = "chunked";
-inline const char* ACCEPT = "Accept";
-inline const char* ACCEPT_ALL = "*/*";
-inline const char* SUCCESS = "Success";
-inline const char* USER_AGENT = "User-Agent";
-inline const char* DEFAULT_AGENT = "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)";
-inline const char* HOST_C = "Host";
-inline const char* ACCEPT_ENCODING = "Accept-Encoding";
-inline const char* IDENTITY = "identity";
-inline const char* LOCATION = "Location";
+INLINE_VAR const char* CONTENT_TYPE = "Content-Type";
+INLINE_VAR const char* CONTENT_LENGTH = "Content-Length";
+INLINE_VAR const char* CONNECTION = "Connection";
+INLINE_VAR const char* CON_CLOSE = "close";
+INLINE_VAR const char* CON_KEEP_ALIVE = "keep-alive";
+INLINE_VAR const char* TRANSFER_ENCODING = "Transfer-Encoding";
+INLINE_VAR const char* CHUNKED = "chunked";
+INLINE_VAR const char* ACCEPT = "Accept";
+INLINE_VAR const char* ACCEPT_ALL = "*/*";
+INLINE_VAR const char* SUCCESS = "Success";
+INLINE_VAR const char* USER_AGENT = "User-Agent";
+INLINE_VAR const char* DEFAULT_AGENT = "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)";
+INLINE_VAR const char* HOST_C = "Host";
+INLINE_VAR const char* ACCEPT_ENCODING = "Accept-Encoding";
+INLINE_VAR const char* IDENTITY = "identity";
+INLINE_VAR const char* LOCATION = "Location";
 
 
 // Http methods
-inline const char* methods[] = {"?","GET","HEAD","POST","PUT","DELETE","TRACE","OPTIONS","CONNECT","PATCH",nullptr};
+INLINE_VAR const char* methods[] = {"?","GET","HEAD","POST","PUT","DELETE","TRACE","OPTIONS","CONNECT","PATCH",nullptr};
 
 /**
  * @brief A individual key - value header line 

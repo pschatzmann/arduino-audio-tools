@@ -10,7 +10,7 @@
 namespace audio_tools {
 
 #if !defined(ARDUINO_ARCH_MBED_RP2040)
-inline ::I2S I2S;
+INLINE_VAR ::I2S I2S;
 #endif
 
 

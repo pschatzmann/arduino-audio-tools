@@ -10,10 +10,10 @@ enum ID3TypeSelection { SELECT_ID3V1=0b001, SELECT_ID3V2=0b010, SELECT_ID3=0b011
 enum MetaDataType { Title, Artist, Album, Genre, Name, Description };
 
 /// Test Description for meta info
-inline const char* MetaDataTypeStr[] = {"Title", "Artist", "Album", "Genre","Name", "Description"};
+INLINE_VAR const char* MetaDataTypeStr[] = {"Title", "Artist", "Album", "Genre","Name", "Description"};
 
 /// Converts the MetaDataType to a string
-inline const char *toStr(MetaDataType t){
+INLINE_VAR const char *toStr(MetaDataType t){
     return MetaDataTypeStr[t];
 }
 
