@@ -45,9 +45,9 @@
 // cheange USE_CHECK_MEMORY to 1 to activate memory checks
 #define USE_CHECK_MEMORY 0
 #if USE_CHECK_MEMORY
-#  define CHECK_MEMORY() 
-#else
 #  define CHECK_MEMORY() checkMemory(true)
+#else
+#  define CHECK_MEMORY() 
 #endif
 
 // Change USE_INLINE_VARS to 0 if inline variables are not supported
