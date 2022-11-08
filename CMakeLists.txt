@@ -30,6 +30,7 @@ if (ADD_STD_LIB)
         FetchContent_Populate(portaudio)
         add_subdirectory(${portaudio_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/portaudio)
     endif()
+    target_compile_options(portaudio PUBLIC -Wno-deprecated-declarations)
 
     # Build with Linux Arduino Emulator
     FetchContent_Declare(arduino_emulator GIT_REPOSITORY "https://github.com/pschatzmann/Arduino-Emulator.git" GIT_TAG main )
