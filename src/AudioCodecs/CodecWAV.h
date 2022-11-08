@@ -135,7 +135,7 @@ class WAVHeader  {
             int write_len = min(data_len, 44 - len);
             memmove(buffer, data+len, write_len);
             len+=write_len;
-            LOGI("WAVHeader::write: %u -> %d -> %d",(unsigned) data_len, write_len, len);
+            LOGI("WAVHeader::write: %u -> %d -> %d",(unsigned) data_len, write_len, (int)len);
             return write_len;
         }
 
