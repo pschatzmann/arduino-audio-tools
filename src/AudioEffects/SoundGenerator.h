@@ -261,12 +261,6 @@ class SquareWaveGenerator : public SineWaveGenerator<T> {
         }
 };
 
-/// sine approximation.
-float sine(float t) {
-  float p = (t - (int)t) - 0.5f; // 0 <= p <= 1
-  float pp = p * p;
-  return (p - 6.283211f * pp * p + 9.132843f * pp * pp * p) * -6.221086f;
-}
 
 /**
  * @brief Sine wave which is based on a fast approximation function. 
@@ -291,6 +285,14 @@ class FastSineGenerator : public SineWaveGenerator<T> {
                 SineWaveGenerator<T>::m_cycles -= 1.0;
             }
             return result;
+        }
+        
+    protected:
+        /// sine approximation.
+        inline float sine(float t) {
+            float p = (t - (int)t) - 0.5f; // 0 <= p <= 1
+            float pp = p * p;
+            return (p - 6.283211f * pp * p + 9.132843f * pp * pp * p) * -6.221086f;
         }
 };
 
