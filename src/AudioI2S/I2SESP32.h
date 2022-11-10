@@ -338,8 +338,13 @@ class I2SBase {
 #if defined(USE_I2S_ANALOG) 
           mode = (i2s_mode_t) (cfg.rx_tx_mode ? I2S_MODE_DAC_BUILT_IN : I2S_MODE_ADC_BUILT_IN);
 #else    
-          LOGE("Not supported");
+          LOGE("mode not supported");
 #endif
+          break;
+
+        default:
+          LOGW("signal_type undefined");
+          mode = (i2s_mode_t) (I2S_MODE_MASTER | I2S_MODE_TX);
           break;
       }
       return mode;

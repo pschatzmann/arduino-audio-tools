@@ -274,7 +274,7 @@ class MemoryStream : public AudioStream {
       buffer_size = size;
       switch(memory_type){
   #ifdef ESP32
-        PS_RAM:
+        case PS_RAM:
           buffer = (buffer==nullptr) ? (uint8_t*)ps_calloc(size,1) : (uint8_t*)ps_realloc(buffer, size);
           break;
   #endif
