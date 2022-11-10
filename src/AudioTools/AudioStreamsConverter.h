@@ -120,12 +120,16 @@ class ChannelFormatConverterStream : public AudioStreamX {
             switch(bits_per_sample){
               case 8:
                  static_cast<ChannelFormatConverterStreamT<int8_t>*>(converter)->setAudioInfo(cfg);
+                 break;
               case 16:
                  static_cast<ChannelFormatConverterStreamT<int16_t>*>(converter)->setAudioInfo(cfg);
+                 break;
               case 24:
                  static_cast<ChannelFormatConverterStreamT<int24_t>*>(converter)->setAudioInfo(cfg);
+                 break;
               case 32:
                  static_cast<ChannelFormatConverterStreamT<int32_t>*>(converter)->setAudioInfo(cfg);
+                 break;
             }
         }
 
