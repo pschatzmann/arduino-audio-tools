@@ -86,7 +86,7 @@ class StreamCopyT {
             delete[] buffer;
         }
 
-        // copies the data from one channel from the source to 2 channels on the destination - the result is in bytes
+        // copies the data from the source to the destination - the result is in bytes
         inline size_t copy(){
             TRACED();
             // if not initialized we do nothing
@@ -143,44 +143,6 @@ class StreamCopyT {
             return result;
         }
 
-
-        // copies the data from one channel from the source to 2 channels on the destination - the result is in bytes
-        size_t copy2(){
-            if (from==nullptr || to == nullptr) 
-                return 0;
-            size_t result = 0;
-            size_t delayCount = 0;
-            size_t bytes_read;
-            size_t len = available();
-            size_t bytes_to_read;
-            
-            if (len>0){
-                bytes_to_read = min(len, static_cast<size_t>(buffer_size / 2));
-                size_t samples = bytes_to_read / sizeof(T);
-                bytes_to_read = samples * sizeof(T);
-
-                T temp_data[samples];
-                bytes_read = from->readBytes((uint8_t*)temp_data, bytes_to_read);
-                // callback with unconverted data
-                if (onWrite!=nullptr) onWrite(onWriteObj, temp_data, bytes_read);
-
-                T* bufferT = (T*) buffer;
-                for (size_t j=0;j<samples;j++){
-                    *bufferT = temp_data[j];
-                    bufferT++;
-                    *bufferT = temp_data[j];
-                    bufferT++;
-                }
-                result = write(samples * sizeof(T)*2, delayCount);
-                #ifndef COPY_LOG_OFF
-                    LOGI("StreamCopy::copy %u -> %u bytes - in %d hops", (unsigned int)bytes_to_read, (unsigned int)result, delayCount);
-                #endif
-                CHECK_MEMORY();
-            } else {
-                delay(delay_on_no_data);
-            }
-            return result;
-        }
 
         /// available bytes in the data source
         int available() {
@@ -370,10 +332,11 @@ class StreamCopy : public StreamCopyT<uint8_t> {
             return result;
         }
         
-        inline size_t copy() {
+        /// Copies all bytes from the input to the output 
+        inline size_t copy()  {
             return StreamCopyT<uint8_t>::copy();
         }
-
+        
         int available() {
             return from == nullptr ? 0 : from->available();
         }
