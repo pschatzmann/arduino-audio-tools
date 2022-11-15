@@ -6,15 +6,15 @@
  * @copyright GPLv3
  */
 
-#include "BluetoothA2DPSink.h"
 #include "AudioTools.h"
 #include "AudioLibs/AudioEspressifFFT.h" // or AudioKissFFT
+#include "BluetoothA2DPSink.h"
 
 BluetoothA2DPSink a2dp_sink;
 AudioEspressifFFT fft; // or AudioKissFFT
 
 // Provide data to FFT
-void readDataStream(const uint8_t *data, uint32_t length) {
+void writeDataStream(const uint8_t *data, uint32_t length) {
   fft.write(data, length);
 }
 
@@ -47,7 +47,7 @@ void setup() {
   fft.begin(tcfg);
 
   // register callback
-  a2dp_sink.set_stream_reader(readDataStream, false);
+  a2dp_sink.set_stream_reader(writeDataStream, false);
 
   // Start Bluetooth Audio Receiver
   Serial.print("starting a2dp-fft...");
