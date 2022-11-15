@@ -4,17 +4,16 @@
 SineWaveGenerator<int16_t> sine_wave(32000);      // subclass of SoundGenerator with max amplitude of 32000
 SineFromTable<int16_t> sine_table(32000);         // subclass of SoundGenerator with max amplitude of 32000
 FastSineGenerator<int16_t> sine_fast(32000);  
-int sec = 5;
 
 size_t measure(int sec, SoundGenerator<int16_t> *gen){
     uint64_t start = millis();
     size_t count = 0;
-    for(int i=0;i<100000;i++){
+    for(int i=0;i<1000000;i++){
         int16_t s = gen->readSample();
     }
     uint64_t timeMs = millis()-start;
     // calculate samples per second
-    return 100.0 / timeMs;
+    return 1000000.0 / timeMs *1000;
 }
 
 const char* resultStr(const char* name, size_t count){
