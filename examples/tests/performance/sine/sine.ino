@@ -7,13 +7,14 @@ FastSineGenerator<int16_t> sine_fast(32000);
 int sec = 5;
 
 size_t measure(int sec, SoundGenerator<int16_t> *gen){
-    uint64_t end = millis()+(1000*sec); 
+    uint64_t start = millis();
     size_t count = 0;
-    while(millis()<end){
+    for(int i=0;i<100000;i++){
         int16_t s = gen->readSample();
-        count++;
     }
-    return count / sec;
+    uint64_t timeMs = millis()-start;
+    // calculate samples per second
+    return 100.0 / timeMs;
 }
 
 const char* resultStr(const char* name, size_t count){
@@ -24,9 +25,7 @@ const char* resultStr(const char* name, size_t count){
 
 void setup(){
     Serial.begin(115200);
-    Serial.print("Number of samples per sec during ");
-    Serial.print(sec);
-    Serial.println(" seconds:");
+    Serial.print("Number of samples per sec");
 }
 
 void loop(){
