@@ -134,6 +134,7 @@ Dependent on the example you might need to install some of the following librari
 - [TTS](https://github.com/pschatzmann/TTS) A Text to Speech Engine
 - [flite](https://github.com/pschatzmann/arduino-flite) A Text to Speech Engine
 - [simple-tts](https://github.com/pschatzmann/arduino-simple-tts) A Simple TTS engine using prerecorded audio (e.g. to implement Talking Clock, Talking Numbers)
+- [espeak-ng](https://github.com/pschatzmann/arduino-espeak-ng) eSpeak NG is an open source speech synthesizer that supports more than hundred languages.
 - [arduino-stk](https://github.com/pschatzmann/Arduino-STK) Synthesis ToolKit in C++ (STK) 
 - [Maximilian](https://github.com/pschatzmann/Maximilian) cross-platform and multi-target audio synthesis and signal processing library
 - [Mozzi](https://github.com/pschatzmann/Mozzi) A sound synthesis library for Arduino
