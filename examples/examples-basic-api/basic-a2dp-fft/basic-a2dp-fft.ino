@@ -13,8 +13,8 @@
 BluetoothA2DPSink a2dp_sink;
 AudioEspressifFFT fft; // or AudioKissFFT
 
-// Write data to SPDIF in callback
-void read_data_stream(const uint8_t *data, uint32_t length) {
+// Provide data to FFT
+void readDataStream(const uint8_t *data, uint32_t length) {
   fft.write(data, length);
 }
 
@@ -47,7 +47,7 @@ void setup() {
   fft.begin(tcfg);
 
   // register callback
-  a2dp_sink.set_stream_reader(read_data_stream, false);
+  a2dp_sink.set_stream_reader(readDataStream, false);
 
   // Start Bluetooth Audio Receiver
   Serial.print("starting a2dp-fft...");
