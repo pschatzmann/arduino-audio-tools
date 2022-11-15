@@ -24,7 +24,7 @@ void setup() {
   AudioLogger::instance().begin(Serial, AudioLogger::Warning);
   //AUDIOKIT_LOG_LEVEL = AudioKitDebug; 
 
-  auto cfg = kit.defaultConfig();
+  auto cfg = kit.defaultConfig(TX_MODE);
   cfg.bits_per_sample = 16;
   cfg.channels = 1;
   cfg.sample_rate = 8000;
