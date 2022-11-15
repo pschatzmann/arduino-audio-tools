@@ -13,7 +13,7 @@
 
 
 
-uint8_t channels = 2;
+uint8_t channels = 1;
 uint16_t sample_rate = 22050;
 
 I2SStream i2s;  // Output to I2S
@@ -34,7 +34,7 @@ void setup(){
 }
 
 void loop(){
-    if (!copier.copy2()){
+    if (!copier.copy()){
       i2s.end();
       stop();
     }
