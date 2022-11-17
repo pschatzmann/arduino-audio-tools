@@ -64,7 +64,7 @@ class AudioServerEx : public AudioPrint {
         end(); // we (re) start with  a clean state
 
         if (info.input==nullptr){
-            p_stream = new ExtensionStream(info.path,tinyhttp::GET, info.mime );
+            p_stream = new ExtensionStream(info.path,tinyhttp::T_GET, info.mime );
         } else {
             p_stream = new ExtensionStream(info.path, info.mime, *info.input);
         }
