@@ -213,12 +213,12 @@ class AudioKitStream : public AudioStreamX {
   }
 
   // restart after end with initial parameters
-  void begin(){
-    begin(cfg);
+  bool begin() override {
+    return begin(cfg);
   }
 
   /// Stops the processing
-  void end() {
+  void end() override {
     TRACED();
     kit.end();
     is_started = false;
