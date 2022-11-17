@@ -188,7 +188,7 @@ class AudioKitStream : public AudioStreamX {
   }
 
   /// Starts the processing
-  void begin(AudioKitStreamConfig config) {
+  bool begin(AudioKitStreamConfig config) {
     TRACED();
     AudioStream::setAudioInfo(config);
     cfg = config;
@@ -210,6 +210,7 @@ class AudioKitStream : public AudioStreamX {
     // set initial volume
     setVolume(volume_value);
     is_started = true;
+    return true;
   }
 
   // restart after end with initial parameters
