@@ -212,6 +212,11 @@ class AudioKitStream : public AudioStreamX {
     is_started = true;
   }
 
+  // restart after end with initial parameters
+  void begin(){
+    begin(cfg);
+  }
+
   /// Stops the processing
   void end() {
     TRACED();
