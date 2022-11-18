@@ -50,14 +50,10 @@
 #  define CHECK_MEMORY() 
 #endif
 
-// Change USE_INLINE_VARS to 0 if inline variables are not supported
-#define USE_INLINE_VARS 1
-#if USE_INLINE_VARS && !defined(INGNORE_INLINE_VARS)
-#  define INLINE_VAR inline
-#else
-#  define INLINE_VAR 
+// Change USE_INLINE_VARS to 1 if inline variables are supported
+#ifndef USE_INLINE_VARS
+#  define USE_INLINE_VARS 0
 #endif
-
 /**
  * ------------------------------------------------------------------------- 
  * @brief Common Default Settings that can usually be changed in the API
@@ -470,3 +466,8 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define USE_URL_ARDUINO
 #endif
 
+#if USE_INLINE_VARS && !defined(INGNORE_INLINE_VARS)
+#  define INLINE_VAR inline
+#else
+#  define INLINE_VAR 
+#endif
