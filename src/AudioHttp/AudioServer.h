@@ -31,9 +31,11 @@ class AudioServer {
          * @brief Construct a new Audio W A V Server object
          * We assume that the WiFi is already connected
          */
-        AudioServer() {
+        AudioServer(int port=80) {
             // the client returns 0 for avialableForWrite()
             copier.setCheckAvailableForWrite(false);
+            WiFiServer tmp(port);
+            server = tmp;
         }
 
 
@@ -43,11 +45,13 @@ class AudioServer {
          * @param network 
          * @param password 
          */
-        AudioServer(const char* network, const char *password) {
+        AudioServer(const char* network, const char *password, int port=80) {
             this->network = (char*)network;
             this->password = (char*)password;
             // the client returns 0 for avialableForWrite()
             copier.setCheckAvailableForWrite(false);
+            WiFiServer tmp(port);
+            server = tmp;
         }
 
         /**
@@ -145,7 +149,7 @@ class AudioServer {
 
     protected:
         // WIFI
-        WiFiServer server = WiFiServer(80);
+        WiFiServer server;
         WiFiClient client_obj;
         char *password = nullptr;
         char *network = nullptr;
@@ -246,7 +250,7 @@ class AudioEncoderServer  : public AudioServer {
          * @brief Construct a new Audio W A V Server object
          * We assume that the WiFi is already connected
          */
-        AudioEncoderServer(AudioEncoder *encoder) : AudioServer() {
+        AudioEncoderServer(AudioEncoder *encoder, int port=80) : AudioServer(port) {
             this->encoder = encoder;
         }
 
@@ -256,7 +260,7 @@ class AudioEncoderServer  : public AudioServer {
          * @param network 
          * @param password 
          */
-        AudioEncoderServer(AudioEncoder *encoder, const char* network, const char *password) : AudioServer(network, password) {
+        AudioEncoderServer(AudioEncoder *encoder, const char* network, const char *password, int port=80) : AudioServer(network, password, port) {
             this->encoder = encoder;
         }
 
@@ -363,7 +367,7 @@ class AudioWAVServer : public AudioEncoderServer {
          * @brief Construct a new Audio W A V Server object
          * We assume that the WiFi is already connected
          */
-        AudioWAVServer() : AudioEncoderServer(new WAVEncoder()){
+        AudioWAVServer(int port=80) : AudioEncoderServer(new WAVEncoder(), port){
         }
 
         /**
@@ -372,7 +376,7 @@ class AudioWAVServer : public AudioEncoderServer {
          * @param network 
          * @param password 
          */
-        AudioWAVServer(const char* network, const char *password) : AudioEncoderServer(new WAVEncoder(), network, password) {
+        AudioWAVServer(const char* network, const char *password, int port=80) : AudioEncoderServer(new WAVEncoder(), network, password, port) {
         }
 
         /// Destructor: release the allocated encoder
