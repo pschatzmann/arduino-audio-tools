@@ -17,6 +17,9 @@ class AudioDecoder : public AudioWriter, public AudioBaseInfoSource {
 public:
   AudioDecoder() = default;
   virtual ~AudioDecoder() = default;
+  AudioDecoder(AudioDecoder const&) = delete;
+  AudioDecoder& operator=(AudioDecoder const&) = delete;
+  
   virtual AudioBaseInfo audioInfo() = 0;
   // for most decoder this is not needed
   virtual void setAudioInfo(AudioBaseInfo from) override {}
@@ -44,6 +47,8 @@ class AudioEncoder : public AudioWriter {
 public:
   AudioEncoder() = default;
   virtual ~AudioEncoder() = default;
+  AudioEncoder(AudioEncoder const&) = delete;
+  AudioEncoder& operator=(AudioEncoder const&) = delete;
   virtual const char *mime() = 0;
 };
 

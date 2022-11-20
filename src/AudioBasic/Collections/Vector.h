@@ -296,6 +296,10 @@ class Vector {
       return p_data;
     }
 
+    operator bool() const {
+      return p_data!=nullptr;
+    }
+
   protected:
     int bufferLen=0;
     int len = 0;

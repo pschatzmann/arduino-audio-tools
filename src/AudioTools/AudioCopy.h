@@ -24,8 +24,8 @@ class StreamCopyT {
             TRACED();
             begin(to, from);
             this->buffer_size = buffer_size;
-            buffer = new uint8_t[buffer_size];
-            if (buffer==nullptr){
+            buffer.resize(buffer_size);
+            if (!buffer){
                 LOGE("Could not allocate enough memory for StreamCopy: %d bytes", buffer_size);
             }
         }
@@ -34,8 +34,8 @@ class StreamCopyT {
             TRACED();
             begin(to, from);
             this->buffer_size = buffer_size;
-            buffer = new uint8_t[buffer_size];
-            if (buffer==nullptr){
+            buffer.resize(buffer_size);
+            if (!buffer){
                 LOGE("Could not allocate enough memory for StreamCopy: %d bytes", buffer_size);
             }
         }
@@ -43,11 +43,14 @@ class StreamCopyT {
         StreamCopyT(int buffer_size=DEFAULT_BUFFER_SIZE){
             TRACED();
             this->buffer_size = buffer_size;
-            buffer = new uint8_t[buffer_size];
-            if (buffer==nullptr){
+            buffer.resize(buffer_size);
+            if (!buffer){
                 LOGE("Could not allocate enough memory for StreamCopy: %d bytes", buffer_size);
             }
         }
+
+        StreamCopyT(StreamCopyT const&) = delete;
+        StreamCopyT& operator=(StreamCopyT const&) = delete;
 
         void begin(){     
             is_first = true;   
@@ -82,10 +85,6 @@ class StreamCopyT {
             return to;
         }
 
-        ~StreamCopyT(){
-            delete[] buffer;
-        }
-
         // copies the data from the source to the destination - the result is in bytes
         inline size_t copy(){
             TRACED();
@@ -118,18 +117,18 @@ class StreamCopyT {
                 // get the data now
                 bytes_read = 0;
                 if (bytes_to_read>0){
-                    bytes_read = from->readBytes((uint8_t*)buffer, bytes_to_read);
+                    bytes_read = from->readBytes((uint8_t*)&buffer[0], bytes_to_read);
                 }
 
                 // determine mime
-                notifyMime(buffer, bytes_to_read);
+                notifyMime(buffer.data(), bytes_to_read);
                 is_first = false;
 
                 // write data
                 result = write(bytes_read, delayCount);
 
                 // callback with unconverted data
-                if (onWrite!=nullptr) onWrite(onWriteObj, buffer, result);
+                if (onWrite!=nullptr) onWrite(onWriteObj, &buffer[0], result);
 
                 #ifndef COPY_LOG_OFF
                 LOGI("StreamCopy::copy %u -> %u -> %u bytes - in %u hops", (unsigned int)bytes_to_read,(unsigned int) bytes_read, (unsigned int)result, (unsigned int)delayCount);
@@ -224,7 +223,7 @@ class StreamCopyT {
     protected:
         AudioStream *from = nullptr;
         Print *to = nullptr;
-        uint8_t *buffer = nullptr;
+        Vector<uint8_t> buffer{0};
         int buffer_size;
         void (*onWrite)(void*obj, void*buffer, size_t len) = nullptr;
         void (*notifyMimeCallback)(const char*mime) = nullptr;
@@ -237,12 +236,12 @@ class StreamCopyT {
 
         // blocking write - until everything is processed
         size_t write(size_t len, size_t &delayCount ){
-            if (buffer==nullptr || len==0) return 0;
+            if (!buffer || len==0) return 0;
             size_t total = 0;
             long open = len;
             int retry = 0;
             while(open>0){
-                size_t written = to->write((const uint8_t*)buffer+total, open);
+                size_t written = to->write((const uint8_t*)buffer.data()+total, open);
                 total += written;
                 open -= written;
                 delayCount++;
@@ -310,17 +309,17 @@ class StreamCopy : public StreamCopyT<uint8_t> {
             BaseConverter<T> *coverter_ptr = &converter;
             if (result>0){
                 size_t bytes_to_read = min(result, static_cast<size_t>(buffer_size) );
-                result = from->readBytes((uint8_t*)buffer, bytes_to_read);
+                result = from->readBytes((uint8_t*)&buffer[0], bytes_to_read);
 
                 // determine mime
-                notifyMime(buffer, bytes_to_read);
+                notifyMime(buffer.data(), bytes_to_read);
                 is_first = false;
 
                 // callback with unconverted data
-                if (onWrite!=nullptr) onWrite(onWriteObj, buffer, result);
+                if (onWrite!=nullptr) onWrite(onWriteObj, buffer.data(), result);
 
                 // convert data
-                coverter_ptr->convert((uint8_t*)buffer,  result );
+                coverter_ptr->convert((uint8_t*)buffer.data(),  result );
                 write(result, delayCount);
                 #ifndef COPY_LOG_OFF
                     LOGI("StreamCopy::copy %u bytes - in %u hops", (unsigned int)result,(unsigned int) delayCount);

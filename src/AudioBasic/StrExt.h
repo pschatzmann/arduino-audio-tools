@@ -50,10 +50,10 @@ class StrExt : public Str {
         // move constructor
         StrExt (StrExt &&obj) = default;
 
-        // copy assignment
+        // move assignment
         StrExt& operator = (StrExt &&obj) = default;
 
-        // move assingment
+        // copy assingment
         StrExt& operator = (StrExt &obj) {
             set(obj.c_str());
             return *this;
