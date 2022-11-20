@@ -34,8 +34,7 @@ class AudioServer {
         AudioServer(int port=80) {
             // the client returns 0 for avialableForWrite()
             copier.setCheckAvailableForWrite(false);
-            WiFiServer tmp(port);
-            server = tmp;
+            setupServer(port);
         }
 
 
@@ -50,8 +49,7 @@ class AudioServer {
             this->password = (char*)password;
             // the client returns 0 for avialableForWrite()
             copier.setCheckAvailableForWrite(false);
-            WiFiServer tmp(port);
-            server = tmp;
+            setupServer(port);
         }
 
         /**
@@ -160,6 +158,11 @@ class AudioServer {
         Stream *in = nullptr;                    
         StreamCopy copier;
         BaseConverter<int16_t> *converter_ptr = nullptr;
+
+        void setupServer(int port) {
+            WiFiServer tmp(port);
+            server = tmp;
+        }
 
         void connectWiFi() {
              TRACED();
