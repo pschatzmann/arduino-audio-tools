@@ -400,18 +400,23 @@ $(function() {
 <div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span><span class="preprocessor">#if defined(USE_I2S_ANALOG) </span></div>
 <div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>          mode = (i2s_mode_t) (cfg.rx_tx_mode ? I2S_MODE_DAC_BUILT_IN : I2S_MODE_ADC_BUILT_IN);</div>
 <div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span><span class="preprocessor">#else    </span></div>
-<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>          LOGE(<span class="stringliteral">&quot;Not supported&quot;</span>);</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>          LOGE(<span class="stringliteral">&quot;mode not supported&quot;</span>);</div>
 <div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>          <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>      }</div>
-<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>      <span class="keywordflow">return</span> mode;</div>
-<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>    }</div>
-<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span> </div>
-<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>};</div>
-<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span> </div>
-<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>}</div>
-<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span> </div>
-<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span> </div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>        <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>          LOGW(<span class="stringliteral">&quot;signal_type undefined&quot;</span>);</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>          mode = (i2s_mode_t) (I2S_MODE_MASTER | I2S_MODE_TX);</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>          <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>      }</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>      <span class="keywordflow">return</span> mode;</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>    }</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span> </div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>};</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span> </div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>}</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span> </div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1_audio_kit_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_audio_kit_stream.html">audio_tools::AudioKitStream</a></div><div class="ttdoc">AudioKit Stream which uses the https://github.com/pschatzmann/arduino-audiokit library.</div><div class="ttdef"><b>Definition:</b> AudioKit.h:178</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_base_html"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_base.html">audio_tools::I2SBase</a></div><div class="ttdoc">Basic I2S API - for the ESP32. If we receive 1 channel, we expand the result to 2 channels.</div><div class="ttdef"><b>Definition:</b> I2SESP32.h:17</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_i2_s_base_html_a029912ddc5b5954186b250f5d1869ba5"><div class="ttname"><a href="classaudio__tools_1_1_i2_s_base.html#a029912ddc5b5954186b250f5d1869ba5">audio_tools::I2SBase::begin</a></div><div class="ttdeci">bool begin(I2SConfig cfg)</div><div class="ttdoc">starts the DAC</div><div class="ttdef"><b>Definition:</b> I2SESP32.h:41</div></div>

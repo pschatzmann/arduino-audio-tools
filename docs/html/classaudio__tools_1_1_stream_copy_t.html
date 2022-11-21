@@ -98,6 +98,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa7edeb526fd202d8bbaa6507a649bf5e"><td class="memItemLeft" align="right" valign="top"><a id="aa7edeb526fd202d8bbaa6507a649bf5e" name="aa7edeb526fd202d8bbaa6507a649bf5e"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>StreamCopyT</b> (<a class="el" href="class_print.html">Print</a> &amp;to, <a class="el" href="class_stream.html">Stream</a> &amp;from, int buffer_size=DEFAULT_BUFFER_SIZE)</td></tr>
 <tr class="separator:aa7edeb526fd202d8bbaa6507a649bf5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef13b9ec0424b949b1f16fbfe576762b"><td class="memItemLeft" align="right" valign="top"><a id="aef13b9ec0424b949b1f16fbfe576762b" name="aef13b9ec0424b949b1f16fbfe576762b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>StreamCopyT</b> (<a class="el" href="classaudio__tools_1_1_stream_copy_t.html">StreamCopyT</a> const &amp;)=delete</td></tr>
+<tr class="separator:aef13b9ec0424b949b1f16fbfe576762b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a573c7beae26a6a28a32b9ee4f11a31a2"><td class="memItemLeft" align="right" valign="top"><a id="a573c7beae26a6a28a32b9ee4f11a31a2" name="a573c7beae26a6a28a32b9ee4f11a31a2"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>available</b> ()</td></tr>
 <tr class="memdesc:a573c7beae26a6a28a32b9ee4f11a31a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">available bytes in the data source <br /></td></tr>
@@ -118,9 +121,6 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>bufferSize</b> ()</td>
 <tr class="memitem:a39d972df8a204d17eece1bfad2d864e5"><td class="memItemLeft" align="right" valign="top"><a id="a39d972df8a204d17eece1bfad2d864e5" name="a39d972df8a204d17eece1bfad2d864e5"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>copy</b> ()</td></tr>
 <tr class="separator:a39d972df8a204d17eece1bfad2d864e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a666fb69b66e9739d464cd34fe6b16780"><td class="memItemLeft" align="right" valign="top"><a id="a666fb69b66e9739d464cd34fe6b16780" name="a666fb69b66e9739d464cd34fe6b16780"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>copy2</b> ()</td></tr>
-<tr class="separator:a666fb69b66e9739d464cd34fe6b16780"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d7d430aa99734a0168f953d6766703b"><td class="memItemLeft" align="right" valign="top"><a id="a8d7d430aa99734a0168f953d6766703b" name="a8d7d430aa99734a0168f953d6766703b"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>copyAll</b> (int retryCount=5, int retryWaitMs=200)</td></tr>
 <tr class="memdesc:a8d7d430aa99734a0168f953d6766703b"><td class="mdescLeft">&#160;</td><td class="mdescRight">copies all data - returns true if we copied anything <br /></td></tr>
@@ -142,6 +142,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isCheckAvailableForWr
 const char *&#160;</td><td class="memItemRight" valign="bottom"><b>mime</b> ()</td></tr>
 <tr class="memdesc:a017362eefe8f9856147c83b1a293b7e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the actual mime type, that was determined from the first available data. <br /></td></tr>
 <tr class="separator:a017362eefe8f9856147c83b1a293b7e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3647dff755b4d101e8490d3e3761cc37"><td class="memItemLeft" align="right" valign="top"><a id="a3647dff755b4d101e8490d3e3761cc37" name="a3647dff755b4d101e8490d3e3761cc37"></a>
+<a class="el" href="classaudio__tools_1_1_stream_copy_t.html">StreamCopyT</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classaudio__tools_1_1_stream_copy_t.html">StreamCopyT</a> const &amp;)=delete</td></tr>
+<tr class="separator:a3647dff755b4d101e8490d3e3761cc37"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba98d7f6707f54f7cf19bf1984b37179"><td class="memItemLeft" align="right" valign="top"><a id="aba98d7f6707f54f7cf19bf1984b37179" name="aba98d7f6707f54f7cf19bf1984b37179"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setCallbackOnWrite</b> (void(*onWrite)(void *obj, void *buffer, size_t len), void *obj)</td></tr>
 <tr class="memdesc:aba98d7f6707f54f7cf19bf1984b37179"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a callback that is notified with the wirtten data. <br /></td></tr>
@@ -178,9 +181,9 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a1cfbfa48c59b861378ee49d59bea2cb8"><td class="memItemLeft" align="right" valign="top"><a id="a1cfbfa48c59b861378ee49d59bea2cb8" name="a1cfbfa48c59b861378ee49d59bea2cb8"></a>
 const char *&#160;</td><td class="memItemRight" valign="bottom"><b>actual_mime</b> = nullptr</td></tr>
 <tr class="separator:a1cfbfa48c59b861378ee49d59bea2cb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad01cd4cf450c02a01b8d701eec8b9f00"><td class="memItemLeft" align="right" valign="top"><a id="ad01cd4cf450c02a01b8d701eec8b9f00" name="ad01cd4cf450c02a01b8d701eec8b9f00"></a>
-uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b> = nullptr</td></tr>
-<tr class="separator:ad01cd4cf450c02a01b8d701eec8b9f00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f58c03bdf1610a3cf1df069e9e79ff0"><td class="memItemLeft" align="right" valign="top"><a id="a5f58c03bdf1610a3cf1df069e9e79ff0" name="a5f58c03bdf1610a3cf1df069e9e79ff0"></a>
+<a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b> {0}</td></tr>
+<tr class="separator:a5f58c03bdf1610a3cf1df069e9e79ff0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3213a3faf0bfeca8b179bc064144188c"><td class="memItemLeft" align="right" valign="top"><a id="a3213a3faf0bfeca8b179bc064144188c" name="a3213a3faf0bfeca8b179bc064144188c"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_size</b></td></tr>
 <tr class="separator:a3213a3faf0bfeca8b179bc064144188c"><td class="memSeparator" colspan="2">&#160;</td></tr>

@@ -177,44 +177,69 @@ Logging</h2>
 Optional Libraries</h2>
 <p >Dependent on the example you might need to install some of the following libraries:</p>
 <ul>
-<li><a href="https://github.com/pschatzmann/ESP32-A2DP">ESP32-A2DP Library</a> to support A2DP Bluetooth Audio</li>
 <li><a href="https://github.com/pschatzmann/arduino-audio-tools/wiki/Encoding-and-Decoding-of-Audio">Many Codec Libraries</a> which are described in the Wiki</li>
+<li><a href="https://github.com/pschatzmann/ESP32-A2DP">ESP32-A2DP Library</a> to support A2DP Bluetooth Audio</li>
+<li><a href="https://github.com/pschatzmann/arduino-midi">arduino-midi</a> A simple <b>MIDI</b> message parser and generator</li>
+<li><a href="https://github.com/pschatzmann/TinyHttp">TinyHttp</a> a http server that also supports audio for multiple users</li>
+<li><a href="https://github.com/pschatzmann/tflite-micro-arduino-examples">Tensorflow Lite</a> Machine Learning for Arduino</li>
+<li>Audio Boards<ul>
 <li><a href="https://github.com/pschatzmann/arduino-audiokit">arduino-audiokit</a> Support for the <b>ESP32 AudioKit</b> and decoder chips (ES8388, A1S, etc)</li>
 <li><a href="https://github.com/pschatzmann/arduino-vs1053">arduino-vs1053</a> Support for <b>VS1053 audio modules</b></li>
-<li><a href="https://github.com/pschatzmann/arduino-midi">arduino-midi</a> A simple <b>MIDI</b> message parser and generator</li>
+</ul>
+</li>
+<li>Text To Speech<ul>
 <li><a href="https://github.com/pschatzmann/arduino-SAM">SAM</a> A Text to Speech Engine</li>
 <li><a href="https://github.com/pschatzmann/TTS">TTS</a> A Text to Speech Engine</li>
 <li><a href="https://github.com/pschatzmann/arduino-flite">flite</a> A Text to Speech Engine</li>
 <li><a href="https://github.com/pschatzmann/arduino-simple-tts">simple-tts</a> A Simple TTS engine using prerecorded audio (e.g. to implement Talking Clock, Talking Numbers)</li>
+<li><a href="https://github.com/pschatzmann/arduino-espeak-ng">espeak-ng</a> eSpeak NG is an open source speech synthesizer that supports more than hundred languages.</li>
+</ul>
+</li>
+<li>Audio DSP Libraries<ul>
 <li><a href="https://github.com/pschatzmann/Arduino-STK">arduino-stk</a> Synthesis ToolKit in C++ (STK)</li>
 <li><a href="https://github.com/pschatzmann/Maximilian">Maximilian</a> cross-platform and multi-target audio synthesis and signal processing library</li>
 <li><a href="https://github.com/pschatzmann/Mozzi">Mozzi</a> A sound synthesis library for Arduino</li>
-<li><a href="https://github.com/pschatzmann/tflite-micro-arduino-examples">Tensorflow Lite</a> Machine Learning for Arduino</li>
+</ul>
+</li>
+<li>Fast Fourier Transform<ul>
 <li><a href="https://github.com/pschatzmann/kissfft">KissFFT</a> Fast Fourier Transform FFT Library</li>
 <li><a href="https://github.com/pschatzmann/esp32-fft">esp32-fft</a> Another FFT library (not only for the ESP32)</li>
+</ul>
+</li>
+<li>I2S Libraries<ul>
 <li><a href="https://github.com/pschatzmann/rp2040-i2s">rp2040-i2s</a> I2S library for MBED RP2040</li>
 <li><a href="https://github.com/pschatzmann/stm32f411-i2s">stm32f411-i2s</a> I2S library for the stm32f411</li>
+</ul>
+</li>
+<li>SD<ul>
 <li><a href="https://github.com/greiman/SdFat">SdFat Library</a> to read and write files supporting SD cards with FAT16/FAT32 and exFAT</li>
 <li><a href="https://www.arduino.cc/en/reference/SD">SD Library</a> to read and write files supporting SD cards with FAT16 and FAT32</li>
-<li><a href="https://github.com/pschatzmann/TinyHttp">TinyHttp</a> a http server that also supports audio for multiple users</li>
+</ul>
+</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md5"></a>
 Show and Tell</h1>
 <p >Get some inspiration <a href="https://github.com/pschatzmann/arduino-audio-tools/discussions/categories/show-and-tell">from projects that were using this library</a> or share your projects with the community.</p>
-<h2><a class="anchor" id="autotoc_md6"></a>
-Documentation</h2>
+<h1><a class="anchor" id="autotoc_md6"></a>
+Documentation</h1>
 <ul>
 <li>Here is the generated <a href="https://pschatzmann.github.io/arduino-audio-tools/html/namespaceaudio__tools.html">Class Documentation</a>.</li>
 <li>Please also check out the <a href="https://github.com/pschatzmann/arduino-audio-tools/wiki">Information in the Wiki</a></li>
 <li>You also might find further information in <a href="https://www.pschatzmann.ch/home/category/machine-sound/">one of my Blogs</a></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md7"></a>
-Installation in Arduino</h2>
+<h1><a class="anchor" id="autotoc_md7"></a>
+Installation in Arduino</h1>
 <p >You can download the library as zip and call include Library -&gt; zip library. Or you can git clone this project into the Arduino libraries folder e.g. with</p>
 <div class="fragment"><div class="line">cd  ~/Documents/Arduino/libraries</div>
 <div class="line">git clone pschatzmann/arduino-audio-tools.git</div>
-</div><!-- fragment --><p >I recommend to use git because you can easily update to the latest version just by executing the <code>git pull</code> command in the project folder.</p>
-<p >If you want to use the library in PlatformIO, you can find a <a href="https://github.com/pschatzmann/arduino-audio-tools/wiki/Working-with-PlatformIO">detailed description in the Wiki</a>. </p>
+</div><!-- fragment --><p >I recommend to use git because you can easily update to the latest version just by executing the <code>git pull</code> command in the project folder. If you want to use the library in PlatformIO, you can find a <a href="https://github.com/pschatzmann/arduino-audio-tools/wiki/Working-with-PlatformIO">detailed description in the Wiki</a>.</p>
+<h1><a class="anchor" id="autotoc_md8"></a>
+Sponsor Me</h1>
+<p >This software is totally free, but you can make me happy by rewarding me with a treat</p>
+<ul>
+<li><a href="https://www.buymeacoffee.com/philschatzh">Buy me a coffee</a></li>
+<li><a href="https://paypal.me/pschatzmann?country.x=CH&amp;locale.x=en_US">Paypal me</a> </li>
+</ul>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->

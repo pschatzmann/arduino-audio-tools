@@ -110,137 +110,140 @@ $(function() {
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_buffered_window.html">   53</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_buffered_window.html">BufferedWindow</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_window_function.html">WindowFunction</a> {</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> <span class="keyword">public</span>:</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  <a class="code hl_class" href="classaudio__tools_1_1_buffered_window.html">BufferedWindow</a>(<a class="code hl_class" href="classaudio__tools_1_1_window_function.html">WindowFunction</a>* wf) { p_wf = wf; }</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> begin(<span class="keywordtype">int</span> samples) {</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="comment">// process only if there is a change</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordflow">if</span> (p_wf-&gt;samples() != samples) {</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>      p_wf-&gt;begin(samples);</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>      len = samples / 2;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>      <span class="keywordflow">if</span> (p_buffer != <span class="keyword">nullptr</span>) <span class="keyword">delete</span>[] p_buffer;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>      p_buffer = <span class="keyword">new</span> <span class="keywordtype">float</span>[len];</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; len; j++) {</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        p_buffer[j] = p_wf-&gt;factor(j);</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>      }</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    }</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  }</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  <a class="code hl_class" href="classaudio__tools_1_1_buffered_window.html">~BufferedWindow</a>() {</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keywordflow">if</span> (p_buffer != <span class="keyword">nullptr</span>) <span class="keyword">delete</span>[] p_buffer;</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  }</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  <span class="keyword">inline</span> <span class="keywordtype">float</span> factor(<span class="keywordtype">int</span> idx) {</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="keywordflow">return</span> idx &lt; len ? p_buffer[idx] : p_buffer[i_samples - idx];</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  }</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  <a class="code hl_class" href="classaudio__tools_1_1_window_function.html">WindowFunction</a>* p_wf = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  <span class="keywordtype">float</span>* p_buffer = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  <span class="keywordtype">int</span> len;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>};</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_rectange.html">   89</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_rectange.html">Rectange</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_window_function.html">WindowFunction</a> {</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  <a class="code hl_class" href="classaudio__tools_1_1_rectange.html">Rectange</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  <span class="keywordtype">float</span> factor(<span class="keywordtype">int</span> idx) { <span class="keywordflow">return</span> 1.0; }</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>};</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_hamming.html">  100</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_hamming.html">Hamming</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_window_function.html">WindowFunction</a> {</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  <a class="code hl_class" href="classaudio__tools_1_1_hamming.html">Hamming</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>  <span class="keywordtype">float</span> factor(<span class="keywordtype">int</span> idx) {</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <span class="keywordflow">return</span> 0.54 - (0.46 * cos(twoPi * ratio(idx)));</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  }</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>};</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_hann.html">  113</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_hann.html">Hann</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_window_function.html">WindowFunction</a> {</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>  <a class="code hl_class" href="classaudio__tools_1_1_hann.html">Hann</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>  <span class="keywordtype">float</span> factor(<span class="keywordtype">int</span> idx) {</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <span class="keywordflow">return</span> 0.54 * (1.0 - cos(twoPi * ratio(idx)));</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>  }</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>};</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_triangle.html">  126</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_triangle.html">Triangle</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_window_function.html">WindowFunction</a> {</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  <a class="code hl_class" href="classaudio__tools_1_1_triangle.html">Triangle</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>  <span class="keywordtype">float</span> factor(<span class="keywordtype">int</span> idx) {</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="keywordflow">return</span> 1.0 - ((2.0 * fabs((idx - 1) -</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>                              (<span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(i_samples - 1) / 2.0))) /</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>                  samples_minus_1);</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>  }</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>};</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_nuttall.html">  142</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_nuttall.html">Nuttall</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_window_function.html">WindowFunction</a> {</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>  <a class="code hl_class" href="classaudio__tools_1_1_nuttall.html">Nuttall</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>  <span class="keywordtype">float</span> factor(<span class="keywordtype">int</span> idx) {</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    <span class="keywordtype">float</span> r = ratio(idx);</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    <span class="keywordflow">return</span> 0.355768 - (0.487396 * (cos(twoPi * r))) +</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>           (0.144232 * (cos(fourPi * r))) - (0.012604 * (cos(sixPi * r)));</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>  }</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>};</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span> </div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_blackman.html">  158</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_blackman.html">Blackman</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_window_function.html">WindowFunction</a> {</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span> <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>  <a class="code hl_class" href="classaudio__tools_1_1_blackman.html">Blackman</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>  <span class="keywordtype">float</span> factor(<span class="keywordtype">int</span> idx) {</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    <span class="keywordtype">float</span> r = ratio(idx);</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    <span class="keywordflow">return</span> 0.42323 - (0.49755 * (cos(twoPi * r))) +</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>           (0.07922 * (cos(fourPi * r)));</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>  }</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>};</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_blackman_nuttall.html">  173</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_blackman_nuttall.html">BlackmanNuttall</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_window_function.html">WindowFunction</a> {</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span> <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>  <a class="code hl_class" href="classaudio__tools_1_1_blackman_nuttall.html">BlackmanNuttall</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>  <span class="keywordtype">float</span> factor(<span class="keywordtype">int</span> idx) {</div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    <span class="keywordtype">float</span> r = ratio(idx);</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    <span class="keywordflow">return</span> 0.3635819 - (0.4891775 * (cos(twoPi * r))) +</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>           (0.1365995 * (cos(fourPi * r))) - (0.0106411 * (cos(sixPi * r)));</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>  }</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>};</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span> </div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_blackman_harris.html">  188</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_blackman_harris.html">BlackmanHarris</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_window_function.html">WindowFunction</a> {</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>  <a class="code hl_class" href="classaudio__tools_1_1_blackman_harris.html">BlackmanHarris</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>  <span class="keywordtype">float</span> factor(<span class="keywordtype">int</span> idx) {</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    <span class="keywordtype">float</span> r = ratio(idx);</div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    <span class="keywordflow">return</span> 0.35875 - (0.48829 * (cos(twoPi * r))) +</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>           (0.14128 * (cos(fourPi * r))) - (0.01168 * (cos(sixPi * r)));</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>  }</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>};</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span> </div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_flat_top.html">  203</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_flat_top.html">FlatTop</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_window_function.html">WindowFunction</a> {</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span> <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>  <a class="code hl_class" href="classaudio__tools_1_1_flat_top.html">FlatTop</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>  <span class="keywordtype">float</span> factor(<span class="keywordtype">int</span> idx) {</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    <span class="keywordtype">float</span> r = ratio(idx);</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    <span class="keywordflow">return</span> 0.2810639 - (0.5208972 * cos(twoPi * r)) +</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>           (0.1980399 * cos(fourPi * r));</div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>  }</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>};</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span> </div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_welch.html">  218</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_welch.html">Welch</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_window_function.html">WindowFunction</a> {</div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span> <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>  <a class="code hl_class" href="classaudio__tools_1_1_welch.html">Welch</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>  <span class="keywordtype">float</span> factor(<span class="keywordtype">int</span> idx) {</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    <span class="keywordtype">float</span> tmp = (((idx - 1) - samples_minus_1 / 2.0) / (samples_minus_1 / 2.0));</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    <span class="keywordflow">return</span> 1.0 - (tmp*tmp);</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>  }</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>};</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span> </div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>}  <span class="comment">// namespace audio_tools</span></div>
-<div class="ttc" id="aclassaudio__tools_1_1_blackman_harris_html"><div class="ttname"><a href="classaudio__tools_1_1_blackman_harris.html">audio_tools::BlackmanHarris</a></div><div class="ttdoc">BlackmanHarris FFT Window function.</div><div class="ttdef"><b>Definition:</b> FFTWindows.h:188</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_blackman_html"><div class="ttname"><a href="classaudio__tools_1_1_blackman.html">audio_tools::Blackman</a></div><div class="ttdoc">Blackman FFT Window function.</div><div class="ttdef"><b>Definition:</b> FFTWindows.h:158</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_blackman_nuttall_html"><div class="ttname"><a href="classaudio__tools_1_1_blackman_nuttall.html">audio_tools::BlackmanNuttall</a></div><div class="ttdoc">BlackmanNuttall FFT Window function.</div><div class="ttdef"><b>Definition:</b> FFTWindows.h:173</div></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  <a class="code hl_class" href="classaudio__tools_1_1_buffered_window.html">BufferedWindow</a>(<a class="code hl_class" href="classaudio__tools_1_1_buffered_window.html">BufferedWindow</a> <span class="keyword">const</span>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  <a class="code hl_class" href="classaudio__tools_1_1_buffered_window.html">BufferedWindow</a>&amp; operator=(<a class="code hl_class" href="classaudio__tools_1_1_buffered_window.html">BufferedWindow</a> <span class="keyword">const</span>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> begin(<span class="keywordtype">int</span> samples) {</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="comment">// process only if there is a change</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordflow">if</span> (p_wf-&gt;samples() != samples) {</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>      p_wf-&gt;begin(samples);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>      len = samples / 2;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>      <span class="keywordflow">if</span> (p_buffer != <span class="keyword">nullptr</span>) <span class="keyword">delete</span>[] p_buffer;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>      p_buffer = <span class="keyword">new</span> <span class="keywordtype">float</span>[len];</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; len; j++) {</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        p_buffer[j] = p_wf-&gt;factor(j);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>      }</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    }</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  }</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  <a class="code hl_class" href="classaudio__tools_1_1_buffered_window.html">~BufferedWindow</a>() {</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="keywordflow">if</span> (p_buffer != <span class="keyword">nullptr</span>) <span class="keyword">delete</span>[] p_buffer;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  }</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  <span class="keyword">inline</span> <span class="keywordtype">float</span> factor(<span class="keywordtype">int</span> idx) {</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keywordflow">return</span> idx &lt; len ? p_buffer[idx] : p_buffer[i_samples - idx];</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  }</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> <span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  <a class="code hl_class" href="classaudio__tools_1_1_window_function.html">WindowFunction</a>* p_wf = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  <span class="keywordtype">float</span>* p_buffer = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  <span class="keywordtype">int</span> len;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>};</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_rectange.html">   92</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_rectange.html">Rectange</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_window_function.html">WindowFunction</a> {</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  <a class="code hl_class" href="classaudio__tools_1_1_rectange.html">Rectange</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  <span class="keywordtype">float</span> factor(<span class="keywordtype">int</span> idx) { <span class="keywordflow">return</span> 1.0; }</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>};</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_hamming.html">  103</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_hamming.html">Hamming</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_window_function.html">WindowFunction</a> {</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  <a class="code hl_class" href="classaudio__tools_1_1_hamming.html">Hamming</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>  <span class="keywordtype">float</span> factor(<span class="keywordtype">int</span> idx) {</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <span class="keywordflow">return</span> 0.54 - (0.46 * cos(twoPi * ratio(idx)));</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>  }</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>};</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_hann.html">  116</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_hann.html">Hann</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_window_function.html">WindowFunction</a> {</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>  <a class="code hl_class" href="classaudio__tools_1_1_hann.html">Hann</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>  <span class="keywordtype">float</span> factor(<span class="keywordtype">int</span> idx) {</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    <span class="keywordflow">return</span> 0.54 * (1.0 - cos(twoPi * ratio(idx)));</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>  }</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>};</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_triangle.html">  129</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_triangle.html">Triangle</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_window_function.html">WindowFunction</a> {</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>  <a class="code hl_class" href="classaudio__tools_1_1_triangle.html">Triangle</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>  <span class="keywordtype">float</span> factor(<span class="keywordtype">int</span> idx) {</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    <span class="keywordflow">return</span> 1.0 - ((2.0 * fabs((idx - 1) -</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>                              (<span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(i_samples - 1) / 2.0))) /</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>                  samples_minus_1);</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>  }</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>};</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_nuttall.html">  145</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_nuttall.html">Nuttall</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_window_function.html">WindowFunction</a> {</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>  <a class="code hl_class" href="classaudio__tools_1_1_nuttall.html">Nuttall</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>  <span class="keywordtype">float</span> factor(<span class="keywordtype">int</span> idx) {</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    <span class="keywordtype">float</span> r = ratio(idx);</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <span class="keywordflow">return</span> 0.355768 - (0.487396 * (cos(twoPi * r))) +</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>           (0.144232 * (cos(fourPi * r))) - (0.012604 * (cos(sixPi * r)));</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>  }</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>};</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span> </div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_blackman.html">  161</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_blackman.html">Blackman</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_window_function.html">WindowFunction</a> {</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>  <a class="code hl_class" href="classaudio__tools_1_1_blackman.html">Blackman</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>  <span class="keywordtype">float</span> factor(<span class="keywordtype">int</span> idx) {</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    <span class="keywordtype">float</span> r = ratio(idx);</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    <span class="keywordflow">return</span> 0.42323 - (0.49755 * (cos(twoPi * r))) +</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>           (0.07922 * (cos(fourPi * r)));</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>  }</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>};</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_blackman_nuttall.html">  176</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_blackman_nuttall.html">BlackmanNuttall</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_window_function.html">WindowFunction</a> {</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span> <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>  <a class="code hl_class" href="classaudio__tools_1_1_blackman_nuttall.html">BlackmanNuttall</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>  <span class="keywordtype">float</span> factor(<span class="keywordtype">int</span> idx) {</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    <span class="keywordtype">float</span> r = ratio(idx);</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    <span class="keywordflow">return</span> 0.3635819 - (0.4891775 * (cos(twoPi * r))) +</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>           (0.1365995 * (cos(fourPi * r))) - (0.0106411 * (cos(sixPi * r)));</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>  }</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>};</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span> </div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_blackman_harris.html">  191</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_blackman_harris.html">BlackmanHarris</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_window_function.html">WindowFunction</a> {</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span> <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>  <a class="code hl_class" href="classaudio__tools_1_1_blackman_harris.html">BlackmanHarris</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>  <span class="keywordtype">float</span> factor(<span class="keywordtype">int</span> idx) {</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    <span class="keywordtype">float</span> r = ratio(idx);</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    <span class="keywordflow">return</span> 0.35875 - (0.48829 * (cos(twoPi * r))) +</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>           (0.14128 * (cos(fourPi * r))) - (0.01168 * (cos(sixPi * r)));</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>  }</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>};</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span> </div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_flat_top.html">  206</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_flat_top.html">FlatTop</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_window_function.html">WindowFunction</a> {</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span> <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>  <a class="code hl_class" href="classaudio__tools_1_1_flat_top.html">FlatTop</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>  <span class="keywordtype">float</span> factor(<span class="keywordtype">int</span> idx) {</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    <span class="keywordtype">float</span> r = ratio(idx);</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    <span class="keywordflow">return</span> 0.2810639 - (0.5208972 * cos(twoPi * r)) +</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>           (0.1980399 * cos(fourPi * r));</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>  }</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>};</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span> </div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_welch.html">  221</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_welch.html">Welch</a> : <span class="keyword">public</span> <a class="code hl_class" href="classaudio__tools_1_1_window_function.html">WindowFunction</a> {</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span> <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>  <a class="code hl_class" href="classaudio__tools_1_1_welch.html">Welch</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>  <span class="keywordtype">float</span> factor(<span class="keywordtype">int</span> idx) {</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    <span class="keywordtype">float</span> tmp = (((idx - 1) - samples_minus_1 / 2.0) / (samples_minus_1 / 2.0));</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    <span class="keywordflow">return</span> 1.0 - (tmp*tmp);</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>  }</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>};</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span> </div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>}  <span class="comment">// namespace audio_tools</span></div>
+<div class="ttc" id="aclassaudio__tools_1_1_blackman_harris_html"><div class="ttname"><a href="classaudio__tools_1_1_blackman_harris.html">audio_tools::BlackmanHarris</a></div><div class="ttdoc">BlackmanHarris FFT Window function.</div><div class="ttdef"><b>Definition:</b> FFTWindows.h:191</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_blackman_html"><div class="ttname"><a href="classaudio__tools_1_1_blackman.html">audio_tools::Blackman</a></div><div class="ttdoc">Blackman FFT Window function.</div><div class="ttdef"><b>Definition:</b> FFTWindows.h:161</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_blackman_nuttall_html"><div class="ttname"><a href="classaudio__tools_1_1_blackman_nuttall.html">audio_tools::BlackmanNuttall</a></div><div class="ttdoc">BlackmanNuttall FFT Window function.</div><div class="ttdef"><b>Definition:</b> FFTWindows.h:176</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_buffered_window_html"><div class="ttname"><a href="classaudio__tools_1_1_buffered_window.html">audio_tools::BufferedWindow</a></div><div class="ttdoc">Buffered window function, so that we do not need to re-calculate the values.</div><div class="ttdef"><b>Definition:</b> FFTWindows.h:53</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_flat_top_html"><div class="ttname"><a href="classaudio__tools_1_1_flat_top.html">audio_tools::FlatTop</a></div><div class="ttdoc">FlatTop FFT Window function.</div><div class="ttdef"><b>Definition:</b> FFTWindows.h:203</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_hamming_html"><div class="ttname"><a href="classaudio__tools_1_1_hamming.html">audio_tools::Hamming</a></div><div class="ttdoc">Hamming FFT Window function.</div><div class="ttdef"><b>Definition:</b> FFTWindows.h:100</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_hann_html"><div class="ttname"><a href="classaudio__tools_1_1_hann.html">audio_tools::Hann</a></div><div class="ttdoc">Hann FFT Window function.</div><div class="ttdef"><b>Definition:</b> FFTWindows.h:113</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_nuttall_html"><div class="ttname"><a href="classaudio__tools_1_1_nuttall.html">audio_tools::Nuttall</a></div><div class="ttdoc">Nuttall FFT Window function.</div><div class="ttdef"><b>Definition:</b> FFTWindows.h:142</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_rectange_html"><div class="ttname"><a href="classaudio__tools_1_1_rectange.html">audio_tools::Rectange</a></div><div class="ttdoc">Rectange FFT Window function.</div><div class="ttdef"><b>Definition:</b> FFTWindows.h:89</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_triangle_html"><div class="ttname"><a href="classaudio__tools_1_1_triangle.html">audio_tools::Triangle</a></div><div class="ttdoc">Triangle FFT Window function.</div><div class="ttdef"><b>Definition:</b> FFTWindows.h:126</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1_welch_html"><div class="ttname"><a href="classaudio__tools_1_1_welch.html">audio_tools::Welch</a></div><div class="ttdoc">Welch FFT Window function.</div><div class="ttdef"><b>Definition:</b> FFTWindows.h:218</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_flat_top_html"><div class="ttname"><a href="classaudio__tools_1_1_flat_top.html">audio_tools::FlatTop</a></div><div class="ttdoc">FlatTop FFT Window function.</div><div class="ttdef"><b>Definition:</b> FFTWindows.h:206</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_hamming_html"><div class="ttname"><a href="classaudio__tools_1_1_hamming.html">audio_tools::Hamming</a></div><div class="ttdoc">Hamming FFT Window function.</div><div class="ttdef"><b>Definition:</b> FFTWindows.h:103</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_hann_html"><div class="ttname"><a href="classaudio__tools_1_1_hann.html">audio_tools::Hann</a></div><div class="ttdoc">Hann FFT Window function.</div><div class="ttdef"><b>Definition:</b> FFTWindows.h:116</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_nuttall_html"><div class="ttname"><a href="classaudio__tools_1_1_nuttall.html">audio_tools::Nuttall</a></div><div class="ttdoc">Nuttall FFT Window function.</div><div class="ttdef"><b>Definition:</b> FFTWindows.h:145</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_rectange_html"><div class="ttname"><a href="classaudio__tools_1_1_rectange.html">audio_tools::Rectange</a></div><div class="ttdoc">Rectange FFT Window function.</div><div class="ttdef"><b>Definition:</b> FFTWindows.h:92</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_triangle_html"><div class="ttname"><a href="classaudio__tools_1_1_triangle.html">audio_tools::Triangle</a></div><div class="ttdoc">Triangle FFT Window function.</div><div class="ttdef"><b>Definition:</b> FFTWindows.h:129</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_welch_html"><div class="ttname"><a href="classaudio__tools_1_1_welch.html">audio_tools::Welch</a></div><div class="ttdoc">Welch FFT Window function.</div><div class="ttdef"><b>Definition:</b> FFTWindows.h:221</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_window_function_html"><div class="ttname"><a href="classaudio__tools_1_1_window_function.html">audio_tools::WindowFunction</a></div><div class="ttdoc">FFT Window Function.</div><div class="ttdef"><b>Definition:</b> FFTWindows.h:23</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AnalogAudioArduino.h:10</div></div>
 </div><!-- fragment --></div><!-- contents -->

@@ -99,13 +99,13 @@ Inheritance diagram for audio_tools::AudioServer:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab44caed87dd768313eea2c8ae9d67998"><td class="memItemLeft" align="right" valign="top"><a id="ab44caed87dd768313eea2c8ae9d67998" name="ab44caed87dd768313eea2c8ae9d67998"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>AudioServer</b> ()</td></tr>
-<tr class="memdesc:ab44caed87dd768313eea2c8ae9d67998"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Audio W A V Server object We assume that the WiFi is already connected. <br /></td></tr>
-<tr class="separator:ab44caed87dd768313eea2c8ae9d67998"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5dc7c00b32072dd354ccadebf030f5be"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server.html#a5dc7c00b32072dd354ccadebf030f5be">AudioServer</a> (const char *network, const char *password)</td></tr>
-<tr class="memdesc:a5dc7c00b32072dd354ccadebf030f5be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Audio W A V Server object.  <a href="classaudio__tools_1_1_audio_server.html#a5dc7c00b32072dd354ccadebf030f5be">More...</a><br /></td></tr>
-<tr class="separator:a5dc7c00b32072dd354ccadebf030f5be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a256a6081f89cf62e2be3a574fd9d3d23"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server.html#a256a6081f89cf62e2be3a574fd9d3d23">AudioServer</a> (const char *network, const char *password, int port=80)</td></tr>
+<tr class="memdesc:a256a6081f89cf62e2be3a574fd9d3d23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Audio W A V Server object.  <a href="classaudio__tools_1_1_audio_server.html#a256a6081f89cf62e2be3a574fd9d3d23">More...</a><br /></td></tr>
+<tr class="separator:a256a6081f89cf62e2be3a574fd9d3d23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1554c2db6cf8a2b17f1b4038f6db61e0"><td class="memItemLeft" align="right" valign="top"><a id="a1554c2db6cf8a2b17f1b4038f6db61e0" name="a1554c2db6cf8a2b17f1b4038f6db61e0"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>AudioServer</b> (int port=80)</td></tr>
+<tr class="memdesc:a1554c2db6cf8a2b17f1b4038f6db61e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Audio W A V Server object We assume that the WiFi is already connected. <br /></td></tr>
+<tr class="separator:a1554c2db6cf8a2b17f1b4038f6db61e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a17971bf1c1ed3a630477a9b1d4d900f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server.html#a17971bf1c1ed3a630477a9b1d4d900f3">begin</a> (<a class="el" href="namespaceaudio__tools.html#acb7797724edbc65915ca6273fd7099e6">AudioServerDataCallback</a> cb, const char *contentType)</td></tr>
 <tr class="memdesc:a17971bf1c1ed3a630477a9b1d4d900f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the server. The data must be provided by a callback method.  <a href="classaudio__tools_1_1_audio_server.html#a17971bf1c1ed3a630477a9b1d4d900f3">More...</a><br /></td></tr>
 <tr class="separator:a17971bf1c1ed3a630477a9b1d4d900f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -143,6 +143,9 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>sendReplyCont
 <tr class="memitem:a3b0ed8529517224bdf7c951208a25514"><td class="memItemLeft" align="right" valign="top"><a id="a3b0ed8529517224bdf7c951208a25514" name="a3b0ed8529517224bdf7c951208a25514"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>sendReplyHeader</b> ()</td></tr>
 <tr class="separator:a3b0ed8529517224bdf7c951208a25514"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bc346835348933b00a6cf7100b30609"><td class="memItemLeft" align="right" valign="top"><a id="a4bc346835348933b00a6cf7100b30609" name="a4bc346835348933b00a6cf7100b30609"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setupServer</b> (int port)</td></tr>
+<tr class="separator:a4bc346835348933b00a6cf7100b30609"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -171,7 +174,7 @@ char *&#160;</td><td class="memItemRight" valign="bottom"><b>network</b> = nullp
 char *&#160;</td><td class="memItemRight" valign="bottom"><b>password</b> = nullptr</td></tr>
 <tr class="separator:a6dda2d3ab7b7175e6d1e18412039d500"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a487905e0a061125001e72da49efbcfa3"><td class="memItemLeft" align="right" valign="top"><a id="a487905e0a061125001e72da49efbcfa3" name="a487905e0a061125001e72da49efbcfa3"></a>
-WiFiServer&#160;</td><td class="memItemRight" valign="bottom"><b>server</b> = WiFiServer(80)</td></tr>
+WiFiServer&#160;</td><td class="memItemRight" valign="bottom"><b>server</b></td></tr>
 <tr class="separator:a487905e0a061125001e72da49efbcfa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -179,8 +182,8 @@ WiFiServer&#160;</td><td class="memItemRight" valign="bottom"><b>server</b> = Wi
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a5dc7c00b32072dd354ccadebf030f5be" name="a5dc7c00b32072dd354ccadebf030f5be"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5dc7c00b32072dd354ccadebf030f5be">&#9670;&#160;</a></span>AudioServer()</h2>
+<a id="a256a6081f89cf62e2be3a574fd9d3d23" name="a256a6081f89cf62e2be3a574fd9d3d23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a256a6081f89cf62e2be3a574fd9d3d23">&#9670;&#160;</a></span>AudioServer()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -198,7 +201,13 @@ WiFiServer&#160;</td><td class="memItemRight" valign="bottom"><b>server</b> = Wi
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>password</em>&#160;</td>
+          <td class="paramname"><em>password</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>port</em> = <code>80</code>&#160;</td>
         </tr>
         <tr>
           <td></td>

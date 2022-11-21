@@ -125,27 +125,33 @@ AudioLogger::instance().begin(Serial, AudioLogger::Debug);
 
 Dependent on the example you might need to install some of the following libraries:
 
-- [ESP32-A2DP Library](https://github.com/pschatzmann/ESP32-A2DP) to support A2DP Bluetooth Audio
 - [Many Codec Libraries](https://github.com/pschatzmann/arduino-audio-tools/wiki/Encoding-and-Decoding-of-Audio) which are described in the Wiki
-- [arduino-audiokit](https://github.com/pschatzmann/arduino-audiokit) Support for the __ESP32 AudioKit__ and decoder chips (ES8388, A1S, etc) 
-- [arduino-vs1053](https://github.com/pschatzmann/arduino-vs1053) Support for __VS1053 audio modules__
+- [ESP32-A2DP Library](https://github.com/pschatzmann/ESP32-A2DP) to support A2DP Bluetooth Audio
 - [arduino-midi](https://github.com/pschatzmann/arduino-midi) A simple __MIDI__ message parser and generator
-- [SAM](https://github.com/pschatzmann/arduino-SAM) A Text to Speech Engine
-- [TTS](https://github.com/pschatzmann/TTS) A Text to Speech Engine
-- [flite](https://github.com/pschatzmann/arduino-flite) A Text to Speech Engine
-- [simple-tts](https://github.com/pschatzmann/arduino-simple-tts) A Simple TTS engine using prerecorded audio (e.g. to implement Talking Clock, Talking Numbers)
-- [espeak-ng](https://github.com/pschatzmann/arduino-espeak-ng) eSpeak NG is an open source speech synthesizer that supports more than hundred languages.
-- [arduino-stk](https://github.com/pschatzmann/Arduino-STK) Synthesis ToolKit in C++ (STK) 
-- [Maximilian](https://github.com/pschatzmann/Maximilian) cross-platform and multi-target audio synthesis and signal processing library
-- [Mozzi](https://github.com/pschatzmann/Mozzi) A sound synthesis library for Arduino
-- [Tensorflow Lite](https://github.com/pschatzmann/tflite-micro-arduino-examples) Machine Learning for Arduino
-- [KissFFT](https://github.com/pschatzmann/kissfft) Fast Fourier Transform FFT Library
-- [esp32-fft](https://github.com/pschatzmann/esp32-fft) Another FFT library (not only for the ESP32)
-- [rp2040-i2s](https://github.com/pschatzmann/rp2040-i2s) I2S library for MBED RP2040
-- [stm32f411-i2s](https://github.com/pschatzmann/stm32f411-i2s) I2S library for the stm32f411
-- [SdFat Library](https://github.com/greiman/SdFat) to read and write files supporting SD cards with FAT16/FAT32 and exFAT
-- [SD Library](https://www.arduino.cc/en/reference/SD) to read and write files supporting SD cards with FAT16 and FAT32
 - [TinyHttp](https://github.com/pschatzmann/TinyHttp) a http server that also supports audio for multiple users
+- [Tensorflow Lite](https://github.com/pschatzmann/tflite-micro-arduino-examples) Machine Learning for Arduino 
+- Audio Boards
+  - [arduino-audiokit](https://github.com/pschatzmann/arduino-audiokit) Support for the __ESP32 AudioKit__ and decoder chips (ES8388, A1S, etc) 
+  - [arduino-vs1053](https://github.com/pschatzmann/arduino-vs1053) Support for __VS1053 audio modules__
+- Text To Speech
+  - [SAM](https://github.com/pschatzmann/arduino-SAM) A Text to Speech Engine
+  - [TTS](https://github.com/pschatzmann/TTS) A Text to Speech Engine
+  - [flite](https://github.com/pschatzmann/arduino-flite) A Text to Speech Engine
+  - [simple-tts](https://github.com/pschatzmann/arduino-simple-tts) A Simple TTS engine using prerecorded audio (e.g. to implement Talking Clock, Talking Numbers)
+  - [espeak-ng](https://github.com/pschatzmann/arduino-espeak-ng) eSpeak NG is an open source speech synthesizer that supports more than hundred languages.
+- Audio DSP Libraries
+  - [arduino-stk](https://github.com/pschatzmann/Arduino-STK) Synthesis ToolKit in C++ (STK) 
+  - [Maximilian](https://github.com/pschatzmann/Maximilian) cross-platform and multi-target audio synthesis and signal processing library
+  - [Mozzi](https://github.com/pschatzmann/Mozzi) A sound synthesis library for Arduino
+- Fast Fourier Transform
+  - [KissFFT](https://github.com/pschatzmann/kissfft) Fast Fourier Transform FFT Library
+  - [esp32-fft](https://github.com/pschatzmann/esp32-fft) Another FFT library (not only for the ESP32)
+- I2S Libraries
+  - [rp2040-i2s](https://github.com/pschatzmann/rp2040-i2s) I2S library for MBED RP2040
+  - [stm32f411-i2s](https://github.com/pschatzmann/stm32f411-i2s) I2S library for the stm32f411
+- SD
+  - [SdFat Library](https://github.com/greiman/SdFat) to read and write files supporting SD cards with FAT16/FAT32 and exFAT
+  - [SD Library](https://www.arduino.cc/en/reference/SD) to read and write files supporting SD cards with FAT16 and FAT32
 
 
 ## Show and Tell
@@ -177,5 +183,5 @@ If you want to use the library in PlatformIO, you can find a [detailed descripti
 
 This software is totally free, but you can make me happy by rewarding me with a treat
 
-- [Buy me a caffee](https://www.buymeacoffee.com/philschatzh)
+- [Buy me a coffee](https://www.buymeacoffee.com/philschatzh)
 - [Paypal me](https://paypal.me/pschatzmann?country.x=CH&locale.x=en_US)
