@@ -77,15 +77,24 @@ class A2DPConfig {
  * @brief Stream support for A2DP: begin(TX_MODE) uses a2dp_source - begin(RX_MODE) a a2dp_sink
  * The data is in int16_t with 2 channels at 44100 hertz. 
  *
- * Because we support only one instance the class is implemented as singleton!
+ * We support only one instance of the class!
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 class A2DPStream : public AudioStream {
 
     public:
-        // Release the allocate a2dp_source or a2dp_sink
+        A2DPStream() {
+            TRACED();
+            xSemaphore = xSemaphoreCreateMutex();
+            // A2DPStream can only be used once
+            assert(A2DPStream_self==nullptr);
+            A2DPStream_self = this;
+        }
+
+        /// Release the allocate a2dp_source or a2dp_sink
         ~A2DPStream(){
+            TRACED();
             if (a2dp_source!=nullptr) delete a2dp_source;
             if (a2dp_sink!=nullptr) delete a2dp_sink;      
             A2DPStream_self = nullptr;      
@@ -95,15 +104,6 @@ class A2DPStream : public AudioStream {
             A2DPConfig cfg;
             cfg.mode = mode;
             return cfg;
-        }
-
-        /// Provides the A2DPStream singleton instance
-        static A2DPStream &instance() {
-            static A2DPStream *ptr;
-            if (ptr==nullptr){
-                ptr = new A2DPStream();
-            }
-            return *ptr;
         }
 
         /// provides access to the 
@@ -290,13 +290,6 @@ class A2DPStream : public AudioStream {
         float volume = 1.0;
         // semaphore to synchronize acess to the buffer
         SemaphoreHandle_t xSemaphore = NULL;
-
-        A2DPStream() {
-            TRACED();
-            xSemaphore = xSemaphoreCreateMutex();
-
-            A2DPStream_self = this;
-        }
 
         static void a2dpStateCallback(esp_a2d_connection_state_t state, void *caller){
             TRACED();

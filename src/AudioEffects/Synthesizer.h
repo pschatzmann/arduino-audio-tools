@@ -210,6 +210,9 @@ class Synthesizer : public SoundGenerator<int16_t> {
         Synthesizer(AbstractSynthesizerChannel *ch){
             defaultChannel = ch;
         }
+        
+        Synthesizer(Synthesizer const&) = delete;
+        Synthesizer& operator=(Synthesizer const&) = delete;
 
         ~Synthesizer(){
             TRACED();

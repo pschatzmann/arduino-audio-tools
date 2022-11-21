@@ -153,14 +153,14 @@ Dependent on the example you might need to install some of the following librari
 Get some inspiration [from projects that were using this library](https://github.com/pschatzmann/arduino-audio-tools/discussions/categories/show-and-tell) or share your projects with the community.
 
 
-### Documentation
+## Documentation
 
 - Here is the generated [Class Documentation](https://pschatzmann.github.io/arduino-audio-tools/html/namespaceaudio__tools.html). 
 - Please also check out the [Information in the Wiki](https://github.com/pschatzmann/arduino-audio-tools/wiki)
 - You also might find further information in [one of my Blogs](https://www.pschatzmann.ch/home/category/machine-sound/)
 
 
-### Installation in Arduino
+## Installation in Arduino
 
 You can download the library as zip and call include Library -> zip library. Or you can git clone this project into the Arduino libraries folder e.g. with
 
@@ -170,5 +170,12 @@ git clone pschatzmann/arduino-audio-tools.git
 ```
 
 I recommend to use git because you can easily update to the latest version just by executing the ```git pull``` command in the project folder.
-
 If you want to use the library in PlatformIO, you can find a [detailed description in the Wiki](https://github.com/pschatzmann/arduino-audio-tools/wiki/Working-with-PlatformIO).
+
+
+## Sponsor Me
+
+This software is totally free, but you can make me happy by rewarding me with a treat
+
+- [Buy me a caffee](https://www.buymeacoffee.com/philschatzh)
+- [Paypal me](https://paypal.me/pschatzmann?country.x=CH&locale.x=en_US)

@@ -32,6 +32,9 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
  public:
   AudioStream() = default;
   virtual ~AudioStream() = default;
+  AudioStream(AudioStream const&) = delete;
+  AudioStream& operator=(AudioStream const&) = delete;
+
 
   virtual bool begin(){return true;}
   virtual void end(){}

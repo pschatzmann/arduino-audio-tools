@@ -11,7 +11,7 @@
 #include "AudioLibs/AudioA2DP.h"
 
 I2SStream i2sStream;                            // Access I2S as stream
-A2DPStream a2dpStream = A2DPStream::instance(); // access A2DP as stream
+A2DPStream a2dpStream;                          // access A2DP as stream
 VolumeStream volume(a2dpStream);
 StreamCopy copier(volume, i2sStream); // copy i2sStream to a2dpStream
 ConverterFillLeftAndRight<int16_t> filler(LeftIsEmpty); // fill both channels
