@@ -567,8 +567,8 @@ class AudioKitStream : public AudioStreamX {
   int volume_value = 40;
   bool active = true;
   // channel and sample size conversion support
-  AudioKitStreamAdapter kit_stream = AudioKitStreamAdapter(&kit);
-  ChannelFormatConverterStream converter = ChannelFormatConverterStream(kit_stream);
+  AudioKitStreamAdapter kit_stream{&kit};
+  ChannelFormatConverterStream converter{kit_stream};
   bool is_started = false;
 
   /// Determines the action logic (ActiveLow or ActiveTouch) for the pin

@@ -19,6 +19,8 @@ class MetaDataPrint : public AudioPrint {
   public:
 
     MetaDataPrint() = default;
+    MetaDataPrint(MetaDataPrint const&) = delete;
+    MetaDataPrint& operator=(MetaDataPrint const&) = delete;
 
     ~MetaDataPrint(){
         end();

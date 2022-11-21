@@ -15,7 +15,7 @@
 const char *startFilePath="/";
 const char* ext="mp3";
 AudioSourceSDFAT source(startFilePath, ext);
-A2DPStream out = A2DPStream::instance();  // A2DP input - A2DPStream is a singleton!
+A2DPStream out;
 MP3DecoderHelix decoder;
 AudioPlayer player(source, out, decoder);
 

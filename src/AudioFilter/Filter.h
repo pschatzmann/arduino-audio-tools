@@ -15,6 +15,9 @@ class Filter {
   // construct without coefs
   Filter() = default;
   virtual ~Filter() = default;
+  Filter(Filter const&) = delete;
+  Filter& operator=(Filter const&) = delete;
+
   virtual T process(T in) = 0;
 };
 

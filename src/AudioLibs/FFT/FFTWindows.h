@@ -53,6 +53,9 @@ class WindowFunction {
 class BufferedWindow : public WindowFunction {
  public:
   BufferedWindow(WindowFunction* wf) { p_wf = wf; }
+  BufferedWindow(BufferedWindow const&) = delete;
+  BufferedWindow& operator=(BufferedWindow const&) = delete;
+
 
   virtual void begin(int samples) {
     // process only if there is a change

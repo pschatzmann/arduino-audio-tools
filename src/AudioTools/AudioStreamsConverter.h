@@ -106,6 +106,9 @@ class ChannelFormatConverterStream : public AudioStreamX {
         ChannelFormatConverterStream(Print &print){
           setStream(print);
         }
+        ChannelFormatConverterStream(ChannelFormatConverterStream const&) = default;
+        ChannelFormatConverterStream& operator=(ChannelFormatConverterStream const&) = default;
+
 
         void setStream(Stream &stream){
           p_stream = &stream;

@@ -64,6 +64,10 @@ class NumberConverter {
 template<typename T>
 class BaseConverter {
     public:
+        BaseConverter() = default;
+        BaseConverter(BaseConverter const&) = delete;
+        BaseConverter& operator=(BaseConverter const&) = delete;
+
         virtual size_t convert(uint8_t *src, size_t size) = 0;
 };
 

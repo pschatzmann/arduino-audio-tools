@@ -101,6 +101,9 @@ namespace audio_tools {
             decoder.setNotifyAudioChange(*this);
         }
 
+        AudioPlayer(AudioPlayer const&) = delete;
+        AudioPlayer& operator=(AudioPlayer const&) = delete;
+
         /// Default destructor
         virtual ~AudioPlayer() {
             if (p_out_decoding != nullptr) {

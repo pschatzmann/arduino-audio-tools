@@ -13,7 +13,7 @@
 
 
 AnalogAudioStream in; // analog mic
-A2DPStream out = A2DPStream::instance() ; // A2DP output - A2DPStream is a singleton!
+A2DPStream out; // A2DP output 
 StreamCopy copier(out, in); // copy in to out
 ConverterAutoCenter<int16_t> center(2); // The data has a center of around 26427, so we we need to shift it down to bring the center to 0
 
