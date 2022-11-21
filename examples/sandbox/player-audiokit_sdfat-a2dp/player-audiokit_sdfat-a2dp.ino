@@ -17,7 +17,7 @@ const char *startFilePath="/";
 const char* ext="mp3";
 SdSpiConfig sdcfg(PIN_AUDIO_KIT_SD_CARD_CS, DEDICATED_SPI, SD_SCK_MHZ(10) , &AUDIOKIT_SD_SPI);
 AudioSourceSDFAT source(startFilePath, ext, sdcfg);
-A2DPStream out = A2DPStream::instance();  // A2DP input - A2DPStream is a singleton!
+A2DPStream out;    // A2DP input - A2DPStream is a singleton!
 MP3DecoderHelix decoder;
 AudioPlayer player(source, out, decoder);
 

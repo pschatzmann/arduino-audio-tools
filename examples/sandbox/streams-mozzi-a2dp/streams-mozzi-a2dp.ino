@@ -19,8 +19,8 @@
 #include <mozzi_midi.h>
 
 
-MozziStream in;                              // Stream generated with mozzi
-A2DPStream out = A2DPStream::instance() ;    // A2DP output - A2DPStream is a singleton!
+MozziStream in;        // Stream generated with mozzi
+A2DPStream out;        // A2DP output
 StreamCopy copier(out, in); // copy in to out
 
 /// Copied from AMsynth.ino
