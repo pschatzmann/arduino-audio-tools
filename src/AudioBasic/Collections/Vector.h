@@ -324,6 +324,7 @@ class Vector {
           delete [] oldData;            
         }  
       }
+      assert(p_data!=nullptr);
     }
 
     void cleanup(T*p_data, int from, int to){

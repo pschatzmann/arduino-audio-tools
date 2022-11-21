@@ -38,7 +38,7 @@ class ChannelFormatConverterStreamT : public AudioStreamX {
            size_t resultBytes = convert(data, size);
            assert(resultBytes = factor*size);
            p_print->write((uint8_t*)buffer.data(), resultBytes);
-           return resultBytes;
+           return size;
         }
 
         size_t readBytes(uint8_t *data, size_t size) override {
