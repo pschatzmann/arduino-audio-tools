@@ -16,7 +16,7 @@ uint16_t sample_rate=44100;
 uint8_t channels = 2;                                     // The stream will have 2 channels 
 SineWaveGenerator<sound_t> sineWave(32000);               // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<sound_t> in(sineWave);               // Stream generated from sine wave
-A2DPStream out = A2DPStream::instance() ;                 // A2DP input - A2DPStream is a singleton!
+A2DPStream out;                                           // A2DP output
 StreamCopy copier(out, in); // copy in to out
 
 // Arduino Setup

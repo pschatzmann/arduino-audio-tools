@@ -11,7 +11,7 @@
 #include "AudioLibs/AudioA2DP.h"
 
 
-A2DPStream in = A2DPStream::instance() ; // A2DP input - A2DPStream is a singleton!
+A2DPStream in; // A2DP input
 AnalogAudioStream out; 
 StreamCopy copier(out, in, 4100); // copy in to out
 
