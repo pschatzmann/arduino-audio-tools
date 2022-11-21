@@ -7,11 +7,11 @@
  * 
  * @copyright Copyright (c) 2022
  * 
- */
-#include <ArduinoJson.h>
-#include "HttpServer.h"
-#include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+ */ 
+#include <ArduinoJson.h>  // https://arduinojson.org/
+#include "HttpServer.h" // https://github.com/pschatzmann/TinyHttp
+#include "AudioTools.h" // https://github.com/pschatzmann/arduino-audio-tools.git
+#include "AudioLibs/AudioKit.h" // https://github.com/pschatzmann/arduino-audiokit.git
 
 // Server
 WiFiServer wifi;
