@@ -18,7 +18,7 @@
 uint16_t sample_rate = 16000;
 uint8_t channels = 1;  // We use one channel only to simplify the processing 
 AudioKitStream kit;
-PitchShift<int16_t> pitch_shift(kit);
+PitchShift<int16_t, VariableSpeedRingBuffer<int16_t>> pitch_shift(kit);
 MemoryManager memory(500); // Activate SPI RAM for objects > 500 bytes
 DynamicMemoryStream recording(true); // Audio stored on heap 
 StreamCopy copier; // copies data
