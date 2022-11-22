@@ -31,6 +31,7 @@
 #include "AudioTools/AudioPlayer.h"
 #include "AudioEffects/SoundGenerator.h"
 #include "AudioEffects/AudioEffects.h"
+#include "AudioEffects/PitchShift.h"
 
 /**
  * ------------------------------------------------------------------------- 
