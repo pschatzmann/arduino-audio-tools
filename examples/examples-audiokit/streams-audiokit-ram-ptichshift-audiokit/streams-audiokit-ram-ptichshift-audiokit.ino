@@ -13,7 +13,6 @@
 #include "AudioTools.h"
 #include "AudioLibs/AudioKit.h"
 #include "AudioLibs/MemoryManager.h"
-#include "AudioEffects/PitchShift.h" // TODO integrate into framework
 
 uint16_t sample_rate = 16000;
 uint8_t channels = 1;  // We use one channel only to simplify the processing 
