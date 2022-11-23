@@ -180,8 +180,8 @@
 #define PIN_I2S_DATA_IN 32
 #define PIN_I2S_DATA_OUT 22
 #define I2S_USE_APLL false  
-// Default Setting: The mute pin can be switched off by setting it to -1. Or you could drive the LED by assigning LED_BUILTIN
-#define PIN_I2S_MUTE 23
+// Default Setting: The mute pin can be switched actovated by setting it to a gpio (e.g 23). Or you could drive the LED by assigning LED_BUILTIN
+#define PIN_I2S_MUTE -1
 #define SOFT_MUTE_VALUE LOW  
 #define PIN_CS SS
 #define PIN_ADC1 34 
@@ -238,8 +238,8 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define PIN_I2S_DATA_OUT 8
 #define PIN_I2S_DATA_IN 9
 #define I2S_USE_APLL false  
-// Default Setting: The mute pin can be switched off by setting it to -1. Or you could drive the LED by assigning LED_BUILTIN
-#define PIN_I2S_MUTE 5
+// Default Setting: The mute pin can be switched actovated by setting it to a gpio (e.g 5). Or you could drive the LED by assigning LED_BUILTIN
+#define PIN_I2S_MUTE -1
 #define SOFT_MUTE_VALUE LOW  
 #define PIN_CS SS
 #define PIN_ADC1 21 
@@ -306,7 +306,8 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define PIN_I2S_WS 1
 #define PIN_I2S_DATA_IN 3
 #define PIN_I2S_DATA_OUT 3
-#define PIN_I2S_MUTE 4
+// Default Setting: The mute pin can be switched actovated by setting it to a gpio (e.g 4). Or you could drive the LED by assigning LED_BUILTIN
+#define PIN_I2S_MUTE -1
 #define SOFT_MUTE_VALUE LOW  
 #define PIN_CS SS
 #endif
@@ -327,7 +328,8 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define PIN_I2S_WS PIN_I2S_BCK+1
 #define PIN_I2S_DATA_IN 28
 #define PIN_I2S_DATA_OUT 28
-#define PIN_I2S_MUTE 4
+// Default Setting: The mute pin can be switched actovated by setting it to a gpio (e.g 4). Or you could drive the LED by assigning LED_BUILTIN
+#define PIN_I2S_MUTE -1
 #define SOFT_MUTE_VALUE LOW  
 #define PIN_CS PIN_SPI0_SS
 
@@ -359,7 +361,8 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define PIN_I2S_WS PIN_I2S_BCK+1
 #define PIN_I2S_DATA_IN 28
 #define PIN_I2S_DATA_OUT 28
-#define PIN_I2S_MUTE 4
+// Default Setting: The mute pin can be switched actovated by setting it to a gpio (e.g 4). Or you could drive the LED by assigning LED_BUILTIN
+#define PIN_I2S_MUTE -1
 #define SOFT_MUTE_VALUE LOW  
 #define PIN_CS PIN_SPI0_SS
 
@@ -441,7 +444,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define PIN_I2S_WS PIN_I2S_BCK+1
 #define PIN_I2S_DATA_IN 3
 #define PIN_I2S_DATA_OUT 3
-#define PIN_I2S_MUTE 4
+#define PIN_I2S_MUTE -1
 #define SOFT_MUTE_VALUE LOW  
 #endif
 
