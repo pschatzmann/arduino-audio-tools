@@ -92,15 +92,19 @@ Inheritance diagram for audio_tools::BaseBuffer&lt; T &gt;:</div>
  <div class="center">
   <img src="classaudio__tools_1_1_base_buffer.png" usemap="#audio_5Ftools::BaseBuffer_3C_20T_20_3E_map" alt=""/>
   <map id="audio_5Ftools::BaseBuffer_3C_20T_20_3E_map" name="audio_5Ftools::BaseBuffer_3C_20T_20_3E_map">
-<area href="classaudio__tools_1_1_n_buffer.html" alt="audio_tools::NBuffer&lt; uint8_t &gt;" shape="rect" coords="223,56,436,80"/>
-<area href="classaudio__tools_1_1_n_buffer.html" alt="audio_tools::NBuffer&lt; Frame &gt;" shape="rect" coords="223,112,436,136"/>
-<area href="classaudio__tools_1_1_ring_buffer.html" alt="audio_tools::RingBuffer&lt; uint8_t &gt;" shape="rect" coords="223,168,436,192"/>
-<area href="classaudio__tools_1_1_ring_buffer.html" alt="audio_tools::RingBuffer&lt; effect_t &gt;" shape="rect" coords="223,224,436,248"/>
-<area href="classaudio__tools_1_1_ring_buffer.html" alt="audio_tools::RingBuffer&lt; int16_t &gt;" shape="rect" coords="223,280,436,304"/>
-<area href="classaudio__tools_1_1_single_buffer.html" alt="audio_tools::SingleBuffer&lt; uint8_t &gt;" shape="rect" coords="223,336,436,360"/>
-<area href="classaudio__tools_1_1_n_buffer.html" title="A lock free N buffer. If count=2 we create a DoubleBuffer, if count=3 a TripleBuffer etc." alt="audio_tools::NBuffer&lt; T &gt;" shape="rect" coords="223,392,436,416"/>
-<area href="classaudio__tools_1_1_ring_buffer.html" title="Implements a typed Ringbuffer." alt="audio_tools::RingBuffer&lt; T &gt;" shape="rect" coords="223,448,436,472"/>
-<area href="classaudio__tools_1_1_single_buffer.html" title="A simple Buffer implementation which just uses a (dynamically sized) array." alt="audio_tools::SingleBuffer&lt; T &gt;" shape="rect" coords="223,504,436,528"/>
+<area href="classaudio__tools_1_1_n_buffer.html" alt="audio_tools::NBuffer&lt; uint8_t &gt;" shape="rect" coords="304,56,598,80"/>
+<area href="classaudio__tools_1_1_n_buffer.html" alt="audio_tools::NBuffer&lt; Frame &gt;" shape="rect" coords="304,112,598,136"/>
+<area href="classaudio__tools_1_1_ring_buffer.html" alt="audio_tools::RingBuffer&lt; uint8_t &gt;" shape="rect" coords="304,168,598,192"/>
+<area href="classaudio__tools_1_1_ring_buffer.html" alt="audio_tools::RingBuffer&lt; effect_t &gt;" shape="rect" coords="304,224,598,248"/>
+<area href="classaudio__tools_1_1_ring_buffer.html" alt="audio_tools::RingBuffer&lt; int16_t &gt;" shape="rect" coords="304,280,598,304"/>
+<area href="classaudio__tools_1_1_single_buffer.html" alt="audio_tools::SingleBuffer&lt; uint8_t &gt;" shape="rect" coords="304,336,598,360"/>
+<area href="classaudio__tools_1_1_variable_speed_ring_buffer.html" alt="audio_tools::VariableSpeedRingBuffer&lt; int16_t &gt;" shape="rect" coords="304,392,598,416"/>
+<area href="classaudio__tools_1_1_n_buffer.html" title="A lock free N buffer. If count=2 we create a DoubleBuffer, if count=3 a TripleBuffer etc." alt="audio_tools::NBuffer&lt; T &gt;" shape="rect" coords="304,448,598,472"/>
+<area href="classaudio__tools_1_1_ring_buffer.html" title="Implements a typed Ringbuffer." alt="audio_tools::RingBuffer&lt; T &gt;" shape="rect" coords="304,504,598,528"/>
+<area href="classaudio__tools_1_1_single_buffer.html" title="A simple Buffer implementation which just uses a (dynamically sized) array." alt="audio_tools::SingleBuffer&lt; T &gt;" shape="rect" coords="304,560,598,584"/>
+<area href="classaudio__tools_1_1_variable_speed_ring_buffer.html" title="Optimized Buffer implementation for Pitch Shift. We try to interpolate the samples and restore the ph..." alt="audio_tools::VariableSpeedRingBuffer&lt; T &gt;" shape="rect" coords="304,616,598,640"/>
+<area href="classaudio__tools_1_1_variable_speed_ring_buffer180.html" title="Varialbe speed ring buffer where we read with 0 and 180 degree and blend the result to prevent overru..." alt="audio_tools::VariableSpeedRingBuffer180&lt; T &gt;" shape="rect" coords="304,672,598,696"/>
+<area href="classaudio__tools_1_1_variable_speed_ring_buffer_simple.html" title="Very Simple Buffer implementation for Pitch Shift. We write in constant speed, but reading can be don..." alt="audio_tools::VariableSpeedRingBufferSimple&lt; T &gt;" shape="rect" coords="304,728,598,752"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -143,8 +147,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>readFrames</b> (T data
 template&lt;int rows, int channels&gt; </td></tr>
 <tr class="memitem:a0af321b42255fa356e4618ed7a4cfeb4"><td class="memTemplItemLeft" align="right" valign="top">int&#160;</td><td class="memTemplItemRight" valign="bottom"><b>readFrames</b> (T(&amp;data)[rows][channels])</td></tr>
 <tr class="separator:a0af321b42255fa356e4618ed7a4cfeb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2137261fd2ef3107bf39064bb86159f4"><td class="memItemLeft" align="right" valign="top"><a id="a2137261fd2ef3107bf39064bb86159f4" name="a2137261fd2ef3107bf39064bb86159f4"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>reset</b> ()=0</td></tr>
+<tr class="memitem:a2137261fd2ef3107bf39064bb86159f4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_base_buffer.html#a2137261fd2ef3107bf39064bb86159f4">reset</a> ()=0</td></tr>
 <tr class="separator:a2137261fd2ef3107bf39064bb86159f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6eff81f6e9f70eff08b9e8ffec3f8770"><td class="memItemLeft" align="right" valign="top"><a id="a6eff81f6e9f70eff08b9e8ffec3f8770" name="a6eff81f6e9f70eff08b9e8ffec3f8770"></a>
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (T data)=0</td></tr>
@@ -170,7 +173,37 @@ friend&#160;</td><td class="memItemRight" valign="bottom"><b>NBuffer&lt; T &gt;<
 class audio_tools::BaseBuffer&lt; T &gt;</div><p >Shared functionality of all buffers. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a2137261fd2ef3107bf39064bb86159f4" name="a2137261fd2ef3107bf39064bb86159f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2137261fd2ef3107bf39064bb86159f4">&#9670;&#160;</a></span>reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void <a class="el" href="classaudio__tools_1_1_base_buffer.html">audio_tools::BaseBuffer</a>&lt; T &gt;::reset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer_simple.html#ad0e487e621b2f3d1b279d9458e688e15">audio_tools::VariableSpeedRingBufferSimple&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer180.html#aab9da6f188a0610cce25deb3df55cdbf">audio_tools::VariableSpeedRingBuffer180&lt; T &gt;</a>, <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html#a7968fd3341bba224512e44ba78ef7384">audio_tools::VariableSpeedRingBuffer&lt; T &gt;</a>, and <a class="el" href="classaudio__tools_1_1_variable_speed_ring_buffer.html#a7968fd3341bba224512e44ba78ef7384">audio_tools::VariableSpeedRingBuffer&lt; int16_t &gt;</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/AudioTools/<a class="el" href="_buffers_8h_source.html">Buffers.h</a></li>
 </ul>
 </div><!-- contents -->
