@@ -151,8 +151,8 @@ Dependent on the example you might need to install some of the following librari
   - [espeak-ng](https://github.com/pschatzmann/arduino-espeak-ng) eSpeak NG is an open source speech synthesizer that supports more than hundred languages.
 - SD
   - [SdFat Library](https://github.com/greiman/SdFat) to read and write files supporting SD cards with FAT16/FAT32 and exFAT
-  - [SD Library](https://www.arduino.cc/en/reference/SD) to read and write files supporting SD cards with FAT16 and FAT32
 
+Please note that this list does not show the supported libraries that are already part of the Arduino implementation: e.g. SD Library, Cmsis, Espressif DSP Library etc.
 
 ## Show and Tell
 
