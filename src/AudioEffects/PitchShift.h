@@ -1,4 +1,5 @@
 
+#pragma once
 #include "Print.h"
 #include <math.h>
 #include <stdio.h>
@@ -7,7 +8,7 @@
 namespace audio_tools {
 
 /**
- * @brief Configuration for PitchShift: set the pitch_shift to define the
+ * @brief Configuration for PitchShiftStream: set the pitch_shift to define the
  * shift
  *
  */
@@ -19,61 +20,6 @@ struct PitchShiftInfo : public AudioBaseInfo {
   }
   float pitch_shift = 1.4f;
   int buffer_size = 1000;
-};
-
-/**
- * @brief Base Calss for Pitch Shifters whch defines the interface and provides
- * the common functionality
- *
- * @tparam T
- */
-template <typename T> class PitchShiftInterface : public AudioPrint {
-public:
-  PitchShiftInfo defaultConfig() {
-    PitchShiftInfo result;
-    return result;
-  }
-
-  virtual bool begin(PitchShiftInfo info);
-
-  virtual void end();
-
-  /// Provides the input data to be pitch shifted
-  /// Provides the input data to be pitch shifted
-  size_t write(const uint8_t *data, size_t len) override {
-    TRACED();
-    if (!active)
-      return 0;
-
-    size_t result = 0;
-    int channels = cfg.channels;
-    T *p_in = (T *)data;
-    int sample_count = len / sizeof(T);
-    for (int j = 0; j < sample_count; j += channels) {
-      float value = 0;
-      for (int ch = 0; ch < channels; ch++) {
-        value += p_in[j + ch];
-      }
-      // calculate avg sample value
-      value /= cfg.channels;
-
-      // output values
-      T out_value = pitchShift(value);
-      LOGD("pitchShift %d -> %d", value, out_value);
-      T out_array[channels];
-      for (int ch = 0; ch < channels; ch++) {
-        out_array[ch] = out_value;
-      }
-      result += p_out->write((uint8_t *)out_array, sizeof(T) * channels);
-    }
-    return result;
-  }
-
-protected:
-  virtual T pitchShift(T in);
-  Print *p_out = nullptr;
-  PitchShiftInfo cfg;
-  bool active = false;
 };
 
 /**
@@ -91,7 +37,7 @@ public:
       resize(size);
   }
 
-  void setIncrement(int increment) { read_increment = increment; }
+  void setIncrement(float increment) { read_increment = increment; }
 
   void resize(int size) {
     buffer_size = size;
@@ -163,10 +109,11 @@ public:
       resize(size);
   }
 
-  void setIncrement(int increment) { pitch_shift = increment; }
+  void setIncrement(float increment) { pitch_shift = increment; }
 
   void resize(int size) {
     buffer_size = size;
+    overlap = buffer_size / 10;
     buffer.resize(size);
   }
 
@@ -193,6 +140,8 @@ public:
   void reset() {
     read_pos_float = 0;
     write_pos = 0;
+    cross_fade = 1.0f;
+    overlap = buffer_size / 10;
     memset(buffer.data(), 0, sizeof(T) * buffer_size);
   }
 
@@ -206,14 +155,16 @@ protected:
   float read_pos_float = 0.0;
   float cross_fade = 1.0;
   int write_pos = 0;
-  int write_pointer;
+  int write_pointer = 0;
   int buffer_size = 0;
   int overlap = 0;
-  float pitch_shift;
+  float pitch_shift = 0;
 
   /// pitch shift for a single sample
   virtual T pitchRead() {
     TRACED();
+    assert(pitch_shift > 0);
+    assert(buffer_size > 0);
 
     // read fractional readpointer and generate 0° and 180° read-pointer in
     // integer
@@ -258,7 +209,6 @@ protected:
   }
 };
 
-
 /**
  * @brief Optimized Buffer implementation for Pitch Shift.
  * We try to interpolate the samples and restore the phase
@@ -273,19 +223,20 @@ public:
       resize(size);
   }
 
-  void setIncrement(int increment) { read_increment = increment; }
+  void setIncrement(float increment) { read_increment = increment; }
 
   void resize(int size) {
     buffer_size = size;
     // prevent an overrun at the start
-    read_pos_int = size / 2;
+    read_pos_float = size / 2;
     buffer.resize(size);
   }
 
   T read() {
+    assert(read_increment != 0.0);
     T result = peek();
     read_pos_float += read_increment;
-    handleReadWriteOverrun();
+    handleReadWriteOverrun(last_value);
     if (read_pos_float > buffer_size) {
       read_pos_float -= buffer_size;
     }
@@ -301,7 +252,7 @@ public:
   bool write(T sample) {
     if (buffer.size() == 0)
       return false;
-    handleReadWriteOverrun();
+    handleReadWriteOverrun(last_value);
     buffer[write_pos++] = sample;
     // on buffer owerflow reset to 0
     if (write_pos >= buffer_size) {
@@ -326,25 +277,36 @@ protected:
   Vector<T> buffer{0};
   int buffer_size;
   float read_pos_float = 0.0;
-  float read_increment;
+  float read_increment = 0.0;
   int write_pos = 0;
-  int read_pos_int;
-  T value, value1, value2;
-
-  /// Linear interpolation
-  float map(float x, float in_min, float in_max, float out_min, float out_max) {
-    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-  }
+  // used to handle overruns:
+  T last_value = 0; // record last read value
+  bool incrementing; // is last read increasing
 
   /// Calculate exact sample value for float position
-  T interpolate(int read_pos_float) {
-    read_pos_int = read_pos_float; // round down
-    value1 = getValue(read_pos_int);
-    value2 = getValue(read_pos_int + 1);
+  T interpolate(float read_pos) {
+    int read_pos_int = read_pos;
+    T value1 = getValue(read_pos_int);
+    T value2 = getValue(read_pos_int + 1);
+    incrementing = value2 - value1 >= 0;
+ 
+    // make sure that value1 is smaller then value 2
+    if (value2 < value1) {
+      T tmp = value2;
+      value2 = value1;
+      value1 = tmp;
+    }
     // the result must be between value 1 and value 2: linear interpolation
-    value = round(
-        map(read_pos_float, read_pos_int, read_pos_int + 1, value1, value2));
-    return value;
+    float offset_in = read_pos - read_pos_int; // calculate fraction: e.g 0.5
+    LOGD("read_pos=%f read_pos_int=%d, offset_in=%f", read_pos, read_pos_int,  offset_in);
+    float diff_result = abs(value2 - value1); // differrence between values: e.g. 10
+    float offset_result = offset_in * diff_result; // 0.5 * 10 = 5
+    float result = offset_result + value1;
+    LOGD("interpolate %d %d -> %f -> %f", value1, value2, offset_result, result);
+
+    last_value = result;
+
+    return result;
   }
 
   /// provides the value from the buffer: Allows pos > buffer_size
@@ -365,28 +327,40 @@ protected:
     return false;
   }
 
-  /// When the read pointer is overpassing the write pointer or the write pointer is
-  /// overpassing the read pointer we need to phase shift
-  void handleReadWriteOverrun() {
+  /// When the read pointer is overpassing the write pointer or the write
+  /// pointer is overpassing the read pointer we need to phase shift
+  void handleReadWriteOverrun(T last_value) {
     // handle overflow - we need to allign the phase
+    int read_pos_int = read_pos_float; // round down
     if (write_pos == read_pos_int ||
         write_pos == (buffer_size % (read_pos_int + 1))) {
+      LOGD("handleReadWriteOverrun write_pos=%d read_pos_int=%d", write_pos,
+           read_pos_int);
       bool found = false;
-      // find the closest match for the last value1/value2
-      bool incrementing = value2 - value1 >= 0;
-      for (int j = 1; j < buffer_size; j++) {
-        T v1 = getValue(read_pos_int + j);
-        T v2 = getValue(read_pos_int + j + 1);
+
+      // find the closest match for the last value
+      for (int j = read_increment * 2; j < buffer_size; j++) {
+        int pos = read_pos_int + j;
+        float v1 = getValue(pos);
+        float v2 = getValue(pos + 1);
         // find corresponging matching sample in buffer for last sample
-        if (isMatching(value1, incrementing, v1, v2)) {
-          read_pos_float =
-              map(value, v1, v2, read_pos_int + j, read_pos_int + j + 1);
+        if (isMatching(last_value, incrementing, v1, v2)) {
+          // interpolate new position
+          float diff_value = abs(v1 - v2);
+          float diff_last_value = abs(v1 - last_value);
+          float fraction = 0;
+          if (diff_value>0){
+            fraction = diff_last_value / diff_value;
+          }
+
+          read_pos_float = fraction + pos;
           // move to next value
           read_pos_float += read_increment;
           // if we are at the end of the buffer we restart from 0
-          if (read_pos_float>buffer_size){
-            read_pos_float-=buffer_size;
+          if (read_pos_float > buffer_size) {
+            read_pos_float -= buffer_size;
           }
+          LOGD("handleReadWriteOverrun -> read_pos pos=%d  pos_float=%f", pos, read_pos_float);
           found = true;
           break;
         }
@@ -408,30 +382,70 @@ protected:
  * @tparam BufferT
  */
 template <typename T, class BufferT>
-class PitchShift : public PitchShiftInterface<T> {
+class PitchShiftStream : public AudioPrint {
 public:
-  PitchShift(Print &out) { PitchShiftInterface<T>::p_out = &out; }
+  PitchShiftStream(Print &out) { p_out = &out; }
+
+  PitchShiftInfo defaultConfig() {
+    PitchShiftInfo result;
+    result.bits_per_sample = sizeof(T) * 8;
+    return result;
+  }
 
   bool begin(PitchShiftInfo info) {
     TRACED();
-    PitchShiftInterface<T>::cfg = info;
+    cfg = info;
+    AudioPrint::setAudioInfo(info);
     buffer.resize(info.buffer_size);
     buffer.reset();
     buffer.setIncrement(info.pitch_shift);
-    PitchShiftInterface<T>::active = true;
-    return PitchShiftInterface<T>::active;
+    active = true;
+    return active;
   }
 
-  void end() { PitchShiftInterface<T>::active = false; }
+  size_t write(const uint8_t *data, size_t len) override {
+    TRACED();
+    if (!active)
+      return 0;
+
+    size_t result = 0;
+    int channels = cfg.channels;
+    T *p_in = (T *)data;
+    int sample_count = len / sizeof(T);
+
+    for (int j = 0; j < sample_count; j += channels) {
+      float value = 0;
+      for (int ch = 0; ch < channels; ch++) {
+        value += p_in[j + ch];
+      }
+      // calculate avg sample value
+      value /= cfg.channels;
+
+      // output values
+      T out_value = pitchShift(value);
+      LOGD("PitchShiftStream %d -> %d", value, out_value);
+      T out_array[channels];
+      for (int ch = 0; ch < channels; ch++) {
+        out_array[ch] = out_value;
+      }
+      result += p_out->write((uint8_t *)out_array, sizeof(T) * channels);
+    }
+    return result;
+  }
+
+  void end() { active = false; }
 
 protected:
   BufferT buffer;
+  bool active;
+  PitchShiftInfo cfg;
+  Print *p_out = nullptr;
 
   // execute the pitch shift by writing one sample and returning the pitch
   // shifted result sample
   T pitchShift(T value) {
     TRACED();
-    if (!PitchShiftInterface<T>::active)
+    if (!active)
       return 0;
     buffer.write(value);
     T out_value = buffer.read();

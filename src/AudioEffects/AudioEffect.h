@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include "AudioTools/AudioLogger.h"
 #include "AudioEffects/AudioParameters.h"
+#include "AudioEffects/PitchShift.h"
 
 namespace audio_tools {
 
@@ -446,6 +447,54 @@ class ADSRGain : public AudioEffect {
     protected:
         ADSR *adsr;
         float factor;
+
+};
+
+/**
+ * @brief Shifts the pitch by the indicated step size: e.g. 2 doubles the pitch
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class PitchShift : public AudioEffect {
+    public:
+        /// Boost Constructor: volume 0.1 - 1.0: decrease result; volume >0: increase result
+        PitchShift(float shift_value=1.0, int buffer_size=1000){
+            effect_value = shift_value;
+            size = buffer_size;
+            buffer.resize(buffer_size);
+            buffer.setIncrement(shift_value);
+        }
+
+        PitchShift(const PitchShift &ref) {
+            size = ref.size;
+            effect_value = ref.effect_value;
+            buffer.resize(size);
+            buffer.setIncrement(effect_value);
+        };
+
+        float value() {
+            return effect_value;
+        }
+
+        void setValue(float value){
+            effect_value = value;
+            buffer.setIncrement(value);
+        }
+
+        effect_t process(effect_t input){
+            if (!active()) return input;
+            buffer.write(input);
+            return buffer.read();
+        }
+
+        PitchShift* clone() {
+            return new PitchShift(*this);
+        }
+
+    protected:
+        VariableSpeedRingBuffer<int16_t> buffer;
+        float effect_value;
+        int size;
 
 };
 

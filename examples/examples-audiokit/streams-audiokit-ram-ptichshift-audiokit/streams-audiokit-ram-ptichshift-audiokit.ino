@@ -16,10 +16,11 @@
 
 uint16_t sample_rate = 16000;
 uint8_t channels = 1;  // We use one channel only to simplify the processing 
-AudioKitStream kit;
-PitchShift<int16_t, VariableSpeedRingBuffer<int16_t>> pitch_shift(kit);
 MemoryManager memory(500); // Activate SPI RAM for objects > 500 bytes
-DynamicMemoryStream recording(true); // Audio stored on heap 
+AudioKitStream kit;
+//use one of VariableSpeedRingBufferSimple, VariableSpeedRingBuffer, VariableSpeedRingBuffer380 
+PitchShiftStream<int16_t, VariableSpeedRingBuffer<int16_t>> pitch_shift(kit);
+DynamicMemoryStream recording(false); // Audio stored on heap, non repeating
 StreamCopy copier; // copies data
  
 
@@ -58,6 +59,7 @@ void setup(){
   // setup pitch shift
   auto cfg_pc = pitch_shift.defaultConfig();
   cfg_pc.pitch_shift = 2; // one octave up
+  cfg_pc.buffer_size = 1000;
   cfg_pc.copyFrom(cfg);
   pitch_shift.begin(cfg_pc);
 
