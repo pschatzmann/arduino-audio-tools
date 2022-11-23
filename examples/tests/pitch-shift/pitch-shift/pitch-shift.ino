@@ -1,14 +1,15 @@
  
 #include "AudioTools.h"
 
+int pitch_buffer_size = 256;
 float pitch_shift = 1.5;
-int buffer_size = 1000;
-uint16_t sample_rate=44100;
+uint16_t sample_rate = 44100;
 uint8_t channels = 1;                                      // The stream will have 2 channels 
 SineWaveGenerator<int16_t> sineWave(32000);                // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound(sineWave);             // Stream generated from sine wave
 CsvStream<int16_t> out(Serial, 1); 
-//use one of VariableSpeedRingBufferSimple, VariableSpeedRingBuffer, VariableSpeedRingBuffer380 
+//PitchShiftStream<int16_t, VariableSpeedRingBufferSimple<int16_t>> pitchShift(out);
+//PitchShiftStream<int16_t, VariableSpeedRingBuffer180<int16_t>> pitchShift(out);
 PitchShiftStream<int16_t, VariableSpeedRingBuffer<int16_t>> pitchShift(out);
 StreamCopy copier(pitchShift, sound);                       // copies sound to out
 
@@ -27,7 +28,7 @@ void setup(void) {
   auto pcfg = pitchShift.defaultConfig();
   pcfg.copyFrom(config);
   pcfg.pitch_shift = pitch_shift;
-  pcfg.buffer_size = buffer_size;
+  pcfg.buffer_size = pitch_buffer_size;
   pitchShift.begin(pcfg);
 
   // Setup sine wave
