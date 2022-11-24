@@ -112,7 +112,7 @@ class BufferedTaskStream : public AudioStream {
         bool active = false;
         TaskHandle_t xHandle = NULL;
         SemaphoreHandle_t mutex = NULL; // Lock access to buffer and Serial
-        NBuffer<uint8_t> buffers = NBuffer<uint8_t>(DEFAULT_BUFFER_SIZE, URL_STREAM_BUFFER_COUNT);
+        NBuffer<uint8_t> buffers {DEFAULT_BUFFER_SIZE, URL_STREAM_BUFFER_COUNT};
         bool ready = false;
 
         void createMutex() {
