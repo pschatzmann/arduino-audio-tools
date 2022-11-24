@@ -61,8 +61,6 @@ class AudioEffect  {
             if (result < -clipLimit) {result = -resultLimit;}
             return result;
         }
-
-
 };
 
 /**
@@ -282,89 +280,110 @@ class Tremolo : public AudioEffect  {
  */
 class Delay : public AudioEffect  {
     public:
-        /// e.g. depthPercent=50, ms=1000, sampleRate=44100
-        Delay(uint16_t duration_ms=1000, float depthPercent=0.3, float feedbackAmount=0.3, uint32_t sampleRate=44100) {
-          delayLine = new DelayLine(duration_ms,depthPercent,feedbackAmount,sampleRate);
+        /// e.g. depth=0.5, ms=1000, sampleRate=44100
+        Delay(uint16_t duration_ms=1000, float depth=0.5, float feedbackAmount=1.0, uint32_t sampleRate=44100, bool zeroIfBufferEmpty=false) {
+            setSampleRate(sampleRate);
+            setFeedback(feedbackAmount);
+            setDepth(depth);
+            setDuration(duration_ms);
+            this->zeroIfBufferEmpty = zeroIfBufferEmpty;
         }
 
-        Delay(const Delay &ref) {
-            delayLine = new DelayLine(*(ref.delayLine));
-            copyParent((AudioEffect *)&ref);
+        Delay(const Delay &copy) {
+            setSampleRate(copy.sampleRate);
+            setFeedback(copy.feedback);
+            setDepth(copy.depth);
+            setDuration(copy.duration);
         };
 
-        virtual ~Delay(){
-            delete delayLine;
-        }
-
-        void setDuration(int16_t m){
-          delayLine->setDuration(m);
+        void setDuration(int16_t dur){
+            duration = dur;
+            updateBufferSize();
         }
 
         int16_t getDuration(){
-            return delayLine->getDuration();
+            return duration;
         }
 
-        void setDepth(float p){
-            delayLine->setDepth(p);
+        void setDepth(float value){
+            depth = value;
+            if (depth>1.0) depth = 1.0;
+            if (depth<0) depth = 0.0;
         }
 
         float getDepth() {
-            return delayLine->getDepth();
+            return depth;
         }
 
-        void setFeedback(float f){
-            delayLine->setFeedback(f);
+        void setFeedback(float feed){
+            feedback = feed;
+            if (feedback>1.0) feedback = 1.0;
+            if (feedback<0) feedback = 0.0;
         }
 
         float getFeedback() {
-            return delayLine->getFeedback();
+            return feedback;
         }
 
-        void setSampleRate(int32_t s){
-            delayLine->setSampleRate(s);
+        void setSampleRate(int32_t sample){
+            sampleRate = sample;
+            updateBufferSize();
         }
 
         float getSampleRate() {
-            return delayLine->getSampleRate();
+            return sampleRate;
         }
 
         effect_t process(effect_t input) {
             if (!active()) return input;
 
-            delayLine->tick();
-            updateBufferSize();
-            // get value from buffer
-            int32_t value = (p_history->available()<sampleCount) ? input : p_history->read();
-            // add feedback decay
-            int32_t delayValue = (value*delayLine->getFeedback());
-            // add input and delay to the buffer
-            p_history->write(input+delayValue);
-            // mix input with result
-            return (delayValue * delayLine->getDepth()) + (input * (1.0f - delayLine->getDepth()));
-        }
+            // add input to buffer until it is full
+            if (history.write(input)){
+                return zeroIfBufferEmpty ? 0 : input;
+            }
 
+            // get value from buffer
+            int32_t delayValue =  history.read();
+
+            // when we got here the last write has failed, now we have space again
+            if(!history.write(input)){
+                LOGE("write failed");
+            }
+
+            // add feedback decay
+            int32_t delayValueWithFeedback = feedback * delayValue;
+
+            // mix input with result
+            int32_t result = (depth * delayValueWithFeedback) + ((1.0f - depth)* input);
+            LOGD("(sample_count: %d)- input: %d - delayValueWithFeedback: %d -> result %d", sample_count, input, delayValueWithFeedback, result);
+
+            return clip(result);
+        }
         Delay *clone() {
             return new Delay(*this);
         }
 
     protected:
-        RingBuffer<effect_t>* p_history=nullptr;
-        DelayLine *delayLine;
-        uint16_t sampleCount=0;
+        RingBuffer<effect_t> history{0};
+        float depth =0,feedback=0,duration=0,sampleRate=0;
+        size_t sample_count=0;
+        bool zeroIfBufferEmpty;
 
         void updateBufferSize(){
-            uint16_t newSampleCount = delayLine->getSampleRate() * delayLine->getDuration() / 1000;
-            if (newSampleCount!=sampleCount){
-                if (p_history!=nullptr) delete p_history;
-                sampleCount = newSampleCount;
-                p_history = new RingBuffer<effect_t>(sampleCount);
+            if (sampleRate>0 && duration>0){
+                size_t newSampleCount = sampleRate * duration / 1000;
+                if (newSampleCount!=sample_count){
+                    sample_count = newSampleCount;
+                    history.resize(sample_count);
+                    LOGD("sample_count: ",sample_count);
+                }
             }
         }
 };
 
 /**
  * @brief ADSR Envelope: Attack, Decay, Sustain and Release.
- * Attack is the time taken for initial run-up of level from nil to peak, beginning when the key is pressed.
+ * Attack is the time taken for initial run-up oeffect_tf level from nil to peak, beginning when the key is pressed.
  * Decay is the time taken for the subsequent run down from the attack level to the designated sustainLevel level.
  * Sustain is the level during the main sequence of the sound's duration, until the key is released.
  * Release is the time taken for the level to decay from the sustainLevel level to zero after the key is released.[4]

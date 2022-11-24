@@ -285,6 +285,7 @@ class RingBuffer : public BaseBuffer<T> {
     this->max_size = len;
     if (len>0){
       _aucBuffer = new T[max_size];
+      assert(_aucBuffer!=nullptr);
     }
     reset();
   }
