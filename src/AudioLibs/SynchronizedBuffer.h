@@ -1,0 +1,312 @@
+
+#pragma once
+#include "AudioConfig.h"
+#include "AudioTools/Buffers.h"
+
+#ifdef ESP32
+#include "FreeRTOS.h"
+#include <freertos/stream_buffer.h>
+#endif
+
+#ifdef USE_STD_CONCURRENCY
+#include <mutex>
+#endif
+
+namespace audio_tools {
+
+/**
+ * @brief Empty Mutex implementation which does nothing
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class MutexBase {
+public:
+  virtual void lock() {}
+  virtual void unlock() {}
+};
+
+#ifdef USE_STD_CONCURRENCY
+
+/**
+ * @brief Mutex implemntation based on std::mutex
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class StdMutex : public MutexBase {
+public:
+  void lock() override { std_mutex.lock(); }
+  void unlock() override { std_mutex.unlock(); }
+
+protected:
+  std::mutex std_mutex;
+};
+
+#endif
+
+#ifdef ESP32
+
+/**
+ * @brief Mutex implemntation using FreeRTOS
+ * @author Phil Schatzmann
+ * @copyright GPLv3 *
+ */
+class Mutex : public MutexBase {
+public:
+  Mutex() {
+    TRACED();
+    xSemaphore = xSemaphoreCreateBinary();
+    xSemaphoreGive(xSemaphore);
+  }
+  ~Mutex() {
+    TRACED();
+    vSemaphoreDelete(xSemaphore);
+  }
+  void lock() override {
+    TRACED();
+    xSemaphoreTake(xSemaphore, portMAX_DELAY);
+  }
+  void unlock() override {
+    TRACED();
+    xSemaphoreGive(xSemaphore);
+  }
+
+protected:
+  SemaphoreHandle_t xSemaphore = NULL;
+};
+
+#elif defined(ARDUINO_ARCH_RP2040)
+/**
+ * @brief Mutex implemntation using RP2040 API
+ * @author Phil Schatzmann
+ * @copyright GPLv3 *
+ */
+class Mutex : public MutexBase {
+public:
+  Mutex() {
+    TRACED();
+    mutex_init(&mtx)
+  }
+  ~Mutex() { TRACED(); }
+  void lock() override {
+    TRACED();
+    mutex_enter_blocking(&mtx)
+  }
+  void unlock() override {
+    TRACED();
+    mutex_exit(&mtx));
+  }
+
+protected:
+  mutex_t mtx
+};
+
+#else
+
+using Mutex = MutexBase;
+
+#endif
+
+/**
+ * @brief RAII implementaion using a Mutex: Only a few microcontrollers provide
+ * lock guards, so I decided to roll my own solution where we can just use a
+ * dummy Mutex implementation that does nothing for the cases where this is not
+ * needed.
+ * @author Phil Schatzmann
+ * @copyright GPLv3 *
+ */
+class LockGuard {
+public:
+  LockGuard(Mutex &mutex) {
+    TRACED();
+    p_mutex = &mutex;
+    p_mutex->lock();
+  }
+  LockGuard(Mutex *mutex) {
+    TRACED();
+    p_mutex = mutex;
+    p_mutex->lock();
+  }
+  ~LockGuard() {
+    TRACED();
+    p_mutex->unlock();
+  }
+
+protected:
+  Mutex *p_mutex = nullptr;
+};
+
+/**
+ * @brief Wrapper class that can turn any Buffer into a thread save
+ * implementation.
+ * @author Phil Schatzmann
+ * @copyright GPLv3 *
+ * @tparam T
+ */
+template <typename T> class SynchronizedBuffer : public BaseBuffer<T> {
+public:
+  SynchronizedBuffer(BaseBuffer<T> &buffer, Mutex &mutex) {
+    p_buffer = &buffer;
+    p_mutex = &mutex;
+  }
+
+  // reads a single value
+  T read() override {
+    TRACED();
+    LockGuard guard(p_mutex);
+    return p_buffer->read();
+  }
+
+  // reads multiple values
+  int readArray(T data[], int len) {
+    TRACED();
+    LockGuard guard(p_mutex);
+    int lenResult = MIN(len, available());
+    for (int j = 0; j < lenResult; j++) {
+      data[j] = p_buffer->read();
+    }
+    return lenResult;
+  }
+
+  int writeArray(const T data[], int len) {
+    LOGD("%s: %d", LOG_METHOD, len);
+    LockGuard guard(p_mutex);
+    int result = 0;
+    for (int j = 0; j < len; j++) {
+      if (p_buffer->write(data[j]) == 0) {
+        break;
+      }
+      result = j + 1;
+    }
+    return result;
+  }
+
+  // peeks the actual entry from the buffer
+  T peek() override {
+    TRACED();
+    LockGuard guard(p_mutex);
+    return p_buffer->peek();
+  }
+
+  // checks if the buffer is full
+  bool isFull() override { return p_buffer->isFull(); }
+
+  bool isEmpty() { return available() == 0; }
+
+  // write add an entry to the buffer
+  bool write(T data) override {
+    TRACED();
+    LockGuard guard(p_mutex);
+    return p_buffer->write(data);
+  }
+
+  // clears the buffer
+  void reset() override {
+    TRACED();
+    LockGuard guard(p_mutex);
+    p_buffer->reset();
+  }
+
+  // provides the number of entries that are available to read
+  int available() override {
+    TRACED();
+    return p_buffer->available();
+  }
+
+  // provides the number of entries that are available to write
+  int availableForWrite() override {
+    TRACED();
+    LockGuard guard(p_mutex);
+    return p_buffer->availableForWrite();
+  }
+
+  // returns the address of the start of the physical read buffer
+  T *address() override {
+    TRACED();
+    return p_buffer->address();
+  }
+
+protected:
+  BaseBuffer<T> *p_buffer = nullptr;
+  Mutex *p_mutex = nullptr;
+};
+
+#ifdef ESP32
+
+/**
+ * @brief Buffer implementation which is using a FreeRTOS StreamBuffer
+ * @author Phil Schatzmann
+ * @copyright GPLv3 *
+ * @tparam T
+ */
+template <typename T> class SynchronizedBufferRTOS : public BaseBuffer<T> {
+public:
+  SynchronizedBufferRTOS(size_t xStreamBufferSizeBytes, size_t xTriggerLevel)
+      : BaseBuffer<T>() {
+    xStreamBuffer = xStreamBufferCreate(xStreamBufferSizeBytes, xTriggerLevel);
+  }
+  ~SynchronizedBufferRTOS() { vStreamBufferDelete(xStreamBuffer); }
+
+  // reads a single value
+  T read() override {
+    T data = 0;
+    readArray(&data, sizeof(T));
+    return data;
+  }
+
+  // reads multiple values
+  int readArray(T data[], int len) {
+    return xStreamBufferReceive(xStreamBuffer, (void *)data, sizeof(T) * len,
+                                portMAX_DELAY);
+  }
+
+  int writeArray(const T data[], int len) {
+    LOGD("%s: %d", LOG_METHOD, len);
+    return xStreamBufferSend(xStreamBuffer, (void *)data, sizeof(T) * len,
+                             portMAX_DELAY);
+  }
+
+  // peeks the actual entry from the buffer
+  T peek() override {
+    LOGE("peek not implmented");
+    return 0;
+  }
+
+  // checks if the buffer is full
+  bool isFull() override {
+    return xStreamBufferIsFull(xStreamBuffer) == pdTRUE;
+  }
+
+  bool isEmpty() { return xStreamBufferIsEmpty(xStreamBuffer) == pdTRUE; }
+
+  // write add an entry to the buffer
+  bool write(T data) override {
+    int len = sizeof(T);
+    return writeArray(&data, len) == len;
+  }
+
+  // clears the buffer
+  void reset() override { xStreamBufferReset(xStreamBuffer); }
+
+  // provides the number of entries that are available to read
+  int available() override {
+    return xStreamBufferBytesAvailable(xStreamBuffer);
+  }
+
+  // provides the number of entries that are available to write
+  int availableForWrite() override {
+    return xStreamBufferSpacesAvailable(xStreamBuffer);
+  }
+
+  // returns the address of the start of the physical read buffer
+  T *address() override {
+    LOGE("address() not implemented");
+    return nullptr;
+  }
+
+protected:
+  StreamBufferHandle_t xStreamBuffer;
+};
+
+#endif
+
+} // namespace audio_tools
