@@ -128,8 +128,6 @@ Dependent on the example you might need to install some of the following librari
 - [Many Codec Libraries](https://github.com/pschatzmann/arduino-audio-tools/wiki/Encoding-and-Decoding-of-Audio) which are described in the Wiki
 - [ESP32-A2DP Library](https://github.com/pschatzmann/ESP32-A2DP) to support A2DP Bluetooth Audio
 - [arduino-midi](https://github.com/pschatzmann/arduino-midi) A simple __MIDI__ message parser and generator
-- [TinyHttp](https://github.com/pschatzmann/TinyHttp) a http server that also supports audio for multiple users
-- [Tensorflow Lite](https://github.com/pschatzmann/tflite-micro-arduino-examples) Machine Learning for Arduino 
 - Audio Boards
   - [arduino-audiokit](https://github.com/pschatzmann/arduino-audiokit) Support for the __ESP32 AudioKit__ and decoder chips (ES8388, A1S, etc) 
   - [arduino-vs1053](https://github.com/pschatzmann/arduino-vs1053) Support for __VS1053 audio modules__
@@ -149,8 +147,12 @@ Dependent on the example you might need to install some of the following librari
   - [flite](https://github.com/pschatzmann/arduino-flite) A Text to Speech Engine
   - [simple-tts](https://github.com/pschatzmann/arduino-simple-tts) A Simple TTS engine using prerecorded audio (e.g. to implement Talking Clock, Talking Numbers)
   - [espeak-ng](https://github.com/pschatzmann/arduino-espeak-ng) eSpeak NG is an open source speech synthesizer that supports more than hundred languages.
-- SD
+- Infrastructure
   - [SdFat Library](https://github.com/greiman/SdFat) to read and write files supporting SD cards with FAT16/FAT32 and exFAT
+  - [freertos-addons](https://github.com/pschatzmann/arduino-freertos-addons) elegant C++ API for FreeRTOS
+  - [TinyHttp](https://github.com/pschatzmann/TinyHttp) a http server that also supports audio for multiple users
+- Machine Learning
+  - [Tensorflow Lite](https://github.com/pschatzmann/tflite-micro-arduino-examples) Machine Learning for Arduino 
 
 Please note that this list does not show the supported libraries that are already part of the Arduino implementation: e.g. SD Library, Cmsis, Espressif DSP Library etc.
 
