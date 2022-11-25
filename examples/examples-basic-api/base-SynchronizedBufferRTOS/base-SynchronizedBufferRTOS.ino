@@ -10,11 +10,11 @@
  */
 #include "AudioTools.h"
 #include "AudioLibs/SynchronizedBuffer.h"
-#include "freertos-all.h"
+#include "freertos-all.h" // https://github.com/pschatzmann/arduino-freertos-addons
 
 SynchronizedBufferRTOS<int16_t> buffer(nbuffer, mutex);
 void doWrite(); // forward declaration 
-Task writeTask("write",5000,10, doWrite);
+Task writeTask("write",5000,10, doWrite);  // FreeRTOS task from addons
 
 // create data and write it to buffer
 void doWrite() {
