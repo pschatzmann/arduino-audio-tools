@@ -98,13 +98,13 @@ Inheritance diagram for audio_tools::Delay:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aab59f3339cf05f9c2b14690e5635f1dc"><td class="memItemLeft" align="right" valign="top"><a id="aab59f3339cf05f9c2b14690e5635f1dc" name="aab59f3339cf05f9c2b14690e5635f1dc"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Delay</b> (const <a class="el" href="classaudio__tools_1_1_delay.html">Delay</a> &amp;ref)</td></tr>
-<tr class="separator:aab59f3339cf05f9c2b14690e5635f1dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe0d985587f9670168d9f97ff54e7667"><td class="memItemLeft" align="right" valign="top"><a id="abe0d985587f9670168d9f97ff54e7667" name="abe0d985587f9670168d9f97ff54e7667"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Delay</b> (uint16_t duration_ms=1000, float depthPercent=0.3, float feedbackAmount=0.3, uint32_t sampleRate=44100)</td></tr>
-<tr class="memdesc:abe0d985587f9670168d9f97ff54e7667"><td class="mdescLeft">&#160;</td><td class="mdescRight">e.g. depthPercent=50, ms=1000, sampleRate=44100 <br /></td></tr>
-<tr class="separator:abe0d985587f9670168d9f97ff54e7667"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bc684e84a3655f226270bff5196d341"><td class="memItemLeft" align="right" valign="top"><a id="a8bc684e84a3655f226270bff5196d341" name="a8bc684e84a3655f226270bff5196d341"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Delay</b> (const <a class="el" href="classaudio__tools_1_1_delay.html">Delay</a> &amp;copy)</td></tr>
+<tr class="separator:a8bc684e84a3655f226270bff5196d341"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a324f5503d566f9bb393f4bcd4c30e567"><td class="memItemLeft" align="right" valign="top"><a id="a324f5503d566f9bb393f4bcd4c30e567" name="a324f5503d566f9bb393f4bcd4c30e567"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Delay</b> (uint16_t duration_ms=1000, float depth=0.5, float feedbackAmount=1.0, uint32_t sampleRate=44100, bool zeroIfBufferEmpty=false)</td></tr>
+<tr class="memdesc:a324f5503d566f9bb393f4bcd4c30e567"><td class="mdescLeft">&#160;</td><td class="mdescRight">e.g. depth=0.5, ms=1000, sampleRate=44100 <br /></td></tr>
+<tr class="separator:a324f5503d566f9bb393f4bcd4c30e567"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b0b00ce7b5ec5e5dda23c2bc6f5b882"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_delay.html">Delay</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_delay.html#a4b0b00ce7b5ec5e5dda23c2bc6f5b882">clone</a> ()</td></tr>
 <tr class="separator:a4b0b00ce7b5ec5e5dda23c2bc6f5b882"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0892b8b65fc8bccf41cc4a29cd621bf"><td class="memItemLeft" align="right" valign="top"><a id="ae0892b8b65fc8bccf41cc4a29cd621bf" name="ae0892b8b65fc8bccf41cc4a29cd621bf"></a>
@@ -122,18 +122,18 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>getSampleRate</b> ()
 <tr class="memitem:a804d16dd25ee9c15b61cebf2fae31823"><td class="memItemLeft" align="right" valign="top">effect_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_delay.html#a804d16dd25ee9c15b61cebf2fae31823">process</a> (effect_t input)</td></tr>
 <tr class="memdesc:a804d16dd25ee9c15b61cebf2fae31823"><td class="mdescLeft">&#160;</td><td class="mdescRight">calculates the effect output from the input  <a href="classaudio__tools_1_1_delay.html#a804d16dd25ee9c15b61cebf2fae31823">More...</a><br /></td></tr>
 <tr class="separator:a804d16dd25ee9c15b61cebf2fae31823"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3b36bed23aefc697f74b4bf20e1074b"><td class="memItemLeft" align="right" valign="top"><a id="aa3b36bed23aefc697f74b4bf20e1074b" name="aa3b36bed23aefc697f74b4bf20e1074b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setDepth</b> (float p)</td></tr>
-<tr class="separator:aa3b36bed23aefc697f74b4bf20e1074b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa1372f454eba67f91cd0d11ba0593cc3"><td class="memItemLeft" align="right" valign="top"><a id="aa1372f454eba67f91cd0d11ba0593cc3" name="aa1372f454eba67f91cd0d11ba0593cc3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setDuration</b> (int16_t m)</td></tr>
-<tr class="separator:aa1372f454eba67f91cd0d11ba0593cc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa0ad0380ee04bbc1a872dd16bed614a6"><td class="memItemLeft" align="right" valign="top"><a id="aa0ad0380ee04bbc1a872dd16bed614a6" name="aa0ad0380ee04bbc1a872dd16bed614a6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setFeedback</b> (float f)</td></tr>
-<tr class="separator:aa0ad0380ee04bbc1a872dd16bed614a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acefe1a89d76da1f6cc63aad4e4d32122"><td class="memItemLeft" align="right" valign="top"><a id="acefe1a89d76da1f6cc63aad4e4d32122" name="acefe1a89d76da1f6cc63aad4e4d32122"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setSampleRate</b> (int32_t s)</td></tr>
-<tr class="separator:acefe1a89d76da1f6cc63aad4e4d32122"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ed060dd431d32653631aa9d7bb87549"><td class="memItemLeft" align="right" valign="top"><a id="a6ed060dd431d32653631aa9d7bb87549" name="a6ed060dd431d32653631aa9d7bb87549"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setDepth</b> (float value)</td></tr>
+<tr class="separator:a6ed060dd431d32653631aa9d7bb87549"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e48555fcc0e792b7a2973626517c268"><td class="memItemLeft" align="right" valign="top"><a id="a1e48555fcc0e792b7a2973626517c268" name="a1e48555fcc0e792b7a2973626517c268"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setDuration</b> (int16_t dur)</td></tr>
+<tr class="separator:a1e48555fcc0e792b7a2973626517c268"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad86a177303774cbbbc2300691ebdba9a"><td class="memItemLeft" align="right" valign="top"><a id="ad86a177303774cbbbc2300691ebdba9a" name="ad86a177303774cbbbc2300691ebdba9a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setFeedback</b> (float feed)</td></tr>
+<tr class="separator:ad86a177303774cbbbc2300691ebdba9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af729e18e24940f2d8785be70ea234c99"><td class="memItemLeft" align="right" valign="top"><a id="af729e18e24940f2d8785be70ea234c99" name="af729e18e24940f2d8785be70ea234c99"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setSampleRate</b> (int32_t sample)</td></tr>
+<tr class="separator:af729e18e24940f2d8785be70ea234c99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classaudio__tools_1_1_audio_effect"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classaudio__tools_1_1_audio_effect')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classaudio__tools_1_1_audio_effect.html">audio_tools::AudioEffect</a></td></tr>
 <tr class="memitem:ab01def7ad32249fbebcdd00da9a54cc6 inherit pub_methods_classaudio__tools_1_1_audio_effect"><td class="memItemLeft" align="right" valign="top"><a id="ab01def7ad32249fbebcdd00da9a54cc6" name="ab01def7ad32249fbebcdd00da9a54cc6"></a>
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>active</b> ()</td></tr>
@@ -174,15 +174,27 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>copyParent</b> (<a cl
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a0f8eeca4a860c4368a9a0578ad197371"><td class="memItemLeft" align="right" valign="top"><a id="a0f8eeca4a860c4368a9a0578ad197371" name="a0f8eeca4a860c4368a9a0578ad197371"></a>
-<a class="el" href="classaudio__tools_1_1_delay_line.html">DelayLine</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>delayLine</b></td></tr>
-<tr class="separator:a0f8eeca4a860c4368a9a0578ad197371"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a039565aabf046da0fd33132566814de6"><td class="memItemLeft" align="right" valign="top"><a id="a039565aabf046da0fd33132566814de6" name="a039565aabf046da0fd33132566814de6"></a>
-<a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; effect_t &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>p_history</b> =nullptr</td></tr>
-<tr class="separator:a039565aabf046da0fd33132566814de6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a113fb7cae6f0622cc87c11b9228e8972"><td class="memItemLeft" align="right" valign="top"><a id="a113fb7cae6f0622cc87c11b9228e8972" name="a113fb7cae6f0622cc87c11b9228e8972"></a>
-uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>sampleCount</b> =0</td></tr>
-<tr class="separator:a113fb7cae6f0622cc87c11b9228e8972"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8b9c30ff7c6ffd432a50b8aa8790e9a"><td class="memItemLeft" align="right" valign="top"><a id="ac8b9c30ff7c6ffd432a50b8aa8790e9a" name="ac8b9c30ff7c6ffd432a50b8aa8790e9a"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>depth</b> =0</td></tr>
+<tr class="separator:ac8b9c30ff7c6ffd432a50b8aa8790e9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57b9eb95cbe1f67098a059d60d5002e4"><td class="memItemLeft" align="right" valign="top"><a id="a57b9eb95cbe1f67098a059d60d5002e4" name="a57b9eb95cbe1f67098a059d60d5002e4"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>duration</b> =0</td></tr>
+<tr class="separator:a57b9eb95cbe1f67098a059d60d5002e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2ac5a1183648d25ea90b9c01f0380ea"><td class="memItemLeft" align="right" valign="top"><a id="ac2ac5a1183648d25ea90b9c01f0380ea" name="ac2ac5a1183648d25ea90b9c01f0380ea"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>feedback</b> =0</td></tr>
+<tr class="separator:ac2ac5a1183648d25ea90b9c01f0380ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e3b8754a502b1bf60299b1a467f7f58"><td class="memItemLeft" align="right" valign="top"><a id="a3e3b8754a502b1bf60299b1a467f7f58" name="a3e3b8754a502b1bf60299b1a467f7f58"></a>
+<a class="el" href="classaudio__tools_1_1_ring_buffer.html">RingBuffer</a>&lt; effect_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>history</b> {0}</td></tr>
+<tr class="separator:a3e3b8754a502b1bf60299b1a467f7f58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c11b6bcce7b7eba79416414f3ae9f22"><td class="memItemLeft" align="right" valign="top"><a id="a9c11b6bcce7b7eba79416414f3ae9f22" name="a9c11b6bcce7b7eba79416414f3ae9f22"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>sample_count</b> =0</td></tr>
+<tr class="separator:a9c11b6bcce7b7eba79416414f3ae9f22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0f8b98661e4d0876bd224e3a951aee8"><td class="memItemLeft" align="right" valign="top"><a id="ad0f8b98661e4d0876bd224e3a951aee8" name="ad0f8b98661e4d0876bd224e3a951aee8"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>sampleRate</b> =0</td></tr>
+<tr class="separator:ad0f8b98661e4d0876bd224e3a951aee8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37880e322ab7d4a4be6a19af099ca653"><td class="memItemLeft" align="right" valign="top"><a id="a37880e322ab7d4a4be6a19af099ca653" name="a37880e322ab7d4a4be6a19af099ca653"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>zeroIfBufferEmpty</b></td></tr>
+<tr class="separator:a37880e322ab7d4a4be6a19af099ca653"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classaudio__tools_1_1_audio_effect"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classaudio__tools_1_1_audio_effect')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classaudio__tools_1_1_audio_effect.html">audio_tools::AudioEffect</a></td></tr>
 <tr class="memitem:a5baa4e28b5634fa5c6a00198b62562ec inherit pro_attribs_classaudio__tools_1_1_audio_effect"><td class="memItemLeft" align="right" valign="top"><a id="a5baa4e28b5634fa5c6a00198b62562ec" name="a5baa4e28b5634fa5c6a00198b62562ec"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>active_flag</b> = true</td></tr>

@@ -25,5 +25,7 @@ var searchData=
   ['multiconverter_22',['MultiConverter',['../classaudio__tools_1_1_multi_converter.html',1,'audio_tools']]],
   ['multioutput_23',['MultiOutput',['../classaudio__tools_1_1_multi_output.html',1,'audio_tools']]],
   ['multitarget_24',['MultiTarget',['../struct_stream_1_1_multi_target.html',1,'Stream']]],
-  ['musicalnotes_25',['MusicalNotes',['../classaudio__tools_1_1_musical_notes.html',1,'audio_tools']]]
+  ['musicalnotes_25',['MusicalNotes',['../classaudio__tools_1_1_musical_notes.html',1,'audio_tools']]],
+  ['mutex_26',['Mutex',['../classaudio__tools_1_1_mutex.html',1,'audio_tools']]],
+  ['mutexbase_27',['MutexBase',['../classaudio__tools_1_1_mutex_base.html',1,'audio_tools']]]
 ];

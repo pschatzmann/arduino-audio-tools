@@ -13,8 +13,9 @@ var searchData=
   ['list_3c_20string_20_3e_10',['List&lt; String &gt;',['../classaudio__tools_1_1_list.html',1,'audio_tools']]],
   ['listdir_11',['listDir',['../classaudio__tools_1_1_s_d_direct.html#a9f73f2bab66074637498237fe9a6a169',1,'audio_tools::SDDirect::listDir()'],['../classaudio__tools_1_1_s_d_index.html#a1f3034591c64dfee519238f3c0103b00',1,'audio_tools::SDIndex::listDir()']]],
   ['lock_12',['Lock',['../classaudio__tools_1_1_lock.html',1,'audio_tools']]],
-  ['logarithmicvolumecontrol_13',['LogarithmicVolumeControl',['../classaudio__tools_1_1_logarithmic_volume_control.html',1,'audio_tools']]],
-  ['loglevel_14',['LogLevel',['../classaudio__tools_1_1_audio_logger.html#a514bd8ffbf484d01cb439a4c82c305e0',1,'audio_tools::AudioLogger']]],
-  ['lsb_5fdepth_15',['lsb_depth',['../structaudio__tools_1_1_opus_encoder_settings.html#ad55336ac70280ecdeffd4c3f18257a55',1,'audio_tools::OpusEncoderSettings']]],
-  ['ltrim_16',['ltrim',['../classaudio__tools_1_1_str.html#a62557a335fc87964c69714e0247c4abc',1,'audio_tools::Str']]]
+  ['lockguard_13',['LockGuard',['../classaudio__tools_1_1_lock_guard.html',1,'audio_tools']]],
+  ['logarithmicvolumecontrol_14',['LogarithmicVolumeControl',['../classaudio__tools_1_1_logarithmic_volume_control.html',1,'audio_tools']]],
+  ['loglevel_15',['LogLevel',['../classaudio__tools_1_1_audio_logger.html#a514bd8ffbf484d01cb439a4c82c305e0',1,'audio_tools::AudioLogger']]],
+  ['lsb_5fdepth_16',['lsb_depth',['../structaudio__tools_1_1_opus_encoder_settings.html#ad55336ac70280ecdeffd4c3f18257a55',1,'audio_tools::OpusEncoderSettings']]],
+  ['ltrim_17',['ltrim',['../classaudio__tools_1_1_str.html#a62557a335fc87964c69714e0247c4abc',1,'audio_tools::Str']]]
 ];
