@@ -470,7 +470,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #endif
 
 #if USE_INLINE_VARS && !defined(INGNORE_INLINE_VARS)
-#  define INLINE_VAR inline
+#  define INLINE_VAR inline 
 #else
-#  define INLINE_VAR 
+#  define INLINE_VAR static inline
 #endif
