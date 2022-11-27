@@ -4,7 +4,6 @@
 #include "AudioTools/AudioPrint.h"
 #include "AudioTools/AudioStreams.h"
 #include "AudioTools/AudioTypes.h"
-#include "Stream.h"
 
 namespace audio_tools {
 

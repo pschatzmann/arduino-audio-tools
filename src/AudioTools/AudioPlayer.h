@@ -188,7 +188,7 @@ namespace audio_tools {
         } 
 
         /// Updates the audio info in the related objects
-        virtual void setAudioInfo(AudioBaseInfo info) {
+        virtual void setAudioInfo(AudioBaseInfo info) override {
             TRACED();
             LOGI("sample_rate: %d", info.sample_rate);
             LOGI("bits_per_sample: %d", info.bits_per_sample);

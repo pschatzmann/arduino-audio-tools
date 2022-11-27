@@ -1,9 +1,13 @@
 #pragma once
+
+#include "AudioConfig.h"
+
 /**
  * @brief Public generic methods 
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
+
 
 
 /// stops any further processing by spinning in an endless loop

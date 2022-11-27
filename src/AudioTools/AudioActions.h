@@ -1,5 +1,4 @@
 #pragma once
-#include "Arduino.h"
 #include "AudioTools/AudioLogger.h"
 
 #ifndef ACTIONS_MAX

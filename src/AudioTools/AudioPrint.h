@@ -1,5 +1,4 @@
 #pragma once
-#include "Arduino.h"
 #include "AudioConfig.h"
 #include "AudioTools/AudioTypes.h"
 #include "AudioTools/Converter.h"
@@ -18,6 +17,7 @@ namespace audio_tools {
  */
 class AudioPrint : public Print, public AudioBaseInfoDependent, public AudioBaseInfoSource {
     public:
+        virtual ~AudioPrint() = default;
         virtual size_t write(const uint8_t *buffer, size_t size) override = 0;
 
         virtual size_t write(uint8_t ch) override {
@@ -28,11 +28,11 @@ class AudioPrint : public Print, public AudioBaseInfoDependent, public AudioBase
             return 1;
         }
 
-        virtual int availableForWrite() {
+        virtual int availableForWrite() override {
             return DEFAULT_BUFFER_SIZE;
         }
 
-        void flush()  {
+        void flush() override  {
             write((const uint8_t*)tmp, tmpPos-1);
             tmpPos=0;
         }
@@ -311,7 +311,7 @@ class MultiOutput : public AudioPrint {
             add(out2);
         }
 
-        ~MultiOutput() {
+        virtual ~MultiOutput() {
             for (int j=0;j<vector.size();j++){
                 if (vector[j]->doRelease()){
                     delete vector[j];

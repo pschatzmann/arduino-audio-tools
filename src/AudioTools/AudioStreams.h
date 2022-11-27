@@ -1,5 +1,4 @@
 #pragma once
-#include "Arduino.h"
 #include "AudioConfig.h"
 #include "AudioTools/AudioTypes.h"
 #include "AudioTools/Buffers.h"
@@ -40,7 +39,7 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
   virtual void end(){}
   
   // Call from subclass or overwrite to do something useful
-  virtual void setAudioInfo(AudioBaseInfo info) {
+  virtual void setAudioInfo(AudioBaseInfo info) override {
       TRACED();
       this->info = info;
       info.logInfo();
@@ -49,7 +48,7 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
       }
   }
 
-  virtual void  setNotifyAudioChange(AudioBaseInfoDependent &bi) {
+  virtual void  setNotifyAudioChange(AudioBaseInfoDependent &bi) override {
       p_notify = &bi;
   }
 
@@ -57,9 +56,9 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
     return readBytes((uint8_t *)buffer, length);
   }
 
-  virtual size_t readBytes(uint8_t *buffer, size_t length) = 0;
+  virtual size_t readBytes(uint8_t *buffer, size_t length) override = 0;
 
-  virtual size_t write(const uint8_t *buffer, size_t size) = 0;
+  virtual size_t write(const uint8_t *buffer, size_t size) override = 0;
 
   operator bool() { return available() > 0; }
 
@@ -69,7 +68,7 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
 
   virtual int availableForWrite() override { return DEFAULT_BUFFER_SIZE; }
 
-  virtual void flush() {}
+  virtual void flush() override {}
 
  protected:
   AudioBaseInfoDependent *p_notify=nullptr;
@@ -89,6 +88,9 @@ class AudioStreamX : public AudioStream {
  public:
   AudioStreamX() = default;
   virtual ~AudioStreamX() = default;
+  AudioStreamX(AudioStreamX const&) = delete;
+  AudioStreamX& operator=(AudioStreamX const&) = delete;
+
   virtual size_t readBytes(uint8_t *buffer, size_t length) override { return not_supported(0); }
   virtual size_t write(const uint8_t *buffer, size_t size) override{ return not_supported(0); }
   virtual size_t write(uint8_t) override { return not_supported(0); }

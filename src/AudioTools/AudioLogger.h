@@ -1,8 +1,9 @@
 #pragma once
 
 #include "AudioConfig.h"
-#include "Stream.h"
-
+#ifdef ARDUINO
+#  include "Stream.h"
+#endif
 // Logging Implementation
 #if USE_AUDIO_LOGGING
 

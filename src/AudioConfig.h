@@ -5,7 +5,11 @@
  * 
  */
 #pragma once
-#include "Arduino.h"
+#ifdef ARDUINO
+#  include "Arduino.h"
+#else
+#  include "AudioLibs/NoArduino.h"
+#endif
 #include <string.h>
 #include <stdint.h>
 #include <assert.h>

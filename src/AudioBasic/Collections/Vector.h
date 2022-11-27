@@ -1,6 +1,6 @@
 #pragma once
 #ifdef USE_INITIALIZER_LIST
-#include "InitializerList.h" 
+#  include "InitializerList.h" 
 #endif
 namespace audio_tools {
 
@@ -142,7 +142,7 @@ class Vector {
     }
 
     /// Destructor
-    inline  ~Vector() {
+    virtual  ~Vector() {
       clear();
       shrink_to_fit();
       delete [] this->p_data;

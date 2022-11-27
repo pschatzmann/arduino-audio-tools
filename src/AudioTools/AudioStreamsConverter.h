@@ -19,6 +19,8 @@ class ChannelFormatConverterStreamT : public AudioStreamX {
         ChannelFormatConverterStreamT(Print &print){
           p_print = &print;
         }
+        ChannelFormatConverterStreamT(ChannelFormatConverterStreamT const&) = delete;
+        ChannelFormatConverterStreamT& operator=(ChannelFormatConverterStreamT const&) = delete;
 
         bool begin(int fromChannels, int toChannels){
           from_channels = fromChannels;
@@ -106,9 +108,8 @@ class ChannelFormatConverterStream : public AudioStreamX {
         ChannelFormatConverterStream(Print &print){
           setStream(print);
         }
-        ChannelFormatConverterStream(ChannelFormatConverterStream const&) = default;
-        ChannelFormatConverterStream& operator=(ChannelFormatConverterStream const&) = default;
-
+        ChannelFormatConverterStream(ChannelFormatConverterStream const&) = delete;
+        ChannelFormatConverterStream& operator=(ChannelFormatConverterStream const&) = delete;
 
         void setStream(Stream &stream){
           p_stream = &stream;

@@ -6,8 +6,9 @@
 #include "AudioHttp/HttpLineReader.h" 
 #include "AudioHttp/Url.h"
 #include "AudioHttp/HttpTypes.h" 
+#ifdef ARDUINO
 #include "Client.h"
-
+#endif
 namespace audio_tools {
 
 // Class Configuration
