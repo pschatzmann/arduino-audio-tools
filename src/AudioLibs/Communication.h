@@ -397,6 +397,13 @@ class UDPStream : public WiFiUDP {
   }
 
   /**
+   * Always return 1492 (MTU 1500 - 8 byte header) as UDP packet available to write
+   */
+  int availableForWrite() {
+    return 1492;
+  }
+
+  /**
    * Provides the available size of the current package and if this is used up
    * of the next package
    */
