@@ -355,7 +355,7 @@ class Delay : public AudioEffect  {
 
             // mix input with result
             int32_t result = (depth * delayValueWithFeedback) + ((1.0f - depth)* input);
-            LOGD("(sample_count: %d)- input: %d - delayValueWithFeedback: %d -> result %d", sample_count, input, delayValueWithFeedback, result);
+            LOGD("(sample_count: %d)- input: %d - delayValueWithFeedback: %d -> result %d", (int)sample_count, (int)input, (int)delayValueWithFeedback, (int)result);
 
             return clip(result);
         }
@@ -375,7 +375,7 @@ class Delay : public AudioEffect  {
                 if (newSampleCount!=sample_count){
                     sample_count = newSampleCount;
                     history.resize(sample_count);
-                    LOGD("sample_count: ",sample_count);
+                    LOGD("sample_count: %d",(int)sample_count);
                 }
             }
         }

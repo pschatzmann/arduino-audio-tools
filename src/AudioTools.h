@@ -24,14 +24,14 @@
 #include "AudioTools/AudioPrint.h"
 #include "AudioTools/Resample.h"
 #include "AudioTools/AudioCopy.h"
-#include "AudioMetaData/MetaData.h"
 #include "AudioCodecs/AudioEncoded.h"
 #include "AudioCodecs/AudioCodecs.h"
-#include "AudioHttp/AudioHttp.h"
-#include "AudioTools/AudioPlayer.h"
 #include "AudioEffects/SoundGenerator.h"
 #include "AudioEffects/AudioEffects.h"
 #include "AudioEffects/PitchShift.h"
+#include "AudioMetaData/MetaData.h"
+#include "AudioHttp/AudioHttp.h"
+#include "AudioTools/AudioPlayer.h"
 
 /**
  * ------------------------------------------------------------------------- 

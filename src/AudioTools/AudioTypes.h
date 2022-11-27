@@ -1,8 +1,9 @@
 #pragma once
 
 #include "AudioConfig.h"
+#include "AudioTools/AudioLogger.h"
 #include "AudioBasic/Int24.h"
-#include "AudioBasic/Collections.h"
+#include "AudioBasic/Collections/Vector.h"
 
 namespace audio_tools {
 
@@ -35,7 +36,7 @@ struct AudioBaseInfo {
         return !(*this == alt);
     } 
     
-    void setAudioInfo(AudioBaseInfo info){
+    void setAudioInfo(AudioBaseInfo info)  {
       sample_rate = info.sample_rate;
       channels = info.channels;
       bits_per_sample = info.bits_per_sample;

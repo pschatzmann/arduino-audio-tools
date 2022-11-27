@@ -1,5 +1,7 @@
 #pragma once
-#include "InitializerList.h" 
+#ifdef USE_INITIALIZER_LIST
+#  include "InitializerList.h" 
+#endif
 #include <stddef.h>
 
 namespace audio_tools {

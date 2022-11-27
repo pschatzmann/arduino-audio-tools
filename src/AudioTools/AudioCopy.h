@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Arduino.h"
 #include "AudioConfig.h"
 #include "AudioTools/AudioTypes.h"
 #include "AudioTools/Buffers.h"
@@ -264,13 +263,13 @@ class StreamCopyT {
         /// Update the mime type
         void notifyMime(void* data, size_t len){
             if (len>4) {
-                const char *start = (const char *) data;
+                const uint8_t *start = (const uint8_t *) data;
                 actual_mime = "audio/basic";
                 if (start[0]==0xFF && start[1]==0xF1){
                     actual_mime = "audio/aac";
-                } else if (strncmp(start,"ID3",3) || start[0]==0xFF || start[0]==0xFE ){
+                } else if (memcmp(start,"ID3",3) || start[0]==0xFF || start[0]==0xFE ){
                     actual_mime = "audio/mpeg";
-                } else if (strncmp(start,"RIFF",4)){
+                } else if (memcmp(start,"RIFF",4)){
                     actual_mime = "audio/vnd.wave";
                 }
                 if (notifyMimeCallback!=nullptr){
