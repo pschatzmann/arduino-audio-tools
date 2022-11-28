@@ -152,6 +152,15 @@ class StreamCopyT {
             delay_on_no_data = delayMs;
         }
 
+        /// Copies pages * buffersize samples
+        size_t copyN(size_t pages){
+            size_t total=0;
+            for (size_t j=0;j<pages;j++){
+                total+=copy();
+            }
+            return total;
+        }
+
         /// copies all data - returns true if we copied anything
         size_t copyAll(int retryCount=5, int retryWaitMs=200){
             TRACED();
@@ -217,6 +226,12 @@ class StreamCopyT {
         /// Is Available for Write check activated ?
         bool isCheckAvailableForWrite() {
             return check_available_for_write;
+        }
+
+        /// resizes the copy buffer
+        void resize(int len){
+            buffer_size = len;
+            buffer.resize(buffer_size);
         }
 
     protected:
