@@ -17,6 +17,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
+#include <chrono>
 
 #define PSTR(fmt) fmt
 #define PI 3.14159265359f
@@ -29,7 +30,9 @@ namespace audio_tools {
 
 class Print {
 public:
-    virtual size_t write(uint8_t)=0;
+    virtual size_t write(uint8_t ch){
+		return write(&ch, 1);
+	}
 
     virtual size_t write(const char *str) {
       return write((const uint8_t *)str, strlen(str));
@@ -49,7 +52,7 @@ public:
 
     // default to zero, meaning "a single write may block"
     // should be overridden by subclasses with buffering
-    virtual int availableForWrite() { return 0; }
+    virtual int availableForWrite() { return 1024; }
 
 
     virtual int print(const char* msg){
@@ -95,7 +98,6 @@ public:
 	virtual void setTimeout(size_t t){}
 };
 
-
 class Client : public Stream {
 public:
 	void stop();
@@ -121,22 +123,37 @@ public:
         }
         return size;
     }
-
 };
 
 static HardwareSerial Serial;
 
 /// Waits for the indicated milliseconds
-void delay(uint64_t ms);
+void delay(uint64_t ms) {
+    //std::this_thread::sleep_for(std::chrono::milliseconds(ms));    
+}
 
 /// Returns the milliseconds since the start
-uint64_t millis();
+uint64_t millis(){
+    using namespace std::chrono;
+    // Get current time with precision of milliseconds
+    auto now = time_point_cast<milliseconds>(system_clock::now());
+    // sys_milliseconds is type time_point<system_clock, milliseconds>
+    using sys_milliseconds = decltype(now);
+    // Convert time_point to signed integral type
+    return now.time_since_epoch().count();
+}
 
 /// Maps input to output values
 inline long map(long x, long in_min, long in_max, long out_min, long out_max) {
   return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
+
+
 } // namespace
 
 using namespace audio_tools;
+
+
+
+

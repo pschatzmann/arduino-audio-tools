@@ -395,13 +395,13 @@ class WAVEncoder : public AudioEncoder {
         }        
 
         // Constructor providing the output stream
-        WAVEncoder(Stream &out){
+        WAVEncoder(Print &out){
             stream_ptr = &out;
             audioInfo = defaultConfig();
         }
 
         // Constructor providing the output stream and the WAVAudioInfo
-        WAVEncoder(Stream &out, WAVAudioInfo ai){
+        WAVEncoder(Print &out, WAVAudioInfo ai){
             stream_ptr = &out;
             setAudioInfo(ai);
         }
