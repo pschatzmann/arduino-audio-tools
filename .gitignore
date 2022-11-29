@@ -218,3 +218,6 @@ pip-log.txt
 # Doxygen
 .DS_Store
 /.vs
+
+# Jupyter
+.ipynb_checkpoints/
