@@ -147,6 +147,15 @@ public:
     for (int i = 0; i < sampleRate; i++)
       waveTable[i] = (sin(i * radPerSec) + 1) * .5f;
   }
+
+  void setNoise() {
+    is_noise = true;
+  }
+
+  bool isNoise() {
+    return is_noise;
+  }
+
   /**
    * sets wavetable to DC one
    */
@@ -303,32 +312,6 @@ protected:
     return interpOut;
   }
 
-/**
- * @brief SoundGenerator from ModulationBaseClass
- * 
- * @tparam T 
- */
- template <class T>
- class SoundGeneratorModulation : public SoundGenerator<T>{
-    public:
-      SoundGeneratorModulation(ModulationBaseClass &mod, int freq){
-        p_mod = &mod;
-        this->freq = freq;
-      }
-      bool begin(AudioBaseInfo info) override{
-          return SoundGenerator<T>::begin(info);
-          max_value = pow(2, info.bits_per_sample)/2-1;
-      }
-      virtual  T readSample() {
-        return max_value * p_mod->readTable(freq);
-      }
-      
-  protected:
-    ModulationBaseClass *p_mod=nullptr;
-    int freq;
-    float max_value=32767;
-};
-
   /**
    * get a cubic spline interpolated out from the wave table
    *
@@ -371,6 +354,34 @@ protected:
   static const int order = 4;
   static const int res = 100;
   effectsuite_t interpTable[order][res];// = {1};
+  bool is_noise = false;
+};
+
+/**
+ * @brief SoundGenerator using the ModulationBaseClass
+ * to generate the samples.
+ * 
+ * @tparam T 
+ */
+ template <class T>
+ class SoundGeneratorModulation : public SoundGenerator<T>{
+    public:
+      SoundGeneratorModulation(ModulationBaseClass &mod, int freq){
+        p_mod = &mod;
+        this->freq = freq;
+      }
+      bool begin(AudioBaseInfo info) override{
+          max_value = pow(2, info.bits_per_sample)/2-1;
+          return SoundGenerator<T>::begin(info);
+      }
+      virtual  T readSample() override {
+        return p_mod->isNoise() ? max_value * p_mod->readNoise() : max_value * p_mod->readTable(freq);
+      }
+      
+  protected:
+    ModulationBaseClass *p_mod=nullptr;
+    int freq;
+    float max_value=32767;
 };
 
 
@@ -1088,11 +1099,6 @@ public:
     return new SimpleChorus(*this);
   }
 
-  /// process 
-  virtual effect_t process(effect_t inputSample) override {
-    return active_flag ? 32767.0 * processDouble(static_cast<effectsuite_t>(inputSample)/32767.0) : inputSample;
-  }
-
 protected:
   /** swing range of delayed audio index in samples
    typical maximum swing would be 15 milliseconds
@@ -1157,7 +1163,7 @@ protected:
 class FilteredDelay : public DelayEffectBase, public FilterEffectBase {
 public:
   /** Constructor */
-  FilteredDelay(int delayInSamples) : DelayEffectBase(44100) {
+  FilteredDelay(int delayInSamples, int sample_rate=44100) : DelayEffectBase(sample_rate) {
     delayTimeSamples = delayInSamples;
     changeChebyICoefficients(.05, true, .1, 4);
   };
