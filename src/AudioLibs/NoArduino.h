@@ -31,7 +31,8 @@ namespace audio_tools {
 class Print {
 public:
     virtual size_t write(uint8_t ch){
-		return write(&ch, 1);
+		// not implememnted: to be overritten
+		return 0;
 	}
 
     virtual size_t write(const char *str) {
@@ -50,10 +51,7 @@ public:
       return write((const uint8_t *)buffer, size);
     }
 
-    // default to zero, meaning "a single write may block"
-    // should be overridden by subclasses with buffering
     virtual int availableForWrite() { return 1024; }
-
 
     virtual int print(const char* msg){
 		int result = strlen(msg);
@@ -86,7 +84,6 @@ public:
 	}
 
 	virtual void flush() { /* Empty implementation for backward compatibility */ }
-
 };
 
 class Stream : public Print {
@@ -97,7 +94,6 @@ public:
 	virtual int peek(){return -1;}
 	virtual void setTimeout(size_t t){}
 };
-
 class Client : public Stream {
 public:
 	void stop();
@@ -110,44 +106,24 @@ public:
 
 class HardwareSerial : public Stream {
 public:
+    size_t write(uint8_t ch) override;
 	virtual operator bool() {
         return true;
-    }
-    virtual size_t write(uint8_t ch) {
-        putchar(ch);
-        return 1;
-    }
-    virtual size_t write(const uint8_t *buffer, size_t size){
-        for (int j=0;j<size;j++){
-            write(buffer[j]);
-        }
-        return size;
     }
 };
 
 static HardwareSerial Serial;
 
 /// Waits for the indicated milliseconds
-void delay(uint64_t ms) {
-    //std::this_thread::sleep_for(std::chrono::milliseconds(ms));    
-}
+inline void delay(uint64_t ms);
 
 /// Returns the milliseconds since the start
-uint64_t millis(){
-    using namespace std::chrono;
-    // Get current time with precision of milliseconds
-    auto now = time_point_cast<milliseconds>(system_clock::now());
-    // sys_milliseconds is type time_point<system_clock, milliseconds>
-    using sys_milliseconds = decltype(now);
-    // Convert time_point to signed integral type
-    return now.time_since_epoch().count();
-}
+inline uint64_t millis();
 
 /// Maps input to output values
 inline long map(long x, long in_min, long in_max, long out_min, long out_max) {
   return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
-
 
 
 } // namespace
