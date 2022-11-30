@@ -115,10 +115,10 @@ public:
 static HardwareSerial Serial;
 
 /// Waits for the indicated milliseconds
-inline void delay(uint64_t ms);
+extern void delay(uint64_t ms);
 
 /// Returns the milliseconds since the start
-inline uint64_t millis();
+extern uint64_t millis();
 
 /// Maps input to output values
 inline long map(long x, long in_min, long in_max, long out_min, long out_max) {

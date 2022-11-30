@@ -59,7 +59,7 @@ class BitVector {
         vector.shrink_to_fit();
     }
 
-    size_t size() {
+    int size() {
         return max_idx;
     }
 
