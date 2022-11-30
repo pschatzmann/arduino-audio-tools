@@ -17,7 +17,8 @@ enum SeekMode { SeekSet = 0, SeekCur = 1, SeekEnd = 2 };
  */
 class File : public Stream {
   public:
-        
+    File() = default;
+    
     void open(const char* name, FileMode mode){
         file_path = name;
         switch(mode){
@@ -45,17 +46,17 @@ class File : public Stream {
         stream.close();
     }
     
-    virtual int print(const char* str){
+    virtual int print(const char* str)override{
         stream << str;
         return strlen(str);
     }
     
-    virtual int println(const char* str=""){
+    virtual int println(const char* str="")override{
         stream << str << "\n";
         return strlen(str)+1;
     }
     
-    virtual int print(int number){
+    virtual int print(int number)override{
         char buffer[80];
         int len = sprintf(buffer, "%d", number);
         print(buffer);
@@ -69,14 +70,10 @@ class File : public Stream {
         return len;
     }
     
-    virtual void flush() {
+    virtual void flush() override {
         stream.flush();
     }
     
-    virtual void write(const char* str, int len) {
-        stream.write(str, len);
-    }
-
     virtual void write(uint8_t* str, int len) {
         stream.write((const char*)str, len);
     }
@@ -86,20 +83,25 @@ class File : public Stream {
         return 1;
     }
     
-    virtual size_t write(uint8_t value){
+    virtual size_t write(uint8_t value)override{
         stream.put(value);    
         return 1;
     }
     
-    virtual int available() {
+    virtual int available() override{
         return stream.rdbuf()->in_avail();
     };
     
-    virtual int read() {
+    virtual int read() override{
         return stream.get();
     } 
-    
-    virtual int peek() {
+
+    virtual size_t readBytes(uint8_t* buffer, size_t len) override {
+         stream.read((char*)buffer, len);
+         return stream?len : stream.gcount();
+    } 
+
+    virtual int peek() override {
         return stream.peek();
     }
    

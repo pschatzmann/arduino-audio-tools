@@ -3,9 +3,6 @@
 #include "AudioBasic/Collections.h"
 #include "AudioEffects/SoundGenerator.h"
 #include "AudioEffects/AudioEffect.h"
-#ifdef  USE_EFFECTS_SUITE
-#include "AudioEffects/AudioEffectsSuite.h"
-#endif
 
 namespace audio_tools {
 

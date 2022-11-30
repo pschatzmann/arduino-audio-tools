@@ -51,7 +51,7 @@ class EffectSuiteBase  : public AudioEffect {
    * @returns an audio sample as a int16_t with effect applied
    */
   virtual effect_t process(effect_t inputSample) override {
-    return active_flag ? 32767.0 * processDouble(static_cast<effectsuite_t>(inputSample)/32767.0) : inputSample;
+    return active_flag ? 32767.0f * processDouble(static_cast<effectsuite_t>(inputSample)/32767.0f) : inputSample;
   }
 
 };
@@ -101,7 +101,7 @@ public:
    */
   void setTriangle() {
     std::fill(waveTable, waveTable + sampleRate, 0);
-    const effectsuite_t radPerSec = 2 * 3.1415926536 * timeStep;
+    const effectsuite_t radPerSec = 2 * 3.1415926536f * timeStep;
     for (int i = 0; i < sampleRate; i++) {
       for (int j = 0; j < 35; j += 1)
         waveTable[i] += pow(-1., j) *
@@ -114,7 +114,7 @@ public:
    */
   void setSquare() {
     std::fill(waveTable, waveTable + sampleRate, 0);
-    const effectsuite_t radPerSec = 2 * 3.1415926536 * timeStep;
+    const effectsuite_t radPerSec = 2 * 3.1415926536f * timeStep;
     for (int i = 0; i < sampleRate; i++) {
       for (int j = 0; j < 35; j += 1)
         waveTable[i] += (sin((2 * j + 1) * i * radPerSec)) / (2 * j + 1);
@@ -125,7 +125,7 @@ public:
    */
   void setSawtooth() {
     std::fill(waveTable, waveTable + sampleRate, 0);
-    const effectsuite_t radPerSec = 2 * 3.1415926536 * timeStep;
+    const effectsuite_t radPerSec = 2 * 3.1415926536f * timeStep;
     for (int i = 0; i < sampleRate; i++) {
       for (int j = 1; j < 11; j += 1)
         waveTable[i] += pow(-1, j) * sin(j * radPerSec * i) / effectsuite_t(j);
@@ -135,7 +135,7 @@ public:
    * sets wavetable to one period of a sine wave oscillating between -1 and 1
    */
   void setSine() {
-    const effectsuite_t radPerSec = 2 * 3.1415926536 * timeStep;
+    const effectsuite_t radPerSec = 2 * 3.1415926536f * timeStep;
     for (int i = 0; i < sampleRate; i++)
       waveTable[i] = sin(i * radPerSec);
   }
@@ -143,9 +143,9 @@ public:
    * sets wavetable to one period of a sine wave oscillating between 0 and 1
    */
   void setOffSine() {
-    const effectsuite_t radPerSec = 2 * 3.1415926536 * timeStep;
+    const effectsuite_t radPerSec = 2 * 3.1415926536f * timeStep;
     for (int i = 0; i < sampleRate; i++)
-      waveTable[i] = (sin(i * radPerSec) + 1) * .5;
+      waveTable[i] = (sin(i * radPerSec) + 1) * .5f;
   }
   /**
    * sets wavetable to DC one
@@ -274,6 +274,7 @@ protected:
    */
   bool allocateMemory() {
     waveTable = new effectsuite_t[sampleRate];
+    assert(waveTable!=nullptr);
     if (!waveTable) {
       return false;
     }
@@ -301,6 +302,32 @@ protected:
     }
     return interpOut;
   }
+
+/**
+ * @brief SoundGenerator from ModulationBaseClass
+ * 
+ * @tparam T 
+ */
+ template <class T>
+ class SoundGeneratorModulation : public SoundGenerator<T>{
+    public:
+      SoundGeneratorModulation(ModulationBaseClass &mod, int freq){
+        p_mod = &mod;
+        this->freq = freq;
+      }
+      bool begin(AudioBaseInfo info) override{
+          return SoundGenerator<T>::begin(info);
+          max_value = pow(2, info.bits_per_sample)/2-1;
+      }
+      virtual  T readSample() {
+        return max_value * p_mod->readTable(freq);
+      }
+      
+  protected:
+    ModulationBaseClass *p_mod=nullptr;
+    int freq;
+    float max_value=32767;
+};
 
   /**
    * get a cubic spline interpolated out from the wave table
@@ -345,6 +372,7 @@ protected:
   static const int res = 100;
   effectsuite_t interpTable[order][res];// = {1};
 };
+
 
 /**
  * @brief A Base class for delay based digital effects. Provides the basic methods
@@ -626,7 +654,7 @@ public:
 
   /// see applyFilter
   virtual effect_t process(effect_t inputSample) override {
-    return active_flag ? 32767.0 * applyFilter(static_cast<effectsuite_t>(inputSample)/32767.0) : inputSample;
+    return active_flag ? 32767.0 * processDouble(static_cast<effectsuite_t>(inputSample)/32767.0) : inputSample;
   }
 
   /**
@@ -996,7 +1024,7 @@ public:
    * Since the class inherits DelayEffectBase it must set a
    * delay buffer size when initialisi.
    */
-  SimpleChorus() : SimpleLPF(0.0001, 4) {}
+//  SimpleChorus() : SimpleLPF(0.0001, 4) {}
   SimpleChorus(int extSampleRate=44100) :
         DelayEffectBase(static_cast<int>(0.031 * extSampleRate)), 
         ModulationBaseClass(extSampleRate),
@@ -1016,7 +1044,7 @@ public:
    * @param inputSample input audio sample
    * @return processed audio sample
    */
-  virtual effectsuite_t processDouble(effectsuite_t inputSample) {
+  virtual effectsuite_t processDouble(effectsuite_t inputSample) override {
     delaySample(inputSample);
     const effectsuite_t waveDelay = getModSignal();
     const effectsuite_t delayAmount =
@@ -1056,8 +1084,13 @@ public:
    */
   void setBase(effectsuite_t baseAmount) { base = baseAmount * sampleRate; }
 
-  SimpleChorus* clone() {
+  SimpleChorus* clone() override {
     return new SimpleChorus(*this);
+  }
+
+  /// process 
+  virtual effect_t process(effect_t inputSample) override {
+    return active_flag ? 32767.0 * processDouble(static_cast<effectsuite_t>(inputSample)/32767.0) : inputSample;
   }
 
 protected:
@@ -1166,6 +1199,10 @@ public:
     return out;
   }
 
+  effect_t process(effect_t inputSample) override {
+    return active_flag ? 32767.0 * processDouble(static_cast<effectsuite_t>(inputSample)/32767.0) : inputSample;
+  }
+
   FilteredDelay *clone() override {
     return new FilteredDelay(*this);
   }
@@ -1270,6 +1307,10 @@ public:
       readHeadIndex = std::fmod(readHeadIndex, maxDelayBufferSize);
     }
     return outSample;
+  }
+
+  effect_t process(effect_t inputSample) override {
+    return active_flag ? 32767.0 * processDouble(static_cast<effectsuite_t>(inputSample)/32767.0) : inputSample;
   }
 
   /**
