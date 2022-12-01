@@ -268,7 +268,7 @@ class ChannelFormatConverterStream : public AudioStreamX {
  * @tparam TArg is the data type of the Stream or Print Object that is passed in the Constructor
  */
 
-template<typename T, typename TArg >
+template<typename TFrom, typename TTo >
 class NumberFormatConverterStreamT : public AudioStreamX {
   public:
         NumberFormatConverterStreamT() = default;
@@ -293,26 +293,27 @@ class NumberFormatConverterStreamT : public AudioStreamX {
         }
 
         virtual size_t write(const uint8_t *data, size_t size) override { 
-           size_t samples = size / sizeof(T);
+           size_t samples = size / sizeof(TFrom);
            size_t result_size = 0;
-           T *data_source = (T *)data;
+           TFrom *data_source = (TFrom *)data;
            
            for (size_t j=0;j<samples;j++){
-             TArg value = static_cast<float>(data_source[j]) * NumberConverter::maxValue(sizeof(TArg)*8) / NumberConverter::maxValue(sizeof(T)*8);
-             result_size += p_print->write((uint8_t*)&value, sizeof(TArg));
+             TTo value = static_cast<float>(data_source[j]) * NumberConverter::maxValue(sizeof(TTo)*8) / NumberConverter::maxValue(sizeof(TFrom)*8);
+             result_size += p_print->write((uint8_t*)&value, sizeof(TTo));
            }
-           return result_size;
+           //assert(result_size / sizeof(TTo) * sizeof(TFrom)==size);
+           return size;;
         }
 
         size_t readBytes(uint8_t *data, size_t size) override {
            if (p_stream==nullptr) return 0;
-           size_t samples = size / sizeof(T);
-           T *data_target = (T *)data;
-           TArg source;
+           size_t samples = size / sizeof(TTo);
+           TTo *data_target = (TTo *)data;
+           TFrom source;
            for (size_t j=0;j<samples;j++){
              source = 0;
-             p_stream->readBytes((uint8_t*)&source, sizeof(TArg));
-             data_target[j]= static_cast<float>(source) * NumberConverter::maxValue(sizeof(T)*8) / NumberConverter::maxValue(sizeof(TArg)*8);
+             p_stream->readBytes((uint8_t*)&source, sizeof(TFrom));
+             data_target[j]= static_cast<float>(source) * NumberConverter::maxValue(sizeof(TTo)*8) / NumberConverter::maxValue(sizeof(TFrom)*8);
            }
            return size;
         }

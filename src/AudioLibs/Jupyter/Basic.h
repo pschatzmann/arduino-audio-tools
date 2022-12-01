@@ -1,5 +1,6 @@
 #pragma once
 #include "AudioLibs/NoArduino.h"
+#include <iostream>
 
 namespace audio_tools {
 
@@ -20,7 +21,7 @@ uint64_t millis(){
 }
 
 size_t HardwareSerial::write(uint8_t ch) {
-    putchar(ch);
+    cout << ch;
     return 1;
 }
 
