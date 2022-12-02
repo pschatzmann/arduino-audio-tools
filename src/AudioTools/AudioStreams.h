@@ -70,6 +70,10 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
 
   virtual void flush() override {}
 
+  virtual Stream* toStreamPointer() {
+    return this;
+  }
+
  protected:
   AudioBaseInfoDependent *p_notify=nullptr;
   AudioBaseInfo info;
@@ -78,6 +82,7 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
     LOGE("AudioStreamX: unsupported operation!");
     return out;
   }
+
 };
 
 /**

@@ -144,7 +144,15 @@ class StreamCopyT {
 
         /// available bytes in the data source
         int available() {
-            return from == nullptr ? 0 : from->available();
+            int result = 0;
+            if (from!=nullptr) {
+                if (availableCallback!=nullptr){
+                    result = availableCallback(from->toStreamPointer());
+                } else {
+                    result = from->available();
+                }
+            }
+            return result;
         }
 
         /// Defines the dealy that is used if no data is available
@@ -208,6 +216,11 @@ class StreamCopyT {
             this->onWriteObj = obj;
         }
 
+        /// Defines a callback that provides the available bytes at the source
+        void setAvailableCallback(int (*callback)(Stream*stream)){
+            availableCallback = callback;
+        }
+
         /// Defines the max number of retries 
         void setRetry(int retry){
             retryLimit = retry;
@@ -241,6 +254,7 @@ class StreamCopyT {
         int buffer_size;
         void (*onWrite)(void*obj, void*buffer, size_t len) = nullptr;
         void (*notifyMimeCallback)(const char*mime) = nullptr;
+        int (*availableCallback)(Stream*stream)=nullptr;
         void *onWriteObj = nullptr;
         bool is_first = false;
         bool check_available_for_write = true;
