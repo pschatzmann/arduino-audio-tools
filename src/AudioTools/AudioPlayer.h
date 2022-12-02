@@ -354,6 +354,11 @@ namespace audio_tools {
             volume_out.setVolumeControl(vc);
         }
 
+        /// Provides access to the StreamCopy, so that we can register additinal callbacks
+        StreamCopy &getStreamCopy(){
+            return copier;
+        }
+
     protected:
         bool active = false;
         bool autonext = false;
