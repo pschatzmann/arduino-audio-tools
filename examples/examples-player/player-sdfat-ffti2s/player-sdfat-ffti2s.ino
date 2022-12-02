@@ -1,5 +1,5 @@
 /**
- * @file player-sdfat-i2s.ino
+ * @file player-sdfat-ffti2s.ino
  * @brief Audio Player with output to I2S and FFT
  * 
  * @author Phil Schatzmann
