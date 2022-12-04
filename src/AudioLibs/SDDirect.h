@@ -61,6 +61,7 @@ class SDDirect {
 
     /// Writes the index file
     void listDir(const char *dirname) {
+      if (dirname==nullptr) return;
       LOGD("listDir: %s", dirname);
       FileT root = open(dirname);
       if (!root) {
@@ -228,7 +229,11 @@ class SDDirect {
 #ifdef USE_SDFAT
       FileT result;
       if (!result.open(name)){
-        LOGE("FileT open error: %s", name);
+        if (name!=nullptr){
+          LOGE("File open error: %s", name);
+        } else {
+          LOGE("File open error: name is null");
+        }
       }
       return result;
 #else

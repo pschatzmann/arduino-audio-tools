@@ -45,11 +45,11 @@ class A2DPChannelConverter {
 };
 
 class A2DPStream;
-A2DPStream *A2DPStream_self=nullptr;
+static A2DPStream *A2DPStream_self=nullptr;
 // buffer which is used to exchange data
-RingBuffer<uint8_t> *a2dp_buffer = nullptr;
+static RingBuffer<uint8_t> *a2dp_buffer = nullptr;
 // flag to indicated that we are ready to process data
-volatile bool is_a2dp_active = false;
+static bool is_a2dp_active = false;
 
 int32_t a2dp_stream_source_sound_data(Frame* data, int32_t len);
 void a2dp_stream_sink_sound_data(const uint8_t* data, uint32_t len);
