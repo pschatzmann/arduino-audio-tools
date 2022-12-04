@@ -874,7 +874,7 @@ class CallbackBufferedStream : public AudioStreamX {
   }
 
   virtual size_t write(const uint8_t *data, size_t len) override {
-    if (!active) return len;
+    if (!active) return 0;
 
     // make space by deleting oldest entries
     int available_bytes = callback_buffer_ptr->availableForWrite()*sizeof(T);

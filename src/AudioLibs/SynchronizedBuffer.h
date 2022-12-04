@@ -240,9 +240,11 @@ protected:
  */
 template <typename T> class SynchronizedBufferRTOS : public BaseBuffer<T> {
 public:
-  SynchronizedBufferRTOS(size_t xStreamBufferSizeBytes, size_t xTriggerLevel)
+  SynchronizedBufferRTOS(size_t xStreamBufferSizeBytes, size_t xTriggerLevel=256, int writeMaxWait=portMAX_DELAY, int readMaxWait=portMAX_DELAY)
       : BaseBuffer<T>() {
     xStreamBuffer = xStreamBufferCreate(xStreamBufferSizeBytes, xTriggerLevel);
+    readWait = readMaxWait;
+    writeWait = writeMaxWait;
   }
   ~SynchronizedBufferRTOS() { vStreamBufferDelete(xStreamBuffer); }
 
@@ -256,13 +258,13 @@ public:
   // reads multiple values
   int readArray(T data[], int len) {
     return xStreamBufferReceive(xStreamBuffer, (void *)data, sizeof(T) * len,
-                                portMAX_DELAY);
+                                readWait);
   }
 
   int writeArray(const T data[], int len) {
     LOGD("%s: %d", LOG_METHOD, len);
     return xStreamBufferSend(xStreamBuffer, (void *)data, sizeof(T) * len,
-                             portMAX_DELAY);
+                             writeWait);
   }
 
   // peeks the actual entry from the buffer
@@ -305,6 +307,8 @@ public:
 
 protected:
   StreamBufferHandle_t xStreamBuffer;
+  int readWait = portMAX_DELAY;
+  int writeWait = portMAX_DELAY;
 };
 
 #endif
