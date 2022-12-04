@@ -839,13 +839,13 @@ class ExternalBufferStream : public AudioStream {
 template <class T>
 class CallbackBufferedStream : public AudioStreamX {
  public:
-  // Default constructor
+  /// Default constructor
   CallbackBufferedStream(int bufferSize, int bufferCount, bool autoRemoveOldestDataIfFull=false)
       : AudioStreamX() {
     callback_buffer_ptr = new NBuffer<T>(bufferSize, bufferCount);
     remove_oldest_data = autoRemoveOldestDataIfFull;
   }
-
+  /// Create stream from any BaseBuffer subclass
   CallbackBufferedStream(BaseBuffer<T> &buffer){
     callback_buffer_ptr = &buffer;
   }
@@ -877,11 +877,13 @@ class CallbackBufferedStream : public AudioStreamX {
     if (!active) return 0;
 
     // make space by deleting oldest entries
-    int available_bytes = callback_buffer_ptr->availableForWrite()*sizeof(T);
-    if (remove_oldest_data && len>available_bytes){
-      int gap = len-available_bytes;
-      uint8_t tmp[gap];
-      readBytes(tmp, gap);
+    if (remove_oldest_data){
+      int available_bytes = callback_buffer_ptr->availableForWrite()*sizeof(T);
+      if (len>available_bytes){
+        int gap = len-available_bytes;
+        uint8_t tmp[gap];
+        readBytes(tmp, gap);
+      }
     }
 
     return callback_buffer_ptr->writeArray(data, len / sizeof(T));
@@ -890,7 +892,6 @@ class CallbackBufferedStream : public AudioStreamX {
   virtual size_t readBytes(uint8_t *data, size_t len) override {
     if (!active) return 0;
     return callback_buffer_ptr->readArray(data, len / sizeof(T));
-    ;
   }
 
   /// Clears the data in the buffer
@@ -1335,7 +1336,6 @@ class MeasuringStream : public AudioStreamX {
           LOGI("%s",msg);
         }
     }
-
 };
 
 /**
