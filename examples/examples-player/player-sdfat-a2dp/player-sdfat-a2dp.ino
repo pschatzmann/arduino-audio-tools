@@ -11,10 +11,11 @@
 #include "AudioLibs/AudioA2DP.h"
 #include "AudioLibs/AudioSourceSDFAT.h"
 #include "AudioCodecs/CodecMP3Helix.h"
+//#include "AudioLibs/AudioKit.h"
 
 const char *startFilePath="/";
 const char* ext="mp3";
-AudioSourceSDFAT source(startFilePath, ext);
+AudioSourceSDFAT source(startFilePath, ext); // , PIN_AUDIO_KIT_SD_CARD_CS);
 A2DPStream out;
 MP3DecoderHelix decoder;
 AudioPlayer player(source, out, decoder);
@@ -23,6 +24,9 @@ AudioPlayer player(source, out, decoder);
 void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+
+  // Setting up SPI if necessary with the right SD pins by calling 
+  // SPI.begin(PIN_AUDIO_KIT_SD_CARD_CLK, PIN_AUDIO_KIT_SD_CARD_MISO, PIN_AUDIO_KIT_SD_CARD_MOSI, PIN_AUDIO_KIT_SD_CARD_CS);
 
   // setup output - We send the test signal via A2DP - so we conect to the "LEXON MINO L" Bluetooth Speaker
   auto cfg = out.defaultConfig(TX_MODE);

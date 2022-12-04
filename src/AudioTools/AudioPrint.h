@@ -10,6 +10,12 @@
 
 namespace audio_tools {
 
+#if ESP_IDF_VERSION_MAJOR <= 3 
+#  define FLUSH_OVERRIDE
+#else
+#  define FLUSH_OVERRIDE override
+#endif
+
 /**
  * @brief Abstract Audio Ouptut class
  * @author Phil Schatzmann
@@ -32,7 +38,7 @@ class AudioPrint : public Print, public AudioBaseInfoDependent, public AudioBase
             return DEFAULT_BUFFER_SIZE;
         }
 
-        void flush() override  {
+        void flush() FLUSH_OVERRIDE  {
             write((const uint8_t*)tmp, tmpPos-1);
             tmpPos=0;
         }
