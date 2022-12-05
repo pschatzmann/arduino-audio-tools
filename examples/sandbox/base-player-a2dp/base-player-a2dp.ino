@@ -23,6 +23,11 @@ const char *startFilePath="/";
 const char* ext="mp3";
 AudioSourceSDFAT source(startFilePath, ext, PIN_AUDIO_KIT_SD_CARD_CS);
 MP3DecoderHelix decoder;
+//Setup of synchronized buffer
+//audio_tools::Mutex mutex;
+//NBuffer<uint8_t> nbuffer(buffer_size, buffer_count);
+//RingBuffer<uint8_t> nbuffer(buffer_size*buffer_count);
+//SynchronizedBuffer<uint8_t> buffer(nbuffer, mutex);
 SynchronizedBufferRTOS<uint8_t> buffer(buffer_size*buffer_count, buffer_size, portMAX_DELAY, 10); // fast synchronized buffer
 CallbackBufferedStream<uint8_t> out(buffer); // convert Buffer to Stream
 AudioPlayer player(source, out, decoder);
@@ -46,8 +51,9 @@ void setup() {
  out.begin();
 
  // setup player
- player.begin();
+ player.setDelayIfOutputFull(0);
  player.setVolume(0.1);
+ player.begin();
  
  // fill buffer with some data
  player.getStreamCopy().copyN(5); 
@@ -60,6 +66,6 @@ void setup() {
 }
 
 void loop() {
- // send data
+ // decode data to buffer
  player.copy();
 }

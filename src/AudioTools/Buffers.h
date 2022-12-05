@@ -490,7 +490,7 @@ class NBuffer : public BaseBuffer<T> {
     actual_read_buffer = getNextFilledBuffer();
   }
 
-  BaseBuffer<T> *getNextAvailableBuffer() {
+  virtual BaseBuffer<T> *getNextAvailableBuffer() {
     BaseBuffer<T> *result = nullptr;
     for (int j = 0; j < buffer_count; j++) {
       result = avaliable_buffers[j];
@@ -502,7 +502,7 @@ class NBuffer : public BaseBuffer<T> {
     return result;
   }
 
-  bool addAvailableBuffer(BaseBuffer<T> *buffer) {
+  virtual bool addAvailableBuffer(BaseBuffer<T> *buffer) {
     bool result = false;
     for (int j = 0; j < buffer_count; j++) {
       if (avaliable_buffers[j] == nullptr) {
@@ -514,7 +514,7 @@ class NBuffer : public BaseBuffer<T> {
     return result;
   }
 
-  BaseBuffer<T> *getNextFilledBuffer() {
+  virtual BaseBuffer<T> *getNextFilledBuffer() {
     BaseBuffer<T> *result = nullptr;
     if (write_buffer_count > 0) {
       // get oldest entry
@@ -529,7 +529,7 @@ class NBuffer : public BaseBuffer<T> {
     return result;
   }
 
-  bool addFilledBuffer(BaseBuffer<T> *buffer) {
+  virtual bool addFilledBuffer(BaseBuffer<T> *buffer) {
     bool result = false;
     if (write_buffer_count < buffer_count) {
       filled_buffers[write_buffer_count++] = buffer;
