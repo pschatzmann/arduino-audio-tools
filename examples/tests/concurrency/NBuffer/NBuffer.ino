@@ -9,7 +9,6 @@
  * 
  */
 #include "AudioTools.h"
-#include "AudioLibs/SynchronizedBuffer.h"
 #include "freertos-all.h"
 
 NBuffer<int16_t> buffer(512,4);

@@ -9,7 +9,6 @@
  * 
  */
 #include "AudioTools.h"
-#include "AudioLibs/SynchronizedBuffer.h"
 #include "freertos-all.h" // https://github.com/pschatzmann/arduino-freertos-addons
 
 SynchronizedBufferRTOS<int16_t> buffer(nbuffer, mutex);

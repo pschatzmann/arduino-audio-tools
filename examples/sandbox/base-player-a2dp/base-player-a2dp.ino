@@ -14,7 +14,6 @@
 #include "AudioLibs/AudioA2DP.h"
 #include "AudioLibs/AudioSourceSDFAT.h"
 #include "AudioCodecs/CodecMP3Helix.h"
-#include "AudioLibs/SynchronizedBuffer.h"
 #include "AudioLibs/AudioKit.h"
 
 int buffer_count = 30;
