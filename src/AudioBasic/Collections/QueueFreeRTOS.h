@@ -2,7 +2,6 @@
 #ifdef ESP32
 #include <FreeRTOS.h>
 
-
 namespace audio_tools {
 
 /**
@@ -26,6 +25,14 @@ class QueueFreeRTOS {
         ~QueueFreeRTOS(){
             TRACED();
             vQueueDelete(xQueue);
+        }
+
+        void setReadMaxWait(TickType_t ticks){
+            read_max_wait = ticks;
+        }
+
+        void setWriteMaxWait(TickType_t ticks){
+            write_max_wait = ticks;
         }
 
         /// (Re-)defines the size
