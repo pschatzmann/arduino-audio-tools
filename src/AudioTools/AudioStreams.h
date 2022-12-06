@@ -842,20 +842,20 @@ class ExternalBufferStream : public AudioStream {
  * @copyright GPLv3
  */
 template <class T>
-class CallbackBufferedStream : public AudioStreamX {
+class QueueStream : public AudioStreamX {
  public:
   /// Default constructor
-  CallbackBufferedStream(int bufferSize, int bufferCount, bool autoRemoveOldestDataIfFull=false)
+  QueueStream(int bufferSize, int bufferCount, bool autoRemoveOldestDataIfFull=false)
       : AudioStreamX() {
     callback_buffer_ptr = new NBuffer<T>(bufferSize, bufferCount);
     remove_oldest_data = autoRemoveOldestDataIfFull;
   }
   /// Create stream from any BaseBuffer subclass
-  CallbackBufferedStream(BaseBuffer<T> &buffer){
+  QueueStream(BaseBuffer<T> &buffer){
     callback_buffer_ptr = &buffer;
   }
 
-  virtual ~CallbackBufferedStream() { delete callback_buffer_ptr; }
+  virtual ~QueueStream() { delete callback_buffer_ptr; }
 
   /// Activates the output
   virtual bool begin() {
@@ -917,6 +917,10 @@ class CallbackBufferedStream : public AudioStreamX {
   bool remove_oldest_data;
 
 };
+
+// support legacy name
+template <typename T>
+using CallbackBufferedStream = QueueStream<T>;
 
 /**
  * @brief Construct a new Converted Stream object. Both the data of the read and write
@@ -1303,6 +1307,10 @@ class MeasuringStream : public AudioStreamX {
       return start_time;
     }
 
+    void setBytesPerSample(int size){
+      sample_div = size;
+    }
+
   protected:
     int max_count=0;
     int count=0;
@@ -1311,6 +1319,7 @@ class MeasuringStream : public AudioStreamX {
     uint64_t start_time;
     int total_bytes = 0;
     int bytes_per_second = 0;
+    int sample_div = 0;
     NullStream null;
     Print *p_logout=nullptr;
 
@@ -1334,7 +1343,11 @@ class MeasuringStream : public AudioStreamX {
 
     void printResult() {
         char msg[70];
-        sprintf(msg, "==> Bytes per second: %d", bytes_per_second);
+        if (sample_div==0){
+          sprintf(msg, "==> Bytes per second: %d", bytes_per_second);
+        } else {
+          sprintf(msg, "==> Samples per second: %d", bytes_per_second/sample_div);
+        }
         if (p_logout!=nullptr){
           p_logout->println(msg);
         } else {

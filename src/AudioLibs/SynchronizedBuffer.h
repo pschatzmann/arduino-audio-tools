@@ -2,10 +2,12 @@
 #pragma once
 #include "AudioConfig.h"
 #include "AudioTools/Buffers.h"
+#include "AudioTools/AudioLogger.h"
 
 #ifdef ESP32
-#include "FreeRTOS.h"
-#include <freertos/stream_buffer.h>
+#  include <FreeRTOS.h>
+#  include <freertos/stream_buffer.h>
+#  include "AudioBasic/Collections/QueueFreeRTOS.h"
 #endif
 
 #ifdef USE_STD_CONCURRENCY
@@ -142,7 +144,8 @@ protected:
  * @copyright GPLv3 *
  * @tparam T
  */
-template <typename T> class SynchronizedBuffer : public BaseBuffer<T> {
+template <typename T> 
+class SynchronizedBuffer : public BaseBuffer<T> {
 public:
   SynchronizedBuffer(BaseBuffer<T> &buffer, Mutex &mutex) {
     p_buffer = &buffer;
@@ -233,12 +236,83 @@ protected:
 #ifdef ESP32
 
 /**
+ * @brief NBuffer which uses some RTOS queues to manage the available and filled buffers
+ * 
+ * @tparam T 
+ * @tparam COUNT number of buffers
+ */
+template <typename T> 
+class SynchronizedNBuffer : public NBuffer<T> {
+public:
+  SynchronizedNBuffer(int bufferSize, int bufferCount, int writeMaxWait=portMAX_DELAY, int readMaxWait=portMAX_DELAY) {
+    TRACED();
+    NBuffer<T>::buffer_count = bufferCount;
+    NBuffer<T>::buffer_size = bufferSize;
+
+    available_buffers.resize(bufferCount);
+    filled_buffers.resize(bufferCount);
+
+    setReadMaxWait(readMaxWait);
+    setWriteMaxWait(writeMaxWait);
+
+    // setup buffers
+    NBuffer<T>::write_buffer_count = 0;
+    for (int j = 0; j < bufferCount; j++) {
+      BaseBuffer<T> *tmp = new SingleBuffer<T>(bufferSize);
+      if (tmp != nullptr) {
+        available_buffers.enqueue(tmp);
+      } else {
+        LOGE("Not Enough Memory for buffer %d", j);
+      }
+    }
+  }
+
+  void setReadMaxWait(TickType_t ticks){
+      available_buffers.setReadMaxWait(ticks);
+      filled_buffers.setReadMaxWait(ticks);
+  }
+
+  void setWriteMaxWait(TickType_t ticks){
+      available_buffers.setWriteMaxWait(ticks);
+      filled_buffers.setWriteMaxWait(ticks);
+  }
+
+
+protected:
+  QueueFreeRTOS<BaseBuffer<T>*> available_buffers{0,portMAX_DELAY,0};
+  QueueFreeRTOS<BaseBuffer<T>*> filled_buffers{0,portMAX_DELAY,0};
+
+  BaseBuffer<T> *getNextAvailableBuffer() {
+    TRACED();
+    BaseBuffer<T>* result;
+    return available_buffers.dequeue(result) ? result : nullptr;
+  }
+
+  bool addAvailableBuffer(BaseBuffer<T> *buffer) {
+    TRACED();
+    return available_buffers.enqueue(buffer);
+  }
+
+  BaseBuffer<T> *getNextFilledBuffer() {
+    TRACED();
+    BaseBuffer<T>* result;
+    return filled_buffers.dequeue(result) ? result : nullptr;
+  }
+
+  bool addFilledBuffer(BaseBuffer<T> *buffer) {
+    TRACED();
+    return filled_buffers.enqueue(buffer);
+  }
+};
+
+/**
  * @brief Buffer implementation which is using a FreeRTOS StreamBuffer
  * @author Phil Schatzmann
  * @copyright GPLv3 *
  * @tparam T
  */
-template <typename T> class SynchronizedBufferRTOS : public BaseBuffer<T> {
+template <typename T> 
+class SynchronizedBufferRTOS : public BaseBuffer<T> {
 public:
   SynchronizedBufferRTOS(size_t xStreamBufferSizeBytes, size_t xTriggerLevel=256, int writeMaxWait=portMAX_DELAY, int readMaxWait=portMAX_DELAY)
       : BaseBuffer<T>() {
@@ -247,6 +321,22 @@ public:
     writeWait = writeMaxWait;
   }
   ~SynchronizedBufferRTOS() { vStreamBufferDelete(xStreamBuffer); }
+
+  void setReadMaxWait(TickType_t ticks){
+    readWait = ticks;
+  }
+
+  void setWriteMaxWait(TickType_t ticks){
+    writeWait = ticks;
+  }
+
+  void setWriteFromISR(bool active){
+    write_from_isr = active;
+  }
+
+  void setReadFromISR(bool active){
+    read_from_isr = active;
+  }
 
   // reads a single value
   T read() override {
@@ -257,14 +347,26 @@ public:
 
   // reads multiple values
   int readArray(T data[], int len) {
-    return xStreamBufferReceive(xStreamBuffer, (void *)data, sizeof(T) * len,
-                                readWait);
+    if (read_from_isr){
+      xHigherPriorityTaskWoken = pdFALSE;
+      int result = xStreamBufferReceiveFromISR(xStreamBuffer, (void *)data, sizeof(T) * len, &xHigherPriorityTaskWoken);
+      portYIELD_FROM_ISR( xHigherPriorityTaskWoken );
+      return result;
+    } else {
+      return xStreamBufferReceive(xStreamBuffer, (void *)data, sizeof(T) * len, readWait);
+    }
   }
 
   int writeArray(const T data[], int len) {
     LOGD("%s: %d", LOG_METHOD, len);
-    return xStreamBufferSend(xStreamBuffer, (void *)data, sizeof(T) * len,
-                             writeWait);
+    if (write_from_isr){
+      xHigherPriorityTaskWoken = pdFALSE;
+      int result = xStreamBufferSendFromISR(xStreamBuffer, (void *)data, sizeof(T) * len, &xHigherPriorityTaskWoken);
+      portYIELD_FROM_ISR( xHigherPriorityTaskWoken );
+      return result;
+    } else {
+      return xStreamBufferSend(xStreamBuffer, (void *)data, sizeof(T) * len, writeWait);
+    }
   }
 
   // peeks the actual entry from the buffer
@@ -307,8 +409,11 @@ public:
 
 protected:
   StreamBufferHandle_t xStreamBuffer;
+  BaseType_t xHigherPriorityTaskWoken = pdFALSE;  // Initialised to pdFALSE.
   int readWait = portMAX_DELAY;
   int writeWait = portMAX_DELAY;
+  bool read_from_isr = false;
+  bool write_from_isr = false;
 };
 
 #endif
