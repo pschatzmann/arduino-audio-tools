@@ -29,7 +29,7 @@ MP3DecoderHelix decoder;
 //RingBuffer<uint8_t> nbuffer(buffer_size*buffer_count);
 //SynchronizedBuffer<uint8_t> buffer(nbuffer, mutex);
 SynchronizedBufferRTOS<uint8_t> buffer(buffer_size*buffer_count, buffer_size, portMAX_DELAY, 10); // fast synchronized buffer
-CallbackBufferedStream<uint8_t> out(buffer); // convert Buffer to Stream
+QueueStream<uint8_t> out(buffer); // convert Buffer to Stream
 AudioPlayer player(source, out, decoder);
 BluetoothA2DPSource a2dp;
 
@@ -47,7 +47,7 @@ void setup() {
  // sd_active is setting up SPI with the right SD pins by calling 
  SPI.begin(PIN_AUDIO_KIT_SD_CARD_CLK, PIN_AUDIO_KIT_SD_CARD_MISO, PIN_AUDIO_KIT_SD_CARD_MOSI, PIN_AUDIO_KIT_SD_CARD_CS);
 
- // start CallbackBufferedStream
+ // start QueueStream
  out.begin();
 
  // setup player

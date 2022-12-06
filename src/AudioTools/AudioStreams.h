@@ -837,20 +837,20 @@ class ExternalBufferStream : public AudioStream {
  * @copyright GPLv3
  */
 template <class T>
-class CallbackBufferedStream : public AudioStreamX {
+class QueueStream : public AudioStreamX {
  public:
   /// Default constructor
-  CallbackBufferedStream(int bufferSize, int bufferCount, bool autoRemoveOldestDataIfFull=false)
+  QueueStream(int bufferSize, int bufferCount, bool autoRemoveOldestDataIfFull=false)
       : AudioStreamX() {
     callback_buffer_ptr = new NBuffer<T>(bufferSize, bufferCount);
     remove_oldest_data = autoRemoveOldestDataIfFull;
   }
   /// Create stream from any BaseBuffer subclass
-  CallbackBufferedStream(BaseBuffer<T> &buffer){
+  QueueStream(BaseBuffer<T> &buffer){
     callback_buffer_ptr = &buffer;
   }
 
-  virtual ~CallbackBufferedStream() { delete callback_buffer_ptr; }
+  virtual ~QueueStream() { delete callback_buffer_ptr; }
 
   /// Activates the output
   virtual bool begin() {
@@ -912,6 +912,10 @@ class CallbackBufferedStream : public AudioStreamX {
   bool remove_oldest_data;
 
 };
+
+// support legacy name
+template <typename T>
+using CallbackBufferedStream = QueueStream<T>;
 
 /**
  * @brief Construct a new Converted Stream object. Both the data of the read and write

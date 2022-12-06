@@ -319,7 +319,7 @@ class OggContainerEncoder : public AudioEncoder {
   Print *p_print = nullptr;
   Print *p_encoded_audio_stream = nullptr;
   SingleBuffer<uint8_t> buffer{1024};
-  CallbackBufferedStream<uint8_t> codec_buffer{buffer};
+  QueueStream<uint8_t> codec_buffer{buffer};
   AudioEncoder* p_codec = nullptr;
   volatile bool is_open;
   OGGZ *p_oggz = nullptr;
