@@ -2,6 +2,7 @@
 #pragma once
 #include "AudioConfig.h"
 #include "AudioTools/Buffers.h"
+#include "AudioTools/AudioLogger.h"
 
 #ifdef ESP32
 #  include <FreeRTOS.h>
@@ -243,10 +244,39 @@ protected:
 template <typename T> 
 class SynchronizedNBuffer : public NBuffer<T> {
 public:
-  SynchronizedNBuffer(int size, int bufferCount) : NBuffer<T>(size, bufferCount) {
+  SynchronizedNBuffer(int bufferSize, int bufferCount, int writeMaxWait=portMAX_DELAY, int readMaxWait=portMAX_DELAY) {
+    TRACED();
+    NBuffer<T>::buffer_count = bufferCount;
+    NBuffer<T>::buffer_size = bufferSize;
+
     available_buffers.resize(bufferCount);
     filled_buffers.resize(bufferCount);
+
+    setReadMaxWait(readMaxWait);
+    setWriteMaxWait(writeMaxWait);
+
+    // setup buffers
+    NBuffer<T>::write_buffer_count = 0;
+    for (int j = 0; j < bufferCount; j++) {
+      BaseBuffer<T> *tmp = new SingleBuffer<T>(bufferSize);
+      if (tmp != nullptr) {
+        available_buffers.enqueue(tmp);
+      } else {
+        LOGE("Not Enough Memory for buffer %d", j);
+      }
+    }
   }
+
+  void setReadMaxWait(TickType_t ticks){
+      available_buffers.setReadMaxWait(ticks);
+      filled_buffers.setReadMaxWait(ticks);
+  }
+
+  void setWriteMaxWait(TickType_t ticks){
+      available_buffers.setWriteMaxWait(ticks);
+      filled_buffers.setWriteMaxWait(ticks);
+  }
+
 
 protected:
   QueueFreeRTOS<BaseBuffer<T>*> available_buffers{0,portMAX_DELAY,0};
@@ -273,7 +303,6 @@ protected:
     TRACED();
     return filled_buffers.enqueue(buffer);
   }
-
 };
 
 /**
@@ -292,6 +321,14 @@ public:
     writeWait = writeMaxWait;
   }
   ~SynchronizedBufferRTOS() { vStreamBufferDelete(xStreamBuffer); }
+
+  void setReadMaxWait(TickType_t ticks){
+    readWait = ticks;
+  }
+
+  void setWriteMaxWait(TickType_t ticks){
+    writeWait = ticks;
+  }
 
   void setWriteFromISR(bool active){
     write_from_isr = active;

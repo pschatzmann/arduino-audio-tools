@@ -1302,6 +1302,10 @@ class MeasuringStream : public AudioStreamX {
       return start_time;
     }
 
+    void setBytesPerSample(int size){
+      sample_div = size;
+    }
+
   protected:
     int max_count=0;
     int count=0;
@@ -1310,6 +1314,7 @@ class MeasuringStream : public AudioStreamX {
     uint64_t start_time;
     int total_bytes = 0;
     int bytes_per_second = 0;
+    int sample_div = 0;
     NullStream null;
     Print *p_logout=nullptr;
 
@@ -1333,7 +1338,11 @@ class MeasuringStream : public AudioStreamX {
 
     void printResult() {
         char msg[70];
-        sprintf(msg, "==> Bytes per second: %d", bytes_per_second);
+        if (sample_div==0){
+          sprintf(msg, "==> Bytes per second: %d", bytes_per_second);
+        } else {
+          sprintf(msg, "==> Samples per second: %d", bytes_per_second/sample_div);
+        }
         if (p_logout!=nullptr){
           p_logout->println(msg);
         } else {

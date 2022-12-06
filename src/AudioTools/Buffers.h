@@ -35,6 +35,7 @@ class BaseBuffer {
     for (int j = 0; j < lenResult; j++) {
       data[j] = read();
     }
+    LOGD("readArray %d -> %d", len, lenResult);
     return lenResult;
   }
 
@@ -50,6 +51,7 @@ class BaseBuffer {
       result = j + 1;
     }
     //CHECK_MEMORY();
+    LOGD("writeArray %d -> %d", len, result);
     return result;
   }
 
@@ -314,7 +316,8 @@ class RingBuffer : public BaseBuffer<T> {
 template <typename T>
 class NBuffer : public BaseBuffer<T> {
  public:
-  NBuffer(int size = 512, int count = 2) {
+
+  NBuffer(int size, int count) {
     filled_buffers = new BaseBuffer<T> *[count];
     avaliable_buffers = new BaseBuffer<T> *[count];
 
@@ -328,7 +331,6 @@ class NBuffer : public BaseBuffer<T> {
       }
     }
   }
-
   virtual ~NBuffer() {
     delete actual_write_buffer;
     delete actual_read_buffer;
@@ -480,6 +482,9 @@ class NBuffer : public BaseBuffer<T> {
   BaseBuffer<T> **filled_buffers = nullptr;
   unsigned long start_time = 0;
   unsigned long sample_count = 0;
+
+  // empty constructor only allowed by subclass
+  NBuffer() = default;
 
   void resetCurrent() {
     if (actual_read_buffer != nullptr) {
