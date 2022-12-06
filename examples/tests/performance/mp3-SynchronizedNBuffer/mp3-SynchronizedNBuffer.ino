@@ -1,33 +1,51 @@
 /**
- * @file base-player-a2dp.ino
+ * @file mp3-SynchronizedBufferRTOS.ino
  * @author Phil Schatzmann
- * @brief Test which uses the A2DP callback to provide data from the AudioPlayer
- * 
+ * @brief Performance test for mp3 decoding form SD on core 1 and pass the data to core 0; 
  * @version 0.1
- * @date 2022-12-04
+ * @date 2022-12-06
  * 
  * @copyright Copyright (c) 2022
  * 
  */
-
 #include "AudioTools.h"
-#include "AudioLibs/AudioA2DP.h"
 #include "AudioLibs/AudioSourceSDFAT.h"
 #include "AudioCodecs/CodecMP3Helix.h"
 #include "AudioLibs/SynchronizedBuffer.h"
 #include "AudioLibs/AudioKit.h"
+#include "freertos-all.h"
 
-int buffer_count = 30;
-int buffer_size = 512;
+const int buffer_count = 30;
+const int buffer_size = 512;
 const char *startFilePath="/";
 const char* ext="mp3";
 AudioSourceSDFAT source(startFilePath, ext, PIN_AUDIO_KIT_SD_CARD_CS);
 MP3DecoderHelix decoder;
-//Setup of synchronized buffer
-SynchronizedNBuffer<uint8_t> buffer(buffer_size,buffer_count, portMAX_DELAY, 10);
+SynchronizedNBuffer<uint8_t> buffer(buffer_size, buffer_count, portMAX_DELAY, 10);
 QueueStream<uint8_t> out(buffer); // convert Buffer to Stream
 AudioPlayer player(source, out, decoder);
-BluetoothA2DPSource a2dp;
+int32_t get_data(uint8_t *data, int32_t bytes);
+uint8_t data[buffer_size];
+
+// Performance measurement: Receive data on core 0
+Task task("name",10000,10, [](){ 
+    uint64_t start = millis();
+    size_t bytes = 0;
+    for(int i=0;i<100;i++){
+        bytes += get_data(data, buffer_size);
+    }
+    //yield();
+    uint64_t timeMs = millis()-start;
+    // prevent div by 0
+    if (timeMs==0){
+        timeMs=1;
+    }
+    // calculate samples per second
+    size_t samples_per_second = bytes / timeMs * 1000 / 4;
+    Serial.print("Samples per second: ");
+    Serial.println(samples_per_second);
+});
+
 
 // Provide data to A2DP
 int32_t get_data(uint8_t *data, int32_t bytes) {
@@ -54,12 +72,8 @@ void setup() {
  // fill buffer with some data
  player.getStreamCopy().copyN(5); 
 
- // start a2dp source
- Serial.println("starting A2DP...");
- //a2dp.set_task_core(1);
- //a2dp.set_task_priority(configMAX_PRIORITIES-1);
- a2dp.start_raw("LEXON MINO L", get_data);  
- Serial.println("Started!");
+ // start the task on kernel 0
+ task.Start(0);
 
 }
 

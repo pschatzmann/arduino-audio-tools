@@ -225,7 +225,7 @@ namespace audio_tools {
         /// moves to next file
         virtual bool next(int offset=1) {
             TRACED();
-            previous_stream = false;
+            steam_increment = 1;
             active = setStream(p_source->nextStream(offset));
             return active;
         }
@@ -233,7 +233,7 @@ namespace audio_tools {
         /// moves to selected file
         virtual bool setIndex(int idx) {
             TRACED();
-            previous_stream = false;
+            steam_increment = 1;
             active = setStream(p_source->selectStream(idx));
             return active;
         }
@@ -241,7 +241,7 @@ namespace audio_tools {
         /// moves to selected file
         virtual bool setPath(const char* path) {
             TRACED();
-            previous_stream = false;
+            steam_increment = 1;
             active = setStream(p_source->selectStream(path));
             return active;
         }
@@ -249,7 +249,7 @@ namespace audio_tools {
         /// moves to previous file
         virtual bool previous(int offset=1) {
             TRACED();
-            previous_stream = true;
+            steam_increment = -1;
             active = setStream(p_source->previousStream(offset));
             return active;
         }
@@ -300,13 +300,18 @@ namespace audio_tools {
             autonext = next;
         }
 
+        /// Defines the wait time in ms if the target output is full
+        virtual void setDelayIfOutputFull(int delayMs){
+            delay_if_full = delayMs;
+        }
+
         /// Call this method in the loop. 
         virtual void copy() {
             if (active) {
                 TRACED();
-                if (p_final_print!=nullptr && p_final_print->availableForWrite()==0){
+                if (delay_if_full!=0 && p_final_print!=nullptr && p_final_print->availableForWrite()==0){
                     // not ready to do anything - so we wait a bit
-                    delay(100);
+                    delay(delay_if_full);
                     return;
                 }
                 // handle sound
@@ -315,26 +320,7 @@ namespace audio_tools {
                     timeout = millis() + p_source->timeoutAutoNext();
                 }
                 // move to next stream after timeout
-                if (p_input_stream == nullptr || millis() > timeout) {
-                    if (autonext) {
-                        if (previous_stream == false) {
-                            LOGW("-> timeout - moving to next stream");
-                            // open next stream
-                            if (!next(1)) {
-                                LOGD("stream is null");
-                            }
-                        } else {
-                            LOGW("-> timeout - moving to previous stream");
-                            // open previous stream
-                            if (!previous(1)) {
-                                LOGD("stream is null");
-                            }
-                        }
-                    } else {
-                        active = false;
-                    }
-                    timeout = millis() + p_source->timeoutAutoNext();
-                }
+                moveToNextFileOnTimeout();
             }
         }
 
@@ -379,12 +365,29 @@ namespace audio_tools {
         StreamCopy copier; // copies sound into i2s
         bool meta_active = false;
         uint32_t timeout = 0;
-        bool previous_stream = false;
+        int steam_increment = 1; // +1 moves forward; -1 moves backward
         float current_volume = -1.0; // illegal value which will trigger an update
+        int delay_if_full = 100;
 
         /// Default constructur only allowed in subclasses
         AudioPlayer() {
             TRACED();
+        }
+
+        void moveToNextFileOnTimeout(){
+            if (p_final_stream->availableForWrite()==0) return;
+            if (p_input_stream == nullptr || millis() > timeout) {
+                if (autonext) {
+                    LOGW("-> timeout - moving by %d", steam_increment);
+                    // open next stream
+                    if (!next(steam_increment)) {
+                        LOGD("stream is null");
+                    }
+                } else {
+                    active = false;
+                }
+                timeout = millis() + p_source->timeoutAutoNext();
+            }
         }
 
         /// Callback implementation which writes to metadata
@@ -395,7 +398,6 @@ namespace audio_tools {
                 p->meta_out.write((const uint8_t*)data, len);
             }
         }
-
     };
 
 }

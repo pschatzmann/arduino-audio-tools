@@ -35,6 +35,7 @@ class BaseBuffer {
     for (int j = 0; j < lenResult; j++) {
       data[j] = read();
     }
+    LOGD("readArray %d -> %d", len, lenResult);
     return lenResult;
   }
 
@@ -50,6 +51,7 @@ class BaseBuffer {
       result = j + 1;
     }
     //CHECK_MEMORY();
+    LOGD("writeArray %d -> %d", len, result);
     return result;
   }
 
@@ -314,7 +316,8 @@ class RingBuffer : public BaseBuffer<T> {
 template <typename T>
 class NBuffer : public BaseBuffer<T> {
  public:
-  NBuffer(int size = 512, int count = 2) {
+
+  NBuffer(int size, int count) {
     filled_buffers = new BaseBuffer<T> *[count];
     avaliable_buffers = new BaseBuffer<T> *[count];
 
@@ -328,7 +331,6 @@ class NBuffer : public BaseBuffer<T> {
       }
     }
   }
-
   virtual ~NBuffer() {
     delete actual_write_buffer;
     delete actual_read_buffer;
@@ -481,6 +483,9 @@ class NBuffer : public BaseBuffer<T> {
   unsigned long start_time = 0;
   unsigned long sample_count = 0;
 
+  // empty constructor only allowed by subclass
+  NBuffer() = default;
+
   void resetCurrent() {
     if (actual_read_buffer != nullptr) {
       actual_read_buffer->reset();
@@ -490,7 +495,7 @@ class NBuffer : public BaseBuffer<T> {
     actual_read_buffer = getNextFilledBuffer();
   }
 
-  BaseBuffer<T> *getNextAvailableBuffer() {
+  virtual BaseBuffer<T> *getNextAvailableBuffer() {
     BaseBuffer<T> *result = nullptr;
     for (int j = 0; j < buffer_count; j++) {
       result = avaliable_buffers[j];
@@ -502,7 +507,7 @@ class NBuffer : public BaseBuffer<T> {
     return result;
   }
 
-  bool addAvailableBuffer(BaseBuffer<T> *buffer) {
+  virtual bool addAvailableBuffer(BaseBuffer<T> *buffer) {
     bool result = false;
     for (int j = 0; j < buffer_count; j++) {
       if (avaliable_buffers[j] == nullptr) {
@@ -514,7 +519,7 @@ class NBuffer : public BaseBuffer<T> {
     return result;
   }
 
-  BaseBuffer<T> *getNextFilledBuffer() {
+  virtual BaseBuffer<T> *getNextFilledBuffer() {
     BaseBuffer<T> *result = nullptr;
     if (write_buffer_count > 0) {
       // get oldest entry
@@ -529,7 +534,7 @@ class NBuffer : public BaseBuffer<T> {
     return result;
   }
 
-  bool addFilledBuffer(BaseBuffer<T> *buffer) {
+  virtual bool addFilledBuffer(BaseBuffer<T> *buffer) {
     bool result = false;
     if (write_buffer_count < buffer_count) {
       filled_buffers[write_buffer_count++] = buffer;
