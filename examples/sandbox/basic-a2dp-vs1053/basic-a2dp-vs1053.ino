@@ -16,7 +16,7 @@
 BluetoothA2DPSink a2dp_sink;
 VS1053Stream out; // final output
 VS1053Config cfg;
-CallbackBufferedStream<uint8_t> buffer(1024,10);
+QueueStream<uint8_t> buffer(1024,10);
 StreamCopy copier(out, buffer); // copies sound into i2s
 
 // Write data from A2DP to buffer
