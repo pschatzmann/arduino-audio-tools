@@ -7,18 +7,23 @@
 #include "AudioTools/VolumeControl.h"
 
 #ifndef URL_CLIENT_TIMEOUT
-#define URL_CLIENT_TIMEOUT 60000
+#  define URL_CLIENT_TIMEOUT 60000
 #endif
 
 #ifndef URL_HANDSHAKE_TIMEOUT
-#define URL_HANDSHAKE_TIMEOUT 120000
+#  define URL_HANDSHAKE_TIMEOUT 120000
 #endif
 
 #ifndef IRAM_ATTR
-#define IRAM_ATTR
+#  define IRAM_ATTR
 #endif
 
-
+#ifdef USE_STREAM_WRITE_OVERRIDE
+#  define STREAM_WRITE_OVERRIDE override
+#else
+#  define STREAM_WRITE_OVERRIDE 
+#endif
+ 
 namespace audio_tools {
 
 /**
@@ -56,7 +61,7 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
     return readBytes((uint8_t *)buffer, length);
   }
 
-  virtual size_t readBytes(uint8_t *buffer, size_t length) override = 0;
+  virtual size_t readBytes(uint8_t *buffer, size_t length) STREAM_WRITE_OVERRIDE = 0;
 
   virtual size_t write(const uint8_t *buffer, size_t size) override = 0;
 

@@ -61,7 +61,7 @@ INLINE_VAR const Nano_BLE_ratio_info ratio_table[] = {
  *  I2S Event handler
  */
 
-extern "C" INLINE_VAR void I2S_IRQHandler(void) {
+extern "C"  void I2S_IRQHandler(void) {
     if(NRF_I2S->EVENTS_TXPTRUPD != 0) {
       // reading from buffer to pins
       NRF_I2S->TXD.PTR = (uint32_t) i2s_buffer.readEnd().address(); // last buffer was processed

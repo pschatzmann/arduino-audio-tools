@@ -176,6 +176,7 @@
 #define USE_EFFECTS_SUITE
 #define USE_TIMER
 #define USE_I2S_ANALOG
+#define USE_STREAM_WRITE_OVERRIDE
 
 #define PWM_FREQENCY 30000
 #define PIN_PWM_START 12
@@ -234,6 +235,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define USE_TYPETRAITS
 #define USE_EFFECTS_SUITE
 #define USE_TIMER
+#define USE_STREAM_WRITE_OVERRIDE
 
 #define PWM_FREQENCY 30000
 #define PIN_PWM_START 1
