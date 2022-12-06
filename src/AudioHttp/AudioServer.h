@@ -147,7 +147,11 @@ class AudioServer {
 
     protected:
         // WIFI
+#ifdef ESP8266
+        WiFiServer server{80};
+#else
         WiFiServer server;
+#endif
         WiFiClient client_obj;
         char *password = nullptr;
         char *network = nullptr;

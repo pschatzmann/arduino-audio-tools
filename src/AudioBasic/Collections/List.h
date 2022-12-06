@@ -108,12 +108,15 @@ class List {
             for(int i = 0; i < N; ++i) 
   	    	    push_back(a[i]);
      	}
+
+#ifdef USE_INITIALIZER_LIST
+
         List(std::initializer_list<T> iniList) {
             link();
             for(auto &obj : iniList) 
   	    	    push_back(obj);
         } 
-        
+#endif        
         bool swap(List<T>&ref){
             List<T> tmp(*this);
             validate();
