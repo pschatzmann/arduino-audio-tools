@@ -7,13 +7,8 @@
  * @copyright GPLv3
  */
 
-#define USE_FDK
-
-
 #include "AudioTools.h"
 #include "AudioCodecs/CodecAACFDK.h"
-
-
 
 AudioEncoderServer server(new AACEncoderFDK(),"ssid","password");  
 

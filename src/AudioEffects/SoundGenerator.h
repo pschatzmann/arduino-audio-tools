@@ -502,10 +502,15 @@ class GeneratorFromArray : public SoundGenerator<T> {
       T result = 0;
       if (this->is_running) {
         result = table[sound_index];
-        sound_index++;
+        sound_index+=index_increment;
       }
 
       return result;
+    }
+
+    // step size the sound index is incremented (default = 1)
+    void setIncrement(int inc){
+        index_increment = inc;
     }
 
     // Sets up a sine table - returns
@@ -536,6 +541,7 @@ class GeneratorFromArray : public SoundGenerator<T> {
     bool owns_data = false;
     T *table;
     size_t table_length = 0;
+    int index_increment = 1;
 
 };
 

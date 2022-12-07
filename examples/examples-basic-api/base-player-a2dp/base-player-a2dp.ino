@@ -1,7 +1,7 @@
 /**
  * @file base-player-a2dp.ino
  * @author Phil Schatzmann
- * @brief Test which uses the A2DP callback to provide data from the AudioPlayer
+ * @brief Sketch which uses the A2DP callback to provide data from the AudioPlayer via a Queue
  * 
  * @version 0.1
  * @date 2022-12-04
@@ -55,8 +55,6 @@ void setup() {
 
  // start a2dp source
  Serial.println("starting A2DP...");
- //a2dp.set_task_core(1);
- //a2dp.set_task_priority(configMAX_PRIORITIES-1);
  a2dp.start_raw("LEXON MINO L", get_data);  
  Serial.println("Started!");
 
