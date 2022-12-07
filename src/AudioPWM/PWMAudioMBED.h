@@ -5,14 +5,27 @@
 #include "AudioTimer/AudioTimer.h"
 #include "mbed.h"
 
+/** 
+ * @defgroup pwm_mbed PWM-MBED
+ * @ingroup platform
+ * @brief PWM Implementation for mbed  
+**/
+
+
 namespace audio_tools {
 
 // forward declaration
 class PWMAudioStreamMBED;
+/**
+ * @typedef  PWMAudioStream
+ * @ingroup pwm_mbed
+ * @brief Please use PWMAudioStream!
+ */
 typedef PWMAudioStreamMBED PWMAudioStream;
 
 /**
  * @brief Audio output to PWM pins for MBED based Arduino implementations
+ * @ingroup pwm_mbed
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

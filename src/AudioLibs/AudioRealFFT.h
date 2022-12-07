@@ -3,10 +3,17 @@
 #include "AudioFFT.h"
 #include "FFT/FFTReal.h"
 
+/** 
+ * @defgroup fft-real Real
+ * @ingroup fft
+ * @brief Fast Fourier Transform using Real FFT 
+**/
+
 namespace audio_tools {
 
 /**
  * @brief Driver for RealFFT
+ * @ingroup fft-real
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -47,6 +54,7 @@ class FFTDriverRealFFT : public FFTDriver {
 
 /**
  * @brief AudioFFT using RealFFT
+ * @ingroup fft-real
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -71,8 +79,6 @@ class AudioRealFFT : public AudioFFTBase {
            static_cast<FFTDriverRealFFT*>(driver())->p_fft_object->do_ifft(real, complex);
            return real;
         }
-
-
 
         FFTDriverRealFFT* driverEx() {
             return (FFTDriverRealFFT*)driver();

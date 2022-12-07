@@ -13,13 +13,19 @@
 #include "AudioCodecs/AudioEncoded.h"
 #include "minimp3.h"
 
+/** 
+ * @defgroup codec-mini Mini-mp3 
+ * @ingroup codecs
+ * @brief Mini MP3 decoder   
+**/
+
 namespace audio_tools {
 
 /**
  * @brief MP3 Decoder using https://github.com/pschatzmann/minimp3.
  * This decoder does not provide any good results and it is not suited to decode any audio above 32000 on an ESP32. So the
  * sample rate is limited by the MINIMP3_MAX_SAMPLE_RATE variable.
- * 
+ * @ingroup codec-mini
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

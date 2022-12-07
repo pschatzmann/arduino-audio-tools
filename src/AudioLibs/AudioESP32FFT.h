@@ -3,10 +3,18 @@
 #include "AudioFFT.h"
 #include "fft.h"
 
+/** 
+ * @defgroup fft-esp32 esp32-fft
+ * @ingroup fft
+ * @brief Fast Fourier Transform using esp32-fft 
+**/
+
+
 namespace audio_tools {
 
 /**
  * @brief Driver for ESP32-FFT https://github.com/pschatzmann/esp32-fft  
+ * @ingroup fft-esp32
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -40,6 +48,7 @@ class FFTDriverESP32FFT : public FFTDriver {
 
 /**
  * @brief AudioFFT using RealFFT
+ * @ingroup fft-esp32
  * @author Phil Schatzmann
  * Warning: This does not work as expected yet: I did not get the expected results...
  * @copyright GPLv3

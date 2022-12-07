@@ -28,7 +28,7 @@ struct SimpleContainerDataHeader {
 
 /**
  * @brief Wraps the encoded data into CFG and DAT segments so that we can recover the audio configuration and orignial segments if this is relevant
- * 
+ * @ingroup codecs
  */
 class SimpleContainerEncoder : public AudioEncoder {
  public:
@@ -98,7 +98,7 @@ class SimpleContainerEncoder : public AudioEncoder {
 
 /**
  * @brief Decodes the provided data from the DAT and CFG segments
- * 
+ * @ingroup codecs
  */
 class SimpleContainerDecoder : public AudioDecoder {
  public:

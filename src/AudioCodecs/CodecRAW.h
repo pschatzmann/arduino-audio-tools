@@ -2,6 +2,12 @@
 
 #include "AudioCodecs/AudioEncoded.h"
 
+/** 
+ * @defgroup codec-raw RAW
+ * @ingroup codecs
+ * @brief Pass Info as-is   
+**/
+
 namespace audio_tools {
 
 
@@ -9,7 +15,7 @@ namespace audio_tools {
  * @brief RAWDecoder - Actually this class does no encoding or decoding at all. It just passes on the 
  * data. The reason that this class exists is that we can use the same processing chain for different
  * file types and just replace the decoder.
- * 
+ * @ingroup codec-raw
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -98,6 +104,7 @@ class RAWDecoder : public AudioDecoder {
 /**
  * @brief RAWDecoder - Actually this class does no encoding or decoding at all. It just passes on the 
  * data. 
+ * @ingroup codec-raw
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

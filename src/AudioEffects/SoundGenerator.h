@@ -4,10 +4,18 @@
 #include "AudioTools/AudioTypes.h"
 #include "AudioBasic/Collections.h"
 
+/** 
+ * @defgroup generator Generators
+ * @ingroup dsp
+ * @brief Sound Generators  
+**/
+
+
 namespace audio_tools {
 
 /**
  * @brief Base class to define the abstract interface for the sound generating classes
+ * @ingroup generator
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 
@@ -147,6 +155,7 @@ class SoundGenerator  {
 /**
  * @brief Generates a Sound with the help of sin() function. If you plan to change the amplitude or frequency (incrementally),
  * I suggest to use SineFromTable instead.
+ * @ingroup generator
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 
@@ -239,6 +248,7 @@ class SineWaveGenerator : public SoundGenerator<T>{
 
 /**
  * @brief Generates a square wave sound.
+ * @ingroup generator
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 
@@ -264,6 +274,7 @@ class SquareWaveGenerator : public SineWaveGenerator<T> {
 
 /**
  * @brief Sine wave which is based on a fast approximation function. 
+ * @ingroup generator
  * @author Vivian Leigh Stewart
  * @copyright GPLv3
  * @tparam T 
@@ -298,6 +309,7 @@ class FastSineGenerator : public SineWaveGenerator<T> {
 
 /**
  * @brief Generates a random noise sound with the help of rand() function.
+ * @ingroup generator
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 
@@ -329,6 +341,7 @@ class NoiseGenerator : public SoundGenerator<T> {
 /**
  * @brief Provides a fixed value (e.g. 0) as sound data. This can be used e.g. to test the output functionality which should optimally just output
  * silence and no artifacts.
+ * @ingroup generator
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 
@@ -353,6 +366,7 @@ class SilenceGenerator : public SoundGenerator<T> {
 
 /**
  * @brief An Adapter Class which lets you use any Stream as a Generator
+ * @ingroup generator
  * @author Phil Schatzmann
  * @copyright GPLv3
  * @tparam T 
@@ -424,6 +438,7 @@ class GeneratorFromStream : public SoundGenerator<T> {
 
 /**
  * @brief We generate the samples from an array which is provided in the constructor
+ * @ingroup generator
  * @author Phil Schatzmann
  * @copyright GPLv3
  * @tparam T 
@@ -547,6 +562,7 @@ class GeneratorFromArray : public SoundGenerator<T> {
 
 /**
  * @brief Just returns a constant value
+ * @ingroup generator
  * @author Phil Schatzmann
  * @copyright GPLv3
  * @tparam T 
@@ -592,6 +608,7 @@ class GeneratorFixedValue : public SoundGenerator<T> {
 
 /**
  * @brief A sine generator based on a table. The table is created based using degress where one full wave is 360 degrees.
+ * @ingroup generator
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -699,6 +716,7 @@ class SineFromTable  : public SoundGenerator<T> {
 
 /**
  * @brief Mixer which combines multiple sound generators into one output
+ * @ingroup generator
  * @author Phil Schatzmann
  * @copyright GPLv3
  * @tparam T 
@@ -743,6 +761,7 @@ class GeneratorMixer : public SoundGenerator<T> {
 
 /**
  * @brief Generates a test signal which is easy to check because the values are incremented or decremented by 1
+ * @ingroup generator
  * @author Phil Schatzmann
  * @copyright GPLv3
  * @tparam T 

@@ -4,6 +4,12 @@
 #include "AudioTimer/AudioTimerDef.h"
 #include "mbed.h"
 
+/**
+ * @defgroup timer_mbed Timer-MBED
+ * @ingroup platform
+ * @brief MBED timer
+ */
+
 namespace audio_tools {
 
 class TimerAlarmRepeatingMBED;
@@ -12,7 +18,7 @@ INLINE_VAR TimerAlarmRepeatingMBED *timerAlarmRepeating = nullptr;
 
 /**
  * @brief Repeating Timer functions for repeated execution: Plaease use the typedef TimerAlarmRepeating
- * 
+ * @ingroup timer_mbed
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 
@@ -62,6 +68,7 @@ class TimerAlarmRepeatingMBED : public TimerAlarmRepeatingDef {
 
 };
 
+/// @brief  use TimerAlarmRepeating!  @ingroup timer_mbed
 typedef  TimerAlarmRepeatingMBED TimerAlarmRepeating;
 
 

@@ -9,18 +9,19 @@ namespace audio_tools {
 
 /**
  * @brief Audio Source (TX_MODE) or Audio Sink (RX_MODE)
+ * @ingroup basic
  */
 enum RxTxMode  {UNDEFINED_MODE=0, TX_MODE=1, RX_MODE=2, RXTX_MODE=3 };
 INLINE_VAR const char* RxTxModeNames[]={"UNDEFINED_MODE","TX_MODE","RX_MODE","RXTX_MODE" };
 /**
  * @brief Time Units
+ * @ingroup basic
  */
-
 enum TimeUnit {MS, US};
 
 /**
  * @brief Basic Audio information which drives e.g. I2S
- * 
+ * @ingroup basic
  */
 struct AudioBaseInfo {
     AudioBaseInfo() = default;
@@ -60,6 +61,7 @@ struct AudioBaseInfo {
 
 /**
  * @brief Supports changes to the sampling rate, bits and channels
+ * @ingroup basic
  */
 class AudioBaseInfoDependent {
     public:
@@ -72,6 +74,7 @@ class AudioBaseInfoDependent {
 
 /**
  * @brief Supports the subscription to audio change notifications
+ * @ingroup basic
  */
 class AudioBaseInfoSource {
     public:
@@ -81,7 +84,7 @@ class AudioBaseInfoSource {
 
 /**
  * @brief E.g. used by Encoders and Decoders
- * 
+ * @ingroup basic
  */
 class AudioWriter {
   public: 
@@ -98,18 +101,18 @@ INLINE_VAR const char* mime_pcm = "audio/pcm";
 
 
 #ifndef IS_DESKTOP
-/// wait for the Output to be ready
+/// wait for the Output to be ready  
 inline void waitFor(HardwareSerial &out){
     while(!out);
 }
 #endif
 
-/// wait for flag to be active
+/// wait for flag to be active  @ingroup basic
 inline void waitFor(bool &flag){
     while(!flag);
 }
 
-/// Pins
+/// Pins  @ingroup basic
 using Pins = Vector<int>;
 
 

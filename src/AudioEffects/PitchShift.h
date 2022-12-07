@@ -5,12 +5,12 @@
 #include <stdio.h>
 #include <string.h>
 
+
 namespace audio_tools {
 
 /**
  * @brief Configuration for PitchShiftStream: set the pitch_shift to define the
  * shift
- *
  */
 struct PitchShiftInfo : public AudioBaseInfo {
   PitchShiftInfo() {
@@ -26,6 +26,7 @@ struct PitchShiftInfo : public AudioBaseInfo {
  * @brief Very Simple Buffer implementation for Pitch Shift. We write in
  * constant speed, but reading can be done in a variable speed. We will hear
  * some noise when the buffer read and write pointers overrun each other
+ * @ingroup buffers
  * @tparam T
  */
 template <typename T>
@@ -99,6 +100,7 @@ protected:
  * @brief Varialbe speed ring buffer where we read with 0 and 180 degree and
  * blend the result to prevent overrun artifacts. See
  * https://github.com/YetAnotherElectronicsChannel/STM32_DSP_PitchShift
+ * @ingroup buffers
  * @tparam T
  */
 template <typename T> class VariableSpeedRingBuffer180 : public BaseBuffer<T> {
@@ -213,6 +215,7 @@ protected:
  * @brief Optimized Buffer implementation for Pitch Shift.
  * We try to interpolate the samples and restore the phase
  * when the read pointer and write pointer overtake each other
+ * @ingroup buffers
  * @tparam T
  */
 template <typename T> class VariableSpeedRingBuffer : public BaseBuffer<T> {
@@ -378,6 +381,7 @@ protected:
  * pitch shifted result in the correct number of channels. The pitch shifting
  * is done with the help of a buffer that can have potentially multiple
  * implementations.
+ * @ingroup transform
  * @tparam T
  * @tparam BufferT
  */

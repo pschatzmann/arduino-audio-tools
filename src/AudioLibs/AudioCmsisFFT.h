@@ -4,10 +4,17 @@
 #include "CMSIS_DSP.h"
 //#endif
 
+/** 
+ * @defgroup fft-cmsis CMSIS
+ * @ingroup fft
+ * @brief Fast Fourier Transform using CMSIS 
+**/
+
 namespace audio_tools {
 
 /**
  * @brief Driver for Cmsis-FFT see https://arm-software.github.io/CMSIS_5/DSP
+ * @ingroup fft-cmsis
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -67,6 +74,7 @@ class FFTDriverCmsisFFT : public FFTDriver {
 
 /**
  * @brief AudioFFT for ARM processors that provided Cmsis  DSP
+ * @ingroup fft-cmsis
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

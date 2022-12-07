@@ -1,4 +1,10 @@
 #pragma once
+/**
+ * @defgroup timer Timers
+ * @ingroup tools
+ * @brief Platform specific timers
+ */
+
 #include "AudioTools/AudioLogger.h"
 #include "AudioTimer/AudioTimerESP32.h"
 #include "AudioTimer/AudioTimerESP8266.h"

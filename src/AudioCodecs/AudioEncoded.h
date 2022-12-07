@@ -9,6 +9,7 @@ namespace audio_tools {
 
 /**
  * @brief Docoding of encoded audio into PCM data
+ * @ingroup codecs
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -39,6 +40,7 @@ public:
 
 /**
  * @brief  Encoding of PCM data
+ * @ingroup codecs
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -55,6 +57,7 @@ public:
  * @brief Dummpy no implmentation Codec. This is used so that we can initialize
  * some pointers to decoders and encoders to make sure that they do not point to
  * null.
+ * @ingroup codecs
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -90,6 +93,7 @@ public:
 /**
  * @brief A Streaming Decoder where we provide both the input and output
  * as streams.
+ * @ingroup codecs
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -140,6 +144,7 @@ protected:
 /**
  * @brief A more natural Stream class to process encoded data (aac, wav,
  * mp3...).
+ * @ingroup codecs
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -355,7 +360,6 @@ public:
   AudioEncoder &encoder() { return *encoder_ptr; }
 
 protected:
-  // ExternalBufferStream ext_buffer;
   AudioDecoder *decoder_ptr = CodecNOP::instance(); // decoder
   AudioEncoder *encoder_ptr = CodecNOP::instance(); // decoder
   AudioWriter *writer_ptr = nullptr;

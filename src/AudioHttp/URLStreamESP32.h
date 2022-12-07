@@ -155,10 +155,11 @@ class BufferedTaskStream : public AudioStream {
 
 /**
  * @brief URLStream implementation for the ESP32 based on a separate FreeRTOS task 
- * @author Phil Schatzmann
+* @ingroup http
+* @author Phil Schatzmann
  * @copyright GPLv3
  */
-
+x
 class URLStream : public AbstractURLStream {
     public:
         URLStream(int readBufferSize=DEFAULT_BUFFER_SIZE){

@@ -5,7 +5,6 @@ namespace audio_tools {
 
 /**
  * @brief Base class for all parameters
- *
  */
 class AbstractParameter {
     public:
@@ -36,7 +35,7 @@ class AbstractParameter {
 
 /**
  * @brief A constant value
- *
+ * @ingroup effects
  */
 class Parameter : public AbstractParameter {
     public:
@@ -48,7 +47,6 @@ class Parameter : public AbstractParameter {
 
 /**
  * @brief Generates ADSR values between 0.0 and 1.0
- *
  */
 class ADSR : public  AbstractParameter  {
     public:

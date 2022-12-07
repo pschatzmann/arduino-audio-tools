@@ -163,7 +163,7 @@ Get some inspiration [from projects that were using this library](https://github
 
 ## Documentation
 
-- Here is the generated [Class Documentation](https://pschatzmann.github.io/arduino-audio-tools/html/namespaceaudio__tools.html). 
+- Here is the generated [Class Documentation](https://pschatzmann.github.io/arduino-audio-tools/html/modules.html). 
 - Please also check out the [Information in the Wiki](https://github.com/pschatzmann/arduino-audio-tools/wiki)
 - You also might find further information in [one of my Blogs](https://www.pschatzmann.ch/home/category/machine-sound/)
 

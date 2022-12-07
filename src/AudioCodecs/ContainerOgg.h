@@ -14,7 +14,7 @@ namespace audio_tools {
  * @brief OggContainerDecoder - Ogg Container. Decodes a packet from an Ogg container.
  * The Ogg begin segment contains the AudioBaseInfo structure. You can subclass
  * and overwrite the beginOfSegment() method to implement your own headers
- *
+ * @ingroup codecs
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -192,7 +192,7 @@ class OggContainerDecoder : public AudioDecoder {
  * @brief OggContainerEncoder - Ogg Container. Encodes a packet for an Ogg container.
  * The Ogg begin segment contains the AudioBaseInfo structure. You can subclass
  * ond overwrite the writeHeader() method to implement your own header logic.
- *
+ * @ingroup codecs
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

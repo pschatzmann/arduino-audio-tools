@@ -8,6 +8,12 @@
 #include "AudioCodecs/AudioEncoded.h"
 #include "MP3DecoderMAD.h"
 
+/** 
+ * @defgroup codec-mad MAD
+ * @ingroup codecs
+ * @brief MAD MP3 decoder   
+**/
+
 namespace audio_tools {
 
 // forward audio changes
@@ -15,6 +21,7 @@ AudioBaseInfoDependent *audioChangeMAD;
 
 /**
  * @brief MP3 Decoder using https://github.com/pschatzmann/arduino-libmad
+ * @ingroup codec-mad
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

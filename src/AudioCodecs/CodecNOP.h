@@ -2,10 +2,17 @@
 
 #include "AudioCodecs/AudioEncoded.h"
 
+/** 
+ * @defgroup codec-nop NOP 
+ * @ingroup codecs
+ * @brief No operation   
+**/
+
 namespace audio_tools {
 
 /**
  * @brief Dummy Decoder which does nothing
+ * @ingroup codec-nop
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

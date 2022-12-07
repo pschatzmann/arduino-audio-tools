@@ -2,12 +2,17 @@
 
 #include "AudioCodecs/AudioEncoded.h"
 
-namespace audio_tools {
+/** 
+ * @defgroup codecs8bit 8Bit
+ * @ingroup codecs
+ * @brief Codec for 8 bit data  
+**/
 
+namespace audio_tools {
 
 /**
  * @brief Decoder8Bit - Converts an 8 Bit Stream into 16Bits
- * 
+ * @ingroup codecs8bit
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -102,6 +107,7 @@ class Decoder8Bit : public AudioDecoder {
 /**
  * @brief Encoder8Bits - Condenses 16 bit PCM data stream to 8 bits
  * data. 
+ * @ingroup codecs8bit
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

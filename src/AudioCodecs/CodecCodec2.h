@@ -20,8 +20,13 @@
 #include "AudioCodecs/AudioEncoded.h"
 #include "codec2.h"
 
-namespace audio_tools {
+/** 
+ * @defgroup codec2 Codec2
+ * @ingroup codecs
+ * @brief Codec2   
+**/
 
+namespace audio_tools {
 
 /// Convert bits per sample to Codec2 mode
 int getCodec2Mode(int bits_per_second) {
@@ -51,6 +56,7 @@ int getCodec2Mode(int bits_per_second) {
 /**
  * @brief Decoder for Codec2. Depends on
  * https://github.com/pschatzmann/arduino-libcodec2.
+ * @ingroup codec2
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -170,6 +176,7 @@ protected:
 /**
  * @brief Encoder for Codec2 - Depends on
  * https://github.com/pschatzmann/arduino-libcodec2.
+ * @ingroup codec2
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

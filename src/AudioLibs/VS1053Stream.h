@@ -45,6 +45,7 @@ class VS1053Config : public AudioBaseInfo {
 /**
  * @brief VS1053 Output Interface which processes PCM data by default. If you want to write
  * encoded data set is_encoded_data = true in the configuration;
+ * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

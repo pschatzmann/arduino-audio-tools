@@ -194,10 +194,10 @@ struct SynthesizerKey {
     int note;
 };
 
-
 /**
  * @brief A simple Synthesizer which can generate sound having multiple keys pressed. The main purpose
  * of this class is managing the synthezizer channels
+ * @ingroup generator
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

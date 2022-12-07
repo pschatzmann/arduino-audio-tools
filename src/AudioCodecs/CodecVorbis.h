@@ -5,6 +5,12 @@
 #include "ivorbiscodec.h"
 #include "ivorbisfile.h"
 
+/** 
+ * @defgroup codec-vorbis Vorbis
+ * @ingroup codecs
+ * @brief Codec Vorbis   
+**/
+
 namespace audio_tools {
 
 #ifndef VARBIS_MAX_READ_SIZE
@@ -15,6 +21,7 @@ namespace audio_tools {
  * @brief Vorbis Streaming Decoder using
  * https://github.com/pschatzmann/arduino-libvorbis-idec
  * https://github.com/pschatzmann/arduino-libopus.git
+ * @ingroup codec-vorbis
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

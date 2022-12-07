@@ -19,7 +19,7 @@ namespace audio_tools {
  * it was created in 1995. In the 90s the computers had limited processor power and memory available. 
  * In todays world we can get some cheap Microcontrollers, which provide almost the same capabilities.
  *
- * 
+ * @ingroup generator
  * @tparam T 
  */
 
@@ -73,6 +73,7 @@ class STKGenerator : public SoundGenerator<T> {
 
 /**
  * @brief STK Stream for Instrument or Voicer
+ * @ingroup dsp
  */
 template <class StkCls>
 class STKStream : public GeneratedSoundStream<int16_t> {
@@ -111,6 +112,7 @@ class STKStream : public GeneratedSoundStream<int16_t> {
  * @brief Use any effect from the STK framework: e.g. Chorus, Echo, FreeVerb, JCRev,
  * PitShift... https://github.com/pschatzmann/Arduino-STK
  *
+ * @ingroup effects
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -130,6 +132,7 @@ protected:
 
 /**
  * @brief Chorus Effect
+ * @ingroup effects
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -146,6 +149,7 @@ public:
 
 /**
  * @brief Echo Effect
+ * @ingroup effects
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -163,6 +167,7 @@ public:
 
 /**
  * @brief Jezar at Dreampoint's FreeVerb, implemented in STK.
+ * @ingroup effects
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -178,6 +183,7 @@ public:
 
 /**
  * @brief John Chowning's reverberator class.
+ * @ingroup effects
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -194,6 +200,7 @@ public:
 
 /**
  * @brief CCRMA's NRev reverberator class.
+ * @ingroup effects
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -209,6 +216,7 @@ public:
 
 /**
  * @brief Perry's simple reverberator class
+ * @ingroup effects
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -224,6 +232,7 @@ public:
 
 /**
  * @brief Pitch shifter effect class based on the Lent algorithm
+ * @ingroup effects
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -241,6 +250,7 @@ public:
 
 /**
  * @brief Pitch shifter effect class based on the Lent algorithm
+ * @ingroup effects
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

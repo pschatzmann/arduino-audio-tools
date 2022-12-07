@@ -1,6 +1,12 @@
 #pragma once
 #include "AudioTools/AudioTypes.h"
 
+/**
+ * @defgroup timer Timer 
+ * @ingroup tools
+ * @brief Timer
+ */
+
 namespace audio_tools {
 
 typedef void (*repeating_timer_callback_t )(void* obj);
@@ -9,7 +15,7 @@ enum TimerFunction {DirectTimerCallback, TimerCallbackInThread, SimpleThreadLoop
 
 /**
  * @brief Common Interface definition for TimerAlarmRepeating 
- * 
+ * @ingroup timer
  */
 class TimerAlarmRepeatingDef {
     public:
@@ -33,7 +39,7 @@ class TimerAlarmRepeatingDef {
 
 /**
  * @brief Tools for calculating timer values
- * 
+ * @ingroup timer
  */
 class AudioUtils {
     public:

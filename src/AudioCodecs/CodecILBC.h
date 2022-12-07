@@ -13,11 +13,18 @@
 #include "AudioCodecs/AudioEncoded.h"
 #include "iLBC.h"
 
+/** 
+ * @defgroup codec-iLBC iLBC
+ * @ingroup codecs
+ * @brief iLBC Codec   
+**/
+
 namespace audio_tools {
 
 /**
  * @brief Decoder for iLBC. Depends on
  * https://github.com/pschatzmann/libilbc
+ * @ingroup codec-iLBC
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -107,6 +114,7 @@ class ILBCDecoder : public AudioDecoder {
 /**
  * @brief Encoder for iLBC - Depends on
  * https://github.com/pschatzmann/libopenilbc
+ * @ingroup codec-iLBC
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

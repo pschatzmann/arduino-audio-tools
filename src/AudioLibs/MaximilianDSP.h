@@ -12,7 +12,7 @@ namespace audio_tools {
 
 /**
  * @brief AudioTools integration with Maximilian
- * 
+ * @ingroup dsp
  */
 class Maximilian {
     public:

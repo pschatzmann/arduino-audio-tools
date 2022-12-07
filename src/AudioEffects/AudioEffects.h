@@ -4,6 +4,13 @@
 #include "AudioEffects/SoundGenerator.h"
 #include "AudioEffects/AudioEffect.h"
 
+/** 
+ * @defgroup effects Effects
+ * @ingroup dsp
+ * @brief Audio Effects  
+**/
+
+
 namespace audio_tools {
 
 /**
@@ -14,6 +21,7 @@ namespace audio_tools {
  * We subclass the AudioEffects from GeneratorT so that we can use this class with the GeneratedSoundStream 
  * class to output the audio.
  *   
+ * @ingroup effects
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

@@ -27,14 +27,15 @@ class AnalogConfig : public AudioBaseInfo {
 };
 
 /**
- * @brief Reading Analog Data using a timer and the Arduino analogRead() method
+ * @brief Please use AnalogAudioStream: Reading Analog Data using a timer and the Arduino analogRead() method
+ * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
  *
  */
-class AnalogAudioStream : public AudioStreamX {
+class AnalogAudioStreamArduino : public AudioStreamX {
  public:
-  AnalogAudioStream() = default;
+  AnalogAudioStreamArduino() = default;
 
   AnalogConfig defaultConfig(RxTxMode mode=RX_MODE) {
     AnalogConfig cfg;
@@ -126,6 +127,8 @@ class AnalogAudioStream : public AudioStreamX {
 
   }
 };
+
+typedef AnalogAudioStream AnalogAudioStreamArduino;
 
 }  // namespace audio_tools
 

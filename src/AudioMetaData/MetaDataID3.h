@@ -11,16 +11,24 @@
 #include <ctype.h>
 #include "AbstractMetaData.h"
 
+/** 
+ * @defgroup metadata-id3 ID3 
+ * @ingroup metadata
+ * @brief ID3 Metadata
+ **/
+
+
 namespace audio_tools {
 
-/// String array with genres
+// String array with genres 
 INLINE_VAR const char *genres[] = { "Classic Rock", "Country", "Dance", "Disco", "Funk", "Grunge", "Hip-Hop", "Jazz", "Metal", "New Age", "Oldies", "Other", "Pop", "R&B", "Rap", "Reggae", "Rock", "Techno", "Industrial", "Alternative", "Ska", "Death Metal", "Pranks", "Soundtrack", "Euro-Techno", "Ambient", "Trip-Hop", "Vocal", "Jazz+Funk", "Fusion", "Trance", "Classical", "Instrumental", "Acid", "House", "Game", "Sound Clip", "Gospel", "Noise", "Alternative Rock", "Bass", "Soul", "Punk", "Space", "Meditative", "Instrumental Pop", "Instrumental Rock", "Ethnic", "Gothic", "Darkwave", "Techno-Insdustiral", "Electronic", "Pop-Folk", "Eurodance", "Dream", "Southern Rock", "Comedy", "Cult", "Gangsta", "Top 40", "Christian Rap", "Pop/Funk", "Jungle", "Native US", "Cabaret", "New Wave", "Psychadelic", "Rave", "Showtunes", "Trailer", "Lo-Fi", "Tribal", "Acid Punk", "Acid Jazz", "Polka", "Retro", "Musical", "Rock & Roll", "Hard Rock", "Folk", "Folk-Rock", "National Folk", "Swing", "Fast Fusion", "Bebob", "Latin", "Revival", "Celtic", "Bluegrass", "Avantgarde", "Gothic Rock", "Progressive Rock", "Psychedelic Rock", "Symphonic Rock", "Slow Rock", "Big Band", "Chorus", "Easy Listening", "Acoustic","Humour", "Speech", "Chanson", "Opera", "Chamber Music", "Sonata", "Symphony", "Booty Bass", "Primus", "Porn Groove", "Satire", "Slow Jam", "Club", "Tango", "Samba", "Folklore", "Ballad", "Power Ballad", "Rhytmic Soul", "Freestyle", "Duet", "Punk Rock", "Drum Solo", "Acapella", "Euro-House", "Dance Hall", "Goa", "Drum & Bass", "Club-House", "Hardcore", "Terror", "Indie", "BritPop", "Negerpunk", "Polsk Punk", "Beat", "Christian Gangsta", "Heavy Metal", "Black Metal", "Crossover", "Contemporary C", "Christian Rock", "Merengue", "Salsa", "Thrash Metal", "Anime", "JPop", "SynthPop" };
 
-/// current status of the parsing
+/// current status of the parsing @ingroup metadata-id3
 enum ParseStatus { TagNotFound, PartialTagAtTail, TagFoundPartial, TagFoundComplete, TagProcessed};
 
 
 /// ID3 verion 1 TAG (130 bytes)
+/// @ingroup metadata-id3
 struct ID3v1 {
     char header[3]; // TAG
     char title[30];
@@ -35,6 +43,7 @@ struct ID3v1 {
 
 
 /// ID3 verion 1 Enchanced TAG (227 bytes)
+/// @ingroup metadata-id3
 struct ID3v1Enhanced {
     char header[4]; // TAG+
     char title[60];
@@ -49,6 +58,7 @@ struct ID3v1Enhanced {
 
 /**
  * @brief ID3 Meta Data Common Functionality
+ * @ingroup metadata-id3
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 
@@ -88,6 +98,7 @@ class MetaDataID3Base  {
 
 /**
  * @brief Simple ID3 Meta Data API which supports ID3 V1
+ * @ingroup metadata-id3
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -265,11 +276,11 @@ class MetaDataID3V1  : public MetaDataID3Base {
 #define ExtendedHeaderFlag 0x20
 #define ExperimentalIndicatorFlag 0x10
         
-/// Relevant v2 Tags        
+// Relevant v2 Tags        
 INLINE_VAR const char* id3_v2_tags[] = {"TALB", "TOPE", "TIT2", "TCON"};
 
 
-/// ID3 verion 2 TAG Header (10 bytes)
+// ID3 verion 2 TAG Header (10 bytes)  @ingroup metadata-id3
 struct ID3v2 {
     uint8_t header[3]; // ID3
     uint8_t version[2];
@@ -285,14 +296,14 @@ struct ID3v2 {
 // }; 
 
 
-/// ID3 verion 2 Tag
+// ID3 verion 2 Tag  
 struct ID3v2Frame {
     uint8_t id[4]; 
     uint8_t size[4];
     uint16_t flags;
 }; 
 
-/// ID3 verion 2 Tag
+// ID3 verion 2 Tag  
 struct ID3v2FrameString {
     uint8_t id[4]; 
     uint8_t size[4];
@@ -310,6 +321,7 @@ INLINE_VAR const int ID3FrameSize = 11;
 
 /**
  * @brief Simple ID3 Meta Data API which supports ID3 V2: We only support the "TALB", "TOPE", "TIT2", "TCON" tags
+ * @ingroup metadata-id3
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -326,7 +338,6 @@ class MetaDataID3V2 : public MetaDataID3Base  {
         tag_processed = false;
     }
     
-
     /// Ends the processing and releases the memory
     void end() {
         status = TagNotFound;
@@ -518,6 +529,7 @@ class MetaDataID3V2 : public MetaDataID3Base  {
 /**
  * @brief Simple ID3 Meta Data Parser which supports ID3 V1 and V2 and implements the Stream interface. You just need to set the callback(s) to receive the result 
  * and copy the audio data to this stream.
+ * @ingroup metadata-id3
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 

@@ -3,6 +3,12 @@
 #ifdef STM32
 #include "AudioI2S/I2SConfig.h"
 
+/** 
+ * @defgroup i2s-STM32 I2S-STM32
+ * @ingroup platform
+ * @brief I2S Implementation for STM32  
+**/
+
 namespace audio_tools {
 #include "stm32-i2s.h"
 
@@ -10,6 +16,7 @@ namespace audio_tools {
  * @brief Basic I2S API - for the STM32
  * Depends on https://github.com/pschatzmann/stm32f411-i2s
  * We just add a write and read buffer and pass some parameters to the STM32 API!
+ * @ingroup i2s-STM32
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

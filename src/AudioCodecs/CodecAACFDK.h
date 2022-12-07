@@ -4,6 +4,12 @@
 #include "AACDecoderFDK.h"
 #include "AACEncoderFDK.h"
 
+/** 
+ * @defgroup fdk fdk
+ * @ingroup codecs
+ * @brief FTK AAC Decoder  
+**/
+
 namespace audio_tools {
 
 // audio change notification target
@@ -13,6 +19,7 @@ AudioBaseInfoDependent *audioChangeFDK = nullptr;
  * @brief Audio Decoder which decodes AAC into a PCM stream
  * This is basically just a wrapper using https://github.com/pschatzmann/arduino-fdk-aac
  * which uses AudioBaseInfo and provides the handlig of AudioBaseInfo changes.
+ * @ingroup fdk
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -116,6 +123,7 @@ class AACDecoderFDK : public AudioDecoder  {
 /**
  * @brief Encodes PCM data to the AAC format and writes the result to a stream
  * This is basically just a wrapper using https://github.com/pschatzmann/arduino-fdk-aac
+ * @ingroup fdk
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

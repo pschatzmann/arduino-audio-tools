@@ -16,10 +16,16 @@
 #define FLAC_READ_TIMEOUT_MS 10000
 #endif
 
-
 #ifndef FLAC_BUFFER_SIZE
 #define FLAC_BUFFER_SIZE (8 * 1024)
 #endif
+
+/** 
+ * @defgroup codec-flac FLAC
+ * @ingroup codecs
+ * @brief FLAC Codec   
+**/
+
 
 namespace audio_tools {
 
@@ -27,7 +33,7 @@ namespace audio_tools {
  * @brief Decoder for FLAC. Depends on https://github.com/pschatzmann/arduino-libflac. We support an efficient streaming API and an very memory intensitiv standard interface. So 
  * you should prefer the streaming interface where you call setOutputStream() before the begin and copy() in the loop.
  * Validated with http://www.2l.no/hires/
- * 
+ * @ingroup codec-flac
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -260,7 +266,7 @@ class FLACDecoder : public StreamingDecoder {
 
 /**
  * @brief FLACEncoder
- *
+ * @ingroup codec-flac
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

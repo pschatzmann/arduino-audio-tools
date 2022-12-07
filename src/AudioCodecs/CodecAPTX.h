@@ -12,11 +12,18 @@
 #include "AudioCodecs/AudioEncoded.h"
 #include "openaptx.h"
 
+/** 
+ * @defgroup aptx AptX
+ * @ingroup codecs
+ * @brief AptX Codec  
+**/
+
 namespace audio_tools {
 
 /**
  * @brief Decoder for OpenAptx. Depends on
  * https://github.com/pschatzmann/libopenaptx
+ * @ingroup aptx
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -190,6 +197,7 @@ class APTXDecoder : public AudioDecoder {
 /**
  * @brief Encoder for OpenAptx - Depends on
  * https://github.com/pschatzmann/libopenaptx
+ * @ingroup aptx
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

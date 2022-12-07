@@ -4,15 +4,28 @@
 #ifdef ARDUINO_AVR_NANO
 #include "AudioPWM/PWMAudioBase.h"
 #include "AudioTimer/AudioTimerAVR.h"
+
+/** 
+ * @defgroup pwm_avr PWM-AVR
+ * @ingroup platform
+ * @brief PWM Implementation for AVR  
+**/
+
 namespace audio_tools {
 
 class PWMAudioStreamAVR;
+/**
+ * @typedef  PWMAudioStream
+ * @ingroup platform
+ * @brief Please use PWMAudioStream!
+ */
 typedef PWMAudioStreamAVR PWMAudioStream;
 static PWMAudioStreamAVR *accessAudioPWM = nullptr; 
 
 
 /**
  * @brief Experimental: Audio output to PWM pins for the AVR. The AVR supports only up to 2 channels. 
+ * @ingroup pwm_avr
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

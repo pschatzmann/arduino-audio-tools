@@ -3,13 +3,22 @@
 #include "AudioTools/AudioPrint.h"
 #include "AudioLibs/FFT/FFTWindows.h"
 
+/** 
+ * @defgroup fft FFT
+ * @ingroup dsp
+ * @brief Fast Fourier Transform  
+**/
+
 namespace audio_tools {
 
 // forward declaration
 class AudioFFTBase;
 MusicalNotes AudioFFTNotes;
 
-/// Result of the FFT
+/**
+ * @brief Result of the FFT
+ * @ingroup fft
+*/
 struct AudioFFTResult {
     int bin;
     float magnitude;
@@ -26,7 +35,11 @@ struct AudioFFTResult {
     }
 };
 
-/// Configuration for AudioFFT. If there are more then 1 channel the channel_used is defining which channel is used to perform the fft on.
+/**
+ * @brief Configuration for AudioFFT. If there are more then 1 channel the 
+ * channel_used is defining which channel is used to perform the fft on.
+ * @ingroup fft
+ */
 struct AudioFFTConfig : public  AudioBaseInfo {
     AudioFFTConfig(){
         channels = 2;
@@ -45,6 +58,7 @@ struct AudioFFTConfig : public  AudioBaseInfo {
 
 /**
  * @brief Abstract Class which defines the basic FFT functionality 
+ * @ingroup fft
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -60,6 +74,7 @@ class FFTDriver {
 
 /**
  * @brief Executes FFT using audio data. The Driver which is passed in the constructor selects a specifc FFT implementation. 
+ * @ingroup fft
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
