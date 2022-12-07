@@ -46,17 +46,6 @@ struct PWMConfig : public AudioBaseInfo {
 #ifndef __AVR__
     uint16_t start_pin = PIN_PWM_START; 
 
-    // // define all pins by passing an array and updates the channels by the number of pins
-    // template<size_t N> 
-    // void setPins(int (&array)[N]) {
-    //      TRACED();
-    //     channels = sizeof(array)/sizeof(int);
-    //     pins_data.resize(channels);
-    //     for (int j=0;j<channels;j++){
-    //         pins_data[j]=array[j];
-    //     }
-    // }
-
     /// Defines the pins and the corresponding number of channels (=number of pins)
     void setPins(Pins &pins){
         channels = pins.size();
@@ -94,8 +83,9 @@ struct PWMConfig : public AudioBaseInfo {
 
 
 /**
- * @brief Common functionality for PWM output
- * 
+ * @brief Common functionality for PWM output. 
+ * Please use the PWMAudioStream typedef instead which references the implementation
+ * @ingroup io
  */
 class PWMAudioStreamBase : public AudioPrint {
     public:

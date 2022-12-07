@@ -4,7 +4,6 @@
  * 
  */
 
-
 #include "AudioTools.h"
 #include "portaudio.h"
 
@@ -12,7 +11,6 @@ namespace audio_tools {
 
 /**
  * @brief PortAudio information
- * 
  */
 class PortAudioConfig : public AudioBaseInfo {
     public:
@@ -34,7 +32,7 @@ class PortAudioConfig : public AudioBaseInfo {
 
 /**
  * @brief Arduino Audio Stream using PortAudio
- * 
+ * @ingroup io
  */
 class PortAudioStream : public AudioStreamX {
     public:

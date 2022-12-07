@@ -81,7 +81,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Simple Facade which can turn any <a class="el" href="class_stream.html">Stream</a> into a IAudioSource. This way we can e.g. use an <a class="el" href="classaudio__tools_1_1_i2_s_stream.html" title="We support the Stream interface for the I2S access. In addition we allow a separate mute pin which mi...">I2SStream</a> as source to stream data.  
+<p>Simple Facade which can turn any <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> into a IAudioSource. This way we can e.g. use an <a class="el" href="classaudio__tools_1_1_i2_s_stream.html" title="We support the Stream interface for the I2S access. In addition we allow a separate mute pin which mi...">I2SStream</a> as source to stream data.  
  <a href="classaudio__tools_1_1_r_t_s_p_source_stream.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_micro_r_t_s_p_audio_8h_source.html">MicroRTSPAudio.h</a>&gt;</code></p>
@@ -94,11 +94,11 @@ Inheritance diagram for audio_tools::RTSPSourceStream:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a62922bbb11ad332ef5c006086173afd0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_source_stream.html#a62922bbb11ad332ef5c006086173afd0">RTSPSourceStream</a> (<a class="el" href="class_stream.html">Stream</a> &amp;stream, <a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> info)</td></tr>
-<tr class="memdesc:a62922bbb11ad332ef5c006086173afd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new RTSPStreamSource object from an Arduino <a class="el" href="class_stream.html">Stream</a> You need to provide the audio information by calling <a class="el" href="classaudio__tools_1_1_r_t_s_p_source_stream.html#a821d952d7d86257c2c82fa19e24240c8" title="Set the Audio Info. This needs to be called if we just pass a Stream. The AudioStream is usually able...">setAudioInfo()</a>  <a href="classaudio__tools_1_1_r_t_s_p_source_stream.html#a62922bbb11ad332ef5c006086173afd0">More...</a><br /></td></tr>
+<tr class="memitem:a62922bbb11ad332ef5c006086173afd0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_source_stream.html#a62922bbb11ad332ef5c006086173afd0">RTSPSourceStream</a> (<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;stream, <a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> info)</td></tr>
+<tr class="memdesc:a62922bbb11ad332ef5c006086173afd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new RTSPStreamSource object from an Arduino <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> You need to provide the audio information by calling <a class="el" href="classaudio__tools_1_1_r_t_s_p_source_stream.html#a821d952d7d86257c2c82fa19e24240c8" title="Set the Audio Info. This needs to be called if we just pass a Stream. The AudioStream is usually able...">setAudioInfo()</a>  <a href="classaudio__tools_1_1_r_t_s_p_source_stream.html#a62922bbb11ad332ef5c006086173afd0">More...</a><br /></td></tr>
 <tr class="separator:a62922bbb11ad332ef5c006086173afd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a1d1c8841aa40394339e59dc4a24bab"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_source_stream.html#a9a1d1c8841aa40394339e59dc4a24bab">RTSPSourceStream</a> (<a class="el" href="class_stream.html">Stream</a> &amp;stream, RTSPFormat &amp;format)</td></tr>
-<tr class="memdesc:a9a1d1c8841aa40394339e59dc4a24bab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new RTSPStreamSource object from an Arduino <a class="el" href="class_stream.html">Stream</a> You need to provide the audio information by calling <a class="el" href="classaudio__tools_1_1_r_t_s_p_source_stream.html#a821d952d7d86257c2c82fa19e24240c8" title="Set the Audio Info. This needs to be called if we just pass a Stream. The AudioStream is usually able...">setAudioInfo()</a>  <a href="classaudio__tools_1_1_r_t_s_p_source_stream.html#a9a1d1c8841aa40394339e59dc4a24bab">More...</a><br /></td></tr>
+<tr class="memitem:a9a1d1c8841aa40394339e59dc4a24bab"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_source_stream.html#a9a1d1c8841aa40394339e59dc4a24bab">RTSPSourceStream</a> (<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;stream, RTSPFormat &amp;format)</td></tr>
+<tr class="memdesc:a9a1d1c8841aa40394339e59dc4a24bab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new RTSPStreamSource object from an Arduino <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> You need to provide the audio information by calling <a class="el" href="classaudio__tools_1_1_r_t_s_p_source_stream.html#a821d952d7d86257c2c82fa19e24240c8" title="Set the Audio Info. This needs to be called if we just pass a Stream. The AudioStream is usually able...">setAudioInfo()</a>  <a href="classaudio__tools_1_1_r_t_s_p_source_stream.html#a9a1d1c8841aa40394339e59dc4a24bab">More...</a><br /></td></tr>
 <tr class="separator:a9a1d1c8841aa40394339e59dc4a24bab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a96194830e4c9f91177a1e483318fc572"><td class="memItemLeft" align="right" valign="top"><a id="a96194830e4c9f91177a1e483318fc572" name="a96194830e4c9f91177a1e483318fc572"></a>
 virtual RTSPFormat *&#160;</td><td class="memItemRight" valign="bottom"><b>getFormat</b> () override</td></tr>
@@ -106,7 +106,7 @@ virtual RTSPFormat *&#160;</td><td class="memItemRight" valign="bottom"><b>getFo
 <tr class="memitem:aafa34b826b3bf8ddb02a2b12e1d89f7a"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_source_stream.html#aafa34b826b3bf8ddb02a2b12e1d89f7a">readBytes</a> (void *dest, int byteCount) override</td></tr>
 <tr class="separator:aafa34b826b3bf8ddb02a2b12e1d89f7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a821d952d7d86257c2c82fa19e24240c8"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_r_t_s_p_source_stream.html#a821d952d7d86257c2c82fa19e24240c8">setAudioInfo</a> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> info)</td></tr>
-<tr class="memdesc:a821d952d7d86257c2c82fa19e24240c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Audio Info. This needs to be called if we just pass a <a class="el" href="class_stream.html">Stream</a>. The <a class="el" href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...">AudioStream</a> is usually able to provide the data from it's original configuration.  <a href="classaudio__tools_1_1_r_t_s_p_source_stream.html#a821d952d7d86257c2c82fa19e24240c8">More...</a><br /></td></tr>
+<tr class="memdesc:a821d952d7d86257c2c82fa19e24240c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Audio Info. This needs to be called if we just pass a <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>. The <a class="el" href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...">AudioStream</a> is usually able to provide the data from it's original configuration.  <a href="classaudio__tools_1_1_r_t_s_p_source_stream.html#a821d952d7d86257c2c82fa19e24240c8">More...</a><br /></td></tr>
 <tr class="separator:a821d952d7d86257c2c82fa19e24240c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a993a27100499f43fbfa4d98609bb5241"><td class="memItemLeft" align="right" valign="top"><a id="a993a27100499f43fbfa4d98609bb5241" name="a993a27100499f43fbfa4d98609bb5241"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setFragmentSize</b> (int fragmentSize)</td></tr>
@@ -128,14 +128,14 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>active</b> = true</td
 RTSPFormatPCM&#160;</td><td class="memItemRight" valign="bottom"><b>format</b> {rtp_info}</td></tr>
 <tr class="separator:a7461a6e85ed32714581dbe9f115d65b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52eeff421aaba57a7d5db2765dafe6c0"><td class="memItemLeft" align="right" valign="top"><a id="a52eeff421aaba57a7d5db2765dafe6c0" name="a52eeff421aaba57a7d5db2765dafe6c0"></a>
-<a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_stream</b> = nullptr</td></tr>
+<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_stream</b> = nullptr</td></tr>
 <tr class="separator:a52eeff421aaba57a7d5db2765dafe6c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47c309133302ad2cf78a44e0b5992cdb"><td class="memItemLeft" align="right" valign="top"><a id="a47c309133302ad2cf78a44e0b5992cdb" name="a47c309133302ad2cf78a44e0b5992cdb"></a>
 <a class="el" href="classaudio__tools_1_1_r_t_p_p_c_m_audio_info.html">RTPPCMAudioInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><b>rtp_info</b></td></tr>
 <tr class="separator:a47c309133302ad2cf78a44e0b5992cdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Simple Facade which can turn any <a class="el" href="class_stream.html">Stream</a> into a IAudioSource. This way we can e.g. use an <a class="el" href="classaudio__tools_1_1_i2_s_stream.html" title="We support the Stream interface for the I2S access. In addition we allow a separate mute pin which mi...">I2SStream</a> as source to stream data. </p>
+<div class="textblock"><p >Simple Facade which can turn any <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> into a IAudioSource. This way we can e.g. use an <a class="el" href="classaudio__tools_1_1_i2_s_stream.html" title="We support the Stream interface for the I2S access. In addition we allow a separate mute pin which mi...">I2SStream</a> as source to stream data. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -151,7 +151,7 @@ RTSPFormatPCM&#160;</td><td class="memItemRight" valign="bottom"><b>format</b> {
         <tr>
           <td class="memname">audio_tools::RTSPSourceStream::RTSPSourceStream </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_stream.html">Stream</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;&#160;</td>
           <td class="paramname"><em>stream</em>, </td>
         </tr>
         <tr>
@@ -173,7 +173,7 @@ RTSPFormatPCM&#160;</td><td class="memItemRight" valign="bottom"><b>format</b> {
 </table>
 </div><div class="memdoc">
 
-<p>Construct a new RTSPStreamSource object from an Arduino <a class="el" href="class_stream.html">Stream</a> You need to provide the audio information by calling <a class="el" href="classaudio__tools_1_1_r_t_s_p_source_stream.html#a821d952d7d86257c2c82fa19e24240c8" title="Set the Audio Info. This needs to be called if we just pass a Stream. The AudioStream is usually able...">setAudioInfo()</a> </p>
+<p>Construct a new RTSPStreamSource object from an Arduino <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> You need to provide the audio information by calling <a class="el" href="classaudio__tools_1_1_r_t_s_p_source_stream.html#a821d952d7d86257c2c82fa19e24240c8" title="Set the Audio Info. This needs to be called if we just pass a Stream. The AudioStream is usually able...">setAudioInfo()</a> </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">stream</td><td></td></tr>
@@ -196,7 +196,7 @@ RTSPFormatPCM&#160;</td><td class="memItemRight" valign="bottom"><b>format</b> {
         <tr>
           <td class="memname">audio_tools::RTSPSourceStream::RTSPSourceStream </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_stream.html">Stream</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;&#160;</td>
           <td class="paramname"><em>stream</em>, </td>
         </tr>
         <tr>
@@ -218,7 +218,7 @@ RTSPFormatPCM&#160;</td><td class="memItemRight" valign="bottom"><b>format</b> {
 </table>
 </div><div class="memdoc">
 
-<p>Construct a new RTSPStreamSource object from an Arduino <a class="el" href="class_stream.html">Stream</a> You need to provide the audio information by calling <a class="el" href="classaudio__tools_1_1_r_t_s_p_source_stream.html#a821d952d7d86257c2c82fa19e24240c8" title="Set the Audio Info. This needs to be called if we just pass a Stream. The AudioStream is usually able...">setAudioInfo()</a> </p>
+<p>Construct a new RTSPStreamSource object from an Arduino <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> You need to provide the audio information by calling <a class="el" href="classaudio__tools_1_1_r_t_s_p_source_stream.html#a821d952d7d86257c2c82fa19e24240c8" title="Set the Audio Info. This needs to be called if we just pass a Stream. The AudioStream is usually able...">setAudioInfo()</a> </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">stream</td><td></td></tr>
@@ -291,7 +291,7 @@ RTSPFormatPCM&#160;</td><td class="memItemRight" valign="bottom"><b>format</b> {
 </table>
 </div><div class="memdoc">
 
-<p>Set the Audio Info. This needs to be called if we just pass a <a class="el" href="class_stream.html">Stream</a>. The <a class="el" href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...">AudioStream</a> is usually able to provide the data from it's original configuration. </p>
+<p>Set the Audio Info. This needs to be called if we just pass a <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>. The <a class="el" href="classaudio__tools_1_1_audio_stream.html" title="Base class for all Audio Streams. It support the boolean operator to test if the object is ready with...">AudioStream</a> is usually able to provide the data from it's original configuration. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">info</td><td></td></tr>

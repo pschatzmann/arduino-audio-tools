@@ -7,6 +7,13 @@
 #undef MIN
 #define MIN(A, B) ((A) < (B) ? (A) : (B))
 
+/**
+ * @defgroup buffers Buffers
+ * @ingroup tools
+ * @brief Different Buffer Implementations
+ */
+
+
 namespace audio_tools {
 
 // forward declaration
@@ -15,6 +22,7 @@ class NBuffer;
 
 /**
  * @brief Shared functionality of all buffers
+ * @ingroup buffers
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -114,6 +122,7 @@ class BaseBuffer {
 /**
  * @brief A simple Buffer implementation which just uses a (dynamically sized)
  * array
+ * @ingroup buffers
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -217,7 +226,7 @@ class SingleBuffer : public BaseBuffer<T> {
 
 /**
  * @brief Implements a typed Ringbuffer
- *
+ * @ingroup buffers
  * @tparam T
  */
 template <typename T>
@@ -310,6 +319,7 @@ class RingBuffer : public BaseBuffer<T> {
 /**
  * @brief A lock free N buffer. If count=2 we create a DoubleBuffer, if count=3
  * a TripleBuffer etc.
+ * @ingroup buffers
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -548,6 +558,7 @@ class NBuffer : public BaseBuffer<T> {
  * @brief Class which is usfull ot provide incremental data access e.g. for
  * EdgeImpulse which request data with an offset and length starting from 0 up
  * to the buffer length, restarting at 0 again.
+ * @ingroup buffers
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

@@ -450,6 +450,7 @@ struct ResampleConfig : public AudioBaseInfo {
 /**
  * @brief Flexible Stream class which can be used to resample audio data between
  * different sample rates.
+ * @ingroup transform
  * @author Phil Schatzmann
  * @copyright GPLv3
  * @tparam T data type of audio data

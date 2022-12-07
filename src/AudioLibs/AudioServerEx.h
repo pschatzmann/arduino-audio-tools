@@ -29,6 +29,7 @@ struct AudioServerExConfig : public AudioBaseInfo {
  * https://github.com/pschatzmann/TinyHttp.
  * It supports multiple concurrent clients. You can e.g. use it to write mp3 data and make
  * it available in multiple clients.
+ * @ingroup http
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -121,6 +122,7 @@ class AudioServerEx : public AudioPrint {
  * @brief A powerfull WAV Web server which is based on 
  * https://github.com/pschatzmann/TinyHttp.
  * It supports multiple concurrent clients
+ * @ingroup http
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 

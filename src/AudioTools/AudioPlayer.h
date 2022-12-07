@@ -16,6 +16,12 @@
 #include "AudioLibs/AudioSourceSDFAT.h"
 #endif
 
+/**
+ * @defgroup player Player
+ * @ingroup main
+ * @brief Audio Player
+ */
+
 
 namespace audio_tools {
 
@@ -25,7 +31,8 @@ namespace audio_tools {
      * - play
      * - stop
      * - next
-     * - setVolume
+     * - set Volume
+     * @ingroup player
      * @author Phil Schatzmann
      * @copyright GPLv3
      */

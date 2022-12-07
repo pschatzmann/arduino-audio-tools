@@ -177,6 +177,7 @@ class ICYStreamDefault : public AbstractURLStream {
 #ifndef USE_URLSTREAM_TASK
 /**
  * @brief ICYStream for all environment except ESP32
+ * @ingroup http
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

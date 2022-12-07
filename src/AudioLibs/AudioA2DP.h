@@ -76,8 +76,8 @@ class A2DPConfig {
 /**
  * @brief Stream support for A2DP: begin(TX_MODE) uses a2dp_source - begin(RX_MODE) a a2dp_sink
  * The data is in int16_t with 2 channels at 44100 hertz. 
- *
  * We support only one instance of the class!
+ * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

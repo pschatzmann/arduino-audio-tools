@@ -97,7 +97,7 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuration for <a class="el" href="classaudio__tools_1_1_a2_d_p_stream.html" title="Stream support for A2DP: begin(TX_MODE) uses a2dp_source - begin(RX_MODE) a a2dp_sink The data is in ...">A2DPStream</a>.  <a href="classaudio__tools_1_1_a2_d_p_config.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a2_d_p_stream.html">audio_tools::A2DPStream</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_stream.html">Stream</a> support for A2DP: begin(TX_MODE) uses a2dp_source - begin(RX_MODE) a a2dp_sink The data is in int16_t with 2 channels at 44100 hertz.  <a href="classaudio__tools_1_1_a2_d_p_stream.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> support for A2DP: begin(TX_MODE) uses a2dp_source - begin(RX_MODE) a a2dp_sink The data is in int16_t with 2 channels at 44100 hertz. We support only one instance of the class!  <a href="classaudio__tools_1_1_a2_d_p_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
@@ -129,14 +129,14 @@ int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>audio_tools::a2dp_
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a3c3c22b176eb26d22ec569bb819d8ae8"><td class="memItemLeft" align="right" valign="top"><a id="a3c3c22b176eb26d22ec569bb819d8ae8" name="a3c3c22b176eb26d22ec569bb819d8ae8"></a>
-RingBuffer&lt; uint8_t &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>audio_tools::a2dp_buffer</b> = nullptr</td></tr>
+static RingBuffer&lt; uint8_t &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>audio_tools::a2dp_buffer</b> = nullptr</td></tr>
 <tr class="separator:a3c3c22b176eb26d22ec569bb819d8ae8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84f080d5979280d0558c7153ad5a86a6"><td class="memItemLeft" align="right" valign="top"><a id="a84f080d5979280d0558c7153ad5a86a6" name="a84f080d5979280d0558c7153ad5a86a6"></a>
-A2DPStream *&#160;</td><td class="memItemRight" valign="bottom"><b>audio_tools::A2DPStream_self</b> =nullptr</td></tr>
+static A2DPStream *&#160;</td><td class="memItemRight" valign="bottom"><b>audio_tools::A2DPStream_self</b> =nullptr</td></tr>
 <tr class="separator:a84f080d5979280d0558c7153ad5a86a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1f03792dca3c9b9072791ad52b5ba14"><td class="memItemLeft" align="right" valign="top"><a id="ae1f03792dca3c9b9072791ad52b5ba14" name="ae1f03792dca3c9b9072791ad52b5ba14"></a>
-volatile bool&#160;</td><td class="memItemRight" valign="bottom"><b>audio_tools::is_a2dp_active</b> = false</td></tr>
-<tr class="separator:ae1f03792dca3c9b9072791ad52b5ba14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cc43ca909ef840f5dccf6e3314d6220"><td class="memItemLeft" align="right" valign="top"><a id="a1cc43ca909ef840f5dccf6e3314d6220" name="a1cc43ca909ef840f5dccf6e3314d6220"></a>
+static bool&#160;</td><td class="memItemRight" valign="bottom"><b>audio_tools::is_a2dp_active</b> = false</td></tr>
+<tr class="separator:a1cc43ca909ef840f5dccf6e3314d6220"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >A2DP Support via Arduino Streams. </p>

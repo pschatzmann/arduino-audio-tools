@@ -86,12 +86,12 @@ $(function() {
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>   <span class="keyword">public</span>:</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>       <a class="code hl_class" href="classaudio__tools_1_1_http_line_reader.html">HttpLineReader</a>(){}</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>       <span class="comment">// reads up the the next CR LF - but never more then the indicated len. returns the number of characters read including crlf</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>       <span class="keyword">virtual</span> <span class="keywordtype">int</span> readlnInternal(<a class="code hl_class" href="class_stream.html">Stream</a> &amp;client, uint8_t* str, <span class="keywordtype">int</span> len, <span class="keywordtype">bool</span> incl_nl=<span class="keyword">true</span>){</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>       <span class="keyword">virtual</span> <span class="keywordtype">int</span> readlnInternal(<a class="code hl_class" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;client, uint8_t* str, <span class="keywordtype">int</span> len, <span class="keywordtype">bool</span> incl_nl=<span class="keyword">true</span>){</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>           <span class="keywordtype">int</span> result = 0;</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>           LOGD( <span class="stringliteral">&quot;HttpLineReader %s&quot;</span>,<span class="stringliteral">&quot;readlnInternal&quot;</span>);</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>           <span class="comment">// wait for first character</span></div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>           <span class="keywordflow">for</span> (<span class="keywordtype">int</span> w=0;w&lt;20 &amp;&amp; client.available()==0; w++){</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>               delay(100);</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>               <a class="code hl_function" href="namespaceaudio__tools.html#ac134f8ec27dfbb4813d22f1fb76b2a5c">delay</a>(100);</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>           }</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>           <span class="comment">// if we do not have any data we stop</span></div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>           <span class="keywordflow">if</span> (client.available()==0) {</div>
@@ -149,9 +149,10 @@ $(function() {
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>};</div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>}</div>
-<div class="ttc" id="aclass_stream_html"><div class="ttname"><a href="class_stream.html">Stream</a></div><div class="ttdef"><b>Definition:</b> Stream.h:49</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_http_line_reader_html"><div class="ttname"><a href="classaudio__tools_1_1_http_line_reader.html">audio_tools::HttpLineReader</a></div><div class="ttdoc">We read a single line. A terminating 0 is added to the string to make it compliant for c string funct...</div><div class="ttdef"><b>Definition:</b> HttpLineReader.h:14</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_stream_html"><div class="ttname"><a href="classaudio__tools_1_1_stream.html">audio_tools::Stream</a></div><div class="ttdef"><b>Definition:</b> NoArduino.h:89</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AnalogAudioArduino.h:10</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html_ac134f8ec27dfbb4813d22f1fb76b2a5c"><div class="ttname"><a href="namespaceaudio__tools.html#ac134f8ec27dfbb4813d22f1fb76b2a5c">audio_tools::delay</a></div><div class="ttdeci">void delay(uint64_t ms)</div><div class="ttdoc">Waits for the indicated milliseconds.</div><div class="ttdef"><b>Definition:</b> Basic.h:8</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

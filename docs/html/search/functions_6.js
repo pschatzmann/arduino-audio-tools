@@ -4,7 +4,7 @@ var searchData=
   ['fauststream_1',['FaustStream',['../classaudio__tools_1_1_faust_stream.html#ac6e177c05e430f4dfe6d6353ef3bfc32',1,'audio_tools::FaustStream::FaustStream(bool useSeparateOutputBuffer=true)'],['../classaudio__tools_1_1_faust_stream.html#a9aa537c40faf571489326f248f60350a',1,'audio_tools::FaustStream::FaustStream(Print &amp;out, bool useSeparateOutputBuffer=true)']]],
   ['filename_2',['fileName',['../classaudio__tools_1_1_s_d_direct.html#a96e4bcbb1129b03cab89d0bc0a483ced',1,'audio_tools::SDDirect::fileName()'],['../classaudio__tools_1_1_s_d_index.html#a0a8047b5e100c90a50e91b6f274875bf',1,'audio_tools::SDIndex::fileName()']]],
   ['filenamepath_3',['fileNamePath',['../classaudio__tools_1_1_s_d_direct.html#aa343c75a4ff3e91c5fe5cc084f0c1189',1,'audio_tools::SDDirect::fileNamePath()'],['../classaudio__tools_1_1_s_d_index.html#ac0e488e0d0114e173f3fc092e2cdd47d',1,'audio_tools::SDIndex::fileNamePath()']]],
-  ['filtereddelay_4',['FilteredDelay',['../classaudio__tools_1_1_filtered_delay.html#a7486ac178617d395c6385ba6965f5341',1,'audio_tools::FilteredDelay']]],
+  ['filtereddelay_4',['FilteredDelay',['../classaudio__tools_1_1_filtered_delay.html#abaab19759f689c9ae091e10bb370b5c6',1,'audio_tools::FilteredDelay']]],
   ['filtereffectbase_5',['FilterEffectBase',['../classaudio__tools_1_1_filter_effect_base.html#a811d8f80b27209fb2ec823f86928c90c',1,'audio_tools::FilterEffectBase']]],
   ['find_6',['find',['../classaudio__tools_1_1_meta_data_filter.html#a2e4a3da7004c0b2bea0061ca54932826',1,'audio_tools::MetaDataFilter']]],
   ['findeffect_7',['findEffect',['../classaudio__tools_1_1_audio_effects.html#a90d84fdd708c71c69453fe634f0b34cc',1,'audio_tools::AudioEffects']]],
@@ -18,5 +18,5 @@ var searchData=
   ['frequency_15',['frequency',['../classaudio__tools_1_1_audio_f_f_t_base.html#a7e8422ed5e2551c712bc7ea7def1208b',1,'audio_tools::AudioFFTBase::frequency()'],['../classaudio__tools_1_1_p_w_m_audio_stream_e_s_p32.html#adee2ba07dacdf8fd8ac11fb43a89c919',1,'audio_tools::PWMAudioStreamESP32::frequency()'],['../classaudio__tools_1_1_musical_notes.html#a89c506ffae7511b916b627d05b045fc9',1,'audio_tools::MusicalNotes::frequency(MusicalNotesEnum note, uint8_t octave)'],['../classaudio__tools_1_1_musical_notes.html#aba42db1fb7e3bdee307484908304b0b3',1,'audio_tools::MusicalNotes::frequency(uint16_t idx)']]],
   ['frequencytomidinote_16',['frequencyToMidiNote',['../classaudio__tools_1_1_musical_notes.html#a0e9607be47d163582247b1ade9015c10',1,'audio_tools::MusicalNotes']]],
   ['fromrate_17',['fromRate',['../classaudio__tools_1_1_resample_parameter_estimator.html#ac55e560832955de8498a7fe9bf919df8',1,'audio_tools::ResampleParameterEstimator']]],
-  ['fuzz_18',['Fuzz',['../classaudio__tools_1_1_fuzz.html#ac976dfec531628fc14ce32d5d1fa7ebc',1,'audio_tools::Fuzz']]]
+  ['fuzz_18',['Fuzz',['../classaudio__tools_1_1_fuzz.html#a41b5c43d22bf95f2077a5d2b23b39c63',1,'audio_tools::Fuzz']]]
 ];

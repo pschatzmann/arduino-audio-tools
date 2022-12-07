@@ -4,22 +4,23 @@
 
 namespace audio_tools {
 
+/// Enum to filter by type of metadata  @ingroup metadata
 enum ID3TypeSelection { SELECT_ID3V1=0b001, SELECT_ID3V2=0b010, SELECT_ID3=0b011, SELECT_ICY=0b100, SELECT_ANY=0b111 };
 
-/// Type of meta info
+/// Type of meta info @ingroup metadata
 enum MetaDataType { Title, Artist, Album, Genre, Name, Description };
 
-/// Test Description for meta info
+// Description for meta info 
 INLINE_VAR const char* MetaDataTypeStr[] = {"Title", "Artist", "Album", "Genre","Name", "Description"};
 
-/// Converts the MetaDataType to a string
+/// Converts the MetaDataType to a string @ingroup metadata
 INLINE_VAR const char *toStr(MetaDataType t){
     return MetaDataTypeStr[t];
 }
 
 /**
  * @brief Common Metadata methods
- * 
+ * @ingroup metadata
  */
 class AbstractMetaData {
     public:

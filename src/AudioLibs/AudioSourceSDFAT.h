@@ -51,7 +51,7 @@ namespace audio_tools {
  * @brief ESP32 AudioSource for AudioPlayer using an SD card as data source.
  * This class is based on the Arduino SD implementation
  * Connect the SD card to the following pins:
- * *
+ * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

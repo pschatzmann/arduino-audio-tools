@@ -172,6 +172,7 @@ class AudioKitStreamAdapter : public AudioStreamX {
 /**
  * @brief AudioKit Stream which uses the
  * https://github.com/pschatzmann/arduino-audiokit library
+ * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

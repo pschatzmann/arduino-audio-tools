@@ -1,5 +1,11 @@
 #pragma once
 
+/** 
+ * @defgroup codecs Codecs
+ * @ingroup main
+ * @brief Audio Coder and Decoder  
+**/
+
 #include "AudioCodecs/CodecWAV.h"
 #include "AudioCodecs/CodecNOP.h"
 #include "AudioCodecs/CodecRAW.h"

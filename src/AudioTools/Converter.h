@@ -3,11 +3,17 @@
 #include "AudioBasic/Collections.h"
 #include "AudioFilter/Filter.h"
 
+/**
+ * @defgroup convert Converters
+ * @ingroup tools
+ * @brief Convert Audio
+ */
+
 namespace audio_tools {
 
 /**
  * @brief Converts from a source to a target number with a different type
- * 
+ * @ingroup convert
  */
 class NumberConverter {
     public:
@@ -57,6 +63,7 @@ class NumberConverter {
 /**
  * @brief Abstract Base class for Converters
  * A converter is processing the data in the indicated array
+ * @ingroup convert
  * @author Phil Schatzmann
  * @copyright GPLv3
  * @tparam T 
@@ -74,7 +81,7 @@ class BaseConverter {
 
 /**
  * @brief Dummy converter which does nothing
- * 
+ * @ingroup convert
  * @tparam T 
  */
 template<typename T>
@@ -85,6 +92,7 @@ class NOPConverter : public  BaseConverter<T> {
 
 /**
  * @brief Multiplies the values with the indicated factor adds the offset and clips at maxValue. To mute use a factor of 0.0!
+ * @ingroup convert
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 
@@ -146,7 +154,7 @@ class ConverterScaler : public  BaseConverter<T> {
 
 /**
  * @brief Makes sure that the avg of the signal is set to 0
- * 
+ * @ingroup convert
  * @tparam T 
  */
 template<typename T>
@@ -201,6 +209,7 @@ class ConverterAutoCenter : public  BaseConverter<T> {
 
 /**
  * @brief Switches the left and right channel
+ * @ingroup convert
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 
@@ -235,6 +244,7 @@ enum FillLeftAndRightStatus {Auto, LeftIsEmpty, RightIsEmpty};
 
 /**
  * @brief Make sure that both channels contain any data
+ * @ingroup convert
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 
@@ -321,6 +331,7 @@ class ConverterFillLeftAndRight : public  BaseConverter<T> {
 /**
  * @brief special case for internal DAC output, the incomming PCM buffer needs 
  *  to be converted from signed 16bit to unsigned
+ * @ingroup convert
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 
@@ -351,7 +362,7 @@ class ConverterToInternalDACFormat : public  BaseConverter<T> {
 /**
  * @brief We combine a datastream which consists of multiple channels into less channels. E.g. 2 to 1
  * The last target channel will contain the combined values of the exceeding source channels.
- * 
+ * @ingroup convert
  * @tparam T 
  */
 template<typename T>
@@ -407,7 +418,7 @@ class ChannelReducer : public BaseConverter<T> {
 
 /**
  * @brief Increases the channel count
- * 
+ * @ingroup convert
  * @tparam T 
  */
 template<typename T>
@@ -462,7 +473,7 @@ class ChannelEnhancer  {
 
 /**
  * @brief Increasing or decreasing the number of channels
- * 
+ * @ingroup convert
  * @tparam T 
  */
 template<typename T>
@@ -515,7 +526,7 @@ class ChannelConverter {
 
 /**
  * @brief Combines multiple converters
- * 
+ * @ingroup convert
  * @tparam T 
  */
 template<typename T>
@@ -559,6 +570,7 @@ class MultiConverter : public BaseConverter<T> {
 
 /**
  * @brief Converts e.g. 24bit data to the indicated smaller or bigger data type
+ * @ingroup convert
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 
@@ -693,6 +705,7 @@ class NumberReader {
 
 /**
  * @brief Converter for 1 Channel which applies the indicated Filter
+ * @ingroup convert
  * @author pschatzmann
  * @tparam T
  */
@@ -715,6 +728,7 @@ class Converter1Channel : public BaseConverter<T> {
 
 /**
  * @brief Converter for n Channels which applies the indicated Filter
+ * @ingroup convert
  * @author pschatzmann
  * @tparam T
  */
@@ -778,7 +792,7 @@ class ConverterNChannels : public BaseConverter<T> {
  * @brief Removes any silence from the buffer that is longer then n samples with a amplitude
  * below the indicated threshhold. If you process multiple channels you need to multiply the
  * channels with the number of samples to indicate n
- * 
+ * @ingroup convert
  * @tparam T 
  */
 
@@ -855,7 +869,7 @@ class SilenceRemovalConverter : public BaseConverter<T>  {
 /**
  * @brief Big value gaps (at the beginning and the end of a recording) can lead to some popping sounds.
  * We will try to set the values to 0 until the first transition thru 0 of the audio curve
- * 
+ * @ingroup convert
  * @tparam T 
  */
 template<typename T>
@@ -911,7 +925,7 @@ class PoppingSoundRemover : public BaseConverter<T> {
 
 /**
  * @brief Changes the samples at the beginning or at the end to slowly ramp up the volume
- * 
+ * @ingroup convert
  * @tparam T 
  */
 template<typename T>

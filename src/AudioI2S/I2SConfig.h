@@ -4,6 +4,9 @@
 
 namespace audio_tools {
 
+/**
+ * @brief I2S Formats
+ */
 enum I2SFormat {
   I2S_STD_FORMAT,
   I2S_LSB_FORMAT,
@@ -15,6 +18,9 @@ enum I2SFormat {
   I2S_PCM_SHORT
 };
 
+/**
+ * @brief I2S Signal Types: Digital, Analog, PDM
+ */
 enum I2SSignalType {
   Digital,
   Analog,

@@ -26,7 +26,7 @@ namespace audio_tools {
  *    D1       4
  *
  *  On the AI Thinker boards the pin settings should be On, On, On, On, On,
- *
+ * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

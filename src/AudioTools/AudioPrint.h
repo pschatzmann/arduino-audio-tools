@@ -75,6 +75,7 @@ class AudioPrint : public Print, public AudioBaseInfoDependent, public AudioBase
 /**
  * @brief Stream Wrapper which can be used to print the values as readable ASCII to the screen to be analyzed in the Serial Plotter
  * The frames are separated by a new line. The channels in one frame are separated by a ,
+ * @ingroup io
  * @tparam T 
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -170,6 +171,7 @@ class CsvStream : public AudioPrint {
 
 /**
  * @brief Creates a Hex Dump
+ * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -237,7 +239,7 @@ class HexDumpStream : public AudioPrint {
 
 /**
  * @brief Wrapper which converts a AudioStream to a AudioPrint
- * 
+ * @ingroup tools
  */
 class AdapterAudioStreamToAudioPrint : public AudioPrint {
     public: 
@@ -261,7 +263,7 @@ class AdapterAudioStreamToAudioPrint : public AudioPrint {
 
 /**
  * @brief Wrapper which converts a Print to a AudioPrint
- * 
+ * @ingroup tools
  */
 class AdapterPrintToAudioPrint : public AudioPrint {
     public: 
@@ -283,6 +285,7 @@ class AdapterPrintToAudioPrint : public AudioPrint {
 
 /**
  * @brief Replicates the output to multiple destinations.
+ * @ingroup transform
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -384,6 +387,7 @@ class MultiOutput : public AudioPrint {
 
 /**
  * @brief Mixing of multiple outputs to one final output
+ * @ingroup transform
  * @author Phil Schatzmann
  * @copyright GPLv3
  * @tparam T 
@@ -578,6 +582,7 @@ class OutputMixer : public Print {
 
 /**
  * @brief A simple class to determine the volume
+ * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -671,6 +676,7 @@ class VolumePrint : public AudioPrint {
 
 /**
  * @brief Prints to a preallocated memory
+ * @ingroup io
  */
 class MemoryPrint : public AudioPrint {
     public:

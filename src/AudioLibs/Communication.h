@@ -6,11 +6,18 @@
 #include "AudioTools/AudioStreams.h"
 #include "AudioTools/Buffers.h"
 
+/**
+ * @defgroup communications Communications
+ * @ingroup main
+ * @brief Transmit Audio
+ */
+
 
 namespace audio_tools {
 
 /**
- * @brief A simple RIA locking class for the ESP32
+ * @brief A simple RIA locking class for the ESP32 using _lock_t
+ * @ingroup concurrency
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -32,6 +39,7 @@ ESPNowStream *ESPNowStreamSelf = nullptr;
 
 /**
  * @brief Configuration for ESP-NOW protocol
+ * @ingroup communications
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -60,6 +68,7 @@ struct ESPNowStreamConfig {
 
 /**
  * @brief ESPNow as Arduino Stream
+ * @ingroup communications
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -383,6 +392,7 @@ class ESPNowStream : public AudioStreamX {
 /**
  * A Simple exension of the WiFiUDP class which makes sure that the basic Stream
  * functioinaltiy which is used as AudioSource and AudioSink
+ * @ingroup communications
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

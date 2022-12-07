@@ -6,6 +6,7 @@ namespace audio_tools {
 
 /**
  * @brief Converter for reducing or increasing the number of Channels
+ * @ingroup transform
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -95,6 +96,7 @@ class ChannelFormatConverterStreamT : public AudioStreamX {
 
 /**
  * @brief Channel converter which does not use a template
+ * @ingroup transform
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -262,6 +264,7 @@ class ChannelFormatConverterStream : public AudioStreamX {
 
 /**
  * @brief Converter which converts from source bits_per_sample to target bits_per_sample
+ * @ingroup transform
  * @author Phil Schatzmann
  * @copyright GPLv3
  * @tparam T specifies the current data type for the result of the read or write. 
@@ -333,6 +336,7 @@ class NumberFormatConverterStreamT : public AudioStreamX {
 
 /**
  * @brief Converter which converts between bits_per_sample and 16 bits
+ * @ingroup transform
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -512,6 +516,7 @@ class NumberFormatConverterStream :  public AudioStreamX {
 
 /**
  * @brief Converter which converts bits_per_sample and channels
+ * @ingroup transform
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

@@ -77,7 +77,7 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_boost-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">audio_tools::Boost Class Reference</div></div>
+  <div class="headertitle"><div class="title">audio_tools::Boost Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__dsp.html">DSP</a> &raquo; <a class="el" href="group__effects.html">Effects</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -100,9 +100,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0fbeeb35764f55ef00169ad2430a43eb"><td class="memItemLeft" align="right" valign="top"><a id="a0fbeeb35764f55ef00169ad2430a43eb" name="a0fbeeb35764f55ef00169ad2430a43eb"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Boost</b> (const <a class="el" href="classaudio__tools_1_1_boost.html">Boost</a> &amp;copy)=default</td></tr>
 <tr class="separator:a0fbeeb35764f55ef00169ad2430a43eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab2b90830ff443d5d253e5f0c892c19c5"><td class="memItemLeft" align="right" valign="top"><a id="ab2b90830ff443d5d253e5f0c892c19c5" name="ab2b90830ff443d5d253e5f0c892c19c5"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Boost</b> (float volume=1.0)</td></tr>
-<tr class="memdesc:ab2b90830ff443d5d253e5f0c892c19c5"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_boost.html" title="Boost AudioEffect.">Boost</a> Constructor: volume 0.1 - 1.0: decrease result; volume &gt;0: increase result. <br /></td></tr>
+<tr class="memitem:ab2b90830ff443d5d253e5f0c892c19c5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_boost.html#ab2b90830ff443d5d253e5f0c892c19c5">Boost</a> (float volume=1.0)</td></tr>
 <tr class="separator:ab2b90830ff443d5d253e5f0c892c19c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb41edd9590cdef9f8b6d1b4f0388b0d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_boost.html">Boost</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_boost.html#acb41edd9590cdef9f8b6d1b4f0388b0d">clone</a> ()</td></tr>
 <tr class="separator:acb41edd9590cdef9f8b6d1b4f0388b0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -149,7 +147,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>effect_value</b></td
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>active_flag</b> = true</td></tr>
 <tr class="separator:a5baa4e28b5634fa5c6a00198b62562ec inherit pro_attribs_classaudio__tools_1_1_audio_effect"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99d421d310dbd778d6b6fb1a8a670a51 inherit pro_attribs_classaudio__tools_1_1_audio_effect"><td class="memItemLeft" align="right" valign="top"><a id="a99d421d310dbd778d6b6fb1a8a670a51" name="a99d421d310dbd778d6b6fb1a8a670a51"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>id_value</b> =-1</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>id_value</b> = -1</td></tr>
 <tr class="separator:a99d421d310dbd778d6b6fb1a8a670a51 inherit pro_attribs_classaudio__tools_1_1_audio_effect"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
@@ -167,7 +165,35 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>copyParent</b> (<a cl
 <div class="textblock"><p ><a class="el" href="classaudio__tools_1_1_boost.html" title="Boost AudioEffect.">Boost</a> <a class="el" href="classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects.">AudioEffect</a>. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ab2b90830ff443d5d253e5f0c892c19c5" name="ab2b90830ff443d5d253e5f0c892c19c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2b90830ff443d5d253e5f0c892c19c5">&#9670;&#160;</a></span>Boost()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">audio_tools::Boost::Boost </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>volume</em> = <code>1.0</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p ><a class="el" href="classaudio__tools_1_1_boost.html" title="Boost AudioEffect.">Boost</a> Constructor: volume 0.1 - 1.0: decrease result; volume &gt;0: increase result </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="acb41edd9590cdef9f8b6d1b4f0388b0d" name="acb41edd9590cdef9f8b6d1b4f0388b0d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acb41edd9590cdef9f8b6d1b4f0388b0d">&#9670;&#160;</a></span>clone()</h2>
 

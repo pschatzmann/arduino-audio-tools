@@ -14,10 +14,18 @@
 #include <mutex>
 #endif
 
+/**
+ * @defgroup concurrency Concurrency
+ * @ingroup tools
+ * @brief Multicore support
+ */
+
+
 namespace audio_tools {
 
 /**
  * @brief Empty Mutex implementation which does nothing
+ * @ingroup concurrency
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -31,6 +39,7 @@ public:
 
 /**
  * @brief Mutex implemntation based on std::mutex
+ * @ingroup concurrency
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -49,6 +58,7 @@ protected:
 
 /**
  * @brief Mutex implemntation using FreeRTOS
+ * @ingroup concurrency
  * @author Phil Schatzmann
  * @copyright GPLv3 *
  */
@@ -79,6 +89,7 @@ protected:
 #elif defined(ARDUINO_ARCH_RP2040)
 /**
  * @brief Mutex implemntation using RP2040 API
+ * @ingroup concurrency
  * @author Phil Schatzmann
  * @copyright GPLv3 *
  */
@@ -113,6 +124,7 @@ using Mutex = MutexBase;
  * lock guards, so I decided to roll my own solution where we can just use a
  * dummy Mutex implementation that does nothing for the cases where this is not
  * needed.
+ * @ingroup concurrency
  * @author Phil Schatzmann
  * @copyright GPLv3 *
  */
@@ -140,6 +152,7 @@ protected:
 /**
  * @brief Wrapper class that can turn any Buffer into a thread save
  * implementation.
+ * @ingroup buffers
  * @author Phil Schatzmann
  * @copyright GPLv3 *
  * @tparam T
@@ -237,7 +250,7 @@ protected:
 
 /**
  * @brief NBuffer which uses some RTOS queues to manage the available and filled buffers
- * 
+ * @ingroup buffers
  * @tparam T 
  * @tparam COUNT number of buffers
  */
@@ -307,6 +320,7 @@ protected:
 
 /**
  * @brief Buffer implementation which is using a FreeRTOS StreamBuffer
+ * @ingroup buffers
  * @author Phil Schatzmann
  * @copyright GPLv3 *
  * @tparam T

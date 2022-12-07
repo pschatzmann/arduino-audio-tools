@@ -10,7 +10,7 @@ namespace audio_tools {
 
 /**
  * @brief ESP32 AudioSource for AudioPlayer using an the SPIFFS file system
- *
+ * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

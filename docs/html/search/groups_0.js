@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['faust_1570',['Faust',['../group___faust.html',1,'']]]
+  ['8bit_0',['8Bit',['../group__codecs8bit.html',1,'']]]
 ];

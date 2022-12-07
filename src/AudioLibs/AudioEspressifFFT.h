@@ -3,10 +3,17 @@
 #include "AudioFFT.h"
 #include "esp_dsp.h"
 
+/** 
+ * @defgroup fft-dsp esp32-dsp
+ * @ingroup fft
+ * @brief Fast Fourier Transform using esp32 esp-dsp library 
+**/
+
 namespace audio_tools {
 
 /**
  * @brief fft Driver for espressif dsp library: https://espressif-docs.readthedocs-hosted.com/projects/esp-dsp/en/latest/esp-dsp-apis.html
+ * @ingroup fft-dsp
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -74,6 +81,7 @@ class FFTDriverEspressifFFT : public FFTDriver {
 };
 /**
  * @brief AudioFFT using FFTReal. The only specific functionality is the access to the dataArray
+ * @ingroup fft-dsp
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

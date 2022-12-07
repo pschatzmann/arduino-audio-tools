@@ -34,7 +34,7 @@ class AudioMP34DT05 *selfAudioMP34DT05 = nullptr;
 /**
  * @brief MP34DT05 Microphone of Nano BLE Sense. We provide a proper Stream
  * implementation. See https://github.com/arduino/ArduinoCore-nRF528x-mbedos
- *
+ * @ingroup io
  */
 class AudioMP34DT05 : public AudioStreamX {
  public:

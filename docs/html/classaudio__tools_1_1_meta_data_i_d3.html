@@ -77,11 +77,11 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_meta_data_i_d3-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">audio_tools::MetaDataID3 Class Reference</div></div>
+  <div class="headertitle"><div class="title">audio_tools::MetaDataID3 Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__metadata.html">Metadata</a> &raquo; <a class="el" href="group__metadata-id3.html">ID3</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Simple ID3 <a class="el" href="class_meta.html" title="minimial implementtion of Meta which just ignores the data">Meta</a> Data Parser which supports ID3 V1 and V2 and implements the <a class="el" href="class_stream.html">Stream</a> interface. You just need to set the callback(s) to receive the result and copy the audio data to this stream.  
+<p>Simple ID3 <a class="el" href="class_meta.html" title="minimial implementtion of Meta which just ignores the data">Meta</a> Data Parser which supports ID3 V1 and V2 and implements the <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> interface. You just need to set the callback(s) to receive the result and copy the audio data to this stream.  
  <a href="classaudio__tools_1_1_meta_data_i_d3.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_meta_data_i_d3_8h_source.html">MetaDataID3.h</a>&gt;</code></p>
@@ -101,10 +101,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a309aabec18aef1f119ffdaacc0a3f3fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a811bbb90bc7d22458c162227ee9242e7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_meta_data_i_d3.html#a811bbb90bc7d22458c162227ee9242e7">end</a> ()</td></tr>
 <tr class="separator:a811bbb90bc7d22458c162227ee9242e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4806f69137d2af64ba507ea580419883"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_meta_data_i_d3.html#a4806f69137d2af64ba507ea580419883">setCallback</a> (void(*fn)(<a class="el" href="namespaceaudio__tools.html#a66747a0ba3d8821e3228fd1680106e68">MetaDataType</a> info, const char *str, int len))</td></tr>
+<tr class="memitem:a4806f69137d2af64ba507ea580419883"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_meta_data_i_d3.html#a4806f69137d2af64ba507ea580419883">setCallback</a> (void(*fn)(<a class="el" href="group__metadata.html#ga66747a0ba3d8821e3228fd1680106e68">MetaDataType</a> info, const char *str, int len))</td></tr>
 <tr class="separator:a4806f69137d2af64ba507ea580419883"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a270cc4edecfb9fefeb178d6abf8d906a"><td class="memItemLeft" align="right" valign="top"><a id="a270cc4edecfb9fefeb178d6abf8d906a" name="a270cc4edecfb9fefeb178d6abf8d906a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setFilter</b> (ID3TypeSelection sel)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setFilter</b> (<a class="el" href="group__metadata.html#gafa57569aa7d4da440caa6e908d032447">ID3TypeSelection</a> sel)</td></tr>
 <tr class="separator:a270cc4edecfb9fefeb178d6abf8d906a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a12b30139d85bcd26beaccc9070a1086b"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_meta_data_i_d3.html#a12b30139d85bcd26beaccc9070a1086b">write</a> (const uint8_t *data, size_t length)</td></tr>
 <tr class="memdesc:a12b30139d85bcd26beaccc9070a1086b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide tha audio data to the API to parse for <a class="el" href="class_meta.html" title="minimial implementtion of Meta which just ignores the data">Meta</a> Data.  <a href="classaudio__tools_1_1_meta_data_i_d3.html#a12b30139d85bcd26beaccc9070a1086b">More...</a><br /></td></tr>
@@ -114,7 +114,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setFilter</b> (ID3Typ
 <tr class="separator:a57f572a2dc62c354d75a96c260ba1259 inherit pub_methods_classaudio__tools_1_1_abstract_meta_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9047b8ab68d189e75cbcd57205a72bab inherit pub_methods_classaudio__tools_1_1_abstract_meta_data"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_abstract_meta_data.html#a9047b8ab68d189e75cbcd57205a72bab">end</a> ()=0</td></tr>
 <tr class="separator:a9047b8ab68d189e75cbcd57205a72bab inherit pub_methods_classaudio__tools_1_1_abstract_meta_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5298d175e21982d1fc1eec9b76456e1 inherit pub_methods_classaudio__tools_1_1_abstract_meta_data"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_abstract_meta_data.html#ac5298d175e21982d1fc1eec9b76456e1">setCallback</a> (void(*fn)(<a class="el" href="namespaceaudio__tools.html#a66747a0ba3d8821e3228fd1680106e68">MetaDataType</a> info, const char *str, int len))=0</td></tr>
+<tr class="memitem:ac5298d175e21982d1fc1eec9b76456e1 inherit pub_methods_classaudio__tools_1_1_abstract_meta_data"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_abstract_meta_data.html#ac5298d175e21982d1fc1eec9b76456e1">setCallback</a> (void(*fn)(<a class="el" href="group__metadata.html#ga66747a0ba3d8821e3228fd1680106e68">MetaDataType</a> info, const char *str, int len))=0</td></tr>
 <tr class="separator:ac5298d175e21982d1fc1eec9b76456e1 inherit pub_methods_classaudio__tools_1_1_abstract_meta_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae65118104b9a2e8c655bc35280999eb3 inherit pub_methods_classaudio__tools_1_1_abstract_meta_data"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_abstract_meta_data.html#ae65118104b9a2e8c655bc35280999eb3">setIcyMetaInt</a> (int value)</td></tr>
 <tr class="separator:ae65118104b9a2e8c655bc35280999eb3 inherit pub_methods_classaudio__tools_1_1_abstract_meta_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -134,7 +134,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>filter</b> = SELECT_ID
 <tr class="separator:a96eafd1a4bcbc77ef2ab2d45381167c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Simple ID3 <a class="el" href="class_meta.html" title="minimial implementtion of Meta which just ignores the data">Meta</a> Data Parser which supports ID3 V1 and V2 and implements the <a class="el" href="class_stream.html">Stream</a> interface. You just need to set the callback(s) to receive the result and copy the audio data to this stream. </p>
+<div class="textblock"><p >Simple ID3 <a class="el" href="class_meta.html" title="minimial implementtion of Meta which just ignores the data">Meta</a> Data Parser which supports ID3 V1 and V2 and implements the <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> interface. You just need to set the callback(s) to receive the result and copy the audio data to this stream. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
@@ -204,7 +204,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>filter</b> = SELECT_ID
         <tr>
           <td class="memname">void audio_tools::MetaDataID3::setCallback </td>
           <td>(</td>
-          <td class="paramtype">void(*)(<a class="el" href="namespaceaudio__tools.html#a66747a0ba3d8821e3228fd1680106e68">MetaDataType</a> info, const char *str, int len)&#160;</td>
+          <td class="paramtype">void(*)(<a class="el" href="group__metadata.html#ga66747a0ba3d8821e3228fd1680106e68">MetaDataType</a> info, const char *str, int len)&#160;</td>
           <td class="paramname"><em>fn</em></td><td>)</td>
           <td></td>
         </tr>

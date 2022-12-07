@@ -5,11 +5,19 @@
 #include "AudioI2S/I2SConfig.h"
 #include <I2S.h>
 
+/** 
+ * @defgroup i2s-ESP8266 I2S-ESP8266
+ * @ingroup platform
+ * @brief I2S Implementation for ESP8266  
+**/
+
+
 namespace audio_tools {
 
 /**
  * @brief Basic I2S API - for the ESP8266
  * Only 16 bits are supported !
+ * @ingroup i2s-ESP8266
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

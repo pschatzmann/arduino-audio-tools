@@ -13,6 +13,7 @@ AudioBaseInfoDependent *audioChangeMP3Helix=nullptr;
 /**
  * @brief MP3 Decoder using libhelix: https://github.com/pschatzmann/arduino-libhelix
  * This is basically just a simple wrapper to provide AudioBaseInfo and AudioBaseInfoDependent
+ * @ingroup helix
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

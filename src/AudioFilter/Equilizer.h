@@ -3,10 +3,17 @@
 #include "AudioTools/AudioPrint.h"
 #include "AudioBasic/Int24.h"
 
+/** 
+ * @defgroup equilizer Equilizer
+ * @ingroup dsp
+ * @brief Digital Equilizer  
+**/
+
 namespace audio_tools {
 
 /**
  * @brief Configuration for 3 Band Equilizer: Set channels,bits_per_sample,sample_rate.  Set and update gain_low, gain_medium and gain_high to value between 0 and 1.0
+ * @ingroup equilizer
  * @author pschatzmann
  */
 struct ConfigEquilizer3Bands : public AudioBaseInfo {
@@ -27,6 +34,7 @@ struct ConfigEquilizer3Bands : public AudioBaseInfo {
 
 /**
  * @brief 3 Band Equilizer inspired from https://www.musicdsp.org/en/latest/Filters/236-3-band-equaliser.html
+ * @ingroup equilizer
  * @author pschatzmann
  */
 class Equilizer3Bands : public AudioStreamX {

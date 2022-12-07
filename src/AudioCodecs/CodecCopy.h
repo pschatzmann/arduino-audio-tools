@@ -3,10 +3,17 @@
 #include "AudioCodecs/AudioEncoded.h"
 #include "Stream.h"
 
+/** 
+ * @defgroup codec-copy Copy
+ * @ingroup codecs
+ * @brief Copies data as is   
+**/
+
 namespace audio_tools {
 
 /**
  * @brief Dummy Decoder which just copies the provided data to the output
+ * @ingroup codec-copy
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -43,6 +50,7 @@ protected:
 
 /**
  * @brief Dummy Encoder which just copies the provided data to the output
+ * @ingroup codec-copy
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

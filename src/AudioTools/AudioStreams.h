@@ -158,6 +158,7 @@ enum MemoryType {RAM, PS_RAM, FLASH_RAM};
 
 /**
  * @brief A simple Stream implementation which is backed by allocated memory
+ * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
  *
@@ -326,6 +327,7 @@ class MemoryStream : public AudioStream {
 /**
  * @brief MemoryStream which is written and read using the internal RAM. For each write the data is allocated
  * on the heap.
+ * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -523,6 +525,7 @@ protected:
  * - that the output is for one channel only!
  * - we do not support reading of individual characters!
  * - we do not support any write operations
+ * @ingroup io
  * @param generator
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -708,6 +711,7 @@ class BufferedStream : public AudioStream {
 /**
  * @brief The Arduino Stream which provides silence and simulates a null device
  * when used as audio target
+ * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -757,6 +761,7 @@ class NullStream : public BufferedStream {
 /**
  * @brief A Stream backed by a Ringbuffer. We can write to the end and read from
  * the beginning of the stream
+ * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -796,48 +801,11 @@ class RingBufferStream : public AudioStream {
   RingBuffer<uint8_t> *buffer = nullptr;
 };
 
-/**
- * @brief A Stream backed by a SingleBufferStream. We assume that the memory is
- * externally allocated and that we can submit only full buffer records, which
- * are then available for reading.
- *
- * @author Phil Schatzmann
- * @copyright GPLv3
- */
-class ExternalBufferStream : public AudioStream {
- public:
-  ExternalBufferStream() { TRACED(); }
-
-  virtual int available() override { return buffer.available(); }
-
-  virtual void flush() override {}
-
-  virtual int peek() override { return buffer.peek(); }
-
-  virtual int read() override { return buffer.read(); }
-
-  virtual size_t readBytes(uint8_t *data, size_t length) override {
-    return buffer.readArray(data, length);
-  }
-
-  virtual size_t write(const uint8_t *data, size_t len) override {
-    buffer.onExternalBufferRefilled((void *)data, len);
-    return len;
-  }
-
-  virtual size_t write(uint8_t c) override {
-    LOGE("not implemented: %s", LOG_METHOD);
-    return 0;
-  }
-
- protected:
-  SingleBuffer<uint8_t> buffer;
-};
 
 /**
  * @brief AudioOutput class which stores the data in a temporary queue buffer.
  * The queue can be consumed e.g. by a callback function by calling readBytes();
-
+ * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -923,18 +891,18 @@ template <typename T>
 using CallbackBufferedStream = QueueStream<T>;
 
 /**
- * @brief Construct a new Converted Stream object. Both the data of the read and write
+ * @brief Both the data of the read or write
  * operations will be converted with the help of the indicated converter.
- * 
+ * @ingroup transform
  * @tparam T 
  * @param out 
  * @param converter 
  */
 template<typename T, class ConverterT>
-class ConvertedStream : public AudioStreamX {
+class ConverterStream : public AudioStreamX {
 
     public:
-        ConvertedStream(Stream &stream, ConverterT &converter) : AudioStreamX() {
+        ConverterStream(Stream &stream, ConverterT &converter) : AudioStreamX() {
             p_converter = &converter;
             p_stream = &stream;
         }
@@ -982,8 +950,9 @@ struct VolumeStreamConfig : public AudioBaseInfo {
 };
 
 /**
- * @brief Output PWM object on which we can apply some volume settings. To work properly the class needs to know the 
+ * @brief Adjust the volume of the related input or output: To work properly the class needs to know the 
  * bits per sample and number of channels!
+ * @ingroup transform
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -1248,7 +1217,7 @@ class VolumeStream : public AudioStreamX {
  * @brief Class which measures the truput
  * @author Phil Schatzmann
  * @copyright GPLv3
- * 
+ * @ingroup io
  */
 class MeasuringStream : public AudioStreamX {
   public:
@@ -1359,6 +1328,7 @@ class MeasuringStream : public AudioStreamX {
 /**
  * @brief MixerStream is mixing the input from Multiple Input Streams.
  * All streams must have the same audo format (sample rate, channels, bits per sample) 
+ * @ingroup transform
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -1452,6 +1422,7 @@ class InputMixer : public AudioStreamX {
 /**
  * @brief  Stream to which we can apply Filters for each channel. The filter 
  * might change the result size!
+ * @ingroup transform
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -1502,7 +1473,6 @@ class FilteredStream : public AudioStreamX {
  * @brief TimerCallbackAudioStream Configuration
  * @author Phil Schatzmann
  * @copyright GPLv3
- *
  */
 struct TimerCallbackAudioStreamInfo : public AudioBaseInfo {
   RxTxMode rx_tx_mode = RX_MODE;
@@ -1521,6 +1491,7 @@ struct TimerCallbackAudioStreamInfo : public AudioBaseInfo {
  * @brief Callback driven Audio Source (rx_tx_mode==RX_MODE) or Audio Sink
  * (rx_tx_mode==TX_MODE). This class allows to to integrate external libraries
  * in order to consume or generate a data stream which is based on a timer
+ * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
  *

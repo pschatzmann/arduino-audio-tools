@@ -78,11 +78,11 @@ $(function() {
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_filtered_delay-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">audio_tools::FilteredDelay Class Reference</div></div>
+  <div class="headertitle"><div class="title">audio_tools::FilteredDelay Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__dsp.html">DSP</a> &raquo; <a class="el" href="group__effects.html">Effects</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classaudio__tools_1_1_delay.html" title="Delay AudioEffect. We mix the actual signal with the delayed signal.">Delay</a> effect that filters the repeat delay.  
+<p><a class="el" href="classaudio__tools_1_1_delay.html" title="Delay/Echo AudioEffect. See https://wiki.analog.com/resources/tools-software/sharc-audio-module/barem...">Delay</a> effect that filters the repeat delay.  
  <a href="classaudio__tools_1_1_filtered_delay.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_audio_effects_suite_8h_source.html">AudioEffectsSuite.h</a>&gt;</code></p>
@@ -104,12 +104,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a07d4345ee3d4dc9604b6da3b808c3e6e"><td class="memItemLeft" align="right" valign="top"><a id="a07d4345ee3d4dc9604b6da3b808c3e6e" name="a07d4345ee3d4dc9604b6da3b808c3e6e"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>FilteredDelay</b> (<a class="el" href="classaudio__tools_1_1_filtered_delay.html">FilteredDelay</a> &amp;copy)=default</td></tr>
 <tr class="separator:a07d4345ee3d4dc9604b6da3b808c3e6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7486ac178617d395c6385ba6965f5341"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_filtered_delay.html#a7486ac178617d395c6385ba6965f5341">FilteredDelay</a> (int delayInSamples)</td></tr>
-<tr class="separator:a7486ac178617d395c6385ba6965f5341"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abaab19759f689c9ae091e10bb370b5c6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_filtered_delay.html#abaab19759f689c9ae091e10bb370b5c6">FilteredDelay</a> (int delayInSamples, int sample_rate=44100)</td></tr>
+<tr class="separator:abaab19759f689c9ae091e10bb370b5c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7772391cf81bc4df11784f931601ed96"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_filtered_delay.html#a7772391cf81bc4df11784f931601ed96">~FilteredDelay</a> ()=default</td></tr>
 <tr class="separator:a7772391cf81bc4df11784f931601ed96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a012754ccd436d88a2060c1f1f6f2da76"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_filtered_delay.html">FilteredDelay</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_filtered_delay.html#a012754ccd436d88a2060c1f1f6f2da76">clone</a> () override</td></tr>
 <tr class="separator:a012754ccd436d88a2060c1f1f6f2da76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21fa3ee17c32448fa30f88c426a7e6fa"><td class="memItemLeft" align="right" valign="top">effect_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_filtered_delay.html#a21fa3ee17c32448fa30f88c426a7e6fa">process</a> (effect_t inputSample) override</td></tr>
+<tr class="memdesc:a21fa3ee17c32448fa30f88c426a7e6fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">see applyFilter  <a href="classaudio__tools_1_1_filtered_delay.html#a21fa3ee17c32448fa30f88c426a7e6fa">More...</a><br /></td></tr>
+<tr class="separator:a21fa3ee17c32448fa30f88c426a7e6fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e0070b2b6a697ac16f32811e1537e58"><td class="memItemLeft" align="right" valign="top">effectsuite_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_filtered_delay.html#a8e0070b2b6a697ac16f32811e1537e58">processDouble</a> (effectsuite_t inputSample) override</td></tr>
 <tr class="separator:a8e0070b2b6a697ac16f32811e1537e58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a81b9dc4801bd9bb0b9fded0b5f86be2d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_filtered_delay.html#a81b9dc4801bd9bb0b9fded0b5f86be2d">setDelayGain</a> (effectsuite_t gain)</td></tr>
@@ -277,7 +280,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>samplingRate</b> = 0</
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>active_flag</b> = true</td></tr>
 <tr class="separator:a5baa4e28b5634fa5c6a00198b62562ec inherit pro_attribs_classaudio__tools_1_1_audio_effect"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99d421d310dbd778d6b6fb1a8a670a51 inherit pro_attribs_classaudio__tools_1_1_audio_effect"><td class="memItemLeft" align="right" valign="top"><a id="a99d421d310dbd778d6b6fb1a8a670a51" name="a99d421d310dbd778d6b6fb1a8a670a51"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>id_value</b> =-1</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>id_value</b> = -1</td></tr>
 <tr class="separator:a99d421d310dbd778d6b6fb1a8a670a51 inherit pro_attribs_classaudio__tools_1_1_audio_effect"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
@@ -298,12 +301,12 @@ static constexpr const effectsuite_t&#160;</td><td class="memItemRight" valign="
 <tr class="separator:a14c34f91581d371418b79c84f6091c59 inherit pro_static_attribs_classaudio__tools_1_1_filter_effect_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p ><a class="el" href="classaudio__tools_1_1_delay.html" title="Delay AudioEffect. We mix the actual signal with the delayed signal.">Delay</a> effect that filters the repeat delay. </p>
+<div class="textblock"><p ><a class="el" href="classaudio__tools_1_1_delay.html" title="Delay/Echo AudioEffect. See https://wiki.analog.com/resources/tools-software/sharc-audio-module/barem...">Delay</a> effect that filters the repeat delay. </p>
 <dl class="section author"><dt>Author</dt><dd>Matthew Hamilton </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>MIT License </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a7486ac178617d395c6385ba6965f5341" name="a7486ac178617d395c6385ba6965f5341"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7486ac178617d395c6385ba6965f5341">&#9670;&#160;</a></span>FilteredDelay()</h2>
+<a id="abaab19759f689c9ae091e10bb370b5c6" name="abaab19759f689c9ae091e10bb370b5c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abaab19759f689c9ae091e10bb370b5c6">&#9670;&#160;</a></span>FilteredDelay()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -315,8 +318,18 @@ static constexpr const effectsuite_t&#160;</td><td class="memItemRight" valign="
           <td class="memname">audio_tools::FilteredDelay::FilteredDelay </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>delayInSamples</em></td><td>)</td>
+          <td class="paramname"><em>delayInSamples</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>sample_rate</em> = <code>44100</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -412,6 +425,36 @@ static constexpr const effectsuite_t&#160;</td><td class="memItemRight" valign="
 </div><div class="memdoc">
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_audio_effect.html">audio_tools::AudioEffect</a>.</p>
+
+</div>
+</div>
+<a id="a21fa3ee17c32448fa30f88c426a7e6fa" name="a21fa3ee17c32448fa30f88c426a7e6fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21fa3ee17c32448fa30f88c426a7e6fa">&#9670;&#160;</a></span>process()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">effect_t audio_tools::FilteredDelay::process </td>
+          <td>(</td>
+          <td class="paramtype">effect_t&#160;</td>
+          <td class="paramname"><em>inputSample</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>see applyFilter </p>
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_filter_effect_base.html#aa0eb0fec4cb788ac117f01a8310e0dc5">audio_tools::FilterEffectBase</a>.</p>
 
 </div>
 </div>
@@ -511,7 +554,7 @@ static constexpr const effectsuite_t&#160;</td><td class="memItemRight" valign="
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioEffects/<a class="el" href="_audio_effects_suite_8h_source.html">AudioEffectsSuite.h</a></li>
+<li>src/AudioLibs/<a class="el" href="_audio_effects_suite_8h_source.html">AudioEffectsSuite.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

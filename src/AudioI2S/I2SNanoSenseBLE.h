@@ -8,6 +8,7 @@
 #include "AudioTools/AudioLogger.h"
 #include "AudioI2S/I2SConfig.h"
 
+
 namespace audio_tools {
 
 INLINE_VAR const int i2s_buffer_size = 1024;

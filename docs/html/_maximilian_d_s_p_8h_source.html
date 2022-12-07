@@ -91,7 +91,7 @@ $(function() {
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_maximilian.html">   17</a></span><span class="keyword">class </span><a class="code hl_class" href="classaudio__tools_1_1_maximilian.html">Maximilian</a> {</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keyword">public</span>:</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <a class="code hl_class" href="classaudio__tools_1_1_maximilian.html">Maximilian</a>(<a class="code hl_class" href="class_print.html">Print</a> &amp;out, <span class="keywordtype">int</span> bufferSize=DEFAULT_BUFFER_SIZE, <span class="keywordtype">void</span> (*callback)(maxi_float_t *channels)=play){</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <a class="code hl_class" href="classaudio__tools_1_1_maximilian.html">Maximilian</a>(<a class="code hl_class" href="classaudio__tools_1_1_print.html">Print</a> &amp;out, <span class="keywordtype">int</span> bufferSize=DEFAULT_BUFFER_SIZE, <span class="keywordtype">void</span> (*callback)(maxi_float_t *channels)=play){</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>            buffer_size = bufferSize;</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>            p_buffer = <span class="keyword">new</span> uint8_t[bufferSize];</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>            p_sink = &amp;out;</div>
@@ -138,20 +138,20 @@ $(function() {
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        uint8_t *p_buffer=<span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <span class="keywordtype">float</span> volume=1.0;</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keywordtype">int</span> buffer_size=256;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        <a class="code hl_class" href="class_print.html">Print</a> *p_sink=<span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        <a class="code hl_class" href="classaudio__tools_1_1_print.html">Print</a> *p_sink=<span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <a class="code hl_struct" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> cfg;</div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        void (*callback)(maxi_float_t *channels);</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>};</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>} <span class="comment">// namespace</span></div>
-<div class="ttc" id="aclass_print_html"><div class="ttname"><a href="class_print.html">Print</a></div><div class="ttdef"><b>Definition:</b> Print.h:34</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_maximilian_html"><div class="ttname"><a href="classaudio__tools_1_1_maximilian.html">audio_tools::Maximilian</a></div><div class="ttdoc">AudioTools integration with Maximilian.</div><div class="ttdef"><b>Definition:</b> MaximilianDSP.h:17</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_maximilian_html_a06228c1443046a66a02340dd941235f0"><div class="ttname"><a href="classaudio__tools_1_1_maximilian.html#a06228c1443046a66a02340dd941235f0">audio_tools::Maximilian::begin</a></div><div class="ttdeci">void begin(AudioBaseInfo cfg)</div><div class="ttdoc">Setup Maximilian with audio parameters.</div><div class="ttdef"><b>Definition:</b> MaximilianDSP.h:32</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_maximilian_html_ae600b733890655ddb964839f794e0c4f"><div class="ttname"><a href="classaudio__tools_1_1_maximilian.html#ae600b733890655ddb964839f794e0c4f">audio_tools::Maximilian::copy</a></div><div class="ttdeci">void copy()</div><div class="ttdoc">Copies the audio data from maximilian to the audio sink, Call this method from the Arduino Loop.</div><div class="ttdef"><b>Definition:</b> MaximilianDSP.h:49</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_maximilian_html_ae9ab2d1fef85f6b40ce9c2d41a117d9b"><div class="ttname"><a href="classaudio__tools_1_1_maximilian.html#ae9ab2d1fef85f6b40ce9c2d41a117d9b">audio_tools::Maximilian::setVolume</a></div><div class="ttdeci">void setVolume(float f)</div><div class="ttdoc">Defines the volume. The values are between 0.0 and 1.0.</div><div class="ttdef"><b>Definition:</b> MaximilianDSP.h:38</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1_print_html"><div class="ttname"><a href="classaudio__tools_1_1_print.html">audio_tools::Print</a></div><div class="ttdef"><b>Definition:</b> NoArduino.h:31</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AnalogAudioArduino.h:10</div></div>
-<div class="ttc" id="astructaudio__tools_1_1_audio_base_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_base_info.html">audio_tools::AudioBaseInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:24</div></div>
+<div class="ttc" id="astructaudio__tools_1_1_audio_base_info_html"><div class="ttname"><a href="structaudio__tools_1_1_audio_base_info.html">audio_tools::AudioBaseInfo</a></div><div class="ttdoc">Basic Audio information which drives e.g. I2S.</div><div class="ttdef"><b>Definition:</b> AudioTypes.h:26</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

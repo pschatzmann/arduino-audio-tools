@@ -117,12 +117,14 @@ namespace audio_tools {
 
 /**
  * @brief Determination of the frequency of a music note
+ * @ingroup tools
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 
  */
 class MusicalNotes {
 public:
+    /// @brief Notes @ingroup tools
     enum MusicalNotesEnum {C, CS, D, DS, E, F, FS, G, GS, A, AS, B};
 
     /// Determines the frequency of the indicate note and octave (0-8)

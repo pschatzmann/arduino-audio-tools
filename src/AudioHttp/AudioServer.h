@@ -18,9 +18,8 @@ typedef void (*AudioServerDataCallback)(Print *out);
  * @brief A simple Arduino Webserver which streams the result 
  * This class is based on the WiFiServer class. All you need to do is to provide the data 
  * with a callback method or from an Arduino Stream:   in -copy> client
-
  * 
- * 
+ * @ingroup http
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -248,6 +247,7 @@ class AudioServer {
  * with a callback method or from a Stream.
  * 
  * in -copy> client
+ * @ingroup http
  */
 class AudioEncoderServer  : public AudioServer {
 
@@ -367,6 +367,7 @@ class AudioEncoderServer  : public AudioServer {
  * @brief A simple Arduino Webserver which streams the audio as WAV data. 
  * This class is based on the AudioEncodedServer class. All you need to do is to provide the data 
  * with a callback method or from a Stream.
+ * @ingroup http
  */
 class AudioWAVServer : public AudioEncoderServer {
     public:

@@ -11,6 +11,7 @@ typedef int16_t effect_t;
 
 /**
  * @brief Abstract Base class for Sound Effects
+ * @ingroup effects
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -62,6 +63,7 @@ protected:
 
 /**
  * @brief Boost AudioEffect
+ * @ingroup effects
  * @author Phil Schatzmann
  * @copyright GPLv3
  *
@@ -95,7 +97,7 @@ protected:
 
 /**
  * @brief Distortion AudioEffect
- *
+ * @ingroup effects
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -135,7 +137,7 @@ protected:
 
 /**
  * @brief Fuzz AudioEffect
- *
+ * @ingroup effects
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -175,6 +177,7 @@ protected:
 
 /**
  * @brief Tremolo AudioEffect
+ * @ingroup effects
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -242,6 +245,7 @@ protected:
  * @brief Delay/Echo AudioEffect. See
  * https://wiki.analog.com/resources/tools-software/sharc-audio-module/baremetal/delay-effect-tutorial
  * Howver the dry value and wet value were replace by the depth parameter.
+ * @ingroup effects
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -349,7 +353,7 @@ protected:
  the key is released.
  * Release is the time taken for the level to decay from the sustainLevel level
  to zero after the key is released.[4]
-
+ * @ingroup effects
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -407,6 +411,7 @@ protected:
 /**
  * @brief Shifts the pitch by the indicated step size: e.g. 2 doubles the pitch
  * @author Phil Schatzmann
+ * @ingroup effects
  * @copyright GPLv3
  */
 class PitchShift : public AudioEffect {

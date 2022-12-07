@@ -1,5 +1,7 @@
-#pragma once
 
+
+
+#pragma once
 #include "AudioConfig.h"
 
 #ifdef USE_I2S
@@ -13,12 +15,13 @@
 #include "AudioI2S/I2SRP2040.h"
 #include "AudioI2S/I2SSTM32.h"
 
+
 namespace audio_tools {
 
 /**
  * @brief We support the Stream interface for the I2S access. In addition we allow a separate mute pin which might also be used
  * to drive a LED... 
- * 
+ * @ingroup io
  * @tparam T 
  * @author Phil Schatzmann
  * @copyright GPLv3

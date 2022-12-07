@@ -79,7 +79,7 @@ $(function() {
 <a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_f_l_a_c_decoder-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">audio_tools::FLACDecoder Class Reference</div></div>
+  <div class="headertitle"><div class="title">audio_tools::FLACDecoder Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__codecs.html">Codecs</a> &raquo; <a class="el" href="group__codec-flac.html">FLAC</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -109,7 +109,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a8b297b78264310dde1f252cb870599cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the processing.  <a href="classaudio__tools_1_1_f_l_a_c_decoder.html#a8b297b78264310dde1f252cb870599cb">More...</a><br /></td></tr>
 <tr class="separator:a8b297b78264310dde1f252cb870599cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c671623e6ac7ce716cdebeb57f8b62d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_l_a_c_decoder.html#a7c671623e6ac7ce716cdebeb57f8b62d">copy</a> ()</td></tr>
-<tr class="memdesc:a7c671623e6ac7ce716cdebeb57f8b62d"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_stream.html">Stream</a> Interface: Process a single frame - only relevant when input stream has been defined.  <a href="classaudio__tools_1_1_f_l_a_c_decoder.html#a7c671623e6ac7ce716cdebeb57f8b62d">More...</a><br /></td></tr>
+<tr class="memdesc:a7c671623e6ac7ce716cdebeb57f8b62d"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> Interface: Process a single frame - only relevant when input stream has been defined.  <a href="classaudio__tools_1_1_f_l_a_c_decoder.html#a7c671623e6ac7ce716cdebeb57f8b62d">More...</a><br /></td></tr>
 <tr class="separator:a7c671623e6ac7ce716cdebeb57f8b62d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5aba1c0f6020b009866d3565b85553bf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_l_a_c_decoder.html#a5aba1c0f6020b009866d3565b85553bf">end</a> ()</td></tr>
 <tr class="memdesc:a5aba1c0f6020b009866d3565b85553bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases the reserved memory.  <a href="classaudio__tools_1_1_f_l_a_c_decoder.html#a5aba1c0f6020b009866d3565b85553bf">More...</a><br /></td></tr>
@@ -121,16 +121,16 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>flush</b> ()</td></tr
 <tr class="memitem:a3118531f7be6b1be55806e28445e5711"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_l_a_c_decoder.html#a3118531f7be6b1be55806e28445e5711">operator bool</a> ()</td></tr>
 <tr class="memdesc:a3118531f7be6b1be55806e28445e5711"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if the class is active  <a href="classaudio__tools_1_1_f_l_a_c_decoder.html#a3118531f7be6b1be55806e28445e5711">More...</a><br /></td></tr>
 <tr class="separator:a3118531f7be6b1be55806e28445e5711"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d98675261e850986878cb243754508a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_l_a_c_decoder.html#a0d98675261e850986878cb243754508a">setInputStream</a> (<a class="el" href="class_stream.html">Stream</a> &amp;input)</td></tr>
+<tr class="memitem:a0d98675261e850986878cb243754508a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_l_a_c_decoder.html#a0d98675261e850986878cb243754508a">setInputStream</a> (<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;input)</td></tr>
 <tr class="separator:a0d98675261e850986878cb243754508a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa567616663fdb5e7fdf1e9aab331a6c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_l_a_c_decoder.html#aa567616663fdb5e7fdf1e9aab331a6c2">setNotifyAudioChange</a> (<a class="el" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> &amp;bi)</td></tr>
-<tr class="memdesc:aa567616663fdb5e7fdf1e9aab331a6c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register Output <a class="el" href="class_stream.html">Stream</a> to be notified about changes.  <a href="classaudio__tools_1_1_f_l_a_c_decoder.html#aa567616663fdb5e7fdf1e9aab331a6c2">More...</a><br /></td></tr>
+<tr class="memdesc:aa567616663fdb5e7fdf1e9aab331a6c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register Output <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> to be notified about changes.  <a href="classaudio__tools_1_1_f_l_a_c_decoder.html#aa567616663fdb5e7fdf1e9aab331a6c2">More...</a><br /></td></tr>
 <tr class="separator:aa567616663fdb5e7fdf1e9aab331a6c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa3394dbb6e483a27e34bf45c228d0c56"><td class="memItemLeft" align="right" valign="top"><a id="aa3394dbb6e483a27e34bf45c228d0c56" name="aa3394dbb6e483a27e34bf45c228d0c56"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setOgg</b> (bool isOgg)</td></tr>
 <tr class="separator:aa3394dbb6e483a27e34bf45c228d0c56"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a62a8d468890aa00a9cf96df2088129d6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_l_a_c_decoder.html#a62a8d468890aa00a9cf96df2088129d6">setOutputStream</a> (<a class="el" href="class_print.html">Print</a> &amp;out_stream)</td></tr>
-<tr class="memdesc:a62a8d468890aa00a9cf96df2088129d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the output <a class="el" href="class_stream.html">Stream</a>.  <a href="classaudio__tools_1_1_f_l_a_c_decoder.html#a62a8d468890aa00a9cf96df2088129d6">More...</a><br /></td></tr>
+<tr class="memitem:a62a8d468890aa00a9cf96df2088129d6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_f_l_a_c_decoder.html#a62a8d468890aa00a9cf96df2088129d6">setOutputStream</a> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;out_stream)</td></tr>
+<tr class="memdesc:a62a8d468890aa00a9cf96df2088129d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the output <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>.  <a href="classaudio__tools_1_1_f_l_a_c_decoder.html#a62a8d468890aa00a9cf96df2088129d6">More...</a><br /></td></tr>
 <tr class="separator:a62a8d468890aa00a9cf96df2088129d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac973bc1e494e2eff6f6524cc93d89bf1"><td class="memItemLeft" align="right" valign="top"><a id="ac973bc1e494e2eff6f6524cc93d89bf1" name="ac973bc1e494e2eff6f6524cc93d89bf1"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setTimeout</b> (uint64_t readTimeout=FLAC_READ_TIMEOUT_MS)</td></tr>
@@ -151,11 +151,11 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setTimeout</b> (uint6
 <tr class="memitem:a9ca0ac81d751a01928046b2cd6375524 inherit pub_methods_classaudio__tools_1_1_streaming_decoder"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_streaming_decoder.html#a9ca0ac81d751a01928046b2cd6375524">operator bool</a> ()=0</td></tr>
 <tr class="memdesc:a9ca0ac81d751a01928046b2cd6375524 inherit pub_methods_classaudio__tools_1_1_streaming_decoder"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if the class is active  <a href="classaudio__tools_1_1_streaming_decoder.html#a9ca0ac81d751a01928046b2cd6375524">More...</a><br /></td></tr>
 <tr class="separator:a9ca0ac81d751a01928046b2cd6375524 inherit pub_methods_classaudio__tools_1_1_streaming_decoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae52a31861c3a4b69368d799597fb20fa inherit pub_methods_classaudio__tools_1_1_streaming_decoder"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_streaming_decoder.html#ae52a31861c3a4b69368d799597fb20fa">setInputStream</a> (<a class="el" href="class_stream.html">Stream</a> &amp;inStream)=0</td></tr>
+<tr class="memitem:ae52a31861c3a4b69368d799597fb20fa inherit pub_methods_classaudio__tools_1_1_streaming_decoder"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_streaming_decoder.html#ae52a31861c3a4b69368d799597fb20fa">setInputStream</a> (<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;inStream)=0</td></tr>
 <tr class="memdesc:ae52a31861c3a4b69368d799597fb20fa inherit pub_methods_classaudio__tools_1_1_streaming_decoder"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the input data stream.  <a href="classaudio__tools_1_1_streaming_decoder.html#ae52a31861c3a4b69368d799597fb20fa">More...</a><br /></td></tr>
 <tr class="separator:ae52a31861c3a4b69368d799597fb20fa inherit pub_methods_classaudio__tools_1_1_streaming_decoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaaf9768e5c5ae3e9a493ddee78f336b0 inherit pub_methods_classaudio__tools_1_1_streaming_decoder"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_streaming_decoder.html#aaaf9768e5c5ae3e9a493ddee78f336b0">setNotifyAudioChange</a> (<a class="el" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> &amp;bi)=0</td></tr>
-<tr class="memdesc:aaaf9768e5c5ae3e9a493ddee78f336b0 inherit pub_methods_classaudio__tools_1_1_streaming_decoder"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register Output <a class="el" href="class_stream.html">Stream</a> to be notified about changes.  <a href="classaudio__tools_1_1_streaming_decoder.html#aaaf9768e5c5ae3e9a493ddee78f336b0">More...</a><br /></td></tr>
+<tr class="memdesc:aaaf9768e5c5ae3e9a493ddee78f336b0 inherit pub_methods_classaudio__tools_1_1_streaming_decoder"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register Output <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> to be notified about changes.  <a href="classaudio__tools_1_1_streaming_decoder.html#aaaf9768e5c5ae3e9a493ddee78f336b0">More...</a><br /></td></tr>
 <tr class="separator:aaaf9768e5c5ae3e9a493ddee78f336b0 inherit pub_methods_classaudio__tools_1_1_streaming_decoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a480f045e9a3447e4592067aa5d878a3b inherit pub_methods_classaudio__tools_1_1_streaming_decoder"><td class="memItemLeft" align="right" valign="top"><a id="a480f045e9a3447e4592067aa5d878a3b" name="a480f045e9a3447e4592067aa5d878a3b"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setOutputStream</b> (<a class="el" href="classaudio__tools_1_1_audio_print.html">AudioPrint</a> &amp;out_stream)</td></tr>
@@ -165,8 +165,8 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setOutputStre
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setOutputStream</b> (<a class="el" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a> &amp;out_stream)</td></tr>
 <tr class="memdesc:a9362f496e846c1ac504cb35e11770871 inherit pub_methods_classaudio__tools_1_1_streaming_decoder"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the output streams and register to be notified. <br /></td></tr>
 <tr class="separator:a9362f496e846c1ac504cb35e11770871 inherit pub_methods_classaudio__tools_1_1_streaming_decoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af5956fbe6807df4370c73eea43c75205 inherit pub_methods_classaudio__tools_1_1_streaming_decoder"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_streaming_decoder.html#af5956fbe6807df4370c73eea43c75205">setOutputStream</a> (<a class="el" href="class_print.html">Print</a> &amp;outStream)=0</td></tr>
-<tr class="memdesc:af5956fbe6807df4370c73eea43c75205 inherit pub_methods_classaudio__tools_1_1_streaming_decoder"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the output <a class="el" href="class_stream.html">Stream</a>.  <a href="classaudio__tools_1_1_streaming_decoder.html#af5956fbe6807df4370c73eea43c75205">More...</a><br /></td></tr>
+<tr class="memitem:af5956fbe6807df4370c73eea43c75205 inherit pub_methods_classaudio__tools_1_1_streaming_decoder"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_streaming_decoder.html#af5956fbe6807df4370c73eea43c75205">setOutputStream</a> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;outStream)=0</td></tr>
+<tr class="memdesc:af5956fbe6807df4370c73eea43c75205 inherit pub_methods_classaudio__tools_1_1_streaming_decoder"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the output <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>.  <a href="classaudio__tools_1_1_streaming_decoder.html#af5956fbe6807df4370c73eea43c75205">More...</a><br /></td></tr>
 <tr class="separator:af5956fbe6807df4370c73eea43c75205 inherit pub_methods_classaudio__tools_1_1_streaming_decoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
@@ -218,13 +218,13 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_active</b> = false
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_ogg</b> = false</td></tr>
 <tr class="separator:ad57566aafcc119c476de1acb86d6d9af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d5ba1607dd3d397ca9b8b1b5f910a54"><td class="memItemLeft" align="right" valign="top"><a id="a2d5ba1607dd3d397ca9b8b1b5f910a54" name="a2d5ba1607dd3d397ca9b8b1b5f910a54"></a>
-<a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_input</b> = nullptr</td></tr>
+<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_input</b> = nullptr</td></tr>
 <tr class="separator:a2d5ba1607dd3d397ca9b8b1b5f910a54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeb3ec77a7d447ad3e649effc02711a6a"><td class="memItemLeft" align="right" valign="top"><a id="aeb3ec77a7d447ad3e649effc02711a6a" name="aeb3ec77a7d447ad3e649effc02711a6a"></a>
 <a class="el" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_notify</b> = nullptr</td></tr>
 <tr class="separator:aeb3ec77a7d447ad3e649effc02711a6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf8ee8ad006a7f97694c0d903ec88e7a"><td class="memItemLeft" align="right" valign="top"><a id="acf8ee8ad006a7f97694c0d903ec88e7a" name="acf8ee8ad006a7f97694c0d903ec88e7a"></a>
-<a class="el" href="class_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_print</b> = nullptr</td></tr>
+<a class="el" href="classaudio__tools_1_1_print.html">Print</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_print</b> = nullptr</td></tr>
 <tr class="separator:acf8ee8ad006a7f97694c0d903ec88e7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26a448a99a161929b42545fe74acba1e"><td class="memItemLeft" align="right" valign="top"><a id="a26a448a99a161929b42545fe74acba1e" name="a26a448a99a161929b42545fe74acba1e"></a>
 uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>read_timeout_ms</b> = FLAC_READ_TIMEOUT_MS</td></tr>
@@ -319,7 +319,7 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>time_last_read</b
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="class_stream.html">Stream</a> Interface: Process a single frame - only relevant when input stream has been defined. </p>
+<p><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> Interface: Process a single frame - only relevant when input stream has been defined. </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_streaming_decoder.html#aeefe809f5480fdd98bbd7be43b1162fb">audio_tools::StreamingDecoder</a>.</p>
 
@@ -433,7 +433,7 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>time_last_read</b
         <tr>
           <td class="memname">void audio_tools::FLACDecoder::setInputStream </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_stream.html">Stream</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;&#160;</td>
           <td class="paramname"><em>input</em></td><td>)</td>
           <td></td>
         </tr>
@@ -444,7 +444,7 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>time_last_read</b
   </tr>
 </table>
 </div><div class="memdoc">
-<p ><a class="el" href="class_stream.html">Stream</a> Interfce: Decode directly by taking data from the stream. This is more efficient then feeding the decoder with write: just call <a class="el" href="classaudio__tools_1_1_f_l_a_c_decoder.html#a7c671623e6ac7ce716cdebeb57f8b62d" title="Stream Interface: Process a single frame - only relevant when input stream has been defined.">copy()</a> in the loop </p>
+<p ><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> Interfce: Decode directly by taking data from the stream. This is more efficient then feeding the decoder with write: just call <a class="el" href="classaudio__tools_1_1_f_l_a_c_decoder.html#a7c671623e6ac7ce716cdebeb57f8b62d" title="Stream Interface: Process a single frame - only relevant when input stream has been defined.">copy()</a> in the loop </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_streaming_decoder.html#ae52a31861c3a4b69368d799597fb20fa">audio_tools::StreamingDecoder</a>.</p>
 
@@ -474,7 +474,7 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>time_last_read</b
 </table>
 </div><div class="memdoc">
 
-<p>Register Output <a class="el" href="class_stream.html">Stream</a> to be notified about changes. </p>
+<p>Register Output <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> to be notified about changes. </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_streaming_decoder.html#aaaf9768e5c5ae3e9a493ddee78f336b0">audio_tools::StreamingDecoder</a>.</p>
 
@@ -492,7 +492,7 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>time_last_read</b
         <tr>
           <td class="memname">virtual void audio_tools::FLACDecoder::setOutputStream </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_print.html">Print</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;&#160;</td>
           <td class="paramname"><em>outStream</em></td><td>)</td>
           <td></td>
         </tr>
@@ -504,7 +504,7 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>time_last_read</b
 </table>
 </div><div class="memdoc">
 
-<p>Defines the output <a class="el" href="class_stream.html">Stream</a>. </p>
+<p>Defines the output <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>. </p>
 
 <p>Implements <a class="el" href="classaudio__tools_1_1_streaming_decoder.html#af5956fbe6807df4370c73eea43c75205">audio_tools::StreamingDecoder</a>.</p>
 

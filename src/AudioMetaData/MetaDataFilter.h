@@ -5,6 +5,7 @@ namespace audio_tools {
 
 /**
  * @brief Class which filters out ID3v1 and ID3v2 Metadata and provides only the audio data to the decoder
+ * @ingroup metadata
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

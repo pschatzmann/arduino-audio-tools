@@ -112,6 +112,7 @@ struct SPDIFConfig : public AudioBaseInfo {
 
 /**
  * @brief Output as 16 bit stereo SPDIF on the I2S data output pin
+ * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
  *

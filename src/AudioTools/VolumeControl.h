@@ -1,9 +1,15 @@
 #pragma once
 
+/**
+ * @defgroup volume Volume
+ * @ingroup tools
+ * @brief Volume Calculations
+ */
 namespace audio_tools {
 
 /**
  * @brief Abstract class for handling of the linear input volume to determine the multiplication factor which should be applied to the audio signal 
+ * @ingroup volume
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -31,6 +37,7 @@ class VolumeControl {
 
 /**
  * @brief In order to optimize the processing time we cache the last input & factor and recalculate the new factor only if the input has changed.
+ * @ingroup volume
  * @author Phil Schatzmann
  * @copyright GPLv3 
  */
@@ -71,6 +78,7 @@ class CachedVolumeControl : public VolumeControl {
  * @brief Parametric Logarithmic volume control. Using the formula pow(b,input) * a - a, where b is b = pow(((1/ym)-1), 2) and a is a = 1.0 / (b - 1.0). 
  * The parameter ym is determining the steepness.
  * See https://electronics.stackexchange.com/questions/304692/formula-for-logarithmic-audio-taper-pot
+ * @ingroup volume
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -94,6 +102,7 @@ class LogarithmicVolumeControl : public VolumeControl {
 
 /**
  * @brief Simple exponentional volume control using the formula pow(2.0, input) - 1.0;
+ * @ingroup volume
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -111,7 +120,7 @@ class ExponentialVolumeControl : public VolumeControl {
  * We split up the input/output curve into 2 linear pieces with a slow and a fast raising part. 
  * The slow raising part goes from (0,0) to (x,y).
  * The fast raising part goes from (x,y) to (1,1).
- *  
+ * @ingroup volume
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -137,6 +146,7 @@ class SimulatedAudioPot : public VolumeControl {
 /**
  * @brief The simplest possible implementation of a VolumeControl: The input = output which describes a linear curve.
  * You would use this implementation if you physically connect an audio pot!
+ * @ingroup volume
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -156,6 +166,7 @@ class LinearVolumeControl : public VolumeControl {
 
 /**
  * @brief Provide the volume function as callback method: This is easy to use e.g together with a lamda function!
+ * @ingroup volume
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

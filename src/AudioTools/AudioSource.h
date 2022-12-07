@@ -4,6 +4,7 @@ namespace audio_tools {
 
 /**
  * @brief Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players
+ * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
  *
@@ -63,6 +64,7 @@ protected:
 
 /**
  * @brief Callback Audio Data Source which is used by the Audio Players
+ * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -136,6 +138,7 @@ protected:
 
 /**
  * @brief Audio Source which provides the data via the network from an URL
+ * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

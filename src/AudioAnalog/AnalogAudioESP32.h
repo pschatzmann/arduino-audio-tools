@@ -35,7 +35,7 @@ static inline uint16_t convert8DAC(int64_t value, int value_bits_per_sample){
 class AnalogConfig : public AudioBaseInfo {
   public:
     // allow ADC to access the protected methods
-    friend class AnalogAudioStream;
+    friend class AnalogAudioStreamESP32;
 
     // public config parameters
     RxTxMode mode;
@@ -149,18 +149,19 @@ class AnalogConfig : public AudioBaseInfo {
 
 
 /**
- * @brief A very fast ADC and DAC using the ESP32 I2S interface.
+ * @brief Please use AnalogAudioStream: A very fast ADC and DAC using the ESP32 I2S interface.
+ * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AnalogAudioStream  : public AudioStreamX {
+class AnalogAudioStreamESP32  : public AudioStreamX {
   public:
     /// Default constructor
-    AnalogAudioStream() {
+    AnalogAudioStreamESP32() {
     }
 
     /// Destructor
-    ~AnalogAudioStream() {
+    virtual ~AnalogAudioStreamESP32() {
       end();
     }
 
@@ -456,7 +457,8 @@ class AnalogAudioStream  : public AudioStreamX {
       return resultTotal;
     }
 };
-
+/// @brief AnalogAudioStream 
+typedef  AnalogAudioStreamESP32 AnalogAudioStream;
 
 } // namespace
 

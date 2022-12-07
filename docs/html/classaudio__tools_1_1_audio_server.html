@@ -78,11 +78,11 @@ $(function() {
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_audio_server-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">audio_tools::AudioServer Class Reference</div></div>
+  <div class="headertitle"><div class="title">audio_tools::AudioServer Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__http.html">Http</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>A simple Arduino Webserver which streams the result This class is based on the WiFiServer class. All you need to do is to provide the data with a callback method or from an Arduino <a class="el" href="class_stream.html">Stream</a>: in -copy&gt; client.  
+<p>A simple Arduino Webserver which streams the result This class is based on the WiFiServer class. All you need to do is to provide the data with a callback method or from an Arduino <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>: in -copy&gt; client.  
  <a href="classaudio__tools_1_1_audio_server.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_audio_server_8h_source.html">AudioServer.h</a>&gt;</code></p>
@@ -109,7 +109,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a17971bf1c1ed3a630477a9b1d4d900f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server.html#a17971bf1c1ed3a630477a9b1d4d900f3">begin</a> (<a class="el" href="namespaceaudio__tools.html#acb7797724edbc65915ca6273fd7099e6">AudioServerDataCallback</a> cb, const char *contentType)</td></tr>
 <tr class="memdesc:a17971bf1c1ed3a630477a9b1d4d900f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the server. The data must be provided by a callback method.  <a href="classaudio__tools_1_1_audio_server.html#a17971bf1c1ed3a630477a9b1d4d900f3">More...</a><br /></td></tr>
 <tr class="separator:a17971bf1c1ed3a630477a9b1d4d900f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac00f408d17bfd9c3cb569ecdcafdf02a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server.html#ac00f408d17bfd9c3cb569ecdcafdf02a">begin</a> (<a class="el" href="class_stream.html">Stream</a> &amp;in, const char *contentType)</td></tr>
+<tr class="memitem:ac00f408d17bfd9c3cb569ecdcafdf02a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server.html#ac00f408d17bfd9c3cb569ecdcafdf02a">begin</a> (<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;in, const char *contentType)</td></tr>
 <tr class="memdesc:ac00f408d17bfd9c3cb569ecdcafdf02a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the server. You need to be connected to WiFI before calling this method.  <a href="classaudio__tools_1_1_audio_server.html#ac00f408d17bfd9c3cb569ecdcafdf02a">More...</a><br /></td></tr>
 <tr class="separator:ac00f408d17bfd9c3cb569ecdcafdf02a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a435355b5db0b55f3ca638c4ee131a29a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_audio_server.html#a435355b5db0b55f3ca638c4ee131a29a">copy</a> ()</td></tr>
@@ -120,10 +120,10 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>doLoop</b> ()</td></t
 <tr class="memdesc:afda20b39daed47ea702fb5b22f71d160"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add this method to your loop Returns true while the client is connected. <br /></td></tr>
 <tr class="separator:afda20b39daed47ea702fb5b22f71d160"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a912fc2fa49533fd86c69c7079400609f"><td class="memItemLeft" align="right" valign="top"><a id="a912fc2fa49533fd86c69c7079400609f" name="a912fc2fa49533fd86c69c7079400609f"></a>
-<a class="el" href="class_stream.html">Stream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>out</b> ()</td></tr>
+<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>out</b> ()</td></tr>
 <tr class="separator:a912fc2fa49533fd86c69c7079400609f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe52399693da4cf8baa6a14eef079300"><td class="memItemLeft" align="right" valign="top"><a id="afe52399693da4cf8baa6a14eef079300" name="afe52399693da4cf8baa6a14eef079300"></a>
-<a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>out_ptr</b> ()</td></tr>
+<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>out_ptr</b> ()</td></tr>
 <tr class="separator:afe52399693da4cf8baa6a14eef079300"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a9ccc643e4bd7cb2af682caeb1cc68a"><td class="memItemLeft" align="right" valign="top"><a id="a7a9ccc643e4bd7cb2af682caeb1cc68a" name="a7a9ccc643e4bd7cb2af682caeb1cc68a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setConverter</b> (<a class="el" href="classaudio__tools_1_1_base_converter.html">BaseConverter</a>&lt; int16_t &gt; *c)</td></tr>
@@ -165,7 +165,7 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>content_type<
 <a class="el" href="classaudio__tools_1_1_stream_copy.html">StreamCopy</a>&#160;</td><td class="memItemRight" valign="bottom"><b>copier</b></td></tr>
 <tr class="separator:a17907c9a5a21ab0d854be762bf29c915"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3d4669600b2a7260b1473420f29f5d80"><td class="memItemLeft" align="right" valign="top"><a id="a3d4669600b2a7260b1473420f29f5d80" name="a3d4669600b2a7260b1473420f29f5d80"></a>
-<a class="el" href="class_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>in</b> = nullptr</td></tr>
+<a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>in</b> = nullptr</td></tr>
 <tr class="separator:a3d4669600b2a7260b1473420f29f5d80"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a49e5d3e4ba9b91142c36edad7b19d2f9"><td class="memItemLeft" align="right" valign="top"><a id="a49e5d3e4ba9b91142c36edad7b19d2f9" name="a49e5d3e4ba9b91142c36edad7b19d2f9"></a>
 char *&#160;</td><td class="memItemRight" valign="bottom"><b>network</b> = nullptr</td></tr>
@@ -174,11 +174,11 @@ char *&#160;</td><td class="memItemRight" valign="bottom"><b>network</b> = nullp
 char *&#160;</td><td class="memItemRight" valign="bottom"><b>password</b> = nullptr</td></tr>
 <tr class="separator:a6dda2d3ab7b7175e6d1e18412039d500"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a487905e0a061125001e72da49efbcfa3"><td class="memItemLeft" align="right" valign="top"><a id="a487905e0a061125001e72da49efbcfa3" name="a487905e0a061125001e72da49efbcfa3"></a>
-WiFiServer&#160;</td><td class="memItemRight" valign="bottom"><b>server</b></td></tr>
+WiFiServer&#160;</td><td class="memItemRight" valign="bottom"><b>server</b> {80}</td></tr>
 <tr class="separator:a487905e0a061125001e72da49efbcfa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >A simple Arduino Webserver which streams the result This class is based on the WiFiServer class. All you need to do is to provide the data with a callback method or from an Arduino <a class="el" href="class_stream.html">Stream</a>: in -copy&gt; client. </p>
+<div class="textblock"><p >A simple Arduino Webserver which streams the result This class is based on the WiFiServer class. All you need to do is to provide the data with a callback method or from an Arduino <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a>: in -copy&gt; client. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -291,7 +291,7 @@ WiFiServer&#160;</td><td class="memItemRight" valign="bottom"><b>server</b></td>
         <tr>
           <td class="memname">void audio_tools::AudioServer::begin </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_stream.html">Stream</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> &amp;&#160;</td>
           <td class="paramname"><em>in</em>, </td>
         </tr>
         <tr>

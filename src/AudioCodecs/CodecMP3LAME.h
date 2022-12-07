@@ -3,10 +3,17 @@
 #include "AudioCodecs/AudioEncoded.h"
 #include "MP3EncoderLAME.h"
 
+/** 
+ * @defgroup codec-lame LAME
+ * @ingroup codecs
+ * @brief LAME MP3 encoder   
+**/
+
 namespace audio_tools {
 
 /**
  * @brief LAME parameters
+ * @ingroup codec-lame
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -27,6 +34,7 @@ struct AudioInfoLAME :  AudioBaseInfo  {
 /**
  * @brief Encodes PCM data to the MP3 format and writes the result to a stream
  * This is basically just a wrapper using https://github.com/pschatzmann/arduino-liblame
+ * @ingroup codec-lame
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

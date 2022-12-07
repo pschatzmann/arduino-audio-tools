@@ -19,6 +19,13 @@
 #include "tensorflow/lite/micro/system_setup.h"
 #include "tensorflow/lite/schema/schema_generated.h"
 
+/** 
+ * @defgroup tflite TFLite
+ * @ingroup ai
+ * @brief Tensorflow 
+**/
+
+
 namespace audio_tools {
 
 // Forward Declarations
@@ -27,6 +34,7 @@ class TfLiteAbstractRecognizeCommands;
 
 /**
  * @brief Input class which provides the next value if the TfLiteAudioStream is treated as an audio sourcce
+ * @ingroup tflite
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -38,6 +46,7 @@ class TfLiteReader {
 
 /**
  * @brief Output class which interprets audio data if TfLiteAudioStream is treated as audio sink
+ * @ingroup tflite
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -48,6 +57,7 @@ class TfLiteWriter {
 };
 /**
  * @brief Error Reporter using the Audio Tools Logger
+ * @ingroup tflite
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -67,6 +77,7 @@ tflite::ErrorReporter* error_reporter = &my_error_reporter;
 
 /**
  * @brief Configuration settings for TfLiteAudioStream
+ * @ingroup tflite
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -161,6 +172,7 @@ struct TfLiteConfig {
 
 /**
  * @brief Quantizer that helps to quantize and dequantize between float and int8
+ * @ingroup tflite
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -195,6 +207,7 @@ class TfLiteQuantizer {
  * @brief Base class for implementing different primitive decoding models on top
  * of the instantaneous results from running an audio recognition model on a
  * single window of samples.
+ * @ingroup tflite
  */
 class TfLiteAbstractRecognizeCommands {
  public:
@@ -214,6 +227,7 @@ class TfLiteAbstractRecognizeCommands {
  * into the processing method. The timestamp for each subsequent call should be
  * increasing from the previous, since the class is designed to process a stream
  * of data over time.
+ * @ingroup tflite
  */
 
 class TfLiteMicroSpeechRecognizeCommands : public TfLiteAbstractRecognizeCommands {
@@ -382,6 +396,7 @@ class TfLiteMicroSpeechRecognizeCommands : public TfLiteAbstractRecognizeCommand
 /**
  * @brief Astract TfLiteAudioStream to provide access to TfLiteAudioStream for
  * Reader and Writers
+ * @ingroup tflite
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -405,6 +420,7 @@ class TfLiteAudioStreamBase : public AudioStreamX {
 
 /**
  * @brief TfLiteMicroSpeachWriter for Audio Data
+ * @ingroup tflite
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -713,6 +729,7 @@ class TfLiteMicroSpeachWriter : public TfLiteWriter {
 /**
  * @brief Generate a sine output from a model that was trained on the sine method.
  * (=hello_world)
+ * @ingroup tflite
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -780,6 +797,7 @@ class TfLiteSineReader : public TfLiteReader {
 
 /**
  * @brief TfLiteAudioStream which uses Tensorflow Light to analyze the data. If it is used as a generator (where we read audio data) 
+ * @ingroup tflite
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

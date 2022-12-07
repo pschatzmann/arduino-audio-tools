@@ -78,11 +78,11 @@ $(function() {
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_simple_delay-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">audio_tools::SimpleDelay Class Reference</div></div>
+  <div class="headertitle"><div class="title">audio_tools::SimpleDelay Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__dsp.html">DSP</a> &raquo; <a class="el" href="group__effects.html">Effects</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Simple <a class="el" href="classaudio__tools_1_1_delay.html" title="Delay AudioEffect. We mix the actual signal with the delayed signal.">Delay</a> effect consiting of a single tap delay with Effect Gain and feed back controls Constructor requires internal delay in samples.  
+<p>Simple <a class="el" href="classaudio__tools_1_1_delay.html" title="Delay/Echo AudioEffect. See https://wiki.analog.com/resources/tools-software/sharc-audio-module/barem...">Delay</a> effect consiting of a single tap delay with Effect Gain and feed back controls Constructor requires internal delay in samples.  
  <a href="classaudio__tools_1_1_simple_delay.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_audio_effects_suite_8h_source.html">AudioEffectsSuite.h</a>&gt;</code></p>
@@ -109,6 +109,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad52da68c503eca90cdb9f02e7d3d561e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a877b866df6cf2c215095998d04d8441e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_simple_delay.html">SimpleDelay</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_simple_delay.html#a877b866df6cf2c215095998d04d8441e">clone</a> () override</td></tr>
 <tr class="separator:a877b866df6cf2c215095998d04d8441e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c7140892ea275b6f6370f030c350b00"><td class="memItemLeft" align="right" valign="top">effect_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_simple_delay.html#a7c7140892ea275b6f6370f030c350b00">process</a> (effect_t inputSample) override</td></tr>
+<tr class="separator:a7c7140892ea275b6f6370f030c350b00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5849ab68381e2130eb79e36af8a1f390"><td class="memItemLeft" align="right" valign="top">effectsuite_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_simple_delay.html#a5849ab68381e2130eb79e36af8a1f390">processDouble</a> (effectsuite_t inputSample) override</td></tr>
 <tr class="separator:a5849ab68381e2130eb79e36af8a1f390"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40ef0c7354b174a04b39f144b1aa7ae9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_simple_delay.html#a40ef0c7354b174a04b39f144b1aa7ae9">setDelayGain</a> (effectsuite_t gain)</td></tr>
@@ -249,7 +251,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>currentDelayWriteIndex
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>active_flag</b> = true</td></tr>
 <tr class="separator:a5baa4e28b5634fa5c6a00198b62562ec inherit pro_attribs_classaudio__tools_1_1_audio_effect"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99d421d310dbd778d6b6fb1a8a670a51 inherit pro_attribs_classaudio__tools_1_1_audio_effect"><td class="memItemLeft" align="right" valign="top"><a id="a99d421d310dbd778d6b6fb1a8a670a51" name="a99d421d310dbd778d6b6fb1a8a670a51"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>id_value</b> =-1</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>id_value</b> = -1</td></tr>
 <tr class="separator:a99d421d310dbd778d6b6fb1a8a670a51 inherit pro_attribs_classaudio__tools_1_1_audio_effect"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
@@ -266,8 +268,8 @@ static const int&#160;</td><td class="memItemRight" valign="bottom"><b>interpRes
 <tr class="separator:a651f509eb8ac1a740224c8c49bbc771f inherit pro_static_attribs_classaudio__tools_1_1_delay_effect_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Simple <a class="el" href="classaudio__tools_1_1_delay.html" title="Delay AudioEffect. We mix the actual signal with the delayed signal.">Delay</a> effect consiting of a single tap delay with Effect Gain and feed back controls Constructor requires internal delay in samples. </p>
-<dl class="section see"><dt>See also</dt><dd>process </dd></dl>
+<div class="textblock"><p >Simple <a class="el" href="classaudio__tools_1_1_delay.html" title="Delay/Echo AudioEffect. See https://wiki.analog.com/resources/tools-software/sharc-audio-module/barem...">Delay</a> effect consiting of a single tap delay with Effect Gain and feed back controls Constructor requires internal delay in samples. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classaudio__tools_1_1_simple_delay.html#a7c7140892ea275b6f6370f030c350b00">process</a> </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Matthew Hamilton </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>MIT License </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -431,6 +433,41 @@ static const int&#160;</td><td class="memItemRight" valign="bottom"><b>interpRes
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>returns interpolated value as effectsuite_t </dd></dl>
+
+</div>
+</div>
+<a id="a7c7140892ea275b6f6370f030c350b00" name="a7c7140892ea275b6f6370f030c350b00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c7140892ea275b6f6370f030c350b00">&#9670;&#160;</a></span>process()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">effect_t audio_tools::SimpleDelay::process </td>
+          <td>(</td>
+          <td class="paramtype">effect_t&#160;</td>
+          <td class="paramname"><em>inputSample</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >Main process block for applying audio effect </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">inputSample</td><td>The int16_t input audio sample for the effect to be applied to </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>an audio sample as a int16_t with effect applied </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classaudio__tools_1_1_effect_suite_base.html">audio_tools::EffectSuiteBase</a>.</p>
 
 </div>
 </div>
@@ -702,7 +739,7 @@ static const int&#160;</td><td class="memItemRight" valign="bottom"><b>interpRes
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioEffects/<a class="el" href="_audio_effects_suite_8h_source.html">AudioEffectsSuite.h</a></li>
+<li>src/AudioLibs/<a class="el" href="_audio_effects_suite_8h_source.html">AudioEffectsSuite.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -78,7 +78,7 @@ $(function() {
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_u_d_p_stream-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">audio_tools::UDPStream Class Reference</div></div>
+  <div class="headertitle"><div class="title">audio_tools::UDPStream Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__communications.html">Communications</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -97,6 +97,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a68f5bb01b848809b42eea9c415e21a40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2e390fac9d686f126e086457ed573a2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_d_p_stream.html#ae2e390fac9d686f126e086457ed573a2">available</a> () override</td></tr>
 <tr class="separator:ae2e390fac9d686f126e086457ed573a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2dde39e6ec7ebcb835ea434ebab1b2fa"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_u_d_p_stream.html#a2dde39e6ec7ebcb835ea434ebab1b2fa">availableForWrite</a> ()</td></tr>
+<tr class="separator:a2dde39e6ec7ebcb835ea434ebab1b2fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6aa620c3813e8d63c642ce5a16289440"><td class="memItemLeft" align="right" valign="top"><a id="a6aa620c3813e8d63c642ce5a16289440" name="a6aa620c3813e8d63c642ce5a16289440"></a>
 uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (IPAddress a, uint16_t port)</td></tr>
 <tr class="memdesc:a6aa620c3813e8d63c642ce5a16289440"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts to send data to the indicated address / port. <br /></td></tr>
@@ -141,7 +143,8 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>ssid</b> = nu
 <tr class="separator:ae03ed49d5d101c93d4813d1221f16d32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >A Simple exension of the WiFiUDP class which makes sure that the basic <a class="el" href="class_stream.html">Stream</a> functioinaltiy which is used as <a class="el" href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.">AudioSource</a> and AudioSink </p><dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
+<div class="textblock"><p >A Simple exension of the WiFiUDP class which makes sure that the basic <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> functioinaltiy which is used as <a class="el" href="classaudio__tools_1_1_audio_source.html" title="Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players.">AudioSource</a> and AudioSink</p>
+<dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ae2e390fac9d686f126e086457ed573a2" name="ae2e390fac9d686f126e086457ed573a2"></a>
@@ -167,6 +170,32 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>ssid</b> = nu
 </table>
 </div><div class="memdoc">
 <p >Provides the available size of the current package and if this is used up of the next package </p>
+
+</div>
+</div>
+<a id="a2dde39e6ec7ebcb835ea434ebab1b2fa" name="a2dde39e6ec7ebcb835ea434ebab1b2fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2dde39e6ec7ebcb835ea434ebab1b2fa">&#9670;&#160;</a></span>availableForWrite()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int audio_tools::UDPStream::availableForWrite </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >Always return 1492 (MTU 1500 - 8 byte header) as UDP packet available to write </p>
 
 </div>
 </div>

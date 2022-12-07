@@ -2,12 +2,18 @@
 
 #include "AudioCodecs/AudioEncoded.h"
 
-namespace audio_tools {
+/** 
+ * @defgroup codec-float Floats
+ * @ingroup codecs
+ * @brief Converts between int16_t and floats   
+**/
 
+
+namespace audio_tools {
 
 /**
  * @brief DecoderFloat - Converts an 8 Bit Stream into Floats
- * 
+ * @ingroup codec-float
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -104,6 +110,7 @@ class DecoderFloat : public AudioDecoder {
 /**
  * @brief EncoderFloats - Encodes 16 bit PCM data stream to floats
  * data. 
+ * @ingroup codec-float
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

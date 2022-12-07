@@ -7,10 +7,18 @@
 #include "AudioMetaData/MetaDataID3.h"
 #include "AudioHttp/HttpRequest.h"
 
+/** 
+ * @defgroup metadata Metadata
+ * @ingroup main
+ * @brief Audio Metadata (Title, Author...)
+**/
+
 namespace audio_tools {
 
 /**
- * @brief ID3 and Icecast/Shoutcast metadata output support
+ * @brief ID3 and Icecast/Shoutcast metadata output support. Just write the audio data 
+ * to an object of this class and receive the metadata via the callback.
+ * @ingroup metadata
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 

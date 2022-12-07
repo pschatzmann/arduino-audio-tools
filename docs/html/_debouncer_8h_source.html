@@ -94,11 +94,11 @@ $(function() {
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1_debouncer.html#a43fd37a4b4e674a78f6a624552eef70e">   22</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="classaudio__tools_1_1_debouncer.html#a43fd37a4b4e674a78f6a624552eef70e">debounce</a>(<span class="keywordtype">void</span>(*cb)(<span class="keywordtype">void</span>* ref) = <span class="keyword">nullptr</span>) {</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>            <span class="keywordtype">bool</span> result = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>            <span class="keywordflow">if</span> (millis() &gt; debounce_ms) {</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>            <span class="keywordflow">if</span> (<a class="code hl_function" href="namespaceaudio__tools.html#ad20c9d686c4330bb11f320c476574541">millis</a>() &gt; debounce_ms) {</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>                LOGI(<span class="stringliteral">&quot;accpted&quot;</span>);</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>                <span class="keywordflow">if</span> (cb != <span class="keyword">nullptr</span>) cb(p_ref);</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>                <span class="comment">// new time limit</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>                debounce_ms = millis() + ms;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>                debounce_ms = <a class="code hl_function" href="namespaceaudio__tools.html#ad20c9d686c4330bb11f320c476574541">millis</a>() + ms;</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>                result = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>            }</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>            <span class="keywordflow">else</span> {</div>
@@ -118,6 +118,7 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1_debouncer_html"><div class="ttname"><a href="classaudio__tools_1_1_debouncer.html">audio_tools::Debouncer</a></div><div class="ttdoc">Helper class to debounce user input from a push button.</div><div class="ttdef"><b>Definition:</b> Debouncer.h:9</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1_debouncer_html_a43fd37a4b4e674a78f6a624552eef70e"><div class="ttname"><a href="classaudio__tools_1_1_debouncer.html#a43fd37a4b4e674a78f6a624552eef70e">audio_tools::Debouncer::debounce</a></div><div class="ttdeci">bool debounce(void(*cb)(void *ref)=nullptr)</div><div class="ttdoc">Prevents that the same method is executed multiple times within the indicated time limit.</div><div class="ttdef"><b>Definition:</b> Debouncer.h:22</div></div>
 <div class="ttc" id="anamespaceaudio__tools_html"><div class="ttname"><a href="namespaceaudio__tools.html">audio_tools</a></div><div class="ttdoc">Generic Implementation of sound input and output for desktop environments using portaudio.</div><div class="ttdef"><b>Definition:</b> AnalogAudioArduino.h:10</div></div>
+<div class="ttc" id="anamespaceaudio__tools_html_ad20c9d686c4330bb11f320c476574541"><div class="ttname"><a href="namespaceaudio__tools.html#ad20c9d686c4330bb11f320c476574541">audio_tools::millis</a></div><div class="ttdeci">uint64_t millis()</div><div class="ttdoc">Returns the milliseconds since the start.</div><div class="ttdef"><b>Definition:</b> Basic.h:13</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -1023,6 +1023,7 @@ public:
  * @brief Simple Chorus effect with a single delay voice and mono output Chorus is
  * effective between 15 and 20 miliseconds delay of original audio. Requires the
  * sample rate when initialising.
+ * @ingroup effects
  * @author Matthew Hamilton
  * @copyright MIT License
  **/
@@ -1157,6 +1158,7 @@ protected:
 
 /**
  * @brief Delay effect that filters the repeat delay 
+ * @ingroup effects
  * @author Matthew Hamilton
  * @copyright MIT License
  */
@@ -1235,6 +1237,7 @@ protected:
  * @brief Simple Delay effect consiting of a single tap delay with Effect Gain and
  * feed back controls
  * Constructor requires internal delay in samples
+ * @ingroup effects
  * @see process
  * @author Matthew Hamilton
  * @copyright MIT License
@@ -1412,6 +1415,7 @@ protected: // member vairables
  * The flanger has an effective range between 0 and 15 miliseconds
  * in this case dleay buffer should be set to sampleRate*3/200
  * Constructor requires internal delay in samples
+ * @ingroup effects
  * @see process
  * @author Matthew Hamilton
  * @copyright MIT License

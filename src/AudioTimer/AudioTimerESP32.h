@@ -4,6 +4,12 @@
 #include "AudioTimer/AudioTimerDef.h"
 #include <esp_task_wdt.h>
 
+/**
+ * @defgroup timer_esp32 Timer-ESP32 
+ * @ingroup platform
+ * @brief ESP32 timer
+ */
+
 namespace audio_tools {
 
 typedef void (* simple_callback )(void);
@@ -112,6 +118,7 @@ static IRAM_ATTR void timerCallback3() {
  * @brief Repeating Timer functions for simple scheduling of repeated execution.
  * The basic logic is taken from https://www.toptal.com/embedded/esp32-audio-sampling.
  * Plaease use the typedef TimerAlarmRepeating.
+ * @ingroup timer_esp32
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 
@@ -294,7 +301,7 @@ class TimerAlarmRepeatingESP32 : public TimerAlarmRepeatingDef {
       }      
 };
 
-// for User API
+/// @brief  use TimerAlarmRepeating!  @ingroup timer_esp32
 typedef  TimerAlarmRepeatingESP32 TimerAlarmRepeating;
 
 

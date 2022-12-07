@@ -7,6 +7,7 @@ namespace audio_tools {
 /**
  * @brief Integration into Faust DSP see https://faust.grame.fr/
  * To generate code from faust, select src and cpp
+ * @ingroup dsp
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

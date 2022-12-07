@@ -17,6 +17,7 @@ static portMUX_TYPE mutex_logger = portMUX_INITIALIZER_UNLOCKED;
 
 /**
  * @brief A simple Logger that writes messages dependent on the log level
+ * @ingroup tools
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 

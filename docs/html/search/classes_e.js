@@ -1,21 +1,13 @@
 var searchData=
 [
-  ['parameter_0',['Parameter',['../classaudio__tools_1_1_parameter.html',1,'audio_tools']]],
-  ['picochannelout_1',['PicoChannelOut',['../structaudio__tools_1_1_pico_channel_out.html',1,'audio_tools']]],
-  ['pininfoesp32_2',['PinInfoESP32',['../structaudio__tools_1_1_pin_info_e_s_p32.html',1,'audio_tools']]],
-  ['pitchshift_3',['PitchShift',['../classaudio__tools_1_1_pitch_shift.html',1,'audio_tools']]],
-  ['pitchshiftinfo_4',['PitchShiftInfo',['../structaudio__tools_1_1_pitch_shift_info.html',1,'audio_tools']]],
-  ['pitchshiftstream_5',['PitchShiftStream',['../classaudio__tools_1_1_pitch_shift_stream.html',1,'audio_tools']]],
-  ['poppingsoundremover_6',['PoppingSoundRemover',['../classaudio__tools_1_1_popping_sound_remover.html',1,'audio_tools']]],
-  ['portaudioconfig_7',['PortAudioConfig',['../classaudio__tools_1_1_port_audio_config.html',1,'audio_tools']]],
-  ['portaudiostream_8',['PortAudioStream',['../classaudio__tools_1_1_port_audio_stream.html',1,'audio_tools']]],
-  ['print_9',['Print',['../class_print.html',1,'']]],
-  ['printable_10',['Printable',['../class_printable.html',1,'']]],
-  ['pwmaudiostreamavr_11',['PWMAudioStreamAVR',['../classaudio__tools_1_1_p_w_m_audio_stream_a_v_r.html',1,'audio_tools']]],
-  ['pwmaudiostreambase_12',['PWMAudioStreamBase',['../classaudio__tools_1_1_p_w_m_audio_stream_base.html',1,'audio_tools']]],
-  ['pwmaudiostreamesp32_13',['PWMAudioStreamESP32',['../classaudio__tools_1_1_p_w_m_audio_stream_e_s_p32.html',1,'audio_tools']]],
-  ['pwmaudiostreammbed_14',['PWMAudioStreamMBED',['../classaudio__tools_1_1_p_w_m_audio_stream_m_b_e_d.html',1,'audio_tools']]],
-  ['pwmaudiostreampico_15',['PWMAudioStreamPico',['../classaudio__tools_1_1_p_w_m_audio_stream_pico.html',1,'audio_tools']]],
-  ['pwmaudiostreamstm32_16',['PWMAudioStreamSTM32',['../classaudio__tools_1_1_p_w_m_audio_stream_s_t_m32.html',1,'audio_tools']]],
-  ['pwmconfig_17',['PWMConfig',['../structaudio__tools_1_1_p_w_m_config.html',1,'audio_tools']]]
+  ['oggcontainerdecoder_0',['OggContainerDecoder',['../classaudio__tools_1_1_ogg_container_decoder.html',1,'audio_tools']]],
+  ['oggcontainerencoder_1',['OggContainerEncoder',['../classaudio__tools_1_1_ogg_container_encoder.html',1,'audio_tools']]],
+  ['opusaudiodecoder_2',['OpusAudioDecoder',['../classaudio__tools_1_1_opus_audio_decoder.html',1,'audio_tools']]],
+  ['opusaudioencoder_3',['OpusAudioEncoder',['../classaudio__tools_1_1_opus_audio_encoder.html',1,'audio_tools']]],
+  ['opusencodersettings_4',['OpusEncoderSettings',['../structaudio__tools_1_1_opus_encoder_settings.html',1,'audio_tools']]],
+  ['opusoggdecoder_5',['OpusOggDecoder',['../classaudio__tools_1_1_opus_ogg_decoder.html',1,'audio_tools']]],
+  ['opusoggencoder_6',['OpusOggEncoder',['../classaudio__tools_1_1_opus_ogg_encoder.html',1,'audio_tools']]],
+  ['opussettings_7',['OpusSettings',['../structaudio__tools_1_1_opus_settings.html',1,'audio_tools']]],
+  ['oscsincos_8',['OscSinCos',['../classffft_1_1_osc_sin_cos.html',1,'ffft']]],
+  ['outputmixer_9',['OutputMixer',['../classaudio__tools_1_1_output_mixer.html',1,'audio_tools']]]
 ];

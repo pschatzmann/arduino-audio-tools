@@ -77,7 +77,7 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_tremolo-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">audio_tools::Tremolo Class Reference</div></div>
+  <div class="headertitle"><div class="title">audio_tools::Tremolo Class Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__dsp.html">DSP</a> &raquo; <a class="el" href="group__effects.html">Effects</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -100,9 +100,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac8de923b02056fe7429a940b4575d7f1"><td class="memItemLeft" align="right" valign="top"><a id="ac8de923b02056fe7429a940b4575d7f1" name="ac8de923b02056fe7429a940b4575d7f1"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Tremolo</b> (const <a class="el" href="classaudio__tools_1_1_tremolo.html">Tremolo</a> &amp;copy)=default</td></tr>
 <tr class="separator:ac8de923b02056fe7429a940b4575d7f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52d6e1c637400e4941114bc121ced71c"><td class="memItemLeft" align="right" valign="top"><a id="a52d6e1c637400e4941114bc121ced71c" name="a52d6e1c637400e4941114bc121ced71c"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Tremolo</b> (int16_t duration_ms=2000, uint8_t depthPercent=50, uint32_t sampleRate=44100)</td></tr>
-<tr class="memdesc:a52d6e1c637400e4941114bc121ced71c"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_tremolo.html" title="Tremolo AudioEffect.">Tremolo</a> constructor - use e.g. duration_ms=2000; depthPercent=50; sampleRate=44100. <br /></td></tr>
+<tr class="memitem:a52d6e1c637400e4941114bc121ced71c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#a52d6e1c637400e4941114bc121ced71c">Tremolo</a> (int16_t duration_ms=2000, uint8_t depthPercent=50, uint32_t sampleRate=44100)</td></tr>
 <tr class="separator:a52d6e1c637400e4941114bc121ced71c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48eb1be03c500a0fb074e0bd410e9715"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classaudio__tools_1_1_tremolo.html">Tremolo</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_tremolo.html#a48eb1be03c500a0fb074e0bd410e9715">clone</a> ()</td></tr>
 <tr class="separator:a48eb1be03c500a0fb074e0bd410e9715"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -170,7 +168,7 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>sampleRate</b></t
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>active_flag</b> = true</td></tr>
 <tr class="separator:a5baa4e28b5634fa5c6a00198b62562ec inherit pro_attribs_classaudio__tools_1_1_audio_effect"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99d421d310dbd778d6b6fb1a8a670a51 inherit pro_attribs_classaudio__tools_1_1_audio_effect"><td class="memItemLeft" align="right" valign="top"><a id="a99d421d310dbd778d6b6fb1a8a670a51" name="a99d421d310dbd778d6b6fb1a8a670a51"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>id_value</b> =-1</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>id_value</b> = -1</td></tr>
 <tr class="separator:a99d421d310dbd778d6b6fb1a8a670a51 inherit pro_attribs_classaudio__tools_1_1_audio_effect"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
@@ -188,7 +186,51 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>copyParent</b> (<a cl
 <div class="textblock"><p ><a class="el" href="classaudio__tools_1_1_tremolo.html" title="Tremolo AudioEffect.">Tremolo</a> <a class="el" href="classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects.">AudioEffect</a>. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a52d6e1c637400e4941114bc121ced71c" name="a52d6e1c637400e4941114bc121ced71c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52d6e1c637400e4941114bc121ced71c">&#9670;&#160;</a></span>Tremolo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">audio_tools::Tremolo::Tremolo </td>
+          <td>(</td>
+          <td class="paramtype">int16_t&#160;</td>
+          <td class="paramname"><em>duration_ms</em> = <code>2000</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>depthPercent</em> = <code>50</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>sampleRate</em> = <code>44100</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p ><a class="el" href="classaudio__tools_1_1_tremolo.html" title="Tremolo AudioEffect.">Tremolo</a> constructor - use e.g. duration_ms=2000; depthPercent=50; sampleRate=44100 </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="a48eb1be03c500a0fb074e0bd410e9715" name="a48eb1be03c500a0fb074e0bd410e9715"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a48eb1be03c500a0fb074e0bd410e9715">&#9670;&#160;</a></span>clone()</h2>
 

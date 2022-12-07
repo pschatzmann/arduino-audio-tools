@@ -77,14 +77,14 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_synchronized_buffer_r_t_o_s-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">audio_tools::SynchronizedBufferRTOS&lt; T &gt; Class Template Reference</div></div>
+  <div class="headertitle"><div class="title">audio_tools::SynchronizedBufferRTOS&lt; T &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__main.html">Arduino Audio Tools</a> &raquo; <a class="el" href="group__tools.html">Tools</a> &raquo; <a class="el" href="group__buffers.html">Buffers</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>Buffer implementation which is using a FreeRTOS StreamBuffer.  
  <a href="classaudio__tools_1_1_synchronized_buffer_r_t_o_s.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_synchronized_buffer_8h_source.html">SynchronizedBuffer.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_synchronized_buffers_8h_source.html">SynchronizedBuffers.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for audio_tools::SynchronizedBufferRTOS&lt; T &gt;:</div>
 <div class="dyncontent">
@@ -97,9 +97,9 @@ Inheritance diagram for audio_tools::SynchronizedBufferRTOS&lt; T &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a23d5a18e66c3c1587d3a42a1c18b6f7d"><td class="memItemLeft" align="right" valign="top"><a id="a23d5a18e66c3c1587d3a42a1c18b6f7d" name="a23d5a18e66c3c1587d3a42a1c18b6f7d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>SynchronizedBufferRTOS</b> (size_t xStreamBufferSizeBytes, size_t xTriggerLevel)</td></tr>
-<tr class="separator:a23d5a18e66c3c1587d3a42a1c18b6f7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ddde87173ed81078b914d2d67e96ae4"><td class="memItemLeft" align="right" valign="top"><a id="a5ddde87173ed81078b914d2d67e96ae4" name="a5ddde87173ed81078b914d2d67e96ae4"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>SynchronizedBufferRTOS</b> (size_t xStreamBufferSizeBytes, size_t xTriggerLevel=256, int writeMaxWait=portMAX_DELAY, int readMaxWait=portMAX_DELAY)</td></tr>
+<tr class="separator:a5ddde87173ed81078b914d2d67e96ae4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ae09b94de1c039e27064c1e7e6debd6"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_synchronized_buffer_r_t_o_s.html#a1ae09b94de1c039e27064c1e7e6debd6">address</a> () override</td></tr>
 <tr class="separator:a1ae09b94de1c039e27064c1e7e6debd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77f28b6eb1794ffb41316034b4fdf484"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_synchronized_buffer_r_t_o_s.html#a77f28b6eb1794ffb41316034b4fdf484">available</a> () override</td></tr>
@@ -120,6 +120,18 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>readArray</b> (T data[
 <tr class="separator:a9ca4e3c88f04fb7b5442d953c5d3e4b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a0195cd2cd3e3bf87c91b5e24e6f48e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_synchronized_buffer_r_t_o_s.html#a0a0195cd2cd3e3bf87c91b5e24e6f48e">reset</a> () override</td></tr>
 <tr class="separator:a0a0195cd2cd3e3bf87c91b5e24e6f48e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbbbf499c8ff2bf49f64532ea4fa20ed"><td class="memItemLeft" align="right" valign="top"><a id="adbbbf499c8ff2bf49f64532ea4fa20ed" name="adbbbf499c8ff2bf49f64532ea4fa20ed"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setReadFromISR</b> (bool active)</td></tr>
+<tr class="separator:adbbbf499c8ff2bf49f64532ea4fa20ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22caa97926f8b7eda0f48d933908d08f"><td class="memItemLeft" align="right" valign="top"><a id="a22caa97926f8b7eda0f48d933908d08f" name="a22caa97926f8b7eda0f48d933908d08f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setReadMaxWait</b> (TickType_t ticks)</td></tr>
+<tr class="separator:a22caa97926f8b7eda0f48d933908d08f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aece288cc9474d23763035ebf46d00b77"><td class="memItemLeft" align="right" valign="top"><a id="aece288cc9474d23763035ebf46d00b77" name="aece288cc9474d23763035ebf46d00b77"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteFromISR</b> (bool active)</td></tr>
+<tr class="separator:aece288cc9474d23763035ebf46d00b77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b9243a1b1d3b348f58415a963098f0f"><td class="memItemLeft" align="right" valign="top"><a id="a7b9243a1b1d3b348f58415a963098f0f" name="a7b9243a1b1d3b348f58415a963098f0f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setWriteMaxWait</b> (TickType_t ticks)</td></tr>
+<tr class="separator:a7b9243a1b1d3b348f58415a963098f0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b87e305a178e12034575de492f8fd4b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_synchronized_buffer_r_t_o_s.html#a7b87e305a178e12034575de492f8fd4b">write</a> (T data) override</td></tr>
 <tr class="separator:a7b87e305a178e12034575de492f8fd4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af0025bc218a3e3470321b5105031e341"><td class="memItemLeft" align="right" valign="top"><a id="af0025bc218a3e3470321b5105031e341" name="af0025bc218a3e3470321b5105031e341"></a>
@@ -174,6 +186,21 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>writeArray</b> (const 
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:ad4f48022c19e2ea9e0d37d449e18af64"><td class="memItemLeft" align="right" valign="top"><a id="ad4f48022c19e2ea9e0d37d449e18af64" name="ad4f48022c19e2ea9e0d37d449e18af64"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>read_from_isr</b> = false</td></tr>
+<tr class="separator:ad4f48022c19e2ea9e0d37d449e18af64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0f0d634de46023c7ded02c7abbb5d7d"><td class="memItemLeft" align="right" valign="top"><a id="ac0f0d634de46023c7ded02c7abbb5d7d" name="ac0f0d634de46023c7ded02c7abbb5d7d"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>readWait</b> = portMAX_DELAY</td></tr>
+<tr class="separator:ac0f0d634de46023c7ded02c7abbb5d7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04953db83c87004f10090ebd6720ef75"><td class="memItemLeft" align="right" valign="top"><a id="a04953db83c87004f10090ebd6720ef75" name="a04953db83c87004f10090ebd6720ef75"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>write_from_isr</b> = false</td></tr>
+<tr class="separator:a04953db83c87004f10090ebd6720ef75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6bbe5cbc855959664aa9fc1e027a8d4c"><td class="memItemLeft" align="right" valign="top"><a id="a6bbe5cbc855959664aa9fc1e027a8d4c" name="a6bbe5cbc855959664aa9fc1e027a8d4c"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>writeWait</b> = portMAX_DELAY</td></tr>
+<tr class="separator:a6bbe5cbc855959664aa9fc1e027a8d4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed96fa7be7107ebfd6151f63b5da9d4d"><td class="memItemLeft" align="right" valign="top"><a id="aed96fa7be7107ebfd6151f63b5da9d4d" name="aed96fa7be7107ebfd6151f63b5da9d4d"></a>
+BaseType_t&#160;</td><td class="memItemRight" valign="bottom"><b>xHigherPriorityTaskWoken</b> = pdFALSE</td></tr>
+<tr class="separator:aed96fa7be7107ebfd6151f63b5da9d4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10b563174372736af9d2d3c56e0b2bb6"><td class="memItemLeft" align="right" valign="top"><a id="a10b563174372736af9d2d3c56e0b2bb6" name="a10b563174372736af9d2d3c56e0b2bb6"></a>
 StreamBufferHandle_t&#160;</td><td class="memItemRight" valign="bottom"><b>xStreamBuffer</b></td></tr>
 <tr class="separator:a10b563174372736af9d2d3c56e0b2bb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -435,7 +462,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioLibs/<a class="el" href="_synchronized_buffer_8h_source.html">SynchronizedBuffer.h</a></li>
+<li>src/AudioTools/<a class="el" href="_synchronized_buffers_8h_source.html">SynchronizedBuffers.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

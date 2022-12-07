@@ -3,10 +3,18 @@
 #include "kiss_fft.h"
 #include "AudioFFT.h"
 
+/** 
+ * @defgroup fft-kiss KISS
+ * @ingroup fft
+ * @brief Fast Fourier Transform using KISS 
+**/
+
+
 namespace audio_tools {
 
 /**
  * @brief Driver for RealFFT
+ * @ingroup fft-kiss
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -40,6 +48,7 @@ class FFTDriverKissFFT : public FFTDriver {
 };
 /**
  * @brief AudioFFT using FFTReal. The only specific functionality is the access to the dataArray
+ * @ingroup fft-kiss
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

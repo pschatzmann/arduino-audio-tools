@@ -1,11 +1,47 @@
 #pragma once
 
 /**
- * @brief Includes all classes
+ * @defgroup main Arduino Audio Tools
+ * @brief A powerful audio library (not only) for Arduino
  * @file AudioTools.h
  * @author Phil Schatzmann
  * @copyright GPLv3
- *
+ */
+
+/**
+ * @defgroup tools Tools
+ * @ingroup main
+ * @brief Div Tools
+ */
+
+/**
+ * @defgroup io IO
+ * @ingroup main
+ * @brief Input/Output
+ */
+
+/**
+ * @defgroup transform Transformation
+ * @ingroup main
+ * @brief Stream classes which change the input or output
+ */
+
+/**
+ * @defgroup ai AI
+ * @ingroup main
+ * @brief Artificial Intelligence
+ */
+
+/**
+ * @defgroup platform Platform
+ * @ingroup main
+ * @brief Platform specific implementations
+ */
+
+/**
+ * @defgroup basic Basic
+ * @ingroup main
+ * @brief Basic Concepts
  */
 #include "AudioConfig.h"
 #include "AudioTimer/AudioTimer.h"

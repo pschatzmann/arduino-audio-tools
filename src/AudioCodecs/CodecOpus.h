@@ -12,10 +12,17 @@
 #define OPUS_DEC_MAX_BUFFER_SIZE 1024
 #endif
 
+/** 
+ * @defgroup codec-opus OPUS 
+ * @ingroup codecs
+ * @brief OPUS Codec   
+**/
+
 namespace audio_tools {
 
 /**
  * @brief Setting for Opus Decoder
+ * @ingroup codec-opus
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -208,6 +215,7 @@ class OpusAudioDecoder : public AudioDecoder {
 /**
  * @brief OpusDecoder - Actually this class does no encoding or decoding at
  * all. It just passes on the data. Dependent on https://github.com/pschatzmann/arduino-libopus.git
+ * @ingroup codec-opus
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

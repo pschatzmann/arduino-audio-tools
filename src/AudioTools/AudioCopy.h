@@ -12,6 +12,7 @@ namespace audio_tools {
 /**
  * @brief Typed Stream Copy which supports the conversion from channel to 2 channels. We make sure that we
  * allways copy full samples
+ * @ingroup tools
  * @tparam T 
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -311,6 +312,7 @@ class StreamCopyT {
 
 /**
  * @brief We provide the typeless StreamCopy as a subclass of StreamCopyT
+ * @ingroup tools
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
