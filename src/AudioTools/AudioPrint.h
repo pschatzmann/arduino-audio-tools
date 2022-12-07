@@ -10,11 +10,6 @@
 
 namespace audio_tools {
 
-#if ESP_IDF_VERSION_MAJOR <= 3 
-#  define FLUSH_OVERRIDE
-#else
-#  define FLUSH_OVERRIDE override
-#endif
 
 /**
  * @brief Abstract Audio Ouptut class
@@ -38,7 +33,8 @@ class AudioPrint : public Print, public AudioBaseInfoDependent, public AudioBase
             return DEFAULT_BUFFER_SIZE;
         }
 
-        void flush() FLUSH_OVERRIDE  {
+        // removed override because some old implementation did not define this method as virtual
+        virtual void flush()  {
             write((const uint8_t*)tmp, tmpPos-1);
             tmpPos=0;
         }
