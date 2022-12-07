@@ -7,12 +7,8 @@
  * @copyright GPLv3
  */
 
-#define USE_LAME
-
 #include "AudioTools.h"
 #include "AudioCodecs/CodecMP3LAME.h"
-
-
 
 AudioEncoderServer server(new MP3EncoderLAME(),"ssid","password");  
 

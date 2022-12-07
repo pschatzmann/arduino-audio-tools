@@ -1,8 +1,14 @@
 /**
- *  Record output from electrical guitar with a ADS1015 and send it to the Serial output 
- *  see https://www.pschatzmann.ch/home/2021/03/02/arduino-based-guitar-pedals-with-standard-components-recording-sound/
+ * @file experiment-ads1015-serial.ino
+ * @author Phil Schatzmann
+ * @brief We can use the ADS1015 to provide analog signals. Unfortunatly it is not
+ * suited for audio because it is too slow.
+ * @version 0.1
+ * @date 2022-12-07
+ * 
+ * @copyright Copyright (c) 2022
+ * 
  */
-
 #include "Wire.h"
 #include "Adafruit_ADS1015.h"
 #include "AudioTools.h"
