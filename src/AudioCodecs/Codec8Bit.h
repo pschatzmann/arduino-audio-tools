@@ -19,7 +19,7 @@ namespace audio_tools {
 class Decoder8Bit : public AudioDecoder {
     public:
         /**
-         * @brief Construct a new RAWDecoder object
+         * @brief Construct a new Decoder8Bit object
          */
 
         Decoder8Bit(){
@@ -27,7 +27,7 @@ class Decoder8Bit : public AudioDecoder {
         }
 
         /**
-         * @brief Construct a new RAWDecoder object
+         * @brief Construct a new Decoder8Bit object
          * 
          * @param out_stream Output Stream to which we write the decoded result
          */
@@ -38,7 +38,7 @@ class Decoder8Bit : public AudioDecoder {
         }
 
         /**
-         * @brief Construct a new RAWDecoder object
+         * @brief Construct a new Decoder8Bit object
          * 
          * @param out_stream Output Stream to which we write the decoded result
          * @param bi Object that will be notified about the Audio Formt (Changes)
