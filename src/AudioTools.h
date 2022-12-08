@@ -35,7 +35,12 @@
 /**
  * @defgroup platform Platform
  * @ingroup main
- * @brief Platform specific implementations
+ * @brief Platform specific implementations.
+ * Do not use any of theses classes directly and use the related platform independent
+ * typedef instead: 
+ * - TimerAlarmRepeating
+ * - I2SStrem
+ * - PWMStream
  */
 
 /**
@@ -79,29 +84,6 @@
 #include "AudioTools/AudioSPDIF.h"
 #endif
 
-#if defined(USE_PORTAUDIO) 
-#include "AudioLibs/PortAudioStream.h"
-#endif
-
-#ifdef USE_MOZZI
-#include "AudioLibs/AudioMozzi.h"
-#endif
-
-#ifdef USE_STK
-#include "AudioLibs/AudioSTK.h"
-#endif
-
-#ifdef USE_ESP8266_AUDIO
-#include "AudioLibs/AudioESP8266.h"
-#endif
-
-#ifdef USE_A2DP
-#include "AudioLibs/AudioA2DP.h"
-#endif
-
-#ifdef USE_EXPERIMENTS
-#include "Experiments/Experiments.h"
-#endif
 
 /**
  * ------------------------------------------------------------------------- 
