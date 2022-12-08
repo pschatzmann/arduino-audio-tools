@@ -20,7 +20,7 @@ namespace audio_tools {
 class DecoderFloat : public AudioDecoder {
     public:
         /**
-         * @brief Construct a new RAWDecoder object
+         * @brief Construct a new DecoderFloat object
          */
 
         DecoderFloat(){
@@ -28,7 +28,7 @@ class DecoderFloat : public AudioDecoder {
         }
 
         /**
-         * @brief Construct a new RAWDecoder object
+         * @brief Construct a new DecoderFloat object
          * 
          * @param out_stream Output Stream to which we write the decoded result
          */
@@ -39,7 +39,7 @@ class DecoderFloat : public AudioDecoder {
         }
 
         /**
-         * @brief Construct a new RAWDecoder object
+         * @brief Construct a new DecoderFloat object
          * 
          * @param out_stream Output Stream to which we write the decoded result
          * @param bi Object that will be notified about the Audio Formt (Changes)
