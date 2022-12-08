@@ -8,8 +8,9 @@
 
 #include "AudioCodecs/CodecWAV.h"
 #include "AudioCodecs/CodecNOP.h"
-#include "AudioCodecs/CodecRAW.h"
+#include "AudioCodecs/CodecCopy.h"
 #include "AudioCodecs/Codec8Bit.h"
+#include "AudioCodecs/CodecFloat.h"
 
 #if defined(USE_HELIX) || defined(USE_DECODERS)
 #warning "USE_HELIX is obsolete - replace with include"
