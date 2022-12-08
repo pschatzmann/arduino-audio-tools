@@ -12,7 +12,7 @@
 namespace audio_tools {
 
 /**
- * @brief DecoderFloat - Converts an 8 Bit Stream into Floats
+ * @brief DecoderFloat - Converts Stream of floats into 2 byte integers
  * @ingroup codec-float
  * @author Phil Schatzmann
  * @copyright GPLv3
