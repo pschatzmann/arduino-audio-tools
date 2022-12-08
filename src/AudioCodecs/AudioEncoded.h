@@ -374,6 +374,11 @@ public:
     setInput(ioStream);
   }
 
+  EncodedAudioStream(Stream *ioStream, AudioDecoder *decoder) : EncodedAudioPrint((Print*)ioStream, decoder) { 
+    // the indicated stream can be used as input
+    setInput(ioStream);
+  }
+
   EncodedAudioStream(AudioDecoder *decoder) : EncodedAudioPrint() { 
     decoder_ptr = decoder;
     writer_ptr = decoder_ptr;
@@ -427,13 +432,12 @@ public:
    * 
    * @param ioStream 
    */
-  void setInput(AudioStream *ioStream){
+  void setInput(Stream *ioStream){
     TRACED();
     p_stream = ioStream;
     ptr_out = &out_stream;
     writer_ptr = decoder_ptr;
     decoder_ptr->setOutputStream(out_stream);
-    decoder_ptr->setNotifyAudioChange(out_stream);
     resize();
   }
 
@@ -464,26 +468,27 @@ protected:
   RingBuffer<uint8_t> decoded_buffer{0}; 
   QueueStream<uint8_t> out_stream{decoded_buffer};
   Vector<uint8_t> copy_buffer{DEFAULT_BUFFER_SIZE};
-  AudioStream *p_stream = nullptr;
+  Stream *p_stream = nullptr;
   int reqested_bytes = DEFAULT_BUFFER_SIZE;
   bool is_setup = false;
+  int max_read_count = 5;
  
   // Fill the decoded_buffer so that we have data for readBytes call
   void decode(int requestedBytes){
     TRACED();
     // setup buffer once
     setupOnce();
-    // fill decoded_buffer
-    int count=0;
-    while(p_stream->available()>0 && decoded_buffer.available()<reqested_bytes){
-      int bytes_read = p_stream->readBytes(copy_buffer.data(), DEFAULT_BUFFER_SIZE);
-      int result = decoder_ptr->write(copy_buffer.data(), bytes_read);
-      LOGD("write %d -> %d / available %d",bytes_read, result, decoded_buffer.available());
-      if (count++>5){
-        LOGW("Decoding did not provide data after %d", count);
+    // fill decoded_buffer if we do not have enough data
+    if(p_stream->available()>0 && decoded_buffer.available()<reqested_bytes){
+      for (int j=0;j<max_read_count;j++){
+        int bytes_read = p_stream->readBytes(copy_buffer.data(), DEFAULT_BUFFER_SIZE);
+        int result = decoder_ptr->write(copy_buffer.data(), bytes_read);
+        if (p_stream->available()==0 || decoded_buffer.available()>=reqested_bytes){
+          break;
+        }
       }
-    }
-    LOGI("available decoded data %d", decoded_buffer.available());
+    } 
+    LOGD("available decoded data %d", decoded_buffer.available());
   }
 
   void setupOnce(){
