@@ -114,7 +114,7 @@ protected:
 //   mutex_t mtx;
 // };
 
-//#else
+#else
 
 using Mutex = MutexBase;
 

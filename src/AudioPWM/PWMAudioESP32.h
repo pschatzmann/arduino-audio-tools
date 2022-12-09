@@ -54,10 +54,6 @@ class PWMDriverESP32 : public DriverPWMBase {
             is_timer_started = false;
         }
 
-        bool isTimerStarted() override {
-            return is_timer_started;
-        }
-
         /// when we get the first write -> we activate the timer to start with the output of data
         virtual void startTimer(){
             if (!is_timer_started){
