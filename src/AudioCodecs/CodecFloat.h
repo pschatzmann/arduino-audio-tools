@@ -161,7 +161,7 @@ class EncoderFloat : public AudioEncoder {
             int16_t *pt16 = (int16_t*)in_ptr;
             size_t samples = in_size / sizeof(int16_t);
             buffer.resize(samples);
-            for (int j=0;j<samples;j++){
+            for (size_t j=0;j<samples;j++){
                 buffer[j] = static_cast<float>(pt16[j]) / 32768.0;
             }
             return p_print->write((uint8_t*)buffer.data(), samples*sizeof(float));

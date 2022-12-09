@@ -187,7 +187,7 @@
 #define I2S_USE_APLL false  
 // Default Setting: The mute pin can be switched actovated by setting it to a gpio (e.g 23). Or you could drive the LED by assigning LED_BUILTIN
 #define PIN_I2S_MUTE -1
-#define SOFT_MUTE_VALUE LOW  
+#define SOFT_MUTE_VALUE 0
 #define PIN_CS SS
 #define PIN_ADC1 34 
 #define PIN_ADC2 14
@@ -246,7 +246,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define I2S_USE_APLL false  
 // Default Setting: The mute pin can be switched actovated by setting it to a gpio (e.g 5). Or you could drive the LED by assigning LED_BUILTIN
 #define PIN_I2S_MUTE -1
-#define SOFT_MUTE_VALUE LOW  
+#define SOFT_MUTE_VALUE 0
 #define PIN_CS SS
 #define PIN_ADC1 21 
 #define PIN_ADC2 22
@@ -288,7 +288,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define PIN_I2S_DATA_OUT -1
 #define I2S_USE_APLL false  
 #define PIN_I2S_MUTE 23
-#define SOFT_MUTE_VALUE LOW  
+#define SOFT_MUTE_VALUE 0
 #define PIN_CS SS
 
 #define URL_CLIENT_TIMEOUT 60000;
@@ -312,7 +312,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define PIN_I2S_DATA_OUT 3
 // Default Setting: The mute pin can be switched actovated by setting it to a gpio (e.g 4). Or you could drive the LED by assigning LED_BUILTIN
 #define PIN_I2S_MUTE -1
-#define SOFT_MUTE_VALUE LOW  
+#define SOFT_MUTE_VALUE 0
 #define PIN_CS SS
 #endif
 
@@ -334,7 +334,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define PIN_I2S_DATA_OUT 28
 // Default Setting: The mute pin can be switched actovated by setting it to a gpio (e.g 4). Or you could drive the LED by assigning LED_BUILTIN
 #define PIN_I2S_MUTE -1
-#define SOFT_MUTE_VALUE LOW  
+#define SOFT_MUTE_VALUE 0
 #define PIN_CS PIN_SPI0_SS
 
 // fix missing __sync_synchronize symbol
@@ -367,7 +367,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define PIN_I2S_DATA_OUT 28
 // Default Setting: The mute pin can be switched actovated by setting it to a gpio (e.g 4). Or you could drive the LED by assigning LED_BUILTIN
 #define PIN_I2S_MUTE -1
-#define SOFT_MUTE_VALUE LOW  
+#define SOFT_MUTE_VALUE 0
 #define PIN_CS PIN_SPI0_SS
 
 // fix missing __sync_synchronize symbol
@@ -436,7 +436,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define PIN_I2S_DATA_IN -1
 #define PIN_I2S_DATA_OUT -1
 #define PIN_I2S_MUTE -1
-#define SOFT_MUTE_VALUE LOW  
+#define SOFT_MUTE_VALUE 0
 #define PIN_CS 10
 #endif
 
@@ -449,7 +449,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define PIN_I2S_DATA_IN 3
 #define PIN_I2S_DATA_OUT 3
 #define PIN_I2S_MUTE -1
-#define SOFT_MUTE_VALUE LOW  
+#define SOFT_MUTE_VALUE 0
 #endif
 
 //------ VS1053 ----------
@@ -478,3 +478,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #else
 #  define INLINE_VAR static 
 #endif
+
+#pragma GCC diagnostic ignored "-Wunused-variable"
+#pragma GCC diagnostic ignored "-Wunused-function"
+#pragma GCC diagnostic ignored "-Wvla"

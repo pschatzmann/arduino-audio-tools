@@ -334,7 +334,7 @@ class MemoryStream : public AudioStream {
 class DynamicMemoryStream : public AudioStreamX {
 public:
   struct DataNode {
-    int len=0;
+    size_t len=0;
     uint8_t* data=nullptr;
 
     DataNode() = default;
@@ -852,7 +852,7 @@ class QueueStream : public AudioStreamX {
     // make space by deleting oldest entries
     if (remove_oldest_data){
       int available_bytes = callback_buffer_ptr->availableForWrite()*sizeof(T);
-      if (len>available_bytes){
+      if ((int)len>available_bytes){
         int gap = len-available_bytes;
         uint8_t tmp[gap];
         readBytes(tmp, gap);
