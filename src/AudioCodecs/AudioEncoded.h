@@ -142,17 +142,16 @@ protected:
 };
 
 /**
- * @brief A more natural Print class to process encoded data (aac, wav,
- * mp3...). Just define the output and the decoder and write the encoded 
- * data.
- * @ingroup transform
+ * @brief A more natural Stream class to process encoded data (aac, wav,
+ * mp3...).
+ * @ingroup codecs
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class EncodedAudioPrint : public AudioStreamX {
+class EncodedAudioStream : public AudioPrint {
 public:
   /// Constructor for AudioStream with automatic notification of audio changes
-  EncodedAudioPrint(AudioStream *outputStream, AudioDecoder *decoder) {
+  EncodedAudioStream(AudioStream *outputStream, AudioDecoder *decoder) {
     TRACED();
     ptr_out = outputStream;
     decoder_ptr = decoder;
@@ -163,7 +162,7 @@ public:
   }
 
   /// Constructor for AudioPrint with automatic notification of audio changes
-  EncodedAudioPrint(AudioPrint *outputStream, AudioDecoder *decoder) {
+  EncodedAudioStream(AudioPrint *outputStream, AudioDecoder *decoder) {
     TRACED();
     ptr_out = outputStream;
     decoder_ptr = decoder;
@@ -180,7 +179,7 @@ public:
    * @param outputStream
    * @param decoder
    */
-  EncodedAudioPrint(Print &outputStream, AudioDecoder &decoder) {
+  EncodedAudioStream(Print &outputStream, AudioDecoder &decoder) {
     TRACED();
     ptr_out = &outputStream;
     decoder_ptr = &decoder;
@@ -195,7 +194,7 @@ public:
    * @param outputStream
    * @param decoder
    */
-  EncodedAudioPrint(Print *outputStream, AudioDecoder *decoder) {
+  EncodedAudioStream(Print *outputStream, AudioDecoder *decoder) {
     TRACED();
     ptr_out = outputStream;
     decoder_ptr = decoder;
@@ -210,7 +209,7 @@ public:
    * @param outputStream
    * @param encoder
    */
-  EncodedAudioPrint(Print &outputStream, AudioEncoder &encoder) {
+  EncodedAudioStream(Print &outputStream, AudioEncoder &encoder) {
     TRACED();
     ptr_out = &outputStream;
     encoder_ptr = &encoder;
@@ -225,7 +224,7 @@ public:
    * @param outputStream
    * @param encoder
    */
-  EncodedAudioPrint(Print *outputStream, AudioEncoder *encoder) {
+  EncodedAudioStream(Print *outputStream, AudioEncoder *encoder) {
     TRACED();
     ptr_out = outputStream;
     encoder_ptr = encoder;
@@ -237,11 +236,22 @@ public:
 
   /**
    * @brief Construct a new Encoded Audio Stream object - the Output and
-   * Encoder/Decoder needs to be defined with the begin method.
+   * Encoder/Decoder needs to be defined with the begin method
+   *
    */
-  EncodedAudioPrint() {
+  EncodedAudioStream() {
     TRACED();
     active = false;
+  }
+
+  /**
+   * @brief Destroy the Encoded Audio Stream object
+   *
+   */
+  virtual ~EncodedAudioStream() {
+    if (write_buffer != nullptr) {
+      delete[] write_buffer;
+    }
   }
 
   /// Define object which need to be notified if the basinfo is changing
@@ -260,33 +270,33 @@ public:
 
   virtual void setAudioInfo(AudioBaseInfo info) override {
     TRACED();
-    AudioStream::setAudioInfo(info);
+    AudioPrint::setAudioInfo(info);
     decoder_ptr->setAudioInfo(info);
     encoder_ptr->setAudioInfo(info);
   }
 
   /// Starts the processing - sets the status to active
-  bool begin(Print *outputStream, AudioEncoder *encoder) {
+  void begin(Print *outputStream, AudioEncoder *encoder) {
     TRACED();
     ptr_out = outputStream;
     encoder_ptr = encoder;
     encoder_ptr->setOutputStream(*outputStream);
     writer_ptr = encoder_ptr;
-    return begin();
+    begin();
   }
 
   /// Starts the processing - sets the status to active
-  bool begin(Print *outputStream, AudioDecoder *decoder) {
+  void begin(Print *outputStream, AudioDecoder *decoder) {
     TRACED();
     ptr_out = outputStream;
     decoder_ptr = decoder;
     decoder_ptr->setOutputStream(*outputStream);
     writer_ptr = decoder_ptr;
-    return begin();
+    begin();
   }
 
   /// Starts the processing - sets the status to active
-  bool begin() {
+  void begin() {
     TRACED();
     const CodecNOP *nop = CodecNOP::instance();
     if (decoder_ptr != nop || encoder_ptr != nop) {
@@ -296,11 +306,10 @@ public:
     } else {
       LOGW("no decoder or encoder defined");
     }
-    return active;
   }
 
   /// Starts the processing - sets the status to active
-  bool begin(AudioBaseInfo info) {
+  void begin(AudioBaseInfo info) {
     TRACED();
     const CodecNOP *nop = CodecNOP::instance();
     if (decoder_ptr != nop || encoder_ptr != nop) {
@@ -313,9 +322,7 @@ public:
     } else {
       LOGW("no decoder or encoder defined");
     }
-    return active;
   }
-
   /// Ends the processing
   void end() {
     TRACEI();
@@ -324,7 +331,7 @@ public:
     active = false;
   }
 
-  /// encodeor decode the data
+  /// encode the data
   virtual size_t write(const uint8_t *data, size_t len) override {
     LOGD("%s: %zu", LOG_METHOD, len);
     if (len == 0) {
@@ -357,151 +364,12 @@ protected:
   AudioEncoder *encoder_ptr = CodecNOP::instance(); // decoder
   AudioWriter *writer_ptr = nullptr;
   Print *ptr_out = nullptr;
+
+  uint8_t *write_buffer = nullptr;
+  int write_buffer_pos = 0;
+  const int write_buffer_size = 256;
   bool active;
 };
 
-/**
- * @brief A more natural Stream class to process encoded data (aac, wav,
- * mp3...) which also supports the decoding by calling readBytes().
- * @ingroup transform
- * @author Phil Schatzmann
- * @copyright GPLv3
- */
-class EncodedAudioStream : public EncodedAudioPrint {
-public:
-  EncodedAudioStream(AudioStream *ioStream, AudioDecoder *decoder) : EncodedAudioPrint(ioStream, decoder) { 
-    // the indicated stream can be used as input
-    setInput(ioStream);
-  }
-
-  EncodedAudioStream(Stream *ioStream, AudioDecoder *decoder) : EncodedAudioPrint((Print*)ioStream, decoder) { 
-    // the indicated stream can be used as input
-    setInput(ioStream);
-  }
-
-  EncodedAudioStream(AudioDecoder *decoder) : EncodedAudioPrint() { 
-    decoder_ptr = decoder;
-    writer_ptr = decoder_ptr;
-    active = false;
-  }
-
-  /// Constructor for AudioPrint with automatic notification of audio changes
-  EncodedAudioStream(AudioPrint *outputStream, AudioDecoder *decoder) : EncodedAudioPrint(outputStream, decoder) {  }
-
-  /**
-   * @brief Construct a new Encoded Stream object - used for decoding
-   *
-   * @param outputStream
-   * @param decoder
-   */
-  EncodedAudioStream(Print &outputStream, AudioDecoder &decoder) : EncodedAudioPrint(outputStream, decoder) {  }
-
-  /**
-   * @brief Construct a new Encoded Audio Stream object - used for decoding
-   *
-   * @param outputStream
-   * @param decoder
-   */
-  EncodedAudioStream(Print *outputStream, AudioDecoder *decoder) : EncodedAudioPrint(outputStream, decoder) {  }
-
-  /**
-   * @brief Construct a new Encoded Audio Stream object - used for encoding
-   *
-   * @param outputStream
-   * @param encoder
-   */
-  EncodedAudioStream(Print &outputStream, AudioEncoder &encoder) : EncodedAudioPrint(outputStream, encoder) { }
-
-  /**
-   * @brief Construct a new Encoded Audio Stream object - used for encoding
-   *
-   * @param outputStream
-   * @param encoder
-   */
-  EncodedAudioStream(Print *outputStream, AudioEncoder *encoder) : EncodedAudioPrint(outputStream, encoder) {}
-
-  /**
-   * @brief Construct a new Encoded Audio Stream object - the Output and
-   * Encoder/Decoder needs to be defined with the begin method
-   *
-   */
-  EncodedAudioStream() : EncodedAudioPrint() {}
-
-  /**
-   * @brief Defines the input stream for decoding
-   * 
-   * @param ioStream 
-   */
-  void setInput(Stream *ioStream){
-    TRACED();
-    p_stream = ioStream;
-    ptr_out = &out_stream;
-    writer_ptr = decoder_ptr;
-    decoder_ptr->setOutputStream(out_stream);
-    resize();
-  }
-
-  /// @brief Defines the buffer size
-  void resize(int size){
-    decoded_buffer.resize(size);
-  }
-
-  /// @brief setup default size for buffer
-  void resize(){
-    resize(1024*10);
-  }
-
-  int available() override {
-    if (p_stream==nullptr) return 0;
-    decode(reqested_bytes);
-    return decoded_buffer.available();
-  }
-
-  size_t readBytes(uint8_t *buffer, size_t length) override {
-    TRACED();
-    if (p_stream==nullptr) return 0;
-    decode(reqested_bytes);
-    return decoded_buffer.readArray(buffer, length);
-  }
-
-protected:
-  RingBuffer<uint8_t> decoded_buffer{0}; 
-  QueueStream<uint8_t> out_stream{decoded_buffer};
-  Vector<uint8_t> copy_buffer{DEFAULT_BUFFER_SIZE};
-  Stream *p_stream = nullptr;
-  int reqested_bytes = DEFAULT_BUFFER_SIZE;
-  bool is_setup = false;
-  int max_read_count = 5;
- 
-  // Fill the decoded_buffer so that we have data for readBytes call
-  void decode(int requestedBytes){
-    TRACED();
-    // setup buffer once
-    setupOnce();
-    // fill decoded_buffer if we do not have enough data
-    if(p_stream->available()>0 && decoded_buffer.available()<reqested_bytes){
-      for (int j=0;j<max_read_count;j++){
-        int bytes_read = p_stream->readBytes(copy_buffer.data(), DEFAULT_BUFFER_SIZE);
-        int result = decoder_ptr->write(copy_buffer.data(), bytes_read);
-        if (p_stream->available()==0 || decoded_buffer.available()>=reqested_bytes){
-          break;
-        }
-      }
-    } 
-    LOGD("available decoded data %d", decoded_buffer.available());
-  }
-
-  void setupOnce(){
-    if (!is_setup){
-      is_setup = true;
-      LOGI("Setup reading support");
-      resize();
-      // make sure the result goes to out_stream
-      decoder_ptr->setOutputStream(out_stream);
-      writer_ptr = decoder_ptr;
-      out_stream.begin();
-    }
-  }
-};
 
 } // namespace audio_tools
