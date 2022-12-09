@@ -21,7 +21,7 @@ typedef void (* my_repeating_timer_callback_t )(void* obj);
 class TimerAlarmRepeatingDriverRP2040 : public TimerAlarmRepeatingDriverBase {
     public:
 
-        TimerAlarmRepeatingDriverRP2040() : TimerAlarmRepeatingDriver(){
+        TimerAlarmRepeatingDriverRP2040(){
             alarm_pool_init_default();
             ap = alarm_pool_get_default();
         }

@@ -9,8 +9,8 @@ namespace audio_tools {
 // forward declaration
 class PWMDriverSTM32;
 /**
- * @typedef  PWMDriverBase
- * @brief Please use PWMDriverBase!
+ * @typedef  DriverPWMBase
+ * @brief Please use DriverPWMBase!
  */
 using PWMDriver = PWMDriverSTM32;
 
@@ -22,7 +22,7 @@ using PWMDriver = PWMDriverSTM32;
  * @copyright GPLv3
  */
 
-class PWMDriverSTM32 : public PWMDriverBase {
+class PWMDriverSTM32 : public DriverPWMBase {
 
     /// @brief PWM information for a single pin
     struct PWMPin {
@@ -63,6 +63,7 @@ class PWMDriverSTM32 : public PWMDriverBase {
             PWM() = default;
 
             void begin(HardwareTimer *pwm_timer, int pwm_frequency, int maxValue){
+
                 this->p_timer = pwm_timer;
                 this->pwm_frequency = pwm_frequency;
                 this->max_value = maxValue;
@@ -116,7 +117,8 @@ class PWMDriverSTM32 : public PWMDriverBase {
     public:
 
         PWMDriverSTM32(){
-            TRACED;
+            TRACED();
+            ticker.setTimer(PWM_FREQ_TIMER_NO);
         }
 
         // Ends the output
@@ -138,7 +140,7 @@ class PWMDriverSTM32 : public PWMDriverBase {
 
 
     protected:
-        TimerAlarmRepeating ticker{DirectTimerCallback, PWM_FREQ_TIMER_NO}; // calls a callback repeatedly with a timeout
+        TimerAlarmRepeating ticker; // calls a callback repeatedly with a timeout
         HardwareTimer *p_pwm_timer=nullptr;
         PWM pwm;
         int64_t max_value;
@@ -194,7 +196,7 @@ class PWMDriverSTM32 : public PWMDriverBase {
 
         /// timer callback: write the next frame to the pins
         static inline void  defaultPWMAudioOutputCallback(void *obj) {
-            PWMDriverBaseSTM32* accessAudioPWM = (PWMDriverBaseSTM32*) obj;
+            PWMDriverSTM32* accessAudioPWM = (PWMDriverSTM32*) obj;
             if (accessAudioPWM!=nullptr){
                 accessAudioPWM->playNextFrame();
             }

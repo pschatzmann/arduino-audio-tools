@@ -9,8 +9,8 @@ namespace audio_tools {
 // forward declaration
 class PWMDriverESP32;
 /**
- * @typedef  PWMDriverBase
- * @brief Please use PWMDriverBase!
+ * @typedef  DriverPWMBase
+ * @brief Please use DriverPWMBase!
  */
 using PWMDriver = PWMDriverESP32;
 static PWMDriverESP32 *accessAudioPWM = nullptr; 
@@ -122,7 +122,6 @@ class PWMDriverESP32 : public DriverPWMBase {
         Vector<PinInfo> pins;      
         hw_timer_t * timer = nullptr;
         portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
-        bool is_timer_started = false;
 
         /// provides the max value for the indicated resulution
         int maxUnsignedValue(int resolution){
