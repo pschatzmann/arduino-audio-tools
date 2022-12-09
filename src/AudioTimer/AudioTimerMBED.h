@@ -4,21 +4,14 @@
 #include "AudioTimer/AudioTimerBase.h"
 #include "mbed.h"
 
-/**
- * @defgroup timer_mbed Timer-MBED
- * @ingroup platform
- * @brief MBED timer
- */
-
 namespace audio_tools {
 
 class TimerAlarmRepeatingDriverMBED;
 static TimerAlarmRepeatingDriverMBED *timerAlarmRepeating = nullptr;
-//typedef void (* repeating_timer_callback_t )(void* obj);
 
 /**
  * @brief Repeating Timer functions for repeated execution: Plaease use the typedef TimerAlarmRepeating
- * @ingroup timer_mbed
+ * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 

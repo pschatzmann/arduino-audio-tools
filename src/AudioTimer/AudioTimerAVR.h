@@ -3,12 +3,6 @@
 #ifdef __AVR__
 #include "AudioTimer/AudioTimerBase.h"
 
-/**
- * @defgroup timer_avr Timer-AVR 
- * @ingroup platform
- * @brief AVR timer
- */
-
 namespace audio_tools {
 typedef void (* repeating_timer_callback_t )(void* obj);
 class TimerAlarmRepeatingDriverAVR;
@@ -17,7 +11,7 @@ static TimerAlarmRepeatingDriverAVR *timerAlarmRepeatingRef = nullptr;
 
 /**
  * @brief Repeating Timer functions for repeated execution: Plaease use the typedef TimerAlarmRepeating
- * @ingroup timer_avr
+ * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 

@@ -4,12 +4,6 @@
 #include "AudioTimer/AudioTimerBase.h"
 #include "Ticker.h"
 
-/**
- * @defgroup timer_esp8266 Timer-ESP38266
- * @ingroup platform
- * @brief ESP8266 timer
- */
-
 namespace audio_tools {
 
 typedef void (* repeating_timer_callback_t )(void* obj);
@@ -19,7 +13,7 @@ TimerAlarmRepeatingDriverESP8266 *self;
 
 /**
  * @brief Repeating Timer functions for repeated execution: Plaease use the typedef TimerAlarmRepeating
- * @ingroup timer_esp8266
+ * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 

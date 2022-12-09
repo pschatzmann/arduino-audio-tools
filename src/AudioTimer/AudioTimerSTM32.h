@@ -3,24 +3,17 @@
 #if defined(STM32)
 #include "AudioTimer/AudioTimerBase.h"
 
-/**
- * @defgroup timer_stm32 Timer-STM32 
- * @ingroup platform
- * @brief STM32 timer
- */
-
 namespace audio_tools {
 
 class TimerAlarmRepeatingDriverSTM32;
-INLINE_VAR TimerAlarmRepeatingDriverSTM32 *timerAlarmRepeating = nullptr;
+static TimerAlarmRepeatingDriverSTM32 *timerAlarmRepeating = nullptr;
 typedef void (* repeating_timer_callback_t )(void* obj);
 
 /**
  * @brief STM32 Repeating Timer functions for repeated execution: Plaease use the typedef TimerAlarmRepeating
- * @ingroup timer_stm32
+ * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
- * 
  */
 class TimerAlarmRepeatingDriverSTM32 : public TimerAlarmRepeatingDriverBase {
     public:

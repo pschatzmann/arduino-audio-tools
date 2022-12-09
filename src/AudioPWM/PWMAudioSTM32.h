@@ -4,19 +4,12 @@
 #include "AudioPWM/PWMAudioBase.h"
 #include "AudioTimer/AudioTimer.h"
 
-/** 
- * @defgroup pwm_stm32 PWM-STM32
- * @ingroup platform
- * @brief PWM Implementation for STM32  
-**/
-
 namespace audio_tools {
 
 // forward declaration
 class PWMDriverSTM32;
 /**
  * @typedef  PWMDriverBase
- * @ingroup pwm_stm32
  * @brief Please use PWMDriverBase!
  */
 using PWMDriver = PWMDriverSTM32;
@@ -24,7 +17,7 @@ using PWMDriver = PWMDriverSTM32;
 /**
  * @brief Audio output to PWM pins for STM32. We use one timer to generate the sample rate and 
  * one timer for the PWM signal.
- * @ingroup pwm_stm32
+ * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

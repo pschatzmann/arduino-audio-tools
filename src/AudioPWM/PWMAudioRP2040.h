@@ -10,19 +10,12 @@
 #include "hardware/clocks.h"
 #include "hardware/structs/clocks.h"
 
-/** 
- * @defgroup pwm_rp2040 PWM-RP2040
- * @ingroup platform
- * @brief PWM Implementation for rp2040  
-**/
-
 namespace audio_tools {
 
 // forwrd declaratioin of callback
 class PWMDriverRP2040;
 /**
  * @typedef  PWMDriverBase
- * @ingroup pwm_rp2040
  * @brief Please use PWMDriverBase!
  */
 using PWMDriver = PWMDriverRP2040;
@@ -43,7 +36,7 @@ struct PicoChannelOut {
 /**
  * @brief Audio output for the Rasperry Pico to PWM pins.
    The Raspberry Pi Pico has 8 PWM blocks/slices(1-8) and each PWM block provides up to two PWM outputs(A-B). 
- * @ingroup pwm_rp2040
+ * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
 
