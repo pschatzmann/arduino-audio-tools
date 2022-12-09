@@ -95,7 +95,7 @@ class AnalogAudioStreamArduino : public AudioStreamX {
   /// Sample data and write to buffer
   static void callback(void *arg) {
     int16_t value = 0;
-    AnalogAudioStream *self = (AnalogAudioStream *)arg;
+    AnalogAudioStreamArduino *self = (AnalogAudioStreamArduino *)arg;
     if (self->buffer != nullptr) {
       int channels = self->config.channels;
       for (int j = 0; j < channels; j++) {
@@ -128,7 +128,7 @@ class AnalogAudioStreamArduino : public AudioStreamX {
   }
 };
 
-typedef AnalogAudioStream AnalogAudioStreamArduino;
+using AnalogAudioStream = AnalogAudioStreamArduino;
 
 }  // namespace audio_tools
 

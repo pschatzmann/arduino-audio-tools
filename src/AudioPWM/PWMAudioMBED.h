@@ -11,8 +11,8 @@ namespace audio_tools {
 // forward declaration
 class PWMDriverMBED;
 /**
- * @typedef  PWMDriverBase
- * @brief Please use PWMDriverBase!
+ * @typedef  DriverPWMBase
+ * @brief Please use DriverPWMBase!
  */
 using PWMDriver = PWMDriverMBED;
 
@@ -23,7 +23,7 @@ using PWMDriver = PWMDriverMBED;
  * @copyright GPLv3
  */
 
-class PWMDriverMBED : public PWMDriverBase {
+class PWMDriverMBED : public DriverPWMBase {
 
     public:
 

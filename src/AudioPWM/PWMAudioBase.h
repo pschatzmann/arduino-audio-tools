@@ -1,6 +1,8 @@
 #pragma once
 
 #include "AudioConfig.h"
+#ifdef USE_PWM
+
 #include "AudioTools.h"
 #include "AudioTools/AudioLogger.h"
 #include "AudioTools/AudioPrint.h"
@@ -14,11 +16,11 @@ namespace audio_tools {
 typedef bool (*PWMCallbackType)(uint8_t channels, int16_t* data);
 // Callback used by system
 void defaultPWMAudioOutputCallback();
-// Stream classes
+// Driver classes
 class PWMDriverESP32;
-class PWMDriverBasePico;
-class PWMDriverBaseMBED;
-class PWMDriverBaseSTM32;
+class PWMDriverRP2040;
+class PWMDriverMBED;
+class PWMDriverSTM32;
 
 /**
  * @brief Configuration data for PWM audio output
@@ -52,7 +54,6 @@ struct PWMConfig : public AudioBaseInfo {
         pins_data = pins;
     }
 
-#endif
     /// Determines the pins (for all channels)
     Pins &pins() {
         if (pins_data.size()==0){
@@ -63,6 +64,8 @@ struct PWMConfig : public AudioBaseInfo {
         }
         return pins_data;
     }
+
+#endif
 
     void logConfig(){
         LOGI("sample_rate: %d", sample_rate);
@@ -81,6 +84,10 @@ struct PWMConfig : public AudioBaseInfo {
 
 } INLINE_VAR default_config;
 
+/**
+ * @brief Base Class for all PWM drivers
+ * 
+ */
 class DriverPWMBase {
     public:
         PWMConfig &audioInfo(){
@@ -165,13 +172,16 @@ class DriverPWMBase {
             user_callback = cb;
         }
 
+        bool isTimerStarted() {
+            return is_timer_started;
+        }
+
         virtual void setupPWM()  = 0;
         virtual void setupTimer()  = 0;
         virtual void startTimer() = 0;
         virtual int maxChannels() = 0;
         virtual int maxOutputValue() = 0;
         virtual void end() = 0;
-        virtual bool isTimerStarted() = 0;
 
         virtual void pwmWrite(int channel, int value) = 0;
 
@@ -184,6 +194,7 @@ class DriverPWMBase {
         uint32_t frame_count = 0;
         uint32_t frames_per_second = 0;
         uint32_t time_1_sec;
+        bool is_timer_started = false;
 
         void playNextFrameCallback(){
              //TRACED();
@@ -269,3 +280,4 @@ class DriverPWMBase {
 
 } // ns
 
+#endif

@@ -8,7 +8,6 @@
 #include "AudioPWM/PWMAudioSTM32.h"
 // this is experimental at the moment
 #include "AudioPWM/PWMAudioAVR.h"
-#endif
 
 
 namespace audio_tools {
@@ -101,3 +100,5 @@ class PWMAudioStream : public AudioPrint {
 };
 
 }
+
+#endif

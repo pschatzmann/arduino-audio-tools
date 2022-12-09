@@ -275,13 +275,11 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #ifdef ESP8266
 //#define USE_URL_ARDUINO // commented out because of compile errors
 #define USE_I2S
-#define USE_PWM
 #define USE_AUDIO_SERVER
 #define USE_TYPETRAITS
 #define USE_EFFECTS_SUITE
 #define USE_TIMER
 #define USE_URL_ARDUINO
-//#define USE_ESP8266_AUDIO
 
 #define PIN_PWM_START 12
 #define PIN_I2S_BCK -1

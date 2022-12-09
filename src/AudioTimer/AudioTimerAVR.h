@@ -19,7 +19,7 @@ static TimerAlarmRepeatingDriverAVR *timerAlarmRepeatingRef = nullptr;
 class TimerAlarmRepeatingDriverAVR : public TimerAlarmRepeatingDriverBase {
     public:
 
-        TimerAlarmRepeatingDriverAVR() : TimerAlarmRepeatingDriver(){
+        TimerAlarmRepeatingDriverAVR() {
             timerAlarmRepeatingRef = this;
         }
 

@@ -4,7 +4,8 @@
  * @ingroup tools
  * @brief Platform specific timers
  */
-
+#include "AudioConfig.h"
+#ifdef USE_TIMER
 #include "AudioTools/AudioLogger.h"
 #include "AudioTimer/AudioTimerBase.h"
 #include "AudioTimer/AudioTimerESP32.h"
@@ -65,4 +66,6 @@ class TimerAlarmRepeating {
 };
 
 } // namespace
+
+#endif
 

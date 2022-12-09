@@ -1,4 +1,6 @@
 #pragma once
+#include "AudioConfig.h"
+#ifdef USE_TIMER
 #include "AudioTools/AudioTypes.h"
 
 /**
@@ -21,7 +23,7 @@ class TimerAlarmRepeatingDriverBase {
         }
      
         virtual bool begin(repeating_timer_callback_t callback_f, uint32_t time, TimeUnit unit = MS) = 0;
-        virtual bool end() {};
+        virtual bool end() { return false;};
 
         void setCallbackParameter(void* obj){
           object = obj;
@@ -38,6 +40,7 @@ class TimerAlarmRepeatingDriverBase {
         void* object=nullptr;
 };
 
+} // namespace
 
-}
+#endif
 

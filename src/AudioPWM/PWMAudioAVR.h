@@ -10,7 +10,7 @@ namespace audio_tools {
 
 class PWMDriverAVR;
 using PWMDriver = PWMDriverAVR;
-static PWMDriverBaseAVR *accessAudioPWM = nullptr; 
+static PWMDriverAVR *accessAudioPWM = nullptr; 
 
 
 /**
@@ -20,13 +20,13 @@ static PWMDriverBaseAVR *accessAudioPWM = nullptr;
  * @copyright GPLv3
  */
 
-class PWMDriverAVR : public PWMDriverBase {
+class PWMDriverAVR : public DriverPWMBase {
     friend void defaultPWMAudioOutputCallback();
 
     public:
 
-        PWMDriverBaseAVR(){
-            LOGD("PWMDriverBaseAVR");
+        PWMDriverAVR(){
+            LOGD("PWMDriverAVR");
             accessAudioPWM = this;
         }
 
@@ -47,7 +47,6 @@ class PWMDriverAVR : public PWMDriverBase {
             is_timer_started = false;
         }
 
-        /// Setup AVR timer with callback
         void setupTimer() {
              TRACED();
             // CPU Frequency 16 MHz
@@ -86,13 +85,15 @@ class PWMDriverAVR : public PWMDriverBase {
             }
         }
 
+        void startTimer() {}
 
         // Timer 0 is used by Arduino!
         // Timer 1 is used to drive output in sample_rate 
         // => only Timer2 is available for PWM
         void setupPin(int pin){
             switch(pin){
-                case 3:case 11:
+                case 3:
+                case 11:
                     // switch PWM frequency to 62500.00 Hz
                     TCCR2B = TCCR2B & B11111000 | B00000001; 
                     LOGI("PWM Frequency changed for D3 and D11");
@@ -137,7 +138,7 @@ inline void defaultPWMAudioOutputCallback(){
 }
 
 /// timer callback: write the next frame to the pins
-inline ISR(TIMER1_COMPA_vect){
+ISR(TIMER1_COMPA_vect){
     defaultPWMAudioOutputCallback();
     TimerAlarmRepeatingDriverAVR::tickerCallback();
 

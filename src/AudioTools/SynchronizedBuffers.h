@@ -10,7 +10,6 @@
 #  if ESP_IDF_VERSION_MAJOR >= 4 
 #    include <freertos/stream_buffer.h>
 #  endif
-#endif
 
 #ifdef USE_STD_CONCURRENCY
 #include <mutex>
@@ -88,34 +87,34 @@ protected:
   SemaphoreHandle_t xSemaphore = NULL;
 };
 
-#elif defined(ARDUINO_ARCH_RP2040)
-/**
- * @brief Mutex implemntation using RP2040 API
- * @ingroup concurrency
- * @author Phil Schatzmann
- * @copyright GPLv3 *
- */
-class Mutex : public MutexBase {
-public:
-  Mutex() {
-    TRACED();
-    mutex_init(&mtx)
-  }
-  ~Mutex() { TRACED(); }
-  void lock() override {
-    TRACED();
-    mutex_enter_blocking(&mtx)
-  }
-  void unlock() override {
-    TRACED();
-    mutex_exit(&mtx));
-  }
+//#elif defined(ARDUINO_ARCH_RP2040)
+// /**
+//  * @brief Mutex implemntation using RP2040 API
+//  * @ingroup concurrency
+//  * @author Phil Schatzmann
+//  * @copyright GPLv3 *
+//  */
+// class Mutex : public MutexBase {
+// public:
+//   Mutex() {
+//     TRACED();
+//     mutex_init(&mtx);
+//   }
+//   ~Mutex() { TRACED(); }
+//   void lock() override {
+//     TRACED();
+//     mutex_enter_blocking(&mtx);
+//   }
+//   void unlock() override {
+//     TRACED();
+//     mutex_exit(&mtx);
+//   }
 
-protected:
-  mutex_t mtx
-};
+// protected:
+//   mutex_t mtx;
+// };
 
-#else
+//#else
 
 using Mutex = MutexBase;
 
@@ -437,3 +436,6 @@ protected:
 #endif // ESP32
 
 } // namespace audio_tools
+
+
+#endif
