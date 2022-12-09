@@ -28,7 +28,7 @@ static inline uint16_t convert8DAC(int64_t value, int value_bits_per_sample){
 
 /**
  * @brief Please use AnalogAudioStream: A very fast ADC and DAC using the ESP32 I2S interface.
- * @ingroup io
+ * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

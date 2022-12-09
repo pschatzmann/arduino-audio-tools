@@ -12,7 +12,7 @@ namespace audio_tools {
 
 /**
  * @brief Please use the AnalogAudioStream: Reading Analog Data using a timer and the Arduino analogRead() method
- * @ingroup io
+ * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  *
