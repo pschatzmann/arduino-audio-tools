@@ -431,6 +431,7 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_distortion.html" title="Distortion AudioEffect.">Distortion</a> <a class="el" href="classaudio__tools_1_1_audio_effect.html" title="Abstract Base class for Sound Effects.">AudioEffect</a>.  <a href="classaudio__tools_1_1_distortion.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_driver_p_w_m_base.html">DriverPWMBase</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base Class for all PWM drivers.  <a href="classaudio__tools_1_1_driver_p_w_m_base.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_dynamic_memory_stream.html">DynamicMemoryStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_memory_stream.html" title="A simple Stream implementation which is backed by allocated memory.">MemoryStream</a> which is written and read using the internal RAM. For each write the data is allocated on the heap.  <a href="classaudio__tools_1_1_dynamic_memory_stream.html#details">More...</a><br /></td></tr>
@@ -648,8 +649,8 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html">I2SDriverESP32</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Basic I2S API - for the ESP32. If we receive 1 channel, we expand the result to 2 channels.  <a href="classaudio__tools_1_1_i2_s_driver_e_s_p32.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p6266.html">I2SDriverESP6266</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Basic I2S API - for the ESP8266 Only 16 bits are supported !  <a href="classaudio__tools_1_1_i2_s_driver_e_s_p6266.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_driver_e_s_p8266.html">I2SDriverESP8266</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Basic I2S API - for the ESP8266 Only 16 bits are supported !  <a href="classaudio__tools_1_1_i2_s_driver_e_s_p8266.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html">I2SDriverNanoBLE</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Basic I2S API - for the Arduino Nano BLE Sense.  <a href="classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html#details">More...</a><br /></td></tr>
@@ -1256,12 +1257,9 @@ Classes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:a993119df38b990fa1e32edc43a4603c9"><td class="memItemLeft" align="right" valign="top"><a id="a993119df38b990fa1e32edc43a4603c9"></a>
-typedef <a class="el" href="classaudio__tools_1_1_analog_audio_stream_e_s_p32.html">AnalogAudioStreamESP32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a993119df38b990fa1e32edc43a4603c9">AnalogAudioStream</a></td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaudio__tools.html#a993119df38b990fa1e32edc43a4603c9">AnalogAudioStream</a> = <a class="el" href="classaudio__tools_1_1_analog_audio_stream_arduino.html">AnalogAudioStreamArduino</a></td></tr>
 <tr class="memdesc:a993119df38b990fa1e32edc43a4603c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">AnalogAudioStream. <br /></td></tr>
 <tr class="separator:a993119df38b990fa1e32edc43a4603c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79822a264a55b3cb81b1f39dd7d8a84b"><td class="memItemLeft" align="right" valign="top"><a id="a79822a264a55b3cb81b1f39dd7d8a84b"></a>
-typedef <a class="el" href="namespaceaudio__tools.html#a993119df38b990fa1e32edc43a4603c9">AnalogAudioStream</a>&#160;</td><td class="memItemRight" valign="bottom"><b>AnalogAudioStreamArduino</b></td></tr>
-<tr class="separator:a79822a264a55b3cb81b1f39dd7d8a84b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6783710409c83ad5dd8ef53e774d2b6d"><td class="memItemLeft" align="right" valign="top"><a id="a6783710409c83ad5dd8ef53e774d2b6d"></a>
 typedef <a class="el" href="classaudio__tools_1_1_file.html">File</a>&#160;</td><td class="memItemRight" valign="bottom"><b>AudioFile</b></td></tr>
 <tr class="separator:a6783710409c83ad5dd8ef53e774d2b6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1603,9 +1601,9 @@ INLINE_VAR const char *&#160;</td><td class="memItemRight" valign="bottom"><b>AC
 <tr class="memitem:a5d171f4c7d36bad8befcb600f8f8a458"><td class="memItemLeft" align="right" valign="top"><a id="a5d171f4c7d36bad8befcb600f8f8a458"></a>
 INLINE_VAR const char *&#160;</td><td class="memItemRight" valign="bottom"><b>ACCEPT_ENCODING</b> = &quot;Accept-Encoding&quot;</td></tr>
 <tr class="separator:a5d171f4c7d36bad8befcb600f8f8a458"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29451d38dc9d8dc3716f382d300abf38"><td class="memItemLeft" align="right" valign="top"><a id="a29451d38dc9d8dc3716f382d300abf38"></a>
-static PWMDriverBaseAVR *&#160;</td><td class="memItemRight" valign="bottom"><b>accessAudioPWM</b> = nullptr</td></tr>
-<tr class="separator:a29451d38dc9d8dc3716f382d300abf38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a552bc73d132b1c60bbc646a335f4be60"><td class="memItemLeft" align="right" valign="top"><a id="a552bc73d132b1c60bbc646a335f4be60"></a>
+static <a class="el" href="classaudio__tools_1_1_p_w_m_driver_a_v_r.html">PWMDriverAVR</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>accessAudioPWM</b> = nullptr</td></tr>
+<tr class="separator:a552bc73d132b1c60bbc646a335f4be60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23493f1badb15f79e6deeb25f1e69af1"><td class="memItemLeft" align="right" valign="top"><a id="a23493f1badb15f79e6deeb25f1e69af1"></a>
 static <a class="el" href="classaudio__tools_1_1_p_w_m_driver_e_s_p32.html">PWMDriverESP32</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>accessAudioPWM</b> = nullptr</td></tr>
 <tr class="separator:a23493f1badb15f79e6deeb25f1e69af1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1668,9 +1666,9 @@ INLINE_VAR const char *&#160;</td><td class="memItemRight" valign="bottom"><b>ge
 <tr class="memitem:a697e638c7a80c7330d726f7677e0d8f3"><td class="memItemLeft" align="right" valign="top"><a id="a697e638c7a80c7330d726f7677e0d8f3"></a>
 INLINE_VAR const char *&#160;</td><td class="memItemRight" valign="bottom"><b>HOST_C</b> = &quot;Host&quot;</td></tr>
 <tr class="separator:a697e638c7a80c7330d726f7677e0d8f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad0f803d6205f7704a6693050e5f211d4"><td class="memItemLeft" align="right" valign="top"><a id="ad0f803d6205f7704a6693050e5f211d4"></a>
-INLINE_VAR ::I2S&#160;</td><td class="memItemRight" valign="bottom"><b>I2S</b></td></tr>
-<tr class="separator:ad0f803d6205f7704a6693050e5f211d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c7a35b498bdecd7aaf59f6ea9bcc0f0"><td class="memItemLeft" align="right" valign="top"><a id="a9c7a35b498bdecd7aaf59f6ea9bcc0f0"></a>
+::I2S&#160;</td><td class="memItemRight" valign="bottom"><b>I2S</b></td></tr>
+<tr class="separator:a9c7a35b498bdecd7aaf59f6ea9bcc0f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3715e2b80e113c285ffa076643f3fe6"><td class="memItemLeft" align="right" valign="top"><a id="ad3715e2b80e113c285ffa076643f3fe6"></a>
 INLINE_VAR const int&#160;</td><td class="memItemRight" valign="bottom"><b>i2s_buffer_size</b> = 1024</td></tr>
 <tr class="separator:ad3715e2b80e113c285ffa076643f3fe6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1747,9 +1745,12 @@ static uint32_t *&#160;</td><td class="memItemRight" valign="bottom"><b>spdif_pt
 <tr class="memitem:a4c7b56d76380f2cd5a5d985134586879"><td class="memItemLeft" align="right" valign="top"><a id="a4c7b56d76380f2cd5a5d985134586879"></a>
 INLINE_VAR const char *&#160;</td><td class="memItemRight" valign="bottom"><b>SUCCESS</b> = &quot;Success&quot;</td></tr>
 <tr class="separator:a4c7b56d76380f2cd5a5d985134586879"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a24cdb1c1e4c2b15114c65aae3ee375da"><td class="memItemLeft" align="right" valign="top"><a id="a24cdb1c1e4c2b15114c65aae3ee375da"></a>
+<tr class="memitem:a3369c642f3a616408cecf0d332c2d279"><td class="memItemLeft" align="right" valign="top"><a id="a3369c642f3a616408cecf0d332c2d279"></a>
 static <a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_m_b_e_d.html">TimerAlarmRepeatingDriverMBED</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>timerAlarmRepeating</b> = nullptr</td></tr>
-<tr class="separator:a24cdb1c1e4c2b15114c65aae3ee375da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a3369c642f3a616408cecf0d332c2d279"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75dc47d6fe6d7939be6bf5450bae8253"><td class="memItemLeft" align="right" valign="top"><a id="a75dc47d6fe6d7939be6bf5450bae8253"></a>
+static <a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_s_t_m32.html">TimerAlarmRepeatingDriverSTM32</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>timerAlarmRepeating</b> = nullptr</td></tr>
+<tr class="separator:a75dc47d6fe6d7939be6bf5450bae8253"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb04109a3896326086f91c33bd637e4a"><td class="memItemLeft" align="right" valign="top"><a id="abb04109a3896326086f91c33bd637e4a"></a>
 static <a class="el" href="classaudio__tools_1_1_timer_alarm_repeating_driver_a_v_r.html">TimerAlarmRepeatingDriverAVR</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>timerAlarmRepeatingRef</b> = nullptr</td></tr>
 <tr class="separator:abb04109a3896326086f91c33bd637e4a"><td class="memSeparator" colspan="2">&#160;</td></tr>

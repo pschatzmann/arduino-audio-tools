@@ -74,13 +74,22 @@ $(function() {
 <div class="title">audio_tools::DriverPWMBase Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Base Class for all PWM drivers.  
+ <a href="classaudio__tools_1_1_driver_p_w_m_base.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_p_w_m_audio_base_8h_source.html">PWMAudioBase.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for audio_tools::DriverPWMBase:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="classaudio__tools_1_1_driver_p_w_m_base.png" usemap="#audio_5Ftools::DriverPWMBase_map" alt=""/>
   <map id="audio_5Ftools::DriverPWMBase_map" name="audio_5Ftools::DriverPWMBase_map">
-<area href="classaudio__tools_1_1_p_w_m_driver_e_s_p32.html" title="Audio output to PWM pins for the ESP32. The ESP32 supports up to 16 channels." alt="audio_tools::PWMDriverESP32" shape="rect" coords="0,56,186,80"/>
+<area href="classaudio__tools_1_1_p_w_m_driver_a_v_r.html" title="Experimental: Audio output to PWM pins for the AVR. The AVR supports only up to 2 channels." alt="audio_tools::PWMDriverAVR" shape="rect" coords="0,56,192,80"/>
+<area href="classaudio__tools_1_1_p_w_m_driver_e_s_p32.html" title="Audio output to PWM pins for the ESP32. The ESP32 supports up to 16 channels." alt="audio_tools::PWMDriverESP32" shape="rect" coords="202,56,394,80"/>
+<area href="classaudio__tools_1_1_p_w_m_driver_m_b_e_d.html" title="Audio output to PWM pins for MBED based Arduino implementations." alt="audio_tools::PWMDriverMBED" shape="rect" coords="404,56,596,80"/>
+<area href="classaudio__tools_1_1_p_w_m_driver_r_p2040.html" title="Audio output for the Rasperry Pico to PWM pins. The Raspberry Pi Pico has 8 PWM blocks/slices(1-8) an..." alt="audio_tools::PWMDriverRP2040" shape="rect" coords="606,56,798,80"/>
+<area href="classaudio__tools_1_1_p_w_m_driver_s_t_m32.html" title="Audio output to PWM pins for STM32. We use one timer to generate the sample rate and one timer for th..." alt="audio_tools::PWMDriverSTM32" shape="rect" coords="808,56,1000,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -101,9 +110,9 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()=0<
 <tr class="memitem:a720006c5c09ebb1456f22588b9046729"><td class="memItemLeft" align="right" valign="top"><a id="a720006c5c09ebb1456f22588b9046729"></a>
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>framesPerSecond</b> ()</td></tr>
 <tr class="separator:a720006c5c09ebb1456f22588b9046729"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a78f1afe8a202d00edfac3cfeb40eff34"><td class="memItemLeft" align="right" valign="top"><a id="a78f1afe8a202d00edfac3cfeb40eff34"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>isTimerStarted</b> ()=0</td></tr>
-<tr class="separator:a78f1afe8a202d00edfac3cfeb40eff34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13760389c83f7a955c19e74326537399"><td class="memItemLeft" align="right" valign="top"><a id="a13760389c83f7a955c19e74326537399"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isTimerStarted</b> ()</td></tr>
+<tr class="separator:a13760389c83f7a955c19e74326537399"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af64171f3a8bfeeb98113eed7aa0150ce"><td class="memItemLeft" align="right" valign="top"><a id="af64171f3a8bfeeb98113eed7aa0150ce"></a>
 virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>maxChannels</b> ()=0</td></tr>
 <tr class="separator:af64171f3a8bfeeb98113eed7aa0150ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -166,6 +175,9 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>frame_count</b> =
 <tr class="memitem:a56e921ab89d88ff37ab63dc425af0b3c"><td class="memItemLeft" align="right" valign="top"><a id="a56e921ab89d88ff37ab63dc425af0b3c"></a>
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>frames_per_second</b> = 0</td></tr>
 <tr class="separator:a56e921ab89d88ff37ab63dc425af0b3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89779cbeeb8f66212773196b1a145b78"><td class="memItemLeft" align="right" valign="top"><a id="a89779cbeeb8f66212773196b1a145b78"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_timer_started</b> = false</td></tr>
+<tr class="separator:a89779cbeeb8f66212773196b1a145b78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c97bbb53a8cd580c05f5159bb9f2725"><td class="memItemLeft" align="right" valign="top"><a id="a4c97bbb53a8cd580c05f5159bb9f2725"></a>
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>time_1_sec</b></td></tr>
 <tr class="separator:a4c97bbb53a8cd580c05f5159bb9f2725"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -179,7 +191,9 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>underflow_per_sec
 PWMCallbackType&#160;</td><td class="memItemRight" valign="bottom"><b>user_callback</b> = nullptr</td></tr>
 <tr class="separator:a6c71d66ba903d9ecba9a14eff13c47a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Base Class for all PWM drivers. </p>
+</div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/AudioPWM/<a class="el" href="_p_w_m_audio_base_8h_source.html">PWMAudioBase.h</a></li>
 </ul>
 </div><!-- contents -->

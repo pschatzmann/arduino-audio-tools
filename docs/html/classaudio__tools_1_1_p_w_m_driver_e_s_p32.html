@@ -86,7 +86,7 @@ Inheritance diagram for audio_tools::PWMDriverESP32:</div>
  <div class="center">
   <img src="classaudio__tools_1_1_p_w_m_driver_e_s_p32.png" usemap="#audio_5Ftools::PWMDriverESP32_map" alt=""/>
   <map id="audio_5Ftools::PWMDriverESP32_map" name="audio_5Ftools::PWMDriverESP32_map">
-<area href="classaudio__tools_1_1_driver_p_w_m_base.html" alt="audio_tools::DriverPWMBase" shape="rect" coords="0,0,186,24"/>
+<area href="classaudio__tools_1_1_driver_p_w_m_base.html" title="Base Class for all PWM drivers." alt="audio_tools::DriverPWMBase" shape="rect" coords="0,0,186,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -130,6 +130,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (<a class="
 <tr class="memitem:a720006c5c09ebb1456f22588b9046729 inherit pub_methods_classaudio__tools_1_1_driver_p_w_m_base"><td class="memItemLeft" align="right" valign="top"><a id="a720006c5c09ebb1456f22588b9046729"></a>
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>framesPerSecond</b> ()</td></tr>
 <tr class="separator:a720006c5c09ebb1456f22588b9046729 inherit pub_methods_classaudio__tools_1_1_driver_p_w_m_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13760389c83f7a955c19e74326537399 inherit pub_methods_classaudio__tools_1_1_driver_p_w_m_base"><td class="memItemLeft" align="right" valign="top"><a id="a13760389c83f7a955c19e74326537399"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isTimerStarted</b> ()</td></tr>
+<tr class="separator:a13760389c83f7a955c19e74326537399 inherit pub_methods_classaudio__tools_1_1_driver_p_w_m_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f1b4025036125decb8aa1d8822f2762 inherit pub_methods_classaudio__tools_1_1_driver_p_w_m_base"><td class="memItemLeft" align="right" valign="top"><a id="a9f1b4025036125decb8aa1d8822f2762"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setUserCallback</b> (PWMCallbackType cb)</td></tr>
 <tr class="separator:a9f1b4025036125decb8aa1d8822f2762 inherit pub_methods_classaudio__tools_1_1_driver_p_w_m_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -178,9 +181,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:affdaa961fa2e92b89f0d91cec8b9787a"><td class="memItemLeft" align="right" valign="top"><a id="affdaa961fa2e92b89f0d91cec8b9787a"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_timer_started</b> = false</td></tr>
-<tr class="separator:affdaa961fa2e92b89f0d91cec8b9787a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a96d7688ea1302b7de52397da1179757b"><td class="memItemLeft" align="right" valign="top"><a id="a96d7688ea1302b7de52397da1179757b"></a>
 <a class="el" href="classaudio__tools_1_1_vector.html">Vector</a>&lt; <a class="el" href="structaudio__tools_1_1_pin_info_e_s_p32.html">PinInfo</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>pins</b></td></tr>
 <tr class="separator:a96d7688ea1302b7de52397da1179757b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -203,6 +203,9 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>frame_count</b> =
 <tr class="memitem:a56e921ab89d88ff37ab63dc425af0b3c inherit pro_attribs_classaudio__tools_1_1_driver_p_w_m_base"><td class="memItemLeft" align="right" valign="top"><a id="a56e921ab89d88ff37ab63dc425af0b3c"></a>
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>frames_per_second</b> = 0</td></tr>
 <tr class="separator:a56e921ab89d88ff37ab63dc425af0b3c inherit pro_attribs_classaudio__tools_1_1_driver_p_w_m_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89779cbeeb8f66212773196b1a145b78 inherit pro_attribs_classaudio__tools_1_1_driver_p_w_m_base"><td class="memItemLeft" align="right" valign="top"><a id="a89779cbeeb8f66212773196b1a145b78"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_timer_started</b> = false</td></tr>
+<tr class="separator:a89779cbeeb8f66212773196b1a145b78 inherit pro_attribs_classaudio__tools_1_1_driver_p_w_m_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c97bbb53a8cd580c05f5159bb9f2725 inherit pro_attribs_classaudio__tools_1_1_driver_p_w_m_base"><td class="memItemLeft" align="right" valign="top"><a id="a4c97bbb53a8cd580c05f5159bb9f2725"></a>
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>time_1_sec</b></td></tr>
 <tr class="separator:a4c97bbb53a8cd580c05f5159bb9f2725 inherit pro_attribs_classaudio__tools_1_1_driver_p_w_m_base"><td class="memSeparator" colspan="2">&#160;</td></tr>

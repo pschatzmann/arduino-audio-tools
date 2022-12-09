@@ -3,7 +3,7 @@ var searchData=
   ['i2s_5firqhandler_411',['I2S_IRQHandler',['../namespaceaudio__tools.html#ad663a1188408b698e16703cd27bf955f',1,'audio_tools']]],
   ['i2sconfig_412',['I2SConfig',['../classaudio__tools_1_1_i2_s_config.html',1,'audio_tools::I2SConfig'],['../classaudio__tools_1_1_i2_s_config.html#a6ddcfcef498a6bda2cab7339d62e166a',1,'audio_tools::I2SConfig::I2SConfig(RxTxMode mode)'],['../classaudio__tools_1_1_i2_s_config.html#a4f62605fe47b2e5ace54bce453806dcf',1,'audio_tools::I2SConfig::I2SConfig(const I2SConfig &amp;cfg)=default']]],
   ['i2sdriveresp32_413',['I2SDriverESP32',['../classaudio__tools_1_1_i2_s_driver_e_s_p32.html',1,'audio_tools']]],
-  ['i2sdriveresp6266_414',['I2SDriverESP6266',['../classaudio__tools_1_1_i2_s_driver_e_s_p6266.html',1,'audio_tools']]],
+  ['i2sdriveresp8266_414',['I2SDriverESP8266',['../classaudio__tools_1_1_i2_s_driver_e_s_p8266.html',1,'audio_tools']]],
   ['i2sdrivernanoble_415',['I2SDriverNanoBLE',['../classaudio__tools_1_1_i2_s_driver_nano_b_l_e.html',1,'audio_tools']]],
   ['i2sdriverrp2040_416',['I2SDriverRP2040',['../classaudio__tools_1_1_i2_s_driver_r_p2040.html',1,'audio_tools']]],
   ['i2sdriversamd_417',['I2SDriverSAMD',['../classaudio__tools_1_1_i2_s_driver_s_a_m_d.html',1,'audio_tools']]],
