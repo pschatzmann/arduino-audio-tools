@@ -161,7 +161,7 @@ class Equilizer3Bands : public AudioStreamX {
                 case 16: {
                         int16_t* p_dataT = (int16_t*)data;
                         size_t sample_count = len / sizeof(int16_t);
-                        for (int j=0; j<sample_count; j+=p_cfg->channels){
+                        for (size_t j=0; j<sample_count; j+=p_cfg->channels){
                             for (int ch=0; ch<p_cfg->channels; ch++){
                                 //p_dataT[j+ch] = sample(state[ch], 1.0 / 32767.0 * p_dataT[j+ch]) * 32767;
                                 p_dataT[j+ch] = toInt16(sample(state[ch], toFloat(p_dataT[j+ch])));

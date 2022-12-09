@@ -178,7 +178,7 @@ class HttpRequest {
         virtual int connect(const char *ip, uint16_t port, int32_t timeout) {
             client_ptr->setTimeout(timeout);
             int is_connected = this->client_ptr->connect(ip, port);
-            LOGI("connected %d timeout %d", is_connected, timeout);
+            LOGI("connected %d timeout %d", is_connected, (int) timeout);
             return is_connected;
         }
 

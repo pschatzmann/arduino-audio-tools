@@ -33,7 +33,7 @@ class TimerAlarmRepeating {
         TimerAlarmRepeating(TimerAlarmRepeatingDriverBase &driver) {
             p_driver = &driver;
         };
-        ~TimerAlarmRepeating() = default;
+        virtual ~TimerAlarmRepeating() = default;
 
         bool begin(repeating_timer_callback_t callback_f, uint32_t time, TimeUnit unit = MS) {
             return p_driver->begin(callback_f, time, unit);

@@ -72,7 +72,7 @@ class AnalogAudioStreamArduino : public AudioStreamX {
     // (re)start timer
     uint32_t time = AudioTime::toTimeUs(config.sample_rate);
     LOGI("sample_rate: %d", cfg.sample_rate);
-    LOGI("time us: %u", time);
+    LOGI("time us: %lu", time);
     timer.setCallbackParameter(this);
     return timer.begin(callback, time, TimeUnit::US);
   }

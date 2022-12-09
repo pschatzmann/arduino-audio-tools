@@ -697,7 +697,7 @@ class MemoryPrint : public AudioPrint {
                 p_next+=len;
                 return len;
             } else {
-                LOGE("Buffer too small: pos:%d, size: %lu ", pos, max_size);
+                LOGE("Buffer too small: pos:%d, size: %d ", pos, (int)max_size);
                 return 0;
             }
         }

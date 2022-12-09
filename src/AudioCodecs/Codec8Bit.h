@@ -85,7 +85,7 @@ class Decoder8Bit : public AudioDecoder {
             if (p_print==nullptr)  return 0;
             buffer.resize(in_size);
             int8_t* pt8 = (int8_t*) in_ptr;
-            for (int j=0;j<in_size;j++){
+            for (size_t j=0;j<in_size;j++){
                 buffer[j] = pt8[j]*258;
             }
             return p_print->write((uint8_t*)buffer.data(), in_size*sizeof(int16_t));
@@ -158,7 +158,7 @@ class Encoder8Bit : public AudioEncoder {
             int16_t *pt16 = (int16_t*)in_ptr;
             buffer.resize(in_size);
             size_t samples = in_size/2;
-            for (int j=0;j<samples;j++){
+            for (size_t j=0;j<samples;j++){
                 buffer[j] = pt16[j] / 258;
             }
 
