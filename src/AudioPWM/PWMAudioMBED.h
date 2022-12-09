@@ -5,12 +5,6 @@
 #include "AudioTimer/AudioTimer.h"
 #include "mbed.h"
 
-/** 
- * @defgroup pwm_mbed PWM-MBED
- * @ingroup platform
- * @brief PWM Implementation for mbed  
-**/
-
 
 namespace audio_tools {
 
@@ -18,14 +12,13 @@ namespace audio_tools {
 class PWMDriverMBED;
 /**
  * @typedef  PWMDriverBase
- * @ingroup pwm_mbed
  * @brief Please use PWMDriverBase!
  */
 using PWMDriver = PWMDriverMBED;
 
 /**
  * @brief Audio output to PWM pins for MBED based Arduino implementations
- * @ingroup pwm_mbed
+ * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

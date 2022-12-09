@@ -7,18 +7,12 @@
 #include "driver/i2s.h"
 #include "esp_system.h"
 
-/** 
- * @defgroup i2s-esp32 I2S-ESP32
- * @ingroup platform
- * @brief I2S Implementation for ESP32  
-**/
-
 
 namespace audio_tools {
 
 /**
  * @brief Basic I2S API - for the ESP32. If we receive 1 channel, we expand the result to 2 channels.
- * @ingroup i2s-esp32
+ * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

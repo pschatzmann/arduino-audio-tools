@@ -8,12 +8,6 @@
 #  include <I2S.h>
 #endif
 
-/** 
- * @defgroup i2s-RP2040 I2S-RP2040
- * @ingroup platform
- * @brief I2S Implementation for RP2040  
-**/
-
 
 namespace audio_tools {
 
@@ -24,7 +18,7 @@ INLINE_VAR ::I2S I2S;
 
 /**
  * @brief Basic I2S API - for the ...
- * @ingroup i2s-RP2040
+ * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

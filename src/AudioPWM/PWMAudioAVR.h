@@ -5,27 +5,17 @@
 #include "AudioPWM/PWMAudioBase.h"
 #include "AudioTimer/AudioTimerAVR.h"
 
-/** 
- * @defgroup pwm_avr PWM-AVR
- * @ingroup platform
- * @brief PWM Implementation for AVR  
-**/
 
 namespace audio_tools {
 
 class PWMDriverAVR;
-/**
- * @typedef  PWMDriverBase
- * @ingroup platform
- * @brief Please use PWMDriverBase!
- */
 using PWMDriver = PWMDriverAVR;
 static PWMDriverBaseAVR *accessAudioPWM = nullptr; 
 
 
 /**
  * @brief Experimental: Audio output to PWM pins for the AVR. The AVR supports only up to 2 channels. 
- * @ingroup pwm_avr
+ * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

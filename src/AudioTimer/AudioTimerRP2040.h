@@ -7,19 +7,13 @@
 #include <time.h>
 #include <functional>
 
-/**
- * @defgroup timer_rp2040 Timer-RP2040 
- * @ingroup platform
- * @brief RP2040 timer
- */
-
 namespace audio_tools {
 
 typedef void (* my_repeating_timer_callback_t )(void* obj);
 
 /**
  * @brief Repeating Timer functions for repeated execution: Plaease use the typedef TimerAlarmRepeating
- * @ingroup timer_rp2040
+ * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 

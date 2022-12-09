@@ -3,12 +3,6 @@
 #ifdef ESP32
 #include "AudioPWM/PWMAudioBase.h"
 
-/** 
- * @defgroup pwm_esp32 PWM-ESP32
- * @ingroup platform
- * @brief PWM Implementation for ESP32  
-**/
-
 
 namespace audio_tools {
 
@@ -16,7 +10,6 @@ namespace audio_tools {
 class PWMDriverESP32;
 /**
  * @typedef  PWMDriverBase
- * @ingroup pwm_esp32
  * @brief Please use PWMDriverBase!
  */
 using PWMDriver = PWMDriverESP32;
@@ -37,7 +30,7 @@ typedef PinInfoESP32 PinInfo;
 
 /**
  * @brief Audio output to PWM pins for the ESP32. The ESP32 supports up to 16 channels. 
- * @ingroup pwm_esp32
+ * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

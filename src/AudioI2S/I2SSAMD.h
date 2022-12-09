@@ -4,17 +4,12 @@
 #include "AudioI2S/I2SConfig.h"
 #include <I2S.h>
 
-/** 
- * @defgroup i2s-SAMD I2S-SAMD
- * @ingroup platform
- * @brief I2S Implementation for SAMD  
-**/
 
 namespace audio_tools {
 
 /**
  * @brief Basic I2S API - for the SAMD
- * @ingroup i2s-SAMD 
+ * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
