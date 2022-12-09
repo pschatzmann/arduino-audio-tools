@@ -2,6 +2,7 @@
 
 #include "AudioConfig.h"
 #ifdef USE_ADC_ARDUINO
+#include "AudioAnalog/AnalogAudioBase.h"
 #include "AudioTimer/AudioTimer.h"
 #include "AudioTools/AudioStreams.h"
 #include "AudioTools/AudioTypes.h"
@@ -10,55 +11,22 @@
 namespace audio_tools {
 
 /**
- * @brief Configuration for Analog Reader
- * @author Phil Schatzmann
- * @copyright GPLv3
- */
-class AnalogConfig : public AudioBaseInfo {
- public:
-  AnalogConfig() {
-    channels = 1;
-    sample_rate = 10000;
-    bits_per_sample = 16;
-  }
-  int start_pin = PIN_ADC_START;
-  uint16_t buffer_size = ADC_BUFFER_SIZE;
-  uint16_t buffers = ADC_BUFFERS;
-};
-
-/**
- * @brief Please use AnalogAudioStream: Reading Analog Data using a timer and the Arduino analogRead() method
+ * @brief Please use the AnalogAudioStream: Reading Analog Data using a timer and the Arduino analogRead() method
  * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
  *
  */
-class AnalogAudioStreamArduino : public AudioStreamX {
+class AnalogDriverArduino : public AnalogDriverBase {
  public:
-  AnalogAudioStreamArduino() = default;
-
-  AnalogConfig defaultConfig(RxTxMode mode=RX_MODE) {
-    AnalogConfig cfg;
-    if (mode!=RX_MODE){
-      LOGE("mode not supported");
-    }
-    return cfg;
-  }
-
-  void setAudioInfo(AudioBaseInfo info) {             
-    AudioStream::setAudioInfo(info);
-    config.channels = info.channels;
-    config.bits_per_sample = info.bits_per_sample;
-    config.sample_rate = info.sample_rate;
-    begin(config);
- }
+  AnalogDriverArduino() = default;
 
   bool begin(AnalogConfig cfg) {
     TRACED();
     config = cfg;
     if (buffer == nullptr) {
-      // allocate buffers
-      buffer = new NBuffer<int16_t>(cfg.buffer_size, cfg.buffers);
+      // allocate buffer_count
+      buffer = new NBuffer<int16_t>(cfg.buffer_size, cfg.buffer_count);
       if (buffer==nullptr){
         LOGE("Not enough memory for buffer");
         return false;
@@ -77,7 +45,7 @@ class AnalogAudioStreamArduino : public AudioStreamX {
     return timer.begin(callback, time, TimeUnit::US);
   }
 
-  virtual int available() { return buffer==nullptr ? 0 : buffer->available()*2; };
+  int available() { return buffer==nullptr ? 0 : buffer->available()*2; };
 
   /// Provides the sampled audio data
   size_t readBytes(uint8_t *values, size_t len) {
@@ -95,7 +63,7 @@ class AnalogAudioStreamArduino : public AudioStreamX {
   /// Sample data and write to buffer
   static void callback(void *arg) {
     int16_t value = 0;
-    AnalogAudioStreamArduino *self = (AnalogAudioStreamArduino *)arg;
+    AnalogDriverArduino *self = (AnalogDriverArduino *)arg;
     if (self->buffer != nullptr) {
       int channels = self->config.channels;
       for (int j = 0; j < channels; j++) {
@@ -128,7 +96,7 @@ class AnalogAudioStreamArduino : public AudioStreamX {
   }
 };
 
-using AnalogAudioStream = AnalogAudioStreamArduino;
+using AnalogDriver = AnalogDriverArduino;
 
 }  // namespace audio_tools
 

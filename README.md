@@ -9,7 +9,7 @@ Some basic __header-only C++ classes__ that can be used for __Audio Processing__
 - Different [Buffer Implementations](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_base_buffer.html) 
 - Different [Converters](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_base_converter.html) and [Filters](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_filter.html)
 - [Musical Notes](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_musical_notes.html) (with frequencies of notes)
-- A [Repeating Timer](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_timer_alarm_repeating_def.html) (e.g. for sampling audio data using exact times) 
+- A [Repeating Timer](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_timer_alarm_repeating.html) (e.g. for sampling audio data using exact times) 
 - Desktop Integration: Building of Arduino Audio Sketches to be run on [Linux, Windows and OS/X](https://github.com/pschatzmann/arduino-audio-tools/wiki/Running-an-Audio-Sketch-on-the-Desktop)
 
 This functionality provides the glue which makes different audio processing components and libraries work together.
@@ -38,7 +38,7 @@ As “Audio Sinks” we will have e.g:
 
 - external DAC – [I2SStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_i2_s_stream.html)
 - Analog output e.g. to an Amplifier – [AnalogAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_analog_audio_stream.html)
-- Output using PWM – [PWMAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_p_w_m_audio_stream_base.html)
+- Output using PWM – [PWMAudioStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_p_w_m_audio_stream.html)
 - Output to SPDIF/TOSLINK - [SPDIFStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_s_p_d_i_f_stream.html)
 - Bluetooth Speakers – [A2DPStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_a2_d_p_stream.html)
 - Serial to display the data as CSV – [CsvStream](https://pschatzmann.github.io/arduino-audio-tools/html/classaudio__tools_1_1_csv_stream.html)

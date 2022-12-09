@@ -368,7 +368,11 @@ public:
     if (read_from_isr){
       xHigherPriorityTaskWoken = pdFALSE;
       int result = xStreamBufferReceiveFromISR(xStreamBuffer, (void *)data, sizeof(T) * len, &xHigherPriorityTaskWoken);
+#ifdef ESP32X
+      portYIELD_FROM_ISR(  );
+#else
       portYIELD_FROM_ISR( xHigherPriorityTaskWoken );
+#endif
       return result;
     } else {
       return xStreamBufferReceive(xStreamBuffer, (void *)data, sizeof(T) * len, readWait);
@@ -380,7 +384,11 @@ public:
     if (write_from_isr){
       xHigherPriorityTaskWoken = pdFALSE;
       int result = xStreamBufferSendFromISR(xStreamBuffer, (void *)data, sizeof(T) * len, &xHigherPriorityTaskWoken);
+#ifdef ESP32X
+      portYIELD_FROM_ISR(  );
+#else
       portYIELD_FROM_ISR( xHigherPriorityTaskWoken );
+#endif
       return result;
     } else {
       return xStreamBufferSend(xStreamBuffer, (void *)data, sizeof(T) * len, writeWait);
