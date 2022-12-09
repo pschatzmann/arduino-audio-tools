@@ -1,14 +1,8 @@
 #pragma once
 
 #ifdef ESP32
-#include "AudioTimer/AudioTimerDef.h"
+#include "AudioTimer/AudioTimerBase.h"
 #include <esp_task_wdt.h>
-
-/**
- * @defgroup timer_esp32 Timer-ESP32 
- * @ingroup platform
- * @brief ESP32 timer
- */
 
 namespace audio_tools {
 
@@ -118,36 +112,31 @@ static IRAM_ATTR void timerCallback3() {
  * @brief Repeating Timer functions for simple scheduling of repeated execution.
  * The basic logic is taken from https://www.toptal.com/embedded/esp32-audio-sampling.
  * Plaease use the typedef TimerAlarmRepeating.
- * @ingroup timer_esp32
+ * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 
  */
-class TimerAlarmRepeatingESP32 : public TimerAlarmRepeatingDef {
+class TimerAlarmRepeatingDriverESP32 : public TimerAlarmRepeatingDriverBase  {
    
     public:
+        TimerAlarmRepeatingDriverESP32(){
+          setTimerFunction(DirectTimerCallback);
+          setTimer(0);
+        }
     
-        TimerAlarmRepeatingESP32(TimerFunction function=DirectTimerCallback, int id=0){
-          LOGI("%s: %d, id=%d",LOG_METHOD, function, id);
+        void setTimer(int id) override {
           if (id>=0 && id<4) {
             this->timer_id = id;
-            this->function = function;
             handler_task = nullptr;
           } else {
             LOGE("Invalid timer id %d", timer_id);
           }
         }
 
-        ~TimerAlarmRepeatingESP32(){
-          end();
-          if (simpleUserCallback!=nullptr){
-            delete [] simpleUserCallback;
-          }
-          if (timerCallbackArray!=nullptr){
-            delete [] timerCallbackArray;
-          }
+        virtual void setTimerFunction(TimerFunction function=DirectTimerCallback) override{
+            this->function = function;
         }
-
 
         /// Starts the alarm timer
         bool begin(repeating_timer_callback_t callback_f, uint32_t time, TimeUnit unit = MS) override {
@@ -288,7 +277,7 @@ class TimerAlarmRepeatingESP32 : public TimerAlarmRepeatingDef {
       /// We can not do any I2C calls in the interrupt handler so we need to do this in a separate task. 
       static void simpleTaskLoop(void *param) {
         TRACEI();
-        TimerAlarmRepeatingESP32* ta = (TimerAlarmRepeatingESP32*) param;
+        TimerAlarmRepeatingDriverESP32* ta = (TimerAlarmRepeatingDriverESP32*) param;
 
         while (true) {
             unsigned long end = micros() + ta->timeUs;
@@ -302,7 +291,7 @@ class TimerAlarmRepeatingESP32 : public TimerAlarmRepeatingDef {
 };
 
 /// @brief  use TimerAlarmRepeating!  @ingroup timer_esp32
-typedef  TimerAlarmRepeatingESP32 TimerAlarmRepeating;
+using TimerAlarmRepeatingDriver = TimerAlarmRepeatingDriverESP32;
 
 
 }

@@ -5,37 +5,30 @@
 #include "AudioTimer/AudioTimer.h"
 #include "mbed.h"
 
-/** 
- * @defgroup pwm_mbed PWM-MBED
- * @ingroup platform
- * @brief PWM Implementation for mbed  
-**/
-
 
 namespace audio_tools {
 
 // forward declaration
-class PWMAudioStreamMBED;
+class PWMDriverMBED;
 /**
- * @typedef  PWMAudioStream
- * @ingroup pwm_mbed
- * @brief Please use PWMAudioStream!
+ * @typedef  DriverPWMBase
+ * @brief Please use DriverPWMBase!
  */
-typedef PWMAudioStreamMBED PWMAudioStream;
+using PWMDriver = PWMDriverMBED;
 
 /**
  * @brief Audio output to PWM pins for MBED based Arduino implementations
- * @ingroup pwm_mbed
+ * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 
-class PWMAudioStreamMBED : public PWMAudioStreamBase {
+class PWMDriverMBED : public DriverPWMBase {
 
     public:
 
-        PWMAudioStreamMBED(){
-            LOGD("PWMAudioStreamMBED");
+        PWMDriverMBED(){
+            LOGD("PWMDriverMBED");
         }
 
         // Ends the output
@@ -110,7 +103,7 @@ class PWMAudioStreamMBED : public PWMAudioStreamBase {
 
         /// timer callback: write the next frame to the pins
         static inline void  defaultPWMAudioOutputCallback(void *obj) {
-            PWMAudioStreamMBED* accessAudioPWM = (PWMAudioStreamMBED*) obj;
+            PWMDriverMBED* accessAudioPWM = (PWMDriverMBED*) obj;
             if (accessAudioPWM!=nullptr){
                 accessAudioPWM->playNextFrame();
             }

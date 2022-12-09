@@ -5,38 +5,28 @@
 #include "AudioPWM/PWMAudioBase.h"
 #include "AudioTimer/AudioTimerAVR.h"
 
-/** 
- * @defgroup pwm_avr PWM-AVR
- * @ingroup platform
- * @brief PWM Implementation for AVR  
-**/
 
 namespace audio_tools {
 
-class PWMAudioStreamAVR;
-/**
- * @typedef  PWMAudioStream
- * @ingroup platform
- * @brief Please use PWMAudioStream!
- */
-typedef PWMAudioStreamAVR PWMAudioStream;
-static PWMAudioStreamAVR *accessAudioPWM = nullptr; 
+class PWMDriverAVR;
+using PWMDriver = PWMDriverAVR;
+static PWMDriverAVR *accessAudioPWM = nullptr; 
 
 
 /**
  * @brief Experimental: Audio output to PWM pins for the AVR. The AVR supports only up to 2 channels. 
- * @ingroup pwm_avr
+ * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 
-class PWMAudioStreamAVR : public PWMAudioStreamBase {
+class PWMDriverAVR : public DriverPWMBase {
     friend void defaultPWMAudioOutputCallback();
 
     public:
 
-        PWMAudioStreamAVR(){
-            LOGD("PWMAudioStreamAVR");
+        PWMDriverAVR(){
+            LOGD("PWMDriverAVR");
             accessAudioPWM = this;
         }
 
@@ -57,7 +47,6 @@ class PWMAudioStreamAVR : public PWMAudioStreamBase {
             is_timer_started = false;
         }
 
-        /// Setup AVR timer with callback
         void setupTimer() {
              TRACED();
             // CPU Frequency 16 MHz
@@ -96,13 +85,15 @@ class PWMAudioStreamAVR : public PWMAudioStreamBase {
             }
         }
 
+        void startTimer() {}
 
         // Timer 0 is used by Arduino!
         // Timer 1 is used to drive output in sample_rate 
         // => only Timer2 is available for PWM
         void setupPin(int pin){
             switch(pin){
-                case 3:case 11:
+                case 3:
+                case 11:
                     // switch PWM frequency to 62500.00 Hz
                     TCCR2B = TCCR2B & B11111000 | B00000001; 
                     LOGI("PWM Frequency changed for D3 and D11");
@@ -147,9 +138,9 @@ inline void defaultPWMAudioOutputCallback(){
 }
 
 /// timer callback: write the next frame to the pins
-inline ISR(TIMER1_COMPA_vect){
+ISR(TIMER1_COMPA_vect){
     defaultPWMAudioOutputCallback();
-    TimerAlarmRepeatingAVR::tickerCallback();
+    TimerAlarmRepeatingDriverAVR::tickerCallback();
 
 }
 

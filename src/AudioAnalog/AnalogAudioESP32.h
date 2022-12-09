@@ -458,7 +458,7 @@ class AnalogAudioStreamESP32  : public AudioStreamX {
     }
 };
 /// @brief AnalogAudioStream 
-typedef  AnalogAudioStreamESP32 AnalogAudioStream;
+using AnalogAudioStream = AnalogAudioStreamESP32;
 
 } // namespace
 

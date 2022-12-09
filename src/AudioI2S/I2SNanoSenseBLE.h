@@ -78,14 +78,15 @@ extern "C"  void I2S_IRQHandler(void) {
 /**
  * @brief Basic I2S API - for the Arduino Nano BLE Sense
  * @author Phil Schatzmann
+ * @ingroup platform
  * @copyright GPLv3
  */
-class I2SBase {
+class I2SDriverNanoBLE {
   friend class I2SStream;
 
   public:
 
-    I2SBase(){
+    I2SDriverNanoBLE(){
       // register IRQ for I2S
       setupIRQ();
     }
@@ -269,6 +270,9 @@ class I2SBase {
     }
 
 };
+
+using I2SDriver = I2SDriverNanoBLE;
+
 
 } // namespace
 

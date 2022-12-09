@@ -70,7 +70,7 @@ class AnalogAudioStreamArduino : public AudioStreamX {
     }
 
     // (re)start timer
-    uint32_t time = AudioUtils::toTimeUs(config.sample_rate);
+    uint32_t time = AudioTime::toTimeUs(config.sample_rate);
     LOGI("sample_rate: %d", cfg.sample_rate);
     LOGI("time us: %u", time);
     timer.setCallbackParameter(this);
@@ -95,7 +95,7 @@ class AnalogAudioStreamArduino : public AudioStreamX {
   /// Sample data and write to buffer
   static void callback(void *arg) {
     int16_t value = 0;
-    AnalogAudioStream *self = (AnalogAudioStream *)arg;
+    AnalogAudioStreamArduino *self = (AnalogAudioStreamArduino *)arg;
     if (self->buffer != nullptr) {
       int channels = self->config.channels;
       for (int j = 0; j < channels; j++) {
@@ -128,7 +128,7 @@ class AnalogAudioStreamArduino : public AudioStreamX {
   }
 };
 
-typedef AnalogAudioStream AnalogAudioStreamArduino;
+using AnalogAudioStream = AnalogAudioStreamArduino;
 
 }  // namespace audio_tools
 
