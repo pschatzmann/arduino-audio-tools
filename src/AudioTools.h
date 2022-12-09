@@ -27,7 +27,7 @@
  */
 
 /**
- * @defgroup ai AI
+ * @defgroup ml Machine Learning
  * @ingroup main
  * @brief Artificial Intelligence
  */

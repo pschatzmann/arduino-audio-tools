@@ -21,7 +21,7 @@
 
 /** 
  * @defgroup tflite TFLite
- * @ingroup ai
+ * @ingroup ml
  * @brief Tensorflow 
 **/
 
