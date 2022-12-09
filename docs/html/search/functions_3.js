@@ -1,7 +1,7 @@
 var searchData=
 [
   ['c_5fstr_0',['c_str',['../classaudio__tools_1_1_str.html#ac4caa99f22b5dbae833b5a0792c52040',1,'audio_tools::Str']]],
-  ['callback_1',['callback',['../classaudio__tools_1_1_analog_audio_stream_arduino.html#a1f6728aa34c4d7f0743160574e03d594',1,'audio_tools::AnalogAudioStreamArduino']]],
+  ['callback_1',['callback',['../classaudio__tools_1_1_analog_driver_arduino.html#a1f6728aa34c4d7f0743160574e03d594',1,'audio_tools::AnalogDriverArduino']]],
   ['capgain_2',['capGain',['../classaudio__tools_1_1_filtered_delay.html#aba58c32ee8fd49054fb97c1c795cb7d8',1,'audio_tools::FilteredDelay::capGain()'],['../classaudio__tools_1_1_simple_delay.html#aba58c32ee8fd49054fb97c1c795cb7d8',1,'audio_tools::SimpleDelay::capGain()'],['../classaudio__tools_1_1_simple_flanger.html#a85147a878d52eb0c3a470c49ba72e4e1',1,'audio_tools::SimpleFlanger::capGain()']]],
   ['categorycount_3',['categoryCount',['../classaudio__tools_1_1_tf_lite_micro_speech_recognize_commands.html#a5fb61859ca170faada0149e7e2049c2f',1,'audio_tools::TfLiteMicroSpeechRecognizeCommands']]],
   ['changechebyicoefficients_4',['changeChebyICoefficients',['../classaudio__tools_1_1_filter_effect_base.html#a76e95f634b46e4a944735c72e400ebda',1,'audio_tools::FilterEffectBase']]],

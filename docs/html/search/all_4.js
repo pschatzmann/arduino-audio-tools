@@ -2,7 +2,7 @@ var searchData=
 [
   ['c_5fstr_0',['c_str',['../classaudio__tools_1_1_str.html#ac4caa99f22b5dbae833b5a0792c52040',1,'audio_tools::Str']]],
   ['cachedvolumecontrol_1',['CachedVolumeControl',['../classaudio__tools_1_1_cached_volume_control.html',1,'audio_tools']]],
-  ['callback_2',['callback',['../classaudio__tools_1_1_analog_audio_stream_arduino.html#a1f6728aa34c4d7f0743160574e03d594',1,'audio_tools::AnalogAudioStreamArduino::callback()'],['../structaudio__tools_1_1_audio_f_f_t_config.html#ab8f87c1d0ccb89d45f13a0f43075a25c',1,'audio_tools::AudioFFTConfig::callback()']]],
+  ['callback_2',['callback',['../classaudio__tools_1_1_analog_driver_arduino.html#a1f6728aa34c4d7f0743160574e03d594',1,'audio_tools::AnalogDriverArduino::callback()'],['../structaudio__tools_1_1_audio_f_f_t_config.html#ab8f87c1d0ccb89d45f13a0f43075a25c',1,'audio_tools::AudioFFTConfig::callback()']]],
   ['callbackvolumecontrol_3',['CallbackVolumeControl',['../classaudio__tools_1_1_callback_volume_control.html',1,'audio_tools']]],
   ['capgain_4',['capGain',['../classaudio__tools_1_1_simple_flanger.html#a85147a878d52eb0c3a470c49ba72e4e1',1,'audio_tools::SimpleFlanger::capGain()'],['../classaudio__tools_1_1_simple_delay.html#aba58c32ee8fd49054fb97c1c795cb7d8',1,'audio_tools::SimpleDelay::capGain()'],['../classaudio__tools_1_1_filtered_delay.html#aba58c32ee8fd49054fb97c1c795cb7d8',1,'audio_tools::FilteredDelay::capGain()']]],
   ['categorycount_5',['categoryCount',['../classaudio__tools_1_1_tf_lite_micro_speech_recognize_commands.html#a5fb61859ca170faada0149e7e2049c2f',1,'audio_tools::TfLiteMicroSpeechRecognizeCommands']]],

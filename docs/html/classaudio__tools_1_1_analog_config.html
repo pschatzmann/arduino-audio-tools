@@ -84,10 +84,10 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Configuration for Analog Reader.  
+<p>ESP32 specific configuration for i2s input via adc. The default input pin is GPIO34. We always use int16_t values. The default output pins are GPIO25 and GPIO26!  
  <a href="classaudio__tools_1_1_analog_config.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_analog_audio_arduino_8h_source.html">AnalogAudioArduino.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_analog_audio_base_8h_source.html">AnalogAudioBase.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for AnalogConfig:</div>
 <div class="dyncontent">
@@ -95,7 +95,6 @@ Inheritance diagram for AnalogConfig:</div>
   <img src="classaudio__tools_1_1_analog_config.png" usemap="#AnalogConfig_map" alt=""/>
   <map id="AnalogConfig_map" name="AnalogConfig_map">
 <area href="structaudio__tools_1_1_audio_base_info.html" title="Basic Audio information which drives e.g. I2S." alt="AudioBaseInfo" shape="rect" coords="0,0,94,24"/>
-<area href="structaudio__tools_1_1_audio_base_info.html" title="Basic Audio information which drives e.g. I2S." alt="AudioBaseInfo" shape="rect" coords="104,0,198,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -140,30 +139,21 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setAudioInfo</b> (<a 
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:adae708b20ac4fe01990712c8041e560a"><td class="memItemLeft" align="right" valign="top"><a id="adae708b20ac4fe01990712c8041e560a" name="adae708b20ac4fe01990712c8041e560a"></a>
-uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_size</b> = ADC_BUFFER_SIZE</td></tr>
-<tr class="separator:adae708b20ac4fe01990712c8041e560a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed2f028a2a2bc4c6f9b2a9283c6c7e96"><td class="memItemLeft" align="right" valign="top"><a id="aed2f028a2a2bc4c6f9b2a9283c6c7e96" name="aed2f028a2a2bc4c6f9b2a9283c6c7e96"></a>
-uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>buffers</b> = ADC_BUFFERS</td></tr>
-<tr class="separator:aed2f028a2a2bc4c6f9b2a9283c6c7e96"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac08273665fc3c6ebc87d8f5b4e572f88"><td class="memItemLeft" align="right" valign="top"><a id="ac08273665fc3c6ebc87d8f5b4e572f88" name="ac08273665fc3c6ebc87d8f5b4e572f88"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>dma_buf_count</b> = I2S_BUFFER_COUNT</td></tr>
-<tr class="separator:ac08273665fc3c6ebc87d8f5b4e572f88"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a92ecb1ec5d8da47d8f4ccdf8cc0f081e"><td class="memItemLeft" align="right" valign="top"><a id="a92ecb1ec5d8da47d8f4ccdf8cc0f081e" name="a92ecb1ec5d8da47d8f4ccdf8cc0f081e"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>dma_buf_len</b> = I2S_BUFFER_SIZE</td></tr>
-<tr class="separator:a92ecb1ec5d8da47d8f4ccdf8cc0f081e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca05ff9ab728526f003dc9eed9554ae3"><td class="memItemLeft" align="right" valign="top"><a id="aca05ff9ab728526f003dc9eed9554ae3" name="aca05ff9ab728526f003dc9eed9554ae3"></a>
-<a class="el" href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">RxTxMode</a>&#160;</td><td class="memItemRight" valign="bottom"><b>mode</b></td></tr>
-<tr class="separator:aca05ff9ab728526f003dc9eed9554ae3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1604207c5fe93cc8e5d75e1e1ef1ee46"><td class="memItemLeft" align="right" valign="top"><a id="a1604207c5fe93cc8e5d75e1e1ef1ee46" name="a1604207c5fe93cc8e5d75e1e1ef1ee46"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_count</b> = I2S_BUFFER_COUNT</td></tr>
+<tr class="separator:a1604207c5fe93cc8e5d75e1e1ef1ee46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af22ff4ab7a026e6c3b4b08eafb2df027"><td class="memItemLeft" align="right" valign="top"><a id="af22ff4ab7a026e6c3b4b08eafb2df027" name="af22ff4ab7a026e6c3b4b08eafb2df027"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_size</b> = I2S_BUFFER_SIZE</td></tr>
+<tr class="separator:af22ff4ab7a026e6c3b4b08eafb2df027"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a572af6438a3abd3227ccebaddf5af845"><td class="memItemLeft" align="right" valign="top"><a id="a572af6438a3abd3227ccebaddf5af845" name="a572af6438a3abd3227ccebaddf5af845"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>mode_internal</b></td></tr>
 <tr class="separator:a572af6438a3abd3227ccebaddf5af845"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea70f90b3f75458c59ec410ddeabe096"><td class="memItemLeft" align="right" valign="top"><a id="aea70f90b3f75458c59ec410ddeabe096" name="aea70f90b3f75458c59ec410ddeabe096"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>port_no</b> = I2S_NUM_0</td></tr>
 <tr class="separator:aea70f90b3f75458c59ec410ddeabe096"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b9aa542734a876f69be24352919951b"><td class="memItemLeft" align="right" valign="top"><a id="a3b9aa542734a876f69be24352919951b" name="a3b9aa542734a876f69be24352919951b"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>start_pin</b> = PIN_ADC_START</td></tr>
-<tr class="separator:a3b9aa542734a876f69be24352919951b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31a454d24fb1f4d74779a0ff668d54cc"><td class="memItemLeft" align="right" valign="top"><a id="a31a454d24fb1f4d74779a0ff668d54cc" name="a31a454d24fb1f4d74779a0ff668d54cc"></a>
+<a class="el" href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">RxTxMode</a>&#160;</td><td class="memItemRight" valign="bottom"><b>rx_tx_mode</b></td></tr>
+<tr class="separator:a31a454d24fb1f4d74779a0ff668d54cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a307f823a3f1283552dc9ea798f56d4f2"><td class="memItemLeft" align="right" valign="top"><a id="a307f823a3f1283552dc9ea798f56d4f2" name="a307f823a3f1283552dc9ea798f56d4f2"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>uninstall_driver_on_end</b> = true</td></tr>
 <tr class="separator:a307f823a3f1283552dc9ea798f56d4f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -183,6 +173,10 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>sample_rate</b> = 0</t
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:ab9efe85aff2b169662e47765da2f2a16"><td class="memItemLeft" align="right" valign="top"><a id="ab9efe85aff2b169662e47765da2f2a16" name="ab9efe85aff2b169662e47765da2f2a16"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>AnalogConfig</b> (<a class="el" href="group__basic.html#ga8cbd91a8bac9b5ab425112be1620eb49">RxTxMode</a> rxtxMode)</td></tr>
+<tr class="memdesc:ab9efe85aff2b169662e47765da2f2a16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor. <br /></td></tr>
+<tr class="separator:ab9efe85aff2b169662e47765da2f2a16"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a841f1fb376492c764a2ef8d71879a67a"><td class="memItemLeft" align="right" valign="top"><a id="a841f1fb376492c764a2ef8d71879a67a" name="a841f1fb376492c764a2ef8d71879a67a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setInputPin1</b> (int gpio, int channelIdx)</td></tr>
 <tr class="memdesc:a841f1fb376492c764a2ef8d71879a67a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the current ADC pin. The following GPIO pins are supported: GPIO32-GPIO39. <br /></td></tr>
@@ -199,18 +193,18 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>adc_pin</b> [2]</td></
 <tr class="memitem:a57afb6821ee5007f38c0898cee757a9b"><td class="memItemLeft" align="right" valign="top"><a id="a57afb6821ee5007f38c0898cee757a9b" name="a57afb6821ee5007f38c0898cee757a9b"></a>
 adc_unit_t&#160;</td><td class="memItemRight" valign="bottom"><b>adc_unit</b> [2]</td></tr>
 <tr class="separator:a57afb6821ee5007f38c0898cee757a9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b9aa542734a876f69be24352919951b"><td class="memItemLeft" align="right" valign="top"><a id="a3b9aa542734a876f69be24352919951b" name="a3b9aa542734a876f69be24352919951b"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>start_pin</b> = PIN_ADC_START</td></tr>
+<tr class="separator:a3b9aa542734a876f69be24352919951b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
-<tr class="memitem:a0805d3a334fee5f2abc8162b1c0dceb6"><td class="memItemLeft" align="right" valign="top"><a id="a0805d3a334fee5f2abc8162b1c0dceb6" name="a0805d3a334fee5f2abc8162b1c0dceb6"></a>
-class&#160;</td><td class="memItemRight" valign="bottom"><b>AnalogAudioStreamESP32</b></td></tr>
-<tr class="separator:a0805d3a334fee5f2abc8162b1c0dceb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61fefa6f9a0594dfce0d7f7e419e330e"><td class="memItemLeft" align="right" valign="top"><a id="a61fefa6f9a0594dfce0d7f7e419e330e" name="a61fefa6f9a0594dfce0d7f7e419e330e"></a>
+class&#160;</td><td class="memItemRight" valign="bottom"><b>AnalogDriverESP32</b></td></tr>
+<tr class="separator:a61fefa6f9a0594dfce0d7f7e419e330e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Configuration for Analog Reader. </p>
-<p >ESP32 specific configuration for i2s input via adc. The default input pin is GPIO34. We always use int16_t values. The default output pins are GPIO25 and GPIO26!</p>
-<dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
-<dl class="section copyright"><dt>Copyright</dt><dd>GPLv3</dd></dl>
+<div class="textblock"><p >ESP32 specific configuration for i2s input via adc. The default input pin is GPIO34. We always use int16_t values. The default output pins are GPIO25 and GPIO26! </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
@@ -241,9 +235,8 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>AnalogAudioStreamESP
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following files:<ul>
-<li>src/AudioAnalog/<a class="el" href="_analog_audio_arduino_8h_source.html">AnalogAudioArduino.h</a></li>
-<li>src/AudioAnalog/<a class="el" href="_analog_audio_e_s_p32_8h_source.html">AnalogAudioESP32.h</a></li>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>src/AudioAnalog/<a class="el" href="_analog_audio_base_8h_source.html">AnalogAudioBase.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

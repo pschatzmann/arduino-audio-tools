@@ -126,14 +126,19 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_d_s_r_gain.html">ADSRGain</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_a_d_s_r.html" title="Generates ADSR values between 0.0 and 1.0.">ADSR</a> Envelope: Attack, Decay, Sustain and Release. Attack is the time taken for initial run-up oeffect_tf level from nil to peak, beginning when the key is pressed. Decay is the time taken for the subsequent run down from the attack level to the designated sustainLevel level. Sustain is the level during the main sequence of the sound's duration, until the key is released. Release is the time taken for the level to decay from the sustainLevel level to zero after the key is released.[4].  <a href="classaudio__tools_1_1_a_d_s_r_gain.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_audio_stream_arduino.html">AnalogAudioStreamArduino</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Please use AnalogAudioStream: Reading Analog Data using a timer and the Arduino analogRead() method.  <a href="classaudio__tools_1_1_analog_audio_stream_arduino.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_audio_stream_e_s_p32.html">AnalogAudioStreamESP32</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Please use AnalogAudioStream: A very fast ADC and DAC using the ESP32 I2S interface.  <a href="classaudio__tools_1_1_analog_audio_stream_e_s_p32.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_audio_stream.html">AnalogAudioStream</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ESP32: A very fast ADC and DAC using the ESP32 I2S interface. For all other architectures we support reading of audio only using analog input with a timer.  <a href="classaudio__tools_1_1_analog_audio_stream.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_config.html">AnalogConfig</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuration for Analog Reader.  <a href="classaudio__tools_1_1_analog_config.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ESP32 specific configuration for i2s input via adc. The default input pin is GPIO34. We always use int16_t values. The default output pins are GPIO25 and GPIO26!  <a href="classaudio__tools_1_1_analog_config.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_driver_arduino.html">AnalogDriverArduino</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Please use the <a class="el" href="classaudio__tools_1_1_analog_audio_stream.html" title="ESP32: A very fast ADC and DAC using the ESP32 I2S interface. For all other architectures we support ...">AnalogAudioStream</a>: Reading Analog Data using a timer and the Arduino analogRead() method.  <a href="classaudio__tools_1_1_analog_driver_arduino.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_driver_base.html">AnalogDriverBase</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_analog_driver_e_s_p32.html">AnalogDriverESP32</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Please use <a class="el" href="classaudio__tools_1_1_analog_audio_stream.html" title="ESP32: A very fast ADC and DAC using the ESP32 I2S interface. For all other architectures we support ...">AnalogAudioStream</a>: A very fast ADC and DAC using the ESP32 I2S interface.  <a href="classaudio__tools_1_1_analog_driver_e_s_p32.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_a_p_t_x_decoder.html">APTXDecoder</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decoder for OpenAptx. Depends on <a href="https://github.com/pschatzmann/libopenaptx">https://github.com/pschatzmann/libopenaptx</a>.  <a href="classaudio__tools_1_1_a_p_t_x_decoder.html#details">More...</a><br /></td></tr>
@@ -1263,10 +1268,10 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a8b49b86cfd336e9e7e9237791685305f"><td class="memItemLeft" align="right" valign="top"><a id="a8b49b86cfd336e9e7e9237791685305f" name="a8b49b86cfd336e9e7e9237791685305f"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>AnalogAudioStream</b> = <a class="el" href="classaudio__tools_1_1_analog_audio_stream_arduino.html">AnalogAudioStreamArduino</a></td></tr>
-<tr class="memdesc:a8b49b86cfd336e9e7e9237791685305f"><td class="mdescLeft">&#160;</td><td class="mdescRight">AnalogAudioStream. <br /></td></tr>
-<tr class="separator:a8b49b86cfd336e9e7e9237791685305f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab063b4b8a473fcf62db503efd2cfafec"><td class="memItemLeft" align="right" valign="top"><a id="ab063b4b8a473fcf62db503efd2cfafec" name="ab063b4b8a473fcf62db503efd2cfafec"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>AnalogDriver</b> = <a class="el" href="classaudio__tools_1_1_analog_driver_arduino.html">AnalogDriverArduino</a></td></tr>
+<tr class="memdesc:ab063b4b8a473fcf62db503efd2cfafec"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classaudio__tools_1_1_analog_audio_stream.html" title="ESP32: A very fast ADC and DAC using the ESP32 I2S interface. For all other architectures we support ...">AnalogAudioStream</a>. <br /></td></tr>
+<tr class="separator:ab063b4b8a473fcf62db503efd2cfafec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acfd0d5e94fb4502fca8d03c8a536dd6e"><td class="memItemLeft" align="right" valign="top"><a id="acfd0d5e94fb4502fca8d03c8a536dd6e" name="acfd0d5e94fb4502fca8d03c8a536dd6e"></a>
 typedef <a class="el" href="classaudio__tools_1_1_file.html">File</a>&#160;</td><td class="memItemRight" valign="bottom"><b>AudioFile</b></td></tr>
 <tr class="separator:acfd0d5e94fb4502fca8d03c8a536dd6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
