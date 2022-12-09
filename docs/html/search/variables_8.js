@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['max_5fbandwidth_2189',['max_bandwidth',['../structaudio__tools_1_1_opus_encoder_settings.html#a42c15bb81eb638772f64b9256967434a',1,'audio_tools::OpusEncoderSettings']]],
-  ['maxdelaybuffersize_2190',['maxDelayBufferSize',['../classaudio__tools_1_1_delay_effect_base.html#a36d6978a7086bf5eb839adc38098bf12',1,'audio_tools::DelayEffectBase']]],
-  ['mime_5fpcm_2191',['mime_pcm',['../namespaceaudio__tools.html#aea370614cc9bb1a89d745dade95ad80d',1,'audio_tools']]],
-  ['modmax_2192',['modMax',['../classaudio__tools_1_1_simple_chorus.html#afc9230308185b8f3c77b8054ebc69f72',1,'audio_tools::SimpleChorus']]],
-  ['modmin_2193',['modMin',['../classaudio__tools_1_1_simple_chorus.html#a252b66995f6489a5188a5d4c2fad2926',1,'audio_tools::SimpleChorus']]],
-  ['modnorm_2194',['modNorm',['../classaudio__tools_1_1_simple_chorus.html#ac77f141bbed6cce9c4cda58baca2879d',1,'audio_tools::SimpleChorus']]],
-  ['modulationconstant_2195',['modulationConstant',['../classaudio__tools_1_1_simple_flanger.html#a38884d1691b2d6331de12a7a46b1d90b',1,'audio_tools::SimpleFlanger']]]
+  ['max_5fbandwidth_0',['max_bandwidth',['../structaudio__tools_1_1_opus_encoder_settings.html#ad8cfdd5ef4a0e393aa271992b518dfaa',1,'audio_tools::OpusEncoderSettings']]],
+  ['maxdelaybuffersize_1',['maxDelayBufferSize',['../classaudio__tools_1_1_delay_effect_base.html#aa11da42ff6171a564f70a1911c3953b4',1,'audio_tools::DelayEffectBase']]],
+  ['mime_5fpcm_2',['mime_pcm',['../namespaceaudio__tools.html#a3961afb9c2a414e91d5687346be60285',1,'audio_tools']]],
+  ['modmax_3',['modMax',['../classaudio__tools_1_1_simple_chorus.html#a91cfe04b1a76f7511690aecbb9ddbc31',1,'audio_tools::SimpleChorus']]],
+  ['modmin_4',['modMin',['../classaudio__tools_1_1_simple_chorus.html#aeeb2bf6f51ec4293a9e158b34d14680d',1,'audio_tools::SimpleChorus']]],
+  ['modnorm_5',['modNorm',['../classaudio__tools_1_1_simple_chorus.html#ae7e2bd5e7e62b4d6d29b7b1c61dfea67',1,'audio_tools::SimpleChorus']]],
+  ['modulationconstant_6',['modulationConstant',['../classaudio__tools_1_1_simple_flanger.html#a459f36c6fea404615bd43c0277eb6aa8',1,'audio_tools::SimpleFlanger']]]
 ];

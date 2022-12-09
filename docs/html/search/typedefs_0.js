@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['analogaudiostream_2212',['AnalogAudioStream',['../namespaceaudio__tools.html#a993119df38b990fa1e32edc43a4603c9',1,'audio_tools']]],
-  ['audioserverdatacallback_2213',['AudioServerDataCallback',['../namespaceaudio__tools.html#acb7797724edbc65915ca6273fd7099e6',1,'audio_tools']]]
+  ['analogaudiostream_0',['AnalogAudioStream',['../namespaceaudio__tools.html#a8b49b86cfd336e9e7e9237791685305f',1,'audio_tools']]],
+  ['audioserverdatacallback_1',['AudioServerDataCallback',['../namespaceaudio__tools.html#ae6d40783cdf760069729786896fc23b2',1,'audio_tools']]]
 ];

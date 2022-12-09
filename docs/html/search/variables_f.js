@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['wavetable_2210',['waveTable',['../classaudio__tools_1_1_modulation_base_class.html#a5812cc2aa6ececef9d5087f036166dcb',1,'audio_tools::ModulationBaseClass']]],
-  ['window_5ffunction_2211',['window_function',['../structaudio__tools_1_1_audio_f_f_t_config.html#a379001b90446e9cf1ed1c39f758067bd',1,'audio_tools::AudioFFTConfig']]]
+  ['wavetable_0',['waveTable',['../classaudio__tools_1_1_modulation_base_class.html#ac7596f96fc6881f824a3b8cbe79075b2',1,'audio_tools::ModulationBaseClass']]],
+  ['window_5ffunction_1',['window_function',['../structaudio__tools_1_1_audio_f_f_t_config.html#a844cd7e00ad0a62016fe513da4d3bf73',1,'audio_tools::AudioFFTConfig']]]
 ];

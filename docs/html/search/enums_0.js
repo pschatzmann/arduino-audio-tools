@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['g7xxcodec_5fe_2216',['G7xxCODEC_e',['../namespaceaudio__tools.html#a69aecf151447208484a6805c7282a848',1,'audio_tools']]]
+  ['g7xxcodec_5fe_0',['G7xxCODEC_e',['../namespaceaudio__tools.html#a44f4d7d26b9f81198ebefe8c302ee30c',1,'audio_tools']]]
 ];
