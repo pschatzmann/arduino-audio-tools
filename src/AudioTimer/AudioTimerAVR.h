@@ -1,7 +1,7 @@
 #pragma once
 
 #ifdef __AVR__
-#include "AudioTimer/AudioTimerDef.h"
+#include "AudioTimer/AudioTimerBase.h"
 
 /**
  * @defgroup timer_avr Timer-AVR 
@@ -11,8 +11,8 @@
 
 namespace audio_tools {
 typedef void (* repeating_timer_callback_t )(void* obj);
-class TimerAlarmRepeatingAVR;
-INLINE_VAR TimerAlarmRepeatingAVR *timerAlarmRepeatingRef = nullptr;
+class TimerAlarmRepeatingDriverAVR;
+static TimerAlarmRepeatingDriverAVR *timerAlarmRepeatingRef = nullptr;
 
 
 /**
@@ -22,19 +22,11 @@ INLINE_VAR TimerAlarmRepeatingAVR *timerAlarmRepeatingRef = nullptr;
  * @copyright GPLv3
  * 
  */
-class TimerAlarmRepeatingAVR : public TimerAlarmRepeatingDef {
+class TimerAlarmRepeatingDriverAVR : public TimerAlarmRepeatingDriverBase {
     public:
 
-        TimerAlarmRepeatingAVR(TimerFunction function=DirectTimerCallback, int id=0) : TimerAlarmRepeatingDef(){
+        TimerAlarmRepeatingDriverAVR() : TimerAlarmRepeatingDriver(){
             timerAlarmRepeatingRef = this;
-        }
-
-        TimerAlarmRepeatingAVR(){
-            timerAlarmRepeatingRef = this;
-        }
-
-        ~TimerAlarmRepeatingAVR(){
-            end();
         }
 
         /**
@@ -102,7 +94,7 @@ class TimerAlarmRepeatingAVR : public TimerAlarmRepeatingDef {
 
 };
 
-typedef  TimerAlarmRepeatingAVR TimerAlarmRepeating;
+using TimerAlarmRepeatingDriver = TimerAlarmRepeatingDriverAVR;
 
 } // namespace
 

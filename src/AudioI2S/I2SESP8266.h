@@ -21,7 +21,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class I2SBase {
+class I2SDriverESP6266 {
   friend class I2SStream;
   public:
 
@@ -185,6 +185,8 @@ class I2SBase {
     }
 
 };
+
+using I2SDriver = I2SDriverES8266;
 
 }
 

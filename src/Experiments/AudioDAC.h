@@ -276,7 +276,7 @@ class SimpleDAC : public OversamplingDAC {
             TRACED();
             // start (optional) timer
             if (outputRate()>0){
-                uint32_t timeUs = AudioUtils::toTimeUs(outputRate());
+                uint32_t timeUs = AudioTime::toTimeUs(outputRate());
                 auto dacTimerCallback = [] (void *ptr)->void IRAM_ATTR {
                     output_frame_count++;
                     ((SimpleDAC*) ptr)->writePins();
@@ -363,7 +363,7 @@ class OversamplingDAC32 : public OversamplingDAC {
             TRACED();
             // start (optional) timer
             if (outputRate()>0){
-                uint32_t timeUs = AudioUtils::toTimeUs(outputRate());
+                uint32_t timeUs = AudioTime::toTimeUs(outputRate());
                 auto dacTimerCallback = [] (void *ptr)->void IRAM_ATTR {
                     output_frame_count++;
                     ((OversamplingDAC32*) ptr)->writePins();
@@ -651,7 +651,7 @@ class PWMDAC : public OversamplingDAC {
             TRACED();
             // start (optional) timer
             if (outputRate()>0){
-                uint32_t timeUs = AudioUtils::toTimeUs(outputRate());
+                uint32_t timeUs = AudioTime::toTimeUs(outputRate());
                 auto dacTimerCallback = [] (void *ptr)->void IRAM_ATTR {
                     output_frame_count++;
                     ((PWMDAC*) ptr)->writePins();

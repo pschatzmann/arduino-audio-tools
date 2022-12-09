@@ -22,17 +22,13 @@ INLINE_VAR ::I2S I2S;
 #endif
 
 
-class I2SBasePIO;
-typedef I2SBasePIO I2SBase;
-
-
 /**
  * @brief Basic I2S API - for the ...
  * @ingroup i2s-RP2040
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class I2SBasePIO {
+class I2SDriverRP2040 {
   friend class I2SStream;
 
   public:
@@ -175,6 +171,9 @@ class I2SBasePIO {
     }
     
 };
+
+using I2SDriver = I2SDriverRP2040;
+
 
 }
 

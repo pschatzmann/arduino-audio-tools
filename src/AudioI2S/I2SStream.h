@@ -120,7 +120,7 @@ class I2SStream : public AudioStream {
         void flush() override {}
 
     protected:
-        I2SBase i2s;
+        I2SDriver i2s;
         int mute_pin;
 
         /// set mute pin on or off

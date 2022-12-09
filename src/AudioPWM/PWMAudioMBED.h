@@ -15,13 +15,13 @@
 namespace audio_tools {
 
 // forward declaration
-class PWMAudioStreamMBED;
+class PWMDriverMBED;
 /**
- * @typedef  PWMAudioStream
+ * @typedef  PWMDriverBase
  * @ingroup pwm_mbed
- * @brief Please use PWMAudioStream!
+ * @brief Please use PWMDriverBase!
  */
-typedef PWMAudioStreamMBED PWMAudioStream;
+using PWMDriver = PWMDriverMBED;
 
 /**
  * @brief Audio output to PWM pins for MBED based Arduino implementations
@@ -30,12 +30,12 @@ typedef PWMAudioStreamMBED PWMAudioStream;
  * @copyright GPLv3
  */
 
-class PWMAudioStreamMBED : public PWMAudioStreamBase {
+class PWMDriverMBED : public PWMDriverBase {
 
     public:
 
-        PWMAudioStreamMBED(){
-            LOGD("PWMAudioStreamMBED");
+        PWMDriverMBED(){
+            LOGD("PWMDriverMBED");
         }
 
         // Ends the output
@@ -110,7 +110,7 @@ class PWMAudioStreamMBED : public PWMAudioStreamBase {
 
         /// timer callback: write the next frame to the pins
         static inline void  defaultPWMAudioOutputCallback(void *obj) {
-            PWMAudioStreamMBED* accessAudioPWM = (PWMAudioStreamMBED*) obj;
+            PWMDriverMBED* accessAudioPWM = (PWMDriverMBED*) obj;
             if (accessAudioPWM!=nullptr){
                 accessAudioPWM->playNextFrame();
             }

@@ -1,7 +1,7 @@
 #pragma once
 
 #ifdef ESP8266
-#include "AudioTimer/AudioTimerDef.h"
+#include "AudioTimer/AudioTimerBase.h"
 #include "Ticker.h"
 
 /**
@@ -14,8 +14,8 @@ namespace audio_tools {
 
 typedef void (* repeating_timer_callback_t )(void* obj);
 
-class TimerAlarmRepeatingESP8266;
-TimerAlarmRepeatingESP8266 *self;
+class TimerAlarmRepeatingDriverESP8266;
+TimerAlarmRepeatingDriverESP8266 *self;
 
 /**
  * @brief Repeating Timer functions for repeated execution: Plaease use the typedef TimerAlarmRepeating
@@ -24,21 +24,8 @@ TimerAlarmRepeatingESP8266 *self;
  * @copyright GPLv3
  * 
  */
-class TimerAlarmRepeatingESP8266 : public TimerAlarmRepeatingDef {
+class TimerAlarmRepeatingDriverESP8266 : public TimerAlarmRepeatingDriverBase {
     public:
-
-        TimerAlarmRepeatingESP8266(){
-            self = this;
-        }
-
-        TimerAlarmRepeatingESP8266(TimerFunction function=DirectTimerCallback, int id=0){
-            self = this;
-        }
-
-        ~TimerAlarmRepeatingESP8266(){
-            end();
-        }
-
         /**
          * We can not do any I2C calls in the interrupt handler so we need to do this in a separate task
          */
@@ -78,7 +65,7 @@ class TimerAlarmRepeatingESP8266 : public TimerAlarmRepeatingDef {
 };
 
 /// @brief  use TimerAlarmRepeating!  @ingroup timer_esp8266
-typedef  TimerAlarmRepeatingESP8266 TimerAlarmRepeating;
+using TimerAlarmRepeatingDriver = TimerAlarmRepeatingDriverESP8266;
 
 
 }

@@ -96,8 +96,41 @@ class AudioWriter {
       virtual void end() = 0;
 };
 
+/**
+ * @brief Tools for calculating timer values
+ * @ingroup timer
+ */
+class AudioTime {
+    public:
+        /// converts sampling rate to delay in microseconds (μs)
+        static uint32_t toTimeUs(uint32_t samplingRate, uint8_t limit=10){
+            uint32_t result = 1000000l / samplingRate;
+            if (1000000l % samplingRate!=0){
+                result++;
+            }
+            if (result <= limit){
+                LOGW("Time for samplingRate %u -> %u is < %u μs - we rounded up", (unsigned int)samplingRate,  (unsigned int)result,  (unsigned int)limit);
+                result = limit;
+            }
+            return result;
+        }
 
-INLINE_VAR const char* mime_pcm = "audio/pcm";
+        static uint32_t toTimeMs(uint32_t samplingRate, uint8_t limit=1){
+            uint32_t result = 1000l / samplingRate;
+            if (1000000l % samplingRate!=0){
+                result++;
+            }
+            if (result <= limit){
+                LOGW("Time for samplingRate %u -> %u is < %u μs - we rounded up", (unsigned int)samplingRate,  (unsigned int)result,  (unsigned int)limit);
+                result = limit;
+            }
+            return result;
+        }
+};
+
+
+/// @brief Mime type for PCM
+static const char* mime_pcm = "audio/pcm";
 
 
 #ifndef IS_DESKTOP

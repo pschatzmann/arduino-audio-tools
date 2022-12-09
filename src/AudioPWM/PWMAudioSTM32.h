@@ -13,13 +13,13 @@
 namespace audio_tools {
 
 // forward declaration
-class PWMAudioStreamSTM32;
+class PWMDriverSTM32;
 /**
- * @typedef  PWMAudioStream
+ * @typedef  PWMDriverBase
  * @ingroup pwm_stm32
- * @brief Please use PWMAudioStream!
+ * @brief Please use PWMDriverBase!
  */
-typedef PWMAudioStreamSTM32 PWMAudioStream;
+using PWMDriver = PWMDriverSTM32;
 
 /**
  * @brief Audio output to PWM pins for STM32. We use one timer to generate the sample rate and 
@@ -29,7 +29,7 @@ typedef PWMAudioStreamSTM32 PWMAudioStream;
  * @copyright GPLv3
  */
 
-class PWMAudioStreamSTM32 : public PWMAudioStreamBase {
+class PWMDriverSTM32 : public PWMDriverBase {
 
     /// @brief PWM information for a single pin
     struct PWMPin {
@@ -122,8 +122,8 @@ class PWMAudioStreamSTM32 : public PWMAudioStreamBase {
 
     public:
 
-        PWMAudioStreamSTM32(){
-            LOGD("PWMAudioStreamSTM32");
+        PWMDriverSTM32(){
+            TRACED;
         }
 
         // Ends the output
@@ -154,7 +154,7 @@ class PWMAudioStreamSTM32 : public PWMAudioStreamBase {
         virtual void startTimer() override {
             if (!is_timer_started){
                 TRACED();
-                uint32_t time = AudioUtils::toTimeUs(audio_config.sample_rate);
+                uint32_t time = AudioTime::toTimeUs(audio_config.sample_rate);
                 ticker.setCallbackParameter(this);
                 ticker.begin(defaultPWMAudioOutputCallback, time, US);
                 is_timer_started = true;
@@ -201,7 +201,7 @@ class PWMAudioStreamSTM32 : public PWMAudioStreamBase {
 
         /// timer callback: write the next frame to the pins
         static inline void  defaultPWMAudioOutputCallback(void *obj) {
-            PWMAudioStreamSTM32* accessAudioPWM = (PWMAudioStreamSTM32*) obj;
+            PWMDriverBaseSTM32* accessAudioPWM = (PWMDriverBaseSTM32*) obj;
             if (accessAudioPWM!=nullptr){
                 accessAudioPWM->playNextFrame();
             }

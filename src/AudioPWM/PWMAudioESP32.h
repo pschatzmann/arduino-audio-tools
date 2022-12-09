@@ -13,14 +13,14 @@
 namespace audio_tools {
 
 // forward declaration
-class PWMAudioStreamESP32;
+class PWMDriverESP32;
 /**
- * @typedef  PWMAudioStream
+ * @typedef  PWMDriverBase
  * @ingroup pwm_esp32
- * @brief Please use PWMAudioStream!
+ * @brief Please use PWMDriverBase!
  */
-typedef PWMAudioStreamESP32 PWMAudioStream;
-static PWMAudioStreamESP32 *accessAudioPWM = nullptr; 
+using PWMDriver = PWMDriverESP32;
+static PWMDriverESP32 *accessAudioPWM = nullptr; 
 
 
 /**
@@ -42,12 +42,12 @@ typedef PinInfoESP32 PinInfo;
  * @copyright GPLv3
  */
 
-class PWMAudioStreamESP32 : public PWMAudioStreamBase {
+class PWMDriverESP32 : public DriverPWMBase {
     friend void defaultPWMAudioOutputCallback();
     public:
 
-        PWMAudioStreamESP32(){
-            LOGD("PWMAudioStreamESP32");
+        PWMDriverESP32(){
+            TRACED();
             accessAudioPWM = this;
         }
 
@@ -61,15 +61,14 @@ class PWMAudioStreamESP32 : public PWMAudioStreamBase {
             is_timer_started = false;
         }
 
-
-    protected:
-        Vector<PinInfo> pins;      
-        hw_timer_t * timer = nullptr;
-        portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
+        bool isTimerStarted() override {
+            return is_timer_started;
+        }
 
         /// when we get the first write -> we activate the timer to start with the output of data
         virtual void startTimer(){
             if (!is_timer_started){
+                audio_config = audioInfo();
                 LOGI("timerAlarmEnable");
                 is_timer_started = true;
                 timerAlarmEnable(timer);
@@ -105,7 +104,7 @@ class PWMAudioStreamESP32 : public PWMAudioStreamBase {
 
         /// Setup ESP32 timer with callback
         virtual void setupTimer() {
-             TRACED();
+            TRACED();
 
             // Attach timer int at sample rate
             int prescale = 2;
@@ -120,6 +119,17 @@ class PWMAudioStreamESP32 : public PWMAudioStreamBase {
             bool auto_reload = true;
             timerAlarmWrite(timer, counter, auto_reload); // Timer fires at ~44100Hz [40Mhz / 907]
         } 
+
+        /// write a pwm value to the indicated channel. The max value depends on the resolution
+        virtual void pwmWrite(int channel, int value){
+            ledcWrite(pins[channel].pwm_channel, value);          
+        }
+
+    protected:
+        Vector<PinInfo> pins;      
+        hw_timer_t * timer = nullptr;
+        portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
+        bool is_timer_started = false;
 
         /// provides the max value for the indicated resulution
         int maxUnsignedValue(int resolution){
@@ -146,10 +156,6 @@ class PWMAudioStreamESP32 : public PWMAudioStreamBase {
             return 312.5;
         }
 
-        /// write a pwm value to the indicated channel. The max value depends on the resolution
-        virtual void pwmWrite(int channel, int value){
-            ledcWrite(pins[channel].pwm_channel, value);          
-        }
       
 };
 
