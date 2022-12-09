@@ -19,13 +19,13 @@
 namespace audio_tools {
 
 // forwrd declaratioin of callback
-class PWMAudioStreamPico;
+class PWMDriverRP2040;
 /**
- * @typedef  PWMAudioStream
+ * @typedef  PWMDriverBase
  * @ingroup pwm_rp2040
- * @brief Please use PWMAudioStream!
+ * @brief Please use PWMDriverBase!
  */
-typedef PWMAudioStreamPico PWMAudioStream;
+using PWMDriver = PWMDriverRP2040;
 
 /**
  * @brief Rasperry Pico Channel to pin assignments
@@ -49,13 +49,13 @@ struct PicoChannelOut {
 
  */
 
-class PWMAudioStreamPico : public PWMAudioStreamBase {
+class PWMDriverRP2040 : public PWMDriverBase {
     //friend bool defaultPWMAudioOutputCallbackPico(repeating_timer* ptr);
 
     public:
 
-        PWMAudioStreamPico(){
-            LOGD("PWMAudioStreamPico");
+        PWMDriverRP2040(){
+            LOGD("PWMDriverBasePico");
         }
 
         /// Ends the output -> resets the timer and the pins
@@ -161,7 +161,7 @@ class PWMAudioStreamPico : public PWMAudioStreamBase {
 
         // timed output executed at the sampleRate
         inline static void defaultPWMAudioOutputCallbackPico(void* ptr) {
-            PWMAudioStreamPico *self = (PWMAudioStreamPico*)  ptr;
+            PWMDriverBasePico *self = (PWMDriverBasePico*)  ptr;
             self->playNextFrame();
         }
 

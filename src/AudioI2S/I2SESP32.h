@@ -22,7 +22,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class I2SBase {
+class I2SDriverESP32 {
 
   friend class AnalogAudio;
   friend class AudioKitStream;
@@ -94,7 +94,7 @@ class I2SBase {
         }
         LOGD("i2s_write %d -> %d bytes", size_bytes, result);
       } else {
-        result = I2SBase::writeExpandChannel(i2s_num, cfg.bits_per_sample, src, size_bytes);
+        result = I2SDriverESP32::writeExpandChannel(i2s_num, cfg.bits_per_sample, src, size_bytes);
       }       
       return result;
     }
@@ -357,8 +357,9 @@ class I2SBase {
       }
       return mode;
     }
-
 };
+
+using I2SDriver = I2SDriverESP32;
 
 }
 

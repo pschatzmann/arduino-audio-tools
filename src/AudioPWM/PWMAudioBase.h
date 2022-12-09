@@ -15,10 +15,10 @@ typedef bool (*PWMCallbackType)(uint8_t channels, int16_t* data);
 // Callback used by system
 void defaultPWMAudioOutputCallback();
 // Stream classes
-class PWMAudioStreamESP32;
-class PWMAudioStreamPico;
-class PWMAudioStreamMBED;
-class PWMAudioStreamSTM32;
+class PWMDriverESP32;
+class PWMDriverBasePico;
+class PWMDriverBaseMBED;
+class PWMDriverBaseSTM32;
 
 /**
  * @brief Configuration data for PWM audio output
@@ -81,65 +81,16 @@ struct PWMConfig : public AudioBaseInfo {
 
 } INLINE_VAR default_config;
 
-
-/**
- * @brief Common functionality for PWM output. 
- * Please use the PWMAudioStream typedef instead which references the implementation
- * @ingroup io
- */
-class PWMAudioStreamBase : public AudioPrint {
+class DriverPWMBase {
     public:
-        ~PWMAudioStreamBase(){
-            if (is_timer_started){
-                end();
-            }
-        }
-
-        virtual PWMConfig defaultConfig() {
-            return default_config;
-        }
-
-        PWMConfig config() {
+        PWMConfig &audioInfo(){
             return audio_config;
         }
 
-        /// updates the sample rate dynamically 
-        virtual void setAudioInfo(AudioBaseInfo info) {
-            TRACEI();
-            PWMConfig cfg = audio_config;
-            if (cfg.sample_rate != info.sample_rate
-                || cfg.channels != info.channels
-                || cfg.bits_per_sample != info.bits_per_sample) {
-                cfg.sample_rate = info.sample_rate;
-                cfg.bits_per_sample = info.bits_per_sample;
-                cfg.channels = info.channels;
-                cfg.logInfo();
-                end();
-                begin(cfg);        
-            }
-        }
-
-        // /// Starts the PWMAudio using callbacks
-        bool begin(uint16_t sampleRate, uint8_t channels, PWMCallbackType cb) {
-            TRACED();
-            audio_config.channels = channels;
-            audio_config.sample_rate = sampleRate;
-            user_callback = cb;
-
-            return begin();
-        }
-
-
-        /// starts the processing using Streams
-        bool begin(PWMConfig config ){
-            TRACED();
-            this->audio_config = config;
-            return begin();
-        }  
-
         // restart with prior definitions
-        bool begin(){
+        bool begin(PWMConfig cfg){
             TRACED();
+            audio_config = cfg;;
             if (audio_config.channels>maxChannels()){
                 LOGE("Only max %d channels are supported!",maxChannels());
                 return false;
@@ -155,7 +106,7 @@ class PWMAudioStreamBase : public AudioPrint {
             }
             
             // initialize if necessary
-            if (!is_timer_started){
+            if (!isTimerStarted()){
                 audio_config.logConfig();
                 setupPWM();
                 setupTimer();
@@ -169,28 +120,13 @@ class PWMAudioStreamBase : public AudioPrint {
             
             LOGI("->Buffer available: %d", buffer->available());
             LOGI("->Buffer available for write: %d", buffer->availableForWrite());
-            LOGI("->is_timer_started: %s ", is_timer_started ? "true" : "false");
+            LOGI("->is_timer_started: %s ", isTimerStarted() ? "true" : "false");
             return true;
         } 
-
-        virtual void end(){
-            TRACED();
-            is_timer_started = false;
-        }
 
         virtual int availableForWrite() { 
             return buffer==nullptr ? 0 : buffer->availableForWrite();
         }
-
-        // // blocking write for a single byte
-        // virtual size_t write(uint8_t value) {
-        //     size_t result = 0;
-        //     if (buffer->availableForWrite()>1){
-        //         result = buffer->write(value);
-        //         startTimer();
-        //     }
-        //     return result;
-        // }
 
         // blocking write for an array: we expect a singed value and convert it into a unsigned 
         virtual size_t write(const uint8_t *wrt_buffer, size_t size){
@@ -214,6 +150,29 @@ class PWMAudioStreamBase : public AudioPrint {
             return frames_per_second;
         }
 
+        inline void updateStatistics(){
+            frame_count++;
+            if (millis()>=time_1_sec){
+                time_1_sec = millis()+1000;
+                frames_per_second = frame_count;
+                underflow_per_second = underflow_count;
+                underflow_count = 0;
+                frame_count = 0;
+            }
+        }
+
+        void setUserCallback(PWMCallbackType cb){
+            user_callback = cb;
+        }
+
+        virtual void setupPWM()  = 0;
+        virtual void setupTimer()  = 0;
+        virtual void startTimer() = 0;
+        virtual int maxChannels() = 0;
+        virtual int maxOutputValue() = 0;
+        virtual void end() = 0;
+        virtual bool isTimerStarted() = 0;
+
         virtual void pwmWrite(int channel, int value) = 0;
 
     protected:
@@ -225,32 +184,6 @@ class PWMAudioStreamBase : public AudioPrint {
         uint32_t frame_count = 0;
         uint32_t frames_per_second = 0;
         uint32_t time_1_sec;
-        bool is_timer_started = false;
-
-        virtual void setupPWM() = 0;
-        virtual void setupTimer() = 0;
-        virtual int maxChannels() = 0;
-        virtual int maxOutputValue() = 0;
-
-
-        /// when we get the first write -> we activate the timer to start with the output of data
-        virtual void startTimer(){
-            if (!is_timer_started){
-                TRACED();
-                is_timer_started = true;
-            }
-        }
-
-        inline void updateStatistics(){
-            frame_count++;
-            if (millis()>=time_1_sec){
-                time_1_sec = millis()+1000;
-                frames_per_second = frame_count;
-                underflow_per_second = underflow_count;
-                underflow_count = 0;
-                frame_count = 0;
-            }
-        }
 
         void playNextFrameCallback(){
              //TRACED();
@@ -268,7 +201,7 @@ class PWMAudioStreamBase : public AudioPrint {
 
         /// writes the next frame to the output pins 
         void playNextFrameStream(){
-            if (is_timer_started && buffer!=nullptr){
+            if (isTimerStarted() && buffer!=nullptr){
                 //TRACED();
                 int required = (audio_config.bits_per_sample / 8) * audio_config.channels;
                 if (buffer->available() >= required){

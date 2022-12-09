@@ -1,7 +1,7 @@
 #pragma once
 
 #if defined(ARDUINO_ARCH_RP2040) && !defined(ARDUINO_ARCH_MBED)
-#include "AudioTimer/AudioTimerDef.h"
+#include "AudioTimer/AudioTimerBase.h"
 #include "hardware/timer.h"
 #include "pico/time.h"
 #include <time.h>
@@ -16,7 +16,6 @@
 namespace audio_tools {
 
 typedef void (* my_repeating_timer_callback_t )(void* obj);
-//typedef bool (* repeating_timer_callback_bool_t )(void* obj);
 
 /**
  * @brief Repeating Timer functions for repeated execution: Plaease use the typedef TimerAlarmRepeating
@@ -25,16 +24,12 @@ typedef void (* my_repeating_timer_callback_t )(void* obj);
  * @copyright GPLv3
  * 
  */
-class TimerAlarmRepeatingRP2040 : public TimerAlarmRepeatingDef{
+class TimerAlarmRepeatingDriverRP2040 : public TimerAlarmRepeatingDriverBase {
     public:
 
-        TimerAlarmRepeatingRP2040(TimerFunction function=DirectTimerCallback, int id=0) : TimerAlarmRepeatingDef(){
+        TimerAlarmRepeatingDriverRP2040() : TimerAlarmRepeatingDriver(){
             alarm_pool_init_default();
             ap = alarm_pool_get_default();
-        }
-
-        ~TimerAlarmRepeatingRP2040(){
-            end();
         }
 
         /**
@@ -61,7 +56,7 @@ class TimerAlarmRepeatingRP2040 : public TimerAlarmRepeatingDef{
         }
 
         inline static bool staticCallback(repeating_timer *ptr)  {
-            TimerAlarmRepeatingRP2040 *self = (TimerAlarmRepeatingRP2040 *)ptr->user_data; 
+            TimerAlarmRepeatingDriverRP2040 *self = (TimerAlarmRepeatingDriverRP2040 *)ptr->user_data; 
             self->instanceCallback(self->object);
             return true;
         }
@@ -78,7 +73,7 @@ class TimerAlarmRepeatingRP2040 : public TimerAlarmRepeatingDef{
 };
 
 /// @brief use TimerAlarmRepeating! @ingroup timer_rp2040
-typedef  TimerAlarmRepeatingRP2040 TimerAlarmRepeating;
+using TimerAlarmRepeatingDriver = TimerAlarmRepeatingDriverRP2040;
 
 }
 

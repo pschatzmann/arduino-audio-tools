@@ -13,14 +13,14 @@
 
 namespace audio_tools {
 
-class PWMAudioStreamAVR;
+class PWMDriverAVR;
 /**
- * @typedef  PWMAudioStream
+ * @typedef  PWMDriverBase
  * @ingroup platform
- * @brief Please use PWMAudioStream!
+ * @brief Please use PWMDriverBase!
  */
-typedef PWMAudioStreamAVR PWMAudioStream;
-static PWMAudioStreamAVR *accessAudioPWM = nullptr; 
+using PWMDriver = PWMDriverAVR;
+static PWMDriverBaseAVR *accessAudioPWM = nullptr; 
 
 
 /**
@@ -30,13 +30,13 @@ static PWMAudioStreamAVR *accessAudioPWM = nullptr;
  * @copyright GPLv3
  */
 
-class PWMAudioStreamAVR : public PWMAudioStreamBase {
+class PWMDriverAVR : public PWMDriverBase {
     friend void defaultPWMAudioOutputCallback();
 
     public:
 
-        PWMAudioStreamAVR(){
-            LOGD("PWMAudioStreamAVR");
+        PWMDriverBaseAVR(){
+            LOGD("PWMDriverBaseAVR");
             accessAudioPWM = this;
         }
 
@@ -149,7 +149,7 @@ inline void defaultPWMAudioOutputCallback(){
 /// timer callback: write the next frame to the pins
 inline ISR(TIMER1_COMPA_vect){
     defaultPWMAudioOutputCallback();
-    TimerAlarmRepeatingAVR::tickerCallback();
+    TimerAlarmRepeatingDriverAVR::tickerCallback();
 
 }
 

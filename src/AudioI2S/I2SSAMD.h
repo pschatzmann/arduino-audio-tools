@@ -18,7 +18,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class I2SBase {
+class I2SDriverSAMD {
   friend class I2SStream;
 
   public:
@@ -73,8 +73,9 @@ class I2SBase {
   protected:
     I2SConfig cfg;
     
-
 };
+
+using I2SDriver = I2SDriverSAMD;
 
 }
 

@@ -6,8 +6,10 @@
 
 #ifdef ESP32
 #  include <FreeRTOS.h>
-#  include <freertos/stream_buffer.h>
 #  include "AudioBasic/Collections/QueueFreeRTOS.h"
+#  if ESP_IDF_VERSION_MAJOR >= 4 
+#    include <freertos/stream_buffer.h>
+#  endif
 #endif
 
 #ifdef USE_STD_CONCURRENCY
@@ -318,6 +320,8 @@ protected:
   }
 };
 
+#if ESP_IDF_VERSION_MAJOR >= 4 
+
 /**
  * @brief Buffer implementation which is using a FreeRTOS StreamBuffer
  * @ingroup buffers
@@ -429,7 +433,7 @@ protected:
   bool read_from_isr = false;
   bool write_from_isr = false;
 };
-
-#endif
+#endif // ESP_IDF_VERSION_MAJOR >= 4 
+#endif // ESP32
 
 } // namespace audio_tools

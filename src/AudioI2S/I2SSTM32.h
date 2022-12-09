@@ -21,7 +21,7 @@ namespace audio_tools {
  * @copyright GPLv3
  */
 
-class I2SBase {
+class I2SDriverSTM32 {
   friend class I2SStream;
 
   public:
@@ -257,6 +257,8 @@ class I2SBase {
       return result;
     }
 };
+
+using I2SDriver = I2SDriverSTM32;
 
 }
 
