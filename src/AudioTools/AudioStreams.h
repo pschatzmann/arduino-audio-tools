@@ -1478,7 +1478,7 @@ struct TimerCallbackAudioStreamInfo : public AudioBaseInfo {
   RxTxMode rx_tx_mode = RX_MODE;
   uint16_t buffer_size = DEFAULT_BUFFER_SIZE;
   bool use_timer = true;
-  int timer_id = 0;
+  int timer_id = -1;
   TimerFunction timer_function = DirectTimerCallback;
   bool adapt_sample_rate = false;
   uint16_t (*callback)(uint8_t *data, uint16_t len) = nullptr;
@@ -1545,8 +1545,12 @@ class TimerCallbackAudioStream : public BufferedStream {
       frameSize = cfg.bits_per_sample * cfg.channels / 8;
       frame = new uint8_t[frameSize];
       buffer = new RingBuffer<uint8_t>(cfg.buffer_size);
-      timer = new TimerAlarmRepeating(cfg.timer_function, cfg.timer_id);
-      time = AudioUtils::toTimeUs(cfg.sample_rate);
+      timer = new TimerAlarmRepeating();
+      timer->setTimerFunction(cfg.timer_function);
+      if (cfg.timer_id>=0){
+        timer->setTimer(cfg.timer_id);
+      }
+      time = AudioTime::toTimeUs(cfg.sample_rate);
       LOGI("sample_rate: %u -> time: %u milliseconds",  (unsigned int)cfg.sample_rate,  (unsigned int)time);
       timer->setCallbackParameter(this);
       timer->begin(timerCallback, time, TimeUnit::US);

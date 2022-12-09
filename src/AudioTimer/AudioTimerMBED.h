@@ -1,37 +1,26 @@
 #pragma once
 
 #if defined(__arm__)  && __has_include("mbed.h") 
-#include "AudioTimer/AudioTimerDef.h"
+#include "AudioTimer/AudioTimerBase.h"
 #include "mbed.h"
-
-/**
- * @defgroup timer_mbed Timer-MBED
- * @ingroup platform
- * @brief MBED timer
- */
 
 namespace audio_tools {
 
-class TimerAlarmRepeatingMBED;
-INLINE_VAR TimerAlarmRepeatingMBED *timerAlarmRepeating = nullptr;
-//typedef void (* repeating_timer_callback_t )(void* obj);
+class TimerAlarmRepeatingDriverMBED;
+static TimerAlarmRepeatingDriverMBED *timerAlarmRepeating = nullptr;
 
 /**
  * @brief Repeating Timer functions for repeated execution: Plaease use the typedef TimerAlarmRepeating
- * @ingroup timer_mbed
+ * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 
  */
-class TimerAlarmRepeatingMBED : public TimerAlarmRepeatingDef {
+class TimerAlarmRepeatingDriverMBED : public TimerAlarmRepeatingDriverBase {
     public:
 
-        TimerAlarmRepeatingMBED(TimerFunction function=DirectTimerCallback, int id=0) :  TimerAlarmRepeatingDef(){
+        TimerAlarmRepeatingDriverMBED() {
             timerAlarmRepeating = this;
-        }
-
-        ~TimerAlarmRepeatingMBED(){
-            end();
         }
 
         /**
@@ -69,7 +58,7 @@ class TimerAlarmRepeatingMBED : public TimerAlarmRepeatingDef {
 };
 
 /// @brief  use TimerAlarmRepeating!  @ingroup timer_mbed
-typedef  TimerAlarmRepeatingMBED TimerAlarmRepeating;
+using TimerAlarmRepeatingDriver = TimerAlarmRepeatingDriverMBED;
 
 
 }

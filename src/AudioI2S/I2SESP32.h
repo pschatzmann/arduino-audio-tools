@@ -7,22 +7,16 @@
 #include "driver/i2s.h"
 #include "esp_system.h"
 
-/** 
- * @defgroup i2s-esp32 I2S-ESP32
- * @ingroup platform
- * @brief I2S Implementation for ESP32  
-**/
-
 
 namespace audio_tools {
 
 /**
  * @brief Basic I2S API - for the ESP32. If we receive 1 channel, we expand the result to 2 channels.
- * @ingroup i2s-esp32
+ * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class I2SBase {
+class I2SDriverESP32 {
 
   friend class AnalogAudio;
   friend class AudioKitStream;
@@ -94,7 +88,7 @@ class I2SBase {
         }
         LOGD("i2s_write %d -> %d bytes", size_bytes, result);
       } else {
-        result = I2SBase::writeExpandChannel(i2s_num, cfg.bits_per_sample, src, size_bytes);
+        result = I2SDriverESP32::writeExpandChannel(i2s_num, cfg.bits_per_sample, src, size_bytes);
       }       
       return result;
     }
@@ -357,8 +351,9 @@ class I2SBase {
       }
       return mode;
     }
-
 };
+
+using I2SDriver = I2SDriverESP32;
 
 }
 

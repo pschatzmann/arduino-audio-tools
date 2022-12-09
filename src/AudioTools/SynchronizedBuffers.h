@@ -88,32 +88,32 @@ protected:
   SemaphoreHandle_t xSemaphore = NULL;
 };
 
-#elif defined(ARDUINO_ARCH_RP2040)
-/**
- * @brief Mutex implemntation using RP2040 API
- * @ingroup concurrency
- * @author Phil Schatzmann
- * @copyright GPLv3 *
- */
-class Mutex : public MutexBase {
-public:
-  Mutex() {
-    TRACED();
-    mutex_init(&mtx)
-  }
-  ~Mutex() { TRACED(); }
-  void lock() override {
-    TRACED();
-    mutex_enter_blocking(&mtx)
-  }
-  void unlock() override {
-    TRACED();
-    mutex_exit(&mtx));
-  }
+//#elif defined(ARDUINO_ARCH_RP2040)
+// /**
+//  * @brief Mutex implemntation using RP2040 API
+//  * @ingroup concurrency
+//  * @author Phil Schatzmann
+//  * @copyright GPLv3 *
+//  */
+// class Mutex : public MutexBase {
+// public:
+//   Mutex() {
+//     TRACED();
+//     mutex_init(&mtx);
+//   }
+//   ~Mutex() { TRACED(); }
+//   void lock() override {
+//     TRACED();
+//     mutex_enter_blocking(&mtx);
+//   }
+//   void unlock() override {
+//     TRACED();
+//     mutex_exit(&mtx);
+//   }
 
-protected:
-  mutex_t mtx
-};
+// protected:
+//   mutex_t mtx;
+// };
 
 #else
 
@@ -433,7 +433,8 @@ protected:
   bool read_from_isr = false;
   bool write_from_isr = false;
 };
-#endif
-#endif
+#endif // ESP_IDF_VERSION_MAJOR >= 4 
+#endif // ESP32
 
 } // namespace audio_tools
+

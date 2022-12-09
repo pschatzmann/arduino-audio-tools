@@ -8,31 +8,21 @@
 #  include <I2S.h>
 #endif
 
-/** 
- * @defgroup i2s-RP2040 I2S-RP2040
- * @ingroup platform
- * @brief I2S Implementation for RP2040  
-**/
-
 
 namespace audio_tools {
 
 #if !defined(ARDUINO_ARCH_MBED_RP2040)
-INLINE_VAR ::I2S I2S;
+static ::I2S I2S;
 #endif
-
-
-class I2SBasePIO;
-typedef I2SBasePIO I2SBase;
 
 
 /**
  * @brief Basic I2S API - for the ...
- * @ingroup i2s-RP2040
+ * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class I2SBasePIO {
+class I2SDriverRP2040 {
   friend class I2SStream;
 
   public:
@@ -175,6 +165,9 @@ class I2SBasePIO {
     }
     
 };
+
+using I2SDriver = I2SDriverRP2040;
+
 
 }
 
