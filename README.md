@@ -87,18 +87,18 @@ void setup(){
 }
 
 void loop(){
-    if (!copier.copy()){
-      i2s.end();
-      stop();
-    }
+    copier.copy();
 }
 
 ```
 Each stream has it's own [configuration object](https://pschatzmann.github.io/arduino-audio-tools/html/structaudio__tools_1_1_audio_base_info.html) that should be passed to the begin method. The defaultConfig() method is providing a default proposal which will usually "just work". Please consult 
-the class documentation for the available configuration parameters. You can also __easily adapt__ any provided examples: If you e.g. replace the I2SStream with the AnalogAudioStream class, you will get analog instead of digital output.
+the [class documentation](https://pschatzmann.github.io/arduino-audio-tools/html/modules.html) for the available configuration parameters. You can also __easily adapt__ any provided examples: If you e.g. replace the I2SStream with the AnalogAudioStream class, you will get analog instead of digital output.
+
+I suggest you continue to read the more [detailed introduction](https://github.com/pschatzmann/arduino-audio-tools/wiki/Introduction).
 
 Further examples can be found in the [Wiki](https://github.com/pschatzmann/arduino-audio-tools/wiki/Examples). 
 
+Dependent on the example you might need to install some [addional libaries](https://github.com/pschatzmann/arduino-audio-tools/wiki/Optional-Libraries)
 
 ### AudioPlayer
 
@@ -121,40 +121,6 @@ Per default we use the log level warning and the logging output is going to Seri
 AudioLogger::instance().begin(Serial, AudioLogger::Debug);
 ```
 
-### Optional Libraries
-
-Dependent on the example you might need to install some of the following libraries:
-
-- [Many Codec Libraries](https://github.com/pschatzmann/arduino-audio-tools/wiki/Encoding-and-Decoding-of-Audio) which are described in the Wiki
-- [ESP32-A2DP Library](https://github.com/pschatzmann/ESP32-A2DP) to support A2DP Bluetooth Audio
-- [arduino-midi](https://github.com/pschatzmann/arduino-midi) A simple __MIDI__ message parser and generator
-- Audio Boards
-  - [arduino-audiokit](https://github.com/pschatzmann/arduino-audiokit) Support for the __ESP32 AudioKit__ and decoder chips (ES8388, A1S, etc) 
-  - [arduino-vs1053](https://github.com/pschatzmann/arduino-vs1053) Support for __VS1053 audio modules__
-- I2S Libraries
-  - [rp2040-i2s](https://github.com/pschatzmann/rp2040-i2s) I2S library for MBED RP2040
-  - [stm32f411-i2s](https://github.com/pschatzmann/stm32f411-i2s) I2S library for the stm32f411
-- Audio DSP Libraries
-  - [arduino-stk](https://github.com/pschatzmann/Arduino-STK) Synthesis ToolKit in C++ (STK) 
-  - [Maximilian](https://github.com/pschatzmann/Maximilian) cross-platform and multi-target audio synthesis and signal processing library
-  - [Mozzi](https://github.com/pschatzmann/Mozzi) A sound synthesis library for Arduino
-- Fast Fourier Transform
-  - [KissFFT](https://github.com/pschatzmann/kissfft) Fast Fourier Transform FFT Library
-  - [esp32-fft](https://github.com/pschatzmann/esp32-fft) Another FFT library (not only for the ESP32)
-- Text To Speech
-  - [SAM](https://github.com/pschatzmann/arduino-SAM) A Text to Speech Engine
-  - [TTS](https://github.com/pschatzmann/TTS) A Text to Speech Engine
-  - [flite](https://github.com/pschatzmann/arduino-flite) A Text to Speech Engine
-  - [simple-tts](https://github.com/pschatzmann/arduino-simple-tts) A Simple TTS engine using prerecorded audio (e.g. to implement Talking Clock, Talking Numbers)
-  - [espeak-ng](https://github.com/pschatzmann/arduino-espeak-ng) eSpeak NG is an open source speech synthesizer that supports more than hundred languages.
-- Infrastructure
-  - [SdFat Library](https://github.com/greiman/SdFat) to read and write files supporting SD cards with FAT16/FAT32 and exFAT
-  - [freertos-addons](https://github.com/pschatzmann/arduino-freertos-addons) elegant C++ API for FreeRTOS
-  - [TinyHttp](https://github.com/pschatzmann/TinyHttp) a http server that also supports audio for multiple users
-- Machine Learning
-  - [Tensorflow Lite](https://github.com/pschatzmann/tflite-micro-arduino-examples) Machine Learning for Arduino 
-
-Please note that this list does not show the supported libraries that are already part of the Arduino implementation: e.g. SD Library, Cmsis, Espressif DSP Library etc.
 
 ## Show and Tell
 
@@ -163,8 +129,8 @@ Get some inspiration [from projects that were using this library](https://github
 
 ## Documentation
 
-- Here is the generated [Class Documentation](https://pschatzmann.github.io/arduino-audio-tools/html/modules.html). 
-- Please also check out the [Information in the Wiki](https://github.com/pschatzmann/arduino-audio-tools/wiki)
+- Here is the generated [Class Documentation](https://pschatzmann.github.io/arduino-audio-tools/html/modules.html). Please use this before you start any question if something is possible!
+- Please also check out the other [Information in the Wiki](https://github.com/pschatzmann/arduino-audio-tools/wiki)
 - You also might find further information in [one of my Blogs](https://www.pschatzmann.ch/home/category/machine-sound/)
 
 
