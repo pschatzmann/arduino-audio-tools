@@ -94,7 +94,7 @@ protected:
     // if we do not have a decoder yet we use a dummy to prevent NPE
     if (p_decoder == nullptr) {
       LOGW("Unknown Data Format: Content will be ignored...")
-      p_decoder = new DecoderNOP();
+      p_decoder = CodecNOP::instance();
     }
     p_decoder->setOutputStream(*p_out_stream);
     p_decoder->setNotifyAudioChange(*p_bi);

@@ -54,7 +54,7 @@ public:
 };
 
 /**
- * @brief Dummpy no implmentation Codec. This is used so that we can initialize
+ * @brief Dummy no implmentation Codec. This is used so that we can initialize
  * some pointers to decoders and encoders to make sure that they do not point to
  * null.
  * @ingroup codecs

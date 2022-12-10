@@ -7,7 +7,6 @@
 **/
 
 #include "AudioCodecs/CodecWAV.h"
-#include "AudioCodecs/CodecNOP.h"
 #include "AudioCodecs/CodecCopy.h"
 #include "AudioCodecs/Codec8Bit.h"
 #include "AudioCodecs/CodecFloat.h"
