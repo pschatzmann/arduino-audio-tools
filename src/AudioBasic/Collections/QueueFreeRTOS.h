@@ -1,6 +1,6 @@
 #pragma once
 #ifdef ESP32
-#include <FreeRTOS.h>
+#include "freertos/FreeRTOS.h"
 
 namespace audio_tools {
 
