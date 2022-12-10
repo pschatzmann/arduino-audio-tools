@@ -13,7 +13,7 @@
 #include "AudioTools.h"
 #include "AudioCodecs/CodecMP3Helix.h"
 
-URLStream url("Phil Schatzmann","sabrina01");  // or replace with ICYStream to get metadata
+URLStream url("ssid","password");  // or replace with ICYStream to get metadata
 MeasuringStream out(50, &Serial); // final output of decoded stream
 EncodedAudioStream dec(&out, new MP3DecoderHelix()); // Decoding stream
 StreamCopy copier(dec, url); // copy url to decoder
