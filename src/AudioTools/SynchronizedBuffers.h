@@ -5,7 +5,7 @@
 #include "AudioTools/AudioLogger.h"
 
 #ifdef ESP32
-#  include <FreeRTOS.h>
+#  include "freertos/FreeRTOS.h"
 #  include "AudioBasic/Collections/QueueFreeRTOS.h"
 #  if ESP_IDF_VERSION_MAJOR >= 4 
 #    include <freertos/stream_buffer.h>
