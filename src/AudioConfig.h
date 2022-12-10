@@ -92,11 +92,11 @@
 #endif
 
 #ifndef A2DP_BUFFER_SIZE 
-#define A2DP_BUFFER_SIZE 1280
+#define A2DP_BUFFER_SIZE 512
 #endif
 
 #ifndef A2DP_BUFFER_COUNT 
-#define A2DP_BUFFER_COUNT 50
+#define A2DP_BUFFER_COUNT 30
 #endif
 
 #ifndef CODEC_DELAY_MS 
