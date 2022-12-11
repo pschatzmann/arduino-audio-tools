@@ -6,7 +6,7 @@
 /** 
  * @defgroup fft-dsp esp32-dsp
  * @ingroup fft
- * @brief Fast Fourier Transform using esp32 esp-dsp library 
+ * @brief FFT using esp32 esp-dsp library 
 **/
 
 namespace audio_tools {

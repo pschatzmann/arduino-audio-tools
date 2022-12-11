@@ -6,7 +6,7 @@
 /** 
  * @defgroup fft-esp32 esp32-fft
  * @ingroup fft
- * @brief Fast Fourier Transform using esp32-fft 
+ * @brief FFT using esp32-fft 
 **/
 
 

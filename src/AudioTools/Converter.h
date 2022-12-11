@@ -13,54 +13,6 @@
 
 namespace audio_tools {
 
-/**
- * @brief Converts from a source to a target number with a different type
- * @ingroup convert
- */
-class NumberConverter {
-    public:
-        static int32_t convertFrom24To32(int24_t value)  {
-            return value.scale32();
-        }
-
-        static int16_t convertFrom24To16(int24_t value)  {
-            return value.scale16();
-        }
-
-        static float convertFrom24ToFloat(int24_t value)  {
-            return value.scaleFloat();
-        }
-
-        static int16_t convertFrom32To16(int32_t value)  {
-            return static_cast<float>(value) / INT32_MAX * INT16_MAX;
-        }
-
-        static int16_t convert16(int value, int value_bits_per_sample){
-            return value * NumberConverter::maxValue(16) / NumberConverter::maxValue(value_bits_per_sample);
-        }
-
-        static int16_t convert8(int value, int value_bits_per_sample){
-            return value * NumberConverter::maxValue(8) / NumberConverter::maxValue(value_bits_per_sample);
-        }
-
-        /// provides the biggest number for the indicated number of bits
-        static int64_t maxValue(int value_bits_per_sample){
-            switch(value_bits_per_sample){
-                case 8:
-                    return 127;
-                case 16:
-                    return 32767;
-                case 24:
-                    return 8388607;
-                case 32:
-                    return 2147483647;
-
-            }
-            return 32767;
-        }
-
-};
-
 
 /**
  * @brief Abstract Base class for Converters
@@ -570,66 +522,66 @@ class MultiConverter : public BaseConverter<T> {
 
 };
 
-/**
- * @brief Converts e.g. 24bit data to the indicated smaller or bigger data type
- * @ingroup convert
- * @author Phil Schatzmann
- * @copyright GPLv3
- * 
- * @tparam T 
- */
-template<typename FromType, typename ToType>
-class FormatConverter {
-    public:
-        FormatConverter(ToType (*converter)(FromType v)){
-            this->convert_ptr = converter;
-        }
+// /**
+//  * @brief Converts e.g. 24bit data to the indicated smaller or bigger data type
+//  * @ingroup convert
+//  * @author Phil Schatzmann
+//  * @copyright GPLv3
+//  * 
+//  * @tparam T 
+//  */
+// template<typename FromType, typename ToType>
+// class FormatConverter {
+//     public:
+//         FormatConverter(ToType (*converter)(FromType v)){
+//             this->convert_ptr = converter;
+//         }
 
-        FormatConverter( float factor, float clip){
-            this->factor = factor;
-            this->clip = clip;
-        }
+//         FormatConverter( float factor, float clip){
+//             this->factor = factor;
+//             this->clip = clip;
+//         }
 
-        // The data is provided as int24_t tgt[][2] but  returned as int24_t
-        size_t convert(uint8_t *src, uint8_t *target, size_t byte_count_src) {
-            return convert((FromType *)src, (ToType*)target, byte_count_src );
-        }
+//         // The data is provided as int24_t tgt[][2] but  returned as int24_t
+//         size_t convert(uint8_t *src, uint8_t *target, size_t byte_count_src) {
+//             return convert((FromType *)src, (ToType*)target, byte_count_src );
+//         }
 
-        // The data is provided as int24_t tgt[][2] but  returned as int24_t
-        size_t convert(FromType *src, ToType *target, size_t byte_count_src) {
-            int size = byte_count_src / sizeof(FromType);
-            FromType *s = src;
-            ToType *t = target;
-            if (convert_ptr!=nullptr){
-                // standard conversion
-                for (int i=size; i>0; i--) {
-                    *t = (*convert_ptr)(*s);
-                    t++;
-                    s++;
-                }
-            } else {
-                // conversion using indicated factor
-                for (int i=size; i>0; i--) {
-                    float tmp = factor * *s;
-                    if (tmp>clip){
-                        tmp=clip;
-                    } else if (tmp<-clip){
-                        tmp = -clip;
-                    }
-                    *t = tmp;
-                    t++;
-                    s++;
-                }
-            }
-            return size*sizeof(ToType);
-        }
+//         // The data is provided as int24_t tgt[][2] but  returned as int24_t
+//         size_t convert(FromType *src, ToType *target, size_t byte_count_src) {
+//             int size = byte_count_src / sizeof(FromType);
+//             FromType *s = src;
+//             ToType *t = target;
+//             if (convert_ptr!=nullptr){
+//                 // standard conversion
+//                 for (int i=size; i>0; i--) {
+//                     *t = (*convert_ptr)(*s);
+//                     t++;
+//                     s++;
+//                 }
+//             } else {
+//                 // conversion using indicated factor
+//                 for (int i=size; i>0; i--) {
+//                     float tmp = factor * *s;
+//                     if (tmp>clip){
+//                         tmp=clip;
+//                     } else if (tmp<-clip){
+//                         tmp = -clip;
+//                     }
+//                     *t = tmp;
+//                     t++;
+//                     s++;
+//                 }
+//             }
+//             return size*sizeof(ToType);
+//         }
 
-    private:
-        ToType (*convert_ptr)(FromType v) = nullptr;
-        float factor=0;
-        float clip=0;
+//     private:
+//         ToType (*convert_ptr)(FromType v) = nullptr;
+//         float factor=0;
+//         float clip=0;
 
-};
+// };
 
 
 
