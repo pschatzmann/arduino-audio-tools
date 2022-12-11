@@ -128,6 +128,53 @@ class AudioTime {
         }
 };
 
+/**
+ * @brief Converts from a source to a target number with a different type
+ * @ingroup basic
+ */
+class NumberConverter {
+    public:
+        static int32_t convertFrom24To32(int24_t value)  {
+            return value.scale32();
+        }
+
+        static int16_t convertFrom24To16(int24_t value)  {
+            return value.scale16();
+        }
+
+        static float convertFrom24ToFloat(int24_t value)  {
+            return value.scaleFloat();
+        }
+
+        static int16_t convertFrom32To16(int32_t value)  {
+            return static_cast<float>(value) / INT32_MAX * INT16_MAX;
+        }
+
+        static int16_t convert16(int value, int value_bits_per_sample){
+            return value * NumberConverter::maxValue(16) / NumberConverter::maxValue(value_bits_per_sample);
+        }
+
+        static int16_t convert8(int value, int value_bits_per_sample){
+            return value * NumberConverter::maxValue(8) / NumberConverter::maxValue(value_bits_per_sample);
+        }
+
+        /// provides the biggest number for the indicated number of bits
+        static int64_t maxValue(int value_bits_per_sample){
+            switch(value_bits_per_sample){
+                case 8:
+                    return 127;
+                case 16:
+                    return 32767;
+                case 24:
+                    return 8388607;
+                case 32:
+                    return 2147483647;
+
+            }
+            return 32767;
+        }
+};
+
 
 /// @brief Mime type for PCM
 static const char* mime_pcm = "audio/pcm";

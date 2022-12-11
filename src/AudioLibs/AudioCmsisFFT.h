@@ -7,7 +7,7 @@
 /** 
  * @defgroup fft-cmsis CMSIS
  * @ingroup fft
- * @brief Fast Fourier Transform using CMSIS 
+ * @brief FFT using CMSIS 
 **/
 
 namespace audio_tools {

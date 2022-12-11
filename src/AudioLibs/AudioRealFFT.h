@@ -6,7 +6,7 @@
 /** 
  * @defgroup fft-real Real
  * @ingroup fft
- * @brief Fast Fourier Transform using Real FFT 
+ * @brief FFT using Real FFT 
 **/
 
 namespace audio_tools {

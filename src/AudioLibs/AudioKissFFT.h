@@ -6,7 +6,7 @@
 /** 
  * @defgroup fft-kiss KISS
  * @ingroup fft
- * @brief Fast Fourier Transform using KISS 
+ * @brief FFT using KISS 
 **/
 
 
