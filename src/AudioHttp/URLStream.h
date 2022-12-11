@@ -58,10 +58,12 @@ class URLStreamDefault : public AbstractURLStream {
 
         ~URLStreamDefault(){
             TRACEI();
+#ifdef USE_WIFI_CLIENT_SECURE
             if (clientSecure!=nullptr){
                 delete clientSecure;
                 clientSecure = nullptr;
             }
+#endif
             if (clientInsecure!=nullptr){
                 delete clientInsecure;
                 clientInsecure = nullptr;
@@ -180,7 +182,9 @@ class URLStreamDefault : public AbstractURLStream {
         char* password=nullptr;
         Client *client=nullptr;
         WiFiClient *clientInsecure=nullptr;
+#ifdef USE_WIFI_CLIENT_SECURE
         WiFiClientSecure *clientSecure=nullptr;
+#endif
         int clientTimeout = URL_CLIENT_TIMEOUT; // 60000;
         unsigned long handshakeTimeout = URL_HANDSHAKE_TIMEOUT; //120000
         bool is_power_save = false;
@@ -235,18 +239,16 @@ class URLStreamDefault : public AbstractURLStream {
         /// Determines the client 
         Client &getClient(bool isSecure){
             if (client!=nullptr) return *client;
+#ifdef USE_WIFI_CLIENT_SECURE
             if (isSecure){
                 if (clientSecure==nullptr){
-#ifndef IS_DESKTOP
                     clientSecure = new WiFiClientSecure();
                     clientSecure->setInsecure();
-#else
-                    clientSecure = new WiFiClient();
-#endif
                 } 
                 LOGI("WiFiClientSecure");
                 return *clientSecure;
             }
+#endif
             if (clientInsecure==nullptr){
                 clientInsecure = new WiFiClient();
                 LOGI("WiFiClient");
