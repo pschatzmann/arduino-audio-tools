@@ -4,7 +4,7 @@ namespace audio_tools {
 
     /**
      * @brief Helper class to debounce user input from a push button
-     *
+     * @ingroup tools
      */
     class Debouncer {
 

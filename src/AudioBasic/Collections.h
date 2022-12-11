@@ -1,4 +1,10 @@
 #pragma once
+/**
+ * @defgroup collections Collections
+ * @ingroup tools
+ * @brief Audio Player
+ */
+
 #include "AudioBasic/Collections/Vector.h"
 #include "AudioBasic/Collections/List.h"
 #include "AudioBasic/Collections/Stack.h"

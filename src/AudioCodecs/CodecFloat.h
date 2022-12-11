@@ -4,7 +4,7 @@
 
 /** 
  * @defgroup codec-float Floats
- * @ingroup codecs
+ * @ingroup codecs ml
  * @brief Converts between int16_t and floats   
 **/
 

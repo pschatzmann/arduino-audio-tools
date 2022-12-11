@@ -8,6 +8,7 @@ namespace audio_tools {
 /**
  * @brief 24bit integer which is used for I2S sound processing. It works only on
  * little endian machines!
+ * @ingroup basic
  * @author Phil Schatzmann
  * @copyright GPLv3
  *

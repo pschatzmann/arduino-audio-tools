@@ -2,6 +2,11 @@
 
 namespace audio_tools {
 
+/**
+ * @brief Lock Free Queue
+ * @ingroup collections
+ * @tparam T 
+ */
 template <typename T> 
 class QueueLockFree {
 public:
