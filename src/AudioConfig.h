@@ -170,6 +170,7 @@
 
 #define USE_PWM
 #define USE_URL_ARDUINO
+#define USE_WIFI_CLIENT_SECURE
 #define USE_I2S
 #define USE_AUDIO_SERVER
 #define USE_TYPETRAITS
@@ -229,6 +230,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 
 #define USE_PWM
 #define USE_URL_ARDUINO
+#define USE_WIFI_CLIENT_SECURE
 #define USE_I2S
 #define USE_AUDIO_SERVER
 //#define USE_URLSTREAM_TASK
@@ -383,8 +385,14 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #endif
 
 //#define USE_ESP8266_AUDIO
-
 #endif
+
+// The Pico W has WIFI support
+#ifdef ARDUINO_RASPBERRY_PI_PICO_W
+#  define USE_URL_ARDUINO
+#  define USE_WIFI_CLIENT_SECURE 
+#endif
+
 
 //----- AVR -----------
 #ifdef __AVR__
@@ -452,6 +460,10 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define SOFT_MUTE_VALUE 0
 #endif
 
+#ifdef ARDUINO_SAMD_MKRWIFI1010
+#include <WiFiNINA.h>
+#define USE_URL_ARDUINO
+#endif
 //------ VS1053 ----------
 
 // Default Pins for VS1053
@@ -471,6 +483,10 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 
 #ifdef IS_DESKTOP
 #define USE_URL_ARDUINO
+#endif
+
+#ifndef ARDUINO
+#define USE_STREAM_WRITE_OVERRIDE
 #endif
 
 #if USE_INLINE_VARS && !defined(INGNORE_INLINE_VARS)
