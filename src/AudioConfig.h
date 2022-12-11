@@ -391,6 +391,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #ifdef ARDUINO_RASPBERRY_PI_PICO_W
 #  define USE_URL_ARDUINO
 #  define USE_WIFI_CLIENT_SECURE 
+#  define USE_AUDIO_SERVER
 #endif
 
 
@@ -463,6 +464,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #ifdef ARDUINO_SAMD_MKRWIFI1010
 #include <WiFiNINA.h>
 #define USE_URL_ARDUINO
+#define USE_AUDIO_SERVER
 #endif
 //------ VS1053 ----------
 
