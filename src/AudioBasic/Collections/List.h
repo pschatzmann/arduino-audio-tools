@@ -8,6 +8,7 @@ namespace audio_tools {
 
 /**
  * @brief Double linked list
+ * @ingroup collections
  * @author Phil Schatzmann
  * @copyright GPLv3
  * @tparam T 

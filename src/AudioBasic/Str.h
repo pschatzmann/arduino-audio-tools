@@ -4,12 +4,21 @@
 #include <string.h>
 #include "AudioTools/AudioLogger.h"
 
+/**
+ * @defgroup string Strings
+ * @ingroup tools
+ * @brief Strings
+ * This framework is avoiding the use of Arduino Strings, so that we can use it
+ * easily also on other platforms!
+ */
+
 namespace audio_tools {
 
 /**
  * @brief A simple  wrapper to provide string functions on char*.
  * If the underlying char* is a const we do not allow any updates; The ownership
  * of the chr* must be managed externally!
+ * @ingroup string
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

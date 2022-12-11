@@ -6,6 +6,7 @@ namespace audio_tools {
 
 /**
  * @brief FIFO Queue which is based on a List
+ * @ingroup collections
  * @author Phil Schatzmann
  * @copyright GPLv3
  * @tparam T 

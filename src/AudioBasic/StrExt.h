@@ -4,7 +4,6 @@
 
 namespace audio_tools {
 
-
 /**
  * @brief Str which keeps the data on the heap. We grow the allocated 
  * memory only if the copy source is not fitting.
@@ -15,6 +14,8 @@ namespace audio_tools {
  * if we need to process an unexpected size.
  * 
  * We also need to use this if we want to manage a vecor of strings.
+ *  
+ * @ingroup string
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

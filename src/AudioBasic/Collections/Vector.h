@@ -7,7 +7,7 @@ namespace audio_tools {
 /**
  * @brief Vector implementation which provides the most important methods as defined by std::vector. This class it is quite handy 
  * to have and most of the times quite better then dealing with raw c arrays.
- *
+ * @ingroup collections
  * @author Phil Schatzmann
  * @copyright GPLv3
  **/

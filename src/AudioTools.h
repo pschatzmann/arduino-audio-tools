@@ -21,7 +21,7 @@
  */
 
 /**
- * @defgroup transform Transformation
+ * @defgroup transform Converting Streams
  * @ingroup main
  * @brief Stream classes which change the input or output
  */

@@ -6,6 +6,7 @@ namespace audio_tools {
 
 /**
  * @brief Space optimized vector which stores the boolean values as bits
+ * @ingroup collections
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
