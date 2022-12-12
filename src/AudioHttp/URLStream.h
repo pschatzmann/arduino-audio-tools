@@ -276,7 +276,7 @@ class URLStream : public AbstractURLStream {
         }
 
         void login(){
-#ifdef IS_WIFI
+#ifdef USE_WIFI
             LOGD("connectWiFi");
             if (network!=nullptr && password != nullptr && WiFi.status() != WL_CONNECTED){
                 WiFi.begin(network, password);
