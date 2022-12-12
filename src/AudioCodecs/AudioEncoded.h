@@ -286,7 +286,7 @@ public:
   }
 
   /// Starts the processing - sets the status to active
-  bool begin() {
+  bool begin() override {
     TRACED();
     const CodecNOP *nop = CodecNOP::instance();
     if (decoder_ptr != nop || encoder_ptr != nop) {
@@ -317,7 +317,7 @@ public:
   }
 
   /// Ends the processing
-  void end() {
+  void end() override {
     TRACEI();
     decoder_ptr->end();
     encoder_ptr->end();

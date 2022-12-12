@@ -826,23 +826,23 @@ class QueueStream : public AudioStreamX {
   virtual ~QueueStream() { delete callback_buffer_ptr; }
 
   /// Activates the output
-  virtual bool begin() {
+  virtual bool begin() override {
     TRACEI();
     active = true;
     return true;
   }
 
   /// stops the processing
-  virtual void end() {
+  virtual void end() override {
     TRACEI();
     active = false;
   };
 
-  int available() {
+  int available() override {
     return callback_buffer_ptr->available()*sizeof(T);
   }
 
-  int availableForWrite() {
+  int availableForWrite() override {
     return callback_buffer_ptr->availableForWrite()*sizeof(T);
   }
 
