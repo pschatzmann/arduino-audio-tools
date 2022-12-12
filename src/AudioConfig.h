@@ -490,6 +490,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 
 #ifdef IS_DESKTOP
 #define USE_URL_ARDUINO
+#define USE_STREAM_WRITE_OVERRIDE
 #endif
 
 #ifndef ARDUINO

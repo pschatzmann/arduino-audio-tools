@@ -5,6 +5,7 @@ namespace audio_tools {
 /**
  * @brief Abstract Base class for all URLStream implementations
  * @author Phil Schatzmann
+ * @ingroup http
  * @copyright GPLv3
  */
 class AbstractURLStream : public AudioStream  {
@@ -12,7 +13,7 @@ class AbstractURLStream : public AudioStream  {
         // executes the URL request
         virtual bool begin(const char* urlStr, const char* acceptMime=nullptr, MethodID action=GET,  const char* reqMime="", const char*reqData="") = 0;
         // ends the request
-        virtual void end()=0;
+        virtual void end() override =0;
         /// provides access to the HttpRequest
         virtual HttpRequest &httpRequest()=0;
         // only the ICYStream supports this
@@ -20,7 +21,7 @@ class AbstractURLStream : public AudioStream  {
             return false;
         }
         /// Writes are not supported
-        int availableForWrite() {
+        int availableForWrite() override {
             return 0;
         }
 
