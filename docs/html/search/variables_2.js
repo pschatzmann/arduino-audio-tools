@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['callback_2166',['callback',['../structaudio__tools_1_1_audio_f_f_t_config.html#ab8f87c1d0ccb89d45f13a0f43075a25c',1,'audio_tools::AudioFFTConfig']]],
-  ['channel_5fused_2167',['channel_used',['../structaudio__tools_1_1_audio_f_f_t_config.html#a3a5b92ec292754862eefea3200d21f5d',1,'audio_tools::AudioFFTConfig']]],
-  ['complexity_2168',['complexity',['../structaudio__tools_1_1_opus_encoder_settings.html#a5cfa32bf3a363603c9088283597de63e',1,'audio_tools::OpusEncoderSettings']]],
-  ['cs_5fpin_2169',['cs_pin',['../classaudio__tools_1_1_v_s1053_config.html#aed65b23a4e5c39c4267c5730833e70db',1,'audio_tools::VS1053Config']]]
+  ['callback_2168',['callback',['../structaudio__tools_1_1_audio_f_f_t_config.html#ab8f87c1d0ccb89d45f13a0f43075a25c',1,'audio_tools::AudioFFTConfig']]],
+  ['channel_5fused_2169',['channel_used',['../structaudio__tools_1_1_audio_f_f_t_config.html#a3a5b92ec292754862eefea3200d21f5d',1,'audio_tools::AudioFFTConfig']]],
+  ['complexity_2170',['complexity',['../structaudio__tools_1_1_opus_encoder_settings.html#a5cfa32bf3a363603c9088283597de63e',1,'audio_tools::OpusEncoderSettings']]],
+  ['cs_5fpin_2171',['cs_pin',['../classaudio__tools_1_1_v_s1053_config.html#aed65b23a4e5c39c4267c5730833e70db',1,'audio_tools::VS1053Config']]]
 ];

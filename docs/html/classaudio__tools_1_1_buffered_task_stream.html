@@ -67,7 +67,6 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classaudio__tools_1_1_buffered_task_stream-members.html">List of all members</a>  </div>
@@ -76,10 +75,10 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>A FreeRTOS task is filling the buffer from the indicated stream.  
+<p>A FreeRTOS task is filling the buffer from the indicated stream. Only to be used on the ESP32.  
  <a href="classaudio__tools_1_1_buffered_task_stream.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_u_r_l_stream_e_s_p32_8h_source.html">URLStreamESP32.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_u_r_l_stream_buffered_8h_source.html">URLStreamBuffered.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for BufferedTaskStream:</div>
 <div class="dyncontent">
@@ -195,16 +194,6 @@ virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>validate</b> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> &amp;info)</td></tr>
 <tr class="separator:a02d13ce67979fd03ea213f793e44d834 inherit pub_methods_classaudio__tools_1_1_audio_base_info_dependent"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:afb1fd8a2ee376a6f0f2f42f1b627078c"><td class="memItemLeft" align="right" valign="top"><a id="afb1fd8a2ee376a6f0f2f42f1b627078c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>createMutex</b> ()</td></tr>
-<tr class="separator:afb1fd8a2ee376a6f0f2f42f1b627078c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_methods_classaudio__tools_1_1_audio_stream"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classaudio__tools_1_1_audio_stream')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a></td></tr>
-<tr class="memitem:ae8b36f594a1e3aaaf9737aabb7c95ba3 inherit pro_methods_classaudio__tools_1_1_audio_stream"><td class="memItemLeft" align="right" valign="top"><a id="ae8b36f594a1e3aaaf9737aabb7c95ba3"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>not_supported</b> (int out)</td></tr>
-<tr class="separator:ae8b36f594a1e3aaaf9737aabb7c95ba3 inherit pro_methods_classaudio__tools_1_1_audio_stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
 <tr class="memitem:a736a12439f30ef6aff1a5890f88ddec9"><td class="memItemLeft" align="right" valign="top"><a id="a736a12439f30ef6aff1a5890f88ddec9"></a>
@@ -216,12 +205,9 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a03c996f9fcf0e10baeb3e700be0c409a"><td class="memItemLeft" align="right" valign="top"><a id="a03c996f9fcf0e10baeb3e700be0c409a"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>active</b> = false</td></tr>
 <tr class="separator:a03c996f9fcf0e10baeb3e700be0c409a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43f615220f6016e55a1c258181df3347"><td class="memItemLeft" align="right" valign="top"><a id="a43f615220f6016e55a1c258181df3347"></a>
-<a class="el" href="classaudio__tools_1_1_n_buffer.html">NBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buffers</b> {DEFAULT_BUFFER_SIZE, URL_STREAM_BUFFER_COUNT}</td></tr>
-<tr class="separator:a43f615220f6016e55a1c258181df3347"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc659d089f5608a17e8650e59a7e26fc"><td class="memItemLeft" align="right" valign="top"><a id="afc659d089f5608a17e8650e59a7e26fc"></a>
-SemaphoreHandle_t&#160;</td><td class="memItemRight" valign="bottom"><b>mutex</b> = NULL</td></tr>
-<tr class="separator:afc659d089f5608a17e8650e59a7e26fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe3955ff0cbc3a3cafaf450a49162c54"><td class="memItemLeft" align="right" valign="top"><a id="abe3955ff0cbc3a3cafaf450a49162c54"></a>
+<a class="el" href="classaudio__tools_1_1_synchronized_n_buffer.html">SynchronizedNBuffer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buffers</b> {DEFAULT_BUFFER_SIZE, URL_STREAM_BUFFER_COUNT}</td></tr>
+<tr class="separator:abe3955ff0cbc3a3cafaf450a49162c54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e7b72b967f1cbc12e11736ff25e66b7"><td class="memItemLeft" align="right" valign="top"><a id="a8e7b72b967f1cbc12e11736ff25e66b7"></a>
 <a class="el" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_stream</b> =nullptr</td></tr>
 <tr class="separator:a8e7b72b967f1cbc12e11736ff25e66b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -238,13 +224,20 @@ TaskHandle_t&#160;</td><td class="memItemRight" valign="bottom"><b>xHandle</b> =
 <tr class="memitem:a55593fb098b50040bc63f28fa32e995a inherit pro_attribs_classaudio__tools_1_1_audio_stream"><td class="memItemLeft" align="right" valign="top"><a id="a55593fb098b50040bc63f28fa32e995a"></a>
 <a class="el" href="classaudio__tools_1_1_audio_base_info_dependent.html">AudioBaseInfoDependent</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>p_notify</b> =nullptr</td></tr>
 <tr class="separator:a55593fb098b50040bc63f28fa32e995a inherit pro_attribs_classaudio__tools_1_1_audio_stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_classaudio__tools_1_1_audio_stream"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classaudio__tools_1_1_audio_stream')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a></td></tr>
+<tr class="memitem:ae8b36f594a1e3aaaf9737aabb7c95ba3 inherit pro_methods_classaudio__tools_1_1_audio_stream"><td class="memItemLeft" align="right" valign="top"><a id="ae8b36f594a1e3aaaf9737aabb7c95ba3"></a>
+virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>not_supported</b> (int out)</td></tr>
+<tr class="separator:ae8b36f594a1e3aaaf9737aabb7c95ba3 inherit pro_methods_classaudio__tools_1_1_audio_stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A FreeRTOS task is filling the buffer from the indicated stream. </p>
+<div class="textblock"><p>A FreeRTOS task is filling the buffer from the indicated stream. Only to be used on the ESP32. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioHttp/<a class="el" href="_u_r_l_stream_e_s_p32_8h_source.html">URLStreamESP32.h</a></li>
+<li>src/AudioHttp/<a class="el" href="_u_r_l_stream_buffered_8h_source.html">URLStreamBuffered.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -28,7 +28,7 @@ var searchData=
   ['generatormixer_374',['GeneratorMixer',['../classaudio__tools_1_1_generator_mixer.html',1,'audio_tools']]],
   ['generators_375',['Generators',['../group__generator.html',1,'']]],
   ['getactionlogic_376',['getActionLogic',['../classaudio__tools_1_1_audio_kit_stream.html#a429791ee6aa07d099b1e2df39b688507',1,'audio_tools::AudioKitStream']]],
-  ['getclient_377',['getClient',['../classaudio__tools_1_1_u_r_l_stream_default.html#a7d9592dd97b0dce77ba5d436d6424f3e',1,'audio_tools::URLStreamDefault']]],
+  ['getclient_377',['getClient',['../classaudio__tools_1_1_u_r_l_stream.html#a7d9592dd97b0dce77ba5d436d6424f3e',1,'audio_tools::URLStream']]],
   ['getcodec2mode_378',['getCodec2Mode',['../namespaceaudio__tools.html#a02c29ed3c839920a3df31605da651f24',1,'audio_tools']]],
   ['getdsp_379',['getDSP',['../classaudio__tools_1_1_faust_stream.html#a44ca8f6d4255e10517465b61346727d9',1,'audio_tools::FaustStream']]],
   ['getfilebypos_380',['getFileByPos',['../classaudio__tools_1_1_audio_source_s_d_f_a_t.html#a3320b70c0506b6448d4e909ea011048e',1,'audio_tools::AudioSourceSDFAT']]],
