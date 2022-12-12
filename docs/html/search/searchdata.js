@@ -9,7 +9,7 @@ var indexSectionsWithContent =
   6: "apt",
   7: "gilmprt",
   8: "d",
-  9: "8abcdefghiklmnoprstvw",
+  9: "8abcdefghiklmoprstvw",
   10: "a"
 };
 
