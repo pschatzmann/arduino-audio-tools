@@ -14,6 +14,7 @@ class PWMDriverESP32;
  */
 using PWMDriver = PWMDriverESP32;
 static PWMDriverESP32 *accessAudioPWM = nullptr; 
+void IRAM_ATTR defaultPWMAudioOutputCallback();
 
 
 /**
@@ -36,8 +37,8 @@ typedef PinInfoESP32 PinInfo;
  */
 
 class PWMDriverESP32 : public DriverPWMBase {
-    friend void defaultPWMAudioOutputCallback();
     public:
+        friend void defaultPWMAudioOutputCallback();
 
         PWMDriverESP32(){
             TRACED();
@@ -103,7 +104,7 @@ class PWMDriverESP32 : public DriverPWMBase {
             LOGI("-> timer counter is %zu", counter);
             LOGD("-> timerAttachInterrupt");
             bool interrupt_edge_type = true;
-            timerAttachInterrupt(timer, &defaultPWMAudioOutputCallback, interrupt_edge_type);
+            timerAttachInterrupt(timer, defaultPWMAudioOutputCallback, interrupt_edge_type);
             LOGD("-> timerAlarmWrite");
             bool auto_reload = true;
             timerAlarmWrite(timer, counter, auto_reload); // Timer fires at ~44100Hz [40Mhz / 907]
@@ -146,15 +147,15 @@ class PWMDriverESP32 : public DriverPWMBase {
 
       
 };
-
-/// timer callback: write the next frame to the pins
-inline void IRAM_ATTR defaultPWMAudioOutputCallback() {
+        /// timer callback: write the next frame to the pins
+void IRAM_ATTR defaultPWMAudioOutputCallback() {
     if (accessAudioPWM!=nullptr){
         portENTER_CRITICAL_ISR(&(accessAudioPWM->timerMux));
         accessAudioPWM->playNextFrame();
         portEXIT_CRITICAL_ISR(&(accessAudioPWM->timerMux));
     }
 }
+
 
 }
 

@@ -153,7 +153,7 @@ class PWMDriverRP2040 : public DriverPWMBase {
         }
 
         // timed output executed at the sampleRate
-        inline static void defaultPWMAudioOutputCallbackPico(void* ptr) {
+        static void defaultPWMAudioOutputCallbackPico(void* ptr) {
             PWMDriverRP2040 *self = (PWMDriverRP2040*)  ptr;
             self->playNextFrame();
         }

@@ -102,7 +102,7 @@ class PWMDriverMBED : public DriverPWMBase {
         }
 
         /// timer callback: write the next frame to the pins
-        static inline void  defaultPWMAudioOutputCallback(void *obj) {
+        static void  defaultPWMAudioOutputCallback(void *obj) {
             PWMDriverMBED* accessAudioPWM = (PWMDriverMBED*) obj;
             if (accessAudioPWM!=nullptr){
                 accessAudioPWM->playNextFrame();

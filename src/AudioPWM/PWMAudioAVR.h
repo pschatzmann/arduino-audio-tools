@@ -131,7 +131,7 @@ class PWMDriverAVR : public DriverPWMBase {
 };
 
 /// separate method that can be defined as friend so that we can access protected information
-inline void defaultPWMAudioOutputCallback(){
+void defaultPWMAudioOutputCallback(){
     if (accessAudioPWM!=nullptr && accessAudioPWM->is_timer_started){
         accessAudioPWM->playNextFrame();
     }

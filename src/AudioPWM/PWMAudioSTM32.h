@@ -195,7 +195,7 @@ class PWMDriverSTM32 : public DriverPWMBase {
         }
 
         /// timer callback: write the next frame to the pins
-        static inline void  defaultPWMAudioOutputCallback(void *obj) {
+        static void  defaultPWMAudioOutputCallback(void *obj) {
             PWMDriverSTM32* accessAudioPWM = (PWMDriverSTM32*) obj;
             if (accessAudioPWM!=nullptr){
                 accessAudioPWM->playNextFrame();
