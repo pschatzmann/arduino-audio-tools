@@ -2,7 +2,7 @@
 #ifdef USE_URL_ARDUINO
 
 #include "AudioConfig.h"
-#include "AudioHttp/URLStreamESP32.h"
+#include "AudioHttp/URLStreamBuffered.h"
 #include "AudioMetaData/MetaDataICY.h"
 
 namespace audio_tools {
@@ -12,35 +12,35 @@ namespace audio_tools {
  * regular stream functions. The metadata is handled with the help of the MetaDataICY state machine and provided via a callback method.
  * 
  * This is basically just a URLStream with the metadata turned on.
- * 
+ * @ingroup http
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 
 
-class ICYStreamDefault : public AbstractURLStream {
+class ICYStream : public AbstractURLStream {
         
     public:
-        ICYStreamDefault(int readBufferSize=DEFAULT_BUFFER_SIZE){
+        ICYStream(int readBufferSize=DEFAULT_BUFFER_SIZE){
             TRACEI();
-            url = new URLStreamDefault(readBufferSize);
+            url = new URLStream(readBufferSize);
             checkUrl();
         }
 
-        ICYStreamDefault(Client &clientPar, int readBufferSize=DEFAULT_BUFFER_SIZE){
+        ICYStream(Client &clientPar, int readBufferSize=DEFAULT_BUFFER_SIZE){
             TRACEI();
-            url = new URLStreamDefault(clientPar, readBufferSize);
+            url = new URLStream(clientPar, readBufferSize);
             checkUrl();
         }
 
         /// Default constructor
-        ICYStreamDefault(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE) {
+        ICYStream(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE) {
             TRACEI();
-            url = new URLStreamDefault(network, password, readBufferSize);
+            url = new URLStream(network, password, readBufferSize);
             checkUrl();
         }
 
-        ~ICYStreamDefault(){
+        ~ICYStream(){
             TRACEI();
             if (url!=nullptr) delete url;
         }
@@ -83,7 +83,7 @@ class ICYStreamDefault : public AbstractURLStream {
             icy.end();
         }
 
-        /// provides the available method from the URLStreamDefault
+        /// provides the available method from the URLStream
         virtual int available() override  {
             return url->available();
         }
@@ -162,7 +162,7 @@ class ICYStreamDefault : public AbstractURLStream {
 
 
     protected:
-        URLStreamDefault *url = nullptr; 
+        URLStream *url = nullptr; 
         MetaDataICY icy; // icy state machine
         void (*callback)(MetaDataType info, const char* str, int len)=nullptr;
 
@@ -173,32 +173,6 @@ class ICYStreamDefault : public AbstractURLStream {
         }
 
 };
-
-#ifndef USE_URLSTREAM_TASK
-/**
- * @brief ICYStream for all environment except ESP32
- * @ingroup http
- * @author Phil Schatzmann
- * @copyright GPLv3
- */
-class ICYStream : public ICYStreamDefault {
-    public:
-        ICYStream(int readBufferSize=DEFAULT_BUFFER_SIZE)
-        :ICYStreamDefault(readBufferSize){
-            TRACEI();
-        }
-        ICYStream(Client &clientPar, int readBufferSize=DEFAULT_BUFFER_SIZE)
-        :ICYStreamDefault(clientPar, readBufferSize){
-            TRACEI();
-        }
-
-        ICYStream(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE)
-        :ICYStreamDefault(network,password,readBufferSize) {            
-            TRACEI();
-        }
-};
-
-#endif
 
 } // namespace
 #endif
