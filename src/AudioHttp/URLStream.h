@@ -182,7 +182,7 @@ class URLStream : public AbstractURLStream {
         char* network=nullptr;
         char* password=nullptr;
         Client *client=nullptr;
-        WiFiClient *clientInsecure=nullptr;
+        Client *clientInsecure=nullptr;
 #ifdef USE_WIFI_CLIENT_SECURE
         WiFiClientSecure *clientSecure=nullptr;
 #endif
@@ -250,11 +250,16 @@ class URLStream : public AbstractURLStream {
                 return *clientSecure;
             }
 #endif
+#ifdef USE_WIFI
             if (clientInsecure==nullptr){
                 clientInsecure = new WiFiClient();
                 LOGI("WiFiClient");
             }
             return *clientInsecure;
+#else       
+            LOGE("Client not set");
+            stop();
+#endif
         }
 
         inline void fillBuffer() {
@@ -270,7 +275,7 @@ class URLStream : public AbstractURLStream {
         }
 
         void login(){
-#ifndef IS_DESKTOP
+#ifdef IS_WIFI
             LOGD("connectWiFi");
             if (network!=nullptr && password != nullptr && WiFi.status() != WL_CONNECTED){
                 WiFi.begin(network, password);
@@ -281,6 +286,8 @@ class URLStream : public AbstractURLStream {
                 Serial.println();
             }
             delay(500);  
+#else   
+            LOGE("login not supported");
 #endif          
         }
 
