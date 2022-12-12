@@ -259,6 +259,7 @@ class URLStream : public AbstractURLStream {
 #else       
             LOGE("Client not set");
             stop();
+            return *client; // to avoid compiler warning
 #endif
         }
 
