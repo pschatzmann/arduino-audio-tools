@@ -10,7 +10,7 @@
 
 namespace audio_tools {
 
-#ifndef ARDUINO
+#if !defined(ARDUINO) || defined(IS_DESKTOP)
 #  define FLUSH_OVERRIDE override
 #else
 #  define FLUSH_OVERRIDE 

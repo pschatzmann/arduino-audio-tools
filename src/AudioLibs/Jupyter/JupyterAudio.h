@@ -25,6 +25,9 @@ public:
          p_audio_stream->write((const char*)buffer,size);
          return size;
     }
+    int availableForWrite() override {
+      return 1024;
+    }
 protected:
     std::fstream *p_audio_stream=nullptr;
 };
@@ -128,15 +131,17 @@ public:
 
   // fills a wav file with data once, the first time it was requested
   void createWAVFile(){
-    if (!fileExists()){
-        std::fstream fstream(fname, fstream.binary | fstream.trunc | fstream.out);
-        FilePrint fp(fstream);
-        WAVEncoder wave_encoder;
-        EncodedAudioStream out(&fp, &wave_encoder); // output to decoder
-        out.begin(cfg);
-        StreamCopyT<T> copier(out, *p_audio_stream, buffer_count);
-        copier.copyN(buffer_count);
-        fstream.close();
+    try{
+      if (!fileExists()){
+          std::fstream fstream(fname, fstream.binary | fstream.trunc | fstream.out);
+          FilePrint fp(fstream);
+          out.begin(&fp, &wave_encoder); // output to decoder
+          copier.begin(out, *p_audio_stream);
+          copier.copyN(buffer_count);
+          fstream.close();
+      }
+    } catch(const std::exception& ex){
+        std::cerr << ex.what();
     }
   }
 
@@ -165,6 +170,9 @@ public:
 protected:
   AudioStream *p_audio_stream=nullptr;
   ChartT<T> chrt;
+  WAVEncoder wave_encoder;
+  EncodedAudioPrint out;
+  StreamCopyT<T> copier;
   AudioBaseInfo cfg;
   string fname;
   size_t buffer_count=0;
