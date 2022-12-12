@@ -1,13 +1,14 @@
 #pragma once
+#ifdef ESP32
 #include "AudioConfig.h"
-#ifdef USE_URLSTREAM_TASK
+#include "AudioTools/SynchronizedBuffers.h"
 #include "AudioTools/AudioStreams.h"
 #include "AudioHttp/URLStream.h"
 
 namespace audio_tools {
 
 /**
- * @brief A FreeRTOS task is filling the buffer from the indicated stream.
+ * @brief A FreeRTOS task is filling the buffer from the indicated stream. Only to be used on the ESP32
  * 
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -16,12 +17,10 @@ class BufferedTaskStream : public AudioStream {
     public:
         BufferedTaskStream() {
             TRACEI();
-            createMutex();
         };
 
         BufferedTaskStream(AudioStream &input){
             TRACEI();
-            createMutex();
             setInput(input);
         }
 
@@ -68,9 +67,7 @@ class BufferedTaskStream : public AudioStream {
         virtual int read() override {
             //if (!ready) return -1;
             int result = -1;
-            xSemaphoreTake(mutex, portMAX_DELAY);
             result = buffers.read();
-            xSemaphoreGive(mutex);
             return result;
         }
 
@@ -78,9 +75,7 @@ class BufferedTaskStream : public AudioStream {
         virtual int peek() override {
             //if (!ready) return -1;
             int result = -1;
-            xSemaphoreTake(mutex, portMAX_DELAY);
             result = buffers.peek();
-            xSemaphoreGive(mutex);
             return result;
         };
         
@@ -88,12 +83,8 @@ class BufferedTaskStream : public AudioStream {
         virtual size_t readBytes( uint8_t *data, size_t length) override { 
             //if (!ready) return 0;
             size_t result = 0;
-            xSemaphoreTake(mutex, portMAX_DELAY);
             result = buffers.readArray(data, length);
-            xSemaphoreGive(mutex);
-
             LOGD("%s: %zu -> %zu", LOG_METHOD, length, result);
-
             return result;
         }
 
@@ -101,9 +92,7 @@ class BufferedTaskStream : public AudioStream {
         virtual int available() override {
             //if (!ready) return 0;
             int result = 0;
-            xSemaphoreTake(mutex, portMAX_DELAY);
             result = buffers.available();
-            xSemaphoreGive(mutex);
             return result;
         }
 
@@ -111,19 +100,8 @@ class BufferedTaskStream : public AudioStream {
         AudioStream *p_stream=nullptr;
         bool active = false;
         TaskHandle_t xHandle = NULL;
-        SemaphoreHandle_t mutex = NULL; // Lock access to buffer and Serial
-        NBuffer<uint8_t> buffers {DEFAULT_BUFFER_SIZE, URL_STREAM_BUFFER_COUNT};
+        SynchronizedNBuffer<uint8_t> buffers {DEFAULT_BUFFER_SIZE, URL_STREAM_BUFFER_COUNT};
         bool ready = false;
-
-        void createMutex() {
-            TRACED();
-            if (mutex == NULL){
-                mutex = xSemaphoreCreateMutex();
-                if (mutex==NULL){
-                    LOGE("Could not create semaphore");
-                }
-            }
-        }
 
         static void task(void * pvParameters){
             TRACED();
@@ -134,9 +112,7 @@ class BufferedTaskStream : public AudioStream {
                 if (*(self->p_stream) && available_to_write>0){
                     size_t to_read = min(available_to_write, (size_t) 512);
                     size_t avail_read = self->p_stream->readBytes((uint8_t*)buffer, to_read);
-                    xSemaphoreTake(self->mutex, portMAX_DELAY);
                     size_t written = self->buffers.writeArray(buffer, avail_read);
-                    xSemaphoreGive(self->mutex);
 
                     if (written!=avail_read){
                         LOGE("DATA Lost! %zu reqested, %zu written!",avail_read, written);
@@ -155,32 +131,32 @@ class BufferedTaskStream : public AudioStream {
 
 /**
  * @brief URLStream implementation for the ESP32 based on a separate FreeRTOS task 
-* @ingroup http
-* @author Phil Schatzmann
+ * @ingroup http
+ * @author Phil Schatzmann
  * @copyright GPLv3
  */
-x
-class URLStream : public AbstractURLStream {
+
+class URLStreamBuffered : public AbstractURLStream {
     public:
-        URLStream(int readBufferSize=DEFAULT_BUFFER_SIZE){
+        URLStreamBuffered(int readBufferSize=DEFAULT_BUFFER_SIZE){
             TRACED();
-            p_urlStream = new URLStreamDefault(readBufferSize);
+            p_urlStream = new URLStream(readBufferSize);
             taskStream.setInput(*p_urlStream);
         }
 
-        URLStream(Client &clientPar, int readBufferSize=DEFAULT_BUFFER_SIZE){
+        URLStreamBuffered(Client &clientPar, int readBufferSize=DEFAULT_BUFFER_SIZE){
             TRACED();
-            p_urlStream = new URLStreamDefault(clientPar, readBufferSize);
+            p_urlStream = new URLStream(clientPar, readBufferSize);
             taskStream.setInput(*p_urlStream);
         }
 
-        URLStream(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE) {
+        URLStreamBuffered(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE) {
             TRACED();
-            p_urlStream = new URLStreamDefault(network, password, readBufferSize);
+            p_urlStream = new URLStream(network, password, readBufferSize);
             taskStream.setInput(*p_urlStream);
         }
 
-        ~URLStream(){
+        ~URLStreamBuffered(){
             TRACED();
             if (p_urlStream!=nullptr) delete p_urlStream;
         }
@@ -238,7 +214,7 @@ class URLStream : public AbstractURLStream {
 
     protected:
         BufferedTaskStream taskStream;
-        URLStreamDefault* p_urlStream=nullptr;
+        URLStream* p_urlStream=nullptr;
 
 };
 

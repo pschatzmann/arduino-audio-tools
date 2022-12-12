@@ -4,14 +4,14 @@
 #ifdef USE_URL_ARDUINO
 
 #if defined(ESP32)
-#include <Client.h>
-#include <WiFiClientSecure.h>
-#include <esp_wifi.h>
+#  include <Client.h>
+#  include <WiFiClientSecure.h>
+#  include <esp_wifi.h>
 #elif defined(ESP8266)
-#include <ESP8266WiFi.h>
+#  include <ESP8266WiFi.h>
 #elif defined(IS_DESKTOP)
-#include <Client.h>
-#include <WiFiClient.h>
+#  include <Client.h>
+#  include <WiFiClient.h>
 typedef WiFiClient WiFiClientSecure;
 #endif
 
@@ -32,31 +32,32 @@ namespace audio_tools {
 /**
  * @brief Represents the content of a URL as Stream. We use the WiFi.h API
  * @author Phil Schatzmann
+ * @ingroup http
  * @copyright GPLv3
  * 
  */
-class URLStreamDefault : public AbstractURLStream {
+class URLStream : public AbstractURLStream {
     public:
 
-        URLStreamDefault(int readBufferSize=DEFAULT_BUFFER_SIZE){
+        URLStream(int readBufferSize=DEFAULT_BUFFER_SIZE){
             TRACEI();
             read_buffer_size = readBufferSize;
         }
 
-        URLStreamDefault(Client &clientPar, int readBufferSize=DEFAULT_BUFFER_SIZE){
+        URLStream(Client &clientPar, int readBufferSize=DEFAULT_BUFFER_SIZE){
             TRACEI();
             read_buffer_size = readBufferSize;
             client = &clientPar;
         }
 
-        URLStreamDefault(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE) {
+        URLStream(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE) {
             TRACEI();
             read_buffer_size = readBufferSize;
             this->network = (char*)network;
             this->password = (char*)password;            
         }
 
-        ~URLStreamDefault(){
+        ~URLStream(){
             TRACEI();
 #ifdef USE_WIFI_CLIENT_SECURE
             if (clientSecure!=nullptr){
@@ -160,7 +161,7 @@ class URLStreamDefault : public AbstractURLStream {
             clientTimeout = ms;
         }
 
-        /// if set to true, it activates the power save mode which comes at the cost of porformance! - By default this is deactivated.
+        /// if set to true, it activates the power save mode which comes at the cost of porformance! - By default this is deactivated. ESP32 Only!
         void setPowerSave(bool ps){
             is_power_save = ps;
         }
@@ -271,7 +272,7 @@ class URLStreamDefault : public AbstractURLStream {
         void login(){
 #ifndef IS_DESKTOP
             LOGD("connectWiFi");
-            if (WiFi.status() != WL_CONNECTED && network!=nullptr && password != nullptr){
+            if (network!=nullptr && password != nullptr && WiFi.status() != WL_CONNECTED){
                 WiFi.begin(network, password);
                 while (WiFi.status() != WL_CONNECTED){
                     Serial.print(".");
@@ -299,33 +300,6 @@ class URLStreamDefault : public AbstractURLStream {
             return request.available()>0;
         }
 };
-
-#ifndef USE_URLSTREAM_TASK
-
-/**
- * @brief URLStream implementation for all envionments except ESP32
- * @author Phil Schatzmann
- * @copyright GPLv3
- */
-class URLStream : public URLStreamDefault {
-    public:
-        URLStream(int readBufferSize=DEFAULT_BUFFER_SIZE)
-        :URLStreamDefault(readBufferSize){
-            TRACEI();
-        }
-
-        URLStream(Client &clientPar, int readBufferSize=DEFAULT_BUFFER_SIZE)
-        :URLStreamDefault(clientPar, readBufferSize){
-            TRACEI();
-        }
-
-        URLStream(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE)
-        :URLStreamDefault(network,password,readBufferSize) {            
-            TRACEI();
-        }
-};
-
-#endif
 
 }
 

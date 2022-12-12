@@ -29,7 +29,7 @@ namespace audio_tools {
 
 class HttpRequest {
     public:
-        friend class URLStreamDefault;
+        friend class URLStream;
 
         HttpRequest() {
              LOGI("HttpRequest");

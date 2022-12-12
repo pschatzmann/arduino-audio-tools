@@ -1,7 +1,6 @@
 #pragma once
+#ifdef ESP32
 #include "AudioConfig.h"
-#ifdef USE_URLSTREAM_TASK
-
 #include "AudioHttp/ICYStream.h"
 
 namespace audio_tools {
@@ -12,33 +11,33 @@ namespace audio_tools {
  * regular stream functions. The metadata is handled with the help of the MetaDataICY state machine and provided via a callback method.
  * 
  * This is basically just a URLStream with the metadata turned on.
- * 
+ * @ingroup http
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 
-class ICYStream : public AbstractURLStream {
+class ICYStreamBuffered : public AbstractURLStream {
     public:
 
-        ICYStream(int readBufferSize=DEFAULT_BUFFER_SIZE){
+        ICYStreamBuffered(int readBufferSize=DEFAULT_BUFFER_SIZE){
             TRACEI();
-            p_urlStream = new ICYStreamDefault(readBufferSize);
+            p_urlStream = new ICYStream(readBufferSize);
             taskStream.setInput(*p_urlStream);
         }
         
-        ICYStream(Client &clientPar, int readBufferSize=DEFAULT_BUFFER_SIZE){
+        ICYStreamBuffered(Client &clientPar, int readBufferSize=DEFAULT_BUFFER_SIZE){
             TRACEI();
-            p_urlStream = new ICYStreamDefault(clientPar, readBufferSize);
+            p_urlStream = new ICYStream(clientPar, readBufferSize);
             taskStream.setInput(*p_urlStream);
         }
 
-        ICYStream(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE) {
+        ICYStreamBuffered(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE) {
             TRACEI();
-            p_urlStream = new ICYStreamDefault(network, password, readBufferSize);
+            p_urlStream = new ICYStream(network, password, readBufferSize);
             taskStream.setInput(*p_urlStream);
         }
 
-        ~ICYStream(){
+        ~ICYStreamBuffered(){
             TRACEI();
             if (p_urlStream!=nullptr) delete p_urlStream;
         }
@@ -103,7 +102,7 @@ class ICYStream : public AbstractURLStream {
 
     protected:
         BufferedTaskStream taskStream;
-        ICYStreamDefault* p_urlStream=nullptr;
+        ICYStream* p_urlStream=nullptr;
 
 };
 
