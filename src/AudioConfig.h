@@ -170,6 +170,7 @@
 
 #define USE_PWM
 #define USE_URL_ARDUINO
+#define USE_WIFI
 #define USE_WIFI_CLIENT_SECURE
 #define USE_I2S
 #define USE_AUDIO_SERVER
@@ -230,6 +231,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 
 #define USE_PWM
 #define USE_URL_ARDUINO
+#define USE_WIFI
 #define USE_WIFI_CLIENT_SECURE
 #define USE_I2S
 #define USE_AUDIO_SERVER
@@ -282,6 +284,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define USE_EFFECTS_SUITE
 #define USE_TIMER
 #define USE_URL_ARDUINO
+#define USE_WIFI
 
 #define PIN_PWM_START 12
 #define PIN_I2S_BCK -1
@@ -390,6 +393,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 // The Pico W has WIFI support
 #ifdef ARDUINO_RASPBERRY_PI_PICO_W
 #  define USE_URL_ARDUINO
+#  define USE_WIFI
 #  define USE_WIFI_CLIENT_SECURE 
 #  define USE_AUDIO_SERVER
 #endif
@@ -399,7 +403,8 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #ifdef __AVR__
 #define USE_PWM
 #define USE_TIMER
-
+#include <Ethernet.h>
+#define USE_URL_ARDUINO
 #ifndef assert
 #define assert(T)
 #endif
