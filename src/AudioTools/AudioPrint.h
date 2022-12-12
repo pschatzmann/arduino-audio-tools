@@ -10,6 +10,11 @@
 
 namespace audio_tools {
 
+#ifndef ARDUINO
+#  define FLUSH_OVERRIDE override
+#else
+#  define FLUSH_OVERRIDE 
+#endif
 
 /**
  * @brief Abstract Audio Ouptut class
@@ -34,7 +39,7 @@ class AudioPrint : public Print, public AudioBaseInfoDependent, public AudioBase
         }
 
         // removed override because some old implementation did not define this method as virtual
-        virtual void flush()  {
+        virtual void flush() FLUSH_OVERRIDE {
             write((const uint8_t*)tmp, tmpPos-1);
             tmpPos=0;
         }

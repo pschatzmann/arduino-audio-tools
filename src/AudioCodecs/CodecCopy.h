@@ -1,8 +1,9 @@
 #pragma once
 
 #include "AudioCodecs/AudioEncoded.h"
-#include "Stream.h"
-
+#ifdef ARDUINO
+#include "Print.h"
+#endif
 /** 
  * @defgroup codec-copy Copy
  * @ingroup codecs
