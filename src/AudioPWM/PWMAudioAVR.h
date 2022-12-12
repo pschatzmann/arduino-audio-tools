@@ -1,10 +1,9 @@
 
 #pragma once
 #include "AudioConfig.h"
-#ifdef ARDUINO_AVR_NANO
+#if defined(USE_PWM) && defined(__AVR__)
 #include "AudioPWM/PWMAudioBase.h"
 #include "AudioTimer/AudioTimerAVR.h"
-
 
 namespace audio_tools {
 
