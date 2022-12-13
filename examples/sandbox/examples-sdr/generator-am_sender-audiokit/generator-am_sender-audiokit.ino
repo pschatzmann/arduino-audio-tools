@@ -41,11 +41,7 @@ void setup() {
     modulated_data.resize(num_samples);
 
     // define resample we resample the audio data from 44100 to 13M
-    auto cfgr = resample.defaultConfig();
-    cfgr.channels = channels;
-    cfgr.sample_rate_from = sample_rate; 
-    cfgr.sample_rate = sample_rate_carrier; 
-    resample.begin(cfgr); 
+    resample.begin(sample_rate, sample_rate_carrier); 
 
     // setup test tone
     auto cfgs = sound.defaultConfig();

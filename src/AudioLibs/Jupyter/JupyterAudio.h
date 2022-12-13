@@ -40,10 +40,21 @@ protected:
 template <typename T> 
 class ChartT {
 public:
-  void setup(std::string fName, int channels, int channel) {
+  void setup(std::string fName, int channelCount, int channelNo) {
     this->fname = fName;
-    this->channels = channels;
-    this->channel = channel;
+    this->channels = channelCount;
+    if (this->channels==0){
+      LOGE("Setting channels to 0");
+    }
+    this->channel = channelNo;
+  }
+
+  int getChannels() {
+    return this->channels;
+  }
+
+  int getChannel() {
+    return this->channel;
   }
 
   /// Provides data as svg polyline
@@ -80,7 +91,7 @@ protected:
   std::stringstream str;
   std::string fname;
   const int wav_header_size = 44;
-  int channels=1;
+  int channels=0;
   int channel=0;
 
   int transform(int x){
