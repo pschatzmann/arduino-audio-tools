@@ -16,6 +16,10 @@ namespace audio_tools {
 #  define FLUSH_OVERRIDE 
 #endif
 
+#ifndef min
+#  define min(A,B) A<B?A:B
+#endif
+
 /**
  * @brief Abstract Audio Ouptut class
  * @author Phil Schatzmann
@@ -720,6 +724,45 @@ class MemoryPrint : public AudioPrint {
         uint8_t* p_start=nullptr;
         uint8_t *p_next=nullptr;
         size_t max_size;
+
+};
+
+/**
+ * @brief The Print API which writes the data to a byte array
+ */
+class AdapterPrintToArray : public Print {
+    public:
+        void begin(uint8_t* array, int len){
+            p_array = array;
+            size = len;
+            pos = 0;
+        }
+        
+        virtual size_t write(const uint8_t *buffer, size_t bytes) override {
+            int size_eff = min((int)bytes, availableForWrite());
+            memcpy(p_array+pos, buffer, size_eff);
+            pos+=size_eff;
+            return size_eff;
+        }
+
+
+        virtual size_t write(uint8_t ch) override {
+            LOGE("Not Supported")
+            return 0;
+        }
+
+        virtual int availableForWrite() override {
+            return size-pos;
+        }
+
+        virtual int available() {
+            return pos;
+        }
+
+    protected:
+        uint8_t* p_array = nullptr;
+        int size = 0;
+        int pos;
 
 };
 
