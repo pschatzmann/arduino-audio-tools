@@ -40,12 +40,15 @@ void setup() {
     audio_data.resize(num_samples);
     modulated_data.resize(num_samples);
 
+    // define resample
+    auto rcfg = resample.defaultConfig();
     // define resample we resample the audio data from 44100 to 13M
-    resample.begin(sample_rate, sample_rate_carrier); 
+    rcfg.step_size = resample.getStepSize(sample_rate, sample_rate_carrier);
+    rcfg.channels = channels;
+    resample.begin(rcfg); 
 
     // setup test tone
     auto cfgs = sound.defaultConfig();
-    cfgs.sample_rate = sample_rate;
     cfgs.channels = channels;
     sound.begin(cfgs);
 

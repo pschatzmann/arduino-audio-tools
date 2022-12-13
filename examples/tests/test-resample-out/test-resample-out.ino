@@ -16,9 +16,10 @@ void setup(void) {
   AudioLogger::instance().begin(Serial, AudioLogger::Warning);
 
   // define resample
-  int sample_rate_from = sample_rate; 
-  int sample_rate_to = 22050; 
-  resample.begin(sample_rate_from, sample_rate_to); 
+  auto rcfg = resample.defaultConfig();
+  rcfg.step_size = 0.5
+  rcfg.channels = channels;
+  resample.begin(rcfg); 
 
   // Define CSV Output
   auto config = out.defaultConfig();
