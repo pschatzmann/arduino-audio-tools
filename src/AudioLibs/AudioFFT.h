@@ -24,7 +24,7 @@ struct AudioFFTResult {
     float magnitude;
     float frequency;
 
-    int frequncyAsInt(){
+    int frequencyAsInt(){
         return round(frequency);
     }
     const char* frequencyAsNote() {
