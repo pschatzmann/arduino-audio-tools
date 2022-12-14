@@ -330,7 +330,7 @@ class AudioFFTBase : public AudioPrint {
                     result[j]=tmp;
                 }
             }
-            return false;
+            return true;
         }
 
         void writeStrideBuffer(uint8_t* buffer, size_t len){
