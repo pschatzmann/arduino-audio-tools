@@ -204,7 +204,7 @@ class AudioFFTBase : public AudioPrint {
         void resultArray(AudioFFTResult (&result)[N]){
             // initialize to negative value
             for (int j=0;j<N;j++){
-                result[j].fft = -1000000;
+                result[j].magnitude = -1000000;
             }
             // find top n values
             AudioFFTResult act;
@@ -212,7 +212,7 @@ class AudioFFTBase : public AudioPrint {
                 act.magnitude = magnitude(j);
                 act.bin = j;
                 act.frequency = frequency(j);
-                insertSorted(result, act);
+                insertSorted<N>(result, act);
             }
         }
 
@@ -319,7 +319,7 @@ class AudioFFTBase : public AudioPrint {
 
         /// make sure that we do not reuse already found results
         template<int N>
-        bool InsertSorted(AudioFFTResult(&result)[N], AudioFFTResult tmp){
+        bool insertSorted(AudioFFTResult(&result)[N], AudioFFTResult tmp){
             for (int j=0;j<N;j++){
                 if (tmp.magnitude>result[j].magnitude){
                     // shift existing values right
