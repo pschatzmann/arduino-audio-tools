@@ -49,6 +49,16 @@ class int24_t  {
     value[0] = in & 0xFF;
   }
 
+  int24_t& operator=(const int24_t& other){
+    set(other);
+    return *this;
+  }
+
+  int24_t& operator=(const float& other){
+    set((int32_t)other);
+    return *this;
+  }
+
   operator int() const {
     return toInt();
   }  

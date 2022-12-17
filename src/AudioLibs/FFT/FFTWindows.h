@@ -30,7 +30,8 @@ class WindowFunction {
   }
 
   inline float ratio(int idx) {
-    return (static_cast<float>(idx) - 1.0 / samples_minus_1);
+    float result = (static_cast<float>(idx)) / samples_minus_1;
+    return result>1.0 ? 1.0 : result;
   }
 
   inline int samples() { return i_samples; }
