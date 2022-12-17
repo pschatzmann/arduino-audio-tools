@@ -137,16 +137,12 @@ class SingleBuffer : public BaseBuffer<T> {
    */
   SingleBuffer(int size) {
     this->max_size = size;
-    buffer = new T[max_size];
+    buffer.resize(max_size);
     reset();
   }
 
   /**
    * @brief Construct a new Single Buffer w/o allocating any memory
-   *
-   * @param data
-   * @param size
-   * @param len
    */
   SingleBuffer() { reset(); }
 
@@ -158,15 +154,9 @@ class SingleBuffer : public BaseBuffer<T> {
     this->current_write_pos = len;
   }
 
-  virtual ~SingleBuffer() {
-    if (owns_buffer && buffer != nullptr) {
-      delete[] buffer;
-    }
-  }
-
   bool write(T sample) {
     bool result = false;
-    if (buffer != nullptr && current_write_pos < max_size) {
+    if (current_write_pos < max_size) {
       buffer[current_write_pos++] = sample;
       result = true;
     }
@@ -175,7 +165,7 @@ class SingleBuffer : public BaseBuffer<T> {
 
   T read() {
     T result = 0;
-    if (buffer != nullptr && current_read_pos < current_write_pos) {
+    if (current_read_pos < current_write_pos) {
       result = buffer[current_read_pos++];
     }
     return result;
@@ -183,7 +173,7 @@ class SingleBuffer : public BaseBuffer<T> {
 
   T peek() {
     T result = 0;
-    if (buffer != nullptr && current_read_pos < current_write_pos) {
+    if (current_read_pos < current_write_pos) {
       result = buffer[current_read_pos];
     }
     return result;
@@ -198,7 +188,7 @@ class SingleBuffer : public BaseBuffer<T> {
 
   bool isFull() { return availableForWrite() <= 0; }
 
-  T *address() { return buffer; }
+  T *address() { return buffer.data(); }
 
   void reset() {
     current_read_pos = 0;
@@ -214,12 +204,17 @@ class SingleBuffer : public BaseBuffer<T> {
 
   size_t size() { return max_size; }
 
+  void resize(int size){
+    buffer.resize(size);
+    max_size = size;
+  }
+
  protected:
   int max_size = 0;
   int current_read_pos = 0;
   int current_write_pos = 0;
   bool owns_buffer = true;
-  T *buffer = nullptr;
+  Vector<T> buffer{0};
 
   void setWritePos(int pos) { current_write_pos = pos; }
 };
