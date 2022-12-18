@@ -43,6 +43,11 @@ class FFTDriverRealFFT : public FFTDriver {
             return sqrt(p_x[idx] * p_x[idx] + p_f[idx] * p_f[idx]);
         }
 
+        /// magnitude w/o sqrt
+        float magnitudeFast(int idx) override {
+            return (p_x[idx] * p_x[idx] + p_f[idx] * p_f[idx]);
+        }
+
         virtual bool isValid() override{ return p_fft_object!=nullptr; }
 
         ffft::FFTReal <float> *p_fft_object=nullptr;

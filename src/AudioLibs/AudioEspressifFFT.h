@@ -66,10 +66,12 @@ class FFTDriverEspressifFFT : public FFTDriver {
         };
 
         float magnitude(int idx) override { 
-            if (idx<N){
-                return sqrt(p_data[idx*2] * p_data[idx*2] + p_data[idx*2+1] * p_data[idx*2+1]);
-            } 
-            return 0.0f;
+            return sqrt(p_data[idx*2] * p_data[idx*2] + p_data[idx*2+1] * p_data[idx*2+1]);
+        }
+
+        /// magnitude w/o sqrt
+        float magnitudeFast(int idx) override { 
+            return (p_data[idx*2] * p_data[idx*2] + p_data[idx*2+1] * p_data[idx*2+1]);
         }
 
         virtual bool isValid() override{ return p_data!=nullptr && ret==ESP_OK; }

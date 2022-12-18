@@ -69,6 +69,7 @@ class FFTDriver {
         virtual void setValue(int pos, int value) =0;
         virtual void fft() = 0;
         virtual float magnitude(int idx) = 0;
+        virtual float magnitudeFast(int idx) = 0;
         virtual bool isValid() = 0;
 };
 
@@ -235,6 +236,13 @@ class AudioFFTBase : public AudioPrint {
             return p_driver->magnitude(bin);
         }
 
+        float magnitudeFast(int bin){
+            if (bin>=bins){
+                LOGE("Invalid bin %d", bin);
+                return 0;
+            }
+            return p_driver->magnitudeFast(bin);
+        }
         /// Provides the magnitudes as array of size size(). Please note that this method is allocating additinal memory!
         float* magnitudes() {
             if (p_magnitudes==nullptr){
@@ -242,6 +250,17 @@ class AudioFFTBase : public AudioPrint {
             }
             for (int j=0;j<size();j++){
                 p_magnitudes[j]= magnitude(j);
+            }
+            return p_magnitudes;
+        }
+
+        /// Provides the magnitudes w/o calling the square root function as array of size size(). Please note that this method is allocating additinal memory!
+        float* magnitudesFast() {
+            if (p_magnitudes==nullptr){
+                p_magnitudes = new float[size()];
+            }
+            for (int j=0;j<size();j++){
+                p_magnitudes[j]= magnitudeFast(j);
             }
             return p_magnitudes;
         }

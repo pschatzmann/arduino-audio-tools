@@ -40,6 +40,11 @@ class FFTDriverKissFFT : public FFTDriver {
             return sqrt(p_data[idx].r * p_data[idx].r + p_data[idx].i * p_data[idx].i);
         }
 
+        /// magnitude w/o sqrt
+        float magnitudeFast(int idx) override { 
+            return (p_data[idx].r * p_data[idx].r + p_data[idx].i * p_data[idx].i);
+        }
+
         virtual bool isValid() override{ return p_fft_object!=nullptr; }
 
         kiss_fft_cfg p_fft_object=nullptr;
