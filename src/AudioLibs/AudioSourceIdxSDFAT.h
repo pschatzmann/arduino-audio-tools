@@ -55,10 +55,10 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioSourceSDFAT : public AudioSource {
+class AudioSourceIdxSDFAT : public AudioSource {
 public:
   /// Default constructor
-  AudioSourceSDFAT(const char* startFilePath = "/", const char* ext = ".mp3", int chipSelect = PIN_CS, int speedMHz = 2, bool setupIndex=true) {
+  AudioSourceIdxSDFAT(const char* startFilePath = "/", const char* ext = ".mp3", int chipSelect = PIN_CS, int speedMHz = 2, bool setupIndex=true) {
         TRACED();
         LOGI("SD chipSelect: %d", chipSelect);
         LOGI("SD speedMHz: %d", speedMHz);
