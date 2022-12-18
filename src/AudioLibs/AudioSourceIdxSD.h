@@ -30,10 +30,10 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioSourceSD : public AudioSource {
+class AudioSourceIdxSD : public AudioSource {
 public:
   /// Default constructor
-  AudioSourceSD(const char *startFilePath = "/", const char *ext = ".mp3", int chipSelect = PIN_CS, bool setupIndex=true) {
+  AudioSourceIdxSD(const char *startFilePath = "/", const char *ext = ".mp3", int chipSelect = PIN_CS, bool setupIndex=true) {
     start_path = startFilePath;
     exension = ext;
     setup_index = setupIndex;

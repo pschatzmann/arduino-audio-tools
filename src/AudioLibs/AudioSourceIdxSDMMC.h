@@ -30,10 +30,10 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioSourceSDMMC : public AudioSource {
+class AudioSourceIdxSDMMC : public AudioSource {
 public:
   /// Default constructor
-  AudioSourceSDMMC(const char *startFilePath = "/", const char *ext = ".mp3", bool setupIndex=true) {
+  AudioSourceIdxSDMMC(const char *startFilePath = "/", const char *ext = ".mp3", bool setupIndex=true) {
     start_path = startFilePath;
     exension = ext;
     setup_index = setupIndex;
