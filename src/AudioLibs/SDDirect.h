@@ -199,6 +199,7 @@ class SDDirect {
 #if defined(USE_SDFAT) || ESP_IDF_VERSION_MAJOR >= 4 
       LOGD("-> fileNamePath: %s", fileName(file));
       file_path_str.clear();
+      file_path_str = start_dir;
       file_path_str += "/";
       for (int j=0; j<file_path_stack.size(); j++){
          file_path_str += file_path_stack[j]+"/";
