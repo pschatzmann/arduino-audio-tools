@@ -63,7 +63,6 @@ class VolumeStream : public AudioStreamX {
             p_notify = (AudioBaseInfoDependent *)&io;
         }
 
-
         void setTarget(Print &out){
             p_out = &out;
         }
@@ -206,7 +205,6 @@ class VolumeStream : public AudioStreamX {
         LinearVolumeControl linear_vc{true};
         SimulatedAudioPot pot_vc;
         CachedVolumeControl cached_volume{pot_vc};
-        AudioBaseInfoDependent *p_notify = nullptr;
         float *volume_values = nullptr;
         float *factor_for_channel = nullptr;
         bool is_active = false;
