@@ -229,6 +229,10 @@ class SineWaveGenerator : public SoundGenerator<T>{
             return result;
         }
 
+        void setAmplitude(float amp){
+            m_amplitude = amp;
+        }
+
     protected:
         volatile float m_frequency = 0;
         float m_cycles = 0.0; // Varies between 0.0 and 1.0
@@ -672,7 +676,7 @@ class SineFromTable  : public SoundGenerator<T> {
                 step = step_new;
                 is_first = false;
             }
-            LOGI("step: %f", step_new);
+            LOGD("step: %f", step_new);
         }
 
     protected:
