@@ -1,17 +1,17 @@
 /**
  * @file basic-a2dp-fft.ino
  * @brief A2DP Sink with output to FFT.   
- *
+ * For details see the FFT Wiki: https://github.com/pschatzmann/arduino-audio-tools/wiki/FFT
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioEspressifFFT.h" // or AudioKissFFT
+#include "AudioLibs/AudioRealFFT.h" // or any other supported inplementation
 #include "BluetoothA2DPSink.h"
 
 BluetoothA2DPSink a2dp_sink;
-AudioEspressifFFT fft; // or AudioKissFFT
+AudioRealFFT fft; // or any other supported inplementation
 
 // Provide data to FFT
 void writeDataStream(const uint8_t *data, uint32_t length) {
