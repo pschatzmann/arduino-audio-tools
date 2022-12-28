@@ -13,7 +13,8 @@ namespace audio_tools {
  */
 class WM8960Config : public I2SConfig {
   public:
-    WM8960Config(){
+    WM8960Config() : I2SConfig() {}
+    WM8960Config(RxTxMode mode):I2SConfig(mode){
         sample_rate = 44100;
         channels = 2;
         bits_per_sample = 16;
@@ -24,6 +25,8 @@ class WM8960Config : public I2SConfig {
     bool vs1053_enable_pll = true;
     /// masterclock rate for wm8960 - default is 0
     uint32_t vs1053_mclk_hz = 0;
+    /// Define wire if we do not use the default Wire object
+    TwoWire *wire=nullptr;
 };
 
 /**
@@ -41,8 +44,7 @@ public:
 
     WM8960Config defaultConfig(RxTxMode mode=TX_MODE) {
         TRACED();
-        WM8960Config c;
-        c.rx_tx_mode = mode;
+        WM8960Config c(mode);
         return c;
     }
 
@@ -164,6 +166,10 @@ protected:
     }
 
     bool init(RxTxMode mode){
+        // define wire object
+        mtb_wm8960_set_wire(cfg.wire);
+
+        // init depending on mode
         switch(mode){
             case RX_MODE:
                 return mtb_wm8960_init(WM8960_FEATURE_MICROPHONE);
