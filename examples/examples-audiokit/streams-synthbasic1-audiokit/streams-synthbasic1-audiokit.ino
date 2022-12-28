@@ -14,7 +14,7 @@ GeneratedSoundStream<int16_t> in(sine);
 StreamCopy copier(kit, in); 
 
 void actionKeyOn(bool active, int pin, void* ptr){
-  int freq = *((int*)ptr);
+  int freq = *((float*)ptr);
   sine.setFrequency(freq);
   in.begin();
 }
@@ -27,7 +27,7 @@ void actionKeyOff(bool active, int pin, void* ptr){
 void setupActions(){
   // assign buttons to notes
   auto act_low = AudioActions::ActiveLow;
-  static int note[] = {N_C3, N_D3, N_E3, N_F3, N_G3, N_A3}; // frequencies
+  static float note[] = {N_C3, N_D3, N_E3, N_F3, N_G3, N_A3}; // frequencies
   kit.audioActions().add(PIN_KEY1, actionKeyOn, actionKeyOff, act_low, &(note[0])); // C3
   kit.audioActions().add(PIN_KEY2, actionKeyOn, actionKeyOff, act_low, &(note[1])); // D3
   kit.audioActions().add(PIN_KEY3, actionKeyOn, actionKeyOff, act_low, &(note[2])); // E3
