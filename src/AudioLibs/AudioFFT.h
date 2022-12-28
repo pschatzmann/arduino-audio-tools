@@ -28,10 +28,10 @@ struct AudioFFTResult {
         return round(frequency);
     }
     const char* frequencyAsNote() {
-        return AudioFFTNotes.note(frequencyAsInt());
+        return AudioFFTNotes.note(frequency);
     }
-    const char* frequencyAsNote(int &diff) {
-        return AudioFFTNotes.note(frequencyAsInt(), diff);
+    const char* frequencyAsNote(float &diff) {
+        return AudioFFTNotes.note(frequency, diff);
     }
 };
 

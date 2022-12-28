@@ -11,7 +11,7 @@
 #include "AudioTools.h"
 #include "freertos-all.h" // https://github.com/pschatzmann/arduino-freertos-addons
 
-SynchronizedBufferRTOS<int16_t> buffer(nbuffer, mutex);
+SynchronizedBufferRTOS<int16_t> buffer(1024);
 void doWrite(); // forward declaration 
 Task writeTask("write",5000,10, doWrite);  // FreeRTOS task from addons
 
@@ -37,7 +37,7 @@ void setup(){
 void loop(){
     int16_t data[512];
     uint64_t start = micros();
-    buffer.readArray(data, 512));
+    buffer.readArray(data, 512);
 
     // process (verify) data
     int error=0;
