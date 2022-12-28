@@ -13,7 +13,7 @@ float value=0;
 
 // display fft result
 void fftResult(AudioFFTBase &fft){
-    int diff;
+    float diff;
     auto result = fft.result();
     if (result.magnitude>100){
         Serial.print(result.frequency);
