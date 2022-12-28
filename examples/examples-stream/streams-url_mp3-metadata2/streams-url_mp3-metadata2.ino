@@ -21,7 +21,7 @@ URLStream url("ssid","password");
 MetaDataPrint out1; // final output of metadata
 I2SStream i2s; // I2S output
 EncodedAudioStream out2dec(&i2s, new MP3DecoderHelix()); // Decoding stream
-MultiOutput out(out1, out2dec);
+MultiOutput out;
 StreamCopy copier(out, url); // copy url to decoder
 
 // callback for meta data
@@ -35,6 +35,10 @@ void printMetaData(MetaDataType type, const char* str, int len){
 void setup(){
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);  
+
+  // setup multi output
+  out.add(out1);
+  out.add(out2dec);
 
   // setup input
   url.begin("https://pschatzmann.github.io/arduino-audio-tools/resources/audio.mp3","audio/mp3");

@@ -20,7 +20,7 @@ void writeDataStream(const uint8_t *data, uint32_t length) {
 
 // display fft result
 void fftResult(AudioFFTBase &fft){
-    int diff;
+    float diff;
     auto result = fft.result();
     if (result.magnitude>100){
         Serial.print(result.frequency);

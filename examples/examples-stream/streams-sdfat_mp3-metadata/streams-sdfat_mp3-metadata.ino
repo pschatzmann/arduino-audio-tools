@@ -26,7 +26,7 @@ SdFs SD;
 MetaDataPrint outMeta; // final output of metadata
 I2SStream i2s; // I2S output
 EncodedAudioStream out2dec(&i2s, new MP3DecoderHelix()); // Decoding stream
-MultiOutput out(outMeta, out2dec);
+MultiOutput out;
 StreamCopy copier(out, audioFile); // copy url to decoder
 
 // callback for meta data
@@ -40,6 +40,10 @@ void printMetaData(MetaDataType type, const char* str, int len){
 void setup(){
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);  
+
+  // setup multi output
+  out.add(outMeta);
+  out.add(out2dec);
 
   // setup file
   SD.begin(SdSpiConfig(PIN_CS, DEDICATED_SPI, SD_SCK_MHZ(2)));
