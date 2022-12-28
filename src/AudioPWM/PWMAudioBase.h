@@ -15,7 +15,7 @@ namespace audio_tools {
 // Callback for user
 typedef bool (*PWMCallbackType)(uint8_t channels, int16_t* data);
 // Callback used by system
-void defaultPWMAudioOutputCallback();
+static void defaultPWMAudioOutputCallback();
 // Driver classes
 class PWMDriverESP32;
 class PWMDriverRP2040;
