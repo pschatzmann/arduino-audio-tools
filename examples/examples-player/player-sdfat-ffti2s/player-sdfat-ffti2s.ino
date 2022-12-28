@@ -23,7 +23,7 @@ AudioRealFFT fft; // or AudioKissFFT or others
 
 // display fft result
 void fftResult(AudioFFTBase &fft){
-    int diff;
+    float diff;
     auto result = fft.result();
     if (result.magnitude>100){
         Serial.print(result.frequency);
