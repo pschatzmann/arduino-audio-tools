@@ -16,9 +16,6 @@ namespace audio_tools {
 #  define FLUSH_OVERRIDE 
 #endif
 
-#ifndef min
-#  define min(A,B) A<B?A:B
-#endif
 
 /**
  * @brief Abstract Audio Ouptut class
@@ -502,7 +499,7 @@ class OutputMixer : public Print {
         // determine ringbuffer with mininum available data
         size_t samples = size_bytes/sizeof(T);
         for (int j=0;j<output_count;j++){
-            samples = min(samples, (size_t) buffers[j]->available());            
+            samples = MIN(samples, (size_t) buffers[j]->available());            
         }
 
         if (samples>0){
@@ -739,7 +736,7 @@ class AdapterPrintToArray : public Print {
         }
         
         virtual size_t write(const uint8_t *buffer, size_t bytes) override {
-            int size_eff = min((int)bytes, availableForWrite());
+            int size_eff = MIN((int)bytes, availableForWrite());
             memcpy(p_array+pos, buffer, size_eff);
             pos+=size_eff;
             return size_eff;

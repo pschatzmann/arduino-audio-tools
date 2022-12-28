@@ -16,7 +16,7 @@
 #include "espeak.h"
 
 AudioKitStream i2s; 
-ESpeakPROGMEM espeak(i2s);
+ESpeak espeak(i2s);
 
 void setup() {
   Serial.begin(115200);

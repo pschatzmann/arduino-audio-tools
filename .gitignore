@@ -15,6 +15,9 @@ local.properties
 .classpath
 .settings/
 .loadpath
+debug.cfg
+debug_custom.json
+esp32.svd
 
 # External tool builders
 .externalToolBuilders/
