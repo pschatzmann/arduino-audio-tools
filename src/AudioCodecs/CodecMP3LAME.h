@@ -26,9 +26,6 @@ struct AudioInfoLAME :  AudioBaseInfo  {
     AudioInfoLAME (const AudioInfoLAME  &) = default;
 
     int quality = 7; // 0..9.  0=best (very slow).  9=worst.
-#ifdef ESP32
-    int extmem_limit = 10000;
-#endif    
 };
 
 /**
@@ -157,10 +154,6 @@ protected:
     // Create enc only at begin so that we can use psram
     void createEnc(){
         if (enc==nullptr){
-#ifdef ESP32
-            // define psram limit
-            liblame_extmem_enable_limit = info.extmem_limit;
-#endif  
             enc = new liblame::MP3EncoderLAME();
             if (p_print!=nullptr){
                 setOutputStream(*p_print);
