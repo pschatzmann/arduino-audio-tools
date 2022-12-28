@@ -1,3 +1,4 @@
+
 ../examples/examples-basic-api/base-adc-a2dp -> rc=0
 ../examples/examples-basic-api/base-adc-serial -> rc=0
 ../examples/examples-basic-api/base-file_raw-serial -> rc=0
@@ -17,8 +18,8 @@
 ../examples/examples-player/player-url_subclass-i2s -> rc=0
 ../examples/examples-webserver/streams-effect-webserver_wav -> rc=0
 ../examples/examples-webserver/streams-flite-webserver_wav -> rc=0
-../examples/examples-webserver/streams-generator-webserverex_wav -> rc=0
-../examples/examples-webserver/streams-generator-webserverex_wav1 -> rc=0
+../examples/examples-webserver/streams-generator-webserverex_wav -> rc=1/0
+../examples/examples-webserver/streams-generator-webserverex_wav1 -> rc=1/0
 ../examples/examples-webserver/streams-generator-webserver_wav -> rc=0
 ../examples/examples-webserver/streams-i2s-webserver_wav -> rc=0
 ../examples/examples-webserver/streams-sam-webserver_wav -> rc=0
@@ -66,7 +67,7 @@
 ../examples/examples-stream/streams-url_raw-serial -> rc=0
 ../examples/examples-stream/streams-url_vorbis_i2s -> rc=0
 ../examples/examples-stream/streams-url_wav-i2s -> rc=0
-../examples/examples-audiokit/audiokit-effects-audiokit -> rc=0
+../examples/examples-audiokit/audiokit-effects-audiokit -> rc=1/0
 ../examples/examples-audiokit/basic-a2dp-audiokit -> rc=0
 ../examples/examples-audiokit/basic-a2dp-eq-audiokit -> rc=0
 ../examples/examples-audiokit/basic-audiokit-a2dp -> rc=0
@@ -86,7 +87,7 @@
 ../examples/examples-audiokit/streams-audiokit-serial -> rc=0
 ../examples/examples-audiokit/streams-audiokit-tf -> rc=0
 ../examples/examples-audiokit/streams-audiokit-webserver_aac -> rc=0
-../examples/examples-audiokit/streams-audiokit-webserver_mp3 -> rc=1
+../examples/examples-audiokit/streams-audiokit-webserver_mp3 -> rc=1/0
 ../examples/examples-audiokit/streams-audiokit-webserver_wav -> rc=0
 ../examples/examples-audiokit/streams-generator-audiokit -> rc=0
 ../examples/examples-audiokit/streams-generator_fromarray-audiokit -> rc=0
@@ -97,7 +98,7 @@
 ../examples/examples-audiokit/streams-memory_pcm-mixer-audiokit -> rc=0
 ../examples/examples-audiokit/streams-pins-audiokit -> rc=0
 ../examples/examples-audiokit/streams-sd-audiokit -> rc=0
-../examples/examples-audiokit/streams-synth-a2dp -> rc=1
+../examples/examples-audiokit/streams-synth-a2dp -> rc=0
 ../examples/examples-audiokit/streams-synth-audiokit -> rc=0
 ../examples/examples-audiokit/streams-synthbasic1-audiokit -> rc=0
 ../examples/examples-audiokit/streams-synthbasic2-audiokit -> rc=0
