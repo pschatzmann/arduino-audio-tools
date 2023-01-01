@@ -6,7 +6,8 @@
 namespace audio_tools {
 
 /**
- * @brief 24bit integer which is used for I2S sound processing. The values are represented as int32_t, but only 3 bytes are used. 
+ * @brief 24bit integer which is used for I2S sound processing. The values are represented as int32_t, but only 3 bytes are used.
+ * If you assign values which are too big, they are clipped. 
  * @ingroup basic
  * @author Phil Schatzmann
  * @copyright GPLv3
