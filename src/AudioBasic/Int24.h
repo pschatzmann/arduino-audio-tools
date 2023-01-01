@@ -19,7 +19,7 @@ class int24_t  {
   }
 
   int24_t(void *ptr) {
-      memcpy(value, ptr, 4);
+      memcpy(&value, ptr, 4);
   }
 
   int24_t(const int16_t &in) {
@@ -87,12 +87,12 @@ class int24_t  {
 
   /// provides value between -32767 and 32767
   int16_t scale16() const {
-    return toInt() * INT16_MAX / INT24_MAX;
+    return toInt() >> 8;
   }
 
   /// provides value between -2,147,483,647 and 2,147,483,647
   int32_t scale32() const {
-    return toInt()  *  (INT32_MAX / INT24_MAX); 
+    return toInt() << 8;
   }
 
   /// provides value between -1.0 and 1.0
