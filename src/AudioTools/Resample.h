@@ -10,7 +10,9 @@ namespace audio_tools {
  * 
  */
 struct ResampleConfig : public AudioBaseInfo {
-    float step_size=1;
+    float step_size=1.0f;
+    /// Optional fixed target sample rate
+    int to_sample_rate = 0;
 };
 
 /**
@@ -57,11 +59,13 @@ class ResampleStream : public AudioStreamX {
     }
 
     bool begin(ResampleConfig cfg){
+        to_sample_rate = cfg.to_sample_rate;
         setAudioInfo(cfg);
         return begin(cfg.step_size);
     }
 
     bool begin(int fromRate, int toRate){
+        to_sample_rate = toRate;
         return begin(getStepSize(fromRate, toRate));
     }
 
@@ -75,6 +79,10 @@ class ResampleStream : public AudioStreamX {
     void setAudioInfo(AudioBaseInfo info) override {
         AudioStream::setAudioInfo(info);
         setChannels(info.channels);
+        // update the step size if a fixed to_sample_rate has been defined
+        if (to_sample_rate!=0){
+            setStepSize(getStepSize(info.sample_rate, to_sample_rate));
+        }
     }
 
     /// Defines the number of channels 
@@ -85,6 +93,7 @@ class ResampleStream : public AudioStreamX {
 
     /// influence the sample rate
     void setStepSize(float step){
+        LOGI("setStepSize: %f", step);
         step_size = step;
     }
 
@@ -134,7 +143,8 @@ class ResampleStream : public AudioStreamX {
     Vector<uint8_t> read_buffer{0};
     AdapterPrintToArray print_to_array;
     bool is_first = true;
-    float step_size=1;
+    float step_size=1.0;
+    int to_sample_rate = 0;
 
     /// Writes the buffer to p_out after resampling
     size_t write(Print *p_out, const uint8_t* buffer, size_t bytes, size_t &written )  {
