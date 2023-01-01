@@ -6,7 +6,9 @@
 namespace audio_tools {
 
 /**
- * @brief 24bit integer which is used for I2S sound processing. The values are represented as int32_t, but only 3 bytes are used. 
+ * @brief 24bit integer which is used for I2S sound processing. The values are really using 3 bytes.
+ * It works only on
+ * little endian machines!
  * @ingroup basic
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -15,15 +17,19 @@ namespace audio_tools {
 class int24_t  {
  public:
   int24_t() {
-    value = 0;
+    value[0] = 0;
+    value[1] = 0;
+    value[2] = 0;
   }
 
   int24_t(void *ptr) {
-      memcpy(value, ptr, 4);
+      memcpy(value, ptr, 3);
   }
 
   int24_t(const int16_t &in) {
-    value = in;
+    value[2] = in > 0 ? 0 : 0xFF;
+    value[1] = (in >> 8) & 0xFF;
+    value[0] = in & 0xFF;
   }
 
   int24_t(const int32_t &in) {
@@ -38,15 +44,10 @@ class int24_t  {
 
 #endif
 
-  /// values are clipped 
-  inline void set(const int32_t &in) {
-    if (in>INT24_MAX){
-      value = INT24_MAX;
-    } else if (in<-INT24_MAX){
-      value = -INT24_MAX;
-    } else {
-      value = in;
-    }
+  void set(const int32_t &in) {
+    value[2] = (in >> 16) & 0xFF;
+    value[1] = (in >> 8) & 0xFF;
+    value[0] = in & 0xFF;
   }
 
   int24_t& operator=(const int24_t& other){
@@ -79,7 +80,13 @@ class int24_t  {
 
   /// Standard Conversion to Int
   int toInt() const {
-    return value;
+    int newInt = ((((int32_t)0xFF & value[0]) << 16) | (((int32_t)0xFF & value[1]) << 8) | ((int32_t)0xFF & value[2]));
+    if ((newInt & 0x00800000) > 0) {
+      newInt |= 0xFF000000;
+    } else {
+      newInt &= 0x00FFFFFF;
+    }
+    return newInt;
   }  
 
   /// convert to float
@@ -100,17 +107,18 @@ class int24_t  {
 
 
   void setAndScale16(int16_t i16) {
-    value = i16;
-    value = value << 8;
+    value[0] = 0;  // clear trailing byte
+    int16_t *p16 = (int16_t *)&value[1];
+    *p16 = i16;
   }
-  
   int16_t getAndScale16() {
-    return value >> 8;
+    int16_t *p16 = (int16_t *)&value[1];
+    return *p16;
   }
 
 
  private:
-  int32_t value;
+  uint8_t value[3];
 };
 
 
