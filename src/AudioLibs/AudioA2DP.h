@@ -301,7 +301,6 @@ class A2DPStream : public AudioStream {
         // auto-detect device to send audio to (TX-Mode)
         static bool detectedDevice(const char* ssid, esp_bd_addr_t address, int rssi){
             LOGW("found SSID: %s", ssid);
-            cfg.name=(char*)ssid;
             return true;
         }
     
