@@ -143,6 +143,10 @@ class A2DPStream : public AudioStream {
                     source(); // allocate object
                     a2dp_source->set_auto_reconnect(cfg.auto_reconnect);
                     a2dp_source->set_volume(volume * 100);
+                    if(cfg.name==nullptr){
+                        //search next available device
+                        a2dp_source->set_ssid_callback(detectedDevice);
+                    }
                     a2dp_source->set_on_connection_state_changed(a2dpStateCallback, this);
                     a2dp_source->start((char*)cfg.name, a2dp_stream_source_sound_data);  
                     while(!a2dp_source->is_connected()){
@@ -291,6 +295,12 @@ class A2DPStream : public AudioStream {
         // semaphore to synchronize acess to the buffer
         SemaphoreHandle_t xSemaphore = NULL;
 
+        // auto-detect device to send audio to (TX-Mode)
+        static bool detectedDevice(const char* ssid, esp_bd_addr_t address, int rssi){
+            LOGW("available SSID: %s", ssid);
+            return true;
+        }
+    
         static void a2dpStateCallback(esp_a2d_connection_state_t state, void *caller){
             TRACED();
             A2DPStream *self = (A2DPStream*)caller;
