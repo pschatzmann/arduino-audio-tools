@@ -101,9 +101,11 @@ public:
   }
 
   virtual Stream *selectStream(int index) override {
-    LOGI("selectStream: %d", index);
-    idx_pos = index;
-    return selectStream(idx[index]);
+    LOGI("selectStream SDFAT: %d", index);
+    if(index > -1){ //avoid invalid position
+      idx_pos = index;
+    }
+    return selectStream(idx[idx_pos]);
   }
 
   virtual Stream *selectStream(const char *path) override {
