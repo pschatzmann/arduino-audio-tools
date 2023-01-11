@@ -173,7 +173,7 @@ class I2SDriverESP32 {
       // setup pin config
       if (this->cfg.signal_type == Digital || this->cfg.signal_type == PDM  ) {
         i2s_pin_config_t pin_config = {
-#if ESP_IDF_VERSION_MAJOR >= 4 
+#if ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(4, 4, 0)                 
             .mck_io_num = cfg.pin_mck,
 #endif
             .bck_io_num = cfg.pin_bck,
