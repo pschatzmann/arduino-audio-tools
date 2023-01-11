@@ -146,6 +146,7 @@ public:
       if (!fileExists()){
           std::fstream fstream(fname, fstream.binary | fstream.trunc | fstream.out);
           FilePrint fp(fstream);
+          wave_encoder.setAudioInfo(audioInfo());
           out.begin(&fp, &wave_encoder); // output to decoder
           copier.begin(out, *p_audio_stream);
           copier.copyN(buffer_count);

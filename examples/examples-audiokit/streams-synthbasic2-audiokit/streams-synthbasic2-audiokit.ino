@@ -11,10 +11,10 @@
 
 AudioKitStream kit;
 SineWaveGenerator<int16_t> sine;
-AudioEffects<SineWaveGenerator<int16_t>> effects(sine);
+GeneratedSoundStream<int16_t> sine_stream(sine); 
+AudioEffectStream effects(sine_stream);
 ADSRGain adsr(0.0001,0.0001, 0.9 , 0.0002);
-GeneratedSoundStream<int16_t> in(effects); 
-StreamCopy copier(kit, in); 
+StreamCopy copier(kit, effects); 
 
 void actionKeyOn(bool active, int pin, void* ptr){
   Serial.println("KeyOn");
@@ -56,7 +56,8 @@ void setup() {
 
   // Setup sound generation based on AudioKit settins
   sine.begin(cfg, 0);
-  in.begin(cfg);
+  sine_stream.begin(cfg);
+  effects.begin(cfg);
 
   // activate keys
   setupActions();

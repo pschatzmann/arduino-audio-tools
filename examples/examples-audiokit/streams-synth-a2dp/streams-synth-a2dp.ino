@@ -8,7 +8,6 @@
 #define USE_MIDI
 #include "BluetoothA2DPSource.h"
 #include "AudioTools.h"
-#include "AudioEffects/Synthesizer.h"
 #include "AudioLibs/AudioKit.h"
 
 BluetoothA2DPSource a2dp_source;
