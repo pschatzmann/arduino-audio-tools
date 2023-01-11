@@ -18,7 +18,7 @@ StreamCopy copier(kit, effects);
 
 void actionKeyOn(bool active, int pin, void* ptr){
   Serial.println("KeyOn");
-  int freq = *((float*)ptr);
+  float freq = *((float*)ptr);
   sine.setFrequency(freq);
   adsr.keyOn();
 }

@@ -72,7 +72,6 @@
 #include "AudioEffects/SoundGenerator.h"
 #include "AudioEffects/AudioEffects.h"
 #include "AudioEffects/PitchShift.h"
-#include "AudioEffects/Synthesizer.h"
 #include "AudioMetaData/MetaData.h"
 #include "AudioHttp/AudioHttp.h"
 #include "AudioTools/AudioPlayer.h"
@@ -82,8 +81,13 @@
  * @brief Optional external libraries
  * 
  */
+
+#ifdef ARDUINO
+#  include "AudioEffects/Synthesizer.h"
+#endif
+
 #if defined(USE_I2S)
-#include "AudioTools/AudioSPDIF.h"
+#  include "AudioTools/AudioSPDIF.h"
 #endif
 
 
