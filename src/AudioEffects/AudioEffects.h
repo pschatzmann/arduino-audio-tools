@@ -68,7 +68,7 @@ class AudioEffectCommon {
 };
 
 /**
- * @brief AudioEffects: the template class describes the input audio to which the effects are applied: 
+ * @brief OBSOLETE AudioEffects: the template class describes the input audio to which the effects are applied: 
  * e.g. SineWaveGenerator, SquareWaveGenerator, GeneratorFromStream etc. 
  * We support only one channel of int16_t data!
  * 
@@ -194,8 +194,10 @@ class AudioEffects : public SoundGenerator<effect_t> {
 /**
  * @brief EffectsStreamT: the template class describes an input or output stream to which one or multiple 
  * effects are applied. The number of channels are used to merge the samples of one frame into one sample
- * before outputting the result as a frame (by repeating the result sample for each channel)
- *   
+ * before outputting the result as a frame (by repeating the result sample for each channel).
+ * Currently only int16_t values are supported, so I recommend to use the __AudioEffectStream__ class which is defined as 
+ * using AudioEffectStream = AudioEffectStreamT<effect_t>;
+  
  * @ingroup effects transform
  * @author Phil Schatzmann
  * @copyright GPLv3*/
