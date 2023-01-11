@@ -191,7 +191,7 @@ class DefaultGuitarChannel : public DefaultSynthesizerChannel<AudioEffects<Gener
  */
 struct SynthesizerKey {
     int pin;
-    int note;
+    float note;
 };
 
 /**
