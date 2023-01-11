@@ -25,8 +25,8 @@ float tremoloDepth = 0.5;
 
 // Audio 
 SineWaveGenerator<int16_t> sine;
-AudioEffects<SineWaveGenerator<int16_t>> effects(sine);
-GeneratedSoundStream<int16_t> in(effects); 
+GeneratedSoundStream<int16_t> stream(sine); 
+AudioEffectStream effects(stream);
 
 // Audio Format
 const int sample_rate = 10000;
@@ -44,12 +44,13 @@ void setup() {
   effects.addEffect(new Tremolo(tremoloDuration, tremoloDepth, sample_rate));
 
   // start server
-  auto config = in.defaultConfig();
+  auto config = stream.defaultConfig();
   config.channels = channels;
   config.sample_rate = sample_rate;
-  server.begin(in, config);
+  server.begin(effects, config);
   sine.begin(config, N_B4);
-  in.begin(config);
+  stream.begin(config);
+  effects.begin(config);
 
 }
 

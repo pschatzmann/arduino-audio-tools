@@ -12,7 +12,11 @@
 #include <Midi.h>
 
 SineWaveGenerator<int16_t> sine;
+GeneratedSoundStream<int16_t> sine_stream(sine); 
 ADSRGain adsr(0.0001,0.0001, 0.9 , 0.0002);
+AudioEffectStream effects(sine_stream);
+AudioKitStream kit;
+StreamCopy copier(kit, effects); 
 
 class SynthAction : public MidiAction {
     public:
@@ -29,10 +33,7 @@ class SynthAction : public MidiAction {
 } action;
 
 MidiBleServer ble("MidiServer", &action);
-AudioKitStream kit;
-AudioEffects<SineWaveGenerator<int16_t>> effects(sine);
-GeneratedSoundStream<int16_t> in(effects); 
-StreamCopy copier(kit, in); 
+
 
 void actionKeyOn(bool active, int pin, void* ptr){
   Serial.println("KeyOn");
@@ -74,7 +75,8 @@ void setup() {
 
   // Setup sound generation based on AudioKit settins
   sine.begin(cfg, 0);
-  in.begin(cfg);
+  sine_stream.begin(cfg);
+  effects.begin(cfg);
 
   // activate keys
   setupActions();

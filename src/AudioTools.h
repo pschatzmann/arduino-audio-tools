@@ -72,6 +72,7 @@
 #include "AudioEffects/SoundGenerator.h"
 #include "AudioEffects/AudioEffects.h"
 #include "AudioEffects/PitchShift.h"
+#include "AudioEffects/Synthesizer.h"
 #include "AudioMetaData/MetaData.h"
 #include "AudioHttp/AudioHttp.h"
 #include "AudioTools/AudioPlayer.h"
