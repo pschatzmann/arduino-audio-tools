@@ -1086,7 +1086,7 @@ class InputMixer : public AudioStreamX {
     }
 
     /// Remove all input streams
-    void end() {
+    void end() override {
       streams.clear();
       weights.clear();
       total_weights = 0.0;
@@ -1099,7 +1099,7 @@ class InputMixer : public AudioStreamX {
 
     /// Provides the data from all streams mixed together 
     size_t readBytes(uint8_t* data, size_t len) override {
-      LOGD("readBytes: %d",len);
+      LOGD("readBytes: %d",(int)len);
       int sample_count = len / sizeof(T);
       T* samples_result = (T*)data;
       memset(data,0, len); // clear data so that we can add values
@@ -1107,7 +1107,7 @@ class InputMixer : public AudioStreamX {
       T* buffer_in = (T*)&buffer[0];
       for (int j=0;j<size();j++){
         float weight = weights[j];
-        LOGD("adding stream %d with len %d with weight %f",j, len, weight);
+        LOGD("adding stream %d with len %d with weight %f",j, (int)len, weight);
         memset(&buffer[0],0, len); // if no data is read we have an array of 0
         streams[j]->readBytes(&buffer[0], len);
         for (int i=0;i<sample_count; i++){
