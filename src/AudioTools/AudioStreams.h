@@ -1131,7 +1131,6 @@ class InputMixer : public AudioStreamX {
 
   protected:
     Vector<Stream*> streams{10};
-    Vector<uint8_t> buffer{DEFAULT_BUFFER_SIZE};
     Vector<float> weights{10}; 
     float total_weights = 0.0;
 
