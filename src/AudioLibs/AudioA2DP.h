@@ -300,8 +300,9 @@ class A2DPStream : public AudioStream {
 
         // auto-detect device to send audio to (TX-Mode)
         static bool detectedDevice(const char* ssid, esp_bd_addr_t address, int rssi){
-            LOGW("found SSID: %s", ssid);
-            return true;
+            LOGW("found Device: %s rssi: %d", ssid, rssi);
+            //filter out weak signals
+            return (rssi > -75);
         }
     
         static void a2dpStateCallback(esp_a2d_connection_state_t state, void *caller){
