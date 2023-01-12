@@ -80,7 +80,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>24bit integer which is used for I2S sound processing. It works only on little endian machines!  
+<p>24bit integer which is used for I2S sound processing. The values are represented as int32_t, but only 3 bytes are used. If you assign values which are too big, they are clipped.  
  <a href="classaudio__tools_1_1int24__t.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_int24_8h_source.html">Int24.h</a>&gt;</code></p>
@@ -90,33 +90,67 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2917de251feb875db281d151035455bd"><td class="memItemLeft" align="right" valign="top"><a id="a2917de251feb875db281d151035455bd" name="a2917de251feb875db281d151035455bd"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>int24_t</b> (const int &amp;in)</td></tr>
 <tr class="separator:a2917de251feb875db281d151035455bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2917de251feb875db281d151035455bd"><td class="memItemLeft" align="right" valign="top"><a id="a2917de251feb875db281d151035455bd" name="a2917de251feb875db281d151035455bd"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>int24_t</b> (const int &amp;in)</td></tr>
+<tr class="separator:a2917de251feb875db281d151035455bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6987fa60243c7e10e569c17b2c7fec5"><td class="memItemLeft" align="right" valign="top"><a id="ac6987fa60243c7e10e569c17b2c7fec5" name="ac6987fa60243c7e10e569c17b2c7fec5"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>int24_t</b> (const int16_t &amp;in)</td></tr>
+<tr class="separator:ac6987fa60243c7e10e569c17b2c7fec5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac6987fa60243c7e10e569c17b2c7fec5"><td class="memItemLeft" align="right" valign="top"><a id="ac6987fa60243c7e10e569c17b2c7fec5" name="ac6987fa60243c7e10e569c17b2c7fec5"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>int24_t</b> (const int16_t &amp;in)</td></tr>
 <tr class="separator:ac6987fa60243c7e10e569c17b2c7fec5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5aac6aebce51fddd7f5c156530b2653"><td class="memItemLeft" align="right" valign="top"><a id="af5aac6aebce51fddd7f5c156530b2653" name="af5aac6aebce51fddd7f5c156530b2653"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>int24_t</b> (const int32_t &amp;in)</td></tr>
 <tr class="separator:af5aac6aebce51fddd7f5c156530b2653"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5aac6aebce51fddd7f5c156530b2653"><td class="memItemLeft" align="right" valign="top"><a id="af5aac6aebce51fddd7f5c156530b2653" name="af5aac6aebce51fddd7f5c156530b2653"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>int24_t</b> (const int32_t &amp;in)</td></tr>
+<tr class="separator:af5aac6aebce51fddd7f5c156530b2653"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52285dcf4240f3202de144eb2018b708"><td class="memItemLeft" align="right" valign="top"><a id="a52285dcf4240f3202de144eb2018b708" name="a52285dcf4240f3202de144eb2018b708"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>int24_t</b> (void *ptr)</td></tr>
+<tr class="separator:a52285dcf4240f3202de144eb2018b708"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52285dcf4240f3202de144eb2018b708"><td class="memItemLeft" align="right" valign="top"><a id="a52285dcf4240f3202de144eb2018b708" name="a52285dcf4240f3202de144eb2018b708"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>int24_t</b> (void *ptr)</td></tr>
 <tr class="separator:a52285dcf4240f3202de144eb2018b708"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5bf95dd08b6fdf582416b414d24812f1"><td class="memItemLeft" align="right" valign="top"><a id="a5bf95dd08b6fdf582416b414d24812f1" name="a5bf95dd08b6fdf582416b414d24812f1"></a>
 int16_t&#160;</td><td class="memItemRight" valign="bottom"><b>getAndScale16</b> ()</td></tr>
 <tr class="separator:a5bf95dd08b6fdf582416b414d24812f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bf95dd08b6fdf582416b414d24812f1"><td class="memItemLeft" align="right" valign="top"><a id="a5bf95dd08b6fdf582416b414d24812f1" name="a5bf95dd08b6fdf582416b414d24812f1"></a>
+int16_t&#160;</td><td class="memItemRight" valign="bottom"><b>getAndScale16</b> ()</td></tr>
+<tr class="separator:a5bf95dd08b6fdf582416b414d24812f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48d27bd92e68c69527589ea65a9af69f"><td class="memItemLeft" align="right" valign="top"><a id="a48d27bd92e68c69527589ea65a9af69f" name="a48d27bd92e68c69527589ea65a9af69f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>operator int</b> () const</td></tr>
+<tr class="separator:a48d27bd92e68c69527589ea65a9af69f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48d27bd92e68c69527589ea65a9af69f"><td class="memItemLeft" align="right" valign="top"><a id="a48d27bd92e68c69527589ea65a9af69f" name="a48d27bd92e68c69527589ea65a9af69f"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>operator int</b> () const</td></tr>
 <tr class="separator:a48d27bd92e68c69527589ea65a9af69f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23ebc8d28e1f1e86c98062137827b365"><td class="memItemLeft" align="right" valign="top"><a id="a23ebc8d28e1f1e86c98062137827b365" name="a23ebc8d28e1f1e86c98062137827b365"></a>
 <a class="el" href="classaudio__tools_1_1int24__t.html">int24_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator+=</b> (int32_t value)</td></tr>
 <tr class="separator:a23ebc8d28e1f1e86c98062137827b365"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23ebc8d28e1f1e86c98062137827b365"><td class="memItemLeft" align="right" valign="top"><a id="a23ebc8d28e1f1e86c98062137827b365" name="a23ebc8d28e1f1e86c98062137827b365"></a>
+<a class="el" href="classaudio__tools_1_1int24__t.html">int24_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator+=</b> (int32_t value)</td></tr>
+<tr class="separator:a23ebc8d28e1f1e86c98062137827b365"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e617782031db11dbfeaca9d8b610dcb"><td class="memItemLeft" align="right" valign="top"><a id="a9e617782031db11dbfeaca9d8b610dcb" name="a9e617782031db11dbfeaca9d8b610dcb"></a>
+<a class="el" href="classaudio__tools_1_1int24__t.html">int24_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator-=</b> (int32_t value)</td></tr>
+<tr class="separator:a9e617782031db11dbfeaca9d8b610dcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e617782031db11dbfeaca9d8b610dcb"><td class="memItemLeft" align="right" valign="top"><a id="a9e617782031db11dbfeaca9d8b610dcb" name="a9e617782031db11dbfeaca9d8b610dcb"></a>
 <a class="el" href="classaudio__tools_1_1int24__t.html">int24_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator-=</b> (int32_t value)</td></tr>
 <tr class="separator:a9e617782031db11dbfeaca9d8b610dcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5226017397111db14efbae7e1d4dba0d"><td class="memItemLeft" align="right" valign="top"><a id="a5226017397111db14efbae7e1d4dba0d" name="a5226017397111db14efbae7e1d4dba0d"></a>
 <a class="el" href="classaudio__tools_1_1int24__t.html">int24_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const float &amp;other)</td></tr>
 <tr class="separator:a5226017397111db14efbae7e1d4dba0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5226017397111db14efbae7e1d4dba0d"><td class="memItemLeft" align="right" valign="top"><a id="a5226017397111db14efbae7e1d4dba0d" name="a5226017397111db14efbae7e1d4dba0d"></a>
+<a class="el" href="classaudio__tools_1_1int24__t.html">int24_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const float &amp;other)</td></tr>
+<tr class="separator:a5226017397111db14efbae7e1d4dba0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea9c4e5a21cb3cfff17672fe2b2853e5"><td class="memItemLeft" align="right" valign="top"><a id="aea9c4e5a21cb3cfff17672fe2b2853e5" name="aea9c4e5a21cb3cfff17672fe2b2853e5"></a>
 <a class="el" href="classaudio__tools_1_1int24__t.html">int24_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classaudio__tools_1_1int24__t.html">int24_t</a> &amp;other)</td></tr>
 <tr class="separator:aea9c4e5a21cb3cfff17672fe2b2853e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea9c4e5a21cb3cfff17672fe2b2853e5"><td class="memItemLeft" align="right" valign="top"><a id="aea9c4e5a21cb3cfff17672fe2b2853e5" name="aea9c4e5a21cb3cfff17672fe2b2853e5"></a>
+<a class="el" href="classaudio__tools_1_1int24__t.html">int24_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classaudio__tools_1_1int24__t.html">int24_t</a> &amp;other)</td></tr>
+<tr class="separator:aea9c4e5a21cb3cfff17672fe2b2853e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5de9df15c4ca32db1246fd57eb79e40"><td class="memItemLeft" align="right" valign="top"><a id="ab5de9df15c4ca32db1246fd57eb79e40" name="ab5de9df15c4ca32db1246fd57eb79e40"></a>
+int16_t&#160;</td><td class="memItemRight" valign="bottom"><b>scale16</b> () const</td></tr>
+<tr class="memdesc:ab5de9df15c4ca32db1246fd57eb79e40"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides value between -32767 and 32767 <br /></td></tr>
+<tr class="separator:ab5de9df15c4ca32db1246fd57eb79e40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab5de9df15c4ca32db1246fd57eb79e40"><td class="memItemLeft" align="right" valign="top"><a id="ab5de9df15c4ca32db1246fd57eb79e40" name="ab5de9df15c4ca32db1246fd57eb79e40"></a>
 int16_t&#160;</td><td class="memItemRight" valign="bottom"><b>scale16</b> () const</td></tr>
 <tr class="memdesc:ab5de9df15c4ca32db1246fd57eb79e40"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides value between -32767 and 32767 <br /></td></tr>
@@ -125,16 +159,35 @@ int16_t&#160;</td><td class="memItemRight" valign="bottom"><b>scale16</b> () con
 int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>scale32</b> () const</td></tr>
 <tr class="memdesc:a7f0c0806ea9d9ccd6fff33eb2af10768"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides value between -2,147,483,647 and 2,147,483,647 <br /></td></tr>
 <tr class="separator:a7f0c0806ea9d9ccd6fff33eb2af10768"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f0c0806ea9d9ccd6fff33eb2af10768"><td class="memItemLeft" align="right" valign="top"><a id="a7f0c0806ea9d9ccd6fff33eb2af10768" name="a7f0c0806ea9d9ccd6fff33eb2af10768"></a>
+int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>scale32</b> () const</td></tr>
+<tr class="memdesc:a7f0c0806ea9d9ccd6fff33eb2af10768"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides value between -2,147,483,647 and 2,147,483,647 <br /></td></tr>
+<tr class="separator:a7f0c0806ea9d9ccd6fff33eb2af10768"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3f975477e832379629a455ed04bae0c"><td class="memItemLeft" align="right" valign="top"><a id="ad3f975477e832379629a455ed04bae0c" name="ad3f975477e832379629a455ed04bae0c"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>scaleFloat</b> () const</td></tr>
+<tr class="memdesc:ad3f975477e832379629a455ed04bae0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides value between -1.0 and 1.0 <br /></td></tr>
+<tr class="separator:ad3f975477e832379629a455ed04bae0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3f975477e832379629a455ed04bae0c"><td class="memItemLeft" align="right" valign="top"><a id="ad3f975477e832379629a455ed04bae0c" name="ad3f975477e832379629a455ed04bae0c"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>scaleFloat</b> () const</td></tr>
 <tr class="memdesc:ad3f975477e832379629a455ed04bae0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides value between -1.0 and 1.0 <br /></td></tr>
 <tr class="separator:ad3f975477e832379629a455ed04bae0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a82ee9face90cedee7f795055fcff3fa8"><td class="memItemLeft" align="right" valign="top"><a id="a82ee9face90cedee7f795055fcff3fa8" name="a82ee9face90cedee7f795055fcff3fa8"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>set</b> (const int32_t &amp;in)</td></tr>
+<tr class="memdesc:a82ee9face90cedee7f795055fcff3fa8"><td class="mdescLeft">&#160;</td><td class="mdescRight">values are clipped <br /></td></tr>
+<tr class="separator:a82ee9face90cedee7f795055fcff3fa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82ee9face90cedee7f795055fcff3fa8"><td class="memItemLeft" align="right" valign="top"><a id="a82ee9face90cedee7f795055fcff3fa8" name="a82ee9face90cedee7f795055fcff3fa8"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>set</b> (const int32_t &amp;in)</td></tr>
 <tr class="separator:a82ee9face90cedee7f795055fcff3fa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02c51bb14f4500b4b8eb089992c6c249"><td class="memItemLeft" align="right" valign="top"><a id="a02c51bb14f4500b4b8eb089992c6c249" name="a02c51bb14f4500b4b8eb089992c6c249"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setAndScale16</b> (int16_t i16)</td></tr>
 <tr class="separator:a02c51bb14f4500b4b8eb089992c6c249"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02c51bb14f4500b4b8eb089992c6c249"><td class="memItemLeft" align="right" valign="top"><a id="a02c51bb14f4500b4b8eb089992c6c249" name="a02c51bb14f4500b4b8eb089992c6c249"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setAndScale16</b> (int16_t i16)</td></tr>
+<tr class="separator:a02c51bb14f4500b4b8eb089992c6c249"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6bb46566b18ad8dffcb702ab299f292"><td class="memItemLeft" align="right" valign="top"><a id="ad6bb46566b18ad8dffcb702ab299f292" name="ad6bb46566b18ad8dffcb702ab299f292"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>toFloat</b> () const</td></tr>
+<tr class="memdesc:ad6bb46566b18ad8dffcb702ab299f292"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert to float <br /></td></tr>
+<tr class="separator:ad6bb46566b18ad8dffcb702ab299f292"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad6bb46566b18ad8dffcb702ab299f292"><td class="memItemLeft" align="right" valign="top"><a id="ad6bb46566b18ad8dffcb702ab299f292" name="ad6bb46566b18ad8dffcb702ab299f292"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>toFloat</b> () const</td></tr>
 <tr class="memdesc:ad6bb46566b18ad8dffcb702ab299f292"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert to float <br /></td></tr>
@@ -143,13 +196,19 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>toFloat</b> () const
 int&#160;</td><td class="memItemRight" valign="bottom"><b>toInt</b> () const</td></tr>
 <tr class="memdesc:a8cc7782de081ce702a9be163b4cb8f84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Standard Conversion to Int. <br /></td></tr>
 <tr class="separator:a8cc7782de081ce702a9be163b4cb8f84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cc7782de081ce702a9be163b4cb8f84"><td class="memItemLeft" align="right" valign="top"><a id="a8cc7782de081ce702a9be163b4cb8f84" name="a8cc7782de081ce702a9be163b4cb8f84"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>toInt</b> () const</td></tr>
+<tr class="memdesc:a8cc7782de081ce702a9be163b4cb8f84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Standard Conversion to Int. <br /></td></tr>
+<tr class="separator:a8cc7782de081ce702a9be163b4cb8f84"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >24bit integer which is used for I2S sound processing. It works only on little endian machines! </p>
+<div class="textblock"><p >24bit integer which is used for I2S sound processing. The values are represented as int32_t, but only 3 bytes are used. If you assign values which are too big, they are clipped. </p>
+<p >24bit integer which is used for I2S sound processing. The values are really using 3 bytes. It works only on little endian machines!</p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/AudioBasic/<a class="el" href="_int24_8h_source.html">Int24.h</a></li>
+<li>src/AudioBasic/<a class="el" href="_int24_ex_8h_source.html">Int24Ex.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

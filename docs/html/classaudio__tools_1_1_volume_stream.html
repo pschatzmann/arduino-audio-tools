@@ -82,10 +82,10 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Adjust the volume of the related input or output: To work properly the class needs to know the bits per sample and number of channels!  
+<p>Adjust the volume of the related input or output: To work properly the class needs to know the bits per sample and number of channels! AudioChanges are forwareded to the related <a class="el" href="classaudio__tools_1_1_print.html">Print</a> or <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> class.  
  <a href="classaudio__tools_1_1_volume_stream.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_audio_streams_8h_source.html">AudioStreams.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_volume_stream_8h_source.html">VolumeStream.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for VolumeStream:</div>
 <div class="dyncontent">
@@ -107,6 +107,14 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>VolumeStream</b> ()=default</td></tr>
 <tr class="memdesc:a91df9205f089001aba76d0fa8a7d1af1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Constructor. <br /></td></tr>
 <tr class="separator:a91df9205f089001aba76d0fa8a7d1af1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a635cdb055cc932ef0d73e2cabdcd0bc7"><td class="memItemLeft" align="right" valign="top"><a id="a635cdb055cc932ef0d73e2cabdcd0bc7" name="a635cdb055cc932ef0d73e2cabdcd0bc7"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>VolumeStream</b> (<a class="el" href="classaudio__tools_1_1_audio_print.html">AudioPrint</a> &amp;out)</td></tr>
+<tr class="memdesc:a635cdb055cc932ef0d73e2cabdcd0bc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor which assigns <a class="el" href="classaudio__tools_1_1_print.html">Print</a> output. <br /></td></tr>
+<tr class="separator:a635cdb055cc932ef0d73e2cabdcd0bc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a957d7851fc8e9598336df3e208f63ec5"><td class="memItemLeft" align="right" valign="top"><a id="a957d7851fc8e9598336df3e208f63ec5" name="a957d7851fc8e9598336df3e208f63ec5"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>VolumeStream</b> (<a class="el" href="classaudio__tools_1_1_audio_stream.html">AudioStream</a> &amp;io)</td></tr>
+<tr class="memdesc:a957d7851fc8e9598336df3e208f63ec5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor which assigns <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> input or output. <br /></td></tr>
+<tr class="separator:a957d7851fc8e9598336df3e208f63ec5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeefdc8cb4396440dcd16cf76ce39b168"><td class="memItemLeft" align="right" valign="top"><a id="aeefdc8cb4396440dcd16cf76ce39b168" name="aeefdc8cb4396440dcd16cf76ce39b168"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>VolumeStream</b> (<a class="el" href="classaudio__tools_1_1_print.html">Print</a> &amp;out)</td></tr>
 <tr class="memdesc:aeefdc8cb4396440dcd16cf76ce39b168"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor which assigns <a class="el" href="classaudio__tools_1_1_print.html">Print</a> output. <br /></td></tr>
@@ -358,7 +366,7 @@ float *&#160;</td><td class="memItemRight" valign="bottom"><b>volume_values</b> 
 <tr class="separator:a55593fb098b50040bc63f28fa32e995a inherit pro_attribs_classaudio__tools_1_1_audio_stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Adjust the volume of the related input or output: To work properly the class needs to know the bits per sample and number of channels! </p>
+<div class="textblock"><p >Adjust the volume of the related input or output: To work properly the class needs to know the bits per sample and number of channels! AudioChanges are forwareded to the related <a class="el" href="classaudio__tools_1_1_print.html">Print</a> or <a class="el" href="classaudio__tools_1_1_stream.html">Stream</a> class. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
@@ -558,7 +566,7 @@ float *&#160;</td><td class="memItemRight" valign="bottom"><b>volume_values</b> 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/AudioTools/<a class="el" href="_audio_streams_8h_source.html">AudioStreams.h</a></li>
+<li>src/AudioTools/<a class="el" href="_volume_stream_8h_source.html">VolumeStream.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

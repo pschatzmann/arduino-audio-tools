@@ -5,5 +5,7 @@ var searchData=
   ['wavencoder_2',['WAVEncoder',['../classaudio__tools_1_1_w_a_v_encoder.html',1,'audio_tools']]],
   ['wavheader_3',['WAVHeader',['../classaudio__tools_1_1_w_a_v_header.html',1,'audio_tools']]],
   ['welch_4',['Welch',['../classaudio__tools_1_1_welch.html',1,'audio_tools']]],
-  ['windowfunction_5',['WindowFunction',['../classaudio__tools_1_1_window_function.html',1,'audio_tools']]]
+  ['windowfunction_5',['WindowFunction',['../classaudio__tools_1_1_window_function.html',1,'audio_tools']]],
+  ['wm8960config_6',['WM8960Config',['../classaudio__tools_1_1_w_m8960_config.html',1,'audio_tools']]],
+  ['wm8960stream_7',['WM8960Stream',['../classaudio__tools_1_1_w_m8960_stream.html',1,'audio_tools']]]
 ];

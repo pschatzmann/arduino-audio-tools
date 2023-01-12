@@ -111,14 +111,14 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa3c26a1c00999c443485677387278b35"><td class="memItemLeft" align="right" valign="top"><a id="aa3c26a1c00999c443485677387278b35" name="aa3c26a1c00999c443485677387278b35"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>frequency</b> (<a class="el" href="group__tools.html#ga9715fceb4c700e7e4a610400464e9396">MusicalNotesEnum</a> <a class="el" href="classaudio__tools_1_1_musical_notes.html#a4bbc354c745e28980d5ceca5e4e3db78">note</a>, uint8_t octave)</td></tr>
-<tr class="memdesc:aa3c26a1c00999c443485677387278b35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the frequency of the indicate note and octave (0-8) <br /></td></tr>
-<tr class="separator:aa3c26a1c00999c443485677387278b35"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4b74a9067ff9fea26ef073deaaba5a4b"><td class="memItemLeft" align="right" valign="top"><a id="a4b74a9067ff9fea26ef073deaaba5a4b" name="a4b74a9067ff9fea26ef073deaaba5a4b"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>frequency</b> (uint16_t idx)</td></tr>
-<tr class="memdesc:a4b74a9067ff9fea26ef073deaaba5a4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the frequency of the indicate note index from 0 to 107. <br /></td></tr>
-<tr class="separator:a4b74a9067ff9fea26ef073deaaba5a4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a521b24b3a00360cbab29a003e14eaa99"><td class="memItemLeft" align="right" valign="top"><a id="a521b24b3a00360cbab29a003e14eaa99" name="a521b24b3a00360cbab29a003e14eaa99"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>frequency</b> (<a class="el" href="group__tools.html#ga9715fceb4c700e7e4a610400464e9396">MusicalNotesEnum</a> <a class="el" href="classaudio__tools_1_1_musical_notes.html#a084621aed7ce7c46a20d61d1f1fcc7ee">note</a>, uint8_t octave)</td></tr>
+<tr class="memdesc:a521b24b3a00360cbab29a003e14eaa99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the frequency of the indicate note and octave (0-8) <br /></td></tr>
+<tr class="separator:a521b24b3a00360cbab29a003e14eaa99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae76b8ddf1b2e70224370b22f516643be"><td class="memItemLeft" align="right" valign="top"><a id="ae76b8ddf1b2e70224370b22f516643be" name="ae76b8ddf1b2e70224370b22f516643be"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>frequency</b> (uint16_t idx)</td></tr>
+<tr class="memdesc:ae76b8ddf1b2e70224370b22f516643be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the frequency of the indicate note index from 0 to 107. <br /></td></tr>
+<tr class="separator:ae76b8ddf1b2e70224370b22f516643be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a49f1d8c185f05e4aebf8254b241b8336"><td class="memItemLeft" align="right" valign="top"><a id="a49f1d8c185f05e4aebf8254b241b8336" name="a49f1d8c185f05e4aebf8254b241b8336"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>frequencyCount</b> ()</td></tr>
 <tr class="separator:a49f1d8c185f05e4aebf8254b241b8336"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -126,38 +126,38 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>frequencyCount</b> ()<
 int&#160;</td><td class="memItemRight" valign="bottom"><b>frequencyToMidiNote</b> (float freq)</td></tr>
 <tr class="memdesc:ac63e0b09fabb3b6d673024cdc4f0f1b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide MIDI note for frequency. <br /></td></tr>
 <tr class="separator:ac63e0b09fabb3b6d673024cdc4f0f1b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1addc9c07ac474ea8ebc591446833276"><td class="memItemLeft" align="right" valign="top"><a id="a1addc9c07ac474ea8ebc591446833276" name="a1addc9c07ac474ea8ebc591446833276"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isAudible</b> (uint16_t <a class="el" href="classaudio__tools_1_1_musical_notes.html#aa3c26a1c00999c443485677387278b35">frequency</a>)</td></tr>
-<tr class="memdesc:a1addc9c07ac474ea8ebc591446833276"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the frequency is audible (in the range of 20 Hz to 20 kHz) <br /></td></tr>
-<tr class="separator:a1addc9c07ac474ea8ebc591446833276"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aefc62e8b98e2cc9ece417b7068742b00"><td class="memItemLeft" align="right" valign="top"><a id="aefc62e8b98e2cc9ece417b7068742b00" name="aefc62e8b98e2cc9ece417b7068742b00"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>mainFrequency</b> (uint64_t idx)</td></tr>
-<tr class="memdesc:aefc62e8b98e2cc9ece417b7068742b00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the frequency of the indicate main note index from 0 to 62. <br /></td></tr>
-<tr class="separator:aefc62e8b98e2cc9ece417b7068742b00"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5f7af52c79d296796e950741dd9c88c"><td class="memItemLeft" align="right" valign="top"><a id="ad5f7af52c79d296796e950741dd9c88c" name="ad5f7af52c79d296796e950741dd9c88c"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>mainFrequency</b> (uint8_t mainNoteIdx, uint8_t octave)</td></tr>
-<tr class="memdesc:ad5f7af52c79d296796e950741dd9c88c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the frequency of the indicate main note index (0-6) and octave (0-8) <br /></td></tr>
-<tr class="separator:ad5f7af52c79d296796e950741dd9c88c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad21d394b5564867c744c3f92cfb602c"><td class="memItemLeft" align="right" valign="top"><a id="aad21d394b5564867c744c3f92cfb602c" name="aad21d394b5564867c744c3f92cfb602c"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isAudible</b> (float <a class="el" href="classaudio__tools_1_1_musical_notes.html#a521b24b3a00360cbab29a003e14eaa99">frequency</a>)</td></tr>
+<tr class="memdesc:aad21d394b5564867c744c3f92cfb602c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the frequency is audible (in the range of 20 Hz to 20 kHz) <br /></td></tr>
+<tr class="separator:aad21d394b5564867c744c3f92cfb602c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01a96d65c4a53b868575d20c1d97af2f"><td class="memItemLeft" align="right" valign="top"><a id="a01a96d65c4a53b868575d20c1d97af2f" name="a01a96d65c4a53b868575d20c1d97af2f"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>mainFrequency</b> (uint64_t idx)</td></tr>
+<tr class="memdesc:a01a96d65c4a53b868575d20c1d97af2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the frequency of the indicate main note index from 0 to 62. <br /></td></tr>
+<tr class="separator:a01a96d65c4a53b868575d20c1d97af2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23e5df1a69fa2beba06527bdd522e3bf"><td class="memItemLeft" align="right" valign="top"><a id="a23e5df1a69fa2beba06527bdd522e3bf" name="a23e5df1a69fa2beba06527bdd522e3bf"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>mainFrequency</b> (uint8_t mainNoteIdx, uint8_t octave)</td></tr>
+<tr class="memdesc:a23e5df1a69fa2beba06527bdd522e3bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the frequency of the indicate main note index (0-6) and octave (0-8) <br /></td></tr>
+<tr class="separator:a23e5df1a69fa2beba06527bdd522e3bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c7b5af824e7fdca28821b0e8503b9fb"><td class="memItemLeft" align="right" valign="top"><a id="a0c7b5af824e7fdca28821b0e8503b9fb" name="a0c7b5af824e7fdca28821b0e8503b9fb"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>midiNoteToFrequency</b> (int x)</td></tr>
 <tr class="memdesc:a0c7b5af824e7fdca28821b0e8503b9fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine frequency of MIDI note. <br /></td></tr>
 <tr class="separator:a0c7b5af824e7fdca28821b0e8503b9fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a498dc834b3d2a0f49d4eeed694c2d7bf"><td class="memItemLeft" align="right" valign="top"><a id="a498dc834b3d2a0f49d4eeed694c2d7bf" name="a498dc834b3d2a0f49d4eeed694c2d7bf"></a>
-const char *&#160;</td><td class="memItemRight" valign="bottom"><b>note</b> (int <a class="el" href="classaudio__tools_1_1_musical_notes.html#aa3c26a1c00999c443485677387278b35">frequency</a>)</td></tr>
-<tr class="memdesc:a498dc834b3d2a0f49d4eeed694c2d7bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the closes note for a frequency. <br /></td></tr>
-<tr class="separator:a498dc834b3d2a0f49d4eeed694c2d7bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4bbc354c745e28980d5ceca5e4e3db78"><td class="memItemLeft" align="right" valign="top"><a id="a4bbc354c745e28980d5ceca5e4e3db78" name="a4bbc354c745e28980d5ceca5e4e3db78"></a>
-const char *&#160;</td><td class="memItemRight" valign="bottom"><b>note</b> (int <a class="el" href="classaudio__tools_1_1_musical_notes.html#aa3c26a1c00999c443485677387278b35">frequency</a>, int &amp;diff)</td></tr>
-<tr class="memdesc:a4bbc354c745e28980d5ceca5e4e3db78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the closes note for a frequency. We also return the frequency difference. <br /></td></tr>
-<tr class="separator:a4bbc354c745e28980d5ceca5e4e3db78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67e60ac4081de150bfe1fdbd4d6fc591"><td class="memItemLeft" align="right" valign="top"><a id="a67e60ac4081de150bfe1fdbd4d6fc591" name="a67e60ac4081de150bfe1fdbd4d6fc591"></a>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><b>note</b> (float <a class="el" href="classaudio__tools_1_1_musical_notes.html#a521b24b3a00360cbab29a003e14eaa99">frequency</a>)</td></tr>
+<tr class="memdesc:a67e60ac4081de150bfe1fdbd4d6fc591"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the closes note for a frequency. <br /></td></tr>
+<tr class="separator:a67e60ac4081de150bfe1fdbd4d6fc591"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a084621aed7ce7c46a20d61d1f1fcc7ee"><td class="memItemLeft" align="right" valign="top"><a id="a084621aed7ce7c46a20d61d1f1fcc7ee" name="a084621aed7ce7c46a20d61d1f1fcc7ee"></a>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><b>note</b> (float <a class="el" href="classaudio__tools_1_1_musical_notes.html#a521b24b3a00360cbab29a003e14eaa99">frequency</a>, float &amp;diff)</td></tr>
+<tr class="memdesc:a084621aed7ce7c46a20d61d1f1fcc7ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the closes note for a frequency. We also return the frequency difference. <br /></td></tr>
+<tr class="separator:a084621aed7ce7c46a20d61d1f1fcc7ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac70c15d4dc6493b6c7d22dba9a45bd11"><td class="memItemLeft" align="right" valign="top"><a id="ac70c15d4dc6493b6c7d22dba9a45bd11" name="ac70c15d4dc6493b6c7d22dba9a45bd11"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>stkNoteToFrequency</b> (int noteNumber)</td></tr>
 <tr class="separator:ac70c15d4dc6493b6c7d22dba9a45bd11"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:afabf3a2629be4e2681beb7a5ea6f5a40"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_musical_notes.html#afabf3a2629be4e2681beb7a5ea6f5a40">notes</a> [9][12]</td></tr>
-<tr class="separator:afabf3a2629be4e2681beb7a5ea6f5a40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e0a41b78e6336ca44cc15aea3c06965"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_musical_notes.html#a4e0a41b78e6336ca44cc15aea3c06965">notes</a> [9][12]</td></tr>
+<tr class="separator:a4e0a41b78e6336ca44cc15aea3c06965"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:accd1a83ececa6b1cdc14901cc4958abc"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_musical_notes.html#accd1a83ececa6b1cdc14901cc4958abc">notes_str</a> [9 *12]</td></tr>
 <tr class="separator:accd1a83ececa6b1cdc14901cc4958abc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -166,8 +166,8 @@ Protected Attributes</h2></td></tr>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Member Data Documentation</h2>
-<a id="afabf3a2629be4e2681beb7a5ea6f5a40" name="afabf3a2629be4e2681beb7a5ea6f5a40"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afabf3a2629be4e2681beb7a5ea6f5a40">&#9670;&#160;</a></span>notes</h2>
+<a id="a4e0a41b78e6336ca44cc15aea3c06965" name="a4e0a41b78e6336ca44cc15aea3c06965"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e0a41b78e6336ca44cc15aea3c06965">&#9670;&#160;</a></span>notes</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -176,7 +176,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint16_t notes[9][12]</td>
+          <td class="memname">float notes[9][12]</td>
         </tr>
       </table>
   </td>

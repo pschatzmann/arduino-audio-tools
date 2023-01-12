@@ -121,6 +121,7 @@ public:
     }
 
     LOGI("-> selectStream: %s", path);
+    strncpy(file_name, path, MAX_FILE_LEN);
     file = new_file;
     return &file;
   }

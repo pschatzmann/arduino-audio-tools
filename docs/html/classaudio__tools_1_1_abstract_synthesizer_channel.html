@@ -90,9 +90,7 @@ Inheritance diagram for AbstractSynthesizerChannel:</div>
  <div class="center">
   <img src="classaudio__tools_1_1_abstract_synthesizer_channel.png" usemap="#AbstractSynthesizerChannel_map" alt=""/>
   <map id="AbstractSynthesizerChannel_map" name="AbstractSynthesizerChannel_map">
-<area href="classaudio__tools_1_1_default_synthesizer_channel.html" alt="DefaultSynthesizerChannel&lt; AudioEffects&lt; GeneratorFromStream&lt; int16_t &gt; &gt; &gt;" shape="rect" coords="0,56,471,80"/>
-<area href="classaudio__tools_1_1_default_synthesizer_channel.html" title="Default implementation for a Channel. You can provide the Sound Generator as parameter to the effects..." alt="DefaultSynthesizerChannel&lt; EffectsT &gt;" shape="rect" coords="481,56,952,80"/>
-<area href="classaudio__tools_1_1_default_guitar_channel.html" title="Audio Processing Channel based on a Input Stream and an Audio Effects Chain. This can be used todo im..." alt="DefaultGuitarChannel" shape="rect" coords="0,112,471,136"/>
+<area href="classaudio__tools_1_1_default_synthesizer_channel.html" title="Default implementation for a Channel. You can provide the Sound Generator as parameter to the effects..." alt="DefaultSynthesizerChannel" shape="rect" coords="0,56,172,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -101,7 +99,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2af50a33b9ba56d52493baffa40e2df8"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_abstract_synthesizer_channel.html#a2af50a33b9ba56d52493baffa40e2df8">begin</a> (<a class="el" href="structaudio__tools_1_1_audio_base_info.html">AudioBaseInfo</a> config)</td></tr>
 <tr class="memdesc:a2af50a33b9ba56d52493baffa40e2df8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the sound generation.  <a href="classaudio__tools_1_1_abstract_synthesizer_channel.html#a2af50a33b9ba56d52493baffa40e2df8">More...</a><br /></td></tr>
 <tr class="separator:a2af50a33b9ba56d52493baffa40e2df8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6380510ad23e1a6bdf33de3ba487a947"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classaudio__tools_1_1_abstract_synthesizer_channel.html">AbstractSynthesizerChannel</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_abstract_synthesizer_channel.html#a6380510ad23e1a6bdf33de3ba487a947">clone</a> ()=0</td></tr>
+<tr class="memitem:a6380510ad23e1a6bdf33de3ba487a947"><td class="memItemLeft" align="right" valign="top"><a id="a6380510ad23e1a6bdf33de3ba487a947" name="a6380510ad23e1a6bdf33de3ba487a947"></a>
+virtual <a class="el" href="classaudio__tools_1_1_abstract_synthesizer_channel.html">AbstractSynthesizerChannel</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>clone</b> ()=0</td></tr>
 <tr class="separator:a6380510ad23e1a6bdf33de3ba487a947"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acfb3416c9355c4756aedad5a90e25b23"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1_abstract_synthesizer_channel.html#acfb3416c9355c4756aedad5a90e25b23">isActive</a> ()=0</td></tr>
 <tr class="memdesc:acfb3416c9355c4756aedad5a90e25b23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the <a class="el" href="classaudio__tools_1_1_a_d_s_r.html" title="Generates ADSR values between 0.0 and 1.0.">ADSR</a> is still active - and generating sound.  <a href="classaudio__tools_1_1_abstract_synthesizer_channel.html#acfb3416c9355c4756aedad5a90e25b23">More...</a><br /></td></tr>
@@ -150,34 +149,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Start the sound generation. </p>
 
-<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_default_synthesizer_channel.html#a01501eab628a2ff4645af6369c834504">DefaultSynthesizerChannel&lt; EffectsT &gt;</a>, <a class="el" href="classaudio__tools_1_1_default_synthesizer_channel.html#a01501eab628a2ff4645af6369c834504">DefaultSynthesizerChannel&lt; AudioEffects&lt; GeneratorFromStream&lt; int16_t &gt; &gt; &gt;</a>, and <a class="el" href="classaudio__tools_1_1_default_guitar_channel.html#a01501eab628a2ff4645af6369c834504">DefaultGuitarChannel</a>.</p>
-
-</div>
-</div>
-<a id="a6380510ad23e1a6bdf33de3ba487a947" name="a6380510ad23e1a6bdf33de3ba487a947"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6380510ad23e1a6bdf33de3ba487a947">&#9670;&#160;</a></span>clone()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual <a class="el" href="classaudio__tools_1_1_abstract_synthesizer_channel.html">AbstractSynthesizerChannel</a> * clone </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_default_guitar_channel.html#a88568f104da5b5996ec4535399acd4d0">DefaultGuitarChannel</a>.</p>
+<p>Reimplemented in <a class="el" href="classaudio__tools_1_1_default_synthesizer_channel.html#a01501eab628a2ff4645af6369c834504">DefaultSynthesizerChannel</a>.</p>
 
 </div>
 </div>
@@ -206,7 +178,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Checks if the <a class="el" href="classaudio__tools_1_1_a_d_s_r.html" title="Generates ADSR values between 0.0 and 1.0.">ADSR</a> is still active - and generating sound. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_default_synthesizer_channel.html#aa7dd2dbf5a8f49e991c84dcd6e2331c1">DefaultSynthesizerChannel&lt; EffectsT &gt;</a>, <a class="el" href="classaudio__tools_1_1_default_synthesizer_channel.html#aa7dd2dbf5a8f49e991c84dcd6e2331c1">DefaultSynthesizerChannel&lt; AudioEffects&lt; GeneratorFromStream&lt; int16_t &gt; &gt; &gt;</a>, and <a class="el" href="classaudio__tools_1_1_default_guitar_channel.html#aa7dd2dbf5a8f49e991c84dcd6e2331c1">DefaultGuitarChannel</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_default_synthesizer_channel.html#aa7dd2dbf5a8f49e991c84dcd6e2331c1">DefaultSynthesizerChannel</a>.</p>
 
 </div>
 </div>
@@ -235,7 +207,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Provides the key off event to <a class="el" href="classaudio__tools_1_1_a_d_s_r.html" title="Generates ADSR values between 0.0 and 1.0.">ADSR</a> to stop the sound. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_default_synthesizer_channel.html#a248b8fd38d66a48400b8d44e78634edb">DefaultSynthesizerChannel&lt; EffectsT &gt;</a>, <a class="el" href="classaudio__tools_1_1_default_synthesizer_channel.html#a248b8fd38d66a48400b8d44e78634edb">DefaultSynthesizerChannel&lt; AudioEffects&lt; GeneratorFromStream&lt; int16_t &gt; &gt; &gt;</a>, and <a class="el" href="classaudio__tools_1_1_default_guitar_channel.html#a248b8fd38d66a48400b8d44e78634edb">DefaultGuitarChannel</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_default_synthesizer_channel.html#a248b8fd38d66a48400b8d44e78634edb">DefaultSynthesizerChannel</a>.</p>
 
 </div>
 </div>
@@ -275,7 +247,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Provides the key on event to <a class="el" href="classaudio__tools_1_1_a_d_s_r.html" title="Generates ADSR values between 0.0 and 1.0.">ADSR</a> to start the sound. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_default_synthesizer_channel.html#a1fbaf5d254e757c2593fa1a52dd89728">DefaultSynthesizerChannel&lt; EffectsT &gt;</a>, <a class="el" href="classaudio__tools_1_1_default_synthesizer_channel.html#a1fbaf5d254e757c2593fa1a52dd89728">DefaultSynthesizerChannel&lt; AudioEffects&lt; GeneratorFromStream&lt; int16_t &gt; &gt; &gt;</a>, and <a class="el" href="classaudio__tools_1_1_default_guitar_channel.html#a1fbaf5d254e757c2593fa1a52dd89728">DefaultGuitarChannel</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_default_synthesizer_channel.html#a1fbaf5d254e757c2593fa1a52dd89728">DefaultSynthesizerChannel</a>.</p>
 
 </div>
 </div>
@@ -304,7 +276,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Provides the actual midi note that is played. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_default_synthesizer_channel.html#a2bc971de1b5ccb05726661277d6b9b65">DefaultSynthesizerChannel&lt; EffectsT &gt;</a>, <a class="el" href="classaudio__tools_1_1_default_synthesizer_channel.html#a2bc971de1b5ccb05726661277d6b9b65">DefaultSynthesizerChannel&lt; AudioEffects&lt; GeneratorFromStream&lt; int16_t &gt; &gt; &gt;</a>, and <a class="el" href="classaudio__tools_1_1_default_guitar_channel.html#a2bc971de1b5ccb05726661277d6b9b65">DefaultGuitarChannel</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_default_synthesizer_channel.html#a2bc971de1b5ccb05726661277d6b9b65">DefaultSynthesizerChannel</a>.</p>
 
 </div>
 </div>
@@ -333,7 +305,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Provides the next sample. </p>
 
-<p>Implemented in <a class="el" href="classaudio__tools_1_1_default_synthesizer_channel.html#a4a3e93a68ae7b16f4c0e3c658d6f33b3">DefaultSynthesizerChannel&lt; EffectsT &gt;</a>, <a class="el" href="classaudio__tools_1_1_default_synthesizer_channel.html#a4a3e93a68ae7b16f4c0e3c658d6f33b3">DefaultSynthesizerChannel&lt; AudioEffects&lt; GeneratorFromStream&lt; int16_t &gt; &gt; &gt;</a>, and <a class="el" href="classaudio__tools_1_1_default_guitar_channel.html#a4a3e93a68ae7b16f4c0e3c658d6f33b3">DefaultGuitarChannel</a>.</p>
+<p>Implemented in <a class="el" href="classaudio__tools_1_1_default_synthesizer_channel.html#a4a3e93a68ae7b16f4c0e3c658d6f33b3">DefaultSynthesizerChannel</a>.</p>
 
 </div>
 </div>

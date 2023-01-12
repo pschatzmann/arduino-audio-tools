@@ -81,8 +81,13 @@
  * @brief Optional external libraries
  * 
  */
+
+#ifdef ARDUINO
+#  include "AudioEffects/Synthesizer.h"
+#endif
+
 #if defined(USE_I2S)
-#include "AudioTools/AudioSPDIF.h"
+#  include "AudioTools/AudioSPDIF.h"
 #endif
 
 

@@ -21,8 +21,7 @@ var searchData=
   ['generatorfixedvalue_18',['GeneratorFixedValue',['../classaudio__tools_1_1_generator_fixed_value.html',1,'audio_tools']]],
   ['generatorfromarray_19',['GeneratorFromArray',['../classaudio__tools_1_1_generator_from_array.html',1,'audio_tools']]],
   ['generatorfromstream_20',['GeneratorFromStream',['../classaudio__tools_1_1_generator_from_stream.html',1,'audio_tools']]],
-  ['generatorfromstream_3c_20int16_5ft_20_3e_21',['GeneratorFromStream&lt; int16_t &gt;',['../classaudio__tools_1_1_generator_from_stream.html',1,'audio_tools']]],
-  ['generatormixer_22',['GeneratorMixer',['../classaudio__tools_1_1_generator_mixer.html',1,'audio_tools']]],
-  ['gsmdecoder_23',['GSMDecoder',['../classaudio__tools_1_1_g_s_m_decoder.html',1,'audio_tools']]],
-  ['gsmencoder_24',['GSMEncoder',['../classaudio__tools_1_1_g_s_m_encoder.html',1,'audio_tools']]]
+  ['generatormixer_21',['GeneratorMixer',['../classaudio__tools_1_1_generator_mixer.html',1,'audio_tools']]],
+  ['gsmdecoder_22',['GSMDecoder',['../classaudio__tools_1_1_g_s_m_decoder.html',1,'audio_tools']]],
+  ['gsmencoder_23',['GSMEncoder',['../classaudio__tools_1_1_g_s_m_encoder.html',1,'audio_tools']]]
 ];
