@@ -487,7 +487,7 @@ class GeneratorFromArray : public SoundGenerator<T> {
       LOGI("table_length: %d", (int)size);
     }
 
-    virtual bool begin(AudioBaseInfo info) {
+    virtual bool begin(AudioBaseInfo info) override {
         return SoundGenerator<T>::begin(info);
     }
 

@@ -10,10 +10,10 @@
 
 I2SStream i2s; //AudioKitStream
 SineWaveGenerator<int16_t> sine;
-AudioEffects<SineWaveGenerator<int16_t>> effects(sine);
+GeneratedSoundStream<int16_t> stream(sine); 
+AudioEffectStream effects(stream);
 ADSRGain adsr(0.0001,0.0001, 0.9 , 0.0002);
-GeneratedSoundStream<int16_t> in(effects); 
-StreamCopy copier(i2s, in); 
+StreamCopy copier(i2s, effects); 
 uint64_t time_on;
 uint64_t time_off;
 
@@ -43,7 +43,8 @@ void setup() {
 
   // Setup sound generation based on AudioKit settins
   sine.begin(cfg, 0);
-  in.begin(cfg);
+  stream.begin(cfg);
+  effects.begin(cfg);
 
 }
 

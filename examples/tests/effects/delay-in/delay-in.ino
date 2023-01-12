@@ -4,11 +4,10 @@ int channels = 1;
 int rate = 44100;
 int hz = 200;
 SineWaveGenerator<int16_t> sine;
-AudioEffects<SineWaveGenerator<int16_t>> effects(sine);
-GeneratedSoundStream<int16_t> in(effects); 
+GeneratedSoundStream<int16_t> gen(sine); 
+AudioEffectStream effects(gen); // apply effects to input: reading from gen
 CsvStream<int16_t> out(Serial);
-StreamCopy copier(out, in); 
-//Delay dly;
+StreamCopy copier(out, effects); 
 Delay dly(998, 0.5, 1.0,rate, true);
 
 
@@ -17,15 +16,14 @@ void setup() {
   // setup effects
   effects.addEffect(dly);
 
-  // Setup output
+  // Setup audio objects
   auto cfg = out.defaultConfig();
   cfg.channels = channels;
   cfg.sample_rate = rate;
   out.begin(cfg);
-
-  // Setup sound generation based on AudioKit settins
   sine.begin(cfg, hz);
-  in.begin(cfg);
+  gen.begin(cfg);
+  effects.begin(cfg);
 }
 // copy the data
 void loop() {

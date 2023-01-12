@@ -1086,7 +1086,7 @@ class InputMixer : public AudioStreamX {
     }
 
     /// Remove all input streams
-    void end() {
+    void end() override {
       streams.clear();
       weights.clear();
       total_weights = 0.0;
@@ -1097,25 +1097,26 @@ class InputMixer : public AudioStreamX {
       return streams.size();
     }
 
-    /// Provides the data from all streams mixed together 
+    /// Provides the data from all streams mixed together
     size_t readBytes(uint8_t* data, size_t len) override {
-      LOGD("readBytes: %d",len);
-      int sample_count = len / sizeof(T);
-      T* samples_result = (T*)data;
-      memset(data,0, len); // clear data so that we can add values
-      buffer.resize(len); // usually does only something the first time
-      T* buffer_in = (T*)&buffer[0];
-      for (int j=0;j<size();j++){
-        float weight = weights[j];
-        LOGD("adding stream %d with len %d with weight %f",j, len, weight);
-        memset(&buffer[0],0, len); // if no data is read we have an array of 0
-        streams[j]->readBytes(&buffer[0], len);
-        for (int i=0;i<sample_count; i++){
-          samples_result[i] += weight * buffer_in[i] / total_weights;
+      if (total_weights==0) return 0;
+      int result_len = MIN(available(), len);
+      int sample_count = result_len / sizeof(T);
+      LOGD("readBytes: %d",(int)len);
+      T *p_data = (T*) data;
+      float sample_total = 0;
+      int size_value = size();
+      for (int j=0;j<sample_count; j++){
+        sample_total = 0.0f;
+        for (int i=0; i<size_value; i++){
+          T sample = read(streams[i], sizeof(T));
+          sample_total += weights[i] * sample / total_weights ;          
         }
+        p_data[j] = sample_total;
       }
-      return len;
+      return result_len;
     }
+
 
     /// Provides the available bytes from the first stream with data
     int available()  override {
@@ -1130,9 +1131,24 @@ class InputMixer : public AudioStreamX {
 
   protected:
     Vector<Stream*> streams{10};
-    Vector<uint8_t> buffer{DEFAULT_BUFFER_SIZE};
     Vector<float> weights{10}; 
     float total_weights = 0.0;
+
+    // garanteed to return the requested data
+    T read(Stream* p_stream, int len){
+      T result;
+      uint8_t *p_result = (uint8_t*) &result;
+      int open = len;
+      int total = 0;
+      // copy missing data
+      while (open>0){
+        int read = p_stream->readBytes(p_result+total, open);
+        open -= read;
+        total += read;
+      }
+      // return result
+      return result;
+    }
 
 };
 

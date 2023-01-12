@@ -25,7 +25,7 @@ const int channels = 1;
 const int bits_per_sample = 16;
 
 // Effects control input
-float volumeControl = 0;
+float volumeControl = 0.1;
 int16_t clipThreashold = 0;
 float fuzzEffectValue = 0;
 int16_t fuzzMaxValue = 0;
@@ -40,9 +40,8 @@ Tremolo tremolo(tremoloDuration, tremoloDepth, sample_rate);
 
 // Audio
 AudioKitStream kit; // Access I2S as stream
-AudioEffects<GeneratorFromStream<effect_t>> effects(kit, channels , 1.0); // apply effects on kit
-GeneratedSoundStream<int16_t> in(effects);
-StreamCopy copier(kit, in); // copy in to kit
+AudioEffectStream effects(kit); // input from kit
+StreamCopy copier(kit, effects); // copy effects to kit
 
 // Update values in effects
 void updateValues(){
@@ -146,6 +145,7 @@ void setup(void) {
   effects.addEffect(distortion);
   effects.addEffect(fuzz);
   effects.addEffect(tremolo);
+  effects.begin(cfg);
 
   updateValues();
 }
