@@ -20,7 +20,9 @@
 #include <chrono>
 
 #define PSTR(fmt) fmt
-#define PI 3.14159265359f
+#ifndef PI
+#  define PI 3.14159265359f
+#endif
 
 using namespace std;
 

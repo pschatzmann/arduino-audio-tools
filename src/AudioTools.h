@@ -82,7 +82,7 @@
  * 
  */
 
-#ifdef ARDUINO
+#if defined(ARDUINO) && !defined(IS_DESKTOP)
 #  include "AudioEffects/Synthesizer.h"
 #endif
 

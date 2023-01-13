@@ -6,7 +6,7 @@
 #include "AudioHttp/HttpLineReader.h" 
 #include "AudioHttp/Url.h"
 #include "AudioHttp/HttpTypes.h" 
-#ifdef ARDUINO
+#if defined(ARDUINO) || defined(IS_DESKTOP)
 #include "Client.h"
 #endif
 namespace audio_tools {
