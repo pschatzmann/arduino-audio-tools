@@ -148,6 +148,11 @@ class ResampleStream : public AudioStreamX {
 
     /// Writes the buffer to p_out after resampling
     size_t write(Print *p_out, const uint8_t* buffer, size_t bytes, size_t &written )  {
+        // prevent npe
+        if (info.channels==0){
+            LOGE("channels is 0");
+            return 0;
+        }
         T* data = (T*)buffer;
         int samples = bytes / sizeof(T); 
         size_t frames = samples / info.channels;
@@ -182,7 +187,7 @@ class ResampleStream : public AudioStreamX {
         T result;
         if (diff!=0){
             float delta = frame_idx - frame_idx0;
-            T diffEffective = delta / diff;
+            T diffEffective = diff * delta;
             result = val0+diffEffective;
         } else {
             result = val0;
