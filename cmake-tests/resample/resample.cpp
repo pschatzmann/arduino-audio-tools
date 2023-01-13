@@ -13,7 +13,7 @@ StreamCopy copier(out, sound, 1012);                             // copies sound
 // Arduino Setup
 void setup(void) {  
   // Open Serial 
-  Serial.begin(115200);
+  //Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
   // Define CSV Output
@@ -23,15 +23,15 @@ void setup(void) {
   csv.begin(config);
 
   // Resample
-  out.begin(channels, sample_rate, 48000);
+  out.begin(0.6);
 
   // Setup sine wave
   sineWave.begin(channels, sample_rate, N_B4);
-  Serial.println("started...");
+  //Serial.println("started...");
 }
 
 // Arduino loop - copy sound to out 
 void loop() {
   copier.copy();
-  Serial.println("----");
+  //Serial.println("----");
 }

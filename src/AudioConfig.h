@@ -5,7 +5,7 @@
  * 
  */
 #pragma once
-#ifdef ARDUINO
+#if defined(ARDUINO) || defined(IS_DESKTOP)
 #  include "Arduino.h"
 #else
 #  include "AudioLibs/NoArduino.h"

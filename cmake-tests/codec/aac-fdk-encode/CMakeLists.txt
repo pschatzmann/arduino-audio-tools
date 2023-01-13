@@ -27,7 +27,7 @@ endif()
 # build sketch as executable
 add_executable (aac-fdk-encode aac-fdk-encode.cpp ../../main.cpp)
 # set preprocessor defines
-target_compile_definitions(aac-fdk-encode PUBLIC -DARDUINO -DEXIT_ON_STOP -DUSE_FDK -DIS_DESKTOP)
+target_compile_definitions(aac-fdk-encode PUBLIC -DARDUINO -DEXIT_ON_STOP -DIS_DESKTOP)
 
 # specify libraries
 target_link_libraries(aac-fdk-encode arduino_emulator fdk_aac arduino-audio-tools)

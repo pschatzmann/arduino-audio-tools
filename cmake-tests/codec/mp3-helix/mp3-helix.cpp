@@ -2,6 +2,7 @@
 #include "Arduino.h"
 #include "AudioTools.h"
 #include "AudioCodecs/CodecMP3Helix.h"
+#include "AudioLibs/PortAudioStream.h"
 #include "BabyElephantWalk60_mp3.h"
 
 using namespace audio_tools;  
