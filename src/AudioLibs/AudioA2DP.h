@@ -103,6 +103,9 @@ class A2DPStream : public AudioStream {
         A2DPConfig defaultConfig(RxTxMode mode=RX_MODE){
             A2DPConfig cfg;
             cfg.mode = mode;
+            if(mode=TX_MODE){
+                cfg.name="[Unknown]";
+            }
             return cfg;
         }
 
@@ -143,6 +146,10 @@ class A2DPStream : public AudioStream {
                     source(); // allocate object
                     a2dp_source->set_auto_reconnect(cfg.auto_reconnect);
                     a2dp_source->set_volume(volume * 100);
+                    if(cfg.name=="[Unknown]"){
+                        //search next available device
+                        a2dp_source->set_ssid_callback(detectedDevice);
+                    }
                     a2dp_source->set_on_connection_state_changed(a2dpStateCallback, this);
                     a2dp_source->start((char*)cfg.name, a2dp_stream_source_sound_data);  
                     while(!a2dp_source->is_connected()){
@@ -291,6 +298,13 @@ class A2DPStream : public AudioStream {
         // semaphore to synchronize acess to the buffer
         SemaphoreHandle_t xSemaphore = NULL;
 
+        // auto-detect device to send audio to (TX-Mode)
+        static bool detectedDevice(const char* ssid, esp_bd_addr_t address, int rssi){
+            LOGW("found Device: %s rssi: %d", ssid, rssi);
+            //filter out weak signals
+            return (rssi > -75);
+        }
+    
         static void a2dpStateCallback(esp_a2d_connection_state_t state, void *caller){
             TRACED();
             A2DPStream *self = (A2DPStream*)caller;
