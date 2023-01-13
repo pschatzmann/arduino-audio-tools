@@ -6,9 +6,10 @@ uint16_t sample_rate=44100;
 uint8_t channels = 1;                                      // The stream will have 2 channels 
 SineWaveGenerator<int16_t> sineWave(32000);                // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound(sineWave);             // Stream generated from sine wave
+ResampleStream<int16_t> out(sound);                        // We double the output sample rate
+
 CsvStream<int16_t> csv(Serial, channels);                  // Output to Serial
-ResampleStream<int16_t> out(csv);                          // We double the output sample rate
-StreamCopy copier(out, sound, 1012);                       // copies sound to out
+StreamCopy copier(csv, out, 1012);                       // copies sound to out
 
 // Arduino Setup
 void setup(void) {  
@@ -26,7 +27,7 @@ void setup(void) {
   csv.begin(config);
   sound.begin(config);
   sineWave.begin(config, N_B4);
-  Serial.println("started...");
+  Serial.println("started (mixer)...");
 }
 
 // Arduino loop - copy sound to out 

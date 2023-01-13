@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AudioTools/AudioStreams.h"
+#include <algorithm>    // std::max
 
 namespace audio_tools {
 
@@ -121,8 +122,9 @@ class ResampleStream : public AudioStreamX {
     }
 
     size_t readBytes(uint8_t *buffer, size_t length) override {
+        if (length==0) return 0;
         // create buffer
-        size_t write_len = length * step_size;
+        size_t write_len = std::max(static_cast<int>(step_size *length), 1);
         read_buffer.resize(write_len);
         // read data from source to buffer
         int bytes_read = p_in->readBytes(read_buffer.data(), write_len);
@@ -131,6 +133,8 @@ class ResampleStream : public AudioStreamX {
             // use use write implementation to fill buffer
             print_to_array.begin(buffer, length);
             write(&print_to_array, read_buffer.data(), bytes_read, written);
+        } else {
+            LOGE("bytes_read==0");
         }
         return written;
     }
