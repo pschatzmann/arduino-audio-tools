@@ -20,8 +20,9 @@ var searchData=
   ['ilbcdecoder_17',['ILBCDecoder',['../classaudio__tools_1_1_i_l_b_c_decoder.html',1,'audio_tools']]],
   ['ilbcencoder_18',['ILBCEncoder',['../classaudio__tools_1_1_i_l_b_c_encoder.html',1,'audio_tools']]],
   ['initializer_5flist_19',['initializer_list',['../classstd_1_1initializer__list.html',1,'std']]],
-  ['inputmixer_20',['InputMixer',['../classaudio__tools_1_1_input_mixer.html',1,'audio_tools']]],
-  ['int24_5ft_21',['int24_t',['../classaudio__tools_1_1int24__t.html',1,'audio_tools']]],
-  ['iterator_22',['Iterator',['../classaudio__tools_1_1_list_1_1_iterator.html',1,'audio_tools::List']]],
-  ['iterator_23',['iterator',['../classaudio__tools_1_1_vector_1_1iterator.html',1,'audio_tools::Vector']]]
+  ['inputmerge_20',['InputMerge',['../classaudio__tools_1_1_input_merge.html',1,'audio_tools']]],
+  ['inputmixer_21',['InputMixer',['../classaudio__tools_1_1_input_mixer.html',1,'audio_tools']]],
+  ['int24_5ft_22',['int24_t',['../classaudio__tools_1_1int24__t.html',1,'audio_tools']]],
+  ['iterator_23',['Iterator',['../classaudio__tools_1_1_list_1_1_iterator.html',1,'audio_tools::List']]],
+  ['iterator_24',['iterator',['../classaudio__tools_1_1_vector_1_1iterator.html',1,'audio_tools::Vector']]]
 ];
