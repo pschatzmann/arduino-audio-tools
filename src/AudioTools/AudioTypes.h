@@ -177,10 +177,10 @@ class NumberConverter {
 
 /// guaranteed to return the requested data
 template<typename T>
-T readStream(Stream* p_stream, int len){
+T readSample(Stream* p_stream){
   T result;
   uint8_t *p_result = (uint8_t*) &result;
-  int open = len;
+  int open = sizeof(T);
   int total = 0;
   // copy missing data
   while (open>0){
