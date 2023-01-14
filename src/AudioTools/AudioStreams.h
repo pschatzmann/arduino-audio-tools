@@ -1110,7 +1110,7 @@ class InputMixer : public AudioStreamX {
       for (int j=0;j<sample_count; j++){
         sample_total = 0.0f;
         for (int i=0; i<size_value; i++){
-          T sample = readStream<T>(streams[i], sizeof(T));
+          T sample = readSample<T>(streams[i]);
           sample_total += weights[i] * sample / total_weights ;          
         }
         p_data[j] = sample_total;
@@ -1177,7 +1177,7 @@ class InputMerge : public AudioStreamX {
       int result_idx = 0;
       for (int j=0;j<sample_count; j++){
         for (int i=0; i<size_value; i++){
-          p_data[result_idx++] = weights[i] * readStream<T>(streams[i], sizeof(T));
+          p_data[result_idx++] = weights[i] * readSample<T>(streams[i]);
         }
       }
       return result_idx*sizeof(T);
