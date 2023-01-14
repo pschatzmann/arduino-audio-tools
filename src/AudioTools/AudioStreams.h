@@ -1046,6 +1046,7 @@ class MeasuringStream : public AudioStreamX {
     }
 };
 
+
 /**
  * @brief MixerStream is mixing the input from Multiple Input Streams.
  * All streams must have the same audo format (sample rate, channels, bits per sample) 
@@ -1100,23 +1101,22 @@ class InputMixer : public AudioStreamX {
     /// Provides the data from all streams mixed together
     size_t readBytes(uint8_t* data, size_t len) override {
       if (total_weights==0) return 0;
+      LOGD("readBytes: %d",(int)len);
       int result_len = MIN(available(), len);
       int sample_count = result_len / sizeof(T);
-      LOGD("readBytes: %d",(int)len);
       T *p_data = (T*) data;
       float sample_total = 0;
       int size_value = size();
       for (int j=0;j<sample_count; j++){
         sample_total = 0.0f;
         for (int i=0; i<size_value; i++){
-          T sample = read(streams[i], sizeof(T));
+          T sample = readStream<T>(streams[i], sizeof(T));
           sample_total += weights[i] * sample / total_weights ;          
         }
         p_data[j] = sample_total;
       }
       return result_len;
     }
-
 
     /// Provides the available bytes from the first stream with data
     int available()  override {
@@ -1134,24 +1134,97 @@ class InputMixer : public AudioStreamX {
     Vector<float> weights{10}; 
     float total_weights = 0.0;
 
-    // garanteed to return the requested data
-    T read(Stream* p_stream, int len){
-      T result;
-      uint8_t *p_result = (uint8_t*) &result;
-      int open = len;
-      int total = 0;
-      // copy missing data
-      while (open>0){
-        int read = p_stream->readBytes(p_result+total, open);
-        open -= read;
-        total += read;
+};
+
+/**
+ * @brief Merges multiple input channels. The input must be mono!
+ * So if you provide 2 mono channels you get a stereo signal as result 
+ * with the left channel from channel 0 and the right from channel 1
+ * @ingroup transform
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ * @tparam T 
+ */
+template<typename T>
+class InputMerge : public AudioStreamX {
+    /// Default constructor
+    InputMerge() = default;
+
+    /// @brief Constructor for stereo signal from to mono input stream
+    /// @param left 
+    /// @param right 
+    InputMerge(Stream &left, Stream &right) {
+      add(left);
+      add(right);
+    };
+
+    virtual bool begin(AudioBaseInfo info) {
+      if (size()!=info.channels){
+        info.channels = size();
+        LOGW("channels corrected to %d", size());
       }
-      // return result
+  	  setAudioInfo(info);
+  	  return true;
+    }
+
+    /// Provides the data from all streams mixed together
+    size_t readBytes(uint8_t* data, size_t len) override {
+      LOGD("readBytes: %d",(int)len);
+      T *p_data = (T*) data;
+      int result_len = MIN(available(), len/size());
+      int sample_count = result_len / sizeof(T);
+      int size_value = size();
+      int result_idx = 0;
+      for (int j=0;j<sample_count; j++){
+        for (int i=0; i<size_value; i++){
+          p_data[result_idx++] = weights[i] * readStream<T>(streams[i], sizeof(T));
+        }
+      }
+      return result_idx*sizeof(T);
+    }
+
+    /// Adds a new input stream
+    void add(Stream &in, float weight=1.0){
+      streams.push_back(&in);
+      weights.push_back(weight);
+    }
+
+    /// Defines a new weight for the indicated channel: If you set it to 0 it is muted.
+    void setWeight(int channel, float weight){
+      if (channel<size()){
+        weights[channel] = weight;
+      } else {
+        LOGE("Invalid channel %d - max is %d", channel, size()-1);
+      }
+    }
+
+    /// Remove all input streams
+    void end() override {
+      streams.clear();
+      weights.clear();
+    }
+
+    /// Number of stremams to which are mixed together = number of result channels
+    int size() {
+      return streams.size();
+    }
+
+    /// Provides the min available data from all streams
+    int available()  override {
+      int result = streams[0]->available();
+      for (int j=1;j<size();j++){
+        int tmp = streams[j]->available();
+        if (tmp<result){
+          result = tmp;
+        } 
+      }
       return result;
     }
 
+  protected:
+    Vector<Stream*> streams{10};
+    Vector<float> weights{10}; 
 };
-
 
 // support legicy VolumeOutput
 //typedef VolumeStream VolumeOutput;

@@ -175,6 +175,23 @@ class NumberConverter {
         }
 };
 
+/// guaranteed to return the requested data
+template<typename T>
+T readStream(Stream* p_stream, int len){
+  T result;
+  uint8_t *p_result = (uint8_t*) &result;
+  int open = len;
+  int total = 0;
+  // copy missing data
+  while (open>0){
+    int read = p_stream->readBytes(p_result+total, open);
+    open -= read;
+    total += read;
+  }
+  // return result
+  return result;
+}
+
 
 /// @brief Mime type for PCM
 static const char* mime_pcm = "audio/pcm";
