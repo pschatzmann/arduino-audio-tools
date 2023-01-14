@@ -333,6 +333,12 @@ class AudioKitStream : public AudioStreamX {
     kit.setSpeakerActive(active);
   }
 
+  /// @brief Returns true if the headphone was detected
+  /// @return 
+  bool headphoneStatus() {
+    return kit.headphoneStatus();
+  }
+
   /**
    * @brief Process input keys and pins
    *
