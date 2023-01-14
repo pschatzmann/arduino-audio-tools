@@ -327,6 +327,12 @@ class AudioKitStream : public AudioStreamX {
   /// Determines the volume
   int volume() { return kit.volume(); }
 
+  /// Activates/Deactives the speaker
+  /// @param active 
+  void setSpeakerActive (bool active){
+    kit.setSpeakerActive(active);
+  }
+
   /**
    * @brief Process input keys and pins
    *
