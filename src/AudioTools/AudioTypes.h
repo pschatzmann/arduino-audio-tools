@@ -178,7 +178,7 @@ class NumberConverter {
 /// guaranteed to return the requested data
 template<typename T>
 T readSample(Stream* p_stream){
-  T result;
+  T result=0;
   uint8_t *p_result = (uint8_t*) &result;
   int open = sizeof(T);
   int total = 0;
@@ -188,7 +188,6 @@ T readSample(Stream* p_stream){
     open -= read;
     total += read;
   }
-  // return result
   return result;
 }
 

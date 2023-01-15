@@ -191,7 +191,7 @@ class ResampleStream : public AudioStreamX {
         T diff = val1 - val0;
         T result;
         if (diff!=0){
-            float delta = frame_idx - frame_idx0;
+            float delta = (frame_idx - frame_idx0) - 1;
             T diffEffective = diff * delta;
             result = val0+diffEffective;
         } else {
