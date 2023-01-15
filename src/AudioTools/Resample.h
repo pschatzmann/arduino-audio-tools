@@ -183,12 +183,8 @@ class ResampleStream : public AudioStreamX {
 
     // interpolate value
     inline T getValue(T *data,float frame_idx, int channel){
-        // if no fraction we lookup the value
-        if (frame_idx == (int)frame_idx){
-            return lookup(data, frame_idx, channel);
-        } 
         // interpolate value
-        int frame_idx1 = frame_idx+1;
+        int frame_idx1 = frame_idx;
         int frame_idx0 = frame_idx1-1;
         T val0 = lookup(data, frame_idx0, channel);
         T val1 = lookup(data, frame_idx1, channel);
