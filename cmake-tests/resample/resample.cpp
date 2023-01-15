@@ -20,7 +20,7 @@ void setup(void) {
   auto config = out.defaultConfig();
   config.sample_rate = sample_rate; 
   config.channels = channels;
-  config.step_size = 0.1;
+  config.step_size = 1.9;
   out.begin(config);
 
   // Define CSV Output
