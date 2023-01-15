@@ -200,7 +200,9 @@ class SDDirect {
       LOGD("-> fileNamePath: %s", fileName(file));
       file_path_str.clear();
       file_path_str = start_dir;
-      file_path_str += "/";
+      if (!file_path_str.endsWith("/")){
+        file_path_str += "/";
+      }
       for (int j=0; j<file_path_stack.size(); j++){
          file_path_str += file_path_stack[j]+"/";
       } 
