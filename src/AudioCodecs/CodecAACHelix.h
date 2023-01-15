@@ -136,6 +136,27 @@ class AACDecoderHelix : public AudioDecoder  {
                 audioChangeAACHelix->setAudioInfo(baseInfo);   
             }
         }
+
+        /// Provides the maximum frame size - this is allocated on the heap and you can reduce the heap size my minimizing this value
+        size_t maxFrameSize() {
+            return aac->maxFrameSize();
+        }
+
+        /// Define your optimized maximum frame size
+        void setMaxFrameSize(size_t len){
+            aac->setMaxFrameSize(len);
+        }
+
+        /// Provides the maximum pwm buffer size - this is allocated on the heap and you can reduce the heap size my minimizing this value
+        size_t maxPWMSize() {
+            return aac->maxPWMSize();
+        }
+
+        /// Define your optimized maximum pwm buffer size
+        void setMaxPWMSize(size_t len) {
+            aac->setMaxPWMSize(len);
+        }
+
     protected:
         libhelix::AACDecoderHelix *aac=nullptr;
 
