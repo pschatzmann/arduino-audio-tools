@@ -1147,6 +1147,7 @@ class InputMixer : public AudioStreamX {
  */
 template<typename T>
 class InputMerge : public AudioStreamX {
+  public:
     /// Default constructor
     InputMerge() = default;
 
