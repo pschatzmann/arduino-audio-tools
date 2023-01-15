@@ -148,6 +148,25 @@ class MP3DecoderHelix : public AudioDecoder  {
             return use_filter;
         }
 
+        /// Provides the maximum frame size - this is allocated on the heap and you can reduce the heap size my minimizing this value
+        size_t maxFrameSize() {
+            return mp3->maxFrameSize();
+        }
+
+        /// Define your optimized maximum frame size
+        void setMaxFrameSize(size_t len){
+            mp3->setMaxFrameSize(len);
+        }
+
+        /// Provides the maximum pwm buffer size - this is allocated on the heap and you can reduce the heap size my minimizing this value
+        size_t maxPWMSize() {
+            return mp3->maxPWMSize();
+        }
+
+        /// Define your optimized maximum pwm buffer size
+        void setMaxPWMSize(size_t len) {
+            mp3->setMaxPWMSize(len);
+        }
 
     protected:
         libhelix::MP3DecoderHelix *mp3=nullptr;
