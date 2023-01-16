@@ -70,7 +70,7 @@ class MetaDataID3Base  {
 
     void setCallback(void (*fn)(MetaDataType info, const char* str, int len)) {
         callback = fn;
-        armed = true;
+        armed = fn!=nullptr;
     }
 
   protected:
@@ -277,7 +277,7 @@ class MetaDataID3V1  : public MetaDataID3Base {
 #define ExperimentalIndicatorFlag 0x10
         
 // Relevant v2 Tags        
-INLINE_VAR const char* id3_v2_tags[] = {"TALB", "TOPE", "TIT2", "TCON"};
+INLINE_VAR const char* id3_v2_tags[] = {"TALB", "TOPE", "TPE1", "TIT2", "TCON"};
 
 
 // ID3 verion 2 TAG Header (10 bytes)  @ingroup metadata-id3
@@ -444,11 +444,14 @@ class MetaDataID3V2 : public MetaDataID3Base  {
                         int checkLen = min(l, 10);
                         if (isAscii(checkLen)){
                             processNotify();
+                        } else {
+                            LOGW("TAG %s ignored", tag);
                         }
                     } else {
                         partial_tag = tag;
+                        LOGI("%s partial tag", tag);
                     }
-                }
+                } 
             }
             
             // save partial tag information so that we process the remainder with the next write
@@ -471,7 +474,9 @@ class MetaDataID3V2 : public MetaDataID3Base  {
         // check on first 10 characters
         int m = l < 5 ? l : 10;
         for (int j=0; j<m; j++){
-            if (!isascii(result[j])) return false;
+            if (!isascii(result[j])) {
+                return false;
+            }
         }
         return true;
     }
@@ -500,13 +505,16 @@ class MetaDataID3V2 : public MetaDataID3Base  {
     /// executes the callbacks
     void processNotify() {
         if (callback!=nullptr && actual_tag!=nullptr && encodingIsSupported()){
-            if (strncmp(actual_tag,"TALB",4)==0)
-                callback(Title, result,strnlen(result, 256));
-            else if (strncmp(actual_tag,"TOPE",4)==0)
-                callback(Artist, result,strnlen(result, 256));
-            else if (strncmp(actual_tag,"TIT2",4)==0)
+            LOGI("callback %s",actual_tag);
+            if (memcmp(actual_tag,"TALB",4)==0)
                 callback(Album, result,strnlen(result, 256));
-            else if (strncmp(actual_tag,"TCON",4)==0) {
+            else if (memcmp(actual_tag,"TPE1",4)==0)
+                callback(Artist, result,strnlen(result, 256));
+            else if (memcmp(actual_tag,"TOPE",4)==0)
+                callback(Artist, result,strnlen(result, 256));
+            else if (memcmp(actual_tag,"TIT2",4)==0)
+                callback(Title, result,strnlen(result, 256));
+            else if (memcmp(actual_tag,"TCON",4)==0) {
                 if (result[0]=='('){
                     // convert genre id to string
                     int end_pos = strpos((char*)result, ")");
@@ -520,7 +528,7 @@ class MetaDataID3V2 : public MetaDataID3Base  {
                     }
                 }
                 callback(Genre, result,strnlen(result, 256));
-            }
+            } 
         }
     }
 
