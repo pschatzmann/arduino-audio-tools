@@ -78,6 +78,15 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
     return this;
   }
 
+  /// Writes n 0 values (= silence)
+  /// @param len 
+  virtual void writeSilence(size_t len){
+    int16_t zero = 0;
+    for (int j=0;j<len/2;j++){
+      write((uint8_t*)&zero,2);
+    } 
+  }
+
  protected:
   AudioBaseInfoDependent *p_notify=nullptr;
   AudioBaseInfo info;
