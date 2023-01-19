@@ -72,7 +72,7 @@ public:
         while(is.read((char *)buffer, rec_size)){
             audioList.push_back(transform(buffer[channel]));
         }
-        string str_size = std::to_string(audioList.size());
+        string str_size = "102400"; //std::to_string(audioList.size());
         str << "<style>div.x-svg {width: "<< str_size <<"px; }</style>";
         str << "<div class='x-svg'><svg viewBox='0 0 "<< str_size << " 100'> <polyline fill='none' stroke='blue' stroke-width='1' points ='";
         // copy data from input stream
@@ -115,6 +115,7 @@ public:
     buffer_count = bufferCount;
     p_audio_stream = &stream;
     cfg = stream.audioInfo();
+    copier.resize(bufferSize);
     fname = fileName;
     if (fileExists()){
         remove(fileName);

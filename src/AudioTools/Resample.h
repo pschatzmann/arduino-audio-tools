@@ -181,34 +181,41 @@ class ResampleStream : public AudioStreamX {
         return bytes;
     }
 
-    // interpolate value
+    /// get the interpolated value for indicated (float) index value
     inline T getValue(T *data,float frame_idx, int channel){
-        // interpolate value
+        // provide value if number w/o digits
+        if (frame_idx==(int)frame_idx){
+            return lookup(data, frame_idx-1, channel);
+        }
+        // interpolate value 
         int frame_idx1 = frame_idx;
         int frame_idx0 = frame_idx1-1;
         T val0 = lookup(data, frame_idx0, channel);
         T val1 = lookup(data, frame_idx1, channel);
         T diff = val1 - val0;
-        T result;
-        if (diff!=0){
-            float delta = (frame_idx - frame_idx0) - 1;
-            T diffEffective = diff * delta;
-            result = val0+diffEffective;
-        } else {
-            result = val0;
-        }
+        if (diff==0){
+            // No difference
+            return val0;
+        } 
+        // interpolate value
+        float delta = (frame_idx - frame_idx0) - 1;
+        T diffEffective = diff * delta;
+        T result = val0+diffEffective;
+
+        
         return result;
     }
 
-    // lookup value for indicated frame & channel
+    // lookup value for indicated frame & channel: index starts with -1;
     T lookup(T *data, int frame, int channel){
         if (frame>=0){
             return data[frame*info.channels+channel];
         } else {
+            // index -1
             return last_samples[channel];
         }
     }  
-
+    // store last samples to provide values for index -1
     void setupLastSamples(T *data, int frame){
         for (int ch=0;ch<info.channels;ch++){
             last_samples[ch] = data[frame+ch];
