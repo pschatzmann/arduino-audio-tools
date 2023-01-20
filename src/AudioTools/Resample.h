@@ -123,8 +123,9 @@ class ResampleStream : public AudioStreamX {
 
     size_t readBytes(uint8_t *buffer, size_t length) override {
         if (length==0) return 0;
-        // create buffer
-        size_t write_len = std::max(static_cast<int>(step_size *length), 1);
+        // create buffer (with min 1 frame)
+        int bytes_per_frame = info.bits_per_sample/8*info.channels;
+        size_t write_len = std::max(static_cast<int>(step_size *length)/bytes_per_frame*bytes_per_frame, 1*bytes_per_frame);
         read_buffer.resize(write_len);
         // read data from source to buffer
         int bytes_read = p_in->readBytes(read_buffer.data(), write_len);
