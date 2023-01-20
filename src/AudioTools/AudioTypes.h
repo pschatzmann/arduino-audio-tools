@@ -169,9 +169,19 @@ class NumberConverter {
                     return 8388607;
                 case 32:
                     return 2147483647;
-
             }
             return 32767;
+        }
+
+        template <typename T> 
+        static T clip(float value){
+            T mv = maxValue(sizeof(T)*8);
+            if (value > mv){
+                return mv;
+            } else if (value < -mv){
+                return -mv;
+            } 
+            return value;
         }
 };
 
