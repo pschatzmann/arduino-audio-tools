@@ -274,6 +274,11 @@ namespace audio_tools {
             return p_input_stream != nullptr;
         }
 
+        /// Provides the actual stream (=e.g.file)
+        virtual Stream* getStream(){
+            return p_input_stream;
+        }
+
         /// determines if the player is active
         virtual bool isActive() {
             return active;
