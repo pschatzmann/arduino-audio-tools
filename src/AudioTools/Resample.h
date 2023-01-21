@@ -62,19 +62,25 @@ class ResampleStream : public AudioStreamX {
     bool begin(ResampleConfig cfg){
         to_sample_rate = cfg.to_sample_rate;
         setAudioInfo(cfg);
-        return begin(cfg.step_size);
-    }
-
-    bool begin(int fromRate, int toRate){
-        to_sample_rate = toRate;
-        return begin(getStepSize(fromRate, toRate));
-    }
-
-    bool begin(float step){
         memset(last_samples.data(),0,sizeof(T)*info.channels);
-        setStepSize(step);
+        setStepSize(cfg.step_size);
         is_first = true;
         return true;
+    }
+
+    bool begin(AudioBaseInfo info, int fromRate, int toRate){
+        ResampleConfig rcfg;
+        rcfg.to_sample_rate = toRate;
+        rcfg.step_size = getStepSize(fromRate, toRate);
+        rcfg.copyFrom(info);
+        return begin(rcfg);
+    }
+
+    bool begin(AudioBaseInfo info, float step){
+        ResampleConfig rcfg;
+        rcfg.step_size = step;
+        rcfg.copyFrom(info);
+        return begin(rcfg);
     }
 
     void setAudioInfo(AudioBaseInfo info) override {
