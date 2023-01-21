@@ -138,14 +138,15 @@ class ResampleStream : public AudioStreamX {
             ring_buffer.resize(buffer_read_len+bytes_per_frame);
             step_dirty = false;
         }
+        // refill ringbuffer
         if (ring_buffer.available()<bytes_per_frame) {            
-            // refill ringbuffer
             size_t read_size = buffer_read_len * step_size;
             read_buffer.resize(read_size);
             // read data from source to buffer
             int bytes_read = p_in->readBytes(read_buffer.data(), read_size);
             if (bytes_read>0){
                 size_t written=0;
+                // resample to ringbuffer
                 write(&ring_buffer, read_buffer.data(), read_size, written);
                 LOGD("written: %d", (int)written);
             } else {
