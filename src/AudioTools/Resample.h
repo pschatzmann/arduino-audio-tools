@@ -135,7 +135,7 @@ class ResampleStream : public AudioStreamX {
         if (length==0) return 0;
         // setup ringbuffer size
         if (step_dirty){
-            ring_buffer.resize(buffer_read_len);
+            ring_buffer.resize(buffer_read_len+bytes_per_frame);
             step_dirty = false;
         }
         if (ring_buffer.available()<bytes_per_frame) {            
