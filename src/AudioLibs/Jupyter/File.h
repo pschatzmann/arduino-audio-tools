@@ -89,7 +89,7 @@ class File : public Stream {
     }
     
     virtual int available() override{
-        return stream.rdbuf()->in_avail();
+        return size()-position();
     };
     
     virtual int read() override{
