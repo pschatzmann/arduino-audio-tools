@@ -140,14 +140,14 @@ class ResampleStream : public AudioStreamX {
         }
         if (ring_buffer.available()<bytes_per_frame) {            
             // refill ringbuffer
-            size_t read_size = buffer_read_len / step_size;
+            size_t read_size = buffer_read_len * step_size;
             read_buffer.resize(read_size);
             // read data from source to buffer
             int bytes_read = p_in->readBytes(read_buffer.data(), read_size);
             if (bytes_read>0){
                 size_t written=0;
                 write(&ring_buffer, read_buffer.data(), read_size, written);
-                LOGI("written: %d", (int)written);
+                LOGD("written: %d", (int)written);
             } else {
                 LOGE("bytes_read==0");
             }
