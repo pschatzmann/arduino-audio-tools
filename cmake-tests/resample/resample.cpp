@@ -10,7 +10,8 @@ GeneratorFromArray<int16_t> sineWave(arsineC256,0,false);
 GeneratedSoundStream<int16_t> sound(sineWave);             // Stream generated from sine wave
 ResampleStream<int16_t> out(sound);                        // We double the output sample rate
 CsvStream<int16_t> csv(Serial, channels);                  // Output to Serial
-StreamCopy copier(csv, out, 1012);                       // copies sound to out
+InputMerge<int16_t> merge; 
+StreamCopy copier(csv, merge, 1024);                       // copies sound to out
 
 // Arduino Setup
 void setup(void) {  
@@ -21,7 +22,7 @@ void setup(void) {
   auto config = out.defaultConfig();
   config.sample_rate = sample_rate; 
   config.channels = channels;
-  config.step_size = 0.001;
+  config.step_size = 0.1;
   out.begin(config);
 
   // Define CSV Output
@@ -29,6 +30,8 @@ void setup(void) {
   sound.begin(config);
 //  sineWave.begin(config, N_B4);
   sineWave.begin(config);
+  merge.begin(config);
+  merge.add(out);
   Serial.println("started (mixer)...");
 }
 
