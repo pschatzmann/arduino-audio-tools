@@ -65,6 +65,9 @@ class ResampleStream : public AudioStreamX {
         memset(last_samples.data(),0,sizeof(T)*info.channels);
         setStepSize(cfg.step_size);
         is_first = true;
+        step_dirty = true;
+        bytes_per_frame = info.bits_per_sample/8*info.channels;
+
         return true;
     }
 
@@ -102,6 +105,7 @@ class ResampleStream : public AudioStreamX {
     void setStepSize(float step){
         LOGI("setStepSize: %f", step);
         step_size = step;
+        step_dirty = true;
     }
 
     /// calculate the step size the sample rate: e.g. from 44200 to 22100 gives a step size of 2 in order to provide fewer samples
@@ -129,33 +133,42 @@ class ResampleStream : public AudioStreamX {
 
     size_t readBytes(uint8_t *buffer, size_t length) override {
         if (length==0) return 0;
-        // create buffer (with min 1 frame)
-        int bytes_per_frame = info.bits_per_sample/8*info.channels;
-        size_t write_len = std::max(static_cast<int>(step_size *length)/bytes_per_frame*bytes_per_frame, 1*bytes_per_frame);
-        read_buffer.resize(write_len);
-        // read data from source to buffer
-        int bytes_read = p_in->readBytes(read_buffer.data(), write_len);
-        size_t written=0;
-        if (bytes_read>0){
-            // use use write implementation to fill buffer
-            print_to_array.begin(buffer, length);
-            write(&print_to_array, read_buffer.data(), bytes_read, written);
-        } else {
-            LOGE("bytes_read==0");
+        // setup ringbuffer size
+        if (step_dirty){
+            ring_buffer.resize(buffer_read_len);
+            step_dirty = false;
         }
-        return written;
+        if (ring_buffer.available()<bytes_per_frame) {            
+            // refill ringbuffer
+            size_t read_size = buffer_read_len / step_size;
+            read_buffer.resize(read_size);
+            // read data from source to buffer
+            int bytes_read = p_in->readBytes(read_buffer.data(), read_size);
+            if (bytes_read>0){
+                size_t written=0;
+                write(&ring_buffer, read_buffer.data(), read_size, written);
+                LOGI("written: %d", (int)written);
+            } else {
+                LOGE("bytes_read==0");
+            }
+        }
+
+        return ring_buffer.readBytes(buffer, length);
     }
 
   protected:
+    size_t buffer_read_len = 1024;
     Print *p_out=nullptr;
     Stream *p_in=nullptr;
     Vector<T> last_samples{0};
     float idx=0;
     Vector<uint8_t> read_buffer{0};
-    AdapterPrintToArray print_to_array;
+    RingBufferStream ring_buffer{0};
     bool is_first = true;
+    bool step_dirty = true;
     float step_size=1.0;
     int to_sample_rate = 0;
+    int bytes_per_frame = 0;
 
     /// Writes the buffer to p_out after resampling
     size_t write(Print *p_out, const uint8_t* buffer, size_t bytes, size_t &written )  {
@@ -178,6 +191,9 @@ class ResampleStream : public AudioStreamX {
         while (idx<frames){
             for (int ch=0;ch<info.channels;ch++){
                 T result = getValue(data, idx, ch);
+                if (p_out->availableForWrite()<sizeof(T)){
+                    LOGE("Could not write");
+                }
                 written += p_out->write((uint8_t*)&result, sizeof(T));
             }
             idx+=step_size;

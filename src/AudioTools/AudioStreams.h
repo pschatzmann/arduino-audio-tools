@@ -776,37 +776,40 @@ class NullStream : public BufferedStream {
 class RingBufferStream : public AudioStream {
  public:
   RingBufferStream(int size = DEFAULT_BUFFER_SIZE) {
-    buffer = new RingBuffer<uint8_t>(size);
-  }
-
-  ~RingBufferStream() {
-    if (buffer != nullptr) {
-      delete buffer;
-    }
+    resize(size);
   }
 
   virtual int available() override {
     // LOGD("RingBufferStream::available: %zu",buffer->available());
-    return buffer->available();
+    return buffer.available();
   }
 
   virtual void flush() override {}
-  virtual int peek() override { return buffer->peek(); }
-  virtual int read() override { return buffer->read(); }
+  virtual int peek() override { return buffer.peek(); }
+  virtual int read() override { return buffer.read(); }
 
   virtual size_t readBytes(uint8_t *data, size_t length) override {
-    return buffer->readArray(data, length);
+    return buffer.readArray(data, length);
   }
 
   virtual size_t write(const uint8_t *data, size_t len) override {
     // LOGD("RingBufferStream::write: %zu",len);
-    return buffer->writeArray(data, len);
+    return buffer.writeArray(data, len);
   }
 
-  virtual size_t write(uint8_t c) override { return buffer->write(c); }
+  virtual size_t write(uint8_t c) override { return buffer.write(c); }
+
+  void resize(int size){
+    buffer.resize(size);
+  }
+
+  size_t size() {
+    return buffer.size();
+  }
+
 
  protected:
-  RingBuffer<uint8_t> *buffer = nullptr;
+  RingBuffer<uint8_t> buffer{0};
 };
 
 
