@@ -18,6 +18,7 @@ AudioKitStream out;
 OutputMixer<int16_t> mixer(out, 2);                         // output mixer with 2 outputs mixing to AudioKitStream 
 StreamCopy copier1(mixer, sound1);                          // copies sound into mixer
 StreamCopy copier2(mixer, sound2);                          // copies sound into mixer
+AudioBaseInfo info;
 
 // Arduino Setup
 void setup(void) {  
@@ -25,12 +26,15 @@ void setup(void) {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Warning);
 
+  // setup audio info
+  info.channels = channels;
+  info.sample_rate = sample_rate;
+  info.bits_per_sample = 16;
+
   // start I2S
   Serial.println("starting I2S...");
   auto config = out.defaultConfig(TX_MODE);
-  config.sample_rate = sample_rate; 
-  config.channels = channels;
-  config.bits_per_sample = 16;
+  config.copyFrom(info); 
   out.begin(config);
 
   // Setup sine wave

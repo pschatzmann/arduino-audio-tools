@@ -20,8 +20,6 @@ MemoryStream guitar(guitar_raw, guitar_raw_len);
 StreamCopy copier(kit, mixer);
 
 void setup() {
-  mixer.add(drums);
-  mixer.add(guitar);
 
   // auto restart when MemoryStream has ended
   drums.setLoop(true);
@@ -34,6 +32,11 @@ void setup() {
   kit.begin(cfg);
   // max volume
   kit.setVolume(1.0);
+
+  mixer.add(drums);
+  mixer.add(guitar);
+  mixer.begin(cfg);
+
 }
 
 void loop() { copier.copy(); }

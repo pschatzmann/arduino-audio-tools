@@ -1,6 +1,5 @@
 #include "AudioTools.h"
 
-
 uint16_t sample_rate=44100;
 uint8_t channels = 2;                                      // The stream will have 2 channels 
 SineWaveGenerator<int16_t> sineWave(32000);                // subclass of SoundGenerator with max amplitude of 32000
@@ -8,6 +7,7 @@ GeneratedSoundStream<int16_t> sound(sineWave);             // Stream generated f
 ResampleStream<int16_t> resample(sound);
 CsvStream<int16_t> out(Serial); 
 StreamCopy copier(out, resample);                        // copies sound to out
+AudioBaseInfo info;
 
 // Arduino Setup
 void setup(void) {  
@@ -15,15 +15,20 @@ void setup(void) {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Warning);
 
+  // setup audio info
+  info.channels = channels;
+  info.sample_rate = sample_rate;
+  info.bits_per_sample = 16;
+
   // define resample
   auto rcfg = resample.defaultConfig();
+  rcfg.copyFrom(info);
   rcfg.step_size = 0.5
-  rcfg.channels = channels;
   resample.begin(rcfg); 
 
   // Define CSV Output
   auto config = out.defaultConfig();
-  config.channels = channels;
+  config.copyFrom(info);
   out.begin(config);
 
   // Setup sine wave

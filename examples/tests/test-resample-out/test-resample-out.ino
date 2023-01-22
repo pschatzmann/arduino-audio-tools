@@ -8,6 +8,7 @@ GeneratedSoundStream<int16_t> sound(sineWave);             // Stream generated f
 CsvStream<int16_t> out(Serial); 
 ResampleStream<int16_t> resample(out);
 StreamCopy copier(resample, sound);                        // copies sound to out
+AudioBaseInfo info;
 
 // Arduino Setup
 void setup(void) {  
@@ -15,16 +16,20 @@ void setup(void) {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Warning);
 
+  // setup audio info
+  info.channels = channels;
+  info.sample_rate = sample_rate;
+  info.bits_per_sample = 16;
+
   // define resample
   auto rcfg = resample.defaultConfig();
+  rcfg.copyFrom(info);
   rcfg.step_size = 0.5
-  rcfg.channels = channels;
   resample.begin(rcfg); 
 
   // Define CSV Output
   auto config = out.defaultConfig();
-  config.sample_rate = sample_rate; 
-  config.channels = channels;
+  config.copyFrom(info);
   out.begin(config);
 
   // Setup sine wave
