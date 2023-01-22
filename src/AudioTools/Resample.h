@@ -135,12 +135,12 @@ class ResampleStream : public AudioStreamX {
         if (length==0) return 0;
         // setup ringbuffer size
         if (step_dirty){
-            ring_buffer.resize(buffer_read_len+bytes_per_frame);
+            ring_buffer.resize(buffer_read_len * (bytes_per_frame+1) / bytes_per_frame);
             step_dirty = false;
         }
         // refill ringbuffer
         if (ring_buffer.available()<bytes_per_frame) {            
-            size_t read_size = buffer_read_len * step_size;
+            size_t read_size = buffer_read_len * step_size * bytes_per_frame / bytes_per_frame;
             read_buffer.resize(read_size);
             // read data from source to buffer
             int bytes_read = p_in->readBytes(read_buffer.data(), read_size);
@@ -154,7 +154,7 @@ class ResampleStream : public AudioStreamX {
             }
         }
 
-        return ring_buffer.readBytes(buffer, length);
+        return ring_buffer.readBytes(buffer, length*bytes_per_frame / bytes_per_frame);
     }
 
   protected:
@@ -242,7 +242,7 @@ class ResampleStream : public AudioStreamX {
     // store last samples to provide values for index -1
     void setupLastSamples(T *data, int frame){
         for (int ch=0;ch<info.channels;ch++){
-            last_samples[ch] = data[frame+ch];
+            last_samples[ch] = data[(frame*info.channels)+ch];
         }
     }  
 };
