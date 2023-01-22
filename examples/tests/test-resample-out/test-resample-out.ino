@@ -24,7 +24,7 @@ void setup(void) {
   // define resample
   auto rcfg = resample.defaultConfig();
   rcfg.copyFrom(info);
-  rcfg.step_size = 0.5
+  rcfg.step_size = 0.5;
   resample.begin(rcfg); 
 
   // Define CSV Output
