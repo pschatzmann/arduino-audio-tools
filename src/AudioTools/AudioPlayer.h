@@ -376,10 +376,12 @@ namespace audio_tools {
             return copier;
         }
 
+        /// If set to true the player writes 0 values instead of no data if the player is inactive
         void setSilenceOnInactive(bool active){
             silence_on_inactive = active;
         }
 
+        /// Checks if silence_on_inactive has been activated (default false)
         bool getSilenceOnInactive(){
             return silence_on_inactive;
         }
