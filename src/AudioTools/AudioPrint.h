@@ -68,6 +68,15 @@ class AudioPrint : public Print, public AudioBaseInfoDependent, public AudioBase
             return cfg;
         }
 
+        /// Writes n 0 values (= silence)
+        /// @param len 
+        virtual void writeSilence(size_t len){
+            int16_t zero = 0;
+            for (int j=0;j<len/2;j++){
+            write((uint8_t*)&zero,2);
+            } 
+        }
+
     protected:
         uint8_t tmp[MAX_SINGLE_CHARS];
         int tmpPos=0;

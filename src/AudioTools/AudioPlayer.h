@@ -289,6 +289,11 @@ namespace audio_tools {
             return isActive();
         }
 
+        /// The same like start() / stop()
+        virtual void setActive(bool isActive){
+            active = isActive;
+        }
+
         /// sets the volume - values need to be between 0.0 and 1.0
         virtual void setVolume(float volume) {
             if (volume >= 0.0f && volume <= 1.0f) {
@@ -333,6 +338,15 @@ namespace audio_tools {
                 }
                 // move to next stream after timeout
                 moveToNextFileOnTimeout();
+            } else {
+                // e.g. A2DP should still receive data to keep the connection open
+                if (silence_on_inactive){
+                    if (p_final_print!=nullptr){
+                        p_final_print->writeSilence(1024);
+                    } else if (p_final_stream!=nullptr){
+                        p_final_stream->writeSilence(1024);
+                    }
+                }
             }
         }
 
@@ -362,9 +376,18 @@ namespace audio_tools {
             return copier;
         }
 
+        void setSilenceOnInactive(bool active){
+            silence_on_inactive = active;
+        }
+
+        bool getSilenceOnInactive(){
+            return silence_on_inactive;
+        }
+
     protected:
         bool active = false;
         bool autonext = false;
+        bool silence_on_inactive = false;
         AudioSource* p_source = nullptr;
         VolumeStream volume_out; // Volume control
         MetaDataID3 meta_out; // Metadata parser
