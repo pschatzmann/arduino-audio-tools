@@ -1081,6 +1081,7 @@ class InputMixer : public AudioStreamX {
 
     virtual bool begin(AudioBaseInfo info) {
   	  setAudioInfo(info);
+      frame_size = info.bits_per_sample/8 * info.channels;
   	  return true;
     }
 
@@ -1114,7 +1115,8 @@ class InputMixer : public AudioStreamX {
     size_t readBytes(uint8_t* data, size_t len) override {
       if (total_weights==0) return 0;
       LOGD("readBytes: %d",(int)len);
-      int result_len = MIN(available(), len);
+      // result_len must be full frames
+      int result_len = MIN(available(), len) * frame_size / frame_size;
       int sample_count = result_len / sizeof(T);
       T *p_data = (T*) data;
       float sample_total = 0;
@@ -1145,6 +1147,7 @@ class InputMixer : public AudioStreamX {
     Vector<Stream*> streams{10};
     Vector<float> weights{10}; 
     float total_weights = 0.0;
+    int frame_size = 4;
 
 };
 
