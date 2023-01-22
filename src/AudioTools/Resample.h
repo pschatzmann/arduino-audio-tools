@@ -157,8 +157,18 @@ class ResampleStream : public AudioStreamX {
         return ring_buffer.readBytes(buffer, length*bytes_per_frame / bytes_per_frame);
     }
 
+    /// @brief  Defines the internal read buffer length that will be used to resample
+    void setReadBufferLen(size_t len){
+        buffer_read_len = len;
+    }
+
+    size_t getReadBufferLen(){
+        return buffer_read_len;
+    }
+
+
   protected:
-    size_t buffer_read_len = 1024;
+    size_t buffer_read_len = 256;
     Print *p_out=nullptr;
     Stream *p_in=nullptr;
     Vector<T> last_samples{0};
