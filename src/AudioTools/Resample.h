@@ -105,7 +105,6 @@ class ResampleStream : public AudioStreamX {
     void setStepSize(float step){
         LOGI("setStepSize: %f", step);
         step_size = step;
-        step_dirty = true;
     }
 
     /// calculate the step size the sample rate: e.g. from 44200 to 22100 gives a step size of 2 in order to provide fewer samples
