@@ -382,7 +382,7 @@ namespace audio_tools {
         }
 
         /// Checks if silence_on_inactive has been activated (default false)
-        bool getSilenceOnInactive(){
+        bool isSilenceOnInactive(){
             return silence_on_inactive;
         }
 
