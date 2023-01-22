@@ -28,6 +28,7 @@ SineFromTable<int16_t> sineWave(32000);                    // subclass of SoundG
 GeneratedSoundStream<int16_t> sound(sineWave);             // Stream generated from sine wave
 ResampleStream<int16_t> resample(sound);
 AnalogAudioStream out; 
+AudioBaseInfo info;
 
 GeneratorFromArray<float> carrier;                         // The most efficient way to generate a fast sine wave
 
@@ -36,20 +37,25 @@ void setup() {
     Serial.begin(115200);
     AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
+    // setup audio info
+    info.channels = channels;
+    info.sample_rate = sample_rate;
+    info.bits_per_sample = 16;
+
     // allocate data
     audio_data.resize(num_samples);
     modulated_data.resize(num_samples);
 
     // define resample
     auto rcfg = resample.defaultConfig();
+    rcfg.copyFrom(info);
     // define resample we resample the audio data from 44100 to 13M
     rcfg.step_size = resample.getStepSize(sample_rate, sample_rate_carrier);
-    rcfg.channels = channels;
     resample.begin(rcfg); 
 
     // setup test tone
     auto cfgs = sound.defaultConfig();
-    cfgs.channels = channels;
+    cfgs.copyFrom(info);
     sound.begin(cfgs);
 
     // setup carrier tone
@@ -59,8 +65,7 @@ void setup() {
 
     // setup analog output via i2s
     auto cfg = out.defaultConfig(TX_MODE);
-    cfg.channels = channels;
-    cfg.bits_per_sample = 16;
+    cfg.copyFrom(info);
     out.begin(cfg);
     out.setMaxSampleRate();
 }

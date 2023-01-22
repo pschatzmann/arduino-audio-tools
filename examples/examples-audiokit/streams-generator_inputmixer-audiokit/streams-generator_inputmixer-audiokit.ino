@@ -17,6 +17,7 @@ GeneratedSoundStream<int16_t> sound2(sineWave2);             // Stream generated
 InputMixer<int16_t> mixer;
 AudioKitStream out; 
 StreamCopy copier(out, mixer);                             // copies sound into i2s
+AudioBaseInfo info;
 
 // Arduino Setup
 void setup(void) {  
@@ -24,20 +25,25 @@ void setup(void) {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
-  mixer.add(sound1);
-  mixer.add(sound2);
+  // setup audio info
+  info.channels = channels;
+  info.sample_rate = sample_rate;
+  info.bits_per_sample = 16;
 
   // start I2S
   Serial.println("starting I2S...");
   auto config = out.defaultConfig(TX_MODE);
-  config.sample_rate = sample_rate; 
-  config.channels = channels;
-  config.bits_per_sample = 16;
+  config.copyFrom(info); 
   out.begin(config);
 
   // Setup sine wave
   sineWave1.begin(channels, sample_rate, N_B4);
   sineWave2.begin(channels, sample_rate, N_E4);
+
+  mixer.add(sound1);
+  mixer.add(sound2);
+  mixer.begin(info);
+
   Serial.println("started...");
 }
 
