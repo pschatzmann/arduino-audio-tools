@@ -462,10 +462,11 @@ class GeneratorFromArray : public SoundGenerator<T> {
      */
 
     template  <size_t arrayLen> 
-    GeneratorFromArray(T(&array)[arrayLen], int repeat=0, bool setInactiveAtEnd=true) {
+    GeneratorFromArray(T(&array)[arrayLen], int repeat=0, bool setInactiveAtEnd=true, size_t startIndex=0) {
         TRACED();
         this->max_repeat = repeat;
         this->inactive_at_end = setInactiveAtEnd;
+        this->sound_index = startIndex;
         setArray(array, arrayLen);
     }
 
