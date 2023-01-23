@@ -459,6 +459,7 @@ class GeneratorFromArray : public SoundGenerator<T> {
      * @tparam array array of audio data of the the type defined as class template parameter 
      * @param repeat number of repetions the array should be played (default 1), set to 0 for endless repeat.
      * @param setInactiveAtEnd  defines if the generator is set inactive when the array has played fully. Default is true.
+     * @param startIndex  defines if the phase. Default is 0.
      */
 
     template  <size_t arrayLen> 
