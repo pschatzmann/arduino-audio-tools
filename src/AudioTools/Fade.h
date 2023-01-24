@@ -76,13 +76,11 @@ protected:
 
   template <typename T> void convertFrames(T *data, int frames, int channels) {
     float delta = 1.0 / frames;
-    // handle fade in
-    if (is_fade_out) {
-      fadeOut<T>(data, frames, channels, delta);
-    }
     // handle fade out
     if (is_fade_in) {
       fadeIn<T>(data, frames, channels, delta);
+    }  else if (is_fade_out) {
+      fadeOut<T>(data, frames, channels, delta);
     }
     if (frames > 0) {
       is_done = true;
@@ -109,12 +107,10 @@ protected:
     for (int j = 0; j < frames; j++) {
       for (int ch = 0; ch < channels; ch++) {
         data[j * channels + ch] = data[j * channels + ch] * volume;
-        if (volume > 0) {
-          volume += delta;
-          if (volume > 1.0) {
-            volume = 1.0;
-            is_fade_in = false;
-          }
+        volume += delta;
+        if (volume > 1.0) {
+          volume = 1.0;
+          is_fade_in = false;
         }
       }
     }
