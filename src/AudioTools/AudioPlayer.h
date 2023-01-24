@@ -175,8 +175,10 @@ namespace audio_tools {
             p_out_decoding->end();
             meta_out.end();
             // end silently
-            fade.writeEnd(*p_final_print, 1024);
-            p_final_print->writeSilence(1024);
+            if (p_final_print!=nullptr){
+                fade.writeEnd(*p_final_print, 1024);
+                p_final_print->writeSilence(1024*10);
+            }
         }
 
         /// (Re)defines the audio source
