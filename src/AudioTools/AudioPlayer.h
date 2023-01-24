@@ -99,6 +99,7 @@ namespace audio_tools {
         AudioPlayer(AudioSource& source, AudioStream& output, AudioDecoder& decoder) {
             TRACED();
             this->p_source = &source;
+            this->p_decoder = &decoder;
             if (decoder.isResultPCM()){
                 this->fade.setTarget(output);
                 this->volume_out.setTarget(fade);
@@ -174,6 +175,13 @@ namespace audio_tools {
             active = false;
             p_out_decoding->end();
             meta_out.end();
+            // remove any data in the decoder
+            if (p_decoder!=nullptr){
+                LOGI("reset codec");
+                p_decoder->end();
+                p_decoder->begin();
+            }
+
             // end silently
             if (p_final_print!=nullptr){
                 fade.writeEnd(*p_final_print, 1024);
@@ -196,6 +204,7 @@ namespace audio_tools {
             if (this->p_out_decoding!=nullptr){
                 delete p_out_decoding;
             }
+            this->p_decoder = &decoder;
             this->p_out_decoding = new EncodedAudioStream(volume_out, decoder);
         }
 
