@@ -74,6 +74,7 @@
 #include "AudioEffects/PitchShift.h"
 #include "AudioMetaData/MetaData.h"
 #include "AudioHttp/AudioHttp.h"
+#include "AudioTools/Fade.h"
 #include "AudioTools/AudioPlayer.h"
 
 /**

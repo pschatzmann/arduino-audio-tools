@@ -300,8 +300,9 @@ public:
   }
 
   /// Starts the processing - sets the status to active
-  bool begin(AudioBaseInfo info) {
+  bool begin(AudioBaseInfo cfg) {
     TRACED();
+    info = cfg;
     const CodecNOP *nop = CodecNOP::instance();
     if (decoder_ptr != nop || encoder_ptr != nop) {
       // some decoders need this - e.g. opus

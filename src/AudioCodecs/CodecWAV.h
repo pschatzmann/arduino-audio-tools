@@ -449,6 +449,8 @@ class WAVEncoder : public AudioEncoder {
         /// Defines the WAVAudioInfo
         virtual void setAudioInfo(WAVAudioInfo ai) {
             audioInfo = ai;
+            LOGI("sample_rate: %d", audioInfo.sample_rate);
+            LOGI("channels: %d", audioInfo.channels);
             audioInfo.byte_rate = audioInfo.sample_rate * audioInfo.bits_per_sample * audioInfo.channels;
             audioInfo.block_align =  audioInfo.bits_per_sample / 8 * audioInfo.channels;
             if (audioInfo.is_streamed || audioInfo.data_length==0 || audioInfo.data_length >= 0x7fff0000) {

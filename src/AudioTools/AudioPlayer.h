@@ -11,6 +11,7 @@
 #include "AudioTools/AudioCopy.h"
 #include "AudioHttp/AudioHttp.h"
 #include "AudioTools/AudioSource.h"
+#include "AudioTools/Fade.h"
 // support for legacy USE_SDFAT
 #ifdef USE_SDFAT
 #include "AudioLibs/AudioSourceSDFAT.h"
@@ -52,7 +53,8 @@ namespace audio_tools {
             this->p_source = &source;
             this->p_decoder = &decoder;
             if (decoder.isResultPCM()){
-                this->volume_out.setTarget(output);
+                this->fade.setTarget(output);
+                this->volume_out.setTarget(fade);
                 this->p_out_decoding = new EncodedAudioStream(volume_out, decoder);
             } else {
                 this->p_out_decoding = new EncodedAudioStream(output, decoder);
@@ -77,7 +79,8 @@ namespace audio_tools {
             this->p_source = &source;
             this->p_decoder = &decoder;
             if (decoder.isResultPCM()){
-                this->volume_out.setTarget(output);
+                this->fade.setTarget(output);
+                this->volume_out.setTarget(fade);
                 this->p_out_decoding = new EncodedAudioStream(volume_out, decoder);
             } else {
                 this->p_out_decoding = new EncodedAudioStream(output, decoder);
@@ -97,7 +100,8 @@ namespace audio_tools {
             TRACED();
             this->p_source = &source;
             if (decoder.isResultPCM()){
-                this->volume_out.setTarget(output);
+                this->fade.setTarget(output);
+                this->volume_out.setTarget(fade);
                 this->p_out_decoding = new EncodedAudioStream(volume_out, decoder);
             } else {
                 this->p_out_decoding = new EncodedAudioStream(output, decoder);
@@ -170,6 +174,9 @@ namespace audio_tools {
             active = false;
             p_out_decoding->end();
             meta_out.end();
+            // end silently
+            fade.writeEnd(*p_final_print, 1024);
+            p_final_print->writeSilence(1024);
         }
 
         /// (Re)defines the audio source
@@ -207,6 +214,7 @@ namespace audio_tools {
             LOGI("channels: %d", info.channels);
             // notifiy volume
             volume_out.setAudioInfo(info);
+            fade.setAudioInfo(info);
             // notifiy final ouput: e.g. i2s
             if (p_final_print != nullptr) p_final_print->setAudioInfo(info);
             if (p_final_stream != nullptr) p_final_stream->setAudioInfo(info);
@@ -220,13 +228,13 @@ namespace audio_tools {
         /// starts / resumes the playing of a matching song
         virtual void play() {
             TRACED();
-            active = true;
+            setActive(true);
         }
 
         /// halts the playing
         virtual void stop() {
             TRACED();
-            active = false;
+            setActive(false);
         }
 
         /// moves to next file
@@ -292,6 +300,11 @@ namespace audio_tools {
         /// The same like start() / stop()
         virtual void setActive(bool isActive){
             active = isActive;
+            if (active){
+               fade.setFadeInActive(true); 
+            } else {
+               fade.setFadeOutActive(true); 
+            }
         }
 
         /// sets the volume - values need to be between 0.0 and 1.0
@@ -339,8 +352,11 @@ namespace audio_tools {
                 // move to next stream after timeout
                 moveToNextFileOnTimeout();
             } else {
+                if (fade.isFadeOutActive() && !fade.isFadeComplete()){
+                    // only single copy 
+                    copier.copy();
                 // e.g. A2DP should still receive data to keep the connection open
-                if (silence_on_inactive){
+                } else if (silence_on_inactive){
                     if (p_final_print!=nullptr){
                         p_final_print->writeSilence(1024);
                     } else if (p_final_stream!=nullptr){
@@ -392,6 +408,7 @@ namespace audio_tools {
         bool silence_on_inactive = false;
         AudioSource* p_source = nullptr;
         VolumeStream volume_out; // Volume control
+        FadeStream fade; // Phase in / Phase Out to avoid popping noise
         MetaDataID3 meta_out; // Metadata parser
         EncodedAudioStream* p_out_decoding = nullptr; // Decoding stream
         AudioDecoder* p_decoder = nullptr;
