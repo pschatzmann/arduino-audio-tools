@@ -126,7 +126,7 @@ protected:
 template <typename T> 
 class LastSampleFaderT {
 public:
-  void setChannels(int ch) { channels = ch; }
+  void setChannels(int ch) { channels = ch; last.resize(ch); }
   size_t write(uint8_t *src, size_t size) {
     if (channels == 0){
       LOGE("channels=0");
@@ -153,7 +153,7 @@ public:
 
 protected:
   int channels = 0;
-  Vector<T> last{2};
+  Vector<T> last{0};
 
   void storeLastSamples(int frames, uint8_t *src) {
     T *data = (T *)src;
