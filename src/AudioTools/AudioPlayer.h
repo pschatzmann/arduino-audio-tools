@@ -468,11 +468,11 @@ namespace audio_tools {
             // end silently
             if (p_final_print!=nullptr){
                 TRACEI();
-                fade.writeEnd(*p_final_print, 1024);
+                //fade.writeEnd(*p_final_print, 1024);
                 p_final_print->writeSilence(1024*10);
             } else if (p_final_stream!=nullptr) {
                 TRACEI();
-                fade.writeEnd(*p_final_stream, 1024);
+                //fade.writeEnd(*p_final_stream, 1024);
                 p_final_stream->writeSilence(1024*10);
             }
         }
