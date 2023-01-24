@@ -182,11 +182,6 @@ namespace audio_tools {
                 p_decoder->begin();
             }
 
-            // end silently
-            if (p_final_print!=nullptr){
-                fade.writeEnd(*p_final_print, 1024);
-                p_final_print->writeSilence(1024*10);
-            }
         }
 
         /// (Re)defines the audio source
@@ -251,6 +246,7 @@ namespace audio_tools {
         /// moves to next file
         virtual bool next(int offset=1) {
             TRACED();
+            writeEnd();
             steam_increment = 1;
             active = setStream(p_source->nextStream(offset));
             return active;
@@ -259,6 +255,7 @@ namespace audio_tools {
         /// moves to selected file
         virtual bool setIndex(int idx) {
             TRACED();
+            writeEnd();
             steam_increment = 1;
             active = setStream(p_source->selectStream(idx));
             return active;
@@ -267,6 +264,7 @@ namespace audio_tools {
         /// moves to selected file
         virtual bool setPath(const char* path) {
             TRACED();
+            writeEnd();
             steam_increment = 1;
             active = setStream(p_source->selectStream(path));
             return active;
@@ -275,6 +273,7 @@ namespace audio_tools {
         /// moves to previous file
         virtual bool previous(int offset=1) {
             TRACED();
+            writeEnd();
             steam_increment = -1;
             active = setStream(p_source->previousStream(offset));
             return active;
@@ -366,6 +365,7 @@ namespace audio_tools {
                 if (fade.isFadeOutActive() && !fade.isFadeComplete()){
                     // only single copy 
                     copier.copy();
+                    writeSilence(1024*10);
                 // e.g. A2DP should still receive data to keep the connection open
                 } else if (silence_on_inactive){
                     if (p_final_print!=nullptr){
@@ -452,6 +452,28 @@ namespace audio_tools {
                     active = false;
                 }
                 timeout = millis() + p_source->timeoutAutoNext();
+            }
+        }
+
+        void writeSilence(size_t bytes) {
+            TRACEI();
+            if (p_final_print!=nullptr){
+                p_final_print->writeSilence(bytes);
+            } else if (p_final_stream!=nullptr){
+                p_final_stream->writeSilence(bytes);
+            }
+        }
+
+        void writeEnd() {
+            // end silently
+            if (p_final_print!=nullptr){
+                TRACEI();
+                fade.writeEnd(*p_final_print, 1024);
+                p_final_print->writeSilence(1024*10);
+            } else if (p_final_stream!=nullptr) {
+                TRACEI();
+                fade.writeEnd(*p_final_stream, 1024);
+                p_final_stream->writeSilence(1024*10);
             }
         }
 
