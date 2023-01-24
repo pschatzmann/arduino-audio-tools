@@ -59,7 +59,7 @@ public:
                              bytes / bytes_per_sample / channels, channels);
       break;
     default:
-      LOGE("Unsupported bitsPerSample");
+      LOGE("%s", "Unsupported bitsPerSample");
       break;
     }
   }
@@ -252,7 +252,7 @@ public:
 
   size_t readBytes(uint8_t *buffer, size_t length) override {
     if (!active) {
-      LOGE(error_msg);
+      LOGE("%s", error_msg);
       return 0;
     }
     fade.convert(buffer, length, info.channels, info.bits_per_sample);
@@ -260,11 +260,11 @@ public:
     return p_io->readBytes(buffer, length);
   }
 
-  int available() { return p_io == nullptr ? 0 : p_io->available(); }
+  int available() override { return p_io == nullptr ? 0 : p_io->available(); }
 
   size_t write(const uint8_t *buffer, size_t size) override {
     if (!active) {
-      LOGE(error_msg);
+      LOGE("%s", error_msg);
       return 0;
     }
     fade.convert((uint8_t *)buffer, size, info.channels, info.bits_per_sample);
@@ -272,7 +272,7 @@ public:
     return p_out->write(buffer, size);
   }
 
-  int availableForWrite() {
+  int availableForWrite() override {
     return p_out == nullptr ? 0 : p_out->availableForWrite();
   }
 
