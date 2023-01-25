@@ -18,7 +18,7 @@
 
 // forward declarations
 void callbackInit();
-Stream* callbackStream();
+Stream* callbackStream(int offset);
 
 
 // data
