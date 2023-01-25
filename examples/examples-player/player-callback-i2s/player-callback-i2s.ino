@@ -35,7 +35,7 @@ void callbackInit() {
   audioFile = SD.open("/");
 }
 
-Stream* callbackStream() {
+Stream* callbackStream(int offset) {
   auto lastFile = audioFile;
   audioFile = audioFile.openNextFile();
   lastFile.close();
