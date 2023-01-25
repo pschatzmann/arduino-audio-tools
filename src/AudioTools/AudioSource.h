@@ -73,7 +73,7 @@ public:
     AudioSourceCallback() {
     }
 
-    AudioSourceCallback(Stream* (*nextStreamCallback)(), void (*onStartCallback)() = nullptr) {
+    AudioSourceCallback(Stream* (*nextStreamCallback)(int offset), void (*onStartCallback)() = nullptr) {
         TRACED();
         this->onStartCallback = onStartCallback;
         this->nextStreamCallback = nextStreamCallback;
@@ -88,7 +88,7 @@ public:
     /// Returns next (with positive index) or previous stream (with negative index)
     virtual Stream* nextStream(int offset) override {
         TRACED();
-        return nextStreamCallback == nullptr ? nullptr : nextStreamCallback();
+        return nextStreamCallback == nullptr ? nullptr : nextStreamCallback(offset);
     }
 
     /// Returns selected audio stream
@@ -105,7 +105,7 @@ public:
         onStartCallback = callback;
     }
 
-    void setCallbackNextStream(Stream* (*callback)()) {
+    void setCallbackNextStream(Stream* (*callback)(int offset)) {
         nextStreamCallback = callback;
     }
 
@@ -129,7 +129,7 @@ public:
 protected:
     void (*onStartCallback)() = nullptr;
     bool auto_next = true;
-    Stream* (*nextStreamCallback)() = nullptr;
+    Stream* (*nextStreamCallback)(int offset) = nullptr;
     Stream* (*indexStreamCallback)(int index) = nullptr;
     const char*path=nullptr;
 };
