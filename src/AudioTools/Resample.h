@@ -219,7 +219,7 @@ class ResampleStream : public AudioStreamX {
     }
 
     /// get the interpolated value for indicated (float) index value
-    virtual T getValue(T *data,float frame_idx, int channel){
+    T getValue(T *data,float frame_idx, int channel){
         // interpolate value 
         int frame_idx1 = frame_idx;
         int frame_idx0 = frame_idx1-1;
@@ -247,6 +247,16 @@ class ResampleStream : public AudioStreamX {
     }  
 };
 
+/**
+ * @brief Dynamic Resampling. We can use a variable factor to speed up or slow down
+ * the playback. This is the original implementation which should be slightly more efficient
+ * for microcontrollers with slow floating point operations
+ * @author Phil Schatzmann
+ * @ingroup transform
+ * @copyright GPLv3
+ * @tparam T 
+ */
+
 template<typename T>
 class ResampleStreamFast : public ResampleStream<T> {
   public:
@@ -262,7 +272,7 @@ class ResampleStreamFast : public ResampleStream<T> {
     ResampleStreamFast(AudioStream &io) : ResampleStream<T>(io){}
     
     /// get the interpolated value for indicated (float) index value
-    T getValue(T *data,float frame_idx, int channel) override {
+    T getValue(T *data,float frame_idx, int channel)  {
         // provide value if number w/o digits
         if (frame_idx==(int)frame_idx)  {
             return ResampleStream<T>::lookup(data, frame_idx-1, channel);
