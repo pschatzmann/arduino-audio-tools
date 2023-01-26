@@ -201,6 +201,16 @@ T readSample(Stream* p_stream){
   return result;
 }
 
+/// @brief  Similar to Arduino map function but using floats
+/// @param x 
+/// @param in_min 
+/// @param in_max 
+/// @param out_min 
+/// @param out_max 
+/// @return 
+float mapFloat(float x, float in_min, float in_max, float out_min, float out_max) {
+  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
 
 /// @brief Mime type for PCM
 static const char* mime_pcm = "audio/pcm";

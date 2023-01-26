@@ -20,10 +20,6 @@ class VolumeControl {
         virtual float getVolumeFactor(float volume) = 0;
 
     protected:
-        /// similar to the Arduino map function - but using floats
-        float map(float x, float in_min, float in_max, float out_min, float out_max) {
-            return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-        }
 
         /// limits the output to the range of 0 to 1.0
         virtual float limit(float in){
@@ -133,9 +129,9 @@ class SimulatedAudioPot : public VolumeControl {
         virtual float getVolumeFactor(float volume) {
             float result = 0;
             if (volume<=x){
-                result = map(volume, 0.0, x, 0, y );
+                result = mapFloat(volume, 0.0, x, 0, y );
             } else {
-                result = map(volume, x, 1.0, y, 1.0);
+                result = mapFloat(volume, x, 1.0, y, 1.0);
             }
             return limit(result);
         }

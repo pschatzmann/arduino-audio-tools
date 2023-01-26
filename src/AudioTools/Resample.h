@@ -130,6 +130,7 @@ class ResampleStream : public AudioStreamX {
         return p_in!=nullptr ? p_in->available() : 0;
     }
 
+    /// Reuses the write implementation to support readBytes
     size_t readBytes(uint8_t *buffer, size_t length) override {
         if (length==0) return 0;
         // setup ringbuffer size
@@ -197,6 +198,7 @@ class ResampleStream : public AudioStreamX {
             is_first = false;
             setupLastSamples(data, 0);
         }
+
         // process all samples
         while (idx<frames){
             for (int ch=0;ch<info.channels;ch++){
@@ -208,35 +210,24 @@ class ResampleStream : public AudioStreamX {
             }
             idx+=step_size;
         }
+        
         // save last samples
         setupLastSamples(data, frames-1);
         idx -= frames;
+        // returns requested bytes to avoid rewriting of processed bytes
         return bytes;
     }
 
     /// get the interpolated value for indicated (float) index value
-    inline T getValue(T *data,float frame_idx, int channel){
-        // provide value if number w/o digits
-        if (frame_idx==(int)frame_idx){
-            return lookup(data, frame_idx-1, channel);
-        }
+    virtual T getValue(T *data,float frame_idx, int channel){
         // interpolate value 
         int frame_idx1 = frame_idx;
         int frame_idx0 = frame_idx1-1;
         T val0 = lookup(data, frame_idx0, channel);
         T val1 = lookup(data, frame_idx1, channel);
-        T diff = val1 - val0;
-        if (diff==0){
-            // No difference
-            return val0;
-        } 
-        // interpolate value
-        float delta = (frame_idx - frame_idx0) - 1;
-        T diffEffective = diff * delta;
-        T result = val0+diffEffective;
 
-        
-        return result;
+        float result = mapFloat(frame_idx,frame_idx1,frame_idx0, val0, val1 );
+        return round(result);
     }
 
     // lookup value for indicated frame & channel: index starts with -1;
@@ -256,6 +247,43 @@ class ResampleStream : public AudioStreamX {
     }  
 };
 
+template<typename T>
+class ResampleStreamFast : public ResampleStream<T> {
+  public:
+    /// Support for resampling via write.
+    ResampleStreamFast(Print &out, int channelCount=2) : ResampleStream<T>(out, channelCount){}
+    /// Support for resampling via write. The audio information is copied from the io
+    ResampleStreamFast(AudioPrint &out) : ResampleStream<T>(out) {}
 
+    /// Support for resampling via write and read. 
+    ResampleStreamFast(Stream &io, int channelCount=2) : ResampleStream<T>(io, channelCount){}
+
+    /// Support for resampling via write and read. The audio information is copied from the io
+    ResampleStreamFast(AudioStream &io) : ResampleStream<T>(io){}
+    
+    /// get the interpolated value for indicated (float) index value
+    T getValue(T *data,float frame_idx, int channel) override {
+        // provide value if number w/o digits
+        if (frame_idx==(int)frame_idx)  {
+            return ResampleStream<T>::lookup(data, frame_idx-1, channel);
+        }
+        // interpolate value 
+        int frame_idx1 = frame_idx;
+        int frame_idx0 = frame_idx1-1;
+        T val0 = ResampleStream<T>::lookup(data, frame_idx0, channel);
+        T val1 = ResampleStream<T>::lookup(data, frame_idx1, channel);
+        T diff = val1 - val0;
+        if (diff==0){
+            // No difference
+            return val0;
+        } 
+        // interpolate value
+        float delta = (frame_idx - frame_idx0) - 1;
+        T diffEffective = diff * delta;
+        T result = val0+diffEffective;
+
+        return result;
+    }
+};
 
 } // namespace
