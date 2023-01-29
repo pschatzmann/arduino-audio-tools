@@ -56,7 +56,7 @@ class AnalogDriverESP32  : public AnalogDriverBase {
             .mode                   = (i2s_mode_t)cfg.mode_internal,
             .sample_rate            = (eps32_i2s_sample_rate_type)cfg.sample_rate,
             .bits_per_sample        = (i2s_bits_per_sample_t)cfg.bits_per_sample,
-            .channel_format         = I2S_CHANNEL_FMT_RIGHT_LEFT,
+            .channel_format         = cfg.channels == 2 ? I2S_CHANNEL_FMT_RIGHT_LEFT : I2S_CHANNEL_FMT_ONLY_LEFT,
             .communication_format   = (i2s_comm_format_t)0,
             .intr_alloc_flags       = 0,
             .dma_buf_count          = cfg.buffer_count,
