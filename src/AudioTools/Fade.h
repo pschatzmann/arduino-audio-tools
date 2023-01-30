@@ -70,7 +70,7 @@ public:
 protected:
   bool is_fade_in = false;
   bool is_fade_out = false;
-  bool channels = 2;
+  int channels = 2;
   float volume = 1.0;
   bool is_done = false;
 
@@ -157,7 +157,7 @@ protected:
 
   void storeLastSamples(int frames, uint8_t *src) {
     T *data = (T *)src;
-    for (int ch; ch < channels; ch++) {
+    for (int ch = 0; ch < channels; ch++) {
       last[ch] = data[frames - 2 * channels + ch];
     }
   }
