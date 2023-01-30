@@ -208,7 +208,7 @@ T readSample(Stream* p_stream){
 /// @param out_min 
 /// @param out_max 
 /// @return 
-float mapFloat(float x, float in_min, float in_max, float out_min, float out_max) {
+inline float mapFloat(float x, float in_min, float in_max, float out_min, float out_max) {
   return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
