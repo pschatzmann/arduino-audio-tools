@@ -2,9 +2,9 @@
 #include "Arduino.h"
 #include "AudioTools.h"
 //#include "AudioLibs/PortAudioStream.h"
-#include "AudioLibs/LinuxStdio.h"
+#include "AudioLibs/StdioStream.h"
 
-LinuxStdio out;                                              // Output to Desktop
+StdioStream out;                                              // Output to Desktop
 SineWaveGenerator<int16_t> sine_wave(32000);                                           // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> in_stream(sine_wave);                   // Stream generated from sine wave
 StreamCopy copier(out, in_stream);                                // copies sound to out

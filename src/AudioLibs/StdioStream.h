@@ -9,7 +9,7 @@
  * @copyright GPLv3
  */
 namespace audio_tools {
-class LinuxStdio : public AudioStreamX {
+class StdioStream : public AudioStreamX {
 public:
   AudioBaseInfo defaultConfig() {
     AudioBaseInfo def;
@@ -26,6 +26,7 @@ public:
   int available() override { return DEFAULT_BUFFER_SIZE; }
 
   size_t readBytes(uint8_t* buffer, size_t len){
+    // read from stdin
     return ::read(0, buffer, len);
   }
 
