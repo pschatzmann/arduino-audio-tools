@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.20)
 
 # set the project name
-project(generator_test)
+project(generator)
 set (CMAKE_CXX_STANDARD 11)
 set (DCMAKE_CXX_FLAGS "-Werror")
 if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
@@ -16,11 +16,11 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
 endif()
 
 # build sketch as executable
-add_executable (generator_test generator.cpp ../main.cpp)
+add_executable (generator generator.cpp ../main.cpp)
 
 # set preprocessor defines
-target_compile_definitions(generator_test PUBLIC -DUSE_PORTAUDIO -DEXIT_ON_STOP -DIS_DESKTOP)
+target_compile_definitions(generator PUBLIC -DUSE_PORTAUDIO -DEXIT_ON_STOP -DIS_DESKTOP)
 
 # specify libraries
-target_link_libraries(generator_test arduino_emulator arduino-audio-tools)
+target_link_libraries(generator arduino_emulator arduino-audio-tools)
 
