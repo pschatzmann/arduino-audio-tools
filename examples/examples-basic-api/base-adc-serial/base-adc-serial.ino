@@ -9,7 +9,6 @@
  */
  
 #include "Arduino.h"
-#include "BluetoothA2DPSource.h"
 #include "AudioTools.h"
 
 /**
