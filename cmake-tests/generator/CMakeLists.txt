@@ -9,6 +9,7 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
     set (CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
 endif()
 
+
 # Build with arduino-audio-tools
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../.. ${CMAKE_CURRENT_BINARY_DIR}/arduino-audio-tools )
@@ -21,5 +22,5 @@ add_executable (generator_test generator.cpp ../main.cpp)
 target_compile_definitions(generator_test PUBLIC -DUSE_PORTAUDIO -DEXIT_ON_STOP -DIS_DESKTOP)
 
 # specify libraries
-target_link_libraries(generator_test portaudio arduino_emulator arduino-audio-tools)
+target_link_libraries(generator_test arduino_emulator arduino-audio-tools)
 
