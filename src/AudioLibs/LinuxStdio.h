@@ -3,7 +3,7 @@
 #include "AudioTools/AudioStreams.h"
 
 /**
- * @brief Direct binary Audio Output to stdout
+ * @brief Direct binary Audio Output to stdout. On linux you can hear the audio e.g. with ./generator | aplay -f cd
  * @author Phil Schatzmann
  * @ingroup io
  * @copyright GPLv3
