@@ -154,7 +154,11 @@ class I2SDriverESP32 {
             .dma_buf_len = cfg.buffer_size,
             .use_apll = (bool) cfg.use_apll,
             .tx_desc_auto_clear = cfg.auto_clear, 
-            .fixed_mclk = (int) (cfg.fixed_mclk>0 ? cfg.fixed_mclk : 0 )
+#if ESP_IDF_VERSION_MAJOR >= 4 
+            .fixed_mclk = (int) (cfg.fixed_mclk>0 ? cfg.fixed_mclk : 0 ),
+            .mclk_multiple = I2S_MCLK_MULTIPLE_DEFAULT,
+            .bits_per_chan = I2S_BITS_PER_CHAN_DEFAULT,
+#endif
       };
       i2s_config = i2s_config_new;
 
