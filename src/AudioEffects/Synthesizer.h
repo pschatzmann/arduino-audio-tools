@@ -21,6 +21,7 @@ namespace audio_tools {
  */
 class AbstractSynthesizerChannel {
     public:
+        virtual ~AbstractSynthesizerChannel() = default;
         virtual AbstractSynthesizerChannel* clone() = 0;
         /// Start the sound generation
         virtual void begin(AudioBaseInfo config);
@@ -170,7 +171,7 @@ class Synthesizer : public SoundGenerator<int16_t> {
         Synthesizer(Synthesizer const&) = delete;
         Synthesizer& operator=(Synthesizer const&) = delete;
 
-        ~Synthesizer(){
+        virtual ~Synthesizer(){
             TRACED();
             for (int j=0;j<channels.size();j++){
                 delete channels[j];
