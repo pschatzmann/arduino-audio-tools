@@ -25,7 +25,7 @@ namespace audio_tools {
 class AudioPrint : public Print, public AudioBaseInfoDependent, public AudioBaseInfoSource {
     public:
         virtual ~AudioPrint() = default;
-        virtual size_t write(const uint8_t *buffer, size_t size) override = 0;
+         size_t write(const uint8_t *buffer, size_t size) override = 0;
 
         virtual size_t write(uint8_t ch) override {
             tmp[tmpPos++] = ch;
