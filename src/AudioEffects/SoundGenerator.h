@@ -165,7 +165,7 @@ class SineWaveGenerator : public SoundGenerator<T>{
     public:
 
         // the scale defines the max value which is generated
-        SineWaveGenerator(float amplitude = NumberConverter::maxValue(sizeof(T)*8), float phase = 0.0){
+        SineWaveGenerator(float amplitude = NumberConverter::maxValueT<T>(), float phase = 0.0){
             LOGD("SineWaveGenerator");
             m_amplitude = amplitude;
             m_phase = phase;

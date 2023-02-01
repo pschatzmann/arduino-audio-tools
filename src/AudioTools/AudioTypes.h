@@ -173,6 +173,12 @@ class NumberConverter {
             return 32767;
         }
 
+        /// provides the biggest number for the indicated type
+        template <typename T> 
+        static int64_t maxValueT(){
+            return (typeid(T) == typeid(int24_t)) ? 8388607 : maxValue(sizeof(T));
+        }
+
         template <typename T> 
         static T clip(float value){
             T mv = maxValue(sizeof(T)*8);
