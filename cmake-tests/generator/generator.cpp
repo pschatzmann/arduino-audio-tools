@@ -4,16 +4,18 @@
 //#include "AudioLibs/PortAudioStream.h"
 #include "AudioLibs/StdioStream.h"
 
-StdioStream out;                                              // Output to Desktop
-SineWaveGenerator<int16_t> sine_wave(32000);                                           // subclass of SoundGenerator with max amplitude of 32000
-GeneratedSoundStream<int16_t> in_stream(sine_wave);                   // Stream generated from sine wave
-StreamCopy copier(out, in_stream);                                // copies sound to out
+//LinuxStdio out;                                     // Output to Desktop
+CsvStream<int24_t> out(Serial);
+SineWaveGenerator<int24_t> sine_wave(8388607);        // subclass of SoundGenerator with max amplitude of 32000
+GeneratedSoundStream<int24_t> in_stream(sine_wave); // Stream generated from sine wave
+StreamCopy copier(out, in_stream);                  // copies sound to out
 
 void setup(){
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Warning);
 
   auto cfg = out.defaultConfig();
+  cfg.bits_per_sample = 24;
   if (!out.begin(cfg)){
     stop();
   }

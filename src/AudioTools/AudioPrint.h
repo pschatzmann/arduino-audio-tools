@@ -126,10 +126,11 @@ class CsvStream : public AudioPrint {
         }
 
         /// Starts the processing with the number of channels defined in AudioBaseInfo
-        void begin(AudioBaseInfo info){
+        bool begin(AudioBaseInfo info){
              TRACED();
             this->active = true;
             this->channels = info.channels;
+            return channels!=0;
         }
 
         /// Starts the processing with the defined number of channels 
