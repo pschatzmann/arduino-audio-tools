@@ -1,5 +1,6 @@
 #pragma once
 
+#include <typeinfo> 
 #include "AudioConfig.h"
 #include "AudioTools/AudioLogger.h"
 #include "AudioBasic/Int24.h"
@@ -176,7 +177,8 @@ class NumberConverter {
         /// provides the biggest number for the indicated type
         template <typename T> 
         static int64_t maxValueT(){
-            return (typeid(T) == typeid(int24_t)) ? 8388607 : maxValue(sizeof(T));
+            // int24_t uses 4 bytes instead of 3!
+            return (std::is_same<T, int24_t>::value ) ? 8388607 : maxValue(sizeof(T));
         }
 
         template <typename T> 
