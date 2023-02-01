@@ -6,7 +6,7 @@
 
 //LinuxStdio out;                                     // Output to Desktop
 CsvStream<int24_t> out(Serial);
-SineWaveGenerator<int24_t> sine_wave;        // subclass of SoundGenerator with max amplitude of 32000
+SineWaveGenerator<int24_t> sine_wave;        // subclass of SoundGenerator with max amplitude
 GeneratedSoundStream<int24_t> in_stream(sine_wave); // Stream generated from sine wave
 StreamCopy copier(out, in_stream);                  // copies sound to out
 

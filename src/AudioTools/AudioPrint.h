@@ -163,7 +163,8 @@ class CsvStream : public AudioPrint {
             for (size_t j=0;j<lenChannels;j++){
                 for (int ch=0;ch<channels;ch++){
                     if (out_ptr!=nullptr && data_ptr!=nullptr){
-                        out_ptr->print(*data_ptr);
+                        int value = *data_ptr;
+                        out_ptr->print(value);
                     }
                     data_ptr++;
                     if (ch<channels-1) Serial.print(", ");

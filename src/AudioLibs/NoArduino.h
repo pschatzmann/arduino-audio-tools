@@ -95,6 +95,9 @@ public:
 	virtual int read(){return -1;}
 	virtual int peek(){return -1;}
 	virtual void setTimeout(size_t t){}
+	operator bool(){
+		return true;
+	}
 };
 class Client : public Stream {
 public:
@@ -108,7 +111,9 @@ public:
 
 class HardwareSerial : public Stream {
 public:
-    size_t write(uint8_t ch) override;
+    size_t write(uint8_t ch) override {
+		return putchar(ch);
+	}
 	virtual operator bool() {
         return true;
     }

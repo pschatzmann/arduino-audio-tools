@@ -1,6 +1,6 @@
 #pragma once
 
-#include <typeinfo> 
+#include <type_traits>
 #include "AudioConfig.h"
 #include "AudioTools/AudioLogger.h"
 #include "AudioBasic/Int24.h"
