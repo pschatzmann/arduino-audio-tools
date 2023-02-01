@@ -1,6 +1,5 @@
 #include "Arduino.h"
 #include "AudioTools.h"
-#include "AudioLibs/StdioStream.h"
 #include "AudioLibs/AudioKit.h"
 
 AudioKitStream out;
