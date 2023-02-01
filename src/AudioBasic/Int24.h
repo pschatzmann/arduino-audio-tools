@@ -31,6 +31,14 @@ class int24_t  {
     set(in);
   }
 
+  int24_t(const int24_t &in) {
+    set(in);
+  }
+
+  int24_t(const float &in) {
+    set(in);
+  }
+
 #if defined(STM32) || defined(ESP32C3)
 
   int24_t(const int &in) {
