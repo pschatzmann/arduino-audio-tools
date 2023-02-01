@@ -178,7 +178,7 @@ class NumberConverter {
         template <typename T> 
         static int64_t maxValueT(){
             // int24_t uses 4 bytes instead of 3!
-            return (std::is_same<T, int24_t>::value ) ? 8388607 : maxValue(sizeof(T));
+            return (std::is_same<T, int24_t>::value ) ? 8388607 : maxValue(sizeof(T)*8);
         }
 
         template <typename T> 
