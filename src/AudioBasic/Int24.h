@@ -20,11 +20,11 @@ class int24_t  {
   }
 
   int24_t(void *ptr) {
-      memcpy(&value, ptr, 4);
+    memcpy(&value, ptr, 4);
   }
 
   int24_t(const int16_t &in) {
-    value = in;
+    set(in) ;
   }
 
   int24_t(const int32_t &in) {
@@ -32,11 +32,11 @@ class int24_t  {
   }
 
   int24_t(const int24_t &in) {
-    set(in);
+    value = in.value;
   }
 
   int24_t(const float &in) {
-    set(in);
+    set((int32_t)in);
   }
 
 #if defined(STM32) || defined(ESP32C3)
@@ -47,28 +47,32 @@ class int24_t  {
 
 #endif
 
-  /// values are clipped 
+  /// values are clipped and shifted by 1 byte
   inline void set(const int32_t &in) {
     if (in>INT24_MAX){
-      value = INT24_MAX;
+      value = INT24_MAX << 8;
     } else if (in<-INT24_MAX){
-      value = -INT24_MAX;
+      value = -(INT24_MAX << 8);
     } else {
-      value = in;
+      value = in << 8;
     }
   }
 
   int24_t& operator=(const int24_t& other){
-    set(other);
+    value = other.value;
     return *this;
   }
 
   int24_t& operator=(const float& other){
-    set((int32_t)other);
+    set(((int32_t)other));
     return *this;
   }
 
   operator int() const {
+    return toInt();
+  }  
+
+  operator int()  {
     return toInt();
   }  
 
@@ -86,17 +90,17 @@ class int24_t  {
     return *this;
   }
 
-  /// Standard Conversion to Int
+  /// Standard Conversion to Int 
   int toInt() const {
-    return value;
+    return value >> 8;
   }  
 
   /// convert to float
-  float toFloat() const { return int(); }
+  float toFloat() const { return toInt(); }
 
   /// provides value between -32767 and 32767
   int16_t scale16() const {
-    return toInt() >> 8;
+    return toInt() >> 8 ;
   }
 
   /// provides value between -2,147,483,647 and 2,147,483,647
@@ -107,18 +111,17 @@ class int24_t  {
   /// provides value between -1.0 and 1.0
   float scaleFloat() const { return toFloat() / INT24_MAX; }
 
-
   void setAndScale16(int16_t i16) {
     value = i16;
-    value = value << 8;
+    value = value << 16;
   }
   
   int16_t getAndScale16() {
-    return value >> 8;
+    return value >> 16;
   }
 
-
  private:
+  // store 24 bit value shifted by 1 byte to the left
   int32_t value;
 };
 
