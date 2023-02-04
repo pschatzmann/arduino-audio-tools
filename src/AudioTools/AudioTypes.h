@@ -9,10 +9,14 @@
 namespace audio_tools {
 
 /**
- * @brief Audio Source (TX_MODE) or Audio Sink (RX_MODE)
+ * @brief Audio Source (TX_MODE) or Audio Sink (RX_MODE). RXTX_MODE is Source and Sink at the same time!
  * @ingroup basic
  */
 enum RxTxMode  {UNDEFINED_MODE=0, TX_MODE=1, RX_MODE=2, RXTX_MODE=3 };
+
+/**
+ * @brief Text string (description) for RxTxMode
+*/
 INLINE_VAR const char* RxTxModeNames[]={"UNDEFINED_MODE","TX_MODE","RX_MODE","RXTX_MODE" };
 /**
  * @brief Time Units
