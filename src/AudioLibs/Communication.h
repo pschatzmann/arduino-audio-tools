@@ -10,6 +10,7 @@
  * @defgroup communications Communications
  * @ingroup main
  * @brief Transmit Audio
+ * Please note that the standard Arduino WiFiClient and WifiServer (to use TCP/IP), Serial or BluetoothSerial are also supported.  
  */
 
 
@@ -39,7 +40,6 @@ ESPNowStream *ESPNowStreamSelf = nullptr;
 
 /**
  * @brief Configuration for ESP-NOW protocol
- * @ingroup communications
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
