@@ -19,7 +19,7 @@ namespace audio_tools {
  */
 class FFTDriverRealFFT : public FFTDriver {
     public:
-        void begin(int len) override {
+        bool begin(int len) override {
             this->len = len;
             if (p_fft_object==nullptr) p_fft_object = new ffft::FFTReal<float>(len);
             if (p_x==nullptr) p_x = new float[len];
@@ -27,6 +27,7 @@ class FFTDriverRealFFT : public FFTDriver {
             assert(p_fft_object!=nullptr);
             assert(p_x!=nullptr);
             assert(p_f!=nullptr);
+            return p_fft_object!=nullptr && p_x!=nullptr && p_f!=nullptr;
         }
         void end()override{
             if (p_fft_object!=nullptr) delete p_fft_object;

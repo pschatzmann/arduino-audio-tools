@@ -64,7 +64,7 @@ struct AudioFFTConfig : public  AudioBaseInfo {
  */
 class FFTDriver {
     public:
-        virtual void begin(int len) =0;
+        virtual bool begin(int len) =0;
         virtual void end() =0;
         virtual void setValue(int pos, int value) =0;
         virtual void fft() = 0;
@@ -108,7 +108,9 @@ class AudioFFTBase : public AudioPrint {
                 // holds last N bytes that need to be reprocessed
                 stride_buffer.resize((cfg.length - cfg.stride)*bytesPerSample());
             }
-            p_driver->begin(cfg.length);
+            if (!p_driver->begin(cfg.length)){
+                LOGE("Not enough memory");
+            }
             if (cfg.window_function!=nullptr){
                 cfg.window_function->begin(length());
             }

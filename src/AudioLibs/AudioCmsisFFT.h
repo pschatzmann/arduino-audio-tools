@@ -20,7 +20,7 @@ namespace audio_tools {
  */
 class FFTDriverCmsisFFT : public FFTDriver {
     public:
-        void begin(int len) override {
+        bool begin(int len) override {
             TRACEI();
             this->len = len;
             input = new float[len];
@@ -33,6 +33,7 @@ class FFTDriverCmsisFFT : public FFTDriver {
             assert(input!=nullptr);
             assert(output!=nullptr);
             assert(output_magn != nullptr);
+            return input!=nullptr && output != nullptr && output_magn != nullptr;
         }
         void end()override{
             TRACEI();
