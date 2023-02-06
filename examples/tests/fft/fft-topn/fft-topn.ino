@@ -10,6 +10,7 @@ uint16_t sample_rate = 44100;
 int bits_per_sample = 16;
 int channels = 1;
 float value = 0;
+static const int N = 5;
 
 // check fft result
 void fftResult(AudioFFTBase &fft) {
@@ -24,18 +25,19 @@ void fftResult(AudioFFTBase &fft) {
     std::sort(all, all + fft.size(), [](AudioFFTResult a, AudioFFTResult b){ return a.magnitude > b.magnitude; });
 
     // get top 5
-    AudioFFTResult topn[5];
+    AudioFFTResult topn[N];
     fft.resultArray(topn);
 
-    // check the topn with sorted result
-    for (int j=0;j<5;j++){
+    // compare the topn with sorted result
+    for (int j=0;j<N;j++){
         Serial.print(all[j].bin);
         Serial.print(":");
         Serial.print(topn[j].bin);
         Serial.print(" ");
-        //assert(all[j].bin==topn[j].bin);
+        assert(all[j].bin==topn[j].bin);
     }
-    Serial.println();
+    Serial.print(" -> TOP: ");
+    Serial.println(fft.result().bin);
 
 }
 
@@ -55,7 +57,7 @@ void setup() {
   // Setup FFT
   auto tcfg = fft.defaultConfig();
   tcfg.copyFrom(cfg);
-  tcfg.length = 4096;
+  tcfg.length = 512;
   tcfg.callback = &fftResult;
   fft.begin(tcfg);
 }
