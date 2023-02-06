@@ -27,6 +27,7 @@ class FFTDriverEspressifFFT : public FFTDriver {
                     LOGE("not enough memory");
                 }
             }
+            assert(p_data!=nullptr);
             ret = dsps_fft2r_init_fc32(NULL, CONFIG_DSP_MAX_FFT_SIZE);
             if (ret  != ESP_OK){
                 LOGE("dsps_fft2r_init_fc32 %d", ret);

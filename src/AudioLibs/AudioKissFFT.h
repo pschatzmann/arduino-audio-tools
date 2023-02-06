@@ -23,7 +23,10 @@ class FFTDriverKissFFT : public FFTDriver {
         void begin(int len) override {
             if (p_fft_object==nullptr) p_fft_object = kiss_fft_alloc(len,0,nullptr,nullptr);
             if (p_data==nullptr) p_data = new kiss_fft_cpx[len];
-        }
+            assert(p_fft_object!=nullptr);
+            assert(p_data!=nullptr);
+        }   
+
         void end() override {
             if (p_fft_object!=nullptr) kiss_fft_free(p_fft_object);
             if (p_data!=nullptr) delete[] p_data;

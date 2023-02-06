@@ -23,6 +23,7 @@ class FFTDriverESP32FFT : public FFTDriver {
         void begin(int len) override {
             this->len = len;
             if (p_fft_object==nullptr) p_fft_object = fft_init(len, FFT_REAL, FFT_FORWARD, NULL, NULL);
+            assert(p_fft_object!=nullptr);
         }
         void end()override{
             if (p_fft_object!=nullptr) fft_destroy(p_fft_object);
