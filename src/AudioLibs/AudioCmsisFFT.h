@@ -30,6 +30,9 @@ class FFTDriverCmsisFFT : public FFTDriver {
             if (status!=ARM_MATH_SUCCESS){
                 LOGE("arm_rfft_fast_init_f32: %d", status);
             }
+            assert(input!=nullptr);
+            assert(output!=nullptr);
+            assert(output_magn != nullptr);
         }
         void end()override{
             TRACEI();

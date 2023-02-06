@@ -24,6 +24,9 @@ class FFTDriverRealFFT : public FFTDriver {
             if (p_fft_object==nullptr) p_fft_object = new ffft::FFTReal<float>(len);
             if (p_x==nullptr) p_x = new float[len];
             if (p_f==nullptr) p_f = new float[len];
+            assert(p_fft_object!=nullptr);
+            assert(p_x!=nullptr);
+            assert(p_f!=nullptr);
         }
         void end()override{
             if (p_fft_object!=nullptr) delete p_fft_object;
