@@ -338,7 +338,9 @@ class AudioFFTBase : public AudioPrint {
 
         /// make sure that we do not reuse already found results
         template<int N>
-        bool insertSorted(AudioFFTResult(&result)[N], AudioFFTResult tmp){
+        void insertSorted(AudioFFTResult(&result)[N], AudioFFTResult tmp){
+            bool inserted = false;
+            // find place where we need to insert new record
             for (int j=0;j<N;j++){
                 if (tmp.magnitude>result[j].magnitude){
                     // shift existing values right
@@ -351,7 +353,6 @@ class AudioFFTBase : public AudioPrint {
                     break;
                 }
             }
-            return true;
         }
 
         void writeStrideBuffer(uint8_t* buffer, size_t len){
