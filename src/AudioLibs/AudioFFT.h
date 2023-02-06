@@ -339,9 +339,9 @@ class AudioFFTBase : public AudioPrint {
         /// make sure that we do not reuse already found results
         template<int N>
         void insertSorted(AudioFFTResult(&result)[N], AudioFFTResult tmp){
-            bool inserted = false;
             // find place where we need to insert new record
             for (int j=0;j<N;j++){
+                // insert when biggen then current record
                 if (tmp.magnitude>result[j].magnitude){
                     // shift existing values right
                     for (int i=N-2;i>=j;i--){
