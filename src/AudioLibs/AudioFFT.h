@@ -214,7 +214,7 @@ class AudioFFTBase : public AudioPrint {
             }
             // find top n values
             AudioFFTResult act;
-            for (int j=1;j<size();j++){
+            for (int j=0;j<size();j++){
                 act.magnitude = magnitude(j);
                 act.bin = j;
                 act.frequency = frequency(j);
@@ -345,6 +345,8 @@ class AudioFFTBase : public AudioPrint {
                     }
                     // insert new value
                     result[j]=tmp;
+                    // stop after we found the correct index
+                    break;
                 }
             }
             return true;
