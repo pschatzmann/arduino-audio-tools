@@ -1113,7 +1113,7 @@ class InputMixer : public AudioStreamX {
 
     /// Provides the data from all streams mixed together
     size_t readBytes(uint8_t* data, size_t len) override {
-      if (total_weights==0 || frame_size==0) return 0;
+      if (total_weights==0 || frame_size==0 || len==0) return 0;
       LOGD("readBytes: %d",(int)len);
       // result_len must be full frames
       int result_len = MIN(available(), len) * frame_size / frame_size;
