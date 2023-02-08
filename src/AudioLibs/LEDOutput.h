@@ -9,6 +9,10 @@ struct LEDOutputConfig;
 LEDOutput *selfLEDOutput=nullptr;
 // default callback function which implements led update
 void updateLEDOutput(LEDOutputConfig*cfg, LEDOutput *matrix, int  max_y);
+// default color
+CHSV get_color(int x, int y, int magnitude){
+  return CHSV( 224, 187, 255);
+}
 
 /**
  * LED Matrix Configuration. Provide the number of leds in x and y direction and
@@ -19,10 +23,8 @@ struct LEDOutputConfig {
   int x = 0;
   /// Number of leds in y direction
   int y = 0;
-  /// Default color
-  int color = CRGB::Blue;
   /// optinal custom logic to select color
-  int (*get_color)(int x, int y, int magnitude) = nullptr;
+  CHSV (*get_color)(int x, int y, int magnitude) = get_color;
   /// Custom callback logic to update the LEDs - by default we use updateLEDOutput()
   void (*update)(LEDOutputConfig*cfg, LEDOutput *matrix, int  max_y) = updateLEDOutput;
   /// Update the leds only ever nth call
@@ -160,10 +162,9 @@ void updateLEDOutput(LEDOutputConfig*cfg, LEDOutput *matrix, int  max_y){
     }
     // update horizontal bar
     for (int y = 0; y < maxY; y++) {
-      int color = cfg->color;
-      if (cfg->get_color != nullptr) {
-        color = cfg->get_color(x, y, maxY);
-      }
+      // determine color
+      CHSV color = cfg->get_color(x, y, maxY);
+      // update LED
       matrix->xyLed(x, y) = color;
     }
   }
