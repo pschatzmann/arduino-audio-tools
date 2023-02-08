@@ -40,8 +40,6 @@ public:
   LEDOutput(AudioFFTBase &fft) {
     selfLEDOutput = this;
     p_fft = &fft;
-    AudioFFTConfig &fft_cfg = p_fft->config();
-    fft_cfg.callback = fftCallback;
   }
 
   /// Provides the default config object
@@ -58,6 +56,12 @@ public:
       LOGE("x or y == 0");
       return false;
     }
+    // assign fft callback
+    AudioFFTConfig &fft_cfg = p_fft->config();
+    fft_cfg.callback = fftCallback;
+
+    // allocate leds
+    leds.resize(ledCount());
 
     // if the number of bins > number of leds in x position we combine adjecent
     // values
@@ -145,12 +149,15 @@ protected:
   };
 };
 
-
+/// Default update implementation which provides the fft result as "barchart"
 void updateLEDOutput(LEDOutputConfig*cfg, LEDOutput *matrix, int  max_y){
   for (int x = 0; x < cfg->x; x++) {
     // max y determined by magnitude
     int maxY = mapFloat(matrix->getMagnitude(x), 0.0f, max_y, 0.0f,
                         static_cast<float>(cfg->y));
+    if (maxY>cfg->y){
+      maxY = cfg->y;
+    }
     // update horizontal bar
     for (int y = 0; y < maxY; y++) {
       int color = cfg->color;
