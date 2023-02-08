@@ -9,7 +9,7 @@
 
 AudioKitStream kit;  // Audio source
 AudioRealFFT fft; // or AudioKissFFT
-StreamCopy copier(fft, kit);  // copy mic to tfl
+StreamCopy copier(fft, kit);  // copy mic to fft
 LEDMatrix led(fft); // output to LED matrix
 
 void setup() {
@@ -38,6 +38,7 @@ void setup() {
 }
 
 void loop() { 
+  // update FFT
   copier.copy();
   // update LEDs
   led.update();
