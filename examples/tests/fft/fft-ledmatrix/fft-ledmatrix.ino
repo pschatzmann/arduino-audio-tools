@@ -1,7 +1,7 @@
 #include "AudioTools.h"
 #include "AudioLibs/AudioKit.h"
 #include "AudioLibs/AudioRealFFT.h" // or AudioKissFFT
-#include "AudioLibs/LEDMatrix.h"
+#include "AudioLibs/LEDOutput.h"
 
 #define PIN_LEDS 22
 #define LED_X 32
@@ -10,7 +10,7 @@
 AudioKitStream kit;  // Audio source
 AudioRealFFT fft; // or AudioKissFFT
 StreamCopy copier(fft, kit);  // copy mic to fft
-LEDMatrix led(fft); // output to LED matrix
+LEDOutput led(fft); // output to LED matrix
 
 void setup() {
   Serial.begin(115200);
@@ -33,7 +33,7 @@ void setup() {
   lcfg.y = LED_Y;
   led.begin(lcfg);
 
-  // addLeds
+  // add LEDs
   FastLED.addLeds<WS2812B, PIN_LEDS, GRB>(led.ledData(), led.ledCount());
 }
 
