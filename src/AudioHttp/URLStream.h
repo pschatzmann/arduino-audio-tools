@@ -59,6 +59,7 @@ class URLStream : public AbstractURLStream {
 
         ~URLStream(){
             TRACEI();
+            end();
 #ifdef USE_WIFI_CLIENT_SECURE
             if (clientSecure!=nullptr){
                 delete clientSecure;
@@ -69,7 +70,6 @@ class URLStream : public AbstractURLStream {
                 delete clientInsecure;
                 clientInsecure = nullptr;
             }
-            end();
         }
 
         virtual bool begin(const char* urlStr, const char* acceptMime=nullptr, MethodID action=GET,  const char* reqMime="", const char*reqData="")  override{
