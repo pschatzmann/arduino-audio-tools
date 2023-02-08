@@ -35,14 +35,17 @@ struct LEDOutputConfig {
  */
 class LEDOutput {
 public:
-  LEDOutputConfig defaultConfig() { return cfg; }
-
+  /// @brief Default Constructor
+  /// @param fft 
   LEDOutput(AudioFFTBase &fft) {
     selfLEDOutput = this;
     p_fft = &fft;
     AudioFFTConfig &fft_cfg = p_fft->config();
     fft_cfg.callback = fftCallback;
   }
+
+  /// Provides the default config object
+  LEDOutputConfig defaultConfig() { return cfg; }
 
   /// Setup Led matrix
   bool begin(LEDOutputConfig config) {
@@ -114,6 +117,11 @@ public:
       selfLEDOutput->max_y = total;
     }
     return total;
+  }
+
+  /// Provides access to the actual config object. E.g. to change the update logic 
+  LEDOutputConfig &config() {
+    return cfg;
   }
 
 protected:
