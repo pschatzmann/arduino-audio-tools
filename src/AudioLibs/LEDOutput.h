@@ -10,23 +10,24 @@ LEDOutput *selfLEDOutput=nullptr;
 // default callback function which implements led update
 void updateLEDOutput(LEDOutputConfig*cfg, LEDOutput *matrix, int  max_y);
 // default color
-CHSV get_color(int x, int y, int magnitude){
-  return CHSV( 224, 187, 255);
+CHSV getColor(int x, int y, int magnitude){
+  return CHSV( 224, 187, 100);
 }
 
 /**
  * LED Matrix Configuration. Provide the number of leds in x and y direction and
  * the data pin.
+ * @author Phil Schatzmann
  */
 struct LEDOutputConfig {
   /// Number of leds in x direction
   int x = 0;
   /// Number of leds in y direction
   int y = 0;
-  /// optinal custom logic to select color
-  CHSV (*get_color)(int x, int y, int magnitude) = get_color;
+  /// optinal custom logic to provide CHSV color: Prividing a 'rainbow' color with hue 0-255, saturating 0-255, and brightness (value) 0-255 (v2)
+  CHSV (*color_callback)(int x, int y, int magnitude) = getColor;
   /// Custom callback logic to update the LEDs - by default we use updateLEDOutput()
-  void (*update)(LEDOutputConfig*cfg, LEDOutput *matrix, int  max_y) = updateLEDOutput;
+  void (*update_callback)(LEDOutputConfig*cfg, LEDOutput *matrix, int  max_y) = updateLEDOutput;
   /// Update the leds only ever nth call
   int update_frequency = 1; // update every call
 };
@@ -34,6 +35,8 @@ struct LEDOutputConfig {
 /**
  * LEDOutput using the FastLED library. You write the data to the FFT Stream.
  * This displays the result of the FFT to a LED matrix.
+ * @ingroup io
+ * @author Phil Schatzmann
  */
 class LEDOutput {
 public:
@@ -75,14 +78,13 @@ public:
     return true;
   }
 
-  // Provides the number of LEDs: call begin() first!
+  /// Provides the number of LEDs: call begin() first!
   int ledCount(){
     int num_leds = cfg.x * cfg.y;
     return num_leds;
   }
 
-  /// @brief  Provides the address fo the CRGB array: call begin() first!
-  /// @return 
+  ///  Provides the address fo the CRGB array: call begin() first!
   CRGB* ledData() {
     if (ledCount() == 0) {
       LOGE("x or y == 0");
@@ -94,9 +96,9 @@ public:
 
   /// Updates the display: call this method in your loop
   virtual void update() {
-    if (count++ % cfg.update_frequency == 0) {
+    if (cfg.update_callback!=nullptr && count++ % cfg.update_frequency == 0) {
       // use custom update logic defined in config
-      cfg.update(&cfg, this, max_y);
+      cfg.update_callback(&cfg, this, max_y);
     }
   }
 
@@ -163,7 +165,7 @@ void updateLEDOutput(LEDOutputConfig*cfg, LEDOutput *matrix, int  max_y){
     // update horizontal bar
     for (int y = 0; y < maxY; y++) {
       // determine color
-      CHSV color = cfg->get_color(x, y, maxY);
+      CHSV color = cfg->color_callback(x, y, maxY);
       // update LED
       matrix->xyLed(x, y) = color;
     }
