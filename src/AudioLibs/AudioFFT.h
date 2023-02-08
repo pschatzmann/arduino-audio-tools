@@ -119,6 +119,10 @@ class AudioFFTBase : public AudioPrint {
             return p_driver->isValid();
         }
 
+        operator bool() {
+            return p_driver!=nullptr && p_driver->isValid();
+        }
+
         /// Notify change of audio information
         void setAudioInfo(AudioBaseInfo info) override {
             cfg.bits_per_sample = info.bits_per_sample;
@@ -268,7 +272,7 @@ class AudioFFTBase : public AudioPrint {
         }
 
         /// Provides the actual configuration
-        AudioFFTConfig config() {
+        AudioFFTConfig &config() {
             return cfg;
         }
 
