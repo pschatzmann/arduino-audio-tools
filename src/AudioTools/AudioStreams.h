@@ -1082,7 +1082,8 @@ class InputMixer : public AudioStreamX {
     virtual bool begin(AudioBaseInfo info) {
   	  setAudioInfo(info);
       frame_size = info.bits_per_sample/8 * info.channels;
-  	  return true;
+      LOGI("frame_size: %d",frame_size);
+  	  return frame_size>0;
     }
 
     /// Defines a new weight for the indicated channel: If you set it to 0 it is muted.
@@ -1113,14 +1114,19 @@ class InputMixer : public AudioStreamX {
 
     /// Provides the data from all streams mixed together
     size_t readBytes(uint8_t* data, size_t len) override {
-      if (total_weights==0 || frame_size==0 || len==0) return 0;
+      if (total_weights==0 || frame_size==0 || len==0) {
+        LOGW("readBytes: %d",(int)len);
+        return 0;
+      }
       LOGD("readBytes: %d",(int)len);
       // result_len must be full frames
       int result_len = MIN(available(), len) * frame_size / frame_size;
       int sample_count = result_len / sizeof(T);
+      LOGD("sample_count: %d", sample_count);
       T *p_data = (T*) data;
-      float sample_total = 0;
+      float sample_total = 0.0f;
       int size_value = size();
+      LOGD("size_value: %d", size_value);
       for (int j=0;j<sample_count; j++){
         sample_total = 0.0f;
         for (int i=0; i<size_value; i++){
