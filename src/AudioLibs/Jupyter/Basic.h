@@ -20,9 +20,4 @@ uint64_t millis(){
     return now.time_since_epoch().count();
 }
 
-size_t HardwareSerial::write(uint8_t ch) {
-    cout << ch;
-    return 1;
-}
-
 }
