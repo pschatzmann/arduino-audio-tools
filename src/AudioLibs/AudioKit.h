@@ -204,7 +204,7 @@ class AudioKitStream : public AudioStreamX {
     converter.begin(cfg.channels, 2, cfg.bits_per_sample);
 
     // Volume control and headphone detection
-S    if (cfg.default_actions_active){
+    if (cfg.default_actions_active){
       setupActions();
     }
     
