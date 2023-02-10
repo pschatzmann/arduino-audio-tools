@@ -320,7 +320,7 @@ class AudioFFTBase : public AudioPrint {
         T windowedSample(T sample){
             T result = sample;
             if (cfg.window_function!=nullptr){
-                result = cfg.window_function->factor(current_pos) * sample;
+                result = cfg.window_function->ratio(current_pos) * sample;
             }
             return result;
         }
