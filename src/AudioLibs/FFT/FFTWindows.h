@@ -32,7 +32,8 @@ class WindowFunction {
   }
 
   inline float factor(int idx) {
-    return idx < i_half_samples ? factor_internal(idx) : factor_internal(i_samples-idx-1);
+    float result =  idx < i_half_samples ? factor_internal(idx) : factor_internal(i_samples-idx-1);
+    return result>1.0f ? 1.0f : result;
   }
 
   inline int samples() { return i_samples; }
@@ -49,8 +50,7 @@ class WindowFunction {
   virtual float factor_internal(int idx) = 0;
 
   inline float ratio(int idx) {
-    float result = (static_cast<float>(idx)) / samples_minus_1;
-    return result>1.0f ? 1.0f : result;
+    return (static_cast<float>(idx)) / samples_minus_1;
   }
 
 };
