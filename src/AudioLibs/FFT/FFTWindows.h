@@ -24,25 +24,31 @@ class WindowFunction {
  public:
   WindowFunction() = default;
 
+  /// Setup the window function providing the fft length
   virtual void begin(int samples) {
     this->samples_minus_1 = -1.0f + samples;
     this->i_samples = samples;
+    this->i_half_samples = samples / 2;
   }
 
   inline float ratio(int idx) {
-    float result = (static_cast<float>(idx)) / samples_minus_1;
-    return result>1.0f ? 1.0f : result;
+    return idx < i_half_samples ? factor(idx) : factor(i_samples-idx);
   }
 
   inline int samples() { return i_samples; }
-  virtual float factor(int idx) = 0;
 
  protected:
   float samples_minus_1 = 0.0f;
   int i_samples = 0;
+  int i_half_samples = 0;
   const float twoPi = 6.28318531f;
   const float fourPi = 12.56637061f;
   const float sixPi = 18.84955593f;
+
+  // virtual function provide implementation in subclass
+  virtual float factor(int idx) = 0;
+
+
 };
 
 /**
@@ -64,7 +70,7 @@ class BufferedWindow : public WindowFunction {
       len = samples / 2;
       buffer.resize(len);
       for (int j = 0; j < len; j++) {
-        buffer[j] = p_wf->factor(j);
+        buffer[j] = p_wf->ratio(j);
       }
     }
   }
