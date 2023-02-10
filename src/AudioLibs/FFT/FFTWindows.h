@@ -31,18 +31,18 @@ class WindowFunction {
 
   inline float ratio(int idx) {
     float result = (static_cast<float>(idx)) / samples_minus_1;
-    return result>1.0 ? 1.0 : result;
+    return result>1.0f ? 1.0f : result;
   }
 
   inline int samples() { return i_samples; }
   virtual float factor(int idx) = 0;
 
  protected:
-  float samples_minus_1 = 0;
+  float samples_minus_1 = 0.0f;
   int i_samples = 0;
-  const float twoPi = 6.28318531;
-  const float fourPi = 12.56637061;
-  const float sixPi = 18.84955593;
+  const float twoPi = 6.28318531f;
+  const float fourPi = 12.56637061f;
+  const float sixPi = 18.84955593f;
 };
 
 /**
@@ -93,7 +93,7 @@ class BufferedWindow : public WindowFunction {
 class Rectange : public WindowFunction {
  public:
   Rectange() = default;
-  float factor(int idx) { return 1.0; }
+  float factor(int idx) { return 1.0f; }
 };
 
 /**
@@ -105,7 +105,7 @@ class Hamming : public WindowFunction {
  public:
   Hamming() = default;
   float factor(int idx) {
-    return 0.54 - (0.46 * cos(twoPi * ratio(idx)));
+    return 0.54f - (0.46f * cos(twoPi * ratio(idx)));
   }
 };
 
@@ -118,7 +118,7 @@ class Hann : public WindowFunction {
  public:
   Hann() = default;
   float factor(int idx) {
-    return 0.54 * (1.0 - cos(twoPi * ratio(idx)));
+    return 0.54f * (1.0f - cos(twoPi * ratio(idx)));
   }
 };
 
@@ -131,8 +131,8 @@ class Triangle : public WindowFunction {
  public:
   Triangle() = default;
   float factor(int idx) {
-    return 1.0 - ((2.0 * fabs((idx - 1) -
-                              (static_cast<float>(i_samples - 1) / 2.0))) /
+    return 1.0f - ((2.0f * fabs((idx - 1) -
+                              (static_cast<float>(i_samples - 1) / 2.0f))) /
                   samples_minus_1);
   }
 };
@@ -148,8 +148,8 @@ class Nuttall : public WindowFunction {
   Nuttall() = default;
   float factor(int idx) {
     float r = ratio(idx);
-    return 0.355768 - (0.487396 * (cos(twoPi * r))) +
-           (0.144232 * (cos(fourPi * r))) - (0.012604 * (cos(sixPi * r)));
+    return 0.355768f - (0.487396f * (cos(twoPi * r))) +
+           (0.144232f * (cos(fourPi * r))) - (0.012604f * (cos(sixPi * r)));
   }
 };
 
@@ -164,8 +164,8 @@ class Blackman : public WindowFunction {
   Blackman() = default;
   float factor(int idx) {
     float r = ratio(idx);
-    return 0.42323 - (0.49755 * (cos(twoPi * r))) +
-           (0.07922 * (cos(fourPi * r)));
+    return 0.42323f - (0.49755f * (cos(twoPi * r))) +
+           (0.07922f * (cos(fourPi * r)));
   }
 };
 
@@ -179,8 +179,8 @@ class BlackmanNuttall : public WindowFunction {
   BlackmanNuttall() = default;
   float factor(int idx) {
     float r = ratio(idx);
-    return 0.3635819 - (0.4891775 * (cos(twoPi * r))) +
-           (0.1365995 * (cos(fourPi * r))) - (0.0106411 * (cos(sixPi * r)));
+    return 0.3635819f - (0.4891775f * (cos(twoPi * r))) +
+           (0.1365995f * (cos(fourPi * r))) - (0.0106411f * (cos(sixPi * r)));
   }
 };
 
@@ -194,8 +194,8 @@ class BlackmanHarris : public WindowFunction {
   BlackmanHarris() = default;
   float factor(int idx) {
     float r = ratio(idx);
-    return 0.35875 - (0.48829 * (cos(twoPi * r))) +
-           (0.14128 * (cos(fourPi * r))) - (0.01168 * (cos(sixPi * r)));
+    return 0.35875f - (0.48829f * (cos(twoPi * r))) +
+           (0.14128f * (cos(fourPi * r))) - (0.01168f * (cos(sixPi * r)));
   }
 };
 
@@ -209,8 +209,8 @@ class FlatTop : public WindowFunction {
   FlatTop() = default;
   float factor(int idx) {
     float r = ratio(idx);
-    return 0.2810639 - (0.5208972 * cos(twoPi * r)) +
-           (0.1980399 * cos(fourPi * r));
+    return 0.2810639f - (0.5208972f * cos(twoPi * r)) +
+           (0.1980399f * cos(fourPi * r));
   }
 };
 
@@ -223,8 +223,8 @@ class Welch : public WindowFunction {
  public:
   Welch() = default;
   float factor(int idx) {
-    float tmp = (((idx - 1) - samples_minus_1 / 2.0) / (samples_minus_1 / 2.0));
-    return 1.0 - (tmp*tmp);
+    float tmp = (((idx - 1) - samples_minus_1 / 2.0f) / (samples_minus_1 / 2.0f));
+    return 1.0f - (tmp*tmp);
   }
 };
 
