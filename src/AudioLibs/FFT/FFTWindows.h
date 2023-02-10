@@ -57,31 +57,25 @@ class BufferedWindow : public WindowFunction {
   BufferedWindow(BufferedWindow const&) = delete;
   BufferedWindow& operator=(BufferedWindow const&) = delete;
 
-
   virtual void begin(int samples) {
     // process only if there is a change
     if (p_wf->samples() != samples) {
       p_wf->begin(samples);
       len = samples / 2;
-      if (p_buffer != nullptr) delete[] p_buffer;
-      p_buffer = new float[len];
+      buffer.resize(len);
       for (int j = 0; j < len; j++) {
-        p_buffer[j] = p_wf->factor(j);
+        buffer[j] = p_wf->factor(j);
       }
     }
   }
 
-  ~BufferedWindow() {
-    if (p_buffer != nullptr) delete[] p_buffer;
-  }
-
   inline float factor(int idx) {
-    return idx < len ? p_buffer[idx] : p_buffer[i_samples - idx];
+    return idx < len ? buffer[idx] : buffer[i_samples - idx];
   }
 
  protected:
   WindowFunction* p_wf = nullptr;
-  float* p_buffer = nullptr;
+  Vector<float> buffer{0};
   int len;
 };
 
