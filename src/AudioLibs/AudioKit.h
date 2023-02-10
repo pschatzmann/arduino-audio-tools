@@ -28,7 +28,7 @@ friend class AudioKitStream;
   audio_hal_dac_output_t output_device = AUDIOKIT_DEFAULT_OUTPUT;
   int masterclock_pin = 0;
   bool sd_active = true;
-  bool speaker_active = true;
+//bool speaker_active = true;
   bool default_actions_active = true;
 
   /// convert to config object needed by HAL
@@ -205,7 +205,7 @@ class AudioKitStream : public AudioStreamX {
     converter.begin(cfg.channels, 2, cfg.bits_per_sample);
 
     // Volume control and headphone detection
-    setSpeakerActive(cfg.speaker_active);
+    //setSpeakerActive(cfg.speaker_active);
     if (cfg.default_actions_active){
       setupActions();
     }
