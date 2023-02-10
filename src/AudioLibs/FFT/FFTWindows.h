@@ -31,11 +31,13 @@ class WindowFunction {
     this->i_half_samples = samples / 2 - 1;
   }
 
+  /// Provides the multipication factor at the indicated position. The result is symetirically mirrored around the center
   inline float factor(int idx) {
     float result =  idx < i_half_samples ? factor_internal(idx) : factor_internal(i_samples-idx-1);
     return result>1.0f ? 1.0f : result;
   }
 
+  /// Provides the number of samples (fft length)
   inline int samples() { return i_samples; }
 
  protected:
@@ -49,6 +51,7 @@ class WindowFunction {
   // virtual function provide implementation in subclass
   virtual float factor_internal(int idx) = 0;
 
+  // the ratio idx / samples -1
   inline float ratio(int idx) {
     return (static_cast<float>(idx)) / samples_minus_1;
   }
