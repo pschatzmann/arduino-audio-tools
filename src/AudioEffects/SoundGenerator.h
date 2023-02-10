@@ -46,6 +46,10 @@ class SoundGenerator  {
             LOGI("bits_per_sample: %d", info.bits_per_sample);
             LOGI("channels: %d", info.channels);
             LOGI("sample_rate: %d", info.sample_rate);
+
+            // support bytes < framesize
+            ring_buffer.resize(info.channels*sizeof(T));
+
             return true;
         }
 
@@ -59,64 +63,19 @@ class SoundGenerator  {
             return active;
         }
 
-        /// Provides the samples into simple array - which represents 1 channel
-        virtual size_t readSamples(T* data, size_t sampleCount=512){
-            for (size_t j=0;j<sampleCount;j++){
-                data[j] = readSample();
-            }
-            return sampleCount;
-        }
-
-        /// Provides the samples into a 2 channel array
-        virtual size_t readSamples(T src[][2], size_t frameCount) {
-            T tmp[frameCount];
-            int len = readSamples(tmp, frameCount);
-            for (int j=0;j<len;j++) {
-                T value = tmp[j];
-                src[j][1] = src[j][0] = value;
-            }
-            return frameCount;
-        }
-
         /// Provides a single sample
         virtual  T readSample() = 0;
 
         /// Provides the data as byte array with the requested number of channels
         virtual size_t readBytes( uint8_t *buffer, size_t lengthBytes){
-            //LOGD("readBytes: %d", (int)lengthBytes);
-            size_t result = 0;
-            int ch = audioInfo().channels;
-            if (ch==0){
-                LOGE("Undefine number of channels: %d",ch);
-                ch = 1;
+            LOGD("readBytes: %d", (int)lengthBytes);
+            int channels = audioInfo().channels;
+            int frame_size = sizeof(T) * channels;
+            int frames = lengthBytes / frame_size;
+            if (lengthBytes>=frame_size){
+                return readBytesFrames(buffer, lengthBytes, frames, channels);
             }
-            int frame_size = sizeof(T) * ch;
-            if (active){
-                int len = lengthBytes / frame_size;
-                if (lengthBytes % frame_size!=0){
-                    len++;
-                }
-                switch (ch){
-                    case 1:
-                        result = readSamples((T*) buffer, len) ;
-                        break;
-                    case 2:
-                        result = readSamples((T(*)[2]) buffer, len);
-                        break;
-                    default:
-                        LOGE( "SoundGenerator::readBytes -> number of channels %d is not supported (use 1 or 2)", ch);
-                        result = 0;
-                        break;
-                }
-            } else {
-                if (!activeWarningIssued) {
-                    LOGE("SoundGenerator::readBytes -> inactive");
-                    activeWarningIssued=true;
-                }
-                result = 0;
-            }
-            //LOGD( "SoundGenerator::readBytes (channels: %d) %zu bytes -> %zu samples", ch, lengthBytes, result);
-            return result * frame_size;
+            return readBytesFromBuffer(buffer, lengthBytes, frame_size, channels);
         }
 
         virtual AudioBaseInfo defaultConfig(){
@@ -148,6 +107,31 @@ class SoundGenerator  {
         bool activeWarningIssued = false;
         int output_channels = 1;
         AudioBaseInfo info;
+        RingBuffer<uint8_t> ring_buffer{0};
+
+        size_t readBytesFrames(uint8_t *buffer, size_t lengthBytes, int frames, int channels ){
+            T* result_buffer = (T*)buffer;
+            for (int j=0;j<frames;j++){
+                T sample = readSample();
+                for (int ch=0;ch<channels;ch++){
+                    *result_buffer++ = sample;
+                }
+            }
+            return frames*sizeof(T);
+        }
+
+        size_t readBytesFromBuffer(uint8_t *buffer, size_t lengthBytes, int frame_size, int channels) {
+            // fill ringbuffer with one frame
+            if (ring_buffer.isEmpty()){
+                uint8_t tmp[frame_size];
+                readBytesFrames(tmp, frame_size, 1, channels);
+                ring_buffer.writeArray(tmp, frame_size);
+            }
+            // provide result
+            return ring_buffer.readArray(buffer, lengthBytes);
+        }
+
+
         
 };
 

@@ -232,7 +232,7 @@ class AudioKitStream : public AudioStreamX {
   }
 
   virtual size_t write(const uint8_t *buffer, size_t size) override {
-//    LOGD("write: %zu",size);
+    LOGD("write: %zu",size);
     return converter.write(buffer, size);
   }
 
