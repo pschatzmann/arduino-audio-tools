@@ -36,6 +36,8 @@ compile_example "esp32:esp32:esp32" "../examples/examples-audiokit/*"
 compile_example "esp32:esp32:esp32" "../examples/examples-maximilian/*"
 compile_example "esp32:esp32:esp32" "../examples/examples-tts/streams*"
 compile_example "esp32:esp32:esp32" "../examples/examples-faust/streams*"
-#compile_example "esp32:esp32:esp32" "../examples/examples-communication/*"
+compile_example "esp32:esp32:esp32" "../examples/examples-communication/*"
 #compile_example "esp32:esp32:esp32" "../examples/tests/test*"
-
+find . -name debug_custom.json -delete
+find . -name debug.cfg -delete
+find . -name esp32.svd -delete
