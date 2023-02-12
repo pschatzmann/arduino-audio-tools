@@ -1,6 +1,6 @@
 #pragma once
 #include "AudioConfig.h"
-#ifdef USE_PWM
+#if defined(USE_PWM) || defined(DOXYGEN)
 
 #include "AudioPWM/PWMAudioESP32.h"
 #include "AudioPWM/PWMAudioRP2040.h"
