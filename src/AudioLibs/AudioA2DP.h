@@ -133,8 +133,9 @@ class A2DPStream : public AudioStream {
         }
 
         /// Opens the processing
-        void begin(A2DPConfig cfg){
+        bool begin(A2DPConfig cfg){
             this->config = cfg;
+            bool result = false;
             LOGI("Connecting to %s",cfg.name);
             if (a2dp_buffer==nullptr){
                 a2dp_buffer = new RingBuffer<uint8_t>(cfg.bufferSize);
@@ -159,6 +160,7 @@ class A2DPStream : public AudioStream {
                     LOGI("a2dp_source is connected...");
                     notifyBaseInfo(44100);
                     //is_a2dp_active = true;
+                    result = true;
                     break;
 
                 case RX_MODE:
@@ -176,8 +178,11 @@ class A2DPStream : public AudioStream {
                     }
                     LOGI("a2dp_sink is connected...");
                     is_a2dp_active = true;
+                    result = true;
                     break;
-            }            
+            } 
+            
+            return result;           
         }
 
         /// checks if we are connected
