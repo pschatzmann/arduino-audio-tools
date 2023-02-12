@@ -117,7 +117,7 @@ struct SPDIFConfig : public AudioBaseInfo {
  * @copyright GPLv3
  *
  */
-class SPDIFStream : public AudioStreamX {
+class SPDIFStream : public AudioStream {
  public:
   /// default constructor
   SPDIFStream() = default;

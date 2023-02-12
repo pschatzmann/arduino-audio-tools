@@ -36,7 +36,7 @@ class AudioMP34DT05 *selfAudioMP34DT05 = nullptr;
  * implementation. See https://github.com/arduino/ArduinoCore-nRF528x-mbedos
  * @ingroup io
  */
-class AudioMP34DT05 : public AudioStreamX {
+class AudioMP34DT05 : public AudioStream {
  public:
   AudioMP34DT05() { selfAudioMP34DT05 = this; };
   virtual ~AudioMP34DT05() {

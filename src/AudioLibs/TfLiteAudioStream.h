@@ -400,7 +400,7 @@ class TfLiteMicroSpeechRecognizeCommands : public TfLiteAbstractRecognizeCommand
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class TfLiteAudioStreamBase : public AudioStreamX {
+class TfLiteAudioStreamBase : public AudioStream {
   public:
     virtual void setInterpreter(tflite::MicroInterpreter* p_interpreter) = 0;
     virtual TfLiteConfig defaultConfig() = 0;

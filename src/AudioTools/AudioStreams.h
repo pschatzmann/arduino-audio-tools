@@ -55,9 +55,9 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
       p_notify = &bi;
   }
 
-  virtual size_t readBytes(uint8_t *buffer, size_t length) STREAM_WRITE_OVERRIDE = 0;
+  virtual size_t readBytes(uint8_t *buffer, size_t length) override { return not_supported(0); }
 
-  virtual size_t write(const uint8_t *buffer, size_t size) override = 0;
+  virtual size_t write(const uint8_t *buffer, size_t size) override{ return not_supported(0); }
 
   virtual size_t write(uint8_t ch) override {
       if (tmp.isFull()){
@@ -65,6 +65,8 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
       }
       return tmp.write(ch);
   }
+
+  virtual int available() override { return DEFAULT_BUFFER_SIZE; };
 
 
   operator bool() { return available() > 0; }
@@ -97,6 +99,11 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
     return readBytes((uint8_t *)buffer, length);
   }
 
+  virtual int read() override { return not_supported(-1); }
+
+  virtual int peek() override { return not_supported(-1); }
+
+
 #endif
 
  protected:
@@ -106,32 +113,10 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
 
 
   virtual int not_supported(int out) {
-    LOGE("AudioStreamX: unsupported operation!");
+    LOGE("AudioStream: unsupported operation!");
     return out;
   }
 
-};
-
-/**
- * @brief Same as AudioStream - but we do not have any abstract methods
- *
- */
-class AudioStreamX : public AudioStream {
- public:
-  AudioStreamX() = default;
-  virtual ~AudioStreamX() = default;
-  AudioStreamX(AudioStreamX const&) = delete;
-  AudioStreamX& operator=(AudioStreamX const&) = delete;
-
-  virtual size_t readBytes(uint8_t *buffer, size_t length) override { return not_supported(0); }
-
-  virtual size_t write(const uint8_t *buffer, size_t size) override{ return not_supported(0); }
-
-  virtual int available() override { return not_supported(0); };
-
-  virtual int read() override { return not_supported(-1); }
-
-  virtual int peek() override { return not_supported(-1); }
 };
 
 /**
@@ -355,7 +340,7 @@ class MemoryStream : public AudioStream {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class DynamicMemoryStream : public AudioStreamX {
+class DynamicMemoryStream : public AudioStream {
 public:
   struct DataNode {
     size_t len=0;
@@ -556,7 +541,7 @@ protected:
  */
 
 template <class T>
-class GeneratedSoundStream : public AudioStreamX {
+class GeneratedSoundStream : public AudioStream {
  public:
   GeneratedSoundStream() = default;
   
@@ -837,11 +822,11 @@ class RingBufferStream : public AudioStream {
  * @copyright GPLv3
  */
 template <class T>
-class QueueStream : public AudioStreamX {
+class QueueStream : public AudioStream {
  public:
   /// Default constructor
   QueueStream(int bufferSize, int bufferCount, bool autoRemoveOldestDataIfFull=false)
-      : AudioStreamX() {
+      : AudioStream() {
     callback_buffer_ptr = new NBuffer<T>(bufferSize, bufferCount);
     remove_oldest_data = autoRemoveOldestDataIfFull;
   }
@@ -926,10 +911,10 @@ using CallbackBufferedStream = QueueStream<T>;
  * @param converter 
  */
 template<typename T, class ConverterT>
-class ConverterStream : public AudioStreamX {
+class ConverterStream : public AudioStream {
 
     public:
-        ConverterStream(Stream &stream, ConverterT &converter) : AudioStreamX() {
+        ConverterStream(Stream &stream, ConverterT &converter) : AudioStream() {
             p_converter = &converter;
             p_stream = &stream;
         }
@@ -968,7 +953,7 @@ class ConverterStream : public AudioStreamX {
  * @copyright GPLv3
  * @ingroup io
  */
-class MeasuringStream : public AudioStreamX {
+class MeasuringStream : public AudioStream {
   public:
     MeasuringStream(int count=10, Print *logOut=nullptr){
       this->count = count;
@@ -1084,7 +1069,7 @@ class MeasuringStream : public AudioStreamX {
  */
 
 template<typename T>
-class InputMixer : public AudioStreamX {
+class InputMixer : public AudioStream {
   public:
     InputMixer() = default;
 
@@ -1183,7 +1168,7 @@ class InputMixer : public AudioStreamX {
  * @tparam T 
  */
 template<typename T>
-class InputMerge : public AudioStreamX {
+class InputMerge : public AudioStream {
   public:
     /// Default constructor
     InputMerge() = default;
@@ -1275,9 +1260,9 @@ class InputMerge : public AudioStreamX {
  * @copyright GPLv3
  */
 template<typename T, class TF>
-class FilteredStream : public AudioStreamX {
+class FilteredStream : public AudioStream {
   public:
-        FilteredStream(Stream &stream, int channels=2) : AudioStreamX() {
+        FilteredStream(Stream &stream, int channels=2) : AudioStream() {
           this->channels = channels;
           p_stream = &stream;
           p_converter = new ConverterNChannels<T,TF>(channels);

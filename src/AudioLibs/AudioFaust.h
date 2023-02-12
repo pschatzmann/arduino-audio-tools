@@ -12,7 +12,7 @@ namespace audio_tools {
  * @copyright GPLv3
  */
 template<class DSP>
-class FaustStream : public AudioStreamX {
+class FaustStream : public AudioStream {
   public:
 
     /// Constructor for Faust as Audio Source

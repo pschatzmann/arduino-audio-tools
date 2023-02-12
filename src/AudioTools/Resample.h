@@ -25,7 +25,7 @@ struct ResampleConfig : public AudioBaseInfo {
  * @tparam T 
  */
 template<typename T>
-class ResampleStream : public AudioStreamX {
+class ResampleStream : public AudioStream {
   public:
     /// Support for resampling via write.
     ResampleStream(Print &out, int channelCount=2){

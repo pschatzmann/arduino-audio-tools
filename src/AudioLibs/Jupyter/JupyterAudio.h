@@ -108,7 +108,7 @@ using Chart = ChartT<int16_t>;
  * load the data again for different representations.
  */
 template <typename T> 
-class JupyterAudioT : public AudioStreamX {
+class JupyterAudioT : public AudioStream {
 public:
 
   JupyterAudioT(const char* fileName, AudioStream &stream, int bufferCount=20, int bufferSize=1024) {

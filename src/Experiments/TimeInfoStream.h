@@ -12,7 +12,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class TimeInfoStream : public AudioStreamX {
+class TimeInfoStream : public AudioStream {
     public:
         TimeInfoStream(AudioStream &io, long startSeconds=0, long endSeconds=-1){
             p_stream = &io;

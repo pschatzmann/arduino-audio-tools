@@ -36,7 +36,7 @@ class WM8960Config : public I2SConfig {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class WM8960Stream : public AudioStreamX {
+class WM8960Stream : public AudioStream {
 
 public:
 

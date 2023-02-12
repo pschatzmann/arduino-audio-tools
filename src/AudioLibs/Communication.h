@@ -72,7 +72,7 @@ struct ESPNowStreamConfig {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class ESPNowStream : public AudioStreamX {
+class ESPNowStream : public AudioStream {
  public:
   ESPNowStream() { ESPNowStreamSelf = this; };
 
@@ -623,7 +623,7 @@ class AudioSyncWriter : public AudioPrint {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioSyncReader : public AudioStreamX {
+class AudioSyncReader : public AudioStream {
  public:
   AudioSyncReader(Stream &in, EncodedAudioStream &out,
                   bool isConfirmer = true) {

@@ -203,7 +203,7 @@ class AudioEffects : public SoundGenerator<effect_t> {
  * @copyright GPLv3*/
 
 template <class T>
-class AudioEffectStreamT : public AudioStreamX {
+class AudioEffectStreamT : public AudioStream {
   public:
     AudioEffectStreamT() = default;
 
@@ -388,7 +388,7 @@ class AudioEffectStreamT : public AudioStreamX {
  * @copyright GPLv3
  **/
 
-class AudioEffectStream : public AudioStreamX {
+class AudioEffectStream : public AudioStream {
     AudioEffectStream() = default;
 
     AudioEffectStream(Stream &io){
