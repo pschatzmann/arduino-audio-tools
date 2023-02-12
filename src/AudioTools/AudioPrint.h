@@ -59,8 +59,8 @@ class AudioPrint : public Print, public AudioBaseInfoDependent, public AudioBase
             p_notify = &bi;
         }
 
-        /// If true we need to release the related memory
-        virtual bool doRelease() {
+        /// If true we need to release the related memory in the destructor
+        virtual bool isDeletable() {
             return false;
         }
 
@@ -270,7 +270,8 @@ class AdapterAudioStreamToAudioPrint : public AudioPrint {
             return p_stream->write(buffer,size);
         }
 
-        virtual bool doRelease() {
+        /// If true we need to release the related memory in the destructor
+        virtual bool isDeletable() {
             return true;
         }
        
@@ -292,7 +293,8 @@ class AdapterPrintToAudioPrint : public AudioPrint {
         size_t write(const uint8_t *buffer, size_t size){
             return p_print->write(buffer,size);
         }
-        virtual bool doRelease() {
+        /// If true we need to release the related memory in the destructor
+        virtual bool isDeletable() {
             return true;
         }
     protected:
@@ -335,7 +337,7 @@ class MultiOutput : public AudioPrint {
 
         virtual ~MultiOutput() {
             for (int j=0;j<vector.size();j++){
-                if (vector[j]->doRelease()){
+                if (vector[j]->isDeletable()){
                     delete vector[j];
                 }
             }
