@@ -32,6 +32,7 @@ namespace audio_tools {
 
 class Print {
 public:
+#ifndef DOXYGEN
     virtual size_t write(uint8_t ch){
 		// not implememnted: to be overritten
 		return 0;
@@ -41,19 +42,9 @@ public:
       return write((const uint8_t *)str, strlen(str));
     }
 
-    virtual size_t write(const uint8_t *buffer, size_t size){
-        if (buffer == nullptr) return 0;
-    	for (size_t j=0;j<size;j++){
-    		write(buffer[j]);
-    	}
-    	return size;
-    }
-
     virtual size_t write(const char *buffer, size_t size) {
       return write((const uint8_t *)buffer, size);
     }
-
-    virtual int availableForWrite() { return 1024; }
 
     virtual int print(const char* msg){
 		int result = strlen(msg);
@@ -85,6 +76,20 @@ public:
 		return -1;
 	}
 
+#endif
+
+    virtual size_t write(const uint8_t *buffer, size_t size){
+        if (buffer == nullptr) return 0;
+    	for (size_t j=0;j<size;j++){
+    		write(buffer[j]);
+    	}
+    	return size;
+    }
+
+
+    virtual int availableForWrite() { return 1024; }
+
+
 	virtual void flush() { /* Empty implementation for backward compatibility */ }
 };
 
@@ -92,9 +97,11 @@ class Stream : public Print {
 public:
 	virtual int available(){return 0;}
 	virtual size_t readBytes(uint8_t* buffer, size_t len) {return 0;}
+#ifndef DOXYGEN
 	virtual int read(){return -1;}
 	virtual int peek(){return -1;}
 	virtual void setTimeout(size_t t){}
+#endif
 	operator bool(){
 		return true;
 	}

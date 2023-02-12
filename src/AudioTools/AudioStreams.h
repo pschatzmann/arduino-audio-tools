@@ -56,13 +56,18 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
       p_notify = &bi;
   }
 
+#ifndef DOXYGEN
+
   virtual size_t readBytes(char *buffer, size_t length) {
     return readBytes((uint8_t *)buffer, length);
   }
 
+#endif
+
   virtual size_t readBytes(uint8_t *buffer, size_t length) STREAM_WRITE_OVERRIDE = 0;
 
   virtual size_t write(const uint8_t *buffer, size_t size) override = 0;
+
 
   operator bool() { return available() > 0; }
 
@@ -110,8 +115,9 @@ class AudioStreamX : public AudioStream {
   AudioStreamX& operator=(AudioStreamX const&) = delete;
 
   virtual size_t readBytes(uint8_t *buffer, size_t length) override { return not_supported(0); }
+#ifndef DOXYGEN
   virtual size_t write(const uint8_t *buffer, size_t size) override{ return not_supported(0); }
-  virtual size_t write(uint8_t) override { return not_supported(0); }
+#endif
   virtual int available() override { return not_supported(0); };
 
   virtual int read() override { return not_supported(-1); }
