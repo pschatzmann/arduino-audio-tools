@@ -9,7 +9,7 @@
  * @copyright GPLv3
  */
 namespace audio_tools {
-class StdioStream : public AudioStreamX {
+class StdioStream : public AudioStream {
 public:
   AudioBaseInfo defaultConfig() {
     AudioBaseInfo def;

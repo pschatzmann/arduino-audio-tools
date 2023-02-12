@@ -153,7 +153,7 @@ friend class AudioKitStream;
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioKitStreamAdapter : public AudioStreamX {
+class AudioKitStreamAdapter : public AudioStream {
  public:
   AudioKitStreamAdapter(AudioKit *kit) { this->kit = kit; }
   size_t write(const uint8_t *data, size_t len) override {
@@ -176,7 +176,7 @@ class AudioKitStreamAdapter : public AudioStreamX {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioKitStream : public AudioStreamX {
+class AudioKitStream : public AudioStream {
  public:
   AudioKitStream() { pt_AudioKitStream = this; }
 

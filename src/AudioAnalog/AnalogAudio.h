@@ -15,7 +15,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AnalogAudioStream  : public AudioStreamX {
+class AnalogAudioStream  : public AudioStream {
   public:
     /// Default constructor
     AnalogAudioStream()=default;

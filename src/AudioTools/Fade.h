@@ -231,7 +231,7 @@ protected:
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class FadeStream : public AudioStreamX {
+class FadeStream : public AudioStream {
 public:
   FadeStream() = default;
   FadeStream(Print &out) { setTarget(out); }
@@ -245,7 +245,7 @@ public:
   void setTarget(Print &out) { p_out = &out; }
 
   void setAudioInfo(AudioBaseInfo info) override {
-    AudioStreamX::setAudioInfo(info);
+    AudioStream::setAudioInfo(info);
     fade_last.setAudioInfo(info);
     active = true;
   }

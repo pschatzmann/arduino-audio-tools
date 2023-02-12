@@ -11,7 +11,7 @@ namespace audio_tools {
  * @copyright GPLv3
  */
 template<typename T>
-class ChannelFormatConverterStreamT : public AudioStreamX {
+class ChannelFormatConverterStreamT : public AudioStream {
   public:
         ChannelFormatConverterStreamT(Stream &stream){
           p_stream = &stream;
@@ -59,7 +59,7 @@ class ChannelFormatConverterStreamT : public AudioStreamX {
         }
 
         void setAudioInfo(AudioBaseInfo cfg) override {
-          AudioStreamX::setAudioInfo(cfg);
+          AudioStream::setAudioInfo(cfg);
           to_channels = cfg.channels;
         }
 
@@ -100,7 +100,7 @@ class ChannelFormatConverterStreamT : public AudioStreamX {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class ChannelFormatConverterStream : public AudioStreamX {
+class ChannelFormatConverterStream : public AudioStream {
   public:
         ChannelFormatConverterStream() = default;
 
@@ -122,7 +122,7 @@ class ChannelFormatConverterStream : public AudioStreamX {
         }
 
         void setAudioInfo(AudioBaseInfo cfg) override {
-          AudioStreamX::setAudioInfo(cfg);
+          AudioStream::setAudioInfo(cfg);
             switch(bits_per_sample){
               case 8:
                  static_cast<ChannelFormatConverterStreamT<int8_t>*>(converter)->setAudioInfo(cfg);
@@ -272,7 +272,7 @@ class ChannelFormatConverterStream : public AudioStreamX {
  */
 
 template<typename TFrom, typename TTo >
-class NumberFormatConverterStreamT : public AudioStreamX {
+class NumberFormatConverterStreamT : public AudioStream {
   public:
         NumberFormatConverterStreamT() = default;
 
@@ -340,7 +340,7 @@ class NumberFormatConverterStreamT : public AudioStreamX {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class NumberFormatConverterStream :  public AudioStreamX {
+class NumberFormatConverterStream :  public AudioStream {
   public:
         NumberFormatConverterStream() = default;
 
@@ -521,7 +521,7 @@ class NumberFormatConverterStream :  public AudioStreamX {
  * @copyright GPLv3
  */
 
-class FormatConverterStream : public AudioStreamX {
+class FormatConverterStream : public AudioStream {
   public:
         FormatConverterStream() = default;
 

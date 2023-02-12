@@ -149,7 +149,7 @@ protected:
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class EncodedAudioPrint : public AudioStreamX {
+class EncodedAudioPrint : public AudioStream {
 public:
   /// Constructor for AudioStream with automatic notification of audio changes
   EncodedAudioPrint(AudioStream *outputStream, AudioDecoder *decoder) {

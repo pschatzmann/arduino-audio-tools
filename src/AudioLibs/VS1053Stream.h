@@ -49,12 +49,12 @@ class VS1053Config : public AudioBaseInfo {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class VS1053Stream : public AudioStreamX {
+class VS1053Stream : public AudioStream {
 
     /**
      * @brief Private output class for the EncodedAudioStream
      */
-    class VS1053StreamOut : public AudioStreamX {
+    class VS1053StreamOut : public AudioStream {
       public:
         VS1053StreamOut(VS1053 *vs){
             p_VS1053 = vs;

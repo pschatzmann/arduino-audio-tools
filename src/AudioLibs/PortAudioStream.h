@@ -34,7 +34,7 @@ class PortAudioConfig : public AudioBaseInfo {
  * @brief Arduino Audio Stream using PortAudio
  * @ingroup io
  */
-class PortAudioStream : public AudioStreamX {
+class PortAudioStream : public AudioStream {
     public:
         PortAudioStream() {
             TRACED();

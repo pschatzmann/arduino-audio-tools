@@ -37,7 +37,7 @@ struct ConfigEquilizer3Bands : public AudioBaseInfo {
  * @ingroup equilizer
  * @author pschatzmann
  */
-class Equilizer3Bands : public AudioStreamX {
+class Equilizer3Bands : public AudioStream {
     public:
 
         Equilizer3Bands(Print &out) {

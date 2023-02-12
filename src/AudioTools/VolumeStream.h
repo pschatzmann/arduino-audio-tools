@@ -29,7 +29,7 @@ struct VolumeStreamConfig : public AudioBaseInfo {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class VolumeStream : public AudioStreamX {
+class VolumeStream : public AudioStream {
     public:
         /// Default Constructor
         VolumeStream() = default;

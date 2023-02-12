@@ -67,7 +67,7 @@ class AudioOutputWithCallback : public AudioOutput, public BufferedStream {
  * @brief Stream Adapter for ESP8288-Audio AudioOutput
  *
  */
-class ESP3288AudioOutput : public AudioStreamX {
+class ESP3288AudioOutput : public AudioStream {
  public:
   ESP3288AudioOutput(AudioOutput &out, int channels) {
     p_out = &out;
