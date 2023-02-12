@@ -5,7 +5,7 @@
  * @brief Platform specific timers
  */
 #include "AudioConfig.h"
-#if defined(USE_TIMER)  || defined(DOXYGEN)
+#if defined(USE_TIMER)  
 #include "AudioTools/AudioLogger.h"
 #include "AudioTimer/AudioTimerBase.h"
 #include "AudioTimer/AudioTimerESP32.h"

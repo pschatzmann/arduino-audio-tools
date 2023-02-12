@@ -4,7 +4,7 @@
 #pragma once
 #include "AudioConfig.h"
 
-#if defined(USE_I2S) || defined(DOXYGEN)
+#if defined(USE_I2S) 
 #include "AudioTools/AudioTypes.h"
 #include "AudioTools/AudioStreams.h"
 #include "AudioI2S/I2SConfig.h"
