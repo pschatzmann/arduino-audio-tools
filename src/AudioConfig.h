@@ -115,6 +115,10 @@
 #define MAX_HTTP_HEADER_LINE_LENGTH 240
 #endif
 
+#ifndef MAX_SINGLE_CHARS
+#define MAX_SINGLE_CHARS 8
+#endif
+
 /**
  * ------------------------------------------------------------------------- 
  * @brief PWM

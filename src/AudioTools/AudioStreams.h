@@ -59,6 +59,13 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
 
   virtual size_t write(const uint8_t *buffer, size_t size) override = 0;
 
+  virtual size_t write(uint8_t ch) override {
+      if (tmp.isFull()){
+          flush();
+      }
+      return tmp.write(ch);
+  }
+
 
   operator bool() { return available() > 0; }
 
@@ -68,7 +75,11 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
 
   virtual int availableForWrite() override { return DEFAULT_BUFFER_SIZE; }
 
-  virtual void flush() override {}
+  virtual void flush() override {
+      if (tmp.available()>0){
+          write((const uint8_t*)tmp.address(), tmp.available());
+      }
+  }
 
   /// Writes len bytes of silence (=0).
   /// @param len 
@@ -86,13 +97,13 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
     return readBytes((uint8_t *)buffer, length);
   }
 
-  virtual size_t write(uint8_t) { return not_supported(0);};
-
 #endif
 
  protected:
   AudioBaseInfoDependent *p_notify=nullptr;
   AudioBaseInfo info;
+  SingleBuffer<uint8_t> tmp{MAX_SINGLE_CHARS};
+
 
   virtual int not_supported(int out) {
     LOGE("AudioStreamX: unsupported operation!");

@@ -6,8 +6,6 @@
 #include "AudioTools/AudioStreams.h"
 #include "AudioBasic/Int24.h"
 
-#define MAX_SINGLE_CHARS 8
-
 namespace audio_tools {
 
 #if !defined(ARDUINO) || defined(IS_DESKTOP)
@@ -28,11 +26,10 @@ class AudioPrint : public Print, public AudioBaseInfoDependent, public AudioBase
          size_t write(const uint8_t *buffer, size_t size) override = 0;
 
         virtual size_t write(uint8_t ch) override {
-            tmp[tmpPos++] = ch;
-            if (tmpPos>MAX_SINGLE_CHARS){
+            if (tmp.isFull()){
                 flush();
-            } 
-            return 1;
+            }
+            return tmp.write(ch);
         }
 
         virtual int availableForWrite() override {
@@ -41,8 +38,9 @@ class AudioPrint : public Print, public AudioBaseInfoDependent, public AudioBase
 
         // removed override because some old implementation did not define this method as virtual
         virtual void flush() FLUSH_OVERRIDE {
-            write((const uint8_t*)tmp, tmpPos-1);
-            tmpPos=0;
+            if (tmp.available()>0){
+                write((const uint8_t*)tmp.address(), tmp.available());
+            }
         }
 
         // overwrite to do something useful
@@ -78,11 +76,10 @@ class AudioPrint : public Print, public AudioBaseInfoDependent, public AudioBase
         }
 
     protected:
-        uint8_t tmp[MAX_SINGLE_CHARS];
         int tmpPos=0;
         AudioBaseInfoDependent *p_notify=nullptr;
         AudioBaseInfo cfg;
-
+        SingleBuffer<uint8_t> tmp{MAX_SINGLE_CHARS};
 };
 
 
