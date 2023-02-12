@@ -4,7 +4,7 @@ Some basic __header-only C++ classes__ that can be used for __Audio Processing__
 
 - We provide different "Audio Sources" and "Audio Sinks" (see next section)
 - Support for different [Encoders](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_audio_encoder.html) and [Decoders](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_audio_decoder.html) for MP3, AAC, WAV, FLAC, etc 
-- Different [Sound Generators](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_sound_generator.html) (e.g. to generate a sine tone) 
+- Different [Sound Generators](https://pschatzmann.github.io/arduino-audio-tools/group__generator.html) (e.g. to generate a sine tone) 
 - Support for [Sound Effects](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_audio_effect_stream.html) with different [Effect Implementations](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_audio_effect.html) (e.g. Boost, Distortion, Echo, Reverb...) 
 - Different [Buffer Implementations](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_base_buffer.html) 
 - Different [Converters](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_base_converter.html) and [Filters](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_filter.html)
@@ -30,7 +30,7 @@ As “Audio Sources” we will have e.g.:
 - ESP32 AudioKit - [AudioKitStream](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_audio_kit_stream.html)
 - Input using FIR, IIR Filters - [FilteredStream](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_filtered_stream.html)
 - Tensorflow Lite - [TfLiteAudioStream](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_tf_lite_audio_stream.html)
-- Converting Streams - [VolumeStream](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_volume_stream.html), [ResampleStream](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_resample_stream.html), [FormatConverterStream](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_format_converter_stream.html), [NumberFormatConverterStream](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_number_format_converter_stream.html), [ChannelFormatConverterStream](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_channel_format_converter_stream.html), [ConvertedStream](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_converted_stream.html)
+- [Converting Streams](https://pschatzmann.github.io/arduino-audio-tools/group__transform.html)
 - Communication - [ESPNowStream](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_e_s_p_now_stream.html), [UDPStream](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_u_d_p_stream.html)
 - Any other Arduino Classes implementing Streams: SD, Ethernet etc
 
@@ -56,7 +56,7 @@ As “Audio Sinks” we will have e.g:
 - 3 Band Equilizer - [Equilizer3Bands](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_equilizer3_bands.html)
 - FFT - [AudioRealFFT](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_audio_real_f_f_t.html) and [AudioKissFFT](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_audio_kiss_f_f_t.html)
 - Tensorflow Lite - [TfLiteAudioStream](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_tf_lite_audio_stream.html)
-- Converting Streams - [VolumeStream](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_volume_stream.html), [ResampleStream](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_resample_stream.html), [FormatConverterStream](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_format_converter_stream.html), [NumberFormatConverterStream](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_number_format_converter_stream.html), [ChannelFormatConverterStream](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_channel_format_converter_stream.html), [ConvertedStream](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_converted_stream.html)
+- [Converting Streams](https://pschatzmann.github.io/arduino-audio-tools/group__transform.html)
 - Communication - [ESPNowStream](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_e_s_p_now_stream.html), [UDPStream](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_u_d_p_stream.html)
 - Multiuser-Webserver for PCM Output - [AudioWAVServerEx](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_audio_w_a_v_server_ex.html)
 - Any other Arduino Classes implementing Streams: SD, Ethernet etc

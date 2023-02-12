@@ -382,7 +382,9 @@ class AudioEffectStreamT : public AudioStream {
 #if __cplusplus >= 201703L || defined(DOXYGEN)
 /** 
  * @brief EffectsStream supporting variable bits_per_sample.
- * This class is only available when __cplusplus >= 201703L
+ * This class is only available when __cplusplus >= 201703L. Otherwise AudioEffectStream results in
+ * using AudioEffectStream = AudioEffectStreamT<effect_t>;
+
  * @ingroup effects transform
  * @author Phil Schatzmann
  * @copyright GPLv3
