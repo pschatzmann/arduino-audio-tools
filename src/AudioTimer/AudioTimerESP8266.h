@@ -6,7 +6,7 @@
 
 namespace audio_tools {
 
-typedef void (* repeating_timer_callback_t )(void* obj);
+typedef void (*repeating_timer_callback_t )(void* obj);
 
 class TimerAlarmRepeatingDriverESP8266;
 TimerAlarmRepeatingDriverESP8266 *self;
@@ -42,7 +42,7 @@ class TimerAlarmRepeatingDriverESP8266 : public TimerAlarmRepeatingDriverBase {
                     break;
             }
 
-            ticker.attach<void*>(timeUs / 1000000, callback_f, this);
+            ticker.attach_ms(timeUs / 1000, callback_f, (void*)this);
             
             return true;
         }

@@ -1,11 +1,11 @@
 #pragma once
-#if __cplusplus >= 201703L 
-#  include <variant>
-#endif
 #include "AudioBasic/Collections.h"
 #include "AudioEffects/SoundGenerator.h"
 #include "AudioEffects/AudioEffect.h"
 #include "AudioTools/AudioStreams.h"
+#if __cplusplus >= 201703L 
+#  include <variant>
+#endif
 
 /** 
  * @defgroup effects Effects
@@ -350,7 +350,7 @@ class AudioEffectStreamT : public AudioStream {
     void addEffect(AudioEffect *effect){
         TRACED();
         effects.addEffect(effect);
-        LOGI("addEffect -> Number of effects: %d", size());
+        LOGI("addEffect -> Number of effects: %d", (int) size());
     }
 
     /// deletes all defined effects
