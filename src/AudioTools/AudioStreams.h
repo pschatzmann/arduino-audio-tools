@@ -22,7 +22,13 @@
 #else
 #  define STREAM_WRITE_OVERRIDE 
 #endif
- 
+
+#ifdef ARDUINO
+#  define STREAM_READ_OVERRIDE 
+#else
+#  define STREAM_READ_OVERRIDE override
+#endif
+
 namespace audio_tools {
 
 /**
@@ -55,7 +61,7 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
       p_notify = &bi;
   }
 
-  virtual size_t readBytes(uint8_t *buffer, size_t length)  { return not_supported(0); }
+  virtual size_t readBytes(uint8_t *buffer, size_t length) STREAM_READ_OVERRIDE { return not_supported(0); }
 
   virtual size_t write(const uint8_t *buffer, size_t size) override{ return not_supported(0); }
 
