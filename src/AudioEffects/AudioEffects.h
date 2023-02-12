@@ -1,5 +1,5 @@
 #pragma once
-
+#include <variant>
 #include "AudioBasic/Collections.h"
 #include "AudioEffects/SoundGenerator.h"
 #include "AudioEffects/AudioEffect.h"
@@ -226,8 +226,13 @@ class AudioEffectStreamT : public AudioStreamX {
 
     bool begin(AudioBaseInfo cfg){
         info = cfg;
-        active = true;
-        return true;
+        if (sizeof(T)==cfg.bits_per_sample/8){
+            active = true;
+        } else {
+            LOGE("bits_per_sample not consistent: %d",cfg.bits_per_sample);
+            active = false;
+        }
+        return active;
     }
 
     void end() override {
@@ -374,13 +379,136 @@ class AudioEffectStreamT : public AudioStreamX {
     Print *p_print=nullptr;
 };
 
+#if __cplusplus >= 201703L
 /** 
- * @brief EffectsStream using effect_t (=int16_t) samples
+ * @brief EffectsStream supporting variable bits_per_sample.
+ * This class is only available when __cplusplus >= 201703L
  * @ingroup effects transform
  * @author Phil Schatzmann
  * @copyright GPLv3
  **/
 
+class AudioEffectStream : public AudioStreamX {
+    AudioEffectStream() = default;
+
+    AudioEffectStream(Stream &io){
+        setOutput(io);
+        setInput(io);
+    }
+
+    AudioEffectStream(Print &out){
+        setOutput(out);
+    }
+
+    AudioBaseInfo defaultConfig() {
+        AudioBaseInfo cfg;
+        cfg.sample_rate = 44100;
+        cfg.bits_per_sample = 16;
+        cfg.channels = 2;
+        return cfg;
+    }
+
+    bool begin(AudioBaseInfo cfg){
+        info = cfg;
+        switch(cfg.bits_per_sample){
+            case 16: 
+                variant.emplace<0>();
+                break;
+            case 24: 
+                variant.emplace<1>();
+                break;
+            case 32: 
+                variant.emplace<2>();
+                break;
+            default:
+                LOGE("Unspported bits_per_sample: %d", cfg.bits_per_sample);
+                return false;
+        }
+        std::visit( [this](auto&& e) {return e.setOutput(*p_print);}, variant );
+        std::visit( [this](auto&& e) {return e.setInput(*p_io);}, variant );
+        return std::visit( [cfg](auto&& e) {return e.begin(cfg);}, variant );
+    }
+
+    void end() override {
+        std::visit( [](auto&& e) {e.end();}, variant );
+    }
+
+    void setInput(Stream &io){
+        p_io = &io;
+    }
+
+    void setOutput(Stream &io){
+        p_io = &io;
+    }
+
+    void setOutput(Print &print){
+        p_print = &print;
+    }
+
+    /**
+     * Provides the audio data by reading the assinged Stream and applying
+     * the effects on that input
+    */
+    size_t readBytes(uint8_t *buffer, size_t length) override {
+        return std::visit( [buffer, length](auto&& e) {return e.readBytes(buffer, length);}, variant );
+    }
+
+    /**
+     * Writes the samples passed in the buffer and applies the effects before writing the
+     * result to the output defined in the constructor.
+    */
+    size_t write(const uint8_t *buffer, size_t length) override {
+        return std::visit( [buffer, length](auto&& e) {return e.write(buffer, length);}, variant );
+    }
+
+    int available() override {
+        return std::visit( [](auto&& e) {return e.available();}, variant );
+    }
+
+    int availableForWrite() override {
+        return std::visit( [](auto&& e) {return e.availableForWrite();}, variant );
+    }
+
+    /// Adds an effect object (by reference)
+    void addEffect(AudioEffect &effect){
+        addEffect(&effect);
+    }
+
+    /// Adds an effect using a pointer
+    void addEffect(AudioEffect *effect){
+        std::visit( [effect](auto&& e) {e.addEffect(effect);}, variant );
+    }
+
+    /// deletes all defined effects
+    void clear() {
+        std::visit( [](auto&& e) {e.clear();}, variant );
+    }
+
+    /// Provides the actual number of defined effects
+    size_t size() {
+        return std::visit( [](auto&& e) {return e.size();}, variant );
+    }
+
+    /// gets an effect by index
+    AudioEffect* operator [](int idx){
+        return std::visit( [idx](auto&& e) {return e[idx];}, variant );
+    }
+
+    /// Finds an effect by id
+    AudioEffect* findEffect(int id){
+        return std::visit( [id](auto&& e) {return e.findEffect(id);}, variant );
+    }
+
+  protected:
+    std::variant<AudioEffectStreamT<int16_t>, AudioEffectStreamT<int24_t>,AudioEffectStreamT<int32_t>> variant;
+    Stream *p_io=nullptr;
+    Print *p_print=nullptr;
+
+};
+
+#else
+// Use int16_t as only supported data type
 using AudioEffectStream = AudioEffectStreamT<effect_t>;
+#endif
 
 } // namespace
