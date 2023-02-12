@@ -38,7 +38,6 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
   AudioStream(AudioStream const&) = delete;
   AudioStream& operator=(AudioStream const&) = delete;
 
-
   virtual bool begin(){return true;}
   virtual void end(){}
   
@@ -56,14 +55,6 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
       p_notify = &bi;
   }
 
-#ifndef DOXYGEN
-
-  virtual size_t readBytes(char *buffer, size_t length) {
-    return readBytes((uint8_t *)buffer, length);
-  }
-
-#endif
-
   virtual size_t readBytes(uint8_t *buffer, size_t length) STREAM_WRITE_OVERRIDE = 0;
 
   virtual size_t write(const uint8_t *buffer, size_t size) override = 0;
@@ -79,11 +70,7 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
 
   virtual void flush() override {}
 
-  virtual Stream* toStreamPointer() {
-    return this;
-  }
-
-  /// Writes n 0 values (= silence)
+  /// Writes len bytes of silence (=0).
   /// @param len 
   virtual void writeSilence(size_t len){
     int16_t zero = 0;
@@ -91,6 +78,17 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
       write((uint8_t*)&zero,2);
     } 
   }
+
+// Methods which should be suppressed in the documentation
+#ifndef DOXYGEN
+
+  virtual size_t readBytes(char *buffer, size_t length) {
+    return readBytes((uint8_t *)buffer, length);
+  }
+
+  virtual size_t write(uint8_t) { return not_supported(0);};
+
+#endif
 
  protected:
   AudioBaseInfoDependent *p_notify=nullptr;
@@ -115,12 +113,13 @@ class AudioStreamX : public AudioStream {
   AudioStreamX& operator=(AudioStreamX const&) = delete;
 
   virtual size_t readBytes(uint8_t *buffer, size_t length) override { return not_supported(0); }
-#ifndef DOXYGEN
+
   virtual size_t write(const uint8_t *buffer, size_t size) override{ return not_supported(0); }
-#endif
+
   virtual int available() override { return not_supported(0); };
 
   virtual int read() override { return not_supported(-1); }
+
   virtual int peek() override { return not_supported(-1); }
 };
 

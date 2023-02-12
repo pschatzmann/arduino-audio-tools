@@ -148,7 +148,7 @@ class StreamCopyT {
             int result = 0;
             if (from!=nullptr) {
                 if (availableCallback!=nullptr){
-                    result = availableCallback(from->toStreamPointer());
+                    result = availableCallback((Stream*)from);
                 } else {
                     result = from->available();
                 }
