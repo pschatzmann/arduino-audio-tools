@@ -12,13 +12,14 @@
 
 BluetoothA2DPSource a2dp_source;
 
+int channels = 2;
 AudioKitStream kit;
 Synthesizer synthesizer;
 GeneratedSoundStream<int16_t> in(synthesizer); 
 SynthesizerKey keys[] = {{PIN_KEY1, N_C3},{PIN_KEY2, N_D3},{PIN_KEY3, N_E3},{PIN_KEY4, N_F3},{PIN_KEY5, N_G3},{PIN_KEY6, N_A3},{0,0}};
 
-int32_t get_sound_data(Frame *data, int32_t len) {
-  int16_t sample = synthesizer.readSamples((int16_t(*)[2])data,len);
+int32_t get_sound_data(Frame *data, int32_t frameCount) {
+  int16_t sample = synthesizer.readBytes(uint8_t*)data,frameCount*sizeof(int16_t)*channels);
   //esp_task_wdt_reset();
   delay(1);
   return len;
@@ -35,7 +36,7 @@ void setup() {
   synthesizer.setKeys(kit.audioActions(), keys, AudioActions::ActiveLow);
   synthesizer.setMidiName("AudioKit Synthesizer");
   auto cfg = in.defaultConfig();
-  cfg.channels = 2;
+  cfg.channels = channels;
   cfg.sample_rate = 44100;
   in.begin(cfg);
 
