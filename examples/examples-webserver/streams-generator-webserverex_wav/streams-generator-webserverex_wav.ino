@@ -28,6 +28,9 @@ void setup() {
   AudioLogger::instance().begin(Serial,AudioLogger::Info);
   HttpLogger.setLevel(tinyhttp::Info);
 
+  // activate additional checks
+  copier.setCheckAvailableForWrite(true);
+
   // start server
   auto cfg = server.defaultConfig();
   cfg.sample_rate = sample_rate;
