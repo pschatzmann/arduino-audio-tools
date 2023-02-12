@@ -1,6 +1,6 @@
 #pragma once
 #include "AudioConfig.h"
-#if defined(USE_I2S_ANALOG) 
+#if defined(USE_I2S_ANALOG) || defined(DOXYGEN)
 #include "AudioAnalog/AnalogAudioBase.h"
 #include "AudioAnalog/AnalogAudioESP32.h"
 #include "AudioAnalog/AnalogAudioArduino.h"
