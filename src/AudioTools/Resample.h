@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AudioTools/AudioStreams.h"
-#include <algorithm>    // std::max
+//#include <algorithm>    // std::max
 
 namespace audio_tools {
 

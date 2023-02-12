@@ -1,5 +1,7 @@
 #pragma once
-#include <variant>
+#if __cplusplus >= 201703L 
+#  include <variant>
+#endif
 #include "AudioBasic/Collections.h"
 #include "AudioEffects/SoundGenerator.h"
 #include "AudioEffects/AudioEffect.h"
