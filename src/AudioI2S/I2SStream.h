@@ -92,21 +92,6 @@ class I2SStream : public AudioStream {
             return i2s.readBytes(data, length);
         }
 
-        /// not supported
-        virtual size_t write(uint8_t){
-            return 0;
-        }
-
-        /// not supported
-        virtual int read() {
-            return -1;
-        }  
-
-        /// not supported
-        virtual int peek() {
-            return -1;
-        }  
-
         /// Provides the available audio data
         virtual int available() override {
             return i2s.available();
