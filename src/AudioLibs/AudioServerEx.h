@@ -156,6 +156,9 @@ class AudioWAVServerEx : public AudioServerEx {
         }
 
     protected:
+        // Dynamic memory
+        tinyhttp::StrExt header;
+
         // wav files start with a 44 bytes header
         virtual tinyhttp::Str* getReplyHeader() {
             header.allocate(44);
@@ -174,10 +177,6 @@ class AudioWAVServerEx : public AudioServerEx {
 
             return &header;
         }
-
-        // Dynamic memory
-            tinyhttp::StrExt header;
-
 };
 
 }

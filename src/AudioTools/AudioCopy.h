@@ -258,7 +258,7 @@ class StreamCopyT {
         int (*availableCallback)(Stream*stream)=nullptr;
         void *onWriteObj = nullptr;
         bool is_first = false;
-        bool check_available_for_write = true;
+        bool check_available_for_write = false;
         const char* actual_mime = nullptr;
         int retryLimit = COPY_RETRY_LIMIT;
         int delay_on_no_data = COPY_DELAY_ON_NODATA;
