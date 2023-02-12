@@ -1,0 +1,5 @@
+esp32:esp32:esp32 ./examples-stream/streams-generator-serial -> rc=0
+esp8266:esp8266:generic ./examples-stream/streams-generator-serial -> rc=0
+arduino:mbed_rp2040:pico ./examples-stream/streams-generator-serial -> rc=0
+rp2040:rp2040:generic ./examples-stream/streams-generator-serial -> rc=0
+arduino:avr:nano ./examples-stream/streams-generator-serial -> rc=0

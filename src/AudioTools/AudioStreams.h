@@ -55,7 +55,7 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
       p_notify = &bi;
   }
 
-  virtual size_t readBytes(uint8_t *buffer, size_t length) override { return not_supported(0); }
+  virtual size_t readBytes(uint8_t *buffer, size_t length)  { return not_supported(0); }
 
   virtual size_t write(const uint8_t *buffer, size_t size) override{ return not_supported(0); }
 

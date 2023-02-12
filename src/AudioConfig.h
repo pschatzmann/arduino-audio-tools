@@ -407,8 +407,9 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #ifdef __AVR__
 #define USE_PWM
 #define USE_TIMER
-#include <Ethernet.h>
-#define USE_URL_ARDUINO
+// Uncomment to activate network
+//#include <Ethernet.h>
+//#define USE_URL_ARDUINO
 #ifndef assert
 #define assert(T)
 #endif
