@@ -379,7 +379,7 @@ class AudioEffectStreamT : public AudioStream {
     Print *p_print=nullptr;
 };
 
-#if __cplusplus >= 201703L
+#if __cplusplus >= 201703L || defined(DOXYGEN)
 /** 
  * @brief EffectsStream supporting variable bits_per_sample.
  * This class is only available when __cplusplus >= 201703L
