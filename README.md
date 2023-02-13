@@ -65,7 +65,7 @@ As “Audio Sinks” we will have e.g:
 
 Here is an simple example which streams a file from the Flash Memory and writes it to I2S: 
 
-```
+```C++
 #include "AudioTools.h"
 #include "StarWars30.h"
 
