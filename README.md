@@ -109,7 +109,7 @@ The library also provides a versatile [AudioPlayer](https://pschatzmann.github.i
 
 The application uses a built in logger (see AudioLogger.h and AudioConfig.h). You can  e.g. deactivate the logging by changing USE_AUDIO_LOGGING to false in the AudioConfig.h: 
 
-```
+```C++
 #define USE_AUDIO_LOGGING false
 #define LOG_LEVEL AudioLogger::Warning
 #define LOG_STREAM Serial
@@ -117,7 +117,7 @@ The application uses a built in logger (see AudioLogger.h and AudioConfig.h). Yo
 
 Per default we use the log level warning and the logging output is going to Serial. You can also change this in your sketch by calling AudioLogger begin with the output stream and the log level e.g:
 
-```
+```C++
 AudioLogger::instance().begin(Serial, AudioLogger::Debug);
 ```
 
