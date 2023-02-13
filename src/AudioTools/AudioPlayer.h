@@ -309,12 +309,14 @@ namespace audio_tools {
 
         /// The same like start() / stop()
         virtual void setActive(bool isActive){
-            active = isActive;
-            if (active){
-               fade.setFadeInActive(true); 
+            if (isActive){
+                fade.setFadeInActive(true); 
             } else {
-               fade.setFadeOutActive(true); 
-            }
+                fade.setFadeOutActive(true); 
+                copier.copy();
+                writeSilence(2048);
+            }            
+            active = isActive;
         }
 
         /// sets the volume - values need to be between 0.0 and 1.0
@@ -362,12 +364,8 @@ namespace audio_tools {
                 // move to next stream after timeout
                 moveToNextFileOnTimeout();
             } else {
-                if (fade.isFadeOutActive() && !fade.isFadeComplete()){
-                    // only single copy 
-                    copier.copy();
-                    writeSilence(1024*10);
                 // e.g. A2DP should still receive data to keep the connection open
-                } else if (silence_on_inactive){
+                if (silence_on_inactive){
                     if (p_final_print!=nullptr){
                         p_final_print->writeSilence(1024);
                     } else if (p_final_stream!=nullptr){
@@ -442,6 +440,7 @@ namespace audio_tools {
         void moveToNextFileOnTimeout(){
             if (p_final_stream->availableForWrite()==0) return;
             if (p_input_stream == nullptr || millis() > timeout) {
+                fade.setFadeInActive(true);
                 if (autonext) {
                     LOGW("-> timeout - moving by %d", steam_increment);
                     // open next stream
@@ -466,15 +465,11 @@ namespace audio_tools {
 
         void writeEnd() {
             // end silently
-            if (p_final_print!=nullptr){
-                TRACEI();
-                //fade.writeEnd(*p_final_print, 1024);
-                p_final_print->writeSilence(1024*10);
-            } else if (p_final_stream!=nullptr) {
-                TRACEI();
-                //fade.writeEnd(*p_final_stream, 1024);
-                p_final_stream->writeSilence(1024*10);
-            }
+            TRACEI();
+            fade.setFadeOutActive(true);
+            copier.copy();
+            // start by fading in
+            fade.setFadeInActive(true);
         }
 
         /// Callback implementation which writes to metadata

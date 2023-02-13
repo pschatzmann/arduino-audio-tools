@@ -27,7 +27,7 @@ void setup(void) {
   }
  
   // open music stream
-  music.begin("https://pschatzmann.github.io/arduino-audio-tools/resources/audio-8000.raw");
+  music.begin("https://pschatzmann.github.io/Resources/audio/audio-8000.raw");
 
   // start I2S with external DAC
   Serial.println("\nstarting I2S...");

@@ -23,6 +23,7 @@ class SDIndex {
     void begin(const char *startDir, const char *extension,
                const char *file_name_pattern, bool setupIndex=true) {
       TRACED();
+      this->start_dir = startDir;
       this->ext = extension;
       this->file_name_pattern = file_name_pattern;
       idx_path = String(startDir)+"/idx.txt";
@@ -101,6 +102,7 @@ class SDIndex {
     SDT *p_sd = nullptr;
     List<String> file_path_stack;
     String file_path_str;
+    const char* start_dir;    
     
     const char *ext = nullptr;
     const char *file_name_pattern = nullptr;
