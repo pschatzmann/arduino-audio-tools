@@ -79,6 +79,7 @@ protected:
     // handle fade out
     if (is_fade_in) {
       fadeIn<T>(data, frames, channels, delta);
+      is_fade_in = false;
     }  else if (is_fade_out) {
       fadeOut<T>(data, frames, channels, delta);
     }
@@ -100,20 +101,23 @@ protected:
         }
       }
     }
+    LOGI("faded out %d frames to volume %f",frames, volume);
   }
 
   template <typename T>
   void fadeIn(T *data, int frames, int channels, float delta) {
+    LOGI("fade in %d frames from volume %f",frames, volume);
     for (int j = 0; j < frames; j++) {
       for (int ch = 0; ch < channels; ch++) {
         data[j * channels + ch] = data[j * channels + ch] * volume;
         volume += delta;
-        if (volume > 1.0) {
-          volume = 1.0;
-          is_fade_in = false;
+        if (volume > 1.0f) {
+          volume = 1.0f;
         }
       }
     }
+    volume = 1.0f;
+    is_fade_in = false;
   }
 };
 
@@ -267,8 +271,12 @@ public:
       LOGE("%s", error_msg);
       return 0;
     }
-    fade.convert((uint8_t *)buffer, size, info.channels, info.bits_per_sample);
+    if (fade.isFadeInActive() || fade.isFadeOutActive()){
+      fade.convert((uint8_t *)buffer, size, info.channels, info.bits_per_sample);
+    }
+    // update last information
     fade_last.write((uint8_t *)buffer, size);
+    // write faded data
     return p_out->write(buffer, size);
   }
 

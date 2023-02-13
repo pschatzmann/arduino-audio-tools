@@ -28,6 +28,7 @@ function compile_example {
   done
 }
 
+rm build-examples-log.txt
 compile_example "esp32:esp32:esp32" "../examples/examples-basic-api/base*"
 compile_example "esp32:esp32:esp32" "../examples/examples-player/player*"
 compile_example "esp32:esp32:esp32" "../examples/examples-webserver/str*"
@@ -36,8 +37,19 @@ compile_example "esp32:esp32:esp32" "../examples/examples-audiokit/*"
 compile_example "esp32:esp32:esp32" "../examples/examples-maximilian/*"
 compile_example "esp32:esp32:esp32" "../examples/examples-tts/streams*"
 compile_example "esp32:esp32:esp32" "../examples/examples-faust/streams*"
-compile_example "esp32:esp32:esp32" "../examples/examples-communication/*"
-#compile_example "esp32:esp32:esp32" "../examples/tests/test*"
-find . -name debug_custom.json -delete
-find . -name debug.cfg -delete
-find . -name esp32.svd -delete
+compile_example "esp32:esp32:esp32" "../examples/examples-communication/esp-now/*"
+compile_example "esp32:esp32:esp32" "../examples/examples-communication/esp-now-codec/*"
+compile_example "esp32:esp32:esp32" "../examples/examples-communication/ip/*"
+compile_example "esp32:esp32:esp32" "../examples/examples-communication/rtsp/*"
+compile_example "esp32:esp32:esp32" "../examples/tests/test*"
+compile_example "esp32:esp32:esp32" "../examples/tests/24bits/*"
+compile_example "esp32:esp32:esp32" "../examples/tests/codecs/*"
+compile_example "esp32:esp32:esp32" "../examples/tests/concurrency/*"
+compile_example "esp32:esp32:esp32" "../examples/tests/conversion/*"
+compile_example "esp32:esp32:esp32" "../examples/tests/effects/*"
+compile_example "esp32:esp32:esp32" "../examples/tests/fft/*"
+compile_example "esp32:esp32:esp32" "../examples/tests/performance/*"
+compile_example "esp32:esp32:esp32" "../examples/tests/pitch-shift/*"
+compile_example "esp32:esp32:esp32" "../examples/tests/sd/*"
+
+./cleanup.sh

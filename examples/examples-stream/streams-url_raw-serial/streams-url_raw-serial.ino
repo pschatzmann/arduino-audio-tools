@@ -30,7 +30,7 @@ void setup(void) {
   }
 
   // open music stream - it contains 2 channels of int16_t data
-  music.begin("https://pschatzmann.github.io/arduino-audio-tools/resources/audio.raw");
+  music.begin("https://pschatzmann.github.io/Resources/audio/audio.raw");
 }
 
 

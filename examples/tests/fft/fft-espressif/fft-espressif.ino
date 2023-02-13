@@ -12,7 +12,7 @@ float value = 0;
 
 // display fftc result
 void fftcResult(AudioFFTBase &fftc) {
-  int diff;
+  float diff;
   auto result = fftc.result();
   if (result.magnitude > 100) {
     Serial.print(result.frequency);

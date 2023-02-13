@@ -41,7 +41,7 @@ void setup(){
   out.add(out2dec);
 
   // setup input
-  url.begin("https://pschatzmann.github.io/arduino-audio-tools/resources/audio.mp3","audio/mp3");
+  url.begin("https://pschatzmann.github.io/Resources/audio/audio.mp3","audio/mp3");
 
   // setup metadata
   out1.setCallback(printMetaData);
