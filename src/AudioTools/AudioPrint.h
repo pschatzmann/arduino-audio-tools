@@ -113,6 +113,10 @@ class CsvStream : public AudioPrint {
             this->active = true;
         }
 
+        AudioBaseInfo defaultConfig(RxTxMode mode){
+            return defaultConfig();
+        }
+
         /// Provides the default configuration
         AudioBaseInfo defaultConfig(){
             AudioBaseInfo info;

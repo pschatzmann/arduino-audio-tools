@@ -138,11 +138,11 @@ protected:
     float volume_out;
 
     void adjustInputVolume(float vol){
-        if (vol>1.0) {
-            volume_in = 1.0;
+        if (vol>1.0f) {
+            volume_in = 1.0f;
             volumeError(vol);
-        } else if (vol<1.0){
-            volume_in = 0;
+        } else if (vol<0.0f){
+            volume_in = 0.0f;
             volumeError(vol);
         } else {
             volume_in = vol;
@@ -152,11 +152,11 @@ protected:
     }
 
     void adjustOutputVolume(float vol){
-        if (vol>1.0) {
-            volume_out = 1.0;
+        if (vol>1.0f) {
+            volume_out = 1.0f;
             volumeError(vol);
-        } else if (vol<1.0){
-            volume_out = 0;
+        } else if (vol<0.0f){
+            volume_out = 0.0f;
             volumeError(vol);
         } else {
             volume_out = vol;
@@ -244,7 +244,7 @@ protected:
 
     /// if microcontroller is master then module is slave
     mtb_wm8960_mode_t modeMasterSlave(bool microcontroller_is_master){
-        return microcontroller_is_master ?WM8960_MODE_SLAVE : WM8960_MODE_MASTER;
+        return microcontroller_is_master ? WM8960_MODE_SLAVE : WM8960_MODE_MASTER;
     }
 
     void volumeError(float vol){
