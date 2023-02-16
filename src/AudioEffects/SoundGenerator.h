@@ -117,7 +117,7 @@ class SoundGenerator  {
                     *result_buffer++ = sample;
                 }
             }
-            return frames*sizeof(T);
+            return frames*sizeof(T)*channels;
         }
 
         size_t readBytesFromBuffer(uint8_t *buffer, size_t lengthBytes, int frame_size, int channels) {
