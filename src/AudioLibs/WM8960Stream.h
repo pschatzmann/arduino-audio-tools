@@ -27,6 +27,8 @@ class WM8960Config : public I2SConfig {
     uint32_t vs1053_mclk_hz = 0;
     /// Define wire if we do not use the default Wire object
     TwoWire *wire=nullptr;
+    /// Dump registers
+    bool vs1053_dump = false;
 };
 
 /**
@@ -68,10 +70,6 @@ public:
     bool begin(WM8960Config config) {
         TRACEI();
         cfg = config;
-        // setup channel converter
-        io.begin(cfg.channels, 2, cfg.bits_per_sample);
-        // setup output
-        i2s.begin(cfg);
 
         // setup wm8960
         if (!init(cfg.rx_tx_mode)){
@@ -87,6 +85,13 @@ public:
             LOGE("configure_clocking");
             return false;
         }
+        if (config.vs1053_dump){
+            mtb_wm8960_dump();
+        }
+
+        // setup output
+        i2s.begin(cfg);
+
         return true;
     }
 
@@ -123,17 +128,16 @@ public:
     }
 
     size_t readBytes (uint8_t *data, size_t size) override{
-        return io.readBytes(data, size);
+        return i2s.readBytes(data, size);
     }
 
     size_t write (const uint8_t *data, size_t size) override {
-        return io.write(data, size);
+        return i2s.write(data, size);
     }
 
 protected:
     WM8960Config cfg;
     I2SStream i2s;
-    ChannelFormatConverterStream io{i2s};
     float volume_in;
     float volume_out;
 
