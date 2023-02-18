@@ -300,9 +300,8 @@ class NumberFormatConverterStreamT : public AudioStream {
            size_t result_size = 0;
            TFrom *data_source = (TFrom *)data;
            
-           float factor = NumberConverter::maxValueT<TTo>() / NumberConverter::maxValueT<TFrom>();
            for (size_t j=0;j<samples;j++){
-             TTo value = static_cast<float>(data_source[j]) * factor;
+             TTo value = static_cast<float>(data_source[j]) * NumberConverter::maxValueT<TTo>() / NumberConverter::maxValueT<TFrom>();
              result_size += p_print->write((uint8_t*)&value, sizeof(TTo));
            }
            //assert(result_size / sizeof(TTo) * sizeof(TFrom)==size);
@@ -314,11 +313,10 @@ class NumberFormatConverterStreamT : public AudioStream {
            size_t samples = size / sizeof(TTo);
            TTo *data_target = (TTo *)data;
            TFrom source;
-           float factor = NumberConverter::maxValueT<TTo>() / NumberConverter::maxValueT<TFrom>();
            for (size_t j=0;j<samples;j++){
              source = 0;
              p_stream->readBytes((uint8_t*)&source, sizeof(TFrom));
-             data_target[j]= static_cast<float>(source) * factor;
+             data_target[j]= static_cast<float>(source) * NumberConverter::maxValueT<TTo>() / NumberConverter::maxValueT<TFrom>();
            }
            return size;
         }
