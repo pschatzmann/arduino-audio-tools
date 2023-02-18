@@ -301,7 +301,7 @@ class NumberFormatConverterStreamT : public AudioStream {
            TFrom *data_source = (TFrom *)data;
            
            for (size_t j=0;j<samples;j++){
-             TTo value = static_cast<float>(data_source[j]) * NumberConverter::maxValue(sizeof(TTo)*8) / NumberConverter::maxValue(sizeof(TFrom)*8);
+             TTo value = static_cast<float>(data_source[j]) * NumberConverter::maxValueT<TTo>() / NumberConverter::maxValueT<TFrom>();
              result_size += p_print->write((uint8_t*)&value, sizeof(TTo));
            }
            //assert(result_size / sizeof(TTo) * sizeof(TFrom)==size);
@@ -316,7 +316,7 @@ class NumberFormatConverterStreamT : public AudioStream {
            for (size_t j=0;j<samples;j++){
              source = 0;
              p_stream->readBytes((uint8_t*)&source, sizeof(TFrom));
-             data_target[j]= static_cast<float>(source) * NumberConverter::maxValue(sizeof(TTo)*8) / NumberConverter::maxValue(sizeof(TFrom)*8);
+             data_target[j]= static_cast<float>(source) * NumberConverter::maxValueT<TTo>() / NumberConverter::maxValueT<TFrom>();
            }
            return size;
         }
@@ -378,6 +378,10 @@ class NumberFormatConverterStream :  public AudioStream {
             converter = new NumberFormatConverterStreamT<int32_t,int16_t>();
           } else if (from_bit_per_samples==16 &&to_bit_per_samples==32){
             converter = new NumberFormatConverterStreamT<int16_t,int32_t>();
+          } else if (from_bit_per_samples==24 &&to_bit_per_samples==16){
+            converter = new NumberFormatConverterStreamT<int24_t,int16_t>();
+          } else if (from_bit_per_samples==16 &&to_bit_per_samples==24){
+            converter = new NumberFormatConverterStreamT<int16_t,int24_t>();
           } else {
             result = false;
             LOGE("bit combination not supported %d -> %d",from_bit_per_samples, to_bit_per_samples);
@@ -400,7 +404,7 @@ class NumberFormatConverterStream :  public AudioStream {
           } else if (from_bit_per_samples==24 &&to_bit_per_samples==16){
              return static_cast<NumberFormatConverterStreamT<int32_t,int16_t>*>(converter)->write(data,size);
           } else if (from_bit_per_samples==16 &&to_bit_per_samples==24){
-             return static_cast<NumberFormatConverterStreamT<int16_t,int32_t>*>(converter)->write(data,size);
+             return static_cast<NumberFormatConverterStreamT<int16_t,int24_t>*>(converter)->write(data,size);
           } else if (from_bit_per_samples==32 &&to_bit_per_samples==16){
              return static_cast<NumberFormatConverterStreamT<int32_t,int16_t>*>(converter)->write(data,size);
           } else if (from_bit_per_samples==16 &&to_bit_per_samples==32){
@@ -421,7 +425,7 @@ class NumberFormatConverterStream :  public AudioStream {
           } else if (from_bit_per_samples==24 &&to_bit_per_samples==16){
              return static_cast<NumberFormatConverterStreamT<int32_t,int16_t>*>(converter)->readBytes(data,size);
           } else if (from_bit_per_samples==16 &&to_bit_per_samples==24){
-             return static_cast<NumberFormatConverterStreamT<int16_t,int32_t>*>(converter)->readBytes(data,size);
+             return static_cast<NumberFormatConverterStreamT<int16_t,int24_t>*>(converter)->readBytes(data,size);
           } else if (from_bit_per_samples==32 &&to_bit_per_samples==16){
              return static_cast<NumberFormatConverterStreamT<int32_t,int16_t>*>(converter)->readBytes(data,size);
           } else if (from_bit_per_samples==16 &&to_bit_per_samples==32){
@@ -442,7 +446,7 @@ class NumberFormatConverterStream :  public AudioStream {
           } else if (from_bit_per_samples==24 &&to_bit_per_samples==16){
              return static_cast<NumberFormatConverterStreamT<int32_t,int16_t>*>(converter)->available();
           } else if (from_bit_per_samples==16 &&to_bit_per_samples==24){
-             return static_cast<NumberFormatConverterStreamT<int16_t,int32_t>*>(converter)->available();
+             return static_cast<NumberFormatConverterStreamT<int16_t,int24_t>*>(converter)->available();
           } else if (from_bit_per_samples==32 &&to_bit_per_samples==16){
              return static_cast<NumberFormatConverterStreamT<int32_t,int16_t>*>(converter)->available();
           } else if (from_bit_per_samples==16 &&to_bit_per_samples==32){
@@ -463,7 +467,7 @@ class NumberFormatConverterStream :  public AudioStream {
           } else if (from_bit_per_samples==24 &&to_bit_per_samples==16){
              return static_cast<NumberFormatConverterStreamT<int32_t,int16_t>*>(converter)->availableForWrite();
           } else if (from_bit_per_samples==16 &&to_bit_per_samples==24){
-             return static_cast<NumberFormatConverterStreamT<int16_t,int32_t>*>(converter)->availableForWrite();
+             return static_cast<NumberFormatConverterStreamT<int16_t,int24_t>*>(converter)->availableForWrite();
           } else if (from_bit_per_samples==32 &&to_bit_per_samples==16){
              return static_cast<NumberFormatConverterStreamT<int32_t,int16_t>*>(converter)->availableForWrite();
           } else if (from_bit_per_samples==16 &&to_bit_per_samples==32){
@@ -489,7 +493,7 @@ class NumberFormatConverterStream :  public AudioStream {
           } else if (from_bit_per_samples==24 &&to_bit_per_samples==16){
               static_cast<NumberFormatConverterStreamT<int32_t,int16_t>*>(converter)->setStream(*p_stream);
           } else if (from_bit_per_samples==16 &&to_bit_per_samples==24){
-              static_cast<NumberFormatConverterStreamT<int16_t,int32_t>*>(converter)->setStream(*p_stream);
+              static_cast<NumberFormatConverterStreamT<int16_t,int24_t>*>(converter)->setStream(*p_stream);
           } else if (from_bit_per_samples==32 &&to_bit_per_samples==16){
               static_cast<NumberFormatConverterStreamT<int32_t,int16_t>*>(converter)->setStream(*p_stream);
           } else if (from_bit_per_samples==16 &&to_bit_per_samples==32){
@@ -503,7 +507,7 @@ class NumberFormatConverterStream :  public AudioStream {
           } else if (from_bit_per_samples==24 &&to_bit_per_samples==16){
               static_cast<NumberFormatConverterStreamT<int32_t,int16_t>*>(converter)->setStream(*p_print);
           } else if (from_bit_per_samples==16 &&to_bit_per_samples==24){
-              static_cast<NumberFormatConverterStreamT<int16_t,int32_t>*>(converter)->setStream(*p_print);
+              static_cast<NumberFormatConverterStreamT<int16_t,int24_t>*>(converter)->setStream(*p_print);
           } else if (from_bit_per_samples==32 &&to_bit_per_samples==16){
               static_cast<NumberFormatConverterStreamT<int32_t,int16_t>*>(converter)->setStream(*p_print);
           } else if (from_bit_per_samples==16 &&to_bit_per_samples==32){
