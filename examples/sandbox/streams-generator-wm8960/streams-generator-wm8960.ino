@@ -22,13 +22,26 @@ void setup(void) {
   while(!Serial);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
+  // setup wire 
+  Wire.begin();
+  Wire.setClock(10000);
+
+
   // start I2S
   Serial.println("starting I2S...");
   auto config = out.defaultConfig(TX_MODE);
   config.sample_rate = sample_rate; 
   config.channels = channels;
   config.bits_per_sample = 16;
-  out.begin(config);
+  config.wire = &Wire;
+  // use custom i2s pins to avoid any conflicts with i2c
+  config.pin_bck = 25;
+  config.pin_ws = 26;
+  config.pin_data = 27;
+
+  if (!out.begin(config)){
+    stop();
+  }
 
   // Setup sine wave
   sineWave.begin(channels, sample_rate, N_B4);
