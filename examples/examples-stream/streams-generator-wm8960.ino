@@ -20,10 +20,10 @@ void setup(void) {
   // Open Serial 
   Serial.begin(115200);
   while(!Serial);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
 
-  // setup wire 
-  Wire.begin();
+  // setup wire on pins 19 and 21
+  Wire.begin(19, 21);
   Wire.setClock(10000);
 
 
@@ -34,10 +34,10 @@ void setup(void) {
   config.channels = channels;
   config.bits_per_sample = 16;
   config.wire = &Wire;
-  // use custom i2s pins to avoid any conflicts with i2c
-  config.pin_bck = 25;
-  config.pin_ws = 26;
-  config.pin_data = 27;
+  // use default i2s pins 
+  //config.pin_bck = 14;
+  //config.pin_ws = 15;
+  //config.pin_data = 22;
 
   if (!out.begin(config)){
     stop();

@@ -29,6 +29,8 @@ class WM8960Config : public I2SConfig {
     TwoWire *wire=nullptr;
     /// Dump registers
     bool vs1053_dump = false;
+    /// Number of i2c write retry on fail: 0 = endless until success
+    uint32_t i2c_retry_count = 0;
 };
 
 /**
@@ -170,6 +172,7 @@ protected:
     }
 
     bool init(RxTxMode mode){
+        mtb_wm8960_set_write_retry_count(cfg.i2c_retry_count);
         // define wire object
         mtb_wm8960_set_wire(cfg.wire);
 
