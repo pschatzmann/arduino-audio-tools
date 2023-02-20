@@ -1065,6 +1065,98 @@ class MeasuringStream : public AudioStream {
     }
 };
 
+/**
+ * @brief Generic calss to measure the the total bytes which were processed in order to 
+ * calculate the progress as a percentage of the total size.
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ * @ingroup io
+ */
+class ProgressStream : public AudioStream {
+  public:
+    ProgressStream() = default;
+
+    ProgressStream(Print &print){
+      setPrint(print);
+    }
+
+    ProgressStream(Stream &stream){
+      setStream(stream);
+    }
+
+    void setStream(Stream &stream){
+      p_stream =&stream;
+      p_print = &stream;
+    }
+
+    void setStream(Print &print){
+      p_print =&print;
+    }
+
+    void setPrint(Print &print){
+      p_print =&print;
+    }
+
+    /// Updates the total size and restarts the percent calculation
+    void setSize(size_t len){
+      total_processed = 0;
+      total_size = len;
+    }
+
+    /// Provides the current total size (defined by setSize)
+    size_t size(){
+      return total_size;
+    }
+
+    /// Provides the number of processed bytes
+    size_t processed() {
+      return total_processed;
+    }
+
+    /// Provides the processed percentage: If no size has been defined we return 0 
+    float percentage() {
+      if (total_size==0) return 0;
+      return 100.0 * total_processed / total_size;
+    }
+
+        /// Provides the data from all streams mixed together 
+    size_t readBytes(uint8_t* data, size_t len) override {
+      if (p_stream==nullptr) return 0;
+      return measure(p_stream->readBytes(data, len));
+    }
+
+    int available()  override {
+      if (p_stream==nullptr) return 0;
+      return p_stream->available();
+    }
+
+    /// Writes raw PCM audio data, which will be the input for the volume control 
+    virtual size_t write(const uint8_t *buffer, size_t size) override {
+      if (p_print==nullptr) return 0;
+      return measure(p_print->write(buffer, size));
+    }
+
+    /// Provides the nubmer of bytes we can write
+    virtual int availableForWrite() override { 
+      if (p_print==nullptr) return 0;
+      return p_print->availableForWrite();
+    }
+
+  protected:
+    Stream *p_stream=nullptr;
+    Print *p_print=nullptr;
+    size_t total_processed = 0;
+    size_t total_size = 0;
+
+    size_t measure(size_t len) {
+      total_processed += len;
+      return len;
+    }
+
+
+};
+
+
 
 /**
  * @brief MixerStream is mixing the input from Multiple Input Streams.
