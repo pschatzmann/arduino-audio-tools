@@ -31,6 +31,9 @@ class WM8960Config : public I2SConfig {
     bool vs1053_dump = false;
     /// Number of i2c write retry on fail: 0 = endless until success
     uint32_t i2c_retry_count = 0;
+    // optional features: use bitmask with WM8960_FEATURE_MICROPHONE,WM8960_FEATURE_HEADPHONE,WM8960_FEATURE_SPEAKER
+    int8_t features = -1;           
+
 };
 
 /**
@@ -117,7 +120,7 @@ public:
     }
 
     void setVolumeOut(float vol){
-        adjustOutputVolume(vol);        
+        setOutputVolume(vol);        
     }
 
     /// provides the volume
@@ -157,7 +160,7 @@ protected:
         mtb_wm8960_adjust_input_volume(vol_int);
     }
 
-    void adjustOutputVolume(float vol){
+    void setOutputVolume(float vol){
         if (vol>1.0f) {
             volume_out = 1.0f;
             volumeError(vol);
@@ -168,7 +171,7 @@ protected:
             volume_out = vol;
         }
         int vol_int = volume_out==0.0? 0 : map(volume_out*100, 0, 100, 30 ,0x7F);
-        mtb_wm8960_adjust_heaphone_output_volume(vol_int);
+        mtb_wm8960_set_output_volume(vol_int);
     }
 
     bool init(RxTxMode mode){
@@ -176,21 +179,22 @@ protected:
         // define wire object
         mtb_wm8960_set_wire(cfg.wire);
 
-        // init depending on mode
-        switch(mode){
-            case RX_MODE:
-                return mtb_wm8960_init(WM8960_FEATURE_MICROPHONE);
-            case TX_MODE:
-                return mtb_wm8960_init(WM8960_FEATURE_HEADPHONE);
-            case RXTX_MODE: {
-                bool ok_in = mtb_wm8960_init(WM8960_FEATURE_MICROPHONE);
-                bool ok_out = mtb_wm8960_init(WM8960_FEATURE_HEADPHONE);
-                return ok_in && ok_out;
-                }
-            default:
-                return mtb_wm8960_init(WM8960_FEATURE_NONE);
+        // init features if not defined depending on mode
+        if (cfg.features==-1){
+            switch(mode){
+                case RX_MODE:
+                    cfg.features = WM8960_FEATURE_MICROPHONE1;
+                    break;
+                case TX_MODE:
+                    cfg.features = WM8960_FEATURE_HEADPHONE | WM8960_FEATURE_SPEAKER;
+                    break;
+                case RXTX_MODE: 
+                    cfg.features = WM8960_FEATURE_MICROPHONE1 | WM8960_FEATURE_HEADPHONE | WM8960_FEATURE_SPEAKER;
+                    break;
+            }
+            LOGW("Setup features: %d", cfg.features);
         }
-        return false;
+        return mtb_wm8960_init(cfg.features);
     }
 
     bool configure_clocking(){
