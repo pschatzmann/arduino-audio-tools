@@ -195,6 +195,7 @@ class DriverPWMBase {
         uint32_t frames_per_second = 0;
         uint32_t time_1_sec;
         bool is_timer_started = false;
+        const char *READ_ERROR_MSG = "Could not read full data";
 
         void playNextFrameCallback(){
              //TRACED();
@@ -243,7 +244,7 @@ class DriverPWMBase {
                 case 8: {
                     int16_t value = buffer->read();
                     if (value<0){
-                        LOGE("Could not read full data");
+                        LOGE(READ_ERROR_MSG);
                         value = 0;
                     }
                     result = map(value, -NumberConverter::maxValue(8), NumberConverter::maxValue(8), 0, maxOutputValue());
@@ -252,7 +253,7 @@ class DriverPWMBase {
                 case 16: {
                     int16_t value;
                     if (buffer->readArray((uint8_t*)&value,2)!=2){
-                        LOGE("Could not read full data");
+                        LOGE(READ_ERROR_MSG);
                     }
                     result = map(value, -NumberConverter::maxValue(16), NumberConverter::maxValue(16), 0, maxOutputValue());
                     break;
@@ -260,7 +261,7 @@ class DriverPWMBase {
                 case 24: {
                     int24_t value;
                     if (buffer->readArray((uint8_t*)&value,3)!=3){
-                        LOGE("Could not read full data");
+                        LOGE(READ_ERROR_MSG);
                     }
                     result = map((int32_t)value, -NumberConverter::maxValue(24), NumberConverter::maxValue(24), 0, maxOutputValue());
                     break;
@@ -268,7 +269,7 @@ class DriverPWMBase {
                 case 32: {
                     int32_t value;
                     if (buffer->readArray((uint8_t*)&value,4)!=4){
-                        LOGE("Could not read full data");
+                        LOGE(READ_ERROR_MSG);
                     }
                     result = map(value, -NumberConverter::maxValue(32), NumberConverter::maxValue(32), 0, maxOutputValue());
                     break;

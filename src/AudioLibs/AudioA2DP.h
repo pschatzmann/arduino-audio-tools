@@ -233,15 +233,6 @@ class A2DPStream : public AudioStream {
             return result;
         }
 
-        virtual size_t write(uint8_t c) {
-            LOGE( "write(char) not supported");
-            assert(false);
-            return -1;
-        }
-
-        virtual void flush() {
-        }
-
         /// Reads the data from the temporary buffer
         virtual size_t readBytes(uint8_t *data, size_t len) { 
             if (a2dp_buffer==nullptr) return 0;
@@ -255,17 +246,6 @@ class A2DPStream : public AudioStream {
                 LOGW( "readBytes failed because !is_a2dp_active");
             }
             return result;
-        }
-
-        // not supported
-        virtual int read() {
-            LOGE( "read() not supported");
-            return -1;
-        }
-        // not supported
-        virtual int peek() {
-            LOGE( "peek() not supported");
-            return -1;
         }
        
         virtual int available() {

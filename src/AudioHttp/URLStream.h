@@ -138,13 +138,11 @@ class URLStream : public AbstractURLStream {
         }
 
         virtual size_t write(uint8_t) override {
-            LOGE("URLStream write - not supported");
-            return 0;
+            return not_supported(0);
         }
 
         virtual size_t write(const uint8_t*,size_t) override {
-            LOGE("URLStream write - not supported");
-            return 0;
+            return not_supported(0);
         }
 
         /// provides access to the HttpRequest
