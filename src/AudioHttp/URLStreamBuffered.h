@@ -191,16 +191,6 @@ class URLStreamBuffered : public AbstractURLStream {
         virtual void flush(){
         }
 
-        size_t write(uint8_t) {
-            LOGE("URLStream write - not supported");
-            return 0;
-        }
-    
-        size_t write(const uint8_t *buffer, size_t size){
-            LOGE("URLStream write - not supported");
-            return 0;
-        }
-
         void end(){
             TRACED();
             taskStream.end();

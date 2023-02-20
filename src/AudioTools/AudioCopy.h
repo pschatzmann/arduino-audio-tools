@@ -26,7 +26,7 @@ class StreamCopyT {
             this->buffer_size = buffer_size;
             buffer.resize(buffer_size);
             if (!buffer){
-                LOGE("Could not allocate enough memory for StreamCopy: %d bytes", buffer_size);
+                LOGE(NOT_ENOUGH_MEMORY_MSG, buffer_size);
             }
         }
 
@@ -36,7 +36,7 @@ class StreamCopyT {
             this->buffer_size = buffer_size;
             buffer.resize(buffer_size);
             if (!buffer){
-                LOGE("Could not allocate enough memory for StreamCopy: %d bytes", buffer_size);
+                LOGE(NOT_ENOUGH_MEMORY_MSG, buffer_size);
             }
         }
 
@@ -45,7 +45,7 @@ class StreamCopyT {
             this->buffer_size = buffer_size;
             buffer.resize(buffer_size);
             if (!buffer){
-                LOGE("Could not allocate enough memory for StreamCopy: %d bytes", buffer_size);
+                LOGE(NOT_ENOUGH_MEMORY_MSG, buffer_size);
             }
         }
 
@@ -262,6 +262,7 @@ class StreamCopyT {
         const char* actual_mime = nullptr;
         int retryLimit = COPY_RETRY_LIMIT;
         int delay_on_no_data = COPY_DELAY_ON_NODATA;
+        const char* NOT_ENOUGH_MEMORY_MSG = "Could not allocate enough memory for StreamCopy: %d bytes";
 
         // blocking write - until everything is processed
         size_t write(size_t len, size_t &delayCount ){

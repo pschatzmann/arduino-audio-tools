@@ -111,13 +111,6 @@ class ICYStream : public AbstractURLStream {
             return result;
         }
 
-
-        /// Not Supported!
-        virtual int peek() override {
-            LOGE("not supported");
-            return -1;
-        }
-
         // Read character and processes using the MetaDataICY state engine
         virtual int read() override {
             int ch = -1;
@@ -134,22 +127,6 @@ class ICYStream : public AbstractURLStream {
             } while (!icy.isData());
             return ch;
         }
-
-        /// not implemented 
-        virtual void flush() override {
-        }
-
-        /// not implemented
-        virtual size_t write(uint8_t) override {
-            LOGE("N/A");
-            return 0;
-        }
-        
-        /// not implemented
-        virtual size_t write(const uint8_t *buffer, size_t size) override {
-            LOGE("N/A");
-            return 0;
-         }
 
         operator bool() {
             return *url;

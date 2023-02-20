@@ -224,13 +224,11 @@ class MozziStream : public AudioStream {
         }
 
         virtual int read(){
-            LOGE("read() not supported -  use readBytes!");
-            return -1;            
+            return not_supported(-1);
         }
 
         virtual int peek(){
-            LOGE("peek() not supported!");
-            return -1;            
+            return not_supported(-1);
         }
 
         virtual void flush(){
