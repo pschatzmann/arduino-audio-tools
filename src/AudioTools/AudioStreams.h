@@ -1097,6 +1097,12 @@ class ProgressStream : public AudioStream {
       p_print =&print;
     }
 
+    /// Updates the total size and restarts the percent calculation: Same as calling setSize()
+    bool begin(size_t len){
+      setSize(size);
+      return AudioStream::begin();
+    }
+
     /// Updates the total size and restarts the percent calculation
     void setSize(size_t len){
       total_processed = 0;
