@@ -1099,7 +1099,7 @@ class ProgressStream : public AudioStream {
 
     /// Updates the total size and restarts the percent calculation: Same as calling setSize()
     bool begin(size_t len){
-      setSize(size);
+      setSize(len);
       return AudioStream::begin();
     }
 
