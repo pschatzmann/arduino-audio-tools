@@ -19,6 +19,9 @@ function compile_example {
 
 rm build-arch-log.txt
 compile_example "esp32:esp32:esp32" 
+compile_example "esp32:esp32:esp32c3" 
+compile_example "esp32:esp32:esp32s3" 
+compile_example "esp32:esp32:esp32s2" 
 compile_example "esp8266:esp8266:generic" 
 compile_example "arduino:mbed_rp2040:pico" 
 compile_example "rp2040:rp2040:generic" 
