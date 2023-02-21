@@ -157,7 +157,7 @@ class AudioActions {
 
   /// determines the value for the action
   bool readValue(Action* a) {
-#ifdef ESP32
+#ifdef USE_TOUCH_READ
     bool result;
     if (a->activeLogic == ActiveTouch) {
       int value = touchRead(a->pin);
