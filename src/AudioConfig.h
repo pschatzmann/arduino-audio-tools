@@ -152,15 +152,15 @@
  */
 
 //-------ESP32---------
-#if defined(ESP32)  && defined(ARDUINO_ESP32C3_DEV)
+#if defined(ESP32)  && defined(CONFIG_IDF_TARGET_ESP32C3)
 #define ESP32C3
 #define ESP32X
 #endif
-#if defined(ESP32)  && defined(ARDUINO_ESP32S2_DEV)
+#if defined(ESP32)  && defined(CONFIG_IDF_TARGET_ESP32S2)
 #define ESP32S2
 #define ESP32X
 #endif
-#if defined(ESP32)  && defined(ARDUINO_ESP32S3_DEV)
+#if defined(ESP32)  && defined(CONFIG_IDF_TARGET_ESP32S3)
 #define ESP32S3
 #define ESP32X
 #endif
@@ -183,6 +183,7 @@
 #define USE_TIMER
 #define USE_I2S_ANALOG
 #define USE_STREAM_WRITE_OVERRIDE
+#define USE_TOUCH_READ
 
 #define PWM_FREQENCY 30000
 #define PIN_PWM_START 12
