@@ -1,9 +1,6 @@
 #pragma once
 
 #include "AudioConfig.h"
-#ifndef USE_UTF8_LONG_NAMES
-#define USE_UTF8_LONG_NAMES 1
-#endif  // USE_UTF8_LONG_NAMES
 
 #include <SPI.h>
 #include <SdFat.h>
@@ -49,7 +46,7 @@ namespace audio_tools {
 /**
  * @brief ESP32 AudioSource for AudioPlayer using an SD card as data source.
  * This class is based on the Arduino SD implementation
- * Connect the SD card to the following pins:
+ * For UTF8 Support change SdFatConfig.h #define USE_UTF8_LONG_NAMES 1
  * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
