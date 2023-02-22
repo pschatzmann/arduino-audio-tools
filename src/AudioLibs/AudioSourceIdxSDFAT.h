@@ -15,7 +15,6 @@
 #include "AudioLibs/SDIndex.h"
 
 
-
 // SD_FAT_TYPE = 0 for SdFat/File as defined in SdFatConfig.h,
 // 1 for FAT16/FAT32, 2 for exFAT, 3 for FAT16/FAT32 and exFAT.
 #ifndef SD_FAT_TYPE
@@ -138,6 +137,9 @@ public:
 
   /// Allows to "correct" the start path if not defined in the constructor
   virtual void setPath(const char *p) { start_path = p; }
+
+  /// Provides the number of files (The max index is size()-1)
+  long size() { return idx.size();}
 
 protected:
   SdSpiConfig *p_cfg = nullptr;

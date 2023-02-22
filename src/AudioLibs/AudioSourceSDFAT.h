@@ -142,6 +142,9 @@ public:
   /// Allows to "correct" the start path if not defined in the constructor
   virtual void setPath(const char *p) { start_path = p; }
 
+  /// Provides the number of files (The max index is size()-1): WARNING this is very slow if you have a lot of files in many subdirectories
+  long size() { return idx.size();}
+
 protected:
   SdSpiConfig *p_cfg = nullptr;
   AudioFs sd;
