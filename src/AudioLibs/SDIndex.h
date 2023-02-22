@@ -57,8 +57,8 @@ class SDIndex {
     /// Access file name by index
     const char *operator[](int idx) {
       // return null when inx too big
-      if (size>=0 && idx>=size) {
-        LOGE("idx %d > size %d", idx, size);
+      if (max_idx>=0 && idx>max_idx) {
+        LOGE("idx %d > size %d", idx, max_idx);
         return nullptr;
       }
       // find record
@@ -88,11 +88,28 @@ class SDIndex {
         count++;
       }
       if (!found){
-        size = count;
+        max_idx = count;
       }
       idxfile.close();
 
       return found ? result.c_str(): nullptr;
+    }
+
+    long size() {
+      if (max_idx==-1){
+        FileT idxfile = p_sd->open(idx_path.c_str());
+        int count=0;
+
+        while (idxfile.available()>0) {
+          result = idxfile.readStringUntil('\n');
+          // result c-string
+          char *c_str = (char*)result.c_str();        
+          count++;
+        }
+        idxfile.close();
+        max_idx = count;
+      }
+      return max_idx;
     }
 
   protected:
@@ -106,7 +123,7 @@ class SDIndex {
     
     const char *ext = nullptr;
     const char *file_name_pattern = nullptr;
-    long size=-1;
+    long max_idx=-1;
 
     /// Writes the index file
     void listDir(Print &idxfile, const char *dirname) {

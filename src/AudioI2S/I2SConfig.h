@@ -120,11 +120,13 @@ class I2SConfig : public AudioBaseInfo {
       LOGI("buffer_size:%d",buffer_size);
 
 #endif
-
-      LOGI("pin_bck: %d", pin_bck);
-      LOGI("pin_ws: %d", pin_ws);
-      LOGI("pin_data: %d", pin_data);
-      if (rx_tx_mode==RXTX_MODE){
+      if (pin_bck!=-1)
+        LOGI("pin_bck: %d", pin_bck);
+      if (pin_ws!=-1)
+        LOGI("pin_ws: %d", pin_ws);
+      if (pin_data!=-1)
+        LOGI("pin_data: %d", pin_data);
+      if (pin_data_rx!=-1 && rx_tx_mode==RXTX_MODE){
         LOGI("pin_data_rx: %d", pin_data_rx);
       }
     }

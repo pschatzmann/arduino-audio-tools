@@ -49,11 +49,12 @@ class I2SStream : public AudioStream {
         }
 
         /// Starts the I2S interface
-        void begin(I2SConfig cfg) {
+        bool begin(I2SConfig cfg) {
             TRACED();
-            i2s.begin(cfg);
+            bool result = i2s.begin(cfg);
             // unmute
             mute(false);
+            return result;
         }
 
         /// Stops the I2S interface 
