@@ -26,8 +26,8 @@ class SDIndex {
       this->start_dir = startDir;
       this->ext = extension;
       this->file_name_pattern = file_name_pattern;
-      idx_path = String(startDir)+"/idx.txt";
-      idx_defpath = String(startDir)+"/idx-def.txt";
+      idx_path = filePathString(startDir,"idx.txt");
+      idx_defpath = filePathString(startDir,"idx-def.txt");
       int idx_file_size = indexFileTSize();
       LOGI("Index file size: %d", idx_file_size);
       String keyNew = String(startDir) + "|" + extension + "|" + file_name_pattern;
@@ -124,6 +124,11 @@ class SDIndex {
     const char *ext = nullptr;
     const char *file_name_pattern = nullptr;
     long max_idx=-1;
+
+    String filePathString(const char* name, const char* suffix){
+      String result = name;
+      return result.endsWith("/") ? result+suffix: result+"/"+suffix;
+    }
 
     /// Writes the index file
     void listDir(Print &idxfile, const char *dirname) {
