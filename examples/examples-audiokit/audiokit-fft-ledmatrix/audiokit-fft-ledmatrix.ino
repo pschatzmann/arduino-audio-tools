@@ -14,7 +14,7 @@ LEDOutput led(fft); // output to LED matrix
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
   // setup Audiokit as input device
   auto cfg = kit.defaultConfig(RX_MODE);
@@ -23,7 +23,7 @@ void setup() {
 
   // Setup FFT output
   auto tcfg = fft.defaultConfig();
-  tcfg.length = LED_X * 2; 
+  tcfg.length = 1024; 
   tcfg.copyFrom(cfg);
   fft.begin(tcfg);
 
@@ -31,6 +31,9 @@ void setup() {
   auto lcfg = led.defaultConfig();
   lcfg.x = LED_X;
   lcfg.y = LED_Y;
+  lcfg.fft_group_bin = 3;
+  lcfg.fft_start_bin = 0;
+  lcfg.fft_max_magnitude = 40000;
   led.begin(lcfg);
 
   // add LEDs
