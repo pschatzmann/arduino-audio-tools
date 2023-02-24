@@ -8,7 +8,7 @@ float coef[] = { 0.021, 0.096, 0.146, 0.096, 0.021};
 // 
 uint16_t sample_rate=44100;
 uint8_t channels = 2;                                             // The stream will have 2 channels 
-NoiseGenerator<int16_t> noise(32000);                             // subclass of SoundGenerator with max amplitude of 32000
+WhiteNoiseGenerator<int16_t> noise(32000);                        // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> in_stream(noise);                   // Stream generated from sine wave
 FilteredStream<int16_t, float> in_filtered(in_stream, channels);  // Defiles the filter as BaseConverter
 PortAudioStream out;                                              // Output to Desktop

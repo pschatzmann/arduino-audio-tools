@@ -303,10 +303,10 @@ class FastSineGenerator : public SineWaveGenerator<T> {
  * 
  */
 template <class T>
-class NoiseGenerator : public SoundGenerator<T> {
+class WhiteNoiseGenerator : public SoundGenerator<T> {
     public:
         /// the scale defines the max value which is generated
-        NoiseGenerator(T amplitude = 32767) {
+        WhiteNoiseGenerator(T amplitude = 32767) {
             this->amplitude = amplitude;
         }
 
@@ -323,6 +323,54 @@ class NoiseGenerator : public SoundGenerator<T> {
         }
 
 
+};
+
+/**
+ * @brief Generates pink noise.
+ * @ingroup generator
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ *
+ */
+template <class T> class PinkNoiseGenerator : public SoundGenerator<T> {
+public:
+  /// the amplitude defines the max value which is generated
+  PinkNoiseGenerator(T amplitude = 32767) {
+    this->amplitude = amplitude;
+    max_key = 0x1f; // Five bits set
+    key = 0;
+    for (int i = 0; i < 5; i++)
+      white_values[i] = rand() % (amplitude / 5);
+  }
+
+  /// Provides a single sample
+  T readSample() {
+    T last_key = key;
+    unsigned int sum;
+
+    key++;
+    if (key > max_key)
+      key = 0;
+    // Exclusive-Or previous value with current value. This gives
+    // a list of bits that have changed.
+    int diff = last_key ^ key;
+    sum = 0;
+    for (int i = 0; i < 5; i++) {
+      // If bit changed get new random number for corresponding
+      // white_value
+      if (diff & (1 << i))
+        white_values[i] = rand() % (amplitude / 5);
+      sum += white_values[i];
+    }
+    return sum;
+
+  }
+
+protected:
+  T max_key;
+  T key;
+  unsigned int white_values[5];
+  unsigned int amplitude;
 };
 
 

@@ -243,11 +243,11 @@ namespace audio_tools {
             setActive(false);
         }
 
-        /// moves to next file
+        /// moves to next file or nth next file when indicating an offset. Negative values are supported to move back.
         virtual bool next(int offset=1) {
             TRACED();
             writeEnd();
-            steam_increment = 1;
+            steam_increment = offset >= 0 ? 1 : -1;
             active = setStream(p_source->nextStream(offset));
             return active;
         }
@@ -275,7 +275,7 @@ namespace audio_tools {
             TRACED();
             writeEnd();
             steam_increment = -1;
-            active = setStream(p_source->previousStream(offset));
+            active = setStream(p_source->previousStream(abs(offset)));
             return active;
         }
 
