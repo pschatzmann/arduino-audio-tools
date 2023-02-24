@@ -6,6 +6,9 @@
 namespace audio_tools {
 #include "stm32-i2s.h"
 
+NBuffer<uint8_t> *p_tx_buffer=nullptr;
+NBuffer<uint8_t> *p_rx_buffer=nullptr;
+
 /**
  * @brief Basic I2S API - for the STM32
  * Depends on https://github.com/pschatzmann/stm32f411-i2s
@@ -144,8 +147,6 @@ class I2SDriverSTM32 {
   protected:
     I2SConfig cfg;
     I2SSettingsSTM32 i2s_stm32;
-    inline static NBuffer<uint8_t> *p_tx_buffer=nullptr;
-    inline static NBuffer<uint8_t> *p_rx_buffer=nullptr;
 
     void deleteBuffers() {
       if (p_rx_buffer!=nullptr) {
