@@ -86,7 +86,7 @@ class SoundGenerator  {
             return def;
         }
 
-        virtual void setFrequency(uint16_t frequency) {
+        virtual void setFrequency(float frequency) {
             LOGE("setFrequency not supported");
         }
 
@@ -169,8 +169,8 @@ class SineWaveGenerator : public SoundGenerator<T>{
             return true;
         }
 
-        bool begin(AudioBaseInfo info, uint16_t frequency){
-            LOGI("%s::begin(channels=%d, sample_rate=%d, frequency=%d)","SineWaveGenerator",info.channels, info.sample_rate,frequency);
+        bool begin(AudioBaseInfo info, float frequency){
+            LOGI("%s::begin(channels=%d, sample_rate=%d, frequency=%.2f)","SineWaveGenerator",info.channels, info.sample_rate,frequency);
             SoundGenerator<T>::begin(info);
             this->m_deltaTime = 1.0 / SoundGenerator<T>::info.sample_rate;
             if (frequency>0){
@@ -179,7 +179,7 @@ class SineWaveGenerator : public SoundGenerator<T>{
             return true;
         }
 
-        bool begin(int channels, int sample_rate, uint16_t frequency=0){
+        bool begin(int channels, int sample_rate, float frequency=0.0){
             SoundGenerator<T>::info.channels  = channels;
             SoundGenerator<T>::info.sample_rate = sample_rate;
             return begin(SoundGenerator<T>::info, frequency);
@@ -196,8 +196,8 @@ class SineWaveGenerator : public SoundGenerator<T>{
         }
 
         /// Defines the frequency - after the processing has been started
-        void setFrequency(uint16_t frequency)  override {
-            LOGI("setFrequency: %d", frequency);
+        void setFrequency(float frequency)  override {
+            LOGI("setFrequency: %.2f", frequency);
             LOGI( "active: %s", SoundGenerator<T>::active ? "true" : "false" );
             m_frequency = frequency;
         }
@@ -645,7 +645,7 @@ class GeneratorFixedValue : public SoundGenerator<T> {
 };
 
 /**
- * @brief A sine generator based on a table. The table is created based using degress where one full wave is 360 degrees.
+ * @brief A sine generator based on a table. The table is created based using degrees where one full wave is 360 degrees.
  * @ingroup generator
  * @author Phil Schatzmann
  * @copyright GPLv3
