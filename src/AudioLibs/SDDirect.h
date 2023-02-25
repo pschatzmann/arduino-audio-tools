@@ -32,7 +32,7 @@ class SDDirect {
 
     /// Access file name by index
     const char *operator[](int idx) {
-      if (max_idx!=-1 && idx>=max_idx){
+      if (max_idx!=-1 && idx>max_idx){
         return nullptr;
       }
 
