@@ -566,9 +566,9 @@ class GeneratorFromArray : public SoundGenerator<T> {
         index_increment = inc;
     }
 
-    // Sets up a sine table - returns
-    int setupSine(int sampleRate, int reqFrequency, float amplitude=1.0){
-        int sample_count = sampleRate / reqFrequency  ; // e.g.  44100 / 300hz = 147 samples per wave
+    // Sets up a sine table - returns the effective frequency
+    int setupSine(int sampleRate, float reqFrequency, float amplitude=1.0){
+        int sample_count = static_cast<float>(sampleRate) / reqFrequency; // e.g.  44100 / 300hz = 147 samples per wave
         float angle = 2.0*PI / sample_count; 
         table = new T[sample_count];
         for (int j=0;j<sample_count;j++){
