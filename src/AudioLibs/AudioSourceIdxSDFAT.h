@@ -79,7 +79,6 @@ public:
 
   virtual void begin() override {
     TRACED();
-    static bool is_sd_setup = false;
     if (!is_sd_setup) {
         if (!sd.begin(*p_cfg)) {
           LOGE("sd.begin failed");
@@ -89,6 +88,11 @@ public:
     }
     idx.begin(start_path, exension, file_name_pattern, setup_index);
     idx_pos = 0;
+  }
+
+  void end() {
+    sd.end();
+    is_sd_setup = false;
   }
 
   virtual Stream *nextStream(int offset = 1) override {
@@ -149,6 +153,7 @@ protected:
   const char *start_path = nullptr;
   const char *file_name_pattern = "*";
   bool setup_index = true;
+  bool is_sd_setup = false;
   int cs;
   bool owns_cfg=false;
 
@@ -157,7 +162,6 @@ protected:
        file.getName(name,MAX_FILE_LEN);
        return name;
   }
-
 
 };
 
