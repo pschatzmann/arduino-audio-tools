@@ -1366,18 +1366,45 @@ class InputMerge : public AudioStream {
 template<typename T, class TF>
 class FilteredStream : public AudioStream {
   public:
-        FilteredStream(Stream &stream, int channels=2) : AudioStream() {
+        FilteredStream(Stream &stream) : AudioStream() {
+          p_stream = &stream;
+        }
+        FilteredStream(Stream &stream, int channels) : AudioStream() {
           this->channels = channels;
           p_stream = &stream;
           p_converter = new ConverterNChannels<T,TF>(channels);
         }
 
+        bool begin(AudioBaseInfo info){
+          setAudioInfo(info);
+          this->channels = info.channels;
+          if (p_converter !=nullptr && info.channels!=channels){
+            LOGE("Inconsistent number of channels");
+            return false;
+          }
+          return begin();
+        }
+
+        bool begin() override {
+          if (channels ==0){
+            LOGE("channels must not be 0");
+            return false;
+          }
+          if (p_converter==nullptr){
+            p_converter = new ConverterNChannels<T,TF>(channels);
+          }
+          return AudioStream::begin();
+        }
+
+
         virtual size_t write(const uint8_t *buffer, size_t size) override { 
+           if (p_converter==nullptr) return 0;
            size_t result = p_converter->convert((uint8_t *)buffer, size); 
            return p_stream->write(buffer, result);
         }
 
         size_t readBytes(uint8_t *data, size_t length) override {
+           if (p_converter==nullptr) return 0;
            size_t result = p_stream->readBytes(data, length);
            result = p_converter->convert(data, result); 
            return result;
@@ -1391,13 +1418,18 @@ class FilteredStream : public AudioStream {
           return p_stream->availableForWrite();
         }
 
-        /// defines the filter for an individual channel - the first channel is 0
+        /// defines the filter for an individual channel - the first channel is 0. The number of channels must have
+        /// been defined before we can call this function.
         void setFilter(int channel, Filter<TF> *filter) {
-          p_converter->setFilter(channel, filter);
+          if (p_converter!=nullptr){
+            p_converter->setFilter(channel, filter);
+          } else {
+            LOGE("p_converter is null");
+          }
         }
 
     protected:
-        int channels;
+        int channels=0;
         Stream *p_stream;
         ConverterNChannels<T,TF> *p_converter;
 
