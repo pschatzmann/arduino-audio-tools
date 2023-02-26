@@ -80,7 +80,6 @@ public:
 
   virtual void begin() override {
     TRACED();
-    static bool is_sd_setup = false;
     if (!is_sd_setup) {
         if (!sd.begin(*p_cfg)) {
           LOGE("sd.begin failed");
@@ -91,6 +90,12 @@ public:
     idx.begin(start_path, exension, file_name_pattern);
     idx_pos = 0;
   }
+
+  void end() {
+    sd.end();
+    is_sd_setup = false;
+  }
+
 
   virtual Stream *nextStream(int offset = 1) override {
     LOGI("nextStream: %d", offset);
@@ -152,9 +157,10 @@ protected:
   const char *exension = nullptr;
   const char *start_path = nullptr;
   const char *file_name_pattern = "*";
-  bool setup_index = true;
   int cs;
+  bool setup_index = true;
   bool owns_cfg=false;
+  bool is_sd_setup = false;
 
   const char* getFileName(AudioFile&file){
        static char name[MAX_FILE_LEN];

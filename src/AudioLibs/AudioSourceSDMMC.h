@@ -41,7 +41,6 @@ public:
 
   virtual void begin() override {
     TRACED();
-    static bool is_sd_setup = false;
     if (!is_sd_setup) {
       if (!SD_MMC.begin("/sdcard", true)) {
         LOGE("SD_MMC.begin failed");
@@ -52,6 +51,12 @@ public:
     idx.begin(start_path, exension, file_name_pattern);
     idx_pos = 0;
   }
+
+  void end() {
+    SD_MMC.end();
+    is_sd_setup = false;
+  }
+
 
   virtual Stream *nextStream(int offset = 1) override {
     LOGI("nextStream: %d", offset);
@@ -104,6 +109,7 @@ protected:
   const char *start_path = nullptr;
   const char *file_name_pattern = "*";
   bool setup_index = true;
+  bool is_sd_setup = false;
 };
 
 } // namespace audio_tools

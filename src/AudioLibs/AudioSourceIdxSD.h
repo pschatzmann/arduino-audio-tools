@@ -42,7 +42,6 @@ public:
 
   virtual void begin() override {
     TRACED();
-    static bool is_sd_setup = false;
     if (!is_sd_setup) {
       while (!SD.begin(cs)) {
         LOGW("SD.begin cs=%d failed", cs);
@@ -52,6 +51,11 @@ public:
     }
     idx.begin(start_path, exension, file_name_pattern, setup_index);
     idx_pos = 0;
+  }
+
+  void end() {
+    SD.end();
+    is_sd_setup = false;
   }
 
   virtual Stream *nextStream(int offset = 1) override {
@@ -105,6 +109,7 @@ protected:
   const char *start_path = nullptr;
   const char *file_name_pattern = "*";
   bool setup_index = true;
+  bool is_sd_setup = false;
   int cs;
 
 

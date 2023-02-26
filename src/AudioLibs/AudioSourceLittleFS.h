@@ -24,7 +24,6 @@ public:
 
   virtual void begin() override {
     TRACED();
-    static bool is_sd_setup = false;
     if (!is_sd_setup) {
       while (!LittleFS.begin()) {
         LOGE("LittleFS.begin failed");
@@ -34,6 +33,11 @@ public:
     }
     idx.begin(start_path, exension, file_name_pattern);
     idx_pos = 0;
+  }
+
+  void end() {
+    LittleFS.end();
+    is_sd_setup = false;
   }
 
   virtual Stream *nextStream(int offset = 1) override {
@@ -86,6 +90,7 @@ protected:
   const char *exension = nullptr;
   const char *start_path = nullptr;
   const char *file_name_pattern = "*";
+  bool is_sd_setup = false;
 };
 
 } // namespace audio_tools
