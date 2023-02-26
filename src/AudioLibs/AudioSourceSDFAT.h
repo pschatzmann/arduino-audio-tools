@@ -92,6 +92,18 @@ public:
     idx_pos = 0;
   }
 
+  void beginEx() {
+    TRACED();
+    if (!sd.begin(*p_cfg)) {
+      LOGE("sd.begin failed");
+      return;
+    }
+    idx.begin(start_path, exension, file_name_pattern);
+    idx_pos = 0;
+  }
+
+  void end() { sd.end(); }  
+
   virtual Stream *nextStream(int offset = 1) override {
     LOGI("nextStream: %d", offset);
     return selectStream(idx_pos + offset);
