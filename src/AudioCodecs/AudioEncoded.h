@@ -237,7 +237,7 @@ public:
 
   /**
    * @brief Construct a new Encoded Audio Stream object - the Output and
-   * Encoder/Decoder needs to be defined with the begin method.
+   * Encoder/Decoder needs to be defined with the corresponding setter methods.
    */
   EncodedAudioPrint() {
     TRACED();
@@ -265,24 +265,28 @@ public:
     encoder_ptr->setAudioInfo(info);
   }
 
-  /// Starts the processing - sets the status to active
-  bool begin(Print *outputStream, AudioEncoder *encoder) {
-    TRACED();
-    ptr_out = outputStream;
-    encoder_ptr = encoder;
-    encoder_ptr->setOutputStream(*outputStream);
-    writer_ptr = encoder_ptr;
-    return begin();
+  /// Defines the output
+  void setOutput(Print *outputStream){
+     ptr_out = outputStream;   
   }
 
-  /// Starts the processing - sets the status to active
-  bool begin(Print *outputStream, AudioDecoder *decoder) {
-    TRACED();
-    ptr_out = outputStream;
+  /// The same as setOutput
+  void setStream(Print *outputStream){
+     setOutput(outputStream); 
+  }
+
+  void setEncoder(AudioEncoder *encoder){
+    encoder_ptr = encoder;
+    if (ptr_out!=nullptr){
+      encoder_ptr->setOutputStream(*ptr_out);
+    }
+  }
+
+  void setDecoder(AudioDecoder *decoder){
     decoder_ptr = decoder;
-    decoder_ptr->setOutputStream(*outputStream);
-    writer_ptr = decoder_ptr;
-    return begin();
+    if (ptr_out!=nullptr){
+      decoder_ptr->setOutputStream(*ptr_out);
+    }
   }
 
   /// Starts the processing - sets the status to active
@@ -423,7 +427,7 @@ public:
 
   /**
    * @brief Construct a new Encoded Audio Stream object - the Output and
-   * Encoder/Decoder needs to be defined with the begin method
+   * Encoder/Decoder needs to be defined with the corresponding setter methods
    *
    */
   EncodedAudioStream() : EncodedAudioPrint() {}
@@ -437,6 +441,17 @@ public:
     TRACED();
     p_stream = ioStream;
   }
+
+  void setEncoder(AudioEncoder *encoder){
+    EncodedAudioPrint::setEncoder(encoder);
+    is_setup = false;
+  }
+
+  void setDecoder(AudioDecoder *decoder){
+    EncodedAudioPrint::setDecoder(decoder);
+    is_setup = false;
+  }
+
 
   /// @brief Defines the buffer size
   void resize(int size){
