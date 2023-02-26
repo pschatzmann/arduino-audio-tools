@@ -737,6 +737,10 @@ class ConverterNChannels : public BaseConverter<T> {
     return size;
   }
 
+  int getChannels() {
+    return channels;
+  }
+
  protected:
   Filter<FT> **filters = nullptr;
   int channels;
