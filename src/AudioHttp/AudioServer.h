@@ -292,7 +292,10 @@ class AudioEncoderServer  : public AudioServer {
             audio_info.channels = channels;
             audio_info.bits_per_sample = bits_per_sample;
             encoder->setAudioInfo(audio_info);
-            encoded_stream.begin(&client_obj, encoder);
+            //encoded_stream.begin(&client_obj, encoder);
+            encoded_stream.setOutput(&client_obj);
+            encoded_stream.setEncoder(encoder);
+            encoded_stream.begin();
             AudioServer::begin(in, encoder->mime());
         }
 
@@ -308,7 +311,10 @@ class AudioEncoderServer  : public AudioServer {
             this->in = &in;
             this->audio_info = info;
             encoder->setAudioInfo(audio_info);
-            encoded_stream.begin(&client_obj, encoder);
+            //encoded_stream.begin(&client_obj, encoder);
+            encoded_stream.setOutput(&client_obj);
+            encoded_stream.setEncoder(encoder);
+            encoded_stream.begin();
 
             AudioServer::begin(in, encoder->mime());
         }
@@ -347,7 +353,11 @@ class AudioEncoderServer  : public AudioServer {
         virtual void sendReplyContent() {
             TRACED();
             if (callback!=nullptr){
-                encoded_stream.begin(out_ptr(), encoder);
+                //encoded_stream.begin(out_ptr(), encoder);
+                encoded_stream.setOutput(out_ptr());
+                encoded_stream.setEncoder(encoder);
+                encoded_stream.begin();
+
                 // provide data via Callback to encoded_stream
                 LOGI("sendReply - calling callback");
                 callback(&encoded_stream);
@@ -355,7 +365,11 @@ class AudioEncoderServer  : public AudioServer {
             } else if (in!=nullptr){
                 // provide data for stream: in -copy>  encoded_stream -> out
                 LOGI("sendReply - Returning encoded stream...");
-                encoded_stream.begin(out_ptr(), encoder);
+                //encoded_stream.begin(out_ptr(), encoder);
+                encoded_stream.setOutput(out_ptr());
+                encoded_stream.setEncoder(encoder);
+                encoded_stream.begin();
+
                 copier.begin(encoded_stream, *in);
             }
         }
