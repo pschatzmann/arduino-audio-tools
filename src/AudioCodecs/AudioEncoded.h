@@ -378,12 +378,12 @@ class EncodedAudioStream : public EncodedAudioPrint {
 public:
   EncodedAudioStream(AudioStream *ioStream, AudioDecoder *decoder) : EncodedAudioPrint(ioStream, decoder) { 
     // the indicated stream can be used as input
-    setInput(ioStream);
+    setStream(ioStream);
   }
 
   EncodedAudioStream(Stream *ioStream, AudioDecoder *decoder) : EncodedAudioPrint((Print*)ioStream, decoder) { 
     // the indicated stream can be used as input
-    setInput(ioStream);
+    setStream(ioStream);
   }
 
   EncodedAudioStream(AudioDecoder *decoder) : EncodedAudioPrint() { 
@@ -434,13 +434,15 @@ public:
    */
   EncodedAudioStream() : EncodedAudioPrint() {}
 
-  /**
-   * @brief Defines the input stream for decoding
-   * 
-   * @param ioStream 
-   */
+  /// Same as setStream() 
   void setInput(Stream *ioStream){
+    setStream(ioStream);
+  }
+
+  /// Defines the input/output stream for decoding
+  void setStream(Stream *ioStream){
     TRACED();
+    EncodedAudioPrint::setStream(ioStream);
     p_stream = ioStream;
   }
 

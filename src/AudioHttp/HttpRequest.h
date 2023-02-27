@@ -226,7 +226,8 @@ class HttpRequest {
             }
             
             LOGI("Request written ... waiting for reply")
-            client_ptr->flush();
+            //Commented out because this breaks the RP2040 W
+            //client_ptr->flush(); 
             reply_header.read(*client_ptr);
 
             // if we use chunked tranfer we need to read the first chunked length

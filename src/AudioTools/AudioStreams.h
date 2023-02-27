@@ -61,15 +61,16 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
       p_notify = &bi;
   }
 
-  virtual size_t readBytes(uint8_t *buffer, size_t length) STREAM_READ_OVERRIDE { return not_supported(0); }
+  virtual size_t readBytes(uint8_t *buffer, size_t length) STREAM_READ_OVERRIDE { return not_supported(0, "readBytes"); }
 
-  virtual size_t write(const uint8_t *buffer, size_t size) override{ return not_supported(0); }
+  virtual size_t write(const uint8_t *buffer, size_t size) override{ return not_supported(0,"write"); }
 
   virtual size_t write(uint8_t ch) override {
-      if (tmp.isFull()){
+      tmp_out.resize(MAX_SINGLE_CHARS);
+      if (tmp_out.isFull()){
           flush();
       }
-      return tmp.write(ch);
+      return tmp_out.write(ch);
   }
 
   virtual int available() override { return DEFAULT_BUFFER_SIZE; };
@@ -84,8 +85,8 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
   virtual int availableForWrite() override { return DEFAULT_BUFFER_SIZE; }
 
   virtual void flush() override {
-      if (tmp.available()>0){
-          write((const uint8_t*)tmp.address(), tmp.available());
+      if (tmp_out.available()>0){
+          write((const uint8_t*)tmp_out.address(), tmp_out.available());
       }
   }
 
@@ -105,9 +106,15 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
     return readBytes((uint8_t *)buffer, length);
   }
 
-  virtual int read() override { return not_supported(-1); }
+  virtual int read() override {
+    refillReadBuffer();
+    return tmp_in.read();
+  }
 
-  virtual int peek() override { return not_supported(-1); }
+  virtual int peek() override { 
+    refillReadBuffer();
+    return tmp_in.peek();
+  }
 
 
 #endif
@@ -115,12 +122,25 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
  protected:
   AudioBaseInfoDependent *p_notify=nullptr;
   AudioBaseInfo info;
-  SingleBuffer<uint8_t> tmp{MAX_SINGLE_CHARS};
+  RingBuffer<uint8_t> tmp_in{0};
+  RingBuffer<uint8_t> tmp_out{0};
 
 
-  virtual int not_supported(int out) {
-    LOGE("AudioStream: unsupported operation!");
+  virtual int not_supported(int out, const char* msg="") {
+    LOGE("AudioStream: %s unsupported operation!", msg);
     return out;
+  }
+
+  void refillReadBuffer() {
+    tmp_in.resize(MAX_SINGLE_CHARS);
+    if (tmp_in.isEmpty()){
+      TRACED();
+      const int len = tmp_in.size();
+      uint8_t bytes[len];
+      int len_eff = readBytes(bytes, len);
+      //LOGD("tmp_in available: %d / size: %d / to be written %d", tmp_in.available(), tmp_in.size(), len_eff);
+      tmp_in.writeArray(bytes,len_eff);
+    }
   }
 
 };

@@ -246,8 +246,9 @@ class AudioServer {
  * This class is based on the WiFiServer class. All you need to do is to provide the data 
  * with a callback method or from a Stream.
  * 
- * in -copy> client
  * @ingroup http
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 class AudioEncoderServer  : public AudioServer {
 
@@ -293,7 +294,7 @@ class AudioEncoderServer  : public AudioServer {
             audio_info.bits_per_sample = bits_per_sample;
             encoder->setAudioInfo(audio_info);
             //encoded_stream.begin(&client_obj, encoder);
-            encoded_stream.setOutput(&client_obj);
+            encoded_stream.setInput(&client_obj);
             encoded_stream.setEncoder(encoder);
             encoded_stream.begin();
             AudioServer::begin(in, encoder->mime());
@@ -312,7 +313,7 @@ class AudioEncoderServer  : public AudioServer {
             this->audio_info = info;
             encoder->setAudioInfo(audio_info);
             //encoded_stream.begin(&client_obj, encoder);
-            encoded_stream.setOutput(&client_obj);
+            encoded_stream.setInput(&client_obj);
             encoded_stream.setEncoder(encoder);
             encoded_stream.begin();
 
@@ -382,6 +383,8 @@ class AudioEncoderServer  : public AudioServer {
  * This class is based on the AudioEncodedServer class. All you need to do is to provide the data 
  * with a callback method or from a Stream.
  * @ingroup http
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 class AudioWAVServer : public AudioEncoderServer {
     public:
