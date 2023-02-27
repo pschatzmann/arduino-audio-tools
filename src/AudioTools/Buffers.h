@@ -48,12 +48,12 @@ class BaseBuffer {
   }
 
   int writeArray(const T data[], int len) {
-    LOGD("%s: %d", LOG_METHOD, len);
+    //LOGD("%s: %d", LOG_METHOD, len);
     //CHECK_MEMORY();
 
     int result = 0;
     for (int j = 0; j < len; j++) {
-      if (write(data[j]) == 0) {
+      if (!write(data[j])) {
         break;
       }
       result = j + 1;
@@ -205,8 +205,11 @@ class SingleBuffer : public BaseBuffer<T> {
   size_t size() { return max_size; }
 
   void resize(int size){
-    buffer.resize(size);
-    max_size = size;
+    if (buffer.size()!=size){
+      TRACED();
+      buffer.resize(size);
+      max_size = size;
+    }
   }
 
  protected:
@@ -285,15 +288,17 @@ class RingBuffer : public BaseBuffer<T> {
   virtual T *address() { return _aucBuffer; }
 
   virtual void resize(int len) {
-    if (_aucBuffer != nullptr) {
-      delete[] _aucBuffer;
+    if (this->max_size!=len){
+      if (_aucBuffer != nullptr) {
+        delete[] _aucBuffer;
+      }
+      this->max_size = len;
+      if (len>0){
+        _aucBuffer = new T[max_size];
+        assert(_aucBuffer!=nullptr);
+      }
+      reset();
     }
-    this->max_size = len;
-    if (len>0){
-      _aucBuffer = new T[max_size];
-      assert(_aucBuffer!=nullptr);
-    }
-    reset();
   }
 
   /// Returns the maximum capacity of the buffer
