@@ -7,12 +7,6 @@
 #  include <Client.h>
 #  include <WiFiClientSecure.h>
 #  include <esp_wifi.h>
-#elif defined(ESP8266)
-#  include <ESP8266WiFi.h>
-#elif defined(IS_DESKTOP)
-#  include <Client.h>
-#  include <WiFiClient.h>
-typedef WiFiClient WiFiClientSecure;
 #endif
 
 #include "AudioHttp/HttpRequest.h"
@@ -282,7 +276,7 @@ class URLStream : public AbstractURLStream {
 
         void login(){
 #ifdef USE_WIFI
-            LOGD("connectWiFi");
+            TRACEI();
             if (network!=nullptr && password != nullptr && WiFi.status() != WL_CONNECTED){
                 WiFi.begin(network, password);
                 while (WiFi.status() != WL_CONNECTED){
@@ -297,8 +291,9 @@ class URLStream : public AbstractURLStream {
 #endif          
         }
 
-        /// waits for some data - returns fals if the request has failed
+        /// waits for some data - returns false if the request has failed
          virtual bool waitForData() {
+            TRACEI();
             if(request.available()==0 ){
                 LOGI("Request written ... waiting for reply")
                 while(request.available()==0){

@@ -20,7 +20,7 @@
 #include "AudioConfigLocal.h"
 #endif
 
-#define AUDIOTOOLS_VERSION "0.8.0"
+#define AUDIOTOOLS_VERSION "0.9.4"
 
 /**
  * ------------------------------------------------------------------------- 
@@ -282,6 +282,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 
 //----- ESP8266 -----------
 #ifdef ESP8266
+#  include <ESP8266WiFi.h>
 //#define USE_URL_ARDUINO // commented out because of compile errors
 #define USE_I2S
 #define USE_AUDIO_SERVER
@@ -396,11 +397,13 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #endif
 
 // The Pico W has WIFI support
-#ifdef ARDUINO_RASPBERRY_PI_PICO_W
+#if defined(ARDUINO_ARCH_RP2040) && LWIP_IPV4==1
+#  include <WiFi.h>
 #  define USE_URL_ARDUINO
 #  define USE_WIFI
-#  define USE_WIFI_CLIENT_SECURE 
+#  define USE_WIFI_CLIENT_SECURE
 #  define USE_AUDIO_SERVER
+using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #endif
 
 
@@ -495,8 +498,11 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 //----------------
 
 #ifdef IS_DESKTOP
-#define USE_URL_ARDUINO
-#define USE_STREAM_WRITE_OVERRIDE
+#  include <Client.h>
+#  include <WiFiClient.h>
+#  define USE_URL_ARDUINO
+#  define USE_STREAM_WRITE_OVERRIDE
+typedef WiFiClient WiFiClientSecure;
 #endif
 
 #ifndef ARDUINO

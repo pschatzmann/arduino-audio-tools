@@ -247,6 +247,8 @@ class HttpHeader {
                         put(line); 
                     }               
                 }
+            } else {
+                LOGW("connection lost");
             }
         }
 
