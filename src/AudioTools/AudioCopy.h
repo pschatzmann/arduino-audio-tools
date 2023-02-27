@@ -136,6 +136,11 @@ class StreamCopyT {
                 LOGI("StreamCopy::copy %u -> %u -> %u bytes - in %u hops", (unsigned int)bytes_to_read,(unsigned int) bytes_read, (unsigned int)result, (unsigned int)delayCount);
                 #endif
 
+                if (result==0){
+                    // give the processor some time 
+                    delay(delay_on_no_data);
+                }
+
                 CHECK_MEMORY();
             } else {
                 // give the processor some time 

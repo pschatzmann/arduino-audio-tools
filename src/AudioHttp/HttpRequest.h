@@ -101,7 +101,8 @@ class HttpRequest {
         }
 
         // reads the reply data
-        virtual int read(uint8_t* str, int len){            
+        virtual int read(uint8_t* str, int len){
+            TRACED();            
             if (reply_header.isChunked()){
                 return chunk_reader.read(*client_ptr, str, len);
             } else {
