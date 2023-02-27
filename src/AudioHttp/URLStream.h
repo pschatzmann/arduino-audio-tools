@@ -164,6 +164,13 @@ class URLStream : public AbstractURLStream {
             is_power_save = ps;
         }
 
+        /// Releases the memory from the request and reply
+        void clear() {
+            httpRequest().reply().clear(false);
+            httpRequest().header().clear(false);
+            read_buffer.resize(0);
+        }
+
 
     protected:
         HttpRequest request;

@@ -277,6 +277,7 @@ public:
 
   void setEncoder(AudioEncoder *encoder){
     encoder_ptr = encoder;
+    writer_ptr = encoder;
     if (ptr_out!=nullptr){
       encoder_ptr->setOutputStream(*ptr_out);
     }
@@ -284,6 +285,7 @@ public:
 
   void setDecoder(AudioDecoder *decoder){
     decoder_ptr = decoder;
+    writer_ptr = decoder;
     if (ptr_out!=nullptr){
       decoder_ptr->setOutputStream(*ptr_out);
     }
