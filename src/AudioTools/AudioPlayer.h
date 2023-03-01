@@ -40,6 +40,12 @@ namespace audio_tools {
     class AudioPlayer : public AudioBaseInfoDependent {
 
     public:
+
+        /// Default constructur 
+        AudioPlayer() {
+            TRACED();
+        }
+
         /**
          * @brief Construct a new Audio Player object. The processing chain is
          * AudioSource -> Stream -copy> EncodedAudioStream -> VolumeOutput -> Print
@@ -52,15 +58,7 @@ namespace audio_tools {
             TRACED();
             this->p_source = &source;
             this->p_decoder = &decoder;
-            if (decoder.isResultPCM()){
-                this->fade.setTarget(output);
-                this->volume_out.setTarget(fade);
-                this->p_out_decoding = new EncodedAudioStream(volume_out, decoder);
-            } else {
-                this->p_out_decoding = new EncodedAudioStream(output, decoder);
-            }
-            this->p_final_print = &output;
-
+            setOutput(output);
             // notification for audio configuration
             decoder.setNotifyAudioChange(*this);
         }
@@ -78,13 +76,7 @@ namespace audio_tools {
             TRACED();
             this->p_source = &source;
             this->p_decoder = &decoder;
-            if (decoder.isResultPCM()){
-                this->fade.setTarget(output);
-                this->volume_out.setTarget(fade);
-                this->p_out_decoding = new EncodedAudioStream(volume_out, decoder);
-            } else {
-                this->p_out_decoding = new EncodedAudioStream(output, decoder);
-            }
+            setOutput(output);
             setNotify(notify);
         }
 
@@ -100,15 +92,7 @@ namespace audio_tools {
             TRACED();
             this->p_source = &source;
             this->p_decoder = &decoder;
-            if (decoder.isResultPCM()){
-                this->fade.setTarget(output);
-                this->volume_out.setTarget(fade);
-                this->p_out_decoding = new EncodedAudioStream(volume_out, decoder);
-            } else {
-                this->p_out_decoding = new EncodedAudioStream(output, decoder);
-            }
-            this->p_final_stream = &output;
-
+            setOutput(output);
             // notification for audio configuration
             decoder.setNotifyAudioChange(*this);
         }
@@ -121,6 +105,38 @@ namespace audio_tools {
             if (p_out_decoding != nullptr) {
                 delete p_out_decoding;
             }
+        }
+
+        void setOutput(AudioPrint& output){
+            if (p_decoder->isResultPCM()){
+                this->fade.setTarget(output);
+                this->volume_out.setTarget(fade);
+                this->p_out_decoding = new EncodedAudioStream(volume_out, *p_decoder);
+            } else {
+                this->p_out_decoding = new EncodedAudioStream(output, *p_decoder);
+            }
+            this->p_final_print = &output;
+        }
+
+        void setOutput(Print &output){
+            if (p_decoder->isResultPCM()){
+                this->fade.setTarget(output);
+                this->volume_out.setTarget(fade);
+                this->p_out_decoding = new EncodedAudioStream(volume_out, *p_decoder);
+            } else {
+                this->p_out_decoding = new EncodedAudioStream(output, *p_decoder);
+            }
+        }
+
+        void setOutput(AudioStream& output){
+            if (p_decoder->isResultPCM()){
+                this->fade.setTarget(output);
+                this->volume_out.setTarget(fade);
+                this->p_out_decoding = new EncodedAudioStream(volume_out, *p_decoder);
+            } else {
+                this->p_out_decoding = new EncodedAudioStream(output, *p_decoder);
+            }
+            this->p_final_stream = &output;
         }
 
         /// Defines the number of bytes used by the copier
@@ -189,10 +205,10 @@ namespace audio_tools {
             this->p_source = &source;
         }
 
-        /// (Re)defines the output
-        void setOutput(Print& output){
-            this->volume_out.setTarget(output);
-        }
+        // /// (Re)defines the output
+        // void setOutput(Print& output){
+        //     this->volume_out.setTarget(output);
+        // }
 
         /// (Re)defines the decoder
         void setDecoder(AudioDecoder& decoder){
@@ -218,6 +234,7 @@ namespace audio_tools {
             LOGI("sample_rate: %d", info.sample_rate);
             LOGI("bits_per_sample: %d", info.bits_per_sample);
             LOGI("channels: %d", info.channels);
+            this->info = info;
             // notifiy volume
             volume_out.setAudioInfo(info);
             fade.setAudioInfo(info);
@@ -228,7 +245,7 @@ namespace audio_tools {
         };
 
         virtual AudioBaseInfo audioInfo() override {
-            return volume_out.audioInfo();
+            return info;
         }
 
         /// starts / resumes the playing of a matching song
@@ -411,6 +428,15 @@ namespace audio_tools {
             return silence_on_inactive;
         }
 
+        void writeSilence(size_t bytes) {
+            TRACEI();
+            if (p_final_print!=nullptr){
+                p_final_print->writeSilence(bytes);
+            } else if (p_final_stream!=nullptr){
+                p_final_stream->writeSilence(bytes);
+            }
+        }
+
     protected:
         bool active = false;
         bool autonext = false;
@@ -420,22 +446,20 @@ namespace audio_tools {
         FadeStream fade; // Phase in / Phase Out to avoid popping noise
         MetaDataID3 meta_out; // Metadata parser
         EncodedAudioStream* p_out_decoding = nullptr; // Decoding stream
-        AudioDecoder* p_decoder = nullptr;
+        CopyDecoder no_decoder{true};
+        AudioDecoder* p_decoder = &no_decoder;
         Stream* p_input_stream = nullptr;
         AudioPrint* p_final_print = nullptr;
         AudioStream* p_final_stream = nullptr;
         AudioBaseInfoDependent* p_final_notify = nullptr;
         StreamCopy copier; // copies sound into i2s
+        AudioBaseInfo info;
         bool meta_active = false;
         uint32_t timeout = 0;
         int steam_increment = 1; // +1 moves forward; -1 moves backward
         float current_volume = -1.0; // illegal value which will trigger an update
         int delay_if_full = 100;
 
-        /// Default constructur only allowed in subclasses
-        AudioPlayer() {
-            TRACED();
-        }
 
         void moveToNextFileOnTimeout(){
             if (p_final_stream->availableForWrite()==0) return;
@@ -454,14 +478,6 @@ namespace audio_tools {
             }
         }
 
-        void writeSilence(size_t bytes) {
-            TRACEI();
-            if (p_final_print!=nullptr){
-                p_final_print->writeSilence(bytes);
-            } else if (p_final_stream!=nullptr){
-                p_final_stream->writeSilence(bytes);
-            }
-        }
 
         void writeEnd() {
             // end silently

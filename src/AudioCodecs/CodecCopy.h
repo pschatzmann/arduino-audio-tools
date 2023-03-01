@@ -22,6 +22,10 @@ class CopyDecoder : public AudioDecoder {
 public:
   CopyDecoder() { TRACED(); }
 
+  CopyDecoder(bool isPcm){
+    is_pcm = isPcm;
+  }
+
   CopyDecoder(Print &out_stream) { TRACED(); pt_print=&out_stream; }
 
   CopyDecoder(Print &out_stream, AudioBaseInfoDependent &bi) {pt_print=&out_stream;}
@@ -43,10 +47,11 @@ public:
   void setNotifyAudioChange(AudioBaseInfoDependent &bi) {}
 
   // The result is encoded data
-  virtual bool isResultPCM() { return false;} 
+  virtual bool isResultPCM() { return is_pcm;} 
 
 protected:
   Print *pt_print=nullptr;
+  bool is_pcm = false;
 };
 
 /**
