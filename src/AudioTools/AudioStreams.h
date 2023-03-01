@@ -208,10 +208,7 @@ class MemoryStream : public AudioStream {
 
   MemoryStream(const uint8_t *buffer, int buffer_size, MemoryType memoryType = FLASH_RAM) {
     LOGD("MemoryStream: %d", buffer_size);
-    this->buffer_size = buffer_size;
-    this->write_pos = buffer_size;
-    this->buffer = (uint8_t *)buffer;
-    this->memory_type = memoryType;
+    setValue(buffer, buffer_size, memoryType);
   }
 
   ~MemoryStream() {
@@ -267,7 +264,6 @@ class MemoryStream : public AudioStream {
   virtual int availableForWrite() override {
     return buffer_size - write_pos;
   } 
-
 
   virtual int read() override {
     int result = peek();
@@ -340,10 +336,18 @@ class MemoryStream : public AudioStream {
     return buffer;
   }
 
+  /// Callback which is executed when we rewind (in loop mode) to the beginning
   void setRewindCallback(void (*cb)()){
     this->rewind = cb;
   }
 
+  /// Update the values  (buffer and size)
+  void setValue(const uint8_t *buffer, int buffer_size, MemoryType memoryType = FLASH_RAM) {
+    this->buffer_size = buffer_size;
+    this->write_pos = buffer_size;
+    this->buffer = (uint8_t *)buffer;
+    this->memory_type = memoryType;
+  }
 
  protected:
   int write_pos = 0;
