@@ -209,7 +209,6 @@ class SDDirect {
     const char* fileNamePath(FileT &file){
 #if defined(USE_SDFAT) || ESP_IDF_VERSION_MAJOR >= 4 
       LOGD("-> fileNamePath: %s", fileName(file));
-      file_path_str.clear();
       file_path_str = start_dir;
       if (!file_path_str.endsWith("/")){
         file_path_str += "/";

@@ -20,11 +20,6 @@
 // Try max SPI clock for an SD. Reduce SPI_CLOCK if errors occur. (40?)
 #define SPI_CLOCK SD_SCK_MHZ(50)
 
-#if defined(ARDUINO_ARCH_RP2040) && !defined(PICO)
-    // only RP2040 from Earle Phil Hower is using the library with a sdfat namespace
-    typedef sdfat::SdSpiConfig SdSpiConfig;
-    typedef sdfat::SdFs AudioFs;
-#else
 #if SD_FAT_TYPE == 0
 	typedef SdFat AudioFs;
 	typedef File AudioFile;
@@ -37,8 +32,6 @@
 #elif SD_FAT_TYPE == 3
 	typedef SdFs AudioFs;
 	typedef FsFile AudioFile;
-#else  // SD_FAT_TYPE
-#endif
 #endif
 
 
@@ -92,7 +85,9 @@ public:
   }
 
   void end() {
+#ifdef ESP32
     sd.end();
+#endif
     is_sd_setup = false;
   }
 
