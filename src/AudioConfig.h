@@ -330,6 +330,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 //----- MBED -----------
 #if defined(ARDUINO_ARCH_MBED_RP2040)
 // install https://github.com/pschatzmann/rp2040-i2s
+#define RP2040_MBED
 #define USE_I2S 1
 #define USE_PWM
 #define USE_ADC_ARDUINO
@@ -346,7 +347,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 // Default Setting: The mute pin can be switched actovated by setting it to a gpio (e.g 4). Or you could drive the LED by assigning LED_BUILTIN
 #define PIN_I2S_MUTE -1
 #define SOFT_MUTE_VALUE 0
-#define PIN_CS PIN_SPI0_SS
+#define PIN_CS 1 //PIN_SPI0_SS
 
 // fix missing __sync_synchronize symbol
 #define FIX_SYNC_SYNCHRONIZE
@@ -363,6 +364,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 
 //----- RP2040 -----------
 #elif defined(ARDUINO_ARCH_RP2040)
+#define RP2040_HOWER
 #define USE_I2S 
 #define USE_PWM
 #define USE_ADC_ARDUINO
