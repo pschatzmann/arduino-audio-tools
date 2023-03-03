@@ -471,7 +471,7 @@ namespace audio_tools {
             if (p_input_stream == nullptr || millis() > timeout) {
                 fade.setFadeInActive(true);
                 if (autonext) {
-                    LOGW("-> timeout - moving by %d", steam_increment);
+                    LOGI("-> timeout - moving by %d", steam_increment);
                     // open next stream
                     if (!next(steam_increment)) {
                         LOGD("stream is null");
