@@ -28,6 +28,10 @@ void previous(bool, int, void*) {
    player.previous();
 }
 
+void startStop(bool, int, void*) {
+   player.setActive(!player.isActive());
+}
+
 void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
@@ -37,6 +41,7 @@ void setup() {
   kit.begin(cfg);
 
  // setup additional buttons 
+  kit.addAction(PIN_KEY1, startStop);
   kit.addAction(PIN_KEY4, next);
   kit.addAction(PIN_KEY3, previous);
 
