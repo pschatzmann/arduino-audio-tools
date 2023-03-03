@@ -147,15 +147,27 @@ class AACDecoderHelix : public AudioDecoder  {
             aac->setMaxFrameSize(len);
         }
 
+#ifdef HELIX_PCM_CORRECTED
         /// Provides the maximum pwm buffer size - this is allocated on the heap and you can reduce the heap size my minimizing this value
-        size_t maxPWMSize() {
-            return aac->maxPWMSize();
+        size_t maxPCMSize() {
+            return aac->maxPCMSize();
         }
 
         /// Define your optimized maximum pwm buffer size
-        void setMaxPWMSize(size_t len) {
-            aac->setMaxPWMSize(len);
+        void setMaxPCMSize(size_t len) {
+            aac->setMaxPCMSize(len);
         }
+#else
+        /// Provides the maximum pwm buffer size - this is allocated on the heap and you can reduce the heap size my minimizing this value
+        size_t maxPCMSize() {
+            return mp3->maxPWMSize();
+        }
+
+        /// Define your optimized maximum pwm buffer size
+        void setMaxPCMSize(size_t len) {
+            mp3->setMaxPWMSize(len);
+        }
+#endif
 
     protected:
         libhelix::AACDecoderHelix *aac=nullptr;
