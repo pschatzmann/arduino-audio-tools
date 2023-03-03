@@ -1,16 +1,23 @@
 #pragma once
 
 #include "AudioConfig.h"
-#include "AudioPrint.h"
-#include "AudioTools.h"
+#include "AudioTools/AudioPrint.h"
+#include "AudioTools/AudioStreams.h"
+#include "AudioTools/Buffers.h"
+#include "AudioOutput.h"
 #include "SoundData.h"
 
 namespace audio_tools {
+
+
 
 /**
  * @brief ESP8266Audio AudioOutput class which stores the data in a temporary
  * buffer. The buffer can be consumed e.g. by a callback function by calling
  * read();
+ * Dependencies: ESP8266Audio Library
+ * Dependencies: ESP32-A2DP Library
+ * 
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
