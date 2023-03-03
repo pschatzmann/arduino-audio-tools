@@ -491,6 +491,8 @@ namespace audio_tools {
             copier.copy();
             // start by fading in
             fade.setFadeInActive(true);
+            // restart the decoder to make sure it does not contain any audio when we continue
+            p_decoder->begin();
         }
 
         /// Callback implementation which writes to metadata
