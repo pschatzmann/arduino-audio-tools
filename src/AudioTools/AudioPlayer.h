@@ -437,6 +437,11 @@ namespace audio_tools {
             }
         }
 
+        /// Provides the Print object to which we send the decoding result
+        Print* getVolumeOutput(){
+            return &volume_out;
+        }
+
     protected:
         bool active = false;
         bool autonext = false;
