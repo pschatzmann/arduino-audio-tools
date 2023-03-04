@@ -19,8 +19,9 @@ public:
     return def;
   }
 
-  bool begin(AudioBaseInfo info) {
+  bool begin(AudioBaseInfo cfg) {
     is_open = true;
+    info = cfg;
     return true;
   }
   int available() override { return DEFAULT_BUFFER_SIZE; }

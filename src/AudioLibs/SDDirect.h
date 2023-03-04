@@ -250,7 +250,7 @@ class SDDirect {
       }
       return result;
 #else
-      return p_sd->open(name);
+      return p_sd->open(name, "r");
 #endif
     }
 

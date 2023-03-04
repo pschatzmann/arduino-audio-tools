@@ -1,5 +1,5 @@
 /**
- * @file player-littlefs-i2s.ino
+ * @file player-sd-i2s.ino
  * @brief example using the SD library
  * 
  * @author Phil Schatzmann
