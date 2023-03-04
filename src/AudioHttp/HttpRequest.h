@@ -23,6 +23,7 @@ namespace audio_tools {
  * type from streaming get requests.
  * 
  * The functionality is based on the Arduino Client class.
+ * @ingroup http
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
