@@ -173,6 +173,12 @@ class HttpRequest {
         bool isReady() {
             return is_ready;
         }
+
+        /// Adds/Updates a request header
+        void addRequestHeader(const char* header, const char* value){
+            request_header.put(header, value);
+        }
+
    
     protected:
         Client *client_ptr;
