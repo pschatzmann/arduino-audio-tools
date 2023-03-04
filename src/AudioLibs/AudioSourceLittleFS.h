@@ -51,13 +51,13 @@ public:
     file_name = idx[index];
     if (file_name==nullptr) return nullptr;
     LOGI("Using file %s", file_name);
-    file = LittleFS.open(file_name);
+    file = LittleFS.open(file_name,"r");
     return file ? &file : nullptr;
   }
 
   virtual Stream *selectStream(const char *path) override {
     file.close();
-    file = LittleFS.open(path);
+    file = LittleFS.open(path,"r");
     file_name = file.name();
     LOGI("-> selectStream: %s", path);
     return file ? &file : nullptr;
@@ -83,7 +83,11 @@ public:
   long size() { return idx.size();}
 
 protected:
+#ifdef RP2040_HOWER
+  SDDirect<FS,File> idx{LittleFS};
+#else
   SDDirect<fs::LittleFSFS,fs::File> idx{LittleFS};
+#endif
   File file;
   size_t idx_pos = 0;
   const char *file_name;

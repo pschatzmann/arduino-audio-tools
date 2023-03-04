@@ -10,6 +10,7 @@
 
 namespace audio_tools {
 
+
 /**
  * @brief ESP32 AudioSource for AudioPlayer using an SD card as data source.
  * This class is based on the Arduino SD implementation
@@ -102,7 +103,11 @@ public:
   long size() { return idx.size();}
 
 protected:
+#ifdef RP2040_HOWER
+  SDDirect<SDClass,fs::File> idx{SD};
+#else
   SDDirect<fs::SDFS,fs::File> idx{SD};
+#endif
   File file;
   size_t idx_pos = 0;
   const char *file_name;

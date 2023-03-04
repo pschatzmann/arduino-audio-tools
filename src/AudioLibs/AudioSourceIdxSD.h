@@ -101,7 +101,11 @@ public:
   long size() { return idx.size();}
 
 protected:
-  SDIndex<fs::SDFS,fs::File> idx{SD};
+#ifdef RP2040_HOWER
+  SDDirect<SDClass,fs::File> idx{SD};
+#else
+  SDDirect<fs::SDFS,fs::File> idx{SD};
+#endif
   File file;
   size_t idx_pos = 0;
   const char *file_name;
