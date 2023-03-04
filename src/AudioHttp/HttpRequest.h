@@ -184,7 +184,8 @@ class HttpRequest {
         }
 
         // sends request and reads the reply_header from the server
-        virtual int process(MethodID action, Url &url, const char* mime, const char *data, int len=-1){
+        virtual int process(MethodID action, Url &url, const char* mime, const char *data, int lenData=-1){
+            int len = lenData;
             is_ready = false;
             if (client_ptr==nullptr){
                 LOGE("The client has not been defined");
