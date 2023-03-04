@@ -78,9 +78,21 @@ class HttpRequest {
             return process(POST, url, mime, data, len);
         }
 
+        virtual int post(Url &url, const char* mime, Stream &data, int len=-1){
+            LOGI("post %s", url.url());
+            p_post_stream = &data;
+            return process(POST, url, mime, nullptr, len);
+        }
+
         virtual int put(Url &url, const char* mime, const char *data, int len=-1){
             LOGI("put %s", url.url());
             return process(PUT, url, mime, data, len);
+        }
+
+        virtual int put(Url &url, const char* mime, Stream &data, int len=-1){
+            LOGI("put %s", url.url());
+            p_post_stream = &data;
+            return process(PUT, url, mime, nullptr, len);
         }
 
         virtual int del(Url &url,const char* mime=nullptr, const char *data=nullptr, int len=-1) {
@@ -174,6 +186,7 @@ class HttpRequest {
         const char *accept_encoding = nullptr;
         bool is_ready = false;
         int32_t clientTimeout = URL_CLIENT_TIMEOUT; // 60000;
+        Stream *p_post_stream = nullptr;
 
         // opens a connection to the indicated host
         virtual int connect(const char *ip, uint16_t port, int32_t timeout) {
@@ -220,10 +233,24 @@ class HttpRequest {
             request_header.put(CONTENT_TYPE, mime);
             request_header.write(*client_ptr);
 
-            if (len>0){
+            // posting data parameter
+            if (len>0 && data!=nullptr){
                 LOGI("Writing data: %d bytes", len);
-                client_ptr->write((const uint8_t*)data,len);
+                client_ptr->write((const uint8_t*)data, len);
                 LOGD("%s",data);
+            }
+
+            // posting data from stream
+            if (p_post_stream!=nullptr){
+                uint8_t buffer[512];
+                int total = 0;
+                while(p_post_stream->available()>0){
+                    int result_len = p_post_stream->readBytes(buffer, 512);
+                    total += result_len;
+                    client_ptr->write(buffer, result_len);
+                }
+                LOGI("Written data: %d bytes", total);
+                p_post_stream = nullptr;
             }
             
             LOGI("Request written ... waiting for reply")
