@@ -165,6 +165,10 @@ class URLStream : public AbstractURLStream {
             read_buffer.resize(0);
         }
 
+        /// Adds/Updates a request header
+        void addRequestHeader(const char* header, const char* value){
+            request.header().put(header, value);
+        }
 
     protected:
         HttpRequest request;
