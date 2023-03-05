@@ -220,7 +220,7 @@ class MemoryStream : public AudioStream {
   bool begin() override {
     TRACED();
     write_pos = memoryCanChange() ? 0 : buffer_size;
-    if (this->buffer==nullptr){
+    if (this->buffer==nullptr && memoryCanChange()){
       resize(buffer_size);
     }
     read_pos = 0;
