@@ -156,7 +156,10 @@ namespace audio_tools {
             }
 
             // navigation support
-            autonext = p_source->isAutoNext();
+            if (autonext){
+                // take definition from source
+                autonext = p_source->isAutoNext();
+            }
 
             // start dependent objects
             p_out_decoding->begin();
