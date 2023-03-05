@@ -105,6 +105,7 @@ class CsvStream : public AudioPrint {
             this->channels = channels;
             this->out_ptr = &out;
             this->active = active;
+            cfg.channels = channels;
         }
 
         /// Starts the processing with 2 channels
@@ -128,7 +129,8 @@ class CsvStream : public AudioPrint {
 
         /// Starts the processing with the number of channels defined in AudioBaseInfo
         bool begin(AudioBaseInfo info){
-             TRACED();
+            TRACED();
+            cfg = info;
             this->active = true;
             this->channels = info.channels;
             return channels!=0;
@@ -140,19 +142,21 @@ class CsvStream : public AudioPrint {
             this->channels = channels;
             this->out_ptr = &out;
             this->active = true;
+            cfg.channels = channels;
         }
 
         /// Sets the CsvStream as inactive 
         void end() {
-             TRACED();
+            TRACED();
             active = false;
         }
 
         /// defines the number of channels
         virtual void setAudioInfo(AudioBaseInfo info) {
-             TRACEI();
+            TRACEI();
             info.logInfo();
             this->channels = info.channels;
+            cfg = info;
         };
 
         /// Writes the data - formatted as CSV -  to the output stream
