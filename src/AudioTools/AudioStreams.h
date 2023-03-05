@@ -344,6 +344,7 @@ class MemoryStream : public AudioStream {
   /// Update the values  (buffer and size)
   void setValue(const uint8_t *buffer, int buffer_size, MemoryType memoryType = FLASH_RAM) {
     this->buffer_size = buffer_size;
+    this->read_pos = 0;
     this->write_pos = buffer_size;
     this->buffer = (uint8_t *)buffer;
     this->memory_type = memoryType;
