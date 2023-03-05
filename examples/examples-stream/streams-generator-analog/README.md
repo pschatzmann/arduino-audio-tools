@@ -10,7 +10,7 @@ Please note the log level should be set so that there is no disturbing output!
 
 To test the output I am using a piezo electric element
 
-![DAC](https://pschatzmann.github.io/arduino-audio-tools/resources/piezo.jpeg)
+![DAC](https://pschatzmann.github.io/Resources/img/piezo.jpeg)
 
 It should also be possible to connect a headphone to the output pins...
 

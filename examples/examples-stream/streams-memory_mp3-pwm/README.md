@@ -14,7 +14,7 @@ Unfortunatly non of those are currently stable in all environments....
 To test the output I am using an earphone from a mobile phone. 
 We get 2 signals one for the left and the other for the right channel.
 
-![DAC](https://pschatzmann.github.io/arduino-audio-tools/resources/earphones.jpg)
+![DAC](https://pschatzmann.github.io/Resources/img/earphones.jpg)
 
 
 The pins depend on the Processor:

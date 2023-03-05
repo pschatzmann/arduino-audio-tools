@@ -7,7 +7,7 @@ We just send the audio data that we receive from microphone the Serial output, s
 
 Here is the result on the Arduino Serial Plotter:
 
-![serial-plotter](https://pschatzmann.github.io/arduino-audio-tools/resources/serial-plotter-sine.png)
+![serial-plotter](https://pschatzmann.github.io/Resources/img/serial-plotter-sine.png)
 
 
 ### Analog Input:

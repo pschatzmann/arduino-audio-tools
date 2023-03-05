@@ -19,7 +19,7 @@ Plaese note that the signal that we receive from the ADC needs to be adjusted so
 
 ### External DAC:
 
-![DAC](https://pschatzmann.github.io/arduino-audio-tools/resources/dac.jpeg)
+![DAC](https://pschatzmann.github.io/Resources/img/dac.jpeg)
 
 For my tests I am using the 24-bit PCM5102 PCM5102A Stereo DAC Digital-to-analog Converter PLL Voice Module pHAT
 

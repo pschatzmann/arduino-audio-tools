@@ -2,12 +2,12 @@
 
 We are reading a raw audio file from the Intenet and write the data to the I2S interface. The audio file must be available using 16 bit integers with 2 channels. I used a sampling rate of 8000.
 
-[Audacity](https://www.audacityteam.org/) might help you out here: export with the file name audio.raw as RAW signed 16 bit PCM and copy it to the SD card. In my example I was using the file [audio.raw](https://pschatzmann.github.io/arduino-audio-tools/resources/audio.raw). 
+[Audacity](https://www.audacityteam.org/) might help you out here: export with the file name audio.raw as RAW signed 16 bit PCM and copy it to the SD card. In my example I was using the file [audio.raw](https://pschatzmann.github.io/Resources/audio/audio.raw). 
 
 
 ### External DAC:
 
-![DAC](https://pschatzmann.github.io/arduino-audio-tools/resources/dac.jpeg)
+![DAC](https://pschatzmann.github.io/Resources/img/dac.jpeg)
 
 
 I am just using the default pins defined by the framework. However I could change them with the help of the config object. The mute pin can be defined in the constructor of the I2SStream - by not defining anything we use the default which is GPIO23

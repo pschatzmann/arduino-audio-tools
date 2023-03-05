@@ -6,7 +6,7 @@ An ESP32 was used to test this sketch.
 
 ### External DAC:
 
-![DAC](https://pschatzmann.github.io/arduino-audio-tools/resources/dac.jpeg)
+![DAC](https://pschatzmann.github.io/Resources/img/dac.jpeg)
 
 
 I am just using the default pins defined by the framework. However I could change them with the help of the config object. The mute pin can be defined in the constructor of the I2SStream - by not defining anything we use the default which is GPIO23
