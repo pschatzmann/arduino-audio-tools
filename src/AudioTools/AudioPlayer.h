@@ -467,6 +467,7 @@ namespace audio_tools {
 
 
         void moveToNextFileOnTimeout(){
+            if (!autonext) return;
             if (p_final_stream==nullptr) return;
             if (p_final_stream->availableForWrite()==0) return;
             if (p_input_stream == nullptr || millis() > timeout) {
