@@ -749,51 +749,38 @@ class BufferedStream : public AudioStream {
 
 /**
  * @brief The Arduino Stream which provides silence and simulates a null device
- * when used as audio target
+ * when used as audio target or audio source
  * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class NullStream : public BufferedStream {
+class NullStream : public AudioStream {
  public:
-  NullStream(bool measureWrite = false) : BufferedStream(100) {
-    is_measure = measureWrite;
-  }
 
-  bool begin(AudioBaseInfo info, int opt = 0) {    
+  bool begin(AudioBaseInfo info) {    
+    this->info = info;
     return true;
   }
 
-  AudioBaseInfo defaultConfig(int opt = 0) {
+  AudioBaseInfo defaultConfig() {
     AudioBaseInfo info;
     return info;
+  }
+
+  size_t write(const uint8_t *buffer, size_t len) override{
+    return len;
+  }
+
+  size_t readBytes(uint8_t *buffer, size_t len) override{
+    memset(buffer,0, len);
+    return len;
   }
 
   /// Define object which need to be notified if the basinfo is changing
   void setNotifyAudioChange(AudioBaseInfoDependent &bi) override {}
 
-  void setAudioInfo(AudioBaseInfo info) override {}
-
- protected:
-  size_t total = 0;
-  unsigned long timeout = 0;
-  bool is_measure;
-
-  virtual size_t writeExt(const uint8_t *data, size_t len) override {
-    if (is_measure) {
-      if (millis() < timeout) {
-        total += len;
-      } else {
-        LOGI("Thruput = %zu kBytes/sec", total / 1000);
-        total = 0;
-        timeout = millis() + 1000;
-      }
-    }
-    return len;
-  }
-  virtual size_t readExt(uint8_t *data, size_t len) override {
-    memset(data, 0, len);
-    return len;
+  void setAudioInfo(AudioBaseInfo info) override {
+    this->info = info;
   }
 };
 
