@@ -53,7 +53,11 @@ class AudioLogger {
         }
 
         void println(){
+#ifdef IS_DESKTOP
+            fprintf( stderr, "%s\n", print_buffer);
+#else
             log_stream_ptr->println(print_buffer);
+#endif
             print_buffer[0]=0;
             unlock();
         }
@@ -74,8 +78,6 @@ class AudioLogger {
         LogLevel level() {
             return log_level;
         }
-
-
 
     protected:
         Stream *log_stream_ptr = &LOG_STREAM;
