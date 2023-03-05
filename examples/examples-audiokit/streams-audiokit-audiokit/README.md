@@ -5,7 +5,7 @@
 
 We implement a AudioKit source and sink: We stream the sound input which we read in from the I2S interface and write it back via I2S to the Speaker 
 
-<img src="https://pschatzmann.github.io/arduino-audio-tools/resources/audio-toolkit.png" alt="Audio Kit" />
+<img src="https://pschatzmann.github.io/Resources/img/audio-toolkit.png" alt="Audio Kit" />
 
 ### Dependencies
 

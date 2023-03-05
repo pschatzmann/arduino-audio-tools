@@ -9,7 +9,7 @@ We just send a generated sine wave to some defined pins and expect to hear some 
 
 To test the output I am using a piezo electric element
 
-![DAC](https://pschatzmann.github.io/arduino-audio-tools/resources/piezo.jpeg)
+![DAC](https://pschatzmann.github.io/Resources/img/piezo.jpeg)
 
 It should also be possible to connect a headphone to the output pins...
 

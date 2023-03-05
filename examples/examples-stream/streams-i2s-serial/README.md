@@ -11,7 +11,7 @@ the ESP32 is acting as master.
 
 ## Pins
 
-![i2s-adc](https://pschatzmann.github.io/arduino-audio-tools/resources/I2S-ADC.jpg)
+![i2s-adc](https://pschatzmann.github.io/Resources/img/I2S-ADC.jpg)
 
 
 | i2s-ADC  |  ESP32

@@ -2,7 +2,7 @@
 
 Compared to the regular URLStream, and ICYStream provides audio Metadata.
 
-<img src="https://pschatzmann.github.io/arduino-audio-tools/resources/audio-toolkit.png" alt="Audio Kit" />
+<img src="https://pschatzmann.github.io/Resources/img/audio-toolkit.png" alt="Audio Kit" />
 
 You dont need to bother about any wires because everything is on one nice board. Just just need to install the dependencies:
 
