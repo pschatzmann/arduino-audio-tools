@@ -26,7 +26,7 @@ public:
   }
   int available() override { return DEFAULT_BUFFER_SIZE; }
 
-  size_t readBytes(uint8_t* buffer, size_t len){
+  size_t readBytes(uint8_t* buffer, size_t len) override {
     // read from stdin
     return ::read(0, buffer, len);
   }
@@ -40,7 +40,7 @@ public:
     return ::write(1, buffer, len);
   }
 
-  void end() {
+  void end() override {
     is_open = false;
   }
 
