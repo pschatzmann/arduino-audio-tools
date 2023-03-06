@@ -9,6 +9,8 @@
 #include "AudioTools/AudioTypes.h"
 #include "AudioBasic/Collections.h"
 
+#define READ_ERROR_MSG  "Could not read full data"
+
 namespace audio_tools {
 
 // forward declarations
@@ -195,7 +197,6 @@ class DriverPWMBase {
         uint32_t frames_per_second = 0;
         uint32_t time_1_sec;
         bool is_timer_started = false;
-        const char *READ_ERROR_MSG = "Could not read full data";
 
         void playNextFrameCallback(){
              //TRACED();
