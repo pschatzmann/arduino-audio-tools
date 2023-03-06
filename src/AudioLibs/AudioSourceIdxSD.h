@@ -102,9 +102,9 @@ public:
 
 protected:
 #ifdef RP2040_HOWER
-  SDDirect<SDClass,fs::File> idx{SD};
+  SDIndex<SDClass,fs::File> idx{SD};
 #else
-  SDDirect<fs::SDFS,fs::File> idx{SD};
+  SDIndex<fs::SDFS,fs::File> idx{SD};
 #endif
   File file;
   size_t idx_pos = 0;
