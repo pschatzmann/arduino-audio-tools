@@ -3,7 +3,7 @@
 #include "AudioEffects/SoundGenerator.h"
 #include "AudioEffects/AudioEffect.h"
 #include "AudioTools/AudioStreams.h"
-#if __cplusplus >= 201703L 
+#if defined(USE_VARIANTS) && __cplusplus >= 201703L 
 #  include <variant>
 #endif
 
@@ -381,7 +381,7 @@ class AudioEffectStreamT : public AudioStream {
     Print *p_print=nullptr;
 };
 
-#if __cplusplus >= 201703L || defined(DOXYGEN)
+#if defined(USE_VARIANTS) && __cplusplus >= 201703L || defined(DOXYGEN)
 /** 
  * @brief EffectsStream supporting variable bits_per_sample.
  * This class is only available when __cplusplus >= 201703L. Otherwise AudioEffectStream results in
