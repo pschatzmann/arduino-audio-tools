@@ -204,6 +204,7 @@ class MemoryStream : public AudioStream {
     LOGD("MemoryStream: %d", buffer_size);
     this->buffer_size = buffer_size;
     this->memory_type = memoryType;
+    resize(buffer_size);
   }
 
   MemoryStream(const uint8_t *buffer, int buffer_size, MemoryType memoryType = FLASH_RAM) {
@@ -228,6 +229,7 @@ class MemoryStream : public AudioStream {
   }
 
   virtual size_t write(uint8_t byte) override {
+    if (buffer==nullptr) return 0;
     int result = 0;
     if (write_pos < buffer_size) {
       result = 1;
@@ -303,12 +305,16 @@ class MemoryStream : public AudioStream {
     if (memoryCanChange()){
       write_pos = 0;
       read_pos = 0;
+      if (buffer==nullptr){
+        resize(buffer_size);
+      }
       if (reset) {
         // we clear the buffer data
         memset(buffer, 0, buffer_size);
       }
     } else {
-      LOGE("data is read only");
+      read_pos = 0;
+      LOGW("data is read only");
     }
   }
 
@@ -323,10 +329,12 @@ class MemoryStream : public AudioStream {
   #ifdef ESP32
         case PS_RAM:
           buffer = (buffer==nullptr) ? (uint8_t*)ps_calloc(size,1) : (uint8_t*)ps_realloc(buffer, size);
+          assert(buffer!=nullptr);
           break;
   #endif
         default:
           buffer = (buffer==nullptr) ? (uint8_t*)calloc(size,1) : (uint8_t*)realloc(buffer, size);
+          assert(buffer!=nullptr);
           break;
       }
     }
