@@ -10,7 +10,7 @@ namespace audio_tools {
 void delay(uint64_t ms) {
     //std::this_thread::sleep_for(std::chrono::milliseconds(ms));    
     auto end = millis()+ms;
-    waitFor(millis()>=end);
+    while(millis()<=end);
 }
 
 /// Returns the milliseconds since the start
