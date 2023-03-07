@@ -53,7 +53,7 @@ class AudioLogger {
         }
 
         void println(){
-#ifdef IS_DESKTOP
+#if defined(IS_DESKTOP) || defined(IS_DESKTOP_WITH_TIME_ONLY)
             fprintf( stderr, "%s\n", print_buffer);
 #else
             log_stream_ptr->println(print_buffer);
