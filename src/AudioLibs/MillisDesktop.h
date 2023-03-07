@@ -2,11 +2,15 @@
 #include "AudioLibs/NoArduino.h"
 #include <iostream>
 
+#define DESKTOP_MILLIS_DEFINED
+
 namespace audio_tools {
 
 /// Waits for the indicated milliseconds
 void delay(uint64_t ms) {
     //std::this_thread::sleep_for(std::chrono::milliseconds(ms));    
+    auto end = millis()+ms;
+    waitFor(millis()>=end);
 }
 
 /// Returns the milliseconds since the start

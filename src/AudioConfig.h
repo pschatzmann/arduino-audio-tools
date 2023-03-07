@@ -5,9 +5,14 @@
  * 
  */
 #pragma once
-#if defined(ARDUINO) || defined(IS_DESKTOP)
+#if defined(ARDUINO) 
 #  include "Arduino.h"
-#else
+#elif defined(IS_DESKTOP)
+#  include "Arduino.h"
+#elif defined(IS_DESKTOP_WITH_TIME)
+#  include "AudioLibs/MillisDesktop.h"
+#  include "AudioLibs/NoArduino.h"
+#else 
 #  include "AudioLibs/NoArduino.h"
 #endif
 #include <string.h>
