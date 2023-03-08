@@ -1246,6 +1246,10 @@ class InputMixer : public AudioStream {
       LOGD("readBytes: %d",(int)len);
       // result_len must be full frames
       int result_len = MIN(available(), len) * frame_size / frame_size;
+      if (result_len==0){
+        delay(COPY_DELAY_ON_NODATA);
+        return 0;
+      }
       int sample_count = result_len / sizeof(T);
       LOGD("sample_count: %d", sample_count);
       T *p_data = (T*) data;
@@ -1260,6 +1264,7 @@ class InputMixer : public AudioStream {
         }
         p_data[j] = sample_total;
       }
+
       return result_len;
     }
 
