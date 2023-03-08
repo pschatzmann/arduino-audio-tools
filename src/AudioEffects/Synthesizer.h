@@ -74,7 +74,7 @@ class DefaultSynthesizerChannel : public AbstractSynthesizerChannel {
 
             // setup generator
             if (p_generator==nullptr){
-                static SineWaveGenerator<int16_t> sine;
+                static FastSineGenerator<int16_t> sine;
                 p_generator = &sine;
             }
             p_generator->begin(config);
@@ -212,7 +212,7 @@ class Synthesizer : public SoundGenerator<int16_t> {
 
         /// Provides mixed samples of all channels
         int16_t readSample() override {
-            float total = 0;
+            int total = 0;
             uint16_t count = 0;
             // calculate sum of all channels
             for (int j=0;j<channels.size();j++){
@@ -222,9 +222,9 @@ class Synthesizer : public SoundGenerator<int16_t> {
                 }
             }
             // prevent divide by zero
-            int16_t result = 0;
+            int result = 0;
             if (count>0){
-                result = 0.9 * total / count;
+                result = NumberConverter::clip<int16_t>(total / count);
             }
             return result;
         }
