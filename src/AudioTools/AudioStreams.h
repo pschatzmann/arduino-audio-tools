@@ -1244,18 +1244,15 @@ class InputMixer : public AudioStream {
         return 0;
       }
       // result_len must be full frames
-      int result_len = MIN(available(), len) * frame_size / frame_size;
-      if (result_len<4){
-        delay(COPY_DELAY_ON_NODATA);
-        return 0;
-      }
-      LOGD("readBytes: %d",(int)len);
+      int result_len = len * frame_size / frame_size;
+      //int result_len = MIN(available(), len) * frame_size / frame_size;
+      //LOGD("readBytes: %d",(int)len);
       int sample_count = result_len / sizeof(T);
-      LOGD("sample_count: %d", sample_count);
+      //LOGD("sample_count: %d", sample_count);
       T *p_data = (T*) data;
       float sample_total = 0.0f;
       int size_value = size();
-      LOGD("size_value: %d", size_value);
+      //LOGD("size_value: %d", size_value);
       for (int j=0;j<sample_count; j++){
         sample_total = 0.0f;
         for (int i=0; i<size_value; i++){
