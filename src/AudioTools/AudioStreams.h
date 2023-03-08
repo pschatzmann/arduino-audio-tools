@@ -1243,13 +1243,13 @@ class InputMixer : public AudioStream {
         LOGW("readBytes: %d",(int)len);
         return 0;
       }
-      LOGD("readBytes: %d",(int)len);
       // result_len must be full frames
       int result_len = MIN(available(), len) * frame_size / frame_size;
-      if (result_len==0){
+      if (result_len<4){
         delay(COPY_DELAY_ON_NODATA);
         return 0;
       }
+      LOGD("readBytes: %d",(int)len);
       int sample_count = result_len / sizeof(T);
       LOGD("sample_count: %d", sample_count);
       T *p_data = (T*) data;
@@ -1268,16 +1268,17 @@ class InputMixer : public AudioStream {
       return result_len;
     }
 
-    /// Provides the available bytes from the first stream with data
-    int available()  override {
-      int result = 0;
-      for (int j=0;j<size();j++){
-        result = streams[j]->available();
-        if (result>0) 
-          break;
-      }
-      return result;
-    }
+    // Commented out because URLStream returns 0 or 1 most of the time
+    // /// Provides the available bytes from the first stream with data
+    // int available()  override {
+    //   int result = 1024;
+    //   for (int j=0;j<size();j++){
+    //     result = streams[j]->available();
+    //     if (result>0) 
+    //       break;
+    //   }
+    //   return result;
+    // }
 
   protected:
     Vector<Stream*> streams{10};
