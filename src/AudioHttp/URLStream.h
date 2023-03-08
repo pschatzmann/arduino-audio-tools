@@ -98,14 +98,20 @@ class URLStream : public AbstractURLStream {
 
         virtual int available() override {
             if (!active || !request) return 0;
-            return request.available();
+            int result = request.available();
+            LOGD("available: %d", result);
+            return result;
         }
 
         virtual size_t readBytes(uint8_t *buffer, size_t length) override {
             if (!active || !request) return 0;
 
-            size_t read = request.read((uint8_t*)&buffer[0], length);
+            int read = request.read((uint8_t*)&buffer[0], length);
+            if (read<0){
+                read = 0;
+            }
             total_read+=read;
+            LOGD("readBytes %d -> %d", length, read);
             return read;
         }
 
