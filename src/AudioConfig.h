@@ -109,7 +109,7 @@
 #endif
 
 #ifndef COPY_DELAY_ON_NODATA 
-#define COPY_DELAY_ON_NODATA 30
+#define COPY_DELAY_ON_NODATA 10
 #endif
 
 #ifndef COPY_RETRY_LIMIT 
