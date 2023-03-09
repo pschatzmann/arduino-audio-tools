@@ -102,7 +102,7 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
 // Methods which should be suppressed in the documentation
 #ifndef DOXYGEN
 
-  virtual size_t readBytes(char *buffer, size_t length) {
+  virtual size_t readBytes(char *buffer, size_t length) STREAM_READ_OVERRIDE {
     return readBytes((uint8_t *)buffer, length);
   }
 

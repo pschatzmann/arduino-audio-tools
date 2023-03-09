@@ -111,7 +111,7 @@ class URLStream : public AbstractURLStream {
                 read = 0;
             }
             total_read+=read;
-            LOGD("readBytes %d -> %d", length, read);
+            LOGD("readBytes %d -> %d", (int)length, read);
             return read;
         }
 
@@ -191,7 +191,7 @@ class URLStream : public AbstractURLStream {
         char* network=nullptr;
         char* password=nullptr;
         Client *client=nullptr;
-        Client *clientInsecure=nullptr;
+        WiFiClient *clientInsecure=nullptr;
 #ifdef USE_WIFI_CLIENT_SECURE
         WiFiClientSecure *clientSecure=nullptr;
 #endif

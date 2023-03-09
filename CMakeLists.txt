@@ -1,18 +1,20 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.25)
 
 # set the project name
 project(arduino-audio-tools)
 
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0")
 set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -O0")
+add_compile_options(-Wno-deprecated-declarations)
 
 include(FetchContent)
 
 add_library(arduino-audio-tools INTERFACE)
 
+option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
+option(ADD_MINIAUDIO "Add Miniaudio Library" OFF)
 option(ADD_PORTAUDIO "Add Portaudio Library" ON)
 option(ADD_ARDUINO_EMULATOR "Add Arduino Emulator Library" ON)
-#option(BUILD_TESTS "Build all tests automatically" OFF)
 
 
 # make include directory available to calling projects 
@@ -33,7 +35,6 @@ if (ADD_PORTAUDIO)
         FetchContent_Populate(portaudio)
         add_subdirectory(${portaudio_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/portaudio)
     endif()
-    target_compile_options(portaudio PUBLIC -Wno-deprecated-declarations)
 endif()
 
 if (ADD_ARDUINO_EMULATOR)
