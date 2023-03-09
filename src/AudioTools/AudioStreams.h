@@ -23,10 +23,10 @@
 #  define STREAM_WRITE_OVERRIDE 
 #endif
 
-#ifdef ARDUINO
-#  define STREAM_READ_OVERRIDE 
-#else
+#ifdef USE_STREAM_READ_OVERRIDE
 #  define STREAM_READ_OVERRIDE override
+#else
+#  define STREAM_READ_OVERRIDE 
 #endif
 
 namespace audio_tools {

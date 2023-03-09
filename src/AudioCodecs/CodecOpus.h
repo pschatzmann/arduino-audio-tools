@@ -64,7 +64,7 @@ setting the value.
 OPUS_SIGNAL_MUSIC};<br> int inband_fecs[3] = {0, 0, 1};<br> int
 packet_loss_perc[4] = {0, 1, 2, 5};<br> int lsb_depths[2] = {8, 24};<br> int
 prediction_disabled[3] = {0, 0, 1};<br> int use_dtx[2] = {0, 1};<br> int
-frame_sizes_ms_x2[9] = {OPUS_FRAMESIZE_2_5_MS,OPUS_FRAMESIZE_5_MS,OPUS_FRAMESIZE_10_MS,OPUS_FRAMESIZE_20_MS,OPUS_FRAMESIZE_40_MS,OPUS_FRAMESIZE_60_MS,OPUS_FRAMESIZE_80_MS,OPUS_FRAMESIZE_100_MS,OPUS_FRAMESIZE_120_MS}/* x2 to avoid 2.5 ms <br>
+frame_sizes_ms_x2[9] = {OPUS_FRAMESIZE_2_5_MS,OPUS_FRAMESIZE_5_MS,OPUS_FRAMESIZE_10_MS,OPUS_FRAMESIZE_20_MS,OPUS_FRAMESIZE_40_MS,OPUS_FRAMESIZE_60_MS,OPUS_FRAMESIZE_80_MS,OPUS_FRAMESIZE_100_MS,OPUS_FRAMESIZE_120_MS} x2 to avoid 2.5 ms <br>
  * @author Phil Schatzmann
  * @copyright GPLv3
 **/
@@ -183,10 +183,10 @@ class OpusAudioDecoder : public AudioDecoder {
     cfg.bits_per_sample = from.bits_per_sample;
   }
 
-  size_t write(const void *in_ptr, size_t in_size) {
+  size_t write(const void *in_ptr, size_t in_size) override {
     if (!active || p_print == nullptr) return 0;
     // decode data
-    LOGD("opus_decode - bytes: %d", in_size);
+    LOGD("opus_decode - bytes: %d", (int)in_size);
     int in_band_forware_error_correction = 0;
     int out_samples = opus_decode(
         dec, (uint8_t *)in_ptr, in_size, (opus_int16 *)outbuf.data(),
@@ -274,7 +274,7 @@ class OpusAudioEncoder : public AudioEncoder {
   }
 
   /// Writes PCM data to be encoded as Opus
-  size_t write(const void *in_ptr, size_t in_size) {
+  size_t write(const void *in_ptr, size_t in_size) override {
     if (!is_open || p_print == nullptr) return 0;
 
     // fill frame

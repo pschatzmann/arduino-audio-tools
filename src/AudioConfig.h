@@ -188,6 +188,7 @@
 #define USE_TIMER
 #define USE_I2S_ANALOG
 #define USE_STREAM_WRITE_OVERRIDE
+#define USE_STREAM_READ_OVERRIDE
 #define USE_TOUCH_READ
 
 #define PWM_FREQENCY 30000
@@ -250,6 +251,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define USE_EFFECTS_SUITE
 #define USE_TIMER
 #define USE_STREAM_WRITE_OVERRIDE
+#define USE_STREAM_READ_OVERRIDE
 
 #define PWM_FREQENCY 30000
 #define PIN_PWM_START 1
@@ -510,6 +512,7 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #  include <WiFiClient.h>
 #  define USE_URL_ARDUINO
 #  define USE_STREAM_WRITE_OVERRIDE
+#  define USE_STREAM_READ_OVERRIDE
 typedef WiFiClient WiFiClientSecure;
 #endif
 

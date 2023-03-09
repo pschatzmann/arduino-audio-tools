@@ -34,7 +34,7 @@ class OggContainerDecoder : public AudioDecoder {
     p_codec = &decoder;
   }
   ~OggContainerDecoder(){
-    if (p_codec!=nullptr) delete p_print;
+    //if (p_codec!=nullptr) delete p_print;
   }
 
   /// Defines the output Stream
@@ -43,7 +43,9 @@ class OggContainerDecoder : public AudioDecoder {
       p_print = &out_stream;
     } else {
       EncodedAudioStream* eas = new EncodedAudioStream();
-      eas->begin(&out_stream, p_codec);
+      eas->setDecoder(p_codec);
+      eas->setOutput(&out_stream);
+      eas->begin();
       p_print = eas;
     }
   }
@@ -102,7 +104,7 @@ class OggContainerDecoder : public AudioDecoder {
   }
 
   virtual size_t write(const void *in_ptr, size_t in_size) override {
-    LOGD("write: %u", in_size);
+    LOGD("write: %d", (int)in_size);
     if (p_print == nullptr) return 0;
 
     // fill buffer
@@ -132,7 +134,7 @@ class OggContainerDecoder : public AudioDecoder {
 
   // Final Stream Callback -> write data to requested output destination
   static size_t ogg_io_read(void *user_handle, void *buf, size_t n) {
-    LOGI("ogg_io_read: %u", n);
+    LOGI("ogg_io_read: %d", (int)n);
     OggContainerDecoder *self = (OggContainerDecoder *)user_handle;
     int len = self->buffer.readArray((uint8_t *)buf, n);
     self->pos += len;
@@ -143,7 +145,7 @@ class OggContainerDecoder : public AudioDecoder {
   // Process full packet
   static int read_packet(OGGZ *oggz, oggz_packet *zp, long serialno,
                          void *user_data) {
-    LOGI("read_packet: %u", zp->op.bytes);
+    LOGI("read_packet: %d", (int) zp->op.bytes);
     OggContainerDecoder *self = (OggContainerDecoder *)user_data;
     ogg_packet *op = &zp->op;
     int result = op->bytes;
@@ -163,14 +165,14 @@ class OggContainerDecoder : public AudioDecoder {
 
 
  static int read_page(OGGZ *oggz, const ogg_page *og, long serialno, void *user_data){
-    LOGI("read_page: %u", og->body_len);
+    LOGI("read_page: %d", (int) og->body_len);
     return og->body_len;
  }
 
   virtual void beginOfSegment(ogg_packet *op) {
     LOGD("bos");
     if (op->bytes >= sizeof(cfg)) {
-      memcpy(&cfg, op->packet, sizeof(cfg));
+      memcpy((void*)&cfg, op->packet, sizeof(cfg));
       cfg.logInfo();
       notify();
     }
@@ -210,7 +212,7 @@ class OggContainerEncoder : public AudioEncoder {
   }
 
   ~OggContainerEncoder(){
-    if (p_codec!=nullptr) delete p_print;
+    //if (p_codec!=nullptr) delete p_print;
   }
 
   /// Defines the output Stream
@@ -219,7 +221,9 @@ class OggContainerEncoder : public AudioEncoder {
       p_print = &out_stream;
     } else {
       EncodedAudioStream* eas = new EncodedAudioStream();
-      eas->begin(&codec_buffer, p_codec);
+      eas->setEncoder(p_codec);
+      eas->setOutput(&codec_buffer);
+      eas->begin();
       p_encoded_audio_stream = eas;
       p_print = &out_stream;
     }

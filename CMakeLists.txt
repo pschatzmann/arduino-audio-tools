@@ -28,6 +28,7 @@ install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/src/" # source directory
 )
 
 if (ADD_PORTAUDIO)
+    add_compile_options(-DIS_DESKTOP)
     # Add Portaduio for desktop build
     FetchContent_Declare(portaudio GIT_REPOSITORY "https://github.com/PortAudio/portaudio.git" GIT_TAG v19.7.0 )
     FetchContent_GetProperties(portaudio)
