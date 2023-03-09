@@ -1246,7 +1246,7 @@ class InputMixer : public AudioStream {
         return 0;
       }
       // result_len must be full frames
-
+      
       int result_len = len * frame_size / frame_size;
       // replace sample based with vector based implementation
       //readBytesSamples((T*)data, result_len));
