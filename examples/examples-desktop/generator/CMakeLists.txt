@@ -6,8 +6,6 @@ set (CMAKE_CXX_STANDARD 11)
 set (DCMAKE_CXX_FLAGS "-Werror")
 
 include(FetchContent)
-option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
-
 
 # Build with arduino-audio-tools
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)

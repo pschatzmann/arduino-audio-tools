@@ -11,6 +11,7 @@ namespace audio_tools {
 
 /**
  * @brief PortAudio information
+ * 
  */
 class PortAudioConfig : public AudioBaseInfo {
     public:
