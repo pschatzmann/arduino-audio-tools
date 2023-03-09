@@ -102,7 +102,7 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
 // Methods which should be suppressed in the documentation
 #ifndef DOXYGEN
 
-  virtual size_t readBytes(char *buffer, size_t length) STREAM_READ_OVERRIDE {
+  virtual size_t readBytes(char *buffer, size_t length) {
     return readBytes((uint8_t *)buffer, length);
   }
 
@@ -1198,7 +1198,7 @@ class InputMixer : public AudioStream {
     InputMixer() = default;
 
     /// Adds a new input stream
-    void add(Stream &in, float weight=1.0){
+    void add(Stream &in, int weight=100){
       streams.push_back(&in);
       weights.push_back(weight);
       total_weights += weight;
@@ -1211,11 +1211,11 @@ class InputMixer : public AudioStream {
   	  return frame_size>0;
     }
 
-    /// Defines a new weight for the indicated channel: If you set it to 0 it is muted.
-    void setWeight(int channel, float weight){
+    /// Defines a new weight for the indicated channel: If you set it to 0 it is muted. We recommend to use values between 1 and 100
+    void setWeight(int channel, int weight){
       if (channel<size()){
         weights[channel] = weight;
-        float total = 0;
+        int total = 0;
         for (int j=0;j<weights.size();j++){
           total += weights[j];
         }
@@ -1229,6 +1229,8 @@ class InputMixer : public AudioStream {
     void end() override {
       streams.clear();
       weights.clear();
+      result_vect.clear();
+      current_vect.clear();
       total_weights = 0.0;
     }
 
@@ -1244,24 +1246,11 @@ class InputMixer : public AudioStream {
         return 0;
       }
       // result_len must be full frames
-      int result_len = len * frame_size / frame_size;
-      //int result_len = MIN(available(), len) * frame_size / frame_size;
-      //LOGD("readBytes: %d",(int)len);
-      int sample_count = result_len / sizeof(T);
-      //LOGD("sample_count: %d", sample_count);
-      T *p_data = (T*) data;
-      float sample_total = 0.0f;
-      int size_value = size();
-      //LOGD("size_value: %d", size_value);
-      for (int j=0;j<sample_count; j++){
-        sample_total = 0.0f;
-        for (int i=0; i<size_value; i++){
-          T sample = readSample<T>(streams[i]);
-          sample_total += weights[i] * sample / total_weights ;          
-        }
-        p_data[j] = sample_total;
-      }
 
+      int result_len = len * frame_size / frame_size;
+      // replace sample based with vector based implementation
+      //readBytesSamples((T*)data, result_len));
+      readBytesVector((T*)data, result_len);
       return result_len;
     }
 
@@ -1279,9 +1268,60 @@ class InputMixer : public AudioStream {
 
   protected:
     Vector<Stream*> streams{10};
-    Vector<float> weights{10}; 
-    float total_weights = 0.0;
+    Vector<int> weights{10}; 
+    int total_weights = 0;
     int frame_size = 4;
+
+    Vector<int> result_vect;
+    Vector<T> current_vect;
+
+    /// mixing using a vector of samples
+    void readBytesVector(T* p_data, int byteCount) {
+      int samples = byteCount / sizeof(T);
+      result_vect.resize(samples);
+      current_vect.resize(samples);
+      int stream_count = size();
+      resultClear();
+      for (int j=0;j<stream_count;j++){
+        readSamples(streams[j],current_vect.data(), samples);
+        float fact = static_cast<float>(weights[j]) / total_weights;
+        resultAdd(fact);
+      }
+      // copy result
+      for (int j=0;j<samples;j++){
+        p_data[j] = result_vect[j];
+      }
+    }
+
+    void resultAdd(float fact){
+      for (int j=0;j<current_vect.size();j++){
+        current_vect[j]*=fact;
+        result_vect[j] += current_vect[j];
+      }
+    }
+
+    void resultClear(){
+      memset(result_vect.data(), 0, sizeof(int)*result_vect.size());
+    }
+
+
+    // mixing using individual samples
+    // void readBytesSamples(T* p_data, int result_len) {
+    //     //int result_len = MIN(available(), len) * frame_size / frame_size;
+    //   //LOGD("readBytes: %d",(int)len);
+    //   int sample_count = result_len / sizeof(T);
+    //   int sample_total = 0;
+    //   int size_value = size();
+    //   //LOGD("size_value: %d", size_value);
+    //   for (int j=0;j<sample_count; j++){
+    //     sample_total = 0.0f;
+    //     for (int i=0; i<size_value; i++){
+    //       T sample = readSample<T>(streams[i]);
+    //       sample_total += weights[i] * sample / total_weights ;          
+    //     }
+    //     p_data[j] = sample_total;
+    //   }
+    // }
 
 };
 

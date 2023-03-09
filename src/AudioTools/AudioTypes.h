@@ -219,6 +219,24 @@ T readSample(Stream* p_stream){
   return result;
 }
 
+/// guaranteed to return the requested data
+template<typename T>
+size_t  readSamples(Stream* p_stream, T* data, int samples){
+  T result=0;
+  uint8_t *p_result = (uint8_t*) data;
+  int open = samples*sizeof(T);
+  int total = 0;
+  // copy missing data
+  while (open>0){
+    int read = p_stream->readBytes(p_result+total, open);
+    open -= read;
+    total += read;
+  }
+  return samples;
+}
+
+
+
 /// @brief  Similar to Arduino map function but using floats
 /// @param x 
 /// @param in_min 
