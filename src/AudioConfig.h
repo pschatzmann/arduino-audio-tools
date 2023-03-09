@@ -14,6 +14,7 @@
 #  include "AudioLibs/NoArduino.h"
 #else 
 #  include "AudioLibs/NoArduino.h"
+#  define IS_JUPYTER
 #endif
 #include <string.h>
 #include <stdint.h>
@@ -517,8 +518,13 @@ typedef WiFiClient WiFiClientSecure;
 #endif
 
 #ifndef ARDUINO
-#define USE_STREAM_WRITE_OVERRIDE
+#  define USE_STREAM_WRITE_OVERRIDE
 #endif
+
+#ifdef IS_JUPYTER
+#  define USE_STREAM_READ_OVERRIDE
+#endif
+
 
 #if USE_INLINE_VARS && !defined(INGNORE_INLINE_VARS)
 #  define INLINE_VAR inline 
