@@ -63,7 +63,7 @@ class OpusOggDecoder : public OggContainerDecoder {
   OpusAudioDecoder dec;
   //EncodedAudioStream opus{(Print *)nullptr, &dec};
 
-  virtual void beginOfSegment(ogg_packet *op) {
+  virtual void beginOfSegment(ogg_packet *op) override {
     LOGD("bos");
     if (op->packet==nullptr) return;
     if (strncmp("OpusHead", (char *)op->packet, 8) == 0) {

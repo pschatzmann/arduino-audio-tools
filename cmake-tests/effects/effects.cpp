@@ -12,7 +12,7 @@ ADSRGain adsr(0.0001,0.0001, 0.9 , 0.0002);
 GeneratedSoundStream<int16_t> in(effects); 
 StreamCopy copier(out, in); 
 uint64_t timeout=0;
-int freq = N_C4;
+float freq = N_C4;
 
 
 void setup() {
