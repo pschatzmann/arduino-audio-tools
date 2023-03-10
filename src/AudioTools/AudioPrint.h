@@ -645,12 +645,12 @@ class VolumePrint : public AudioPrint {
             return size;
         }
 
-        /// Determines the volume (the range depends on the bits_per_sample)
+        /// Determines the volume (max amplitude). The range depends on the bits_per_sample.
         float volume() {
             return f_volume;
         }
 
-        /// Determines the volume for the indicated channel
+        /// Determines the volume for the indicated channel. You must call the begin method to define the number of channels
         float volume(int channel) {
             if (volumes.size()==0){
                 LOGE("begin not called!");
