@@ -633,10 +633,7 @@ class VolumePrint : public AudioPrint {
         }
 
         size_t write(const uint8_t *buffer, size_t size){
-            f_volume_tmp = 0;
-            for (int j=0;j<info.channels;j++){
-                volumes_tmp[j]=0;
-            }
+            clear();
             switch(info.bits_per_sample){
                 case 16: {
                         int16_t *buffer16 = (int16_t*)buffer;
@@ -673,6 +670,14 @@ class VolumePrint : public AudioPrint {
         /// Determines the volume for the indicated channel
         float volume(int channel) {
             return channel<info.channels ? volumes[channel]:0.0;
+        }
+
+        /// Resets the actual volume
+        void clear() {
+            f_volume_tmp = 0;
+            for (int j=0;j<info.channels;j++){
+                volumes_tmp[j]=0;
+            }
         }
 
     protected:
