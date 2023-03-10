@@ -612,12 +612,6 @@ class OutputMixer : public Print {
  */
 class VolumePrint : public AudioPrint {
     public:
-        VolumePrint() = default;
-
-        ~VolumePrint() {
-            if (volumes!=nullptr) delete volumes;
-            if (volumes_tmp!=nullptr) delete volumes_tmp;
-        }
      
         bool begin(AudioBaseInfo info){
             setAudioInfo(info);
@@ -626,37 +620,26 @@ class VolumePrint : public AudioPrint {
 
         void setAudioInfo(AudioBaseInfo info){
             this->info = info;
-            if (info.channels){
-                volumes = new float[info.channels];
-                volumes_tmp = new float[info.channels];
+            if (info.channels>0){
+                volumes.resize(info.channels);
+                volumes_tmp.resize(info.channels);
             }
         }
 
         size_t write(const uint8_t *buffer, size_t size){
             clear();
             switch(info.bits_per_sample){
-                case 16: {
-                        int16_t *buffer16 = (int16_t*)buffer;
-                        int samples16 = size/2;
-                        for (int j=0;j<samples16;j++){
-                            float tmp = static_cast<float>(abs(buffer16[j]));
-                            updateVolume(tmp,j);
-                        }
-                        commit();
-                    } break;
-                case 32: {
-                        int32_t *buffer32 = (int32_t*)buffer;
-                        int samples32 = size/4;
-                        for (int j=0;j<samples32;j++){
-                            float tmp = static_cast<float>(abs(buffer32[j]))/samples32;
-                            updateVolume(tmp,j);
-                        }
-                        commit();
-                    }break;
-
+                case 16: 
+                    updateVolumes<int16_t>(buffer, size); 
+                    break;
+                case 24: 
+                    updateVolumes<int24_t>(buffer, size); 
+                    break;
+                case 32: 
+                    updateVolumes<int32_t>(buffer, size); 
+                    break;
                 default:
                     LOGE("Unsupported bits_per_sample: %d", info.bits_per_sample);
-                    f_volume = 0;
                     break;
             }
             return size;
@@ -669,7 +652,15 @@ class VolumePrint : public AudioPrint {
 
         /// Determines the volume for the indicated channel
         float volume(int channel) {
-            return channel<info.channels ? volumes[channel]:0.0;
+            if (volumes.size()==0){
+                LOGE("begin not called!");
+                return 0.0f;
+            }
+            if (channel >= volumes.size()){
+                LOGE("invalid channel %d", channel);
+                return 0.0f;
+            }
+            return volumes[channel];
         }
 
         /// Resets the actual volume
@@ -684,14 +675,25 @@ class VolumePrint : public AudioPrint {
         AudioBaseInfo info;
         float f_volume_tmp = 0;
         float f_volume = 0;
-        float *volumes=nullptr;
-        float *volumes_tmp=nullptr;
+        Vector<float> volumes{0};
+        Vector<float> volumes_tmp{0};
+
+        template<typename T>
+        void updateVolumes(const uint8_t *buffer, size_t size){
+            T *bufferT = (T*)buffer;
+            int samplesCount = size/sizeof(T);
+            for (int j=0;j<samplesCount;j++){
+                float tmp = static_cast<float>(abs(bufferT[j]));
+                updateVolume(tmp,j);
+            }
+            commit();
+        }
 
         void updateVolume(float tmp, int j) {
             if (tmp>f_volume){
                 f_volume_tmp = tmp;
             }
-            if (volumes_tmp!=nullptr && tmp>volumes_tmp[j%info.channels]){
+            if (volumes_tmp.size()>0 && info.channels>0){
                 volumes_tmp[j%info.channels] = tmp;
             }
         }
