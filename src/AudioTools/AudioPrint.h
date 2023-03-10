@@ -633,6 +633,7 @@ class VolumePrint : public AudioPrint {
         }
 
         size_t write(const uint8_t *buffer, size_t size){
+            f_volume_tmp = 0;
             for (int j=0;j<info.channels;j++){
                 volumes_tmp[j]=0;
             }
