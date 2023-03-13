@@ -265,9 +265,16 @@ class HexDumpStream : public AudioPrint {
  */
 class AdapterAudioStreamToAudioPrint : public AudioPrint {
     public: 
+        AdapterAudioStreamToAudioPrint() = default;
+
         AdapterAudioStreamToAudioPrint(AudioStream &stream){
+            setStream(stream);
+        }
+
+        void setStream(AudioStream &stream){
             p_stream = &stream;
         }
+
         void setAudioInfo(AudioBaseInfo info){
             p_stream->setAudioInfo(info);
         }
