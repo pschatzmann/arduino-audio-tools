@@ -251,6 +251,11 @@ class SBCEncoder : public AudioEncoder {
     return in_size;
   }
 
+  /// Provides the frame length in bytes
+  int frameLength() {
+    return sbc_get_frame_length(&sbc);
+  }
+
  protected:
   AudioBaseInfo info;
   Print *p_print = nullptr;
