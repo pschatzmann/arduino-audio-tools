@@ -1416,8 +1416,62 @@ class InputMerge : public AudioStream {
     Vector<float> weights{10}; 
 };
 
-// support legicy VolumeOutput
-//typedef VolumeStream VolumeOutput;
+
+/**
+ * @brief CallbackStream: A Stream that allows to register callback methods for accessing and providing data
+ * @ingroup io
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class CallbackStream : public AudioStream {
+  public: 
+    CallbackStream() = default;
+
+    CallbackStream(size_t (*cb_read)(uint8_t* data, size_t len), size_t (*cb_write)(const uint8_t* data, size_t len)) {
+      setWriteCallback(cb_write);
+      setReadCallback(cb_read);
+    }
+
+    void setWriteCallback(size_t (*cb_write)(const uint8_t* data, size_t len)){
+      this->cb_write = cb_write;
+    }
+
+    void setReadCallback(size_t (*cb_read)(uint8_t* data, size_t len)){
+      this->cb_read = cb_read;
+    }
+
+    virtual bool begin(AudioBaseInfo info) {
+  	  setAudioInfo(info);
+  	  return begin();
+    }
+
+    virtual bool begin() {
+      active = true;
+      return true;
+    }
+    void end() { active = false;}
+
+    size_t readBytes(uint8_t* data, size_t len) override {
+      if (!active) return 0;
+      if (cb_read){
+        return cb_read(data, len);
+      }
+      return 0;
+    }
+
+    size_t write(const uint8_t* data, size_t len) override {
+      if (!active) return 0;
+      if (cb_write){
+        return cb_write(data, len);
+      }
+      return 0;
+    }
+
+  protected:
+    bool active=true;
+    size_t (*cb_write)(const uint8_t* data, size_t len) = nullptr;
+    size_t (*cb_read)(uint8_t* data, size_t len) = nullptr;
+};
 
 /**
  * @brief  Stream to which we can apply Filters for each channel. The filter 
