@@ -46,7 +46,7 @@ class VolumeStream : public AudioStream {
 
         /// Constructor which assigns Stream input or output
         VolumeStream(Stream &in) {
-            setTarget(in);
+            setStream(in);
         }
 
         /// Constructor which assigns Print output
@@ -59,15 +59,23 @@ class VolumeStream : public AudioStream {
         /// Constructor which assigns Stream input or output
         VolumeStream(AudioStream &io) {
             Stream *p_stream = &io;
-            setTarget(*p_stream);
+            setStream(*p_stream);
             p_notify = (AudioBaseInfoDependent *)&io;
         }
 
+        /// Defines/Changes the output target
         void setTarget(Print &out){
             p_out = &out;
         }
-        
+
+        /// same as setStream        
         void setTarget(Stream &in){
+            p_in = &in;
+            p_out = p_in;
+        }
+
+        /// Defines/Changes the input & output
+        void setStream(Stream &in){
             p_in = &in;
             p_out = p_in;
         }
