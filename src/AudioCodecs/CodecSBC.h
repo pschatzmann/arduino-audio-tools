@@ -12,11 +12,11 @@
 #include "sbc.h"
 #include "sbc/formats.h"
 
-/** 
+/**
  * @defgroup codec-sbc SBC
  * @ingroup codecs
- * @brief Codec SBC   
-**/
+ * @brief Codec SBC
+ **/
 
 namespace audio_tools {
 
@@ -29,15 +29,17 @@ namespace audio_tools {
  * @copyright GPLv3
  */
 class SBCDecoder : public AudioDecoder {
- public:
+public:
   SBCDecoder(int bufferSize = 8192) {
     result_buffer = new uint8_t[bufferSize];
     result_buffer_size = bufferSize;
   }
 
   ~SBCDecoder() {
-    if (result_buffer != nullptr) delete[] result_buffer;
-    if (input_buffer != nullptr) delete[] input_buffer;
+    if (result_buffer != nullptr)
+      delete[] result_buffer;
+    if (input_buffer != nullptr)
+      delete[] input_buffer;
   }
 
   virtual AudioBaseInfo audioInfo() { return info; }
@@ -83,7 +85,7 @@ class SBCDecoder : public AudioDecoder {
       }
     }
 
-    if (!is_first){
+    if (!is_first) {
       for (int j = 0; j < count; j++) {
         processByte(start[j]);
       }
@@ -92,7 +94,13 @@ class SBCDecoder : public AudioDecoder {
     return length;
   }
 
- protected:
+  /// Provides the compressed length in bytes (after encoding)
+  int frameLength() { return sbc_get_frame_length(&sbc); }
+
+  // Provides the uncompressed length (of the PCM data) in bytes
+  int codeSize() { return sbc_get_codesize(&sbc); }
+
+protected:
   Print *p_print = nullptr;
   AudioBaseInfo info;
   AudioBaseInfoDependent *p_notify = nullptr;
@@ -111,22 +119,22 @@ class SBCDecoder : public AudioDecoder {
     info.channels = sbc.mode == SBC_MODE_MONO ? 1 : 2;
     LOGI("channels: %d", info.channels);
     switch (sbc.frequency) {
-      case SBC_FREQ_16000:
-        info.sample_rate = 16000;
-        break;
-      case SBC_FREQ_32000:
-        info.sample_rate = 32000;
-        break;
-      case SBC_FREQ_44100:
-        info.sample_rate = 44100;
-        break;
-      case SBC_FREQ_48000:
-        info.sample_rate = 48000;
-        break;
-      default:
-        LOGE("Unsupported sample rate");
-        info.sample_rate = 0;
-        break;
+    case SBC_FREQ_16000:
+      info.sample_rate = 16000;
+      break;
+    case SBC_FREQ_32000:
+      info.sample_rate = 32000;
+      break;
+    case SBC_FREQ_44100:
+      info.sample_rate = 44100;
+      break;
+    case SBC_FREQ_48000:
+      info.sample_rate = 48000;
+      break;
+    default:
+      LOGE("Unsupported sample rate");
+      info.sample_rate = 0;
+      break;
     }
     LOGI("sample_rate: %d", info.sample_rate);
     if (p_notify != nullptr) {
@@ -134,15 +142,13 @@ class SBCDecoder : public AudioDecoder {
     }
   }
 
-  bool isValidFrameLen(int len){
-    return len > 0 && len < 256;
-  }
+  bool isValidFrameLen(int len) { return len > 0 && len < 256; }
 
   /// Determines the framelen
   int firstWrite(const void *data, size_t length) {
     size_t result_len = 0;
     int frame_len = sbc_parse(&sbc, data, length);
-    if (isValidFrameLen(frame_len)){
+    if (isValidFrameLen(frame_len)) {
 
       // setup audio info
       setupAudioInfo();
@@ -156,7 +162,8 @@ class SBCDecoder : public AudioDecoder {
 
   void setupInputBuffer(int len) {
     LOGI("input_buffer: %d", len);
-    if (input_buffer != nullptr) delete[] input_buffer;
+    if (input_buffer != nullptr)
+      delete[] input_buffer;
     input_buffer = new uint8_t[len];
   }
 
@@ -187,22 +194,22 @@ class SBCDecoder : public AudioDecoder {
  * @copyright GPLv3
  */
 class SBCEncoder : public AudioEncoder {
- public:
-  SBCEncoder(int resultBufferSize = 1024, int subbands = SBC_SB_8,
-             int blocks = 16, int bitpool = 32,
+public:
+  SBCEncoder(int subbands = SBC_SB_8, int blocks = 16, int bitpool = 32,
              int snr = SBC_AM_LOUDNESS) {
     this->subbands = subbands;
     this->blocks = blocks;
     this->bitpool = bitpool;
     this->snr = snr;
-    this->result_buffer_size = resultBufferSize;
-    result_buffer = new uint8_t[resultBufferSize];
   }
 
-  ~SBCEncoder() {
-    if (result_buffer != nullptr) delete[] result_buffer;
-    if (buffer != nullptr) delete[] buffer;
-  }
+  void setSubbands(int subbands) { this->subbands = subbands; }
+
+  void setBlocks(int blocks) { this->blocks = blocks; }
+
+  void setBitpool(int bitpool) { this->bitpool = bitpool; }
+
+  void setSnr(int snr) { this->snr = snr; }
 
   void begin(AudioBaseInfo bi) {
     setAudioInfo(bi);
@@ -213,12 +220,9 @@ class SBCEncoder : public AudioEncoder {
     TRACEI();
     is_first = true;
     is_active = setup();
-    int codesize = sbc_get_codesize(&sbc);
-    if (codesize != current_codesize) {
-      if (buffer != nullptr) delete[] buffer;
-      buffer = new uint8_t[codesize];
-      current_codesize = codesize;
-    }
+    current_codesize = codeSize();
+    buffer.resize(current_codesize);
+    result_buffer.resize(frameLength());
   }
 
   virtual void end() {
@@ -251,23 +255,22 @@ class SBCEncoder : public AudioEncoder {
     return in_size;
   }
 
-  /// Provides the frame length in bytes
-  int frameLength() {
-    return sbc_get_frame_length(&sbc);
-  }
+  /// Provides the compressed length in bytes (after encoding)
+  int frameLength() { return sbc_get_frame_length(&sbc); }
 
- protected:
+  // Provides the uncompressed length (of the PCM data) in bytes
+  int codeSize() { return sbc_get_codesize(&sbc); }
+
+protected:
   AudioBaseInfo info;
   Print *p_print = nullptr;
   sbc_t sbc;
   bool is_first = true;
   bool is_active = false;
   int current_codesize = 0;
-  uint8_t *buffer = nullptr;
   int buffer_pos = 0;
-  uint8_t *result_buffer = nullptr;
-  int result_buffer_size = 0;
-  int result_size = 0;
+  Vector<uint8_t> buffer{0};
+  Vector<uint8_t> result_buffer{0};
   int subbands = 4;
   int blocks = 4;
   int bitpool = 32;
@@ -278,33 +281,33 @@ class SBCEncoder : public AudioEncoder {
     sbc_init(&sbc, 0L);
 
     switch (info.sample_rate) {
-      case 16000:
-        sbc.frequency = SBC_FREQ_16000;
-        break;
-      case 32000:
-        sbc.frequency = SBC_FREQ_32000;
-        break;
-      case 44100:
-        sbc.frequency = SBC_FREQ_44100;
-        break;
-      case 48000:
-        sbc.frequency = SBC_FREQ_48000;
-        break;
-      default:
-        LOGE("Invalid sample_rate: %d", info.sample_rate);
-        return false;
+    case 16000:
+      sbc.frequency = SBC_FREQ_16000;
+      break;
+    case 32000:
+      sbc.frequency = SBC_FREQ_32000;
+      break;
+    case 44100:
+      sbc.frequency = SBC_FREQ_44100;
+      break;
+    case 48000:
+      sbc.frequency = SBC_FREQ_48000;
+      break;
+    default:
+      LOGE("Invalid sample_rate: %d", info.sample_rate);
+      return false;
     }
 
     switch (info.channels) {
-      case 1:
-        sbc.mode = SBC_MODE_MONO;
-        break;
-      case 2:
-        sbc.mode = SBC_MODE_STEREO;
-        break;
-      default:
-        LOGE("Invalid channels: %d", info.channels);
-        return false;
+    case 1:
+      sbc.mode = SBC_MODE_MONO;
+      break;
+    case 2:
+      sbc.mode = SBC_MODE_STEREO;
+      break;
+    default:
+      LOGE("Invalid channels: %d", info.channels);
+      return false;
     }
 
     sbc.subbands = subbands == 4 ? SBC_SB_4 : SBC_SB_8;
@@ -328,17 +331,14 @@ class SBCEncoder : public AudioEncoder {
       // Encodes ONE input block into ONE output block */
       // ssize_t sbc_encode(sbc_t *sbc, const void *input, size_t input_len,
       // void *output, size_t output_len, ssize_t *written);
-      sbc_encode(&sbc, buffer, current_codesize, result_buffer + result_size,
-                 result_buffer_size - result_size, &written);
-      result_size += written;
-      if (result_size + written >= result_buffer_size) {
-        LOGI("result_size: %d (%d)", result_size, written);
-        p_print->write(result_buffer, result_size);
-        result_size = 0;
-      }
+      sbc_encode(&sbc, &buffer[0], current_codesize, &result_buffer[0],
+                 result_buffer.size(), &written);
+      LOGD("sbc_encode: %d -> %d (buffer: %d))", current_codesize, written,
+           result_buffer.size());
+      p_print->write(&result_buffer[0], written);
       buffer_pos = 0;
     }
   }
 };
 
-}  // namespace audio_tools
+} // namespace audio_tools
