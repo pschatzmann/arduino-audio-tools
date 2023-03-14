@@ -195,21 +195,44 @@ protected:
  */
 class SBCEncoder : public AudioEncoder {
 public:
-  SBCEncoder(int subbands = SBC_SB_8, int blocks = 16, int bitpool = 32,
-             int snr = SBC_AM_LOUDNESS) {
-    this->subbands = subbands;
-    this->blocks = blocks;
-    this->bitpool = bitpool;
-    this->snr = snr;
+  SBCEncoder(int subbands = 8, int blocks = 16, int bitpool = 32,
+             int allocation_method = SBC_AM_LOUDNESS) {
+    setSubbands(subbands);
+    setBlocks(blocks);
+    setBitpool(bitpool);
+    setAllocationMethod(allocation_method);
   }
 
-  void setSubbands(int subbands) { this->subbands = subbands; }
+  /// Use 4 or 8
+  void setSubbands(int subbands) {
+    if (subbands == 8 || subbands == 4) {
+      this->subbands = subbands;
+    } else {
+      LOGE("Invalid subbands: %d - using 8", subbands);
+      this->subbands = 8;
+    }
+  }
 
-  void setBlocks(int blocks) { this->blocks = blocks; }
+  void setBlocks(int blocks) {
+    if (blocks == 16 || blocks == 12 || blocks == 8 || blocks == 4) {
+      this->blocks = blocks;
+    } else {
+      LOGE("Invalid blocks: %d - using 16", blocks);
+      this->blocks = 16;
+    }
+  }
 
   void setBitpool(int bitpool) { this->bitpool = bitpool; }
 
-  void setSnr(int snr) { this->snr = snr; }
+  // Use SBC_AM_LOUDNESS, SBC_AM_SNR
+  void setAllocationMethod(int allocation_method) {
+    if (allocation_method == SBC_AM_LOUDNESS || allocation_method == SBC_AM_SNR) {
+      this->allocation_method = allocation_method;
+    } else {
+      LOGE("Invalid allocation Method: %d - using SBC_AM_LOUDNESS", allocation_method);
+      this->allocation_method = SBC_AM_LOUDNESS;
+    }
+  }
 
   void begin(AudioBaseInfo bi) {
     setAudioInfo(bi);
@@ -274,7 +297,7 @@ protected:
   int subbands = 4;
   int blocks = 4;
   int bitpool = 32;
-  int snr;
+  int allocation_method;
 
   /// Determines audio information and calls sbc_init;
   bool setup() {
@@ -310,16 +333,38 @@ protected:
       return false;
     }
 
-    sbc.subbands = subbands == 4 ? SBC_SB_4 : SBC_SB_8;
-    // sbc.endian = SBC_LE;
+    switch (subbands) {
+    case 4:
+      sbc.subbands = SBC_SB_4;
+      break;
+    case 8:
+      sbc.subbands = SBC_SB_8;
+      break;
+    default:
+      LOGE("Invalid subbands: %d", subbands);
+      return false;
+    }
+
+    switch (blocks) {
+    case 4:
+      sbc.blocks = SBC_BLK_4;
+      break;
+    case 8:
+      sbc.blocks = SBC_BLK_8;
+      break;
+    case 12:
+      sbc.blocks = SBC_BLK_12;
+      break;
+    case 16:
+      sbc.blocks = SBC_BLK_16;
+      break;
+    default:
+      LOGE("Invalid blocks: %d", blocks);
+      return false;
+    }
 
     sbc.bitpool = bitpool;
-    sbc.allocation = snr ? SBC_AM_SNR : SBC_AM_LOUDNESS;
-    sbc.blocks = blocks == 4    ? SBC_BLK_4
-                 : blocks == 8  ? SBC_BLK_8
-                 : blocks == 12 ? SBC_BLK_12
-                                : SBC_BLK_16;
-
+    sbc.allocation = allocation_method;
     return true;
   }
 
