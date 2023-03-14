@@ -217,10 +217,10 @@
 #define URL_CLIENT_TIMEOUT 60000;
 #define URL_HANDSHAKE_TIMEOUT 120000
 
-// Default LED
-#ifndef LED_BUILTIN
-# define LED_BUILTIN 13 // pin number is specific to your esp32 board
-#endif
+// // Default LED
+// #ifndef LED_BUILTIN
+// # define LED_BUILTIN 13 // pin number is specific to your esp32 board
+// #endif
 
 // support for old idf releases
 #if ESP_IDF_VERSION_MAJOR < 4 && !defined(I2S_COMM_FORMAT_STAND_I2S)
@@ -279,10 +279,10 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define URL_CLIENT_TIMEOUT 60000;
 #define URL_HANDSHAKE_TIMEOUT 120000
 
-// Default LED
-#ifndef LED_BUILTIN
-# define LED_BUILTIN 13 // pin number is specific to your esp32 board
-#endif
+// // Default LED
+// #ifndef LED_BUILTIN
+// # define LED_BUILTIN 13 // pin number is specific to your esp32 board
+// #endif
 
 typedef uint32_t eps32_i2s_sample_rate_type;
 
