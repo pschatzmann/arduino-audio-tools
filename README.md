@@ -1,6 +1,6 @@
 # Arduino Audio Tools
 
-Some basic __header-only C++ classes__ that can be used for __Audio Processing__ provided as __Arduino Library__:
+Some basic __header-only C++ classes__ that can be used for __Audio Processing__ provided as __Arduino and cmake C++ Library__:
 
 - We provide different "Audio Sources" and "Audio Sinks" (see next section)
 - Support for different [Encoders](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_audio_encoder.html) and [Decoders](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_audio_decoder.html) for MP3, AAC, WAV, FLAC, etc 
