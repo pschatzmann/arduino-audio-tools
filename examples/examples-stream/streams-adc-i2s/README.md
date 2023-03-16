@@ -14,12 +14,14 @@ Since the ADC via I2S is using the i2s port 0, we use port 1 for the output.
 | GND     |  GND
 | OUT     |  GPIO34
 
-For the input I was using a cjmcu-622 Microphone Sensor.
+For the input I was using a MCP6022 Microphone Sensor.
 Plaese note that the signal that we receive from the ADC needs to be adjusted so that it is oscillating around 0.
+
+![MCP6022](https://pschatzmann.github.io/Resources/img/mcp6022.jpeg)
+
 
 ### External DAC:
 
-![DAC](https://pschatzmann.github.io/Resources/img/dac.jpeg)
 
 For my tests I am using the 24-bit PCM5102 PCM5102A Stereo DAC Digital-to-analog Converter PLL Voice Module pHAT
 
@@ -41,3 +43,4 @@ XMT  |	3V (or another GPIO PIN which is set to high)
 - FMT - Audio format selection : I2S (Low) / Left justified (High)
 - XMT - Soft mute control(1): Soft mute (Low) / soft un-mute (High)
 
+![DAC](https://pschatzmann.github.io/Resources/img/dac.jpeg)
