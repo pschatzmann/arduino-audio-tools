@@ -18,5 +18,7 @@ Here is the result on the Arduino Serial Plotter:
 | GND     |  GND
 | OUT     |  GPIO34
 
-For the input I was using a cjmcu-622 Microphone Sensor.
+For the input I was using a MCP6022 Microphone Sensor.
 Plaese note that the signal that we receive from the ADC needs to be adjusted so that it is oscillating around 0.
+
+![MCP6022](https://pschatzmann.github.io/Resources/img/mcp6022.jpeg)
