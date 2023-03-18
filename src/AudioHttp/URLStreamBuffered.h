@@ -140,31 +140,29 @@ class URLStreamBuffered : public AbstractURLStream {
     public:
         URLStreamBuffered(int readBufferSize=DEFAULT_BUFFER_SIZE){
             TRACED();
-            p_urlStream = new URLStream(readBufferSize);
-            taskStream.setInput(*p_urlStream);
+            urlStream.setReadBufferSize(readBufferSize);
+            taskStream.setInput(urlStream);
         }
 
         URLStreamBuffered(Client &clientPar, int readBufferSize=DEFAULT_BUFFER_SIZE){
             TRACED();
-            p_urlStream = new URLStream(clientPar, readBufferSize);
-            taskStream.setInput(*p_urlStream);
+            urlStream.setReadBufferSize(readBufferSize);
+            setClient(clientPar);
+            taskStream.setInput(urlStream);
         }
 
         URLStreamBuffered(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE) {
             TRACED();
-            p_urlStream = new URLStream(network, password, readBufferSize);
-            taskStream.setInput(*p_urlStream);
-        }
-
-        ~URLStreamBuffered(){
-            TRACED();
-            if (p_urlStream!=nullptr) delete p_urlStream;
+            urlStream.setReadBufferSize(readBufferSize);
+            setSSID(network);
+            setPassword(password);
+            taskStream.setInput(urlStream);
         }
 
         bool begin(const char* urlStr, const char* acceptMime=nullptr, MethodID action=GET,  const char* reqMime="", const char*reqData="") {
             TRACED();
             // start real stream
-            bool result = p_urlStream->begin(urlStr, acceptMime, action,reqMime, reqData );
+            bool result = urlStream.begin(urlStr, acceptMime, action,reqMime, reqData );
             // start buffer task
             taskStream.begin();
             return result;
@@ -194,18 +192,32 @@ class URLStreamBuffered : public AbstractURLStream {
         void end(){
             TRACED();
             taskStream.end();
-            p_urlStream->end();
+            urlStream.end();
         }
 
         /// provides access to the HttpRequest
         HttpRequest &httpRequest(){
-            return p_urlStream->httpRequest();
+            return urlStream.httpRequest();
+        }
+
+        /// (Re-)defines the client
+        void setClient(Client &client) override {
+            urlStream.setClient(client);
+        }
+
+        /// Sets the ssid that will be used for logging in (when calling begin)
+        void setSSID(const char* ssid) override{
+            urlStream.setSSID(ssid);
+        }
+
+        /// Sets the password that will be used for logging in (when calling begin)
+        void setPassword(const char* password) override {
+            urlStream.setPassword(password);
         }
 
     protected:
         BufferedTaskStream taskStream;
-        URLStream* p_urlStream=nullptr;
-
+        URLStream urlStream;
 };
 
 

@@ -21,36 +21,34 @@ class ICYStreamBuffered : public AbstractURLStream {
 
         ICYStreamBuffered(int readBufferSize=DEFAULT_BUFFER_SIZE){
             TRACEI();
-            p_urlStream = new ICYStream(readBufferSize);
-            taskStream.setInput(*p_urlStream);
+            urlStream.setReadBufferSize(readBufferSize);
+            taskStream.setInput(urlStream);
         }
         
         ICYStreamBuffered(Client &clientPar, int readBufferSize=DEFAULT_BUFFER_SIZE){
             TRACEI();
-            p_urlStream = new ICYStream(clientPar, readBufferSize);
-            taskStream.setInput(*p_urlStream);
+            urlStream.setReadBufferSize(readBufferSize);
+            setClient(clientPar);
+            taskStream.setInput(urlStream);
         }
 
         ICYStreamBuffered(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE) {
             TRACEI();
-            p_urlStream = new ICYStream(network, password, readBufferSize);
-            taskStream.setInput(*p_urlStream);
-        }
-
-        ~ICYStreamBuffered(){
-            TRACEI();
-            if (p_urlStream!=nullptr) delete p_urlStream;
+            urlStream.setReadBufferSize(readBufferSize);
+            setSSID(network);
+            setPassword(password);
+            taskStream.setInput(urlStream);
         }
 
         virtual bool setMetadataCallback(void (*fn)(MetaDataType info, const char* str, int len)) override {
             TRACED();
-            return p_urlStream->setMetadataCallback(fn);
+            return urlStream.setMetadataCallback(fn);
         }
 
         virtual bool begin(const char* urlStr, const char* acceptMime=nullptr, MethodID action=GET,  const char* reqMime="", const char*reqData="") override {
             TRACED();
             // start real stream
-            bool result = p_urlStream->begin(urlStr, acceptMime, action, reqMime, reqData);
+            bool result = urlStream.begin(urlStr, acceptMime, action, reqMime, reqData);
             // start reader task
             taskStream.begin();
             return result;
@@ -59,7 +57,7 @@ class ICYStreamBuffered : public AbstractURLStream {
         virtual void end() override{
             TRACED();
             taskStream.end();
-            p_urlStream->end();
+            urlStream.end();
         }
 
         virtual int available() override {
@@ -86,12 +84,28 @@ class ICYStreamBuffered : public AbstractURLStream {
 
         /// provides access to the HttpRequest
         virtual HttpRequest &httpRequest() override {
-            return p_urlStream->httpRequest();
+            return urlStream.httpRequest();
         }
+
+        /// (Re-)defines the client
+        void setClient(Client &client) override {
+            urlStream.setClient(client);
+        }
+
+        /// Sets the ssid that will be used for logging in (when calling begin)
+        void setSSID(const char* ssid) override{
+            urlStream.setSSID(ssid);
+        }
+
+        /// Sets the password that will be used for logging in (when calling begin)
+        void setPassword(const char* password) override {
+            urlStream.setPassword(password);
+        }
+
 
     protected:
         BufferedTaskStream taskStream;
-        ICYStream* p_urlStream=nullptr;
+        ICYStream urlStream;
 
 };
 

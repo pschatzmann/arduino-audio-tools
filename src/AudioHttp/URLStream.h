@@ -35,20 +35,20 @@ class URLStream : public AbstractURLStream {
 
         URLStream(int readBufferSize=DEFAULT_BUFFER_SIZE){
             TRACEI();
-            read_buffer_size = readBufferSize;
+            setReadBufferSize(readBufferSize);
         }
 
         URLStream(Client &clientPar, int readBufferSize=DEFAULT_BUFFER_SIZE){
             TRACEI();
-            read_buffer_size = readBufferSize;
+            setReadBufferSize(readBufferSize);
             setClient(clientPar);
         }
 
         URLStream(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE) {
             TRACEI();
-            read_buffer_size = readBufferSize;
-            this->network = (char*)network;
-            this->password = (char*)password;            
+            setReadBufferSize(readBufferSize);
+            setSSID(network);
+            setPassword(password);
         }
 
         ~URLStream(){
@@ -67,18 +67,22 @@ class URLStream : public AbstractURLStream {
         }
 
         /// (Re-)defines the client
-        void setClient(Client &clientPar){
+        void setClient(Client &clientPar) override {
             client = &clientPar;
         }
 
         /// Sets the ssid that will be used for logging in (when calling begin)
-        void setSSID(const char ssid){
+        void setSSID(const char* ssid) override {
             this->network = (char*)network;
         }
 
         /// Sets the password that will be used for logging in (when calling begin)
-        void setPassword(const char password){
+        void setPassword(const char* password) override{
             this->password = (char*)password;            
+        }
+
+        void setReadBufferSize(int readBufferSize) {
+            read_buffer_size = readBufferSize;
         }
 
         virtual bool begin(const char* urlStr, const char* acceptMime=nullptr, MethodID action=GET,  const char* reqMime="", const char*reqData="")  override{
