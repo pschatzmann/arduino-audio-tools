@@ -23,26 +23,21 @@ class ICYStream : public AbstractURLStream {
     public:
         ICYStream(int readBufferSize=DEFAULT_BUFFER_SIZE){
             TRACEI();
-            url = new URLStream(readBufferSize);
-            checkUrl();
+            setReadBufferSize(readBufferSize);
         }
 
         ICYStream(Client &clientPar, int readBufferSize=DEFAULT_BUFFER_SIZE){
             TRACEI();
-            url = new URLStream(clientPar, readBufferSize);
-            checkUrl();
+            setReadBufferSize(readBufferSize);
+            setClient(clientPar);
         }
 
         /// Default constructor
         ICYStream(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE) {
             TRACEI();
-            url = new URLStream(network, password, readBufferSize);
-            checkUrl();
-        }
-
-        ~ICYStream(){
-            TRACEI();
-            if (url!=nullptr) delete url;
+            setReadBufferSize(readBufferSize);
+            setSSID(network);
+            setPassword(password);
         }
 
         /// Defines the meta data callback function
@@ -57,13 +52,13 @@ class ICYStream : public AbstractURLStream {
         virtual bool begin(const char* urlStr, const char* acceptMime=nullptr, MethodID action=GET,  const char* reqMime="", const char*reqData="") override {
             TRACED();
             // accept metadata
-            url->httpRequest().header().put("Icy-MetaData","1");
-            bool result = url->begin(urlStr, acceptMime, action, reqMime, reqData);
+            url.httpRequest().header().put("Icy-MetaData","1");
+            bool result = url.begin(urlStr, acceptMime, action, reqMime, reqData);
 
             if (result) {
                 // setup icy
                 ICYUrlSetup icySetup;
-                int iceMetaint = icySetup.setup(url->httpRequest());
+                int iceMetaint = icySetup.setup(url.httpRequest());
                 // callbacks from http request
                 icySetup.executeCallback(callback);
                 icy.setIcyMetaInt(iceMetaint);
@@ -79,13 +74,13 @@ class ICYStream : public AbstractURLStream {
         /// Ends the processing
         virtual void end() override {
             TRACED();
-            url->end();
+            url.end();
             icy.end();
         }
 
         /// provides the available method from the URLStream
         virtual int available() override  {
-            return url->available();
+            return url.available();
         }
 
         /// reads the audio bytes
@@ -93,7 +88,7 @@ class ICYStream : public AbstractURLStream {
             size_t result = 0;
             if (icy.hasMetaData()){
                 // get data
-                int read = url->readBytes(buffer, len);
+                int read = url.readBytes(buffer, len);
                 // remove metadata from data
                 int pos = 0;
                 for (int j=0; j<read; j++){
@@ -105,7 +100,7 @@ class ICYStream : public AbstractURLStream {
                 result = pos;            
             } else {
                 // fast access if there is no metadata
-                result = url->readBytes(buffer, len);
+                result = url.readBytes(buffer, len);
             }
             LOGD("%s: %zu -> %zu", LOG_METHOD, len, result);
             return result;
@@ -114,11 +109,10 @@ class ICYStream : public AbstractURLStream {
         // Read character and processes using the MetaDataICY state engine
         virtual int read() override {
             int ch = -1;
-            if (url==nullptr) return -1;
 
             // get next data byte 
             do {
-                ch = url->read();
+                ch = url.read();
                 if (ch==-1){
                     break;
                 }
@@ -129,25 +123,38 @@ class ICYStream : public AbstractURLStream {
         }
 
         operator bool() {
-            return *url;
+            return url;
         }
 
         /// provides access to the HttpRequest
         virtual HttpRequest &httpRequest() override {
-            return url->httpRequest();
+            return url.httpRequest();
         }
 
+        void setReadBufferSize(int readBufferSize) {
+            url.setReadBufferSize(readBufferSize);
+        }
+
+        /// (Re-)defines the client
+        void setClient(Client &client) override {
+            url.setClient(client);
+        }
+
+        /// Sets the ssid that will be used for logging in (when calling begin)
+        void setSSID(const char* ssid) override{
+            url.setSSID(ssid);
+        }
+
+        /// Sets the password that will be used for logging in (when calling begin)
+        void setPassword(const char* password) override {
+            url.setPassword(password);
+        }
 
     protected:
-        URLStream *url = nullptr; 
+        URLStream url; 
         MetaDataICY icy; // icy state machine
         void (*callback)(MetaDataType info, const char* str, int len)=nullptr;
 
-        void checkUrl() {
-            if (url==nullptr){
-                LOGE("Not enough memory!");
-            }
-        }
 
 };
 

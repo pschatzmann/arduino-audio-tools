@@ -25,6 +25,15 @@ class AbstractURLStream : public AudioStream  {
             return 0;
         }
 
+        /// (Re-)defines the client
+        virtual void setClient(Client &clientPar) = 0;
+
+        /// Sets the ssid that will be used for logging in (when calling begin)
+        virtual void setSSID(const char* ssid) = 0;
+
+        /// Sets the password that will be used for logging in (when calling begin)
+        virtual void setPassword(const char* password) = 0;
+
 };
 
 }
