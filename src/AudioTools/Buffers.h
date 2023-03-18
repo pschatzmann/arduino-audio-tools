@@ -235,8 +235,6 @@ class RingBuffer : public BaseBuffer<T> {
     reset();
   }
 
-  ~RingBuffer() { delete[] _aucBuffer; }
-
   virtual T read() {
     if (isEmpty()) return -1;
 
@@ -285,20 +283,10 @@ class RingBuffer : public BaseBuffer<T> {
   virtual int availableForWrite() { return (max_size - _numElems); }
 
   // returns the address of the start of the physical read buffer
-  virtual T *address() { return _aucBuffer; }
+  virtual T *address() { return _aucBuffer.data(); }
 
   virtual void resize(int len) {
-    if (this->max_size!=len){
-      if (_aucBuffer != nullptr) {
-        delete[] _aucBuffer;
-      }
-      this->max_size = len;
-      if (len>0){
-        _aucBuffer = new T[max_size];
-        assert(_aucBuffer!=nullptr);
-      }
-      reset();
-    }
+    _aucBuffer.resize(len);
   }
 
   /// Returns the maximum capacity of the buffer
@@ -307,7 +295,7 @@ class RingBuffer : public BaseBuffer<T> {
   }
 
  protected:
-  T *_aucBuffer = nullptr;
+  Vector<T> _aucBuffer;
   int _iHead;
   int _iTail;
   int _numElems;
