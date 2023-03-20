@@ -38,7 +38,7 @@ public:
   virtual void unlock() {}
 };
 
-#if defined(USE_STD_CONCURRENCY) && defined(ARDUINO)
+#if defined(USE_STD_CONCURRENCY) 
 
 /**
  * @brief Mutex implemntation based on std::mutex
