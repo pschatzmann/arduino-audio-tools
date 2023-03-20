@@ -326,7 +326,7 @@ class MemoryStream : public AudioStream {
     if (memoryCanChange()){      
       buffer_size = size;
       switch(memory_type){
-  #ifdef ESP32
+  #if defined(ESP32) && defined(ARDUINO) 
         case PS_RAM:
           buffer = (buffer==nullptr) ? (uint8_t*)ps_calloc(size,1) : (uint8_t*)ps_realloc(buffer, size);
           assert(buffer!=nullptr);

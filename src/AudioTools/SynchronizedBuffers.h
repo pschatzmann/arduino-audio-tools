@@ -1,6 +1,7 @@
 
 #pragma once
 #include "AudioConfig.h"
+#ifdef USE_CONCURRENCY
 #include "AudioTools/Buffers.h"
 #include "AudioTools/AudioLogger.h"
 
@@ -37,7 +38,7 @@ public:
   virtual void unlock() {}
 };
 
-#ifdef USE_STD_CONCURRENCY
+#if defined(USE_STD_CONCURRENCY) && defined(ARDUINO)
 
 /**
  * @brief Mutex implemntation based on std::mutex
@@ -56,7 +57,7 @@ protected:
 
 #endif
 
-#ifdef ESP32
+#if defined(ESP32) 
 
 /**
  * @brief Mutex implemntation using FreeRTOS
@@ -248,7 +249,7 @@ protected:
   Mutex *p_mutex = nullptr;
 };
 
-#ifdef ESP32
+#if defined(ESP32) 
 
 /**
  * @brief NBuffer which uses some RTOS queues to manage the available and filled buffers
@@ -445,4 +446,6 @@ protected:
 #endif // ESP32
 
 } // namespace audio_tools
+
+#endif
 

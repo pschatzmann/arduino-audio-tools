@@ -574,7 +574,7 @@ class OutputMixer : public Print {
         if (buffers[j]!=nullptr){
             delete buffers[j];
         }
-#ifdef ESP32
+#if defined(ESP32) && defined(ARDUINO)
         if (memory_type==PS_RAM && ESP.getFreePsram()>=size_bytes){
             p_memory = ps_malloc(size_bytes);
             LOGI("Buffer %d allocated %d bytes in PS_RAM",j, size_bytes);

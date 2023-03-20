@@ -1,5 +1,5 @@
 #pragma once
-#ifdef ESP32
+#if defined(ESP32) && defined(USE_URL_ARDUINO)
 #include "AudioConfig.h"
 #include "AudioHttp/ICYStream.h"
 

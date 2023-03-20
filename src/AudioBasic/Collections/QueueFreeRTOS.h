@@ -1,5 +1,6 @@
 #pragma once
-#ifdef ESP32
+#include "AudioConfig.h"
+#ifdef USE_CONCURRENCY
 #include "freertos/FreeRTOS.h"
 
 namespace audio_tools {

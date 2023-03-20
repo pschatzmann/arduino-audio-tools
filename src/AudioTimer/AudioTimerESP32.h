@@ -1,6 +1,6 @@
 #pragma once
 
-#ifdef ESP32
+#if defined(ESP32) && defined(ARDUINO)
 #include "AudioTimer/AudioTimerBase.h"
 #include <esp_task_wdt.h>
 

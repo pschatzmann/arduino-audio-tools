@@ -1,6 +1,6 @@
 #pragma once
 
-#ifdef ESP32
+#if defined(ESP32) && !defined(I2S_NEW)
 
 #include "AudioConfig.h"
 #include "AudioI2S/I2SConfig.h"
@@ -330,7 +330,7 @@ class I2SDriverESP32 {
 
     // determines the i2s_format_t
     i2s_mode_t toMode(I2SConfig &cfg) {
-      i2s_mode_t mode;
+      i2s_mode_t mode = (i2s_mode_t) (I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_RX );
       switch (cfg.signal_type){
         case Digital:
           mode = (i2s_mode_t) getModeDigital(cfg);

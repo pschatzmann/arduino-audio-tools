@@ -9,6 +9,7 @@
 #include "AudioTools/AudioStreams.h"
 #include "AudioI2S/I2SConfig.h"
 #include "AudioI2S/I2SESP32.h"
+#include "AudioI2S/I2SESP32-New.h"
 #include "AudioI2S/I2SESP8266.h"
 #include "AudioI2S/I2SSAMD.h"
 #include "AudioI2S/I2SNanoSenseBLE.h"
@@ -30,7 +31,10 @@ namespace audio_tools {
 class I2SStream : public AudioStream {
 
     public:
-        I2SStream(int mute_pin=PIN_I2S_MUTE) {
+        I2SStream() = default;
+
+#ifdef ARDUINO
+        I2SStream(int mute_pin) {
             TRACED();
             this->mute_pin = mute_pin;
             if (mute_pin>0) {
@@ -38,6 +42,7 @@ class I2SStream : public AudioStream {
                 mute(true);
             }
         }
+#endif
 
         /// Provides the default configuration
         I2SConfig defaultConfig(RxTxMode mode=TX_MODE) {
@@ -111,9 +116,11 @@ class I2SStream : public AudioStream {
 
         /// set mute pin on or off
         void mute(bool is_mute){
+#ifdef ARDUINO
             if (mute_pin>0) {
                 digitalWrite(mute_pin, is_mute ? SOFT_MUTE_VALUE : !SOFT_MUTE_VALUE );
             }
+#endif
         }
 
 };
