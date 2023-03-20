@@ -291,7 +291,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #endif
 
 // --- ESP32 ------------
-// as part of the IDF use cmake for the necesseary defines
+// E.g when using the Espressif IDF. Use cmake for the necesseary defines
 #if defined(ESP32_CMAKE)
 
 #include "freertos/FreeRTOS.h"
