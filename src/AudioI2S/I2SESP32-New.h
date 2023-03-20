@@ -99,21 +99,15 @@ public:
 
 protected:
   I2SConfig cfg = defaultConfig(RX_MODE);
-  i2s_port_t i2s_num;
   i2s_std_config_t i2s_config;
   i2s_chan_handle_t tx_chan; // I2S tx channel handler
   i2s_chan_handle_t rx_chan; // I2S rx channel handler
   bool is_started = false;
 
   struct DriverCommon {
-    virtual i2s_chan_config_t getChannelConfig(I2SConfig &cfg) {
-      i2s_chan_config_t x;
-      return x;
-    };
-    virtual bool initChannels(I2SConfig &cfg, i2s_chan_handle_t tx_chan,
-                              i2s_chan_handle_t rx_chan, int txPin, int rxPin) {
-      return false;
-    };
+    virtual i2s_chan_config_t getChannelConfig(I2SConfig &cfg) = 0;
+    virtual bool startChannels(I2SConfig &cfg, i2s_chan_handle_t tx_chan,
+                              i2s_chan_handle_t rx_chan, int txPin, int rxPin) = 0;
   };
 
   struct DriverI2S : public DriverCommon {
@@ -137,6 +131,7 @@ protected:
             (i2s_slot_mode_t)cfg.channels);
       }
       // use default config
+      TRACEE();
       return I2S_STD_PHILIPS_SLOT_DEFAULT_CONFIG(
           (i2s_data_bit_width_t)cfg.bits_per_sample,
           (i2s_slot_mode_t)cfg.channels);
@@ -152,7 +147,7 @@ protected:
       return I2S_STD_CLK_DEFAULT_CONFIG((uint32_t)cfg.sample_rate);
     }
 
-    bool initChannels(I2SConfig &cfg, i2s_chan_handle_t tx_chan,
+    bool startChannels(I2SConfig &cfg, i2s_chan_handle_t tx_chan,
                       i2s_chan_handle_t rx_chan, int txPin, int rxPin) {
       i2s_std_config_t std_cfg = {
           .clk_cfg = getClockConfig(cfg),
@@ -219,7 +214,7 @@ protected:
       return I2S_PDM_RX_CLK_DEFAULT_CONFIG((uint32_t)cfg.sample_rate);
     }
 
-    bool initChannels(I2SConfig &cfg, i2s_chan_handle_t tx_chan,
+    bool startChannels(I2SConfig &cfg, i2s_chan_handle_t tx_chan,
                       i2s_chan_handle_t rx_chan, int txPin, int rxPin) {
 
       if (cfg.rx_tx_mode == TX_MODE) {
@@ -259,6 +254,7 @@ protected:
         }
         return true;
       }
+      TRACEE();
       return false;
     }
   } pdm;
@@ -280,7 +276,7 @@ protected:
   //     return I2S_TDM_CLK_DEFAULT_CONFIG((uint32_t)cfg.sample_rate);
   //   }
 
-  //   bool initChannels(I2SConfig &cfg, i2s_chan_handle_t tx_chan,
+  //   bool startChannels(I2SConfig &cfg, i2s_chan_handle_t tx_chan,
   //                     i2s_chan_handle_t rx_chan, int txPin, int rxPin) {
 
   //     i2s_tdm_config_t tdm_cfg = {
@@ -315,12 +311,11 @@ protected:
   //   }
   // } tdm;
 
-  /// starts the DAC
+  /// starts I2S 
   bool begin(I2SConfig cfg, int txPin, int rxPin) {
     TRACED();
     cfg.logInfo();
     this->cfg = cfg;
-    this->i2s_num = (i2s_port_t)cfg.port_no;
     if (cfg.channels <= 0 || cfg.channels > 2) {
       LOGE("invalid channels: %d", cfg.channels);
       return false;
@@ -334,7 +329,7 @@ protected:
       return false;
     }
 
-    is_started = driver.initChannels(cfg, tx_chan, rx_chan, txPin, rxPin);
+    is_started = driver.startChannels(cfg, tx_chan, rx_chan, txPin, rxPin);
     return is_started;
   }
 
