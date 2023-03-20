@@ -8,7 +8,7 @@
 #include "driver/i2s_std.h"
 #include "driver/i2s_tdm.h"
 #include "esp_system.h"
-#define I2S_PIN_NO_CHANGE I2S_GPIO_UNUSED
+
 namespace audio_tools {
 
 /**
@@ -40,12 +40,12 @@ public:
     this->cfg = cfg;
     switch (cfg.rx_tx_mode) {
     case TX_MODE:
-      return begin(cfg, cfg.pin_data, I2S_PIN_NO_CHANGE);
+      return begin(cfg, cfg.pin_data, I2S_GPIO_UNUSED);
     case RX_MODE:
       // usually we expet cfg.pin_data but if the used assinged rx we might
       // consider this one
-      return begin(cfg, I2S_PIN_NO_CHANGE,
-                   cfg.pin_data != I2S_PIN_NO_CHANGE ? cfg.pin_data
+      return begin(cfg, I2S_GPIO_UNUSED,
+                   cfg.pin_data != I2S_GPIO_UNUSED ? cfg.pin_data
                                                      : cfg.pin_data_rx);
     default:
       return begin(cfg, cfg.pin_data, cfg.pin_data_rx);
