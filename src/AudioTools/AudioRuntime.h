@@ -21,7 +21,7 @@ inline void stop() {
 
 /// Executes heap_caps_check_integrity_all()  @ingroup basic
 inline static void checkMemory(bool memoryCheck=false) {
-    #ifdef ESP32
+    #if defined(ESP32) && defined(ARDUINO)
         assert(heap_caps_check_integrity_all(true)); 
         if (memoryCheck) printf("==> Available stack: %d - heap: %d\n", uxTaskGetStackHighWaterMark(NULL), ESP.getFreeHeap());
     #endif    

@@ -222,7 +222,7 @@ class HttpRequest {
                 LOGI("process is already connected");
             }
 
-#ifdef ESP32
+#if defined(ESP32) && defined(ARDUINO)
             LOGI("Free heap: %u", ESP.getFreeHeap());
 #endif
 

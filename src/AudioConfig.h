@@ -173,7 +173,7 @@
 
 // ----- Regular ESP32 -----
 #if defined(ESP32)  && !defined(ESP32X)
-#include "esp32-hal-log.h"
+//#include "esp32-hal-log.h"
 // optional libraries
 //#define USE_A2DP
 //#define USE_ESP8266_AUDIO
@@ -191,6 +191,7 @@
 #define USE_STREAM_WRITE_OVERRIDE
 #define USE_STREAM_READ_OVERRIDE
 #define USE_TOUCH_READ
+#define USE_CONCURRENCY
 
 #define PWM_FREQENCY 30000
 #define PIN_PWM_START 12
@@ -223,7 +224,7 @@
 // #endif
 
 // support for old idf releases
-#if ESP_IDF_VERSION_MAJOR < 4 && !defined(I2S_COMM_FORMAT_STAND_I2S)
+#if !defined(I2S_NEW) && ESP_IDF_VERSION_MAJOR < 4 && !defined(I2S_COMM_FORMAT_STAND_I2S)
 # define I2S_COMM_FORMAT_STAND_I2S (I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_MSB)
 # define I2S_COMM_FORMAT_STAND_MSB (I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_LSB)
 # define I2S_COMM_FORMAT_STAND_PCM_LONG (I2S_COMM_FORMAT_PCM | I2S_COMM_FORMAT_PCM_LONG)
@@ -253,6 +254,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define USE_TIMER
 #define USE_STREAM_WRITE_OVERRIDE
 #define USE_STREAM_READ_OVERRIDE
+#define USE_CONCURRENCY
 
 #define PWM_FREQENCY 30000
 #define PIN_PWM_START 1
@@ -286,6 +288,27 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 
 typedef uint32_t eps32_i2s_sample_rate_type;
 
+#endif
+
+// --- ESP32 ------------
+// as part of the IDF use cmake for the necesseary defines
+#if defined(ESP32_CMAKE)
+
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#define ESP32
+#define DESKTOP_MILLIS_DEFINED
+
+typedef uint32_t eps32_i2s_sample_rate_type;
+// forward declare app_amin
+extern "C" void app_main(); 
+// delay and millis is needed by this framework
+namespace audio_tools {
+
+void delay(uint64_t ms){ vTaskDelay(1000 / portTICK_PERIOD_MS);}
+uint64_t millis() {return (xTaskGetTickCount() * portTICK_PERIOD_MS);}
+
+}
 #endif
 
 //----- ESP8266 -----------
