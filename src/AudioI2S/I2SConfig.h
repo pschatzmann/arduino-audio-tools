@@ -114,7 +114,7 @@ class I2SConfig : public AudioBaseInfo {
         LOGI("use_apll: %s", use_apll ? "true" : "false");
       }
       if (fixed_mclk){
-        LOGI("fixed_mclk: %d", fixed_mclk);
+        LOGI("fixed_mclk: %d", (int) fixed_mclk);
       }
       LOGI("buffer_count:%d",buffer_count);
       LOGI("buffer_size:%d",buffer_size);
