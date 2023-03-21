@@ -29,6 +29,7 @@ class AnalogConfig : public AudioBaseInfo {
     // public config parameters
     int port_no = I2S_NUM_0; // Analog input and output only supports 0!
     bool use_apll = false;
+    bool auto_clear = false;
     bool uninstall_driver_on_end = true;
     int mode_internal; 
 

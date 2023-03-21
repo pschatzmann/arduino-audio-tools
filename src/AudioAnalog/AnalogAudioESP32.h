@@ -62,7 +62,7 @@ class AnalogDriverESP32  : public AnalogDriverBase {
             .dma_buf_count          = cfg.buffer_count,
             .dma_buf_len            = cfg.buffer_size,
             .use_apll               = cfg.use_apll,
-            .tx_desc_auto_clear     = false,
+            .tx_desc_auto_clear     = cfg.auto_clear,
 #if ESP_IDF_VERSION_MAJOR >= 4 
             .fixed_mclk             = 0,
             .mclk_multiple          = I2S_MCLK_MULTIPLE_DEFAULT,
