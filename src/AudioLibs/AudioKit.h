@@ -109,12 +109,11 @@ friend class AudioKitStream;
                              I2S_PHILIPS_FORMAT,
                              I2S_RIGHT_JUSTIFIED_FORMAT,
                              I2S_LEFT_JUSTIFIED_FORMAT,
-                             I2S_PCM_LONG,
-                             I2S_PCM_SHORT};
+                             I2S_PCM};
     const static audio_hal_iface_format_t oa[] = {
         AUDIO_HAL_I2S_NORMAL, AUDIO_HAL_I2S_LEFT,  AUDIO_HAL_I2S_RIGHT,
         AUDIO_HAL_I2S_NORMAL, AUDIO_HAL_I2S_RIGHT, AUDIO_HAL_I2S_LEFT,
-        AUDIO_HAL_I2S_DSP,    AUDIO_HAL_I2S_DSP};
+        AUDIO_HAL_I2S_DSP};
     for (int j = 0; j < 8; j++) {
       if (ia[j] == i2s_format) {
         LOGD("-> %d",j)
