@@ -45,6 +45,8 @@ friend class AudioKitStream;
     result.bits_per_sample = toBits();
     result.buffer_size = buffer_size;
     result.buffer_count = buffer_count;
+    // we use the AudioKit library only to set up the codec
+    result.i2s_active = false;
 #if AUDIOKIT_SETUP_SD
     result.sd_active = sd_active;
 #else
@@ -52,8 +54,23 @@ friend class AudioKitStream;
     result.sd_active = false;
 #endif  
     LOGW("sd_active = %s", sd_active ? "true" : "false" );
+
     return result;
   }
+
+  /// Defines the pins based on the information provided by the AudioKit project
+  void setupPins() {
+    TRACED();
+    i2s_pin_config_t pins;
+    get_i2s_pins((i2s_port_t)port_no, &pins);
+    pin_bck = pins.bck_io_num;
+    pin_ws = pins.ws_io_num;
+    pin_data = pins.data_out_num;
+    pin_data_rx = pins.data_in_num;
+#if ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(4, 4, 0)                 
+    pin_mck = 0;
+#endif
+  };
 
  protected:
   // convert to audio_hal_iface_samples_t
@@ -147,28 +164,6 @@ friend class AudioKitStream;
 };
 
 /**
- * @brief Converts a AudioKit into a AudioStream, so that we can pass it
- * to the converter
- * @author Phil Schatzmann
- * @copyright GPLv3
- */
-class AudioKitStreamAdapter : public AudioStream {
- public:
-  AudioKitStreamAdapter(AudioKit *kit) { this->kit = kit; }
-  size_t write(const uint8_t *data, size_t len) override {
-//    TRACED();
-    return kit->write(data, len);
-  }
-  size_t readBytes(uint8_t *data, size_t len) override {
-//    TRACED();
-    return kit->read(data, len);
-  }
-
- protected:
-  AudioKit *kit = nullptr;
-};
-
-/**
  * @brief AudioKit Stream which uses the
  * https://github.com/pschatzmann/arduino-audiokit library
  * @ingroup io
@@ -193,14 +188,15 @@ class AudioKitStream : public AudioStream {
     AudioStream::setAudioInfo(config);
     cfg = config;
     cfg.logInfo();
+    // start codec
     if (!kit.begin(cfg.toAudioKitConfig())){
       LOGE("begin faild: please verify your AUDIOKIT_BOARD setting: %d", AUDIOKIT_BOARD);
       stop();
     }
 
-    // convert channels if necessary
-    LOGI("Channels %d->%d", cfg.channels, 2);
-    converter.begin(cfg.channels, 2, cfg.bits_per_sample);
+    // start i2s
+    cfg.setupPins();
+    i2s_stream.begin(cfg);
 
     // Volume control and headphone detection
     if (cfg.default_actions_active){
@@ -222,6 +218,7 @@ class AudioKitStream : public AudioStream {
   void end() override {
     TRACED();
     kit.end();
+    i2s_stream.end();
     is_started = false;
   }
 
@@ -230,32 +227,13 @@ class AudioKitStream : public AudioStream {
     return cfg.rx_tx_mode == TX_MODE ? 0 :  DEFAULT_BUFFER_SIZE;
   }
 
-  virtual size_t write(const uint8_t *buffer, size_t size) override {
-    LOGD("write: %zu",size);
-    return converter.write(buffer, size);
+  virtual size_t write(const uint8_t *data, size_t length) override {
+    return i2s_stream.write(data, length);
   }
 
   /// Reads the audio data
   virtual size_t readBytes(uint8_t *data, size_t length) override {
-    if (cfg.channels == 2) {
-      return kit.read(data, length);
-    } else if (cfg.channels==1) {
-      // convert 2 channels of int16_t to 1
-      int16_t temp[length];
-      int len_res = kit.read(temp, length*2);
-      int res_count = len_res / 2;
-      int16_t *out = (int16_t*) data;
-      for (int j=0; j<res_count; j+=2){
-          int32_t total = temp[j];
-          total+=temp[j+1];
-          total = total/2;
-          *out = total;
-          out++;
-      }
-      return res_count;
-    }       
-    LOGE("Unsuported number of channels : %d", cfg.channels);
-    return 0;
+    return i2s_stream.readBytes(data, length);
   }
 
   /// Update the audio info with new values: e.g. new sample_rate,
@@ -270,7 +248,7 @@ class AudioKitStream : public AudioStream {
       // update sample rate only
       cfg.sample_rate = info.sample_rate;
       cfg.logInfo();
-      converter.setAudioInfo(cfg);
+      i2s_stream.setAudioInfo(cfg);
       kit.setSampleRate(cfg.toSampleRate());
     } else if (cfg.sample_rate != info.sample_rate
     || cfg.bits_per_sample != info.bits_per_sample
@@ -284,11 +262,10 @@ class AudioKitStream : public AudioStream {
 
       // Stop first
       if(is_started){
-        kit.end();
+        end();
       }
-      // update input format
-      converter.setAudioInfo(cfg);
       // start kit with new config
+      i2s_stream.begin(cfg);
       kit.begin(cfg.toAudioKitConfig());
       is_started = true;
     }
@@ -344,8 +321,7 @@ class AudioKitStream : public AudioStream {
    */
   void processActions() {
 //  TRACED();
-      actions.processActions();
-//  delay(1);
+    actions.processActions();
     yield();
   }
 
@@ -574,13 +550,11 @@ class AudioKitStream : public AudioStream {
 
  protected:
   AudioKit kit;
+  I2SStream i2s_stream;
   AudioKitStreamConfig cfg;
   AudioActions actions;
   int volume_value = 40;
   bool active = true;
-  // channel and sample size conversion support
-  AudioKitStreamAdapter kit_stream{&kit};
-  ChannelFormatConverterStream converter{kit_stream};
   bool is_started = false;
 
   /// Determines the action logic (ActiveLow or ActiveTouch) for the pin
