@@ -111,10 +111,10 @@ class I2SDriverESP32 {
             ChannelReducer<int16_t> reducer16(1, 2);
             result = reducer16.convert((uint8_t*)dest,temp, result);
             } break;
-          // case 24: {
-          //   ChannelReducer<int24_t> reducer24(1,2);
-          //   result = reducer24.convert((uint8_t*)dest,temp,result);
-          //   } break;
+           case 24: {
+             ChannelReducer<int24_t> reducer24(1,2);
+             result = reducer24.convert((uint8_t*)dest,temp,result);
+             } break;
           case 32: {
             ChannelReducer<int32_t> reducer32(1, 2);
             result = reducer32.convert((uint8_t*)dest, temp, result);
