@@ -67,6 +67,9 @@ class I2SConfig : public AudioBaseInfo {
             #endif
             break;
           default: 
+            #ifdef ESP32
+                auto_clear = I2S_AUTO_CLEAR;
+            #endif
             pin_data = PIN_I2S_DATA_OUT;
             pin_data_rx = PIN_I2S_DATA_IN;
             break;
@@ -89,9 +92,8 @@ class I2SConfig : public AudioBaseInfo {
 #elif defined(ESP32)
     int buffer_count = I2S_BUFFER_COUNT;
     int buffer_size = I2S_BUFFER_SIZE;
-
     I2SSignalType signal_type = Digital;  // e.g. the ESP32 supports analog input or output or PDM picrophones
-    bool auto_clear;
+    bool auto_clear = I2S_AUTO_CLEAR;
     bool use_apll = I2S_USE_APLL; 
     uint32_t fixed_mclk = 0; 
 
@@ -109,7 +111,7 @@ class I2SConfig : public AudioBaseInfo {
       LOGI("number of channels: %d", channels);
       LOGI("i2s_format: %s", i2s_formats[i2s_format]);
 #ifdef ESP32
-      LOGI("auto_clear:%d",auto_clear);
+      LOGI("auto_clear: %s",auto_clear? "true" : "false");
       if (use_apll) {
         LOGI("use_apll: %s", use_apll ? "true" : "false");
       }
