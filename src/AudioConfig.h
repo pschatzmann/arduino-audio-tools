@@ -207,7 +207,7 @@
 #define PIN_ADC1 34 
 #define PIN_ADC2 14
 
-#define I2S_AUTO_CLEAR true
+#define I2S_AUTO_CLEAR false
 
 // URLStream
 //#define USE_URLSTREAM_TASK
@@ -270,7 +270,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define PIN_ADC1 21 
 #define PIN_ADC2 22
 
-#define I2S_AUTO_CLEAR true
+#define I2S_AUTO_CLEAR false
 
 // URLStream
 //#define USE_ESP8266_AUDIO
