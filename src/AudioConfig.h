@@ -94,7 +94,7 @@
 #endif
 
 #ifndef I2S_BUFFER_COUNT 
-#define I2S_BUFFER_COUNT 10 // 20
+#define I2S_BUFFER_COUNT 6 // 20
 #endif
 
 #ifndef A2DP_BUFFER_SIZE 
@@ -199,7 +199,7 @@
 #define PIN_I2S_WS 15
 #define PIN_I2S_DATA_IN 32
 #define PIN_I2S_DATA_OUT 22
-#define I2S_USE_APLL false  
+#define I2S_USE_APLL true  
 // Default Setting: The mute pin can be switched actovated by setting it to a gpio (e.g 23). Or you could drive the LED by assigning LED_BUILTIN
 #define PIN_I2S_MUTE -1
 #define SOFT_MUTE_VALUE 0
@@ -207,7 +207,7 @@
 #define PIN_ADC1 34 
 #define PIN_ADC2 14
 
-#define I2S_AUTO_CLEAR false
+#define I2S_AUTO_CLEAR true
 
 // URLStream
 //#define USE_URLSTREAM_TASK
@@ -262,7 +262,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define PIN_I2S_WS 7
 #define PIN_I2S_DATA_OUT 8
 #define PIN_I2S_DATA_IN 9
-#define I2S_USE_APLL false  
+#define I2S_USE_APLL true  
 // Default Setting: The mute pin can be switched actovated by setting it to a gpio (e.g 5). Or you could drive the LED by assigning LED_BUILTIN
 #define PIN_I2S_MUTE -1
 #define SOFT_MUTE_VALUE 0
@@ -270,7 +270,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define PIN_ADC1 21 
 #define PIN_ADC2 22
 
-#define I2S_AUTO_CLEAR false
+#define I2S_AUTO_CLEAR true
 
 // URLStream
 //#define USE_ESP8266_AUDIO
