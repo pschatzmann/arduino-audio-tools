@@ -73,12 +73,12 @@ class URLStream : public AbstractURLStream {
 
         /// Sets the ssid that will be used for logging in (when calling begin)
         void setSSID(const char* ssid) override {
-            this->network = (char*)network;
+            this->network = ssid;
         }
 
         /// Sets the password that will be used for logging in (when calling begin)
         void setPassword(const char* password) override{
-            this->password = (char*)password;            
+            this->password = password;            
         }
 
         void setReadBufferSize(int readBufferSize) {
@@ -93,6 +93,12 @@ class URLStream : public AbstractURLStream {
 
             // optional: login if necessary
             login();
+
+            // check if we are connected
+            if (WiFi.status() != WL_CONNECTED){
+                LOGE("Not connected");
+                return false;
+            }
 
             //request.reply().setAutoCreateLines(false);
             if (acceptMime!=nullptr){
@@ -207,8 +213,8 @@ class URLStream : public AbstractURLStream {
         uint16_t read_size;
         bool active = false;
         // optional 
-        char* network=nullptr;
-        char* password=nullptr;
+        const char* network=nullptr;
+        const char* password=nullptr;
         Client *client=nullptr;
         WiFiClient *clientInsecure=nullptr;
 #ifdef USE_WIFI_CLIENT_SECURE
