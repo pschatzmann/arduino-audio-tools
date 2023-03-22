@@ -11,7 +11,7 @@ The output goes to a ‘AI Thinker Audio Kit’.
 
 You need to install the following libraries:
 
-- [Arduino Audio Tolls](https://github.com/pschatzmann/arduino-audio-tools)
+- [Arduino Audio Tools](https://github.com/pschatzmann/arduino-audio-tools)
 - [AudioKit](https://github.com/pschatzmann/arduino-audiokit)
 - [FLITE](https://github.com/pschatzmann/arduino-flite)
 
