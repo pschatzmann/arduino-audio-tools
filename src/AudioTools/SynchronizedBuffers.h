@@ -333,13 +333,23 @@ protected:
 template <typename T> 
 class SynchronizedBufferRTOS : public BaseBuffer<T> {
 public:
-  SynchronizedBufferRTOS(size_t xStreamBufferSizeBytes, size_t xTriggerLevel=256, int writeMaxWait=portMAX_DELAY, int readMaxWait=portMAX_DELAY)
+  SynchronizedBufferRTOS(size_t xStreamBufferSizeBytes, size_t xTriggerLevel=256, TickType_t writeMaxWait=portMAX_DELAY, TickType_t readMaxWait=portMAX_DELAY)
       : BaseBuffer<T>() {
     xStreamBuffer = xStreamBufferCreate(xStreamBufferSizeBytes, xTriggerLevel);
     readWait = readMaxWait;
     writeWait = writeMaxWait;
+    current_size = xStreamBufferSizeBytes;
+    trigger_level = xTriggerLevel;
   }
   ~SynchronizedBufferRTOS() { vStreamBufferDelete(xStreamBuffer); }
+
+  void resize(size_t size){
+    if (current_size != size){
+      vStreamBufferDelete(xStreamBuffer);
+      xStreamBuffer = xStreamBufferCreate(size, trigger_level);
+      current_size = size;
+    }
+  }
 
   void setReadMaxWait(TickType_t ticks){
     readWait = ticks;
@@ -441,6 +451,8 @@ protected:
   int writeWait = portMAX_DELAY;
   bool read_from_isr = false;
   bool write_from_isr = false;
+  size_t current_size=0;
+  size_t trigger_level=0;
 };
 #endif // ESP_IDF_VERSION_MAJOR >= 4 
 #endif // ESP32
