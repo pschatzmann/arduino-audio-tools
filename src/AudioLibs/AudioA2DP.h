@@ -17,38 +17,9 @@
 
 namespace audio_tools {
 
-/**
- * @brief Covnerts the data from T src[][2] to a Frame array 
- * @author Phil Schatzmann
- * @copyright GPLv3
- * 
- * @tparam T 
- */
-
-template<typename T>
-class A2DPChannelConverter {
-    public:
-        A2DPChannelConverter( int16_t (*convert_ptr)(T from)){
-            this->convert_ptr = convert_ptr;
-        }
-
-        // The data is provided as int24_t tgt[][2] but  returned as int24_t
-        void convert(T src[][2], Frame* channels, size_t size) {
-            for (int i=size; i>0; i--) {
-                channels[i].channel1 = (*convert_ptr)(src[i][0]);
-                channels[i].channel2 = (*convert_ptr)(src[i][1]);
-            }
-        }
-
-    protected:
-        int16_t (*convert_ptr)(T from);
-
-};
-
 class A2DPStream;
 A2DPStream *A2DPStream_self=nullptr;
 // buffer which is used to exchange data
-//RingBuffer<uint8_t> a2dp_buffer{0};
 SynchronizedBufferRTOS<uint8_t>a2dp_buffer{A2DP_BUFFER_SIZE * A2DP_BUFFER_COUNT, A2DP_BUFFER_SIZE, portMAX_DELAY, portMAX_DELAY};
 // flag to indicated that we are ready to process data
 bool is_a2dp_active = false;
@@ -353,6 +324,7 @@ class A2DPStream : public AudioStream {
 
         /// callback to update audio info with used a2dp sample rate
         static void sample_rate_callback(uint16_t rate) {
+            A2DPStream_self->info.sample_rate = rate;
             if (A2DPStream_self->audioBaseInfoDependent!=nullptr){
                 A2DPStream_self->notify_base_Info(rate);
             }
