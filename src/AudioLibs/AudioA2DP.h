@@ -38,7 +38,7 @@ enum A2DPNoData {A2DPSilence, A2DPWhoosh};
 class A2DPConfig {
     public:
         A2DPStartLogic startLogic = StartWhenBufferFull;
-        A2DPNoData noData = A2DPWhoosh;
+        A2DPNoData noData = A2DPSilence;
         RxTxMode mode = RX_MODE;
         const char* name = "A2DP"; 
         bool auto_reconnect = false;
@@ -306,8 +306,6 @@ class A2DPStream : public AudioStream {
             if (is_a2dp_active){
                 uint32_t result_len = a2dp_buffer.writeArray(data, len);
                 LOGD("a2dp_stream_sink_sound_data %d -> %d", len, result_len);
-                // allow some other task 
-                //yield();
             } 
         }
 
