@@ -11,11 +11,11 @@
 #include "AudioTools.h"
 #include "AudioLibs/AudioA2DP.h"
 
-typedef int16_t sound_t;                                  // sound will be represented as int16_t (with 2 bytes)
+const char* name = "LEXON MINO L";                         // Replace with your device name
 uint16_t sample_rate=44100;
 uint8_t channels = 2;                                     // The stream will have 2 channels 
-SineWaveGenerator<sound_t> sineWave(32000);               // subclass of SoundGenerator with max amplitude of 32000
-GeneratedSoundStream<sound_t> in(sineWave);               // Stream generated from sine wave
+SineWaveGenerator<int16_t> sineWave(32000);               // subclass of SoundGenerator with max amplitude of 32000
+GeneratedSoundStream<int16_t> in(sineWave);               // Stream generated from sine wave
 A2DPStream out;                                           // A2DP output
 StreamCopy copier(out, in); // copy in to out
 
@@ -36,7 +36,7 @@ void setup(void) {
 
   // We send the test signal via A2DP - so we conect to the MyMusic Bluetooth Speaker
   auto cfgA2DP = out.defaultConfig(TX_MODE);
-  cfgA2DP.name = "LEXON MINO L";
+  cfgA2DP.name = name;
   //cfgA2DP.auto_reconnect = false;
   out.begin(cfgA2DP);
   out.setVolume(0.3);
