@@ -55,6 +55,8 @@ class A2DPConfig {
  * however this is rather inefficient, beause quite a bit buffer needs to be allocated.
  * It is recommended to use the API with the callbacks. Examples can be found in the examples-basic-api
  * directory.
+ * 
+ * Requires: https://github.com/pschatzmann/ESP32-A2DP
  *
  * @ingroup io
  * @author Phil Schatzmann
