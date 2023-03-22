@@ -8,6 +8,6 @@ Here is a Synthesizer in just 30 lines of code..
 
 You need to install the following libraries:
 
-- [Arduino Audio Tolls](https://github.com/pschatzmann/arduino-audio-tools)
+- [Arduino Audio Tools](https://github.com/pschatzmann/arduino-audio-tools)
 - [Midi](https://github.com/pschatzmann/arduino-midi)
 
