@@ -60,7 +60,6 @@ namespace audio_tools {
             this->p_decoder = &decoder;
             setOutput(output);
             // notification for audio configuration
-            setAudioInfo(output.audioInfo());
             decoder.setNotifyAudioChange(*this);
         }
 
@@ -95,7 +94,6 @@ namespace audio_tools {
             this->p_decoder = &decoder;
             setOutput(output);
             // notification for audio configuration
-            setAudioInfo(output.audioInfo());
             decoder.setNotifyAudioChange(*this);
         }
 
@@ -163,6 +161,9 @@ namespace audio_tools {
                 autonext = p_source->isAutoNext();
             }
 
+            // initial audio info for fade from output
+            setupFade();
+            
             // start dependent objects
             p_out_decoding->begin();
             p_source->begin();
@@ -469,6 +470,14 @@ namespace audio_tools {
         int steam_increment = 1; // +1 moves forward; -1 moves backward
         float current_volume = -1.0; // illegal value which will trigger an update
         int delay_if_full = 100;
+
+        void setupFade() {
+            if (p_final_print !=  nullptr) {
+                fade.setAudioInfo(p_final_print->audioInfo());
+            } else if (p_final_stream != nullptr){
+                fade.setAudioInfo(p_final_stream->audioInfo());
+            }
+        }
 
 
         void moveToNextFileOnTimeout(){
