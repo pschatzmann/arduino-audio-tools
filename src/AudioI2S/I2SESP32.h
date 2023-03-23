@@ -7,6 +7,9 @@
 #include "driver/i2s.h"
 #include "esp_system.h"
 
+#ifndef I2S_MCLK_MULTIPLE_DEFAULT
+#define I2S_MCLK_MULTIPLE_DEFAULT ((i2s_mclk_multiple_t)0)
+#endif
 
 namespace audio_tools {
 
@@ -156,10 +159,8 @@ class I2SDriverESP32 {
             .tx_desc_auto_clear = cfg.auto_clear, 
 #if ESP_IDF_VERSION_MAJOR >= 4 
             .fixed_mclk = (int) (cfg.fixed_mclk>0 ? cfg.fixed_mclk : 0 ),
-#if ESP_IDF_VERSION_MAJOR < 5 
             .mclk_multiple = I2S_MCLK_MULTIPLE_DEFAULT,
             .bits_per_chan = I2S_BITS_PER_CHAN_DEFAULT,
-#endif
 #endif
       };
       i2s_config = i2s_config_new;
