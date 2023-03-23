@@ -161,11 +161,39 @@ extern uint64_t millis();
 
 #endif
 
-/// e.g. gor AudioActions
-extern int digitalRead(int pin);
-extern void pinMode(int pin, int mode);
 
 } // namespace
+
+#if defined(ESP32) || defined(ESP32_CMAKE)
+#include "driver/gpio.h"
+/// e.g. for AudioActions
+int digitalRead(int pin) {
+	return gpio_get_level((gpio_num_t)pin);
+}
+void pinMode(int pin, int mode) {
+	gpio_config_t cfg;
+	switch (mode){
+		case INPUT:
+			cfg.mode = GPIO_MODE_INPUT; 
+			cfg.pull_up_en = GPIO_PULLUP_DISABLE;
+			break;
+		case OUTPUT:
+			cfg.mode = GPIO_MODE_OUTPUT; 
+			break;
+		case INPUT_PULLUP:
+			cfg.mode = GPIO_MODE_INPUT; 
+			cfg.pull_up_en = GPIO_PULLUP_ENABLE;
+			break;
+	}
+	gpio_config(&cfg);
+
+}
+
+#else
+/// e.g. for AudioActions
+int digitalRead(int pin);
+void pinMode(int pin, int mode);
+#endif
 
 using namespace audio_tools;
 
