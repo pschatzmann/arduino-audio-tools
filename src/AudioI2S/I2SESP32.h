@@ -283,8 +283,8 @@ class I2SDriverESP32 {
         return result;
     }
 
-// #pragma GCC diagnostic push
-// #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+  #pragma GCC diagnostic push
+  #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
     // determines the i2s_comm_format_t - by default we use I2S_COMM_FORMAT_STAND_I2S
     i2s_comm_format_t toCommFormat(I2SFormat mode){
@@ -295,10 +295,10 @@ class I2SDriverESP32 {
             return (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_I2S;
           case I2S_LEFT_JUSTIFIED_FORMAT:
           case I2S_MSB_FORMAT:
-            return (i2s_comm_format_t) (I2S_COMM_FORMAT_STAND_MSB);
+            return (i2s_comm_format_t) (I2S_COMM_FORMAT_I2S|I2S_COMM_FORMAT_I2S_MSB);
           case I2S_RIGHT_JUSTIFIED_FORMAT:
           case I2S_LSB_FORMAT:
-            return (i2s_comm_format_t) (I2S_COMM_FORMAT_STAND_I2S);
+            return (i2s_comm_format_t) (I2S_COMM_FORMAT_I2S|I2S_COMM_FORMAT_I2S_LSB);
           case I2S_PCM:
             return (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_PCM_SHORT;
 
@@ -307,7 +307,7 @@ class I2SDriverESP32 {
             return (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_I2S;
         }
     }
-// #pragma GCC diagnostic pop
+  #pragma GCC diagnostic pop
 
     int getModeDigital(I2SConfig &cfg) {
         int i2s_format = cfg.is_master ? I2S_MODE_MASTER : I2S_MODE_SLAVE;
