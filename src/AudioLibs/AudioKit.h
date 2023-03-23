@@ -5,6 +5,16 @@
 #include "AudioI2S/I2SConfig.h"
 #include "AudioTools/AudioActions.h"
 
+#ifndef PERIPH_ID_BUTTON
+#  define PERIPH_ID_BUTTON 1
+#endif
+#ifndef PERIPH_ID_ADC_BTN
+#  define PERIPH_ID_ADC_BTN 2
+#endif
+#ifndef PERIPH_ID_TOUCH
+#  define PERIPH_ID_TOUCH 3
+#endif
+
 namespace audio_tools {
 
 class AudioKitStream;
@@ -559,6 +569,7 @@ class AudioKitStream : public AudioStream {
 
   /// Determines the action logic (ActiveLow or ActiveTouch) for the pin
   AudioActions::ActiveLogic getActionLogic(int pin){
+#if defined(USE_EXT_BUTTON_LOGIC)
     input_key_service_info_t input_key_info[] = INPUT_KEY_DEFAULT_INFO();
     int size = sizeof(input_key_info) / sizeof(input_key_info[0]);
     for (int j=0; j<size; j++){
@@ -577,6 +588,7 @@ class AudioKitStream : public AudioStream {
       }
     }
     LOGW("Undefined ActionLogic for pin: %d ",pin);
+#endif
     return AudioActions::ActiveLow;
   }
 
@@ -584,10 +596,12 @@ class AudioKitStream : public AudioStream {
   void setupActions() {
     TRACEI();
     // SPI might have been activated 
+  #ifdef ARDUINO
     if (!cfg.sd_active){
       LOGW("Deactivating SPI because SD is not active");
       SPI.end();
     }
+  #endif
 
     // pin conflicts with the SD CS pin for AIThinker and buttons
     if (! (cfg.sd_active && (AUDIOKIT_BOARD==5 || AUDIOKIT_BOARD==6))){
