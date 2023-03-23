@@ -143,6 +143,8 @@ extern uint64_t millis();
 
 #endif
 
+/// e.g. gor AudioActions
+extern int digitalRead(int pin);
 
 } // namespace
 
