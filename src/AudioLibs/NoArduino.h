@@ -24,6 +24,24 @@
 #  define PI 3.14159265359f
 #endif
 
+#ifndef INPUT
+#  define INPUT 0x0
+#endif
+#ifndef OUTPUT
+#  define OUTPUT 0x1
+#endif
+#ifndef INPUT_PULLUP
+#  define INPUT_PULLUP 0x2
+#endif
+
+#ifndef HIGH
+#define HIGH 0x1
+#  endif
+#ifndef LOW
+#  define LOW  0x0
+#endif
+
+
 using namespace std;
 
 enum PrintCharFmt {DEC, HEX};
@@ -145,6 +163,7 @@ extern uint64_t millis();
 
 /// e.g. gor AudioActions
 extern int digitalRead(int pin);
+extern void pinMode(int pin, int mode);
 
 } // namespace
 
