@@ -60,6 +60,7 @@ namespace audio_tools {
             this->p_decoder = &decoder;
             setOutput(output);
             // notification for audio configuration
+            setAudioInfo(output.audioInfo());
             decoder.setNotifyAudioChange(*this);
         }
 
@@ -94,6 +95,7 @@ namespace audio_tools {
             this->p_decoder = &decoder;
             setOutput(output);
             // notification for audio configuration
+            setAudioInfo(output.audioInfo());
             decoder.setNotifyAudioChange(*this);
         }
 
