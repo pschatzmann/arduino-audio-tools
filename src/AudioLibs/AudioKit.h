@@ -5,16 +5,6 @@
 #include "AudioI2S/I2SConfig.h"
 #include "AudioTools/AudioActions.h"
 
-#ifndef PERIPH_ID_BUTTON
-#  define PERIPH_ID_BUTTON 1
-#endif
-#ifndef PERIPH_ID_ADC_BTN
-#  define PERIPH_ID_ADC_BTN 2
-#endif
-#ifndef PERIPH_ID_TOUCH
-#  define PERIPH_ID_TOUCH 3
-#endif
-
 namespace audio_tools {
 
 class AudioKitStream;
