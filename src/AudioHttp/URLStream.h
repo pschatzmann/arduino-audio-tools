@@ -184,7 +184,7 @@ class URLStream : public AbstractURLStream {
             clientTimeout = ms;
         }
 
-        /// if set to true, it activates the power save mode which comes at the cost of porformance! - By default this is deactivated. ESP32 Only!
+        /// if set to true, it activates the power save mode which comes at the cost of performance! - By default this is deactivated. ESP32 Only!
         void setPowerSave(bool ps){
             is_power_save = ps;
         }
