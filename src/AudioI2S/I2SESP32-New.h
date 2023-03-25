@@ -324,8 +324,8 @@ protected:
     DriverCommon &driver = getDriver(cfg);
 
     i2s_chan_config_t chan_cfg = driver.getChannelConfig(cfg);
-    if (USE_I2S_NEW_channel(&chan_cfg, &tx_chan, &rx_chan) != ESP_OK) {
-      LOGE("USE_I2S_NEW_channel");
+    if (i2s_channel(&chan_cfg, &tx_chan, &rx_chan) != ESP_OK) {
+      LOGE("i2s_channel");
       return false;
     }
 
