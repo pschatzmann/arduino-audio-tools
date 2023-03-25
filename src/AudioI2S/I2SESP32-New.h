@@ -248,6 +248,11 @@ protected:
           LOGE("i2s_channel_init_pdm_tx_mode %s", "tx");
           return false;
         }
+        if (i2s_channel_enable(tx_chan)!=ESP_OK){
+          LOGE("i2s_channel_enable %s", "tx");
+          return false;
+        }
+
       }
       if (cfg.rx_tx_mode == RX_MODE) {
         i2s_pdm_rx_config_t pdm_rx_cfg = {.clk_cfg = getRxClockConfig(cfg),
@@ -262,6 +267,10 @@ protected:
                                           }};
         if (i2s_channel_init_pdm_rx_mode(rx_chan, &pdm_rx_cfg) != ESP_OK) {
           LOGE("i2s_channel_init_pdm_tx_mode %s", "rx");
+          return false;
+        }
+        if (i2s_channel_enable(rx_chan)!=ESP_OK){
+          LOGE("i2s_channel_enable %s", "rx");
           return false;
         }
         return true;
