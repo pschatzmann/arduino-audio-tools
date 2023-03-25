@@ -81,7 +81,7 @@ public:
   size_t writeBytes(const void *src, size_t size_bytes) {
     TRACED();
     size_t result;
-    if (i2s_channel_write(tx_chan, src, size_bytes, &result, portMAX_DELAY) !=
+    if (i2s_new_channel(tx_chan, src, size_bytes, &result, portMAX_DELAY) !=
         ESP_OK) {
       TRACEE();
     }
