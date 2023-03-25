@@ -168,25 +168,30 @@ extern uint64_t millis();
 #include "driver/gpio.h"
 /// e.g. for AudioActions
 int digitalRead(int pin) {
+	printf("digitalRead:%d\n", pin);
 	return gpio_get_level((gpio_num_t)pin);
 }
+
 void pinMode(int pin, int mode) {
-	gpio_config_t cfg;
+	gpio_num_t gpio_pin=(gpio_num_t)pin;
+	printf("pinMode(%d,%d)\n", pin, mode);
+
+	gpio_reset_pin(gpio_pin);
 	switch (mode){
 		case INPUT:
-			cfg.mode = GPIO_MODE_INPUT; 
-			cfg.pull_up_en = GPIO_PULLUP_DISABLE;
+			gpio_set_direction(gpio_pin, GPIO_MODE_INPUT);
 			break;
 		case OUTPUT:
-			cfg.mode = GPIO_MODE_OUTPUT; 
+			gpio_set_direction(gpio_pin, GPIO_MODE_OUTPUT);
 			break;
 		case INPUT_PULLUP:
-			cfg.mode = GPIO_MODE_INPUT; 
-			cfg.pull_up_en = GPIO_PULLUP_ENABLE;
+			gpio_set_direction(gpio_pin, GPIO_MODE_INPUT);
+			gpio_set_pull_mode(gpio_pin, GPIO_PULLUP_ONLY);
+			break;
+		default:
+			gpio_set_direction(gpio_pin, GPIO_MODE_INPUT_OUTPUT);
 			break;
 	}
-	gpio_config(&cfg);
-
 }
 
 #else
