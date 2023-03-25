@@ -1,6 +1,6 @@
 #pragma once
 
-#if defined(ESP32) && !defined(I2S_NEW)
+#if defined(ESP32) && !defined(USE_I2S_NEW)
 
 #include "AudioConfig.h"
 #include "AudioI2S/I2SConfig.h"
