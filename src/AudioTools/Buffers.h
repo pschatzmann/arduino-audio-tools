@@ -286,7 +286,9 @@ class RingBuffer : public BaseBuffer<T> {
   virtual T *address() { return _aucBuffer.data(); }
 
   virtual void resize(int len) {
+    LOGI("resize: %d",len);
     _aucBuffer.resize(len);
+    max_size = len;
   }
 
   /// Returns the maximum capacity of the buffer
