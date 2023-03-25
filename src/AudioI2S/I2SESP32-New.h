@@ -106,12 +106,13 @@ protected:
 
   struct DriverCommon {
     virtual i2s_chan_config_t getChannelConfig(I2SConfig &cfg) = 0;
-    virtual bool startChannels(I2SConfig &cfg, i2s_chan_handle_t tx_chan,
-                              i2s_chan_handle_t rx_chan, int txPin, int rxPin) = 0;
+    virtual bool startChannels(I2SConfig &cfg, i2s_chan_handle_t &tx_chan,
+                              i2s_chan_handle_t &rx_chan, int txPin, int rxPin) = 0;
   };
 
   struct DriverI2S : public DriverCommon {
     i2s_std_slot_config_t getSlotConfig(I2SConfig &cfg) {
+      TRACED();
       switch (cfg.i2s_format) {
       case I2S_RIGHT_JUSTIFIED_FORMAT:
       case I2S_LSB_FORMAT:
@@ -138,17 +139,20 @@ protected:
     }
 
     i2s_chan_config_t getChannelConfig(I2SConfig &cfg) {
+      TRACED();
       return I2S_CHANNEL_DEFAULT_CONFIG((i2s_port_t)cfg.port_no,
                                         cfg.is_master ? I2S_ROLE_MASTER
                                                       : I2S_ROLE_SLAVE);
     }
 
     i2s_std_clk_config_t getClockConfig(I2SConfig &cfg) {
+      TRACED();
       return I2S_STD_CLK_DEFAULT_CONFIG((uint32_t)cfg.sample_rate);
     }
 
-    bool startChannels(I2SConfig &cfg, i2s_chan_handle_t tx_chan,
-                      i2s_chan_handle_t rx_chan, int txPin, int rxPin) {
+    bool startChannels(I2SConfig &cfg, i2s_chan_handle_t &tx_chan,
+                      i2s_chan_handle_t &rx_chan, int txPin, int rxPin) {
+      TRACED();
       i2s_std_config_t std_cfg = {
           .clk_cfg = getClockConfig(cfg),
           .slot_cfg = getSlotConfig(cfg),
@@ -173,11 +177,19 @@ protected:
           LOGE("i2s_channel_init_std_mode %s", "tx");
           return false;
         }
+        if (i2s_channel_enable(tx_chan)!=ESP_OK){
+          LOGE("i2s_channel_enable %s", "tx");
+          return false;
+        }
       }
 
       if (cfg.rx_tx_mode == RXTX_MODE || cfg.rx_tx_mode == RX_MODE) {
         if (i2s_channel_init_std_mode(rx_chan, &std_cfg) != ESP_OK) {
           LOGE("i2s_channel_init_std_mode %s", "rx");
+          return false;
+        }
+        if (i2s_channel_enable(rx_chan)!=ESP_OK){
+          LOGE("i2s_channel_enable %s", "tx");
           return false;
         }
       }
@@ -214,8 +226,8 @@ protected:
       return I2S_PDM_RX_CLK_DEFAULT_CONFIG((uint32_t)cfg.sample_rate);
     }
 
-    bool startChannels(I2SConfig &cfg, i2s_chan_handle_t tx_chan,
-                      i2s_chan_handle_t rx_chan, int txPin, int rxPin) {
+    bool startChannels(I2SConfig &cfg, i2s_chan_handle_t &tx_chan,
+                      i2s_chan_handle_t &rx_chan, int txPin, int rxPin) {
 
       if (cfg.rx_tx_mode == TX_MODE) {
         i2s_pdm_tx_config_t pdm_tx_cfg = {
@@ -276,8 +288,8 @@ protected:
   //     return I2S_TDM_CLK_DEFAULT_CONFIG((uint32_t)cfg.sample_rate);
   //   }
 
-  //   bool startChannels(I2SConfig &cfg, i2s_chan_handle_t tx_chan,
-  //                     i2s_chan_handle_t rx_chan, int txPin, int rxPin) {
+  //   bool startChannels(I2SConfig &cfg, i2s_chan_handle_t &tx_chan,
+  //                     i2s_chan_handle_t &rx_chan, int txPin, int rxPin) {
 
   //     i2s_tdm_config_t tdm_cfg = {
   //         .clk_cfg = getClockConfig(cfg),
@@ -330,6 +342,9 @@ protected:
     }
 
     is_started = driver.startChannels(cfg, tx_chan, rx_chan, txPin, rxPin);
+    if(!is_started){
+      LOGE("Channels not started");
+    }
     return is_started;
   }
 
