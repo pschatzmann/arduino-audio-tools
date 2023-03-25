@@ -81,7 +81,7 @@ public:
   size_t writeBytes(const void *src, size_t size_bytes) {
     TRACED();
     size_t result;
-    if (i2s_new_channel(tx_chan, src, size_bytes, &result, portMAX_DELAY) !=
+    if (i2s_channel_write(tx_chan, src, size_bytes, &result, portMAX_DELAY) !=
         ESP_OK) {
       TRACEE();
     }
@@ -324,7 +324,7 @@ protected:
     DriverCommon &driver = getDriver(cfg);
 
     i2s_chan_config_t chan_cfg = driver.getChannelConfig(cfg);
-    if (i2s_channel(&chan_cfg, &tx_chan, &rx_chan) != ESP_OK) {
+    if (i2s_new_channel(&chan_cfg, &tx_chan, &rx_chan) != ESP_OK) {
       LOGE("i2s_channel");
       return false;
     }
