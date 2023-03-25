@@ -1,6 +1,6 @@
 #pragma once
 
-#if defined(ESP32) && defined(I2S_NEW)
+#if defined(ESP32) && defined(USE_I2S_NEW)
 
 #include "AudioConfig.h"
 #include "AudioI2S/I2SConfig.h"
@@ -324,8 +324,8 @@ protected:
     DriverCommon &driver = getDriver(cfg);
 
     i2s_chan_config_t chan_cfg = driver.getChannelConfig(cfg);
-    if (i2s_new_channel(&chan_cfg, &tx_chan, &rx_chan) != ESP_OK) {
-      LOGE("i2s_new_channel");
+    if (USE_I2S_NEW_channel(&chan_cfg, &tx_chan, &rx_chan) != ESP_OK) {
+      LOGE("USE_I2S_NEW_channel");
       return false;
     }
 
