@@ -13,12 +13,12 @@
 namespace audio_tools {
 
 // audio change notification target
-AudioBaseInfoDependent *audioChangeFDK = nullptr;
+AudioInfoDependent *audioChangeFDK = nullptr;
 
 /**
  * @brief Audio Decoder which decodes AAC into a PCM stream
  * This is basically just a wrapper using https://github.com/pschatzmann/arduino-fdk-aac
- * which uses AudioBaseInfo and provides the handlig of AudioBaseInfo changes.
+ * which uses AudioInfo and provides the handlig of AudioInfo changes.
  * @ingroup fdk
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -75,8 +75,8 @@ class AACDecoderFDK : public AudioDecoder  {
         }
 
         // provides common information
-        AudioBaseInfo audioInfo() {
-            AudioBaseInfo result;
+        AudioInfo audioInfo() {
+            AudioInfo result;
             CStreamInfo i = audioInfoEx();
             result.channels = i.numChannels;
             result.sample_rate = i.sampleRate;
@@ -100,7 +100,7 @@ class AACDecoderFDK : public AudioDecoder  {
 
         static void audioChangeCallback(CStreamInfo &info){
             if (audioChangeFDK!=nullptr){
-                AudioBaseInfo base;
+                AudioInfo base;
                 base.channels = info.numChannels;
                 base.sample_rate = info.sampleRate;
                 base.bits_per_sample = 16;
@@ -109,7 +109,7 @@ class AACDecoderFDK : public AudioDecoder  {
             }
         }
 
-        virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi) {
+        virtual void setNotifyAudioChange(AudioInfoDependent &bi) {
             audioChangeFDK = &bi;
             // register audio change handler
             dec->setInfoCallback(audioChangeCallback);
@@ -239,7 +239,7 @@ public:
     }
 
     /// Defines the Audio Info
-    virtual void setAudioInfo(AudioBaseInfo from) {
+    virtual void setAudioInfo(AudioInfo from) {
         TRACED();
         aac_fdk::AudioInfo info;
         info.channels = from.channels;
@@ -254,7 +254,7 @@ public:
      * @param info 
      * @return int 
      */
-    virtual void begin(AudioBaseInfo info) {
+    virtual void begin(AudioInfo info) {
         TRACED();
         enc->begin(info.channels,info.sample_rate, info.bits_per_sample);
     }

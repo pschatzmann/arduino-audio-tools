@@ -32,9 +32,9 @@ const int32_t ima_step_table[89] {
  * @copyright GPLv3
  * 
  */
-struct WavIMAAudioInfo : AudioBaseInfo {
+struct WavIMAAudioInfo : AudioInfo {
     WavIMAAudioInfo() = default;
-    WavIMAAudioInfo(const AudioBaseInfo& from) {
+    WavIMAAudioInfo(const AudioInfo& from) {
         sample_rate = from.sample_rate;    
         channels = from.channels;       
         bits_per_sample = from.bits_per_sample; 
@@ -311,7 +311,7 @@ class WavIMADecoder : public AudioDecoder {
          * @param bi Object that will be notified about the Audio Formt (Changes)
          */
 
-        WavIMADecoder(Print &out_stream, AudioBaseInfoDependent &bi) {
+        WavIMADecoder(Print &out_stream, AudioInfoDependent &bi) {
             TRACED();
             this->out = &out_stream;
             this->audioBaseInfoSupport = &bi;
@@ -327,7 +327,7 @@ class WavIMADecoder : public AudioDecoder {
             this->out = &out_stream;
         }
 
-        void setNotifyAudioChange(AudioBaseInfoDependent &bi) {
+        void setNotifyAudioChange(AudioInfoDependent &bi) {
             this->audioBaseInfoSupport = &bi;
         }
 
@@ -356,7 +356,7 @@ class WavIMADecoder : public AudioDecoder {
             return header.audioInfo();
         }
 
-        AudioBaseInfo audioInfo() {
+        AudioInfo audioInfo() {
             return header.audioInfo();
         }
 
@@ -396,7 +396,7 @@ class WavIMADecoder : public AudioDecoder {
                         input_buffer = new uint8_t[bytes_per_encoded_block];
                         output_buffer = new int16_t[samples_per_decoded_block];
                         // update sampling rate if the target supports it
-                        AudioBaseInfo bi;
+                        AudioInfo bi;
                         bi.sample_rate = header.audioInfo().sample_rate;
                         bi.channels = header.audioInfo().channels;
                         bi.bits_per_sample = 16;
@@ -437,7 +437,7 @@ class WavIMADecoder : public AudioDecoder {
     protected:
         WavIMAHeader header;
         Print *out;
-        AudioBaseInfoDependent *audioBaseInfoSupport;
+        AudioInfoDependent *audioBaseInfoSupport;
         bool isFirst = true;
         bool isValid = true;
         bool active;

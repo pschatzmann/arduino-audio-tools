@@ -38,8 +38,8 @@ class STKGenerator : public SoundGenerator<T> {
         }
 
         /// provides the default configuration
-        AudioBaseInfo defaultConfig() {
-            AudioBaseInfo info;
+        AudioInfo defaultConfig() {
+            AudioInfo info;
             info.channels = 2;
             info.bits_per_sample = sizeof(T) * 8;
             info.sample_rate = stk::Stk::sampleRate();
@@ -47,7 +47,7 @@ class STKGenerator : public SoundGenerator<T> {
         }
 
         /// Starts the processing
-        bool begin(AudioBaseInfo cfg){
+        bool begin(AudioInfo cfg){
             TRACEI();
             cfg.logInfo();
             SoundGenerator<T>::begin(cfg);
@@ -95,8 +95,8 @@ class STKStream : public GeneratedSoundStream<int16_t> {
             GeneratedSoundStream<int16_t>::setInput(generator);
         }
 
-        AudioBaseInfo defaultConfig() {
-            AudioBaseInfo info;
+        AudioInfo defaultConfig() {
+            AudioInfo info;
             info.channels = 1;
             info.bits_per_sample = 16;
             info.sample_rate = stk::Stk::sampleRate();

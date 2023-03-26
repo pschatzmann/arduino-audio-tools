@@ -61,7 +61,7 @@ public:
         begin(c);
     }
 
-    void setAudioInfo(AudioBaseInfo c){
+    void setAudioInfo(AudioInfo c){
         cfg.copyFrom(c);
         begin(cfg);
     }

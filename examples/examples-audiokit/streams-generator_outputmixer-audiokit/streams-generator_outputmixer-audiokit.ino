@@ -18,7 +18,7 @@ AudioKitStream out;
 OutputMixer<int16_t> mixer(out, 2);                         // output mixer with 2 outputs mixing to AudioKitStream 
 StreamCopy copier1(mixer, sound1);                          // copies sound into mixer
 StreamCopy copier2(mixer, sound2);                          // copies sound into mixer
-AudioBaseInfo info;
+AudioInfo info;
 
 // Arduino Setup
 void setup(void) {  

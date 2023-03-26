@@ -43,9 +43,9 @@ public:
 
   virtual void setOutputStream(Print &out_stream) {pt_print=&out_stream;}
 
-  AudioBaseInfo audioInfo() { return info; }
+  AudioInfo audioInfo() { return info; }
   
-  void setAudioInfo(AudioBaseInfo ai) { info = ai; }
+  void setAudioInfo(AudioInfo ai) { info = ai; }
 
   /// @brief  Activate multiple protocols
   /// @param protocol 
@@ -134,14 +134,14 @@ public:
 
   operator bool() { return active; }
 
-  void setNotifyAudioChange(AudioBaseInfoDependent &bi) {}
+  void setNotifyAudioChange(AudioInfoDependent &bi) {}
 
   // The result is encoded data
   virtual bool isResultPCM() { return false;} 
 
 protected:
   Print *pt_print=nullptr;
-  AudioBaseInfo info;
+  AudioInfo info;
   GGWave ggwave;
   GGWave::TxRxData data;
   SingleBuffer<uint8_t> receive_buffer{0};
@@ -187,7 +187,7 @@ public:
     pt_print=&out_stream;
    }
 
-  void setAudioInfo(AudioBaseInfo ai) { info = ai; }
+  void setAudioInfo(AudioInfo ai) { info = ai; }
 
   void setOutputStream(Print &out_stream) {pt_print=&out_stream;}
 
@@ -253,7 +253,7 @@ public:
     active = false;
   }
 
-  AudioBaseInfo audioInfo() { return info; }
+  AudioInfo audioInfo() { return info; }
 
   size_t write(const void *data, size_t len) { 
     if (!active) return 0;
@@ -288,7 +288,7 @@ public:
 
 protected:
   Print *pt_print=nullptr;
-  AudioBaseInfo info;
+  AudioInfo info;
   GGWave ggwave;
   ggwave_ProtocolId protocolId = GGWAVE_DEFAULT_PROTOCOL; 
   int samples_per_frame = GGWAVE_DEFAULT_SAMPLES_PER_FRAME;

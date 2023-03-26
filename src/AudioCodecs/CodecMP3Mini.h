@@ -42,7 +42,7 @@ class MP3DecoderMini : public AudioDecoder {
 
   void setBufferLength(int len) { buffer_size = len; }
 
-  void setNotifyAudioChange(AudioBaseInfoDependent &bi) {
+  void setNotifyAudioChange(AudioInfoDependent &bi) {
     audioBaseInfoSupport = &bi;
   }
 
@@ -68,7 +68,7 @@ class MP3DecoderMini : public AudioDecoder {
   void setOutputStream(Print &outStream) { this->out = &outStream; }
 
   /// Provides the last available MP3FrameInfo
-  AudioBaseInfo audioInfo() { return audio_info; }
+  AudioInfo audioInfo() { return audio_info; }
 
   /// Write mp3 data to decoder
   size_t write(const void *data, size_t len) {
@@ -99,8 +99,8 @@ class MP3DecoderMini : public AudioDecoder {
   }
 
  protected:
-  AudioBaseInfo audio_info;
-  AudioBaseInfoDependent *audioBaseInfoSupport = nullptr;
+  AudioInfo audio_info;
+  AudioInfoDependent *audioBaseInfoSupport = nullptr;
   Print *out = nullptr;
   mp3dec_t mp3d;
   mp3dec_frame_info_t mp3dec_info;
@@ -142,7 +142,7 @@ class MP3DecoderMini : public AudioDecoder {
   /// Provides Metadata and PCM data
   void provideResult(int samples) {
     LOGD("provideResult: %d samples", samples);
-    AudioBaseInfo info;
+    AudioInfo info;
     info.sample_rate = mp3dec_info.hz>sample_rate_limit ? sample_rate_limit : mp3dec_info.hz;
     info.channels = mp3dec_info.channels;
     info.bits_per_sample = 16;

@@ -26,7 +26,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-struct OpusSettings : public AudioBaseInfo {
+struct OpusSettings : public AudioInfo {
   OpusSettings() {
     /// 8000,12000,16000 ,24000,48000
     sample_rate = 48000;
@@ -134,11 +134,11 @@ class OpusAudioDecoder : public AudioDecoder {
   /// Defines the output Stream
   void setOutputStream(Print &out_stream) override { p_print = &out_stream; }
 
-  void setNotifyAudioChange(AudioBaseInfoDependent &bi) override {
+  void setNotifyAudioChange(AudioInfoDependent &bi) override {
     this->bid = &bi;
   }
 
-  AudioBaseInfo audioInfo() override { return cfg; }
+  AudioInfo audioInfo() override { return cfg; }
 
   /// Provides access to the configuration
   OpusSettings &config() { return cfg; }
@@ -177,7 +177,7 @@ class OpusAudioDecoder : public AudioDecoder {
     active = false;
   }
 
-  void setAudioInfo(AudioBaseInfo from) override {
+  void setAudioInfo(AudioInfo from) override {
     cfg.sample_rate = from.sample_rate;
     cfg.channels = from.channels;
     cfg.bits_per_sample = from.bits_per_sample;
@@ -205,7 +205,7 @@ class OpusAudioDecoder : public AudioDecoder {
 
  protected:
   Print *p_print = nullptr;
-  AudioBaseInfoDependent *bid = nullptr;
+  AudioInfoDependent *bid = nullptr;
   OpusSettings cfg;
   OpusDecoder *dec;
   bool active;
@@ -234,7 +234,7 @@ class OpusAudioEncoder : public AudioEncoder {
   const char *mime() override { return "audio/opus"; }
 
   /// We actually do nothing with this
-  void setAudioInfo(AudioBaseInfo from) override {
+  void setAudioInfo(AudioInfo from) override {
     cfg.sample_rate = from.sample_rate;
     cfg.channels = from.channels;
     cfg.bits_per_sample = from.bits_per_sample;

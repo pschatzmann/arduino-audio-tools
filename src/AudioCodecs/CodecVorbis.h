@@ -36,7 +36,7 @@ public:
     }
   }
 
-  void setNotifyAudioChange(AudioBaseInfoDependent &bi) override {
+  void setNotifyAudioChange(AudioInfoDependent &bi) override {
     p_notify = &bi;
   }
 
@@ -71,7 +71,7 @@ public:
   void setInputStream(Stream &inStream) override { this->p_in = &inStream; }
 
   /// Provides the last available MP3FrameInfo
-  AudioBaseInfo audioInfo() override { return cfg; }
+  AudioInfo audioInfo() override { return cfg; }
 
   /// checks if the class is active
   virtual operator bool() override { return active; }
@@ -90,7 +90,7 @@ public:
 
     long result = ov_read(&file, (char *)pcm.data(), pcm.size(), &bitstream);
     if (result > 0) {
-      AudioBaseInfo current = currentInfo();
+      AudioInfo current = currentInfo();
       if (current != cfg) {
         cfg = current;
         cfg.logInfo();
@@ -109,8 +109,8 @@ public:
   }
 
 protected:
-  AudioBaseInfo cfg;
-  AudioBaseInfoDependent *p_notify = nullptr;
+  AudioInfo cfg;
+  AudioInfoDependent *p_notify = nullptr;
   Print *p_out = nullptr;
   Stream *p_in = nullptr;
   Vector<uint8_t> pcm;
@@ -120,8 +120,8 @@ protected:
   int bitstream;
   bool is_first = true;
 
-  AudioBaseInfo currentInfo() {
-    AudioBaseInfo result;
+  AudioInfo currentInfo() {
+    AudioInfo result;
     vorbis_info *info = ov_info(&file, -1);
     result.sample_rate = info->rate;
     result.channels = info->channels;

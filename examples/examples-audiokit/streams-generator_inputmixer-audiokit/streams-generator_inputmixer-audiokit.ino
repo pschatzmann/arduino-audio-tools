@@ -17,7 +17,7 @@ GeneratedSoundStream<int16_t> sound2(sineWave2);             // Stream generated
 InputMixer<int16_t> mixer;
 AudioKitStream out; 
 StreamCopy copier(out, mixer);                             // copies sound into i2s
-AudioBaseInfo info;
+AudioInfo info;
 
 // Arduino Setup
 void setup(void) {  

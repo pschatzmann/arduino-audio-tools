@@ -17,7 +17,7 @@
 namespace audio_tools {
 
 // forward audio changes
-AudioBaseInfoDependent *audioChangeMAD;
+AudioInfoDependent *audioChangeMAD;
 
 /**
  * @brief MP3 Decoder using https://github.com/pschatzmann/arduino-libmad
@@ -83,10 +83,10 @@ class MP3DecoderMAD : public AudioDecoder  {
             return mad->audioInfo();
         }
 
-        AudioBaseInfo audioInfo(){
+        AudioInfo audioInfo(){
             TRACED();
             libmad::MadAudioInfo info = audioInfoEx();
-            AudioBaseInfo base;
+            AudioInfo base;
             base.channels = info.channels;
             base.sample_rate = info.sample_rate;
             base.bits_per_sample = info.bits_per_sample; 
@@ -117,7 +117,7 @@ class MP3DecoderMAD : public AudioDecoder  {
         static void audioChangeCallback(libmad::MadAudioInfo &info){
             if (audioChangeMAD!=nullptr){
                 TRACED();
-                AudioBaseInfo base;
+                AudioInfo base;
                 base.channels = info.channels;
                 base.sample_rate = info.sample_rate;
                 base.bits_per_sample = info.bits_per_sample;
@@ -126,7 +126,7 @@ class MP3DecoderMAD : public AudioDecoder  {
             }
         }
 
-        virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi) {
+        virtual void setNotifyAudioChange(AudioInfoDependent &bi) {
             TRACED();
             audioChangeMAD = &bi;
             // register audio change handler

@@ -34,11 +34,11 @@ class G722Decoder : public AudioDecoder {
  public:
   G722Decoder() = default;
 
-  virtual void setAudioInfo(AudioBaseInfo cfg) { this->cfg = cfg; }
+  virtual void setAudioInfo(AudioInfo cfg) { this->cfg = cfg; }
 
-  virtual AudioBaseInfo audioInfo() { return cfg; }
+  virtual AudioInfo audioInfo() { return cfg; }
 
-  virtual void begin(AudioBaseInfo cfg) {
+  virtual void begin(AudioInfo cfg) {
     setAudioInfo(cfg);
     begin();
   }
@@ -71,7 +71,7 @@ class G722Decoder : public AudioDecoder {
     is_active = false;
   }
 
-  virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi) {
+  virtual void setNotifyAudioChange(AudioInfoDependent &bi) {
     p_notify = &bi;
   }
 
@@ -97,8 +97,8 @@ class G722Decoder : public AudioDecoder {
  protected:
   Print *p_print = nullptr;
   G722_DEC_CTX *g722_dctx=nullptr;
-  AudioBaseInfo cfg;
-  AudioBaseInfoDependent *p_notify = nullptr;
+  AudioInfo cfg;
+  AudioInfoDependent *p_notify = nullptr;
   Vector<uint8_t> input_buffer;
   Vector<uint8_t> result_buffer;
   int options = G722_SAMPLE_RATE_8000;
@@ -137,7 +137,7 @@ class G722Encoder : public AudioEncoder {
  public:
   G722Encoder() = default;
 
-  void begin(AudioBaseInfo bi) {
+  void begin(AudioInfo bi) {
     setAudioInfo(bi);
     begin();
   }
@@ -172,7 +172,7 @@ class G722Encoder : public AudioEncoder {
 
   virtual const char *mime() { return "audio/g722"; }
 
-  virtual void setAudioInfo(AudioBaseInfo cfg) { this->cfg = cfg; }
+  virtual void setAudioInfo(AudioInfo cfg) { this->cfg = cfg; }
 
   virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
 
@@ -193,7 +193,7 @@ class G722Encoder : public AudioEncoder {
   }
 
  protected:
-  AudioBaseInfo cfg;
+  AudioInfo cfg;
   Print *p_print = nullptr;
   G722_ENC_CTX *g722_ectx = nullptr;
   Vector<uint8_t> input_buffer;

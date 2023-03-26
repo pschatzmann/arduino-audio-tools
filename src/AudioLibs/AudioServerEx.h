@@ -14,7 +14,7 @@ namespace audio_tools {
  * @copyright GPLv3
  */
 
-struct AudioServerExConfig : public AudioBaseInfo {
+struct AudioServerExConfig : public AudioInfo {
     const char* mime = nullptr;
     const char* ssid = nullptr;
     const char* password = nullptr;

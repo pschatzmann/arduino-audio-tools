@@ -35,7 +35,7 @@ INLINE_VAR const char* i2s_formats[] = {"I2S_STD_FORMAT","I2S_LSB_FORMAT","I2S_M
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class I2SConfig : public AudioBaseInfo {
+class I2SConfig : public AudioInfo {
   public:
 
     I2SConfig() {

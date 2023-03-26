@@ -96,7 +96,7 @@ class TimeInfoStream : public AudioStream {
             return isActive() ? p_stream->available() : 0; 
         }
 
-        void setAudioInfo(AudioBaseInfo info) override {
+        void setAudioInfo(AudioInfo info) override {
             p_info->setAudioInfo(info);
         }
 
@@ -111,7 +111,7 @@ class TimeInfoStream : public AudioStream {
     protected:    
         Stream *p_stream=nullptr;
         Print *p_print=nullptr;
-        AudioBaseInfoDependent *p_info=nullptr;
+        AudioInfoDependent *p_info=nullptr;
         long start_time = 0;
         long end_time = -1;
         double current_time = 0; 

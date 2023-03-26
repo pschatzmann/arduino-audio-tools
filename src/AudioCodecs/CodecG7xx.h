@@ -52,7 +52,7 @@ class G7xxDecoder : public AudioDecoder {
     }
   }
 
-  void setAudioInfo(AudioBaseInfo cfg) override { 
+  void setAudioInfo(AudioInfo cfg) override { 
     if (cfg.channels!=1){
       LOGE("channels must be 1 instead of %d", cfg.channels);
     }
@@ -64,9 +64,9 @@ class G7xxDecoder : public AudioDecoder {
     }
   }
 
-  AudioBaseInfo audioInfo()override { return cfg; }
+  AudioInfo audioInfo()override { return cfg; }
 
-  virtual void begin(AudioBaseInfo cfg)  {
+  virtual void begin(AudioInfo cfg)  {
     setAudioInfo(cfg);
     begin();
   }
@@ -86,7 +86,7 @@ class G7xxDecoder : public AudioDecoder {
     is_active = false;
   }
 
-  void setNotifyAudioChange(AudioBaseInfoDependent &bi) override {
+  void setNotifyAudioChange(AudioInfoDependent &bi) override {
     p_notify = &bi;
   }
 
@@ -112,8 +112,8 @@ class G7xxDecoder : public AudioDecoder {
 
  protected:
   Print *p_print = nullptr;
-  AudioBaseInfo cfg;
-  AudioBaseInfoDependent *p_notify = nullptr;
+  AudioInfo cfg;
+  AudioInfoDependent *p_notify = nullptr;
   int input_pos = 0;
   bool is_active = false;
   int16_t sample;
@@ -163,7 +163,7 @@ class G7xxEncoder : public AudioEncoder {
     }
   }
 
-  virtual void begin(AudioBaseInfo bi) {
+  virtual void begin(AudioInfo bi) {
     setAudioInfo(bi);
     begin();
   }
@@ -184,7 +184,7 @@ class G7xxEncoder : public AudioEncoder {
 
   const char *mime() override { return p_mime; }
 
-  virtual void setAudioInfo(AudioBaseInfo cfg) { 
+  virtual void setAudioInfo(AudioInfo cfg) { 
     if (cfg.channels!=1){
       LOGE("channels must be 1 instead of %d", cfg.channels);
     }
@@ -218,7 +218,7 @@ class G7xxEncoder : public AudioEncoder {
   }
 
  protected:
-  AudioBaseInfo cfg;
+  AudioInfo cfg;
   Print *p_print = nullptr;
   bool is_active = false;
   const char *p_mime = nullptr;

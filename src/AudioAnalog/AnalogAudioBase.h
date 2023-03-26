@@ -16,7 +16,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AnalogConfig : public AudioBaseInfo {
+class AnalogConfig : public AudioInfo {
   public:
     int buffer_count = I2S_BUFFER_COUNT;
     int buffer_size = I2S_BUFFER_SIZE;
@@ -68,7 +68,7 @@ class AnalogConfig : public AudioBaseInfo {
     }
 
     void logInfo() {
-      AudioBaseInfo::logInfo();
+      AudioInfo::logInfo();
       if (rx_tx_mode == TX_MODE){
         LOGI("analog left output pin: %d", 25);
         LOGI("analog right output pin: %d", 26);

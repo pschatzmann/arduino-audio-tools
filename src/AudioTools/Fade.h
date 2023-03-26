@@ -183,7 +183,7 @@ public:
     bits_per_sample = bits;
   }
 
-  void setAudioInfo(AudioBaseInfo info)  {
+  void setAudioInfo(AudioInfo info)  {
     setChannels(info.channels);
     setBitsPerSample(info.bits_per_sample);
   }
@@ -248,7 +248,7 @@ public:
 
   void setTarget(Print &out) { p_out = &out; }
 
-  void setAudioInfo(AudioBaseInfo info) override {
+  void setAudioInfo(AudioInfo info) override {
     AudioStream::setAudioInfo(info);
     fade_last.setAudioInfo(info);
     active = true;

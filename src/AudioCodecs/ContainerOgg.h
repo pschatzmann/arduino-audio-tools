@@ -12,7 +12,7 @@ namespace audio_tools {
 
 /**
  * @brief OggContainerDecoder - Ogg Container. Decodes a packet from an Ogg container.
- * The Ogg begin segment contains the AudioBaseInfo structure. You can subclass
+ * The Ogg begin segment contains the AudioInfo structure. You can subclass
  * and overwrite the beginOfSegment() method to implement your own headers
  * @ingroup codecs
  * @author Phil Schatzmann
@@ -50,13 +50,13 @@ class OggContainerDecoder : public AudioDecoder {
     }
   }
 
-  void setNotifyAudioChange(AudioBaseInfoDependent &bi) override {
+  void setNotifyAudioChange(AudioInfoDependent &bi) override {
     this->bid = &bi;
   }
 
-  AudioBaseInfo audioInfo() override { return cfg; }
+  AudioInfo audioInfo() override { return cfg; }
 
-  void begin(AudioBaseInfo info) {
+  void begin(AudioInfo info) {
     TRACED();
     cfg = info;
     if (bid != nullptr) {
@@ -127,8 +127,8 @@ class OggContainerDecoder : public AudioDecoder {
   RingBuffer<uint8_t> buffer{OGG_DEFAULT_BUFFER_SIZE};
   Print *p_print = nullptr;
   OGGZ *p_oggz = nullptr;
-  AudioBaseInfoDependent *bid = nullptr;
-  AudioBaseInfo cfg;
+  AudioInfoDependent *bid = nullptr;
+  AudioInfo cfg;
   bool is_open = false;
   long pos = 0;
 
@@ -192,7 +192,7 @@ class OggContainerDecoder : public AudioDecoder {
 
 /**
  * @brief OggContainerEncoder - Ogg Container. Encodes a packet for an Ogg container.
- * The Ogg begin segment contains the AudioBaseInfo structure. You can subclass
+ * The Ogg begin segment contains the AudioInfo structure. You can subclass
  * ond overwrite the writeHeader() method to implement your own header logic.
  * @ingroup codecs
  * @author Phil Schatzmann
@@ -233,9 +233,9 @@ class OggContainerEncoder : public AudioEncoder {
   const char *mime() override { return mime_pcm; }
 
   /// We actually do nothing with this
-  virtual void setAudioInfo(AudioBaseInfo from) override { cfg = from; }
+  virtual void setAudioInfo(AudioInfo from) override { cfg = from; }
 
-  virtual void begin(AudioBaseInfo from) {
+  virtual void begin(AudioInfo from) {
     setAudioInfo(cfg);
     begin();
   }
@@ -332,7 +332,7 @@ class OggContainerEncoder : public AudioEncoder {
   size_t granulepos = 0;
   size_t packetno = 0;
   long serialno = -1;
-  AudioBaseInfo cfg;
+  AudioInfo cfg;
   bool is_audio = false;
 
   virtual bool writePacket(ogg_packet &op, int flag = 0) {

@@ -11,15 +11,15 @@
 namespace audio_tools {
 class StdioStream : public AudioStream {
 public:
-  AudioBaseInfo defaultConfig() {
-    AudioBaseInfo def;
+  AudioInfo defaultConfig() {
+    AudioInfo def;
     def.bits_per_sample = 16;
     def.sample_rate = 44100;
     def.channels = 2;
     return def;
   }
 
-  bool begin(AudioBaseInfo cfg) {
+  bool begin(AudioInfo cfg) {
     is_open = true;
     info = cfg;
     return true;

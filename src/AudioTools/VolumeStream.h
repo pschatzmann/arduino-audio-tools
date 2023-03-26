@@ -11,7 +11,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3 
  */
-struct VolumeStreamConfig : public AudioBaseInfo {
+struct VolumeStreamConfig : public AudioInfo {
   VolumeStreamConfig(){
     bits_per_sample = 16;
     channels = 2;
@@ -53,14 +53,14 @@ class VolumeStream : public AudioStream {
         VolumeStream(AudioPrint &out) {
             Print *p_print = &out;
             setTarget(*p_print);
-            p_notify = (AudioBaseInfoDependent*) &out;
+            p_notify = (AudioInfoDependent*) &out;
         }
 
         /// Constructor which assigns Stream input or output
         VolumeStream(AudioStream &io) {
             Stream *p_stream = &io;
             setStream(*p_stream);
-            p_notify = (AudioBaseInfoDependent *)&io;
+            p_notify = (AudioInfoDependent *)&io;
         }
 
         /// Defines/Changes the output target
@@ -85,7 +85,7 @@ class VolumeStream : public AudioStream {
             return c;
         }
 
-        bool begin(AudioBaseInfo cfg)  {
+        bool begin(AudioInfo cfg)  {
           VolumeStreamConfig cfg1;
           cfg1.channels = cfg.channels;
           cfg1.sample_rate = cfg.sample_rate;
@@ -165,7 +165,7 @@ class VolumeStream : public AudioStream {
         }
 
         /// Detines the Audio info - The bits_per_sample are critical to work properly!
-        void setAudioInfo(AudioBaseInfo cfg) override {
+        void setAudioInfo(AudioInfo cfg) override {
             TRACED();
             // pass on notification
             if (p_notify!=nullptr){

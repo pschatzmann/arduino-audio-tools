@@ -58,7 +58,7 @@ class ChannelFormatConverterStreamT : public AudioStream {
            return size;
         }
 
-        void setAudioInfo(AudioBaseInfo cfg) override {
+        void setAudioInfo(AudioInfo cfg) override {
           AudioStream::setAudioInfo(cfg);
           to_channels = cfg.channels;
         }
@@ -121,7 +121,7 @@ class ChannelFormatConverterStream : public AudioStream {
           p_print = &print;
         }
 
-        void setAudioInfo(AudioBaseInfo cfg) override {
+        void setAudioInfo(AudioInfo cfg) override {
           AudioStream::setAudioInfo(cfg);
             switch(bits_per_sample){
               case 8:
@@ -555,16 +555,16 @@ class FormatConverterStream : public AudioStream {
         }
 
         /// Defines the audio info of the stream which has been defined in the constructor
-        void setSourceAudioInfo(AudioBaseInfo from){
+        void setSourceAudioInfo(AudioInfo from){
           from_cfg = from;
         }
 
-        bool begin(AudioBaseInfo from, AudioBaseInfo to){
+        bool begin(AudioInfo from, AudioInfo to){
             setSourceAudioInfo(from);
             return begin(to);
         }
 
-        bool begin(AudioBaseInfo to){
+        bool begin(AudioInfo to){
           setAudioInfo(to);
           to_cfg = to;
           if (p_stream!=nullptr){
@@ -598,8 +598,8 @@ class FormatConverterStream : public AudioStream {
         }
 
   protected:
-    AudioBaseInfo from_cfg;
-    AudioBaseInfo to_cfg;
+    AudioInfo from_cfg;
+    AudioInfo to_cfg;
     Stream *p_stream=nullptr;
     Print *p_print=nullptr;
     NumberFormatConverterStream numberFormatConverter;

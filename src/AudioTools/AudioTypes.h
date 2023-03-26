@@ -30,42 +30,42 @@ enum TimeUnit {MS, US};
  * @brief Basic Audio information which drives e.g. I2S
  * @ingroup basic
  */
-struct AudioBaseInfo {
+struct AudioInfo {
     /// Default constructor
-    AudioBaseInfo() = default;
+    AudioInfo() = default;
 
     /// Constructor which supports all attribures as parameters
-    AudioBaseInfo(int sampleRate, int channelCount, int bitsPerSample) {
+    AudioInfo(int sampleRate, int channelCount, int bitsPerSample) {
         sample_rate = sampleRate;
         channels = channelCount;
         bits_per_sample = bitsPerSample;
     };
 
     /// Copy constructor
-    AudioBaseInfo(const AudioBaseInfo &) = default;
+    AudioInfo(const AudioInfo &) = default;
     
     int sample_rate = 0;    // undefined
     int channels = 0;       // undefined
     int bits_per_sample=16; // we assume int16_t
 
-    bool operator==(AudioBaseInfo alt){
+    bool operator==(AudioInfo alt){
         return sample_rate==alt.sample_rate && channels == alt.channels && bits_per_sample == alt.bits_per_sample;
     }
-    bool operator!=(AudioBaseInfo alt){
+    bool operator!=(AudioInfo alt){
         return !(*this == alt);
     } 
     
-    void setAudioInfo(AudioBaseInfo info)  {
+    void setAudioInfo(AudioInfo info)  {
       sample_rate = info.sample_rate;
       channels = info.channels;
       bits_per_sample = info.bits_per_sample;
     }
 
-    void copyFrom(AudioBaseInfo info){
+    void copyFrom(AudioInfo info){
       setAudioInfo(info);
     }
 
-    AudioBaseInfo& operator= (const AudioBaseInfo& info){
+    AudioInfo& operator= (const AudioInfo& info){
       setAudioInfo(info);
       return *this;      
     }
@@ -77,15 +77,18 @@ struct AudioBaseInfo {
     }      
 };
 
+// Support legacy name
+using AudioBaseInfo = AudioInfo;
+
 /**
  * @brief Supports changes to the sampling rate, bits and channels
  * @ingroup basic
  */
-class AudioBaseInfoDependent {
+class AudioInfoDependent {
     public:
-      virtual void setAudioInfo(AudioBaseInfo info)=0;
-      virtual AudioBaseInfo audioInfo() = 0;
-      virtual bool validate(AudioBaseInfo &info){
+      virtual void setAudioInfo(AudioInfo info)=0;
+      virtual AudioInfo audioInfo() = 0;
+      virtual bool validate(AudioInfo &info){
         return true;
       }
 };
@@ -94,9 +97,9 @@ class AudioBaseInfoDependent {
  * @brief Supports the subscription to audio change notifications
  * @ingroup basic
  */
-class AudioBaseInfoSource {
+class AudioInfoSource {
     public:
-      virtual void  setNotifyAudioChange(AudioBaseInfoDependent &bi) = 0;
+      virtual void  setNotifyAudioChange(AudioInfoDependent &bi) = 0;
 };
 
 
@@ -107,7 +110,7 @@ class AudioBaseInfoSource {
 class AudioWriter {
   public: 
       virtual size_t write(const void *in_ptr, size_t in_size) = 0;
-      virtual void setAudioInfo(AudioBaseInfo from) = 0;
+      virtual void setAudioInfo(AudioInfo from) = 0;
       virtual void setOutputStream(Print &out_stream) = 0;
       virtual operator bool() = 0;
       virtual void begin() = 0;

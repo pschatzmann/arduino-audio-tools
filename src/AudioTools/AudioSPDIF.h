@@ -100,7 +100,7 @@ static uint32_t *spdif_ptr;
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-struct SPDIFConfig : public AudioBaseInfo {
+struct SPDIFConfig : public AudioInfo {
   SPDIFConfig() {
     bits_per_sample = 16;
     channels = 2;
@@ -179,7 +179,7 @@ class SPDIFStream : public AudioStream {
   }
 
   /// Change the audio parameters
-  void setAudioInfo(AudioBaseInfo info) {
+  void setAudioInfo(AudioInfo info) {
     TRACED();
     cfg.bits_per_sample = info.bits_per_sample;
     cfg.channels = info.channels;

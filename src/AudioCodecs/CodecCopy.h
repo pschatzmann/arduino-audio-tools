@@ -28,7 +28,7 @@ public:
 
   CopyDecoder(Print &out_stream) { TRACED(); pt_print=&out_stream; }
 
-  CopyDecoder(Print &out_stream, AudioBaseInfoDependent &bi) {pt_print=&out_stream;}
+  CopyDecoder(Print &out_stream, AudioInfoDependent &bi) {pt_print=&out_stream;}
 
   ~CopyDecoder() {}
 
@@ -38,13 +38,13 @@ public:
 
   void end() {}
 
-  AudioBaseInfo audioInfo() { AudioBaseInfo dummy; return dummy; }
+  AudioInfo audioInfo() { AudioInfo dummy; return dummy; }
 
   size_t write(const void *data, size_t len) { return pt_print->write((uint8_t*)data,len); }
 
   operator bool() { return true; }
 
-  void setNotifyAudioChange(AudioBaseInfoDependent &bi) {}
+  void setNotifyAudioChange(AudioInfoDependent &bi) {}
 
   // The result is encoded data
   virtual bool isResultPCM() { return is_pcm;} 
@@ -66,7 +66,7 @@ public:
 
   CopyEncoder(Print &out_stream) { TRACED(); pt_print=&out_stream; }
 
-  CopyEncoder(Print &out_stream, AudioBaseInfoDependent &bi) {pt_print=&out_stream;}
+  CopyEncoder(Print &out_stream, AudioInfoDependent &bi) {pt_print=&out_stream;}
 
   ~CopyEncoder() {}
 
@@ -76,21 +76,21 @@ public:
 
   void end() {}
 
-  AudioBaseInfo audioInfo() { return info; }
-  void setAudioInfo(AudioBaseInfo ai) { info = ai; }
+  AudioInfo audioInfo() { return info; }
+  void setAudioInfo(AudioInfo ai) { info = ai; }
 
   size_t write(const void *data, size_t len) { return pt_print->write((uint8_t*)data,len); }
 
   operator bool() { return true; }
 
-  void setNotifyAudioChange(AudioBaseInfoDependent &bi) {}
+  void setNotifyAudioChange(AudioInfoDependent &bi) {}
 
   const char *mime() {return nullptr;}
 
 
 protected:
   Print *pt_print=nullptr;
-  AudioBaseInfo info;
+  AudioInfo info;
 };
 
 

@@ -19,7 +19,7 @@ namespace audio_tools {
 
 struct SimpleContainerConfig {
   char header[4] = "CFG";
-  AudioBaseInfo info;
+  AudioInfo info;
 };
 
 struct SimpleContainerDataHeader {
@@ -39,7 +39,7 @@ class SimpleContainerEncoder : public AudioEncoder {
 
   void setOutputStream(Print &outStream) { p_codec->setOutputStream(outStream);}
 
-  void begin(AudioBaseInfo info) {
+  void begin(AudioInfo info) {
     TRACED();
     setAudioInfo(info);
     p_codec->begin();
@@ -49,7 +49,7 @@ class SimpleContainerEncoder : public AudioEncoder {
     p_codec->begin();
   }
 
-  void setAudioInfo(AudioBaseInfo info){
+  void setAudioInfo(AudioInfo info){
     p_codec->setAudioInfo(info);
     cfg.info = info;
   }
@@ -106,7 +106,7 @@ class SimpleContainerDecoder : public AudioDecoder {
 
   void setOutputStream(Print &outStream) { p_codec->setOutputStream(outStream);}
 
-  void setNotifyAudioChange(AudioBaseInfoDependent &bi) { p_inform = &bi; }
+  void setNotifyAudioChange(AudioInfoDependent &bi) { p_inform = &bi; }
 
   void begin() {
     p_codec->begin();
@@ -152,11 +152,11 @@ class SimpleContainerDecoder : public AudioDecoder {
     return len;
   }
 
-  AudioBaseInfo audioInfo() { return cfg.info; }
+  AudioInfo audioInfo() { return cfg.info; }
 
  protected:
   SimpleContainerConfig cfg;
-  AudioBaseInfoDependent *p_inform = nullptr;
+  AudioInfoDependent *p_inform = nullptr;
   AudioDecoder* p_codec = nullptr;
   Vector<char *> parsed;
 };

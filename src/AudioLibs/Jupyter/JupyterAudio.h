@@ -178,7 +178,7 @@ public:
   }
 
   // Provides the audion information
-  AudioBaseInfo audioInfo() {
+  AudioInfo audioInfo() {
     return cfg;
   }
 
@@ -188,7 +188,7 @@ protected:
   WAVEncoder wave_encoder;
   EncodedAudioPrint out;
   StreamCopyT<T> copier;
-  AudioBaseInfo cfg;
+  AudioInfo cfg;
   string fname;
   size_t buffer_count=0;
 };

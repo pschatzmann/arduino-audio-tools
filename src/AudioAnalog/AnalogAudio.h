@@ -33,7 +33,7 @@ class AnalogAudioStream  : public AudioStream {
     }
 
     /// updates the sample rate dynamically 
-    virtual void setAudioInfo(AudioBaseInfo info) {
+    virtual void setAudioInfo(AudioInfo info) {
         TRACEI();
         if (adc_config.sample_rate != info.sample_rate
             || adc_config.channels != info.channels

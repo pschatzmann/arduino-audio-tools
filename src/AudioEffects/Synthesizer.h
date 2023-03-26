@@ -24,7 +24,7 @@ class AbstractSynthesizerChannel {
         virtual ~AbstractSynthesizerChannel() = default;
         virtual AbstractSynthesizerChannel* clone() = 0;
         /// Start the sound generation
-        virtual void begin(AudioBaseInfo config);
+        virtual void begin(AudioInfo config);
         /// Checks if the ADSR is still active - and generating sound
         virtual bool isActive() = 0;
         /// Provides the key on event to ADSR to start the sound
@@ -67,7 +67,7 @@ class DefaultSynthesizerChannel : public AbstractSynthesizerChannel {
             p_generator = &generator;
         }
 
-        virtual void begin(AudioBaseInfo config) override {
+        virtual void begin(AudioInfo config) override {
             TRACEI();
             this->config = config;
             config.logInfo();
@@ -131,7 +131,7 @@ class DefaultSynthesizerChannel : public AbstractSynthesizerChannel {
         }
 
     protected:
-        AudioBaseInfo config;
+        AudioInfo config;
         AudioEffectCommon effects;
         SoundGenerator<int16_t> *p_generator = nullptr;
         ADSRGain *p_adsr = nullptr;
@@ -183,7 +183,7 @@ class Synthesizer : public SoundGenerator<int16_t> {
 #endif
        }
 
-        bool begin(AudioBaseInfo config) {
+        bool begin(AudioInfo config) {
             TRACEI();
             this->cfg = config;
             SoundGenerator<int16_t>::begin(config);
@@ -243,7 +243,7 @@ class Synthesizer : public SoundGenerator<int16_t> {
         }
 
     protected:
-        AudioBaseInfo cfg;
+        AudioInfo cfg;
         AbstractSynthesizerChannel* defaultChannel;
         Vector<AbstractSynthesizerChannel*> channels;
         const char* midi_name = "Synthesizer";

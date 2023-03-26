@@ -14,7 +14,7 @@ namespace audio_tools {
 /**
  * @brief Config for Mini
  */
-class MiniAudioConfig : public AudioBaseInfo {
+class MiniAudioConfig : public AudioInfo {
 public:
   PortAudioConfig() {
     sample_rate = 44100;
@@ -22,7 +22,7 @@ public:
     bits_per_sample = 16;
   };
   PortAudioConfig(const PortAudioConfig &) = default;
-  PortAudioConfig(const AudioBaseInfo &in) {
+  PortAudioConfig(const AudioInfo &in) {
     sample_rate = in.sample_rate;
     channels = in.channels;
     bits_per_sample = in.bits_per_sample;
@@ -48,7 +48,7 @@ public:
   MiniAudioStream(Print out) { p_out = &out; }
 
   MiniAudioConfig defaultConfig(RxTxMode mode = RX_TX_MODE) {
-    AudioBaseInfo info;
+    AudioInfo info;
     info.sample_rate = 44100;
     info.channels = 2;
     info.bits_per_sample = 16;
@@ -73,7 +73,7 @@ public:
     return info;
   }
 
-  void setAudioInfo(AudioBaseInfo in) override {
+  void setAudioInfo(AudioInfo in) override {
     if (in.sample_rate != info.sample_rate || in.channels != info.channels ||
         in.bits_per_sample != info.bits_per_sample) {
       end();
@@ -81,7 +81,7 @@ public:
     }
   }
 
-  bool begin(AudioBaseInfo info) {
+  bool begin(AudioInfo info) {
     this->info = info;
     if (info.is_input) {
       buffer_in.resize(1024 * 5);

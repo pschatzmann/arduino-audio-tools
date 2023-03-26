@@ -13,7 +13,7 @@ namespace audio_tools {
  * @brief PortAudio information
  * 
  */
-class PortAudioConfig : public AudioBaseInfo {
+class PortAudioConfig : public AudioInfo {
     public:
         PortAudioConfig() {
             sample_rate = 44100;
@@ -21,7 +21,7 @@ class PortAudioConfig : public AudioBaseInfo {
             bits_per_sample = 16;
         };
         PortAudioConfig(const PortAudioConfig&) = default;
-        PortAudioConfig(const AudioBaseInfo& in) {
+        PortAudioConfig(const AudioInfo& in) {
             sample_rate = in.sample_rate;
             channels = in.channels;
             bits_per_sample = in.bits_per_sample;
@@ -77,7 +77,7 @@ class PortAudioStream : public AudioStream {
         }
 
         /// notification of audio info change
-        void setAudioInfo(AudioBaseInfo in) override {
+        void setAudioInfo(AudioInfo in) override {
             TRACEI();
             info.channels = in.channels;
             info.sample_rate = in.sample_rate;

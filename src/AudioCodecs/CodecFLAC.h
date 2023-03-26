@@ -52,8 +52,8 @@ class FLACDecoder : public StreamingDecoder {
     is_ogg = isOgg;
   }
 
-  AudioBaseInfo audioInfo() { 
-    AudioBaseInfo info;
+  AudioInfo audioInfo() { 
+    AudioInfo info;
     info.sample_rate = FLAC__stream_decoder_get_sample_rate(decoder);
     info.channels = FLAC__stream_decoder_get_channels(decoder);
     info.bits_per_sample = 16; // only 16 is supported
@@ -101,7 +101,7 @@ class FLACDecoder : public StreamingDecoder {
     while(FLAC__stream_decoder_process_single(decoder));
   }
 
-  void setNotifyAudioChange(AudioBaseInfoDependent &bi) {
+  void setNotifyAudioChange(AudioInfoDependent &bi) {
     p_notify = &bi;
   }
 
@@ -137,8 +137,8 @@ class FLACDecoder : public StreamingDecoder {
  protected:
   bool is_active = false;
   bool is_ogg = false;
-  AudioBaseInfo info;
-  AudioBaseInfoDependent *p_notify = nullptr;
+  AudioInfo info;
+  AudioInfoDependent *p_notify = nullptr;
   FLAC__StreamDecoder *decoder = nullptr;
   FLAC__StreamDecoderInitStatus init_status;
   Print *p_print = nullptr;
@@ -199,7 +199,7 @@ class FLACDecoder : public StreamingDecoder {
     LOGI("write_callback: %d", frame->header.blocksize);
     FLACDecoder *self = (FLACDecoder *)client_data;
 
-    AudioBaseInfo actual_info = self->audioInfo();
+    AudioInfo actual_info = self->audioInfo();
     if (self->info != actual_info){
       self->info = actual_info;
       self->info.logInfo();
@@ -300,12 +300,12 @@ class FLACEncoder : public AudioEncoder {
   const char *mime() override { return "audio/flac"; }
 
   /// We update the audio information which will be used in the begin method
-  virtual void setAudioInfo(AudioBaseInfo from) override { 
+  virtual void setAudioInfo(AudioInfo from) override { 
     cfg = from; 
     cfg.logInfo(); 
   }
 
-  virtual void begin(AudioBaseInfo from) {
+  virtual void begin(AudioInfo from) {
     setAudioInfo(from);
     begin();
   }
@@ -402,7 +402,7 @@ class FLACEncoder : public AudioEncoder {
   bool isOpen() { return is_open; }
 
  protected:
-  AudioBaseInfo cfg;
+  AudioInfo cfg;
   Vector<FLAC__int32> buffer;
   Print *p_print = nullptr;
   FLAC__StreamEncoder *p_encoder=nullptr;

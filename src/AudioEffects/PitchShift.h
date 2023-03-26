@@ -12,7 +12,7 @@ namespace audio_tools {
  * @brief Configuration for PitchShiftStream: set the pitch_shift to define the
  * shift
  */
-struct PitchShiftInfo : public AudioBaseInfo {
+struct PitchShiftInfo : public AudioInfo {
   PitchShiftInfo() {
     channels = 2;
     sample_rate = 44100;

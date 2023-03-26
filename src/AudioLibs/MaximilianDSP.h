@@ -29,7 +29,7 @@ class Maximilian {
         }
 
         /// Setup Maximilian with audio parameters
-        void begin(AudioBaseInfo cfg){
+        void begin(AudioInfo cfg){
             this->cfg = cfg;
             maxiSettings::setup(cfg.sample_rate, cfg.channels, DEFAULT_BUFFER_SIZE);
         }
@@ -68,7 +68,7 @@ class Maximilian {
         float volume=1.0;
         int buffer_size=256;
         Print *p_sink=nullptr;
-        AudioBaseInfo cfg;
+        AudioInfo cfg;
         void (*callback)(maxi_float_t *channels);
 };
 

@@ -36,7 +36,7 @@ class APTXDecoder : public AudioDecoder {
     info.bits_per_sample = isHd ? 24 : 16;
   }
 
-  virtual AudioBaseInfo audioInfo() { return info; }
+  virtual AudioInfo audioInfo() { return info; }
 
   virtual void begin() {
     TRACEI();
@@ -54,7 +54,7 @@ class APTXDecoder : public AudioDecoder {
     ctx = nullptr;
   }
 
-  virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi) {
+  virtual void setNotifyAudioChange(AudioInfoDependent &bi) {
     notify = &bi;
   }
 
@@ -101,9 +101,9 @@ class APTXDecoder : public AudioDecoder {
   }
 
  protected:
-  AudioBaseInfo info;
+  AudioInfo info;
   struct aptx_context *ctx = nullptr;
-  AudioBaseInfoDependent *notify = nullptr;
+  AudioInfoDependent *notify = nullptr;
   Print *p_print = nullptr;
   bool is_first_write = true;
   Vector<uint8_t> output_buffer;
@@ -210,7 +210,7 @@ class APTXEncoder : public AudioEncoder {
     info.bits_per_sample = isHd ? 24 : 16;
   }
 
-  void begin(AudioBaseInfo info) {
+  void begin(AudioInfo info) {
     setAudioInfo(info);
     begin();
   }
@@ -247,7 +247,7 @@ class APTXEncoder : public AudioEncoder {
 
   virtual const char *mime() { return "audio/aptx"; }
 
-  virtual void setAudioInfo(AudioBaseInfo info) {
+  virtual void setAudioInfo(AudioInfo info) {
     this->info = info;
     switch (info.bits_per_sample) {
       case 16:
@@ -310,7 +310,7 @@ class APTXEncoder : public AudioEncoder {
 
  protected:
   bool is_hd;
-  AudioBaseInfo info;
+  AudioInfo info;
   Vector<int24_t> input_buffer{4 * 2};
   Vector<uint8_t> output_buffer;
   int input_pos = 0;

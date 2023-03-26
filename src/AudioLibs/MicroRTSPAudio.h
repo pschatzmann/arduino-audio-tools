@@ -23,7 +23,7 @@ class RTPStreamPCMInfo : public PCMInfo {
   int getSampleSizeBytes() override {
     return p_stream->audioInfo().bits_per_sample / 8;
   };
-  virtual void setAudioInfo(AudioBaseInfo ai) { p_stream->setAudioInfo(ai); }
+  virtual void setAudioInfo(AudioInfo ai) { p_stream->setAudioInfo(ai); }
 
  protected:
   AudioStream* p_stream = nullptr;
@@ -31,7 +31,7 @@ class RTPStreamPCMInfo : public PCMInfo {
 
 /**
  * @brief PCMInfo subclass which provides the audio information from the
- * AudioBaseInfo parameter
+ * AudioInfo parameter
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -39,14 +39,14 @@ class RTPStreamPCMInfo : public PCMInfo {
 class RTPPCMAudioInfo : public PCMInfo {
  public:
   RTPPCMAudioInfo() = default;
-  virtual void begin(AudioBaseInfo info) { this->info = info; }
+  virtual void begin(AudioInfo info) { this->info = info; }
   int getSampleRate() override { return info.sample_rate; }
   int getChannels() override { return info.channels; }
   int getSampleSizeBytes() override { return info.bits_per_sample / 8; };
-  virtual void setAudioInfo(AudioBaseInfo ai) { info = ai; }
+  virtual void setAudioInfo(AudioInfo ai) { info = ai; }
 
  protected:
-  AudioBaseInfo info;
+  AudioInfo info;
 };
 
 
@@ -81,7 +81,7 @@ class RTSPSourceAudioStream : public IAudioSource {
    *
    * @param info
    */
-  virtual void setAudioInfo(AudioBaseInfo info) {
+  virtual void setAudioInfo(AudioInfo info) {
     TRACEI();
     p_audiostream->setAudioInfo(info);
   }
@@ -146,7 +146,7 @@ class RTSPSourceStream : public IAudioSource {
    * @param stream
    * @param info
    */
-  RTSPSourceStream(Stream& stream, AudioBaseInfo info) {
+  RTSPSourceStream(Stream& stream, AudioInfo info) {
     p_stream = &stream;
     rtp_info.begin(info);
     setFormat(new RTSPFormatPCM(rtp_info));
@@ -170,7 +170,7 @@ class RTSPSourceStream : public IAudioSource {
    *
    * @param info
    */
-  virtual void setAudioInfo(AudioBaseInfo info) {
+  virtual void setAudioInfo(AudioInfo info) {
     TRACEI();
     rtp_info.setAudioInfo(info);
   }

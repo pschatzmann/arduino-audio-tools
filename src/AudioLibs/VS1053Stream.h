@@ -17,7 +17,7 @@ enum VS1053Mode {ENCODED_MODE, PCM_MODE, MIDI_MODE };
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class VS1053Config : public AudioBaseInfo {
+class VS1053Config : public AudioInfo {
   public:
     VS1053Config(){
         sample_rate = 44100;
@@ -88,7 +88,7 @@ public:
         cfg = c;
     }
 
-    void setAudioInfo(AudioBaseInfo c){
+    void setAudioInfo(AudioInfo c){
         cfg.copyFrom(c);
     }
 

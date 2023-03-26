@@ -34,11 +34,11 @@ class GSMDecoder : public AudioDecoder {
     cfg.channels = 1;
   }
 
-  virtual void setAudioInfo(AudioBaseInfo cfg) { this->cfg = cfg; }
+  virtual void setAudioInfo(AudioInfo cfg) { this->cfg = cfg; }
 
-  virtual AudioBaseInfo audioInfo() { return cfg; }
+  virtual AudioInfo audioInfo() { return cfg; }
 
-  virtual void begin(AudioBaseInfo cfg) {
+  virtual void begin(AudioInfo cfg) {
     setAudioInfo(cfg);
     begin();
   }
@@ -63,7 +63,7 @@ class GSMDecoder : public AudioDecoder {
     is_active = false;
   }
 
-  virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi) {
+  virtual void setNotifyAudioChange(AudioInfoDependent &bi) {
     p_notify = &bi;
   }
 
@@ -89,8 +89,8 @@ class GSMDecoder : public AudioDecoder {
  protected:
   Print *p_print = nullptr;
   gsm v_gsm;
-  AudioBaseInfo cfg;
-  AudioBaseInfoDependent *p_notify = nullptr;
+  AudioInfo cfg;
+  AudioInfoDependent *p_notify = nullptr;
   bool is_active = false;
   Vector<uint8_t> input_buffer;
   Vector<uint8_t> result_buffer;
@@ -135,7 +135,7 @@ class GSMEncoder : public AudioEncoder {
     scaling_active = scaling;
   }
 
-  void begin(AudioBaseInfo bi) {
+  void begin(AudioInfo bi) {
     setAudioInfo(bi);
     begin();
   }
@@ -166,7 +166,7 @@ class GSMEncoder : public AudioEncoder {
 
   virtual const char *mime() { return "audio/gsm"; }
 
-  virtual void setAudioInfo(AudioBaseInfo cfg) { this->cfg = cfg; }
+  virtual void setAudioInfo(AudioInfo cfg) { this->cfg = cfg; }
 
   virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
 
@@ -187,7 +187,7 @@ class GSMEncoder : public AudioEncoder {
   }
 
  protected:
-  AudioBaseInfo cfg;
+  AudioInfo cfg;
   Print *p_print = nullptr;
   gsm v_gsm;
   bool is_active = false;
