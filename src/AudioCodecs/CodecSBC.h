@@ -308,6 +308,11 @@ protected:
   bool setup() {
     sbc_init(&sbc, 0L);
 
+    if (info.bits_per_saple!=16){
+      LOGE("Invalid bits_per_saple: %d", info.bits_per_saple);
+      return false;
+    }
+
     switch (info.sample_rate) {
     case 16000:
       sbc.frequency = SBC_FREQ_16000;
