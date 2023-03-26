@@ -31,8 +31,19 @@ enum TimeUnit {MS, US};
  * @ingroup basic
  */
 struct AudioBaseInfo {
+    /// Default constructor
     AudioBaseInfo() = default;
+
+    /// Constructor which supports all attribures as parameters
+    AudioBaseInfo(int sampleRate, int channelCount, int bitsPerSample) {
+        sample_rate = sampleRate;
+        channels = channelCount;
+        bits_per_sample = bitsPerSample;
+    };
+
+    /// Copy constructor
     AudioBaseInfo(const AudioBaseInfo &) = default;
+    
     int sample_rate = 0;    // undefined
     int channels = 0;       // undefined
     int bits_per_sample=16; // we assume int16_t
