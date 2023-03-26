@@ -12,6 +12,9 @@ namespace audio_tools {
 
 /**
  * @brief Decoder8Bit - Converts an 8 Bit Stream into 16Bits
+ * Most microcontrollers can not output 8 bit data directly. 8 bit data however is very
+ * memory efficient and helps if you need to store audio on constrained resources. This 
+ * decoder translates 8bit data into 16bit data.
  * @ingroup codecs8bit
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -107,6 +110,9 @@ class Decoder8Bit : public AudioDecoder {
 /**
  * @brief Encoder8Bits - Condenses 16 bit PCM data stream to 8 bits
  * data. 
+ * Most microcontrollers can not process 8 bit audio data directly. 8 bit data however is very
+ * memory efficient and helps if you need to store audio on constrained resources. This 
+ * encoder translates 16bit data into 8bit data.
  * @ingroup codecs8bit
  * @author Phil Schatzmann
  * @copyright GPLv3
