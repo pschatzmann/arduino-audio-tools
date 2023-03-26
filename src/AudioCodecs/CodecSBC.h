@@ -203,7 +203,7 @@ public:
     setAllocationMethod(allocation_method);
   }
 
-  /// Use 4 or 8
+  /// Defines the subbands: Use 4 or 8
   void setSubbands(int subbands) {
     if (subbands == 8 || subbands == 4) {
       this->subbands = subbands;
@@ -213,6 +213,7 @@ public:
     }
   }
 
+  /// Defines the number of blocks: valid values (4,8,12,16)
   void setBlocks(int blocks) {
     if (blocks == 16 || blocks == 12 || blocks == 8 || blocks == 4) {
       this->blocks = blocks;
@@ -222,9 +223,10 @@ public:
     }
   }
 
+  /// Defines the bitpool (2-86?)
   void setBitpool(int bitpool) { this->bitpool = bitpool; }
 
-  // Use SBC_AM_LOUDNESS, SBC_AM_SNR
+  /// Defines the allocation method: Use SBC_AM_LOUDNESS, SBC_AM_SNR
   void setAllocationMethod(int allocation_method) {
     if (allocation_method == SBC_AM_LOUDNESS || allocation_method == SBC_AM_SNR) {
       this->allocation_method = allocation_method;
@@ -234,11 +236,13 @@ public:
     }
   }
 
+  /// Starts the processing: channels 1 or 2, supported sample rates: 16000, 32000, 44100, 48000
   void begin(AudioBaseInfo bi) {
     setAudioInfo(bi);
     begin();
   }
 
+  /// Restarts the processing
   void begin() {
     TRACEI();
     is_first = true;
@@ -248,6 +252,7 @@ public:
     result_buffer.resize(frameLength());
   }
 
+  /// Ends the processing
   virtual void end() {
     TRACEI();
     sbc_finish(&sbc);
@@ -281,7 +286,7 @@ public:
   /// Provides the compressed length in bytes (after encoding)
   int frameLength() { return sbc_get_frame_length(&sbc); }
 
-  // Provides the uncompressed length (of the PCM data) in bytes
+  /// Provides the uncompressed length (of the PCM data) in bytes
   int codeSize() { return sbc_get_codesize(&sbc); }
 
 protected:
