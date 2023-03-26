@@ -22,9 +22,9 @@ namespace audio_tools {
  * @copyright GPLv3
  * 
  */
-struct WAVAudioInfo : AudioBaseInfo {
+struct WAVAudioInfo : AudioInfo {
     WAVAudioInfo() = default;
-    WAVAudioInfo(const AudioBaseInfo& from){
+    WAVAudioInfo(const AudioInfo& from){
         sample_rate = from.sample_rate;    
         channels = from.channels;       
         bits_per_sample=from.bits_per_sample; 
@@ -271,7 +271,7 @@ class WAVDecoder : public AudioDecoder {
          * @param bi Object that will be notified about the Audio Formt (Changes)
          */
 
-        WAVDecoder(Print &out_stream, AudioBaseInfoDependent &bi){
+        WAVDecoder(Print &out_stream, AudioInfoDependent &bi){
             TRACED();
             this->out = &out_stream;
             this->audioBaseInfoSupport = &bi;
@@ -282,7 +282,7 @@ class WAVDecoder : public AudioDecoder {
             this->out = &out_stream;
         }
 
-        void setNotifyAudioChange(AudioBaseInfoDependent &bi){
+        void setNotifyAudioChange(AudioInfoDependent &bi){
             this->audioBaseInfoSupport = &bi;
         }
 
@@ -306,7 +306,7 @@ class WAVDecoder : public AudioDecoder {
             return header.audioInfo();
         }
 
-        AudioBaseInfo audioInfo(){
+        AudioInfo audioInfo(){
             return header.audioInfo();
         }
 
@@ -341,7 +341,7 @@ class WAVDecoder : public AudioDecoder {
                         isValid = false;
                     } else {
                         // update sampling rate if the target supports it
-                        AudioBaseInfo bi;
+                        AudioInfo bi;
                         bi.sample_rate = header.audioInfo().sample_rate;
                         bi.channels = header.audioInfo().channels;
                         bi.bits_per_sample = header.audioInfo().bits_per_sample;
@@ -383,7 +383,7 @@ class WAVDecoder : public AudioDecoder {
     protected:
         WAVHeader header;
         Print *out;
-        AudioBaseInfoDependent *audioBaseInfoSupport;
+        AudioInfoDependent *audioBaseInfoSupport;
         bool isFirst = true;
         bool isValid = true;
         bool active;
@@ -440,7 +440,7 @@ class WAVEncoder : public AudioEncoder {
         }
 
         /// Update actual WAVAudioInfo 
-        virtual void setAudioInfo(AudioBaseInfo from) {
+        virtual void setAudioInfo(AudioInfo from) {
             audioInfo.sample_rate = from.sample_rate;    
             audioInfo.channels = from.channels;       
             audioInfo.bits_per_sample=from.bits_per_sample; 

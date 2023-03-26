@@ -70,7 +70,7 @@ class I2SStream : public AudioStream {
         }
 
         /// updates the sample rate dynamically 
-        virtual void setAudioInfo(AudioBaseInfo info) {
+        virtual void setAudioInfo(AudioInfo info) {
             TRACEI();
             AudioStream::setAudioInfo(info);
             I2SConfig cfg = i2s.config();

@@ -17,7 +17,7 @@ volatile uint32_t output_frame_count = 0;
  * @copyright GPLv3
  * 
  */
-class DACInfo : public AudioBaseInfo {
+class DACInfo : public AudioInfo {
     public:
         friend class OversamplingDAC;    
 
@@ -48,7 +48,7 @@ class DACInfo : public AudioBaseInfo {
 
         /// Logs the configuration settings to the console (if logging is active)
         void logInfo(bool withPins=false) {
-            AudioBaseInfo::logInfo();
+            AudioInfo::logInfo();
             LOGI("oversample_factor: %d",oversample_factor );
             LOGI("output_bits: %d",output_bits );
             if (withPins){

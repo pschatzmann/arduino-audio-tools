@@ -13,11 +13,11 @@
 namespace audio_tools {
 
 // audio change notification target
-AudioBaseInfoDependent *audioChangeAACHelix=nullptr;
+AudioInfoDependent *audioChangeAACHelix=nullptr;
 
 /**
  * @brief AAC Decoder using libhelix: https://github.com/pschatzmann/arduino-libhelix
- * This is basically just a simple wrapper to provide AudioBaseInfo and AudioBaseInfoDependent
+ * This is basically just a simple wrapper to provide AudioInfo and AudioInfoDependent
  * @ingroup helix
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -52,7 +52,7 @@ class AACDecoderHelix : public AudioDecoder  {
          * @param out_stream 
          * @param bi 
          */
-        AACDecoderHelix(Print &out_stream, AudioBaseInfoDependent &bi){
+        AACDecoderHelix(Print &out_stream, AudioInfoDependent &bi){
             TRACED();
             aac = new libhelix::AACDecoderHelix(out_stream);
             if (aac==nullptr){
@@ -95,8 +95,8 @@ class AACDecoderHelix : public AudioDecoder  {
             return aac->audioInfo();
         }
 
-        virtual AudioBaseInfo audioInfo(){
-            AudioBaseInfo result;
+        virtual AudioInfo audioInfo(){
+            AudioInfo result;
             auto i = audioInfoEx();
             result.channels = i.nChans;
             result.sample_rate = i.sampRateOut;
@@ -119,7 +119,7 @@ class AACDecoderHelix : public AudioDecoder  {
         }
 
         /// Defines the callback object to which the Audio information change is provided
-        virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi){
+        virtual void setNotifyAudioChange(AudioInfoDependent &bi){
             TRACED();
             audioChangeAACHelix = &bi;
             if (aac!=nullptr) aac->setInfoCallback(infoCallback);
@@ -129,7 +129,7 @@ class AACDecoderHelix : public AudioDecoder  {
         static void infoCallback(_AACFrameInfo &i){
             if (audioChangeAACHelix!=nullptr){
                 TRACED();
-                AudioBaseInfo baseInfo;
+                AudioInfo baseInfo;
                 baseInfo.channels = i.nChans;
                 baseInfo.sample_rate = i.sampRateOut;
                 baseInfo.bits_per_sample = i.bitsPerSample;

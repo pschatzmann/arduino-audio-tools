@@ -10,7 +10,7 @@ namespace audio_tools {
  * channels and the step_size. All other information is not used.
  * 
  */
-struct ResampleConfig : public AudioBaseInfo {
+struct ResampleConfig : public AudioInfo {
     float step_size=1.0f;
     /// Optional fixed target sample rate
     int to_sample_rate = 0;
@@ -71,7 +71,7 @@ class ResampleStream : public AudioStream {
         return true;
     }
 
-    bool begin(AudioBaseInfo info, int fromRate, int toRate){
+    bool begin(AudioInfo info, int fromRate, int toRate){
         ResampleConfig rcfg;
         rcfg.to_sample_rate = toRate;
         rcfg.step_size = getStepSize(fromRate, toRate);
@@ -79,14 +79,14 @@ class ResampleStream : public AudioStream {
         return begin(rcfg);
     }
 
-    bool begin(AudioBaseInfo info, float step){
+    bool begin(AudioInfo info, float step){
         ResampleConfig rcfg;
         rcfg.step_size = step;
         rcfg.copyFrom(info);
         return begin(rcfg);
     }
 
-    void setAudioInfo(AudioBaseInfo info) override {
+    void setAudioInfo(AudioInfo info) override {
         AudioStream::setAudioInfo(info);
         setChannels(info.channels);
         // update the step size if a fixed to_sample_rate has been defined

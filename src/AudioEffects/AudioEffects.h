@@ -128,7 +128,7 @@ class AudioEffects : public SoundGenerator<effect_t> {
             TRACED();
             p_generator = &in;
             // automatically activate this object
-            AudioBaseInfo info;
+            AudioInfo info;
             info.channels = 1;
             info.bits_per_sample = sizeof(effect_t)*8;
             begin(info);
@@ -218,15 +218,15 @@ class AudioEffectStreamT : public AudioStream {
         setOutput(out);
     }
 
-    AudioBaseInfo defaultConfig() {
-        AudioBaseInfo cfg;
+    AudioInfo defaultConfig() {
+        AudioInfo cfg;
         cfg.sample_rate = 44100;
         cfg.bits_per_sample = 16;
         cfg.channels = 2;
         return cfg;
     }
 
-    bool begin(AudioBaseInfo cfg){
+    bool begin(AudioInfo cfg){
         info = cfg;
         if (sizeof(T)==cfg.bits_per_sample/8){
             active = true;
@@ -404,15 +404,15 @@ class AudioEffectStream : public AudioStream {
         setOutput(out);
     }
 
-    AudioBaseInfo defaultConfig() {
-        AudioBaseInfo cfg;
+    AudioInfo defaultConfig() {
+        AudioInfo cfg;
         cfg.sample_rate = 44100;
         cfg.bits_per_sample = 16;
         cfg.channels = 2;
         return cfg;
     }
 
-    bool begin(AudioBaseInfo cfg){
+    bool begin(AudioInfo cfg){
         info = cfg;
         switch(cfg.bits_per_sample){
             case 16: 

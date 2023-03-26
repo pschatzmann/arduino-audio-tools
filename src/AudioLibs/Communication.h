@@ -523,7 +523,7 @@ struct AudioHeader {
 /// Protocal Record To Start
 struct AudioDataBegin : public AudioHeader {
   AudioDataBegin() { rec = Begin; }
-  AudioBaseInfo info;
+  AudioInfo info;
   AudioType type = PCM;
 };
 
@@ -557,7 +557,7 @@ class AudioSyncWriter : public AudioPrint {
  public:
   AudioSyncWriter(Stream &dest) { p_dest = &dest; }
 
-  bool begin(AudioBaseInfo &info, AudioType type) {
+  bool begin(AudioInfo &info, AudioType type) {
     is_sync = true;
     AudioDataBegin begin;
     begin.info = info;
@@ -730,7 +730,7 @@ class AudioSyncReader : public AudioStream {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-struct ThrottleConfig : public AudioBaseInfo {
+struct ThrottleConfig : public AudioInfo {
   ThrottleConfig() {
     sample_rate = 44100;
     bits_per_sample = 16;

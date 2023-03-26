@@ -17,7 +17,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-struct AudioInfoLAME :  AudioBaseInfo  {
+struct AudioInfoLAME :  AudioInfo  {
     AudioInfoLAME () {
         sample_rate = 44100;
         channels = 2;
@@ -62,7 +62,7 @@ public:
     }
 
     /// Defines the Audio Info
-    void setAudioInfo(AudioBaseInfo from) {
+    void setAudioInfo(AudioInfo from) {
         TRACED();
         info.channels = from.channels;
         info.sample_rate = from.sample_rate;

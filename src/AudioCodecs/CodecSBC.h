@@ -42,7 +42,7 @@ public:
       delete[] input_buffer;
   }
 
-  virtual AudioBaseInfo audioInfo() { return info; }
+  virtual AudioInfo audioInfo() { return info; }
 
   virtual void begin() {
     TRACEI();
@@ -57,7 +57,7 @@ public:
     is_active = false;
   }
 
-  virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi) {
+  virtual void setNotifyAudioChange(AudioInfoDependent &bi) {
     p_notify = &bi;
   }
 
@@ -102,8 +102,8 @@ public:
 
 protected:
   Print *p_print = nullptr;
-  AudioBaseInfo info;
-  AudioBaseInfoDependent *p_notify = nullptr;
+  AudioInfo info;
+  AudioInfoDependent *p_notify = nullptr;
   sbc_t sbc;
   bool is_first = true;
   bool is_active = false;
@@ -237,7 +237,7 @@ public:
   }
 
   /// Starts the processing: channels 1 or 2, supported sample rates: 16000, 32000, 44100, 48000
-  void begin(AudioBaseInfo bi) {
+  void begin(AudioInfo bi) {
     setAudioInfo(bi);
     begin();
   }
@@ -261,7 +261,7 @@ public:
 
   virtual const char *mime() { return "audio/sbc"; }
 
-  virtual void setAudioInfo(AudioBaseInfo info) { this->info = info; }
+  virtual void setAudioInfo(AudioInfo info) { this->info = info; }
 
   virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
 
@@ -290,7 +290,7 @@ public:
   int codeSize() { return sbc_get_codesize(&sbc); }
 
 protected:
-  AudioBaseInfo info;
+  AudioInfo info;
   Print *p_print = nullptr;
   sbc_t sbc;
   bool is_first = true;

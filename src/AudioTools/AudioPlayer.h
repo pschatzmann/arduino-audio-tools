@@ -37,7 +37,7 @@ namespace audio_tools {
      * @author Phil Schatzmann
      * @copyright GPLv3
      */
-    class AudioPlayer : public AudioBaseInfoDependent {
+    class AudioPlayer : public AudioInfoDependent {
 
     public:
 
@@ -72,7 +72,7 @@ namespace audio_tools {
          * @param decoder
          * @param notify
          */
-        AudioPlayer(AudioSource& source, Print& output, AudioDecoder& decoder, AudioBaseInfoDependent* notify = nullptr) {
+        AudioPlayer(AudioSource& source, Print& output, AudioDecoder& decoder, AudioInfoDependent* notify = nullptr) {
             TRACED();
             this->p_source = &source;
             this->p_decoder = &decoder;
@@ -228,7 +228,7 @@ namespace audio_tools {
         }
 
         /// (Re)defines the notify
-        void setNotify(AudioBaseInfoDependent* notify){
+        void setNotify(AudioInfoDependent* notify){
             this->p_final_notify = notify;
             // notification for audio configuration
             if (p_decoder!=nullptr){
@@ -237,7 +237,7 @@ namespace audio_tools {
         } 
 
         /// Updates the audio info in the related objects
-        virtual void setAudioInfo(AudioBaseInfo info) override {
+        virtual void setAudioInfo(AudioInfo info) override {
             TRACED();
             LOGI("sample_rate: %d", info.sample_rate);
             LOGI("bits_per_sample: %d", info.bits_per_sample);
@@ -252,7 +252,7 @@ namespace audio_tools {
             if (p_final_notify != nullptr) p_final_notify->setAudioInfo(info);
         };
 
-        virtual AudioBaseInfo audioInfo() override {
+        virtual AudioInfo audioInfo() override {
             return info;
         }
 
@@ -467,9 +467,9 @@ namespace audio_tools {
         Stream* p_input_stream = nullptr;
         AudioPrint* p_final_print = nullptr;
         AudioStream* p_final_stream = nullptr;
-        AudioBaseInfoDependent* p_final_notify = nullptr;
+        AudioInfoDependent* p_final_notify = nullptr;
         StreamCopy copier; // copies sound into i2s
-        AudioBaseInfo info;
+        AudioInfo info;
         bool meta_active = false;
         uint32_t timeout = 0;
         int steam_increment = 1; // +1 moves forward; -1 moves backward

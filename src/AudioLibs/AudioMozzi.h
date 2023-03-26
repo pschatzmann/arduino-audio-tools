@@ -13,7 +13,7 @@ namespace audio_tools {
  * @brief Mozzi Configuration for input or output stream
  * 
  */
-struct MozziConfig : AudioBaseInfo {
+struct MozziConfig : AudioInfo {
     uint16_t control_rate=CONTROL_RATE;
     void (*updateControl)() = nullptr; //&::updateControl;
     AudioOutput_t (*updateAudio)() = nullptr; // = &::updateAudio;

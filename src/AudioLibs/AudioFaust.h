@@ -41,8 +41,8 @@ class FaustStream : public AudioStream {
         return p_dsp;
     }
 
-    AudioBaseInfo defaultConfig() {
-        AudioBaseInfo def;
+    AudioInfo defaultConfig() {
+        AudioInfo def;
         def.channels = 2;
         def.bits_per_sample = 16;
         def.sample_rate = 44100;
@@ -51,7 +51,7 @@ class FaustStream : public AudioStream {
 
 
     /// Checks the parameters and starts the processing
-    bool begin(AudioBaseInfo cfg){
+    bool begin(AudioInfo cfg){
         TRACED();
         bool result = true;
         this->cfg = cfg;
@@ -219,7 +219,7 @@ class FaustStream : public AudioStream {
     int bytes_per_sample;
     int buffer_allocated;
     DSP *p_dsp = nullptr;
-    AudioBaseInfo cfg;
+    AudioInfo cfg;
     Print *p_out=nullptr;
     FAUSTFLOAT** p_buffer=nullptr;
     FAUSTFLOAT** p_buffer_out=nullptr;

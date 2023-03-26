@@ -28,7 +28,7 @@ SineFromTable<int16_t> sineWave(32000);                    // subclass of SoundG
 GeneratedSoundStream<int16_t> sound(sineWave);             // Stream generated from sine wave
 ResampleStream<int16_t> resample(sound);
 AnalogAudioStream out; 
-AudioBaseInfo info;
+AudioInfo info;
 
 GeneratorFromArray<float> carrier;                         // The most efficient way to generate a fast sine wave
 

@@ -16,7 +16,7 @@ namespace audio_tools {
  * @ingroup equilizer
  * @author pschatzmann
  */
-struct ConfigEquilizer3Bands : public AudioBaseInfo {
+struct ConfigEquilizer3Bands : public AudioInfo {
     ConfigEquilizer3Bands(){
         channels = 2;
         bits_per_sample = 16;
@@ -93,7 +93,7 @@ class Equilizer3Bands : public AudioStream {
             return true;
         }
 
-        virtual void setAudioInfo(AudioBaseInfo info) override {
+        virtual void setAudioInfo(AudioInfo info) override {
             p_cfg->sample_rate = info.sample_rate;
             p_cfg->channels = info.channels;
             p_cfg->bits_per_sample = info.bits_per_sample;

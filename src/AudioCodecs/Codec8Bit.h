@@ -47,7 +47,7 @@ class Decoder8Bit : public AudioDecoder {
          * @param bi Object that will be notified about the Audio Formt (Changes)
          */
 
-        Decoder8Bit(Print &out_stream, AudioBaseInfoDependent &bi){
+        Decoder8Bit(Print &out_stream, AudioInfoDependent &bi){
             TRACED();
             p_print = &out_stream;
         }
@@ -57,15 +57,15 @@ class Decoder8Bit : public AudioDecoder {
             p_print = &out_stream;
         }
 
-        void setNotifyAudioChange(AudioBaseInfoDependent &bi) override {
+        void setNotifyAudioChange(AudioInfoDependent &bi) override {
             this->bid = &bi;
         }
 
-        AudioBaseInfo audioInfo() override {
+        AudioInfo audioInfo() override {
             return cfg;
         }
 
-        void begin(AudioBaseInfo info) {
+        void begin(AudioInfo info) {
             TRACED();
             cfg = info;
             if (bid!=nullptr){
@@ -100,8 +100,8 @@ class Decoder8Bit : public AudioDecoder {
 
     protected:
         Print *p_print=nullptr;
-        AudioBaseInfoDependent *bid=nullptr;
-        AudioBaseInfo cfg;
+        AudioInfoDependent *bid=nullptr;
+        AudioInfo cfg;
         bool active;
         Vector<int16_t> buffer;
 
@@ -139,7 +139,7 @@ class Encoder8Bit : public AudioEncoder {
         }
 
         /// We actually do nothing with this 
-        virtual void setAudioInfo(AudioBaseInfo from) override {
+        virtual void setAudioInfo(AudioInfo from) override {
         }
 
         /// starts the processing using the actual RAWAudioInfo

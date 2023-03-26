@@ -370,7 +370,7 @@ protected:
         p_mod = &mod;
         this->freq = freq;
       }
-      bool begin(AudioBaseInfo info) override{
+      bool begin(AudioInfo info) override{
           max_value = pow(2, info.bits_per_sample)/2-1;
           return SoundGenerator<T>::begin(info);
       }

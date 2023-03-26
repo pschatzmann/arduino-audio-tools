@@ -40,7 +40,7 @@ struct AudioFFTResult {
  * channel_used is defining which channel is used to perform the fft on.
  * @ingroup fft
  */
-struct AudioFFTConfig : public  AudioBaseInfo {
+struct AudioFFTConfig : public  AudioInfo {
     AudioFFTConfig(){
         channels = 2;
         bits_per_sample = 16;
@@ -124,7 +124,7 @@ class AudioFFTBase : public AudioPrint {
         }
 
         /// Notify change of audio information
-        void setAudioInfo(AudioBaseInfo info) override {
+        void setAudioInfo(AudioInfo info) override {
             cfg.bits_per_sample = info.bits_per_sample;
             cfg.sample_rate = info.sample_rate;
             cfg.channels = info.channels;

@@ -34,7 +34,7 @@ class SoundGenerator  {
             end();
         }
 
-        virtual bool begin(AudioBaseInfo info) {
+        virtual bool begin(AudioInfo info) {
             this->info = info;
             return begin();
         }
@@ -78,8 +78,8 @@ class SoundGenerator  {
             return readBytesFromBuffer(buffer, lengthBytes, frame_size, channels);
         }
 
-        virtual AudioBaseInfo defaultConfig(){
-            AudioBaseInfo def;
+        virtual AudioInfo defaultConfig(){
+            AudioInfo def;
             def.bits_per_sample = sizeof(T)*8;
             def.channels = 1;
             def.sample_rate = 44100;
@@ -91,11 +91,11 @@ class SoundGenerator  {
         }
 
 
-        virtual AudioBaseInfo audioInfo() {
+        virtual AudioInfo audioInfo() {
             return info;
         }
 
-        virtual void setAudioInfo(AudioBaseInfo info){
+        virtual void setAudioInfo(AudioInfo info){
             this->info = info;
             if (info.bits_per_sample!=sizeof(T)*8){
                 LOGE("invalid bits_per_sample: %d", info.channels);
@@ -106,7 +106,7 @@ class SoundGenerator  {
         bool active = false;
         bool activeWarningIssued = false;
         int output_channels = 1;
-        AudioBaseInfo info;
+        AudioInfo info;
         RingBuffer<uint8_t> ring_buffer{0};
 
         size_t readBytesFrames(uint8_t *buffer, size_t lengthBytes, int frames, int channels ){
@@ -162,14 +162,14 @@ class SineWaveGenerator : public SoundGenerator<T>{
             return true;
         }
 
-        bool begin(AudioBaseInfo info) override {
+        bool begin(AudioInfo info) override {
             LOGI("%s::begin(channels=%d, sample_rate=%d)","SineWaveGenerator", info.channels, info.sample_rate);
             SoundGenerator<T>::begin(info);
             this->m_deltaTime = 1.0 / SoundGenerator<T>::info.sample_rate;
             return true;
         }
 
-        bool begin(AudioBaseInfo info, float frequency){
+        bool begin(AudioInfo info, float frequency){
             LOGI("%s::begin(channels=%d, sample_rate=%d, frequency=%.2f)","SineWaveGenerator",info.channels, info.sample_rate,frequency);
             SoundGenerator<T>::begin(info);
             this->m_deltaTime = 1.0 / SoundGenerator<T>::info.sample_rate;
@@ -186,12 +186,12 @@ class SineWaveGenerator : public SoundGenerator<T>{
         }
 
         // update m_deltaTime
-        virtual void setAudioInfo(AudioBaseInfo info) override {
+        virtual void setAudioInfo(AudioInfo info) override {
             SoundGenerator<T>::setAudioInfo(info);
             this->m_deltaTime = 1.0 / SoundGenerator<T>::info.sample_rate;
         }
 
-        virtual AudioBaseInfo defaultConfig() override {
+        virtual AudioInfo defaultConfig() override {
             return SoundGenerator<T>::defaultConfig();
         }
 
@@ -521,7 +521,7 @@ class GeneratorFromArray : public SoundGenerator<T> {
       LOGI("table_length: %d", (int)size);
     }
 
-    virtual bool begin(AudioBaseInfo info) override {
+    virtual bool begin(AudioInfo info) override {
         return SoundGenerator<T>::begin(info);
     }
 
@@ -611,7 +611,7 @@ class GeneratorFixedValue : public SoundGenerator<T> {
 
     GeneratorFixedValue() = default;
 
-    virtual bool begin(AudioBaseInfo info) {
+    virtual bool begin(AudioInfo info) {
         return SoundGenerator<T>::begin(info);
     }
 
@@ -691,7 +691,7 @@ class SineFromTable  : public SoundGenerator<T> {
             return true;
         }
 
-        bool begin(AudioBaseInfo info, float frequency) {
+        bool begin(AudioInfo info, float frequency) {
             SoundGenerator<T>::begin(info);
             base_frequency = SoundGenerator<T>::audioInfo().sample_rate / 360.0; //122.5 hz (at 44100); 61 hz (at 22050)
             setFrequency(frequency);

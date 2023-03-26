@@ -307,7 +307,7 @@ class AudioEncoderServer  : public AudioServer {
          * @param info 
          * @param converter 
          */
-        void begin(Stream &in, AudioBaseInfo info, BaseConverter<int16_t> *converter=nullptr) {
+        void begin(Stream &in, AudioInfo info, BaseConverter<int16_t> *converter=nullptr) {
             TRACED();
             this->in = &in;
             this->audio_info = info;
@@ -347,7 +347,7 @@ class AudioEncoderServer  : public AudioServer {
 
         // Sound Generation
         EncodedAudioStream  encoded_stream;
-        AudioBaseInfo audio_info;
+        AudioInfo audio_info;
         AudioEncoder *encoder = nullptr;
 
 

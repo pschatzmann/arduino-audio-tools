@@ -34,7 +34,7 @@ class PWMAudioStream : public AudioPrint {
         }
 
         /// updates the sample rate dynamically 
-        virtual void setAudioInfo(AudioBaseInfo info) {
+        virtual void setAudioInfo(AudioInfo info) {
             TRACEI();
             PWMConfig cfg = audio_config;
             if (cfg.sample_rate != info.sample_rate

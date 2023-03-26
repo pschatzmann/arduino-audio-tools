@@ -37,7 +37,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBaseInfoSource {
+class AudioStream : public Stream, public AudioInfoDependent, public AudioInfoSource {
  public:
   AudioStream() = default;
   virtual ~AudioStream() = default;
@@ -48,7 +48,7 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
   virtual void end(){}
   
   // Call from subclass or overwrite to do something useful
-  virtual void setAudioInfo(AudioBaseInfo info) override {
+  virtual void setAudioInfo(AudioInfo info) override {
       TRACED();
       this->info = info;
       info.logInfo();
@@ -57,7 +57,7 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
       }
   }
 
-  virtual void  setNotifyAudioChange(AudioBaseInfoDependent &bi) override {
+  virtual void  setNotifyAudioChange(AudioInfoDependent &bi) override {
       p_notify = &bi;
   }
 
@@ -78,7 +78,7 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
 
   operator bool() { return available() > 0; }
 
-  virtual AudioBaseInfo audioInfo() override {
+  virtual AudioInfo audioInfo() override {
     return info;
   }
 
@@ -120,8 +120,8 @@ class AudioStream : public Stream, public AudioBaseInfoDependent, public AudioBa
 #endif
 
  protected:
-  AudioBaseInfoDependent *p_notify=nullptr;
-  AudioBaseInfo info;
+  AudioInfoDependent *p_notify=nullptr;
+  AudioInfo info;
   RingBuffer<uint8_t> tmp_in{0};
   RingBuffer<uint8_t> tmp_out{0};
 
@@ -593,7 +593,7 @@ class GeneratedSoundStream : public AudioStream {
     this->generator_ptr = &generator;
   }
 
-  AudioBaseInfo defaultConfig() { return this->generator_ptr->defaultConfig(); }
+  AudioInfo defaultConfig() { return this->generator_ptr->defaultConfig(); }
 
   /// start the processing
   bool begin() override {
@@ -610,7 +610,7 @@ class GeneratedSoundStream : public AudioStream {
   }
 
   /// start the processing
-  bool begin(AudioBaseInfo cfg) {
+  bool begin(AudioInfo cfg) {
     TRACED();
     if (generator_ptr==nullptr){
       LOGE("%s",source_not_defined_error);
@@ -630,11 +630,11 @@ class GeneratedSoundStream : public AudioStream {
     active = false;
   }
 
-  virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi) override {
+  virtual void setNotifyAudioChange(AudioInfoDependent &bi) override {
     audioBaseInfoDependent = &bi;
   }
 
-  AudioBaseInfo audioInfo() override {
+  AudioInfo audioInfo() override {
     return generator_ptr->audioInfo();
   }
 
@@ -656,7 +656,7 @@ class GeneratedSoundStream : public AudioStream {
  protected:
   bool active = false;
   SoundGenerator<T> *generator_ptr;
-  AudioBaseInfoDependent *audioBaseInfoDependent = nullptr;
+  AudioInfoDependent *audioBaseInfoDependent = nullptr;
   const char* source_not_defined_error = "Source not defined";
 
 };
@@ -766,13 +766,13 @@ class BufferedStream : public AudioStream {
 class NullStream : public AudioStream {
  public:
 
-  bool begin(AudioBaseInfo info) {    
+  bool begin(AudioInfo info) {    
     this->info = info;
     return true;
   }
 
-  AudioBaseInfo defaultConfig() {
-    AudioBaseInfo info;
+  AudioInfo defaultConfig() {
+    AudioInfo info;
     return info;
   }
 
@@ -786,9 +786,9 @@ class NullStream : public AudioStream {
   }
 
   /// Define object which need to be notified if the basinfo is changing
-  void setNotifyAudioChange(AudioBaseInfoDependent &bi) override {}
+  void setNotifyAudioChange(AudioInfoDependent &bi) override {}
 
-  void setAudioInfo(AudioBaseInfo info) override {
+  void setAudioInfo(AudioInfo info) override {
     this->info = info;
   }
 };
@@ -1204,7 +1204,7 @@ class InputMixer : public AudioStream {
       total_weights += weight;
     }
 
-    virtual bool begin(AudioBaseInfo info) {
+    virtual bool begin(AudioInfo info) {
   	  setAudioInfo(info);
       frame_size = info.bits_per_sample/8 * info.channels;
       LOGI("frame_size: %d",frame_size);
@@ -1350,7 +1350,7 @@ class InputMerge : public AudioStream {
       add(right);
     };
 
-    virtual bool begin(AudioBaseInfo info) {
+    virtual bool begin(AudioInfo info) {
       if (size()!=info.channels){
         info.channels = size();
         LOGW("channels corrected to %d", size());
@@ -1442,7 +1442,7 @@ class CallbackStream : public AudioStream {
       this->cb_read = cb_read;
     }
 
-    virtual bool begin(AudioBaseInfo info) {
+    virtual bool begin(AudioInfo info) {
   	  setAudioInfo(info);
   	  return begin();
     }
@@ -1494,7 +1494,7 @@ class FilteredStream : public AudioStream {
           p_converter = new ConverterNChannels<T,TF>(channels);
         }
 
-        bool begin(AudioBaseInfo info){
+        bool begin(AudioInfo info){
           setAudioInfo(info);
           this->channels = info.channels;
           if (p_converter !=nullptr && info.channels!=channels){
@@ -1562,7 +1562,7 @@ class FilteredStream : public AudioStream {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-struct TimerCallbackAudioStreamInfo : public AudioBaseInfo {
+struct TimerCallbackAudioStreamInfo : public AudioInfo {
   RxTxMode rx_tx_mode = RX_MODE;
   uint16_t buffer_size = DEFAULT_BUFFER_SIZE;
   bool use_timer = true;
@@ -1604,7 +1604,7 @@ class TimerCallbackAudioStream : public BufferedStream {
   }
 
   /// updates the audio information
-  virtual void setAudioInfo(AudioBaseInfo info) {
+  virtual void setAudioInfo(AudioInfo info) {
     TRACED();
     if (cfg.sample_rate != info.sample_rate || cfg.channels != info.channels ||
         cfg.bits_per_sample != info.bits_per_sample) {
@@ -1618,11 +1618,11 @@ class TimerCallbackAudioStream : public BufferedStream {
   }
 
   /// Defines the target that needs to be notified
-  void setNotifyAudioChange(AudioBaseInfoDependent &bi) { notifyTarget = &bi; }
+  void setNotifyAudioChange(AudioInfoDependent &bi) { notifyTarget = &bi; }
 
   /// Provides the current audio information
   TimerCallbackAudioStreamInfo audioInfoExt() { return cfg; }
-  AudioBaseInfo audioInfo() { return cfg; }
+  AudioInfo audioInfo() { return cfg; }
 
   void begin(TimerCallbackAudioStreamInfo config) {
     LOGD("%s:  %s", LOG_METHOD,
@@ -1674,7 +1674,7 @@ class TimerCallbackAudioStream : public BufferedStream {
 
  protected:
   TimerCallbackAudioStreamInfo cfg;
-  AudioBaseInfoDependent *notifyTarget = nullptr;
+  AudioInfoDependent *notifyTarget = nullptr;
   bool active = false;
   uint16_t (*frameCallback)(uint8_t *data, uint16_t len);
   // below only relevant with timer

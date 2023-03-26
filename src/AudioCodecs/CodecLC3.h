@@ -36,7 +36,7 @@ namespace audio_tools {
  */
 class LC3Decoder : public AudioDecoder {
  public:
-  LC3Decoder(AudioBaseInfo info, int dt_us = LC3_DEFAULT_DT_US,
+  LC3Decoder(AudioInfo info, int dt_us = LC3_DEFAULT_DT_US,
              uint16_t inputByteCount = DEFAULT_BYTE_COUNT) {
     this->dt_us = dt_us;
     this->info = info;
@@ -51,9 +51,9 @@ class LC3Decoder : public AudioDecoder {
     info.channels = 2;
   }
 
-  virtual AudioBaseInfo audioInfo() { return info; }
+  virtual AudioInfo audioInfo() { return info; }
 
-  void begin(AudioBaseInfo bi) {
+  void begin(AudioInfo bi) {
     info = bi;
     begin();
   }
@@ -95,7 +95,7 @@ class LC3Decoder : public AudioDecoder {
     active = false;
   }
 
-  virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi) {
+  virtual void setNotifyAudioChange(AudioInfoDependent &bi) {
     TRACEI();
     p_notify = &bi;
   }
@@ -133,8 +133,8 @@ class LC3Decoder : public AudioDecoder {
 
  protected:
   Print *p_print = nullptr;
-  AudioBaseInfo info;
-  AudioBaseInfoDependent *p_notify = nullptr;
+  AudioInfo info;
+  AudioInfoDependent *p_notify = nullptr;
   lc3_decoder_t lc3_decoder = nullptr;
   lc3_pcm_format pcm_format;
   Vector<uint8_t> lc3_decoder_memory;
@@ -205,7 +205,7 @@ class LC3Encoder : public AudioEncoder {
     output_byte_count = outputByteCount;
   }
 
-  void begin(AudioBaseInfo bi) {
+  void begin(AudioInfo bi) {
     setAudioInfo(bi);
     begin();
   }
@@ -246,7 +246,7 @@ class LC3Encoder : public AudioEncoder {
 
   virtual const char *mime() { return "audio/lc3"; }
 
-  virtual void setAudioInfo(AudioBaseInfo info) { this->info = info; }
+  virtual void setAudioInfo(AudioInfo info) { this->info = info; }
 
   virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
 
@@ -278,7 +278,7 @@ class LC3Encoder : public AudioEncoder {
   }
 
  protected:
-  AudioBaseInfo info;
+  AudioInfo info;
   Print *p_print = nullptr;
   unsigned dt_us = 1000;
   uint16_t num_frames;

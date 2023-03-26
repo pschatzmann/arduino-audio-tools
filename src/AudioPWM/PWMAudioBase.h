@@ -29,7 +29,7 @@ class PWMDriverSTM32;
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-struct PWMConfig : public AudioBaseInfo {
+struct PWMConfig : public AudioInfo {
 
     PWMConfig(){
         // default basic information

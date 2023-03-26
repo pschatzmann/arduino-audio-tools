@@ -42,7 +42,7 @@ class ILBCDecoder : public AudioDecoder {
     end();
   }
 
-  virtual AudioBaseInfo audioInfo() { return info; }
+  virtual AudioInfo audioInfo() { return info; }
 
   virtual void begin() {
     TRACEI();
@@ -71,7 +71,7 @@ class ILBCDecoder : public AudioDecoder {
     p_ilbc = nullptr;
   }
 
-  virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi) {
+  virtual void setNotifyAudioChange(AudioInfoDependent &bi) {
     notify = &bi;
   }
 
@@ -99,8 +99,8 @@ class ILBCDecoder : public AudioDecoder {
   }
 
  protected:
-  AudioBaseInfo info;
-  AudioBaseInfoDependent *notify = nullptr;
+  AudioInfo info;
+  AudioInfoDependent *notify = nullptr;
   Print *p_print = nullptr;
   iLBCDecode *p_ilbc = nullptr;
   Vector<int16_t> decoded_buffer{0};
@@ -131,12 +131,12 @@ class ILBCEncoder : public AudioEncoder {
     end();
   }
 
-  void begin(AudioBaseInfo info) {
+  void begin(AudioInfo info) {
     setAudioInfo(info);
     begin();
   }
 
-  void setAudioInfo(AudioBaseInfo info) {
+  void setAudioInfo(AudioInfo info) {
     this->info = info;
   }
 
@@ -200,7 +200,7 @@ class ILBCEncoder : public AudioEncoder {
   }
 
  protected:
-  AudioBaseInfo info;
+  AudioInfo info;
   Print *p_print = nullptr;
   iLBCEncode *p_ilbc = nullptr;
   Vector<float> decoded_buffer{0};

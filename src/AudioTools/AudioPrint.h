@@ -20,7 +20,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioPrint : public Print, public AudioBaseInfoDependent, public AudioBaseInfoSource {
+class AudioPrint : public Print, public AudioInfoDependent, public AudioInfoSource {
     public:
         virtual ~AudioPrint() = default;
          size_t write(const uint8_t *buffer, size_t size) override = 0;
@@ -44,7 +44,7 @@ class AudioPrint : public Print, public AudioBaseInfoDependent, public AudioBase
         }
 
         // overwrite to do something useful
-        virtual void setAudioInfo(AudioBaseInfo info) override {
+        virtual void setAudioInfo(AudioInfo info) override {
             TRACED();
             cfg = info;
             info.logInfo();
@@ -53,7 +53,7 @@ class AudioPrint : public Print, public AudioBaseInfoDependent, public AudioBase
             }
         }
 
-        virtual void  setNotifyAudioChange(AudioBaseInfoDependent &bi) override {
+        virtual void  setNotifyAudioChange(AudioInfoDependent &bi) override {
             p_notify = &bi;
         }
 
@@ -62,7 +62,7 @@ class AudioPrint : public Print, public AudioBaseInfoDependent, public AudioBase
             return false;
         }
 
-        virtual AudioBaseInfo audioInfo() override {
+        virtual AudioInfo audioInfo() override {
             return cfg;
         }
 
@@ -77,8 +77,8 @@ class AudioPrint : public Print, public AudioBaseInfoDependent, public AudioBase
 
     protected:
         int tmpPos=0;
-        AudioBaseInfoDependent *p_notify=nullptr;
-        AudioBaseInfo cfg;
+        AudioInfoDependent *p_notify=nullptr;
+        AudioInfo cfg;
         SingleBuffer<uint8_t> tmp{MAX_SINGLE_CHARS};
 };
 
@@ -114,21 +114,21 @@ class CsvStream : public AudioPrint {
             this->active = true;
         }
 
-        AudioBaseInfo defaultConfig(RxTxMode mode){
+        AudioInfo defaultConfig(RxTxMode mode){
             return defaultConfig();
         }
 
         /// Provides the default configuration
-        AudioBaseInfo defaultConfig(){
-            AudioBaseInfo info;
+        AudioInfo defaultConfig(){
+            AudioInfo info;
             info.channels = 2;
             info.sample_rate = 44100;
             info.bits_per_sample = sizeof(T)*8;
             return info;
         }
 
-        /// Starts the processing with the number of channels defined in AudioBaseInfo
-        bool begin(AudioBaseInfo info){
+        /// Starts the processing with the number of channels defined in AudioInfo
+        bool begin(AudioInfo info){
             TRACED();
             cfg = info;
             this->active = true;
@@ -152,7 +152,7 @@ class CsvStream : public AudioPrint {
         }
 
         /// defines the number of channels
-        virtual void setAudioInfo(AudioBaseInfo info) {
+        virtual void setAudioInfo(AudioInfo info) {
             TRACEI();
             info.logInfo();
             this->channels = info.channels;
@@ -210,7 +210,7 @@ class HexDumpStream : public AudioPrint {
             this->active = active;
         }
 
-        void begin(AudioBaseInfo info){
+        void begin(AudioInfo info){
             TRACED();
             info.logInfo();
             this->active = true;
@@ -275,7 +275,7 @@ class AdapterAudioStreamToAudioPrint : public AudioPrint {
             p_stream = &stream;
         }
 
-        void setAudioInfo(AudioBaseInfo info){
+        void setAudioInfo(AudioInfo info){
             p_stream->setAudioInfo(info);
         }
         size_t write(const uint8_t *buffer, size_t size){
@@ -300,7 +300,7 @@ class AdapterPrintToAudioPrint : public AudioPrint {
         AdapterPrintToAudioPrint(Print &print){
             p_print = &print;
         }
-        void setAudioInfo(AudioBaseInfo info){
+        void setAudioInfo(AudioInfo info){
         }
         size_t write(const uint8_t *buffer, size_t size){
             return p_print->write(buffer,size);
@@ -355,7 +355,7 @@ class MultiOutput : public AudioPrint {
             }
         }
 
-        bool begin(AudioBaseInfo info){
+        bool begin(AudioInfo info){
             setAudioInfo(info);
             return true;
         }
@@ -382,7 +382,7 @@ class MultiOutput : public AudioPrint {
             }
         }
 
-        void setAudioInfo(AudioBaseInfo info){
+        void setAudioInfo(AudioInfo info){
             for (int j=0;j<vector.size();j++){
                 vector[j]->setAudioInfo(info);
             }
@@ -620,12 +620,12 @@ class OutputMixer : public Print {
 class VolumePrint : public AudioPrint {
     public:
      
-        bool begin(AudioBaseInfo info){
+        bool begin(AudioInfo info){
             setAudioInfo(info);
             return true;
         }
 
-        void setAudioInfo(AudioBaseInfo info){
+        void setAudioInfo(AudioInfo info){
             this->info = info;
             if (info.channels>0){
                 volumes.resize(info.channels);
@@ -679,7 +679,7 @@ class VolumePrint : public AudioPrint {
         }
 
     protected:
-        AudioBaseInfo info;
+        AudioInfo info;
         float f_volume_tmp = 0;
         float f_volume = 0;
         Vector<float> volumes{0};

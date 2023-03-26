@@ -8,7 +8,7 @@ GeneratedSoundStream<int16_t> sound(sineWave);             // Stream generated f
 CsvStream<int16_t> out(Serial); 
 ResampleStream<int16_t> resample(out);
 StreamCopy copier(resample, sound);                        // copies sound to out
-AudioBaseInfo info;
+AudioInfo info;
 
 // Arduino Setup
 void setup(void) {  

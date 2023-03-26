@@ -238,7 +238,7 @@ class AudioKitStream : public AudioStream {
 
   /// Update the audio info with new values: e.g. new sample_rate,
   /// bits_per_samples or channels. 
-  virtual void setAudioInfo(AudioBaseInfo info) {
+  virtual void setAudioInfo(AudioInfo info) {
     TRACEI();
 
     if (cfg.sample_rate != info.sample_rate

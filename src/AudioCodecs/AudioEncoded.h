@@ -13,16 +13,16 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioDecoder : public AudioWriter, public AudioBaseInfoSource {
+class AudioDecoder : public AudioWriter, public AudioInfoSource {
 public:
   AudioDecoder() = default;
   virtual ~AudioDecoder() = default;
   AudioDecoder(AudioDecoder const&) = delete;
   AudioDecoder& operator=(AudioDecoder const&) = delete;
   
-  virtual AudioBaseInfo audioInfo() = 0;
+  virtual AudioInfo audioInfo() = 0;
   // for most decoder this is not needed
-  virtual void setAudioInfo(AudioBaseInfo from) override {}
+  virtual void setAudioInfo(AudioInfo from) override {}
   virtual void setOutputStream(AudioStream &out_stream) {
     Print *p_print = &out_stream;
     setOutputStream(*p_print);
@@ -71,11 +71,11 @@ public:
   virtual void begin() {}
   virtual void end() {}
   virtual void setOutputStream(Print &out_stream) {}
-  virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi) {}
-  virtual void setAudioInfo(AudioBaseInfo info) {}
+  virtual void setNotifyAudioChange(AudioInfoDependent &bi) {}
+  virtual void setAudioInfo(AudioInfo info) {}
 
-  virtual AudioBaseInfo audioInfo() {
-    AudioBaseInfo info;
+  virtual AudioInfo audioInfo() {
+    AudioInfo info;
     return info;
   }
   virtual operator bool() { return false; }
@@ -109,7 +109,7 @@ public:
   virtual void setOutputStream(Print &outStream) = 0;
 
   /// Register Output Stream to be notified about changes
-  virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi) = 0;
+  virtual void setNotifyAudioChange(AudioInfoDependent &bi) = 0;
 
   /// Defines the output streams and register to be notified
   virtual void setOutputStream(AudioStream &out_stream) {
@@ -129,7 +129,7 @@ public:
   virtual void setInputStream(Stream &inStream) = 0;
 
   /// Provides the last available MP3FrameInfo
-  virtual AudioBaseInfo audioInfo() = 0;
+  virtual AudioInfo audioInfo() = 0;
 
   /// checks if the class is active
   virtual operator bool() = 0;
@@ -245,20 +245,20 @@ public:
   }
 
   /// Define object which need to be notified if the basinfo is changing
-  void setNotifyAudioChange(AudioBaseInfoDependent &bi) override {
+  void setNotifyAudioChange(AudioInfoDependent &bi) override {
     TRACEI();
     decoder_ptr->setNotifyAudioChange(bi);
   }
 
-  AudioBaseInfo defaultConfig() {
-    AudioBaseInfo cfg;
+  AudioInfo defaultConfig() {
+    AudioInfo cfg;
     cfg.channels = 2;
     cfg.sample_rate = 44100;
     cfg.bits_per_sample = 16;
     return cfg;
   }
 
-  virtual void setAudioInfo(AudioBaseInfo info) override {
+  virtual void setAudioInfo(AudioInfo info) override {
     TRACED();
     AudioStream::setAudioInfo(info);
     decoder_ptr->setAudioInfo(info);
@@ -306,7 +306,7 @@ public:
   }
 
   /// Starts the processing - sets the status to active
-  bool begin(AudioBaseInfo cfg) {
+  bool begin(AudioInfo cfg) {
     TRACED();
     info = cfg;
     const CodecNOP *nop = CodecNOP::instance();

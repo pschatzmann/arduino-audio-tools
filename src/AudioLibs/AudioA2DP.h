@@ -239,7 +239,7 @@ class A2DPStream : public AudioStream {
             if (a2dp!=nullptr) a2dp->set_volume(volume * 128);
         }
 
-        virtual void setNotifyAudioChange (AudioBaseInfoDependent &bi) {
+        virtual void setNotifyAudioChange (AudioInfoDependent &bi) {
             audioBaseInfoDependent = &bi;
         }
 
@@ -249,7 +249,7 @@ class A2DPStream : public AudioStream {
         BluetoothA2DPSource *a2dp_source = nullptr;
         BluetoothA2DPSink *a2dp_sink = nullptr;
         BluetoothA2DPCommon *a2dp=nullptr;
-        AudioBaseInfoDependent *audioBaseInfoDependent=nullptr;
+        AudioInfoDependent *audioBaseInfoDependent=nullptr;
         float volume = 1.0;
 
         // auto-detect device to send audio to (TX-Mode)
@@ -311,10 +311,10 @@ class A2DPStream : public AudioStream {
             } 
         }
 
-        /// notify subscriber with AudioBaseInfo
+        /// notify subscriber with AudioInfo
         void notify_base_Info(int rate){
             if (audioBaseInfoDependent!=nullptr){
-                AudioBaseInfo info;
+                AudioInfo info;
                 info.channels = 2;
                 info.bits_per_sample = 16;
                 info.sample_rate = rate;
