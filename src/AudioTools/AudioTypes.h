@@ -44,23 +44,27 @@ struct AudioInfo {
     /// Copy constructor
     AudioInfo(const AudioInfo &) = default;
     
-    int sample_rate = 0;    // undefined
-    int channels = 0;       // undefined
-    int bits_per_sample=16; // we assume int16_t
-
     bool operator==(AudioInfo alt){
         return sample_rate==alt.sample_rate && channels == alt.channels && bits_per_sample == alt.bits_per_sample;
     }
+
     bool operator!=(AudioInfo alt){
         return !(*this == alt);
     } 
     
-    void setAudioInfo(AudioInfo info)  {
+    /// Copies the values from info
+    void set(AudioInfo info)  {
       sample_rate = info.sample_rate;
       channels = info.channels;
       bits_per_sample = info.bits_per_sample;
     }
 
+    /// Same as set
+    void setAudioInfo(AudioInfo info)  {
+        set(info);
+    }
+
+    /// Same as set
     void copyFrom(AudioInfo info){
       setAudioInfo(info);
     }
@@ -74,7 +78,13 @@ struct AudioInfo {
       LOGI("sample_rate: %d", sample_rate);
       LOGI("channels: %d", channels);
       LOGI("bits_per_sample: %d", bits_per_sample);
-    }      
+    }  
+
+    // public attributes
+    int sample_rate = 0;    // undefined
+    int channels = 0;       // undefined
+    int bits_per_sample=16; // we assume int16_t
+    
 };
 
 // Support legacy name
