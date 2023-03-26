@@ -1186,7 +1186,7 @@ class ProgressStream : public AudioStream {
 
 /**
  * @brief MixerStream is mixing the input from Multiple Input Streams.
- * All streams must have the same audo format (sample rate, channels, bits per sample) 
+ * All streams must have the same audo format (sample rate, channels, bits per sample). 
  * @ingroup transform
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -1211,7 +1211,7 @@ class InputMixer : public AudioStream {
   	  return frame_size>0;
     }
 
-    /// Defines a new weight for the indicated channel: If you set it to 0 it is muted. We recommend to use values between 1 and 100
+    /// Dynamically update the new weight for the indicated channel: If you set it to 0 it is muted (and the stream is not read any more). We recommend to use values between 1 and 100
     void setWeight(int channel, int weight){
       if (channel<size()){
         weights[channel] = weight;
@@ -1283,9 +1283,11 @@ class InputMixer : public AudioStream {
       int stream_count = size();
       resultClear();
       for (int j=0;j<stream_count;j++){
-        readSamples(streams[j],current_vect.data(), samples);
-        float fact = static_cast<float>(weights[j]) / total_weights;
-        resultAdd(fact);
+        if (weights[j]>0){
+          readSamples(streams[j],current_vect.data(), samples);
+          float fact = static_cast<float>(weights[j]) / total_weights;
+          resultAdd(fact);
+        }
       }
       // copy result
       for (int j=0;j<samples;j++){
