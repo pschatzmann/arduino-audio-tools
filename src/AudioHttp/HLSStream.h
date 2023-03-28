@@ -113,7 +113,7 @@ protected:
     AudioDecoder *create(const char *name) {
       for (auto it = codecs.begin(); it != codecs.end(); ++it) {
         if (Str(name).startsWith(it->name)) {
-          LOGI("Using codec: %s", codecs[j].name);
+          LOGI("Using codec: %s", it->name);
           release = it->release;
           return it->create();
         }
