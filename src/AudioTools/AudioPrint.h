@@ -23,7 +23,8 @@ namespace audio_tools {
 class AudioPrint : public Print, public AudioInfoDependent, public AudioInfoSource {
     public:
         virtual ~AudioPrint() = default;
-         size_t write(const uint8_t *buffer, size_t size) override = 0;
+
+        virtual size_t write(const uint8_t *buffer, size_t size) override = 0;
 
         virtual size_t write(uint8_t ch) override {
             if (tmp.isFull()){
@@ -71,7 +72,7 @@ class AudioPrint : public Print, public AudioInfoDependent, public AudioInfoSour
         virtual void writeSilence(size_t len){
             int16_t zero = 0;
             for (int j=0;j<len/2;j++){
-            write((uint8_t*)&zero,2);
+                write((uint8_t*)&zero,2);
             } 
         }
 

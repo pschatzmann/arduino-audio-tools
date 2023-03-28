@@ -308,8 +308,8 @@ protected:
   bool setup() {
     sbc_init(&sbc, 0L);
 
-    if (info.bits_per_saple!=16){
-      LOGE("Invalid bits_per_saple: %d", info.bits_per_saple);
+    if (info.bits_per_sample!=16){
+      LOGE("Invalid bits_per_sample: %d", info.bits_per_sample);
       return false;
     }
 
