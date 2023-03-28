@@ -138,6 +138,7 @@ protected:
   class HLSParser {
   public:
     bool begin(const char *urlStr) {
+      url_str = "";
       bool rc = url_stream.begin(urlStr);
       if (rc)
         rc = parse();
