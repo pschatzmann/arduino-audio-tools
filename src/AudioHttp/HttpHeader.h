@@ -91,7 +91,8 @@ class HttpHeader {
                 LOGD("HttpHeader::put %s %s", key, value);
                 HttpHeaderLine *hl = headerLine(key);
                 if (hl==nullptr){
-                    LOGE("HttpHeader::put - did not add HttpHeaderLine for %s", key);
+                    if (create_new_lines)
+                        LOGE("HttpHeader::put - did not add HttpHeaderLine for %s", key);
                     return *this;
                 }
 

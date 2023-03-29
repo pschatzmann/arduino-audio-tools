@@ -63,6 +63,7 @@ class StrExt : public Str {
 
         ~StrExt() {
             if (chars!=nullptr){
+                LOGD("delete %d",maxlen);
                 delete [] chars;
                 chars = nullptr;
             }
@@ -113,7 +114,7 @@ class StrExt : public Str {
             bool grown = false;
             
             if (chars==nullptr || newMaxLen > maxlen ){
-                LOGD("StrExt::grow(%d)",newMaxLen);
+                LOGD("grow(%d)",newMaxLen);
 
                 grown = true;
                 // we use at minimum the defined maxlen
