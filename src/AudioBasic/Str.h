@@ -561,7 +561,7 @@ class Str {
         /// remove trailing spaces
         virtual void rtrim(){
             if (!isConst()){
-                while(this->endsWith(" ")){
+                while(isspace(chars[len])){
                     len--;
                     chars[len] = 0;
                 }
