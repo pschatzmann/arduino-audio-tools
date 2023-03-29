@@ -29,6 +29,11 @@ namespace audio_tools {
 class HLSStream : public AudioStream {
  public:
   HLSStream() = default;
+  
+  HLSStream(const char *ssid, const char *password) {
+    setSSID(ssid);
+    setPassword(password);
+  };
 
   HLSStream(AudioStream &out) { setOutput(out); };
 
@@ -88,6 +93,7 @@ class HLSStream : public AudioStream {
   /// Returns the string representation of the codec of the audio stream
   const char *codec() { return parser.getCodecString(); }
 
+  /// Process the audio data when output has been defined in constructor
   int copy() {
     if (p_out == nullptr) return 0;
     uint8_t tmp[512];
@@ -104,7 +110,8 @@ class HLSStream : public AudioStream {
     }
     return result;
   }
-  int available() {
+
+  int available() override {
     Stream &urlStream = getURLStream();
     int result = urlStream.available();
     if (result == 0) {
@@ -117,7 +124,7 @@ class HLSStream : public AudioStream {
     return result;
   }
 
-  size_t readBytes(uint8_t *data, size_t len) {
+  size_t readBytes(uint8_t *data, size_t len) override {
     Stream &urlStream = getURLStream();
     size_t result = 0;
     if (urlStream.available() > 0) {
