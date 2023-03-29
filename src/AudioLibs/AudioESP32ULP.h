@@ -19,6 +19,8 @@
 #include <math.h>
 #include <soc/rtc.h>
 
+enum UlpDac { ULP_DAC1 = 1, ULP_DAC2 = 2 };
+
 /**
  * @brief Outputs to ESP32 DAC through the ULP (Ultra> Low Power coprocessor),
  * freeing I2S for other uses. Connect left channel on pin 25 Connect right
@@ -34,13 +36,22 @@ public:
     return cfg;
   }
 
+  /// Selects the DAC when we have a mono signal
+  void setMonoDAC(UlpDac dac){
+    selected_mono_dac = dac;
+  }
+
+  /// Selects the limit for the availableForWrite to report the data
+  void setMinWriteBytes(int bytes){
+    min_write_bytes = bytes;
+  }
+
   /// Starts the processing. I the output is mono, we can determine the output pin by selecting DAC1 (gpio25) or DAC2 (gpio26)
-  bool begin(AudioInfo info, int monoDac = DAC1, int minWriteBytes=128) {
+  bool begin(AudioInfo info) {
     TRACEI();
     cfg = info;
-    min_write_bytes = minWriteBytes;
     stereoOutput = info.channels == 2;
-    activeDACs = stereoOutput ? 3 : monoDac;
+    activeDACs = stereoOutput ? 3 : selected_mono_dac;
     hertz = cfg.sample_rate;
 
     if (info.bits_per_sample != 16) {
@@ -99,12 +110,12 @@ public:
     return true;
   }
 
-  enum : int { DAC1 = 1, DAC2 = 2 };
 
 private:
   int lastFilledWord = 0;
   int hertz;
   int min_write_bytes = 128;
+  UlpDac selected_mono_dac = ULP_DAC1;
   uint8_t bufferedOddSample = 128;
   bool waitingOddSample = true; // must be set to false for mono output
   int activeDACs = 3;           // 1:DAC1; 2:DAC2; 3:both;
