@@ -24,68 +24,72 @@ namespace audio_tools {
 
 class HLSStream {
  public:
-  HLSStream(AudioStream &out) {
-    setOutput(out);
-  };
+  HLSStream(AudioStream &out) { setOutput(out); };
 
   HLSStream(AudioStream &out, const char *ssid, const char *password) {
     setOutput(out);
     setSSID(ssid);
     setPassword(password);
   }
-
-  // executes the URL request
   bool begin(const char *urlStr) {
     // parse the url to the HLS
     bool rc = parser.begin(urlStr);
 
     if (rc) {
       rc = beginEncodedAudioStream();
-    if (rc)
-      rc = parser.nextStream();
+      // if (rc)
+      //   rc = parser.nextStream();
 
-    if(!rc)
-      LOGW("HLS failed");
+      if (!rc) LOGW("HLS failed");
     }
     return rc;
   }
+
+  bool begin() { return parser.begin(); }
+
   // ends the request
-  void end()  { parser.end(); }
+  void end() { parser.end(); }
 
   /// provides access to the HttpRequest
-  HttpRequest &httpRequest()  {
-    return parser.getURLStream().httpRequest();
-  }
+  HttpRequest &httpRequest() { return parser.getURLStream().httpRequest(); }
 
   /// (Re-)defines the client
-  void setClient(Client &clientPar)  {
+  void setClient(Client &clientPar) {
     parser.getURLStream().setClient(clientPar);
   }
 
   /// Sets the ssid that will be used for logging in (when calling begin)
-  void setSSID(const char *ssid)  {
-    parser.getURLStream().setSSID(ssid);
-  }
+  void setSSID(const char *ssid) { parser.getURLStream().setSSID(ssid); }
 
   /// Sets the password that will be used for logging in (when calling begin)
-  void setPassword(const char *password)  {
+  void setPassword(const char *password) {
     parser.getURLStream().setPassword(password);
   }
 
   /// Defines a codec for the indicated type string
-  void setOutput(AudioStream &out) { p_out = &out;}
+  void setOutput(AudioStream &out) { p_out = &out; }
 
   /// Registers a decoder
   void addDecoder(const char *name, AudioDecoder &codec) {
     parser.addDecoder(name, codec);
   }
 
+  Stream &getURLStream() { return parser.getURLStream(); }
+
   int copy() {
     uint8_t tmp[512];
-    size_t len = readBytes(tmp, 512);
-    size_t len_write = dec_stream.write(tmp, len);
-    LOGI("copy %d -> %d", len, len_write);
-    return len;
+    int result = available();
+    if (result > 0) {
+      result = readBytes(tmp, 512);
+      size_t len_write = dec_stream.write(tmp, result);
+      LOGI("copy %d -> %d", result, len_write);
+      delay(5);
+
+    } else {
+      LOGI("copy %d", result);
+      delay(10);
+    }
+    return result;
   }
 
  protected:
@@ -154,26 +158,32 @@ class HLSStream {
   class HLSParser {
    public:
     bool begin(const char *urlStr) {
-      url_str = "";
+      index_url_str = urlStr;
+      segments_url_str = "";
+      bandwidth = 0;
       LOGI("-------------------");
-      LOGI("Loading index: %s", urlStr);
+      LOGI("Loading index: %s", index_url_str);
       url_stream.setTimeout(1000);
       url_stream.setConnectionClose(false);
       // we only update the content length
-      url_stream.httpRequest().reply().put(CONTENT_LENGTH,0);
+      url_stream.httpRequest().reply().put(CONTENT_LENGTH, 0);
       url_stream.setAutoCreateLines(false);
-      bool rc = url_stream.begin(urlStr);
+
+      bool rc = url_stream.begin(index_url_str);
       if (rc) rc = parse(true);
-
       if (rc) rc = codecSetup();
-
-      // if (rc) rc = beginStream();
-
-      // release attributes
-      url_stream.clear();
       return rc;
     }
 
+    bool begin() {
+      segments_url_str = "";
+      bandwidth = 0;
+      LOGI("-------------------");
+      LOGI("Loading index: %s", index_url_str);
+      bool rc = url_stream.begin(index_url_str);
+      if (rc) rc = parse(true);
+      return rc;
+    }
 
     // parse the index file and the segments
     bool parse(bool process_index) {
@@ -184,8 +194,11 @@ class HLSStream {
 
       // parse lines
       memset(tmp, 0, MAX_HLS_LINE);
-      while (url_stream.httpRequest().readBytesUntil('\n', tmp, MAX_HLS_LINE)) {
+      while (url_stream.available()) {
+        memset(tmp, 0, MAX_HLS_LINE);
+        url_stream.httpRequest().readBytesUntil('\n', tmp, MAX_HLS_LINE);
         Str str(tmp);
+
         if (!str.startsWith("#EXTM3U")) {
           is_extm3u = true;
         }
@@ -195,17 +208,14 @@ class HLSStream {
         } else {
           parseSegments(str);
         }
-        // clear buffer
-        memset(tmp, 0, MAX_HLS_LINE);
       }
 
       // load segments
-      if (process_index && !url_str.isEmpty()) {
+      if (process_index && !segments_url_str.isEmpty()) {
         LOGI("-------------------");
         endUrlStream();
-        LOGI("Load segments from: %s", url_str.c_str());
-        if (url_stream.begin(url_str.c_str())) {
-          process_index = false;
+        LOGI("Load segments from: %s", segments_url_str.c_str());
+        if (url_stream.begin(segments_url_str.c_str())) {
           result = parse(false);
         }
       }
@@ -220,16 +230,17 @@ class HLSStream {
       TRACED();
       segments.clear();
       codec.clear();
-      url_str.clear();
+      segments_url_str.clear();
       endUrlStream();
-//      dec_stream.end();
+      //      dec_stream.end();
       codec_mgmt.end();
     }
 
-//    EncodedAudioStream &decodedStream() { return dec_stream; }
+    //    EncodedAudioStream &decodedStream() { return dec_stream; }
 
     /// Get the decoded data from the next segment
     bool nextStream() {
+      TRACEI();
       bool result = false;
       StrExt url1;
       URLStream &url_stream = getURLStream();
@@ -241,7 +252,7 @@ class HLSStream {
           tmp.set(url1.c_str());
         } else {
           // we create the complete url
-          tmp.set(url_str.c_str());
+          tmp.set(segments_url_str.c_str());
           tmp.add("/");
           tmp.add(url1.c_str());
         }
@@ -249,6 +260,8 @@ class HLSStream {
         LOGI("playing %s", tmp.c_str());
         endUrlStream();
         result = url_stream.begin(tmp.c_str(), "audio/mp4a", GET);
+      } else {
+        LOGW("No more segments");
       }
       return result;
     }
@@ -275,16 +288,15 @@ class HLSStream {
 
     void codecDelete() { codec_mgmt.end(); }
 
-    AudioDecoder *getDecoder(){
-      return decoder;
-    }
+    AudioDecoder *getDecoder() { return decoder; }
 
    protected:
     int bandwidth = 0;
     bool url_active = false;
     bool is_extm3u = false;
     StrExt codec;
-    StrExt url_str;
+    StrExt segments_url_str;
+    const char *index_url_str = nullptr;
     Queue<StrExt> segments;
     URLStream url_stream;
     AudioDecoder *decoder = nullptr;
@@ -331,9 +343,9 @@ class HLSStream {
 
       if (url_active && str.startsWith("http")) {
         if (str.startsWith("http")) {
-          url_str.set(str);
+          segments_url_str.set(str);
           if (codecIsValid(codec.c_str())) {
-            LOGI("-> url: %s", url_str.c_str());
+            LOGI("-> url: %s", segments_url_str.c_str());
           } else {
             LOGW("Url ignored because there is no codec for %s", codec.c_str());
           }
@@ -346,20 +358,32 @@ class HLSStream {
   AudioStream *p_out = nullptr;
 
   bool beginEncodedAudioStream() {
-    if (p_out==nullptr) return false;
-    if (parser.getDecoder()==nullptr) return false;
+    if (p_out == nullptr) return false;
+    if (parser.getDecoder() == nullptr) return false;
     dec_stream.setStream(p_out);
     dec_stream.setDecoder(parser.getDecoder());
     dec_stream.setNotifyAudioChange(*p_out);
     return dec_stream.begin();
   }
 
-  size_t readBytes(uint8_t *data, size_t len) {
-    size_t result = parser.getURLStream().readBytes(data, len);
-    if (result == 0 && !parser.getSegments().empty()) {
-      if (parser.nextStream()) {
-        result = parser.getURLStream().readBytes(data, len);
+  int available() {
+    Stream &urlStream = getURLStream();
+    int result = urlStream.available();
+    if (result == 0) {
+      if (!parser.nextStream()) {
+        // we consumed all segments so we get new ones
+        begin();
       }
+      result = urlStream.available();
+    }
+    return result;
+  }
+
+  size_t readBytes(uint8_t *data, size_t len) {
+    Stream &urlStream = getURLStream();
+    size_t result = 0;
+    if (urlStream.available() > 0) {
+      result = urlStream.readBytes(data, len);
     }
     return result;
   }
