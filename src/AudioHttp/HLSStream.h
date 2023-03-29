@@ -16,14 +16,20 @@ namespace audio_tools {
  * @brief HTTP Live Streaming using HLS. We use a simplified parsing that
  * supports registed decoders.
  *
- * http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_world_service/bbc_world_service.isml/bbc_world_service-audio%3d96000.norewind.m3u8/bbc_world_service-audio=96000-262505003.ts
-
+ * If you provide an output in the constructor the audio is decoded via the
+ * defined decoder and processed via copy();
+ * You can also get the (undecoded) audio by calling readBytes().
+ *
+ * Example url: http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_world_service/bbc_world_service.isml/bbc_world_service-audio%3d96000.norewind.m3u8/bbc_world_service-audio=96000-262505003.ts
+ *
  * @author Phil Schatzmann
  * @ingroup http *@copyright GPLv3
  */
 
-class HLSStream {
+class HLSStream : public AudioStream {
  public:
+  HLSStream() = default;
+
   HLSStream(AudioStream &out) { setOutput(out); };
 
   HLSStream(AudioStream &out, const char *ssid, const char *password) {
@@ -31,17 +37,15 @@ class HLSStream {
     setSSID(ssid);
     setPassword(password);
   }
+
   bool begin(const char *urlStr) {
     // parse the url to the HLS
     bool rc = parser.begin(urlStr);
 
-    if (rc) {
+    if (rc && p_out != nullptr) {
       rc = beginEncodedAudioStream();
-      // if (rc)
-      //   rc = parser.nextStream();
-
-      if (!rc) LOGW("HLS failed");
     }
+    if (!rc) LOGW("HLS failed");
     return rc;
   }
 
@@ -73,10 +77,19 @@ class HLSStream {
   void addDecoder(const char *name, AudioDecoder &codec) {
     parser.addDecoder(name, codec);
   }
+  /// Defines a supported decoder for selecting the audio stream
+  void addDecoder(const char *name) {
+    if (p_out != nullptr) {
+      LOGE("You need to provide a decoder!");
+    }
+    parser.addDecoder(name);
+  }
 
-  Stream &getURLStream() { return parser.getURLStream(); }
+  /// Returns the string representation of the codec of the audio stream
+  const char *codec() { return parser.getCodecString(); }
 
   int copy() {
+    if (p_out == nullptr) return 0;
     uint8_t tmp[512];
     int result = available();
     if (result > 0) {
@@ -88,6 +101,27 @@ class HLSStream {
     } else {
       LOGI("copy %d", result);
       delay(10);
+    }
+    return result;
+  }
+  int available() {
+    Stream &urlStream = getURLStream();
+    int result = urlStream.available();
+    if (result == 0) {
+      if (!parser.nextStream()) {
+        // we consumed all segments so we get new ones
+        begin();
+      }
+      result = urlStream.available();
+    }
+    return result;
+  }
+
+  size_t readBytes(uint8_t *data, size_t len) {
+    Stream &urlStream = getURLStream();
+    size_t result = 0;
+    if (urlStream.available() > 0) {
+      result = urlStream.readBytes(data, len);
     }
     return result;
   }
@@ -105,6 +139,10 @@ class HLSStream {
       this->name = name;
       this->p_decoder = &codec;
     }
+    CodecEntry(const char *name) {
+      this->name = name;
+      this->p_decoder = nullptr;
+    }
   };
 
   /**
@@ -115,6 +153,10 @@ class HLSStream {
    public:
     void addDecoder(const char *name, AudioDecoder &decoder) {
       CodecEntry entry{name, decoder};
+      codecs.push_back(entry);
+    }
+    void addDecoder(const char *name) {
+      CodecEntry entry{name};
       codecs.push_back(entry);
     }
 
@@ -275,6 +317,8 @@ class HLSStream {
     void addDecoder(const char *name, AudioDecoder &codec) {
       codec_mgmt.addDecoder(name, codec);
     }
+
+    void addDecoder(const char *name) { codec_mgmt.addDecoder(name); }
     // Determine the decoder
     bool codecSetup() {
       codec_mgmt.end();
@@ -289,6 +333,8 @@ class HLSStream {
     void codecDelete() { codec_mgmt.end(); }
 
     AudioDecoder *getDecoder() { return decoder; }
+
+    const char *getCodecString() { return codec.c_str(); }
 
    protected:
     int bandwidth = 0;
@@ -357,6 +403,8 @@ class HLSStream {
   EncodedAudioStream dec_stream;
   AudioStream *p_out = nullptr;
 
+  Stream &getURLStream() { return parser.getURLStream(); }
+
   bool beginEncodedAudioStream() {
     if (p_out == nullptr) return false;
     if (parser.getDecoder() == nullptr) return false;
@@ -365,30 +413,7 @@ class HLSStream {
     dec_stream.setNotifyAudioChange(*p_out);
     return dec_stream.begin();
   }
-
-  int available() {
-    Stream &urlStream = getURLStream();
-    int result = urlStream.available();
-    if (result == 0) {
-      if (!parser.nextStream()) {
-        // we consumed all segments so we get new ones
-        begin();
-      }
-      result = urlStream.available();
-    }
-    return result;
-  }
-
-  size_t readBytes(uint8_t *data, size_t len) {
-    Stream &urlStream = getURLStream();
-    size_t result = 0;
-    if (urlStream.available() > 0) {
-      result = urlStream.readBytes(data, len);
-    }
-    return result;
-  }
 };
-
 }  // namespace audio_tools
 
 #endif
