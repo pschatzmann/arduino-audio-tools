@@ -24,6 +24,7 @@ class ChannelFormatConverterStreamT : public AudioStream {
         ChannelFormatConverterStreamT& operator=(ChannelFormatConverterStreamT const&) = delete;
 
         bool begin(int fromChannels, int toChannels){
+          LOGI("begin %d -> %d channels", fromChannels,  toChannels);
           from_channels = fromChannels;
           to_channels = toChannels;
           factor = static_cast<float>(toChannels) / static_cast<float>(fromChannels);
@@ -35,6 +36,7 @@ class ChannelFormatConverterStreamT : public AudioStream {
         }
 
         virtual size_t write(const uint8_t *data, size_t size) override { 
+           TRACED();
            if (from_channels==to_channels){
               return p_print->write(data, size);
            }
@@ -45,6 +47,7 @@ class ChannelFormatConverterStreamT : public AudioStream {
         }
 
         size_t readBytes(uint8_t *data, size_t size) override {
+          TRACED();
            if (p_stream==nullptr) return 0;
            if (from_channels==to_channels){
               return p_stream->readBytes(data, size);
@@ -140,11 +143,13 @@ class ChannelFormatConverterStream : public AudioStream {
         }
 
         bool begin(int fromChannels, int toChannels, int bits_per_sample=16){
+          LOGI("begin %d -> %d channels", fromChannels,  toChannels);
           this->bits_per_sample = bits_per_sample;
           return setupConverter(fromChannels, toChannels);
         }
 
         virtual size_t write(const uint8_t *data, size_t size) override { 
+            TRACED();
             switch(bits_per_sample){
               case 8:
                 return static_cast<ChannelFormatConverterStreamT<int8_t>*>(converter)->write(data,size);
@@ -160,6 +165,7 @@ class ChannelFormatConverterStream : public AudioStream {
         }
 
         size_t readBytes(uint8_t *data, size_t size) override {
+            TRACED();
             switch(bits_per_sample){
               case 8:
                 return static_cast<ChannelFormatConverterStreamT<int8_t>*>(converter)->write(data,size);
@@ -292,10 +298,12 @@ class NumberFormatConverterStreamT : public AudioStream {
         }
 
         bool begin() override {
+          LOGI("begin %d -> %d bits", sizeof(TFrom),  sizeof(TTo));
           return true;
         }
 
         virtual size_t write(const uint8_t *data, size_t size) override { 
+          TRACED();
            size_t samples = size / sizeof(TFrom);
            size_t result_size = 0;
            TFrom *data_source = (TFrom *)data;
@@ -309,6 +317,7 @@ class NumberFormatConverterStreamT : public AudioStream {
         }
 
         size_t readBytes(uint8_t *data, size_t size) override {
+          TRACED();
            if (p_stream==nullptr) return 0;
            size_t samples = size / sizeof(TTo);
            TTo *data_target = (TTo *)data;
@@ -360,6 +369,7 @@ class NumberFormatConverterStream :  public AudioStream {
         }
 
         bool begin(int from_bit_per_samples, int to_bit_per_samples){
+          LOGI("begin %d -> %d bits", from_bit_per_samples,  to_bit_per_samples);
           bool result = true;
           this->from_bit_per_samples = from_bit_per_samples;
           this->to_bit_per_samples = to_bit_per_samples;
@@ -393,11 +403,12 @@ class NumberFormatConverterStream :  public AudioStream {
         }
 
         virtual size_t write(const uint8_t *data, size_t size) override { 
+          TRACED();
           if (from_bit_per_samples==to_bit_per_samples){
             return p_print->write(data, size);
           }
 
-          if (from_bit_per_samples==8 &&to_bit_per_samples==16){
+          if (from_bit_per_samples==8 && to_bit_per_samples==16){
              return static_cast<NumberFormatConverterStreamT<int8_t,int16_t>*>(converter)->write(data,size);
           } else if (from_bit_per_samples==16 &&to_bit_per_samples==8){
              return static_cast<NumberFormatConverterStreamT<int16_t,int8_t>*>(converter)->write(data,size);
@@ -415,6 +426,7 @@ class NumberFormatConverterStream :  public AudioStream {
         }
 
         size_t readBytes(uint8_t *data, size_t size) override {
+          TRACED();
           if (from_bit_per_samples==to_bit_per_samples){
             return p_stream->readBytes(data, size);
           }
@@ -548,10 +560,14 @@ class FormatConverterStream : public AudioStream {
         void setStream(Stream &stream){
           p_stream = &stream;
           p_print = &stream;
+          numberFormatConverter.setStream(*p_stream);
+          channelFormatConverter.setStream(numberFormatConverter);
         }
 
         void setStream(Print &print){
           p_print = &print;
+          numberFormatConverter.setStream(*p_print);
+          channelFormatConverter.setStream(numberFormatConverter);
         }
 
         /// Defines the audio info of the stream which has been defined in the constructor
@@ -565,27 +581,26 @@ class FormatConverterStream : public AudioStream {
         }
 
         bool begin(AudioInfo to){
+          TRACED();
           setAudioInfo(to);
           to_cfg = to;
-          if (p_stream!=nullptr){
-            numberFormatConverter.setStream(*p_stream);
-            channelFormatConverter.setStream(numberFormatConverter);
-          } else {
-            numberFormatConverter.setStream(*p_print);
-            channelFormatConverter.setStream(numberFormatConverter);
-          }
           bool result = numberFormatConverter.begin(from_cfg.bits_per_sample, to_cfg.bits_per_sample);
           if (result){
-            result =  channelFormatConverter.begin(to_cfg.bits_per_sample, from_cfg.channels, to_cfg.channels);
+            result =  channelFormatConverter.begin(from_cfg.channels, to_cfg.channels, to_cfg.bits_per_sample);
+          }
+          if (!result){
+            LOGE("begin failed");
           }
           return result;
         }
 
         virtual size_t write(const uint8_t *data, size_t size) override { 
+          TRACED();
           return channelFormatConverter.write(data, size);
         }
 
         size_t readBytes(uint8_t *data, size_t size) override {
+          TRACED();
           return channelFormatConverter.readBytes(data, size);
         }
 
