@@ -123,6 +123,11 @@ class HttpRequest {
             }
         }
 
+
+        size_t readBytesUntil(char terminator, char *buffer, size_t length){
+            return client_ptr->readBytesUntil(terminator, buffer, length);
+        }
+
         // read the reply data up to the next new line. For Chunked data we provide 
         // the full chunk!
         virtual int readln(uint8_t* str, int len, bool incl_nl=true){
@@ -179,6 +184,10 @@ class HttpRequest {
             request_header.put(header, value);
         }
 
+        Client &client() {
+            return *client_ptr;
+        }
+
    
     protected:
         Client *client_ptr;
@@ -205,6 +214,7 @@ class HttpRequest {
 
         // sends request and reads the reply_header from the server
         virtual int process(MethodID action, Url &url, const char* mime, const char *data, int lenData=-1){
+            TRACED();
             int len = lenData;
             is_ready = false;
             if (client_ptr==nullptr){
@@ -247,6 +257,7 @@ class HttpRequest {
                 LOGD("%s",data);
             }
 
+
             // posting data from stream
             if (p_post_stream!=nullptr){
                 uint8_t buffer[512];
@@ -259,7 +270,6 @@ class HttpRequest {
                 LOGI("Written data: %d bytes", total);
                 p_post_stream = nullptr;
             }
-            
             LOGI("Request written ... waiting for reply")
             //Commented out because this breaks the RP2040 W
             //client_ptr->flush(); 

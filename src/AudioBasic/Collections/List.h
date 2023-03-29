@@ -64,6 +64,9 @@ class List {
                 inline T &operator*() {
                     return node->data;
                 }
+                inline T *operator->() {
+                    return &(node->data);
+                }
                 inline Node *get_node() {
                     return node;
                 }
@@ -100,7 +103,7 @@ class List {
         /// Default constructor
         List() { link(); };
         /// copy constructor
-        List(const List&ref) = default;
+        List(List&ref) = default;
 
         /// Constructor using array
         template<size_t N>

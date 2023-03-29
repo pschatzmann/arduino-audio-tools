@@ -189,6 +189,16 @@ class URLStream : public AbstractURLStream {
             is_power_save = ps;
         }
 
+        /// If set to true, new undefined reply parameters will be stored
+        void setAutoCreateLines(bool flag){
+            httpRequest().reply().setAutoCreateLines(flag);
+        }
+
+        /// Sets if the connection should be close automatically
+        void setConnectionClose(bool close){
+            httpRequest().setConnection(close ? CON_CLOSE : CON_KEEP_ALIVE);
+        }
+        
         /// Releases the memory from the request and reply
         void clear() {
             httpRequest().reply().clear(false);
@@ -208,7 +218,7 @@ class URLStream : public AbstractURLStream {
         long total_read;
         // buffered single byte read
         Vector<uint8_t> read_buffer{0};
-        uint16_t read_buffer_size;
+        uint16_t read_buffer_size=DEFAULT_BUFFER_SIZE;
         uint16_t read_pos;
         uint16_t read_size;
         bool active = false;
@@ -311,16 +321,16 @@ class URLStream : public AbstractURLStream {
 
         void login(){
 #ifdef USE_WIFI
-            TRACEI();
             if (network!=nullptr && password != nullptr && WiFi.status() != WL_CONNECTED){
+                TRACEI();
                 WiFi.begin(network, password);
                 while (WiFi.status() != WL_CONNECTED){
                     Serial.print(".");
                     delay(500); 
                 }
                 Serial.println();
+                delay(500);  
             }
-            delay(500);  
 #else   
             LOGE("login not supported");
 #endif          
@@ -340,6 +350,7 @@ class URLStream : public AbstractURLStream {
                     delay(500);
                 }
             }
+            LOGI("available: %d", request.available());
             return request.available()>0;
         }
 };

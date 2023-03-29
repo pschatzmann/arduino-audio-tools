@@ -82,6 +82,9 @@ class Vector {
         inline T &operator*() {
           return *ptr;
         }
+        inline T *operator->() {
+          return ptr;
+        }
         inline T *getPtr() {
           return ptr;
         }
@@ -162,7 +165,7 @@ class Vector {
 
     inline void push_back(T value){
       resize_internal(len+1, true);
-      p_data[len] = value;
+      p_data[len] =  value;
       len++;
     }
 
