@@ -94,11 +94,15 @@ public:
     return length;
   }
 
-  /// Provides the compressed length in bytes (after encoding)
-  int frameLength() { return sbc_get_frame_length(&sbc); }
 
   // Provides the uncompressed length (of the PCM data) in bytes
-  int codeSize() { return sbc_get_codesize(&sbc); }
+  int bytesUncompressed() {
+    return codeSize();
+  }
+  /// Provides the compressed length in bytes (after encoding)
+  int bytesCompressed() {
+    return frameLength();
+  }
 
 protected:
   Print *p_print = nullptr;
@@ -112,6 +116,12 @@ protected:
   int framelen;
   uint8_t *input_buffer = nullptr;
   int input_pos = 0;
+
+  /// Provides the compressed length in bytes (after encoding)
+  int frameLength() { return sbc_get_frame_length(&sbc); }
+
+  // Provides the uncompressed length (of the PCM data) in bytes
+  int codeSize() { return sbc_get_codesize(&sbc); }
 
   /// Process audio info
   void setupAudioInfo() {
@@ -283,11 +293,13 @@ public:
     return in_size;
   }
 
-  /// Provides the compressed length in bytes (after encoding)
-  int frameLength() { return sbc_get_frame_length(&sbc); }
 
-  /// Provides the uncompressed length (of the PCM data) in bytes
-  int codeSize() { return sbc_get_codesize(&sbc); }
+  int bytesUncompressed() {
+    return codeSize();
+  }
+  int bytesCompressed() {
+    return frameLength();
+  }
 
 protected:
   AudioInfo info;
@@ -303,6 +315,12 @@ protected:
   int blocks = 4;
   int bitpool = 32;
   int allocation_method;
+
+  /// Provides the compressed length in bytes (after encoding)
+  int frameLength() { return sbc_get_frame_length(&sbc); }
+
+  /// Provides the uncompressed length (of the PCM data) in bytes
+  int codeSize() { return sbc_get_codesize(&sbc); }
 
   /// Determines audio information and calls sbc_init;
   bool setup() {

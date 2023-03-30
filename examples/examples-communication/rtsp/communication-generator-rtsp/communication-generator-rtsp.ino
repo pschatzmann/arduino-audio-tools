@@ -10,7 +10,7 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/MicroRTSPAudio.h"
+#include "AudioLibs/RTSPStream.h"
 #include "AudioStreamer.h"
 #include "RTSPServer.h"
 
@@ -23,7 +23,7 @@ const char* password = "password";
 
 SineFromTable<int16_t> sineWave(32000);           // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound(sineWave);    // Stream generated from sine wave
-RTSPSourceAudioStream source(sound);              // Stream sound via RTSP
+RTSPSourceFromAudioStream source(sound);              // Stream sound via RTSP
 AudioStreamer streamer = AudioStreamer(&source);
 RTSPServer rtsp = RTSPServer(&streamer, port);
 
