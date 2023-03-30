@@ -49,7 +49,8 @@ class Decoder8Bit : public AudioDecoder {
 
         Decoder8Bit(Print &out_stream, AudioInfoDependent &bi){
             TRACED();
-            p_print = &out_stream;
+            setOutputStream(out_stream);
+            setNotifyAudioChange(bi);
         }
 
         /// Defines the output Stream
@@ -59,6 +60,11 @@ class Decoder8Bit : public AudioDecoder {
 
         void setNotifyAudioChange(AudioInfoDependent &bi) override {
             this->bid = &bi;
+        }
+
+        /// By default the int8_t values are signed, you can set them to be unsigned
+        void setSigned(bool isSigned){
+            is_signed = isSigned;
         }
 
         AudioInfo audioInfo() override {
@@ -89,7 +95,11 @@ class Decoder8Bit : public AudioDecoder {
             buffer.resize(in_size);
             int8_t* pt8 = (int8_t*) in_ptr;
             for (size_t j=0;j<in_size;j++){
-                buffer[j] = pt8[j]*258;
+                int16_t tmp = pt8[j];
+                if (!is_signed){
+                    tmp-=128;
+                }
+                buffer[j] = tmp*258;
             }
             return p_print->write((uint8_t*)buffer.data(), in_size*sizeof(int16_t));
         }
@@ -103,6 +113,7 @@ class Decoder8Bit : public AudioDecoder {
         AudioInfoDependent *bid=nullptr;
         AudioInfo cfg;
         bool active;
+        bool is_signed = true;
         Vector<int16_t> buffer;
 
 };
@@ -126,6 +137,11 @@ class Encoder8Bit : public AudioEncoder {
         // Constructor providing the output stream
         Encoder8Bit(Print &out){
             p_print = &out;
+        }
+
+        /// By default the int8_t values are signed, you can set them to be unsigned
+        void setSigned(bool isSigned){
+            is_signed = isSigned;
         }
 
         /// Defines the output Stream
@@ -165,7 +181,11 @@ class Encoder8Bit : public AudioEncoder {
             buffer.resize(in_size);
             size_t samples = in_size/2;
             for (size_t j=0;j<samples;j++){
-                buffer[j] = pt16[j] / 258;
+                int16_t tmp = pt16[j] / 258;
+                if (!is_signed){
+                    tmp+=128;
+                }
+                buffer[j] = tmp;
             }
 
             return p_print->write((uint8_t*)buffer.data(), samples);
@@ -181,10 +201,10 @@ class Encoder8Bit : public AudioEncoder {
 
     protected:
         Print* p_print=nullptr;;
-        volatile bool is_open;
+        bool is_open;
+        bool is_signed = true;
         Vector<int8_t> buffer;
         
-
 };
 
 }
