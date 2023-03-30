@@ -257,7 +257,6 @@ class ConverterFillLeftAndRight : public  BaseConverter<T> {
 
         void setup(T *src, size_t size) {
             if (!is_setup) {
-                T *sample = (T*) src;
                 for (int j=0;j<size;j++) {
                     if (*src!=0) {
                         left_empty = false;
@@ -265,7 +264,6 @@ class ConverterFillLeftAndRight : public  BaseConverter<T> {
                     }
                     src+=2;
                 }
-                sample = src+1;
                 for (int j=0;j<size-1;j++) {
                     if (*(src)!=0) {
                         right_empty = false;
