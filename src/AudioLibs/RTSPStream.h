@@ -9,7 +9,7 @@
 /**
  * @defgroup rtsp RTSP Streaming 
  * @ingroup communications
- * @file RTPStream.h
+ * @file RTSPStream.h
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -24,9 +24,9 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class RTPStreamPCMInfo : public PCMInfo {
+class RTSPStreamPCMInfo : public PCMInfo {
  public:
-  RTPStreamPCMInfo() = default;
+  RTSPStreamPCMInfo() = default;
   virtual void begin(AudioStream& stream) { p_stream = &stream; }
   int getSampleRate() override { return p_stream->audioInfo().sample_rate; }
   int getChannels() override { return p_stream->audioInfo().channels; }
@@ -47,9 +47,9 @@ class RTPStreamPCMInfo : public PCMInfo {
  * @copyright GPLv3
  */
 
-class RTPPCMAudioInfo : public PCMInfo {
+class RTSPPCMAudioInfo : public PCMInfo {
  public:
-  RTPPCMAudioInfo() = default;
+  RTSPPCMAudioInfo() = default;
   virtual void begin(AudioInfo info) { this->info = info; }
   int getSampleRate() override { return info.sample_rate; }
   int getChannels() override { return info.channels; }
@@ -158,7 +158,7 @@ class RTSPSourceFromAudioStream : public IAudioSource {
   AudioStream* p_audiostream = nullptr;
   uint64_t time_of_last_read = 0;
   bool started = true;
-  RTPStreamPCMInfo pcmInfo;
+  RTSPStreamPCMInfo pcmInfo;
   RTSPFormatPCM format{pcmInfo};
 };
 
@@ -247,7 +247,7 @@ class RTSPSourceStream : public IAudioSource {
  protected:
   Stream* p_stream = nullptr;
   bool active = true;
-  RTPPCMAudioInfo rtp_info;
+  RTSPPCMAudioInfo rtp_info;
   RTSPFormatPCM format{rtp_info};
 };
 
@@ -267,7 +267,7 @@ class RTSPFormatAudioTools : public RTSPFormat {
 
 /**
  * @brief SBC format for RTSP
- * https://en.wikipedia.org/wiki/RTP_payload_formats
+ * https://en.wikipedia.org/wiki/RTSP_payload_formats
  * @ingroup rtsp
  * @author Phil Schatzmann
  */
