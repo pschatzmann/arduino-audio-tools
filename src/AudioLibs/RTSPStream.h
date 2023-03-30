@@ -8,7 +8,7 @@
 
 /**
  * @defgroup rtsp RTSP Streaming 
- * @ingroup main
+ * @ingroup communications
  * @file RTPStream.h
  * @author Phil Schatzmann
  * @copyright GPLv3
