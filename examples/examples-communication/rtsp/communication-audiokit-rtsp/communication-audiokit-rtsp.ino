@@ -11,13 +11,13 @@
 
 #include "AudioTools.h"
 #include "AudioLibs/AudioKit.h"
-#include "AudioLibs/MicroRTSPAudio.h"
+#include "AudioLibs/RTSPStream.h"
 #include "AudioStreamer.h"
 #include "RTSPServer.h"
 
 int port = 554;
 AudioKitStream kit;  // Audio source
-RTSPSourceAudioStream source(kit); // IAudioSource for RTSP
+RTSPSourceFromAudioStream source(kit); // IAudioSource for RTSP
 AudioStreamer streamer = AudioStreamer(&source); // Stream audio via RTSP
 RTSPServer rtsp = RTSPServer(&streamer, port);
 
