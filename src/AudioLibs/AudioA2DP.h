@@ -86,7 +86,7 @@ class A2DPStream : public AudioStream {
         A2DPConfig defaultConfig(RxTxMode mode=RX_MODE){
             A2DPConfig cfg;
             cfg.mode = mode;
-            if(mode=TX_MODE){
+            if(mode==TX_MODE){
                 cfg.name="[Unknown]";
             }
             return cfg;
@@ -128,7 +128,7 @@ class A2DPStream : public AudioStream {
                     source(); // allocate object
                     a2dp_source->set_auto_reconnect(cfg.auto_reconnect);
                     a2dp_source->set_volume(volume * 100);
-                    if(cfg.name=="[Unknown]"){
+                    if(Str(cfg.name).equals("[Unknown]")){
                         //search next available device
                         a2dp_source->set_ssid_callback(detected_device);
                     }
@@ -160,6 +160,9 @@ class A2DPStream : public AudioStream {
                     LOGI("a2dp_sink is connected...");
                     is_a2dp_active = true;
                     result = true;
+                    break;
+                default:
+                    LOGE("Undefined mode: %d", cfg.mode);
                     break;
             } 
             
