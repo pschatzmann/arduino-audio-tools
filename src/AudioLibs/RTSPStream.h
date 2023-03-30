@@ -7,8 +7,8 @@
 #include "RTSPServer.h"
 
 /**
- * @defgroup rtp RTP Streaming Support using the AudioTools
- * Depends on the https://github.com/pschatzmann/Micro-RTSP-Audio/ library
+ * @defgroup rtsp RTSP Streaming 
+ * @ingroup main
  * @file RTPStream.h
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -19,7 +19,8 @@ namespace audio_tools {
 /**
  * @brief PCMInfo subclass which provides the audio information from the related
  * AudioStream
- * @ingroup rtp
+ * Depends on the https://github.com/pschatzmann/Micro-RTSP-Audio/ library
+ * @ingroup rtsp
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -41,7 +42,7 @@ class RTPStreamPCMInfo : public PCMInfo {
 /**
  * @brief PCMInfo subclass which provides the audio information from the
  * AudioInfo parameter
- * @ingroup rtp
+ * @ingroup rtsp
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -63,7 +64,8 @@ class RTPPCMAudioInfo : public PCMInfo {
  * @brief Simple Facade which can turn  AudioStream into a
  * IAudioSource. This way we can e.g. use an I2SStream as source to stream
  * data
- * @ingroup rtp
+ * Depends on the https://github.com/pschatzmann/Micro-RTSP-Audio/ library
+ * @ingroup rtsp
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -164,7 +166,8 @@ class RTSPSourceFromAudioStream : public IAudioSource {
  * @brief Simple Facade which can turn any Stream into a
  * IAudioSource. This way we can e.g. use an I2SStream as source to stream
  * data
- * @ingroup rtp
+ * Depends on the https://github.com/pschatzmann/Micro-RTSP-Audio/ library
+ * @ingroup rtsp
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -250,7 +253,7 @@ class RTSPSourceStream : public IAudioSource {
 
 /**
  * @brief RTSPFormat which supports the AudioInfo class
- * @ingroup rtp
+ * @ingroup rtsp
  * @author Phil Schatzmann
  */
 class RTSPFormatAudioTools : public RTSPFormat {
@@ -265,7 +268,7 @@ class RTSPFormatAudioTools : public RTSPFormat {
 /**
  * @brief SBC format for RTSP
  * https://en.wikipedia.org/wiki/RTP_payload_formats
- * @ingroup rtp
+ * @ingroup rtsp
  * @author Phil Schatzmann
  */
 class RTSPFormatSBC : public RTSPFormatAudioTools {
@@ -291,7 +294,7 @@ class RTSPFormatSBC : public RTSPFormatAudioTools {
 /**
  * @brief GSM format for RTSP
  * https://en.wikipedia.org/wiki/RTP_payload_formats
- * @ingroup rtp
+ * @ingroup rtsp
  * @author Phil Schatzmann
  */
 class RTSPFormatGSM : public RTSPFormatAudioTools {
@@ -315,7 +318,7 @@ class RTSPFormatGSM : public RTSPFormatAudioTools {
 /**
  * @brief PCM format for RTSP
  * https://en.wikipedia.org/wiki/RTP_payload_formats
- * @ingroup rtp
+ * @ingroup rtsp
  * @author Phil Schatzmann
  */
 class RTSPFormatPCM : public RTSPFormatAudioTools {
@@ -381,7 +384,8 @@ class RTSPFormatPCM : public RTSPFormatAudioTools {
  * indicated encoder (e.g. SBCEncoder) and can be consumed by a RTSPServer.
  * You have to make sure that the codec supports the provided audio format:
  * e.g. GSM support only 8000 samples per second with one channel.
- * @ingroup rtp
+ * Depends on the https://github.com/pschatzmann/Micro-RTSP-Audio/ library
+ * @ingroup rtsp
  * @ingroup io
  * @author Phil Schatzmann
  */
