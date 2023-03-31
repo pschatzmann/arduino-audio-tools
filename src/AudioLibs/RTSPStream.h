@@ -7,7 +7,7 @@
 #include "RTSPServer.h"
 
 /**
- * @defgroup rtsp RTSP Streaming 
+ * @defgroup rtsp RTSP Streaming
  * @ingroup communications
  * @file RTSPStream.h
  * @author Phil Schatzmann
@@ -25,9 +25,9 @@ namespace audio_tools {
  * @copyright GPLv3
  */
 class RTSPStreamPCMInfo : public PCMInfo {
- public:
+public:
   RTSPStreamPCMInfo() = default;
-  virtual void begin(AudioStream& stream) { p_stream = &stream; }
+  virtual void begin(AudioStream &stream) { p_stream = &stream; }
   int getSampleRate() override { return p_stream->audioInfo().sample_rate; }
   int getChannels() override { return p_stream->audioInfo().channels; }
   int getSampleSizeBytes() override {
@@ -35,8 +35,8 @@ class RTSPStreamPCMInfo : public PCMInfo {
   };
   virtual void setAudioInfo(AudioInfo ai) { p_stream->setAudioInfo(ai); }
 
- protected:
-  AudioStream* p_stream = nullptr;
+protected:
+  AudioStream *p_stream = nullptr;
 };
 
 /**
@@ -48,7 +48,7 @@ class RTSPStreamPCMInfo : public PCMInfo {
  */
 
 class RTSPPCMAudioInfo : public PCMInfo {
- public:
+public:
   RTSPPCMAudioInfo() = default;
   virtual void begin(AudioInfo info) { this->info = info; }
   int getSampleRate() override { return info.sample_rate; }
@@ -56,7 +56,7 @@ class RTSPPCMAudioInfo : public PCMInfo {
   int getSampleSizeBytes() override { return info.bits_per_sample / 8; };
   virtual void setAudioInfo(AudioInfo ai) { info = ai; }
 
- protected:
+protected:
   AudioInfo info;
 };
 
@@ -70,24 +70,24 @@ class RTSPPCMAudioInfo : public PCMInfo {
  * @copyright GPLv3
  */
 class RTSPSourceFromAudioStream : public IAudioSource {
- public:
+public:
   RTSPSourceFromAudioStream() = default;
   /**
    * @brief Construct a new RTSPStreamSource object from an AudioStream
    *
    * @param stream
    */
-  RTSPSourceFromAudioStream(AudioStream& stream) {
+  RTSPSourceFromAudioStream(AudioStream &stream) {
     setInput(stream);
     setFormat(new RTSPFormatPCM(pcmInfo));
   }
 
-  RTSPSourceFromAudioStream(AudioStream& stream, RTSPFormat& format) {
+  RTSPSourceFromAudioStream(AudioStream &stream, RTSPFormat &format) {
     setInput(stream);
     setFormat(&format);
   }
 
-  void setInput(AudioStream& stream) {
+  void setInput(AudioStream &stream) {
     p_audiostream = &stream;
     pcmInfo.begin(stream);
   }
@@ -110,17 +110,17 @@ class RTSPSourceFromAudioStream : public IAudioSource {
    * @param maxSamples maximum number of samples to be copied
    * @return actual number of samples that were copied
    */
-  virtual int readBytes(void* dest, int byteCount) override {
+  virtual int readBytes(void *dest, int byteCount) override {
     time_of_last_read = millis();
     int result = 0;
     LOGD("readDataTo: %d", byteCount);
     if (started) {
-      result = p_audiostream->readBytes((uint8_t*)dest, byteCount);
+      result = p_audiostream->readBytes((uint8_t *)dest, byteCount);
     }
     return result;
   }
   // Provides the Audio Information
-  virtual RTSPFormat* getFormat() override { return &format; }
+  virtual RTSPFormat *getFormat() override { return &format; }
 
   /**
    * Start preparing data in order to provide it for the stream
@@ -154,8 +154,8 @@ class RTSPSourceFromAudioStream : public IAudioSource {
   /// Returns true after start() has been called.
   bool isStarted() { return started; }
 
- protected:
-  AudioStream* p_audiostream = nullptr;
+protected:
+  AudioStream *p_audiostream = nullptr;
   uint64_t time_of_last_read = 0;
   bool started = true;
   RTSPStreamPCMInfo pcmInfo;
@@ -172,14 +172,14 @@ class RTSPSourceFromAudioStream : public IAudioSource {
  * @copyright GPLv3
  */
 class RTSPSourceStream : public IAudioSource {
- public:
+public:
   /**
    * @brief Construct a new RTSPStreamSource object from an Arduino Stream
    * You need to provide the audio information by calling setAudioInfo()
    * @param stream
    * @param info
    */
-  RTSPSourceStream(Stream& stream, AudioInfo info) {
+  RTSPSourceStream(Stream &stream, AudioInfo info) {
     p_stream = &stream;
     rtp_info.begin(info);
     setFormat(new RTSPFormatPCM(rtp_info));
@@ -191,7 +191,7 @@ class RTSPSourceStream : public IAudioSource {
    * @param stream
    * @param format
    */
-  RTSPSourceStream(Stream& stream, RTSPFormat& format) {
+  RTSPSourceStream(Stream &stream, RTSPFormat &format) {
     p_stream = &stream;
     setFormat(&format);
   }
@@ -209,17 +209,17 @@ class RTSPSourceStream : public IAudioSource {
   }
 
   // Provides the Audio Information
-  virtual RTSPFormat* getFormat() override { return &format; }
+  virtual RTSPFormat *getFormat() override { return &format; }
 
   /**
    * (Reads and) Copies up to maxSamples samples into the given buffer
    * @return actual number of samples that were copied
    */
-  virtual int readBytes(void* dest, int byteCount) override {
+  virtual int readBytes(void *dest, int byteCount) override {
     int result = 0;
     LOGD("readDataTo: %d", byteCount);
     if (active) {
-      result = p_stream->readBytes((uint8_t*)dest, byteCount);
+      result = p_stream->readBytes((uint8_t *)dest, byteCount);
     }
     return result;
   }
@@ -244,8 +244,8 @@ class RTSPSourceStream : public IAudioSource {
 
   void setTimerPeriod(int period) { format.setTimerPeriod(period); }
 
- protected:
-  Stream* p_stream = nullptr;
+protected:
+  Stream *p_stream = nullptr;
   bool active = true;
   RTSPPCMAudioInfo rtp_info;
   RTSPFormatPCM format{rtp_info};
@@ -257,37 +257,74 @@ class RTSPSourceStream : public IAudioSource {
  * @author Phil Schatzmann
  */
 class RTSPFormatAudioTools : public RTSPFormat {
- public:
-  void begin(AudioInfo info) { cfg = info; }
-  const char* format(char* buffer, int len) = 0;
+public:
+  virtual void begin(AudioInfo info) { cfg = info; }
+  /// Provides the format string
+  virtual const char *format(char *buffer, int len) = 0;
+  /// Provide a default format that will just work
+  virtual AudioInfo defaultConfig() = 0;
 
- protected:
+protected:
   AudioInfo cfg;
 };
 
 /**
- * @brief SBC format for RTSP
- * https://en.wikipedia.org/wiki/RTSP_payload_formats
+ * @brief Opus format for RTSP
+ * https://en.wikipedia.org/wiki/RTP_payload_formats
  * @ingroup rtsp
  * @author Phil Schatzmann
  */
-class RTSPFormatSBC : public RTSPFormatAudioTools {
- public:
+class RTSPFormatOpus : public RTSPFormatAudioTools {
+public:
+  // Provides the Opus format information:
+  //  m=audio 54312 RTP/AVP 101
+  //  a=rtpmap:101 opus/48000/2
+  //  a=fmtp:101 stereo=1; sprop-stereo=1
+  const char *format(char *buffer, int len) override {
+    TRACEI();
+    snprintf(buffer, len,
+             "s=Microphone\r\n"     // Stream Name
+             "c=IN IP4 0.0.0.0\r\n" // Connection Information
+             "t=0 0\r\n" // start / stop - 0 -> unbounded and permanent session
+             "m=audio 0 RTP/AVP 101\r\n" // UDP sessions with format 101=opus
+             "a=rtpmap:101 opus/%d/2\r\n"
+             "a=fmtp:101 stereo=1; sprop-stereo=%d\r\n",
+             cfg.sample_rate, cfg.channels == 2);
+    return (const char *)buffer;
+  }
+  AudioInfo defaultConfig() {
+    AudioInfo cfg(44100, 2, 16);
+    return cfg;
+  }
+};
+
+/**
+ * @brief abtX format for RTSP
+ * https://en.wikipedia.org/wiki/RTP_payload_formats
+ * @ingroup rtsp
+ * @author Phil Schatzmann
+ */
+class RTSPFormatAbtX : public RTSPFormatAudioTools {
+public:
   // Provides the SBC format information:
   //    m=audio 5004 RTP/AVP 98
   //    a=rtpmap:98 aptx/44100/2
   //    a=fmtp:98 variant=standard; bitresolution=16;
-  const char* format(char* buffer, int len) override {
+  const char *format(char *buffer, int len) override {
     TRACEI();
     snprintf(buffer, len,
-             "s=Microphone\r\n"      // Stream Name
-             "c=IN IP4 0.0.0.0\r\n"  // Connection Information
-             "t=0 0\r\n"  // start / stop - 0 -> unbounded and permanent session
-             "m=audio 0 RTP/AVP 98\r\n"  // UDP sessions with format 98=aptx
+             "s=Microphone\r\n"     // Stream Name
+             "c=IN IP4 0.0.0.0\r\n" // Connection Information
+             "t=0 0\r\n" // start / stop - 0 -> unbounded and permanent session
+             "m=audio 0 RTP/AVP 98\r\n" // UDP sessions with format 98=aptx
              "a=rtpmap:98 aptx/%d/%d\r\n"
              "a=fmtp:98 variant=standard; bitresolution=%d\r\n",
              cfg.sample_rate, cfg.channels, cfg.bits_per_sample);
-    return (const char*)buffer;
+    return (const char *)buffer;
+  }
+  AudioInfo defaultConfig() {
+    AudioInfo cfg(44100, 2, 16);
+    return cfg;
   }
 };
 
@@ -298,21 +335,64 @@ class RTSPFormatSBC : public RTSPFormatAudioTools {
  * @author Phil Schatzmann
  */
 class RTSPFormatGSM : public RTSPFormatAudioTools {
- public:
+public:
   /// Provides the GSM format information
-  const char* format(char* buffer, int len) override {
+  const char *format(char *buffer, int len) override {
     TRACEI();
     assert(cfg.sample_rate == 8000);
     assert(cfg.channels == 1);
 
     snprintf(buffer, len,
-             "s=Microphone\r\n"      // Stream Name
-             "c=IN IP4 0.0.0.0\r\n"  // Connection Information
-             "t=0 0\r\n"  // start / stop - 0 -> unbounded and permanent session
-             "m=audio 0 RTP/AVP 3\r\n"  // UDP sessions with format 3=GSM
+             "s=Microphone\r\n"     // Stream Name
+             "c=IN IP4 0.0.0.0\r\n" // Connection Information
+             "t=0 0\r\n" // start / stop - 0 -> unbounded and permanent session
+             "m=audio 0 RTP/AVP 3\r\n" // UDP sessions with format 3=GSM
     );
-    return (const char*)buffer;
+    return (const char *)buffer;
   }
+
+  AudioInfo defaultConfig() {
+    AudioInfo cfg(8000, 1, 16);
+    return cfg;
+  }
+};
+
+/**
+ * @brief G711 μ-Law format for RTSP
+ * https://en.wikipedia.org/wiki/RTP_payload_formats
+ * Packet intervall: 20, frame size: any
+ * @ingroup rtsp
+ * @author Phil Schatzmann
+ */
+class RTSPFormatG711 : public RTSPFormatAudioTools {
+public:
+  /// Provides the G711  format information
+  const char *format(char *buffer, int len) override {
+    TRACEI();
+    assert(cfg.sample_rate == 8000);
+    assert(cfg.channels == 1);
+
+    snprintf(buffer, len,
+             "s=Microphone\r\n"     // Stream Name
+             "c=IN IP4 0.0.0.0\r\n" // Connection Information
+             "t=0 0\r\n" // start / stop - 0 -> unbounded and permanent session
+             "m=audio 0 RTP/AVP %d\r\n" // UDP sessions with format 0=G711 μ-Law
+             ,
+             getFormat());
+    return (const char *)buffer;
+  }
+
+  /// Defines if we use ulow ar alow
+  void setIsULaw(bool flag) { is_ulaw = flag; }
+
+  AudioInfo defaultConfig() {
+    AudioInfo cfg(8000, 1, 16);
+    return cfg;
+  }
+
+protected:
+  bool is_ulaw = true;
+  uint8_t getFormat() { return is_ulaw ? 0 : 8; }
 };
 
 /**
@@ -322,60 +402,90 @@ class RTSPFormatGSM : public RTSPFormatAudioTools {
  * @author Phil Schatzmann
  */
 class RTSPFormatPCM : public RTSPFormatAudioTools {
- public:
+public:
   /// Provides the GSM format information
-  const char* format(char* buffer, int len) override {
+  const char *format(char *buffer, int len) override {
     TRACEI();
     snprintf(buffer, len,
-             "s=Microphone\r\n"      // Stream Name
-             "c=IN IP4 0.0.0.0\r\n"  // Connection Information
-             "t=0 0\r\n"  // start / stop - 0 -> unbounded and permanent session
-             "m=audio 0 RTP/AVP %d\r\n"  // UDP sessions with format 10 or 11
+             "s=Microphone\r\n"     // Stream Name
+             "c=IN IP4 0.0.0.0\r\n" // Connection Information
+             "t=0 0\r\n" // start / stop - 0 -> unbounded and permanent session
+             "m=audio 0 RTP/AVP %d\r\n" // UDP sessions with format 10 or 11
              "a=rtpmap:%s\r\n"
-             "a=rate:%i\r\n",  // provide sample rate
+             "a=rate:%i\r\n", // provide sample rate
              format(cfg.channels), payloadFormat(cfg.sample_rate, cfg.channels),
              cfg.sample_rate);
-    return (const char*)buffer;
+    return (const char *)buffer;
   }
 
- protected:
+  AudioInfo defaultConfig() {
+    AudioInfo cfg(16000, 2, 16);
+    return cfg;
+  }
+
+protected:
   char payload_fromat[30];
 
   // format for mono is 11 and stereo 11
-  const int format(int channels) {
+  int format(int channels) {
     int result = 0;
     switch (channels) {
-      case 1:
-        result = 11;
-        break;
-      case 2:
-        result = 10;
-        break;
-      default:
-        LOGE("unsupported audio type");
-        break;
+    case 1:
+      result = 11;
+      break;
+    case 2:
+      result = 10;
+      break;
+    default:
+      LOGE("unsupported audio type");
+      break;
     }
     return result;
   }
 
-  const char* payloadFormat(int sampleRate, int channels) {
+  const char *payloadFormat(int sampleRate, int channels) {
     // see https://en.wikipedia.org/wiki/RTP_payload_formats
     // 11 L16/%i/%i
 
     switch (channels) {
-      case 1:
-        snprintf(payload_fromat, 30, "%d L16/%i/%i", format(channels),
-                 sampleRate, channels);
-        break;
-      case 2:
-        snprintf(payload_fromat, 30, "%d L16/%i/%i", format(channels),
-                 sampleRate, channels);
-        break;
-      default:
-        LOGE("unsupported audio type");
-        break;
+    case 1:
+      snprintf(payload_fromat, 30, "%d L16/%i/%i", format(channels), sampleRate,
+               channels);
+      break;
+    case 2:
+      snprintf(payload_fromat, 30, "%d L16/%i/%i", format(channels), sampleRate,
+               channels);
+      break;
+    default:
+      LOGE("unsupported audio type");
+      break;
     }
     return payload_fromat;
+  }
+};
+
+/**
+ * @brief L8 format for RTSP
+ * https://en.wikipedia.org/wiki/RTP_payload_formats
+ * @ingroup rtsp
+ * @author Phil Schatzmann
+ */
+class RTSPFormatPCM8 : public RTSPFormatAudioTools {
+public:
+  const char *format(char *buffer, int len) override {
+    TRACEI();
+    snprintf(buffer, len,
+             "s=Microphone\r\n"     // Stream Name
+             "c=IN IP4 0.0.0.0\r\n" // Connection Information
+             "t=0 0\r\n" // start / stop - 0 -> unbounded and permanent session
+             "m=audio 0 RTP/AVP 96\r\n" // UDP sessions with format 96=dynamic
+             "a=rtpmap:96 l8/%d/%d\r\n",
+             cfg.sample_rate, cfg.channels);
+    return (const char *)buffer;
+  }
+  AudioInfo defaultConfig() {
+    AudioInfo cfg(16000, 2, 8);
+    return cfg;
   }
 };
 
@@ -390,8 +500,8 @@ class RTSPFormatPCM : public RTSPFormatAudioTools {
  * @author Phil Schatzmann
  */
 class RTSPStream : public AudioPrint {
- public:
-  RTSPStream(RTSPFormatAudioTools& format, AudioEncoder& encoder,
+public:
+  RTSPStream(RTSPFormatAudioTools &format, AudioEncoder &encoder,
              int buffer_size = 1024 * 2) {
     buffer.resize(buffer_size);
     p_format = &format;
@@ -399,7 +509,7 @@ class RTSPStream : public AudioPrint {
     p_encoder->setOutputStream(buffer);
   }
 
-  AudioStreamer* streamer() { return &rtsp_streamer; }
+  AudioStreamer *streamer() { return &rtsp_streamer; }
 
   bool begin(AudioInfo info) {
     cfg = info;
@@ -447,7 +557,7 @@ class RTSPStream : public AudioPrint {
    * We write PCM data which is encoded on the fly by the indicated encoder.
    * This data is provided by the IAudioSource
    */
-  size_t write(const uint8_t* buffer, size_t byteCount) override {
+  size_t write(const uint8_t *buffer, size_t byteCount) override {
     TRACED();
     size_t result = p_encoder->write(buffer, byteCount);
     return result;
@@ -456,13 +566,13 @@ class RTSPStream : public AudioPrint {
   /// @brief Returns true if the server has been started
   operator boolean() { return rtps_source.isActive(); }
 
- protected:
+protected:
   RTSPSourceFromAudioStream rtps_source;
   RingBufferStream buffer{0};
-  AudioStream* p_input = &buffer;
-  AudioEncoder* p_encoder = nullptr;
-  RTSPFormatAudioTools* p_format = nullptr;
+  AudioStream *p_input = &buffer;
+  AudioEncoder *p_encoder = nullptr;
+  RTSPFormatAudioTools *p_format = nullptr;
   AudioStreamer rtsp_streamer;
 };
 
-}  // namespace audio_tools
+} // namespace audio_tools
