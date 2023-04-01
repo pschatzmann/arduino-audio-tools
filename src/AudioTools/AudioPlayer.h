@@ -5,7 +5,7 @@
 #include "AudioBasic/Debouncer.h"
 #include "AudioTools/AudioTypes.h"
 #include "AudioTools/Buffers.h"
-#include "AudioTools/Converter.h"
+#include "AudioTools/BaseConverter.h"
 #include "AudioTools/AudioLogger.h"
 #include "AudioTools/AudioStreams.h"
 #include "AudioTools/StreamCopy.h"

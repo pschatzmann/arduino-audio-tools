@@ -4,7 +4,7 @@
 #include <soc/rtc.h>
 #include "driver/i2s.h"
 #include "AudioTools/AudioStreams.h"
-#include "AudioTools/Resample.h"
+#include "AudioTools/ResampleStream.h"
 #include "AudioAnalog/AnalogAudio.h"
 #include "AudioEffects/SoundGenerator.h"
 

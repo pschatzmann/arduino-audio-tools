@@ -1,6 +1,6 @@
 #pragma once
 #include "AudioTools/AudioStreams.h"
-#include "AudioTools/Resample.h"
+#include "AudioTools/ResampleStream.h"
 
 namespace audio_tools {
 
@@ -615,20 +615,19 @@ class FormatConverterStream : public ReformatBaseStream {
     // start individual converters
     bool result = channelFormatConverter.begin(from_cfg, to_cfg.channels);
 
-    AudioInfo from1_cfg(from_cfg);
-    from1_cfg.channels = to_cfg.channels;
-    result &= numberFormatConverter.begin(from_cfg.bits_per_sample,
+    AudioInfo from_actual_cfg(from_cfg);
+    from_actual_cfg.channels = to_cfg.channels;
+    result &= numberFormatConverter.begin(from_actual_cfg.bits_per_sample,
                                           to_cfg.bits_per_sample);
 
     numberFormatConverter.setBuffered(true);
 
-    AudioInfo from2_cfg(from1_cfg);
-    from1_cfg.bits_per_sample = to_cfg.bits_per_sample;
-    result &= sampleRateConverter.begin(from2_cfg, to_cfg.sample_rate);
+    from_actual_cfg.bits_per_sample = to_cfg.bits_per_sample;
+    result &= sampleRateConverter.begin(from_actual_cfg, to_cfg.sample_rate);
 
     // setup reader to support readBytes()
     if (getStream()!=nullptr){
-      setupReader(byteFactor());
+      setupReader();
     }
 
     if (!result) {

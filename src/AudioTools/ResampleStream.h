@@ -19,10 +19,9 @@ class TransformationReader {
   /// @param byteFactor The factor of how much more data we need to read to get
   /// the requested converted bytes
   /// @param source The data source of the data to be converted
-  void begin(T *transform, float byteFactor, Stream *source) {
+  void begin(T *transform, Stream *source) {
     TRACED();
     active = true;
-    byte_factor = byteFactor;
     p_stream = source;
     p_transform = transform;
     if (transform == nullptr) {
@@ -33,6 +32,7 @@ class TransformationReader {
       LOGE("p_stream is NULL");
       active = false;
     }
+    byte_factor = getByteFactor();
   }
 
   size_t readBytes(uint8_t *data, size_t byteCount) {
@@ -46,11 +46,12 @@ class TransformationReader {
       return 0;
     }
     int read_size = byte_factor * byteCount;
+    LOGD("factor %f -> buffer %d bytes", byte_factor, read_size);
     buffer.resize(read_size);
     int read = p_stream->readBytes(buffer.data(), read_size);
     assert(read == read_size);
     Print *tmp = setupOutput(data, byteCount);
-    size_t result_size = p_transform->write(buffer.data(), read_size);
+    p_transform->write(buffer.data(), read_size);
     restoreOutput(tmp);
     return print_to_array.totalBytesWritten();
   }
@@ -72,15 +73,13 @@ class TransformationReader {
     size_t write(const uint8_t *data, size_t byteCount) override {
       LOGD("AdapterPrintToArray::write: %d (%d)", byteCount, pos);
       if (pos + byteCount > max_len) return 0;
-      memcpy(p_data+pos, data, byteCount);
-     
-      pos+=byteCount;
+      memcpy(p_data + pos, data, byteCount);
+
+      pos += byteCount;
       return byteCount;
     }
 
-    int totalBytesWritten() {
-      return pos;
-    }
+    int totalBytesWritten() { return pos; }
 
    protected:
     uint8_t *p_data;
@@ -109,6 +108,18 @@ class TransformationReader {
   void restoreOutput(Print *out) {
     if (out) p_transform->setStream(*out);
   }
+
+  float getByteFactor(){
+    buffer.resize(64);
+    float input_size = 8.0;
+    Print *tmp = setupOutput(buffer.data(), 64);
+    p_transform->write(buffer.data(), input_size);
+    restoreOutput(tmp);
+    float output_size = print_to_array.totalBytesWritten();
+    float factor = input_size/output_size;
+    LOGI("input_size: %f / output_size: %f / factor (eff): %f", input_size, output_size, factor);
+    return factor;
+  }
 };
 
 /**
@@ -119,9 +130,9 @@ class TransformationReader {
  */
 class ReformatBaseStream : public AudioStream {
  public:
-  void setupReader(float factor) {
+  void setupReader() {
     assert(getStream() != nullptr);
-    reader.begin(this, factor, getStream());
+    reader.begin(this, getStream());
   }
 
   virtual void setStream(Stream &stream) {
@@ -145,7 +156,7 @@ class ReformatBaseStream : public AudioStream {
   }
 
   int availableForWrite() override {
-    return DEFAULT_BUFFER_SIZE; //reader.availableForWrite();
+    return DEFAULT_BUFFER_SIZE;  // reader.availableForWrite();
   }
 
  protected:
@@ -217,8 +228,8 @@ class ResampleStream : public ReformatBaseStream {
 
     // setup reader: e.g. if step size is 2 we need to double the input data
     // reader.begin(this, step_size, p_stream);
-    if (p_stream!=nullptr){
-      setupReader(step_size);
+    if (p_stream != nullptr) {
+      setupReader();
     }
 
     return true;
@@ -226,16 +237,16 @@ class ResampleStream : public ReformatBaseStream {
 
   bool begin(AudioInfo from, int toRate) {
     ResampleConfig rcfg;
+    rcfg.copyFrom(from);
     rcfg.to_sample_rate = toRate;
     rcfg.step_size = getStepSize(from.sample_rate, toRate);
-    rcfg.copyFrom(from);
     return begin(rcfg);
   }
 
   bool begin(AudioInfo info, float step) {
     ResampleConfig rcfg;
-    rcfg.step_size = step;
     rcfg.copyFrom(info);
+    rcfg.step_size = step;
     return begin(rcfg);
   }
 
@@ -279,6 +290,7 @@ class ResampleStream : public ReformatBaseStream {
     }
     return 0;
   }
+
  protected:
   Vector<uint8_t> last_samples{0};
   float idx = 0;
@@ -318,6 +330,8 @@ class ResampleStream : public ReformatBaseStream {
       is_first = false;
       setupLastSamples<T>(data, 0);
     }
+
+    info.logInfo();
 
     // process all samples
     while (idx < frames) {

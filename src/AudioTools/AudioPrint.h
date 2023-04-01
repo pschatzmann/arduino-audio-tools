@@ -1,7 +1,7 @@
 #pragma once
 #include "AudioConfig.h"
 #include "AudioTools/AudioTypes.h"
-#include "AudioTools/Converter.h"
+#include "AudioTools/BaseConverter.h"
 #include "AudioTools/Buffers.h"
 #include "AudioTools/AudioStreams.h"
 #include "AudioBasic/Int24.h"
