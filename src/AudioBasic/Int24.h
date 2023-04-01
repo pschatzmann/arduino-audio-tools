@@ -31,6 +31,10 @@ class int24_t  {
     set(in);
   }
 
+  int24_t(const int64_t &in) {
+    set(in) ;
+  }
+
   int24_t(const int24_t &in) {
     value = in.value;
   }

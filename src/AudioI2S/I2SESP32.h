@@ -214,7 +214,7 @@ class I2SDriverESP32 {
     }
     
 
-    /// writes the data by making shure that we send 2 channels
+    /// writes the data by making sure that we send 2 channels
     static size_t writeExpandChannel(i2s_port_t i2s_num, const int bits_per_sample, const void *src, size_t size_bytes){
         size_t result = 0;   
         int j;
