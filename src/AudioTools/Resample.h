@@ -1,299 +1,377 @@
 #pragma once
 
 #include "AudioTools/AudioStreams.h"
-//#include <algorithm>    // std::max
 
 namespace audio_tools {
 
 /**
- * @brief Optional Configuration object. The critical information is the 
+ * @brief ConverterStream Helper class which implements the converting
+ * readBytes with the help of write.
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ * @tparam T class name of the original transformer stream
+ */
+template <class T>
+class TransformationReader {
+ public:
+  /// @brief setup of the TransformationReader class
+  /// @param transform The original transformer stream
+  /// @param byteFactor The factor of how much more data we need to read to get
+  /// the requested converted bytes
+  /// @param source The data source of the data to be converted
+  void begin(T *transform, float byteFactor, Stream *source) {
+    TRACED();
+    active = true;
+    byte_factor = byteFactor;
+    p_stream = source;
+    p_transform = transform;
+    if (transform == nullptr) {
+      LOGE("transform is NULL");
+      active = false;
+    }
+    if (p_stream == nullptr) {
+      LOGE("p_stream is NULL");
+      active = false;
+    }
+  }
+
+  size_t readBytes(uint8_t *data, size_t byteCount) {
+    LOGD("TransformationReader::readBytes: %d", byteCount);
+    if (!active) {
+      LOGE("inactive");
+      return 0;
+    }
+    if (p_stream == nullptr) {
+      LOGE("p_stream is NULL");
+      return 0;
+    }
+    int read_size = byte_factor * byteCount;
+    buffer.resize(read_size);
+    int read = p_stream->readBytes(buffer.data(), read_size);
+    assert(read == read_size);
+    Print *tmp = setupOutput(data, byteCount);
+    size_t result_size = p_transform->write(buffer.data(), read_size);
+    restoreOutput(tmp);
+    return print_to_array.totalBytesWritten();
+  }
+
+  int availableForWrite() { return print_to_array.availableForWrite(); }
+
+ protected:
+  class AdapterPrintToArray : public AudioPrint {
+   public:
+    void begin(uint8_t *array, size_t data_len) {
+      TRACED();
+      p_data = array;
+      max_len = data_len;
+      pos = 0;
+    }
+
+    int availableForWrite() override { return max_len; }
+
+    size_t write(const uint8_t *data, size_t byteCount) override {
+      LOGD("AdapterPrintToArray::write: %d (%d)", byteCount, pos);
+      if (pos + byteCount > max_len) return 0;
+      memcpy(p_data+pos, data, byteCount);
+     
+      pos+=byteCount;
+      return byteCount;
+    }
+
+    int totalBytesWritten() {
+      return pos;
+    }
+
+   protected:
+    uint8_t *p_data;
+    size_t max_len;
+    size_t pos = 0;
+  } print_to_array;
+  float byte_factor = 0.0f;
+  Stream *p_stream = nullptr;
+  Vector<uint8_t> buffer{0};  // we allocate memory only when needed
+  T *p_transform = nullptr;
+  bool active = false;
+
+  /// Makes sure that the data  is written to the array
+  /// @param data
+  /// @param byteCount
+  /// @return original output of the converter class
+  Print *setupOutput(uint8_t *data, size_t byteCount) {
+    Print *result = p_transform->getPrint();
+    p_transform->setStream(print_to_array);
+    print_to_array.begin(data, byteCount);
+
+    return result;
+  }
+  /// @brief  restores the original output in the converter class
+  /// @param out
+  void restoreOutput(Print *out) {
+    if (out) p_transform->setStream(*out);
+  }
+};
+
+/**
+ * @brief Base class for chained converting streams
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ *
+ */
+class ReformatBaseStream : public AudioStream {
+ public:
+  void setupReader(float factor) {
+    assert(getStream() != nullptr);
+    reader.begin(this, factor, getStream());
+  }
+
+  virtual void setStream(Stream &stream) {
+    p_stream = &stream;
+    p_print = &stream;
+  }
+
+  virtual void setStream(Print &print) { p_print = &print; }
+
+  virtual Print *getPrint() { return p_print; }
+
+  virtual Stream *getStream() { return p_stream; }
+
+  size_t readBytes(uint8_t *data, size_t size) override {
+    LOGD("ReformatBaseStream::readBytes: %d", size);
+    return reader.readBytes(data, size);
+  }
+
+  int available() override {
+    return DEFAULT_BUFFER_SIZE;  // reader.availableForWrite();
+  }
+
+  int availableForWrite() override {
+    return DEFAULT_BUFFER_SIZE; //reader.availableForWrite();
+  }
+
+ protected:
+  TransformationReader<ReformatBaseStream> reader;
+  Stream *p_stream = nullptr;
+  Print *p_print = nullptr;
+  float factor;
+};
+
+/**
+ * @brief Optional Configuration object. The critical information is the
  * channels and the step_size. All other information is not used.
- * 
+ *
  */
 struct ResampleConfig : public AudioInfo {
-    float step_size=1.0f;
-    /// Optional fixed target sample rate
-    int to_sample_rate = 0;
+  float step_size = 1.0f;
+  /// Optional fixed target sample rate
+  int to_sample_rate = 0;
 };
 
 /**
- * @brief Dynamic Resampling. We can use a variable factor to speed up or slow down
- * the playback.
+ * @brief Dynamic Resampling. We can use a variable factor to speed up or slow
+ * down the playback.
  * @author Phil Schatzmann
  * @ingroup transform
  * @copyright GPLv3
- * @tparam T 
+ * @tparam T
  */
-template<typename T>
-class ResampleStream : public AudioStream {
-  public:
-    /// Support for resampling via write.
-    ResampleStream(Print &out, int channelCount=2){
-        setChannels(channelCount);
-        p_out = &out;
-    }
-    /// Support for resampling via write. The audio information is copied from the io
-    ResampleStream(AudioPrint &out){
-        p_out = &out;
-        setAudioInfo(out.audioInfo());
-    }
+class ResampleStream : public ReformatBaseStream {
+ public:
+  ResampleStream() = default;
 
-    /// Support for resampling via write and read. 
-    ResampleStream(Stream &io, int channelCount=2){
-        setChannels(channelCount);
-        p_out = &io;
-        p_in = &io;
-    }
+  /// Support for resampling via write.
+  ResampleStream(Print &out) { setStream(out); }
+  /// Support for resampling via write. The audio information is copied from the
+  /// io
+  ResampleStream(AudioPrint &out) {
+    setAudioInfo(out.audioInfo());
+    setStream(out);
+  }
 
-    /// Support for resampling via write and read. The audio information is copied from the io
-    ResampleStream(AudioStream &io){
-        p_out = &io;
-        p_in = &io;
-        setAudioInfo(io.audioInfo());
-    }
+  /// Support for resampling via write and read.
+  ResampleStream(Stream &io) { setStream(io); }
 
-    // Provides the default configuraiton
-    ResampleConfig defaultConfig() {
-        ResampleConfig cfg;
-        cfg.copyFrom(audioInfo());
-        return cfg;
-    }
+  /// Support for resampling via write and read. The audio information is copied
+  /// from the io
+  ResampleStream(AudioStream &io) {
+    setAudioInfo(io.audioInfo());
+    setStream(io);
+  }
 
-    bool begin(ResampleConfig cfg){
-        to_sample_rate = cfg.to_sample_rate;
-        setAudioInfo(cfg);
-        memset(last_samples.data(),0,sizeof(T)*info.channels);
-        setStepSize(cfg.step_size);
-        is_first = true;
-        step_dirty = true;
-        bytes_per_frame = info.bits_per_sample/8*info.channels;
+  /// Provides the default configuraiton
+  ResampleConfig defaultConfig() {
+    ResampleConfig cfg;
+    cfg.copyFrom(audioInfo());
+    return cfg;
+  }
 
-        return true;
-    }
+  bool begin(ResampleConfig cfg) {
+    LOGI("begin step_size: %f", cfg.step_size);
+    setAudioInfo(cfg);
+    to_sample_rate = cfg.to_sample_rate;
 
-    bool begin(AudioInfo info, int fromRate, int toRate){
-        ResampleConfig rcfg;
-        rcfg.to_sample_rate = toRate;
-        rcfg.step_size = getStepSize(fromRate, toRate);
-        rcfg.copyFrom(info);
-        return begin(rcfg);
+    setupLastSamples(cfg);
+    setStepSize(cfg.step_size);
+    is_first = true;
+    // step_dirty = true;
+    bytes_per_frame = info.bits_per_sample / 8 * info.channels;
+
+    // setup reader: e.g. if step size is 2 we need to double the input data
+    // reader.begin(this, step_size, p_stream);
+    if (p_stream!=nullptr){
+      setupReader(step_size);
     }
 
-    bool begin(AudioInfo info, float step){
-        ResampleConfig rcfg;
-        rcfg.step_size = step;
-        rcfg.copyFrom(info);
-        return begin(rcfg);
+    return true;
+  }
+
+  bool begin(AudioInfo from, int toRate) {
+    ResampleConfig rcfg;
+    rcfg.to_sample_rate = toRate;
+    rcfg.step_size = getStepSize(from.sample_rate, toRate);
+    rcfg.copyFrom(from);
+    return begin(rcfg);
+  }
+
+  bool begin(AudioInfo info, float step) {
+    ResampleConfig rcfg;
+    rcfg.step_size = step;
+    rcfg.copyFrom(info);
+    return begin(rcfg);
+  }
+
+  void setAudioInfo(AudioInfo info) override {
+    AudioStream::setAudioInfo(info);
+    // update the step size if a fixed to_sample_rate has been defined
+    if (to_sample_rate != 0) {
+      setStepSize(getStepSize(info.sample_rate, to_sample_rate));
+    }
+  }
+
+  /// influence the sample rate
+  void setStepSize(float step) {
+    LOGI("setStepSize: %f", step);
+    step_size = step;
+  }
+
+  /// calculate the step size the sample rate: e.g. from 44200 to 22100 gives a
+  /// step size of 2 in order to provide fewer samples
+  float getStepSize(float sampleRateFrom, float sampleRateTo) {
+    return sampleRateFrom / sampleRateTo;
+  }
+
+  /// Returns the actual step size
+  float getStepSize() { return step_size; }
+
+  // int availableForWrite() override { return p_print->availableForWrite(); }
+
+  size_t write(const uint8_t *buffer, size_t bytes) override {
+    LOGD("ResampleStream::write: %d", bytes);
+    size_t written;
+    switch (info.bits_per_sample) {
+      case 16:
+        return write<int16_t>(p_print, buffer, bytes, written);
+      case 24:
+        return write<int24_t>(p_print, buffer, bytes, written);
+      case 32:
+        return write<int32_t>(p_print, buffer, bytes, written);
+      default:
+        TRACEE();
+    }
+    return 0;
+  }
+ protected:
+  Vector<uint8_t> last_samples{0};
+  float idx = 0;
+  bool is_first = true;
+  float step_size = 1.0;
+  int to_sample_rate = 0;
+  int bytes_per_frame = 0;
+  TransformationReader<ResampleStream> reader;
+
+  /// Sets up the buffer for the rollover samples
+  void setupLastSamples(AudioInfo cfg) {
+    int bytes_per_sample = cfg.bits_per_sample / 8;
+    int last_samples_size = cfg.channels * bytes_per_sample;
+    last_samples.resize(last_samples_size);
+    memset(last_samples.data(), 0, last_samples_size);
+  }
+
+  /// Writes the buffer to p_print after resampling
+  template <typename T>
+  size_t write(Print *p_out, const uint8_t *buffer, size_t bytes,
+               size_t &written) {
+    if (step_size == 1.0) {
+      return p_print->write(buffer, bytes);
+    }
+    // prevent npe
+    if (info.channels == 0) {
+      LOGE("channels is 0");
+      return 0;
+    }
+    T *data = (T *)buffer;
+    int samples = bytes / sizeof(T);
+    size_t frames = samples / info.channels;
+    written = 0;
+
+    // avoid noise if audio does not start with 0
+    if (is_first) {
+      is_first = false;
+      setupLastSamples<T>(data, 0);
     }
 
-    void setAudioInfo(AudioInfo info) override {
-        AudioStream::setAudioInfo(info);
-        setChannels(info.channels);
-        // update the step size if a fixed to_sample_rate has been defined
-        if (to_sample_rate!=0){
-            setStepSize(getStepSize(info.sample_rate, to_sample_rate));
+    // process all samples
+    while (idx < frames) {
+      T frame[info.channels];
+      for (int ch = 0; ch < info.channels; ch++) {
+        T result = getValue<T>(data, idx, ch);
+        if (p_out->availableForWrite() < sizeof(T)) {
+          LOGE("Could not write");
         }
+        frame[ch] = result;
+      }
+      written += p_out->write((const uint8_t *)&frame, (size_t)sizeof(frame));
+      idx += step_size;
     }
 
-    /// Defines the number of channels 
-    void setChannels(int channels){
-        last_samples.resize(channels);
-        info.channels = channels;
+    // save last samples
+    setupLastSamples<T>(data, frames - 1);
+    idx -= frames;
+    // returns requested bytes to avoid rewriting of processed bytes
+    return bytes;
+  }
+
+  /// get the interpolated value for indicated (float) index value
+  template <typename T>
+  T getValue(T *data, float frame_idx, int channel) {
+    // interpolate value
+    int frame_idx1 = frame_idx;
+    int frame_idx0 = frame_idx1 - 1;
+    T val0 = lookup<T>(data, frame_idx0, channel);
+    T val1 = lookup<T>(data, frame_idx1, channel);
+
+    float result = mapFloat(frame_idx, frame_idx1, frame_idx0, val0, val1);
+    return round(result);
+  }
+
+  // lookup value for indicated frame & channel: index starts with -1;
+  template <typename T>
+  T lookup(T *data, int frame, int channel) {
+    if (frame >= 0) {
+      return data[frame * info.channels + channel];
+    } else {
+      // index -1
+      T *pt_last_samples = (T *)last_samples.data();
+      return pt_last_samples[channel];
     }
-
-    /// influence the sample rate
-    void setStepSize(float step){
-        LOGI("setStepSize: %f", step);
-        step_size = step;
+  }
+  // store last samples to provide values for index -1
+  template <typename T>
+  void setupLastSamples(T *data, int frame) {
+    for (int ch = 0; ch < info.channels; ch++) {
+      T *pt_last_samples = (T *)last_samples.data();
+      pt_last_samples[ch] = data[(frame * info.channels) + ch];
     }
-
-    /// calculate the step size the sample rate: e.g. from 44200 to 22100 gives a step size of 2 in order to provide fewer samples
-    float getStepSize(float sampleRateFrom, float sampleRateTo){
-        return sampleRateFrom / sampleRateTo;
-    }
-
-    /// Returns the actual step size
-    float getStepSize(){
-        return step_size;
-    }
-
-    int availableForWrite() override {
-        return p_out->availableForWrite();
-    }
-
-    size_t write(const uint8_t* buffer, size_t bytes) override {
-        size_t written;
-        return write(p_out, buffer, bytes, written);
-    }
-
-    int available() override {
-        return p_in!=nullptr ? p_in->available() : 0;
-    }
-
-    /// Reuses the write implementation to support readBytes
-    size_t readBytes(uint8_t *buffer, size_t length) override {
-        if (length==0) return 0;
-        // setup ringbuffer size
-        if (step_dirty){
-            ring_buffer.resize(buffer_read_len * (bytes_per_frame+1) / bytes_per_frame);
-            step_dirty = false;
-        }
-        // refill ringbuffer
-        if (ring_buffer.available()<bytes_per_frame) {            
-            size_t read_size = buffer_read_len * step_size * bytes_per_frame / bytes_per_frame;
-            read_buffer.resize(read_size);
-            // read data from source to buffer
-            int bytes_read = p_in->readBytes(read_buffer.data(), read_size);
-            if (bytes_read>0){
-                size_t written=0;
-                // resample to ringbuffer
-                write(&ring_buffer, read_buffer.data(), read_size, written);
-                LOGD("written: %d", (int)written);
-            } else {
-                LOGE("bytes_read==0");
-            }
-        }
-
-        return ring_buffer.readBytes(buffer, length*bytes_per_frame / bytes_per_frame);
-    }
-
-    /// @brief  Defines the internal read buffer length that will be used to resample
-    void setReadBufferLen(size_t len){
-        buffer_read_len = len;
-    }
-
-    size_t getReadBufferLen(){
-        return buffer_read_len;
-    }
-
-
-  protected:
-    size_t buffer_read_len = 256;
-    Print *p_out=nullptr;
-    Stream *p_in=nullptr;
-    Vector<T> last_samples{0};
-    float idx=0;
-    Vector<uint8_t> read_buffer{0};
-    RingBufferStream ring_buffer{0};
-    bool is_first = true;
-    bool step_dirty = true;
-    float step_size=1.0;
-    int to_sample_rate = 0;
-    int bytes_per_frame = 0;
-
-    /// Writes the buffer to p_out after resampling
-    size_t write(Print *p_out, const uint8_t* buffer, size_t bytes, size_t &written )  {
-        // prevent npe
-        if (info.channels==0){
-            LOGE("channels is 0");
-            return 0;
-        }
-        T* data = (T*)buffer;
-        int samples = bytes / sizeof(T); 
-        size_t frames = samples / info.channels;
-        written = 0;
-
-        // avoid noise if audio does not start with 0
-        if (is_first){
-            is_first = false;
-            setupLastSamples(data, 0);
-        }
-
-        // process all samples
-        while (idx<frames){
-            for (int ch=0;ch<info.channels;ch++){
-                T result = getValue(data, idx, ch);
-                if (p_out->availableForWrite()<sizeof(T)){
-                    LOGE("Could not write");
-                }
-                written += p_out->write((uint8_t*)&result, sizeof(T));
-            }
-            idx+=step_size;
-        }
-        
-        // save last samples
-        setupLastSamples(data, frames-1);
-        idx -= frames;
-        // returns requested bytes to avoid rewriting of processed bytes
-        return bytes;
-    }
-
-    /// get the interpolated value for indicated (float) index value
-    T getValue(T *data,float frame_idx, int channel){
-        // interpolate value 
-        int frame_idx1 = frame_idx;
-        int frame_idx0 = frame_idx1-1;
-        T val0 = lookup(data, frame_idx0, channel);
-        T val1 = lookup(data, frame_idx1, channel);
-
-        float result = mapFloat(frame_idx,frame_idx1,frame_idx0, val0, val1 );
-        return round(result);
-    }
-
-    // lookup value for indicated frame & channel: index starts with -1;
-    T lookup(T *data, int frame, int channel){
-        if (frame>=0){
-            return data[frame*info.channels+channel];
-        } else {
-            // index -1
-            return last_samples[channel];
-        }
-    }  
-    // store last samples to provide values for index -1
-    void setupLastSamples(T *data, int frame){
-        for (int ch=0;ch<info.channels;ch++){
-            last_samples[ch] = data[(frame*info.channels)+ch];
-        }
-    }  
+  }
 };
 
-/**
- * @brief Dynamic Resampling. We can use a variable factor to speed up or slow down
- * the playback. This is the original implementation which should be slightly more efficient
- * for microcontrollers with slow floating point operations
- * @author Phil Schatzmann
- * @ingroup transform
- * @copyright GPLv3
- * @tparam T 
- */
-
-template<typename T>
-class ResampleStreamFast : public ResampleStream<T> {
-  public:
-    /// Support for resampling via write.
-    ResampleStreamFast(Print &out, int channelCount=2) : ResampleStream<T>(out, channelCount){}
-    /// Support for resampling via write. The audio information is copied from the io
-    ResampleStreamFast(AudioPrint &out) : ResampleStream<T>(out) {}
-
-    /// Support for resampling via write and read. 
-    ResampleStreamFast(Stream &io, int channelCount=2) : ResampleStream<T>(io, channelCount){}
-
-    /// Support for resampling via write and read. The audio information is copied from the io
-    ResampleStreamFast(AudioStream &io) : ResampleStream<T>(io){}
-    
-    /// get the interpolated value for indicated (float) index value
-    T getValue(T *data,float frame_idx, int channel)  {
-        // provide value if number w/o digits
-        if (frame_idx==(int)frame_idx)  {
-            return ResampleStream<T>::lookup(data, frame_idx-1, channel);
-        }
-        // interpolate value 
-        int frame_idx1 = frame_idx;
-        int frame_idx0 = frame_idx1-1;
-        T val0 = ResampleStream<T>::lookup(data, frame_idx0, channel);
-        T val1 = ResampleStream<T>::lookup(data, frame_idx1, channel);
-        T diff = val1 - val0;
-        if (diff==0){
-            // No difference
-            return val0;
-        } 
-        // interpolate value
-        float delta = (frame_idx - frame_idx0) - 1;
-        T diffEffective = diff * delta;
-        T result = val0+diffEffective;
-
-        return result;
-    }
-};
-
-} // namespace
+}  // namespace audio_tools

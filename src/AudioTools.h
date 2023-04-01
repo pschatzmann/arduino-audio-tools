@@ -66,7 +66,7 @@
 #include "AudioTools/AudioPrint.h"
 #include "AudioTools/VolumeStream.h"
 #include "AudioTools/Resample.h"
-#include "AudioTools/AudioCopy.h"
+#include "AudioTools/StreamCopy.h"
 #include "AudioCodecs/AudioEncoded.h"
 #include "AudioCodecs/AudioCodecs.h"
 #include "AudioEffects/SoundGenerator.h"

@@ -103,7 +103,6 @@ class CsvStream : public AudioPrint {
 
         /// Constructor
         CsvStream(Print &out, int channels=2, int buffer_size=DEFAULT_BUFFER_SIZE, bool active=true) {
-            this->channels = channels;
             this->out_ptr = &out;
             this->active = active;
             cfg.channels = channels;
@@ -133,14 +132,12 @@ class CsvStream : public AudioPrint {
             TRACED();
             cfg = info;
             this->active = true;
-            this->channels = info.channels;
-            return channels!=0;
+            return cfg.channels!=0;
         }
 
         /// Starts the processing with the defined number of channels 
         void begin(int channels, Print &out=Serial){
              TRACED();
-            this->channels = channels;
             this->out_ptr = &out;
             this->active = true;
             cfg.channels = channels;
@@ -156,26 +153,29 @@ class CsvStream : public AudioPrint {
         virtual void setAudioInfo(AudioInfo info) {
             TRACEI();
             info.logInfo();
-            this->channels = info.channels;
             cfg = info;
         };
 
         /// Writes the data - formatted as CSV -  to the output stream
         virtual size_t write(const uint8_t* data, size_t len) {   
             if (!active) return 0;
-            TRACED();
-            size_t lenChannels = len / (sizeof(T)*channels); 
-            data_ptr = (T*)data;
-            for (size_t j=0;j<lenChannels;j++){
-                for (int ch=0;ch<channels;ch++){
-                    if (out_ptr!=nullptr && data_ptr!=nullptr){
-                        int value = *data_ptr;
-                        out_ptr->print(value);
-                    }
-                    data_ptr++;
-                    if (ch<channels-1) Serial.print(", ");
+            LOGD("CsvStream::write: %d", len);
+            size_t lenChannels = len / (sizeof(T)*cfg.channels); 
+            if (lenChannels>0){
+                writeFrames((T*)data, lenChannels);
+            } else if (len==sizeof(T)) {
+                // if the write contains less then a frame we buffer the data
+                T* data_value = (T*) data;
+                out_ptr->print(data_value[0]);
+                channel++;
+                if (channel == cfg.channels){
+                    out_ptr->println();
+                    channel = 0;
+                } else {
+                    out_ptr->print(", ");
                 }
-                Serial.println();
+            } else {
+                LOGE("Unsuppoted size: %d for channels %d and bits: %d", len, cfg.channels, cfg.bits_per_sample);
             }
             return len;
         }
@@ -187,8 +187,24 @@ class CsvStream : public AudioPrint {
     protected:
         T *data_ptr;
         Print *out_ptr = &Serial;
-        int channels = 2;
+        int channel = 0;
         bool active = false;
+
+
+        void writeFrames(T* data_ptr, int frameCount){
+            for (size_t j=0;j<frameCount;j++){
+                for (int ch=0;ch<cfg.channels;ch++){
+                    if (out_ptr!=nullptr && data_ptr!=nullptr){
+                        int value = *data_ptr;
+                        out_ptr->print(value);
+                    }
+                    data_ptr++;
+                    if (ch<cfg.channels-1) Serial.print(", ");
+                }
+                Serial.println();
+            }
+
+        }
 
 };
 

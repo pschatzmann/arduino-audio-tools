@@ -7,7 +7,7 @@
  * @defgroup convert Converters
  * @ingroup tools
  * @brief Convert Audio
- * You can add a converter as argument to the AudioCopy::copy() or better use is with 
+ * You can add a converter as argument to the StreamCopy::copy() or better use is with 
  * a ConverterStream.
  */
 

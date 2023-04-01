@@ -8,7 +8,7 @@
 #include "AudioTools/Converter.h"
 #include "AudioTools/AudioLogger.h"
 #include "AudioTools/AudioStreams.h"
-#include "AudioTools/AudioCopy.h"
+#include "AudioTools/StreamCopy.h"
 #include "AudioHttp/AudioHttp.h"
 #include "AudioTools/AudioSource.h"
 #include "AudioTools/Fade.h"
