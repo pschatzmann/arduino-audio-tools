@@ -215,8 +215,9 @@ class NumberConverter {
 #endif
         }
 
+        /// Clips the value to avoid any over or underflows
         template <typename T> 
-        static T clip(float value){
+        static T clip(int64_t value){
             T mv = maxValue(sizeof(T)*8);
             if (value > mv){
                 return mv;
@@ -225,6 +226,14 @@ class NumberConverter {
             } 
             return value;
         }
+
+        /// Convert a number from one type to another
+        template <typename FromT, typename ToT> 
+        static ToT convert(FromT value){
+            int64_t value1 = value;
+            return clip<ToT>(value1 * maxValueT<ToT>() / maxValueT<FromT>());
+        }
+
 };
 
 /// guaranteed to return the requested data

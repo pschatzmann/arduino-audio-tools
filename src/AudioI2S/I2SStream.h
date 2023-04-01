@@ -89,7 +89,7 @@ class I2SStream : public AudioStream {
 
         /// Writes the audio data to I2S
         virtual size_t write(const uint8_t *buffer, size_t size) {
-            TRACED();
+            LOGD("I2SStream::write: %d", size);
             return i2s.writeBytes(buffer, size);
         }
 

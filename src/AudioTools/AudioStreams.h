@@ -128,6 +128,8 @@ class AudioStream : public Stream, public AudioInfoDependent, public AudioInfoSo
 
   virtual int not_supported(int out, const char* msg="") {
     LOGE("AudioStream: %s unsupported operation!", msg);
+    // trigger stacktrace
+    //assert(false);
     return out;
   }
 
@@ -1553,7 +1555,6 @@ class FilteredStream : public AudioStream {
         ConverterNChannels<T,TF> *p_converter;
 
 };
-
 
 
 #ifdef USE_TIMER
