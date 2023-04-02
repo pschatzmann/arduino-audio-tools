@@ -17,7 +17,7 @@ SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with
 GeneratedSoundStream<int16_t> sound( sineWave);  // Stream generated from sine wave
 WiFiClient client;                  
 MeasuringStream clientTimed(client);
-StreamCopy copier(clientTimed, sound, 256);  // copies sound into i2s
+StreamCopy copier(clientTimed, sound, 256);  // copies sound into MeasuringStream 
 const char *ssid = "ssid";
 const char *password = "password";
 const char *client_address = "192.168.1.33"; // update based on your receive ip
