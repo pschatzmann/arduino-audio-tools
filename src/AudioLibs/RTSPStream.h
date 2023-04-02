@@ -272,6 +272,12 @@ public:
     name_str = name;
   }
 
+  void setFragmentSize(int fragmentSize) { RTSPFormat::setFragmentSize(fragmentSize);}
+  int fragmentSize() { return RTSPFormat::fragmentSize(); }
+
+  void setTimerPeriod(int period) { RTSPFormat::setTimerPeriod(period); }
+  int timerPeriod() { return RTSPFormat::timerPeriod(); }
+
 protected:
   AudioInfo cfg;
   const char* name_str="RTSP-Demo";;
