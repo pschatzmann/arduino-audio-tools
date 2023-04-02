@@ -263,9 +263,18 @@ public:
   virtual const char *format(char *buffer, int len) = 0;
   /// Provide a default format that will just work
   virtual AudioInfo defaultConfig() = 0;
+  /// Proides the name
+  const char* name() {
+    return name_str;
+  }
+  /// Defines the  name
+  void setName(const char* name){
+    name_str = name;
+  }
 
 protected:
   AudioInfo cfg;
+  const char* name_str="RTSP-Demo";;
 };
 
 /**
@@ -283,13 +292,13 @@ public:
   const char *format(char *buffer, int len) override {
     TRACEI();
     snprintf(buffer, len,
-             "s=Microphone\r\n"     // Stream Name
+             "s=%s\r\n"     // Stream Name
              "c=IN IP4 0.0.0.0\r\n" // Connection Information
              "t=0 0\r\n" // start / stop - 0 -> unbounded and permanent session
              "m=audio 0 RTP/AVP 101\r\n" // UDP sessions with format 101=opus
              "a=rtpmap:101 opus/%d/2\r\n"
              "a=fmtp:101 stereo=1; sprop-stereo=%d\r\n",
-             cfg.sample_rate, cfg.channels == 2);
+             name(), cfg.sample_rate, cfg.channels == 2);
     return (const char *)buffer;
   }
   AudioInfo defaultConfig() {
@@ -313,13 +322,13 @@ public:
   const char *format(char *buffer, int len) override {
     TRACEI();
     snprintf(buffer, len,
-             "s=Microphone\r\n"     // Stream Name
+             "s=%s\r\n"     // Stream Name
              "c=IN IP4 0.0.0.0\r\n" // Connection Information
              "t=0 0\r\n" // start / stop - 0 -> unbounded and permanent session
              "m=audio 0 RTP/AVP 98\r\n" // UDP sessions with format 98=aptx
              "a=rtpmap:98 aptx/%d/%d\r\n"
              "a=fmtp:98 variant=standard; bitresolution=%d\r\n",
-             cfg.sample_rate, cfg.channels, cfg.bits_per_sample);
+             name(), cfg.sample_rate, cfg.channels, cfg.bits_per_sample);
     return (const char *)buffer;
   }
   AudioInfo defaultConfig() {
@@ -343,11 +352,11 @@ public:
     assert(cfg.channels == 1);
 
     snprintf(buffer, len,
-             "s=Microphone\r\n"     // Stream Name
+             "s=%s\r\n"     // Stream Name
              "c=IN IP4 0.0.0.0\r\n" // Connection Information
              "t=0 0\r\n" // start / stop - 0 -> unbounded and permanent session
              "m=audio 0 RTP/AVP 3\r\n" // UDP sessions with format 3=GSM
-    );
+             , name());
     return (const char *)buffer;
   }
 
@@ -373,16 +382,15 @@ public:
     assert(cfg.channels == 1);
 
     snprintf(buffer, len,
-             "s=Microphone\r\n"     // Stream Name
+             "s=%s\r\n"     // Stream Name
              "c=IN IP4 0.0.0.0\r\n" // Connection Information
              "t=0 0\r\n" // start / stop - 0 -> unbounded and permanent session
              "m=audio 0 RTP/AVP %d\r\n" // UDP sessions with format 0=G711 μ-Law
-             ,
-             getFormat());
+             , name(), getFormat());
     return (const char *)buffer;
   }
 
-  /// Defines if we use ulow ar alow
+  /// Defines if we use ulow ar alow; by default we use ulaw!
   void setIsULaw(bool flag) { is_ulaw = flag; }
 
   AudioInfo defaultConfig() {
@@ -407,13 +415,13 @@ public:
   const char *format(char *buffer, int len) override {
     TRACEI();
     snprintf(buffer, len,
-             "s=Microphone\r\n"     // Stream Name
+             "s=%s\r\n"     // Stream Name
              "c=IN IP4 0.0.0.0\r\n" // Connection Information
              "t=0 0\r\n" // start / stop - 0 -> unbounded and permanent session
              "m=audio 0 RTP/AVP %d\r\n" // UDP sessions with format 10 or 11
              "a=rtpmap:%s\r\n"
              "a=rate:%i\r\n", // provide sample rate
-             format(cfg.channels), payloadFormat(cfg.sample_rate, cfg.channels),
+             name(), format(cfg.channels), payloadFormat(cfg.sample_rate, cfg.channels),
              cfg.sample_rate);
     return (const char *)buffer;
   }
@@ -475,12 +483,12 @@ public:
   const char *format(char *buffer, int len) override {
     TRACEI();
     snprintf(buffer, len,
-             "s=Microphone\r\n"     // Stream Name
+             "s=%s\r\n"     // Stream Name
              "c=IN IP4 0.0.0.0\r\n" // Connection Information
              "t=0 0\r\n" // start / stop - 0 -> unbounded and permanent session
              "m=audio 0 RTP/AVP 96\r\n" // UDP sessions with format 96=dynamic
              "a=rtpmap:96 l8/%d/%d\r\n",
-             cfg.sample_rate, cfg.channels);
+             name(), cfg.sample_rate, cfg.channels);
     return (const char *)buffer;
   }
   AudioInfo defaultConfig() {
@@ -501,11 +509,18 @@ public:
  */
 class RTSPStream : public AudioPrint {
 public:
+  /// Default constructor
   RTSPStream(RTSPFormatAudioTools &format, AudioEncoder &encoder,
              int buffer_size = 1024 * 2) {
     buffer.resize(buffer_size);
     p_format = &format;
     p_encoder = &encoder;
+    p_encoder->setOutputStream(buffer);
+  }
+
+  /// Construcor using RTSPFormatPCM and no encoder
+  RTSPStream(int buffer_size = 1024) {
+    buffer.resize(buffer_size);
     p_encoder->setOutputStream(buffer);
   }
 
@@ -567,11 +582,13 @@ public:
   operator boolean() { return rtps_source.isActive(); }
 
 protected:
+  RTSPFormatPCM pcm;
+  CopyEncoder copy_encoder;
   RTSPSourceFromAudioStream rtps_source;
   RingBufferStream buffer{0};
   AudioStream *p_input = &buffer;
-  AudioEncoder *p_encoder = nullptr;
-  RTSPFormatAudioTools *p_format = nullptr;
+  AudioEncoder *p_encoder = &copy_encoder;
+  RTSPFormatAudioTools *p_format = &pcm;
   AudioStreamer rtsp_streamer;
 };
 
