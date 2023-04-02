@@ -10,6 +10,13 @@ extern "C"{
  * @brief G72x Codecs   
 **/
 
+/** 
+ * @defgroup codec-g711 g711
+ * @ingroup codecs
+ * @brief G711 Codecs   
+**/
+
+
 namespace audio_tools {
 
 /**
@@ -298,7 +305,7 @@ class G723_40Encoder : public G7xxEncoder {
 /**
  * @brief 64 kbit/s g711 ULOW Encoder based on https://github.com/pschatzmann/arduino-libg7xx
  * Supported encoder parameters: linear2alaw2, linear2ulaw
- * @ingroup codec-g72x
+ * @ingroup codec-g711
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -334,7 +341,7 @@ class G711Encoder : public G7xxEncoder {
  * @brief 64 kbit/s  g711 ULOW Decoder based on https://github.com/pschatzmann/arduino-libg7xx
  * Supported decoder parameters: alaw2linear, ulaw2linear
  * @author Phil Schatzmann
- * @ingroup codec-g72x
+ * @ingroup codec-g711
  * @copyright GPLv3
  */
 class G711Decoder : public G7xxDecoder {
@@ -365,7 +372,7 @@ class G711Decoder : public G7xxDecoder {
 
 /**
  * @brief 64 kbit/s  g711 ALOW Encoder based on https://github.com/pschatzmann/arduino-libg7xx
- * @ingroup codec-g72x
+ * @ingroup codec-g711
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -376,7 +383,7 @@ class G711_ALAWEncoder : public G711Encoder {
 
 /**
  * @brief 64 kbit/s  g711 ALOW Decoder based on https://github.com/pschatzmann/arduino-libg7xx
- * @ingroup codec-g72x
+ * @ingroup codec-g711
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -387,7 +394,7 @@ class G711_ALAWDecoder : public G711Decoder {
 
 /**
  * @brief 64 kbit/s  g711 ULOW Encoder based on https://github.com/pschatzmann/arduino-libg7xx
- * @ingroup codec-g72x
+ * @ingroup codec-g711
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -398,7 +405,7 @@ class G711_ULAWEncoder : public G711Encoder {
 
 /**
  * @brief 64 kbit/s  g711 ULOW Decoder based on https://github.com/pschatzmann/arduino-libg7xx
- * @ingroup codec-g72x
+ * @ingroup codec-g711
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
