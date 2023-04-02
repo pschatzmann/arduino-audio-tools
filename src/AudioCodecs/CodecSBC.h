@@ -283,8 +283,12 @@ public:
       LOGE("inactive");
       return 0;
     }
-    const uint8_t *start = (const uint8_t *)in_ptr;
+    if (p_print==nullptr){
+      LOGE("output not defined");
+      return 0;
+    }
 
+    const uint8_t *start = (const uint8_t *)in_ptr;
     // encode bytes
     for (int j = 0; j < in_size; j++) {
       processByte(start[j]);

@@ -359,6 +359,15 @@ class NumberFormatConverterStream : public ReformatBaseStream {
   NumberFormatConverterStream(Stream &stream) { setStream(stream); }
   NumberFormatConverterStream(Print &print) { setStream(print); }
 
+  void setAudioInfo (AudioInfo info) {
+    this->from_bit_per_samples = info.sample_rate;
+    AudioStream::setAudioInfo(info);
+  }
+
+  bool begin(AudioInfo info, int to_bit_per_samples) {
+    AudioStream::setAudioInfo(info);
+    return begin(info.bits_per_sample, to_bit_per_samples);
+  }
 
   bool begin(int from_bit_per_samples, int to_bit_per_samples) {
     LOGI("begin %d -> %d bits", from_bit_per_samples, to_bit_per_samples);
@@ -571,14 +580,12 @@ class FormatConverterStream : public ReformatBaseStream {
     setStream(print);
   }
 
-
   void setStream(Stream &io) override {
     TRACED();
     //p_print = &print;
     ReformatBaseStream::setStream(io);
     sampleRateConverter.setStream(io);
   }
-
 
   void setStream(Print &print) override {
     TRACED();
