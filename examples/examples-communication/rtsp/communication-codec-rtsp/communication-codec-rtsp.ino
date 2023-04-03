@@ -30,6 +30,10 @@ void setup() {
   // Setup sine wave
   sineWave.begin(info, N_B4);
 
+  // setup Output mixer with default buffer size
+  mixer.begin();
+
+
   // Start Output Stream
   rtsp_stream.begin(info);
 
