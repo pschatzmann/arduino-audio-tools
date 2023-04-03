@@ -333,7 +333,7 @@ public:
 
   /// encodeor decode the data
   virtual size_t write(const uint8_t *data, size_t len) override {
-    LOGD("%s: %zu", LOG_METHOD, len);
+    LOGD("EncodedAudioPrint::write: %zu", len);
     if (len == 0) {
       LOGI("write: %d", 0);
       return 0;
@@ -421,6 +421,20 @@ public:
 
   /**
    * @brief Construct a new Encoded Audio Stream object - used for encoding
+  */
+  EncodedAudioStream(Stream &io, AudioEncoder &encoder) : EncodedAudioPrint(io, encoder) {
+    setStream(&io);
+  }
+
+  /**
+   * @brief Construct a new Encoded Audio Stream object - used for encoding
+  */
+  EncodedAudioStream(AudioStream &io, AudioEncoder &encoder) : EncodedAudioPrint(io, encoder) {
+    setStream(&io);
+  }
+
+  /**
+   * @brief Construct a new Encoded Audio Stream object - used for encoding
    *
    * @param outputStream
    * @param encoder
@@ -474,17 +488,21 @@ public:
   }
 
   size_t readBytes(uint8_t *buffer, size_t length) override {
-    TRACED();
-    if (p_stream==nullptr) return 0;
+    LOGD("EncodedAudioStream::readBytes: %d", length);
+    if (p_stream==nullptr) {
+      TRACEE();
+      return 0;
+    }
     decode(reqested_bytes);
     return decoded_buffer.readArray(buffer, length);
   }
 
 protected:
   RingBuffer<uint8_t> decoded_buffer{0}; 
-  QueueStream<uint8_t> out_stream{decoded_buffer};
+  QueueStream<uint8_t> queue_stream{decoded_buffer};
   Vector<uint8_t> copy_buffer{DEFAULT_BUFFER_SIZE};
   Stream *p_stream = nullptr;
+  AudioWriter *p_write = nullptr;
   int reqested_bytes = DEFAULT_BUFFER_SIZE;
   bool is_setup = false;
   int max_read_count = 5;
@@ -494,11 +512,13 @@ protected:
     TRACED();
     // setup buffer once
     setupOnce();
+    
     // fill decoded_buffer if we do not have enough data
     if(p_stream->available()>0 && decoded_buffer.available()<reqested_bytes){
       for (int j=0;j<max_read_count;j++){
         int bytes_read = p_stream->readBytes(copy_buffer.data(), DEFAULT_BUFFER_SIZE);
-        int result = decoder_ptr->write(copy_buffer.data(), bytes_read);
+        LOGD("bytes_read: %d", bytes_read);
+        int result = writer_ptr->write(copy_buffer.data(), bytes_read);
         if (p_stream->available()==0 || decoded_buffer.available()>=reqested_bytes){
           break;
         }
@@ -513,9 +533,8 @@ protected:
       LOGI("Setup reading support");
       resize();
       // make sure the result goes to out_stream
-      decoder_ptr->setOutputStream(out_stream);
-      writer_ptr = decoder_ptr;
-      out_stream.begin();
+      writer_ptr->setOutputStream(queue_stream);
+      queue_stream.begin();
     }
   }
 };
