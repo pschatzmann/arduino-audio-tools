@@ -20,22 +20,42 @@ public:
   AudioDecoder(AudioDecoder const&) = delete;
   AudioDecoder& operator=(AudioDecoder const&) = delete;
   
-  virtual AudioInfo audioInfo() = 0;
+  virtual AudioInfo audioInfo() {return info; };
+
   // for most decoder this is not needed
-  virtual void setAudioInfo(AudioInfo from) override {}
+  virtual void setAudioInfo(AudioInfo from) override { 
+    if (info!=from){
+      if (p_notify!=nullptr){
+        p_notify->setAudioInfo(from);
+      }
+    }
+    info = from;
+  }
   virtual void setOutputStream(AudioStream &out_stream) {
     Print *p_print = &out_stream;
     setOutputStream(*p_print);
     setNotifyAudioChange(out_stream);
   }
+
   virtual void setOutputStream(AudioPrint &out_stream) {
     Print *p_print = &out_stream;
     setOutputStream(*p_print);
     setNotifyAudioChange(out_stream);
   }
-  virtual void setOutputStream(Print &out_stream) override = 0;
+
+  virtual void setOutputStream(Print &out_stream) {
+    p_print = &out_stream;
+  }
   // Th decoding result is PCM data
   virtual bool isResultPCM() { return true;} 
+
+  /// Registers an object that is notified if the audio format is changing
+  void setNotifyAudioChange(AudioInfoDependent &notify){ p_notify = &notify;}
+
+protected:
+  Print *p_print=nullptr;
+  AudioInfo info;
+  AudioInfoDependent *p_notify=nullptr;
 };
 
 /**

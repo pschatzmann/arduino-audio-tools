@@ -34,10 +34,10 @@ class BaseBuffer {
   BaseBuffer(BaseBuffer const&) = delete;
   BaseBuffer& operator=(BaseBuffer const&) = delete;
 
-  // reads a single value
+  /// reads a single value
   virtual T read() = 0;
 
-  // reads multiple values
+  /// reads multiple values
   int readArray(T data[], int len) {
     int lenResult = MIN(len, available());
     for (int j = 0; j < lenResult; j++) {
@@ -47,6 +47,7 @@ class BaseBuffer {
     return lenResult;
   }
 
+  /// Fills the data from the buffer
   int writeArray(const T data[], int len) {
     //LOGD("%s: %d", LOG_METHOD, len);
     //CHECK_MEMORY();
@@ -63,7 +64,7 @@ class BaseBuffer {
     return result;
   }
 
-  // reads multiple values for array of 2 dimensional frames
+  /// reads multiple values for array of 2 dimensional frames
   int readFrames(T data[][2], int len) {
     LOGD("%s: %d", LOG_METHOD, len);
     //CHECK_MEMORY();
@@ -90,27 +91,32 @@ class BaseBuffer {
     return lenResult;
   }
 
-  // peeks the actual entry from the buffer
+  /// peeks the actual entry from the buffer
   virtual T peek() = 0;
 
-  // checks if the buffer is full
+  /// checks if the buffer is full
   virtual bool isFull() = 0;
 
   bool isEmpty() { return available() == 0; }
 
-  // write add an entry to the buffer
+  /// write add an entry to the buffer
   virtual bool write(T data) = 0;
 
-  // clears the buffer
+  /// clears the buffer
   virtual void reset() = 0;
 
-  // provides the number of entries that are available to read
+  ///  same as reset
+  void clear() {
+    reset();
+  }
+
+  /// provides the number of entries that are available to read
   virtual int available() = 0;
 
-  // provides the number of entries that are available to write
+  /// provides the number of entries that are available to write
   virtual int availableForWrite() = 0;
 
-  // returns the address of the start of the physical read buffer
+  /// returns the address of the start of the physical read buffer
   virtual T *address() = 0;
 
  protected:
@@ -286,9 +292,11 @@ class RingBuffer : public BaseBuffer<T> {
   virtual T *address() { return _aucBuffer.data(); }
 
   virtual void resize(int len) {
-    LOGI("resize: %d",len);
-    _aucBuffer.resize(len);
-    max_size = len;
+    if (max_size!=len){
+      LOGI("resize: %d",len);
+      _aucBuffer.resize(len);
+      max_size = len;
+    }
   }
 
   /// Returns the maximum capacity of the buffer
