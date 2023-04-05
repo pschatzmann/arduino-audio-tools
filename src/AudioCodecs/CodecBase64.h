@@ -6,6 +6,13 @@
 
 namespace audio_tools {
 
+/** 
+ * @defgroup codecsbase64 Base64
+ * @ingroup codecs
+ * @brief Codec for 8 bit data  
+**/
+
+
 enum Base46Logic { NoCR, CRforFrame, CRforWrite };
 
 /**
@@ -13,7 +20,7 @@ enum Base46Logic { NoCR, CRforFrame, CRforWrite };
  * data stream. Decoding only gives a valid result if we start at a limit of 4
  * bytes. We therefore use by default a newline to determine a valid start
  * boundary.
- * @ingroup codecs8bit
+ * @ingroup codecsbase64
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -160,13 +167,11 @@ const int DecoderBase64::B64index[256] = {
     37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51};
 
 /**
- * @brief EncoderBase64s - Condenses 16 bit PCM data buffeream to 8 bits
- * data.
- * Most microcontrollers can not process 8 bit audio data directly. 8 bit data
- * however is very memory efficient and helps if you need to store audio on
- * conbufferained resources. This encoder translates 16bit data into 8bit
- * data.
- * @ingroup codecs8bit
+ * @brief EncoderBase64s - Encodes the input data into a Base64 string.
+ * By default each audio frame is followed by a new line, so that we can
+ * easily resynchronize the reading of a data stream. The generation
+ * of the new line can be configured with the setNewLine() method.
+ * @ingroup codecsbase64
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
