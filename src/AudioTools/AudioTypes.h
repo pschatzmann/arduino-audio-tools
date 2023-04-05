@@ -118,13 +118,24 @@ class AudioInfoSource {
  * @ingroup basic
  */
 class AudioWriter {
-  public: 
-      virtual size_t write(const void *in_ptr, size_t in_size) = 0;
-      virtual void setAudioInfo(AudioInfo from) = 0;
-      virtual void setOutputStream(Print &out_stream) = 0;
-      virtual operator bool() = 0;
-      virtual void begin() = 0;
-      virtual void end() = 0;
+    public: 
+        virtual size_t write(const void *in_ptr, size_t in_size) = 0;
+        virtual void setAudioInfo(AudioInfo from) = 0;
+        virtual void setOutputStream(Print &out_stream) = 0;
+        virtual operator bool() = 0;
+        virtual void begin() = 0;
+        virtual void end() = 0;
+    protected:
+        void writeBlocking(Print *out, uint8_t* data, size_t len){
+            TRACED();
+            int open = len;
+            int written = 0;
+            while(open>0){
+                int result = out->write(data+written, open);
+                open -= result;
+                written += result;
+            }
+        }
 };
 
 /**
