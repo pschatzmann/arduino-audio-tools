@@ -33,6 +33,9 @@ class FFTDriverRealFFT : public FFTDriver {
             if (p_fft_object!=nullptr) delete p_fft_object;
             if (p_x!=nullptr) delete[] p_x;
             if (p_f!=nullptr) delete[] p_f;
+            p_fft_object = nullptr;
+            p_x = nullptr;
+            p_f = nullptr;
         }
         void setValue(int idx, int value) override{
             p_x[idx] = value; 
