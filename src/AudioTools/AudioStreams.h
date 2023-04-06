@@ -320,6 +320,7 @@ class MemoryStream : public AudioStream {
     }
   }
 
+  /// Automatically rewinds to the beginning when reaching the end
   virtual void setLoop(bool loop){
     is_loop = loop;
   }
@@ -432,6 +433,7 @@ public:
     clear();
   }
 
+  /// Automatically rewinds to the beginning when reaching the end
   virtual void setLoop(bool loop){
     is_loop = loop;
   }
