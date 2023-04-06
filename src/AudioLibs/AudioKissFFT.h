@@ -31,6 +31,8 @@ class FFTDriverKissFFT : public FFTDriver {
         void end() override {
             if (p_fft_object!=nullptr) kiss_fft_free(p_fft_object);
             if (p_data!=nullptr) delete[] p_data;
+            p_fft_object = nullptr;
+            p_data = nullptr;
         }
         void setValue(int idx, int value) override {
             p_data[idx].r  = value; 
