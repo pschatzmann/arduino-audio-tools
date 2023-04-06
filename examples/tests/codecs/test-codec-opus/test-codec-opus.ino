@@ -12,7 +12,7 @@
 #include "AudioLibs/AudioKit.h"
 #include "AudioCodecs/CodecOpus.h"
 
-int sample_rate = 24000;
+int sample_rate = 32000;
 int channels = 1;  
 
 SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
@@ -47,9 +47,10 @@ void setup() {
   encoder.begin(cfgs);
 
   // configure additinal parameters
-  //enc.config().application = OPUS_APPLICATION_RESTRICTED_LOWDELAY;
-  //enc.config().frame_sizes_ms_x2 = OPUS_FRAMESIZE_20_MS;
-  //enc.config().complexity = 5;
+  // auto &enc_cfg = enc.config()
+  // enc_cfg.application = OPUS_APPLICATION_RESTRICTED_LOWDELAY;
+  // enc_cfg.frame_sizes_ms_x2 = OPUS_FRAMESIZE_20_MS;
+  // enc_cfg.complexity = 5;
 
   Serial.println("Test started...");
 }

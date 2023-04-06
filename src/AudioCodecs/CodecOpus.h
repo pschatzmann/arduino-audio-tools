@@ -110,7 +110,7 @@ struct OpusEncoderSettings : public OpusSettings {
 };
 
 /**
- * @brief OpusDecoder. Depends on https://github.com/pschatzmann/arduino-libopus.git
+ * @brief OpusAudioDecoder: Depends on https://github.com/pschatzmann/arduino-libopus.git
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -213,8 +213,7 @@ class OpusAudioDecoder : public AudioDecoder {
 };
 
 /**
- * @brief OpusDecoder - Actually this class does no encoding or decoding at
- * all. It just passes on the data. Dependent on https://github.com/pschatzmann/arduino-libopus.git
+ * @brief OpusAudioEncoder: Dependens on https://github.com/pschatzmann/arduino-libopus.git
  * @ingroup codec-opus
  * @author Phil Schatzmann
  * @copyright GPLv3

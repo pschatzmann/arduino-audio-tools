@@ -17,7 +17,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-struct AudioInfoLAME :  AudioInfo  {
+struct AudioInfoLAME : public liblame::AudioInfo  {
     AudioInfoLAME () {
         sample_rate = 44100;
         channels = 2;
@@ -158,7 +158,7 @@ protected:
             if (p_print!=nullptr){
                 setOutputStream(*p_print);
             }
-            liblame::AudioInfo tmp;
+            AudioInfoLAME tmp;
             tmp.channels = info.channels;
             tmp.sample_rate = info.sample_rate;
             tmp.bits_per_sample = info.bits_per_sample;
