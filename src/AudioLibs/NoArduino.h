@@ -164,7 +164,7 @@ extern uint64_t millis();
 
 } // namespace
 
-#if defined(ESP32) || defined(ESP32_CMAKE)
+#if defined(ESP32) 
 #include "driver/gpio.h"
 /// e.g. for AudioActions
 int digitalRead(int pin) {
@@ -194,10 +194,6 @@ void pinMode(int pin, int mode) {
 	}
 }
 
-#else
-/// e.g. for AudioActions
-int digitalRead(int pin);
-void pinMode(int pin, int mode);
 #endif
 
 using namespace audio_tools;

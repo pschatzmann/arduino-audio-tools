@@ -1,4 +1,6 @@
 #pragma once
+#include "AudioConfig.h"
+#ifdef USE_URL_ARDUINO
 
 #include "AudioMetaData/AbstractMetaData.h"
 #include "AudioBasic/Str.h"
@@ -306,3 +308,5 @@ class ICYUrlSetup {
 };
 
 }
+
+#endif

@@ -94,19 +94,6 @@ public:
         enc->begin();
     }
 
-    // /**
-    //  * @brief Opens the encoder  
-    //  * 
-    //  * @param input_channels 
-    //  * @param input_sample_rate 
-    //  * @param input_bits_per_sample 
-    //  */
-    // void begin(int input_channels, int input_sample_rate, int input_bits_per_sample) {
-    //     TRACED();
-    //     createEnc();
-    //     enc->begin(input_channels, input_sample_rate, input_bits_per_sample);
-    // }
-
 
     AudioInfoLAME &audioInfo(){
         return info;
@@ -153,10 +140,13 @@ protected:
 
     // Create enc only at begin so that we can use psram
     void createEnc(){
+        TRACED();
         if (enc==nullptr){
             enc = new liblame::MP3EncoderLAME();
             if (p_print!=nullptr){
                 setOutputStream(*p_print);
+            } else {
+                LOGE("Output undefined");
             }
             AudioInfoLAME tmp;
             tmp.channels = info.channels;

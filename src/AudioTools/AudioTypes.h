@@ -266,7 +266,6 @@ T readSample(Stream* p_stream){
 /// guaranteed to return the requested data
 template<typename T>
 size_t  readSamples(Stream* p_stream, T* data, int samples){
-  T result=0;
   uint8_t *p_result = (uint8_t*) data;
   int open = samples*sizeof(T);
   int total = 0;
