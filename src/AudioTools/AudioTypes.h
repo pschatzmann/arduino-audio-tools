@@ -87,9 +87,6 @@ struct AudioInfo {
     
 };
 
-// Support legacy name
-using AudioBaseInfo = AudioInfo;
-
 /**
  * @brief Supports changes to the sampling rate, bits and channels
  * @ingroup basic
@@ -102,6 +99,11 @@ class AudioInfoDependent {
         return true;
       }
 };
+
+// Support legacy name
+using AudioBaseInfo = AudioInfo;
+using AudioBaseInfoDependent = AudioInfoDependent;
+
 
 /**
  * @brief Supports the subscription to audio change notifications
