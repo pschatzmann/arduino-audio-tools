@@ -1,6 +1,6 @@
 #pragma once
-
 #include <stdlib.h>
+#include "AudioConfig.h"
 #include "AudioTools/AudioTypes.h"
 #include "AudioTools/AudioStreams.h"
 #include "AudioMetaData/MetaDataICY.h"
@@ -41,6 +41,8 @@ class MetaDataPrint : public AudioPrint {
         callback = fn; 
     }
 
+#ifdef USE_URL_ARDUINO
+
     /// Starts the processing - iceMetaint is determined from the HttpRequest
     virtual void begin(HttpRequest &http) {
         TRACED();
@@ -49,13 +51,18 @@ class MetaDataPrint : public AudioPrint {
         icySetup.executeCallback(callback);
         begin(metaInt);
     }
+#endif
 
     /// Starts the processing - if iceMetaint is defined we use icecast
     virtual void begin(int iceMetaint=0) {
         LOGD("%s: %d", LOG_METHOD, iceMetaint);
         if (callback!=nullptr){
             if (meta == nullptr) {
+#if defined(USE_URL_ARDUINO)
                 meta = (iceMetaint > 0) ? new MetaDataICY() : (AbstractMetaData *)  new MetaDataID3();
+#else
+                meta =  new MetaDataID3();
+#endif
             }
             meta->setCallback(callback);    
             meta->setIcyMetaInt(iceMetaint);

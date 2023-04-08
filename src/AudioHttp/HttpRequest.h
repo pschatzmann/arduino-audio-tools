@@ -1,4 +1,6 @@
 #pragma once
+#include "AudioConfig.h"
+#ifdef USE_URL_ARDUINO
 
 #include "AudioHttp/HttpTypes.h" 
 #include "AudioHttp/HttpHeader.h" 
@@ -288,3 +290,5 @@ class HttpRequest {
 };
 
 }
+
+#endif

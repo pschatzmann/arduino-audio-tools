@@ -43,8 +43,10 @@ friend class AudioKitStream;
     result.fmt = toFormat();
     result.sample_rate = toSampleRate();
     result.bits_per_sample = toBits();
+#if defined(ESP32)
     result.buffer_size = buffer_size;
     result.buffer_count = buffer_count;
+#endif
     // we use the AudioKit library only to set up the codec
     result.i2s_active = false;
 #if AUDIOKIT_SETUP_SD
@@ -67,8 +69,10 @@ friend class AudioKitStream;
     pin_ws = pins.ws_io_num;
     pin_data = pins.data_out_num;
     pin_data_rx = pins.data_in_num;
-#if ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(4, 4, 0)                 
+#if defined(ESP32)
+#  if ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(4, 4, 0)                 
     pin_mck = 0;
+#  endif
 #endif
   };
 
