@@ -10,8 +10,8 @@
 namespace audio_tools {
 
 #if defined(ESP32) && defined(SYNCHRONIZED_LOGGING)
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
+#  include "freertos/FreeRTOS.h"
+#  include "freertos/task.h"
 static portMUX_TYPE mutex_logger = portMUX_INITIALIZER_UNLOCKED;
 #endif
 
@@ -148,29 +148,35 @@ class AudioLogger {
 #define LOGI(fmt, ...) if (AudioLogger::instance().level()<=AudioLogger::Info) { LOG_OUT_PGMEM(AudioLogger::Info, fmt, ##__VA_ARGS__);}
 #define LOGW(fmt, ...) if (AudioLogger::instance().level()<=AudioLogger::Warning) { LOG_OUT_PGMEM(AudioLogger::Warning, fmt, ##__VA_ARGS__);}
 #define LOGE(fmt, ...) if (AudioLogger::instance().level()<=AudioLogger::Error) { LOG_OUT_PGMEM(AudioLogger::Error, fmt, ##__VA_ARGS__);}
-    
-#else
 
-#define LOGD(...) 
-#define LOGI(...) 
-#define LOGW(...) 
-#define LOGE(...) 
-
-#endif
-
-// Log File and line 
-#ifdef NO_TRACED
+// Just log file and line 
+#if defined(NO_TRACED) 
 #  define TRACED()
 #else
 #  define TRACED() if (AudioLogger::instance().level()<=AudioLogger::Debug) { LOG_OUT(AudioLogger::Debug, LOG_METHOD);}
 #endif
 
-#ifdef NO_TRACEI
+#if  defined(NO_TRACEI) 
 #  define TRACEI()
 #else 
 #  define TRACEI() if (AudioLogger::instance().level()<=AudioLogger::Info) { LOG_OUT(AudioLogger::Info, LOG_METHOD);}
 #endif
 #define TRACEW() if (AudioLogger::instance().level()<=AudioLogger::Warning) { LOG_OUT(AudioLogger::Warning, LOG_METHOD);}
 #define TRACEE() if (AudioLogger::instance().level()<=AudioLogger::Error) { LOG_OUT(AudioLogger::Error, LOG_METHOD);}
+
+
+#else
+
+// Switch off logging
+#define LOGD(...) 
+#define LOGI(...) 
+#define LOGW(...) 
+#define LOGE(...) 
+#define TRACED()
+#define TRACEI()
+#define TRACEW()
+#define TRACEE()
+
+#endif
 
 
