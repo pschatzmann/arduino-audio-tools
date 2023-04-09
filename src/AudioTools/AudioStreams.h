@@ -815,6 +815,10 @@ class RingBufferStream : public AudioStream {
     return buffer.available();
   }
 
+  virtual int availableForWrite() override {
+    return buffer.availableForWrite();
+  }
+
   virtual void flush() override {}
   virtual int peek() override { return buffer.peek(); }
   virtual int read() override { return buffer.read(); }
