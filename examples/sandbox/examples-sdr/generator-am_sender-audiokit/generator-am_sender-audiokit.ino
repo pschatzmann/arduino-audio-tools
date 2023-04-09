@@ -26,7 +26,7 @@ uint8_t channels = 1;                                      // The stream will ha
 
 SineFromTable<int16_t> sineWave(32000);                    // subclass of SoundGenerator with maaudio_data amplitude of 32000
 GeneratedSoundStream<int16_t> sound(sineWave);             // Stream generated from sine wave
-ResampleStream<int16_t> resample(sound);
+ResampleStream resample(sound);
 AnalogAudioStream out; 
 AudioInfo info;
 
