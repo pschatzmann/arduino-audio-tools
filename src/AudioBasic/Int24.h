@@ -43,7 +43,7 @@ class int24_t  {
     set((int32_t)in);
   }
 
-#if defined(STM32) || defined(ESP32C3) || defined(TARGET_RP2040) || !defined(ARDUINO)
+#if defined(STM32) || defined(ESP32C3) || defined(TARGET_RP2040) || defined(AUDIOKIT_USE_IDF)
 
   int24_t(const int &in) {
     set(in);

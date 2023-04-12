@@ -43,14 +43,14 @@ public:
     setNotifyAudioChange(out_stream);
   }
 
-  virtual void setOutputStream(Print &out_stream) {
+  virtual void setOutputStream(Print &out_stream) override {
     p_print = &out_stream;
   }
   // Th decoding result is PCM data
   virtual bool isResultPCM() { return true;} 
 
   /// Registers an object that is notified if the audio format is changing
-  void setNotifyAudioChange(AudioInfoDependent &notify){ p_notify = &notify;}
+  void setNotifyAudioChange(AudioInfoDependent &notify) override { p_notify = &notify;}
 
 protected:
   Print *p_print=nullptr;
@@ -508,7 +508,7 @@ public:
   }
 
   size_t readBytes(uint8_t *buffer, size_t length) override {
-    LOGD("EncodedAudioStream::readBytes: %d", length);
+    LOGD("EncodedAudioStream::readBytes: %d", (int)length);
     if (p_stream==nullptr) {
       TRACEE();
       return 0;
