@@ -364,7 +364,7 @@ class ResampleStream : public ReformatBaseStream {
     T val1 = lookup<T>(data, frame_idx1, channel);
 
     float result = mapFloat(frame_idx, frame_idx1, frame_idx0, val0, val1);
-    return round(result);
+    return (float)round(result);
   }
 
   // lookup value for indicated frame & channel: index starts with -1;
