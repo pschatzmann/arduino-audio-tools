@@ -213,7 +213,7 @@ class EncoderBase64 : public AudioEncoder {
         frame_size = 4;
       }
       p_print->write('\n');
-      p_print->flush();
+      flush();
     }
   }
 
@@ -261,6 +261,16 @@ class EncoderBase64 : public AudioEncoder {
   static char encoding_table[64];
   static int mod_table[3];
 
+  void flush() {
+#if defined(ESP32) 
+#  if ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(3, 3, 5) 
+      p_print->flush();
+#  endif
+#else
+      p_print->flush();
+#endif
+  }
+
   void encodeLine(uint8_t *data, size_t input_length) {
     LOGD("EncoderBase64::encodeLine: %d",input_length);
     int output_length = 4 * ((input_length + 2) / 3);
@@ -291,7 +301,7 @@ class EncoderBase64 : public AudioEncoder {
     }
 
     writeBlocking(p_print, ret.data(), output_length);
-    p_print->flush();
+    flush();
   }
 };
 
