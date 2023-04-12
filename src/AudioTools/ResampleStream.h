@@ -36,7 +36,7 @@ class TransformationReader {
   }
 
   size_t readBytes(uint8_t *data, size_t byteCount) {
-    LOGD("TransformationReader::readBytes: %d", byteCount);
+    LOGD("TransformationReader::readBytes: %d", (int)byteCount);
     if (!active) {
       LOGE("inactive");
       return 0;
@@ -71,7 +71,7 @@ class TransformationReader {
     int availableForWrite() override { return max_len; }
 
     size_t write(const uint8_t *data, size_t byteCount) override {
-      LOGD("AdapterPrintToArray::write: %d (%d)", byteCount, pos);
+      LOGD("AdapterPrintToArray::write: %d (%d)", (int) byteCount, (int) pos);
       if (pos + byteCount > max_len) return 0;
       memcpy(p_data + pos, data, byteCount);
 
@@ -147,7 +147,7 @@ class ReformatBaseStream : public AudioStream {
   virtual Stream *getStream() { return p_stream; }
 
   size_t readBytes(uint8_t *data, size_t size) override {
-    LOGD("ReformatBaseStream::readBytes: %d", size);
+    LOGD("ReformatBaseStream::readBytes: %d", (int)size);
     return reader.readBytes(data, size);
   }
 
@@ -276,7 +276,7 @@ class ResampleStream : public ReformatBaseStream {
   // int availableForWrite() override { return p_print->availableForWrite(); }
 
   size_t write(const uint8_t *buffer, size_t bytes) override {
-    LOGD("ResampleStream::write: %d", bytes);
+    LOGD("ResampleStream::write: %d", (int)bytes);
     size_t written;
     switch (info.bits_per_sample) {
       case 16:

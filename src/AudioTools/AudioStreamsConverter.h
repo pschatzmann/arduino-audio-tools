@@ -137,7 +137,7 @@ class ChannelFormatConverterStream : public ReformatBaseStream {
   }
 
   virtual size_t write(const uint8_t *data, size_t size) override {
-    LOGD("ChannelFormatConverterStream::write: %d", size);
+    LOGD("ChannelFormatConverterStream::write: %d", (int)size);
     switch (bits_per_sample) {
       case 8:
         return getConverter<int8_t>()->write(data, size);
@@ -153,7 +153,7 @@ class ChannelFormatConverterStream : public ReformatBaseStream {
   }
 
   size_t readBytes(uint8_t *data, size_t size) override {
-    LOGD("ChannelFormatConverterStream::readBytes: %d", size);
+    LOGD("ChannelFormatConverterStream::readBytes: %d", (int)size);
     switch (bits_per_sample) {
       case 8:
         return getConverter<int8_t>()->readBytes(data, size);
@@ -276,7 +276,7 @@ class NumberFormatConverterStreamT : public ReformatBaseStream {
   NumberFormatConverterStreamT(Print &print) { setStream(print); }
 
   bool begin() override {
-    LOGI("begin %d -> %d bits", sizeof(TFrom), sizeof(TTo));
+    LOGI("begin %d -> %d bits", (int) sizeof(TFrom),(int) sizeof(TTo));
     return true;
   }
 
@@ -306,7 +306,7 @@ class NumberFormatConverterStreamT : public ReformatBaseStream {
   }
 
   size_t readBytes(uint8_t *data, size_t size) override {
-    LOGD("NumberFormatConverterStreamT::readBytes: %d", size);
+    LOGD("NumberFormatConverterStreamT::readBytes: %d", (int)size);
     if (p_stream == nullptr) return 0;
     size_t samples = size / sizeof(TTo);
     TTo *data_target = (TTo *)data;
@@ -359,7 +359,7 @@ class NumberFormatConverterStream : public ReformatBaseStream {
   NumberFormatConverterStream(Stream &stream) { setStream(stream); }
   NumberFormatConverterStream(Print &print) { setStream(print); }
 
-  void setAudioInfo (AudioInfo info) {
+  void setAudioInfo (AudioInfo info) override {
     this->from_bit_per_samples = info.sample_rate;
     AudioStream::setAudioInfo(info);
   }
@@ -405,7 +405,7 @@ class NumberFormatConverterStream : public ReformatBaseStream {
   }
 
   virtual size_t write(const uint8_t *data, size_t size) override {
-    LOGD("NumberFormatConverterStream::write: %d", size);
+    LOGD("NumberFormatConverterStream::write: %d", (int) size);
     if (from_bit_per_samples == to_bit_per_samples) {
       return p_print->write(data, size);
     }
@@ -429,7 +429,7 @@ class NumberFormatConverterStream : public ReformatBaseStream {
   }
 
   size_t readBytes(uint8_t *data, size_t size) override {
-    LOGD("NumberFormatConverterStream::readBytes: %d", size);
+    LOGD("NumberFormatConverterStream::readBytes: %d", (int)size);
     if (from_bit_per_samples == to_bit_per_samples) {
       return p_stream->readBytes(data, size);
     }
@@ -644,7 +644,7 @@ class FormatConverterStream : public ReformatBaseStream {
   }
 
   virtual size_t write(const uint8_t *data, size_t size) override {
-    LOGD("FormatConverterStream::write: %d", size);
+    LOGD("FormatConverterStream::write: %d", (int)size);
     return channelFormatConverter.write(data, size);
   }
 

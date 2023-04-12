@@ -1455,11 +1455,11 @@ class CallbackStream : public AudioStream {
   	  return begin();
     }
 
-    virtual bool begin() {
+    virtual bool begin() override {
       active = true;
       return true;
     }
-    void end() { active = false;}
+    void end() override { active = false;}
 
     size_t readBytes(uint8_t* data, size_t len) override {
       if (!active) return 0;

@@ -92,7 +92,7 @@ class DecoderBase64 : public AudioDecoder {
   static const int B64index[256];
 
   void decodeLine(uint8_t *data, size_t byteCount) {
-    LOGD("decode: %d", byteCount);
+    LOGD("decode: %d", (int)byteCount);
     int len = byteCount;
 
     unsigned char *p = (unsigned char *)data;
@@ -222,7 +222,7 @@ class EncoderBase64 : public AudioEncoder {
 
   /// Writes PCM data to be encoded as RAW
   virtual size_t write(const void *binary, size_t len) override {
-    LOGD("EncoderBase64::write: %d",len);
+    LOGD("EncoderBase64::write: %d", (int)len);
     uint8_t *data = (uint8_t *)binary;
 
     switch (newline_logic) {
@@ -272,7 +272,7 @@ class EncoderBase64 : public AudioEncoder {
   }
 
   void encodeLine(uint8_t *data, size_t input_length) {
-    LOGD("EncoderBase64::encodeLine: %d",input_length);
+    LOGD("EncoderBase64::encodeLine: %d", (int)input_length);
     int output_length = 4 * ((input_length + 2) / 3);
     if (ret.size() < output_length + 1) {
       ret.resize(output_length + 1);
