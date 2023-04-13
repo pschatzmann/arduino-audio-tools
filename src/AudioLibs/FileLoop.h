@@ -50,9 +50,14 @@ public:
   /// defines the start position after the rewind. E.g. for wav files this should be 44
   void setStartPos(int pos) { start_pos = pos; }
 
-  /// defines the requested playing size in bytes
+  /// optionally defines the requested playing size in bytes
   void setSize(size_t len) {
     total_size = len;
+  }
+
+  /// Returns the (requested) file size
+  size_t size() {
+    return total_size == -1 ? current_file.size() : total_size;
   }
 
   /// You can be notified about a rewind 
@@ -107,13 +112,9 @@ public:
     return result;
   }
 
+  // Returns the bool of the current file
   operator bool() {
     return current_file;
-  }
-
-  /// Returns the (requested) file size
-  size_t size() {
-    return total_size == -1 ? current_file.size() : total_size;
   }
 
   /// @return true as long as we are looping
