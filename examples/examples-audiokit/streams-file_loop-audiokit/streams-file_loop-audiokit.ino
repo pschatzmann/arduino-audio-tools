@@ -1,7 +1,7 @@
 /**
- * @file streams-sd-audiokit.ino
+ * @file streams-file_loop-audiokit.ino
  * @author Phil Schatzmann
- * @brief Just a small demo, how to use files with the SD library
+ * @brief Just a small demo, how to use looping (=repeating) files with the SD library
  * @version 0.1
  * @date 2022-10-09
  * 
