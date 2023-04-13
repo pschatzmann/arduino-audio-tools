@@ -20,7 +20,7 @@ const int chipSelect=PIN_AUDIO_KIT_SD_CARD_CS;
 AudioKitStream i2s; // final output of decoded stream
 EncodedAudioStream decoder(&i2s, new MP3DecoderHelix()); // Decoding stream
 FileLoop loopingFile;
-StreamCopy copier(decoder, audioFile); 
+StreamCopy copier(decoder, loopingFile); 
 
 void setup(){
   Serial.begin(115200);
