@@ -51,7 +51,7 @@ class AnalogDriverArduino : public AnalogDriverBase {
   size_t readBytes(uint8_t *values, size_t len) {
     if (buffer==nullptr) return 0;
     int samples = len / 2;
-    return buffer->readArray((int16_t *)values, samples);
+    return buffer->readArray((int16_t *)values, samples) * 2;
   }
 
  protected:
