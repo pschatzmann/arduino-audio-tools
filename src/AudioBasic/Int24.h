@@ -32,7 +32,7 @@ class int24_t  {
   }
 
   int24_t(const int64_t &in) {
-    set(in) ;
+    set((int32_t)in) ;
   }
 
   int24_t(const int24_t &in) {
@@ -72,24 +72,28 @@ class int24_t  {
     return *this;
   }
 
-  operator int() const {
-    return toInt();
-  }  
-
   operator int()  {
     return toInt();
   }  
 
-  int24_t& operator +=(int32_t value){
+  explicit operator float()  {
+    return toInt();
+  }  
+
+  explicit operator int64_t()   {
+    return toInt();
+  }  
+
+  int24_t& operator +=(int32_t valueA){
     int32_t temp = toInt();
-    temp += value;
+    temp += valueA;
     set(temp);
     return *this;
   }
 
-  int24_t& operator -=(int32_t value){
+  int24_t& operator -=(int32_t valueA){
     int32_t temp = toInt();
-    temp -= value;
+    temp -= valueA;
     set(temp);
     return *this;
   }
@@ -100,16 +104,16 @@ class int24_t  {
   }  
 
   /// convert to float
-  float toFloat() const { return toInt(); }
+  float toFloat() const { return (float)toInt(); }
 
   /// provides value between -32767 and 32767
   int16_t scale16() const {
-    return toInt() >> 8 ;
+    return static_cast<int16_t>(toInt() >> 8) ;
   }
 
   /// provides value between -2,147,483,647 and 2,147,483,647
   int32_t scale32() const {
-    return toInt() << 8;
+    return static_cast<int32_t>(toInt() << 8);
   }
 
   /// provides value between -1.0 and 1.0
@@ -121,7 +125,7 @@ class int24_t  {
   }
   
   int16_t getAndScale16() {
-    return value >> 16;
+    return static_cast<int16_t>(value >> 16);
   }
 
  private:
