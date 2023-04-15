@@ -707,7 +707,7 @@ class VolumePrint : public AudioPrint {
             T *bufferT = (T*)buffer;
             int samplesCount = size/sizeof(T);
             for (int j=0;j<samplesCount;j++){
-                float tmp = static_cast<float>(abs(bufferT[j]));
+                float tmp = abs(static_cast<float>(bufferT[j]));
                 updateVolume(tmp,j);
             }
             commit();
