@@ -23,15 +23,15 @@ class int24_t  {
     memcpy(&value, ptr, 4);
   }
 
-  int24_t(const int16_t &in) {
+  int24_t(const int16_t in) {
     set(in) ;
   }
 
-  int24_t(const int32_t &in) {
+  int24_t(const int32_t in) {
     set(in);
   }
 
-  int24_t(const int64_t &in) {
+  int24_t(const int64_t in) {
     set((int32_t)in) ;
   }
 
@@ -39,13 +39,13 @@ class int24_t  {
     value = in.value;
   }
 
-  int24_t(const float &in) {
+  int24_t(const float in) {
     set((int32_t)in);
   }
 
-#if defined(STM32) || defined(ESP32C3) || defined(TARGET_RP2040) || defined(AUDIOKIT_USE_IDF) || defined(ARDUINO_ARCH_SAMD)
+#if defined(USE_INT24_FROM_INT) 
 
-  int24_t(const int &in) {
+  int24_t(const int in) {
     set(in);
   }
 
