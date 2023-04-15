@@ -161,6 +161,7 @@
 #if defined(ESP32)  && defined(CONFIG_IDF_TARGET_ESP32C3)
 #define ESP32C3
 #define ESP32X
+#define USE_INT24_FROM_INT
 #endif
 #if defined(ESP32)  && defined(CONFIG_IDF_TARGET_ESP32S2)
 #define ESP32S2
@@ -369,6 +370,7 @@ uint64_t millis() {return (xTaskGetTickCount() * portTICK_PERIOD_MS);}
 #define USE_TYPETRAITS
 #define USE_EFFECTS_SUITE
 #define USE_TIMER
+#define USE_INT24_FROM_INT
 
 #define PIN_ADC_START 26
 #define PIN_PWM_START 6
@@ -403,6 +405,7 @@ uint64_t millis() {return (xTaskGetTickCount() * portTICK_PERIOD_MS);}
 #define USE_TYPETRAITS
 #define USE_EFFECTS_SUITE
 #define USE_TIMER
+#define USE_INT24_FROM_INT
 
 #define PIN_ADC_START 26
 #define PIN_PWM_START 6
@@ -481,9 +484,10 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #define USE_PWM
 #define USE_TIMER
 #define USE_ADC_ARDUINO
+#define USE_INT24_FROM_INT
+
 #define ADC_BUFFER_SIZE 1024
 #define ADC_BUFFERS 20
-
 #define PIN_ADC_START PA0
 #define PIN_PWM_START PA0
 #define PWM_DEFAULT_TIMER TIM2
@@ -502,6 +506,7 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 
 #ifdef ARDUINO_ARCH_SAMD
 #define USE_I2S
+#define USE_INT24_FROM_INT
 #define PIN_I2S_BCK 1
 #define PIN_I2S_WS PIN_I2S_BCK+1
 #define PIN_I2S_DATA_IN 3
@@ -549,6 +554,9 @@ typedef WiFiClient WiFiClientSecure;
 #  define USE_STREAM_READ_OVERRIDE
 #endif
 
+#ifdef AUDIOKIT_USE_IDF
+#  define USE_INT24_FROM_INT
+#endif
 
 #if USE_INLINE_VARS && !defined(INGNORE_INLINE_VARS)
 #  define INLINE_VAR inline 
