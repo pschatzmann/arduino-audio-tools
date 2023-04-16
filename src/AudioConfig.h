@@ -472,6 +472,14 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #define NO_TRACED
 #define NO_TRACEI
 
+// we use  spi to emulate i2s
+#define PIN_I2S_BCK 13
+#define PIN_I2S_WS 10 
+#define PIN_I2S_DATA_IN 12
+#define PIN_I2S_DATA_OUT 11
+#define PIN_I2S_MUTE -1
+
+
 #endif
 
 //---- STM32 ------------

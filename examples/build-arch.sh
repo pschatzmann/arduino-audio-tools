@@ -26,6 +26,7 @@ compile_example "esp8266:esp8266:generic"
 compile_example "arduino:mbed_rp2040:pico" 
 compile_example "rp2040:rp2040:generic" 
 compile_example "arduino:avr:nano" 
+compile_example "arduino:samd:arduino_zero_native"
 #compile_example "STMicroelectronics:stm32:GenF4" 
 
 ./cleanup.sh

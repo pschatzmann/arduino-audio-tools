@@ -117,14 +117,14 @@ class DecoderBase64 : public AudioDecoder {
     memset(result.data(), 0, result.size());
 
     for (size_t i = 0, j = 0; i < L; i += 4) {
-      int n = B64index[p[i]] << 18 | B64index[p[i + 1]] << 12 |
+      int32_t n = static_cast<int32_t>(B64index[p[i]]) << 18 | B64index[p[i + 1]] << 12 |
               B64index[p[i + 2]] << 6 | B64index[p[i + 3]];
       result[j++] = n >> 16;
       result[j++] = n >> 8 & 0xFF;
       result[j++] = n & 0xFF;
     }
     if (pad) {
-      int n = B64index[p[L]] << 18 | B64index[p[L + 1]] << 12;
+      int32_t n = static_cast<int32_t>(B64index[p[L]]) << 18 | B64index[p[L + 1]] << 12;
       result[result.size() - 1] = n >> 16;
 
       if (len > L + 2 && p[L + 2] != '=') {
