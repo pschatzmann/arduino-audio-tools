@@ -861,15 +861,21 @@ class QueueStream : public AudioStream {
   /// Default constructor
   QueueStream(int bufferSize, int bufferCount, bool autoRemoveOldestDataIfFull=false)
       : AudioStream() {
+    owns_buffer = true;
     callback_buffer_ptr = new NBuffer<T>(bufferSize, bufferCount);
     remove_oldest_data = autoRemoveOldestDataIfFull;
   }
   /// Create stream from any BaseBuffer subclass
   QueueStream(BaseBuffer<T> &buffer){
+    owns_buffer = false;
     callback_buffer_ptr = &buffer;
   }
 
-  virtual ~QueueStream() { delete callback_buffer_ptr; }
+  virtual ~QueueStream() { 
+    if(owns_buffer) {
+      delete callback_buffer_ptr; 
+    }
+  }
 
   /// Activates the output
   virtual bool begin() override {
@@ -929,6 +935,7 @@ class QueueStream : public AudioStream {
   BaseBuffer<T> *callback_buffer_ptr;
   bool active;
   bool remove_oldest_data;
+  bool owns_buffer;
 
 };
 
