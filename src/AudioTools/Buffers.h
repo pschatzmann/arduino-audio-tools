@@ -195,6 +195,7 @@ class SingleBuffer : public BaseBuffer<T> {
   bool isFull() { return availableForWrite() <= 0; }
 
   T *address() { return buffer.data(); }
+  T *data() { return buffer.data(); }
 
   void reset() {
     current_read_pos = 0;
