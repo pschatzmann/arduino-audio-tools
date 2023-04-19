@@ -6,10 +6,10 @@
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-#define USE_FDK
 
 #include "AudioTools.h"
 #include "AudioLibs/AudioKit.h"
+#include "AudioCodecs/CodecAACFDK.h"
 
 AudioKitStream kit;    
 AACEncoderFDK *fdk=nullptr;
