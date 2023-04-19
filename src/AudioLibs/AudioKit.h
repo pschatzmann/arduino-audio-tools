@@ -589,13 +589,6 @@ class AudioKitStream : public AudioStream {
   /// Setup the supported default actions
   void setupActions() {
     TRACEI();
-    // SPI might have been activated 
-  #ifdef ARDUINO
-    if (!cfg.sd_active){
-      LOGW("Deactivating SPI because SD is not active");
-      SPI.end();
-    }
-  #endif
 
     // pin conflicts with the SD CS pin for AIThinker and buttons
     if (! (cfg.sd_active && (AUDIOKIT_BOARD==5 || AUDIOKIT_BOARD==6))){
