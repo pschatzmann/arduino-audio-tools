@@ -1,6 +1,7 @@
 ../examples/examples-basic-api/base-adc-a2dp -> rc=0
 ../examples/examples-basic-api/base-adc-serial -> rc=0
 ../examples/examples-basic-api/base-file_raw-serial -> rc=0
+../examples/examples-basic-api/base-generator-a2dp -> rc=0
 ../examples/examples-basic-api/base-i2s-a2dp -> rc=0
 ../examples/examples-basic-api/base-player-a2dp -> rc=0
 ../examples/examples-basic-api/base-SynchronizedBufferRTOS -> rc=0
@@ -29,11 +30,13 @@
 ../examples/examples-stream/streams-adsr-i2s -> rc=0
 ../examples/examples-stream/streams-generator-a2dp -> rc=0
 ../examples/examples-stream/streams-generator-analog -> rc=0
+../examples/examples-stream/streams-generator-formatconverter-i2s -> rc=0
 ../examples/examples-stream/streams-generator_fromarray-analog -> rc=0
 ../examples/examples-stream/streams-generator-i2s -> rc=0
 ../examples/examples-stream/streams-generator-pwm -> rc=0
 ../examples/examples-stream/streams-generator-serial -> rc=0
 ../examples/examples-stream/streams-generator-spdif -> rc=0
+../examples/examples-stream/streams-generator-wm8960 -> rc=0
 ../examples/examples-stream/streams-i2s-a2dp -> rc=0
 ../examples/examples-stream/streams-i2s-filter-i2s -> rc=0
 ../examples/examples-stream/streams-i2s-i2s -> rc=0
@@ -66,7 +69,6 @@
 ../examples/examples-stream/streams-url_raw-serial -> rc=0
 ../examples/examples-stream/streams-url_vorbis_i2s -> rc=0
 ../examples/examples-stream/streams-url_wav-i2s -> rc=0
-../examples/examples-audiokit/audiokit-effects-audiokit -> rc=0
 ../examples/examples-audiokit/basic-a2dp-audiokit -> rc=0
 ../examples/examples-audiokit/basic-a2dp-eq-audiokit -> rc=0
 ../examples/examples-audiokit/basic-audiokit-a2dp -> rc=0
@@ -75,8 +77,11 @@
 ../examples/examples-audiokit/player-sdfat-audiokit -> rc=0
 ../examples/examples-audiokit/player-sdmmc-audiokit -> rc=0
 ../examples/examples-audiokit/player-url_icy-audiokit -> rc=0
+../examples/examples-audiokit/streams-a2dp-audiokit -> rc=0
 ../examples/examples-audiokit/streams-audiokit-audiokit -> rc=0
+../examples/examples-audiokit/streams-audiokit-effects-audiokit -> rc=0
 ../examples/examples-audiokit/streams-audiokit-fft -> rc=0
+../examples/examples-audiokit/streams-audiokit-fft-led -> rc=0
 ../examples/examples-audiokit/streams-audiokit-filter-audiokit -> rc=0
 ../examples/examples-audiokit/streams-audiokit-multioutput -> rc=0
 ../examples/examples-audiokit/streams-audiokit-multioutput-server -> rc=0
@@ -88,6 +93,7 @@
 ../examples/examples-audiokit/streams-audiokit-webserver_aac -> rc=0
 ../examples/examples-audiokit/streams-audiokit-webserver_mp3 -> rc=0
 ../examples/examples-audiokit/streams-audiokit-webserver_wav -> rc=0
+../examples/examples-audiokit/streams-file_loop-audiokit -> rc=0
 ../examples/examples-audiokit/streams-generator-audiokit -> rc=0
 ../examples/examples-audiokit/streams-generator_fromarray-audiokit -> rc=0
 ../examples/examples-audiokit/streams-generator_inputmixer-audiokit -> rc=0
@@ -97,7 +103,7 @@
 ../examples/examples-audiokit/streams-memory_pcm-mixer-audiokit -> rc=0
 ../examples/examples-audiokit/streams-pins-audiokit -> rc=0
 ../examples/examples-audiokit/streams-sd-audiokit -> rc=0
-../examples/examples-audiokit/streams-synth-a2dp -> rc=1/0
+../examples/examples-audiokit/streams-synth-a2dp -> rc=0
 ../examples/examples-audiokit/streams-synth-audiokit -> rc=0
 ../examples/examples-audiokit/streams-synthbasic1-audiokit -> rc=0
 ../examples/examples-audiokit/streams-synthbasic2-audiokit -> rc=0
@@ -128,6 +134,7 @@
 ../examples/examples-maximilian/18-DrumMachine -> rc=0
 ../examples/examples-maximilian/19-Enveloping2 -> rc=0
 ../examples/examples-maximilian/20-FFT -> rc=0
+../examples/examples-tts/streams-azure_tts-i2s.ino -> rc=1
 ../examples/examples-tts/streams-espeak-audiokit -> rc=0
 ../examples/examples-tts/streams-espeak-i2s -> rc=0
 ../examples/examples-tts/streams-flite-audiokit -> rc=0
@@ -144,13 +151,12 @@
 ../examples/examples-communication/esp-now/communication-espnow-receive_csv -> rc=0
 ../examples/examples-communication/esp-now/communication-espnow-receive_measure -> rc=0
 ../examples/examples-communication/esp-now/communication-espnow-send -> rc=0
-../examples/examples-communication/esp-now-codec/communication-codec-espnow-receive -> rc=0
-../examples/examples-communication/esp-now-codec/communication-codec-espnow-receive_measure -> rc=0
-../examples/examples-communication/esp-now-codec/communication-codec-espnow-send -> rc=0
+../examples/examples-communication/esp-now-codec/* -> rc=1
 ../examples/examples-communication/ip/communication-ip-receive -> rc=0
 ../examples/examples-communication/ip/communication-ip-receive_measure -> rc=0
 ../examples/examples-communication/ip/communication-ip-send -> rc=0
 ../examples/examples-communication/rtsp/communication-audiokit-rtsp -> rc=0
+../examples/examples-communication/rtsp/communication-codec-rtsp -> rc=0
 ../examples/examples-communication/rtsp/communication-generator-rtsp -> rc=0
 ../examples/tests/test-ads1015 -> rc=0
 ../examples/tests/test-bitvector -> rc=0
@@ -164,6 +170,7 @@
 ../examples/tests/test-resample-out -> rc=0
 ../examples/tests/24bits/24bits-write -> rc=0
 ../examples/tests/codecs/test-codec-aptx -> rc=0
+../examples/tests/codecs/test-codec-base64 -> rc=0
 ../examples/tests/codecs/test-codec-codec2 -> rc=0
 ../examples/tests/codecs/test-codec-flac -> rc=0
 ../examples/tests/codecs/test-codec-g711_alaw -> rc=0
@@ -194,7 +201,6 @@
 ../examples/tests/fft/fft-esp32 -> rc=0
 ../examples/tests/fft/fft-espressif -> rc=0
 ../examples/tests/fft/fft-kiss -> rc=0
-../examples/tests/fft/fft-ledmatrix -> rc=0
 ../examples/tests/fft/fft-real -> rc=0
 ../examples/tests/fft/fft-topn -> rc=0
 ../examples/tests/fft/fft-window -> rc=0
