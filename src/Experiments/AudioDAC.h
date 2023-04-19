@@ -216,7 +216,7 @@ class OversamplingDAC : public AudioPrint {
         /// Releases the memory
         virtual void reset() {
             if (current_values!=nullptr){
-                delete last_values;
+                delete current_values;
                 current_values = nullptr;
             }
             if (last_values!=nullptr){
