@@ -25,6 +25,7 @@ enum UlpDac { ULP_DAC1 = 1, ULP_DAC2 = 2 };
  * @brief Outputs to ESP32 DAC through the ULP (Ultra> Low Power coprocessor),
  * freeing I2S for other uses. Connect left channel on pin 25 Connect right
  * channel on pin 26
+ * @ingroup io
  * @version 0.1
  * @date 2023-03-26
  * @copyright  (C) 2020  Martin Laclaustra, based on bitluni's code
