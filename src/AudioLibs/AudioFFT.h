@@ -119,6 +119,14 @@ class AudioFFTBase : public AudioPrint {
             return p_driver->isValid();
         }
 
+        /// Just resets the current_pos e.g. to start a new cycle
+        void reset(){
+            current_pos = 0;
+            if (cfg.window_function!=nullptr){
+                cfg.window_function->begin(length());
+            }
+        }
+
         operator bool() {
             return p_driver!=nullptr && p_driver->isValid();
         }
