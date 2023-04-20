@@ -1129,6 +1129,11 @@ class ProgressStream : public AudioStream {
       setStream(stream);
     }
 
+    ProgressStream(AudioStream &stream){
+      setStream(stream);
+      p_info_from = &stream;
+    }
+
     ProgressStreamInfo& defaultConfig() {
       return progress_info;
     }
@@ -1151,16 +1156,23 @@ class ProgressStream : public AudioStream {
       p_print =&print;
     }
 
+    bool begin() override {
+      if (p_info_from!=nullptr){
+        setAudioInfo(p_info_from->audioInfo());
+      }
+      return AudioStream::begin();
+    }
+
     /// Updates the total size and restarts the percent calculation: Same as calling setSize()
     bool begin(size_t len){
       setSize(len);
-      return AudioStream::begin();
+      return begin();
     }
 
     bool begin(ProgressStreamInfo info){
       progress_info = info;
       setAudioInfo(info);
-      return AudioStream::begin();
+      return begin();
     }
 
     /// Updates the total size and restarts the percent calculation
@@ -1223,6 +1235,7 @@ class ProgressStream : public AudioStream {
     ProgressStreamInfo progress_info;
     Stream *p_stream=nullptr;
     Print *p_print=nullptr;
+    AudioInfoDependent *p_info_from=nullptr;
     size_t total_processed = 0;
 
     size_t measure(size_t len) {
