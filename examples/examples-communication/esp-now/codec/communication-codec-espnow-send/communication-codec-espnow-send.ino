@@ -12,12 +12,12 @@
 #include "AudioLibs/Communication.h"
 #include "AudioCodecs/CodecSBC.h"
 
-uint16_t sample_rate = 32000;
-uint8_t channels = 2;  // The stream will have 2 channels
+AudioInfo info(32000,1,16);
 SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound( sineWave); // Stream generated from sine wave
 ESPNowStream now;
-EncodedAudioStream encoder(&now, new SBCEncoder()); // encode and write to ESP-now
+SBCEncoder sbc;
+EncodedAudioStream encoder(now, sbc); // encode and write to ESP-now
 StreamCopy copier(encoder, sound);  // copies sound into i2s
 const char *peers[] = {"A8:48:FA:0B:93:01"};
 
@@ -31,14 +31,10 @@ void setup() {
   now.addPeers(peers);
 
   // Setup sine wave
-  auto cfgs = sineWave.defaultConfig();
-  cfgs.sample_rate = sample_rate;
-  cfgs.channels = channels;
-  cfgs.bits_per_sample = 16;
-  sineWave.begin(cfgs, N_B4);
+  sineWave.begin(info, N_B4);
 
   // start encoder
-  encoder.begin(cfgs);
+  encoder.begin(info);
   
   Serial.println("Sender started...");
 }

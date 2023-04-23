@@ -57,13 +57,11 @@ struct ESPNowStreamConfig {
   int write_retry_count = -1; // -1 endless
   void (*recveive_cb)(const uint8_t *mac_addr, const uint8_t *data,
                       int data_len) = nullptr;
-  // to encrypt set primary_master_key and local_master_key to 16 byte strings
+  /// to encrypt set primary_master_key and local_master_key to 16 byte strings
   const char *primary_master_key = nullptr;
   const char *local_master_key = nullptr;
-
-#ifdef FAST_ESP_NOW_HACK
+  /// esp-now bit rate
   wifi_phy_rate_t rate = WIFI_PHY_RATE_2M_S;
-#endif
 };
 
 /**
@@ -86,7 +84,10 @@ class ESPNowStream : public AudioStream {
   }
 
   /// Returns the mac address of the current ESP32
-  const char *macAddress() { return WiFi.macAddress().c_str(); }
+  const char *macAddress() { 
+    static const char* result = WiFi.macAddress().c_str(); 
+    return result; 
+  }
 
   /// Defines an alternative send callback
   void setSendCallback(esp_now_send_cb_t cb) { send = cb; }
@@ -128,13 +129,11 @@ class ESPNowStream : public AudioStream {
       }
     }
 
-#ifdef FAST_ESP_NOW_HACK
     LOGI("Setting ESP-NEW rate");
     if (esp_wifi_config_espnow_rate(getInterface(), cfg.rate) !=
         ESP_OK) {
       LOGW("Could not set rate");
     }
-#endif
 
     Serial.println();
     Serial.print("mac: ");
