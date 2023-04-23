@@ -1,7 +1,7 @@
 /**
  * @file example-serial-send.ino
  * @author Phil Schatzmann
- * @brief Sending audio over ESPNow
+ * @brief Sending data over ESPNow. We define a specific esp-now rate
  * @version 0.1
  * @date 2022-03-09
  *
