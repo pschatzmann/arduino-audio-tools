@@ -8,9 +8,7 @@
  * @date 2022-03-09
  * 
  * @copyright Copyright (c) 2022
- * 
- * ATTENTION: DRAFT - not tested yet
- */
+ *  */
 
 #include "AudioTools.h"
 #include "AudioLibs/Communication.h"
