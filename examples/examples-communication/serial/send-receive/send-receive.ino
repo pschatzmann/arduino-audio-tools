@@ -17,8 +17,8 @@ AudioInfo info(22000, 1, 16);
 SineWaveGenerator<int16_t> sineWave(32000);
 GeneratedSoundStream<int16_t> sound(sineWave);
 I2SStream out;                        // or AudioKitStream
-StreamCopy copierOut(Serial, sound, 256);  // copies sound into i2s
-StreamCopy copierIn(out, Serial, 256);     // copies sound into i2s
+StreamCopy copierOut(Serial, sound, 256);  // copies sound into Serial
+StreamCopy copierIn(out, Serial, 256);     // copies sound from Serial
 
 void setup() {
   Serial2.begin(115200);
