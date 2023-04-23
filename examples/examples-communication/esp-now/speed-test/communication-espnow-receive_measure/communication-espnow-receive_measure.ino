@@ -1,7 +1,7 @@
 /**
  * @file example-serial-receive_measure.ino
  * @author Phil Schatzmann
- * @brief Receiving audio via ESPNow with max speed to measure thruput
+ * @brief Receiving data via ESPNow with max speed to measure thruput. We define a specific esp-now rate
  * @version 0.1
  * @date 2022-03-09
  * 
