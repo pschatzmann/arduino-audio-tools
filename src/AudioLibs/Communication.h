@@ -753,6 +753,12 @@ class Throttle {
     return c;
   }
 
+  void begin(AudioInfo info) {
+    ThrottleConfig cfg;
+    cfg.copyFrom(info);
+    begin(cfg);
+  }
+
   void begin(ThrottleConfig info) {
     this->info = info;
     bytesPerSample = info.bits_per_sample / 8 * info.channels;

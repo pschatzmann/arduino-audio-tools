@@ -1,7 +1,9 @@
 /**
  * @file example-udp-receive.ino
  * @author Phil Schatzmann
- * @brief Receiving audio via udp
+ * @brief Receiving audio via udp.
+ * Because the clocks of the 2 processors are not synchronized, we might get some
+ * buffer overruns or underruns. 
  * @version 0.1
  * @date 2022-03-09
  * 
@@ -12,37 +14,29 @@
 
 #include "AudioTools.h"
 #include "AudioLibs/Communication.h"
+// #include "AudioLibs/AudioKit.h"
 
-uint16_t sample_rate = 44100;
-uint8_t channels = 2;  // The stream will have 2 channels
-I2SStream out; 
-UDPStream udp; 
-const int udpPort = 7000;
-StreamCopy copier(out, udp);     
 const char* ssid="SSID";
 const char* password="password";
+AudioInfo info(22000, 1, 16);
+UDPStream udp(ssid, password); 
+const int udpPort = 7000;
+I2SStream out; // or ony other e.g. AudioKitStream
+StreamCopy copier(out, udp);     
 
 void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
-  // connect to WIFI
-  WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED) {
-      delay(500);
-      Serial.print(".");
-  }
-  Serial.println();
-
-
-  udp.begin(port);
+  // start UDP receive
+  udp.begin(udpPort);
 
   // start I2S
   Serial.println("starting I2S...");
   auto config = out.defaultConfig(TX_MODE);
-  config.sample_rate = sample_rate; 
-  config.channels = channels;
-  config.bits_per_sample = 16;
+  config.copyFrom(info);
+  config.buffer_size = 1024;
+  config.buffer_count = 20;
   out.begin(config);
 
   Serial.println("started...");
