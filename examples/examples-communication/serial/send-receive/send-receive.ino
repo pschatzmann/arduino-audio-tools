@@ -1,5 +1,5 @@
 /**
- * @file example-serial-send.ino
+ * @file send-receive.ino
  * @author Phil Schatzmann
  * @brief Sending and receiving audio via Serial. You need to connect the RX pin
  * with the TX pin!
@@ -25,7 +25,7 @@ void setup() {
   AudioLogger::instance().begin(Serial2, AudioLogger::Warning);
 
   // Note the format for setting a serial port is as follows:
-  // Serial2.begin(baud-rate, protocol, RX pin, TX pin);
+  // Serial.begin(baud-rate, protocol, RX pin, TX pin);
   Serial.begin(1000000, SERIAL_8N1);
 
   // Setup sine wave
