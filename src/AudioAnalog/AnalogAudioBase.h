@@ -51,6 +51,7 @@ class AnalogConfig : public AudioInfo {
       if (rx_tx_mode == RX_MODE) {
         mode_internal = (I2S_MODE_MASTER | I2S_MODE_RX | I2S_MODE_ADC_BUILT_IN);
         setInputPin1(PIN_ADC1);
+        auto_clear = false;
 //        setInputPin2(PIN_ADC2);
         LOGI("I2S_MODE_ADC_BUILT_IN");
       } else {
