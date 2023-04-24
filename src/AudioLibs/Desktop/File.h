@@ -1,5 +1,5 @@
 #pragma once
-#include "AudioLibs/NoArduino.h"
+#include "AudioLibs/Desktop/NoArduino.h"
 #include <iostream>
 #include <fstream>
 #include <sys/stat.h>
@@ -18,6 +18,9 @@ enum SeekMode { SeekSet = 0, SeekCur = 1, SeekEnd = 2 };
 class File : public Stream {
   public:
     File() = default;
+    File(const char* fn) {
+        open(fn, FILE_READ);
+    }
     
     void open(const char* name, FileMode mode){
         file_path = name;

@@ -11,9 +11,9 @@
 #  include "Arduino.h"
 #elif defined(IS_DESKTOP_WITH_TIME_ONLY)
 #  include "AudioLibs/MillisDesktop.h"
-#  include "AudioLibs/NoArduino.h"
+#  include "AudioLibs/Desktop/NoArduino.h"
 #else 
-#  include "AudioLibs/NoArduino.h"
+#  include "AudioLibs/Desktop/NoArduino.h"
 #  define IS_JUPYTER
 #endif
 #include <string.h>
@@ -552,6 +552,13 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #  define USE_STREAM_WRITE_OVERRIDE
 #  define USE_STREAM_READ_OVERRIDE
 typedef WiFiClient WiFiClientSecure;
+#endif
+
+#ifdef IS_MIN_DESKTOP
+#  include "AudioLibs/Desktop/NoArduino.h"
+#  include "AudioLibs/Desktop/Millis.h"
+#  include "AudioLibs/Desktop/Main.h"
+#  include "AudioLibs/Desktop/File.h"
 #endif
 
 #ifndef ARDUINO

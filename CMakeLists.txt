@@ -12,8 +12,7 @@ include(FetchContent)
 add_library(arduino-audio-tools INTERFACE)
 
 option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
-option(ADD_MINIAUDIO "Add Miniaudio Library" OFF)
-option(ADD_PORTAUDIO "Add Portaudio Library" ON)
+option(ADD_PORTAUDIO "Add Portaudio Library" OFF)
 option(ADD_ARDUINO_EMULATOR "Add Arduino Emulator Library" ON)
 
 
@@ -37,6 +36,7 @@ if (ADD_PORTAUDIO)
         add_subdirectory(${portaudio_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/portaudio)
     endif()
 endif()
+
 
 if (ADD_ARDUINO_EMULATOR)
     # Build with Linux Arduino Emulator

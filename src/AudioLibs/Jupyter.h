@@ -1,4 +1,4 @@
 #pragma once
-#include "MillisDesktop.h"
-#include "Jupyter/JupyterAudio.h"
-#include "Jupyter/File.h"
+#include "Desktop/Millis.h"
+#include "Desktop/JupyterAudio.h"
+#include "Desktop/File.h"
