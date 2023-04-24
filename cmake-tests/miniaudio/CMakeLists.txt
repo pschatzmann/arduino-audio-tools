@@ -13,6 +13,10 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../.. ${CMAKE_CURRENT_BINARY_DIR}/arduino-audio-tools )
 endif()
 
+# Download miniaudio.h
+file(DOWNLOAD https://raw.githubusercontent.com/mackron/miniaudio/master/miniaudio.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/miniaudio.h)
+
 
 # build sketch as executable
 add_executable (generator generator.cpp)
