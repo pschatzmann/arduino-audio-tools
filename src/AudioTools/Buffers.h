@@ -327,8 +327,8 @@ class NBuffer : public BaseBuffer<T> {
  public:
 
   NBuffer(int size, int count) {
-    filled_buffers = new BaseBuffer<T> *[count];
-    avaliable_buffers = new BaseBuffer<T> *[count];
+    filled_buffers.resize(count);
+    avaliable_buffers.resize(count);
 
     write_buffer_count = 0;
     buffer_count = count;
@@ -340,6 +340,7 @@ class NBuffer : public BaseBuffer<T> {
       }
     }
   }
+  
   virtual ~NBuffer() {
     delete actual_write_buffer;
     delete actual_read_buffer;
@@ -481,14 +482,38 @@ class NBuffer : public BaseBuffer<T> {
     return *actual_read_buffer;
   }
 
+  int bufferCountFilled() {
+    int result = 0;
+    for (int j=0;j<buffer_count;j++){
+      if (filled_buffers[j]!=nullptr){
+        result++;
+      }
+    }
+    return result;
+  }
+
+  int bufferCountEmpty() {
+    int result = 0;
+    for (int j=0;j<buffer_count;j++){
+      if (avaliable_buffers[j]!=nullptr){
+        result++;
+      }
+    }
+    return result;
+  }
+
+  void setBufferSize(int size){
+    buffer_size = size;
+  }
+
  protected:
   int buffer_size = 0;
   uint16_t buffer_count = 0;
   uint16_t write_buffer_count = 0;
   BaseBuffer<T> *actual_read_buffer = nullptr;
   BaseBuffer<T> *actual_write_buffer = nullptr;
-  BaseBuffer<T> **avaliable_buffers = nullptr;
-  BaseBuffer<T> **filled_buffers = nullptr;
+  Vector<BaseBuffer<T> *> avaliable_buffers;
+  Vector<BaseBuffer<T> *> filled_buffers;
   unsigned long start_time = 0;
   unsigned long sample_count = 0;
 

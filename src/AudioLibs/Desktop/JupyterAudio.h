@@ -1,5 +1,5 @@
 #pragma once
-#include "AudioLibs/NoArduino.h"
+#include "AudioLibs/Desktop/NoArduino.h"
 #include "AudioTools/AudioStreams.h"
 #include "AudioTools/AudioPrint.h"
 #include "AudioCodecs/CodecWAV.h"
