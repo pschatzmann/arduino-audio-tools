@@ -126,6 +126,10 @@ class AudioWriter {
         virtual void setOutputStream(Print &out_stream) = 0;
         virtual operator bool() = 0;
         virtual void begin() = 0;
+        virtual void begin(AudioInfo info) {
+            setAudioInfo(info);
+            begin();
+        }
         virtual void end() = 0;
     protected:
         void writeBlocking(Print *out, uint8_t* data, size_t len){
