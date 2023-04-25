@@ -64,10 +64,10 @@ class AnalogAudioStream  : public AudioStream {
       driver.end();
     }
 
-    /// Overides the sample rate and uses the max value which is around  ~13MHz. Call this methd after begin();
-    void setMaxSampleRate() {
-        driver.setMaxSampleRate();
-    }
+    // /// Overides the sample rate and uses the max value which is around  ~13MHz. Call this methd after begin();
+    // void setMaxSampleRate() {
+    //     driver.setMaxSampleRate();
+    // }
 
     AnalogConfig &config() {
       return adc_config;
