@@ -528,6 +528,29 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #define USE_URL_ARDUINO
 #define USE_AUDIO_SERVER
 #endif
+
+//---- GIGA ------------
+// DRAFT Support - Not tested !
+#if defined(ARDUINO_GIGA) || defined(ARDUINO_ARCH_MBED_PORTENTA)
+#include <WiFi.h>
+#define IS_MBED
+#define USE_INT24_FROM_INT
+#define USE_TYPETRAITS
+#define USE_EFFECTS_SUITE
+#define USE_I2S_ANALOG
+#define USE_STREAM_WRITE_OVERRIDE
+#define ADC_BUFFER_SIZE 1024
+#define ADC_BUFFERS 10
+#define USE_URL_ARDUINO
+#define USE_AUDIO_SERVER
+
+#define PIN_ADC_START A7
+#define PIN_DAC_1 A12
+#define PIN_DAC_2 A13
+
+#endif
+
+
 //------ VS1053 ----------
 
 // Default Pins for VS1053
@@ -543,7 +566,10 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #define VS1053_DEFAULT_VOLUME 0.7
 
 
+
 //----------------
+
+
 
 #ifdef IS_DESKTOP
 #  include <Client.h>
@@ -582,3 +608,5 @@ typedef WiFiClient WiFiClientSecure;
 #pragma GCC diagnostic ignored "-Wunused-variable"
 #pragma GCC diagnostic ignored "-Wunused-function"
 #pragma GCC diagnostic ignored "-Wvla"
+#pragma GCC diagnostic ignored "-Wsign-compare"
+#pragma GCC diagnostic ignored "-Wunused-but-set-variable"

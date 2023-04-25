@@ -4,6 +4,7 @@
 #include "AudioAnalog/AnalogAudioBase.h"
 #include "AudioAnalog/AnalogAudioESP32.h"
 #include "AudioAnalog/AnalogAudioArduino.h"
+#include "AudioAnalog/AnalogAudioMBED.h"
 
 namespace audio_tools {
 
