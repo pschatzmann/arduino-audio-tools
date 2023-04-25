@@ -332,10 +332,8 @@ public:
     const CodecNOP *nop = CodecNOP::instance();
     if (decoder_ptr != nop || encoder_ptr != nop) {
       // some decoders need this - e.g. opus
-      decoder_ptr->setAudioInfo(info);
-      decoder_ptr->begin();
-      encoder_ptr->setAudioInfo(info);
-      encoder_ptr->begin();
+      decoder_ptr->begin(info);
+      encoder_ptr->begin(info);
       active = true;
     } else {
       LOGW("no decoder or encoder defined");
