@@ -145,14 +145,14 @@ class AnalogDriverESP32  : public AnalogDriverBase {
         active = false;   
     }
 
-    /// Overides the sample rate and uses the max value which is around  ~13MHz. Call this methd after begin();
-    void setMaxSampleRate() {
-      //this is the hack that enables the highest sampling rate possible ~13MHz, have fun
-      SET_PERI_REG_BITS(I2S_CLKM_CONF_REG(0), I2S_CLKM_DIV_A_V, 1, I2S_CLKM_DIV_A_S);
-      SET_PERI_REG_BITS(I2S_CLKM_CONF_REG(0), I2S_CLKM_DIV_B_V, 1, I2S_CLKM_DIV_B_S);
-      SET_PERI_REG_BITS(I2S_CLKM_CONF_REG(0), I2S_CLKM_DIV_NUM_V, 1, I2S_CLKM_DIV_NUM_S); 
-      SET_PERI_REG_BITS(I2S_SAMPLE_RATE_CONF_REG(0), I2S_TX_BCK_DIV_NUM_V, 1, I2S_TX_BCK_DIV_NUM_S); 
-    }
+    // /// Overides the sample rate and uses the max value which is around  ~13MHz. Call this methd after begin();
+    // void setMaxSampleRate() {
+    //   //this is the hack that enables the highest sampling rate possible ~13MHz, have fun
+    //   SET_PERI_REG_BITS(I2S_CLKM_CONF_REG(0), I2S_CLKM_DIV_A_V, 1, I2S_CLKM_DIV_A_S);
+    //   SET_PERI_REG_BITS(I2S_CLKM_CONF_REG(0), I2S_CLKM_DIV_B_V, 1, I2S_CLKM_DIV_B_S);
+    //   SET_PERI_REG_BITS(I2S_CLKM_CONF_REG(0), I2S_CLKM_DIV_NUM_V, 1, I2S_CLKM_DIV_NUM_S); 
+    //   SET_PERI_REG_BITS(I2S_SAMPLE_RATE_CONF_REG(0), I2S_TX_BCK_DIV_NUM_V, 1, I2S_TX_BCK_DIV_NUM_S); 
+    // }
 
      /// writes the data to the I2S interface
     size_t write(const uint8_t *src, size_t size_bytes) override { 
