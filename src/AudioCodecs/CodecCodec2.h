@@ -2,14 +2,14 @@
  * @file CodecCodec2.h
  * @author Phil Schatzmann
  * @brief Codec2 Codec using  https://github.com/pschatzmann/arduino-codec2
- * The codec was developed by David Grant Rowe, with support and cooperation of other researchers 
- * (e.g., Jean-Marc Valin from Opus).
- * Codec 2 consists of 3200, 2400, 1600, 1400, 1300, 1200, 700 and 450 bit/s codec modes. 
- * It outperforms most other low-bitrate speech codecs. For example, it uses half the bandwidth 
- * of Advanced Multi-Band Excitation to encode speech with similar quality.
- * The speech codec uses 16-bit PCM sampled audio, and outputs packed digital bytes. 
- * When sent packed digital bytes, it outputs PCM sampled audio. The audio sample rate is fixed 
- * at 8 kHz.
+ * The codec was developed by David Grant Rowe, with support and cooperation of
+ * other researchers (e.g., Jean-Marc Valin from Opus). Codec 2 consists of
+ * 3200, 2400, 1600, 1400, 1300, 1200, 700 and 450 bit/s codec modes. It
+ * outperforms most other low-bitrate speech codecs. For example, it uses half
+ * the bandwidth of Advanced Multi-Band Excitation to encode speech with similar
+ * quality. The speech codec uses 16-bit PCM sampled audio, and outputs packed
+ * digital bytes. When sent packed digital bytes, it outputs PCM sampled audio.
+ * The audio sample rate is fixed at 8 kHz.
  *
  * @version 0.1
  * @date 2022-04-24
@@ -20,11 +20,12 @@
 #include "AudioCodecs/AudioEncoded.h"
 #include "codec2.h"
 
-/** 
+
+/**
  * @defgroup codec2 Codec2
  * @ingroup codecs
- * @brief Codec2   
-**/
+ * @brief Codec2
+ **/
 
 namespace audio_tools {
 
@@ -48,7 +49,9 @@ int getCodec2Mode(int bits_per_second) {
     case 450:
       return CODEC2_MODE_450;
     default:
-      LOGE("Unsupported sample rate: use 3200, 2400, 1600, 1400, 1300, 1200, 700 or 450");
+      LOGE(
+          "Unsupported sample rate: use 3200, 2400, 1600, 1400, 1300, 1200, "
+          "700 or 450");
       return -1;
   }
 }
@@ -61,24 +64,18 @@ int getCodec2Mode(int bits_per_second) {
  * @copyright GPLv3
  */
 class Codec2Decoder : public AudioDecoder {
-public:
-  Codec2Decoder() {
-    cfg.sample_rate = 8000;
-    cfg.channels = 1;
-    cfg.bits_per_sample = 16;
+ public:
+  Codec2Decoder(int bps = 3200) {
+    info.sample_rate = 8000;
+    info.channels = 1;
+    info.bits_per_sample = 16;
+    setBitsPerSecond(bps);
   }
-  /// sets bits per second: 3200, 2400, 1600, 1400, 1300, 1200, 700 and 450 bit/s
-  virtual void setBitsPerSecond(int bps){
-    bits_per_second = bps;
-  }
+  /// sets bits per second: 3200, 2400, 1600, 1400, 1300, 1200, 700 and 450
+  /// bit/s
+  virtual void setBitsPerSecond(int bps) { bits_per_second = bps; }
 
-  int bitsPerSecond() {
-    return bits_per_second;
-  }
-
-  virtual void setAudioInfo(AudioInfo cfg) { this->cfg = cfg; }
-
-  virtual AudioInfo audioInfo() { return cfg; }
+  int bitsPerSecond() { return bits_per_second; }
 
   virtual void begin(AudioInfo cfg) {
     setAudioInfo(cfg);
@@ -89,35 +86,52 @@ public:
     TRACEI();
 
     int mode = getCodec2Mode(bits_per_second);
-    if (mode==-1){
+    if (mode == -1) {
+      LOGE("invalid bits_per_second")
       return;
     }
-    if (cfg.channels!=1){
+    if (info.channels != 1) {
       LOGE("Only 1 channel supported")
       return;
     }
-    if (cfg.bits_per_sample!=16){
+    if (info.bits_per_sample != 16) {
       LOGE("Only 16 bps are supported")
       return;
     }
-    if (cfg.sample_rate!=8000){
-      LOGW("Sample rate should be 8000: %d", cfg.sample_rate);
+    if (info.sample_rate != 8000) {
+      LOGW("Sample rate should be 8000: %d", info.sample_rate);
     }
 
     p_codec2 = codec2_create(mode);
-    if (p_codec2==nullptr){
+    if (p_codec2 == nullptr) {
       LOGE("codec2_create");
       return;
     }
 
-    result_buffer.resize(codec2_samples_per_frame(p_codec2));
-    input_buffer.resize(codec2_bytes_per_frame(p_codec2));
+    result_buffer.resize(bytesCompressed());
+    input_buffer.resize(bytesCompressed() );
+
+    assert(input_buffer.size()>0);
+    assert(result_buffer.size()>0);
 
     if (p_notify != nullptr) {
-      p_notify->setAudioInfo(cfg);
+      p_notify->setAudioInfo(info);
     }
+    LOGI("bytesCompressed:%d", bytesCompressed());
+    LOGI("bytesUncompressed:%d", bytesUncompressed());
     is_active = true;
   }
+
+  int bytesCompressed() {
+    return p_codec2 != nullptr ? codec2_bytes_per_frame(p_codec2) : 0;
+  }
+
+  int bytesUncompressed() {
+    return p_codec2 != nullptr
+               ? codec2_samples_per_frame(p_codec2) * sizeof(int16_t)
+               : 0;
+  }
+
 
   virtual void end() {
     TRACEI();
@@ -125,15 +139,11 @@ public:
     is_active = false;
   }
 
-  virtual void setNotifyAudioChange(AudioInfoDependent &bi) {
-    p_notify = &bi;
-  }
-
   virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
 
   operator bool() { return is_active; }
 
-  virtual size_t write(const void *data, size_t length) {
+  size_t write(const void *data, size_t length) override {
     LOGD("write: %d", length);
     if (!is_active) {
       LOGE("inactive");
@@ -148,16 +158,14 @@ public:
     return length;
   }
 
-protected:
+ protected:
   Print *p_print = nullptr;
   struct CODEC2 *p_codec2;
-  AudioInfo cfg;
-  AudioInfoDependent *p_notify = nullptr;
   bool is_active = false;
   Vector<uint8_t> input_buffer;
-  Vector<int16_t> result_buffer;
+  Vector<uint8_t> result_buffer;
   int input_pos = 0;
-  int bits_per_second=2400;
+  int bits_per_second = 0;
 
   /// Build decoding buffer and decode when frame is full
   void processByte(uint8_t byte) {
@@ -166,8 +174,13 @@ protected:
 
     // decode if buffer is full
     if (input_pos >= input_buffer.size()) {
-      codec2_decode(p_codec2, result_buffer.data(), input_buffer.data());
-      p_print->write((uint8_t*)result_buffer.data(), result_buffer.size()*2);
+      codec2_decode(p_codec2, (short*)result_buffer.data(), input_buffer.data());
+      int written = p_print->write((uint8_t *)result_buffer.data(), result_buffer.size());
+      if (written != result_buffer.size()){
+        LOGE("write: %d written: %d", result_buffer.size(), written);
+      } else {
+        LOGD("write: %d written: %d", result_buffer.size(), written);
+      }
       input_pos = 0;
     }
   }
@@ -181,54 +194,67 @@ protected:
  * @copyright GPLv3
  */
 class Codec2Encoder : public AudioEncoder {
-public:
-  Codec2Encoder() {
-    cfg.sample_rate = 8000;
-    cfg.channels = 1;
-    cfg.bits_per_sample = 16;
+ public:
+  Codec2Encoder(int bps = 3200) {
+    info.sample_rate = 8000;
+    info.channels = 1;
+    info.bits_per_sample = 16;
+    setBitsPerSecond(bps);
   }
 
-  /// sets bits per second: 3200, 2400, 1600, 1400, 1300, 1200, 700 and 450 bit/s
-  virtual void setBitsPerSecond(int bps){
-    bits_per_second = bps;
-  }
+  /// sets bits per second: 3200, 2400, 1600, 1400, 1300, 1200, 700 and 450
+  /// bit/s
+  virtual void setBitsPerSecond(int bps) { bits_per_second = bps; }
 
-  int bitsPerSecond() {
-    return bits_per_second;
-  }
+  int bitsPerSecond() { return bits_per_second; }
 
   void begin(AudioInfo bi) {
     setAudioInfo(bi);
     begin();
   }
 
+  int bytesCompressed() {
+    return p_codec2 != nullptr ? codec2_bytes_per_frame(p_codec2) : 0;
+  }
+
+  int bytesUncompressed() {
+    return p_codec2 != nullptr
+               ? codec2_samples_per_frame(p_codec2) * sizeof(int16_t)
+               : 0;
+  }
+
   void begin() {
     TRACEI();
 
     int mode = getCodec2Mode(bits_per_second);
-    if (mode==-1){
+    if (mode == -1) {
+      LOGE("invalid bits_per_second")
       return;
     }
-    if (cfg.channels!=1){
+    if (info.channels != 1) {
       LOGE("Only 1 channel supported")
       return;
     }
-    if (cfg.bits_per_sample!=16){
+    if (info.bits_per_sample != 16) {
       LOGE("Only 16 bps are supported")
       return;
     }
-    if (cfg.sample_rate!=8000){
-      LOGW("Sample rate should be 8000: %d", cfg.sample_rate);
+    if (info.sample_rate != 8000) {
+      LOGW("Sample rate should be 8000: %d", info.sample_rate);
     }
 
     p_codec2 = codec2_create(mode);
-    if (p_codec2==nullptr){
+    if (p_codec2 == nullptr) {
       LOGE("codec2_create");
       return;
     }
 
-    input_buffer.resize(codec2_samples_per_frame(p_codec2)*sizeof(int16_t));
-    result_buffer.resize(codec2_bytes_per_frame(p_codec2));
+    input_buffer.resize(bytesCompressed());
+    result_buffer.resize(bytesUncompressed());
+    assert(input_buffer.size()>0);
+    assert(result_buffer.size()>0);
+    LOGI("bytesCompressed:%d", bytesCompressed());
+    LOGI("bytesUncompressed:%d", bytesUncompressed());
     is_active = true;
   }
 
@@ -240,13 +266,13 @@ public:
 
   virtual const char *mime() { return "audio/codec2"; }
 
-  virtual void setAudioInfo(AudioInfo cfg) { this->cfg = cfg; }
+  virtual void setAudioInfo(AudioInfo cfg) { this->info = cfg; }
 
   virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
 
   operator bool() { return is_active; }
 
-  virtual size_t write(const void *in_ptr, size_t in_size) {
+  size_t write(const void *in_ptr, size_t in_size) override {
     LOGD("write: %d", in_size);
     if (!is_active) {
       LOGE("inactive");
@@ -260,26 +286,32 @@ public:
     return in_size;
   }
 
-protected:
-  AudioInfo cfg;
+ protected:
+  AudioInfo info;
   Print *p_print = nullptr;
-  struct CODEC2 *p_codec2;
+  struct CODEC2 *p_codec2 = nullptr;
   bool is_active = false;
   int buffer_pos = 0;
   Vector<uint8_t> input_buffer;
   Vector<uint8_t> result_buffer;
-  int bits_per_second=2400;
+  int bits_per_second = 0;
 
   // add byte to decoding buffer and decode if buffer is full
   void processByte(uint8_t byte) {
     input_buffer[buffer_pos++] = byte;
     if (buffer_pos >= input_buffer.size()) {
       // encode
-      codec2_encode(p_codec2, result_buffer.data(),(int16_t*)input_buffer.data());
-      p_print->write(result_buffer.data(), result_buffer.size());
+      codec2_encode(p_codec2, result_buffer.data(),
+                    (short*)input_buffer.data());
+      int written = p_print->write(result_buffer.data(), result_buffer.size());
+      if(written!=result_buffer.size()){
+        LOGE("write: %d written: %d", result_buffer.size(), written);
+      } else {
+        LOGD("write: %d written: %d", result_buffer.size(), written);
+      }
       buffer_pos = 0;
     }
   }
 };
 
-} // namespace audio_tools
+}  // namespace audio_tools

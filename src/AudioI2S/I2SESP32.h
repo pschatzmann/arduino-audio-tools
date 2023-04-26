@@ -280,7 +280,7 @@ class I2SDriverESP32 {
             }
             break;
         }
-        return result;
+        return size_bytes;
     }
 
   #pragma GCC diagnostic push
