@@ -91,6 +91,7 @@ class ILBCDecoder : public AudioDecoder {
         p_ilbc->decode(encoded_buffer.data(), decoded_buffer.data());
         if (p_print!=nullptr){
           p_print->write((uint8_t*)decoded_buffer.data(), decoded_buffer.size()*sizeof(int16_t));
+          delay(2);
         }
         encoded_buffer_pos = 0;
       }

@@ -181,6 +181,7 @@ class Codec2Decoder : public AudioDecoder {
       } else {
         LOGD("write: %d written: %d", result_buffer.size(), written);
       }
+      delay(2);
       input_pos = 0;
     }
   }
