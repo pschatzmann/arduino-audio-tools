@@ -82,10 +82,12 @@ class StreamCopyT {
             LOGI("buffer_size=%d",buffer_size);    
         }
 
+        /// Provides a pointer to the copy source. Can be used to check if the source is defined.
         Stream *getFrom(){
             return from;
         }
 
+        /// Provides a pointer to the copy target. Can be used to check if the target is defined.
         Print *getTo() {
             return to;
         }
@@ -375,10 +377,6 @@ class StreamCopy : public StreamCopyT<uint8_t> {
             return StreamCopyT<uint8_t>::copy();
         }
         
-        /// available bytes of the data source
-        int available() {
-            return from == nullptr ? 0 : from->available();
-        }
 };
 
 } // Namespace
