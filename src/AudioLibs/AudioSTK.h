@@ -174,6 +174,14 @@ public:
 class STKFreeVerb : public AudioEffect, public stk::FreeVerb {
 public:
   STKFreeVerb() = default;
+  STKFreeVerb(const STKFreeVerb& copy) = default;
+  AudioEffect* clone() override{
+    return new STKFreeVerb(*this);
+  }
+  StkFloat tick (StkFloat input, unsigned int channel=0) override
+  {
+    return FreeVerb::tick(input, input, channel);
+  }
   virtual effect_t process(effect_t in) {
     // just convert between int16 and float
     float value = static_cast<float>(in) / 32767.0;
@@ -190,6 +198,10 @@ public:
 class STKChowningReverb : public AudioEffect, public stk::JCRev {
 public:
   STKChowningReverb() = default;
+  STKChowningReverb(const STKChowningReverb& copy) = default;
+  AudioEffect* clone() override{
+    return new STKChowningReverb(*this);
+  }
 
   virtual effect_t process(effect_t in) {
     // just convert between int16 and float
@@ -207,6 +219,10 @@ public:
 class STKNReverb : public AudioEffect, public stk::NRev {
 public:
   STKNReverb(float t60 = 1.0) : NRev(t60) {}
+  STKNReverb(const STKNReverb& copy) = default;
+  AudioEffect* clone() override{
+    return new STKNReverb(*this);
+  }
   virtual effect_t process(effect_t in) {
     // just convert between int16 and float
     float value = static_cast<float>(in) / 32767.0;
@@ -223,6 +239,10 @@ public:
 class STKPerryReverb : public AudioEffect, public stk::PRCRev {
 public:
   STKPerryReverb(float t60 = 1.0) : PRCRev(t60) {}
+  STKPerryReverb(const STKPerryReverb& copy) = default;
+  AudioEffect* clone() override{
+    return new STKPerryReverb(*this);
+  }
   virtual effect_t process(effect_t in) {
     // just convert between int16 and float
     float value = static_cast<float>(in) / 32767.0;
