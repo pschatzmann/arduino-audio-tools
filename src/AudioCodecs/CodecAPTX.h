@@ -10,6 +10,7 @@
  */
 #pragma once
 #include "AudioCodecs/AudioEncoded.h"
+#include "AudioBasic/Int24x.h"
 #include "openaptx.h"
 
 /** 
@@ -105,7 +106,7 @@ class APTXDecoder : public AudioDecoder {
       int samples = written / 3;
       LOGI("written: %d", written);
       LOGI("samples: %d", samples);
-      int24_t *p_int24 = (int24_t *)output_buffer.data();
+      int24x_t *p_int24 = (int24x_t *)output_buffer.data();
       int16_t *p_int16 = (int16_t *)output_buffer.data();
       for (int j = 0; j < samples; j++) {
         p_int16[j] = p_int24[j].getAndScale16();
@@ -298,7 +299,7 @@ class APTXEncoder : public AudioEncoder {
  protected:
   bool is_hd;
   AudioInfo info;
-  Vector<int24_t> input_buffer{4 * 2};
+  Vector<int24x_t> input_buffer{4 * 2};
   Vector<uint8_t> output_buffer;
   int input_pos = 0;
   int output_pos = 0;
