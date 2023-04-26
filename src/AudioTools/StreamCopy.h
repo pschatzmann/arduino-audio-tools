@@ -54,16 +54,19 @@ class StreamCopyT {
         StreamCopyT(StreamCopyT const&) = delete;
         StreamCopyT& operator=(StreamCopyT const&) = delete;
 
+        /// (Re)starts the processing
         void begin(){     
             is_first = true;   
             LOGI("buffer_size=%d",buffer_size);    
         }
 
+        /// Ends the processing
         void end() {
             this->from = nullptr;
             this->to = nullptr;
         }
 
+        /// assign a new output and input stream
         void begin(Print &to, Stream &from){
             this->from = new AudioStreamWrapper(from);
             this->to = &to;
@@ -71,7 +74,7 @@ class StreamCopyT {
             LOGI("buffer_size=%d",buffer_size);    
         }
 
-        // assign a new output and input stream
+        /// assign a new output and input stream
         void begin(Print &to, AudioStream &from){
             this->from = &from;
             this->to = &to;
@@ -87,7 +90,7 @@ class StreamCopyT {
             return to;
         }
 
-        // copies the data from the source to the destination - the result is in bytes
+        /// copies the data from the source to the destination - the result is in bytes
         inline size_t copy(){
             TRACED();
             // if not initialized we do nothing
@@ -99,7 +102,6 @@ class StreamCopyT {
                  delay(500);
                  return 0;
             }
-
 
             size_t result = 0;
             size_t delayCount = 0;
@@ -124,7 +126,6 @@ class StreamCopyT {
 
                 // determine mime
                 notifyMime(buffer.data(), bytes_to_read);
-                is_first = false;
 
                 // write data
                 result = write(bytes_read, delayCount);
@@ -150,7 +151,7 @@ class StreamCopyT {
         }
 
 
-        /// available bytes in the data source
+        /// available bytes of the data source
         int available() {
             int result = 0;
             if (from!=nullptr) {
@@ -270,7 +271,7 @@ class StreamCopyT {
         int retryLimit = COPY_RETRY_LIMIT;
         int delay_on_no_data = COPY_DELAY_ON_NODATA;
 
-        // blocking write - until everything is processed
+        /// blocking write - until everything is processed
         size_t write(size_t len, size_t &delayCount ){
             if (!buffer || len==0) return 0;
             size_t total = 0;
@@ -299,7 +300,7 @@ class StreamCopyT {
 
         /// Update the mime type
         void notifyMime(void* data, size_t len){
-            if (len>4) {
+            if (is_first && len>4) {
                 const uint8_t *start = (const uint8_t *) data;
                 actual_mime = "audio/basic";
                 if (start[0]==0xFF && start[1]==0xF1){
@@ -313,6 +314,7 @@ class StreamCopyT {
                     notifyMimeCallback(actual_mime);
                 }
             }
+            is_first = false;
         }
 
 };
@@ -373,6 +375,7 @@ class StreamCopy : public StreamCopyT<uint8_t> {
             return StreamCopyT<uint8_t>::copy();
         }
         
+        /// available bytes of the data source
         int available() {
             return from == nullptr ? 0 : from->available();
         }
