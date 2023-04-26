@@ -12,8 +12,7 @@
 #include "AudioCodecs/CodecG722.h"
 #include "AudioLibs/AudioKit.h"
 
-uint16_t sample_rate = 24000;
-uint8_t channels = 1;  // The stream will have 2 channels
+AudioInfo info(24000, 1, 16);
 SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound( sineWave); // Stream generated from sine wave
 AudioKitStream out; 
@@ -29,23 +28,17 @@ void setup() {
   // start I2S
   Serial.println("starting I2S...");
   auto cfgi = out.defaultConfig(TX_MODE);
-  cfgi.sample_rate = sample_rate;
-  cfgi.channels = channels;
-  cfgi.bits_per_sample = 16;
+  cfgi.copyFrom(info);
   out.begin(cfgi);
 
   // Setup sine wave
-  auto cfgs = sineWave.defaultConfig();
-  cfgs.sample_rate = sample_rate;
-  cfgs.channels = channels;
-  cfgs.bits_per_sample = 16;
-  sineWave.begin(cfgs, N_B4);
+  sineWave.begin(info, N_B4);
 
   // start decoder
-  decoder.begin();
+  decoder.begin(info);
 
   // start encoder
-  encoder.begin(cfgs);
+  encoder.begin(info);
 
   Serial.println("Test started...");
 }

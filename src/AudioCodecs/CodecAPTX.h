@@ -36,26 +36,20 @@ class APTXDecoder : public AudioDecoder {
     info.bits_per_sample = isHd ? 24 : 16;
   }
 
-  virtual AudioInfo audioInfo() { return info; }
-
-  virtual void begin() {
+  void begin() override {
     TRACEI();
     ctx = aptx_init(is_hd);
     is_first_write = true;
-    if (notify != nullptr) {
-      notify->setAudioInfo(info);
+    if (p_notify != nullptr) {
+      p_notify->setAudioInfo(info);
     }
   }
 
-  virtual void end() {
+  void end() override {
     TRACEI();
     bool dropped = aptx_decode_sync_finish(ctx);
     aptx_finish(ctx);
     ctx = nullptr;
-  }
-
-  virtual void setNotifyAudioChange(AudioInfoDependent &bi) {
-    notify = &bi;
   }
 
   virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
@@ -74,11 +68,6 @@ class APTXDecoder : public AudioDecoder {
         return 0;
       }
     }
-
-    // output_buffer.resize(length*10);
-    // processed = aptx_decode(ctx,(const uint8_t *) input_buffer, length,
-    // output_buffer.data(),
-    //                         output_buffer.size(), &written);
 
     output_buffer.resize(length * 10);
     memset(output_buffer.data(), 0, output_buffer.size());
@@ -101,9 +90,7 @@ class APTXDecoder : public AudioDecoder {
   }
 
  protected:
-  AudioInfo info;
   struct aptx_context *ctx = nullptr;
-  AudioInfoDependent *notify = nullptr;
   Print *p_print = nullptr;
   bool is_first_write = true;
   Vector<uint8_t> output_buffer;
