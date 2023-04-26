@@ -135,7 +135,7 @@ class OpusAudioDecoder : public AudioDecoder {
   void setOutputStream(Print &out_stream) override { p_print = &out_stream; }
 
   void setNotifyAudioChange(AudioInfoDependent &bi) override {
-    this->bid = &bi;
+    this->p_notify = &bi;
   }
 
   AudioInfo audioInfo() override { return cfg; }
@@ -144,11 +144,12 @@ class OpusAudioDecoder : public AudioDecoder {
   OpusSettings &config() { return cfg; }
   OpusSettings &defaultConfig() { return cfg; }
 
-  void begin(OpusSettings info) {
+  void begin(OpusSettings settings) {
     TRACED();
-    cfg = info;
-    if (bid != nullptr) {
-      bid->setAudioInfo(cfg);
+    AudioDecoder::setAudioInfo(settings);
+    cfg = settings;
+    if (p_notify != nullptr) {
+      p_notify->setAudioInfo(cfg);
     }
     begin();
   }
@@ -178,6 +179,8 @@ class OpusAudioDecoder : public AudioDecoder {
   }
 
   void setAudioInfo(AudioInfo from) override {
+    AudioDecoder::setAudioInfo(from);
+    info = from;
     cfg.sample_rate = from.sample_rate;
     cfg.channels = from.channels;
     cfg.bits_per_sample = from.bits_per_sample;
@@ -205,7 +208,6 @@ class OpusAudioDecoder : public AudioDecoder {
 
  protected:
   Print *p_print = nullptr;
-  AudioInfoDependent *bid = nullptr;
   OpusSettings cfg;
   OpusDecoder *dec;
   bool active;
