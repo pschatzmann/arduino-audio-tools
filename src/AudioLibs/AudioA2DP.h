@@ -59,6 +59,7 @@ class A2DPConfig {
  * Requires: https://github.com/pschatzmann/ESP32-A2DP
  *
  * @ingroup io
+ * @ingroup communications
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -108,6 +109,7 @@ class A2DPStream : public AudioStream {
             return *a2dp_sink;
         }
 
+        /// Starts the processing
         void begin(RxTxMode mode, const char* name){
             A2DPConfig cfg;
             cfg.mode = mode;
@@ -115,7 +117,7 @@ class A2DPStream : public AudioStream {
             begin(cfg);
         }
 
-        /// Opens the processing
+        /// Starts the processing
         bool begin(A2DPConfig cfg){
             this->config = cfg;
             bool result = false;
@@ -187,7 +189,7 @@ class A2DPStream : public AudioStream {
         }
 
         /// Writes the data into a temporary send buffer - where it can be picked up by the callback
-        virtual size_t write(const uint8_t* data, size_t len) {   
+        size_t write(const uint8_t* data, size_t len) override {   
             LOGD("%s: %zu", LOG_METHOD, len);
             if (config.mode==TX_MODE){
                 // if buffer is full and we are still not connected, we wait
@@ -211,7 +213,7 @@ class A2DPStream : public AudioStream {
         }
 
         /// Reads the data from the temporary buffer
-        virtual size_t readBytes(uint8_t *data, size_t len) { 
+        size_t readBytes(uint8_t *data, size_t len) override { 
             if (!is_a2dp_active){
                 LOGW( "readBytes failed because !is_a2dp_active");
                 return 0;
@@ -222,13 +224,13 @@ class A2DPStream : public AudioStream {
             return result;
         }
        
-        virtual int available() {
+        int available() override {
             // only supported in tx mode
             if (config.mode!=RX_MODE) return 0;
             return a2dp_buffer.available();
         }
 
-        virtual int availableForWrite() {
+        int availableForWrite() override {
             // only supported in tx mode
             if (config.mode!=TX_MODE ) return 0;
             // return infor from buffer
@@ -242,9 +244,6 @@ class A2DPStream : public AudioStream {
             if (a2dp!=nullptr) a2dp->set_volume(volume * 128);
         }
 
-        virtual void setNotifyAudioChange (AudioInfoDependent &bi) {
-            audioBaseInfoDependent = &bi;
-        }
 
 
     protected:
@@ -252,7 +251,6 @@ class A2DPStream : public AudioStream {
         BluetoothA2DPSource *a2dp_source = nullptr;
         BluetoothA2DPSink *a2dp_sink = nullptr;
         BluetoothA2DPCommon *a2dp=nullptr;
-        AudioInfoDependent *audioBaseInfoDependent=nullptr;
         float volume = 1.0;
 
         // auto-detect device to send audio to (TX-Mode)
@@ -316,19 +314,19 @@ class A2DPStream : public AudioStream {
 
         /// notify subscriber with AudioInfo
         void notify_base_Info(int rate){
-            if (audioBaseInfoDependent!=nullptr){
+            if (p_notify!=nullptr){
                 AudioInfo info;
                 info.channels = 2;
                 info.bits_per_sample = 16;
                 info.sample_rate = rate;
-                audioBaseInfoDependent->setAudioInfo(info);
+                p_notify->setAudioInfo(info);
             }
         }
 
         /// callback to update audio info with used a2dp sample rate
         static void sample_rate_callback(uint16_t rate) {
             A2DPStream_self->info.sample_rate = rate;
-            if (A2DPStream_self->audioBaseInfoDependent!=nullptr){
+            if (A2DPStream_self->p_notify!=nullptr){
                 A2DPStream_self->notify_base_Info(rate);
             }
         }
