@@ -105,7 +105,7 @@ class OggContainerDecoder : public AudioDecoder {
 
   virtual size_t write(const void *in_ptr, size_t in_size) override {
     LOGD("write: %d", (int)in_size);
-    if (p_print == nullptr) return 0;
+    if (p_print == nullptr || in_ptr==nullptr) return 0;
 
     // fill buffer
     size_t size_consumed = buffer.writeArray((uint8_t *)in_ptr, in_size);
@@ -138,8 +138,8 @@ class OggContainerDecoder : public AudioDecoder {
     OggContainerDecoder *self = (OggContainerDecoder *)user_handle;
     int len = self->buffer.readArray((uint8_t *)buf, n);
     self->pos += len;
+    //self->p_print->write((uint8_t *)buf, n);
     return len;
-    //return self->p_print->write((uint8_t *)buf, n);
   }
   
   // Process full packet
@@ -236,13 +236,15 @@ class OggContainerEncoder : public AudioEncoder {
   virtual void setAudioInfo(AudioInfo from) override { cfg = from; }
 
   virtual void begin(AudioInfo from) {
-    setAudioInfo(cfg);
+    setAudioInfo(from);
     begin();
   }
 
   /// starts the processing using the actual AudioInfo
   virtual void begin() override {
     TRACED();
+    assert(cfg.channels!=0);
+    assert(cfg.sample_rate!=0);
     is_open = true;
     codec_buffer.begin();
     if (p_oggz == nullptr) {
@@ -277,14 +279,14 @@ class OggContainerEncoder : public AudioEncoder {
 
   /// Writes raw data to be encoded and packaged
   virtual size_t write(const void *in_ptr, size_t in_size) override {
-    if (!is_open || p_print == nullptr) return 0;
-    LOGD("write: %d", (int) in_size);
+    if (!is_open || p_print == nullptr || in_ptr==nullptr) return 0;
+    LOGD("OggContainerEncoder::write: %d", (int) in_size);
 
     if (p_codec!=nullptr){
       // encode the data
       size_t eff = p_encoded_audio_stream->write((uint8_t*)in_ptr, in_size);
       if (eff!=in_size){
-        LOGE("Write overflow");
+        LOGE("Write overflow req:%d eff:%d", in_size, eff);
       }
       // get the result from the buffer
       void *encoded_data = buffer.address();
@@ -338,7 +340,7 @@ class OggContainerEncoder : public AudioEncoder {
   virtual bool writePacket(ogg_packet &op, int flag = 0) {
     LOGD("writePacket: %d", (int) op.bytes);
     long result = oggz_write_feed(p_oggz, &op, serialno, flag, NULL);
-    if (result < 0) {
+    if (result < 0 && result!=OGGZ_ERR_OUT_OF_MEMORY) {
       LOGE("oggz_write_feed: %d", (int) result);
       return false;
     }
