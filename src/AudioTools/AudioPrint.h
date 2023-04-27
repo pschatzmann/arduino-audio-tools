@@ -76,6 +76,9 @@ class AudioPrint : public Print, public AudioInfoDependent, public AudioInfoSour
             } 
         }
 
+        virtual bool begin() {return true;}
+        virtual void end() {}
+
     protected:
         int tmpPos=0;
         AudioInfoDependent *p_notify=nullptr;
@@ -234,10 +237,11 @@ class HexDumpStream : public AudioPrint {
             pos = 0;
         }
 
-        void begin(){
+        bool begin(){
              TRACED();
             this->active = true;
             pos = 0;
+            return active;
         }
 
         /// Sets the CsvStream as inactive 
@@ -472,12 +476,13 @@ class OutputMixer : public Print {
       update_total_weights();
     }
 
-    void begin(int copy_buffer_size_bytes=DEFAULT_BUFFER_SIZE, MemoryType memoryType=PS_RAM) {
+    bool begin(int copy_buffer_size_bytes=DEFAULT_BUFFER_SIZE, MemoryType memoryType=PS_RAM) {
       is_active = true;
       size_bytes = copy_buffer_size_bytes;
       stream_idx = 0;
       memory_type = memoryType;
       allocate_buffers();
+      return true;
     }
 
     /// Remove all input streams

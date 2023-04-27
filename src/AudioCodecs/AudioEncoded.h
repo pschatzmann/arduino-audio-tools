@@ -17,15 +17,15 @@ class AudioDecoder : public AudioWriter, public AudioInfoSource {
 public:
   AudioDecoder() = default;
   virtual ~AudioDecoder() = default;
-  AudioDecoder(AudioDecoder const&) = delete;
-  AudioDecoder& operator=(AudioDecoder const&) = delete;
-  
-  virtual AudioInfo audioInfo() {return info; };
+  AudioDecoder(AudioDecoder const &) = delete;
+  AudioDecoder &operator=(AudioDecoder const &) = delete;
+
+  virtual AudioInfo audioInfo() { return info; };
 
   // for most decoder this is not needed
-  virtual void setAudioInfo(AudioInfo from) override { 
-    if (info!=from){
-      if (p_notify!=nullptr){
+  virtual void setAudioInfo(AudioInfo from) override {
+    if (info != from) {
+      if (p_notify != nullptr) {
         p_notify->setAudioInfo(from);
       }
     }
@@ -47,15 +47,17 @@ public:
     p_print = &out_stream;
   }
   // Th decoding result is PCM data
-  virtual bool isResultPCM() { return true;} 
+  virtual bool isResultPCM() { return true; }
 
   /// Registers an object that is notified if the audio format is changing
-  void setNotifyAudioChange(AudioInfoDependent &notify) override { p_notify = &notify;}
+  void setNotifyAudioChange(AudioInfoDependent &notify) override {
+    p_notify = &notify;
+  }
 
 protected:
-  Print *p_print=nullptr;
+  Print *p_print = nullptr;
   AudioInfo info;
-  AudioInfoDependent *p_notify=nullptr;
+  AudioInfoDependent *p_notify = nullptr;
 };
 
 /**
@@ -68,9 +70,10 @@ class AudioEncoder : public AudioWriter {
 public:
   AudioEncoder() = default;
   virtual ~AudioEncoder() = default;
-  AudioEncoder(AudioEncoder const&) = delete;
-  AudioEncoder& operator=(AudioEncoder const&) = delete;
+  AudioEncoder(AudioEncoder const &) = delete;
+  AudioEncoder &operator=(AudioEncoder const &) = delete;
   virtual const char *mime() = 0;
+  void setAudioInfo(AudioInfo from) override {};
 };
 
 /**
@@ -163,7 +166,7 @@ protected:
 
 /**
  * @brief A more natural Print class to process encoded data (aac, wav,
- * mp3...). Just define the output and the decoder and write the encoded 
+ * mp3...). Just define the output and the decoder and write the encoded
  * data.
  * @ingroup transform
  * @author Phil Schatzmann
@@ -192,7 +195,6 @@ public:
     writer_ptr = decoder_ptr;
     active = false;
   }
-
 
   /**
    * @brief Construct a new Encoded Stream object - used for decoding
@@ -254,7 +256,6 @@ public:
     active = false;
   }
 
-
   /**
    * @brief Construct a new Encoded Audio Stream object - the Output and
    * Encoder/Decoder needs to be defined with the corresponding setter methods.
@@ -286,27 +287,23 @@ public:
   }
 
   /// Defines the output
-  void setOutput(Print *outputStream){
-     ptr_out = outputStream;   
-  }
+  void setOutput(Print *outputStream) { ptr_out = outputStream; }
 
   /// The same as setOutput
-  void setStream(Print *outputStream){
-     setOutput(outputStream); 
-  }
+  void setStream(Print *outputStream) { setOutput(outputStream); }
 
-  void setEncoder(AudioEncoder *encoder){
+  void setEncoder(AudioEncoder *encoder) {
     encoder_ptr = encoder;
     writer_ptr = encoder;
-    if (ptr_out!=nullptr){
+    if (ptr_out != nullptr) {
       encoder_ptr->setOutputStream(*ptr_out);
     }
   }
 
-  void setDecoder(AudioDecoder *decoder){
+  void setDecoder(AudioDecoder *decoder) {
     decoder_ptr = decoder;
     writer_ptr = decoder;
-    if (ptr_out!=nullptr){
+    if (ptr_out != nullptr) {
       decoder_ptr->setOutputStream(*ptr_out);
     }
   }
@@ -394,24 +391,27 @@ protected:
  */
 class EncodedAudioStream : public EncodedAudioPrint {
 public:
-  EncodedAudioStream(AudioStream *ioStream, AudioDecoder *decoder) : EncodedAudioPrint(ioStream, decoder) { 
+  EncodedAudioStream(AudioStream *ioStream, AudioDecoder *decoder)
+      : EncodedAudioPrint(ioStream, decoder) {
     // the indicated stream can be used as input
     setStream(ioStream);
   }
 
-  EncodedAudioStream(Stream *ioStream, AudioDecoder *decoder) : EncodedAudioPrint((Print*)ioStream, decoder) { 
+  EncodedAudioStream(Stream *ioStream, AudioDecoder *decoder)
+      : EncodedAudioPrint((Print *)ioStream, decoder) {
     // the indicated stream can be used as input
     setStream(ioStream);
   }
 
-  EncodedAudioStream(AudioDecoder *decoder) : EncodedAudioPrint() { 
+  EncodedAudioStream(AudioDecoder *decoder) : EncodedAudioPrint() {
     decoder_ptr = decoder;
     writer_ptr = decoder_ptr;
     active = false;
   }
 
   /// Constructor for AudioPrint with automatic notification of audio changes
-  EncodedAudioStream(AudioPrint *outputStream, AudioDecoder *decoder) : EncodedAudioPrint(outputStream, decoder) {  }
+  EncodedAudioStream(AudioPrint *outputStream, AudioDecoder *decoder)
+      : EncodedAudioPrint(outputStream, decoder) {}
 
   /**
    * @brief Construct a new Encoded Stream object - used for decoding
@@ -419,7 +419,8 @@ public:
    * @param outputStream
    * @param decoder
    */
-  EncodedAudioStream(Print &outputStream, AudioDecoder &decoder) : EncodedAudioPrint(outputStream, decoder) {  }
+  EncodedAudioStream(Print &outputStream, AudioDecoder &decoder)
+      : EncodedAudioPrint(outputStream, decoder) {}
 
   /**
    * @brief Construct a new Encoded Audio Stream object - used for decoding
@@ -427,7 +428,8 @@ public:
    * @param outputStream
    * @param decoder
    */
-  EncodedAudioStream(Print *outputStream, AudioDecoder *decoder) : EncodedAudioPrint(outputStream, decoder) {  }
+  EncodedAudioStream(Print *outputStream, AudioDecoder *decoder)
+      : EncodedAudioPrint(outputStream, decoder) {}
 
   /**
    * @brief Construct a new Encoded Audio Stream object - used for encoding
@@ -435,19 +437,22 @@ public:
    * @param outputStream
    * @param encoder
    */
-  EncodedAudioStream(Print &outputStream, AudioEncoder &encoder) : EncodedAudioPrint(outputStream, encoder) { }
+  EncodedAudioStream(Print &outputStream, AudioEncoder &encoder)
+      : EncodedAudioPrint(outputStream, encoder) {}
 
   /**
    * @brief Construct a new Encoded Audio Stream object - used for encoding
-  */
-  EncodedAudioStream(Stream &io, AudioEncoder &encoder) : EncodedAudioPrint(io, encoder) {
+   */
+  EncodedAudioStream(Stream &io, AudioEncoder &encoder)
+      : EncodedAudioPrint(io, encoder) {
     setStream(&io);
   }
 
   /**
    * @brief Construct a new Encoded Audio Stream object - used for encoding
-  */
-  EncodedAudioStream(AudioStream &io, AudioEncoder &encoder) : EncodedAudioPrint(io, encoder) {
+   */
+  EncodedAudioStream(AudioStream &io, AudioEncoder &encoder)
+      : EncodedAudioPrint(io, encoder) {
     setStream(&io);
   }
 
@@ -457,7 +462,8 @@ public:
    * @param outputStream
    * @param encoder
    */
-  EncodedAudioStream(Print *outputStream, AudioEncoder *encoder) : EncodedAudioPrint(outputStream, encoder) {}
+  EncodedAudioStream(Print *outputStream, AudioEncoder *encoder)
+      : EncodedAudioPrint(outputStream, encoder) {}
 
   /**
    * @brief Construct a new Encoded Audio Stream object - the Output and
@@ -466,48 +472,42 @@ public:
    */
   EncodedAudioStream() : EncodedAudioPrint() {}
 
-  /// Same as setStream() 
-  void setInput(Stream *ioStream){
-    setStream(ioStream);
-  }
+  /// Same as setStream()
+  void setInput(Stream *ioStream) { setStream(ioStream); }
 
   /// Defines the input/output stream for decoding
-  void setStream(Stream *ioStream){
+  void setStream(Stream *ioStream) {
     TRACED();
     EncodedAudioPrint::setStream(ioStream);
     p_stream = ioStream;
   }
 
-  void setEncoder(AudioEncoder *encoder){
+  void setEncoder(AudioEncoder *encoder) {
     EncodedAudioPrint::setEncoder(encoder);
     is_setup = false;
   }
 
-  void setDecoder(AudioDecoder *decoder){
+  void setDecoder(AudioDecoder *decoder) {
     EncodedAudioPrint::setDecoder(decoder);
     is_setup = false;
   }
 
-
   /// @brief Defines the buffer size
-  void resize(int size){
-    decoded_buffer.resize(size);
-  }
+  void resize(int size) { decoded_buffer.resize(size); }
 
   /// @brief setup default size for buffer
-  void resize(){
-    resize(1024*10);
-  }
+  void resize() { resize(1024 * 10); }
 
   int available() override {
-    if (p_stream==nullptr) return 0;
+    if (p_stream == nullptr)
+      return 0;
     decode(reqested_bytes);
     return decoded_buffer.available();
   }
 
   size_t readBytes(uint8_t *buffer, size_t length) override {
     LOGD("EncodedAudioStream::readBytes: %d", (int)length);
-    if (p_stream==nullptr) {
+    if (p_stream == nullptr) {
       TRACEE();
       return 0;
     }
@@ -516,7 +516,7 @@ public:
   }
 
 protected:
-  RingBuffer<uint8_t> decoded_buffer{0}; 
+  RingBuffer<uint8_t> decoded_buffer{0};
   QueueStream<uint8_t> queue_stream{decoded_buffer};
   Vector<uint8_t> copy_buffer{DEFAULT_BUFFER_SIZE};
   Stream *p_stream = nullptr;
@@ -524,29 +524,32 @@ protected:
   int reqested_bytes = DEFAULT_BUFFER_SIZE;
   bool is_setup = false;
   int max_read_count = 5;
- 
+
   // Fill the decoded_buffer so that we have data for readBytes call
-  void decode(int requestedBytes){
+  void decode(int requestedBytes) {
     TRACED();
     // setup buffer once
     setupOnce();
-    
+
     // fill decoded_buffer if we do not have enough data
-    if(p_stream->available()>0 && decoded_buffer.available()<reqested_bytes){
-      for (int j=0;j<max_read_count;j++){
-        int bytes_read = p_stream->readBytes(copy_buffer.data(), DEFAULT_BUFFER_SIZE);
+    if (p_stream->available() > 0 &&
+        decoded_buffer.available() < reqested_bytes) {
+      for (int j = 0; j < max_read_count; j++) {
+        int bytes_read =
+            p_stream->readBytes(copy_buffer.data(), DEFAULT_BUFFER_SIZE);
         LOGD("bytes_read: %d", bytes_read);
         int result = writer_ptr->write(copy_buffer.data(), bytes_read);
-        if (p_stream->available()==0 || decoded_buffer.available()>=reqested_bytes){
+        if (p_stream->available() == 0 ||
+            decoded_buffer.available() >= reqested_bytes) {
           break;
         }
       }
-    } 
+    }
     LOGD("available decoded data %d", decoded_buffer.available());
   }
 
-  void setupOnce(){
-    if (!is_setup){
+  void setupOnce() {
+    if (!is_setup) {
       is_setup = true;
       LOGI("Setup reading support");
       resize();
@@ -557,5 +560,125 @@ protected:
   }
 };
 
+/**
+ * @brief ContainerTarget: forwards requests to both the output and the
+ * encoder/decoder
+ *
+ */
+class ContainerTarget {
+public:
+  virtual bool begin();
+  virtual void end();
+  virtual void setAudioInfo(AudioInfo info);
+  virtual size_t write(uint8_t *data, size_t size);
+};
+
+class ContainerTargetPrint : public ContainerTarget {
+public:
+  ContainerTargetPrint(Print &print, AudioWriter *writer) {
+    p_print = &print;
+    p_writer = writer;
+  }
+  virtual bool begin() {
+    if (p_writer) {
+      p_writer->begin();
+      p_writer->setOutputStream(*p_print);
+    }
+    return true;
+  }
+  virtual void end() {
+    if (p_writer)
+      p_writer->end();
+  }
+  virtual void setAudioInfo(AudioInfo info) {
+    if (p_writer)
+      p_writer->setAudioInfo(info);
+  }
+  virtual size_t write(uint8_t *data, size_t size) {
+    return p_writer ? p_writer->write(data, size) : p_print->write(data, size);
+  }
+
+protected:
+  Print *p_print = nullptr;
+  AudioWriter *p_writer = nullptr;
+};
+
+class ContainerTargetAudioPrint : public ContainerTarget {
+public:
+  ContainerTargetAudioPrint(AudioPrint &print, AudioWriter *writer) {
+    p_print = &print;
+    p_writer = writer;
+  }
+  virtual bool begin() {
+    if (p_writer) {
+      p_writer->begin();
+      p_writer->setOutputStream(*p_print);
+    }
+    return p_print->begin();
+  }
+  virtual void end() {
+    if (p_writer)
+      p_writer->end();
+    p_print->end();
+  }
+  virtual void setAudioInfo(AudioInfo info) {
+    if (p_writer)
+      p_writer->setAudioInfo(info);
+
+    p_print->setAudioInfo(info);
+  }
+  virtual size_t write(uint8_t *data, size_t size) {
+    return p_writer ? p_writer->write(data, size) : p_print->write(data, size);
+  }
+
+protected:
+  AudioPrint *p_print;
+  AudioWriter *p_writer = nullptr;
+};
+
+class ContainerTargetAudioStream : public ContainerTarget {
+public:
+  ContainerTargetAudioStream(AudioStream &print, AudioWriter *writer) {
+    p_print = &print;
+    p_writer = writer;
+  }
+  virtual bool begin() {
+    if (p_writer) {
+      p_writer->begin();
+      p_writer->setOutputStream(*p_print);
+    }
+    return p_print->begin();
+  }
+  virtual void end() { p_print->end(); }
+  virtual void setAudioInfo(AudioInfo info) {
+    if (p_writer)
+      p_writer->setAudioInfo(info);
+    p_print->setAudioInfo(info);
+  }
+  virtual size_t write(uint8_t *data, size_t size) {
+    return p_writer ? p_writer->write(data, size) : p_print->write(data, size);
+  }
+
+protected:
+  AudioStream *p_print;
+  AudioWriter *p_writer = nullptr;
+};
+
+class ContainerTargetAudioWriter : public ContainerTarget {
+public:
+  ContainerTargetAudioWriter(AudioWriter *print) { p_print = print; }
+  virtual bool begin() {
+    p_print->begin();
+    return true;
+  }
+  virtual void end() { p_print->end(); }
+  virtual void setAudioInfo(AudioInfo info) { p_print->setAudioInfo(info); }
+  virtual size_t write(uint8_t *data, size_t size) {
+    return p_print->write(data, size);
+  }
+
+protected:
+  AudioWriter *p_print;
+};
 
 } // namespace audio_tools
