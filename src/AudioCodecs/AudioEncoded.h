@@ -14,7 +14,7 @@ namespace audio_tools {
  * @copyright GPLv3
  */
 class AudioDecoder : public AudioWriter, public AudioInfoSource {
-public:
+ public:
   AudioDecoder() = default;
   virtual ~AudioDecoder() = default;
   AudioDecoder(AudioDecoder const &) = delete;
@@ -24,6 +24,7 @@ public:
 
   // for most decoder this is not needed
   virtual void setAudioInfo(AudioInfo from) override {
+    TRACED();
     if (info != from) {
       if (p_notify != nullptr) {
         p_notify->setAudioInfo(from);
@@ -54,7 +55,7 @@ public:
     p_notify = &notify;
   }
 
-protected:
+ protected:
   Print *p_print = nullptr;
   AudioInfo info;
   AudioInfoDependent *p_notify = nullptr;
@@ -67,13 +68,13 @@ protected:
  * @copyright GPLv3
  */
 class AudioEncoder : public AudioWriter {
-public:
+ public:
   AudioEncoder() = default;
   virtual ~AudioEncoder() = default;
   AudioEncoder(AudioEncoder const &) = delete;
   AudioEncoder &operator=(AudioEncoder const &) = delete;
   virtual const char *mime() = 0;
-  void setAudioInfo(AudioInfo from) override {};
+  void setAudioInfo(AudioInfo from) override{};
 };
 
 /**
@@ -85,7 +86,7 @@ public:
  * @copyright GPLv3
  */
 class CodecNOP : public AudioDecoder, public AudioEncoder {
-public:
+ public:
   static CodecNOP *instance() {
     static CodecNOP self;
     return &self;
@@ -121,7 +122,7 @@ public:
  * @copyright GPLv3
  */
 class StreamingDecoder {
-public:
+ public:
   /// Starts the processing
   virtual void begin() = 0;
 
@@ -160,7 +161,7 @@ public:
   /// Process a single read operation - to be called in the loop
   virtual bool copy() = 0;
 
-protected:
+ protected:
   virtual size_t readBytes(uint8_t *buffer, size_t len) = 0;
 };
 
@@ -173,7 +174,7 @@ protected:
  * @copyright GPLv3
  */
 class EncodedAudioPrint : public AudioStream {
-public:
+ public:
   /// Constructor for AudioStream with automatic notification of audio changes
   EncodedAudioPrint(AudioStream *outputStream, AudioDecoder *decoder) {
     TRACED();
@@ -374,9 +375,9 @@ public:
   /// Provides the initialized encoder
   AudioEncoder &encoder() { return *encoder_ptr; }
 
-protected:
-  AudioDecoder *decoder_ptr = CodecNOP::instance(); // decoder
-  AudioEncoder *encoder_ptr = CodecNOP::instance(); // decoder
+ protected:
+  AudioDecoder *decoder_ptr = CodecNOP::instance();  // decoder
+  AudioEncoder *encoder_ptr = CodecNOP::instance();  // decoder
   AudioWriter *writer_ptr = nullptr;
   Print *ptr_out = nullptr;
   bool active;
@@ -390,7 +391,7 @@ protected:
  * @copyright GPLv3
  */
 class EncodedAudioStream : public EncodedAudioPrint {
-public:
+ public:
   EncodedAudioStream(AudioStream *ioStream, AudioDecoder *decoder)
       : EncodedAudioPrint(ioStream, decoder) {
     // the indicated stream can be used as input
@@ -499,8 +500,7 @@ public:
   void resize() { resize(1024 * 10); }
 
   int available() override {
-    if (p_stream == nullptr)
-      return 0;
+    if (p_stream == nullptr) return 0;
     decode(reqested_bytes);
     return decoded_buffer.available();
   }
@@ -515,7 +515,7 @@ public:
     return decoded_buffer.readArray(buffer, length);
   }
 
-protected:
+ protected:
   RingBuffer<uint8_t> decoded_buffer{0};
   QueueStream<uint8_t> queue_stream{decoded_buffer};
   Vector<uint8_t> copy_buffer{DEFAULT_BUFFER_SIZE};
@@ -566,7 +566,7 @@ protected:
  *
  */
 class ContainerTarget {
-public:
+ public:
   virtual bool begin();
   virtual void end();
   virtual void setAudioInfo(AudioInfo info);
@@ -574,7 +574,7 @@ public:
 };
 
 class ContainerTargetPrint : public ContainerTarget {
-public:
+ public:
   ContainerTargetPrint(Print &print, AudioWriter *writer) {
     p_print = &print;
     p_writer = writer;
@@ -587,24 +587,23 @@ public:
     return true;
   }
   virtual void end() {
-    if (p_writer)
-      p_writer->end();
+    if (p_writer) p_writer->end();
   }
   virtual void setAudioInfo(AudioInfo info) {
-    if (p_writer)
-      p_writer->setAudioInfo(info);
+    if (p_writer) p_writer->setAudioInfo(info);
   }
   virtual size_t write(uint8_t *data, size_t size) {
+    TRACED();
     return p_writer ? p_writer->write(data, size) : p_print->write(data, size);
   }
 
-protected:
+ protected:
   Print *p_print = nullptr;
   AudioWriter *p_writer = nullptr;
 };
 
 class ContainerTargetAudioPrint : public ContainerTarget {
-public:
+ public:
   ContainerTargetAudioPrint(AudioPrint &print, AudioWriter *writer) {
     p_print = &print;
     p_writer = writer;
@@ -617,27 +616,28 @@ public:
     return p_print->begin();
   }
   virtual void end() {
-    if (p_writer)
-      p_writer->end();
+    if (p_writer) p_writer->end();
     p_print->end();
   }
   virtual void setAudioInfo(AudioInfo info) {
-    if (p_writer)
-      p_writer->setAudioInfo(info);
+    if (p_writer) p_writer->setAudioInfo(info);
 
-    p_print->setAudioInfo(info);
+    if (p_print->audioInfo() != info) {
+      p_print->setAudioInfo(info);
+    }
   }
   virtual size_t write(uint8_t *data, size_t size) {
+    TRACED();
     return p_writer ? p_writer->write(data, size) : p_print->write(data, size);
   }
 
-protected:
+ protected:
   AudioPrint *p_print;
   AudioWriter *p_writer = nullptr;
 };
 
 class ContainerTargetAudioStream : public ContainerTarget {
-public:
+ public:
   ContainerTargetAudioStream(AudioStream &print, AudioWriter *writer) {
     p_print = &print;
     p_writer = writer;
@@ -651,34 +651,39 @@ public:
   }
   virtual void end() { p_print->end(); }
   virtual void setAudioInfo(AudioInfo info) {
-    if (p_writer)
-      p_writer->setAudioInfo(info);
-    p_print->setAudioInfo(info);
+    if (p_writer) p_writer->setAudioInfo(info);
+    if (p_print->audioInfo() != info) {
+      p_print->setAudioInfo(info);
+    }
   }
   virtual size_t write(uint8_t *data, size_t size) {
+    TRACED();
     return p_writer ? p_writer->write(data, size) : p_print->write(data, size);
   }
 
-protected:
+ protected:
   AudioStream *p_print;
   AudioWriter *p_writer = nullptr;
 };
 
 class ContainerTargetAudioWriter : public ContainerTarget {
-public:
-  ContainerTargetAudioWriter(AudioWriter *print) { p_print = print; }
+ public:
+  ContainerTargetAudioWriter(AudioWriter *writer) {
+      p_writer = writer;
+  }
   virtual bool begin() {
-    p_print->begin();
+    p_writer->begin();
     return true;
   }
-  virtual void end() { p_print->end(); }
-  virtual void setAudioInfo(AudioInfo info) { p_print->setAudioInfo(info); }
+  virtual void end() { p_writer->end(); }
+  virtual void setAudioInfo(AudioInfo info) { p_writer->setAudioInfo(info); }
   virtual size_t write(uint8_t *data, size_t size) {
-    return p_print->write(data, size);
+    TRACED();
+    return p_writer->write(data, size);
   }
 
-protected:
-  AudioWriter *p_print;
+ protected:
+  AudioWriter *p_writer;
 };
 
-} // namespace audio_tools
+}  // namespace audio_tools

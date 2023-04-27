@@ -14,9 +14,9 @@
  *
  */
 #pragma once
-#include "AudioCodecs/AudioEncoded.h"
 #include <Print.h>
 #include <string.h>
+#include "AudioCodecs/AudioEncoded.h"
 
 namespace audio_tools {
 
@@ -65,29 +65,26 @@ struct ProcessedResult {
  * @ingroup codecs
  */
 class BinaryContainerEncoder : public AudioEncoder {
-public:
+ public:
   BinaryContainerEncoder() = default;
   BinaryContainerEncoder(AudioEncoder &encoder) { p_codec = &encoder; }
+  BinaryContainerEncoder(AudioEncoder *encoder) { p_codec = encoder; }
   ~BinaryContainerEncoder() {
-    if (p_target != nullptr)
-      delete p_target;
+    if (p_target != nullptr) delete p_target;
   }
 
   void setOutputStream(AudioStream &outStream) {
-    if (p_target != nullptr)
-      delete p_target;
+    if (p_target != nullptr) delete p_target;
     p_target = new ContainerTargetAudioStream(outStream, p_codec);
   }
 
   void setOutputStream(Print &outStream) {
-    if (p_target != nullptr)
-      delete p_target;
+    if (p_target != nullptr) delete p_target;
     p_target = new ContainerTargetPrint(outStream, p_codec);
   }
 
   void setOutputStream(AudioPrint &outStream) {
-    if (p_target != nullptr)
-      delete p_target;
+    if (p_target != nullptr) delete p_target;
     p_target = new ContainerTargetAudioPrint(outStream, p_codec);
   }
 
@@ -103,9 +100,15 @@ public:
   }
 
   void setAudioInfo(AudioInfo info) override {
-    AudioEncoder::setAudioInfo(info);
-    p_target->setAudioInfo(info);
-    cfg.info = info;
+    TRACED();
+    if (info!=audioInfo()){
+      p_target->setAudioInfo(info);
+      cfg.info = info;
+    }
+  }
+
+  AudioInfo audioInfo() {
+    return cfg.info;
   }
 
   /// Adds meta data segment
@@ -118,16 +121,12 @@ public:
 
   /// Add data segment. On first write we also add a AudioInfo header
   size_t write(const void *data, size_t len) {
+    LOGD("BinaryContainerEncoder::write: %d", (int)len);
     if (is_beginning) {
       writeHeader();
       is_beginning = false;
     }
-    // output of data header
-    dh.common.len = len;
-    output((uint8_t *)&dh, sizeof(dh));
-
-    // output of data
-    output((uint8_t *)data, len);
+    writeAudio((uint8_t *)data, len);
     return len;
   }
 
@@ -136,7 +135,7 @@ public:
   operator bool() { return p_target != nullptr; }
   virtual const char *mime() { return "audio/binary"; };
 
-protected:
+ protected:
   uint64_t packet_count = 0;
   bool is_beginning = true;
   int repeat_header;
@@ -146,11 +145,24 @@ protected:
   ContainerTarget *p_target = nullptr;
   AudioEncoder *p_codec = nullptr;
 
-  void writeHeader() { output((uint8_t *)&cfg, sizeof(cfg)); }
+  void writeAudio(const uint8_t *data, size_t len) {
+    TRACED();
+    // output of audio data header
+    dh.common.len = len;
+    output((uint8_t *)&dh, sizeof(dh));
 
-  size_t output(uint8_t *data, size_t len) {
-    if (p_target)
-      p_target->write((uint8_t *)data, len);
+    // output of data
+    output(data, len);
+  }
+
+  void writeHeader() {
+    TRACED();
+    output((uint8_t *)&cfg, sizeof(cfg));
+  }
+
+  size_t output(const uint8_t *data, size_t len) {
+    TRACED();
+    if (p_target) p_target->write((uint8_t *)data, len);
     return len;
   }
 };
@@ -160,29 +172,26 @@ protected:
  * @ingroup codecs
  */
 class BinaryContainerDecoder : public AudioDecoder {
-public:
+ public:
   BinaryContainerDecoder() = default;
   BinaryContainerDecoder(AudioDecoder &decoder) { p_codec = &decoder; }
+  BinaryContainerDecoder(AudioDecoder *decoder) { p_codec = decoder; }
   ~BinaryContainerDecoder() {
-    if (p_target != nullptr)
-      delete p_target;
+    if (p_target != nullptr) delete p_target;
   }
 
   void setOutputStream(AudioStream &outStream) {
-    if (p_target != nullptr)
-      delete p_target;
+    if (p_target != nullptr) delete p_target;
     p_target = new ContainerTargetAudioStream(outStream, p_codec);
   }
 
   void setOutputStream(Print &outStream) {
-    if (p_target != nullptr)
-      delete p_target;
+    if (p_target != nullptr) delete p_target;
     p_target = new ContainerTargetPrint(outStream, p_codec);
   }
 
   void setOutputStream(AudioPrint &outStream) {
-    if (p_target != nullptr)
-      delete p_target;
+    if (p_target != nullptr) delete p_target;
     p_target = new ContainerTargetAudioPrint(outStream, p_codec);
   }
 
@@ -195,19 +204,16 @@ public:
   void begin() {
     // if no target is defined we use the codec as target
     if (p_target == nullptr && p_codec != nullptr) {
-      if (p_target != nullptr)
-        delete p_target;
+      if (p_target != nullptr) delete p_target;
       p_target = new ContainerTargetAudioWriter(p_codec);
     }
 
     is_first = true;
-    if (p_target != nullptr)
-      p_target->begin();
+    if (p_target != nullptr) p_target->begin();
   }
 
   void end() {
-    if (p_target != nullptr)
-      p_target->end();
+    if (p_target != nullptr) p_target->end();
   }
 
   size_t write(const void *data, size_t len) {
@@ -247,7 +253,7 @@ public:
 
   operator bool() { return p_target != nullptr; }
 
-protected:
+ protected:
   bool is_first = true;
   ProcessedResult result;
   AudioInfo info;
@@ -260,6 +266,7 @@ protected:
 
   // loads the data into the buffer and writes it if complete
   ProcessedResult processData(uint8_t *data8, size_t len) {
+    TRACED();
     ProcessedResult result = loadData(data8, len);
     writeData(result);
     return result;
@@ -267,10 +274,13 @@ protected:
 
   // loads the data
   ProcessedResult loadData(uint8_t *data8, size_t len) {
+    TRACED();
     ProcessedResult result;
     if (data8[0] == '\n') {
       memcpy(&header, data8, header_size);
       result.total_len = header_size + header.len;
+      LOGD("header.len: %d, result.total_len: %d, len: %d", (int)header.len,
+           (int)result.total_len, (int)len);
       if (result.total_len <= len) {
         result.processed = result.total_len;
         result.open = 0;
@@ -280,10 +290,12 @@ protected:
       }
       result.type = checkType(header.type);
       if (result.type != Undefined) {
+        LOGD("header.len: %d", header.len);
         if (frame.size() < header.len) {
           frame.resize(header.len);
         }
-        frame.writeArray(data8 + header_size, result.processed - header_size);
+        if (result.processed - header_size > 0)
+          frame.writeArray(data8 + header_size, result.processed - header_size);
       }
     } else {
       LOGW("data ignored");
@@ -297,39 +309,38 @@ protected:
   bool writeData(ProcessedResult result) {
     bool rc = false;
     if (result.open == 0 && frame.available() > 0) {
-
+      TRACED();
       switch (result.type) {
+        case Header: {
+          LOGD("Header");
+          // We expect that the header is never split because it is at the start
+          SimpleContainerConfig config;
+          assert(result.open == 0);
+          memmove(&config, frame.data(), sizeof(config));
+          info = config.info;
+          if (p_notify) {
+            p_notify->setAudioInfo(info);
+          }
+          info.logInfo();
+          frame.clear();
+          rc = true;
+        } break;
 
-      case Header: {
-        LOGD("Header");
-        // We expect that the header is never split because it is at the start
-        SimpleContainerConfig config;
-        assert(result.open == 0);
-        memmove(&config, frame.data(), sizeof(config));
-        info = config.info;
-        if (p_notify) {
-          p_notify->setAudioInfo(info);
-        }
-        info.logInfo();
-        frame.clear();
-        rc = true;
-      } break;
+        case Audio: {
+          LOGD("Audio");
+          output(frame.data(), frame.available());
+          frame.clear();
+          rc = true;
+        } break;
 
-      case Audio: {
-        LOGD("Audio");
-        output(frame.data(), frame.available());
-        frame.clear();
-        rc = true;
-      } break;
-
-      case Meta: {
-        LOGD("Meta");
-        if (meta_callback) {
-          meta_callback(frame.data(), frame.available());
-        }
-        frame.clear();
-        rc = true;
-      } break;
+        case Meta: {
+          LOGD("Meta");
+          if (meta_callback) {
+            meta_callback(frame.data(), frame.available());
+          }
+          frame.clear();
+          rc = true;
+        } break;
       }
     }
     return rc;
@@ -337,6 +348,7 @@ protected:
 
   // processes the reaminder of a split segment
   ProcessedResult processOpen(ProcessedResult in, uint8_t *data8, size_t len) {
+    TRACED();
     ProcessedResult result = loadOpen(in, data8, len);
     writeData(result);
     return result;
@@ -344,6 +356,7 @@ protected:
 
   // if a segment is split we process the remaining missing part
   ProcessedResult loadOpen(ProcessedResult in, uint8_t *data8, size_t len) {
+    TRACED();
     ProcessedResult result = in;
     int to_process;
     if (in.open <= len) {
@@ -353,9 +366,11 @@ protected:
       result.open = in.open - len;
       result.processed = len;
     }
-
+    LOGD("in.type: %d, len: %d", in.type, result.processed);
     if (in.type != Undefined) {
       frame.writeArray(data8, result.processed);
+    } else {
+      LOGW("Unsupported tye");
     }
     return result;
   }
@@ -364,15 +379,15 @@ protected:
   ContainerType checkType(ContainerType type) {
     ContainerType result = Undefined;
     switch (header.type) {
-    case Header:
-      result = Header;
-      break;
-    case Audio:
-      result = Audio;
-      break;
-    case Meta:
-      result = Meta;
-      break;
+      case Header:
+        result = Header;
+        break;
+      case Audio:
+        result = Audio;
+        break;
+      case Meta:
+        result = Meta;
+        break;
     }
     return result;
   }
@@ -380,10 +395,10 @@ protected:
   // writes the data to the decoder which forwards it to the output; if there is
   // no coded we write to the output instead
   size_t output(uint8_t *data, size_t len) {
-    if (p_codec != nullptr)
-      p_codec->write((uint8_t *)data, len);
+    LOGD("BinaryContainerDecoder::output: %d",(int)len);
+    if (p_target != nullptr) p_target->write((uint8_t *)data, len);
     return len;
   }
 };
 
-} // namespace audio_tools
+}  // namespace audio_tools
