@@ -257,6 +257,24 @@ class EncodedAudioPrint : public AudioStream {
     active = false;
   }
 
+  EncodedAudioPrint(AudioPrint *outputStream, AudioEncoder *encoder) {
+    TRACED();
+    ptr_out = outputStream;
+    encoder_ptr = encoder;
+    encoder_ptr->setOutputStream(*outputStream);
+    writer_ptr = encoder_ptr;
+    active = false;
+  }
+
+  EncodedAudioPrint(AudioStream *outputStream, AudioEncoder *encoder) {
+    TRACED();
+    ptr_out = outputStream;
+    encoder_ptr = encoder;
+    encoder_ptr->setOutputStream(*outputStream);
+    writer_ptr = encoder_ptr;
+    active = false;
+  }
+
   /**
    * @brief Construct a new Encoded Audio Stream object - the Output and
    * Encoder/Decoder needs to be defined with the corresponding setter methods.
@@ -282,9 +300,12 @@ class EncodedAudioPrint : public AudioStream {
 
   virtual void setAudioInfo(AudioInfo info) override {
     TRACED();
-    AudioStream::setAudioInfo(info);
-    decoder_ptr->setAudioInfo(info);
-    encoder_ptr->setAudioInfo(info);
+    if (this->info != info) {
+      this->info = info;
+      AudioStream::setAudioInfo(info);
+      decoder_ptr->setAudioInfo(info);
+      encoder_ptr->setAudioInfo(info);
+    }
   }
 
   /// Defines the output
@@ -294,6 +315,9 @@ class EncodedAudioPrint : public AudioStream {
   void setStream(Print *outputStream) { setOutput(outputStream); }
 
   void setEncoder(AudioEncoder *encoder) {
+    if (encoder == nullptr) {
+      encoder = CodecNOP::instance();
+    }
     encoder_ptr = encoder;
     writer_ptr = encoder;
     if (ptr_out != nullptr) {
@@ -302,6 +326,9 @@ class EncodedAudioPrint : public AudioStream {
   }
 
   void setDecoder(AudioDecoder *decoder) {
+    if (decoder == nullptr) {
+      decoder = CodecNOP::instance();
+    }
     decoder_ptr = decoder;
     writer_ptr = decoder;
     if (ptr_out != nullptr) {
@@ -312,13 +339,16 @@ class EncodedAudioPrint : public AudioStream {
   /// Starts the processing - sets the status to active
   bool begin() override {
     TRACED();
-    const CodecNOP *nop = CodecNOP::instance();
-    if (decoder_ptr != nop || encoder_ptr != nop) {
-      decoder_ptr->begin();
-      encoder_ptr->begin();
-      active = true;
-    } else {
-      LOGW("no decoder or encoder defined");
+
+    if (!active) {
+      const CodecNOP *nop = CodecNOP::instance();
+      if (decoder_ptr != nop || encoder_ptr != nop) {
+        active = true;
+        decoder_ptr->begin();
+        encoder_ptr->begin();
+      } else {
+        LOGW("no decoder or encoder defined");
+      }
     }
     return active;
   }
@@ -376,6 +406,7 @@ class EncodedAudioPrint : public AudioStream {
   AudioEncoder &encoder() { return *encoder_ptr; }
 
  protected:
+  AudioInfo info;
   AudioDecoder *decoder_ptr = CodecNOP::instance();  // decoder
   AudioEncoder *encoder_ptr = CodecNOP::instance();  // decoder
   AudioWriter *writer_ptr = nullptr;
@@ -561,129 +592,95 @@ class EncodedAudioStream : public EncodedAudioPrint {
 };
 
 /**
- * @brief ContainerTarget: forwards requests to both the output and the
- * encoder/decoder
+ * @brief Facade class which lets an AudioWriter behave like a Print
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  *
+ */
+
+class AudioWriterToPrint : public AudioPrint {
+ public:
+  void setWriter(AudioWriter *writer) { p_writer = writer; }
+  size_t write(const uint8_t *in_ptr, size_t in_size) {
+    return p_writer->write(in_ptr, in_size);
+  };
+
+ protected:
+  AudioWriter *p_writer = nullptr;
+};
+
+/**
+ * @brief ContainerTarget: forwards requests to both the output and the
+ * encoder/decoder and sets up the output chain for Containers. We also
+ * manage the proper sequence of the output classes
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 class ContainerTarget {
  public:
-  virtual bool begin();
-  virtual void end();
-  virtual void setAudioInfo(AudioInfo info);
-  virtual size_t write(uint8_t *data, size_t size);
+  virtual bool begin() = 0;
+  virtual void end() = 0;
+  virtual void setAudioInfo(AudioInfo info) {
+    if (this->info != info) {
+      this->info = info;
+      if (p_writer1 != nullptr) p_writer1->setAudioInfo(info);
+      if (p_writer2 != nullptr) p_writer2->setAudioInfo(info);
+    }
+  }
+  virtual size_t write(uint8_t *data, size_t size) = 0;
+
+ protected:
+  AudioInfo info;
+  AudioWriter *p_writer1 = nullptr;
+  AudioWriter *p_writer2 = nullptr;
+  AudioWriterToPrint print2;
+  bool active = false;
 };
 
 class ContainerTargetPrint : public ContainerTarget {
  public:
-  ContainerTargetPrint(Print &print, AudioWriter *writer) {
+  void setupOutput(AudioWriter *writer1, AudioWriter *writer2, Print &print) {
     p_print = &print;
-    p_writer = writer;
+    p_writer1 = writer1;
+    p_writer2 = writer2;
+    print2.setWriter(p_writer2);
   }
+
+  void setupOutput(AudioWriter *writer1, Print &print) {
+    p_print = &print;
+    p_writer1 = writer1;
+  }
+
   virtual bool begin() {
-    if (p_writer) {
-      p_writer->begin();
-      p_writer->setOutputStream(*p_print);
+    if (!active) {
+      active = true;
+      if (p_writer2 != nullptr) {
+        p_writer1->setOutputStream(print2);
+        p_writer2->setOutputStream(*p_print);
+        p_writer1->begin();
+        p_writer2->begin();
+      } else {
+        p_writer1->setOutputStream(*p_print);
+        p_writer1->begin();
+      }
     }
     return true;
   }
   virtual void end() {
-    if (p_writer) p_writer->end();
-  }
-  virtual void setAudioInfo(AudioInfo info) {
-    if (p_writer) p_writer->setAudioInfo(info);
+    if (active) {
+      if (p_writer1 != nullptr) p_writer1->end();
+      if (p_writer2 != nullptr) p_writer2->end();
+    }
+    active = false;
   }
   virtual size_t write(uint8_t *data, size_t size) {
     TRACED();
-    return p_writer ? p_writer->write(data, size) : p_print->write(data, size);
+    return p_writer1->write(data, size);
   }
 
  protected:
   Print *p_print = nullptr;
-  AudioWriter *p_writer = nullptr;
-};
-
-class ContainerTargetAudioPrint : public ContainerTarget {
- public:
-  ContainerTargetAudioPrint(AudioPrint &print, AudioWriter *writer) {
-    p_print = &print;
-    p_writer = writer;
-  }
-  virtual bool begin() {
-    if (p_writer) {
-      p_writer->begin();
-      p_writer->setOutputStream(*p_print);
-    }
-    return p_print->begin();
-  }
-  virtual void end() {
-    if (p_writer) p_writer->end();
-    p_print->end();
-  }
-  virtual void setAudioInfo(AudioInfo info) {
-    if (p_writer) p_writer->setAudioInfo(info);
-
-    if (p_print->audioInfo() != info) {
-      p_print->setAudioInfo(info);
-    }
-  }
-  virtual size_t write(uint8_t *data, size_t size) {
-    TRACED();
-    return p_writer ? p_writer->write(data, size) : p_print->write(data, size);
-  }
-
- protected:
-  AudioPrint *p_print;
-  AudioWriter *p_writer = nullptr;
-};
-
-class ContainerTargetAudioStream : public ContainerTarget {
- public:
-  ContainerTargetAudioStream(AudioStream &print, AudioWriter *writer) {
-    p_print = &print;
-    p_writer = writer;
-  }
-  virtual bool begin() {
-    if (p_writer) {
-      p_writer->begin();
-      p_writer->setOutputStream(*p_print);
-    }
-    return p_print->begin();
-  }
-  virtual void end() { p_print->end(); }
-  virtual void setAudioInfo(AudioInfo info) {
-    if (p_writer) p_writer->setAudioInfo(info);
-    if (p_print->audioInfo() != info) {
-      p_print->setAudioInfo(info);
-    }
-  }
-  virtual size_t write(uint8_t *data, size_t size) {
-    TRACED();
-    return p_writer ? p_writer->write(data, size) : p_print->write(data, size);
-  }
-
- protected:
-  AudioStream *p_print;
-  AudioWriter *p_writer = nullptr;
-};
-
-class ContainerTargetAudioWriter : public ContainerTarget {
- public:
-  ContainerTargetAudioWriter(AudioWriter *writer) {
-      p_writer = writer;
-  }
-  virtual bool begin() {
-    p_writer->begin();
-    return true;
-  }
-  virtual void end() { p_writer->end(); }
-  virtual void setAudioInfo(AudioInfo info) { p_writer->setAudioInfo(info); }
-  virtual size_t write(uint8_t *data, size_t size) {
-    TRACED();
-    return p_writer->write(data, size);
-  }
-
- protected:
-  AudioWriter *p_writer;
+  AudioWriterToPrint print2;
 };
 
 }  // namespace audio_tools

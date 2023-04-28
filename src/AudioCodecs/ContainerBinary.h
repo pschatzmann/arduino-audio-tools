@@ -14,8 +14,9 @@
  *
  */
 #pragma once
-#include <Print.h>
+// #include <Print.h>
 #include <string.h>
+
 #include "AudioCodecs/AudioEncoded.h"
 
 namespace audio_tools {
@@ -69,47 +70,36 @@ class BinaryContainerEncoder : public AudioEncoder {
   BinaryContainerEncoder() = default;
   BinaryContainerEncoder(AudioEncoder &encoder) { p_codec = &encoder; }
   BinaryContainerEncoder(AudioEncoder *encoder) { p_codec = encoder; }
-  ~BinaryContainerEncoder() {
-    if (p_target != nullptr) delete p_target;
-  }
-
-  void setOutputStream(AudioStream &outStream) {
-    if (p_target != nullptr) delete p_target;
-    p_target = new ContainerTargetAudioStream(outStream, p_codec);
-  }
 
   void setOutputStream(Print &outStream) {
-    if (p_target != nullptr) delete p_target;
-    p_target = new ContainerTargetPrint(outStream, p_codec);
-  }
-
-  void setOutputStream(AudioPrint &outStream) {
-    if (p_target != nullptr) delete p_target;
-    p_target = new ContainerTargetAudioPrint(outStream, p_codec);
+    LOGD("BinaryContainerEncoder::setOutputStream: %d",is_initial_output);
+    if (is_initial_output) {
+      setupIntialOutputStream(outStream);
+    } else {
+      p_final_print = &outStream;
+    }
   }
 
   void begin(AudioInfo info) {
-    TRACED();
     setAudioInfo(info);
     begin();
   }
 
   void begin() override {
-    p_target->begin();
+    TRACED();
+    target.begin();
     is_beginning = true;
   }
 
   void setAudioInfo(AudioInfo info) override {
     TRACED();
-    if (info!=audioInfo()){
-      p_target->setAudioInfo(info);
+    if (info != audioInfo()) {
+      target.setAudioInfo(info);
       cfg.info = info;
     }
   }
 
-  AudioInfo audioInfo() {
-    return cfg.info;
-  }
+  AudioInfo audioInfo() { return cfg.info; }
 
   /// Adds meta data segment
   size_t writeMeta(const uint8_t *data, size_t len) {
@@ -130,9 +120,13 @@ class BinaryContainerEncoder : public AudioEncoder {
     return len;
   }
 
-  void end() { p_target->end(); }
+  void end() {
+    target.end();
+    is_initial_output = true;
+  }
 
-  operator bool() { return p_target != nullptr; }
+  operator bool() { return true; };
+
   virtual const char *mime() { return "audio/binary"; };
 
  protected:
@@ -142,8 +136,23 @@ class BinaryContainerEncoder : public AudioEncoder {
   SimpleContainerConfig cfg;
   SimpleContainerDataHeader dh;
   SimpleContainerMetaDataHeader meta;
-  ContainerTarget *p_target = nullptr;
   AudioEncoder *p_codec = nullptr;
+  AudioWriter *p_print1 = nullptr;
+  AudioWriter *p_print2 = nullptr;
+  ContainerTargetPrint target;
+  bool is_initial_output = true;
+  Print *p_final_print = nullptr;
+
+  void setupIntialOutputStream(Print &outStream) {
+    p_print1 = p_codec;
+    p_print2 = this;
+    if (p_codec)
+      target.setupOutput(p_print1, p_print2, outStream);
+    else
+      target.setupOutput(p_print2, outStream);
+
+    is_initial_output = false;
+  }
 
   void writeAudio(const uint8_t *data, size_t len) {
     TRACED();
@@ -162,7 +171,10 @@ class BinaryContainerEncoder : public AudioEncoder {
 
   size_t output(const uint8_t *data, size_t len) {
     TRACED();
-    if (p_target) p_target->write((uint8_t *)data, len);
+    if (p_final_print != nullptr)
+      p_final_print->write((uint8_t *)data, len);
+    else
+      LOGW("output not defined");
     return len;
   }
 };
@@ -176,23 +188,17 @@ class BinaryContainerDecoder : public AudioDecoder {
   BinaryContainerDecoder() = default;
   BinaryContainerDecoder(AudioDecoder &decoder) { p_codec = &decoder; }
   BinaryContainerDecoder(AudioDecoder *decoder) { p_codec = decoder; }
-  ~BinaryContainerDecoder() {
-    if (p_target != nullptr) delete p_target;
-  }
 
-  void setOutputStream(AudioStream &outStream) {
-    if (p_target != nullptr) delete p_target;
-    p_target = new ContainerTargetAudioStream(outStream, p_codec);
-  }
-
+  // Defines the output: this method is called 2 times: first to define
+  // output defined in the EnocdedAudioStream and then to define the
+  // real output in the output chain.
   void setOutputStream(Print &outStream) {
-    if (p_target != nullptr) delete p_target;
-    p_target = new ContainerTargetPrint(outStream, p_codec);
-  }
-
-  void setOutputStream(AudioPrint &outStream) {
-    if (p_target != nullptr) delete p_target;
-    p_target = new ContainerTargetAudioPrint(outStream, p_codec);
+    LOGD("BinaryContainerDecoder::setOutputStream: %d",is_initial_output);
+    if (is_initial_output) {
+      setupIntialOutputStream(outStream);
+    } else {
+      p_final_print = &outStream;
+    }
   }
 
   void setMetaCallback(void (*callback)(uint8_t *, int)) {
@@ -202,18 +208,13 @@ class BinaryContainerDecoder : public AudioDecoder {
   void setNotifyAudioChange(AudioInfoDependent &bi) {}
 
   void begin() {
-    // if no target is defined we use the codec as target
-    if (p_target == nullptr && p_codec != nullptr) {
-      if (p_target != nullptr) delete p_target;
-      p_target = new ContainerTargetAudioWriter(p_codec);
-    }
-
     is_first = true;
-    if (p_target != nullptr) p_target->begin();
+    target.begin();
   }
 
   void end() {
-    if (p_target != nullptr) p_target->end();
+    target.end();
+    is_initial_output = true;
   }
 
   size_t write(const void *data, size_t len) {
@@ -221,8 +222,8 @@ class BinaryContainerDecoder : public AudioDecoder {
     int open = len;
     int processed = 0;
 
-    // on first call we try to synchronize the delimiter; hopefully however the
-    // new line is on the first char.
+    // on first call we try to synchronize the delimiter; hopefully however
+    // the new line is on the first char.
     if (is_first) {
       is_first = false;
       // ignore the data before the first newline
@@ -251,7 +252,7 @@ class BinaryContainerDecoder : public AudioDecoder {
 
   AudioInfo audioInfo() { return info; }
 
-  operator bool() { return p_target != nullptr; }
+  operator bool() { return true; };
 
  protected:
   bool is_first = true;
@@ -259,10 +260,27 @@ class BinaryContainerDecoder : public AudioDecoder {
   AudioInfo info;
   CommonHeader header;
   const size_t header_size = sizeof(header);
-  ContainerTarget *p_target = nullptr;
   AudioDecoder *p_codec = nullptr;
   void (*meta_callback)(uint8_t *, int) = nullptr;
   SingleBuffer<uint8_t> frame{0};
+  AudioWriter *p_print1 = nullptr;
+  AudioWriter *p_print2 = nullptr;
+  Print *p_out = nullptr;
+  ContainerTargetPrint target;
+  bool is_initial_output = true;
+  Print *p_final_print = nullptr;
+
+  void setupIntialOutputStream(Print &outStream) {
+    p_out = &outStream;
+    p_print1 = this;
+    if (p_codec != nullptr) {
+      p_print2 = p_codec;
+      target.setupOutput(p_print1, p_print2, outStream);
+    } else {
+      target.setupOutput(p_print1, outStream);
+    }
+    is_initial_output = false;
+  }
 
   // loads the data into the buffer and writes it if complete
   ProcessedResult processData(uint8_t *data8, size_t len) {
@@ -313,7 +331,8 @@ class BinaryContainerDecoder : public AudioDecoder {
       switch (result.type) {
         case Header: {
           LOGD("Header");
-          // We expect that the header is never split because it is at the start
+          // We expect that the header is never split because it is at the
+          // start
           SimpleContainerConfig config;
           assert(result.open == 0);
           memmove(&config, frame.data(), sizeof(config));
@@ -392,11 +411,15 @@ class BinaryContainerDecoder : public AudioDecoder {
     return result;
   }
 
-  // writes the data to the decoder which forwards it to the output; if there is
-  // no coded we write to the output instead
+  // writes the data to the decoder which forwards it to the output; if there
+  // is no coded we write to the output instead
   size_t output(uint8_t *data, size_t len) {
-    LOGD("BinaryContainerDecoder::output: %d",(int)len);
-    if (p_target != nullptr) p_target->write((uint8_t *)data, len);
+    LOGD("BinaryContainerDecoder::output: %d", (int)len);
+    if (p_final_print != nullptr)
+      p_final_print->write((uint8_t *)data, len);
+    else
+      LOGW("output not defined");
+
     return len;
   }
 };

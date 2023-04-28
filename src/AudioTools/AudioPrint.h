@@ -87,7 +87,6 @@ class AudioPrint : public Print, public AudioInfoDependent, public AudioInfoSour
 };
 
 
-
 /**
  * @brief Stream Wrapper which can be used to print the values as readable ASCII to the screen to be analyzed in the Serial Plotter
  * The frames are separated by a new line. The channels in one frame are separated by a ,
@@ -112,9 +111,10 @@ class CsvStream : public AudioPrint {
         }
 
         /// Starts the processing with 2 channels
-        void begin(){
+        bool begin(){
              TRACED();
             this->active = true;
+            return true;
         }
 
         AudioInfo defaultConfig(RxTxMode mode){
@@ -162,7 +162,7 @@ class CsvStream : public AudioPrint {
         /// Writes the data - formatted as CSV -  to the output stream
         virtual size_t write(const uint8_t* data, size_t len) {   
             if (!active) return 0;
-            LOGD("CsvStream::write: %d", len);
+            LOGD("CsvStream::write: %d", (int)len);
             size_t lenChannels = len / (sizeof(T)*cfg.channels); 
             if (lenChannels>0){
                 writeFrames((T*)data, lenChannels);
@@ -178,7 +178,7 @@ class CsvStream : public AudioPrint {
                     out_ptr->print(", ");
                 }
             } else {
-                LOGE("Unsuppoted size: %d for channels %d and bits: %d", len, cfg.channels, cfg.bits_per_sample);
+                LOGE("Unsuppoted size: %d for channels %d and bits: %d", (int)len, cfg.channels, cfg.bits_per_sample);
             }
             return len;
         }
@@ -271,6 +271,12 @@ class HexDumpStream : public AudioPrint {
                 }
             }
             return len;
+        }
+
+        //
+        AudioInfo defaultConfig(RxTxMode mode=TX_MODE){
+            AudioInfo info;
+            return info;
         }
 
     protected:
