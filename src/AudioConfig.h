@@ -10,7 +10,7 @@
 #elif defined(IS_DESKTOP)
 #  include "Arduino.h"
 #elif defined(IS_DESKTOP_WITH_TIME_ONLY)
-#  include "AudioLibs/MillisDesktop.h"
+#  include "AudioLibs/Desktop/Millis.h"
 #  include "AudioLibs/Desktop/NoArduino.h"
 #else 
 #  include "AudioLibs/Desktop/NoArduino.h"
