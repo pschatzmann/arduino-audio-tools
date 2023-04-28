@@ -146,7 +146,7 @@ class BinaryContainerEncoder : public AudioEncoder {
   void setupIntialOutputStream(Print &outStream) {
     p_print1 = p_codec;
     p_print2 = this;
-    if (p_codec)
+    if (p_codec!=nullptr)
       target.setupOutput(p_print1, p_print2, outStream);
     else
       target.setupOutput(p_print2, outStream);
@@ -272,11 +272,12 @@ class BinaryContainerDecoder : public AudioDecoder {
 
   void setupIntialOutputStream(Print &outStream) {
     p_out = &outStream;
-    p_print1 = this;
     if (p_codec != nullptr) {
-      p_print2 = p_codec;
+      p_print1 = p_codec;
+      p_print2 = this;
       target.setupOutput(p_print1, p_print2, outStream);
     } else {
+      p_print1 = this;
       target.setupOutput(p_print1, outStream);
     }
     is_initial_output = false;
