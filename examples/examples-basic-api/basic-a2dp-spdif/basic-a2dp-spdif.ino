@@ -1,6 +1,6 @@
 /**
  * @file basic-a2dp-audiospdif.ino
- * @brief A2DP Sink with output to SPDIFStream
+ * @brief A2DP Sink with output to SPDIFOutput
  * 
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -11,7 +11,7 @@
 #include "AudioTools.h"
 
 BluetoothA2DPSink a2dp_sink;
-SPDIFStream spdif;
+SPDIFOutput spdif;
 
 // Write data to SPDIF in callback
 void read_data_stream(const uint8_t *data, uint32_t length) {

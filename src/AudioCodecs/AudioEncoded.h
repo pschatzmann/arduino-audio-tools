@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AudioConfig.h"
-#include "AudioTools/AudioPrint.h"
+#include "AudioTools/AudioOutput.h"
 #include "AudioTools/AudioStreams.h"
 #include "AudioTools/AudioTypes.h"
 
@@ -38,7 +38,7 @@ class AudioDecoder : public AudioWriter, public AudioInfoSource {
     setNotifyAudioChange(out_stream);
   }
 
-  virtual void setOutputStream(AudioPrint &out_stream) {
+  virtual void setOutputStream(AudioOutput &out_stream) {
     Print *p_print = &out_stream;
     setOutputStream(*p_print);
     setNotifyAudioChange(out_stream);
@@ -143,7 +143,7 @@ class StreamingDecoder {
   }
 
   /// Defines the output streams and register to be notified
-  virtual void setOutputStream(AudioPrint &out_stream) {
+  virtual void setOutputStream(AudioOutput &out_stream) {
     Print *p_print = &out_stream;
     setOutputStream(*p_print);
     setNotifyAudioChange(out_stream);
@@ -173,10 +173,10 @@ class StreamingDecoder {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class EncodedAudioPrint : public AudioStream {
+class EncodedAudioOutput : public AudioStream {
  public:
   /// Constructor for AudioStream with automatic notification of audio changes
-  EncodedAudioPrint(AudioStream *outputStream, AudioDecoder *decoder) {
+  EncodedAudioOutput(AudioStream *outputStream, AudioDecoder *decoder) {
     TRACED();
     ptr_out = outputStream;
     decoder_ptr = decoder;
@@ -186,8 +186,8 @@ class EncodedAudioPrint : public AudioStream {
     active = false;
   }
 
-  /// Constructor for AudioPrint with automatic notification of audio changes
-  EncodedAudioPrint(AudioPrint *outputStream, AudioDecoder *decoder) {
+  /// Constructor for AudioOutput with automatic notification of audio changes
+  EncodedAudioOutput(AudioOutput *outputStream, AudioDecoder *decoder) {
     TRACED();
     ptr_out = outputStream;
     decoder_ptr = decoder;
@@ -203,7 +203,7 @@ class EncodedAudioPrint : public AudioStream {
    * @param outputStream
    * @param decoder
    */
-  EncodedAudioPrint(Print &outputStream, AudioDecoder &decoder) {
+  EncodedAudioOutput(Print &outputStream, AudioDecoder &decoder) {
     TRACED();
     ptr_out = &outputStream;
     decoder_ptr = &decoder;
@@ -218,7 +218,7 @@ class EncodedAudioPrint : public AudioStream {
    * @param outputStream
    * @param decoder
    */
-  EncodedAudioPrint(Print *outputStream, AudioDecoder *decoder) {
+  EncodedAudioOutput(Print *outputStream, AudioDecoder *decoder) {
     TRACED();
     ptr_out = outputStream;
     decoder_ptr = decoder;
@@ -233,7 +233,7 @@ class EncodedAudioPrint : public AudioStream {
    * @param outputStream
    * @param encoder
    */
-  EncodedAudioPrint(Print &outputStream, AudioEncoder &encoder) {
+  EncodedAudioOutput(Print &outputStream, AudioEncoder &encoder) {
     TRACED();
     ptr_out = &outputStream;
     encoder_ptr = &encoder;
@@ -248,7 +248,7 @@ class EncodedAudioPrint : public AudioStream {
    * @param outputStream
    * @param encoder
    */
-  EncodedAudioPrint(Print *outputStream, AudioEncoder *encoder) {
+  EncodedAudioOutput(Print *outputStream, AudioEncoder *encoder) {
     TRACED();
     ptr_out = outputStream;
     encoder_ptr = encoder;
@@ -257,7 +257,7 @@ class EncodedAudioPrint : public AudioStream {
     active = false;
   }
 
-  EncodedAudioPrint(AudioPrint *outputStream, AudioEncoder *encoder) {
+  EncodedAudioOutput(AudioOutput *outputStream, AudioEncoder *encoder) {
     TRACED();
     ptr_out = outputStream;
     encoder_ptr = encoder;
@@ -266,7 +266,7 @@ class EncodedAudioPrint : public AudioStream {
     active = false;
   }
 
-  EncodedAudioPrint(AudioStream *outputStream, AudioEncoder *encoder) {
+  EncodedAudioOutput(AudioStream *outputStream, AudioEncoder *encoder) {
     TRACED();
     ptr_out = outputStream;
     encoder_ptr = encoder;
@@ -279,7 +279,7 @@ class EncodedAudioPrint : public AudioStream {
    * @brief Construct a new Encoded Audio Stream object - the Output and
    * Encoder/Decoder needs to be defined with the corresponding setter methods.
    */
-  EncodedAudioPrint() {
+  EncodedAudioOutput() {
     TRACED();
     active = false;
   }
@@ -379,7 +379,7 @@ class EncodedAudioPrint : public AudioStream {
 
   /// encodeor decode the data
   virtual size_t write(const uint8_t *data, size_t len) override {
-    LOGD("EncodedAudioPrint::write: %zu", len);
+    LOGD("EncodedAudioOutput::write: %zu", len);
     if (len == 0) {
       LOGI("write: %d", 0);
       return 0;
@@ -414,6 +414,9 @@ class EncodedAudioPrint : public AudioStream {
   bool active;
 };
 
+// legacy name
+using EncodedAudioPrint = EncodedAudioOutput;
+
 /**
  * @brief A more natural Stream class to process encoded data (aac, wav,
  * mp3...) which also supports the decoding by calling readBytes().
@@ -421,29 +424,29 @@ class EncodedAudioPrint : public AudioStream {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class EncodedAudioStream : public EncodedAudioPrint {
+class EncodedAudioStream : public EncodedAudioOutput {
  public:
   EncodedAudioStream(AudioStream *ioStream, AudioDecoder *decoder)
-      : EncodedAudioPrint(ioStream, decoder) {
+      : EncodedAudioOutput(ioStream, decoder) {
     // the indicated stream can be used as input
     setStream(ioStream);
   }
 
   EncodedAudioStream(Stream *ioStream, AudioDecoder *decoder)
-      : EncodedAudioPrint((Print *)ioStream, decoder) {
+      : EncodedAudioOutput((Print *)ioStream, decoder) {
     // the indicated stream can be used as input
     setStream(ioStream);
   }
 
-  EncodedAudioStream(AudioDecoder *decoder) : EncodedAudioPrint() {
+  EncodedAudioStream(AudioDecoder *decoder) : EncodedAudioOutput() {
     decoder_ptr = decoder;
     writer_ptr = decoder_ptr;
     active = false;
   }
 
-  /// Constructor for AudioPrint with automatic notification of audio changes
-  EncodedAudioStream(AudioPrint *outputStream, AudioDecoder *decoder)
-      : EncodedAudioPrint(outputStream, decoder) {}
+  /// Constructor for AudioOutput with automatic notification of audio changes
+  EncodedAudioStream(AudioOutput *outputStream, AudioDecoder *decoder)
+      : EncodedAudioOutput(outputStream, decoder) {}
 
   /**
    * @brief Construct a new Encoded Stream object - used for decoding
@@ -452,7 +455,7 @@ class EncodedAudioStream : public EncodedAudioPrint {
    * @param decoder
    */
   EncodedAudioStream(Print &outputStream, AudioDecoder &decoder)
-      : EncodedAudioPrint(outputStream, decoder) {}
+      : EncodedAudioOutput(outputStream, decoder) {}
 
   /**
    * @brief Construct a new Encoded Audio Stream object - used for decoding
@@ -461,7 +464,7 @@ class EncodedAudioStream : public EncodedAudioPrint {
    * @param decoder
    */
   EncodedAudioStream(Print *outputStream, AudioDecoder *decoder)
-      : EncodedAudioPrint(outputStream, decoder) {}
+      : EncodedAudioOutput(outputStream, decoder) {}
 
   /**
    * @brief Construct a new Encoded Audio Stream object - used for encoding
@@ -470,13 +473,13 @@ class EncodedAudioStream : public EncodedAudioPrint {
    * @param encoder
    */
   EncodedAudioStream(Print &outputStream, AudioEncoder &encoder)
-      : EncodedAudioPrint(outputStream, encoder) {}
+      : EncodedAudioOutput(outputStream, encoder) {}
 
   /**
    * @brief Construct a new Encoded Audio Stream object - used for encoding
    */
   EncodedAudioStream(Stream &io, AudioEncoder &encoder)
-      : EncodedAudioPrint(io, encoder) {
+      : EncodedAudioOutput(io, encoder) {
     setStream(&io);
   }
 
@@ -484,7 +487,7 @@ class EncodedAudioStream : public EncodedAudioPrint {
    * @brief Construct a new Encoded Audio Stream object - used for encoding
    */
   EncodedAudioStream(AudioStream &io, AudioEncoder &encoder)
-      : EncodedAudioPrint(io, encoder) {
+      : EncodedAudioOutput(io, encoder) {
     setStream(&io);
   }
 
@@ -495,14 +498,14 @@ class EncodedAudioStream : public EncodedAudioPrint {
    * @param encoder
    */
   EncodedAudioStream(Print *outputStream, AudioEncoder *encoder)
-      : EncodedAudioPrint(outputStream, encoder) {}
+      : EncodedAudioOutput(outputStream, encoder) {}
 
   /**
    * @brief Construct a new Encoded Audio Stream object - the Output and
    * Encoder/Decoder needs to be defined with the corresponding setter methods
    *
    */
-  EncodedAudioStream() : EncodedAudioPrint() {}
+  EncodedAudioStream() : EncodedAudioOutput() {}
 
   /// Same as setStream()
   void setInput(Stream *ioStream) { setStream(ioStream); }
@@ -510,17 +513,17 @@ class EncodedAudioStream : public EncodedAudioPrint {
   /// Defines the input/output stream for decoding
   void setStream(Stream *ioStream) {
     TRACED();
-    EncodedAudioPrint::setStream(ioStream);
+    EncodedAudioOutput::setStream(ioStream);
     p_stream = ioStream;
   }
 
   void setEncoder(AudioEncoder *encoder) {
-    EncodedAudioPrint::setEncoder(encoder);
+    EncodedAudioOutput::setEncoder(encoder);
     is_setup = false;
   }
 
   void setDecoder(AudioDecoder *decoder) {
-    EncodedAudioPrint::setDecoder(decoder);
+    EncodedAudioOutput::setDecoder(decoder);
     is_setup = false;
   }
 
@@ -598,7 +601,7 @@ class EncodedAudioStream : public EncodedAudioPrint {
  *
  */
 
-class AudioWriterToPrint : public AudioPrint {
+class AudioWriterToAudioOutput : public AudioOutput {
  public:
   void setWriter(AudioWriter *writer) { p_writer = writer; }
   size_t write(const uint8_t *in_ptr, size_t in_size) {
@@ -633,7 +636,7 @@ class ContainerTarget {
   AudioInfo info;
   AudioWriter *p_writer1 = nullptr;
   AudioWriter *p_writer2 = nullptr;
-  AudioWriterToPrint print2;
+  AudioWriterToAudioOutput print2;
   bool active = false;
 };
 
@@ -680,7 +683,7 @@ class ContainerTargetPrint : public ContainerTarget {
 
  protected:
   Print *p_print = nullptr;
-  AudioWriterToPrint print2;
+  AudioWriterToAudioOutput print2;
 };
 
 }  // namespace audio_tools

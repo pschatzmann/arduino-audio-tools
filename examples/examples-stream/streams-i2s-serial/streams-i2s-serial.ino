@@ -12,7 +12,7 @@
 
 int channels = 2;
 I2SStream i2sStream; // Access I2S as stream
-CsvStream<int32_t> csvStream(Serial, channels);
+CsvOutput<int32_t> csvStream(Serial, channels);
 StreamCopy copier(csvStream, i2sStream); // copy i2sStream to csvStream
 
 // Arduino Setup

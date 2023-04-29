@@ -62,7 +62,7 @@ public:
     cfg.update_callback = fftLEDOutput;
   }
 
-  LEDOutput(VolumePrint &vol) {
+  LEDOutput(VolumeOutput &vol) {
     selfLEDOutput = this;
     p_vol = &vol;
     cfg.update_callback = volumeLEDOutput;
@@ -223,7 +223,7 @@ protected:
   Vector<float> magnitudes{0};
   LEDOutputConfig cfg;
   AudioFFTBase *p_fft = nullptr;
-  VolumePrint *p_vol = nullptr;
+  VolumeOutput *p_vol = nullptr;
   uint64_t count = 0;
 
 

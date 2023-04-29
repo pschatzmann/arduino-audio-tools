@@ -6,7 +6,7 @@
 #include <TensorFlowLite.h>
 #include <cmath>
 #include <cstdint>
-#include "AudioTools/AudioPrint.h"
+#include "AudioTools/AudioOutput.h"
 #include "AudioTools/Buffers.h"
 #include "tensorflow/lite/c/common.h"
 #include "tensorflow/lite/experimental/microfrontend/lib/frontend.h"

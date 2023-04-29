@@ -15,10 +15,10 @@
 
 //                            -> EncodedAudioStream -> I2SStream
 // URLStream -> MultiOutput -|
-//                            -> MetaDataPrint
+//                            -> MetaDataOutput
 
 URLStream url("ssid","password");
-MetaDataPrint out1; // final output of metadata
+MetaDataOutput out1; // final output of metadata
 I2SStream i2s; // I2S output
 EncodedAudioStream out2dec(&i2s, new MP3DecoderHelix()); // Decoding stream
 MultiOutput out;

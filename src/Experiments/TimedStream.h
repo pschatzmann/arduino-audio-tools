@@ -22,7 +22,7 @@ public:
     end_time = endSeconds;
   }
 
-  TimedStream(AudioPrint &o, long startSeconds = 0, long endSeconds = -1) {
+  TimedStream(AudioOutput &o, long startSeconds = 0, long endSeconds = -1) {
     p_print = &o;
     p_info = &o;
     start_time = startSeconds;

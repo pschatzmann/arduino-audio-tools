@@ -552,7 +552,7 @@ struct AudioDataEnd : public AudioHeader {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioSyncWriter : public AudioPrint {
+class AudioSyncWriter : public AudioOutput {
  public:
   AudioSyncWriter(Stream &dest) { p_dest = &dest; }
 

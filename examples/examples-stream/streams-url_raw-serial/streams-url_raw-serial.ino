@@ -13,7 +13,7 @@
 
 URLStream music;  // Music Stream
 int channels = 2; // The stream has 2 channels 
-CsvStream<int16_t> printer(Serial, channels);  // ASCII stream 
+CsvOutput<int16_t> printer(Serial, channels);  // ASCII stream 
 StreamCopy copier(printer, music);    // copies music into printer
 
 // Arduino Setup

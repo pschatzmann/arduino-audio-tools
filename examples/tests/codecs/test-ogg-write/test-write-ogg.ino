@@ -6,7 +6,7 @@ SineWaveGenerator<int16_t> sineWave(
     32000);  // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound(
     sineWave);  // Stream generated from sine wave
-HexDumpStream out(Serial);
+HexDumpOutput out(Serial);
 OggContainerEncoder enc;
 EncodedAudioStream encoder(out, enc);  // encode and write
 StreamCopy copier(encoder, sound);

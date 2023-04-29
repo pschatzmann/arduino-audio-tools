@@ -12,7 +12,7 @@
 #include "AudioLibs/AudioKit.h"
 
 AudioKitStream kit; // Access I2S as stream
-CsvStream<int16_t> csvStream(Serial);
+CsvOutput<int16_t> csvStream(Serial);
 StreamCopy copier(csvStream, kit); // copy kit to csvStream
 
 // Arduino Setup

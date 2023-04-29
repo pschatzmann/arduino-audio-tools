@@ -14,7 +14,7 @@ AudioInfo from(32000,2,32);
 AudioInfo to(16000,1,16);
 SineWaveGenerator<int32_t> sineWave;                
 GeneratedSoundStream<int32_t> sound(sineWave); // Stream generated from sine wave
-I2SStream out;   // or any other e.g. AudioKitStream, CsvStream<int16_t> out(Serial); 
+I2SStream out;   // or any other e.g. AudioKitStream, CsvOutput<int16_t> out(Serial); 
 FormatConverterStream converter(sound);  // or use converter(out)
 StreamCopy copier(out, converter);       //        copier(converter, sound);     
 

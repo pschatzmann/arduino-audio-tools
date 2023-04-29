@@ -13,7 +13,7 @@
 
 int channels = 1;
 VS1053Stream in; // Access VS1053/VS1003 as stream
-CsvStream<int16_t> csvStream(Serial, channels);
+CsvOutput<int16_t> csvStream(Serial, channels);
 StreamCopy copier(csvStream, in); // copy in to csvStream
 
 // Arduino Setup

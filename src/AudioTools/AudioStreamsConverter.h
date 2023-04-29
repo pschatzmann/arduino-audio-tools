@@ -575,7 +575,7 @@ class FormatConverterStream : public ReformatBaseStream {
     setSourceAudioInfo(stream.audioInfo());
     setStream(stream);
   }
-  FormatConverterStream(AudioPrint &print) {
+  FormatConverterStream(AudioOutput &print) {
     setSourceAudioInfo(print.audioInfo());
     setStream(print);
   }

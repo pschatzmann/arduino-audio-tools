@@ -23,14 +23,14 @@ namespace audio_tools {
  * @copyright GPLv3
  * 
  */
-class MetaDataPrint : public AudioPrint {
+class MetaDataOutput : public AudioOutput {
   public:
 
-    MetaDataPrint() = default;
-    MetaDataPrint(MetaDataPrint const&) = delete;
-    MetaDataPrint& operator=(MetaDataPrint const&) = delete;
+    MetaDataOutput() = default;
+    MetaDataOutput(MetaDataOutput const&) = delete;
+    MetaDataOutput& operator=(MetaDataOutput const&) = delete;
 
-    ~MetaDataPrint(){
+    ~MetaDataOutput(){
         end();
         if (meta!=nullptr) delete meta;
     }
@@ -108,5 +108,7 @@ class MetaDataPrint : public AudioPrint {
 
 };
 
+// legacy name
+using MetaDataPrint = MetaDataOutput;
 
 }

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AudioTools/AudioPrint.h"
+#include "AudioTools/AudioOutput.h"
 #include "AudioLibs/FFT/FFTWindows.h"
 
 /** 
@@ -79,7 +79,7 @@ class FFTDriver {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioFFTBase : public AudioPrint {
+class AudioFFTBase : public AudioOutput {
     public:
         /// Default Constructor. The len needs to be of the power of 2 (e.g. 512, 1024, 2048, 4096, 8192)
         AudioFFTBase(FFTDriver* driver){

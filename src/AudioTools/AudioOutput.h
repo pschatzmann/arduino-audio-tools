@@ -20,9 +20,9 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioPrint : public Print, public AudioInfoDependent, public AudioInfoSource {
+class AudioOutput : public Print, public AudioInfoDependent, public AudioInfoSource {
     public:
-        virtual ~AudioPrint() = default;
+        virtual ~AudioOutput() = default;
 
         virtual size_t write(const uint8_t *buffer, size_t size) override = 0;
 
@@ -96,15 +96,15 @@ class AudioPrint : public Print, public AudioInfoDependent, public AudioInfoSour
  * @copyright GPLv3
 */
 template<typename T>
-class CsvStream : public AudioPrint {
+class CsvOutput : public AudioOutput {
 
     public:
-        CsvStream(int buffer_size=DEFAULT_BUFFER_SIZE, bool active=true) {
+        CsvOutput(int buffer_size=DEFAULT_BUFFER_SIZE, bool active=true) {
             this->active = active;
         }
 
         /// Constructor
-        CsvStream(Print &out, int channels=2, int buffer_size=DEFAULT_BUFFER_SIZE, bool active=true) {
+        CsvOutput(Print &out, int channels=2, int buffer_size=DEFAULT_BUFFER_SIZE, bool active=true) {
             this->out_ptr = &out;
             this->active = active;
             cfg.channels = channels;
@@ -146,7 +146,7 @@ class CsvStream : public AudioPrint {
             cfg.channels = channels;
         }
 
-        /// Sets the CsvStream as inactive 
+        /// Sets the CsvOutput as inactive 
         void end() {
             TRACED();
             active = false;
@@ -162,7 +162,7 @@ class CsvStream : public AudioPrint {
         /// Writes the data - formatted as CSV -  to the output stream
         virtual size_t write(const uint8_t* data, size_t len) {   
             if (!active) return 0;
-            LOGD("CsvStream::write: %d", (int)len);
+            LOGD("CsvOutput::write: %d", (int)len);
             size_t lenChannels = len / (sizeof(T)*cfg.channels); 
             if (lenChannels>0){
                 writeFrames((T*)data, lenChannels);
@@ -211,21 +211,25 @@ class CsvStream : public AudioPrint {
 
 };
 
+// legacy name
+template<typename T>
+using CsvStream = CsvOutput<T>;
+
 /**
  * @brief Creates a Hex Dump
  * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class HexDumpStream : public AudioPrint {
+class HexDumpOutput : public AudioOutput {
 
     public:
-        HexDumpStream(int buffer_size=DEFAULT_BUFFER_SIZE, bool active=true) {
+        HexDumpOutput(int buffer_size=DEFAULT_BUFFER_SIZE, bool active=true) {
             this->active = active;
         }
 
         /// Constructor
-        HexDumpStream(Print &out, int buffer_size=DEFAULT_BUFFER_SIZE, bool active=true) {
+        HexDumpOutput(Print &out, int buffer_size=DEFAULT_BUFFER_SIZE, bool active=true) {
             this->out_ptr = &out;
             this->active = active;
         }
@@ -244,7 +248,7 @@ class HexDumpStream : public AudioPrint {
             return active;
         }
 
-        /// Sets the CsvStream as inactive 
+        /// Sets the CsvOutput as inactive 
         void end() {
              TRACED();
             active = false;
@@ -285,16 +289,18 @@ class HexDumpStream : public AudioPrint {
         bool active = false;
 };
 
+// legacy name
+using HexDumpStream = HexDumpOutput;
 
 /**
- * @brief Wrapper which converts a AudioStream to a AudioPrint
+ * @brief Wrapper which converts a AudioStream to a AudioOutput
  * @ingroup tools
  */
-class AdapterAudioStreamToAudioPrint : public AudioPrint {
+class AdapterAudioStreamToAudioOutput : public AudioOutput {
     public: 
-        AdapterAudioStreamToAudioPrint() = default;
+        AdapterAudioStreamToAudioOutput() = default;
 
-        AdapterAudioStreamToAudioPrint(AudioStream &stream){
+        AdapterAudioStreamToAudioOutput(AudioStream &stream){
             setStream(stream);
         }
 
@@ -319,12 +325,12 @@ class AdapterAudioStreamToAudioPrint : public AudioPrint {
 };
 
 /**
- * @brief Wrapper which converts a Print to a AudioPrint
+ * @brief Wrapper which converts a Print to a AudioOutput
  * @ingroup tools
  */
-class AdapterPrintToAudioPrint : public AudioPrint {
+class AdapterPrintToAudioOutput : public AudioOutput {
     public: 
-        AdapterPrintToAudioPrint(Print &print){
+        AdapterPrintToAudioOutput(Print &print){
             p_print = &print;
         }
         void setAudioInfo(AudioInfo info){
@@ -347,14 +353,14 @@ class AdapterPrintToAudioPrint : public AudioPrint {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class MultiOutput : public AudioPrint {
+class MultiOutput : public AudioOutput {
     public:
 
         /// Defines a MultiOutput with no final output: Define your outputs with add()
         MultiOutput() = default;
 
         /// Defines a MultiOutput with a single final outputs,
-        MultiOutput(AudioPrint &out){
+        MultiOutput(AudioOutput &out){
             add(out);            
         }
 
@@ -363,7 +369,7 @@ class MultiOutput : public AudioPrint {
         }
 
         /// Defines a MultiOutput with 2 final outputs
-        MultiOutput(AudioPrint &out1, AudioPrint &out2){
+        MultiOutput(AudioOutput &out1, AudioOutput &out2){
             add(out1);
             add(out2);
         }
@@ -387,19 +393,19 @@ class MultiOutput : public AudioPrint {
             return true;
         }
 
-        /// Add an additional AudioPrint output
-        void add(AudioPrint &out){
+        /// Add an additional AudioOutput output
+        void add(AudioOutput &out){
             vector.push_back(&out);
         }
 
         /// Add an AudioStream to the output
         void add(AudioStream &stream){
-            AdapterAudioStreamToAudioPrint* out = new AdapterAudioStreamToAudioPrint(stream);
+            AdapterAudioStreamToAudioOutput* out = new AdapterAudioStreamToAudioOutput(stream);
             vector.push_back(out);
         }
 
         void add(Print &print){
-            AdapterPrintToAudioPrint* out = new AdapterPrintToAudioPrint(print);
+            AdapterPrintToAudioOutput* out = new AdapterPrintToAudioOutput(print);
             vector.push_back(out);
         }
 
@@ -439,7 +445,7 @@ class MultiOutput : public AudioPrint {
         }
 
     protected:
-        Vector<AudioPrint*> vector;
+        Vector<AudioOutput*> vector;
 
 };
 
@@ -645,7 +651,7 @@ class OutputMixer : public Print {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class VolumePrint : public AudioPrint {
+class VolumeOutput : public AudioOutput {
     public:
      
         bool begin(AudioInfo info){
@@ -741,13 +747,16 @@ class VolumePrint : public AudioPrint {
         }
 };
 
+// legacy name
+using VolumePrint = VolumeOutput;
+
 /**
- * @brief Prints to a preallocated memory
+ * @brief Writes to a preallocated memory
  * @ingroup io
  */
-class MemoryPrint : public AudioPrint {
+class MemoryOutput : public AudioOutput {
     public:
-        MemoryPrint(uint8_t*start, int len){
+        MemoryOutput(uint8_t*start, int len){
             p_start = start;
             p_next = start;
             max_size = len;
@@ -784,5 +793,8 @@ class MemoryPrint : public AudioPrint {
         size_t max_size;
 
 };
+
+// legacy name
+using MemoryPrint = MemoryOutput;
 
 } //n namespace

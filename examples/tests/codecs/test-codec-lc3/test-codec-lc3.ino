@@ -17,7 +17,7 @@ SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with
 GeneratedSoundStream<int16_t> sound( sineWave); // Stream generated from sine wave
 AudioKitStream out;
 //I2SStream out; 
-//CsvStream<int16_t> out(Serial,channels);
+//CsvOutput<int16_t> out(Serial,channels);
 EncodedAudioStream decoder(&out, new LC3Decoder()); // encode and write
 EncodedAudioStream encoder(&decoder, new LC3Encoder()); // encode and write
 StreamCopy copier(encoder, sound);     

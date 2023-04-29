@@ -13,7 +13,7 @@
 #include "AudioLibs/AudioKit.h"
 
 AudioKitStream kit; // Access I2S as stream
-CsvStream<int16_t> csv(Serial,2);
+CsvOutput<int16_t> csv(Serial,2);
 MultiOutput out;
 StreamCopy copier(out, kit); // copy kit to kit
 

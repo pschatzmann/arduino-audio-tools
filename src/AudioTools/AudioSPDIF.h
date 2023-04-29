@@ -117,13 +117,13 @@ struct SPDIFConfig : public AudioInfo {
  * @copyright GPLv3
  *
  */
-class SPDIFStream : public AudioStream {
+class SPDIFOutput : public AudioStream {
  public:
   /// default constructor
-  SPDIFStream() = default;
+  SPDIFOutput() = default;
 
   /// destructor
-  virtual ~SPDIFStream() { end(); }
+  virtual ~SPDIFOutput() { end(); }
 
   /// Starting with default settings
   bool begin() { return begin(defaultConfig()); }
@@ -246,5 +246,7 @@ class SPDIFStream : public AudioStream {
     }
   }
 };
+
+using SPDIFStream = SPDIFOutput;
 
 }  // namespace audio_tools

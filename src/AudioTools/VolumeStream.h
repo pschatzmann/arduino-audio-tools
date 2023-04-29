@@ -1,7 +1,7 @@
 
 #pragma once
 #include "AudioTools/AudioStreams.h"
-#include "AudioTools/AudioPrint.h"
+#include "AudioTools/AudioOutput.h"
 #include "AudioTools/VolumeControl.h"
 
 namespace audio_tools {
@@ -50,7 +50,7 @@ class VolumeStream : public AudioStream {
         }
 
         /// Constructor which assigns Print output
-        VolumeStream(AudioPrint &out) {
+        VolumeStream(AudioOutput &out) {
             Print *p_print = &out;
             setTarget(*p_print);
             p_notify = (AudioInfoDependent*) &out;

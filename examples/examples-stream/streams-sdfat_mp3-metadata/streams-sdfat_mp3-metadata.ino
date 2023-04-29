@@ -19,11 +19,11 @@
 
 //                            -> EncodedAudioStream -> I2SStream
 // URLStream -> MultiOutput -|
-//                            -> MetaDataPrint
+//                            -> MetaDataOutput
 
 File audioFile;
 SdFs SD;
-MetaDataPrint outMeta; // final output of metadata
+MetaDataOutput outMeta; // final output of metadata
 I2SStream i2s; // I2S output
 EncodedAudioStream out2dec(&i2s, new MP3DecoderHelix()); // Decoding stream
 MultiOutput out;
