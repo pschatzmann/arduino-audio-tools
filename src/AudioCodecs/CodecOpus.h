@@ -12,17 +12,11 @@
 #define OPUS_DEC_MAX_BUFFER_SIZE 1024
 #endif
 
-/** 
- * @defgroup codec-opus OPUS 
- * @ingroup codecs
- * @brief OPUS Codec   
-**/
 
 namespace audio_tools {
 
 /**
  * @brief Setting for Opus Decoder
- * @ingroup codec-opus
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -112,6 +106,8 @@ struct OpusEncoderSettings : public OpusSettings {
 /**
  * @brief OpusAudioDecoder: Depends on https://github.com/pschatzmann/arduino-libopus.git
  * @author Phil Schatzmann
+ * @ingroup codecs
+ * @ingroup decoder
  * @copyright GPLv3
  */
 class OpusAudioDecoder : public AudioDecoder {
@@ -217,7 +213,8 @@ class OpusAudioDecoder : public AudioDecoder {
 
 /**
  * @brief OpusAudioEncoder: Dependens on https://github.com/pschatzmann/arduino-libopus.git
- * @ingroup codec-opus
+ * @ingroup codecs
+ * @ingroup encoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

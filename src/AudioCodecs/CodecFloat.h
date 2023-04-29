@@ -2,18 +2,13 @@
 
 #include "AudioCodecs/AudioEncoded.h"
 
-/** 
- * @defgroup codec-float Floats
- * @ingroup codecs ml
- * @brief Converts between int16_t and floats   
-**/
-
 
 namespace audio_tools {
 
 /**
  * @brief DecoderFloat - Converts Stream of floats into 2 byte integers
- * @ingroup codec-float
+ * @ingroup codecs
+ * @ingroup decoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -110,7 +105,8 @@ class DecoderFloat : public AudioDecoder {
 /**
  * @brief EncoderFloats - Encodes 16 bit PCM data stream to floats
  * data. 
- * @ingroup codec-float
+ * @ingroup codecs
+ * @ingroup encoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

@@ -6,12 +6,6 @@
 
 namespace audio_tools {
 
-/** 
- * @defgroup codecsbase64 Base64
- * @ingroup codecs
- * @brief Codec for 8 bit data  
-**/
-
 
 enum Base46Logic { NoCR, CRforFrame, CRforWrite };
 static char encoding_table[] = {
@@ -36,7 +30,8 @@ static const int B64index[256] = {
  * data stream. Decoding only gives a valid result if we start at a limit of 4
  * bytes. We therefore use by default a newline to determine a valid start
  * boundary.
- * @ingroup codecsbase64
+ * @ingroup codecs
+ * @ingroup decoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -178,7 +173,8 @@ class DecoderBase64 : public AudioDecoder {
  * By default each audio frame is followed by a new line, so that we can
  * easily resynchronize the reading of a data stream. The generation
  * of the new line can be configured with the setNewLine() method.
- * @ingroup codecsbase64
+ * @ingroup codecs
+ * @ingroup encoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

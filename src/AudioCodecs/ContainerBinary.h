@@ -64,6 +64,7 @@ struct ProcessedResult {
  * relevant. We assume that a full segment is written with each call of write();
  * The segments are separated with a new line character.
  * @ingroup codecs
+ * @ingroup encoder
  */
 class BinaryContainerEncoder : public AudioEncoder {
  public:
@@ -182,6 +183,8 @@ class BinaryContainerEncoder : public AudioEncoder {
 /**
  * @brief Decodes the provided data from the DAT and CFG segments
  * @ingroup codecs
+ * @ingroup decoder
+ codecs
  */
 class BinaryContainerDecoder : public AudioDecoder {
  public:

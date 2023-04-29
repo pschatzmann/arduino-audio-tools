@@ -12,11 +12,6 @@
 #include "sbc.h"
 #include "sbc/formats.h"
 
-/**
- * @defgroup codec-sbc SBC
- * @ingroup codecs
- * @brief Codec SBC
- **/
 
 namespace audio_tools {
 
@@ -24,7 +19,8 @@ namespace audio_tools {
  * @brief Decoder for SBC. Depends on
  * https://github.com/pschatzmann/arduino-libsbc.
  * Inspired by sbcdec.c
- * @ingroup codec-sbc
+ * @ingroup codecs
+ * @ingroup decoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -199,7 +195,8 @@ protected:
  * @brief Encoder for SBC - Depends on
  * https://github.com/pschatzmann/arduino-libsbc.
  * Inspired by sbcenc.c
- * @ingroup codec-sbc
+ * @ingroup codecs
+ * @ingroup encoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

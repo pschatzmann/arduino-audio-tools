@@ -28,7 +28,8 @@ struct __attribute__((packed)) OpusOggCommentHeader {
  * @brief Opus Decoder which uses the Ogg Container. See
  * https://datatracker.ietf.org/doc/html/rfc7845. The audio data is transmitted in frames and the
  * header information contains the sampler rate, channels and other critical info.
- * @ingroup codec-opus
+ * @ingroup codecs
+ * @ingroup decoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -81,7 +82,8 @@ class OpusOggDecoder : public OggContainerDecoder {
 /**
  * @brief Opus Encoder which uses the Ogg Container: see
  * https://datatracker.ietf.org/doc/html/rfc7845
- * @ingroup codec-opus
+ * @ingroup codecs
+ * @ingroup encoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

@@ -11,11 +11,6 @@
 #include "AudioCodecs/AudioEncoded.h"
 #include "gsm.h"
 
-/** 
- * @defgroup codec-gsm gsm
- * @ingroup codecs
- * @brief GSM Codec   
-**/
 
 namespace audio_tools {
 
@@ -23,7 +18,8 @@ namespace audio_tools {
  * @brief Decoder for GSM. Depends on
  * https://github.com/pschatzmann/arduino-libgsm.
  * Inspired by gsmdec.c
- * @ingroup codec-gsm
+ * @ingroup codecs
+ * @ingroup decoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -123,7 +119,8 @@ class GSMDecoder : public AudioDecoder {
  * @brief Encoder for GSM - Depends on
  * https://github.com/pschatzmann/arduino-libgsm.
  * Inspired by gsmenc.c
- * @ingroup codec-gsm
+ * @ingroup codecs
+ * @ingroup encoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
