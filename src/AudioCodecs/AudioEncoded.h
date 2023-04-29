@@ -595,13 +595,13 @@ class EncodedAudioStream : public EncodedAudioOutput {
 };
 
 /**
- * @brief Facade class which lets an AudioWriter behave like a Print
+ * @brief Adapter class which lets an AudioWriter behave like a Print
  * @author Phil Schatzmann
  * @copyright GPLv3
  *
  */
 
-class AudioWriterToAudioOutput : public AudioOutput {
+class AudioWriterToAudioOutput : public AudioOutputAdapter {
  public:
   void setWriter(AudioWriter *writer) { p_writer = writer; }
   size_t write(const uint8_t *in_ptr, size_t in_size) {
