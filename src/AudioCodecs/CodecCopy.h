@@ -4,17 +4,13 @@
 #ifdef ARDUINO
 #include "Print.h"
 #endif
-/** 
- * @defgroup codec-copy Copy
- * @ingroup codecs
- * @brief Copies data as is   
-**/
 
 namespace audio_tools {
 
 /**
  * @brief Dummy Decoder which just copies the provided data to the output
- * @ingroup codec-copy
+ * @ingroup codecs
+ * @ingroup decoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -56,7 +52,8 @@ protected:
 
 /**
  * @brief Dummy Encoder which just copies the provided data to the output
- * @ingroup codec-copy
+ * @ingroup codecs
+ * @ingroup encoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

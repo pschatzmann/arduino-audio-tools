@@ -4,12 +4,6 @@
 #include "AudioCodecs/AudioEncoded.h"
 #include "AACDecoderHelix.h"
 
-/** 
- * @defgroup helix Helix
- * @ingroup codecs
- * @brief Helix Decoder  
-**/
-
 namespace audio_tools {
 
 // audio change notification target
@@ -18,7 +12,8 @@ AudioInfoDependent *audioChangeAACHelix=nullptr;
 /**
  * @brief AAC Decoder using libhelix: https://github.com/pschatzmann/arduino-libhelix
  * This is basically just a simple wrapper to provide AudioInfo and AudioInfoDependent
- * @ingroup helix
+ * @ingroup codecs
+ * @ingroup decoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

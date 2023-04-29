@@ -63,7 +63,6 @@ const char* wav_ima_mime = "audio/x-wav";
  * @author Phil Schatzmann
  * @author Norman Ritz
  * @copyright GPLv3
- * 
  */
 
 typedef enum {
@@ -276,7 +275,8 @@ class WavIMAHeader  {
  * and send the sound data to the stream which was indicated in the constructor.
  * Only WAV files with WAVE_FORMAT_IMA_ADPCM are supported by this codec!
  * 
- * @ingroup codec-wav
+ * @ingroup codecs
+ * @ingroup decoder
  * @author Phil Schatzmann
  * @author Norman Ritz
  * @copyright GPLv3

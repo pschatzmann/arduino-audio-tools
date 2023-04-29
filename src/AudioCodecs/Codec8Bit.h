@@ -2,12 +2,6 @@
 
 #include "AudioCodecs/AudioEncoded.h"
 
-/** 
- * @defgroup codecs8bit 8Bit
- * @ingroup codecs
- * @brief Codec for 8 bit data  
-**/
-
 namespace audio_tools {
 
 /**
@@ -15,7 +9,8 @@ namespace audio_tools {
  * Most microcontrollers can not output 8 bit data directly. 8 bit data however is very
  * memory efficient and helps if you need to store audio on constrained resources. This 
  * decoder translates 8bit data into 16bit data.
- * @ingroup codecs8bit
+ * @ingroup codecs
+ * @ingroup decoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -124,7 +119,8 @@ class Decoder8Bit : public AudioDecoder {
  * Most microcontrollers can not process 8 bit audio data directly. 8 bit data however is very
  * memory efficient and helps if you need to store audio on constrained resources. This 
  * encoder translates 16bit data into 8bit data.
- * @ingroup codecs8bit
+ * @ingroup codecs
+ * @ingroup encoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

@@ -15,6 +15,7 @@ namespace audio_tools {
  * The Ogg begin segment contains the AudioInfo structure. You can subclass
  * and overwrite the beginOfSegment() method to implement your own headers
  * @ingroup codecs
+ * @ingroup decoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -195,6 +196,7 @@ class OggContainerDecoder : public AudioDecoder {
  * The Ogg begin segment contains the AudioInfo structure. You can subclass
  * ond overwrite the writeHeader() method to implement your own header logic.
  * @ingroup codecs
+ * @ingroup encoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

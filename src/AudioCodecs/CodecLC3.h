@@ -13,12 +13,6 @@
 #include "AudioCodecs/AudioEncoded.h"
 #include "lc3.h"
 
-/**
- * @defgroup c lc3
- * @ingroup codecs
- * @brief LC3 Codec
- **/
-
 namespace audio_tools {
 
 // 20 to 400
@@ -29,7 +23,8 @@ namespace audio_tools {
 /**
  * @brief Decoder for LC3. Depends on
  * https://github.com/pschatzmann/arduino-liblc3
- * @ingroup codec-lc3
+ * @ingroup codecs
+ * @ingroup decoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -196,7 +191,8 @@ class LC3Decoder : public AudioDecoder {
 /**
  * @brief Encoder for LC3 - Depends on
  * https://github.com/pschatzmann/arduino-liblc3
- * @ingroup codec-lc3
+ * @ingroup codecs
+ * @ingroup encoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

@@ -15,18 +15,14 @@
 #define G722_PCM_SIZE 80
 #define G722_ENC_SIZE 40
 
-/** 
- * @defgroup codec-g722 g722
- * @ingroup codecs
- * @brief G722 Codec   
-**/
 
 namespace audio_tools {
 
 /**
  * @brief Decoder for G.722. Depends on
  * https://github.com/pschatzmann/arduino-libg722.
- * @ingroup codec-g722
+ * @ingroup codecs
+ * @ingroup decoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -129,7 +125,8 @@ class G722Decoder : public AudioDecoder {
  * @brief Encoder for G.722 - Depends on
  * https://github.com/pschatzmann/arduino-libg722.
  * Inspired by g722enc.c
- * @ingroup codec-g722
+ * @ingroup codecs
+ * @ingroup encoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

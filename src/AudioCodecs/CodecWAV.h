@@ -6,18 +6,11 @@
 #define TAG(a, b, c, d) ((static_cast<uint32_t>(a) << 24) | (static_cast<uint32_t>(b) << 16) | (static_cast<uint32_t>(c) << 8) | (d))
 #define READ_BUFFER_SIZE 512
 
-/** 
- * @defgroup codec-wav wav
- * @ingroup codecs
- * @brief Codec wav   
-**/
-
 
 namespace audio_tools {
 
 /**
  * @brief Sound information which is available in the WAV header
- * @ingroup codec-wav
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 
@@ -237,7 +230,8 @@ class WAVHeader  {
  * @brief WAVDecoder - We parse the header data on the first record
  * and send the sound data to the stream which was indicated in the
  * constructor. Only WAV files with WAV_FORMAT_PCM are supported!
- * @ingroup codec-wav
+ * @ingroup codecs
+ * @ingroup decoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -392,7 +386,8 @@ class WAVDecoder : public AudioDecoder {
 
 /**
  * @brief A simple WAV file encoder. 
- * @ingroup codec-wav
+ * @ingroup codecs
+ * @ingroup encoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
