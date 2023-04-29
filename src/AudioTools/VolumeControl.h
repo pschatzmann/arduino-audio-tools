@@ -2,7 +2,7 @@
 
 /**
  * @defgroup volume Volume
- * @ingroup tools
+ * @ingroup dsp
  * @brief Volume Calculations
  */
 namespace audio_tools {
