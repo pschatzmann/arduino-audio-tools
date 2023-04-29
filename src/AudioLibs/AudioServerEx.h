@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AudioConfig.h"
-#include "AudioTools/AudioPrint.h"
+#include "AudioTools/AudioOutput.h"
 #include "AudioCodecs/CodecWAV.h"
 #include "HttpServer.h"
 #include "HttpExtensions.h"
@@ -34,7 +34,7 @@ struct AudioServerExConfig : public AudioInfo {
  * @copyright GPLv3
  */
 
-class AudioServerEx : public AudioPrint {
+class AudioServerEx : public AudioOutput {
   public:
     // Default Constructor
     AudioServerEx() = default;
@@ -162,7 +162,7 @@ class AudioWAVServerEx : public AudioServerEx {
         // wav files start with a 44 bytes header
         virtual tinyhttp::Str* getReplyHeader() {
             header.allocate(44);
-            MemoryPrint mp{(uint8_t*)header.c_str(), 44};
+            MemoryOutput mp{(uint8_t*)header.c_str(), 44};
             WAVEncoder enc;
             WAVAudioInfo wi;
             wi.format = WAV_FORMAT_PCM;

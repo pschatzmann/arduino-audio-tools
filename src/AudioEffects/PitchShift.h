@@ -9,7 +9,7 @@
 namespace audio_tools {
 
 /**
- * @brief Configuration for PitchShiftStream: set the pitch_shift to define the
+ * @brief Configuration for PitchShiftOutput: set the pitch_shift to define the
  * shift
  */
 struct PitchShiftInfo : public AudioInfo {
@@ -386,9 +386,9 @@ protected:
  * @tparam BufferT
  */
 template <typename T, class BufferT>
-class PitchShiftStream : public AudioPrint {
+class PitchShiftOutput : public AudioOutput {
 public:
-  PitchShiftStream(Print &out) { p_out = &out; }
+  PitchShiftOutput(Print &out) { p_out = &out; }
 
   PitchShiftInfo defaultConfig() {
     PitchShiftInfo result;
@@ -399,7 +399,7 @@ public:
   bool begin(PitchShiftInfo info) {
     TRACED();
     cfg = info;
-    AudioPrint::setAudioInfo(info);
+    AudioOutput::setAudioInfo(info);
     buffer.resize(info.buffer_size);
     buffer.reset();
     buffer.setIncrement(info.pitch_shift);
@@ -427,7 +427,7 @@ public:
 
       // output values
       T out_value = pitchShift(value);
-      LOGD("PitchShiftStream %d -> %d", value, out_value);
+      LOGD("PitchShiftOutput %d -> %d", value, out_value);
       T out_array[channels];
       for (int ch = 0; ch < channels; ch++) {
         out_array[ch] = out_value;

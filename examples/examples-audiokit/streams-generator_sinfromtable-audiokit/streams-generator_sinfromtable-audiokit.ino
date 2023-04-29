@@ -13,7 +13,7 @@ uint8_t channels = 2;                                      // The stream will ha
 SineFromTable<int16_t> sineWave(32000);                // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound(sineWave);             // Stream generated from sine wave
 AudioKitStream out; 
-//CsvStream<int16_t> out(Serial);
+//CsvOutput<int16_t> out(Serial);
 int sound_len=1024;
 StreamCopy copier(out, sound, sound_len);                             // copies sound into i2s
 int freq = 122;

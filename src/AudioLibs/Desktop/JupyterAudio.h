@@ -1,7 +1,7 @@
 #pragma once
 #include "AudioLibs/Desktop/NoArduino.h"
 #include "AudioTools/AudioStreams.h"
-#include "AudioTools/AudioPrint.h"
+#include "AudioTools/AudioOutput.h"
 #include "AudioCodecs/CodecWAV.h"
 #include <string.h>
 #include <iostream>
@@ -16,9 +16,9 @@ namespace audio_tools {
 /**
  * @brief Simple layer for Print object to write to a c++ file
  */
-class FilePrint : public Print {
+class FileOutput : public Print {
 public:
-    FilePrint(std::fstream &stream){
+    FileOutput(std::fstream &stream){
         p_audio_stream = &stream;
     }
     size_t write(const uint8_t *buffer, size_t size) override {
@@ -146,7 +146,7 @@ public:
     try{
       if (!fileExists()){
           std::fstream fstream(fname, fstream.binary | fstream.trunc | fstream.out);
-          FilePrint fp(fstream);
+          FileOutput fp(fstream);
           wave_encoder.setAudioInfo(audioInfo());
           out.setOutput(&fp);
           out.setEncoder(&wave_encoder);
@@ -186,7 +186,7 @@ protected:
   AudioStream *p_audio_stream=nullptr;
   ChartT<T> chrt;
   WAVEncoder wave_encoder;
-  EncodedAudioPrint out;
+  EncodedAudioOutput out;
   StreamCopyT<T> copier;
   AudioInfo cfg;
   string fname;

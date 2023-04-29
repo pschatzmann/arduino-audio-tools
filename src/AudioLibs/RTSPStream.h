@@ -9,7 +9,7 @@
 /**
  * @defgroup rtsp RTSP Streaming
  * @ingroup communications
- * @file RTSPStream.h
+ * @file RTSPOutput.h
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -24,9 +24,9 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class RTSPStreamPCMInfo : public PCMInfo {
+class RTSPOutputPCMInfo : public PCMInfo {
 public:
-  RTSPStreamPCMInfo() = default;
+  RTSPOutputPCMInfo() = default;
   virtual void begin(AudioStream &stream) { p_stream = &stream; }
   int getSampleRate() override { return p_stream->audioInfo().sample_rate; }
   int getChannels() override { return p_stream->audioInfo().channels; }
@@ -73,7 +73,7 @@ class RTSPSourceFromAudioStream : public IAudioSource {
 public:
   RTSPSourceFromAudioStream() = default;
   /**
-   * @brief Construct a new RTSPStreamSource object from an AudioStream
+   * @brief Construct a new RTSPOutputSource object from an AudioStream
    *
    * @param stream
    */
@@ -158,7 +158,7 @@ protected:
   AudioStream *p_audiostream = nullptr;
   uint64_t time_of_last_read = 0;
   bool started = true;
-  RTSPStreamPCMInfo pcmInfo;
+  RTSPOutputPCMInfo pcmInfo;
   RTSPFormatPCM format{pcmInfo};
 };
 
@@ -174,7 +174,7 @@ protected:
 class RTSPSourceStream : public IAudioSource {
 public:
   /**
-   * @brief Construct a new RTSPStreamSource object from an Arduino Stream
+   * @brief Construct a new RTSPOutputSource object from an Arduino Stream
    * You need to provide the audio information by calling setAudioInfo()
    * @param stream
    * @param info
@@ -186,7 +186,7 @@ public:
   }
 
   /**
-   * @brief Construct a new RTSPStreamSource object from an Arduino Stream
+   * @brief Construct a new RTSPOutputSource object from an Arduino Stream
    * You need to provide the audio information by calling setAudioInfo()
    * @param stream
    * @param format
@@ -504,7 +504,7 @@ public:
 };
 
 /**
- * @brief We can write PCM data to the RTSPStream. This is encoded by the
+ * @brief We can write PCM data to the RTSPOutput. This is encoded by the
  * indicated encoder (e.g. SBCEncoder) and can be consumed by a RTSPServer.
  * You have to make sure that the codec supports the provided audio format:
  * e.g. GSM support only 8000 samples per second with one channel.
@@ -513,10 +513,10 @@ public:
  * @ingroup io
  * @author Phil Schatzmann
  */
-class RTSPStream : public AudioPrint {
+class RTSPOutput : public AudioOutput {
 public:
   /// Default constructor
-  RTSPStream(RTSPFormatAudioTools &format, AudioEncoder &encoder,
+  RTSPOutput(RTSPFormatAudioTools &format, AudioEncoder &encoder,
              int buffer_size = 1024 * 2) {
     buffer.resize(buffer_size);
     p_format = &format;
@@ -525,7 +525,7 @@ public:
   }
 
   /// Construcor using RTSPFormatPCM and no encoder
-  RTSPStream(int buffer_size = 1024) {
+  RTSPOutput(int buffer_size = 1024) {
     buffer.resize(buffer_size);
     p_encoder->setOutputStream(buffer);
   }
@@ -597,5 +597,8 @@ protected:
   RTSPFormatAudioTools *p_format = &pcm;
   AudioStreamer rtsp_streamer;
 };
+
+// legacy name
+using RTSPStream = RTSPOutput;
 
 } // namespace audio_tools

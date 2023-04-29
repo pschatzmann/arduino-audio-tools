@@ -14,12 +14,12 @@ namespace audio_tools {
 
 /**
  * @brief Common functionality for PWM output. 
- * Please use the PWMAudioStream typedef instead which references the implementation
+ * Please use the PWMAudioOutput typedef instead which references the implementation
  * @ingroup io
  */
-class PWMAudioStream : public AudioPrint {
+class PWMAudioOutput : public AudioOutput {
     public:
-        ~PWMAudioStream(){
+        ~PWMAudioOutput(){
             if (driver.isTimerStarted()){
                 end();
             }
@@ -98,6 +98,9 @@ class PWMAudioStream : public AudioPrint {
         PWMDriver driver; // platform specific driver
 
 };
+
+// legacy name
+using PWMAudioStream = PWMAudioOutput;
 
 }
 

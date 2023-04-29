@@ -63,7 +63,7 @@
 #include "AudioTools/AudioLogger.h"
 #include "AudioTools/AudioStreams.h"
 #include "AudioTools/AudioStreamsConverter.h"
-#include "AudioTools/AudioPrint.h"
+#include "AudioTools/AudioOutput.h"
 #include "AudioTools/VolumeStream.h"
 #include "AudioTools/ResampleStream.h"
 #include "AudioTools/StreamCopy.h"

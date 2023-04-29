@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AudioConfig.h"
-#include "AudioTools/AudioPrint.h"
+#include "AudioTools/AudioOutput.h"
 #include "AudioTools/AudioStreams.h"
 #include "AudioTools/Buffers.h"
 #include "AudioOutput.h"

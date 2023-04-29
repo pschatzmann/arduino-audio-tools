@@ -12,8 +12,8 @@
 const uint16_t sample_rate = 8000;
 AnalogAudioStream in; 
 int channels = 1;
-CsvStream<int16_t> out(Serial, channels); // ASCII output stream 
-StreamCopy copier(out, in); // copy i2sStream to CsvStream
+CsvOutput<int16_t> out(Serial, channels); // ASCII output stream 
+StreamCopy copier(out, in); // copy i2sStream to CsvOutput
 ConverterAutoCenter<int16_t> center(2); // set avg to 0
 
 // Arduino Setup

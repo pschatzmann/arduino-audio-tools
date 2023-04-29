@@ -59,7 +59,7 @@ class TransformationReader {
   int availableForWrite() { return print_to_array.availableForWrite(); }
 
  protected:
-  class AdapterPrintToArray : public AudioPrint {
+  class AdapterPrintToArray : public AudioOutput {
    public:
     void begin(uint8_t *array, size_t data_len) {
       TRACED();
@@ -193,7 +193,7 @@ class ResampleStream : public ReformatBaseStream {
   ResampleStream(Print &out) { setStream(out); }
   /// Support for resampling via write. The audio information is copied from the
   /// io
-  ResampleStream(AudioPrint &out) {
+  ResampleStream(AudioOutput &out) {
     setAudioInfo(out.audioInfo());
     setStream(out);
   }

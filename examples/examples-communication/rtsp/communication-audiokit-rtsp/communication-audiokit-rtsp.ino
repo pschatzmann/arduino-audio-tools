@@ -11,7 +11,7 @@
 
 #include "AudioTools.h"
 #include "AudioLibs/AudioKit.h"
-#include "AudioLibs/RTSPStream.h"
+#include "AudioLibs/RTSPOutput.h"
 #include "AudioStreamer.h"
 #include "RTSPServer.h"
 

@@ -16,7 +16,7 @@
 
 
 MemoryStream mp3(BabyElephantWalk60_mp3, BabyElephantWalk60_mp3_len);
-PWMAudioStream out;  // PWM output 
+PWMAudioOutput out;  // PWM output 
 EncodedAudioStream decoded(&out, new MP3DecoderHelix()); // output to decoder
 StreamCopy copier(decoded, mp3);    // copy in to out
 

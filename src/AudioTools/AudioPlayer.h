@@ -54,7 +54,7 @@ namespace audio_tools {
          * @param output
          * @param decoder
          */
-        AudioPlayer(AudioSource& source, AudioPrint& output, AudioDecoder& decoder) {
+        AudioPlayer(AudioSource& source, AudioOutput& output, AudioDecoder& decoder) {
             TRACED();
             this->p_source = &source;
             this->p_decoder = &decoder;
@@ -107,7 +107,7 @@ namespace audio_tools {
             }
         }
 
-        void setOutput(AudioPrint& output){
+        void setOutput(AudioOutput& output){
             if (p_decoder->isResultPCM()){
                 this->fade.setTarget(output);
                 this->volume_out.setTarget(fade);
@@ -465,7 +465,7 @@ namespace audio_tools {
         CopyDecoder no_decoder{true};
         AudioDecoder* p_decoder = &no_decoder;
         Stream* p_input_stream = nullptr;
-        AudioPrint* p_final_print = nullptr;
+        AudioOutput* p_final_print = nullptr;
         AudioStream* p_final_stream = nullptr;
         AudioInfoDependent* p_final_notify = nullptr;
         StreamCopy copier; // copies sound into i2s

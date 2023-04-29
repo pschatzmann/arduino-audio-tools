@@ -13,7 +13,7 @@ int channels = 1;
 uint16_t sample_rate=8000;
 SineWaveGenerator<int16_t> sineWave(32000); // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound(sineWave);  // Stream generated from sine wave
-PWMAudioStream pwm;                  
+PWMAudioOutput pwm;                  
 StreamCopy copier(pwm, sound);    // copy in to out
 
 

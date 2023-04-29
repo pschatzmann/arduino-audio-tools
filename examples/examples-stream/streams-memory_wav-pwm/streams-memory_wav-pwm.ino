@@ -14,11 +14,11 @@
 
 
 
-//Data Flow: MemoryStream -> EncodedAudioStream  -> PWMAudioStream
+//Data Flow: MemoryStream -> EncodedAudioStream  -> PWMAudioOutput
 
 //MemoryStream wav(knghtsng_wav, knghtsng_wav_len);
 MemoryStream wav(alice_wav, alice_wav_len);
-PWMAudioStream pwm;          // PWM output 
+PWMAudioOutput pwm;          // PWM output 
 WAVDecoder decoder(pwm);        // decode wav to pcm and send it to printer
 EncodedAudioStream out(pwm, decoder); // Decoder stream
 StreamCopy copier(out, wav);    // copy in to out

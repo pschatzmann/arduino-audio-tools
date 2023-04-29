@@ -3,7 +3,7 @@
 #include "AudioTools/AudioLogger.h"
 #include "AudioTools/Buffers.h"
 #include "AudioTimer/AudioTimer.h"
-#include "AudioTools/AudioPrint.h"
+#include "AudioTools/AudioOutput.h"
 
 namespace audio_tools {
 
@@ -79,7 +79,7 @@ class DACOut {
  * @copyright GPLv3
  * 
  */
-class OversamplingDAC : public AudioPrint {
+class OversamplingDAC : public AudioOutput {
     public:
 
         OversamplingDAC(){

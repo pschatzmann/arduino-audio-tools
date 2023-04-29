@@ -5,7 +5,7 @@
 
 #include "AudioTools.h"
 #include "AudioTools/AudioLogger.h"
-#include "AudioTools/AudioPrint.h"
+#include "AudioTools/AudioOutput.h"
 #include "AudioTools/AudioTypes.h"
 #include "AudioBasic/Collections.h"
 

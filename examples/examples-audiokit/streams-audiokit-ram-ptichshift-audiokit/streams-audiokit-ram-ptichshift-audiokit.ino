@@ -19,7 +19,7 @@ uint8_t channels = 1;  // We use one channel only to simplify the processing
 MemoryManager memory(500); // Activate SPI RAM for objects > 500 bytes
 AudioKitStream kit;
 //use one of VariableSpeedRingBufferSimple, VariableSpeedRingBuffer, VariableSpeedRingBuffer180 
-PitchShiftStream<int16_t, VariableSpeedRingBuffer<int16_t>> pitch_shift(kit);
+PitchShiftOutput<int16_t, VariableSpeedRingBuffer<int16_t>> pitch_shift(kit);
 DynamicMemoryStream recording(false); // Audio stored on heap, non repeating
 StreamCopy copier; // copies data
  

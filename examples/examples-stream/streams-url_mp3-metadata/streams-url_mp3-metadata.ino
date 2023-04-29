@@ -14,7 +14,7 @@
 
 
 ICYStream url("ssid","password");
-MetaDataPrint out; // final output of decoded stream
+MetaDataOutput out; // final output of decoded stream
 StreamCopy copier(out, url); // copy url to decoder
 
 // callback for meta data

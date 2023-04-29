@@ -5,7 +5,7 @@ int rate = 44100;
 int hz = 200;
 SineWaveGenerator<int16_t> sine;
 GeneratedSoundStream<int16_t> gen(sine); 
-CsvStream<int16_t> csv(Serial);
+CsvOutput<int16_t> csv(Serial);
 AudioEffectStream effects(csv); // apply effects to output: writing to effects
 StreamCopy copier(effects, gen); 
 Delay dly(998, 0.5, 1.0,rate, true);

@@ -10,7 +10,7 @@
 #include "BabyElephantWalk60_mp3.h"
 
 MemoryStream mp3(BabyElephantWalk60_mp3, BabyElephantWalk60_mp3_len);
-//CsvStream<int16_t> out(Serial,2);  
+//CsvOutput<int16_t> out(Serial,2);  
 AudioKitStream out;
 EncodedAudioStream decoder(&out, new MP3DecoderMAD()); // output to decoder
 StreamCopy copier(decoder, mp3);   

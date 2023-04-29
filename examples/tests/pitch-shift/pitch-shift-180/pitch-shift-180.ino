@@ -7,10 +7,10 @@ uint16_t sample_rate = 44100;
 uint8_t channels = 1;                                      // The stream will have 2 channels 
 SineWaveGenerator<int16_t> sineWave(32000);                // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound(sineWave);             // Stream generated from sine wave
-CsvStream<int16_t> out(Serial, 1); 
-//PitchShiftStream<int16_t, VariableSpeedRingBufferSimple<int16_t>> pitchShift(out);
-PitchShiftStream<int16_t, VariableSpeedRingBuffer180<int16_t>> pitchShift(out);
-//PitchShiftStream<int16_t, VariableSpeedRingBuffer<int16_t>> pitchShift(out);
+CsvOutput<int16_t> out(Serial, 1); 
+//PitchShiftOutput<int16_t, VariableSpeedRingBufferSimple<int16_t>> pitchShift(out);
+PitchShiftOutput<int16_t, VariableSpeedRingBuffer180<int16_t>> pitchShift(out);
+//PitchShiftOutput<int16_t, VariableSpeedRingBuffer<int16_t>> pitchShift(out);
 StreamCopy copier(pitchShift, sound);                       // copies sound to out
 
 // Arduino Setup

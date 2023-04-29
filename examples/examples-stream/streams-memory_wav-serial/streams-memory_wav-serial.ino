@@ -13,9 +13,9 @@
 
 
 
-// MemoryStream -> EncodedAudioStream -> CsvStream
+// MemoryStream -> EncodedAudioStream -> CsvOutput
 MemoryStream wav(knghtsng_wav, knghtsng_wav_len);
-CsvStream<int16_t> out(Serial);  // ASCII stream 
+CsvOutput<int16_t> out(Serial);  // ASCII stream 
 EncodedAudioStream enc(&out, new WAVDecoder());
 StreamCopy copier(enc, wav);    // copy in to out
 

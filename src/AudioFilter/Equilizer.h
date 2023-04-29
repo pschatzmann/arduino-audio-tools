@@ -1,6 +1,6 @@
 #pragma once
 #include <math.h>
-#include "AudioTools/AudioPrint.h"
+#include "AudioTools/AudioOutput.h"
 #include "AudioBasic/Int24.h"
 
 /** 
@@ -48,7 +48,7 @@ class Equilizer3Bands : public AudioStream {
             p_stream = &in;
         }
 
-        Equilizer3Bands(AudioPrint &out) {
+        Equilizer3Bands(AudioOutput &out) {
             p_out = &out;
             p_print = &out;
             out.setNotifyAudioChange(*this);
@@ -130,7 +130,7 @@ class Equilizer3Bands : public AudioStream {
         const float vsa = (1.0 / 4294967295.0);   // Very small amount (Denormal Fix)
         Print *p_print = nullptr; // support for write
         Stream *p_stream = nullptr; // support for write
-        AudioPrint *p_out=nullptr; // support for write
+        AudioOutput *p_out=nullptr; // support for write
         AudioStream *p_in=nullptr; // support for readBytes
         int max_state_count=0;
 
