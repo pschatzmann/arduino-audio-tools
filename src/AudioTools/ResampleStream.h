@@ -59,7 +59,7 @@ class TransformationReader {
   int availableForWrite() { return print_to_array.availableForWrite(); }
 
  protected:
-  class AdapterPrintToArray : public AudioOutput {
+  class AdapterPrintToArray : public AudioOutputAdapter {
    public:
     void begin(uint8_t *array, size_t data_len) {
       TRACED();

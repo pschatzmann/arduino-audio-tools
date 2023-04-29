@@ -293,10 +293,17 @@ class HexDumpOutput : public AudioOutput {
 using HexDumpStream = HexDumpOutput;
 
 /**
+ * @brief Base class for Output Adpapters
+ * 
+ */
+class AudioOutputAdapter : public AudioOutput {
+};
+
+/**
  * @brief Wrapper which converts a AudioStream to a AudioOutput
  * @ingroup tools
  */
-class AdapterAudioStreamToAudioOutput : public AudioOutput {
+class AdapterAudioStreamToAudioOutput : public AudioOutputAdapter {
     public: 
         AdapterAudioStreamToAudioOutput() = default;
 
@@ -328,7 +335,7 @@ class AdapterAudioStreamToAudioOutput : public AudioOutput {
  * @brief Wrapper which converts a Print to a AudioOutput
  * @ingroup tools
  */
-class AdapterPrintToAudioOutput : public AudioOutput {
+class AdapterPrintToAudioOutput : public AudioOutputAdapter {
     public: 
         AdapterPrintToAudioOutput(Print &print){
             p_print = &print;
