@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AudioTools/AudioStreams.h"
+#include "AudioTools/AudioIO.h"
 
 namespace audio_tools {
 

@@ -13,7 +13,7 @@ void setup(){
   AudioLogger::instance().begin(Serial, AudioLogger::Info);  
 
   sine_wave.begin(info, N_B4);
-  conv.begin(from, to_channels);
+  conv.begin(info, to_channels);
   in_stream.begin();
 
   out.begin();

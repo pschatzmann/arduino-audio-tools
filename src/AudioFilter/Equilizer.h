@@ -1,5 +1,6 @@
 #pragma once
 #include <math.h>
+#include "AudioTools/AudioStreams.h"
 #include "AudioTools/AudioOutput.h"
 #include "AudioBasic/Int24.h"
 
