@@ -90,8 +90,6 @@
 ../examples/examples-audiokit/streams-audiokit-sd-audiokit -> rc=0
 ../examples/examples-audiokit/streams-audiokit-serial -> rc=0
 ../examples/examples-audiokit/streams-audiokit-tf -> rc=0
-../examples/examples-audiokit/streams-audiokit-webserver_aac -> rc=0
-../examples/examples-audiokit/streams-audiokit-webserver_mp3 -> rc=0
 ../examples/examples-audiokit/streams-audiokit-webserver_wav -> rc=0
 ../examples/examples-audiokit/streams-file_loop-audiokit -> rc=0
 ../examples/examples-audiokit/streams-generator-audiokit -> rc=0
@@ -134,7 +132,7 @@
 ../examples/examples-maximilian/18-DrumMachine -> rc=0
 ../examples/examples-maximilian/19-Enveloping2 -> rc=0
 ../examples/examples-maximilian/20-FFT -> rc=0
-../examples/examples-tts/streams-azure_tts-i2s.ino -> rc=1
+../examples/examples-tts/streams-azure_tts-i2s -> rc=0
 ../examples/examples-tts/streams-espeak-audiokit -> rc=0
 ../examples/examples-tts/streams-espeak-i2s -> rc=0
 ../examples/examples-tts/streams-flite-audiokit -> rc=0
@@ -147,11 +145,9 @@
 ../examples/examples-faust/streams-faust_noise-i2s -> rc=0
 ../examples/examples-faust/streams-generator-faust-i2s -> rc=0
 ../examples/examples-faust/streams-i2s-faust_guitarix-i2s -> rc=0
-../examples/examples-communication/esp-now/communication-espnow-receive -> rc=0
-../examples/examples-communication/esp-now/communication-espnow-receive_csv -> rc=0
-../examples/examples-communication/esp-now/communication-espnow-receive_measure -> rc=0
-../examples/examples-communication/esp-now/communication-espnow-send -> rc=0
-../examples/examples-communication/esp-now-codec/* -> rc=1
+../examples/examples-communication/esp-now/codec -> rc=1/0
+../examples/examples-communication/esp-now/pcm -> rc=1/0
+../examples/examples-communication/esp-now/speed-test -> rc=1/0
 ../examples/examples-communication/ip/communication-ip-receive -> rc=0
 ../examples/examples-communication/ip/communication-ip-receive_measure -> rc=0
 ../examples/examples-communication/ip/communication-ip-send -> rc=0
@@ -182,10 +178,13 @@
 ../examples/tests/codecs/test-codec-gsm -> rc=0
 ../examples/tests/codecs/test-codec-iLBC -> rc=0
 ../examples/tests/codecs/test-codec-lc3 -> rc=0
+../examples/tests/codecs/test-codec-ogg -> rc=0
 ../examples/tests/codecs/test-codec-opus -> rc=0
 ../examples/tests/codecs/test-codec-opusogg -> rc=0
 ../examples/tests/codecs/test-codec-sbc -> rc=0
+../examples/tests/codecs/test-container-binary -> rc=0
 ../examples/tests/codecs/test-mp3-helix -> rc=0
+../examples/tests/codecs/test-mp3-helix-reading -> rc=0
 ../examples/tests/codecs/test-mp3-mad -> rc=0
 ../examples/tests/concurrency/NBuffer -> rc=0
 ../examples/tests/concurrency/synchBufferRTOS -> rc=0

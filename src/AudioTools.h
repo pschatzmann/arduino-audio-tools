@@ -65,6 +65,7 @@
 #include "AudioTools/AudioStreamsConverter.h"
 #include "AudioTools/AudioOutput.h"
 #include "AudioTools/VolumeStream.h"
+#include "AudioTools/AudioIO.h"
 #include "AudioTools/ResampleStream.h"
 #include "AudioTools/StreamCopy.h"
 #include "AudioCodecs/AudioEncoded.h"

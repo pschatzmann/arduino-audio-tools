@@ -13,7 +13,6 @@
  * @brief Different Buffer Implementations
  */
 
-
 namespace audio_tools {
 
 // forward declaration
@@ -31,14 +30,14 @@ class BaseBuffer {
  public:
   BaseBuffer() = default;
   virtual ~BaseBuffer() = default;
-  BaseBuffer(BaseBuffer const&) = delete;
-  BaseBuffer& operator=(BaseBuffer const&) = delete;
+  BaseBuffer(BaseBuffer const &) = delete;
+  BaseBuffer &operator=(BaseBuffer const &) = delete;
 
   /// reads a single value
   virtual T read() = 0;
 
   /// reads multiple values
-  int readArray(T data[], int len) {
+  virtual int readArray(T data[], int len) {
     int lenResult = MIN(len, available());
     for (int j = 0; j < lenResult; j++) {
       data[j] = read();
@@ -48,9 +47,9 @@ class BaseBuffer {
   }
 
   /// Fills the data from the buffer
-  int writeArray(const T data[], int len) {
-    //LOGD("%s: %d", LOG_METHOD, len);
-    //CHECK_MEMORY();
+  virtual int writeArray(const T data[], int len) {
+    // LOGD("%s: %d", LOG_METHOD, len);
+    // CHECK_MEMORY();
 
     int result = 0;
     for (int j = 0; j < len; j++) {
@@ -59,7 +58,7 @@ class BaseBuffer {
       }
       result = j + 1;
     }
-    //CHECK_MEMORY();
+    // CHECK_MEMORY();
     LOGD("writeArray %d -> %d", len, result);
     return result;
   }
@@ -67,14 +66,14 @@ class BaseBuffer {
   /// reads multiple values for array of 2 dimensional frames
   int readFrames(T data[][2], int len) {
     LOGD("%s: %d", LOG_METHOD, len);
-    //CHECK_MEMORY();
+    // CHECK_MEMORY();
     int result = MIN(len, available());
     for (int j = 0; j < result; j++) {
       T sample = read();
       data[j][0] = sample;
       data[j][1] = sample;
     }
-    //CHECK_MEMORY();
+    // CHECK_MEMORY();
     return result;
   }
 
@@ -106,9 +105,7 @@ class BaseBuffer {
   virtual void reset() = 0;
 
   ///  same as reset
-  void clear() {
-    reset();
-  }
+  void clear() { reset(); }
 
   /// provides the number of entries that are available to read
   virtual int available() = 0;
@@ -211,8 +208,8 @@ class SingleBuffer : public BaseBuffer<T> {
 
   size_t size() { return max_size; }
 
-  void resize(int size){
-    if (buffer.size()!=size){
+  void resize(int size) {
+    if (buffer.size() != size) {
       TRACED();
       buffer.resize(size);
       max_size = size;
@@ -293,17 +290,15 @@ class RingBuffer : public BaseBuffer<T> {
   virtual T *address() { return _aucBuffer.data(); }
 
   virtual void resize(int len) {
-    if (max_size!=len){
-      LOGI("resize: %d",len);
+    if (max_size != len) {
+      LOGI("resize: %d", len);
       _aucBuffer.resize(len);
       max_size = len;
     }
   }
 
   /// Returns the maximum capacity of the buffer
-  virtual int size() {
-    return max_size;
-  }
+  virtual int size() { return max_size; }
 
  protected:
   Vector<T> _aucBuffer;
@@ -316,8 +311,164 @@ class RingBuffer : public BaseBuffer<T> {
 };
 
 /**
- * @brief A lock free N buffer. If count=2 we create a DoubleBuffer, if count=3
- * a TripleBuffer etc.
+ * @brief An File backed Ring Buffer that we can use to receive
+ * streaming audio. We expect an open p_file as parameter.
+ *
+ * If you want to keep the processed data, call setAutoRewind(false) and
+ * call p_file->save() when you are done!
+ * @ingroup buffers
+ * @tparam File
+ * @tparam T
+ */
+template <class File, typename T>
+class RingBufferFile : public BaseBuffer<T> {
+ public:
+  RingBufferFile(bool autoRewind = true) { setAutoRewind(autoRewind); }
+  RingBufferFile(File &file, bool autoRewind = true) {
+    setFile(file);
+    setAutoRewind(autoRewind);
+  }
+
+  /// if the full buffer has been consumed we restart from the 0 p_file position
+  /// Set this value to false if you want to keep the full processed data in the
+  /// p_file
+  void setAutoRewind(bool flag) { auto_rewind = true; }
+
+  /// Assigns the p_file to be used.
+  void setFile(File &bufferFile, bool clear = false) {
+    p_file = &bufferFile;
+    if (!*p_file) {
+      LOGE("file is not valid");
+    }
+    // if no clear has been requested we can access the existing data in the
+    // p_file
+    if (!clear) {
+      element_count = p_file->size() / sizeof(T);
+      LOGI("existing elements: %s", element_count);
+      read_pos = element_count;
+    }
+  }
+
+  T read() override {
+    if (isEmpty()) return -1;
+
+    T result = peek();
+    read_pos++;
+    element_count--;
+    // the buffer is empty
+    if (auto_rewind && isEmpty()) {
+      LOGI("pos 0");
+      write_pos = 0;
+      read_pos = 0;
+    }
+
+    return result;
+  }
+
+  /// reads multiple values
+  int readArray(T data[], int count) override {
+    if (p_file == nullptr) return 0;
+    int read_count = min(count, element_count);
+    file_seek(read_pos);
+    int elements_processed = file_read(data, read_count);
+    read_pos += elements_processed;
+    element_count -= elements_processed;
+    return elements_processed;
+  }
+
+  // peeks the actual entry from the buffer
+  T peek() override {
+    if (p_file == nullptr) return 0;
+    if (isEmpty()) return -1;
+
+    file_seek(read_pos);
+    T result;
+    size_t count = file_read(&result, 1);
+    return result;
+  }
+
+  // checks if the buffer is full
+  bool isFull() override { return available() == max_size; }
+
+  bool isEmpty() { return available() == 0; }
+
+  // write add an entry to the buffer
+  virtual bool write(T data) override { return writeArray(&data, 1); }
+
+  /// Fills the data from the buffer
+  int writeArray(const T data[], int len) override {
+    if (p_file == nullptr) return 0;
+    file_seek(write_pos);
+    int elements_written = file_write(data, len);
+    write_pos += elements_written;
+    element_count += elements_written;
+    return elements_written;
+  }
+
+  // clears the buffer
+  void reset() override {
+    write_pos = 0;
+    read_pos = 0;
+    element_count = 0;
+    if (p_file != nullptr) file_seek(0);
+  }
+
+  // provides the number of entries that are available to read
+  int available() override { return element_count; }
+
+  // provides the number of entries that are available to write
+  int availableForWrite() override { return (max_size - element_count); }
+
+  // /// Returns the maximum capacity of the buffer
+  // int size() override { return max_size; }
+
+  // not supported
+  T *address() override { return nullptr; }
+
+ protected:
+  File *p_file = nullptr;
+  int write_pos;
+  int read_pos;
+  int element_count;
+  int max_size = INT_MAX;
+  bool auto_rewind = true;
+
+  void file_seek(int pos) {
+    if (p_file->position() != pos * sizeof(T)) {
+      LOGD("file_seek: %d", pos);
+      if (!p_file->seek(pos * sizeof(T))) {
+        LOGE("seek %d", pos * sizeof(T))
+      }
+    }
+  }
+
+  int file_write(const T *data, int count) {
+    LOGD("file_write: %d", count);
+    if (p_file == nullptr) return 0;
+    int to_write = sizeof(T) * count;
+    int bytes_written = p_file->write((const uint8_t *)data, to_write);
+    // p_file->flush();
+    int elements_written = bytes_written / sizeof(T);
+    if (bytes_written != to_write) {
+      LOGE("write: %d -> %d", to_write, bytes_written);
+    }
+    return elements_written;
+  }
+
+  int file_read(T *result, int count) {
+    LOGD("file_read: %d", count);
+    size_t result_bytes = p_file->read((uint8_t *)result, sizeof(T) * count);
+    if (result_bytes != count * sizeof(T)) {
+      LOGE("readBytes: %d -> %d", (int)sizeof(T) * count, (int)result_bytes);
+      result = 0;
+    }
+    return count;
+  }
+};
+
+/**
+ * @brief A lock free N buffer. If count=2 we create a DoubleBuffer, if
+ * count=3 a TripleBuffer etc.
  * @ingroup buffers
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -325,7 +476,6 @@ class RingBuffer : public BaseBuffer<T> {
 template <typename T>
 class NBuffer : public BaseBuffer<T> {
  public:
-
   NBuffer(int size, int count) {
     filled_buffers.resize(count);
     avaliable_buffers.resize(count);
@@ -340,7 +490,7 @@ class NBuffer : public BaseBuffer<T> {
       }
     }
   }
-  
+
   virtual ~NBuffer() {
     delete actual_write_buffer;
     delete actual_read_buffer;
@@ -484,8 +634,8 @@ class NBuffer : public BaseBuffer<T> {
 
   int bufferCountFilled() {
     int result = 0;
-    for (int j=0;j<buffer_count;j++){
-      if (filled_buffers[j]!=nullptr){
+    for (int j = 0; j < buffer_count; j++) {
+      if (filled_buffers[j] != nullptr) {
         result++;
       }
     }
@@ -494,17 +644,15 @@ class NBuffer : public BaseBuffer<T> {
 
   int bufferCountEmpty() {
     int result = 0;
-    for (int j=0;j<buffer_count;j++){
-      if (avaliable_buffers[j]!=nullptr){
+    for (int j = 0; j < buffer_count; j++) {
+      if (avaliable_buffers[j] != nullptr) {
         result++;
       }
     }
     return result;
   }
 
-  void setBufferSize(int size){
-    buffer_size = size;
-  }
+  void setBufferSize(int size) { buffer_size = size; }
 
  protected:
   int buffer_size = 0;
@@ -597,24 +745,24 @@ class BufferedArray {
   }
   // access values, the offset and length are specified in samples of type <T>
   int16_t *getValues(size_t offset, size_t length) {
-      LOGD("getValues(%d,%d) - max %d", offset, length, array.size());
+    LOGD("getValues(%d,%d) - max %d", offset, length, array.size());
     if (offset == 0) {
       // we restart at the beginning
       last_end = 0;
       actual_end = length;
     } else {
       // if first position is at end we do not want to read the full buffer
-      last_end = actual_end>=0 ? actual_end :  offset;
+      last_end = actual_end >= 0 ? actual_end : offset;
       // increase actual end if bigger then old
       actual_end = offset + length > actual_end ? offset + length : actual_end;
     }
     int size = actual_end - last_end;
     if (size > 0) {
       LOGD("readBytes(%d,%d)", last_end, size);
-      assert(last_end+size<=array.size());
+      assert(last_end + size <= array.size());
       p_stream->readBytes((uint8_t *)(&array[last_end]), size * 2);
     }
-    assert(offset<actual_end);
+    assert(offset < actual_end);
     return &array[offset];
   }
 

@@ -17,6 +17,13 @@ namespace audio_tools {
 enum RxTxMode  {UNDEFINED_MODE=0, TX_MODE=1, RX_MODE=2, RXTX_MODE=3 };
 
 /**
+ * @brief Memory types
+ * @ingroup basic
+ */
+
+enum MemoryType {RAM, PS_RAM, FLASH_RAM};
+
+/**
  * @brief Text string (description) for RxTxMode
 */
 INLINE_VAR const char* RxTxModeNames[]={"UNDEFINED_MODE","TX_MODE","RX_MODE","RXTX_MODE" };
