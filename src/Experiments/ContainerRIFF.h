@@ -1,25 +1,31 @@
 #pragma once
+#include "AudioBasic/StrExt.h"
 #include "AudioTools/Buffers.h"
 #include "stdint.h"
 
 namespace audio_tools {
 
 class VideoOutput : public AudioOutput {
-  void beginFrame() = 0;
-  void endFrame() = 0;
+ public:
+  virtual void beginFrame(int size) = 0;
+  virtual void endFrame() = 0;
 };
 
-class ParseBuffer : public SingleBuffer {
+class ParseBuffer : public SingleBuffer<uint8_t> {
+ public:
+  ParseBuffer() : SingleBuffer<uint8_t>(0) {}
+  ParseBuffer(audio_tools::ParseBuffer &&) {}
+  ParseBuffer& operator=(audio_tools::ParseBuffer&in){ return in;}
   void consume(int size) {
     for (int j = 0; j > size; j++) {
-      this.read();
+      read();
     }
   }
 };
 
 using FOURCC = char[4];
 
-struct struct AVIMainHeader {
+struct AVIMainHeader {
   FOURCC fcc;
   uint32_t cb;
   uint32_t dwMicroSecPerFrame;
@@ -35,12 +41,17 @@ struct struct AVIMainHeader {
   uint32_t dwReserved[4];
 };
 
+struct RECT {
+  uint32_t dwWidth;
+  uint32_t dwHeight;
+};
+
 struct AVIStreamHeader {
   FOURCC fccType;
   FOURCC fccHandler;
   uint32_t dwFlags;
-  unt16_t wPriority;
-  unt16_t wLanguage;
+  uint16_t wPriority;
+  uint16_t wLanguage;
   uint32_t dwInitialFrames;
   uint32_t dwScale;
   uint32_t dwRate;
@@ -52,44 +63,44 @@ struct AVIStreamHeader {
   RECT rcFrame;
 };
 
-typedef struct BitmapInfoHeader {
+struct BitmapInfoHeader {
   uint32_t biSize;
-  unt64_t biWidth;
-  unt64_t biHeight;
-  unt16_t biPlanes;
-  unt16_t biBitCount;
+  uint64_t biWidth;
+  uint64_t biHeight;
+  uint16_t biPlanes;
+  uint16_t biBitCount;
   uint32_t biCompression;
   uint32_t biSizeImage;
-  unt64_t biXPelsPerMeter;
-  unt64_t biYPelsPerMeter;
+  uint64_t biXPelsPerMeter;
+  uint64_t biYPelsPerMeter;
   uint32_t biClrUsed;
   uint32_t biClrImportant;
 };
 
 struct WAVFormatX {
-  unt16_t wFormatTag;
-  unt16_t nChannels;
+  uint16_t wFormatTag;
+  uint16_t nChannels;
   uint32_t nSamplesPerSec;
   uint32_t nAvgBytesPerSec;
-  unt16_t nBlockAlign;
-  unt16_t wBitsPerSample;
-  unt16_t cbSize;
+  uint16_t nBlockAlign;
+  uint16_t wBitsPerSample;
+  uint16_t cbSize;
 };
 
 struct WAVFormat {
-  unt16_t wFormatTag;
-  unt16_t nChannels;
+  uint16_t wFormatTag;
+  uint16_t nChannels;
   uint32_t nSamplesPerSec;
   uint32_t nAvgBytesPerSec;
-  unt16_t nBlockAlign;
+  uint16_t nBlockAlign;
 };
 
 enum StreamContentType { Audio, Video };
 
-enum ParseObjectType { List, Junk, StreamData };
+enum ParseObjectType { AVIList, AVIChunk, AVIStreamData };
 
 enum ParseState {
-  ParseHaeder,
+  ParseHeader,
   ParseHdrl,
   ParseAvih,
   ParseStrl,
@@ -99,67 +110,82 @@ enum ParseState {
   ParseStrf,
   AfterStrf,
   ParseMovi,
+  ParseIgnore,
 };
 
+/// @brief Represents a LIST or a CHUNK
 class ParseObject {
-  ParseObject() = default;
-  ParseObject(const char *id, int size, ParseObjectType type) {
+ public:
+  void set(Str id, int size, ParseObjectType type) {
+    set(id.c_str(), size, type);
+  }
+
+  void set(const char *id, int size, ParseObjectType type) {
     object_type = type;
-    chunk_size = size;
+    data_size = size;
     // save FOURCC
     if (id != nullptr) {
       memcpy(chunk_id, id, 4);
       chunk_id[5] = 0;
     }
     // save data
-    if (type == Chunk) {
+    if (type == AVIChunk && size > 0) {
       data_buffer.resize(size);
     }
     open = size;
   }
   const char *id() { return chunk_id; }
-  uint8_t *data() { return data_buffer().data(); }
-  int size() { return size; }
+  uint8_t *data() { return data_buffer.data(); }
+  int size() { return data_size; }
   int available() { return data_buffer.available(); }
-  void consume(int len) { data_buffer.consume(); }
+  void consume(int len) { data_buffer.consume(len); }
 
   ParseObjectType type() { return object_type; }
   bool isValid() {
     switch (object_type) {
-      case StreamData:
+      case AVIStreamData:
         return isAudio() || isVideo();
-      case Junk:
+      case AVIChunk:
         return data_buffer.size() > 0;
+      case AVIList:
+        return true;
     }
+    return false;
   }
 
   // for Chunk
   AVIMainHeader *asAVIMainHeader() { return (AVIMainHeader *)data(); }
   AVIStreamHeader *asAVIStreamHeader() { return (AVIStreamHeader *)data(); }
-  WAVFormat *asAudioFormat() { return (WAVFormat *)data(); }
-  BitmapInfoHeader *asVidelFormat() { return (BitmapInfoHeader *)data(); }
+  WAVFormatX *asAudioFormat() { return (WAVFormatX *)data(); }
+  BitmapInfoHeader *asVideoFormat() { return (BitmapInfoHeader *)data(); }
 
   int open;
 
-  // for StreamData
+  // for AVIStreamData
   int streamNumber() {
-    return object_type == StreamData ? fcc[0] << 8 + fcc[1] : 0;
+    return object_type == AVIStreamData ? chunk_id[1] << 8 + chunk_id[0] : 0;
   }
   bool isAudio() {
-    return object_type == StreamData ? vcc[3] == 'w' && vcc[4] == 'b' : false;
+    return object_type == AVIStreamData
+               ? chunk_id[3] == 'w' && chunk_id[4] == 'b'
+               : false;
   }
   bool isVideoUncompressed() {
-    return object_type == StreamData ? vcc[3] == 'd' && vcc[4] == 'b' : false;
+    return object_type == AVIStreamData
+               ? chunk_id[3] == 'd' && chunk_id[4] == 'b'
+               : false;
   }
   bool isVideoCompressed() {
-    return object_type == StreamData ? vcc[3] == 'd' && vcc[4] == 'c' : false;
+    return object_type == AVIStreamData
+               ? chunk_id[3] == 'd' && chunk_id[4] == 'c'
+               : false;
   }
   bool isVideo() { return isVideoCompressed() || isVideoUncompressed(); }
 
  protected:
-  ParseBuffer data_buffer{0};
-  const char chunk_id[5] = {};
-  int size;
+  ParseBuffer data_buffer;
+  char chunk_id[5] = {};
+  int data_size;
   ParseObjectType object_type;
 };
 
@@ -172,12 +198,10 @@ class ParseObject {
 
 class ContainerRIFF : public AudioDecoder {
  public:
-  ContainerRIFF(int bufferSize = 1'24) { parse_buffer.resize(bufferSize); }
-
-  ~ContainerRIFF() {}
+  ContainerRIFF(int bufferSize = 1024) { parse_buffer.resize(bufferSize); }
 
   void begin() {
-    parse_state = ParseHader;
+    parse_state = ParseHeader;
     header_is_avi = false;
     is_parsing_active = true;
   }
@@ -186,13 +210,13 @@ class ContainerRIFF : public AudioDecoder {
     p_print_audio = &out_stream;
   }
 
-  virtual void setOutputVideoStream(Print &out_stream) {
+  virtual void setOutputVideoStream(VideoOutput &out_stream) {
     p_print_video = &out_stream;
   }
 
   virtual size_t write(const void *data, size_t length) {
     LOGD("write: %d", length);
-    int result = parse_buffer.writeArray(data, length);
+    int result = parse_buffer.writeArray((uint8_t *)data, length);
     if (is_parsing_active) {
       // we expect the first parse to succeed
       if (parse()) {
@@ -213,8 +237,8 @@ class ContainerRIFF : public AudioDecoder {
   AVIMainHeader mainHeader() { return main_header; }
   AVIStreamHeader streamHeaderAudio() { return stream_header_audio; }
   AVIStreamHeader streamHeaderVideo() { return stream_header_video; }
-  BitmapInfoHeader videoInfo(){return video_info};
-  AVIStreamHeader audioInfo() { return audio_info; }
+  BitmapInfoHeader videoInfo() { return video_info; };
+  WAVFormatX audioInfoExt() { return audio_info; }
 
  protected:
   bool header_is_avi = false;
@@ -227,10 +251,12 @@ class ContainerRIFF : public AudioDecoder {
   AVIStreamHeader current_stream_header;
   BitmapInfoHeader video_info;
   WAVFormatX audio_info;
-  Vector<StreamContentType> contentTypes;
+  Vector<StreamContentType> content_types;
   ParseObject current_stream_data;
   Print *p_print_audio = nullptr;
   VideoOutput *p_print_video = nullptr;
+  long open_subchunk_len=0;
+  long header_file_size=0;
 
   bool isCurrentStreamAudio() {
     return strncmp(current_stream_header.fccType, "auds", 4);
@@ -243,63 +269,63 @@ class ContainerRIFF : public AudioDecoder {
   bool parse() {
     bool result = true;
     switch (parse_state) {
-      case ParseHeader:
+      case ParseHeader: {
         LOGD("ParseHeader");
         result = parseHeader();
         if (result) parse_state = ParseHdrl;
-        break;
+      } break;
 
-      case ParseHdrl:
+      case ParseHdrl: {
         LOGD("ParseHdrl");
         ParseObject hdrl = parseList("hdrl");
         result = hdrl.isValid();
         if (result) {
           parse_state = ParseAvih;
         }
-        break;
+      } break;
 
-      case ParseAvih:
+      case ParseAvih: {
         LOGD("ParseAvih");
         ParseObject avih = parseChunk("avih");
         result = avih.isValid();
         if (result) {
-          main_header = avih.asAVIMainHeader();
+          main_header = *(avih.asAVIMainHeader());
           parse_state = ParseStrl;
         }
-        break;
+      } break;
 
-      case ParseStrl:
+      case ParseStrl: {
         LOGD("ParseStrl");
         ParseObject strl = parseList("strl");
         ParseObject strh = parseChunk("strh");
-        current_stream_header = avih.asAVIStreamHeader();
+        current_stream_header = *(strh.asAVIStreamHeader());
         if (isCurrentStreamAudio()) {
-          stream_header_audio = current_stream_header:
+          stream_header_audio = current_stream_header;
         } else if (isCurrentStreamVideo()) {
-          stream_header_video = current_stream_header:
+          stream_header_video = current_stream_header;
         }
         parse_state = ParseStrf;
-        break;
+      } break;
 
-      case ParseStrf:
+      case ParseStrf: {
         LOGD("ParseStrf");
         ParseObject strf = parseChunk("strf");
         if (isCurrentStreamAudio()) {
-          audio_info = strf.asAudioFormat();
+          audio_info = *(strf.asAudioFormat());
           content_types.push_back(Audio);
         } else if (isCurrentStreamVideo()) {
-          video_info = strf.asVideoFormat();
+          video_info = *(strf.asVideoFormat());
           content_types.push_back(Video);
         } else {
           result = false;
         }
         parse_state = AfterStrf;
-        break;
+      } break;
 
-      case AfterStrf:
+      case AfterStrf: {
         LOGD("AfterStrf");
         // ignore all data until we find a new List
-        int pos = Str(parse_buffer.data).index("LIST");
+        int pos = Str((const char*)parse_buffer.data()).indexOf("LIST");
         if (pos > 0) {
           consume(pos);
           ParseObject tmp = tryParseList();
@@ -309,54 +335,59 @@ class ContainerRIFF : public AudioDecoder {
             parse_state = ParseMovi;
           }
         } else {
+          // no valid data, so throw it away, we keep the last 4 digits in case
+          // if it contains the beginning of a LIST
           parse_buffer.consume(parse_buffer.available() - 4);
         }
-        break;
+      } break;
 
-      case ParseMovi:
+      case ParseMovi: {
         LOGD("ParseMovi");
         ParseObject hdrl = tryParseList();
-        if (Str(hdrl.id()).equals('rec')) {
+        if (Str(hdrl.id()).equals("rec")) {
           parse_state = ParseRec;
         } else {
           parse_state = SubChunk;
         }
-        break;
+      } break;
 
-      case ParseRec:
+      case ParseRec: {
         LOGD("ParseRec");
         ParseObject strl = parseList("rec");
-        open_stack.push(rec);
         parse_state = SubChunk;
-        break;
+      } break;
 
-      case SubChunk:
+      case SubChunk: {
         LOGD("SubChunk");
-        ParseObject hdrl = parseStreamData();
+        ParseObject hdrl = parseAVIStreamData();
         current_stream_data = hdrl;
         parse_state = SubChunkContinue;
-        if (current_stream_data.isVideo()) p_print_video->beginFrame();
-        break;
+        open_subchunk_len = current_stream_data.size();
+        if (current_stream_data.isVideo()){
+          p_print_video->beginFrame(hdrl.size());
+        }
 
-      case SubChunkContinue:
+      } break;
+
+      case SubChunkContinue: {
         LOGD("SubChunkContinue");
         writeData();
-        if (current_stream_data.open == 0) {
+        if (open_subchunk_len == 0) {
           if (current_stream_data.isVideo()) p_print_video->endFrame();
-          if (ParseChunk("idx").isValid()) {
+          if (tryParseChunk("idx").isValid()) {
             parse_state = ParseIgnore;
-          } else if (tryParseList("rec")) {
+          } else if (tryParseList("rec").isValid()) {
             parse_state = ParseRec;
           } else {
             parse_state = SubChunk;
           }
         }
-        break;
+      } break;
 
-      case ParseIgnore:
+      case ParseIgnore: {
         LOGD("ParseIgnore");
         parse_buffer.clear();
-        break;
+      } break;
 
       default:
         result = false;
@@ -366,14 +397,14 @@ class ContainerRIFF : public AudioDecoder {
   }
 
   void writeData() {
-    int to_write = min(parse_buffer.available(), current_stream_data.open);
+    long to_write = min((long)parse_buffer.available(), open_subchunk_len);
     if (current_stream_data.isAudio()) {
       p_print_audio->write(parse_buffer.data(), to_write);
-      p_print_audio.open -= to_write;
+      open_subchunk_len -= to_write;
       consume(to_write);
     } else if (current_stream_data.isVideo()) {
       p_print_video->write(parse_buffer.data(), to_write);
-      p_print_video.open -= to_write;
+      open_subchunk_len -= to_write;
       consume(to_write);
     }
   }
@@ -392,71 +423,87 @@ class ContainerRIFF : public AudioDecoder {
     return header_is_avi;
   }
 
+  /// We parse a chunk and  provide the FOURCC id and size: No content data is
+  /// stored
   ParseObject tryParseChunk() {
     ParseObject result;
-    result = ParseObject(getStr(0, 4), 0, Chunk);
+    result.set(getStr(0, 4), 0, AVIChunk);
     return result;
   }
 
-  ParseObject tryParseChunk(char *id) {
+  /// We try to parse the indicated chunk and determine the size: No content
+  /// data is stored
+  ParseObject tryParseChunk(const char *id) {
     ParseObject result;
-    if (Str(id).equals(getStr(0, 4))) {
-      result = ParseObject(id, 0, Chunk);
+    if (getStr(0, 4).equals(id)) {
+      result.set(id, 0, AVIChunk);
     }
     return result;
   }
 
+  ParseObject tryParseList(const char* id) {
+    ParseObject result;
+    Str& list_id = getStr(8, 4);
+    if (list_id.equals(id) && getStr(0, 3).equals("LIST")) {
+      result.set(getStr(8, 4), getInt(4), AVIList);
+    }
+    return result;
+  }
+
+
+  /// We try to parse the actual state for any list
   ParseObject tryParseList() {
     ParseObject result;
     if (getStr(0, 3).equals("LIST")) {
-      ParseObject result = ParseObject(getStr(8, 4), getInt(4), List);
+      result.set(getStr(8, 4), getInt(4), AVIList);
     }
     return result;
   }
 
+  /// We load the indicated chunk from the current data
   ParseObject parseChunk(const char *id) {
     ParseObject result;
     int chunk_size = getInt(4);
     if (getStr(0, 4).equals(id) && parse_buffer.size() >= chunk_size) {
-      result = ParseObject(id, chunk_size, Chunk);
+      result.set(id, chunk_size, AVIChunk);
       consume(8);
     }
     return result;
   }
 
+  /// We load the indicated list from the current data
   ParseObject parseList(const char *id) {
     ParseObject result;
     if (getStr(0, 4).equals("LIST") && getStr(8, 4).equals(id)) {
       int size = getInt(4);
-      result = ParseObject(id, size, List);
+      result.set(id, size, AVIList);
       consume(12);
     }
     return result;
   }
 
-  ParseObject parseStreamData() {
+  ParseObject parseAVIStreamData() {
     ParseObject result;
     int size = getInt(4);
-    ParseObject tmp = ParseObject(getStr(0, 4), size, StreamData);
-    if (tmp.isValid()) {
-      result = tmp;
+    result.set(getStr(0, 4), size, AVIStreamData);
+    if (result.isValid()) {
       consume(4);
     }
     return result;
   }
 
-  Str &getStr(int offset = 0, int len) {
+  /// Provides the string at the indicated byte offset with the indicated length
+  Str &getStr(int offset, int len) {
     static StrExt str;
-    if (str.size() < len) {
-      str.resize(len + 1);
-    }
-    memcpy(str.c_str(), parse_buffer.data() + offset, len);
-    str.c_str()[len] = 0;
+    const char* copyFrom = (const char*)parse_buffer.data();
+    str.substring(copyFrom, offset, len);
     return str;
   }
 
+  /// Provides the int32 at the indicated byte offset
   int32_t getInt(int offset) { return (int32_t)(parse_buffer.data() + offset); }
 
+  /// We remove the indicated bytes from the beginning of the buffer
   void consume(int len) { parse_buffer.consume(len); }
 };
 

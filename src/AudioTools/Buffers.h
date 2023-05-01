@@ -3,6 +3,7 @@
 
 #include "AudioBasic/Collections.h"
 #include "AudioTools/AudioLogger.h"
+#include <limits.h>         /* For INT_MAX */
 
 #undef MIN
 #define MIN(A, B) ((A) < (B) ? (A) : (B))
