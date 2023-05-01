@@ -96,7 +96,7 @@ class FLACDecoder : public StreamingDecoder {
     while(FLAC__stream_decoder_process_single(decoder));
   }
 
-  void setNotifyAudioChange(AudioInfoDependent &bi) {
+  void setNotifyAudioChange(AudioInfoSupport &bi) {
     p_notify = &bi;
   }
 
@@ -133,7 +133,7 @@ class FLACDecoder : public StreamingDecoder {
   bool is_active = false;
   bool is_ogg = false;
   AudioInfo info;
-  AudioInfoDependent *p_notify = nullptr;
+  AudioInfoSupport *p_notify = nullptr;
   FLAC__StreamDecoder *decoder = nullptr;
   FLAC__StreamDecoderInitStatus init_status;
   Print *p_print = nullptr;

@@ -98,7 +98,7 @@ struct AudioInfo {
  * @brief Supports changes to the sampling rate, bits and channels
  * @ingroup basic
  */
-class AudioInfoDependent {
+class AudioInfoSupport {
     public:
       virtual void setAudioInfo(AudioInfo info)=0;
       virtual AudioInfo audioInfo() = 0;
@@ -109,7 +109,8 @@ class AudioInfoDependent {
 
 // Support legacy name
 using AudioBaseInfo = AudioInfo;
-using AudioBaseInfoDependent = AudioInfoDependent;
+using AudioBaseInfoDependent = AudioInfoSupport;
+using AudioInfoDependent = AudioInfoSupport;
 
 
 /**
@@ -118,7 +119,7 @@ using AudioBaseInfoDependent = AudioInfoDependent;
  */
 class AudioInfoSource {
     public:
-      virtual void  setNotifyAudioChange(AudioInfoDependent &bi) = 0;
+      virtual void  setNotifyAudioChange(AudioInfoSupport &bi) = 0;
 };
 
 

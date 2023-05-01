@@ -37,7 +37,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioStream : public Stream, public AudioInfoDependent, public AudioInfoSource {
+class AudioStream : public Stream, public AudioInfoSupport, public AudioInfoSource {
  public:
   AudioStream() = default;
   virtual ~AudioStream() = default;
@@ -57,7 +57,7 @@ class AudioStream : public Stream, public AudioInfoDependent, public AudioInfoSo
       }
   }
 
-  virtual void  setNotifyAudioChange(AudioInfoDependent &bi) override {
+  virtual void  setNotifyAudioChange(AudioInfoSupport &bi) override {
       p_notify = &bi;
   }
 
@@ -120,7 +120,7 @@ class AudioStream : public Stream, public AudioInfoDependent, public AudioInfoSo
 #endif
 
  protected:
-  AudioInfoDependent *p_notify=nullptr;
+  AudioInfoSupport *p_notify=nullptr;
   AudioInfo info;
   RingBuffer<uint8_t> tmp_in{0};
   RingBuffer<uint8_t> tmp_out{0};
@@ -632,7 +632,7 @@ class GeneratedSoundStream : public AudioStream {
     active = false;
   }
 
-  virtual void setNotifyAudioChange(AudioInfoDependent &bi) override {
+  virtual void setNotifyAudioChange(AudioInfoSupport &bi) override {
     audioBaseInfoDependent = &bi;
   }
 
@@ -658,7 +658,7 @@ class GeneratedSoundStream : public AudioStream {
  protected:
   bool active = false;
   SoundGenerator<T> *generator_ptr;
-  AudioInfoDependent *audioBaseInfoDependent = nullptr;
+  AudioInfoSupport *audioBaseInfoDependent = nullptr;
   const char* source_not_defined_error = "Source not defined";
 
 };
@@ -788,7 +788,7 @@ class NullStream : public AudioStream {
   }
 
   /// Define object which need to be notified if the basinfo is changing
-  void setNotifyAudioChange(AudioInfoDependent &bi) override {}
+  void setNotifyAudioChange(AudioInfoSupport &bi) override {}
 
   void setAudioInfo(AudioInfo info) override {
     this->info = info;
@@ -1238,7 +1238,7 @@ class ProgressStream : public AudioStream {
     ProgressStreamInfo progress_info;
     Stream *p_stream=nullptr;
     Print *p_print=nullptr;
-    AudioInfoDependent *p_info_from=nullptr;
+    AudioInfoSupport *p_info_from=nullptr;
     size_t total_processed = 0;
 
     size_t measure(size_t len) {
@@ -1691,7 +1691,7 @@ class TimerCallbackAudioStream : public BufferedStream {
   }
 
   /// Defines the target that needs to be notified
-  void setNotifyAudioChange(AudioInfoDependent &bi) { notifyTarget = &bi; }
+  void setNotifyAudioChange(AudioInfoSupport &bi) { notifyTarget = &bi; }
 
   /// Provides the current audio information
   TimerCallbackAudioStreamInfo audioInfoExt() { return cfg; }
@@ -1747,7 +1747,7 @@ class TimerCallbackAudioStream : public BufferedStream {
 
  protected:
   TimerCallbackAudioStreamInfo cfg;
-  AudioInfoDependent *notifyTarget = nullptr;
+  AudioInfoSupport *notifyTarget = nullptr;
   bool active = false;
   uint16_t (*frameCallback)(uint8_t *data, uint16_t len);
   // below only relevant with timer

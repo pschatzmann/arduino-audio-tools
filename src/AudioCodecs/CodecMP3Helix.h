@@ -8,11 +8,11 @@
 namespace audio_tools {
 
 // audio change notification target
-AudioInfoDependent *audioChangeMP3Helix=nullptr;
+AudioInfoSupport *audioChangeMP3Helix=nullptr;
 
 /**
  * @brief MP3 Decoder using libhelix: https://github.com/pschatzmann/arduino-libhelix
- * This is basically just a simple wrapper to provide AudioInfo and AudioInfoDependent
+ * This is basically just a simple wrapper to provide AudioInfo and AudioInfoSupport
  * @ingroup codecs
  * @ingroup decoder
  * @author Phil Schatzmann
@@ -51,7 +51,7 @@ class MP3DecoderHelix : public AudioDecoder  {
          * @param out_stream 
          * @param bi 
          */
-        MP3DecoderHelix(Print &out_stream, AudioInfoDependent &bi){
+        MP3DecoderHelix(Print &out_stream, AudioInfoSupport &bi){
             TRACED();
             mp3 = new libhelix::MP3DecoderHelix();
             filter.setDecoder(mp3);
@@ -121,7 +121,7 @@ class MP3DecoderHelix : public AudioDecoder  {
         }
 
         /// Defines the callback object to which the Audio information change is provided
-        void setNotifyAudioChange(AudioInfoDependent &bi){
+        void setNotifyAudioChange(AudioInfoSupport &bi){
             TRACED();
             audioChangeMP3Helix = &bi;
             if (mp3!=nullptr)  mp3->setInfoCallback(infoCallback);

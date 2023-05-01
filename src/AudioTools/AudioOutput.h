@@ -19,7 +19,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioOutput : public Print, public AudioInfoDependent, public AudioInfoSource {
+class AudioOutput : public Print, public AudioInfoSupport, public AudioInfoSource {
     public:
         virtual ~AudioOutput() = default;
 
@@ -53,7 +53,7 @@ class AudioOutput : public Print, public AudioInfoDependent, public AudioInfoSou
             }
         }
 
-        virtual void  setNotifyAudioChange(AudioInfoDependent &bi) override {
+        virtual void  setNotifyAudioChange(AudioInfoSupport &bi) override {
             p_notify = &bi;
         }
 
@@ -80,7 +80,7 @@ class AudioOutput : public Print, public AudioInfoDependent, public AudioInfoSou
 
     protected:
         int tmpPos=0;
-        AudioInfoDependent *p_notify=nullptr;
+        AudioInfoSupport *p_notify=nullptr;
         AudioInfo cfg;
         SingleBuffer<uint8_t> tmp{MAX_SINGLE_CHARS};
 };

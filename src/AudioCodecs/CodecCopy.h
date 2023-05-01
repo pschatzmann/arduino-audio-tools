@@ -24,7 +24,7 @@ public:
 
   CopyDecoder(Print &out_stream) { TRACED(); pt_print=&out_stream; }
 
-  CopyDecoder(Print &out_stream, AudioInfoDependent &bi) {pt_print=&out_stream;}
+  CopyDecoder(Print &out_stream, AudioInfoSupport &bi) {pt_print=&out_stream;}
 
   ~CopyDecoder() {}
 
@@ -40,7 +40,7 @@ public:
 
   operator bool() { return true; }
 
-  void setNotifyAudioChange(AudioInfoDependent &bi) {}
+  void setNotifyAudioChange(AudioInfoSupport &bi) {}
 
   // The result is encoded data
   virtual bool isResultPCM() { return is_pcm;} 
@@ -63,7 +63,7 @@ public:
 
   CopyEncoder(Print &out_stream) { TRACED(); pt_print=&out_stream; }
 
-  CopyEncoder(Print &out_stream, AudioInfoDependent &bi) {pt_print=&out_stream;}
+  CopyEncoder(Print &out_stream, AudioInfoSupport &bi) {pt_print=&out_stream;}
 
   ~CopyEncoder() {}
 
@@ -80,7 +80,7 @@ public:
 
   operator bool() { return true; }
 
-  void setNotifyAudioChange(AudioInfoDependent &bi) {}
+  void setNotifyAudioChange(AudioInfoSupport &bi) {}
 
   const char *mime() {return nullptr;}
 
