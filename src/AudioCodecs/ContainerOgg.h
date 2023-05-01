@@ -288,7 +288,7 @@ class OggContainerEncoder : public AudioEncoder {
       // encode the data
       size_t eff = p_encoded_audio_stream->write((uint8_t*)in_ptr, in_size);
       if (eff!=in_size){
-        LOGE("Write overflow req:%d eff:%d", in_size, eff);
+        LOGE("Write overflow req:%d eff:%d", (int)in_size, (int)eff);
       }
       // get the result from the buffer
       void *encoded_data = buffer.address();
