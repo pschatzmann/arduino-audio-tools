@@ -7,7 +7,7 @@
 namespace audio_tools {
 
 // audio change notification target
-AudioInfoSupport *audioChangeAACHelix=nullptr;
+extern AudioInfoSupport *audioChangeAACHelix;
 
 /**
  * @brief AAC Decoder using libhelix: https://github.com/pschatzmann/arduino-libhelix
