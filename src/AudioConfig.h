@@ -569,17 +569,17 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 
 //----------------
 
-
-
+// Full Arduino functionality using emulator
 #ifdef IS_DESKTOP
 #  include <Client.h>
-#  include <WiFiClient.h>
+#  include <WiFi.h>
 #  define USE_URL_ARDUINO
 #  define USE_STREAM_WRITE_OVERRIDE
 #  define USE_STREAM_READ_OVERRIDE
 typedef WiFiClient WiFiClientSecure;
 #endif
 
+// Minimum desktop functionality w/o Arduino emulator
 #ifdef IS_MIN_DESKTOP
 #  include "AudioLibs/Desktop/NoArduino.h"
 #  include "AudioLibs/Desktop/Millis.h"
