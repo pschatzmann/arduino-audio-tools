@@ -16,7 +16,7 @@ int channels = 1;  // The stream will have 2 channels
 
 SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound( sineWave); // Stream generated from sine wave
-CsvStream<int16_t> out(Serial, 2);   // Output of sound on desktop 
+CsvOutput<int16_t> out(Serial, 2);   // Output of sound on desktop 
 OpusAudioEncoder enc;
 OpusAudioDecoder dec;
 EncodedAudioStream decoder(out, dec); // encode and write 

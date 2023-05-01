@@ -9,7 +9,7 @@ int16_t arsineC256[] = { 436, 657, 877, 1096, 1316, 1534, 1751, 1967, 2183, 2396
 GeneratorFromArray<int16_t> sineWave(arsineC256,0,false); 
 GeneratedSoundStream<int16_t> sound(sineWave);             // Stream generated from sine wave
 ResampleStream out(sound);                        // We double the output sample rate
-CsvStream<int16_t> csv(Serial, channels);                  // Output to Serial
+CsvOutput<int16_t> csv(Serial, channels);                  // Output to Serial
 InputMerge<int16_t> merge; 
 StreamCopy copier(csv, merge, 1024);                       // copies sound to out
 
