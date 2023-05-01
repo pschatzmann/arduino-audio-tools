@@ -25,7 +25,7 @@ public:
     p_out_stream = &out_stream;
   }
 
-  DecoderHelix(Print &out_stream, AudioInfoDependent &bi) {
+  DecoderHelix(Print &out_stream, AudioInfoSupport &bi) {
     TRACED();
     p_out_stream = &out_stream;
     p_bi = &bi;
@@ -71,12 +71,12 @@ public:
 
   /// Defines the callback object to which the Audio information change is
   /// provided
-  void setNotifyAudioChange(AudioInfoDependent &bi) { p_bi = &bi; }
+  void setNotifyAudioChange(AudioInfoSupport &bi) { p_bi = &bi; }
 
 protected:
   AudioDecoder *p_decoder = nullptr;
   Print *p_out_stream = nullptr;
-  AudioInfoDependent *p_bi = nullptr;
+  AudioInfoSupport *p_bi = nullptr;
   AudioInfo noInfo;
 
   /// Defines the decoder based on the audio format

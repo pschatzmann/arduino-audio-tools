@@ -32,7 +32,7 @@ public:
     }
   }
 
-  void setNotifyAudioChange(AudioInfoDependent &bi) override {
+  void setNotifyAudioChange(AudioInfoSupport &bi) override {
     p_notify = &bi;
   }
 
@@ -106,7 +106,7 @@ public:
 
 protected:
   AudioInfo cfg;
-  AudioInfoDependent *p_notify = nullptr;
+  AudioInfoSupport *p_notify = nullptr;
   Print *p_out = nullptr;
   Stream *p_in = nullptr;
   Vector<uint8_t> pcm;

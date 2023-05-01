@@ -208,7 +208,7 @@ class BinaryContainerDecoder : public AudioDecoder {
     meta_callback = callback;
   }
 
-  void setNotifyAudioChange(AudioInfoDependent &bi) {}
+  void setNotifyAudioChange(AudioInfoSupport &bi) {}
 
   void begin() {
     is_first = true;

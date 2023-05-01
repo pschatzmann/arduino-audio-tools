@@ -265,7 +265,7 @@ class WAVDecoder : public AudioDecoder {
          * @param bi Object that will be notified about the Audio Formt (Changes)
          */
 
-        WAVDecoder(Print &out_stream, AudioInfoDependent &bi){
+        WAVDecoder(Print &out_stream, AudioInfoSupport &bi){
             TRACED();
             this->out = &out_stream;
             this->audioBaseInfoSupport = &bi;
@@ -276,7 +276,7 @@ class WAVDecoder : public AudioDecoder {
             this->out = &out_stream;
         }
 
-        void setNotifyAudioChange(AudioInfoDependent &bi){
+        void setNotifyAudioChange(AudioInfoSupport &bi){
             this->audioBaseInfoSupport = &bi;
         }
 
@@ -377,7 +377,7 @@ class WAVDecoder : public AudioDecoder {
     protected:
         WAVHeader header;
         Print *out;
-        AudioInfoDependent *audioBaseInfoSupport;
+        AudioInfoSupport *audioBaseInfoSupport;
         bool isFirst = true;
         bool isValid = true;
         bool active;

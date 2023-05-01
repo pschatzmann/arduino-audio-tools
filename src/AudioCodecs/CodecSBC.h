@@ -53,7 +53,7 @@ public:
     is_active = false;
   }
 
-  virtual void setNotifyAudioChange(AudioInfoDependent &bi) {
+  virtual void setNotifyAudioChange(AudioInfoSupport &bi) {
     p_notify = &bi;
   }
 
@@ -103,7 +103,7 @@ public:
 protected:
   Print *p_print = nullptr;
   AudioInfo info;
-  AudioInfoDependent *p_notify = nullptr;
+  AudioInfoSupport *p_notify = nullptr;
   sbc_t sbc;
   bool is_first = true;
   bool is_active = false;

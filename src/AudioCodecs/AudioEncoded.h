@@ -51,14 +51,14 @@ class AudioDecoder : public AudioWriter, public AudioInfoSource {
   virtual bool isResultPCM() { return true; }
 
   /// Registers an object that is notified if the audio format is changing
-  void setNotifyAudioChange(AudioInfoDependent &notify) override {
+  void setNotifyAudioChange(AudioInfoSupport &notify) override {
     p_notify = &notify;
   }
 
  protected:
   Print *p_print = nullptr;
   AudioInfo info;
-  AudioInfoDependent *p_notify = nullptr;
+  AudioInfoSupport *p_notify = nullptr;
 };
 
 /**
@@ -95,7 +95,7 @@ class CodecNOP : public AudioDecoder, public AudioEncoder {
   virtual void begin() {}
   virtual void end() {}
   virtual void setOutputStream(Print &out_stream) {}
-  virtual void setNotifyAudioChange(AudioInfoDependent &bi) {}
+  virtual void setNotifyAudioChange(AudioInfoSupport &bi) {}
   virtual void setAudioInfo(AudioInfo info) {}
 
   virtual AudioInfo audioInfo() {
@@ -133,7 +133,7 @@ class StreamingDecoder {
   virtual void setOutputStream(Print &outStream) = 0;
 
   /// Register Output Stream to be notified about changes
-  virtual void setNotifyAudioChange(AudioInfoDependent &bi) = 0;
+  virtual void setNotifyAudioChange(AudioInfoSupport &bi) = 0;
 
   /// Defines the output streams and register to be notified
   virtual void setOutputStream(AudioStream &out_stream) {
@@ -285,7 +285,7 @@ class EncodedAudioOutput : public AudioStream {
   }
 
   /// Define object which need to be notified if the basinfo is changing
-  void setNotifyAudioChange(AudioInfoDependent &bi) override {
+  void setNotifyAudioChange(AudioInfoSupport &bi) override {
     TRACEI();
     decoder_ptr->setNotifyAudioChange(bi);
   }

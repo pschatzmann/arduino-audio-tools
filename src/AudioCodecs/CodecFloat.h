@@ -40,7 +40,7 @@ class DecoderFloat : public AudioDecoder {
          * @param bi Object that will be notified about the Audio Formt (Changes)
          */
 
-        DecoderFloat(Print &out_stream, AudioInfoDependent &bi){
+        DecoderFloat(Print &out_stream, AudioInfoSupport &bi){
             TRACED();
             p_print = &out_stream;
         }
@@ -50,7 +50,7 @@ class DecoderFloat : public AudioDecoder {
             p_print = &out_stream;
         }
 
-        void setNotifyAudioChange(AudioInfoDependent &bi) override {
+        void setNotifyAudioChange(AudioInfoSupport &bi) override {
             this->bid = &bi;
         }
 
@@ -95,7 +95,7 @@ class DecoderFloat : public AudioDecoder {
 
     protected:
         Print *p_print=nullptr;
-        AudioInfoDependent *bid=nullptr;
+        AudioInfoSupport *bid=nullptr;
         AudioInfo cfg;
         bool active;
         Vector<int16_t> buffer;

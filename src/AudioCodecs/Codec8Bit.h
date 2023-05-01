@@ -42,7 +42,7 @@ class Decoder8Bit : public AudioDecoder {
          * @param bi Object that will be notified about the Audio Formt (Changes)
          */
 
-        Decoder8Bit(Print &out_stream, AudioInfoDependent &bi){
+        Decoder8Bit(Print &out_stream, AudioInfoSupport &bi){
             TRACED();
             setOutputStream(out_stream);
             setNotifyAudioChange(bi);
@@ -53,7 +53,7 @@ class Decoder8Bit : public AudioDecoder {
             p_print = &out_stream;
         }
 
-        void setNotifyAudioChange(AudioInfoDependent &bi) override {
+        void setNotifyAudioChange(AudioInfoSupport &bi) override {
             this->bid = &bi;
         }
 
@@ -105,7 +105,7 @@ class Decoder8Bit : public AudioDecoder {
 
     protected:
         Print *p_print=nullptr;
-        AudioInfoDependent *bid=nullptr;
+        AudioInfoSupport *bid=nullptr;
         AudioInfo cfg;
         bool active;
         bool is_signed = true;

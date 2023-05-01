@@ -279,7 +279,7 @@ class TimedStream : public AudioStream {
  protected:
   Stream *p_stream = nullptr;
   Print *p_print = nullptr;
-  AudioInfoDependent *p_info = nullptr;
+  AudioInfoSupport *p_info = nullptr;
   uint32_t start_seconds = 0;
   uint32_t end_seconds = UINT32_MAX;
   uint32_t start_bytes = 0;

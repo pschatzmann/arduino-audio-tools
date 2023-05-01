@@ -59,7 +59,7 @@ class GSMDecoder : public AudioDecoder {
     is_active = false;
   }
 
-  virtual void setNotifyAudioChange(AudioInfoDependent &bi) {
+  virtual void setNotifyAudioChange(AudioInfoSupport &bi) {
     p_notify = &bi;
   }
 
@@ -86,7 +86,7 @@ class GSMDecoder : public AudioDecoder {
   Print *p_print = nullptr;
   gsm v_gsm;
   AudioInfo cfg;
-  AudioInfoDependent *p_notify = nullptr;
+  AudioInfoSupport *p_notify = nullptr;
   bool is_active = false;
   Vector<uint8_t> input_buffer;
   Vector<uint8_t> result_buffer;

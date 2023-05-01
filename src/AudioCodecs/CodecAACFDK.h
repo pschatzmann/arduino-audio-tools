@@ -8,7 +8,7 @@
 namespace audio_tools {
 
 // audio change notification target
-AudioInfoDependent *audioChangeFDK = nullptr;
+AudioInfoSupport *audioChangeFDK = nullptr;
 
 /**
  * @brief Audio Decoder which decodes AAC into a PCM stream
@@ -105,7 +105,7 @@ class AACDecoderFDK : public AudioDecoder  {
             }
         }
 
-        virtual void setNotifyAudioChange(AudioInfoDependent &bi) {
+        virtual void setNotifyAudioChange(AudioInfoSupport &bi) {
             audioChangeFDK = &bi;
             // register audio change handler
             dec->setInfoCallback(audioChangeCallback);
