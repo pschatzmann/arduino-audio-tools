@@ -17,7 +17,7 @@ endif()
 add_executable (generator generator.cpp ../main.cpp)
 
 # set preprocessor defines
-target_compile_definitions(generator PUBLIC -DUSE_PORTAUDIO -DEXIT_ON_STOP -DIS_DESKTOP)
+target_compile_definitions(generator PUBLIC -DEXIT_ON_STOP -DIS_DESKTOP)
 
 # specify libraries
 target_link_libraries(generator arduino_emulator arduino-audio-tools)
