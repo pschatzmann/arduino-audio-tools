@@ -175,6 +175,7 @@ class MultiOutput : public AudioOutput {
  * Usually it is used to wrap an Audio Sink (e.g. I2SStream), but wrapping an
  * Audio Source is supported as well. Only wrap classes which represent PCM
  * data!
+ * @ingroup transform
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

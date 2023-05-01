@@ -1,6 +1,6 @@
 /*
 Audio playback and capture library. Choice of public domain or MIT-0. See license statements at the end of this file.
-miniaudio - v0.11.14 - 2023-03-29
+miniaudio - v0.11.15 - 2023-04-30
 
 David Reid - mackron@gmail.com
 
@@ -461,6 +461,9 @@ miniaudio should work cleanly out of the box without the need to download or ins
 dependencies. See below for platform-specific details.
 
 Note that GCC and Clang require `-msse2`, `-mavx2`, etc. for SIMD optimizations.
+
+If you get errors about undefined references to `__sync_val_compare_and_swap_8`, `__atomic_load_8`,
+etc. you need to link with `-latomic`.
 
 
 2.1. Windows
@@ -3719,7 +3722,7 @@ extern "C" {
 
 #define MA_VERSION_MAJOR    0
 #define MA_VERSION_MINOR    11
-#define MA_VERSION_REVISION 14
+#define MA_VERSION_REVISION 15
 #define MA_VERSION_STRING   MA_XSTRINGIFY(MA_VERSION_MAJOR) "." MA_XSTRINGIFY(MA_VERSION_MINOR) "." MA_XSTRINGIFY(MA_VERSION_REVISION)
 
 #if defined(_MSC_VER) && !defined(__clang__)
@@ -11001,6 +11004,7 @@ typedef struct
     ma_uint32 channelsIn;
     ma_uint32 channelsOut;
     ma_uint32 sampleRate;               /* Only used when the type is set to ma_engine_node_type_sound. */
+    ma_uint32 volumeSmoothTimeInPCMFrames;  /* The number of frames to smooth over volume changes. Defaults to 0 in which case no smoothing is used. */
     ma_mono_expansion_mode monoExpansionMode;
     ma_bool8 isPitchDisabled;           /* Pitching can be explicitly disabled with MA_SOUND_FLAG_NO_PITCH to optimize processing. */
     ma_bool8 isSpatializationDisabled;  /* Spatialization can be explicitly disabled with MA_SOUND_FLAG_NO_SPATIALIZATION. */
@@ -11016,11 +11020,14 @@ typedef struct
     ma_node_base baseNode;                              /* Must be the first member for compatiblity with the ma_node API. */
     ma_engine* pEngine;                                 /* A pointer to the engine. Set based on the value from the config. */
     ma_uint32 sampleRate;                               /* The sample rate of the input data. For sounds backed by a data source, this will be the data source's sample rate. Otherwise it'll be the engine's sample rate. */
+    ma_uint32 volumeSmoothTimeInPCMFrames;
     ma_mono_expansion_mode monoExpansionMode;
     ma_fader fader;
     ma_linear_resampler resampler;                      /* For pitch shift. */
     ma_spatializer spatializer;
     ma_panner panner;
+    ma_gainer volumeGainer;                             /* This will only be used if volumeSmoothTimeInPCMFrames is > 0. */
+    ma_atomic_float volume;                             /* Defaults to 1. */
     MA_ATOMIC(4, float) pitch;
     float oldPitch;                                     /* For determining whether or not the resampler needs to be updated to reflect the new pitch. The resampler will be updated on the mixing thread. */
     float oldDopplerPitch;                              /* For determining whether or not the resampler needs to be updated to take a new doppler pitch into account. */
@@ -11055,6 +11062,7 @@ typedef struct
     ma_uint32 channelsOut;                      /* Set this to 0 (default) to use the engine's channel count. Set to MA_SOUND_SOURCE_CHANNEL_COUNT to use the data source's channel count (only used if using a data source as input). */
     ma_mono_expansion_mode monoExpansionMode;   /* Controls how the mono channel should be expanded to other channels when spatialization is disabled on a sound. */
     ma_uint32 flags;                            /* A combination of MA_SOUND_FLAG_* flags. */
+    ma_uint32 volumeSmoothTimeInPCMFrames;      /* The number of frames to smooth over volume changes. Defaults to 0 in which case no smoothing is used. */
     ma_uint64 initialSeekPointInPCMFrames;      /* Initializes the sound such that it's seeked to this location by default. */
     ma_uint64 rangeBegInPCMFrames;
     ma_uint64 rangeEndInPCMFrames;
@@ -11110,27 +11118,28 @@ MA_API ma_sound_group_config ma_sound_group_config_init_2(ma_engine* pEngine);  
 typedef struct
 {
 #if !defined(MA_NO_RESOURCE_MANAGER)
-    ma_resource_manager* pResourceManager;      /* Can be null in which case a resource manager will be created for you. */
+    ma_resource_manager* pResourceManager;          /* Can be null in which case a resource manager will be created for you. */
 #endif
 #if !defined(MA_NO_DEVICE_IO)
     ma_context* pContext;
-    ma_device* pDevice;                         /* If set, the caller is responsible for calling ma_engine_data_callback() in the device's data callback. */
-    ma_device_id* pPlaybackDeviceID;            /* The ID of the playback device to use with the default listener. */
+    ma_device* pDevice;                             /* If set, the caller is responsible for calling ma_engine_data_callback() in the device's data callback. */
+    ma_device_id* pPlaybackDeviceID;                /* The ID of the playback device to use with the default listener. */
     ma_device_notification_proc notificationCallback;
 #endif
-    ma_log* pLog;                               /* When set to NULL, will use the context's log. */
-    ma_uint32 listenerCount;                    /* Must be between 1 and MA_ENGINE_MAX_LISTENERS. */
-    ma_uint32 channels;                         /* The number of channels to use when mixing and spatializing. When set to 0, will use the native channel count of the device. */
-    ma_uint32 sampleRate;                       /* The sample rate. When set to 0 will use the native channel count of the device. */
-    ma_uint32 periodSizeInFrames;               /* If set to something other than 0, updates will always be exactly this size. The underlying device may be a different size, but from the perspective of the mixer that won't matter.*/
-    ma_uint32 periodSizeInMilliseconds;         /* Used if periodSizeInFrames is unset. */
-    ma_uint32 gainSmoothTimeInFrames;           /* The number of frames to interpolate the gain of spatialized sounds across. If set to 0, will use gainSmoothTimeInMilliseconds. */
-    ma_uint32 gainSmoothTimeInMilliseconds;     /* When set to 0, gainSmoothTimeInFrames will be used. If both are set to 0, a default value will be used. */
+    ma_log* pLog;                                   /* When set to NULL, will use the context's log. */
+    ma_uint32 listenerCount;                        /* Must be between 1 and MA_ENGINE_MAX_LISTENERS. */
+    ma_uint32 channels;                             /* The number of channels to use when mixing and spatializing. When set to 0, will use the native channel count of the device. */
+    ma_uint32 sampleRate;                           /* The sample rate. When set to 0 will use the native channel count of the device. */
+    ma_uint32 periodSizeInFrames;                   /* If set to something other than 0, updates will always be exactly this size. The underlying device may be a different size, but from the perspective of the mixer that won't matter.*/
+    ma_uint32 periodSizeInMilliseconds;             /* Used if periodSizeInFrames is unset. */
+    ma_uint32 gainSmoothTimeInFrames;               /* The number of frames to interpolate the gain of spatialized sounds across. If set to 0, will use gainSmoothTimeInMilliseconds. */
+    ma_uint32 gainSmoothTimeInMilliseconds;         /* When set to 0, gainSmoothTimeInFrames will be used. If both are set to 0, a default value will be used. */
+    ma_uint32 defaultVolumeSmoothTimeInPCMFrames;   /* Defaults to 0. Controls the default amount of smoothing to apply to volume changes to sounds. High values means more smoothing at the expense of high latency (will take longer to reach the new volume). */
     ma_allocation_callbacks allocationCallbacks;
-    ma_bool32 noAutoStart;                      /* When set to true, requires an explicit call to ma_engine_start(). This is false by default, meaning the engine will be started automatically in ma_engine_init(). */
-    ma_bool32 noDevice;                         /* When set to true, don't create a default device. ma_engine_read_pcm_frames() can be called manually to read data. */
-    ma_mono_expansion_mode monoExpansionMode;   /* Controls how the mono channel should be expanded to other channels when spatialization is disabled on a sound. */
-    ma_vfs* pResourceManagerVFS;                /* A pointer to a pre-allocated VFS object to use with the resource manager. This is ignored if pResourceManager is not NULL. */
+    ma_bool32 noAutoStart;                          /* When set to true, requires an explicit call to ma_engine_start(). This is false by default, meaning the engine will be started automatically in ma_engine_init(). */
+    ma_bool32 noDevice;                             /* When set to true, don't create a default device. ma_engine_read_pcm_frames() can be called manually to read data. */
+    ma_mono_expansion_mode monoExpansionMode;       /* Controls how the mono channel should be expanded to other channels when spatialization is disabled on a sound. */
+    ma_vfs* pResourceManagerVFS;                    /* A pointer to a pre-allocated VFS object to use with the resource manager. This is ignored if pResourceManager is not NULL. */
 } ma_engine_config;
 
 MA_API ma_engine_config ma_engine_config_init(void);
@@ -11156,6 +11165,7 @@ struct ma_engine
     ma_sound_inlined* pInlinedSoundHead;        /* The first inlined sound. Inlined sounds are tracked in a linked list. */
     MA_ATOMIC(4, ma_uint32) inlinedSoundCount;  /* The total number of allocated inlined sound objects. Used for debugging. */
     ma_uint32 gainSmoothTimeInFrames;           /* The number of frames to interpolate the gain of spatialized sounds across. */
+    ma_uint32 defaultVolumeSmoothTimeInPCMFrames;
     ma_mono_expansion_mode monoExpansionMode;
 };
 
@@ -14798,10 +14808,26 @@ typedef unsigned char           c89atomic_bool;
     #define c89atomic_fetch_and_explicit_16(dst, src, order)        __atomic_fetch_and(dst, src, order)
     #define c89atomic_fetch_and_explicit_32(dst, src, order)        __atomic_fetch_and(dst, src, order)
     #define c89atomic_fetch_and_explicit_64(dst, src, order)        __atomic_fetch_and(dst, src, order)
-    #define c89atomic_compare_and_swap_8 (dst, expected, desired)   __sync_val_compare_and_swap(dst, expected, desired)
-    #define c89atomic_compare_and_swap_16(dst, expected, desired)   __sync_val_compare_and_swap(dst, expected, desired)
-    #define c89atomic_compare_and_swap_32(dst, expected, desired)   __sync_val_compare_and_swap(dst, expected, desired)
-    #define c89atomic_compare_and_swap_64(dst, expected, desired)   __sync_val_compare_and_swap(dst, expected, desired)
+    static C89ATOMIC_INLINE c89atomic_uint8 c89atomic_compare_and_swap_8(volatile c89atomic_uint8* dst, c89atomic_uint8 expected, c89atomic_uint8 desired)
+    {
+        __atomic_compare_exchange_n(dst, &expected, desired, 0, __ATOMIC_SEQ_CST, __ATOMIC_SEQ_CST);
+        return expected;
+    }
+    static C89ATOMIC_INLINE c89atomic_uint16 c89atomic_compare_and_swap_16(volatile c89atomic_uint16* dst, c89atomic_uint16 expected, c89atomic_uint16 desired)
+    {
+        __atomic_compare_exchange_n(dst, &expected, desired, 0, __ATOMIC_SEQ_CST, __ATOMIC_SEQ_CST);
+        return expected;
+    }
+    static C89ATOMIC_INLINE c89atomic_uint32 c89atomic_compare_and_swap_32(volatile c89atomic_uint32* dst, c89atomic_uint32 expected, c89atomic_uint32 desired)
+    {
+        __atomic_compare_exchange_n(dst, &expected, desired, 0, __ATOMIC_SEQ_CST, __ATOMIC_SEQ_CST);
+        return expected;
+    }
+    static C89ATOMIC_INLINE c89atomic_uint64 c89atomic_compare_and_swap_64(volatile c89atomic_uint64* dst, c89atomic_uint64 expected, c89atomic_uint64 desired)
+    {
+        __atomic_compare_exchange_n(dst, &expected, desired, 0, __ATOMIC_SEQ_CST, __ATOMIC_SEQ_CST);
+        return expected;
+    }
     typedef c89atomic_uint8 c89atomic_flag;
     #define c89atomic_flag_test_and_set_explicit(dst, order)        (c89atomic_bool)__atomic_test_and_set(dst, order)
     #define c89atomic_flag_clear_explicit(dst, order)               __atomic_clear(dst, order)
@@ -21991,6 +22017,7 @@ static ma_result ma_device_init_internal__wasapi(ma_context* pContext, ma_device
     ma_WASAPIDeviceInterface* pDeviceInterface = NULL;
     ma_IAudioClient2* pAudioClient2;
     ma_uint32 nativeSampleRate;
+    ma_bool32 usingProcessLoopback = MA_FALSE;
 
     MA_ASSERT(pContext != NULL);
     MA_ASSERT(pData != NULL);
@@ -21999,6 +22026,8 @@ static ma_result ma_device_init_internal__wasapi(ma_context* pContext, ma_device
     if (deviceType == ma_device_type_duplex) {
         return MA_INVALID_ARGS;
     }
+
+    usingProcessLoopback = deviceType == ma_device_type_loopback && pData->loopbackProcessID != 0 && pDeviceID == NULL;
 
     pData->pAudioClient = NULL;
     pData->pRenderClient = NULL;
@@ -22086,9 +22115,44 @@ static ma_result ma_device_init_internal__wasapi(ma_context* pContext, ma_device
         MA_WAVEFORMATEXTENSIBLE* pNativeFormat = NULL;
         hr = ma_IAudioClient_GetMixFormat((ma_IAudioClient*)pData->pAudioClient, (MA_WAVEFORMATEX**)&pNativeFormat);
         if (hr != S_OK) {
-            result = MA_FORMAT_NOT_SUPPORTED;
+            /* When using process-specific loopback, GetMixFormat() seems to always fail. */
+            if (usingProcessLoopback) {
+                wf.wFormatTag      = WAVE_FORMAT_IEEE_FLOAT;
+                wf.nChannels       = 2;
+                wf.nSamplesPerSec  = 44100;
+                wf.wBitsPerSample  = 32;
+                wf.nBlockAlign     = wf.nChannels * wf.wBitsPerSample / 8;
+                wf.nAvgBytesPerSec = wf.nSamplesPerSec * wf.nBlockAlign;
+                wf.cbSize          = sizeof(MA_WAVEFORMATEX);
+
+                result = MA_SUCCESS;
+            } else {
+                result = MA_FORMAT_NOT_SUPPORTED;
+            }
         } else {
-            MA_COPY_MEMORY(&wf, pNativeFormat, sizeof(wf));
+            /*
+            I've seen cases where cbSize will be set to sizeof(WAVEFORMATEX) even though the structure itself
+            is given the format tag of WAVE_FORMAT_EXTENSIBLE. If the format tag is WAVE_FORMAT_EXTENSIBLE
+            want to make sure we copy the whole WAVEFORMATEXTENSIBLE structure. Otherwise we'll have to be
+            safe and only copy the WAVEFORMATEX part.
+            */
+            if (pNativeFormat->wFormatTag == WAVE_FORMAT_EXTENSIBLE) {
+                MA_COPY_MEMORY(&wf, pNativeFormat, sizeof(MA_WAVEFORMATEXTENSIBLE));
+            } else {
+                /* I've seen a case where cbSize was set to 0. Assume sizeof(WAVEFORMATEX) in this case. */
+                size_t cbSize = pNativeFormat->cbSize;
+                if (cbSize == 0) {
+                    cbSize = sizeof(MA_WAVEFORMATEX);
+                }
+
+                /* Make sure we don't copy more than the capacity of `wf`. */
+                if (cbSize > sizeof(wf)) {
+                    cbSize = sizeof(wf);
+                }
+
+                MA_COPY_MEMORY(&wf, pNativeFormat, cbSize);
+            }
+            
             result = MA_SUCCESS;
         }
 
@@ -22133,8 +22197,16 @@ static ma_result ma_device_init_internal__wasapi(ma_context* pContext, ma_device
     pData->channelsOut = wf.nChannels;
     pData->sampleRateOut = wf.nSamplesPerSec;
 
-    /* Get the internal channel map based on the channel mask. */
-    ma_channel_mask_to_channel_map__win32(wf.dwChannelMask, pData->channelsOut, pData->channelMapOut);
+    /*
+    Get the internal channel map based on the channel mask. There is a possibility that GetMixFormat() returns
+    a WAVEFORMATEX instead of a WAVEFORMATEXTENSIBLE, in which case the channel mask will be undefined. In this
+    case we'll just use the default channel map.
+    */
+    if (wf.wFormatTag == WAVE_FORMAT_EXTENSIBLE || wf.cbSize >= sizeof(MA_WAVEFORMATEXTENSIBLE)) {
+        ma_channel_mask_to_channel_map__win32(wf.dwChannelMask, pData->channelsOut, pData->channelMapOut);
+    } else {
+        ma_channel_map_init_standard(ma_standard_channel_map_microsoft, pData->channelMapOut, ma_countof(pData->channelMapOut), pData->channelsOut);
+    }
 
     /* Period size. */
     pData->periodsOut = (pData->periodsIn != 0) ? pData->periodsIn : MA_DEFAULT_PERIODS;
@@ -22307,11 +22379,20 @@ static ma_result ma_device_init_internal__wasapi(ma_context* pContext, ma_device
     }
 
     if (!wasInitializedUsingIAudioClient3) {
-        ma_uint32 bufferSizeInFrames;
+        ma_uint32 bufferSizeInFrames = 0;
         hr = ma_IAudioClient_GetBufferSize((ma_IAudioClient*)pData->pAudioClient, &bufferSizeInFrames);
         if (FAILED(hr)) {
             errorMsg = "[WASAPI] Failed to get audio client's actual buffer size.", result = ma_result_from_HRESULT(hr);
             goto done;
+        }
+
+        /*
+        When using process loopback mode, retrieval of the buffer size seems to result in totally
+        incorrect values. In this case we'll just assume it's the same size as what we requested
+        when we initialized the client.
+        */
+        if (usingProcessLoopback) {
+            bufferSizeInFrames = (ma_uint32)((periodDurationInMicroseconds * pData->periodsOut) * pData->sampleRateOut / 1000000);
         }
 
         pData->periodSizeInFramesOut = bufferSizeInFrames / pData->periodsOut;
@@ -40653,7 +40734,7 @@ static ma_result ma_device__post_init_setup(ma_device* pDevice, ma_device_type d
         pDevice->playback.inputCacheConsumed  = 0;
         pDevice->playback.inputCacheRemaining = 0;
 
-        if ((pDevice->type == ma_device_type_duplex && ma_context_is_backend_asynchronous(pDevice->pContext)) ||            /* Duplex with asynchronous backend. */
+        if (pDevice->type == ma_device_type_duplex ||                                                                       /* Duplex. backend may decide to use ma_device_handle_backend_data_callback() which will require this cache. */
             ma_data_converter_get_required_input_frame_count(&pDevice->playback.converter, 1, &unused) != MA_SUCCESS)       /* Data conversion required input frame calculation not supported. */
         {
             /* We need a heap allocated cache. We want to size this based on the period size. */
@@ -48643,7 +48724,7 @@ static /*__attribute__((noinline))*/ ma_result ma_gainer_process_pcm_frames_inte
 
                 /* Initialize the running gain. */
                 for (iChannel = 0; iChannel < pGainer->config.channels; iChannel += 1) {
-                    float t = (pGainer->pOldGains[iChannel] - pGainer->pNewGains[iChannel]) * pGainer->masterVolume;
+                    float t = (pGainer->pNewGains[iChannel] - pGainer->pOldGains[iChannel]) * pGainer->masterVolume;
                     pRunningGainDelta[iChannel] = t * d;
                     pRunningGain[iChannel] = (pGainer->pOldGains[iChannel] * pGainer->masterVolume) + (t * a);
                 }
@@ -73514,8 +73595,16 @@ static ma_result ma_engine_node_set_volume(ma_engine_node* pEngineNode, float vo
         return MA_INVALID_ARGS;
     }
 
-    /* We should always have an active spatializer because it can be enabled and disabled dynamically. We can just use that for hodling our volume. */
-    ma_spatializer_set_master_volume(&pEngineNode->spatializer, volume);
+    ma_atomic_float_set(&pEngineNode->volume, volume);
+
+    /* If we're not smoothing we should bypass the volume gainer entirely. */
+    if (pEngineNode->volumeSmoothTimeInPCMFrames == 0) {
+        /* We should always have an active spatializer because it can be enabled and disabled dynamically. We can just use that for hodling our volume. */
+        ma_spatializer_set_master_volume(&pEngineNode->spatializer, volume);
+    } else {
+        /* We're using volume smoothing, so apply the master volume to the gainer. */
+        ma_gainer_set_gain(&pEngineNode->volumeGainer, volume);
+    }
 
     return MA_SUCCESS;
 }
@@ -73532,7 +73621,9 @@ static ma_result ma_engine_node_get_volume(const ma_engine_node* pEngineNode, fl
         return MA_INVALID_ARGS;
     }
 
-    return ma_spatializer_get_master_volume(&pEngineNode->spatializer, pVolume);
+    *pVolume = ma_atomic_float_get((ma_atomic_float*)&pEngineNode->volume);
+
+    return MA_SUCCESS;
 }
 
 
@@ -73548,6 +73639,7 @@ static void ma_engine_node_process_pcm_frames__general(ma_engine_node* pEngineNo
     ma_bool32 isFadingEnabled;
     ma_bool32 isSpatializationEnabled;
     ma_bool32 isPanningEnabled;
+    ma_bool32 isVolumeSmoothingEnabled;
 
     frameCountIn  = *pFrameCountIn;
     frameCountOut = *pFrameCountOut;
@@ -73558,10 +73650,11 @@ static void ma_engine_node_process_pcm_frames__general(ma_engine_node* pEngineNo
     totalFramesProcessedIn  = 0;
     totalFramesProcessedOut = 0;
 
-    isPitchingEnabled       = ma_engine_node_is_pitching_enabled(pEngineNode);
-    isFadingEnabled         = pEngineNode->fader.volumeBeg != 1 || pEngineNode->fader.volumeEnd != 1;
-    isSpatializationEnabled = ma_engine_node_is_spatialization_enabled(pEngineNode);
-    isPanningEnabled        = pEngineNode->panner.pan != 0 && channelsOut != 1;
+    isPitchingEnabled        = ma_engine_node_is_pitching_enabled(pEngineNode);
+    isFadingEnabled          = pEngineNode->fader.volumeBeg != 1 || pEngineNode->fader.volumeEnd != 1;
+    isSpatializationEnabled  = ma_engine_node_is_spatialization_enabled(pEngineNode);
+    isPanningEnabled         = pEngineNode->panner.pan != 0 && channelsOut != 1;
+    isVolumeSmoothingEnabled = pEngineNode->volumeSmoothTimeInPCMFrames > 0;
 
     /* Keep going while we've still got data available for processing. */
     while (totalFramesProcessedOut < frameCountOut) {
@@ -73638,6 +73731,19 @@ static void ma_engine_node_process_pcm_frames__general(ma_engine_node* pEngineNo
         }
 
         /*
+        If we're using smoothing, we won't be applying volume via the spatializer, but instead from a ma_gainer. In this case
+        we'll want to apply our volume now.
+        */
+        if (isVolumeSmoothingEnabled) {
+            if (isWorkingBufferValid) {
+                ma_gainer_process_pcm_frames(&pEngineNode->volumeGainer, pWorkingBuffer, pWorkingBuffer, framesJustProcessedOut);
+            } else {
+                ma_gainer_process_pcm_frames(&pEngineNode->volumeGainer, pWorkingBuffer, pRunningFramesIn, framesJustProcessedOut);
+                isWorkingBufferValid = MA_TRUE;
+            }
+        }
+
+        /*
         If at this point we still haven't actually done anything with the working buffer we need
         to just read straight from the input buffer.
         */
@@ -73668,11 +73774,21 @@ static void ma_engine_node_process_pcm_frames__general(ma_engine_node* pEngineNo
 
             if (channelsIn == channelsOut) {
                 /* No channel conversion required. Just copy straight to the output buffer. */
-                ma_copy_and_apply_volume_factor_f32(pRunningFramesOut, pWorkingBuffer, framesJustProcessedOut * channelsOut, volume);
+                if (isVolumeSmoothingEnabled) {
+                    /* Volume has already been applied. Just copy straight to the output buffer. */
+                    ma_copy_pcm_frames(pRunningFramesOut, pWorkingBuffer, framesJustProcessedOut * channelsOut, ma_format_f32, channelsOut);
+                } else {
+                    /* Volume has not been applied yet. Copy and apply volume in the same pass. */
+                    ma_copy_and_apply_volume_factor_f32(pRunningFramesOut, pWorkingBuffer, framesJustProcessedOut * channelsOut, volume);
+                }
             } else {
                 /* Channel conversion required. TODO: Add support for channel maps here. */
                 ma_channel_map_apply_f32(pRunningFramesOut, NULL, channelsOut, pWorkingBuffer, NULL, channelsIn, framesJustProcessedOut, ma_channel_mix_mode_simple, pEngineNode->monoExpansionMode);
-                ma_apply_volume_factor_f32(pRunningFramesOut, framesJustProcessedOut * channelsOut, volume);
+
+                /* If we're using smoothing, the volume will have already been applied. */
+                if (!isVolumeSmoothingEnabled) {
+                    ma_apply_volume_factor_f32(pRunningFramesOut, framesJustProcessedOut * channelsOut, volume);
+                }
             }
         }
 
@@ -73896,6 +74012,7 @@ typedef struct
     size_t baseNodeOffset;
     size_t resamplerOffset;
     size_t spatializerOffset;
+    size_t gainerOffset;
 } ma_engine_node_heap_layout;
 
 static ma_result ma_engine_node_get_heap_layout(const ma_engine_node_config* pConfig, ma_engine_node_heap_layout* pHeapLayout)
@@ -73905,6 +74022,7 @@ static ma_result ma_engine_node_get_heap_layout(const ma_engine_node_config* pCo
     ma_node_config baseNodeConfig;
     ma_linear_resampler_config resamplerConfig;
     ma_spatializer_config spatializerConfig;
+    ma_gainer_config gainerConfig;
     ma_uint32 channelsIn;
     ma_uint32 channelsOut;
     ma_channel defaultStereoChannelMap[2] = {MA_CHANNEL_SIDE_LEFT, MA_CHANNEL_SIDE_RIGHT};  /* <-- Consistent with the default channel map of a stereo listener. Means channel conversion can run on a fast path. */
@@ -73970,6 +74088,20 @@ static ma_result ma_engine_node_get_heap_layout(const ma_engine_node_config* pCo
     pHeapLayout->sizeInBytes += ma_align_64(tempHeapSize);
 
 
+    /* Gainer. Will not be used if we are not using smoothing. */
+    if (pConfig->volumeSmoothTimeInPCMFrames > 0) {
+        gainerConfig = ma_gainer_config_init(channelsIn, pConfig->volumeSmoothTimeInPCMFrames);
+
+        result = ma_gainer_get_heap_size(&gainerConfig, &tempHeapSize);
+        if (result != MA_SUCCESS) {
+            return result;
+        }
+
+        pHeapLayout->gainerOffset = pHeapLayout->sizeInBytes;
+        pHeapLayout->sizeInBytes += ma_align_64(tempHeapSize);
+    }
+
+
     return MA_SUCCESS;
 }
 
@@ -74003,6 +74135,7 @@ MA_API ma_result ma_engine_node_init_preallocated(const ma_engine_node_config* p
     ma_fader_config faderConfig;
     ma_spatializer_config spatializerConfig;
     ma_panner_config pannerConfig;
+    ma_gainer_config gainerConfig;
     ma_uint32 channelsIn;
     ma_uint32 channelsOut;
     ma_channel defaultStereoChannelMap[2] = {MA_CHANNEL_SIDE_LEFT, MA_CHANNEL_SIDE_RIGHT};  /* <-- Consistent with the default channel map of a stereo listener. Means channel conversion can run on a fast path. */
@@ -74025,15 +74158,17 @@ MA_API ma_result ma_engine_node_init_preallocated(const ma_engine_node_config* p
     pEngineNode->_pHeap = pHeap;
     MA_ZERO_MEMORY(pHeap, heapLayout.sizeInBytes);
 
-    pEngineNode->pEngine                  = pConfig->pEngine;
-    pEngineNode->sampleRate               = (pConfig->sampleRate > 0) ? pConfig->sampleRate : ma_engine_get_sample_rate(pEngineNode->pEngine);
-    pEngineNode->monoExpansionMode        = pConfig->monoExpansionMode;
-    pEngineNode->pitch                    = 1;
-    pEngineNode->oldPitch                 = 1;
-    pEngineNode->oldDopplerPitch          = 1;
-    pEngineNode->isPitchDisabled          = pConfig->isPitchDisabled;
-    pEngineNode->isSpatializationDisabled = pConfig->isSpatializationDisabled;
-    pEngineNode->pinnedListenerIndex      = pConfig->pinnedListenerIndex;
+    pEngineNode->pEngine                     = pConfig->pEngine;
+    pEngineNode->sampleRate                  = (pConfig->sampleRate > 0) ? pConfig->sampleRate : ma_engine_get_sample_rate(pEngineNode->pEngine);
+    pEngineNode->volumeSmoothTimeInPCMFrames = pConfig->volumeSmoothTimeInPCMFrames;
+    pEngineNode->monoExpansionMode           = pConfig->monoExpansionMode;
+    ma_atomic_float_set(&pEngineNode->volume, 1);
+    pEngineNode->pitch                       = 1;
+    pEngineNode->oldPitch                    = 1;
+    pEngineNode->oldDopplerPitch             = 1;
+    pEngineNode->isPitchDisabled             = pConfig->isPitchDisabled;
+    pEngineNode->isSpatializationDisabled    = pConfig->isSpatializationDisabled;
+    pEngineNode->pinnedListenerIndex         = pConfig->pinnedListenerIndex;
 
     channelsIn  = (pConfig->channelsIn  != 0) ? pConfig->channelsIn  : ma_engine_get_channels(pConfig->pEngine);
     channelsOut = (pConfig->channelsOut != 0) ? pConfig->channelsOut : ma_engine_get_channels(pConfig->pEngine);
@@ -74113,6 +74248,18 @@ MA_API ma_result ma_engine_node_init_preallocated(const ma_engine_node_config* p
         goto error3;
     }
 
+
+    /* We'll need a gainer for smoothing out volume changes if we have a non-zero smooth time. We apply this before converting to the output channel count. */
+    if (pConfig->volumeSmoothTimeInPCMFrames > 0) {
+        gainerConfig = ma_gainer_config_init(channelsIn, pConfig->volumeSmoothTimeInPCMFrames);
+
+        result = ma_gainer_init_preallocated(&gainerConfig, ma_offset_ptr(pHeap, heapLayout.gainerOffset), &pEngineNode->volumeGainer);
+        if (result != MA_SUCCESS) {
+            goto error3;
+        }
+    }
+
+
     return MA_SUCCESS;
 
     /* No need for allocation callbacks here because we use a preallocated heap. */
@@ -74161,6 +74308,10 @@ MA_API void ma_engine_node_uninit(ma_engine_node* pEngineNode, const ma_allocati
     ma_node_uninit(&pEngineNode->baseNode, pAllocationCallbacks);
 
     /* Now that the node has been uninitialized we can safely uninitialize the rest. */
+    if (pEngineNode->volumeSmoothTimeInPCMFrames > 0) {
+        ma_gainer_uninit(&pEngineNode->volumeGainer, pAllocationCallbacks);
+    }
+
     ma_spatializer_uninit(&pEngineNode->spatializer, pAllocationCallbacks);
     ma_linear_resampler_uninit(&pEngineNode->resampler, pAllocationCallbacks);
 
@@ -74284,6 +74435,7 @@ MA_API ma_result ma_engine_init(const ma_engine_config* pConfig, ma_engine* pEng
     }
 
     pEngine->monoExpansionMode = engineConfig.monoExpansionMode;
+    pEngine->defaultVolumeSmoothTimeInPCMFrames = engineConfig.defaultVolumeSmoothTimeInPCMFrames;
     ma_allocation_callbacks_init_copy(&pEngine->allocationCallbacks, &engineConfig.allocationCallbacks);
 
     #if !defined(MA_NO_RESOURCE_MANAGER)
@@ -75099,9 +75251,14 @@ static ma_result ma_sound_init_from_data_source_internal(ma_engine* pEngine, con
     source that provides this information upfront.
     */
     engineNodeConfig = ma_engine_node_config_init(pEngine, type, pConfig->flags);
-    engineNodeConfig.channelsIn        = pConfig->channelsIn;
-    engineNodeConfig.channelsOut       = pConfig->channelsOut;
-    engineNodeConfig.monoExpansionMode = pConfig->monoExpansionMode;
+    engineNodeConfig.channelsIn                  = pConfig->channelsIn;
+    engineNodeConfig.channelsOut                 = pConfig->channelsOut;
+    engineNodeConfig.volumeSmoothTimeInPCMFrames = pConfig->volumeSmoothTimeInPCMFrames;
+    engineNodeConfig.monoExpansionMode           = pConfig->monoExpansionMode;
+
+    if (engineNodeConfig.volumeSmoothTimeInPCMFrames == 0) {
+        engineNodeConfig.volumeSmoothTimeInPCMFrames = pEngine->defaultVolumeSmoothTimeInPCMFrames;
+    }
 
     /* If we're loading from a data source the input channel count needs to be the data source's native channel count. */
     if (pConfig->pDataSource != NULL) {
@@ -75301,10 +75458,11 @@ MA_API ma_result ma_sound_init_copy(ma_engine* pEngine, const ma_sound* pExistin
     }
 
     config = ma_sound_config_init_2(pEngine);
-    config.pDataSource        = pSound->pResourceManagerDataSource;
-    config.flags              = flags;
-    config.pInitialAttachment = pGroup;
-    config.monoExpansionMode  = pExistingSound->engineNode.monoExpansionMode;
+    config.pDataSource                 = pSound->pResourceManagerDataSource;
+    config.flags                       = flags;
+    config.pInitialAttachment          = pGroup;
+    config.monoExpansionMode           = pExistingSound->engineNode.monoExpansionMode;
+    config.volumeSmoothTimeInPCMFrames = pExistingSound->engineNode.volumeSmoothTimeInPCMFrames;
 
     result = ma_sound_init_from_data_source_internal(pEngine, &config, pSound);
     if (result != MA_SUCCESS) {

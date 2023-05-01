@@ -8,6 +8,9 @@ set (DCMAKE_CXX_FLAGS "-Werror")
 set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0 -ldl -lpthread -lm")
 set (CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -O0 -ldl -lpthread -lm")
 
+# Emulator is not necessary for -DIS_MIN_DESKTOP
+set(ADD_ARDUINO_EMULATOR OFF CACHE BOOL "Add Arduino Emulator Library") 
+
 # Build with arduino-audio-tools
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../.. ${CMAKE_CURRENT_BINARY_DIR}/arduino-audio-tools )
@@ -22,7 +25,7 @@ file(DOWNLOAD https://raw.githubusercontent.com/mackron/miniaudio/master/miniaud
 add_executable (generator generator.cpp)
 
 # set preprocessor defines
-target_compile_definitions(generator PUBLIC DEXIT_ON_STOP -DIS_MIN_DESKTOP)
+target_compile_definitions(generator PUBLIC -DEXIT_ON_STOP -DIS_MIN_DESKTOP)
 
 # specify libraries
 target_link_libraries(generator arduino-audio-tools)
