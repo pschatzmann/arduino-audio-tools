@@ -8,7 +8,7 @@
 namespace audio_tools {
 
 // audio change notification target
-AudioInfoSupport *audioChangeMP3Helix=nullptr;
+static AudioInfoSupport *audioChangeMP3Helix=nullptr;
 
 /**
  * @brief MP3 Decoder using libhelix: https://github.com/pschatzmann/arduino-libhelix
