@@ -1,7 +1,7 @@
 #pragma once
 /** 
  * @defgroup http Http
- * @ingroup main
+ * @ingroup communications
  * @brief Http client & server  
 **/
 
