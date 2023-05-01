@@ -7,11 +7,11 @@
 namespace audio_tools {
 
 // audio change notification target
-AudioInfoDependent *audioChangeAACHelix=nullptr;
+AudioInfoSupport *audioChangeAACHelix=nullptr;
 
 /**
  * @brief AAC Decoder using libhelix: https://github.com/pschatzmann/arduino-libhelix
- * This is basically just a simple wrapper to provide AudioInfo and AudioInfoDependent
+ * This is basically just a simple wrapper to provide AudioInfo and AudioInfoSupport
  * @ingroup codecs
  * @ingroup decoder
  * @author Phil Schatzmann
@@ -47,7 +47,7 @@ class AACDecoderHelix : public AudioDecoder  {
          * @param out_stream 
          * @param bi 
          */
-        AACDecoderHelix(Print &out_stream, AudioInfoDependent &bi){
+        AACDecoderHelix(Print &out_stream, AudioInfoSupport &bi){
             TRACED();
             aac = new libhelix::AACDecoderHelix(out_stream);
             if (aac==nullptr){
@@ -114,7 +114,7 @@ class AACDecoderHelix : public AudioDecoder  {
         }
 
         /// Defines the callback object to which the Audio information change is provided
-        virtual void setNotifyAudioChange(AudioInfoDependent &bi){
+        virtual void setNotifyAudioChange(AudioInfoSupport &bi){
             TRACED();
             audioChangeAACHelix = &bi;
             if (aac!=nullptr) aac->setInfoCallback(infoCallback);

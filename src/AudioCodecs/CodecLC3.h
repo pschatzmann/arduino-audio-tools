@@ -93,7 +93,7 @@ class LC3Decoder : public AudioDecoder {
     active = false;
   }
 
-  virtual void setNotifyAudioChange(AudioInfoDependent &bi) {
+  virtual void setNotifyAudioChange(AudioInfoSupport &bi) {
     TRACEI();
     p_notify = &bi;
   }

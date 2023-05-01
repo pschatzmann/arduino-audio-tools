@@ -311,7 +311,7 @@ class WavIMADecoder : public AudioDecoder {
          * @param bi Object that will be notified about the Audio Formt (Changes)
          */
 
-        WavIMADecoder(Print &out_stream, AudioInfoDependent &bi) {
+        WavIMADecoder(Print &out_stream, AudioInfoSupport &bi) {
             TRACED();
             this->out = &out_stream;
             this->audioBaseInfoSupport = &bi;
@@ -327,7 +327,7 @@ class WavIMADecoder : public AudioDecoder {
             this->out = &out_stream;
         }
 
-        void setNotifyAudioChange(AudioInfoDependent &bi) {
+        void setNotifyAudioChange(AudioInfoSupport &bi) {
             this->audioBaseInfoSupport = &bi;
         }
 
@@ -437,7 +437,7 @@ class WavIMADecoder : public AudioDecoder {
     protected:
         WavIMAHeader header;
         Print *out;
-        AudioInfoDependent *audioBaseInfoSupport;
+        AudioInfoSupport *audioBaseInfoSupport;
         bool isFirst = true;
         bool isValid = true;
         bool active;

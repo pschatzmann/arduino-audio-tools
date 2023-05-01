@@ -37,7 +37,7 @@ namespace audio_tools {
      * @author Phil Schatzmann
      * @copyright GPLv3
      */
-    class AudioPlayer : public AudioInfoDependent {
+    class AudioPlayer : public AudioInfoSupport {
 
     public:
 
@@ -72,7 +72,7 @@ namespace audio_tools {
          * @param decoder
          * @param notify
          */
-        AudioPlayer(AudioSource& source, Print& output, AudioDecoder& decoder, AudioInfoDependent* notify = nullptr) {
+        AudioPlayer(AudioSource& source, Print& output, AudioDecoder& decoder, AudioInfoSupport* notify = nullptr) {
             TRACED();
             this->p_source = &source;
             this->p_decoder = &decoder;
@@ -228,7 +228,7 @@ namespace audio_tools {
         }
 
         /// (Re)defines the notify
-        void setNotify(AudioInfoDependent* notify){
+        void setNotify(AudioInfoSupport* notify){
             this->p_final_notify = notify;
             // notification for audio configuration
             if (p_decoder!=nullptr){
@@ -467,7 +467,7 @@ namespace audio_tools {
         Stream* p_input_stream = nullptr;
         AudioOutput* p_final_print = nullptr;
         AudioStream* p_final_stream = nullptr;
-        AudioInfoDependent* p_final_notify = nullptr;
+        AudioInfoSupport* p_final_notify = nullptr;
         StreamCopy copier; // copies sound into i2s
         AudioInfo info;
         bool meta_active = false;

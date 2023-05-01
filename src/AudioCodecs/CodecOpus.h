@@ -130,7 +130,7 @@ class OpusAudioDecoder : public AudioDecoder {
   /// Defines the output Stream
   void setOutputStream(Print &out_stream) override { p_print = &out_stream; }
 
-  void setNotifyAudioChange(AudioInfoDependent &bi) override {
+  void setNotifyAudioChange(AudioInfoSupport &bi) override {
     this->p_notify = &bi;
   }
 

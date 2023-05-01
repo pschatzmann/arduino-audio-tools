@@ -51,7 +51,7 @@ class OggContainerDecoder : public AudioDecoder {
     }
   }
 
-  void setNotifyAudioChange(AudioInfoDependent &bi) override {
+  void setNotifyAudioChange(AudioInfoSupport &bi) override {
     this->bid = &bi;
   }
 
@@ -128,7 +128,7 @@ class OggContainerDecoder : public AudioDecoder {
   RingBuffer<uint8_t> buffer{OGG_DEFAULT_BUFFER_SIZE};
   Print *p_print = nullptr;
   OGGZ *p_oggz = nullptr;
-  AudioInfoDependent *bid = nullptr;
+  AudioInfoSupport *bid = nullptr;
   AudioInfo cfg;
   bool is_open = false;
   long pos = 0;

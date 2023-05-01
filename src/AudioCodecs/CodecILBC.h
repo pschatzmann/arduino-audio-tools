@@ -67,7 +67,7 @@ class ILBCDecoder : public AudioDecoder {
     p_ilbc = nullptr;
   }
 
-  virtual void setNotifyAudioChange(AudioInfoDependent &bi) {
+  virtual void setNotifyAudioChange(AudioInfoSupport &bi) {
     notify = &bi;
   }
 
@@ -97,7 +97,7 @@ class ILBCDecoder : public AudioDecoder {
 
  protected:
   AudioInfo info;
-  AudioInfoDependent *notify = nullptr;
+  AudioInfoSupport *notify = nullptr;
   Print *p_print = nullptr;
   iLBCDecode *p_ilbc = nullptr;
   Vector<int16_t> decoded_buffer{0};

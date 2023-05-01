@@ -53,14 +53,14 @@ class VolumeStream : public AudioStream {
         VolumeStream(AudioOutput &out) {
             Print *p_print = &out;
             setTarget(*p_print);
-            p_notify = (AudioInfoDependent*) &out;
+            p_notify = (AudioInfoSupport*) &out;
         }
 
         /// Constructor which assigns Stream input or output
         VolumeStream(AudioStream &io) {
             Stream *p_stream = &io;
             setStream(*p_stream);
-            p_notify = (AudioInfoDependent *)&io;
+            p_notify = (AudioInfoSupport *)&io;
         }
 
         /// Defines/Changes the output target

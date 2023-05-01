@@ -38,7 +38,7 @@ class MP3DecoderMini : public AudioDecoder {
 
   void setBufferLength(int len) { buffer_size = len; }
 
-  void setNotifyAudioChange(AudioInfoDependent &bi) {
+  void setNotifyAudioChange(AudioInfoSupport &bi) {
     audioBaseInfoSupport = &bi;
   }
 
@@ -96,7 +96,7 @@ class MP3DecoderMini : public AudioDecoder {
 
  protected:
   AudioInfo audio_info;
-  AudioInfoDependent *audioBaseInfoSupport = nullptr;
+  AudioInfoSupport *audioBaseInfoSupport = nullptr;
   Print *out = nullptr;
   mp3dec_t mp3d;
   mp3dec_frame_info_t mp3dec_info;
