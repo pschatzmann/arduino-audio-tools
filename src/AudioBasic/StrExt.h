@@ -108,6 +108,16 @@ class StrExt : public Str {
             this->len = new_size;
         }
 
+        /// assigns a memory buffer
+        void copyFrom(const char *source, int len, int maxlen=0){
+            this->maxlen = maxlen==0? len : maxlen;
+            grow(this->maxlen);
+            this->len = len;
+            this->is_const = false;
+            memmove(this->chars, source, len);
+            this->chars[len] = 0;
+        }
+
     protected:
 
         bool grow(int newMaxLen){

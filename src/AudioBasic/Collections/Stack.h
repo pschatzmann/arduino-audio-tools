@@ -24,8 +24,8 @@ class Stack {
         }
 
         bool peek(T& data){
-            if (l.end()->prior==nullptr) return false;
-            data = *(l.end()->prior);
+            if (size()==0) return false;
+            data = *(--l.end());
             return true;
         }
 
