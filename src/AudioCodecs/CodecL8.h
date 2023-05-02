@@ -147,7 +147,7 @@ class EncoderL8 : public AudioEncoder {
 
         /// Provides "audio/pcm"
         const char* mime() override{
-            return mime_pcm;
+            return "audio/l8";
         }
 
         /// We actually do nothing with this 

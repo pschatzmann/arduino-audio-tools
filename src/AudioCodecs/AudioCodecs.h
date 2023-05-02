@@ -20,7 +20,7 @@
 
 #include "AudioCodecs/CodecWAV.h"
 #include "AudioCodecs/CodecCopy.h"
-#include "AudioCodecs/Codec8Bit.h"
+#include "AudioCodecs/CodecL8.h"
 #include "AudioCodecs/CodecFloat.h"
 #include "AudioCodecs/CodecBase64.h"
 
