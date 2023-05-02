@@ -72,9 +72,9 @@ public:
   virtual size_t write(const void *in_ptr, size_t in_size) override {
     if (p_print == nullptr)
       return 0;
-    int16_t *data16 = (int16_t *) in_ptr;
-    for (int j=0;j<in_size/2;j++){
-        data16[j]= ntohs(data16[j]);
+    int16_t *data16 = (int16_t *)in_ptr;
+    for (int j = 0; j < in_size / 2; j++) {
+      data16[j] = ntohs(data16[j]);
     }
     return p_print->write((uint8_t *)in_ptr, in_size);
   }
@@ -111,7 +111,7 @@ public:
   void setOutputStream(Print &out_stream) override { p_print = &out_stream; }
 
   /// Provides "audio/pcm"
-  const char *mime() override { return mime_pcm; }
+  const char *mime() override { return "audio/l16"; }
 
   /// We actually do nothing with this
   virtual void setAudioInfo(AudioInfo from) override {}
@@ -133,9 +133,9 @@ public:
     if (p_print == nullptr)
       return 0;
 
-    int16_t *data16 = (int16_t *) in_ptr;
-    for (int j=0;j<in_size/2;j++){
-        data16[j]= htons(data16[j]);
+    int16_t *data16 = (int16_t *)in_ptr;
+    for (int j = 0; j < in_size / 2; j++) {
+      data16[j] = htons(data16[j]);
     }
 
     return p_print->write((uint8_t *)in_ptr, in_size);
