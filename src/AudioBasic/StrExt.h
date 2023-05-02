@@ -118,6 +118,17 @@ class StrExt : public Str {
             this->chars[len] = 0;
         }
 
+        /// Fills the string with len chars 
+        void setChars(char c, int len){
+            grow(this->maxlen);
+            for (int j=0;j<len;j++){
+                this->chars[j]=c;
+            }  
+            this->len = len;
+            this->is_const = false;
+            this->chars[len]=0;
+        }
+
     protected:
 
         bool grow(int newMaxLen){
