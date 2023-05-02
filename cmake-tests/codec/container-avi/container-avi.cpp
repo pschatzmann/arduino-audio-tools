@@ -9,11 +9,11 @@
  * 
  */
 #include "AudioTools.h"
-#include "Experiments/ContainerAVI.h"
+#include "AudioCodecs/ContainerAVI.h"
 #include "AudioLibs/Desktop/File.h"
 
 CsvStream<int16_t> csv;
-ContainerAVI codec;
+AVIDecoder codec;
 EncodedAudioStream riff(csv, codec);
 File file;
 StreamCopy copier(riff, file);
@@ -24,5 +24,7 @@ void setup() {
 }
 
 void loop() {
-  copier.copy();
+  if(!copier.copy()){
+    stop();
+  }
 }

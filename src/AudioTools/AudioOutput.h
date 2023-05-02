@@ -162,6 +162,10 @@ class CsvOutput : public AudioOutput {
         virtual size_t write(const uint8_t* data, size_t len) {   
             if (!active) return 0;
             LOGD("CsvOutput::write: %d", (int)len);
+            if (cfg.channels==0){
+                LOGW("Channels not defined: using 2");
+                cfg.channels = 2;
+            }
             size_t lenChannels = len / (sizeof(T)*cfg.channels); 
             if (lenChannels>0){
                 writeFrames((T*)data, lenChannels);
