@@ -5,7 +5,7 @@
 namespace audio_tools {
 
 /**
- * @brief Decoder8Bit - Converts an 8 Bit Stream into 16Bits
+ * @brief DecoderL8 - Converts an 8 Bit Stream into 16Bits
  * Most microcontrollers can not output 8 bit data directly. 8 bit data however is very
  * memory efficient and helps if you need to store audio on constrained resources. This 
  * decoder translates 8bit data into 16bit data.
@@ -14,35 +14,35 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class Decoder8Bit : public AudioDecoder {
+class DecoderL8 : public AudioDecoder {
     public:
         /**
-         * @brief Construct a new Decoder8Bit object
+         * @brief Construct a new DecoderL8 object
          */
 
-        Decoder8Bit(){
+        DecoderL8(){
             TRACED();
         }
 
         /**
-         * @brief Construct a new Decoder8Bit object
+         * @brief Construct a new DecoderL8 object
          * 
          * @param out_stream Output Stream to which we write the decoded result
          */
-        Decoder8Bit(Print &out_stream, bool active=true){
+        DecoderL8(Print &out_stream, bool active=true){
             TRACED();
             p_print = &out_stream;
             this->active = active;
         }
 
         /**
-         * @brief Construct a new Decoder8Bit object
+         * @brief Construct a new DecoderL8 object
          * 
          * @param out_stream Output Stream to which we write the decoded result
          * @param bi Object that will be notified about the Audio Formt (Changes)
          */
 
-        Decoder8Bit(Print &out_stream, AudioInfoSupport &bi){
+        DecoderL8(Print &out_stream, AudioInfoSupport &bi){
             TRACED();
             setOutputStream(out_stream);
             setNotifyAudioChange(bi);
@@ -114,7 +114,7 @@ class Decoder8Bit : public AudioDecoder {
 };
 
 /**
- * @brief Encoder8Bits - Condenses 16 bit PCM data stream to 8 bits
+ * @brief EncoderL8s - Condenses 16 bit PCM data stream to 8 bits
  * data. 
  * Most microcontrollers can not process 8 bit audio data directly. 8 bit data however is very
  * memory efficient and helps if you need to store audio on constrained resources. This 
@@ -124,14 +124,14 @@ class Decoder8Bit : public AudioDecoder {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class Encoder8Bit : public AudioEncoder {
+class EncoderL8 : public AudioEncoder {
     public: 
         // Empty Constructor - the output stream must be provided with begin()
-        Encoder8Bit(){
+        EncoderL8(){
         }        
 
         // Constructor providing the output stream
-        Encoder8Bit(Print &out){
+        EncoderL8(Print &out){
             p_print = &out;
         }
 
