@@ -14,7 +14,6 @@
  *
  */
 #pragma once
-// #include <Print.h>
 #include <string.h>
 
 #include "AudioCodecs/AudioEncoded.h"
@@ -65,6 +64,8 @@ struct ProcessedResult {
  * The segments are separated with a new line character.
  * @ingroup codecs
  * @ingroup encoder
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 class BinaryContainerEncoder : public AudioEncoder {
  public:
@@ -184,7 +185,8 @@ class BinaryContainerEncoder : public AudioEncoder {
  * @brief Decodes the provided data from the DAT and CFG segments
  * @ingroup codecs
  * @ingroup decoder
- codecs
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 class BinaryContainerDecoder : public AudioDecoder {
  public:
