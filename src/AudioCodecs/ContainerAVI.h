@@ -509,10 +509,14 @@ class ParseObject {
 };
 
 /**
- * AVI Container Decoder which can be fed with small chunks of data. The minimum
+ * @brief AVI Container Decoder which can be fed with small chunks of data. The minimum
  * length must be bigger then the header size! The file structure is documented
  * at
  * https://learn.microsoft.com/en-us/windows/win32/directshow/avi-riff-file-reference
+ * @ingroup codecs
+ * @ingroup encoder
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 
 class AVIDecoder : public AudioDecoder {
