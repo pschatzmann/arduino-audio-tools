@@ -92,13 +92,19 @@ class AudioStream : public Stream, public AudioInfoSupport, public AudioInfoSour
   }
 
   /// Writes len bytes of silence (=0).
-  /// @param len 
   virtual void writeSilence(size_t len){
     int16_t zero = 0;
     for (int j=0;j<len/2;j++){
       write((uint8_t*)&zero,2);
     } 
   }
+
+  /// Source to generate silence: just sets the buffer to 0
+  virtual size_t readSilence(uint8_t *buffer, size_t length)  { 
+    memset(buffer, 0, length);
+    return length;
+  }
+  
 
 // Methods which should be suppressed in the documentation
 #ifndef DOXYGEN
