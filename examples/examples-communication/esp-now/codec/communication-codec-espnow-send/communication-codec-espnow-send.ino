@@ -17,7 +17,7 @@ SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with
 GeneratedSoundStream<int16_t> sound( sineWave); // Stream generated from sine wave
 ESPNowStream now;
 SBCEncoder sbc;
-EncodedAudioStream encoder(now, sbc); // encode and write to ESP-now
+EncodedAudioStream encoder(&now, &sbc); // encode and write to ESP-now
 StreamCopy copier(encoder, sound);  // copies sound into i2s
 const char *peers[] = {"A8:48:FA:0B:93:01"};
 

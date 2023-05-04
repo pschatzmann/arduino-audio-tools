@@ -18,8 +18,8 @@ GeneratedSoundStream<int16_t> sound( sineWave); // Stream generated from sine wa
 AudioKitStream out; 
 OggContainerEncoder enc;
 OggContainerDecoder dec;
-EncodedAudioStream decoder(out, dec); // encode and write
-EncodedAudioStream encoder(decoder, enc); // encode and write
+EncodedAudioStream decoder(&out, &dec); // encode and write
+EncodedAudioStream encoder(&decoder, &enc); // encode and write
 StreamCopy copier(encoder, sound);     
 
 void setup() {

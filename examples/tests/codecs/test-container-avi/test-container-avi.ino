@@ -15,7 +15,7 @@
 URLStream url("ssid","password"); // input
 AudioKitStream out;               // output
 AVIDecoder codec;
-EncodedAudioStream avi(out, codec);
+EncodedAudioStream avi(&out, &codec);
 StreamCopy copier(avi, url);
 
 void setup() {
