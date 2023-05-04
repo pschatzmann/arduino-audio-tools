@@ -5,6 +5,7 @@
 
 #include "AudioTools/AudioStreams.h"
 #include "AudioTools/Buffers.h"
+#include "AudioBasic/Str.h"
 
 /**
  * @defgroup communications Communications
@@ -185,6 +186,11 @@ class ESPNowStream : public AudioStream {
     peer.channel = cfg.channel;
     peer.ifidx = getInterface();
     peer.encrypt = false;
+
+    if (Str(address).equals(cfg.mac_address)){
+      LOGW("Did not add own address as peer");
+      return true;
+    }
 
     if (isEncrypted()) {
       peer.encrypt = true;
