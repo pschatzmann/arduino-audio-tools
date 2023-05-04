@@ -22,7 +22,7 @@ class DecoderL8 : public AudioDecoder {
    * @brief Construct a new DecoderL8 object
    */
 
-  DecoderL8(bool isSigned = true) {
+  DecoderL8(bool isSigned = false) {
     TRACED();
     setSigned(isSigned);
   }
@@ -51,7 +51,8 @@ class DecoderL8 : public AudioDecoder {
     setNotifyAudioChange(bi);
   }
 
-  /// By default the encoded values are unsigned, but you can change them to signed 
+  /// By default the encoded values are unsigned, but you can change them to
+  /// signed
   void setSigned(bool isSigned) { is_signed = isSigned; }
 
   void begin(AudioInfo info1) {
@@ -74,7 +75,7 @@ class DecoderL8 : public AudioDecoder {
     active = false;
   }
 
-  // for most decoder this is not needed
+  /// for most decoders this is not needed
   virtual void setAudioInfo(AudioInfo from) override {
     TRACED();
     from.bits_per_sample = 16;
@@ -89,15 +90,30 @@ class DecoderL8 : public AudioDecoder {
   virtual size_t write(const void *in_ptr, size_t in_size) override {
     if (p_print == nullptr) return 0;
     buffer.resize(in_size);
-    int8_t *pt8 = (int8_t *)in_ptr;
-    for (size_t j = 0; j < in_size; j++) {
-      int16_t tmp = pt8[j];
-      if (!is_signed) {
-        tmp -= 128;
+    memset(buffer.data(), 0, in_size * 2);
+    if (is_signed) {
+      int8_t *pt8 = (int8_t *)in_ptr;
+      for (size_t j = 0; j < in_size; j++) {
+        buffer[j] = convertSample(pt8[j]);
       }
-      buffer[j] = tmp * 256;
+    } else {
+      uint8_t *pt8 = (uint8_t *)in_ptr;
+      for (size_t j = 0; j < in_size; j++) {
+        buffer[j] = convertSample(pt8[j]);
+      }
     }
-    return p_print->write((uint8_t *)buffer.data(), in_size * sizeof(int16_t));
+    size_t result =
+        p_print->write((uint8_t *)buffer.data(), in_size * sizeof(int16_t));
+    LOGD("DecoderL8 %d -> %d", (int)in_size, (int)result);
+    return result * sizeof(int16_t);
+  }
+
+  int16_t convertSample(int16_t in) {
+    int32_t tmp = in;
+    if (!is_signed) {
+      tmp -= 129;
+    }
+    return NumberConverter::clip<int16_t>(tmp * 258);
   }
 
   virtual operator bool() override { return active; }
@@ -124,7 +140,7 @@ class DecoderL8 : public AudioDecoder {
 class EncoderL8 : public AudioEncoder {
  public:
   // Empty Constructor - the output stream must be provided with begin()
-  EncoderL8(bool isSigned = true) {
+  EncoderL8(bool isSigned = false) {
     TRACED();
     setSigned(isSigned);
   }
@@ -132,7 +148,7 @@ class EncoderL8 : public AudioEncoder {
   // Constructor providing the output stream
   EncoderL8(Print &out) { p_print = &out; }
 
-  /// By default the encoded values are unsigned, but can change them to signed 
+  /// By default the encoded values are unsigned, but can change them to signed
   void setSigned(bool isSigned) { is_signed = isSigned; }
 
   /// Defines the output Stream
@@ -142,10 +158,10 @@ class EncoderL8 : public AudioEncoder {
   const char *mime() override { return "audio/l8"; }
 
   /// We actually do nothing with this
-  virtual void setAudioInfo(AudioInfo from) override {}
+  void setAudioInfo(AudioInfo from) override {}
 
   /// starts the processing using the actual RAWAudioInfo
-  virtual void begin() override { is_open = true; }
+  void begin() override { is_open = true; }
 
   /// starts the processing
   void begin(Print &out) {
@@ -157,23 +173,36 @@ class EncoderL8 : public AudioEncoder {
   void end() override { is_open = false; }
 
   /// Writes PCM data to be encoded as RAW
-  virtual size_t write(const void *in_ptr, size_t in_size) override {
+  size_t write(const void *in_ptr, size_t in_size) override {
     if (p_print == nullptr) return 0;
     int16_t *pt16 = (int16_t *)in_ptr;
-    buffer.resize(in_size);
     size_t samples = in_size / 2;
+    buffer.resize(samples);
+    memset(buffer.data(), 0, samples);
     for (size_t j = 0; j < samples; j++) {
-      int16_t tmp = pt16[j] / 258;
-      if (!is_signed) {
-        tmp += 128;
-      }
-      buffer[j] = tmp;
+      buffer[j] = convertSample(pt16[j]);
     }
 
-    return p_print->write((uint8_t *)buffer.data(), samples);
+    size_t result = p_print->write((uint8_t *)buffer.data(), samples);
+    LOGD("EncoderL8 %d -> %d", (int)in_size, (int)result);
+    return result / sizeof(int16_t);
   }
 
   operator bool() override { return is_open; }
+
+  int16_t convertSample(int16_t sample) {
+    int16_t tmp = NumberConverter::clip<int8_t>(sample / 258);
+    if (!is_signed) {
+      tmp += 129;
+      // clip to range
+      if (tmp < 0) {
+        tmp = 0;
+      } else if (tmp > 255) {
+        tmp = 255;
+      }
+    }
+    return tmp;
+  }
 
   bool isOpen() { return is_open; }
 
