@@ -67,8 +67,13 @@ friend class AudioKitStream;
     get_i2s_pins((i2s_port_t)port_no, &pins);
     pin_bck = pins.bck_io_num;
     pin_ws = pins.ws_io_num;
-    pin_data = pins.data_out_num;
-    pin_data_rx = pins.data_in_num;
+    if (rx_tx_mode == RX_MODE){
+      pin_data = pins.data_in_num;
+      pin_data_rx = I2S_PIN_NO_CHANGE;
+    } else {
+      pin_data = pins.data_out_num;
+      pin_data_rx = pins.data_in_num;      
+    }
 #if defined(ESP32)
 #  if ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(4, 4, 0)                 
     pin_mck = 0;
