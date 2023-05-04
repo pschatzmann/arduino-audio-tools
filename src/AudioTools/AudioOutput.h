@@ -635,20 +635,26 @@ using MemoryPrint = MemoryOutput;
  * @brief Class which can be used to filter the output out based on a switch: If
  * the switch is on the output is forwarded. If it is off it is just ignored.
  * @ingroup io
+ * @ingroup transform
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 class OnOffOutput : public AudioOutput {
 public:
+  OnOffOutput() = default;
   OnOffOutput(Print &out) { p_output = &out; }
 
+  /// Redefines the final output  
   void setOutput(Print &out) { p_output = &out; }
 
+  /// set the sitch to on or off
   void setActive(bool on) { is_active = on; }
 
+  /// Determines if the switch is on
   bool isActive() { return is_active; }
 
   size_t write(const uint8_t *buffer, size_t len) override {
+    if (p_output==nullptr) return 0;
     size_t result = len;
     if (is_active) {
       len = p_output->write(buffer, len);
