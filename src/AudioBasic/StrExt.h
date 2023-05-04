@@ -112,21 +112,25 @@ class StrExt : public Str {
         void copyFrom(const char *source, int len, int maxlen=0){
             this->maxlen = maxlen==0? len : maxlen;
             grow(this->maxlen);
-            this->len = len;
-            this->is_const = false;
-            memmove(this->chars, source, len);
-            this->chars[len] = 0;
+            if (this->chars!=nullptr){
+                this->len = len;
+                this->is_const = false;
+                memmove(this->chars, source, len);
+                this->chars[len] = 0;                
+            }
         }
 
         /// Fills the string with len chars 
         void setChars(char c, int len){
             grow(this->maxlen);
-            for (int j=0;j<len;j++){
-                this->chars[j]=c;
-            }  
-            this->len = len;
-            this->is_const = false;
-            this->chars[len]=0;
+            if (this->chars!=nullptr){
+                for (int j=0;j<len;j++){
+                    this->chars[j]=c;
+                }  
+                this->len = len;
+                this->is_const = false;
+                this->chars[len]=0;
+            }
         }
 
     protected:

@@ -4,7 +4,8 @@
 #include "AudioBasic/StrExt.h"
 #include "AudioTools/Buffers.h"
 
-#define WAVE_FORMAT_UNKNOWN 0x0000    /* Microsoft Corporation */
+#define WAVE_FORMAT_UNKNOWN 0x0000 /* Microsoft Corporation */
+#define WAVE_FORMAT_PCM 0x0001
 #define WAVE_FORMAT_ADPCM 0x0002      /* Microsoft Corporation */
 #define WAVE_FORMAT_IEEE_FLOAT 0x0003 /* Microsoft Corporation */
 #define WAVE_FORMAT_VSELP 0x0004      /* Compaq Computer Corp. */
@@ -509,9 +510,9 @@ class ParseObject {
 };
 
 /**
- * @brief AVI Container Decoder which can be fed with small chunks of data. The minimum
- * length must be bigger then the header size! The file structure is documented
- * at
+ * @brief AVI Container Decoder which can be fed with small chunks of data. The
+ * minimum length must be bigger then the header size! The file structure is
+ * documented at
  * https://learn.microsoft.com/en-us/windows/win32/directshow/avi-riff-file-reference
  * @ingroup codecs
  * @ingroup encoder
@@ -521,7 +522,19 @@ class ParseObject {
 
 class AVIDecoder : public AudioDecoder {
  public:
-  AVIDecoder(int bufferSize = 1024) { parse_buffer.resize(bufferSize); }
+  AVIDecoder(int bufferSize = 1024) {
+    parse_buffer.resize(bufferSize);
+    p_decoder = &copy_decoder;
+    p_output_audio = new EncodedAudioOutput(&copy_decoder);
+  }
+  AVIDecoder(AudioDecoder *audioDecoder, int bufferSize = 1024) {
+    parse_buffer.resize(bufferSize);
+    p_decoder = audioDecoder;
+    p_output_audio = new EncodedAudioOutput(audioDecoder);
+  }
+  ~AVIDecoder() {
+    if (p_output_audio != nullptr) delete p_output_audio;
+  }
 
   void begin() {
     parse_state = ParseHeader;
@@ -530,14 +543,16 @@ class AVIDecoder : public AudioDecoder {
     current_pos = 0;
     header_is_avi = false;
     stream_header_idx = -1;
+    is_metadata_ready = false;
   }
 
   virtual void setOutputStream(Print &out_stream) {
-    p_print_audio = &out_stream;
+    // p_output_audio = &out_stream;
+    p_output_audio->setOutput(&out_stream);
   }
 
   virtual void setOutputVideoStream(VideoOutput &out_stream) {
-    p_print_video = &out_stream;
+    p_output_video = &out_stream;
   }
 
   virtual size_t write(const void *data, size_t length) {
@@ -571,10 +586,23 @@ class AVIDecoder : public AudioDecoder {
   AVIStreamHeader streamHeader(int idx) { return stream_header[idx]; }
 
   /// Provides the video information
-  BitmapInfoHeader videoInfo() { return video_info; };
+  BitmapInfoHeader videoInfoExt() { return video_info; };
+
+  const char *videoFormat() { return video_format; }
 
   /// Provides the audio information
   WAVFormatX audioInfoExt() { return audio_info; }
+
+  /// Provides the  audio_info.wFormatTag
+  int audioFormat() { return audio_info.wFormatTag; }
+
+  /// Returns true if all metadata has been parsed and is available
+  bool isMetadataReady() { return is_metadata_ready; }
+  /// Register a validation callback which is called after parsing just before
+  /// playing the audio
+  void setValidationCallback(bool (*cb)(AVIDecoder &avi)) {
+    validation_cb = cb;
+  }
 
  protected:
   bool header_is_avi = false;
@@ -589,13 +617,18 @@ class AVIDecoder : public AudioDecoder {
   Vector<StreamContentType> content_types;
   Stack<ParseObject> object_stack;
   ParseObject current_stream_data;
-  Print *p_print_audio = nullptr;
-  VideoOutput *p_print_video = nullptr;
+  EncodedAudioOutput *p_output_audio = nullptr;
+  VideoOutput *p_output_video = nullptr;
   long open_subchunk_len = 0;
   long current_pos = 0;
   long movi_end_pos = 0;
   StrExt spaces;
   StrExt str;
+  char video_format[5] = {0};
+  bool is_metadata_ready = false;
+  bool (*validation_cb)(AVIDecoder &avi) = nullptr;
+  CopyDecoder copy_decoder;
+  AudioDecoder *p_decoder = nullptr;
 
   bool isCurrentStreamAudio() {
     return strncmp(stream_header[stream_header_idx].fccType, "auds", 4) == 0;
@@ -647,11 +680,15 @@ class AVIDecoder : public AudioDecoder {
         if (isCurrentStreamAudio()) {
           audio_info = *(strf.asAVIAudioFormat(parse_buffer.data()));
           setupAudioInfo();
+          LOGI("audioFormat: %d", audioFormat());
           content_types.push_back(Audio);
           consume(strf.size());
         } else if (isCurrentStreamVideo()) {
           video_info = *(strf.asAVIVideoFormat(parse_buffer.data()));
+          setupVideoInfo();
+          LOGI("videoFormat: %s", videoFormat());
           content_types.push_back(Video);
+          video_format[4] = 0;
           consume(strf.size());
         } else {
           result = false;
@@ -669,6 +706,9 @@ class AVIDecoder : public AudioDecoder {
             parse_state = ParseStrl;
           } else if (Str(tmp.id()).equals("movi")) {
             parse_state = ParseMovi;
+          } else {
+            // e.g. ignore info
+            consume(tmp.size() + LIST_HEADER_SIZE);
           }
         } else {
           // no valid data, so throw it away, we keep the last 4 digits in case
@@ -682,9 +722,13 @@ class AVIDecoder : public AudioDecoder {
         ParseObject movi = tryParseList();
         if (Str(movi.id()).equals("movi")) {
           consume(LIST_HEADER_SIZE);
+          is_metadata_ready = true;
+          if (validation_cb) is_parsing_active = (validation_cb(*this));
           processStack(movi);
           movi_end_pos = movi.end_pos;
           parse_state = SubChunk;
+          // trigger new write
+          result = false;
         }
       } break;
 
@@ -700,7 +744,8 @@ class AVIDecoder : public AudioDecoder {
         parse_state = SubChunkContinue;
         open_subchunk_len = current_stream_data.open;
         if (current_stream_data.isVideo()) {
-          if (p_print_video != nullptr) p_print_video->beginFrame(hdrl.size());
+          if (p_output_video != nullptr)
+            p_output_video->beginFrame(hdrl.size());
         }
 
       } break;
@@ -708,8 +753,8 @@ class AVIDecoder : public AudioDecoder {
       case SubChunkContinue: {
         writeData();
         if (open_subchunk_len == 0) {
-          if (current_stream_data.isVideo() && p_print_video != nullptr)
-            p_print_video->endFrame();
+          if (current_stream_data.isVideo() && p_output_video != nullptr)
+            p_output_video->endFrame();
           if (tryParseChunk("idx").isValid()) {
             parse_state = ParseIgnore;
           } else if (tryParseList("rec").isValid()) {
@@ -740,24 +785,33 @@ class AVIDecoder : public AudioDecoder {
     info.channels = audio_info.nChannels;
     info.bits_per_sample = audio_info.wBitsPerSample;
     info.sample_rate = audio_info.nSamplesPerSec;
+    info.logInfo();
+    // adjust the audio info if necessary
+    if (p_decoder != nullptr) {
+      p_decoder->setAudioInfo(info);
+      info = p_decoder->audioInfo();
+    }
     if (p_notify) {
       p_notify->setAudioInfo(info);
     }
+  }
+
+  void setupVideoInfo() {
+    memcpy(video_format, stream_header[stream_header_idx].fccHandler, 4);
   }
 
   void writeData() {
     long to_write = min((long)parse_buffer.available(), open_subchunk_len);
     if (current_stream_data.isAudio()) {
       LOGD("audio %d", (int)to_write);
-      if (p_print_audio != nullptr)
-        p_print_audio->write(parse_buffer.data(), to_write);
+      p_output_audio->write(parse_buffer.data(), to_write);
       open_subchunk_len -= to_write;
       cleanupStack();
       consume(to_write);
     } else if (current_stream_data.isVideo()) {
       LOGD("video %d", (int)to_write);
-      if (p_print_video != nullptr)
-        p_print_video->write(parse_buffer.data(), to_write);
+      if (p_output_video != nullptr)
+        p_output_video->write(parse_buffer.data(), to_write);
       open_subchunk_len -= to_write;
       cleanupStack();
       consume(to_write);
