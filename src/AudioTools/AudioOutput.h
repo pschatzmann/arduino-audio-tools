@@ -634,7 +634,6 @@ using MemoryPrint = MemoryOutput;
 /***
  * @brief Class which can be used to filter the output out based on a switch: If
  * the switch is on the output is forwarded. If it is off it is just ignored.
- * @ingroup io
  * @ingroup transform
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -643,6 +642,9 @@ class OnOffOutput : public AudioOutput {
 public:
   OnOffOutput() = default;
   OnOffOutput(Print &out) { p_output = &out; }
+
+  bool begin() override { return setActive(true); }
+  void end() override { return setActive(false); }
 
   /// Redefines the final output  
   void setOutput(Print &out) { p_output = &out; }
