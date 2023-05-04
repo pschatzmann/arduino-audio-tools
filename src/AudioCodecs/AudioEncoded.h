@@ -176,7 +176,19 @@ class StreamingDecoder {
  */
 class EncodedAudioOutput : public AudioStream {
  public:
-  /// Constructor for AudioStream with automatic notification of audio changes
+
+  EncodedAudioOutput() {
+    TRACED();
+    active = false;
+  }
+
+  EncodedAudioOutput(AudioDecoder *decoder) {
+    TRACED();
+    decoder_ptr = decoder;
+    writer_ptr = decoder_ptr;
+    active = false;
+  }
+
   EncodedAudioOutput(AudioStream *outputStream, AudioDecoder *decoder) {
     TRACED();
     ptr_out = outputStream;
@@ -187,7 +199,6 @@ class EncodedAudioOutput : public AudioStream {
     active = false;
   }
 
-  /// Constructor for AudioOutput with automatic notification of audio changes
   EncodedAudioOutput(AudioOutput *outputStream, AudioDecoder *decoder) {
     TRACED();
     ptr_out = outputStream;
@@ -198,27 +209,6 @@ class EncodedAudioOutput : public AudioStream {
     active = false;
   }
 
-  // /**
-  //  * @brief Construct a new Encoded Stream object - used for decoding
-  //  *
-  //  * @param outputStream
-  //  * @param decoder
-  //  */
-  // EncodedAudioOutput(Print &outputStream, AudioDecoder &decoder) {
-  //   TRACED();
-  //   ptr_out = &outputStream;
-  //   decoder_ptr = &decoder;
-  //   decoder_ptr->setOutputStream(outputStream);
-  //   writer_ptr = decoder_ptr;
-  //   active = false;
-  // }
-
-  /**
-   * @brief Construct a new Encoded Audio Stream object - used for decoding
-   *
-   * @param outputStream
-   * @param decoder
-   */
   EncodedAudioOutput(Print *outputStream, AudioDecoder *decoder) {
     TRACED();
     ptr_out = outputStream;
@@ -228,27 +218,6 @@ class EncodedAudioOutput : public AudioStream {
     active = false;
   }
 
-  // /**
-  //  * @brief Construct a new Encoded Audio Stream object - used for encoding
-  //  *
-  //  * @param outputStream
-  //  * @param encoder
-  //  */
-  // EncodedAudioOutput(Print &outputStream, AudioEncoder &encoder) {
-  //   TRACED();
-  //   ptr_out = &outputStream;
-  //   encoder_ptr = &encoder;
-  //   encoder_ptr->setOutputStream(outputStream);
-  //   writer_ptr = encoder_ptr;
-  //   active = false;
-  // }
-
-  /**
-   * @brief Construct a new Encoded Audio Stream object - used for encoding
-   *
-   * @param outputStream
-   * @param encoder
-   */
   EncodedAudioOutput(Print *outputStream, AudioEncoder *encoder) {
     TRACED();
     ptr_out = outputStream;
@@ -278,21 +247,6 @@ class EncodedAudioOutput : public AudioStream {
     active = false;
   }
 
-  /**
-   * @brief Construct a new Encoded Audio Stream object - the Output and
-   * Encoder/Decoder needs to be defined with the corresponding setter methods.
-   */
-  EncodedAudioOutput() {
-    TRACED();
-    active = false;
-  }
-
-  EncodedAudioOutput(AudioDecoder *decoder) {
-    TRACED();
-    decoder_ptr = decoder;
-    writer_ptr = decoder_ptr;
-    active = false;
-  }
 
   /// Define object which need to be notified if the basinfo is changing
   void setNotifyAudioChange(AudioInfoSupport &bi) override {
@@ -444,17 +398,14 @@ using EncodedAudioPrint = EncodedAudioOutput;
  */
 class EncodedAudioStream : public EncodedAudioOutput {
  public:
+
+  EncodedAudioStream() : EncodedAudioOutput() {}
+
   EncodedAudioStream(AudioStream *ioStream, AudioDecoder *decoder)
       : EncodedAudioOutput(ioStream, decoder) {
     // the indicated stream can be used as input
     setStream(ioStream);
   }
-
-  // EncodedAudioStream(AudioStream &ioStream, AudioDecoder &decoder)
-  //     : EncodedAudioOutput(&ioStream, &decoder) {
-  //   // the indicated stream can be used as input
-  //   setStream(&ioStream);
-  // }
 
   EncodedAudioStream(Stream *ioStream, AudioDecoder *decoder)
       : EncodedAudioOutput((Print *)ioStream, decoder) {
@@ -468,80 +419,16 @@ class EncodedAudioStream : public EncodedAudioOutput {
     active = false;
   }
 
-  /// Constructor for AudioOutput with automatic notification of audio changes
   EncodedAudioStream(AudioOutput *outputStream, AudioDecoder *decoder)
       : EncodedAudioOutput(outputStream, decoder) {}
 
-  // /// Constructor for AudioOutput with automatic notification of audio
-  // changes EncodedAudioStream(AudioOutput &outputStream, AudioDecoder
-  // &decoder)
-  //     : EncodedAudioOutput(&outputStream, &decoder) {}
-
-  // /**
-  //  * @brief Construct a new Encoded Stream object - used for decoding
-  //  *
-  //  * @param outputStream
-  //  * @param decoder
-  //  */
-  // EncodedAudioStream(Print &outputStream, AudioDecoder &decoder)
-  //     : EncodedAudioOutput(outputStream, decoder) {}
-
-  /**
-   * @brief Construct a new Encoded Audio Stream object - used for decoding
-   *
-   * @param outputStream
-   * @param decoder
-   */
   EncodedAudioStream(Print *outputStream, AudioDecoder *decoder)
       : EncodedAudioOutput(outputStream, decoder) {}
 
-  // /**
-  //  * @brief Construct a new Encoded Audio Stream object - used for encoding
-  //  *
-  //  * @param outputStream
-  //  * @param encoder
-  //  */
-  // EncodedAudioStream(Print &outputStream, AudioEncoder &encoder)
-  //     : EncodedAudioOutput(outputStream, encoder) {}
 
-  // /**
-  //  * @brief Construct a new Encoded Audio Stream object - used for encoding
-  //  */
-  // EncodedAudioStream(Stream &io, AudioEncoder &encoder)
-  //     : EncodedAudioOutput(io, encoder) {
-  //   setStream(&io);
-  // }
-
-  // /**
-  //  * @brief Construct a new Encoded Audio Stream object - used for encoding
-  //  */
-  // EncodedAudioStream(AudioStream &io, AudioEncoder &encoder)
-  //     : EncodedAudioOutput(io, encoder) {
-  //   setStream(&io);
-  //   decoder_ptr->setNotifyAudioChange(io);
-  // }
-
-  // EncodedAudioStream(AudioOutput &io, AudioEncoder &encoder)
-  //     : EncodedAudioOutput(io, encoder) {
-  //   //setStream(&io);
-  //   decoder_ptr->setNotifyAudioChange(io);
-  // }
-
-  /**
-   * @brief Construct a new Encoded Audio Stream object - used for encoding
-   *
-   * @param outputStream
-   * @param encoder
-   */
   EncodedAudioStream(Print *outputStream, AudioEncoder *encoder)
       : EncodedAudioOutput(outputStream, encoder) {}
 
-  /**
-   * @brief Construct a new Encoded Audio Stream object - the Output and
-   * Encoder/Decoder needs to be defined with the corresponding setter methods
-   *
-   */
-  EncodedAudioStream() : EncodedAudioOutput() {}
 
   /// Same as setStream()
   void setInput(Stream *ioStream) { setStream(ioStream); }

@@ -8,6 +8,7 @@
  * @copyright Copyright (c) 2023
  *
  */
+
 #include <SD.h>
 #include <SPI.h>
 
@@ -31,6 +32,7 @@ void setup() {
   auto cfg = in.defaultConfig(RX_MODE);
   cfg.sd_active = true;
   cfg.copyFrom(info);
+  cfg.input_device = AUDIO_HAL_ADC_INPUT_LINE2; // microphone
   in.begin(cfg);
 
   // Open SD drive
@@ -39,6 +41,10 @@ void setup() {
     stop();
   }
   
+  // Cleanup if necessary
+  if (SD.exists(file_name))
+    SD.remove(file_name);
+
   // open file
   file = SD.open(file_name, FILE_WRITE);
   if (!file){

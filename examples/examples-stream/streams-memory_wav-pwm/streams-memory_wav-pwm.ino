@@ -20,7 +20,7 @@
 MemoryStream wav(alice_wav, alice_wav_len);
 PWMAudioOutput pwm;          // PWM output 
 WAVDecoder decoder(pwm);        // decode wav to pcm and send it to printer
-EncodedAudioStream out(pwm, decoder); // Decoder stream
+EncodedAudioStream out(&pwm, &decoder); // Decoder stream
 StreamCopy copier(out, wav);    // copy in to out
 
 void setup(){
