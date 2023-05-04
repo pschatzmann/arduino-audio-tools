@@ -21,7 +21,7 @@ namespace audio_tools {
 class AudioOutput : public Print,
                     public AudioInfoSupport,
                     public AudioInfoSource {
-public:
+ public:
   virtual ~AudioOutput() = default;
 
   virtual size_t write(const uint8_t *buffer, size_t size) override = 0;
@@ -74,7 +74,7 @@ public:
   virtual bool begin() { return true; }
   virtual void end() {}
 
-protected:
+ protected:
   int tmpPos = 0;
   AudioInfoSupport *p_notify = nullptr;
   AudioInfo cfg;
@@ -90,9 +90,9 @@ protected:
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-template <typename T> class CsvOutput : public AudioOutput {
-
-public:
+template <typename T>
+class CsvOutput : public AudioOutput {
+ public:
   CsvOutput(int buffer_size = DEFAULT_BUFFER_SIZE, bool active = true) {
     this->active = active;
   }
@@ -154,8 +154,7 @@ public:
 
   /// Writes the data - formatted as CSV -  to the output stream
   virtual size_t write(const uint8_t *data, size_t len) {
-    if (!active)
-      return 0;
+    if (!active) return 0;
     LOGD("CsvOutput::write: %d", (int)len);
     if (cfg.channels == 0) {
       LOGW("Channels not defined: using 2");
@@ -184,7 +183,7 @@ public:
 
   int availableForWrite() { return 1024; }
 
-protected:
+ protected:
   T *data_ptr;
   Print *out_ptr = &Serial;
   int channel = 0;
@@ -198,8 +197,7 @@ protected:
           out_ptr->print(value);
         }
         data_ptr++;
-        if (ch < cfg.channels - 1)
-          Serial.print(", ");
+        if (ch < cfg.channels - 1) Serial.print(", ");
       }
       Serial.println();
     }
@@ -207,7 +205,8 @@ protected:
 };
 
 // legacy name
-template <typename T> using CsvStream = CsvOutput<T>;
+template <typename T>
+using CsvStream = CsvOutput<T>;
 
 /**
  * @brief Creates a Hex Dump
@@ -216,8 +215,7 @@ template <typename T> using CsvStream = CsvOutput<T>;
  * @copyright GPLv3
  */
 class HexDumpOutput : public AudioOutput {
-
-public:
+ public:
   HexDumpOutput(int buffer_size = DEFAULT_BUFFER_SIZE, bool active = true) {
     this->active = active;
   }
@@ -255,8 +253,7 @@ public:
   }
 
   virtual size_t write(const uint8_t *data, size_t len) {
-    if (!active)
-      return 0;
+    if (!active) return 0;
     TRACED();
     for (size_t j = 0; j < len; j++) {
       out_ptr->print(data[j], HEX);
@@ -273,13 +270,13 @@ public:
     return len;
   }
 
-  // 
+  //
   AudioInfo defaultConfig(RxTxMode mode = TX_MODE) {
     AudioInfo info;
     return info;
   }
 
-protected:
+ protected:
   Print *out_ptr = &Serial;
   int pos = 0;
   bool active = false;
@@ -295,8 +292,9 @@ using HexDumpStream = HexDumpOutput;
  * @copyright GPLv3
  * @tparam T
  */
-template <typename T> class OutputMixer : public Print {
-public:
+template <typename T>
+class OutputMixer : public Print {
+ public:
   OutputMixer(Print &finalOutput, int outputStreamCount) {
     p_final_output = &finalOutput;
     setOutputCount(outputStreamCount);
@@ -370,9 +368,10 @@ public:
     assert(p_buffer != nullptr);
     size_t samples = bytes / sizeof(T);
     if (p_buffer->availableForWrite() < samples) {
-      LOGW("Available Buffer too small %d: requested: %d -> increase the "
-           "buffer size",
-           p_buffer->availableForWrite(), samples);
+      LOGW(
+          "Available Buffer too small %d: requested: %d -> increase the "
+          "buffer size",
+          p_buffer->availableForWrite(), samples);
     } else {
       result = p_buffer->writeArray((T *)buffer_c, samples) * sizeof(T);
     }
@@ -387,8 +386,7 @@ public:
   /// Provides the bytes available to write for the indicated stream index
   int availableForWrite(int idx) {
     RingBuffer<T> *p_buffer = buffers[idx];
-    if (p_buffer == nullptr)
-      return 0;
+    if (p_buffer == nullptr) return 0;
     return p_buffer->availableForWrite();
   }
 
@@ -424,7 +422,7 @@ public:
     return;
   }
 
-protected:
+ protected:
   Vector<RingBuffer<T> *> buffers{0};
   Vector<T> output{0};
   Vector<float> weights{0};
@@ -492,7 +490,7 @@ protected:
  * @copyright GPLv3
  */
 class VolumeOutput : public AudioOutput {
-public:
+ public:
   bool begin(AudioInfo info) {
     setAudioInfo(info);
     return true;
@@ -509,18 +507,18 @@ public:
   size_t write(const uint8_t *buffer, size_t size) {
     clear();
     switch (info.bits_per_sample) {
-    case 16:
-      updateVolumes<int16_t>(buffer, size);
-      break;
-    case 24:
-      updateVolumes<int24_t>(buffer, size);
-      break;
-    case 32:
-      updateVolumes<int32_t>(buffer, size);
-      break;
-    default:
-      LOGE("Unsupported bits_per_sample: %d", info.bits_per_sample);
-      break;
+      case 16:
+        updateVolumes<int16_t>(buffer, size);
+        break;
+      case 24:
+        updateVolumes<int24_t>(buffer, size);
+        break;
+      case 32:
+        updateVolumes<int32_t>(buffer, size);
+        break;
+      default:
+        LOGE("Unsupported bits_per_sample: %d", info.bits_per_sample);
+        break;
     }
     return size;
   }
@@ -551,14 +549,15 @@ public:
     }
   }
 
-protected:
+ protected:
   AudioInfo info;
   float f_volume_tmp = 0;
   float f_volume = 0;
   Vector<float> volumes{0};
   Vector<float> volumes_tmp{0};
 
-  template <typename T> void updateVolumes(const uint8_t *buffer, size_t size) {
+  template <typename T>
+  void updateVolumes(const uint8_t *buffer, size_t size) {
     T *bufferT = (T *)buffer;
     int samplesCount = size / sizeof(T);
     for (int j = 0; j < samplesCount; j++) {
@@ -593,7 +592,7 @@ using VolumePrint = VolumeOutput;
  * @ingroup io
  */
 class MemoryOutput : public AudioOutput {
-public:
+ public:
   MemoryOutput(uint8_t *start, int len) {
     p_start = start;
     p_next = start;
@@ -604,8 +603,7 @@ public:
   }
 
   size_t write(const uint8_t *buffer, size_t len) override {
-    if (p_next == nullptr)
-      return 0;
+    if (p_next == nullptr) return 0;
     if (pos + len <= max_size) {
       memcpy(p_next, buffer, len);
       pos += len;
@@ -621,7 +619,7 @@ public:
 
   int size() { return max_size; }
 
-protected:
+ protected:
   int pos = 0;
   uint8_t *p_start = nullptr;
   uint8_t *p_next = nullptr;
@@ -632,23 +630,27 @@ protected:
 using MemoryPrint = MemoryOutput;
 
 /**
- * @brief Switched Output class. Class which can be used to filter the output out based on a switch: If
- * the switch is on the output is forwarded. If it is off it is just ignored.
+ * @brief Switched Output class. Class which can be used to filter the output
+ * out based on a switch: If the switch is on the output is forwarded. If it is
+ * off it is just ignored.
  * @ingroup transform
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 class OnOffOutput : public AudioOutput {
-public:
+ public:
   OnOffOutput() = default;
   OnOffOutput(Print &out) { setOutput(out); }
 
   /// Same as setActive(true)
-  bool begin() override { return setActive(true); }
+  bool begin() override {
+    setActive(true);
+    return true;
+  }
   /// Same as setActive(false)
-  void end() override { return setActive(false); }
+  void end() override { setActive(false); }
 
-  /// Redefines the final output  
+  /// Redefines the final output
   void setOutput(Print &out) { p_output = &out; }
 
   /// set the sitch to on or off
@@ -658,7 +660,7 @@ public:
   bool isActive() { return is_active; }
 
   size_t write(const uint8_t *buffer, size_t len) override {
-    if (p_output==nullptr) return 0;
+    if (p_output == nullptr) return 0;
     size_t result = len;
     if (is_active) {
       len = p_output->write(buffer, len);
@@ -666,9 +668,9 @@ public:
     return len;
   }
 
-protected:
+ protected:
   Print *p_output = nullptr;
   bool is_active = true;
 };
 
-} // namespace audio_tools
+}  // namespace audio_tools
