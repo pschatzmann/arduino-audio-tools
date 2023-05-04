@@ -51,7 +51,7 @@ class DecoderL8 : public AudioDecoder {
     setNotifyAudioChange(bi);
   }
 
-  /// By default the int8_t values are signed, you can set them to be unsigned
+  /// By default the encoded values are unsigned, but you can change them to signed 
   void setSigned(bool isSigned) { is_signed = isSigned; }
 
   void begin(AudioInfo info1) {
@@ -132,7 +132,7 @@ class EncoderL8 : public AudioEncoder {
   // Constructor providing the output stream
   EncoderL8(Print &out) { p_print = &out; }
 
-  /// By default the int8_t values are signed, you can set them to be unsigned
+  /// By default the encoded values are unsigned, but can change them to signed 
   void setSigned(bool isSigned) { is_signed = isSigned; }
 
   /// Defines the output Stream

@@ -16,7 +16,7 @@
 
 const char* file_name = "/rec.wav";
 AudioInfo info(16000, 1, 16);
-AudioKitStream in; // replace with any other audio source 
+AudioKitStream in;
 File file;  // final output stream
 EncodedAudioStream out(&file, new WAVEncoder());
 StreamCopy copier(out, in);  // copies data
@@ -25,7 +25,13 @@ uint64_t timeout;
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+
+  // setup input
+  auto cfg = in.defaultConfig(RX_MODE);
+  cfg.sd_active = true;
+  cfg.copyFrom(info);
+  in.begin(cfg);
 
   // Open SD drive
   if (!SD.begin(PIN_AUDIO_KIT_SD_CARD_CS)) {
@@ -35,12 +41,10 @@ void setup() {
   
   // open file
   file = SD.open(file_name, FILE_WRITE);
-
-  // setup input
-  auto cfg = in.defaultConfig(RX_MODE);
-  cfg.sd_active = true;
-  cfg.copyFrom(info);
-  in.begin(cfg);
+  if (!file){
+    Serial.println("file failed!");
+    stop();
+  }
 
   // setup output
   out.begin(info);
@@ -50,13 +54,13 @@ void setup() {
 }
 
 void loop() {
-  if (timeout < millis()) {
+  if (millis() < timeout) {
     // record to wav file
     copier.copy();
   } else {
     // close file when done
     if (file) {
-      file.flush(); 
+      file.flush();
       Serial.print("File has ");
       Serial.print(file.size());
       Serial.println(" bytes");
