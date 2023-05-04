@@ -111,9 +111,9 @@ namespace audio_tools {
             if (p_decoder->isResultPCM()){
                 this->fade.setTarget(output);
                 this->volume_out.setTarget(fade);
-                this->p_out_decoding = new EncodedAudioStream(volume_out, *p_decoder);
+                this->p_out_decoding = new EncodedAudioStream(&volume_out, p_decoder);
             } else {
-                this->p_out_decoding = new EncodedAudioStream(output, *p_decoder);
+                this->p_out_decoding = new EncodedAudioStream(&output, p_decoder);
             }
             this->p_final_print = &output;
         }
@@ -122,9 +122,9 @@ namespace audio_tools {
             if (p_decoder->isResultPCM()){
                 this->fade.setTarget(output);
                 this->volume_out.setTarget(fade);
-                this->p_out_decoding = new EncodedAudioStream(volume_out, *p_decoder);
+                this->p_out_decoding = new EncodedAudioStream(&volume_out, p_decoder);
             } else {
-                this->p_out_decoding = new EncodedAudioStream(output, *p_decoder);
+                this->p_out_decoding = new EncodedAudioStream(&output, p_decoder);
             }
         }
 
@@ -132,9 +132,9 @@ namespace audio_tools {
             if (p_decoder->isResultPCM()){
                 this->fade.setTarget(output);
                 this->volume_out.setTarget(fade);
-                this->p_out_decoding = new EncodedAudioStream(volume_out, *p_decoder);
+                this->p_out_decoding = new EncodedAudioStream(&volume_out, p_decoder);
             } else {
-                this->p_out_decoding = new EncodedAudioStream(output, *p_decoder);
+                this->p_out_decoding = new EncodedAudioStream(&output, p_decoder);
             }
             this->p_final_stream = &output;
         }
@@ -224,7 +224,7 @@ namespace audio_tools {
                 delete p_out_decoding;
             }
             this->p_decoder = &decoder;
-            this->p_out_decoding = new EncodedAudioStream(volume_out, decoder);
+            this->p_out_decoding = new EncodedAudioStream(&volume_out, p_decoder);
         }
 
         /// (Re)defines the notify

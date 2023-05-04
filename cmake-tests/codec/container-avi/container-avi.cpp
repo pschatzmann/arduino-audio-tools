@@ -12,15 +12,16 @@
 #include "AudioCodecs/ContainerAVI.h"
 #include "AudioLibs/Desktop/File.h"
 
-CsvStream<int16_t> csv;
-AVIDecoder codec;
-EncodedAudioStream riff(csv, codec);
+CsvOutput<int16_t> csv;
+//AVIDecoder codec;
+AVIDecoder codec(new DecoderL8(false));
+EncodedAudioOutput riff(&csv, &codec);
 File file;
 StreamCopy copier(riff, file);
 
 void setup() {
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
-  file.open("/data/resources/test.avi",FILE_READ);
+  file.open("/data/resources/test1.avi",FILE_READ);
 }
 
 void loop() {
