@@ -631,8 +631,8 @@ protected:
 // legacy name
 using MemoryPrint = MemoryOutput;
 
-/***
- * @brief Class which can be used to filter the output out based on a switch: If
+/**
+ * @brief Switched Output class. Class which can be used to filter the output out based on a switch: If
  * the switch is on the output is forwarded. If it is off it is just ignored.
  * @ingroup transform
  * @author Phil Schatzmann
