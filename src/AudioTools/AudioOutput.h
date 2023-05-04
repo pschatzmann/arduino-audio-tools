@@ -641,9 +641,11 @@ using MemoryPrint = MemoryOutput;
 class OnOffOutput : public AudioOutput {
 public:
   OnOffOutput() = default;
-  OnOffOutput(Print &out) { p_output = &out; }
+  OnOffOutput(Print &out) { setOutput(out); }
 
+  /// Same as setActive(true)
   bool begin() override { return setActive(true); }
+  /// Same as setActive(false)
   void end() override { return setActive(false); }
 
   /// Redefines the final output  
