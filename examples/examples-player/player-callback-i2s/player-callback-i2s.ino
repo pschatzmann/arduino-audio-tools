@@ -22,7 +22,7 @@ Stream* callbackStream(int offset);
 
 // data
 const int chipSelect=PIN_CS;
-AudioSourceCallback source(callbackStream,callbackInit);
+AudioSourceCallback source(callbackNextStream, callbackInit);
 I2SStream i2s;
 MP3DecoderHelix decoder;
 AudioPlayer player(source, i2s, decoder);
@@ -34,8 +34,7 @@ void callbackInit() {
   dir = SD.open("/TomWaits");
 }
 
-Stream* callbackStream(int offset) {
-  LOGI("callbackStream: %d", offset);
+Stream* callbackNextStream(int offset) {
   audioFile.close();
   // the next files must be a mp3 file
   for (int j=0;j<offset;j++)

@@ -2,6 +2,9 @@
 
 The example demonstrates how to implement an __MP3 Player__ which __provides the data via callbacks__ and sends the audio via I2S to an external DAC. 
 
+This demonstrates the minimum implementation. I recommend however to provide implementations for the other callback methods to enhance the functionality: e.g absolute positioning, file selection by name etc. 
+
+
 ## SD Card
 
 Here is the information how to wire the SD card to the ESP32
