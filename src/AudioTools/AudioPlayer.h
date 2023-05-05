@@ -155,11 +155,8 @@ namespace audio_tools {
                 setVolume(current_volume);
             }
 
-            // navigation support
-            if (autonext){
-                // take definition from source
-                autonext = p_source->isAutoNext();
-            }
+            // take definition from source
+            autonext = p_source->isAutoNext();
 
             // initial audio info for fade from output when not defined yet
             if (fade.audioInfo().channels==0){
@@ -362,7 +359,7 @@ namespace audio_tools {
             return current_volume;
         }
 
-        /// Set move to next
+        /// Set move to next: This is determined from the AudioSource. If you want to override it call this method after calling begin()!
         virtual void setAutoNext(bool next) {
             autonext = next;
         }
@@ -455,7 +452,7 @@ namespace audio_tools {
 
     protected:
         bool active = false;
-        bool autonext = false;
+        bool autonext = true;
         bool silence_on_inactive = false;
         AudioSource* p_source = nullptr;
         VolumeStream volume_out; // Volume control

@@ -64,7 +64,6 @@ void setup() {
 
   // setup player
   player.setMetadataCallback(callbackPrintMetaData);
-  player.setAutoNext(true);
   player.begin();
 }
 
