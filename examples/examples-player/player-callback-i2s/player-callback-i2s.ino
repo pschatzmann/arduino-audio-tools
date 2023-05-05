@@ -20,7 +20,6 @@
 void callbackInit();
 Stream* callbackStream(int offset);
 
-
 // data
 const int chipSelect=PIN_CS;
 AudioSourceCallback source(callbackStream,callbackInit);
@@ -31,12 +30,13 @@ File audioFile;
 
 
 void callbackInit() {
-  SD.begin(chipSelect);
-  audioFile = SD.open("/");
+  // make sure that the directory conains only mp3 files
+  audioFile = SD.open("/TomWaits");
 }
 
 Stream* callbackStream(int offset) {
   auto lastFile = audioFile;
+  // we assume the next file is a valid mp3 file
   audioFile = audioFile.openNextFile();
   lastFile.close();
   return &audioFile;
@@ -53,6 +53,9 @@ void callbackPrintMetaData(MetaDataType type, const char* str, int len){
 void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
+
+  // setup SD
+  SD.begin(chipSelect);
 
   // setup output
   auto cfg = i2s.defaultConfig(TX_MODE);
