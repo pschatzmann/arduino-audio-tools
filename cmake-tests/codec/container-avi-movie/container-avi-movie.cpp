@@ -9,27 +9,26 @@
  *
  */
 
+#include "AudioTools.h"
 #include "AudioCodecs/ContainerAVI.h"
 #include "AudioLibs/Desktop/File.h"
-#include "AudioTools.h"
+#include "AudioLibs/PortAudioStream.h"
+#include "JpegDisplayOpenCV.h"
 
-MiniAudioStream out;                   // output
-DecoderL8 l8;                          // audio decoder
-AVIDecoder codec(&l8);                 // container
-EncodedAudioOutput avi(&out, &codec);  // avi stream
-File file;                             // data input
-StreamCopy copier(avi, file);
-JpegDisplay jpeg;                      // display jpeg movie
+PortAudioStream out;   // Output of sound on desktop 
+JpegDisplayOpenCV jpegDisplay;
+AVIDecoder codec(new DecoderL8(), &jpegDisplay);
+EncodedAudioOutput riff(&out, &codec);
+File file;
+StreamCopy copier(riff, file);
 
 void setup() {
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
-  file.open("/data/resources/test1.avi", FILE_READ);
-  // jpec decoder
-  codec.setOutputVideoStream(jpeg);
+  file.open("/data/resources/test1.avi",FILE_READ);
 }
 
 void loop() {
-  if (!copier.copy()) {
+  if(!copier.copy()){
     stop();
   }
 }

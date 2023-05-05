@@ -11,11 +11,13 @@
 #include "AudioTools.h"
 #include "AudioCodecs/ContainerAVI.h"
 #include "AudioLibs/Desktop/File.h"
+#include "AudioLibs/PortAudioStream.h"
 
-CsvOutput<int16_t> csv;
+//CsvOutput<int16_t> out;
+PortAudioStream out;   // Output of sound on desktop 
 //AVIDecoder codec;
-AVIDecoder codec(new DecoderL8(false));
-EncodedAudioOutput riff(&csv, &codec);
+AVIDecoder codec(new DecoderL8());
+EncodedAudioOutput riff(&out, &codec);
 File file;
 StreamCopy copier(riff, file);
 

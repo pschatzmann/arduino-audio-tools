@@ -20,12 +20,12 @@ endif()
 add_executable (container-avi container-avi.cpp)
 
 # set preprocessor defines
-target_compile_definitions(container-avi PUBLIC -DEXIT_ON_STOP -DIS_MIN_DESKTOP)
+target_compile_definitions(container-avi PUBLIC -DEXIT_ON_STOP -DUSE_PORTAUDIO -DIS_MIN_DESKTOP)
 target_include_directories(container-avi PRIVATE "${arduino_emulator_SOURCE_DIR}/ArduinoCore-Linux/libraries/SdFat" )
 
 # OS/X might need this setting for core audio
 #target_compile_definitions(portaudio PUBLIC -DPA_USE_COREAUDIO=1)
 
 # specify libraries
-target_link_libraries(container-avi arduino-audio-tools)
+target_link_libraries(container-avi portaudio arduino-audio-tools)
 

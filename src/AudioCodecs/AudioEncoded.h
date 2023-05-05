@@ -264,7 +264,7 @@ class EncodedAudioOutput : public AudioStream {
 
   virtual void setAudioInfo(AudioInfo info) override {
     TRACED();
-    if (this->info != info) {
+    if (this->info != info && info.channels!=0 && info.sample_rate!=0) {
       this->info = info;
       AudioStream::setAudioInfo(info);
       decoder_ptr->setAudioInfo(info);
@@ -547,7 +547,7 @@ class ContainerTarget {
   virtual bool begin() = 0;
   virtual void end() = 0;
   virtual void setAudioInfo(AudioInfo info) {
-    if (this->info != info) {
+    if (this->info != info && info.channels!=0 && info.sample_rate!=0) {
       this->info = info;
       if (p_writer1 != nullptr) p_writer1->setAudioInfo(info);
       if (p_writer2 != nullptr) p_writer2->setAudioInfo(info);
