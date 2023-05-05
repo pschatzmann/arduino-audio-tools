@@ -4,12 +4,10 @@
 #include "AudioBasic/StrExt.h"
 #include "AudioTools/Buffers.h"
 
-
 #define LIST_HEADER_SIZE 12
 #define CHUNK_HEADER_SIZE 8
 
 namespace audio_tools {
-
 
 /// Audio Formats
 enum class AudioFormat : uint16_t {
@@ -292,12 +290,62 @@ enum class AudioFormat : uint16_t {
   // FLAC = 0xF1AC /* flac.sourceforge.net */
 };
 
-
+/**
+ * Abstract class for video playback
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
 class VideoOutput : public AudioOutput {
  public:
   virtual void beginFrame(size_t size) = 0;
   virtual size_t write(const uint8_t *data, size_t byteCount) = 0;
-  virtual void endFrame() = 0;
+  virtual uint32_t endFrame() = 0;
+};
+
+/**
+ * Synchronize video and audio output: We buffer the audio and play it back
+ * in the waiting time after the frame has been rendered.
+ * You can replace this with your own optimized implementation.
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class AudioVideoSync {
+ public:
+  void setOutput(AudioOutput *out) { p_out = out; }
+  void writeAudio(uint8_t *data, size_t size) {
+    // make space in buffer by playing the audio that is not fitting
+    int to_write = buffer.availableForWrite();
+    if (to_write < size) {
+      int to_read = size - to_write;
+      uint8_t bytes[to_read];
+      buffer.readArray(bytes, to_read);
+      p_out->write(bytes, to_read);
+    }
+    // store audio to buffer
+    buffer.writeArray(data, size);
+  }
+  void resize(int size) { buffer.resize(size); }
+
+  void setMicrosecondsPerFrame(int32_t time) { us_per_frame = time; }
+
+  void delay(uint32_t time_used_ms) {
+    int32_t delay_ms = us_per_frame / 1000 - time_used_ms;
+    uint64_t timeout = millis() + delay_ms;
+    while (millis() < timeout) {
+      uint8_t bytes[80];
+      int byte_count = buffer.readArray(bytes, 80);
+      int written = p_out->write(bytes, byte_count);
+      // if nothing to write we add a delay
+      if (written == 0) {
+        delay(10);
+      }
+    }
+  }
+
+ protected:
+  RingBuffer<uint8_t> buffer{1024 * 20};
+  int32_t us_per_frame;
+  AudioOutput *p_out = nullptr;
 };
 
 class ParseBuffer {
@@ -405,13 +453,13 @@ struct WAVFormatX {
   uint16_t cbSize;
 };
 
-struct WAVFormat {
-  uint16_t wFormatTag;
-  uint16_t nChannels;
-  uint32_t nSamplesPerSec;
-  uint32_t nAvgBytesPerSec;
-  uint16_t nBlockAlign;
-};
+// struct WAVFormat {
+//   uint16_t wFormatTag;
+//   uint16_t nChannels;
+//   uint32_t nSamplesPerSec;
+//   uint32_t nAvgBytesPerSec;
+//   uint16_t nBlockAlign;
+// };
 
 enum StreamContentType { Audio, Video };
 
@@ -531,11 +579,12 @@ class AVIDecoder : public AudioDecoder {
     p_decoder = &copy_decoder;
     p_output_audio = new EncodedAudioOutput(&copy_decoder);
   }
-  AVIDecoder(AudioDecoder *audioDecoder, VideoOutput *videoOut=nullptr, int bufferSize = 1024) {
+  AVIDecoder(AudioDecoder *audioDecoder, VideoOutput *videoOut = nullptr,
+             int bufferSize = 1024) {
     parse_buffer.resize(bufferSize);
     p_decoder = audioDecoder;
     p_output_audio = new EncodedAudioOutput(audioDecoder);
-    if (videoOut!=nullptr){
+    if (videoOut != nullptr) {
       setOutputVideoStream(*videoOut);
     }
   }
@@ -553,10 +602,14 @@ class AVIDecoder : public AudioDecoder {
     is_metadata_ready = false;
   }
 
+  /// Defines the audio output stream - usually called by EncodedAudioStream
   virtual void setOutputStream(Print &out_stream) {
     // p_output_audio = &out_stream;
     p_output_audio->setOutput(&out_stream);
   }
+
+  ///
+  void setMute(bool mute) { is_mute = mute; }
 
   virtual void setOutputVideoStream(VideoOutput &out_stream) {
     p_output_video = &out_stream;
@@ -612,7 +665,12 @@ class AVIDecoder : public AudioDecoder {
   }
 
   /// Provide the length of the video in seconds
-  int videoSeconds() {return video_seconds;}
+  int videoSeconds() { return video_seconds; }
+
+  /// Replace the synchronization logic with your implementation
+  void setAudioVideoSync(AudioVideoSync*yourSync){
+    p_sync = yourSync;
+  }
 
  protected:
   bool header_is_avi = false;
@@ -637,9 +695,13 @@ class AVIDecoder : public AudioDecoder {
   char video_format[5] = {0};
   bool is_metadata_ready = false;
   bool (*validation_cb)(AVIDecoder &avi) = nullptr;
+  bool is_mute = false;
   CopyDecoder copy_decoder;
   AudioDecoder *p_decoder = nullptr;
   int video_seconds = 0;
+  AudioVideoSync defaultSynch;
+  AudioVideoSync *p_synch = &defaultSynch;
+
 
   bool isCurrentStreamAudio() {
     return strncmp(stream_header[stream_header_idx].fccType, "auds", 4) == 0;
@@ -671,6 +733,8 @@ class AVIDecoder : public AudioDecoder {
         result = avih.isValid();
         if (result) {
           main_header = *(avih.asAVIMainHeader(parse_buffer.data()));
+          // let the synchronizer now how much time we need to sped for each frame
+          p_synch->setMicrosecondsPerFrame(main_header.dwMicroSecPerFrame);
           stream_header.resize(main_header.dwStreams);
           consume(avih.size());
           parse_state = ParseStrl;
@@ -755,11 +819,13 @@ class AVIDecoder : public AudioDecoder {
         parse_state = SubChunkContinue;
         open_subchunk_len = current_stream_data.open;
         if (current_stream_data.isVideo()) {
-          LOGI("video:[%d]->[%d]",(int)current_stream_data.start_pos, (int)current_stream_data.end_pos );
+          LOGI("video:[%d]->[%d]", (int)current_stream_data.start_pos,
+               (int)current_stream_data.end_pos);
           if (p_output_video != nullptr)
             p_output_video->beginFrame(current_stream_data.open);
-        } else if (current_stream_data.isAudio()){
-          LOGI("audio:[%d]->[%d]", (int)current_stream_data.start_pos,(int)current_stream_data.end_pos );
+        } else if (current_stream_data.isAudio()) {
+          LOGI("audio:[%d]->[%d]", (int)current_stream_data.start_pos,
+               (int)current_stream_data.end_pos);
         } else {
           LOGW("unknown subchunk at %d", (int)current_pos);
         }
@@ -769,8 +835,10 @@ class AVIDecoder : public AudioDecoder {
       case SubChunkContinue: {
         writeData();
         if (open_subchunk_len == 0) {
-          if (current_stream_data.isVideo() && p_output_video != nullptr)
-            p_output_video->endFrame();
+          if (current_stream_data.isVideo() && p_output_video != nullptr){
+            uint32_t time_used_ms = p_output_video->endFrame();
+            p_synch->delay(time_used_ms);
+          }
           if (tryParseChunk("idx").isValid()) {
             parse_state = ParseIgnore;
           } else if (tryParseList("rec").isValid()) {
@@ -822,12 +890,12 @@ class AVIDecoder : public AudioDecoder {
     video_seconds = rate <= 0 ? 0 : vh->dwLength / rate;
     LOGI("videoSeconds: %d seconds", video_seconds);
   }
-  
+
   void writeData() {
     long to_write = min((long)parse_buffer.available(), open_subchunk_len);
     if (current_stream_data.isAudio()) {
       LOGD("audio %d", (int)to_write);
-      p_output_audio->write(parse_buffer.data(), to_write);
+      if (!is_mute) p_output_audio->write(parse_buffer.data(), to_write);
       open_subchunk_len -= to_write;
       cleanupStack();
       consume(to_write);

@@ -272,7 +272,7 @@ namespace audio_tools {
         virtual bool next(int offset=1) {
             TRACED();
             writeEnd();
-            steam_increment = offset >= 0 ? 1 : -1;
+            stream_increment = offset >= 0 ? 1 : -1;
             active = setStream(p_source->nextStream(offset));
             return active;
         }
@@ -281,7 +281,7 @@ namespace audio_tools {
         virtual bool setIndex(int idx) {
             TRACED();
             writeEnd();
-            steam_increment = 1;
+            stream_increment = 1;
             active = setStream(p_source->selectStream(idx));
             return active;
         }
@@ -290,7 +290,7 @@ namespace audio_tools {
         virtual bool setPath(const char* path) {
             TRACED();
             writeEnd();
-            steam_increment = 1;
+            stream_increment = 1;
             active = setStream(p_source->selectStream(path));
             return active;
         }
@@ -299,7 +299,7 @@ namespace audio_tools {
         virtual bool previous(int offset=1) {
             TRACED();
             writeEnd();
-            steam_increment = -1;
+            stream_increment = -1;
             active = setStream(p_source->previousStream(abs(offset)));
             return active;
         }
@@ -385,7 +385,7 @@ namespace audio_tools {
                 // handle sound
                 result = copier.copy();
                 if (result>0 || timeout == 0) {
-                    // reset timeout
+                    // reset timeout if we had any data
                     timeout = millis() + p_source->timeoutAutoNext();
                 }
                 // move to next stream after timeout
@@ -472,7 +472,7 @@ namespace audio_tools {
         AudioInfo info;
         bool meta_active = false;
         uint32_t timeout = 0;
-        int steam_increment = 1; // +1 moves forward; -1 moves backward
+        int stream_increment = 1; // +1 moves forward; -1 moves backward
         float current_volume = -1.0; // illegal value which will trigger an update
         int delay_if_full = 100;
 
@@ -492,9 +492,9 @@ namespace audio_tools {
             if (p_input_stream == nullptr || millis() > timeout) {
                 fade.setFadeInActive(true);
                 if (autonext) {
-                    LOGI("-> timeout - moving by %d", steam_increment);
+                    LOGI("-> timeout - moving by %d", stream_increment);
                     // open next stream
-                    if (!next(steam_increment)) {
+                    if (!next(stream_increment)) {
                         LOGD("stream is null");
                     }
                 } else {
