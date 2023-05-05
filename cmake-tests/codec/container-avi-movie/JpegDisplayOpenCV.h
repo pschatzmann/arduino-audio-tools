@@ -14,19 +14,17 @@ class JpegDisplayOpenCV : public VideoOutput {
  public:
   JpegDisplayOpenCV() = default;
 
-  // add some data to image vector
-  size_t write(const uint8_t* buffer, size_t byteCount) override {
-    memcpy(&img_vector[pos], buffer, byteCount);
-    pos += byteCount;
-    open -= byteCount;
-    return byteCount;
-  }
-
-  void beginFrame(size_t size) override {
-    LOGI("jpegSize: %d", (int)size);
-    img_vector.resize(size);
-    pos = 0;
-    open = size;
+  // Allocate memory and create window
+  void beginFrame(size_t jpegSize) override {
+    start = millis();
+    LOGI("jpegSize: %d", (int)jpegSize);
+    // prevent memory fragmentation, change size only if more memory is needed
+    if (img_vector.size() < jpegSize) {
+      img_vector.resize(jpegSize);
+    }
+    this->pos = 0;
+    this->open = jpegSize;
+    this->size = jpegSize;
 
     if (create_window) {
       create_window = false;
@@ -35,23 +33,38 @@ class JpegDisplayOpenCV : public VideoOutput {
     }
   }
 
-  void endFrame() override { display(); }
+  /// dipsplay a single jpeg image, provides the milliseconds since the begin
+  /// frame
+  uint32_t endFrame() override {
+    display();
+    return millis() - start;
+  }
+
+  // Add some more data to the image vector
+  size_t write(const uint8_t* buffer, size_t byteCount) override {
+    memcpy(&img_vector[pos], buffer, byteCount);
+    pos += byteCount;
+    open -= byteCount;
+    return byteCount;
+  }
 
  protected:
   bool create_window = true;
   std::vector<uint8_t> img_vector;
   const char* window = "Movie";
   size_t pos = 0;
-  size_t open = 0;
+  size_t size = 0;
+  int open = 0;
+  uint64_t start;
 
   void display() {
     assert(open == 0);
 
-    cv::Mat data(1, (int)img_vector.size(), CV_8UC1, (void*)&img_vector[0]);
+    cv::Mat data(1, size, CV_8UC1, (void*)&img_vector[0]);
     // cv::InputArray input_array(img_vector);
     cv::Mat mat = cv::imdecode(data, 0);
     cv::imshow(window, mat);
-    //cv::pollKey();
+    // cv::pollKey();
     cv::waitKey(1);
   }
 };

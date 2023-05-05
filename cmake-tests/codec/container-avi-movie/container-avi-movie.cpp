@@ -18,13 +18,15 @@
 PortAudioStream out;   // Output of sound on desktop 
 JpegDisplayOpenCV jpegDisplay;
 AVIDecoder codec(new DecoderL8(), &jpegDisplay);
-EncodedAudioOutput riff(&out, &codec);
+EncodedAudioOutput avi(&out, &codec);
 File file;
-StreamCopy copier(riff, file);
+StreamCopy copier(avi, file);
 
 void setup() {
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
   file.open("/data/resources/test1.avi",FILE_READ);
+  codec.setOutputVideoStream(jpegDisplay);
+  codec.setMute(true);
 }
 
 void loop() {

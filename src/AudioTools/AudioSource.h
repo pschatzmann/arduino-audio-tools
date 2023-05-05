@@ -96,8 +96,13 @@ public:
         LOGI("selectStream: %d", index);
         if (indexStreamCallback==nullptr){
             LOGI("setCallbackSelectStream not provided");
-            if (index>0) begin();
-            return nextStream(index);
+            if (index>0) {
+                begin();
+                return nextStream(index);
+            } else {
+                // nextStream(0) will return the directory but we need a file
+                return nextStream(1);
+            }
         }
         return indexStreamCallback(index);
     }

@@ -27,18 +27,19 @@ I2SStream i2s;
 MP3DecoderHelix decoder;
 AudioPlayer player(source, i2s, decoder);
 File audioFile;
-
+File dir;
 
 void callbackInit() {
-  // make sure that the directory conains only mp3 files
-  audioFile = SD.open("/TomWaits");
+  // make sure that the directory contains only mp3 files
+  dir = SD.open("/TomWaits");
 }
 
 Stream* callbackStream(int offset) {
-  auto lastFile = audioFile;
-  // we assume the next file is a valid mp3 file
-  audioFile = audioFile.openNextFile();
-  lastFile.close();
+  LOGI("callbackStream: %d", offset);
+  audioFile.close();
+  // the next files must be a mp3 file
+  for (int j=0;j<offset;j++)
+    audioFile = dir.openNextFile();
   return &audioFile;
 }
 
@@ -63,6 +64,7 @@ void setup() {
 
   // setup player
   player.setMetadataCallback(callbackPrintMetaData);
+  player.setAutoNext(true);
   player.begin();
 }
 
