@@ -93,7 +93,13 @@ public:
 
     /// Returns selected audio stream
     virtual Stream* selectStream(int index) override {
-        return indexStreamCallback == nullptr ? nullptr : indexStreamCallback(index);
+        LOGI("selectStream: %d", index);
+        if (indexStreamCallback==nullptr){
+            LOGI("setCallbackSelectStream not provided");
+            if (index>0) begin();
+            return nextStream(index);
+        }
+        return indexStreamCallback(index);
     }
     /// Returns audio stream by path
     virtual Stream* selectStream(const char* path) override {
