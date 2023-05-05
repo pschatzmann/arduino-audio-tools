@@ -359,7 +359,7 @@ namespace audio_tools {
             return current_volume;
         }
 
-        /// Set move to next: This is determined from the AudioSource. If you want to override it call this method after calling begin()!
+        /// Set automatically move to next file and end of current file: This is determined from the AudioSource. If you want to override it call this method after calling begin()!
         virtual void setAutoNext(bool next) {
             autonext = next;
         }

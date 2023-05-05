@@ -18,7 +18,7 @@
 
 // forward declarations
 void callbackInit();
-Stream* callbackStream(int offset);
+Stream* callbackNextStream(int offset);
 
 // data
 const int chipSelect=PIN_CS;
