@@ -3,8 +3,8 @@
 #include "stdint.h"
 
 /**
- * @defgroup tools Tools
- * @ingroup video
+ * @defgroup video Video 
+ * @ingroup main
  * @brief Video playback
  */
 
