@@ -134,6 +134,6 @@ protected:
     drawTime = millis() - drawTime; // Calculate the time it took
     return drawTime;
   }
-}; // namespace audio_tools
+};  // JpegTFT
 
 } // namespace audio_tools
