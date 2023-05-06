@@ -1,7 +1,12 @@
 /**
- * @file communication-container-binary.ino
+ * @file container-avi-movie.cpp
  * @author Phil Schatzmann
- * @brief generate sine wave -> encoder -> decoder -> audiokit (i2s)
+ * @brief Play AVI test movie downloaded from https://archive.org/embed/Test_Avi
+ * To build execute the following steps
+ * - mkdir build
+ * - cd build
+ * - cmake ..
+ * - make
  * @version 0.1
  * @date 2022-04-30
  *
