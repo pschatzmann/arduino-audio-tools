@@ -18,7 +18,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class VideoOutput : public AudioOutput {
+class VideoOutput  {
  public:
   virtual void beginFrame(size_t size) = 0;
   virtual size_t write(const uint8_t *data, size_t byteCount) = 0;
