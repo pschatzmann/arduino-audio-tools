@@ -58,7 +58,7 @@ class DecoderFloat : public AudioDecoder {
             return cfg;
         }
 
-        void begin(AudioInfo info) {
+        void begin(AudioInfo info) override {
             TRACED();
             cfg = info;
             if (bid!=nullptr){

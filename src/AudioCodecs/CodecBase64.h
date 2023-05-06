@@ -200,7 +200,7 @@ class EncoderBase64 : public AudioEncoder {
   /// We add a new line after each write
   void setNewLine(Base46Logic flag) { newline_logic = flag; }
 
-  virtual void begin(AudioInfo cfg) {
+  virtual void begin(AudioInfo cfg) override {
     setAudioInfo(cfg);
     begin();
   }

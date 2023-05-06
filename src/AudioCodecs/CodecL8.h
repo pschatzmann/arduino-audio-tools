@@ -55,7 +55,7 @@ class DecoderL8 : public AudioDecoder {
   /// signed
   void setSigned(bool isSigned) { is_signed = isSigned; }
 
-  void begin(AudioInfo info1) {
+  void begin(AudioInfo info1) override {
     TRACED();
     info = info1;
     info.bits_per_sample = 16;  //

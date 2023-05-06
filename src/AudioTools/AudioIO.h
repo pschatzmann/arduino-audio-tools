@@ -221,7 +221,7 @@ class TimedStream : public AudioStream {
     return begin();
   }
 
-  bool begin() {
+  bool begin() override {
     calculateByteLimits();
     current_bytes = 0;
     return true;
