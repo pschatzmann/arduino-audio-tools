@@ -2,11 +2,18 @@
 #include "AudioTools/AudioOutput.h"
 #include "stdint.h"
 
+/**
+ * @defgroup tools Tools
+ * @ingroup video
+ * @brief Video playback
+ */
+
 namespace audio_tools {
 
 /**
  * Abstract class for video playback. This class is used to assemble a complete
  * video frame in memory
+ * @ingroup video
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -21,6 +28,7 @@ public:
  * Logic to Synchronize video and audio output: This is the minimum
  * implementatin which actually does not synchronize, but directly processes the
  * data. Provide your own optimized platform specific implementation
+ * @ingroup video
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
