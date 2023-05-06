@@ -240,7 +240,8 @@ protected:
  * documented at
  * https://learn.microsoft.com/en-us/windows/win32/directshow/avi-riff-file-reference
  * @ingroup codecs
- * @ingroup encoder
+ * @ingroup decoder
+ * @ingroup video
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
