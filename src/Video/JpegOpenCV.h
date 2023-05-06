@@ -1,22 +1,24 @@
 #pragma once
 
+#include "Video/Video.h"
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 
-#include "AudioCodecs/ContainerAVI.h"
+namespace audio_tools {
 
 /**
- * Display image with opencv
+ * Display image with opencv to be used on the desktop
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class JpegDisplayOpenCV : public VideoOutput {
- public:
-  JpegDisplayOpenCV() = default;
+class JpegOpenCV : public VideoOutput {
+public:
+  JpegOpenCV() = default;
 
   // Allocate memory and create window
   void beginFrame(size_t jpegSize) override {
-    start = millis();
+    if (start == 0l)
+      start = millis();
     LOGI("jpegSize: %d", (int)jpegSize);
     // prevent memory fragmentation, change size only if more memory is needed
     if (img_vector.size() < jpegSize) {
@@ -34,33 +36,33 @@ class JpegDisplayOpenCV : public VideoOutput {
   }
 
   /// dipsplay a single jpeg image, provides the milliseconds since the begin
-  /// frame
+  /// frame to calculate the necessary delay
   uint32_t endFrame() override {
     display();
-    return millis() - start;
+    return millis() - last_start;
   }
 
   // Add some more data to the image vector
-  size_t write(const uint8_t* buffer, size_t byteCount) override {
+  size_t write(const uint8_t *buffer, size_t byteCount) override {
     memcpy(&img_vector[pos], buffer, byteCount);
     pos += byteCount;
     open -= byteCount;
     return byteCount;
   }
 
- protected:
+protected:
   bool create_window = true;
   std::vector<uint8_t> img_vector;
-  const char* window = "Movie";
+  const char *window = "Movie";
   size_t pos = 0;
   size_t size = 0;
   int open = 0;
-  uint64_t start;
+  uint64_t start = 0;
 
   void display() {
     assert(open == 0);
 
-    cv::Mat data(1, size, CV_8UC1, (void*)&img_vector[0]);
+    cv::Mat data(1, size, CV_8UC1, (void *)&img_vector[0]);
     // cv::InputArray input_array(img_vector);
     cv::Mat mat = cv::imdecode(data, 0);
     cv::imshow(window, mat);
@@ -68,3 +70,5 @@ class JpegDisplayOpenCV : public VideoOutput {
     cv::waitKey(1);
   }
 };
+
+} // namespace audio_tools
