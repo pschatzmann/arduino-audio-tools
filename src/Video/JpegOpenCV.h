@@ -40,7 +40,7 @@ public:
   /// frame to calculate the necessary delay
   uint32_t endFrame() override {
     display();
-    return millis() - last_start;
+    return millis() - start;
   }
 
   // Add some more data to the image vector

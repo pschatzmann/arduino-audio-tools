@@ -13,20 +13,23 @@
 #include "AudioCodecs/ContainerAVI.h"
 #include "AudioLibs/Desktop/File.h"
 #include "AudioLibs/PortAudioStream.h"
-#include "JpegDisplayOpenCV.h"
+#include "Video/JpegOpenCV.h"
 
 PortAudioStream out;   // Output of sound on desktop 
-JpegDisplayOpenCV jpegDisplay;
+JpegOpenCV jpegDisplay;
 AVIDecoder codec(new DecoderL8(), &jpegDisplay);
 EncodedAudioOutput avi(&out, &codec);
 File file;
 StreamCopy copier(avi, file);
+VideoAudioBufferedSync videoSync(10*1024, -20);
+
 
 void setup() {
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
   file.open("/data/resources/test1.avi",FILE_READ);
   codec.setOutputVideoStream(jpegDisplay);
-  codec.setMute(true);
+  codec.setVideoAudioSync(&videoSync);
+  //codec.setMute(true);
 }
 
 void loop() {
