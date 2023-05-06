@@ -12,7 +12,10 @@
 
 namespace audio_tools {
 
-/// Audio Formats
+/**
+ * @brief Audio format codes used by Microsoft e.g. in avi or wav files
+ * @ingroup video
+ */
 enum class AudioFormat : uint16_t {
   UNKNOWN = 0x0000, /* Microsoft Corporation */
   PCM = 0x0001,

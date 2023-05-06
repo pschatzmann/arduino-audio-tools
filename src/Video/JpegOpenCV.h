@@ -8,6 +8,7 @@ namespace audio_tools {
 
 /**
  * Display image with opencv to be used on the desktop
+ * @ingroup video
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
