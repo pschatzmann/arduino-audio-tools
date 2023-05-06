@@ -1,25 +1,27 @@
 #pragma once
-
-#include "JPEGDecoder.h"  // JPEG decoder library
-#include "JPEGDecoder.h"  // https://github.com/Bodmer/JPEGDecoder
-#include "TFT.h"          // Arduino LCD library
+#include "AudioBasic/Collections/Vector.h"
+#include "JPEGDecoder.h" // https://github.com/Bodmer/JPEGDecoder
+#include "TFT_eSPI.h"    // https://github.com/Bodmer/TFT_eSPI
 #include "Video/Video.h"
+#include <algorithm> // std::min
 
 namespace audio_tools {
 
 /**
- * Display jpeg image using https://github.com/Bodmer/TFT_eSPI
+ * Display jpeg image using https://github.com/Bodmer/TFT_eSPI and
+ * https://github.com/Bodmer/JPEGDecoder
  * @ingroup video
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 class JpegTFT : public VideoOutput {
- public:
-  JpegTFT(TFT &TFTscreen) { p_screen = &TFTscreen; }
+public:
+  JpegTFT(TFT_eSPI &TFTscreen) { p_screen = &TFTscreen; }
 
   // Allocate memory and create window
   void beginFrame(size_t jpegSize) override {
-    if (start == 0l) start = millis();
+    if (start == 0l)
+      start = millis();
     LOGI("jpegSize: %d", (int)jpegSize);
     // prevent memory fragmentation, change size only if more memory is needed
     if (img_vector.size() < jpegSize) {
@@ -34,8 +36,9 @@ class JpegTFT : public VideoOutput {
   /// frame to calculate the necessary delay
   uint32_t endFrame() override {
     assert(open == 0);
-    jpeg_decoder.decodeArray((void *)&img_vector[0], size);
-    renderJPEG(*p_screen, 0, 0) return millis() - start;
+    jpeg_decoder.decodeArray((const uint8_t *)&img_vector[0], size);
+    renderJPEG(0, 0);
+    return millis() - start;
   }
 
   // Add some more data to the image vector
@@ -46,19 +49,19 @@ class JpegTFT : public VideoOutput {
     return byteCount;
   }
 
- protected:
-  std::vector<uint8_t> img_vector;
+protected:
+  Vector<uint8_t> img_vector;
   size_t pos = 0;
   size_t size = 0;
   int open = 0;
   uint64_t start = 0;
   JPEGDecoder jpeg_decoder;
-  TFT *p_screen = nullptr;
+  TFT_eSPI *p_screen = nullptr;
 
   //====================================================================================
   //   Decode and paint onto the TFT screen
   //====================================================================================
-  void renderJPEG(TFT &TFTscreen, int xpos, int ypos) {
+  uint32_t renderJPEG(int xpos, int ypos) {
     // retrieve infomration about the image
     uint16_t *pImg;
     uint16_t mcu_w = jpeg_decoder.MCUWidth;
@@ -69,8 +72,8 @@ class JpegTFT : public VideoOutput {
     // Jpeg images are draw as a set of image block (tiles) called Minimum
     // Coding Units (MCUs) Typically these MCUs are 16x16 pixel blocks Determine
     // the width and height of the right and bottom edge image blocks
-    uint32_t min_w = minimum(mcu_w, max_x % mcu_w);
-    uint32_t min_h = minimum(mcu_h, max_y % mcu_h);
+    uint32_t min_w = std::min((uint32_t)mcu_w, max_x % mcu_w);
+    uint32_t min_h = std::min((uint32_t)mcu_h, max_y % mcu_h);
 
     // save the current image block size
     uint32_t win_w = mcu_w;
@@ -118,7 +121,7 @@ class JpegTFT : public VideoOutput {
                                 mcu_y + win_h - 1);
         // push all the image block pixels to the screen
         while (mcu_pixels--)
-          p_screen->pushColor(*pImg++);  // Send to TFT 16 bits at a time
+          p_screen->pushColor(*pImg++); // Send to TFT 16 bits at a time
       }
 
       // stop drawing blocks if the bottom of the screen has been reached
@@ -128,9 +131,9 @@ class JpegTFT : public VideoOutput {
     }
 
     // calculate how long it took to draw the image
-    drawTime = millis() - drawTime;  // Calculate the time it took
+    drawTime = millis() - drawTime; // Calculate the time it took
     return drawTime;
   }
-};  // namespace audio_tools
+}; // namespace audio_tools
 
-}  // namespace audio_tools
+} // namespace audio_tools
