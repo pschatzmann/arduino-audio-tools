@@ -8,7 +8,7 @@
 namespace audio_tools {
 
 /**
- * Display jpeg image using https://github.com/Bodmer/TFT_eSPI and
+ * @brief Display jpeg image using https://github.com/Bodmer/TFT_eSPI and
  * https://github.com/Bodmer/JPEGDecoder
  * @ingroup video
  * @author Phil Schatzmann

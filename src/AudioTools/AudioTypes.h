@@ -292,6 +292,20 @@ size_t  readSamples(Stream* p_stream, T* data, int samples){
   return samples;
 }
 
+/// guaranteed to return the requested data
+template<typename T>
+size_t  writeSamples(Print* p_out, T* data, int samples){
+  uint8_t *p_result = (uint8_t*) data;
+  int open = samples*sizeof(T);
+  int total = 0;
+  // copy missing data
+  while (open>0){
+    int written = p_out->write(p_result+total, open);
+    open -= written;
+    total += written;
+  }
+  return samples;
+}
 
 
 /// @brief  Similar to Arduino map function but using floats
