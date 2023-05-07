@@ -45,7 +45,7 @@ struct LEDOutputConfig {
 };
 
 /**
- * LEDOutput using the FastLED library. You write the data to the FFT Stream.
+ * @brief LEDOutput using the FastLED library. You write the data to the FFT Stream.
  * This displays the result of the FFT to a LED matrix.
  * @ingroup io
  * @author Phil Schatzmann
