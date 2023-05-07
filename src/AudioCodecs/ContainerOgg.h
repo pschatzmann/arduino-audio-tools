@@ -196,10 +196,8 @@ class OggContainerDecoder : public AudioDecoder {
 };
 
 /**
- * @brief OggContainerEncoder - Ogg Container. Encodes a packet for an Ogg
- * container. The Ogg begin segment contains the AudioInfo structure. You can
- * subclass ond overwrite the writeHeader() method to implement your own header
- * logic.
+ * @brief OggContainerOutput - Output class for the OggContainerEncoder. Each
+ * write is ending up as container entry
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -250,7 +248,7 @@ class OggContainerOutput : public AudioOutput {
   /// Writes raw data to be encoded and packaged
   virtual size_t write(const uint8_t *in_ptr, size_t in_size) override {
     if (!is_open || in_ptr == nullptr) return 0;
-    LOGD("OggContainerEncoder::write: %d", (int)in_size);
+    LOGD("OggContainerOutput::write: %d", (int)in_size);
 
     // encode the data
     uint8_t *data = (uint8_t *)in_ptr;
@@ -338,7 +336,8 @@ class OggContainerOutput : public AudioOutput {
  * @brief OggContainerEncoder - Ogg Container. Encodes a packet for an Ogg
  * container. The Ogg begin segment contains the AudioInfo structure. You can
  * subclass ond overwrite the writeHeader() method to implement your own header
- * logic.
+ * logic. When an optional encoder is specified in the constructor we package
+ * the encoded data.
  * @ingroup codecs
  * @ingroup encoder
  * @author Phil Schatzmann
