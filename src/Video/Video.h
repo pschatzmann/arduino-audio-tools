@@ -12,13 +12,13 @@
 namespace audio_tools {
 
 /**
- * Abstract class for video playback. This class is used to assemble a complete
- * video frame in memory
+ * @brief Abstract class for video playback. This class is used to assemble a
+ * complete video frame in memory
  * @ingroup video
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class VideoOutput  {
+class VideoOutput {
  public:
   virtual void beginFrame(size_t size) = 0;
   virtual size_t write(const uint8_t *data, size_t byteCount) = 0;
@@ -26,7 +26,7 @@ class VideoOutput  {
 };
 
 /**
- * Logic to Synchronize video and audio output: This is the minimum
+ * @brief Logic to Synchronize video and audio output: This is the minimum
  * implementatin which actually does not synchronize, but directly processes the
  * data. No additinal memory is used! Provide your own optimized platform
  * specific implementation
@@ -51,11 +51,14 @@ class VideoAudioSync {
 };
 
 /**
- * Logic to Synchronize video and audio output: we use a buffer to store the
- * audio and instead of delaying the frames with delay() we play audio.
- * The bufferSize defines the audio buffer in bytes. The correctionMs is
- * used to slow down the playback of the video to prevent any audio buffer
+ * @brief Logic to Synchronize video and audio output: we use a buffer to store
+ * the audio and instead of delaying the frames with delay() we play audio. The
+ * bufferSize defines the audio buffer in bytes. The correctionMs is used to
+ * slow down or speed up the playback of the video to prevent any audio buffer
  * underflows.
+ * @ingroup video
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 class VideoAudioBufferedSync : public VideoAudioSync {
  public:
@@ -83,6 +86,7 @@ class VideoAudioBufferedSync : public VideoAudioSync {
     uint32_t delay_ms = microsecondsPerFrame / 1000;
     uint64_t timeout = millis() + delay_ms + correction_ms;
     uint8_t audio[8];
+    // output audio
     while (millis() < timeout) {
       ring_buffer.readArray(audio, 8);
       p_out->write(audio, 8);

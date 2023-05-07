@@ -27,4 +27,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/mp3-mad ${CMAKE_CURRENT_BINARY_DIR}
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/mp3-metadata ${CMAKE_CURRENT_BINARY_DIR}/mp3-metadata)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/opus ${CMAKE_CURRENT_BINARY_DIR}/opus)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/opusogg ${CMAKE_CURRENT_BINARY_DIR}/opusogg)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/container-avi ${CMAKE_CURRENT_BINARY_DIR}/container-avi)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/container-avi-movie ${CMAKE_CURRENT_BINARY_DIR}/container-avi-movie)
+
 
