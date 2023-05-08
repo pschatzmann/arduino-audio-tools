@@ -15,7 +15,8 @@
 AudioInfo info(24000, 1, 16);
 SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound( sineWave); // Stream generated from sine wave
-CsvOutput<int16_t> out(Serial); 
+AudioKitStream out;
+//CsvOutput<int16_t> out(Serial); 
 OpusOggEncoder enc;
 OpusOggDecoder dec;
 EncodedAudioStream decoder(&out, &dec); // encode and write 
@@ -25,6 +26,11 @@ StreamCopy copier(encoder, sound);
 void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+
+  // Setup output
+  auto cfgo = out.defaultConfig();
+  cfgo.copyFrom(info);
+  out.begin(cfgo);
 
   // Setup sine wave
   auto cfgs = sineWave.defaultConfig();

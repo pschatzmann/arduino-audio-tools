@@ -186,12 +186,12 @@ class OpusAudioDecoder : public AudioDecoder {
     if (!active || p_print == nullptr) return 0;
     // decode data
     LOGD("OpusAudioDecoder::write: %d", (int)in_size);
-    int in_band_forware_error_correction = 0;
+    int in_band_forward_error_correction = 0;
     int out_samples = opus_decode(
         dec, (uint8_t *)in_ptr, in_size, (opus_int16 *)outbuf.data(),
-        cfg.max_buffer_size, in_band_forware_error_correction);
+        cfg.max_buffer_size, in_band_forward_error_correction);
     if (out_samples < 0) {
-      LOGE("opus-decode: %s", opus_strerror(out_samples));
+      LOGW("opus-decode: %s", opus_strerror(out_samples));
     } else if (out_samples > 0) {
       // write data to final destination
       int out_bytes = out_samples * cfg.channels * sizeof(int16_t);
@@ -324,7 +324,7 @@ class OpusAudioEncoder : public AudioEncoder {
         LOGD("opus-encode: %d", len);
         int eff = p_print->write(packet, len);
         if (eff!=len){
-          LOGE("encodeFrame data lost");
+          LOGE("encodeFrame data lost: %d->%d", len, eff);
         }
       }
     }

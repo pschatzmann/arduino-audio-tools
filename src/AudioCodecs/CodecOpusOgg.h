@@ -1,7 +1,7 @@
 #pragma once
 
-#include "AudioCodecs/ContainerOgg.h"
 #include "AudioCodecs/CodecOpus.h"
+#include "AudioCodecs/ContainerOgg.h"
 
 namespace audio_tools {
 
@@ -26,8 +26,10 @@ struct __attribute__((packed)) OpusOggCommentHeader {
 
 /**
  * @brief Opus Decoder which uses the Ogg Container. See
- * https://datatracker.ietf.org/doc/html/rfc7845. The audio data is transmitted in frames and the
- * header information contains the sampler rate, channels and other critical info.
+ * https://datatracker.ietf.org/doc/html/rfc7845. The audio data is transmitted
+ * in frames and the header information contains the sampler rate, channels and
+ * other critical info.
+ * Dependency: https://github.com/pschatzmann/arduino-libopus
  * @ingroup codecs
  * @ingroup decoder
  * @author Phil Schatzmann
@@ -36,11 +38,13 @@ struct __attribute__((packed)) OpusOggCommentHeader {
 class OpusOggDecoder : public OggContainerDecoder {
  public:
   OpusOggDecoder() {
-    p_codec = &dec; // OpusAudioDecoder
+    p_codec = &dec;  // OpusAudioDecoder
+    out.setDecoder(p_codec);
   };
 
+
   /// Provides access to the Opus configuration
-  OpusSettings &config()  { return dec.config(); }
+  OpusSettings &config() { return dec.config(); }
 
   void begin(OpusSettings settings) {
     OggContainerDecoder::begin();
@@ -62,65 +66,29 @@ class OpusOggDecoder : public OggContainerDecoder {
  protected:
   OpusOggHeader header;
   OpusAudioDecoder dec;
-  //EncodedAudioStream opus{(Print *)nullptr, &dec};
 
   virtual void beginOfSegment(ogg_packet *op) override {
     LOGD("bos");
-    if (op->packet==nullptr) return;
+    if (op->packet == nullptr) return;
     if (strncmp("OpusHead", (char *)op->packet, 8) == 0) {
       memmove(&header, (char *)op->packet, sizeof(header));
-      cfg.sample_rate = header.sampleRate;
-      cfg.channels = header.channelCount;
-      LOGI("sample rate: %d", cfg.sample_rate);
-      notify();
-    } else if (strncmp("OpusTags",(char *)op->packet , 8) == 0) {
+      AudioInfo info = audioInfo();
+      info.sample_rate = header.sampleRate;
+      info.channels = header.channelCount;
+      info.bits_per_sample = 16;
+      info.logInfo();
+      setAudioInfo(info);
+    } else if (strncmp("OpusTags", (char *)op->packet, 8) == 0) {
       // not processed
     }
   }
 };
 
-/**
- * @brief Opus Encoder which uses the Ogg Container: see
- * https://datatracker.ietf.org/doc/html/rfc7845
- * @ingroup codecs
- * @ingroup encoder
- * @author Phil Schatzmann
- * @copyright GPLv3
- */
-class OpusOggEncoder : public OggContainerEncoder {
- public:
-  OpusOggEncoder() {
-    p_codec = &enc; // OpusAudioEncoder
-  };
-
-  /// Provides access to the configuration
-  OpusEncoderSettings &config() { return enc.config(); }
-  OpusEncoderSettings &defaultConfig() { return enc.config(); }
-
-  void begin(OpusEncoderSettings settings) {
-    cfg = settings;
-    begin();
-  }
-
-  void begin() override {
-    TRACED();
-    OggContainerEncoder::begin();
-    enc.begin();
-  }
-
-  void end() override {
-    TRACED();
-    OggContainerEncoder::begin();
-    enc.end();
-  }
-
-  /// Provides "audio/opus"
-  const char *mime() override { return "audio/opus"; }
+class OpusOggWriter : public OggContainerOutput {
 
  protected:
   OpusOggHeader header;
   OpusOggCommentHeader comment;
-  OpusAudioEncoder enc;
   ogg_packet oh1;
 
   bool writeHeader() override {
@@ -135,8 +103,9 @@ class OpusOggEncoder : public OggContainerEncoder {
     oh.packetno = packetno++;
     oh.b_o_s = true;
     oh.e_o_s = false;
-    if (!writePacket(oh)){
+    if (!writePacket(oh)) {
       result = false;
+      LOGE("writePacket-header");
     }
 
     // write comment header
@@ -146,12 +115,43 @@ class OpusOggEncoder : public OggContainerEncoder {
     oh1.packetno = packetno++;
     oh1.b_o_s = true;
     oh1.e_o_s = false;
-    if (!writePacket(oh1, OGGZ_FLUSH_AFTER)){
+    if (!writePacket(oh1, OGGZ_FLUSH_AFTER)) {
       result = false;
+      LOGE("writePacket-header1");
     }
     TRACED();
     return result;
   }
+};
+
+/**
+ * @brief Opus Encoder which uses the Ogg Container: see
+ * https://datatracker.ietf.org/doc/html/rfc7845
+ * Dependency: https://github.com/pschatzmann/arduino-libopus
+ * @ingroup codecs
+ * @ingroup encoder
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class OpusOggEncoder : public OggContainerEncoder {
+ public:
+  OpusOggEncoder() {
+    setOggOutput(&ogg_writer);
+    setEncoder(&enc);
+  }
+
+
+  /// Provides "audio/opus"
+  const char *mime() override { return "audio/opus"; }
+
+  /// Provides access to the Opus config
+  OpusEncoderSettings &config() { return enc.config(); }
+
+ protected:
+  // use custom writer
+  OpusOggWriter ogg_writer;
+  // use opus encoder
+  OpusAudioEncoder enc;
 };
 
 }  // namespace audio_tools

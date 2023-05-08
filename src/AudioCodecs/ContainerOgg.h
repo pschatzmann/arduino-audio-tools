@@ -13,7 +13,7 @@
 namespace audio_tools {
 
 /**
- * @brief OggContainerDecoder - Ogg Container. Decodes a packet from an Ogg
+ * @brief Decoder for Ogg Container. Decodes a packet from an Ogg
  * container. The Ogg begin segment contains the AudioInfo structure. You can
  * subclass and overwrite the beginOfSegment() method to implement your own
  * headers
@@ -34,13 +34,12 @@ class OggContainerDecoder : public AudioDecoder {
     out.setDecoder(p_codec);
   }
 
-  OggContainerDecoder(AudioDecoder *decoder) {
-    p_codec = decoder;
-    out.setDecoder(p_codec);
-  }
+  OggContainerDecoder(AudioDecoder *decoder) { setDecoder(decoder); }
 
-  OggContainerDecoder(AudioDecoder &decoder) {
-    p_codec = &decoder;
+  OggContainerDecoder(AudioDecoder &decoder) { setDecoder(&decoder); }
+
+  void setDecoder(AudioDecoder *decoder) {
+    p_codec = decoder;
     out.setDecoder(p_codec);
   }
 
@@ -49,6 +48,7 @@ class OggContainerDecoder : public AudioDecoder {
 
   void setNotifyAudioChange(AudioInfoSupport &bi) override {
     out.setNotifyAudioChange(bi);
+    p_notify = &bi;
   }
 
   AudioInfo audioInfo() override { return out.audioInfo(); }
@@ -156,10 +156,14 @@ class OggContainerDecoder : public AudioDecoder {
     } else if (op->e_o_s) {
       self->endOfSegment(op);
     } else {
-      LOGD("process audio packet");
-      int eff = self->out.write(op->packet, op->bytes);
-      if (eff != result) {
-        LOGE("Incomplere write");
+      if (memcmp(op->packet, "OpusTags", 8) == 0) {
+        self->beginOfSegment(op);
+      } else {
+        LOGD("process audio packet");
+        int eff = self->out.write(op->packet, op->bytes);
+        if (eff != result) {
+          LOGE("Incomplere write");
+        }
       }
     }
     // 0 = success
@@ -197,7 +201,7 @@ class OggContainerDecoder : public AudioDecoder {
 };
 
 /**
- * @brief OggContainerOutput - Output class for the OggContainerEncoder. Each
+ * @brief Output class for the OggContainerEncoder. Each
  * write is ending up as container entry
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -230,6 +234,7 @@ class OggContainerOutput : public AudioOutput {
 
       if (!writeHeader()) {
         is_open = false;
+        LOGE("writeHeader");
       }
     }
     return is_open;
@@ -248,8 +253,9 @@ class OggContainerOutput : public AudioOutput {
 
   /// Writes raw data to be encoded and packaged
   virtual size_t write(const uint8_t *in_ptr, size_t in_size) override {
-    if (!is_open || in_ptr == nullptr) return 0;
+    if (in_ptr == nullptr) return 0;
     LOGD("OggContainerOutput::write: %d", (int)in_size);
+    assert(cfg.channels != 0);
 
     // encode the data
     uint8_t *data = (uint8_t *)in_ptr;
@@ -276,7 +282,7 @@ class OggContainerOutput : public AudioOutput {
 
  protected:
   Print *p_out = nullptr;
-  bool is_open;
+  bool is_open = false;
   OGGZ *p_oggz = nullptr;
   ogg_packet op;
   ogg_packet oh;
@@ -284,6 +290,7 @@ class OggContainerOutput : public AudioOutput {
   size_t packetno = 0;
   long serialno = -1;
   bool is_audio = false;
+
   virtual bool writePacket(ogg_packet &op, int flag = 0) {
     LOGD("writePacket: %d", (int)op.bytes);
     long result = oggz_write_feed(p_oggz, &op, serialno, flag, NULL);
@@ -334,7 +341,7 @@ class OggContainerOutput : public AudioOutput {
 };
 
 /**
- * @brief OggContainerEncoder - Ogg Container. Encodes a packet for an Ogg
+ * @brief Encoder for Ogg Container. Encodes a packet for an Ogg
  * container. The Ogg begin segment contains the AudioInfo structure. You can
  * subclass ond overwrite the writeHeader() method to implement your own header
  * logic. When an optional encoder is specified in the constructor we package
@@ -350,18 +357,21 @@ class OggContainerEncoder : public AudioEncoder {
   // Empty Constructor - the output stream must be provided with begin()
   OggContainerEncoder() = default;
 
-  OggContainerEncoder(AudioEncoder *encoder) { p_codec = encoder; }
+  OggContainerEncoder(AudioEncoder *encoder) { setEncoder(encoder); }
 
-  OggContainerEncoder(AudioEncoder &encoder) { p_codec = &encoder; }
+  OggContainerEncoder(AudioEncoder &encoder) { setEncoder(&encoder); }
 
   /// Defines the output Stream
-  void setOutputStream(Print &print) override { ogg.setOutput(print); }
+  void setOutputStream(Print &print) override { p_ogg->setOutput(print); }
 
   /// Provides "audio/pcm"
   const char *mime() override { return mime_pcm; }
 
   /// We actually do nothing with this
-  virtual void setAudioInfo(AudioInfo info) override { ogg.setAudioInfo(info); }
+  virtual void setAudioInfo(AudioInfo info) override {
+    p_ogg->setAudioInfo(info);
+    if (p_codec != nullptr) p_codec->setAudioInfo(info);
+  }
 
   virtual void begin(AudioInfo from) {
     setAudioInfo(from);
@@ -371,10 +381,10 @@ class OggContainerEncoder : public AudioEncoder {
   /// starts the processing using the actual AudioInfo
   virtual void begin() override {
     TRACED();
-    ogg.begin();
+    p_ogg->begin();
     if (p_codec != nullptr) {
-      p_codec->setOutputStream(ogg);
-      p_codec->begin(ogg.audioInfo());
+      p_codec->setOutputStream(*p_ogg);
+      p_codec->begin(p_ogg->audioInfo());
     }
   }
 
@@ -382,29 +392,35 @@ class OggContainerEncoder : public AudioEncoder {
   void end() override {
     TRACED();
     if (p_codec != nullptr) p_codec->end();
-    ogg.end();
+    p_ogg->end();
   }
 
   /// Writes raw data to be encoded and packaged
   virtual size_t write(const void *in_ptr, size_t in_size) override {
-    if (!ogg.isOpen() || in_ptr == nullptr) return 0;
+    if (!p_ogg->isOpen() || in_ptr == nullptr) return 0;
     LOGD("OggContainerEncoder::write: %d", (int)in_size);
     size_t result = 0;
     if (p_codec == nullptr) {
-      result = ogg.write((const uint8_t *)in_ptr, in_size);
+      result = p_ogg->write((const uint8_t *)in_ptr, in_size);
     } else {
       result = p_codec->write(in_ptr, in_size);
     }
     return result;
   }
 
-  operator bool() override { return ogg.isOpen(); }
+  operator bool() override { return p_ogg->isOpen(); }
 
-  bool isOpen() { return ogg.isOpen(); }
+  bool isOpen() { return p_ogg->isOpen(); }
 
  protected:
   AudioEncoder *p_codec = nullptr;
   OggContainerOutput ogg;
+  OggContainerOutput *p_ogg = &ogg;
+
+  void setEncoder(AudioEncoder *enc) { p_codec = enc; }
+
+  /// Replace the ogg output class
+  void setOggOutput(OggContainerOutput *out) { p_ogg = out; }
 };
 
 }  // namespace audio_tools
