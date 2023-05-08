@@ -27,9 +27,12 @@ StreamCopy copier(encoder, sound);
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
+  AudioLogger::instance().begin(Serial, AudioLogger::Debug);
 
-
+  // Setup output
+  auto cfgo = out.defaultConfig();
+  cfgo.copyFrom(info);
+  out.begin(cfgo);
 
   // Setup sine wave
   auto cfgs = sineWave.defaultConfig();
