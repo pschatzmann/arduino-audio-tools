@@ -14,8 +14,8 @@
  *
  */
 
-#include "AudioCodecs/CodecOpusOgg.h"
 #include "AudioTools.h"
+#include "AudioCodecs/CodecOpusOgg.h"
 
 // WIFI
 const char *ssid = "ssid";
@@ -24,8 +24,7 @@ const char *password = "password";
 AudioInfo info(16000, 1, 16);
 OpusOggEncoder ogg;
 AudioEncoderServer server(&ogg, ssid, password);
-SineWaveGenerator<int16_t>
-    sineWave;  // Subclass of SoundGenerator with max amplitude of 32000
+SineWaveGenerator<int16_t> sineWave;
 GeneratedSoundStream<int16_t> in(sineWave);  // Stream generated from sine wave
 
 void setup() {
