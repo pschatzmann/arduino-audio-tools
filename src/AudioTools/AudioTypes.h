@@ -131,7 +131,7 @@ class AudioWriter {
     public: 
         virtual size_t write(const void *in_ptr, size_t in_size) = 0;
         virtual void setAudioInfo(AudioInfo from) = 0;
-        virtual void setOutputStream(Print &out_stream) = 0;
+        virtual void setOutput(Print &out_stream) = 0;
         virtual operator bool() = 0;
         virtual void begin() = 0;
         virtual void begin(AudioInfo info) {

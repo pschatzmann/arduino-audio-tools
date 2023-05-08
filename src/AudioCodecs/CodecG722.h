@@ -71,7 +71,7 @@ class G722Decoder : public AudioDecoder {
     p_notify = &bi;
   }
 
-  virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
+  virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
 
   operator bool() { return is_active; }
 
@@ -171,7 +171,7 @@ class G722Encoder : public AudioEncoder {
 
   virtual void setAudioInfo(AudioInfo cfg) { this->cfg = cfg; }
 
-  virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
+  virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
 
   operator bool() { return is_active; }
 

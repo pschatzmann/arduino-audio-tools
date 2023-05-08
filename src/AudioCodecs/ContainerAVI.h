@@ -280,7 +280,7 @@ public:
   }
 
   /// Defines the audio output stream - usually called by EncodedAudioStream
-  virtual void setOutputStream(Print &out_stream) override {
+  virtual void setOutput(Print &out_stream) override {
     // p_output_audio = &out_stream;
     p_output_audio->setOutput(&out_stream);
   }

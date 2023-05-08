@@ -63,7 +63,7 @@ class AACDecoderHelix : public AudioDecoder  {
         }
 
         /// Defines the output Stream
-        virtual void setOutputStream(Print &out_stream){
+        virtual void setOutput(Print &out_stream){
             TRACED();
             if (aac!=nullptr) aac->setOutput(out_stream);
         }

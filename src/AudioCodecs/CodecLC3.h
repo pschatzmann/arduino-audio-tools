@@ -98,7 +98,7 @@ class LC3Decoder : public AudioDecoder {
     p_notify = &bi;
   }
 
-  virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
+  virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
 
   operator bool() { return active; }
 
@@ -251,7 +251,7 @@ class LC3Encoder : public AudioEncoder {
 
   virtual void setAudioInfo(AudioInfo info) { this->info = info; }
 
-  virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
+  virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
 
   operator bool() { return lc3_encoder != nullptr; }
 

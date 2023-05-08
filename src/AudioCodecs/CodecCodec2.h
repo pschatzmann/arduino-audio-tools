@@ -134,7 +134,7 @@ class Codec2Decoder : public AudioDecoder {
     is_active = false;
   }
 
-  virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
+  virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
 
   operator bool() { return is_active; }
 
@@ -265,7 +265,7 @@ class Codec2Encoder : public AudioEncoder {
 
   virtual void setAudioInfo(AudioInfo cfg) { this->info = cfg; }
 
-  virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
+  virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
 
   operator bool() { return is_active; }
 

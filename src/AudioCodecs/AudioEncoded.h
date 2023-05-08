@@ -33,19 +33,19 @@ class AudioDecoder : public AudioWriter, public AudioInfoSource {
     }
     info = from;
   }
-  virtual void setOutputStream(AudioStream &out_stream) {
+  virtual void setOutput(AudioStream &out_stream) {
     Print *p_print = &out_stream;
-    setOutputStream(*p_print);
+    setOutput(*p_print);
     setNotifyAudioChange(out_stream);
   }
 
-  virtual void setOutputStream(AudioOutput &out_stream) {
+  virtual void setOutput(AudioOutput &out_stream) {
     Print *p_print = &out_stream;
-    setOutputStream(*p_print);
+    setOutput(*p_print);
     setNotifyAudioChange(out_stream);
   }
 
-  virtual void setOutputStream(Print &out_stream) override {
+  virtual void setOutput(Print &out_stream) override {
     p_print = &out_stream;
   }
   // Th decoding result is PCM data
@@ -95,7 +95,7 @@ class CodecNOP : public AudioDecoder, public AudioEncoder {
 
   virtual void begin() {}
   virtual void end() {}
-  virtual void setOutputStream(Print &out_stream) {}
+  virtual void setOutput(Print &out_stream) {}
   virtual void setNotifyAudioChange(AudioInfoSupport &bi) {}
   virtual void setAudioInfo(AudioInfo info) {}
 
@@ -131,22 +131,22 @@ class StreamingDecoder {
   virtual void end() = 0;
 
   /// Defines the output Stream
-  virtual void setOutputStream(Print &outStream) = 0;
+  virtual void setOutput(Print &outStream) = 0;
 
   /// Register Output Stream to be notified about changes
   virtual void setNotifyAudioChange(AudioInfoSupport &bi) = 0;
 
   /// Defines the output streams and register to be notified
-  virtual void setOutputStream(AudioStream &out_stream) {
+  virtual void setOutput(AudioStream &out_stream) {
     Print *p_print = &out_stream;
-    setOutputStream(*p_print);
+    setOutput(*p_print);
     setNotifyAudioChange(out_stream);
   }
 
   /// Defines the output streams and register to be notified
-  virtual void setOutputStream(AudioOutput &out_stream) {
+  virtual void setOutput(AudioOutput &out_stream) {
     Print *p_print = &out_stream;
-    setOutputStream(*p_print);
+    setOutput(*p_print);
     setNotifyAudioChange(out_stream);
   }
 
@@ -193,7 +193,7 @@ class EncodedAudioOutput : public AudioStream {
     TRACED();
     ptr_out = outputStream;
     decoder_ptr = decoder;
-    decoder_ptr->setOutputStream(*outputStream);
+    decoder_ptr->setOutput(*outputStream);
     decoder_ptr->setNotifyAudioChange(*outputStream);
     writer_ptr = decoder_ptr;
     active = false;
@@ -203,7 +203,7 @@ class EncodedAudioOutput : public AudioStream {
     TRACED();
     ptr_out = outputStream;
     decoder_ptr = decoder;
-    decoder_ptr->setOutputStream(*outputStream);
+    decoder_ptr->setOutput(*outputStream);
     decoder_ptr->setNotifyAudioChange(*outputStream);
     writer_ptr = decoder_ptr;
     active = false;
@@ -213,7 +213,7 @@ class EncodedAudioOutput : public AudioStream {
     TRACED();
     ptr_out = outputStream;
     decoder_ptr = decoder;
-    decoder_ptr->setOutputStream(*outputStream);
+    decoder_ptr->setOutput(*outputStream);
     writer_ptr = decoder_ptr;
     active = false;
   }
@@ -222,7 +222,7 @@ class EncodedAudioOutput : public AudioStream {
     TRACED();
     ptr_out = outputStream;
     encoder_ptr = encoder;
-    encoder_ptr->setOutputStream(*outputStream);
+    encoder_ptr->setOutput(*outputStream);
     writer_ptr = encoder_ptr;
     active = false;
   }
@@ -231,7 +231,7 @@ class EncodedAudioOutput : public AudioStream {
     TRACED();
     ptr_out = outputStream;
     encoder_ptr = encoder;
-    encoder_ptr->setOutputStream(*outputStream);
+    encoder_ptr->setOutput(*outputStream);
     decoder_ptr->setNotifyAudioChange(*outputStream);
     writer_ptr = encoder_ptr;
     active = false;
@@ -241,7 +241,7 @@ class EncodedAudioOutput : public AudioStream {
     TRACED();
     ptr_out = outputStream;
     encoder_ptr = encoder;
-    encoder_ptr->setOutputStream(*outputStream);
+    encoder_ptr->setOutput(*outputStream);
     decoder_ptr->setNotifyAudioChange(*outputStream);
     writer_ptr = encoder_ptr;
     active = false;
@@ -276,10 +276,10 @@ class EncodedAudioOutput : public AudioStream {
   void setOutput(Print *outputStream) {
     ptr_out = outputStream;
     if (decoder_ptr != nullptr) {
-      decoder_ptr->setOutputStream(*ptr_out);
+      decoder_ptr->setOutput(*ptr_out);
     }    
     if (encoder_ptr != nullptr) {
-      encoder_ptr->setOutputStream(*ptr_out);
+      encoder_ptr->setOutput(*ptr_out);
     }
   }
 
@@ -293,7 +293,7 @@ class EncodedAudioOutput : public AudioStream {
     encoder_ptr = encoder;
     writer_ptr = encoder;
     if (ptr_out != nullptr) {
-      encoder_ptr->setOutputStream(*ptr_out);
+      encoder_ptr->setOutput(*ptr_out);
     }
   }
 
@@ -304,7 +304,7 @@ class EncodedAudioOutput : public AudioStream {
     decoder_ptr = decoder;
     writer_ptr = decoder;
     if (ptr_out != nullptr) {
-      decoder_ptr->setOutputStream(*ptr_out);
+      decoder_ptr->setOutput(*ptr_out);
     }
   }
 
@@ -511,7 +511,7 @@ class EncodedAudioStream : public EncodedAudioOutput {
       LOGI("Setup reading support");
       resize();
       // make sure the result goes to out_stream
-      writer_ptr->setOutputStream(queue_stream);
+      writer_ptr->setOutput(queue_stream);
       queue_stream.begin();
     }
   }
@@ -581,12 +581,12 @@ class ContainerTargetPrint : public ContainerTarget {
     if (!active) {
       active = true;
       if (p_writer2 != nullptr) {
-        p_writer1->setOutputStream(print2);
-        p_writer2->setOutputStream(*p_print);
+        p_writer1->setOutput(print2);
+        p_writer2->setOutput(*p_print);
         p_writer1->begin();
         p_writer2->begin();
       } else {
-        p_writer1->setOutputStream(*p_print);
+        p_writer1->setOutput(*p_print);
         p_writer1->begin();
       }
     }

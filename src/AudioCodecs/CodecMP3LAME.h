@@ -47,7 +47,7 @@ public:
      }
 
     /// Defines the output stream
-    void setOutputStream(Print &out_stream){
+    void setOutput(Print &out_stream){
         TRACED();
         p_print = &out_stream;
         if (enc!=nullptr){
@@ -138,7 +138,7 @@ protected:
         if (enc==nullptr){
             enc = new liblame::MP3EncoderLAME();
             if (p_print!=nullptr){
-                setOutputStream(*p_print);
+                setOutput(*p_print);
             } else {
                 LOGE("Output undefined");
             }

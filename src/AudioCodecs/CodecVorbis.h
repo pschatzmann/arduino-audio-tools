@@ -61,7 +61,7 @@ public:
   }
 
   /// Defines the output Stream
-  void setOutputStream(Print &outStream) override { this->p_out = &outStream; }
+  void setOutput(Print &outStream) override { this->p_out = &outStream; }
 
   /// Defines the output Stream
   void setInputStream(Stream &inStream) override { this->p_in = &inStream; }

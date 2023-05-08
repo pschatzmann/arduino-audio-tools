@@ -28,7 +28,7 @@ public:
 
   ~CopyDecoder() {}
 
-  virtual void setOutputStream(Print &out_stream) {pt_print=&out_stream;}
+  virtual void setOutput(Print &out_stream) {pt_print=&out_stream;}
 
   void begin() {}
 
@@ -67,7 +67,7 @@ public:
 
   ~CopyEncoder() {}
 
-  virtual void setOutputStream(Print &out_stream) {pt_print=&out_stream;}
+  virtual void setOutput(Print &out_stream) {pt_print=&out_stream;}
 
   void begin() {}
 

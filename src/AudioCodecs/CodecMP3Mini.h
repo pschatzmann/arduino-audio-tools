@@ -61,7 +61,7 @@ class MP3DecoderMini : public AudioDecoder {
   }
 
   /// Defines the output Stream
-  void setOutputStream(Print &outStream) { this->out = &outStream; }
+  void setOutput(Print &outStream) { this->out = &outStream; }
 
   /// Provides the last available MP3FrameInfo
   AudioInfo audioInfo() { return audio_info; }

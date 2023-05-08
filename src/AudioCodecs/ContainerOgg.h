@@ -44,7 +44,7 @@ class OggContainerDecoder : public AudioDecoder {
   }
 
   /// Defines the output Stream
-  void setOutputStream(Print &print) override { out.setOutput(&print); }
+  void setOutput(Print &print) override { out.setOutput(&print); }
 
   void setNotifyAudioChange(AudioInfoSupport &bi) override {
     out.setNotifyAudioChange(bi);
@@ -363,7 +363,7 @@ class OggContainerEncoder : public AudioEncoder {
   OggContainerEncoder(AudioEncoder &encoder) { setEncoder(&encoder); }
 
   /// Defines the output Stream
-  void setOutputStream(Print &print) override { p_ogg->setOutput(print); }
+  void setOutput(Print &print) override { p_ogg->setOutput(print); }
 
   /// Provides "audio/pcm"
   const char *mime() override { return mime_pcm; }
@@ -384,7 +384,7 @@ class OggContainerEncoder : public AudioEncoder {
     TRACED();
     p_ogg->begin();
     if (p_codec != nullptr) {
-      p_codec->setOutputStream(*p_ogg);
+      p_codec->setOutput(*p_ogg);
       p_codec->begin(p_ogg->audioInfo());
     }
   }

@@ -39,12 +39,12 @@ public:
 
   DecoderL16(Print &out_stream, AudioInfoSupport &bi) {
     TRACED();
-    setOutputStream(out_stream);
+    setOutput(out_stream);
     setNotifyAudioChange(bi);
   }
 
   /// Defines the output Stream
-  void setOutputStream(Print &out_stream) override { p_print = &out_stream; }
+  void setOutput(Print &out_stream) override { p_print = &out_stream; }
 
   void setNotifyAudioChange(AudioInfoSupport &bi) override { this->bid = &bi; }
 
@@ -108,7 +108,7 @@ public:
   EncoderL16(Print &out) { p_print = &out; }
 
   /// Defines the output Stream
-  void setOutputStream(Print &out_stream) override { p_print = &out_stream; }
+  void setOutput(Print &out_stream) override { p_print = &out_stream; }
 
   /// Provides "audio/pcm"
   const char *mime() override { return "audio/l16"; }

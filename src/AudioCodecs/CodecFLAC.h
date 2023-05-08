@@ -25,7 +25,7 @@ namespace audio_tools {
 
 /**
  * @brief Decoder for FLAC. Depends on https://github.com/pschatzmann/arduino-libflac. We support an efficient streaming API and an very memory intensitiv standard interface. So 
- * you should prefer the streaming interface where you call setOutputStream() before the begin and copy() in the loop.
+ * you should prefer the streaming interface where you call setOutput() before the begin and copy() in the loop.
  * Validated with http://www.2l.no/hires/
  * @ingroup codecs
  * @ingroup decoder
@@ -106,7 +106,7 @@ class FLACDecoder : public StreamingDecoder {
     p_input = &input;
   }
 
-  virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
+  virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
 
   operator bool() { return is_active; }
 
@@ -290,7 +290,7 @@ class FLACEncoder : public AudioEncoder {
   int compressionLevel() {return flac_compression_level;}
 
   /// Defines the output Stream
-  void setOutputStream(Print &out_stream) override { p_print = &out_stream; }
+  void setOutput(Print &out_stream) override { p_print = &out_stream; }
 
   /// Provides "audio/pcm"
   const char *mime() override { return "audio/flac"; }

@@ -47,7 +47,7 @@ class DecoderL8 : public AudioDecoder {
 
   DecoderL8(Print &out_stream, AudioInfoSupport &bi) {
     TRACED();
-    setOutputStream(out_stream);
+    setOutput(out_stream);
     setNotifyAudioChange(bi);
   }
 
@@ -152,7 +152,7 @@ class EncoderL8 : public AudioEncoder {
   void setSigned(bool isSigned) { is_signed = isSigned; }
 
   /// Defines the output Stream
-  void setOutputStream(Print &out_stream) override { p_print = &out_stream; }
+  void setOutput(Print &out_stream) override { p_print = &out_stream; }
 
   /// Provides "audio/pcm"
   const char *mime() override { return "audio/l8"; }
