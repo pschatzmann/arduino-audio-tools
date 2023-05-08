@@ -323,7 +323,7 @@ class WavIMADecoder : public AudioDecoder {
         }
 
         /// Defines the output Stream
-        void setOutputStream(Print &out_stream) {
+        void setOutput(Print &out_stream) {
             this->out = &out_stream;
         }
 

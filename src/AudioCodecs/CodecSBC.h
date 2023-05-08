@@ -57,7 +57,7 @@ public:
     p_notify = &bi;
   }
 
-  virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
+  virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
 
   operator bool() { return is_active; }
 
@@ -270,7 +270,7 @@ public:
 
   virtual void setAudioInfo(AudioInfo info) { this->info = info; }
 
-  virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
+  virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
 
   operator bool() { return is_active; }
 

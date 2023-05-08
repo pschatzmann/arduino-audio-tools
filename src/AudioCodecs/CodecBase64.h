@@ -50,11 +50,11 @@ class DecoderBase64 : public AudioDecoder {
    */
   DecoderBase64(Print &out) {
     TRACED();
-    setOutputStream(out);
+    setOutput(out);
   }
 
   /// Defines the output Stream
-  void setOutputStream(Print &out) override { p_print = &out; }
+  void setOutput(Print &out) override { p_print = &out; }
 
   /// We expect new lines to delimit the individual lines
   void setNewLine(Base46Logic logic) { newline_logic = logic; }
@@ -187,7 +187,7 @@ class EncoderBase64 : public AudioEncoder {
   EncoderBase64(Print &out) { p_print = &out; }
 
   /// Defines the output Stream
-  void setOutputStream(Print &out_buffeream) override {
+  void setOutput(Print &out_buffeream) override {
     p_print = &out_buffeream;
   }
 

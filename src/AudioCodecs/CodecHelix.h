@@ -34,7 +34,7 @@ public:
   ~DecoderHelix() { resetDecoder(); }
 
   /// Defines the output Stream
-  virtual void setOutputStream(Print &outStream) { p_out_stream = &outStream; }
+  virtual void setOutput(Print &outStream) { p_out_stream = &outStream; }
 
   /// Starts the processing
   void begin() {
@@ -96,7 +96,7 @@ protected:
       LOGW("Unknown Data Format: Content will be ignored...")
       p_decoder = CodecNOP::instance();
     }
-    p_decoder->setOutputStream(*p_out_stream);
+    p_decoder->setOutput(*p_out_stream);
     p_decoder->setNotifyAudioChange(*p_bi);
   }
 

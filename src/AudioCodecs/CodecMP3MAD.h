@@ -44,7 +44,7 @@ class MP3DecoderMAD : public AudioDecoder  {
             delete mad;
         }
 
-        void setOutputStream(Print &out){
+        void setOutput(Print &out){
             TRACED();
             mad->setOutput(out);
         }

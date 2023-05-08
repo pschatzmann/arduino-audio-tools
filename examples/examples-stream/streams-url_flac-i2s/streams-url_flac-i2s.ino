@@ -25,7 +25,7 @@ void setup() {
 
   url.begin("http://www.lindberg.no/hires/test/2L-145_01_stereo_01.cd.flac");
   dec.setInputStream(url);
-  dec.setOutputStream(i2s);
+  dec.setOutput(i2s);
   dec.begin();
 }
 

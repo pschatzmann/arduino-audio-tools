@@ -30,7 +30,7 @@ public:
    */
   DecoderBasic(Print &out_stream, bool active = true) {
     TRACED();
-    setOutputStream(out_stream);
+    setOutput(out_stream);
   }
 
   /**
@@ -42,13 +42,13 @@ public:
 
   DecoderBasic(Print &out_stream, AudioInfoSupport &bi) {
     TRACED();
-    setOutputStream(out_stream);
+    setOutput(out_stream);
     setNotifyAudioChange(bi);
   }
 
   /// Defines the output Stream
-  void setOutputStream(Print &out_stream) override {
-    decoder.setOutputStream(out_stream);
+  void setOutput(Print &out_stream) override {
+    decoder.setOutput(out_stream);
   }
 
   void setNotifyAudioChange(AudioInfoSupport &bi) override {
@@ -93,10 +93,10 @@ public:
   EncoderBasic() {}
 
   // Constructor providing the output stream
-  EncoderBasic(Print &out) { setOutputStream(out); }
+  EncoderBasic(Print &out) { setOutput(out); }
 
   /// Defines the output Stream
-  void setOutputStream(Print &out) override { encoder.setOutputStream(out); }
+  void setOutput(Print &out) override { encoder.setOutput(out); }
 
   /// Provides "audio/pcm"
   const char *mime() override { return "audio/basic"; }

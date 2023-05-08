@@ -521,13 +521,13 @@ public:
     buffer.resize(buffer_size);
     p_format = &format;
     p_encoder = &encoder;
-    p_encoder->setOutputStream(buffer);
+    p_encoder->setOutput(buffer);
   }
 
   /// Construcor using RTSPFormatPCM and no encoder
   RTSPOutput(int buffer_size = 1024) {
     buffer.resize(buffer_size);
-    p_encoder->setOutputStream(buffer);
+    p_encoder->setOutput(buffer);
   }
 
   AudioStreamer *streamer() { return &rtsp_streamer; }

@@ -86,7 +86,7 @@ class G7xxDecoder : public AudioDecoder {
     p_notify = &bi;
   }
 
-  void setOutputStream(Print &out_stream) override { p_print = &out_stream; }
+  void setOutput(Print &out_stream) override { p_print = &out_stream; }
 
   operator bool() { return is_active; }
 
@@ -193,7 +193,7 @@ class G7xxEncoder : public AudioEncoder {
     }
   }
 
-  void setOutputStream(Print &out_stream) override { p_print = &out_stream; }
+  void setOutput(Print &out_stream) override { p_print = &out_stream; }
 
   operator bool() { return is_active; }
 

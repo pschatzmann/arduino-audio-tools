@@ -36,7 +36,7 @@ class AACDecoderFDK : public AudioDecoder  {
         }
 
         /// Defines the output stream
-        void setOutputStream(Print &out_stream){
+        void setOutput(Print &out_stream){
             dec->setOutput(out_stream);
         }
 
@@ -141,7 +141,7 @@ public:
          delete enc;
      }
 
-     void setOutputStream(Print &out_stream){
+     void setOutput(Print &out_stream){
          enc->setOutput(out_stream);
      }
 

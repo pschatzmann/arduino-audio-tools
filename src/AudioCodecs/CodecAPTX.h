@@ -48,7 +48,7 @@ class APTXDecoder : public AudioDecoder {
     ctx = nullptr;
   }
 
-  virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
+  virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
 
   operator bool() { return ctx != nullptr; }
 
@@ -245,7 +245,7 @@ class APTXEncoder : public AudioEncoder {
     }
   }
 
-  virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
+  virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
 
   operator bool() { return ctx != nullptr; }
 

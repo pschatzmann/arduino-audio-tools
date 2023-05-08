@@ -272,7 +272,7 @@ class WAVDecoder : public AudioDecoder {
         }
 
         /// Defines the output Stream
-        void setOutputStream(Print &out_stream){
+        void setOutput(Print &out_stream){
             this->out = &out_stream;
         }
 
@@ -411,7 +411,7 @@ class WAVEncoder : public AudioEncoder {
         }
 
         /// Defines the otuput stream
-        void setOutputStream(Print &out){
+        void setOutput(Print &out){
             stream_ptr = &out;
         }
 

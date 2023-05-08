@@ -46,7 +46,7 @@ class DecoderFloat : public AudioDecoder {
         }
 
         /// Defines the output Stream
-        void setOutputStream(Print &out_stream) override {
+        void setOutput(Print &out_stream) override {
             p_print = &out_stream;
         }
 
@@ -122,7 +122,7 @@ class EncoderFloat : public AudioEncoder {
         }
 
         /// Defines the output Stream
-        void setOutputStream(Print &out_stream) override {
+        void setOutput(Print &out_stream) override {
             p_print = &out_stream;
         }
 

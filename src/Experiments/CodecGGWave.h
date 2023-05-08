@@ -41,7 +41,7 @@ public:
 
   GGWaveDecoder(Print &out_stream) : GGWaveDecoder() { TRACED(); pt_print=&out_stream; }
 
-  virtual void setOutputStream(Print &out_stream) {pt_print=&out_stream;}
+  virtual void setOutput(Print &out_stream) {pt_print=&out_stream;}
 
   AudioInfo audioInfo() { return info; }
   
@@ -189,7 +189,7 @@ public:
 
   void setAudioInfo(AudioInfo ai) { info = ai; }
 
-  void setOutputStream(Print &out_stream) {pt_print=&out_stream;}
+  void setOutput(Print &out_stream) {pt_print=&out_stream;}
 
   void setSamplesFormatInput(ggwave_SampleFormat fmt){
     samples_format_input = fmt;

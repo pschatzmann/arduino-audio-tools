@@ -71,7 +71,7 @@ class ILBCDecoder : public AudioDecoder {
     notify = &bi;
   }
 
-  virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
+  virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
 
   operator bool() { return p_ilbc != nullptr; }
 
@@ -172,7 +172,7 @@ class ILBCEncoder : public AudioEncoder {
 
   virtual const char *mime() { return "audio/ilbc"; }
 
-  virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
+  virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
 
   operator bool() { return p_ilbc != nullptr; }
 

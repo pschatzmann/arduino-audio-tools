@@ -124,11 +124,11 @@ class OpusAudioDecoder : public AudioDecoder {
    */
   OpusAudioDecoder(Print &out_stream) {
     TRACED();
-    setOutputStream(out_stream);
+    setOutput(out_stream);
   }
 
   /// Defines the output Stream
-  void setOutputStream(Print &out_stream) override { p_print = &out_stream; }
+  void setOutput(Print &out_stream) override { p_print = &out_stream; }
 
   void setNotifyAudioChange(AudioInfoSupport &bi) override {
     this->p_notify = &bi;
@@ -224,10 +224,10 @@ class OpusAudioEncoder : public AudioEncoder {
   OpusAudioEncoder() {}
 
   // Constructor providing the output stream
-  OpusAudioEncoder(Print &out) { setOutputStream(out); }
+  OpusAudioEncoder(Print &out) { setOutput(out); }
 
   /// Defines the output Stream
-  void setOutputStream(Print &out_stream) override { p_print = &out_stream; }
+  void setOutput(Print &out_stream) override { p_print = &out_stream; }
 
   /// Provides "audio/pcm"
   const char *mime() override { return "audio/opus"; }

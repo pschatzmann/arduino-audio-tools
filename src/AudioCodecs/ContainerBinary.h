@@ -73,8 +73,8 @@ class BinaryContainerEncoder : public AudioEncoder {
   BinaryContainerEncoder(AudioEncoder &encoder) { p_codec = &encoder; }
   BinaryContainerEncoder(AudioEncoder *encoder) { p_codec = encoder; }
 
-  void setOutputStream(Print &outStream) {
-    LOGD("BinaryContainerEncoder::setOutputStream: %d",is_initial_output);
+  void setOutput(Print &outStream) {
+    LOGD("BinaryContainerEncoder::setOutput: %d",is_initial_output);
     if (is_initial_output) {
       setupIntialOutputStream(outStream);
     } else {
@@ -197,8 +197,8 @@ class BinaryContainerDecoder : public AudioDecoder {
   // Defines the output: this method is called 2 times: first to define
   // output defined in the EnocdedAudioStream and then to define the
   // real output in the output chain.
-  void setOutputStream(Print &outStream) {
-    LOGD("BinaryContainerDecoder::setOutputStream: %d",is_initial_output);
+  void setOutput(Print &outStream) {
+    LOGD("BinaryContainerDecoder::setOutput: %d",is_initial_output);
     if (is_initial_output) {
       setupIntialOutputStream(outStream);
     } else {

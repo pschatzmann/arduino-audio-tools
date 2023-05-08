@@ -38,7 +38,7 @@ class MP3DecoderHelix : public AudioDecoder  {
             if (mp3==nullptr){
                 LOGE("Not enough memory for libhelix");
             }
-            setOutputStream(out_stream);
+            setOutput(out_stream);
         }  
 
         /**
@@ -55,7 +55,7 @@ class MP3DecoderHelix : public AudioDecoder  {
             if (mp3==nullptr){
                 LOGE("Not enough memory for libhelix");
             }
-            setOutputStream(out_stream);
+            setOutput(out_stream);
             setNotifyAudioChange(bi);
         }  
 
@@ -68,7 +68,7 @@ class MP3DecoderHelix : public AudioDecoder  {
         }
 
         /// Defines the output Stream
-        virtual void setOutputStream(Print &outStream){
+        virtual void setOutput(Print &outStream){
             if (mp3!=nullptr) mp3->setOutput(outStream);
         }
 
