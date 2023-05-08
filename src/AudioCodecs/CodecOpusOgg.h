@@ -9,9 +9,9 @@ namespace audio_tools {
 struct __attribute__((packed)) OpusOggHeader {
   char signature[8] = {'O', 'p', 'u', 's', 'H', 'e', 'a', 'd'};
   uint8_t version = 1;
-  uint8_t channelCount = 2;
+  uint8_t channelCount = 0;
   uint16_t preSkip = 3840;
-  uint32_t sampleRate = 48000;
+  uint32_t sampleRate = 0;
   int16_t outputGain = 0;
   uint8_t channelMappingFamily = 0;
 };
@@ -142,7 +142,7 @@ class OpusOggEncoder : public OggContainerEncoder {
 
 
   /// Provides "audio/opus"
-  const char *mime() override { return "audio/opus"; }
+  const char *mime() override { return "audio/ogg;codecs=opus"; }
 
   /// Provides access to the Opus config
   OpusEncoderSettings &config() { return enc.config(); }

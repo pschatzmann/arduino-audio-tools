@@ -262,8 +262,9 @@ class OggContainerOutput : public AudioOutput {
     op.packet = (uint8_t *)data;
     op.bytes = in_size;
     if (op.bytes > 0) {
-      op.granulepos = granulepos +=
-          op.bytes / sizeof(int16_t) / cfg.channels;  // sample
+      int bytes_per_sample = cfg.bits_per_sample / 8;
+      granulepos += op.bytes / bytes_per_sample;  // sample
+      op.granulepos = granulepos;
       op.b_o_s = false;
       op.e_o_s = false;
       op.packetno = packetno++;
