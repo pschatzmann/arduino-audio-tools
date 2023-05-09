@@ -429,7 +429,7 @@ protected:
       if (isCurrentStreamAudio()) {
         audio_info = *(strf.asAVIAudioFormat(parse_buffer.data()));
         setupAudioInfo();
-        LOGI("audioFormat: %d", (int)audioFormat());
+        LOGI("audioFormat: %d (%x)", (int)audioFormat(),(int)audioFormat());
         content_types.push_back(Audio);
         consume(strf.size());
       } else if (isCurrentStreamVideo()) {
