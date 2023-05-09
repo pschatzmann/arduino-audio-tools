@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Stream.h"
+//#include "Stream.h"
 #include "AudioCodecs/AudioEncoded.h"
 #include "AACDecoderHelix.h"
 
@@ -17,9 +17,10 @@ namespace audio_tools {
 class AACDecoderHelix : public AudioDecoder  {
     public:
 
-        AACDecoderHelix() {
+        AACDecoderHelix(bool raw=false) {
             TRACED();
             aac = new libhelix::AACDecoderHelix();
+            setRaw(raw);
             if (aac==nullptr){
                 LOGE("Not enough memory for libhelix");
             }
@@ -60,6 +61,10 @@ class AACDecoderHelix : public AudioDecoder  {
         ~AACDecoderHelix(){
              TRACED();
             if (aac!=nullptr) delete aac;
+        }
+
+        void setRaw(bool flag){
+            if (aac!=nullptr) aac->setRaw(flag);
         }
 
         /// Defines the output Stream
