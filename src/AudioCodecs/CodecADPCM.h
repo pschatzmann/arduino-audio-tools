@@ -10,6 +10,9 @@ enum class ADPCMNoiseShaping {
   AD_NOISE_SHAPING_DYNAMIC = 2
 };
 
+#define DEFAULT_NOISE_SHAPING NOISE_SHAPING_OFF
+#define DEFAULT_LOOKAHEAD 0
+#define DEFAULT_BLOCKSIZE_POW2 0
 /**
  * @brief Decoder for ADPCM. Depends on
  * https://github.com/pschatzmann/arduino-adpcm-xq
@@ -102,9 +105,9 @@ class ADPCMDecoder : public AudioDecoder {
   Vector<uint8_t> adpcm_block;
   int32_t initial_deltas[2] = {0};
   Print *p_print = nullptr;
-  int samples_per_block = 0, lookahead = 3,
-      noise_shaping = NOISE_SHAPING_DYNAMIC, block_size_pow2 = 0,
-      block_size = 0;
+  int samples_per_block = 0, lookahead = DEFAULT_LOOKAHEAD,
+      noise_shaping = (int)DEFAULT_NOISE_SHAPING,
+      block_size_pow2 = DEFAULT_BLOCKSIZE_POW2, block_size = 0;
 
   bool decode(int this_block_adpcm_samples) {
     int result = adpcm_decode_block(pcm_block.data(), adpcm_block.data(),
@@ -214,9 +217,9 @@ class ADPCMEncoder : public AudioEncoder {
   Vector<int16_t> pcm_block;
   Vector<uint8_t> adpcm_block;
   Print *p_print = nullptr;
-  int samples_per_block = 0, lookahead = 3,
-      noise_shaping = NOISE_SHAPING_DYNAMIC, block_size_pow2 = 0,
-      block_size = 0, pcm_block_size;
+  int samples_per_block = 0, lookahead = DEFAULT_LOOKAHEAD,
+      noise_shaping = (int)DEFAULT_NOISE_SHAPING,
+      block_size_pow2 = DEFAULT_BLOCKSIZE_POW2, block_size = 0, pcm_block_size;
   bool is_first = true;
 
   bool encode() {
