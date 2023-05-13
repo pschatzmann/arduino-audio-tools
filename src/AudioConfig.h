@@ -576,6 +576,7 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #  define USE_URL_ARDUINO
 #  define USE_STREAM_WRITE_OVERRIDE
 #  define USE_STREAM_READ_OVERRIDE
+#  define USE_STREAM_READCHAR_OVERRIDE
 typedef WiFiClient WiFiClientSecure;
 #endif
 
@@ -585,6 +586,7 @@ typedef WiFiClient WiFiClientSecure;
 #  include "AudioLibs/Desktop/Millis.h"
 #  include "AudioLibs/Desktop/Main.h"
 #  include "AudioLibs/Desktop/File.h"
+#  define USE_STREAM_READ_OVERRIDE
 #endif
 
 #ifndef ARDUINO

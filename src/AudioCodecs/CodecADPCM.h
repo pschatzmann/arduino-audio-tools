@@ -270,3 +270,5 @@ class ADPCMEncoder : public AudioEncoder {
 };
 
 }  // namespace audio_tools
+
+} // namespace audio_tools
