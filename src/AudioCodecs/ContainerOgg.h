@@ -53,7 +53,7 @@ class OggContainerDecoder : public AudioDecoder {
 
   AudioInfo audioInfo() override { return out.audioInfo(); }
 
-  void begin(AudioInfo info) {
+  void begin(AudioInfo info) override {
     TRACED();
     this->info = info;
     out.setAudioInfo(info);
@@ -180,8 +180,7 @@ class OggContainerDecoder : public AudioDecoder {
   virtual void beginOfSegment(ogg_packet *op) {
     LOGD("bos");
     if (op->bytes == sizeof(AudioInfo)) {
-      AudioInfo cfg;
-      memcpy(&cfg, op->packet, op->bytes);
+      AudioInfo cfg(*(AudioInfo*)op->packet);
       cfg.logInfo();
       if (cfg.bits_per_sample == 16 || cfg.bits_per_sample == 24 ||
           cfg.bits_per_sample == 32) {
@@ -374,7 +373,7 @@ class OggContainerEncoder : public AudioEncoder {
     if (p_codec != nullptr) p_codec->setAudioInfo(info);
   }
 
-  virtual void begin(AudioInfo from) {
+  virtual void begin(AudioInfo from) override {
     setAudioInfo(from);
     begin();
   }
