@@ -508,15 +508,15 @@ class UDPStream : public WiFiUDP {
   }
 };
 
-enum RecordType : uint8_t { Undefined, Begin, Send, Receive, End };
-enum AudioType : uint8_t { PCM, MP3, AAC, WAV };
-enum TransmitRole : uint8_t { Sender, Receiver };
+enum class RecordType : uint8_t { Undefined, Begin, Send, Receive, End };
+enum class AudioType : uint8_t { PCM, MP3, AAC, WAV };
+enum class TransmitRole : uint8_t { Sender, Receiver };
 
 /// Common Header for all records
 struct AudioHeader {
   AudioHeader() = default;
   uint8_t app = 123;
-  RecordType rec = Undefined;
+  RecordType rec = RecordType::Undefined;
   uint16_t seq = 0;
   // record counter
   void increment() {
@@ -527,29 +527,28 @@ struct AudioHeader {
 
 /// Protocal Record To Start
 struct AudioDataBegin : public AudioHeader {
-  AudioDataBegin() { rec = Begin; }
+  AudioDataBegin() { rec = RecordType::Begin; }
   AudioInfo info;
-  AudioType type = PCM;
+  AudioType type = AudioType::PCM;
 };
 
 /// Protocol Record for Data
 struct AudioSendData : public AudioHeader {
   AudioSendData() {
-    rec = Send;
-    ;
+    rec = RecordType::Send;
   }
   uint16_t size = 0;
 };
 
 /// Protocol Record for Request
 struct AudioConfirmDataToReceive : public AudioHeader {
-  AudioConfirmDataToReceive() { rec = Receive; }
+  AudioConfirmDataToReceive() { rec = RecordType::Receive; }
   uint16_t size = 0;
 };
 
 /// Protocol Record for End
 struct AudioDataEnd : public AudioHeader {
-  AudioDataEnd() { rec = End; }
+  AudioDataEnd() { rec = RecordType::End; }
 };
 
 /**
@@ -644,13 +643,13 @@ class AudioSyncReader : public AudioStream {
     readBytes((uint8_t *)&header, header_size);
 
     switch (header.rec) {
-      case Begin:
+      case RecordType::Begin:
         audioDataBegin();
         break;
-      case End:
+      case RecordType::End:
         audioDataEnd();
         break;
-      case Send:
+      case RecordType::Send:
         processed = receiveData();
         break;
     }

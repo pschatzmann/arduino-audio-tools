@@ -20,7 +20,7 @@
 
 namespace audio_tools {
 
-enum ContainerType : uint8_t { Header = 1, Audio = 2, Meta = 3, Undefined = 0 };
+enum class ContainerType : uint8_t { Header = 1, Audio = 2, Meta = 3, Undefined = 0 };
 
 struct CommonHeader {
   CommonHeader() = default;
@@ -35,20 +35,20 @@ struct CommonHeader {
 
 struct SimpleContainerConfig {
   SimpleContainerConfig() = default;
-  CommonHeader common{Header, sizeof(AudioInfo)};
+  CommonHeader common{ContainerType::Header, sizeof(AudioInfo)};
   AudioInfo info;
 };
 
 struct SimpleContainerDataHeader {
-  CommonHeader common{Audio, 0};
+  CommonHeader common{ContainerType::Audio, 0};
 };
 
 struct SimpleContainerMetaDataHeader {
-  CommonHeader common{Meta, 0};
+  CommonHeader common{ContainerType::Meta, 0};
 };
 
 struct ProcessedResult {
-  ContainerType type = Undefined;
+  ContainerType type = ContainerType::Undefined;
   // total length incl header
   int total_len = 0;
   // processed bytes incl header of last step
@@ -313,7 +313,7 @@ class BinaryContainerDecoder : public AudioDecoder {
         result.open = result.total_len - len;
       }
       result.type = checkType(header.type);
-      if (result.type != Undefined) {
+      if (result.type != ContainerType::Undefined) {
         LOGD("header.len: %d", header.len);
         if (frame.size() < header.len) {
           frame.resize(header.len);
@@ -323,7 +323,7 @@ class BinaryContainerDecoder : public AudioDecoder {
       }
     } else {
       LOGW("data ignored");
-      result.type = Undefined;
+      result.type = ContainerType::Undefined;
     }
     return result;
   }
@@ -335,7 +335,7 @@ class BinaryContainerDecoder : public AudioDecoder {
     if (result.open == 0 && frame.available() > 0) {
       TRACED();
       switch (result.type) {
-        case Header: {
+        case ContainerType::Header: {
           LOGD("Header");
           // We expect that the header is never split because it is at the
           // start
@@ -351,14 +351,14 @@ class BinaryContainerDecoder : public AudioDecoder {
           rc = true;
         } break;
 
-        case Audio: {
+        case ContainerType::Audio: {
           LOGD("Audio");
           output(frame.data(), frame.available());
           frame.clear();
           rc = true;
         } break;
 
-        case Meta: {
+        case ContainerType::Meta: {
           LOGD("Meta");
           if (meta_callback) {
             meta_callback(frame.data(), frame.available());
@@ -392,7 +392,7 @@ class BinaryContainerDecoder : public AudioDecoder {
       result.processed = len;
     }
     LOGD("in.type: %d, len: %d", in.type, result.processed);
-    if (in.type != Undefined) {
+    if (in.type != ContainerType::Undefined) {
       frame.writeArray(data8, result.processed);
     } else {
       LOGW("Unsupported tye");
@@ -402,16 +402,16 @@ class BinaryContainerDecoder : public AudioDecoder {
 
   // checks the type
   ContainerType checkType(ContainerType type) {
-    ContainerType result = Undefined;
+    ContainerType result = ContainerType::Undefined;
     switch (header.type) {
-      case Header:
-        result = Header;
+      case ContainerType::Header:
+        result = ContainerType::Header;
         break;
-      case Audio:
-        result = Audio;
+      case ContainerType::Audio:
+        result = ContainerType::Audio;
         break;
-      case Meta:
-        result = Meta;
+      case ContainerType::Meta:
+        result = ContainerType::Meta;
         break;
     }
     return result;
