@@ -9,7 +9,7 @@
  * 
  */
 #include "AudioTools.h"
-#include "AudioCodecs/CodecADPCM.h"
+#include "AudioCodecs/CodecADPCM.h" // https://github.com/pschatzmann/adpcm
 #include "AudioLibs/PortAudioStream.h"
 
 AudioInfo info(16000, 2, 16);
