@@ -1,21 +1,11 @@
 #pragma once
+#include "ADPCM.h"  // https://github.com/pschatzmann/adpcm
 #include "AudioCodecs/AudioEncoded.h"
-#include "adpcm-lib.h"  // https://github.com/pschatzmann/arduino-adpcm-xq
 
 namespace audio_tools {
 
-enum class ADPCMNoiseShaping {
-  AD_NOISE_SHAPING_OFF = 0,     // flat noise (no shaping)
-  AD_NOISE_SHAPING_STATIC = 1,  // first-order highpass shaping
-  AD_NOISE_SHAPING_DYNAMIC = 2
-};
-
-#define DEFAULT_NOISE_SHAPING NOISE_SHAPING_OFF
-#define DEFAULT_LOOKAHEAD 0
-#define DEFAULT_BLOCKSIZE_POW2 0
 /**
- * @brief Decoder for ADPCM. Depends on
- * https://github.com/pschatzmann/arduino-adpcm-xq
+ * @brief Decoder for ADPCM. Depends on https://github.com/pschatzmann/adpcm
  * @ingroup codecs
  * @ingroup decoder
  * @author Phil Schatzmann
@@ -23,109 +13,81 @@ enum class ADPCMNoiseShaping {
  */
 class ADPCMDecoder : public AudioDecoder {
  public:
-  ADPCMDecoder() {
+  ADPCMDecoder(AVCodecID id, int blockSize = ADAPCM_DEFAULT_BLOCK_SIZE) {
     info.sample_rate = 44100;
     info.channels = 2;
     info.bits_per_sample = 16;
+    decoder.setCodecID(id);
+    decoder.setBlockSize(blockSize);
   }
-
-  /// set bocksizes as 2^pow: range from 8 to 15
-  void setBlockSizePower(int pow) {
-    if (pow >= 8 && pow >= 15) {
-      block_size_pow2 = pow;
-    }
-  }
-
-  /// Set look ahead bytes from 0 to 8
-  void setLookahead(int value) {
-    if (value <= 8) {
-      lookahead = value;
-    }
-  }
-
-  /// Defines the noise shaping
-  void setNoiseShaping(ADPCMNoiseShaping ns) { noise_shaping = (int)ns; }
 
   void begin() override {
     TRACEI();
     current_byte = 0;
-    if (adpcm_cnxt == nullptr) {
-      adpcm_cnxt = adpcm_create_context(info.channels, lookahead, noise_shaping,
-                                        initial_deltas);
-
-      if (block_size_pow2)
-        block_size = 1 << block_size_pow2;
-      else
-        block_size = 256 * info.channels *
-                     (info.sample_rate < 11000 ? 1 : info.sample_rate / 11000);
-
-      samples_per_block =
-          (block_size - info.channels * 4) * (info.channels ^ 3) + 1;
-
-      pcm_block.resize(samples_per_block * info.channels);
-      adpcm_block.resize(block_size);
-    }
+    decoder.begin(info.sample_rate, info.channels);
+    LOGI("frameSize: %d", (int)decoder.frameSize());
+    assert(decoder.blockSize() != 0);
+    assert(decoder.frameSize() != 0);
+    adpcm_block.resize(decoder.blockSize());
 
     if (p_notify != nullptr) {
       p_notify->setAudioInfo(info);
     }
+    is_started = true;
   }
 
   void end() override {
     TRACEI();
-    if (adpcm_cnxt != nullptr) {
-      adpcm_free_context(adpcm_cnxt);
-      adpcm_cnxt = nullptr;
-    }
-    pcm_block.resize(0);
+    decoder.end();
     adpcm_block.resize(0);
+    is_started = false;
   }
 
   virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
 
-  operator bool() { return adpcm_cnxt != nullptr; }
-
   virtual size_t write(const void *input_buffer, size_t length) {
+    TRACED();
+
     uint8_t *input_buffer8 = (uint8_t *)input_buffer;
     LOGD("write: %d", (int)length);
     for (int j = 0; j < length; j++) {
-      adpcm_block[current_byte++] = input_buffer8[j];
-      if (current_byte == block_size) {
-        decode(current_byte);
-        current_byte = 0;
-      }
+      decode(input_buffer8[j]);
     }
     return length;
   }
 
- protected:
-  int current_byte = 0;
-  void *adpcm_cnxt = nullptr;
-  Vector<int16_t> pcm_block;
-  Vector<uint8_t> adpcm_block;
-  int32_t initial_deltas[2] = {0};
-  Print *p_print = nullptr;
-  int samples_per_block = 0, lookahead = DEFAULT_LOOKAHEAD,
-      noise_shaping = (int)DEFAULT_NOISE_SHAPING,
-      block_size_pow2 = DEFAULT_BLOCKSIZE_POW2, block_size = 0;
+  operator bool() override { return is_started; }
 
-  bool decode(int this_block_adpcm_samples) {
-    int result = adpcm_decode_block(pcm_block.data(), adpcm_block.data(),
-                                    block_size, info.channels);
-    if (result != samples_per_block) {
-      LOGE("adpcm_decode_block: %d instead %d", result,
-           this_block_adpcm_samples);
-      return false;
+ protected:
+  adpcm_ffmpeg::ADPCMDecoder decoder;
+  Vector<uint8_t> adpcm_block;
+  Print *p_print = nullptr;
+  int current_byte = 0;
+  bool is_started = false;
+
+  bool decode(uint8_t byte) {
+    adpcm_block[current_byte++] = byte;
+
+    if (current_byte == decoder.blockSize()) {
+      TRACED();
+      AVFrame &frame = decoder.decode(&adpcm_block[0], decoder.blockSize());
+      // print the result
+      int16_t *data = (int16_t *)frame.data[0];
+      size_t byte_count = frame.nb_samples * sizeof(int16_t); // * info.channels;
+      size_t written = p_print->write((uint8_t *)data, byte_count);
+      if (written != byte_count) {
+        LOGE("encode %d->%d", (int)byte_count, (int)written);
+      }
+
+      // restart from array begin
+      current_byte = 0;
     }
-    int write_size = samples_per_block * info.channels * 2;
-    p_print->write((uint8_t *)pcm_block.data(), write_size);
     return true;
   }
 };
 
 /**
- * @brief Encoder for ADPCM - Depends on
- * https://github.com/pschatzmann/arduino-adpcm-xq
+ * @brief Encoder for ADPCM - Depends on https://github.com/pschatzmann/adpcm
  * @ingroup codecs
  * @ingroup encoder
  * @author Phil Schatzmann
@@ -133,28 +95,13 @@ class ADPCMDecoder : public AudioDecoder {
  */
 class ADPCMEncoder : public AudioEncoder {
  public:
-  ADPCMEncoder() {
+  ADPCMEncoder(AVCodecID id, int blockSize = ADAPCM_DEFAULT_BLOCK_SIZE) {
     info.sample_rate = 44100;
     info.channels = 2;
     info.bits_per_sample = 16;
+    encoder.setCodecID(id);
+    encoder.setBlockSize(blockSize);
   }
-
-  /// set bocksizes as 2^pow: range from 8 to 15
-  void setBlockSizePower(int pow) {
-    if (pow >= 8 && pow >= 15) {
-      block_size_pow2 = pow;
-    }
-  }
-
-  /// Set look ahead bytes from 0 to 8
-  void setLookahead(int value) {
-    if (value <= 8) {
-      lookahead = value;
-    }
-  }
-
-  /// Defines the noise shaping
-  void setNoiseShaping(ADPCMNoiseShaping ns) { noise_shaping = (int)ns; }
 
   void begin(AudioInfo info) {
     setAudioInfo(info);
@@ -163,29 +110,21 @@ class ADPCMEncoder : public AudioEncoder {
 
   void begin() override {
     TRACEI();
-
-    if (block_size_pow2)
-      block_size = 1 << block_size_pow2;
-    else
-      block_size = 256 * info.channels *
-                   (info.sample_rate < 11000 ? 1 : info.sample_rate / 11000);
-
-    samples_per_block =
-        (block_size - info.channels * 4) * (info.channels ^ 3) + 1;
-
-    pcm_block.resize(samples_per_block * info.channels);
-    adpcm_block.resize(block_size);
+    encoder.begin(info.sample_rate, info.channels);
+    LOGI("frameSize: %d", (int)encoder.frameSize());
+    assert(info.sample_rate != 0);
+    assert(encoder.frameSize() != 0);
+    pcm_block.resize(encoder.frameSize() * info.channels);
     current_sample = 0;
+
+    is_started = true;
   }
 
   void end() override {
     TRACEI();
-    if (adpcm_cnxt != nullptr) {
-      adpcm_free_context(adpcm_cnxt);
-      adpcm_cnxt = nullptr;
-    }
     pcm_block.resize(0);
-    adpcm_block.resize(0);
+    encoder.end();
+    is_started = false;
   }
 
   const char *mime() override { return "audio/adpcm"; }
@@ -194,81 +133,41 @@ class ADPCMEncoder : public AudioEncoder {
 
   void setOutput(Print &out_stream) override { p_print = &out_stream; }
 
-  operator bool() { return adpcm_cnxt != nullptr; }
+  operator bool() { return is_started; }
 
   size_t write(const void *in_ptr, size_t in_size) override {
     LOGD("write: %d", (int)in_size);
-    int16_t *input_buffer = (int16_t *)in_ptr;
-    pcm_block_size = samples_per_block * info.channels;
+    int16_t *data16 = (int16_t *)in_ptr;
     for (int j = 0; j < in_size / 2; j++) {
-      pcm_block[current_sample++] = input_buffer[j];
-      if (current_sample == samples_per_block * info.channels) {
-        encode();
-        current_sample = 0;
-      }
+      encode(data16[j]);
     }
     return in_size;
   }
 
  protected:
   AudioInfo info;
-  int current_sample = 0;
-  void *adpcm_cnxt = nullptr;
+  adpcm_ffmpeg::ADPCMEncoder encoder;
   Vector<int16_t> pcm_block;
-  Vector<uint8_t> adpcm_block;
   Print *p_print = nullptr;
-  int samples_per_block = 0, lookahead = DEFAULT_LOOKAHEAD,
-      noise_shaping = (int)DEFAULT_NOISE_SHAPING,
-      block_size_pow2 = DEFAULT_BLOCKSIZE_POW2, block_size = 0, pcm_block_size;
-  bool is_first = true;
+  bool is_started = false;
+  int current_sample = 0;
 
-  bool encode() {
-    // if this is the first block, compute a decaying average (in reverse) so
-    // that we can let the encoder know what kind of initial deltas to expect
-    // (helps initializing index)
-
-    if (adpcm_cnxt == nullptr) {
-      is_first = false;
-      int32_t average_deltas[2];
-
-      average_deltas[0] = average_deltas[1] = 0;
-
-      for (int i = samples_per_block * info.channels; i -= info.channels;) {
-        average_deltas[0] -= average_deltas[0] >> 3;
-        average_deltas[0] +=
-            abs((int32_t)pcm_block[i] - pcm_block[i - info.channels]);
-
-        if (info.channels == 2) {
-          average_deltas[1] -= average_deltas[1] >> 3;
-          average_deltas[1] +=
-              abs((int32_t)pcm_block[i - 1] - pcm_block[i + 1]);
+  bool encode(int16_t sample) {
+    pcm_block[current_sample++] = sample;
+    if (current_sample >= encoder.blockSize()) {
+      TRACED();
+      AVPacket &packet = encoder.encode(&pcm_block[0], encoder.blockSize());
+      if (packet.size > 0) {
+        size_t written = p_print->write(packet.data, packet.size);
+        if (written != packet.size) {
+          LOGE("encode %d->%d", (int)packet.size, (int)written);
         }
       }
-
-      average_deltas[0] >>= 3;
-      average_deltas[1] >>= 3;
-
-      adpcm_cnxt = adpcm_create_context(info.channels, lookahead, noise_shaping,
-                                        average_deltas);
+      // restart from array begin
+      current_sample = 0;
     }
-
-    size_t num_bytes;
-    adpcm_encode_block(adpcm_cnxt, adpcm_block.data(), &num_bytes,
-                       pcm_block.data(), samples_per_block);
-
-    if (num_bytes != block_size) {
-      LOGE(
-          "adpcm_encode_block() did not return expected value "
-          "(expected %d, got %d)!\n",
-          block_size, (int)num_bytes);
-      return false;
-    }
-
-    p_print->write(adpcm_block.data(), block_size);
     return true;
   }
 };
 
 }  // namespace audio_tools
-
-} // namespace audio_tools
