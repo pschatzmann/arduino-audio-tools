@@ -105,9 +105,15 @@ class BinaryContainerEncoder : public AudioEncoder {
 
   /// Adds meta data segment
   size_t writeMeta(const uint8_t *data, size_t len) {
+    LOGD("BinaryContainerEncoder::writeMeta: %d", (int)len);
     meta.common.len = len;
-    output((uint8_t *)&meta, sizeof(meta));
-    output((uint8_t *)&data, len);
+    uint8_t tmp_array[sizeof(meta)+len];
+    //output((uint8_t *)&meta, sizeof(meta));
+    //output((uint8_t *)&data, len);
+    // output in one write
+    memcpy(tmp_array, &meta, sizeof(meta));
+    memcpy(tmp_array+sizeof(meta), data, len);
+    output(tmp_array, sizeof(tmp_array));
     return len;
   }
 
@@ -360,7 +366,7 @@ class BinaryContainerDecoder : public AudioDecoder {
 
         case ContainerType::Meta: {
           LOGD("Meta");
-          if (meta_callback) {
+          if (meta_callback!=nullptr) {
             meta_callback(frame.data(), frame.available());
           }
           frame.clear();
