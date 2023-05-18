@@ -9,7 +9,7 @@
  * 
  */
 #include "AudioTools.h"
-#include "AudioCodecs/CodecADPCM.h"
+#include "AudioCodecs/CodecADPCMXQ.h"
 #include "AudioLibs/AudioKit.h"
 
 AudioInfo info(44100, 2, 16);
@@ -18,8 +18,8 @@ GeneratedSoundStream<int16_t> sound( sineWave); // Stream generated from sine wa
 //AudioKitStream out; 
 //I2SStream out; 
 AudioKitStream out; 
-EncodedAudioStream decoder(&out, new ADPCMDecoder(AV_CODEC_ID_ADPCM_IMA_WAV)); // encode and write
-EncodedAudioStream encoder(&decoder, new ADPCMEncoder(AV_CODEC_ID_ADPCM_IMA_WAV)); // encode and write
+EncodedAudioStream decoder(&out, new ADPCMDecoderXQ()); // encode and write
+EncodedAudioStream encoder(&decoder, new ADPCMEncoderXQ()); // encode and write
 StreamCopy copier(encoder, sound);     
 
 void setup() {
