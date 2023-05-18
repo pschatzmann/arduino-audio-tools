@@ -2,6 +2,7 @@
  * @file test-codec-adpcm.ino
  * @author Phil Schatzmann
  * @brief generate sine wave -> encoder -> decoder -> audiokit (i2s)
+ * Please install the https://github.com/pschatzmann/adpcm library
  * @version 0.1
  * @date 2022-04-30
  * 
@@ -9,7 +10,7 @@
  * 
  */
 #include "AudioTools.h"
-#include "AudioCodecs/CodecADPCM.h"
+#include "AudioCodecs/CodecADPCM.h" // https://github.com/pschatzmann/adpcm
 #include "AudioLibs/AudioKit.h"
 
 AudioInfo info(44100, 2, 16);
