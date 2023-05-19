@@ -23,6 +23,9 @@ struct ConfigEquilizer3Bands : public AudioInfo {
         bits_per_sample = 16;
         sample_rate = 44100;
     }
+    
+    ConfigEquilizer3Bands(const ConfigEquilizer3Bands&) = delete;
+
     // Frequencies
     int freq_low=880;
     int freq_high=5000;
