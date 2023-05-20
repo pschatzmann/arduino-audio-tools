@@ -1,8 +1,6 @@
 #pragma once
 
 #include "AudioCodecs/AudioEncoded.h"
-#include "AudioCodecs/CodecCopy.h"
-#include "AudioCodecs/CodecADPCM.h"
 #include "Video/AudioFormat.h"
 
 
@@ -266,7 +264,7 @@ class WAVHeader {
 
 /**
  * @brief A simple WAVDecoder: We parse the header data on the first record to 
- * determine the format. If no ADPCMDecoder is specified we just write the PCM
+ * determine the format. If no AudioDecoderExt is specified we just write the PCM
  * data to the output that is defined by calling setOutput(). You can define a
  * ADPCM decoder to decode WAV files that contain ADPCM data.
  * @ingroup codecs
@@ -285,12 +283,12 @@ class WAVDecoder : public AudioDecoder {
    * @brief Construct a new WAVDecoder object for ADPCM data
    * 
   */
-  WAVDecoder(ADPCMDecoder &dec, AudioFormat fmt) {
+  WAVDecoder(AudioDecoderExt &dec, AudioFormat fmt) {
     setDecoder(dec, fmt);
   }
 
   /// Defines an optional decoder if the format is not PCM
-  void setDecoder(ADPCMDecoder &dec, AudioFormat fmt)  {
+  void setDecoder(AudioDecoderExt &dec, AudioFormat fmt)  {
     TRACED();
     decoder_format = fmt;
     p_decoder = &dec;
@@ -344,7 +342,7 @@ class WAVDecoder : public AudioDecoder {
   bool isValid = true;
   bool active = false;
   AudioFormat decoder_format = AudioFormat::PCM;
-  ADPCMDecoder *p_decoder = nullptr;
+  AudioDecoderExt *p_decoder = nullptr;
   EncodedAudioOutput dec_out;
 
   Print& out() {
@@ -418,7 +416,7 @@ class WAVDecoder : public AudioDecoder {
 };
 
 /**
- * @brief A simple WAV file encoder. If no ADPCMEncoder is specified the WAV file contains
+ * @brief A simple WAV file encoder. If no AudioEncoderExt is specified the WAV file contains
  * PCM data, otherwise it is encoded as ADPCM. The WAV header is written with the first writing
  * of audio data. Calling begin() is making sure that the header is written again.
  * @ingroup codecs
@@ -436,11 +434,11 @@ class WAVEncoder : public AudioEncoder {
   /**
    * @brief Construct a new WAVEncoder object for ADPCM data
    */
-  WAVEncoder(ADPCMEncoder &enc, AudioFormat fmt) {
+  WAVEncoder(AudioEncoderExt &enc, AudioFormat fmt) {
     setEncoder(enc, fmt);
   };
 
-  void setEncoder(ADPCMEncoder &enc, AudioFormat fmt)  {
+  void setEncoder(AudioEncoderExt &enc, AudioFormat fmt)  {
     TRACED();
     audioInfo.format = fmt;
     p_encoder = &enc;
@@ -453,7 +451,7 @@ class WAVEncoder : public AudioEncoder {
   }
 
   /// Provides "audio/wav"
-  const char *mime() { return wav_mime; }
+  const char *mime() override { return wav_mime; }
 
   // Provides the default configuration
   WAVAudioInfo defaultConfig() {
@@ -554,7 +552,7 @@ class WAVEncoder : public AudioEncoder {
     return result;
   }
 
-  operator bool() { return is_open; }
+  operator bool() override { return is_open; }
 
   bool isOpen() { return is_open; }
 
@@ -564,7 +562,7 @@ class WAVEncoder : public AudioEncoder {
  protected:
   WAVHeader header;
   Print *p_print = nullptr; // final output  CopyEncoder copy; // used for PCM
-  ADPCMEncoder *p_encoder = nullptr; 
+  AudioEncoderExt *p_encoder = nullptr; 
   EncodedAudioOutput enc_out;
   WAVAudioInfo audioInfo = defaultConfig();
   int64_t size_limit = 0;

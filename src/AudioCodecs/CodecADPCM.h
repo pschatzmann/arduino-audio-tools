@@ -11,7 +11,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class ADPCMDecoder : public AudioDecoder {
+class ADPCMDecoder : public AudioDecoderExt {
  public:
   ADPCMDecoder(AVCodecID id, int blockSize = ADAPCM_DEFAULT_BLOCK_SIZE) {
     info.sample_rate = 44100;
@@ -22,7 +22,7 @@ class ADPCMDecoder : public AudioDecoder {
   }
 
   // defines the block size
-  void setBlockSize(int blockSize){
+  void setBlockSize(int blockSize) override {
     decoder.setBlockSize(blockSize);
   }
 
@@ -49,9 +49,9 @@ class ADPCMDecoder : public AudioDecoder {
     is_started = false;
   }
 
-  virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
+  virtual void setOutput(Print &out_stream) override { p_print = &out_stream; }
 
-  virtual size_t write(const void *input_buffer, size_t length) {
+  virtual size_t write(const void *input_buffer, size_t length) override {
     TRACED();
 
     uint8_t *input_buffer8 = (uint8_t *)input_buffer;
@@ -100,7 +100,7 @@ class ADPCMDecoder : public AudioDecoder {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class ADPCMEncoder : public AudioEncoder {
+class ADPCMEncoder : public AudioEncoderExt {
  public:
   ADPCMEncoder(AVCodecID id, int blockSize = ADAPCM_DEFAULT_BLOCK_SIZE) {
     info.sample_rate = 44100;
@@ -111,11 +111,11 @@ class ADPCMEncoder : public AudioEncoder {
   }
 
   /// Provides the block size (only available after calling begin)
-  int blockSize() {
+  int blockSize() override {
     return encoder.blockSize();
   }
 
-  void begin(AudioInfo info) {
+  void begin(AudioInfo info) override {
     setAudioInfo(info);
     begin();
   }
@@ -146,7 +146,7 @@ class ADPCMEncoder : public AudioEncoder {
 
   void setOutput(Print &out_stream) override { p_print = &out_stream; }
 
-  operator bool() { return is_started; }
+  operator bool() override { return is_started; }
 
   size_t write(const void *in_ptr, size_t in_size) override {
     LOGD("write: %d", (int)in_size);
