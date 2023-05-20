@@ -271,9 +271,11 @@ class WavIMAHeader  {
 
 
 /**
- * @brief WavIMADecoder - based on WAVDecoder - We parse the header data as we receive it
+ * @brief Obsolete: WavIMADecoder - based on WAVDecoder - We parse the header data as we receive it
  * and send the sound data to the stream which was indicated in the constructor.
  * Only WAV files with WAVE_FORMAT_IMA_ADPCM are supported by this codec!
+ * 
+ * We recommend using the WAVDecoder with a corresponding ADPCMDecoder instead. 
  * 
  * @ingroup codecs
  * @ingroup decoder

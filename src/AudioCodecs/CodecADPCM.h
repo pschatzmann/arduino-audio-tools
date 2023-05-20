@@ -21,6 +21,11 @@ class ADPCMDecoder : public AudioDecoder {
     decoder.setBlockSize(blockSize);
   }
 
+  // defines the block size
+  void setBlockSize(int blockSize){
+    decoder.setBlockSize(blockSize);
+  }
+
   void begin() override {
     TRACEI();
     current_byte = 0;
@@ -103,6 +108,11 @@ class ADPCMEncoder : public AudioEncoder {
     info.bits_per_sample = 16;
     encoder.setCodecID(id);
     encoder.setBlockSize(blockSize);
+  }
+
+  /// Provides the block size (only available after calling begin)
+  int blockSize() {
+    return encoder.blockSize();
   }
 
   void begin(AudioInfo info) {
