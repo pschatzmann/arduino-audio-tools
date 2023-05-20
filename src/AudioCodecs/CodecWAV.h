@@ -142,13 +142,17 @@ class WAVHeader {
   /// Returns true if the header is complete (with 44 bytes)
   bool isDataComplete() { return len == 44; }
 
-  // provides the AudioInfo
+  /// provides the info from the header
   WAVAudioInfo &audioInfo() { return headerInfo; }
 
-  /// Just write a wav header to the indicated output
-  void writeHeader(Print *out, WAVAudioInfo info) {
-    SingleBuffer<uint8_t> buffer(50);
+  /// Sets the info in the header
+  void setAudioInfo(WAVAudioInfo info){
     headerInfo = info;
+  }
+
+  /// Just write a wav header to the indicated output
+  void writeHeader(Print *out) {
+    SingleBuffer<uint8_t> buffer(50);
     writeRiffHeader(buffer);
     writeFMT(buffer);
     writeDataHeader(buffer);
@@ -520,13 +524,16 @@ class WAVEncoder : public AudioEncoder {
       LOGE("The WAVEncoder is not open - please call begin()");
       return 0;
     }
+    
     if (p_print == nullptr) {
       LOGE("No output stream was provided");
       return 0;
     }
+
     if (!header_written) {
       LOGI("Writing Header");
-      header.writeHeader(p_print, audioInfo);
+      header.setAudioInfo(audioInfo);
+      header.writeHeader(p_print);
       audioInfo.file_size -= 44;
       header_written = true;
     }
