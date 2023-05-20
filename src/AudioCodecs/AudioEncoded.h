@@ -83,6 +83,17 @@ class AudioEncoder : public AudioWriter {
   void setAudioInfo(AudioInfo from) override{};
 };
 
+class AudioDecoderExt : public AudioDecoder {
+  public:
+  virtual void setBlockSize(int blockSize) = 0;
+};
+
+class AudioEncoderExt : public AudioEncoder {
+  public:
+  virtual int blockSize() =0;
+};
+
+
 /**
  * @brief Dummy no implmentation Codec. This is used so that we can initialize
  * some pointers to decoders and encoders to make sure that they do not point to
