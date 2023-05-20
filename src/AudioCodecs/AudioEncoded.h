@@ -23,7 +23,7 @@ class AudioDecoder : public AudioWriter, public AudioInfoSource {
 
   virtual AudioInfo audioInfo() { return info; };
 
-  // for most decoder this is not needed
+  /// for most decoders this is not needed
   virtual void setAudioInfo(AudioInfo from) override {
     TRACED();
     if (info != from) {
@@ -33,22 +33,25 @@ class AudioDecoder : public AudioWriter, public AudioInfoSource {
     }
     info = from;
   }
+  /// Defines where the decoded result is written to
   virtual void setOutput(AudioStream &out_stream) {
     Print *p_print = &out_stream;
     setOutput(*p_print);
     setNotifyAudioChange(out_stream);
   }
 
+  /// Defines where the decoded result is written to
   virtual void setOutput(AudioOutput &out_stream) {
     Print *p_print = &out_stream;
     setOutput(*p_print);
     setNotifyAudioChange(out_stream);
   }
 
+  /// Defines where the decoded result is written to
   virtual void setOutput(Print &out_stream) override {
     p_print = &out_stream;
   }
-  // Th decoding result is PCM data
+  /// If true, the decoding result is PCM data
   virtual bool isResultPCM() { return true; }
 
   /// Registers an object that is notified if the audio format is changing
@@ -74,7 +77,9 @@ class AudioEncoder : public AudioWriter {
   virtual ~AudioEncoder() = default;
   AudioEncoder(AudioEncoder const &) = delete;
   AudioEncoder &operator=(AudioEncoder const &) = delete;
+  /// Provides the mime type of the encoded result
   virtual const char *mime() = 0;
+  /// Defines the sample rate, number of channels and bits per sample 
   void setAudioInfo(AudioInfo from) override{};
 };
 
