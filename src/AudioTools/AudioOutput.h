@@ -295,10 +295,16 @@ using HexDumpStream = HexDumpOutput;
 template <typename T>
 class OutputMixer : public Print {
  public:
+  OutputMixer() = default;
+
   OutputMixer(Print &finalOutput, int outputStreamCount) {
-    p_final_output = &finalOutput;
+    setOutput(finalOutput);
     setOutputCount(outputStreamCount);
-  };
+  }
+
+  void setOutput(Print &finalOutput){
+    p_final_output = &finalOutput;
+  }
 
   void setOutputCount(int count) {
     output_count = count;
