@@ -50,8 +50,7 @@ class WAVHeader {
  public:
   WAVHeader() = default;
 
-  /// Adds data to the 44 byte wav header data buffer, returns the index at
-  /// which the audio starts
+  /// Adds data to the 44 byte wav header data buffer and make it available for parsing
   int write(uint8_t *data, size_t data_len) {
     int write_len = min(data_len, 44 - len);
     memmove(buffer, data + len, write_len);
