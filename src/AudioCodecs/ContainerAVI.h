@@ -2,7 +2,7 @@
 #include <string.h>
 
 #include "AudioBasic/StrExt.h"
-#include "Video/AudioFormat.h"
+#include "AudioCodecs/AudioFormat.h"
 #include "Video/Video.h"
 #include "AudioTools/Buffers.h"
 

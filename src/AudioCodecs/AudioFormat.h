@@ -1,6 +1,6 @@
 /**
  * @file AudioFormat.h
- * @author your name (you@domain.com)
+ * @author Phil Schatzmann
  * @brief WAV Audio Formats used by Microsoft e.g. in AVI video files
  * @version 0.1
  * @date 2023-05-06
