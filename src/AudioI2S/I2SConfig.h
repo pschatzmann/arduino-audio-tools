@@ -86,13 +86,10 @@ class I2SConfig : public AudioInfo {
     int pin_data_rx; // rx pin for RXTX_MODE
     int pin_mck = 0;
     I2SFormat i2s_format = I2S_STD_FORMAT;
+    int buffer_count = I2S_BUFFER_COUNT;
+    int buffer_size = I2S_BUFFER_SIZE;
 
-#if defined(STM32)
-    int buffer_count = I2S_BUFFER_COUNT;
-    int buffer_size = I2S_BUFFER_SIZE;
-#elif defined(ESP32)
-    int buffer_count = I2S_BUFFER_COUNT;
-    int buffer_size = I2S_BUFFER_SIZE;
+#if defined(ESP32)
     I2SSignalType signal_type = Digital;  // e.g. the ESP32 supports analog input or output or PDM picrophones
     bool auto_clear = I2S_AUTO_CLEAR;
     bool use_apll = I2S_USE_APLL; 
