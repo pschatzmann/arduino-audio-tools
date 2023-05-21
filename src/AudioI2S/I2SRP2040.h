@@ -11,8 +11,8 @@
 
 namespace audio_tools {
 
-#if !defined(ARDUINO_ARCH_MBED_RP2040)
-static ::I2S I2S;
+#if !defined(ARDUINO_ARCH_MBED_RP2040)//todo why this if?
+//static ::I2S I2S;
 #endif
 
 
@@ -44,43 +44,73 @@ class I2SDriverRP2040 {
       TRACEI();
       this->cfg = cfg;
       cfg.logInfo();
-      if (cfg.rx_tx_mode != TX_MODE ){
-          LOGE("Unsupported mode: only TX_MODE is supported");
-          return false;
+      switch (cfg.rx_tx_mode){
+      case TX_MODE:
+        i2s = I2S(OUTPUT);
+        break;
+      case RX_MODE:
+        i2s = I2S(INPUT);
+        break;
+      default:
+        LOGE("Unsupported mode: only TX_MODE, RX_MODE is supported");
+        return false;
+        break;
       }
-      if (!I2S.setBCLK(cfg.pin_bck)){
+
+      if (cfg.pin_ws == cfg.pin_bck + 1){ //normal pin order
+        if(!i2s.setBCLK(cfg.pin_bck)){
           LOGE("Could not set bck pin: %d", cfg.pin_bck);
           return false;
-      }
-      if (!I2S.setDATA(cfg.pin_data)){
-          LOGE("Could not set data pin: %d", cfg.pin_data);
+        }
+      } else if(cfg.pin_ws == cfg.pin_bck - 1){ //reverse pin order
+        if (!i2s.swapClocks() || !i2s.setBCLK(cfg.pin_ws)){//setBCLK() actually sets the lower pin of bck/ws
+          LOGE("Could not set bck pin: %d", cfg.pin_bck);
           return false;
+        }
+      } else{
+        LOGE("pins bck: '%d' and ws: '%d' must be next to each other", cfg.pin_bck, cfg.pin_ws);
+        return false;
       }
-      if (cfg.bits_per_sample != 16){
-          LOGE("Unsupported bits_per_sample: %d", cfg.bits_per_sample);
+      if (!i2s.setDATA(cfg.pin_data)){
+        LOGE("Could not set data pin: %d", cfg.pin_data);
+        return false;
+      }
+
+      if (i2s.setBitsPerSample(cfg.bits_per_sample)){
+        LOGE("Could not set bits per sample: %d", cfg.bits_per_sample);
+        return false;
+      }
+
+      if (!i2s.setBuffers(cfg.buffer_count, cfg.buffer_size)){
+        LOGE("Could not set buffers: Count: '%d', size: '%d'", cfg.buffer_count, cfg.buffer_size);
+        return false;
+      }
+
+      if(cfg.i2s_format == I2S_LEFT_JUSTIFIED_FORMAT){//todo is I2S_LEFT_JUSTIFIED_FORMAT even LSBJ?
+        if(!i2s.setLSBJFormat()){
+          LOGE("Could not set LSB Format")
           return false;
+        }
+      } else if(cfg.i2s_format != I2S_STD_FORMAT){
+        LOGE("Unsupported I2S format");
+        return false;
       }
 
       if (cfg.channels < 1 || cfg.channels > 2 ){
-          LOGE("Unsupported channels: '%d' - only 2 is supported", cfg.channels);
-          return false;
+        LOGE("Unsupported channels: '%d' - only 1 or 2 is supported", cfg.channels);
+        return false;
       }
 
-      int rate = cfg.sample_rate; 
-      if (cfg.channels==1){
-        rate = rate /2;
-      } 
-
-      if (!I2S.begin(rate)){
-          LOGE("Could not start I2S");
-          return false;
+      if (!i2s.begin(cfg.sample_rate)){
+        LOGE("Could not start I2S");
+        return false;
       }
       return true;
     }
 
-    /// stops the I2C and unistalls the driver
+    /// stops the I2C and uninstalls the driver
     void end()  {
-      I2S.end();
+      i2s.end();//todo flush before end?
     }
 
     /// provides the actual configuration
@@ -94,7 +124,7 @@ class I2SDriverRP2040 {
       size_t result = 0;
       int16_t *p16 = (int16_t *)src;
       
-      if (cfg.channels==1){
+      if (cfg.channels==1){//TODO Mono->Stereo that works with all bits per sample
         int samples = size_bytes/2;
         // multiply 1 channel into 2
         int16_t buffer[samples*2]; // from 1 byte to 2 bytes
@@ -102,9 +132,9 @@ class I2SDriverRP2040 {
           buffer[j*2]= p16[j];
           buffer[j*2+1]= p16[j];
         } 
-        result = I2S.write((const uint8_t*)buffer, size_bytes*2)*2;
+        result = i2s.write((const uint8_t*)buffer, size_bytes*2)/2;
       } else if (cfg.channels==2){
-        result = I2S.write((const uint8_t*)src, size_bytes)*4;
+        result = i2s.write((const uint8_t*)src, size_bytes);//TODO ensure that size_bytes is always multiple of 4
       } 
       return result;
     }
@@ -116,20 +146,12 @@ class I2SDriverRP2040 {
     }
 
     int availableForWrite()  {
-      int result = 0;
+        //availableForWrite() returns amount of 32-bit words NOT amount of Bytes! *4 to get bytes
       if (cfg.channels == 1){
-        // it should be a multiple of 2
-        result = I2S.availableForWrite()/2*2;
-        // return half of it because we double when writing
-        result = result / 2;
+        return i2s.availableForWrite()*4/2;// return half of it because we double when writing
       } else {
-        // it should be a multiple of 4
-        result = I2S.availableForWrite()/4*4;
+        return i2s.availableForWrite()*4;
       } 
-      if (result<4){
-        result = 0;
-      }
-      return result;
     }
 
     int available()  {
@@ -137,33 +159,12 @@ class I2SDriverRP2040 {
     }
 
     void flush()   {
-      return I2S.flush();
+      return i2s.flush();
     }
 
   protected:
     I2SConfig cfg;
-
-    // blocking write
-    void writeSample(int16_t sample){
-        int written = I2S.write(sample);
-        while (!written) {
-          delay(5);
-          LOGW("written: %d ", written);
-          written = I2S.write(sample);
-        }
-    }
-
-    int writeSamples(int samples, int16_t* values){
-        int result=0;
-        for (int j=0;j<samples;j++){
-          int16_t sample = values[j];
-          writeSample(sample);
-          writeSample(sample);
-          result++;
-        }
-        return result;
-    }
-    
+    I2S i2s;
 };
 
 using I2SDriver = I2SDriverRP2040;
