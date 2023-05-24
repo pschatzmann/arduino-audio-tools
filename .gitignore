@@ -225,8 +225,7 @@ pip-log.txt
 # Jupyter
 .ipynb_checkpoints/
 jupyter/*.wav
-src/.DS_Store
-src/.DS_Store
+.DS_Store
 
 # doxygen
 docs/html/
