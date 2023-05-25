@@ -42,7 +42,7 @@ class I2SDriverSTM32 {
       deleteBuffers();
 
       if (cfg.bits_per_sample!=16){
-        LOGE("Bits per second not supported: %d", cfg.bits_per_sample);
+        LOGE("Bits per sample not supported: %d", cfg.bits_per_sample);
         return false;
       }
       if (cfg.channels>2 || cfg.channels<=0){
