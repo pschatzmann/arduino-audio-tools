@@ -86,15 +86,24 @@ class I2SConfig : public AudioInfo {
     int pin_data_rx; // rx pin for RXTX_MODE
     int pin_mck = 0;
     I2SFormat i2s_format = I2S_STD_FORMAT;
+
+#if defined(STM32)
     int buffer_count = I2S_BUFFER_COUNT;
     int buffer_size = I2S_BUFFER_SIZE;
-
-#if defined(ESP32)
+#elif defined(ESP32)
+    int buffer_count = I2S_BUFFER_COUNT;
+    int buffer_size = I2S_BUFFER_SIZE;
     I2SSignalType signal_type = Digital;  // e.g. the ESP32 supports analog input or output or PDM picrophones
     bool auto_clear = I2S_AUTO_CLEAR;
     bool use_apll = I2S_USE_APLL; 
     uint32_t fixed_mclk = 0; 
 
+#if ESP_IDF_VERSION_MAJOR >= 4 
+    int pin_mck = -1;
+#endif
+#elif defined(ARDUINO_ARCH_RP2040)//todo correct define?
+    int buffer_count = I2S_BUFFER_COUNT;
+    int buffer_size = I2S_BUFFER_SIZE;
 #endif
 
     void logInfo() {
@@ -116,6 +125,10 @@ class I2SConfig : public AudioInfo {
       LOGI("buffer_count:%d",buffer_count);
       LOGI("buffer_size:%d",buffer_size);
 
+#endif
+#ifdef ARDUINO_ARCH_RP2040
+      LOGI("buffer_count:%d",buffer_count);
+      LOGI("buffer_size:%d",buffer_size);
 #endif
       if (pin_mck!=-1)
         LOGI("pin_mck: %d", pin_mck);

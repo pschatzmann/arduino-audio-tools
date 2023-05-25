@@ -76,7 +76,7 @@ class I2SDriverRP2040 {
         return false;
       }
 
-      if (i2s.setBitsPerSample(cfg.bits_per_sample)){
+      if (!i2s.setBitsPerSample(cfg.bits_per_sample)){
         LOGE("Could not set bits per sample: %d", cfg.bits_per_sample);
         return false;
       }
@@ -124,17 +124,11 @@ class I2SDriverRP2040 {
       size_t result = 0;
       int16_t *p16 = (int16_t *)src;
       
-      if (cfg.channels==1){//TODO Mono->Stereo that works with all bits per sample
-        int samples = size_bytes/2;
-        // multiply 1 channel into 2
-        int16_t buffer[samples*2]; // from 1 byte to 2 bytes
-        for (int j=0;j<samples;j++){
-          buffer[j*2]= p16[j];
-          buffer[j*2+1]= p16[j];
-        } 
-        result = i2s.write((const uint8_t*)buffer, size_bytes*2)/2;
+      if (cfg.channels==1){
+        result = writeExpandChannel(src,size_bytes);
       } else if (cfg.channels==2){
-        result = i2s.write((const uint8_t*)src, size_bytes);//TODO ensure that size_bytes is always multiple of 4
+        size_bytes = size_bytes /4*4;//ensures that size_bytes is always multiple of 4. Just don't write the rest, if it isn't
+        result = i2s.write((uint8_t*) src, size_bytes);
       } 
       return result;
     }
@@ -146,7 +140,7 @@ class I2SDriverRP2040 {
     }
 
     int availableForWrite()  {
-        //availableForWrite() returns amount of 32-bit words NOT amount of Bytes! *4 to get bytes
+      //availableForWrite() returns amount of 32-bit words NOT amount of Bytes! *4 to get bytes
       if (cfg.channels == 1){
         return i2s.availableForWrite()*4/2;// return half of it because we double when writing
       } else {
@@ -165,6 +159,69 @@ class I2SDriverRP2040 {
   protected:
     I2SConfig cfg;
     I2S i2s;
+
+    //writes 1 channel to I2S while expanding it to 2 channels
+    //writes multiple of 4 bytes like I2S::write() wants
+    //returns amount of bytes written from src to i2s
+    size_t writeExpandChannel(const void *src, size_t size_bytes){
+      size_t writtenBytes = 0;
+
+      switch(cfg.bits_per_sample){
+        case 8:
+        for(int i = 0; i<size_bytes - 1; i += 2){//2 Samples read at a time to write 4 bytes
+          int8_t frame[4];
+          int8_t *data = (int8_t*) src;
+          frame[0] = data[i];
+          frame[1] = data[i];
+          frame[2] = data[i+1];//i<size_bytes-1 in for() because of this +1
+          frame[3] = data[i+1];
+          size_t justWritten = i2s.write((uint8_t*)frame,4);
+          if(!justWritten){//write() only writes/returns multiples of 4. Either it writes 0 or 4. 
+            return writtenBytes;
+          } else {
+            //half because we doubled the bytes before writing to get 2 channels from 1
+            writtenBytes += justWritten / 2;
+          }
+        }
+        break;
+        case 16:
+        for(int i = 0; i<size_bytes/sizeof(int16_t); i++){//1 sample written at a time to write 4 bytes
+          int16_t frame[2];
+          int16_t *data = (int16_t *) src;
+          frame[0] = data[i];
+          frame[1] = data[i];
+          size_t justWritten = i2s.write((uint8_t*)frame, 4);//todo or use write(uint32_t,false) instead?
+          if(!justWritten){//write() only writes/returns multiples of 4. Either it writes 0 or 4.
+            return writtenBytes;
+          } else{
+            //half because we doubled the bytes before writing to get 2 channels from 1
+            writtenBytes += justWritten /2;
+          }
+        }
+        break;
+        case 24://24bps are already stored as left-aligned int32_t => handle just like 32bps
+        case 32:
+        for(int i = 0; i<size_bytes/sizeof(int32_t); i++){//1 sample written at a time to write 2*4 bytes
+          int32_t frame[2];
+          int32_t *data = (int32_t *) src;
+          frame[0] = data[i];
+          frame[1] = data[i];
+          size_t justWritten = i2s.write((uint8_t*) frame, 8);
+          if(justWritten != 8){//because we write 8 bytes, write() might return 0,4,8
+            writtenBytes += justWritten /2;
+            return writtenBytes;
+          } else {
+            //half because we doubled the bytes before writing to get 2 channels from 1
+            writtenBytes += justWritten /2;
+          }
+
+        }
+        break;
+      }
+      //mono=>stereo = doubling of bytes. We return here how many bytes from src were written
+      return writtenBytes;
+
+    }
 };
 
 using I2SDriver = I2SDriverRP2040;
