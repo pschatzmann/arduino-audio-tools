@@ -5,6 +5,10 @@
 #include "AudioI2S/I2SConfig.h"
 #include "AudioTools/AudioActions.h"
 
+#ifndef AUDIOKIT_V1
+#error Upgrade the AudioKit library
+#endif
+
 namespace audio_tools {
 
 class AudioKitStream;
@@ -21,67 +25,68 @@ class AudioKitStreamConfig : public I2SConfig {
 friend class AudioKitStream;
 
  public:
-  AudioKitStreamConfig() = default;
+  AudioKitStreamConfig() { setupI2SPins(); };
   // set adc channel with audio_hal_adc_input_t
   audio_hal_adc_input_t input_device = AUDIOKIT_DEFAULT_INPUT;
   // set dac channel 
   audio_hal_dac_output_t output_device = AUDIOKIT_DEFAULT_OUTPUT;
-  int masterclock_pin = 0;
   bool sd_active = true;
   bool default_actions_active = true;
+  audio_kit_pins pins;
+  audio_hal_func_t driver = AUDIO_DRIVER;
 
   /// convert to config object needed by HAL
   AudioKitConfig toAudioKitConfig() {
     TRACED();
-    AudioKitConfig result;
-    result.i2s_num = (i2s_port_t)port_no;
-    result.mclk_gpio = (gpio_num_t)masterclock_pin;
-    result.adc_input = input_device;
-    result.dac_output = output_device;
-    result.codec_mode = toCodecMode();
-    result.master_slave_mode = toMode();
-    result.fmt = toFormat();
-    result.sample_rate = toSampleRate();
-    result.bits_per_sample = toBits();
+    audiokit_config.driver = driver;
+    audiokit_config.pins = pins;
+    audiokit_config.i2s_num = (i2s_port_t)port_no;
+    audiokit_config.adc_input = input_device;
+    audiokit_config.dac_output = output_device;
+    audiokit_config.codec_mode = toCodecMode();
+    audiokit_config.master_slave_mode = toMode();
+    audiokit_config.fmt = toFormat();
+    audiokit_config.sample_rate = toSampleRate();
+    audiokit_config.bits_per_sample = toBits();
 #if defined(ESP32)
-    result.buffer_size = buffer_size;
-    result.buffer_count = buffer_count;
+    audiokit_config.buffer_size = buffer_size;
+    audiokit_config.buffer_count = buffer_count;
 #endif
     // we use the AudioKit library only to set up the codec
-    result.i2s_active = false;
+    audiokit_config.i2s_active = false;
 #if AUDIOKIT_SETUP_SD
-    result.sd_active = sd_active;
+    audiokit_config.sd_active = sd_active;
 #else
 //  SD has been deactivated in the AudioKitConfig.h file
-    result.sd_active = false;
+    audiokit_config.sd_active = false;
 #endif  
     LOGW("sd_active = %s", sd_active ? "true" : "false" );
 
-    return result;
+    return audiokit_config;
   }
 
-  /// Defines the pins based on the information provided by the AudioKit project
-  void setupPins() {
-    TRACED();
-    i2s_pin_config_t pins;
-    get_i2s_pins((i2s_port_t)port_no, &pins);
-    pin_bck = pins.bck_io_num;
-    pin_ws = pins.ws_io_num;
-    if (rx_tx_mode == RX_MODE){
-      pin_data = pins.data_in_num;
-      pin_data_rx = I2S_PIN_NO_CHANGE;
-    } else {
-      pin_data = pins.data_out_num;
-      pin_data_rx = pins.data_in_num;      
-    }
-#if defined(ESP32)
-#  if ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(4, 4, 0)                 
-    pin_mck = 0;
-#  endif
-#endif
-  };
 
  protected:
+  AudioKitConfig audiokit_config;
+  board_driver board;
+
+  /// Defines the pins based on the information provided by the AudioKit project
+  void setupI2SPins() {
+    TRACED();
+    i2s_pin_config_t i2s_pins;
+    board.setup(pins);
+    board.get_i2s_pins((i2s_port_t)port_no, &i2s_pins);
+    pin_bck = i2s_pins.bck_io_num;
+    pin_ws = i2s_pins.ws_io_num;
+    if (rx_tx_mode == RX_MODE){
+      pin_data = i2s_pins.data_in_num;
+      pin_data_rx = I2S_PIN_NO_CHANGE;
+    } else {
+      pin_data = i2s_pins.data_out_num;
+      pin_data_rx = i2s_pins.data_in_num;      
+    }
+  };
+
   // convert to audio_hal_iface_samples_t
   audio_hal_iface_bits_t toBits() {
     TRACED();
@@ -194,17 +199,19 @@ class AudioKitStream : public AudioStream {
   /// Starts the processing
   bool begin(AudioKitStreamConfig config) {
     TRACED();
-    AudioStream::setAudioInfo(config);
     cfg = config;
+
+    AudioStream::setAudioInfo(config);
     cfg.logInfo();
+
     // start codec
-    if (!kit.begin(cfg.toAudioKitConfig())){
+    auto kit_cfg = cfg.toAudioKitConfig();
+    if (!kit.begin(kit_cfg)){
       LOGE("begin faild: please verify your AUDIOKIT_BOARD setting: %d", AUDIOKIT_BOARD);
       stop();
     }
 
     // start i2s
-    cfg.setupPins();
     i2s_stream.begin(cfg);
 
     // Volume control and headphone detection
@@ -280,7 +287,7 @@ class AudioKitStream : public AudioStream {
     }
   }
 
-  AudioKitStreamConfig config() { return cfg; }
+  AudioKitStreamConfig &config() { return cfg; }
 
   /// Sets the codec active / inactive
   bool setActive(bool active) { return kit.setActive(active); }
