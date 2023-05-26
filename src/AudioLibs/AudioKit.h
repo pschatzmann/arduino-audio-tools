@@ -5,6 +5,10 @@
 #include "AudioI2S/I2SConfig.h"
 #include "AudioTools/AudioActions.h"
 
+#ifndef AUDIOKIT_V1
+#error Upgrade the AudioKit library
+#endif
+
 namespace audio_tools {
 
 class AudioKitStream;
