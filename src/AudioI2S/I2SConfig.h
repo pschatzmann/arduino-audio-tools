@@ -84,6 +84,7 @@ class I2SConfig : public AudioInfo {
     int pin_bck = PIN_I2S_BCK;
     int pin_data; // rx or tx pin dependent on mode: tx pin for RXTX_MODE
     int pin_data_rx; // rx pin for RXTX_MODE
+    int pin_mck = 0;
     I2SFormat i2s_format = I2S_STD_FORMAT;
 
 #if defined(STM32)
@@ -97,9 +98,6 @@ class I2SConfig : public AudioInfo {
     bool use_apll = I2S_USE_APLL; 
     uint32_t fixed_mclk = 0; 
 
-#if ESP_IDF_VERSION_MAJOR >= 4 
-    int pin_mck = -1;
-#endif
 #endif
 
     void logInfo() {
@@ -122,6 +120,8 @@ class I2SConfig : public AudioInfo {
       LOGI("buffer_size:%d",buffer_size);
 
 #endif
+      if (pin_mck!=-1)
+        LOGI("pin_mck: %d", pin_mck);
       if (pin_bck!=-1)
         LOGI("pin_bck: %d", pin_bck);
       if (pin_ws!=-1)
