@@ -98,9 +98,6 @@ class I2SConfig : public AudioInfo {
     bool use_apll = I2S_USE_APLL; 
     uint32_t fixed_mclk = 0; 
 
-#if ESP_IDF_VERSION_MAJOR >= 4 
-    int pin_mck = -1;
-#endif
 #elif defined(ARDUINO_ARCH_RP2040)//todo correct define?
     int buffer_count = I2S_BUFFER_COUNT;
     int buffer_size = I2S_BUFFER_SIZE;
