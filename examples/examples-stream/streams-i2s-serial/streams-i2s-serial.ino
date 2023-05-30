@@ -32,7 +32,7 @@ void setup(void) {
     i2sStream.begin(cfg);
 
     // make sure that we have the correct channels set up
-    csvStream.begin(cfg);
+    csvStream.begin(cfg, true); // Arduino Serial Plotter autorange enabled
 
 }
 

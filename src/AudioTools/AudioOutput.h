@@ -88,6 +88,7 @@ class AudioOutput : public Print,
  * @ingroup io
  * @tparam T
  * @author Phil Schatzmann
+ * @author mgesteiro
  * @copyright GPLv3
  */
 template <typename T>
@@ -106,9 +107,10 @@ class CsvOutput : public AudioOutput {
   }
 
   /// Starts the processing with 2 channels
-  bool begin() {
+  bool begin(bool autorange = false) {
     TRACED();
     this->active = true;
+    this->autorange = autorange;
     return true;
   }
 
@@ -124,18 +126,20 @@ class CsvOutput : public AudioOutput {
   }
 
   /// Starts the processing with the number of channels defined in AudioInfo
-  bool begin(AudioInfo info) {
+  bool begin(AudioInfo info, bool autorange = false) {
     TRACED();
     cfg = info;
     this->active = true;
+    this->autorange = autorange;
     return cfg.channels != 0;
   }
 
   /// Starts the processing with the defined number of channels
-  void begin(int channels, Print &out = Serial) {
+  void begin(int channels, Print &out = Serial, bool autorange = false) {
     TRACED();
     this->out_ptr = &out;
     this->active = true;
+    this->autorange = autorange;
     cfg.channels = channels;
   }
 
@@ -164,18 +168,28 @@ class CsvOutput : public AudioOutput {
     if (lenChannels > 0) {
       writeFrames((T *)data, lenChannels);
     } else if (len == sizeof(T)) {
-      // if the write contains less then a frame we buffer the data
+      // if the write contains less than a frame we buffer the data
       T *data_value = (T *)data;
+      if (autorange) {
+        if (data_value[0] < range_min) range_min = data_value[0];
+        if (data_value[0] > range_max) range_max = data_value[0];
+      }
       out_ptr->print(data_value[0]);
       channel++;
       if (channel == cfg.channels) {
+        if (this->autorange) {
+          out_ptr->print(",");
+          out_ptr->print(this->range_min);
+          out_ptr->print(",");
+          out_ptr->print(this->range_max);
+        }
         out_ptr->println();
         channel = 0;
       } else {
-        out_ptr->print(", ");
+        out_ptr->print(",");
       }
     } else {
-      LOGE("Unsuppoted size: %d for channels %d and bits: %d", (int)len,
+      LOGE("Unsupported size: %d for %d channels and %d bits", (int)len,
            cfg.channels, cfg.bits_per_sample);
     }
     return len;
@@ -188,16 +202,28 @@ class CsvOutput : public AudioOutput {
   Print *out_ptr = &Serial;
   int channel = 0;
   bool active = false;
+  bool autorange = false;
+  T range_max = 0, range_min = 0;
 
   void writeFrames(T *data_ptr, int frameCount) {
     for (size_t j = 0; j < frameCount; j++) {
       for (int ch = 0; ch < cfg.channels; ch++) {
         if (out_ptr != nullptr && data_ptr != nullptr) {
-          int value = *data_ptr;
+          T value = *data_ptr; // fixing downcasting error!
+          if (autorange) {
+            if (value < range_min) range_min = value;
+            if (value > range_max) range_max = value;
+          }
           out_ptr->print(value);
         }
         data_ptr++;
-        if (ch < cfg.channels - 1) out_ptr->print(", ");
+        if (ch < cfg.channels - 1) out_ptr->print(",");
+      }
+      if (autorange) {
+        out_ptr->print(",");
+        out_ptr->print(this->range_min);
+        out_ptr->print(",");
+        out_ptr->print(this->range_max);
       }
       out_ptr->println();
     }
