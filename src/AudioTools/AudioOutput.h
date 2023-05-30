@@ -197,9 +197,9 @@ class CsvOutput : public AudioOutput {
           out_ptr->print(value);
         }
         data_ptr++;
-        if (ch < cfg.channels - 1) Serial.print(", ");
+        if (ch < cfg.channels - 1) out_ptr->print(", ");
       }
-      Serial.println();
+      out_ptr->println();
     }
   }
 };
@@ -248,7 +248,7 @@ class HexDumpOutput : public AudioOutput {
   }
 
   void flush() {
-    Serial.println();
+    out_ptr->println();
     pos = 0;
   }
 
@@ -260,10 +260,10 @@ class HexDumpOutput : public AudioOutput {
       out_ptr->print(" ");
       pos++;
       if (pos == 8) {
-        Serial.print(" - ");
+        out_ptr->print(" - ");
       }
       if (pos == 16) {
-        Serial.println();
+        out_ptr->println();
         pos = 0;
       }
     }
