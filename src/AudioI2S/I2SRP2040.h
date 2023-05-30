@@ -128,7 +128,7 @@ class I2SDriverRP2040 {
         result = writeExpandChannel(src,size_bytes);
       } else if (cfg.channels==2){
         size_bytes = size_bytes /4*4;//ensures that size_bytes is always multiple of 4. Just don't write the rest, if it isn't
-        result = i2s.write((uint8_t*) src, size_bytes);
+        result = i2s.write((uint8_t*) src, size_bytes);//NOT Blocking
       } 
       return result;
     }
@@ -175,12 +175,12 @@ class I2SDriverRP2040 {
           frame[1] = data[i];
           frame[2] = data[i+1];//i<size_bytes-1 in for() because of this +1
           frame[3] = data[i+1];
-          size_t justWritten = i2s.write((uint8_t*)frame,4);
-          if(!justWritten){//write() only writes/returns multiples of 4. Either it writes 0 or 4. 
+          size_t justWritten = i2s.write(*(uint32_t*)frame, true);//blocking
+          if(!justWritten){//write() only returns true or false. 
             return writtenBytes;
           } else {
             //half because we doubled the bytes before writing to get 2 channels from 1
-            writtenBytes += justWritten / 2;
+            writtenBytes += 2;
           }
         }
         break;
@@ -190,15 +190,15 @@ class I2SDriverRP2040 {
           int16_t *data = (int16_t *) src;
           frame[0] = data[i];
           frame[1] = data[i];
-          size_t justWritten = i2s.write((uint8_t*)frame, 4);//todo or use write(uint32_t,false) instead?
-          if(!justWritten){//write() only writes/returns multiples of 4. Either it writes 0 or 4.
+          size_t justWritten = i2s.write(*(uint32_t*)frame, true);//blocking
+          if(!justWritten){//write() only returns true or false. 
             return writtenBytes;
           } else{
             //half because we doubled the bytes before writing to get 2 channels from 1
-            writtenBytes += justWritten /2;
+            writtenBytes += 2;
           }
         }
-        break;
+        break;//TODO 24 and 32 BPS DO NOT HAVE the "make I2SRP2040-write blocking" workaround! Only for testing!
         case 24://24bps are already stored as left-aligned int32_t => handle just like 32bps
         case 32:
         for(int i = 0; i<size_bytes/sizeof(int32_t); i++){//1 sample written at a time to write 2*4 bytes
