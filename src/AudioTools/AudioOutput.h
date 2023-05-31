@@ -105,6 +105,16 @@ class CsvOutput : public AudioOutput {
     cfg.channels = channels;
   }
 
+  /// Defines an alternative (column) delimiter. The default is ,
+  void setDelimiter(const char* del){
+    delimiter_str = del;
+  }
+
+  /// Provides the current column delimiter
+  const char* delimiter() {
+    return delimiter_str;
+  }
+
   /// Starts the processing with 2 channels
   bool begin() {
     TRACED();
@@ -172,10 +182,10 @@ class CsvOutput : public AudioOutput {
         out_ptr->println();
         channel = 0;
       } else {
-        out_ptr->print(", ");
+        out_ptr->print(delimiter_str);
       }
     } else {
-      LOGE("Unsuppoted size: %d for channels %d and bits: %d", (int)len,
+      LOGE("Unsupported size: %d for channels %d and bits: %d", (int)len,
            cfg.channels, cfg.bits_per_sample);
     }
     return len;
@@ -188,6 +198,7 @@ class CsvOutput : public AudioOutput {
   Print *out_ptr = &Serial;
   int channel = 0;
   bool active = false;
+  const char* delimiter_str = ",";
 
   void writeFrames(T *data_ptr, int frameCount) {
     for (size_t j = 0; j < frameCount; j++) {
@@ -197,9 +208,9 @@ class CsvOutput : public AudioOutput {
           out_ptr->print(value);
         }
         data_ptr++;
-        if (ch < cfg.channels - 1) Serial.print(", ");
+        if (ch < cfg.channels - 1) this->out_ptr->print(",");
       }
-      Serial.println();
+      this->out_ptr->println();
     }
   }
 };
