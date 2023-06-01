@@ -21,7 +21,7 @@ namespace audio_tools {
 class AudioOutput : public Print,
                     public AudioInfoSupport,
                     public AudioInfoSource {
- public:
+public:
   virtual ~AudioOutput() = default;
 
   virtual size_t write(const uint8_t *buffer, size_t size) override = 0;
@@ -74,7 +74,7 @@ class AudioOutput : public Print,
   virtual bool begin() { return true; }
   virtual void end() {}
 
- protected:
+protected:
   int tmpPos = 0;
   AudioInfoSupport *p_notify = nullptr;
   AudioInfo cfg;
@@ -90,9 +90,8 @@ class AudioOutput : public Print,
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-template <typename T>
-class CsvOutput : public AudioOutput {
- public:
+template <typename T> class CsvOutput : public AudioOutput {
+public:
   CsvOutput(int buffer_size = DEFAULT_BUFFER_SIZE, bool active = true) {
     this->active = active;
   }
@@ -106,14 +105,10 @@ class CsvOutput : public AudioOutput {
   }
 
   /// Defines an alternative (column) delimiter. The default is ,
-  void setDelimiter(const char* del){
-    delimiter_str = del;
-  }
+  void setDelimiter(const char *del) { delimiter_str = del; }
 
   /// Provides the current column delimiter
-  const char* delimiter() {
-    return delimiter_str;
-  }
+  const char *delimiter() { return delimiter_str; }
 
   /// Starts the processing with 2 channels
   bool begin() {
@@ -164,7 +159,8 @@ class CsvOutput : public AudioOutput {
 
   /// Writes the data - formatted as CSV -  to the output stream
   virtual size_t write(const uint8_t *data, size_t len) {
-    if (!active) return 0;
+    if (!active)
+      return 0;
     LOGD("CsvOutput::write: %d", (int)len);
     if (cfg.channels == 0) {
       LOGW("Channels not defined: using 2");
@@ -193,12 +189,12 @@ class CsvOutput : public AudioOutput {
 
   int availableForWrite() { return 1024; }
 
- protected:
+protected:
   T *data_ptr;
   Print *out_ptr = &Serial;
   int channel = 0;
   bool active = false;
-  const char* delimiter_str = ",";
+  const char *delimiter_str = ",";
 
   void writeFrames(T *data_ptr, int frameCount) {
     for (size_t j = 0; j < frameCount; j++) {
@@ -208,7 +204,8 @@ class CsvOutput : public AudioOutput {
           out_ptr->print(value);
         }
         data_ptr++;
-        if (ch < cfg.channels - 1) this->out_ptr->print(",");
+        if (ch < cfg.channels - 1)
+          this->out_ptr->print(",");
       }
       this->out_ptr->println();
     }
@@ -216,8 +213,7 @@ class CsvOutput : public AudioOutput {
 };
 
 // legacy name
-template <typename T>
-using CsvStream = CsvOutput<T>;
+template <typename T> using CsvStream = CsvOutput<T>;
 
 /**
  * @brief Creates a Hex Dump
@@ -226,7 +222,7 @@ using CsvStream = CsvOutput<T>;
  * @copyright GPLv3
  */
 class HexDumpOutput : public AudioOutput {
- public:
+public:
   HexDumpOutput(int buffer_size = DEFAULT_BUFFER_SIZE, bool active = true) {
     this->active = active;
   }
@@ -264,7 +260,8 @@ class HexDumpOutput : public AudioOutput {
   }
 
   virtual size_t write(const uint8_t *data, size_t len) {
-    if (!active) return 0;
+    if (!active)
+      return 0;
     TRACED();
     for (size_t j = 0; j < len; j++) {
       out_ptr->print(data[j], HEX);
@@ -287,7 +284,7 @@ class HexDumpOutput : public AudioOutput {
     return info;
   }
 
- protected:
+protected:
   Print *out_ptr = &Serial;
   int pos = 0;
   bool active = false;
@@ -303,9 +300,8 @@ using HexDumpStream = HexDumpOutput;
  * @copyright GPLv3
  * @tparam T
  */
-template <typename T>
-class OutputMixer : public Print {
- public:
+template <typename T> class OutputMixer : public Print {
+public:
   OutputMixer() = default;
 
   OutputMixer(Print &finalOutput, int outputStreamCount) {
@@ -313,9 +309,7 @@ class OutputMixer : public Print {
     setOutputCount(outputStreamCount);
   }
 
-  void setOutput(Print &finalOutput){
-    p_final_output = &finalOutput;
-  }
+  void setOutput(Print &finalOutput) { p_final_output = &finalOutput; }
 
   void setOutputCount(int count) {
     output_count = count;
@@ -385,10 +379,9 @@ class OutputMixer : public Print {
     assert(p_buffer != nullptr);
     size_t samples = bytes / sizeof(T);
     if (p_buffer->availableForWrite() < samples) {
-      LOGW(
-          "Available Buffer too small %d: requested: %d -> increase the "
-          "buffer size",
-          p_buffer->availableForWrite(), samples);
+      LOGW("Available Buffer too small %d: requested: %d -> increase the "
+           "buffer size",
+           p_buffer->availableForWrite(), samples);
     } else {
       result = p_buffer->writeArray((T *)buffer_c, samples) * sizeof(T);
     }
@@ -403,7 +396,8 @@ class OutputMixer : public Print {
   /// Provides the bytes available to write for the indicated stream index
   int availableForWrite(int idx) {
     RingBuffer<T> *p_buffer = buffers[idx];
-    if (p_buffer == nullptr) return 0;
+    if (p_buffer == nullptr)
+      return 0;
     return p_buffer->availableForWrite();
   }
 
@@ -439,7 +433,7 @@ class OutputMixer : public Print {
     return;
   }
 
- protected:
+protected:
   Vector<RingBuffer<T> *> buffers{0};
   Vector<T> output{0};
   Vector<float> weights{0};
@@ -507,7 +501,7 @@ class OutputMixer : public Print {
  * @copyright GPLv3
  */
 class VolumeOutput : public AudioOutput {
- public:
+public:
   bool begin(AudioInfo info) {
     setAudioInfo(info);
     return true;
@@ -524,18 +518,18 @@ class VolumeOutput : public AudioOutput {
   size_t write(const uint8_t *buffer, size_t size) {
     clear();
     switch (info.bits_per_sample) {
-      case 16:
-        updateVolumes<int16_t>(buffer, size);
-        break;
-      case 24:
-        updateVolumes<int24_t>(buffer, size);
-        break;
-      case 32:
-        updateVolumes<int32_t>(buffer, size);
-        break;
-      default:
-        LOGE("Unsupported bits_per_sample: %d", info.bits_per_sample);
-        break;
+    case 16:
+      updateVolumes<int16_t>(buffer, size);
+      break;
+    case 24:
+      updateVolumes<int24_t>(buffer, size);
+      break;
+    case 32:
+      updateVolumes<int32_t>(buffer, size);
+      break;
+    default:
+      LOGE("Unsupported bits_per_sample: %d", info.bits_per_sample);
+      break;
     }
     return size;
   }
@@ -566,15 +560,14 @@ class VolumeOutput : public AudioOutput {
     }
   }
 
- protected:
+protected:
   AudioInfo info;
   float f_volume_tmp = 0;
   float f_volume = 0;
   Vector<float> volumes{0};
   Vector<float> volumes_tmp{0};
 
-  template <typename T>
-  void updateVolumes(const uint8_t *buffer, size_t size) {
+  template <typename T> void updateVolumes(const uint8_t *buffer, size_t size) {
     T *bufferT = (T *)buffer;
     int samplesCount = size / sizeof(T);
     for (int j = 0; j < samplesCount; j++) {
@@ -609,7 +602,7 @@ using VolumePrint = VolumeOutput;
  * @ingroup io
  */
 class MemoryOutput : public AudioOutput {
- public:
+public:
   MemoryOutput(uint8_t *start, int len) {
     p_start = start;
     p_next = start;
@@ -620,7 +613,8 @@ class MemoryOutput : public AudioOutput {
   }
 
   size_t write(const uint8_t *buffer, size_t len) override {
-    if (p_next == nullptr) return 0;
+    if (p_next == nullptr)
+      return 0;
     if (pos + len <= max_size) {
       memcpy(p_next, buffer, len);
       pos += len;
@@ -636,7 +630,7 @@ class MemoryOutput : public AudioOutput {
 
   int size() { return max_size; }
 
- protected:
+protected:
   int pos = 0;
   uint8_t *p_start = nullptr;
   uint8_t *p_next = nullptr;
@@ -655,7 +649,7 @@ using MemoryPrint = MemoryOutput;
  * @copyright GPLv3
  */
 class OnOffOutput : public AudioOutput {
- public:
+public:
   OnOffOutput() = default;
   OnOffOutput(Print &out) { setOutput(out); }
 
@@ -677,7 +671,8 @@ class OnOffOutput : public AudioOutput {
   bool isActive() { return is_active; }
 
   size_t write(const uint8_t *buffer, size_t len) override {
-    if (p_output == nullptr) return 0;
+    if (p_output == nullptr)
+      return 0;
     size_t result = len;
     if (is_active) {
       len = p_output->write(buffer, len);
@@ -685,9 +680,62 @@ class OnOffOutput : public AudioOutput {
     return len;
   }
 
- protected:
+protected:
   Print *p_output = nullptr;
   bool is_active = true;
 };
 
-}  // namespace audio_tools
+/**
+ * @brief Simple functionality to extract mono streams from a multichannel (e.g. stereo)
+ * signal.
+ * @ingroup transform
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ * @tparam T
+ */
+template <typename T> 
+class ChannelSplitOutput : public AudioOutput {
+public:
+  ChannelSplitOutput() = default;
+
+  ChannelSplitOutput(int channel, Print &out) { addOutput(channel, out); }
+
+  /// Define the channel to be sent to the specified output. 0: first (=left) channel, 1: second (=right) channel
+  void addOutput(int channel, Print &out) {
+    ChannelSelectionOutputDef def;
+    def.channel = channel;
+    def.p_out = &out;
+    out_chanels.push_back(def);
+  }
+
+  virtual size_t write(const uint8_t *buffer, size_t size) override {
+    int sample_count = size / sizeof(T);
+    int result_size = sample_count / cfg.channels;
+    T *data = (T *)buffer;
+    T result[result_size];
+
+    for (int ch = 0; ch < out_chanels.size(); ch++) {
+      ChannelSelectionOutputDef &def = out_chanels[ch]; 
+      // extract mono result
+      int i = 0;
+      for (int j = def.channel; j < sample_count; j += cfg.channels) {
+        result[i++] = data[j];
+      }
+      // write mono result 
+      size_t written = def.p_out->write((uint8_t *)result, result_size * sizeof(T));
+      if (written!=result_size * sizeof(T)){
+        LOGW("Could not write all samples");
+      }
+    }
+    return size;
+  }
+
+protected:
+  struct ChannelSelectionOutputDef {
+    Print *p_out = nullptr;
+    int channel;
+  };
+  Vector<ChannelSelectionOutputDef> out_chanels;
+};
+
+} // namespace audio_tools
