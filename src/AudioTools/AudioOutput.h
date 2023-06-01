@@ -71,14 +71,22 @@ public:
     }
   }
 
-  virtual bool begin() { return true; }
-  virtual void end() {}
+  virtual bool begin(AudioInfo info){
+    setAudioInfo(info);
+    return begin();
+  }
+
+  virtual bool begin() { is_active = true; return true; }
+  virtual void end() { is_active = false;}
+  operator bool() {return is_active;}
+
 
 protected:
   int tmpPos = 0;
   AudioInfoSupport *p_notify = nullptr;
   AudioInfo cfg;
   SingleBuffer<uint8_t> tmp{MAX_SINGLE_CHARS};
+  bool is_active = false;
 };
 
 /**
@@ -93,14 +101,14 @@ protected:
 template <typename T> class CsvOutput : public AudioOutput {
 public:
   CsvOutput(int buffer_size = DEFAULT_BUFFER_SIZE, bool active = true) {
-    this->active = active;
+    this->is_active = active;
   }
 
   /// Constructor
   CsvOutput(Print &out, int channels = 2, int buffer_size = DEFAULT_BUFFER_SIZE,
             bool active = true) {
     this->out_ptr = &out;
-    this->active = active;
+    this->is_active = active;
     cfg.channels = channels;
   }
 
@@ -110,12 +118,6 @@ public:
   /// Provides the current column delimiter
   const char *delimiter() { return delimiter_str; }
 
-  /// Starts the processing with 2 channels
-  bool begin() {
-    TRACED();
-    this->active = true;
-    return true;
-  }
 
   AudioInfo defaultConfig(RxTxMode mode) { return defaultConfig(); }
 
@@ -128,14 +130,6 @@ public:
     return info;
   }
 
-  /// Starts the processing with the number of channels defined in AudioInfo
-  bool begin(AudioInfo info) {
-    TRACED();
-    cfg = info;
-    this->active = true;
-    return cfg.channels != 0;
-  }
-
   /// Starts the processing with the defined number of channels
   void begin(int channels, Print &out = Serial) {
     TRACED();
@@ -144,11 +138,6 @@ public:
     cfg.channels = channels;
   }
 
-  /// Sets the CsvOutput as inactive
-  void end() {
-    TRACED();
-    active = false;
-  }
 
   /// defines the number of channels
   virtual void setAudioInfo(AudioInfo info) {
@@ -159,7 +148,7 @@ public:
 
   /// Writes the data - formatted as CSV -  to the output stream
   virtual size_t write(const uint8_t *data, size_t len) {
-    if (!active)
+    if (!is_active)
       return 0;
     LOGD("CsvOutput::write: %d", (int)len);
     if (cfg.channels == 0) {
@@ -193,7 +182,6 @@ protected:
   T *data_ptr;
   Print *out_ptr = &Serial;
   int channel = 0;
-  bool active = false;
   const char *delimiter_str = ",";
 
   void writeFrames(T *data_ptr, int frameCount) {
@@ -224,35 +212,23 @@ template <typename T> using CsvStream = CsvOutput<T>;
 class HexDumpOutput : public AudioOutput {
 public:
   HexDumpOutput(int buffer_size = DEFAULT_BUFFER_SIZE, bool active = true) {
-    this->active = active;
+    this->is_active = active;
   }
 
   /// Constructor
   HexDumpOutput(Print &out, int buffer_size = DEFAULT_BUFFER_SIZE,
                 bool active = true) {
     this->out_ptr = &out;
-    this->active = active;
-  }
-
-  void begin(AudioInfo info) {
-    TRACED();
-    info.logInfo();
-    this->active = true;
-    pos = 0;
+    this->is_active = active;
   }
 
   bool begin() {
     TRACED();
-    this->active = true;
+    this->is_active = true;
     pos = 0;
-    return active;
+    return is_active;
   }
 
-  /// Sets the CsvOutput as inactive
-  void end() {
-    TRACED();
-    active = false;
-  }
 
   void flush() {
     Serial.println();
@@ -260,7 +236,7 @@ public:
   }
 
   virtual size_t write(const uint8_t *data, size_t len) {
-    if (!active)
+    if (!is_active)
       return 0;
     TRACED();
     for (size_t j = 0; j < len; j++) {
@@ -287,7 +263,6 @@ public:
 protected:
   Print *out_ptr = &Serial;
   int pos = 0;
-  bool active = false;
 };
 
 // legacy name
@@ -502,10 +477,6 @@ protected:
  */
 class VolumeOutput : public AudioOutput {
 public:
-  bool begin(AudioInfo info) {
-    setAudioInfo(info);
-    return true;
-  }
 
   void setAudioInfo(AudioInfo info) {
     this->info = info;
@@ -682,7 +653,6 @@ public:
 
 protected:
   Print *p_output = nullptr;
-  bool is_active = true;
 };
 
 /**
