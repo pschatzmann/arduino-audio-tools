@@ -180,7 +180,7 @@ class StreamCopyT {
             return total;
         }
 
-        /// Copies audio for the indicated number of millis: note that the resolution is determined by the buffer_size
+        /// Copies audio for the indicated number of milliseconds: note that the resolution is determined by the buffer_size
         size_t copyMs(size_t millis, AudioInfo info){
             size_t samples = info.sample_rate * millis / 1000;
             size_t bytes = samples * info.channels * info.bits_per_sample / 8;
