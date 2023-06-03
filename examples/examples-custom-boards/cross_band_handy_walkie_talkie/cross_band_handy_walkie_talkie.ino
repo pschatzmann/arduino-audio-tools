@@ -38,8 +38,8 @@ void setup(void) {
   config.pin_mclk = 47
   config.pin_bck = 21;
   config.pin_ws = 12;
-  config.pin_data = 11;
-  config.pin_data_in = 14;
+  config.pin_data = 14;
+  config.pin_data_in = 11;
 
   //config.sd_active = false;
   config.pins.sd_cs = 2;
