@@ -171,6 +171,13 @@ class AudioTime {
             return result;
         }
 
+        /// converts milliseconds to bytes
+        static uint32_t toBytes(uint32_t millis, AudioInfo info){
+            size_t samples = info.sample_rate * millis / 1000;
+            size_t bytes = samples * info.channels * info.bits_per_sample / 8;
+            return bytes;
+        }
+
         static uint32_t toTimeMs(uint32_t samplingRate, uint8_t limit=1){
             uint32_t result = 1000l / samplingRate;
             if (1000000l % samplingRate!=0){

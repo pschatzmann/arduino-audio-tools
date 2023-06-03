@@ -182,9 +182,7 @@ class StreamCopyT {
 
         /// Copies audio for the indicated number of milliseconds: note that the resolution is determined by the buffer_size
         size_t copyMs(size_t millis, AudioInfo info){
-            size_t samples = info.sample_rate * millis / 1000;
-            size_t bytes = samples * info.channels * info.bits_per_sample / 8;
-            size_t pages = bytes / buffer_size;
+            size_t pages = AudioTime::toBytes(millis, info) / buffer_size;
             return copyN(pages);
         }
 
