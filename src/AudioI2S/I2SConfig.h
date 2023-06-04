@@ -100,7 +100,7 @@ class I2SConfig : public AudioInfo {
 #if ESP_IDF_VERSION_MAJOR >= 4 
     int pin_mck = -1;
 #endif
-#elif defined(ARDUINO_ARCH_RP2040)//todo correct define?
+#elif defined(ARDUINO_ARCH_RP2040)
     int buffer_count = I2S_BUFFER_COUNT;
     int buffer_size = I2S_BUFFER_SIZE;
 #endif
