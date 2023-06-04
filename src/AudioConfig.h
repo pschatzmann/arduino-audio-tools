@@ -201,6 +201,7 @@
 #define PIN_I2S_WS 15
 #define PIN_I2S_DATA_IN 32
 #define PIN_I2S_DATA_OUT 22
+#define PIN_I2S_MCK -1
 #define I2S_USE_APLL true  
 // Default Setting: The mute pin can be switched actovated by setting it to a gpio (e.g 23). Or you could drive the LED by assigning LED_BUILTIN
 #define PIN_I2S_MUTE -1
@@ -260,6 +261,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 
 #define PWM_FREQENCY 30000
 #define PIN_PWM_START 1
+#define PIN_I2S_MCK -1
 #define PIN_I2S_BCK 6
 #define PIN_I2S_WS 7
 #define PIN_I2S_DATA_OUT 8
