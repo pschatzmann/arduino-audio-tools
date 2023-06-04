@@ -34,11 +34,6 @@ class VolumeStream : public AudioStream {
         /// Default Constructor
         VolumeStream() = default;
 
-        /// Destructor
-        ~VolumeStream() {
-            cleanup();
-        };
-
         /// Constructor which assigns Print output
         VolumeStream(Print &out) {
             setTarget(out);
@@ -190,6 +185,7 @@ class VolumeStream : public AudioStream {
               float volume_value = volumeValue(vol);
               LOGI("setVolume: %f", volume_value);
               float factor = volumeControl().getVolumeFactor(volume_value);
+              volume_values[channel]=volume_value;
               factor_for_channel[channel]=factor;
             } else {
               LOGE("Invalid channel %d - max: %d", channel, info.channels-1);
@@ -198,7 +194,7 @@ class VolumeStream : public AudioStream {
 
         /// Provides the current volume setting
         float volume() {
-            return volume_values[0];
+            return volume_values.size()==0? 0: volume_values[0];
         }
 
         /// Provides the current volume setting for the indicated channel
@@ -213,35 +209,18 @@ class VolumeStream : public AudioStream {
         LinearVolumeControl linear_vc{true};
         SimulatedAudioPot pot_vc;
         CachedVolumeControl cached_volume{pot_vc};
-        float *volume_values = nullptr;
-        float *factor_for_channel = nullptr;
+        Vector<float> volume_values;
+        Vector<float> factor_for_channel;
         bool is_active = false;
         float max_value = 32767; // max value for clipping
         int max_channels=0;
 
         void setup(float vol) {
             is_active = vol!=1.0f;
-            if (info.channels>max_channels){
-              cleanup();
-            }
-            if (factor_for_channel==nullptr){
-              factor_for_channel = new float[info.channels];
-            }
-            if (volume_values==nullptr){
-              volume_values = new float[info.channels];
-            }
+            factor_for_channel.resize(info.channels);
+            volume_values.resize(info.channels);
         }
 
-        void cleanup() {
-          if (factor_for_channel!=nullptr) {
-            delete []factor_for_channel;
-            factor_for_channel = nullptr;
-          } 
-          if (volume_values!=nullptr) {
-            delete []volume_values;
-            volume_values = nullptr;
-          }
-        }
 
         float volumeValue(float vol){
             if (!info.allow_boost && vol>1.0f) vol = 1.0;
@@ -258,7 +237,7 @@ class VolumeStream : public AudioStream {
         }
 
         float factorForChannel(int channel){
-            return factor_for_channel==nullptr ? 1.0 : factor_for_channel[channel];
+            return factor_for_channel.size()==0? 1.0 : factor_for_channel[channel];
         }
 
         void applyVolume(const uint8_t *buffer, size_t size){
