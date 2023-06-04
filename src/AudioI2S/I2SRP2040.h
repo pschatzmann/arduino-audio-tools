@@ -44,11 +44,11 @@ class I2SDriverRP2040 {
       case TX_MODE:
         i2s = I2S(OUTPUT);
         break;
-      case RX_MODE:
-        i2s = I2S(INPUT);
-        break;
+      //case RX_MODE:
+      //  i2s = I2S(INPUT);
+      //  break;
       default:
-        LOGE("Unsupported mode: only TX_MODE, RX_MODE are supported");
+        LOGE("Unsupported mode: only TX_MODE is supported");
         return false;
         break;
       }
