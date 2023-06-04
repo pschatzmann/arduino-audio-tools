@@ -12,8 +12,7 @@
 #include "AudioLibs/AudioA2DP.h"
 
 const char* name = "LEXON MINO L";                         // Replace with your device name
-uint16_t sample_rate=44100;
-uint8_t channels = 2;                                     // The stream will have 2 channels 
+AudioInfo info(44100, 2, 16);
 SineWaveGenerator<int16_t> sineWave(32000);               // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> in(sineWave);               // Stream generated from sine wave
 A2DPStream out;                                           // A2DP output
@@ -29,8 +28,7 @@ void setup(void) {
 
   // Setup sine wave
   auto cfg = in.defaultConfig();
-  cfg.channels = channels;
-  cfg.sample_rate = sample_rate;
+  cfg.copyFrom(info);
   in.setNotifyAudioChange(out);
   in.begin(cfg);
 

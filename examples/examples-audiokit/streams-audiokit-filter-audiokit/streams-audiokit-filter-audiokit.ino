@@ -8,8 +8,7 @@
 #include "AudioTools.h"
 #include "AudioLibs/AudioKit.h"
  
-uint16_t sample_rate=44100;
-uint16_t channels = 2;
+AudioInfo info(44100, 2, 16);
 AudioKitStream kit;
 
 // copy filtered values
@@ -33,8 +32,7 @@ void setup(void) {
   // start I2S in
   Serial.println("starting KIT...");
   auto config = kit.defaultConfig(RXTX_MODE);
-  config.sample_rate = sample_rate; 
-  config.channels = channels;
+  config.copyFrom(info); 
   config.sd_active = false;
   config.input_device = AUDIO_HAL_ADC_INPUT_LINE2;
   kit.begin(config);

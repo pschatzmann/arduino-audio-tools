@@ -5,9 +5,7 @@ AudioKissFFT fft; // or AudioKissFFT
 SineWaveGenerator<int16_t> sineWave(32000);
 GeneratedSoundStream<int16_t> in(sineWave);
 StreamCopy copier(fft, in);
-uint16_t sample_rate = 44100;
-int bits_per_sample = 16;
-int channels = 1;
+AudioInfo info(44100, 1, 16);
 float value = 0;
 
 // display fft result
@@ -37,13 +35,12 @@ void setup() {
 
   // Setup sine wave
   auto cfg = in.defaultConfig();
-  cfg.channels = channels;
-  cfg.sample_rate = sample_rate;
+  cfg.copyFrom(info);
   in.begin(cfg);
 
   // Setup FFT
   auto tcfg = fft.defaultConfig();
-  tcfg.copyFrom(cfg);
+  tcfg.copyFrom(info);
   tcfg.length = 4096;
   tcfg.callback = &fftResult;
   fft.begin(tcfg);

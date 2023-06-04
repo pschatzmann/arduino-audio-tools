@@ -9,8 +9,7 @@
 #include "AudioTools.h"
 
 typedef int16_t sound_t;                                   // sound will be represented as int16_t (with 2 bytes)
-uint16_t sample_rate=44100;
-uint8_t channels = 2;                                      // The stream will have 2 channels 
+AudioInfo info(44100, 2, 16);
 SineWaveGenerator<sound_t> sineWave(32000);                // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<sound_t> sound(sineWave);             // Stream generated from sine wave
 AnalogAudioStream out; 
@@ -24,11 +23,11 @@ void setup(void) {
 
   // start the analog output
   auto config = out.defaultConfig(TX_MODE);
-  config.sample_rate = sample_rate; 
+  config.copyFrom(info); 
   out.begin(config);
 
   // Setup sine wave
-  sineWave.begin(channels, sample_rate, N_B4);
+  sineWave.begin(info, N_B4);
   Serial.println("started...");
 }
 

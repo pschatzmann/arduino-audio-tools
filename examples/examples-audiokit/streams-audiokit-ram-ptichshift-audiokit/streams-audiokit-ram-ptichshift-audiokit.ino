@@ -14,8 +14,7 @@
 #include "AudioLibs/AudioKit.h"
 #include "AudioLibs/MemoryManager.h"
 
-uint16_t sample_rate = 16000;
-uint8_t channels = 1;  // We use one channel only to simplify the processing 
+AudioInfo info(16000, 1, 16);
 MemoryManager memory(500); // Activate SPI RAM for objects > 500 bytes
 AudioKitStream kit;
 //use one of VariableSpeedRingBufferSimple, VariableSpeedRingBuffer, VariableSpeedRingBuffer180 
@@ -50,8 +49,7 @@ void setup(){
   // setup input and output
   auto cfg = kit.defaultConfig(RXTX_MODE);
   cfg.sd_active = true;
-  cfg.sample_rate = sample_rate;
-  cfg.channels = channels;
+  cfg.copyFrom(info);
   cfg.input_device = AUDIO_HAL_ADC_INPUT_LINE2;
   kit.begin(cfg);
   kit.setVolume(1.0);
@@ -60,7 +58,7 @@ void setup(){
   auto cfg_pc = pitch_shift.defaultConfig();
   cfg_pc.pitch_shift = 2; // one octave up
   cfg_pc.buffer_size = 1000;
-  cfg_pc.copyFrom(cfg);
+  cfg_pc.copyFrom(info);
   pitch_shift.begin(cfg_pc);
 
   // record when key 1 is pressed
