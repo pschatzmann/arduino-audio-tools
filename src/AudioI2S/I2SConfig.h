@@ -2,7 +2,13 @@
 #include "AudioConfig.h"
 #ifdef USE_I2S
 
+#ifndef PIN_I2S_MCK
+#  define PIN_I2S_MCK -1
+#endif
+
 namespace audio_tools {
+
+
 
 /**
  * @brief I2S Formats
@@ -84,7 +90,7 @@ class I2SConfig : public AudioInfo {
     int pin_bck = PIN_I2S_BCK;
     int pin_data; // rx or tx pin dependent on mode: tx pin for RXTX_MODE
     int pin_data_rx; // rx pin for RXTX_MODE
-    int pin_mck = 0;
+    int pin_mck = PIN_I2S_MCK;
     I2SFormat i2s_format = I2S_STD_FORMAT;
 
 #if defined(STM32)
