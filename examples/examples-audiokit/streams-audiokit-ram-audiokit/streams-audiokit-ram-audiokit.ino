@@ -13,8 +13,7 @@
 #include "AudioLibs/AudioKit.h"
 #include "AudioLibs/MemoryManager.h"
 
-uint16_t sample_rate = 16000;
-uint8_t channels = 1;  // The stream will have 2 channels 
+AudioInfo info(16000, 1, 16);
 AudioKitStream kit;
 MemoryManager memory(500); // Activate SPI RAM for objects > 500 bytes
 DynamicMemoryStream recording(true); // Audio stored on heap 
@@ -46,8 +45,7 @@ void setup(){
   // setup input and output
   auto cfg = kit.defaultConfig(RXTX_MODE);
   cfg.sd_active = true;
-  cfg.sample_rate = sample_rate;
-  cfg.channels = channels;
+  cfg.copyFrom(info);
   cfg.input_device = AUDIO_HAL_ADC_INPUT_LINE2;
   kit.begin(cfg);
   kit.setVolume(1.0);

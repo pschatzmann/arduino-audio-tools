@@ -11,8 +11,7 @@
 #include "AudioTools.h"
 #include "AudioLibs/Communication.h"
 
-uint16_t sample_rate = 8000;
-uint8_t channels = 1;  // The stream will have 2 channels
+AudioInfo info(8000, 1, 16);
 ESPNowStream now;
 MeasuringStream now1(now);
 
@@ -32,9 +31,7 @@ void setup() {
   // start I2S
   Serial.println("starting I2S...");
   auto config = out.defaultConfig(TX_MODE);
-  config.sample_rate = sample_rate; 
-  config.channels = channels;
-  config.bits_per_sample = 16;
+  config.copyFrom(info); 
   out.begin(config);
 
   Serial.println("Receiver started...");

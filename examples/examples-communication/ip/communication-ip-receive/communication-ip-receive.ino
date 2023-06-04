@@ -11,9 +11,8 @@
 #include "AudioTools.h"
 #include <WiFi.h>
 
-uint16_t sample_rate = 16000;
+AudioInfo info(16000, 1, 16);
 uint16_t port = 8000;
-uint8_t channels = 1;  // The stream will have 2 channels
 WiFiServer server(port);
 WiFiClient client; 
 I2SStream out; 
@@ -48,9 +47,7 @@ void setup() {
   // start I2S
   Serial.println("starting I2S...");
   auto config = out.defaultConfig(TX_MODE);
-  config.sample_rate = sample_rate; 
-  config.channels = channels;
-  config.bits_per_sample = 16;
+  config.copyFrom(info); 
   config.buffer_size = 512;
   config.buffer_count = 6;
   out.begin(config);

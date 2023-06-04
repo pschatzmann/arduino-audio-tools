@@ -11,9 +11,8 @@
 #include "AudioTools.h"
 #include <WiFi.h>
 
-uint16_t sample_rate = 16000;
+AudioInfo info(16000, 1, 16);
 uint16_t port = 8000;
-uint8_t channels = 1;  // The stream will have 2 channels
 WiFiServer server(port);
 WiFiClient client; 
 MeasuringStream out;

@@ -9,7 +9,7 @@
 
 #include "AudioTools.h"
 
-const uint16_t sample_rate = 44100;
+AudioInfo info(44100, 2, 16);
 AnalogAudioStream in; 
 I2SStream out;                        
 StreamCopy copier(out, in); // copy in to out
@@ -22,13 +22,13 @@ void setup(void) {
 
   // RX automatically uses port 0 with pin GPIO34
   auto cfgRx = in.defaultConfig(RX_MODE);
-  cfgRx.sample_rate = sample_rate;
+  cfgRx.copyFrom(info);
   in.begin(cfgRx);
  
   // TX on I2S_NUM_1 
   auto cfgTx = out.defaultConfig(TX_MODE);
   cfgTx.port_no = 1;
-  cfgTx.sample_rate = sample_rate;
+  cfgTx.copyFrom(info);
   out.begin(cfgTx);
 }
 

@@ -9,8 +9,7 @@
 #include "AudioTools.h"
 
 //Pins pins = {22, 23};
-int channels = 1;
-uint16_t sample_rate=8000;
+AudioInfo info(8000, 1, 16);
 SineWaveGenerator<int16_t> sineWave(32000); // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound(sineWave);  // Stream generated from sine wave
 PWMAudioOutput pwm;                  
@@ -22,11 +21,11 @@ void setup() {
   AudioLogger::instance().begin(Serial, AudioLogger::Warning);  
 
   // setup sine wave
-  sineWave.begin(channels, sample_rate, N_B4);
+  sineWave.begin(info, N_B4);
 
   // setup PWM output
   auto config = pwm.defaultConfig();
-  config.sample_rate = sample_rate;
+  config.copyFrom(info);
   //config.resolution = 8;  // must be between 8 and 11 -> drives pwm frequency (8 is default)
   // alternative 1
   //config.channels = 2;  // not necesarry because 2 is default
