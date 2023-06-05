@@ -6,8 +6,11 @@
 #  define PIN_I2S_MCK -1
 #endif
 
-namespace audio_tools {
+#ifdef ESP32
+#  include "driver/i2s.h"
+#endif
 
+namespace audio_tools {
 
 
 /**
@@ -97,6 +100,7 @@ class I2SConfig : public AudioInfo {
     int buffer_count = I2S_BUFFER_COUNT;
     int buffer_size = I2S_BUFFER_SIZE;
 #elif defined(ESP32)
+    int channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT;
     int buffer_count = I2S_BUFFER_COUNT;
     int buffer_size = I2S_BUFFER_SIZE;
     I2SSignalType signal_type = Digital;  // e.g. the ESP32 supports analog input or output or PDM picrophones
