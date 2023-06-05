@@ -21,6 +21,16 @@ class File : public Stream {
     File(const char* fn) {
         open(fn, FILE_READ);
     }
+
+    File(File &file){
+        open(file.name(), FILE_READ);
+    }
+
+    File& operator =(File file){
+        open(file.name(), FILE_READ);
+        return *this;
+    }
+
     
     void open(const char* name, FileMode mode){
         file_path = name;
@@ -40,9 +50,9 @@ class File : public Stream {
         }
     }
     
-    virtual void begin(){
+    virtual bool begin(){
         // move to beginning
-        seek(0);
+        return seek(0);
     }
 
     virtual void end() {
@@ -159,6 +169,10 @@ class File : public Stream {
 
     void close() {
         stream.close();
+    }
+
+    const char* name() {
+        return file_path;
     }
 
   protected:

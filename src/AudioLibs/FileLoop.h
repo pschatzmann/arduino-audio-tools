@@ -1,8 +1,12 @@
 #pragma once
 
 #include "AudioTools/AudioStreams.h"
-#include "FS.h"
-
+#ifdef ARDUINO
+#  include "FS.h"
+#  define READTYPE char
+#else 
+#  define READTYPE uint8_t
+#endif
 namespace audio_tools {
 
 /**
@@ -76,8 +80,8 @@ public:
     return isLoopActive() ? DEFAULT_BUFFER_SIZE : current_file.available();
   }
 
-  size_t readBytes(uint8_t *data, size_t len) {
-    LOGD("FileLoopT::readBytes %d at %d", len, current_file.position());
+  size_t readBytes(uint8_t *data, size_t len) override {
+    LOGD("FileLoopT::readBytes %d at %d", (int)len, (int)current_file.position());
     if (!current_file)
       return 0;
     
@@ -88,7 +92,7 @@ public:
     }
 
     // read step 1;
-    int result1 = current_file.readBytes((char *)data, copy_len);
+    int result1 = current_file.readBytes((READTYPE *)data, copy_len);
     int result2 = 0;
     int open = copy_len - result1;
     if (isLoopActive() && open>0) {
@@ -99,7 +103,7 @@ public:
       if (callback!=nullptr){
         callback(*this);
       }
-      result1 = current_file.readBytes((char *)data + result1, open);
+      result1 = current_file.readBytes((READTYPE*)data + result1, open);
       if (loop_count>0)
         loop_count--;
     }
