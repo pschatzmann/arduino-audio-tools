@@ -85,7 +85,7 @@ class I2SDriverESP32 {
       TRACED();
 
       size_t result = 0;   
-      if (cfg.channels==2){
+      if (isNoChannelConversion(cfg)){
         if (i2s_write(i2s_num, src, size_bytes, &result, portMAX_DELAY)!=ESP_OK){
           TRACEE();
         }
@@ -98,7 +98,7 @@ class I2SDriverESP32 {
 
     size_t readBytes(void *dest, size_t size_bytes){
       size_t result = 0;
-      if (cfg.channels==2){
+      if (isNoChannelConversion(cfg)){
         if (i2s_read(i2s_num, dest, size_bytes, &result, portMAX_DELAY)!=ESP_OK){
           TRACEE();
         }
@@ -138,6 +138,13 @@ class I2SDriverESP32 {
     i2s_config_t i2s_config;
     bool is_started = false;
 
+    bool isNoChannelConversion(I2SConfig cfg) {
+      if (cfg.channels==2) return true;
+      if (cfg.channels==1 && cfg.channel_format == I2S_CHANNEL_FMT_ONLY_RIGHT) return true;
+      if (cfg.channels==1 && cfg.channel_format == I2S_CHANNEL_FMT_ONLY_LEFT) return true;
+      return false;
+    }
+
     /// starts the DAC 
     bool begin(I2SConfig cfg, int txPin, int rxPin) {
       TRACED();
@@ -150,7 +157,7 @@ class I2SDriverESP32 {
             .mode = toMode(cfg),
             .sample_rate = (eps32_i2s_sample_rate_type)cfg.sample_rate,
             .bits_per_sample = (i2s_bits_per_sample_t) cfg.bits_per_sample,
-            .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,
+            .channel_format = (i2s_channel_fmt_t) cfg.channel_format,
             .communication_format = toCommFormat(cfg.i2s_format),
             .intr_alloc_flags = 0, // default interrupt priority
             .dma_buf_count = cfg.buffer_count,
