@@ -131,11 +131,17 @@ public:
   }
 
   /// Starts the processing with the defined number of channels
-  void begin(int channels, Print &out = Serial) {
+  bool begin(AudioInfo info, Print &out = Serial) {
+    return begin(info.channels, out);
+  }
+
+  /// Starts the processing with the defined number of channels
+  bool begin(int channels, Print &out = Serial) {
     TRACED();
     this->out_ptr = &out;
-    this->active = true;
+    this->is_active = true;
     cfg.channels = channels;
+    return true;
   }
 
 
