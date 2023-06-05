@@ -143,11 +143,10 @@ class I2SDriverRP2040 {
     }
 
     int availableForWrite()  {
-      //availableForWrite() returns amount of 32-bit words NOT amount of Bytes! *4 to get bytes
       if (cfg.channels == 1){
-        return i2s.availableForWrite()*4/2;// return half of it because we double when writing
+        return i2s.availableForWrite()/2;// return half of it because we double when writing
       } else {
-        return i2s.availableForWrite()*4;
+        return i2s.availableForWrite();
       } 
     }
 
