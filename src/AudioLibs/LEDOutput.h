@@ -162,7 +162,7 @@ public:
       if (idx >= magnitudes.size()) {
         idx = magnitudes.size() - 1;
       }
-      total = magnitudes[idx];
+      total += magnitudes[idx];
     }
     return total / cfg.fft_group_bin;
   }
