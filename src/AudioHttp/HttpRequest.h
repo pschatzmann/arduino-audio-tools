@@ -76,39 +76,44 @@ class HttpRequest {
             }
         }
 
+        /// http post
         virtual int post(Url &url, const char* mime, const char *data, int len=-1){
             LOGI("post %s", url.url());
             return process(POST, url, mime, data, len);
         }
 
+        /// http post
         virtual int post(Url &url, const char* mime, Stream &data, int len=-1){
             LOGI("post %s", url.url());
-            p_post_stream = &data;
-            return process(POST, url, mime, nullptr, len);
+            return process(POST, url, mime, data);
         }
 
+        /// http put
         virtual int put(Url &url, const char* mime, const char *data, int len=-1){
             LOGI("put %s", url.url());
             return process(PUT, url, mime, data, len);
         }
 
+        /// http put
         virtual int put(Url &url, const char* mime, Stream &data, int len=-1){
             LOGI("put %s", url.url());
-            p_post_stream = &data;
-            return process(PUT, url, mime, nullptr, len);
+            return process(PUT, url, mime, data);
         }
 
+        /// http del
         virtual int del(Url &url,const char* mime=nullptr, const char *data=nullptr, int len=-1) {
             LOGI("del %s", url.url());
             return process(DELETE, url, mime, data, len);
         }
 
+        /// http get
         virtual int get(Url &url,const char* acceptMime=nullptr, const char *data=nullptr, int len=-1) {
             LOGI("get %s", url.url());
             this->accept = acceptMime;
             return process(GET, url, nullptr, data, len);
         }
 
+        /// http head
         virtual int head(Url &url,const char* acceptMime=nullptr, const char *data=nullptr, int len=-1) {
             LOGI("head %s", url.url());
             this->accept = acceptMime;
@@ -124,7 +129,6 @@ class HttpRequest {
                 return client_ptr->read(str, len);
             }
         }
-
 
         size_t readBytesUntil(char terminator, char *buffer, size_t length){
             return client_ptr->readBytesUntil(terminator, buffer, length);
@@ -145,10 +149,12 @@ class HttpRequest {
             return reply_header;
         }
 
+        /// provides access to the request header
         virtual HttpRequestHeader &header(){
             return request_header;
         }
 
+        /// Defines the agent
         virtual void setAgent(const char* agent){
             this->agent = agent;
         }
@@ -190,45 +196,44 @@ class HttpRequest {
             return *client_ptr;
         }
 
-   
-    protected:
-        Client *client_ptr;
-        Url url;
-        HttpRequestHeader request_header;
-        HttpReplyHeader reply_header;
-        HttpChunkReader chunk_reader = HttpChunkReader(reply_header);
-        const char *agent = nullptr;
-        const char *host_name=nullptr;
-        const char *connection = CON_CLOSE;
-        const char *accept = ACCEPT_ALL;
-        const char *accept_encoding = nullptr;
-        bool is_ready = false;
-        int32_t clientTimeout = URL_CLIENT_TIMEOUT; // 60000;
-        Stream *p_post_stream = nullptr;
-
-        // opens a connection to the indicated host
-        virtual int connect(const char *ip, uint16_t port, int32_t timeout) {
-            client_ptr->setTimeout(timeout);
-            int is_connected = this->client_ptr->connect(ip, port);
-            LOGI("connected %d timeout %d", is_connected, (int) timeout);
-            return is_connected;
+        // process http request and reads the reply_header from the server
+        virtual int process(MethodID action, Url &url, const char* mime, const char *data, int lenData=-1){
+            int len = lenData;
+            if (data!=nullptr && len<=0){
+                len = strlen(data);
+            }
+            processBegin(action, url, mime, len);
+            // posting data parameter
+            if (lenData>0 && data!=nullptr){
+                LOGI("Writing data: %d bytes", len);
+                client_ptr->write((const uint8_t*)data, len);
+                LOGD("%s",data);
+            }
+            return processEnd();
         }
 
-        // sends request and reads the reply_header from the server
-        virtual int process(MethodID action, Url &url, const char* mime, const char *data, int lenData=-1){
+        // process http request and reads the reply_header from the server
+        virtual int process(MethodID action, Url &url, const char* mime, Stream &stream){
+            processBegin(action, url, mime, stream.available());
+            processPost(stream);
+            return processEnd();
+        }
+
+        /// starts http request processing
+        virtual bool processBegin(MethodID action, Url &url, const char* mime, int lenData=-1){
             TRACED();
             int len = lenData;
             is_ready = false;
             if (client_ptr==nullptr){
                 LOGE("The client has not been defined");
-                return -1;
+                return false;
             }
             if (!this->connected()){
                 LOGI("process connecting to host %s port %d", url.host(), url.port());
                 int is_connected = connect(url.host(), url.port(), clientTimeout);
                 if (is_connected!=1){
                     LOGE("Connect failed");
-                    return -1;
+                    return false;
                 }
             } else {
                 LOGI("process is already connected");
@@ -240,9 +245,8 @@ class HttpRequest {
 
             host_name = url.host();                
             request_header.setValues(action, url.path());
-            if (data!=nullptr){
-                len = strlen(data);
-                request_header.put(CONTENT_LENGTH, len);
+            if (lenData>0){
+                request_header.put(CONTENT_LENGTH, lenData);
             }
             request_header.put(HOST_C, host_name);                
             request_header.put(CONNECTION, connection);
@@ -252,26 +256,28 @@ class HttpRequest {
             request_header.put(CONTENT_TYPE, mime);
             request_header.write(*client_ptr);
 
-            // posting data parameter
-            if (len>0 && data!=nullptr){
-                LOGI("Writing data: %d bytes", len);
-                client_ptr->write((const uint8_t*)data, len);
-                LOGD("%s",data);
-            }
+            return true;
+        }
 
-
-            // posting data from stream
-            if (p_post_stream!=nullptr){
-                uint8_t buffer[512];
-                int total = 0;
-                while(p_post_stream->available()>0){
-                    int result_len = p_post_stream->readBytes(buffer, 512);
-                    total += result_len;
-                    client_ptr->write(buffer, result_len);
-                }
-                LOGI("Written data: %d bytes", total);
-                p_post_stream = nullptr;
+        /// Posts the data of the indicated stream after calling processBegin
+        virtual void processPost(Stream &stream){
+            uint8_t buffer[512];
+            int total = 0;
+            while(stream.available()>0){
+                int result_len = stream.readBytes(buffer, 512);
+                total += result_len;
+                client_ptr->write(buffer, result_len);
             }
+            LOGI("Written data: %d bytes", total);
+        }
+
+        /// Write data to the client: can be used to post data after calling processBegin
+        virtual size_t write(uint8_t* data, size_t len){
+            return client_ptr->write(data, len);
+        }
+
+        /// Ends the http request processing and returns the status code
+        virtual int processEnd(){
             LOGI("Request written ... waiting for reply")
             //Commented out because this breaks the RP2040 W
             //client_ptr->flush(); 
@@ -285,6 +291,28 @@ class HttpRequest {
             // wait for data
             is_ready = true;
             return reply_header.statusCode();
+        }
+
+    protected:
+        Client *client_ptr;
+        Url url;
+        HttpRequestHeader request_header;
+        HttpReplyHeader reply_header;
+        HttpChunkReader chunk_reader = HttpChunkReader(reply_header);
+        const char *agent = nullptr;
+        const char *host_name=nullptr;
+        const char *connection = CON_CLOSE;
+        const char *accept = ACCEPT_ALL;
+        const char *accept_encoding = nullptr;
+        bool is_ready = false;
+        int32_t clientTimeout = URL_CLIENT_TIMEOUT; // 60000;
+
+        // opens a connection to the indicated host
+        virtual int connect(const char *ip, uint16_t port, int32_t timeout) {
+            client_ptr->setTimeout(timeout);
+            int is_connected = this->client_ptr->connect(ip, port);
+            LOGI("connected %d timeout %d", is_connected, (int) timeout);
+            return is_connected;
         }
 
 };
