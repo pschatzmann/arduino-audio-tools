@@ -85,7 +85,7 @@ class HttpRequest {
         /// http post
         virtual int post(Url &url, const char* mime, Stream &data, int len=-1){
             LOGI("post %s", url.url());
-            return process(POST, url, mime, data);
+            return process(POST, url, mime, data, len);
         }
 
         /// http put
@@ -97,7 +97,7 @@ class HttpRequest {
         /// http put
         virtual int put(Url &url, const char* mime, Stream &data, int len=-1){
             LOGI("put %s", url.url());
-            return process(PUT, url, mime, data);
+            return process(PUT, url, mime, data, len);
         }
 
         /// http del
@@ -213,8 +213,11 @@ class HttpRequest {
         }
 
         // process http request and reads the reply_header from the server
-        virtual int process(MethodID action, Url &url, const char* mime, Stream &stream){
-            processBegin(action, url, mime, stream.available());
+        virtual int process(MethodID action, Url &url, const char* mime, Stream &stream, int len=-1){
+            if (len==-1){
+                len = stream.available();
+            }
+            processBegin(action, url, mime, len);
             processPost(stream);
             return processEnd();
         }
