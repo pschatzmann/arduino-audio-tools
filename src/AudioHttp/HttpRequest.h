@@ -204,7 +204,7 @@ class HttpRequest {
             }
             processBegin(action, url, mime, len);
             // posting data parameter
-            if (lenData>0 && data!=nullptr){
+            if (len>0 && data!=nullptr){
                 LOGI("Writing data: %d bytes", len);
                 client_ptr->write((const uint8_t*)data, len);
                 LOGD("%s",data);
