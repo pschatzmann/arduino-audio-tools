@@ -129,8 +129,9 @@ class SPDIFOutput : public AudioStream {
   bool begin() { return begin(defaultConfig()); }
 
   /// Start with the provided parameters
-  bool begin(SPDIFConfig cfg) {
+  bool begin(SPDIFConfig config) {
     TRACED();
+    cfg = config;
     // Some validations to make sure that the config is valid
     if (!(cfg.channels == 1 || cfg.channels == 2)) {
       LOGE("Unsupported number of channels: %d", cfg.channels);
@@ -181,14 +182,18 @@ class SPDIFOutput : public AudioStream {
   /// Change the audio parameters
   void setAudioInfo(AudioInfo info) {
     TRACED();
-    cfg.bits_per_sample = info.bits_per_sample;
-    cfg.channels = info.channels;
-    cfg.sample_rate = info.sample_rate;
     if (info.bits_per_sample != 16) {
       LOGE("Unsupported bits per sample: %d - must be 16!",
            info.bits_per_sample);
     }
-    begin(cfg);
+    if (cfg.bits_per_sample != info.bits_per_sample
+    || cfg.channels != info.channels
+    || cfg.sample_rate != info.sample_rate){
+      cfg.bits_per_sample = info.bits_per_sample;
+      cfg.channels = info.channels;
+      cfg.sample_rate = info.sample_rate;
+      begin(cfg);
+    }
   }
 
   /// Provides the default configuration
