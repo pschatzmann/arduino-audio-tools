@@ -188,7 +188,8 @@ class SPDIFOutput : public AudioStream {
     }
     if (cfg.bits_per_sample != info.bits_per_sample
     || cfg.channels != info.channels
-    || cfg.sample_rate != info.sample_rate){
+    || cfg.sample_rate != info.sample_rate
+    || !i2sOn) {
       cfg.bits_per_sample = info.bits_per_sample;
       cfg.channels = info.channels;
       cfg.sample_rate = info.sample_rate;
