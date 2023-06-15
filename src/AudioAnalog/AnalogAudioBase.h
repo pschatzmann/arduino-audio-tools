@@ -140,9 +140,11 @@ class AnalogConfig : public AudioInfo {
     /// Default constructor
     AnalogConfig(RxTxMode rxtxMode) : AnalogConfig() {
       rx_tx_mode = rxtxMode;
+#ifdef USE_ADC_ARDUINO
       if (rxtxMode != RX_MODE) {
         LOGE("Only RX_MODE supported");
       }
+#endif
     }
   int start_pin = PIN_ADC_START;
 
