@@ -208,18 +208,14 @@ enum class AudioFormat : uint16_t {
   // SOUNDSPACE_MUSICOMPRESS = 0x1500, /* AT&T Labs, Inc. */
   // MPEG_ADTS_AAC = 0x1600, /* Microsoft Corporation */
   // MPEG_RAW_AAC = 0x1601, /* Microsoft Corporation */
-  // MPEG_LOAS = 0x1602, /* Microsoft Corporation (MPEG-4 Audio
-  //                     * Transport Streams (LOAS/LATM) \
-  //                     */
+  // MPEG_LOAS = 0x1602, /* Microsoft Corporation (MPEG-4 Audio Transport Streams (LOAS/LATM) 
   // NOKIA_MPEG_ADTS_AAC = 0x1608, /* Microsoft Corporation */
   // NOKIA_MPEG_RAW_AAC = 0x1609, /* Microsoft Corporation */
   // VODAFONE_MPEG_ADTS_AAC = 0x160A, /* Microsoft Corporation */
   // VODAFONE_MPEG_RAW_AAC = 0x160B, /* Microsoft Corporation */
   // MPEG_HEAAC =
   //     0x1610, /* Microsoft Corporation (MPEG-2 AAC or MPEG-4 HE-AAC
-  //     v1/v2 streams
-  //             \
-  //             with any payload (ADTS, ADIF, LOAS/LATM, RAW). Format block \
+  //     v1/v2 streams with any payload (ADTS, ADIF, LOAS/LATM, RAW). Format block 
   //             icludes MP4 AudioSpecificConfig() -- see HEAACWAVEFORMAT below
   //             */
   // VOXWARE_RT24_SPEECH = 0x181C, /* Voxware Inc. */

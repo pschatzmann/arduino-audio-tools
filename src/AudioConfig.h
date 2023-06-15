@@ -481,8 +481,8 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #define PIN_I2S_DATA_OUT 11
 #define PIN_I2S_MUTE -1
 
-
 #endif
+
 
 //---- STM32 ------------
 #if defined(ARDUINO_ARCH_STM32F4) || defined(ARDUINO_ARCH_STM32)
@@ -533,8 +533,9 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 
 //---- GIGA ------------
 // DRAFT Support - Not tested !
-#if defined(ARDUINO_GIGA) || defined(ARDUINO_ARCH_MBED_PORTENTA)
+#if defined(ARDUINO_GIGA) 
 #include <WiFi.h>
+#include <Arduino_AdvancedAnalog.h>
 #define IS_MBED
 #define USE_INT24_FROM_INT
 #define USE_TYPETRAITS
@@ -550,6 +551,27 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #define PIN_DAC_1 A12
 #define PIN_DAC_2 A13
 
+#endif
+
+// //---- Portenta ------------
+// // DRAFT: not tested
+#if defined(ARDUINO_ARCH_MBED_PORTENTA)
+#include <WiFi.h>
+#include <Arduino_AdvancedAnalog.h>
+#define IS_MBED
+#define USE_INT24_FROM_INT
+#define USE_TYPETRAITS
+#define USE_EFFECTS_SUITE
+#define USE_I2S_ANALOG
+#define USE_STREAM_WRITE_OVERRIDE
+#define ADC_BUFFER_SIZE 1024
+#define ADC_BUFFERS 10
+#define USE_URL_ARDUINO
+#define USE_AUDIO_SERVER
+
+#define PIN_ADC_START A0
+#define PIN_DAC_1 D0
+#define PIN_DAC_2 D1
 #endif
 
 
