@@ -1204,7 +1204,6 @@ class ProgressStream : public AudioStream {
 
     /// Provides the number of processed seconds
     size_t processedSecs() {
-      AudioInfo info = audioInfo();
       return total_processed / byteRate();
     }
 
@@ -1260,6 +1259,7 @@ class ProgressStream : public AudioStream {
     }
 
     size_t byteRate() {
+      AudioInfo info = audioInfo();
       int byte_rate = info.sample_rate * info.bits_per_sample * info.channels / 8;
       if (byte_rate==0){
         LOGE("Audio Info not defined");

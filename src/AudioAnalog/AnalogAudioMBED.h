@@ -4,13 +4,6 @@
 #include "AudioConfig.h"
 #if defined(IS_MBED) && defined(USE_I2S_ANALOG)
 
-#if __has_include && !__has_include(<Arduino_AdvancedAnalog.h>)
-#error "Please install the Arduino_AdvancedAnalog library"
-#else
-
-#include <Arduino_AdvancedAnalog.h>
-//#include <pins_arduino.h>
-
 namespace audio_tools {
 
 /**
@@ -127,7 +120,7 @@ public:
   virtual int available() override { return info.buffer_size; }
 
 protected:
-  RingBuffer<Sample> ring_buffer{0};
+  audio_tools::RingBuffer<Sample> ring_buffer{0};
   AnalogConfig info;
   AdvancedDAC dac1{PIN_DAC_1};
   AdvancedDAC dac2{PIN_DAC_2};
@@ -169,5 +162,4 @@ using AnalogDriver = AnalogDriverMBED;
 
 } // namespace audio_tools
 
-#endif // __has_include
 #endif // USE_I2S_ANALOG
