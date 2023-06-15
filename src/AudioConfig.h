@@ -563,6 +563,8 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #define USE_TYPETRAITS
 #define USE_EFFECTS_SUITE
 #define USE_I2S_ANALOG
+#define USE_TIMER
+#define USE_PWM
 #define USE_STREAM_WRITE_OVERRIDE
 #define ADC_BUFFER_SIZE 1024
 #define ADC_BUFFERS 10
@@ -570,6 +572,7 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #define USE_AUDIO_SERVER
 
 #define PIN_ADC_START A0
+#define PIN_PWM_START D2
 #define PIN_DAC_1 D0
 #define PIN_DAC_2 D1
 #endif
