@@ -81,28 +81,14 @@ class VolumeStream : public AudioStream {
         }
 
         bool begin(AudioInfo cfg)  {
-          VolumeStreamConfig cfg1;
-          cfg1.channels = cfg.channels;
-          cfg1.sample_rate = cfg.sample_rate;
-          cfg1.bits_per_sample = cfg.bits_per_sample;
-          // keep volume which might habe been defined befor calling begin
-          cfg1.volume = info.volume;  
-          return begin(cfg1);
-        }
-
-        void end() override {
-            is_active = false;
+            VolumeStreamConfig cfg1 = setupAudioInfo(cfg);
+            return begin(cfg1);
         }
 
         /// starts the processing 
         bool begin(VolumeStreamConfig cfg){
             TRACED();
-            info = cfg;
-            max_value = NumberConverter::maxValue(info.bits_per_sample);
-            if (info.channels>max_channels){
-              max_channels = info.channels;
-            }
-
+            setupVolumeStreamConfig(cfg);
             // usually we use a exponential volume control - except if we allow values > 1.0
             if (cfg.allow_boost){
               setVolumeControl(linear_vc);
@@ -112,9 +98,15 @@ class VolumeStream : public AudioStream {
 
             // set start volume
             setVolume(cfg.volume); 
-
+            is_started = true;
             return true;
         }
+
+        void end() override {
+            is_active = false;
+            is_started = false;
+        }
+
 
         /// Defines the volume control logic
         void setVolumeControl(VolumeControl &vc){
@@ -166,8 +158,12 @@ class VolumeStream : public AudioStream {
             if (p_notify!=nullptr){
               p_notify->setAudioInfo(cfg);
             }
-            if (!is_active){
-              begin(cfg); 
+
+            if (is_started){
+                VolumeStreamConfig cfg1 = setupAudioInfo(cfg);
+                setupVolumeStreamConfig(cfg1);
+            } else {
+                begin(cfg);
             }
         }
 
@@ -183,7 +179,8 @@ class VolumeStream : public AudioStream {
         /// Sets the volume for one channel
         void setVolume(float vol, int channel){
             if (channel<info.channels){
-              setup(vol);
+              setupVectors();
+              is_active = vol!=1.0f;
               float volume_value = volumeValue(vol);
               LOGI("setVolume: %f", volume_value);
               float factor = volumeControl().getVolumeFactor(volume_value);
@@ -214,15 +211,35 @@ class VolumeStream : public AudioStream {
         Vector<float> volume_values;
         Vector<float> factor_for_channel;
         bool is_active = false;
+        bool is_started = false;
         float max_value = 32767; // max value for clipping
         int max_channels=0;
 
-        void setup(float vol) {
-            is_active = vol!=1.0f;
+        /// Resizes the vectors
+        void setupVectors() {
             factor_for_channel.resize(info.channels);
             volume_values.resize(info.channels);
         }
 
+        /// Provides a VolumeStreamConfig based on a AudioInfo
+        VolumeStreamConfig setupAudioInfo(AudioInfo cfg){
+            VolumeStreamConfig cfg1;
+            cfg1.channels = cfg.channels;
+            cfg1.sample_rate = cfg.sample_rate;
+            cfg1.bits_per_sample = cfg.bits_per_sample;
+            // keep volume which might habe been defined befor calling begin
+            cfg1.volume = info.volume;  
+            return cfg1;
+        }
+
+        /// Stores the local variable and calculates some max values
+        void setupVolumeStreamConfig(VolumeStreamConfig cfg){
+            info = cfg;
+            max_value = NumberConverter::maxValue(info.bits_per_sample);
+            if (info.channels>max_channels){
+              max_channels = info.channels;
+            }
+        }
 
         float volumeValue(float vol){
             if (!info.allow_boost && vol>1.0f) vol = 1.0;
