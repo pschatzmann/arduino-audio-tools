@@ -166,7 +166,9 @@ class VolumeStream : public AudioStream {
             if (p_notify!=nullptr){
               p_notify->setAudioInfo(cfg);
             }
-            begin(cfg);
+            if (!is_active){
+              begin(cfg); 
+            }
         }
 
         /// Defines the volume for all channels:  needs to be in the range of 0 to 1.0
