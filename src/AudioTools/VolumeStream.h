@@ -80,6 +80,10 @@ class VolumeStream : public AudioStream {
             return c;
         }
 
+        bool begin(){
+          return begin(info);    
+        }
+
         bool begin(AudioInfo cfg)  {
             VolumeStreamConfig cfg1 = setupAudioInfo(cfg);
             return begin(cfg1);
