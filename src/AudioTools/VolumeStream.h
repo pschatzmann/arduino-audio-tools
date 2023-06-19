@@ -103,7 +103,6 @@ class VolumeStream : public AudioStream {
         }
 
         void end() override {
-            is_active = false;
             is_started = false;
         }
 
@@ -126,7 +125,7 @@ class VolumeStream : public AudioStream {
                 return 0;
             }
             size_t result = p_in->readBytes(buffer, length);
-            if (is_active) applyVolume(buffer, result);
+            if (is_started) applyVolume(buffer, result);
             return result;
         }
 
@@ -137,7 +136,7 @@ class VolumeStream : public AudioStream {
                 LOGE("NPE");
                 return 0;
             }
-            if (is_active) applyVolume(buffer,size);
+            if (is_started) applyVolume(buffer,size);
             return p_out->write(buffer, size);
         }
 
@@ -180,7 +179,6 @@ class VolumeStream : public AudioStream {
         void setVolume(float vol, int channel){
             if (channel<info.channels){
               setupVectors();
-              is_active = vol!=1.0f;
               float volume_value = volumeValue(vol);
               LOGI("setVolume: %f", volume_value);
               float factor = volumeControl().getVolumeFactor(volume_value);
@@ -210,7 +208,6 @@ class VolumeStream : public AudioStream {
         CachedVolumeControl cached_volume{pot_vc};
         Vector<float> volume_values;
         Vector<float> factor_for_channel;
-        bool is_active = false;
         bool is_started = false;
         float max_value = 32767; // max value for clipping
         int max_channels=0;
