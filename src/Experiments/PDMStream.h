@@ -49,8 +49,6 @@ class DecimationStream {
 };
 
 
-
-
 /**
  * @brief Applies low pass filter to a decimated pdm signal to convert it
  * to pcm
@@ -121,6 +119,11 @@ class PDMStreamT {
   }
 
   int available() { return in_filtered.available(); }
+
+  template <size_t B>
+  void setFilterValues(const T (&b)[B]) {
+    fir.setValues(b);
+  }
 
  protected:
   AudioInfo cfg;

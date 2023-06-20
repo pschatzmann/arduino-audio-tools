@@ -64,12 +64,20 @@ class FIR : public Filter<T> {
   public:
     template  <size_t B>
     FIR(const T (&b)[B], const T factor=1.0) : lenB(B), factor(factor) {
+      setValues(b);
+    }
+
+    template  <size_t B>
+    void setValues(const T (&b)[B]){
+      if (x!=nullptr) delete x;
       x = new T[lenB]();
       coeff_b = new T[2*lenB-1];
       for (uint16_t i = 0; i < 2*lenB-1; i++) {
         coeff_b[i] = b[(2*lenB - 1 - i)%lenB];
       } 
+
     }
+
     ~FIR() {
       delete[] x;
       delete[] coeff_b;
@@ -99,7 +107,7 @@ class FIR : public Filter<T> {
   private:
     const uint8_t lenB;
     uint8_t i_b = 0;
-    T *x;
+    T *x = nullptr;
     T *coeff_b;
     T factor;
 };
