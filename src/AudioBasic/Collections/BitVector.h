@@ -80,15 +80,19 @@ public:
     max_idx = size;
     int round_up = size % 64 != 0;
     vector.resize(size / 64 + round_up);
+    for (int j=0;j<max_idx;j++){
+      set(j, 0);
+    }
   }
 
-  // shifts n bits: + to the left; - to the right
+  // shifts n bits: + to the right; - to the left
   void shift(int n) {
     if (n == 0)
       return;
     for (int j = 0; j < max_idx - n; j++) {
-      set(j, get(j + n));
+      set(j, get(j - n));
     }
+    max_idx+=n;
   }
   /// Extracts an integer 
   template <typename T> T toInt(int n) {

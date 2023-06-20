@@ -555,11 +555,14 @@ protected:
   }
 
   void updateVolume(float tmp, int j) {
-    if (tmp > f_volume) {
+    if (tmp > f_volume_tmp) {
       f_volume_tmp = tmp;
     }
     if (volumes_tmp.size() > 0 && info.channels > 0) {
-      volumes_tmp[j % info.channels] = tmp;
+      int ch = j % info.channels;
+      if (tmp>volumes_tmp[ch]){
+        volumes_tmp[ch] = tmp;
+      }
     }
   }
 
