@@ -80,7 +80,7 @@ class VolumeStream : public AudioStream {
             return c;
         }
 
-        bool begin(){
+        bool begin() override {
           return begin(info);    
         }
 
