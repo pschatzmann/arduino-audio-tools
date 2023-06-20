@@ -11,19 +11,17 @@ AudioInfo info(44100, 2, 16);
 SineWaveGenerator<int16_t> sineWave(32000);                // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound(sineWave);             // Stream generated from sine wave
 VolumeOutput out; 
-StreamCopy copier(out, sound);                             // copies sound into i2s
+StreamCopy copier(out, sound, 1024*2);                     // copies sound into VolumeOutput
 
 // Arduino Setup
 void setup(void) {  
   // Open Serial 
   Serial.begin(115200);
   while(!Serial);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
 
   // start Volume Output
-  auto config = out.defaultConfig();
-  config.copyFrom(info); 
-  out.begin(config);
+  out.begin(info);
 
   // Setup sine wave
   sineWave.begin(info, N_B4);
