@@ -37,6 +37,7 @@ enum I2SSignalType {
 };
 
 INLINE_VAR const char* i2s_formats[] = {"I2S_STD_FORMAT","I2S_LSB_FORMAT","I2S_MSB_FORMAT","I2S_PHILIPS_FORMAT","I2S_RIGHT_JUSTIFIED_FORMAT","I2S_LEFT_JUSTIFIED_FORMAT","I2S_PCM"};
+INLINE_VAR const char* i2s_signal_types[] = {"Digital","Analog","PDM","TDM"};
 
 
 /**
@@ -120,7 +121,10 @@ class I2SConfig : public AudioInfo {
       LOGI("sample rate: %d", sample_rate);
       LOGI("bits per sample: %d", bits_per_sample);
       LOGI("number of channels: %d", channels);
-      LOGI("i2s_format: %s", i2s_formats[i2s_format]);
+      LOGI("signal_type: %s", i2s_signal_types[signal_type]);      
+      if (signal_type==Digital){
+        LOGI("i2s_format: %s", i2s_formats[i2s_format]);      
+      } 
 #ifdef ESP32
       LOGI("auto_clear: %s",auto_clear? "true" : "false");
       if (use_apll) {
