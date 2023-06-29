@@ -13,7 +13,6 @@
 
 #ifdef IS_RENESAS
 // This is needed for renesas
-size_t strnlen(const char *s, size_t maxlen);
 int isascii(int c);
 #endif
 
@@ -250,19 +249,19 @@ class MetaDataID3V1  : public MetaDataID3Base {
         if (callback==nullptr) return;
 
         if (tag_ext!=nullptr){
-            callback(Title, tag_ext->title,strnlen(tag_ext->title,60));
-            callback(Artist, tag_ext->artist,strnlen(tag_ext->artist,60));
-            callback(Album, tag_ext->album,strnlen(tag_ext->album,60));
-            callback(Genre, tag_ext->genre,strnlen(tag_ext->genre,30));
+            callback(Title, tag_ext->title,strnlength(tag_ext->title,60));
+            callback(Artist, tag_ext->artist,strnlength(tag_ext->artist,60));
+            callback(Album, tag_ext->album,strnlength(tag_ext->album,60));
+            callback(Genre, tag_ext->genre,strnlength(tag_ext->genre,30));
             delete tag_ext;
             tag_ext = nullptr;
             status = TagProcessed;
         }
 
         if (tag!=nullptr){
-            callback(Title, tag->title,strnlen(tag->title,30));
-            callback(Artist, tag->artist,strnlen(tag->artist,30));
-            callback(Album, tag->album,strnlen(tag->album,30));        
+            callback(Title, tag->title,strnlength(tag->title,30));
+            callback(Artist, tag->artist,strnlength(tag->artist,30));
+            callback(Album, tag->album,strnlength(tag->album,30));        
             uint16_t genre = tag->genre;
             if (genre < sizeof(genres)){
                 const char* genre_str = genres[genre];
@@ -513,13 +512,13 @@ class MetaDataID3V2 : public MetaDataID3Base  {
         if (callback!=nullptr && actual_tag!=nullptr && encodingIsSupported()){
             LOGI("callback %s",actual_tag);
             if (memcmp(actual_tag,"TALB",4)==0)
-                callback(Album, result,strnlen(result, 256));
+                callback(Album, result,strnlength(result, 256));
             else if (memcmp(actual_tag,"TPE1",4)==0)
-                callback(Artist, result,strnlen(result, 256));
+                callback(Artist, result,strnlength(result, 256));
             else if (memcmp(actual_tag,"TOPE",4)==0)
-                callback(Artist, result,strnlen(result, 256));
+                callback(Artist, result,strnlength(result, 256));
             else if (memcmp(actual_tag,"TIT2",4)==0)
-                callback(Title, result,strnlen(result, 256));
+                callback(Title, result,strnlength(result, 256));
             else if (memcmp(actual_tag,"TCON",4)==0) {
                 if (result[0]=='('){
                     // convert genre id to string
@@ -533,7 +532,7 @@ class MetaDataID3V2 : public MetaDataID3Base  {
                         }
                     }
                 }
-                callback(Genre, result,strnlen(result, 256));
+                callback(Genre, result,strnlength(result, 256));
             } 
         }
     }
