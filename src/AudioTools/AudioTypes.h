@@ -192,11 +192,11 @@ class AudioTime {
         }
 
         static float toRateUs(uint32_t time_us){
-            return static_cast<float>(time_us) / 1000000.0;
+            return 1000000.0 / time_us;
         }
         
         static float toRateMs(uint32_t time_ms){
-            return static_cast<float>(time_ms) / 1000.0;
+            return 1000.0 / time_ms;
         }
 };
 
