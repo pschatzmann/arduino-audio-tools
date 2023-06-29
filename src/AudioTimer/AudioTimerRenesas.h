@@ -11,16 +11,16 @@ typedef void (*my_repeating_timer_callback_t)(void *obj);
 
 /**
  * @brief Repeating Timer functions for repeated execution: Plaease use the
- * typedef TimerAlarmRepeating. Please note that in Renesis we only have one
+ * typedef TimerAlarmRepeating. Please note that in Renesas we only have one
  * high resolution timer (channel 1) available!
  * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  *
  */
-class TimerAlarmRepeatingDriverRenesis : public TimerAlarmRepeatingDriverBase {
+class TimerAlarmRepeatingDriverRenesas : public TimerAlarmRepeatingDriverBase {
  public:
-  TimerAlarmRepeatingDriverRenesis() {}
+  TimerAlarmRepeatingDriverRenesas() {}
 
   /**
    * Starts the alarm timer
@@ -61,7 +61,7 @@ class TimerAlarmRepeatingDriverRenesis : public TimerAlarmRepeatingDriverBase {
   }
 
   inline static void staticCallback(timer_callback_args_t *ptr) {
-    TimerAlarmRepeatingDriverRenesis *self = (TimerAlarmRepeatingDriverRenesis *)ptr->p_context;
+    TimerAlarmRepeatingDriverRenesas *self = (TimerAlarmRepeatingDriverRenesas *)ptr->p_context;
     self->instanceCallback(self->object);
   }
 
@@ -82,7 +82,7 @@ class TimerAlarmRepeatingDriverRenesis : public TimerAlarmRepeatingDriverBase {
 };
 
 /// @brief use TimerAlarmRepeating! @ingroup timer_rp2040
-using TimerAlarmRepeatingDriver = TimerAlarmRepeatingDriverRenesis;
+using TimerAlarmRepeatingDriver = TimerAlarmRepeatingDriverRenesas;
 
 }  // namespace audio_tools
 
