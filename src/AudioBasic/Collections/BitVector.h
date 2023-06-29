@@ -105,7 +105,6 @@ public:
     return result;
   }
 
-  friend std::ostream &operator<<(std::ostream &os, BitVector &dt);
 
 protected:
   Vector<uint64_t> vector;
@@ -114,11 +113,5 @@ protected:
   int64_t max_idx = 0;
 };
 
-std::ostream &operator<<(std::ostream &os, BitVector &bv) {
-  for (int j = 0; j < bv.size(); j++) {
-    os << bv.get(j);
-  }
-  return os;
-}
 
 } // namespace audio_tools
