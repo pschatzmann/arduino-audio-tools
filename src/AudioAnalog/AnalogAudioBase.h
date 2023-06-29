@@ -1,6 +1,6 @@
 #pragma once
 #include "AudioConfig.h"
-#if defined(USE_I2S_ANALOG) 
+#if defined(USE_ANALOG) 
 #if defined(ESP32) 
 # include "driver/i2s.h"
 # include "driver/adc.h"
@@ -21,8 +21,9 @@ class AnalogConfig : public AudioInfo {
     int buffer_count = I2S_BUFFER_COUNT;
     int buffer_size = I2S_BUFFER_SIZE;
     RxTxMode rx_tx_mode;
+    bool is_blocking_write = true;
 
-#if defined(ESP32) && defined(USE_I2S_ANALOG) 
+#if defined(ESP32) && defined(USE_ANALOG) 
     // allow ADC to access the protected methods
     friend class AnalogDriverESP32;
 
@@ -133,20 +134,15 @@ class AnalogConfig : public AudioInfo {
         sample_rate = 10000;
         bits_per_sample = 16;
         channels = 2;
-        buffer_size = ADC_BUFFER_SIZE;
-        buffer_count = ADC_BUFFERS;
+        buffer_size = ANALOG_BUFFER_SIZE;
+        buffer_count = ANALOG_BUFFERS;
         rx_tx_mode = RX_MODE;
     }
     /// Default constructor
     AnalogConfig(RxTxMode rxtxMode) : AnalogConfig() {
       rx_tx_mode = rxtxMode;
-#ifdef USE_ADC_ARDUINO
-      if (rxtxMode != RX_MODE) {
-        LOGE("Only RX_MODE supported");
-      }
-#endif
     }
-  int start_pin = PIN_ADC_START;
+  int start_pin = PIN_ANALOG_START;
 
 #endif
   

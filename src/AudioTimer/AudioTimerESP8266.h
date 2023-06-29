@@ -40,6 +40,10 @@ class TimerAlarmRepeatingDriverESP8266 : public TimerAlarmRepeatingDriverBase {
                 case US:
                     timeUs = time;
                     break;
+                case HZ:
+                    // convert hz to time in us
+                    timeUs = AudioTime::toTimeUs(time);
+                    break;
             }
 
             ticker.attach_ms(timeUs / 1000, callback_f, (void*)this);

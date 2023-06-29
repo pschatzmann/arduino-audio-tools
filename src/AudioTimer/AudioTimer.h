@@ -14,6 +14,7 @@
 #include "AudioTimer/AudioTimerMBED.h"
 #include "AudioTimer/AudioTimerAVR.h"
 #include "AudioTimer/AudioTimerSTM32.h"
+#include "AudioTimer/AudioTimerRenesis.h"
 
 namespace audio_tools {
 

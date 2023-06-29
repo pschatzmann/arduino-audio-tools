@@ -140,6 +140,8 @@ class I2SDriverESP32 {
 
     bool isNoChannelConversion(I2SConfig cfg) {
       if (cfg.channels==2) return true;
+      if (cfg.channels==1 && cfg.channel_format == I2S_CHANNEL_FMT_ALL_RIGHT) return true;
+      if (cfg.channels==1 && cfg.channel_format == I2S_CHANNEL_FMT_ALL_LEFT) return true;
       if (cfg.channels==1 && cfg.channel_format == I2S_CHANNEL_FMT_ONLY_RIGHT) return true;
       if (cfg.channels==1 && cfg.channel_format == I2S_CHANNEL_FMT_ONLY_LEFT) return true;
       return false;
@@ -348,7 +350,7 @@ class I2SDriverESP32 {
           break;        
 
         case Analog:
-#if defined(USE_I2S_ANALOG) 
+#if defined(USE_ANALOG) 
           mode = (i2s_mode_t) (cfg.rx_tx_mode ? I2S_MODE_DAC_BUILT_IN : I2S_MODE_ADC_BUILT_IN);
 #else    
           LOGE("mode not supported");

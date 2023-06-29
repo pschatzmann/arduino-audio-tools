@@ -31,7 +31,8 @@ INLINE_VAR const char* RxTxModeNames[]={"UNDEFINED_MODE","TX_MODE","RX_MODE","RX
  * @brief Time Units
  * @ingroup basic
  */
-enum TimeUnit {MS, US};
+enum TimeUnit {MS, US, HZ};
+const char* TimeUnitStr[] {"MS","US","HZ"};
 
 /**
  * @brief Basic Audio information which drives e.g. I2S
@@ -188,6 +189,14 @@ class AudioTime {
                 result = limit;
             }
             return result;
+        }
+
+        static float toRateUs(uint32_t time_us){
+            return static_cast<float>(time_us) / 1000000.0;
+        }
+        
+        static float toRateMs(uint32_t time_ms){
+            return static_cast<float>(time_ms) / 1000.0;
         }
 };
 

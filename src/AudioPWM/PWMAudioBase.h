@@ -42,17 +42,28 @@ struct PWMConfig : public AudioInfo {
     uint16_t buffer_size = PWM_BUFFER_SIZE;
     uint8_t buffers = PWM_BUFFERS; 
 
-    // additinal info
+    // additinal info which might not be used by all processors
     uint16_t pwm_frequency = PWM_AUDIO_FREQUENCY;  // audable range is from 20 to 20,000Hz (not used by ESP32)
     uint8_t resolution = 8;     // Only used by ESP32: must be between 8 and 11 -> drives pwm frequency
     uint8_t timer_id = 0;       // Only used by ESP32 must be between 0 and 3
-    
+
 #ifndef __AVR__
     uint16_t start_pin = PIN_PWM_START; 
 
+    /// support assignament of int array
+    template <typename T, int N>
+    void setPins(T (&a) [N]) {
+        pins_data.clear();
+        pins_data.resize(N);
+        for (int i = 0; i < N; ++i) pins_data[i] = a[i]; // reset all elements  
+    }
+
     /// Defines the pins and the corresponding number of channels (=number of pins)
     void setPins(Pins &pins){
-        channels = pins.size();
+        pins_data.clear();
+        for(int i=0;i<pins.size();i++){
+            pins_data.push_back(pins[i]);
+        }
         pins_data = pins;
     }
 
@@ -61,7 +72,7 @@ struct PWMConfig : public AudioInfo {
         if (pins_data.size()==0){
             pins_data.resize(channels);
             for (int j=0;j<channels;j++){
-                pins_data[j]=start_pin+j;
+                pins_data[j]=start_pin + j;
             }
         }
         return pins_data;
@@ -84,7 +95,7 @@ struct PWMConfig : public AudioInfo {
         Pins pins_data;
 
 
-} INLINE_VAR default_config;
+};
 
 /**
  * @brief Base Class for all PWM drivers
@@ -94,6 +105,11 @@ class DriverPWMBase {
     public:
         PWMConfig &audioInfo(){
             return audio_config;
+        }
+
+        virtual PWMConfig defaultConfig(){
+            PWMConfig cfg;
+            return cfg;
         }
 
         // restart with prior definitions
@@ -139,6 +155,11 @@ class DriverPWMBase {
 
         // blocking write for an array: we expect a singed value and convert it into a unsigned 
         virtual size_t write(const uint8_t *wrt_buffer, size_t size){
+            if (is_blocking_write && availableForWrite()==0){
+                LOGI("Waiting for buffer to clear");
+                while (availableForWrite()==0);
+            }
+            
             size_t available = min((size_t)availableForWrite(),size);
             LOGD("write: %u bytes -> %u", (unsigned int)size, (unsigned int)available);
             size_t result = buffer->writeArray(wrt_buffer, available);
@@ -197,6 +218,7 @@ class DriverPWMBase {
         uint32_t frames_per_second = 0;
         uint32_t time_1_sec;
         bool is_timer_started = false;
+        bool is_blocking_write = true;
 
         void playNextFrameCallback(){
              //TRACED();

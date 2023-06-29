@@ -37,6 +37,11 @@ class TimerAlarmRepeatingDriverMBED : public TimerAlarmRepeatingDriverBase {
                 case US:
                     ticker.attach_us(tickerCallback,(us_timestamp_t) time);
                     break;
+                case HZ:
+                    // convert hz to time in us
+                    uint64_t time_us = AudioTime::toTimeUs(time);
+                    ticker.attach_us(tickerCallback,(us_timestamp_t) time_us);
+                    break;
             }
             return true;
         }

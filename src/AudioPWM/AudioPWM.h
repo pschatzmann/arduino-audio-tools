@@ -6,6 +6,7 @@
 #include "AudioPWM/PWMAudioRP2040.h"
 #include "AudioPWM/PWMAudioMBED.h"
 #include "AudioPWM/PWMAudioSTM32.h"
+#include "AudioPWM/PWMAudioRenesis.h"
 // this is experimental at the moment
 #include "AudioPWM/PWMAudioAVR.h"
 
@@ -26,7 +27,7 @@ class PWMAudioOutput : public AudioOutput {
         }
 
         virtual PWMConfig defaultConfig() {
-            return default_config;
+            return driver.defaultConfig();
         }
 
         PWMConfig config() {

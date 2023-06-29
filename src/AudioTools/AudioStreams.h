@@ -1627,9 +1627,9 @@ class FilteredStream : public AudioStream {
 
         /// defines the filter for an individual channel - the first channel is 0. The number of channels must have
         /// been defined before we can call this function.
-        void setFilter(int channel, Filter<TF> *filter) {
+        void setFilter(int channel, Filter<TF> &filter) {
           if (p_converter!=nullptr){
-            p_converter->setFilter(channel, filter);
+            p_converter->setFilter(channel, &filter);
           } else {
             LOGE("p_converter is null");
           }

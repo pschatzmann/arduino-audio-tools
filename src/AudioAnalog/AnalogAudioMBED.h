@@ -2,7 +2,7 @@
 #pragma once
 
 #include "AudioConfig.h"
-#if defined(IS_MBED) && defined(USE_I2S_ANALOG)
+#if defined(IS_MBED) && defined(USE_ANALOG)
 
 namespace audio_tools {
 
@@ -124,8 +124,8 @@ protected:
   AnalogConfig info;
   AdvancedDAC dac1{PIN_DAC_1};
   AdvancedDAC dac2{PIN_DAC_2};
-  AdvancedADC adc1{PIN_ADC_START};
-  AdvancedADC adc2{PIN_ADC_START + 1};
+  AdvancedADC adc1{PIN_ANALOG_START};
+  AdvancedADC adc2{PIN_ANALOG_START + 1};
   bool active = false;
 
   /// The ringbuffer is used to make sure that we can write full SampleBuffers
@@ -162,4 +162,4 @@ using AnalogDriver = AnalogDriverMBED;
 
 } // namespace audio_tools
 
-#endif // USE_I2S_ANALOG
+#endif // USE_ANALOG
