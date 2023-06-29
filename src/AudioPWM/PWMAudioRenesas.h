@@ -8,27 +8,27 @@
 namespace audio_tools {
 
 // forward declaration
-class PWMDriverRenesis;
+class PWMDriverRenesas;
 /**
  * @typedef  DriverPWMBase
  * @brief Please use DriverPWMBase!
  */
-using PWMDriver = PWMDriverRenesis;
+using PWMDriver = PWMDriverRenesas;
 
 
 /**
- * @brief Audio output to PWM pins for Renesis based Arduino implementations
+ * @brief Audio output to PWM pins for Renesas based Arduino implementations
  * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 
-class PWMDriverRenesis : public DriverPWMBase {
+class PWMDriverRenesas : public DriverPWMBase {
 
     public:
 
-        PWMDriverRenesis(){
-            LOGD("PWMDriverRenesis");
+        PWMDriverRenesas(){
+            LOGD("PWMDriverRenesas");
         }
 
         virtual PWMConfig defaultConfig() {
@@ -111,7 +111,7 @@ class PWMDriverRenesis : public DriverPWMBase {
 
         /// timer callback: write the next frame to the pins
         static void  defaultPWMAudioOutputCallback(void *obj) {
-            PWMDriverRenesis* accessAudioPWM = (PWMDriverRenesis*) obj;
+            PWMDriverRenesas* accessAudioPWM = (PWMDriverRenesas*) obj;
             if (accessAudioPWM!=nullptr){
                 accessAudioPWM->playNextFrame();
             }
