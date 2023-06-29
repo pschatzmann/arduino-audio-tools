@@ -32,7 +32,7 @@ INLINE_VAR const char* RxTxModeNames[]={"UNDEFINED_MODE","TX_MODE","RX_MODE","RX
  * @ingroup basic
  */
 enum TimeUnit {MS, US, HZ};
-const char* TimeUnitStr[] {"MS","US","HZ"};
+INLINE_VAR const char* TimeUnitStr[] {"MS","US","HZ"};
 
 /**
  * @brief Basic Audio information which drives e.g. I2S
