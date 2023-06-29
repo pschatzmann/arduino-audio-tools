@@ -578,7 +578,7 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #endif
 
 //------ RENESAS ----------
-
+// Arduino UNO R4
 #if defined(ARDUINO_ARCH_RENESAS) || defined(_RENESAS_RA_) 
 #define USE_INT24_FROM_INT
 #define IS_RENESAS 1
@@ -594,6 +594,7 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #define ANALOG_BUFFER_SIZE 512
 #define ANALOG_BUFFERS 5
 #ifdef ARDUINO
+#  define USE_WIFI
 #  define USE_URL_ARDUINO
 #  define USE_AUDIO_SERVER
 #  include "WiFiS3.h"
