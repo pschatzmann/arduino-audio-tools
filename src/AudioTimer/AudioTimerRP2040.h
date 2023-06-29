@@ -42,6 +42,11 @@ class TimerAlarmRepeatingDriverRP2040 : public TimerAlarmRepeatingDriverBase {
                 case US:
                     result = alarm_pool_add_repeating_timer_us(ap, time, &staticCallback, this, &timer);
                     break;
+                case HZ:
+                    // convert hz to time in us
+                    uint64_t time_us = AudioTime::toTimeUs(time);
+                    result = alarm_pool_add_repeating_timer_us(ap, time_us, &staticCallback, this, &timer);
+                    break;
                 default:
                     LOGE("Undefined Unit");
             }

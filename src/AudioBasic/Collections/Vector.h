@@ -330,9 +330,9 @@ class Vector {
       assert(p_data!=nullptr);
     }
 
-    void cleanup(T*p_data, int from, int to){
+    void cleanup(T*data, int from, int to){
       for (int j=from;j<to;j++){
-        p_data[j].~T();
+        data[j].~T();
       }
     }
 };

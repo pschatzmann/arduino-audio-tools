@@ -38,6 +38,10 @@ class TimerAlarmRepeatingDriverAVR : public TimerAlarmRepeatingDriverBase {
                 case US:
                     timeUs = time;
                     break;
+                case HZ:
+                    // convert hz to time in us
+                    timeUs = AudioTime::toTimeUs(time);
+                    break;
             }
             // frequency = beats / second
             setupTimer(1000000 / time); 

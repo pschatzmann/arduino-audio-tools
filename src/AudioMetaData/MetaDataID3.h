@@ -11,6 +11,12 @@
 #include <ctype.h>
 #include "AbstractMetaData.h"
 
+#ifdef IS_RENESAS
+// This is needed for renesas
+size_t strnlen(const char *s, size_t maxlen);
+int isascii(int c);
+#endif
+
 /** 
  * @defgroup metadata-id3 ID3 
  * @ingroup metadata

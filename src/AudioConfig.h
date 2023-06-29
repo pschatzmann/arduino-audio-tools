@@ -134,7 +134,7 @@
 #endif
 
 #ifndef PWM_BUFFERS 
-#define PWM_BUFFERS 40
+#define PWM_BUFFERS 4
 #endif
 
 #ifndef PWM_AUDIO_FREQUENCY 
@@ -188,7 +188,7 @@
 #define USE_TYPETRAITS
 #define USE_EFFECTS_SUITE
 #define USE_TIMER
-#define USE_I2S_ANALOG
+#define USE_ANALOG
 #define USE_STREAM_WRITE_OVERRIDE
 #define USE_STREAM_READ_OVERRIDE
 #define USE_TOUCH_READ
@@ -368,13 +368,13 @@ uint64_t millis() {return (xTaskGetTickCount() * portTICK_PERIOD_MS);}
 #define RP2040_MBED
 #define USE_I2S 1
 #define USE_PWM
-#define USE_ADC_ARDUINO
+#define USE_ANALOG_ARDUINO
 #define USE_TYPETRAITS
 #define USE_EFFECTS_SUITE
 #define USE_TIMER
 #define USE_INT24_FROM_INT
 
-#define PIN_ADC_START 26
+#define PIN_ANALOG_START 26
 #define PIN_PWM_START 6
 #define PIN_I2S_BCK 26
 #define PIN_I2S_WS PIN_I2S_BCK+1
@@ -388,12 +388,12 @@ uint64_t millis() {return (xTaskGetTickCount() * portTICK_PERIOD_MS);}
 // fix missing __sync_synchronize symbol
 #define FIX_SYNC_SYNCHRONIZE
 #define IRAM_ATTR
-#ifndef ADC_BUFFER_SIZE 
-#define ADC_BUFFER_SIZE 1024
+#ifndef ANALOG_BUFFER_SIZE 
+#define ANALOG_BUFFER_SIZE 1024
 #endif
 
-#ifndef ADC_BUFFERS 
-#define ADC_BUFFERS 50
+#ifndef ANALOG_BUFFERS 
+#define ANALOG_BUFFERS 50
 #endif
 
 //#define USE_ESP8266_AUDIO
@@ -403,13 +403,13 @@ uint64_t millis() {return (xTaskGetTickCount() * portTICK_PERIOD_MS);}
 #define RP2040_HOWER
 #define USE_I2S 
 #define USE_PWM
-#define USE_ADC_ARDUINO
+#define USE_ANALOG_ARDUINO
 #define USE_TYPETRAITS
 #define USE_EFFECTS_SUITE
 #define USE_TIMER
 #define USE_INT24_FROM_INT
 
-#define PIN_ADC_START 26
+#define PIN_ANALOG_START 26
 #define PIN_PWM_START 6
 #define PIN_I2S_BCK 26
 #define PIN_I2S_WS PIN_I2S_BCK+1
@@ -424,12 +424,12 @@ uint64_t millis() {return (xTaskGetTickCount() * portTICK_PERIOD_MS);}
 #define FIX_SYNC_SYNCHRONIZE
 #define IRAM_ATTR
 
-#ifndef ADC_BUFFER_SIZE 
-#define ADC_BUFFER_SIZE 256
+#ifndef ANALOG_BUFFER_SIZE 
+#define ANALOG_BUFFER_SIZE 256
 #endif
 
-#ifndef ADC_BUFFERS 
-#define ADC_BUFFERS 100
+#ifndef ANALOG_BUFFERS 
+#define ANALOG_BUFFERS 100
 #endif
 
 //#define USE_ESP8266_AUDIO
@@ -493,12 +493,12 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #define USE_I2S
 #define USE_PWM
 #define USE_TIMER
-#define USE_ADC_ARDUINO
+#define USE_ANALOG_ARDUINO
 #define USE_INT24_FROM_INT
 
-#define ADC_BUFFER_SIZE 1024
-#define ADC_BUFFERS 20
-#define PIN_ADC_START PA0
+#define ANALOG_BUFFER_SIZE 1024
+#define ANALOG_BUFFERS 20
+#define PIN_ANALOG_START PA0
 #define PIN_PWM_START PA0
 #define PWM_DEFAULT_TIMER TIM2
 #define PWM_FREQ_TIMER_NO 3
@@ -540,14 +540,14 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #define USE_INT24_FROM_INT
 #define USE_TYPETRAITS
 #define USE_EFFECTS_SUITE
-#define USE_I2S_ANALOG
+#define USE_ANALOG
 #define USE_STREAM_WRITE_OVERRIDE
-#define ADC_BUFFER_SIZE 1024
-#define ADC_BUFFERS 10
+#define ANALOG_BUFFER_SIZE 1024
+#define ANALOG_BUFFERS 10
 #define USE_URL_ARDUINO
 #define USE_AUDIO_SERVER
 
-#define PIN_ADC_START A7
+#define PIN_ANALOG_START A7
 #define PIN_DAC_1 A12
 #define PIN_DAC_2 A13
 
@@ -562,21 +562,43 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #define USE_INT24_FROM_INT
 #define USE_TYPETRAITS
 #define USE_EFFECTS_SUITE
-#define USE_I2S_ANALOG
+#define USE_ANALOG
 #define USE_TIMER
 #define USE_PWM
 #define USE_STREAM_WRITE_OVERRIDE
-#define ADC_BUFFER_SIZE 1024
-#define ADC_BUFFERS 10
+#define ANALOG_BUFFER_SIZE 1024
+#define ANALOG_BUFFERS 10
 #define USE_URL_ARDUINO
 #define USE_AUDIO_SERVER
 
-#define PIN_ADC_START A0
+#define PIN_ANALOG_START A0
 #define PIN_PWM_START D2
 #define PIN_DAC_1 D0
 #define PIN_DAC_2 D1
 #endif
 
+//------ RENESAS ----------
+
+#if defined(ARDUINO_ARCH_RENESAS) || defined(_RENESAS_RA_) 
+#define USE_INT24_FROM_INT
+#define IS_RENESAS 1
+#define USE_TYPETRAITS
+#define USE_EFFECTS_SUITE
+#define USE_TIMER
+#define USE_PWM
+#define PIN_PWM_START D2
+#define PIN_PWM_COUNT 12
+#define USE_ANALOG
+#define USE_ANALOG_ARDUINO
+#define PIN_ANALOG_START A0
+#define ANALOG_BUFFER_SIZE 512
+#define ANALOG_BUFFERS 5
+#ifdef ARDUINO
+#  define USE_URL_ARDUINO
+#  define USE_AUDIO_SERVER
+#  include "WiFiS3.h"
+#endif
+#endif
 
 //------ VS1053 ----------
 

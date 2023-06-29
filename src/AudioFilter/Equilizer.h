@@ -91,8 +91,8 @@ class Equilizer3Bands : public AudioStream {
                 memset(&state[j],0,sizeof(EQSTATE));
 
                 // Calculate filter cutoff frequencies
-                state[j].lf = 2 * sin((float)M_PI * ((float)p_cfg->freq_low / (float)p_cfg->sample_rate));
-                state[j].hf = 2 * sin((float)M_PI * ((float)p_cfg->freq_high / (float)p_cfg->sample_rate));
+                state[j].lf = 2 * sin((float)PI * ((float)p_cfg->freq_low / (float)p_cfg->sample_rate));
+                state[j].hf = 2 * sin((float)PI * ((float)p_cfg->freq_high / (float)p_cfg->sample_rate));
             }
             return true;
         }

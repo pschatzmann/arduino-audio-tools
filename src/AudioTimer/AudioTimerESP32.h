@@ -150,6 +150,10 @@ class TimerAlarmRepeatingDriverESP32 : public TimerAlarmRepeatingDriverBase  {
                 case US:
                     timeUs = time;
                     break;
+                case HZ:
+                    // convert hz to time in us
+                    timeUs = AudioTime::toTimeUs(time);
+                    break;
             }
             LOGI("Timer every: %u us", timeUs);
             uint32_t cpu_freq = getCpuFrequencyMhz();  // 80 ? 

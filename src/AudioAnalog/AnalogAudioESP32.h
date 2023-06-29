@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AudioConfig.h"
-#if defined(ESP32) && defined(USE_I2S_ANALOG) 
+#if defined(ESP32) && defined(USE_ANALOG) 
 #include "AudioAnalog/AnalogAudioBase.h"
 #include "driver/i2s.h"
 #include "driver/adc.h"
