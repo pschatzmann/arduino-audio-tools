@@ -1,7 +1,7 @@
 #include "AudioTools.h"
 
 uint32_t sampling_rate = 44100;
-uint32_t delay_us = AudioUtils::toTimeUs(sampling_rate);
+uint32_t delay_us = AudioTime::toTimeUs(sampling_rate);
 uint32_t count;
 TimerAlarmRepeating timer;
 
