@@ -18,6 +18,15 @@ INLINE_VAR const char *toStr(MetaDataType t){
     return MetaDataTypeStr[t];
 }
 
+/// unfortunatly strnlen or strnlen_s is not available in all implementations
+size_t strnlength (const char* s, size_t n)  { 
+    size_t i;
+    for (i = 0; i < n && s[i] != '\0'; i++)
+        continue;
+    return i;
+}
+
+
 /**
  * @brief Common Metadata methods
  * @ingroup metadata
@@ -38,5 +47,7 @@ class AbstractMetaData {
         virtual void setIcyMetaInt(int value){}
 
 };
+
+
 
 }
