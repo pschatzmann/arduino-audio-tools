@@ -9,7 +9,7 @@
 #include "AudioTools.h"
 
 typedef int16_t sound_t;                                   // sound will be represented as int16_t (with 2 bytes)
-AudioInfo info(44100, 2, 16);
+AudioInfo info(8000, 1, 16);
 SineWaveGenerator<sound_t> sineWave(32000);                // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<sound_t> sound(sineWave);             // Stream generated from sine wave
 AnalogAudioStream out; 

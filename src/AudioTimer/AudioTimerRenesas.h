@@ -11,8 +11,8 @@ typedef void (*my_repeating_timer_callback_t)(void *obj);
 
 /**
  * @brief Repeating Timer functions for repeated execution: Plaease use the
- * typedef TimerAlarmRepeating. Please note that in Renesas we only have one
- * high resolution timer (channel 1) available!
+ * typedef TimerAlarmRepeating. By default we use a new GPT timer. You can
+ * also request 1 AGT timer by calling setTimer(1);
  * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -44,8 +44,8 @@ class TimerAlarmRepeatingDriverRenesas : public TimerAlarmRepeatingDriverBase {
         rate = time;
         break;                                           
       default:
-        rate = 44100;
         LOGE("Undefined Unit");
+        return false;
     }
     if (rate < 550 || rate > 100000){
       LOGE("Unsupported rate: %f hz", rate);
@@ -53,7 +53,9 @@ class TimerAlarmRepeatingDriverRenesas : public TimerAlarmRepeatingDriverBase {
     } else {
       LOGI("rate is %f hz", rate);
     }
-    return startTimer(rate);
+    LOGI("Using %s", timer_type==1 ? "AGT": "GPT")
+    return timer_type==1 ? startAGTTimer(rate) : startGPTTimer(rate);
+
   }
 
   inline static void staticCallback(timer_callback_args_t *ptr) {
@@ -61,22 +63,40 @@ class TimerAlarmRepeatingDriverRenesas : public TimerAlarmRepeatingDriverBase {
     self->instanceCallback(self->object);
   }
 
-  // ends the timer and if necessary the task
+  /// ends the timer and if necessary the task
   bool end() {
     audio_timer.end();
     return true;
   }
 
-  void setTimer(int timer) override { timer_channel = timer; }
+  /// Selects the timer type: 0=GPT and 1=AGT
+  void setTimer(int timer) override{
+    timer_type = timer;
+  }
+
 
  protected:
   FspTimer audio_timer;
   my_repeating_timer_callback_t instanceCallback = nullptr;
-  int timer_channel = 1;
-  uint8_t type=AGT_TIMER;
+  uint8_t timer_type = 1; // Should be 0 - but this is currently not working
 
-  // setup timer
-  bool startTimer(float rate) {
+  // starts Asynchronous General Purpose Timer (AGT) timer
+  bool startAGTTimer(float rate){
+    TRACED();
+    uint8_t timer_type=AGT_TIMER;
+    // only channel 1 is available
+    int timer_channel = 1;
+    audio_timer.begin(TIMER_MODE_PERIODIC, timer_type, timer_channel, rate * 2.0, 0.0f, staticCallback, this);
+    IRQManager::getInstance().addPeripheral(IRQ_AGT, audio_timer.get_cfg());
+    audio_timer.open();
+    bool result = audio_timer.start();
+    return result;
+
+  }
+
+  // setup General PWM Timer (GPT timer
+  bool startGPTTimer(float rate) {
+    TRACED();
     uint8_t timer_type = GPT_TIMER;
     int8_t tindex = FspTimer::get_available_timer(timer_type);
     if (tindex==0){
@@ -97,7 +117,7 @@ class TimerAlarmRepeatingDriverRenesas : public TimerAlarmRepeatingDriverBase {
     TimerIrqCfg_t cfg;
     cfg.base_cfg = audio_timer.get_cfg();
     if (!IRQManager::getInstance().addTimerOverflow(cfg)){
-      LOGE("error:addPeripheral");
+      LOGE("error:addTimerOverflow");
     }
     if (!audio_timer.open()){
       LOGE("error:open");

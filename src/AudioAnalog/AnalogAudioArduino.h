@@ -48,9 +48,7 @@ class AnalogDriverArduino : public AnalogDriverBase {
     return timer.begin(callback, cfg.sample_rate, TimeUnit::HZ);
   }
 
-  void end() override {
-    timer.end();
-  }
+  void end() override { timer.end(); }
 
   int available() {
     if (config.rx_tx_mode == TX_MODE) return 0;
@@ -72,11 +70,17 @@ class AnalogDriverArduino : public AnalogDriverBase {
 
   size_t write(const uint8_t *data, size_t len) {
     if (config.rx_tx_mode == RX_MODE) return 0;
-    while (config.is_blocking_write && buffer->availableForWrite()==0){
-      delay(10);
-    } 
-    int16_t *data_16 = (int16_t*)data;
-    return buffer->writeArray(data_16, len/2) * 2;
+
+    // blocking write ?
+    if (config.is_blocking_write) {
+      LOGD("Waiting for buffer to clear");
+      while (buffer->availableForWrite() == 0) {
+        delay(10);
+      }
+    }
+    // write data
+    int16_t *data_16 = (int16_t *)data;
+    return buffer->writeArray(data_16, len / 2) * 2;
   }
 
  protected:
@@ -93,7 +97,7 @@ class AnalogDriverArduino : public AnalogDriverBase {
     if (self->buffer == nullptr) return;
 
     // Logic for reading audio data
-    if (self->config.rx_tx_mode==RX_MODE) {
+    if (self->config.rx_tx_mode == RX_MODE) {
       int channels = self->config.channels;
       for (int j = 0; j < channels; j++) {
         // provides value in range 0…4095
@@ -101,15 +105,15 @@ class AnalogDriverArduino : public AnalogDriverBase {
         value = (value - self->avg_value) * 16;
         self->buffer->write(value);
       }
-    // Logic for writing audio data
-    } else if (self->config.rx_tx_mode==TX_MODE) {
+      // Logic for writing audio data
+    } else if (self->config.rx_tx_mode == TX_MODE) {
       int channels = self->config.channels;
       for (int j = 0; j < channels; j++) {
         int16_t sample = self->buffer->read();
-        sample = map(sample,-32768,32767,0,255);
+        sample = map(sample, -32768, 32767, 0, 255);
         int pin = self->config.start_pin + j;
         analogWrite(pin, sample);
-        //LOGI("analogWrite(%d, %d)", pin, sample);
+        // LOGI("analogWrite(%d, %d)", pin, sample);
       }
     }
   }
@@ -118,28 +122,28 @@ class AnalogDriverArduino : public AnalogDriverBase {
   void setupPins() {
     TRACED();
     if (config.rx_tx_mode == RX_MODE) {
-        LOGI("rx start_pin: %d", config.start_pin);
-        // setup pins for read
-        for (int j = 0; j < config.channels; j++) {
-          int pin = config.start_pin + j;
-          pinMode(pin, INPUT);
-          LOGD("pinMode(%d, INPUT)", pin);
-        }
-        // calculate the avarage value to center the signal
-        float total = 0;
-        for (int j = 0; j < 200; j++) {
-          total += analogRead(config.start_pin);
-        }
-        avg_value = total / 200.0;
-        LOGI("Avg Signal was %d", avg_value);
-    } else  if (config.rx_tx_mode == TX_MODE) {
-        LOGI("tx start_pin: %d", config.start_pin);
-        // setup pins for read
-        for (int j = 0; j < config.channels; j++) {
-          int pin = config.start_pin + j;
-          pinMode(pin, OUTPUT);
-          LOGD("pinMode(%d, OUTPUT)", pin);
-        }
+      LOGI("rx start_pin: %d", config.start_pin);
+      // setup pins for read
+      for (int j = 0; j < config.channels; j++) {
+        int pin = config.start_pin + j;
+        pinMode(pin, INPUT);
+        LOGD("pinMode(%d, INPUT)", pin);
+      }
+      // calculate the avarage value to center the signal
+      float total = 0;
+      for (int j = 0; j < 200; j++) {
+        total += analogRead(config.start_pin);
+      }
+      avg_value = total / 200.0;
+      LOGI("Avg Signal was %d", avg_value);
+    } else if (config.rx_tx_mode == TX_MODE) {
+      LOGI("tx start_pin: %d", config.start_pin);
+      // setup pins for read
+      for (int j = 0; j < config.channels; j++) {
+        int pin = config.start_pin + j;
+        pinMode(pin, OUTPUT);
+        LOGD("pinMode(%d, OUTPUT)", pin);
+      }
     }
   }
 };
