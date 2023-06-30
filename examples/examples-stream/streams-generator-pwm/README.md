@@ -11,13 +11,18 @@ To test the output I am using a piezo electric element
 
 ![DAC](https://pschatzmann.github.io/Resources/img/piezo.jpeg)
 
+You can also use some simple earphones
+
+![DAC](https://pschatzmann.github.io/Resources/img/earphones.jpg)
+
+
 It should also be possible to connect a headphone to the output pins...
 
 
 The pins depend on the Processor:
 
 
-| PIEZO   |  ESP32       | RPI Pico      | MBED         |
-| --------| -------------|---------------|--------------|
-| +       |  GPI4/GPIO5  | GPI2/GPIO3    | GPI2/GPI3    |
-| -       |  GND         |               |              |
+| PIEZO   |  ESP32       | RPI Pico      | MBED         | UNO R4      |
+| --------| -------------|---------------|--------------|-------------|
+| +       |  GPIO4/GPIO5 | GPIO2/GPIO3   | GPIO2/GPIO3  | GPIO2/GPIO4 |
+| -       |  GND         | GND           | GND          | GND         |
