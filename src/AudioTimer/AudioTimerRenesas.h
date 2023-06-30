@@ -48,7 +48,8 @@ class TimerAlarmRepeatingDriverRenesas : public TimerAlarmRepeatingDriverBase {
         LOGE("Undefined Unit");
     }
     if (rate < 550 || rate > 100000){
-      LOGE("Unsupported rate: %d", rate);
+      LOGE("Unsupported rate: %f hz", rate);
+      return false;
     } else {
       LOGI("rate is %f hz", rate);
     }
