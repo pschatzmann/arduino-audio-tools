@@ -21,7 +21,7 @@ void setup(void) {
 
   // RX automatically uses port 0 with pins GPIO34,GPIO35
   auto cfgRx = in.defaultConfig(RX_MODE);
-  // cfgRx.start_pin = A1; // optinally define pin for channel 0
+  // cfgRx.start_pin = A1; // optinally define pin
   // cfgRx.is_auto_center_read = true;
   cfgRx.copyFrom(info);
   in.begin(cfgRx);
