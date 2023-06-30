@@ -48,16 +48,11 @@ class TimerAlarmRepeatingDriverRenesas : public TimerAlarmRepeatingDriverBase {
         LOGE("Undefined Unit");
     }
     if (rate < 550 || rate > 100000){
-      LOGE("Unsopported rate: %d", rate);
+      LOGE("Unsupported rate: %d", rate);
     } else {
       LOGI("rate is %f hz", rate);
     }
-    audio_timer.begin(TIMER_MODE_PERIODIC, type, timer_channel, rate * 2.0,
-                      0.0f, staticCallback, this);
-    IRQManager::getInstance().addPeripheral(IRQ_AGT, audio_timer.get_cfg());
-    audio_timer.open();
-    result = audio_timer.start();
-    return result;
+    return startTimer(rate);
   }
 
   inline static void staticCallback(timer_callback_args_t *ptr) {
@@ -79,6 +74,40 @@ class TimerAlarmRepeatingDriverRenesas : public TimerAlarmRepeatingDriverBase {
   int timer_channel = 1;
   uint8_t type=AGT_TIMER;
 
+  // setup timer
+  bool startTimer(float rate) {
+    uint8_t timer_type = GPT_TIMER;
+    int8_t tindex = FspTimer::get_available_timer(timer_type);
+    if (tindex==0){
+      LOGE("Using pwm reserved timer");
+      FspTimer::force_use_of_pwm_reserved_timer();
+      int8_t tindex = FspTimer::get_available_timer(timer_type);
+    }
+    if (tindex==0){
+      LOGE("no timer");
+      return false;
+    }
+    LOGI("timer idx: %d", tindex);
+    if(!audio_timer.begin(TIMER_MODE_PERIODIC, timer_type, tindex, rate, 0.0f, staticCallback)){
+      LOGE("error:begin");
+      return false;
+    }
+    
+    TimerIrqCfg_t cfg;
+    cfg.base_cfg = audio_timer.get_cfg();
+    if (!IRQManager::getInstance().addTimerOverflow(cfg)){
+      LOGE("error:addPeripheral");
+    }
+    if (!audio_timer.open()){
+      LOGE("error:open");
+      return false;
+    }
+    if (!audio_timer.start()){
+      LOGE("error:start");
+      return false;
+    }
+    return true;
+  }
 };
 
 /// @brief use TimerAlarmRepeating! @ingroup timer_rp2040
