@@ -22,6 +22,7 @@ class AnalogConfig : public AudioInfo {
     int buffer_size = I2S_BUFFER_SIZE;
     RxTxMode rx_tx_mode;
     bool is_blocking_write = true;
+    bool is_auto_center_read = true;
 
 #if defined(ESP32) && defined(USE_ANALOG) 
     // allow ADC to access the protected methods
