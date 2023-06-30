@@ -87,7 +87,7 @@ class AnalogDriverArduino : public AnalogDriverBase {
   AnalogConfig config;
   TimerAlarmRepeating timer;
   BaseBuffer<int16_t> *buffer = nullptr;
-  int16_t avg_value = 0;
+  int avg_value, min, max, count;
 
   /// Sample data and write to buffer
   static void callback(void *arg) {
@@ -102,6 +102,9 @@ class AnalogDriverArduino : public AnalogDriverBase {
       for (int j = 0; j < channels; j++) {
         // provides value in range 0…4095
         value = analogRead(self->config.start_pin + j);
+        if (self->config.is_auto_center_read){
+          self->updateMinMax(value);
+        }
         value = (value - self->avg_value) * 16;
         self->buffer->write(value);
       }
@@ -129,13 +132,14 @@ class AnalogDriverArduino : public AnalogDriverBase {
         pinMode(pin, INPUT);
         LOGD("pinMode(%d, INPUT)", pin);
       }
-      // calculate the avarage value to center the signal
-      float total = 0;
-      for (int j = 0; j < 200; j++) {
-        total += analogRead(config.start_pin);
+
+      if (config.is_auto_center_read){
+        // calculate the avarage value to center the signal
+        for (int j = 0; j < 1024; j++) {
+          updateMinMax(analogRead(config.start_pin));
+        }
+        LOGI("Avg Signal was %d", avg_value);
       }
-      avg_value = total / 200.0;
-      LOGI("Avg Signal was %d", avg_value);
     } else if (config.rx_tx_mode == TX_MODE) {
       LOGI("tx start_pin: %d", config.start_pin);
       // setup pins for read
@@ -145,6 +149,19 @@ class AnalogDriverArduino : public AnalogDriverBase {
         LOGD("pinMode(%d, OUTPUT)", pin);
       }
     }
+  }
+
+  void updateMinMax(int value){
+    if (value<min) min = value;
+    if (value>max) max = value;
+    if (count++==1024) updateAvg();
+  }
+
+  void updateAvg(){
+    avg_value = (max + min) / 2;   
+    min = INT_MAX;
+    max = INT_MIN; 
+    count = 0;
   }
 };
 
