@@ -12,14 +12,13 @@
 AnalogAudioStream in; 
 AudioInfo info(8000, 1, 16);
 CsvOutput<int16_t> out(Serial); // ASCII output stream 
-StreamCopy copier(out, in); // copy i2sStream to CsvOutput
+StreamCopy copier(out, in); 
 
 // Arduino Setup
 void setup(void) {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
 
-  // RX automatically uses port 0 with pins GPIO34,GPIO35
   auto cfgRx = in.defaultConfig(RX_MODE);
   // cfgRx.start_pin = A1; // optinally define pin
   // cfgRx.is_auto_center_read = true;
