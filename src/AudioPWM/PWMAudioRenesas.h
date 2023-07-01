@@ -66,6 +66,7 @@ class PWMDriverRenesas : public DriverPWMBase {
 
         /// when we get the first write -> we activate the timer to start with the output of data
         virtual void startTimer() override {
+            TRACED();
             if (!is_timer_started){
                 TRACED();
                 ticker.setCallbackParameter(this);

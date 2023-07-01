@@ -78,7 +78,7 @@ class TimerAlarmRepeatingDriverRenesas : public TimerAlarmRepeatingDriverBase {
  protected:
   FspTimer audio_timer;
   my_repeating_timer_callback_t instanceCallback = nullptr;
-  uint8_t timer_type = 1; // Should be 0 - but this is currently not working
+  uint8_t timer_type = 0; // Should be 0 - but this is currently not working
 
   // starts Asynchronous General Purpose Timer (AGT) timer
   bool startAGTTimer(float rate){
@@ -102,23 +102,23 @@ class TimerAlarmRepeatingDriverRenesas : public TimerAlarmRepeatingDriverBase {
     if (tindex==0){
       LOGE("Using pwm reserved timer");
       FspTimer::force_use_of_pwm_reserved_timer();
-      int8_t tindex = FspTimer::get_available_timer(timer_type);
+      tindex = FspTimer::get_available_timer(timer_type);
     }
     if (tindex==0){
       LOGE("no timer");
       return false;
     }
     LOGI("timer idx: %d", tindex);
-    if(!audio_timer.begin(TIMER_MODE_PERIODIC, timer_type, tindex, rate, 0.0f, staticCallback)){
+    if(!audio_timer.begin(TIMER_MODE_PERIODIC, timer_type, tindex, rate, 0.0f, staticCallback, this)){
       LOGE("error:begin");
       return false;
     }
     
-    TimerIrqCfg_t cfg;
-    cfg.base_cfg = audio_timer.get_cfg();
-    if (!IRQManager::getInstance().addTimerOverflow(cfg)){
-      LOGE("error:addTimerOverflow");
+    if (!audio_timer.setup_overflow_irq()){
+      LOGE("error:setup_overflow_irq");
+      return false;      
     }
+
     if (!audio_timer.open()){
       LOGE("error:open");
       return false;
