@@ -593,22 +593,35 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #define PIN_ANALOG_START A0
 #define ANALOG_BUFFER_SIZE 512
 #define ANALOG_BUFFERS 5
+
+// default pins for UNO VS1053 shield
+#define VS1053_CS 6 
+#define VS1053_DCS 7 
+#define VS1053_DREQ 2 
+#define VS1053_CS_SD 9
+#define VS1053_RESET 8
+#define VS1053_DEFINED
+#define PIN_CS 9
+
 #ifdef ARDUINO
 #  define USE_WIFI
 #  define USE_URL_ARDUINO
 #  define USE_AUDIO_SERVER
 #  include "WiFiS3.h"
 #endif
+
 #endif
 
 //------ VS1053 ----------
 
 // Default Pins for VS1053
-#define VS1053_CS 5
-#define VS1053_DCS 16
-#define VS1053_DREQ 4
-#define VS1053_RESET 15  
-#define VS1053_CS_SD -1
+#ifndef VS1053_DEFINED
+#  define VS1053_CS 5
+#  define VS1053_DCS 16
+#  define VS1053_DREQ 4
+#  define VS1053_RESET 15  
+#  define VS1053_CS_SD -1
+#endif
 
 // use 0 for https://github.com/baldram/ESP_VS1053_Library
 // use 1 for https://github.com/pschatzmann/arduino-vs1053
