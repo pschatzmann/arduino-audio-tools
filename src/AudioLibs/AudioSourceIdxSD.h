@@ -1,6 +1,5 @@
 #pragma once
 #include <SPI.h>
-#include <FS.h>
 #include <SD.h>
 #include "AudioLogger.h"
 #include "AudioBasic/StrExt.h"
@@ -101,8 +100,8 @@ public:
   long size() { return idx.size();}
 
 protected:
-#ifdef RP2040_HOWER
-  SDIndex<SDClass,fs::File> idx{SD};
+#if defined(USE_SD_NO_NS) 
+  SDIndex<SDClass, File> idx{SD};
 #else
   SDIndex<fs::SDFS,fs::File> idx{SD};
 #endif

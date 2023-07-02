@@ -4,7 +4,6 @@
 #include "AudioLogger.h"
 #include "AudioTools/AudioSource.h"
 #include "AudioLibs/SDDirect.h"
-#include "FS.h"
 #include "SD.h"
 #include "SPI.h"
 
@@ -103,8 +102,8 @@ public:
   long size() { return idx.size();}
 
 protected:
-#ifdef RP2040_HOWER
-  SDDirect<SDClass,fs::File> idx{SD};
+#if defined(USE_SD_NO_NS) 
+  SDDirect<SDClass, File> idx{SD};
 #else
   SDDirect<fs::SDFS,fs::File> idx{SD};
 #endif
