@@ -142,27 +142,49 @@ class AudioLogger {
     snprintf(AudioLogger::instance().str(), LOG_PRINTF_BUFFER_SIZE, fmt,  ##__VA_ARGS__); \
     AudioLogger::instance().println();\
 }
+#define LOG_MIN(level) { \
+    AudioLogger::instance().prefix(__FILE__,__LINE__, level); \
+    AudioLogger::instance().println();\
+}
 
+#ifdef LOG_NO_MSG
+#define LOGD(fmt, ...) if (AudioLogger::instance().level()<=AudioLogger::Debug) { LOG_MIN(AudioLogger::Debug);}
+#define LOGI(fmt, ...) if (AudioLogger::instance().level()<=AudioLogger::Info) { LOG_MIN(AudioLogger::Info);}
+#define LOGW(fmt, ...) if (AudioLogger::instance().level()<=AudioLogger::Warning) { LOG_MIN(AudioLogger::Warning);}
+#define LOGE(fmt, ...) if (AudioLogger::instance().level()<=AudioLogger::Error) { LOG_MIN(AudioLogger::Error);}
+#else
 // Log statments which store the fmt string in Progmem
 #define LOGD(fmt, ...) if (AudioLogger::instance().level()<=AudioLogger::Debug) { LOG_OUT_PGMEM(AudioLogger::Debug, fmt, ##__VA_ARGS__);}
 #define LOGI(fmt, ...) if (AudioLogger::instance().level()<=AudioLogger::Info) { LOG_OUT_PGMEM(AudioLogger::Info, fmt, ##__VA_ARGS__);}
 #define LOGW(fmt, ...) if (AudioLogger::instance().level()<=AudioLogger::Warning) { LOG_OUT_PGMEM(AudioLogger::Warning, fmt, ##__VA_ARGS__);}
 #define LOGE(fmt, ...) if (AudioLogger::instance().level()<=AudioLogger::Error) { LOG_OUT_PGMEM(AudioLogger::Error, fmt, ##__VA_ARGS__);}
+#endif
 
 // Just log file and line 
-#if defined(NO_TRACED) 
+#if defined(NO_TRACED) || defined(NO_TRACE)
 #  define TRACED()
 #else
 #  define TRACED() if (AudioLogger::instance().level()<=AudioLogger::Debug) { LOG_OUT(AudioLogger::Debug, LOG_METHOD);}
 #endif
 
-#if  defined(NO_TRACEI) 
+#if  defined(NO_TRACEI) || defined(NO_TRACE)
 #  define TRACEI()
 #else 
 #  define TRACEI() if (AudioLogger::instance().level()<=AudioLogger::Info) { LOG_OUT(AudioLogger::Info, LOG_METHOD);}
 #endif
-#define TRACEW() if (AudioLogger::instance().level()<=AudioLogger::Warning) { LOG_OUT(AudioLogger::Warning, LOG_METHOD);}
+
+#if  defined(NO_TRACEW) || defined(NO_TRACE)
+#  define TRACEW()
+#else 
+#  define TRACEW() if (AudioLogger::instance().level()<=AudioLogger::Warning) { LOG_OUT(AudioLogger::Warning, LOG_METHOD);}
+#endif
+
+#if  defined(NO_TRACEE) || defined(NO_TRACE)
+#  define TRACEE()
+#else 
 #define TRACEE() if (AudioLogger::instance().level()<=AudioLogger::Error) { LOG_OUT(AudioLogger::Error, LOG_METHOD);}
+#endif
+
 
 
 #else

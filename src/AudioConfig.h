@@ -401,6 +401,7 @@ uint64_t millis() {return (xTaskGetTickCount() * portTICK_PERIOD_MS);}
 //----- RP2040 -----------
 #elif defined(ARDUINO_ARCH_RP2040)
 #define RP2040_HOWER
+#define USE_SD_NO_NS
 #define USE_I2S 
 #define USE_PWM
 #define USE_ANALOG_ARDUINO
@@ -580,6 +581,10 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 //------ RENESAS ----------
 // Arduino UNO R4
 #if defined(ARDUINO_ARCH_RENESAS) || defined(_RENESAS_RA_) 
+// no trace to save on memory
+#define NO_TRACE
+//#define LOG_NO_MSG
+
 #define USE_INT24_FROM_INT
 #define IS_RENESAS 1
 #define USE_TYPETRAITS
@@ -590,10 +595,10 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #define PIN_PWM_COUNT 12
 #define USE_ANALOG
 #define USE_ANALOG_ARDUINO
+#define USE_SD_NO_NS
 #define PIN_ANALOG_START A0
 #define ANALOG_BUFFER_SIZE 512
 #define ANALOG_BUFFERS 5
-
 // default pins for UNO VS1053 shield
 #define VS1053_CS 6 
 #define VS1053_DCS 7 

@@ -10,15 +10,12 @@
 
 #include "AudioTools.h"
 #include "AudioLibs/VS1053Stream.h"
-#include "AudioLibs/AudioSourceSDFAT.h"
+#include "AudioLibs/AudioSourceSD.h"
 #include "AudioCodecs/CodecCopy.h"
-
-#define SD_CARD_CS  22
 
 const char *startFilePath="/";
 const char* ext="mp3";
-SdSpiConfig sdcfg(SD_CARD_CS, DEDICATED_SPI, SD_SCK_MHZ(10) , &SPI);
-AudioSourceSDFAT source(startFilePath, ext, sdcfg);
+AudioSourceSD source(startFilePath, ext);
 VS1053Stream vs1053; // final output
 AudioPlayer player(source, vs1053, *new CopyDecoder());
 

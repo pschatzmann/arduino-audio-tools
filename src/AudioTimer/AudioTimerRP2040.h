@@ -47,8 +47,6 @@ class TimerAlarmRepeatingDriverRP2040 : public TimerAlarmRepeatingDriverBase {
                     uint64_t time_us = AudioTime::toTimeUs(time);
                     result = alarm_pool_add_repeating_timer_us(ap, time_us, &staticCallback, this, &timer);
                     break;
-                default:
-                    LOGE("Undefined Unit");
             }
             
             return result;

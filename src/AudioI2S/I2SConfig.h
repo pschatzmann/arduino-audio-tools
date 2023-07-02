@@ -121,11 +121,11 @@ class I2SConfig : public AudioInfo {
       LOGI("sample rate: %d", sample_rate);
       LOGI("bits per sample: %d", bits_per_sample);
       LOGI("number of channels: %d", channels);
+#ifdef ESP32
       LOGI("signal_type: %s", i2s_signal_types[signal_type]);      
       if (signal_type==Digital){
         LOGI("i2s_format: %s", i2s_formats[i2s_format]);      
       } 
-#ifdef ESP32
       LOGI("auto_clear: %s",auto_clear? "true" : "false");
       if (use_apll) {
         LOGI("use_apll: %s", use_apll ? "true" : "false");
