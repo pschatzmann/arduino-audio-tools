@@ -253,7 +253,7 @@ namespace audio_tools {
             return info;
         }
 
-        /// starts / resumes the playing of a matching song
+        /// starts / resumes the playing after calling stop()
         virtual void play() {
             TRACED();
             setActive(true);
@@ -331,13 +331,15 @@ namespace audio_tools {
 
         /// The same like start() / stop()
         virtual void setActive(bool isActive){
-            if (isActive){
-                fade.setFadeInActive(true); 
-            } else {
-                fade.setFadeOutActive(true); 
-                copier.copy();
-                writeSilence(2048);
-            }            
+            if (is_auto_fade){
+                if (isActive){
+                    fade.setFadeInActive(true); 
+                } else {
+                    fade.setFadeOutActive(true); 
+                    copier.copy();
+                    writeSilence(2048);
+                }            
+            }
             active = isActive;
         }
 
@@ -450,6 +452,15 @@ namespace audio_tools {
             return &volume_out;
         }
 
+        /// Activates/deactivates the automatic fade in and fade out to prevent popping sounds: default is active
+        bool setAutoFade(bool active){
+            is_auto_fade = active;
+        }
+
+        bool isAutoFade() {
+            return is_auto_fade;
+        }
+
     protected:
         bool active = false;
         bool autonext = true;
@@ -472,13 +483,14 @@ namespace audio_tools {
         int stream_increment = 1; // +1 moves forward; -1 moves backward
         float current_volume = -1.0; // illegal value which will trigger an update
         int delay_if_full = 100;
+        bool is_auto_fade = true;
 
         void setupFade() {
             if (p_final_print !=  nullptr) {
                 fade.setAudioInfo(p_final_print->audioInfo());
             } else if (p_final_stream != nullptr){
                 fade.setAudioInfo(p_final_stream->audioInfo());
-            }
+            }                
         }
 
 
@@ -487,7 +499,7 @@ namespace audio_tools {
             if (p_final_stream==nullptr) return;
             if (p_final_stream->availableForWrite()==0) return;
             if (p_input_stream == nullptr || millis() > timeout) {
-                fade.setFadeInActive(true);
+                if (is_auto_fade) fade.setFadeInActive(true);
                 if (autonext) {
                     LOGI("-> timeout - moving by %d", stream_increment);
                     // open next stream
@@ -505,10 +517,12 @@ namespace audio_tools {
         void writeEnd() {
             // end silently
             TRACEI();
-            fade.setFadeOutActive(true);
-            copier.copy();
-            // start by fading in
-            fade.setFadeInActive(true);
+            if (is_auto_fade){
+                fade.setFadeOutActive(true);
+                copier.copy();
+                // start by fading in
+                fade.setFadeInActive(true);
+            }
             // restart the decoder to make sure it does not contain any audio when we continue
             p_decoder->begin();
         }
