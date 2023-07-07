@@ -101,6 +101,7 @@ protected:
         }
       }
     }
+    is_fade_out = false;
     LOGI("faded out %d frames to volume %f",frames, volume);
   }
 
