@@ -8,6 +8,9 @@
 #include "AudioBasic/Int24.h"
 #include "AudioBasic/Collections/Vector.h"
 
+// fix compile error for ESP32 C3
+#undef HZ
+
 namespace audio_tools {
 
 /**
