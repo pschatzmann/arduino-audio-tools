@@ -453,7 +453,7 @@ namespace audio_tools {
         }
 
         /// Activates/deactivates the automatic fade in and fade out to prevent popping sounds: default is active
-        bool setAutoFade(bool active){
+        void setAutoFade(bool active){
             is_auto_fade = active;
         }
 
