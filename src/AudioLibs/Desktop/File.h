@@ -21,8 +21,7 @@ class File : public Stream {
     File(const char* fn) {
         open(fn, FILE_READ);
     }
-
-    File(File &file){
+    File(const File &file){
         open(file.name(), FILE_READ);
     }
 
@@ -31,7 +30,6 @@ class File : public Stream {
         return *this;
     }
 
-    
     void open(const char* name, FileMode mode){
         file_path = name;
         switch(mode){
@@ -171,7 +169,7 @@ class File : public Stream {
         stream.close();
     }
 
-    const char* name() {
+    const char* name() const {
         return file_path;
     }
 
@@ -193,8 +191,9 @@ public:
         file.open(path, mode);
         return file;
     }
-    File open(const std::string& path, FileMode mode = FILE_READ){
-        return open(path.c_str(), mode);
+    File open(const std::string &path, FileMode mode = FILE_READ){
+        const char* path_str = path.c_str(); 
+        return this->open(path_str, mode);
     }
     bool exists(const char* path){
         struct stat buffer;   
