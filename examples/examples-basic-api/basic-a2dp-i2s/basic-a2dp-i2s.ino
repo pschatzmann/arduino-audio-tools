@@ -14,7 +14,7 @@
 BluetoothA2DPSink a2dp_sink;
 I2SStream i2s;
 
-// Write data to SPDIF in callback
+// Write data to I2S
 void read_data_stream(const uint8_t *data, uint32_t length) {
   i2s.write(data, length);
 }
@@ -36,6 +36,8 @@ void setup() {
   cfg.sample_rate = a2dp_sink.sample_rate();
   cfg.channels = 2;
   cfg.bits_per_sample = 16;
+  cfg.buffer_count = 8;
+  cfg.buffer_size = 256;
   i2s.begin(cfg);
 }
 
