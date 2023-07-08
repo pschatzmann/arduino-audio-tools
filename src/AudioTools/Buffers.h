@@ -257,6 +257,21 @@ class RingBuffer : public BaseBuffer<T> {
     return _aucBuffer[_iTail];
   }
 
+  virtual int peekArray(T*data, int n){
+    if (isEmpty()) return -1;
+    int result = 0;
+    int count = _numElems;
+    int tail = _iTail;
+    for (int j=0;j<n;j++){
+      data[j] = _aucBuffer[tail];
+      tail = nextIndex(tail);
+      count--;
+      result++;
+      if (count==0)break;
+    }
+    return result;
+  }
+
   // checks if the buffer is full
   virtual bool isFull() { return available() == max_size; }
 
