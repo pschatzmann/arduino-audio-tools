@@ -33,7 +33,7 @@ class Slice {
   }
 
   /// Returns true if we contain any valid data
-  operator bool() { return len > 0 && start!?nullptr; }
+  operator bool() { return len > 0 && start!=nullptr; }
 
   /// Returns the slice at the indicated index for the indicated slize size;
   Slice slice(int sliceSize, int idx) {
