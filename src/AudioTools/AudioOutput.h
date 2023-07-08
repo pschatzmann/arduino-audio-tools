@@ -323,7 +323,7 @@ public:
     size_bytes = copy_buffer_size_bytes;
     stream_idx = 0;
     memory_type = memoryType;
-    allocate_buffers();
+    allocate_buffers(size_bytes);
     return true;
   }
 
@@ -414,6 +414,14 @@ public:
     return;
   }
 
+  /// Resizes the buffer to the indicated number of bytes
+  void resize(int size){
+    if(size != size_bytes){
+      allocate_buffers(size);
+    }
+    size_bytes = size;
+  }
+
 protected:
   Vector<RingBuffer<T> *> buffers{0};
   Vector<T> output{0};
@@ -434,27 +442,27 @@ protected:
     }
   }
 
-  void allocate_buffers() {
+  void allocate_buffers(int size) {
     // allocate ringbuffers for each output
     for (int j = 0; j < output_count; j++) {
       if (buffers[j] != nullptr) {
         delete buffers[j];
       }
 #if defined(ESP32) && defined(ARDUINO)
-      if (memory_type == PS_RAM && ESP.getFreePsram() >= size_bytes) {
-        p_memory = ps_malloc(size_bytes);
-        LOGI("Buffer %d allocated %d bytes in PS_RAM", j, size_bytes);
+      if (memory_type == PS_RAM && ESP.getFreePsram() >= size) {
+        p_memory = ps_malloc(size);
+        LOGI("Buffer %d allocated %d bytes in PS_RAM", j, size);
       } else {
-        p_memory = malloc(size_bytes);
-        LOGI("Buffer %d allocated %d bytes in RAM", j, size_bytes);
+        p_memory = malloc(size);
+        LOGI("Buffer %d allocated %d bytes in RAM", j, size);
       }
       if (p_memory != nullptr) {
-        buffers[j] = new (p_memory) RingBuffer<T>(size_bytes / sizeof(T));
+        buffers[j] = new (p_memory) RingBuffer<T>(size / sizeof(T));
       } else {
-        LOGE("Not enough memory to allocate %d bytes", size_bytes);
+        LOGE("Not enough memory to allocate %d bytes", size);
       }
 #else
-      buffers[j] = new RingBuffer<T>(size_bytes / sizeof(T));
+      buffers[j] = new RingBuffer<T>(size / sizeof(T));
 #endif
     }
   }
