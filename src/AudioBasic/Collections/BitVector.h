@@ -1,4 +1,5 @@
 #pragma once
+#ifdef HAS_IOSTRAM
 #include "Vector.h"
 #include <stdint.h>
 #include <iostream>
@@ -115,3 +116,5 @@ protected:
 
 
 } // namespace audio_tools
+
+#endif
