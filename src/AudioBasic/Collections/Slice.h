@@ -23,7 +23,7 @@ class Slice {
   /// Returns the data
   T* data() { return start; }
 
-  /// Returns the (result) data size in bytes
+  /// Returns the (result) data size is number of entries
   size_t size() { return len; }
 
   /// Returns the number of slices of the indicated size
@@ -32,7 +32,8 @@ class Slice {
     return len % sliceSize == 0 ? result : result+1;
   }
 
-  operator bool() { return len > 0; }
+  /// Returns true if we contain any valid data
+  operator bool() { return len > 0 && start!?nullptr; }
 
   /// Returns the slice at the indicated index for the indicated slize size;
   Slice slice(int sliceSize, int idx) {
