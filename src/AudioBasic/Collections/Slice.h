@@ -7,6 +7,8 @@ namespace audio_tools {
 /**
  * @brief Helps to split up a big memory array into smaller slices. There are no
  * additinal heap allocations!
+ * Example: if we have an array with 9 entries (1,2,3,4,5,6,7,8,9): slices(5) gives 2.
+ * slice(5,0) returns size 5 with 1,2,3,4,5 and slice(5,1) returns size 4 with 6,7,8,9!
  * @ingroup collections
  * @author Phil Schatzmann
  */
@@ -24,7 +26,7 @@ class Slice {
   /// Returns the (result) data size in bytes
   size_t size() { return len; }
 
-  /// Returns the number of slices
+  /// Returns the number of slices of the indicated size
   size_t slices(int sliceSize){
     int result = len / sliceSize;
     return len % sliceSize == 0 ? result : result+1;
@@ -32,7 +34,7 @@ class Slice {
 
   operator bool() { return len > 0; }
 
-  /// Returns the slice at the indicated index;
+  /// Returns the slice at the indicated index for the indicated slize size;
   Slice slice(int sliceSize, int idx) {
     int start_pos = idx * sliceSize;
     int end_pos = start_pos + sliceSize;
