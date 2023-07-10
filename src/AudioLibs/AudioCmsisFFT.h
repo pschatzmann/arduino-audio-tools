@@ -1,9 +1,11 @@
 #pragma once
 #include "AudioFFT.h"
-//#ifdef STM32
-#include "CMSIS_DSP.h"
-//#endif
-
+#ifdef STM32
+#  include "CMSIS_DSP.h"
+#endif
+#if defined(ARDUINO_ARCH_RENESAS) || defined(ARDUINO_ARCH_RP2040)
+#  include "arm_vec_fft.h"
+#endif
 /** 
  * @defgroup fft-cmsis CMSIS
  * @ingroup fft
