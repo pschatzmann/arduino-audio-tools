@@ -1,14 +1,11 @@
 #pragma once
+#include "AudioBasic/Net.h"
 #include "AudioLogger.h"
-
-#define htonl(x)                                            \
-  (((x) << 24 & 0xFF000000UL) | ((x) << 8 & 0x00FF0000UL) | \
-   ((x) >> 8 & 0x0000FF00UL) | ((x) >> 24 & 0x000000FFUL))
-#define ntohl(x) htonl(x)
-#define htons(x) (((uint16_t)(x)&0xff00) >> 8) | (((uint16_t)(x)&0X00FF) << 8)
-#define ntohs(x) htons(x)
+#include "AudioCodecs/CodecAACHelix.h"
 
 namespace audio_tools {
+
+class ContainerMP4;
 
 /**
  * @brief Represents a single MPEG4 atom
@@ -16,13 +13,17 @@ namespace audio_tools {
  * @copyright GPLv3
  */
 struct MP4Atom {
-  MP4Atom() = default;
-  MP4Atom(const char *atom) { strncpy(this->atom, atom, 4); }
+  friend class ContainerMP4;
+  MP4Atom(ContainerMP4 *container) { this->container = container; };
+  MP4Atom(ContainerMP4 *container, const char *atom) {
+    strncpy(this->atom, atom, 4);
+    this->container = container;
+  }
   // start pos in data stream
-  size_t start_pos;
-
-  /// size w/o size filed and atom
-  uint32_t size = 0;
+  int start_pos = 0;
+  /// size w/o size and atom fields
+  int total_size = 0;
+  int data_size = 0;
   /// 4 digit atom name
   char atom[5] = {0};
   /// true if atom is header w/o data content
@@ -30,44 +31,54 @@ struct MP4Atom {
   // data
   const uint8_t *data = nullptr;
   // length of the data
-  uint32_t data_size = 0;
+  // uint32_t data_size = 0;
+  // pointer to parent container
+  ContainerMP4 *container = nullptr;
+  /// data is provided in
+  bool is_stream = false;
 
-  void setHeader(uint8_t *data, int len) {
-    uint32_t *p_size = (uint32_t *)data;
-    size = ntohl(*p_size) - 8;
-    memcpy(atom, data + 4, 4);
-    // it is a header atom when the next atom just follows it
-    is_header_atom = isalpha(data[12]) && isalpha(data[13]) &&
-                     isalpha(data[14]) && isalpha(data[15]);
-    LOGI("%s %d - %s", atom, size, is_header_atom ? "header" : "atom");
-  }
+  void setHeader(uint8_t *data, int total);
 
+  /// Compares the atom name
   bool is(const char *atom) { return strncmp(this->atom, atom, 4) == 0; }
 
-  void setData(const uint8_t *data, int len) {
+  // /// Incomplete atom data, we send the data in individual chunks
+  // bool isStream();
+
+  /// Atom which is sent to print output
+  bool isStreamAtom();
+
+  operator bool() {
+    return isalpha(atom[0]) && isalpha(atom[1]) && isalpha(atom[2]) &&
+           isalpha(atom[3]) && total_size >= 0;
+  }
+
+  /// Updates the data and size field
+  void setData(const uint8_t *data, int len_data) {
     this->data = data;
-    data_size = len;
+    this->data_size = len_data;
     // assert(size == len);
   }
 
+  /// Clears the atom
   void clear() {
-    size = 0;
+    total_size = 0;
+    data_size = 0;
     memset(atom, 0, 5);
     data = nullptr;
-    data_size = 0;
   }
 
+  /// Returns true if the atom is a header atom
   bool isHeader() { return is_header_atom; }
-  operator bool() { return strlen(atom) == 4; }
 
   uint16_t read16(int pos) {
-    if (size < pos) return 0;
-    uint16_t *ptr = (uint16_t *)data + pos;
+    if (data_size < pos) return 0;
+    uint16_t *ptr = (uint16_t *)(data + pos);
     return ntohs(*ptr);
   }
   uint32_t read32(int pos) {
-    if (size < pos) return 0;
-    uint32_t *ptr = (uint32_t *)data + pos;
+    if (data_size < pos) return 0;
+    uint32_t *ptr = (uint32_t *)(data + pos);
     return ntohl(*ptr);
   }
 };
@@ -79,7 +90,7 @@ struct MP4Atom {
  */
 class MP4ParseBuffer {
  public:
-  MP4ParseBuffer() = default;
+  MP4ParseBuffer(ContainerMP4 *container) { this->container = container; };
   // provides the data
   size_t write(const uint8_t *data, size_t length) {
     // initialize buffer size
@@ -88,34 +99,7 @@ class MP4ParseBuffer {
   }
 
   /// returns the parsed atoms
-  MP4Atom parse() {
-    // determine atom length from header of buffer
-    MP4Atom result;
-    while (true) {
-      if (buffer.available() < 64) break;
-
-      uint8_t header[64];
-      buffer.peekArray(header, 64);
-      result.setHeader(header, 64);
-      int16_t len = peekLength();
-
-      if (result.is_header_atom) {
-        // consume data for header atom
-        buffer.readArray(header, 32);
-      } else {
-        if (len <= buffer.available()) {
-          // not enough data
-          break;
-        } else {
-          buffer.readArray(header, 32);
-          uint8_t data[len - 32];
-          buffer.readArray(data, len - 32);
-          result.setData(data, len - 32);
-        }
-      }
-      return result;
-    }
-  }
+  MP4Atom parse();
 
   int available() { return buffer.available(); }
 
@@ -124,16 +108,8 @@ class MP4ParseBuffer {
   }
 
  protected:
-  RingBuffer<uint8_t> buffer{0};
-
-  // determines the actual length attribute value from the atom at the head of
-  // the buffer
-  int16_t peekLength() {
-    int16_t len;
-    buffer.peekArray((uint8_t *)&len, 4);
-    len = ntohl(len);
-    return len;
-  }
+  RingBuffer<uint8_t> buffer{1024};
+  ContainerMP4 *container = nullptr;
 };
 
 /**
@@ -147,25 +123,44 @@ class MP4ParseBuffer {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class ContainerMP4 : public AudioStream {
+class ContainerMP4 : public AudioDecoder {
+  friend class MP4ParseBuffer;
+
  public:
-  ContainerMP4(Print &out, const char *streamAtom = "mdat") {
-    p_print = &out;
+  ContainerMP4(const char *streamAtom = "mdat") {
     stream_atom = streamAtom;
   }
 
-  bool begin() { current_pos = 0; }
+  void begin() override {
+    current_pos = 0;
+    assert(p_print!=nullptr);
+    decoder.setOutput(*p_print);
+    decoder.begin();
+  }
+
+  void end() override { decoder.end(); }
+
+  operator bool() override { return true; }
+
 
   /// writes the next atom
-  size_t write(const uint8_t *data, size_t length) override {
+  size_t write(const void *in, size_t length) override {
+    TRACED();
+    uint8_t *data = (uint8_t *)in;
+    // initialize the max_size with copy length
+    if (max_size == 0) setMaxSize(length);
+
     // direct output to stream
     if (stream_out_open > 0) {
-      size_t len = min(stream_out_open, length);
-      size_t result = len;
-      MP4Atom atom{stream_atom};
-      atom.size = len;
+      int len = min(stream_out_open, (int)length);
+      int result = len;
+      MP4Atom atom{this, stream_atom};
+      atom.total_size = len;
+      atom.data_size = len;
       atom.data = data;
-      if (callback != nullptr) callback(atom, *this);
+      atom.start_pos = current_pos;
+
+      if (data_callback != nullptr) data_callback(atom, *this);
       current_pos += len;
       stream_out_open -= result;
       return result;
@@ -174,79 +169,208 @@ class ContainerMP4 : public AudioStream {
     // parse data and provide info via callback
     size_t result = buffer.write(data, length);
     MP4Atom atom = buffer.parse();
-    while (atom) {
-      atom.start_pos = current_pos;
-      if (callback != nullptr) callback(atom, *this);
-      current_pos += atom.size + 8;
+    while (atom && !atom.is_stream) {
+      // atom.start_pos = current_pos;
+      // current_pos += atom.total_size;
       atom = buffer.parse();
-    }
-
-    // write data of mdat to print
-    if (atom.is(stream_atom)) {
-      setStreamOutputSize(atom.size);
-      size_t len = buffer.available();
-      uint8_t tmp[len];
-      buffer.readArray(tmp, len);
-
-      MP4Atom atom{stream_atom};
-      atom.start_pos = current_pos;
-      atom.size = len;
-      atom.data = tmp;
-      if (callback != nullptr) callback(atom, *this);
-      current_pos += len;
-
-      stream_out_open -= result;
     }
 
     return result;
   }
 
   /// Defines the callback that is executed on each atom
-  void setCallback(void (*cb)(MP4Atom atom, ContainerMP4 &container)) {
-    callback = cb;
+  void setDataCallback(void (*cb)(MP4Atom &atom, ContainerMP4 &container)) {
+    data_callback = cb;
   }
 
-  /// output of mdat to p_print;
-  size_t print(const uint8_t *data, size_t len) {
-    return p_print == nullptr ? 0 : p_print->write(data, len);
+  /// Defines the callback which is used to determine if an atom is a header
+  /// atom
+  void setIsHeaderCallback(bool (*cb)(MP4Atom *atom, const uint8_t *data)) {
+    is_header_callback = cb;
   }
 
-  /// Provides the content atom which will be written incrementally
+  /// Provides the content atom name which will be written incrementally
   const char *streamAtom() { return stream_atom; }
 
+  /// Checks if the indicated atom is a header atom: you can define your custom
+  /// method with setIsHeaderCallback()
+  bool isHeader(MP4Atom *atom, const uint8_t *data) {
+    return is_header_callback(atom, data);
+  }
+
+  /// Defines the maximum size that we can submit to the decoder
+  void setMaxSize(int size) { max_size = size; }
+
+  /// Provides the maximum size 
+  int maxSize() { return max_size; }
+
  protected:
-  MP4ParseBuffer buffer;
+  int max_size;
+  MP4ParseBuffer buffer{this};
   int stream_out_open = 0;
-  Print *p_print = nullptr;
+  bool is_sound = false;
+  AACDecoderHelix decoder{false};
   const char *stream_atom;
-  size_t current_pos = 0;
-  void (*callback)(MP4Atom atom, ContainerMP4 &container) = default_callback;
+  int current_pos = 0;
+  const char *current_atom = nullptr;
+  void (*data_callback)(MP4Atom &atom,
+                        ContainerMP4 &container) = default_data_callback;
+  bool (*is_header_callback)(MP4Atom *atom,
+                             const uint8_t *data) = default_is_header_callback;
+
+  /// output of mdat to decoder;
+  size_t decode(const uint8_t *data, size_t len) {
+    return decoder.write(data, len);
+  }
+
 
   void setStreamOutputSize(int size) { stream_out_open = size; }
 
-  static void default_callback(MP4Atom atom, ContainerMP4 &container) {
+  /// Default logic to determine if a atom is a header
+  static bool default_is_header_callback(MP4Atom *atom, const uint8_t *data) {
+    // it is a header atom when the next atom just follows it
+    bool is_header_atom = isalpha(data[12]) && isalpha(data[13]) &&
+                          isalpha(data[14]) && isalpha(data[15]) &&
+                          atom->data_size > 0;
+    return is_header_atom;
+  }
+
+  /// Default logic to process an atom
+  static void default_data_callback(MP4Atom &atom, ContainerMP4 &container) {
+    // char msg[80];
+    // snprintf(msg, 80, "%s %d-%d %d", atom.atom, (int)atom.start_pos,
+    // atom.start_pos+atom.total_size,  atom.total_size);
+    LOGI("%s: 0x%06x-0x%06x %d %s", atom.atom, (int)atom.start_pos,
+         (int)atom.start_pos + atom.total_size, atom.total_size, atom.is_header_atom?" *":"");
+    if (atom.total_size > 1024) {
+      TRACED();
+    }
     // parse ftyp to determine the subtype
-    if (atom.is("ftyp")) {
+    if (atom.is("ftyp") && atom.data != nullptr) {
       char subtype[5];
-      strncpy(subtype, (char *)atom.data + 8, 4);
-      LOGI("subtype: %s", subtype);
+      memcpy(subtype, atom.data, 4);
+      subtype[4] = 0;
+      LOGI("    subtype: %s", subtype);
+    }
+
+    // parse hdlr to determine if audio
+    if (atom.is("hdlr") && atom.data != nullptr) {
+      const uint8_t *sound = atom.data + 8;
+      container.is_sound = memcmp("soun", sound, 4) == 0;
+      LOGI("    is_sound: %s", container.is_sound ? "true" : "flase");
     }
 
     // parse stsd -> audio info
     if (atom.is("stsd")) {
       AudioInfo info;
-      info.channels = atom.read16(8 + 0x20);
-      info.bits_per_sample = atom.read16(8 + 0x22);  // not used
-      info.sample_rate = atom.read32(8 + 0x26);
+      info.channels = atom.read16(0x20);
+      info.bits_per_sample = atom.read16(0x22);  // not used
+      info.sample_rate = atom.read32(0x26);
       info.logInfo();
       container.setAudioInfo(info);
+      // init raw output
+      container.decoder.setAudioInfo(info);
     }
 
-    /// output of mdat to p_print;
-    if (atom.is(container.streamAtom())) {
-      container.print(atom.data, atom.data_size);
+    /// output of mdat to decoder;
+    if (atom.isStreamAtom()) { // 
+      if (container.is_sound){
+        int pos = 0;
+        int open = atom.data_size;
+        while (open>0){
+          int processed = container.decode(atom.data+pos, open);
+          open -=processed;
+          pos +=processed;
+        }
+
+      } else {
+        LOGD("%s: %d bytes ignored", container.stream_atom, atom.data_size);
+      }
     }
   }
 };
+
+//-------------------------------------------------------------------------------------------------------------------
+// methods
+//--------------------------------------------------------------------------------------------------------------------
+
+void MP4Atom::setHeader(uint8_t *data, int len) {
+  uint32_t *p_size = (uint32_t *)data;
+  total_size = ntohl(*p_size);
+  data_size = total_size - 8;
+  memcpy(atom, data + 4, 4);
+
+  is_header_atom = container->isHeader(this, data);
+}
+
+bool MP4Atom::isStreamAtom() {
+  const char *name = container->streamAtom();
+  return is(name);
+}
+
+MP4Atom MP4ParseBuffer::parse() {
+  TRACED();
+  // determine atom length from header of buffer
+  MP4Atom result{container};
+  result.start_pos = container->current_pos;
+
+  // read potentially 2 headers
+  uint8_t header[16];
+  buffer.peekArray(header, 16);
+  result.setHeader(header, 16);
+  result.is_stream = false;
+  container->current_atom = result.atom;
+
+  // abort on invalid atom
+  if (!result) {
+    LOGE("Invalid atom");
+    return result;
+  }
+
+  // make sure that we fill the buffer to it's max limit
+  if (result.data_size > buffer.available() &&
+      buffer.available() != container->maxSize()) {
+    result.clear();
+    return result;
+  }
+
+  // temp buffer for data
+  uint8_t data[min(result.data_size, buffer.available())];
+
+  if (result.is_header_atom) {
+    // consume data for header atom
+    buffer.readArray(header, 8);
+    container->current_pos += 8;
+  } else {
+    if (result.total_size > buffer.available()) {
+      // not enough data use streaming
+      LOGI("total %s: 0x%06x-0x%06x - %d", container->current_atom,
+           container->current_pos, container->current_pos + result.total_size,
+           result.data_size);
+      int avail = buffer.available() - 8;
+      container->setStreamOutputSize(result.data_size - avail);
+
+      buffer.readArray(header, 8);
+      buffer.readArray(data, avail);
+      result.setData(data, avail);
+      result.total_size = avail;
+      result.data_size = avail - 8;
+      result.is_stream = true;
+      assert(buffer.available()==0);
+      container->current_pos += result.total_size;
+    } else {
+      buffer.readArray(header, 8);
+      buffer.readArray(data, result.data_size);
+      result.setData(data, result.data_size);
+      container->current_pos += result.total_size;
+    }
+  }
+
+  // callback for data
+  if (result && container->data_callback != nullptr)
+    container->data_callback(result, *container);
+
+  return result;
+}
 
 }  // namespace audio_tools

@@ -140,7 +140,7 @@ class AudioFFTBase : public AudioOutput {
         }
 
         /// Release the allocated memory
-        void end() {
+        void end() override {
             p_driver->end();
             if (p_magnitudes!=nullptr) delete []p_magnitudes;
         }
