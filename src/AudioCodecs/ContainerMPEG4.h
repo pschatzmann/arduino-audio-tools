@@ -131,19 +131,24 @@ class ContainerMP4 : public AudioDecoder {
     stream_atom = streamAtom;
   }
 
+  /// starts the processing
   void begin() override {
     current_pos = 0;
     assert(p_print!=nullptr);
     decoder.setOutput(*p_print);
     decoder.begin();
+    is_active = true;
   }
 
-  void end() override { decoder.end(); }
+  /// ends the processing
+  void end() override { 
+    decoder.end(); 
+    is_active = false;
+  }
 
-  operator bool() override { return true; }
+  operator bool() override { return is_active; }
 
-
-  /// writes the next atom
+  /// writes the data to be parsed into atoms
   size_t write(const void *in, size_t length) override {
     TRACED();
     uint8_t *data = (uint8_t *)in;
@@ -183,8 +188,7 @@ class ContainerMP4 : public AudioDecoder {
     data_callback = cb;
   }
 
-  /// Defines the callback which is used to determine if an atom is a header
-  /// atom
+  /// Defines the callback which is used to determine if an atom is a header atom
   void setIsHeaderCallback(bool (*cb)(MP4Atom *atom, const uint8_t *data)) {
     is_header_callback = cb;
   }
@@ -192,8 +196,7 @@ class ContainerMP4 : public AudioDecoder {
   /// Provides the content atom name which will be written incrementally
   const char *streamAtom() { return stream_atom; }
 
-  /// Checks if the indicated atom is a header atom: you can define your custom
-  /// method with setIsHeaderCallback()
+  /// Checks if the indicated atom is a header atom: you can define your custom method with setIsHeaderCallback()
   bool isHeader(MP4Atom *atom, const uint8_t *data) {
     return is_header_callback(atom, data);
   }
@@ -209,6 +212,7 @@ class ContainerMP4 : public AudioDecoder {
   MP4ParseBuffer buffer{this};
   int stream_out_open = 0;
   bool is_sound = false;
+  bool is_active = false;
   AACDecoderHelix decoder{false};
   const char *stream_atom;
   int current_pos = 0;
@@ -218,12 +222,12 @@ class ContainerMP4 : public AudioDecoder {
   bool (*is_header_callback)(MP4Atom *atom,
                              const uint8_t *data) = default_is_header_callback;
 
-  /// output of mdat to decoder;
+  /// output of audio mdat to helix decoder;
   size_t decode(const uint8_t *data, size_t len) {
     return decoder.write(data, len);
   }
 
-
+  /// Defines the size of open data that will be written directly w/o parsing
   void setStreamOutputSize(int size) { stream_out_open = size; }
 
   /// Default logic to determine if a atom is a header
