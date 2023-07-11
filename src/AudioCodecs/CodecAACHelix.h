@@ -101,6 +101,11 @@ class AACDecoderHelix : public AudioDecoder  {
             return result;
         }
 
+        void setAudioInfo(AudioInfo info){
+            AudioDecoder::setAudioInfo(info);
+            aac->setAudioInfo(info.channels, info.sample_rate);
+        }
+
         /// Write AAC data to decoder
         size_t write(const void* aac_data, size_t len) {
             return aac==nullptr ? 0 : aac->write(aac_data, len);
