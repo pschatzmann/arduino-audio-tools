@@ -116,7 +116,7 @@ class MP4ParseBuffer {
  * @brief Minimum flexible parser for MPEG4 data (which is based on the
  * Quicktime format). Small atoms will be make available via a callback method.
  * The big (audio) content is written to the Print object which was specified in
- * the constructor.
+ * the constructor. Depends on https://github.com/pschatzmann/arduino-libhelix!
  * @ingroup codecs
  * @ingroup decoder
  * @ingroup video
