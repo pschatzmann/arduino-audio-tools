@@ -131,18 +131,28 @@ class ContainerMP4 : public AudioDecoder {
     stream_atom = streamAtom;
   }
 
+  ContainerMP4(AudioDecoder &decoder, const char *streamAtom = "mdat") {
+    stream_atom = streamAtom;
+    p_decoder = &decoder;
+  }
+
+  ContainerMP4(AudioDecoder *decoder, const char *streamAtom = "mdat") {
+    stream_atom = streamAtom;
+    p_decoder = decoder;
+  }
+
   /// starts the processing
   void begin() override {
     current_pos = 0;
     assert(p_print!=nullptr);
-    decoder.setOutput(*p_print);
-    decoder.begin();
+    p_decoder->setOutput(*p_print);
+    p_decoder->begin();
     is_active = true;
   }
 
   /// ends the processing
   void end() override { 
-    decoder.end(); 
+    p_decoder->end(); 
     is_active = false;
   }
 
@@ -213,7 +223,8 @@ class ContainerMP4 : public AudioDecoder {
   int stream_out_open = 0;
   bool is_sound = false;
   bool is_active = false;
-  AACDecoderHelix decoder{false};
+  AACDecoderHelix aac_decoder{false};
+  AudioDecoder* p_decoder = &aac_decoder;
   const char *stream_atom;
   int current_pos = 0;
   const char *current_atom = nullptr;
@@ -224,7 +235,7 @@ class ContainerMP4 : public AudioDecoder {
 
   /// output of audio mdat to helix decoder;
   size_t decode(const uint8_t *data, size_t len) {
-    return decoder.write(data, len);
+    return p_decoder->write(data, len);
   }
 
   /// Defines the size of open data that will be written directly w/o parsing
@@ -273,7 +284,7 @@ class ContainerMP4 : public AudioDecoder {
       info.logInfo();
       container.setAudioInfo(info);
       // init raw output
-      container.decoder.setAudioInfo(info);
+      container.p_decoder->setAudioInfo(info);
     }
 
     /// output of mdat to decoder;
@@ -303,6 +314,9 @@ void MP4Atom::setHeader(uint8_t *data, int len) {
   total_size = ntohl(*p_size);
   data_size = total_size - 8;
   memcpy(atom, data + 4, 4);
+  if (total_size==1){
+
+  }
 
   is_header_atom = container->isHeader(this, data);
 }

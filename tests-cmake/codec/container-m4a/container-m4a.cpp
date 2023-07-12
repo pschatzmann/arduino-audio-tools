@@ -11,8 +11,9 @@
 #include "AudioTools.h"
 #include "AudioCodecs/ContainerMP4.h"
 //#include "AudioLibs/StdioStream.h"
-
-auto file = SD.open("/home/pschatzmann/Development/Mp4Parser/sample-1.m4a", FILE_READ);
+//const char *file = "/home/pschatzmann/Development/Mp4Parser/sample-1.m4a";
+const char* file_str = "/home/pschatzmann/Downloads/test.m4a";
+auto file = SD.open(file_str, FILE_READ);
 CsvOutput<int16_t> out(Serial);
 ContainerMP4 mp4;
 EncodedAudioStream codec(&out, &mp4);
