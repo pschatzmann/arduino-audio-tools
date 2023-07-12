@@ -11,6 +11,7 @@
 #include "AudioTools.h"
 #include "AudioLibs/AudioKit.h"
 
+AudioInfo info(44100, 2, 16);
 AudioKitStream kit; // Access I2S as stream
 CsvOutput<int16_t> csvStream(Serial);
 StreamCopy copier(csvStream, kit); // copy kit to csvStream
@@ -21,11 +22,12 @@ void setup(void) {
     AudioLogger::instance().begin(Serial, AudioLogger::Warning);
     
     auto cfg = kit.defaultConfig(RX_MODE);
+    cfg.copyFrom(info);
     cfg.input_device = AUDIO_HAL_ADC_INPUT_LINE2;
     kit.begin(cfg);
 
     // make sure that we have the correct channels set up
-    csvStream.begin();
+    csvStream.begin(info);
 
 }
 

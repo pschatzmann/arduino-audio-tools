@@ -1,11 +1,11 @@
 #include "AudioTools.h"
 
+AudioInfo info(44100,2,16);
 SineWaveGenerator<int16_t> sineWave(32000);                // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound(sineWave);             // Stream generated from sine wave
 ResampleStream resample(sound);
 CsvOutput<int16_t> out(Serial); 
 StreamCopy copier(out, resample);                        // copies sound to out
-AudioInfo info(44100,2,16);
 
 // Arduino Setup
 void setup(void) {  
@@ -20,9 +20,7 @@ void setup(void) {
   resample.begin(rcfg); 
 
   // Define CSV Output
-  auto config = out.defaultConfig();
-  config.copyFrom(info);
-  out.begin(config);
+  out.begin(info);
 
   // Setup sine wave
   sineWave.begin(info, N_B4);
