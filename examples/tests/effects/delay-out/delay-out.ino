@@ -1,7 +1,6 @@
 #include "AudioTools.h"
 
-int channels = 1;
-int rate = 44100;
+AudioInfo info(44100, 1, 16);
 int hz = 200;
 SineWaveGenerator<int16_t> sine;
 GeneratedSoundStream<int16_t> gen(sine); 
@@ -17,13 +16,10 @@ void setup() {
   effects.addEffect(dly);
 
   // Setup audio objects
-  auto cfg = csv.defaultConfig();
-  cfg.channels = channels;
-  cfg.sample_rate = rate;
-  csv.begin(cfg);
-  sine.begin(cfg, hz);
-  gen.begin(cfg);
-  effects.begin(cfg);
+  csv.begin(info);
+  sine.begin(info, hz);
+  gen.begin(info);
+  effects.begin(info);
 }
 // copy the data
 void loop() {
