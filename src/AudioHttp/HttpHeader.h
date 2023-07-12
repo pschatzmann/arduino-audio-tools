@@ -6,6 +6,9 @@
 #include "AudioHttp/HttpLineReader.h" 
 #include "AudioHttp/Url.h"
 #include "AudioHttp/HttpTypes.h" 
+
+#define MAX_HTTP_REQ_LEN 300
+
 #if defined(ARDUINO) || defined(IS_DESKTOP)
 #include "Client.h"
 #endif
@@ -368,8 +371,8 @@ class HttpRequestHeader : public HttpHeader {
         // action path protocol
         void write1stLine(Client &out){
             LOGI("HttpRequestHeader::write1stLine");
-            char msg[200];
-            Str msg_str(msg,200);
+            char msg[MAX_HTTP_REQ_LEN];
+            Str msg_str(msg, MAX_HTTP_REQ_LEN);
 
             const char* method_str = methods[this->method_id];
             msg_str = method_str;
