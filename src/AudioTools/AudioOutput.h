@@ -237,7 +237,7 @@ public:
 
 
   void flush() {
-    Serial.println();
+    out_ptr->println();
     pos = 0;
   }
 
@@ -250,10 +250,10 @@ public:
       out_ptr->print(" ");
       pos++;
       if (pos == 8) {
-        Serial.print(" - ");
+        out_ptr->print(" - ");
       }
       if (pos == 16) {
-        Serial.println();
+        out_ptr->println();
         pos = 0;
       }
     }
