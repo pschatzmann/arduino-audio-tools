@@ -211,6 +211,11 @@ class URLStream : public AbstractURLStream {
             request.header().put(header, value);
         }
 
+        /// Callback which allows you to add additional paramters dynamically
+        void setOnConnectCallback(void (*callback)(HttpRequest &request,Url &url, HttpRequestHeader &request_header)){
+            request.setOnConnectCallback(callback);
+        }
+
     protected:
         HttpRequest request;
         Url url;
