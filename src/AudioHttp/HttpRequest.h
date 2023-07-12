@@ -231,6 +231,9 @@ class HttpRequest {
                 LOGE("The client has not been defined");
                 return false;
             }
+            if (http_connect_callback){
+                http_connect_callback(*this, url, request_header);
+            }
             if (!this->connected()){
                 LOGI("process connecting to host %s port %d", url.host(), url.port());
                 int is_connected = connect(url.host(), url.port(), clientTimeout);
@@ -296,6 +299,11 @@ class HttpRequest {
             return reply_header.statusCode();
         }
 
+        /// Callback which allows you to add additional paramters dynamically
+        void setOnConnectCallback(void (*callback)(HttpRequest &request,Url &url, HttpRequestHeader &request_header)){
+            http_connect_callback = callback;
+        }
+
     protected:
         Client *client_ptr;
         Url url;
@@ -309,6 +317,7 @@ class HttpRequest {
         const char *accept_encoding = nullptr;
         bool is_ready = false;
         int32_t clientTimeout = URL_CLIENT_TIMEOUT; // 60000;
+        void (*http_connect_callback)(HttpRequest &request,Url &url, HttpRequestHeader &request_header) = nullptr;
 
         // opens a connection to the indicated host
         virtual int connect(const char *ip, uint16_t port, int32_t timeout) {
