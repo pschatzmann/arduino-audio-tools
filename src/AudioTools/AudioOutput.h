@@ -244,7 +244,7 @@ public:
   }
 
 
-  void flush() {
+  void flush() override {
     out_ptr->println();
     pos = 0;
   }
