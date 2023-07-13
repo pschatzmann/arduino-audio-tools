@@ -11,11 +11,9 @@
 #include "AudioTools.h"
 #include "knghtsng.h"
 
-
-
 // MemoryStream -> EncodedAudioStream -> CsvOutput
 MemoryStream wav(knghtsng_wav, knghtsng_wav_len);
-CsvOutput<int16_t> out(Serial);  // ASCII stream 
+CsvOutput<int16_t> out(Serial, 1);  // ASCII stream 
 EncodedAudioStream enc(&out, new WAVDecoder());
 StreamCopy copier(enc, wav);    // copy in to out
 
@@ -24,8 +22,7 @@ void setup(){
   AudioLogger::instance().begin(Serial, AudioLogger::Info);  
 
   // update number of channels from wav file
-  enc.setNotifyAudioChange(out);
-  
+  enc.begin();
   out.begin();
   wav.begin();
 }

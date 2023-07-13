@@ -12,8 +12,8 @@ I2SStream in;
 I2SStream out; 
 
 // copy filtered values
-FilteredStream<int16_t, float> filtered(in, channels);  // Defiles the filter as BaseConverter
-StreamCopy copier(out, filtered);               // copies sound into i2s
+FilteredStream<int16_t, float> filtered(in, info.channels);  // Defiles the filter as BaseConverter
+StreamCopy copier(out, filtered); // copies sound into i2s
 
 // define FIR filter parameters
 float coef[] = { 0.021, 0.096, 0.146, 0.096, 0.021};

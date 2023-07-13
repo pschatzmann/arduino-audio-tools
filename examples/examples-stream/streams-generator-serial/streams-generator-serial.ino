@@ -8,7 +8,7 @@
 #include "AudioTools.h"
 
 
-AudioInfo info(44100, 2, 16);
+AudioInfo audio_info(44100, 2, 16);
 SineWaveGenerator<int16_t> sineWave(32000);                // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound(sineWave);             // Stream generated from sine wave
 CsvOutput<int16_t> out(Serial); 
@@ -21,10 +21,10 @@ void setup(void) {
   AudioLogger::instance().begin(Serial, AudioLogger::Warning);
 
   // Define CSV Output
-  out.begin(info);
+  out.begin(audio_info);
 
   // Setup sine wave
-  sineWave.begin(info, N_B4);
+  sineWave.begin(audio_info, N_B4);
   Serial.println("started...");
 }
 

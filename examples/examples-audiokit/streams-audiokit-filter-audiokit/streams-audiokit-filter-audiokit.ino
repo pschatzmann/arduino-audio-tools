@@ -12,7 +12,7 @@ AudioInfo info(44100, 2, 16);
 AudioKitStream kit;
 
 // copy filtered values
-FilteredStream<int16_t, float> filtered(kit, channels);  // Defiles the filter as BaseConverter
+FilteredStream<int16_t, float> filtered(kit, info.channels);  // Defiles the filter as BaseConverter
 StreamCopy copier(filtered, kit); // copies sound into i2s (both from kit to filtered or filered to kit are supported)
 
 // define FIR filter
