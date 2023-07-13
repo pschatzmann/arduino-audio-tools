@@ -32,7 +32,7 @@ void record_end(bool pinStatus, int pin, void* ref){
   // Remove popping noise, from button: we delete 6 segments at the beginning and end 
   // and on the resulting audio we slowly raise the volume on the first segment
   // end decrease it on the last segment
-  recording.postProcessSmoothTransition<int16_t>(channels, 0.01, 6);
+  recording.postProcessSmoothTransition<int16_t>(info.channels, 0.01, 6);
 
   copier.begin(kit, recording);  // start playback
 }

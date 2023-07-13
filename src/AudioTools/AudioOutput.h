@@ -131,16 +131,21 @@ public:
   }
 
   /// Starts the processing with the defined number of channels
-  bool begin(AudioInfo info, Print &out = Serial) {
-    return begin(info.channels, out);
+  bool begin(AudioInfo info) {
+    return begin(info.channels);
   }
 
   /// Starts the processing with the defined number of channels
-  bool begin(int channels, Print &out = Serial) {
+  bool begin(int channels) {
     TRACED();
-    this->out_ptr = &out;
     this->is_active = true;
     cfg.channels = channels;
+    return true;
+  }
+
+  /// (Re)start (e.g. if channels is set in constructor)
+  bool begin() override {
+    this->is_active = true;
     return true;
   }
 
@@ -148,15 +153,18 @@ public:
   /// defines the number of channels
   virtual void setAudioInfo(AudioInfo info) {
     TRACEI();
+    this->is_active = true;
     info.logInfo();
     cfg = info;
   };
 
   /// Writes the data - formatted as CSV -  to the output stream
-  virtual size_t write(const uint8_t *data, size_t len) {
-    if (!is_active)
-      return 0;
+  virtual size_t write(const uint8_t *data, size_t len) override {
     LOGD("CsvOutput::write: %d", (int)len);
+    if (!is_active){
+      LOGE("is not active");
+      return 0;
+    }
     if (cfg.channels == 0) {
       LOGW("Channels not defined: using 2");
       cfg.channels = 2;
@@ -228,7 +236,7 @@ public:
     this->is_active = active;
   }
 
-  bool begin() {
+  bool begin() override {
     TRACED();
     this->is_active = true;
     pos = 0;
@@ -241,7 +249,7 @@ public:
     pos = 0;
   }
 
-  virtual size_t write(const uint8_t *data, size_t len) {
+  virtual size_t write(const uint8_t *data, size_t len) override {
     if (!is_active)
       return 0;
     TRACED();

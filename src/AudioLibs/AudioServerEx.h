@@ -163,9 +163,9 @@ class AudioWAVServerEx : public AudioServerEx {
         virtual tinyhttp::Str* getReplyHeader() {
             header.allocate(44);
             MemoryOutput mp{(uint8_t*)header.c_str(), 44};
-            WAVEncoder enc;
+            WAVHeader enc;
             WAVAudioInfo wi;
-            wi.format = WAV_FORMAT_PCM;
+            wi.format = AudioFormat::PCM;
             wi.sample_rate = info.sample_rate;
             wi.bits_per_sample = info.bits_per_sample;
             wi.channels = info.channels;

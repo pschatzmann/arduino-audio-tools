@@ -1,7 +1,9 @@
 
 #include "AudioTools.h"
-#include "AudioBasic/Collections.h"
-
+#include "AudioBasic/Collections/BitVector.h"
+#ifndef HAS_IOSTRAM
+#error processor does nos support this functionality
+#endif
 BitVector bv;
 
 void printBitVector(){
