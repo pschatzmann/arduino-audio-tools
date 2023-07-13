@@ -143,11 +143,10 @@ class PWMDriverESP32 : public DriverPWMBase {
                 case 11: return 39.0625;
             }
             return 312.5;
-        }
-
-      
+        }      
 };
-        /// timer callback: write the next frame to the pins
+
+/// timer callback: write the next frame to the pins
 void IRAM_ATTR defaultPWMAudioOutputCallback() {
     if (accessAudioPWM!=nullptr){
         portENTER_CRITICAL_ISR(&(accessAudioPWM->timerMux));
@@ -155,7 +154,6 @@ void IRAM_ATTR defaultPWMAudioOutputCallback() {
         portEXIT_CRITICAL_ISR(&(accessAudioPWM->timerMux));
     }
 }
-
 
 }
 

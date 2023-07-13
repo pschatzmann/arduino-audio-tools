@@ -107,7 +107,6 @@ static IRAM_ATTR void timerCallback3() {
 }
 
 
-
 /**
  * @brief Repeating Timer functions for simple scheduling of repeated execution.
  * The basic logic is taken from https://www.toptal.com/embedded/esp32-audio-sampling.
@@ -123,6 +122,11 @@ class TimerAlarmRepeatingDriverESP32 : public TimerAlarmRepeatingDriverBase  {
         TimerAlarmRepeatingDriverESP32(){
           setTimerFunction(DirectTimerCallback);
           setTimer(0);
+        }
+
+        TimerAlarmRepeatingDriverESP32(int timer, TimerFunction function){
+          setTimerFunction(function);
+          setTimer(timer);
         }
     
         void setTimer(int id) override {
@@ -156,8 +160,7 @@ class TimerAlarmRepeatingDriverESP32 : public TimerAlarmRepeatingDriverBase  {
                     break;
             }
             LOGI("Timer every: %u us", timeUs);
-            uint32_t cpu_freq = getCpuFrequencyMhz();  // 80 ? 
-            adc_timer = timerBegin(0, cpu_freq, true);  // divider=80 -> 1000000 calls per second
+            adc_timer = timerBegin(timer_id, 80, true);  // divider=80 -> 1000000 calls per second
 
 
             switch (function) {
@@ -184,6 +187,7 @@ class TimerAlarmRepeatingDriverESP32 : public TimerAlarmRepeatingDriverBase  {
         bool end() override {
             TRACED();
             if (started){
+              timerDetachInterrupt(adc_timer);
               timerEnd(adc_timer);
               if (handler_task!=nullptr){
                 vTaskDelete(handler_task);
@@ -209,19 +213,37 @@ class TimerAlarmRepeatingDriverESP32 : public TimerAlarmRepeatingDriverBase  {
       int priority = configMAX_PRIORITIES -1;
       uint32_t timeUs;
 
-
       /// direct timer callback 
       void setupDirectTimerCallback(repeating_timer_callback_t callback_f){
+        TRACED();
+        // We start the timer which executes the callbacks directly
+        if (simpleUserCallback==nullptr){
+          simpleUserCallback = new UserCallback[4];
+        }
+        simpleUserCallback[timer_id].setup(callback_f, object, true);
+        if (timer_id==0) timerAttachInterrupt(adc_timer, userCallback0, false); 
+        else if (timer_id==1) timerAttachInterrupt(adc_timer, userCallback1, false); 
+        else if (timer_id==2) timerAttachInterrupt(adc_timer, userCallback2, false); 
+        else if (timer_id==3) timerAttachInterrupt(adc_timer, userCallback3, false); 
+
+        timerAlarmWrite(adc_timer, timeUs, true);
+        //timerSetAutoReload(adc_timer, true);
+        timerAlarmEnable(adc_timer);
+
+      }
+
+      /// timer callback is notifiying task
+      void setupTimerCallbackInThread(repeating_timer_callback_t callback_f){
         TRACED();
         // we start the timer which runs the callback in a seprate task
         if (timerCallbackArray==nullptr){
           timerCallbackArray = new TimerCallback[4];
         }
 
-        if (timer_id==0) timerAttachInterrupt(adc_timer, timerCallback0, true); 
-        else if (timer_id==1) timerAttachInterrupt(adc_timer, timerCallback1, true); 
-        else if (timer_id==2) timerAttachInterrupt(adc_timer, timerCallback2, true); 
-        else if (timer_id==3) timerAttachInterrupt(adc_timer, timerCallback3, true); 
+        if (timer_id==0) timerAttachInterrupt(adc_timer, timerCallback0, false); 
+        else if (timer_id==1) timerAttachInterrupt(adc_timer, timerCallback1, false); 
+        else if (timer_id==2) timerAttachInterrupt(adc_timer, timerCallback2, false); 
+        else if (timer_id==3) timerAttachInterrupt(adc_timer, timerCallback3, false); 
 
         // we record the callback method and user data
         user_callback.setup(callback_f, object, false);
@@ -235,23 +257,6 @@ class TimerAlarmRepeatingDriverESP32 : public TimerAlarmRepeatingDriverBase  {
         timerAlarmEnable(adc_timer);
       }
 
-      // timer callback is notifiying task
-      void setupTimerCallbackInThread(repeating_timer_callback_t callback_f){
-        TRACED();
-        // We start the timer which executes the callbacks directly
-        if (simpleUserCallback==nullptr){
-          simpleUserCallback = new UserCallback[4];
-        }
-        simpleUserCallback[timer_id].setup(callback_f, object, true);
-        if (timer_id==0) timerAttachInterrupt(adc_timer, userCallback0, true); 
-        else if (timer_id==1) timerAttachInterrupt(adc_timer, userCallback1, true); 
-        else if (timer_id==2) timerAttachInterrupt(adc_timer, userCallback2, true); 
-        else if (timer_id==3) timerAttachInterrupt(adc_timer, userCallback3, true); 
-
-        timerAlarmWrite(adc_timer, timeUs, true);
-        timerAlarmEnable(adc_timer);
-
-      }
 
       /// No timer - just a simple task loop
       void setupSimpleThreadLoop(repeating_timer_callback_t callback_f){

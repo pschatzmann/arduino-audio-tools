@@ -119,7 +119,11 @@ class DriverPWMBase {
             if (audio_config.channels>maxChannels()){
                 LOGE("Only max %d channels are supported!",maxChannels());
                 return false;
-            }             
+            } 
+            if (audio_config.bits_per_sample!=16){
+                LOGE("bits_per_sample must be 16!");
+                return false;
+            }            
             // allocate buffer if necessary
             if (user_callback==nullptr) {
                 if (buffer!=nullptr){
@@ -157,7 +161,7 @@ class DriverPWMBase {
         virtual size_t write(const uint8_t *wrt_buffer, size_t size){
             if (is_blocking_write && availableForWrite()==0){
                 LOGD("Waiting for buffer to clear");
-                while (availableForWrite()==0);
+                while (availableForWrite()==0) delay(1);
             }
             
             size_t available = min((size_t)availableForWrite(),size);
