@@ -50,16 +50,6 @@ class PWMAudioOutput : public AudioOutput {
             }
         }
 
-        // /// Starts the PWMAudio using callbacks
-        bool begin(uint16_t sampleRate, uint8_t channels, PWMCallbackType cb) {
-            TRACED();
-            audio_config.channels = channels;
-            audio_config.sample_rate = sampleRate;
-            driver.setUserCallback(cb);
-            return begin();
-        }
-
-
         /// starts the processing using Streams
         bool begin(PWMConfig config ) {
             TRACED();
