@@ -113,6 +113,8 @@ class LEDOutput {
     if (cfg.update_callback != nullptr && count++ % cfg.update_frequency == 0) {
       // use custom update logic defined in config
       cfg.update_callback(&cfg, this);
+    } else {
+      display();
     }
   }
 
@@ -181,6 +183,11 @@ class LEDOutput {
       }
     }
     return max;
+  }
+
+  /// Update the led_matrix (calling FastLED.show();
+  void display() {
+    FastLED.show();
   }
 
   /// Provides acces to the FFTDisplay object
