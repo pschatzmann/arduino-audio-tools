@@ -5,9 +5,10 @@ namespace audio_tools {
 
 class FFTDisplay;
 FFTDisplay *selfFFTDisplay = nullptr;
+#ifdef USE_CONCURRENCY
 // fft mutex
 static Mutex fft_mux;
-
+#endif
 /**
  * Display FFT result: we can define a start bin and group susequent bins for a
  * combined result.
