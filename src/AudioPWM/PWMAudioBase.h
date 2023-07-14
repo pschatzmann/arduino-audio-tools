@@ -161,7 +161,7 @@ class DriverPWMBase {
         virtual size_t write(const uint8_t *wrt_buffer, size_t size){
             if (is_blocking_write && availableForWrite()==0){
                 LOGD("Waiting for buffer to clear");
-                while (availableForWrite()==0) delay(1);
+                while (availableForWrite()==0) delay(5);
             }
             
             size_t available = min((size_t)availableForWrite(),size);

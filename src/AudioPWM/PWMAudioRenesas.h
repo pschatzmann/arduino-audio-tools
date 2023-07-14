@@ -105,9 +105,6 @@ class PWMDriverRenesas : public DriverPWMBase {
         /// write a pwm value to the indicated channel. The max value depends on the resolution
         virtual void pwmWrite(int channel, int value){
             pins[channel]->pulse_perc(value);
-            //char buffer[80];
-            //sprintf(buffer,"channel %d - value: %d", channel, value);
-            //LOGD("%s", buffer);
         }
 
         /// timer callback: write the next frame to the pins

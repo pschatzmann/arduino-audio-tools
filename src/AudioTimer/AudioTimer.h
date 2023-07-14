@@ -37,9 +37,11 @@ class TimerAlarmRepeating {
         virtual ~TimerAlarmRepeating() = default;
 
         bool begin(repeating_timer_callback_t callback_f, uint32_t time, TimeUnit unit = MS) {
-            return p_driver->begin(callback_f, time, unit);
+            is_active = p_driver->begin(callback_f, time, unit);
+            return is_active;
         }
         bool end() { 
+            is_active = false;
             return p_driver->end(); 
         };
 
@@ -59,8 +61,16 @@ class TimerAlarmRepeating {
             p_driver->setTimerFunction(function);
         }
 
+        void setIsSave(bool is_save){
+            p_driver->setIsSave(is_save);
+        }
+
+        /// @brief Returns true if the timer is active
+        operator bool() { return is_active; }
+
     protected:
         void* object=nullptr;
+        bool is_active = false;;
         TimerAlarmRepeatingDriver driver; // platform specific driver
         TimerAlarmRepeatingDriverBase *p_driver=&driver;
 

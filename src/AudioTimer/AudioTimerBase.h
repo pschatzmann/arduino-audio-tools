@@ -35,6 +35,8 @@ class TimerAlarmRepeatingDriverBase {
 
         virtual void setTimer(int timer){}
         virtual void setTimerFunction(TimerFunction function=DirectTimerCallback){}
+        /// @brief Not used
+        virtual void setIsSave(bool is_save){}
 
     protected:
         void* object=nullptr;
