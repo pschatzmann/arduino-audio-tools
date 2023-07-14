@@ -18,8 +18,7 @@ void volumeLEDOutputUnoR4(LEDOutputUnoR4Config *cfg, LEDOutputUnoR4 *matrix);
  * @author Phil Schatzmann
  */
 struct LEDOutputUnoR4Config {
-  /// Custom callback logic to update the LEDs - by default we use
-  /// fftLEDOutputUnoR4()
+  /// Custom callback logic to update the LEDs when update() is called
   void (*update_callback)(LEDOutputUnoR4Config *cfg,
                           LEDOutputUnoR4 *matrix) = nullptr;
   /// Update the leds only ever nth call
@@ -28,29 +27,32 @@ struct LEDOutputUnoR4Config {
   int x = 12;
   /// Number of LEDs in a column
   int y = 8;
+  /// when true 0,0 is in the lower left corder
   bool y_mirror = true;
   /// Influences the senitivity
   int max_magnitude = 700;
 };
 
 /**
- * @brief LEDOutputUnoR4 using the FastLED library. You write the data to the
- * FFT Stream. This displays the result of the FFT to a LED matrix.
+ * @brief LED output using the R4 LED matrix library. 
  * @ingroup io
  * @author Phil Schatzmann
  */
 class LEDOutputUnoR4 {
 
  public:
+  /// @brief Default Constructor
   LEDOutputUnoR4() = default;
 
-  /// @brief Default Constructor
+  /// @brief Constructor for FFT scenario
   /// @param fft
   LEDOutputUnoR4(FFTDisplay &fft) {
     p_fft = &fft;
     cfg.update_callback = fftLEDOutputUnoR4;
   }
 
+  /// @brief Constructor for VolumeOutput scenario
+  /// @param vol
   LEDOutputUnoR4(VolumeOutput &vol) {
     p_vol = &vol;
     cfg.update_callback = volumeLEDOutputUnoR4;
@@ -59,6 +61,7 @@ class LEDOutputUnoR4 {
   /// Provides the default config object
   LEDOutputUnoR4Config defaultConfig() { return cfg; }
 
+  /// Starts the processing with the default configuration
   bool begin() { return begin(defaultConfig()); }
 
   /// Setup Led matrix
@@ -70,8 +73,7 @@ class LEDOutputUnoR4 {
     return true;
   }
 
-  /// Updates the display by calling the update callback method: call this
-  /// method in your loop
+  /// Updates the display by calling the update callback method: call this method in your loop
   virtual void update() {
     if (cfg.update_callback != nullptr && count++ % cfg.update_frequency == 0) {
       // use custom update logic defined in config
@@ -85,7 +87,7 @@ class LEDOutputUnoR4 {
     return frame[x + (y * cfg.x)];
   }
 
-  /// @brief Provodes the max magnitude
+  /// Provodes the max magnitude for the VolumeOutput and FFT scenario
   virtual float getMaxMagnitude() {
     // get magnitude from
     if (p_vol != nullptr) {
@@ -128,14 +130,15 @@ class LEDOutputUnoR4 {
     setColumnBar(max_column, currY);
   }
 
-  /// Provides access to the actual config object. E.g. to change the update
-  /// logic
+  /// Provides access to the actual config object. E.g. to change the update logic
   LEDOutputUnoR4Config &config() { return cfg; }
 
+  /// Update the led_matrix
   void display() {
     led_matrix.loadPixels((uint8_t *)frame.data(), cfg.x * cfg.y);
   }
 
+  /// Provides access to the FFTDisplay object
   FFTDisplay& fftDisplay() {
     return *p_fft;
   }

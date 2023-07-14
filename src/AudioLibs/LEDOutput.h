@@ -41,22 +41,23 @@ struct LEDOutputConfig {
 };
 
 /**
- * @brief LEDOutput using the FastLED library. You write the data to the FFT
- * Stream. This displays the result of the FFT to a LED matrix.
- * @ingroup io
+ * @brief LED output using the FastLED library. 
  * @author Phil Schatzmann
  */
 class LEDOutput {
  public:
+  /// @brief Default Constructor
   LEDOutput() = default;
 
-  /// @brief Default Constructor
+  /// @brief Constructor for FFT scenario
   /// @param fft
   LEDOutput(FFTDisplay &fft) {
     p_fft = &fft;
     cfg.update_callback = fftLEDOutput;
   }
 
+  /// @brief Constructor for VolumeOutput scenario
+  /// @param vol
   LEDOutput(VolumeOutput &vol) {
     p_vol = &vol;
     cfg.update_callback = volumeLEDOutput;
@@ -68,10 +69,6 @@ class LEDOutput {
   /// Setup Led matrix
   bool begin(LEDOutputConfig config) {
     cfg = config;
-    // if (!*p_fft) {
-    //   LOGE("fft not started");
-    //   return false;
-    // }
     if (ledCount() == 0) {
       LOGE("x or y == 0");
       return false;
@@ -165,11 +162,10 @@ class LEDOutput {
     setColumnBar(max_column, currY);
   }
 
-  /// Provides access to the actual config object. E.g. to change the update
-  /// logic
+  /// Provides access to the actual config object. E.g. to change the update logic
   LEDOutputConfig &config() { return cfg; }
 
-  /// @brief Provodes the max magnitude
+  ///Provodes the max magnitude for both the 
   virtual float getMaxMagnitude() {
     // get magnitude from
     if (p_vol != nullptr) {
@@ -187,6 +183,7 @@ class LEDOutput {
     return max;
   }
 
+  /// Provides acces to the FFTDisplay object
   FFTDisplay &fftDisplay() { return *p_fft; }
 
  protected:
@@ -268,7 +265,7 @@ void volumeLEDOutput(LEDOutputConfig *cfg, LEDOutput *matrix) {
   FastLED.show();
 }
 
-/// @brief  Default logic to update the color for the indicated x,y position
+/// Default logic to update the color for the indicated x,y position
 CHSV getDefaultColor(int x, int y, int magnitude) {
   int color = map(magnitude, 0, 7, 255, 0);
   return CHSV(color, 255, 100);  // blue CHSV(160, 255, 255
