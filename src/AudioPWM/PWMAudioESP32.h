@@ -13,8 +13,6 @@ class PWMDriverESP32;
  * @brief Please use DriverPWMBase!
  */
 using PWMDriver = PWMDriverESP32;
-static PWMDriverESP32 *accessAudioPWM = nullptr; 
-void IRAM_ATTR defaultPWMAudioOutputCallback();
 
 
 /**
@@ -38,50 +36,45 @@ typedef PinInfoESP32 PinInfo;
 
 class PWMDriverESP32 : public DriverPWMBase {
     public:
-        friend void defaultPWMAudioOutputCallback();
+        //friend void pwm_callback(void*ptr);
 
         PWMDriverESP32(){
             TRACED();
-            accessAudioPWM = this;
         }
 
         // Ends the output
         virtual void end(){
             TRACED();
-            timerAlarmDisable(timer);
+            timer.end();
+            is_timer_started = false;
             for (int j=0;j<audio_config.channels;j++){
                 ledcDetachPin(pins[j].gpio);
             }
-            is_timer_started = false;
         }
 
         /// when we get the first write -> we activate the timer to start with the output of data
         virtual void startTimer(){
-            if (!is_timer_started){
+            if (!timer){
+                TRACEI();
                 audio_config = audioInfo();
-                LOGI("timerAlarmEnable");
+                timer.begin(pwm_callback, audio_config.sample_rate, HZ);
                 is_timer_started = true;
-                timerAlarmEnable(timer);
             }
         }
 
         /// Setup LED PWM
         virtual void setupPWM(){
-            TRACED();
             // frequency is driven by selected resolution
-            uint32_t freq = frequency(audio_config.resolution)*1000;
-            audio_config.pwm_frequency = freq;
+            audio_config.pwm_frequency = frequency(audio_config.resolution) * 1000;
 
             pins.resize(audio_config.channels);
             for (int j=0;j<audio_config.channels;j++){
-                LOGD("Processing channel %d", j);
                 int pwmChannel = j;
                 pins[j].pwm_channel = pwmChannel;
                 pins[j].gpio = audio_config.pins()[j];
-                LOGI("-> ledcSetup:  frequency=%d / resolution=%d", freq, audio_config.resolution);
-                ledcSetup(pwmChannel, freq, audio_config.resolution);
-                LOGD("-> ledcAttachPin: %d", pins[j].gpio);
-                ledcAttachPin(pins[j].gpio, pwmChannel);
+                ledcSetup(pins[j].pwm_channel, audio_config.pwm_frequency, audio_config.resolution);
+                ledcAttachPin(pins[j].gpio, pins[j].pwm_channel);
+                LOGI("setupPWM: pin=%d, channel=%d, frequency=%d, resolution=%d", pins[j].gpio, pins[j].pwm_channel, audio_config.pwm_frequency, audio_config.resolution);
             }
             logPins();
         }
@@ -94,31 +87,18 @@ class PWMDriverESP32 : public DriverPWMBase {
 
         /// Setup ESP32 timer with callback
         virtual void setupTimer() {
-            TRACED();
-
-            // Attach timer int at sample rate
-            int prescale = 2;
-            bool rising_edge = true;
-            timer = timerBegin(audio_config.timer_id, prescale, rising_edge); // Timer at full 40Mhz,  prescaling 2
-            uint32_t counter = 20000000 / audio_config.sample_rate;
-            LOGI("-> timer counter is %zu", counter);
-            LOGD("-> timerAttachInterrupt");
-            bool interrupt_edge_type = true;
-            timerAttachInterrupt(timer, defaultPWMAudioOutputCallback, interrupt_edge_type);
-            LOGD("-> timerAlarmWrite");
-            bool auto_reload = true;
-            timerAlarmWrite(timer, counter, auto_reload); // Timer fires at ~44100Hz [40Mhz / 907]
+            timer.setCallbackParameter(this);
+            timer.setIsSave(false);
         } 
 
         /// write a pwm value to the indicated channel. The max value depends on the resolution
         virtual void pwmWrite(int channel, int value){
-            ledcWrite(pins[channel].pwm_channel, value);          
+            ledcWrite(pins[channel].pwm_channel, value);  
         }
 
     protected:
         Vector<PinInfo> pins;      
-        hw_timer_t * timer = nullptr;
-        portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
+        TimerAlarmRepeating timer;
 
         /// provides the max value for the indicated resulution
         int maxUnsignedValue(int resolution){
@@ -143,17 +123,18 @@ class PWMDriverESP32 : public DriverPWMBase {
                 case 11: return 39.0625;
             }
             return 312.5;
-        }      
+        }    
+
+        /// timer callback: write the next frame to the pins
+        static void pwm_callback(void*ptr){
+            PWMDriverESP32 *accessAudioPWM =  (PWMDriverESP32*)ptr;
+            if (accessAudioPWM!=nullptr){
+                accessAudioPWM->playNextFrame();
+            }
+        }
+
 };
 
-/// timer callback: write the next frame to the pins
-void IRAM_ATTR defaultPWMAudioOutputCallback() {
-    if (accessAudioPWM!=nullptr){
-        portENTER_CRITICAL_ISR(&(accessAudioPWM->timerMux));
-        accessAudioPWM->playNextFrame();
-        portEXIT_CRITICAL_ISR(&(accessAudioPWM->timerMux));
-    }
-}
 
 }
 

@@ -6,11 +6,9 @@
 
 namespace audio_tools {
 
-typedef void (* simple_callback )(void);
-
-
 /**
  * @brief Internal class to manage User callbacks. An optinal parameter can be passed to the callback method
+ * We support 4 timers
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -138,7 +136,7 @@ class TimerAlarmRepeatingDriverESP32 : public TimerAlarmRepeatingDriverBase  {
           }
         }
 
-        virtual void setTimerFunction(TimerFunction function=DirectTimerCallback) override{
+        void setTimerFunction(TimerFunction function=DirectTimerCallback) override{
             this->function = function;
         }
 
@@ -162,7 +160,6 @@ class TimerAlarmRepeatingDriverESP32 : public TimerAlarmRepeatingDriverBase  {
             LOGI("Timer every: %u us", timeUs);
             adc_timer = timerBegin(timer_id, 80, true);  // divider=80 -> 1000000 calls per second
 
-
             switch (function) {
                 case DirectTimerCallback:
                   setupDirectTimerCallback(callback_f);
@@ -175,7 +172,6 @@ class TimerAlarmRepeatingDriverESP32 : public TimerAlarmRepeatingDriverBase  {
                 case SimpleThreadLoop:
                   setupSimpleThreadLoop(callback_f);
                   break;
-
             }
 
             started = true;
@@ -201,13 +197,19 @@ class TimerAlarmRepeatingDriverESP32 : public TimerAlarmRepeatingDriverBase  {
         void setCore(int core){
           this->core = core;
         }
+        
+        /// Selects the TimerFunction: default is DirectTimerCallback, when set to save we use TimerCallbackInThread
+        void setIsSave(bool is_save) override{
+            setTimerFunction(is_save?TimerCallbackInThread : DirectTimerCallback);
+        }
+
 
     protected:
       int timer_id=0;
       volatile bool started = false;
       TaskHandle_t handler_task = nullptr;
       hw_timer_t* adc_timer = nullptr; // our timer
-      UserCallback user_callback;
+      UserCallback user_callback; // for task
       TimerFunction function;
       int core = 1;
       int priority = configMAX_PRIORITIES -1;
@@ -227,12 +229,11 @@ class TimerAlarmRepeatingDriverESP32 : public TimerAlarmRepeatingDriverBase  {
         else if (timer_id==3) timerAttachInterrupt(adc_timer, userCallback3, false); 
 
         timerAlarmWrite(adc_timer, timeUs, true);
-        //timerSetAutoReload(adc_timer, true);
         timerAlarmEnable(adc_timer);
 
       }
 
-      /// timer callback is notifiying task
+      /// timer callback is notifiying task: supports functionality which can not be called in an interrupt e.g. i2c
       void setupTimerCallbackInThread(repeating_timer_callback_t callback_f){
         TRACED();
         // we start the timer which runs the callback in a seprate task
