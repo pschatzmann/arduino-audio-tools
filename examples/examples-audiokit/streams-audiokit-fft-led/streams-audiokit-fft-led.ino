@@ -1,16 +1,28 @@
-#include "AudioTools.h"
+/**
+ * @file streams-audiokit-fft-led.ino
+ * @author Phil Schatzmann
+ * @brief  We peform FFT on the microphone input of the AudioKit and display the
+ * result on a 32*8 LED matrix
+ * @version 0.1
+ * @date 2022-10-14
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
 #include "AudioLibs/AudioKit.h"
-#include "AudioLibs/AudioRealFFT.h" // or AudioKissFFT
+#include "AudioLibs/AudioRealFFT.h"  // or AudioKissFFT
 #include "AudioLibs/LEDOutput.h"
+#include "AudioTools.h"
 
 #define PIN_LEDS 22
 #define LED_X 32
 #define LED_Y 8
 
 AudioKitStream kit;  // Audio source
-AudioRealFFT fft; // or AudioKissFFT
+AudioRealFFT fft;    // or AudioKissFFT
+FFTDisplay fft_dis(fft);
+LEDOutput led(fft_dis);       // output to LED matrix
 StreamCopy copier(fft, kit);  // copy mic to fft
-LEDOutput led(fft); // output to LED matrix
 
 void setup() {
   Serial.begin(115200);
@@ -23,24 +35,27 @@ void setup() {
 
   // Setup FFT output
   auto tcfg = fft.defaultConfig();
-  tcfg.length = 1024; 
+  tcfg.length = 1024;
   tcfg.copyFrom(cfg);
   fft.begin(tcfg);
+
+  // Setup FFT Display
+  fft_dis.fft_group_bin = 3;
+  fft_dis.fft_start_bin = 0;
+  fft_dis.fft_max_magnitude = 40000;
+  fft_dis.begin();
 
   // Setup LED matrix output
   auto lcfg = led.defaultConfig();
   lcfg.x = LED_X;
   lcfg.y = LED_Y;
-  lcfg.fft_group_bin = 3;
-  lcfg.fft_start_bin = 0;
-  lcfg.fft_max_magnitude = 40000;
   led.begin(lcfg);
 
   // add LEDs
   FastLED.addLeds<WS2812B, PIN_LEDS, GRB>(led.ledData(), led.ledCount());
 }
 
-void loop() { 
+void loop() {
   // update FFT
   copier.copy();
   // update LEDs

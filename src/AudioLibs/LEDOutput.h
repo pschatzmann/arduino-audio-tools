@@ -1,20 +1,20 @@
 #pragma once
-#include "AudioLibs/AudioFFT.h"
 #include <FastLED.h>
 
+#include "AudioLibs/AudioFFT.h"
+#include "FFTDisplay.h"
+
 namespace audio_tools {
+
 class LEDOutput;
 struct LEDOutputConfig;
 
-LEDOutput *selfLEDOutput = nullptr;
 // default callback function which implements led update
 void fftLEDOutput(LEDOutputConfig *cfg, LEDOutput *matrix);
 // led update for volume
 void volumeLEDOutput(LEDOutputConfig *cfg, LEDOutput *matrix);
 // default color
 CHSV getDefaultColor(int x, int y, int magnitude);
-// fft mutex
-Mutex fft_mux;
 
 /**
  * LED Matrix Configuration. Provide the number of leds in x and y direction and
@@ -33,37 +33,31 @@ struct LEDOutputConfig {
   /// fftLEDOutput()
   void (*update_callback)(LEDOutputConfig *cfg, LEDOutput *matrix) = nullptr;
   /// Update the leds only ever nth call
-  int update_frequency = 1; // update every call
+  int update_frequency = 1;  // update every call
   bool is_serpentine_layout = true;
   bool is_matrix_vertical = true;
-  /// start bin which is displayed
-  int fft_start_bin = 0;
-  /// group result by adding subsequent bins
-  int fft_group_bin = 1;
   /// Influences the senitivity
-  int fft_max_magnitude = 700;
+  int max_magnitude = 700;
 };
 
 /**
- * @brief LEDOutput using the FastLED library. You write the data to the FFT Stream.
- * This displays the result of the FFT to a LED matrix.
+ * @brief LEDOutput using the FastLED library. You write the data to the FFT
+ * Stream. This displays the result of the FFT to a LED matrix.
  * @ingroup io
  * @author Phil Schatzmann
  */
 class LEDOutput {
-public:
+ public:
   LEDOutput() = default;
 
   /// @brief Default Constructor
   /// @param fft
-  LEDOutput(AudioFFTBase &fft) {
-    selfLEDOutput = this;
+  LEDOutput(FFTDisplay &fft) {
     p_fft = &fft;
     cfg.update_callback = fftLEDOutput;
   }
 
   LEDOutput(VolumeOutput &vol) {
-    selfLEDOutput = this;
     p_vol = &vol;
     cfg.update_callback = volumeLEDOutput;
   }
@@ -90,19 +84,13 @@ public:
     }
 
     // clear LED
-    FastLED.clear(); // clear all pixel data
+    FastLED.clear();  // clear all pixel data
 
     if (p_fft != nullptr) {
-      // assign fft callback
-      AudioFFTConfig &fft_cfg = p_fft->config();
-      fft_cfg.callback = fftCallback;
-
-      // number of bins
-      magnitudes.resize(p_fft->size());
-      for (int j = 0; j < p_fft->size(); j++) {
-        magnitudes[j] = 0;
-      }
+      p_fft->begin();
     }
+
+    max_column = -1;
 
     return true;
   }
@@ -133,58 +121,22 @@ public:
 
   /// Determine the led with the help of the x and y pos
   CRGB &ledXY(uint8_t x, uint8_t y) {
-    if (x > cfg.x)
-      x = cfg.x - 1;
-    if (x < 0)
-      x = 0;
-    if (y > cfg.y)
-      y = cfg.y - 1;
-    if (y < 0)
-      y = 0;
+    if (x > cfg.x) x = cfg.x - 1;
+    if (x < 0) x = 0;
+    if (y > cfg.y) y = cfg.y - 1;
+    if (y < 0) y = 0;
     int index = xy(x, y);
     return leds[index];
   }
 
   /// Determine the led with the help of the index pos
   CRGB &led(uint8_t index) {
-    if (index > cfg.x * cfg.y)
-      return not_valid;
+    if (index > cfg.x * cfg.y) return not_valid;
     return leds[index];
   }
 
-  /// Returns the magnitude for the indicated led x position. We might
-  /// need to combine values from the magnitudes array if this is much bigger.
-  virtual float getMagnitude(int x) {
-    // get magnitude from fft
-    float total = 0;
-    for (int j = 0; j < cfg.fft_group_bin; j++) {
-      int idx = cfg.fft_start_bin + (x * cfg.fft_group_bin) + j;
-      if (idx >= magnitudes.size()) {
-        idx = magnitudes.size() - 1;
-      }
-      total += magnitudes[idx];
-    }
-    return total / cfg.fft_group_bin;
-  }
-
-  /// @brief Provodes the max magnitude
-  virtual float getMaxMagnitude() {
-    // get magnitude from
-    if (p_vol != nullptr) {
-      return p_vol->volume();
-    }
-    float max = 0;
-    for (int j = 0; j < cfg.x; j++) {
-      float value = getMagnitude(j);
-      if (value > max) {
-        max = value;
-      }
-    }
-    return max;
-  }
-
   /// Update the indicated column with the indicated bar
-  void updateColumn(int x, int currY) {
+  void setColumnBar(int x, int currY) {
     // update vertical bar
     for (uint8_t y = 0; y < currY; y++) {
       // determine color
@@ -195,10 +147,57 @@ public:
     for (uint8_t y = currY; y < cfg.y; y++) {
       ledXY(x, y) = CRGB::Black;
     }
+    if (x > max_column) max_column = x;
   }
 
   /// Update the last column with the indicated bar
-  void updateColumn(int currY) { updateColumn(cfg.x - 1, currY); }
+  void setColumnBar(int currY) { setColumnBar(cfg.x - 1, currY); }
+
+  /// Update the last column with the indicated bar
+  void addColumnBar(int currY) {
+    max_column++;
+    if (max_column >= cfg.x) {
+      addEmptyColumn();
+    }
+    if (max_column > cfg.x - 1) {
+      max_column = cfg.x - 1;
+    }
+    setColumnBar(max_column, currY);
+  }
+
+  /// Provides access to the actual config object. E.g. to change the update
+  /// logic
+  LEDOutputConfig &config() { return cfg; }
+
+  /// @brief Provodes the max magnitude
+  virtual float getMaxMagnitude() {
+    // get magnitude from
+    if (p_vol != nullptr) {
+      return p_vol->volume();
+    }
+    float max = 0;
+    if (p_fft != nullptr) {
+      for (int j = 0; j < cfg.x; j++) {
+        float value = p_fft->getMagnitude(j);
+        if (value > max) {
+          max = value;
+        }
+      }
+    }
+    return max;
+  }
+
+  FFTDisplay &fftDisplay() { return *p_fft; }
+
+ protected:
+  friend class AudioFFTBase;
+  CRGB not_valid;
+  Vector<CRGB> leds{0};
+  LEDOutputConfig cfg;
+  VolumeOutput *p_vol = nullptr;
+  FFTDisplay *p_fft = nullptr;
+  uint64_t count = 0;
+  int max_column = -1;
 
   /// Adds an empty column to the end shifting the content to the left
   void addEmptyColumn() {
@@ -211,22 +210,6 @@ public:
       ledXY(cfg.x - 1, y) = CRGB::Black;
     }
   }
-
-  /// Provides access to the actual config object. E.g. to change the update
-  /// logic
-  LEDOutputConfig &config() { return cfg; }
-
-protected:
-  friend class AudioFFTBase;
-  CRGB not_valid;
-  Vector<CRGB> leds{0};
-  Vector<float> magnitudes{0};
-  LEDOutputConfig cfg;
-  AudioFFTBase *p_fft = nullptr;
-  VolumeOutput *p_vol = nullptr;
-  uint64_t count = 0;
-
-
 
   uint16_t xy(uint8_t x, uint8_t y) {
     uint16_t i;
@@ -249,7 +232,7 @@ protected:
           // Even rows run forwards
           i = (y * cfg.x) + x;
         }
-      } else { // vertical positioning
+      } else {  // vertical positioning
         if (x & 0x01) {
           i = cfg.y * (cfg.x - (x + 1)) + y;
         } else {
@@ -260,30 +243,17 @@ protected:
 
     return i;
   }
-
-  /// callback method which provides updated data from fft
-  static void fftCallback(AudioFFTBase &fft) {
-    // just save magnitudes to be displayed
-    LockGuard guard(fft_mux);
-    for (int j = 0; j < fft.size(); j++) {
-      float value = fft.magnitude(j);
-      selfLEDOutput->magnitudes[j] = value;
-    }
-  };
 };
 
 /// Default update implementation which provides the fft result as "barchart"
 void fftLEDOutput(LEDOutputConfig *cfg, LEDOutput *matrix) {
-  {
-    LockGuard guard(fft_mux);
-    // process horizontal
-    for (int x = 0; x < cfg->x; x++) {
-      // max y determined by magnitude
-      int currY = mapFloat(matrix->getMagnitude(x), 0, cfg->fft_max_magnitude,
-                          0.0f, static_cast<float>(cfg->y));
-      LOGD("x: %d, y: %d", x, currY);
-      matrix->updateColumn(x, currY);
-    }
+  // process horizontal
+  LockGuard guard(fft_mux);
+  for (int x = 0; x < cfg->x; x++) {
+    // max y determined by magnitude
+    int currY = matrix->fftDisplay().getMagnitudeScaled(x, cfg->y);
+    LOGD("x: %d, y: %d", x, currY);
+    matrix->setColumnBar(x, currY);
   }
   FastLED.show();
 }
@@ -291,17 +261,17 @@ void fftLEDOutput(LEDOutputConfig *cfg, LEDOutput *matrix) {
 /// Default update implementation which provides the fft result as "barchart"
 void volumeLEDOutput(LEDOutputConfig *cfg, LEDOutput *matrix) {
   float vol = matrix->getMaxMagnitude();
-  int currY = mapFloat(matrix->getMagnitude(vol), 0, cfg->fft_max_magnitude,
-                        0.0f, static_cast<float>(cfg->y));
-  matrix->addEmptyColumn();
-  matrix->updateColumn(currY);
+  int currY = mapFloat(vol, 0,
+                       cfg->max_magnitude, 0.0f,
+                       static_cast<float>(cfg->y));
+  matrix->addColumnBar(currY);
   FastLED.show();
 }
 
 /// @brief  Default logic to update the color for the indicated x,y position
 CHSV getDefaultColor(int x, int y, int magnitude) {
   int color = map(magnitude, 0, 7, 255, 0);
-  return CHSV(color, 255, 100); // blue CHSV(160, 255, 255
+  return CHSV(color, 255, 100);  // blue CHSV(160, 255, 255
 }
 
-} // namespace audio_tools
+}  // namespace audio_tools
