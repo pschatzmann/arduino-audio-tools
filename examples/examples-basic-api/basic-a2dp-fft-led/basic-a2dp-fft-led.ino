@@ -17,7 +17,8 @@
 
 BluetoothA2DPSink a2dp_sink;
 AudioRealFFT fft; // or any other supported inplementation
-LEDOutput led(fft); // output to LED matrix
+FFTDisplay fft_dis(fft);
+LEDOutput led(fft_dis); // output to LED matrix
 
 // Provide data to FFT
 void writeDataStream(const uint8_t *data, uint32_t length) {
@@ -40,10 +41,12 @@ void setup() {
   auto lcfg = led.defaultConfig();
   lcfg.x = LED_X;
   lcfg.y = LED_Y;
-  lcfg.fft_group_bin = 3;
-  lcfg.fft_start_bin = 0;
-  lcfg.fft_max_magnitude = 40000;
   led.begin(lcfg);
+
+  fft_dis.fft_group_bin = 3;
+  fft_dis.fft_start_bin = 0;
+  fft_dis.fft_max_magnitude = 40000;
+  fft_dis.begin();
 
   // add LEDs
   FastLED.addLeds<WS2812B, PIN_LEDS, GRB>(led.ledData(), led.ledCount());
