@@ -120,10 +120,6 @@ class DriverPWMBase {
                 LOGE("Only max %d channels are supported!",maxChannels());
                 return false;
             } 
-            if (audio_config.bits_per_sample!=16){
-                LOGE("bits_per_sample must be 16!");
-                return false;
-            }            
             // allocate buffer if necessary
             if (user_callback==nullptr) {
                 if (buffer!=nullptr){
@@ -195,10 +191,6 @@ class DriverPWMBase {
             }
         }
 
-        void setUserCallback(PWMCallbackType cb){
-            user_callback = cb;
-        }
-
         bool isTimerStarted() {
             return is_timer_started;
         }
@@ -224,22 +216,8 @@ class DriverPWMBase {
         bool is_timer_started = false;
         bool is_blocking_write = true;
 
-        void playNextFrameCallback(){
-             //TRACED();
-            uint8_t channels = audio_config.channels;
-            int16_t data[channels];
-            if (user_callback(channels, data)){
-                for (uint8_t j=0;j<audio_config.channels;j++){
-                    int value  = map(data[j], -NumberConverter::maxValue(16), NumberConverter::maxValue(16), 0, 255); 
-                    pwmWrite(j, value);
-                }
-                updateStatistics();                
-            }
-        }
-
-
         /// writes the next frame to the output pins 
-        void playNextFrameStream(){
+        void playNextFrame(){
             if (isTimerStarted() && buffer!=nullptr){
                 //TRACED();
                 int required = (audio_config.bits_per_sample / 8) * audio_config.channels;
@@ -254,15 +232,6 @@ class DriverPWMBase {
                 updateStatistics();
             } 
         } 
-
-        void playNextFrame(){
-            // TRACED();
-            if (user_callback!=nullptr){
-                playNextFrameCallback();
-            } else {
-                playNextFrameStream();
-            }
-        }
 
         /// determines the next scaled value
         virtual int nextValue() {
