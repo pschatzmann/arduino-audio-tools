@@ -78,6 +78,8 @@ class LEDOutputUnoR4 {
     if (cfg.update_callback != nullptr && count++ % cfg.update_frequency == 0) {
       // use custom update logic defined in config
       cfg.update_callback(&cfg, this);
+    } else {
+      display();
     }
   }
 
