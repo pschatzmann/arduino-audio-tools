@@ -60,7 +60,11 @@ class VS1053Stream : public AudioStream {
             p_VS1053 = vs;
         }
         size_t write(const uint8_t *buffer, size_t size) override { 
-            if (p_VS1053==nullptr) return 0;
+            if (p_VS1053==nullptr) {
+                LOGE("NPE");
+                return 0;
+            }
+            TRACED();
             p_VS1053->playChunk((uint8_t*)buffer, size);
             return size;
         }
@@ -224,8 +228,12 @@ public:
     }
 
     /// Write audio data
-    virtual size_t write(const uint8_t *buffer, size_t size) override{ 
-        if (p_out==nullptr) return 0;
+    virtual size_t write(const uint8_t *buffer, size_t size) override { 
+        TRACED();
+        if (p_out==nullptr) {
+            LOGE("NPE");
+            return 0;
+        }
         return p_out->write(buffer, size);
     }
 
