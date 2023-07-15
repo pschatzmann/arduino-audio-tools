@@ -367,7 +367,7 @@ class EncodedAudioOutput : public AudioStream {
 
   /// encodeor decode the data
   virtual size_t write(const uint8_t *data, size_t len) override {
-    LOGD("EncodedAudioOutput::write: %zu", len);
+    LOGD("EncodedAudioOutput::write: %d", (int)len);
     if (len == 0) {
       LOGI("write: %d", 0);
       return 0;
@@ -379,6 +379,7 @@ class EncodedAudioOutput : public AudioStream {
     }
 
     size_t result = writer_ptr->write(data, len);
+    LOGD("EncodedAudioOutput::write: %d -> %d", (int)len, (int)result);
     return result;
   }
 

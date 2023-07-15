@@ -36,7 +36,10 @@ public:
 
   AudioInfo audioInfo() { AudioInfo dummy; return dummy; }
 
-  size_t write(const void *data, size_t len) { return pt_print->write((uint8_t*)data,len); }
+  size_t write(const void *data, size_t len) { 
+    TRACED();
+    return pt_print->write((uint8_t*)data,len);
+  }
 
   operator bool() { return true; }
 

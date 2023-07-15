@@ -610,7 +610,7 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #define VS1053_DEFINED
 #define PIN_CS 9
 
-#ifdef ARDUINO
+#if defined(ARDUINO) && !defined(ARDUINO_MINIMA)
 #  define USE_WIFI
 #  define USE_URL_ARDUINO
 #  define USE_AUDIO_SERVER

@@ -26,7 +26,7 @@ void setup(){
   AudioLogger::instance().begin(Serial, AudioLogger::Warning); // Info is causing a lot of noise  
 
   // Setup sine wave
-  sineWave.begin(channels, sample_rate, N_A4);
+  sineWave.begin(info, N_A4);
 
   // setup output
   auto cfg = out.defaultConfig();
