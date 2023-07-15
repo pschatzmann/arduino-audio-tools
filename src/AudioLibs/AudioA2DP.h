@@ -194,7 +194,7 @@ class A2DPStream : public AudioStream {
             if (config.mode==TX_MODE){
                 // if buffer is full and we are still not connected, we wait
                 while(len > a2dp_buffer.availableForWrite()){
-                    LOGI("waiting for buffer to be consumed...")
+                    LOGD("Waiting for buffer to be available");
                     delay(200);
                     if (config.startLogic==StartWhenBufferFull){
                         is_a2dp_active = true;
