@@ -156,7 +156,7 @@ class DriverPWMBase {
         // blocking write for an array: we expect a singed value and convert it into a unsigned 
         virtual size_t write(const uint8_t *wrt_buffer, size_t size){
             if (is_blocking_write && availableForWrite()==0){
-                LOGD("Waiting for buffer to clear");
+                LOGD("Waiting for buffer to be available");
                 while (availableForWrite()==0) delay(5);
             }
             

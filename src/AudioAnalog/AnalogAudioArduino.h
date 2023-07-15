@@ -73,7 +73,7 @@ class AnalogDriverArduino : public AnalogDriverBase {
 
     // blocking write ?
     if (config.is_blocking_write) {
-      LOGD("Waiting for buffer to clear");
+      LOGD("Waiting for buffer to be available");
       while (buffer->availableForWrite() == 0) {
         delay(10);
       }
