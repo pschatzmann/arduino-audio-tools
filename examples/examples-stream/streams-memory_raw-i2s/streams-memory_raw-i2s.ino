@@ -1,5 +1,5 @@
 /**
- * @file streams-memory_raw-i2s_external_dac.ino
+ * @file streams-memory_raw-i2s.ino
  * @author Phil Schatzmann
  * @brief Compile with Partition Scheme Hughe APP!
  * @version 0.1
@@ -23,7 +23,6 @@ void setup(){
     auto config = i2s.defaultConfig(TX_MODE);
     config.copyFrom(info);
     i2s.begin(config);
-
 }
 
 void loop(){

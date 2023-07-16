@@ -4,8 +4,6 @@ Somtimes we want to store the sound file in memory. [Audacity](https://www.audac
 
 Then you can convert the file with xxd into a C file that contains the data in an array. In the Sketch I am using the __MemoryStream class__ which turns the array into a Stream. 
 
-Unlike in the other examples I am using the typed __StreamCopyT<int16_t>__ class together with the __copy2()__ method. This reads the one channel input and copies it as 2 channels to the destination I2S stream.
-
 Please note that you must compile this sketch with the __Partition Scheme: Huge App__!
 
 
