@@ -87,6 +87,11 @@ class AnalogAudioStream  : public AudioStream {
     int available() override {
         return driver.available();
     }
+
+    int availableForWrite() override {
+        return driver.availableForWrite();
+    }
+
 protected:
     AnalogDriver driver;
     AnalogConfig adc_config;

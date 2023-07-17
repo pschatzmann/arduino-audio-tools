@@ -318,10 +318,10 @@ class RingBuffer : public BaseBuffer<T> {
 
  protected:
   Vector<T> _aucBuffer;
-  int _iHead;
-  int _iTail;
-  int _numElems;
-  int max_size = 0;
+  volatile int _iHead;
+  volatile int _iTail;
+  volatile int _numElems;
+  volatile int max_size = 0;
 
   int nextIndex(int index) { return (uint32_t)(index + 1) % max_size; }
 };

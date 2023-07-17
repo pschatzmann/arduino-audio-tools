@@ -59,7 +59,6 @@ class PWMDriverRenesas : public DriverPWMBase {
             //pins.shrink_to_fit();
         }
 
-
     protected:
         Vector<PwmOut*> pins;      
         TimerAlarmRepeating ticker; // calls a callback repeatedly with a timeout
@@ -70,7 +69,11 @@ class PWMDriverRenesas : public DriverPWMBase {
             if (!is_timer_started){
                 TRACED();
                 ticker.setCallbackParameter(this);
-                ticker.begin(defaultPWMAudioOutputCallback, audio_config.sample_rate, HZ);
+                int sample_rate = effectiveOutputSampleRate();
+                if (isDecimateActive()){
+                    LOGI("Using reduced sample rate: %d", effectiveOutputSampleRate());
+                }
+                ticker.begin(defaultPWMAudioOutputCallback, sample_rate, HZ);
                 is_timer_started = true;
             }
         }
@@ -113,6 +116,19 @@ class PWMDriverRenesas : public DriverPWMBase {
             if (accessAudioPWM!=nullptr){
                 accessAudioPWM->playNextFrame();
             }
+        }
+
+        int maxSampleRate() override {
+            return ANALOG_MAX_SAMPLE_RATE;
+        }
+
+        int decimation() override {
+            for(int j=1;j<5;j++){
+                if (j%2==0 && audio_config.sample_rate/j <= maxSampleRate()) {
+                    return j;
+                }
+            }
+            return 5;
         }
 
 };

@@ -22,7 +22,6 @@ namespace audio_tools {
  * @copyright GPLv3
  * @tparam T 
  */
-template<typename T>
 class BaseConverter {
     public:
         BaseConverter() = default;
@@ -39,7 +38,7 @@ class BaseConverter {
  * @tparam T 
  */
 template<typename T>
-class NOPConverter : public  BaseConverter<T> {
+class NOPConverter : public  BaseConverter {
     public:
         virtual size_t convert(uint8_t(*src), size_t size) {return size;};
 };
@@ -53,7 +52,7 @@ class NOPConverter : public  BaseConverter<T> {
  * @tparam T 
  */
 template<typename T>
-class ConverterScaler : public  BaseConverter<T> {
+class ConverterScaler : public  BaseConverter {
     public:
         ConverterScaler(float factor, T offset, T maxValue, int channels=2){
             this->factor_value = factor;
@@ -112,7 +111,7 @@ class ConverterScaler : public  BaseConverter<T> {
  * @tparam T 
  */
 template<typename T>
-class ConverterAutoCenter : public  BaseConverter<T> {
+class ConverterAutoCenter : public  BaseConverter {
     public:
         ConverterAutoCenter(int channels=2){
             this->channels = channels;
@@ -170,7 +169,7 @@ class ConverterAutoCenter : public  BaseConverter<T> {
  * @tparam T 
  */
 template<typename T>
-class ConverterSwitchLeftAndRight : public  BaseConverter<T> {
+class ConverterSwitchLeftAndRight : public  BaseConverter {
     public:
         ConverterSwitchLeftAndRight(int channels=2){
             this->channels = channels;
@@ -207,7 +206,7 @@ enum FillLeftAndRightStatus {Auto, LeftIsEmpty, RightIsEmpty};
 
 
 template<typename T>
-class ConverterFillLeftAndRight : public  BaseConverter<T> {
+class ConverterFillLeftAndRight : public  BaseConverter {
     public:
         ConverterFillLeftAndRight(FillLeftAndRightStatus config=Auto, int channels=2){
             this->channels = channels;
@@ -290,7 +289,7 @@ class ConverterFillLeftAndRight : public  BaseConverter<T> {
  * @tparam T 
  */
 template<typename T>
-class ConverterToInternalDACFormat : public  BaseConverter<T> {
+class ConverterToInternalDACFormat : public  BaseConverter {
     public:
         ConverterToInternalDACFormat(int channels=2){
             this->channels = channels;
@@ -318,11 +317,11 @@ class ConverterToInternalDACFormat : public  BaseConverter<T> {
  * @tparam T 
  */
 template<typename T>
-class ChannelReducer : public BaseConverter<T> {
+class ChannelReducerT : public BaseConverter {
     public:
-        ChannelReducer() = default;
+        ChannelReducerT() = default;
 
-        ChannelReducer(int channelCountOfTarget, int channelCountOfSource){
+        ChannelReducerT(int channelCountOfTarget, int channelCountOfSource){
             from_channels = channelCountOfSource;
             to_channels = channelCountOfTarget;
         }
@@ -344,7 +343,7 @@ class ChannelReducer : public BaseConverter<T> {
             size_t result_size=0;
             T* result = (T*)target;
             T* source = (T*)src;
-            int reduceDiv = from_channels-to_channels+1;
+            int reduceDiv = to_channels - from_channels + 1;
 
             for(int i=0; i < frame_count; i++){
                 // copy first to_channels-1 
@@ -367,6 +366,159 @@ class ChannelReducer : public BaseConverter<T> {
         int from_channels;
         int to_channels;
 };
+
+/**
+ * @brief We combine a datastream which consists of multiple channels into less channels. E.g. 2 to 1
+ * The last target channel will contain the combined values of the exceeding source channels.
+ * @ingroup convert
+ */
+class ChannelReducer : public BaseConverter {
+    public:
+
+        ChannelReducer(int channelCountOfTarget, int channelCountOfSource, int bitsPerSample){
+            from_channels = channelCountOfSource;
+            to_channels = channelCountOfTarget;
+            bits = bitsPerSample;
+        }
+
+        size_t convert(uint8_t*src, size_t size) {
+            return convert(src,src,size);
+        }
+
+        size_t convert(uint8_t*target, uint8_t*src, size_t size) {
+            switch(bits){
+                case 16:{
+                    ChannelReducerT<int16_t> cr16(to_channels, from_channels);
+                    return cr16.convert(target, src, size);
+                }
+                case 24:{
+                    ChannelReducerT<int24_t> cr24(to_channels, from_channels);
+                    return cr24.convert(target, src, size);
+                }
+                case 32:{
+                    ChannelReducerT<int32_t> cr32(to_channels, from_channels);
+                    return cr32.convert(target, src, size);
+                }
+            }
+            return 0;
+        }
+
+    protected:
+        int from_channels;
+        int to_channels;
+        int bits;
+};
+
+
+/**
+ * @brief Provides reduced sampling rates
+ * @ingroup convert
+*/
+template<typename T>
+class DecimateT : public BaseConverter {
+    public:
+        DecimateT(int factor, int channels){
+            setChannels(channels);
+            setFactor(factor);
+
+        }
+        /// Defines the number of channels
+        void setChannels(int channels){
+            this->channels = channels;
+        }
+
+        /// Sets the factor: e.g. with 4 we keep every forth sample
+        void setFactor(int factor){
+            this->factor = factor;
+        }
+
+        size_t convert(uint8_t*src, size_t size) {
+            return convert(src, src, size);
+        }
+
+        size_t convert(uint8_t*target, uint8_t*src, size_t size) {
+            int frame_count = size/(sizeof(T)*channels);
+            T *p_target = (T*) target;
+            T *p_source = (T*) src;
+            size_t result_size = 0;
+
+            for(int i=0; i < frame_count; i++){
+                if (++count == factor){
+                    count = 0;
+                    // only keep even samples
+                    for (int ch=0; ch<channels; ch++){
+                        *p_target++ = p_source[i+ch]; 
+                        result_size += sizeof(T);
+                    }
+                }
+            }
+            //LOGI("%d: %d -> %d ",factor, (int)size, (int)result_size);
+            return result_size;
+        }
+
+        operator bool() {return factor>1;};
+
+    protected:
+        int channels=2;
+        int factor=1;
+        uint16_t count=0;
+};
+
+/**
+ * @brief Provides reduced the sampling rates
+ * @ingroup convert
+*/
+
+class Decimate : public BaseConverter {
+    public:
+        Decimate() = default;
+        Decimate(int factor, int channels, int bits_per_sample){
+            setFactor(factor);
+            setChannels(channels);
+            setBits(bits_per_sample);
+        }
+        /// Defines the number of channels
+        void setChannels(int channels){
+            this->channels = channels;
+        }
+        void setBits(int bits){
+            this->bits = bits;
+        }
+        /// Sets the factor: e.g. with 4 we keep every forth sample
+        void setFactor(int factor){
+            this->factor = factor;
+        }
+
+        size_t convert(uint8_t*src, size_t size) {
+            return convert(src, src, size);
+        }
+        size_t convert(uint8_t*target, uint8_t*src, size_t size) {
+            switch(bits){
+                case 16:{
+                    DecimateT<int16_t> dec16(factor, channels);
+                    return dec16.convert(target, src, size);
+                }
+                case 24:{
+                    DecimateT<int24_t> dec24(factor, channels);
+                    return dec24.convert(target, src, size);
+                }
+                case 32:{
+                    DecimateT<int32_t> dec32(factor, channels);
+                    return dec32.convert(target, src, size);
+                }
+            }
+            return 0;
+        }
+
+        operator bool() {return factor>1;};
+
+    protected:
+        int channels=2;
+        int bits=16;
+        int factor=1;
+
+};
+
 
 /**
  * @brief Increases the channel count
@@ -470,7 +622,7 @@ class ChannelConverter {
 
     protected:
         ChannelEnhancer<T> enhancer;
-        ChannelReducer<T> reducer;
+        ChannelReducerT<T> reducer;
         int from_channels;
         int to_channels;
 
@@ -482,28 +634,28 @@ class ChannelConverter {
  * @tparam T 
  */
 template<typename T>
-class MultiConverter : public BaseConverter<T> {
+class MultiConverter : public BaseConverter {
     public:
         MultiConverter(){
         }
 
-        MultiConverter(BaseConverter<T> &c1){
+        MultiConverter(BaseConverter &c1){
             add(c1);
         }
 
-        MultiConverter(BaseConverter<T> &c1, BaseConverter<T> &c2){
+        MultiConverter(BaseConverter &c1, BaseConverter &c2){
             add(c1);
             add(c2);
         }
 
-        MultiConverter(BaseConverter<T> &c1, BaseConverter<T> &c2, BaseConverter<T> &c3){
+        MultiConverter(BaseConverter &c1, BaseConverter &c2, BaseConverter &c3){
             add(c1);
             add(c2);
             add(c3);
         }
 
         // adds a converter
-        void add(BaseConverter<T> &converter){
+        void add(BaseConverter &converter){
             converters.push_back(&converter);
         }
 
@@ -516,7 +668,7 @@ class MultiConverter : public BaseConverter<T> {
         }
 
     private:
-        Vector<BaseConverter<T>*> converters;
+        Vector<BaseConverter*> converters;
 
 };
 
@@ -662,7 +814,7 @@ class NumberReader {
  * @tparam T
  */
 template <typename T>
-class Converter1Channel : public BaseConverter<T> {
+class Converter1Channel : public BaseConverter {
  public:
   Converter1Channel(Filter<T> &filter) { this->p_filter = &filter; }
 
@@ -685,7 +837,7 @@ class Converter1Channel : public BaseConverter<T> {
  * @tparam T
  */
 template <typename T, typename FT>
-class ConverterNChannels : public BaseConverter<T> {
+class ConverterNChannels : public BaseConverter {
  public:
   /// Default Constructor
   ConverterNChannels(int channels) {
@@ -753,7 +905,7 @@ class ConverterNChannels : public BaseConverter<T> {
  */
 
 template <typename T>
-class SilenceRemovalConverter : public BaseConverter<T>  {
+class SilenceRemovalConverter : public BaseConverter  {
  public:
 
   SilenceRemovalConverter(int n = 8, int aplidudeLimit = 2) { 
@@ -829,7 +981,7 @@ class SilenceRemovalConverter : public BaseConverter<T>  {
  * @tparam T 
  */
 template<typename T>
-class PoppingSoundRemover : public BaseConverter<T> {
+class PoppingSoundRemover : public BaseConverter {
     public:
         PoppingSoundRemover(int channels, bool fromBeginning, bool fromEnd){
             this->channels = channels;
@@ -885,7 +1037,7 @@ class PoppingSoundRemover : public BaseConverter<T> {
  * @tparam T 
  */
 template<typename T>
-class SmoothTransition : public BaseConverter<T> {
+class SmoothTransition : public BaseConverter {
     public:
         SmoothTransition(int channels, bool fromBeginning, bool fromEnd, float inc=0.01){
             this->channels = channels;
