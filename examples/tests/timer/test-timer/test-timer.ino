@@ -21,6 +21,7 @@ void loop() {
   timer.begin(callback, delay_us, US);
   delay(10000);
   timer.end();
-  Serial.print("Sampling Rate 44100 vs eff: ");
-  Serial.println(count / 10);
+  char msg[80];
+  sprintf(msg, "Sampling Rate %d vs eff: %d", sampling_rate, count / 10);
+  Serial.println(msg);
 }
