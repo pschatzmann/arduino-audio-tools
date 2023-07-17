@@ -353,11 +353,11 @@ class StreamCopy : public StreamCopyT<uint8_t> {
 
         /// copies a buffer length of data and applies the converter
         template<typename T>
-        size_t copy(BaseConverter<T> &converter) {
+        size_t copy(BaseConverter &converter) {
             size_t result = available();
             size_t delayCount = 0;
 
-            BaseConverter<T> *coverter_ptr = &converter;
+            BaseConverter* coverter_ptr = &converter;
             if (result>0){
                 size_t bytes_to_read = min(result, static_cast<size_t>(buffer_size) );
                 result = from->readBytes((uint8_t*)&buffer[0], bytes_to_read);

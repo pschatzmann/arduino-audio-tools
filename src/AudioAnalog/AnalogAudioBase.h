@@ -18,8 +18,8 @@ namespace audio_tools {
  */
 class AnalogConfig : public AudioInfo {
   public:
-    int buffer_count = I2S_BUFFER_COUNT;
-    int buffer_size = I2S_BUFFER_SIZE;
+    int buffer_count = PWM_BUFFER_COUNT;
+    int buffer_size = PWM_BUFFER_SIZE;
     RxTxMode rx_tx_mode;
     bool is_blocking_write = true;
     bool is_auto_center_read = true;

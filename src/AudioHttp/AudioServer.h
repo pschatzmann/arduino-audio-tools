@@ -132,7 +132,7 @@ class AudioServer {
         }
 
         // defines a converter that will be used when the audio is rendered
-        void setConverter(BaseConverter<int16_t>  *c){
+        void setConverter(BaseConverter  *c){
             converter_ptr = c;
         }
 
@@ -160,7 +160,7 @@ class AudioServer {
         AudioServerDataCallback callback = nullptr;
         Stream *in = nullptr;                    
         StreamCopy copier;
-        BaseConverter<int16_t> *converter_ptr = nullptr;
+        BaseConverter *converter_ptr = nullptr;
 
         void setupServer(int port) {
             WiFiServer tmp(port);
@@ -286,7 +286,7 @@ class AudioEncoderServer  : public AudioServer {
          * @param sample_rate 
          * @param channels 
          */
-        void begin(Stream &in, int sample_rate, int channels, int bits_per_sample=16, BaseConverter<int16_t> *converter=nullptr) {
+        void begin(Stream &in, int sample_rate, int channels, int bits_per_sample=16, BaseConverter *converter=nullptr) {
             TRACED();
             this->in = &in;
             audio_info.sample_rate = sample_rate;
@@ -307,7 +307,7 @@ class AudioEncoderServer  : public AudioServer {
          * @param info 
          * @param converter 
          */
-        void begin(Stream &in, AudioInfo info, BaseConverter<int16_t> *converter=nullptr) {
+        void begin(Stream &in, AudioInfo info, BaseConverter *converter=nullptr) {
             TRACED();
             this->in = &in;
             this->audio_info = info;

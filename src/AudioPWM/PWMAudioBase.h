@@ -40,7 +40,7 @@ struct PWMConfig : public AudioInfo {
 
     // basic pwm information
     uint16_t buffer_size = PWM_BUFFER_SIZE;
-    uint8_t buffers = PWM_BUFFERS; 
+    uint8_t buffers = PWM_BUFFER_COUNT; 
 
     // additinal info which might not be used by all processors
     uint16_t pwm_frequency = PWM_AUDIO_FREQUENCY;  // audable range is from 20 to 20,000Hz (not used by ESP32)
@@ -103,6 +103,8 @@ struct PWMConfig : public AudioInfo {
  */
 class DriverPWMBase {
     public:
+        DriverPWMBase() = default;
+
         PWMConfig &audioInfo(){
             return audio_config;
         }
@@ -115,20 +117,25 @@ class DriverPWMBase {
         // restart with prior definitions
         bool begin(PWMConfig cfg){
             TRACED();
-            audio_config = cfg;;
+            audio_config = cfg;
+            decimate.setChannels(cfg.channels);
+            decimate.setBits(cfg.bits_per_sample);
+            decimate.setFactor(decimation());
+            LOGI("decimation: %d", decimation());
+            frame_size = audio_config.channels*(audio_config.bits_per_sample/8);
             if (audio_config.channels>maxChannels()){
                 LOGE("Only max %d channels are supported!",maxChannels());
                 return false;
-            } 
-            // allocate buffer if necessary
-            if (user_callback==nullptr) {
-                if (buffer!=nullptr){
-                    delete buffer;
-                    buffer = nullptr;
-                }
-                LOGI("->Allocating new buffer %d * %d bytes",audio_config.buffers, audio_config.buffer_size);
-                buffer = new NBuffer<uint8_t>(audio_config.buffer_size, audio_config.buffers);
             }
+
+            // allocate buffer if necessary
+            if (buffer!=nullptr){
+                delete buffer;
+                buffer = nullptr;
+            }
+            LOGI("->Allocating new buffer %d * %d bytes",audio_config.buffers, audio_config.buffer_size);
+            //buffer = new NBuffer<uint8_t>(audio_config.buffer_size, audio_config.buffers);
+            buffer = new RingBuffer<uint8_t>(audio_config.buffer_size * audio_config.buffers);
             
             // initialize if necessary
             if (!isTimerStarted()){
@@ -150,25 +157,36 @@ class DriverPWMBase {
         } 
 
         virtual int availableForWrite() { 
-            return buffer==nullptr ? 0 : buffer->availableForWrite();
+            return is_blocking_write ? audio_config.buffer_size : buffer->availableForWrite() / frame_size * frame_size;
         }
 
         // blocking write for an array: we expect a singed value and convert it into a unsigned 
-        virtual size_t write(const uint8_t *wrt_buffer, size_t size){
-            if (is_blocking_write && availableForWrite()==0){
-                LOGD("Waiting for buffer to be available");
-                while (availableForWrite()==0) delay(5);
+        virtual size_t write(const uint8_t *wrt_buffer, size_t bytes){
+            size_t size = bytes;
+
+            // only allow full frame
+            size = (size / frame_size) * frame_size;
+            LOGD("adjusted size: %d", (int)size);
+
+            if (isDecimateActive()){
+                size = decimate.convert((uint8_t*)wrt_buffer, size);
+                LOGD("decimated size: %d", (int)size);
             }
-            
-            size_t available = min((size_t)availableForWrite(),size);
-            LOGD("write: %u bytes -> %u", (unsigned int)size, (unsigned int)available);
-            size_t result = buffer->writeArray(wrt_buffer, available);
-            if (result!=available){
+
+            if (is_blocking_write && buffer->availableForWrite()<size){
+                LOGD("Waiting for buffer to be available");
+                while (buffer->availableForWrite()<size) delay(5);
+            } else {
+                size = min((size_t)availableForWrite(), size);
+            }
+
+            size_t result = buffer->writeArray(wrt_buffer, size);
+            if (result!=size){
                 LOGW("Could not write all data: %u -> %d", (unsigned int) size, result);
             }
             // activate the timer now - if not already done
             startTimer();
-            return result;
+            return result * decimation();
         }
 
         // When the timer does not have enough data we increase the underflow_count;
@@ -204,17 +222,19 @@ class DriverPWMBase {
 
         virtual void pwmWrite(int channel, int value) = 0;
 
+
     protected:
         PWMConfig audio_config;
-        NBuffer<uint8_t> *buffer = nullptr;
-        PWMCallbackType user_callback = nullptr;
+        BaseBuffer<uint8_t> *buffer = nullptr;
         uint32_t underflow_count = 0;
         uint32_t underflow_per_second = 0;
         uint32_t frame_count = 0;
         uint32_t frames_per_second = 0;
+        uint32_t frame_size = 0;
         uint32_t time_1_sec;
         bool is_timer_started = false;
         bool is_blocking_write = true;
+        Decimate decimate;
 
         /// writes the next frame to the output pins 
         void playNextFrame(){
@@ -272,7 +292,28 @@ class DriverPWMBase {
                 }
             }        
             return result;
-        }      
+        }  
+
+        /// Provides the max working sample rate
+        virtual int maxSampleRate(){
+            return 48000;
+        }
+
+        /// The requested sampling rate is too hight: we only process half of the samples so we can half the sampling rate
+        virtual bool isDecimateActive(){
+            return audio_config.sample_rate >= ANALOG_MAX_SAMPLE_RATE;
+        } 
+
+        /// Provides the effective sample rate
+        virtual int effectiveOutputSampleRate(){
+            return audio_config.sample_rate / decimation();
+        }   
+
+        /// Decimation factor to reduce the sample rate
+        virtual int decimation() {
+            return 1;
+        }
+
 };
 
 } // ns

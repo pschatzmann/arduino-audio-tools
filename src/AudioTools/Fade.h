@@ -314,7 +314,7 @@ protected:
  * @ingroup convert
  * @tparam T
  */
-template <typename T> class FadeConverter : public BaseConverter<T> {
+template <typename T> class FadeConverter : public BaseConverter{
 public:
   FadeConverter(int channels) { setChannels(channels); }
 
