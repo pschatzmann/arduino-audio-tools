@@ -43,13 +43,13 @@ class AnalogDriverArduino : public AnalogDriverBase {
 
   void end() override { timer.end(); }
 
-  int available() {
+  int available() override {
     if (config.rx_tx_mode == TX_MODE) return 0;
     return buffer == nullptr ? 0 : buffer->available() * 2;
   };
 
   /// Provides the sampled audio data
-  size_t readBytes(uint8_t *values, size_t len) {
+  size_t readBytes(uint8_t *values, size_t len) override {
     if (config.rx_tx_mode == TX_MODE) return 0;
     if (buffer == nullptr) return 0;
     int bytes = len / frame_size * frame_size;
@@ -62,7 +62,7 @@ class AnalogDriverArduino : public AnalogDriverBase {
     return config.is_blocking_write ? config.buffer_size : buffer->availableForWrite();
   }
 
-  size_t write(const uint8_t *data, size_t len) ovrride {
+  size_t write(const uint8_t *data, size_t len) override {
     LOGD("write: %d", (int)len);
     if (config.rx_tx_mode == RX_MODE) return 0;
     // only process full frames
