@@ -115,7 +115,7 @@ class AudioServer {
                         if (converter_ptr==nullptr) {
                             copier.copy();
                         }else {
-                            copier.copy<int16_t>(*converter_ptr);
+                            copier.copy(*converter_ptr);
                         }
                         // if we limit the size of the WAV the encoder gets automatically closed when all has been sent
                         if (!client_obj) {
