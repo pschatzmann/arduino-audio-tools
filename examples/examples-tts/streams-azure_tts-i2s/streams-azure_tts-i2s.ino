@@ -17,8 +17,8 @@ String msg = "This is a demonstration of Phil Schatzmann's AudioTools integratin
 
 URLStream AzureURLStream("ssid", "pwd");
 I2SStream i2s;                          // or I2SStream 
-WAVDecoder decoder(i2s);                // decode wav to pcm and send it to I2S
-EncodedAudioStream out(i2s, decoder);   // Decoder stream
+WAVDecoder decoder;
+EncodedAudioStream out(&i2s, &decoder);   // Decoder stream
 StreamCopy copier(out, AzureURLStream); // copy in to out
 
 void setup(){
