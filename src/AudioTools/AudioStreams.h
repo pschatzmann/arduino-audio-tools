@@ -962,11 +962,11 @@ using CallbackBufferedStream = QueueStream<T>;
  * @param out 
  * @param converter 
  */
-template<typename T, class ConverterT>
+template<typename T>
 class ConverterStream : public AudioStream {
 
     public:
-        ConverterStream(Stream &stream, ConverterT &converter) : AudioStream() {
+        ConverterStream(Stream &stream, BaseConverter &converter) : AudioStream() {
             p_converter = &converter;
             p_stream = &stream;
         }
@@ -995,7 +995,7 @@ class ConverterStream : public AudioStream {
 
     protected:
         Stream *p_stream;
-        ConverterT *p_converter;
+        BaseConverter *p_converter;
 
 };
 
