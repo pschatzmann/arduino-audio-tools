@@ -132,7 +132,7 @@ class AnalogConfig : public AudioInfo {
     }  
 #else 
     AnalogConfig() {
-        sample_rate = 10000;
+        sample_rate = 44100;
         bits_per_sample = 16;
         channels = 2;
         buffer_size = ANALOG_BUFFER_SIZE;

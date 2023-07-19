@@ -37,7 +37,6 @@ class BaseConverter {
  * @ingroup convert
  * @tparam T 
  */
-template<typename T>
 class NOPConverter : public  BaseConverter {
     public:
         virtual size_t convert(uint8_t(*src), size_t size) {return size;};
