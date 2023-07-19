@@ -13,7 +13,7 @@ AudioInfo info(44100, 2, 16);
 AnalogAudioStream in; 
 I2SStream out;                        
 StreamCopy copier(out, in); // copy in to out
-ConverterAutoCenterT<int16_t> converter;
+ConverterAutoCenter converter(info);
 
 // Arduino Setup
 void setup(void) {

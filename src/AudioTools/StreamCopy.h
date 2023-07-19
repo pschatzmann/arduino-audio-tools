@@ -352,7 +352,6 @@ class StreamCopy : public StreamCopyT<uint8_t> {
         }
 
         /// copies a buffer length of data and applies the converter
-        template<typename T>
         size_t copy(BaseConverter &converter) {
             size_t result = available();
             size_t delayCount = 0;

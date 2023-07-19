@@ -181,6 +181,10 @@ class ConverterAutoCenter : public  BaseConverter {
   public:
     ConverterAutoCenter() = default;
 
+    ConverterAutoCenter(AudioInfo info){
+        begin(info.channels, info.bits_per_sample);
+    }
+
     ConverterAutoCenter(int channels, int bitsPerSample){
         begin(channels, bitsPerSample);
     }
