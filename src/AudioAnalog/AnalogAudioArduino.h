@@ -56,13 +56,13 @@ class AnalogDriverArduino : public AnalogDriverBase {
     return buffer->readArray(values, bytes);
   }
 
-  int availableForWrite() {
+  int availableForWrite() override {
     if (config.rx_tx_mode == RX_MODE) return 0;
     if (buffer == nullptr) return 0;
     return config.is_blocking_write ? config.buffer_size : buffer->availableForWrite();
   }
 
-  size_t write(const uint8_t *data, size_t len) {
+  size_t write(const uint8_t *data, size_t len) ovrride {
     LOGD("write: %d", (int)len);
     if (config.rx_tx_mode == RX_MODE) return 0;
     // only process full frames

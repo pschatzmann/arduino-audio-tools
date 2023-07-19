@@ -48,6 +48,11 @@ class AnalogDriverESP32  : public AnalogDriverBase {
       TRACEI();
       cfg.logInfo();
 
+      if (adc_config.is_auto_center_read){
+        LOGI("auto_center")
+        auto_center.begin(cfg.channels, cfg.bits_per_sample);
+      }
+
       if (!is_driver_installed){
         port_no = (i2s_port_t) cfg.port_no;
 
@@ -182,6 +187,10 @@ class AnalogDriverESP32  : public AnalogDriverBase {
       if (i2s_read(port_no, dest, size_bytes, &result, portMAX_DELAY)!=ESP_OK){
         TRACEE();
       }
+      // make sure that the center is at 0
+      if (adc_config.is_auto_center_read){
+        auto_center.convert(dest, result);
+      }
       LOGD( "%s - len: %d -> %d", __func__, size_bytes, result);
       return result;
     }
@@ -192,6 +201,7 @@ class AnalogDriverESP32  : public AnalogDriverBase {
 
   protected:
     AnalogConfig adc_config;
+    ConverterAutoCenter auto_center;
     i2s_port_t port_no;
     bool active = false;
     bool is_driver_installed = false;

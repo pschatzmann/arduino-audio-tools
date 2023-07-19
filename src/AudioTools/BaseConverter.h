@@ -111,9 +111,9 @@ class ConverterScaler : public  BaseConverter {
  * @tparam T 
  */
 template<typename T>
-class ConverterAutoCenter : public  BaseConverter {
+class ConverterAutoCenterT : public  BaseConverter {
     public:
-        ConverterAutoCenter(int channels=2){
+        ConverterAutoCenterT(int channels=2){
             this->channels = channels;
         }
 
@@ -121,6 +121,7 @@ class ConverterAutoCenter : public  BaseConverter {
             int size = byte_count / channels / sizeof(T);
             T *sample = (T*) src;
             setup((T*)src, size);
+            // convert data
             if (is_setup){
                 for (size_t j=0; j<size; j++){
                     for (int i=0;i<channels;i++){
@@ -133,32 +134,93 @@ class ConverterAutoCenter : public  BaseConverter {
         }
 
     protected:
-        T offset;
-        float left;
-        float right;
+        T offset = 0;
+        float left = 0.0;
+        float right = 0.0;
         bool is_setup = false;
         int channels;
 
         void setup(T *src, size_t size){
+            if (size==0) return;
             if (!is_setup) {
-                T *sample = (T*) src;
-                for (size_t j=0;j<size;j++){
-                    left += *sample++;
-                    right += *sample++;
-                }
-                left = left / size;
-                right = right / size;
+                if (channels==1){
+                    T *sample = (T*) src;
+                    for (size_t j=0;j<size;j++){
+                        left += *sample++;
+                    }
+                    offset = left / size;
+                    is_setup = true;
+                    LOGD("offset: %d",offset);
+                } else if (channels==2){
+                    T *sample = (T*) src;
+                    for (size_t j=0;j<size;j++){
+                        left += *sample++;
+                        right += *sample++;
+                    }
+                    left = left / size;
+                    right = right / size;
 
-                if (left>0){
-                    offset = left;
-                    is_setup = true;
-                } else if (right>0){
-                    offset = right;
-                    is_setup = true;
+                    if (left>0){
+                        offset = left;
+                        is_setup = true;
+                    } else if (right>0){
+                        offset = right;
+                        is_setup = true;
+                    }
+                    LOGD("offset: %d",offset);
                 }
             }
         }
 };
+
+/**
+ * @brief Makes sure that the avg of the signal is set to 0
+ * @ingroup convert
+ */
+class ConverterAutoCenter : public  BaseConverter {
+  public:
+    ConverterAutoCenter() = default;
+
+    ConverterAutoCenter(int channels, int bitsPerSample){
+        begin(channels, bitsPerSample);
+    }
+    ~ConverterAutoCenter(){
+        if (p_converter!=nullptr) delete p_converter;
+    }
+
+    void begin(int channels, int bitsPerSample){
+        this->channels = channels;
+        this->bits_per_sample = bitsPerSample;
+        if (p_converter!=nullptr) delete p_converter;
+        switch(bits_per_sample){
+            case 16:{
+                p_converter = new ConverterAutoCenterT<int16_t>(channels);
+                break;
+            }
+            case 24:{
+                p_converter = new ConverterAutoCenterT<int24_t>(channels);
+                break;
+            }
+            case 32:{
+                p_converter = new ConverterAutoCenterT<int32_t>(channels);
+                break;
+            }
+        }
+    }
+
+    size_t convert(uint8_t *src, size_t size) override {
+        if(p_converter==nullptr) return 0;
+        return p_converter->convert(src, size);
+    }
+
+
+  protected:
+    int channels;
+    int bits_per_sample;
+    BaseConverter *p_converter = nullptr;
+};
+
+
 
 /**
  * @brief Switches the left and right channel
