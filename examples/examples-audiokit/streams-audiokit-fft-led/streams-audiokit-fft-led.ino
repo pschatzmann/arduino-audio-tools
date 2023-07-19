@@ -9,10 +9,10 @@
  * @copyright Copyright (c) 2022
  *
  */
+#include "AudioTools.h"
 #include "AudioLibs/AudioKit.h"
 #include "AudioLibs/AudioRealFFT.h"  // or AudioKissFFT
 #include "AudioLibs/LEDOutput.h"
-#include "AudioTools.h"
 
 #define PIN_LEDS 22
 #define LED_X 32

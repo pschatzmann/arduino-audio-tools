@@ -102,7 +102,7 @@
 ../examples/examples-audiokit/streams-file_loop-audiokit -> rc=0
 ../examples/examples-audiokit/streams-generator-audiokit -> rc=0
 ../examples/examples-audiokit/streams-generator_fromarray-audiokit -> rc=0
-../examples/examples-audiokit/streams-generator_inputmixer-audiokit -> rc=1
+../examples/examples-audiokit/streams-generator_inputmixer-audiokit -> rc=0
 ../examples/examples-audiokit/streams-generator_outputmixer-audiokit -> rc=0
 ../examples/examples-audiokit/streams-generator_sinfromtable-audiokit -> rc=0
 ../examples/examples-audiokit/streams-memory_mp3-audiokit -> rc=0
@@ -226,7 +226,8 @@
 ../examples/tests/performance/mp3-SynchronizedBufferRTOS -> rc=0
 ../examples/tests/performance/mp3-SynchronizedNBuffer -> rc=0
 ../examples/tests/performance/mp3-SynchronizedRingBuffer -> rc=0
-../examples/tests/performance/sine -> rc=1
+../examples/tests/performance/sine -> rc=0
+../examples/tests/performance/wifi -> rc=0
 ../examples/tests/pitch-shift/pitch-shift -> rc=0
 ../examples/tests/pitch-shift/pitch-shift-180 -> rc=0
 ../examples/tests/pitch-shift/pitch-shift-simple -> rc=0
