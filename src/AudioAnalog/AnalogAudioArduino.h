@@ -139,11 +139,7 @@ class AnalogDriverArduino : public AnalogDriverBase {
       }
       // setup pins
       setupPins();
-    } else {
-      LOGE("Not enough memory");
-      timer.end();
-      return false;
-    }
+    } 
     return true;
   }
 

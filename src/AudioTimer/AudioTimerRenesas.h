@@ -53,8 +53,15 @@ class TimerAlarmRepeatingDriverRenesas : public TimerAlarmRepeatingDriverBase {
     } else {
       LOGI("rate is %f hz", rate);
     }
+
+    // stop timer if it is active
+    if (timer_active){
+      end();
+    }
+
     LOGI("Using %s", timer_type==1 ? "AGT": "GPT")
-    return timer_type==1 ? startAGTTimer(rate) : startGPTTimer(rate);
+    timer_active = timer_type==1 ? startAGTTimer(rate) : startGPTTimer(rate);
+    return timer_active;
 
   }
 
@@ -65,7 +72,9 @@ class TimerAlarmRepeatingDriverRenesas : public TimerAlarmRepeatingDriverBase {
 
   /// ends the timer and if necessary the task
   bool end() {
+    TRACED();
     audio_timer.end();
+    timer_active = false;
     return true;
   }
 
@@ -79,6 +88,7 @@ class TimerAlarmRepeatingDriverRenesas : public TimerAlarmRepeatingDriverBase {
   FspTimer audio_timer;
   my_repeating_timer_callback_t instanceCallback = nullptr;
   uint8_t timer_type = 0; // Should be 0 - but this is currently not working
+  bool timer_active = false;
 
   // starts Asynchronous General Purpose Timer (AGT) timer
   bool startAGTTimer(float rate){
