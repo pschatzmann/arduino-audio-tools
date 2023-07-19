@@ -37,6 +37,7 @@ public:
       return false;
     }
     info = cfg;
+    auto_center.begin(config.channels, config.bits_per.sample);
     int n_samples = cfg.buffer_size / (cfg.bits_per_sample / 8);
     ring_buffer.resize(n_samples);
     switch (info.channels) {
@@ -114,6 +115,12 @@ public:
       }
       break;
     }
+
+    // make sure that the center is at 0
+    if (adc_config.is_auto_center_read){
+        auto_center.convert(dest, result);
+    }
+
     return result;
   }
 
@@ -122,6 +129,7 @@ public:
 protected:
   audio_tools::RingBuffer<Sample> ring_buffer{0};
   AnalogConfig info;
+  ConverterAutoCenter auto_center;
   AdvancedDAC dac1{PIN_DAC_1};
   AdvancedDAC dac2{PIN_DAC_2};
   AdvancedADC adc1{PIN_ANALOG_START};

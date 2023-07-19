@@ -679,6 +679,10 @@ typedef WiFiClient WiFiClientSecure;
 #  define INLINE_VAR static 
 #endif
 
+#ifndef ANALOG_MAX_SAMPLE_RATE
+#  define ANALOG_MAX_SAMPLE_RATE 44000
+#endif
+
 #pragma GCC diagnostic ignored "-Wunused-variable"
 #pragma GCC diagnostic ignored "-Wunused-function"
 #pragma GCC diagnostic ignored "-Wvla"
