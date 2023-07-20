@@ -13,7 +13,6 @@ AudioInfo info(44100, 2, 16);
 AnalogAudioStream in; 
 I2SStream out;                        
 StreamCopy copier(out, in); // copy in to out
-ConverterAutoCenter converter(info);
 
 // Arduino Setup
 void setup(void) {
@@ -34,5 +33,5 @@ void setup(void) {
 
 // Arduino loop - copy data 
 void loop() {
-  copier.copy(converter);
+  copier.copy();
 }
