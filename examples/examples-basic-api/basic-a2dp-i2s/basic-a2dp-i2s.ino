@@ -8,7 +8,6 @@
  */
 
 #include "BluetoothA2DPSink.h"
-#include "AudioConfigLocal.h"
 #include "AudioTools.h"
 
 BluetoothA2DPSink a2dp_sink;
