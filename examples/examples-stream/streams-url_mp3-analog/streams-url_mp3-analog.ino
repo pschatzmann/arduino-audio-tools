@@ -1,5 +1,5 @@
 /**
- * @file streams-url_mp3-analog.ino
+ * @file streams-url_mp3-out.ino
  * @author Phil Schatzmann
  * @brief decode MP3 stream from url and output it on I2S
  * @version 0.1
@@ -15,8 +15,8 @@
 
 
 URLStream url("ssid","password");
-AnalogAudioStream analog; // final output of decoded stream
-EncodedAudioStream dec(&analog, new MP3DecoderHelix()); // Decoding stream
+AnalogAudioStream out; // final output of decoded stream
+EncodedAudioStream dec(&out, new MP3DecoderHelix()); // Decoding stream
 StreamCopy copier(dec, url); // copy url to decoder
 
 
@@ -24,12 +24,12 @@ void setup(){
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);  
 
-  // setup analog
-  auto config = analog.defaultConfig(TX_MODE);
-  analog.begin(config);
+  // setup out
+  auto config = out.defaultConfig(TX_MODE);
+  out.begin(config);
 
   // setup I2S based on sampling rate provided by decoder
-  dec.setNotifyAudioChange(analog);
+  dec.setNotifyAudioChange(out);
   dec.begin();
 
 // mp3 radio
