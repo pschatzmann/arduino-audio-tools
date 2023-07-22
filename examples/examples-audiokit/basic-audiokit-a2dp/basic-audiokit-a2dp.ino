@@ -1,8 +1,7 @@
 /**
  * @file base-audiokit-a2dp.ino
  * @author Phil Schatzmann
- * @brief We play mp4 files to an A2DP speaker
- * make sure that you compile with partition scheme: huge app
+ * @brief We play the input from the ADC to an A2DP speaker
  * @copyright GPLv3
  */
 
