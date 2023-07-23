@@ -213,7 +213,7 @@ class OggContainerOutput : public AudioOutput {
   /// Defines the output Stream
   void setOutput(Print &print) { p_out = &print; }
 
-  virtual bool begin(AudioInfo from) {
+  virtual bool begin(AudioInfo from) override {
     setAudioInfo(from);
     return begin();
   }
