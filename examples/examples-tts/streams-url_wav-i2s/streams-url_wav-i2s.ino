@@ -1,7 +1,7 @@
 /**
  * @file streams-url_wav-serial.ino
  * @author Phil Schatzmann
- * @brief decode WAV stream from url and output it on I2S
+ * @brief decode WAV stream from rhasspy url and output it on I2S
  * @version 0.1
  * @date 2021-96-25
  * 
