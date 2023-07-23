@@ -43,4 +43,5 @@ void setup(void) {
 
 // Arduino loop - repeated processing 
 void loop() {
+  delay(1000);
 }
