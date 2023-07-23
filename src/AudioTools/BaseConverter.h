@@ -26,6 +26,8 @@ class BaseConverter {
     public:
         BaseConverter() = default;
         BaseConverter(BaseConverter const&) = delete;
+        virtual ~BaseConverter() = default;
+
         BaseConverter& operator=(BaseConverter const&) = delete;
 
         virtual size_t convert(uint8_t *src, size_t size) = 0;

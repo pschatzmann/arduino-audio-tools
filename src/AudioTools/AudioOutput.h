@@ -131,7 +131,7 @@ public:
   }
 
   /// Starts the processing with the defined number of channels
-  bool begin(AudioInfo info) {
+  bool begin(AudioInfo info) override {
     return begin(info.channels);
   }
 
@@ -151,7 +151,7 @@ public:
 
 
   /// defines the number of channels
-  virtual void setAudioInfo(AudioInfo info) {
+  virtual void setAudioInfo(AudioInfo info) override {
     TRACEI();
     this->is_active = true;
     info.logInfo();
@@ -190,7 +190,7 @@ public:
     return len;
   }
 
-  int availableForWrite() { return 1024; }
+  int availableForWrite() override { return 1024; }
 
 protected:
   T *data_ptr;
