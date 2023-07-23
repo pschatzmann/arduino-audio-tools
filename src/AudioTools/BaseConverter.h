@@ -149,7 +149,7 @@ class ConverterAutoCenterT : public  BaseConverter {
                     }
                     offset = left / size;
                     is_setup = true;
-                    LOGD("offset: %d",offset);
+                    LOGD("offset: %d",(int)offset);
                 } else if (channels==2){
                     T *sample = (T*) src;
                     for (size_t j=0;j<size;j++){
@@ -166,7 +166,7 @@ class ConverterAutoCenterT : public  BaseConverter {
                         offset = right;
                         is_setup = true;
                     }
-                    LOGD("offset: %d",offset);
+                    LOGD("offset: %d",(int)offset);
                 }
             }
         }
