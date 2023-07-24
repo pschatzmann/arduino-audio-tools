@@ -1,3 +1,13 @@
+/**
+ * @file communication-codec-rtsp.ino
+ * @author Phil Schatzmann
+ * @brief Provide Audio via RTSP using a codec. Depends on https://github.com/pschatzmann/Micro-RTSP-Audio
+ * @version 0.1
+ * @date 2022-05-02
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #include "AudioTools.h"
 #include "AudioLibs/RTSP.h"
 #include "AudioCodecs/CodecG7xx.h"
