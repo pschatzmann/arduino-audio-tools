@@ -35,7 +35,15 @@ class int24x_t  {
     set(in);
   }
 
-#if defined(STM32) || defined(ESP32C3)
+  int24x_t(const int64_t &in) {
+    set(in);
+  }
+
+  int24x_t(const float in) {
+    set((int32_t)in);
+  }
+
+#if defined(USE_INT24_FROM_INT) 
 
   int24x_t(const int &in) {
     set(in);

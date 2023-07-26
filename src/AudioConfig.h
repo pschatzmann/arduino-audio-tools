@@ -649,6 +649,7 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #  define USE_STREAM_WRITE_OVERRIDE
 #  define USE_STREAM_READ_OVERRIDE
 #  define USE_STREAM_READCHAR_OVERRIDE
+#  define USE_3BYTE_INT24
 typedef WiFiClient WiFiClientSecure;
 #endif
 
@@ -686,7 +687,7 @@ typedef WiFiClient WiFiClientSecure;
 // select int24 implementation
 #ifdef USE_3BYTE_INT24
 #  include "AudioBasic/Int24x.h"
-using int24_t = int24x_t;
+using int24_t = audio_tools::int24x_t;
 #else
 #  include "AudioBasic/Int24.h"
 #endif
