@@ -28,6 +28,8 @@
 
 #define AUDIOTOOLS_VERSION "0.9.4"
 
+//#define PREFER_FIXEDPOINT //uses fixed point multiplication instead float for VolumeStream for slightly better performance on platforms without float hardware. Tested on RP2040 at 16 bit per second (still too slow for 32bit)
+
 /**
  * ------------------------------------------------------------------------- 
  * @brief Logging
