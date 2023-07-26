@@ -109,15 +109,15 @@ class TimerAlarmRepeatingDriverRenesas : public TimerAlarmRepeatingDriverBase {
     TRACED();
     uint8_t timer_type = GPT_TIMER;
     int8_t tindex = FspTimer::get_available_timer(timer_type);
-    if (tindex==0){
+    if (tindex < 0){
       LOGE("Using pwm reserved timer");
-      FspTimer::force_use_of_pwm_reserved_timer();
-      tindex = FspTimer::get_available_timer(timer_type);
+      tindex = FspTimer::get_available_timer(timer_type, true);
     }
-    if (tindex==0){
+    if (tindex < 0){
       LOGE("no timer");
       return false;
     }
+    FspTimer::force_use_of_pwm_reserved_timer();
     LOGI("timer idx: %d", tindex);
     if(!audio_timer.begin(TIMER_MODE_PERIODIC, timer_type, tindex, rate, 0.0f, staticCallback, this)){
       LOGE("error:begin");
