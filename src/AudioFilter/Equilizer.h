@@ -1,8 +1,8 @@
 #pragma once
 #include <math.h>
+#include "AudioConfig.h"
 #include "AudioTools/AudioStreams.h"
 #include "AudioTools/AudioOutput.h"
-#include "AudioBasic/Int24.h"
 
 /** 
  * @defgroup equilizer Equilizer
