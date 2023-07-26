@@ -683,6 +683,14 @@ typedef WiFiClient WiFiClientSecure;
 #  define ANALOG_MAX_SAMPLE_RATE 44000
 #endif
 
+// select int24 implementation
+#ifdef USE_3BYTE_INT24
+#  include "AudioBasic/Int24x.h"
+using int24_t = int24x_t;
+#else
+#  include "AudioBasic/Int24.h"
+#endif
+
 #pragma GCC diagnostic ignored "-Wunused-variable"
 #pragma GCC diagnostic ignored "-Wunused-function"
 #pragma GCC diagnostic ignored "-Wvla"
