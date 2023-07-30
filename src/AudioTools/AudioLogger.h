@@ -2,7 +2,7 @@
 
 #include "AudioConfig.h"
 #ifdef ARDUINO
-#  include "Stream.h"
+#  include "Print.h"
 #endif
 // Logging Implementation
 #if USE_AUDIO_LOGGING
@@ -36,14 +36,14 @@ class AudioLogger {
         };
 
         /// activate the logging
-        void begin(Stream& out, LogLevel level=LOG_LEVEL) {
-            this->log_stream_ptr = &out;
+        void begin(Print& out, LogLevel level=LOG_LEVEL) {
+            this->log_print_ptr = &out;
             this->log_level = level;
         }
 
         /// checks if the logging is active
         bool isLogging(LogLevel level = Info){
-            return log_stream_ptr!=nullptr && level >= log_level;
+            return log_print_ptr!=nullptr && level >= log_level;
         }
 
         AudioLogger &prefix(const char* file, int line, LogLevel current_level){
@@ -56,7 +56,7 @@ class AudioLogger {
 #if defined(IS_DESKTOP) || defined(IS_DESKTOP_WITH_TIME_ONLY)
             fprintf( stderr, "%s\n", print_buffer);
 #else
-            log_stream_ptr->println(print_buffer);
+            log_print_ptr->println(print_buffer);
 #endif
             print_buffer[0]=0;
             unlock();
@@ -80,7 +80,7 @@ class AudioLogger {
         }
 
     protected:
-        Stream *log_stream_ptr = &LOG_STREAM;
+        Print *log_print_ptr = &LOG_STREAM;
         const char* TAG = "AudioTools";
         LogLevel log_level = LOG_LEVEL;
         char print_buffer[LOG_PRINTF_BUFFER_SIZE];
@@ -104,13 +104,13 @@ class AudioLogger {
         int printPrefix(const char* file, int line, LogLevel current_level) const {
             const char* file_name = strrchr(file, '/') ? strrchr(file, '/') + 1 : file;
             const char* level_code = levelName(current_level);
-            int len = log_stream_ptr->print("[");
-            len += log_stream_ptr->print(level_code);
-            len += log_stream_ptr->print("] ");
-            len += log_stream_ptr->print(file_name);
-            len += log_stream_ptr->print(" : ");
-            len += log_stream_ptr->print(line);
-            len += log_stream_ptr->print(" - ");
+            int len = log_print_ptr->print("[");
+            len += log_print_ptr->print(level_code);
+            len += log_print_ptr->print("] ");
+            len += log_print_ptr->print(file_name);
+            len += log_print_ptr->print(" : ");
+            len += log_print_ptr->print(line);
+            len += log_print_ptr->print(" - ");
             return len;
         }
 
