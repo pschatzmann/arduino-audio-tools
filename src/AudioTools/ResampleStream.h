@@ -49,9 +49,8 @@ class TransformationReader {
     LOGD("factor %f -> buffer %d bytes", byte_factor, read_size);
     buffer.resize(read_size);
     int read = p_stream->readBytes(buffer.data(), read_size);
-    assert(read == read_size);
     Print *tmp = setupOutput(data, byteCount);
-    p_transform->write(buffer.data(), read_size);
+    p_transform->write(buffer.data(), read);
     restoreOutput(tmp);
     return print_to_array.totalBytesWritten();
   }
