@@ -30,16 +30,16 @@ void setup(void) {
   auto config = out.defaultConfig(TX_MODE);
   config.copyFrom(info);
   config.sd_active = false;
-  config.default_actions_active = flase;
+  config.default_actions_active = false;
   // i2c
   config.pins.i2c_sda = 36;
   config.pins.i2c_scl = 35;
   // i2s
-  config.pin_mclk = 47
+  config.pin_mck = 47;
   config.pin_bck = 21;
   config.pin_ws = 12;
   config.pin_data = 14;
-  config.pin_data_in = 11;
+  config.pin_data_rx = 11;
 
   //config.sd_active = false;
   config.pins.sd_cs = 2;
