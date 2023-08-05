@@ -48,9 +48,12 @@ class TransformationReader {
     int read_size = byte_factor * byteCount;
     LOGD("factor %f -> buffer %d bytes", byte_factor, read_size);
     buffer.resize(read_size);
-    int read = p_stream->readBytes(buffer.data(), read_size);
+    int read_eff = p_stream->readBytes(buffer.data(), read_size);
+    // stop when there is not data
+    if (read_eff==0) return 0;
+    // provide result
     Print *tmp = setupOutput(data, byteCount);
-    p_transform->write(buffer.data(), read);
+    p_transform->write(buffer.data(), read_eff);
     restoreOutput(tmp);
     return print_to_array.totalBytesWritten();
   }
