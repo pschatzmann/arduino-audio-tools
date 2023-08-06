@@ -406,11 +406,13 @@ class ChannelReducerT : public BaseConverter {
         }
 
         size_t convert(uint8_t*target, uint8_t*src, size_t size) {
+            LOGD("convert %d -> %d", from_channels, to_channels);
+            assert(to_channels<=from_channels);
             int frame_count = size/(sizeof(T)*from_channels);
             size_t result_size=0;
             T* result = (T*)target;
             T* source = (T*)src;
-            int reduceDiv = to_channels - from_channels + 1;
+            int reduceDiv = from_channels - to_channels + 1;
 
             for(int i=0; i < frame_count; i++){
                 // copy first to_channels-1 
