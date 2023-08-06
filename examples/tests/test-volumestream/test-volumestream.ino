@@ -22,6 +22,7 @@ void setup(void) {
 
   // Define CSV Output
   out.begin(audio_info);
+  vol.begin(audio_info);
   vol.setVolume(0.1);
 
   // Setup sine wave
