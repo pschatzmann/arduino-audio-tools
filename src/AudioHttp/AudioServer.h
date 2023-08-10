@@ -131,17 +131,24 @@ class AudioServer {
             return active;
         }
 
-        // defines a converter that will be used when the audio is rendered
+        /// defines a converter that will be used when the audio is rendered
         void setConverter(BaseConverter  *c){
             converter_ptr = c;
         }
 
+        /// Provides the output stream 
         Stream& out() {
             return client_obj;
         }
 
-        Stream* out_ptr() {
+        /// Provides a pointer to the WiFiClient
+        WiFiClient* out_ptr() {
             return &client_obj;
+        }
+
+        /// Checks if any clinent has connnected
+        bool isClientConnected() {
+            return client_obj.connected();
         }
 
     protected:
