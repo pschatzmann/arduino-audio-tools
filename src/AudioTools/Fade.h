@@ -44,6 +44,7 @@ public:
   /// @param channels
   /// @param bitsPerSample
   void convert(uint8_t *data, int bytes, int channels, int bitsPerSample) {
+    this->channels = channels;
     int bytes_per_sample = bitsPerSample / 8;
     switch (bitsPerSample) {
     case 16:
