@@ -47,7 +47,7 @@ class BaseBuffer {
     return lenResult;
   }
 
-  /// Fills the data from the buffer
+  /// Fills the buffer data 
   virtual int writeArray(const T data[], int len) {
     // LOGD("%s: %d", LOG_METHOD, len);
     // CHECK_MEMORY();
@@ -63,6 +63,17 @@ class BaseBuffer {
     LOGD("writeArray %d -> %d", len, result);
     return result;
   }
+
+  /// Fills the buffer data and overwrites the oldest data if the buffer is full
+  virtual int writeArrayOverwrite(const T data[], int len) {
+    int to_delete = len - availableForWrite();
+    if (to_delete>0){
+      T buffer[to_delete];
+      readArray(buffer,to_delete);
+    }
+    return writeArray(data, len);
+  }
+
 
   /// reads multiple values for array of 2 dimensional frames
   int readFrames(T data[][2], int len) {
