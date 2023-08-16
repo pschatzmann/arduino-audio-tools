@@ -14,31 +14,24 @@
 #include "BluetoothA2DPSink.h"
 
 BluetoothA2DPSink a2dp_sink;
-VS1053Stream out; // final output
+VS1053Stream out; //  output
 VS1053Config cfg;
-QueueStream<uint8_t> buffer(1024,10);
-StreamCopy copier(out, buffer); // copies sound into i2s
 
 // Write data from A2DP to buffer
-void read_data_stream(const uint8_t *data, uint32_t frames) {
-  int frameSize = 4;
-  buffer.write(data, frames*frameSize);
+void read_data_stream(const uint8_t *data, uint32_t bytes) {
+  out.write(data, bytes);
 }
 
 
 // for esp_a2d_audio_state_t see https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp_a2dp.html#_CPPv421esp_a2d_audio_state_t
 void audio_state_changed(esp_a2d_audio_state_t state, void *ptr){
-  Serial.println(a2dp_sink.to_str(state));
+    Serial.println(a2dp_sink.to_str(state));
     switch(state){
-      case ESP_A2D_AUDIO_STATE_STARTED:
-        buffer.begin();
-        out.begin(cfg);
-        break;
       case ESP_A2D_AUDIO_STATE_STOPPED:
       case ESP_A2D_AUDIO_STATE_REMOTE_SUSPEND:
+        // add new wav header
         out.end();
-        buffer.end();
-        buffer.clear();
+        out.begin(cfg);
         break;
     }
 }
@@ -56,8 +49,9 @@ void setup() {
   //cfg.cs_pin = VS1053_CS; 
   //cfg.dcs_pin = VS1053_DCS;
   //cfg.dreq_pin = VS1053_DREQ;
-  //cfg.reset_pin = VS1053_RESET;
-
+  // cfg.reset_pin =  //VS1053_RESET;
+  out.begin(cfg);
+  
   // register callbacks
   a2dp_sink.set_stream_reader(read_data_stream, false);
   a2dp_sink.set_on_audio_state_changed(audio_state_changed);
@@ -65,9 +59,7 @@ void setup() {
   a2dp_sink.set_auto_reconnect(false);
   a2dp_sink.start("a2dp-vs1053");
 
-
 }
 
 void loop() { 
-  if (buffer) copier.copy();
 }

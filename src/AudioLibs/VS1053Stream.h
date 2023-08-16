@@ -230,8 +230,9 @@ public:
     /// Write audio data
     virtual size_t write(const uint8_t *buffer, size_t size) override { 
         TRACED();
+        if (size==0) return 0;
         if (p_out==nullptr) {
-            LOGE("NPE");
+            LOGE("vs1053 is closed");
             return 0;
         }
         return p_out->write(buffer, size);
