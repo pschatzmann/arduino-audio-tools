@@ -140,6 +140,22 @@ Please use this before you raise any issue or start a discussion!
 - Find your class in [All Classes Alphabetically](https://pschatzmann.github.io/arduino-audio-tools/namespaceaudio__tools.html)
 - You also might find further information in [one of my Blogs](https://www.pschatzmann.ch/home/category/machine-sound/)
 
+## Support
+
+I spent a lot of time to provide a comprehensive and complete documentation.
+So please read the documentation first and check the issues and discussions before posting any new ones on Github.
+
+Open issues only for bugs and if it is not a bug, use a discussion: Provide enough information about 
+- the selected scenario/sketch 
+- what exactly you are trying to do
+- your hardware
+- your software versions
+- what exactly your problem is
+
+to enable others to understand and reproduce your issue.
+
+Finally above all __don't__ send me any e-mails or post questions on my personal website! 
+
 
 ## Installation in Arduino
 
