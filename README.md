@@ -154,7 +154,7 @@ Open issues only for bugs and if it is not a bug, use a discussion: Provide enou
 
 to enable others to understand and reproduce your issue.
 
-Finally above all __don't__ send me any e-mails or post questions on my personal website! 
+Finally, __don't__ send me any e-mails or post questions on my personal website! 
 
 
 ## Installation in Arduino
