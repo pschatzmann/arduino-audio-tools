@@ -1,5 +1,5 @@
 /**
- * @file stream-memory_mp3-out.ino
+ * @file stream-memory_mp3-analog.ino
  * @author Phil Schatzmann
  * @brief decode MP3 stream and output as out signal
  * @version 0.1
@@ -17,8 +17,8 @@
 
 
 MemoryStream mp3(BabyElephantWalk60_mp3, BabyElephantWalk60_mp3_len);
-AnalogAudioStream out;  // Analog output 
-EncodedAudioStream out(&out, new MP3DecoderHelix()); // output to decoder
+AnalogAudioStream analog;  // Analog output 
+EncodedAudioStream out(&analog, new MP3DecoderHelix()); // output to decoder
 StreamCopy copier(out, mp3);    // copy in to out
 
 void setup(){
@@ -26,7 +26,7 @@ void setup(){
   AudioLogger::instance().begin(Serial, AudioLogger::Info);  
 
   // update audio info with info from decoder
-  out.setNotifyAudioChange(out);
+  out.setNotifyAudioChange(analog);
 
   // begin processing
   auto cfg = out.defaultConfig();
