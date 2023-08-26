@@ -41,14 +41,14 @@ namespace audio_tools {
 
     public:
 
-        /// Default constructur 
+        /// Default constructor 
         AudioPlayer() {
             TRACED();
         }
 
         /**
          * @brief Construct a new Audio Player object. The processing chain is
-         * AudioSource -> Stream -copy> EncodedAudioStream -> VolumeOutput -> Print
+         * AudioSource -> Stream-copy -> EncodedAudioStream -> VolumeStream -> FadeStream -> Print
          *
          * @param source
          * @param output
@@ -65,7 +65,7 @@ namespace audio_tools {
 
         /**
          * @brief Construct a new Audio Player object. The processing chain is
-         * AudioSource -> Stream -copy> EncodedAudioStream -> VolumeOutput -> Print
+         * AudioSource -> Stream-copy -> EncodedAudioStream -> VolumeStream -> FadeStream -> Print
          *
          * @param source
          * @param output
@@ -82,7 +82,7 @@ namespace audio_tools {
 
         /**
          * @brief Construct a new Audio Player object. The processing chain is
-         * AudioSource -> Stream -copy> EncodedAudioStream -> VolumeOutput -> Print
+         * AudioSource -> Stream-copy -> EncodedAudioStream -> VolumeStream -> FadeStream -> Print
          *
          * @param source
          * @param output
@@ -111,8 +111,10 @@ namespace audio_tools {
             if (p_decoder->isResultPCM()){
                 this->fade.setTarget(output);
                 this->volume_out.setTarget(fade);
+                delete this->p_out_decoding;
                 this->p_out_decoding = new EncodedAudioStream(&volume_out, p_decoder);
             } else {
+                delete this->p_out_decoding;
                 this->p_out_decoding = new EncodedAudioStream(&output, p_decoder);
             }
             this->p_final_print = &output;
@@ -122,8 +124,10 @@ namespace audio_tools {
             if (p_decoder->isResultPCM()){
                 this->fade.setTarget(output);
                 this->volume_out.setTarget(fade);
+                delete this->p_out_decoding;
                 this->p_out_decoding = new EncodedAudioStream(&volume_out, p_decoder);
             } else {
+                delete this->p_out_decoding;
                 this->p_out_decoding = new EncodedAudioStream(&output, p_decoder);
             }
         }
@@ -132,8 +136,10 @@ namespace audio_tools {
             if (p_decoder->isResultPCM()){
                 this->fade.setTarget(output);
                 this->volume_out.setTarget(fade);
+                delete this->p_out_decoding;
                 this->p_out_decoding = new EncodedAudioStream(&volume_out, p_decoder);
             } else {
+                delete this->p_out_decoding;
                 this->p_out_decoding = new EncodedAudioStream(&output, p_decoder);
             }
             this->p_final_stream = &output;
