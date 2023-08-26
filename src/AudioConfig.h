@@ -348,6 +348,7 @@ uint64_t millis() {return (xTaskGetTickCount() * portTICK_PERIOD_MS);}
 //------ NANO33BLE ----------
 #if defined(ARDUINO_SEEED_XIAO_NRF52840_SENSE) || defined(ARDUINO_ARDUINO_NANO33BLE)
 #define USE_NANO33BLE 
+#define USE_INT24_FROM_INT
 #define USE_I2S
 #define USE_PWM
 #define USE_TYPETRAITS
