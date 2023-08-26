@@ -402,11 +402,7 @@ namespace audio_tools {
             } else {
                 // e.g. A2DP should still receive data to keep the connection open
                 if (silence_on_inactive){
-                    if (p_final_print!=nullptr){
-                        p_final_print->writeSilence(1024);
-                    } else if (p_final_stream!=nullptr){
-                        p_final_stream->writeSilence(1024);
-                    }
+                    writeSilence(1024);
                 }
             }
             return result;
