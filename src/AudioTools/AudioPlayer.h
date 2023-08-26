@@ -41,14 +41,14 @@ namespace audio_tools {
 
     public:
 
-        /// Default constructur 
+        /// Default constructor 
         AudioPlayer() {
             TRACED();
         }
 
         /**
          * @brief Construct a new Audio Player object. The processing chain is
-         * AudioSource -> Stream -copy> EncodedAudioStream -> VolumeOutput -> Print
+         * AudioSource -> Stream-copy -> EncodedAudioStream -> VolumeStream -> FadeStream -> Print
          *
          * @param source
          * @param output
@@ -65,7 +65,7 @@ namespace audio_tools {
 
         /**
          * @brief Construct a new Audio Player object. The processing chain is
-         * AudioSource -> Stream -copy> EncodedAudioStream -> VolumeOutput -> Print
+         * AudioSource -> Stream-copy -> EncodedAudioStream -> VolumeStream -> FadeStream -> Print
          *
          * @param source
          * @param output
@@ -82,7 +82,7 @@ namespace audio_tools {
 
         /**
          * @brief Construct a new Audio Player object. The processing chain is
-         * AudioSource -> Stream -copy> EncodedAudioStream -> VolumeOutput -> Print
+         * AudioSource -> Stream-copy -> EncodedAudioStream -> VolumeStream -> FadeStream -> Print
          *
          * @param source
          * @param output
@@ -111,31 +111,41 @@ namespace audio_tools {
             if (p_decoder->isResultPCM()){
                 this->fade.setTarget(output);
                 this->volume_out.setTarget(fade);
+                delete this->p_out_decoding;
                 this->p_out_decoding = new EncodedAudioStream(&volume_out, p_decoder);
             } else {
+                delete this->p_out_decoding;
                 this->p_out_decoding = new EncodedAudioStream(&output, p_decoder);
             }
             this->p_final_print = &output;
+            this->p_final_stream = nullptr;
         }
 
         void setOutput(Print &output){
             if (p_decoder->isResultPCM()){
                 this->fade.setTarget(output);
                 this->volume_out.setTarget(fade);
+                delete this->p_out_decoding;
                 this->p_out_decoding = new EncodedAudioStream(&volume_out, p_decoder);
             } else {
+                delete this->p_out_decoding;
                 this->p_out_decoding = new EncodedAudioStream(&output, p_decoder);
             }
+            this->p_final_print = nullptr;
+            this->p_final_stream = nullptr;
         }
 
         void setOutput(AudioStream& output){
             if (p_decoder->isResultPCM()){
                 this->fade.setTarget(output);
                 this->volume_out.setTarget(fade);
+                delete this->p_out_decoding;
                 this->p_out_decoding = new EncodedAudioStream(&volume_out, p_decoder);
             } else {
+                delete this->p_out_decoding;
                 this->p_out_decoding = new EncodedAudioStream(&output, p_decoder);
             }
+            this->p_final_print = nullptr;
             this->p_final_stream = &output;
         }
 
@@ -376,7 +386,7 @@ namespace audio_tools {
             size_t result = 0;
             if (active) {
                 TRACED();
-                if (delay_if_full!=0 && p_final_print!=nullptr && p_final_print->availableForWrite()==0){
+                if (delay_if_full!=0 && ((p_final_print!=nullptr && p_final_print->availableForWrite()==0) || (p_final_stream!=nullptr && p_final_stream->availableForWrite()==0))){
                     // not ready to do anything - so we wait a bit
                     delay(delay_if_full);
                     return 0;
@@ -392,11 +402,7 @@ namespace audio_tools {
             } else {
                 // e.g. A2DP should still receive data to keep the connection open
                 if (silence_on_inactive){
-                    if (p_final_print!=nullptr){
-                        p_final_print->writeSilence(1024);
-                    } else if (p_final_stream!=nullptr){
-                        p_final_stream->writeSilence(1024);
-                    }
+                    writeSilence(1024);
                 }
             }
             return result;
