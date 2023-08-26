@@ -118,6 +118,7 @@ namespace audio_tools {
                 this->p_out_decoding = new EncodedAudioStream(&output, p_decoder);
             }
             this->p_final_print = &output;
+            this->p_final_stream = nullptr;
         }
 
         void setOutput(Print &output){
@@ -130,6 +131,8 @@ namespace audio_tools {
                 delete this->p_out_decoding;
                 this->p_out_decoding = new EncodedAudioStream(&output, p_decoder);
             }
+            this->p_final_print = nullptr;
+            this->p_final_stream = nullptr;
         }
 
         void setOutput(AudioStream& output){
@@ -142,6 +145,7 @@ namespace audio_tools {
                 delete this->p_out_decoding;
                 this->p_out_decoding = new EncodedAudioStream(&output, p_decoder);
             }
+            this->p_final_print = nullptr;
             this->p_final_stream = &output;
         }
 
