@@ -386,7 +386,7 @@ namespace audio_tools {
             size_t result = 0;
             if (active) {
                 TRACED();
-                if (delay_if_full!=0 && p_final_print!=nullptr && p_final_print->availableForWrite()==0){
+                if (delay_if_full!=0 && ((p_final_print!=nullptr && p_final_print->availableForWrite()==0) || (p_final_stream!=nullptr && p_final_stream->availableForWrite()==0))){
                     // not ready to do anything - so we wait a bit
                     delay(delay_if_full);
                     return 0;
