@@ -25,7 +25,7 @@ class AudioKitStreamConfig : public I2SConfig {
 friend class AudioKitStream;
 
  public:
-  AudioKitStreamConfig() { setupI2SPins(); };
+  AudioKitStreamConfig(RxTxMode mode=RXTX_MODE) { setupI2SPins(mode); };
   // set adc channel with audio_hal_adc_input_t
   audio_hal_adc_input_t input_device = AUDIOKIT_DEFAULT_INPUT;
   // set dac channel 
@@ -71,8 +71,9 @@ friend class AudioKitStream;
   board_driver board;
 
   /// Defines the pins based on the information provided by the AudioKit project
-  void setupI2SPins() {
+  void setupI2SPins(RxTxMode rxtx_mode) {
     TRACED();
+    this->rx_tx_mode = rxtx_mode;
     i2s_pin_config_t i2s_pins;
     board.setup(pins);
     board.get_i2s_pins((i2s_port_t)port_no, &i2s_pins);
@@ -192,7 +193,7 @@ class AudioKitStream : public AudioStream {
   /// Provides the default configuration
   AudioKitStreamConfig defaultConfig(RxTxMode mode = RXTX_MODE) {
     TRACED();
-    AudioKitStreamConfig result;
+    AudioKitStreamConfig result{mode};
     result.rx_tx_mode = mode;
     return result;
   }
