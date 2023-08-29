@@ -54,11 +54,13 @@ class PWMAudioOutput : public AudioOutput {
         bool begin(PWMConfig config ) {
             TRACED();
             this->audio_config = config;
+            AudioOutput::setAudioInfo(audio_config);
             return driver.begin(audio_config);
         }  
 
         bool begin()  {
             TRACED();
+            AudioOutput::setAudioInfo(audio_config);
             return driver.begin(audio_config);
         }  
 
