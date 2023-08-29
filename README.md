@@ -149,7 +149,7 @@ Open issues only for bugs and if it is not a bug, use a discussion: Provide enou
 - the selected scenario/sketch 
 - what exactly you are trying to do
 - your hardware
-- your software versions
+- your software version (from the Boards Manager) and library versions
 - what exactly your problem is
 
 to enable others to understand and reproduce your issue.
