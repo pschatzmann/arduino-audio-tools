@@ -66,7 +66,6 @@ struct PWMConfig : public AudioInfo {
         for(int i=0;i<pins.size();i++){
             pins_data.push_back(pins[i]);
         }
-        pins_data = pins;
     }
 
     /// Determines the pins (for all channels)
