@@ -28,8 +28,10 @@ void setup() {
   //config.resolution = 8;  // must be between 8 and 11 -> drives pwm frequency (8 is default)
   // alternative 1
   //config.start_pin = 3;
-  // alternative 2: defines pins and channels
+  // alternative 2
   //int pins[] = {3};
+  // alternative 3
+  //Pins pins = {3};
   //config.setPins(pins); 
   pwm.begin(config);
 }
