@@ -29,7 +29,7 @@ void setup() {
   // alternative 1
   //config.start_pin = 3;
   // alternative 2: defines pins and channels
-  //int pins[] = {22, 23};
+  //int pins[] = {3};
   //config.setPins(pins); 
   pwm.begin(config);
 }
