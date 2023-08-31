@@ -167,11 +167,6 @@ class I2SDriverNanoBLE {
       return result;
     }
 
-    void setupIRQ() {
-        TRACED();
-        NVIC_EnableIRQ(I2S_IRQn);      
-    }
-
     void setupRxTx(I2SConfig cfg) {
         TRACED();
         if (cfg.rx_tx_mode == TX_MODE) { 
@@ -282,7 +277,7 @@ class I2SDriverNanoBLE {
         // define copy size
         NRF_I2S->RXTXD.MAXCNT = i2s_buffer_size;
 
-        setupIRQ();
+        NVIC_EnableIRQ(I2S_IRQn);      
 
         // ensble I2S
         NRF_I2S->ENABLE = 1;
