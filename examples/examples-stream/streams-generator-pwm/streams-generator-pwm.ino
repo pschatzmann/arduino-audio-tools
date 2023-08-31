@@ -8,7 +8,6 @@
  
 #include "AudioTools.h"
 
-//int pins[] = {22, 23};
 AudioInfo info(8000, 1, 16);
 SineWaveGenerator<int16_t> sineWave(32000); // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound(sineWave);  // Stream generated from sine wave
@@ -30,6 +29,7 @@ void setup() {
   // alternative 1
   //config.start_pin = 3;
   // alternative 2: defines pins and channels
+  //int pins[] = {22, 23};
   //config.setPins(pins); 
   pwm.begin(config);
 }
