@@ -355,7 +355,7 @@ uint64_t millis() {return (xTaskGetTickCount() * portTICK_PERIOD_MS);}
 #define USE_EFFECTS_SUITE
 #define USE_TIMER
 
-#define PIN_PWM_START 6
+#define PIN_PWM_START 4
 #define PIN_I2S_BCK 2
 #define PIN_I2S_WS 1
 #define PIN_I2S_DATA_IN 3

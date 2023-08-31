@@ -55,7 +55,9 @@ struct PWMConfig : public AudioInfo {
     void setPins(T (&a) [N]) {
         pins_data.clear();
         pins_data.resize(N);
-        for (int i = 0; i < N; ++i) pins_data[i] = a[i]; // reset all elements  
+        for (int i = 0; i < N; ++i) {
+            pins_data[i] = a[i]; // reset all elements 
+        }
     }
 
     /// Defines the pins and the corresponding number of channels (=number of pins)
