@@ -11,8 +11,10 @@
 
 namespace audio_tools {
 
-INLINE_VAR const int i2s_buffer_size = 1024;
-INLINE_VAR NBuffer<uint8_t> i2s_buffer(i2s_buffer_size, 5);
+static const int i2s_buffer_size = 1024;
+static NBuffer<uint8_t> i2s_buffer(i2s_buffer_size, 5);
+static const uint8_t i2s_empty_array[i2s_buffer_size] = {0};
+static uint32_t irq_count=0;
 
 /**
  *  @brief Mapping Frequency constants to available frequencies
@@ -62,13 +64,16 @@ INLINE_VAR const Nano_BLE_ratio_info ratio_table[] = {
  *  I2S Event handler
  */
 
-extern "C"  void I2S_IRQHandler(void) {
+extern "C" void I2S_IRQHandler(void) {
+    irq_count++;
     if(NRF_I2S->EVENTS_TXPTRUPD != 0) {
-      // reading from buffer to pins
-      NRF_I2S->TXD.PTR = (uint32_t) i2s_buffer.readEnd().address(); // last buffer was processed
+      // writing from buffer to pins
+      NRF_I2S->TXD.PTR = (uint32_t) (!i2s_buffer.isEmpty() ? i2s_buffer.readEnd().address() : i2s_empty_array); // last buffer was processed
       NRF_I2S->EVENTS_TXPTRUPD = 0;
 
-    } else if(NRF_I2S->EVENTS_RXPTRUPD != 0) {
+    }  
+    
+    if(NRF_I2S->EVENTS_RXPTRUPD != 0) {
       // reading from pins writing to buffer
       NRF_I2S->RXD.PTR = (uint32_t) i2s_buffer.writeEnd().address(); // last buffer was processed
       NRF_I2S->EVENTS_RXPTRUPD = 0;
@@ -77,6 +82,7 @@ extern "C"  void I2S_IRQHandler(void) {
 
 /**
  * @brief Basic I2S API - for the Arduino Nano BLE Sense
+ * See https://content.arduino.cc/assets/Nano_BLE_MCU-nRF52840_PS_v1.1.pdf?_gl=1*1huxzp5*_ga*MTk1MjI1NjMzOS4xNjc1MzI4MTcx*_ga_NEXN8H46L5*MTY5MzQ5MDg2Ni45NS4xLjE2OTM0OTA4NjguMC4wLjA.
  * @author Phil Schatzmann
  * @ingroup platform
  * @copyright GPLv3
@@ -86,10 +92,7 @@ class I2SDriverNanoBLE {
 
   public:
 
-    I2SDriverNanoBLE(){
-      // register IRQ for I2S
-      setupIRQ();
-    }
+    I2SDriverNanoBLE() = default;
     
     /// Provides the default configuration
     I2SConfig defaultConfig(RxTxMode mode) {
@@ -111,16 +114,12 @@ class I2SDriverNanoBLE {
         setupBitWidth(cfg);
         setupMode(cfg);
         setupPins(cfg);
-        setupData(cfg);
 
-        // Use stereo
-        NRF_I2S->CONFIG.CHANNELS = I2S_CONFIG_CHANNELS_CHANNELS_Stereo << I2S_CONFIG_CHANNELS_CHANNELS_Pos;
-        // Setup master or slave mode
-        NRF_I2S->CONFIG.MODE = cfg.is_master ? 0 << I2S_CONFIG_MODE_MODE_Pos : 1 << I2S_CONFIG_MODE_MODE_Pos ;
-        // ensble I2S
-        NRF_I2S->ENABLE = 1;
-        // start task
-        NRF_I2S->TASKS_START = 1;
+        // TX_MODE is started with first write
+        if (cfg.rx_tx_mode==RX_MODE){
+          startI2SActive();
+        }
+
         return true;
     }
 
@@ -139,6 +138,8 @@ class I2SDriverNanoBLE {
         NRF_I2S->TASKS_START = 0;
         // ensble I2S
         NRF_I2S->ENABLE = 0;
+
+        is_active = false;
     }
 
     /// provides the actual configuration
@@ -148,10 +149,15 @@ class I2SDriverNanoBLE {
 
   protected:
     I2SConfig cfg;
+    bool is_active = false;
     
     /// writes the data to the I2S buffer
     size_t writeBytes(const void *src, size_t size_bytes){
-      size_t result = i2s_buffer.writeArray((uint8_t*)src, size_bytes);          
+      size_t result = i2s_buffer.writeArray((uint8_t*)src, size_bytes); 
+
+      if (!is_active) {
+        startI2SActive();
+      }         
       return result;
     }
 
@@ -196,10 +202,11 @@ class I2SDriverNanoBLE {
                 // Ratio 
                 NRF_I2S->CONFIG.RATIO = div.id << I2S_CONFIG_RATIO_RATIO_Pos;
                 selected_freq = freq_value;
+                LOGD("frequency requested %f vs %f", freq_requested, selected_freq);
               }
            }
-           LOGI("frequency requested %f vs %f", freq_requested, selected_freq);
         }
+        LOGI("frequency requested %f vs %f", freq_requested, selected_freq);
     }
 
     void setupBitWidth(I2SConfig cfg) {
@@ -261,12 +268,29 @@ class I2SDriverNanoBLE {
         }
     }
 
-    // setup initial data pointers
-    void setupData(I2SConfig cfg) {
-        TRACED();
-        NRF_I2S->TXD.PTR = (uint32_t) i2s_buffer.readEnd().address(); // last buffer was processed
-        NRF_I2S->RXD.PTR = (uint32_t) i2s_buffer.writeEnd().address(); // last buffer was processed
+    /// Start IRQ and I2S
+    void startI2SActive(){
+        TRACEI();
+        // Use stereo
+        NRF_I2S->CONFIG.CHANNELS = I2S_CONFIG_CHANNELS_CHANNELS_Stereo << I2S_CONFIG_CHANNELS_CHANNELS_Pos;
+        // Setup master or slave mode
+        NRF_I2S->CONFIG.MODE = cfg.is_master ? 0 << I2S_CONFIG_MODE_MODE_Pos : 1 << I2S_CONFIG_MODE_MODE_Pos ;
+
+        // initial empty buffer 
+        NRF_I2S->TXD.PTR = (uint32_t) i2s_empty_array;
+        NRF_I2S->RXD.PTR = (uint32_t) i2s_empty_array; 
+        // define copy size
         NRF_I2S->RXTXD.MAXCNT = i2s_buffer_size;
+
+        setupIRQ();
+
+        // ensble I2S
+        NRF_I2S->ENABLE = 1;
+        // start task
+        NRF_I2S->TASKS_START = 1;
+
+        is_active = true;
+
     }
 
 };
