@@ -9,7 +9,6 @@ namespace audio_tools {
 typedef void (*repeating_timer_callback_t )(void* obj);
 
 class TimerAlarmRepeatingDriverESP8266;
-TimerAlarmRepeatingDriverESP8266 *self;
 
 /**
  * @brief Repeating Timer functions for repeated execution: Plaease use the typedef TimerAlarmRepeating
