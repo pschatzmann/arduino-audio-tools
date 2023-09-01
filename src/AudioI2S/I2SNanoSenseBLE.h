@@ -119,7 +119,7 @@ class I2SDriverNanoBLE {
 
     /// starts the DAC 
     bool begin(I2SConfig cfg) {
-        LOGD(__func__);
+        TRACEI();
         this->cfg = cfg;
 
         if (cfg.bits_per_sample==32){
@@ -241,7 +241,7 @@ class I2SDriverNanoBLE {
               }
            }
         }
-        LOGI("frequency req. %f vs eff. %f", freq_requested, selected_freq);
+        LOGI("Frequency req. %f vs eff. %f", freq_requested, selected_freq);
 
 
     }
@@ -336,7 +336,7 @@ class I2SDriverNanoBLE {
 
     /// Start IRQ and I2S
     void startI2SActive(){
-        TRACEI();
+        TRACED();
         // Use stereo
         NRF_I2S->CONFIG.CHANNELS = I2S_CONFIG_CHANNELS_CHANNELS_Stereo << I2S_CONFIG_CHANNELS_CHANNELS_Pos;
         // Setup master or slave mode
@@ -360,7 +360,7 @@ class I2SDriverNanoBLE {
 
     /// dynamic buffer management
     bool setupBuffers(){
-      TRACEI();
+      TRACED();
       i2s_buffer_size = cfg.buffer_size;
       if (p_i2s_array==nullptr){
         p_i2s_array = new uint8_t[cfg.buffer_size]{0};
@@ -375,7 +375,7 @@ class I2SDriverNanoBLE {
 
     /// Release buffers
     void releaseBuffers(){
-      TRACEI();
+      TRACED();
       i2s_buffer_size = 0;
 
       delete p_i2s_array;
