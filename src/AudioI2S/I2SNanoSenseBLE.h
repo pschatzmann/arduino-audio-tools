@@ -87,7 +87,7 @@ void I2S_IRQHandler(void) {
     //Handle Read
     if(NRF_I2S->EVENTS_RXPTRUPD == 1) {
       // reading from pins writing to buffer
-      NRF_I2S->RXD.PTR = (uint32_t) p_i2s_buffer->writeEnd().address(); // last buffer was processed
+      p_i2s_buffer->writeArray(p_i2s_array, i2s_buffer_size);
       NRF_I2S->EVENTS_RXPTRUPD = 0;
     }
 } 
