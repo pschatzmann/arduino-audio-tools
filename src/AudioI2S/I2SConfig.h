@@ -10,6 +10,10 @@
 #  include "driver/i2s.h"
 #endif
 
+#if defined(STM32) || defined(ARDUINO_ARCH_RP2040) || defined(USE_NANO33BLE)
+#  define I2S_BUFFER_SIZE_ONLY
+#endif
+
 namespace audio_tools {
 
 
@@ -97,7 +101,7 @@ class I2SConfig : public AudioInfo {
     int pin_mck = PIN_I2S_MCK;
     I2SFormat i2s_format = I2S_STD_FORMAT;
 
-#if defined(STM32)
+#if defined(I2S_BUFFER_SIZE_ONLY)
     int buffer_count = I2S_BUFFER_COUNT;
     int buffer_size = I2S_BUFFER_SIZE;
 #elif defined(ESP32)
@@ -108,11 +112,8 @@ class I2SConfig : public AudioInfo {
     bool auto_clear = I2S_AUTO_CLEAR;
     bool use_apll = I2S_USE_APLL; 
     uint32_t fixed_mclk = 0; 
-
-#elif defined(ARDUINO_ARCH_RP2040)
-    int buffer_count = I2S_BUFFER_COUNT;
-    int buffer_size = I2S_BUFFER_SIZE;
 #endif
+
 
     void logInfo() {
       LOGI("rx/tx mode: %s", RxTxModeNames[rx_tx_mode]);
@@ -137,7 +138,7 @@ class I2SConfig : public AudioInfo {
       LOGI("buffer_size:%d",buffer_size);
 
 #endif
-#ifdef ARDUINO_ARCH_RP2040
+#if defined(I2S_BUFFER_SIZE_ONLY)
       LOGI("buffer_count:%d",buffer_count);
       LOGI("buffer_size:%d",buffer_size);
 #endif

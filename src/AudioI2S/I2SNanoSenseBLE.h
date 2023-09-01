@@ -11,9 +11,9 @@
 
 namespace audio_tools {
 
-static const int i2s_buffer_size = 1024;
-static NBuffer<uint8_t> i2s_buffer(i2s_buffer_size, 5);
-static const uint8_t i2s_empty_array[i2s_buffer_size] = {0};
+static int i2s_buffer_size = 0;
+static NBuffer<uint8_t> *p_i2s_buffer = nullptr;
+static const uint8_t *p_i2s_empty_array = nullptr;
 static uint32_t irq_count=0;
 
 /**
@@ -65,17 +65,23 @@ INLINE_VAR const Nano_BLE_ratio_info ratio_table[] = {
  */
 
 extern "C" void I2S_IRQHandler(void) {
+    // to validate if IRQ is called
     irq_count++;
+    // prevent NPE
+    if (p_i2s_buffer==nullptr || p_i2s_empty_array==0)  return;
+
+    //Handle Wrtie
     if(NRF_I2S->EVENTS_TXPTRUPD != 0) {
       // writing from buffer to pins
-      NRF_I2S->TXD.PTR = (uint32_t) (!i2s_buffer.isEmpty() ? i2s_buffer.readEnd().address() : i2s_empty_array); // last buffer was processed
+      NRF_I2S->TXD.PTR = (uint32_t) (!p_i2s_buffer->isEmpty() ? p_i2s_buffer->readEnd().address() : p_i2s_empty_array); // last buffer was processed
       NRF_I2S->EVENTS_TXPTRUPD = 0;
 
     }  
     
+    //Handle Read
     if(NRF_I2S->EVENTS_RXPTRUPD != 0) {
       // reading from pins writing to buffer
-      NRF_I2S->RXD.PTR = (uint32_t) i2s_buffer.writeEnd().address(); // last buffer was processed
+      NRF_I2S->RXD.PTR = (uint32_t) p_i2s_buffer->writeEnd().address(); // last buffer was processed
       NRF_I2S->EVENTS_RXPTRUPD = 0;
     }
 } 
@@ -109,6 +115,25 @@ class I2SDriverNanoBLE {
     bool begin(I2SConfig cfg) {
         LOGD(__func__);
         this->cfg = cfg;
+
+        if (cfg.bits_per_sample==32){
+          LOGE("32 bits not supported");
+          return false;
+        }
+
+        if (!setupBuffers()){
+          LOGE("out of memory");
+          return false;
+        }
+
+        if (cfg.rx_tx_mode==RXTX_MODE){
+          LOGE("RX_TX_MODE not supported yet");
+          return false;
+        }
+
+        NVIC_SetVector(I2S_IRQn, (uint32_t)I2S_IRQHandler);
+        NVIC_EnableIRQ(I2S_IRQn);      
+        
         setupRxTx(cfg);
         setupClock(cfg);
         setupBitWidth(cfg);
@@ -124,11 +149,11 @@ class I2SDriverNanoBLE {
     }
 
     int available() {
-      return i2s_buffer.available();
+      return p_i2s_buffer->available();
     }
 
     int availableForWrite() {
-      return i2s_buffer.availableForWrite();
+      return p_i2s_buffer->availableForWrite();
     }
 
     /// stops the I2C and unistalls the driver
@@ -138,6 +163,8 @@ class I2SDriverNanoBLE {
         NRF_I2S->TASKS_START = 0;
         // ensble I2S
         NRF_I2S->ENABLE = 0;
+
+        releaseBuffers();
 
         is_active = false;
     }
@@ -153,7 +180,7 @@ class I2SDriverNanoBLE {
     
     /// writes the data to the I2S buffer
     size_t writeBytes(const void *src, size_t size_bytes){
-      size_t result = i2s_buffer.writeArray((uint8_t*)src, size_bytes); 
+      size_t result = p_i2s_buffer->writeArray((uint8_t*)src, size_bytes); 
 
       if (!is_active) {
         startI2SActive();
@@ -163,7 +190,7 @@ class I2SDriverNanoBLE {
 
     // reads the data from the I2S buffer
     size_t readBytes(void *dest, size_t size_bytes){
-      size_t result = i2s_buffer.readArray((uint8_t*)dest, size_bytes);          
+      size_t result = p_i2s_buffer->readArray((uint8_t*)dest, size_bytes);          
       return result;
     }
 
@@ -263,6 +290,28 @@ class I2SDriverNanoBLE {
         }
     }
 
+    /// Divisor to calculate MAXCNT
+    int frame_size(){
+      int bytes = (cfg.bits_per_sample!=24) ? cfg.bits_per_sample/8 : 4;
+      return bytes * cfg.channels;
+    }
+
+    /// Determine the INTENSET value
+    unsigned long getINTENSET(){
+      unsigned long result = 0;
+        switch (cfg.rx_tx_mode){
+          case TX_MODE:
+            result = I2S_INTENSET_TXPTRUPD_Enabled << I2S_INTENSET_TXPTRUPD_Pos;
+            break;
+          case RX_MODE:
+            result = I2S_INTENSET_RXPTRUPD_Enabled << I2S_INTENSET_RXPTRUPD_Pos;
+            break;
+          default:
+            TRACEE();
+        }
+        return result;
+    }
+
     /// Start IRQ and I2S
     void startI2SActive(){
         TRACEI();
@@ -272,12 +321,12 @@ class I2SDriverNanoBLE {
         NRF_I2S->CONFIG.MODE = cfg.is_master ? 0 << I2S_CONFIG_MODE_MODE_Pos : 1 << I2S_CONFIG_MODE_MODE_Pos ;
 
         // initial empty buffer 
-        NRF_I2S->TXD.PTR = (uint32_t) i2s_empty_array;
-        NRF_I2S->RXD.PTR = (uint32_t) i2s_empty_array; 
+        NRF_I2S->TXD.PTR = (uint32_t) p_i2s_empty_array;
+        NRF_I2S->RXD.PTR = (uint32_t) p_i2s_empty_array; 
         // define copy size
-        NRF_I2S->RXTXD.MAXCNT = i2s_buffer_size;
-
-        NVIC_EnableIRQ(I2S_IRQn);      
+        NRF_I2S->RXTXD.MAXCNT = i2s_buffer_size / frame_size();
+        
+        NRF_I2S->INTENSET = getINTENSET();
 
         // ensble I2S
         NRF_I2S->ENABLE = 1;
@@ -285,6 +334,33 @@ class I2SDriverNanoBLE {
         NRF_I2S->TASKS_START = 1;
 
         is_active = true;
+    }
+
+    /// dynamic buffer management
+    bool setupBuffers(){
+      TRACEI();
+      i2s_buffer_size = cfg.buffer_size;
+      if (p_i2s_empty_array==nullptr){
+        p_i2s_empty_array = new uint8_t[cfg.buffer_size]{0};
+      }
+    
+      if (p_i2s_buffer==nullptr){
+        p_i2s_buffer = new NBuffer<uint8_t>(cfg.buffer_size, cfg.buffer_count);
+      }
+
+      return p_i2s_empty_array!=nullptr && p_i2s_buffer!=nullptr;
+    }
+
+    /// Release buffers
+    void releaseBuffers(){
+      TRACEI();
+      i2s_buffer_size = 0;
+
+      delete p_i2s_empty_array;
+      p_i2s_empty_array = nullptr;
+
+      delete p_i2s_buffer;
+      p_i2s_buffer = nullptr;
 
     }
 
