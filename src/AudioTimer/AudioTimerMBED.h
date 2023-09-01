@@ -32,15 +32,15 @@ class TimerAlarmRepeatingDriverMBED : public TimerAlarmRepeatingDriverBase {
             // we determine the time in microseconds
             switch(unit){
                 case MS:
-                    ticker.attach_us(tickerCallback, (us_timestamp_t) time * 1000);
+                    ticker.attach(tickerCallback, std::chrono::microseconds(time * 1000));
                     break;
                 case US:
-                    ticker.attach_us(tickerCallback,(us_timestamp_t) time);
+                    ticker.attach(tickerCallback, std::chrono::microseconds(time));
                     break;
                 case HZ:
                     // convert hz to time in us
                     uint64_t time_us = AudioTime::toTimeUs(time);
-                    ticker.attach_us(tickerCallback,(us_timestamp_t) time_us);
+                    ticker.attach(tickerCallback, std::chrono::microseconds(time_us));
                     break;
             }
             return true;
