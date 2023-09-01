@@ -79,6 +79,9 @@ void I2S_IRQHandler(void) {
     if(NRF_I2S->EVENTS_TXPTRUPD == 1) {
       // writing from buffer to pins
       //NRF_I2S->TXD.PTR = (uint32_t) (!p_i2s_buffer->isEmpty() ? p_i2s_buffer->readEnd().address() : p_i2s_array); // last buffer was processed
+      // provide no audio data
+      memset(p_i2s_array,0, i2s_buffer_size);
+      // fill will audio data, if available
       p_i2s_buffer->readArray(p_i2s_array, i2s_buffer_size);
       NRF_I2S->EVENTS_TXPTRUPD = 0;
 
@@ -188,7 +191,8 @@ class I2SDriverNanoBLE {
     size_t writeBytes(const void *src, size_t size_bytes){
       size_t result = p_i2s_buffer->writeArray((uint8_t*)src, size_bytes); 
 
-      if (!is_active) {
+      // activate I2S when the buffer is full
+      if (!is_active && result < size_bytes) {
         startI2SActive();
       }         
       return result;
