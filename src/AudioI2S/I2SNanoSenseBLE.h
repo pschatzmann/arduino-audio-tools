@@ -226,7 +226,7 @@ class I2SDriverNanoBLE {
         }
 
         // find closest frequency for requested sample_rate
-        float freq_requested = cfg.sample_rate * cfg.bits_per_sample ;
+        float freq_requested = cfg.sample_rate; // * cfg.bits_per_sample ;
         float selected_freq = 0;
         for (auto freq : freq_table) {
           for (auto div : ratio_table) {
@@ -241,7 +241,7 @@ class I2SDriverNanoBLE {
               }
            }
         }
-        LOGI("frequency requested %f vs %f", freq_requested, selected_freq);
+        LOGI("frequency req. %f vs eff. %f", freq_requested, selected_freq);
 
 
     }
