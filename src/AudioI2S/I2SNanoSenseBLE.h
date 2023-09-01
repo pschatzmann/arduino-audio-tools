@@ -9,11 +9,16 @@
 #include "AudioI2S/I2SConfig.h"
 
 
+// #define PIN_MCK    (13)
+// #define PIN_SCK    (14)
+// #define PIN_LRCK   (15)
+// #define PIN_SDOUT  (16)
+
 namespace audio_tools {
 
 static int i2s_buffer_size = 0;
 static NBuffer<uint8_t> *p_i2s_buffer = nullptr;
-static const uint8_t *p_i2s_empty_array = nullptr;
+static uint8_t *p_i2s_array = nullptr;
 static uint32_t irq_count=0;
 
 /**
@@ -64,22 +69,23 @@ INLINE_VAR const Nano_BLE_ratio_info ratio_table[] = {
  *  I2S Event handler
  */
 
-extern "C" void I2S_IRQHandler(void) {
+void I2S_IRQHandler(void) {
     // to validate if IRQ is called
     irq_count++;
     // prevent NPE
-    if (p_i2s_buffer==nullptr || p_i2s_empty_array==0)  return;
+    if (p_i2s_buffer==nullptr || p_i2s_array==0)  return;
 
     //Handle Wrtie
-    if(NRF_I2S->EVENTS_TXPTRUPD != 0) {
+    if(NRF_I2S->EVENTS_TXPTRUPD == 1) {
       // writing from buffer to pins
-      NRF_I2S->TXD.PTR = (uint32_t) (!p_i2s_buffer->isEmpty() ? p_i2s_buffer->readEnd().address() : p_i2s_empty_array); // last buffer was processed
+      //NRF_I2S->TXD.PTR = (uint32_t) (!p_i2s_buffer->isEmpty() ? p_i2s_buffer->readEnd().address() : p_i2s_array); // last buffer was processed
+      p_i2s_buffer->readArray(p_i2s_array, i2s_buffer_size);
       NRF_I2S->EVENTS_TXPTRUPD = 0;
 
     }  
     
     //Handle Read
-    if(NRF_I2S->EVENTS_RXPTRUPD != 0) {
+    if(NRF_I2S->EVENTS_RXPTRUPD == 1) {
       // reading from pins writing to buffer
       NRF_I2S->RXD.PTR = (uint32_t) p_i2s_buffer->writeEnd().address(); // last buffer was processed
       NRF_I2S->EVENTS_RXPTRUPD = 0;
@@ -207,6 +213,13 @@ class I2SDriverNanoBLE {
 
     void setupClock(I2SConfig cfg){
         TRACED();
+        // // Enable MCK generator
+        // NRF_I2S->CONFIG.MCKEN = (I2S_CONFIG_MCKEN_MCKEN_ENABLE << I2S_CONFIG_MCKEN_MCKEN_Pos)
+        // // MCKFREQ = 4 MHz
+        // NRF_I2S->CONFIG.MCKFREQ = I2S_CONFIG_MCKFREQ_MCKFREQ_32MDIV11  << I2S_CONFIG_MCKFREQ_MCKFREQ_Pos;
+        // // Raito = 64 
+        // NRF_I2S->CONFIG.RATIO = I2S_CONFIG_RATIO_RATIO_64X << I2S_CONFIG_RATIO_RATIO_Pos;
+
         // Enable MCK generator if in master mode
         if (cfg.is_master){
           NRF_I2S->CONFIG.MCKEN = (I2S_CONFIG_MCKEN_MCKEN_Enabled << I2S_CONFIG_MCKEN_MCKEN_Pos);
@@ -229,6 +242,8 @@ class I2SDriverNanoBLE {
            }
         }
         LOGI("frequency requested %f vs %f", freq_requested, selected_freq);
+
+
     }
 
     void setupBitWidth(I2SConfig cfg) {
@@ -273,21 +288,28 @@ class I2SDriverNanoBLE {
     // setup pins
     void setupPins(I2SConfig cfg){
         TRACED();
+      // NRF_I2S->PSEL.MCK = (PIN_MCK << I2S_PSEL_MCK_PIN_Pos);
+      // NRF_I2S->PSEL.SCK = (PIN_SCK << I2S_PSEL_SCK_PIN_Pos);
+      // NRF_I2S->PSEL.LRCK = (PIN_LRCK << I2S_PSEL_LRCK_PIN_Pos);
+      // NRF_I2S->PSEL.SDOUT = (PIN_SDOUT << I2S_PSEL_SDOUT_PIN_Pos);
+
         // MCK routed to pin 0
-        // if (cfg.is_master){
-        //   NRF_I2S->PSEL.MCK = (0 << I2S_PSEL_MCK_PIN_Pos) | (I2S_PSEL_MCK_CONNECT_Connected << I2S_PSEL_MCK_CONNECT_Pos);
-        // }
+        if (cfg.is_master && cfg.pin_mck >= 0){
+           NRF_I2S->PSEL.MCK = digitalPinToPinName(cfg.pin_mck) << I2S_PSEL_MCK_PIN_Pos;
+        }
         // SCK - bit clock -  routed to pin 1
-        NRF_I2S->PSEL.SCK = (cfg.pin_bck << I2S_PSEL_SCK_PIN_Pos) | (I2S_PSEL_SCK_CONNECT_Connected << I2S_PSEL_SCK_CONNECT_Pos);
+        NRF_I2S->PSEL.SCK = digitalPinToPinName(cfg.pin_bck) << I2S_PSEL_SCK_PIN_Pos ;
         // LRCK routed to pin 2
-        NRF_I2S->PSEL.LRCK = (cfg.pin_ws << I2S_PSEL_LRCK_PIN_Pos) | (I2S_PSEL_LRCK_CONNECT_Connected << I2S_PSEL_LRCK_CONNECT_Pos);
+        NRF_I2S->PSEL.LRCK = digitalPinToPinName(cfg.pin_ws) << I2S_PSEL_LRCK_PIN_Pos;
         if (cfg.rx_tx_mode == TX_MODE) { 
           // SDOUT routed to pin 3
-          NRF_I2S->PSEL.SDOUT = (cfg.pin_data << I2S_PSEL_SDOUT_PIN_Pos) | (I2S_PSEL_SDOUT_CONNECT_Connected << I2S_PSEL_SDOUT_CONNECT_Pos);
+          NRF_I2S->PSEL.SDOUT = digitalPinToPinName(cfg.pin_data) << I2S_PSEL_SDOUT_PIN_Pos;
         } else {
           // SDIN routed on pin 4
-          NRF_I2S->PSEL.SDIN = (cfg.pin_data << I2S_PSEL_SDIN_PIN_Pos) |(I2S_PSEL_SDIN_CONNECT_Connected << I2S_PSEL_SDIN_CONNECT_Pos);
+          NRF_I2S->PSEL.SDIN = digitalPinToPinName(cfg.pin_data) << I2S_PSEL_SDIN_PIN_Pos;
         }
+
+
     }
 
     /// Divisor to calculate MAXCNT
@@ -318,11 +340,11 @@ class I2SDriverNanoBLE {
         // Use stereo
         NRF_I2S->CONFIG.CHANNELS = I2S_CONFIG_CHANNELS_CHANNELS_Stereo << I2S_CONFIG_CHANNELS_CHANNELS_Pos;
         // Setup master or slave mode
-        NRF_I2S->CONFIG.MODE = cfg.is_master ? 0 << I2S_CONFIG_MODE_MODE_Pos : 1 << I2S_CONFIG_MODE_MODE_Pos ;
+        NRF_I2S->CONFIG.MODE = cfg.is_master ? I2S_CONFIG_MODE_MODE_MASTER << I2S_CONFIG_MODE_MODE_Pos : I2S_CONFIG_MODE_MODE_Slave << I2S_CONFIG_MODE_MODE_Pos ;
 
         // initial empty buffer 
-        NRF_I2S->TXD.PTR = (uint32_t) p_i2s_empty_array;
-        NRF_I2S->RXD.PTR = (uint32_t) p_i2s_empty_array; 
+        NRF_I2S->TXD.PTR = (uint32_t) p_i2s_array;
+        NRF_I2S->RXD.PTR = (uint32_t) p_i2s_array; 
         // define copy size
         NRF_I2S->RXTXD.MAXCNT = i2s_buffer_size / frame_size();
         
@@ -340,15 +362,15 @@ class I2SDriverNanoBLE {
     bool setupBuffers(){
       TRACEI();
       i2s_buffer_size = cfg.buffer_size;
-      if (p_i2s_empty_array==nullptr){
-        p_i2s_empty_array = new uint8_t[cfg.buffer_size]{0};
+      if (p_i2s_array==nullptr){
+        p_i2s_array = new uint8_t[cfg.buffer_size]{0};
       }
     
       if (p_i2s_buffer==nullptr){
         p_i2s_buffer = new NBuffer<uint8_t>(cfg.buffer_size, cfg.buffer_count);
       }
 
-      return p_i2s_empty_array!=nullptr && p_i2s_buffer!=nullptr;
+      return p_i2s_array!=nullptr && p_i2s_buffer!=nullptr;
     }
 
     /// Release buffers
@@ -356,8 +378,8 @@ class I2SDriverNanoBLE {
       TRACEI();
       i2s_buffer_size = 0;
 
-      delete p_i2s_empty_array;
-      p_i2s_empty_array = nullptr;
+      delete p_i2s_array;
+      p_i2s_array = nullptr;
 
       delete p_i2s_buffer;
       p_i2s_buffer = nullptr;
