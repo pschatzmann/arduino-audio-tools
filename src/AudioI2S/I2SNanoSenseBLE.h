@@ -178,10 +178,6 @@ class I2SDriverNanoBLE {
       return cfg;
     }
 
-  protected:
-    I2SConfig cfg;
-    bool is_active = false;
-    
     /// writes the data to the I2S buffer
     size_t writeBytes(const void *src, size_t size_bytes){
       size_t result = p_i2s_buffer->writeArray((uint8_t*)src, size_bytes); 
@@ -199,6 +195,11 @@ class I2SDriverNanoBLE {
       return result;
     }
 
+
+  protected:
+    I2SConfig cfg;
+    bool is_active = false;
+    
     /// setup TXEN or RXEN
     bool setupRxTx(I2SConfig cfg) {
         TRACED();
