@@ -16,9 +16,8 @@
 namespace audio_tools {
 
 
-
 static int i2s_buffer_size = 0;
-#ifdef USE_FAST_READ 
+#if USE_FAST_READ 
 static NBuffer<uint8_t> *p_i2s_buffer = nullptr;
 #else
 static BaseBuffer<uint8_t> *p_i2s_buffer = nullptr;
