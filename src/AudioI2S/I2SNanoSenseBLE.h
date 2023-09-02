@@ -151,11 +151,13 @@ class I2SDriverNanoBLE {
     }
 
     int available() {
+      if (cfg.rx_tx_mode==TX_MODE) return 0;
       return p_i2s_buffer->available();
     }
 
     int availableForWrite() {
-      return p_i2s_buffer->availableForWrite();
+      if (cfg.rx_tx_mode==RX_MODE) return 0;
+      return max(i2s_buffer_size, p_i2s_buffer->availableForWrite());
     }
 
     /// stops the I2S 
