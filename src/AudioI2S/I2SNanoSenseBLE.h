@@ -263,8 +263,6 @@ class I2SDriverNanoBLE {
         switch(cfg.i2s_format){
           case I2S_STD_FORMAT:
           case I2S_PHILIPS_FORMAT:
-            NRF_I2S->CONFIG.ALIGN = I2S_CONFIG_FORMAT_FORMAT_I2S << I2S_CONFIG_FORMAT_FORMAT_Pos;
-            break;
           case I2S_MSB_FORMAT:
           case I2S_LEFT_JUSTIFIED_FORMAT:
             NRF_I2S->CONFIG.FORMAT = I2S_CONFIG_FORMAT_FORMAT_I2S << I2S_CONFIG_FORMAT_FORMAT_Pos;
@@ -280,24 +278,34 @@ class I2SDriverNanoBLE {
         }
     }
 
+
+    /// Provides the arduino or unconverted pin name
+    int getPinName(int pin){
+#if defined(USE_ALT_PIN_SUPPORT)
+      return cfg.is_arduino_pin_numbers ? digitalPinToPinName(pin) : pin;
+#else
+      return digitalPinToPinName(pin);
+#endif
+    }
+
     /// setup pins
     void setupPins(I2SConfig cfg){
         TRACED();
 
         // MCK routed to pin 0
         if (cfg.is_master && cfg.pin_mck >= 0){
-           NRF_I2S->PSEL.MCK = digitalPinToPinName(cfg.pin_mck) << I2S_PSEL_MCK_PIN_Pos;
+           NRF_I2S->PSEL.MCK = getPinName(cfg.pin_mck) << I2S_PSEL_MCK_PIN_Pos;
         }
         // SCK - bit clock -  routed to pin 1
-        NRF_I2S->PSEL.SCK = digitalPinToPinName(cfg.pin_bck) << I2S_PSEL_SCK_PIN_Pos ;
+        NRF_I2S->PSEL.SCK = getPinName(cfg.pin_bck) << I2S_PSEL_SCK_PIN_Pos ;
         // LRCK routed to pin 2
-        NRF_I2S->PSEL.LRCK = digitalPinToPinName(cfg.pin_ws) << I2S_PSEL_LRCK_PIN_Pos;
+        NRF_I2S->PSEL.LRCK = getPinName(cfg.pin_ws) << I2S_PSEL_LRCK_PIN_Pos;
         if (cfg.rx_tx_mode == TX_MODE) { 
           // SDOUT routed to pin 3
-          NRF_I2S->PSEL.SDOUT = digitalPinToPinName(cfg.pin_data) << I2S_PSEL_SDOUT_PIN_Pos;
+          NRF_I2S->PSEL.SDOUT = getPinName(cfg.pin_data) << I2S_PSEL_SDOUT_PIN_Pos;
         } else {
           // SDIN routed on pin 4
-          NRF_I2S->PSEL.SDIN = digitalPinToPinName(cfg.pin_data) << I2S_PSEL_SDIN_PIN_Pos;
+          NRF_I2S->PSEL.SDIN = getPinName(cfg.pin_data) << I2S_PSEL_SDIN_PIN_Pos;
         }
     }
 

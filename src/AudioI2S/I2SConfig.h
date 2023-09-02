@@ -114,6 +114,10 @@ class I2SConfig : public AudioInfo {
     uint32_t fixed_mclk = 0; 
 #endif
 
+#if defined(USE_ALT_PIN_SUPPORT)
+    bool is_arduino_pin_numbers = true;
+#endif
+
 
     void logInfo() {
       LOGI("rx/tx mode: %s", RxTxModeNames[rx_tx_mode]);
