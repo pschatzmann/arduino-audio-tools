@@ -68,8 +68,12 @@ INLINE_VAR const Nano_BLE_ratio_info ratio_table[] = {
 void I2S_IRQHandler(void) {
     // to validate if IRQ is called
     irq_count++;
-    // prevent NPE
-    if (p_i2s_buffer==nullptr || p_i2s_array==0)  return;
+    // prevent NPE 
+    if (p_i2s_buffer==nullptr || p_i2s_array==0)  {
+      NRF_I2S->EVENTS_TXPTRUPD = 0;
+      NRF_I2S->EVENTS_RXPTRUPD = 0;
+      return;
+    }
 
     //Handle Wrtie
     if(NRF_I2S->EVENTS_TXPTRUPD == 1) {
