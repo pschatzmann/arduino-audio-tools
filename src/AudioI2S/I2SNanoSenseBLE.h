@@ -116,6 +116,7 @@ class I2SDriverNanoBLE {
     /// starts the I2S 
     bool begin(I2SConfig cfg) {
         TRACEI();
+        cfg.logInfo();
         this->cfg = cfg;
 
         if (cfg.bits_per_sample==32){
