@@ -308,6 +308,7 @@ class I2SDriverNanoBLE {
         NRF_I2S->PSEL.SCK = getPinName(cfg.pin_bck) << I2S_PSEL_SCK_PIN_Pos ;
         // LRCK 
         NRF_I2S->PSEL.LRCK = getPinName(cfg.pin_ws) << I2S_PSEL_LRCK_PIN_Pos;
+        // i2s Data Pins
         switch (cfg.rx_tx_mode){
           case TX_MODE:
             NRF_I2S->PSEL.SDOUT = getPinName(cfg.pin_data) << I2S_PSEL_SDOUT_PIN_Pos;
@@ -315,6 +316,8 @@ class I2SDriverNanoBLE {
           case RX_MODE:
             NRF_I2S->PSEL.SDIN = getPinName(cfg.pin_data) << I2S_PSEL_SDIN_PIN_Pos;
             break;
+          default:
+            TRACEW();
         } 
     }
 
