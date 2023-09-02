@@ -1,6 +1,6 @@
 
 #pragma once
-#if defined(__arm__)  && __has_include("mbed.h")
+#if defined(ARDUINO_ARCH_MBED)
 #include "AudioPWM/PWMAudioBase.h"
 #include "AudioTimer/AudioTimer.h"
 #include "mbed.h"
