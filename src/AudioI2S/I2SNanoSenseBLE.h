@@ -18,10 +18,10 @@ namespace audio_tools {
 
 
 static int i2s_buffer_size = 0;
-#ifdef USE_RINGBUFFER
-static BaseBuffer<uint8_t> *p_i2s_buffer = nullptr;
-#else
+#ifdef USE_FAST_READ 
 static NBuffer<uint8_t> *p_i2s_buffer = nullptr;
+#else
+static BaseBuffer<uint8_t> *p_i2s_buffer = nullptr;
 #endif
 static uint8_t *p_i2s_array = nullptr;
 static uint32_t i2s_underflow_count = 0;
@@ -82,7 +82,7 @@ void I2S_IRQWrite(void) {
         // Alternative API via Stream
          eff_read = p_nano_ble_stream->readBytes(p_i2s_array, i2s_buffer_size);
       } else {
-#if USE_FAST_READ && USE_RINGBUFFER!=0
+#if USE_FAST_READ 
         // directly using N Buffer addresses
         p_i2s_buffer->readEnd();
         eff_read = p_i2s_buffer->available();
@@ -103,6 +103,16 @@ void I2S_IRQWrite(void) {
     }  
 }
 
+
+void I2S_IRQRead(void) {
+    //Handle Read
+    if(NRF_I2S->EVENTS_RXPTRUPD == 1) {
+      // reading from pins writing to buffer - overwrite oldest data on overflow
+      p_i2s_buffer->writeArrayOverwrite(p_i2s_array, i2s_buffer_size);
+      NRF_I2S->EVENTS_RXPTRUPD = 0;
+    }
+}
+
 /**
  *  I2S Event handler
  */
@@ -116,13 +126,7 @@ void I2S_IRQHandler(void) {
     }
 
     I2S_IRQWrite();
-    
-    //Handle Read
-    if(NRF_I2S->EVENTS_RXPTRUPD == 1) {
-      // reading from pins writing to buffer - overwrite oldest data on overflow
-      p_i2s_buffer->writeArrayOverwrite(p_i2s_array, i2s_buffer_size);
-      NRF_I2S->EVENTS_RXPTRUPD = 0;
-    }
+    I2S_IRQRead();
 } 
 
 /**
@@ -419,10 +423,10 @@ class I2SDriverNanoBLE {
       }
     
       if (p_i2s_buffer==nullptr){
-#if USE_RINGBUFFER
-        p_i2s_buffer = new RingBuffer<uint8_t>(cfg.buffer_size * cfg.buffer_count);
-#else
+#if USE_FAST_READ || !USE_RINGBUFFER
         p_i2s_buffer = new NBuffer<uint8_t>(cfg.buffer_size, cfg.buffer_count);
+#else
+        p_i2s_buffer = new RingBuffer<uint8_t>(cfg.buffer_size * cfg.buffer_count);
 #endif
       }
 
