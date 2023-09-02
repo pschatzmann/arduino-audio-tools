@@ -308,13 +308,14 @@ class I2SDriverNanoBLE {
         NRF_I2S->PSEL.SCK = getPinName(cfg.pin_bck) << I2S_PSEL_SCK_PIN_Pos ;
         // LRCK 
         NRF_I2S->PSEL.LRCK = getPinName(cfg.pin_ws) << I2S_PSEL_LRCK_PIN_Pos;
-        if (cfg.rx_tx_mode == TX_MODE) { 
-          // SDOUT 
-          NRF_I2S->PSEL.SDOUT = getPinName(cfg.pin_data) << I2S_PSEL_SDOUT_PIN_Pos;
-        } else {
-          // SDIN 
-          NRF_I2S->PSEL.SDIN = getPinName(cfg.pin_data) << I2S_PSEL_SDIN_PIN_Pos;
-        }
+        switch (cfg.rx_tx_mode){
+          case TX_MODE:
+            NRF_I2S->PSEL.SDOUT = getPinName(cfg.pin_data) << I2S_PSEL_SDOUT_PIN_Pos;
+            break;
+          case RX_MODE:
+            NRF_I2S->PSEL.SDIN = getPinName(cfg.pin_data) << I2S_PSEL_SDIN_PIN_Pos;
+            break;
+        } 
     }
 
     /// Divisor to calculate MAXCNT
