@@ -91,6 +91,7 @@ void I2S_IRQHandler(void) {
 /**
  * @brief Basic I2S API - for the Arduino Nano BLE Sense
  * See https://content.arduino.cc/assets/Nano_BLE_MCU-nRF52840_PS_v1.1.pdf?_gl=1*1huxzp5*_ga*MTk1MjI1NjMzOS4xNjc1MzI4MTcx*_ga_NEXN8H46L5*MTY5MzQ5MDg2Ni45NS4xLjE2OTM0OTA4NjguMC4wLjA.
+ * Douplex mode (RXTX_MODE) is currently not supported, but it should be quite easy to implement.
  * @author Phil Schatzmann
  * @ingroup platform
  * @copyright GPLv3
@@ -129,15 +130,13 @@ class I2SDriverNanoBLE {
           return false;
         }
 
-        if (cfg.rx_tx_mode==RXTX_MODE){
-          LOGE("RX_TX_MODE not supported yet");
-          return false;
-        }
 
         NVIC_SetVector(I2S_IRQn, (uint32_t)I2S_IRQHandler);
         NVIC_EnableIRQ(I2S_IRQn);      
         
-        setupRxTx(cfg);
+        if (!setupRxTx(cfg)){
+          return false;
+        }
         setupClock(cfg);
         setupBitWidth(cfg);
         setupMode(cfg);
@@ -201,14 +200,20 @@ class I2SDriverNanoBLE {
     }
 
     /// setup TXEN or RXEN
-    void setupRxTx(I2SConfig cfg) {
+    bool setupRxTx(I2SConfig cfg) {
         TRACED();
-        if (cfg.rx_tx_mode == TX_MODE) { 
-          // Enable transmission
-          NRF_I2S->CONFIG.TXEN = (I2S_CONFIG_TXEN_TXEN_Enabled << I2S_CONFIG_TXEN_TXEN_Pos);
-        } else {
-          // Enable reception
-          NRF_I2S->CONFIG.RXEN = (I2S_CONFIG_RXEN_RXEN_Enabled << I2S_CONFIG_RXEN_RXEN_Pos);
+        switch (cfg.rx_tx_mode) {
+          case TX_MODE: 
+            // Enable transmission
+            NRF_I2S->CONFIG.TXEN = (I2S_CONFIG_TXEN_TXEN_Enabled << I2S_CONFIG_TXEN_TXEN_Pos);
+            return true;
+          case RX_MODE: 
+            // Enable reception
+            NRF_I2S->CONFIG.RXEN = (I2S_CONFIG_RXEN_RXEN_Enabled << I2S_CONFIG_RXEN_RXEN_Pos);
+            return true;
+          default:
+            LOGE("rx_tx_mode not supported");
+            return false;
         }
     }
 
@@ -295,19 +300,19 @@ class I2SDriverNanoBLE {
     void setupPins(I2SConfig cfg){
         TRACED();
 
-        // MCK routed to pin 0
+        // MCK 
         if (cfg.is_master && cfg.pin_mck >= 0){
            NRF_I2S->PSEL.MCK = getPinName(cfg.pin_mck) << I2S_PSEL_MCK_PIN_Pos;
         }
-        // SCK - bit clock -  routed to pin 1
+        // SCK - bit clock 
         NRF_I2S->PSEL.SCK = getPinName(cfg.pin_bck) << I2S_PSEL_SCK_PIN_Pos ;
-        // LRCK routed to pin 2
+        // LRCK 
         NRF_I2S->PSEL.LRCK = getPinName(cfg.pin_ws) << I2S_PSEL_LRCK_PIN_Pos;
         if (cfg.rx_tx_mode == TX_MODE) { 
-          // SDOUT routed to pin 3
+          // SDOUT 
           NRF_I2S->PSEL.SDOUT = getPinName(cfg.pin_data) << I2S_PSEL_SDOUT_PIN_Pos;
         } else {
-          // SDIN routed on pin 4
+          // SDIN 
           NRF_I2S->PSEL.SDIN = getPinName(cfg.pin_data) << I2S_PSEL_SDIN_PIN_Pos;
         }
     }
