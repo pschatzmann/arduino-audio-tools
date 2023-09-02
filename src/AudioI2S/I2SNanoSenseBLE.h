@@ -10,8 +10,8 @@
 #include "AudioI2S/I2SConfig.h"
 
 // Select Implementation 
-#define USE_FAST_READ 0
-#define USE_RINGBUFFER 0
+#define USE_FAST_READ false
+#define USE_RINGBUFFER false
 
 namespace audio_tools {
 
