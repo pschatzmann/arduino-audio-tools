@@ -101,7 +101,7 @@ class StreamCopyT {
             // E.g. if we try to write to a server we might not have any output destination yet
             int to_write = to->availableForWrite();
             if (check_available_for_write && to_write==0){
-                 delay(500);
+                 delay(delay_on_no_data);
                  return 0;
             }
 
