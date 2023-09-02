@@ -90,7 +90,7 @@ void I2S_IRQHandler(void) {
 
 /**
  * @brief Basic I2S API - for the Arduino Nano BLE Sense
- * See https://content.arduino.cc/assets/Nano_BLE_MCU-nRF52840_PS_v1.1.pdf?_gl=1*1huxzp5*_ga*MTk1MjI1NjMzOS4xNjc1MzI4MTcx*_ga_NEXN8H46L5*MTY5MzQ5MDg2Ni45NS4xLjE2OTM0OTA4NjguMC4wLjA.
+ * See https://content.arduino.cc/assets/Nano_BLE_MCU-nRF52840_PS_v1.1.pdf
  * Douplex mode (RXTX_MODE) is currently not supported, but it should be quite easy to implement.
  * @author Phil Schatzmann
  * @ingroup platform

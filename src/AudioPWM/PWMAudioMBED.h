@@ -27,9 +27,7 @@ class PWMDriverMBED : public DriverPWMBase {
 
     public:
 
-        PWMDriverMBED(){
-            LOGD("PWMDriverMBED");
-        }
+        PWMDriverMBED() = default;
 
         // Ends the output
         virtual void end() override {
@@ -86,6 +84,7 @@ class PWMDriverMBED : public DriverPWMBase {
         virtual void setupTimer() {
         } 
 
+        /// Maximum supported channels
         virtual int maxChannels() {
             return 16;
         };
