@@ -9,20 +9,15 @@
 #include "AudioTools/AudioLogger.h"
 #include "AudioI2S/I2SConfig.h"
 
-// Select Implementation 
-#define USE_FAST_READ false
-#define USE_RINGBUFFER false
 
 namespace audio_tools {
 
 
 static int i2s_buffer_size = 0;
-#if USE_FAST_READ 
-static NBuffer<uint8_t> *p_i2s_buffer = nullptr;
-#else
 static BaseBuffer<uint8_t> *p_i2s_buffer = nullptr;
-#endif
 static uint8_t *p_i2s_array = nullptr;
+static uint8_t *p_i2s_array_1 = nullptr;
+static uint8_t *p_i2s_array_2 = nullptr;
 static uint32_t i2s_underflow_count = 0;
 // alternative API
 static Stream *p_nano_ble_stream=nullptr;
@@ -77,20 +72,15 @@ void I2S_IRQWrite(void) {
     if(NRF_I2S->EVENTS_TXPTRUPD == 1) {
       size_t eff_read = 0;
 
+      // toggle arrays to avoid noise
+      p_i2s_array = p_i2s_array==p_i2s_array_1?p_i2s_array_2:p_i2s_array_1;
+
       if (p_nano_ble_stream!=nullptr){
         // Alternative API via Stream
          eff_read = p_nano_ble_stream->readBytes(p_i2s_array, i2s_buffer_size);
       } else {
-#if USE_FAST_READ 
-        // directly using N Buffer addresses
-        p_i2s_buffer->readEnd();
-        eff_read = p_i2s_buffer->available();
-        uint8_t *adr = p_i2s_buffer->address();
-        NRF_I2S->TXD.PTR =  (adr==nullptr) ? (uint32_t)p_i2s_array : (uint32_t)adr;
-#else
         // Using readArray
          eff_read = p_i2s_buffer->readArray(p_i2s_array, i2s_buffer_size);
-#endif
       }
       // if we did not get any valid data we provide silence
       if (eff_read < i2s_buffer_size){
@@ -98,7 +88,10 @@ void I2S_IRQWrite(void) {
         // allow checking for underflows
         i2s_underflow_count++;
       }
+      NRF_I2S->TXD.PTR = (uint32_t)p_i2s_array;
       NRF_I2S->EVENTS_TXPTRUPD = 0;
+
+      
     }  
 }
 
@@ -414,19 +407,17 @@ class I2SDriverNanoBLE {
     /// dynamic buffer management
     bool setupBuffers(){
       TRACED();
-      if (i2s_buffer_size==0 || USE_FAST_READ){
+      if (i2s_buffer_size==0 ){
         i2s_buffer_size = cfg.buffer_size;
       }
       if (p_i2s_array==nullptr){
-        p_i2s_array = new uint8_t[cfg.buffer_size]{0};
+        p_i2s_array_1 = new uint8_t[cfg.buffer_size]{0};
+        p_i2s_array_2 = new uint8_t[cfg.buffer_size]{0};
+        p_i2s_array = p_i2s_array_1;
       }
     
       if (p_i2s_buffer==nullptr){
-#if USE_FAST_READ || !USE_RINGBUFFER
         p_i2s_buffer = new NBuffer<uint8_t>(cfg.buffer_size, cfg.buffer_count);
-#else
-        p_i2s_buffer = new RingBuffer<uint8_t>(cfg.buffer_size * cfg.buffer_count);
-#endif
       }
 
       return p_i2s_array!=nullptr && p_i2s_buffer!=nullptr;
