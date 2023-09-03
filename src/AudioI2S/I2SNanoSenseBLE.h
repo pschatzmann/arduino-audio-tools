@@ -99,6 +99,9 @@ void I2S_IRQRead(void) {
     if(NRF_I2S->EVENTS_RXPTRUPD == 1) {
       // reading from pins writing to buffer - overwrite oldest data on overflow
       p_i2s_buffer->writeArrayOverwrite(p_i2s_array, i2s_buffer_size);
+      // switch buffer assuming that this is necessary like in the write case
+      p_i2s_array = p_i2s_array==p_i2s_array_1?p_i2s_array_2:p_i2s_array_1;
+      NRF_I2S->RXD.PTR = (uint32_t)p_i2s_array;
       NRF_I2S->EVENTS_RXPTRUPD = 0;
     }
 }
@@ -404,17 +407,18 @@ class I2SDriverNanoBLE {
     /// dynamic buffer management
     bool setupBuffers(){
       TRACED();
-      if (i2s_buffer_size==0 ){
-        i2s_buffer_size = cfg.buffer_size;
-      }
+      i2s_buffer_size = cfg.buffer_size;
+      
       if (p_i2s_array==nullptr){
-        p_i2s_array_1 = new uint8_t[cfg.buffer_size]{0};
-        p_i2s_array_2 = new uint8_t[cfg.buffer_size]{0};
+        p_i2s_array_1 = new uint8_t[i2s_buffer_size]{0};
+        p_i2s_array_2 = new uint8_t[i2s_buffer_size]{0};
         p_i2s_array = p_i2s_array_1;
+      } else {  
+        memset(p_i2s_array_1, 0, i2s_buffer_size);
+        memset(p_i2s_array_2, 0, i2s_buffer_size);
       }
-    
       if (p_i2s_buffer==nullptr){
-        p_i2s_buffer = new NBuffer<uint8_t>(cfg.buffer_size, cfg.buffer_count);
+        p_i2s_buffer = new NBuffer<uint8_t>(cfg.buffer_size, i2s_buffer_size);
       }
 
       return p_i2s_array!=nullptr && p_i2s_buffer!=nullptr;
