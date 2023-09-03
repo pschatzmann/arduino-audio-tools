@@ -15,9 +15,9 @@ namespace audio_tools {
 
 static int i2s_buffer_size = 0;
 static BaseBuffer<uint8_t> *p_i2s_buffer = nullptr;
-static uint8_t *p_i2s_array = nullptr;
-static uint8_t *p_i2s_array_1 = nullptr;
-static uint8_t *p_i2s_array_2 = nullptr;
+static uint8_t *p_i2s_array = nullptr; // current array
+static uint8_t *p_i2s_array_1 = nullptr; // array 1
+static uint8_t *p_i2s_array_2 = nullptr; // array 2
 static uint32_t i2s_underflow_count = 0;
 // alternative API
 static Stream *p_nano_ble_stream=nullptr;
@@ -90,8 +90,6 @@ void I2S_IRQWrite(void) {
       }
       NRF_I2S->TXD.PTR = (uint32_t)p_i2s_array;
       NRF_I2S->EVENTS_TXPTRUPD = 0;
-
-      
     }  
 }
 
@@ -108,7 +106,6 @@ void I2S_IRQRead(void) {
 /**
  *  I2S Event handler
  */
-
 void I2S_IRQHandler(void) {
     // prevent NPE 
     if (p_i2s_buffer==nullptr || p_i2s_array==0)  {
@@ -163,7 +160,7 @@ class I2SDriverNanoBLE {
           return false;
         }
 
-
+        // setup IRQ
         NVIC_SetVector(I2S_IRQn, (uint32_t)I2S_IRQHandler);
         NVIC_EnableIRQ(I2S_IRQn);      
         
@@ -428,14 +425,15 @@ class I2SDriverNanoBLE {
       TRACED();
       i2s_buffer_size = 0;
 
-      delete p_i2s_array;
       p_i2s_array = nullptr;
+      delete p_i2s_array_1;
+      p_i2s_array_1 = nullptr;
+      delete p_i2s_array_2;
+      p_i2s_array_2 = nullptr;
 
       delete p_i2s_buffer;
       p_i2s_buffer = nullptr;
-
     }
-
 };
 
 using I2SDriver = I2SDriverNanoBLE;
