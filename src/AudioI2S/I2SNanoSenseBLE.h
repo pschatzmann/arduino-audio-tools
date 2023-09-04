@@ -417,11 +417,17 @@ class I2SDriverNanoBLE {
         memset(p_i2s_array_1, 0, i2s_buffer_size);
         memset(p_i2s_array_2, 0, i2s_buffer_size);
       }
-      if (p_i2s_buffer==nullptr){
+
+      // allocate buffer only when needed
+      if (p_i2s_buffer==nullptr && p_nano_ble_stream==nullptr){
         p_i2s_buffer = new NBuffer<uint8_t>(cfg.buffer_size, i2s_buffer_size);
       }
 
-      return p_i2s_array!=nullptr && p_i2s_buffer!=nullptr;
+      // on stream option we only need to have the arrays allocated
+      if (p_nano_ble_stream!=null){
+        return p_i2s_array_1!=nullptr && p_i2s_array_2!=nullptr;
+      } 
+      return p_i2s_array_1!=nullptr && p_i2s_array_2!=nullptr && p_i2s_buffer!=nullptr;
     }
 
     /// Release buffers
