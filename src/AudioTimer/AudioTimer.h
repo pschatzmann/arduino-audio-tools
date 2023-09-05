@@ -29,50 +29,55 @@ class TimerAlarmRepeating {
         /**
          * @brief Construct a new Timer Alarm Repeating object by passing your object
          * which has been customized with some special platform specific parameters
-         * @param driver 
+         * @param timer 
          */
-        TimerAlarmRepeating(TimerAlarmRepeatingDriverBase &driver) {
-            p_driver = &driver;
+        TimerAlarmRepeating(TimerAlarmRepeatingDriverBase &timer) {
+            p_timer = &timer;
         };
         virtual ~TimerAlarmRepeating() = default;
 
         bool begin(repeating_timer_callback_t callback_f, uint32_t time, TimeUnit unit = MS) {
-            is_active = p_driver->begin(callback_f, time, unit);
+            is_active = p_timer->begin(callback_f, time, unit);
             return is_active;
         }
         bool end() { 
             is_active = false;
-            return p_driver->end(); 
+            return p_timer->end(); 
         };
 
         void setCallbackParameter(void* obj){
-          p_driver->setCallbackParameter(obj);
+          p_timer->setCallbackParameter(obj);
         }
 
         void *callbackParameter(){
-            return p_driver->callbackParameter();
+            return p_timer->callbackParameter();
         }
 
         virtual void setTimer(int timer){
-            p_driver->setTimer(timer);
+            p_timer->setTimer(timer);
         }
 
         virtual void setTimerFunction(TimerFunction function=DirectTimerCallback){
-            p_driver->setTimerFunction(function);
+            p_timer->setTimerFunction(function);
         }
 
         void setIsSave(bool is_save){
-            p_driver->setIsSave(is_save);
+            p_timer->setIsSave(is_save);
         }
 
         /// @brief Returns true if the timer is active
         operator bool() { return is_active; }
 
+        /// Provides access to the driver
+        TimerAlarmRepeatingDriverBase* driver() {
+            return p_timer;
+        }
+
     protected:
         void* object=nullptr;
         bool is_active = false;;
-        TimerAlarmRepeatingDriver driver; // platform specific driver
-        TimerAlarmRepeatingDriverBase *p_driver=&driver;
+        TimerAlarmRepeatingDriver timer; // platform specific timer
+        TimerAlarmRepeatingDriverBase *p_timer=&timer;
 
 };
 
