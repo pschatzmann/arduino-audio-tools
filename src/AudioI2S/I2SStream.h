@@ -14,6 +14,7 @@
 #include "AudioI2S/I2SSAMD.h"
 #include "AudioI2S/I2SNanoSenseBLE.h"
 #include "AudioI2S/I2SRP2040.h"
+#include "AudioI2S/I2SRP2040-MBED.h"
 #include "AudioI2S/I2SSTM32.h"
 
 
