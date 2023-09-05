@@ -56,18 +56,18 @@ class AnalogAudioStream  : public AudioStream {
     /// starts the DAC 
     bool begin(AnalogConfig cfg) {
       TRACEI();
-      return driver.begin(cfg);
+      return analog.begin(cfg);
     }
 
-    /// stops the I2S and unistalls the driver
+    /// stops the I2S and unistalls the analog
     void end() override {
       TRACEI();
-      driver.end();
+      analog.end();
     }
 
     // /// Overides the sample rate and uses the max value which is around  ~13MHz. Call this methd after begin();
     // void setMaxSampleRate() {
-    //     driver.setMaxSampleRate();
+    //     analog.setMaxSampleRate();
     // }
 
     AnalogConfig &config() {
@@ -77,23 +77,28 @@ class AnalogAudioStream  : public AudioStream {
      /// ESP32 only: writes the data to the I2S interface
     size_t write(const uint8_t *src, size_t size_bytes) override { 
       TRACED();
-      return driver.write(src, size_bytes);
+      return analog.write(src, size_bytes);
     }   
 
     size_t readBytes(uint8_t *dest, size_t size_bytes) override {
-        return driver.readBytes(dest, size_bytes);
+        return analog.readBytes(dest, size_bytes);
     }
 
     int available() override {
-        return driver.available();
+        return analog.available();
     }
 
     int availableForWrite() override {
-        return driver.availableForWrite();
+        return analog.availableForWrite();
+    }
+
+    /// Provides access to the driver
+    AnalogDriver* driver() {
+        return &analog;
     }
 
 protected:
-    AnalogDriver driver;
+    AnalogDriver analog;
     AnalogConfig adc_config;
 };
 

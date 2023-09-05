@@ -233,6 +233,11 @@ class I2SDriverNanoBLE {
       p_nano_ble_stream = &stream;
     }
 
+    /// Deactivate alternative API: don't forget to call begin()
+    void clearStream(){
+      p_nano_ble_stream = nullptr;
+    }
+
     void setBufferSize(int size){
       i2s_buffer_size = size;
     }

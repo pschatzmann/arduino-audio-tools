@@ -110,8 +110,13 @@ class I2SStream : public AudioStream {
 
         void flush() override {}
 
+        /// Provides access to the driver
+        I2SDriver* driver() {
+            return &i2s;
+        }
+
     protected:
-        I2SDriver i2s;
+        I2SDriver i2s;        
         int mute_pin;
 
         /// set mute pin on or off

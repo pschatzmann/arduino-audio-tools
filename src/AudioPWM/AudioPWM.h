@@ -21,13 +21,13 @@ namespace audio_tools {
 class PWMAudioOutput : public AudioOutput {
     public:
         ~PWMAudioOutput(){
-            if (driver.isTimerStarted()){
+            if (pwm.isTimerStarted()){
                 end();
             }
         }
 
         virtual PWMConfig defaultConfig() {
-            return driver.defaultConfig();
+            return pwm.defaultConfig();
         }
 
         PWMConfig config() {
@@ -55,40 +55,45 @@ class PWMAudioOutput : public AudioOutput {
             TRACED();
             this->audio_config = config;
             AudioOutput::setAudioInfo(audio_config);
-            return driver.begin(audio_config);
+            return pwm.begin(audio_config);
         }  
 
         bool begin()  {
             TRACED();
             AudioOutput::setAudioInfo(audio_config);
-            return driver.begin(audio_config);
+            return pwm.begin(audio_config);
         }  
 
         virtual void end() {
-            driver.end();
+            pwm.end();
         }
 
         int availableForWrite() override { 
-            return driver.availableForWrite();
+            return pwm.availableForWrite();
         }
 
         // blocking write for an array: we expect a singed value and convert it into a unsigned 
         size_t write(const uint8_t *wrt_buffer, size_t size) override{
-            return driver.write(wrt_buffer, size);
+            return pwm.write(wrt_buffer, size);
         }
 
         // When the timer does not have enough data we increase the underflow_count;
         uint32_t underflowsPerSecond(){
-            return driver.underflowsPerSecond();
+            return pwm.underflowsPerSecond();
         }
         // provides the effectivly measured output frames per second
         uint32_t framesPerSecond(){
-            return driver.framesPerSecond();
+            return pwm.framesPerSecond();
+        }
+
+        /// Provides access to the driver
+        PWMDriver* driver() {
+            return &pwm;
         }
 
     protected:
         PWMConfig audio_config;
-        PWMDriver driver; // platform specific driver
+        PWMDriver pwm; // platform specific pwm
 
 };
 
