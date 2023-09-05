@@ -1,12 +1,8 @@
 #pragma once
 
-#if defined(ARDUINO_ARCH_RP2040) 
 #include "AudioI2S/I2SConfig.h"
-#if defined(ARDUINO_ARCH_MBED_RP2040)
-#  include "RP2040-I2S.h"
-#else
-#  include <I2S.h>
-#endif
+#if defined(RP2040_HOWER)
+#include <I2S.h>
 
 
 namespace audio_tools {
@@ -117,11 +113,11 @@ class I2SDriverRP2040 {
 
     /// writes the data to the I2S interface 
     size_t writeBytes(const void *src, size_t size_bytes) {
-      TRACED();
+      LOGD("writeBytes(%d)", size_bytes);
       size_t result = 0;
 
       if (cfg.channels==1){
-        result = writeExpandChannel(src,size_bytes);
+        result = writeExpandChannel(src, size_bytes);
       } else if (cfg.channels==2){
         const uint8_t *p = (const uint8_t*) src;
         while(size_bytes >= sizeof(int32_t)){
@@ -144,7 +140,7 @@ class I2SDriverRP2040 {
 
     int availableForWrite()  {
       if (cfg.channels == 1){
-        return i2s.availableForWrite()/2;// return half of it because we double when writing
+        return cfg.buffer_size;
       } else {
         return i2s.availableForWrite();
       } 
@@ -163,51 +159,36 @@ class I2SDriverRP2040 {
     I2S i2s;
 
     //writes 1 channel to I2S while expanding it to 2 channels
-    //writes multiple of 4 bytes like I2S::write() wants
     //returns amount of bytes written from src to i2s
     size_t writeExpandChannel(const void *src, size_t size_bytes) {
-      size_t writtenBytes = 0;
       switch(cfg.bits_per_sample){
-        case 8:
-        for(int i = 0; i<size_bytes - 1; i += 2){//2 Samples written at a time to write 4 bytes
-          int8_t frame[4];
-          int8_t *data = (int8_t*) src;
-          frame[0] = data[i];
-          frame[1] = data[i];
-          frame[2] = data[i+1];//i<size_bytes-1 in for() because of this +1
-          frame[3] = data[i+1];
-          bool justWritten = i2s.write(*(uint32_t*)frame, true);//blocking
-          if(justWritten){
-            writtenBytes += 2;
-          } else return writtenBytes;
-        }
-        break;
-        case 16:
-        for(int i = 0; i<size_bytes/sizeof(int16_t); i++){//1 sample written at a time to write 4 bytes
-          int16_t frame[2];
-          int16_t *data = (int16_t *) src;
-          frame[0] = data[i];
-          frame[1] = data[i];
-          bool justWritten = i2s.write(*(uint32_t*)frame, true);//blocking
-          if(justWritten){
-            writtenBytes += sizeof(int16_t);
-          } else return writtenBytes;
-        }
-        break;
-        case 24://24bps are already stored as left-aligned int32_t => handle just like 32bps
-        case 32:
-        for(int i = 0; i<size_bytes/sizeof(int32_t); i++){//1 sample written at a time to write 2*4 bytes
-          int32_t frame[2];
-          int32_t *data = (int32_t *) src;
-          frame[0] = data[i];
-          frame[1] = data[i];
-          bool justWritten = i2s.write(frame[0], true) && i2s.write(frame[1], true);
-          if(justWritten){
-            writtenBytes += sizeof(int32_t);
-          } else return writtenBytes;
-        }
+        case 8: {
+          int8_t *pt8 = (int8_t*) src;
+          for (int j=0;j<size_bytes;j++){
+            i2s.write8(pt8[j], pt8[j]); 
+            //LOGI("%d", pt8[j]);
+          }
+        } break;
+        case 16: {
+          int16_t *pt16 = (int16_t*) src;
+          for (int j=0;j<size_bytes/sizeof(int16_t);j++){            
+            i2s.write16(pt16[j], pt16[j]); 
+          }
+        } break;
+        case 24: {
+          int32_t *pt24 = (int32_t*) src;
+          for (int j=0;j<size_bytes/sizeof(int32_t);j++){
+            i2s.write24(pt24[j], pt24[j]); 
+          }
+        } break;
+        case 32:{
+          int32_t *pt32 = (int32_t*) src;
+          for (int j=0;j<size_bytes/sizeof(int32_t);j++){
+            i2s.write32(pt32[j], pt32[j]); 
+          }
+        } break;
       }
-      return writtenBytes;
+      return size_bytes;
     }
 };
 
