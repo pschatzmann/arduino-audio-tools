@@ -37,17 +37,17 @@ class I2SDriverRP2040 {
       this->cfg = cfg;
       cfg.logInfo();
       switch (cfg.rx_tx_mode){
-      case TX_MODE:
-        i2s = I2S(OUTPUT);
-        break;
-      case RX_MODE:
-       i2s = I2S(INPUT);
-       has_input[0] = has_input[1] = false;
-       break;
-      default:
-        LOGE("Unsupported mode: only TX_MODE is supported");
-        return false;
-        break;
+        case TX_MODE:
+          i2s = I2S(OUTPUT);
+          break;
+        case RX_MODE:
+          i2s = I2S(INPUT);
+          has_input[0] = has_input[1] = false;
+          break;
+        default:
+          LOGE("Unsupported mode: only TX_MODE is supported");
+          return false;
+          break;
       }
 
       if (cfg.pin_ws == cfg.pin_bck + 1){ //normal pin order
@@ -79,12 +79,15 @@ class I2SDriverRP2040 {
         return false;
       }
 
-      if(cfg.i2s_format == I2S_LEFT_JUSTIFIED_FORMAT){
+      // setup format
+      if(cfg.i2s_format == I2S_STD_FORMAT || cfg.i2s_format == I2S_PHILIPS_FORMAT){
+        // default setting: do nothing
+      } else if(cfg.i2s_format == I2S_LEFT_JUSTIFIED_FORMAT || cfg.i2s_format==I2S_LSB_FORMAT){
         if(!i2s.setLSBJFormat()){
           LOGE("Could not set LSB Format")
           return false;
         }
-      } else if(cfg.i2s_format != I2S_STD_FORMAT){
+      } else {
         LOGE("Unsupported I2S format");
         return false;
       }
