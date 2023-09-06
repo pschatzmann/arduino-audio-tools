@@ -40,9 +40,10 @@ class I2SDriverRP2040 {
       case TX_MODE:
         i2s = I2S(OUTPUT);
         break;
-      //case RX_MODE:
-      //  i2s = I2S(INPUT);
-      //  break;
+      case RX_MODE:
+       i2s = I2S(INPUT);
+       has_input[0] = has_input[1] = false;
+       break;
       default:
         LOGE("Unsupported mode: only TX_MODE is supported");
         return false;
@@ -68,7 +69,7 @@ class I2SDriverRP2040 {
         return false;
       }
 
-      if (!i2s.setBitsPerSample(cfg.bits_per_sample)){
+      if (cfg.bits_per_sample==8 || !i2s.setBitsPerSample(cfg.bits_per_sample)){
         LOGE("Could not set bits per sample: %d", cfg.bits_per_sample);
         return false;
       }
@@ -133,9 +134,14 @@ class I2SDriverRP2040 {
     }
 
     size_t readBytes(void *dest, size_t size_bytes) {
-      TRACEE();
-      size_t result = 0;
-      return result;
+      TRACED();
+      switch(cfg.channels){
+        case 1:
+          return read1Channel(dest, size_bytes);
+        case 2:
+          return read2Channels(dest, size_bytes);
+      }
+      return 0;
     }
 
     int availableForWrite()  {
@@ -147,7 +153,7 @@ class I2SDriverRP2040 {
     }
 
     int available() {
-      return 0;
+      return min(i2s.available(), cfg.buffer_size);
     }
 
     void flush() {
@@ -157,18 +163,21 @@ class I2SDriverRP2040 {
   protected:
     I2SConfig cfg;
     I2S i2s;
+    bool has_input[2];
 
-    //writes 1 channel to I2S while expanding it to 2 channels
+    /// writes 1 channel to I2S while expanding it to 2 channels
     //returns amount of bytes written from src to i2s
     size_t writeExpandChannel(const void *src, size_t size_bytes) {
       switch(cfg.bits_per_sample){
-        case 8: {
-          int8_t *pt8 = (int8_t*) src;
-          for (int j=0;j<size_bytes;j++){
-            i2s.write8(pt8[j], pt8[j]); 
-            //LOGI("%d", pt8[j]);
-          }
-        } break;
+        // case 8: {
+        //   int8_t *pt8 = (int8_t*) src;
+        //   int16_t sample16 = static_cast<int16_t>(*pt8) << 8;
+        //   for (int j=0;j<size_bytes;j++){
+        //     // 8 bit does not work
+        //     i2s.write8(pt8[j], pt8[j]); 
+        //     //LOGI("%d", pt8[j]);
+        //   }
+        // } break;
         case 16: {
           int16_t *pt16 = (int16_t*) src;
           for (int j=0;j<size_bytes/sizeof(int16_t);j++){            
@@ -190,6 +199,141 @@ class I2SDriverRP2040 {
       }
       return size_bytes;
     }
+
+    /// Provides sterio data from i2s
+    size_t read2Channels(void *dest, size_t size_bytes) {
+      TRACED();
+      size_t result = 0;
+      switch(cfg.bits_per_sample){
+        // case 8:{
+        //   int8_t *data = (int8_t*)dest;
+        //   for (int j=0;j<size_bytes;j+=2){
+        //     if (i2s.read8(data+j, data+j+1)){
+        //       result+=2;;
+        //     } else {
+        //       return result;
+        //     }
+        //   }
+        // }break;
+        
+        case 16:{
+          int16_t *data = (int16_t *)dest;
+          for (int j=0;j<size_bytes/sizeof(int16_t);j+=2){
+            if (i2s.read16(data+j, data+j+1)){
+              result+=4;
+            } else {
+              return result;
+            }
+          }
+        }break;
+
+        case 24:{
+          int32_t *data = (int32_t *)dest;
+          for (int j=0;j<size_bytes/sizeof(int32_t);j+=2){
+            if (i2s.read24(data+j, data+j+1)){
+              result+=8;
+            } else {
+              return result;
+            }
+          }          
+        }break;
+
+        case 32:{
+          int32_t *data = (int32_t *)dest;
+          for (int j=0;j<size_bytes/sizeof(int32_t);j+=2){
+            if (i2s.read32(data+j, data+j+1)){
+              result+=8;
+            } else {
+              return result;
+            }
+          }          
+          
+        }break;
+      }
+      return result;
+    }
+
+    /// Reads 2 channels from i2s and combineds them to 1
+    size_t read1Channel(void *dest, size_t size_bytes) {
+      TRACED();
+      size_t result = 0;
+      switch(cfg.bits_per_sample){
+        // case 8:{
+        //   int8_t tmp[2];
+        //   int8_t *data = (int8_t*)dest;
+        //   for (int j=0;j<size_bytes;j++){
+        //     if (i2s.read8(tmp, tmp+1)){
+        //       data[j] = mix(tmp[0], tmp[1]);
+        //       result++;;
+        //     } else {
+        //       return result;
+        //     }
+        //   }
+        // }break;
+        
+        case 16:{
+          int16_t tmp[2];
+          int16_t *data = (int16_t*)dest;
+          for (int j=0;j<size_bytes/sizeof(int16_t);j++){
+            if (i2s.read16(tmp, tmp+1)){
+              data[j] = mix(tmp[0], tmp[1]);
+              result+=2;
+            } else {
+              return result;
+            }
+          }
+        }break;
+
+        case 24:{
+          int32_t tmp[2];
+          int32_t *data = (int32_t*)dest;
+          for (int j=0;j<size_bytes/sizeof(int32_t);j++){
+            if (i2s.read24(tmp, tmp+1)){
+              data[j] = mix(tmp[0],tmp[1]);
+              result+=4;
+            } else {
+              return result;
+            }
+          }
+        }break;
+
+        case 32:{
+          int32_t tmp[2];
+          int32_t *data = (int32_t*)dest;
+          for (int j=0;j<size_bytes/sizeof(int32_t);j++){
+            if (i2s.read32(tmp, tmp+1)){
+              data[j] = mix(tmp[0],tmp[1]);
+              result+=4;
+            } else {
+              return result;
+            }
+          }          
+        }break;
+      }
+      return result;
+    }
+
+    // we just provide the avg of both samples
+    template <class T>
+    T mix (T left, T right) {
+      if (left!=0) has_input[0]=true;
+      if (right!=0) has_input[1]=true;
+
+      // if right is always empty we return left
+      if (has_input[0]&&!has_input[1]){
+        return left;
+      }
+
+      // if left is always empty we return right
+      if (!has_input[0]&&has_input[1]){
+        return right;
+      }
+      
+      return (left/2) + (right/2);
+
+    }
+
+
 };
 
 using I2SDriver = I2SDriverRP2040;
