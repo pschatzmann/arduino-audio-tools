@@ -1,6 +1,6 @@
 # Simple TTS to A2DP
 
-This is just an adaptation of the [streams-simple_tts-i2s example](https://github.com/pschatzmann/arduino-audio-tools/tree/main/examples/examples-tts/streams-simple_tts-a2dp) where the output stream has been replaced with a A2DPStream.
+This is just an adaptation of the [streams-simple_tts-i2s example](https://github.com/pschatzmann/arduino-audio-tools/tree/main/examples/examples-tts/streams-simple_tts-i2s) where the output stream has been replaced with a A2DPStream.
 
 So the output goes to a Bluetooth Speaker! 
 
