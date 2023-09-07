@@ -396,7 +396,9 @@ class NumberFormatConverterStream : public ReformatBaseStream {
            to_bit_per_samples);
     }
 
-    setupStream();
+    if (from_bit_per_samples != to_bit_per_samples){
+      setupStream();
+    }
 
     if (!result) {
       TRACEE()
@@ -627,7 +629,9 @@ class FormatConverterStream : public ReformatBaseStream {
     result &= numberFormatConverter.begin(from_actual_cfg.bits_per_sample,
                                           to_cfg.bits_per_sample);
 
-    numberFormatConverter.setBuffered(true);
+    numberFormatConverter.setBuffered(is_buffered);
+    sampleRateConverter.setBuffered(is_buffered);
+
 
     from_actual_cfg.bits_per_sample = to_cfg.bits_per_sample;
     result &= sampleRateConverter.begin(from_actual_cfg, to_cfg.sample_rate);
@@ -648,12 +652,18 @@ class FormatConverterStream : public ReformatBaseStream {
     return channelFormatConverter.write(data, size);
   }
 
+  /// Buffering is active by default to minimize the number of output calls
+  void setBuffered(bool active){
+    is_buffered = active;
+  }
+
  protected:
   AudioInfo from_cfg;
   AudioInfo to_cfg;
   NumberFormatConverterStream numberFormatConverter;
   ChannelFormatConverterStream channelFormatConverter;
   ResampleStream sampleRateConverter;
+  bool is_buffered = true;
 
   /// e.g if we do channels 2->1 we nead to double the input data
   /// @return

@@ -177,6 +177,7 @@ struct ResampleConfig : public AudioInfo {
   float step_size = 1.0f;
   /// Optional fixed target sample rate
   int to_sample_rate = 0;
+  int buffer_size = DEFAULT_BUFFER_SIZE;
 };
 
 /**
@@ -221,6 +222,7 @@ class ResampleStream : public ReformatBaseStream {
     LOGI("begin step_size: %f", cfg.step_size);
     setAudioInfo(cfg);
     to_sample_rate = cfg.to_sample_rate;
+    out_buffer.resize(cfg.buffer_size);
 
     setupLastSamples(cfg);
     setStepSize(cfg.step_size);
@@ -292,6 +294,11 @@ class ResampleStream : public ReformatBaseStream {
     }
     return 0;
   }
+  
+  /// Activates buffering to avoid small incremental writes
+  void setBuffered(bool active){
+    is_buffer_active = active;
+  }
 
  protected:
   Vector<uint8_t> last_samples{0};
@@ -301,6 +308,10 @@ class ResampleStream : public ReformatBaseStream {
   int to_sample_rate = 0;
   int bytes_per_frame = 0;
   TransformationReader<ResampleStream> reader;
+  // optional buffering
+  bool is_buffer_active = false;
+  SingleBuffer<uint8_t> out_buffer{0};
+  Print *p_out=nullptr;
 
   /// Sets up the buffer for the rollover samples
   void setupLastSamples(AudioInfo cfg) {
@@ -314,6 +325,7 @@ class ResampleStream : public ReformatBaseStream {
   template <typename T>
   size_t write(Print *p_out, const uint8_t *buffer, size_t bytes,
                size_t &written) {
+    this->p_out = p_out;            
     if (step_size == 1.0) {
       return p_print->write(buffer, bytes);
     }
@@ -333,27 +345,49 @@ class ResampleStream : public ReformatBaseStream {
       setupLastSamples<T>(data, 0);
     }
 
-    info.logInfo();
+    T frame[info.channels];
+    size_t frame_size = sizeof(frame);
 
     // process all samples
     while (idx < frames) {
-      T frame[info.channels];
       for (int ch = 0; ch < info.channels; ch++) {
         T result = getValue<T>(data, idx, ch);
-        if (p_out->availableForWrite() < sizeof(T)) {
-          LOGE("Could not write");
-        }
         frame[ch] = result;
       }
-      written += p_out->write((const uint8_t *)&frame, (size_t)sizeof(frame));
+
+      if (is_buffer_active){
+        // if buffer is full we send it to output
+        if (out_buffer.availableForWrite()<frame_size){
+            flush();
+        }
+
+        // we use a buffer to minimize the number of output calls
+        written +=  out_buffer.writeArray((const uint8_t *)&frame, frame_size);
+      } else {
+        if (p_out->availableForWrite() < frame_size) {
+          TRACEE();
+        }
+        written += p_out->write((const uint8_t *)&frame, frame_size);
+      }
+
       idx += step_size;
     }
+    
+    flush();
 
     // save last samples
     setupLastSamples<T>(data, frames - 1);
     idx -= frames;
     // returns requested bytes to avoid rewriting of processed bytes
     return bytes;
+  }
+
+  void flush() override {
+    if (p_out!=nullptr && !out_buffer.isEmpty()){
+      TRACED();
+      p_out->write(out_buffer.data(), out_buffer.available());
+      out_buffer.reset();
+    }
   }
 
   /// get the interpolated value for indicated (float) index value
