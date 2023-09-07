@@ -18,11 +18,11 @@
 namespace audio_tools {
 
 class A2DPStream;
-A2DPStream *A2DPStream_self=nullptr;
+static A2DPStream *A2DPStream_self=nullptr;
 // buffer which is used to exchange data
-SynchronizedBufferRTOS<uint8_t>a2dp_buffer{A2DP_BUFFER_SIZE * A2DP_BUFFER_COUNT, A2DP_BUFFER_SIZE, portMAX_DELAY, portMAX_DELAY};
+static SynchronizedBufferRTOS<uint8_t>a2dp_buffer{A2DP_BUFFER_SIZE * A2DP_BUFFER_COUNT, A2DP_BUFFER_SIZE, portMAX_DELAY, portMAX_DELAY};
 // flag to indicated that we are ready to process data
-bool is_a2dp_active = false;
+static bool is_a2dp_active = false;
 
 int32_t a2dp_stream_source_sound_data(Frame* data, int32_t len);
 void a2dp_stream_sink_sound_data(const uint8_t* data, uint32_t len);
@@ -43,7 +43,9 @@ class A2DPConfig {
         const char* name = "A2DP"; 
         bool auto_reconnect = false;
         int bufferSize = A2DP_BUFFER_SIZE * A2DP_BUFFER_COUNT;
-        int delay_ms = 5;
+        int delay_ms = 1;
+        /// when a2dp source has no data we generate silence data
+        bool silence_on_nodata = false;
 };
 
 
@@ -124,6 +126,12 @@ class A2DPStream : public AudioStream {
             LOGI("Connecting to %s",cfg.name);
             a2dp_buffer.resize(cfg.bufferSize);
 
+            // initialize a2dp_silence_timeout
+            if (config.silence_on_nodata){
+                LOGI("Using StartOnConnect")
+                config.startLogic = StartOnConnect;
+            }
+
             switch (cfg.mode){
                 case TX_MODE:
                     LOGI("Starting a2dp_source...");
@@ -191,11 +199,12 @@ class A2DPStream : public AudioStream {
         /// Writes the data into a temporary send buffer - where it can be picked up by the callback
         size_t write(const uint8_t* data, size_t len) override {   
             LOGD("%s: %zu", LOG_METHOD, len);
+
             if (config.mode==TX_MODE){
-                // if buffer is full and we are still not connected, we wait
+                // if buffer is full we wait
                 while(len > a2dp_buffer.availableForWrite()){
                     LOGD("Waiting for buffer to be available");
-                    delay(200);
+                    delay(5);
                     if (config.startLogic==StartWhenBufferFull){
                         is_a2dp_active = true;
                     }
@@ -244,8 +253,6 @@ class A2DPStream : public AudioStream {
             if (a2dp!=nullptr) a2dp->set_volume(volume * 128);
         }
 
-
-
     protected:
         A2DPConfig config;
         BluetoothA2DPSource *a2dp_source = nullptr;
@@ -280,6 +287,12 @@ class A2DPStream : public AudioStream {
                 // the data in the file must be in int16 with 2 channels 
                 yield();
                 result_len = a2dp_buffer.readArray((uint8_t*)data, len);
+
+                // provide silence data
+                if (config.silence_on_nodata && result_len == 0){
+                    memset(data,0, len);
+                    result_len = len;
+                }
             } else {
 
                 // prevent underflow on first call

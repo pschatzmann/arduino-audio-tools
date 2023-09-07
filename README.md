@@ -156,6 +156,7 @@ to enable others to understand and reproduce your issue.
 
 Finally, __don't__ send me any e-mails or post questions on my personal website! 
 
+Please note that discussions and issues which have already been answered before or where the answer can be found in the documentation may get deleted w/o reply.
 
 ## Installation in Arduino
 
