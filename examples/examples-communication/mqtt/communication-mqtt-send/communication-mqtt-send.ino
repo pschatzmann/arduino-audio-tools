@@ -1,5 +1,5 @@
 /**
- * @file example-serial-receive.ino
+ * @file communication-mqtt-send.ino
  * @author Phil Schatzmann
  * @brief Send Audio File to MQTT.
  * I am using the ArduinoMQTTClient library from Arduino provided by the library manager.
