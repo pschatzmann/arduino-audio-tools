@@ -14,6 +14,9 @@
 #include "ArduinoMqttClient.h"
 #include "AudioTools.h"
 
+#define SIZE 1024
+#define N 100
+
 // Communication
 const char* ssid = "SSID";    // your network SSID (name)
 const char* password = "PASSWORD";    // your network password (use for WPA, or use as key for WEP)
@@ -28,7 +31,7 @@ AudioInfo info(8000, 1, 16);
 WhiteNoiseGenerator<int16_t> noise(32000);                        // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> in_stream(noise);                   // Stream generated from noise
 EncodedAudioStream out_stream(&mqttClient, new WAVEncoder());     // encode as wav file
-StreamCopy copier(out_stream, in_stream, 1024);                         // copies sound to MQTT client
+StreamCopy copier(out_stream, in_stream, SIZE);                   // copies sound to MQTT client
 
 // Connect to Wifi
 void connectWIFI() {
@@ -76,18 +79,19 @@ void sendMQTT() {
     out_stream.begin(info);
 
     // send message, the Print interface can be used to set the message contents
-    mqttClient.beginMessage(topic);
+    mqttClient.beginMessage(topic, SIZE * N, true);
 
     // copy audio data to mqtt: 100 * 1024 bytes
-    copier.copyN(100);
+    copier.copyN(N);
 
     mqttClient.endMessage();
 }
 
 
 void setup() {
-  //Initialize serial and wait for port to open:
+  // Initialize logger 
   Serial.begin(115200);
+  AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
   // connect
   connectWIFI();
