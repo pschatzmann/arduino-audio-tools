@@ -1,9 +1,8 @@
-# Simple TTS
+# Simple TTS to A2DP
 
-I am providing a simple sketch which generates sound data with my Simple TTS text to speach engine that 
-uses a configurable library of prerecorded words.
+This is just an adaptation of the [streams-simple_tts-i2s example](https://github.com/pschatzmann/arduino-audio-tools/tree/main/examples/examples-tts/streams-simple_tts-a2dp) where the output stream has been replaced with a A2DPStream.
 
-In this demo we provide the output to a Bluetooth Speaker 
+So the output goes to a Bluetooth Speaker! 
 
 More examples can be found at https://github.com/pschatzmann/arduino-simple-tts/tree/main/examples
 
