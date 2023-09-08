@@ -35,8 +35,7 @@ static inline uint16_t convert8DAC(int64_t value, int value_bits_per_sample){
 class AnalogDriverESP32  : public AnalogDriverBase {
   public:
     /// Default constructor
-    AnalogDriverESP32() {
-    }
+    AnalogDriverESP32() = default;
 
     /// Destructor
     virtual ~AnalogDriverESP32() {
@@ -93,8 +92,10 @@ class AnalogDriverESP32  : public AnalogDriverBase {
         switch (cfg.rx_tx_mode) {
           case RX_MODE:
             LOGI("RX_MODE");
+            
+            setupInputPin(cfg.adc_pin);
 
-            if (i2s_set_adc_mode(cfg.adc_unit[0], cfg.adc_channel[0])!=ESP_OK) {
+            if (i2s_set_adc_mode(adc_unit, adc_channel)!=ESP_OK) {
               LOGE( "%s - %s", __func__, "i2s_driver_install");
               return false;
             }
@@ -207,6 +208,52 @@ class AnalogDriverESP32  : public AnalogDriverBase {
     bool is_driver_installed = false;
     size_t result=0;
 
+  // input values
+    adc_unit_t adc_unit;
+    adc1_channel_t adc_channel;
+
+    /// Defines the current ADC pin. The following GPIO pins are supported: GPIO32-GPIO39
+    void setupInputPin(int gpio){
+      TRACED();
+
+      switch(gpio){
+        case 32:
+          adc_unit = ADC_UNIT_1;
+          adc_channel = ADC1_GPIO32_CHANNEL;
+          break;
+        case 33:
+          adc_unit = ADC_UNIT_1;
+          adc_channel  = ADC1_GPIO33_CHANNEL;
+          break;
+        case 34:
+          adc_unit = ADC_UNIT_1;
+          adc_channel  = ADC1_GPIO34_CHANNEL;
+          break;
+        case 35:
+          adc_unit = ADC_UNIT_1;
+          adc_channel  = ADC1_GPIO35_CHANNEL;
+          break;
+        case 36:
+          adc_unit = ADC_UNIT_1;
+          adc_channel  = ADC1_GPIO36_CHANNEL;
+          break;
+        case 37:
+          adc_unit = ADC_UNIT_1;
+          adc_channel  = ADC1_GPIO37_CHANNEL;
+          break;
+        case 38:
+          adc_unit = ADC_UNIT_1;
+          adc_channel  = ADC1_GPIO38_CHANNEL;
+          break;
+        case 39:
+          adc_unit = ADC_UNIT_1;
+          adc_channel  = ADC1_GPIO39_CHANNEL;
+          break;
+
+        default:
+          LOGE( "%s - pin GPIO%d is not supported", __func__,gpio);
+      }
+    }
 
     // The internal DAC only supports 8 bit values - so we need to convert the data
     size_t outputStereo(const void *src, size_t size_bytes) {

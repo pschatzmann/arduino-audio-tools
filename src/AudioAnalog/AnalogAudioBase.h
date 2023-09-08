@@ -34,27 +34,18 @@ class AnalogConfig : public AudioInfo {
     bool auto_clear = I2S_AUTO_CLEAR;
     bool uninstall_driver_on_end = true;
     int mode_internal; 
-
-    AnalogConfig() {
-        sample_rate = 44100;
-        bits_per_sample = 16;
-        channels = 2;
-        this->rx_tx_mode = TX_MODE;
-        // enable both channels
-        mode_internal = (I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_DAC_BUILT_IN);
-    }
+    int adc_pin;
 
     /// Default constructor
-    AnalogConfig(RxTxMode rxtxMode) {
+    AnalogConfig(RxTxMode rxtxMode=TX_MODE) {
       sample_rate = 44100;
       bits_per_sample = 16;
       channels = 2;
       rx_tx_mode = rxtxMode;
       if (rx_tx_mode == RX_MODE) {
         mode_internal = (I2S_MODE_MASTER | I2S_MODE_RX | I2S_MODE_ADC_BUILT_IN);
-        setInputPin1(PIN_ADC1);
+        adc_pin = PIN_ADC1;
         auto_clear = false;
-//        setInputPin2(PIN_ADC2);
         LOGI("I2S_MODE_ADC_BUILT_IN");
       } else {
         mode_internal = (I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_DAC_BUILT_IN);
@@ -65,72 +56,23 @@ class AnalogConfig : public AudioInfo {
     /// Copy constructor
     AnalogConfig(const AnalogConfig &cfg) = default;
 
-    /// Defines an alternative input pin (for the left channel)
-    void setInputPin1(int pin=PIN_ADC1){
-      setInputPin1(pin,0);
-    }
-
     void logInfo() {
       AudioInfo::logInfo();
       if (rx_tx_mode == TX_MODE){
         LOGI("analog left output pin: %d", 25);
         LOGI("analog right output pin: %d", 26);
       } else {
-        LOGI("input pin1: %d", adc_pin[0]);
-        if (channels==2){
-          LOGI("input pin2: %d", adc_pin[1]);
-        }
+        LOGI("input pin1: %d", adc_pin);
       }
     }
 
-  protected:
-  // input values
-    int adc_pin[2];
-    adc_unit_t adc_unit[2];
-    adc1_channel_t adc_channel[2];
+    /// Defines an alternative input pin (for the left channel)
+    void setInputPin1(int pin){
+      this->adc_pin = pin;
+    }
 
-    /// Defines the current ADC pin. The following GPIO pins are supported: GPIO32-GPIO39
-    void setInputPin1(int gpio, int channelIdx){
-      this->adc_pin[channelIdx] = gpio;
-      switch(gpio){
-        case 32:
-          adc_unit[channelIdx] = ADC_UNIT_1;
-          adc_channel[channelIdx] = ADC1_GPIO32_CHANNEL;
-          break;
-        case 33:
-          adc_unit[channelIdx] = ADC_UNIT_1;
-          adc_channel[channelIdx]  = ADC1_GPIO33_CHANNEL;
-          break;
-        case 34:
-          adc_unit[channelIdx] = ADC_UNIT_1;
-          adc_channel[channelIdx]  = ADC1_GPIO34_CHANNEL;
-          break;
-        case 35:
-          adc_unit[channelIdx] = ADC_UNIT_1;
-          adc_channel[channelIdx]  = ADC1_GPIO35_CHANNEL;
-          break;
-        case 36:
-          adc_unit[channelIdx] = ADC_UNIT_1;
-          adc_channel[channelIdx]  = ADC1_GPIO36_CHANNEL;
-          break;
-        case 37:
-          adc_unit[channelIdx] = ADC_UNIT_1;
-          adc_channel[channelIdx]  = ADC1_GPIO37_CHANNEL;
-          break;
-        case 38:
-          adc_unit[channelIdx] = ADC_UNIT_1;
-          adc_channel[channelIdx]  = ADC1_GPIO38_CHANNEL;
-          break;
-        case 39:
-          adc_unit[channelIdx] = ADC_UNIT_1;
-          adc_channel[channelIdx]  = ADC1_GPIO39_CHANNEL;
-          break;
-
-        default:
-          LOGE( "%s - pin GPIO%d is not supported", __func__,gpio);
-      }
-    }  
 #else 
+
     AnalogConfig() {
         sample_rate = 44100;
         bits_per_sample = 16;
@@ -143,7 +85,7 @@ class AnalogConfig : public AudioInfo {
     AnalogConfig(RxTxMode rxtxMode) : AnalogConfig() {
       rx_tx_mode = rxtxMode;
     }
-  int start_pin = PIN_ANALOG_START;
+    int start_pin = PIN_ANALOG_START;
 
 #endif
   

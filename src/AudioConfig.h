@@ -211,7 +211,6 @@
 #define SOFT_MUTE_VALUE 0
 #define PIN_CS SS
 #define PIN_ADC1 34 
-#define PIN_ADC2 14
 
 #define I2S_AUTO_CLEAR true
 
@@ -275,7 +274,6 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define SOFT_MUTE_VALUE 0
 #define PIN_CS SS
 #define PIN_ADC1 21 
-#define PIN_ADC2 22
 
 #define I2S_AUTO_CLEAR true
 
