@@ -62,7 +62,6 @@ public:
   void begin() override {
     TRACED();
     decoder.begin();
-    ;
   }
 
   void end() override { decoder.end(); }

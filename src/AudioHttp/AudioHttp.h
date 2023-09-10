@@ -10,3 +10,4 @@
 #include "AudioHttp/AudioServer.h"
 #include "AudioHttp/ICYStream.h"
 #include "AudioHttp/ICYStreamBuffered.h"
+#include "AudioHttp/HLSStream.h"

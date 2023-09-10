@@ -300,6 +300,15 @@ class ResampleStream : public ReformatBaseStream {
     is_buffer_active = active;
   }
 
+  /// When buffering is active, writes the buffered audio to the output
+  void flush() override {
+    if (p_out!=nullptr && !out_buffer.isEmpty()){
+      TRACED();
+      p_out->write(out_buffer.data(), out_buffer.available());
+      out_buffer.reset();
+    }
+  }
+
  protected:
   Vector<uint8_t> last_samples{0};
   float idx = 0;
@@ -382,13 +391,6 @@ class ResampleStream : public ReformatBaseStream {
     return bytes;
   }
 
-  void flush() override {
-    if (p_out!=nullptr && !out_buffer.isEmpty()){
-      TRACED();
-      p_out->write(out_buffer.data(), out_buffer.available());
-      out_buffer.reset();
-    }
-  }
 
   /// get the interpolated value for indicated (float) index value
   template <typename T>
