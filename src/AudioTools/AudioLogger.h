@@ -79,6 +79,15 @@ class AudioLogger {
             return log_level;
         }
 
+        void printChar(char c){
+            log_print_ptr->print(c);
+        }
+
+        void printCharHex(char c){
+            log_print_ptr->print(c, HEX);
+            log_print_ptr->print(" ");            
+        }
+
     protected:
         Print *log_print_ptr = &LOG_STREAM;
         const char* TAG = "AudioTools";

@@ -312,9 +312,9 @@ class HttpRequest {
         HttpChunkReader chunk_reader = HttpChunkReader(reply_header);
         const char *agent = nullptr;
         const char *host_name=nullptr;
-        const char *connection = CON_CLOSE;
+        const char *connection = CON_KEEP_ALIVE;
         const char *accept = ACCEPT_ALL;
-        const char *accept_encoding = nullptr;
+        const char *accept_encoding = IDENTITY;
         bool is_ready = false;
         int32_t clientTimeout = URL_CLIENT_TIMEOUT; // 60000;
         void (*http_connect_callback)(HttpRequest &request,Url &url, HttpRequestHeader &request_header) = nullptr;

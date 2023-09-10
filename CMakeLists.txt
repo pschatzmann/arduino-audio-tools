@@ -5,6 +5,7 @@ project(arduino-audio-tools)
 
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0")
 set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -O0")
+set(FETCHCONTENT_UPDATES_DISCONNECTED ON)
 add_compile_options(-Wno-deprecated-declarations)
 
 include(FetchContent)
