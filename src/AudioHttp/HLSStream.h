@@ -4,8 +4,6 @@
 
 #ifdef USE_URL_ARDUINO
 #include "AudioBasic/StrExt.h"
-#include "AudioCodecs/CodecAACHelix.h"
-#include "AudioCodecs/CodecMP3Helix.h"
 #include "AudioHttp/URLStream.h"
 
 #define MAX_HLS_LINE 200
