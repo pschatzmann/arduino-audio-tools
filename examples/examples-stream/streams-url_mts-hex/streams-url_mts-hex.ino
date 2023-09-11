@@ -9,7 +9,7 @@
 #include "AudioCodecs/CodecMTS.h"
 
 HexDumpOutput out(Serial);                                   
-HLSStream hls_stream("Phil Schatzmann", "sabrina01");
+HLSStream hls_stream("SSID", "password");
 MTSDecoder mts;
 EncodedAudioStream mts_stream(&out, &mts);
 StreamCopy copier(mts_stream, hls_stream);
