@@ -251,7 +251,7 @@ class SingleBuffer : public BaseBuffer<T> {
   /// If we load values directly into the address we need to set the avialeble
   /// size
   size_t setAvailable(size_t available_size) {
-    size_t result = min(available_size, max_size);
+    size_t result = min(available_size, (size_t) max_size);
     current_read_pos = 0;
     current_write_pos = result;
     return result;
