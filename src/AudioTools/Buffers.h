@@ -79,8 +79,7 @@ class BaseBuffer {
   virtual int writeArrayOverwrite(const T data[], int len) {
     int to_delete = len - availableForWrite();
     if (to_delete>0){
-      T buffer[to_delete];
-      readArray(buffer,to_delete);
+      clearArray(to_delete);
     }
     return writeArray(data, len);
   }
