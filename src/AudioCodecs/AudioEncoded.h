@@ -327,8 +327,8 @@ class EncodedAudioOutput : public AudioStream {
   /// Starts the processing - sets the status to active
   bool begin() override {
     TRACED();
-
     if (!active) {
+      TRACED();
       const CodecNOP *nop = CodecNOP::instance();
       if (decoder_ptr != nop || encoder_ptr != nop) {
         active = true;
@@ -342,19 +342,9 @@ class EncodedAudioOutput : public AudioStream {
   }
 
   /// Starts the processing - sets the status to active
-  bool begin(AudioInfo cfg) {
-    TRACED();
+  virtual bool begin(AudioInfo cfg) {
     info = cfg;
-    const CodecNOP *nop = CodecNOP::instance();
-    if (decoder_ptr != nop || encoder_ptr != nop) {
-      // some decoders need this - e.g. opus
-      decoder_ptr->begin(info);
-      encoder_ptr->begin(info);
-      active = true;
-    } else {
-      LOGW("no decoder or encoder defined");
-    }
-    return active;
+    return begin();
   }
 
   /// Ends the processing
