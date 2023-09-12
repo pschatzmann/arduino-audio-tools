@@ -47,6 +47,16 @@ class BaseBuffer {
     return lenResult;
   }
 
+  /// Removes the next len entries 
+  virtual int clearArray(int len) {
+    int lenResult = MIN(len, available());
+    for (int j = 0; j < lenResult; j++) {
+      read();
+    }
+    return lenResult;
+  }
+
+
   /// Fills the buffer data 
   virtual int writeArray(const T data[], int len) {
     // LOGD("%s: %d", LOG_METHOD, len);
@@ -63,6 +73,7 @@ class BaseBuffer {
     LOGD("writeArray %d -> %d", len, result);
     return result;
   }
+
 
   /// Fills the buffer data and overwrites the oldest data if the buffer is full
   virtual int writeArrayOverwrite(const T data[], int len) {
@@ -169,7 +180,7 @@ class SingleBuffer : public BaseBuffer<T> {
     this->current_write_pos = len;
   }
 
-  bool write(T sample) {
+  bool write(T sample) override {
     bool result = false;
     if (current_write_pos < max_size) {
       buffer[current_write_pos++] = sample;
@@ -178,7 +189,7 @@ class SingleBuffer : public BaseBuffer<T> {
     return result;
   }
 
-  T read() {
+  T read() override {
     T result = 0;
     if (current_read_pos < current_write_pos) {
       result = buffer[current_read_pos++];
@@ -186,7 +197,7 @@ class SingleBuffer : public BaseBuffer<T> {
     return result;
   }
 
-  T peek() {
+  T peek() override {
     T result = 0;
     if (current_read_pos < current_write_pos) {
       result = buffer[current_read_pos];
@@ -194,29 +205,58 @@ class SingleBuffer : public BaseBuffer<T> {
     return result;
   }
 
-  int available() {
+  int available() override {
     int result = current_write_pos - current_read_pos;
     return max(result, 0);
   }
 
-  int availableForWrite() { return max_size - current_write_pos; }
+  int availableForWrite() override { return max_size - current_write_pos; }
 
-  bool isFull() { return availableForWrite() <= 0; }
+  bool isFull() override { return availableForWrite() <= 0; }
 
-  T *address() { return buffer.data(); }
-  T *data() { return buffer.data(); }
+  /// consumes len bytes and moves current data to the beginning
+  int clearArray(int len) override{
+    int len_available = available();
+    if (len>available()) {
+      reset();
+      return len_available;
+    }
+    current_read_pos += len;
+    len_available -= len;
+    memmove(buffer.data(), buffer.data()+current_read_pos, len_available);
+    current_read_pos = 0;
+    current_write_pos = len_available;
 
-  void reset() {
+    if (is_clear_with_zero){
+      memset(buffer.data()+current_write_pos,0,buffer.size()-current_write_pos);
+    }
+
+    return len;
+  }
+
+  /// Provides address to beginning of the buffer
+  T *address() override { return buffer.data(); }
+
+  /// Provides address of actual data
+  T *data() { return buffer.data()+current_read_pos; }
+
+  void reset() override {
     current_read_pos = 0;
     current_write_pos = 0;
+    if (is_clear_with_zero){
+      memset(buffer.data(),0,buffer.size());
+    }
   }
 
   /// If we load values directly into the address we need to set the avialeble
   /// size
-  void setAvailable(size_t available_size) {
+  size_t setAvailable(size_t available_size) {
+    size_t result = min(available_size, max_size);
     current_read_pos = 0;
-    current_write_pos = available_size;
+    current_write_pos = result;
+    return result;
   }
+
 
   size_t size() { return max_size; }
 
@@ -228,11 +268,17 @@ class SingleBuffer : public BaseBuffer<T> {
     }
   }
 
+  /// Sets the buffer to 0 on clear
+  void setClearWithZero(bool flag){
+    is_clear_with_zero = flag;
+  }
+
  protected:
   int max_size = 0;
   int current_read_pos = 0;
   int current_write_pos = 0;
   bool owns_buffer = true;
+  bool is_clear_with_zero = false;
   Vector<T> buffer{0};
 
   void setWritePos(int pos) { current_write_pos = pos; }
