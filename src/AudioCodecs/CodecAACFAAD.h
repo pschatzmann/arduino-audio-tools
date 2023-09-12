@@ -18,6 +18,8 @@ namespace audio_tools {
 
 /**
  * @brief AAC Decoder using faad: https://github.com/pschatzmann/arduino-libfaad
+ * This needs a stack of around 60000 and you need to make sure that memory is allocated on PSRAM.
+ * See https://www.pschatzmann.ch/home/2023/09/12/arduino-audio-tools-faat-aac-decoder/
  * @ingroup codecs
  * @ingroup decoder
  * @author Phil Schatzmann
