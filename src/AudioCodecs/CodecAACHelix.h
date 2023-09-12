@@ -74,7 +74,7 @@ class AACDecoderHelix : public AudioDecoder  {
         }
 
         /// Starts the processing
-        void begin(){
+        void begin() override {
             TRACED();
             if (aac!=nullptr) {
                 aac->setDelay(CODEC_DELAY_MS);
@@ -83,7 +83,7 @@ class AACDecoderHelix : public AudioDecoder  {
         }
 
         /// Releases the reserved memory
-        virtual void end(){
+        virtual void end() override {
             TRACED();
             if (aac!=nullptr) aac->end();
         }
@@ -92,7 +92,7 @@ class AACDecoderHelix : public AudioDecoder  {
             return aac->audioInfo();
         }
 
-        virtual AudioInfo audioInfo(){
+        virtual AudioInfo audioInfo() override{
             AudioInfo result;
             auto i = audioInfoEx();
             result.channels = i.nChans;
@@ -101,18 +101,19 @@ class AACDecoderHelix : public AudioDecoder  {
             return result;
         }
 
-        void setAudioInfo(AudioInfo info){
+        void setAudioInfo(AudioInfo info) override {
             AudioDecoder::setAudioInfo(info);
             aac->setAudioInfo(info.channels, info.sample_rate);
         }
 
         /// Write AAC data to decoder
-        size_t write(const void* aac_data, size_t len) {
+        size_t write(const void* aac_data, size_t len) override {
+            LOGD("AACDecoderHelix::write: %d", (int)len);
             return aac==nullptr ? 0 : aac->write(aac_data, len);
         }
 
         /// checks if the class is active 
-        virtual operator bool(){
+        virtual operator bool() override {
             return aac!=nullptr && (bool)*aac;
         }
 
@@ -121,7 +122,7 @@ class AACDecoderHelix : public AudioDecoder  {
         }
 
         /// Defines the callback object to which the Audio information change is provided
-        virtual void setNotifyAudioChange(AudioInfoSupport &bi){
+        virtual void setNotifyAudioChange(AudioInfoSupport &bi) override {
             TRACED();
             audioChangeAACHelix = &bi;
             if (aac!=nullptr) aac->setInfoCallback(infoCallback, this);

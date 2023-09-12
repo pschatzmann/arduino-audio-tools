@@ -7,8 +7,17 @@ namespace audio_tools {
 #include "AudioCodecs/AudioEncoded.h"
 #include "tsdemux.h"
 
-#define PRINT_PIDS_LEN (16)
+#ifndef MTS_PRINT_PIDS_LEN
+#  define MTS_PRINT_PIDS_LEN (16)
+#endif
 
+#ifndef MTS_UNDERFLOW_LIMIT
+#  define MTS_UNDERFLOW_LIMIT 200
+#endif
+
+#ifndef MTS_WRITE_BUFFER_SIZE
+#  define MTS_WRITE_BUFFER_SIZE 2000
+#endif
 /**
  * @brief MPEG-TS (MTS) decoder
  * https://github.com/pschatzmann/arduino-tsdemux
@@ -22,33 +31,44 @@ class MTSDecoder : public AudioDecoder {
  public:
   MTSDecoder() { 
     self = this; 
-    // default supported stream types
-    addStreamType(TSD_PMT_STREAM_TYPE_PES_METADATA);
-    addStreamType(TSD_PMT_STREAM_TYPE_AUDIO_AAC);
   };
 
-  void begin() {
+  void begin() override {
     TRACED();
     // automatically close when called multiple times
     if (is_active) {
       end();
     }
+
+    is_active = true;
+
     // create the pids we plan on printing
     memset(print_pids, 0, sizeof(print_pids));
 
     // set default values onto the context.
-    tsd_context_init(&ctx);
+    if (tsd_context_init(&ctx)!=TSD_OK){
+      TRACEE();
+      is_active = false;
+    }
+
+    // default supported stream types
+    if (stream_types.empty()){
+      addStreamType(TSD_PMT_STREAM_TYPE_PES_METADATA);
+      addStreamType(TSD_PMT_STREAM_TYPE_AUDIO_AAC);
+    }
 
     // add a callback.
     // the callback is used to determine which PIDs contain the data we want
     // to demux. We also receive PES data for any PIDs that we register later
     // on.
-    tsd_set_event_callback(&ctx, event_cb);
+    if (tsd_set_event_callback(&ctx, event_cb)!=TSD_OK){
+      TRACEE();
+      is_active = false;
+    }
 
-    is_active = true;
   }
 
-  void end() {
+  void end() override {
     TRACED();
     // finally end the demux process which will flush any remaining PES data.
     tsd_demux_end(&ctx);
@@ -59,48 +79,60 @@ class MTSDecoder : public AudioDecoder {
     is_active = false;
   }
 
-  virtual operator bool() { return is_active; }
+  virtual operator bool() override { return is_active; }
 
   const char *mime() { return "video/MP2T"; }
 
-  size_t write(const void *in_ptr, size_t in_size) {
+  size_t write(const void *in_ptr, size_t in_size) override {
     if (!is_active) return 0;
-    LOGI("MTSDecoder::write: %d", (int)in_size);
+    LOGD("MTSDecoder::write: %d", (int)in_size);
     size_t result = buffer.writeArray((uint8_t*)in_ptr, in_size);
     // demux
-    demux();
+    demux(underflowLimit);
     return result;
   }
 
+  void flush(){
+    demux(0);
+  }
+
   void clearStreamTypes(){
+    TRACED();
     stream_types.clear();
   }
 
   void addStreamType(TSDPMTStreamType type){
+    TRACED();
     stream_types.push_back(type);
+  }
+
+  /// Set a new write buffer size (default is 2000)
+  void resizeBuffer(int size){
+    buffer.resize(size);
   }
 
  protected:
   static MTSDecoder *self;
+  int underflowLimit = MTS_UNDERFLOW_LIMIT;
   bool is_active = false;
   TSDemuxContext ctx;
-  uint16_t print_pids[PRINT_PIDS_LEN] = {0};
-  RingBuffer<uint8_t> buffer{2000};
+  uint16_t print_pids[MTS_PRINT_PIDS_LEN] = {0};
+  SingleBuffer<uint8_t> buffer{MTS_WRITE_BUFFER_SIZE};
   Vector<TSDPMTStreamType> stream_types;
 
-  void demux(){
+  void demux(int limit){
+    TRACED();
     TSDCode res = TSD_OK;
-    uint8_t data[1024];
-    int open = buffer.peekArray(data, 1024);
-    int processed = 0;
-    while (res == TSD_OK && open > 200) {
-      size_t len = tsd_demux(&ctx, (void *)data, open, &res);
+    int count = 0;
+    while (res == TSD_OK && buffer.available() > limit) {
+      size_t len = tsd_demux(&ctx, (void *)buffer.data(), buffer.available(), &res);
       // remove processed bytes
-      buffer.readArray(data, len);
+      buffer.clearArray(len);
       // get next bytes
-      open = buffer.peekArray(data, 1024);
+      count++;
       if (res != TSD_OK) logResult(res);
     }
+    LOGD("Number of demux calls: %d", count);
   }
 
   void logResult(TSDCode code) {
@@ -177,7 +209,7 @@ class MTSDecoder : public AudioDecoder {
       // print out the PES Packet data if it's in our print list
       int i;
       AudioLogger logger = AudioLogger::instance();
-      for (i = 0; i < PRINT_PIDS_LEN; ++i) {
+      for (i = 0; i < MTS_PRINT_PIDS_LEN; ++i) {
         if (print_pids[i] == pid) {
           // output data
           if (p_print != nullptr) {
@@ -294,7 +326,7 @@ class MTSDecoder : public AudioDecoder {
   void add_print_pid(TSDProgramElement *prog, TSDPMTStreamType type) {
     if (prog->stream_type == type) {
       int k;
-      for (k = 0; k < PRINT_PIDS_LEN; ++k) {
+      for (k = 0; k < MTS_PRINT_PIDS_LEN; ++k) {
         // find a spare slot in the pids
         if (print_pids[k] == 0) {
           print_pids[k] = prog->elementary_pid;
