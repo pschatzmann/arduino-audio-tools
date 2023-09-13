@@ -51,6 +51,14 @@ class MTSDecoder : public AudioDecoder {
       is_active = false;
     }
 
+    // log memory allocations ?
+    if (is_alloc_active){
+      ctx.malloc = log_malloc;
+      ctx.realloc = log_realloc;
+      ctx.calloc = log_calloc;
+      ctx.free = log_free;
+    }
+
     // default supported stream types
     if (stream_types.empty()){
       addStreamType(TSD_PMT_STREAM_TYPE_PES_METADATA);
@@ -111,10 +119,16 @@ class MTSDecoder : public AudioDecoder {
     buffer.resize(size);
   }
 
+  /// Activate logging for memory allocations
+  void setMemoryAllocationLogging(bool flag){
+    is_alloc_active = flag;
+  }
+
  protected:
   static MTSDecoder *self;
   int underflowLimit = MTS_UNDERFLOW_LIMIT;
   bool is_active = false;
+  bool is_alloc_active = false;
   TSDemuxContext ctx;
   uint16_t print_pids[MTS_PRINT_PIDS_LEN] = {0};
   SingleBuffer<uint8_t> buffer{MTS_WRITE_BUFFER_SIZE};
@@ -800,6 +814,30 @@ class MTSDecoder : public AudioDecoder {
       } break;
     }
   }
+
+  static void* log_malloc (size_t size) {
+      void *result = malloc(size);
+      LOGI("malloc(%d) -> %p %s\n", (int)size,result, result!=NULL?"OK":"ERROR");
+      return result;
+  }
+
+  static void* log_calloc(size_t num, size_t size){
+      void *result = calloc(num, size);
+      LOGI("calloc(%d) -> %p %s\n", (int)(num*size),result, result!=NULL?"OK":"ERROR");
+      return result;
+  }
+
+  static void* log_realloc(void *ptr, size_t size){
+      void *result = realloc(ptr, size);
+      LOGI("realloc(%d) -> %p %s\n", (int)size, result, result!=NULL?"OK":"ERROR");
+      return result;
+  }
+
+  static void log_free (void *mem){
+      LOGI("free(%p)\n", mem);
+      free(mem);
+  }
+
 };
 // init static variable
 MTSDecoder *MTSDecoder::self = nullptr;
