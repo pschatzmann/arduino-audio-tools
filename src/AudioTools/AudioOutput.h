@@ -313,8 +313,7 @@ public:
     update_total_weights();
   }
 
-  /// Defines a new weight for the indicated channel: If you set it to 0 it is
-  /// muted.
+  /// Defines a new weight for the indicated channel: If you set it to 0.0 it is muted. The initial value is 1.0
   void setWeight(int channel, float weight) {
     if (channel < size()) {
       weights[channel] = weight;
@@ -324,6 +323,7 @@ public:
     update_total_weights();
   }
 
+  /// Starts the processing. 
   bool begin(int copy_buffer_size_bytes = DEFAULT_BUFFER_SIZE,
              MemoryType memoryType = PS_RAM) {
     is_active = true;
@@ -347,8 +347,7 @@ public:
 
   size_t write(uint8_t) override { return 0; }
 
-  /// Write the data from a simgle stream which will be mixed together (the
-  /// stream idx is increased)
+  /// Write the data from a simgle stream which will be mixed together (the stream idx is increased)
   size_t write(const uint8_t *buffer_c, size_t bytes) override {
     size_t result = write(stream_idx, buffer_c, bytes);
     // after writing the last stream we flush
