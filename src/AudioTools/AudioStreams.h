@@ -1333,8 +1333,12 @@ class InputMixer : public AudioStream {
         LOGW("readBytes: %d",(int)len);
         return 0;
       }
+
+      if (limit_available_data){
+        len = min(len, availableBytes());
+      }
+
       // result_len must be full frames
-      
       int result_len = len * frame_size / frame_size;
       // replace sample based with vector based implementation
       //readBytesSamples((T*)data, result_len));
@@ -1354,11 +1358,17 @@ class InputMixer : public AudioStream {
     //   return result;
     // }
 
+    /// Do not wait for all data to be available
+    void setLimitToAvailableData(bool flag){
+      limit_available_data = flag;
+    }
+
   protected:
     Vector<Stream*> streams{10};
     Vector<int> weights{10}; 
     int total_weights = 0;
     int frame_size = 4;
+    bool limit_available_data = false;;
 
     Vector<int> result_vect;
     Vector<T> current_vect;
@@ -1381,6 +1391,15 @@ class InputMixer : public AudioStream {
       for (int j=0;j<samples;j++){
         p_data[j] = result_vect[j];
       }
+    }
+
+    /// Provides the available bytes from the first stream with data
+    int availableBytes()  {
+      int result = DEFAULT_BUFFER_SIZE;
+      for (int j=0;j<size();j++){
+        result = min(result, streams[j]->available());
+      }
+      return result;
     }
 
     void resultAdd(float fact){
