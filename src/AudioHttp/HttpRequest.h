@@ -35,11 +35,11 @@ class HttpRequest {
         friend class URLStream;
 
         HttpRequest() {
-             LOGI("HttpRequest");
+             LOGD("HttpRequest");
         }
 
         HttpRequest(Client &client){
-            LOGI("HttpRequest");
+            LOGD("HttpRequest");
             setClient(client);
         }
 
@@ -171,7 +171,7 @@ class HttpRequest {
             this->accept = mime;
         }
 
-        size_t getReceivedContentLength() {
+        size_t contentLength() {
             const char *len_str = reply().get(CONTENT_LENGTH);
             int len = 0;
             if (len_str != nullptr) {
@@ -302,6 +302,10 @@ class HttpRequest {
         /// Callback which allows you to add additional paramters dynamically
         void setOnConnectCallback(void (*callback)(HttpRequest &request,Url &url, HttpRequestHeader &request_header)){
             http_connect_callback = callback;
+        }
+
+        void setTimeout(int timeout){
+            clientTimeout = timeout;
         }
 
     protected:

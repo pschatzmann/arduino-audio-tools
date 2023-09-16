@@ -119,7 +119,8 @@ class I2SConfig : public AudioInfo {
 #endif
 
 
-    void logInfo() {
+    void logInfo(const char* source=nullptr) {
+      AudioInfo::logInfo(source);
       LOGI("rx/tx mode: %s", RxTxModeNames[rx_tx_mode]);
       LOGI("port_no: %d", port_no);
       LOGI("is_master: %s", is_master ? "Master":"Slave");

@@ -15,6 +15,7 @@ namespace audio_tools {
 static portMUX_TYPE mutex_logger = portMUX_INITIALIZER_UNLOCKED;
 #endif
 
+
 /**
  * @brief A simple Logger that writes messages dependent on the log level
  * @ingroup tools
@@ -79,6 +80,10 @@ class AudioLogger {
             return log_level;
         }
 
+        void print(const char *c){
+            log_print_ptr->print(c);
+        }
+
         void printChar(char c){
             log_print_ptr->print(c);
         }
@@ -135,6 +140,41 @@ class AudioLogger {
             #endif
         }
 };
+
+/// Class specific custom log level
+class CustomLogLevel {
+public:
+    AudioLogger::LogLevel getActual(){
+        return actual;
+    }
+
+    /// Defines a custom level
+    void set(AudioLogger::LogLevel level){
+      active = true;
+      original = AudioLogger::instance().level();
+      actual = level;
+    }
+
+    /// sets the defined log level
+    void set(){
+        if (active){
+            AudioLogger::instance().begin(Serial, actual);
+        }
+    }
+    /// resets to the original log level
+    void reset(){
+        if (active){
+            AudioLogger::instance().begin(Serial, original);
+        }
+    }
+protected:
+    bool active=false;
+    AudioLogger::LogLevel original;
+    AudioLogger::LogLevel actual;
+
+};
+
+
 
 }
 

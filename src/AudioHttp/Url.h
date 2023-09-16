@@ -24,11 +24,11 @@ class Url {
     public:
         // empty url
         Url() {
-            LOGI("Url");
+            LOGD("Url");
         }
         
         ~Url() {
-            LOGI("~Url");
+            LOGD("~Url");
             pathStr.clear();
             hostStr.clear();
             protocolStr.clear();
@@ -38,13 +38,13 @@ class Url {
 
         // setup url with string
         Url(const char *url){
-            LOGI("Url %s",url);
+            LOGD("Url %s",url);
             setUrl(url);
         }
 
         // copy constructor
         Url(Url &url){
-            LOGI("Url %s",url.url());
+            LOGD("Url %s",url.url());
             setUrl(url.url());
         }
 

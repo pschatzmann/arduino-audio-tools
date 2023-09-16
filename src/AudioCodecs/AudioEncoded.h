@@ -326,6 +326,7 @@ class EncodedAudioOutput : public AudioStream {
 
   /// Starts the processing - sets the status to active
   bool begin() override {
+    custom_log_level.set();
     TRACED();
     if (!active) {
       TRACED();
@@ -338,6 +339,7 @@ class EncodedAudioOutput : public AudioStream {
         LOGW("no decoder or encoder defined");
       }
     }
+    custom_log_level.reset();
     return active;
   }
 
@@ -349,14 +351,17 @@ class EncodedAudioOutput : public AudioStream {
 
   /// Ends the processing
   void end() override {
+    custom_log_level.set();
     TRACEI();
     decoder_ptr->end();
     encoder_ptr->end();
     active = false;
+    custom_log_level.reset();
   }
 
   /// encodeor decode the data
   virtual size_t write(const uint8_t *data, size_t len) override {
+    custom_log_level.set();
     LOGD("EncodedAudioOutput::write: %d", (int)len);
     if (len == 0) {
       LOGI("write: %d", 0);
@@ -370,6 +375,8 @@ class EncodedAudioOutput : public AudioStream {
 
     size_t result = writer_ptr->write(data, len);
     LOGD("EncodedAudioOutput::write: %d -> %d", (int)len, (int)result);
+    custom_log_level.reset();
+
     return result;
   }
 
@@ -384,6 +391,11 @@ class EncodedAudioOutput : public AudioStream {
   /// Provides the initialized encoder
   AudioEncoder &encoder() { return *encoder_ptr; }
 
+  /// Defines the class specific custom log level
+  void setLogLevel(AudioLogger::LogLevel level){
+    custom_log_level.set(level);
+  }
+
  protected:
   AudioInfo info;
   AudioDecoder *decoder_ptr = CodecNOP::instance();  // decoder
@@ -391,6 +403,7 @@ class EncodedAudioOutput : public AudioStream {
   AudioWriter *writer_ptr = nullptr;
   Print *ptr_out = nullptr;
   bool active;
+  CustomLogLevel custom_log_level;
 };
 
 // legacy name
@@ -470,13 +483,16 @@ class EncodedAudioStream : public EncodedAudioOutput {
   }
 
   size_t readBytes(uint8_t *buffer, size_t length) override {
+    custom_log_level.set();
     LOGD("EncodedAudioStream::readBytes: %d", (int)length);
     if (p_stream == nullptr) {
       TRACEE();
       return 0;
     }
     decode(reqested_bytes);
-    return decoded_buffer.readArray(buffer, length);
+    size_t result = decoded_buffer.readArray(buffer, length);
+    custom_log_level.reset();
+    return result;
   }
 
  protected:

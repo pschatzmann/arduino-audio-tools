@@ -60,14 +60,14 @@ struct HttpHeaderLine {
 class HttpHeader {
     public:
         HttpHeader(){
-            LOGI("HttpHeader");
-           // set default values
+            LOGD("HttpHeader");
+            // set default values
             protocol_str = "HTTP/1.1";
             url_path = "/";
             status_msg = "";
         }
         ~HttpHeader(){
-            LOGI("~HttpHeader");
+            LOGD("~HttpHeader");
             clear(true);
         }
 
@@ -233,10 +233,15 @@ class HttpHeader {
             char line[MAX_HTTP_HEADER_LINE_LENGTH];   
             if (in.connected()){
                 if (in.available()==0) {
-                    LOGW("Waiting for data...");
+                    int count = 0;
                     while(in.available()==0){
-                        delay(500);
+                        delay(50);
+                        count++;
+                        if (count==2){
+                            LOGI("Waiting for data...");
+                        }
                     }
+                    LOGI("Data availble");
                 }
                 readLine(in, line, MAX_HTTP_HEADER_LINE_LENGTH);
                 parse1stLine(line);

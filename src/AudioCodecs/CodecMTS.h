@@ -114,6 +114,13 @@ class MTSDecoder : public AudioDecoder {
     stream_types.push_back(type);
   }
 
+  bool isStreamTypeActive(TSDPMTStreamType type){
+    for (int j=0;j<stream_types.size();j++){
+      if (stream_types[j]==type) return true;
+    }
+    return false;
+  }
+
   /// Set a new write buffer size (default is 2000)
   void resizeBuffer(int size){
     buffer.resize(size);
@@ -128,11 +135,17 @@ class MTSDecoder : public AudioDecoder {
   static MTSDecoder *self;
   int underflowLimit = MTS_UNDERFLOW_LIMIT;
   bool is_active = false;
+  bool is_write_active = false;
   bool is_alloc_active = false;
   TSDemuxContext ctx;
   uint16_t print_pids[MTS_PRINT_PIDS_LEN] = {0};
   SingleBuffer<uint8_t> buffer{MTS_WRITE_BUFFER_SIZE};
   Vector<TSDPMTStreamType> stream_types;
+
+  void set_write_active(bool flag){
+    //LOGD("is_write_active: %s", flag ? "true":"false");
+    is_write_active = flag;
+  }
 
   void demux(int limit){
     TRACED();
@@ -152,7 +165,7 @@ class MTSDecoder : public AudioDecoder {
   void logResult(TSDCode code) {
     switch (code) {
       case TSD_OK:
-        LOGI("TSD_OK");
+        LOGD("TSD_OK");
         break;
       case TSD_INVALID_SYNC_BYTE:
         LOGW("TSD_INVALID_SYNC_BYTE");
@@ -202,7 +215,7 @@ class MTSDecoder : public AudioDecoder {
   // event callback
   static void event_cb(TSDemuxContext *ctx, uint16_t pid, TSDEventId event_id,
                        void *data) {
-    TRACEI();
+    TRACED();
     if (MTSDecoder::self != nullptr) {
       MTSDecoder::self->event_cb_local(ctx, pid, event_id, data);
     }
@@ -211,27 +224,26 @@ class MTSDecoder : public AudioDecoder {
   void event_cb_local(TSDemuxContext *ctx, uint16_t pid, TSDEventId event_id,
                       void *data) {
     if (event_id == TSD_EVENT_PAT) {
+      set_write_active(false);
       print_pat(ctx, data);
     } else if (event_id == TSD_EVENT_PMT) {
+      set_write_active(false);
       print_pmt(ctx, data);
     } else if (event_id == TSD_EVENT_PES) {
       TSDPESPacket *pes = (TSDPESPacket *)data;
-      // This is where we would write the PES data into our buffer.
-      LOGI("====================");
-      LOGI("PID %d PES Packet, Size: %ld, stream_id=%u, pts=%lu, dts=%lu", pid,
+      // This is where we write the PES data into our buffer.
+      LOGD("====================");
+      LOGD("PID %d PES Packet, Size: %ld, stream_id=%u, pts=%lu, dts=%lu", pid,
            pes->data_bytes_length, pes->stream_id, pes->pts, pes->dts);
       // print out the PES Packet data if it's in our print list
       int i;
       AudioLogger logger = AudioLogger::instance();
       for (i = 0; i < MTS_PRINT_PIDS_LEN; ++i) {
         if (print_pids[i] == pid) {
-          // output data
-          if (p_print != nullptr) {
-            p_print->write(pes->data_bytes, pes->data_bytes_length);
-          }
           // log data
           if (logger.isLogging(AudioLogger::Debug)) {
-            LOGI("    PES data: ");
+            logger.print("    PES data ");
+            logger.print(is_write_active? "active:":"inactive:");
             int j = 0;
             while (j < pes->data_bytes_length) {
               char n = pes->data_bytes[j];
@@ -240,10 +252,19 @@ class MTSDecoder : public AudioDecoder {
             }
             logger.printChar('\n');
           }
+          // output data
+          if (p_print != nullptr) {
+            size_t eff = p_print->write(pes->data_bytes, pes->data_bytes_length);
+            if(eff!=pes->data_bytes_length){
+              // we should not get here
+              TRACEE();
+            }
+          }
         }
       }
 
     } else if (event_id == TSD_EVENT_ADAP_FIELD_PRV_DATA) {
+      set_write_active(false);
       // we're only watching for SCTE Adaptions Field Private Data,
       // so we know that we must parse it as a list of descritors.
       TSDAdaptationField *adap_field = (TSDAdaptationField *)data;
@@ -253,61 +274,65 @@ class MTSDecoder : public AudioDecoder {
                              adap_field->transport_private_data_length,
                              &descriptors, &descriptors_length);
 
-      LOGI("====================");
-      LOGI("Descriptors - Adaptation Fields");
+      LOGD("====================");
+      LOGD("Descriptors - Adaptation Fields");
       int i = 0;
       for (; i < descriptors_length; ++i) {
         TSDDescriptor *des = &descriptors[i];
-        LOGI("  %d) tag: (0x%04X) %s", i, des->tag,
+        LOGD("  %d) tag: (0x%04X) %s", i, des->tag,
              descriptor_tag_to_str(des->tag));
-        LOGI("      length: %d", des->length);
+        LOGD("      length: %d", des->length);
         print_descriptor_info(des);
       }
     }
   }
 
   void print_pat(TSDemuxContext *ctx, void *data) {
-    LOGI("====================");
+    LOGD("====================");
     TSDPATData *pat = (TSDPATData *)data;
     size_t len = pat->length;
     size_t i;
-    LOGI("PAT, Length %d", (int)pat->length);
+    LOGD("PAT, Length %d", (int)pat->length);
 
     if (len > 1) {
-      LOGI("number of progs: %d", (int)len);
+      LOGD("number of progs: %d", (int)len);
     }
     for (i = 0; i < len; ++i) {
-      LOGI("  %d) prog num: 0x%X, pid: 0x%X", (int)i, pat->program_number[i],
+      LOGD("  %d) prog num: 0x%X, pid: 0x%X", (int)i, pat->program_number[i],
            pat->pid[i]);
     }
   }
 
   void print_pmt(TSDemuxContext *ctx, void *data) {
-    LOGI("====================");
-    LOGI("PMT");
+    LOGD("====================");
+    LOGD("PMT");
     TSDPMTData *pmt = (TSDPMTData *)data;
-    LOGI("PCR PID: 0x%04X", pmt->pcr_pid);
-    LOGI("program info length: %d", (int)pmt->program_info_length);
-    LOGI("descriptors length: %d", (int)pmt->descriptors_length);
+    LOGD("PCR PID: 0x%04X", pmt->pcr_pid);
+    LOGD("program info length: %d", (int)pmt->program_info_length);
+    LOGD("descriptors length: %d", (int)pmt->descriptors_length);
     size_t i;
 
     for (i = 0; i < pmt->descriptors_length; ++i) {
       TSDDescriptor *des = &pmt->descriptors[i];
-      LOGI("  %d) tag: (0x%04X) %s", (int)i, des->tag,
+      LOGD("  %d) tag: (0x%04X) %s", (int)i, des->tag,
            descriptor_tag_to_str(des->tag));
-      LOGI("     length: %d", des->length);
+      LOGD("     length: %d", des->length);
       print_descriptor_info(des);
     }
 
-    LOGI("program elements length: %d", (int)pmt->program_elements_length);
+    LOGD("program elements length: %d", (int)pmt->program_elements_length);
     for (i = 0; i < pmt->program_elements_length; ++i) {
       TSDProgramElement *prog = &pmt->program_elements[i];
-      LOGI("  -----Program #%d", (int)i);
-      LOGI("  stream type: (0x%04X)  %s", prog->stream_type,
+      LOGD("  -----Program #%d", (int)i);
+      LOGD("  stream type: (0x%04X)  %s", prog->stream_type,
            stream_type_to_str((TSDPESStreamId)(prog->stream_type)));
-      LOGI("  elementary pid: 0x%04X", prog->elementary_pid);
-      LOGI("  es info length: %d", prog->es_info_length);
-      LOGI("  descriptors length: %d", (int)prog->descriptors_length);
+      LOGD("  elementary pid: 0x%04X", prog->elementary_pid);
+      LOGD("  es info length: %d", prog->es_info_length);
+      LOGD("  descriptors length: %d", (int)prog->descriptors_length);
+
+      if (isStreamTypeActive((TSDPMTStreamType)prog->stream_type)){
+        set_write_active(true);
+      }
 
       // keep track of metadata pids, we'll print the data for these
       for(int j=0;j<stream_types.size();j++){
@@ -320,9 +345,9 @@ class MTSDecoder : public AudioDecoder {
       size_t j;
       for (j = 0; j < prog->descriptors_length; ++j) {
         TSDDescriptor *des = &prog->descriptors[j];
-        LOGI("    %d) tag: (0x%04X) %s", (int)j, des->tag,
+        LOGD("    %d) tag: (0x%04X) %s", (int)j, des->tag,
              descriptor_tag_to_str(des->tag));
-        LOGI("         length: %d", des->length);
+        LOGD("         length: %d", des->length);
         print_descriptor_info(des);
 
         // if this tag is the SCTE Adaption field private data descriptor,
@@ -784,7 +809,7 @@ class MTSDecoder : public AudioDecoder {
         TSDDescriptorRegistration res;
         if (TSD_OK == tsd_parse_descriptor_registration(
                           desc->data, desc->data_length, &res)) {
-          LOGI("\n  format identififer: 0x%08X", res.format_identifier);
+          LOGD("\n  format identififer: 0x%08X", res.format_identifier);
         }
       } break;
       case 0x0A:  // ISO 639 Language descriptor
@@ -792,13 +817,13 @@ class MTSDecoder : public AudioDecoder {
         TSDDescriptorISO639Language res;
         if (TSD_OK == tsd_parse_descriptor_iso639_language(
                           desc->data, desc->data_length, &res)) {
-          LOGI("\n");
+          LOGD("\n");
           int i = 0;
           for (; i < res.language_length; ++i) {
-            LOGI(" ISO Language Code: 0x%08X, audio type: 0x%02x",
+            LOGD(" ISO Language Code: 0x%08X, audio type: 0x%02x",
                  res.iso_language_code[i], res.audio_type[i]);
           }
-          LOGI("\n");
+          LOGD("\n");
         }
       } break;
       case 0x0E:  // Maximum bitrate descriptor
@@ -806,7 +831,7 @@ class MTSDecoder : public AudioDecoder {
         TSDDescriptorMaxBitrate res;
         if (TSD_OK == tsd_parse_descriptor_max_bitrate(
                           desc->data, desc->data_length, &res)) {
-          LOGI(" Maximum Bitrate: %d x 50 bytes/second", res.max_bitrate);
+          LOGD(" Maximum Bitrate: %d x 50 bytes/second", res.max_bitrate);
         }
       } break;
       default: {
@@ -834,7 +859,7 @@ class MTSDecoder : public AudioDecoder {
   }
 
   static void log_free (void *mem){
-      LOGI("free(%p)\n", mem);
+      LOGD("free(%p)\n", mem);
       free(mem);
   }
 

@@ -303,6 +303,10 @@ class Vector {
       return p_data!=nullptr;
     }
 
+    void set_capacity(int size){
+      resize_internal(size, false, false);
+    }
+
   protected:
     int bufferLen=0;
     int len = 0;
