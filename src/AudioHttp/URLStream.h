@@ -23,6 +23,7 @@
 
 namespace audio_tools {
 
+
 /**
  * @brief Represents the content of a URL as Stream. We use the WiFi.h API
  * @author Phil Schatzmann
@@ -34,25 +35,25 @@ class URLStream : public AbstractURLStream {
     public:
 
         URLStream(int readBufferSize=DEFAULT_BUFFER_SIZE){
-            TRACEI();
+            TRACED();
             setReadBufferSize(readBufferSize);
         }
 
         URLStream(Client &clientPar, int readBufferSize=DEFAULT_BUFFER_SIZE){
-            TRACEI();
+            TRACED();
             setReadBufferSize(readBufferSize);
             setClient(clientPar);
         }
 
         URLStream(const char* network, const char *password, int readBufferSize=DEFAULT_BUFFER_SIZE) {
-            TRACEI();
+            TRACED();
             setReadBufferSize(readBufferSize);
             setSSID(network);
             setPassword(password);
         }
 
         ~URLStream(){
-            TRACEI();
+            TRACED();
             end();
 #ifdef USE_WIFI_CLIENT_SECURE
             if (clientSecure!=nullptr){
@@ -87,9 +88,13 @@ class URLStream : public AbstractURLStream {
 
         virtual bool begin(const char* urlStr, const char* acceptMime=nullptr, MethodID action=GET,  const char* reqMime="", const char*reqData="")  override{
             LOGI( "%s: %s",LOG_METHOD, urlStr);
-            
-            url.setUrl(urlStr);
+            custom_log_level.set();
+            url_str = urlStr;
+            url.setUrl(url_str.c_str());
             int result = -1;
+
+            // close it - if we have an active connection
+            if (active) end();
 
             // optional: login if necessary
             login();
@@ -106,23 +111,28 @@ class URLStream : public AbstractURLStream {
             }
             result = process(action, url, reqMime, reqData);
             if (result>0){
-                size = request.getReceivedContentLength();
+                size = request.contentLength();
                 LOGI("size: %d", (int)size);
-                if (size>=0){
+                if (size>=0 && wait_for_data){
                     waitForData();
                 }
             }
+            total_read = 0;
             active = result == 200;
+            custom_log_level.reset();
+
             return active;
         }
 
         virtual void end() override {
             active = false;
             request.stop();
+            clear();
         }
 
         virtual int available() override {
             if (!active || !request) return 0;
+
             int result = request.available();
             LOGD("available: %d", result);
             return result;
@@ -204,6 +214,8 @@ class URLStream : public AbstractURLStream {
             httpRequest().reply().clear(false);
             httpRequest().header().clear(false);
             read_buffer.resize(0);
+            read_pos = 0;
+            read_size = 0;
         }
 
         /// Adds/Updates a request header
@@ -216,8 +228,45 @@ class URLStream : public AbstractURLStream {
             request.setOnConnectCallback(callback);
         }
 
+        void setWaitForData(bool flag){
+            wait_for_data = flag;
+        }
+
+        size_t contentLength() {
+            return request.contentLength();
+        }
+
+        size_t totalRead() {
+            return total_read;
+        }
+
+        /// waits for some data - returns false if the request has failed
+        virtual bool waitForData() {
+            TRACEI();
+            if(request.available()==0 ){
+                LOGI("Request written ... waiting for reply")
+                while(request.available()==0){
+                    // stop waiting if we got an error
+                    if (request.reply().statusCode()>=300){
+                        LOGE("Error code recieved ... stop waiting for reply");
+                        break;
+                    }
+                    delay(500);
+                }
+            }
+            LOGI("available: %d", request.available());
+            return request.available()>0;
+        }
+
+        /// Defines the class specific custom log level
+        void setLogLevel(AudioLogger::LogLevel level){
+            custom_log_level.set(level);
+        }
+
     protected:
         HttpRequest request;
+        CustomLogLevel custom_log_level;
+        StrExt url_str;
         Url url;
         long size;
         long total_read;
@@ -227,6 +276,7 @@ class URLStream : public AbstractURLStream {
         uint16_t read_pos;
         uint16_t read_size;
         bool active = false;
+        bool wait_for_data = true;
         // optional 
         const char* network=nullptr;
         const char* password=nullptr;
@@ -239,19 +289,18 @@ class URLStream : public AbstractURLStream {
         unsigned long handshakeTimeout = URL_HANDSHAKE_TIMEOUT; //120000
         bool is_power_save = false;
 
-        void setTimeouts() {
-            // set regular timeout
-            getClient(url.isSecure()).setTimeout(clientTimeout/1000); // this is in seconds
-        }
 
         /// Process the Http request and handle redirects
         int process(MethodID action, Url &url, const char* reqMime, const char *reqData, int len=-1) {
-            request.setClient(getClient(url.isSecure()));
+            client = &getClient(url.isSecure());
+            request.setClient(*client);
             // keep icy across redirect requests ?
             const char* icy = request.header().get("Icy-MetaData");
 
             // set timeout
-            setTimeouts();
+            client->setTimeout(clientTimeout / 1000);
+            request.setTimeout(clientTimeout);
+
 #ifdef ESP32
             // There is a bug in IDF 4!
             if (clientSecure!=nullptr){
@@ -312,6 +361,7 @@ class URLStream : public AbstractURLStream {
 #endif
         }
 
+
         inline void fillBuffer() {
             if (isEOS()){
                 // if we consumed all bytes we refill the buffer
@@ -341,23 +391,6 @@ class URLStream : public AbstractURLStream {
 #endif          
         }
 
-        /// waits for some data - returns false if the request has failed
-         virtual bool waitForData() {
-            TRACEI();
-            if(request.available()==0 ){
-                LOGI("Request written ... waiting for reply")
-                while(request.available()==0){
-                    // stop waiting if we got an error
-                    if (request.reply().statusCode()>=300){
-                        LOGE("Error code recieved ... stop waiting for reply");
-                        break;
-                    }
-                    delay(500);
-                }
-            }
-            LOGI("available: %d", request.available());
-            return request.available()>0;
-        }
 };
 
 }

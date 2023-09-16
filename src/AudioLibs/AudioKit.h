@@ -204,7 +204,7 @@ class AudioKitStream : public AudioStream {
     cfg = config;
 
     AudioStream::setAudioInfo(config);
-    cfg.logInfo();
+    cfg.logInfo("AudioKitStream");
 
     // start codec
     auto kit_cfg = cfg.toAudioKitConfig();
@@ -265,7 +265,6 @@ class AudioKitStream : public AudioStream {
     && is_started) {
       // update sample rate only
       cfg.sample_rate = info.sample_rate;
-      cfg.logInfo();
       i2s_stream.setAudioInfo(cfg);
       kit.setSampleRate(cfg.toSampleRate());
     } else if (cfg.sample_rate != info.sample_rate
@@ -276,7 +275,7 @@ class AudioKitStream : public AudioStream {
       cfg.sample_rate = info.sample_rate;
       cfg.bits_per_sample = info.bits_per_sample;
       cfg.channels = info.channels;
-      cfg.logInfo();
+      cfg.logInfo("AudioKit");
 
       // Stop first
       if(is_started){
@@ -569,7 +568,7 @@ class AudioKitStream : public AudioStream {
  protected:
   AudioKit kit;
   I2SStream i2s_stream;
-  AudioKitStreamConfig cfg;
+  AudioKitStreamConfig cfg = defaultConfig(RXTX_MODE);
   AudioActions actions;
   int volume_value = 40;
   bool active = true;
