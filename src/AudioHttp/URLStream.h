@@ -242,7 +242,7 @@ class URLStream : public AbstractURLStream {
 
         /// waits for some data - returns false if the request has failed
         virtual bool waitForData() {
-            TRACEI();
+            TRACED();
             if(request.available()==0 ){
                 LOGI("Request written ... waiting for reply")
                 while(request.available()==0){
@@ -254,7 +254,7 @@ class URLStream : public AbstractURLStream {
                     delay(500);
                 }
             }
-            LOGI("available: %d", request.available());
+            LOGD("available: %d", request.available());
             return request.available()>0;
         }
 

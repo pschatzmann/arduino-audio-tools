@@ -94,8 +94,8 @@ protected:
 
     // switch current stream if we have no more data
     if ((!stream || stream.totalRead()==stream.contentLength()) && !urls.empty()) {
-      const char* url = urls[0];
       assert(stream.available()==0);
+      const char* url = urls[0];
       urls.pop_front();
 
 #ifdef ESP32
@@ -104,14 +104,17 @@ protected:
       LOGI("Playing %s of %d", url, urls.size());
 
       stream.clear();
+      stream.setWaitForData(false);
       if (!stream.begin(url)){
         TRACEE();
       }
       // free memory
       delete(url);
+      return;
     }
 
     // copy data to buffer
+    stream.waitForData();
     int to_write = min(buffer.availableForWrite(),DEFAULT_BUFFER_SIZE);
     if (to_write>0){
       int total = 0;
