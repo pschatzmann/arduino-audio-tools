@@ -2,6 +2,8 @@
 #ifdef USE_INITIALIZER_LIST
 #  include "InitializerList.h" 
 #endif
+#include <assert.h>
+
 namespace audio_tools {
 
 /**
@@ -169,9 +171,12 @@ class Vector {
       len++;
     }
 
-    inline void push_front(T value){
+    void push_front(T value){
       resize_internal(len+1, true);
-      memmove(p_data,p_data+1,len*sizeof(T));
+      //memmove(p_data,p_data+1,len*sizeof(T));
+      for (int j=len; j >= 0; j--){
+          p_data[j+1] = p_data[j];
+      }
       p_data[0] = value;
       len++;
     }
@@ -183,12 +188,8 @@ class Vector {
     }
 
     inline void pop_front(){
-        if (len>0) {
-          len--;
-          if (len>0){
-            memmove(p_data, p_data+1,len*sizeof(T));
-          }
-        }
+        erase(0);
+          
     }
 
 
@@ -282,13 +283,21 @@ class Vector {
 
     // removes a single element
     inline void erase(iterator it) {
-      int pos = it.pos();
+      return erase(it.pos());
+    }
+
+    // removes a single element
+    inline void erase(int pos) {
       if (pos<len){
           int lenToEnd = len - pos - 1;
           // call destructor on data to be erased
           p_data[pos].~T();
           // shift values by 1 position
-          memmove((void*) &p_data[pos],(void*)(&p_data[pos+1]),lenToEnd*sizeof(T));
+          //memmove((void*) &p_data[pos],(void*)(&p_data[pos+1]),lenToEnd*sizeof(T));
+          for (int j=pos; j<len; j++){
+              p_data[j] = p_data[j+1];
+          }
+          
           // make sure that we have a valid object at the end
           p_data[len-1] = T();
           len--;
@@ -301,10 +310,6 @@ class Vector {
 
     operator bool() const {
       return p_data!=nullptr;
-    }
-
-    void set_capacity(int size){
-      resize_internal(size, false, false);
     }
 
   protected:

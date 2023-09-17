@@ -70,6 +70,7 @@ class AACDecoderHelix : public AudioDecoder  {
         /// Defines the output Stream
         virtual void setOutput(Print &out_stream){
             TRACED();
+            AudioDecoder::setOutput(out_stream);
             if (aac!=nullptr) aac->setOutput(out_stream);
         }
 
@@ -78,6 +79,7 @@ class AACDecoderHelix : public AudioDecoder  {
             TRACED();
             if (aac!=nullptr) {
                 aac->setDelay(CODEC_DELAY_MS);
+                aac->setInfoCallback(infoCallback, this);
                 aac->begin();
             }
         }
@@ -103,7 +105,10 @@ class AACDecoderHelix : public AudioDecoder  {
 
         void setAudioInfo(AudioInfo info) override {
             AudioDecoder::setAudioInfo(info);
-            aac->setAudioInfo(info.channels, info.sample_rate);
+            //aac->setAudioInfo(info.channels, info.sample_rate);
+            if(p_notify!=nullptr && info_notifications_active){
+                p_notify->setAudioInfo(info);   
+            }
         }
 
         /// Write AAC data to decoder
@@ -121,23 +126,25 @@ class AACDecoderHelix : public AudioDecoder  {
         //     aac->flush();
         }
 
-        /// Defines the callback object to which the Audio information change is provided
-        virtual void setNotifyAudioChange(AudioInfoSupport &bi) override {
-            TRACED();
-            audioChangeAACHelix = &bi;
-            if (aac!=nullptr) aac->setInfoCallback(infoCallback, this);
-        }
+        // /// Defines the callback object to which the Audio information change is provided
+        // virtual void setNotifyAudioChange(AudioInfoSupport &bi) override {
+        //     TRACED();
+        //     audioChangeAACHelix = &bi;
+        //     if (aac!=nullptr) aac->setInfoCallback(infoCallback, this);
+        // }
 
         /// notifies the subscriber about a change
         static void infoCallback(_AACFrameInfo &i, void* ref){
             AACDecoderHelix *p_helix =  (AACDecoderHelix *)ref;
-            if (p_helix!=nullptr && p_helix->audioChangeAACHelix!=nullptr){
+            if (p_helix!=nullptr){
                 TRACED();
                 AudioInfo baseInfo;
                 baseInfo.channels = i.nChans;
                 baseInfo.sample_rate = i.sampRateOut;
                 baseInfo.bits_per_sample = i.bitsPerSample;
-                p_helix->audioChangeAACHelix->setAudioInfo(baseInfo);   
+                //p_helix->audioChangeAACHelix->setAudioInfo(baseInfo);   
+                LOGW("sample_rate: %d", i.sampRateOut);
+                p_helix->setAudioInfo(baseInfo);
             }
         }
 
@@ -149,6 +156,10 @@ class AACDecoderHelix : public AudioDecoder  {
         /// Define your optimized maximum frame size
         void setMaxFrameSize(size_t len){
             aac->setMaxFrameSize(len);
+        }
+
+        void setAudioInfoNotifications(bool active){
+            info_notifications_active = active;
         }
 
 #ifdef HELIX_PCM_CORRECTED
@@ -175,8 +186,7 @@ class AACDecoderHelix : public AudioDecoder  {
 
     protected:
         libhelix::AACDecoderHelix *aac=nullptr;
-        // audio change notification target
-        AudioInfoSupport *audioChangeAACHelix=nullptr;
+        bool info_notifications_active = true;
 
 
 };
