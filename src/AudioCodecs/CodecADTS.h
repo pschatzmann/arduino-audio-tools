@@ -122,7 +122,7 @@ struct ADTSParser {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AACDecoderADTS : public AudioDecoder {
+class ADTSDecoder : public AudioDecoder {
  public:
   void begin() override {
     parser.begin();
@@ -133,7 +133,7 @@ class AACDecoderADTS : public AudioDecoder {
 
   /// Write AAC data to decoder
   size_t write(const void *dataIn, size_t len) override {
-    LOGD("AACDecoderADTS::write: %d", len);
+    LOGD("ADTSDecoder::write: %d", len);
 
     // make sure that we can hold at least the len
     if (buffer.size() < len) {
