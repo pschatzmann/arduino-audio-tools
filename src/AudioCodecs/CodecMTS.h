@@ -6,6 +6,7 @@ namespace audio_tools {
 
 #include "AudioCodecs/AudioEncoded.h"
 #include "tsdemux.h"
+#include "stdlib.h"
 
 #ifndef MTS_PRINT_PIDS_LEN
 #  define MTS_PRINT_PIDS_LEN (16)
@@ -18,6 +19,22 @@ namespace audio_tools {
 #ifndef MTS_WRITE_BUFFER_SIZE
 #  define MTS_WRITE_BUFFER_SIZE 2000
 #endif
+
+#ifndef ALLOC_MEM_INIT
+#  define ALLOC_MEM_INIT 0
+#endif
+
+struct AllocSize {
+   void *data = nullptr;
+   size_t size = 0;
+
+  AllocSize() = default;
+   AllocSize(void*data, size_t size){
+    this->data = data;
+    this->size = size;
+   }
+};
+
 /**
  * @brief MPEG-TS (MTS) decoder
  * https://github.com/pschatzmann/arduino-tsdemux
@@ -52,12 +69,12 @@ class MTSDecoder : public AudioDecoder {
     }
 
     // log memory allocations ?
-    if (is_alloc_active){
+    //if (is_alloc_active){
       ctx.malloc = log_malloc;
       ctx.realloc = log_realloc;
       ctx.calloc = log_calloc;
       ctx.free = log_free;
-    }
+    //}
 
     // default supported stream types
     if (stream_types.empty()){
@@ -141,6 +158,7 @@ class MTSDecoder : public AudioDecoder {
   uint16_t print_pids[MTS_PRINT_PIDS_LEN] = {0};
   SingleBuffer<uint8_t> buffer{MTS_WRITE_BUFFER_SIZE};
   Vector<TSDPMTStreamType> stream_types;
+  Vector<AllocSize> alloc_vector;
 
   void set_write_active(bool flag){
     //LOGD("is_write_active: %s", flag ? "true":"false");
@@ -254,7 +272,8 @@ class MTSDecoder : public AudioDecoder {
           }
           // output data
           if (p_print != nullptr) {
-            size_t eff = p_print->write(pes->data_bytes, pes->data_bytes_length);
+            //size_t eff = p_print->write(pes->data_bytes, pes->data_bytes_length);
+            size_t eff = writeSamples<uint8_t>(p_print,(uint8_t*) pes->data_bytes, pes->data_bytes_length);
             if(eff!=pes->data_bytes_length){
               // we should not get here
               TRACEE();
@@ -862,6 +881,63 @@ class MTSDecoder : public AudioDecoder {
       LOGD("free(%p)\n", mem);
       free(mem);
   }
+
+  //   // store allocated size in first bytes
+  // static void* log_malloc (size_t size) {
+  //     void *result = malloc(size);
+  //     memset(result, 0, size);
+  //     AllocSize entry{result, size};
+  //     self->alloc_vector.push_back(entry);
+  //     assert(find_size(result)>=0);
+  //     LOGI("malloc(%d) -> %p %s\n", (int)size,result, result!=NULL?"OK":"ERROR");
+  //     return result;
+  // }
+
+  // static void* log_calloc(size_t num, size_t size){
+  //   return log_malloc(num*size);
+  // }
+
+  // static int find_size(void *ptr){
+  //   for (int j=0;j<self->alloc_vector.size();j++){
+  //     if (self->alloc_vector[j].data==ptr) return j;
+  //   }
+  //   return -1;
+  // }
+
+  // static void* log_realloc(void *ptr, size_t size){
+  //     int pos = find_size(ptr);
+  //     void *result = nullptr;
+  //     if (pos>=0){
+  //       result =  realloc(ptr, size);
+  //       // store size in header
+  //       size_t old_size = self->alloc_vector[pos].size;
+  //       memset(result+old_size, 0, size-old_size);
+  //       self->alloc_vector[pos].size = size;
+  //     } else {
+  //       LOGE("realloc of unallocatd memory %p", ptr);
+  //       result =  realloc(ptr, size);
+  //       AllocSize entry{result, size};
+  //       self->alloc_vector.push_back(entry);
+  //       assert(find_size(result)>=0);
+  //     }
+
+  //     LOGI("realloc(%d) -> %p %s\n", (int)size, result, result!=NULL?"OK":"ERROR");
+  //     return result;
+  // }
+
+  // static void log_free (void *mem){
+  //     LOGD("free(%p)\n", mem);
+  //     free(mem);
+  //     int pos = find_size(mem);
+  //     if (pos>=0){
+  //       self->alloc_vector.erase(pos);
+  //       assert(find_size(mem)==-1);
+
+  //     } else {
+  //       LOGE("free of unallocatd memory %p", mem);
+  //     }
+  // }
+
 
 };
 // init static variable

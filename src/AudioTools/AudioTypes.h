@@ -85,14 +85,14 @@ struct AudioInfo {
     }
 
     virtual void logInfo(const char* source=nullptr) {
-      static AudioInfo old;
-      if (*this!=old){  
+      //static AudioInfo old;
+      //if (*this!=old){  
         if(source!=nullptr) LOGI("Info from %s:", source);
         LOGI("sample_rate: %d", sample_rate);
         LOGI("channels: %d", channels);
         LOGI("bits_per_sample: %d", bits_per_sample);
-        old = *this;
-      }
+        //old = *this;
+      //}
     }  
 
     // public attributes

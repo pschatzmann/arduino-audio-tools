@@ -65,6 +65,7 @@ class URLLoader {
     if(!active) return 0;
     TRACED();
     bufferRefill();
+    if (buffer.available()<len) LOGW("Buffer underflow");
     return buffer.readArray(data, len);
   }
 
@@ -97,6 +98,7 @@ protected:
       assert(stream.available()==0);
       const char* url = urls[0];
       urls.pop_front();
+      assert(urls[0]!=url);
 
 #ifdef ESP32
       LOGI("Free heap: %d", ESP.getFreeHeap());

@@ -177,7 +177,7 @@ class HttpRequest {
             if (len_str != nullptr) {
                 len = atoi(len_str);
             } else {
-                LOGW("no CONTENT_LENGTH found in reply");
+                LOGI("no CONTENT_LENGTH found in reply");
             }
             return len;
         }

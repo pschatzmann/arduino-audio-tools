@@ -245,18 +245,18 @@ class AudioKitStream : public AudioStream {
     return cfg.rx_tx_mode == TX_MODE ? 0 :  DEFAULT_BUFFER_SIZE;
   }
 
-  virtual size_t write(const uint8_t *data, size_t length) override {
+  size_t write(const uint8_t *data, size_t length) override {
     return i2s_stream.write(data, length);
   }
 
   /// Reads the audio data
-  virtual size_t readBytes(uint8_t *data, size_t length) override {
+  size_t readBytes(uint8_t *data, size_t length) override {
     return i2s_stream.readBytes(data, length);
   }
 
   /// Update the audio info with new values: e.g. new sample_rate,
   /// bits_per_samples or channels. 
-  virtual void setAudioInfo(AudioInfo info) {
+  void setAudioInfo(AudioInfo info) override {
     TRACEI();
 
     if (cfg.sample_rate != info.sample_rate
@@ -264,6 +264,7 @@ class AudioKitStream : public AudioStream {
     && cfg.channels == info.channels
     && is_started) {
       // update sample rate only
+      LOGW("Update sample rate: %d", info.sample_rate);
       cfg.sample_rate = info.sample_rate;
       i2s_stream.setAudioInfo(cfg);
       kit.setSampleRate(cfg.toSampleRate());
