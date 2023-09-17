@@ -36,7 +36,8 @@ struct AllocSize {
 };
 
 /**
- * @brief MPEG-TS (MTS) decoder
+ * @brief MPEG-TS (MTS) decoder. Extracts the AAC audio data from a MPEG-TS (MTS) data stream. You can
+ * define the relevant stream types via the API.
  * https://github.com/pschatzmann/arduino-tsdemux
  * @ingroup codecs
  * @ingroup decoder
