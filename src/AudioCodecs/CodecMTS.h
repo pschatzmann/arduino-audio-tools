@@ -252,7 +252,7 @@ class MTSDecoder : public AudioDecoder {
       TSDPESPacket *pes = (TSDPESPacket *)data;
       // This is where we write the PES data into our buffer.
       LOGD("====================");
-      LOGD("PID %d PES Packet, Size: %ld, stream_id=%u, pts=%lu, dts=%lu", pid,
+      LOGD("PID %x PES Packet, Size: %ld, stream_id=%u, pts=%lu, dts=%lu", pid,
            pes->data_bytes_length, pes->stream_id, pes->pts, pes->dts);
       // print out the PES Packet data if it's in our print list
       int i;
@@ -261,7 +261,7 @@ class MTSDecoder : public AudioDecoder {
         if (print_pids[i] == pid) {
           // log data
           if (logger.isLogging(AudioLogger::Debug)) {
-            logger.print("    PES data ");
+            logger.print("    PES data");
             logger.print(is_write_active? "active:":"inactive:");
             int j = 0;
             while (j < pes->data_bytes_length) {
@@ -862,24 +862,24 @@ class MTSDecoder : public AudioDecoder {
 
   static void* log_malloc (size_t size) {
       void *result = malloc(size);
-      LOGI("malloc(%d) -> %p %s\n", (int)size,result, result!=NULL?"OK":"ERROR");
+      LOGI("malloc(%d) -> %p %s", (int)size,result, result!=NULL?"OK":"ERROR");
       return result;
   }
 
   static void* log_calloc(size_t num, size_t size){
       void *result = calloc(num, size);
-      LOGI("calloc(%d) -> %p %s\n", (int)(num*size),result, result!=NULL?"OK":"ERROR");
+      LOGI("calloc(%d) -> %p %s", (int)(num*size),result, result!=NULL?"OK":"ERROR");
       return result;
   }
 
   static void* log_realloc(void *ptr, size_t size){
       void *result = realloc(ptr, size);
-      LOGI("realloc(%d) -> %p %s\n", (int)size, result, result!=NULL?"OK":"ERROR");
+      LOGI("realloc(%d) -> %p %s", (int)size, result, result!=NULL?"OK":"ERROR");
       return result;
   }
 
   static void log_free (void *mem){
-      LOGD("free(%p)\n", mem);
+      LOGD("free(%p)", mem);
       free(mem);
   }
 

@@ -189,10 +189,6 @@ class PortAudioStream : public AudioStream {
             return len;            
         }
 
-        int available() override {
-            return DEFAULT_BUFFER_SIZE;
-        }
-
 
     protected:
         PaStream *stream = nullptr;
@@ -219,7 +215,7 @@ class PortAudioStream : public AudioStream {
 
         /// automatically start the stream when we start to get data
         void startStream() {
-            if (!stream_started) {
+            if (!stream_started && stream != nullptr) {
                 TRACED();
                 err = Pa_StartStream( stream );
                 if( err == paNoError ) {

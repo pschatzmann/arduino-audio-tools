@@ -555,7 +555,8 @@ class Str {
         /// remove leading spaces
         virtual void ltrim(){
             int n = count(' ',0);
-            *this << n;
+            if (n > 0)
+                *this << n;
         }    
         
         /// remove trailing spaces

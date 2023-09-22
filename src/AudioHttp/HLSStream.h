@@ -6,7 +6,7 @@
 #include "AudioBasic/StrExt.h"
 #include "AudioHttp/URLStream.h"
 
-#define MAX_HLS_LINE 400
+#define MAX_HLS_LINE 512
 
 namespace audio_tools {
 
@@ -27,6 +27,7 @@ class URLLoader {
 
   bool begin() {
     TRACED();
+    buffer.resize(buffer_size, buffer_count);
     active = true;
     return true;
   }
@@ -74,15 +75,22 @@ class URLLoader {
     return stream.httpRequest().reply().get(CONTENT_TYPE);
   }
 
-  const char *contentLength() {
-    if (!stream) return nullptr;
-    return stream.httpRequest().reply().get(CONTENT_LENGTH);
+  int contentLength() {
+    if (!stream) return 0;
+    return stream.contentLength();
+  }
+
+  void setBuffer(int size, int count){
+    buffer_size = size;
+    buffer_count = count;
   }
 
 protected:
   Vector<const char*> urls{10};
-  NBuffer<uint8_t> buffer{DEFAULT_BUFFER_SIZE, 50};
+  NBuffer<uint8_t> buffer{DEFAULT_BUFFER_SIZE, 10};
   bool active = false;
+  int buffer_size = DEFAULT_BUFFER_SIZE;
+  int buffer_count = 10;
   URLStream stream;
 
 
@@ -90,12 +98,18 @@ protected:
   void bufferRefill() {
     TRACED();
     // we have nothing to do
-    if (urls.empty()) return;
-    if (buffer.availableForWrite()==0) return;
+    if (urls.empty()) {
+      LOGD("urls empty");
+      return;
+    }
+    if (buffer.availableForWrite()==0) {
+      LOGD("buffer full");
+      return;
+    }
 
     // switch current stream if we have no more data
     if ((!stream || stream.totalRead()==stream.contentLength()) && !urls.empty()) {
-      assert(stream.available()==0);
+      LOGD("Refilling");
       const char* url = urls[0];
       urls.pop_front();
       assert(urls[0]!=url);
@@ -106,26 +120,26 @@ protected:
       LOGI("Playing %s of %d", url, urls.size());
 
       stream.clear();
-      stream.setWaitForData(false);
+      stream.setWaitForData(true);
       if (!stream.begin(url)){
         TRACEE();
       }
       // free memory
       delete(url);
-      return;
     }
 
     // copy data to buffer
-    stream.waitForData();
+    //LOGD("waitForData");
+    //stream.waitForData();
     int to_write = min(buffer.availableForWrite(),DEFAULT_BUFFER_SIZE);
     if (to_write>0){
       int total = 0;
       while(to_write>0){
+        if (stream.totalRead()==stream.contentLength()) break;
         uint8_t tmp[to_write]={0};
         int read = stream.readBytes(tmp, to_write);
         total += read;
         if (read>0){
-          if (stream.totalRead()==stream.contentLength()) break;
           buffer.writeArray(tmp, read);      
           to_write = min(buffer.availableForWrite(),DEFAULT_BUFFER_SIZE);
         } else {
@@ -242,14 +256,13 @@ class HLSParser {
     return url_loader.contentType();
   }
 
-  const char *contentLength() {
+  int contentLength() {
     return url_loader.contentLength();
   }
 
   /// Closes the processing
   void end() {
     TRACEI();
-    //timer.end();
     codec.clear();
     segments_url_str.clear();
     url_stream.end();
@@ -265,6 +278,10 @@ class HLSParser {
   /// Defines the class specific custom log level
   void setLogLevel(AudioLogger::LogLevel level){
     custom_log_level.set(level);
+  }
+
+  void setBuffer(int size, int count){
+    url_loader.setBuffer(size, count);
   }
 
  protected:
@@ -509,7 +526,7 @@ class HLSStream : public AudioStream {
     return parser.contentType();
   }
 
-  const char *contentLength() {
+  int contentLength() {
     return parser.contentLength();
   }
 
@@ -526,6 +543,11 @@ class HLSStream : public AudioStream {
   /// Defines the class specific custom log level
   void setLogLevel(AudioLogger::LogLevel level){
     parser.setLogLevel(level);
+  }
+
+  /// Defines the buffer size
+  void setBuffer(int size, int count){
+    parser.setBuffer(size, count);
   }
 
  protected:
@@ -547,8 +569,6 @@ class HLSStream : public AudioStream {
       LOGW("login not supported");
 #endif          
   }
-
-
 };
 
 }  // namespace audio_tools

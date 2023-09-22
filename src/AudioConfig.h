@@ -51,7 +51,7 @@
 #define LOG_STREAM Serial
 #endif
 
-#define LOG_PRINTF_BUFFER_SIZE 256
+#define LOG_PRINTF_BUFFER_SIZE 303
 #define LOG_METHOD __PRETTY_FUNCTION__
 
 // cheange USE_CHECK_MEMORY to 1 to activate memory checks
@@ -648,6 +648,7 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #ifdef IS_DESKTOP
 #  include <Client.h>
 #  include <WiFi.h>
+#  define USE_WIFI
 #  define USE_URL_ARDUINO
 #  define USE_STREAM_WRITE_OVERRIDE
 #  define USE_STREAM_READ_OVERRIDE
