@@ -8,9 +8,9 @@ set (DCMAKE_CXX_FLAGS "-Werror")
 
 include(FetchContent)
 
-# Deactivate Emulator and Portaudio
+# Activate Emulator and Portaudio
 set(ADD_ARDUINO_EMULATOR ON CACHE BOOL "Add Arduino Emulator Library") 
-set(ADD_PORTAUDIO OFF CACHE BOOL "Add Portaudio Library") 
+set(ADD_PORTAUDIO ON CACHE BOOL "Add Portaudio Library") 
 
 # Build with arduino-audio-tools
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
