@@ -11,7 +11,7 @@ HLSStream hls_stream("NA", "NA");
 //CsvOutput<int16_t> out(Serial, 2);  // Or use StdOuput
 PortAudioStream out;
 MTSDecoder mts;
-AACDecoderADTS adts;
+ADTSDecoder adts;
 AACDecoderHelix aac;
 EncodedAudioStream aac_stream(&out, &aac); 
 EncodedAudioStream adts_stream(&aac_stream, &adts);
@@ -24,7 +24,7 @@ void setup(void) {
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
   //hls_stream.setLogLevel(AudioLogger::Debug); // hls_stream is quite chatty at Info
   //adts_stream.setLogLevel(AudioLogger::Debug);
-  mts_stream.setLogLevel(AudioLogger::Debug);
+  //mts_stream.setLogLevel(AudioLogger::Debug);
 
   aac.setAudioInfoNotifications(false);
 
