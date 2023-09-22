@@ -104,8 +104,7 @@ class AACDecoderHelix : public AudioDecoder  {
         }
 
         void setAudioInfo(AudioInfo info) override {
-            AudioDecoder::setAudioInfo(info);
-            //aac->setAudioInfo(info.channels, info.sample_rate);
+            this->info = info;
             if(p_notify!=nullptr && info_notifications_active){
                 p_notify->setAudioInfo(info);   
             }
@@ -114,7 +113,16 @@ class AACDecoderHelix : public AudioDecoder  {
         /// Write AAC data to decoder
         size_t write(const void* aac_data, size_t len) override {
             LOGD("AACDecoderHelix::write: %d", (int)len);
-            return aac==nullptr ? 0 : aac->write(aac_data, len);
+            if (aac==nullptr) return 0;
+            int open = len;
+            int processed = 0;
+            uint8_t *data = (uint8_t*)aac_data;
+            while(open>0){
+                 int act_write = aac->write(data+processed, min(open, DEFAULT_BUFFER_SIZE));
+                 open -= act_write;
+                 processed += act_write;
+            }
+            return processed;
         }
 
         /// checks if the class is active 

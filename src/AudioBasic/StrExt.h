@@ -27,6 +27,7 @@ class StrExt : public Str {
 
         StrExt(int initialAllocatedLength) : Str() {
             maxlen = initialAllocatedLength;
+            is_const = false;
         }
 
         StrExt(Str &source) : Str() {
@@ -52,7 +53,10 @@ class StrExt : public Str {
         StrExt (StrExt &&obj) = default;
 
         // move assignment
-        StrExt& operator = (StrExt &&obj) = default;
+        StrExt& operator = (StrExt &&obj) {
+            set(obj.c_str());
+            return *this;
+        }
 
         // copy assingment
         StrExt& operator = (StrExt &obj) {
@@ -61,19 +65,14 @@ class StrExt : public Str {
         };
 
 
-        ~StrExt() {
-            if (chars!=nullptr){
-                LOGD("delete %d",maxlen);
-                delete [] chars;
-                chars = nullptr;
-            }
+        ~StrExt() {    
         }
 
-        bool isOnHeap() {
+        bool isOnHeap() override {
             return true;
         }
         
-        bool isConst() {
+        bool isConst() override {
             return false;
         }
 
@@ -134,9 +133,11 @@ class StrExt : public Str {
         }
 
     protected:
+        Vector<char> vector;
 
         bool grow(int newMaxLen){
             bool grown = false;
+            assert(newMaxLen<1024*10);
             
             if (chars==nullptr || newMaxLen > maxlen ){
                 LOGD("grow(%d)",newMaxLen);
@@ -144,18 +145,8 @@ class StrExt : public Str {
                 grown = true;
                 // we use at minimum the defined maxlen
                 int newSize = newMaxLen > maxlen ? newMaxLen : maxlen;                
-                if (chars!=nullptr){
-                    char* tmp = chars;
-                    chars = new char[newSize+1];
-                    if (chars!=nullptr){
-                        strcpy(chars,tmp);
-                    }
-                    delete [] tmp;
-                } else {
-                    chars = new char[newSize+1];
-                    if (chars!=nullptr)
-                        chars[0] = 0;
-                }
+                vector.resize(newSize+1);
+                chars = &vector[0];
                 maxlen = newSize;
                 
             }

@@ -52,6 +52,9 @@ class URLStream : public AbstractURLStream {
             setPassword(password);
         }
 
+        URLStream(const URLStream&) = delete;
+
+
         ~URLStream(){
             TRACED();
             end();
@@ -93,7 +96,7 @@ class URLStream : public AbstractURLStream {
             url.setUrl(url_str.c_str());
             int result = -1;
 
-            // close it - if we have an active connection
+// close it - if we have an active connection
             if (active) end();
 
             // optional: login if necessary
@@ -232,8 +235,8 @@ class URLStream : public AbstractURLStream {
             wait_for_data = flag;
         }
 
-        size_t contentLength() {
-            return request.contentLength();
+        int contentLength() {
+            return size;
         }
 
         size_t totalRead() {
@@ -387,7 +390,6 @@ class URLStream : public AbstractURLStream {
                 delay(500);  
             }
 #else   
-            LOGE("login not supported");
 #endif          
         }
 

@@ -80,7 +80,8 @@ class HttpHeader {
                 if (activeFlag){
                     (*it)->active = false;
                 } else {
-                    delete *it;
+                    (*it)->active = false;
+                    //delete *it;  // this leads to exceptions
                 }
             }
             if (!activeFlag){
@@ -195,8 +196,8 @@ class HttpHeader {
             msg[len-2] = 0;
             LOGI(" -> %s ", msg);
 
-            // marke as processed
-            header->active = false;
+            // mark as processed
+            // header->active = false;
         }
         
         const char* urlPath() {
@@ -243,6 +244,7 @@ class HttpHeader {
                     }
                     LOGI("Data availble");
                 }
+
                 readLine(in, line, MAX_HTTP_HEADER_LINE_LENGTH);
                 parse1stLine(line);
                 while (in.available()){
@@ -254,11 +256,9 @@ class HttpHeader {
                             break;
                         }
                         put(line); 
-                    }               
+                    }           
                 }
-            } else {
-                LOGW("connection lost");
-            }
+            } 
         }
 
         /// writes the full header to the indicated HttpStreamedMultiOutput stream
@@ -272,6 +272,12 @@ class HttpHeader {
             crlf(out);
             out.flush();
             is_written = true;
+        }
+
+        void setProcessed() {
+            for (auto it = lines.begin() ; it != lines.end(); ++it){
+                (*it)->active = false;
+            }          
         }
 
         /// automatically create new lines

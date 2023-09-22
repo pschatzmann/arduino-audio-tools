@@ -380,7 +380,7 @@ class EncodedAudioOutput : public AudioStream {
     return result;
   }
 
-  int availableForWrite() override { return ptr_out->availableForWrite(); }
+  int availableForWrite() override { return min(ptr_out->availableForWrite(), DEFAULT_BUFFER_SIZE); }
 
   /// Returns true if status is active and we still have data to be processed
   operator bool() { return active; }

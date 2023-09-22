@@ -133,7 +133,7 @@ class ADTSDecoder : public AudioDecoder {
 
   /// Write AAC data to decoder
   size_t write(const void *dataIn, size_t len) override {
-    LOGD("ADTSDecoder::write: %d", len);
+    LOGD("AACDecoderADTS::write: %d", (int)len);
 
     // make sure that we can hold at least the len
     if (buffer.size() < len) {
@@ -225,7 +225,7 @@ class ADTSDecoder : public AudioDecoder {
 
   void resizeBuffer() {
     if (parser.size() > buffer.size()) {
-      LOGI("resize buffer %d to %d", buffer.size(), parser.size());
+      LOGI("resize buffer %d to %d", (int)buffer.size(), (int)parser.size());
       buffer.resize(parser.size());
       buffer_write_size = parser.size();
     }

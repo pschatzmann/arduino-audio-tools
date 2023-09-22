@@ -549,35 +549,11 @@ template <typename T>
 class NBuffer : public BaseBuffer<T> {
  public:
   NBuffer(int size, int count) {
-    filled_buffers.resize(count);
-    avaliable_buffers.resize(count);
-
-    write_buffer_count = 0;
-    buffer_count = count;
-    buffer_size = size;
-    for (int j = 0; j < count; j++) {
-      avaliable_buffers[j] = new SingleBuffer<T>(size);
-      if (avaliable_buffers[j] == nullptr) {
-        LOGE("Not Enough Memory for buffer %d", j);
-      }
-    }
+    resize(size, count);
   }
 
   virtual ~NBuffer() {
-    delete actual_write_buffer;
-    delete actual_read_buffer;
-
-    BaseBuffer<T> *ptr = getNextAvailableBuffer();
-    while (ptr != nullptr) {
-      delete ptr;
-      ptr = getNextAvailableBuffer();
-    }
-
-    ptr = getNextFilledBuffer();
-    while (ptr != nullptr) {
-      delete ptr;
-      ptr = getNextFilledBuffer();
-    }
+    freeMemory();
   }
 
   // reads an entry from the buffer
@@ -724,7 +700,23 @@ class NBuffer : public BaseBuffer<T> {
     return result;
   }
 
-  void setBufferSize(int size) { buffer_size = size; }
+  void resize(int size, int count) { 
+    if (buffer_size==size && buffer_count == count)
+      return;
+    freeMemory();
+    filled_buffers.resize(count);
+    avaliable_buffers.resize(count);
+
+    write_buffer_count = 0;
+    buffer_count = count;
+    buffer_size = size;
+    for (int j = 0; j < count; j++) {
+      avaliable_buffers[j] = new SingleBuffer<T>(size);
+      if (avaliable_buffers[j] == nullptr) {
+        LOGE("Not Enough Memory for buffer %d", j);
+      }
+    }
+  }
 
  protected:
   int buffer_size = 0;
@@ -739,6 +731,25 @@ class NBuffer : public BaseBuffer<T> {
 
   // empty constructor only allowed by subclass
   NBuffer() = default;
+
+  void freeMemory()  {
+    delete actual_write_buffer;
+    actual_write_buffer = nullptr;
+    delete actual_read_buffer;
+    actual_read_buffer = nullptr;
+
+    BaseBuffer<T> *ptr = getNextAvailableBuffer();
+    while (ptr != nullptr) {
+      delete ptr;
+      ptr = getNextAvailableBuffer();
+    }
+
+    ptr = getNextFilledBuffer();
+    while (ptr != nullptr) {
+      delete ptr;
+      ptr = getNextFilledBuffer();
+    }
+  }
 
   void resetCurrent() {
     if (actual_read_buffer != nullptr) {

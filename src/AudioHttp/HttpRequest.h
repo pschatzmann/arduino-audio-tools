@@ -237,7 +237,7 @@ class HttpRequest {
             if (!this->connected()){
                 LOGI("process connecting to host %s port %d", url.host(), url.port());
                 int is_connected = connect(url.host(), url.port(), clientTimeout);
-                if (is_connected!=1){
+                if (!is_connected){
                     LOGE("Connect failed");
                     return false;
                 }
@@ -248,6 +248,9 @@ class HttpRequest {
 #if defined(ESP32) && defined(ARDUINO)
             LOGI("Free heap: %u", ESP.getFreeHeap());
 #endif
+
+            reply_header.setProcessed();
+
 
             host_name = url.host();                
             request_header.setValues(action, url.path());
@@ -330,7 +333,7 @@ class HttpRequest {
             LOGI("connected %d timeout %d", is_connected, (int) timeout);
             return is_connected;
         }
-
+       
 };
 
 }

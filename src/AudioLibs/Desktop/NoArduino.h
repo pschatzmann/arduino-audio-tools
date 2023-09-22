@@ -82,13 +82,13 @@ public:
 	}
 
 	virtual int print(char c, PrintCharFmt spec){
-		char result[3];
+		char result[5];
 		switch(spec){
 		case DEC:
 			 snprintf(result, 3,"%c", c);
 			 return print(result);
 		case HEX:
-			 snprintf(result, 3,"%x", c & 0xff);
+			 snprintf(result, 3,"%x", c);
 			 return print(result);
 		}
 		return -1;

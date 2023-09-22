@@ -188,8 +188,7 @@ class Vector {
     }
 
     inline void pop_front(){
-        erase(0);
-          
+        erase(0);          
     }
 
 

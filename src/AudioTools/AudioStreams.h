@@ -1583,6 +1583,87 @@ class CallbackStream : public AudioStream {
 };
 
 /**
+ * @brief Provides data from a concatenation of Streams. Please note that the provided
+ * Streams can be played only once! You will need to reset them (e.g. moving the file pointer to the beginning) 
+ * and readd them back if you want to process them a second time. The default timeout on the available() method
+ * is set to 0. This might be not good if you use e.g. a URLStream. 
+ * @ingroup io
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class CatStream : public AudioStream {
+  CatStream(){
+    _timeout = 0;
+  }
+  void add(Stream *stream){
+    input_streams.push_back(stream);
+  }
+  void add(Stream &stream){
+    input_streams.push_back(&stream);    
+  }
+
+  bool begin() override {
+    is_active = true;
+    return AudioStream::begin();
+  }
+
+  void end() override {
+    is_active = false;
+    return AudioStream::end();
+  }
+
+  int available() override {
+    if (!is_active) return 0;
+    if (!moveToNextStreamOnEnd()){
+      return 0;
+    }
+    return availableWithTimout();
+  }
+
+  size_t readBytes(uint8_t* data, size_t len) override {
+    if (!is_active) return 0;
+    if (!moveToNextStreamOnEnd()){
+      return 0;
+    }
+    return p_current_stream->readBytes(data, len);
+  }
+
+  /// Returns true if active and we still have data
+  operator bool(){
+    return is_active && available()>0;
+  }
+
+
+protected:
+  Vector<Stream*> input_streams;
+  Stream *p_current_stream = nullptr;
+  bool is_active = false;
+
+  /// moves to the next stream if necessary: returns true if we still have a valid stream
+  bool moveToNextStreamOnEnd(){
+    if ((p_current_stream==nullptr || availableWithTimout()) && !input_streams.empty()){
+      p_current_stream = input_streams[0];
+      input_streams.pop_front();
+    }
+    // returns true if we have a valid stream
+    return p_current_stream!=nullptr;
+  }
+
+  int availableWithTimout(){
+    int result = p_current_stream->available();
+    if (result==0){
+      for (int j=0; j <_timeout/10;j++){
+        delay(10);
+        result = p_current_stream->available();
+        if (result!=0) break;
+      }
+    }
+    return result;
+  }
+
+};
+
+/**
  * @brief  Stream to which we can apply Filters for each channel. The filter 
  * might change the result size!
  * @ingroup transform
