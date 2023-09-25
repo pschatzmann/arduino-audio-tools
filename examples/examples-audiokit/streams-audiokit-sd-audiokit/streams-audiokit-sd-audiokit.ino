@@ -46,6 +46,14 @@ void setup(){
   while(!Serial); // wait for serial to be ready
   AudioLogger::instance().begin(Serial, AudioLogger::Warning);  
 
+  // setup input and output: setup audiokit before SD!
+  auto cfg = kit.defaultConfig(RXTX_MODE);
+  cfg.sd_active = true;
+  cfg.copyFrom(info);
+  cfg.input_device = AUDIO_HAL_ADC_INPUT_LINE2;
+  kit.begin(cfg);
+  kit.setVolume(1.0);
+
   // Open SD drive
   if (!SD.begin(PIN_AUDIO_KIT_SD_CARD_CS)) {
     Serial.println("Initialization failed!");
@@ -53,13 +61,6 @@ void setup(){
   }
   Serial.println("Initialization done.");
 
-  // setup input and output
-  auto cfg = kit.defaultConfig(RXTX_MODE);
-  cfg.sd_active = true;
-  cfg.copyFrom(info);
-  cfg.input_device = AUDIO_HAL_ADC_INPUT_LINE2;
-  kit.begin(cfg);
-  kit.setVolume(1.0);
 
   // record when key 1 is pressed
   kit.audioActions().add(PIN_KEY1, record_start, record_end);
