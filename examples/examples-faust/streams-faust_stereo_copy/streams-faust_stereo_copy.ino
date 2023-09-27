@@ -1,7 +1,8 @@
 /**
- * @file streams-faust_noise-i2s.ino
+ * @file streams-faust_stereo_copy.ino
  * @author Phil Schatzmann
- * @brief Example how to use Faust as Audio Source
+ * @brief Example how to use Faust to write and process a stereo signal. The data
+ * is just copied, keeping the left and right signal separate.
  * @version 0.1
  * @date 2022-04-22
  * 
@@ -15,8 +16,8 @@
 #include "Copy.h"
 
 AudioKitStream io; 
-FaustStream<mydsp> faust(io);
-StreamCopy copier(faust, io);  // copy mic to tfl
+FaustStream<mydsp> faust(io);  // final output to io
+StreamCopy copier(faust, io);  // copy mic to faust
 
 // Arduino Setup
 void setup(void) {  
