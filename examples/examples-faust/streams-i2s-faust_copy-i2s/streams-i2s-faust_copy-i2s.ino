@@ -1,5 +1,5 @@
 /**
- * @file streams-faust_stereo_copy.ino
+ * @file streams-i2s-faust_copy-i2s.ino
  * @author Phil Schatzmann
  * @brief Example how to use Faust to write and process a stereo signal. The data
  * is just copied, keeping the left and right signal separate.
