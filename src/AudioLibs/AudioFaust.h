@@ -55,7 +55,7 @@ class FaustStream : public AudioStream {
         TRACED();
         bool result = true;
         this->cfg = cfg;
-        this->bytes_per_sample = cfg.bits_per_sample/8;
+        this->bytes_per_sample = cfg.bits_per_sample / 8;
         this->bytes_per_frame = bytes_per_sample * cfg.channels;
         this->float_to_int_factor = NumberConverter::maxValue(cfg.bits_per_sample);
 
@@ -144,6 +144,7 @@ class FaustStream : public AudioStream {
 
     /// Used if FaustStream is used as audio sink or filter
     size_t write(const uint8_t *write_data, size_t len) override {
+        LOGD("FaustStream::write: %d", len);
         switch(cfg.bits_per_sample){
             case 8:
                 return writeT<int8_t>(write_data, len);
@@ -309,13 +310,14 @@ class FaustStream : public AudioStream {
         if (is_write){
             TRACED();
             int samples = len / bytes_per_sample;
+            int frames = samples / cfg.channels;
             // prepare float input for faust
             allocateFloatBuffer(samples, with_output_buffer);
             convertIntBufferToFloat<T>(samples, (void*) write_data, p_buffer);
 
             // determine result
             FAUSTFLOAT** p_float_buffer = with_output_buffer ? p_buffer_out : p_buffer; 
-            p_dsp->compute(samples, p_buffer, p_float_buffer);
+            p_dsp->compute(frames, p_buffer, p_float_buffer);
 
             // update buffer with data from faust
             convertFloatBufferToInt<T>(samples, p_float_buffer, (void*) write_data);
