@@ -56,6 +56,8 @@ class FaustStream : public AudioStream {
         bool result = true;
         this->cfg = cfg;
         this->bytes_per_sample = cfg.bits_per_sample/8;
+        this->bytes_per_frame = bytes_per_sample * cfg.channels;
+        this->float_to_int_factor = NumberConverter::maxValue(cfg.bits_per_sample);
 
         if (p_dsp==nullptr){
 #ifdef USE_MEMORY_MANAGER
@@ -119,35 +121,42 @@ class FaustStream : public AudioStream {
             int samples = len / bytes_per_sample;
             allocateFloatBuffer(samples, false);
             p_dsp->compute(samples, nullptr, p_buffer);
-            // convert from float to int16
-            convertFloatBufferToInt16(samples, data, p_buffer);
+            // convert from float to int
+            switch(cfg.bits_per_sample){
+                case 8:
+                    convertFloatBufferToInt<int8_t>(samples, p_buffer, data);
+                    break;
+                case 16:
+                    convertFloatBufferToInt<int16_t>(samples, p_buffer, data);
+                    break;
+                case 24:
+                    convertFloatBufferToInt<int24_t>(samples, p_buffer, data);
+                    break;
+                case 32:
+                    convertFloatBufferToInt<int32_t>(samples, p_buffer, data);
+                    break;
+                default:
+                    TRACEE();
+            }
         }
         return result;
     }
 
     /// Used if FaustStream is used as audio sink or filter
     size_t write(const uint8_t *write_data, size_t len) override {
-        size_t result = 0;
-        if (is_write){
-            TRACED();
-            int samples = len / bytes_per_sample;
-            allocateFloatBuffer(samples, with_output_buffer);
-            int16_t *data16 = (int16_t*) write_data;
-            // convert to float
-            int frameCount = samples/cfg.channels;
-            for(int j=0;j<frameCount;j++){
-                for(int i=0;i<cfg.channels;i++){
-                    p_buffer[i][j] =  static_cast<FAUSTFLOAT>(data16[(j*cfg.channels)+i])/32767.0;
-                }
-            }
-            FAUSTFLOAT** p_float_out = with_output_buffer ? p_buffer_out : p_buffer; 
-            p_dsp->compute(samples, p_buffer, p_float_out);
-            // update buffer with data from faust
-            convertFloatBufferToInt16(samples,(void*) write_data, p_float_out);
-            // write data to final output
-            result = p_out->write(write_data, len);
+        switch(cfg.bits_per_sample){
+            case 8:
+                return writeT<int8_t>(write_data, len);
+            case 16:
+                return writeT<int16_t>(write_data, len);
+            case 24:
+                return writeT<int24_t>(write_data, len);
+            case 32:
+                return writeT<int32_t>(write_data, len);
+            default:
+                TRACEE();
         }
-        return result;
+        return 0;
     }
 
     int available() override {
@@ -155,7 +164,7 @@ class FaustStream : public AudioStream {
     }
 
     int availableForWrite() override {
-        return DEFAULT_BUFFER_SIZE / 4; // we limit the write size to 
+        return DEFAULT_BUFFER_SIZE / bytes_per_frame; // we limit the write size  
     }
 
     /// Determines the value of a parameter
@@ -217,7 +226,9 @@ class FaustStream : public AudioStream {
     bool gate_exists = false;
     bool with_output_buffer;
     int bytes_per_sample;
+    int bytes_per_frame;
     int buffer_allocated;
+    float float_to_int_factor = 32767;
     DSP *p_dsp = nullptr;
     AudioInfo cfg;
     Print *p_out=nullptr;
@@ -259,16 +270,61 @@ class FaustStream : public AudioStream {
         return result;
     }
 
-    /// Converts the float buffer to int16 values
-    void convertFloatBufferToInt16(int samples, void *data, FAUSTFLOAT**p_float_out){
-        int16_t *data16 = (int16_t*) data;
+    /// Converts the float buffer to int values
+    template <class T> 
+    void convertFloatBufferToInt(int samples, FAUSTFLOAT**p_float_in, void *data_out){
+        T *dataT = (T*) data_out;
         int frameCount = samples/cfg.channels;
-        for (int j=0;j<frameCount;j++){
+        for (int j=0; j<frameCount; j++){
             for (int i=0;i<cfg.channels;i++){
-                data16[(j*cfg.channels)+i]=p_float_out[i][j]*32767;
+                float sample = p_float_in[i][j];
+                // clip input
+    			if(sample > 1.0f){
+                    sample = 1.0f;
+                }
+    			if(sample < -1.0f){
+                    sample = -1.0f;
+                }
+                dataT[(j*cfg.channels)+i] = sample * float_to_int_factor;
             }
         }
     }
+
+    /// Converts the int buffer to float values
+    template <class T> 
+    void convertIntBufferToFloat(int samples, void *data_in, FAUSTFLOAT**p_float_out ){
+        T *dataT = (T*) data_in;
+        int frameCount = samples/cfg.channels;
+        for(int j=0;j<frameCount;j++){
+            for(int i=0;i<cfg.channels;i++){
+                p_float_out[i][j] =  static_cast<FAUSTFLOAT>(dataT[(j*cfg.channels)+i]) / float_to_int_factor;
+            }
+        }
+    }
+
+      /// Used if FaustStream is used as audio sink or filter
+    template <class T> 
+    size_t writeT(const uint8_t *write_data, size_t len) {
+        size_t result = 0;
+        if (is_write){
+            TRACED();
+            int samples = len / bytes_per_sample;
+            // prepare float input for faust
+            allocateFloatBuffer(samples, with_output_buffer);
+            convertIntBufferToFloat<T>(samples, (void*) write_data, p_buffer);
+
+            // determine result
+            FAUSTFLOAT** p_float_buffer = with_output_buffer ? p_buffer_out : p_buffer; 
+            p_dsp->compute(samples, p_buffer, p_float_buffer);
+
+            // update buffer with data from faust
+            convertFloatBufferToInt<T>(samples, p_float_buffer, (void*) write_data);
+            // write data to final output
+            result = p_out->write(write_data, len);
+        }
+        return result;
+    }
+  
 
     /// Allocate the buffer that is needed by faust
     void allocateFloatBuffer(int samples, bool allocate_out){
