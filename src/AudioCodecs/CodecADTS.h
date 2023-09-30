@@ -217,11 +217,16 @@ class ADTSDecoder : public AudioDecoder {
   void writeFrame() {
     // write out data
     parser.log();
-    LOGD("writing ADTS Frame: %d bytes", parser.size());
-    assert(buffer.available() >= parser.size());
-    size_t len = p_print->write(buffer.data(), parser.size());
-    assert(len == parser.size());
-    buffer.clearArray(parser.size());
+    int size = parser.size();
+    if (size>0){
+      LOGD("writing ADTS Frame: %d bytes", size);
+      assert(buffer.available() >= size);
+      size_t len = p_print->write(buffer.data(), size);
+      assert(len == size);
+      buffer.clearArray(parser.size());
+    } else {
+      buffer.clearArray(2);
+    }
   }
 
   void resizeBuffer() {

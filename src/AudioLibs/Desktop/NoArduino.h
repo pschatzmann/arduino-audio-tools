@@ -19,7 +19,12 @@
 #include <string.h>
 #include <chrono>
 
-#define PSTR(fmt) fmt
+#define IS_NOARDUINO
+
+#ifndef PSTR
+#  define PSTR(fmt) fmt
+#endif
+
 #ifndef PI
 #  define PI 3.14159265359f
 #endif
@@ -27,9 +32,11 @@
 #ifndef INPUT
 #  define INPUT 0x0
 #endif
+
 #ifndef OUTPUT
 #  define OUTPUT 0x1
 #endif
+
 #ifndef INPUT_PULLUP
 #  define INPUT_PULLUP 0x2
 #endif
@@ -109,6 +116,10 @@ public:
 
 
 	virtual void flush() { /* Empty implementation for backward compatibility */ }
+
+  protected:
+	int _timeout = 10;
+
 };
 
 class Stream : public Print {
