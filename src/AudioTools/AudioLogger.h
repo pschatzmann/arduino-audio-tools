@@ -89,8 +89,10 @@ class AudioLogger {
         }
 
         void printCharHex(char c){
-            log_print_ptr->print(c, HEX);
-            log_print_ptr->print(" ");            
+            char tmp[5];
+            unsigned char val = c;
+            snprintf(tmp, 5, "%02X ", val);
+            log_print_ptr->print(tmp);
         }
 
     protected:

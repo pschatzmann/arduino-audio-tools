@@ -164,22 +164,22 @@ class HttpHeader {
         // reads a single header line 
         void readLine(Client &in, char* str, int len){
             reader.readlnInternal(in, (uint8_t*) str, len, false);
-            LOGI("HttpHeader::readLine -> %s",str);
+            LOGD("HttpHeader::readLine -> %s",str);
         }
 
         // writes a lingle header line
         void writeHeaderLine(Client &out,HttpHeaderLine *header ){
             if (header==nullptr){
-                LOGI("HttpHeader::writeHeaderLine: the value must not be null");
+                LOGD("HttpHeader::writeHeaderLine: the value must not be null");
                 return;
             }
             LOGD("HttpHeader::writeHeaderLine: %s",header->key.c_str());
             if (!header->active){
-                LOGI("HttpHeader::writeHeaderLine - not active");
+                LOGD("HttpHeader::writeHeaderLine - not active");
                 return;
             }
             if (header->value.c_str() == nullptr){
-                LOGI("HttpHeader::writeHeaderLine - ignored because value is null");
+                LOGD("HttpHeader::writeHeaderLine - ignored because value is null");
                 return;
             }
 
@@ -227,7 +227,7 @@ class HttpHeader {
 
         /// reads the full header from the request (stream)
         void read(Client &in) {
-            LOGI("HttpHeader::read");
+            LOGD("HttpHeader::read");
             // remove all existing value
             clear();
 
@@ -327,7 +327,7 @@ class HttpHeader {
                         }
                     }
                 }
-                if (create_new_lines){
+                if (create_new_lines || Str(key).equalsIgnoreCase(CONTENT_LENGTH) || Str(key).equalsIgnoreCase(CONTENT_TYPE)){
                     HttpHeaderLine *newLine = new HttpHeaderLine();
                     LOGD("HttpHeader::headerLine - new line created for %s", key);
                     newLine->active = true;
@@ -372,7 +372,7 @@ class HttpRequestHeader : public HttpHeader {
             this->method_id = id;
             this->url_path = urlPath;
             
-            LOGI("HttpRequestHeader::setValues - path: %s",this->url_path.c_str());
+            LOGD("HttpRequestHeader::setValues - path: %s",this->url_path.c_str());
             if (protocol!=nullptr){
                 this->protocol_str = protocol;
             }
@@ -381,7 +381,7 @@ class HttpRequestHeader : public HttpHeader {
 
         // action path protocol
         void write1stLine(Client &out){
-            LOGI("HttpRequestHeader::write1stLine");
+            LOGD("HttpRequestHeader::write1stLine");
             char msg[MAX_HTTP_REQ_LEN];
             Str msg_str(msg, MAX_HTTP_REQ_LEN);
 
@@ -402,7 +402,7 @@ class HttpRequestHeader : public HttpHeader {
         // parses the requestline 
         // Request-Line = Method SP Request-URI SP HTTP-Version CRLF
         void parse1stLine(const char *line){
-            LOGI("HttpRequestHeader::parse1stLine %s", line);
+            LOGD("HttpRequestHeader::parse1stLine %s", line);
             Str line_str(line);
             int space1 = line_str.indexOf(" ");
             int space2 = line_str.indexOf(" ", space1+1);
@@ -412,9 +412,9 @@ class HttpRequestHeader : public HttpHeader {
             this->url_path.substring(line_str,space1+1,space2);
             this->url_path.trim();
   
-            LOGI("->method %s", methods[this->method_id]);
-            LOGI("->protocol %s", protocol_str.c_str());
-            LOGI("->url_path %s", url_path.c_str());
+            LOGD("->method %s", methods[this->method_id]);
+            LOGD("->protocol %s", protocol_str.c_str());
+            LOGD("->url_path %s", url_path.c_str());
         }
 
 };

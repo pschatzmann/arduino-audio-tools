@@ -87,7 +87,7 @@ class URLLoader {
 
 protected:
   Vector<const char*> urls{10};
-  NBuffer<uint8_t> buffer{DEFAULT_BUFFER_SIZE, 10};
+  NBuffer<uint8_t> buffer{DEFAULT_BUFFER_SIZE, 50};
   bool active = false;
   int buffer_size = DEFAULT_BUFFER_SIZE;
   int buffer_count = 10;
@@ -121,16 +121,14 @@ protected:
 
       stream.clear();
       stream.setWaitForData(true);
+      stream.setAutoCreateLines(false);
       if (!stream.begin(url)){
         TRACEE();
       }
       // free memory
-      delete(url);
+      delete[] url;
     }
 
-    // copy data to buffer
-    //LOGD("waitForData");
-    //stream.waitForData();
     int to_write = min(buffer.availableForWrite(),DEFAULT_BUFFER_SIZE);
     if (to_write>0){
       int total = 0;
@@ -143,7 +141,7 @@ protected:
           buffer.writeArray(tmp, read);      
           to_write = min(buffer.availableForWrite(),DEFAULT_BUFFER_SIZE);
         } else {
-          delay(50);
+          delay(5);
         }
       }
       LOGD("Refilled with %d now %d available to write", total, buffer.availableForWrite());
@@ -221,20 +219,20 @@ class HLSParser {
 
   int available() {
     TRACED();
-    if (!active) return 0;
+    int result = 0;
     custom_log_level.set();
     reloadSegments(this);
-    int result = url_loader.available();
+    if (active) result = url_loader.available();
     custom_log_level.reset();
     return result;
   }
 
   size_t readBytes(uint8_t* buffer, size_t len){
     TRACED();
-    if (!active) return 0;
+    size_t result = 0;
     custom_log_level.set();
     reloadSegments(this);
-    size_t result = url_loader.readBytes(buffer, len);
+    if (active) result = url_loader.readBytes(buffer, len);
     custom_log_level.reset();
     return result;
   }
@@ -268,6 +266,7 @@ class HLSParser {
     url_stream.end();
     url_loader.end();
     url_history.clear();
+    active = false;
   }
 
   /// Defines the number of urls that are preloaded in the URLLoader
@@ -297,9 +296,10 @@ class HLSParser {
   URLStream url_stream;
   URLLoader url_loader;
   bool active = false;
+  bool parse_segments_active = false;
   int media_sequence = 0;
   int tartget_duration_ms=5000;
-  int segment_count;
+  int segment_count = 0;
   uint64_t next_sement_load_time = 0;
   URLHistory url_history;
 
@@ -308,10 +308,7 @@ class HLSParser {
     TRACED();
     HLSParser *self = (HLSParser*)ref;
     // get new urls
-    if (!self->segments_url_str.isEmpty()
-    && self->tartget_duration_ms!=0){ 
-    //&& millis() > self->next_sement_load_time){
-      //self->next_sement_load_time = millis() + self->tartget_duration_ms;
+    if (!self->segments_url_str.isEmpty()){
       self->parseSegments();
     }
   }
@@ -320,9 +317,9 @@ class HLSParser {
   bool parseIndex() {
     TRACED();
     url_stream.setTimeout(1000);
-    url_stream.setConnectionClose(false);
+    //url_stream.setConnectionClose(true);
+
     // we only update the content length
-    url_stream.httpRequest().reply().put(CONTENT_LENGTH, 0);
     url_stream.setAutoCreateLines(false);
     bool rc = url_stream.begin(index_url_str);
     url_active = true;
@@ -333,29 +330,47 @@ class HLSParser {
   // parse the segment url provided by the index
   bool parseSegments() {
     TRACED();
-    if (millis()<next_sement_load_time) return false;
+    if (parse_segments_active){
+      return false;
+    }
+
+    // make sure that we load at relevant schedule 
+    if (millis() < next_sement_load_time && url_loader.urlCount()>0) {
+      return false;
+    }
+    parse_segments_active = true;
+
+    LOGI("Available urls: %d", url_loader.urlCount());
+
     if (url_stream) url_stream.clear();
     LOGI("parsing %s", segments_url_str.c_str());
 
     if (segments_url_str.isEmpty()){
       TRACEE();
+      parse_segments_active = false;
       return false;
     }
 
     if (!url_stream.begin(segments_url_str.c_str())){
       TRACEE();
+      parse_segments_active = false;
       return false;
     }
 
     segment_count = 0;
     if (!parse(false)){
       TRACEE();
+      parse_segments_active = false;
       return false;
     }
 
     next_sement_load_time = millis() + (segment_count * tartget_duration_ms);
-    
+    assert(segment_count>0);
+
+    // we request a minimum of collected urls to play before we start
     active = true;
+    parse_segments_active = false;
+    
     return true;
   }
 
@@ -418,8 +433,7 @@ class HLSParser {
       if (pos>=0){
           const char* duration_str = str.c_str()+pos+22;
           tartget_duration_ms = 1000 * atoi(duration_str);
-          LOGI("tartget_duration_ms: %s %d",duration_str, tartget_duration_ms);
-          // use updated value
+          LOGI("tartget_duration_ms: %d (%s)",tartget_duration_ms, duration_str);
       }
     } else {
       segment_count++;

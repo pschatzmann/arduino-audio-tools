@@ -1,9 +1,16 @@
 #pragma once
-#include "AudioLibs/Desktop/NoArduino.h"
+#include "AudioConfig.h"
 #include <iostream>
 #include <fstream>
 #include <sys/stat.h>
 #include <unistd.h>
+
+#ifdef IS_NOARDUINO
+#  define NOARD_OVR override
+#else
+#  define NOARD_OVR 
+#endif
+
 
 namespace audio_tools {
 
@@ -57,17 +64,17 @@ class File : public Stream {
         stream.close();
     }
     
-    virtual int print(const char* str)override{
+    virtual int print(const char* str) NOARD_OVR {
         stream << str;
         return strlen(str);
     }
     
-    virtual int println(const char* str="")override{
+    virtual int println(const char* str="") NOARD_OVR {
         stream << str << "\n";
         return strlen(str)+1;
     }
     
-    virtual int print(int number)override{
+    virtual int print(int number) NOARD_OVR {
         char buffer[80];
         int len = sprintf(buffer, "%d", number);
         print(buffer);
@@ -100,7 +107,8 @@ class File : public Stream {
     }
     
     virtual int available() override{
-        return size()-position();
+        int result = size()-position();
+        return result;
     };
     
     virtual int read() override{
@@ -120,7 +128,7 @@ class File : public Stream {
         if (is_read){
             switch(mode){
                 case SeekSet:
-                    stream.seekg(pos, ios_base::beg);
+                    stream.seekg(pos, std::ios_base::beg);
                     break;
                 case SeekCur:
                     stream.seekg(pos, std::ios_base::cur);
@@ -132,7 +140,7 @@ class File : public Stream {
         } else {
             switch(mode){
                 case SeekSet:
-                    stream.seekp(pos, ios_base::beg);
+                    stream.seekp(pos, std::ios_base::beg);
                     break;
                 case SeekCur:
                     stream.seekp(pos, std::ios_base::cur);

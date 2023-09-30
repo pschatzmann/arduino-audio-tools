@@ -59,7 +59,7 @@ class HttpRequest {
         }
 
         virtual bool connected(){
-            return client_ptr != nullptr ? (bool)*client_ptr && client_ptr->connected() : false;
+            return client_ptr == nullptr ? false : client_ptr->connected();
         } 
 
         virtual int available() {
@@ -312,13 +312,13 @@ class HttpRequest {
         }
 
     protected:
-        Client *client_ptr;
+        Client *client_ptr = nullptr;
         Url url;
         HttpRequestHeader request_header;
         HttpReplyHeader reply_header;
         HttpChunkReader chunk_reader = HttpChunkReader(reply_header);
         const char *agent = nullptr;
-        const char *host_name=nullptr;
+        const char *host_name = nullptr;
         const char *connection = CON_KEEP_ALIVE;
         const char *accept = ACCEPT_ALL;
         const char *accept_encoding = IDENTITY;

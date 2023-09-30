@@ -1592,58 +1592,77 @@ class CallbackStream : public AudioStream {
  * @copyright GPLv3
  */
 class CatStream : public AudioStream {
-  CatStream(){
-    _timeout = 0;
-  }
-  void add(Stream *stream){
-    input_streams.push_back(stream);
-  }
-  void add(Stream &stream){
-    input_streams.push_back(&stream);    
-  }
-
-  bool begin() override {
-    is_active = true;
-    return AudioStream::begin();
-  }
-
-  void end() override {
-    is_active = false;
-    return AudioStream::end();
-  }
-
-  int available() override {
-    if (!is_active) return 0;
-    if (!moveToNextStreamOnEnd()){
-      return 0;
+  public:
+    CatStream(){
+      _timeout = 0;
     }
-    return availableWithTimout();
-  }
-
-  size_t readBytes(uint8_t* data, size_t len) override {
-    if (!is_active) return 0;
-    if (!moveToNextStreamOnEnd()){
-      return 0;
+    void add(Stream *stream){
+      input_streams.push_back(stream);
     }
-    return p_current_stream->readBytes(data, len);
-  }
+    void add(Stream &stream){
+      input_streams.push_back(&stream);    
+    }
 
-  /// Returns true if active and we still have data
-  operator bool(){
-    return is_active && available()>0;
-  }
+    bool begin() override {
+      is_active = true;
+      return AudioStream::begin();
+    }
 
+    void end() override {
+      is_active = false;
+      return AudioStream::end();
+    }
+
+    int available() override {
+      if (!is_active) return 0;
+      if (!moveToNextStreamOnEnd()){
+        return 0;
+      }
+      return availableWithTimout();
+    }
+
+    size_t readBytes(uint8_t* data, size_t len) override {
+      if (!is_active) return 0;
+      if (!moveToNextStreamOnEnd()){
+        return 0;
+      }
+      return p_current_stream->readBytes(data, len);
+    }
+
+    /// Returns true if active and we still have data
+    operator bool(){
+      return is_active && available()>0;
+    }
+
+    void setOnBeginCallback(void (*callback)(Stream* stream) ){    
+      begin_callback = callback;
+    }
+    void setOnEndCallback(void (*callback)(Stream* stream) ){
+      end_callback = callback;    
+    }
 
 protected:
   Vector<Stream*> input_streams;
   Stream *p_current_stream = nullptr;
   bool is_active = false;
+  void (*begin_callback)(Stream* stream) = nullptr;
+  void (*end_callback)(Stream* stream) = nullptr;
 
   /// moves to the next stream if necessary: returns true if we still have a valid stream
   bool moveToNextStreamOnEnd(){
-    if ((p_current_stream==nullptr || availableWithTimout()) && !input_streams.empty()){
-      p_current_stream = input_streams[0];
-      input_streams.pop_front();
+    // keep on running
+    if (p_current_stream!=nullptr && p_current_stream->available()>0) return true;
+    // at end?
+    if ((p_current_stream==nullptr || availableWithTimout()==0)){
+      if (end_callback && p_current_stream) end_callback(p_current_stream);
+      if (!input_streams.empty()) {
+        LOGI("using next stream");
+        p_current_stream = input_streams[0];
+        input_streams.pop_front();
+        if (begin_callback && p_current_stream) begin_callback(p_current_stream);
+      } else {
+        p_current_stream = nullptr;
+      }
     }
     // returns true if we have a valid stream
     return p_current_stream!=nullptr;

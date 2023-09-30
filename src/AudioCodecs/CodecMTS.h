@@ -70,12 +70,12 @@ class MTSDecoder : public AudioDecoder {
     }
 
     // log memory allocations ?
-    //if (is_alloc_active){
+    if (is_alloc_active){
       ctx.malloc = log_malloc;
       ctx.realloc = log_realloc;
       ctx.calloc = log_calloc;
       ctx.free = log_free;
-    //}
+    }
 
     // default supported stream types
     if (stream_types.empty()){
@@ -91,7 +91,6 @@ class MTSDecoder : public AudioDecoder {
       TRACEE();
       is_active = false;
     }
-
   }
 
   void end() override {
@@ -166,11 +165,23 @@ class MTSDecoder : public AudioDecoder {
     is_write_active = flag;
   }
 
+  /// Determines if we are at the beginning of a new file
+  bool is_new_file(uint8_t* data){
+    bool payloadUnitStartIndicator = (data[1] & 0x40) >> 6;
+    bool result = data[0]==0x47 && payloadUnitStartIndicator;
+    return result;
+  }
+
   void demux(int limit){
     TRACED();
     TSDCode res = TSD_OK;
     int count = 0;
     while (res == TSD_OK && buffer.available() > limit) {
+      // Unfortunatly we need to reset the demux after each file
+      if (is_new_file(buffer.data())){
+        LOGD("parsing new file");
+        begin();
+      }
       size_t len = tsd_demux(&ctx, (void *)buffer.data(), buffer.available(), &res);
       // remove processed bytes
       buffer.clearArray(len);
