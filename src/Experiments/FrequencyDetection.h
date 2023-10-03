@@ -112,7 +112,6 @@ class FrequncyAutoCorrelationStream : public AudioStream {
         if (pd_state == 2 && (sum-sum_old) <=0) {
           period = i;
           pd_state = 3;
-          break;
         }
         if (pd_state == 1 && (sum > thresh) && (sum-sum_old) > 0) {
           pd_state = 2;
