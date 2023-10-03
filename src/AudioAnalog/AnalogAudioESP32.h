@@ -136,7 +136,9 @@ class AnalogDriverESP32  : public AnalogDriverBase {
     /// stops the I2S and unistalls the driver
     void end() override {
         LOGI(__func__);
-        i2s_zero_dma_buffer(port_no);
+        if (active) {
+          i2s_zero_dma_buffer(port_no);
+        }
 
         // close ADC
         if (adc_config.rx_tx_mode == RX_MODE){
