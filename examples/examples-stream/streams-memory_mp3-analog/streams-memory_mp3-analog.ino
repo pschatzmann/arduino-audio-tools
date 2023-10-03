@@ -31,8 +31,6 @@ void setup(){
   // begin processing
   auto cfg = out.defaultConfig();
   out.begin(cfg);
-
-  out.begin();
 }
 
 void loop(){
