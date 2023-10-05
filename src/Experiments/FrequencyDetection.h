@@ -126,6 +126,13 @@ class FrequncyAutoCorrelationStream : public AudioStream {
     }
 };
 
+/**
+ * @brief Determine Frequency using upward 0 crossings. 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ * @ingroup io
+*/
+
 class FrequncyZeroCrossingStream : public AudioStream {
   public:
     FrequncyZeroCrossingStream() = default;
