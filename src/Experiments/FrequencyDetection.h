@@ -126,4 +126,112 @@ class FrequncyAutoCorrelationStream : public AudioStream {
     }
 };
 
+class FrequncyZeroCrossingStream : public AudioStream {
+  public:
+    FrequncyZeroCrossingStream() = default;
+
+    FrequncyZeroCrossingStream(Print& out) {
+      p_out = &out;
+    };
+
+    FrequncyZeroCrossingStream(Stream& in) {
+      p_out = &in;
+      p_in = &in;
+    };
+
+    bool begin(AudioInfo info){
+      setAudioInfo(info);
+      return AudioStream::begin();
+    }
+
+    int available()override{
+      if (p_in) return p_in->available();
+      return 0;
+    }
+
+    int availableForWrite()override{
+      if (p_out) return p_out->availableForWrite();
+      return DEFAULT_BUFFER_SIZE;
+    }
+
+    size_t readBytes(uint8_t *data, size_t size) override {
+      size_t result = p_in->readBytes(data, size);
+      switch(info.bits_per_sample){
+        case 16:
+          detect<int16_t>((int16_t*)data, size/sizeof(int16_t));
+          break;
+        case 24:
+          detect<int24_t>((int24_t*)data, size/sizeof(int24_t));
+          break;
+        case 32:
+          detect<int32_t>((int32_t*)data, size/sizeof(int32_t));
+          break;
+      }
+      return result;
+    }
+
+    virtual size_t write(const uint8_t *buffer, size_t size) override { 
+      switch(info.bits_per_sample){
+        case 16:
+          detect<int16_t>((int16_t*)buffer, size/sizeof(int16_t));
+          break;
+        case 24:
+          detect<int24_t>((int24_t*)buffer, size/sizeof(int24_t));
+          break;
+        case 32:
+          detect<int32_t>((int32_t*)buffer, size/sizeof(int32_t));
+          break;
+      }
+
+      size_t result = size;
+      if (p_out!=nullptr) result = p_out->write(buffer, size);
+      return result;
+    }
+
+    /// provides the determined frequncy
+    float frequency(int channel) {
+      if(channel>=info.channels) {
+        LOGE("Invalid channel: %d", channel);
+        return 0;
+      }
+      return freq[channel];
+    }
+
+    void setFrequencyCallback(void (*callback)(int channel, float freq)){
+      notify = callback;
+    }
+
+  protected:
+    Vector<float> freq;
+    Print *p_out=nullptr;
+    Stream *p_in = nullptr;
+    int count = 0;
+    bool active = false;
+    void (*notify)(int channel, float freq);
+
+    template <class T>
+    void detect(T* samples, size_t len) {
+      freq.resize(info.channels);
+      for (int ch=0; ch<info.channels; ch++){
+        detectChannel(ch, samples, len);
+      }
+    }
+
+    template <class T>
+    void detectChannel(int channel, T* samples, size_t len) {
+      for(int i = channel; i < (len-info.channels); i+=info.channels) {
+        // start counter at first crossing
+        if (active) count++;
+        // update frequncy at each upward zero crossing
+        if (samples[i]<=0 && samples[i+info.channels]>0) {
+          freq[channel] = (1.0f * info.sample_rate) / count;
+          if (notify) notify(channel, freq[channel]);
+          count = 0;
+          active = true;
+        }
+      }      
+    }
+};
+
+
 }
