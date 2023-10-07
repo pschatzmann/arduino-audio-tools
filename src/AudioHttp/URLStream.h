@@ -96,7 +96,7 @@ class URLStream : public AbstractURLStream {
             url.setUrl(url_str.c_str());
             int result = -1;
 
-// close it - if we have an active connection
+            // close it - if we have an active connection
             if (active) end();
 
             // optional: login if necessary
@@ -128,8 +128,8 @@ class URLStream : public AbstractURLStream {
         }
 
         virtual void end() override {
+            if (active) request.stop();
             active = false;
-            request.stop();
             clear();
         }
 
@@ -264,6 +264,10 @@ class URLStream : public AbstractURLStream {
         /// Defines the class specific custom log level
         void setLogLevel(AudioLogger::LogLevel level){
             custom_log_level.set(level);
+        }
+
+        const char* urlStr() {
+            return url_str.c_str();
         }
 
     protected:
