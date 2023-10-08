@@ -17,9 +17,11 @@ BluetoothA2DPSink a2dp_sink;
 VS1053Stream out; //  output
 VS1053Config cfg;
 
-// Write data from A2DP to buffer
+// Write data to VS1053
 void read_data_stream(const uint8_t *data, uint32_t bytes) {
-  out.write(data, bytes);
+  int samples = bytes / sizeof(int16_t);
+  // split up writes to max 512 samples
+  writeSamples<int16_t>(out, (int16_t*) data, samples, 512);
 }
 
 

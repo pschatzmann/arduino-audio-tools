@@ -10,6 +10,11 @@
 // fix compile error for ESP32 C3
 #undef HZ
 
+// MIN
+#undef MIN
+#define MIN(A, B) ((A) < (B) ? (A) : (B))
+
+
 namespace audio_tools {
 
 /**
@@ -317,13 +322,14 @@ size_t  readSamples(Stream* p_stream, T* data, int samples){
 
 /// guaranteed to return the requested data
 template<typename T>
-size_t  writeSamples(Print* p_out, T* data, int samples){
+size_t  writeSamples(Print* p_out, T* data, int samples, int maxSamples=512){
   uint8_t *p_result = (uint8_t*) data;
   int open = samples*sizeof(T);
   int total = 0;
   // copy missing data
   while (open>0){
-    int written = p_out->write(p_result+total, open);
+    int to_write = MIN(open, (int) maxSamples*sizeof(T));
+    int written = p_out->write(p_result+total, to_write );
     open -= written;
     total += written;
   }
