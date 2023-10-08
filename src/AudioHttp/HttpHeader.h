@@ -7,8 +7,6 @@
 #include "AudioHttp/Url.h"
 #include "AudioHttp/HttpTypes.h" 
 
-#define MAX_HTTP_REQ_LEN 300
-
 #if defined(ARDUINO) || defined(IS_DESKTOP)
 #include "Client.h"
 #endif

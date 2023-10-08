@@ -127,6 +127,11 @@
 #define MAX_SINGLE_CHARS 8
 #endif
 
+// max size of 1st http request line
+#ifndef MAX_HTTP_REQ_LEN
+#define MAX_HTTP_REQ_LEN 300
+#endif
+
 /**
  * ------------------------------------------------------------------------- 
  * @brief PWM
