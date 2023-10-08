@@ -220,6 +220,17 @@ class TimerAlarmRepeatingDriverESP32 : public TimerAlarmRepeatingDriverBase  {
       int priority = configMAX_PRIORITIES -1;
       uint32_t timeUs;
 
+      /// call timerAttachInterrupt
+      void attach(hw_timer_t* timer, void (*cb)()){
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 1 , 0)
+        timerAttachInterrupt(timer, cb);
+#else
+        timerAttachInterrupt(timer, cb, false);
+#endif
+      }
+
+
+
       /// direct timer callback 
       void setupDirectTimerCallback(repeating_timer_callback_t callback_f){
         TRACED();
@@ -228,10 +239,10 @@ class TimerAlarmRepeatingDriverESP32 : public TimerAlarmRepeatingDriverBase  {
           simpleUserCallback = new UserCallback[4];
         }
         simpleUserCallback[timer_id].setup(callback_f, object, true);
-        if (timer_id==0) timerAttachInterrupt(adc_timer, userCallback0); 
-        else if (timer_id==1) timerAttachInterrupt(adc_timer, userCallback1); 
-        else if (timer_id==2) timerAttachInterrupt(adc_timer, userCallback2); 
-        else if (timer_id==3) timerAttachInterrupt(adc_timer, userCallback3); 
+        if (timer_id==0) attach(adc_timer, userCallback0); 
+        else if (timer_id==1) attach(adc_timer, userCallback1); 
+        else if (timer_id==2) attach(adc_timer, userCallback2); 
+        else if (timer_id==3) attach(adc_timer, userCallback3); 
 
 #if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 1 , 0)
         timerStart(adc_timer);
@@ -250,10 +261,10 @@ class TimerAlarmRepeatingDriverESP32 : public TimerAlarmRepeatingDriverBase  {
           timerCallbackArray = new TimerCallback[4];
         }
 
-        if (timer_id==0) timerAttachInterrupt(adc_timer, timerCallback0); 
-        else if (timer_id==1) timerAttachInterrupt(adc_timer, timerCallback1); 
-        else if (timer_id==2) timerAttachInterrupt(adc_timer, timerCallback2); 
-        else if (timer_id==3) timerAttachInterrupt(adc_timer, timerCallback3); 
+        if (timer_id==0) attach(adc_timer, timerCallback0); 
+        else if (timer_id==1) attach(adc_timer, timerCallback1); 
+        else if (timer_id==2) attach(adc_timer, timerCallback2); 
+        else if (timer_id==3) attach(adc_timer, timerCallback3); 
 
         // we record the callback method and user data
         user_callback.setup(callback_f, object, false);
@@ -271,7 +282,6 @@ class TimerAlarmRepeatingDriverESP32 : public TimerAlarmRepeatingDriverBase  {
         timerAlarmEnable(adc_timer);
 #endif
       }
-
 
       /// No timer - just a simple task loop
       void setupSimpleThreadLoop(repeating_timer_callback_t callback_f){
