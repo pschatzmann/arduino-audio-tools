@@ -157,9 +157,14 @@ class TimerAlarmRepeatingDriverESP32 : public TimerAlarmRepeatingDriverBase  {
                     timeUs = AudioTime::toTimeUs(time);
                     break;
             }
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 1 , 0)
+            uint32_t freq = AudioTime::AudioTime::toRateUs(timeUs);
+            LOGI("Timer freq: %u hz", freq);
+            adc_timer = timerBegin(freq);  // divider=80 -> 1000000 calls per second
+#else
             LOGI("Timer every: %u us", timeUs);
             adc_timer = timerBegin(timer_id, 80, true);  // divider=80 -> 1000000 calls per second
-
+#endif
             switch (function) {
                 case DirectTimerCallback:
                   setupDirectTimerCallback(callback_f);
@@ -223,13 +228,17 @@ class TimerAlarmRepeatingDriverESP32 : public TimerAlarmRepeatingDriverBase  {
           simpleUserCallback = new UserCallback[4];
         }
         simpleUserCallback[timer_id].setup(callback_f, object, true);
-        if (timer_id==0) timerAttachInterrupt(adc_timer, userCallback0, false); 
-        else if (timer_id==1) timerAttachInterrupt(adc_timer, userCallback1, false); 
-        else if (timer_id==2) timerAttachInterrupt(adc_timer, userCallback2, false); 
-        else if (timer_id==3) timerAttachInterrupt(adc_timer, userCallback3, false); 
+        if (timer_id==0) timerAttachInterrupt(adc_timer, userCallback0); 
+        else if (timer_id==1) timerAttachInterrupt(adc_timer, userCallback1); 
+        else if (timer_id==2) timerAttachInterrupt(adc_timer, userCallback2); 
+        else if (timer_id==3) timerAttachInterrupt(adc_timer, userCallback3); 
 
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 1 , 0)
+        timerStart(adc_timer);
+#else
         timerAlarmWrite(adc_timer, timeUs, true);
         timerAlarmEnable(adc_timer);
+#endif
 
       }
 
@@ -241,21 +250,26 @@ class TimerAlarmRepeatingDriverESP32 : public TimerAlarmRepeatingDriverBase  {
           timerCallbackArray = new TimerCallback[4];
         }
 
-        if (timer_id==0) timerAttachInterrupt(adc_timer, timerCallback0, false); 
-        else if (timer_id==1) timerAttachInterrupt(adc_timer, timerCallback1, false); 
-        else if (timer_id==2) timerAttachInterrupt(adc_timer, timerCallback2, false); 
-        else if (timer_id==3) timerAttachInterrupt(adc_timer, timerCallback3, false); 
+        if (timer_id==0) timerAttachInterrupt(adc_timer, timerCallback0); 
+        else if (timer_id==1) timerAttachInterrupt(adc_timer, timerCallback1); 
+        else if (timer_id==2) timerAttachInterrupt(adc_timer, timerCallback2); 
+        else if (timer_id==3) timerAttachInterrupt(adc_timer, timerCallback3); 
 
         // we record the callback method and user data
         user_callback.setup(callback_f, object, false);
         timerCallbackArray[timer_id].setup(handler_task);
+#if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 1 , 0)
         timerAlarmWrite(adc_timer, timeUs, true);
-
+#endif
         // setup the timercallback
         xTaskCreatePinnedToCore(complexTaskHandler, "TimerAlarmRepeatingTask", configMINIMAL_STACK_SIZE+10000, &user_callback, priority, &handler_task, core);
         LOGI("Task created on core %d", core);
 
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 1 , 0)
+        timerStart(adc_timer);
+#else
         timerAlarmEnable(adc_timer);
+#endif
       }
 
 

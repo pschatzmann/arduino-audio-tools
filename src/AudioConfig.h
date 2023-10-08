@@ -185,6 +185,11 @@
 // optional libraries
 //#define USE_A2DP
 //#define USE_ESP8266_AUDIO
+#if ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(5, 0 , 0)
+#  define USE_INT24_FROM_INT
+#else
+#  define USE_ANALOG
+#endif
 
 #define USE_PWM
 #define USE_URL_ARDUINO
@@ -195,7 +200,6 @@
 #define USE_TYPETRAITS
 #define USE_EFFECTS_SUITE
 #define USE_TIMER
-#define USE_ANALOG
 #define USE_STREAM_WRITE_OVERRIDE
 #define USE_STREAM_READ_OVERRIDE
 #define USE_TOUCH_READ
