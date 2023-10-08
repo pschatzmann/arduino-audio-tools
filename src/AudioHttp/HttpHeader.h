@@ -181,15 +181,16 @@ class HttpHeader {
                 return;
             }
 
-            char msg[MAX_HTTP_REQ_LEN];
-            Str msg_str(msg,MAX_HTTP_REQ_LEN);
+            char* msg = tempBuffer();
+            Str msg_str(msg, HTTP_MAX_LEN);
             msg_str = header->key.c_str();
             msg_str += ": ";
             msg_str += header->value.c_str();
             msg_str += CRLF;
-            out.print(msg);
+            out.print(msg_str.c_str());
 
             // remove crlf from log
+
             int len = strlen(msg);
             msg[len-2] = 0;
             LOGI(" -> %s ", msg);
@@ -229,7 +230,7 @@ class HttpHeader {
             // remove all existing value
             clear();
 
-            char line[MAX_HTTP_HEADER_LINE_LENGTH];   
+            char* line = tempBuffer();   
             if (in.connected()){
                 if (in.available()==0) {
                     int count = 0;
@@ -243,10 +244,10 @@ class HttpHeader {
                     LOGI("Data availble");
                 }
 
-                readLine(in, line, MAX_HTTP_HEADER_LINE_LENGTH);
+                readLine(in, line, HTTP_MAX_LEN);
                 parse1stLine(line);
                 while (in.available()){
-                    readLine(in, line, MAX_HTTP_HEADER_LINE_LENGTH);
+                    readLine(in, line, HTTP_MAX_LEN);
                     if (isValidStatus() || isRedirectStatus()){
                         Str lineStr(line);
                         lineStr.ltrim();
@@ -292,7 +293,13 @@ class HttpHeader {
             return status_code >= 300 && status_code < 400;
         }
 
+        /// release static temp buffer
+        static void end(){
+            temp_buffer.resize(0);
+        }
+
     protected:
+        static Vector<char> temp_buffer;
         int status_code = UNDEFINED;
         bool is_written = false;
         bool is_chunked = false;
@@ -306,6 +313,12 @@ class HttpHeader {
         Vector<HttpHeaderLine*> lines;
         HttpLineReader reader;
         const char* CRLF = "\r\n";
+
+        char* tempBuffer(){
+            temp_buffer.resize(HTTP_MAX_LEN);
+            temp_buffer.clear();
+            return temp_buffer.data();
+        }
 
         // the headers need to delimited with CR LF
         void crlf(Client &out) {
@@ -358,6 +371,10 @@ class HttpHeader {
      
 };
 
+// declare static member variable
+Vector<char> HttpHeader::temp_buffer;
+
+
 /**
  * @brief Reading and writing of Http Requests
  * @author Phil Schatzmann
@@ -380,8 +397,8 @@ class HttpRequestHeader : public HttpHeader {
         // action path protocol
         void write1stLine(Client &out){
             LOGD("HttpRequestHeader::write1stLine");
-            char msg[MAX_HTTP_REQ_LEN];
-            Str msg_str(msg, MAX_HTTP_REQ_LEN);
+            char* msg = tempBuffer();
+            Str msg_str(msg, HTTP_MAX_LEN);
 
             const char* method_str = methods[this->method_id];
             msg_str = method_str;
@@ -437,19 +454,19 @@ class HttpReplyHeader : public HttpHeader  {
         // reads the final chunked reply headers 
         void readExt(Client &in) {
             LOGI("HttpReplyHeader::readExt");
-            char line[MAX_HTTP_HEADER_LINE_LENGTH];   
-            readLine(in, line, MAX_HTTP_HEADER_LINE_LENGTH);
+            char* line = tempBuffer();   
+            readLine(in, line, HTTP_MAX_LEN);
             while(strlen(line)!=0){
                 put(line);                
-                readLine(in, line, MAX_HTTP_HEADER_LINE_LENGTH);
+                readLine(in, line, HTTP_MAX_LEN);
             }
         }
 
         // HTTP-Version SP Status-Code SP Reason-Phrase CRLF
         void write1stLine(Client &out){
             LOGI("HttpReplyHeader::write1stLine");
-            char msg[MAX_HTTP_REQ_LEN];
-            Str msg_str(msg, MAX_HTTP_REQ_LEN);
+            char* msg = tempBuffer();
+            Str msg_str(msg, HTTP_MAX_LEN);
             msg_str = this->protocol_str.c_str();
             msg_str += " ";
             msg_str += this->status_code;

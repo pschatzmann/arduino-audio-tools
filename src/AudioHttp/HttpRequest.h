@@ -34,12 +34,13 @@ class HttpRequest {
     public:
         friend class URLStream;
 
-        HttpRequest() {
-             LOGD("HttpRequest");
+        HttpRequest() = default;
+
+        ~HttpRequest() {
+            HttpHeader::end();
         }
 
         HttpRequest(Client &client){
-            LOGD("HttpRequest");
             setClient(client);
         }
 
