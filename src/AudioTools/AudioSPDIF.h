@@ -153,6 +153,10 @@ class SPDIFOutput : public AudioStream {
 
     // Setup I2S
     int sample_rate = cfg.sample_rate * BMC_BITS_FACTOR;
+    if (sample_rate==0){
+      TRACEE();
+      return false;
+    }
     int bclk = sample_rate * I2S_BITS_PER_SAMPLE * I2S_CHANNELS;
     int mclk = (I2S_BUG_MAGIC / bclk) * bclk;  // use mclk for avoiding I2S bug
 
@@ -168,8 +172,7 @@ class SPDIFOutput : public AudioStream {
     i2s_cfg.use_apll = true;
     i2s_cfg.fixed_mclk = mclk;
 #endif
-    i2s.begin(i2s_cfg);
-    i2sOn = true;
+    i2sOn = i2s.begin(i2s_cfg);
     return i2sOn;
   }
 
