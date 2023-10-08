@@ -48,7 +48,11 @@ class PWMDriverESP32 : public DriverPWMBase {
             timer.end();
             is_timer_started = false;
             for (int j=0;j<audio_config.channels;j++){
+#if ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(5, 0 , 0)
+                ledcDetach(pins[j].gpio);
+#else
                 ledcDetachPin(pins[j].gpio);
+#endif
             }
         }
 
@@ -69,11 +73,15 @@ class PWMDriverESP32 : public DriverPWMBase {
 
             pins.resize(audio_config.channels);
             for (int j=0;j<audio_config.channels;j++){
+                pins[j].gpio = audio_config.pins()[j];
+#if ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(5, 0 , 0)
+                ledcAttach(pins[j].gpio, audio_config.pwm_frequency, audio_config.resolution);
+#else
                 int pwmChannel = j;
                 pins[j].pwm_channel = pwmChannel;
-                pins[j].gpio = audio_config.pins()[j];
                 ledcSetup(pins[j].pwm_channel, audio_config.pwm_frequency, audio_config.resolution);
                 ledcAttachPin(pins[j].gpio, pins[j].pwm_channel);
+#endif
                 LOGI("setupPWM: pin=%d, channel=%d, frequency=%d, resolution=%d", pins[j].gpio, pins[j].pwm_channel, audio_config.pwm_frequency, audio_config.resolution);
             }
             logPins();
