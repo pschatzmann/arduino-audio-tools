@@ -181,8 +181,8 @@ class HttpHeader {
                 return;
             }
 
-            char msg[200];
-            Str msg_str(msg,200);
+            char msg[MAX_HTTP_REQ_LEN];
+            Str msg_str(msg,MAX_HTTP_REQ_LEN);
             msg_str = header->key.c_str();
             msg_str += ": ";
             msg_str += header->value.c_str();
@@ -448,8 +448,8 @@ class HttpReplyHeader : public HttpHeader  {
         // HTTP-Version SP Status-Code SP Reason-Phrase CRLF
         void write1stLine(Client &out){
             LOGI("HttpReplyHeader::write1stLine");
-            char msg[200];
-            Str msg_str(msg,200);
+            char msg[MAX_HTTP_REQ_LEN];
+            Str msg_str(msg, MAX_HTTP_REQ_LEN);
             msg_str = this->protocol_str.c_str();
             msg_str += " ";
             msg_str += this->status_code;
