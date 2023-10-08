@@ -317,7 +317,8 @@ size_t  readSamples(Stream* p_stream, T* data, int samples){
     open -= read;
     total += read;
   }
-  return samples;
+  // convert bytes to samples
+  return samples / sizeof(T);
 }
 
 /// guaranteed to return the requested data
@@ -328,12 +329,13 @@ size_t  writeSamples(Print* p_out, T* data, int samples, int maxSamples=512){
   int total = 0;
   // copy missing data
   while (open>0){
-    int to_write = MIN(open, (int) maxSamples*sizeof(T));
+    int to_write = min(open, static_cast<int>(maxSamples*sizeof(T)));
     int written = p_out->write(p_result+total, to_write );
     open -= written;
     total += written;
   }
-  return samples;
+  // convert bytes to samples
+  return total / sizeof(T);
 }
 
 
