@@ -181,6 +181,10 @@ class File : public Stream {
         return file_path;
     }
 
+    operator bool() {
+        return stream.is_open();
+    }
+
   protected:
     std::fstream stream;
     bool is_read=true;
