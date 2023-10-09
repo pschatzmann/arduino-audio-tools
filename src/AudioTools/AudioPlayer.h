@@ -112,10 +112,10 @@ namespace audio_tools {
                 this->fade.setTarget(output);
                 this->volume_out.setTarget(fade);
                 delete this->p_out_decoding;
-                this->p_out_decoding = new EncodedAudioStream(&volume_out, p_decoder);
+                this->p_out_decoding = new EncodedAudioOutput(&volume_out, p_decoder);
             } else {
                 delete this->p_out_decoding;
-                this->p_out_decoding = new EncodedAudioStream(&output, p_decoder);
+                this->p_out_decoding = new EncodedAudioOutput(&output, p_decoder);
             }
             this->p_final_print = &output;
             this->p_final_stream = nullptr;
@@ -126,10 +126,10 @@ namespace audio_tools {
                 this->fade.setTarget(output);
                 this->volume_out.setTarget(fade);
                 delete this->p_out_decoding;
-                this->p_out_decoding = new EncodedAudioStream(&volume_out, p_decoder);
+                this->p_out_decoding = new EncodedAudioOutput(&volume_out, p_decoder);
             } else {
                 delete this->p_out_decoding;
-                this->p_out_decoding = new EncodedAudioStream(&output, p_decoder);
+                this->p_out_decoding = new EncodedAudioOutput(&output, p_decoder);
             }
             this->p_final_print = nullptr;
             this->p_final_stream = nullptr;
@@ -140,10 +140,10 @@ namespace audio_tools {
                 this->fade.setTarget(output);
                 this->volume_out.setTarget(fade);
                 delete this->p_out_decoding;
-                this->p_out_decoding = new EncodedAudioStream(&volume_out, p_decoder);
+                this->p_out_decoding = new EncodedAudioOutput(&volume_out, p_decoder);
             } else {
                 delete this->p_out_decoding;
-                this->p_out_decoding = new EncodedAudioStream(&output, p_decoder);
+                this->p_out_decoding = new EncodedAudioOutput(&output, p_decoder);
             }
             this->p_final_print = nullptr;
             this->p_final_stream = &output;
@@ -220,18 +220,13 @@ namespace audio_tools {
             this->p_source = &source;
         }
 
-        // /// (Re)defines the output
-        // void setOutput(Print& output){
-        //     this->volume_out.setTarget(output);
-        // }
-
         /// (Re)defines the decoder
         void setDecoder(AudioDecoder& decoder){
             if (this->p_out_decoding!=nullptr){
                 delete p_out_decoding;
             }
             this->p_decoder = &decoder;
-            this->p_out_decoding = new EncodedAudioStream(&volume_out, p_decoder);
+            this->p_out_decoding = new EncodedAudioOutput(&volume_out, p_decoder);
         }
 
         /// (Re)defines the notify
@@ -475,7 +470,7 @@ namespace audio_tools {
         VolumeStream volume_out; // Volume control
         FadeStream fade; // Phase in / Phase Out to avoid popping noise
         MetaDataID3 meta_out; // Metadata parser
-        EncodedAudioStream* p_out_decoding = nullptr; // Decoding stream
+        EncodedAudioOutput* p_out_decoding = nullptr; // Decoding stream
         CopyDecoder no_decoder{true};
         AudioDecoder* p_decoder = &no_decoder;
         Stream* p_input_stream = nullptr;
@@ -485,7 +480,7 @@ namespace audio_tools {
         StreamCopy copier; // copies sound into i2s
         AudioInfo info;
         bool meta_active = false;
-        uint32_t timeout = 0;
+        uint64_t timeout = 0;
         int stream_increment = 1; // +1 moves forward; -1 moves backward
         float current_volume = -1.0; // illegal value which will trigger an update
         int delay_if_full = 100;

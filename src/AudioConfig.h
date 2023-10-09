@@ -20,6 +20,8 @@
 #include <stdint.h>
 #include <assert.h>
 #include "AudioTools/AudioRuntime.h"
+#include "AudioBasic/Int24_3bytes_t.h"
+#include "AudioBasic/Int24_4bytes_t.h"
 
 // If you don't want to use all the settings from here you can define your own local config settings in AudioConfigLocal.h
 #if __has_include("AudioConfigLocal.h") 
@@ -658,7 +660,7 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #  define USE_STREAM_WRITE_OVERRIDE
 #  define USE_STREAM_READ_OVERRIDE
 #  define USE_STREAM_READCHAR_OVERRIDE
-#  define USE_3BYTE_INT24
+//#  define USE_3BYTE_INT24
 typedef WiFiClient WiFiClientSecure;
 #endif
 
@@ -695,10 +697,9 @@ typedef WiFiClient WiFiClientSecure;
 
 // select int24 implementation
 #ifdef USE_3BYTE_INT24
-#  include "AudioBasic/Int24x.h"
-using int24_t = audio_tools::int24x_t;
+using int24_t = audio_tools::int24_3bytes_t;
 #else
-#  include "AudioBasic/Int24.h"
+using int24_t = audio_tools::int24_4bytes_t;
 #endif
 
 #pragma GCC diagnostic ignored "-Wunused-variable"

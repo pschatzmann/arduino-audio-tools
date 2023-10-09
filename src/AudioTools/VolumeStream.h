@@ -282,7 +282,7 @@ class VolumeStream : public AudioStream {
                     applyVolume16((int16_t*)buffer, size/2);
                     break;
                 case 24:
-                    applyVolume24((int24_t*)buffer, size/3);//TODO is that size/3 right? sizeof(int24_t) is 4
+                    applyVolume24((int24_t*)buffer, size/sizeof(int24_t));
                     break;
                 case 32:
                     applyVolume32((int32_t*)buffer, size/4);

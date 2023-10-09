@@ -13,39 +13,39 @@ namespace audio_tools {
  * @copyright GPLv3
  *
  */
-class int24_t  {
+class int24_4bytes_t  {
  public:
-  int24_t() {
+  int24_4bytes_t() {
     value = 0;
   }
 
-  int24_t(void *ptr) {
+  int24_4bytes_t(void *ptr) {
     memcpy(&value, ptr, 4);
   }
 
-  int24_t(const int16_t in) {
+  int24_4bytes_t(const int16_t in) {
     set(in) ;
   }
 
-  int24_t(const int32_t in) {
+  int24_4bytes_t(const int32_t in) {
     set(in);
   }
 
-  int24_t(const int64_t in) {
+  int24_4bytes_t(const int64_t in) {
     set((int32_t)in) ;
   }
 
-  int24_t(const int24_t &in) {
+  int24_4bytes_t(const int24_4bytes_t &in) {
     value = in.value;
   }
 
-  int24_t(const float in) {
+  int24_4bytes_t(const float in) {
     set((int32_t)in);
   }
 
 #if defined(USE_INT24_FROM_INT) 
 
-  int24_t(const int in) {
+  int24_4bytes_t(const int in) {
     set(in);
   }
 
@@ -62,12 +62,12 @@ class int24_t  {
     }
   }
 
-  int24_t& operator=(const int24_t& other){
+  int24_4bytes_t& operator=(const int24_4bytes_t& other){
     value = other.value;
     return *this;
   }
 
-  int24_t& operator=(const float& other){
+  int24_4bytes_t& operator=(const float& other){
     set(((int32_t)other));
     return *this;
   }
@@ -84,14 +84,14 @@ class int24_t  {
     return toInt();
   }  
 
-  int24_t& operator +=(int32_t valueA){
+  int24_4bytes_t& operator +=(int32_t valueA){
     int32_t temp = toInt();
     temp += valueA;
     set(temp);
     return *this;
   }
 
-  int24_t& operator -=(int32_t valueA){
+  int24_4bytes_t& operator -=(int32_t valueA){
     int32_t temp = toInt();
     temp -= valueA;
     set(temp);

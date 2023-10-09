@@ -106,7 +106,6 @@ class PortAudioStream : public AudioStream {
                 }
 
                 // calculate frames
-                int bytes = info.bits_per_sample / 8;
                 int buffer_frames = paFramesPerBufferUnspecified; //buffer_size / bytes / info.channels;
 
                 // Open an audio I/O stream. 
@@ -114,7 +113,7 @@ class PortAudioStream : public AudioStream {
                 err = Pa_OpenDefaultStream( &stream,
                     info.is_input ? info.channels : 0,    // no input channels 
                     info.is_output ? info.channels : 0,   // no output 
-                    getFormat(info.bits_per_sample),      // format  
+                    getFormat(),      // format  
                     info.sample_rate,                     // sample rate
                     buffer_frames,                        // frames per buffer 
                     nullptr,   
@@ -156,8 +155,7 @@ class PortAudioStream : public AudioStream {
 
             size_t result = 0;
             if (stream!=nullptr){
-                int bytes = info.bits_per_sample / 8;
-                int frames = len / bytes / info.channels;
+                int frames = len / bytesPerSample() / info.channels;
                 err = Pa_WriteStream( stream, data, frames);
                 if( err == paNoError ) {
                     LOGD("Pa_WriteStream: %zu", len);
@@ -175,8 +173,7 @@ class PortAudioStream : public AudioStream {
             LOGD("readBytes: %zu", len);
             size_t result = 0;
             if (stream!=nullptr){
-                int bytes = info.bits_per_sample / 8;
-                int frames = len / bytes / info.channels;
+                int frames = len / bytesPerSample() / info.channels;
                 err = Pa_ReadStream( stream, data, frames );
                 if( err == paNoError ) {
                     result = len;
@@ -197,16 +194,21 @@ class PortAudioStream : public AudioStream {
         bool stream_started = false;
         int buffer_size = 10*1024;
 
+        int bytesPerSample(){
+            //return info.bits_per_sample / 8;
+            return info.bits_per_sample==24 ? sizeof(int24_t): info.bits_per_sample / 8;
+        }
 
-        PaSampleFormat getFormat(int bitLength){
-            switch(bitLength){
-                case 8:
+
+        PaSampleFormat getFormat(){
+            switch(bytesPerSample()){
+                case 1:
                     return paInt8;
-                case 16:
+                case 2:
                     return paInt16;
-                case 24:
+                case 3:
                     return paInt24;
-                case 32:
+                case 4:
                     return paInt32;
             }
             // make sure that we return a valid value 
