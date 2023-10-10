@@ -780,6 +780,7 @@ class Throttle {
     int durationMsEff = millis() - start_time;
     int durationToBe = (samples * 1000) / info.sample_rate;
     int waitMs = durationToBe - durationMsEff + info.correction_ms;
+    LOGI("wait: %d", waitMs);
     if (waitMs > 0) {
       delay(waitMs);
     }
