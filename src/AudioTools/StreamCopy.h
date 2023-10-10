@@ -95,6 +95,7 @@ class StreamCopyT {
         /// copies the data from the source to the destination - the result is in bytes
         inline size_t copy(){
             TRACED();
+            if (!active) return 0;
             // if not initialized we do nothing
             if (from==nullptr || to==nullptr) return 0;
 
@@ -177,6 +178,7 @@ class StreamCopyT {
 
         /// Copies pages * buffersize samples
         size_t copyN(size_t pages){
+            if (!active) return 0;
             size_t total=0;
             for (size_t j=0;j<pages;j++){
                 total+=copy();
@@ -186,6 +188,7 @@ class StreamCopyT {
 
         /// Copies audio for the indicated number of milliseconds: note that the resolution is determined by the buffer_size
         size_t copyMs(size_t millis, AudioInfo info){
+            if (!active) return 0;
             size_t pages = AudioTime::toBytes(millis, info) / buffer_size;
             return copyN(pages);
         }
@@ -193,6 +196,7 @@ class StreamCopyT {
         /// copies all data - returns true if we copied anything
         size_t copyAll(int retryCount=5, int retryWaitMs=200){
             TRACED();
+            if (!active) return 0;
             size_t result = 0;
             int retry = 0;
 
@@ -268,6 +272,16 @@ class StreamCopyT {
             buffer.resize(buffer_size);
         }
 
+        /// deactivate/activate copy - active by default
+        void setActive(bool flag){
+            active = flag;
+        }
+
+        /// Check if copier is active
+        bool isActive(){
+            return active;
+        }
+
     protected:
         AudioStream *from = nullptr;
         Print *to = nullptr;
@@ -282,6 +296,7 @@ class StreamCopyT {
         const char* actual_mime = nullptr;
         int retryLimit = COPY_RETRY_LIMIT;
         int delay_on_no_data = COPY_DELAY_ON_NODATA;
+        bool active = true;
 
         /// blocking write - until everything is processed
         size_t write(size_t len, size_t &delayCount ){
