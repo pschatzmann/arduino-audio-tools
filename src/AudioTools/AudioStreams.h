@@ -654,7 +654,7 @@ class GeneratedSoundStream : public AudioStream {
   }
 
   /// This is unbounded so we just return the buffer size
-  virtual int available() override { return DEFAULT_BUFFER_SIZE; }
+  virtual int available() override { return DEFAULT_BUFFER_SIZE*2; }
 
   /// privide the data as byte stream
   size_t readBytes(uint8_t *buffer, size_t length) override {
