@@ -56,6 +56,7 @@
 #include "AudioTools/BaseConverter.h"
 #include "AudioFilter/Filter.h"
 #include "AudioFilter/Equilizer.h"
+#include "AudioFilter/MedianFilter.h"
 #include "AudioTools/MusicalNotes.h"
 #include "AudioI2S/I2SStream.h"
 #include "AudioPWM/AudioPWM.h"
