@@ -26,6 +26,7 @@ namespace audio_tools {
  * adc_continuous API
  * 
  * @author Phil Schatzmann
+ * @ingroup platform
  * @copyright GPLv3
  */
 class AnalogConfigESP32V1 : public AudioInfo {
