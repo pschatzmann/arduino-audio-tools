@@ -93,7 +93,7 @@ static const uint16_t bmc_tab_uint[256] = {
 static const int16_t *bmc_tab = (int16_t *)bmc_tab_uint;
 
 static uint32_t spdif_buf[SPDIF_BUF_ARRAY_SIZE];
-static uint32_t *spdif_ptr;
+static uint32_t *spdif_ptr = nullptr;
 
 /**
  * @brief SPDIF configuration

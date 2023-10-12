@@ -20,8 +20,6 @@
 #include <stdint.h>
 #include <assert.h>
 #include "AudioTools/AudioRuntime.h"
-#include "AudioBasic/Int24_3bytes_t.h"
-#include "AudioBasic/Int24_4bytes_t.h"
 
 // If you don't want to use all the settings from here you can define your own local config settings in AudioConfigLocal.h
 #if __has_include("AudioConfigLocal.h") 
@@ -30,7 +28,8 @@
 
 #define AUDIOTOOLS_VERSION "0.9.4"
 
-//#define PREFER_FIXEDPOINT //uses fixed point multiplication instead float for VolumeStream for slightly better performance on platforms without float hardware. Tested on RP2040 at 16 bit per second (still too slow for 32bit)
+// Use fixed point multiplication instead float for VolumeStream for slightly better performance on platforms without float hardware. Tested on RP2040 at 16 bit per second (still too slow for 32bit)
+//#define PREFER_FIXEDPOINT 
 
 /**
  * ------------------------------------------------------------------------- 
@@ -42,15 +41,15 @@
  */
  
 #ifndef USE_AUDIO_LOGGING 
-#define USE_AUDIO_LOGGING true
+#  define USE_AUDIO_LOGGING true
 #endif
 
 #ifndef LOG_LEVEL 
-#define LOG_LEVEL AudioLogger::Warning
+#  define LOG_LEVEL AudioLogger::Warning
 #endif
 
 #ifndef LOG_STREAM 
-#define LOG_STREAM Serial
+#  define LOG_STREAM Serial
 #endif
 
 #define LOG_PRINTF_BUFFER_SIZE 303
@@ -68,66 +67,67 @@
 #ifndef USE_INLINE_VARS
 #  define USE_INLINE_VARS 0
 #endif
+
 /**
  * ------------------------------------------------------------------------- 
  * @brief Common Default Settings that can usually be changed in the API
  */
 
 #ifndef DEFAULT_BUFFER_SIZE 
-#define DEFAULT_BUFFER_SIZE 1024
+#  define DEFAULT_BUFFER_SIZE 1024
 #endif
 
 #ifndef DEFAULT_SAMPLE_RATE 
-#define DEFAULT_SAMPLE_RATE 44100
+#  define DEFAULT_SAMPLE_RATE 44100
 #endif
 
 #ifndef DEFAULT_CHANNELS 
-#define DEFAULT_CHANNELS 2
+#  define DEFAULT_CHANNELS 2
 #endif
 
 #ifndef DEFAULT_BITS_PER_SAMPLE 
-#define DEFAULT_BITS_PER_SAMPLE 16
+#  define DEFAULT_BITS_PER_SAMPLE 16
 #endif
 
 #ifndef I2S_DEFAULT_PORT 
-#define I2S_DEFAULT_PORT 0
+#  define I2S_DEFAULT_PORT 0
 #endif
 
 #ifndef I2S_BUFFER_SIZE 
-#define I2S_BUFFER_SIZE 512
+#  define I2S_BUFFER_SIZE 512
 #endif
 
 #ifndef I2S_BUFFER_COUNT 
-#define I2S_BUFFER_COUNT 6 // 20
+#  define I2S_BUFFER_COUNT 6 // 20
 #endif
 
 #ifndef A2DP_BUFFER_SIZE 
-#define A2DP_BUFFER_SIZE 512
+#  define A2DP_BUFFER_SIZE 512
 #endif
 
 #ifndef A2DP_BUFFER_COUNT 
-#define A2DP_BUFFER_COUNT 30
+#  define A2DP_BUFFER_COUNT 30
 #endif
 
 #ifndef CODEC_DELAY_MS 
-#define CODEC_DELAY_MS 10
+#  define CODEC_DELAY_MS 10
 #endif
 
 #ifndef COPY_DELAY_ON_NODATA 
-#define COPY_DELAY_ON_NODATA 10
+#  define COPY_DELAY_ON_NODATA 10
 #endif
 
 #ifndef COPY_RETRY_LIMIT 
-#define COPY_RETRY_LIMIT 20
+#  define COPY_RETRY_LIMIT 20
 #endif
 
 #ifndef MAX_SINGLE_CHARS
-#define MAX_SINGLE_CHARS 8
+#  define MAX_SINGLE_CHARS 8
 #endif
 
 // max size of http processing buffer
 #ifndef HTTP_MAX_LEN
-#define HTTP_MAX_LEN 1024
+#  define HTTP_MAX_LEN 1024
 #endif
 
 /**
@@ -135,26 +135,16 @@
  * @brief PWM
  */
 #ifndef PWM_BUFFER_SIZE 
-#define PWM_BUFFER_SIZE 1024
+#  define PWM_BUFFER_SIZE 1024
 #endif
 
 #ifndef PWM_BUFFER_COUNT 
-#define PWM_BUFFER_COUNT 4
+#  define PWM_BUFFER_COUNT 4
 #endif
 
 #ifndef PWM_AUDIO_FREQUENCY 
-#define PWM_AUDIO_FREQUENCY 30000
+#  define PWM_AUDIO_FREQUENCY 30000
 #endif
-
-
-/**
- * ------------------------------------------------------------------------- 
- * @brief Activate Other Tools
- */
-
-//#define USE_STK
-//#define USE_SDFAT
-//#define USE_DELTASIGMA 
 
 
 /**
@@ -179,21 +169,17 @@
 
 // ----- Regular ESP32 -----
 #if defined(ESP32)  && !defined(ESP32X)
-//#include "esp32-hal-log.h"
-// optional libraries
-//#define USE_A2DP
-//#define USE_ESP8266_AUDIO
 #if ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(5, 0 , 0)
 #  define USE_INT24_FROM_INT
-#else
-#  define USE_ANALOG
 #endif
 
+#define USE_ANALOG
 #define USE_PWM
 #define USE_URL_ARDUINO
 #define USE_WIFI
 #define USE_WIFI_CLIENT_SECURE
 #define USE_I2S
+#define USE_PDM
 #define USE_AUDIO_SERVER
 #define USE_TYPETRAITS
 #define USE_EFFECTS_SUITE
@@ -236,7 +222,7 @@
 // #endif
 
 // support for old idf releases
-#if !defined(USE_I2S_NEW) && ESP_IDF_VERSION_MAJOR < 4 && !defined(I2S_COMM_FORMAT_STAND_I2S)
+#if ESP_IDF_VERSION_MAJOR < 4 && !defined(I2S_COMM_FORMAT_STAND_I2S)
 # define I2S_COMM_FORMAT_STAND_I2S (I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_MSB)
 # define I2S_COMM_FORMAT_STAND_MSB (I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_LSB)
 # define I2S_COMM_FORMAT_STAND_PCM_LONG (I2S_COMM_FORMAT_PCM | I2S_COMM_FORMAT_PCM_LONG)
@@ -696,10 +682,16 @@ typedef WiFiClient WiFiClientSecure;
 #endif
 
 // select int24 implementation
+#include "AudioBasic/Int24_3bytes_t.h"
+#include "AudioBasic/Int24_4bytes_t.h"
 #ifdef USE_3BYTE_INT24
 using int24_t = audio_tools::int24_3bytes_t;
 #else
 using int24_t = audio_tools::int24_4bytes_t;
+#endif
+
+#ifndef ESP32
+#define ESP_IDF_VERSION_VAL(a, b , c) 0
 #endif
 
 #pragma GCC diagnostic ignored "-Wunused-variable"

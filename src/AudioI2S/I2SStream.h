@@ -9,7 +9,7 @@
 #include "AudioTools/AudioStreams.h"
 #include "AudioI2S/I2SConfig.h"
 #include "AudioI2S/I2SESP32.h"
-#include "AudioI2S/I2SESP32-New.h"
+#include "AudioI2S/I2SESP32V1.h"
 #include "AudioI2S/I2SESP8266.h"
 #include "AudioI2S/I2SSAMD.h"
 #include "AudioI2S/I2SNanoSenseBLE.h"
