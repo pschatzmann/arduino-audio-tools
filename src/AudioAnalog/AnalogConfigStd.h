@@ -8,6 +8,7 @@ namespace audio_tools {
  * @brief Generic ADC and DAC configuration 
  * 
  * @author Phil Schatzmann
+ * @ingroup platform
  * @copyright GPLv3
  */
 class AnalogConfigStd : public AudioInfo {

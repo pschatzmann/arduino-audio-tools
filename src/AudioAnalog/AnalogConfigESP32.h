@@ -14,6 +14,7 @@ namespace audio_tools {
  * @brief ESP32 specific configuration for i2s input via adc. The default input pin is GPIO34. We always use int16_t values. The default
  * output pins are GPIO25 and GPIO26! 
  * 
+ * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
