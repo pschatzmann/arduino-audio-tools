@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AudioConfig.h"
-#if defined(ESP32) && defined(USE_ANALOG) && ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0 , 0)
+#if defined(ESP32) && defined(USE_ANALOG) && ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0 , 0) || defined(DOXYGEN)
 #include "AudioAnalog/AnalogAudioBase.h"
 #include "driver/i2s.h"
 #include "driver/adc.h"
