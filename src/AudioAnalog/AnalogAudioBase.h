@@ -1,12 +1,33 @@
 #pragma once
 #include "AudioConfig.h"
 #if defined(USE_ANALOG) 
-#if defined(ESP32) && ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0 , 0)
-# include "driver/i2s.h"
-# include "driver/adc.h"
-# include "soc/dac_channel.h"
-# include "soc/adc_channel.h"
+#if defined(ESP32) 
+#  if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0 , 0)
+#   include "driver/i2s.h"
+#   include "driver/adc.h"
+#   include "soc/dac_channel.h"
+#   include "soc/adc_channel.h"
+#  else
+#   include "esp_adc/adc_continuous.h"
+#  endif
 #endif
+
+#if CONFIG_IDF_TARGET_ESP32
+#define ADC_CONV_MODE       ADC_CONV_SINGLE_UNIT_1  //ESP32 only supports ADC1 DMA mode
+#define ADC_OUTPUT_TYPE     ADC_DIGI_OUTPUT_FORMAT_TYPE1
+#elif CONFIG_IDF_TARGET_ESP32S2
+#define ADC_CONV_MODE       ADC_CONV_BOTH_UNIT
+#define ADC_OUTPUT_TYPE     ADC_DIGI_OUTPUT_FORMAT_TYPE2
+#elif CONFIG_IDF_TARGET_ESP32C3 || CONFIG_IDF_TARGET_ESP32H2 || CONFIG_IDF_TARGET_ESP32C2
+#define ADC_CONV_MODE       ADC_CONV_ALTER_UNIT     //ESP32C3 only supports alter mode
+#define ADC_OUTPUT_TYPE     ADC_DIGI_OUTPUT_FORMAT_TYPE2
+#elif CONFIG_IDF_TARGET_ESP32S3
+#define ADC_CONV_MODE       ADC_CONV_BOTH_UNIT
+#define ADC_OUTPUT_TYPE     ADC_DIGI_OUTPUT_FORMAT_TYPE2
+#endif
+
+
+
 namespace audio_tools {
 
 /**
@@ -27,14 +48,30 @@ class AnalogConfig : public AudioInfo {
 #if defined(ESP32) && defined(USE_ANALOG) 
     // allow ADC to access the protected methods
     friend class AnalogDriverESP32;
+    bool use_apll = false;
 
     // public config parameters
+#if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0 , 0)
     int port_no = I2S_NUM_0; // Analog input and output only supports 0!
-    bool use_apll = false;
     bool auto_clear = I2S_AUTO_CLEAR;
     bool uninstall_driver_on_end = true;
     int mode_internal; 
     int adc_pin;
+#else
+    int adc_conversion_mode = ADC_CONV_MODE;
+    int adc_output_type = ADC_OUTPUT_TYPE;
+    int adc_attenuation = ADC_ATTEN_DB_0;
+    int adc_bit_width = SOC_ADC_DIGI_MAX_BITWIDTH;
+    #if CONFIG_IDF_TARGET_ESP32C3 || CONFIG_IDF_TARGET_ESP32S3 || CONFIG_IDF_TARGET_ESP32H2 || CONFIG_IDF_TARGET_ESP32C2
+    adc_channel_t channel[3] = {ADC_CHANNEL_2, ADC_CHANNEL_3, (ADC_CHANNEL_0 | 1 << 3)};
+    #endif
+    #if CONFIG_IDF_TARGET_ESP32S2
+    adc_channel_t channel[3] = {ADC_CHANNEL_2, ADC_CHANNEL_3, (ADC_CHANNEL_0 | 1 << 3)};
+    #endif  
+    #if CONFIG_IDF_TARGET_ESP32
+    adc_channel_t channel[1] = {ADC_CHANNEL_7};
+    #endif
+#endif
 
     /// Default constructor
     AnalogConfig(RxTxMode rxtxMode=TX_MODE) {
@@ -45,9 +82,9 @@ class AnalogConfig : public AudioInfo {
       if (rx_tx_mode == RX_MODE) {
 #if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0 , 0)
         mode_internal = (I2S_MODE_MASTER | I2S_MODE_RX | I2S_MODE_ADC_BUILT_IN);
-#endif
         adc_pin = PIN_ADC1;
         auto_clear = false;
+#endif
         LOGI("I2S_MODE_ADC_BUILT_IN");
       } else {
 #if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0 , 0)
@@ -65,15 +102,15 @@ class AnalogConfig : public AudioInfo {
       if (rx_tx_mode == TX_MODE){
         LOGI("analog left output pin: %d", 25);
         LOGI("analog right output pin: %d", 26);
-      } else {
-        LOGI("input pin1: %d", adc_pin);
-      }
+      } 
     }
 
+#if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0 , 0)
     /// Defines an alternative input pin (for the left channel)
     void setInputPin1(int pin){
       this->adc_pin = pin;
     }
+#endif
 
 #else 
 
