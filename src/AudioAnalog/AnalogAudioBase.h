@@ -1,7 +1,7 @@
 #pragma once
 #include "AudioConfig.h"
 #if defined(USE_ANALOG) 
-#if defined(ESP32) 
+#if defined(ESP32) && ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0 , 0)
 # include "driver/i2s.h"
 # include "driver/adc.h"
 # include "soc/dac_channel.h"
@@ -43,12 +43,16 @@ class AnalogConfig : public AudioInfo {
       channels = 2;
       rx_tx_mode = rxtxMode;
       if (rx_tx_mode == RX_MODE) {
+#if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0 , 0)
         mode_internal = (I2S_MODE_MASTER | I2S_MODE_RX | I2S_MODE_ADC_BUILT_IN);
+#endif
         adc_pin = PIN_ADC1;
         auto_clear = false;
         LOGI("I2S_MODE_ADC_BUILT_IN");
       } else {
+#if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0 , 0)
         mode_internal = (I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_DAC_BUILT_IN);
+#endif
         LOGI("I2S_MODE_DAC_BUILT_IN");
       }
     }
@@ -95,7 +99,6 @@ class AnalogDriverBase {
 public:
     virtual bool begin(AnalogConfig cfg) = 0;
     virtual void end() = 0;
-//  virtual void setMaxSampleRate() {}
     virtual size_t write(const uint8_t *src, size_t size_bytes) { return 0;}
     virtual size_t readBytes(uint8_t *dest, size_t size_bytes) = 0;
     virtual int available() = 0;

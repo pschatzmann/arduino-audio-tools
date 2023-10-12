@@ -1,8 +1,8 @@
 #pragma once
 
-#if defined(ESP32) && !defined(USE_I2S_NEW)
-
 #include "AudioConfig.h"
+#if defined(ESP32) && defined(USE_I2S) && ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0 , 0)
+
 #include "AudioI2S/I2SConfig.h"
 #include "driver/i2s.h"
 #include "esp_system.h"

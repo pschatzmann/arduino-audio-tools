@@ -1,8 +1,8 @@
 #pragma once
 
-#if defined(ESP32) && defined(USE_I2S_NEW)
-
 #include "AudioConfig.h"
+#if defined(ESP32) && defined(USE_I2S) && ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
+
 #include "AudioI2S/I2SConfig.h"
 #include "driver/i2s_pdm.h"
 #include "driver/i2s_std.h"
@@ -18,7 +18,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class I2SDriverESP32New {
+class I2SDriverESP32V1 {
 
 public:
   /// Provides the default configuration
@@ -32,7 +32,7 @@ public:
 
   /// starts the DAC with the current config - if not started yet. If I2S has
   /// been started there is no action and we return true
-  bool begin() { return !is_started ? begin(cfg) : true; }
+  bool begin() { return (!is_started) ? begin(cfg) : true; }
 
   /// starts the DAC
   bool begin(I2SConfig cfg) {
@@ -199,6 +199,8 @@ protected:
     }
   } i2s;
 
+#ifdef USE_PDM
+
   struct DriverPDM : public DriverCommon {
     i2s_pdm_rx_slot_config_t getRxSlotConfig(I2SConfig &cfg) {
       return I2S_PDM_RX_SLOT_DEFAULT_CONFIG(
@@ -280,6 +282,7 @@ protected:
     }
   } pdm;
 
+#endif
   // struct DriverTDM : public DriverCommon {
   //   i2s_tdm_slot_config_t getSlotConfig(I2SConfig &cfg) {
   //     return I2S_TDM_SLOT_DEFAULT_CONFIG(
@@ -361,9 +364,11 @@ protected:
     switch (cfg.signal_type) {
     case Digital:
       return i2s;
+#ifdef USE_PDM
     case Analog:
     case PDM:
       return pdm;
+#endif
     case TDM:
       LOGW("TDM not supported");
     }
@@ -372,7 +377,7 @@ protected:
   }
 };
 
-using I2SDriver = I2SDriverESP32New;
+using I2SDriver = I2SDriverESP32V1;
 
 } // namespace audio_tools
 
