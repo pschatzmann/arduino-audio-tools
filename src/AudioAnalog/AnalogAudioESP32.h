@@ -43,7 +43,7 @@ class AnalogDriverESP32  : public AnalogDriverBase {
     }
 
     /// starts the DAC 
-    bool begin(AnalogConfig cfg) {
+    bool begin(AnalogConfigESP32 cfg) {
       TRACEI();
       cfg.logInfo();
 
@@ -203,7 +203,7 @@ class AnalogDriverESP32  : public AnalogDriverBase {
     }
 
   protected:
-    AnalogConfig adc_config;
+    AnalogConfigESP32 adc_config;
     ConverterAutoCenter auto_center;
     i2s_port_t port_no;
     bool active = false;

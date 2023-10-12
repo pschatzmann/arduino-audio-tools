@@ -28,7 +28,7 @@ class AnalogDriverESP32V1 : public AnalogDriverBase {
   virtual ~AnalogDriverESP32V1() { end(); }
 
   /// starts the DAC
-  bool begin(AnalogConfig cfg) {
+  bool begin(AnalogConfigESP32V1 cfg) {
     TRACEI();
     bool result = true;
     this->cfg = cfg;
@@ -98,7 +98,7 @@ class AnalogDriverESP32V1 : public AnalogDriverBase {
  protected:
   dac_continuous_handle_t dac_handle;
   adc_continuous_handle_t adc_handle;
-  AnalogConfig cfg;
+  AnalogConfigESP32V1 cfg;
   bool active = false;
   bool active_tx = false;
   bool active_rx = false;
