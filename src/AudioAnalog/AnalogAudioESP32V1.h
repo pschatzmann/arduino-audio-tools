@@ -164,6 +164,11 @@ class AnalogDriverESP32V1 : public AnalogDriverBase {
 
 
   bool setup_rx(){
+    int max_channels = sizeof(cfg.adc_channels)/sizeof(adc_channel_t);
+    if (cfg.channels > max_channels ){
+      LOGE("channels: %d, max: %d", cfg.channels, max_channels);
+      return false;
+    }
     adc_continuous_handle_cfg_t adc_config = {
         .max_store_buf_size = (uint32_t)cfg.buffer_size * cfg.buffer_count,
         .conv_frame_size = (uint32_t)cfg.buffer_size,
@@ -179,8 +184,8 @@ class AnalogDriverESP32V1 : public AnalogDriverBase {
     adc_continuous_config_t dig_cfg = {};
     dig_cfg.pattern_num = cfg.channels;
     for (int i = 0; i < cfg.channels; i++) {
-        uint8_t unit = GET_UNIT(cfg.channel[i]);
-        uint8_t ch = cfg.channel[i] & 0x7;
+        uint8_t unit = GET_UNIT(cfg.adc_channels[i]);
+        uint8_t ch = cfg.adc_channels[i] & 0x7;
         adc_pattern[i].atten = cfg.adc_attenuation;
         adc_pattern[i].channel = ch;
         adc_pattern[i].unit = unit;
