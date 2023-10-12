@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AudioConfig.h"
-#ifdef USE_ANALOG_ARDUINO
+#if defined(USE_ANALOG_ARDUINO) || defined(DOXYGEN)
 #include "AudioAnalog/AnalogAudioBase.h"
 #include "AudioTimer/AudioTimer.h"
 #include "AudioTools/AudioStreams.h"
