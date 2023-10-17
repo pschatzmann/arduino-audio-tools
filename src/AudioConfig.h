@@ -701,3 +701,5 @@ using int24_t = audio_tools::int24_4bytes_t;
 #ifdef USE_INITIALIZER_LIST
 #pragma GCC diagnostic ignored "-Wnarrowing"
 #endif
+
+#undef rewind

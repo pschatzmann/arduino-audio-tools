@@ -34,7 +34,8 @@ class URLLoader {
 
   void end(){
     TRACED();
-    stream.end();
+    p_stream->end();
+    p_stream = nullptr;
     buffer.clear();
     active = false;
   }
@@ -42,10 +43,17 @@ class URLLoader {
   /// Adds the next url to be played in sequence
   void addUrl(const char* url){
     LOGI("Adding %s", url);
-    Str url_str(url);
-    char *str = new char[url_str.length()+1];
-    memcpy(str, url_str.c_str(), url_str.length()+1);
-    urls.push_back(str);
+    //Str url_str(url);
+    //char *str = new char[url_str.length()+1];
+    //memcpy(str, url_str.c_str(), url_str.length()+1);
+    URLStream *p_stream = new URLStream();
+    p_stream->setWaitForData(false);
+    p_stream->setAutoCreateLines(false);
+    if (!p_stream->begin(url)){
+      TRACEE();
+    }
+
+    urls.push_back(p_stream);
   }
 
   /// Provides the number of open urls which can be played. Refills them, when min limit is reached.
@@ -71,13 +79,13 @@ class URLLoader {
   }
 
   const char *contentType() {
-    if (!stream) return nullptr;
-    return stream.httpRequest().reply().get(CONTENT_TYPE);
+    if (p_stream==nullptr) return nullptr;
+    return p_stream->httpRequest().reply().get(CONTENT_TYPE);
   }
 
   int contentLength() {
-    if (!stream) return 0;
-    return stream.contentLength();
+    if (p_stream==nullptr) return 0;
+    return p_stream->contentLength();
   }
 
   void setBuffer(int size, int count){
@@ -86,12 +94,12 @@ class URLLoader {
   }
 
 protected:
-  Vector<const char*> urls{10};
+  Vector<URLStream*> urls{10};
   NBuffer<uint8_t> buffer{DEFAULT_BUFFER_SIZE, 50};
   bool active = false;
   int buffer_size = DEFAULT_BUFFER_SIZE;
   int buffer_count = 10;
-  URLStream stream;
+  URLStream *p_stream = nullptr;
 
 
   /// try to keep the buffer filled
@@ -108,34 +116,30 @@ protected:
     }
 
     // switch current stream if we have no more data
-    if ((!stream || stream.totalRead()==stream.contentLength()) && !urls.empty()) {
+    if ((p_stream==nullptr || p_stream->totalRead()==p_stream->contentLength()) && !urls.empty()) {
       LOGD("Refilling");
-      const char* url = urls[0];
+      if (p_stream!=nullptr) {
+        p_stream->end();
+        delete p_stream;
+      }
+      p_stream = urls[0];
+      p_stream->waitForData();
       urls.pop_front();
-      assert(urls[0]!=url);
+      //assert(urls[0]!=url);
 
 #ifdef ESP32
       LOGI("Free heap: %d", ESP.getFreeHeap());
 #endif
-      LOGI("Playing %s of %d", url, urls.size());
-
-      stream.clear();
-      stream.setWaitForData(true);
-      stream.setAutoCreateLines(false);
-      if (!stream.begin(url)){
-        TRACEE();
-      }
-      // free memory
-      delete[] url;
+      LOGI("Playing %s of %d", p_stream->urlStr(), urls.size());
     }
 
     int to_write = min(buffer.availableForWrite(),DEFAULT_BUFFER_SIZE);
     if (to_write>0){
       int total = 0;
       while(to_write>0){
-        if (stream.totalRead()==stream.contentLength()) break;
+        if (p_stream->totalRead()==p_stream->contentLength()) break;
         uint8_t tmp[to_write]={0};
-        int read = stream.readBytes(tmp, to_write);
+        int read = p_stream->readBytes(tmp, to_write);
         total += read;
         if (read>0){
           buffer.writeArray(tmp, read);      
