@@ -100,10 +100,12 @@ struct AudioInfo {
       //}
     }  
 
-    // public attributes
-    int sample_rate = 0;    // undefined
-    int channels = 0;       // undefined
-    int bits_per_sample=16; // we assume int16_t
+    /// Sample Rate: e.g 44100
+    int sample_rate = DEFAULT_SAMPLE_RATE;    
+    /// Number of channels: 2=stereo, 1=mono
+    int channels = DEFAULT_CHANNELS;  
+    /// Number of bits per sample (int16_t = 16 bits)    
+    int bits_per_sample = DEFAULT_BITS_PER_SAMPLE; 
     
 };
 
