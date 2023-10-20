@@ -20,8 +20,8 @@ namespace audio_tools {
  */
 class AnalogConfigESP32 : public AudioInfo {
   public:
-    int buffer_count = PWM_BUFFER_COUNT;
-    int buffer_size = PWM_BUFFER_SIZE;
+    int buffer_count = ANALOG_BUFFER_COUNT;
+    int buffer_size = ANALOG_BUFFER_SIZE;
     RxTxMode rx_tx_mode;
     bool is_blocking_write = true;
     bool is_auto_center_read = true;

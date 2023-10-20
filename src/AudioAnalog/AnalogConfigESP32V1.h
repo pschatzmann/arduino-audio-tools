@@ -8,15 +8,21 @@
 #if CONFIG_IDF_TARGET_ESP32
 #define ADC_CONV_MODE       ADC_CONV_SINGLE_UNIT_1  //ESP32 only supports ADC1 DMA mode
 #define ADC_OUTPUT_TYPE     ADC_DIGI_OUTPUT_FORMAT_TYPE1
+#define ADC_CHANNELS        {ADC_CHANNEL_6, ADC_CHANNEL_7}
+#define HAS_ESP32_DAC
 #elif CONFIG_IDF_TARGET_ESP32S2
 #define ADC_CONV_MODE       ADC_CONV_BOTH_UNIT
 #define ADC_OUTPUT_TYPE     ADC_DIGI_OUTPUT_FORMAT_TYPE2
+#define ADC_CHANNELS        {ADC_CHANNEL_2, ADC_CHANNEL_3}
+#define HAS_ESP32_DAC
 #elif CONFIG_IDF_TARGET_ESP32C3 || CONFIG_IDF_TARGET_ESP32H2 || CONFIG_IDF_TARGET_ESP32C2
 #define ADC_CONV_MODE       ADC_CONV_ALTER_UNIT     //ESP32C3 only supports alter mode
 #define ADC_OUTPUT_TYPE     ADC_DIGI_OUTPUT_FORMAT_TYPE2
+#define ADC_CHANNELS        {ADC_CHANNEL_2, ADC_CHANNEL_3}
 #elif CONFIG_IDF_TARGET_ESP32S3
 #define ADC_CONV_MODE       ADC_CONV_BOTH_UNIT
 #define ADC_OUTPUT_TYPE     ADC_DIGI_OUTPUT_FORMAT_TYPE2
+#define ADC_CHANNELS        {ADC_CHANNEL_2, ADC_CHANNEL_3}
 #endif
 
 namespace audio_tools {
@@ -31,8 +37,8 @@ namespace audio_tools {
  */
 class AnalogConfigESP32V1 : public AudioInfo {
   public:
-    int buffer_count = PWM_BUFFER_COUNT;
-    int buffer_size = PWM_BUFFER_SIZE;
+    int buffer_count = ANALOG_BUFFER_COUNT;
+    int buffer_size = ANALOG_BUFFER_SIZE;
     RxTxMode rx_tx_mode;
     bool is_blocking_write = true;
     bool is_auto_center_read = true;
@@ -46,21 +52,14 @@ class AnalogConfigESP32V1 : public AudioInfo {
     int adc_output_type = ADC_OUTPUT_TYPE;
     int adc_attenuation = ADC_ATTEN_DB_0;
     int adc_bit_width = SOC_ADC_DIGI_MAX_BITWIDTH;
-    #if CONFIG_IDF_TARGET_ESP32C3 || CONFIG_IDF_TARGET_ESP32S3 || CONFIG_IDF_TARGET_ESP32H2 || CONFIG_IDF_TARGET_ESP32C2
-    adc_channel_t adc_channels[3] = {ADC_CHANNEL_2, ADC_CHANNEL_3, (ADC_CHANNEL_0 | 1 << 3)};
-    #endif
-    #if CONFIG_IDF_TARGET_ESP32S2
-    adc_channel_t adc_channels[3] = {ADC_CHANNEL_2, ADC_CHANNEL_3, (ADC_CHANNEL_0 | 1 << 3)};
-    #endif  
-    #if CONFIG_IDF_TARGET_ESP32
-    adc_channel_t adc_channels[1] = {ADC_CHANNEL_7};
-    #endif
+    /// ESP32: ADC_CHANNEL_6, ADC_CHANNEL_7; others ADC_CHANNEL_2, ADC_CHANNEL_3
+    adc_channel_t adc_channels[2] = ADC_CHANNELS;
 
     /// Default constructor
     AnalogConfigESP32V1(RxTxMode rxtxMode=TX_MODE) {
       sample_rate = 44100;
       bits_per_sample = 16;
-      channels = 2;
+      channels =  2;
       rx_tx_mode = rxtxMode;
       if (rx_tx_mode == RX_MODE) {
         LOGI("I2S_MODE_ADC_BUILT_IN");
