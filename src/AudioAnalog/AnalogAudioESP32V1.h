@@ -5,8 +5,10 @@
 #include "AudioAnalog/AnalogAudioBase.h"
 #include "AudioTools/AudioStreams.h"
 #include "AudioTools/AudioStreamsConverter.h"
-#include "driver/dac_continuous.h"
 #include "esp_adc/adc_continuous.h"
+#ifdef HAS_ESP32_DAC
+#  include "driver/dac_continuous.h"
+#endif
 
 namespace audio_tools {
 
@@ -41,10 +43,10 @@ class AnalogDriverESP32V1 : public AnalogDriverBase {
         active_tx = true;
         break;
       case RX_MODE:
-        if (!setup_tx()){
+        if (!setup_rx()){
           return false;
         }
-        active_tx = true;
+        active_rx = true;
         break;
       default:
         LOGE("mode");
@@ -63,9 +65,11 @@ class AnalogDriverESP32V1 : public AnalogDriverBase {
   /// stops the I2S and unistalls the driver
   void end() override {
     TRACEI();
+#ifdef HAS_ESP32_DAC
     if (active_tx)  {
       dac_continuous_del_channels(dac_handle);
     }
+#endif
     if (active_rx) {
       adc_continuous_stop(adc_handle);
       adc_continuous_deinit(adc_handle);
@@ -96,7 +100,9 @@ class AnalogDriverESP32V1 : public AnalogDriverBase {
   }
 
  protected:
+#ifdef HAS_ESP32_DAC
   dac_continuous_handle_t dac_handle;
+#endif
   adc_continuous_handle_t adc_handle;
   AnalogConfigESP32V1 cfg;
   bool active = false;
@@ -112,12 +118,16 @@ class AnalogDriverESP32V1 : public AnalogDriverBase {
       }
       size_t write(const uint8_t *src, size_t size_bytes) override {
         TRACED();
+#ifdef HAS_ESP32_DAC
         size_t result = size_bytes;
         if (dac_continuous_write(self->dac_handle, (uint8_t *)src, size_bytes, &result,
                                 self->timeout) != ESP_OK) {
           result = 0;
         }
         return size_bytes;
+#else
+        return 0;
+#endif
       }
 
       size_t readBytes(uint8_t *dest, size_t size_bytes) override {
@@ -134,6 +144,8 @@ class AnalogDriverESP32V1 : public AnalogDriverBase {
   } io{this};
 
   NumberFormatConverterStream converter{io};
+
+#ifdef HAS_ESP32_DAC
 
   bool setup_tx(){
     dac_continuous_config_t cont_cfg = {
@@ -161,6 +173,13 @@ class AnalogDriverESP32V1 : public AnalogDriverBase {
     }
     return true;
   }
+  
+  #else
+  bool setup_tx(){
+    LOGE("DAC not supported");
+    return false;
+  }
+  #endif
 
 
   bool setup_rx(){

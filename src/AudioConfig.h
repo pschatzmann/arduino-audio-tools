@@ -101,6 +101,15 @@
 #  define I2S_BUFFER_COUNT 6 // 20
 #endif
 
+#ifndef ANALOG_BUFFER_SIZE 
+#  define ANALOG_BUFFER_SIZE 512
+#endif
+
+#ifndef ANALOG_BUFFER_COUNT 
+#  define ANALOG_BUFFER_COUNT 6 // 20
+#endif
+
+
 #ifndef A2DP_BUFFER_SIZE 
 #  define A2DP_BUFFER_SIZE 512
 #endif
@@ -239,6 +248,11 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 
 #if defined(ESP32)  && defined(ESP32X)
 #include "esp32-hal-log.h"
+#if ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(5, 0 , 0)
+#  define USE_INT24_FROM_INT
+#  define USE_ANALOG
+#endif
+
 
 #define USE_PWM
 #define USE_URL_ARDUINO
