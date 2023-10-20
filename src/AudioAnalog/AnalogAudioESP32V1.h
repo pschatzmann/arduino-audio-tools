@@ -108,7 +108,7 @@ class AnalogDriverESP32V1 : public AnalogDriverBase {
   bool active = false;
   bool active_tx = false;
   bool active_rx = false;
-  int timeout = portMAX_DELAY;
+  TickType_t timeout = portMAX_DELAY;
 
   /// writes the int16_t data to the DAC
   class IO16Bit : public AudioStream {
@@ -119,8 +119,17 @@ class AnalogDriverESP32V1 : public AnalogDriverBase {
       size_t write(const uint8_t *src, size_t size_bytes) override {
         TRACED();
 #ifdef HAS_ESP32_DAC
-        size_t result = size_bytes;
-        if (dac_continuous_write(self->dac_handle, (uint8_t *)src, size_bytes, &result,
+        size_t result = 0;
+
+        // convert signed 16 bit to unsigned 8 bits
+        int16_t* data16 = (int16_t*)src;
+        uint8_t* data8 = (uint8_t*)src;
+        int samples = size_bytes / 2;
+        for (int j=0; j < samples; j++){
+          data8[j] = (32768u + data16[j]) >> 8;
+        }
+
+        if (dac_continuous_write(self->dac_handle, data8, samples, &result,
                                 self->timeout) != ESP_OK) {
           result = 0;
         }
