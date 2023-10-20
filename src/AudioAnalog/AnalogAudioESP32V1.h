@@ -133,7 +133,7 @@ class AnalogDriverESP32V1 : public AnalogDriverBase {
                                 self->timeout) != ESP_OK) {
           result = 0;
         }
-        return size_bytes;
+        return result * 2;
 #else
         return 0;
 #endif
@@ -141,11 +141,20 @@ class AnalogDriverESP32V1 : public AnalogDriverBase {
 
       size_t readBytes(uint8_t *dest, size_t size_bytes) override {
         TRACED();
-        uint32_t result = size_bytes;
-        if(adc_continuous_read(self->adc_handle, dest, size_bytes, &result, self->timeout)!= ESP_OK) {
+        uint32_t result = 0;
+        size_t samples = size_bytes / 2;
+
+        if(adc_continuous_read(self->adc_handle, dest, samples, &result, self->timeout)== ESP_OK) {
+          // convert unsigned 8 bits to signed 16 bits;
+          int16_t* data16 = (int16_t*)src;
+          uint8_t* data8 = (uint8_t*)src;
+          for (int j=samples-1;j>=0;j--){
+            data16[J] = (static_cast<int16_t>(data[8]) - 128) * 256;
+          }
+        } else {
           result = 0;
         }
-        return result;
+        return result * 2;
       }
     protected:
       AnalogDriverESP32V1 *self;
