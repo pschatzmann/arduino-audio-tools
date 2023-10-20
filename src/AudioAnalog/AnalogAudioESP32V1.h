@@ -146,10 +146,9 @@ class AnalogDriverESP32V1 : public AnalogDriverBase {
 
         if(adc_continuous_read(self->adc_handle, dest, samples, &result, self->timeout)== ESP_OK) {
           // convert unsigned 8 bits to signed 16 bits;
-          int16_t* data16 = (int16_t*)src;
-          uint8_t* data8 = (uint8_t*)src;
+          int16_t* data16 = (int16_t*)dest;
           for (int j=samples-1;j>=0;j--){
-            data16[J] = (static_cast<int16_t>(data[8]) - 128) * 256;
+            data16[j] = (static_cast<int16_t>(dest[8]) - 128) * 256;
           }
         } else {
           result = 0;
