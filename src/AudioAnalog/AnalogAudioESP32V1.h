@@ -5,10 +5,6 @@
 #include "AudioAnalog/AnalogAudioBase.h"
 #include "AudioTools/AudioStreams.h"
 #include "AudioTools/AudioStreamsConverter.h"
-#include "esp_adc/adc_continuous.h"
-#ifdef HAS_ESP32_DAC
-#  include "driver/dac_continuous.h"
-#endif
 
 namespace audio_tools {
 
@@ -167,7 +163,7 @@ class AnalogDriverESP32V1 : public AnalogDriverBase {
   bool setup_tx(){
     dac_continuous_config_t cont_cfg = {
         .chan_mask =
-            cfg.channels == 1 ? DAC_CHANNEL_MASK_CH0 : DAC_CHANNEL_MASK_ALL,
+            cfg.channels == 1 ? cfg.dac_mono_channel : DAC_CHANNEL_MASK_ALL,
         .desc_num = (uint32_t)cfg.buffer_count,
         .buf_size = (size_t) cfg.buffer_size,
         .freq_hz = (uint32_t)cfg.sample_rate,
