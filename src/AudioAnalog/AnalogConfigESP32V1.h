@@ -3,7 +3,7 @@
 #include "AudioConfig.h"
 #if defined(USE_ANALOG) && defined(ESP32) && ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0 , 0) || defined(DOXYGEN)
 
-#   include "esp_adc/adc_continuous.h"
+#include "esp_adc/adc_continuous.h"
 
 #if CONFIG_IDF_TARGET_ESP32
 #define ADC_CONV_MODE       ADC_CONV_SINGLE_UNIT_1  //ESP32 only supports ADC1 DMA mode
@@ -23,6 +23,10 @@
 #define ADC_CONV_MODE       ADC_CONV_BOTH_UNIT
 #define ADC_OUTPUT_TYPE     ADC_DIGI_OUTPUT_FORMAT_TYPE2
 #define ADC_CHANNELS        {ADC_CHANNEL_2, ADC_CHANNEL_3}
+#endif
+
+#ifdef HAS_ESP32_DAC
+#  include "driver/dac_continuous.h"
 #endif
 
 namespace audio_tools {
@@ -54,6 +58,8 @@ class AnalogConfigESP32V1 : public AudioInfo {
     int adc_bit_width = SOC_ADC_DIGI_MAX_BITWIDTH;
     /// ESP32: ADC_CHANNEL_6, ADC_CHANNEL_7; others ADC_CHANNEL_2, ADC_CHANNEL_3
     adc_channel_t adc_channels[2] = ADC_CHANNELS;
+    /// ESP32: DAC_CHANNEL_MASK_CH0 or DAC_CHANNEL_MASK_CH1
+    dac_channel_mask_t dac_mono_channel = DAC_CHANNEL_MASK_CH0;
 
     /// Default constructor
     AnalogConfigESP32V1(RxTxMode rxtxMode=TX_MODE) {
