@@ -139,6 +139,11 @@ protected:
 class STKChorus : public AudioEffect, public stk::Chorus {
 public:
   STKChorus(float baseDelay = 6000) : stk::Chorus(baseDelay) {}
+  STKChorus(const STKChorus& copy) = default;
+
+  AudioEffect* clone() override{
+    return new STKChorus(*this);
+  }
 
   virtual effect_t process(effect_t in) {
     // just convert between int16 and float
@@ -157,6 +162,11 @@ class STKEcho : public AudioEffect, public stk::Echo {
 public:
   STKEcho(unsigned long maximumDelay = (unsigned long)Stk::sampleRate())
       : stk::Echo(maximumDelay) {}
+  STKEcho(const STKEcho& copy) = default;
+
+  AudioEffect* clone() override{
+    return new STKEcho(*this);
+  }
 
   virtual effect_t process(effect_t in) {
     // just convert between int16 and float
@@ -260,7 +270,11 @@ class STKLentPitShift : public AudioEffect, public stk::LentPitShift {
 public:
   STKLentPitShift(float periodRatio = 1.0, int tMax = 512)
       : stk::LentPitShift(periodRatio, tMax) {}
+  STKLentPitShift(const STKLentPitShift& copy) = default;
 
+  AudioEffect* clone() override{
+    return new STKLentPitShift(*this);
+  }
   virtual effect_t process(effect_t in) {
     // just convert between int16 and float
     float value = static_cast<float>(in) / 32767.0;
@@ -269,7 +283,8 @@ public:
 };
 
 /**
- * @brief Pitch shifter effect class based on the Lent algorithm
+ * @brief Simple Pitch shifter effect class: This class implements a simple pitch 
+ * shifter using a delay line.
  * @ingroup effects
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -277,6 +292,11 @@ public:
 class STKPitShift : public AudioEffect, public stk::PitShift {
 public:
   STKPitShift() = default;
+  STKPitShift(const STKPitShift& copy) = default;
+
+  AudioEffect* clone() override{
+    return new STKPitShift(*this);
+  }
   virtual effect_t process(effect_t in) {
     // just convert between int16 and float
     float value = static_cast<float>(in) / 32767.0;
