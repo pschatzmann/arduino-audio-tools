@@ -28,7 +28,7 @@ void setup(void) {
   cfg.stream_name = "Stream1";
   cfg.target_ip = IPAddress{192,168,1,37}; 
   cfg.throttle_active = true;
-  cfg.throttle_correction_ms = -4; // optimize overload and underrun
+  //cfg.throttle_correction_us = 0; // optimize overload and underrun
   if (!out.begin(cfg)) stop();
 
   // Setup sine wave
