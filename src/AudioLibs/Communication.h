@@ -792,7 +792,7 @@ class Throttle {
   }
 
  protected:
-  unsigned long start_time;
+  uint64_t start_time;
   uint64_t sum_samples = 0;
   ThrottleConfig info;
   int bytesPerSample;
