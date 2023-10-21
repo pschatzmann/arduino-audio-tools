@@ -50,7 +50,7 @@ void setup() {
   cfg.stream_name = "Stream1";
   cfg.target_ip = IPAddress{192,168,1,37};
   cfg.throttle_active = true;
-  cfg.throttle_correction_ms = -20;
+  //cfg.throttle_correction_us = 0;
   if (!out.begin(cfg)) stop();
 
   // setup player

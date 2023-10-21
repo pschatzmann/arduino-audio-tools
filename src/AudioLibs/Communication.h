@@ -740,7 +740,7 @@ struct ThrottleConfig : public AudioInfo {
     bits_per_sample = 16;
     channels = 2;
   }
-  int correction_ms = 0;
+  int correction_us = 0;
 };
 
 /**
@@ -767,27 +767,33 @@ class Throttle {
   void begin(ThrottleConfig info) {
     this->info = info;
     bytesPerSample = info.bits_per_sample / 8 * info.channels;
+    startDelay();
   }
 
   // starts the timing
-  void startDelay() { start_time = millis(); }
+  void startDelay() { 
+    start_time = micros(); 
+    sum_samples = 0;
+  }
 
   // delay
   void delayBytes(size_t bytes) { delaySamples(bytes / bytesPerSample); }
 
   // delay
   void delaySamples(size_t samples) {
-    int durationMsEff = millis() - start_time;
-    int durationToBe = (samples * 1000) / info.sample_rate;
-    int waitMs = durationToBe - durationMsEff + info.correction_ms;
-    LOGI("wait: %d", waitMs);
-    if (waitMs > 0) {
-      delay(waitMs);
+    sum_samples += samples;
+    int64_t durationUsEff = micros() - start_time;
+    int64_t durationUsToBe = (sum_samples * 1000000) / info.sample_rate;
+    int64_t waitUs = durationUsToBe - durationUsEff + info.correction_us;
+    LOGI("wait: %d", waitUs);
+    if (waitUs > 0) {
+      delayMicroseconds(waitUs);
     }
   }
 
  protected:
   unsigned long start_time;
+  uint64_t sum_samples = 0;
   ThrottleConfig info;
   int bytesPerSample;
 };

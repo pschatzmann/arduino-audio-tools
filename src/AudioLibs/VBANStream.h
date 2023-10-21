@@ -29,7 +29,7 @@ class VBANConfig : public AudioInfo {
     // set to true if samples are generated faster then sample rate
     bool throttle_active = false;
     // when negative the number of ms that are subtracted from the calculated wait time to fine tune Overload and Underruns
-    int throttle_correction_ms = -2;
+    int throttle_correction_us = 0;
     // defines the max write size
     int max_write_size = DEFAULT_BUFFER_SIZE * 2; // just good enough for 44100 stereo
 };
@@ -57,7 +57,7 @@ class VBANStream : public AudioStream {
         AudioStream::setAudioInfo(info);
         auto thc = throttle.defaultConfig();
         thc.copyFrom(info);
-        thc.correction_ms = cfg.throttle_correction_ms;;
+        thc.correction_us = cfg.throttle_correction_us;;
         throttle.begin(thc);
         if (cfg.mode==TX_MODE){
             configure_tx();
@@ -111,7 +111,6 @@ class VBANStream : public AudioStream {
                 tx_buffer.reset();
             }
         }
-        throttle.startDelay();
         return byteCount;
     }
 
