@@ -731,4 +731,92 @@ protected:
   Vector<ChannelSelectionOutputDef> out_chanels;
 };
 
+
+/**
+ * @brief Configure Throttle setting
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+struct ThrottleConfig : public AudioInfo {
+  ThrottleConfig() {
+    sample_rate = 44100;
+    bits_per_sample = 16;
+    channels = 2;
+  }
+  int correction_us = 0;
+};
+
+
+/**
+ * @brief Throttle the sending of the audio data to limit it to the indicated
+ * sample rate.
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class Throttle : public AudioOutput {
+ public:
+  Throttle() = default;
+  Throttle(Print &out) { p_out = &out; } 
+
+  ThrottleConfig defaultConfig() {
+    ThrottleConfig c;
+    return c;
+  }
+
+  bool begin(ThrottleConfig info) {
+    AudioOutput::begin(info);
+    this->info = info;
+    return begin();
+  }
+
+  bool begin(){ 
+    info.copyFrom(cfg);
+    bytesPerSample = info.bits_per_sample / 8 * info.channels;
+    startDelay();
+    return true;
+  }
+
+  // (re)starts the timing
+  void startDelay() { 
+    start_time = micros(); 
+    sum_samples = 0;
+  }
+
+  int availableForWrite() {
+    if (p_out){
+      return p_out->availableForWrite();
+    }
+    return DEFAULT_BUFFER_SIZE;
+  }
+
+  size_t write(const uint8_t* data, size_t len){
+    size_t result = p_out->write(data, len);
+    delayBytes(len);
+    return result;
+  }
+
+  // delay
+  void delayBytes(size_t bytes) { delaySamples(bytes / bytesPerSample); }
+
+  // delay
+  void delaySamples(size_t samples) {
+    sum_samples += samples;
+    int64_t durationUsEff = micros() - start_time;
+    int64_t durationUsToBe = (sum_samples * 1000000) / info.sample_rate;
+    int64_t waitUs = durationUsToBe - durationUsEff + info.correction_us;
+    LOGI("wait: %d", waitUs);
+    if (waitUs > 0) {
+      delayMicroseconds(waitUs);
+    }
+  }
+
+ protected:
+  uint64_t start_time;
+  uint64_t sum_samples = 0;
+  ThrottleConfig info;
+  int bytesPerSample;
+  Print *p_out = nullptr;
+};
+
+
 } // namespace audio_tools
