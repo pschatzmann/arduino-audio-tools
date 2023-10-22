@@ -525,34 +525,34 @@ public:
 
         if (fabs(inSampleF) > threshold) {
             if (gain >=  gainreduce) {
-                if (State==S_NoOperation) {
-                    State=S_Attack;
+                if (state==S_NoOperation) {
+                    state=S_Attack;
                      timeout = attack_count;
                 }
-                else if (State==S_Release) {
-                    State=S_Attack;
+                else if (state==S_Release) {
+                    state=S_Attack;
                      timeout = attack_count;
                 }
             }
-            if (State==S_GainReduction)  timeout = hold_count;
+            if (state==S_GainReduction)  timeout = hold_count;
 
         }
 
         if (fabs(inSampleF) < threshold && gain <= 1.0f) {
-            if ( timeout==0 && State==S_GainReduction) {
-                State=S_Release;
+            if ( timeout==0 && state==S_GainReduction) {
+                state=S_Release;
                  timeout = release_count;
             }
         }
 
-        switch (State) {
+        switch (state) {
             case S_Attack:
                 if ( timeout>0 && gain > gainreduce) {
                     gain -= gain_step_attack;
                      timeout--;
                 }
                 else {
-                    State=S_GainReduction;
+                    state=S_GainReduction;
                      timeout = hold_count;
                 }
                 break;
@@ -561,7 +561,7 @@ public:
             case S_GainReduction:
                 if ( timeout>0)  timeout--;
                 else {
-                    State=S_Release;
+                    state=S_Release;
                      timeout = release_count;
                 }
                 break;
@@ -573,30 +573,28 @@ public:
                     gain += gain_step_release;
                 }
                 else {
-                    State=S_NoOperation;
+                    state=S_NoOperation;
                 }
                 break;
 
             case S_NoOperation:
-                if (gain < 1.0f) gain = 1.0F;
+                if (gain < 1.0f) gain = 1.0f;
                 break;
 
             default:
-
                 break;
 
         }
 
-        float outSampleF = inSample*gain;
-
-        return (int) outSampleF;
+        float outSampleF = gain * inSample;
+        return outSampleF;
     }
 
     Compressor *clone() { return new Compressor(*this); }
 
 protected:
     enum CompStates {S_NoOperation, S_Attack, S_GainReduction, S_Release };
-    enum CompStates State = S_NoOperation;
+    enum CompStates state = S_NoOperation;
 
     int32_t attack_count, release_count, hold_count,  timeout;
     float gainreduce, gain_step_attack, gain_step_release, gain, threshold;
