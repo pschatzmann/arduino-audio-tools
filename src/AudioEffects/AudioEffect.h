@@ -396,6 +396,8 @@ public:
   void keyOff() { adsr->keyOff(); }
 
   effect_t process(effect_t input) {
+    if (!active())
+      return input;
     effect_t result = factor * adsr->tick() * input;
     return result;
   }
@@ -520,8 +522,10 @@ public:
     }
 
     /// Processes the sample
-    effect_t process(effect_t inSample) {
-        return compress(inSample);
+    effect_t process(effect_t input) {
+        if (!active())
+          return input;
+        return compress(input);
     }
 
     Compressor *clone() { return new Compressor(*this); }
