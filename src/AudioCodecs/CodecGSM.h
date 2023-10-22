@@ -103,16 +103,37 @@ class GSMDecoder : public AudioDecoder {
         LOGE("gsm_decode");
       }
 
+      //fromBigEndian(result_buffer);
       // scale to 13 to 16-bit samples
-      int16_t *pt16 = (int16_t *)input_buffer.data();
-      for (int j = 0; j < input_buffer.size() / 2; j++) {
-        pt16[j] = pt16[j] * 8;
-      }
+      scale(result_buffer);
 
       p_print->write(result_buffer.data(), result_buffer.size());
       input_pos = 0;
     }
   }
+
+  void scale(Vector<uint8_t> &vector){
+      int16_t *pt16 = (int16_t *)vector.data();
+      for (int j = 0; j < vector.size() / 2; j++) {
+        if (abs(pt16[j])<=4095){
+          pt16[j] = pt16[j] * 8;
+        } else if(pt16[j]<0){
+          pt16[j] = -32767;
+        } else if(pt16[j]>0){
+          pt16[j] = 32767;
+        }
+      }
+  }
+
+  void fromBigEndian(Vector<uint8_t> &vector){
+    int size = vector.size() / 2;
+    int16_t *data16 = (int16_t*) vector.data();
+    for (int i=0; i<size; i++){
+      data16[i] = ntohs(data16[i]);
+    }
+  }
+
+
 };
 
 /**
@@ -197,24 +218,36 @@ class GSMEncoder : public AudioEncoder {
   void processByte(uint8_t byte) {
     input_buffer[buffer_pos++] = byte;
     if (buffer_pos >= input_buffer.size()) {
-      scaleValues();
+      scaleValues(input_buffer);
+      // toBigEndian(input_buffer);
       // encode
       gsm_encode(v_gsm, (gsm_signal*)input_buffer.data(), result_buffer.data());
-      p_print->write(result_buffer.data(), result_buffer.size());
+      size_t written = p_print->write(result_buffer.data(), result_buffer.size());
+      assert(written == result_buffer.size());
       buffer_pos = 0;
     }
   }
 
-  void scaleValues() {
-    int16_t *pt16 = (int16_t *)input_buffer.data();
+  void toBigEndian(Vector<uint8_t> &vector){
+    int size = vector.size() / 2;
+    int16_t *data16 = (int16_t*) vector.data();
+    for (int i=0; i<size; i++){
+      data16[i] = htons(data16[i]);
+    }
+  }
+
+
+  void scaleValues(Vector<uint8_t> &vector) {
+    int16_t *pt16 = (int16_t *)vector.data();
+    int size = vector.size() / 2;
     if (scaling_active){
       // scale to 16 to 13-bit samples
-      for (int j = 0; j < input_buffer.size() / 2; j++) {
+      for (int j = 0; j < size; j++) {
         pt16[j] = pt16[j] / 8;
       }
     } else {
       // clip value to 13-bits
-      for (int j = 0; j < input_buffer.size() / 2; j++) {
+      for (int j = 0; j < size; j++) {
         if ( pt16[j]>4095){
           pt16[j] = 4095;
         }

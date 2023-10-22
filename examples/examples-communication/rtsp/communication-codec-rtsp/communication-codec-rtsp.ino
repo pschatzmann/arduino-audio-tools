@@ -34,14 +34,14 @@ void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Warning);
 
-  // Start Wifi & rtsp server
-  rtsp.begin(wifi, password);
-
   // Setup sine wave
   sineWave.begin(info, N_B4);
 
   // Start Output Stream
   rtsp_stream.begin(info);
+
+  // Start Wifi & rtsp server
+  rtsp.begin(wifi, password);
 
 }
 
