@@ -469,7 +469,7 @@ public:
     Compressor(const Compressor &copy) = default;
 
     /// Default Constructor
-    Compressor(uint32_t sampleRate = 44100, int32_t attackMs=30, int32_t releaseMs=20, int32_t holdMs=10, uint8_t thresholdPercent=10, float compressionRatio=0.5){
+    Compressor(uint32_t sampleRate = 44100, uint16_t attackMs=30, uint16_t releaseMs=20, uint16_t holdMs=10, uint8_t thresholdPercent=10, float compressionRatio=0.5){
         //assuming 1 sample = 1/96kHz = ~10us
         //Attack -> 30 ms -> 3000
         //Release -> 20 ms -> 2000
@@ -489,19 +489,19 @@ public:
     }
 
     /// Defines the attack duration in ms
-    void setAttack(int32_t attackMs){
+    void setAttack(uint16_t attackMs){
         attack_count = sample_rate * attackMs / 1000;
         recalculate();
     }
 
     /// Defines the release duration in ms
-    void setRelease(int32_t releaseMs){
+    void setRelease(uint16_t releaseMs){
         release_count = sample_rate * releaseMs / 1000;
         recalculate();
     }
 
     /// Defines the hold duration in ms
-    void setHold(int32_t holdMs){
+    void setHold(uint16_t holdMs){
         hold_count = sample_rate * holdMs / 1000; 
         recalculate();
     }
