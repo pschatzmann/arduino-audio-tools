@@ -521,8 +521,25 @@ public:
 
     /// Processes the sample
     effect_t process(effect_t inSample) {
-        float inSampleF = (float)inSample;
+        return compress(inSample);
+    }
 
+    Compressor *clone() { return new Compressor(*this); }
+
+protected:
+    enum CompStates {S_NoOperation, S_Attack, S_GainReduction, S_Release };
+    enum CompStates state = S_NoOperation;
+
+    int32_t attack_count, release_count, hold_count,  timeout;
+    float gainreduce, gain_step_attack, gain_step_release, gain, threshold;
+    uint32_t sample_rate;
+
+    void recalculate() {
+        gain_step_attack = (1.0f - gainreduce) / attack_count;
+        gain_step_release = (1.0f - gainreduce) / release_count;
+    }
+
+    float compress(float inSampleF){
         if (fabs(inSampleF) > threshold) {
             if (gain >=  gainreduce) {
                 if (state==S_NoOperation) {
@@ -586,23 +603,8 @@ public:
 
         }
 
-        float outSampleF = gain * inSample;
+        float outSampleF = gain * inSampleF;
         return outSampleF;
-    }
-
-    Compressor *clone() { return new Compressor(*this); }
-
-protected:
-    enum CompStates {S_NoOperation, S_Attack, S_GainReduction, S_Release };
-    enum CompStates state = S_NoOperation;
-
-    int32_t attack_count, release_count, hold_count,  timeout;
-    float gainreduce, gain_step_attack, gain_step_release, gain, threshold;
-    uint32_t sample_rate;
-
-    void recalculate() {
-        gain_step_attack = (1.0f - gainreduce) / attack_count;
-        gain_step_release = (1.0f - gainreduce) / release_count;
     }
 
 };
