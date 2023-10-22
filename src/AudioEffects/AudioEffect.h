@@ -2,6 +2,7 @@
 #include "AudioEffects/AudioParameters.h"
 #include "AudioEffects/PitchShift.h"
 #include "AudioTools/AudioLogger.h"
+#include "AudioTools/AudioTypes.h"
 #include <stdint.h>
 
 namespace audio_tools {
@@ -453,4 +454,152 @@ protected:
   float effect_value;
   int size;
 };
+
+
+/**
+ * @brief Compressor inspired by https://github.com/YetAnotherElectronicsChannel/STM32_DSP_COMPRESSOR/blob/master/code/Src/main.c
+ * @author Phil Schatzmann
+ * @ingroup effects
+ * @copyright GPLv3
+*/
+
+class Compressor : public AudioEffect { 
+    
+    Compressor(const Compressor &copy) = default;
+
+    Compressor(uint32_t sampleRate = 44100, int32_t attackMs=30, int32_t releaseMs=20, int32_t holdMs=10, uint8_t thresholdPercent=10, float compressionRatio=0.5){
+        //assuming 1 sample = 1/96kHz = ~10us
+        //Attack -> 30 ms -> 3000
+        //Release -> 20 ms -> 2000
+        //Hold -> 10ms -> 1000
+        sample_rate = sample_rate * attackMs / 1000;
+        attack_count = sample_rate * attackMs / 1000;
+        release_count = sample_rate * releaseMs / 1000;
+        hold_count = sample_rate * holdMs / 1000; 
+
+        //threshold -20dB below limit -> 0.1 * 2^31
+        threshold = 0.01f * thresholdPercent * NumberConverter::maxValueT<effect_t>();
+        //compression ratio: 6:1 -> -6dB = 0.5
+        gainreduce = compressionRatio;
+        //initial gain = 1.0 -> no compression
+	      gain = 1.0f;
+        recalculate();
+    }
+
+    Compressor *clone() { return new Compressor(*this); }
+
+    void setAttack(int32_t attackMs){
+        attack_count = sample_rate * attackMs / 1000;
+        recalculate();
+    }
+
+    void setRelease(int32_t releaseMs){
+        release_count = sample_rate * releaseMs / 1000;
+        recalculate();
+    }
+
+    void setHold(int32_t holdMs){
+        hold_count = sample_rate * holdMs / 1000; 
+        recalculate();
+    }
+
+    void setThresholdPercent(uint8_t thresholdPercent){
+        threshold = 0.01f * thresholdPercent * NumberConverter::maxValueT<effect_t>();
+    }
+
+    void setCompressionRatio(float compressionRatio){
+      if (compressionRatio<1.0){
+        gainreduce = compressionRatio;
+      }
+      recalculate();
+    }
+
+    effect_t process(effect_t inSample) {
+        float inSampleF = (float)inSample;
+
+        if (fabs(inSampleF) > threshold) {
+            if (gain >=  gainreduce) {
+                if (State==S_NoOperation) {
+                    State=S_Attack;
+                     timeout = attack_count;
+                }
+                else if (State==S_Release) {
+                    State=S_Attack;
+                     timeout = attack_count;
+                }
+            }
+            if (State==S_GainReduction)  timeout = hold_count;
+
+        }
+
+        if (fabs(inSampleF) < threshold && gain <= 1.0f) {
+            if ( timeout==0 && State==S_GainReduction) {
+                State=S_Release;
+                 timeout = release_count;
+            }
+        }
+
+        switch (State) {
+            case S_Attack:
+                if ( timeout>0 && gain > gainreduce) {
+                    gain -= gain_step_attack;
+                     timeout--;
+                }
+                else {
+                    State=S_GainReduction;
+                     timeout = hold_count;
+                }
+                break;
+
+
+            case S_GainReduction:
+                if ( timeout>0)  timeout--;
+                else {
+                    State=S_Release;
+                     timeout = release_count;
+                }
+                break;
+
+
+            case S_Release:
+                if ( timeout>0 && gain<1.0f) {
+                     timeout--;
+                    gain += gain_step_release;
+                }
+                else {
+                    State=S_NoOperation;
+                }
+                break;
+
+            case S_NoOperation:
+                if (gain < 1.0f) gain = 1.0F;
+                break;
+
+            default:
+
+                break;
+
+        }
+
+        float outSampleF = inSample*gain;
+
+        return (int) outSampleF;
+    }
+
+protected:
+    enum CompStates {S_NoOperation, S_Attack, S_GainReduction, S_Release };
+    enum CompStates State = S_NoOperation;
+
+    int32_t attack_count, release_count, hold_count,  timeout;
+    float gainreduce, gain_step_attack, gain_step_release, gain, threshold;
+    uint32_t sample_rate;
+
+    void recalculate() {
+        gain_step_attack = (1.0f - gainreduce) / attack_count;
+        gain_step_release = (1.0f - gainreduce) / release_count;
+    }
+
+};
+
+
 } // namespace audio_tools
