@@ -464,7 +464,7 @@ protected:
 */
 
 class Compressor : public AudioEffect { 
-    
+public:    
     /// Copy Constructor
     Compressor(const Compressor &copy) = default;
 
