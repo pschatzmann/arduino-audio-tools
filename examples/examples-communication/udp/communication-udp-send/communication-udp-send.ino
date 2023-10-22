@@ -18,15 +18,18 @@ AudioInfo info(22000, 1, 16);
 SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound( sineWave);  // Stream generated from sine wave
 UDPStream udp(ssid, password); 
-Throttle throttle;
+Throttle throttle(udp);
 IPAddress udpAddress(192, 168, 1, 255);
 const int udpPort = 7000;
-StreamCopy copier(udp, sound);  // copies sound into i2s
+StreamCopy copier(throttle, sound);  // copies sound into i2s
 
 
 void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
+
+  // Setup sine wave
+  sineWave.begin(info, N_B4);
 
   // Define udp address and port
   udp.begin(udpAddress, udpPort);
@@ -37,13 +40,9 @@ void setup() {
   //cfg.correction_ms = 0;
   throttle.begin(cfg);
 
-  // Setup sine wave
-  sineWave.begin(info, N_B4);
   Serial.println("started...");
 }
 
 void loop() { 
-    throttle.startDelay();
-    int bytes = copier.copy();
-    throttle.delayBytes(bytes);
+    copier.copy();
 }
