@@ -66,11 +66,6 @@ class AnalogAudioStream  : public AudioStream {
       analog.end();
     }
 
-    // /// Overides the sample rate and uses the max value which is around  ~13MHz. Call this methd after begin();
-    // void setMaxSampleRate() {
-    //     analog.setMaxSampleRate();
-    // }
-
     AnalogConfig &config() {
       return adc_config;
     }
