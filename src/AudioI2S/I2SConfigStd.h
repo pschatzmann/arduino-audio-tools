@@ -9,7 +9,7 @@
 namespace audio_tools {
 
 /**
- * @brief configuration for all common i2s settings
+ * @brief Configuration for i2s 
  * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3

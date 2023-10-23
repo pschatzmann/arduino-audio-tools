@@ -22,7 +22,7 @@ enum I2SSignalType {
 INLINE_VAR const char* i2s_signal_types[] = {"Digital","Analog","PDM","TDM"};
 
 /**
- * @brief configuration for ESP32 i2s for IDF > 5.0
+ * @brief Configuration for ESP32 i2s for IDF > 5.0
  * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
