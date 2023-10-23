@@ -170,7 +170,9 @@ class SPDIFOutput : public AudioStream {
     i2s_cfg.pin_data = cfg.pin_data;
 #ifdef ESP32
     i2s_cfg.use_apll = true;
+#  if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0 , 0)
     i2s_cfg.fixed_mclk = mclk;
+#  endif
 #endif
     i2sOn = i2s.begin(i2s_cfg);
     return i2sOn;

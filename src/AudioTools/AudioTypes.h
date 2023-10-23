@@ -291,6 +291,25 @@ class NumberConverter {
 
 };
 
+#if defined(USE_I2S) 
+
+/**
+ * @brief I2S Formats
+ */
+enum I2SFormat {
+  I2S_STD_FORMAT,
+  I2S_LSB_FORMAT,
+  I2S_MSB_FORMAT,
+  I2S_PHILIPS_FORMAT,
+  I2S_RIGHT_JUSTIFIED_FORMAT,
+  I2S_LEFT_JUSTIFIED_FORMAT,
+  I2S_PCM,
+};
+
+INLINE_VAR const char* i2s_formats[] = {"I2S_STD_FORMAT","I2S_LSB_FORMAT","I2S_MSB_FORMAT","I2S_PHILIPS_FORMAT","I2S_RIGHT_JUSTIFIED_FORMAT","I2S_LEFT_JUSTIFIED_FORMAT","I2S_PCM"};
+
+#endif
+
 /// guaranteed to return the requested data
 template<typename T>
 T readSample(Stream* p_stream){
