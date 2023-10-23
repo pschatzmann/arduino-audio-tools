@@ -2,11 +2,6 @@
 #include "AudioConfig.h"
 #ifdef USE_I2S
 
-
-namespace audio_tools {
-
-}
-
 #if defined(ESP32)
 #  if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0 , 0)
 #    include "I2SConfigESP32.h"

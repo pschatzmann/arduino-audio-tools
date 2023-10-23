@@ -10,6 +10,7 @@ namespace audio_tools {
 
 /**
  * @brief configuration for all common i2s settings
+ * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

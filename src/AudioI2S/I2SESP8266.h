@@ -20,8 +20,8 @@ class I2SDriverESP8266 {
   public:
 
     /// Provides the default configuration
-    I2SConfig defaultConfig(RxTxMode mode) {
-        I2SConfig c(mode);
+    I2SConfigStd defaultConfig(RxTxMode mode) {
+        I2SConfigStd c(mode);
         return c;
     }
 
@@ -31,7 +31,7 @@ class I2SDriverESP8266 {
     }
 
     /// starts the DAC 
-    bool begin(I2SConfig cfg) {
+    bool begin(I2SConfigStd cfg) {
       this->cfg = cfg;
       i2s_set_rate(cfg.sample_rate);
       cfg.bits_per_sample = 16;
@@ -58,12 +58,12 @@ class I2SDriverESP8266 {
     }
 
     /// provides the actual configuration
-    I2SConfig config() {
+    I2SConfigStd config() {
       return cfg;
     }
 
   protected:
-    I2SConfig cfg;
+    I2SConfigStd cfg;
     
     /// writes the data to the I2S interface
     size_t writeBytes(const void *src, size_t size_bytes){

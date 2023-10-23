@@ -24,8 +24,8 @@ class I2SDriverSTM32 {
   public:
 
     /// Provides the default configuration
-    I2SConfig defaultConfig(RxTxMode mode = TX_MODE) {
-        I2SConfig c(mode);
+    I2SConfigStd defaultConfig(RxTxMode mode = TX_MODE) {
+        I2SConfigStd c(mode);
         return c;
     }
 
@@ -36,7 +36,7 @@ class I2SDriverSTM32 {
     }
 
     /// starts the DAC 
-    bool begin(I2SConfig cfg) {
+    bool begin(I2SConfigStd cfg) {
       TRACED();
       bool result = false;
       deleteBuffers();
@@ -92,7 +92,7 @@ class I2SDriverSTM32 {
     }
 
     /// provides the actual configuration
-    I2SConfig config() {
+    I2SConfigStd config() {
       return cfg;
     }
 
@@ -145,7 +145,7 @@ class I2SDriverSTM32 {
     }
 
   protected:
-    I2SConfig cfg;
+    I2SConfigStd cfg;
     I2SSettingsSTM32 i2s_stm32;
 
     void deleteBuffers() {
@@ -167,7 +167,7 @@ class I2SDriverSTM32 {
       i2s_stm32.i2s = &hi2s3;
     }
 
-    uint32_t getMode(I2SConfig &cfg){
+    uint32_t getMode(I2SConfigStd &cfg){
       if (cfg.is_master) {
         switch(cfg.rx_tx_mode){
           case RX_MODE:
@@ -192,7 +192,7 @@ class I2SDriverSTM32 {
     }
 
     
-    uint32_t getStandard(I2SConfig &cfg){
+    uint32_t getStandard(I2SConfigStd &cfg){
       uint32_t result;
       switch(cfg.i2s_format) {
           case I2S_PHILIPS_FORMAT:
@@ -208,7 +208,7 @@ class I2SDriverSTM32 {
       return I2S_STANDARD_PHILIPS;
     }
 
-    uint32_t getSampleRate(I2SConfig &cfg){
+    uint32_t getSampleRate(I2SConfigStd &cfg){
       switch(cfg.sample_rate){
         case I2S_AUDIOFREQ_192K:              
         case I2S_AUDIOFREQ_96K:             

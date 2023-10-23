@@ -14,6 +14,7 @@ namespace audio_tools {
 
 /***
  * @brief I2S Signal Types: Digital, Analog, PDM
+ * @ingroup platform
  */
 enum I2SSignalType {
   Digital,
@@ -25,6 +26,7 @@ INLINE_VAR const char* i2s_signal_types[] = {"Digital","Analog","PDM","TDM"};
 
 /**
  * @brief configuration for USE_ALT_PIN_SUPPORT i2s 
+ * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

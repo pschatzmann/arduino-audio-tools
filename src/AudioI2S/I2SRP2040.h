@@ -20,8 +20,8 @@ class I2SDriverRP2040 {
   public:
 
     /// Provides the default configuration
-    I2SConfig defaultConfig(RxTxMode mode) {
-        I2SConfig c(mode);
+    I2SConfigStd defaultConfig(RxTxMode mode) {
+        I2SConfigStd c(mode);
         return c;
     }
 
@@ -32,7 +32,7 @@ class I2SDriverRP2040 {
     }
 
     /// starts the DAC 
-    bool begin(I2SConfig cfg) {
+    bool begin(I2SConfigStd cfg) {
       TRACEI();
       this->cfg = cfg;
       cfg.logInfo();
@@ -111,7 +111,7 @@ class I2SDriverRP2040 {
     }
 
     /// provides the actual configuration
-    I2SConfig config() {
+    I2SConfigStd config() {
       return cfg;
     }
 
@@ -164,7 +164,7 @@ class I2SDriverRP2040 {
     }
 
   protected:
-    I2SConfig cfg;
+    I2SConfigStd cfg;
     I2S i2s;
     bool has_input[2];
 
