@@ -46,6 +46,9 @@ struct HttpHeaderLine {
     bool active;
 };
 
+static Vector<char> temp_buffer;
+
+
 /**
  * @brief In a http request and reply we need to process header information. With this API
  * we can define and query the header information. The individual header lines are stored
@@ -299,7 +302,6 @@ class HttpHeader {
         }
 
     protected:
-        static Vector<char> temp_buffer;
         int status_code = UNDEFINED;
         bool is_written = false;
         bool is_chunked = false;
@@ -370,10 +372,6 @@ class HttpHeader {
 
      
 };
-
-// declare static member variable
-Vector<char> HttpHeader::temp_buffer;
-
 
 /**
  * @brief Reading and writing of Http Requests
