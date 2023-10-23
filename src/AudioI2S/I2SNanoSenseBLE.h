@@ -137,8 +137,8 @@ class I2SDriverNanoBLE {
     I2SDriverNanoBLE() = default;
     
     /// Provides the default configuration
-    I2SConfig defaultConfig(RxTxMode mode) {
-        I2SConfig c(mode);
+    I2SConfigStd defaultConfig(RxTxMode mode) {
+        I2SConfigStd c(mode);
         return c;
     }
 
@@ -148,7 +148,7 @@ class I2SDriverNanoBLE {
     }
 
     /// starts the I2S 
-    bool begin(I2SConfig cfg) {
+    bool begin(I2SConfigStd cfg) {
         TRACEI();
         cfg.logInfo();
         this->cfg = cfg;
@@ -207,7 +207,7 @@ class I2SDriverNanoBLE {
     }
 
     /// provides the actual configuration
-    I2SConfig config() {
+    I2SConfigStd config() {
       return cfg;
     }
 
@@ -243,11 +243,11 @@ class I2SDriverNanoBLE {
     }
 
   protected:
-    I2SConfig cfg;
+    I2SConfigStd cfg;
     bool is_active = false;
     
     /// setup TXEN or RXEN
-    bool setupRxTx(I2SConfig cfg) {
+    bool setupRxTx(I2SConfigStd cfg) {
         TRACED();
         switch (cfg.rx_tx_mode) {
           case TX_MODE: 
@@ -265,7 +265,7 @@ class I2SDriverNanoBLE {
     }
 
     /// setup MCKFREQ and RATIO
-    void setupClock(I2SConfig cfg){
+    void setupClock(I2SConfigStd cfg){
         TRACED();
 
         // Enable MCK generator if in master mode
@@ -293,7 +293,7 @@ class I2SDriverNanoBLE {
     }
 
     /// setup SWIDTH
-    void setupBitWidth(I2SConfig cfg) {
+    void setupBitWidth(I2SConfigStd cfg) {
         TRACED();
         uint16_t swidth = I2S_CONFIG_SWIDTH_SWIDTH_16Bit;
         switch(cfg.bits_per_sample){
@@ -312,7 +312,7 @@ class I2SDriverNanoBLE {
     }
 
     /// setup format and align
-    void setupMode(I2SConfig cfg){
+    void setupMode(I2SConfigStd cfg){
         TRACED();
         // setup mode
         switch(cfg.i2s_format){
@@ -344,7 +344,7 @@ class I2SDriverNanoBLE {
     }
 
     /// setup pins
-    void setupPins(I2SConfig cfg){
+    void setupPins(I2SConfigStd cfg){
         TRACED();
 
         // MCK 

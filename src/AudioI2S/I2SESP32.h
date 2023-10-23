@@ -8,7 +8,7 @@
 #include "esp_system.h"
 
 #ifndef I2S_MCLK_MULTIPLE_DEFAULT
-#define I2S_MCLK_MULTIPLE_DEFAULT ((i2s_mclk_multiple_t)0)
+#  define I2S_MCLK_MULTIPLE_DEFAULT ((i2s_mclk_multiple_t)0)
 #endif
 
 namespace audio_tools {
@@ -27,8 +27,8 @@ class I2SDriverESP32 {
   public:
 
     /// Provides the default configuration
-    I2SConfig defaultConfig(RxTxMode mode) {
-        I2SConfig c(mode);
+    I2SConfigESP32 defaultConfig(RxTxMode mode) {
+        I2SConfigESP32 c(mode);
         return c;
     }
 
@@ -43,7 +43,7 @@ class I2SDriverESP32 {
     }
 
     /// starts the DAC 
-    bool begin(I2SConfig cfg) {
+    bool begin(I2SConfigESP32 cfg) {
       TRACED();
       this->cfg = cfg;
       switch(cfg.rx_tx_mode){
@@ -76,7 +76,7 @@ class I2SDriverESP32 {
     }
 
     /// provides the actual configuration
-    I2SConfig config() {
+    I2SConfigESP32 config() {
       return cfg;
     }
 
@@ -133,12 +133,12 @@ class I2SDriverESP32 {
     }
 
   protected:
-    I2SConfig cfg = defaultConfig(RX_MODE);
+    I2SConfigESP32 cfg = defaultConfig(RX_MODE);
     i2s_port_t i2s_num;
     i2s_config_t i2s_config;
     bool is_started = false;
 
-    bool isNoChannelConversion(I2SConfig cfg) {
+    bool isNoChannelConversion(I2SConfigESP32 cfg) {
       if (cfg.channels==2) return true;
       if (cfg.channels==1 && cfg.channel_format == I2S_CHANNEL_FMT_ALL_RIGHT) return true;
       if (cfg.channels==1 && cfg.channel_format == I2S_CHANNEL_FMT_ALL_LEFT) return true;
@@ -148,7 +148,7 @@ class I2SDriverESP32 {
     }
 
     /// starts the DAC 
-    bool begin(I2SConfig cfg, int txPin, int rxPin) {
+    bool begin(I2SConfigESP32 cfg, int txPin, int rxPin) {
       TRACED();
       cfg.logInfo();
       this->cfg = cfg;
@@ -318,7 +318,7 @@ class I2SDriverESP32 {
     }
   #pragma GCC diagnostic pop
 
-    int getModeDigital(I2SConfig &cfg) {
+    int getModeDigital(I2SConfigESP32 &cfg) {
         int i2s_format = cfg.is_master ? I2S_MODE_MASTER : I2S_MODE_SLAVE;
         int i2s_rx_tx = 0;
         switch(cfg.rx_tx_mode){
@@ -338,7 +338,7 @@ class I2SDriverESP32 {
     }
 
     // determines the i2s_format_t
-    i2s_mode_t toMode(I2SConfig &cfg) {
+    i2s_mode_t toMode(I2SConfigESP32 &cfg) {
       i2s_mode_t mode = (i2s_mode_t) (I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_RX );
       switch (cfg.signal_type){
         case Digital:

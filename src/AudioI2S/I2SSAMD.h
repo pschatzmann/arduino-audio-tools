@@ -19,8 +19,8 @@ class I2SDriverSAMD {
   public:
 
     /// Provides the default configuration
-    I2SConfig defaultConfig(RxTxMode mode) {
-        I2SConfig c(mode);
+    I2SConfigStd defaultConfig(RxTxMode mode) {
+        I2SConfigStd c(mode);
         return c;
     }
 
@@ -30,7 +30,7 @@ class I2SDriverSAMD {
     }
 
     /// starts the DAC 
-    bool begin(I2SConfig cfg) {
+    bool begin(I2SConfigStd cfg) {
         this->cfg = cfg;
         return I2S.begin(cfg.i2s_format, cfg.sample_rate, cfg.bits_per_sample);
     }
@@ -45,7 +45,7 @@ class I2SDriverSAMD {
     }
 
     /// provides the actual configuration
-    I2SConfig config() {
+    I2SConfigStd config() {
       return cfg;
     }
 
@@ -66,7 +66,7 @@ class I2SDriverSAMD {
     }
 
   protected:
-    I2SConfig cfg;
+    I2SConfigStd cfg;
     
 };
 
