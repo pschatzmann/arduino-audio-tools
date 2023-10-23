@@ -25,7 +25,7 @@ enum I2SSignalType {
 INLINE_VAR const char* i2s_signal_types[] = {"Digital","Analog","PDM","TDM"};
 
 /**
- * @brief configuration for USE_ALT_PIN_SUPPORT i2s 
+ * @brief Configuration for ESP32 legacy i2s 
  * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -97,13 +97,13 @@ class I2SConfigESP32 : public AudioInfo {
       if (signal_type==Digital){
         LOGI("i2s_format: %s", i2s_formats[i2s_format]);      
       } 
-      //LOGI("auto_clear: %s",auto_clear? "true" : "false");
+      LOGI("auto_clear: %s",auto_clear? "true" : "false");
       if (use_apll) {
         LOGI("use_apll: %s", use_apll ? "true" : "false");
       }
-      //if (fixed_mclk){
-      //  LOGI("fixed_mclk: %d", (int) fixed_mclk);
-      //}
+      if (fixed_mclk){
+       LOGI("fixed_mclk: %d", (int) fixed_mclk);
+      }
       LOGI("buffer_count:%d",buffer_count);
       LOGI("buffer_size:%d",buffer_size);
 
