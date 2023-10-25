@@ -427,6 +427,7 @@ uint64_t millis() {return (xTaskGetTickCount() * portTICK_PERIOD_MS);}
 #define PIN_I2S_WS PIN_I2S_BCK+1
 #define PIN_I2S_DATA_IN 28
 #define PIN_I2S_DATA_OUT 28
+#define PIN_I2S_MCK -1 
 // Default Setting: The mute pin can be switched actovated by setting it to a gpio (e.g 4). Or you could drive the LED by assigning LED_BUILTIN
 #define PIN_I2S_MUTE -1
 #define SOFT_MUTE_VALUE 0

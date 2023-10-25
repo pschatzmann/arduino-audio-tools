@@ -68,9 +68,11 @@ class I2SDriverRP2040 {
         LOGE("Could not set data pin: %d", cfg.pin_data);
         return false;
       }
-      if (!i2s.setMCLK(cfg.pin_mck)){
-        LOGE("Could not set data pin: %d", cfg.pin_mck);
-        return false;
+      if (cfg.pin_mck != -1){
+        if (!i2s.setMCLK(cfg.pin_mck)){
+          LOGE("Could not set data pin: %d", cfg.pin_mck);
+          return false;
+        }
       }
 
       if (cfg.bits_per_sample==8 || !i2s.setBitsPerSample(cfg.bits_per_sample)){
