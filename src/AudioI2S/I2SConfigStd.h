@@ -60,6 +60,11 @@ class I2SConfigStd : public AudioInfo {
     int buffer_count = I2S_BUFFER_COUNT;
     int buffer_size = I2S_BUFFER_SIZE;
 
+#if defined(RP2040_HOWER)
+    /// materclock multiplier for RP2040: must be multiple of 64
+    int mck_multiplier  = 64;
+#endif
+
 #if defined(USE_ALT_PIN_SUPPORT)
     bool is_arduino_pin_numbers = true;
 #endif
