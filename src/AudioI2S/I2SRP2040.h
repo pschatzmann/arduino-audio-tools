@@ -69,6 +69,7 @@ class I2SDriverRP2040 {
         return false;
       }
       if (cfg.pin_mck != -1){
+        i2s.setMCLKmult(cfg.mck_multiplier);
         if (!i2s.setMCLK(cfg.pin_mck)){
           LOGE("Could not set data pin: %d", cfg.pin_mck);
           return false;
