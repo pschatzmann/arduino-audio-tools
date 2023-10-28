@@ -16,7 +16,7 @@
 #include "AudioLibs/AudioKit.h"
 
 
-URLStream url("ssid","password");  // or replace with ICYStream to get metadata
+URLStream url("ssid","password");  
 AudioKitStream i2s; // final output of decoded stream
 EncodedAudioStream dec(&i2s, new MP3DecoderHelix()); // Decoding stream
 StreamCopy copier(dec, url); // copy url to decoder
