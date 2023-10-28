@@ -207,7 +207,7 @@ class OpusAudioDecoder : public AudioDecoder {
   Print *p_print = nullptr;
   OpusSettings cfg;
   OpusDecoder *dec;
-  bool active;
+  bool active = false;
   Vector<uint8_t> outbuf{0};
 };
 

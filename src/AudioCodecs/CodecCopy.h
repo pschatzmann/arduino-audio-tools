@@ -85,7 +85,7 @@ public:
 
   void setNotifyAudioChange(AudioInfoSupport &bi) {}
 
-  const char *mime() {return nullptr;}
+  const char *mime() {return "audio/pcm";}
 
 
 protected:
@@ -93,6 +93,8 @@ protected:
   AudioInfo info;
 };
 
+using PCMEncoder = CopyEncoder;
+using PCMDecoder = CopyDecoder;
 
 } // namespace audio_tools
 
