@@ -135,7 +135,7 @@ class VolumeStream : public AudioStream {
 
         /// Writes raw PCM audio data, which will be the input for the volume control 
         virtual size_t write(const uint8_t *buffer, size_t size) override {
-            LOGD("VolumeStream::write: %d", size);
+            LOGD("VolumeStream::write: %zu", size);
             if (buffer==nullptr || p_out==nullptr){
                 LOGE("NPE");
                 return 0;
