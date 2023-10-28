@@ -804,7 +804,7 @@ class Throttle : public AudioOutput {
     int64_t durationUsEff = micros() - start_time;
     int64_t durationUsToBe = (sum_samples * 1000000) / info.sample_rate;
     int64_t waitUs = durationUsToBe - durationUsEff + info.correction_us;
-    LOGI("wait: %d", waitUs);
+    LOGI("wait: %d", (int)waitUs);
     if (waitUs > 0) {
       delayMicroseconds(waitUs);
     }
