@@ -30,6 +30,8 @@ struct OpusSettings : public AudioInfo {
     bits_per_sample = 16;
   }
   int max_buffer_size = OPUS_DEC_MAX_BUFFER_SIZE;
+  int max_buffer_write_size = 512;
+
 };
 
 /**
@@ -200,9 +202,9 @@ class OpusAudioDecoder : public AudioDecoder {
       int open = out_bytes;
       int processed = 0;
       while(open>0){
-        int to_write = std::min(open, 512);
+        int to_write = std::min(open, cfg.max_buffer_write_size);
         int written = p_print->write(outbuf.data()+processed, to_write);
-        open -+ written;
+        open -= written;
         processed += written;
       }
     }
