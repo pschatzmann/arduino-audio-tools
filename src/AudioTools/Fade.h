@@ -240,15 +240,23 @@ protected:
 class FadeStream : public AudioStream {
 public:
   FadeStream() = default;
-  FadeStream(Print &out) { setTarget(out); }
-  FadeStream(Stream &io) { setTarget(io); }
+  FadeStream(Print &out) { setOutput(out); }
+  FadeStream(Stream &io) { setStream(io); }
 
-  void setTarget(Stream &io) {
+  void setStream(Stream &io) {
     p_io = &io;
     p_out = &io;
   }
 
-  void setTarget(Print &out) { p_out = &out; }
+  void setOutput(Print &out) { p_out = &out; }
+
+  /// same as setStream
+  void setOutput(Stream &io) {
+    p_io = &io;
+  }
+
+  /// same as setOutput
+  void setStream(Print &out) { p_out = &out; }
 
   void setAudioInfo(AudioInfo info) override {
     AudioStream::setAudioInfo(info);

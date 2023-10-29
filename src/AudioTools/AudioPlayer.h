@@ -109,8 +109,8 @@ namespace audio_tools {
 
         void setOutput(AudioOutput& output){
             if (p_decoder->isResultPCM()){
-                this->fade.setTarget(output);
-                this->volume_out.setTarget(fade);
+                this->fade.setOutput(output);
+                this->volume_out.setOutput(fade);
                 delete this->p_out_decoding;
                 this->p_out_decoding = new EncodedAudioOutput(&volume_out, p_decoder);
             } else {
@@ -123,8 +123,8 @@ namespace audio_tools {
 
         void setOutput(Print &output){
             if (p_decoder->isResultPCM()){
-                this->fade.setTarget(output);
-                this->volume_out.setTarget(fade);
+                this->fade.setOutput(output);
+                this->volume_out.setOutput(fade);
                 delete this->p_out_decoding;
                 this->p_out_decoding = new EncodedAudioOutput(&volume_out, p_decoder);
             } else {
@@ -137,8 +137,8 @@ namespace audio_tools {
 
         void setOutput(AudioStream& output){
             if (p_decoder->isResultPCM()){
-                this->fade.setTarget(output);
-                this->volume_out.setTarget(fade);
+                this->fade.setOutput(output);
+                this->volume_out.setOutput(fade);
                 delete this->p_out_decoding;
                 this->p_out_decoding = new EncodedAudioOutput(&volume_out, p_decoder);
             } else {

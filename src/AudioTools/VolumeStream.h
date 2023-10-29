@@ -36,7 +36,7 @@ class VolumeStream : public AudioStream {
 
         /// Constructor which assigns Print output
         VolumeStream(Print &out) {
-            setTarget(out);
+            setOutput(out);
         }
 
         /// Constructor which assigns Stream input or output
@@ -47,7 +47,7 @@ class VolumeStream : public AudioStream {
         /// Constructor which assigns Print output
         VolumeStream(AudioOutput &out) {
             Print *p_print = &out;
-            setTarget(*p_print);
+            setOutput(*p_print);
             p_notify = (AudioInfoSupport*) &out;
         }
 
@@ -58,21 +58,26 @@ class VolumeStream : public AudioStream {
             p_notify = (AudioInfoSupport *)&io;
         }
 
-        /// Defines/Changes the output target
-        void setTarget(Print &out){
-            p_out = &out;
-        }
-
-        /// same as setStream        
-        void setTarget(Stream &in){
-            p_in = &in;
-            p_out = p_in;
-        }
-
         /// Defines/Changes the input & output
         void setStream(Stream &in){
             p_in = &in;
             p_out = p_in;
+        }
+
+        /// Defines/Changes the output target
+        void setOutput(Print &out){
+            p_out = &out;
+        }
+        
+        /// same as setStream        
+        void setOutput(Stream &in){
+            p_in = &in;
+            p_out = p_in;
+        }
+
+        /// same as set Output
+        void setStream(Print &out){
+            p_out = &out;
         }
 
         VolumeStreamConfig defaultConfig() {
