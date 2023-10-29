@@ -9,7 +9,7 @@
 #endif
 
 #ifndef OPUS_DEC_MAX_BUFFER_SIZE
-#define OPUS_DEC_MAX_BUFFER_SIZE 1024
+#define OPUS_DEC_MAX_BUFFER_SIZE 4*1024
 #endif
 
 
@@ -187,16 +187,24 @@ class OpusAudioDecoder : public AudioDecoder {
     // decode data
     LOGD("OpusAudioDecoder::write: %d", (int)in_size);
     int in_band_forward_error_correction = 0;
+    int frame_count = cfg.max_buffer_size / cfg.channels / sizeof(opus_int16);
     int out_samples = opus_decode(
         dec, (uint8_t *)in_ptr, in_size, (opus_int16 *)outbuf.data(),
-        cfg.max_buffer_size, in_band_forward_error_correction);
+        frame_count, in_band_forward_error_correction);
     if (out_samples < 0) {
       LOGW("opus-decode: %s", opus_strerror(out_samples));
     } else if (out_samples > 0) {
       // write data to final destination
       int out_bytes = out_samples * cfg.channels * sizeof(int16_t);
       LOGD("opus-decode: %d", out_bytes);
-      p_print->write(outbuf.data(), out_bytes);
+      int open = out_bytes;
+      int processed = 0;
+      while(open>0){
+        int to_write = std::min(open, 512);
+        int written = p_print->write(outbuf.data()+processed, to_write);
+        open -+ written;
+        processed += written;
+      }
     }
     return in_size;
   }
