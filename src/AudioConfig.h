@@ -317,8 +317,8 @@ extern "C" void app_main();
 // delay and millis is needed by this framework
 namespace audio_tools {
 
-void delay(uint64_t ms){ vTaskDelay(1000 / portTICK_PERIOD_MS);}
-uint64_t millis() {return (xTaskGetTickCount() * portTICK_PERIOD_MS);}
+void delay(uint32_t ms){ vTaskDelay(1000 / portTICK_PERIOD_MS);}
+uint32_t millis() {return (xTaskGetTickCount() * portTICK_PERIOD_MS);}
 
 }
 #endif

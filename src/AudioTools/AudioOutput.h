@@ -811,10 +811,10 @@ class Throttle : public AudioOutput {
   }
 
  protected:
-  uint64_t start_time;
-  uint64_t sum_samples = 0;
+  uint32_t start_time = 0;
+  uint32_t sum_samples = 0;
   ThrottleConfig info;
-  int bytesPerSample;
+  int bytesPerSample = 0;
   Print *p_out = nullptr;
 };
 

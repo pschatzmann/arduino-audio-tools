@@ -15,11 +15,7 @@ namespace audio_tools {
  */
 class DecoderFromStreaming : public AudioDecoder {
 public:
-  /**
-   * @brief Constructor for a new DecoderBase64 object
-   *
-   * @param out_buffeream Output Stream to which we write the decoded result
-   */
+  /// Default Constructor
   DecoderFromStreaming(StreamingDecoder &dec, int bufferSize) {
     TRACED();
     p_dec = &dec;

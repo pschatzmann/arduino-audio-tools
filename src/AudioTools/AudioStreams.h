@@ -1058,7 +1058,7 @@ class MeasuringStream : public AudioStream {
     }
 
     /// Provides the time when the last measurement was started
-    uint64_t startTime() {
+    uint32_t startTime() {
       return start_time;
     }
 
@@ -1071,7 +1071,7 @@ class MeasuringStream : public AudioStream {
     int count=0;
     Stream *p_stream=nullptr;
     Print *p_print=nullptr;
-    uint64_t start_time;
+    uint32_t start_time;
     int total_bytes = 0;
     int bytes_per_second = 0;
     int sample_div = 0;
@@ -1083,7 +1083,7 @@ class MeasuringStream : public AudioStream {
       total_bytes+=len;
 
       if (count<0){
-        uint64_t end_time = millis();
+        uint32_t end_time = millis();
         int time_diff = end_time - start_time; // in ms
         if (time_diff>0){
           bytes_per_second = total_bytes / time_diff * 1000;
