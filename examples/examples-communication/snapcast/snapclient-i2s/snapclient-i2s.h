@@ -10,13 +10,24 @@
  * @copyright Copyright (c) 2022
  */
 
-#include "AudioTools.h"
-#include "SnapClient.h" // install https://github.com/pschatzmann/arduino-snapclient
+/**
+ * @brief SnapClient with Opus decoder: I2S OUtput 
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
 
+#include "AudioTools.h"
+#include "SnapClient.h"
+#include "AudioCodecs/CodecOpus.h"
+
+#define ARDUINO_LOOP_STACK_SIZE (10 * 1024)
+
+OpusAudioDecoder opus;
 I2SStream out;
-SnapClient client(out);
+SnapClient client(out, opus);
 
 void setup() {
+  Serial.begin(115200);
   // login to wifi
   WiFi.begin(CONFIG_WIFI_SSID, CONFIG_WIFI_PASSWORD);
   Serial.print("Connecting to WiFi ..");
@@ -41,5 +52,5 @@ void setup() {
 }
 
 void loop() {
-  delay(100);
+  client.doLoop();
 }
