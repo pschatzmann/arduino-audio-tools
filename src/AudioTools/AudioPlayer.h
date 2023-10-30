@@ -480,7 +480,7 @@ namespace audio_tools {
         StreamCopy copier; // copies sound into i2s
         AudioInfo info;
         bool meta_active = false;
-        uint64_t timeout = 0;
+        uint32_t timeout = 0;
         int stream_increment = 1; // +1 moves forward; -1 moves backward
         float current_volume = -1.0; // illegal value which will trigger an update
         int delay_if_full = 100;

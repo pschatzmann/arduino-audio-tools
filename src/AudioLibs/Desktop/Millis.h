@@ -7,14 +7,14 @@
 namespace audio_tools {
 
 /// Waits for the indicated milliseconds
-void delay(uint64_t ms) {
+void delay(uint32_t ms) {
     //std::this_thread::sleep_for(std::chrono::milliseconds(ms));    
     auto end = millis()+ms;
     while(millis()<=end);
 }
 
 /// Returns the milliseconds since the start
-uint64_t millis(){
+uint32_t millis(){
     using namespace std::chrono;
     // Get current time with precision of milliseconds
     auto now = time_point_cast<milliseconds>(system_clock::now());

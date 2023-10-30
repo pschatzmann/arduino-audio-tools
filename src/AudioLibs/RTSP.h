@@ -156,7 +156,7 @@ public:
 
 protected:
   AudioStream *p_audiostream = nullptr;
-  uint64_t time_of_last_read = 0;
+  uint32_t time_of_last_read = 0;
   bool started = true;
   RTSPOutputPCMInfo pcmInfo;
   RTSPFormatPCM format{pcmInfo};

@@ -336,7 +336,7 @@ public:
   void setReportAt(int at) { count_at = at; }
 
   /// Defines an alternative method to determine millis()
-  void setTimeCallback(uint64_t (*cb_ms)(void)) { millis_cb = cb_ms; }
+  void setTimeCallback(uint32_t (*cb_ms)(void)) { millis_cb = cb_ms; }
 
   int availableForWrite() override {
     if (p_out == nullptr)
@@ -419,12 +419,12 @@ protected:
   Print *p_out = nullptr;
   uint32_t counter = 0;
   uint32_t count_at = -1;
-  uint64_t start_time = 0;
-  uint64_t last_time = 0;
-  uint64_t total_bytes = 0;
-  uint64_t (*millis_cb)(void) = nullptr;
+  uint32_t start_time = 0;
+  uint32_t last_time = 0;
+  uint32_t total_bytes = 0;
+  uint32_t (*millis_cb)(void) = nullptr;
 
-  inline uint64_t ms() {
+  inline uint32_t ms() {
     if (millis_cb)
       return millis_cb();
     return millis();
