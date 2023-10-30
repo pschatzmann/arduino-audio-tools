@@ -1,4 +1,14 @@
 
+/**
+ * @file communication-rtsp-i2s.ino
+ * @author Phil Schatzmann
+ * @brief Demo for RTSP Client that is playing mp3. I tested with the live555 server with linux 
+ * @version 0.1
+ * @date 2022-05-02
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #include "AudioTools.h" // https://github.com/pschatzmann/arduino-audio-tools
 #include "AudioCodecs/CodecMP3Helix.h" // https://github.com/pschatzmann/arduino-libhelix
 #include "AudioLibs/AudioKit.h" // https://github.com/pschatzmann/arduino-audiokit
