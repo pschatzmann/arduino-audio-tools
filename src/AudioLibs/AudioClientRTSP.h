@@ -61,7 +61,7 @@ static bool rtspUseTCP = REQUEST_STREAMING_OVER_TCP;
 namespace audio_tools {
 
 /**
- * @brief A simple RTSPClient using https://github.com/pschatzmann/live555  
+ * @brief A simple RTSPClient using https://github.com/pschatzmann/arduino-live555
  * @ingroup communications
  * @author Phil Schatzmann
  * @copyright GPLv3
