@@ -23,4 +23,5 @@
 #include "AudioCodecs/CodecL8.h"
 #include "AudioCodecs/CodecFloat.h"
 #include "AudioCodecs/CodecBase64.h"
+#include "AudioCodecs/DecoderFromStreaming.h"
 
