@@ -411,7 +411,7 @@ public:
          info.sample_rate, sampleRate(), correctionFactor());
   }
 
-  bool isActvie() { return count_at >= 0 && counter <= count_at; }
+  bool isActvie() { return  counter <= count_at; }
 
 protected:
   const char *TAG = "SNAP";
