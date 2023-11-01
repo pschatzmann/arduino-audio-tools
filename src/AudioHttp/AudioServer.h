@@ -360,6 +360,12 @@ class AudioEncoderServer  : public AudioServer {
 
         virtual void sendReplyContent() {
             TRACED();
+            // restart encoder
+            if (encoder){
+                encoder->end();
+                encoder->begin();
+            }
+
             if (callback!=nullptr){
                 //encoded_stream.begin(out_ptr(), encoder);
                 encoded_stream.setOutput(out_ptr());
