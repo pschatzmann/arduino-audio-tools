@@ -429,7 +429,7 @@ class I2SDriverNanoBLE {
       }
 
       // on stream option we only need to have the arrays allocated
-      if (p_nano_ble_stream!=null){
+      if (p_nano_ble_stream!=nullptr){
         return p_i2s_array_1!=nullptr && p_i2s_array_2!=nullptr;
       } 
       return p_i2s_array_1!=nullptr && p_i2s_array_2!=nullptr && p_i2s_buffer!=nullptr;
