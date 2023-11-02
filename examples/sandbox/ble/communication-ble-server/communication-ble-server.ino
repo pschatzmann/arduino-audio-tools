@@ -32,5 +32,5 @@ void setup() {
 }
 
 void loop() { 
-  if (ble) copier.copy();
+  if (ble.availableForWrite()>0) copier.copy();
 }
