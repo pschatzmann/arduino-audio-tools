@@ -373,6 +373,10 @@ class EncodedAudioOutput : public AudioStream {
       return 0;
     }
 
+    if(availableForWrite()==0){
+      return 0;
+    }
+
     size_t result = writer_ptr->write(data, len);
     LOGD("EncodedAudioOutput::write: %d -> %d", (int)len, (int)result);
     custom_log_level.reset();
