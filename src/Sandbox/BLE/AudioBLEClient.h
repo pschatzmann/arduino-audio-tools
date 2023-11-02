@@ -20,11 +20,14 @@ static AudioBLEClient *selfAudioBLEClient = nullptr;
  */
 
 class AudioBLEClient : public AudioBLEStream,
+                       public BLEClientCallbacks,
                        public BLEAdvertisedDeviceCallbacks {
 public:
   AudioBLEClient(int mtu = BLE_BUFFER_SIZE) : AudioBLEStream(mtu) {
     selfAudioBLEClient = this;
   }
+
+
 
   /// starts a BLE client
   bool begin(const char *serverName, int seconds) {
@@ -50,17 +53,27 @@ public:
 
   size_t readBytes(uint8_t *data, size_t dataSize) override {
     TRACED();
-    // changed to auto to be version independent (it changed from std::string to String)
-    auto str = ch02_char->readValue();
-    memcpy(data, str.c_str(), str.length());
+    if (!is_client_connected || !is_client_set_up) return 0;
+    if (!ch01_char->canRead()) return 0;
+    // changed to auto to be version independent (it changed from std::string to
+    // String)
+    auto str = ch01_char->readValue();
+    if (str.length() > 0){
+      memcpy(data, str.c_str(), str.length());
+    }
     return str.length();
   }
 
   int available() override { return BLE_BUFFER_SIZE; }
 
   size_t write(const uint8_t *data, size_t dataSize) override {
-    ch01_char->writeValue((uint8_t *)data, dataSize, false);
-    return dataSize;
+    int result = 0;
+    if (!is_client_connected || !is_client_set_up) return 0;
+    if (ch02_char->canWrite()) {
+      ch02_char->writeValue((uint8_t *)data, dataSize, false);
+      result = dataSize;
+    }
+    return result;
   }
 
   int availableForWrite() override { return BLE_BUFFER_SIZE; }
@@ -73,11 +86,21 @@ protected:
   BLEAdvertising *p_advertising = nullptr;
   BLERemoteService *p_remote_service = nullptr;
   BLEAddress *p_server_address = nullptr;
-  BLERemoteCharacteristic *ch01_char = nullptr;
-  BLERemoteCharacteristic *ch02_char = nullptr;
+  BLERemoteCharacteristic *ch01_char = nullptr; // read
+  BLERemoteCharacteristic *ch02_char = nullptr; // write
   BLERemoteCharacteristic *info_char = nullptr;
   BLEAdvertisedDevice advertised_device;
-  bool is_client_connected = false;
+  volatile bool is_client_connected = false;
+  bool is_client_set_up = false;
+
+  virtual void onConnect(BLEClient *pClient) {
+    TRACEI();
+    is_client_connected = true;
+  }
+  virtual void onDisconnect(BLEClient *pClient) {
+    TRACEI();
+    is_client_connected = false;
+  };
 
   void writeAudioInfoCharacteristic(AudioInfo info) override {
     TRACEI();
@@ -119,6 +142,9 @@ protected:
     if (p_client == nullptr)
       p_client = BLEDevice::createClient();
 
+    // onConnect and on onDisconnect support
+    p_client->setClientCallbacks(this);
+
     // Connect to the remove BLE Server.
     LOGI("Connecting to %s ...",
          advertised_device.getAddress().toString().c_str());
@@ -128,9 +154,9 @@ protected:
       LOGE("connect failed");
       return false;
     }
-    p_client->setMTU(max_transfer_size);
 
-    LOGI("Connected to server: %s", is_client_connected ? "true" : "false");
+    LOGI("Setting mtu to %d", max_transfer_size);
+    p_client->setMTU(max_transfer_size);
 
     // Obtain a reference to the service we are after in the remote BLE
     // server.
@@ -147,14 +173,15 @@ protected:
     }
 
     if (ch02_char == nullptr) {
-       ch02_char= p_remote_service->getCharacteristic(BLE_CH2_UUID);
+      ch02_char = p_remote_service->getCharacteristic(BLE_CH2_UUID);
     }
 
     if (is_audio_info_active && info_char == nullptr) {
       info_char = p_remote_service->getCharacteristic(BLE_INFO_UUID);
       info_char->registerForNotify(notifyCallback);
     }
-    is_client_connected = true;
+    LOGI("Connected to server: %s", is_client_connected ? "true" : "false");
+    is_client_set_up = true;
     return is_client_connected;
   }
 };
