@@ -23,18 +23,16 @@ class AudioBLEClient : public AudioBLEStream,
                        public BLEClientCallbacks,
                        public BLEAdvertisedDeviceCallbacks {
 public:
-  AudioBLEClient(int mtu = BLE_BUFFER_SIZE) : AudioBLEStream(mtu) {
+  AudioBLEClient(int mtu = BLE_MTU) : AudioBLEStream(mtu) {
     selfAudioBLEClient = this;
+    max_transfer_size = mtu;
   }
 
-
-
   /// starts a BLE client
-  bool begin(const char *serverName, int seconds) {
+  bool begin(const char *localName, int seconds) {
     TRACEI();
-    ble_server_name = serverName;
     // Init BLE device
-    BLEDevice::init("client");
+    BLEDevice::init(localName);
 
     // Retrieve a Scanner and set the callback we want to use to be informed
     // when we have detected a new device.
@@ -53,22 +51,28 @@ public:
 
   size_t readBytes(uint8_t *data, size_t dataSize) override {
     TRACED();
-    if (!is_client_connected || !is_client_set_up) return 0;
-    if (!ch01_char->canRead()) return 0;
+    setupBLEClient();
+    if (!is_client_connected || !is_client_set_up)
+      return 0;
+    if (!ch01_char->canRead())
+      return 0;
     // changed to auto to be version independent (it changed from std::string to
     // String)
     auto str = ch01_char->readValue();
-    if (str.length() > 0){
+    if (str.length() > 0) {
       memcpy(data, str.c_str(), str.length());
     }
     return str.length();
   }
 
-  int available() override { return BLE_BUFFER_SIZE; }
+  int available() override { return BLE_MTU; }
 
   size_t write(const uint8_t *data, size_t dataSize) override {
+    TRACED();
+    setupBLEClient();
     int result = 0;
-    if (!is_client_connected || !is_client_set_up) return 0;
+    if (!is_client_connected || !is_client_set_up)
+      return 0;
     if (ch02_char->canWrite()) {
       ch02_char->writeValue((uint8_t *)data, dataSize, false);
       result = dataSize;
@@ -76,9 +80,16 @@ public:
     return result;
   }
 
-  int availableForWrite() override { return BLE_BUFFER_SIZE; }
+  int availableForWrite() override { return BLE_MTU; }
 
-  virtual bool connected() override { return is_client_connected; }
+  bool connected() override {
+    if (!setupBLEClient()) {
+      LOGE("setupBLEClient failed");
+    }
+    return is_client_connected;
+  }
+
+  void doLoop() { setupBLEClient(); }
 
 protected:
   // client
@@ -90,14 +101,20 @@ protected:
   BLERemoteCharacteristic *ch02_char = nullptr; // write
   BLERemoteCharacteristic *info_char = nullptr;
   BLEAdvertisedDevice advertised_device;
+  BLEUUID BLUEID_AUDIO_SERVICE_UUID{BLE_AUDIO_SERVICE_UUID};
+  BLEUUID BLUEID_CH1_UUID{BLE_CH1_UUID};
+  BLEUUID BLUEID_CH2_UUID{BLE_CH2_UUID};
+  BLEUUID BLUEID_INFO_UUID{BLE_INFO_UUID};
+
   volatile bool is_client_connected = false;
   bool is_client_set_up = false;
 
-  virtual void onConnect(BLEClient *pClient) {
+  void onConnect(BLEClient *pClient) override {
     TRACEI();
     is_client_connected = true;
   }
-  virtual void onDisconnect(BLEClient *pClient) {
+
+  void onDisconnect(BLEClient *pClient) override {
     TRACEI();
     is_client_connected = false;
   };
@@ -112,17 +129,13 @@ protected:
   void onResult(BLEAdvertisedDevice advertisedDevice) override {
     TRACEI();
     // Check if the name of the advertiser matches
-    if (advertisedDevice.getName() == ble_server_name) {
-      TRACEI();
+    if (advertisedDevice.haveServiceUUID() &&
+        advertisedDevice.isAdvertisingService(BLUEID_AUDIO_SERVICE_UUID)) {
+      LOGI("Service '%s' found!", BLE_AUDIO_SERVICE_UUID);
+      // save advertised_device in class variable
       advertised_device = advertisedDevice;
       // Scan can be stopped, we found what we are looking for
       advertised_device.getScan()->stop();
-      // Address of advertiser is the one we need
-      // p_server_address = new BLEAddress(advertisedDevice.getAddress());
-
-      LOGI("Device '%s' found: Connecting!",
-           advertised_device.toString().c_str());
-      setupBLEClient();
     }
     delay(10);
   }
@@ -137,6 +150,8 @@ protected:
   }
 
   bool setupBLEClient() {
+    if (is_client_set_up)
+      return true;
     TRACEI();
 
     if (p_client == nullptr)
@@ -151,37 +166,53 @@ protected:
     // p_client->connect(advertised_device.getAddress(),BLE_ADDR_TYPE_RANDOM);
     p_client->connect(&advertised_device);
     if (!p_client->isConnected()) {
-      LOGE("connect failed");
+      LOGE("Connect failed");
       return false;
     }
+    LOGI("Connected to %s ...",
+         advertised_device.getAddress().toString().c_str());
 
     LOGI("Setting mtu to %d", max_transfer_size);
+    assert(max_transfer_size > 0);
     p_client->setMTU(max_transfer_size);
 
     // Obtain a reference to the service we are after in the remote BLE
     // server.
     if (p_remote_service == nullptr) {
-      p_remote_service = p_client->getService(BLE_SERIAL_SERVICE_UUID);
+      p_remote_service = p_client->getService(BLUEID_AUDIO_SERVICE_UUID);
       if (p_remote_service == nullptr) {
-        LOGE("Failed to find our service UUID: %s", BLE_SERIAL_SERVICE_UUID);
+        LOGE("Failed to find our service UUID: %s", BLE_AUDIO_SERVICE_UUID);
         return (false);
       }
     }
 
     if (ch01_char == nullptr) {
-      ch01_char = p_remote_service->getCharacteristic(BLE_CH1_UUID);
+      ch01_char = p_remote_service->getCharacteristic(BLUEID_CH1_UUID);
+      if (ch01_char == nullptr) {
+        LOGE("Failed to find char. UUID: %s", BLE_CH1_UUID);
+        return false;
+      }
     }
 
     if (ch02_char == nullptr) {
-      ch02_char = p_remote_service->getCharacteristic(BLE_CH2_UUID);
+      ch02_char = p_remote_service->getCharacteristic(BLUEID_CH2_UUID);
+      if (ch02_char == nullptr) {
+        LOGE("Failed to find char. UUID: %s", BLE_CH2_UUID);
+        return false;
+      }
     }
 
     if (is_audio_info_active && info_char == nullptr) {
-      info_char = p_remote_service->getCharacteristic(BLE_INFO_UUID);
+      info_char = p_remote_service->getCharacteristic(BLUEID_INFO_UUID);
+      if (info_char == nullptr) {
+        LOGE("Failed to find char. UUID: %s", BLE_INFO_UUID);
+        return false;
+      }
       info_char->registerForNotify(notifyCallback);
     }
     LOGI("Connected to server: %s", is_client_connected ? "true" : "false");
     is_client_set_up = true;
+    is_client_connected = true;
     return is_client_connected;
   }
 };

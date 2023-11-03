@@ -26,7 +26,7 @@ void setup() {
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
   // start BLE client - wait at most 10 minutes
-  ble.begin("ble-send", 60*10);
+  ble.begin("ble-receive", 60*10);
 
   // start decoder
   decoder.begin(info);

@@ -19,14 +19,14 @@ class AudioBLEServer : public AudioBLEStream,
                        public BLECharacteristicCallbacks,
                        public BLEServerCallbacks {
 public:
-  AudioBLEServer(int mtu = BLE_BUFFER_SIZE) : AudioBLEStream(mtu) {}
+  AudioBLEServer(int mtu = BLE_MTU) : AudioBLEStream(mtu) {}
 
   // starts a BLE server with the indicated name
   bool begin(const char *name) {
     TRACEI();
     ble_server_name = name;
     BLEDevice::init(name);
-    BLEDevice::setMTU(BLE_BUFFER_SIZE);
+    //BLEDevice::setMTU(BLE_MTU);
     // Increase connection interval to 30 milliseconds (30 * 1.25 ms)
     // BLEDevice::setConnectionParams(30, 30, 0, 0);
 
@@ -36,9 +36,9 @@ public:
     setupBLEService();
 
     p_advertising = BLEDevice::getAdvertising();
-    p_advertising->addServiceUUID(BLE_SERIAL_SERVICE_UUID);
-    p_advertising->setScanResponse(false);
-    p_advertising->setMinPreferred(0x00);
+    p_advertising->addServiceUUID(BLE_AUDIO_SERVICE_UUID);
+    //p_advertising->setScanResponse(false);
+    //p_advertising->setMinPreferred(0x00);
     // p_advertising->setMinPreferred(0x06);
     BLEDevice::startAdvertising();
     return true;
@@ -99,7 +99,6 @@ protected:
   RingBuffer<uint16_t> transmit_buffer_sizes{0};
 
   virtual void receiveAudio(const uint8_t *data, size_t size) {
-    setupRXBuffer();
     while (receive_buffer.availableForWrite() < size) {
       // wait for ringbuffer to get freed up
       delay(10);
@@ -123,7 +122,7 @@ protected:
     if (max_transfer_size == 0) {
       int peer_max_transfer_size =
           p_server->getPeerMTU(p_server->getConnId()) - 5;
-      max_transfer_size = std::min(BLE_BUFFER_SIZE, peer_max_transfer_size);
+      max_transfer_size = std::min(BLE_MTU, peer_max_transfer_size);
 
       LOGI("max_transfer_size: %d", max_transfer_size);
     }
@@ -135,7 +134,7 @@ protected:
     // characteristic property is what the other device does.
 
     if (p_service == nullptr) {
-      p_service = p_server->createService(BLE_SERIAL_SERVICE_UUID);
+      p_service = p_server->createService(BLE_AUDIO_SERVICE_UUID);
 
       ch01_char = p_service->createCharacteristic(
           BLE_CH1_UUID, BLECharacteristic::PROPERTY_READ );
@@ -160,16 +159,21 @@ protected:
         info_desc.setValue("Audio Info");
         info_char->addDescriptor(&info_desc);
         info_char->setCallbacks(this);
+
       }
 
       p_service->start();
+
+      getMTU();
+
+      if (info_char != nullptr) {
+        writeAudioInfoCharacteristic(info);
+      }
     }
   }
 
   void onConnect(BLEServer *pServer) override {
     TRACEI();
-    getMTU();
-    writeAudioInfoCharacteristic(info);
   }
 
   void onDisconnect(BLEServer *pServer) override {
@@ -180,6 +184,7 @@ protected:
   /// store the next batch of data
   void onWrite(BLECharacteristic *pCharacteristic) override {
     TRACED();
+    setupRXBuffer();
     // changed to auto to be version independent (it changed from std::string to String)
     auto value = pCharacteristic->getValue();
     if (pCharacteristic->getUUID().toString() == BLE_INFO_UUID) {
@@ -210,6 +215,7 @@ protected:
 
   void setupTXBuffer() {
     if (transmit_buffer.size() == 0) {
+      LOGI("Setting transmit_buffer to %d for mtu %d", RX_BUFFER_SIZE, getMTU());
       transmit_buffer.resize(TX_BUFFER_SIZE);
       if (is_framed) {
         transmit_buffer_sizes.resize(TX_COUNT);
@@ -219,6 +225,7 @@ protected:
 
   void setupRXBuffer() {
     if (receive_buffer.size() == 0) {
+      LOGI("Setting receive_buffer to %d for mtu %d", RX_BUFFER_SIZE, getMTU());
       receive_buffer.resize(RX_BUFFER_SIZE);
       if (is_framed) {
         receive_sizes.resize(RX_COUNT);
