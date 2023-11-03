@@ -26,20 +26,13 @@ public:
     TRACEI();
     ble_server_name = name;
     BLEDevice::init(name);
-    //BLEDevice::setMTU(BLE_MTU);
-    // Increase connection interval to 30 milliseconds (30 * 1.25 ms)
-    // BLEDevice::setConnectionParams(30, 30, 0, 0);
 
     p_server = BLEDevice::createServer();
     p_server->setCallbacks(this);
 
     setupBLEService();
-
     p_advertising = BLEDevice::getAdvertising();
     p_advertising->addServiceUUID(BLE_AUDIO_SERVICE_UUID);
-    //p_advertising->setScanResponse(false);
-    //p_advertising->setMinPreferred(0x00);
-    // p_advertising->setMinPreferred(0x06);
     BLEDevice::startAdvertising();
     return true;
   }
@@ -121,8 +114,8 @@ protected:
     TRACED();
     if (max_transfer_size == 0) {
       int peer_max_transfer_size =
-          p_server->getPeerMTU(p_server->getConnId()) - 5;
-      max_transfer_size = std::min(BLE_MTU, peer_max_transfer_size);
+          p_server->getPeerMTU(p_server->getConnId()) - BLE_MTU_OVERHEAD;
+      max_transfer_size = std::min(BLE_MTU - BLE_MTU, peer_max_transfer_size);
 
       LOGI("max_transfer_size: %d", max_transfer_size);
     }
@@ -201,7 +194,7 @@ protected:
     auto uuid = pCharacteristic->getUUID().toString();
     if (uuid == BLE_CH1_UUID || uuid == BLE_CH2_UUID) {
       setupTXBuffer();
-      int len = min(getMTU(), (int)transmit_buffer.available());
+      int len = std::min(getMTU() - BLE_MTU_OVERHEAD, (int)transmit_buffer.available());
       if (is_framed) {
         len = transmit_buffer_sizes.read();
       }
