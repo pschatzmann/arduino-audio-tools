@@ -80,7 +80,7 @@ class AudioEncoder : public AudioWriter {
   /// Provides the mime type of the encoded result
   virtual const char *mime() = 0;
   /// Defines the sample rate, number of channels and bits per sample 
-  void setAudioInfo(AudioInfo from) override{};
+  virtual void setAudioInfo(AudioInfo from) override{};
 };
 
 class AudioDecoderExt : public AudioDecoder {
@@ -282,7 +282,6 @@ class EncodedAudioOutput : public AudioStream {
     TRACED();
     if (this->info != info && info.channels!=0 && info.sample_rate!=0) {
       this->info = info;
-      AudioStream::setAudioInfo(info);
       decoder_ptr->setAudioInfo(info);
       encoder_ptr->setAudioInfo(info);
     }
@@ -333,6 +332,8 @@ class EncodedAudioOutput : public AudioStream {
       const CodecNOP *nop = CodecNOP::instance();
       if (decoder_ptr != nop || encoder_ptr != nop) {
         active = true;
+        decoder_ptr->setAudioInfo(info);
+        encoder_ptr->setAudioInfo(info);
         decoder_ptr->begin();
         encoder_ptr->begin();
       } else {
@@ -401,7 +402,7 @@ class EncodedAudioOutput : public AudioStream {
   }
 
  protected:
-  AudioInfo info;
+  //AudioInfo info;
   AudioDecoder *decoder_ptr = CodecNOP::instance();  // decoder
   AudioEncoder *encoder_ptr = CodecNOP::instance();  // decoder
   AudioWriter *writer_ptr = nullptr;
