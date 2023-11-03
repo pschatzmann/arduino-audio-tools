@@ -65,7 +65,7 @@ public:
     return str.length();
   }
 
-  int available() override { return BLE_MTU; }
+  int available() override { return BLE_MTU - BLE_MTU_OVERHEAD; }
 
   size_t write(const uint8_t *data, size_t dataSize) override {
     TRACED();
@@ -80,7 +80,7 @@ public:
     return result;
   }
 
-  int availableForWrite() override { return BLE_MTU; }
+  int availableForWrite() override { return BLE_MTU - BLE_MTU_OVERHEAD; }
 
   bool connected() override {
     if (!setupBLEClient()) {
@@ -125,6 +125,17 @@ protected:
     info_char->writeValue((uint8_t *)&info, sizeof(AudioInfo));
   }
 
+  bool readAudioInfoCharacteristic(){
+    if (!info_char->canRead())
+      return false;
+    auto str = info_char->readValue();
+    if (str.length() > 0) {
+      setAudioInfo((const uint8_t*)str.c_str(), str.length());
+      return true;
+    }
+    return false;
+  }
+
   // Scanning Results
   void onResult(BLEAdvertisedDevice advertisedDevice) override {
     TRACEI();
@@ -152,6 +163,7 @@ protected:
   bool setupBLEClient() {
     if (is_client_set_up)
       return true;
+
     TRACEI();
 
     if (p_client == nullptr)
@@ -209,6 +221,8 @@ protected:
         return false;
       }
       info_char->registerForNotify(notifyCallback);
+      readAudioInfoCharacteristic();
+
     }
     LOGI("Connected to server: %s", is_client_connected ? "true" : "false");
     is_client_set_up = true;
