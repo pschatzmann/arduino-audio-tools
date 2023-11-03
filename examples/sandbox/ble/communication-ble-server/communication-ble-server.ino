@@ -28,6 +28,7 @@ void setup() {
   
   encoder.begin(info);
 
+  //ble.setAudioInfoActive(true);
   ble.begin("ble-send");
 }
 
