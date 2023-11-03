@@ -29,6 +29,7 @@ class ADPCMDecoder : public AudioDecoderExt {
   void begin() override {
     TRACEI();
     current_byte = 0;
+    LOGI("sample_rate: %d, channels: %d", info.sample_rate, info.channels);
     decoder.begin(info.sample_rate, info.channels);
     LOGI("frameSize: %d", (int)decoder.frameSize());
     block_size = decoder.blockSize();
@@ -115,13 +116,10 @@ class ADPCMEncoder : public AudioEncoderExt {
     return encoder.blockSize();
   }
 
-  void begin(AudioInfo info) override {
-    setAudioInfo(info);
-    begin();
-  }
 
   void begin() override {
     TRACEI();
+    LOGI("sample_rate: %d, channels: %d", info.sample_rate, info.channels);
     encoder.begin(info.sample_rate, info.channels);
     LOGI("frameSize: %d", (int)encoder.frameSize());
     assert(info.sample_rate != 0);

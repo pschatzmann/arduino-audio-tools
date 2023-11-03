@@ -14,7 +14,7 @@
 #include "AudioCodecs/CodecADPCM.h" // https://github.com/pschatzmann/adpcm
 #include "Sandbox/BLE/AudioBLE.h"
 
-AudioInfo info(8000, 1, 16);
+AudioInfo info(44100, 2, 16);
 AudioBLEClient ble;
 I2SStream i2s;
 ADPCMDecoder adpcm(AV_CODEC_ID_ADPCM_IMA_WAV);
