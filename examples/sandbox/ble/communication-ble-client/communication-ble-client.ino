@@ -23,7 +23,7 @@ StreamCopy copier(decoder, ble);
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
 
   // start BLE client - wait at most 10 minutes
   ble.begin("ble-receive", 60*10);
