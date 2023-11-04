@@ -253,6 +253,7 @@ public:
   /// same as setStream
   void setOutput(Stream &io) {
     p_io = &io;
+    p_out = &io;
   }
 
   /// same as setOutput
@@ -277,6 +278,7 @@ public:
   int available() override { return p_io == nullptr ? 0 : p_io->available(); }
 
   size_t write(const uint8_t *buffer, size_t size) override {
+    if (p_out==nullptr) return 0;
     if (!active) {
       LOGE("%s", error_msg);
       return 0;

@@ -374,7 +374,7 @@ class EncodedAudioOutput : public AudioStream {
       return 0;
     }
 
-    if(availableForWrite()==0){
+    if(check_available_for_write && availableForWrite()==0){
       return 0;
     }
 
@@ -400,6 +400,10 @@ class EncodedAudioOutput : public AudioStream {
   void setLogLevel(AudioLogger::LogLevel level){
     custom_log_level.set(level);
   }
+  /// Is Available for Write check activated ?
+  bool isCheckAvailableForWrite() {
+      return check_available_for_write;
+  }
 
  protected:
   //AudioInfo info;
@@ -407,7 +411,8 @@ class EncodedAudioOutput : public AudioStream {
   AudioEncoder *encoder_ptr = CodecNOP::instance();  // decoder
   AudioWriter *writer_ptr = nullptr;
   Print *ptr_out = nullptr;
-  bool active;
+  bool active = false;
+  bool check_available_for_write = false;
   CustomLogLevel custom_log_level;
 };
 
