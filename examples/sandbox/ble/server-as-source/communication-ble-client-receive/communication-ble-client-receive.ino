@@ -1,11 +1,11 @@
 /**
- * @file example-serial-receive.ino
+ * @file communications-ble-client-receive.ino
  * @author Phil Schatzmann
- * @brief Receiving audio via BLE and writing to I2S
+ * @brief Receiving audio via BLE: The client acts as audio sink and is writing to I2S
  * @version 0.1
- * @date 2022-03-09
+ * @date 2022-11-04
  *
- * @copyright Copyright (c) 2022
+ * @copyright Copyright (c) 2023
  */
 
 

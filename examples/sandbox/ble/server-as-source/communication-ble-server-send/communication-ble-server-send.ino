@@ -1,11 +1,11 @@
 /**
- * @file communications-ble-send.ino
+ * @file communications-ble-server-send.ino
  * @author Phil Schatzmann
- * @brief Sending audio via BLE
+ * @brief Sending audio via BLE: The server acts as audio source
  * @version 0.1
- * @date 2022-03-09
+ * @date 2022-11-04
  *
- * @copyright Copyright (c) 2022
+ * @copyright Copyright (c) 2023
  */
 
 #include "AudioTools.h"
