@@ -11,14 +11,15 @@
 #include "AudioTools.h"
 #include <WiFi.h>
 
+const char *ssid = "ssid";
+const char *password = "password";
+
 AudioInfo info(16000, 1, 16);
 uint16_t port = 8000;
 WiFiServer server(port);
 WiFiClient client; 
 MeasuringStream out;
 StreamCopy copier(out, client);     
-const char *ssid = "ssid";
-const char *password = "password";
 
 void connectWifi() {
   // connect to WIFI
@@ -31,7 +32,7 @@ void connectWifi() {
   Serial.println(WiFi. localIP());
 
   // Performance Hack              
-  esp_wifi_set_ps(WIFI_PS_NONE);
+  WiFi.setSleep(false);
 }
 
 void setup() {
@@ -57,5 +58,8 @@ void loop() {
   // copy data if we are connected
   if (client.connected()){
     copier.copy();
+  } else {
+    // feed the dog
+    delay(100);
   }
 }
