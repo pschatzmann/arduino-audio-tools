@@ -2,6 +2,7 @@
  * @file communications-ble-server-receive.ino
  * @author Phil Schatzmann
  * @brief Receiving audio via BLE: the server acts as audio sink
+ * Please not that the thruput in this scenario is very limited!
  * @version 0.1
  * @date 2022-11-04
  *
