@@ -1062,8 +1062,18 @@ class MeasuringStream : public AudioStream {
       return start_time;
     }
 
-    void setBytesPerSample(int size){
-      sample_div = size;
+    void setAudioInfo(AudioInfo info){
+      AudioStream::info = info;
+      setFrameSize(info.bits_per_sample / 8 *info.channels);
+    }
+
+    bool begin(AudioInfo info){
+      setAudioInfo(info);
+      return true;
+    }
+
+    void setFrameSize(int size){
+      frame_size = size;
     }
 
   protected:
@@ -1074,7 +1084,7 @@ class MeasuringStream : public AudioStream {
     uint32_t start_time;
     int total_bytes = 0;
     int bytes_per_second = 0;
-    int sample_div = 0;
+    int frame_size = 0;
     NullStream null;
     Print *p_logout=nullptr;
 
@@ -1098,10 +1108,10 @@ class MeasuringStream : public AudioStream {
 
     void printResult() {
         char msg[70];
-        if (sample_div==0){
+        if (frame_size==0){
           sprintf(msg, "==> Bytes per second: %d", bytes_per_second);
         } else {
-          sprintf(msg, "==> Samples per second: %d", bytes_per_second/sample_div);
+          sprintf(msg, "==> Samples per second: %d", bytes_per_second/frame_size);
         }
         if (p_logout!=nullptr){
           p_logout->println(msg);
@@ -1270,6 +1280,130 @@ class ProgressStream : public AudioStream {
 
 };
 
+/**
+ * @brief Configure Throttle setting
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+struct ThrottleConfig : public AudioInfo {
+  ThrottleConfig() {
+    sample_rate = 44100;
+    bits_per_sample = 16;
+    channels = 2;
+  }
+  int correction_us = 0;
+};
+
+/**
+ * @brief Throttle the sending or receiving of the audio data to limit it to the indicated
+ * sample rate.
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class Throttle : public AudioStream {
+ public:
+  Throttle() = default;
+  Throttle(Print &out) { p_out = &out; } 
+  Throttle(Stream &out) { p_out = &out; p_in = &out; } 
+
+  ThrottleConfig defaultConfig() {
+    ThrottleConfig c;
+    return c;
+  }
+
+  bool begin(ThrottleConfig cfg) {
+    LOGI("begin sample_rate: %d, channels: %d, bits: %d", info.sample_rate, info.channels, info.bits_per_sample);
+    this->info = cfg;
+    this->cfg = cfg;
+    return begin();
+  }
+
+  bool begin(AudioInfo info) {
+    LOGI("begin sample_rate: %d, channels: %d, bits: %d", info.sample_rate, info.channels, info.bits_per_sample);
+    this->info = info;
+    this->cfg.copyFrom(info);
+    return begin();
+  }
+
+  bool begin(){ 
+    frame_size = cfg.bits_per_sample / 8 * cfg.channels;
+    startDelay();
+    return true;
+  }
+
+  // (re)starts the timing
+  void startDelay() { 
+    start_time = micros(); 
+    sum_frames = 0;
+  }
+
+  int availableForWrite() {
+    if (p_out){
+      return p_out->availableForWrite();
+    }
+    return DEFAULT_BUFFER_SIZE;
+  }
+
+  size_t write(const uint8_t* data, size_t len){
+    size_t result = p_out->write(data, len);
+    delayBytes(len);
+    return result;
+  }
+
+  int available() {
+    if (p_in==nullptr) return 0;
+    return p_in->available();
+  }
+
+  size_t readBytes(uint8_t* data, size_t len){
+    if (p_in==nullptr) {
+      delayBytes(len);
+      return 0;
+    } 
+    size_t result = p_in->readBytes(data, len);
+    delayBytes(len);
+    return result;
+  }
+
+  // delay
+  void delayBytes(size_t bytes) { delayFrames(bytes / frame_size); }
+
+  // delay
+  void delayFrames(size_t frames) {
+    sum_frames += frames;
+    uint64_t durationUsEff = micros() - start_time;
+    uint64_t durationUsToBe = getDelayUs(sum_frames);
+    int64_t waitUs = durationUsToBe - durationUsEff + cfg.correction_us;
+    LOGI("wait us: %ld", waitUs);
+    if (waitUs > 0) {
+      int64_t waitMs = waitUs / 1000;
+      if (waitMs > 0) delay(waitMs);
+      delayMicroseconds(waitUs - (waitMs * 1000));
+    } else {
+      LOGD("negative delay!")
+    }
+  }
+
+  inline int64_t getDelayUs(uint64_t frames){
+    return (frames * 1000000) / cfg.sample_rate;
+  }
+
+  inline int64_t getDelayMs(uint64_t frames){
+    return getDelayUs(frames) / 1000;
+  }
+
+  inline int64_t getDelaySec(uint64_t frames){
+    return getDelayUs(frames) / 1000000l;
+  }
+
+ protected:
+  uint32_t start_time = 0;
+  uint32_t sum_frames = 0;
+  ThrottleConfig cfg;
+  int frame_size = 0;
+  Print *p_out = nullptr;
+  Stream *p_in = nullptr;
+};
 
 
 /**

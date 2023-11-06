@@ -169,9 +169,7 @@ namespace audio_tools {
             autonext = p_source->isAutoNext();
 
             // initial audio info for fade from output when not defined yet
-            if (fade.audioInfo().channels==0){
-                setupFade();
-            }
+            setupFade();
             
             // start dependent objects
             p_out_decoding->begin();
