@@ -67,14 +67,14 @@ public:
   }
 
 protected:
-  float dt;
-  float max;
-  float min;
-  float kp;
-  float kd;
-  float ki;
-  float preerror = 0;
-  float integral = 0;
+  float dt = 1.0f;
+  float max = 0.0f;
+  float min = 0.0f;
+  float kp = 0.0f;
+  float kd = 0.0f;
+  float ki = 0.0f;
+  float preerror = 0.0f;
+  float integral = 0.0f;
 
 }; // namespace audiotools
 
