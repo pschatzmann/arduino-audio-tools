@@ -70,17 +70,31 @@ public:
   size_t write(const uint8_t *data, size_t dataSize) override {
     TRACED();
     setupBLEClient();
-    int result = 0;
     if (!is_client_connected || !is_client_set_up)
       return 0;
-    if (ch02_char->canWrite()) {
-      ch02_char->writeValue((uint8_t *)data, dataSize, false);
-      result = dataSize;
+    if (!ch02_char->canWrite()){
+      return 0;
     }
-    return result;
+
+    if (is_framed){
+      writeChannel2Characteristic(data, dataSize);
+      delay(1);
+    } else {
+      // send only data with max mtu
+      for (int j=0; j<dataSize; j++){
+        write_buffer.write(data[j]);
+        if (write_buffer.isFull()){
+          writeChannel2Characteristic(write_buffer.data(), write_buffer.available());
+          write_buffer.reset();
+        }
+      }
+    }
+    return dataSize;
   }
 
-  int availableForWrite() override { return BLE_MTU - BLE_MTU_OVERHEAD; }
+  int availableForWrite() override { 
+    return is_framed ? (BLE_MTU - BLE_MTU_OVERHEAD) : DEFAULT_BUFFER_SIZE; 
+  }
 
   bool connected() override {
     if (!setupBLEClient()) {
@@ -89,7 +103,13 @@ public:
     return is_client_connected;
   }
 
-  void doLoop() { setupBLEClient(); }
+  void setWriteThrottle(int ms){
+    write_throttle = ms;
+  }
+
+  void setConfirmWrite(bool flag){
+    write_confirmation_flag = flag;
+  }
 
 protected:
   // client
@@ -105,6 +125,9 @@ protected:
   BLEUUID BLUEID_CH1_UUID{BLE_CH1_UUID};
   BLEUUID BLUEID_CH2_UUID{BLE_CH2_UUID};
   BLEUUID BLUEID_INFO_UUID{BLE_INFO_UUID};
+  SingleBuffer<uint8_t> write_buffer{0};
+  int write_throttle = 0;
+  bool write_confirmation_flag = false;
 
   volatile bool is_client_connected = false;
   bool is_client_set_up = false;
@@ -123,6 +146,13 @@ protected:
     TRACEI();
     // send update via BLE
     info_char->writeValue((uint8_t *)&info, sizeof(AudioInfo));
+  }
+
+  void writeChannel2Characteristic(const uint8_t*data, size_t len){
+    if (ch02_char->canWrite()) {
+      ch02_char->writeValue((uint8_t *)data, len, write_confirmation_flag);
+      delay(write_throttle);
+    }
   }
 
   bool readAudioInfoCharacteristic(){
@@ -165,6 +195,11 @@ protected:
       return true;
 
     TRACEI();
+
+    // setup buffer
+    if (write_buffer.size()==0){
+      write_buffer.resize(getMTU() - BLE_MTU_OVERHEAD);
+    }
 
     if (p_client == nullptr)
       p_client = BLEDevice::createClient();
