@@ -407,8 +407,7 @@ public:
   bool isUpdate() { return counter == count_at; }
 
   void logResult() {
-    LOGI(TAG, "Sample rate: %d, effective: %f -> correction %f",
-         info.sample_rate, sampleRate(), correctionFactor());
+    LOGI("Sample rate: %d, effective: %f -> correction %f", info.sample_rate, sampleRate(), correctionFactor());
   }
 
   bool isActvie() { return  counter <= count_at; }
