@@ -176,11 +176,11 @@
 #define ESP32X
 #endif
 #if defined(ESP32)  && defined(CONFIG_IDF_TARGET_ESP32H2)
-#define ESP32S3
+#define ESP32H2
 #define ESP32X
 #endif
 #if defined(ESP32)  && defined(CONFIG_IDF_TARGET_ESP32C6)
-#define ESP32S3
+#define ESP32C6
 #define ESP32X
 #endif
 
