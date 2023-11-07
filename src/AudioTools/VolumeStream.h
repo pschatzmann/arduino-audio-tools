@@ -134,7 +134,7 @@ class VolumeStream : public AudioStream {
                 return 0;
             }
             size_t result = p_in->readBytes(buffer, length);
-            if (is_started) applyVolume(buffer, result);
+            if (is_started && info.volume < 1.0) applyVolume(buffer, result);
             return result;
         }
 
@@ -145,7 +145,7 @@ class VolumeStream : public AudioStream {
                 LOGE("NPE");
                 return 0;
             }
-            if (is_started) applyVolume(buffer,size);
+            if (is_started && info.volume < 1.0) applyVolume(buffer,size);
             return p_out->write(buffer, size);
         }
 
