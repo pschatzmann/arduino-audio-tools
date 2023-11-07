@@ -58,9 +58,10 @@ class AnalogConfigESP32V1 : public AudioInfo {
     int adc_bit_width = SOC_ADC_DIGI_MAX_BITWIDTH;
     /// ESP32: ADC_CHANNEL_6, ADC_CHANNEL_7; others ADC_CHANNEL_2, ADC_CHANNEL_3
     adc_channel_t adc_channels[2] = ADC_CHANNELS;
+#ifdef HAS_ESP32_DAC
     /// ESP32: DAC_CHANNEL_MASK_CH0 or DAC_CHANNEL_MASK_CH1
     dac_channel_mask_t dac_mono_channel = DAC_CHANNEL_MASK_CH0;
-
+#endif
     /// Default constructor
     AnalogConfigESP32V1(RxTxMode rxtxMode=TX_MODE) {
       sample_rate = 44100;
