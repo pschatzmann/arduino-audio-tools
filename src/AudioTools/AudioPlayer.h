@@ -98,24 +98,18 @@ namespace audio_tools {
         }
 
         AudioPlayer(AudioPlayer const&) = delete;
-        AudioPlayer& operator=(AudioPlayer const&) = delete;
 
-        /// Default destructor
-        virtual ~AudioPlayer() {
-            if (p_out_decoding != nullptr) {
-                delete p_out_decoding;
-            }
-        }
+        AudioPlayer& operator=(AudioPlayer const&) = delete;
 
         void setOutput(AudioOutput& output){
             if (p_decoder->isResultPCM()){
                 this->fade.setOutput(output);
                 this->volume_out.setOutput(fade);
-                delete this->p_out_decoding;
-                this->p_out_decoding = new EncodedAudioOutput(&volume_out, p_decoder);
+                out_decoding.setOutput(&volume_out);
+                out_decoding.setDecoder(p_decoder);
             } else {
-                delete this->p_out_decoding;
-                this->p_out_decoding = new EncodedAudioOutput(&output, p_decoder);
+                out_decoding.setOutput(&output);
+                out_decoding.setDecoder(p_decoder);
             }
             this->p_final_print = &output;
             this->p_final_stream = nullptr;
@@ -125,11 +119,11 @@ namespace audio_tools {
             if (p_decoder->isResultPCM()){
                 this->fade.setOutput(output);
                 this->volume_out.setOutput(fade);
-                delete this->p_out_decoding;
-                this->p_out_decoding = new EncodedAudioOutput(&volume_out, p_decoder);
+                out_decoding.setOutput(&volume_out);
+                out_decoding.setDecoder(p_decoder);
             } else {
-                delete this->p_out_decoding;
-                this->p_out_decoding = new EncodedAudioOutput(&output, p_decoder);
+                out_decoding.setOutput(&output);
+                out_decoding.setDecoder(p_decoder);
             }
             this->p_final_print = nullptr;
             this->p_final_stream = nullptr;
@@ -139,11 +133,12 @@ namespace audio_tools {
             if (p_decoder->isResultPCM()){
                 this->fade.setOutput(output);
                 this->volume_out.setOutput(fade);
-                delete this->p_out_decoding;
-                this->p_out_decoding = new EncodedAudioOutput(&volume_out, p_decoder);
+                out_decoding.setOutput(&volume_out);
+                out_decoding.setDecoder(p_decoder);
             } else {
-                delete this->p_out_decoding;
-                this->p_out_decoding = new EncodedAudioOutput(&output, p_decoder);
+                out_decoding.setOutput(&output);
+                out_decoding.setDecoder(p_decoder);
+
             }
             this->p_final_print = nullptr;
             this->p_final_stream = &output;
@@ -172,7 +167,7 @@ namespace audio_tools {
             setupFade();
             
             // start dependent objects
-            p_out_decoding->begin();
+            out_decoding.begin();
             p_source->begin();
             meta_out.begin();
 
@@ -182,7 +177,7 @@ namespace audio_tools {
                     if (meta_active) {
                         copier.setCallbackOnWrite(decodeMetaData, this);
                     }
-                    copier.begin(*p_out_decoding, *p_input_stream);
+                    copier.begin(out_decoding, *p_input_stream);
                     timeout = millis() + p_source->timeoutAutoNext();
                     active = isActive;
                     result = true;
@@ -202,7 +197,7 @@ namespace audio_tools {
         virtual void end() {
             TRACED();
             active = false;
-            p_out_decoding->end();
+            out_decoding.end();
             meta_out.end();
             // remove any data in the decoder
             if (p_decoder!=nullptr){
@@ -210,7 +205,6 @@ namespace audio_tools {
                 p_decoder->end();
                 p_decoder->begin();
             }
-
         }
 
         /// (Re)defines the audio source
@@ -220,11 +214,8 @@ namespace audio_tools {
 
         /// (Re)defines the decoder
         void setDecoder(AudioDecoder& decoder){
-            if (this->p_out_decoding!=nullptr){
-                delete p_out_decoding;
-            }
             this->p_decoder = &decoder;
-            this->p_out_decoding = new EncodedAudioOutput(&volume_out, p_decoder);
+            out_decoding.setDecoder(p_decoder);
         }
 
         /// (Re)defines the notify
@@ -307,12 +298,12 @@ namespace audio_tools {
         /// start selected input stream
         virtual bool setStream(Stream *input) {
             end();
-            p_out_decoding->begin();
+            out_decoding.begin();
             p_input_stream = input;
             if (p_input_stream != nullptr) {
                 LOGD("open selected stream");
                 meta_out.begin();
-                copier.begin(*p_out_decoding, *p_input_stream);
+                copier.begin(out_decoding, *p_input_stream);
             }
             return p_input_stream != nullptr;
         }
@@ -468,7 +459,7 @@ namespace audio_tools {
         VolumeStream volume_out; // Volume control
         FadeStream fade; // Phase in / Phase Out to avoid popping noise
         MetaDataID3 meta_out; // Metadata parser
-        EncodedAudioOutput* p_out_decoding = nullptr; // Decoding stream
+        EncodedAudioOutput out_decoding; // Decoding stream
         CopyDecoder no_decoder{true};
         AudioDecoder* p_decoder = &no_decoder;
         Stream* p_input_stream = nullptr;
