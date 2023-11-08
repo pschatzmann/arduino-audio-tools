@@ -3,6 +3,7 @@
  * @author Phil Schatzmann
  * @brief Receiving audio via FTP and writing to I2S of the AudioKit.
  * Replace the userids, passwords and ip adresses with your own!
+ * And don't forget to read the Wiki of the imported projects
  * @version 0.1
  * @date 2023-11-09
  *
@@ -11,9 +12,9 @@
 
 #include "WiFi.h"
 #include "ArduinoFTPClient.h" // install https://github.com/pschatzmann/TinyFTPClient
-#include "AudioTools.h"
-#include "AudioCodecs/CodecMP3Helix.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioTools.h" // https://github.com/pschatzmann/arduino-audio-tools
+#include "AudioCodecs/CodecMP3Helix.h" // https://github.com/pschatzmann/arduino-libhelix
+#include "AudioLibs/AudioKit.h" // https://github.com/pschatzmann/arduino-audiokit
 
 WiFiClient cmd;
 WiFiClient data;
