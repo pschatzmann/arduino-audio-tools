@@ -58,7 +58,7 @@ class AnalogDriverESP32V1 : public AnalogDriverBase {
     return active;
   }
 
-  /// stops the I2S and unistalls the driver
+  /// stops the I2S and uninstalls the driver
   void end() override {
     TRACEI();
 #ifdef HAS_ESP32_DAC
@@ -194,24 +194,59 @@ class AnalogDriverESP32V1 : public AnalogDriverBase {
   }
   #endif
 
-
   bool setup_rx(){
     int max_channels = sizeof(cfg.adc_channels)/sizeof(adc_channel_t);
     if (cfg.channels > max_channels ){
       LOGE("channels: %d, max: %d", cfg.channels, max_channels);
       return false;
-    }
+    } else {
+      LOGI("channels: %d, max: %d", cfg.channels, max_channels);
 
+    }
     adc_continuous_handle_cfg_t adc_config = {
         .max_store_buf_size = (uint32_t)cfg.buffer_size * cfg.buffer_count,
         .conv_frame_size = (uint32_t)cfg.buffer_size / SOC_ADC_DIGI_DATA_BYTES_PER_CONV * SOC_ADC_DIGI_DATA_BYTES_PER_CONV,
     };
-    adc_continuous_new_handle(&adc_config, &adc_handle);
+    esp_err_t err = adc_continuous_new_handle(&adc_config, &adc_handle);
+    if (err != ESP_OK){
+      LOGE("adc_continuous_new_handle failed with error: %d", err);
+      return false;
+    } else {
+      LOGI("adc_continuous_new_handle successful");
+    }
+
+    if ((cfg.sample_rate < SOC_ADC_SAMPLE_FREQ_THRES_LOW) || (cfg.sample_rate > SOC_ADC_SAMPLE_FREQ_THRES_HIGH)){
+      LOGE("sample rate: %u can not be set, range: %u to %u", SOC_ADC_SAMPLE_FREQ_THRES_LOW, SOC_ADC_SAMPLE_FREQ_THRES_HIGH);
+      return false;
+    } else {
+      LOGI("sample rate: %u, range: %u to %u",cfg.sample_rate, SOC_ADC_SAMPLE_FREQ_THRES_LOW, SOC_ADC_SAMPLE_FREQ_THRES_HIGH);
+    }
+
+    if ((cfg.adc_bit_width < SOC_ADC_DIGI_MIN_BITWIDTH) || (cfg.adc_bit_width > SOC_ADC_DIGI_MAX_BITWIDTH)){
+      LOGE("adc bit width: %u cannot be set, range: %u to %u", SOC_ADC_DIGI_MIN_BITWIDTH, SOC_ADC_DIGI_MAX_BITWIDTH);
+      return false;
+    } else {
+      LOGI("adc bit width: %u, range: %u to %u", cfg.adc_bit_width, SOC_ADC_DIGI_MIN_BITWIDTH, SOC_ADC_DIGI_MAX_BITWIDTH);
+    }
+
+    // adjust bits per sample based on adc bit width setting (multiple of 8)
+    if (cfg.adc_bit_width <= 8) {
+      cfg.bits_per_sample = 8;
+    } else if (cfg.adc_bit_width <= 16) {
+      cfg.bits_per_sample = 16;
+    } else if(cfg.adc_bit_width <= 24) {
+      cfg.bits_per_sample = 24;
+    } else if(cfg.adc_bit_width <= 32) {
+      cfg.bits_per_sample = 32;
+    } else {
+      cfg.bits_per_sample = 16;
+    }
+    LOGI("bits per sample: %d", cfg.bits_per_sample);
 
     adc_continuous_config_t dig_cfg = {
-        .sample_freq_hz = (uint32_t)cfg.sample_rate,
-        .conv_mode = (adc_digi_convert_mode_t)cfg.adc_conversion_mode,
-        .format = (adc_digi_output_format_t)cfg.adc_output_type,
+        .sample_freq_hz = cfg.sample_rate,
+        .conv_mode = cfg.adc_conversion_mode,
+        .format = cfg.adc_output_type,
     };
     adc_digi_pattern_config_t adc_pattern[cfg.channels] = {0};
     dig_cfg.pattern_num = cfg.channels;
@@ -222,22 +257,33 @@ class AnalogDriverESP32V1 : public AnalogDriverBase {
         adc_pattern[i].channel = ch;
         adc_pattern[i].unit = unit;
         adc_pattern[i].bit_width = cfg.adc_bit_width;
-
-        LOGI("adc_pattern[%d].atten is :%x", i, adc_pattern[i].atten);
-        LOGI("adc_pattern[%d].channel is :%x", i, adc_pattern[i].channel);
-        LOGI("adc_pattern[%d].unit is :%x", i, adc_pattern[i].unit);
     }
     dig_cfg.adc_pattern = adc_pattern;
-    if (adc_continuous_config(adc_handle, &dig_cfg)!=ESP_OK){
-      LOGE("adc_continuous_config");
+
+    LOGI("dig_cfg.sample_freq_hz: %u", dig_cfg.sample_freq_hz);
+    LOGI("dig_cfg.conv_mode: %u", dig_cfg.conv_mode);
+    LOGI("dig_cfg.format: %u", dig_cfg.format);
+    for (int i = 0; i < cfg.channels; i++) {
+        LOGI("dig_cfg.adc_pattern[%d].atten: %u", i, dig_cfg.adc_pattern[i].atten);
+        LOGI("dig_cfg.adc_pattern[%d].channel: %u", i, dig_cfg.adc_pattern[i].channel);
+        LOGI("dig_cfg.adc_pattern[%d].unit: %u", i, dig_cfg.adc_pattern[i].unit);
+        LOGI("dig_cfg.adc_pattern[%d].bit_width: %u", i, dig_cfg.adc_pattern[i].bit_width);
+    } 
+
+    err = adc_continuous_config(adc_handle, &dig_cfg);
+    if (err != ESP_OK){
+      LOGE("adc_continuous_config unsuccessful with error: %d", err);
+      return false;
+    }
+    LOGI("adc_continuous_config successful");
+
+    err = adc_continuous_start(adc_handle);
+    if(err != ESP_OK){
+      LOGE("adc_continuous_start unsuccessful with error: %d", err);
       return false;
     }
 
-    if (adc_continuous_start(adc_handle)!=ESP_OK){
-      LOGE("adc_continuous_start");
-      return false;
-    }
-
+    LOGI("adc_continuous_start successful");
     return true;
   }
 
