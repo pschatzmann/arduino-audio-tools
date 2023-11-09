@@ -22,6 +22,11 @@ class AnalogAudioStream  : public AudioStream {
     /// Default constructor
     AnalogAudioStream()=default;
 
+    /// Constructor to define a custom driver
+    AnalogAudioStream(AnalogDriverBase &driver){
+      p_analog = &driver;
+    }
+
     /// Destructor
     virtual ~AnalogAudioStream() {
       end();
@@ -57,13 +62,13 @@ class AnalogAudioStream  : public AudioStream {
     /// starts the DAC 
     bool begin(AnalogConfig cfg) {
       TRACEI();
-      return analog.begin(cfg);
+      return p_analog->begin(cfg);
     }
 
     /// stops the I2S and unistalls the analog
     void end() override {
       TRACEI();
-      analog.end();
+      p_analog->end();
     }
 
     AnalogConfig &config() {
@@ -73,28 +78,29 @@ class AnalogAudioStream  : public AudioStream {
      /// ESP32 only: writes the data to the I2S interface
     size_t write(const uint8_t *src, size_t size_bytes) override { 
       TRACED();
-      return analog.write(src, size_bytes);
+      return p_analog->write(src, size_bytes);
     }   
 
     size_t readBytes(uint8_t *dest, size_t size_bytes) override {
-        return analog.readBytes(dest, size_bytes);
+        return p_analog->readBytes(dest, size_bytes);
     }
 
     int available() override {
-        return analog.available();
+        return p_analog->available();
     }
 
     int availableForWrite() override {
-        return analog.availableForWrite();
+        return p_analog->availableForWrite();
     }
 
     /// Provides access to the driver
-    AnalogDriver* driver() {
-        return &analog;
+    AnalogDriverBase* driver() {
+        return p_analog;
     }
 
 protected:
-    AnalogDriver analog;
+    AnalogDriver default_analog;
+    AnalogDriverBase* p_analog = &default_analog;
     AnalogConfig adc_config;
 };
 
