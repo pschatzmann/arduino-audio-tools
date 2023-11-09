@@ -11,7 +11,7 @@
 #define ADC_CHANNELS        {ADC_CHANNEL_6, ADC_CHANNEL_7}
 #define HAS_ESP32_DAC
 #elif CONFIG_IDF_TARGET_ESP32S2
-#define ADC_CONV_MODE       ADC_CONV_BOTH_UNIT
+#define ADC_CONV_MODE       ADC_CONV_BOTH_UNIT // might only work with single unit
 #define ADC_OUTPUT_TYPE     ADC_DIGI_OUTPUT_FORMAT_TYPE2
 #define ADC_CHANNELS        {ADC_CHANNEL_2, ADC_CHANNEL_3}
 #define HAS_ESP32_DAC
@@ -20,7 +20,7 @@
 #define ADC_OUTPUT_TYPE     ADC_DIGI_OUTPUT_FORMAT_TYPE2
 #define ADC_CHANNELS        {ADC_CHANNEL_2, ADC_CHANNEL_3}
 #elif CONFIG_IDF_TARGET_ESP32S3
-#define ADC_CONV_MODE       ADC_CONV_BOTH_UNIT
+#define ADC_CONV_MODE       ADC_CONV_BOTH_UNIT // might only work with single unit
 #define ADC_OUTPUT_TYPE     ADC_DIGI_OUTPUT_FORMAT_TYPE2
 #define ADC_CHANNELS        {ADC_CHANNEL_2, ADC_CHANNEL_3}
 #endif
@@ -52,12 +52,16 @@ class AnalogConfigESP32V1 : public AudioInfo {
     bool use_apll = false;
 
     // public config parameters
-    int adc_conversion_mode = ADC_CONV_MODE;
-    int adc_output_type = ADC_OUTPUT_TYPE;
-    int adc_attenuation = ADC_ATTEN_DB_0;
-    int adc_bit_width = SOC_ADC_DIGI_MAX_BITWIDTH;
+    adc_digi_convert_mode_t adc_conversion_mode = ADC_CONV_MODE;
+    adc_digi_output_format_t adc_output_type = ADC_OUTPUT_TYPE;
+    uint8_t adc_attenuation = ADC_ATTEN_DB_0;
+    uint8_t adc_bit_width = SOC_ADC_DIGI_MAX_BITWIDTH;
+    uint32_t sample_rate = SOC_ADC_SAMPLE_FREQ_THRES_LOW;
     /// ESP32: ADC_CHANNEL_6, ADC_CHANNEL_7; others ADC_CHANNEL_2, ADC_CHANNEL_3
     adc_channel_t adc_channels[2] = ADC_CHANNELS;
+    uint32_t channels = 2;    
+    int bits_per_sample = 16;
+
 #ifdef HAS_ESP32_DAC
     /// ESP32: DAC_CHANNEL_MASK_CH0 or DAC_CHANNEL_MASK_CH1
     dac_channel_mask_t dac_mono_channel = DAC_CHANNEL_MASK_CH0;
@@ -65,7 +69,7 @@ class AnalogConfigESP32V1 : public AudioInfo {
     /// Default constructor
     AnalogConfigESP32V1(RxTxMode rxtxMode=TX_MODE) {
       sample_rate = 44100;
-      bits_per_sample = 16;
+      adc_bit_width  = 12;
       channels =  2;
       rx_tx_mode = rxtxMode;
       if (rx_tx_mode == RX_MODE) {
