@@ -55,8 +55,9 @@
 #define LOG_PRINTF_BUFFER_SIZE 303
 #define LOG_METHOD __PRETTY_FUNCTION__
 
-// cheange USE_CHECK_MEMORY to 1 to activate memory checks
-#define USE_CHECK_MEMORY 0
+// cheange USE_CHECK_MEMORY to true to activate memory checks
+#define USE_CHECK_MEMORY false
+
 #if USE_CHECK_MEMORY
 #  define CHECK_MEMORY() checkMemory(true)
 #else

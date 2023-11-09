@@ -229,8 +229,6 @@ class TimerAlarmRepeatingDriverESP32 : public TimerAlarmRepeatingDriverBase  {
 #endif
       }
 
-
-
       /// direct timer callback 
       void setupDirectTimerCallback(repeating_timer_callback_t callback_f){
         TRACED();
@@ -305,6 +303,7 @@ class TimerAlarmRepeatingDriverESP32 : public TimerAlarmRepeatingDriverBase  {
           if (thread_notification){
               cb->call();
           }
+          yield();
         }
       }
 
@@ -317,6 +316,9 @@ class TimerAlarmRepeatingDriverESP32 : public TimerAlarmRepeatingDriverBase  {
             unsigned long end = micros() + ta->timeUs;
             ta->user_callback.call();
             long waitUs = end - micros();
+            long waitMs = waitUs / 1000;
+            waitUs = waitUs - (waitMs * 1000);
+            delay(waitMs);
             if (waitUs>0){
               delayMicroseconds(waitUs);
             }
