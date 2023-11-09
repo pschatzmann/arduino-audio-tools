@@ -88,7 +88,7 @@ class AnalogDriverESP32V1 : public AnalogDriverBase {
   }
 
   int available() override {
-    return 0;
+    return active_rx ? DEFAULT_BUFFER_SIZE : 0;
   } 
 
   void setTimeout(int value){
@@ -201,19 +201,19 @@ class AnalogDriverESP32V1 : public AnalogDriverBase {
       LOGE("channels: %d, max: %d", cfg.channels, max_channels);
       return false;
     }
+
     adc_continuous_handle_cfg_t adc_config = {
         .max_store_buf_size = (uint32_t)cfg.buffer_size * cfg.buffer_count,
-        .conv_frame_size = (uint32_t)cfg.buffer_size,
+        .conv_frame_size = (uint32_t)cfg.buffer_size / SOC_ADC_DIGI_DATA_BYTES_PER_CONV * SOC_ADC_DIGI_DATA_BYTES_PER_CONV,
     };
     adc_continuous_new_handle(&adc_config, &adc_handle);
 
-    adc_continuous_config_t dvig_cfg = {
+    adc_continuous_config_t dig_cfg = {
         .sample_freq_hz = (uint32_t)cfg.sample_rate,
         .conv_mode = (adc_digi_convert_mode_t)cfg.adc_conversion_mode,
         .format = (adc_digi_output_format_t)cfg.adc_output_type,
     };
     adc_digi_pattern_config_t adc_pattern[cfg.channels] = {0};
-    adc_continuous_config_t dig_cfg = {};
     dig_cfg.pattern_num = cfg.channels;
     for (int i = 0; i < cfg.channels; i++) {
         uint8_t unit = GET_UNIT(cfg.adc_channels[i]);
@@ -232,11 +232,18 @@ class AnalogDriverESP32V1 : public AnalogDriverBase {
       LOGE("adc_continuous_config");
       return false;
     }
+
+    if (adc_continuous_start(adc_handle)!=ESP_OK){
+      LOGE("adc_continuous_start");
+      return false;
+    }
+
     return true;
   }
 
 };
 
+#define ANALOG_DRIVER_DEFINED
 /// @brief AnalogAudioStream
 using AnalogDriver = AnalogDriverESP32V1;
 
