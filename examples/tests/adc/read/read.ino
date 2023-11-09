@@ -1,7 +1,7 @@
 #include "AudioTools.h"
 #include "AudioTools.h"
 
-AudioInfo info(44100, 1, 16);
+AudioInfo info(44100, 2, 16);
 AnalogAudioStream adc; 
 MeasuringStream out(10, &Serial);
 StreamCopy copier(out, adc); 
@@ -11,7 +11,10 @@ void setup(void) {
     Serial.begin(115200);
     AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
-    LOGI("Supported samples rates: %d - %d", SOC_ADC_SAMPLE_FREQ_THRES_LOW, SOC_ADC_SAMPLE_FREQ_THRES_HIGH)
+#ifdef ESP32
+    LOGI("Supported samples rates: %d - %d", SOC_ADC_SAMPLE_FREQ_THRES_LOW, SOC_ADC_SAMPLE_FREQ_THRES_HIGH);
+    LOGI("Supported bit width: %d - %d", SOC_ADC_DIGI_MIN_BITWIDTH, SOC_ADC_DIGI_MAX_BITWIDTH);
+#endif
     
     auto cfg = adc.defaultConfig(RX_MODE);
     cfg.copyFrom(info);

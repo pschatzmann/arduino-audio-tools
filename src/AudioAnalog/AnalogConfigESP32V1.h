@@ -59,8 +59,6 @@ class AnalogConfigESP32V1 : public AudioInfo {
     uint32_t sample_rate = SOC_ADC_SAMPLE_FREQ_THRES_LOW;
     /// ESP32: ADC_CHANNEL_6, ADC_CHANNEL_7; others ADC_CHANNEL_2, ADC_CHANNEL_3
     adc_channel_t adc_channels[2] = ADC_CHANNELS;
-    uint32_t channels = 2;    
-    int bits_per_sample = 16;
 
 #ifdef HAS_ESP32_DAC
     /// ESP32: DAC_CHANNEL_MASK_CH0 or DAC_CHANNEL_MASK_CH1
