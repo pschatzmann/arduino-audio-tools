@@ -243,7 +243,6 @@ class AnalogDriverESP32V1 : public AnalogDriverBase {
 
 };
 
-#define ANALOG_DRIVER_DEFINED
 /// @brief AnalogAudioStream
 using AnalogDriver = AnalogDriverESP32V1;
 
