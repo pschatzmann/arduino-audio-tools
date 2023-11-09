@@ -1092,7 +1092,7 @@ class MeasuringStream : public AudioStream {
       count--;
       total_bytes+=len;
 
-      if (count<0){
+      if (count<=0){
         uint32_t end_time = millis();
         int time_diff = end_time - start_time; // in ms
         if (time_diff>0){
