@@ -119,7 +119,8 @@ class BufferedTaskStream : public AudioStream {
                     }
 
                 } else {
-                    delay(100);
+                    // 3ms at 44100 stereo is about 529.2 bytes
+                    delay(3);
                 }
                 // buffer is full we start to provide data
                 if (available_to_write==0){
