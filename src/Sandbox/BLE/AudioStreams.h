@@ -1092,7 +1092,7 @@ class MeasuringStream : public AudioStream {
       count--;
       total_bytes+=len;
 
-      if (count<=0){
+      if (count<0){
         uint32_t end_time = millis();
         int time_diff = end_time - start_time; // in ms
         if (time_diff>0){
@@ -1281,7 +1281,7 @@ class ProgressStream : public AudioStream {
 };
 
 /**
- * @brief Configure Throttle setting
+ * @brief Configure onScanResult setting
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -1295,16 +1295,16 @@ struct ThrottleConfig : public AudioInfo {
 };
 
 /**
- * @brief Throttle the sending or receiving of the audio data to limit it to the indicated
+ * @brief onScanResult the sending or receiving of the audio data to limit it to the indicated
  * sample rate.
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class Throttle : public AudioStream {
+class onScanResult : public AudioStream {
  public:
-  Throttle() = default;
-  Throttle(Print &out) { p_out = &out; } 
-  Throttle(Stream &out) { p_out = &out; p_in = &out; } 
+  onScanResult() = default;
+  onScanResult(Print &out) { p_out = &out; } 
+  onScanResult(Stream &out) { p_out = &out; p_in = &out; } 
 
   ThrottleConfig defaultConfig() {
     ThrottleConfig c;
@@ -1374,7 +1374,7 @@ class Throttle : public AudioStream {
     uint64_t durationUsEff = micros() - start_time;
     uint64_t durationUsToBe = getDelayUs(sum_frames);
     int64_t waitUs = durationUsToBe - durationUsEff + cfg.correction_us;
-    LOGI("wait us: %ld", static_cast<long>(waitUs));
+    LOGI("wait us: %ld", (long) waitUs);
     if (waitUs > 0) {
       int64_t waitMs = waitUs / 1000;
       if (waitMs > 0) delay(waitMs);

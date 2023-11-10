@@ -15,10 +15,8 @@
 #include "Sandbox/BLE/AudioBLE.h"
 
 AudioInfo info(16000, 1, 16);
-SineWaveGenerator<int16_t>
-    sineWave(32000); // subclass of SoundGenerator with max amplitude of 32000
-GeneratedSoundStream<int16_t>
-    sound(sineWave); // Stream generated from sine wave
+SineWaveGenerator<int16_t> sineWave(32000);
+GeneratedSoundStream<int16_t> sound(sineWave); 
 Throttle throttle(sound);
 AudioBLEClient ble;
 ADPCMEncoder adpcm(AV_CODEC_ID_ADPCM_IMA_WAV);
