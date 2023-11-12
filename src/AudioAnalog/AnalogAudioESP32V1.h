@@ -4,21 +4,11 @@
 #if defined(ESP32) && defined(USE_ANALOG) &&                                   \
         ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0) ||                     \
     defined(DOXYGEN)
+
+#include "AudioAnalog/AnalogConfigESP32V1.h"
 #include "AudioAnalog/AnalogAudioBase.h"
 #include "AudioTools/AudioStreams.h"
 #include "AudioTools/AudioStreamsConverter.h"
-
-#if CONFIG_IDF_TARGET_ESP32 || CONFIG_IDF_TARGET_ESP32S2
-#define AUDIO_ADC_OUTPUT_TYPE             ADC_DIGI_OUTPUT_FORMAT_TYPE1
-#define AUDIO_ADC_GET_CHANNEL(p_data)     ((p_data)->type1.channel)
-#define AUDIO_ADC_GET_DATA(p_data)        ((p_data)->type1.data)
-#else
-#define AUDIO_ADC_OUTPUT_TYPE             ADC_DIGI_OUTPUT_FORMAT_TYPE2
-#define AUDIO_ADC_GET_CHANNEL(p_data)     ((p_data)->type2.channel)
-#define AUDIO_ADC_GET_DATA(p_data)        ((p_data)->type2.data)
-#endif
-#define GET_UNIT(x) ((x >> 3) & 0x1)
-
 
 
 namespace audio_tools {
