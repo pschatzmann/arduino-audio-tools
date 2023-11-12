@@ -1,4 +1,13 @@
-#include "AudioTools.h"
+/**
+ * @file read.ino
+ * @author Phil Schatzmann
+ * @brief reads the data from the ADC 
+ * @version 0.1
+ * @date 2023-11-11
+ * 
+ * @copyright Copyright (c) 2023
+ */ 
+
 #include "AudioTools.h"
 
 AudioInfo info(44100, 2, 16);
