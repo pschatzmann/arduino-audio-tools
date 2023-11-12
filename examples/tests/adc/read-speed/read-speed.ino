@@ -2,6 +2,8 @@
  * @file read.ino
  * @author Phil Schatzmann
  * @brief reads the data from the ADC 
+ * Default Pins ESP32: 34, 35 (ADC_CHANNEL_6, ADC_CHANNEL_7)
+ * Default Pins ESP32C3: 2, 3 (ADC_CHANNEL_2, ADC_CHANNEL_3)
  * @version 0.1
  * @date 2023-11-11
  * 

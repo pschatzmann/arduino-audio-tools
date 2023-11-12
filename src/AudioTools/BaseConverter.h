@@ -114,8 +114,9 @@ class ConverterScaler : public  BaseConverter {
 template<typename T>
 class ConverterAutoCenterT : public  BaseConverter {
     public:
-        ConverterAutoCenterT(int channels=2){
+        ConverterAutoCenterT(int channels=2, int initCount=1){
             this->channels = channels;
+            this->init_count = initCount;
         }
 
         size_t convert(uint8_t(*src), size_t byte_count) {
@@ -139,20 +140,25 @@ class ConverterAutoCenterT : public  BaseConverter {
         float left = 0.0;
         float right = 0.0;
         bool is_setup = false;
+        int init_count = 1;
         int channels;
 
         void setup(T *src, size_t size){
             if (size==0) return;
             if (!is_setup) {
                 if (channels==1){
+                    left = 0;
                     T *sample = (T*) src;
                     for (size_t j=0;j<size;j++){
                         left += *sample++;
                     }
                     offset = left / size;
-                    is_setup = true;
+                    
+                    is_setup = --init_count <= 0;
                     LOGD("offset: %d",(int)offset);
                 } else if (channels==2){
+                    left = 0;
+                    right = 0;
                     T *sample = (T*) src;
                     for (size_t j=0;j<size;j++){
                         left += *sample++;
@@ -163,10 +169,10 @@ class ConverterAutoCenterT : public  BaseConverter {
 
                     if (left>0){
                         offset = left;
-                        is_setup = true;
+                        is_setup = --init_count <= 0;
                     } else if (right>0){
                         offset = right;
-                        is_setup = true;
+                        is_setup = --init_count <= 0;;
                     }
                     LOGD("offset: %d",(int)offset);
                 }
@@ -193,7 +199,7 @@ class ConverterAutoCenter : public  BaseConverter {
         if (p_converter!=nullptr) delete p_converter;
     }
 
-    void begin(int channels, int bitsPerSample){
+    void begin(int channels, int bitsPerSample, int count=1){
         this->channels = channels;
         this->bits_per_sample = bitsPerSample;
         if (p_converter!=nullptr) delete p_converter;

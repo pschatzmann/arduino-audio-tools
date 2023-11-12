@@ -41,36 +41,35 @@ namespace audio_tools {
  * @copyright GPLv3
  */
 class AnalogConfigESP32V1 : public AudioInfo {
+    // allow ADC to access the protected methods
+    friend class AnalogDriverESP32;
   public:
     int buffer_count = ANALOG_BUFFER_COUNT;
     int buffer_size = ANALOG_BUFFER_SIZE;
     RxTxMode rx_tx_mode;
+#ifdef HAS_ESP32_DAC
     bool is_blocking_write = true;
-    bool is_auto_center_read = true;
-
-    // allow ADC to access the protected methods
-    friend class AnalogDriverESP32;
     bool use_apll = false;
+    /// ESP32: DAC_CHANNEL_MASK_CH0 or DAC_CHANNEL_MASK_CH1
+    dac_channel_mask_t dac_mono_channel = DAC_CHANNEL_MASK_CH0;
+#endif
 
-    // public config parameters
+    // ADC config parameters
+    bool adc_calibration_active = false;
+    bool is_auto_center_read = false;
     adc_digi_convert_mode_t adc_conversion_mode = ADC_CONV_MODE;
     adc_digi_output_format_t adc_output_type = ADC_OUTPUT_TYPE;
     uint8_t adc_attenuation = ADC_ATTEN_DB_0;
     uint8_t adc_bit_width = SOC_ADC_DIGI_MAX_BITWIDTH;
-    uint32_t sample_rate = SOC_ADC_SAMPLE_FREQ_THRES_LOW;
+    //uint32_t sample_rate = SOC_ADC_SAMPLE_FREQ_THRES_LOW;
     /// ESP32: ADC_CHANNEL_6, ADC_CHANNEL_7; others ADC_CHANNEL_2, ADC_CHANNEL_3
     adc_channel_t adc_channels[2] = ADC_CHANNELS;
 
-#ifdef HAS_ESP32_DAC
-    /// ESP32: DAC_CHANNEL_MASK_CH0 or DAC_CHANNEL_MASK_CH1
-    dac_channel_mask_t dac_mono_channel = DAC_CHANNEL_MASK_CH0;
-#endif
     /// Default constructor
     AnalogConfigESP32V1(RxTxMode rxtxMode=TX_MODE) {
       sample_rate = 44100;
-      adc_bit_width  = 12;
       channels =  2;
-      bits_per_sample = SOC_ADC_DIGI_RESULT_BYTES*8;
+      bits_per_sample = 16;
       rx_tx_mode = rxtxMode;
       if (rx_tx_mode == RX_MODE) {
         LOGI("I2S_MODE_ADC_BUILT_IN");
