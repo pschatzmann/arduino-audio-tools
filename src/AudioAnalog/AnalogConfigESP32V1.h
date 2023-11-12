@@ -58,6 +58,8 @@ class AnalogConfigESP32V1 : public AudioInfo {
     int buffer_count = ANALOG_BUFFER_COUNT;
     int buffer_size = ANALOG_BUFFER_SIZE;
     RxTxMode rx_tx_mode;
+    TickType_t timeout = portMAX_DELAY;
+
 #ifdef HAS_ESP32_DAC
     bool is_blocking_write = true;
     bool use_apll = false;
