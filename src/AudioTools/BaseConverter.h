@@ -114,21 +114,28 @@ class ConverterScaler : public  BaseConverter {
 template<typename T>
 class ConverterAutoCenterT : public  BaseConverter {
     public:
-        ConverterAutoCenterT(int channels=2, int initCount=1){
+        ConverterAutoCenterT(int channels=2, bool isDynamic=false){
             this->channels = channels;
-            this->init_count = initCount;
+            this->is_dynamic = isDynamic;
         }
 
         size_t convert(uint8_t(*src), size_t byte_count) {
-            int size = byte_count / channels / sizeof(T);
+            size_t size = byte_count / channels / sizeof(T);
             T *sample = (T*) src;
             setup((T*)src, size);
             // convert data
             if (is_setup){
-                for (size_t j=0; j<size; j++){
-                    for (int i=0;i<channels;i++){
-                        *sample = *sample - offset;
-                        sample++;
+                if (!is_dynamic) {
+                    for (size_t j=0; j<size; j++){
+                        for (int ch=0;ch<channels;ch++){
+                           sample[(j*channels)+ch] = sample[(j*channels)+ch] - offset_to[ch];
+                        }
+                    }
+                } else {
+                    for (size_t j=0; j<size; j++){
+                        for (int ch=0;ch<channels;ch++){
+                           sample[(j*channels)+ch] = sample[(j*channels)+ch] - offset_from[ch] + (offset_step[ch]*size);
+                        }
                     }
                 }
             }
@@ -136,48 +143,46 @@ class ConverterAutoCenterT : public  BaseConverter {
         }
 
     protected:
-        T offset = 0;
+        Vector<float> offset_from{0};
+        Vector<float> offset_to{0};
+        Vector<float> offset_step{0};
+        Vector<float> total{0};
         float left = 0.0;
         float right = 0.0;
         bool is_setup = false;
-        int init_count = 1;
+        bool is_dynamic;
         int channels;
 
         void setup(T *src, size_t size){
             if (size==0) return;
-            if (!is_setup) {
-                if (channels==1){
-                    left = 0;
-                    T *sample = (T*) src;
-                    for (size_t j=0;j<size;j++){
-                        left += *sample++;
-                    }
-                    offset = left / size;
-                    
-                    is_setup = --init_count <= 0;
-                    LOGD("offset: %d",(int)offset);
-                } else if (channels==2){
-                    left = 0;
-                    right = 0;
-                    T *sample = (T*) src;
-                    for (size_t j=0;j<size;j++){
-                        left += *sample++;
-                        right += *sample++;
-                    }
-                    left = left / size;
-                    right = right / size;
-
-                    if (left>0){
-                        offset = left;
-                        is_setup = --init_count <= 0;
-                    } else if (right>0){
-                        offset = right;
-                        is_setup = --init_count <= 0;;
-                    }
-                    LOGD("offset: %d",(int)offset);
+            if (!is_setup || is_dynamic) {
+                if (offset_from.size()==0){
+                    offset_from.resize(channels);
+                    offset_to.resize(channels);
+                    offset_step.resize(channels);
+                    total.resize(channels);
                 }
+
+                // save last offset
+                for (int ch=0; ch<channels; ch++){
+                    offset_from[ch] = offset_to[ch];
+                    total[ch] = 0.0;
+                }
+
+                // calculate new offset
+                for (size_t j=0; j < size; j++){
+                    for (int ch=0; ch<channels; ch++){
+                       total[ch] += src[(j*channels)+ch];
+                    }
+                }
+                for (int ch=0; ch<channels; ch++){
+                    offset_to[ch] = total[ch] / size;
+                    offset_step[ch] = (offset_to[ch] - offset_from[ch]) / size;
+                }
+                is_setup = true;
             }
         }
+
 };
 
 /**
@@ -199,21 +204,21 @@ class ConverterAutoCenter : public  BaseConverter {
         if (p_converter!=nullptr) delete p_converter;
     }
 
-    void begin(int channels, int bitsPerSample, int count=1){
+    void begin(int channels, int bitsPerSample, bool isDynamic=false){
         this->channels = channels;
         this->bits_per_sample = bitsPerSample;
         if (p_converter!=nullptr) delete p_converter;
         switch(bits_per_sample){
             case 16:{
-                p_converter = new ConverterAutoCenterT<int16_t>(channels);
+                p_converter = new ConverterAutoCenterT<int16_t>(channels, isDynamic);
                 break;
             }
             case 24:{
-                p_converter = new ConverterAutoCenterT<int24_t>(channels);
+                p_converter = new ConverterAutoCenterT<int24_t>(channels, isDynamic);
                 break;
             }
             case 32:{
-                p_converter = new ConverterAutoCenterT<int32_t>(channels);
+                p_converter = new ConverterAutoCenterT<int32_t>(channels, isDynamic);
                 break;
             }
         }

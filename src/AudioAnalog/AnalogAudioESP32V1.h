@@ -267,7 +267,7 @@ protected:
         .max_store_buf_size = (uint32_t)conv_frame_size * cfg.buffer_count,
         .conv_frame_size = conv_frame_size,
     };
-    
+
     // Create adc_continuous handle
     esp_err_t err = adc_continuous_new_handle(&adc_config, &adc_handle);
     if (err != ESP_OK) {
@@ -355,7 +355,7 @@ protected:
     }
     
     // setup up optinal auto center which puts the avg at 0 
-    auto_center.begin(cfg.channels, cfg.bits_per_sample, 2);
+    auto_center.begin(cfg.channels, cfg.bits_per_sample, true);
 
     LOGI("adc_continuous_start successful");
     return true;
