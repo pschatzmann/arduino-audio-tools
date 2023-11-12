@@ -256,48 +256,18 @@ protected:
     } else {
       LOGI("channels: %d, max: %d", cfg.channels, max_channels);
     }
-
-    adc_continuous_handle_cfg_t adc_config;
-
-    // Code from esp32-hal-adc.c:
-    // adc_handle[adc_unit].conversion_frame_size = conversions_per_pin * pins_count * SOC_ADC_DIGI_RESULT_BYTES;
-    // #if CONFIG_IDF_TARGET_ESP32 || CONFIG_IDF_TARGET_ESP32S2
-    //     uint8_t calc_multiple = adc_handle[adc_unit].conversion_frame_size % SOC_ADC_DIGI_DATA_BYTES_PER_CONV;
-    //     if(calc_multiple != 0){
-    //         adc_handle[adc_unit].conversion_frame_size = (adc_handle[adc_unit].conversion_frame_size + calc_multiple);
-    //     }
-    // #endif
-    // adc_handle[adc_unit].buffer_size = adc_handle[adc_unit].conversion_frame_size * 2;
-    // adc_continuous_handle_cfg_t adc_config = {
-    //     .max_store_buf_size = adc_handle[adc_unit].buffer_size,
-    //     .conv_frame_size = adc_handle[adc_unit].conversion_frame_size,
-    // };
-
-    /* Because ESPs have different ADC DMA and conversion configurations
-       we need to adjust the frame_size accordingly
-        ESP32S2
-          SOC_ADC_DIGI_RESULT_BYTES        (2)
-          SOC_ADC_DIGI_DATA_BYTES_PER_CONV (2)
-        ESP32 
-          SOC_ADC_DIGI_RESULT_BYTES        (2)
-          SOC_ADC_DIGI_DATA_BYTES_PER_CONV (4)
-        ESP32C3 || ESP32H2 || ESP32C6 || ESP32S3
-          SOC_ADC_DIGI_RESULT_BYTES        (4)
-          SOC_ADC_DIGI_DATA_BYTES_PER_CONV (4)
-        ESP32C2 
-          is not defined, likley the same as c3
-    */
     
-    adc_config.conv_frame_size = cfg.buffer_size * cfg.buffer_count * SOC_ADC_DIGI_RESULT_BYTES;
-#if CONFIG_IDF_TARGET_ESP32 || CONFIG_IDF_TARGET_ESP32S2
-    uint8_t calc_multiple = adc_config.conv_frame_size % SOC_ADC_DIGI_DATA_BYTES_PER_CONV;
-    if (calc_multiple != 0) {
-        adc_config.conv_frame_size += (SOC_ADC_DIGI_DATA_BYTES_PER_CONV - calc_multiple);
+    // determine conv_frame_size which must be multiple of SOC_ADC_DIGI_DATA_BYTES_PER_CONV
+    uint32_t conv_frame_size = (uint32_t)cfg.buffer_size * SOC_ADC_DIGI_RESULT_BYTES;
+    uint8_t calc_multiple_diff = conv_frame_size % SOC_ADC_DIGI_DATA_BYTES_PER_CONV;
+    if(calc_multiple_diff != 0){
+      conv_frame_size = (conv_frame_size + calc_multiple_diff);
     }
-#endif
-    adc_config.max_store_buf_size = adc_config.conv_frame_size * 2;    
-    LOGI("adc conv_frame_size is %d and max store buf size is %d",adc_config.conv_frame_size, adc_config.max_store_buf_size);
-
+    adc_continuous_handle_cfg_t adc_config = {
+        .max_store_buf_size = (uint32_t)conv_frame_size * cfg.buffer_count,
+        .conv_frame_size = conv_frame_size,
+    };
+    
     // Create adc_continuous handle
     esp_err_t err = adc_continuous_new_handle(&adc_config, &adc_handle);
     if (err != ESP_OK) {
