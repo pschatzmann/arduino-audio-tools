@@ -93,69 +93,11 @@ public:
 
   size_t readBytes(uint8_t *dest, size_t size_bytes) override {
     TRACED();
-    size_t total_bytes = 0;
-    // allocate buffer for the requested bytes
-    int sample_count = size_bytes / sizeof(int16_t);
-    adc_digi_output_data_t result_data[sample_count];
-    memset(&result_data, 0, sizeof(result_data));
-    uint32_t result_cont;
-    if (adc_continuous_read(adc_handle, (uint8_t*) result_data, sizeof(result_data), &result_cont, timeout) ==
-        ESP_OK) {
-       // Result must fit into uint16_T !   
-        uint16_t *result16 = (uint16_t*) dest;
-        uint16_t *end = (uint16_t*) (dest+size_bytes);
-        int result_count = result_cont / sizeof(adc_digi_output_data_t);
-        LOGD("adc_continuous_read -> %d bytes / %d samples", result_cont, result_count);
-
-        for (int i = 0; i < result_count; i++) {
-            adc_digi_output_data_t *p = &result_data[i];
-            uint16_t chan_num = AUDIO_ADC_GET_CHANNEL(p);
-            uint32_t data = AUDIO_ADC_GET_DATA(p);
-
-            if (isValidADCChannel((adc_channel_t)chan_num)){
-              LOGD("Idx: %d, channel: %d, data: %u", i, chan_num, data);
-
-              assert(result16 < end); // make sure we dont write past the end
-              if (cfg.adc_calibration_active){
-                int data_milliVolts;    
-                auto err = adc_cali_raw_to_voltage(adc_cali_handle, data, &data_milliVolts);
-                if (err == ESP_OK) {
-                  // map 0 - 3300 millivolts to range from 0 to 65535 ?
-                  int result_full_range = data_milliVolts;// * 19;
-                  *result16 = result_full_range;
-                  assert(result_full_range == (int) *result16); // check that we did not loose any bytes
-                  result16++;
-                  total_bytes += sizeof(uint16_t);
-                } else {
-                  LOGE("adc_cali_raw_to_voltage: %d", err);
-                }
-              } else {
-                *result16 = data;
-                assert(data == (uint32_t) *result16); // check that we did not loose any bytes
-                result16++;
-                total_bytes += sizeof(uint16_t); 
-              }
-
-            } else {
-              LOGD("invalid channel: %d, data: %u", chan_num, data);
-            }
-        }
-        // make sure that the center is at 0, so the result will be int16_t
-        if (cfg.is_auto_center_read){
-          auto_center.convert(dest, total_bytes);
-        }
-
-    } else {
-      LOGE("adc_continuous_read");
-      total_bytes = 0;
-    }
-    return total_bytes;
+    return io.readBytes(dest, size_bytes);
   }
   // is data in the ADC buffer?
   int available() override { return active_rx ? DEFAULT_BUFFER_SIZE : 0; }
 
-  // set ADC read timtout
-  void setTimeout(int value) { timeout = value; }
 
 protected:
 #ifdef HAS_ESP32_DAC
@@ -167,13 +109,14 @@ protected:
   bool active = false;
   bool active_tx = false;
   bool active_rx = false;
-  TickType_t timeout = portMAX_DELAY;
   ConverterAutoCenter auto_center;
 
   /// writes the int16_t data to the DAC
   class IO16Bit : public AudioStream {
   public:
     IO16Bit(AnalogDriverESP32V1 *driver) { self = driver; }
+
+    // write int16_t data to the dac
     size_t write(const uint8_t *src, size_t size_bytes) override {
       TRACED();
 #ifdef HAS_ESP32_DAC
@@ -188,7 +131,7 @@ protected:
       }
 
       if (dac_continuous_write(self->dac_handle, data8, samples, &result,
-                               self->timeout) != ESP_OK) {
+                               self->cfg.timeout) != ESP_OK) {
         result = 0;
       }
       return result * 2;
@@ -197,8 +140,81 @@ protected:
 #endif
     }
 
+    // provides int16_t data from the adc
+    size_t readBytes(uint8_t *dest, size_t size_bytes) override {
+      TRACED();
+      size_t total_bytes = 0;
+      // allocate buffer for the requested bytes
+      int sample_count = size_bytes / sizeof(int16_t);
+      adc_digi_output_data_t result_data[sample_count];
+      memset(&result_data, 0, sizeof(result_data));
+      uint32_t result_cont;
+      if (adc_continuous_read(self->adc_handle, (uint8_t*) result_data, sizeof(result_data), &result_cont, self->cfg.timeout) ==
+          ESP_OK) {
+        // Result must fit into uint16_T !   
+          uint16_t *result16 = (uint16_t*) dest;
+          uint16_t *end = (uint16_t*) (dest+size_bytes);
+          int result_count = result_cont / sizeof(adc_digi_output_data_t);
+          LOGD("adc_continuous_read -> %d bytes / %d samples", result_cont, result_count);
+
+          for (int i = 0; i < result_count; i++) {
+              adc_digi_output_data_t *p = &result_data[i];
+              uint16_t chan_num = AUDIO_ADC_GET_CHANNEL(p);
+              uint32_t data = AUDIO_ADC_GET_DATA(p);
+
+              if (isValidADCChannel((adc_channel_t)chan_num)){
+                LOGD("Idx: %d, channel: %d, data: %u", i, chan_num, data);
+
+                assert(result16 < end); // make sure we dont write past the end
+                if (self->cfg.adc_calibration_active){
+                  int data_milliVolts;    
+                  auto err = adc_cali_raw_to_voltage(self->adc_cali_handle, data, &data_milliVolts);
+                  if (err == ESP_OK) {
+                    // map 0 - 3300 millivolts to range from 0 to 65535 ?
+                    int result_full_range = data_milliVolts;// * 19;
+                    *result16 = result_full_range;
+                    assert(result_full_range == (int) *result16); // check that we did not loose any bytes
+                    result16++;
+                    total_bytes += sizeof(uint16_t);
+                  } else {
+                    LOGE("adc_cali_raw_to_voltage: %d", err);
+                  }
+                } else {
+                  *result16 = data;
+                  assert(data == (uint32_t) *result16); // check that we did not loose any bytes
+                  result16++;
+                  total_bytes += sizeof(uint16_t); 
+                }
+
+              } else {
+                LOGD("invalid channel: %d, data: %u", chan_num, data);
+              }
+          }
+          // make sure that the center is at 0, so the result will be int16_t
+          if (self->cfg.is_auto_center_read){
+            self->auto_center.convert(dest, total_bytes);
+          }
+
+      } else {
+        LOGE("adc_continuous_read");
+        total_bytes = 0;
+      }
+      return total_bytes;
+    }
+
+
   protected:
     AnalogDriverESP32V1 *self;
+
+    bool isValidADCChannel(adc_channel_t channel){
+    for(int j=0; j<self->cfg.channels; j++){
+      if (self->cfg.adc_channels[j] == channel) {
+        return true;
+      }
+    }
+    return false;
+  } 
+  
 
   } io{this};
 
@@ -375,14 +391,6 @@ protected:
     }
   }
 
-  bool isValidADCChannel(adc_channel_t channel){
-    for(int j=0; j<cfg.channels; j++){
-      if (cfg.adc_channels[j] == channel) {
-        return true;
-      }
-    }
-    return false;
-  } 
 
   bool setupADCCalibration(){
     if (!cfg.adc_calibration_active) return true;
