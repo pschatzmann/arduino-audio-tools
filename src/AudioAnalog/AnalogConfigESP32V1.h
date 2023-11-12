@@ -72,7 +72,6 @@ class AnalogConfigESP32V1 : public AudioInfo {
     adc_digi_output_format_t adc_output_type = ADC_OUTPUT_TYPE;
     uint8_t adc_attenuation = ADC_ATTEN_DB_0;
     uint8_t adc_bit_width = SOC_ADC_DIGI_MAX_BITWIDTH;
-    //uint32_t sample_rate = SOC_ADC_SAMPLE_FREQ_THRES_LOW;
     /// ESP32: ADC_CHANNEL_6, ADC_CHANNEL_7; others ADC_CHANNEL_2, ADC_CHANNEL_3
     adc_channel_t adc_channels[2] = ADC_CHANNELS;
 
