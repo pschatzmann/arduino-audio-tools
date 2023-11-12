@@ -101,16 +101,17 @@ public:
     uint32_t result_cont;
     if (adc_continuous_read(adc_handle, (uint8_t*) result_data, sizeof(result_data), &result_cont, timeout) ==
         ESP_OK) {
-      // convert unsigned to signed ?
+       // Result must fit into uint16_T !   
         uint16_t *result16 = (uint16_t*) dest;
         uint16_t *end = (uint16_t*) (dest+size_bytes);
         int result_count = result_cont / sizeof(adc_digi_output_data_t);
         LOGD("adc_continuous_read -> %d bytes / %d samples", result_cont, result_count);
 
-        for (int i = 0; i < result_count; i ++) {
+        for (int i = 0; i < result_count; i++) {
             adc_digi_output_data_t *p = &result_data[i];
             uint16_t chan_num = AUDIO_ADC_GET_CHANNEL(p);
             uint32_t data = AUDIO_ADC_GET_DATA(p);
+
             if (isValidADCChannel((adc_channel_t)chan_num)){
               LOGD("Idx: %d, channel: %d, data: %u", i, chan_num, data);
 
@@ -119,7 +120,7 @@ public:
                 int data_milliVolts;    
                 auto err = adc_cali_raw_to_voltage(adc_cali_handle, data, &data_milliVolts);
                 if (err == ESP_OK) {
-                  // map 0 - 3300 millivolts to range from 0 to 65535
+                  // map 0 - 3300 millivolts to range from 0 to 65535 ?
                   int result_full_range = data_milliVolts;// * 19;
                   *result16 = result_full_range;
                   assert(result_full_range == (int) *result16); // check that we did not loose any bytes
@@ -139,7 +140,7 @@ public:
               LOGD("invalid channel: %d, data: %u", chan_num, data);
             }
         }
-        // make sure that the center is at 0
+        // make sure that the center is at 0, so the result will be int16_t
         if (cfg.is_auto_center_read){
           auto_center.convert(dest, total_bytes);
         }
