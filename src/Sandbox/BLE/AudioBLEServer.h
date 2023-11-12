@@ -1,55 +1,72 @@
 #pragma once
 
 #include "AudioBLEStream.h"
-//#include <BLE2902.h>
-#include <BLEDevice.h>
-#include <BLEServer.h>
-#include <BLEUtils.h>
+#include <ArduinoBLE.h>
 
 namespace audio_tools {
+
+class AudioBLEServer;
+class AudioBLEServer *selfAudioBLEServer = nullptr;
+
 /**
  * @brief A simple BLE server that implements the serial protocol, so that it
- * can be used to send and recevie audio. In BLE terminologiy this is a Peripheral.
+ * can be used to send and recevie audio. In BLE terminologiy this is a
+ * Peripheral.
+ * This implementation uses the ArduinoBLE library!
  * @ingroup communications
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 
-class AudioBLEServer : public AudioBLEStream,
-                       public BLECharacteristicCallbacks,
-                       public BLEServerCallbacks {
+class AudioBLEServer : public AudioBLEStream {
 public:
-  AudioBLEServer(int mtu = BLE_MTU) : AudioBLEStream(mtu) {}
+  AudioBLEServer(int mtu = BLE_MTU) : AudioBLEStream(mtu) {
+    selfAudioBLEServer = this;
+  }
 
   // starts a BLE server with the indicated name
   bool begin(const char *name) {
     TRACEI();
     ble_server_name = name;
-    BLEDevice::init(name);
 
-    p_server = BLEDevice::createServer();
-    p_server->setCallbacks(this);
+    if (!BLE.begin()) {
+      LOGE("starting BLE failed");
+      return false;
+    }
 
+    // set the local name peripheral advertises
+    BLE.setLocalName(ble_server_name);
+
+    // assign event handlers for connected, disconnected to peripheral
+    BLE.setEventHandler(BLEConnected, blePeripheralConnectHandler);
+    BLE.setEventHandler(BLEDisconnected, blePeripheralDisconnectHandler);
+
+    // setup serice with characteristics
     setupBLEService();
-    p_advertising = BLEDevice::getAdvertising();
-    p_advertising->addServiceUUID(BLE_AUDIO_SERVICE_UUID);
-    BLEDevice::startAdvertising();
+
+    // start advertising
+    BLE.advertise();
+
     return true;
   }
 
   void end() override {
     TRACEI();
     flush();
-    BLEDevice::deinit();
+    BLE.end();
   }
 
   size_t readBytes(uint8_t *data, size_t dataSize) override {
     TRACED();
+    if (!checkCentralConnected())
+      return 0;
     size_t read_size = getReadSize(dataSize);
     return receive_buffer.readArray(data, read_size);
   }
 
   int available() override {
+    if (!checkCentralConnected())
+      return 0;
     if (is_framed)
       return receive_sizes.peek();
     return this->receive_buffer.available();
@@ -57,9 +74,8 @@ public:
 
   size_t write(const uint8_t *data, size_t dataSize) override {
     LOGD("AudioBLEStream::write: %d", dataSize);
-    if (!connected()) {
+    if (!checkCentralConnected())
       return 0;
-    }
     if (is_framed && availableForWrite() < dataSize) {
       return 0;
     }
@@ -67,29 +83,108 @@ public:
   }
 
   int availableForWrite() override {
-    int result =  transmit_buffer.availableForWrite();
+    if (!checkCentralConnected())
+      return 0;
+    setupTXBuffer();
+    int result = transmit_buffer.availableForWrite();
     // make sure we copy always a consistent amount of data
-    if (result < DEFAULT_BUFFER_SIZE) result = 0;
-    return result ;
+    if (result < DEFAULT_BUFFER_SIZE)
+      result = 0;
+    return result;
   }
 
-  bool connected() override { return p_server->getConnectedCount() > 0; }
+
+  bool connected() override { return checkCentralConnected(); }
 
 protected:
   // server
-  BLEServer *p_server = nullptr;
-  BLEService *p_service = nullptr;
-  BLEAdvertising *p_advertising = nullptr;
-  BLECharacteristic *ch01_char;
-  BLECharacteristic *ch02_char;
-  BLECharacteristic *info_char;
-  BLEDescriptor ch01_desc{"2901"};
-  BLEDescriptor ch02_desc{"2901"};
-  BLEDescriptor info_desc{"2901"};
+  BLEService service{BLE_AUDIO_SERVICE_UUID}; // create service
+  BLECharacteristic ch01_char{BLE_CH1_UUID, BLERead,
+                              BLE_MTU - BLE_MTU_OVERHEAD};
+  BLECharacteristic ch02_char{BLE_CH2_UUID, BLEWrite,
+                              BLE_MTU - BLE_MTU_OVERHEAD};
+  BLECharacteristic info_char{BLE_INFO_UUID, BLERead | BLEWrite | BLENotify,
+                              80};
+  BLEDescriptor ch01_desc{"2901", "channel 1"};
+  BLEDescriptor ch02_desc{"2901", "channel 2"};
+  BLEDescriptor info_desc{"2901", "info"};
+
   RingBuffer<uint8_t> receive_buffer{0};
   RingBuffer<uint16_t> receive_sizes{0};
   RingBuffer<uint8_t> transmit_buffer{0};
   RingBuffer<uint16_t> transmit_buffer_sizes{0};
+
+  static void blePeripheralConnectHandler(BLEDevice device) {
+    selfAudioBLEServer->onConnect(device);
+  }
+
+  static void blePeripheralDisconnectHandler(BLEDevice device) {
+    selfAudioBLEServer->onDisconnect(device);
+  }
+
+  static void bleOnWrite(BLEDevice device, BLECharacteristic characteristic) {
+    selfAudioBLEServer->onWrite(characteristic);
+  }
+
+  static void bleOnRead(BLEDevice device, BLECharacteristic characteristic) {
+    TRACED();
+    selfAudioBLEServer->onRead(characteristic);
+  }
+
+  void onConnect(BLEDevice device) { TRACEI(); }
+
+  void onDisconnect(BLEDevice device) {
+    TRACEI();
+    BLE.advertise();
+  }
+
+  /// store the next batch of data
+  void onWrite(BLECharacteristic characteristic) {
+    TRACED();
+    setupRXBuffer();
+    // changed to auto to be version independent (it changed from std::string to
+    // String)
+    if (Str(BLE_INFO_UUID).equals(characteristic.uuid())) {
+      setAudioInfo((uint8_t *)characteristic.value(),
+                   characteristic.valueLength());
+    } else {
+      receiveAudio((uint8_t *)characteristic.value(),
+                   characteristic.valueLength());
+    }
+  }
+
+  /// provide the next batch of audio data
+  void onRead(BLECharacteristic characteristic) {
+    TRACED();
+    auto uuid = Str(characteristic.uuid());
+    if (uuid == BLE_CH1_UUID || uuid == BLE_CH2_UUID) {
+      TRACEI();
+      setupTXBuffer();
+      int len = std::min(getMTU() - BLE_MTU_OVERHEAD,
+                         (int)transmit_buffer.available());
+      if (is_framed) {
+        len = transmit_buffer_sizes.read();
+      }
+      LOGI("%s: len: %d, buffer: %d", uuid.c_str(), len,
+           transmit_buffer.size());
+      if (len>0){
+        assert(len==512);
+        uint8_t tmp[len];
+        transmit_buffer.readArray(tmp, len);
+        characteristic.writeValue(tmp, len);
+      }
+    }
+  }
+
+
+  bool checkCentralConnected() {
+    BLEDevice central = BLE.central();
+
+    // if a central is connected to the peripheral:
+    if (central)
+      return central.connected();
+    return false;
+  }
 
   virtual void receiveAudio(const uint8_t *data, size_t size) {
     while (receive_buffer.availableForWrite() < size) {
@@ -106,16 +201,17 @@ protected:
     // send update via BLE
     Str str = toStr(info);
     LOGI("AudioInfo: %s", str.c_str());
-    info_char->setValue((uint8_t *)str.c_str(), str.length() + 1);
-    info_char->notify();
+    info_char.setValue((uint8_t *)str.c_str(), str.length() + 1);
   }
 
   int getMTU() override {
     TRACED();
     if (max_transfer_size == 0) {
-      int peer_max_transfer_size =
-          p_server->getPeerMTU(p_server->getConnId()) - BLE_MTU_OVERHEAD;
-      max_transfer_size = std::min(BLE_MTU - BLE_MTU, peer_max_transfer_size);
+      // int peer_max_transfer_size =
+      //     p_server->getPeerMTU(p_server->getConnId()) - BLE_MTU_OVERHEAD;
+      // max_transfer_size = std::min(BLE_MTU - BLE_MTU,
+      // peer_max_transfer_size);
+      max_transfer_size = BLE_MTU - BLE_MTU_OVERHEAD;
 
       LOGI("max_transfer_size: %d", max_transfer_size);
     }
@@ -124,91 +220,42 @@ protected:
 
   void setupBLEService() {
     TRACEI();
-    // characteristic property is what the other device does.
+    // set the UUID for the service this peripheral advertises
+    BLE.setAdvertisedService(service);
 
-    if (p_service == nullptr) {
-      p_service = p_server->createService(BLE_AUDIO_SERVICE_UUID);
+    ch01_char.addDescriptor(ch01_desc);
+    ch02_char.addDescriptor(ch02_desc);
 
-      ch01_char = p_service->createCharacteristic(
-          BLE_CH1_UUID, BLECharacteristic::PROPERTY_READ );
-      ch01_desc.setValue("Channel 1");
-      ch01_char->addDescriptor(&ch01_desc);
-      ch01_char->setCallbacks(this);
+    // add the characteristic to the service
+    service.addCharacteristic(ch01_char);
+    service.addCharacteristic(ch02_char);
 
-      ch02_char = p_service->createCharacteristic(
-          BLE_CH2_UUID, BLECharacteristic::PROPERTY_WRITE);
-      ch02_desc.setValue("Channel 2");
-      ch02_char->addDescriptor(&ch02_desc);
-      ch02_char->setCallbacks(this);
+    // assign event handlers for characteristic
+    ch02_char.setEventHandler(BLEWritten, bleOnWrite);
+    ch01_char.setEventHandler(BLERead, bleOnRead);
 
-      // optional setup of audio info notifications
-      if (is_audio_info_active && info_char == nullptr) {
-
-        info_char = p_service->createCharacteristic(
-            BLE_INFO_UUID, BLECharacteristic::PROPERTY_NOTIFY |
-                               BLECharacteristic::PROPERTY_READ |
-                               BLECharacteristic::PROPERTY_NOTIFY |
-                               BLECharacteristic::PROPERTY_INDICATE);
-        info_desc.setValue("Audio Info");
-        info_char->addDescriptor(&info_desc);
-        info_char->setCallbacks(this);
-
-      }
-
-      p_service->start();
-
-      getMTU();
-
-      if (info_char != nullptr) {
-        writeAudioInfoCharacteristic(info);
-      }
+    if (is_audio_info_active) {
+      info_char.addDescriptor(info_desc);
+      service.addCharacteristic(info_char);
     }
-  }
 
-  void onConnect(BLEServer *pServer) override {
-    TRACEI();
-  }
+    // add service
+    BLE.addService(service);
 
-  void onDisconnect(BLEServer *pServer) override {
-    TRACEI();
-    BLEDevice::startAdvertising();
-  }
-
-  /// store the next batch of data
-  void onWrite(BLECharacteristic *pCharacteristic) override {
-    TRACED();
-    setupRXBuffer();
-    // changed to auto to be version independent (it changed from std::string to String)
-    auto value = pCharacteristic->getValue();
-    if (pCharacteristic->getUUID().toString() == BLE_INFO_UUID) {
-      setAudioInfo((uint8_t *)&value[0], value.length());
-    } else {
-      receiveAudio((uint8_t *)&value[0], value.length());
+    // provide AudioInfo
+    if (is_audio_info_active) {
+      writeAudioInfoCharacteristic(info);
     }
-  }
 
-  /// provide the next batch of audio data
-  void onRead(BLECharacteristic *pCharacteristic) override {
-    TRACED();
-    // changed to auto to be version independent (it changed from std::string to String)
-    auto uuid = pCharacteristic->getUUID().toString();
-    if (uuid == BLE_CH1_UUID || uuid == BLE_CH2_UUID) {
-      setupTXBuffer();
-      int len = std::min(getMTU() - BLE_MTU_OVERHEAD, (int)transmit_buffer.available());
-      if (is_framed) {
-        len = transmit_buffer_sizes.read();
-      }
-      LOGD("%s: len: %d, buffer: %d", uuid.c_str(), len,
-           transmit_buffer.size());
-      uint8_t tmp[len];
-      transmit_buffer.readArray(tmp, len);
-      pCharacteristic->setValue(tmp, len);
-    }
+    // Read callback works only when we provide some initial data
+    uint8_t tmp[512]={0xFF};
+    ch01_char.writeValue(tmp, 512, false);
   }
 
   void setupTXBuffer() {
     if (transmit_buffer.size() == 0) {
-      LOGI("Setting transmit_buffer to %d for mtu %d", RX_BUFFER_SIZE, getMTU());
+      LOGI("Setting transmit_buffer to %d for mtu %d", RX_BUFFER_SIZE,
+           getMTU());
       transmit_buffer.resize(TX_BUFFER_SIZE);
       if (is_framed) {
         transmit_buffer_sizes.resize(TX_COUNT);
@@ -245,6 +292,5 @@ protected:
     return read_size;
   }
 };
-
 
 } // namespace audio_tools
