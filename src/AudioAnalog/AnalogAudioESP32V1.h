@@ -8,9 +8,21 @@
 #include "AudioTools/AudioStreams.h"
 #include "AudioTools/AudioStreamsConverter.h"
 
+#if CONFIG_IDF_TARGET_ESP32 || CONFIG_IDF_TARGET_ESP32S2
+#define AUDIO_ADC_OUTPUT_TYPE             ADC_DIGI_OUTPUT_FORMAT_TYPE1
+#define AUDIO_ADC_GET_CHANNEL(p_data)     ((p_data)->type1.channel)
+#define AUDIO_ADC_GET_DATA(p_data)        ((p_data)->type1.data)
+#else
+#define AUDIO_ADC_OUTPUT_TYPE             ADC_DIGI_OUTPUT_FORMAT_TYPE2
+#define AUDIO_ADC_GET_CHANNEL(p_data)     ((p_data)->type2.channel)
+#define AUDIO_ADC_GET_DATA(p_data)        ((p_data)->type2.data)
+#endif
+#define GET_UNIT(x) ((x >> 3) & 0x1)
+
+
+
 namespace audio_tools {
 
-#define GET_UNIT(x) ((x >> 3) & 0x1)
 
 /**
  * @brief AnalogAudioStream: A very fast DAC using DMA using the new
@@ -89,56 +101,65 @@ public:
     return io.write(src, size_bytes);
   }
 
-  // reads data from DMA buffer
   size_t readBytes(uint8_t *dest, size_t size_bytes) override {
     TRACED();
+    size_t total_bytes = 0;
+    // allocate buffer for the requested bytes
+    int sample_count = size_bytes / sizeof(int16_t);
+    adc_digi_output_data_t result_data[sample_count];
+    memset(&result_data, 0, sizeof(result_data));
+    uint32_t result_cont;
+    if (adc_continuous_read(adc_handle, (uint8_t*) result_data, sizeof(result_data), &result_cont, timeout) ==
+        ESP_OK) {
+      // convert unsigned to signed ?
+        uint16_t *result16 = (uint16_t*) dest;
+        uint16_t *end = (uint16_t*) (dest+size_bytes);
+        int result_count = result_cont / sizeof(adc_digi_output_data_t);
+        LOGD("adc_continuous_read -> %d bytes / %d samples", result_cont, result_count);
 
-    int data_milliVolts;    
-    uint32_t bytes_read = 0;
+        for (int i = 0; i < result_count; i ++) {
+            adc_digi_output_data_t *p = &result_data[i];
+            uint16_t chan_num = AUDIO_ADC_GET_CHANNEL(p);
+            uint32_t data = AUDIO_ADC_GET_DATA(p);
+            if (isValidADCChannel((adc_channel_t)chan_num)){
+              LOGD("Idx: %d, channel: %d, data: %u", i, chan_num, data);
 
-    // size_bytes should be multiple of SOC_ADC_DIGI_RESULT_BYTES
-    if ( (size_bytes % SOC_ADC_DIGI_RESULT_BYTES) !=0) {
-      LOGE("requested %d bytes is not a multiple of %d", size_bytes, SOC_ADC_DIGI_RESULT_BYTES);
-      return 0;
+              assert(result16 < end); // make sure we dont write past the end
+              if (cfg.adc_calibration_active){
+                int data_milliVolts;    
+                auto err = adc_cali_raw_to_voltage(adc_cali_handle, data, &data_milliVolts);
+                if (err == ESP_OK) {
+                  // map 0 - 3300 millivolts to range from 0 to 65535
+                  int result_full_range = data_milliVolts;// * 19;
+                  *result16 = result_full_range;
+                  assert(result_full_range == (int) *result16); // check that we did not loose any bytes
+                  result16++;
+                  total_bytes += sizeof(uint16_t);
+                } else {
+                  LOGE("adc_cali_raw_to_voltage: %d", err);
+                }
+              } else {
+                *result16 = data;
+                assert(data == (uint32_t) *result16); // check that we did not loose any bytes
+                result16++;
+                total_bytes += sizeof(uint16_t); 
+              }
+
+            } else {
+              LOGD("invalid channel: %d, data: %u", chan_num, data);
+            }
+        }
+        // make sure that the center is at 0
+        if (cfg.is_auto_center_read){
+          auto_center.convert(dest, total_bytes);
+        }
+
+    } else {
+      LOGE("adc_continuous_read");
+      total_bytes = 0;
     }
-
-    size_t num_samples = size_bytes / SOC_ADC_DIGI_RESULT_BYTES;
-    LOGI("requesting %d bytes, %d samples", size_bytes, num_samples);
-
-    // Manual says
-    // read DMA buffer (hanndle, bufffer, expected length in bytes, real length in bytes, timeout in ms)
-    esp_err_t err = adc_continuous_read(adc_handle, dest, size_bytes, &bytes_read, timeout);
-    if (err != ESP_OK) {
-      if ( err == ESP_ERR_TIMEOUT) { LOGE("reading data failed, increase timeout"); } 
-      else { LOGE("reading data failed with error %d", err); }
-      dest = NULL;
-      return 0;
-    }
-    
-    LOGI("received %d bytes, %d samples, at %d ms", bytes_read, bytes_read / SOC_ADC_DIGI_RESULT_BYTES, millis());
-
-    // Calibrate the ADC readings
-    for (int i = 0; i < bytes_read; i += SOC_ADC_DIGI_RESULT_BYTES) {
-      int raw_data;
-    #if SOC_ADC_DIGI_RESULT_BYTES == 4
-      raw_data = *(uint32_t *) &dest[i];
-    #else
-      raw_data = *(uint16_t *) &dest[i];
-    #endif
-        err = adc_cali_raw_to_voltage(adc_cali_handle, raw_data, &data_milliVolts);
-        if (err == ESP_OK) {
-    #if SOC_ADC_DIGI_RESULT_BYTES == 4
-        *(uint32_t *) &dest[i] = (uint32_t) data_milliVolts;
-    #else
-        *(uint16_t *) &dest[i] = (uint16_t) data_milliVolts;
-    #endif
-        } else { LOGE("converting data to milliVolts failed with error: %d", err); }
-    }
-    LOGI("calibrated %d bytes %d samples", bytes_read, bytes_read / SOC_ADC_DIGI_RESULT_BYTES);
-
-    return bytes_read; 
+    return total_bytes;
   }
-
   // is data in the ADC buffer?
   int available() override { return active_rx ? DEFAULT_BUFFER_SIZE : 0; }
 
@@ -156,6 +177,7 @@ protected:
   bool active_tx = false;
   bool active_rx = false;
   TickType_t timeout = portMAX_DELAY;
+  ConverterAutoCenter auto_center;
 
   /// writes the int16_t data to the DAC
   class IO16Bit : public AudioStream {
@@ -313,7 +335,7 @@ protected:
 
     /// Configure the ADC
     adc_continuous_config_t dig_cfg = {
-        .sample_freq_hz = cfg.sample_rate,
+        .sample_freq_hz = (uint32_t) cfg.sample_rate,
         .conv_mode = cfg.adc_conversion_mode,
         .format = cfg.adc_output_type,
     };
@@ -350,6 +372,60 @@ protected:
     }
     LOGI("adc_continuous_config successful");
 
+    // set up optional calibration
+    if (!setupADCCalibration()){
+      return false;
+    }
+
+    // Start ADC
+    err = adc_continuous_start(adc_handle);
+    if (err != ESP_OK) {
+      LOGE("adc_continuous_start unsuccessful with error: %d", err);
+      return false;
+    }
+    
+    // setup up optinal auto center which puts the avg at 0 
+    auto_center.begin(cfg.channels, cfg.bits_per_sample, 2);
+
+    LOGI("adc_continuous_start successful");
+    return true;
+  }
+
+  bool checkBitsPerSample() {
+    // bits per sample must be multiple of 8
+    // int to_be_bits = cfg.adc_bit_width;
+    // int diff = to_be_bits % 8;
+    // if (diff!=0){
+    //   to_be_bits+=diff;
+    // }
+    int to_be_bits = 16; // for the time beeing we support only 16 bits!
+
+    if (cfg.bits_per_sample == 0) {
+      cfg.bits_per_sample = to_be_bits;
+      LOGI("bits per sample set to: %d", cfg.bits_per_sample);
+    } 
+    
+    if (cfg.bits_per_sample == 16) {
+      LOGI("bits per sample: %d", cfg.bits_per_sample);
+      return true;
+    } else {
+      LOGE("checking bits per sample error. It should be: %d but is %d",to_be_bits, cfg.bits_per_sample);
+      return false;
+    }
+  }
+
+  bool isValidADCChannel(adc_channel_t channel){
+    for(int j=0; j<cfg.channels; j++){
+      if (cfg.adc_channels[j] == channel) {
+        return true;
+      }
+    }
+    return false;
+  } 
+
+  bool setupADCCalibration(){
+    if (!cfg.adc_calibration_active) return true;
+
     // Initialize ADC calibration handle
     //
     // Calibration is applied to an ADC unit (not per channel). There is ADC1 and ADC2 unit (0,1). 
@@ -363,7 +439,8 @@ protected:
         return false;
       }
     }
-    
+
+    // setup calibration only when requested
     if(adc_cali_handle == NULL){
       #if ADC_CALI_SCHEME_CURVE_FITTING_SUPPORTED
         // curve fitting is preferred
@@ -371,7 +448,7 @@ protected:
         cali_config.unit_id  = (adc_unit_t) unit;
         cali_config.atten    = (adc_atten_t) cfg.adc_attenuation;
         cali_config.bitwidth = (adc_bitwidth_t) cfg.adc_bit_width;
-        err = adc_cali_create_scheme_curve_fitting(&cali_config, &adc_cali_handle);
+        auto err = adc_cali_create_scheme_curve_fitting(&cali_config, &adc_cali_handle);
       #elif !defined(CONFIG_IDF_TARGET_ESP32H2)
         // line fitting
         adc_cali_line_fitting_config_t cali_config;
@@ -389,30 +466,8 @@ protected:
                 unit, cfg.adc_attenuation, cfg.adc_bit_width);
         }
     }
-
-    // Start ADC
-    err = adc_continuous_start(adc_handle);
-    if (err != ESP_OK) {
-      LOGE("adc_continuous_start unsuccessful with error: %d", err);
-      return false;
-    }
-
-    LOGI("adc_continuous_start successful");
     return true;
-  }
 
-  bool checkBitsPerSample() {
-    if (cfg.bits_per_sample == 0) {
-      cfg.bits_per_sample = SOC_ADC_DIGI_RESULT_BYTES*8;
-      LOGI("bits per sample set to: %d", cfg.bits_per_sample);
-      return true;
-    } else if (cfg.bits_per_sample == SOC_ADC_DIGI_RESULT_BYTES*8) {
-      LOGI("bits per sample: %d", cfg.bits_per_sample);
-      return true;
-    } else {
-      LOGE("checking bits per sample error. It should be: %d but is %d", SOC_ADC_DIGI_RESULT_BYTES*8, cfg.bits_per_sample);
-      return false;
-    }
   }
 
 };

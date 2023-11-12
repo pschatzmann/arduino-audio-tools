@@ -2,10 +2,8 @@
  * @file read-csv.ino
  * @author Phil Schatzmann
  * @brief Test case for the new continuous API of the ESP32:
- * Default Pins ESP32:
- * input: 34, 35 (ADC_CHANNEL_6, ADC_CHANNEL_7)
- * Default Pins ESP32C3:
- * input: 2, 3 (ADC_CHANNEL_2, ADC_CHANNEL_3)
+ * Default Pins ESP32: 34, 35 (ADC_CHANNEL_6, ADC_CHANNEL_7)
+ * Default Pins ESP32C3: 2, 3 (ADC_CHANNEL_2, ADC_CHANNEL_3)
  * @version 0.1
  * @date 2023-11-01
  *
@@ -29,7 +27,9 @@ void setup(void) {
 
   auto cfg_rx = in.defaultConfig(RX_MODE);
   // cfg_rx.is_auto_center_read = false;
+  // cfg_rx.adc_calibration_active = true;
   cfg_rx.copyFrom(info);
+
   in.begin(cfg_rx);
 
   // open output
