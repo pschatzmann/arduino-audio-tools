@@ -415,7 +415,7 @@ protected:
         cali_config.unit_id  = (adc_unit_t) unit;
         cali_config.atten    = (adc_atten_t) cfg.adc_attenuation;
         cali_config.bitwidth = (adc_bitwidth_t) cfg.adc_bit_width;
-        err = adc_cali_create_scheme_line_fitting(&cali_config, &adc_cali_handle);
+        auto err = adc_cali_create_scheme_line_fitting(&cali_config, &adc_cali_handle);
       #endif
         if(err != ESP_OK){
             LOGE("creating cali handle failed for ADC%d with atten %d and bitwidth %d", 
