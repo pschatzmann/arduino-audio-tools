@@ -7,24 +7,35 @@
 #include "esp_adc/adc_cali_scheme.h"
 
 #if CONFIG_IDF_TARGET_ESP32
-#define ADC_CONV_MODE       ADC_CONV_SINGLE_UNIT_1  // ADC2 and Wifi work together
-#define ADC_OUTPUT_TYPE     ADC_DIGI_OUTPUT_FORMAT_TYPE1
-#define ADC_CHANNELS        {ADC_CHANNEL_6, ADC_CHANNEL_7}
-#define HAS_ESP32_DAC
+#  define ADC_CONV_MODE       ADC_CONV_SINGLE_UNIT_1  // ADC2 and Wifi work together
+#  define ADC_OUTPUT_TYPE     ADC_DIGI_OUTPUT_FORMAT_TYPE1
+#  define ADC_CHANNELS        {ADC_CHANNEL_6, ADC_CHANNEL_7}
+#  define AUDIO_ADC_GET_CHANNEL(p_data)     ((p_data)->type1.channel)
+#  define AUDIO_ADC_GET_DATA(p_data)        ((p_data)->type1.data)
+#  define HAS_ESP32_DAC
 #elif CONFIG_IDF_TARGET_ESP32S2
-#define ADC_CONV_MODE       ADC_CONV_SINGLE_UNIT_1 // ADC2 competes with WiFi and WiFi has priority, ADC_CONV_BOTH_UNIT
-#define ADC_OUTPUT_TYPE     ADC_DIGI_OUTPUT_FORMAT_TYPE2
-#define ADC_CHANNELS        {ADC_CHANNEL_2, ADC_CHANNEL_3}
-#define HAS_ESP32_DAC
+#  define ADC_CONV_MODE       ADC_CONV_SINGLE_UNIT_1 // ADC2 competes with WiFi and WiFi has priority, ADC_CONV_BOTH_UNIT
+#  define ADC_OUTPUT_TYPE     ADC_DIGI_OUTPUT_FORMAT_TYPE2
+#  define AUDIO_ADC_GET_CHANNEL(p_data)     ((p_data)->type2.channel)
+#  define AUDIO_ADC_GET_DATA(p_data)        ((p_data)->type2.data)
+#  define ADC_CHANNELS        {ADC_CHANNEL_2, ADC_CHANNEL_3}
+#  define HAS_ESP32_DAC
 #elif CONFIG_IDF_TARGET_ESP32C3 || CONFIG_IDF_TARGET_ESP32H2 || CONFIG_IDF_TARGET_ESP32C2 || CONFIG_IDF_TARGET_ESP32C6
-#define ADC_CONV_MODE       ADC_CONV_ALTER_UNIT     //ESP32C3 only supports alter mode
-#define ADC_OUTPUT_TYPE     ADC_DIGI_OUTPUT_FORMAT_TYPE2
-#define ADC_CHANNELS        {ADC_CHANNEL_2, ADC_CHANNEL_3}
+#  define ADC_CONV_MODE       ADC_CONV_ALTER_UNIT     //ESP32C3 only supports alter mode
+#  define ADC_OUTPUT_TYPE     ADC_DIGI_OUTPUT_FORMAT_TYPE2
+#  define AUDIO_ADC_GET_CHANNEL(p_data)     ((p_data)->type2.channel)
+#  define AUDIO_ADC_GET_DATA(p_data)        ((p_data)->type2.data)
+#  define ADC_CHANNELS        {ADC_CHANNEL_2, ADC_CHANNEL_3}
 #elif CONFIG_IDF_TARGET_ESP32S3
-#define ADC_CONV_MODE       ADC_CONV_SINGLE_UNIT_1 // ADC2 competes with WiFi and WiFi has priority
-#define ADC_OUTPUT_TYPE     ADC_DIGI_OUTPUT_FORMAT_TYPE2
-#define ADC_CHANNELS        {ADC_CHANNEL_2, ADC_CHANNEL_3} // These are the I2C SDA and SCL pins on Adafruit ESP32-S3 feather , Channel 4&5 might be better
+#  define ADC_CONV_MODE       ADC_CONV_SINGLE_UNIT_1 // ADC2 competes with WiFi and WiFi has priority
+#  define ADC_OUTPUT_TYPE     ADC_DIGI_OUTPUT_FORMAT_TYPE2
+#  define AUDIO_ADC_GET_CHANNEL(p_data)     ((p_data)->type2.channel)
+#  define AUDIO_ADC_GET_DATA(p_data)        ((p_data)->type2.data)
+#  define ADC_CHANNELS        {ADC_CHANNEL_2, ADC_CHANNEL_3} // These are the I2C SDA and SCL pins on Adafruit ESP32-S3 feather , Channel 4&5 might be better
 #endif
+
+#define GET_UNIT(x) ((x >> 3) & 0x1)
+
 
 #ifdef HAS_ESP32_DAC
 #  include "driver/dac_continuous.h"
