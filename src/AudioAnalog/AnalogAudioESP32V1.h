@@ -88,11 +88,13 @@ public:
   // writes the data to the DAC
   size_t write(const uint8_t *src, size_t size_bytes) override {
     TRACED();
-    return io.write(src, size_bytes);
+    // convert any format to int16_t
+    return converter.write(src, size_bytes);
   }
 
   size_t readBytes(uint8_t *dest, size_t size_bytes) override {
     TRACED();
+    // in the future we might use the converter -> for the time beeing we only support 16 bits
     return io.readBytes(dest, size_bytes);
   }
   // is data in the ADC buffer?
@@ -100,9 +102,6 @@ public:
 
 
 protected:
-#ifdef HAS_ESP32_DAC
-  dac_continuous_handle_t dac_handle;
-#endif
   adc_continuous_handle_t adc_handle;
   adc_cali_handle_t adc_cali_handle; 
   AnalogConfigESP32V1 cfg;
@@ -110,8 +109,11 @@ protected:
   bool active_tx = false;
   bool active_rx = false;
   ConverterAutoCenter auto_center;
+#ifdef HAS_ESP32_DAC
+  dac_continuous_handle_t dac_handle;
+#endif
 
-  /// writes the int16_t data to the DAC
+  /// conversion between int16_t and other formats
   class IO16Bit : public AudioStream {
   public:
     IO16Bit(AnalogDriverESP32V1 *driver) { self = driver; }
