@@ -301,7 +301,7 @@ protected:
     adc_digi_pattern_config_t adc_pattern[cfg.channels] = {0};
     dig_cfg.pattern_num = cfg.channels;
     for (int i = 0; i < cfg.channels; i++) {
-      uint8_t unit = GET_UNIT(cfg.adc_channels[i]);
+      uint8_t unit = GET_ADC_UNIT_FROM_CHANNEL(cfg.adc_channels[i]);
       uint8_t ch = cfg.adc_channels[i] & 0x7;
       adc_pattern[i].atten = cfg.adc_attenuation;
       adc_pattern[i].channel = ch;
@@ -423,9 +423,9 @@ protected:
     // Therefore we prefere ADC1.
 
     // Lets make sure ADC Channels chosen are on same unit:
-    uint8_t unit = GET_UNIT(cfg.adc_channels[0]);
+    uint8_t unit = GET_ADC_UNIT_FROM_CHANNEL(cfg.adc_channels[0]);
     for (int i = 1; i < cfg.channels; i++) {
-      if (unit != GET_UNIT(cfg.adc_channels[i])) {
+      if (unit != GET_ADC_UNIT_FROM_CHANNEL(cfg.adc_channels[i])) {
         LOGE("error, dont select ADC channels on different ADC units");
         return false;
       }
