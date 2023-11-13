@@ -84,6 +84,10 @@ class AnalogConfigESP32V1 : public AudioInfo {
       bits_per_sample = 16;
       rx_tx_mode = rxtxMode;
       if (rx_tx_mode == RX_MODE) {
+        // make sure that the proposed sample rate is valid
+        if (sample_rate*channels>SOC_ADC_SAMPLE_FREQ_THRES_HIGH){
+          sample_rate = SOC_ADC_SAMPLE_FREQ_THRES_HIGH / channels;
+        }
         LOGI("I2S_MODE_ADC_BUILT_IN");
       } else {
         LOGI("I2S_MODE_DAC_BUILT_IN");

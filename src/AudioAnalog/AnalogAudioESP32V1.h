@@ -294,7 +294,7 @@ protected:
 
     /// Configure the ADC
     adc_continuous_config_t dig_cfg = {
-        .sample_freq_hz = (uint32_t)cfg.sample_rate,
+        .sample_freq_hz = (uint32_t)cfg.sample_rate * cfg.channels,
         .conv_mode = cfg.adc_conversion_mode,
         .format = cfg.adc_output_type,
     };
@@ -375,14 +375,15 @@ protected:
   }
 
   bool checkADCSampleRate() {
+    int sample_rate =  cfg.sample_rate * cfg.channels;
     // Boundary checks
-    if ((cfg.sample_rate < SOC_ADC_SAMPLE_FREQ_THRES_LOW) ||
-        (cfg.sample_rate > SOC_ADC_SAMPLE_FREQ_THRES_HIGH)) {
+    if ((sample_rate < SOC_ADC_SAMPLE_FREQ_THRES_LOW) ||
+        (sample_rate > SOC_ADC_SAMPLE_FREQ_THRES_HIGH)) {
       LOGE("sample rate: %u can not be set, range: %u to %u",
            SOC_ADC_SAMPLE_FREQ_THRES_LOW, SOC_ADC_SAMPLE_FREQ_THRES_HIGH);
       return false;
     } else {
-      LOGI("sample rate: %u, range: %u to %u", cfg.sample_rate,
+      LOGI("sample rate: %u, range: %u to %u", sample_rate,
            SOC_ADC_SAMPLE_FREQ_THRES_LOW, SOC_ADC_SAMPLE_FREQ_THRES_HIGH);
     }
     return true;
