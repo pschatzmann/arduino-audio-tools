@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AudioBLEStream.h"
+#include "ConstantsArduino.h"
 #include <ArduinoBLE.h>
 
 namespace audio_tools {

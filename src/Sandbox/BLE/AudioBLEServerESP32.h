@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AudioBLEStream.h"
+#include "ConstantsESP32.h"
 //#include <BLE2902.h>
 #include <BLEDevice.h>
 #include <BLEServer.h>
