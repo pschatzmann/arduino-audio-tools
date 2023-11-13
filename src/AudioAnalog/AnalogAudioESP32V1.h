@@ -379,11 +379,11 @@ protected:
     // Boundary checks
     if ((sample_rate < SOC_ADC_SAMPLE_FREQ_THRES_LOW) ||
         (sample_rate > SOC_ADC_SAMPLE_FREQ_THRES_HIGH)) {
-      LOGE("sample rate: %u can not be set, range: %u to %u",
+      LOGE("sample rate eff: %u can not be set, range: %u to %u",sample_rate,
            SOC_ADC_SAMPLE_FREQ_THRES_LOW, SOC_ADC_SAMPLE_FREQ_THRES_HIGH);
       return false;
     } else {
-      LOGI("sample rate: %u, range: %u to %u", sample_rate,
+      LOGI("sample rate eff: %u, range: %u to %u", sample_rate,
            SOC_ADC_SAMPLE_FREQ_THRES_LOW, SOC_ADC_SAMPLE_FREQ_THRES_HIGH);
     }
     return true;
