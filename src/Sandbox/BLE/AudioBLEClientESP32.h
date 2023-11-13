@@ -167,7 +167,7 @@ protected:
   }
 
   // Scanning Results
-  void onScanResult(BLEAdvertisedDevice advertisedDevice) override {
+  void onResult(BLEAdvertisedDevice advertisedDevice) override {
     TRACEI();
     // Check if the name of the advertiser matches
     if (advertisedDevice.haveServiceUUID() &&
