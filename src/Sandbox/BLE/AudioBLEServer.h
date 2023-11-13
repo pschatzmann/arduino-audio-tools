@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AudioBLEStream.h"
+#include "ConstantsArduino.h"
 #include <ArduinoBLE.h>
 
 namespace audio_tools {
@@ -13,6 +14,8 @@ class AudioBLEServer *selfAudioBLEServer = nullptr;
  * can be used to send and recevie audio. In BLE terminologiy this is a
  * Peripheral.
  * This implementation uses the ArduinoBLE library!
+ * This is working only correctly if the client sets the max MTU to a value >= 256.
+ * Otherwise some of the transmitted information gets silently dropped
  * @ingroup communications
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -20,7 +23,7 @@ class AudioBLEServer *selfAudioBLEServer = nullptr;
 
 class AudioBLEServer : public AudioBLEStream {
 public:
-  AudioBLEServer(int mtu = BLE_MTU) : AudioBLEStream(mtu) {
+  AudioBLEServer(int mtu = 0) : AudioBLEStream(mtu) {
     selfAudioBLEServer = this;
   }
 
@@ -93,16 +96,14 @@ public:
     return result;
   }
 
-
   bool connected() override { return checkCentralConnected(); }
 
 protected:
   // server
+  BLEDevice central;
   BLEService service{BLE_AUDIO_SERVICE_UUID}; // create service
-  BLECharacteristic ch01_char{BLE_CH1_UUID, BLERead,
-                              BLE_MTU - BLE_MTU_OVERHEAD};
-  BLECharacteristic ch02_char{BLE_CH2_UUID, BLEWrite,
-                              BLE_MTU - BLE_MTU_OVERHEAD};
+  BLECharacteristic ch01_char{BLE_CH1_UUID, BLERead, getMTU()};
+  BLECharacteristic ch02_char{BLE_CH2_UUID, BLEWrite, getMTU()};
   BLECharacteristic info_char{BLE_INFO_UUID, BLERead | BLEWrite | BLENotify,
                               80};
   BLEDescriptor ch01_desc{"2901", "channel 1"};
@@ -159,27 +160,26 @@ protected:
     auto uuid = Str(characteristic.uuid());
     if (uuid == BLE_CH1_UUID || uuid == BLE_CH2_UUID) {
       TRACEI();
-      setupTXBuffer();
-      int len = std::min(getMTU() - BLE_MTU_OVERHEAD,
-                         (int)transmit_buffer.available());
+      int len = std::min(getMTU(), (int)transmit_buffer.available());
       if (is_framed) {
         len = transmit_buffer_sizes.read();
       }
       LOGI("%s: len: %d, buffer: %d", uuid.c_str(), len,
            transmit_buffer.size());
-      if (len>0){
-        assert(len==512);
+      if (len > 0) {
         uint8_t tmp[len];
-        transmit_buffer.readArray(tmp, len);
-        characteristic.writeValue(tmp, len);
+        transmit_buffer.peekArray(tmp, len);
+        if (characteristic.writeValue(tmp, len)) {
+          transmit_buffer.readArray(tmp, len);
+        } else {
+          LOGW("writeValue failed")
+        }
       }
     }
   }
 
-
   bool checkCentralConnected() {
-    BLEDevice central = BLE.central();
-
+    central = BLE.central();
     // if a central is connected to the peripheral:
     if (central)
       return central.connected();
@@ -211,6 +211,7 @@ protected:
       //     p_server->getPeerMTU(p_server->getConnId()) - BLE_MTU_OVERHEAD;
       // max_transfer_size = std::min(BLE_MTU - BLE_MTU,
       // peer_max_transfer_size);
+      // max_transfer_size = central.mtu() - BLE_MTU_OVERHEAD;
       max_transfer_size = BLE_MTU - BLE_MTU_OVERHEAD;
 
       LOGI("max_transfer_size: %d", max_transfer_size);
@@ -248,14 +249,13 @@ protected:
     }
 
     // Read callback works only when we provide some initial data
-    uint8_t tmp[512]={0xFF};
+    uint8_t tmp[512] = {0xFF};
     ch01_char.writeValue(tmp, 512, false);
   }
 
   void setupTXBuffer() {
     if (transmit_buffer.size() == 0) {
-      LOGI("Setting transmit_buffer to %d for mtu %d", RX_BUFFER_SIZE,
-           getMTU());
+      LOGI("Setting transmit_buffer to %d", RX_BUFFER_SIZE);
       transmit_buffer.resize(TX_BUFFER_SIZE);
       if (is_framed) {
         transmit_buffer_sizes.resize(TX_COUNT);

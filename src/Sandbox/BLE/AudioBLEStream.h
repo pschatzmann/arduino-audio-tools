@@ -4,13 +4,6 @@
 #include "AudioBasic/Collections/Vector.h"
 #include "AudioTools/Buffers.h"
 
-// must be greater than MTU, less than ESP_GATT_MAX_ATTR_LEN
-#define BLE_MTU 517
-#define BLE_MTU_OVERHEAD 5
-#define RX_BUFFER_SIZE 4096
-#define RX_COUNT 100
-#define TX_BUFFER_SIZE 4096
-#define TX_COUNT 100
 
 namespace audio_tools {
 
@@ -83,7 +76,7 @@ protected:
   const char *BLE_CH2_UUID = "6e400003-b5a3-f393-e0a9-e50e24dcca9e"; // TX
   const char *BLE_INFO_UUID = "6e400004-b5a3-f393-e0a9-e50e24dcca9e";
 
-  virtual int getMTU() { return BLE_MTU; }
+  virtual int getMTU() = 0;
 
   // override to implement your own extended logic
   virtual void setAudioInfo(const uint8_t *data, size_t size) {
