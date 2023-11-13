@@ -169,12 +169,12 @@ protected:
 
             assert(result16 < end); // make sure we dont write past the end
             if (self->cfg.adc_calibration_active) {
+              // Provide result in millivolts
               int data_milliVolts;
               auto err = adc_cali_raw_to_voltage(self->adc_cali_handle, data,
                                                  &data_milliVolts);
               if (err == ESP_OK) {
-                // map 0 - 3300 millivolts to range from 0 to 65535 ?
-                int result_full_range = data_milliVolts; // * 19;
+                int result_full_range = data_milliVolts;
                 *result16 = result_full_range;
                 assert(result_full_range ==
                        (int)*result16); // check that we did not loose any bytes
@@ -356,10 +356,9 @@ protected:
       LOGE("adc bit width: %u cannot be set, range: %u to %u",
            SOC_ADC_DIGI_MIN_BITWIDTH, SOC_ADC_DIGI_MAX_BITWIDTH);
       return false;
-    } else {
-      LOGI("adc bit width: %u, range: %u to %u", cfg.adc_bit_width,
+    } 
+    LOGI("adc bit width: %u, range: %u to %u", cfg.adc_bit_width,
            SOC_ADC_DIGI_MIN_BITWIDTH, SOC_ADC_DIGI_MAX_BITWIDTH);
-    }
     return true;
   }
 
@@ -368,9 +367,8 @@ protected:
     if (cfg.channels > max_channels) {
       LOGE("channels: %d, max: %d", cfg.channels, max_channels);
       return false;
-    } else {
-      LOGI("channels: %d, max: %d", cfg.channels, max_channels);
-    }
+    } 
+    LOGI("channels: %d, max: %d", cfg.channels, max_channels);
     return true;
   }
 
@@ -382,35 +380,30 @@ protected:
       LOGE("sample rate eff: %u can not be set, range: %u to %u",sample_rate,
            SOC_ADC_SAMPLE_FREQ_THRES_LOW, SOC_ADC_SAMPLE_FREQ_THRES_HIGH);
       return false;
-    } else {
-      LOGI("sample rate eff: %u, range: %u to %u", sample_rate,
+    } 
+    LOGI("sample rate eff: %u, range: %u to %u", sample_rate,
            SOC_ADC_SAMPLE_FREQ_THRES_LOW, SOC_ADC_SAMPLE_FREQ_THRES_HIGH);
-    }
+    
     return true;
   }
 
   bool checkADCBitsPerSample() {
-    // bits per sample must be multiple of 8
-    // int to_be_bits = cfg.adc_bit_width;
-    // int diff = to_be_bits % 8;
-    // if (diff!=0){
-    //   to_be_bits+=diff;
-    // }
-    int to_be_bits = 16; // for the time beeing we support only 16 bits!
+    int supported_bits = 16; // for the time beeing we support only 16 bits!
 
+    // calculated default value if nothing is specified
     if (cfg.bits_per_sample == 0) {
-      cfg.bits_per_sample = to_be_bits;
+      cfg.bits_per_sample = supported_bits;
       LOGI("bits per sample set to: %d", cfg.bits_per_sample);
     }
 
-    if (cfg.bits_per_sample == 16) {
-      LOGI("bits per sample: %d", cfg.bits_per_sample);
-      return true;
-    } else {
+    // check bits_per_sample
+    if (cfg.bits_per_sample != supported_bits) {
       LOGE("checking bits per sample error. It should be: %d but is %d",
-           to_be_bits, cfg.bits_per_sample);
+           supported_bits, cfg.bits_per_sample);
       return false;
     }
+    LOGI("bits per sample: %d", cfg.bits_per_sample);
+    return true;
   }
 
   bool setupADCCalibration() {
