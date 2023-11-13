@@ -71,11 +71,14 @@ public:
     if (active_rx) {
       adc_continuous_stop(adc_handle);
       adc_continuous_deinit(adc_handle);
+      // free up resources from calibration
+      if (cfg.adc_calibration_active) {
 #if ADC_CALI_SCHEME_CURVE_FITTING_SUPPORTED
-      adc_cali_delete_scheme_curve_fitting(adc_cali_handle);
+          adc_cali_delete_scheme_curve_fitting(adc_cali_handle);
 #elif !defined(CONFIG_IDF_TARGET_ESP32H2)
-      adc_cali_delete_scheme_line_fitting(adc_cali_handle);
+          adc_cali_delete_scheme_line_fitting(adc_cali_handle);
 #endif
+      }
     }
     converter.end();
     active_tx = false;
@@ -100,8 +103,8 @@ public:
   int available() override { return active_rx ? DEFAULT_BUFFER_SIZE : 0; }
 
 protected:
-  adc_continuous_handle_t adc_handle;
-  adc_cali_handle_t adc_cali_handle;
+  adc_continuous_handle_t adc_handle = nullptr;
+  adc_cali_handle_t adc_cali_handle = nullptr;
   AnalogConfigESP32V1 cfg;
   bool active = false;
   bool active_tx = false;
