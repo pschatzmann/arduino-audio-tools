@@ -34,7 +34,7 @@
 #  define ADC_CHANNELS        {ADC_CHANNEL_2, ADC_CHANNEL_3} // These are the I2C SDA and SCL pins on Adafruit ESP32-S3 feather , Channel 4&5 might be better
 #endif
 
-#define GET_UNIT(x) ((x >> 3) & 0x1)
+#define GET_ADC_UNIT_FROM_CHANNEL(x) ((x >> 3) & 0x1)
 
 
 #ifdef HAS_ESP32_DAC
