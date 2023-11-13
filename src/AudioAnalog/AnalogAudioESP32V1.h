@@ -5,14 +5,12 @@
         ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0) ||                     \
     defined(DOXYGEN)
 
-#include "AudioAnalog/AnalogConfigESP32V1.h"
 #include "AudioAnalog/AnalogAudioBase.h"
+#include "AudioAnalog/AnalogConfigESP32V1.h"
 #include "AudioTools/AudioStreams.h"
 #include "AudioTools/AudioStreamsConverter.h"
 
-
 namespace audio_tools {
-
 
 /**
  * @brief AnalogAudioStream: A very fast DAC using DMA using the new
@@ -65,19 +63,19 @@ public:
   /// stops the I2S and uninstalls the driver
   void end() override {
     TRACEI();
-  #ifdef HAS_ESP32_DAC
+#ifdef HAS_ESP32_DAC
     if (active_tx) {
       dac_continuous_del_channels(dac_handle);
     }
-  #endif
+#endif
     if (active_rx) {
       adc_continuous_stop(adc_handle);
-      adc_continuous_deinit(adc_handle);    
-  #if ADC_CALI_SCHEME_CURVE_FITTING_SUPPORTED        
+      adc_continuous_deinit(adc_handle);
+#if ADC_CALI_SCHEME_CURVE_FITTING_SUPPORTED
       adc_cali_delete_scheme_curve_fitting(adc_cali_handle);
-  #elif !defined(CONFIG_IDF_TARGET_ESP32H2)
+#elif !defined(CONFIG_IDF_TARGET_ESP32H2)
       adc_cali_delete_scheme_line_fitting(adc_cali_handle);
-  #endif
+#endif
     }
     converter.end();
     active_tx = false;
@@ -94,16 +92,16 @@ public:
 
   size_t readBytes(uint8_t *dest, size_t size_bytes) override {
     TRACED();
-    // in the future we might use the converter -> for the time beeing we only support 16 bits
+    // in the future we might use the converter -> for the time beeing we only
+    // support 16 bits
     return io.readBytes(dest, size_bytes);
   }
   // is data in the ADC buffer?
   int available() override { return active_rx ? DEFAULT_BUFFER_SIZE : 0; }
 
-
 protected:
   adc_continuous_handle_t adc_handle;
-  adc_cali_handle_t adc_cali_handle; 
+  adc_cali_handle_t adc_cali_handle;
   AnalogConfigESP32V1 cfg;
   bool active = false;
   bool active_tx = false;
@@ -151,51 +149,57 @@ protected:
       adc_digi_output_data_t result_data[sample_count];
       memset(&result_data, 0, sizeof(result_data));
       uint32_t result_cont;
-      if (adc_continuous_read(self->adc_handle, (uint8_t*) result_data, sizeof(result_data), &result_cont, self->cfg.timeout) ==
-          ESP_OK) {
-        // Result must fit into uint16_T !   
-          uint16_t *result16 = (uint16_t*) dest;
-          uint16_t *end = (uint16_t*) (dest+size_bytes);
-          int result_count = result_cont / sizeof(adc_digi_output_data_t);
-          LOGD("adc_continuous_read -> %d bytes / %d samples", result_cont, result_count);
+      if (adc_continuous_read(self->adc_handle, (uint8_t *)result_data,
+                              sizeof(result_data), &result_cont,
+                              self->cfg.timeout) == ESP_OK) {
+        // Result must fit into uint16_T !
+        uint16_t *result16 = (uint16_t *)dest;
+        uint16_t *end = (uint16_t *)(dest + size_bytes);
+        int result_count = result_cont / sizeof(adc_digi_output_data_t);
+        LOGD("adc_continuous_read -> %d bytes / %d samples", result_cont,
+             result_count);
 
-          for (int i = 0; i < result_count; i++) {
-              adc_digi_output_data_t *p = &result_data[i];
-              uint16_t chan_num = AUDIO_ADC_GET_CHANNEL(p);
-              uint32_t data = AUDIO_ADC_GET_DATA(p);
+        for (int i = 0; i < result_count; i++) {
+          adc_digi_output_data_t *p = &result_data[i];
+          uint16_t chan_num = AUDIO_ADC_GET_CHANNEL(p);
+          uint32_t data = AUDIO_ADC_GET_DATA(p);
 
-              if (isValidADCChannel((adc_channel_t)chan_num)){
-                LOGD("Idx: %d, channel: %d, data: %u", i, chan_num, data);
+          if (isValidADCChannel((adc_channel_t)chan_num)) {
+            LOGD("Idx: %d, channel: %d, data: %u", i, chan_num, data);
 
-                assert(result16 < end); // make sure we dont write past the end
-                if (self->cfg.adc_calibration_active){
-                  int data_milliVolts;    
-                  auto err = adc_cali_raw_to_voltage(self->adc_cali_handle, data, &data_milliVolts);
-                  if (err == ESP_OK) {
-                    // map 0 - 3300 millivolts to range from 0 to 65535 ?
-                    int result_full_range = data_milliVolts;// * 19;
-                    *result16 = result_full_range;
-                    assert(result_full_range == (int) *result16); // check that we did not loose any bytes
-                    result16++;
-                    total_bytes += sizeof(uint16_t);
-                  } else {
-                    LOGE("adc_cali_raw_to_voltage: %d", err);
-                  }
-                } else {
-                  *result16 = data;
-                  assert(data == (uint32_t) *result16); // check that we did not loose any bytes
-                  result16++;
-                  total_bytes += sizeof(uint16_t); 
-                }
-
+            assert(result16 < end); // make sure we dont write past the end
+            if (self->cfg.adc_calibration_active) {
+              int data_milliVolts;
+              auto err = adc_cali_raw_to_voltage(self->adc_cali_handle, data,
+                                                 &data_milliVolts);
+              if (err == ESP_OK) {
+                // map 0 - 3300 millivolts to range from 0 to 65535 ?
+                int result_full_range = data_milliVolts; // * 19;
+                *result16 = result_full_range;
+                assert(result_full_range ==
+                       (int)*result16); // check that we did not loose any bytes
+                result16++;
+                total_bytes += sizeof(uint16_t);
               } else {
-                LOGD("invalid channel: %d, data: %u", chan_num, data);
+                LOGE("adc_cali_raw_to_voltage: %d", err);
               }
+            } else {
+              *result16 = data;
+              assert(
+                  data ==
+                  (uint32_t)*result16); // check that we did not loose any bytes
+              result16++;
+              total_bytes += sizeof(uint16_t);
+            }
+
+          } else {
+            LOGD("invalid channel: %d, data: %u", chan_num, data);
           }
-          // make sure that the center is at 0, so the result will be int16_t
-          if (self->cfg.is_auto_center_read){
-            self->auto_center.convert(dest, total_bytes);
-          }
+        }
+        // make sure that the center is at 0, so the result will be int16_t
+        if (self->cfg.is_auto_center_read) {
+          self->auto_center.convert(dest, total_bytes);
+        }
 
       } else {
         LOGE("adc_continuous_read");
@@ -204,19 +208,17 @@ protected:
       return total_bytes;
     }
 
-
   protected:
     AnalogDriverESP32V1 *self;
 
-    bool isValidADCChannel(adc_channel_t channel){
-    for(int j=0; j<self->cfg.channels; j++){
-      if (self->cfg.adc_channels[j] == channel) {
-        return true;
+    bool isValidADCChannel(adc_channel_t channel) {
+      for (int j = 0; j < self->cfg.channels; j++) {
+        if (self->cfg.adc_channels[j] == channel) {
+          return true;
+        }
       }
+      return false;
     }
-    return false;
-  } 
-  
 
   } io{this};
 
@@ -258,18 +260,22 @@ protected:
 #endif
 
   bool setup_rx() {
-    int max_channels = sizeof(cfg.adc_channels) / sizeof(adc_channel_t);
-    if (cfg.channels > max_channels) {
-      LOGE("channels: %d, max: %d", cfg.channels, max_channels);
+    if (!checkADCChannels())
       return false;
-    } else {
-      LOGI("channels: %d, max: %d", cfg.channels, max_channels);
-    }
-    
-    // determine conv_frame_size which must be multiple of SOC_ADC_DIGI_DATA_BYTES_PER_CONV
-    uint32_t conv_frame_size = (uint32_t)cfg.buffer_size * SOC_ADC_DIGI_RESULT_BYTES;
-    uint8_t calc_multiple_diff = conv_frame_size % SOC_ADC_DIGI_DATA_BYTES_PER_CONV;
-    if(calc_multiple_diff != 0){
+    if (!checkADCSampleRate())
+      return false;
+    if (!checkADCBitWidth())
+      return false;
+    if (!checkADCBitsPerSample())
+      return false;
+
+    // determine conv_frame_size which must be multiple of
+    // SOC_ADC_DIGI_DATA_BYTES_PER_CONV
+    uint32_t conv_frame_size =
+        (uint32_t)cfg.buffer_size * SOC_ADC_DIGI_RESULT_BYTES;
+    uint8_t calc_multiple_diff =
+        conv_frame_size % SOC_ADC_DIGI_DATA_BYTES_PER_CONV;
+    if (calc_multiple_diff != 0) {
       conv_frame_size = (conv_frame_size + calc_multiple_diff);
     }
     adc_continuous_handle_cfg_t adc_config = {
@@ -286,35 +292,9 @@ protected:
       LOGI("adc_continuous_new_handle successful");
     }
 
-    // Boundary checks
-    if ((cfg.sample_rate < SOC_ADC_SAMPLE_FREQ_THRES_LOW) ||
-        (cfg.sample_rate > SOC_ADC_SAMPLE_FREQ_THRES_HIGH)) {
-      LOGE("sample rate: %u can not be set, range: %u to %u",
-           SOC_ADC_SAMPLE_FREQ_THRES_LOW, SOC_ADC_SAMPLE_FREQ_THRES_HIGH);
-      return false;
-    } else {
-      LOGI("sample rate: %u, range: %u to %u", cfg.sample_rate,
-           SOC_ADC_SAMPLE_FREQ_THRES_LOW, SOC_ADC_SAMPLE_FREQ_THRES_HIGH);
-    }
-
-    if ((cfg.adc_bit_width < SOC_ADC_DIGI_MIN_BITWIDTH) ||
-        (cfg.adc_bit_width > SOC_ADC_DIGI_MAX_BITWIDTH)) {
-      LOGE("adc bit width: %u cannot be set, range: %u to %u",
-           SOC_ADC_DIGI_MIN_BITWIDTH, SOC_ADC_DIGI_MAX_BITWIDTH);
-      return false;
-    } else {
-      LOGI("adc bit width: %u, range: %u to %u", cfg.adc_bit_width,
-           SOC_ADC_DIGI_MIN_BITWIDTH, SOC_ADC_DIGI_MAX_BITWIDTH);
-    }
-
-    // Update bits per sample
-    if (!checkBitsPerSample()) {
-      return false;
-    }
-
     /// Configure the ADC
     adc_continuous_config_t dig_cfg = {
-        .sample_freq_hz = (uint32_t) cfg.sample_rate,
+        .sample_freq_hz = (uint32_t)cfg.sample_rate,
         .conv_mode = cfg.adc_conversion_mode,
         .format = cfg.adc_output_type,
     };
@@ -352,7 +332,7 @@ protected:
     LOGI("adc_continuous_config successful");
 
     // set up optional calibration
-    if (!setupADCCalibration()){
+    if (!setupADCCalibration()) {
       return false;
     }
 
@@ -362,15 +342,53 @@ protected:
       LOGE("adc_continuous_start unsuccessful with error: %d", err);
       return false;
     }
-    
-    // setup up optinal auto center which puts the avg at 0 
+
+    // setup up optinal auto center which puts the avg at 0
     auto_center.begin(cfg.channels, cfg.bits_per_sample, true);
 
     LOGI("adc_continuous_start successful");
     return true;
   }
 
-  bool checkBitsPerSample() {
+  bool checkADCBitWidth() {
+    if ((cfg.adc_bit_width < SOC_ADC_DIGI_MIN_BITWIDTH) ||
+        (cfg.adc_bit_width > SOC_ADC_DIGI_MAX_BITWIDTH)) {
+      LOGE("adc bit width: %u cannot be set, range: %u to %u",
+           SOC_ADC_DIGI_MIN_BITWIDTH, SOC_ADC_DIGI_MAX_BITWIDTH);
+      return false;
+    } else {
+      LOGI("adc bit width: %u, range: %u to %u", cfg.adc_bit_width,
+           SOC_ADC_DIGI_MIN_BITWIDTH, SOC_ADC_DIGI_MAX_BITWIDTH);
+    }
+    return true;
+  }
+
+  bool checkADCChannels() {
+    int max_channels = sizeof(cfg.adc_channels) / sizeof(adc_channel_t);
+    if (cfg.channels > max_channels) {
+      LOGE("channels: %d, max: %d", cfg.channels, max_channels);
+      return false;
+    } else {
+      LOGI("channels: %d, max: %d", cfg.channels, max_channels);
+    }
+    return true;
+  }
+
+  bool checkADCSampleRate() {
+    // Boundary checks
+    if ((cfg.sample_rate < SOC_ADC_SAMPLE_FREQ_THRES_LOW) ||
+        (cfg.sample_rate > SOC_ADC_SAMPLE_FREQ_THRES_HIGH)) {
+      LOGE("sample rate: %u can not be set, range: %u to %u",
+           SOC_ADC_SAMPLE_FREQ_THRES_LOW, SOC_ADC_SAMPLE_FREQ_THRES_HIGH);
+      return false;
+    } else {
+      LOGI("sample rate: %u, range: %u to %u", cfg.sample_rate,
+           SOC_ADC_SAMPLE_FREQ_THRES_LOW, SOC_ADC_SAMPLE_FREQ_THRES_HIGH);
+    }
+    return true;
+  }
+
+  bool checkADCBitsPerSample() {
     // bits per sample must be multiple of 8
     // int to_be_bits = cfg.adc_bit_width;
     // int diff = to_be_bits % 8;
@@ -382,28 +400,30 @@ protected:
     if (cfg.bits_per_sample == 0) {
       cfg.bits_per_sample = to_be_bits;
       LOGI("bits per sample set to: %d", cfg.bits_per_sample);
-    } 
-    
+    }
+
     if (cfg.bits_per_sample == 16) {
       LOGI("bits per sample: %d", cfg.bits_per_sample);
       return true;
     } else {
-      LOGE("checking bits per sample error. It should be: %d but is %d",to_be_bits, cfg.bits_per_sample);
+      LOGE("checking bits per sample error. It should be: %d but is %d",
+           to_be_bits, cfg.bits_per_sample);
       return false;
     }
   }
 
-
-  bool setupADCCalibration(){
-    if (!cfg.adc_calibration_active) return true;
+  bool setupADCCalibration() {
+    if (!cfg.adc_calibration_active)
+      return true;
 
     // Initialize ADC calibration handle
     //
-    // Calibration is applied to an ADC unit (not per channel). There is ADC1 and ADC2 unit (0,1). 
-    // ADC2 and WiFi share hardware and WiFi has priority. Therefore we prefere ADC1.
+    // Calibration is applied to an ADC unit (not per channel). There is ADC1
+    // and ADC2 unit (0,1). ADC2 and WiFi share hardware and WiFi has priority.
+    // Therefore we prefere ADC1.
 
     // Lets make sure ADC Channels chosen are on same unit:
-    uint8_t unit=GET_UNIT(cfg.adc_channels[0]);
+    uint8_t unit = GET_UNIT(cfg.adc_channels[0]);
     for (int i = 1; i < cfg.channels; i++) {
       if (unit != GET_UNIT(cfg.adc_channels[i])) {
         LOGE("error, dont select ADC channels on different ADC units");
@@ -412,34 +432,36 @@ protected:
     }
 
     // setup calibration only when requested
-    if(adc_cali_handle == NULL){
-      #if ADC_CALI_SCHEME_CURVE_FITTING_SUPPORTED
-        // curve fitting is preferred
-        adc_cali_curve_fitting_config_t cali_config;
-        cali_config.unit_id  = (adc_unit_t) unit;
-        cali_config.atten    = (adc_atten_t) cfg.adc_attenuation;
-        cali_config.bitwidth = (adc_bitwidth_t) cfg.adc_bit_width;
-        auto err = adc_cali_create_scheme_curve_fitting(&cali_config, &adc_cali_handle);
-      #elif !defined(CONFIG_IDF_TARGET_ESP32H2)
-        // line fitting
-        adc_cali_line_fitting_config_t cali_config;
-        cali_config.unit_id  = (adc_unit_t) unit;
-        cali_config.atten    = (adc_atten_t) cfg.adc_attenuation;
-        cali_config.bitwidth = (adc_bitwidth_t) cfg.adc_bit_width;
-        auto err = adc_cali_create_scheme_line_fitting(&cali_config, &adc_cali_handle);
-      #endif
-        if(err != ESP_OK){
-            LOGE("creating cali handle failed for ADC%d with atten %d and bitwidth %d", 
-                unit, cfg.adc_attenuation, cfg.adc_bit_width);
-            return false;
-        } else {
-          LOGI("created cali handle for ADC%d with atten %d and bitwidth %d", 
-                unit, cfg.adc_attenuation, cfg.adc_bit_width);
-        }
+    if (adc_cali_handle == NULL) {
+#if ADC_CALI_SCHEME_CURVE_FITTING_SUPPORTED
+      // curve fitting is preferred
+      adc_cali_curve_fitting_config_t cali_config;
+      cali_config.unit_id = (adc_unit_t)unit;
+      cali_config.atten = (adc_atten_t)cfg.adc_attenuation;
+      cali_config.bitwidth = (adc_bitwidth_t)cfg.adc_bit_width;
+      auto err =
+          adc_cali_create_scheme_curve_fitting(&cali_config, &adc_cali_handle);
+#elif !defined(CONFIG_IDF_TARGET_ESP32H2)
+      // line fitting
+      adc_cali_line_fitting_config_t cali_config;
+      cali_config.unit_id = (adc_unit_t)unit;
+      cali_config.atten = (adc_atten_t)cfg.adc_attenuation;
+      cali_config.bitwidth = (adc_bitwidth_t)cfg.adc_bit_width;
+      auto err =
+          adc_cali_create_scheme_line_fitting(&cali_config, &adc_cali_handle);
+#endif
+      if (err != ESP_OK) {
+        LOGE("creating cali handle failed for ADC%d with atten %d and bitwidth "
+             "%d",
+             unit, cfg.adc_attenuation, cfg.adc_bit_width);
+        return false;
+      } else {
+        LOGI("created cali handle for ADC%d with atten %d and bitwidth %d",
+             unit, cfg.adc_attenuation, cfg.adc_bit_width);
+      }
     }
     return true;
   }
-
 };
 
 /// @brief AnalogAudioStream
