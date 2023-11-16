@@ -31,6 +31,8 @@ public:
   void begin() override {
     TRACED();
     active = true;
+    p_dec->begin();
+    queue.begin();
   }
 
   void end() override {
@@ -44,12 +46,13 @@ public:
   }
 
   size_t write(const void *data, size_t byteCount) override {
-    if (p_out == nullptr)
-      return 0;
     TRACED();
     size_t result = queue.write((uint8_t *)data, byteCount);
-    // trigger processing
-    while(p_dec->copy()) delay(1);
+    // trigger processing - we leave byteCount in the buffer
+    while(queue.available()>byteCount){
+      p_dec->copy(); 
+      delay(1);
+    }
     return result;
   }
 
@@ -60,7 +63,6 @@ protected:
   StreamingDecoder *p_dec = nullptr;
   RingBuffer<uint8_t> rbuffer{0};
   QueueStream<uint8_t> queue{rbuffer}; // convert Buffer to Stream
-  Print *p_out = nullptr;
 };
 
 } // namespace audio_tools
