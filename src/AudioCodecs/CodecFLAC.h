@@ -114,7 +114,7 @@ class FLACDecoder : public StreamingDecoder {
 
   /// Stream Interface: Process a single frame - only relevant when input stream has been defined
   bool copy() {
-    LOGI("copy");
+    LOGD("copy");
     if (!is_active) {
       LOGE("not active");
       return false;
@@ -160,7 +160,7 @@ class FLACDecoder : public StreamingDecoder {
   /// Callback which reads from stream
   static FLAC__StreamDecoderReadStatus read_callback(const FLAC__StreamDecoder *decoder, FLAC__byte result_buffer[],size_t *bytes, void *client_data) {
     FLAC__StreamDecoderReadStatus result = FLAC__STREAM_DECODER_READ_STATUS_CONTINUE;
-    LOGI("read_callback: %d", (int) *bytes);
+    LOGD("read_callback: %d", (int) *bytes);
     FLACDecoder *self = (FLACDecoder *)client_data;
     if (self == nullptr || !self->is_active) {
       return FLAC__STREAM_DECODER_READ_STATUS_ABORT;
@@ -192,7 +192,7 @@ class FLACDecoder : public StreamingDecoder {
 
     /// Output decoded result to final output stream
   static FLAC__StreamDecoderWriteStatus write_callback(const FLAC__StreamDecoder *decoder, const FLAC__Frame *frame,const FLAC__int32 *const buffer[], void *client_data) {
-    LOGI("write_callback: %d", frame->header.blocksize);
+    LOGD("write_callback: %d", frame->header.blocksize);
     FLACDecoder *self = (FLACDecoder *)client_data;
 
     AudioInfo actual_info = self->audioInfo();
