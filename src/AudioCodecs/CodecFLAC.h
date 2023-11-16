@@ -189,9 +189,9 @@ class FLACDecoder : public StreamingDecoder {
       return result;
   }
 
-  /// Output decoded result to final output stream
+    /// Output decoded result to final output stream
   static FLAC__StreamDecoderWriteStatus write_callback(const FLAC__StreamDecoder *decoder, const FLAC__Frame *frame,const FLAC__int32 *const buffer[], void *client_data) {
-    LOGI("write_callback: %d", (int) frame->header.blocksize);
+    LOGI("write_callback: %d", frame->header.blocksize);
     FLACDecoder *self = (FLACDecoder *)client_data;
 
     AudioInfo actual_info = self->audioInfo();
@@ -200,7 +200,7 @@ class FLACDecoder : public StreamingDecoder {
       self->info.logInfo();
       int bps = FLAC__stream_decoder_get_bits_per_sample(decoder);
       if (bps!=16){
-        LOGI("Converting from %d bits", (int) bps);
+        LOGI("Converting from %d bits", bps);
       }
       if (self->p_notify != nullptr) {
         self->info = actual_info;
@@ -210,53 +210,50 @@ class FLACDecoder : public StreamingDecoder {
 
     // write audio data
     int bps = FLAC__stream_decoder_get_bits_per_sample(decoder);
-    int16_t sample;
+    int16_t result_frame[actual_info.channels];
+
     switch(bps){
       case 8:
         for (int j = 0; j < frame->header.blocksize; j++) {
           for (int i = 0; i < actual_info.channels; i++) {
             //self->output_buffer[j*actual_info.channels + i] = buffer[i][j]<<8;
-            sample = buffer[i][j]<<8;;
-            self->p_print->write((uint8_t *)&sample,2);
+            result_frame[i] = buffer[i][j]<<8;
           }
+          self->p_print->write((uint8_t *)&frame, sizeof(frame));
         }
         break;
       case 16:
         for (int j = 0; j < frame->header.blocksize; j++) {
           for (int i = 0; i < actual_info.channels; i++) {
-            //self->output_buffer[j*actual_info.channels + i] = buffer[i][j];
-            sample = buffer[i][j];
-            self->p_print->write((uint8_t *)&sample,2);
+            result_frame[i] = buffer[i][j];
           }
+          self->p_print->write((uint8_t *)&frame, sizeof(frame));
         }
         break;
       case 24:
         for (int j = 0; j < frame->header.blocksize; j++) {
           for (int i = 0; i < actual_info.channels; i++) {
-            //self->output_buffer[j*actual_info.channels + i] = buffer[i][j]>>8;
-            sample = buffer[i][j] >>8;
-            self->p_print->write((uint8_t *)&sample,2);
+            result_frame[i]  = buffer[i][j] >>8;
           }
+          self->p_print->write((uint8_t *)&frame, sizeof(frame));
         }
         break;
       case 32:
         for (int j = 0; j < frame->header.blocksize; j++) {
           for (int i = 0; i < actual_info.channels; i++) {
              //self->output_buffer[j*actual_info.channels+ i] = buffer[i][j]>>16;           
-            sample = buffer[i][j] >>16;
-            self->p_print->write((uint8_t *)&sample,2);
+            result_frame[i] = buffer[i][j] >>16;
           }
+          self->p_print->write((uint8_t *)&frame, sizeof(frame));
         }
         break;
       default:
-        LOGE("Unsupported bps: %d", (int) bps);
+        LOGE("Unsupported bps: %d", bps);
     }
   
     return FLAC__STREAM_DECODER_WRITE_STATUS_CONTINUE;
   }
-
 };
-
 
 
 /**
