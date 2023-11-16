@@ -228,7 +228,7 @@ class HttpHeader {
         }
 
         /// reads the full header from the request (stream)
-        void read(Client &in) {
+        bool read(Client &in) {
             LOGD("HttpHeader::read");
             // remove all existing value
             clear();
@@ -237,11 +237,18 @@ class HttpHeader {
             if (in.connected()){
                 if (in.available()==0) {
                     int count = 0;
+                    uint32_t timeout = millis() + timeout_ms;
                     while(in.available()==0){
                         delay(50);
                         count++;
                         if (count==2){
                             LOGI("Waiting for data...");
+                        }
+                        // If we dont get an answer, we abort
+                        if(millis() > timeout ){
+                            LOGE("Request timed out after %d ms", timeout_ms);
+                            status_code = 401;
+                            return false;
                         }
                     }
                     LOGI("Data availble");
@@ -261,6 +268,7 @@ class HttpHeader {
                     }           
                 }
             } 
+            return true;
         }
 
         /// writes the full header to the indicated HttpStreamedMultiOutput stream
@@ -301,6 +309,10 @@ class HttpHeader {
             temp_buffer.resize(0);
         }
 
+        void setTimeout(int timeoutMs){
+            timeout_ms = timeoutMs;
+        }
+
     protected:
         int status_code = UNDEFINED;
         bool is_written = false;
@@ -315,6 +327,7 @@ class HttpHeader {
         Vector<HttpHeaderLine*> lines;
         HttpLineReader reader;
         const char* CRLF = "\r\n";
+        int timeout_ms = URL_CLIENT_TIMEOUT;
 
         char* tempBuffer(){
             temp_buffer.resize(HTTP_MAX_LEN);
