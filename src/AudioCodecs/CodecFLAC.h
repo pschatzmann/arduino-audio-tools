@@ -10,6 +10,7 @@
 
 #include "AudioCodecs/AudioEncoded.h"
 #include "AudioTools/Buffers.h"
+#include "AudioBasic/Net.h"
 #include "flac.h"
 
 #ifndef FLAC_READ_TIMEOUT_MS
@@ -217,7 +218,7 @@ class FLACDecoder : public StreamingDecoder {
         for (int j = 0; j < frame->header.blocksize; j++) {
           for (int i = 0; i < actual_info.channels; i++) {
             //self->output_buffer[j*actual_info.channels + i] = buffer[i][j]<<8;
-            result_frame[i] = buffer[i][j]<<8;
+            result_frame[i] = ntohl(buffer[i][j])<<8;
           }
           self->p_print->write((uint8_t *)&frame, sizeof(frame));
         }
@@ -225,7 +226,7 @@ class FLACDecoder : public StreamingDecoder {
       case 16:
         for (int j = 0; j < frame->header.blocksize; j++) {
           for (int i = 0; i < actual_info.channels; i++) {
-            result_frame[i] = buffer[i][j];
+            result_frame[i] = ntohl(buffer[i][j]);
           }
           self->p_print->write((uint8_t *)&frame, sizeof(frame));
         }
@@ -233,7 +234,7 @@ class FLACDecoder : public StreamingDecoder {
       case 24:
         for (int j = 0; j < frame->header.blocksize; j++) {
           for (int i = 0; i < actual_info.channels; i++) {
-            result_frame[i]  = buffer[i][j] >>8;
+            result_frame[i]  = ntohl(buffer[i][j]) >> 8;
           }
           self->p_print->write((uint8_t *)&frame, sizeof(frame));
         }
@@ -242,7 +243,7 @@ class FLACDecoder : public StreamingDecoder {
         for (int j = 0; j < frame->header.blocksize; j++) {
           for (int i = 0; i < actual_info.channels; i++) {
              //self->output_buffer[j*actual_info.channels+ i] = buffer[i][j]>>16;           
-            result_frame[i] = buffer[i][j] >>16;
+            result_frame[i] = ntohl(buffer[i][j]) >> 16;
           }
           self->p_print->write((uint8_t *)&frame, sizeof(frame));
         }
@@ -368,10 +369,15 @@ class FLACEncoder : public AudioEncoder {
         data = buffer.data();
         break;
 
+      case 24:
       case 32:
         samples = in_size / sizeof(int32_t);
         frames = samples / cfg.channels;
         data = (int32_t*) in_ptr;
+        // convert to big endian
+        for (int j=0;j<samples;j++){
+          data[j] = htonl(data[j]);
+        }
         break;
 
       default:
@@ -419,7 +425,7 @@ class FLACEncoder : public AudioEncoder {
   void writeBuffer(int16_t * data, size_t samples) {
     buffer.resize(samples);
     for (int j=0;j<samples;j++){
-      buffer[j] = data[j];
+      buffer[j] = htonl(data[j]);
     }
   }
 };
