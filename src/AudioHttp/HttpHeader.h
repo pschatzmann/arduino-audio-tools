@@ -246,7 +246,7 @@ class HttpHeader {
                         }
                         // If we dont get an answer, we abort
                         if(millis() > timeout ){
-                            LOGE("Request timed out after %d ms", timeout_ms);
+                            LOGE("Request timed out after %d ms", (int)timeout_ms);
                             status_code = 401;
                             return false;
                         }
