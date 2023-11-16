@@ -159,7 +159,7 @@ class FLACDecoder : public StreamingDecoder {
   /// Callback which reads from stream
   static FLAC__StreamDecoderReadStatus read_callback(const FLAC__StreamDecoder *decoder, FLAC__byte result_buffer[],size_t *bytes, void *client_data) {
     FLAC__StreamDecoderReadStatus result = FLAC__STREAM_DECODER_READ_STATUS_CONTINUE;
-    LOGI("read_callback: %d", *bytes);
+    LOGI("read_callback: %d", (int) *bytes);
     FLACDecoder *self = (FLACDecoder *)client_data;
     if (self == nullptr || !self->is_active) {
       return FLAC__STREAM_DECODER_READ_STATUS_ABORT;
@@ -167,7 +167,7 @@ class FLACDecoder : public StreamingDecoder {
 
     // get data directly from stream
     *bytes = self->readBytes(result_buffer, *bytes);
-    LOGD("-> %d", *bytes);
+    LOGD("-> %d", (int) *bytes);
     if (self->isEof(*bytes)){
         result = FLAC__STREAM_DECODER_READ_STATUS_END_OF_STREAM;
         self->is_active = false;
@@ -191,7 +191,7 @@ class FLACDecoder : public StreamingDecoder {
 
   /// Output decoded result to final output stream
   static FLAC__StreamDecoderWriteStatus write_callback(const FLAC__StreamDecoder *decoder, const FLAC__Frame *frame,const FLAC__int32 *const buffer[], void *client_data) {
-    LOGI("write_callback: %d", frame->header.blocksize);
+    LOGI("write_callback: %d", (int) frame->header.blocksize);
     FLACDecoder *self = (FLACDecoder *)client_data;
 
     AudioInfo actual_info = self->audioInfo();
@@ -200,7 +200,7 @@ class FLACDecoder : public StreamingDecoder {
       self->info.logInfo();
       int bps = FLAC__stream_decoder_get_bits_per_sample(decoder);
       if (bps!=16){
-        LOGI("Converting from %d bits", bps);
+        LOGI("Converting from %d bits", (int) bps);
       }
       if (self->p_notify != nullptr) {
         self->info = actual_info;
@@ -249,7 +249,7 @@ class FLACDecoder : public StreamingDecoder {
         }
         break;
       default:
-        LOGE("Unsupported bps: %d", bps);
+        LOGE("Unsupported bps: %d", (int) bps);
     }
   
     return FLAC__STREAM_DECODER_WRITE_STATUS_CONTINUE;
@@ -358,7 +358,7 @@ class FLACEncoder : public AudioEncoder {
   /// Writes FLAC Packet
   virtual size_t write(const void *in_ptr, size_t in_size) override {
     if (!is_open || p_print == nullptr) return 0;
-    LOGD("write: %u", in_size);
+    LOGD("write: %zu", in_size);
     size_t result = 0;
     int samples=0;
     int frames=0;
@@ -378,7 +378,7 @@ class FLACEncoder : public AudioEncoder {
         break;
 
       default:
-        LOGE("bits_per_sample not supported: %d", cfg.bits_per_sample);
+        LOGE("bits_per_sample not supported: %d", (int) cfg.bits_per_sample);
         break;
     }
 
@@ -412,7 +412,7 @@ class FLACEncoder : public AudioEncoder {
     if (self->p_print!=nullptr){
       size_t written = self->p_print->write((uint8_t*)buffer, bytes);
       if (written!=bytes){
-        LOGE("write_callback %d -> %d", bytes, written);
+        LOGE("write_callback %zu -> %zu", bytes, written);
         return FLAC__STREAM_ENCODER_WRITE_STATUS_FATAL_ERROR;
       }
     }
