@@ -12,14 +12,6 @@
 #include "AudioHttp/HttpRequest.h"
 #include "AudioHttp/AbstractURLStream.h"
 
-#ifndef URL_CLIENT_TIMEOUT
-#define URL_CLIENT_TIMEOUT 60000
-#endif
-
-#ifndef URL_HANDSHAKE_TIMEOUT
-#define URL_HANDSHAKE_TIMEOUT 120000
-#endif
-
 
 namespace audio_tools {
 

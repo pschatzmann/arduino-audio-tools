@@ -8,14 +8,6 @@
 #include "AudioHttp/Url.h"
 #include "AudioTools/AudioLogger.h" 
 
-#ifndef URL_CLIENT_TIMEOUT
-#define URL_CLIENT_TIMEOUT 60000
-#endif
-
-#ifndef URL_HANDSHAKE_TIMEOUT
-#define URL_HANDSHAKE_TIMEOUT 120000
-#endif
-
 namespace audio_tools {
 
 
@@ -308,8 +300,9 @@ class HttpRequest {
             http_connect_callback = callback;
         }
 
-        void setTimeout(int timeout){
-            clientTimeout = timeout;
+        /// Defines the client timeout in ms
+        void setTimeout(int timeoutMs){
+            clientTimeout = timeoutMs;
         }
 
     protected:
@@ -329,7 +322,9 @@ class HttpRequest {
 
         // opens a connection to the indicated host
         virtual int connect(const char *ip, uint16_t port, int32_t timeout) {
-            client_ptr->setTimeout(timeout);
+            client_ptr->setTimeout(timeout/1000); // client timeout is in seconds!
+            request_header.setTimeout(timeout);
+            reply_header.setTimeout(timeout);
             int is_connected = this->client_ptr->connect(ip, port);
             LOGI("connected %d timeout %d", is_connected, (int) timeout);
             return is_connected;
