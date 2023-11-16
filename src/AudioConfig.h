@@ -705,6 +705,11 @@ typedef WiFiClient WiFiClientSecure;
 #  define ANALOG_MAX_SAMPLE_RATE 44000
 #endif
 
+#ifndef URL_CLIENT_TIMEOUT
+#  define URL_CLIENT_TIMEOUT 60000;
+#  define URL_HANDSHAKE_TIMEOUT 120000
+#endif
+
 // select int24 implementation
 #include "AudioBasic/Int24_3bytes_t.h"
 #include "AudioBasic/Int24_4bytes_t.h"
