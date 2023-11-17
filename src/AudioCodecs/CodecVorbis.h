@@ -45,7 +45,10 @@ public:
     callbacks.close_func = close_func;
     callbacks.tell_func = tell_func;
 
-    int rc = ov_open_callbacks(this, &file, nullptr, 0, callbacks);
+    // in order to succeed we need to be able to provide data now
+    if (p_in->available()>0){
+      ovOpen();
+    }
 
     pcm.resize(VARBIS_MAX_READ_SIZE);
 
@@ -75,6 +78,7 @@ public:
   virtual bool copy() override {
     LOGI("copy");
 
+    // wait for data
     if (is_first){
           // wait for some data
       while(p_in->available()==0){
@@ -83,7 +87,12 @@ public:
       is_first = false;
     }
 
+    // delayed open: if not already done
+    if (!is_ov_open){
+      ovOpen();
+    }
 
+    // convert to pcm
     long result = ov_read(&file, (char *)pcm.data(), pcm.size(), &bitstream);
     if (result > 0) {
       AudioInfo current = currentInfo();
@@ -115,13 +124,23 @@ protected:
   bool active;
   int bitstream;
   bool is_first = true;
+  bool is_ov_open = false;
+
+  void ovOpen(){
+      int rc = ov_open_callbacks(this, &file, nullptr, 0, callbacks);
+      if (rc<0){
+        LOGE("ov_open_callbacks");
+      } else {
+        is_ov_open = true;
+      }
+  }
 
   AudioInfo currentInfo() {
     AudioInfo result;
     vorbis_info *info = ov_info(&file, -1);
     result.sample_rate = info->rate;
     result.channels = info->channels;
-    result.bits_per_sample = 2;
+    result.bits_per_sample = 16;
     return result;
   }
 
