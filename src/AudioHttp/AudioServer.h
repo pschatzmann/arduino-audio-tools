@@ -299,6 +299,7 @@ class AudioEncoderServer  : public AudioServer {
             audio_info.sample_rate = sample_rate;
             audio_info.channels = channels;
             audio_info.bits_per_sample = bits_per_sample;
+            this->converter_ptr = converter;
             encoder->setAudioInfo(audio_info);
             //encoded_stream.begin(&client_obj, encoder);
             encoded_stream.setInput(&client_obj);
@@ -318,6 +319,7 @@ class AudioEncoderServer  : public AudioServer {
             TRACED();
             this->in = &in;
             this->audio_info = info;
+            this->converter_ptr = converter;
             encoder->setAudioInfo(audio_info);
             //encoded_stream.begin(&client_obj, encoder);
             encoded_stream.setInput(&client_obj);
