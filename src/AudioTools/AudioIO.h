@@ -182,6 +182,8 @@ protected:
  */
 class TimedStream : public AudioStream {
 public:
+  TimedStream() = default;
+  
   TimedStream(AudioStream &io, long startSeconds = 0, long endSeconds = -1) {
     p_stream = &io;
     p_print = &io;
@@ -274,7 +276,7 @@ public:
   /// Updates the AudioInfo in the current object and in the source or target
   void setAudioInfo(AudioInfo info) override {
     AudioStream::setAudioInfo(info);
-    p_info->setAudioInfo(info);
+    if (p_info) p_info->setAudioInfo(info);
     calculateByteLimits();
   }
 
@@ -289,17 +291,20 @@ public:
     return info.sample_rate * info.channels * info.bits_per_sample / 8;
   }
 
-  void setOutput(Print &out){
+  void setOutput(AudioOutput &out){
     p_print = &out;
+    p_info = &out;
   }
 
-  void setStream(Print &out){
+  void setStream(AudioOutput &out){
     p_print = &out;
+    p_info = &out;
   }
 
-  void setStream(Stream &stream){
+  void setStream(AudioStream &stream){
     p_print = &stream;
     p_stream = &stream;
+    p_info = &stream;
   }
 
 protected:

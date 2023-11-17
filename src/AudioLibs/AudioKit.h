@@ -74,7 +74,7 @@ friend class AudioKitStream;
   void setupI2SPins(RxTxMode rxtx_mode) {
     TRACED();
     this->rx_tx_mode = rxtx_mode;
-    i2s_pin_config_t i2s_pins;
+    i2s_pin_config_t i2s_pins = {};
     board.setup(pins);
     board.get_i2s_pins((i2s_port_t)port_no, &i2s_pins);
     pin_mck = i2s_pins.mck_io_num;

@@ -128,7 +128,7 @@ protected:
   virtual size_t readBytes(uint8_t *ptr, size_t size) override {
     size_t read_size =  min(size,(size_t)VARBIS_MAX_READ_SIZE);
     size_t result = p_in->readBytes((uint8_t *)ptr, read_size);
-    LOGD("readBytes: %ld",result);
+    LOGD("readBytes: %zu",result);
     return result;
   }
 
