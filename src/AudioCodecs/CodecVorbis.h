@@ -6,7 +6,7 @@
 namespace audio_tools {
 
 #ifndef VARBIS_MAX_READ_SIZE
-#  define VARBIS_MAX_READ_SIZE 256
+#  define VARBIS_MAX_READ_SIZE 1024
 #endif
 
 /**
@@ -71,7 +71,7 @@ public:
   virtual operator bool() override { return active; }
 
   virtual bool copy() override {
-    LOGI("copy");
+    LOGD("copy");
 
     // wait for data
     if (is_first){
@@ -108,7 +108,13 @@ public:
       p_out->write(pcm.data(), result);
       return true;
     } else {
-      LOGE("copy: %ld - %s", result, readError(result));
+      if (result==-3){
+        // data interruption
+        LOGD("copy: %ld - %s", result, readError(result));
+      } else {
+        LOGE("copy: %ld - %s", result, readError(result));
+      }
+    
       return false;
     }
   }
@@ -157,7 +163,7 @@ protected:
                           void *datasource) {
     VorbisDecoder *self = (VorbisDecoder *)datasource;
     delay(0);
-    return self->readBytes((uint8_t *)ptr, size);
+    return self->readBytes((uint8_t *)ptr, size*nmemb);
   }
 
   static int seek_func(void *datasource, ogg_int64_t offset, int whence) {
