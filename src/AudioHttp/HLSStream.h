@@ -130,7 +130,7 @@ protected:
 #ifdef ESP32
       LOGI("Free heap: %u", (unsigned) ESP.getFreeHeap());
 #endif
-      LOGI("Playing %s of %zu", p_stream->urlStr(), urls.size());
+      LOGI("Playing %s of %d", p_stream->urlStr(),(int) urls.size());
     }
 
     int to_write = min(buffer.availableForWrite(),DEFAULT_BUFFER_SIZE);
