@@ -1165,6 +1165,49 @@ class SmoothTransition : public BaseConverter {
         }
 };
 
+/**
+ * @brief Copy channel Cx value of type T shifted by S bits to all Cn channels
+ * @ingroup convert
+ * @tparam T, Cn, Cx, S 
+ */
+template<typename T, size_t Cn, size_t Cx, size_t S>
+class CopyChannels : public BaseConverter {
+  public:
+  CopyChannels() : _max_val(0), _counter(0), _prev_ms(0) {}
+
+  size_t convert(uint8_t *src, size_t size) {
+    T *chan = (T*)src;
+    size_t samples = (size / Cn) / sizeof(T);
+    for( size_t s=0; s<samples; s++ ) {
+      chan[s*Cn+Cx] = (Cx < Cn) ? chan[s*Cn+Cx] << S : 0;
+
+      for( size_t c=0; c<Cn; c++ ) {
+        if( c != Cx ) {
+          chan[s*Cn+c] = chan[s*Cn+Cx];
+        }
+      }
+
+      if( _max_val < chan[s*Cn] ) { 
+          _max_val = chan[s*Cn];
+      }
+
+      _counter++;
+      uint32_t now = millis();
+      if( now - _prev_ms > 1000 ) { 
+        _prev_ms = now;
+        LOGI("CopyChannels samples: %u, amplitude: %d", _counter, _max_val);
+        _max_val = 0;
+      }
+    }
+    return samples * Cn * sizeof(T);
+  }
+
+  private:
+  T _max_val;
+  uint32_t _counter;
+  uint32_t _prev_ms;
+};
+
 
 
 }
