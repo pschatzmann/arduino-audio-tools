@@ -38,6 +38,10 @@ class BaseBuffer {
 
   /// reads multiple values
   virtual int readArray(T data[], int len) {
+    if (data==nullptr){
+      LOGE("NPE");
+      return 0;
+    }
     int lenResult = MIN(len, available());
     for (int j = 0; j < lenResult; j++) {
       data[j] = read();
