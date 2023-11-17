@@ -57,7 +57,7 @@ class AudioServer {
          * @param in 
          * @param contentType Mime Type of result
          */
-        void begin(Stream &in, const char* contentType) {
+        bool begin(Stream &in, const char* contentType) {
              TRACED();
             this->in = &in;
             this->content_type = contentType;
@@ -66,6 +66,7 @@ class AudioServer {
 
             // start server
             server.begin();
+            return true;
         }
 
         /**
@@ -74,7 +75,7 @@ class AudioServer {
          * @param cb 
          * @param contentType Mime Type of result
          */
-        void begin(AudioServerDataCallback cb, const char* contentType) {
+        bool begin(AudioServerDataCallback cb, const char* contentType) {
              TRACED();
             this->in =nullptr;
             this->callback = cb;
@@ -84,6 +85,7 @@ class AudioServer {
 
             // start server
             server.begin();
+            return true;
         }
 
         /**
@@ -292,7 +294,7 @@ class AudioEncoderServer  : public AudioServer {
          * @param sample_rate 
          * @param channels 
          */
-        void begin(Stream &in, int sample_rate, int channels, int bits_per_sample=16, BaseConverter *converter=nullptr) {
+        bool begin(Stream &in, int sample_rate, int channels, int bits_per_sample=16, BaseConverter *converter=nullptr) {
             TRACED();
             this->in = &in;
             setConverter(converter);
@@ -304,7 +306,7 @@ class AudioEncoderServer  : public AudioServer {
             encoded_stream.setInput(&client_obj);
             encoded_stream.setEncoder(encoder);
             encoded_stream.begin();
-            AudioServer::begin(in, encoder->mime());
+            return AudioServer::begin(in, encoder->mime());
         }
 
         /**
@@ -314,19 +316,38 @@ class AudioEncoderServer  : public AudioServer {
          * @param info 
          * @param converter 
          */
-        void begin(Stream &in, AudioInfo info, BaseConverter *converter=nullptr) {
+        bool begin(Stream &in, AudioInfo info, BaseConverter *converter=nullptr) {
             TRACED();
             this->in = &in;
             this->audio_info = info;
             setConverter(converter);
             encoder->setAudioInfo(audio_info);
-            //encoded_stream.begin(&client_obj, encoder);
             encoded_stream.setInput(&client_obj);
             encoded_stream.setEncoder(encoder);
             encoded_stream.begin();
 
-            AudioServer::begin(in, encoder->mime());
+            return AudioServer::begin(in, encoder->mime());
         }
+
+          /**
+         * @brief Start the server. You need to be connected to WiFI before calling this method
+         * 
+         * @param in 
+         * @param converter 
+         */
+        bool begin(AudioStream &in, BaseConverter *converter=nullptr) {
+            TRACED();
+            this->in = &in;
+            this->audio_info = in.audioInfo();
+            setConverter(converter);
+            encoder->setAudioInfo(audio_info);
+            encoded_stream.setInput(&client_obj);
+            encoded_stream.setEncoder(encoder);
+            encoded_stream.begin();
+
+            return AudioServer::begin(in, encoder->mime());
+        }
+      
 
         /**
          * @brief Start the server. The data must be provided by a callback method
@@ -335,14 +356,14 @@ class AudioEncoderServer  : public AudioServer {
          * @param sample_rate 
          * @param channels 
          */
-        void begin(AudioServerDataCallback cb, int sample_rate, int channels, int bits_per_sample=16) {
+        bool begin(AudioServerDataCallback cb, int sample_rate, int channels, int bits_per_sample=16) {
             TRACED();
             audio_info.sample_rate = sample_rate;
             audio_info.channels = channels;
             audio_info.bits_per_sample = bits_per_sample;
             encoder->setAudioInfo(audio_info);
 
-            AudioServer::begin(cb, encoder->mime());
+            return AudioServer::begin(cb, encoder->mime());
         }
 
         // provides a pointer to the encoder
