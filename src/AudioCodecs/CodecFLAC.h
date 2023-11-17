@@ -192,7 +192,7 @@ class FLACDecoder : public StreamingDecoder {
 
     /// Output decoded result to final output stream
   static FLAC__StreamDecoderWriteStatus write_callback(const FLAC__StreamDecoder *decoder, const FLAC__Frame *frame,const FLAC__int32 *const buffer[], void *client_data) {
-    LOGD("write_callback: %d", frame->header.blocksize);
+    LOGD("write_callback: %u", (unsigned)frame->header.blocksize);
     FLACDecoder *self = (FLACDecoder *)client_data;
 
     AudioInfo actual_info = self->audioInfo();
