@@ -159,7 +159,7 @@ protected:
         uint16_t *result16 = (uint16_t *)dest;
         uint16_t *end = (uint16_t *)(dest + size_bytes);
         int result_count = result_cont / sizeof(adc_digi_output_data_t);
-        LOGD("adc_continuous_read -> %d bytes / %d samples", result_cont,
+        LOGD("adc_continuous_read -> %u bytes / %d samples", (unsigned) result_cont,
              result_count);
 
         for (int i = 0; i < result_count; i++) {
@@ -168,7 +168,7 @@ protected:
           uint32_t data = AUDIO_ADC_GET_DATA(p);
 
           if (isValidADCChannel((adc_channel_t)chan_num)) {
-            LOGD("Idx: %d, channel: %d, data: %u", i, chan_num, data);
+            LOGD("Idx: %d, channel: %d, data: %u", i, chan_num, (unsigned) data);
 
             assert(result16 < end); // make sure we dont write past the end
             if (self->cfg.adc_calibration_active) {
@@ -196,7 +196,7 @@ protected:
             }
 
           } else {
-            LOGD("invalid channel: %d, data: %u", chan_num, data);
+            LOGD("invalid channel: %d, data: %u", chan_num, (unsigned) data);
           }
         }
         // make sure that the center is at 0, so the result will be int16_t
@@ -313,7 +313,7 @@ protected:
     }
     dig_cfg.adc_pattern = adc_pattern;
 
-    LOGI("dig_cfg.sample_freq_hz: %u", dig_cfg.sample_freq_hz);
+    LOGI("dig_cfg.sample_freq_hz: %u", (unsigned) dig_cfg.sample_freq_hz);
     LOGI("dig_cfg.conv_mode: %u", dig_cfg.conv_mode);
     LOGI("dig_cfg.format: %u", dig_cfg.format);
     for (int i = 0; i < cfg.channels; i++) {
@@ -356,12 +356,12 @@ protected:
   bool checkADCBitWidth() {
     if ((cfg.adc_bit_width < SOC_ADC_DIGI_MIN_BITWIDTH) ||
         (cfg.adc_bit_width > SOC_ADC_DIGI_MAX_BITWIDTH)) {
-      LOGE("adc bit width: %u cannot be set, range: %u to %u",
-           SOC_ADC_DIGI_MIN_BITWIDTH, SOC_ADC_DIGI_MAX_BITWIDTH);
+      LOGE("adc bit width: %u cannot be set, range: %u to %u", cfg.adc_bit_width,
+           (unsigned)SOC_ADC_DIGI_MIN_BITWIDTH, (unsigned)SOC_ADC_DIGI_MAX_BITWIDTH);
       return false;
     } 
     LOGI("adc bit width: %u, range: %u to %u", cfg.adc_bit_width,
-           SOC_ADC_DIGI_MIN_BITWIDTH, SOC_ADC_DIGI_MAX_BITWIDTH);
+           (unsigned)SOC_ADC_DIGI_MIN_BITWIDTH, (unsigned)SOC_ADC_DIGI_MAX_BITWIDTH);
     return true;
   }
 

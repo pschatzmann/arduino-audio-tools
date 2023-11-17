@@ -186,24 +186,30 @@ public:
     p_stream = &io;
     p_print = &io;
     p_info = &io;
-    setStartSecond(startSeconds);
-    setEndSecond(endSeconds);
+    setStartSec(startSeconds);
+    setEndSec(endSeconds);
   }
 
   TimedStream(AudioOutput &o, long startSeconds = 0, long endSeconds = -1) {
     p_print = &o;
     p_info = &o;
-    setStartSecond(startSeconds);
-    setEndSecond(endSeconds);
+    setStartSec(startSeconds);
+    setEndSec(endSeconds);
   }
 
   /// Defines the start time in seconds. The audio before the start time will be
   /// skipped
-  void setStartSecond(long startSeconds) { start_seconds = startSeconds; }
+  void setStartSec(uint32_t startSeconds) { start_ms = startSeconds*1000; }
+
+  /// Defines the start time in milliseconds
+  void setStartMs(uint32_t ms) { start_ms = ms; }
 
   /// Defines (an optional) the end time in seconds. After the end time no audio
   /// is played and available() will return 0
-  void setEndSecond(long endSeconds) { end_seconds = endSeconds; }
+  void setEndSec(uint32_t endSeconds) { end_ms = endSeconds*1000; }
+
+  /// Defines the (optional) end time in milliseconds
+  void setEndMs(uint32_t ms) { end_ms = ms; }
 
   /// Returns true if we are in a valid time range and are still playing sound
   bool isPlaying() {
@@ -283,22 +289,35 @@ public:
     return info.sample_rate * info.channels * info.bits_per_sample / 8;
   }
 
+  void setOutput(Print &out){
+    p_print = &out;
+  }
+
+  void setStream(Print &out){
+    p_print = &out;
+  }
+
+  void setStream(Stream &stream){
+    p_print = &stream;
+    p_stream = &stream;
+  }
+
 protected:
   Stream *p_stream = nullptr;
   Print *p_print = nullptr;
   AudioInfoSupport *p_info = nullptr;
-  uint32_t start_seconds = 0;
-  uint32_t end_seconds = UINT32_MAX;
+  uint32_t start_ms = 0;
+  uint32_t end_ms = UINT32_MAX;
   uint32_t start_bytes = 0;
   uint32_t end_bytes = UINT32_MAX;
   uint32_t current_bytes = 0;
   float compression_ratio = 1.0;
 
   void calculateByteLimits() {
-    int bytes_per_second = bytesPerSecond();
+    float bytes_per_second = bytesPerSecond();
     if (bytes_per_second > 0) {
-      start_bytes = bytes_per_second * start_seconds / compression_ratio;
-      end_bytes = bytes_per_second * end_seconds / compression_ratio;
+      start_bytes = bytes_per_second * start_ms / compression_ratio / 1000;
+      end_bytes = bytes_per_second * end_ms / compression_ratio / 1000;
     } else {
       LOGE("AudioInfo not defined");
     }
