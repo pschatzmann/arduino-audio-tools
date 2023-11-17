@@ -285,7 +285,6 @@ class AudioEncoderServer  : public AudioServer {
         ~AudioEncoderServer() {
         }
 
-
         /**
          * @brief Start the server. You need to be connected to WiFI before calling this method
          * 
@@ -296,10 +295,10 @@ class AudioEncoderServer  : public AudioServer {
         void begin(Stream &in, int sample_rate, int channels, int bits_per_sample=16, BaseConverter *converter=nullptr) {
             TRACED();
             this->in = &in;
+            setConverter(converter);
             audio_info.sample_rate = sample_rate;
             audio_info.channels = channels;
             audio_info.bits_per_sample = bits_per_sample;
-            this->converter_ptr = converter;
             encoder->setAudioInfo(audio_info);
             //encoded_stream.begin(&client_obj, encoder);
             encoded_stream.setInput(&client_obj);
@@ -319,7 +318,7 @@ class AudioEncoderServer  : public AudioServer {
             TRACED();
             this->in = &in;
             this->audio_info = info;
-            this->converter_ptr = converter;
+            setConverter(converter);
             encoder->setAudioInfo(audio_info);
             //encoded_stream.begin(&client_obj, encoder);
             encoded_stream.setInput(&client_obj);
@@ -389,8 +388,6 @@ class AudioEncoderServer  : public AudioServer {
                 copier.begin(encoded_stream, *in);
             }
         }
-
-
 };
 
 /**
@@ -407,8 +404,7 @@ class AudioWAVServer : public AudioEncoderServer {
          * @brief Construct a new Audio W A V Server object
          * We assume that the WiFi is already connected
          */
-        AudioWAVServer(int port=80) : AudioEncoderServer(new WAVEncoder(), port){
-        }
+        AudioWAVServer(int port=80) : AudioEncoderServer(new WAVEncoder(), port){}
 
         /**
          * @brief Construct a new Audio W A V Server object
@@ -416,8 +412,7 @@ class AudioWAVServer : public AudioEncoderServer {
          * @param network 
          * @param password 
          */
-        AudioWAVServer(const char* network, const char *password, int port=80) : AudioEncoderServer(new WAVEncoder(), network, password, port) {
-        }
+        AudioWAVServer(const char* network, const char *password, int port=80) : AudioEncoderServer(new WAVEncoder(), network, password, port) {}
 
         /// Destructor: release the allocated encoder
         ~AudioWAVServer() {
@@ -431,8 +426,6 @@ class AudioWAVServer : public AudioEncoderServer {
         WAVEncoder &wavEncoder(){
             return *static_cast<WAVEncoder*>(encoder);
         }
-
-
 };
 
 }
