@@ -23,7 +23,7 @@ inline void stop() {
 inline static void checkMemory(bool memoryCheck=false) {
     #if defined(ESP32) && defined(ARDUINO)
         assert(heap_caps_check_integrity_all(true)); 
-        if (memoryCheck) printf("==> Available stack: %d - heap: %d\n", uxTaskGetStackHighWaterMark(NULL), ESP.getFreeHeap());
+        if (memoryCheck) printf("==> Available stack: %d - heap: %u\n",(int) uxTaskGetStackHighWaterMark(NULL), (unsigned)ESP.getFreeHeap());
     #endif    
 }
 

@@ -159,7 +159,7 @@ class TimerAlarmRepeatingDriverESP32 : public TimerAlarmRepeatingDriverBase  {
             }
 #if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 1 , 0)
             uint32_t freq = AudioTime::AudioTime::toRateUs(timeUs);
-            LOGI("Timer freq: %u hz", freq);
+            LOGI("Timer freq: %u hz",(unsigned) freq);
             adc_timer = timerBegin(freq);  // divider=80 -> 1000000 calls per second
 #else
             LOGI("Timer every: %u us", timeUs);

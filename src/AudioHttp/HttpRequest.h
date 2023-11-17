@@ -239,7 +239,7 @@ class HttpRequest {
             }
 
 #if defined(ESP32) && defined(ARDUINO)
-            LOGI("Free heap: %u", ESP.getFreeHeap());
+            LOGI("Free heap: %u", (unsigned)ESP.getFreeHeap());
 #endif
 
             reply_header.setProcessed();
