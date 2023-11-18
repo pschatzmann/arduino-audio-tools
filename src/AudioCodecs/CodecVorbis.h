@@ -104,7 +104,7 @@ public:
 
     // convert to pcm
     long result = ov_read(&file, (char *)pcm.data(), pcm.size(), &bitstream);
-    LOGI("copy: %d", result);
+    LOGI("copy: %ld", result);
     if (result > 0) {
       AudioInfo current = currentInfo();
       if (current != cfg) {
