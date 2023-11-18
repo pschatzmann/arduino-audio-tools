@@ -94,7 +94,8 @@ class MiniAudioStream : public AudioStream {
     return begin();
   }
 
-  bool begin(){
+  bool begin() override {
+    TRACEI();
     MiniAudioConfig info = config;
     if (info.is_output && !info.is_input)
         config_ma = ma_device_config_init(ma_device_type_playback);
@@ -137,7 +138,7 @@ class MiniAudioStream : public AudioStream {
     return is_active;
   }
 
-  void end() {
+  void end() override {
     is_active = false;
     is_playing = false;
     // This will stop the device so no need to do that manually.
