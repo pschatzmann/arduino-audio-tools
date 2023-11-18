@@ -1,13 +1,20 @@
 #pragma once
-
+#include "AudioConfig.h"
 #include "AudioCodecs/AudioEncoded.h"
 #include "vorbis-tremor.h"
+
+// #include "AudioCodecs/ContainerOgg.h"
+// #include "ivorbiscodec.h"
+// #include "ivorbisfile.h"
+
 
 namespace audio_tools {
 
 #ifndef VARBIS_MAX_READ_SIZE
-#  define VARBIS_MAX_READ_SIZE 1024
+#  define VARBIS_MAX_READ_SIZE 256
 #endif
+
+#define VORBIS_HEADER_OPEN_LIMIT 1024
 
 /**
  * @brief Vorbis Streaming Decoder using
@@ -41,7 +48,7 @@ public:
     callbacks.close_func = close_func;
     callbacks.tell_func = tell_func;
 
-    if (p_in->available()>0){
+    if (p_in->available()>=VORBIS_HEADER_OPEN_LIMIT){
       ovOpen();
     }
 
@@ -71,20 +78,23 @@ public:
   virtual operator bool() override { return active; }
 
   virtual bool copy() override {
-    LOGD("copy");
-
     // wait for data
     if (is_first){
-          // wait for some data
-      while(p_in->available()==0){
-        delay(1);
+      // wait for some data
+      if(p_in->available()<VORBIS_HEADER_OPEN_LIMIT){
+        delay(20);
+        return false;
       }
+      LOGI("available: %d", p_in->available());
       is_first = false;
     }
 
     // open if not already done
     if (!is_ov_open){
-      if (!ovOpen()) return false;
+      if (!ovOpen()) {
+        LOGE("not open");
+        return false;
+      }
     }
 
     if(pcm.data()==nullptr){
@@ -94,6 +104,7 @@ public:
 
     // convert to pcm
     long result = ov_read(&file, (char *)pcm.data(), pcm.size(), &bitstream);
+    LOGI("copy: %d", result);
     if (result > 0) {
       AudioInfo current = currentInfo();
       if (current != cfg) {
@@ -106,6 +117,7 @@ public:
         }
       }
       p_out->write(pcm.data(), result);
+      delay(1);
       return true;
     } else {
       if (result==-3){
@@ -136,7 +148,7 @@ protected:
     pcm.resize(VARBIS_MAX_READ_SIZE);
     int rc = ov_open_callbacks(this, &file, nullptr, 0, callbacks);
     if (rc<0){
-      LOGE("ov_open_callbacks");
+      LOGE("ov_open_callbacks: %d", rc);
     } else {
       is_ov_open = true;
     }
@@ -162,8 +174,7 @@ protected:
   static size_t read_func(void *ptr, size_t size, size_t nmemb,
                           void *datasource) {
     VorbisDecoder *self = (VorbisDecoder *)datasource;
-    delay(0);
-    return self->readBytes((uint8_t *)ptr, size*nmemb);
+    return self->readBytes((uint8_t *)ptr, size * nmemb);
   }
 
   static int seek_func(void *datasource, ogg_int64_t offset, int whence) {
