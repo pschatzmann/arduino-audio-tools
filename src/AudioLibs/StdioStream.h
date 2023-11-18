@@ -20,10 +20,16 @@ public:
   }
 
   bool begin(AudioInfo cfg) {
-    is_open = true;
     info = cfg;
+    return begin();
+  }
+
+  bool begin() {
+    is_open = true;
     return true;
   }
+
+
   int available() override { return DEFAULT_BUFFER_SIZE; }
 
   size_t readBytes(uint8_t* buffer, size_t len) override {
