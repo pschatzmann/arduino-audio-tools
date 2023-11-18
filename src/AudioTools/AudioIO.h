@@ -40,9 +40,22 @@ public:
 
   void setStream(AudioStream &stream) { p_stream = &stream; }
 
-  void setAudioInfo(AudioInfo info) { p_stream->setAudioInfo(info); }
-  size_t write(const uint8_t *buffer, size_t size) {
+  void setAudioInfo(AudioInfo info) override { p_stream->setAudioInfo(info); }
+
+  size_t write(const uint8_t *buffer, size_t size) override {
     return p_stream->write(buffer, size);
+  }
+
+  int availableForWrite() override {
+    return p_stream->availableForWrite();
+  }
+
+  bool begin() override {
+    return p_stream->begin();
+  }
+
+  bool end() override {
+    return p_stream->end();
   }
 
   /// If true we need to release the related memory in the destructor
