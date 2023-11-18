@@ -54,8 +54,8 @@ public:
     return p_stream->begin();
   }
 
-  bool end() override {
-    return p_stream->end();
+  void end() override {
+    p_stream->end();
   }
 
   /// If true we need to release the related memory in the destructor
