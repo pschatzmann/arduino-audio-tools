@@ -77,15 +77,19 @@ class MiniAudioStream : public AudioStream {
   }
 
   void setAudioInfo(AudioInfo in) override {
+    AudioStream::setAudioInfo(in);
     if (in.sample_rate != info.sample_rate || in.channels != info.channels ||
         in.bits_per_sample != info.bits_per_sample) {
-      end();
-      begin(in);
+      config.copyFrom(in);    
+      if (is_active){
+        end();
+        begin();
+      }
     }
   }
 
   bool begin(MiniAudioConfig info) {
-    this->info = info;
+    AudioStream::setAudioInfo(info);
     this->config = info;
     return begin();
   }
