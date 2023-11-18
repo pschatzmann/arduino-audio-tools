@@ -87,7 +87,11 @@ class MiniAudioStream : public AudioStream {
   bool begin(MiniAudioConfig info) {
     this->info = info;
     this->config = info;
+    return begin();
+  }
 
+  bool begin(){
+    MiniAudioConfig info = config;
     if (info.is_output && !info.is_input)
         config_ma = ma_device_config_init(ma_device_type_playback);
     else if (!info.is_output && info.is_input)

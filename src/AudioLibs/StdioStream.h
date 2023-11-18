@@ -24,7 +24,7 @@ public:
     return begin();
   }
 
-  bool begin() {
+  bool begin() override {
     is_open = true;
     return true;
   }
