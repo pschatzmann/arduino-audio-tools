@@ -251,7 +251,7 @@ class HttpHeader {
                             return false;
                         }
                     }
-                    LOGI("Data availble");
+                    LOGI("Data available: %d", in.available());
                 }
 
                 readLine(in, line, HTTP_MAX_LEN);
