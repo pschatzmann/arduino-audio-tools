@@ -1461,7 +1461,7 @@ class InputMixer : public AudioStream {
       }
 
       if (limit_available_data){
-        len = min(len, availableBytes());
+        len = min((int)len, availableBytes());
       }
 
       // result_len must be full frames
