@@ -21,6 +21,12 @@
  */
 
 /**
+ * @defgroup fec FEC
+ * @ingroup main
+ * @brief Forward Error Correction
+ */
+
+/**
  * @defgroup transform Converting Streams
  * @ingroup main
  * @brief Stream classes which change the input or output

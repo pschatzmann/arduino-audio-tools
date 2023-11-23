@@ -9,9 +9,7 @@ namespace audio_tools {
 /**
  * @brief Forward error correction using Reed-Solomon: 
  * write is encoding and readBytes does the decoding.
- * 
- * 
- * 
+ * @ingroup fec
  * @author Phil Schatzmann
  * @copyright GPLv3
  **/
