@@ -9,7 +9,7 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/Communication.h"
+#include "Communication/ESPNowStream.h"
 
 ESPNowStream now;
 const char *peers[] = {"A8:48:FA:0B:93:02"};

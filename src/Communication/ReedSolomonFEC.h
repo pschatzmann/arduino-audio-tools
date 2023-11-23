@@ -14,15 +14,15 @@ namespace audio_tools {
  * @copyright GPLv3
  **/
 template <int bytecount, int additional_bytes>
-class FECReedSolomon : public Stream {
+class ReedSolomonFEC : public Stream {
   public:
 
-    FECReedSolomon(Stream &stream){
+    ReedSolomonFEC(Stream &stream){
         p_stream = &stream;
         p_print = &stream;
     }
 
-    FECReedSolomon(Print &print){
+    ReedSolomonFEC(Print &print){
         p_print = &print;
     }
 

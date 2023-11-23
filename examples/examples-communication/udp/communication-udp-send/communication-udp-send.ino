@@ -10,7 +10,7 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/Communication.h"
+#include "Communication/UDPStream.h"
 
 const char *ssid = "ssid";
 const char *password = "password";

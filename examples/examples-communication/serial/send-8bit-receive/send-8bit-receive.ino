@@ -3,9 +3,6 @@
  * @author Phil Schatzmann
  * @brief Sending and receiving audio via Serial. You need to connect the RX pin
  * with the TX pin!
- * The sine wave generator is providing the data as fast as possible, therefore we 
- * throttle on the sending side to prevent that the receiver is getting the data
- * too fast. 
  *
  * @version 0.1
  * @date 2022-03-09
@@ -17,12 +14,18 @@
 // #include "AudioLibs/AudioKit.h"
 
 AudioInfo info(22000, 1, 16);
+I2SStream out; // or AudioKitStream
 SineWaveGenerator<int16_t> sineWave(32000);
 GeneratedSoundStream<int16_t> sound(sineWave);
 Throttle throttle(sound);
-I2SStream out;                        // or AudioKitStream
-StreamCopy copierOut(Serial, throttle, 256);  // copies sound into Serial
-StreamCopy copierIn(out, Serial, 256);     // copies sound from Serial
+
+EncoderL8 enc;
+DecoderL8 dec;
+EncodedAudioStream enc_stream(&throttle, &enc);
+EncodedAudioStream dec_stream(&out, &dec);
+
+StreamCopy copierOut(Serial, enc_stream, 256);  // copies sound into Serial
+StreamCopy copierIn(dec_stream, Serial, 256);     // copies sound from Serial
 
 void setup() {
   Serial2.begin(115200);
@@ -32,9 +35,10 @@ void setup() {
   // Serial.begin(baud-rate, protocol, RX pin, TX pin);
   Serial.begin(1000000, SERIAL_8N1);
 
-  // Setup sine wave
   sineWave.begin(info, N_B4);
   throttle.begin(info);
+  encoder.begin(info);
+  decoder.begin(info);
 
   // start I2S
   Serial.println("starting I2S...");

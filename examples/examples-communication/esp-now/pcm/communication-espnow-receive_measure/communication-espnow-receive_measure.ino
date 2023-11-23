@@ -10,7 +10,7 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/Communication.h"
+#include "Communication/ESPNowStream.h"
 
 ESPNowStream now;
 MeasuringStream out;
