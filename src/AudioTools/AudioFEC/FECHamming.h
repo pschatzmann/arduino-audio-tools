@@ -27,14 +27,14 @@ namespace audio_tools {
 */
 
 template <int bytecount, class block_t>
-class Hamming : public Stream {
+class FECHamming : public Stream {
   public:
-    Hamming(Stream &stream){
+    FECHamming(Stream &stream){
         p_stream = &stream;
         p_print = &stream;
     }
 
-    Hamming(Print &print){
+    FECHamming(Print &print){
         p_print = &print;
     }
 
