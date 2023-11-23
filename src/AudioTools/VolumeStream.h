@@ -175,7 +175,7 @@ class VolumeStream : public AudioStream {
             }
         }
 
-        /// Defines the volume for all channels:  needs to be in the range of 0 to 1.0
+        /// Defines the volume for all channels: needs to be in the range of 0 to 1.0 (if allow boost has not been set)
         bool setVolume(float vol){
             bool result;
             // just to make sure that we have a valid start volume before begin
@@ -214,9 +214,17 @@ class VolumeStream : public AudioStream {
             }
         }
 
-        /// Provides the current volume setting
+        /// Provides the current (avg) volume accross all channels
         float volume() {
-            return volume_values.size()==0? 0: volume_values[0];
+            // prevent npe
+            if (volume_values.size()==0) return 0;
+            // calculate avg
+            float total = 0;
+            int cnt = volume_values.size();
+            for (int j=0; j<cnt; j++){
+                total += volume_values[j];
+            }
+            return total / static_cast<float>(cnt);
         }
 
         /// Provides the current volume setting for the indicated channel
