@@ -10,7 +10,7 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/Communication.h"
+#include "Communication/ESPNowStream.h"
 #include "AudioCodecs/CodecSBC.h"
 
 ESPNowStream now;

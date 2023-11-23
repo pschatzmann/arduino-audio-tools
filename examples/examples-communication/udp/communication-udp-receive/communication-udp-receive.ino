@@ -11,7 +11,7 @@
  *  */
 
 #include "AudioTools.h"
-#include "AudioLibs/Communication.h"
+#include "Communication/UDPStream.h"
 // #include "AudioLibs/AudioKit.h"
 
 const char* ssid="SSID";

@@ -9,7 +9,7 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/Communication.h"
+#include "Communication/ESPNowStream.h"
 #include "AudioCodecs/CodecSBC.h"
 
 AudioInfo info(32000,1,16);
