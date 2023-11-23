@@ -134,7 +134,7 @@ class VolumeStream : public AudioStream {
                 return 0;
             }
             size_t result = p_in->readBytes(buffer, length);
-            if (is_started && (info.allow_boost || info.volume < 1.0)) applyVolume(buffer, result);
+            if (isVolumeUpdate()) applyVolume(buffer, result);
             return result;
         }
 
@@ -145,7 +145,7 @@ class VolumeStream : public AudioStream {
                 LOGE("NPE");
                 return 0;
             }
-            if (is_started && (info.allow_boost || info.volume < 1.0)) applyVolume(buffer,size);
+            if (isVolumeUpdate()) applyVolume(buffer,size);
             return p_out->write(buffer, size);
         }
 
@@ -176,16 +176,22 @@ class VolumeStream : public AudioStream {
         }
 
         /// Defines the volume for all channels:  needs to be in the range of 0 to 1.0
-        void setVolume(float vol){
+        bool setVolume(float vol){
+            bool result;
             // just to make sure that we have a valid start volume before begin
             info.volume = vol; 
             for (int j=0;j<info.channels;j++){
-              setVolume(vol, j);
+              result = setVolume(vol, j);
             }
+            return result;
         }
 
         /// Sets the volume for one channel
-        void setVolume(float vol, int channel){
+        bool setVolume(float vol, int channel){
+            if ((vol > 1.0 && !info.allow_boost) || vol < 0) {
+                LOGE("Invalid volume: %f", vol);
+                return false;
+            }
             if (channel<info.channels){
               setupVectors();
               float volume_value = volumeValue(vol);
@@ -193,16 +199,18 @@ class VolumeStream : public AudioStream {
               float factor = volumeControl().getVolumeFactor(volume_value);
               volume_values[channel]=volume_value;
               #ifdef PREFER_FIXEDPOINT
-              //convert float to fixed point 2.6
-              //Fixedpoint-Math from https://github.com/earlephilhower/ESP8266Audio/blob/0abcf71012f6128d52a6bcd155ed1404d6cc6dcd/src/AudioOutput.h#L67
-              if(factor > 4.0) factor = 4.0;//factor can only be >1 if allow_boost == true TODO: should we update volume_values[channel] if factor got clipped to 4.0?
-              uint8_t factorF2P6 = (uint8_t) (factor*(1<<6));
-              factor_for_channel[channel] = factorF2P6;
+                //convert float to fixed point 2.6
+                //Fixedpoint-Math from https://github.com/earlephilhower/ESP8266Audio/blob/0abcf71012f6128d52a6bcd155ed1404d6cc6dcd/src/AudioOutput.h#L67
+                if(factor > 4.0) factor = 4.0;//factor can only be >1 if allow_boost == true TODO: should we update volume_values[channel] if factor got clipped to 4.0?
+                uint8_t factorF2P6 = (uint8_t) (factor*(1<<6));
+                factor_for_channel[channel] = factorF2P6;
               #else
-              factor_for_channel[channel]=factor;
+                  factor_for_channel[channel]=factor;
               #endif
+              return true;
             } else {
               LOGE("Invalid channel %d - max: %d", channel, info.channels-1);
+              return false;
             }
         }
 
@@ -225,13 +233,27 @@ class VolumeStream : public AudioStream {
         CachedVolumeControl cached_volume{pot_vc};
         Vector<float> volume_values;
         #ifdef PREFER_FIXEDPOINT
-        Vector<uint8_t> factor_for_channel; //Fixed point 2.6
+            Vector<uint8_t> factor_for_channel; //Fixed point 2.6
         #else
-        Vector<float> factor_for_channel;
+            Vector<float> factor_for_channel;
         #endif
         bool is_started = false;
         float max_value = 32767; // max value for clipping
-        int max_channels=0;
+        int max_channels = 0;
+
+        // checks if volume needs to be updated
+        bool isVolumeUpdate(){
+            if (!is_started) return false;
+            if (isAllChannelsFullVolume()) return false;
+            return true;
+        }
+
+        bool isAllChannelsFullVolume(){
+            for (int ch=0;ch<info.channels;ch++){
+                if (volume_values[ch]!=1.0) return false;
+            }
+            return true;
+        }
 
         /// Resizes the vectors
         void setupVectors() {
