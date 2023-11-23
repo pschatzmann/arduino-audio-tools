@@ -11,7 +11,7 @@
 namespace audio_tools {
 
 /**
- * Hamming forware error correction. Inspired by
+ * @brief Hamming forware error correction. Inspired by
  * https://github.com/nasserkessas/hamming-codes
  * 
  * Hamming<1024,uint16_t> hamming; // block_ts of 1k with block_tsize 16bits = 31.25% redundency
@@ -23,6 +23,7 @@ namespace audio_tools {
  * 32	6	18.75%
  * 64	7	10.94%
  * 
+ * @ingroup fec
 */
 
 template <int bytecount, class block_t>
