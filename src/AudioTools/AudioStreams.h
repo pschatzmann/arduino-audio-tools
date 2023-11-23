@@ -992,7 +992,7 @@ class ConverterStream : public AudioStream {
 };
 
 /**
- * @brief Class which measures the truput
+ * @brief Class which measures the thruput
  * @author Phil Schatzmann
  * @copyright GPLv3
  * @ingroup io
@@ -1653,7 +1653,8 @@ class InputMerge : public AudioStream {
 
 
 /**
- * @brief CallbackStream: A Stream that allows to register callback methods for accessing and providing data
+ * @brief CallbackStream: A Stream that allows to register callback methods for accessing and providing data. 
+ * The callbacks can be lambda expressions.
  * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -1661,6 +1662,19 @@ class InputMerge : public AudioStream {
 class CallbackStream : public AudioStream {
   public: 
     CallbackStream() = default;
+
+    /// Allows to change the audio before sending it to the output or before getting it from the original input
+    CallbackStream(Stream &io, size_t (*cb_update)(uint8_t* data, size_t len)) {
+      p_stream = &io;
+      p_out = &io;
+      setUpdateCallback(cb_update);
+    }
+
+    /// Allows to change the audio before sending it to the output
+    CallbackStream(Print &out, size_t (*cb_update)(uint8_t* data, size_t len)) {
+      p_out = &out;
+      setUpdateCallback(cb_update);
+    }
 
     CallbackStream(size_t (*cb_read)(uint8_t* data, size_t len), size_t (*cb_write)(const uint8_t* data, size_t len)) {
       setWriteCallback(cb_write);
@@ -1673,6 +1687,10 @@ class CallbackStream : public AudioStream {
 
     void setReadCallback(size_t (*cb_read)(uint8_t* data, size_t len)){
       this->cb_read = cb_read;
+    }
+
+    void setUpdateCallback(size_t (*cb_update)(uint8_t* data, size_t len)){
+      this->cb_update = cb_update;
     }
 
     virtual bool begin(AudioInfo info) {
@@ -1688,24 +1706,68 @@ class CallbackStream : public AudioStream {
 
     size_t readBytes(uint8_t* data, size_t len) override {
       if (!active) return 0;
+      // provide data from callback
       if (cb_read){
         return cb_read(data, len);
       }
-      return 0;
+      // provide data from source
+      size_t result = 0;
+      if (p_stream){
+        result = p_stream->readBytes(data , len);
+      }
+      if (cb_update){
+        result = cb_update(data, result);
+      }
+      return result;
     }
 
     size_t write(const uint8_t* data, size_t len) override {
       if (!active) return 0;
+      // write to callback
       if (cb_write){
         return cb_write(data, len);
       }
+      // write to output
+      if(p_out){
+        size_t result = len;
+        if (cb_update) {
+          result = cb_update((uint8_t*)data, len);
+        }
+        return p_out->write(data, result);
+      }
+      // no processing possible  
       return 0;
+    }
+
+    /// Defines/Changes the input & output
+    void setStream(Stream &in){
+        p_stream = &in;
+        p_out = &in;
+    }
+
+    /// Defines/Changes the output target
+    void setOutput(Print &out){
+        p_out = &out;
+    }
+    
+    /// same as setStream        
+    void setOutput(Stream &in){
+        p_stream = &in;
+        p_out = &in;
+    }
+
+    /// same as set Output
+    void setStream(Print &out){
+        p_out = &out;
     }
 
   protected:
     bool active=true;
     size_t (*cb_write)(const uint8_t* data, size_t len) = nullptr;
     size_t (*cb_read)(uint8_t* data, size_t len) = nullptr;
+    size_t (*cb_update)(uint8_t* data, size_t len) = nullptr;
+    Stream *p_stream = nullptr;
+    Print *p_out = nullptr;
 };
 
 /**
