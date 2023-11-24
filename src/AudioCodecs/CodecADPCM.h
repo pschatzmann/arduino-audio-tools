@@ -4,6 +4,8 @@
 
 namespace audio_tools {
 
+static const uint8_t Magic[] = { 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0x88 };  // to sync block headers, each byte different
+
 /**
  * @brief Decoder for ADPCM. Depends on https://github.com/pschatzmann/adpcm
  * @ingroup codecs
@@ -29,6 +31,7 @@ class ADPCMDecoder : public AudioDecoderExt {
   void begin() override {
     TRACEI();
     current_byte = 0;
+    magic_pos = 0;
     LOGI("sample_rate: %d, channels: %d", info.sample_rate, info.channels);
     decoder.begin(info.sample_rate, info.channels);
     LOGI("frameSize: %d", (int)decoder.frameSize());
@@ -72,10 +75,20 @@ class ADPCMDecoder : public AudioDecoderExt {
   int current_byte = 0;
   int block_size = 0;
   bool is_started = false;
+  size_t magic_pos = 0;
 
-  bool decode(uint8_t byte) {
+  void decode(uint8_t byte) {
+    if( !current_byte ) {
+      if( magic_pos != sizeof(Magic) ) {
+        if( byte != Magic[magic_pos++] ) {
+          magic_pos = 0;
+        }
+        return;
+      }
+      magic_pos = 0;
+    }
+
     adpcm_block[current_byte++] = byte;
-
     if (current_byte >= block_size) {
       TRACED();
       AVFrame &frame = decoder.decode(&adpcm_block[0], block_size);
@@ -90,7 +103,6 @@ class ADPCMDecoder : public AudioDecoderExt {
       // restart from array begin
       current_byte = 0;
     }
-    return true;
   }
 };
 
@@ -164,7 +176,13 @@ class ADPCMEncoder : public AudioEncoderExt {
   int current_sample = 0;
   int total_samples=0;
 
-  bool encode(int16_t sample) {
+  void encode(int16_t sample) {
+    if( !current_sample ) {
+      size_t written = p_print->write(Magic, sizeof(Magic));
+      if (written != sizeof(Magic)) {
+        LOGE("encode %d->%d", (int)sizeof(Magic), (int)written);
+      }
+    }
     pcm_block[current_sample++] = sample;
     if (current_sample >= total_samples) {
       TRACED();
@@ -178,7 +196,6 @@ class ADPCMEncoder : public AudioEncoderExt {
       // restart from array begin
       current_sample = 0;
     }
-    return true;
   }
 };
 
