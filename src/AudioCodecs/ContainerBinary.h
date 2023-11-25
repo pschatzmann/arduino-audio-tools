@@ -71,6 +71,8 @@ static uint8_t checkSum(const uint8_t *data, size_t len) {
   }
   return result;
 }
+/// @brief Error types
+enum BinaryContainerEncoderError { InvalidHeader, InvalidChecksum, DataMissing};
 
 /**
  * @brief Wraps the encoded data into Config, Data, and Meta segments so that we
@@ -238,6 +240,10 @@ public:
 
   operator bool() { return true; };
 
+  void addErrorHandler(void (*error_handler)(BinaryContainerEncoderError error, BinaryContainerDecoder* source)){
+    this->error_handler = error_handler;
+  }
+
 protected:
   bool is_first = true;
   AudioInfo info;
@@ -247,6 +253,7 @@ protected:
   void (*meta_callback)(uint8_t *, int) = nullptr;
   SingleBuffer<uint8_t> buffer{0};
   Print *p_out = nullptr;
+  void (*error_handler)(BinaryContainerEncoderError error, BinaryContainerDecoder* source) = nullptr;
 
 
   bool parseBuffer() {
@@ -267,6 +274,7 @@ protected:
       // check header
       if (!isValidHeader()) {
         LOGW("invalid header: %d", header.type);
+        if (error_handler) error_handler(InvalidHeader, this);
         nextRecord();
         return false;
       };
@@ -279,9 +287,12 @@ protected:
       } else {
         LOGD("not enough data - available %d / req: %d", buffer.available(),
              header.len);
+        if (error_handler) error_handler(DataMissing, this);
+
       }
     } else {
       LOGD("not enough data for header: %d", buffer.available());
+      if (error_handler) error_handler(DataMissing, this);
     }
     return result;
   }
@@ -323,6 +334,7 @@ protected:
         buffer.clearArray(data_len);
       } else {
         LOGW("invalid checksum");
+        if (error_handler) error_handler(InvalidChecksum, this);
         // move to next record
         nextRecord();
         return false;

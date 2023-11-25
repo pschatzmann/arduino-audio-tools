@@ -16,10 +16,10 @@
 #include "AudioTools.h"
 // #include "AudioLibs/AudioKit.h"
 
-AudioInfo info(8000, 1, 16);
+AudioInfo info(22000, 1, 16);
 SineWaveGenerator<int16_t> sineWave(32000);
 GeneratedSoundStream<int16_t> sound(sineWave);
-I2SStream out;// or AudioKitStream
+I2SStream out; // or AnalogAudioStream, AudioKitStream etc
 auto &serial = Serial2;
 Throttle throttle(serial);
 StreamCopy copierOut(throttle, sound, 256);  // copies sound into Serial
@@ -31,7 +31,7 @@ void setup() {
 
   // Note the format for setting a serial port is as follows:
   // Serial.begin(baud-rate, protocol, RX pin, TX pin);
-  Serial2.begin(1000000, SERIAL_8N1 );
+  Serial2.begin(3000000, SERIAL_8N1 );
 
   // Setup sine wave
   sineWave.begin(info, N_B4);

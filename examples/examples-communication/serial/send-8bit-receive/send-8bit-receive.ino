@@ -7,7 +7,7 @@
  * We send 8bit data over the wire, so any (small) data loss will not be audible
  *
  * @version 0.1
- * @date 2022-03-09
+ * @date 2023-11-25
  *
  * @copyright Copyright (c) 2022
  */
@@ -15,8 +15,8 @@
 #include "AudioTools.h"
 // #include "AudioLibs/AudioKit.h"
 
-AudioInfo info(8000, 1, 16);
-I2SStream out; // or AudioKitStream
+AudioInfo info(44100, 2, 16);
+I2SStream out; // or AnalogAudioStream, AudioKitStream etc
 SineWaveGenerator<int16_t> sineWave(32000);
 GeneratedSoundStream<int16_t> sound(sineWave);
 auto &serial = Serial2;
@@ -34,7 +34,7 @@ void setup() {
 
   // Note the format for setting a serial port is as follows:
   // Serial.begin(baud-rate, protocol, RX pin, TX pin);
-  Serial2.begin(1000000, SERIAL_8N1);
+  Serial2.begin(3000000, SERIAL_8N1);
 
   sineWave.begin(info, N_B4);
   throttle.begin(info);
