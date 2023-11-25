@@ -20,7 +20,12 @@
 
 namespace audio_tools {
 
-enum class ContainerType : uint8_t { Header = 1, Audio = 2, Meta = 3, Undefined = 0 };
+enum class ContainerType : uint8_t {
+  Header = 1,
+  Audio = 2,
+  Meta = 3,
+  Undefined = 0
+};
 
 struct CommonHeader {
   CommonHeader() = default;
@@ -28,9 +33,10 @@ struct CommonHeader {
     this->type = type;
     this->len = len;
   }
-  char header = '\n';
+  char header[2] = {'\r','\n'};
   ContainerType type;
   uint16_t len;
+  uint8_t checksum = 0;
 };
 
 struct SimpleContainerConfig {
@@ -47,15 +53,24 @@ struct SimpleContainerMetaDataHeader {
   CommonHeader common{ContainerType::Meta, 0};
 };
 
-struct ProcessedResult {
-  ContainerType type = ContainerType::Undefined;
-  // total length incl header
-  int total_len = 0;
-  // processed bytes incl header of last step
-  int processed = 0;
-  // still (total) open
-  int open = 0;
-};
+// struct ProcessedResult {
+//   ContainerType type = ContainerType::Undefined;
+//   // total length incl header
+//   int total_len = 0;
+//   // processed bytes incl header of last step
+//   int processed = 0;
+//   // still (total) open
+//   int open = 0;
+// };
+
+/// @brief  Calculates the checksum
+static uint8_t checkSum(const uint8_t *data, size_t len) {
+  uint8_t result = 0;
+  for (int j = 0; j < len; j++) {
+    result ^= data[j];
+  }
+  return result;
+}
 
 /**
  * @brief Wraps the encoded data into Config, Data, and Meta segments so that we
@@ -68,18 +83,14 @@ struct ProcessedResult {
  * @copyright GPLv3
  */
 class BinaryContainerEncoder : public AudioEncoder {
- public:
+public:
   BinaryContainerEncoder() = default;
   BinaryContainerEncoder(AudioEncoder &encoder) { p_codec = &encoder; }
   BinaryContainerEncoder(AudioEncoder *encoder) { p_codec = encoder; }
 
   void setOutput(Print &outStream) {
-    LOGD("BinaryContainerEncoder::setOutput: %d",is_initial_output);
-    if (is_initial_output) {
-      setupIntialOutputStream(outStream);
-    } else {
-      p_final_print = &outStream;
-    }
+    LOGD("BinaryContainerEncoder::setOutput");
+    p_out = &outStream;
   }
 
   void begin(AudioInfo info) {
@@ -89,14 +100,15 @@ class BinaryContainerEncoder : public AudioEncoder {
 
   void begin() override {
     TRACED();
-    target.begin();
+    // target.begin();
+    p_codec->begin();
+    p_codec->setAudioInfo(cfg.info);
     is_beginning = true;
   }
 
   void setAudioInfo(AudioInfo info) override {
     TRACED();
     if (info != audioInfo()) {
-      target.setAudioInfo(info);
       cfg.info = info;
     }
   }
@@ -106,14 +118,11 @@ class BinaryContainerEncoder : public AudioEncoder {
   /// Adds meta data segment
   size_t writeMeta(const uint8_t *data, size_t len) {
     LOGD("BinaryContainerEncoder::writeMeta: %d", (int)len);
-    meta.common.len = len;
-    uint8_t tmp_array[sizeof(meta)+len];
-    //output((uint8_t *)&meta, sizeof(meta));
-    //output((uint8_t *)&data, len);
-    // output in one write
+    meta.common.len = len + sizeof(SimpleContainerMetaDataHeader);
+    uint8_t tmp_array[meta.common.len];
     memcpy(tmp_array, &meta, sizeof(meta));
-    memcpy(tmp_array+sizeof(meta), data, len);
-    output(tmp_array, sizeof(tmp_array));
+    memcpy(tmp_array + sizeof(meta), data, len);
+    output(tmp_array, meta.common.len);
     return len;
   }
 
@@ -128,16 +137,13 @@ class BinaryContainerEncoder : public AudioEncoder {
     return len;
   }
 
-  void end() {
-    target.end();
-    is_initial_output = true;
-  }
+  void end() { p_codec->end(); }
 
   operator bool() { return true; };
 
   virtual const char *mime() { return "audio/binary"; };
 
- protected:
+protected:
   uint64_t packet_count = 0;
   bool is_beginning = true;
   int repeat_header;
@@ -145,43 +151,36 @@ class BinaryContainerEncoder : public AudioEncoder {
   SimpleContainerDataHeader dh;
   SimpleContainerMetaDataHeader meta;
   AudioEncoder *p_codec = nullptr;
-  AudioWriter *p_print1 = nullptr;
-  AudioWriter *p_print2 = nullptr;
-  ContainerTargetPrint target;
-  bool is_initial_output = true;
-  Print *p_final_print = nullptr;
-
-  void setupIntialOutputStream(Print &outStream) {
-    p_print1 = p_codec;
-    p_print2 = this;
-    if (p_codec!=nullptr)
-      target.setupOutput(p_print1, p_print2, outStream);
-    else
-      target.setupOutput(p_print2, outStream);
-
-    is_initial_output = false;
-  }
+  Print *p_out = nullptr;
 
   void writeAudio(const uint8_t *data, size_t len) {
-    TRACED();
+    LOGD("writeAudio: %d", (int)len);
+    // encode data
+    SingleBuffer<uint8_t> tmp_buffer{(int)len};
+    QueueStream<uint8_t> tmp{tmp_buffer};
+    tmp.begin();
+    p_codec->setOutput(tmp);
+    p_codec->write(data, len);
+
     // output of audio data header
-    dh.common.len = len;
+    dh.common.len = tmp.available() + sizeof(CommonHeader);
+    dh.common.checksum = checkSum(tmp_buffer.data(), tmp_buffer.available());
     output((uint8_t *)&dh, sizeof(dh));
 
     // output of data
-    output(data, len);
+    output(tmp_buffer.data(), tmp_buffer.available());
   }
 
   void writeHeader() {
-    TRACED();
+    LOGD("writeHeader");
     output((uint8_t *)&cfg, sizeof(cfg));
   }
 
   size_t output(const uint8_t *data, size_t len) {
-    TRACED();
-    if (p_final_print != nullptr)
-      p_final_print->write((uint8_t *)data, len);
-    else
+    if (p_out != nullptr) {
+      int written = p_out->write((uint8_t *)data, len);
+      LOGD("output: %d -> %d", (int)len, written);
+    } else
       LOGW("output not defined");
     return len;
   }
@@ -195,7 +194,7 @@ class BinaryContainerEncoder : public AudioEncoder {
  * @copyright GPLv3
  */
 class BinaryContainerDecoder : public AudioDecoder {
- public:
+public:
   BinaryContainerDecoder() = default;
   BinaryContainerDecoder(AudioDecoder &decoder) { p_codec = &decoder; }
   BinaryContainerDecoder(AudioDecoder *decoder) { p_codec = decoder; }
@@ -204,12 +203,8 @@ class BinaryContainerDecoder : public AudioDecoder {
   // output defined in the EnocdedAudioStream and then to define the
   // real output in the output chain.
   void setOutput(Print &outStream) {
-    LOGD("BinaryContainerDecoder::setOutput: %d",is_initial_output);
-    if (is_initial_output) {
-      setupIntialOutputStream(outStream);
-    } else {
-      p_final_print = &outStream;
-    }
+    LOGD("BinaryContainerDecoder::setOutput")
+    p_out = &outStream;
   }
 
   void setMetaCallback(void (*callback)(uint8_t *, int)) {
@@ -219,216 +214,160 @@ class BinaryContainerDecoder : public AudioDecoder {
   void setNotifyAudioChange(AudioInfoSupport &bi) {}
 
   void begin() {
+    TRACED();
     is_first = true;
-    target.begin();
   }
 
-  void end() {
-    target.end();
-    is_initial_output = true;
-  }
+  void end() { TRACED(); }
 
   size_t write(const void *data, size_t len) {
+    LOGD("write: %d", (int)len);
     uint8_t *data8 = (uint8_t *)data;
-    int open = len;
-    int processed = 0;
-
-    // on first call we try to synchronize the delimiter; hopefully however
-    // the new line is on the first char.
-    if (is_first) {
-      is_first = false;
-      // ignore the data before the first newline
-      uint8_t *ptr = (uint8_t *)memchr(data8, '\n', len);
-      if (ptr != nullptr) {
-        processed = ptr - data8;
-        open -= processed;
-      }
-    } else {
-      // process remaining data from last run
-      while (result.open > 0) {
-        result = processOpen(result, data8 + processed, open);
-        open -= result.processed;
-        processed += result.processed;
-      }
+    if (buffer.size() < len) {
+      buffer.resize(
+          std::max(static_cast<int>(DEFAULT_BUFFER_SIZE + header_size),
+                   static_cast<int>(len * 4 + header_size)));
     }
-
-    // process new data startubg with newline
-    while (open > 0) {
-      result = processData(data8 + processed, open);
-      open -= result.processed;
-      processed += result.processed;
-    }
-    return len;
+    size_t result = buffer.writeArray(data8, len);
+    while (parseBuffer())
+      ;
+    return result;
   }
 
   AudioInfo audioInfo() { return info; }
 
   operator bool() { return true; };
 
- protected:
+protected:
   bool is_first = true;
-  ProcessedResult result;
   AudioInfo info;
   CommonHeader header;
   const size_t header_size = sizeof(header);
   AudioDecoder *p_codec = nullptr;
   void (*meta_callback)(uint8_t *, int) = nullptr;
-  SingleBuffer<uint8_t> frame{0};
-  AudioWriter *p_print1 = nullptr;
-  AudioWriter *p_print2 = nullptr;
+  SingleBuffer<uint8_t> buffer{0};
   Print *p_out = nullptr;
-  ContainerTargetPrint target;
-  bool is_initial_output = true;
-  Print *p_final_print = nullptr;
 
-  void setupIntialOutputStream(Print &outStream) {
-    p_out = &outStream;
-    if (p_codec != nullptr) {
-      p_print1 = p_codec;
-      p_print2 = this;
-      target.setupOutput(p_print1, p_print2, outStream);
-    } else {
-      p_print1 = this;
-      target.setupOutput(p_print1, outStream);
+
+  bool parseBuffer() {
+    LOGD("parseBuffer");
+    bool result = false;
+
+    Str str{(const char *)buffer.data()};
+    int start = str.indexOf("\r\n");
+    LOGD("start: %d", start);
+    if (start < 0) {
+      return false;
     }
-    is_initial_output = false;
-  }
+    // get next record
+    if (buffer.available() - start > sizeof(header)) {
+      // determine header
+      memmove((uint8_t *)&header, buffer.data() + start, sizeof(header));
 
-  // loads the data into the buffer and writes it if complete
-  ProcessedResult processData(uint8_t *data8, size_t len) {
-    TRACED();
-    ProcessedResult result = loadData(data8, len);
-    writeData(result);
-    return result;
-  }
+      // check header
+      if (!isValidHeader()) {
+        LOGW("invalid header: %d", header.type);
+        nextRecord();
+        return false;
+      };
 
-  // loads the data
-  ProcessedResult loadData(uint8_t *data8, size_t len) {
-    TRACED();
-    ProcessedResult result;
-    if (data8[0] == '\n') {
-      memcpy(&header, data8, header_size);
-      result.total_len = header_size + header.len;
-      LOGD("header.len: %d, result.total_len: %d, len: %d", (int)header.len,
-           (int)result.total_len, (int)len);
-      if (result.total_len <= len) {
-        result.processed = result.total_len;
-        result.open = 0;
+      if (buffer.available() - start >= header.len) {
+        // move to start of frame
+        buffer.clearArray(start);
+        // process frame
+        result = processData();
       } else {
-        result.processed = len;
-        result.open = result.total_len - len;
-      }
-      result.type = checkType(header.type);
-      if (result.type != ContainerType::Undefined) {
-        LOGD("header.len: %d", header.len);
-        if (frame.size() < header.len) {
-          frame.resize(header.len);
-        }
-        if (result.processed - header_size > 0)
-          frame.writeArray(data8 + header_size, result.processed - header_size);
+        LOGD("not enough data - available %d / req: %d", buffer.available(),
+             header.len);
       }
     } else {
-      LOGW("data ignored");
-      result.type = ContainerType::Undefined;
+      LOGD("not enough data for header: %d", buffer.available());
     }
     return result;
   }
 
-  // processes the completed data from frame buffer: e.g. writes it to the
-  // output
-  bool writeData(ProcessedResult result) {
+  // processes the completed data from the buffer: e.g. writes it
+  bool processData() {
+    LOGD("processData");
     bool rc = false;
-    if (result.open == 0 && frame.available() > 0) {
-      TRACED();
-      switch (result.type) {
-        case ContainerType::Header: {
-          LOGD("Header");
-          // We expect that the header is never split because it is at the
-          // start
-          SimpleContainerConfig config;
-          assert(result.open == 0);
-          memmove(&config, frame.data(), sizeof(config));
-          info = config.info;
-          if (p_notify) {
-            p_notify->setAudioInfo(info);
-          }
-          info.logInfo();
-          frame.clear();
-          rc = true;
-        } break;
-
-        case ContainerType::Audio: {
-          LOGD("Audio");
-          output(frame.data(), frame.available());
-          frame.clear();
-          rc = true;
-        } break;
-
-        case ContainerType::Meta: {
-          LOGD("Meta");
-          if (meta_callback!=nullptr) {
-            meta_callback(frame.data(), frame.available());
-          }
-          frame.clear();
-          rc = true;
-        } break;
+    switch (header.type) {
+    case ContainerType::Header: {
+      LOGD("Header");
+      SimpleContainerConfig config;
+      buffer.readArray((uint8_t *)&config, sizeof(config));
+      info = config.info;
+      if (p_notify) {
+        p_notify->setAudioInfo(info);
       }
+      info.logInfo();
+      p_codec->setAudioInfo(info);
+      p_codec->begin();
+      rc = true;
+    } break;
+
+    case ContainerType::Audio: {
+      LOGD("Audio");
+      buffer.clearArray(sizeof(header));
+      int data_len = header.len - header_size;
+      uint8_t crc = checkSum(buffer.data(), data_len);
+      if (header.checksum == crc) {
+        // decode
+        SingleBuffer<uint8_t> tmp_buffer{data_len * 5};
+        QueueStream<uint8_t> tmp{tmp_buffer};
+        tmp.begin();
+        p_codec->setOutput(tmp);
+        p_codec->write(buffer.data(), data_len);
+
+        // output decoded data
+        output(tmp_buffer.data(), tmp_buffer.available());
+        buffer.clearArray(data_len);
+      } else {
+        LOGW("invalid checksum");
+        // move to next record
+        nextRecord();
+        return false;
+      }
+      rc = true;
+    } break;
+
+    case ContainerType::Meta: {
+      LOGD("Meta");
+      buffer.clearArray(sizeof(header));
+      int data_len = header.len - header_size;
+      if (meta_callback != nullptr) {
+        meta_callback(buffer.data(), data_len);
+      }
+      buffer.clearArray(data_len);
+      rc = true;
+    } break;
     }
     return rc;
   }
 
-  // processes the reaminder of a split segment
-  ProcessedResult processOpen(ProcessedResult in, uint8_t *data8, size_t len) {
-    TRACED();
-    ProcessedResult result = loadOpen(in, data8, len);
-    writeData(result);
-    return result;
-  }
-
-  // if a segment is split we process the remaining missing part
-  ProcessedResult loadOpen(ProcessedResult in, uint8_t *data8, size_t len) {
-    TRACED();
-    ProcessedResult result = in;
-    int to_process;
-    if (in.open <= len) {
-      result.open = 0;
-      result.processed = in.open;
-    } else {
-      result.open = in.open - len;
-      result.processed = len;
-    }
-    LOGD("in.type: %d, len: %d", in.type, result.processed);
-    if (in.type != ContainerType::Undefined) {
-      frame.writeArray(data8, result.processed);
-    } else {
-      LOGW("Unsupported tye");
-    }
-    return result;
-  }
-
-  // checks the type
-  ContainerType checkType(ContainerType type) {
-    ContainerType result = ContainerType::Undefined;
+  bool isValidHeader() {
     switch (header.type) {
-      case ContainerType::Header:
-        result = ContainerType::Header;
-        break;
-      case ContainerType::Audio:
-        result = ContainerType::Audio;
-        break;
-      case ContainerType::Meta:
-        result = ContainerType::Meta;
-        break;
+    case ContainerType::Header:
+      return header.checksum == 0;
+    case ContainerType::Audio:
+      return true;
+    case ContainerType::Meta:
+      return header.checksum == 0;
     }
-    return result;
+    return false;
+  }
+
+  void nextRecord() {
+    TRACED();
+    while (buffer.available() && buffer.peek() != '\n')
+      buffer.read();
   }
 
   // writes the data to the decoder which forwards it to the output; if there
   // is no coded we write to the output instead
   size_t output(uint8_t *data, size_t len) {
-    LOGD("BinaryContainerDecoder::output: %d", (int)len);
-    if (p_final_print != nullptr)
-      p_final_print->write((uint8_t *)data, len);
+    LOGD("output: %d", (int)len);
+    if (p_out != nullptr)
+      p_out->write((uint8_t *)data, len);
     else
       LOGW("output not defined");
 
@@ -436,4 +375,4 @@ class BinaryContainerDecoder : public AudioDecoder {
   }
 };
 
-}  // namespace audio_tools
+} // namespace audio_tools

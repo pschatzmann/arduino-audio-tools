@@ -3,28 +3,25 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-/* HDLC Asynchronous framing */
-/* The frame boundary octet is 01111110, (7E in hexadecimal notation) */
+/// HDLC Asynchronous framing: The frame boundary octet is 01111110, (7E in
+/// hexadecimal notation)
 #define FRAME_BOUNDARY_OCTET 0x7E
 
-/* A "control escape octet", has the bit sequence '01111101', (7D hexadecimal)
- */
+/// A "control escape octet", has the bit sequence '01111101', (7D hexadecimal)
 #define CONTROL_ESCAPE_OCTET 0x7D
 
-/* If either of these two octets appears in the transmitted data, an escape
- * octet is sent, */
-/* followed by the original data octet with bit 5 inverted */
+/// If either of these two octets appears in the transmitted data, an escape
+/// octet is sent, followed by the original data octet with bit 5 inverted
 #define INVERT_OCTET 0x20
 
-/* The frame check sequence (FCS) is a 16-bit CRC-CCITT */
-/* AVR Libc CRC function is _crc_ccitt_update() */
-/* Corresponding CRC function in Qt (www.qt.io) is qChecksum() */
+/// The frame check sequence (FCS) is a 16-bit CRC-CCITT
+/// AVR Libc CRC function is _crc_ccitt_update()
+/// Corresponding CRC function in Qt (www.qt.io) is qChecksum()
 #define CRC16_CCITT_INIT_VAL 0xFFFF
 
-/* 16bit low and high bytes copier */
+/// 16bit low and high bytes copier
 #define low(x) ((x)&0xFF)
 #define high(x) (((x) >> 8) & 0xFF)
-
 #define lo8(x) ((x)&0xff)
 #define hi8(x) ((x) >> 8)
 
@@ -38,15 +35,16 @@ namespace audio_tools {
 
 class HDLCStream : public Stream {
 public:
+  /// Defines the output for the hdlc encoding
   HDLCStream(Print &out, uint16_t max_frame_length) {
-    p_out = &out;
+    setOutput(out);
     this->max_frame_length = max_frame_length;
     begin();
   }
 
+  /// Defines the input for the hdlc decoding
   HDLCStream(Stream &io, uint16_t max_frame_length) {
-    p_out = &io;
-    p_in = &io;
+    setStream(io);
     this->max_frame_length = max_frame_length;
     begin();
   }
@@ -54,8 +52,10 @@ public:
   bool begin() {
     this->frame_position = 0;
     this->frame_checksum = CRC16_CCITT_INIT_VAL;
-    this->has_escape_character = false;
-    this->frame_buffer.resize(max_frame_length + 1);
+    this->escape_character = false;
+    if (frame_buffer.size() == 0) {
+      frame_buffer.resize(max_frame_length + 1);
+    }
     return p_out != nullptr || p_in != nullptr;
   }
 
@@ -65,35 +65,50 @@ public:
     return p_out == nullptr ? 0 : DEFAULT_BUFFER_SIZE;
   }
 
+  /// Sends the encoded data to the defined output
   size_t write(const uint8_t *data, size_t len) override {
+    LOGD("HDLCStream::write: %zu", len);
+
     for (int j = 0; j < len; j++) {
-      frame_buffer.write(data[j]);
-      if (frame_buffer.availableForWrite() == 1) {
-        sendFrame(frame_buffer.data(), frame_buffer.available());
+      bool ok = frame_buffer.write(data[j]);
+      assert(ok);
+      if (frame_buffer.available() == max_frame_length) {
+        sendFrame(frame_buffer.data(), max_frame_length);
+        frame_buffer.reset();
       }
     }
     return len;
   }
 
   int available() override {
-    return p_in == nullptr ? 0 : frame_buffer.available();
+    return p_in == nullptr ? 0 : max_frame_length;
   }
 
+  /// Provides the decoded data
   size_t readBytes(uint8_t *data, size_t len) override {
-    if (p_in == nullptr)
+    if (p_in == nullptr) {
+      LOGI("No data source");
       return 0;
-    int max = std::min((size_t)max_frame_length, len);
-    uint8_t tmp[max];
-    int result = p_in->readBytes(tmp, max);
-    for (int j = 0; j < result; j++) {
-      int result = charReceiver(tmp[j]);
-      if (result > 0) {
-        memcpy(data, frame_buffer.data(), result);
-        frame_buffer.reset();
-        return result;
+    }
+
+    int result = 0;
+    // process bytes from input
+    while (result == 0) {
+      int ch = p_in->read();
+      // ch is -1 when no data
+      if (ch >= 0){        
+        result = charReceiver(ch);
+        if (result > 0) {
+          result = frame_buffer.readArray(data, result);
+          break;
+        }
+      } else {
+        break;
       }
     }
-    return 0;
+    LOGD("HDLCStream::readBytes: %zu -> %d", len, result);
+    return result;
+    ;
   }
 
   void setStream(Stream &io) {
@@ -121,62 +136,63 @@ public:
 private:
   Print *p_out = nullptr;
   Stream *p_in = nullptr;
-  bool has_escape_character;
-  SingleBuffer<uint8_t> frame_buffer;
-  uint8_t frame_position;
+  bool escape_character = false;
+  SingleBuffer<uint8_t> frame_buffer{0};
+  uint8_t frame_position = 0;
   // 16bit CRC sum for _crc_ccitt_update
   uint16_t frame_checksum;
   uint16_t max_frame_length;
 
-  /// Function to find valid HDLC frame from incoming data
+  /// Function to find valid HDLC frame from incoming data: returns the available result bytes in the buffer 
   int charReceiver(uint8_t data) {
-    /* FRAME FLAG */
-    bool result = 0;
+    int result = 0;
+    uint8_t *frame_buffer_data = frame_buffer.address();
+    LOGD("charReceiver: %c", data);
+
     if (data == FRAME_BOUNDARY_OCTET) {
-      if (this->has_escape_character == true) {
-        this->has_escape_character = false;
+      if (escape_character == true) {
+        escape_character = false;
+      } else if ((frame_position >= 2) &&
+                 (frame_checksum ==
+                  ((frame_buffer_data[frame_position - 1] << 8) |
+                   (frame_buffer_data[frame_position - 2] & 0xff)))) {
+        // trigger processing of result data
+        frame_buffer.setAvailable(frame_position - 2);
+        result = frame_buffer.available();
+        LOGD("==> Result: %d", result);
       }
-      /* If a valid frame is detected */
-      else if ((this->frame_position >= 2) &&
-               (this->frame_checksum ==
-                ((this->frame_buffer.data()[this->frame_position - 1] << 8) |
-                 (this->frame_buffer.data()[this->frame_position - 2] &
-                  0xff)))) // (msb << 8 ) | (lsb & 0xff)
-      {
-        /* Call the user defined function and pass frame to it */
-        result = this->frame_position - 2;
-      }
-      this->frame_position = 0;
-      this->frame_checksum = CRC16_CCITT_INIT_VAL;
+      frame_position = 0;
+      frame_checksum = CRC16_CCITT_INIT_VAL;
       return result;
     }
 
-    if (this->has_escape_character) {
-      this->has_escape_character = false;
+    if (escape_character) {
+      escape_character = false;
       data ^= INVERT_OCTET;
     } else if (data == CONTROL_ESCAPE_OCTET) {
-      this->has_escape_character = true;
-      return 0;
+      escape_character = true;
+      return result;
     }
 
-    frame_buffer.data()[this->frame_position] = data;
+    frame_buffer_data[frame_position] = data;
 
-    if (this->frame_position - 2 >= 0) {
-      this->frame_checksum = _crc_ccitt_update(
-          this->frame_checksum, frame_buffer.data()[this->frame_position - 2]);
+    if (frame_position - 2 >= 0) {
+      frame_checksum = _crc_ccitt_update(frame_checksum,
+                                         frame_buffer_data[frame_position - 2]);
     }
 
-    this->frame_position++;
+    frame_position++;
 
-    if (this->frame_position == this->max_frame_length) {
-      this->frame_position = 0;
-      this->frame_checksum = CRC16_CCITT_INIT_VAL;
+    if (frame_position == max_frame_length) {
+      frame_position = 0;
+      frame_checksum = CRC16_CCITT_INIT_VAL;
     }
-    return 0;
+    return result;
   }
 
   /// Wrap given data in HDLC frame and send it out byte at a time
-  void sendFrame(const uint8_t *framebuffer, uint8_t frame_length) {
+  void sendFrame(const uint8_t *framebuffer, size_t frame_length) {
+    LOGD("HDLCStream::sendFrame: %zu", frame_length);
     uint8_t data;
     uint16_t fcs = CRC16_CCITT_INIT_VAL;
 
@@ -205,6 +221,7 @@ private:
     }
     p_out->write(data);
     p_out->write(FRAME_BOUNDARY_OCTET);
+    p_out->flush();
   }
 
   static uint16_t crc16_update(uint16_t crc, uint8_t a) {
