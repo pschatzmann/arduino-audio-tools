@@ -245,9 +245,9 @@ public:
     this->error_handler = error_handler;
   }
 
-  // If set to true we do not expect a retry to write the missing data but continue just with the next
+  // If set to true we do not expect a retry to write the missing data but continue just with the next. (Default is true);
   bool setIgnoreWriteErrors(bool flag){
-    ignore_write_errors = falg;
+    ignore_write_errors = flag;
   }
 
 protected:
