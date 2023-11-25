@@ -102,10 +102,10 @@ class DecoderL8 : public AudioDecoder {
         buffer[j] = convertSample(pt8[j]);
       }
     }
-    size_t result =
-        p_print->write((uint8_t *)buffer.data(), in_size * sizeof(int16_t));
-    LOGD("DecoderL8 %d -> %d", (int)in_size, (int)result);
-    return result * sizeof(int16_t);
+    int write_byte_count = in_size * sizeof(int16_t);
+    size_t result = p_print->write((uint8_t *)buffer.data(), write_byte_count);
+    LOGD("DecoderL8 %d -> %d -> %d", (int)in_size, write_byte_count, (int)result);
+    return result / sizeof(int16_t);
   }
 
   int16_t convertSample(int16_t in) {
@@ -184,8 +184,8 @@ class EncoderL8 : public AudioEncoder {
     }
 
     size_t result = p_print->write((uint8_t *)buffer.data(), samples);
-    LOGD("EncoderL8 %d -> %d", (int)in_size, (int)result);
-    return result / sizeof(int16_t);
+    LOGD("EncoderL8 %d -> %d -> %d", (int)in_size,(int) samples, (int)result);
+    return result * sizeof(int16_t);
   }
 
   operator bool() override { return is_open; }

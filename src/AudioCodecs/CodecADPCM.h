@@ -26,12 +26,24 @@ class ADPCMDecoder : public AudioDecoderExt {
     decoder.setBlockSize(blockSize);
   }
 
+  /// Provides the block size (size of encoded frame) (only available after calling begin)
+  int blockSize() {
+    return decoder.blockSize();
+  }
+
+  /// Provides the frame size (size of decoded frame) (only available after calling begin)
+  int frameSize() {
+    return decoder.frameSize()*2;
+  }
+
+
   void begin() override {
     TRACEI();
     current_byte = 0;
     LOGI("sample_rate: %d, channels: %d", info.sample_rate, info.channels);
     decoder.begin(info.sample_rate, info.channels);
-    LOGI("frameSize: %d", (int)decoder.frameSize());
+    LOGI("frameSize: %d", (int)frameSize());
+    LOGI("blockSize: %d", (int)blockSize());
     block_size = decoder.blockSize();
     assert(block_size > 0);
     assert(decoder.frameSize() > 0);
@@ -73,7 +85,7 @@ class ADPCMDecoder : public AudioDecoderExt {
   int block_size = 0;
   bool is_started = false;
 
-  bool decode(uint8_t byte) {
+  virtual bool decode(uint8_t byte) {
     adpcm_block[current_byte++] = byte;
 
     if (current_byte >= block_size) {
@@ -84,7 +96,9 @@ class ADPCMDecoder : public AudioDecoderExt {
       size_t byte_count = frame.nb_samples * sizeof(int16_t) * info.channels;
       size_t written = p_print->write((uint8_t *)data, byte_count);
       if (written != byte_count) {
-        LOGE("encode %d->%d", (int)byte_count, (int)written);
+        LOGE("decode %d -> %d -> %d",block_size, (int)byte_count, (int)written);
+      } else {
+        LOGD("decode %d -> %d -> %d",block_size, (int)byte_count, (int)written);
       }
 
       // restart from array begin
@@ -111,17 +125,22 @@ class ADPCMEncoder : public AudioEncoderExt {
     encoder.setBlockSize(blockSize);
   }
 
-  /// Provides the block size (only available after calling begin)
+  /// Provides the block size (size of encoded frame) (only available after calling begin)
   int blockSize() override {
     return encoder.blockSize();
   }
 
+  /// Provides the frame size (size of decoded frame) (only available after calling begin)
+  int frameSize()  {
+    return encoder.frameSize()*2;
+  }
 
   void begin() override {
     TRACEI();
     LOGI("sample_rate: %d, channels: %d", info.sample_rate, info.channels);
     encoder.begin(info.sample_rate, info.channels);
-    LOGI("frameSize: %d", (int)encoder.frameSize());
+    LOGI("frameSize: %d", (int)frameSize());
+    LOGI("blockSize: %d", (int)blockSize());
     assert(info.sample_rate != 0);
     assert(encoder.frameSize() != 0);
     total_samples = encoder.frameSize()*info.channels;
@@ -164,7 +183,7 @@ class ADPCMEncoder : public AudioEncoderExt {
   int current_sample = 0;
   int total_samples=0;
 
-  bool encode(int16_t sample) {
+  virtual bool encode(int16_t sample) {
     pcm_block[current_sample++] = sample;
     if (current_sample >= total_samples) {
       TRACED();
@@ -172,7 +191,9 @@ class ADPCMEncoder : public AudioEncoderExt {
       if (packet.size > 0) {
         size_t written = p_print->write(packet.data, packet.size);
         if (written != packet.size) {
-          LOGE("encode %d->%d", (int)packet.size, (int)written);
+          LOGE("encode %d->%d->%d",2*total_samples, (int)packet.size, (int)written);
+        } else {
+          LOGD("encode %d->%d->%d",2*total_samples, (int)packet.size, (int)written);
         }
       }
       // restart from array begin

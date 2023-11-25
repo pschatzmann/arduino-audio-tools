@@ -385,7 +385,10 @@ class EncodedAudioOutput : public AudioStream {
     return result;
   }
 
-  int availableForWrite() override { return min(ptr_out->availableForWrite(), DEFAULT_BUFFER_SIZE); }
+  int availableForWrite() override {
+    if (!check_available_for_write) return  frame_size;
+    return min(ptr_out->availableForWrite(), frame_size); 
+  }
 
   /// Returns true if status is active and we still have data to be processed
   operator bool() { return active; }
@@ -405,6 +408,11 @@ class EncodedAudioOutput : public AudioStream {
       return check_available_for_write;
   }
 
+  /// defines the size of the decoded frame in bytes
+  void setFrameSize(int size){
+    frame_size = size;
+  }
+
  protected:
   //AudioInfo info;
   AudioDecoder *decoder_ptr = CodecNOP::instance();  // decoder
@@ -414,6 +422,7 @@ class EncodedAudioOutput : public AudioStream {
   bool active = false;
   bool check_available_for_write = false;
   CustomLogLevel custom_log_level;
+  int frame_size = DEFAULT_BUFFER_SIZE;
 };
 
 // legacy name

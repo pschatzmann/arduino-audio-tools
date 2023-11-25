@@ -882,14 +882,14 @@ class QueueStream : public AudioStream {
 
   /// Activates the output
   virtual bool begin() override {
-    TRACEI();
+    TRACED();
     active = true;
     return true;
   }
 
   /// stops the processing
   virtual void end() override {
-    TRACEI();
+    TRACED();
     active = false;
   };
 

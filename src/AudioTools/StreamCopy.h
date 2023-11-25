@@ -94,10 +94,10 @@ class StreamCopyT {
 
         /// copies the data from the source to the destination - the result is in bytes
         inline size_t copy(){
-            TRACED();
+            LOGD("copy %s", log_name);
             if (!active) return 0;
             // if not initialized we do nothing
-            if (from==nullptr || to==nullptr) return 0;
+            if (from==nullptr && to==nullptr) return 0;
 
             // E.g. if we try to write to a server we might not have any output destination yet
             int to_write = to->availableForWrite();
@@ -108,16 +108,19 @@ class StreamCopyT {
 
             size_t result = 0;
             size_t delayCount = 0;
-            size_t len = available();
+            size_t len = buffer_size;
+            if (check_available) {
+                len = available();
+            }
             size_t bytes_to_read = buffer_size;
             size_t bytes_read = 0; 
 
-            if (len>0){
+            if (len > 0){
                 bytes_to_read = min(len, static_cast<size_t>(buffer_size));
                 size_t samples = bytes_to_read / sizeof(T);
                 bytes_to_read = samples * sizeof(T);
                 // don't overflow buffer
-                if (to_write>0){
+                if (to_write > 0){
                     bytes_to_read = min((int)bytes_to_read, to_write);
                 }
 
@@ -137,23 +140,24 @@ class StreamCopyT {
                 if (onWrite!=nullptr) onWrite(onWriteObj, &buffer[0], result);
 
                 #ifndef COPY_LOG_OFF
-                LOGI("StreamCopy::copy %u -> %u -> %u bytes - in %u hops", (unsigned int)bytes_to_read,(unsigned int) bytes_read, (unsigned int)result, (unsigned int)delayCount);
+                LOGI("StreamCopy::copy %s %u -> %u -> %u bytes - in %u hops",log_name, (unsigned int)bytes_to_read,(unsigned int) bytes_read, (unsigned int)result, (unsigned int)delayCount);
                 #endif
-                TRACED();
+                //TRACED();
 
-                if (result==0){
+                if (result == 0){
                     TRACED();
-                // give the processor some time 
+                    // give the processor some time 
                     delay(delay_on_no_data);
                 }
 
-                TRACED();
+                //TRACED();
                 CHECK_MEMORY();
             } else {
                 // give the processor some time 
                 delay(delay_on_no_data);
+                LOGD("no data %s", log_name);
             }
-            TRACED();
+            //TRACED();
             return result;
         }
 
@@ -167,7 +171,10 @@ class StreamCopyT {
                 } else {
                     result = from->available();
                 }
+            } else {
+                LOGW("source not defined");
             }
+            LOGD("available: %d", result);
             return result;
         }
 
@@ -266,6 +273,16 @@ class StreamCopyT {
             return check_available_for_write;
         }
 
+        /// Activates the check that we copy only if available returns a value
+        void setCheckAvailable(bool flag){
+            check_available = flag;
+        }
+
+        /// Is Available check activated ?
+        bool isCheckAvailable() {
+            return check_available;
+        }
+
         /// resizes the copy buffer
         void resize(int len){
             buffer_size = len;
@@ -282,6 +299,14 @@ class StreamCopyT {
             return active;
         }
 
+        void setLogName(const char* name){
+            log_name = name;
+        }
+
+        void setRetryDelay(int delay){
+            retry_delay = delay;
+        }
+
     protected:
         AudioStream *from = nullptr;
         Print *to = nullptr;
@@ -293,31 +318,43 @@ class StreamCopyT {
         void *onWriteObj = nullptr;
         bool is_first = false;
         bool check_available_for_write = false;
+        bool check_available = true;
         const char* actual_mime = nullptr;
         int retryLimit = COPY_RETRY_LIMIT;
         int delay_on_no_data = COPY_DELAY_ON_NODATA;
         bool active = true;
+        const char* log_name = "";
+        int retry_delay = 10;
 
         /// blocking write - until everything is processed
         size_t write(size_t len, size_t &delayCount ){
             if (!buffer || len==0) return 0;
+            LOGD("write: %d", len);
             size_t total = 0;
             long open = len;
             int retry = 0;
-            while(open>0){
+            while(open > 0){
                 size_t written = to->write((const uint8_t*)buffer.data()+total, open);
+                LOGD("write: %d -> %d", open, (int) written);
                 total += written;
                 open -= written;
                 delayCount++;
 
-                if (retry++ > retryLimit){
-                    LOGE("write to target has failed! (%ld bytes)", open);
-                    break;
-                }
-                
-                if (retry>1) {
-                    delay(5);
-                    LOGI("try write - %d (open %ld bytes) ",retry, open);
+                if (open > 0){
+                    // if we still have progress we reset the retry counter
+                    if (written>0) retry = 0;
+
+                    // abort if we reached the retry limit
+                    if (retry++ > retryLimit){
+                        LOGE("write %s to target has failed after %d retries! (%ld bytes)", log_name, retry, open);
+                        break;
+                    }
+                    
+                    // wait a bit
+                    if (retry>1) {
+                        delay(retry_delay);
+                        LOGI("try write %s - %d (open %ld bytes) ",log_name, retry, open);
+                    }
                 }
 
                 CHECK_MEMORY();
