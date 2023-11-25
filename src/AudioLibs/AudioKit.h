@@ -12,7 +12,7 @@
 namespace audio_tools {
 
 class AudioKitStream;
-AudioKitStream *pt_AudioKitStream = nullptr;
+static AudioKitStream *pt_AudioKitStream = nullptr;
 
 /**
  * @brief Configuration for AudioKitStream: we use as subclass of I2SConfig
