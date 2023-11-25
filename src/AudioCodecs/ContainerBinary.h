@@ -230,10 +230,11 @@ public:
           std::max(static_cast<int>(DEFAULT_BUFFER_SIZE + header_size),
                    static_cast<int>(len * 4 + header_size)));
     }
+
     size_t result = buffer.writeArray(data8, len);
     while (parseBuffer())
       ;
-    return result;
+    return ignore_write_errors ? len : result;
   }
 
   AudioInfo audioInfo() { return info; }
@@ -242,6 +243,11 @@ public:
 
   void addErrorHandler(void (*error_handler)(BinaryContainerEncoderError error, BinaryContainerDecoder* source)){
     this->error_handler = error_handler;
+  }
+
+  // If set to true we do not expect a retry to write the missing data but continue just with the next
+  bool setIgnoreWriteErrors(bool flag){
+    ignore_write_errors = falg;
   }
 
 protected:
@@ -254,6 +260,7 @@ protected:
   SingleBuffer<uint8_t> buffer{0};
   Print *p_out = nullptr;
   void (*error_handler)(BinaryContainerEncoderError error, BinaryContainerDecoder* source) = nullptr;
+  bool ignore_write_errors = true;
 
 
   bool parseBuffer() {
