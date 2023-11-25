@@ -5,10 +5,10 @@
  * with the TX pin!
  * 
  * We send encoded ADPCM audio over the serial wire. In order to be able to recover
- * the encoded frames we use a Container
+ * from data loss in the encoded frames we use a Container
  *
  * @version 0.1
- * @date 2022-03-09
+ * @date 2023-11-25
  *
  * @copyright Copyright (c) 2022
  */
@@ -18,8 +18,8 @@
 #include "AudioCodecs/ContainerBinary.h"
 // #include "AudioLibs/AudioKit.h"
 
-AudioInfo info(22000, 1, 16);
-I2SStream out; // or AudioKitStream
+AudioInfo info(44100, 2, 16);
+I2SStream out; // or AnalogAudioStream, AudioKitStream etc
 SineWaveGenerator<int16_t> sineWave(32000);
 GeneratedSoundStream<int16_t> sound(sineWave);
 
@@ -41,13 +41,19 @@ void setup() {
 
   // Note the format for setting a serial port is as follows:
   // Serial.begin(baud-rate, protocol, RX pin, TX pin);
-  Serial2.begin(1000000, SERIAL_8N1);
+  Serial2.begin(1100000, SERIAL_8N1);
 
   sineWave.begin(info, N_B4);
   throttle.begin(info);
+
+// increase the reliability
+  dec_stream.setFrameSize(frame_size);
+  enc_stream.setFrameSize(frame_size);
+
   enc_stream.begin(info);
   dec_stream.begin(info);
 
+  
   // start I2S
   auto config = out.defaultConfig(TX_MODE);
   config.copyFrom(info);

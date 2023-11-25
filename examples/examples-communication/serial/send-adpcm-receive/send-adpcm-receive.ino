@@ -4,10 +4,11 @@
  * @brief Sending and receiving audio via Serial. You need to connect the RX pin
  * with the TX pin!
  * 
- * We send encoded ADPCM audio over the serial wire.
+ * We send encoded ADPCM audio over the serial wire: The higher the transmission rate
+ * the higher the risk of data loss!
  *
  * @version 0.1
- * @date 2022-03-09
+ * @date 2023-11-25
  *
  * @copyright Copyright (c) 2022
  */
@@ -16,8 +17,8 @@
 #include "AudioCodecs/CodecADPCM.h" // https://github.com/pschatzmann/adpcm
 //#include "AudioLibs/AudioKit.h"
 
-AudioInfo info(8000, 1, 16);
-I2SStream out; // or AudioKitStream
+AudioInfo info(22000, 1, 16);
+I2SStream out; // or AnalogAudioStream, AudioKitStream etc
 SineWaveGenerator<int16_t> sineWave(32000);
 GeneratedSoundStream<int16_t> sound(sineWave);
 
@@ -33,11 +34,11 @@ StreamCopy copierIn(dec_stream, serial, frame_size);     // copies sound from Se
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
 
   // Note the format for setting a serial port is as follows:
   // Serial.begin(baud-rate, protocol, RX pin, TX pin);
-  Serial2.begin(1000000, SERIAL_8N1);
+  Serial2.begin(115200, SERIAL_8N1);
 
   sineWave.begin(info, N_B4);
   throttle.begin(info);
