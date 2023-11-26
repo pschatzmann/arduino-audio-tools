@@ -1,3 +1,6 @@
+/**
+ * Test case for MedianFilter
+*/
 #include "AudioTools.h"
 #include "AudioLibs/AudioKit.h"
 
@@ -12,12 +15,13 @@ public:
     gen_noise.begin(info);
   }
   virtual int16_t readSample() {
+    // proper signal
     int16_t sample = gen_sine.readSample();
     if (count-- == 0){
       // plan for next random value
       count = random(100, 10000);
-      // return a random value
-      return gen_noise.readSample();;
+      // replace proper singal value with a random value
+      sample = gen_noise.readSample();;
     }
     return sample;
   };
