@@ -24,25 +24,25 @@ class MedianFilter : public Filter<T> {
     }
 
   protected:
-    struct sMedianNode_t {
+    struct MedianNode_t {
         T value;                      //sample value
-        struct sMedianNode_t *nextAge;    //pointer to next oldest value
-        struct sMedianNode_t *nextValue;  //pointer to next smallest value
-        struct sMedianNode_t *prevValue;  //pointer to previous smallest value
+        struct MedianNode_t *nextAge;    //pointer to next oldest value
+        struct MedianNode_t *nextValue;  //pointer to next smallest value
+        struct MedianNode_t *prevValue;  //pointer to previous smallest value
     };
 
-    struct sMedianFilter_t {
+    struct MedianFilter_t {
         unsigned int numNodes;          //median node buffer length
-        sMedianNode_t *medianBuffer;    //median node buffer
-        sMedianNode_t *ageHead;         //pointer to oldest value
-        sMedianNode_t *valueHead;       //pointer to smallest value
-        sMedianNode_t *medianHead;      //pointer to median value
+        MedianNode_t *medianBuffer;    //median node buffer
+        MedianNode_t *ageHead;         //pointer to oldest value
+        MedianNode_t *valueHead;       //pointer to smallest value
+        MedianNode_t *medianHead;      //pointer to median value
     };
 
-    sMedianFilter_t medianFilter;
-    Vector<sMedianNode_t> medianBuffer;
+    MedianFilter_t medianFilter;
+    Vector<MedianNode_t> medianBuffer;
 
-    int init(sMedianFilter_t *medianFilter){
+    int init(MedianFilter_t *medianFilter){
         if(medianFilter && medianFilter->medianBuffer &&
             (medianFilter->numNodes % 2) && (medianFilter->numNodes > 1)){
             //initialize buffer nodes
@@ -63,9 +63,9 @@ class MedianFilter : public Filter<T> {
         return -1;
     }
 
-    int insert(sMedianFilter_t *medianFilter, T sample) {
+    int insert(MedianFilter_t *medianFilter, T sample) {
         unsigned int i;
-        sMedianNode_t *newNode, *it;
+        MedianNode_t *newNode, *it;
 
         if(medianFilter->ageHead == medianFilter->valueHead){
              //if oldest node is also the smallest node, increment value head
@@ -113,7 +113,6 @@ class MedianFilter : public Filter<T> {
 
         return medianFilter->medianHead->value;
     }
-
 };
 
 
