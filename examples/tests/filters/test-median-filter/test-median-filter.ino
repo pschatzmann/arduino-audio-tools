@@ -1,0 +1,48 @@
+#include "AudioTools.h"
+#include "AudioLibs/AudioKit.h"
+#include "Sandbox/MedianFilter.h"
+
+AudioInfo info(44100, 1, 16);
+
+// provide sine wave damaged with some rare random noise samples
+class TestGenerator : public SoundGenerator<int16_t> {
+public:
+  TestGenerator() {
+    gen_sine.begin(info);
+    gen_sine.setFrequency(N_B4);
+    gen_noise.begin(info);
+  }
+  virtual int16_t readSample() {
+    int16_t sample = gen_sine.readSample();
+    if (count-- == 0){
+      // plan for next random value
+      count = random(100, 10000);
+      // return a random value
+      return gen_noise.readSample();;
+    }
+    return sample;
+  };
+protected:
+  SineWaveGenerator<int16_t> gen_sine;
+  WhiteNoiseGenerator<int16_t> gen_noise;
+  size_t count = 0;
+} testSound;
+
+GeneratedSoundStream<int16_t> testStream(testSound);             // Stream generated from sine wave
+FilteredStream<int16_t, int16_t> inFiltered(testStream, info.channels);  // Defiles the filter as BaseConverter
+MedianFilter<int16_t> medianFilter;
+AudioKitStream out;
+StreamCopy copier(out, inFiltered);                             
+//StreamCopy copier(out, testStream); //compare with this                            
+
+
+void setup() {
+  inFiltered.setFilter(0, &medianFilter);
+  auto cfg = out.defaultConfig(TX_MODE);
+  cfg.copyFrom(info);
+  out.begin(cfg);
+}
+
+void loop() {
+  copier.copy();
+}

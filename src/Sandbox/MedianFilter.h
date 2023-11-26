@@ -15,7 +15,7 @@ class MedianFilter : public Filter<T> {
     MedianFilter(int size=7) {
         medianBuffer.resize(size);
         medianFilter.numNodes = size;
-        medianFilter.medianBuffer = medianBuffer;
+        medianFilter.medianBuffer = medianBuffer.data();
         init(&medianFilter);
     };
 
@@ -26,9 +26,9 @@ class MedianFilter : public Filter<T> {
   protected:
     struct sMedianNode_t {
         T value;                      //sample value
-        struct sMedianNode *nextAge;    //pointer to next oldest value
-        struct sMedianNode *nextValue;  //pointer to next smallest value
-        struct sMedianNode *prevValue;  //pointer to previous smallest value
+        struct sMedianNode_t *nextAge;    //pointer to next oldest value
+        struct sMedianNode_t *nextValue;  //pointer to next smallest value
+        struct sMedianNode_t *prevValue;  //pointer to previous smallest value
     };
 
     struct sMedianFilter_t {
