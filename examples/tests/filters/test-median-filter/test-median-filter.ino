@@ -1,6 +1,5 @@
 #include "AudioTools.h"
 #include "AudioLibs/AudioKit.h"
-#include "Sandbox/MedianFilter.h"
 
 AudioInfo info(44100, 1, 16);
 
