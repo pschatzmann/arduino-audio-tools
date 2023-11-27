@@ -228,6 +228,7 @@ public:
   // provides the number of entries that are available to read
   int available() override {
     TRACED();
+    LockGuard guard(p_mutex);
     return p_buffer->available();
   }
 
