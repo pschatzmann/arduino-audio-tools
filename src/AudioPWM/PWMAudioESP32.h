@@ -124,13 +124,25 @@ class PWMDriverESP32 : public DriverPWMBase {
         
         /// determiens the PWM frequency based on the requested resolution
         float frequency(int resolution) {
-            switch (resolution){
-                case 8: return 312.5;
-                case 9: return 156.25;
-                case 10: return 78.125;
-                case 11: return 39.0625;
-            }
-            return 312.5;
+            // On ESP32S2 and S3, the frequncy seems off by a factor of 2
+            #if defined(ESP32S2) || defined(ESP32S3)
+                switch (resolution){
+                    case 7: return 312.5;
+                    case 8: return 156.25;
+                    case 9: return 78.125;
+                    case 10: return 39.0625;
+                    case 11: return 19.53125;
+                }
+                return 312.5;
+            #else
+                switch (resolution){
+                    case 8: return 312.5;
+                    case 9: return 156.25;
+                    case 10: return 78.125;
+                    case 11: return 39.0625;
+                }
+                return 312.5;
+            #endif
         }    
 
         /// timer callback: write the next frame to the pins
