@@ -43,7 +43,7 @@ struct PWMConfig : public AudioInfo {
     uint8_t buffers = PWM_BUFFER_COUNT; 
 
     // additinal info which might not be used by all processors
-    uint16_t pwm_frequency = PWM_AUDIO_FREQUENCY;  // audable range is from 20 to 20,000Hz (not used by ESP32)
+    uint32_t pwm_frequency = PWM_AUDIO_FREQUENCY;  // audable range is from 20 to 20,000Hz (not used by ESP32)
     uint8_t resolution = 8;     // Only used by ESP32: must be between 8 and 11 -> drives pwm frequency
     uint8_t timer_id = 0;       // Only used by ESP32 must be between 0 and 3
 
