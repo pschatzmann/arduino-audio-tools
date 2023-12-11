@@ -21,7 +21,7 @@ VS1053Config cfg;
 void read_data_stream(const uint8_t *data, uint32_t bytes) {
   int samples = bytes / sizeof(int16_t);
   // split up writes to max 512 samples
-  writeSamples<int16_t>(out, (int16_t*) data, samples, 512);
+  writeSamples<int16_t>(&out, (int16_t*) data, samples, 512);
 }
 
 
