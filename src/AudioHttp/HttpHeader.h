@@ -43,8 +43,16 @@ INLINE_VAR const char* methods[] = {"?","GET","HEAD","POST","PUT","DELETE","TRAC
 struct HttpHeaderLine {
     StrExt key;
     StrExt value;
-    bool active;
+    bool active = true;
+    HttpHeaderLine() = default;
+    HttpHeaderLine(const char*k){
+        key = k;
+    }
 };
+
+/**
+ * @brief workng buffer on the heap 
+ */
 
 static Vector<char> temp_buffer;
 
@@ -69,25 +77,27 @@ class HttpHeader {
         }
         ~HttpHeader(){
             LOGD("~HttpHeader");
-            clear(true);
+            clear();
         }
 
-        /// clears the data - usually we do not delete but we just set the active flag
-        HttpHeader& clear(bool activeFlag=true) {
+        // /// clears the data - usually we do not delete but we just set the active flag
+        // HttpHeader& reset() {
+        //     is_written = false;
+        //     is_chunked = false;
+        //     url_path = "/";
+        //     for (auto it = lines.begin() ; it != lines.end(); ++it){
+        //         (*it).active = false;
+        //         (*it).value = "";     
+        //     }
+        //     return *this;
+        // }
+
+        /// clears the data 
+        HttpHeader& clear() {
             is_written = false;
             is_chunked = false;
             url_path = "/";
-            for (auto it = lines.begin() ; it != lines.end(); ++it){
-                if (activeFlag){
-                    (*it)->active = false;
-                } else {
-                    (*it)->active = false;
-                    //delete *it;  // this leads to exceptions
-                }
-            }
-            if (!activeFlag){
-                lines.clear();
-            }
+            lines.clear();
             return *this;
         }
 
@@ -152,43 +162,40 @@ class HttpHeader {
         // determines a header value with the key
         const char* get(const char* key){
             for (auto it = lines.begin() ; it != lines.end(); ++it){
-                HttpHeaderLine *line = *it;
-                line->key.trim();
-                if (line->key.equalsIgnoreCase(key)){
-                    const char* result = line->value.c_str();
-                    return line->active ? result : nullptr;
+                HttpHeaderLine &line = *it;
+                line.key.trim();
+                if (line.key.equalsIgnoreCase(key)){
+                    const char* result = line.value.c_str();
+                    return line.active ? result : nullptr;
                 }
             }
             return nullptr;
         }
 
         // reads a single header line 
-        void readLine(Client &in, char* str, int len){
-            reader.readlnInternal(in, (uint8_t*) str, len, false);
+        int readLine(Client &in, char* str, int len){
+            int result = reader.readlnInternal(in, (uint8_t*) str, len, false);
             LOGD("HttpHeader::readLine -> %s",str);
+            return result;
         }
 
         // writes a lingle header line
-        void writeHeaderLine(Client &out,HttpHeaderLine *header ){
-            if (header==nullptr){
-                LOGD("HttpHeader::writeHeaderLine: the value must not be null");
-                return;
-            }
-            LOGD("HttpHeader::writeHeaderLine: %s",header->key.c_str());
-            if (!header->active){
+        void writeHeaderLine(Client &out,HttpHeaderLine &header ){
+            LOGD("HttpHeader::writeHeaderLine: %s",header.key.c_str());
+            if (!header.active){
                 LOGD("HttpHeader::writeHeaderLine - not active");
                 return;
             }
-            if (header->value.c_str() == nullptr){
+            if (header.value.c_str() == nullptr){
                 LOGD("HttpHeader::writeHeaderLine - ignored because value is null");
                 return;
             }
 
             char* msg = tempBuffer();
             Str msg_str(msg, HTTP_MAX_LEN);
-            msg_str = header->key.c_str();
+            msg_str = header.key.c_str();
             msg_str += ": ";
-            msg_str += header->value.c_str();
+            msg_str += header.value.c_str();
             msg_str += CRLF;
             out.print(msg_str.c_str());
 
@@ -256,8 +263,9 @@ class HttpHeader {
 
                 readLine(in, line, HTTP_MAX_LEN);
                 parse1stLine(line);
-                while (in.available()){
-                    readLine(in, line, HTTP_MAX_LEN);
+                while (true){
+                    int len = readLine(in, line, HTTP_MAX_LEN);
+                    if (len==0 && in.available()==0) break;
                     if (isValidStatus() || isRedirectStatus()){
                         Str lineStr(line);
                         lineStr.ltrim();
@@ -286,7 +294,7 @@ class HttpHeader {
 
         void setProcessed() {
             for (auto it = lines.begin() ; it != lines.end(); ++it){
-                (*it)->active = false;
+                (*it).active = false;
             }          
         }
 
@@ -324,7 +332,7 @@ class HttpHeader {
         StrExt protocol_str = StrExt(10);
         StrExt url_path = StrExt(70);
         StrExt status_msg = StrExt(20);
-        Vector<HttpHeaderLine*> lines;
+        Vector<HttpHeaderLine> lines;
         HttpLineReader reader;
         const char* CRLF = "\r\n";
         int timeout_ms = URL_CLIENT_TIMEOUT;
@@ -345,21 +353,18 @@ class HttpHeader {
         HttpHeaderLine *headerLine(const char* key) {
             if (key!=nullptr){
                 for (auto it = lines.begin() ; it != lines.end(); ++it){
-                    HttpHeaderLine *pt = (*it);
-                    if (pt!=nullptr && pt->key.c_str()!=nullptr){
-                        if (pt->key.equalsIgnoreCase(key)){
-                            pt->active = true;
-                            return pt;
+                    HttpHeaderLine &pt = (*it);
+                    if (pt.key.c_str()!=nullptr){
+                        if (pt.key.equalsIgnoreCase(key)){
+                            pt.active = true;
+                            return &pt;
                         }
                     }
                 }
                 if (create_new_lines || Str(key).equalsIgnoreCase(CONTENT_LENGTH) || Str(key).equalsIgnoreCase(CONTENT_TYPE)){
-                    HttpHeaderLine *newLine = new HttpHeaderLine();
-                    LOGD("HttpHeader::headerLine - new line created for %s", key);
-                    newLine->active = true;
-                    newLine->key = key;
+                    HttpHeaderLine newLine(key);
                     lines.push_back(newLine);
-                    return newLine;
+                    return &lines.back();
                 }
             } else {
                 LOGI("HttpHeader::headerLine %s", "The key must not be null");
@@ -369,10 +374,10 @@ class HttpHeader {
 
         MethodID getMethod(const char* line){
             // set action
-            for (int j=0; methods[j]!=nullptr;j++){
+            for (int j=0; methods[j]!=nullptr; j++){
                 const char *action = methods[j];
                 int len = strlen(action);
-                if (strncmp(action,line,len)==0){
+                if (strncmp(action, line, len)==0){
                     return (MethodID) j;
                 }
             }
@@ -511,8 +516,6 @@ class HttpReplyHeader : public HttpHeader  {
             status_msg.substring(line_str, space2+1, line_str.length());
 
         }
-
-
 };
 
 }

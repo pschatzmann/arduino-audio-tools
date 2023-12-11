@@ -109,11 +109,12 @@ class URLStream : public AbstractURLStream {
                 size = request.contentLength();
                 LOGI("size: %d", (int)size);
                 if (size>=0 && wait_for_data){
-                    waitForData();
+                    waitForData(clientTimeout);
                 }
             }
             total_read = 0;
             active = result == 200;
+            LOGI("==> http status: %d", result);
             custom_log_level.reset();
 
             return active;
@@ -206,8 +207,8 @@ class URLStream : public AbstractURLStream {
         
         /// Releases the memory from the request and reply
         void clear() {
-            httpRequest().reply().clear(false);
-            httpRequest().header().clear(false);
+            httpRequest().reply().clear();
+            httpRequest().header().clear();
             read_buffer.resize(0);
             read_pos = 0;
             read_size = 0;
@@ -236,11 +237,13 @@ class URLStream : public AbstractURLStream {
         }
 
         /// waits for some data - returns false if the request has failed
-        virtual bool waitForData() {
+        virtual bool waitForData(int timeout) {
             TRACED();
+            uint32_t end = millis()+timeout;
             if(request.available()==0 ){
                 LOGI("Request written ... waiting for reply")
                 while(request.available()==0){
+                    if (millis()>end) break;
                     // stop waiting if we got an error
                     if (request.reply().statusCode()>=300){
                         LOGE("Error code recieved ... stop waiting for reply");

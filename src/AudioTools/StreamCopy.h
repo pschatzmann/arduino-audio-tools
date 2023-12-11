@@ -329,13 +329,13 @@ class StreamCopyT {
         /// blocking write - until everything is processed
         size_t write(size_t len, size_t &delayCount ){
             if (!buffer || len==0) return 0;
-            LOGD("write: %d", len);
+            LOGD("write: %d", (int)len);
             size_t total = 0;
             long open = len;
             int retry = 0;
             while(open > 0){
                 size_t written = to->write((const uint8_t*)buffer.data()+total, open);
-                LOGD("write: %d -> %d", open, (int) written);
+                LOGD("write: %d -> %d", (int) open, (int) written);
                 total += written;
                 open -= written;
                 delayCount++;
