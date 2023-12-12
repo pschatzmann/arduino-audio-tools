@@ -2,14 +2,16 @@
 #include "AudioCodecs/CodecMTS.h"
 #include "AudioCodecs/CodecADTS.h"
 #include "AudioCodecs/CodecAACHelix.h"
-#include "AudioLibs/PortAudioStream.h"
+//#include "AudioLibs/PortAudioStream.h"
+#include "AudioLibs/MiniAudioStream.h"
 
 AudioInfo info(48000,2,16);
 HLSStream hls_stream("NA", "NA");
 // HexDumpOutput hex(Serial);
 // NullStream null;
-CsvOutput<int16_t> out(Serial, 2);  // Or use StdOuput
+//CsvOutput<int16_t> out(Serial, 2);  // Or use StdOuput
 //PortAudioStream out;
+MiniAudioStream out;
 MTSDecoder mts;
 ADTSDecoder adts;
 AACDecoderHelix aac;
@@ -26,7 +28,7 @@ void setup(void) {
   //adts_stream.setLogLevel(AudioLogger::Debug);
   //mts_stream.setLogLevel(AudioLogger::Debug);
 
-  aac.setAudioInfoNotifications(false);
+  //aac.setAudioInfoNotifications(false);
 
   auto cfg = out.defaultConfig(TX_MODE);
   cfg.copyFrom(info);

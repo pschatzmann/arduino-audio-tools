@@ -20,7 +20,10 @@ namespace audio_tools {
 
 class URLLoader {
   public:
-  URLLoader() = default;
+  URLLoader(URLStream &stream) {
+    p_stream = &stream;
+  };
+
   ~URLLoader(){
     end();
   }
@@ -43,17 +46,18 @@ class URLLoader {
   /// Adds the next url to be played in sequence
   void addUrl(const char* url){
     LOGI("Adding %s", url);
-    //Str url_str(url);
-    //char *str = new char[url_str.length()+1];
-    //memcpy(str, url_str.c_str(), url_str.length()+1);
-    URLStream *p_stream = new URLStream();
-    p_stream->setWaitForData(false);
-    p_stream->setAutoCreateLines(false);
-    if (!p_stream->begin(url)){
-      TRACEE();
-    }
+    Str url_str(url);
+    char *str = new char[url_str.length()+1];
+    memcpy(str, url_str.c_str(), url_str.length()+1);
+    urls.push_back(str);
+    // URLStream *p_stream = new URLStream();
+    // p_stream->setWaitForData(false);
+    // p_stream->setAutoCreateLines(false);
+    // if (!p_stream->begin(url)){
+    //   TRACEE();
+    // }
 
-    urls.push_back(p_stream);
+    // urls.push_back(p_stream);
   }
 
   /// Provides the number of open urls which can be played. Refills them, when min limit is reached.
@@ -94,12 +98,13 @@ class URLLoader {
   }
 
 protected:
-  Vector<URLStream*> urls{10};
+  Vector<const char*> urls{10};
   NBuffer<uint8_t> buffer{DEFAULT_BUFFER_SIZE, 50};
   bool active = false;
   int buffer_size = DEFAULT_BUFFER_SIZE;
   int buffer_count = 10;
   URLStream *p_stream = nullptr;
+  const char* url_to_play = nullptr;
 
 
   /// try to keep the buffer filled
@@ -116,14 +121,17 @@ protected:
     }
 
     // switch current stream if we have no more data
-    if ((p_stream==nullptr || p_stream->totalRead()==p_stream->contentLength()) && !urls.empty()) {
+    if ((p_stream->totalRead()==p_stream->contentLength()) && !urls.empty()) {
       LOGD("Refilling");
-      if (p_stream!=nullptr) {
-        p_stream->end();
-        delete p_stream;
+      if (url_to_play!=nullptr) {
+        delete url_to_play;
       }
-      p_stream = urls[0];
-      p_stream->waitForData();
+      url_to_play = urls[0];
+      LOGI("playing %s", url_to_play);
+      if (p_stream->httpRequest().connected())
+        p_stream->end();
+      p_stream->begin(url_to_play);
+      p_stream->waitForData(500);
       urls.pop_front();
       //assert(urls[0]!=url);
 
@@ -136,6 +144,7 @@ protected:
     int to_write = min(buffer.availableForWrite(),DEFAULT_BUFFER_SIZE);
     if (to_write>0){
       int total = 0;
+      int failed = 0;
       while(to_write>0){
         if (p_stream->totalRead()==p_stream->contentLength()) break;
         uint8_t tmp[to_write]={0};
@@ -146,6 +155,9 @@ protected:
           to_write = min(buffer.availableForWrite(),DEFAULT_BUFFER_SIZE);
         } else {
           delay(5);
+          // this should not really happen
+          failed++;
+          if (failed>=3) break;
         }
       }
       LOGD("Refilled with %d now %d available to write", total, buffer.availableForWrite());
@@ -213,6 +225,7 @@ class HLSParser {
       TRACEE();
       return false;
     }
+
     if (!url_loader.begin()){
       TRACEE();
       return false;
@@ -298,7 +311,7 @@ class HLSParser {
   StrExt url_str;
   const char *index_url_str = nullptr;
   URLStream url_stream;
-  URLLoader url_loader;
+  URLLoader url_loader{url_stream};
   bool active = false;
   bool parse_segments_active = false;
   int media_sequence = 0;
@@ -387,9 +400,10 @@ class HLSParser {
 
     // parse lines
     memset(tmp, 0, MAX_HLS_LINE);
-    while (url_stream.available()) {
+    while (true) {
       memset(tmp, 0, MAX_HLS_LINE);
-      url_stream.httpRequest().readBytesUntil('\n', tmp, MAX_HLS_LINE);
+      size_t len = url_stream.httpRequest().readBytesUntil('\n', tmp, MAX_HLS_LINE);
+      if (len==0 && url_stream.available()==0) break;
       Str str(tmp);
 
       // check header
@@ -409,7 +423,6 @@ class HLSParser {
         }
       } 
     }
-
     return result;
   }
 
