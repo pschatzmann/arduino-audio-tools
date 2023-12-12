@@ -264,8 +264,8 @@ class MTSDecoder : public AudioDecoder {
       TSDPESPacket *pes = (TSDPESPacket *)data;
       // This is where we write the PES data into our buffer.
       LOGD("====================");
-      LOGD("PID %x PES Packet, Size: %ld, stream_id=%u, pts=%lu, dts=%lu", pid,
-           pes->data_bytes_length, pes->stream_id, pes->pts, pes->dts);
+      LOGD("PID %x PES Packet, Size: %zu, stream_id=%u, pts=%lu, dts=%lu", pid,
+           pes->data_bytes_length, pes->stream_id,(unsigned long) pes->pts, (unsigned long) pes->dts);
       // print out the PES Packet data if it's in our print list
       int i;
       AudioLogger logger = AudioLogger::instance();
@@ -425,6 +425,8 @@ class MTSDecoder : public AudioDecoder {
       stream_id = (TSDPESStreamId)0xEB;
     }
 
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Wswitch"
     switch (stream_id) {
       case 0x00:
         return "ITU-T | ISO/IEC Reserved";
@@ -548,8 +550,10 @@ class MTSDecoder : public AudioDecoder {
         return "VC-1 Elementary Stream per RP227";
       case 0xEB:
         return "ATSC User Private Program Elements";
+      default:
+        return "Unknown";
     }
-    return "Unknown";
+    #pragma GCC diagnostic pop
   }
 
   const char *descriptor_tag_to_str(uint8_t tag) {
@@ -564,6 +568,9 @@ class MTSDecoder : public AudioDecoder {
     } else if (tag >= 0x98 && tag <= 0x9F) {
       tag = 0x98;
     }
+
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Wswitch"
 
     switch (tag) {
       case 0x00:
@@ -830,6 +837,7 @@ class MTSDecoder : public AudioDecoder {
       case 0xEC:
         return "MDTV hybrid stereoscopic service descriptor";
     }
+    #pragma GCC diagnostic pop
     return "Unknown";
   }
 

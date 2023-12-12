@@ -12,6 +12,7 @@
 
 #include "AudioTools.h"
 #include "AudioCodecs/CodecMTS.h"
+#include "AudioCodecs/CodecADTS.h"
 #include "AudioCodecs/CodecAACHelix.h"
 #include "AudioLibs/AudioKit.h"
 
