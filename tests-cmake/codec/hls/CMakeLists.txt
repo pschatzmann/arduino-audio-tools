@@ -10,7 +10,7 @@ include(FetchContent)
 
 # Activate Emulator and Portaudio
 set(ADD_ARDUINO_EMULATOR ON CACHE BOOL "Add Arduino Emulator Library") 
-set(ADD_PORTAUDIO ON CACHE BOOL "Add Portaudio Library") 
+set(ADD_PORTAUDIO OFF CACHE BOOL "Add Portaudio Library") 
 
 # Build with arduino-audio-tools
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
@@ -33,6 +33,9 @@ if(NOT arduino_helix_POPULATED)
     add_subdirectory(${arduino_helix_SOURCE_DIR})
 endif()
 
+# Download miniaudio.h
+file(DOWNLOAD https://raw.githubusercontent.com/mackron/miniaudio/master/miniaudio.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/miniaudio.h)
 
 # build sketch as executable
 set_source_files_properties(hls.ino PROPERTIES LANGUAGE CXX)
@@ -41,8 +44,11 @@ add_executable (hls hls.cpp ../../main.cpp )
 # set preprocessor defines
 target_compile_definitions(hls PUBLIC -DARDUINO -DIS_DESKTOP -DEXIT_ON_STOP -DHELIX_PRINT)
 
+# access to miniaudio in sketch directory
+target_include_directories(hls PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+
 # specify libraries
-target_link_libraries(hls arduino-audio-tools arduino_emulator tsdemux arduino_helix portaudio)
+target_link_libraries(hls arduino-audio-tools arduino_emulator tsdemux arduino_helix)
 
 
 

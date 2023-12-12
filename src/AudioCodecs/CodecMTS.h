@@ -182,7 +182,8 @@ class MTSDecoder : public AudioDecoder {
         LOGD("parsing new file");
         begin();
       }
-      size_t len = tsd_demux(&ctx, (void *)buffer.data(), buffer.available(), &res);
+      size_t len;
+      res = tsd_demux(&ctx, (void *)buffer.data(), buffer.available(), &len);
       // remove processed bytes
       buffer.clearArray(len);
       // get next bytes
