@@ -5,6 +5,10 @@
         ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0) ||                     \
     defined(DOXYGEN)
 
+#ifndef perimanClearPinBus(p)
+#define perimanClearPinBus(p) perimanSetPinBus(p, ESP32_BUS_TYPE_INIT, NULL)
+#endif
+
 #include "AudioAnalog/AnalogAudioBase.h"
 #include "AudioAnalog/AnalogConfigESP32V1.h"
 #include "AudioTools/AudioStreams.h"
@@ -70,6 +74,7 @@ public:
 #endif
     if (active_rx) {
       adc_continuous_stop(adc_handle);
+      // free up resources from ADC
       adc_continuous_deinit(adc_handle);
       // free up resources from calibration
       if (cfg.adc_calibration_active) {
@@ -80,6 +85,21 @@ public:
 #endif
       }
     }
+
+    // Set all used pins/channels to INIT state
+    for(int i = 0; i < cfg.channels; i++){
+        // convert channel to pin
+        adc_channel_t adc_channel = cfg.adc_channels[i];
+        int io_pin;
+        adc_continuous_channel_to_io(ADC_UNIT, adc_channel, &io_pin);
+        if(perimanGetPinBusType(io_pin) == ESP32_BUS_TYPE_ADC_CONT){
+          if( !perimanClearPinBus(io_pin) ){
+              LOGE("perimanClearPinBus failed!");
+              return;
+          }
+        }
+    }
+
     converter.end();
     active_tx = false;
     active_rx = false;
@@ -93,12 +113,14 @@ public:
     return converter.write(src, size_bytes);
   }
 
+// reads data from DMA buffer
   size_t readBytes(uint8_t *dest, size_t size_bytes) override {
     TRACED();
     // in the future we might use the converter -> for the time beeing we only
     // support 16 bits
     return io.readBytes(dest, size_bytes);
   }
+
   // is data in the ADC buffer?
   int available() override { return active_rx ? DEFAULT_BUFFER_SIZE : 0; }
 
@@ -155,7 +177,7 @@ protected:
       if (adc_continuous_read(self->adc_handle, (uint8_t *)result_data,
                               sizeof(result_data), &result_cont,
                               self->cfg.timeout) == ESP_OK) {
-        // Result must fit into uint16_T !
+        // Result must fit into uint16_t !
         uint16_t *result16 = (uint16_t *)dest;
         uint16_t *end = (uint16_t *)(dest + size_bytes);
         int result_count = result_cont / sizeof(adc_digi_output_data_t);
@@ -205,7 +227,7 @@ protected:
         }
 
       } else {
-        LOGE("adc_continuous_read");
+        LOGE("adc_continuous_read unsuccessful");
         total_bytes = 0;
       }
       return total_bytes;
@@ -263,6 +285,11 @@ protected:
 #endif
 
   bool setup_rx() {
+
+    adc_channel_t adc_channel;
+    int io_pin;
+    esp_err_t err; 
+
     if (!checkADCChannels())
       return false;
     if (!checkADCSampleRate())
@@ -272,7 +299,26 @@ protected:
     if (!checkADCBitsPerSample())
       return false;
 
-    // determine conv_frame_size which must be multiple of
+    if(adc_handle != nullptr){
+        LOGE("adc unit %u continuous is already initialized. Please call end() first!", ADC_UNIT);
+        return false;
+    }
+
+    // Set periman deinit callback
+    // TODO, currently handled in end() method
+
+    // Set the pins/channels to INIT state
+    for(int i = 0; i < cfg.channels; i++){
+        // convert channel to pin
+        adc_channel = cfg.adc_channels[i];
+        adc_continuous_channel_to_io(ADC_UNIT, adc_channel, &io_pin);
+        if( !perimanClearPinBus(io_pin) ){
+            LOGE("perimanClearPinBus failed!");
+            return false;
+        }
+    }
+
+    // Determine conv_frame_size which must be multiple of
     // SOC_ADC_DIGI_DATA_BYTES_PER_CONV
     uint32_t conv_frame_size =
         (uint32_t)cfg.buffer_size * SOC_ADC_DIGI_RESULT_BYTES;
@@ -281,18 +327,27 @@ protected:
     if (calc_multiple_diff != 0) {
       conv_frame_size = (conv_frame_size + calc_multiple_diff);
     }
+
+    //Conversion frame size buffer cant be bigger than 4092 bytes
+    if(conv_frame_size > 4092){
+        LOGE("buffer_size is too big. Please set lower buffer_size.");
+        return false;
+    } else {
+      LOGD("buffer_size %u, conv_frame_size: %u", cfg.buffer_size, conv_frame_size);
+    }
+
     adc_continuous_handle_cfg_t adc_config = {
         .max_store_buf_size = (uint32_t)conv_frame_size * cfg.buffer_count,
         .conv_frame_size = conv_frame_size,
     };
 
     // Create adc_continuous handle
-    esp_err_t err = adc_continuous_new_handle(&adc_config, &adc_handle);
+    err = adc_continuous_new_handle(&adc_config, &adc_handle);
     if (err != ESP_OK) {
       LOGE("adc_continuous_new_handle failed with error: %d", err);
       return false;
     } else {
-      LOGI("adc_continuous_new_handle successful");
+      LOGD("adc_continuous_new_handle successful");
     }
 
     /// Configure the ADC
@@ -304,16 +359,15 @@ protected:
     adc_digi_pattern_config_t adc_pattern[cfg.channels] = {0};
     dig_cfg.pattern_num = cfg.channels;
     for (int i = 0; i < cfg.channels; i++) {
-      uint8_t unit = GET_ADC_UNIT_FROM_CHANNEL(cfg.adc_channels[i]);
       uint8_t ch = cfg.adc_channels[i] & 0x7;
       adc_pattern[i].atten = cfg.adc_attenuation;
       adc_pattern[i].channel = ch;
-      adc_pattern[i].unit = unit;
+      adc_pattern[i].unit = ADC_UNIT;
       adc_pattern[i].bit_width = cfg.adc_bit_width;
     }
     dig_cfg.adc_pattern = adc_pattern;
 
-    LOGI("dig_cfg.sample_freq_hz: %u", (unsigned) dig_cfg.sample_freq_hz);
+    LOGI("dig_cfg.sample_freq_hz: %u", dig_cfg.sample_freq_hz);
     LOGI("dig_cfg.conv_mode: %u", dig_cfg.conv_mode);
     LOGI("dig_cfg.format: %u", dig_cfg.format);
     for (int i = 0; i < cfg.channels; i++) {
@@ -334,11 +388,22 @@ protected:
     }
     LOGI("adc_continuous_config successful");
 
-    // set up optional calibration
+    // Set up optional calibration
     if (!setupADCCalibration()) {
       return false;
     }
 
+    // Attach the pins to the ADC unit
+    for(int i = 0; i < cfg.channels; i++){
+        adc_channel = cfg.adc_channels[i];
+        adc_continuous_channel_to_io(ADC_UNIT, adc_channel, &io_pin);
+        //   perimanSetPinBus: uint8_t pin, peripheral_bus_type_t type, void * bus, int8_t bus_num, int8_t bus_channel
+        if( !perimanSetPinBus(io_pin, ESP32_BUS_TYPE_ADC_CONT, (void *)(ADC_UNIT+1), ADC_UNIT, adc_channel) ) {
+            LOGE("perimanSetPinBus to Continuous an ADC Unit %u failed!", ADC_UNIT);
+            return false;
+        }
+    }
+    
     // Start ADC
     err = adc_continuous_start(adc_handle);
     if (err != ESP_OK) {
@@ -346,7 +411,7 @@ protected:
       return false;
     }
 
-    // setup up optinal auto center which puts the avg at 0
+    // setup up optimal auto center which puts the avg at 0
     auto_center.begin(cfg.channels, cfg.bits_per_sample, true);
 
     LOGI("adc_continuous_start successful");
@@ -366,19 +431,33 @@ protected:
   }
 
   bool checkADCChannels() {
+    int io_pin;
+    adc_channel_t adc_channel;
+
     int max_channels = sizeof(cfg.adc_channels) / sizeof(adc_channel_t);
     if (cfg.channels > max_channels) {
-      LOGE("channels: %d, max: %d", cfg.channels, max_channels);
+      LOGE("number of channels: %d, max: %d", cfg.channels, max_channels);
       return false;
     } 
     LOGI("channels: %d, max: %d", cfg.channels, max_channels);
+
+    // Lets make sure the adc channels are available
+    for(int i = 0; i < cfg.channels; i++){
+        adc_channel = cfg.adc_channels[i];
+        auto err = adc_continuous_channel_to_io(ADC_UNIT, adc_channel, &io_pin);
+        if(err != ESP_OK){
+            LOGE("ADC channel %u is not available on ADC unit %u", adc_channel, ADC_UNIT);
+            return false;
+        } else {
+            LOGI("ADC channel %u is on pin %u", adc_channel, io_pin);
+        }
+    }    
     return true;
   }
 
   bool checkADCSampleRate() {
     int sample_rate =  cfg.sample_rate * cfg.channels;
-    // Boundary checks
-    if ((sample_rate < SOC_ADC_SAMPLE_FREQ_THRES_LOW) ||
+        if ((sample_rate < SOC_ADC_SAMPLE_FREQ_THRES_LOW) ||
         (sample_rate > SOC_ADC_SAMPLE_FREQ_THRES_HIGH)) {
       LOGE("sample rate eff: %u can not be set, range: %u to %u",sample_rate,
            SOC_ADC_SAMPLE_FREQ_THRES_LOW, SOC_ADC_SAMPLE_FREQ_THRES_HIGH);
@@ -401,7 +480,7 @@ protected:
 
     // check bits_per_sample
     if (cfg.bits_per_sample != supported_bits) {
-      LOGE("checking bits per sample error. It should be: %d but is %d",
+      LOGE("bits per sample:  error. It should be: %d but is %d",
            supported_bits, cfg.bits_per_sample);
       return false;
     }
@@ -414,26 +493,14 @@ protected:
       return true;
 
     // Initialize ADC calibration handle
-    //
-    // Calibration is applied to an ADC unit (not per channel). There is ADC1
-    // and ADC2 unit (0,1). ADC2 and WiFi share hardware and WiFi has priority.
-    // Therefore we prefere ADC1.
-
-    // Lets make sure ADC Channels chosen are on same unit:
-    uint8_t unit = GET_ADC_UNIT_FROM_CHANNEL(cfg.adc_channels[0]);
-    for (int i = 1; i < cfg.channels; i++) {
-      if (unit != GET_ADC_UNIT_FROM_CHANNEL(cfg.adc_channels[i])) {
-        LOGE("error, dont select ADC channels on different ADC units");
-        return false;
-      }
-    }
+    // Calibration is applied to an ADC unit (not per channel). 
 
     // setup calibration only when requested
     if (adc_cali_handle == NULL) {
 #if ADC_CALI_SCHEME_CURVE_FITTING_SUPPORTED
       // curve fitting is preferred
       adc_cali_curve_fitting_config_t cali_config;
-      cali_config.unit_id = (adc_unit_t)unit;
+      cali_config.unit_id = ADC_UNIT;
       cali_config.atten = (adc_atten_t)cfg.adc_attenuation;
       cali_config.bitwidth = (adc_bitwidth_t)cfg.adc_bit_width;
       auto err =
@@ -441,7 +508,7 @@ protected:
 #elif !defined(CONFIG_IDF_TARGET_ESP32H2)
       // line fitting
       adc_cali_line_fitting_config_t cali_config;
-      cali_config.unit_id = (adc_unit_t)unit;
+      cali_config.unit_id = ADC_UNIT;
       cali_config.atten = (adc_atten_t)cfg.adc_attenuation;
       cali_config.bitwidth = (adc_bitwidth_t)cfg.adc_bit_width;
       auto err =
@@ -450,15 +517,16 @@ protected:
       if (err != ESP_OK) {
         LOGE("creating cali handle failed for ADC%d with atten %d and bitwidth "
              "%d",
-             unit, cfg.adc_attenuation, cfg.adc_bit_width);
+             ADC_UNIT, cfg.adc_attenuation, cfg.adc_bit_width);
         return false;
       } else {
         LOGI("created cali handle for ADC%d with atten %d and bitwidth %d",
-             unit, cfg.adc_attenuation, cfg.adc_bit_width);
+             ADC_UNIT, cfg.adc_attenuation, cfg.adc_bit_width);
       }
     }
     return true;
   }
+
 };
 
 /// @brief AnalogAudioStream
