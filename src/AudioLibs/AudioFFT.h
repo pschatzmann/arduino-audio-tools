@@ -13,7 +13,7 @@ namespace audio_tools {
 
 // forward declaration
 class AudioFFTBase;
-MusicalNotes AudioFFTNotes;
+static MusicalNotes AudioFFTNotes;
 
 /**
  * @brief Result of the FFT
