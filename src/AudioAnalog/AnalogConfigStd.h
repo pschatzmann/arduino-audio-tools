@@ -31,7 +31,7 @@ class AnalogConfigStd : public AudioInfo {
         rx_tx_mode = RX_MODE;
     }
     /// Default constructor
-    AnalogConfigStd(RxTxMode rxtxMode) : AnalogConfig() {
+    AnalogConfigStd(RxTxMode rxtxMode) : AudioInfo() {
       rx_tx_mode = rxtxMode;
     }
     int start_pin = PIN_ANALOG_START;
