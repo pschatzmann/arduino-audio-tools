@@ -78,11 +78,14 @@ class Url {
                 return;
             }
             protocolStr.substring(urlStr, 0,protocolEnd);
-            int portStart = urlStr.indexOf(":",protocolEnd+3);            
-            int hostEnd = portStart!=-1 ? portStart : urlStr.indexOf("/",protocolEnd+4);
+            int pathStart = urlStr.indexOf("/",protocolEnd+4);
+            int portStart = urlStr.indexOf(":",protocolEnd+3);
+            // check if the found portStart isn't part of the path
+            portStart = portStart < pathStart ? portStart : -1;
+            int hostEnd = portStart != -1 ? portStart : pathStart;
             // we have not path -> so then host end is the end of string
             if (hostEnd==-1){
-                hostEnd = urlStr.length();                
+                hostEnd = urlStr.length();
             }
             hostStr.substring(urlStr, protocolEnd+3,hostEnd);
             if (portStart>0){
@@ -98,7 +101,7 @@ class Url {
                     portInt = -1; // undefined
             }
             int pathStart = urlStr.indexOf("/",protocolEnd+4);
-            if (pathStart==0){
+            if (pathStart<=0){
                 // we have no path
                 pathStr = "/";
                 urlRootStr = urlStr;
