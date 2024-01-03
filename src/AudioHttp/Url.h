@@ -100,7 +100,6 @@ class Url {
                 else 
                     portInt = -1; // undefined
             }
-            int pathStart = urlStr.indexOf("/",protocolEnd+4);
             if (pathStart<=0){
                 // we have no path
                 pathStr = "/";
