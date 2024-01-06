@@ -265,6 +265,10 @@ protected:
     is_client_connected = true;
     return is_client_connected;
   }
+
+  virtual int getMTU() override { return BLE_MTU; }
+
+
 };
 
 } // namespace audio_tools
