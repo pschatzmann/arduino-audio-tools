@@ -266,7 +266,7 @@ protected:
     return is_client_connected;
   }
 
-  virtual int getMTU() override { return BLE_MTU; }
+  int getMTU() override { return BLE_MTU; }
 
 
 };
