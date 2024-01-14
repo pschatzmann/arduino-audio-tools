@@ -305,7 +305,7 @@ class AudioEncoderServer  : public AudioServer {
             //encoded_stream.begin(&client_obj, encoder);
             encoded_stream.setInput(&client_obj);
             encoded_stream.setEncoder(encoder);
-            encoded_stream.begin();
+            encoded_stream.begin(audio_info);
             return AudioServer::begin(in, encoder->mime());
         }
 
@@ -324,7 +324,7 @@ class AudioEncoderServer  : public AudioServer {
             encoder->setAudioInfo(audio_info);
             encoded_stream.setInput(&client_obj);
             encoded_stream.setEncoder(encoder);
-            encoded_stream.begin();
+            encoded_stream.begin(audio_info);
 
             return AudioServer::begin(in, encoder->mime());
         }
@@ -343,7 +343,7 @@ class AudioEncoderServer  : public AudioServer {
             encoder->setAudioInfo(audio_info);
             encoded_stream.setInput(&client_obj);
             encoded_stream.setEncoder(encoder);
-            encoded_stream.begin();
+            encoded_stream.begin(audio_info);
 
             return AudioServer::begin(in, encoder->mime());
         }
