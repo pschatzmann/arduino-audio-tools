@@ -887,6 +887,15 @@ class QueueStream : public AudioStream {
     return true;
   }
 
+  /// Activate only when filled buffer reached % 
+  virtual bool begin(size_t activeWhenPercentFilled){
+    // determine total buffer size in bytes
+    size_t size = (available() + availableForWrite()) * sizeof(T);
+    // calculate limit
+    active_limit = size * activeWhenPercentFilled / 100;
+    return true;
+  }
+
   /// stops the processing
   virtual void end() override {
     TRACED();
@@ -894,7 +903,7 @@ class QueueStream : public AudioStream {
   };
 
   int available() override {
-    return callback_buffer_ptr->available()*sizeof(T);
+    return active ? callback_buffer_ptr->available()*sizeof(T) : 0;
   }
 
   int availableForWrite() override {
@@ -902,7 +911,12 @@ class QueueStream : public AudioStream {
   }
 
   virtual size_t write(const uint8_t *data, size_t len) override {
-    if (!active) return 0;
+    if (active_limit==0 && !active) return 0;
+
+    // activate automaticaly when limit has been reached
+    if (active_limit > 0 && !active && available() >= active_limit){
+      this->active = true;
+    }
 
     // make space by deleting oldest entries
     if (remove_oldest_data){
@@ -936,6 +950,7 @@ class QueueStream : public AudioStream {
 
  protected:
   BaseBuffer<T> *callback_buffer_ptr;
+  size_t active_limit = 0;
   bool active;
   bool remove_oldest_data;
   bool owns_buffer;
