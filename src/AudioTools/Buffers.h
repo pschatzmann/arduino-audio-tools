@@ -141,6 +141,8 @@ class BaseBuffer {
   /// returns the address of the start of the physical read buffer
   virtual T *address() = 0;
 
+  virtual size_t size() = 0;
+
  protected:
   void setWritePos(int pos){};
 
@@ -373,7 +375,7 @@ class RingBuffer : public BaseBuffer<T> {
   }
 
   /// Returns the maximum capacity of the buffer
-  virtual int size() { return max_size; }
+  virtual size_t size() { return max_size; }
 
  protected:
   Vector<T> _aucBuffer;
@@ -720,6 +722,8 @@ class NBuffer : public BaseBuffer<T> {
       }
     }
   }
+
+  size_t size() { return buffer_size * buffer_count;}
 
  protected:
   int buffer_size = 0;

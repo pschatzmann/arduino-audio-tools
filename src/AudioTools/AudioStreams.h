@@ -890,7 +890,7 @@ class QueueStream : public AudioStream {
   /// Activate only when filled buffer reached % 
   virtual bool begin(size_t activeWhenPercentFilled){
     // determine total buffer size in bytes
-    size_t size = (available() + availableForWrite()) * sizeof(T);
+    size_t size =  callback_buffer_ptr->size() * sizeof(T);
     // calculate limit
     active_limit = size * activeWhenPercentFilled / 100;
     return true;

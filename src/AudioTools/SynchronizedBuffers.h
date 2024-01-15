@@ -263,6 +263,7 @@ class SynchronizedNBuffer : public NBuffer<T> {
 public:
   SynchronizedNBuffer(int bufferSize, int bufferCount, int writeMaxWait=portMAX_DELAY, int readMaxWait=portMAX_DELAY) {
     TRACED();
+    max_size = bufferSize * bufferCount;
     NBuffer<T>::buffer_count = bufferCount;
     NBuffer<T>::buffer_size = bufferSize;
 
@@ -294,10 +295,14 @@ public:
       filled_buffers.setWriteMaxWait(ticks);
   }
 
+  size_t size() {
+    return max_size;
+  }
 
 protected:
   QueueFreeRTOS<BaseBuffer<T>*> available_buffers{0,portMAX_DELAY,0};
   QueueFreeRTOS<BaseBuffer<T>*> filled_buffers{0,portMAX_DELAY,0};
+  size_t max_size;
 
   BaseBuffer<T> *getNextAvailableBuffer() {
     TRACED();
@@ -443,6 +448,10 @@ public:
   T *address() override {
     LOGE("address() not implemented");
     return nullptr;
+  }
+
+  size_t size() {
+    return current_size;
   }
 
 protected:
