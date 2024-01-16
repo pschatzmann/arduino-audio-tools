@@ -5,8 +5,10 @@
         ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0) ||                     \
     defined(DOXYGEN)
 
-#ifndef perimanClearPinBus(p)
-#define perimanClearPinBus(p) perimanSetPinBus(p, ESP32_BUS_TYPE_INIT, NULL)
+#ifdef ARDUINO
+#  ifndef perimanClearPinBus
+#    define perimanClearPinBus(p) perimanSetPinBus(p, ESP32_BUS_TYPE_INIT, NULL)
+#  endif
 #endif
 
 #include "AudioAnalog/AnalogAudioBase.h"
@@ -86,6 +88,7 @@ public:
       }
     }
 
+#ifdef ARDUINO
     // Set all used pins/channels to INIT state
     for(int i = 0; i < cfg.channels; i++){
         // convert channel to pin
@@ -99,6 +102,7 @@ public:
           }
         }
     }
+#endif
 
     converter.end();
     active_tx = false;
@@ -304,6 +308,7 @@ protected:
         return false;
     }
 
+#ifdef ARDUINO
     // Set periman deinit callback
     // TODO, currently handled in end() method
 
@@ -317,6 +322,7 @@ protected:
             return false;
         }
     }
+#endif
 
     // Determine conv_frame_size which must be multiple of
     // SOC_ADC_DIGI_DATA_BYTES_PER_CONV
@@ -393,6 +399,7 @@ protected:
       return false;
     }
 
+#ifdef ARDUINO
     // Attach the pins to the ADC unit
     for(int i = 0; i < cfg.channels; i++){
         adc_channel = cfg.adc_channels[i];
@@ -403,7 +410,8 @@ protected:
             return false;
         }
     }
-    
+#endif
+
     // Start ADC
     err = adc_continuous_start(adc_handle);
     if (err != ESP_OK) {

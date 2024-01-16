@@ -5,7 +5,9 @@
 
 #include "esp_adc/adc_continuous.h"
 #include "esp_adc/adc_cali_scheme.h"
-#include "esp32-hal-periman.h"
+#ifdef ARDUINO
+#  include "esp32-hal-periman.h"
+#endif
 
 #if CONFIG_IDF_TARGET_ESP32
 #  define ADC_CONV_MODE       ADC_CONV_SINGLE_UNIT_1
@@ -73,7 +75,7 @@ class AnalogConfigESP32V1 : public AudioInfo {
     bool is_auto_center_read = false;
     adc_digi_convert_mode_t adc_conversion_mode = ADC_CONV_MODE;
     adc_digi_output_format_t adc_output_type = ADC_OUTPUT_TYPE;
-    uint8_t adc_attenuation = ADC_ATTEN_DB_11; // full voltage range of 3.9V
+    uint8_t adc_attenuation = ADC_ATTEN_DB_12; // full voltage range of 3.9V
     uint8_t adc_bit_width = SOC_ADC_DIGI_MAX_BITWIDTH;
     /// ESP32: ADC_CHANNEL_6, ADC_CHANNEL_7; others ADC_CHANNEL_2, ADC_CHANNEL_3
     adc_channel_t adc_channels[2] = ADC_CHANNELS;
