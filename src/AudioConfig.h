@@ -519,8 +519,6 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #define USE_ANALOG_ARDUINO
 #define USE_INT24_FROM_INT
 
-#define ANALOG_BUFFER_SIZE 1024
-#define ANALOG_BUFFERS 20
 #define PIN_ANALOG_START PA0
 #define PIN_PWM_START PA0
 #define PWM_DEFAULT_TIMER TIM2
