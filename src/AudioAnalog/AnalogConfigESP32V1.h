@@ -5,16 +5,17 @@
 
 #include "esp_adc/adc_continuous.h"
 #include "esp_adc/adc_cali_scheme.h"
+#include "esp32-hal-periman.h"
 
 #if CONFIG_IDF_TARGET_ESP32
-#  define ADC_CONV_MODE       ADC_CONV_SINGLE_UNIT_1  // ADC2 and Wifi work together
+#  define ADC_CONV_MODE       ADC_CONV_SINGLE_UNIT_1
 #  define ADC_OUTPUT_TYPE     ADC_DIGI_OUTPUT_FORMAT_TYPE1
 #  define ADC_CHANNELS        {ADC_CHANNEL_6, ADC_CHANNEL_7}
 #  define AUDIO_ADC_GET_CHANNEL(p_data)     ((p_data)->type1.channel)
 #  define AUDIO_ADC_GET_DATA(p_data)        ((p_data)->type1.data)
 #  define HAS_ESP32_DAC
 #elif CONFIG_IDF_TARGET_ESP32S2
-#  define ADC_CONV_MODE       ADC_CONV_SINGLE_UNIT_1 // ADC2 competes with WiFi and WiFi has priority, ADC_CONV_BOTH_UNIT
+#  define ADC_CONV_MODE       ADC_CONV_SINGLE_UNIT_1
 #  define ADC_OUTPUT_TYPE     ADC_DIGI_OUTPUT_FORMAT_TYPE2
 #  define AUDIO_ADC_GET_CHANNEL(p_data)     ((p_data)->type2.channel)
 #  define AUDIO_ADC_GET_DATA(p_data)        ((p_data)->type2.data)
@@ -27,15 +28,15 @@
 #  define AUDIO_ADC_GET_DATA(p_data)        ((p_data)->type2.data)
 #  define ADC_CHANNELS        {ADC_CHANNEL_2, ADC_CHANNEL_3}
 #elif CONFIG_IDF_TARGET_ESP32S3
-#  define ADC_CONV_MODE       ADC_CONV_SINGLE_UNIT_1 // ADC2 competes with WiFi and WiFi has priority
+#  define ADC_CONV_MODE       ADC_CONV_SINGLE_UNIT_1
 #  define ADC_OUTPUT_TYPE     ADC_DIGI_OUTPUT_FORMAT_TYPE2
 #  define AUDIO_ADC_GET_CHANNEL(p_data)     ((p_data)->type2.channel)
 #  define AUDIO_ADC_GET_DATA(p_data)        ((p_data)->type2.data)
-#  define ADC_CHANNELS        {ADC_CHANNEL_2, ADC_CHANNEL_3} // These are the I2C SDA and SCL pins on Adafruit ESP32-S3 feather , Channel 4&5 might be better
+#  define ADC_CHANNELS        {ADC_CHANNEL_2, ADC_CHANNEL_3} // or channel 4 & 5
 #endif
 
-#define GET_ADC_UNIT_FROM_CHANNEL(x) ((x >> 3) & 0x1)
-
+// #define GET_ADC_UNIT_FROM_CHANNEL(x) ((x >> 3) & 0x1)
+#  define ADC_UNIT            ADC_UNIT_1 // continuous ADC API only supports ADC1
 
 #ifdef HAS_ESP32_DAC
 #  include "driver/dac_continuous.h"
