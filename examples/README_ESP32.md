@@ -44,7 +44,7 @@ for example:
     | ADC_ATTEN_DB_0  | 0..1.1V | 100-950mV      |
     | ADC_ATTEN_DB_2_5| 0..1.5V | 100-1250mV     |
     | ADC_ATTEN_DB_6  | 0..2.2V | 150-1750mV     |
-    | ADC_ATTEN_DB_11 | 0..3.9V | 150-2450mV     |
+    | ADC_ATTEN_DB_12 | 0..3.9V | 150-2450mV     |
    
 - **channels**:
     - mono = 1  
@@ -62,7 +62,7 @@ adcConfig.sample_rate = 44100;
 adcConfig.adc_bit_width = 12;
 adcConfig.adc_calibration_active = true;
 adcConfig.is_auto_center_read = false;
-adcConfig.adc_attenuation = ADC_ATTEN_DB_11; 
+adcConfig.adc_attenuation = ADC_ATTEN_DB_12; 
 adcConfig.channels = 2;
 adcConfig.adc_channels[0] = ADC_CHANNEL_4; 
 adcConfig.adc_channels[1] = ADC_CHANNEL_5;
