@@ -9,7 +9,7 @@
 namespace audio_tools {
 
 /**
- * A UDP class which makes sure that we can use UDP as
+ * @brief A UDP class which makes sure that we can use UDP as
  * AudioSource and AudioSink. By default the WiFiUDP object is used and we login
  * to wifi if the ssid and password is provided and we are not already
  * connected.
