@@ -31,20 +31,31 @@ public:
 
 class LT8920Stream : public AudioStream {
 public:
+
+  LT8920Config defaultConfig(RxTxMode mode) {
+    LT8920Config cfg;
+    cfg.mode = mode;
+    return cfg;
+  }
+
   bool begin(LT8920Config cfg) {
     this->config = cfg;
-    if (cfg.rst_pin==-1 || cfg.cs_pin==-1 || cfg.pkt_pin==-1){
+    return begin();
+  }
+
+  bool begin() {
+    if (config.rst_pin==-1 || config.cs_pin==-1 || config.pkt_pin==-1){
       LOGE("Pins not defined");
       return false;
     }
     if (p_lt == nullptr) {
-      p_lt = new LT8920(cfg.cs_pin, cfg.pkt_pin, cfg.rst_pin);
+      p_lt = new LT8920(config.cs_pin, config.pkt_pin, config.rst_pin);
     }
     p_lt->begin();
-    p_lt->setCurrentControl(cfg.power, cfg.gain);
-    p_lt->setDataRate(cfg.rate);
-    p_lt->setChannel(cfg.channel);
-    switch (cfg.mode) {
+    p_lt->setCurrentControl(config.power, config.gain);
+    p_lt->setDataRate(config.rate);
+    p_lt->setChannel(config.channel);
+    switch (config.mode) {
     case RX_MODE:
       p_lt->startListening();
       break;
