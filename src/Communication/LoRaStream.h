@@ -36,10 +36,14 @@ public:
 
   bool begin(LoRaConfig cfg) {
     this->config = cfg;
-    bool result = LoRa.begin(cfg.frequency);
-    LoRa.setSignalBandwidth(cfg.signal_bandwidth);
+    return begin();
+  }
+
+  bool begin() {
+    bool result = LoRa.begin(config.frequency);
+    LoRa.setSignalBandwidth(config.signal_bandwidth);
     if (config.mode == TX_MODE) {
-      LoRa.setTxPower(cfg.tx_power);
+      LoRa.setTxPower(config.tx_power);
     }
     return result;
   }

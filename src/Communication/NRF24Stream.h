@@ -14,16 +14,16 @@ enum class NRF24Role {
 class NRF24Config {
 public:
   RxTxMode mode;
-  NRF24Role role = Unidirectional;
+  NRF24Role role = NRF24Role::Unidirectional;
   rf24_gpio_pin_t ce_pin = -1;
   rf24_gpio_pin_t cs_pin = -1;
-  uint8_t default_address[][6] = {"1Node", "2Node"};
-  uint8_t default_number = 0;
   int buffer_size = DEFAULT_BUFFER_SIZE;
   _SPI *spi = &SPI;
   bool auto_ack = true;
   rf24_pa_dbm_e pa_level = RF24_PA_MAX;
   rf24_datarate_e data_rate = RF24_2MBPS;
+  uint8_t default_number = 0;
+  uint8_t default_address[2][6] = {"1Node", "2Node"};
 };
 
 /**
@@ -46,8 +46,12 @@ public:
   }
 
   bool begin(NRF24Config cfg) {
-    TRACED();
     this->cfg = cfg;
+    return begin();
+  }
+
+  bool begin() {
+    TRACED();
     rf_radio.powerUp();
     if (cfg.ce_pin == -1) {
       LOGE("ce_pin not defined");
@@ -76,10 +80,10 @@ public:
       openReadingPipe();
       openWritingPipe();
       switch (cfg.role) {
-      case BidirectionalPrimary:
+      case NRF24Role::BidirectionalPrimary:
         stopListening();
         break;
-      case BidirectionalSecondary:
+      case NRF24Role::BidirectionalSecondary:
         startListening();
         break;
       }
@@ -111,13 +115,13 @@ public:
   }
 
   int available() override {
-    if (cfg.mode == Unidirectional && mode == TX_MODE)
+    if (cfg.role == NRF24Role::Unidirectional && cfg.mode == TX_MODE)
       return 0;
     return rf_radio.available() ? cfg.buffer_size : 0;
   }
 
   int availableForWrite() override {
-    if (cfg.mode == Unidirectional && mode == RX_MODE)
+    if (cfg.role == NRF24Role::Unidirectional && cfg.mode == RX_MODE)
       return 0;
 
     return cfg.buffer_size;
@@ -125,9 +129,9 @@ public:
 
   size_t readBytes(uint8_t *buf, size_t len) override {
     LOGD("read: %d", len);
-    if (cfg.mode == Unidirectional && mode == TX_MODE)
+    if (cfg.role == NRF24Role::Unidirectional && cfg.mode == TX_MODE)
       return 0;
-    if (cfg.mode != Unidirectional)
+    if (cfg.role != NRF24Role::Unidirectional)
       startListening();
     int payload = rf_radio.getPayloadSize();
     int open = len;
@@ -143,9 +147,9 @@ public:
 
   size_t write(const uint8_t *buf, size_t len) override {
     LOGD("write: %d", len);
-    if (cfg.mode == Unidirectional && mode == RX_MODE)
+    if (cfg.role == NRF24Role::Unidirectional && cfg.mode == RX_MODE)
       return 0;
-    if (cfg.mode != Unidirectional)
+    if (cfg.role != NRF24Role::Unidirectional)
       stopListening();
     // we can send ony max payload chars
     int payload = rf_radio.getPayloadSize();
@@ -171,12 +175,12 @@ public:
 
   void openReadingPipe() {
     switch (cfg.role) {
-    case Unidirectional:
+    case NRF24Role::Unidirectional:
       openReadingPipe(cfg.default_number, cfg.default_address[0]);
-    case BidirectionalPrimary:
+    case NRF24Role::BidirectionalPrimary:
       openReadingPipe(cfg.default_number, cfg.default_address[0]);
       break;
-    case BidirectionalSecondary:
+    case NRF24Role::BidirectionalSecondary:
       openReadingPipe(cfg.default_number, cfg.default_address[1]);
       break;
     }
@@ -184,12 +188,12 @@ public:
 
   void openWritingPipe() {
     switch (cfg.role) {
-    case Unidirectional:
+    case NRF24Role::Unidirectional:
       openWritingPipe(cfg.default_address[0]);
-    case BidirectionalPrimary:
+    case NRF24Role::BidirectionalPrimary:
       openWritingPipe(cfg.default_address[1]);
       break;
-    case BidirectionalSecondary:
+    case NRF24Role::BidirectionalSecondary:
       openWritingPipe(cfg.default_address[0]);
       break;
     }
