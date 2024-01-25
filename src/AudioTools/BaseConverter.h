@@ -271,6 +271,10 @@ class ConverterSwitchLeftAndRight : public  BaseConverter {
 };
 
 
+/**
+ * @brief Configure ConverterFillLeftAndRight
+ * @ingroup convert
+ */
 enum FillLeftAndRightStatus {Auto, LeftIsEmpty, RightIsEmpty};
 
 /**
