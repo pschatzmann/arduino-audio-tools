@@ -199,6 +199,7 @@ public:
   Tremolo(const Tremolo &copy) = default;
 
   void setDuration(int16_t ms) {
+    this->duration_ms = ms;
     int32_t rate_count = sampleRate * ms / 1000;
     rate_count_half = rate_count / 2;
   }
