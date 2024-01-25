@@ -179,6 +179,13 @@ class A2DPStream : public AudioStream {
             return result;           
         }
 
+        void end() override {
+            if (a2dp != nullptr) {
+                a2dp->disconnect();
+            }
+            AudioStream::end();
+        }
+
         /// checks if we are connected
         bool isConnected() {
             if (a2dp_source==nullptr && a2dp_sink==nullptr) return false;
