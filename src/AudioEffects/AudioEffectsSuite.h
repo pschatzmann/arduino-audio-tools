@@ -34,7 +34,7 @@ static effectsuite_t **interpolationTable = nullptr;
 
 /**
  * @brief Base Class for Effects
- * 
+ * @ingroup effects
  */
 
 class EffectSuiteBase  : public AudioEffect {
@@ -63,6 +63,7 @@ class EffectSuiteBase  : public AudioEffect {
  * to modulate The parameters of another effect. Class initialised with sample
  * rate.
  * @author Matthew Hamilton
+ * @ingroup effects
  * @copyright MIT License
  */
 class ModulationBaseClass {
@@ -360,7 +361,7 @@ protected:
 /**
  * @brief SoundGenerator using the ModulationBaseClass
  * to generate the samples.
- * 
+ * @ingroup effects
  * @tparam T 
  */
  template <class T>
@@ -391,6 +392,7 @@ protected:
  * @version 0.1
  * @see DelayEffectBase
  * @author Matthew Hamilton
+ * @ingroup effects
  * @copyright MIT License
  */
 class DelayEffectBase  {
@@ -625,6 +627,7 @@ protected: // member variables
  * high, low and band pass filtering
  * @see FilterEffectBase
  * @author Matthew Hamilton
+ * @ingroup effects
  * @copyright MIT License
  */
 class FilterEffectBase : public EffectSuiteBase  {
@@ -994,6 +997,7 @@ protected: // variables
 /**
  * @brief SimpleLPF
  * @author Matthew Hamilton
+ * @ingroup effects
  * @copyright MIT License
  */
 class SimpleLPF : public FilterEffectBase {
@@ -1551,6 +1555,7 @@ protected:
 /**
  * @brief EnvelopeFilter
  * @author Matthew Hamilton
+ * @ingroup effects
  * @copyright MIT License
  */
 class EnvelopeFilter : public FilterEffectBase {
