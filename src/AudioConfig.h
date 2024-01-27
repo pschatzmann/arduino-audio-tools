@@ -29,17 +29,16 @@
 #define AUDIOTOOLS_VERSION "0.9.4"
 
 // Use fixed point multiplication instead float for VolumeStream for slightly better performance on platforms without float hardware. Tested on RP2040 at 16 bit per second (still too slow for 32bit)
-//#define PREFER_FIXEDPOINT 
+#ifndef PREFER_FIXEDPOINT
+#  define PREFER_FIXEDPOINT false 
+#endif
 
-/**
- * Add automatic using namespace audio_tools;
-*/
+// Add automatic using namespace audio_tools;
 #ifndef USE_AUDIOTOOLS_NS
 #  define USE_AUDIOTOOLS_NS true
 #endif
 
 /**
- * ------------------------------------------------------------------------- 
  * @brief Logging
  * Logging Configuration in Arduino -> set USE_AUDIO_LOGGING to false if you want to deactivate Logging.
  * When using cmake you can set -DUSE_AUDIO_LOGGING=false
@@ -77,7 +76,6 @@
 #endif
 
 /**
- * ------------------------------------------------------------------------- 
  * @brief Common Default Settings that can usually be changed in the API
  */
 
@@ -117,7 +115,6 @@
 #  define ANALOG_BUFFER_COUNT 6 // 20
 #endif
 
-
 #ifndef A2DP_BUFFER_SIZE 
 #  define A2DP_BUFFER_SIZE 512
 #endif
@@ -148,7 +145,6 @@
 #endif
 
 /**
- * ------------------------------------------------------------------------- 
  * @brief PWM
  */
 #ifndef PWM_BUFFER_SIZE 
