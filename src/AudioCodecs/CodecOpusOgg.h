@@ -47,7 +47,7 @@ class OpusOggDecoder : public OggContainerDecoder {
   OpusSettings &config() { return dec.config(); }
 
   void begin(OpusSettings settings) {
-    OggContainerDecoder::begin();
+    OggContainerDecoder::begin(settings);
     dec.begin(settings);
   }
 
@@ -59,7 +59,7 @@ class OpusOggDecoder : public OggContainerDecoder {
 
   void end() override {
     TRACED();
-    OggContainerDecoder::begin();
+    OggContainerDecoder::end();
     dec.end();
   }
 
