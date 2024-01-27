@@ -113,7 +113,7 @@
  * @brief Set namespace
  * 
  */
-#ifndef NO_AUDIOTOOLS_NS
+#if USE_AUDIOTOOLS_NS
 using namespace audio_tools;  
 #endif
 
