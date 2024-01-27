@@ -32,6 +32,13 @@
 //#define PREFER_FIXEDPOINT 
 
 /**
+ * Add automatic using namespace audio_tools;
+*/
+#ifndef USE_AUDIOTOOLS_NS
+#  define USE_AUDIOTOOLS_NS true
+#endif
+
+/**
  * ------------------------------------------------------------------------- 
  * @brief Logging
  * Logging Configuration in Arduino -> set USE_AUDIO_LOGGING to false if you want to deactivate Logging.
