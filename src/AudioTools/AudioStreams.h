@@ -323,8 +323,19 @@ class MemoryStream : public AudioStream {
     }
   }
 
-  /// Automatically rewinds to the beginning when reaching the end
-  virtual void setLoop(bool loop, int rewindPos=0){
+  /// Automatically rewinds to the beginning when reaching the end. For wav files we move to pos 44 to ignore the header!
+  virtual void setLoop(bool loop){
+    is_loop = loop;
+    rewind_pos = 0;
+    if (buffer!=nullptr && buffer_size > 12){
+      if (memcmp("WAVE", buffer+8, 4)==0){
+        rewind_pos = 44;
+      } 
+    }
+  }
+
+  /// Automatically rewinds to the indicated position when reaching the end
+  virtual void setLoop(bool loop, int rewindPos){
     is_loop = loop;
     rewind_pos = rewindPos;
   }
