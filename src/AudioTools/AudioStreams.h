@@ -260,7 +260,7 @@ class MemoryStream : public AudioStream {
     int result = write_pos - read_pos;
     if (result<=0 && is_loop){
       // rewind to start
-      read_pos = 0;
+      read_pos = rewind_pos;
       result = write_pos - read_pos;
       // call callback
       if (rewind!=nullptr) rewind();
@@ -324,8 +324,9 @@ class MemoryStream : public AudioStream {
   }
 
   /// Automatically rewinds to the beginning when reaching the end
-  virtual void setLoop(bool loop){
+  virtual void setLoop(bool loop, int rewindPos=0){
     is_loop = loop;
+    rewind_pos = rewindPos;
   }
 
   virtual void resize(size_t size){
@@ -368,6 +369,7 @@ class MemoryStream : public AudioStream {
   int write_pos = 0;
   int read_pos = 0;
   int buffer_size = 0;
+  int rewind_pos = 0;
   uint8_t *buffer = nullptr;
   MemoryType memory_type = RAM;
   bool is_loop = false;
