@@ -652,7 +652,7 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #endif
 
 //------ VS1053 ----------
-
+// see https://github.com/pschatzmann/arduino-vs1053/wiki/Pinouts-for-Processors-and-Tested-Boards#microcontrollers
 // Default Pins for VS1053
 #ifndef VS1053_DEFINED
 #  define VS1053_CS 5
