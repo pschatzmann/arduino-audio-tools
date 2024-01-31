@@ -458,6 +458,15 @@ uint32_t millis() {return (xTaskGetTickCount() * portTICK_PERIOD_MS);}
 #endif
 
 //#define USE_ESP8266_AUDIO
+
+// default pins for VS1053 shield
+#define VS1053_CS 17 
+#define VS1053_DCS 9 
+#define VS1053_DREQ 10 
+#define VS1053_CS_SD -1
+#define VS1053_RESET 11
+#define VS1053_DEFINED
+
 #endif
 
 // The Pico W has WIFI support
