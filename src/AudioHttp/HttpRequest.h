@@ -213,7 +213,7 @@ class HttpRequest {
                 len = stream.available();
             }
             processBegin(action, url, mime, len);
-            processPost(stream);
+            processWrite(stream);
             return processEnd();
         }
 
@@ -263,8 +263,8 @@ class HttpRequest {
             return true;
         }
 
-        /// Posts the data of the indicated stream after calling processBegin
-        virtual void processPost(Stream &stream){
+        /// Writes (Posts) the data of the indicated stream after calling processBegin
+        virtual void processWrite(Stream &stream){
             uint8_t buffer[CHUNK_SIZE];
             int total = 0;
             while(stream.available()>0){
