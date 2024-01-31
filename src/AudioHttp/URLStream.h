@@ -88,7 +88,7 @@ class URLStream : public AbstractURLStream {
                 LOGE("preProcess failed");
                 return false;
             }
-            int result = process(action, url, reqMime, reqData);
+            int result = process<const char*>(action, url, reqMime, reqData);
             if (result>0){
                 size = request.contentLength();
                 LOGI("size: %d", (int)size);
@@ -111,7 +111,7 @@ class URLStream : public AbstractURLStream {
                 LOGE("preProcess failed");
                 return false;
             }
-            int result = process(action, url, reqMime, reqData, len);
+            int result = process<Stream&>(action, url, reqMime, reqData, len);
             if (result>0){
                 size = request.contentLength();
                 LOGI("size: %d", (int)size);
@@ -345,35 +345,9 @@ class URLStream : public AbstractURLStream {
         }
 
         /// Process the Http request and handle redirects
-        int process(MethodID action, Url &url, const char* reqMime, const char *reqData, int len=-1) {
+        template<typename T>
+        int process(MethodID action, Url &url, const char* reqMime, T reqData, int len=-1) {
             TRACED();
-            // keep icy across redirect requests ?
-            const char* icy = request.header().get("Icy-MetaData");
-
-            int status_code = request.process(action, url, reqMime, reqData, len);
-            // redirect
-            while (request.reply().isRedirectStatus()){
-                const char *redirect_url = request.reply().get(LOCATION);
-                if (redirect_url!=nullptr) {
-                    LOGW("Redirected to: %s", redirect_url);
-                    url.setUrl(redirect_url);
-                    Client* p_client =  &getClient(url.isSecure()); 
-                    p_client->stop();
-                    request.setClient(*p_client);
-                    if (icy){
-                        request.header().put("Icy-MetaData", icy);
-                    }
-                    status_code = request.process(action, url, reqMime, reqData, len);
-                } else {
-                    LOGE("Location is null");
-                    break;
-                }
-            }
-            return status_code;
-        }
-
-        /// Process the Http request and handle redirects
-        int process(MethodID action, Url &url, const char* reqMime, Stream &reqData, int len=-1) {
             // keep icy across redirect requests ?
             const char* icy = request.header().get("Icy-MetaData");
 
@@ -434,7 +408,7 @@ class URLStream : public AbstractURLStream {
         }
 
         inline bool isEOS() {
-            return read_pos>=read_size;
+            return read_pos >= read_size;
         }
 
         void login(){
@@ -448,8 +422,7 @@ class URLStream : public AbstractURLStream {
                 }
                 Serial.println();
                 delay(500);  
-            }
-#else   
+            }   
 #endif          
         }
 
