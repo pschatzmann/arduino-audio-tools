@@ -1721,6 +1721,11 @@ class CallbackStream : public AudioStream {
       this->cb_update = cb_update;
     }
 
+    // callback result negative -> no change; callbeack result >=0 provides the result
+    void setAvailableCallback(int (*cb)()){
+      this->cb_available = cb;
+    }
+
     virtual bool begin(AudioInfo info) {
   	  setAudioInfo(info);
   	  return begin();
@@ -1731,6 +1736,22 @@ class CallbackStream : public AudioStream {
       return true;
     }
     void end() override { active = false;}
+
+    int available() override {
+      int result = AudioStream::available();
+      // determine value from opional variable
+      if (available_bytes>=0) 
+        return available_bytes;
+      // check if there is a callback  
+      if (cb_available==nullptr) 
+        return result;
+      // determine value from callback
+      int tmp_available = cb_available();
+      if (tmp_available < 0)
+        return result;
+
+      return tmp_available;
+    }
 
     size_t readBytes(uint8_t* data, size_t len) override {
       if (!active) return 0;
@@ -1789,13 +1810,22 @@ class CallbackStream : public AudioStream {
         p_out = &out;
     }
 
+    /// optioinally define available bytes for next read
+    void setAvailable(int val){
+      available_bytes = val;
+    }
+
+
+
   protected:
     bool active=true;
     size_t (*cb_write)(const uint8_t* data, size_t len) = nullptr;
     size_t (*cb_read)(uint8_t* data, size_t len) = nullptr;
     size_t (*cb_update)(uint8_t* data, size_t len) = nullptr;
+    int (*cb_available)() = nullptr;
     Stream *p_stream = nullptr;
     Print *p_out = nullptr;
+    int available_bytes = -1;
 };
 
 /**
