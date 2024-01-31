@@ -81,30 +81,37 @@ class URLStream : public AbstractURLStream {
             read_buffer_size = readBufferSize;
         }
 
-        virtual bool begin(const char* urlStr, const char* acceptMime=nullptr, MethodID action=GET,  const char* reqMime="", const char*reqData="")  override{
+        /// Execute http request: by default we use a GET request
+        virtual bool begin(const char* urlStr, const char* acceptMime=nullptr, MethodID action=GET,  const char* reqMime="", const char*reqData="") override {
             LOGI( "%s: %s",LOG_METHOD, urlStr);
-            custom_log_level.set();
-            url_str = urlStr;
-            url.setUrl(url_str.c_str());
-            int result = -1;
-
-            // close it - if we have an active connection
-            if (active) end();
-
-            // optional: login if necessary
-            login();
-
-            // check if we are connected
-            if (WiFi.status() != WL_CONNECTED){
-                LOGE("Not connected");
+            if (!preProcess(urlStr, acceptMime)){
+                LOGE("preProcess failed");
                 return false;
             }
-
-            //request.reply().setAutoCreateLines(false);
-            if (acceptMime!=nullptr){
-                request.setAcceptMime(acceptMime);
+            int result = process(action, url, reqMime, reqData);
+            if (result>0){
+                size = request.contentLength();
+                LOGI("size: %d", (int)size);
+                if (size>=0 && wait_for_data){
+                    waitForData(clientTimeout);
+                }
             }
-            result = process(action, url, reqMime, reqData);
+            total_read = 0;
+            active = result == 200;
+            LOGI("==> http status: %d", result);
+            custom_log_level.reset();
+
+            return active;
+        }
+
+        /// Execute e.g. http POST request which submits the content as a stream
+        virtual bool begin(const char* urlStr, const char* acceptMime, MethodID action, const char* reqMime, Stream &reqData, int len=-1)  {
+            LOGI( "%s: %s",LOG_METHOD, urlStr);
+            if (!preProcess(urlStr, acceptMime)){
+                LOGE("preProcess failed");
+                return false;
+            }
+            int result = process(action, url, reqMime, reqData, len);
             if (result>0){
                 size = request.contentLength();
                 LOGI("size: %d", (int)size);
@@ -291,13 +298,33 @@ class URLStream : public AbstractURLStream {
         unsigned long handshakeTimeout = URL_HANDSHAKE_TIMEOUT; //120000
         bool is_power_save = false;
 
+        bool preProcess(const char* urlStr, const char* acceptMime){
+            TRACED();
+            custom_log_level.set();
+            url_str = urlStr;
+            url.setUrl(url_str.c_str());
+            int result = -1;
 
-        /// Process the Http request and handle redirects
-        int process(MethodID action, Url &url, const char* reqMime, const char *reqData, int len=-1) {
+            // close it - if we have an active connection
+            if (active) end();
+
+            // optional: login if necessary
+            login();
+
+            // check if we are connected
+            if (WiFi.status() != WL_CONNECTED){
+                LOGE("Not connected");
+                return false;
+            }
+
+            //request.reply().setAutoCreateLines(false);
+            if (acceptMime!=nullptr){
+                request.setAcceptMime(acceptMime);
+            }
+
+            // setup client
             client = &getClient(url.isSecure());
             request.setClient(*client);
-            // keep icy across redirect requests ?
-            const char* icy = request.header().get("Icy-MetaData");
 
             // set timeout
             client->setTimeout(clientTimeout / 1000);
@@ -314,6 +341,41 @@ class URLStream : public AbstractURLStream {
                 esp_wifi_set_ps(WIFI_PS_NONE);
             }
 #endif
+            return true;
+        }
+
+        /// Process the Http request and handle redirects
+        int process(MethodID action, Url &url, const char* reqMime, const char *reqData, int len=-1) {
+            TRACED();
+            // keep icy across redirect requests ?
+            const char* icy = request.header().get("Icy-MetaData");
+
+            int status_code = request.process(action, url, reqMime, reqData, len);
+            // redirect
+            while (request.reply().isRedirectStatus()){
+                const char *redirect_url = request.reply().get(LOCATION);
+                if (redirect_url!=nullptr) {
+                    LOGW("Redirected to: %s", redirect_url);
+                    url.setUrl(redirect_url);
+                    Client* p_client =  &getClient(url.isSecure()); 
+                    p_client->stop();
+                    request.setClient(*p_client);
+                    if (icy){
+                        request.header().put("Icy-MetaData", icy);
+                    }
+                    status_code = request.process(action, url, reqMime, reqData, len);
+                } else {
+                    LOGE("Location is null");
+                    break;
+                }
+            }
+            return status_code;
+        }
+
+        /// Process the Http request and handle redirects
+        int process(MethodID action, Url &url, const char* reqMime, Stream &reqData, int len=-1) {
+            // keep icy across redirect requests ?
+            const char* icy = request.header().get("Icy-MetaData");
 
             int status_code = request.process(action, url, reqMime, reqData, len);
             // redirect
@@ -362,7 +424,6 @@ class URLStream : public AbstractURLStream {
             return *client; // to avoid compiler warning
 #endif
         }
-
 
         inline void fillBuffer() {
             if (isEOS()){

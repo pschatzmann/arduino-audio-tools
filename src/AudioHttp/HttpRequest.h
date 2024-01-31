@@ -8,6 +8,8 @@
 #include "AudioHttp/Url.h"
 #include "AudioTools/AudioLogger.h" 
 
+#define CHUNK_SIZE 512
+
 namespace audio_tools {
 
 
@@ -263,23 +265,37 @@ class HttpRequest {
 
         /// Posts the data of the indicated stream after calling processBegin
         virtual void processPost(Stream &stream){
-            uint8_t buffer[512];
+            uint8_t buffer[CHUNK_SIZE];
             int total = 0;
             while(stream.available()>0){
-                int result_len = stream.readBytes(buffer, 512);
+                int result_len = stream.readBytes(buffer, CHUNK_SIZE);
                 total += result_len;
-                client_ptr->write(buffer, result_len);
+                write(buffer, result_len);
             }
             LOGI("Written data: %d bytes", total);
         }
 
         /// Write data to the client: can be used to post data after calling processBegin
         virtual size_t write(uint8_t* data, size_t len){
-            return client_ptr->write(data, len);
+            size_t result = 0;
+            if (isChunked()){
+                client_ptr->println(len);
+                if(len>0){
+                    result = client_ptr->write(data, len);
+                }
+                client_ptr->println();
+            } else {
+                result = client_ptr->write(data, len);
+            }
+            return result;
         }
 
         /// Ends the http request processing and returns the status code
         virtual int processEnd(){
+            // if sending is chunked we terminate with an empty chunk
+            if (isChunked()){
+                write(nullptr, 0);
+            }
             LOGI("Request written ... waiting for reply")
             //Commented out because this breaks the RP2040 W
             //client_ptr->flush(); 
@@ -303,6 +319,11 @@ class HttpRequest {
         /// Defines the client timeout in ms
         void setTimeout(int timeoutMs){
             clientTimeout = timeoutMs;
+        }
+
+        /// we are sending the data chunked
+        bool isChunked() {
+            return request_header.isChunked();
         }
 
     protected:
