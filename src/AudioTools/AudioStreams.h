@@ -197,7 +197,7 @@ class AudioStreamWrapper : public AudioStream {
 
 
 /**
- * @brief A simple Stream implementation which is backed by allocated memory
+ * @brief A simple Stream implementation which is backed by allocated memory. 
  * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -205,6 +205,7 @@ class AudioStreamWrapper : public AudioStream {
  */
 class MemoryStream : public AudioStream {
  public:
+  /// Constructor for alloction in RAM
   MemoryStream(int buffer_size = 512, MemoryType memoryType = RAM) {
     LOGD("MemoryStream: %d", buffer_size);
     this->buffer_size = buffer_size;
@@ -212,9 +213,11 @@ class MemoryStream : public AudioStream {
     resize(buffer_size);
   }
 
-  MemoryStream(const uint8_t *buffer, int buffer_size, MemoryType memoryType = FLASH_RAM) {
+  /// Constructor for data from Progmem, active is set to true automatically by default.
+  MemoryStream(const uint8_t *buffer, int buffer_size, bool isActive=true, MemoryType memoryType = FLASH_RAM) {
     LOGD("MemoryStream: %d", buffer_size);
     setValue(buffer, buffer_size, memoryType);
+    is_active = isActive;
   }
 
   ~MemoryStream() {
@@ -393,7 +396,7 @@ class MemoryStream : public AudioStream {
   MemoryType memory_type = RAM;
   bool is_loop = false;
   void (*rewind)() = nullptr;
-  bool is_active = true; // true to minimize impact of change
+  bool is_active = false;
 
   bool memoryCanChange() {
     return memory_type!=FLASH_RAM;
