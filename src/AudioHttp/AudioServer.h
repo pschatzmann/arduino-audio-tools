@@ -107,7 +107,7 @@ class AudioServer {
             //LOGD("doLoop");
             bool active = true;
             if (!client_obj.connected()) {
-#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)                 
+#if USE_SERVER_ACCEPT               
                 client_obj = server.accept(); // listen for incoming clients
 #else
                 client_obj = server.available(); // listen for incoming clients
