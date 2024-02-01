@@ -230,10 +230,12 @@ class MemoryStream : public AudioStream {
       resize(buffer_size);
     }
     read_pos = 0;
+    is_active = true;
     return true;
   }
 
   virtual size_t write(uint8_t byte) override {
+    if (!is_active) return 0;
     if (buffer==nullptr) return 0;
     int result = 0;
     if (write_pos < buffer_size) {
@@ -245,6 +247,7 @@ class MemoryStream : public AudioStream {
   }
 
   virtual size_t write(const uint8_t *buffer, size_t size) override {
+    if (!is_active) return 0;
     size_t result = 0;
     for (size_t j = 0; j < size; j++) {
       if (!write(buffer[j])) {
@@ -256,6 +259,7 @@ class MemoryStream : public AudioStream {
   }
 
   virtual int available() override { 
+    if (!is_active) return 0;
     if (buffer==nullptr) return 0;
     int result = write_pos - read_pos;
     if (result<=0 && is_loop){
@@ -269,6 +273,7 @@ class MemoryStream : public AudioStream {
   }
 
   virtual int availableForWrite() override {
+    if (!is_active) return 0;
     return buffer_size - write_pos;
   } 
 
@@ -281,6 +286,7 @@ class MemoryStream : public AudioStream {
   }
 
   virtual size_t readBytes(uint8_t *buffer, size_t length) override {
+    if (!is_active) return 0;
     size_t count = 0;
     while (count < length) {
       int c = read();
@@ -292,6 +298,7 @@ class MemoryStream : public AudioStream {
   }
 
   virtual int peek() override {
+    if (!is_active) return -1;
     int result = -1;
     if (available() > 0) {
       result = buffer[read_pos];
@@ -303,6 +310,7 @@ class MemoryStream : public AudioStream {
 
   virtual void end() override {
     read_pos = 0;
+    is_active = false;
   }
 
   /// clears the audio data: sets all values to 0
@@ -385,6 +393,7 @@ class MemoryStream : public AudioStream {
   MemoryType memory_type = RAM;
   bool is_loop = false;
   void (*rewind)() = nullptr;
+  bool is_active = false;
 
   bool memoryCanChange() {
     return memory_type!=FLASH_RAM;
