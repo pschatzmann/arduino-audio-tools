@@ -188,6 +188,12 @@
 #define ESP32X
 #endif
 
+#if defined(ESP32)
+#  if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0) 
+#    define USE_SERVER_ACCEPT true              
+#  endif
+#endif
+
 // ----- Regular ESP32 -----
 #if defined(ESP32)  && !defined(ESP32X)
 #if ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(5, 0 , 0)
@@ -718,6 +724,10 @@ typedef WiFiClient WiFiClientSecure;
 #ifndef URL_CLIENT_TIMEOUT
 #  define URL_CLIENT_TIMEOUT 60000;
 #  define URL_HANDSHAKE_TIMEOUT 120000
+#endif
+
+#ifndef USE_SERVER_ACCEPT
+#  define USE_SERVER_ACCEPT false
 #endif
 
 // select int24 implementation
