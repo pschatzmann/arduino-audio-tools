@@ -450,6 +450,7 @@ uint32_t millis() {return (xTaskGetTickCount() * portTICK_PERIOD_MS);}
 #define PIN_I2S_MUTE -1
 #define SOFT_MUTE_VALUE 0
 #define PIN_CS PIN_SPI0_SS
+#define USE_SERVER_ACCEPT true
 
 // fix missing __sync_synchronize symbol
 #define FIX_SYNC_SYNCHRONIZE
