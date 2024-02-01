@@ -393,7 +393,7 @@ class MemoryStream : public AudioStream {
   MemoryType memory_type = RAM;
   bool is_loop = false;
   void (*rewind)() = nullptr;
-  bool is_active = false;
+  bool is_active = true; // true to minimize impact of change
 
   bool memoryCanChange() {
     return memory_type!=FLASH_RAM;
