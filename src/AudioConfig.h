@@ -446,7 +446,7 @@ uint32_t millis() {return (xTaskGetTickCount() * portTICK_PERIOD_MS);}
 #define PIN_CS PIN_SPI0_SS
 
 // fix missing __sync_synchronize symbol
-#define FIX_SYNC_SYNCHRONIZE
+//#define FIX_SYNC_SYNCHRONIZE
 #define IRAM_ATTR
 
 #ifndef ANALOG_BUFFER_SIZE 
