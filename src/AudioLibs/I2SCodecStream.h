@@ -111,12 +111,14 @@ public:
   bool hasBoard() { return p_board != nullptr; }
 
   Pin getPin(PinFunctionEnum function) {
-    if (p_board==nullptr) return -1;
+    if (p_board == nullptr)
+      return -1;
     return p_board->getPins().getPin(function);
   }
 
   Pin getPin(PinFunctionEnum function, int pos) {
-    if (p_board==nullptr) return -1;
+    if (p_board == nullptr)
+      return -1;
     return p_board->getPins().getPin(function, pos);
   }
 
@@ -131,7 +133,7 @@ protected:
     auto i2s = p_board->getPins().getI2SPins();
     if (i2s) {
       // determine i2s pins from board definition
-      PinsI2S i2s_pins = i2s.value(); 
+      PinsI2S i2s_pins = i2s.value();
       cfg.pin_bck = i2s_pins.bck;
       cfg.pin_mck = i2s_pins.mclk;
       cfg.pin_ws = i2s_pins.ws;
@@ -150,7 +152,9 @@ protected:
   bool beginCodec(I2SCodecConfig info) {
     CodecConfig codec_cfg;
     codec_cfg.adc_input = info.adc_input;
+    LOGD("input: %d", info.adc_input);
     codec_cfg.dac_output = info.dac_output;
+    LOGD("output: %d", info.dac_output);
     codec_cfg.i2s.bits = toCodecBits(info.bits_per_sample);
     codec_cfg.i2s.rate = toRate(info.sample_rate);
     codec_cfg.i2s.fmt = toFormat(info.i2s_format);
@@ -165,28 +169,44 @@ protected:
   sample_bits_t toCodecBits(int bits) {
     switch (bits) {
     case 16:
+      LOGD("BIT_LENGTH_16BITS");
       return BIT_LENGTH_16BITS;
     case 24:
+      LOGD("BIT_LENGTH_24BITS");
       return BIT_LENGTH_24BITS;
     case 32:
+      LOGD("BIT_LENGTH_32BITS");
       return BIT_LENGTH_32BITS;
     }
     LOGE("Unsupported bits: %d", bits);
     return BIT_LENGTH_16BITS;
   }
   samplerate_t toRate(int rate) {
-    if (rate <= 8000)
+    if (rate <= 8000) {
+      LOGD("RATE_08K");
       return RATE_08K;
-    if (rate <= 11000)
+    }
+    if (rate <= 11000) {
+      LOGD("RATE_08K");
       return RATE_11K;
-    if (rate <= 16000)
+    }
+    if (rate <= 16000) {
+      LOGD("RATE_08K");
       return RATE_16K;
-    if (rate <= 22000)
+    }
+    if (rate <= 22000) {
+      LOGD("RATE_08K");
       return RATE_22K;
-    if (rate <= 32000)
+    }
+    if (rate <= 32000) {
+      LOGD("RATE_08K");
       return RATE_32K;
-    if (rate <= 44000)
+    }
+    if (rate <= 44000) {
+      LOGD("RATE_08K");
       return RATE_44K;
+    }
+    LOGD("RATE_08K");
     return RATE_48K;
   }
 
@@ -194,14 +214,18 @@ protected:
     switch (fmt) {
     case I2S_PHILIPS_FORMAT:
     case I2S_STD_FORMAT:
+      LOGD("I2S_NORMAL");
       return I2S_NORMAL;
     case I2S_LEFT_JUSTIFIED_FORMAT:
     case I2S_MSB_FORMAT:
+      LOGD("I2S_LEFT");
       return I2S_LEFT;
     case I2S_RIGHT_JUSTIFIED_FORMAT:
     case I2S_LSB_FORMAT:
+      LOGD("I2S_RIGHT");
       return I2S_RIGHT;
     case I2S_PCM:
+      LOGD("I2S_DSP");
       return I2S_DSP;
     default:
       LOGE("unsupported mode");
