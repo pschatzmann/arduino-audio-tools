@@ -36,6 +36,7 @@ public:
   }
 
   bool begin() {
+    setupI2SPins();
     if (!beginCodec(cfg)) {
       TRACEE()
     }
@@ -109,10 +110,35 @@ public:
   void setBoard(AudioBoard *board) { p_board = board; }
   bool hasBoard() { return p_board != nullptr; }
 
+  Pin getPin(PinFunctionEnum function) {
+    if (p_board==nullptr) return -1;
+    return p_board->getPins().getPin(function);
+  }
+
+  Pin getPin(PinFunctionEnum function, int pos) {
+    if (p_board==nullptr) return -1;
+    return p_board->getPins().getPin(function, pos);
+  }
+
 protected:
   I2SStream i2s;
   I2SCodecConfig cfg;
   AudioBoard *p_board = nullptr;
+
+  /// We use the board pins if they are available
+  void setupI2SPins() {
+    // setup pins in i2s config
+    auto i2s = p_board->getPins().getI2SPins();
+    if (i2s) {
+      // determine i2s pins from board definition
+      PinsI2S i2s_pins = i2s.value(); 
+      cfg.pin_bck = i2s_pins.bck;
+      cfg.pin_mck = i2s_pins.mclk;
+      cfg.pin_ws = i2s_pins.ws;
+      cfg.pin_data = i2s_pins.data_out;
+      cfg.pin_data_rx = i2s_pins.data_in;
+    }
+  }
 
   bool beginCodec(AudioInfo info) {
     cfg.sample_rate = info.sample_rate;
@@ -122,17 +148,18 @@ protected:
   }
 
   bool beginCodec(I2SCodecConfig info) {
-    CodecConfig cfg;
-    cfg.adc_input = info.adc_input;
-    cfg.dac_output = info.dac_output;
-    cfg.i2s.bits = toCodecBits(info.bits_per_sample);
-    cfg.i2s.rate = toRate(info.sample_rate);
-    cfg.i2s.fmt = toFormat(info.i2s_format);
+    CodecConfig codec_cfg;
+    codec_cfg.adc_input = info.adc_input;
+    codec_cfg.dac_output = info.dac_output;
+    codec_cfg.i2s.bits = toCodecBits(info.bits_per_sample);
+    codec_cfg.i2s.rate = toRate(info.sample_rate);
+    codec_cfg.i2s.fmt = toFormat(info.i2s_format);
     // use reverse logic for codec setting
-    cfg.i2s.mode = info.is_master ? MODE_SLAVE : MODE_MASTER;
+    codec_cfg.i2s.mode = info.is_master ? MODE_SLAVE : MODE_MASTER;
     if (p_board == nullptr)
       return false;
-    return p_board->begin(cfg);
+
+    return p_board->begin(codec_cfg);
   }
 
   sample_bits_t toCodecBits(int bits) {
