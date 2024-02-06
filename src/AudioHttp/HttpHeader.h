@@ -213,10 +213,6 @@ class HttpHeader {
             return url_path.c_str(); 
         }
 
-        const char* protocol() {
-            return protocol_str.c_str(); 
-        }
-
         MethodID method(){
             return method_id;
         }
@@ -308,6 +304,7 @@ class HttpHeader {
             return status_code >= 200 && status_code < 300;
         }
 
+        /// returns true if the status code is >=300 and < 400
         bool isRedirectStatus() {
             return status_code >= 300 && status_code < 400;
         }
@@ -317,8 +314,19 @@ class HttpHeader {
             temp_buffer.resize(0);
         }
 
+        /// Set the timout
         void setTimeout(int timeoutMs){
             timeout_ms = timeoutMs;
+        }
+
+        /// Provide the protocol
+        const char* protocol() {
+            return protocol_str.c_str(); 
+        }
+
+        /// Defines the protocol: e.g. HTTP/1.1
+        void setProtocol(const char* protocal){
+            protocol_str = protocal;
         }
 
     protected:
