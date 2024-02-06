@@ -18,7 +18,12 @@ struct I2SCodecConfig : public I2SConfig {
  */
 class I2SCodecStream : public AudioStream {
 public:
-  I2SCodecStream(AudioBoard *board) { p_board = board; }
+  /// Default Constructor (w/o codec)
+  I2SCodecStream() = default;
+
+  I2SCodecStream(AudioBoard &board) { setBoard(board); }
+  /// Provide board via pointer
+  I2SCodecStream(AudioBoard *board) { setBoard(board); }
 
   /// Provides the default configuration
   I2SCodecConfig defaultConfig(RxTxMode mode = TX_MODE) {
@@ -47,7 +52,8 @@ public:
   /// Stops the I2S interface
   void end() {
     TRACED();
-    p_board->end();
+    if (p_board)
+      p_board->end();
     i2s.end();
   }
 
@@ -77,12 +83,31 @@ public:
   virtual int availableForWrite() override { return i2s.availableForWrite(); }
 
   /// sets the volume (range 0.0 - 1.0)
-  bool setVolume(float vol) { return p_board->setVolume(vol * 100.0); }
-  int getVolume() { return p_board->getVolume(); }
-  bool setMute(bool mute) { return p_board->setMute(mute); }
-  bool setPAPower(bool active) { return p_board->setPAPower(active); }
+  bool setVolume(float vol) {
+    if (p_board == nullptr)
+      return false;
+    return p_board->setVolume(vol * 100.0);
+  }
+  int getVolume() {
+    if (p_board == nullptr)
+      return -1;
+    return p_board->getVolume();
+  }
+  bool setMute(bool mute) {
+    if (p_board == nullptr)
+      return false;
+    return p_board->setMute(mute);
+  }
+  bool setPAPower(bool active) {
+    if (p_board == nullptr)
+      return false;
+    return p_board->setPAPower(active);
+  }
 
   AudioBoard &board() { return *p_board; }
+  void setBoard(AudioBoard &board) { p_board = &board; }
+  void setBoard(AudioBoard *board) { p_board = board; }
+  bool hasBoard() { return p_board != nullptr; }
 
 protected:
   I2SStream i2s;
@@ -105,6 +130,8 @@ protected:
     cfg.i2s.fmt = toFormat(info.i2s_format);
     // use reverse logic for codec setting
     cfg.i2s.mode = info.is_master ? MODE_SLAVE : MODE_MASTER;
+    if (p_board == nullptr)
+      return false;
     return p_board->begin(cfg);
   }
 
