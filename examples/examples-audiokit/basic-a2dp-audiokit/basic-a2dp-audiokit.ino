@@ -7,12 +7,14 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+//#include "AudioLibs/AudioKit.h"
 #include "AudioLibs/AudioA2DP.h"
+#include "AudioLibs/AudioBoardStream.h"
 
 
 BluetoothA2DPSink a2dp_sink;
-AudioKitStream kit;
+//AudioKitStream kit;
+I2SCodecStream kit(AudioKitEs8388V1); 
 
 // Write data to AudioKit in callback
 void read_data_stream(const uint8_t *data, uint32_t length) {
@@ -34,5 +36,5 @@ void setup() {
 }
 
 void loop() {
-  kit.processActions();
+  //kit.processActions();
 }
