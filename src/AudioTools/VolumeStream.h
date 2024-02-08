@@ -177,7 +177,7 @@ class VolumeStream : public AudioStream {
 
         /// Defines the volume for all channels: needs to be in the range of 0 to 1.0 (if allow boost has not been set)
         bool setVolume(float vol){
-            bool result;
+            bool result = true;
             // just to make sure that we have a valid start volume before begin
             info.volume = vol; 
             for (int j=0;j<info.channels;j++){

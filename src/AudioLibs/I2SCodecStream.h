@@ -3,6 +3,9 @@
 #include "AudioConfig.h"
 #include "AudioI2S/I2SStream.h"
 
+#pragma GCC diagnostic ignored "-Wclass-memaccess"
+
+
 // Added to be compatible with the AudioKitStream.h
 #ifndef PIN_AUDIO_KIT_SD_CARD_CS
 #  define PIN_AUDIO_KIT_SD_CARD_CS 13
@@ -42,6 +45,7 @@ public:
     memcpy(&cfg, &cfg1, sizeof(cfg1));
     cfg.input_device = ADC_INPUT_LINE1;
     cfg.output_device = DAC_OUTPUT_ALL;
+    cfg.sd_active = true;
     return cfg;
   }
 
@@ -120,13 +124,13 @@ public:
   void setBoard(AudioBoard *board) { p_board = board; }
   bool hasBoard() { return p_board != nullptr; }
 
-  Pin getPinID(PinFunctionEnum function) {
+  Pin getPinID(PinFunction function) {
     if (p_board == nullptr)
       return -1;
     return p_board->getPins().getPinID(function);
   }
 
-  Pin getPinID(PinFunctionEnum function, int pos) {
+  Pin getPinID(PinFunction function, int pos) {
     if (p_board == nullptr)
       return -1;
     return p_board->getPins().getPinID(function, pos);
