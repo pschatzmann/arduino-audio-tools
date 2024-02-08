@@ -8,6 +8,8 @@ namespace audio_tools {
 struct I2SCodecConfig : public I2SConfig {
   adc_input_t adc_input = ADC_INPUT_LINE1;
   dac_output_t dac_output = DAC_OUTPUT_ALL;
+  // to be compatible with the AudioKitStream -> do not activate SD spi if false
+  bool sd_active = true;
 };
 
 /**
@@ -44,7 +46,7 @@ public:
   }
 
   /// Starts the I2S interface
-  bool begin(I2SCodecConfig cfg) {
+  virtual bool begin(I2SCodecConfig cfg) {
     TRACED();
     this->cfg = cfg;
     return begin();
@@ -153,6 +155,7 @@ protected:
 
   bool beginCodec(I2SCodecConfig info) {
     CodecConfig codec_cfg;
+    codec_cfg.sd_active = info.sd_active;
     codec_cfg.adc_input = info.adc_input;
     LOGD("input: %d", info.adc_input);
     codec_cfg.dac_output = info.dac_output;
