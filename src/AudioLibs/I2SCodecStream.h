@@ -3,17 +3,25 @@
 #include "AudioConfig.h"
 #include "AudioI2S/I2SStream.h"
 
+// Added to be compatible with the AudioKitStream.h
+#ifndef PIN_AUDIO_KIT_SD_CARD_CS
+#  define PIN_AUDIO_KIT_SD_CARD_CS 13
+#  define PIN_AUDIO_KIT_SD_CARD_MISO 2
+#  define PIN_AUDIO_KIT_SD_CARD_MOSI 15
+#  define PIN_AUDIO_KIT_SD_CARD_CLK  14
+#endif
+
 namespace audio_tools {
 
 struct I2SCodecConfig : public I2SConfig {
-  adc_input_t adc_input = ADC_INPUT_LINE1;
-  dac_output_t dac_output = DAC_OUTPUT_ALL;
+  input_device_t input_device = ADC_INPUT_LINE1;
+  output_device_t output_device = DAC_OUTPUT_ALL;
   // to be compatible with the AudioKitStream -> do not activate SD spi if false
   bool sd_active = true;
 };
 
 /**
- * @brief  I2S Stream which also sets up a codec chip
+ * @brief  I2S Stream which also sets up a codec chip and i2s
  * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -32,8 +40,8 @@ public:
     auto cfg1 = i2s.defaultConfig(mode);
     I2SCodecConfig cfg;
     memcpy(&cfg, &cfg1, sizeof(cfg1));
-    cfg.adc_input = ADC_INPUT_LINE1;
-    cfg.dac_output = DAC_OUTPUT_ALL;
+    cfg.input_device = ADC_INPUT_LINE1;
+    cfg.output_device = DAC_OUTPUT_ALL;
     return cfg;
   }
 
@@ -112,16 +120,16 @@ public:
   void setBoard(AudioBoard *board) { p_board = board; }
   bool hasBoard() { return p_board != nullptr; }
 
-  Pin getPin(PinFunctionEnum function) {
+  Pin getPinID(PinFunctionEnum function) {
     if (p_board == nullptr)
       return -1;
-    return p_board->getPins().getPin(function);
+    return p_board->getPins().getPinID(function);
   }
 
-  Pin getPin(PinFunctionEnum function, int pos) {
+  Pin getPinID(PinFunctionEnum function, int pos) {
     if (p_board == nullptr)
       return -1;
-    return p_board->getPins().getPin(function, pos);
+    return p_board->getPins().getPinID(function, pos);
   }
 
   DriverPins &getPins() { return p_board->getPins(); }
@@ -156,10 +164,10 @@ protected:
   bool beginCodec(I2SCodecConfig info) {
     CodecConfig codec_cfg;
     codec_cfg.sd_active = info.sd_active;
-    codec_cfg.adc_input = info.adc_input;
-    LOGD("input: %d", info.adc_input);
-    codec_cfg.dac_output = info.dac_output;
-    LOGD("output: %d", info.dac_output);
+    codec_cfg.input_device = info.input_device;
+    LOGD("input: %d", info.input_device);
+    codec_cfg.output_device = info.output_device;
+    LOGD("output: %d", info.output_device);
     codec_cfg.i2s.bits = toCodecBits(info.bits_per_sample);
     codec_cfg.i2s.rate = toRate(info.sample_rate);
     codec_cfg.i2s.fmt = toFormat(info.i2s_format);

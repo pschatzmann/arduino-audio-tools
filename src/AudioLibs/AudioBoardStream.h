@@ -9,10 +9,10 @@ class AudioBoardStream;
 AudioBoardStream *selfAudioBoard = nullptr;
 
 /**
- * New functionality which replaces the AudioKitStream that is based on the
+ * @brief New functionality which replaces the AudioKitStream that is based on the
  * legicy AudioKit library. This functionality uses the new arduino-audio-driver
  * library! It is the same as I2SCodecStream extended by some AudioActoins and
- * some method calls to determine pin values.
+ * some method calls to determine defined pin values.
  * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -163,7 +163,7 @@ public:
    * @return  -1      non-existent
    *          Others  gpio number
    */
-  Pin pinAuxin() { return getPin(AUXIN_DETECT); }
+  Pin pinAuxin() { return getPinID(AUXIN_DETECT); }
 
   /**
    * @brief  Get the gpio number for headphone detection
@@ -171,7 +171,7 @@ public:
    * @return  -1      non-existent
    *          Others  gpio number
    */
-  Pin pinHeadphoneDetect() { return getPin(HEADPHONE_DETECT); }
+  Pin pinHeadphoneDetect() { return getPinID(HEADPHONE_DETECT); }
 
   /**
    * @brief  Get the gpio number for PA enable
@@ -179,7 +179,7 @@ public:
    * @return  -1      non-existent
    *          Others  gpio number
    */
-  Pin pinPaEnable() { return getPin(PA); }
+  Pin pinPaEnable() { return getPinID(PA); }
 
   //   /**
   //    * @brief  Get the gpio number for adc detection
@@ -195,7 +195,7 @@ public:
    * @return  -1      non-existent
    *          Others  button id
    */
-  Pin pinInputRec() { return getPin(KEY, 1); }
+  Pin pinInputRec() { return getPinID(KEY, 1); }
 
   /**
    * @brief  Get the number for mode-button
@@ -203,7 +203,7 @@ public:
    * @return  -1      non-existent
    *          Others  number
    */
-  Pin pinInputMode() { return getPin(KEY, 2); }
+  Pin pinInputMode() { return getPinID(KEY, 2); }
 
   /**
    * @brief Get number for set function
@@ -211,7 +211,7 @@ public:
    * @return -1       non-existent
    *         Others   number
    */
-  Pin pinInputSet() { return getPin(KEY, 4); }
+  Pin pinInputSet() { return getPinID(KEY, 4); }
 
   /**
    * @brief Get number for play function
@@ -219,7 +219,7 @@ public:
    * @return -1       non-existent
    *         Others   number
    */
-  Pin pinInputPlay() { return getPin(KEY, 3); }
+  Pin pinInputPlay() { return getPinID(KEY, 3); }
 
   /**
    * @brief number for volume up function
@@ -227,7 +227,7 @@ public:
    * @return -1       non-existent
    *         Others   number
    */
-  Pin pinVolumeUp() { return getPin(KEY, 6); }
+  Pin pinVolumeUp() { return getPinID(KEY, 6); }
 
   /**
    * @brief Get number for volume down function
@@ -235,7 +235,7 @@ public:
    * @return -1       non-existent
    *         Others   number
    */
-  Pin pinVolumeDown() { return getPin(KEY, 5); }
+  Pin pinVolumeDown() { return getPinID(KEY, 5); }
 
   /**
    * @brief Get LED pin
@@ -243,7 +243,7 @@ public:
    * @return -1       non-existent
    *         Others   gpio number
    */
-  Pin pinLed(int idx) { return getPin(LED, idx); }
+  Pin pinLed(int idx) { return getPinID(LED, idx); }
 
   /// the same as setPAPower()
   void setSpeakerActive(bool active) { setPAPower(active); }
@@ -308,7 +308,7 @@ protected:
       addAction(pinInputMode(), actionStartStop);
 
     // pin conflicts with AIThinker A101: key6 and headphone detection
-    if (getPin(KEY, 6) != pinHeadphoneDetect()) {
+    if (getPinID(KEY, 6) != pinHeadphoneDetect()) {
       actions.add(pinHeadphoneDetect(), actionHeadphoneDetection, AudioActions::ActiveChange);
     }
 
