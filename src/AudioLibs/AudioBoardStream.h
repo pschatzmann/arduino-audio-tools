@@ -130,7 +130,7 @@ public:
    * and switch it on again if the headphone is unplugged.
    * This method complies with the
    */
-  static void actionHeadphoneDetection() {
+  static void actionHeadphoneDetection(bool, int, void *) {
     if (selfAudioBoard->pinHeadphoneDetect() >= 0) {
 
       // detect changes
@@ -288,9 +288,9 @@ protected:
   void setupActions() {
     TRACEI();
     Pin sd_cs = -1;
-    auto sd_opt = getPins().spi(SD);
+    auto sd_opt = getPins().getSPIPins(SD);
     if (sd_opt) {
-      sd_cs = sd_opt.value().cs)
+      sd_cs = sd_opt.value().cs;
     }
     // pin conflicts for pinInputMode() with the SD CS pin for AIThinker and
     // buttons
@@ -299,8 +299,7 @@ protected:
 
     // pin conflicts with AIThinker A101: key6 and headphone detection
     if (getPin(KEY, 6) != pinHeadphoneDetect()) {
-      actions.add(pinHeadphoneDetect(), actionHeadphoneDetection,
-                  AudioActions::ActiveChange);
+      actions.add(pinHeadphoneDetect(), actionHeadphoneDetection, AudioActions::ActiveChange);
     }
 
     // pin conflicts with SD Lyrat SD CS Pin and buttons / Conflict on Audiokit

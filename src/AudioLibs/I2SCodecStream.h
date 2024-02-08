@@ -122,6 +122,8 @@ public:
     return p_board->getPins().getPin(function, pos);
   }
 
+  DriverPins &getPins() { return p_board->getPins(); }
+
 protected:
   I2SStream i2s;
   I2SCodecConfig cfg;
