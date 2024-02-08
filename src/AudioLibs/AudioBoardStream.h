@@ -23,6 +23,15 @@ public:
     selfAudioBoard = this;
   }
 
+  bool begin() override {
+    setupActions();
+    return I2SCodecStream::begin();
+  }
+
+  bool begin(I2SCodecConfig cfg) override {
+    return I2SCodecStream::begin(cfg);
+  }
+
   /**
    * @brief Process input keys and pins
    *
@@ -255,15 +264,12 @@ public:
    */
   void setActive(bool active) { setMute(!active); }
 
-  /// Inform this object that SD is active
-  void setSDActive(bool active) { sd_active = active; }
 
 protected:
   AudioActions actions;
   int volume_value = 40;
   bool headphoneIsConnected = false;
   bool active = true;
-  bool sd_active = false;
 
   /// Determines the action logic (ActiveLow or ActiveTouch) for the pin
   AudioActions::ActiveLogic getActionLogic(int pin) {
@@ -291,10 +297,14 @@ protected:
     auto sd_opt = getPins().getSPIPins(SD);
     if (sd_opt) {
       sd_cs = sd_opt.value().cs;
+    } else {
+      // no spi -> no sd
+      LOGI("No sd defined -> sd_active=false")
+      cfg.sd_active = false;
     }
     // pin conflicts for pinInputMode() with the SD CS pin for AIThinker and
     // buttons
-    if (pinInputMode() != sd_cs || !sd_active)
+    if (pinInputMode() != sd_cs || !cfg.sd_active)
       addAction(pinInputMode(), actionStartStop);
 
     // pin conflicts with AIThinker A101: key6 and headphone detection
@@ -304,7 +314,7 @@ protected:
 
     // pin conflicts with SD Lyrat SD CS Pin and buttons / Conflict on Audiokit
     // V. 2957
-    if (!sd_active || (pinVolumeDown()!=sd_cs && pinVolumeUp()!=sd_cs ) ) {
+    if (!cfg.sd_active || (pinVolumeDown()!=sd_cs && pinVolumeUp()!=sd_cs ) ) {
       LOGD("actionVolumeDown")
       addAction(pinVolumeDown(), actionVolumeDown);
       LOGD("actionVolumeUp")
