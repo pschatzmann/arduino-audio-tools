@@ -100,7 +100,7 @@ class I2SConfigESP32V1 : public AudioInfo {
         LOGI("pin_ws: %d", pin_ws);
       if (pin_data!=-1)
         LOGI("pin_data: %d", pin_data);
-      if (pin_data_rx!=-1 && rx_tx_mode==RXTX_MODE){
+      if (pin_data_rx!=-1){
         LOGI("pin_data_rx: %d", pin_data_rx);
       }
     }

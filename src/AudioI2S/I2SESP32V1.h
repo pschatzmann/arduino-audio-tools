@@ -45,8 +45,8 @@ public:
       // usually we expet cfg.pin_data but if the used assinged rx we might
       // consider this one
       return begin(cfg, I2S_GPIO_UNUSED,
-                   cfg.pin_data != I2S_GPIO_UNUSED ? cfg.pin_data
-                                                     : cfg.pin_data_rx);
+                   cfg.pin_data_rx != I2S_GPIO_UNUSED ? cfg.pin_data_rx
+                                                     : cfg.pin_data);
     default:
       return begin(cfg, cfg.pin_data, cfg.pin_data_rx);
     }
@@ -147,12 +147,18 @@ protected:
 
     i2s_std_clk_config_t getClockConfig(I2SConfigESP32V1 &cfg) {
       TRACED();
-      return I2S_STD_CLK_DEFAULT_CONFIG((uint32_t)cfg.sample_rate);
+      i2s_std_clk_config_t clk_cfg = I2S_STD_CLK_DEFAULT_CONFIG((uint32_t)cfg.sample_rate);
+      if (cfg.bits_per_sample == 24){
+        //mclk_multiple' should be the multiple of 3 while using 24-bit 
+        clk_cfg.mclk_multiple = I2S_MCLK_MULTIPLE_384; 
+      }
+      return clk_cfg;
     }
 
     bool startChannels(I2SConfigESP32V1 &cfg, i2s_chan_handle_t &tx_chan,
                       i2s_chan_handle_t &rx_chan, int txPin, int rxPin) {
       TRACED();
+      LOGI("tx: %d, rx: %d",txPin, rxPin);
       i2s_std_config_t std_cfg = {
           .clk_cfg = getClockConfig(cfg),
           .slot_cfg = getSlotConfig(cfg),
