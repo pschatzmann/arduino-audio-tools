@@ -130,16 +130,20 @@ public:
   void setBoard(AudioBoard *board) { p_board = board; }
   bool hasBoard() { return p_board != nullptr; }
 
-  Pin getPinID(PinFunction function) {
+  GpioPin getPinID(PinFunction function) {
     if (p_board == nullptr)
       return -1;
     return p_board->getPins().getPinID(function);
   }
 
-  Pin getPinID(PinFunction function, int pos) {
+  GpioPin getPinID(PinFunction function, int pos) {
     if (p_board == nullptr)
       return -1;
     return p_board->getPins().getPinID(function, pos);
+  }
+
+  GpioPin getKey(int pos){
+    return getPinID(PinFunction::KEY, pos);
   }
 
   DriverPins &getPins() { return p_board->getPins(); }

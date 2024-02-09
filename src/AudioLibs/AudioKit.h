@@ -620,7 +620,7 @@ class AudioKitStream : public AudioStream {
       LOGW("Headphone detection ignored because of conflict: %d ",kit.pinHeadphoneDetect());
     }
 
-    // pin conflicts with SD Lyrat SD CS Pin and buttons / Conflict on Audiokit V. 2957
+    // pin conflicts with SD Lyrat SD CS GpioPinand buttons / Conflict on Audiokit V. 2957
     if (! (cfg.sd_active && (AUDIOKIT_BOARD==1 || AUDIOKIT_BOARD==7))){
       LOGD("actionVolumeDown")
       addAction(kit.pinVolumeDown(), actionVolumeDown); 

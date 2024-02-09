@@ -245,6 +245,10 @@ public:
     return p_buffer->address();
   }
 
+  size_t size() {
+    return p_buffer->size();
+  }
+
 protected:
   BaseBuffer<T> *p_buffer = nullptr;
   Mutex *p_mutex = nullptr;

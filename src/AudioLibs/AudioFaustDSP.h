@@ -144,7 +144,7 @@ class UI {
     }
 
     protected:
-        Vector<Entry> entries;
+        audio_tools::Vector<Entry> entries;
 
         Entry *findEntry(const char* name){
             Str nameStr(name);
