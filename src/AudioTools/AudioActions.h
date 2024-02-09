@@ -17,7 +17,7 @@ class AudioActions;
 static AudioActions *selfAudioActions = nullptr;
 
 /**
- * @brief A simple class to assign Functions to Pins e.g. to implement a simple
+ * @brief A simple class to assign functions to gpio pins e.g. to implement a simple
  * navigation control or volume control with buttons
  * @ingroup tools
  */
