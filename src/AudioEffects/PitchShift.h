@@ -87,6 +87,7 @@ public:
   virtual int available() { return buffer_size; }
   virtual int availableForWrite() { return buffer_size; }
   virtual T *address() { return nullptr; }
+  size_t size() {return buffer_size;}
 
 protected:
   Vector<T> buffer{0};
@@ -151,6 +152,7 @@ public:
   virtual int available() { return buffer_size; }
   virtual int availableForWrite() { return buffer_size; }
   virtual T *address() { return nullptr; }
+  size_t size() {return buffer_size;}
 
 protected:
   Vector<T> buffer{0};

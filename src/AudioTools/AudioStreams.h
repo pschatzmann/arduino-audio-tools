@@ -1099,6 +1099,10 @@ class MeasuringStream : public AudioStream {
       setFrameSize(info.bits_per_sample / 8 *info.channels);
     }
 
+    bool begin(){
+      return AudioStream::begin();
+    }
+
     bool begin(AudioInfo info){
       setAudioInfo(info);
       return true;
