@@ -195,7 +195,7 @@ protected:
           return false;
         }
         if (i2s_channel_enable(rx_chan)!=ESP_OK){
-          LOGE("i2s_channel_enable %s", "tx");
+          LOGE("i2s_channel_enable %s", "rx");
           return false;
         }
       }
@@ -352,10 +352,7 @@ protected:
     }
 
     DriverCommon &driver = getDriver(cfg);
-
-    i2s_chan_config_t chan_cfg = driver.getChannelConfig(cfg);
-    if (i2s_new_channel(&chan_cfg, &tx_chan, &rx_chan) != ESP_OK) {
-      LOGE("i2s_channel");
+    if (!newChannels(cfg, driver)){
       return false;
     }
 
@@ -364,6 +361,30 @@ protected:
       LOGE("Channels not started");
     }
     return is_started;
+  }
+
+  bool newChannels(I2SConfigESP32V1 &cfg, DriverCommon& driver){
+    i2s_chan_config_t chan_cfg = driver.getChannelConfig(cfg);
+    switch(cfg.rx_tx_mode){
+      case RX_MODE:
+        if (i2s_new_channel(&chan_cfg, NULL, &rx_chan) != ESP_OK) {
+          LOGE("i2s_channel");
+          return false;
+        }
+        break;
+      case TX_MODE:
+        if (i2s_new_channel(&chan_cfg, &tx_chan, NULL) != ESP_OK) {
+          LOGE("i2s_channel");
+          return false;
+        }
+        break;
+      default:
+        if (i2s_new_channel(&chan_cfg, &tx_chan, &rx_chan) != ESP_OK) {
+          LOGE("i2s_channel");
+          return false;
+        }
+    } 
+    return true;
   }
 
   DriverCommon &getDriver(I2SConfigESP32V1 &cfg) {
