@@ -8,14 +8,14 @@
 
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 #include "AudioLibs/AudioSourceSD.h" // or AudioSourceIdxSD.h
 #include "AudioCodecs/CodecMP3Helix.h"
 
 const char *startFilePath="/";
 const char* ext="mp3";
 AudioSourceSD source(startFilePath, ext, PIN_AUDIO_KIT_SD_CARD_CS);
-AudioKitStream kit;
+AudioBoardStream kit(AudioKitEs8388V1);
 MP3DecoderHelix decoder;  // or change to MP3DecoderMAD
 AudioPlayer player(source, kit, decoder);
 
@@ -43,9 +43,9 @@ void setup() {
   kit.begin(cfg);
 
   // setup additional buttons 
-  kit.addAction(PIN_KEY1, startStop);
-  kit.addAction(PIN_KEY4, next);
-  kit.addAction(PIN_KEY3, previous);
+  kit.addAction(kit.getKey(1), startStop);
+  kit.addAction(kit.getKey(4), next);
+  kit.addAction(kit.getKey(3), previous);
 
 
   // setup player

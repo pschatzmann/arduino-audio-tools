@@ -10,11 +10,11 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 
 const int buffer_count = 10;
 const int buffer_size = 1024;
-AudioKitStream kit; // input & output
+AudioBoardStream kit(AudioKitEs8388V1); // input & output
 QueueStream<uint8_t> queue(buffer_size, buffer_count, true); 
 AudioEncoderServer server(new WAVEncoder(),"WIFI","password");  
 MultiOutput out(queue, kit);
@@ -28,7 +28,7 @@ void setup(void) {
    // setup audiokit
    auto cfg = kit.defaultConfig(RXTX_MODE);
    cfg.sd_active = false;
-   cfg.input_device = AUDIO_HAL_ADC_INPUT_LINE2; // input from microphone
+   cfg.input_device = ADC_INPUT_LINE2; // input from microphone
    cfg.sample_rate = 16000;
    kit.setVolume(0.5);
    kit.begin(cfg);

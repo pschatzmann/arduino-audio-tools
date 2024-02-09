@@ -10,11 +10,11 @@
 
 #include "AudioTools.h"
 #include "AudioLibs/AudioA2DP.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 
 
 A2DPStream in;
-AudioKitStream kit;
+AudioBoardStream kit(AudioKitEs8388V1);
 StreamCopy copier(kit, in); // copy in to out
 
 // Arduino Setup

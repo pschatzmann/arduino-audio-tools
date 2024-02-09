@@ -14,10 +14,10 @@
 #include "AudioCodecs/CodecMTS.h"
 #include "AudioCodecs/CodecADTS.h"
 #include "AudioCodecs/CodecAACHelix.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 
 
-AudioKitStream out; // final output of decoded stream
+AudioBoardStream out(AudioKitEs8388V1);// final output of decoded stream
 HLSStream hls_stream("SSID", "password");
 MTSDecoder mts;
 ADTSDecoder adts;

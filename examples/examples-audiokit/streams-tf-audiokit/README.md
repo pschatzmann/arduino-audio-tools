@@ -18,5 +18,5 @@ The log level has been set to Info to help you to identify any problems. Please 
 You need to install the following libraries:
 
 - https://github.com/pschatzmann/arduino-audio-tools
-- https://github.com/pschatzmann/arduino-audiokit
+- https://github.com/pschatzmann/arduino-audio-driver
 - https://github.com/pschatzmann/tflite-micro-arduino-examples

@@ -11,7 +11,7 @@
 #include "AudioTools.h"
 #include "AudioLibs/AudioSourceSDFAT.h"
 #include "AudioCodecs/CodecMP3Helix.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 #include "freertos-all.h"
 
 const int buffer_count = 30;

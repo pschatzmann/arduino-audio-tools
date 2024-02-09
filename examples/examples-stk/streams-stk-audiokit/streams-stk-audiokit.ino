@@ -2,17 +2,17 @@
  * @file streams-stk-audioout.ino
  * @brief Plays random notes on instrument. For available instruments
  * see https://pschatzmann.github.io/Arduino-STK/html/classstk_1_1Instrmnt.html
- * I used an AudioKitStream to test the output, but you can replace it with any other output class (e.g. I2SStream)
+ * I used an AudioBoardStream to test the output, but you can replace it with any other output class (e.g. I2SStream)
  * @author Phil Schatzmann
  * @copyright Copyright (c) 2021
  */
 #include "AudioTools.h"
 #include "AudioLibs/AudioSTK.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 
 Sitar instrument(440);
 STKStream<Instrmnt> in(instrument);
-AudioKitStream out;
+AudioBoardStream out(AudioKitEs8388V1);
 StreamCopy copier(out, in);
 MusicalNotes notes;
 

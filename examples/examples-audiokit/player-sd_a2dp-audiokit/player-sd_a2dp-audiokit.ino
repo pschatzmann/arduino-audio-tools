@@ -13,14 +13,14 @@
 
 #include "AudioTools.h"
 #include "AudioLibs/AudioA2DP.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 #include "AudioLibs/AudioSourceSDFAT.h"
 #include "AudioCodecs/CodecMP3Helix.h"
 
 const char *startFilePath="/";
 const char* ext="mp3";
-AudioKitStream kit;
-SdSpiConfig sdcfg(PIN_AUDIO_KIT_SD_CARD_CS, DEDICATED_SPI, SD_SCK_MHZ(10) , &AUDIOKIT_SD_SPI);
+AudioBoardStream kit(AudioKitEs8388V1);
+SdSpiConfig sdcfg(PIN_AUDIO_KIT_SD_CARD_CS, DEDICATED_SPI, SD_SCK_MHZ(10) , &SPI);
 AudioSourceSDFAT source(startFilePath, ext, sdcfg);
 MP3DecoderHelix decoder;
 AudioPlayer player(source, kit, decoder);
@@ -68,7 +68,7 @@ void setup() {
   kit.begin(cfg);
 
  // setup additional buttons 
-  kit.addAction(PIN_KEY4, mode);
+  kit.addAction(kit.getKey(4), mode);
 
   // setup player
   player.setVolume(0.7);

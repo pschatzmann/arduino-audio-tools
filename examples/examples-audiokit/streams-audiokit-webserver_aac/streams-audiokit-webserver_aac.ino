@@ -8,10 +8,10 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 #include "AudioCodecs/CodecAACFDK.h"
 
-AudioKitStream kit;    
+AudioBoardStream kit(AudioKitEs8388V1);    
 AACEncoderFDK *fdk=nullptr;
 AudioEncoderServer *server=nullptr;  
 
@@ -33,12 +33,11 @@ void setup(){
   // start i2s input with default configuration
   Serial.println("starting AudioKit...");
   auto config = kit.defaultConfig(RX_MODE);
-  config.input_device = AUDIO_HAL_ADC_INPUT_LINE2;
+  config.input_device = ADC_INPUT_LINE2;
   config.sample_rate = 44100; 
-  config.default_actions_active = false; 
   config.channels = 2; 
   config.sd_active = false;
-  kit.begin(config);
+  kit.begin(config, false);
   Serial.println("AudioKit started");
 
   // start data sink

@@ -13,7 +13,6 @@
 #include "AudioLibs/AudioA2DP.h"
 #include "AudioLibs/AudioSourceSDFAT.h"
 #include "AudioCodecs/CodecMP3Helix.h"
-//#include "AudioLibs/AudioKit.h"
 
 const char *startFilePath="/";
 const char* ext="mp3";

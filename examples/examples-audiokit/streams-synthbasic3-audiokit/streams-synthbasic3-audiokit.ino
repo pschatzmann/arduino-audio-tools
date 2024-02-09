@@ -8,14 +8,14 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 #include <Midi.h>
 
 SineWaveGenerator<int16_t> sine;
 GeneratedSoundStream<int16_t> sine_stream(sine); 
 ADSRGain adsr(0.0001,0.0001, 0.9 , 0.0002);
 AudioEffectStream effects(sine_stream);
-AudioKitStream kit;
+AudioBoardStream kit(AudioKitEs8388V1);
 StreamCopy copier(kit, effects); 
 
 class SynthAction : public MidiAction {
@@ -52,12 +52,12 @@ void setupActions(){
   // assign buttons to notes
   auto act_low = AudioActions::ActiveLow;
   static float note[] = {N_C3, N_D3, N_E3, N_F3, N_G3, N_A3}; // frequencies
-  kit.audioActions().add(PIN_KEY1, actionKeyOn, actionKeyOff, act_low, &(note[0])); // C3
-  kit.audioActions().add(PIN_KEY2, actionKeyOn, actionKeyOff, act_low, &(note[1])); // D3
-  kit.audioActions().add(PIN_KEY3, actionKeyOn, actionKeyOff, act_low, &(note[2])); // E3
-  kit.audioActions().add(PIN_KEY4, actionKeyOn, actionKeyOff, act_low, &(note[3])); // F3
-  kit.audioActions().add(PIN_KEY5, actionKeyOn, actionKeyOff, act_low, &(note[4])); // G3
-  kit.audioActions().add(PIN_KEY6, actionKeyOn, actionKeyOff, act_low, &(note[5])); // A3
+  kit.audioActions().add(kit.getKey(1), actionKeyOn, actionKeyOff, act_low, &(note[0])); // C3
+  kit.audioActions().add(kit.getKey(2), actionKeyOn, actionKeyOff, act_low, &(note[1])); // D3
+  kit.audioActions().add(kit.getKey(3), actionKeyOn, actionKeyOff, act_low, &(note[2])); // E3
+  kit.audioActions().add(kit.getKey(4), actionKeyOn, actionKeyOff, act_low, &(note[3])); // F3
+  kit.audioActions().add(kit.getKey(5), actionKeyOn, actionKeyOff, act_low, &(note[4])); // G3
+  kit.audioActions().add(kit.getKey(6), actionKeyOn, actionKeyOff, act_low, &(note[5])); // A3
 }
 
 void setup() {

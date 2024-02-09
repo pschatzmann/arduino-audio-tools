@@ -12,11 +12,11 @@
 
 #include "AudioTools.h"
 #include "AudioCodecs/CodecAACHelix.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 
 
 URLStream url("ssid","password");  // or replace with ICYStream to get metadata
-AudioKitStream i2s; // final output of decoded stream
+AudioBoardStream i2s(AudioKitEs8388V1); // final output of decoded stream
 EncodedAudioStream dec(&i2s, new AACDecoderHelix()); // Decoding stream
 StreamCopy copier(dec, url); // copy url to decoder
 

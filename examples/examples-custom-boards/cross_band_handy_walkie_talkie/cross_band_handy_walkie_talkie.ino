@@ -8,13 +8,13 @@
 */
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 #include "SD.h"
 
 AudioInfo info(32000, 2, 16);
 SineWaveGenerator<int16_t> sineWave(32000);                // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound(sineWave);             // Stream generated from sine wave
-AudioKitStream out;
+AudioBoardStream out(AudioKitEs8388V1);
 StreamCopy copier(out, sound);                             // copies sound into i2s
 
 // Arduino Setup
@@ -30,7 +30,6 @@ void setup(void) {
   auto config = out.defaultConfig(TX_MODE);
   config.copyFrom(info);
   config.sd_active = false;
-  config.default_actions_active = false;
   // i2c
   config.pins.i2c_sda = 36;
   config.pins.i2c_scl = 35;
@@ -46,7 +45,7 @@ void setup(void) {
   config.pins.sd_miso = 42;
   config.pins.sd_mosi = 43;
   config.pins.sd_clk = 44;
-  out.begin(config);
+  out.begin(config, false);
 
   // check SD drive
   if(!SD.begin(config.pins.sd_cs)){

@@ -10,11 +10,11 @@
  * 
  */
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 #include "AudioLibs/MemoryManager.h"
 
 AudioInfo info(16000, 1, 16);
-AudioKitStream kit;
+AudioBoardStream kit(AudioKitEs8388V1);
 MemoryManager memory(500); // Activate SPI RAM for objects > 500 bytes
 DynamicMemoryStream recording(true); // Audio stored on heap 
 StreamCopy copier; // copies data
@@ -46,12 +46,12 @@ void setup(){
   auto cfg = kit.defaultConfig(RXTX_MODE);
   cfg.sd_active = true;
   cfg.copyFrom(info);
-  cfg.input_device = AUDIO_HAL_ADC_INPUT_LINE2;
+  cfg.input_device = ADC_INPUT_LINE2;
   kit.begin(cfg);
   kit.setVolume(1.0);
 
   // record when key 1 is pressed
-  kit.audioActions().add(PIN_KEY1, record_start, record_end);
+  kit.audioActions().add(kit.getKey(1), record_start, record_end);
   Serial.println("Press Key 1 to record");
 
 }

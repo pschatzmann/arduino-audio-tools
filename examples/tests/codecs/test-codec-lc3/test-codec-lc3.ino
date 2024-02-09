@@ -10,12 +10,12 @@
  */
 #include "AudioTools.h"
 #include "AudioCodecs/CodecLC3.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 
 AudioInfo info(24000, 1, 16);
 SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound( sineWave); // Stream generated from sine wave
-AudioKitStream out;
+AudioBoardStream out(AudioKitEs8388V1);
 //I2SStream out; 
 //CsvOutput<int16_t> out(Serial,channels);
 EncodedAudioStream decoder(&out, new LC3Decoder()); // encode and write

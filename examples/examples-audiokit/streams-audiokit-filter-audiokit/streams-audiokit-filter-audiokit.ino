@@ -6,10 +6,10 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
  
 AudioInfo info(44100, 2, 16);
-AudioKitStream kit;
+AudioBoardStream kit(AudioKitEs8388V1);
 
 // copy filtered values
 FilteredStream<int16_t, float> filtered(kit, info.channels);  // Defiles the filter as BaseConverter
@@ -34,7 +34,7 @@ void setup(void) {
   auto config = kit.defaultConfig(RXTX_MODE);
   config.copyFrom(info); 
   config.sd_active = false;
-  config.input_device = AUDIO_HAL_ADC_INPUT_LINE2;
+  config.input_device = ADC_INPUT_LINE2;
   kit.begin(config);
 
   Serial.println("KIT started...");

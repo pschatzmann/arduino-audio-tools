@@ -11,11 +11,11 @@
 
 #include "AudioTools.h"
 #include "AudioCodecs/CodecMP3Helix.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 #include "zero.h"
 
 MemoryStream mp3(zero_mp3, zero_mp3_len);
-AudioKitStream i2s; 
+AudioBoardStream i2s(AudioKitEs8388V1); 
 MP3DecoderHelix helix;
 EncodedAudioStream out(&i2s, &helix); // output to decoder
 StreamCopy copier(out, mp3);    // copy in to i2s

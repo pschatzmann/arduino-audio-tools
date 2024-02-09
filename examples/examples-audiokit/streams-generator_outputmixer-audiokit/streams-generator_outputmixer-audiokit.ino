@@ -6,15 +6,15 @@
  */
  
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 
 AudioInfo info(32000, 2, 16);
 SineWaveGenerator<int16_t> sineWave1(32000);                // subclass of SoundGenerator with max amplitude of 32000
 SineWaveGenerator<int16_t> sineWave2(32000);                // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound1(sineWave1);            // Stream generated from sine wave
 GeneratedSoundStream<int16_t> sound2(sineWave2);            // Stream generated from sine wave
-AudioKitStream out; 
-OutputMixer<int16_t> mixer(out, 2);                         // output mixer with 2 outputs mixing to AudioKitStream 
+AudioBoardStream out(AudioKitEs8388V1);
+OutputMixer<int16_t> mixer(out, 2);                         // output mixer with 2 outputs mixing to AudioBoardStream 
 StreamCopy copier1(mixer, sound1);                          // copies sound into mixer
 StreamCopy copier2(mixer, sound2);                          // copies sound into mixer
 

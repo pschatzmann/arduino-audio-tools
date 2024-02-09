@@ -12,7 +12,7 @@ The output goes to a ‘AI Thinker Audio Kit’.
 You need to install the following libraries:
 
 - [Arduino Audio Tools](https://github.com/pschatzmann/arduino-audio-tools)
-- [AudioKit](https://github.com/pschatzmann/arduino-audiokit)
+- [Audio Driver](https://github.com/pschatzmann/arduino-audio-driver)
 - [SAM](https://github.com/pschatzmann/arduino-SAM)
 
 

@@ -7,14 +7,12 @@
  */
 
 #include "AudioTools.h"
-//#include "AudioLibs/AudioKit.h"
-#include "AudioLibs/AudioA2DP.h"
-#include "AudioLibs/AudioBoardStream.h"
+#include "AudioLibs/AudioA2DP.h" // install https://github.com/pschatzmann/ESP32-A2DP
+#include "AudioLibs/AudioBoardStream.h" // install https://github.com/pschatzmann/arduino-audio-driver
 
 
 BluetoothA2DPSink a2dp_sink;
-//AudioKitStream kit;
-I2SCodecStream kit(AudioKitEs8388V1); 
+AudioBoardStream kit(AudioKitEs8388V1); 
 
 // Write data to AudioKit in callback
 void read_data_stream(const uint8_t *data, uint32_t length) {

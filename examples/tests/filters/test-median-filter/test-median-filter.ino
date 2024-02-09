@@ -2,7 +2,7 @@
  * Test case for MedianFilter
 */
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 
 AudioInfo info(44100, 1, 16);
 
@@ -34,7 +34,7 @@ protected:
 GeneratedSoundStream<int16_t> testStream(testSound);             // Stream generated from sine wave
 FilteredStream<int16_t, int16_t> inFiltered(testStream, info.channels);  // Defiles the filter as BaseConverter
 MedianFilter<int16_t> medianFilter;
-AudioKitStream out;
+AudioBoardStream out(AudioKitEs8388V1);
 StreamCopy copier(out, inFiltered);                             
 //StreamCopy copier(out, testStream); //compare with this                            
 

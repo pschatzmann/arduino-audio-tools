@@ -8,9 +8,9 @@
 
 #include "flite_arduino.h"
 #include "AudioTools.h"
-//#include "AudioLibs/AudioKit.h"
+//#include "AudioLibs/AudioBoardStream.h"
 
-I2SStream out; // Replace with desired class e.g. AudioKitStream, AnalogAudioStream etc.
+I2SStream out; // Replace with desired class e.g. AudioBoardStream, AnalogAudioStream etc.
 Flite flite(out);
 
 

@@ -10,7 +10,7 @@
  *
  */
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 #include "AudioLibs/AudioRealFFT.h"  // or AudioKissFFT
 #include "AudioLibs/LEDOutput.h"
 
@@ -18,7 +18,7 @@
 #define LED_X 32
 #define LED_Y 8
 
-AudioKitStream kit;  // Audio source
+AudioBoardStream kit(AudioKitEs8388V1);  // Audio source
 AudioRealFFT fft;    // or AudioKissFFT
 FFTDisplay fft_dis(fft);
 LEDOutput led(fft_dis);       // output to LED matrix
@@ -30,7 +30,7 @@ void setup() {
 
   // setup Audiokit as input device
   auto cfg = kit.defaultConfig(RX_MODE);
-  cfg.input_device = AUDIO_HAL_ADC_INPUT_LINE2;
+  cfg.input_device = ADC_INPUT_LINE2;
   kit.begin(cfg);
 
   // Setup FFT output
