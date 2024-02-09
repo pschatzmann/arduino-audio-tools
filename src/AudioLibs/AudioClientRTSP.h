@@ -41,6 +41,7 @@ along with this library; if not, write to the Free Software Foundation, Inc.,
 
 // If you don't want to see debugging output for each received frame, then
 // comment out the following line:
+#undef DEBUG_PRINT_EACH_RECEIVED_FRAME
 #define DEBUG_PRINT_EACH_RECEIVED_FRAME 0
 
 // audiotools_rtsp - Forward Declarations
@@ -124,7 +125,7 @@ class AudioClientRTSP {
 
     /// to be called in Arduino loop when blocking = false
     void loop() {
-      if (audiotools_rtsp::rtspEventLoopWatchVariable==0) env->taskScheduler().singleStep();  
+      if (audiotools_rtsp::rtspEventLoopWatchVariable==0) scheduler->SingleStep();  
     }
 
     void end() {
@@ -143,7 +144,7 @@ class AudioClientRTSP {
   protected:
     audiotools_rtsp::OurRTSPClient* rtsp_client;
     UsageEnvironment* env=nullptr;
-    TaskScheduler* scheduler=nullptr;
+    BasicTaskScheduler* scheduler=nullptr;
     const char* ssid=nullptr;
     const char* password = nullptr;
     bool is_blocking = false;
