@@ -9,26 +9,35 @@ class AudioBoardStream;
 AudioBoardStream *selfAudioBoard = nullptr;
 
 /**
- * @brief New functionality which replaces the AudioKitStream that is based on the
- * legicy AudioKit library. This functionality uses the new arduino-audio-driver
- * library! It is the same as I2SCodecStream extended by some AudioActoins and
- * some method calls to determine defined pin values.
+ * @brief New functionality which replaces the AudioKitStream that is based on
+ * the legicy AudioKit library. This functionality uses the new
+ * arduino-audio-driver library! It is the same as I2SCodecStream extended by
+ * some AudioActions and some method calls to determine defined pin values.
  * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 class AudioBoardStream : public I2SCodecStream {
 public:
+  /**
+   * @brief Default constructor: for available AudioBoard values check audioboard
+   * variables in https://pschatzmann.github.io/arduino-audio-driver/html/group__audio__driver.html
+   * Further information can be found in https://github.com/pschatzmann/arduino-audio-driver/wiki
+   */
   AudioBoardStream(audio_driver::AudioBoard &board) : I2SCodecStream(board) {
     selfAudioBoard = this;
   }
 
   bool begin() override {
-    setupActions();
+    if (is_default_actions && getPins().hasPins())
+      setupActions();
     return I2SCodecStream::begin();
   }
 
-  bool begin(I2SCodecConfig cfg) override {
+  bool begin(I2SCodecConfig cfg) override { return I2SCodecStream::begin(cfg); }
+
+  bool begin(I2SCodecConfig cfg, bool defaultActionActive) { 
+    setDefaultActionsActive(defaultActionActive);
     return I2SCodecStream::begin(cfg);
   }
 
@@ -163,7 +172,7 @@ public:
    * @return  -1      non-existent
    *          Others  gpio number
    */
-  Pin pinAuxin() { return getPinID(PinFunction::AUXIN_DETECT); }
+  GpioPin pinAuxin() { return getPinID(PinFunction::AUXIN_DETECT); }
 
   /**
    * @brief  Get the gpio number for headphone detection
@@ -171,7 +180,7 @@ public:
    * @return  -1      non-existent
    *          Others  gpio number
    */
-  Pin pinHeadphoneDetect() { return getPinID(PinFunction::HEADPHONE_DETECT); }
+  GpioPin pinHeadphoneDetect() { return getPinID(PinFunction::HEADPHONE_DETECT); }
 
   /**
    * @brief  Get the gpio number for PA enable
@@ -179,7 +188,7 @@ public:
    * @return  -1      non-existent
    *          Others  gpio number
    */
-  Pin pinPaEnable() { return getPinID(PinFunction::PA); }
+  GpioPin pinPaEnable() { return getPinID(PinFunction::PA); }
 
   //   /**
   //    * @brief  Get the gpio number for adc detection
@@ -187,7 +196,7 @@ public:
   //    * @return  -1      non-existent
   //    *          Others  gpio number
   //    */
-  //   Pin pinAdcDetect() { return getPin(AUXIN_DETECT); }
+  //   GpioPin pinAdcDetect() { return getPin(AUXIN_DETECT); }
 
   /**
    * @brief  Get the record-button id for adc-button
@@ -195,7 +204,7 @@ public:
    * @return  -1      non-existent
    *          Others  button id
    */
-  Pin pinInputRec() { return getPinID(PinFunction::KEY, 1); }
+  GpioPin pinInputRec() { return getPinID(PinFunction::KEY, 1); }
 
   /**
    * @brief  Get the number for mode-button
@@ -203,7 +212,7 @@ public:
    * @return  -1      non-existent
    *          Others  number
    */
-  Pin pinInputMode() { return getPinID(PinFunction::KEY, 2); }
+  GpioPin pinInputMode() { return getPinID(PinFunction::KEY, 2); }
 
   /**
    * @brief Get number for set function
@@ -211,7 +220,7 @@ public:
    * @return -1       non-existent
    *         Others   number
    */
-  Pin pinInputSet() { return getPinID(PinFunction::KEY, 4); }
+  GpioPin pinInputSet() { return getPinID(PinFunction::KEY, 4); }
 
   /**
    * @brief Get number for play function
@@ -219,7 +228,7 @@ public:
    * @return -1       non-existent
    *         Others   number
    */
-  Pin pinInputPlay() { return getPinID(PinFunction::KEY, 3); }
+  GpioPin pinInputPlay() { return getPinID(PinFunction::KEY, 3); }
 
   /**
    * @brief number for volume up function
@@ -227,7 +236,7 @@ public:
    * @return -1       non-existent
    *         Others   number
    */
-  Pin pinVolumeUp() { return getPinID(PinFunction::KEY, 6); }
+  GpioPin pinVolumeUp() { return getPinID(PinFunction::KEY, 6); }
 
   /**
    * @brief Get number for volume down function
@@ -235,7 +244,7 @@ public:
    * @return -1       non-existent
    *         Others   number
    */
-  Pin pinVolumeDown() { return getPinID(PinFunction::KEY, 5); }
+  GpioPin pinVolumeDown() { return getPinID(PinFunction::KEY, 5); }
 
   /**
    * @brief Get LED pin
@@ -243,7 +252,7 @@ public:
    * @return -1       non-existent
    *         Others   gpio number
    */
-  Pin pinLed(int idx) { return getPinID(PinFunction::LED, idx); }
+  GpioPin pinLed(int idx) { return getPinID(PinFunction::LED, idx); }
 
   /// the same as setPAPower()
   void setSpeakerActive(bool active) { setPAPower(active); }
@@ -255,8 +264,8 @@ public:
    * @return false
    */
   bool headphoneStatus() {
-    int headphonePin = pinHeadphoneDetect();
-    return headphonePin > 0 ? !digitalRead(headphonePin) : false;
+    int headphoneGpioPin = pinHeadphoneDetect();
+    return headphoneGpioPin > 0 ? !digitalRead(headphoneGpioPin) : false;
   }
 
   /**
@@ -265,11 +274,19 @@ public:
   void setActive(bool active) { setMute(!active); }
 
 
+  /**
+   * @brief Defines if we set up the default actions
+   */
+  void setDefaultActionsActive(bool active){
+    is_default_actions = active;
+  }
+
 protected:
   AudioActions actions;
   int volume_value = 40;
   bool headphoneIsConnected = false;
   bool active = true;
+  bool is_default_actions = true;
 
   /// Determines the action logic (ActiveLow or ActiveTouch) for the pin
   AudioActions::ActiveLogic getActionLogic(int pin) {
@@ -290,10 +307,10 @@ protected:
     }
   }
 
-  /// Setup the supported default actions
+  /// Setup the supported default actions (volume, inpu_mode, headphone detection)
   void setupActions() {
     TRACEI();
-    Pin sd_cs = -1;
+    GpioPin sd_cs = -1;
     auto sd_opt = getPins().getSPIPins(PinFunction::SD);
     if (sd_opt) {
       sd_cs = sd_opt.value().cs;
@@ -304,24 +321,29 @@ protected:
     }
     // pin conflicts for pinInputMode() with the SD CS pin for AIThinker and
     // buttons
-    if (pinInputMode() != sd_cs || !cfg.sd_active)
+    int input_mode = pinInputMode();
+    if (input_mode != -1 && (input_mode != sd_cs || !cfg.sd_active))
       addAction(pinInputMode(), actionStartStop);
 
     // pin conflicts with AIThinker A101: key6 and headphone detection
-    if (getPinID(PinFunction::KEY, 6) != pinHeadphoneDetect()) {
-      actions.add(pinHeadphoneDetect(), actionHeadphoneDetection, AudioActions::ActiveChange);
+    int head_phone = pinHeadphoneDetect();
+    if (head_phone != -1 && (getPinID(PinFunction::KEY, 6) != head_phone)) {
+      actions.add(pinHeadphoneDetect(), actionHeadphoneDetection,
+                  AudioActions::ActiveChange);
     }
 
-    // pin conflicts with SD Lyrat SD CS Pin and buttons / Conflict on Audiokit
+    // pin conflicts with SD Lyrat SD CS GpioPin and buttons / Conflict on Audiokit
     // V. 2957
-    if (!cfg.sd_active || (pinVolumeDown()!=sd_cs && pinVolumeUp()!=sd_cs ) ) {
+    int vol_up = pinVolumeUp();
+    int vol_down = pinVolumeDown();
+    if ((vol_up != -1 && vol_down!=-1) && (!cfg.sd_active ||
+        (vol_down != sd_cs && vol_up != sd_cs))) {
       LOGD("actionVolumeDown")
-      addAction(pinVolumeDown(), actionVolumeDown);
+      addAction(vol_down, actionVolumeDown);
       LOGD("actionVolumeUp")
-      addAction(pinVolumeUp(), actionVolumeUp);
+      addAction(vol_up, actionVolumeUp);
     } else {
-      LOGW("Volume Buttons ignored because of conflict: %d ",
-           pinVolumeDown());
+      LOGW("Volume Buttons ignored because of conflict: %d ", pinVolumeDown());
     }
   }
 };
