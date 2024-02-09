@@ -10,12 +10,12 @@
  */
 #include "AudioTools.h"
 #include "AudioLibs/TfLiteAudioStream.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 #include "model.h"
 
 TfLiteSineReader tf_reader(20000,0.3);  // Audio generation logic 
 TfLiteAudioStream tf_stream;            // Audio source -> no classification so N is 0
-AudioKitStream i2s;                     // Audio destination
+AudioBoardStream i2s(AudioKitEs8388V1);                     // Audio destination
 StreamCopy copier(i2s, tf_stream);      // copy tf_stream to i2s
 int channels = 1;
 int samples_per_second = 16000;

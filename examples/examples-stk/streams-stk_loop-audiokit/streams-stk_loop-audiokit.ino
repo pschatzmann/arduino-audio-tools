@@ -9,12 +9,12 @@
  * 
  */
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 #include "AudioLibs/AudioSTK.h"
 
 MemoryLoop mloop("crashcym.raw", crashcym_raw, crashcym_raw_len);
 STKStream<MemoryLoop> in(mloop);
-AudioKitStream out;
+AudioBoardStream out(AudioKitEs8388V1);
 StreamCopy copier(out, in);
 
 void setup() {

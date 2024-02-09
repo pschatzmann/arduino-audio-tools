@@ -12,11 +12,11 @@
 
 #include "AudioTools.h"
 #include "Experiments/CodecGGWave.h" // https://github.com/ggerganov/ggwave-arduinop
-#include "AudioLibs/AudioKit.h" // https://github.com/pschatzmann/arduino-audiokit.git
+#include "AudioLibs/AudioBoardStream.h" // https://github.com/pschatzmann/arduino-audio-driver.git
 
 int sample_rate = GGWAVE_DEFAULT_SAMPLE_RATE;
 int channels = 1;
-AudioKitStream in;  // or AudioKitStream
+AudioBoardStream in;  // or AudioBoardStream
 GGWaveDecoder dec;
 EncodedAudioStream encoder_stream(Serial, dec); // decode and write to I2S - ESP Now is limited to 256 bytes
 StreamCopy copier(encoder_stream, in, GGWAVE_DEFAULT_BYTES_PER_FRAME);  // copy mic to tfl
@@ -30,7 +30,7 @@ void setup() {
   auto config = in.defaultConfig(RX_MODE);
   config.sample_rate = sample_rate;
   config.channels = channels;
-  config.input_device = AUDIO_HAL_ADC_INPUT_LINE2; // microphone
+  config.input_device = ADC_INPUT_LINE2; // microphone
   in.begin(config);
 
   // setup codec

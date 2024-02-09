@@ -11,11 +11,11 @@
 #include "SD_MMC.h"
 #include "AudioTools.h"
 #include "AudioLibs/AudioSTK.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 
 
 STKStream<Instrmnt> in;
-AudioKitStream out;
+AudioBoardStream out(AudioKitEs8388V1);
 StreamCopy copier(out, in);
 MusicalNotes notes;
 Instrmnt* p_instrument=nullptr; // instrument depends on file system

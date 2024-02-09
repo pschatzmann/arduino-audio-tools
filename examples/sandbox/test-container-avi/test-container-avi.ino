@@ -10,10 +10,10 @@
  */
 #include "AudioTools.h"
 #include "AudioCodecs/ContainerAVI.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 
 URLStream url("ssid","password"); // input
-AudioKitStream out;  
+AudioBoardStream out(AudioKitEs8388V1); 
 DecoderL8 l8(false);             
 AVIDecoder codec(&l8);
 EncodedAudioStream avi(&out, &codec);

@@ -10,14 +10,14 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 #include "AudioLibs/AudioFaust.h"
 #include "volume.h"
 
 SineWaveGenerator<int16_t> sineWave(32000);                // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound(sineWave);             // Stream generated from sine wave
 mydsp dsp;
-AudioKitStream out; 
+AudioBoardStream out(AudioKitEs8388V1);
 FaustStream<mydsp> faust(out);
 StreamCopy copier(faust, sound);  // copy mic to tfl
 

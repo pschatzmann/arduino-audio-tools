@@ -15,10 +15,10 @@
 
 #include "AudioTools.h"
 #include "AudioCodecs/CodecADPCM.h" // https://github.com/pschatzmann/adpcm
-//#include "AudioLibs/AudioKit.h"
+//#include "AudioLibs/AudioBoardStream.h"
 
 AudioInfo info(22000, 1, 16);
-I2SStream out; // or AnalogAudioStream, AudioKitStream etc
+I2SStream out; // or AnalogAudioStream, AudioBoardStream etc
 SineWaveGenerator<int16_t> sineWave(32000);
 GeneratedSoundStream<int16_t> sound(sineWave);
 

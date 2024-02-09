@@ -11,8 +11,8 @@
 #include "AudioLibs/PortAudioStream.h"
 typedef PortAudioStream MyStdOut;
 #else
-#include "AudioLibs/AudioKit.h"
-typedef AudioKitStream MyStdOut;
+#include "AudioLibs/AudioBoardStream.h"
+typedef AudioBoardStream MyStdOut;
 
 #endif
 Instrmnt *p_Instrmnt=nullptr; // will be allocated dynamically

@@ -1,8 +1,8 @@
 #include "Arduino.h"
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 
-AudioKitStream out;
+AudioBoardStream out(AudioKitEs8388V1);
 //CsvOutput<int24_t> out(Serial);
 SineWaveGenerator<int24_t> sine_wave;               // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int24_t> in_stream(sine_wave); // Stream generated from sine wave

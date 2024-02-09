@@ -14,12 +14,12 @@
  */
 
 #include "AudioTools.h"
-// #include "AudioLibs/AudioKit.h"
+// #include "AudioLibs/AudioBoardStream.h"
 
 AudioInfo info(22000, 1, 16);
 SineWaveGenerator<int16_t> sineWave(32000);
 GeneratedSoundStream<int16_t> sound(sineWave);
-I2SStream out; // or AnalogAudioStream, AudioKitStream etc
+I2SStream out; // or AnalogAudioStream, AudioBoardStream etc
 auto &serial = Serial2;
 Throttle throttle(serial);
 StreamCopy copierOut(throttle, sound, 256);  // copies sound into Serial

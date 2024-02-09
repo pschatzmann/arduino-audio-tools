@@ -8,9 +8,9 @@
 
 #include "flite_arduino.h"
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 
-AudioKitStream kit;
+AudioBoardStream kit(AudioKitEs8388V1);
 Flite flite(kit);
 
 const char* alice = "Hallo my name is FLITE";

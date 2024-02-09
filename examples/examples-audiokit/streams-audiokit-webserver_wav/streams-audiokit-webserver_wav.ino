@@ -8,10 +8,10 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 
 AudioEncoderServer server(new WAVEncoder(),"ssid","password");  
-AudioKitStream kit;    
+AudioBoardStream kit(AudioKitEs8388V1);    
 
 // Arduino setup
 void setup(){
@@ -21,7 +21,7 @@ void setup(){
   // start i2s input with default configuration
   Serial.println("starting AudioKit...");
   auto config = kit.defaultConfig(RX_MODE);
-  config.input_device = AUDIO_HAL_ADC_INPUT_LINE1;
+  config.input_device = ADC_INPUT_LINE1;
   config.sample_rate = 44100;
   config.sd_active = false;
   kit.begin(config);

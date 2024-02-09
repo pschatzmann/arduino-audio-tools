@@ -1,6 +1,6 @@
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 #define USE_SDFAT
 #include <SPI.h>
 #include <SdFat.h>

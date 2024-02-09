@@ -11,11 +11,11 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 #include "AudioLibs/AudioFaust.h"
 #include "Copy.h"
 
-AudioKitStream io; 
+AudioBoardStream io(AudioKitEs8388V1); 
 FaustStream<mydsp> faust(io);  // final output to io
 StreamCopy copier(faust, io);  // copy mic to faust
 

@@ -10,11 +10,11 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 #include "AudioLibs/AudioFaust.h"
 #include "guitarix.h"
 
-AudioKitStream kit; 
+AudioBoardStream kit(AudioKitEs8388V1); 
 FaustStream<mydsp> faust(kit); // final output of Faust is kit
 StreamCopy copier(faust, kit);  // copy data from kit to faust
 
@@ -48,7 +48,7 @@ void setup(void) {
   cfg_i2s.sample_rate = cfg.sample_rate; 
   cfg_i2s.channels = cfg.channels;
   cfg_i2s.bits_per_sample = cfg.bits_per_sample;
-  cfg_i2s.input_device = AUDIO_HAL_ADC_INPUT_LINE1;
+  cfg_i2s.input_device = ADC_INPUT_LINE1;
   kit.begin(cfg_i2s);
 
 }

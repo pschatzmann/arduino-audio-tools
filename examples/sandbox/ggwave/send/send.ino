@@ -12,11 +12,11 @@
 
 #include "AudioTools.h"
 #include "Experiments/CodecGGWave.h" // https://github.com/ggerganov/ggwave-arduinop
-#include "AudioLibs/AudioKit.h" // https://github.com/pschatzmann/arduino-audiokit.git
+#include "AudioLibs/AudioBoardStream.h" // https://github.com/pschatzmann/arduino-audio-driver.git
 
 int sample_rate = GGWAVE_DEFAULT_SAMPLE_RATE;
 int channels = 1;
-AudioKitStream out;  // or AudioKitStream
+AudioBoardStream out(AudioKitEs8388V1); // or AudioBoardStream
 GGWaveEncoder enc;
 EncodedAudioStream encoder_stream(&out, &enc); // decode and write to I2S - ESP Now is limited to 256 bytes
 

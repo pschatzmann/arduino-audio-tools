@@ -11,7 +11,7 @@
 #include "AudioTools.h"
 #include "AudioLibs/AudioSourceSDFAT.h"
 #include "AudioCodecs/CodecMP3Helix.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 
 const char *startFilePath="/";
 const char* ext="mp3";
@@ -27,9 +27,6 @@ void setup() {
 
  // sd_active is setting up SPI with the right SD pins by calling 
  SPI.begin(PIN_AUDIO_KIT_SD_CARD_CLK, PIN_AUDIO_KIT_SD_CARD_MISO, PIN_AUDIO_KIT_SD_CARD_MOSI, PIN_AUDIO_KIT_SD_CARD_CS);
-
- // convert bytes to samples (frames)
- out.setBytesPerSample(2*16);
 
  // setup player
  player.setDelayIfOutputFull(0);
