@@ -8,10 +8,10 @@
 
 // Added to be compatible with the AudioKitStream.h
 #ifndef PIN_AUDIO_KIT_SD_CARD_CS
-#  define PIN_AUDIO_KIT_SD_CARD_CS 13
-#  define PIN_AUDIO_KIT_SD_CARD_MISO 2
-#  define PIN_AUDIO_KIT_SD_CARD_MOSI 15
-#  define PIN_AUDIO_KIT_SD_CARD_CLK  14
+#define PIN_AUDIO_KIT_SD_CARD_CS 13
+#define PIN_AUDIO_KIT_SD_CARD_MISO 2
+#define PIN_AUDIO_KIT_SD_CARD_MOSI 15
+#define PIN_AUDIO_KIT_SD_CARD_CLK 14
 #endif
 
 namespace audio_tools {
@@ -33,7 +33,13 @@ class I2SCodecStream : public AudioStream {
 public:
   /// Default Constructor (w/o codec)
   I2SCodecStream() = default;
-
+  /**
+   * @brief Default constructor: for available AudioBoard values check
+   * audioboard variables in
+   * https://pschatzmann.github.io/arduino-audio-driver/html/group__audio__driver.html
+   * Further information can be found in
+   * https://github.com/pschatzmann/arduino-audio-driver/wiki
+   */
   I2SCodecStream(AudioBoard &board) { setBoard(board); }
   /// Provide board via pointer
   I2SCodecStream(AudioBoard *board) { setBoard(board); }
