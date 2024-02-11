@@ -17,8 +17,8 @@ class AudioActions;
 static AudioActions *selfAudioActions = nullptr;
 
 /**
- * @brief A simple class to assign functions to gpio pins e.g. to implement a simple
- * navigation control or volume control with buttons
+ * @brief A simple class to assign functions to gpio pins e.g. to implement a
+ * simple navigation control or volume control with buttons
  * @ingroup tools
  */
 class AudioActions {
@@ -35,9 +35,9 @@ public:
     void (*actionOn)(bool pinStatus, int pin, void *ref) = nullptr;
     void (*actionOff)(bool pinStatus, int pin, void *ref) = nullptr;
     void *ref = nullptr;
-    unsigned long debounceTimeout;
+    unsigned long debounceTimeout = 0;
     ActiveLogic activeLogic;
-    bool lastState;
+    bool lastState = true;
     bool enabled = true;
 
     /// determines the value for the action
@@ -72,7 +72,7 @@ public:
         if (this->actionOn != nullptr && this->actionOff != nullptr) {
           // we have on and off action defined
           if (value != this->lastState) {
-            // LOGI("processActions: case with on and off");
+            //LOGI("processActions: case with on and off");
             // execute action -> reports active instead of pin state
             if ((value && this->activeLogic == ActiveHigh) ||
                 (!value && this->activeLogic == ActiveLow)) {
@@ -83,10 +83,10 @@ public:
             this->lastState = value;
           }
         } else if (this->activeLogic == ActiveChange) {
-          bool active = (this->activeLogic == ActiveLow) ? !value : value;
+          bool active = value;
           // reports pin state
           if (value != this->lastState && millis() > this->debounceTimeout) {
-            // LOGI("processActions: ActiveChange");
+            //LOGI("processActions: ActiveChange");
             //  execute action
             this->actionOn(active, this->pin, this->ref);
             this->lastState = value;
@@ -201,24 +201,31 @@ public:
   void setTouchLimit(int value) { touchLimit = value; }
   /// Use interrupts instead of processActions() call in loop
   void setUsePinInterrupt(bool active) { use_pin_interrupt = active; }
+  /// setup pin mode when true
+  void setPinMode(bool active) { use_pin_mode = active; }
 
 protected:
   int debounceDelayValue = DEBOUNCE_DELAY;
   int touchLimit = TOUCH_LIMIT;
   bool use_pin_interrupt = false;
+  bool use_pin_mode = true;
 
   Vector<Action> actions{0};
 
   static void audioActionsISR() { selfAudioActions->processAllActions(); }
 
   void setupPin(int pin, ActiveLogic logic) {
-    if (logic == ActiveLow) {
-      pinMode(pin, INPUT_PULLUP);
-      LOGI("pin %d -> INPUT_PULLUP", pin);
-    } else {
-      pinMode(pin, INPUT);
-      LOGI("pin %d -> INPUT", pin);
+    // in the audio-driver library the pins are already set up
+    if (use_pin_mode) {
+      if (logic == ActiveLow) {
+        pinMode(pin, INPUT_PULLUP);
+        LOGI("pin %d -> INPUT_PULLUP", pin);
+      } else {
+        pinMode(pin, INPUT);
+        LOGI("pin %d -> INPUT", pin);
+      }
     }
+
     if (use_pin_interrupt) {
       attachInterrupt(digitalPinToInterrupt(pin), audioActionsISR, CHANGE);
     }

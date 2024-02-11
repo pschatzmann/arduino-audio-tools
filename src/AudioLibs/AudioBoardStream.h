@@ -20,26 +20,21 @@ AudioBoardStream *selfAudioBoard = nullptr;
 class AudioBoardStream : public I2SCodecStream {
 public:
   /**
-   * @brief Default constructor: for available AudioBoard values check audioboard
-   * variables in https://pschatzmann.github.io/arduino-audio-driver/html/group__audio__driver.html
-   * Further information can be found in https://github.com/pschatzmann/arduino-audio-driver/wiki
+   * @brief Default constructor: for available AudioBoard values check
+   * audioboard variables in
+   * https://pschatzmann.github.io/arduino-audio-driver/html/group__audio__driver.html
+   * Further information can be found in
+   * https://github.com/pschatzmann/arduino-audio-driver/wiki
    */
   AudioBoardStream(audio_driver::AudioBoard &board) : I2SCodecStream(board) {
     selfAudioBoard = this;
+    // pin mode already set up by driver library
+    actions.setPinMode(false);
   }
 
-  bool begin() override {
-    if (is_default_actions && getPins().hasPins())
-      setupActions();
-    return I2SCodecStream::begin();
-  }
+  bool begin() override { return I2SCodecStream::begin(); }
 
   bool begin(I2SCodecConfig cfg) override { return I2SCodecStream::begin(cfg); }
-
-  bool begin(I2SCodecConfig cfg, bool defaultActionActive) { 
-    setDefaultActionsActive(defaultActionActive);
-    return I2SCodecStream::begin(cfg);
-  }
 
   /**
    * @brief Process input keys and pins
@@ -84,16 +79,18 @@ public:
 
   /// Provides access to the AudioActions
   AudioActions &audioActions() { return actions; }
+  AudioActions &getActions() { return actions; }
 
   /**
    * @brief Relative volume control
    *
    * @param vol
    */
-  void incrementVolume(int vol) {
-    volume_value += vol;
-    LOGI("incrementVolume: %d -> %d", vol, volume_value);
-    setVolume(volume_value);
+  void incrementVolume(float inc) {
+    float current_volume = getVolume();
+    float new_volume = current_volume + inc;
+    LOGI("incrementVolume: %f -> %f", current_volume, new_volume);
+    setVolume(new_volume);
   }
 
   /**
@@ -180,7 +177,9 @@ public:
    * @return  -1      non-existent
    *          Others  gpio number
    */
-  GpioPin pinHeadphoneDetect() { return getPinID(PinFunction::HEADPHONE_DETECT); }
+  GpioPin pinHeadphoneDetect() {
+    return getPinID(PinFunction::HEADPHONE_DETECT);
+  }
 
   /**
    * @brief  Get the gpio number for PA enable
@@ -273,20 +272,76 @@ public:
    */
   void setActive(bool active) { setMute(!active); }
 
+  /// add start/stop on inputMode
+  void addStartStopAction() {
+    // pin conflicts for pinInputMode() with the SD CS pin for AIThinker and
+    // buttons
+    int sd_cs = getSdCsPin();
+    int input_mode = pinInputMode();
+    if (input_mode != -1 && (input_mode != sd_cs || !cfg.sd_active)) {
+      LOGD("actionInputMode")
+      addAction(input_mode, actionStartStop);
+    }
+  }
+  /// add volume up and volume down action
+  void addVolumeActions() {
+    // pin conflicts with SD Lyrat SD CS GpioPin and buttons / Conflict on
+    // Audiokit V. 2957
+    int sd_cs = getSdCsPin();
+    int vol_up = pinVolumeUp();
+    int vol_down = pinVolumeDown();
+    if ((vol_up != -1 && vol_down != -1) &&
+        (!cfg.sd_active || (vol_down != sd_cs && vol_up != sd_cs))) {
+      LOGD("actionVolumeDown")
+      addAction(vol_down, actionVolumeDown);
+      LOGD("actionVolumeUp")
+      addAction(vol_up, actionVolumeUp);
+    } else {
+      LOGW("Volume Buttons ignored because of conflict: %d ", pinVolumeDown());
+    }
+  }
 
-  /**
-   * @brief Defines if we set up the default actions
-   */
-  void setDefaultActionsActive(bool active){
-    is_default_actions = active;
+  /// Adds headphone determination
+  void addHeadphonDetectionAction() {
+    // pin conflicts with AIThinker A101: key6 and headphone detection
+    int head_phone = pinHeadphoneDetect();
+    if (head_phone != -1 && (getPinID(PinFunction::KEY, 6) != head_phone)) {
+      actions.add(head_phone, actionHeadphoneDetection,
+                  AudioActions::ActiveChange);
+    }
+  }
+
+  /// Setup the supported default actions (volume, inpu_mode, headphone
+  /// detection)
+  void addDefaultActions() {
+    TRACEI();
+    addHeadphonDetectionAction();
+    addStartStopAction();
+    addVolumeActions();
   }
 
 protected:
   AudioActions actions;
-  int volume_value = 40;
   bool headphoneIsConnected = false;
   bool active = true;
-  bool is_default_actions = true;
+
+  int getSdCsPin() {
+    static GpioPin sd_cs = -2;
+    // execute only once
+    if (sd_cs != -2)
+      return sd_cs;
+
+    auto sd_opt = getPins().getSPIPins(PinFunction::SD);
+    if (sd_opt) {
+      sd_cs = sd_opt.value().cs;
+    } else {
+      // no spi -> no sd
+      LOGI("No sd defined -> sd_active=false")
+      cfg.sd_active = false;
+      sd_cs = -1;
+    }
+    return sd_cs;
+  }
 
   /// Determines the action logic (ActiveLow or ActiveTouch) for the pin
   AudioActions::ActiveLogic getActionLogic(int pin) {
@@ -304,46 +359,6 @@ protected:
       return AudioActions::ActiveTouch;
     default:
       return AudioActions::ActiveLow;
-    }
-  }
-
-  /// Setup the supported default actions (volume, inpu_mode, headphone detection)
-  void setupActions() {
-    TRACEI();
-    GpioPin sd_cs = -1;
-    auto sd_opt = getPins().getSPIPins(PinFunction::SD);
-    if (sd_opt) {
-      sd_cs = sd_opt.value().cs;
-    } else {
-      // no spi -> no sd
-      LOGI("No sd defined -> sd_active=false")
-      cfg.sd_active = false;
-    }
-    // pin conflicts for pinInputMode() with the SD CS pin for AIThinker and
-    // buttons
-    int input_mode = pinInputMode();
-    if (input_mode != -1 && (input_mode != sd_cs || !cfg.sd_active))
-      addAction(pinInputMode(), actionStartStop);
-
-    // pin conflicts with AIThinker A101: key6 and headphone detection
-    int head_phone = pinHeadphoneDetect();
-    if (head_phone != -1 && (getPinID(PinFunction::KEY, 6) != head_phone)) {
-      actions.add(pinHeadphoneDetect(), actionHeadphoneDetection,
-                  AudioActions::ActiveChange);
-    }
-
-    // pin conflicts with SD Lyrat SD CS GpioPin and buttons / Conflict on Audiokit
-    // V. 2957
-    int vol_up = pinVolumeUp();
-    int vol_down = pinVolumeDown();
-    if ((vol_up != -1 && vol_down!=-1) && (!cfg.sd_active ||
-        (vol_down != sd_cs && vol_up != sd_cs))) {
-      LOGD("actionVolumeDown")
-      addAction(vol_down, actionVolumeDown);
-      LOGD("actionVolumeUp")
-      addAction(vol_up, actionVolumeUp);
-    } else {
-      LOGW("Volume Buttons ignored because of conflict: %d ", pinVolumeDown());
     }
   }
 };

@@ -43,6 +43,7 @@ void setup() {
   kit.begin(cfg);
 
   // setup additional buttons 
+  kit.addDefaultActions();
   kit.addAction(kit.getKey(1), startStop);
   kit.addAction(kit.getKey(4), next);
   kit.addAction(kit.getKey(3), previous);
