@@ -99,7 +99,7 @@ class PWMDriverSTM32 : public DriverPWMBase {
 
         protected:
             HardwareTimer *p_timer;
-            Vector<PWMPin> pins;
+            audio_tools::Vector<PWMPin> pins;
             int channel;
             int max_value;
             int pwm_frequency;

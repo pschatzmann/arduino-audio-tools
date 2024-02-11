@@ -55,15 +55,15 @@ class I2SDriverSTM32 {
       switch(cfg.rx_tx_mode){
         case RX_MODE:
           p_rx_buffer = new NBuffer<uint8_t>(cfg.buffer_size, cfg.buffer_count);
-        	result = startI2SReceive(&i2s_stm32, writeFromReceive, cfg.buffer_size);
+        	result = I2S.startI2SReceive(i2s_stm32, writeFromReceive, cfg.buffer_size);
           break;
         case TX_MODE:
           p_tx_buffer = new NBuffer<uint8_t>(cfg.buffer_size, cfg.buffer_count);
-      	  result =  startI2STransmit(&i2s_stm32, readToTransmit, cfg.buffer_size);
+      	  result =  I2S.startI2STransmit(i2s_stm32, readToTransmit, cfg.buffer_size);
           break;
         case RXTX_MODE:
           p_tx_buffer = new NBuffer<uint8_t>(cfg.buffer_size, cfg.buffer_count);
-	        result = startI2STransmitReceive(&i2s_stm32, readToTransmit, writeFromReceive, cfg.buffer_size);
+	        result = I2S.startI2STransmitReceive(i2s_stm32, readToTransmit, writeFromReceive, cfg.buffer_size);
           break;
         default:
           LOGE("Unsupported mode");
@@ -77,7 +77,7 @@ class I2SDriverSTM32 {
     /// stops the I2C and unistalls the driver
     void end(){
       TRACED();
-      stopI2S();
+      I2S.stopI2S();
       deleteBuffers();
     }
 
@@ -164,7 +164,7 @@ class I2SDriverSTM32 {
       i2s_stm32.mode = getMode(cfg);
       i2s_stm32.standard = getStandard(cfg);
       i2s_stm32.fullduplexmode = cfg.rx_tx_mode == RXTX_MODE ? I2S_FULLDUPLEXMODE_ENABLE : I2S_FULLDUPLEXMODE_DISABLE;
-      i2s_stm32.i2s = &hi2s3;
+      //i2s_stm32.i2s = &hi2s3;
     }
 
     uint32_t getMode(I2SConfigStd &cfg){
