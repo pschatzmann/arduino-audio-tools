@@ -48,5 +48,4 @@ void setup() {
 }
 
 void loop() {
-  // kit.processActions();  // uncomment for default button commands
 }

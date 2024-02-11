@@ -34,5 +34,4 @@ void setup() {
 }
 
 void loop() {
-  //kit.processActions();
 }

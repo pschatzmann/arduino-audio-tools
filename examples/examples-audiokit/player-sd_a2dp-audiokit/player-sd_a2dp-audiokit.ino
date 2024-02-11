@@ -68,6 +68,7 @@ void setup() {
   kit.begin(cfg);
 
  // setup additional buttons 
+  kit.addDefaultActions();
   kit.addAction(kit.getKey(4), mode);
 
   // setup player
