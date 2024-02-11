@@ -4,6 +4,7 @@
 #include "AudioTools/AudioTypes.h"
 #include "AudioTools/Buffers.h"
 #include "AudioTools/AudioLogger.h"
+#include "AudioTools/BaseConverter.h"
 #include "AudioEffects/SoundGenerator.h"
 
 #ifndef IRAM_ATTR
