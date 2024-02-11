@@ -3,6 +3,7 @@
 #include "AudioBasic/Collections.h"
 #include "AudioTools/AudioLogger.h"
 #include "AudioTools/AudioTypes.h"
+#include <math.h>
 
 /**
  * @defgroup generator Generators
@@ -543,7 +544,7 @@ public:
     float angle = 2.0 * PI / sample_count;
     table = new T[sample_count];
     for (int j = 0; j < sample_count; j++) {
-      table[j] = sin(j * angle) * amplitude;
+      table[j] = sinf(j * angle) * amplitude;
     }
     owns_data = true;
     table_length = sample_count;
