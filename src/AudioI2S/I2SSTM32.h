@@ -2,7 +2,6 @@
 
 #ifdef STM32
 #include "AudioI2S/I2SConfig.h"
-
 namespace audio_tools {
 #include "stm32-i2s.h"
 
@@ -55,15 +54,27 @@ class I2SDriverSTM32 {
       switch(cfg.rx_tx_mode){
         case RX_MODE:
           p_rx_buffer = new NBuffer<uint8_t>(cfg.buffer_size, cfg.buffer_count);
+#ifdef STM32_I2S_WITH_OBJECT
         	result = I2S.startI2SReceive(i2s_stm32, writeFromReceive, cfg.buffer_size);
+#else 
+        	result = startI2SReceive(&i2s_stm32, writeFromReceive, cfg.buffer_size);
+#endif
           break;
         case TX_MODE:
           p_tx_buffer = new NBuffer<uint8_t>(cfg.buffer_size, cfg.buffer_count);
+#ifdef STM32_I2S_WITH_OBJECT
       	  result =  I2S.startI2STransmit(i2s_stm32, readToTransmit, cfg.buffer_size);
+#else 
+      	  result =  startI2STransmit(&i2s_stm32, readToTransmit, cfg.buffer_size);
+#endif
           break;
         case RXTX_MODE:
           p_tx_buffer = new NBuffer<uint8_t>(cfg.buffer_size, cfg.buffer_count);
+#ifdef STM32_I2S_WITH_OBJECT
 	        result = I2S.startI2STransmitReceive(i2s_stm32, readToTransmit, writeFromReceive, cfg.buffer_size);
+#else 
+	        result = startI2STransmitReceive(&i2s_stm32, readToTransmit, writeFromReceive, cfg.buffer_size);
+#endif
           break;
         default:
           LOGE("Unsupported mode");
@@ -77,7 +88,11 @@ class I2SDriverSTM32 {
     /// stops the I2C and unistalls the driver
     void end(){
       TRACED();
+#ifdef STM32_I2S_WITH_OBJECT
       I2S.stopI2S();
+#else 
+      stopI2S();
+#endif
       deleteBuffers();
     }
 
