@@ -86,7 +86,7 @@ class I2SDriverESP32 {
 
       size_t result = 0;   
       if (isNoChannelConversion(cfg)){
-        if (i2s_write(i2s_num, src, size_bytes, &result, portMAX_DELAY)!=ESP_OK){
+        if (i2s_write(i2s_num, src, size_bytes, &result, ticks_to_wait)!=ESP_OK){
           TRACEE();
         }
         LOGD("i2s_write %d -> %d bytes", size_bytes, result);
@@ -99,13 +99,13 @@ class I2SDriverESP32 {
     size_t readBytes(void *dest, size_t size_bytes){
       size_t result = 0;
       if (isNoChannelConversion(cfg)){
-        if (i2s_read(i2s_num, dest, size_bytes, &result, portMAX_DELAY)!=ESP_OK){
+        if (i2s_read(i2s_num, dest, size_bytes, &result, ticks_to_wait)!=ESP_OK){
           TRACEE();
         }
       } else if (cfg.channels==1){
         // I2S has always 2 channels. We support to reduce it to 1
         uint8_t temp[size_bytes*2];
-        if (i2s_read(i2s_num, temp, size_bytes*2, &result, portMAX_DELAY)!=ESP_OK){
+        if (i2s_read(i2s_num, temp, size_bytes*2, &result, ticks_to_wait)!=ESP_OK){
           TRACEE();
         }
         // convert to 1 channel
@@ -132,11 +132,16 @@ class I2SDriverESP32 {
       return result;
     }
 
+    void setWaitTimeMs(TickType_t ms) {
+      ticks_to_wait = pdMS_TO_TICKS(ms);
+    }
+
   protected:
     I2SConfigESP32 cfg = defaultConfig(RX_MODE);
     i2s_port_t i2s_num;
     i2s_config_t i2s_config;
     bool is_started = false;
+    TickType_t ticks_to_wait = portMAX_DELAY;
 
     bool isNoChannelConversion(I2SConfigESP32 cfg) {
       if (cfg.channels==2) return true;
@@ -236,7 +241,7 @@ class I2SDriverESP32 {
               frame[0]=data[j];
               frame[1]=data[j];
               size_t result_call = 0;   
-              if (i2s_write(i2s_num, frame, sizeof(int8_t)*2, &result_call, portMAX_DELAY)!=ESP_OK){
+              if (i2s_write(i2s_num, frame, sizeof(int8_t)*2, &result_call, ticks_to_wait)!=ESP_OK){
                 TRACEE();
               } else {
                 result += result_call;
@@ -251,7 +256,7 @@ class I2SDriverESP32 {
               frame[0]=data[j];
               frame[1]=data[j];
               size_t result_call = 0;   
-              if (i2s_write(i2s_num, frame, sizeof(int16_t)*2, &result_call, portMAX_DELAY)!=ESP_OK){
+              if (i2s_write(i2s_num, frame, sizeof(int16_t)*2, &result_call, ticks_to_wait)!=ESP_OK){
                 TRACEE();
               } else {
                 result += result_call;
@@ -266,7 +271,7 @@ class I2SDriverESP32 {
               frame[0]=data[j];
               frame[1]=data[j];
               size_t result_call = 0;   
-              if (i2s_write(i2s_num, frame, sizeof(int24_t)*2, &result_call, portMAX_DELAY)!=ESP_OK){
+              if (i2s_write(i2s_num, frame, sizeof(int24_t)*2, &result_call, ticks_to_wait)!=ESP_OK){
                 TRACEE();
               } else {
                 result += result_call;
@@ -281,7 +286,7 @@ class I2SDriverESP32 {
               frame[0]=data[j];
               frame[1]=data[j];
               size_t result_call = 0;   
-              if (i2s_write(i2s_num, frame, sizeof(int32_t)*2, &result_call, portMAX_DELAY)!=ESP_OK){
+              if (i2s_write(i2s_num, frame, sizeof(int32_t)*2, &result_call, ticks_to_wait)!=ESP_OK){
                 TRACEE();
               } else {
                 result += result_call;
