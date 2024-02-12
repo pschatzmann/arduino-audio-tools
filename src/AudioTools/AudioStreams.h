@@ -660,7 +660,7 @@ class GeneratedSoundStream : public AudioStream {
   void end() override {
     TRACED();
     generator_ptr->end();
-    active = false;
+    active = true; // legacy support - most sketches do not call begin
   }
 
   virtual void setNotifyAudioChange(AudioInfoSupport &bi) override {
