@@ -10,9 +10,10 @@ AudioBoardStream *selfAudioBoard = nullptr;
 
 /**
  * @brief New functionality which replaces the AudioKitStream that is based on
- * the legicy AudioKit library. This functionality uses the new
+ * the legacy AudioKit library. This functionality uses the new
  * arduino-audio-driver library! It is the same as I2SCodecStream extended by
  * some AudioActions and some method calls to determine defined pin values.
+ * See https://github.com/pschatzmann/arduino-audio-driver
  * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -21,7 +22,7 @@ class AudioBoardStream : public I2SCodecStream {
 public:
   /**
    * @brief Default constructor: for available AudioBoard values check
-   * audioboard variables in
+   * the audioboard variables in
    * https://pschatzmann.github.io/arduino-audio-driver/html/group__audio__driver.html
    * Further information can be found in
    * https://github.com/pschatzmann/arduino-audio-driver/wiki
@@ -283,6 +284,7 @@ public:
       addAction(input_mode, actionStartStop);
     }
   }
+  
   /// add volume up and volume down action
   void addVolumeActions() {
     // pin conflicts with SD Lyrat SD CS GpioPin and buttons / Conflict on
@@ -311,8 +313,9 @@ public:
     }
   }
 
-  /// Setup the supported default actions (volume, inpu_mode, headphone
-  /// detection)
+  /**
+   * @brief Setup the supported default actions (volume, start/stop, headphone detection)
+  */
   void addDefaultActions() {
     TRACEI();
     addHeadphonDetectionAction();
