@@ -81,7 +81,7 @@ public:
   size_t writeBytes(const void *src, size_t size_bytes) {
     TRACED();
     size_t result;
-    if (i2s_channel_write(tx_chan, src, size_bytes, &result, portMAX_DELAY) !=
+    if (i2s_channel_write(tx_chan, src, size_bytes, &result, ticks_to_wait) !=
         ESP_OK) {
       TRACEE();
     }
@@ -90,11 +90,15 @@ public:
 
   size_t readBytes(void *dest, size_t size_bytes) {
     size_t result = 0;
-    if (i2s_channel_read(rx_chan, dest, size_bytes, &result, portMAX_DELAY) !=
+    if (i2s_channel_read(rx_chan, dest, size_bytes, &result, ticks_to_wait) !=
         ESP_OK) {
       TRACEE();
     }
     return result;
+  }
+
+  void setWaitTimeMs(TickType_t ms) {
+    ticks_to_wait = pdMS_TO_TICKS(ms);
   }
 
 protected:
@@ -103,6 +107,7 @@ protected:
   i2s_chan_handle_t tx_chan; // I2S tx channel handler
   i2s_chan_handle_t rx_chan; // I2S rx channel handler
   bool is_started = false;
+  TickType_t ticks_to_wait = portMAX_DELAY;
 
   struct DriverCommon {
     virtual i2s_chan_config_t getChannelConfig(I2SConfigESP32V1 &cfg) = 0;
