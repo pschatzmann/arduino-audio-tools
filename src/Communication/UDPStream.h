@@ -74,6 +74,12 @@ public:
     return p_udp->begin(port);
   }
 
+   /// Starts to receive data in multicast from/with the indicated address / port
+  bool beginMulticast(IPAddress address, uint16_t port) {
+    connect();
+    return  p_udp->beginMulticast(address,port);   
+  }
+
   /// We use the same remote port as defined in begin for write
   uint16_t remotePort() {
     uint16_t result = p_udp->remotePort();
