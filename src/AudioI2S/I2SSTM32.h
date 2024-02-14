@@ -2,8 +2,9 @@
 
 #ifdef STM32
 #include "AudioI2S/I2SConfig.h"
-namespace audio_tools {
 #include "stm32-i2s.h"
+
+namespace audio_tools {
 
 NBuffer<uint8_t> *p_tx_buffer=nullptr;
 NBuffer<uint8_t> *p_rx_buffer=nullptr;
@@ -36,7 +37,7 @@ class I2SDriverSTM32 {
 
     /// starts the DAC 
     bool begin(I2SConfigStd cfg) {
-      TRACED();
+      //TRACED();
       bool result = false;
       deleteBuffers();
 
@@ -55,7 +56,7 @@ class I2SDriverSTM32 {
         case RX_MODE:
           p_rx_buffer = new NBuffer<uint8_t>(cfg.buffer_size, cfg.buffer_count);
 #ifdef STM32_I2S_WITH_OBJECT
-        	result = I2S.startI2SReceive(i2s_stm32, writeFromReceive, cfg.buffer_size);
+        	result = stm32_i2s::STM32_I2S.startI2SReceive(i2s_stm32, writeFromReceive, cfg.buffer_size);
 #else 
         	result = startI2SReceive(&i2s_stm32, writeFromReceive, cfg.buffer_size);
 #endif
@@ -63,7 +64,7 @@ class I2SDriverSTM32 {
         case TX_MODE:
           p_tx_buffer = new NBuffer<uint8_t>(cfg.buffer_size, cfg.buffer_count);
 #ifdef STM32_I2S_WITH_OBJECT
-      	  result =  I2S.startI2STransmit(i2s_stm32, readToTransmit, cfg.buffer_size);
+      	  result =  stm32_i2s::STM32_I2S.startI2STransmit(i2s_stm32, readToTransmit, cfg.buffer_size);
 #else 
       	  result =  startI2STransmit(&i2s_stm32, readToTransmit, cfg.buffer_size);
 #endif
@@ -71,7 +72,7 @@ class I2SDriverSTM32 {
         case RXTX_MODE:
           p_tx_buffer = new NBuffer<uint8_t>(cfg.buffer_size, cfg.buffer_count);
 #ifdef STM32_I2S_WITH_OBJECT
-	        result = I2S.startI2STransmitReceive(i2s_stm32, readToTransmit, writeFromReceive, cfg.buffer_size);
+	        result = stm32_i2s::STM32_I2S.startI2STransmitReceive(i2s_stm32, readToTransmit, writeFromReceive, cfg.buffer_size);
 #else 
 	        result = startI2STransmitReceive(&i2s_stm32, readToTransmit, writeFromReceive, cfg.buffer_size);
 #endif
@@ -87,9 +88,9 @@ class I2SDriverSTM32 {
 
     /// stops the I2C and unistalls the driver
     void end(){
-      TRACED();
+      //TRACED();
 #ifdef STM32_I2S_WITH_OBJECT
-      I2S.stopI2S();
+      stm32_i2s::STM32_I2S.stopI2S();
 #else 
       stopI2S();
 #endif
@@ -98,12 +99,12 @@ class I2SDriverSTM32 {
 
     /// we assume the data is already available in the buffer
     int available() {
-      return I2S_BUFFER_COUNT*I2S_BUFFER_SIZE;
+      return p_rx_buffer == nullptr ? 0 :I2S_BUFFER_COUNT*I2S_BUFFER_SIZE;
     }
 
     /// We limit the write size to the buffer size
     int availableForWrite() {
-      return I2S_BUFFER_SIZE;
+      return p_tx_buffer == nullptr ? 0 : I2S_BUFFER_SIZE;
     }
 
     /// provides the actual configuration
@@ -161,7 +162,7 @@ class I2SDriverSTM32 {
 
   protected:
     I2SConfigStd cfg;
-    I2SSettingsSTM32 i2s_stm32;
+    stm32_i2s::I2SSettingsSTM32 i2s_stm32;
 
     void deleteBuffers() {
       if (p_rx_buffer!=nullptr) {
@@ -179,7 +180,6 @@ class I2SDriverSTM32 {
       i2s_stm32.mode = getMode(cfg);
       i2s_stm32.standard = getStandard(cfg);
       i2s_stm32.fullduplexmode = cfg.rx_tx_mode == RXTX_MODE ? I2S_FULLDUPLEXMODE_ENABLE : I2S_FULLDUPLEXMODE_DISABLE;
-      //i2s_stm32.i2s = &hi2s3;
     }
 
     uint32_t getMode(I2SConfigStd &cfg){

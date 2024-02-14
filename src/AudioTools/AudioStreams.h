@@ -688,7 +688,7 @@ class GeneratedSoundStream : public AudioStream {
   void flush() override {}
 
  protected:
-  bool active = false;
+  bool active = true; // support for legacy sketches
   SoundGenerator<T> *generator_ptr;
   AudioInfoSupport *audioBaseInfoDependent = nullptr;
   const char* source_not_defined_error = "Source not defined";
