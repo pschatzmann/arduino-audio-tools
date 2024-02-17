@@ -542,6 +542,7 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #define PIN_PWM_START PA0
 #define PWM_DEFAULT_TIMER TIM2
 #define PWM_FREQ_TIMER_NO 3
+#define USE_SD_NO_NS
 
 #define PIN_I2S_BCK -1
 #define PIN_I2S_WS -1
@@ -549,7 +550,7 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #define PIN_I2S_DATA_OUT -1
 #define PIN_I2S_MUTE -1
 #define SOFT_MUTE_VALUE 0
-#define PIN_CS 10
+#define PIN_CS -1
 #endif
 
 //---- SAMD ------------
