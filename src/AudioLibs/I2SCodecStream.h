@@ -109,44 +109,63 @@ public:
       return false;
     return p_board->setVolume(vol * 100.0);
   }
+
+  /// Provides the actual volume (0.0 - 1.0)
   int getVolume() {
     if (p_board == nullptr)
       return -1;
     return p_board->getVolume();
   }
+  
+  /// Mute / unmote
   bool setMute(bool mute) {
     if (p_board == nullptr)
       return false;
     return p_board->setMute(mute);
   }
+
+  /// Sets the output of the PA Power Pin
   bool setPAPower(bool active) {
     if (p_board == nullptr)
       return false;
     return p_board->setPAPower(active);
   }
 
+  /// Provides the board
   AudioBoard &board() { return *p_board; }
+  /// (re)defines the board
   void setBoard(AudioBoard &board) { p_board = &board; }
+  /// (re)defines the board
   void setBoard(AudioBoard *board) { p_board = board; }
+  /// checks if a board has been defined
   bool hasBoard() { return p_board != nullptr; }
 
+  /// Provides the gpio for the indicated function 
   GpioPin getPinID(PinFunction function) {
     if (p_board == nullptr)
       return -1;
     return p_board->getPins().getPinID(function);
   }
 
+  /// Provides the gpio for the indicated function 
   GpioPin getPinID(PinFunction function, int pos) {
     if (p_board == nullptr)
       return -1;
     return p_board->getPins().getPinID(function, pos);
   }
 
+  /// Provides the gpio for the indicated key pos
   GpioPin getKey(int pos){
     return getPinID(PinFunction::KEY, pos);
   }
 
+  /// Provides access to the pin information
   DriverPins &getPins() { return p_board->getPins(); }
+
+  /// Provides the i2s driver
+  I2SDriver* driver() {
+    return i2s.driver();
+  }
 
 protected:
   I2SStream i2s;
