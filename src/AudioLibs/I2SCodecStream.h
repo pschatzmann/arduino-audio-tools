@@ -229,30 +229,30 @@ protected:
   }
   samplerate_t toRate(int rate) {
     if (rate <= 8000) {
-      LOGD("RATE_08K");
-      return RATE_08K;
+      LOGD("RATE_8K");
+      return RATE_8K;
     }
     if (rate <= 11000) {
-      LOGD("RATE_08K");
+      LOGD("RATE_8K");
       return RATE_11K;
     }
     if (rate <= 16000) {
-      LOGD("RATE_08K");
+      LOGD("RATE_8K");
       return RATE_16K;
     }
     if (rate <= 22000) {
-      LOGD("RATE_08K");
+      LOGD("RATE_8K");
       return RATE_22K;
     }
     if (rate <= 32000) {
-      LOGD("RATE_08K");
+      LOGD("RATE_8K");
       return RATE_32K;
     }
     if (rate <= 44000) {
-      LOGD("RATE_08K");
+      LOGD("RATE_8K");
       return RATE_44K;
     }
-    LOGD("RATE_08K");
+    LOGD("RATE_8K");
     return RATE_48K;
   }
 
