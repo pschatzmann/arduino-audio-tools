@@ -103,13 +103,13 @@ public:
   virtual void setAudioInfo(AudioInfo info) {
     TRACEI();
     AudioStream::setAudioInfo(info);
-    int vol = -1;
+    float vol = -1.0f;
     // save volume if possible
     if (is_active) vol = getVolume();
     beginCodec(info);
     i2s.setAudioInfo(info);
     // restore volume
-    if (vol>0) setVolume(vol);
+    if (vol>0.0f) setVolume(vol);
   }
 
   /// Writes the audio data to I2S
