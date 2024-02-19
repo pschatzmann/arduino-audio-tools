@@ -150,9 +150,9 @@ class I2SCodecStream : public AudioStream {
   }
 
   /// Provides the actual volume (0.0 - 1.0)
-  int getVolume() {
-    if (p_board == nullptr) return -1;
-    return static_cast<float>(p_board->getVolume()) / 100.0;
+  float getVolume() {
+    if (p_board == nullptr) return 0.0f;
+    return static_cast<float>(p_board->getVolume()) / 100.0f;
   }
 
   /// Mute / unmote
