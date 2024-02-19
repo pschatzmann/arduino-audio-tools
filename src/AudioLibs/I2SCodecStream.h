@@ -77,7 +77,7 @@ class I2SCodecStream : public AudioStream {
     is_active = i2s.begin(cfg);
 
     // if setvolume was called before begin
-    if (is_active && volume > 0.0f) {
+    if (is_active && volume >= 0.0f) {
       setVolume(volume);
     }
     return is_active;
