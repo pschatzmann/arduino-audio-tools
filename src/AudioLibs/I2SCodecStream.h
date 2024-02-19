@@ -1,10 +1,9 @@
 #pragma once
-#include "AudioBoard.h" // install audio-driver library
+#include "AudioBoard.h"  // install audio-driver library
 #include "AudioConfig.h"
 #include "AudioI2S/I2SStream.h"
 
 #pragma GCC diagnostic ignored "-Wclass-memaccess"
-
 
 // Added to be compatible with the AudioKitStream.h
 #ifndef PIN_AUDIO_KIT_SD_CARD_CS
@@ -21,23 +20,19 @@ namespace audio_tools {
  * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
-*/
+ */
 struct I2SCodecConfig : public I2SConfig {
   input_device_t input_device = ADC_INPUT_LINE1;
   output_device_t output_device = DAC_OUTPUT_ALL;
   // to be compatible with the AudioKitStream -> do not activate SD spi if false
   bool sd_active = true;
 
-  bool operator==(I2SCodecConfig alt){
-    return input_device == alt.input_device
-      && output_device == alt.output_device
-      && *((AudioInfo*)this) == alt;
+  bool operator==(I2SCodecConfig alt) {
+    return input_device == alt.input_device &&
+           output_device == alt.output_device && *((AudioInfo *)this) == alt;
   }
 
-  bool operator!=(I2SCodecConfig alt){
-      return !(*this == alt);
-  } 
-
+  bool operator!=(I2SCodecConfig alt) { return !(*this == alt); }
 };
 
 /**
@@ -47,7 +42,7 @@ struct I2SCodecConfig : public I2SConfig {
  * @copyright GPLv3
  */
 class I2SCodecStream : public AudioStream {
-public:
+ public:
   /// Default Constructor (w/o codec)
   I2SCodecStream() = default;
   /**
@@ -82,7 +77,7 @@ public:
     is_active = i2s.begin(cfg);
 
     // if setvolume was called before begin
-    if (is_active && volume>0.0f) {
+    if (is_active && volume > 0.0f) {
       setVolume(volume);
     }
     return is_active;
@@ -98,8 +93,7 @@ public:
   /// Stops the I2S interface
   void end() {
     TRACED();
-    if (p_board)
-      p_board->end();
+    if (p_board) p_board->end();
     i2s.end();
     is_active = false;
   }
@@ -109,13 +103,26 @@ public:
     TRACEI();
     // save volume if possible
     AudioStream::setAudioInfo(info);
-    beginCodec(info);
     i2s.setAudioInfo(info);
-    // restore volume 
-    if (volume > 0.0f) {
-      LOGI("restoring volume: %f", volume);
-      setVolume(volume);
+
+    if (!is_active || p_board == nullptr) {
+      return;
     }
+
+    if (cfg.sample_rate == info.sample_rate &&
+        cfg.bits_per_sample == info.bits_per_sample &&
+        cfg.channels == info.channels) {
+      return;
+    }
+
+    cfg.sample_rate = info.sample_rate;
+    cfg.bits_per_sample = info.bits_per_sample;
+    cfg.channels = info.channels;
+
+    // update values in codec
+    codec_cfg.i2s.bits = toCodecBits(cfg.bits_per_sample);
+    codec_cfg.i2s.rate = toRate(cfg.sample_rate);
+    p_board->setConfig(codec_cfg);
   }
 
   /// Writes the audio data to I2S
@@ -138,29 +145,25 @@ public:
   /// sets the volume (range 0.0 - 1.0)
   bool setVolume(float vol) {
     volume = vol;
-    if (!is_active || p_board == nullptr)
-      return false;
+    if (!is_active || p_board == nullptr) return false;
     return p_board->setVolume(vol * 100.0);
   }
 
   /// Provides the actual volume (0.0 - 1.0)
   int getVolume() {
-    if (p_board == nullptr)
-      return -1;
+    if (p_board == nullptr) return -1;
     return p_board->getVolume();
   }
-  
+
   /// Mute / unmote
   bool setMute(bool mute) {
-    if (p_board == nullptr)
-      return false;
+    if (p_board == nullptr) return false;
     return p_board->setMute(mute);
   }
 
   /// Sets the output of the PA Power Pin
   bool setPAPower(bool active) {
-    if (p_board == nullptr)
-      return false;
+    if (p_board == nullptr) return false;
     return p_board->setPAPower(active);
   }
 
@@ -173,37 +176,31 @@ public:
   /// checks if a board has been defined
   bool hasBoard() { return p_board != nullptr; }
 
-  /// Provides the gpio for the indicated function 
+  /// Provides the gpio for the indicated function
   GpioPin getPinID(PinFunction function) {
-    if (p_board == nullptr)
-      return -1;
+    if (p_board == nullptr) return -1;
     return p_board->getPins().getPinID(function);
   }
 
-  /// Provides the gpio for the indicated function 
+  /// Provides the gpio for the indicated function
   GpioPin getPinID(PinFunction function, int pos) {
-    if (p_board == nullptr)
-      return -1;
+    if (p_board == nullptr) return -1;
     return p_board->getPins().getPinID(function, pos);
   }
 
   /// Provides the gpio for the indicated key pos
-  GpioPin getKey(int pos){
-    return getPinID(PinFunction::KEY, pos);
-  }
+  GpioPin getKey(int pos) { return getPinID(PinFunction::KEY, pos); }
 
   /// Provides access to the pin information
   DriverPins &getPins() { return p_board->getPins(); }
 
   /// Provides the i2s driver
-  I2SDriver* driver() {
-    return i2s.driver();
-  }
+  I2SDriver *driver() { return i2s.driver(); }
 
-protected:
+ protected:
   I2SStream i2s;
   I2SCodecConfig cfg;
-  I2SCodecConfig cfg_driver; // last driver state
+  CodecConfig codec_cfg;
   AudioBoard *p_board = nullptr;
   bool is_active = false;
   float volume = -1.0f;
@@ -242,30 +239,23 @@ protected:
     codec_cfg.i2s.fmt = toFormat(info.i2s_format);
     // use reverse logic for codec setting
     codec_cfg.i2s.mode = info.is_master ? MODE_SLAVE : MODE_MASTER;
-    if (p_board == nullptr)
-      return false;
+    if (p_board == nullptr) return false;
 
     // setup driver only on changes
-    bool result = true;
-    if (!is_active || (cfg_driver != info)){
-      result = p_board->begin(codec_cfg);
-      cfg_driver = info;
-    }
-    return result;
-
+    return p_board->begin(codec_cfg);
   }
 
   sample_bits_t toCodecBits(int bits) {
     switch (bits) {
-    case 16:
-      LOGD("BIT_LENGTH_16BITS");
-      return BIT_LENGTH_16BITS;
-    case 24:
-      LOGD("BIT_LENGTH_24BITS");
-      return BIT_LENGTH_24BITS;
-    case 32:
-      LOGD("BIT_LENGTH_32BITS");
-      return BIT_LENGTH_32BITS;
+      case 16:
+        LOGD("BIT_LENGTH_16BITS");
+        return BIT_LENGTH_16BITS;
+      case 24:
+        LOGD("BIT_LENGTH_24BITS");
+        return BIT_LENGTH_24BITS;
+      case 32:
+        LOGD("BIT_LENGTH_32BITS");
+        return BIT_LENGTH_32BITS;
     }
     LOGE("Unsupported bits: %d", bits);
     return BIT_LENGTH_16BITS;
@@ -301,26 +291,26 @@ protected:
 
   i2s_format_t toFormat(I2SFormat fmt) {
     switch (fmt) {
-    case I2S_PHILIPS_FORMAT:
-    case I2S_STD_FORMAT:
-      LOGD("I2S_NORMAL");
-      return I2S_NORMAL;
-    case I2S_LEFT_JUSTIFIED_FORMAT:
-    case I2S_MSB_FORMAT:
-      LOGD("I2S_LEFT");
-      return I2S_LEFT;
-    case I2S_RIGHT_JUSTIFIED_FORMAT:
-    case I2S_LSB_FORMAT:
-      LOGD("I2S_RIGHT");
-      return I2S_RIGHT;
-    case I2S_PCM:
-      LOGD("I2S_DSP");
-      return I2S_DSP;
-    default:
-      LOGE("unsupported mode");
-      return I2S_NORMAL;
+      case I2S_PHILIPS_FORMAT:
+      case I2S_STD_FORMAT:
+        LOGD("I2S_NORMAL");
+        return I2S_NORMAL;
+      case I2S_LEFT_JUSTIFIED_FORMAT:
+      case I2S_MSB_FORMAT:
+        LOGD("I2S_LEFT");
+        return I2S_LEFT;
+      case I2S_RIGHT_JUSTIFIED_FORMAT:
+      case I2S_LSB_FORMAT:
+        LOGD("I2S_RIGHT");
+        return I2S_RIGHT;
+      case I2S_PCM:
+        LOGD("I2S_DSP");
+        return I2S_DSP;
+      default:
+        LOGE("unsupported mode");
+        return I2S_NORMAL;
     }
   }
 };
 
-} // namespace audio_tools
+}  // namespace audio_tools
