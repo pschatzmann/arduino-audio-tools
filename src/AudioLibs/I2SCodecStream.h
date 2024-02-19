@@ -16,11 +16,28 @@
 
 namespace audio_tools {
 
+/**
+ * @brief  Configuration for I2SCodecStream
+ * @ingroup io
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+*/
 struct I2SCodecConfig : public I2SConfig {
   input_device_t input_device = ADC_INPUT_LINE1;
   output_device_t output_device = DAC_OUTPUT_ALL;
   // to be compatible with the AudioKitStream -> do not activate SD spi if false
   bool sd_active = true;
+
+  bool operator==(I2SCodecConfig alt){
+    return input_device == alt.input_device
+      && output_device == alt.output_device
+      && *((AudioInfo*)this) == alt;
+  }
+
+  bool operator!=(I2SCodecConfig alt){
+      return !(*this == alt);
+  } 
+
 };
 
 /**
@@ -58,9 +75,12 @@ public:
   bool begin() {
     setupI2SPins();
     if (!beginCodec(cfg)) {
-      TRACEE()
+      TRACEE();
+      is_active = false;
+      return false;
     }
-    return i2s.begin(cfg);
+    is_active = i2s.begin(cfg);
+    return is_active;
   }
 
   /// Starts the I2S interface
@@ -76,14 +96,20 @@ public:
     if (p_board)
       p_board->end();
     i2s.end();
+    is_active = false;
   }
 
   /// updates the sample rate dynamically
   virtual void setAudioInfo(AudioInfo info) {
     TRACEI();
     AudioStream::setAudioInfo(info);
+    int vol = -1;
+    // save volume if possible
+    if (is_active) vol = getVolume();
     beginCodec(info);
     i2s.setAudioInfo(info);
+    // restore volume
+    if (vol>0) setVolume(vol);
   }
 
   /// Writes the audio data to I2S
@@ -170,7 +196,9 @@ public:
 protected:
   I2SStream i2s;
   I2SCodecConfig cfg;
+  I2SCodecConfig cfg_driver; // last driver state
   AudioBoard *p_board = nullptr;
+  bool is_active = false;
 
   /// We use the board pins if they are available
   void setupI2SPins() {
@@ -209,7 +237,14 @@ protected:
     if (p_board == nullptr)
       return false;
 
-    return p_board->begin(codec_cfg);
+    // setup driver only on changes
+    bool result = true;
+    if (!is_active || (cfg_driver != info)){
+      result = p_board->begin(codec_cfg);
+      cfg_driver = info;
+    }
+    return result;
+
   }
 
   sample_bits_t toCodecBits(int bits) {
