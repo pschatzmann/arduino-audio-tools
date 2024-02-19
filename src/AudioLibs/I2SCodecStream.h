@@ -80,6 +80,11 @@ public:
       return false;
     }
     is_active = i2s.begin(cfg);
+
+    // if setvolume was called before begin
+    if (is_active && volume>0.0f) {
+      setVolume(volume);
+    }
     return is_active;
   }
 
@@ -102,14 +107,15 @@ public:
   /// updates the sample rate dynamically
   virtual void setAudioInfo(AudioInfo info) {
     TRACEI();
-    AudioStream::setAudioInfo(info);
-    float vol = -1.0f;
     // save volume if possible
-    if (is_active) vol = getVolume();
+    AudioStream::setAudioInfo(info);
     beginCodec(info);
     i2s.setAudioInfo(info);
-    // restore volume
-    if (vol>0.0f) setVolume(vol);
+    // restore volume 
+    if (volume > 0.0f) {
+      LOGI("restoring volume: %f", volume);
+      setVolume(volume);
+    }
   }
 
   /// Writes the audio data to I2S
@@ -131,7 +137,8 @@ public:
 
   /// sets the volume (range 0.0 - 1.0)
   bool setVolume(float vol) {
-    if (p_board == nullptr)
+    volume = vol;
+    if (!is_active || p_board == nullptr)
       return false;
     return p_board->setVolume(vol * 100.0);
   }
@@ -199,6 +206,7 @@ protected:
   I2SCodecConfig cfg_driver; // last driver state
   AudioBoard *p_board = nullptr;
   bool is_active = false;
+  float volume = -1.0f;
 
   /// We use the board pins if they are available
   void setupI2SPins() {
