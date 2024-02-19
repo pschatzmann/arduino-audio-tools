@@ -101,25 +101,27 @@ class I2SCodecStream : public AudioStream {
   /// updates the sample rate dynamically
   virtual void setAudioInfo(AudioInfo info) {
     TRACEI();
-    // save volume if possible
     AudioStream::setAudioInfo(info);
     i2s.setAudioInfo(info);
 
+    // return if we we are not ready
     if (!is_active || p_board == nullptr) {
       return;
     }
 
+    // return if there is nothing to do
     if (cfg.sample_rate == info.sample_rate &&
         cfg.bits_per_sample == info.bits_per_sample &&
         cfg.channels == info.channels) {
       return;
     }
 
+    // update cfg
     cfg.sample_rate = info.sample_rate;
     cfg.bits_per_sample = info.bits_per_sample;
     cfg.channels = info.channels;
 
-    // update values in codec
+    // update codec_cfg
     codec_cfg.i2s.bits = toCodecBits(cfg.bits_per_sample);
     codec_cfg.i2s.rate = toRate(cfg.sample_rate);
     p_board->setConfig(codec_cfg);
@@ -220,15 +222,7 @@ class I2SCodecStream : public AudioStream {
     }
   }
 
-  bool beginCodec(AudioInfo info) {
-    cfg.sample_rate = info.sample_rate;
-    cfg.bits_per_sample = info.bits_per_sample;
-    cfg.channels = info.channels;
-    return beginCodec(cfg);
-  }
-
   bool beginCodec(I2SCodecConfig info) {
-    CodecConfig codec_cfg;
     codec_cfg.sd_active = info.sd_active;
     codec_cfg.input_device = info.input_device;
     LOGD("input: %d", info.input_device);
