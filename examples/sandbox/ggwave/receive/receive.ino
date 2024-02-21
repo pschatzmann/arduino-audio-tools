@@ -16,7 +16,7 @@
 
 int sample_rate = GGWAVE_DEFAULT_SAMPLE_RATE;
 int channels = 1;
-AudioBoardStream in;  // or AudioBoardStream
+AudioBoardStream in(AudioKitEs8388V1);  // or e.g. I2SStream
 GGWaveDecoder dec;
 EncodedAudioStream encoder_stream(Serial, dec); // decode and write to I2S - ESP Now is limited to 256 bytes
 StreamCopy copier(encoder_stream, in, GGWAVE_DEFAULT_BYTES_PER_FRAME);  // copy mic to tfl

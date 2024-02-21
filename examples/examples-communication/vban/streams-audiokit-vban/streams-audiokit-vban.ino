@@ -9,7 +9,7 @@
 #include "AudioLibs/AudioBoardStream.h" // comment out when not using AudioKit
 
 AudioInfo info(44100, 2, 16);
-AudioBoardStream in;  // Audio source e.g. replace with I2SStream
+AudioBoardStream in(AudioKitEs8388V1);  // Audio source e.g. replace with I2SStream
 VBANStream out;
 StreamCopy copier(out, in, 2048);                             // copies sound into i2s
 
