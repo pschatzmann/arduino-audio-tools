@@ -91,7 +91,7 @@ class VBANStream : public AudioStream {
 
         // limit output speed
         if (cfg.throttle_active){
-            throttle.delaySamples(samples / cfg.channels);
+            throttle.delayFrames(samples / cfg.channels);
         }
 
         for (int j=0; j<samples; j++){
@@ -159,6 +159,11 @@ class VBANStream : public AudioStream {
             return false;
         }
         WiFi.setSleep(false); 
+        // connect to target
+        if (!udp.connect(cfg.target_ip, cfg.udp_port)){
+            LOGE("Could not connect to '%s:%d' target", toString(cfg.target_ip), cfg.udp_port);
+        }
+        // handle data
         udp.onPacket([this](AsyncUDPPacket packet) {
              receive_udp(packet);
         });
@@ -200,10 +205,10 @@ class VBANStream : public AudioStream {
         
         // Setup the packet header:
         strncpy(vban.hdr->preamble, "VBAN", 4);
-        vban.hdr->sample_rate      = VBAN_PROTOCOL_AUDIO | rate;   // 11025 Hz, which matches default sample rate for soundmodem
+        vban.hdr->sample_rate      = static_cast<int>(VBAN_PROTOCOL_AUDIO) | rate;   // 11025 Hz, which matches default sample rate for soundmodem
         vban.hdr->num_samples      = (VBAN_PACKET_NUM_SAMPLES / cfg.channels)-1;                       // 255 = 256 samples
         vban.hdr->num_channels     = cfg.channels - 1;                             // 0 = 1 channel
-        vban.hdr->sample_format    = VBAN_BITFMT_16_INT | VBAN_CODEC_PCM;          // int16 PCM
+        vban.hdr->sample_format    = static_cast<int>(VBAN_BITFMT_16_INT) | VBAN_CODEC_PCM;          // int16 PCM
         strncpy(vban.hdr->stream_name, cfg.stream_name, min((int)strlen(cfg.stream_name),VBAN_STREAM_NAME_SIZE));
 
         vban.packet_data_bytes = (vban.hdr->num_samples+1) * (vban.hdr->num_channels+1) * ((vban.hdr->sample_format & VBAN_BIT_RESOLUTION_MASK)+1);
@@ -279,6 +284,12 @@ class VBANStream : public AudioStream {
                 break;
         }
         return result;
+    }
+
+    const char* toString(IPAddress adr){
+        static char str[11] = {0};
+        snprintf(str,11, "%d.%d.%d.%d", adr[0],adr[1],adr[2],adr[3]);
+        return str;
     }
 
     /** 
