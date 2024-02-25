@@ -49,10 +49,12 @@ public:
     TRACED();
     size_t result = queue.write((uint8_t *)data, byteCount);
     // trigger processing - we leave byteCount in the buffer
-    while(queue.available()>byteCount){
-      p_dec->copy(); 
-      delay(1);
-    }
+    // while(queue.available()>byteCount){
+    //   p_dec->copy(); 
+    //   delay(1);
+    // }
+    while(p_dec->copy());
+    
     return result;
   }
 
