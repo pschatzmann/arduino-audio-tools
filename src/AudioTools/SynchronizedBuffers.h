@@ -345,6 +345,7 @@ class SynchronizedBufferRTOS : public BaseBuffer<T> {
 public:
   SynchronizedBufferRTOS(size_t xStreamBufferSizeBytes, size_t xTriggerLevel=256, TickType_t writeMaxWait=portMAX_DELAY, TickType_t readMaxWait=portMAX_DELAY)
       : BaseBuffer<T>() {
+    if (xStreamBufferSizeBytes>0)
     xStreamBuffer = xStreamBufferCreate(xStreamBufferSizeBytes, xTriggerLevel);
     readWait = readMaxWait;
     writeWait = writeMaxWait;
@@ -355,7 +356,8 @@ public:
 
   void resize(size_t size){
     if (current_size != size){
-      vStreamBufferDelete(xStreamBuffer);
+      if (xStreamBuffer!=nullptr)
+        vStreamBufferDelete(xStreamBuffer);
       xStreamBuffer = xStreamBufferCreate(size, trigger_level);
       current_size = size;
     }
@@ -459,7 +461,7 @@ public:
   }
 
 protected:
-  StreamBufferHandle_t xStreamBuffer;
+  StreamBufferHandle_t xStreamBuffer = nullptr;
   BaseType_t xHigherPriorityTaskWoken = pdFALSE;  // Initialised to pdFALSE.
   int readWait = portMAX_DELAY;
   int writeWait = portMAX_DELAY;

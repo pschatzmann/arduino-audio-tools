@@ -1412,7 +1412,7 @@ class Throttle : public AudioStream {
     uint64_t durationUsEff = micros() - start_time;
     uint64_t durationUsToBe = getDelayUs(sum_frames);
     int64_t waitUs = durationUsToBe - durationUsEff + cfg.correction_us;
-    LOGI("wait us: %ld", static_cast<long>(waitUs));
+    LOGD("wait us: %ld", static_cast<long>(waitUs));
     if (waitUs > 0) {
       int64_t waitMs = waitUs / 1000;
       if (waitMs > 0) delay(waitMs);
