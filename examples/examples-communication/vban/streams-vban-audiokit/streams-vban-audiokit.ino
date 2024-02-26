@@ -23,6 +23,9 @@ void setup(void) {
   auto cfg_out = out.defaultConfig(TX_MODE);
   if (!out.begin(cfg_out)) stop();
 
+  // format changes in vban must change the output as well
+  in.setNotifyAudioChange(out);
+
   // setup input from vban
   auto cfg_in = in.defaultConfig(RX_MODE);
   cfg_in.ssid = "ssid";

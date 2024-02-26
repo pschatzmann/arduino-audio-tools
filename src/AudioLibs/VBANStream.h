@@ -377,15 +377,22 @@ class VBANStream : public AudioStream {
       uint8_t vbanSampleRateIdx = udpIncomingPacket[4] & VBAN_SR_MASK;
       uint8_t vbchannels = udpIncomingPacket[6] + 1;
       uint8_t vbframes = udpIncomingPacket[5] + 1;
-      uint8_t vbformat = udpIncomingPacket[4] & VBAN_PROTOCOL_MASK;;
+      uint8_t vbformat = udpIncomingPacket[7] & VBAN_PROTOCOL_MASK;;
+      uint8_t vbformat_bits = udpIncomingPacket[7] & VBAN_BIT_RESOLUTION_MASK;;
       uint32_t vbanSampleRate = VBanSRList[vbanSampleRateIdx];
       
       LOGD("sample_count: %d -  frames: %d", vban_rx_sample_count, vbframes);
       assert (vban_rx_sample_count == vbframes*vbchannels);
 
-
+      // E.g. do not process any text
       if (vbformat != cfg.format){
         LOGE("Format ignored: 0x%x", vbformat);
+        return;
+      }
+
+      // Currently we support only 16 bits.
+      if (vbformat_bits != VBAN_BITFMT_16_INT){
+        LOGE("Format only 16 bits supported");
         return;
       }
 
@@ -398,9 +405,13 @@ class VBANStream : public AudioStream {
 
       // update sample rate
       if (cfg.sample_rate != vbanSampleRate || cfg.channels != vbchannels) {
+        // update audio info
         cfg.sample_rate = vbanSampleRate;
         cfg.channels = vbchannels;
         setAudioInfo(cfg);
+        // remove any buffered data
+        rx_buffer.reset();
+        available_active = false;
       }
 
       if (p_out!=nullptr){
@@ -412,7 +423,6 @@ class VBANStream : public AudioStream {
       }
 
       // write data to buffer
-      TRACED();
       int size_written = rx_buffer.writeArray((uint8_t*)vban_rx_data, vban_rx_data_bytes);
       if (size_written != vban_rx_data_bytes) {
         LOGE("buffer overflow %d -> %d", vban_rx_data_bytes, size_written);
