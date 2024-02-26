@@ -381,8 +381,8 @@ class VBANStream : public AudioStream {
       uint8_t vbformat_bits = udpIncomingPacket[7] & VBAN_BIT_RESOLUTION_MASK;;
       uint32_t vbanSampleRate = VBanSRList[vbanSampleRateIdx];
       
-      LOGD("sample_count: %d -  frames: %d", vban_rx_sample_count, vbframes);
-      assert (vban_rx_sample_count == vbframes*vbchannels);
+      //LOGD("sample_count: %d -  frames: %d", vban_rx_sample_count, vbframes);
+      //assert (vban_rx_sample_count == vbframes*vbchannels);
 
       // E.g. do not process any text
       if (vbformat != cfg.format){
