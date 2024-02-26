@@ -25,7 +25,7 @@ class VBANConfig : public AudioInfo {
   const char* ssid = nullptr;
   /// password for wifi connection
   const char* password = nullptr;
-  int rx_buffer_count = 10;
+  int rx_buffer_count = 30;
   // set to true if samples are generated faster then sample rate
   bool throttle_active = false;
   // when negative the number of ms that are subtracted from the calculated wait
@@ -34,6 +34,7 @@ class VBANConfig : public AudioInfo {
   // defines the max write size
   int max_write_size =
       DEFAULT_BUFFER_SIZE * 2;  // just good enough for 44100 stereo
+  uint8_t format = 0;
 };
 
 /**
@@ -54,13 +55,16 @@ class VBANStream : public AudioStream {
     return def;
   }
 
+  void setOutput(Print &out){
+    p_out = &out;
+  }
+
   void setAudioInfo(AudioInfo info) override {
     cfg.copyFrom(info);
     AudioStream::setAudioInfo(info);
     auto thc = throttle.defaultConfig();
     thc.copyFrom(info);
-    thc.correction_us = cfg.throttle_correction_us;
-    ;
+    thc.correction_us = cfg.throttle_correction_us;  
     throttle.begin(thc);
     if (cfg.mode == TX_MODE) {
       configure_tx();
@@ -82,7 +86,12 @@ class VBANStream : public AudioStream {
       tx_buffer.resize(VBAN_PACKET_NUM_SAMPLES);
       return begin_tx();
     } else {
-      rx_buffer.resize(VBAN_PACKET_MAX_LEN_BYTES, cfg.rx_buffer_count);
+#ifdef ESP32
+      rx_buffer.resize(DEFAULT_BUFFER_SIZE * cfg.rx_buffer_count);
+      rx_buffer.setReadMaxWait(10);
+#else
+      rx_buffer.resize(DEFAULT_BUFFER_SIZE, cfg.rx_buffer_count);
+#endif  
       return begin_rx();
     }
   }
@@ -91,8 +100,7 @@ class VBANStream : public AudioStream {
     if (!udp_connected) return 0;
 
     int16_t* adc_data = (int16_t*)data;
-    ;
-    size_t samples = byteCount / 2;
+    size_t samples = byteCount / (cfg.bits_per_sample/8);
 
     // limit output speed
     if (cfg.throttle_active) {
@@ -123,6 +131,11 @@ class VBANStream : public AudioStream {
   int availableForWrite() { return cfg.max_write_size; }
 
   size_t readBytes(uint8_t* data, size_t byteCount) override {
+    TRACED();
+    size_t samples = byteCount / (cfg.bits_per_sample/8);
+    if (cfg.throttle_active) {
+      throttle.delayFrames(samples / cfg.channels);
+    }
     return rx_buffer.readArray(data, byteCount);
   }
 
@@ -134,12 +147,17 @@ class VBANStream : public AudioStream {
   VBan vban;
   VBANConfig cfg;
   SingleBuffer<int16_t> tx_buffer{0};
+ #ifdef ESP32
+   SynchronizedBufferRTOS<uint8_t> rx_buffer{ 0};
+ #else
   NBuffer<uint8_t> rx_buffer{DEFAULT_BUFFER_SIZE, 0};
+ #endif
   bool udp_connected = false;
   uint32_t packet_counter = 0;
   Throttle throttle;
   size_t bytes_received = 0;
   bool available_active = false;
+  Print *p_out = nullptr;
 
   bool begin_tx() {
     if (!configure_tx()) {
@@ -332,19 +350,21 @@ class VBANStream : public AudioStream {
 
     int len = packet.length();
     if (len > 0) {
+      LOGD("receive_udp %d", len);
       uint8_t* udpIncomingPacket = packet.data();
 
       // receive incoming UDP packet
       // Check if packet length meets VBAN specification:
       if (len <= (VBAN_PACKET_HEADER_BYTES + VBAN_PACKET_COUNTER_BYTES) ||
           len > VBAN_PACKET_MAX_LEN_BYTES) {
-        LOGE("Error: packet length %u bytes\n", len);
+        LOGE("Packet length %u bytes", len);
+        rx_buffer.reset();
         return;
       }
 
       // Check if preamble matches VBAN format:
       if (strncmp("VBAN", (const char*)udpIncomingPacket, 4) != 0) {
-        LOGE("Unrecognized preamble %.4s\n", udpIncomingPacket);
+        LOGE("Unrecognized preamble %.4s", udpIncomingPacket);
         return;
       }
 
@@ -353,15 +373,26 @@ class VBANStream : public AudioStream {
       vban_rx_pkt_nbr = (uint32_t*)&udpIncomingPacket[VBAN_PACKET_HEADER_BYTES];
       vban_rx_data = (int16_t*)&udpIncomingPacket[VBAN_PACKET_HEADER_BYTES +
                                                   VBAN_PACKET_COUNTER_BYTES];
-      vban_rx_sample_count = vban_rx_data_bytes / 2;
+      vban_rx_sample_count = vban_rx_data_bytes / (cfg.bits_per_sample / 8);
       uint8_t vbanSampleRateIdx = udpIncomingPacket[4] & VBAN_SR_MASK;
       uint8_t vbchannels = udpIncomingPacket[6] + 1;
+      uint8_t vbframes = udpIncomingPacket[5] + 1;
+      uint8_t vbformat = udpIncomingPacket[4] & VBAN_PROTOCOL_MASK;;
       uint32_t vbanSampleRate = VBanSRList[vbanSampleRateIdx];
+      
+      LOGD("sample_count: %d -  frames: %d", vban_rx_sample_count, vbframes);
+      assert (vban_rx_sample_count == vbframes*vbchannels);
+
+
+      if (vbformat != cfg.format){
+        LOGE("Format ignored: 0x%x", vbformat);
+        return;
+      }
 
       // Just to be safe, re-check sample count against max sample count to
       // avoid overrunning outBuf later
       if (vban_rx_sample_count > VBAN_PACKET_MAX_SAMPLES) {
-        LOGE("error: unexpected packet size: %u\n", vban_rx_sample_count);
+        LOGE("unexpected packet size: %u", vban_rx_sample_count);
         return;
       }
 
@@ -372,17 +403,28 @@ class VBANStream : public AudioStream {
         setAudioInfo(cfg);
       }
 
+      if (p_out!=nullptr){
+        int size_written = p_out->write((uint8_t*)vban_rx_data, vban_rx_data_bytes);
+        if (size_written != vban_rx_data_bytes) {
+          LOGE("buffer overflow %d -> %d", vban_rx_data_bytes, size_written);
+        }
+        return;
+      }
+
       // write data to buffer
-      int size = vban_rx_sample_count * sizeof(uint16_t);
-      if (rx_buffer.writeArray((uint8_t*)&vban_rx_data, size) != size) {
-        LOGE("buffer overflow");
+      TRACED();
+      int size_written = rx_buffer.writeArray((uint8_t*)vban_rx_data, vban_rx_data_bytes);
+      if (size_written != vban_rx_data_bytes) {
+        LOGE("buffer overflow %d -> %d", vban_rx_data_bytes, size_written);
       }
 
       // report available bytes only when buffer is 50% full
       if (!available_active) {
-        bytes_received += size;
-        if (bytes_received >= cfg.rx_buffer_count * DEFAULT_BUFFER_SIZE * 0.5)
+        bytes_received += vban_rx_data_bytes;
+        if (bytes_received >= cfg.rx_buffer_count * DEFAULT_BUFFER_SIZE * 0.75){
           available_active = true;
+          LOGI("Activating vban");
+        }
       }
     }
   }
