@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AudioConfig.h"
-#ifdef ARDUINO
+#if defined(ARDUINO) && !defined(IS_MIN_DESKTOP)
 #  include "Print.h"
 #endif
 // Logging Implementation

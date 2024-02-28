@@ -176,6 +176,24 @@ extern void delayMicroseconds(uint32_t ms);
 /// Returns the milliseconds since the start
 extern uint32_t micros();
 
+#else 
+
+extern "C" {
+	
+/// Waits for the indicated milliseconds
+extern void delay(uint32_t ms);
+
+/// Returns the milliseconds since the start
+extern uint32_t millis();
+
+/// Waits for the indicated milliseconds
+extern void delayMicroseconds(uint32_t ms);
+
+/// Returns the milliseconds since the start
+extern uint32_t micros();
+
+}
+
 #endif
 
 

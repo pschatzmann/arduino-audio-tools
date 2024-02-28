@@ -10,6 +10,11 @@
 #define DEBOUNCE_DELAY 500
 #endif
 
+#if defined(IS_MIN_DESKTOP)
+extern "C" void pinMode(int, int);
+extern "C" int digitalRead(int);
+#endif
+
 namespace audio_tools {
 
 // global reference to access from static callback methods
@@ -226,9 +231,11 @@ protected:
       }
     }
 
+#if !defined(IS_MIN_DESKTOP)
     if (use_pin_interrupt) {
       attachInterrupt(digitalPinToInterrupt(pin), audioActionsISR, CHANGE);
     }
+#endif
   }
 };
 
