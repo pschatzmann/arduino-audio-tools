@@ -2,14 +2,14 @@
  * Test sketch for test.pd that was compiled with hvcc -n test test.pd
  */
 
-#include "AudioLibs/AudioBoardStream.h"  // install https://github.com/pschatzmann/arduino-audio-driver
-#include "AudioLibs/PureDataStream.h"
 #include "AudioTools.h"
+#include "AudioLibs/AudioBoardStream.h"  // install https://github.com/pschatzmann/arduino-audio-driver
 #include "Heavy_test.hpp"  // import before PureDataStream!
+#include "AudioLibs/PureDataStream.h"
 
 Heavy_test pd_test(44100);
 PureDataStream pd(pd_test);
-AudioBoardStream out(AudioKitEs8388V1);
+AudioBoardStream out(AudioKitEs8388V1); // or replace with other output
 StreamCopy copier(out, pd);  // copy kit to kit
 
 void setup() {
