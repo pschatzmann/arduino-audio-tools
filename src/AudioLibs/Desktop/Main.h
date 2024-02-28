@@ -1,8 +1,9 @@
 /**
  * Generic main for desktop arduino emulation
 */
-#pragma once
+#ifndef NO_MAIN
 
+#pragma once
 void loop();
 void setup();
 
@@ -11,4 +12,6 @@ int main (void) {
     while(true){
         loop();
     }
- }	
+ }
+
+#endif

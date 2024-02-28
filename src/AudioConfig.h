@@ -5,13 +5,15 @@
  * 
  */
 #pragma once
-#if defined(ARDUINO) 
-#  include "Arduino.h"
-#elif defined(IS_DESKTOP)
-#  include "Arduino.h"
+#if defined(IS_MIN_DESKTOP) 
+#  include "AudioLibs/Desktop/NoArduino.h"
 #elif defined(IS_DESKTOP_WITH_TIME_ONLY)
 #  include "AudioLibs/Desktop/Millis.h"
 #  include "AudioLibs/Desktop/NoArduino.h"
+#elif defined(IS_DESKTOP)
+#  include "Arduino.h"
+#elif defined(ARDUINO)
+#  include "Arduino.h"
 #else 
 #  include "AudioLibs/Desktop/NoArduino.h"
 #  define IS_JUPYTER
