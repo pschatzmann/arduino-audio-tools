@@ -52,13 +52,7 @@ class AudioStream : public Stream, public AudioInfoSupport, public AudioInfoSour
       TRACED();
       this->info = info;
       info.logInfo();
-      if (p_notify!=nullptr){
-          p_notify->setAudioInfo(info);
-      }
-  }
-
-  virtual void  setNotifyAudioChange(AudioInfoSupport &bi) override {
-      p_notify = &bi;
+      notifyAudioChange(info);
   }
 
   virtual size_t readBytes(uint8_t *buffer, size_t length) STREAM_READ_OVERRIDE { return not_supported(0, "readBytes"); }
@@ -126,7 +120,6 @@ class AudioStream : public Stream, public AudioInfoSupport, public AudioInfoSour
 #endif
 
  protected:
-  AudioInfoSupport *p_notify=nullptr;
   AudioInfo info;
   RingBuffer<uint8_t> tmp_in{0};
   RingBuffer<uint8_t> tmp_out{0};
@@ -636,8 +629,7 @@ class GeneratedSoundStream : public AudioStream {
       return false;
     }
     generator_ptr->begin();
-    if (audioBaseInfoDependent != nullptr)
-      audioBaseInfoDependent->setAudioInfo(generator_ptr->audioInfo());
+    notifyAudioChange(generator_ptr->audioInfo());
     active = true;
     return active;
   }
@@ -650,8 +642,7 @@ class GeneratedSoundStream : public AudioStream {
       return false;
     }
     generator_ptr->begin(cfg);
-    if (audioBaseInfoDependent != nullptr)
-      audioBaseInfoDependent->setAudioInfo(generator_ptr->audioInfo());
+    notifyAudioChange(generator_ptr->audioInfo());
     active = true;
     return active;
   }
@@ -661,10 +652,6 @@ class GeneratedSoundStream : public AudioStream {
     TRACED();
     generator_ptr->end();
     active = true; // legacy support - most sketches do not call begin
-  }
-
-  virtual void setNotifyAudioChange(AudioInfoSupport &bi) override {
-    audioBaseInfoDependent = &bi;
   }
 
   AudioInfo audioInfo() override {
@@ -690,7 +677,6 @@ class GeneratedSoundStream : public AudioStream {
  protected:
   bool active = true; // support for legacy sketches
   SoundGenerator<T> *generator_ptr;
-  AudioInfoSupport *audioBaseInfoDependent = nullptr;
   const char* source_not_defined_error = "Source not defined";
 
 };
@@ -818,9 +804,6 @@ class NullStream : public AudioStream {
     memset(buffer,0, len);
     return len;
   }
-
-  /// Define object which need to be notified if the basinfo is changing
-  void setNotifyAudioChange(AudioInfoSupport &bi) override {}
 
   void setAudioInfo(AudioInfo info) override {
     this->info = info;
@@ -2092,9 +2075,6 @@ class TimerCallbackAudioStream : public BufferedStream {
     }
   }
 
-  /// Defines the target that needs to be notified
-  void setNotifyAudioChange(AudioInfoSupport &bi) { notifyTarget = &bi; }
-
   /// Provides the current audio information
   TimerCallbackAudioStreamInfo audioInfoExt() { return cfg; }
   AudioInfo audioInfo() { return cfg; }
@@ -2119,7 +2099,7 @@ class TimerCallbackAudioStream : public BufferedStream {
       timer->begin(timerCallback, time, TimeUnit::US);
     }
 
-    notifyAudioChange();
+    notifyAudioChange(cfg);
     active = true;
   }
 
@@ -2149,7 +2129,6 @@ class TimerCallbackAudioStream : public BufferedStream {
 
  protected:
   TimerCallbackAudioStreamInfo cfg;
-  AudioInfoSupport *notifyTarget = nullptr;
   bool active = false;
   uint16_t (*frameCallback)(uint8_t *data, uint16_t len);
   // below only relevant with timer
@@ -2215,14 +2194,7 @@ class TimerCallbackAudioStream : public BufferedStream {
     if (cfg.adapt_sample_rate &&
         abs((int)currentRateValue - cfg.sample_rate) > 200) {
       cfg.sample_rate = currentRateValue;
-      notifyAudioChange();
-    }
-  }
-
-  /// Update Audio Information in target device
-  virtual void notifyAudioChange() {
-    if (notifyTarget != nullptr) {
-      notifyTarget->setAudioInfo(cfg);
+      notifyAudioChange(cfg);
     }
   }
 

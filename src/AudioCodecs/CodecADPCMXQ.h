@@ -67,9 +67,7 @@ class ADPCMDecoderXQ : public AudioDecoder {
       adpcm_block.resize(block_size);
     }
 
-    if (p_notify != nullptr) {
-      p_notify->setAudioInfo(info);
-    }
+    notifyAudioChange(info);
   }
 
   void end() override {

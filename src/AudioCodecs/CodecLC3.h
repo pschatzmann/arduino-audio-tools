@@ -80,9 +80,7 @@ class LC3Decoder : public AudioDecoder {
     // setup decoder
     lc3_decoder = lc3_setup_decoder(dt_us, info.sample_rate, 0,
                                     (void *)lc3_decoder_memory.data());
-    if (p_notify != nullptr) {
-      p_notify->setAudioInfo(info);
-    }
+    notifyAudioChange(info);
 
     input_pos = 0;
     active = true;
@@ -91,11 +89,6 @@ class LC3Decoder : public AudioDecoder {
   virtual void end() {
     TRACEI();
     active = false;
-  }
-
-  virtual void setNotifyAudioChange(AudioInfoSupport &bi) {
-    TRACEI();
-    p_notify = &bi;
   }
 
   virtual void setOutput(Print &out_stream) { p_print = &out_stream; }

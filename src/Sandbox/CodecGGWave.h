@@ -134,8 +134,6 @@ public:
 
   operator bool() { return active; }
 
-  void setNotifyAudioChange(AudioInfoSupport &bi) {}
-
   // The result is encoded data
   virtual bool isResultPCM() { return false;} 
 

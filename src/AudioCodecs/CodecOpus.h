@@ -132,10 +132,6 @@ class OpusAudioDecoder : public AudioDecoder {
   /// Defines the output Stream
   void setOutput(Print &out_stream) override { p_print = &out_stream; }
 
-  void setNotifyAudioChange(AudioInfoSupport &bi) override {
-    this->p_notify = &bi;
-  }
-
   AudioInfo audioInfo() override { return cfg; }
 
   /// Provides access to the configuration
@@ -146,9 +142,7 @@ class OpusAudioDecoder : public AudioDecoder {
     TRACED();
     AudioDecoder::setAudioInfo(settings);
     cfg = settings;
-    if (p_notify != nullptr) {
-      p_notify->setAudioInfo(cfg);
-    }
+    notifyAudioChange(cfg);
     begin();
   }
 

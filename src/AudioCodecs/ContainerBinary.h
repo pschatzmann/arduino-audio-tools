@@ -213,8 +213,6 @@ public:
     meta_callback = callback;
   }
 
-  void setNotifyAudioChange(AudioInfoSupport &bi) {}
-
   void begin() {
     TRACED();
     is_first = true;
@@ -314,9 +312,7 @@ protected:
       SimpleContainerConfig config;
       buffer.readArray((uint8_t *)&config, sizeof(config));
       info = config.info;
-      if (p_notify) {
-        p_notify->setAudioInfo(info);
-      }
+      notifyAudioChange(info);
       info.logInfo();
       p_codec->setAudioInfo(info);
       p_codec->begin();

@@ -27,9 +27,7 @@ class AudioDecoder : public AudioWriter, public AudioInfoSource {
   virtual void setAudioInfo(AudioInfo from) override {
     TRACED();
     if (info != from) {
-      if (p_notify != nullptr) {
-        p_notify->setAudioInfo(from);
-      }
+      notifyAudioChange(from);
     }
     info = from;
   }
@@ -37,14 +35,14 @@ class AudioDecoder : public AudioWriter, public AudioInfoSource {
   virtual void setOutput(AudioStream &out_stream) {
     Print *p_print = &out_stream;
     setOutput(*p_print);
-    setNotifyAudioChange(out_stream);
+    addNotifyAudioChange(out_stream);
   }
 
   /// Defines where the decoded result is written to
   virtual void setOutput(AudioOutput &out_stream) {
     Print *p_print = &out_stream;
     setOutput(*p_print);
-    setNotifyAudioChange(out_stream);
+    addNotifyAudioChange(out_stream);
   }
 
   /// Defines where the decoded result is written to
@@ -54,15 +52,9 @@ class AudioDecoder : public AudioWriter, public AudioInfoSource {
   /// If true, the decoding result is PCM data
   virtual bool isResultPCM() { return true; }
 
-  /// Registers an object that is notified if the audio format is changing
-  void setNotifyAudioChange(AudioInfoSupport &notify) override {
-    p_notify = &notify;
-  }
-
  protected:
   Print *p_print = nullptr;
   AudioInfo info;
-  AudioInfoSupport *p_notify = nullptr;
 };
 
 /**
@@ -112,7 +104,7 @@ class CodecNOP : public AudioDecoder, public AudioEncoder {
   virtual void begin() {}
   virtual void end() {}
   virtual void setOutput(Print &out_stream) {}
-  virtual void setNotifyAudioChange(AudioInfoSupport &bi) {}
+  virtual void addNotifyAudioChange(AudioInfoSupport &bi) {}
   virtual void setAudioInfo(AudioInfo info) {}
 
   virtual AudioInfo audioInfo() {
@@ -138,7 +130,7 @@ class CodecNOP : public AudioDecoder, public AudioEncoder {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class StreamingDecoder {
+class StreamingDecoder : public AudioInfoSource {
  public:
   /// Starts the processing
   virtual void begin() = 0;
@@ -147,27 +139,25 @@ class StreamingDecoder {
   virtual void end() = 0;
 
   /// Defines the output Stream
-  virtual void setOutput(Print &outStream) = 0;
-
-  /// Register Output Stream to be notified about changes
-  virtual void setNotifyAudioChange(AudioInfoSupport &bi) = 0;
+  virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
 
   /// Defines the output streams and register to be notified
   virtual void setOutput(AudioStream &out_stream) {
     Print *p_print = &out_stream;
     setOutput(*p_print);
-    setNotifyAudioChange(out_stream);
+    addNotifyAudioChange(out_stream);
   }
 
   /// Defines the output streams and register to be notified
   virtual void setOutput(AudioOutput &out_stream) {
     Print *p_print = &out_stream;
     setOutput(*p_print);
-    setNotifyAudioChange(out_stream);
+    addNotifyAudioChange(out_stream);
   }
 
-  /// Defines the input data stream
-  virtual void setInputStream(Stream &inStream) = 0;
+  /// Stream Interface: Decode directly by taking data from the stream. This is more efficient
+  /// then feeding the decoder with write: just call copy() in the loop
+  void setInputStream(Stream &inStream) { this->p_input = &inStream; }
 
   /// Provides the last available MP3FrameInfo
   virtual AudioInfo audioInfo() = 0;
@@ -180,6 +170,8 @@ class StreamingDecoder {
 
  protected:
   virtual size_t readBytes(uint8_t *buffer, size_t len) = 0;
+  Print *p_print = nullptr;
+  Stream *p_input = nullptr;
 };
 
 /**
@@ -210,7 +202,7 @@ class EncodedAudioOutput : public AudioStream {
     ptr_out = outputStream;
     decoder_ptr = decoder;
     decoder_ptr->setOutput(*outputStream);
-    decoder_ptr->setNotifyAudioChange(*outputStream);
+    decoder_ptr->addNotifyAudioChange(*outputStream);
     writer_ptr = decoder_ptr;
     active = false;
   }
@@ -220,7 +212,7 @@ class EncodedAudioOutput : public AudioStream {
     ptr_out = outputStream;
     decoder_ptr = decoder;
     decoder_ptr->setOutput(*outputStream);
-    decoder_ptr->setNotifyAudioChange(*outputStream);
+    decoder_ptr->addNotifyAudioChange(*outputStream);
     writer_ptr = decoder_ptr;
     active = false;
   }
@@ -248,7 +240,7 @@ class EncodedAudioOutput : public AudioStream {
     ptr_out = outputStream;
     encoder_ptr = encoder;
     encoder_ptr->setOutput(*outputStream);
-    decoder_ptr->setNotifyAudioChange(*outputStream);
+    decoder_ptr->addNotifyAudioChange(*outputStream);
     writer_ptr = encoder_ptr;
     active = false;
   }
@@ -258,16 +250,16 @@ class EncodedAudioOutput : public AudioStream {
     ptr_out = outputStream;
     encoder_ptr = encoder;
     encoder_ptr->setOutput(*outputStream);
-    decoder_ptr->setNotifyAudioChange(*outputStream);
+    decoder_ptr->addNotifyAudioChange(*outputStream);
     writer_ptr = encoder_ptr;
     active = false;
   }
 
 
   /// Define object which need to be notified if the basinfo is changing
-  void setNotifyAudioChange(AudioInfoSupport &bi) override {
+  void addNotifyAudioChange(AudioInfoSupport &bi) override {
     TRACEI();
-    decoder_ptr->setNotifyAudioChange(bi);
+    decoder_ptr->addNotifyAudioChange(bi);
   }
 
   AudioInfo defaultConfig() {

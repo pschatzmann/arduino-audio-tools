@@ -60,7 +60,7 @@ namespace audio_tools {
             this->p_decoder = &decoder;
             setOutput(output);
             // notification for audio configuration
-            decoder.setNotifyAudioChange(*this);
+            decoder.addNotifyAudioChange(*this);
         }
 
         /**
@@ -77,7 +77,7 @@ namespace audio_tools {
             this->p_source = &source;
             this->p_decoder = &decoder;
             setOutput(output);
-            setNotify(notify);
+            addNotifyAudioChange(notify);
         }
 
         /**
@@ -94,7 +94,7 @@ namespace audio_tools {
             this->p_decoder = &decoder;
             setOutput(output);
             // notification for audio configuration
-            decoder.setNotifyAudioChange(*this);
+            decoder.addNotifyAudioChange(*this);
         }
 
         AudioPlayer(AudioPlayer const&) = delete;
@@ -219,11 +219,11 @@ namespace audio_tools {
         }
 
         /// (Re)defines the notify
-        void setNotify(AudioInfoSupport* notify){
+        void addNotifyAudioChange(AudioInfoSupport* notify){
             this->p_final_notify = notify;
             // notification for audio configuration
             if (p_decoder!=nullptr){
-                p_decoder->setNotifyAudioChange(*this);
+                p_decoder->addNotifyAudioChange(*this);
             }
         } 
 

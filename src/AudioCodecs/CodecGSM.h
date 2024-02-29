@@ -47,9 +47,7 @@ class GSMDecoder : public AudioDecoder {
     input_buffer.resize(33);
 
     v_gsm = gsm_create();
-    if (p_notify!=nullptr){
-      p_notify->setAudioInfo(cfg);
-    }
+    notifyAudioChange(cfg);
     is_active = true;
   }
 
@@ -57,10 +55,6 @@ class GSMDecoder : public AudioDecoder {
     TRACEI();
     gsm_destroy(v_gsm);
     is_active = false;
-  }
-
-  virtual void setNotifyAudioChange(AudioInfoSupport &bi) {
-    p_notify = &bi;
   }
 
   virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
@@ -86,7 +80,6 @@ class GSMDecoder : public AudioDecoder {
   Print *p_print = nullptr;
   gsm v_gsm;
   AudioInfo cfg;
-  AudioInfoSupport *p_notify = nullptr;
   bool is_active = false;
   Vector<uint8_t> input_buffer;
   Vector<uint8_t> result_buffer;

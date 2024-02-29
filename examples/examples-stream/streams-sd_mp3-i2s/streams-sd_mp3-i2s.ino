@@ -34,7 +34,7 @@ void setup(){
   i2s.begin(config);
 
   // setup I2S based on sampling rate provided by decoder
-  decoder.setNotifyAudioChange(i2s);
+  decoder.addNotifyAudioChange(i2s);
   decoder.begin();
 
   // begin copy

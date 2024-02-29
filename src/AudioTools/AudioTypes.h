@@ -118,9 +118,9 @@ class AudioInfoSupport {
     public:
       virtual void setAudioInfo(AudioInfo info)=0;
       virtual AudioInfo audioInfo() = 0;
-      virtual bool validate(AudioInfo &info){
-        return true;
-      }
+    //   virtual bool validate(AudioInfo &info){
+    //     return true;
+    //   }
 };
 
 // Support legacy name
@@ -135,7 +135,44 @@ using AudioInfoDependent = AudioInfoSupport;
  */
 class AudioInfoSource {
     public:
-      virtual void  setNotifyAudioChange(AudioInfoSupport &bi) = 0;
+      /// Obsolete: Use addNotifyAudioChange
+      virtual void setNotifyAudioChange(AudioInfoSupport &bi) { 
+        addNotifyAudioChange(bi);
+      }
+      /// Adds target to be notified about audio changes
+      virtual void addNotifyAudioChange(AudioInfoSupport &bi) {
+        if (!contains(bi)) notify_vector.push_back(&bi);
+      }
+
+      /// Removes a target in order not to be notified about audio changes
+      virtual bool removeNotifyAudioChange(AudioInfoSupport &bi){
+        int pos = notify_vector.indexOf(&bi);
+        if (pos<0) return false;
+        notify_vector.erase(pos);
+        return true;
+      }
+
+      /// Deletes all change notify subscriptions
+      virtual void clearNotifyAudioChange() {
+        notify_vector.clear();
+      }
+
+    protected:
+      Vector<AudioInfoSupport*> notify_vector;
+
+      void notifyAudioChange(AudioInfo info){
+        for(auto n : notify_vector){
+            n->setAudioInfo(info);
+        }
+      }
+
+      bool contains(AudioInfoSupport &bi){
+        for(auto n : notify_vector){
+            if (n==&bi) return true;
+        }
+        return false;
+      }
+
 };
 
 

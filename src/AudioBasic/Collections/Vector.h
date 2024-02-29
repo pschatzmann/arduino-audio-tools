@@ -311,6 +311,13 @@ class Vector {
       return p_data!=nullptr;
     }
 
+    int indexOf(T obj) {
+      for (int j=0; j<size(); j++){
+        if (p_data[j] == obj) return j;
+      }
+      return -1;
+    }
+
   protected:
     int bufferLen=0;
     int len = 0;

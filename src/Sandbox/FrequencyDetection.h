@@ -232,7 +232,7 @@ class FrequncyZeroCrossingStream : public AudioStream {
         // update frequncy at each upward zero crossing
         if (samples[i]<=0 && samples[i+info.channels]>0) {
           freq[channel] = (1.0f * info.sample_rate) / count;
-          if (notify) notify(channel, freq[channel]);
+          if (notify) notifyAudioChange(channel, freq[channel]);
           count = 0;
           active = true;
         }

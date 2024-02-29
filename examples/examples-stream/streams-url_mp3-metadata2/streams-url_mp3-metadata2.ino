@@ -52,7 +52,7 @@ void setup(){
   i2s.begin(config);
 
   // setup I2S based on sampling rate provided by decoder
-  out2dec.setNotifyAudioChange(i2s);
+  out2dec.addNotifyAudioChange(i2s);
   out2dec.begin();
 
 }

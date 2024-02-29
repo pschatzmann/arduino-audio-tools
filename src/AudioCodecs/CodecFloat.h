@@ -50,10 +50,6 @@ class DecoderFloat : public AudioDecoder {
             p_print = &out_stream;
         }
 
-        void setNotifyAudioChange(AudioInfoSupport &bi) override {
-            this->bid = &bi;
-        }
-
         AudioInfo audioInfo() override {
             return cfg;
         }
@@ -61,9 +57,7 @@ class DecoderFloat : public AudioDecoder {
         void begin(AudioInfo info) override {
             TRACED();
             cfg = info;
-            if (bid!=nullptr){
-                bid->setAudioInfo(cfg);
-            }
+            notifyAudioChange(cfg);
             active = true;
         }
 
@@ -95,7 +89,6 @@ class DecoderFloat : public AudioDecoder {
 
     protected:
         Print *p_print=nullptr;
-        AudioInfoSupport *bid=nullptr;
         AudioInfo cfg;
         bool active;
         Vector<int16_t> buffer;

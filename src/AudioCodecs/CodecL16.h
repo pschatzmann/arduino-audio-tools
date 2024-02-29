@@ -40,22 +40,18 @@ public:
   DecoderL16(Print &out_stream, AudioInfoSupport &bi) {
     TRACED();
     setOutput(out_stream);
-    setNotifyAudioChange(bi);
+    addNotifyAudioChange(bi);
   }
 
   /// Defines the output Stream
   void setOutput(Print &out_stream) override { p_print = &out_stream; }
-
-  void setNotifyAudioChange(AudioInfoSupport &bi) override { this->bid = &bi; }
 
   AudioInfo audioInfo() override { return cfg; }
 
   void begin(AudioInfo info) {
     TRACED();
     cfg = info;
-    if (bid != nullptr) {
-      bid->setAudioInfo(cfg);
-    }
+    notifyAudioChange(cfg);
     active = true;
   }
 
@@ -83,7 +79,6 @@ public:
 
 protected:
   Print *p_print = nullptr;
-  AudioInfoSupport *bid = nullptr;
   AudioInfo cfg;
   bool active;
 };

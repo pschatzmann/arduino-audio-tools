@@ -56,7 +56,7 @@ class MP3DecoderHelix : public AudioDecoder  {
                 LOGE("Not enough memory for libhelix");
             }
             setOutput(out_stream);
-            setNotifyAudioChange(bi);
+            addNotifyAudioChange(bi);
         }  
 
         /**
@@ -118,22 +118,22 @@ class MP3DecoderHelix : public AudioDecoder  {
         }
 
         /// Defines the callback object to which the Audio information change is provided
-        void setNotifyAudioChange(AudioInfoSupport &bi){
+        void addNotifyAudioChange(AudioInfoSupport &bi){
             TRACED();
-            audioChangeMP3Helix = &bi;
-            if (mp3!=nullptr)  mp3->setInfoCallback(infoCallback, this);
+            addNotifyAudioChange(bi);
+            if (mp3!=nullptr) mp3->setInfoCallback(infoCallback, this);
         }
 
         /// notifies the subscriber about a change
         static void infoCallback(MP3FrameInfo &i, void * ref){
             MP3DecoderHelix* p_helix = (MP3DecoderHelix* )ref;
-            if (p_helix!=nullptr && p_helix->audioChangeMP3Helix!=nullptr){
+            if (p_helix!=nullptr){
                 TRACED();
                 AudioInfo baseInfo;
                 baseInfo.channels = i.nChans;
                 baseInfo.sample_rate = i.samprate;
                 baseInfo.bits_per_sample = i.bitsPerSample;
-                p_helix->audioChangeMP3Helix->setAudioInfo(baseInfo);   
+                p_helix->notifyAudioChange(baseInfo);   
             }
         }
 
@@ -182,9 +182,6 @@ class MP3DecoderHelix : public AudioDecoder  {
         libhelix::MP3DecoderHelix *mp3=nullptr;
         MetaDataFilter<libhelix::MP3DecoderHelix> filter;
         bool use_filter = false;
-        // audio change notification target
-        AudioInfoSupport *audioChangeMP3Helix=nullptr;
-
 
 };
 

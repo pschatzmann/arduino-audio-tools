@@ -171,7 +171,7 @@ class MetaDataID3V1  : public MetaDataID3Base {
             if (tag_ext!=nullptr){
                 if (len-pos>=sizeof(ID3v1Enhanced)){
                     memcpy(tag,data+pos,sizeof(ID3v1Enhanced));
-                    processNotify();                    
+                    processnotifyAudioChange();                    
                 } else {
                     use_bytes_of_next_write = min(sizeof(ID3v1Enhanced), len-pos);
                     memcpy(tag_ext, data+pos, use_bytes_of_next_write);
@@ -185,7 +185,7 @@ class MetaDataID3V1  : public MetaDataID3Base {
                 if (tag!=nullptr){
                     if (len-pos>=sizeof(ID3v1)){
                         memcpy(tag,data+pos,sizeof(ID3v1));
-                        processNotify();                    
+                        processnotifyAudioChange();                    
                     } else {
                         use_bytes_of_next_write = min(sizeof(ID3v1), len-pos);
                         memcpy(tag,data+pos,use_bytes_of_next_write);
@@ -220,12 +220,12 @@ class MetaDataID3V1  : public MetaDataID3Base {
             tag_ext = new ID3v1Enhanced();
             memcpy(tag,tag_str, 4);
             memcpy(tag,data+len,sizeof(ID3v1Enhanced));
-            processNotify();                    
+            processnotifyAudioChange();                    
         } else if (strncmp((char*)tag_str,"TAG",3)==0){
             tag = new ID3v1();
             memcpy(tag,tag_str, 3);
             memcpy(tag,data+len,sizeof(ID3v1));
-            processNotify();                    
+            processnotifyAudioChange();                    
         }
     }
 
@@ -234,18 +234,18 @@ class MetaDataID3V1  : public MetaDataID3Base {
         if (tag!=nullptr){
             int remainder = sizeof(ID3v1) - use_bytes_of_next_write;
             memcpy(tag,data+use_bytes_of_next_write,remainder);
-            processNotify();                 
+            processnotifyAudioChange();                 
             use_bytes_of_next_write = 0;   
         } else if (tag_ext!=nullptr){
             int remainder = sizeof(ID3v1Enhanced) - use_bytes_of_next_write;
             memcpy(tag_ext,data+use_bytes_of_next_write,remainder);
-            processNotify();                 
+            processnotifyAudioChange();                 
             use_bytes_of_next_write = 0;   
         }
     }
 
     /// executes the callbacks
-    void processNotify() {
+    void processnotifyAudioChange() {
         if (callback==nullptr) return;
 
         if (tag_ext!=nullptr){
@@ -448,7 +448,7 @@ class MetaDataID3V2 : public MetaDataID3Base  {
                         strncpy((char*)result, (char*) data+tag_pos+ID3FrameSize, l);
                         int checkLen = min(l, 10);
                         if (isAscii(checkLen)){
-                            processNotify();
+                            processnotifyAudioChange();
                         } else {
                             LOGW("TAG %s ignored", tag);
                         }
@@ -490,7 +490,7 @@ class MetaDataID3V2 : public MetaDataID3Base  {
     void processPartialTagAtTail(const uint8_t* data, size_t len) {
         int remainder = calcSize(frame_header.size) - use_bytes_of_next_write;
         memcpy(result+use_bytes_of_next_write, data, remainder);
-        processNotify();    
+        processnotifyAudioChange();    
 
         status = TagNotFound;
         processTagNotFound(data+use_bytes_of_next_write, len-use_bytes_of_next_write);
@@ -508,7 +508,7 @@ class MetaDataID3V2 : public MetaDataID3Base  {
 
 
     /// executes the callbacks
-    void processNotify() {
+    void processnotifyAudioChange() {
         if (callback!=nullptr && actual_tag!=nullptr && encodingIsSupported()){
             LOGI("callback %s",actual_tag);
             if (memcmp(actual_tag,"TALB",4)==0)

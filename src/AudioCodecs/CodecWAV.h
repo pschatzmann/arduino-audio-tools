@@ -297,11 +297,6 @@ class WAVDecoder : public AudioDecoder {
   /// Defines the output Stream
   void setOutput(Print &out_stream) { this->p_print = &out_stream; }
 
-  /// Defines the object that needs to be notified about audio format changes
-  void setNotifyAudioChange(AudioInfoSupport &bi) {
-    this->audioBaseInfoSupport = &bi;
-  }
-
   void begin() {
     TRACED();
     setupEncodedAudio();
@@ -342,7 +337,6 @@ class WAVDecoder : public AudioDecoder {
 
  protected:
   WAVHeader header;
-  AudioInfoSupport *audioBaseInfoSupport=nullptr;
   bool isFirst = true;
   bool isValid = true;
   bool active = false;
@@ -442,20 +436,10 @@ class WAVDecoder : public AudioDecoder {
       bi.sample_rate = header.audioInfo().sample_rate;
       bi.channels = header.audioInfo().channels;
       bi.bits_per_sample = header.audioInfo().bits_per_sample;
-      // we provide some functionality so that we could check if the
-      // destination supports the requested format
-      if (audioBaseInfoSupport != nullptr) {
-        isValid = audioBaseInfoSupport->validate(bi);
-        if (isValid) {
-          LOGI("isValid: %s", isValid ? "true" : "false");
-          audioBaseInfoSupport->setAudioInfo(bi);
-          // write prm data from first record
-          LOGI("WAVDecoder writing first sound data");
-          result = out().write(sound_ptr, len);
-        } else {
-          LOGE("isValid: %s", isValid ? "true" : "false");
-        }
-      }
+      notifyAudioChange(bi);
+      // write prm data from first record
+      LOGI("WAVDecoder writing first sound data");
+      result = out().write(sound_ptr, len);
     } else {
       LOGE("WAV format not supported: %d", (int)format);
     }

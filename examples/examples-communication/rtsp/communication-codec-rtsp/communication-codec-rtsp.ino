@@ -9,8 +9,8 @@
  * 
  */
 #include "AudioTools.h"
-#include "AudioLibs/RTSP.h"
-#include "AudioCodecs/CodecG7xx.h"
+#include "AudioLibs/RTSP.h" // https://github.com/pschatzmann/Micro-RTSP-Audio
+#include "AudioCodecs/CodecG7xx.h" // https://github.com/pschatzmann/arduino-libg7xx.git
 #include "RTSPServer.h"
 
 int port = 554;

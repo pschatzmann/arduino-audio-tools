@@ -43,7 +43,7 @@ public:
   DecoderBasic(Print &out_stream, AudioInfoSupport &bi) {
     TRACED();
     setOutput(out_stream);
-    setNotifyAudioChange(bi);
+    addNotifyAudioChange(bi);
   }
 
   /// Defines the output Stream
@@ -51,8 +51,8 @@ public:
     decoder.setOutput(out_stream);
   }
 
-  void setNotifyAudioChange(AudioInfoSupport &bi) override {
-    decoder.setNotifyAudioChange(bi);
+  void addNotifyAudioChange(AudioInfoSupport &bi) override {
+    decoder.addNotifyAudioChange(bi);
   }
 
   AudioInfo audioInfo() override { return decoder.audioInfo(); }

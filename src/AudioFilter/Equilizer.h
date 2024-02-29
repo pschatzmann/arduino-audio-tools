@@ -55,14 +55,14 @@ class Equilizer3Bands : public AudioStream {
         Equilizer3Bands(AudioOutput &out) {
             p_out = &out;
             p_print = &out;
-            out.setNotifyAudioChange(*this);
+            out.addNotifyAudioChange(*this);
         }
 
         Equilizer3Bands(AudioStream &stream) {
             p_in = &stream;
             p_stream = &stream;
             p_print = &stream;
-            stream.setNotifyAudioChange(*this);
+            stream.addNotifyAudioChange(*this);
         }
 
         ~Equilizer3Bands(){

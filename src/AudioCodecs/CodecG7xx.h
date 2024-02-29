@@ -82,10 +82,6 @@ class G7xxDecoder : public AudioDecoder {
     is_active = false;
   }
 
-  void setNotifyAudioChange(AudioInfoSupport &bi) override {
-    p_notify = &bi;
-  }
-
   void setOutput(Print &out_stream) override { p_print = &out_stream; }
 
   operator bool() { return is_active; }
@@ -109,7 +105,6 @@ class G7xxDecoder : public AudioDecoder {
  protected:
   Print *p_print = nullptr;
   AudioInfo cfg;
-  AudioInfoSupport *p_notify = nullptr;
   int input_pos = 0;
   bool is_active = false;
   int16_t sample;

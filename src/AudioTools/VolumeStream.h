@@ -48,14 +48,14 @@ class VolumeStream : public AudioStream {
         VolumeStream(AudioOutput &out) {
             Print *p_print = &out;
             setOutput(*p_print);
-            p_notify = (AudioInfoSupport*) &out;
+            addNotifyAudioChange(out);
         }
 
         /// Constructor which assigns Stream input or output
         VolumeStream(AudioStream &io) {
             Stream *p_stream = &io;
             setStream(*p_stream);
-            p_notify = (AudioInfoSupport *)&io;
+            addNotifyAudioChange(io);
         }
 
         /// Defines/Changes the input & output
@@ -163,9 +163,7 @@ class VolumeStream : public AudioStream {
         void setAudioInfo(AudioInfo cfg) override {
             TRACED();
             // pass on notification
-            if (p_notify!=nullptr){
-              p_notify->setAudioInfo(cfg);
-            }
+            notifyAudioChange(cfg);
 
             if (is_started){
                 VolumeStreamConfig cfg1 = setupAudioInfo(cfg);

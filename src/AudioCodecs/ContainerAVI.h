@@ -550,9 +550,7 @@ protected:
       p_decoder->setAudioInfo(info);
       info = p_decoder->audioInfo();
     }
-    if (p_notify) {
-      p_notify->setAudioInfo(info);
-    }
+    notifyAudioChange(info);
   }
 
   void setupVideoInfo() {
