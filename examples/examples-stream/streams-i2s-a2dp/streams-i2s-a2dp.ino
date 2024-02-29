@@ -31,7 +31,7 @@ void setup(void) {
 
     // start i2s input with default configuration
     Serial.println("starting I2S...");
-    a2dpStream.setNotifyAudioChange(i2sStream); // i2s is using the info from a2dp
+    a2dpStream.addNotifyAudioChange(i2sStream); // i2s is using the info from a2dp
     i2sStream.begin(i2sStream.defaultConfig(RX_MODE));
 
 }

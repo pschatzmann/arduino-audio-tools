@@ -53,10 +53,6 @@ public:
     is_active = false;
   }
 
-  virtual void setNotifyAudioChange(AudioInfoSupport &bi) {
-    p_notify = &bi;
-  }
-
   virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
 
   operator bool() { return is_active; }
@@ -103,7 +99,6 @@ public:
 protected:
   Print *p_print = nullptr;
   AudioInfo info;
-  AudioInfoSupport *p_notify = nullptr;
   sbc_t sbc;
   bool is_first = true;
   bool is_active = false;
@@ -143,9 +138,7 @@ protected:
       break;
     }
     LOGI("sample_rate: %d", info.sample_rate);
-    if (p_notify != nullptr) {
-      p_notify->setAudioInfo(info);
-    }
+    notifyAudioChange(info);
   }
 
   bool isValidFrameLen(int len) { return len > 0 && len < 256; }

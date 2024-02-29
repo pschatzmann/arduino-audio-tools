@@ -335,21 +335,17 @@ class A2DPStream : public AudioStream {
 
         /// notify subscriber with AudioInfo
         void notify_base_Info(int rate){
-            if (p_notify!=nullptr){
-                AudioInfo info;
-                info.channels = 2;
-                info.bits_per_sample = 16;
-                info.sample_rate = rate;
-                p_notify->setAudioInfo(info);
-            }
+            AudioInfo info;
+            info.channels = 2;
+            info.bits_per_sample = 16;
+            info.sample_rate = rate;
+            notifyAudioChange(info);            
         }
 
         /// callback to update audio info with used a2dp sample rate
         static void sample_rate_callback(uint16_t rate) {
             A2DPStream_self->info.sample_rate = rate;
-            if (A2DPStream_self->p_notify!=nullptr){
-                A2DPStream_self->notify_base_Info(rate);
-            }
+            A2DPStream_self->notify_base_Info(rate);
         }
 
 };

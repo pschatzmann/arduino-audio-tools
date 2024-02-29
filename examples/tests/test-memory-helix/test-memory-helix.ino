@@ -25,7 +25,7 @@ void setup(){
   i2s.begin(config);
 
   // setup I2S based on sampling rate provided by decoder
-  dec.setNotifyAudioChange(i2s);
+  dec.addNotifyAudioChange(i2s);
   dec.begin();
 
 // set initial volume

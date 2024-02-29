@@ -49,9 +49,7 @@ class ADPCMDecoder : public AudioDecoderExt {
     assert(decoder.frameSize() > 0);
     adpcm_block.resize(block_size);
 
-    if (p_notify != nullptr) {
-      p_notify->setAudioInfo(info);
-    }
+    notifyAudioChange(info);
     is_started = true;
   }
 

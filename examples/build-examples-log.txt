@@ -76,13 +76,13 @@
 ../examples/examples-stream/streams-url_mts-hex -> rc=0
 ../examples/examples-stream/streams-url_raw-i2s -> rc=0
 ../examples/examples-stream/streams-url_raw-serial -> rc=0
-../examples/examples-stream/streams-url_vorbis_i2s -> rc=1
+../examples/examples-stream/streams-url_vorbis_i2s -> rc=0
 ../examples/examples-audiokit/basic-a2dp-audiokit -> rc=0
 ../examples/examples-audiokit/basic-a2dp-eq-audiokit -> rc=0
 ../examples/examples-audiokit/basic-audiokit-a2dp -> rc=0
 ../examples/examples-audiokit/player-sd_a2dp-audiokit -> rc=0
 ../examples/examples-audiokit/player-sd-audiokit -> rc=0
-../examples/examples-audiokit/player-sdfat-audiokit -> rc=1
+../examples/examples-audiokit/player-sdfat-audiokit -> rc=0
 ../examples/examples-audiokit/player-sdmmc-audiokit -> rc=0
 ../examples/examples-audiokit/player-url_icy-audiokit -> rc=0
 ../examples/examples-audiokit/README.md -> rc=1
@@ -161,7 +161,7 @@
 ../examples/examples-faust/streams-faust_flute-i2s -> rc=0
 ../examples/examples-faust/streams-faust_noise-i2s -> rc=0
 ../examples/examples-faust/streams-generator-faust-i2s -> rc=0
-../examples/examples-faust/streams-i2s-faust_copy-i2s -> rc=1
+../examples/examples-faust/streams-i2s-faust_copy-i2s -> rc=0
 ../examples/examples-faust/streams-i2s-faust_guitarix-i2s -> rc=0
 ../examples/examples-faust/streams-i2s-faust_pitchshift-i2s -> rc=0
 ../examples/examples-communication/esp-now/codec/communication-codec-espnow-receive -> rc=0
@@ -179,7 +179,7 @@
 ../examples/examples-communication/rtsp/communication-audiokit-rtsp -> rc=0
 ../examples/examples-communication/rtsp/communication-codec-rtsp -> rc=0
 ../examples/examples-communication/rtsp/communication-generator-rtsp -> rc=0
-../examples/examples-communication/rtsp/communication-rtsp-audiokit -> rc=1
+../examples/examples-communication/rtsp/communication-rtsp-audiokit -> rc=0
 ../examples/examples-communication/rtsp/communication-rtsp-i2s -> rc=0
 ../examples/tests/test-ads1015 -> rc=0
 ../examples/tests/test-bitvector -> rc=0

@@ -23,7 +23,7 @@ void setup(){
   out.begin(out.defaultConfig());
 
   // make sure that i2s is updated
-  pcm_source.setNotifyAudioChange(out);
+  pcm_source.addNotifyAudioChange(out);
   // setup pcm_source
   pcm_source.begin();
 }

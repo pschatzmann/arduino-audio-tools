@@ -30,7 +30,7 @@ void setup(void) {
     Serial.println("starting STK...");
     auto cfgSTK = in.defaultConfig();
     cfgSTK.channels = 2;
-    in.setNotifyAudioChange(out);
+    in.addNotifyAudioChange(out);
     in.begin(cfgSTK);
 
 }

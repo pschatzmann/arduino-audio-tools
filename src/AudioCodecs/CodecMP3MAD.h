@@ -12,7 +12,7 @@
 namespace audio_tools {
 
 // forward audio changes
-AudioInfoSupport *audioChangeMAD;
+static AudioInfoSupport *audioChangeMAD=nullptr;
 
 /**
  * @brief MP3 Decoder using https://github.com/pschatzmann/arduino-libmad
@@ -122,7 +122,7 @@ class MP3DecoderMAD : public AudioDecoder  {
             }
         }
 
-        virtual void setNotifyAudioChange(AudioInfoSupport &bi) {
+        virtual void addNotifyAudioChange(AudioInfoSupport &bi) {
             TRACED();
             audioChangeMAD = &bi;
             // register audio change handler

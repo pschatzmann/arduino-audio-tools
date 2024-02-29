@@ -38,10 +38,6 @@ class MP3DecoderMini : public AudioDecoder {
 
   void setBufferLength(int len) { buffer_size = len; }
 
-  void setNotifyAudioChange(AudioInfoSupport &bi) {
-    audioBaseInfoSupport = &bi;
-  }
-
   /// Starts the processing
   void begin() {
     TRACED();
@@ -96,7 +92,6 @@ class MP3DecoderMini : public AudioDecoder {
 
  protected:
   AudioInfo audio_info;
-  AudioInfoSupport *audioBaseInfoSupport = nullptr;
   Print *out = nullptr;
   mp3dec_t mp3d;
   mp3dec_frame_info_t mp3dec_info;
@@ -144,9 +139,9 @@ class MP3DecoderMini : public AudioDecoder {
     info.bits_per_sample = 16;
 
     // notify about audio changes
-    if (audioBaseInfoSupport != nullptr && info != audio_info) {
+    if (info != audio_info) {
       info.logInfo();
-      audioBaseInfoSupport->setAudioInfo(info);
+      notifyAudioChange(info);
     }
     // store last audio_info so that we can detect any changes
     audio_info = info;

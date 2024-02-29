@@ -46,9 +46,9 @@ class OggContainerDecoder : public AudioDecoder {
   /// Defines the output Stream
   void setOutput(Print &print) override { out.setOutput(&print); }
 
-  void setNotifyAudioChange(AudioInfoSupport &bi) override {
-    out.setNotifyAudioChange(bi);
-    p_notify = &bi;
+  void addNotifyAudioChange(AudioInfoSupport &bi) override {
+    out.addNotifyAudioChange(bi);
+    addNotifyAudioChange(bi);
   }
 
   AudioInfo audioInfo() override { return out.audioInfo(); }

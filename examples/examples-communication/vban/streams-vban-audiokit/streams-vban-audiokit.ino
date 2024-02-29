@@ -24,7 +24,7 @@ void setup(void) {
   if (!out.begin(cfg_out)) stop();
 
   // format changes in vban must change the output as well
-  in.setNotifyAudioChange(out);
+  in.addNotifyAudioChange(out);
 
   // setup input from vban
   auto cfg_in = in.defaultConfig(RX_MODE);

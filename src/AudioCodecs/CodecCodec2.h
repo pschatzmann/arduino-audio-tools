@@ -109,9 +109,7 @@ class Codec2Decoder : public AudioDecoder {
     assert(input_buffer.size()>0);
     assert(result_buffer.size()>0);
 
-    if (p_notify != nullptr) {
-      p_notify->setAudioInfo(info);
-    }
+    notifyAudioChange(info);
     LOGI("bytesCompressed:%d", bytesCompressed());
     LOGI("bytesUncompressed:%d", bytesUncompressed());
     is_active = true;

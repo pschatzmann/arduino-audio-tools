@@ -105,7 +105,7 @@ class AACDecoderFDK : public AudioDecoder  {
             }
         }
 
-        virtual void setNotifyAudioChange(AudioInfoSupport &bi) {
+        void addNotifyAudioChange(AudioInfoSupport &bi) override {
             audioChangeFDK = &bi;
             // register audio change handler
             dec->setInfoCallback(audioChangeCallback);

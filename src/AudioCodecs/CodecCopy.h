@@ -43,8 +43,6 @@ public:
 
   operator bool() { return true; }
 
-  void setNotifyAudioChange(AudioInfoSupport &bi) {}
-
   // The result is encoded data
   virtual bool isResultPCM() { return is_pcm;} 
 
@@ -82,8 +80,6 @@ public:
   size_t write(const void *data, size_t len) { return pt_print->write((uint8_t*)data,len); }
 
   operator bool() { return true; }
-
-  void setNotifyAudioChange(AudioInfoSupport &bi) {}
 
   const char *mime() {return "audio/pcm";}
 

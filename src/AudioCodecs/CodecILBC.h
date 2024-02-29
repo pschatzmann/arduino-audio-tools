@@ -56,19 +56,13 @@ class ILBCDecoder : public AudioDecoder {
     encoded_buffer.resize(p_ilbc->getEncodedBytes());
 
     // update audio information
-    if (notify != nullptr) {
-      notify->setAudioInfo(info);
-    }
+    notifyAudioChange(info);
   }
 
   virtual void end() {
     TRACEI();
     delete p_ilbc;
     p_ilbc = nullptr;
-  }
-
-  virtual void setNotifyAudioChange(AudioInfoSupport &bi) {
-    notify = &bi;
   }
 
   virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
@@ -97,7 +91,6 @@ class ILBCDecoder : public AudioDecoder {
 
  protected:
   AudioInfo info;
-  AudioInfoSupport *notify = nullptr;
   Print *p_print = nullptr;
   iLBCDecode *p_ilbc = nullptr;
   Vector<int16_t> decoded_buffer{0};

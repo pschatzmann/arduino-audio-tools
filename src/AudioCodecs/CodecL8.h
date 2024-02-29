@@ -48,7 +48,7 @@ class DecoderL8 : public AudioDecoder {
   DecoderL8(Print &out_stream, AudioInfoSupport &bi) {
     TRACED();
     setOutput(out_stream);
-    setNotifyAudioChange(bi);
+    addNotifyAudioChange(bi);
   }
 
   /// By default the encoded values are unsigned, but you can change them to
@@ -59,9 +59,7 @@ class DecoderL8 : public AudioDecoder {
     TRACED();
     info = info1;
     info.bits_per_sample = 16;  //
-    if (p_notify != nullptr) {
-      p_notify->setAudioInfo(info);
-    }
+    notifyAudioChange(info);
     active = true;
   }
 
@@ -80,9 +78,7 @@ class DecoderL8 : public AudioDecoder {
     TRACED();
     from.bits_per_sample = 16;
     if (info != from) {
-      if (p_notify != nullptr) {
-        p_notify->setAudioInfo(from);
-      }
+      notifyAudioChange(from);
     }
     info = from;
   }

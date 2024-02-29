@@ -256,7 +256,7 @@ protected:
         LOGE("Failed to find char. UUID: %s", BLE_INFO_UUID);
         return false;
       }
-      info_char->registerForNotify(notifyCallback);
+      info_char->registerFornotifyAudioChange(notifyCallback);
       readAudioInfoCharacteristic();
 
     }

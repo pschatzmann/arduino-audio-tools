@@ -55,9 +55,7 @@ class G722Decoder : public AudioDecoder {
       return;
     }
 
-    if (p_notify != nullptr) {
-      p_notify->setAudioInfo(cfg);
-    }
+    notifyAudioChange(cfg);
     is_active = true;
   }
 
@@ -65,10 +63,6 @@ class G722Decoder : public AudioDecoder {
     TRACEI();
     g722_decoder_destroy(g722_dctx);
     is_active = false;
-  }
-
-  virtual void setNotifyAudioChange(AudioInfoSupport &bi) {
-    p_notify = &bi;
   }
 
   virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
@@ -94,7 +88,6 @@ class G722Decoder : public AudioDecoder {
   Print *p_print = nullptr;
   G722_DEC_CTX *g722_dctx=nullptr;
   AudioInfo cfg;
-  AudioInfoSupport *p_notify = nullptr;
   Vector<uint8_t> input_buffer;
   Vector<uint8_t> result_buffer;
   int options = G722_SAMPLE_RATE_8000;

@@ -36,9 +36,7 @@ class APTXDecoder : public AudioDecoder {
     TRACEI();
     ctx = aptx_init(is_hd);
     is_first_write = true;
-    if (p_notify != nullptr) {
-      p_notify->setAudioInfo(info);
-    }
+    notifyAudioChange(info);
   }
 
   void end() override {

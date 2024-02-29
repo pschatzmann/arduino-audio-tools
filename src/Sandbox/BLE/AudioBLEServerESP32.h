@@ -108,7 +108,7 @@ protected:
     Str str = toStr(info);
     LOGI("AudioInfo: %s", str.c_str());
     info_char->setValue((uint8_t *)str.c_str(), str.length() + 1);
-    info_char->notify();
+    info_char->notifyAudioChange();
   }
 
   int getMTU() override {

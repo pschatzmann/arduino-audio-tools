@@ -291,7 +291,6 @@ class WavIMADecoder : public AudioDecoder {
 
         WavIMADecoder() {
             TRACED();
-            this->audioBaseInfoSupport = nullptr;
         }
 
         /**
@@ -302,7 +301,6 @@ class WavIMADecoder : public AudioDecoder {
         WavIMADecoder(Print &out_stream, bool active=true) {
             TRACED();
             this->out = &out_stream;
-            this->audioBaseInfoSupport = nullptr;
             this->active = active;
         }
 
@@ -316,7 +314,7 @@ class WavIMADecoder : public AudioDecoder {
         WavIMADecoder(Print &out_stream, AudioInfoSupport &bi) {
             TRACED();
             this->out = &out_stream;
-            this->audioBaseInfoSupport = &bi;
+            addNotifyAudioChange(bi);
         }
 
         ~WavIMADecoder() {
@@ -328,11 +326,6 @@ class WavIMADecoder : public AudioDecoder {
         void setOutput(Print &out_stream) {
             this->out = &out_stream;
         }
-
-        void setNotifyAudioChange(AudioInfoSupport &bi) {
-            this->audioBaseInfoSupport = &bi;
-        }
-
 
         void begin() {
             TRACED();
@@ -403,19 +396,10 @@ class WavIMADecoder : public AudioDecoder {
                         bi.channels = header.audioInfo().channels;
                         bi.bits_per_sample = 16;
                         remaining_bytes = header.audioInfo().data_length;
-                        // we provide some functionality so that we could check if the destination supports the requested format
-                        if (audioBaseInfoSupport != nullptr) {
-                            isValid = audioBaseInfoSupport->validate(bi);
-                            if (isValid) {
-                                LOGI("isValid: %s", isValid ? "true" : "false");
-                                audioBaseInfoSupport->setAudioInfo(bi);
-                                // write prm data from first record
-                                LOGI("WavIMADecoder writing first sound data");
-                                processInput(sound_ptr, len);
-                            } else {
-                                LOGE("isValid: %s", isValid ? "true" : "false");
-                            }
-                        }
+                        notifyAudioChange(bi);
+                        // write prm data from first record
+                        LOGI("WavIMADecoder writing first sound data");
+                        processInput(sound_ptr, len);
                     }
                 } else if (isValid) {
                     processInput((uint8_t*)in_ptr, in_size);
@@ -439,7 +423,6 @@ class WavIMADecoder : public AudioDecoder {
     protected:
         WavIMAHeader header;
         Print *out;
-        AudioInfoSupport *audioBaseInfoSupport;
         bool isFirst = true;
         bool isValid = true;
         bool active;

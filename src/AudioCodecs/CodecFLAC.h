@@ -97,17 +97,6 @@ class FLACDecoder : public StreamingDecoder {
     while(FLAC__stream_decoder_process_single(decoder));
   }
 
-  void setNotifyAudioChange(AudioInfoSupport &bi) {
-    p_notify = &bi;
-  }
-
-  /// Stream Interfce: Decode directly by taking data from the stream. This is more efficient
-  /// then feeding the decoder with write: just call copy() in the loop
-  void setInputStream(Stream &input) {
-    p_input = &input;
-  }
-
-  virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
 
   operator bool() { return is_active; }
 
@@ -134,11 +123,8 @@ class FLACDecoder : public StreamingDecoder {
   bool is_active = false;
   bool is_ogg = false;
   AudioInfo info;
-  AudioInfoSupport *p_notify = nullptr;
   FLAC__StreamDecoder *decoder = nullptr;
   FLAC__StreamDecoderInitStatus init_status;
-  Print *p_print = nullptr;
-  Stream *p_input = nullptr;
   uint64_t time_last_read = 0;
   uint64_t read_timeout_ms = FLAC_READ_TIMEOUT_MS;
 
@@ -203,10 +189,8 @@ class FLACDecoder : public StreamingDecoder {
       if (bps!=16){
         LOGI("Converting from %d bits", bps);
       }
-      if (self->p_notify != nullptr) {
-        self->info = actual_info;
-        self->p_notify->setAudioInfo(self->info);
-      }
+      self->info = actual_info;
+      self->notifyAudioChange(self->info);
     }
 
     // write audio data
