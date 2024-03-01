@@ -88,6 +88,6 @@ protected:
   }
 };
 
-using DecoderFromStreaming = DecoderAdapter
+using DecoderFromStreaming = DecoderAdapter;
 
 } // namespace audio_tools

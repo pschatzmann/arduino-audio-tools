@@ -196,7 +196,7 @@ protected:
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class BinaryContainerDecoder : public AudioDecoder {
+class BinaryContainerDecoder : public ContainerDecoder {
 public:
   BinaryContainerDecoder() = default;
   BinaryContainerDecoder(AudioDecoder &decoder) { p_codec = &decoder; }

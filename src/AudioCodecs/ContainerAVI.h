@@ -245,7 +245,7 @@ protected:
  * @copyright GPLv3
  */
 
-class AVIDecoder : public AudioDecoder {
+class AVIDecoder : public ContainerDecoder {
 public:
   AVIDecoder(int bufferSize = 1024) {
     parse_buffer.resize(bufferSize);
