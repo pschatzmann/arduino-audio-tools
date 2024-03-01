@@ -60,6 +60,17 @@ protected:
 };
 
 /**
+ * @brief Parent class for all container formats
+ * @ingroup codecs
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+
+class ContainerDecoder : public AudioDecoder {
+   bool isResultPCM() override { return true; }
+};
+
+/**
  * @brief  Encoding of PCM data
  * @ingroup codecs
  * @author Phil Schatzmann

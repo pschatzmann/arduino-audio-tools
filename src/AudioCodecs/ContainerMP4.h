@@ -123,7 +123,7 @@ class MP4ParseBuffer {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class ContainerMP4 : public AudioDecoder {
+class ContainerMP4 : public ContainerDecoder {
   friend class MP4ParseBuffer;
 
  public:

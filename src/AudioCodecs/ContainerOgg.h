@@ -23,7 +23,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class OggContainerDecoder : public AudioDecoder {
+class OggContainerDecoder : public ContainerDecoder {
  public:
   /**
    * @brief Construct a new OggContainerDecoder object
