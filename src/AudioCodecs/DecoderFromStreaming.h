@@ -13,10 +13,10 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class DecoderFromStreaming : public AudioDecoder {
+class DecoderAdapter : public AudioDecoder {
 public:
   /// Default Constructor
-  DecoderFromStreaming(StreamingDecoder &dec, int bufferSize) {
+  DecoderAdapter(StreamingDecoder &dec, int bufferSize) {
     TRACED();
     p_dec = &dec;
     p_dec->setInputStream(queue);
@@ -86,8 +86,8 @@ protected:
       is_setup = true;
     }
   }
-
-
 };
+
+using DecoderFromStreaming = DecoderAdapter
 
 } // namespace audio_tools
