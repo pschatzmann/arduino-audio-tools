@@ -318,7 +318,7 @@ class ResampleStream : public ReformatBaseStream {
   int bytes_per_frame = 0;
   TransformationReader<ResampleStream> reader;
   // optional buffering
-  bool is_buffer_active = false;
+  bool is_buffer_active = USE_RESAMPLE_BUFFER;
   SingleBuffer<uint8_t> out_buffer{0};
   Print *p_out=nullptr;
 
