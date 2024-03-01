@@ -54,16 +54,18 @@ class DecoderFloat : public AudioDecoder {
             return cfg;
         }
 
-        void begin(AudioInfo info) override {
+        bool begin(AudioInfo info) override {
             TRACED();
             cfg = info;
             notifyAudioChange(cfg);
             active = true;
+            return true;
         }
 
-        void begin() override {
+        bool begin() override {
             TRACED();
             active = true;
+            return true;
         }
 
         void end() override {
@@ -129,14 +131,15 @@ class EncoderFloat : public AudioEncoder {
         }
 
         /// starts the processing using the actual RAWAudioInfo
-        virtual void begin() override{
+        virtual bool begin() override{
             is_open = true;
+            return true;
         }
 
         /// starts the processing
-        void begin(Print &out) {
+        bool begin(Print &out) {
             p_print = &out;
-            begin();
+            return begin();
         }
 
         /// stops the processing

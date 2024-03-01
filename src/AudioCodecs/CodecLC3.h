@@ -48,12 +48,12 @@ class LC3Decoder : public AudioDecoder {
 
   virtual AudioInfo audioInfo() { return info; }
 
-  void begin(AudioInfo bi) {
+  bool begin(AudioInfo bi) {
     info = bi;
-    begin();
+    return begin();
   }
 
-  virtual void begin() {
+  virtual bool begin() {
     TRACEI();
 
     // Return the number of PCM samples in a frame
@@ -69,7 +69,7 @@ class LC3Decoder : public AudioDecoder {
 
     if (!checkValues()) {
       LOGE("Invalid Parameters");
-      return;
+      return false;
     }
 
     // setup memory
@@ -84,6 +84,7 @@ class LC3Decoder : public AudioDecoder {
 
     input_pos = 0;
     active = true;
+    return true;
   }
 
   virtual void end() {
@@ -200,12 +201,12 @@ class LC3Encoder : public AudioEncoder {
     output_byte_count = outputByteCount;
   }
 
-  void begin(AudioInfo bi) {
+  bool begin(AudioInfo bi) {
     setAudioInfo(bi);
-    begin();
+    return begin();
   }
 
-  void begin() {
+  bool begin() {
     TRACEI();
 
     unsigned enc_size = lc3_encoder_size(dt_us, info.sample_rate);
@@ -219,7 +220,7 @@ class LC3Encoder : public AudioEncoder {
     LOGI("num_frames: %d", num_frames);
 
     if (!checkValues()) {
-      return;
+      return false;
     }
 
     // setup memory
@@ -233,6 +234,7 @@ class LC3Encoder : public AudioEncoder {
 
     input_pos = 0;
     active = true;
+    return true;
   }
 
   virtual void end() {

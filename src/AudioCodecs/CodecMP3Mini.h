@@ -39,7 +39,7 @@ class MP3DecoderMini : public AudioDecoder {
   void setBufferLength(int len) { buffer_size = len; }
 
   /// Starts the processing
-  void begin() {
+  bool begin() {
     TRACED();
     //esp_task_wdt_delete(nullptr);
     ::mp3dec_init(&mp3d);
@@ -47,6 +47,7 @@ class MP3DecoderMini : public AudioDecoder {
     pcm.resize(MINIMP3_MAX_SAMPLES_PER_FRAME);
     buffer_pos = 0;
     active = true;
+    return true;
   }
 
   /// Releases the reserved memory

@@ -37,10 +37,11 @@ public:
   virtual void setOutput(Print &outStream) { p_out_stream = &outStream; }
 
   /// Starts the processing
-  void begin() {
+  bool begin() {
     TRACED();
     // reset actual decoder so that we start a new determination
     resetDecoder();
+    return true;
   }
 
   /// Releases the reserved memory

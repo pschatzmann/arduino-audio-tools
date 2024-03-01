@@ -40,11 +40,11 @@ class ILBCDecoder : public AudioDecoder {
 
   virtual AudioInfo audioInfo() { return info; }
 
-  virtual void begin() {
+  virtual bool begin() {
     TRACEI();
     if (p_print==nullptr){
       LOGE("Output not defined");
-      return;
+      return false;
     }
 
     if (p_ilbc==nullptr){
@@ -57,6 +57,7 @@ class ILBCDecoder : public AudioDecoder {
 
     // update audio information
     notifyAudioChange(info);
+    return true;
   }
 
   virtual void end() {
@@ -122,24 +123,24 @@ class ILBCEncoder : public AudioEncoder {
     end();
   }
 
-  void begin(AudioInfo info) {
+  bool begin(AudioInfo info) {
     setAudioInfo(info);
-    begin();
+    return begin();
   }
 
   void setAudioInfo(AudioInfo info) {
     this->info = info;
   }
 
-  void begin() {
+  bool begin() {
     TRACEI();
     if (p_print==nullptr){
       LOGE("Output not defined");
-      return;
+      return false;
     }
     if (info.bits_per_sample!=16){
       LOGE("bits_per_sample must be 16: %d",info.bits_per_sample);
-      return;
+      return false;
     }
     if (info.sample_rate!=8000){
       LOGW("The sample rate should be 8000: %d", info.sample_rate);
@@ -153,6 +154,7 @@ class ILBCEncoder : public AudioEncoder {
     decoded_buffer.resize(p_ilbc->getSamples());
     encoded_buffer.resize(p_ilbc->getEncodedBytes());
     decoded_buffer_pos = 0;
+    return true;
   }
 
   virtual void end() {

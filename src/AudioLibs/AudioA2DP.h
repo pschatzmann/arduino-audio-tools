@@ -112,11 +112,11 @@ class A2DPStream : public AudioStream {
         }
 
         /// Starts the processing
-        void begin(RxTxMode mode, const char* name){
+        bool begin(RxTxMode mode, const char* name){
             A2DPConfig cfg;
             cfg.mode = mode;
             cfg.name = name;
-            begin(cfg);
+            return begin(cfg);
         }
 
         /// Starts the processing

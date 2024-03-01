@@ -48,16 +48,18 @@ public:
 
   AudioInfo audioInfo() override { return cfg; }
 
-  void begin(AudioInfo info) {
+  bool begin(AudioInfo info) {
     TRACED();
     cfg = info;
     notifyAudioChange(cfg);
     active = true;
+    return true;
   }
 
-  void begin() override {
+  bool begin() override {
     TRACED();
     active = true;
+    return true;
   }
 
   void end() override {
@@ -112,12 +114,12 @@ public:
   virtual void setAudioInfo(AudioInfo from) override {}
 
   /// starts the processing using the actual RAWAudioInfo
-  virtual void begin() override { is_open = true; }
+  virtual bool begin() override { is_open = true; return true;}
 
   /// starts the processing
-  void begin(Print &out) {
+  bool begin(Print &out) {
     p_print = &out;
-    begin();
+    return begin();
   }
 
   /// stops the processing

@@ -34,9 +34,9 @@ class G722Decoder : public AudioDecoder {
 
   virtual AudioInfo audioInfo() { return cfg; }
 
-  virtual void begin(AudioInfo cfg) {
+  virtual bool begin(AudioInfo cfg) {
     setAudioInfo(cfg);
-    begin();
+    return begin();
   }
 
   /// Defines the options for the G.722 Codec: G722_SAMPLE_RATE_8000,G722_PACKED
@@ -44,7 +44,7 @@ class G722Decoder : public AudioDecoder {
     this->options = options;
   }
 
-  virtual void begin() {
+  virtual bool begin() {
     TRACEI();
     input_buffer.resize(10);
     result_buffer.resize(40);
@@ -52,11 +52,12 @@ class G722Decoder : public AudioDecoder {
     g722_dctx = g722_decoder_new(cfg.sample_rate, options);
     if (g722_dctx == nullptr) {
       LOGE("g722_decoder_new");
-      return;
+      return false;
     }
 
     notifyAudioChange(cfg);
     is_active = true;
+    return true;
   }
 
   virtual void end() {
@@ -127,9 +128,9 @@ class G722Encoder : public AudioEncoder {
  public:
   G722Encoder() = default;
 
-  void begin(AudioInfo bi) {
+  bool begin(AudioInfo bi) {
     setAudioInfo(bi);
-    begin();
+    return begin();
   }
 
   /// Defines the options for the G.722 Codec: G722_SAMPLE_RATE_8000,G722_PACKED
@@ -137,7 +138,7 @@ class G722Encoder : public AudioEncoder {
     this->options = options;
   }
 
-  void begin() {
+  bool begin() {
     TRACEI();
     if (cfg.channels != 1) {
       LOGW("1 channel expected, was: %d", cfg.channels);
@@ -146,12 +147,13 @@ class G722Encoder : public AudioEncoder {
     g722_ectx = g722_encoder_new(cfg.sample_rate, options);
     if (g722_ectx == NULL) {
       LOGE("g722_encoder_new");
-      return;
+      return false;
     }
 
     input_buffer.resize(G722_PCM_SIZE);
     result_buffer.resize(G722_ENC_SIZE);
     is_active = true;
+    return true;
   }
 
   virtual void end() {

@@ -40,11 +40,12 @@ public:
 
   virtual AudioInfo audioInfo() { return info; }
 
-  virtual void begin() {
+  virtual bool begin() {
     TRACEI();
     is_first = true;
     is_active = true;
     sbc_init(&sbc, 0L);
+    return true;
   }
 
   virtual void end() {
@@ -237,19 +238,20 @@ public:
   }
 
   /// Starts the processing: channels 1 or 2, supported sample rates: 16000, 32000, 44100, 48000
-  void begin(AudioInfo bi) {
+  bool begin(AudioInfo bi) {
     setAudioInfo(bi);
-    begin();
+    return begin();
   }
 
   /// Restarts the processing
-  void begin() {
+  bool begin() {
     TRACEI();
     is_first = true;
     is_active = setup();
     current_codesize = codeSize();
     buffer.resize(current_codesize);
     result_buffer.resize(frameLength());
+    return true;
   }
 
   /// Ends the processing

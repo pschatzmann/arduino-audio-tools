@@ -32,11 +32,12 @@ class APTXDecoder : public AudioDecoder {
     info.bits_per_sample = isHd ? 24 : 16;
   }
 
-  void begin() override {
+  bool begin() override {
     TRACEI();
     ctx = aptx_init(is_hd);
     is_first_write = true;
     notifyAudioChange(info);
+    return ctx != nullptr;
   }
 
   void end() override {
@@ -192,12 +193,12 @@ class APTXEncoder : public AudioEncoder {
     info.bits_per_sample = isHd ? 24 : 16;
   }
 
-  void begin(AudioInfo info) {
+  bool begin(AudioInfo info) {
     setAudioInfo(info);
-    begin();
+    return begin();
   }
 
-  void begin() {
+  bool begin() {
     TRACEI();
     input_buffer.resize(4 * 2);
     output_buffer.resize(100 * (is_hd ? 6 : 4));
@@ -206,6 +207,7 @@ class APTXEncoder : public AudioEncoder {
     LOGI("output_buffer.size: %d", output_buffer.size());
     LOGI("is_hd: %s", is_hd ? "true" : "false");
     ctx = aptx_init(is_hd);
+    return ctx!=nullptr;
   }
 
   virtual void end() {

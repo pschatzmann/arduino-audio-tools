@@ -138,15 +138,15 @@ class OpusAudioDecoder : public AudioDecoder {
   OpusSettings &config() { return cfg; }
   OpusSettings &defaultConfig() { return cfg; }
 
-  void begin(OpusSettings settings) {
+  bool begin(OpusSettings settings) {
     TRACED();
     AudioDecoder::setAudioInfo(settings);
     cfg = settings;
     notifyAudioChange(cfg);
-    begin();
+    return begin();
   }
 
-  void begin() override {
+  bool begin() override {
     TRACED();
     outbuf.resize(cfg.max_buffer_size);
     assert(outbuf.data() != nullptr);
@@ -156,9 +156,10 @@ class OpusAudioDecoder : public AudioDecoder {
     if (err != OPUS_OK) {
       LOGE("opus_decoder_create: %s for sample_rate: %d, channels:%d",
            opus_strerror(err), cfg.sample_rate, cfg.channels);
-      return;
+      return false;
     }
     active = true;
+    return true;
   }
 
   void end() override {
@@ -244,7 +245,7 @@ class OpusAudioEncoder : public AudioEncoder {
   }
 
   /// starts the processing using the actual OpusAudioInfo
-  void begin() override {
+  bool begin() override {
     int err;
     int size = getFrameSizeSamples(cfg.sample_rate) * 2;
     frame.resize(size);
@@ -253,18 +254,19 @@ class OpusAudioEncoder : public AudioEncoder {
     if (err != OPUS_OK) {
       LOGE("opus_encoder_create: %s for sample_rate: %d, channels:%d",
            opus_strerror(err), cfg.sample_rate, cfg.channels);
-      return;
+      return false;
     }
     is_open = settings();
+    return true;
   }
 
   /// Provides access to the configuration
   OpusEncoderSettings &config() { return cfg; }
   OpusEncoderSettings &defaultConfig() { return cfg; }
 
-  void begin(OpusEncoderSettings settings) {
+  bool begin(OpusEncoderSettings settings) {
     cfg = settings;
-    begin();
+    return begin();
   }
 
   /// stops the processing

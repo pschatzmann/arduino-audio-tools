@@ -70,9 +70,11 @@ public:
     }
 
     // starts the processing
-    void begin() {
+    bool begin() {
         createEnc();
+        if (enc==nullptr) return false;
         enc->begin();
+        return true;
     }
 
     /**
@@ -81,11 +83,9 @@ public:
      * @param info 
      * @return int 
      */
-    void begin(AudioInfoLAME info) {
-        TRACED();
-        createEnc();
+    bool begin(AudioInfoLAME info) {
         setAudioInfo(info);
-        enc->begin();
+        return begin();
     }
 
 

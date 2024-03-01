@@ -62,12 +62,12 @@ class G7xxDecoder : public AudioDecoder {
 
   AudioInfo audioInfo()override { return cfg; }
 
-  virtual void begin(AudioInfo cfg)  {
+  virtual bool begin(AudioInfo cfg)  {
     setAudioInfo(cfg);
-    begin();
+    return begin();
   }
 
-  void begin() override {
+  bool begin() override {
     TRACEI();
     in_buffer = 0;
     in_bits = 0;
@@ -75,6 +75,7 @@ class G7xxDecoder : public AudioDecoder {
     g72x_init_state(&state);
 
     is_active = true;
+    return true;
   }
 
   void end() override {
@@ -155,18 +156,19 @@ class G7xxEncoder : public AudioEncoder {
     }
   }
 
-  virtual void begin(AudioInfo bi) {
+  virtual bool begin(AudioInfo bi) {
     setAudioInfo(bi);
-    begin();
+    return begin();
   }
 
-  void begin() override {
+  bool begin() override {
     TRACEI();
     g72x_init_state(&state);
     out_buffer = 0;
     out_bits = 0;
 
     is_active = true;
+    return true;
   }
 
   void end() override {

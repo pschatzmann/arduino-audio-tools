@@ -62,9 +62,10 @@ class MP3DecoderMAD : public AudioDecoder  {
         }
 
          /// Starts the processing
-        void begin(){
+        bool begin(){
             TRACED();
             mad->begin();
+            return true;
         }
 
         /// Releases the reserved memory

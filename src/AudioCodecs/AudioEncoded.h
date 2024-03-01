@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AudioConfig.h"
+#include "AudioLogger.h"
 #include "AudioTools/AudioIO.h"
 #include "AudioTools/AudioOutput.h"
 #include "AudioTools/AudioStreams.h"
@@ -101,7 +102,7 @@ class CodecNOP : public AudioDecoder, public AudioEncoder {
     return &self;
   }
 
-  virtual void begin() {}
+  virtual bool begin() { return true;}
   virtual void end() {}
   virtual void setOutput(Print &out_stream) {}
   virtual void addNotifyAudioChange(AudioInfoSupport &bi) {}
@@ -133,7 +134,7 @@ class CodecNOP : public AudioDecoder, public AudioEncoder {
 class StreamingDecoder : public AudioInfoSource {
  public:
   /// Starts the processing
-  virtual void begin() = 0;
+  virtual bool begin() = 0;
 
   /// Releases the reserved memory
   virtual void end() = 0;
@@ -324,10 +325,8 @@ class EncodedAudioOutput : public AudioStream {
       const CodecNOP *nop = CodecNOP::instance();
       if (decoder_ptr != nop || encoder_ptr != nop) {
         active = true;
-        decoder_ptr->setAudioInfo(info);
-        encoder_ptr->setAudioInfo(info);
-        decoder_ptr->begin();
-        encoder_ptr->begin();
+        if (!decoder_ptr->begin(info)) active = false;
+        if (!encoder_ptr->begin(info)) active = false;
       } else {
         LOGW("no decoder or encoder defined");
       }

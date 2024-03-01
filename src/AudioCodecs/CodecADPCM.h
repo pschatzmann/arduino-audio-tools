@@ -37,8 +37,9 @@ class ADPCMDecoder : public AudioDecoderExt {
   }
 
 
-  void begin() override {
+  bool begin() override {
     TRACEI();
+    if (is_started) return true;
     current_byte = 0;
     LOGI("sample_rate: %d, channels: %d", info.sample_rate, info.channels);
     decoder.begin(info.sample_rate, info.channels);
@@ -51,6 +52,7 @@ class ADPCMDecoder : public AudioDecoderExt {
 
     notifyAudioChange(info);
     is_started = true;
+    return true;
   }
 
   void end() override {
@@ -133,8 +135,9 @@ class ADPCMEncoder : public AudioEncoderExt {
     return encoder.frameSize()*2;
   }
 
-  void begin() override {
+  bool begin() override {
     TRACEI();
+    if (is_started) return true;
     LOGI("sample_rate: %d, channels: %d", info.sample_rate, info.channels);
     encoder.begin(info.sample_rate, info.channels);
     LOGI("frameSize: %d", (int)frameSize());
@@ -146,6 +149,7 @@ class ADPCMEncoder : public AudioEncoderExt {
     current_sample = 0;
 
     is_started = true;
+    return true;
   }
 
   void end() override {

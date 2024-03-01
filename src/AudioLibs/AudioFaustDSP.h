@@ -185,9 +185,10 @@ public:
     * Inform the Memory Manager with the number of expected memory zones.
     * @param count - the number of memory zones
     */
-    virtual void begin(size_t count){
+    virtual bool begin(size_t count){
         this->count = count;
         total = 0;
+        return true;
     }
 
     /**

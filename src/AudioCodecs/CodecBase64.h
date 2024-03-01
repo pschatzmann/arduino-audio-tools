@@ -59,10 +59,11 @@ class DecoderBase64 : public AudioDecoder {
   /// We expect new lines to delimit the individual lines
   void setNewLine(Base46Logic logic) { newline_logic = logic; }
 
-  void begin() override {
+  bool begin() override {
     TRACED();
     is_valid = newline_logic == NoCR;
     active = true;
+    return true;
   }
 
   void end() override {
@@ -200,24 +201,25 @@ class EncoderBase64 : public AudioEncoder {
   /// We add a new line after each write
   void setNewLine(Base46Logic flag) { newline_logic = flag; }
 
-  virtual void begin(AudioInfo cfg) override {
+  virtual bool begin(AudioInfo cfg) override {
     setAudioInfo(cfg);
-    begin();
+    return begin();
   }
 
   /// starts the processing using the actual RAWAudioInfo
-  virtual void begin() override {
+  virtual bool begin() override {
     is_open = true;
     frame_size = info.bits_per_sample * info.channels / 8;
     if (newline_logic != NoCR) {
       if (frame_size==0){
-        LOGE("AudioInfo not defined");
+        LOGW("AudioInfo not defined");
         // assume frame size
         frame_size = 4;
       }
       p_print->write('\n');
       flush();
     }
+    return true;
   }
 
   /// stops the processing

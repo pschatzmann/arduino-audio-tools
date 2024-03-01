@@ -1,6 +1,5 @@
 #pragma once
 #include <string.h>
-
 #include "AudioBasic/StrExt.h"
 #include "AudioCodecs/AudioFormat.h"
 #include "Video/Video.h"
@@ -269,7 +268,7 @@ public:
       delete p_output_audio;
   }
 
-  void begin() override {
+  bool begin() override {
     parse_state = ParseHeader;
     header_is_avi = false;
     is_parsing_active = true;
@@ -277,6 +276,7 @@ public:
     header_is_avi = false;
     stream_header_idx = -1;
     is_metadata_ready = false;
+    return true;
   }
 
   /// Defines the audio output stream - usually called by EncodedAudioStream

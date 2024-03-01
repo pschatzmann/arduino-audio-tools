@@ -56,7 +56,7 @@ class FLACDecoder : public StreamingDecoder {
     return info;
   }
 
-  void begin() {
+  bool begin() {
     TRACEI();
     is_active = true;
 
@@ -64,7 +64,7 @@ class FLACDecoder : public StreamingDecoder {
       if ((decoder = FLAC__stream_decoder_new()) == NULL) {
         LOGE("ERROR: allocating decoder");
         is_active = false;
-        return;
+        return false;
       }
     }
     LOGI("FLAC__stream_decoder_new");
@@ -80,9 +80,10 @@ class FLACDecoder : public StreamingDecoder {
     if (init_status != FLAC__STREAM_DECODER_INIT_STATUS_OK) {
       LOGE("ERROR: initializing decoder: %s", FLAC__StreamDecoderInitStatusString[init_status]);
       is_active = false;
-      return;
+      return false;
     }
-    LOGI("FLAC__stream_decoder_init_stream");
+    LOGI("FLAC is open");
+    return true;
   }
 
   void end() {
@@ -282,20 +283,20 @@ class FLACEncoder : public AudioEncoder {
     cfg.logInfo(); 
   }
 
-  virtual void begin(AudioInfo from) {
+  virtual bool begin(AudioInfo from) {
     setAudioInfo(from);
-    begin();
+    return begin();
   }
 
   /// starts the processing using the actual AudioInfo
-  virtual void begin() override {
+  virtual bool begin() override {
     TRACED();
     is_open = false;
     if (p_encoder==nullptr){
       p_encoder = FLAC__stream_encoder_new();
       if (p_encoder==nullptr){
         LOGE("FLAC__stream_encoder_new");
-        return;
+        return false;
       }
     }
 
@@ -317,15 +318,16 @@ class FLACEncoder : public AudioEncoder {
       if (status==FLAC__STREAM_ENCODER_INIT_STATUS_ENCODER_ERROR){
         LOGE(" -> %s", FLAC__StreamEncoderStateString[FLAC__stream_encoder_get_state(p_encoder)]);
       }
-      return;
+      return false;
     }
     is_open = true;
+    return true;
   }
 
   /// starts the processing
-  void begin(Print &out) {
+  bool begin(Print &out) {
     p_print = &out;
-    begin();
+    return begin();
   }
 
   /// stops the processing

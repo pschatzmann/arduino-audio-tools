@@ -75,13 +75,14 @@ class AACDecoderHelix : public AudioDecoder  {
         }
 
         /// Starts the processing
-        void begin() override {
+        bool begin() override {
             TRACED();
             if (aac!=nullptr) {
                 aac->setDelay(CODEC_DELAY_MS);
                 aac->setInfoCallback(infoCallback, this);
                 aac->begin();
             }
+            return true;
         }
 
         /// Releases the reserved memory
