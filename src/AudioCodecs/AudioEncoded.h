@@ -15,7 +15,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioDecoder : public AudioWriter, public AudioInfoSource {
+class AudioDecoder : public AudioWriter, public AudioInfoSource, public AudioInfoSupport {
 public:
   AudioDecoder() = default;
   virtual ~AudioDecoder() = default;
