@@ -146,6 +146,10 @@
 #  define HTTP_MAX_LEN 1024
 #endif
 
+#ifndef USE_RESAMPLE_BUFFER
+#  define USE_RESAMPLE_BUFFER false
+#endif
+
 /**
  * @brief PWM
  */
