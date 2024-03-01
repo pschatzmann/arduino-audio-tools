@@ -49,7 +49,7 @@ class MozziGenerator : public SoundGenerator<int16_t> {
             end();
         }
 
-        void begin(MozziConfig config){
+        bool begin(MozziConfig config){
             SoundGenerator<int16_t>::begin();
             info = config;
             if (info.control_rate==0){
@@ -60,6 +60,7 @@ class MozziGenerator : public SoundGenerator<int16_t> {
                 control_counter_max = 1;
             }
             control_counter = control_counter_max;
+            return true;
         }
 
         /// Provides some key audio information
@@ -166,22 +167,24 @@ class MozziStream : public AudioStream {
         }
 
         /// Starts Mozzi with its default parameters
-        void begin(){
-            begin(defaultConfig());
+        bool begin(){
+            return begin(defaultConfig());
         }
 
         // Start Mozzi -  if controlRate > 0 we actiavate the sound generation (=>allow reads); the parameters describe the values if the
         // provided input stream or resulting output stream;
-        void begin(MozziConfig cfg){
+        bool begin(MozziConfig cfg){
               TRACED();
             config = cfg;
             Mozzi.setAudioRate(config.sample_rate);
             // in output mode we do not allocate any unnecessary functionality
             if (cfg.channels != config.channels){
                 LOGE("You need to change the AUDIO_CHANNELS in mozzi_config.h to %d", cfg.channels);
+                return false;
             }
 
             Mozzi.start(config.control_rate);
+            return true;
         }
 
         void end(){

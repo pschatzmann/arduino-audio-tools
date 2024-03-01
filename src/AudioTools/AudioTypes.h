@@ -186,10 +186,10 @@ class AudioWriter {
         virtual void setAudioInfo(AudioInfo from) = 0;
         virtual void setOutput(Print &out_stream) = 0;
         virtual operator bool() = 0;
-        virtual void begin() = 0;
-        virtual void begin(AudioInfo info) {
+        virtual bool begin() = 0;
+        virtual bool begin(AudioInfo info) {
             setAudioInfo(info);
-            begin();
+            return begin();
         }
         virtual void end() = 0;
     protected:

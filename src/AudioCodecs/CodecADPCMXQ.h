@@ -47,7 +47,7 @@ class ADPCMDecoderXQ : public AudioDecoder {
   /// Defines the noise shaping
   void setNoiseShaping(ADPCMNoiseShaping ns) { noise_shaping = (int)ns; }
 
-  void begin() override {
+  bool begin() override {
     TRACEI();
     current_byte = 0;
     if (adpcm_cnxt == nullptr) {
@@ -68,6 +68,7 @@ class ADPCMDecoderXQ : public AudioDecoder {
     }
 
     notifyAudioChange(info);
+    return true;
   }
 
   void end() override {
@@ -155,12 +156,12 @@ class ADPCMEncoderXQ : public AudioEncoder {
   /// Defines the noise shaping
   void setNoiseShaping(ADPCMNoiseShaping ns) { noise_shaping = (int)ns; }
 
-  void begin(AudioInfo info) {
+  bool begin(AudioInfo info) {
     setAudioInfo(info);
-    begin();
+    return begin();
   }
 
-  void begin() override {
+  bool begin() override {
     TRACEI();
 
     if (block_size_pow2)
@@ -175,6 +176,7 @@ class ADPCMEncoderXQ : public AudioEncoder {
     pcm_block.resize(samples_per_block * info.channels);
     adpcm_block.resize(block_size);
     current_sample = 0;
+    return true;
   }
 
   void end() override {

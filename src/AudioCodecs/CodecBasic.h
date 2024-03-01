@@ -57,11 +57,11 @@ public:
 
   AudioInfo audioInfo() override { return decoder.audioInfo(); }
 
-  void begin(AudioInfo info) { decoder.begin(info); }
+  bool begin(AudioInfo info) { return decoder.begin(info); }
 
-  void begin() override {
+  bool begin() override {
     TRACED();
-    decoder.begin();
+    return decoder.begin();
   }
 
   void end() override { decoder.end(); }
@@ -106,7 +106,7 @@ public:
   }
 
   /// starts the processing using the actual RAWAudioInfo
-  virtual void begin() override { encoder.begin(); }
+  bool begin() override { return encoder.begin(); }
 
   /// stops the processing
   void end() override { encoder.end(); }

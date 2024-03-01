@@ -327,7 +327,7 @@ class WavIMADecoder : public AudioDecoder {
             this->out = &out_stream;
         }
 
-        void begin() {
+        bool begin() {
             TRACED();
             ima_states[0].predictor = 0;
             ima_states[0].step_index = 0;
@@ -336,6 +336,7 @@ class WavIMADecoder : public AudioDecoder {
             isFirst = true;
             active = true;
             header.clearHeader();
+            return true;
         }
 
         void end() {

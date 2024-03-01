@@ -585,7 +585,7 @@ public:
   }
 
   /// @brief Returns true if the server has been started
-  operator boolean() { return rtps_source.isActive(); }
+  operator bool() { return rtps_source.isActive(); }
 
 protected:
   RTSPFormatPCM pcm;

@@ -297,12 +297,13 @@ class WAVDecoder : public AudioDecoder {
   /// Defines the output Stream
   void setOutput(Print &out_stream) { this->p_print = &out_stream; }
 
-  void begin() {
+  bool begin() {
     TRACED();
     setupEncodedAudio();
     buffer24.reset();
     isFirst = true;
     active = true;
+    return true;
   }
 
   void end() {
@@ -540,17 +541,18 @@ class WAVEncoder : public AudioEncoder {
   }
 
   /// starts the processing
-  void begin(WAVAudioInfo ai) {
+  bool begin(WAVAudioInfo ai) {
     setAudioInfo(ai);
-    begin();
+    return begin();
   }
 
   /// starts the processing using the actual WAVAudioInfo
-  virtual void begin() override { 
+  virtual bool begin() override { 
     TRACED();
     setupEncodedAudio();
     header_written = false;
     is_open = true;
+    return true;
   }
 
   /// stops the processing

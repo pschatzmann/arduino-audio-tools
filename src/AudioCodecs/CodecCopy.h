@@ -30,7 +30,7 @@ public:
 
   virtual void setOutput(Print &out_stream) {pt_print=&out_stream;}
 
-  void begin() {}
+  bool begin() { return true; }
 
   void end() {}
 
@@ -70,7 +70,7 @@ public:
 
   virtual void setOutput(Print &out_stream) {pt_print=&out_stream;}
 
-  void begin() {}
+  bool begin() { return true;}
 
   void end() {}
 

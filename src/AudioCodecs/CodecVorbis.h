@@ -36,7 +36,7 @@ public:
   }
 
   /// Starts the processing
-  void begin() override {
+  bool begin() override {
     LOGI("begin");
 
     callbacks.read_func = read_func;
@@ -50,6 +50,7 @@ public:
 
     active = true;
     is_first = true;
+    return true;
   }
 
   /// Releases the reserved memory

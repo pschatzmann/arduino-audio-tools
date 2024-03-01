@@ -95,17 +95,18 @@ public:
     p_out = &outStream;
   }
 
-  void begin(AudioInfo info) {
+  bool begin(AudioInfo info) {
     setAudioInfo(info);
-    begin();
+    return begin();
   }
 
-  void begin() override {
+  bool begin() override {
     TRACED();
     // target.begin();
-    p_codec->begin();
+    bool rc = p_codec->begin();
     p_codec->setAudioInfo(cfg.info);
     is_beginning = true;
+    return rc;
   }
 
   void setAudioInfo(AudioInfo info) override {
@@ -213,9 +214,10 @@ public:
     meta_callback = callback;
   }
 
-  void begin() {
+  bool begin() {
     TRACED();
     is_first = true;
+    return true;
   }
 
   void end() { TRACED(); }

@@ -72,26 +72,26 @@ class Codec2Decoder : public AudioDecoder {
 
   int bitsPerSecond() { return bits_per_second; }
 
-  virtual void begin(AudioInfo cfg) {
+  bool begin(AudioInfo cfg) {
     setAudioInfo(cfg);
-    begin();
+    return begin();
   }
 
-  virtual void begin() {
+  virtual bool begin() {
     TRACEI();
 
     int mode = getCodec2Mode(bits_per_second);
     if (mode == -1) {
       LOGE("invalid bits_per_second")
-      return;
+      return false;
     }
     if (info.channels != 1) {
       LOGE("Only 1 channel supported")
-      return;
+      return false;
     }
     if (info.bits_per_sample != 16) {
       LOGE("Only 16 bps are supported")
-      return;
+      return false;
     }
     if (info.sample_rate != 8000) {
       LOGW("Sample rate should be 8000: %d", info.sample_rate);
@@ -100,7 +100,7 @@ class Codec2Decoder : public AudioDecoder {
     p_codec2 = codec2_create(mode);
     if (p_codec2 == nullptr) {
       LOGE("codec2_create");
-      return;
+      return false;
     }
 
     result_buffer.resize(bytesCompressed());
@@ -113,6 +113,7 @@ class Codec2Decoder : public AudioDecoder {
     LOGI("bytesCompressed:%d", bytesCompressed());
     LOGI("bytesUncompressed:%d", bytesUncompressed());
     is_active = true;
+    return true;
   }
 
   int bytesCompressed() {
@@ -203,9 +204,9 @@ class Codec2Encoder : public AudioEncoder {
 
   int bitsPerSecond() { return bits_per_second; }
 
-  void begin(AudioInfo bi) {
+  bool begin(AudioInfo bi) {
     setAudioInfo(bi);
-    begin();
+    return begin();
   }
 
   int bytesCompressed() {
@@ -218,21 +219,21 @@ class Codec2Encoder : public AudioEncoder {
                : 0;
   }
 
-  void begin() {
+  bool begin() {
     TRACEI();
 
     int mode = getCodec2Mode(bits_per_second);
     if (mode == -1) {
       LOGE("invalid bits_per_second")
-      return;
+      return false;
     }
     if (info.channels != 1) {
       LOGE("Only 1 channel supported")
-      return;
+      return false;
     }
     if (info.bits_per_sample != 16) {
       LOGE("Only 16 bps are supported")
-      return;
+      return false;
     }
     if (info.sample_rate != 8000) {
       LOGW("Sample rate should be 8000: %d", info.sample_rate);
@@ -241,7 +242,7 @@ class Codec2Encoder : public AudioEncoder {
     p_codec2 = codec2_create(mode);
     if (p_codec2 == nullptr) {
       LOGE("codec2_create");
-      return;
+      return false;
     }
 
     input_buffer.resize(bytesCompressed());
@@ -251,6 +252,7 @@ class Codec2Encoder : public AudioEncoder {
     LOGI("bytesCompressed:%d", bytesCompressed());
     LOGI("bytesUncompressed:%d", bytesUncompressed());
     is_active = true;
+    return true;
   }
 
   virtual void end() {

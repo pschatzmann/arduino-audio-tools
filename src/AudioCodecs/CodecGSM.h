@@ -34,12 +34,12 @@ class GSMDecoder : public AudioDecoder {
 
   virtual AudioInfo audioInfo() { return cfg; }
 
-  virtual void begin(AudioInfo cfg) {
+  virtual bool begin(AudioInfo cfg) {
     setAudioInfo(cfg);
-    begin();
+    return begin();
   }
 
-  virtual void begin() {
+  virtual bool begin() {
     TRACEI();
     // 160 13-bit samples
     result_buffer.resize(160 * sizeof(int16_t));
@@ -49,6 +49,7 @@ class GSMDecoder : public AudioDecoder {
     v_gsm = gsm_create();
     notifyAudioChange(cfg);
     is_active = true;
+    return true;
   }
 
   virtual void end() {
@@ -146,12 +147,12 @@ class GSMEncoder : public AudioEncoder {
     scaling_active = scaling;
   }
 
-  void begin(AudioInfo bi) {
+  bool begin(AudioInfo bi) {
     setAudioInfo(bi);
-    begin();
+    return begin();
   }
 
-  void begin() {
+  bool begin() {
     TRACEI();
 
     if (cfg.sample_rate != 8000) {
@@ -167,6 +168,7 @@ class GSMEncoder : public AudioEncoder {
     // gsm_frame of 33 bytes
     result_buffer.resize(33);
     is_active = true;
+    return true;
   }
 
   virtual void end() {

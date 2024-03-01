@@ -55,17 +55,19 @@ class DecoderL8 : public AudioDecoder {
   /// signed
   void setSigned(bool isSigned) { is_signed = isSigned; }
 
-  void begin(AudioInfo info1) override {
+  bool begin(AudioInfo info1) override {
     TRACED();
     info = info1;
     info.bits_per_sample = 16;  //
     notifyAudioChange(info);
     active = true;
+    return true;
   }
 
-  void begin() override {
+  bool begin() override {
     TRACED();
     active = true;
+    return true;
   }
 
   void end() override {
@@ -157,12 +159,12 @@ class EncoderL8 : public AudioEncoder {
   void setAudioInfo(AudioInfo from) override {}
 
   /// starts the processing using the actual RAWAudioInfo
-  void begin() override { is_open = true; }
+  bool begin() override { is_open = true; return true;}
 
   /// starts the processing
-  void begin(Print &out) {
+  bool begin(Print &out) {
     p_print = &out;
-    begin();
+    return begin();
   }
 
   /// stops the processing

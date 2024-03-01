@@ -142,12 +142,13 @@ class ContainerMP4 : public AudioDecoder {
   }
 
   /// starts the processing
-  void begin() override {
+  bool begin() override {
     current_pos = 0;
     assert(p_print!=nullptr);
     p_decoder->setOutput(*p_print);
-    p_decoder->begin();
+    bool rc = p_decoder->begin();
     is_active = true;
+    return rc;
   }
 
   /// ends the processing

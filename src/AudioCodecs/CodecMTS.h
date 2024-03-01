@@ -51,7 +51,7 @@ class MTSDecoder : public AudioDecoder {
     self = this; 
   };
 
-  void begin() override {
+  bool begin() override {
     TRACED();
     // automatically close when called multiple times
     if (is_active) {
@@ -91,6 +91,7 @@ class MTSDecoder : public AudioDecoder {
       TRACEE();
       is_active = false;
     }
+    return true;
   }
 
   void end() override {

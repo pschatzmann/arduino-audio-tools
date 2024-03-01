@@ -28,11 +28,12 @@ public:
     p_dec->setOutput(out);
   }
 
-  void begin() override {
+  bool begin() override {
     TRACED();
     active = true;
-    p_dec->begin();
+    bool rc = p_dec->begin();
     queue.begin();
+    return rc;
   }
 
   void end() override {

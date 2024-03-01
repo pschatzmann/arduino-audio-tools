@@ -53,14 +53,14 @@ class OggContainerDecoder : public AudioDecoder {
 
   AudioInfo audioInfo() override { return out.audioInfo(); }
 
-  void begin(AudioInfo info) override {
+  bool begin(AudioInfo info) override {
     TRACED();
     this->info = info;
     out.setAudioInfo(info);
-    begin();
+    return begin();
   }
 
-  void begin() override {
+  bool begin() override {
     TRACED();
     out.begin();
     if (p_oggz == nullptr) {
@@ -82,6 +82,7 @@ class OggContainerDecoder : public AudioDecoder {
         is_open = false;
       }
     }
+    return is_open;
   }
 
   void end() override {
@@ -373,19 +374,18 @@ class OggContainerEncoder : public AudioEncoder {
     if (p_codec != nullptr) p_codec->setAudioInfo(info);
   }
 
-  virtual void begin(AudioInfo from) override {
+  virtual bool begin(AudioInfo from) override {
     setAudioInfo(from);
-    begin();
+    return begin();
   }
 
   /// starts the processing using the actual AudioInfo
-  virtual void begin() override {
+  virtual bool begin() override {
     TRACED();
     p_ogg->begin();
-    if (p_codec != nullptr) {
-      p_codec->setOutput(*p_ogg);
-      p_codec->begin(p_ogg->audioInfo());
-    }
+    if (p_codec==nullptr) return false;
+    p_codec->setOutput(*p_ogg);
+    return p_codec->begin(p_ogg->audioInfo());
   }
 
   /// stops the processing
