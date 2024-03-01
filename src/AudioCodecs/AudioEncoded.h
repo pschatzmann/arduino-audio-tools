@@ -53,6 +53,9 @@ class AudioDecoder : public AudioWriter, public AudioInfoSource {
   /// If true, the decoding result is PCM data
   virtual bool isResultPCM() { return true; }
 
+  /// custom id to be used by application
+  int id;
+
  protected:
   Print *p_print = nullptr;
   AudioInfo info;
@@ -305,6 +308,10 @@ class EncodedAudioOutput : public AudioStream {
     }
   }
 
+  AudioEncoder* getEncoder(){
+    return encoder_ptr;
+  }
+
   void setDecoder(AudioDecoder *decoder) {
     if (decoder == nullptr) {
       decoder = CodecNOP::instance();
@@ -314,6 +321,10 @@ class EncodedAudioOutput : public AudioStream {
     if (ptr_out != nullptr) {
       decoder_ptr->setOutput(*ptr_out);
     }
+  }
+
+  AudioDecoder* getDecoder(){
+    return decoder_ptr;
   }
 
   /// Starts the processing - sets the status to active
