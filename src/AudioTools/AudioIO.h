@@ -214,17 +214,17 @@ public:
 
   /// Defines the start time in seconds. The audio before the start time will be
   /// skipped
-  void setStartSec(uint32_t startSeconds) { start_ms = startSeconds*1000; }
+  void setStartSec(uint32_t startSeconds) { start_ms = startSeconds*1000; calculateByteLimits(); }
 
   /// Defines the start time in milliseconds
-  void setStartMs(uint32_t ms) { start_ms = ms; }
+  void setStartMs(uint32_t ms) { start_ms = ms; calculateByteLimits(); }
 
   /// Defines (an optional) the end time in seconds. After the end time no audio
   /// is played and available() will return 0
-  void setEndSec(uint32_t endSeconds) { end_ms = endSeconds*1000; }
+  void setEndSec(uint32_t endSeconds) { end_ms = endSeconds*1000; calculateByteLimits(); }
 
   /// Defines the (optional) end time in milliseconds
-  void setEndMs(uint32_t ms) { end_ms = ms; }
+  void setEndMs(uint32_t ms) { end_ms = ms; calculateByteLimits(); }
 
   /// Returns true if we are in a valid time range and are still playing sound
   bool isPlaying() {
