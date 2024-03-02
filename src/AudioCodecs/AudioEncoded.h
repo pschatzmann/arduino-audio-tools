@@ -200,7 +200,8 @@ public:
   StreamingDecoderAdapter(AudioDecoder &decoder,
                           int copySize = DEFAULT_BUFFER_SIZE) {
     p_decoder = &decoder;
-    buffer.resize(copySize);
+    if (copySize>0)
+      resize(copySize);
   }
   /// Starts the processing
   bool begin() override {return p_decoder->begin();}
@@ -223,6 +224,11 @@ public:
     int written = 0;
     if (read > 0) written = p_decoder->write(&buffer[0], read);
     return written > 0;
+  }
+
+  /// Adjust the buffer size: the existing content of the buffer is lost! 
+  void resize(int bufferSize){
+    buffer.resize(bufferSize);
   }
 
 protected:
