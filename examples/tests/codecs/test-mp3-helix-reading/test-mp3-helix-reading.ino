@@ -1,6 +1,6 @@
 /**
- * @brief Tesing the MP3DecoderHelix
- * 
+ * @brief Tesing the MP3DecoderHelix: Decoding
+ * on the input side.
  */
 // install https://github.com/pschatzmann/arduino-libhelix.git
 
