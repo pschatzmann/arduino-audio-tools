@@ -2,7 +2,6 @@
  * @file streams-generator-server_aac.ino
  *
  *  This sketch generates a test sine wave. The result is provided as AAC stream which can be listened to in a Web Browser
- *
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 
@@ -10,6 +9,7 @@
 
 #include "AudioTools.h"
 #include "AudioCodecs/CodecAACFDK.h"
+
 
 // WIFI
 const char *ssid = "ssid";
@@ -24,6 +24,11 @@ GeneratedSoundStream<int16_t> in(sineWave);     // Stream generated from sine wa
 void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial,AudioLogger::Info);
+
+  // configure FDK to use less RAM
+  fdk.setAudioObjectType(2);  // AAC low complexity
+  fdk.setOutputBufferSize(1024); // decrease output buffer size
+  fdk.setVariableBitrateMode(2); // low variable bitrate
 
   // start server
   server.begin(in, info);
