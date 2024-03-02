@@ -34,7 +34,6 @@ void setup(){
   i2s.begin(config);
 
   // setup I2S based on sampling rate provided by decoder
-  dec.addNotifyAudioChange(i2s);
   dec.begin();
 
 // mp3 radio

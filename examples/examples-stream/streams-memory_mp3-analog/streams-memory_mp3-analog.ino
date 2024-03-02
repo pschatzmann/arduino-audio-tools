@@ -25,9 +25,6 @@ void setup(){
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);  
 
-  // update audio info with info from decoder
-  out.addNotifyAudioChange(analog);
-
   // begin processing
   auto cfg = out.defaultConfig();
   out.begin(cfg);
