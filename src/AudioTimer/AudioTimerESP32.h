@@ -147,7 +147,7 @@ class TimerAlarmRepeatingDriverESP32 : public TimerAlarmRepeatingDriverBase  {
             // we determine the time in microseconds
             switch(unit){
                 case MS:
-                    timeUs = time / 1000;
+                    timeUs = time * 1000;
                     break;
                 case US:
                     timeUs = time;
