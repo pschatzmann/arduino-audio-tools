@@ -76,6 +76,31 @@ void testErase() {
   }
 }
 
+void testCopy() {
+  Vector<int> vector;
+  for (int j = 0; j < 10; j++) {
+    vector.push_back(j);
+  }
+  print("testCopy", vector);
+  Vector<int> v1{vector};
+  assert(v1.size()==10);
+
+  Vector<int> v2 = vector;
+  assert(v2.size()==10);
+
+  vector.erase(0);
+  assert(v1.size()==10);
+  assert(v2.size()==10);
+
+  testArg(v1);
+}
+
+void testArg(Vector<int> arg){
+  print("testArg", arg);
+  assert(arg.size()==10);
+}
+
+
 void setup() {
   Serial.begin(115200);
   testPushBack();
@@ -83,6 +108,7 @@ void setup() {
   testPopFront();
   testPopBack();
   testErase();
+  testCopy();
   Serial.print("All tests passed");
 }
 
