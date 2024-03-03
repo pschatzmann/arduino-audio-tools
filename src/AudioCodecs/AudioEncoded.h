@@ -225,7 +225,7 @@ public:
 
   /// Process a single read operation - to be called in the loop
   virtual bool copy() {
-    int read = p_input->readBytes(&buffer[0], buffer.size());
+    int read = readBytes(&buffer[0], buffer.size());
     int written = 0;
     if (read > 0) written = p_decoder->write(&buffer[0], read);
     return written > 0;
@@ -239,6 +239,12 @@ public:
 protected:
   AudioDecoder *p_decoder = nullptr;
   Vector<uint8_t> buffer{0};
+
+  size_t readBytes(uint8_t *buffer, size_t len) override {
+    if (p_input==nullptr) return 0;
+    return p_input->readBytes(buffer, len);
+  }
+
 };
 
 /**
