@@ -209,7 +209,7 @@ public:
       resize(copySize);
   }
   /// Starts the processing
-  bool begin() override {return p_decoder->begin();}
+  bool begin() override {return p_input != nullptr && p_decoder->begin();}
 
   /// Releases the reserved memory
   void end() override {p_decoder->end();}
