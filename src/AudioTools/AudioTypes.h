@@ -180,7 +180,7 @@ class AudioInfoSource {
  * @brief E.g. used by Encoders and Decoders
  * @ingroup basic
  */
-class AudioWriter {
+class AudioWriter : public AudioInfoSupport {
     public: 
         virtual size_t write(const void *in_ptr, size_t in_size) = 0;
         virtual void setAudioInfo(AudioInfo from) = 0;
