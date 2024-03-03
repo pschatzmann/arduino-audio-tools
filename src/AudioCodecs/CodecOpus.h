@@ -239,6 +239,7 @@ class OpusAudioEncoder : public AudioEncoder {
 
   /// We actually do nothing with this
   void setAudioInfo(AudioInfo from) override {
+    AudioEncoder::setAudioInfo(from);
     cfg.sample_rate = from.sample_rate;
     cfg.channels = from.channels;
     cfg.bits_per_sample = from.bits_per_sample;
@@ -262,6 +263,7 @@ class OpusAudioEncoder : public AudioEncoder {
 
   /// Provides access to the configuration
   OpusEncoderSettings &config() { return cfg; }
+
   OpusEncoderSettings &defaultConfig() { return cfg; }
 
   bool begin(OpusEncoderSettings settings) {

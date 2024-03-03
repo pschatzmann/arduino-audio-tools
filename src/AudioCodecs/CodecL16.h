@@ -27,7 +27,6 @@ public:
   DecoderL16(Print &out_stream, bool active = true) {
     TRACED();
     p_print = &out_stream;
-    this->active = active;
   }
 
   /**
@@ -46,27 +45,6 @@ public:
   /// Defines the output Stream
   void setOutput(Print &out_stream) override { p_print = &out_stream; }
 
-  AudioInfo audioInfo() override { return cfg; }
-
-  bool begin(AudioInfo info) {
-    TRACED();
-    cfg = info;
-    notifyAudioChange(cfg);
-    active = true;
-    return true;
-  }
-
-  bool begin() override {
-    TRACED();
-    active = true;
-    return true;
-  }
-
-  void end() override {
-    TRACED();
-    active = false;
-  }
-
   virtual size_t write(const void *in_ptr, size_t in_size) override {
     if (p_print == nullptr)
       return 0;
@@ -77,12 +55,10 @@ public:
     return p_print->write((uint8_t *)in_ptr, in_size);
   }
 
-  virtual operator bool() override { return active; }
+  virtual operator bool() override { return p_print!=nullptr; }
 
 protected:
   Print *p_print = nullptr;
-  AudioInfo cfg;
-  bool active;
 };
 
 /**
@@ -109,9 +85,6 @@ public:
 
   /// Provides "audio/pcm"
   const char *mime() override { return "audio/l16"; }
-
-  /// We actually do nothing with this
-  virtual void setAudioInfo(AudioInfo from) override {}
 
   /// starts the processing using the actual RAWAudioInfo
   virtual bool begin() override { is_open = true; return true;}

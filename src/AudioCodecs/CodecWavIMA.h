@@ -352,7 +352,7 @@ class WavIMADecoder : public AudioDecoder {
             return header.audioInfo();
         }
 
-        AudioInfo audioInfo() {
+        AudioInfo audioInfo() override {
             return header.audioInfo();
         }
 

@@ -185,8 +185,6 @@ public:
     pt_print=&out_stream;
    }
 
-  void setAudioInfo(AudioInfo ai) { info = ai; }
-
   void setOutput(Print &out_stream) {pt_print=&out_stream;}
 
   void setSamplesFormatInput(ggwave_SampleFormat fmt){
@@ -251,8 +249,6 @@ public:
     active = false;
   }
 
-  AudioInfo audioInfo() { return info; }
-
   size_t write(const void *data, size_t len) { 
     if (!active) return 0;
 
@@ -286,7 +282,6 @@ public:
 
 protected:
   Print *pt_print=nullptr;
-  AudioInfo info;
   GGWave ggwave;
   ggwave_ProtocolId protocolId = GGWAVE_DEFAULT_PROTOCOL; 
   int samples_per_frame = GGWAVE_DEFAULT_SAMPLES_PER_FRAME;

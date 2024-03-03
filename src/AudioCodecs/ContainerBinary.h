@@ -95,11 +95,6 @@ public:
     p_out = &outStream;
   }
 
-  bool begin(AudioInfo info) {
-    setAudioInfo(info);
-    return begin();
-  }
-
   bool begin() override {
     TRACED();
     // target.begin();
@@ -116,7 +111,7 @@ public:
     }
   }
 
-  AudioInfo audioInfo() { return cfg.info; }
+  AudioInfo audioInfo() override { return cfg.info; }
 
   /// Adds meta data segment
   size_t writeMeta(const uint8_t *data, size_t len) {
@@ -237,8 +232,6 @@ public:
     return ignore_write_errors ? len : result;
   }
 
-  AudioInfo audioInfo() { return info; }
-
   operator bool() { return true; };
 
   void addErrorHandler(void (*error_handler)(BinaryContainerEncoderError error, BinaryContainerDecoder* source)){
@@ -252,7 +245,6 @@ public:
 
 protected:
   bool is_first = true;
-  AudioInfo info;
   CommonHeader header;
   const size_t header_size = sizeof(header);
   AudioDecoder *p_codec = nullptr;

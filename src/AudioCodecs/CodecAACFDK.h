@@ -73,7 +73,7 @@ class AACDecoderFDK : public AudioDecoder  {
         }
 
         // provides common information
-        AudioInfo audioInfo() {
+        AudioInfo audioInfo() override {
             AudioInfo result;
             CStreamInfo i = audioInfoEx();
             result.channels = i.numChannels;
@@ -238,8 +238,9 @@ public:
     }
 
     /// Defines the Audio Info
-    virtual void setAudioInfo(AudioInfo from) {
+    void setAudioInfo(AudioInfo from) override {
         TRACED();
+        AudioEncoder::setAudioInfo(from);
         aac_fdk::AudioInfo info;
         info.channels = from.channels;
         info.sample_rate = from.sample_rate;

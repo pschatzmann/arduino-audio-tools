@@ -316,7 +316,7 @@ class WAVDecoder : public AudioDecoder {
 
   WAVAudioInfo &audioInfoEx() { return header.audioInfo(); }
 
-  AudioInfo audioInfo() { return header.audioInfo(); }
+  AudioInfo audioInfo() override { return header.audioInfo(); }
 
   virtual size_t write(const void *in_ptr, size_t in_size) {
     TRACED();
@@ -520,6 +520,7 @@ class WAVEncoder : public AudioEncoder {
 
   /// Defines the WAVAudioInfo
   virtual void setAudioInfo(WAVAudioInfo ai) {
+    AudioEncoder::setAudioInfo(ai);
     audioInfo = ai;
     LOGI("sample_rate: %d", audioInfo.sample_rate);
     LOGI("channels: %d", audioInfo.channels);

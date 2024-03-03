@@ -273,7 +273,7 @@ class ContainerMP4 : public ContainerDecoder {
     if (atom.is("hdlr") && atom.data != nullptr) {
       const uint8_t *sound = atom.data + 8;
       container.is_sound = memcmp("soun", sound, 4) == 0;
-      LOGI("    is_sound: %s", container.is_sound ? "true" : "flase");
+      LOGI("    is_sound: %s", container.is_sound ? "true" : "false");
     }
 
     // parse stsd -> audio info

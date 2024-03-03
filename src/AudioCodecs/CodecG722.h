@@ -30,15 +30,6 @@ class G722Decoder : public AudioDecoder {
  public:
   G722Decoder() = default;
 
-  virtual void setAudioInfo(AudioInfo cfg) { this->cfg = cfg; }
-
-  virtual AudioInfo audioInfo() { return cfg; }
-
-  virtual bool begin(AudioInfo cfg) {
-    setAudioInfo(cfg);
-    return begin();
-  }
-
   /// Defines the options for the G.722 Codec: G722_SAMPLE_RATE_8000,G722_PACKED
   void setOptions(int options){
     this->options = options;
@@ -49,13 +40,13 @@ class G722Decoder : public AudioDecoder {
     input_buffer.resize(10);
     result_buffer.resize(40);
 
-    g722_dctx = g722_decoder_new(cfg.sample_rate, options);
+    g722_dctx = g722_decoder_new(info.sample_rate, options);
     if (g722_dctx == nullptr) {
       LOGE("g722_decoder_new");
       return false;
     }
 
-    notifyAudioChange(cfg);
+    notifyAudioChange(info);
     is_active = true;
     return true;
   }
@@ -88,7 +79,6 @@ class G722Decoder : public AudioDecoder {
  protected:
   Print *p_print = nullptr;
   G722_DEC_CTX *g722_dctx=nullptr;
-  AudioInfo cfg;
   Vector<uint8_t> input_buffer;
   Vector<uint8_t> result_buffer;
   int options = G722_SAMPLE_RATE_8000;
@@ -128,11 +118,6 @@ class G722Encoder : public AudioEncoder {
  public:
   G722Encoder() = default;
 
-  bool begin(AudioInfo bi) {
-    setAudioInfo(bi);
-    return begin();
-  }
-
   /// Defines the options for the G.722 Codec: G722_SAMPLE_RATE_8000,G722_PACKED
   void setOptions(int options){
     this->options = options;
@@ -140,11 +125,11 @@ class G722Encoder : public AudioEncoder {
 
   bool begin() {
     TRACEI();
-    if (cfg.channels != 1) {
-      LOGW("1 channel expected, was: %d", cfg.channels);
+    if (info.channels != 1) {
+      LOGW("1 channel expected, was: %d", info.channels);
     }
 
-    g722_ectx = g722_encoder_new(cfg.sample_rate, options);
+    g722_ectx = g722_encoder_new(info.sample_rate, options);
     if (g722_ectx == NULL) {
       LOGE("g722_encoder_new");
       return false;
@@ -163,8 +148,6 @@ class G722Encoder : public AudioEncoder {
   }
 
   virtual const char *mime() { return "audio/g722"; }
-
-  virtual void setAudioInfo(AudioInfo cfg) { this->cfg = cfg; }
 
   virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
 
@@ -185,7 +168,6 @@ class G722Encoder : public AudioEncoder {
   }
 
  protected:
-  AudioInfo cfg;
   Print *p_print = nullptr;
   G722_ENC_CTX *g722_ectx = nullptr;
   Vector<uint8_t> input_buffer;

@@ -26,17 +26,8 @@ namespace audio_tools {
 class GSMDecoder : public AudioDecoder {
  public:
   GSMDecoder() {
-    cfg.sample_rate = 8000;
-    cfg.channels = 1;
-  }
-
-  virtual void setAudioInfo(AudioInfo cfg) { this->cfg = cfg; }
-
-  virtual AudioInfo audioInfo() { return cfg; }
-
-  virtual bool begin(AudioInfo cfg) {
-    setAudioInfo(cfg);
-    return begin();
+    info.sample_rate = 8000;
+    info.channels = 1;
   }
 
   virtual bool begin() {
@@ -47,7 +38,7 @@ class GSMDecoder : public AudioDecoder {
     input_buffer.resize(33);
 
     v_gsm = gsm_create();
-    notifyAudioChange(cfg);
+    notifyAudioChange(info);
     is_active = true;
     return true;
   }
@@ -80,7 +71,6 @@ class GSMDecoder : public AudioDecoder {
  protected:
   Print *p_print = nullptr;
   gsm v_gsm;
-  AudioInfo cfg;
   bool is_active = false;
   Vector<uint8_t> input_buffer;
   Vector<uint8_t> result_buffer;
@@ -142,24 +132,19 @@ class GSMDecoder : public AudioDecoder {
 class GSMEncoder : public AudioEncoder {
  public:
   GSMEncoder(bool scaling=true) {
-    cfg.sample_rate = 8000;
-    cfg.channels = 1;
+    info.sample_rate = 8000;
+    info.channels = 1;
     scaling_active = scaling;
-  }
-
-  bool begin(AudioInfo bi) {
-    setAudioInfo(bi);
-    return begin();
   }
 
   bool begin() {
     TRACEI();
 
-    if (cfg.sample_rate != 8000) {
-      LOGW("Sample rate is supposed to be 8000 - it was %d", cfg.sample_rate);
+    if (info.sample_rate != 8000) {
+      LOGW("Sample rate is supposed to be 8000 - it was %d", info.sample_rate);
     }
-    if (cfg.channels != 1) {
-      LOGW("channels is supposed to be 1 - it was %d", cfg.channels);
+    if (info.channels != 1) {
+      LOGW("channels is supposed to be 1 - it was %d", info.channels);
     }
 
     v_gsm = gsm_create();
@@ -178,8 +163,6 @@ class GSMEncoder : public AudioEncoder {
   }
 
   virtual const char *mime() { return "audio/gsm"; }
-
-  virtual void setAudioInfo(AudioInfo cfg) { this->cfg = cfg; }
 
   virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
 
@@ -200,7 +183,6 @@ class GSMEncoder : public AudioEncoder {
   }
 
  protected:
-  AudioInfo cfg;
   Print *p_print = nullptr;
   gsm v_gsm;
   bool is_active = false;
@@ -230,7 +212,6 @@ class GSMEncoder : public AudioEncoder {
       data16[i] = htons(data16[i]);
     }
   }
-
 
   void scaleValues(Vector<uint8_t> &vector) {
     int16_t *pt16 = (int16_t *)vector.data();

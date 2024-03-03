@@ -93,7 +93,7 @@ class MP3DecoderHelix : public AudioDecoder  {
             return mp3->audioInfo();
         }
 
-        AudioInfo audioInfo(){
+        AudioInfo audioInfo() override {
             MP3FrameInfo i = audioInfoEx();
             AudioInfo baseInfo;
             baseInfo.channels = i.nChans;
@@ -119,9 +119,9 @@ class MP3DecoderHelix : public AudioDecoder  {
         }
 
         /// Defines the callback object to which the Audio information change is provided
-        void addNotifyAudioChange(AudioInfoSupport &bi){
+        void addNotifyAudioChange(AudioInfoSupport &bi) override {
             TRACED();
-            addNotifyAudioChange(bi);
+            AudioDecoder::addNotifyAudioChange(bi);
             if (mp3!=nullptr) mp3->setInfoCallback(infoCallback, this);
         }
 

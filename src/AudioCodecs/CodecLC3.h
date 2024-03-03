@@ -46,13 +46,6 @@ class LC3Decoder : public AudioDecoder {
     info.channels = 1;
   }
 
-  virtual AudioInfo audioInfo() { return info; }
-
-  bool begin(AudioInfo bi) {
-    info = bi;
-    return begin();
-  }
-
   virtual bool begin() {
     TRACEI();
 
@@ -201,11 +194,6 @@ class LC3Encoder : public AudioEncoder {
     output_byte_count = outputByteCount;
   }
 
-  bool begin(AudioInfo bi) {
-    setAudioInfo(bi);
-    return begin();
-  }
-
   bool begin() {
     TRACEI();
 
@@ -244,8 +232,6 @@ class LC3Encoder : public AudioEncoder {
 
   virtual const char *mime() { return "audio/lc3"; }
 
-  virtual void setAudioInfo(AudioInfo info) { this->info = info; }
-
   virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
 
   operator bool() { return lc3_encoder != nullptr; }
@@ -277,7 +263,6 @@ class LC3Encoder : public AudioEncoder {
   }
 
  protected:
-  AudioInfo info;
   Print *p_print = nullptr;
   unsigned dt_us = 1000;
   uint16_t num_frames;

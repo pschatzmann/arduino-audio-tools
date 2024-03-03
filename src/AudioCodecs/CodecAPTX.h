@@ -193,11 +193,6 @@ class APTXEncoder : public AudioEncoder {
     info.bits_per_sample = isHd ? 24 : 16;
   }
 
-  bool begin(AudioInfo info) {
-    setAudioInfo(info);
-    return begin();
-  }
-
   bool begin() {
     TRACEI();
     input_buffer.resize(4 * 2);
@@ -232,7 +227,7 @@ class APTXEncoder : public AudioEncoder {
   virtual const char *mime() { return "audio/aptx"; }
 
   virtual void setAudioInfo(AudioInfo info) {
-    this->info = info;
+    AudioEncoder::setAudioInfo(info);
     switch (info.bits_per_sample) {
       case 16:
         is_hd = false;
@@ -294,7 +289,6 @@ class APTXEncoder : public AudioEncoder {
 
  protected:
   bool is_hd;
-  AudioInfo info;
   Vector<int24_t> input_buffer{4 * 2};
   Vector<uint8_t> output_buffer;
   int input_pos = 0;
