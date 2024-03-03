@@ -195,16 +195,8 @@ class EncoderBase64 : public AudioEncoder {
   /// Provides "text/base64"
   const char *mime() override { return "text/base64"; }
 
-  /// We actually do nothing with this
-  virtual void setAudioInfo(AudioInfo from) override { info = from; }
-
   /// We add a new line after each write
   void setNewLine(Base46Logic flag) { newline_logic = flag; }
-
-  virtual bool begin(AudioInfo cfg) override {
-    setAudioInfo(cfg);
-    return begin();
-  }
 
   /// starts the processing using the actual RAWAudioInfo
   virtual bool begin() override {

@@ -80,7 +80,7 @@ class MP3DecoderMAD : public AudioDecoder  {
             return mad->audioInfo();
         }
 
-        AudioInfo audioInfo(){
+        AudioInfo audioInfo() override {
             TRACED();
             libmad::MadAudioInfo info = audioInfoEx();
             AudioInfo base;

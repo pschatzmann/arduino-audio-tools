@@ -53,7 +53,7 @@ public:
     resetDecoder();
   }
 
-  AudioInfo audioInfo() {
+  AudioInfo audioInfo() override {
     return p_decoder != nullptr ? p_decoder->audioInfo() : noInfo;
   }
 

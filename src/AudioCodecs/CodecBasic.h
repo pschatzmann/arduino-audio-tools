@@ -102,6 +102,7 @@ public:
 
   /// We actually do nothing with this
   virtual void setAudioInfo(AudioInfo from) override {
+    AudioEncoder::setAudioInfo(from);
     encoder.setAudioInfo(from);
   }
 

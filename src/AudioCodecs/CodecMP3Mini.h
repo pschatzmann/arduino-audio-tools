@@ -60,9 +60,6 @@ class MP3DecoderMini : public AudioDecoder {
   /// Defines the output Stream
   void setOutput(Print &outStream) { this->out = &outStream; }
 
-  /// Provides the last available MP3FrameInfo
-  AudioInfo audioInfo() { return audio_info; }
-
   /// Write mp3 data to decoder
   size_t write(const void *data, size_t len) {
     LOGD("write: %zu", len);
@@ -92,7 +89,6 @@ class MP3DecoderMini : public AudioDecoder {
   }
 
  protected:
-  AudioInfo audio_info;
   Print *out = nullptr;
   mp3dec_t mp3d;
   mp3dec_frame_info_t mp3dec_info;
@@ -134,18 +130,18 @@ class MP3DecoderMini : public AudioDecoder {
   /// Provides Metadata and PCM data
   void provideResult(int samples) {
     LOGD("provideResult: %d samples", samples);
-    AudioInfo info;
-    info.sample_rate = mp3dec_info.hz>sample_rate_limit ? sample_rate_limit : mp3dec_info.hz;
-    info.channels = mp3dec_info.channels;
-    info.bits_per_sample = 16;
+    AudioInfo tmp;
+    tmp.sample_rate = mp3dec_info.hz>sample_rate_limit ? sample_rate_limit : mp3dec_info.hz;
+    tmp.channels = mp3dec_info.channels;
+    tmp.bits_per_sample = 16;
 
     // notify about audio changes
-    if (info != audio_info) {
-      info.logInfo();
-      notifyAudioChange(info);
+    if (tmp != info) {
+      tmp.logInfo();
+      notifyAudioChange(tmp);
     }
-    // store last audio_info so that we can detect any changes
-    audio_info = info;
+    // store last info so that we can detect any changes
+    info = info;
 
     // provide result pwm data
     if (out != nullptr) {

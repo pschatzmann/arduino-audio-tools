@@ -283,11 +283,6 @@ class FLACEncoder : public AudioEncoder {
     cfg.logInfo(); 
   }
 
-  virtual bool begin(AudioInfo from) {
-    setAudioInfo(from);
-    return begin();
-  }
-
   /// starts the processing using the actual AudioInfo
   virtual bool begin() override {
     TRACED();

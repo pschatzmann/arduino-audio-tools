@@ -95,7 +95,7 @@ class AACDecoderHelix : public AudioDecoder  {
             return aac->audioInfo();
         }
 
-        virtual AudioInfo audioInfo() override{
+        AudioInfo audioInfo() override{
             AudioInfo result;
             auto i = audioInfoEx();
             result.channels = i.nChans;

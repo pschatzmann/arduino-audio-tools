@@ -38,8 +38,6 @@ class ILBCDecoder : public AudioDecoder {
     end();
   }
 
-  virtual AudioInfo audioInfo() { return info; }
-
   virtual bool begin() {
     TRACEI();
     if (p_print==nullptr){
@@ -91,7 +89,6 @@ class ILBCDecoder : public AudioDecoder {
   }
 
  protected:
-  AudioInfo info;
   Print *p_print = nullptr;
   iLBCDecode *p_ilbc = nullptr;
   Vector<int16_t> decoded_buffer{0};
@@ -121,15 +118,6 @@ class ILBCEncoder : public AudioEncoder {
 
   ~ILBCEncoder(){
     end();
-  }
-
-  bool begin(AudioInfo info) {
-    setAudioInfo(info);
-    return begin();
-  }
-
-  void setAudioInfo(AudioInfo info) {
-    this->info = info;
   }
 
   bool begin() {
@@ -193,7 +181,6 @@ class ILBCEncoder : public AudioEncoder {
   }
 
  protected:
-  AudioInfo info;
   Print *p_print = nullptr;
   iLBCEncode *p_ilbc = nullptr;
   Vector<float> decoded_buffer{0};

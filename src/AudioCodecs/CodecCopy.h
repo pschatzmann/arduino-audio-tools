@@ -34,8 +34,6 @@ public:
 
   void end() {}
 
-  AudioInfo audioInfo() { AudioInfo dummy; return dummy; }
-
   size_t write(const void *data, size_t len) { 
     TRACED();
     return pt_print->write((uint8_t*)data,len);
@@ -74,9 +72,6 @@ public:
 
   void end() {}
 
-  AudioInfo audioInfo() { return info; }
-  void setAudioInfo(AudioInfo ai) { info = ai; }
-
   size_t write(const void *data, size_t len) { return pt_print->write((uint8_t*)data,len); }
 
   operator bool() { return true; }
@@ -86,7 +81,6 @@ public:
 
 protected:
   Print *pt_print=nullptr;
-  AudioInfo info;
 };
 
 using PCMEncoder = CopyEncoder;

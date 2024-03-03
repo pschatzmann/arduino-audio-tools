@@ -35,7 +35,6 @@ class DecoderL8 : public AudioDecoder {
   DecoderL8(Print &out_stream, bool active = true) {
     TRACED();
     p_print = &out_stream;
-    this->active = active;
   }
 
   /**
@@ -55,29 +54,12 @@ class DecoderL8 : public AudioDecoder {
   /// signed
   void setSigned(bool isSigned) { is_signed = isSigned; }
 
-  bool begin(AudioInfo info1) override {
-    TRACED();
-    info = info1;
-    info.bits_per_sample = 16;  //
-    notifyAudioChange(info);
-    active = true;
-    return true;
-  }
-
-  bool begin() override {
-    TRACED();
-    active = true;
-    return true;
-  }
-
-  void end() override {
-    TRACED();
-    active = false;
-  }
-
   /// for most decoders this is not needed
   virtual void setAudioInfo(AudioInfo from) override {
     TRACED();
+    if (from.bits_per_sample!=16){
+      LOGE("Bits per sample not supported: %d", from.bits_per_sample);
+    }
     from.bits_per_sample = 16;
     if (info != from) {
       notifyAudioChange(from);
@@ -114,10 +96,9 @@ class DecoderL8 : public AudioDecoder {
     return NumberConverter::clip<int16_t>(tmp * 258);
   }
 
-  virtual operator bool() override { return active; }
+  virtual operator bool() override { return p_print!=nullptr; }
 
  protected:
-  bool active;
   bool is_signed = false;
   Vector<int16_t> buffer;
 };
@@ -154,9 +135,6 @@ class EncoderL8 : public AudioEncoder {
 
   /// Provides "audio/pcm"
   const char *mime() override { return "audio/l8"; }
-
-  /// We actually do nothing with this
-  void setAudioInfo(AudioInfo from) override {}
 
   /// starts the processing using the actual RAWAudioInfo
   bool begin() override { is_open = true; return true;}

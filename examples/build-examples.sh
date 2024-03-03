@@ -26,11 +26,11 @@ function compile_example {
       echo -e "$f -> rc=$EC" >> "build-examples-log.txt"
     #fi
   done
-}
+
 
 rm build-examples-log.txt
 compile_example "esp32:esp32:esp32" "../examples/examples-basic-api/base*"
-compile_example "esp32:esp32:esp32" "../examples/examples-player/player*"
+compile_example "esp32:esp32:esp32" "../examples/etest-compile-allxamples-player/player*"
 compile_example "esp32:esp32:esp32" "../examples/examples-webserver/str*"
 compile_example "esp32:esp32:esp32" "../examples/examples-stream/streams*"
 compile_example "esp32:esp32:esp32" "../examples/examples-audiokit/*"

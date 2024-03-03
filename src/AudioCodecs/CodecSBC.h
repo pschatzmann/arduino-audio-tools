@@ -38,8 +38,6 @@ public:
       delete[] input_buffer;
   }
 
-  virtual AudioInfo audioInfo() { return info; }
-
   virtual bool begin() {
     TRACEI();
     is_first = true;
@@ -99,7 +97,6 @@ public:
 
 protected:
   Print *p_print = nullptr;
-  AudioInfo info;
   sbc_t sbc;
   bool is_first = true;
   bool is_active = false;
@@ -237,12 +234,6 @@ public:
     }
   }
 
-  /// Starts the processing: channels 1 or 2, supported sample rates: 16000, 32000, 44100, 48000
-  bool begin(AudioInfo bi) {
-    setAudioInfo(bi);
-    return begin();
-  }
-
   /// Restarts the processing
   bool begin() {
     TRACEI();
@@ -262,8 +253,6 @@ public:
   }
 
   virtual const char *mime() { return "audio/sbc"; }
-
-  virtual void setAudioInfo(AudioInfo info) { this->info = info; }
 
   virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
 
@@ -298,7 +287,6 @@ public:
   }
 
 protected:
-  AudioInfo info;
   Print *p_print = nullptr;
   sbc_t sbc;
   bool is_first = true;

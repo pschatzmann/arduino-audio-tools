@@ -76,7 +76,7 @@ class ContainerDecoder : public AudioDecoder {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioEncoder : public AudioWriter {
+class AudioEncoder : public AudioWriter, public AudioInfoSupport {
 public:
   AudioEncoder() = default;
   virtual ~AudioEncoder() = default;
@@ -85,7 +85,12 @@ public:
   /// Provides the mime type of the encoded result
   virtual const char *mime() = 0;
   /// Defines the sample rate, number of channels and bits per sample
-  virtual void setAudioInfo(AudioInfo from) override{};
+  void setAudioInfo(AudioInfo from) override { info = from;};
+  AudioInfo audioInfo() {return info;}
+
+protected:
+  AudioInfo info;
+
 };
 
 class AudioDecoderExt : public AudioDecoder {

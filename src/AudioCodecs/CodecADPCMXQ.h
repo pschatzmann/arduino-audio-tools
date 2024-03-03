@@ -156,11 +156,6 @@ class ADPCMEncoderXQ : public AudioEncoder {
   /// Defines the noise shaping
   void setNoiseShaping(ADPCMNoiseShaping ns) { noise_shaping = (int)ns; }
 
-  bool begin(AudioInfo info) {
-    setAudioInfo(info);
-    return begin();
-  }
-
   bool begin() override {
     TRACEI();
 
@@ -191,8 +186,6 @@ class ADPCMEncoderXQ : public AudioEncoder {
 
   const char *mime() override { return "audio/adpcm"; }
 
-  void setAudioInfo(AudioInfo info) override { this->info = info; }
-
   void setOutput(Print &out_stream) override { p_print = &out_stream; }
 
   operator bool() override { return adpcm_cnxt != nullptr; }
@@ -212,7 +205,6 @@ class ADPCMEncoderXQ : public AudioEncoder {
   }
 
  protected:
-  AudioInfo info;
   int current_sample = 0;
   void *adpcm_cnxt = nullptr;
   Vector<int16_t> pcm_block;

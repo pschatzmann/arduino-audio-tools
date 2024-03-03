@@ -16,21 +16,12 @@ class DecoderFloat : public AudioDecoder {
     public:
         /**
          * @brief Construct a new DecoderFloat object
-         */
-
-        DecoderFloat(){
-            TRACED();
-        }
-
-        /**
-         * @brief Construct a new DecoderFloat object
          * 
          * @param out_stream Output Stream to which we write the decoded result
          */
         DecoderFloat(Print &out_stream, bool active=true){
             TRACED();
             p_print = &out_stream;
-            this->active = active;
         }
 
         /**
@@ -43,34 +34,12 @@ class DecoderFloat : public AudioDecoder {
         DecoderFloat(Print &out_stream, AudioInfoSupport &bi){
             TRACED();
             p_print = &out_stream;
+            addNotifyAudioChange(bi);
         }
 
         /// Defines the output Stream
         void setOutput(Print &out_stream) override {
             p_print = &out_stream;
-        }
-
-        AudioInfo audioInfo() override {
-            return cfg;
-        }
-
-        bool begin(AudioInfo info) override {
-            TRACED();
-            cfg = info;
-            notifyAudioChange(cfg);
-            active = true;
-            return true;
-        }
-
-        bool begin() override {
-            TRACED();
-            active = true;
-            return true;
-        }
-
-        void end() override {
-            TRACED();
-            active = false;
         }
 
         /// Converts data from float to int16_t
@@ -86,13 +55,11 @@ class DecoderFloat : public AudioDecoder {
         }
 
         virtual operator bool() override {
-            return active;
+            return p_print!=nullptr;;
         }
 
     protected:
         Print *p_print=nullptr;
-        AudioInfo cfg;
-        bool active;
         Vector<int16_t> buffer;
 
 };
@@ -124,10 +91,6 @@ class EncoderFloat : public AudioEncoder {
         /// Provides "audio/pcm"
         const char* mime() override{
             return mime_pcm;
-        }
-
-        /// We actually do nothing with this 
-        virtual void setAudioInfo(AudioInfo from) override {
         }
 
         /// starts the processing using the actual RAWAudioInfo

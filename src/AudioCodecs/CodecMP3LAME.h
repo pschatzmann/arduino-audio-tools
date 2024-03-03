@@ -58,15 +58,16 @@ public:
     /// Defines the Audio Info
     void setAudioInfo(AudioInfo from) {
         TRACED();
-        info.channels = from.channels;
-        info.sample_rate = from.sample_rate;
-        info.bits_per_sample = from.bits_per_sample;
+        AudioEncoder::setAudioInfo(from);
+        lame_info.channels = from.channels;
+        lame_info.sample_rate = from.sample_rate;
+        lame_info.bits_per_sample = from.bits_per_sample;
     }
 
     /// Defines the Audio Info
     void setAudioInfo(AudioInfoLAME from) {
         TRACED();
-        info = from;
+        lame_info = from;
     }
 
     // starts the processing
@@ -77,20 +78,9 @@ public:
         return true;
     }
 
-    /**
-     * @brief Opens the encoder  
-     * 
-     * @param info 
-     * @return int 
-     */
-    bool begin(AudioInfoLAME info) {
-        setAudioInfo(info);
-        return begin();
-    }
 
-
-    AudioInfoLAME &audioInfo(){
-        return info;
+    AudioInfoLAME &audioInfoExt(){
+        return lame_info;
     }
 
     AudioInfoLAME defaultConfig(){
@@ -129,7 +119,7 @@ public:
 
 protected:
     liblame::MP3EncoderLAME *enc=nullptr;
-    AudioInfoLAME info;
+    AudioInfoLAME lame_info;
     Print *p_print=nullptr;
 
     // Create enc only at begin so that we can use psram
@@ -143,10 +133,10 @@ protected:
                 LOGE("Output undefined");
             }
             AudioInfoLAME tmp;
-            tmp.channels = info.channels;
-            tmp.sample_rate = info.sample_rate;
-            tmp.bits_per_sample = info.bits_per_sample;
-            tmp.quality = info.quality;
+            tmp.channels = lame_info.channels;
+            tmp.sample_rate = lame_info.sample_rate;
+            tmp.bits_per_sample = lame_info.bits_per_sample;
+            tmp.quality = lame_info.quality;
             LOGI("LibLAME channels: %d", tmp.channels);
             LOGI("LibLAME sample_rate: %d", tmp.sample_rate);
             LOGI("LibLAME bits_per_sample: %d", tmp.bits_per_sample);

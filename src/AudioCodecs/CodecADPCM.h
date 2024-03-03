@@ -161,8 +161,6 @@ class ADPCMEncoder : public AudioEncoderExt {
 
   const char *mime() override { return "audio/adpcm"; }
 
-  void setAudioInfo(AudioInfo info) override { this->info = info; }
-
   void setOutput(Print &out_stream) override { p_print = &out_stream; }
 
   operator bool() override { return is_started; }
@@ -177,7 +175,6 @@ class ADPCMEncoder : public AudioEncoderExt {
   }
 
  protected:
-  AudioInfo info;
   adpcm_ffmpeg::ADPCMEncoder encoder;
   Vector<int16_t> pcm_block;
   Print *p_print = nullptr;

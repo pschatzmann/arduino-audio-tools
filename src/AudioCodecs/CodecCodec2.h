@@ -72,11 +72,6 @@ class Codec2Decoder : public AudioDecoder {
 
   int bitsPerSecond() { return bits_per_second; }
 
-  bool begin(AudioInfo cfg) {
-    setAudioInfo(cfg);
-    return begin();
-  }
-
   virtual bool begin() {
     TRACEI();
 
@@ -204,11 +199,6 @@ class Codec2Encoder : public AudioEncoder {
 
   int bitsPerSecond() { return bits_per_second; }
 
-  bool begin(AudioInfo bi) {
-    setAudioInfo(bi);
-    return begin();
-  }
-
   int bytesCompressed() {
     return p_codec2 != nullptr ? codec2_bytes_per_frame(p_codec2) : 0;
   }
@@ -263,8 +253,6 @@ class Codec2Encoder : public AudioEncoder {
 
   virtual const char *mime() { return "audio/codec2"; }
 
-  virtual void setAudioInfo(AudioInfo cfg) { this->info = cfg; }
-
   virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
 
   operator bool() { return is_active; }
@@ -284,7 +272,6 @@ class Codec2Encoder : public AudioEncoder {
   }
 
  protected:
-  AudioInfo info;
   Print *p_print = nullptr;
   struct CODEC2 *p_codec2 = nullptr;
   bool is_active = false;

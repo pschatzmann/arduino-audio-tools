@@ -48,7 +48,7 @@ class OggContainerDecoder : public ContainerDecoder {
 
   void addNotifyAudioChange(AudioInfoSupport &bi) override {
     out.addNotifyAudioChange(bi);
-    addNotifyAudioChange(bi);
+    ContainerDecoder::addNotifyAudioChange(bi);
   }
 
   AudioInfo audioInfo() override { return out.audioInfo(); }
@@ -214,11 +214,6 @@ class OggContainerOutput : public AudioOutput {
   /// Defines the output Stream
   void setOutput(Print &print) { p_out = &print; }
 
-  virtual bool begin(AudioInfo from) override {
-    setAudioInfo(from);
-    return begin();
-  }
-
   /// starts the processing using the actual AudioInfo
   virtual bool begin() override {
     TRACED();
@@ -370,6 +365,7 @@ class OggContainerEncoder : public AudioEncoder {
 
   /// We actually do nothing with this
   virtual void setAudioInfo(AudioInfo info) override {
+    AudioEncoder::setAudioInfo(info);
     p_ogg->setAudioInfo(info);
     if (p_codec != nullptr) p_codec->setAudioInfo(info);
   }
