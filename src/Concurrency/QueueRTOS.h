@@ -1,8 +1,8 @@
 #pragma once
 #include "AudioConfig.h"
 #ifdef USE_CONCURRENCY
-#include "FreeRTOS.h"
-#include "queue.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/queue.h"
 
 namespace audio_tools {
 
