@@ -65,7 +65,6 @@
 #include "AudioTimer/AudioTimer.h"
 #include "AudioTools/AudioTypes.h"
 #include "AudioTools/Buffers.h"
-#include "AudioTools/SynchronizedBuffers.h"
 #include "AudioTools/BaseConverter.h"
 #include "AudioFilter/Filter.h"
 #include "AudioFilter/Equilizer.h"

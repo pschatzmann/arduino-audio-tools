@@ -13,6 +13,7 @@
 #include "BluetoothA2DPSink.h"
 #include "BluetoothA2DPSource.h"
 #include "AudioTools/AudioStreams.h"
+#include "Concurrency/SynchronizedBuffers.h"
 
 
 namespace audio_tools {
@@ -20,7 +21,7 @@ namespace audio_tools {
 class A2DPStream;
 static A2DPStream *A2DPStream_self=nullptr;
 // buffer which is used to exchange data
-static SynchronizedBufferRTOS<uint8_t>a2dp_buffer{A2DP_BUFFER_SIZE * A2DP_BUFFER_COUNT, A2DP_BUFFER_SIZE, portMAX_DELAY, portMAX_DELAY};
+static BufferRTOS<uint8_t>a2dp_buffer{A2DP_BUFFER_SIZE * A2DP_BUFFER_COUNT, A2DP_BUFFER_SIZE, portMAX_DELAY, portMAX_DELAY};
 // flag to indicated that we are ready to process data
 static bool is_a2dp_active = false;
 

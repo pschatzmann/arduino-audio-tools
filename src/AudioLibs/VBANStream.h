@@ -4,6 +4,7 @@
 
 #include "AudioLibs/vban/vban.h"
 #include "AudioTools/AudioStreams.h"
+#include "Concurrency/SynchronizedBuffers.h"
 
 namespace audio_tools {
 
@@ -148,7 +149,7 @@ class VBANStream : public AudioStream {
   VBANConfig cfg;
   SingleBuffer<int16_t> tx_buffer{0};
  #ifdef ESP32
-   SynchronizedBufferRTOS<uint8_t> rx_buffer{ 0};
+   BufferRTOS<uint8_t> rx_buffer{ 0};
  #else
   NBuffer<uint8_t> rx_buffer{DEFAULT_BUFFER_SIZE, 0};
  #endif

@@ -470,6 +470,7 @@ uint32_t millis() {return (xTaskGetTickCount() * portTICK_PERIOD_MS);}
 #define ANALOG_BUFFERS 100
 #endif
 
+#define USE_CONCURRENCY
 //#define USE_ESP8266_AUDIO
 
 // default pins for VS1053 shield
