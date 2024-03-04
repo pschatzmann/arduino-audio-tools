@@ -67,11 +67,15 @@ class AllocatorExt : public Allocator {
 
 #ifdef ESP32
 
-*@brief Memory allocateator which uses ps_malloc to allocate the memory in PSRAM
-    on the ESP32* @ingroup collections* @author Phil
-        Schatzmann* @copyright GPLv3
+/**
+ * @brief Memory allocateator which uses ps_malloc to allocate the memory in
+ * PSRAM on the ESP32
+ * @ingroup collections
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ **/
 
-    class AllocatorPSRAM : public Allocator {
+class AllocatorPSRAM : public Allocator {
   void* do_allocate(int size) {
     void* result = nullptr;
     result = ps_calloc(1, size);
