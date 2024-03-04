@@ -3,6 +3,7 @@
 #  include "InitializerList.h" 
 #endif
 #include <assert.h>
+#include "Allocator.h"
 
 namespace audio_tools {
 
@@ -113,12 +114,14 @@ class Vector {
 #endif
 
     /// default constructor
-    inline Vector(size_t len = 20) {
+    inline Vector(size_t len = 20, Allocator &allocator=DefaultAllocator) {
+      p_allocator = &allocator;
       resize_internal(len, false);
     }
 
     /// allocate size and initialize array
-    inline Vector(int size, T value) {
+    inline Vector(int size, T value, Allocator &allocator=DefaultAllocator) {
+      p_allocator = &allocator;
       resize(size);
       for (int j=0;j< size;j++){
         p_data[j] = value;
@@ -130,6 +133,7 @@ class Vector {
 
     /// copy constructor
     inline Vector(Vector<T> &copyFrom) {
+      this->p_allocator = copyFrom.p_allocator;
       resize_internal(copyFrom.size(), false);
       for (int j=0;j<copyFrom.size();j++){
         p_data[j] = copyFrom[j];
@@ -138,7 +142,8 @@ class Vector {
     }
 
     /// legacy constructor with pointer range
-    inline Vector(T *from, T *to) {
+    inline Vector(T *from, T *to, Allocator &allocator=DefaultAllocator) {
+      this->p_allocator = &allocator;
       this->len = to - from; 
       resize_internal(this->len, false);
       for (size_t j=0;j<this->len;j++){
@@ -150,7 +155,7 @@ class Vector {
     virtual  ~Vector() {
       clear();
       shrink_to_fit();
-      delete [] this->p_data;
+      p_allocator->free(p_data); //delete [] this->p_data;
     }
 
     inline void clear() {
@@ -322,6 +327,7 @@ class Vector {
     int bufferLen=0;
     int len = 0;
     T *p_data = nullptr;
+    Allocator *p_allocator = &DefaultAllocator;
 
     inline void resize_internal(int newSize, bool copy, bool shrink=false)  {
       if (newSize<=0) return;
@@ -330,7 +336,7 @@ class Vector {
         //withNewSize = true;            
         T* oldData = p_data;
         int oldBufferLen = this->bufferLen;
-        this->p_data = new T[newSize+1];
+        this->p_data = (T*) p_allocator->allocate((newSize+1)*sizeof(T)); //new T[newSize+1];
         this->bufferLen = newSize;  
         if (oldData != nullptr) {
           if(copy && this->len > 0){
@@ -339,7 +345,7 @@ class Vector {
           if (shrink){
             cleanup(oldData, newSize, oldBufferLen);
           }
-          delete [] oldData;            
+          p_allocator->free(oldData);//delete [] oldData;            
         }  
       }
       assert(p_data!=nullptr);

@@ -13,7 +13,7 @@
 #include "BluetoothA2DPSink.h"
 #include "BluetoothA2DPSource.h"
 #include "AudioTools/AudioStreams.h"
-#include "Concurrency/SynchronizedBuffers.h"
+#include "Concurrency/BufferRTOS.h"
 
 
 namespace audio_tools {
