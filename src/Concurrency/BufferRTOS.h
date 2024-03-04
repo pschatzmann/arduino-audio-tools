@@ -4,12 +4,11 @@
 #include "AudioBasic/Collections/Allocator.h"
 
 #ifdef ESP32
-#include <freertos/stream_buffer.h>
-
-#include "freertos/FreeRTOS.h"
+#  include <freertos/stream_buffer.h>
+#  include "freertos/FreeRTOS.h"
 #else
-#include "FreeRTOS.h"
-#include "stream_buffer.h"
+#  include "FreeRTOS.h"
+#  include "stream_buffer.h"
 #endif
 
 namespace audio_tools {
@@ -29,12 +28,14 @@ class BufferRTOS : public BaseBuffer<T> {
  public:
   BufferRTOS(size_t xStreamBufferSizeBytes, size_t xTriggerLevel = 1,
              TickType_t writeMaxWait = portMAX_DELAY,
-             TickType_t readMaxWait = portMAX_DELAY)
+             TickType_t readMaxWait = portMAX_DELAY,
+             Allocator &allocator = DefaultAllocator)
       : BaseBuffer<T>() {
     readWait = readMaxWait;
     writeWait = writeMaxWait;
     current_size = xStreamBufferSizeBytes;
     trigger_level = xTriggerLevel;
+    p_allocator = &allocator;
 
     if (current_size > 0) {
       setup();
@@ -147,6 +148,9 @@ class BufferRTOS : public BaseBuffer<T> {
 
  protected:
   StreamBufferHandle_t xStreamBuffer = nullptr;
+  StaticStreamBuffer_t static_stream_buffer;
+  uint8_t *p_data = nullptr;
+  Allocator *p_allocator = nullptr;
   BaseType_t xHigherPriorityTaskWoken = pdFALSE;  // Initialised to pdFALSE.
   int readWait = portMAX_DELAY;
   int writeWait = portMAX_DELAY;
@@ -160,9 +164,16 @@ class BufferRTOS : public BaseBuffer<T> {
   bool setup() {
     if (current_size == 0) return true;
 
+    // allocate data if necessary
+    if (p_data == nullptr) {
+      p_data = (uint8_t *)p_allocator->allocate((current_size + 1) * sizeof(T));
+    }
+    if (p_data == nullptr) return false;
+
     // create stream buffer if necessary
     if (xStreamBuffer == nullptr) {
-      xStreamBuffer = xStreamBufferCreate(current_size, trigger_level);
+      xStreamBuffer = xStreamBufferCreateStatic(current_size, trigger_level,
+                                                p_data, &static_stream_buffer);
     }
     if (xStreamBuffer == nullptr) return false;
     // make sure that the data is empty
@@ -173,7 +184,9 @@ class BufferRTOS : public BaseBuffer<T> {
   /// Release resurces: call resize to restart again
   void end() {
     if (xStreamBuffer != nullptr) vStreamBufferDelete(xStreamBuffer);
+    p_allocator->free(p_data);
     current_size = 0;
+    p_data = nullptr;
     xStreamBuffer = nullptr;
   }
 };
