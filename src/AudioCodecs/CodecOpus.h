@@ -151,8 +151,16 @@ class OpusAudioDecoder : public AudioDecoder {
     outbuf.resize(cfg.max_buffer_size);
     assert(outbuf.data() != nullptr);
     
-    int err;
-    dec = opus_decoder_create(cfg.sample_rate, cfg.channels, &err);
+    // int err;
+    // dec = opus_decoder_create(cfg.sample_rate, cfg.channels, &err);
+   
+    size_t size = opus_decoder_get_size(cfg.channels);
+    decbuf.resize(size);
+    assert(decbuf.data() != nullptr);
+    dec = (OpusDecoder*)decbuf.data();
+    int err = opus_decoder_init(dec, cfg.sample_rate, cfg.channels);
+  
+
     if (err != OPUS_OK) {
       LOGE("opus_decoder_create: %s for sample_rate: %d, channels:%d",
            opus_strerror(err), cfg.sample_rate, cfg.channels);
@@ -214,6 +222,7 @@ class OpusAudioDecoder : public AudioDecoder {
   OpusDecoder *dec;
   bool active = false;
   Vector<uint8_t> outbuf{0};
+  Vector<uint8_t> decbuf{0};
 };
 
 /**
