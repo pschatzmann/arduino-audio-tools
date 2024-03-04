@@ -1,9 +1,9 @@
 #pragma once
 #if defined(ESP32) && defined(USE_URL_ARDUINO)
 #include "AudioConfig.h"
-#include "AudioTools/SynchronizedBuffers.h"
 #include "AudioTools/AudioStreams.h"
 #include "AudioHttp/URLStream.h"
+#include "Concurrency/SynchronizedBuffers.h"
 
 namespace audio_tools {
 

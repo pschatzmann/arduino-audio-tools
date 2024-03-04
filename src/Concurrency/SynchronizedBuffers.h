@@ -7,15 +7,15 @@
 
 #ifdef ESP32
 #  include "freertos/FreeRTOS.h"
-#  include "AudioBasic/Collections/QueueFreeRTOS.h"
+#  include "Concurrency/QueueRTOS.h"
 #  if ESP_IDF_VERSION_MAJOR >= 4 
 #    include <freertos/stream_buffer.h>
 #  endif
+#else
+#  include "stream_buffer.h"
 #endif
 
-#ifdef USE_STD_CONCURRENCY
-#include <mutex>
-#endif
+#include "LockGuard.h"
 
 /**
  * @defgroup concurrency Concurrency
@@ -23,134 +23,8 @@
  * @brief Multicore support
  */
 
-
 namespace audio_tools {
 
-/**
- * @brief Empty Mutex implementation which does nothing
- * @ingroup concurrency
- * @author Phil Schatzmann
- * @copyright GPLv3
- */
-class MutexBase {
-public:
-  virtual void lock() {}
-  virtual void unlock() {}
-};
-
-#if defined(USE_STD_CONCURRENCY) 
-
-/**
- * @brief Mutex implemntation based on std::mutex
- * @ingroup concurrency
- * @author Phil Schatzmann
- * @copyright GPLv3
- */
-class StdMutex : public MutexBase {
-public:
-  void lock() override { std_mutex.lock(); }
-  void unlock() override { std_mutex.unlock(); }
-
-protected:
-  std::mutex std_mutex;
-};
-
-#endif
-
-#if defined(ESP32) 
-
-/**
- * @brief Mutex implemntation using FreeRTOS
- * @ingroup concurrency
- * @author Phil Schatzmann
- * @copyright GPLv3 *
- */
-class Mutex : public MutexBase {
-public:
-  Mutex() {
-    TRACED();
-    xSemaphore = xSemaphoreCreateBinary();
-    xSemaphoreGive(xSemaphore);
-  }
-  ~Mutex() {
-    TRACED();
-    vSemaphoreDelete(xSemaphore);
-  }
-  void lock() override {
-    TRACED();
-    xSemaphoreTake(xSemaphore, portMAX_DELAY);
-  }
-  void unlock() override {
-    TRACED();
-    xSemaphoreGive(xSemaphore);
-  }
-
-protected:
-  SemaphoreHandle_t xSemaphore = NULL;
-};
-
-//#elif defined(ARDUINO_ARCH_RP2040)
-// /**
-//  * @brief Mutex implemntation using RP2040 API
-//  * @ingroup concurrency
-//  * @author Phil Schatzmann
-//  * @copyright GPLv3 *
-//  */
-// class Mutex : public MutexBase {
-// public:
-//   Mutex() {
-//     TRACED();
-//     mutex_init(&mtx);
-//   }
-//   ~Mutex() { TRACED(); }
-//   void lock() override {
-//     TRACED();
-//     mutex_enter_blocking(&mtx);
-//   }
-//   void unlock() override {
-//     TRACED();
-//     mutex_exit(&mtx);
-//   }
-
-// protected:
-//   mutex_t mtx;
-// };
-
-#else
-
-using Mutex = MutexBase;
-
-#endif
-
-/**
- * @brief RAII implementaion using a Mutex: Only a few microcontrollers provide
- * lock guards, so I decided to roll my own solution where we can just use a
- * dummy Mutex implementation that does nothing for the cases where this is not
- * needed.
- * @ingroup concurrency
- * @author Phil Schatzmann
- * @copyright GPLv3 *
- */
-class LockGuard {
-public:
-  LockGuard(Mutex &mutex) {
-    TRACED();
-    p_mutex = &mutex;
-    p_mutex->lock();
-  }
-  LockGuard(Mutex *mutex) {
-    TRACED();
-    p_mutex = mutex;
-    p_mutex->lock();
-  }
-  ~LockGuard() {
-    TRACED();
-    p_mutex->unlock();
-  }
-
-protected:
-  Mutex *p_mutex = nullptr;
-};
 
 /**
  * @brief Wrapper class that can turn any Buffer into a thread save
@@ -254,8 +128,6 @@ protected:
   Mutex *p_mutex = nullptr;
 };
 
-#if defined(ESP32) 
-
 /**
  * @brief NBuffer which uses some RTOS queues to manage the available and filled buffers
  * @ingroup buffers
@@ -304,8 +176,8 @@ public:
   }
 
 protected:
-  QueueFreeRTOS<BaseBuffer<T>*> available_buffers{0,portMAX_DELAY,0};
-  QueueFreeRTOS<BaseBuffer<T>*> filled_buffers{0,portMAX_DELAY,0};
+  QueueRTOS<BaseBuffer<T>*> available_buffers{0,portMAX_DELAY,0};
+  QueueRTOS<BaseBuffer<T>*> filled_buffers{0,portMAX_DELAY,0};
   size_t max_size;
 
   BaseBuffer<T> *getNextAvailableBuffer() {
@@ -331,7 +203,7 @@ protected:
   }
 };
 
-#if ESP_IDF_VERSION_MAJOR >= 4 
+//#if ESP_IDF_VERSION_MAJOR >= 4 
 
 /**
  * @brief Buffer implementation which is using a FreeRTOS StreamBuffer
@@ -341,9 +213,9 @@ protected:
  * @tparam T
  */
 template <typename T> 
-class SynchronizedBufferRTOS : public BaseBuffer<T> {
+class BufferRTOS : public BaseBuffer<T> {
 public:
-  SynchronizedBufferRTOS(size_t xStreamBufferSizeBytes, size_t xTriggerLevel=256, TickType_t writeMaxWait=portMAX_DELAY, TickType_t readMaxWait=portMAX_DELAY)
+  BufferRTOS(size_t xStreamBufferSizeBytes, size_t xTriggerLevel=256, TickType_t writeMaxWait=portMAX_DELAY, TickType_t readMaxWait=portMAX_DELAY)
       : BaseBuffer<T>() {
     if (xStreamBufferSizeBytes>0)
     xStreamBuffer = xStreamBufferCreate(xStreamBufferSizeBytes, xTriggerLevel);
@@ -352,7 +224,7 @@ public:
     current_size = xStreamBufferSizeBytes;
     trigger_level = xTriggerLevel;
   }
-  ~SynchronizedBufferRTOS() { vStreamBufferDelete(xStreamBuffer); }
+  ~BufferRTOS() { vStreamBufferDelete(xStreamBuffer); }
 
   void resize(size_t size){
     if (current_size != size){
@@ -470,8 +342,10 @@ protected:
   size_t current_size=0;
   size_t trigger_level=0;
 };
-#endif // ESP_IDF_VERSION_MAJOR >= 4 
-#endif // ESP32
+//#endif // ESP_IDF_VERSION_MAJOR >= 4 
+
+template<class T>
+using SynchronizedBufferRTOS = BufferRTOS<T>;
 
 } // namespace audio_tools
 
