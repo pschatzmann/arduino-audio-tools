@@ -117,7 +117,7 @@ class OpusAudioDecoder : public AudioDecoder {
   /**
    * @brief Construct a new OpusDecoder object
    */
-  OpusAudioDecoder() { TRACED(); }
+  OpusAudioDecoder() = default;
 
   /**
    * @brief Construct a new OpusDecoder object
@@ -148,6 +148,10 @@ class OpusAudioDecoder : public AudioDecoder {
 
   bool begin() override {
     TRACED();
+    if (!isValidRate(cfg.sample_rate)){
+      LOGE("Sample rate not supported: %d", cfg.sample_rate);
+      return false;
+    }
     outbuf.resize(cfg.max_buffer_size);
     assert(outbuf.data() != nullptr);
     
@@ -176,6 +180,8 @@ class OpusAudioDecoder : public AudioDecoder {
       opus_decoder_destroy(dec);
       dec = nullptr;
     }
+    outbuf.resize(0);
+    decbuf.resize(0);
     active = false;
   }
 
@@ -223,6 +229,14 @@ class OpusAudioDecoder : public AudioDecoder {
   bool active = false;
   Vector<uint8_t> outbuf{0};
   Vector<uint8_t> decbuf{0};
+  const uint32_t valid_rates[5] = {8000, 12000, 16000, 24000,  48000};
+
+  bool isValidRate(int rate){
+    for (auto &valid : valid_rates){
+      if (valid==rate) return true;
+    }
+    return false;
+  }
 };
 
 /**
@@ -235,7 +249,7 @@ class OpusAudioDecoder : public AudioDecoder {
 class OpusAudioEncoder : public AudioEncoder {
  public:
   // Empty Constructor - the output stream must be provided with begin()
-  OpusAudioEncoder() {}
+  OpusAudioEncoder() = default;
 
   // Constructor providing the output stream
   OpusAudioEncoder(Print &out) { setOutput(out); }
