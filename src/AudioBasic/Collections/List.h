@@ -101,17 +101,25 @@ class List {
         };
 
         /// Default constructor
-        List() { link(); };
+        List(Allocator &allocator=DefaultAllocator) { 
+            p_allocator = &allocator;
+            link(); 
+        };
         /// copy constructor
         List(List&ref) = default;
 
         /// Constructor using array
         template<size_t N>
-        List(const T (&a)[N]) {
+        List(const T (&a)[N], Allocator &allocator=DefaultAllocator) {
+            p_allocator = &allocator;
             link();
             for(int i = 0; i < N; ++i) 
   	    	    push_back(a[i]);
      	}
+
+         ~List(){
+            clear();
+        }
 
 #ifdef USE_INITIALIZER_LIST
 
@@ -138,7 +146,7 @@ class List {
         }
 
         bool push_back(T data){
-            Node *node = new Node();
+            Node *node = (Node*) p_allocator->allocate(sizeof(Node));// new Node();
             if (node==nullptr) return false;
             node->data = data;
 
@@ -155,7 +163,7 @@ class List {
         }
 
         bool push_front(T data){
-            Node *node = new Node();
+            Node *node = (Node*) p_allocator->allocate(sizeof(Node));// new Node();
             if (node==nullptr) return false;
             node->data = data;
 
@@ -172,7 +180,7 @@ class List {
         }
 
         bool insert(Iterator it, const T& data){
-            Node *node = new Node();
+            Node *node = (Node*) p_allocator->allocate(sizeof(Node));// new Node();
             if (node==nullptr) return false;
             node->data = data;
 
@@ -214,7 +222,7 @@ class List {
             p_prior->next = p_next;
             p_next->prior = p_prior;
 
-            delete p_delete;
+            p_allocator->free(p_delete); //delete p_delete;
             record_count--;    
 
             validate();
@@ -234,7 +242,7 @@ class List {
             p_prior->next = p_next;
             p_next->prior = p_prior;
 
-            delete p_delete;
+            p_allocator->free(p_delete); //delete p_delete;
             record_count--;
 
             validate();
@@ -254,7 +262,7 @@ class List {
             p_prior->next = p_next;
             p_next->prior = p_prior;
 
-            delete p_delete;
+            p_allocator->free(p_delete);//delete p_delete;
             record_count--;    
             return true;
         }
@@ -306,11 +314,16 @@ class List {
             return n->data;
         }
 
+        void setAllocator(Allocator &allocator){
+            p_allocator = &allocator;
+        }
+
 
     protected:
         Node first; // empty dummy first node which which is always before the first data node 
         Node last; // empty dummy last node which which is always after the last data node 
         size_t record_count=0;
+        Allocator *p_allocator = &DefaultAllocator;
 
         void link(){
             first.next = &last;

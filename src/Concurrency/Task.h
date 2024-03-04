@@ -28,7 +28,7 @@ class Task {
     }
   }
 
-  void start(void (*process)()) {
+  void begin(void (*process)()) {
     LOGI("staring task");
     loop_code = process;
     resume();
