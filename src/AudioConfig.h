@@ -368,6 +368,7 @@ uint32_t millis() {return (xTaskGetTickCount() * portTICK_PERIOD_MS);}
 #define PIN_I2S_MUTE 23
 #define SOFT_MUTE_VALUE 0
 #define PIN_CS SS
+#define USE_SERVER_ACCEPT 1
 
 #define URL_CLIENT_TIMEOUT 60000;
 #define URL_HANDSHAKE_TIMEOUT 120000
