@@ -37,7 +37,7 @@ struct MetaData {
   char type[5];
 };
 
-void metaCallback(uint8_t* data, int len) {
+void metaCallback(uint8_t* data, int len, void*ref) {
   assert(sizeof(MetaData)==len);
   MetaData meta((MetaData*)data);
   meta.log();
