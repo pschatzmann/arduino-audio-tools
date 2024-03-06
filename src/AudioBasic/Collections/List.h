@@ -3,6 +3,7 @@
 #  include "InitializerList.h" 
 #endif
 #include <stddef.h>
+#include "Allocator.h"
 
 namespace audio_tools {
 

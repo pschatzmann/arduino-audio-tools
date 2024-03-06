@@ -331,12 +331,12 @@ class Vector {
 
     inline void resize_internal(int newSize, bool copy, bool shrink=false)  {
       if (newSize<=0) return;
-      //bool withNewSize = false;
       if (newSize>bufferLen || this->p_data==nullptr ||shrink){
-        //withNewSize = true;            
+
         T* oldData = p_data;
         int oldBufferLen = this->bufferLen;
-        this->p_data = (T*) p_allocator->allocate((newSize+1)*sizeof(T)); //new T[newSize+1];
+        p_data = allocateMemory(newSize); //new T[newSize+1];
+        assert(p_data!=nullptr);
         this->bufferLen = newSize;  
         if (oldData != nullptr) {
           if(copy && this->len > 0){
@@ -348,7 +348,14 @@ class Vector {
           p_allocator->free(oldData);//delete [] oldData;            
         }  
       }
-      assert(p_data!=nullptr);
+    }
+
+    T* allocateMemory(int newSize){
+      T *p_data = (T*) p_allocator->allocate((newSize+1)*sizeof(T)); //new T[newSize+1];
+      for (int j=0;j<newSize;j++){
+          new (p_data+j) T();
+      }
+      return p_data;
     }
 
     void cleanup(T*data, int from, int to){
