@@ -21,8 +21,7 @@ namespace audio_tools {
  */
 
 class StrExt : public Str {
-
-public:
+ public:
   StrExt() = default;
 
   StrExt(int initialAllocatedLength) : Str() {
@@ -131,7 +130,7 @@ public:
     this->len = strlen(temp);
   }
 
-  /// decodes a url encoded string 
+  /// decodes a url encoded string
   void urlDecode() {
     char szTemp[2];
     size_t i = 0;
@@ -155,7 +154,7 @@ public:
     this->len = result_idx;
   }
 
-protected:
+ protected:
   Vector<char> vector;
 
   bool grow(int newMaxLen) {
@@ -201,11 +200,11 @@ protected:
   char strToBin(char *pString) {
     char szBuffer[2];
     char ch;
-    szBuffer[0] = charToInt(pString[0]);   // make the B to 11 -- 00001011
-    szBuffer[1] = charToInt(pString[1]);   // make the 0 to 0 -- 00000000
-    ch = (szBuffer[0] << 4) | szBuffer[1]; // to change the BO to 10110000
+    szBuffer[0] = charToInt(pString[0]);    // make the B to 11 -- 00001011
+    szBuffer[1] = charToInt(pString[1]);    // make the 0 to 0 -- 00000000
+    ch = (szBuffer[0] << 4) | szBuffer[1];  // to change the BO to 10110000
     return ch;
   }
 };
 
-} // namespace audio_tools
+}  // namespace audio_tools
