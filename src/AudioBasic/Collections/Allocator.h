@@ -17,9 +17,17 @@ class Allocator {
  public:
   template <class T>
   T* create() {
-    T& ref = *(T*)allocate(sizeof(T));
-    // ref();
-    return &ref;
+    void* addr = allocate(sizeof(T));
+    // call constructor
+    T* ref = new (addr) T();
+    return ref;
+  }
+
+  template <class T>
+  void remove(T* obj){
+    if (obj==nullptr) return;
+    obj->~T();
+    free((void*)obj);
   }
 
   virtual void* allocate(size_t size) {
@@ -28,7 +36,7 @@ class Allocator {
       LOGE("Allocateation failed for %d bytes", size);
       stop();
     } else {
-      LOGI("Allocated %d", size);
+      LOGD("Allocated %d", size);
     }
     return result;
   }
@@ -38,7 +46,7 @@ class Allocator {
   }
 
  protected:
-  virtual void* do_allocate(size_t size) { return calloc(1, size); }
+  virtual void* do_allocate(size_t size) { return calloc(1, size==0? 1 : size); }
 };
 
 /**
@@ -51,6 +59,7 @@ class Allocator {
 class AllocatorExt : public Allocator {
   void* do_allocate(int size) {
     void* result = nullptr;
+    if (size==0) size = 1;
 #ifdef ESP32
     result = ps_malloc(size);
 #endif
@@ -77,6 +86,7 @@ class AllocatorExt : public Allocator {
 
 class AllocatorPSRAM : public Allocator {
   void* do_allocate(int size) {
+    if (size==0) size = 1;
     void* result = nullptr;
     result = ps_calloc(1, size);
     if (result == nullptr) {
