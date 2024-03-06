@@ -90,6 +90,8 @@ public:
   BinaryContainerEncoder(AudioEncoder &encoder) { p_codec = &encoder; }
   BinaryContainerEncoder(AudioEncoder *encoder) { p_codec = encoder; }
 
+  void setEncoder(AudioEncoder *encoder) { p_codec = encoder; }
+
   void setOutput(Print &outStream) {
     LOGD("BinaryContainerEncoder::setOutput");
     p_out = &outStream;
@@ -196,6 +198,10 @@ public:
   BinaryContainerDecoder() = default;
   BinaryContainerDecoder(AudioDecoder &decoder) { p_codec = &decoder; }
   BinaryContainerDecoder(AudioDecoder *decoder) { p_codec = decoder; }
+
+  void setDecoder(AudioDecoder *decoder){
+    p_codec = decoder;
+  }
 
   // Defines the output: this method is called 2 times: first to define
   // output defined in the EnocdedAudioStream and then to define the
