@@ -31,8 +31,6 @@ class StrExt : public Str {
 
   StrExt(Str &source) : Str() { set(source); }
 
-  StrExt(StrExt &source) : Str() { set(source); }
-
   StrExt(const char *str) : Str() {
     if (str != nullptr) {
       len = strlen(str);
@@ -43,23 +41,6 @@ class StrExt : public Str {
       }
     }
   }
-
-  // move constructor
-  StrExt(StrExt &&obj) = default;
-
-  // move assignment
-  StrExt &operator=(StrExt &&obj) {
-    set(obj.c_str());
-    return *this;
-  }
-
-  // copy assingment
-  StrExt &operator=(StrExt &obj) {
-    set(obj.c_str());
-    return *this;
-  };
-
-  ~StrExt() {}
 
   bool isOnHeap() override { return true; }
 

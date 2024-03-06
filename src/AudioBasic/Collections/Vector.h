@@ -32,57 +32,57 @@ class Vector {
     size_t pos_;
 
    public:
-    inline iterator() {}
-    inline iterator(T *parPtr, size_t pos) {
+    iterator() {}
+    iterator(T *parPtr, size_t pos) {
       this->ptr = parPtr;
       this->pos_ = pos;
     }
     // copy constructor
-    inline iterator(const iterator &copyFrom) {
+    iterator(const iterator &copyFrom) {
       ptr = copyFrom.ptr;
       pos_ = copyFrom.pos_;
     }
-    inline iterator operator++(int n) {
+    iterator operator++(int n) {
       ptr++;
       pos_++;
       return *this;
     }
-    inline iterator operator++() {
+    iterator operator++() {
       ptr++;
       pos_++;
       return *this;
     }
-    inline iterator operator--(int n) {
+    iterator operator--(int n) {
       ptr--;
       pos_--;
       return *this;
     }
-    inline iterator operator--() {
+    iterator operator--() {
       ptr--;
       pos_--;
       return *this;
     }
-    inline iterator operator+(int offset) {
+    iterator operator+(int offset) {
       pos_ += offset;
       return iterator(ptr + offset, offset);
     }
-    inline bool operator==(iterator it) { return ptr == it.getPtr(); }
-    inline bool operator<(iterator it) { return ptr < it.getPtr(); }
-    inline bool operator<=(iterator it) { return ptr <= it.getPtr(); }
-    inline bool operator>(iterator it) { return ptr > it.getPtr(); }
-    inline bool operator>=(iterator it) { return ptr >= it.getPtr(); }
-    inline bool operator!=(iterator it) { return ptr != it.getPtr(); }
-    inline T &operator*() { return *ptr; }
-    inline T *operator->() { return ptr; }
-    inline T *getPtr() { return ptr; }
-    inline size_t pos() { return pos_; }
-    inline size_t operator-(iterator it) { return (ptr - it.getPtr()); }
+    bool operator==(iterator it) { return ptr == it.getPtr(); }
+    bool operator<(iterator it) { return ptr < it.getPtr(); }
+    bool operator<=(iterator it) { return ptr <= it.getPtr(); }
+    bool operator>(iterator it) { return ptr > it.getPtr(); }
+    bool operator>=(iterator it) { return ptr >= it.getPtr(); }
+    bool operator!=(iterator it) { return ptr != it.getPtr(); }
+    T &operator*() { return *ptr; }
+    T *operator->() { return ptr; }
+    T *getPtr() { return ptr; }
+    size_t pos() { return pos_; }
+    size_t operator-(iterator it) { return (ptr - it.getPtr()); }
   };
 
 #ifdef USE_INITIALIZER_LIST
 
   /// support for initializer_list
-  inline Vector(std::initializer_list<T> iniList) {
+  Vector(std::initializer_list<T> iniList) {
     resize(iniList.size());
     int pos = 0;
     for (auto &obj : iniList) {
@@ -93,13 +93,13 @@ class Vector {
 #endif
 
   /// default constructor
-  inline Vector(size_t len = 20, Allocator &allocator = DefaultAllocator) {
+  Vector(size_t len = 20, Allocator &allocator = DefaultAllocator) {
     p_allocator = &allocator;
     resize_internal(len, false);
   }
 
   /// allocate size and initialize array
-  inline Vector(int size, T value, Allocator &allocator = DefaultAllocator) {
+  Vector(int size, T value, Allocator &allocator = DefaultAllocator) {
     p_allocator = &allocator;
     resize(size);
     for (int j = 0; j < size; j++) {
@@ -107,10 +107,14 @@ class Vector {
     }
   }
 
-  inline Vector(Vector<T> &&moveFrom) = default;
+  /// Move constructor
+  Vector(Vector<T> &&moveFrom) = default;
+
+  /// Move operator
+  Vector &operator=(Vector &&obj);
 
   /// copy constructor
-  inline Vector(Vector<T> &copyFrom) {
+  Vector(Vector<T> &copyFrom) {
     this->p_allocator = copyFrom.p_allocator;
     resize_internal(copyFrom.size(), false);
     for (int j = 0; j < copyFrom.size(); j++) {
@@ -120,7 +124,7 @@ class Vector {
   }
 
   /// legacy constructor with pointer range
-  inline Vector(T *from, T *to, Allocator &allocator = DefaultAllocator) {
+  Vector(T *from, T *to, Allocator &allocator = DefaultAllocator) {
     this->p_allocator = &allocator;
     this->len = to - from;
     resize_internal(this->len, false);
@@ -136,13 +140,13 @@ class Vector {
     p_allocator->free(p_data);  // delete [] this->p_data;
   }
 
-  inline void clear() { len = 0; }
+  void clear() { len = 0; }
 
-  inline int size() { return len; }
+  int size() { return len; }
 
-  inline bool empty() { return size() == 0; }
+  bool empty() { return size() == 0; }
 
-  inline void push_back(T value) {
+  void push_back(T value) {
     resize_internal(len + 1, true);
     p_data[len] = value;
     len++;
@@ -158,15 +162,15 @@ class Vector {
     len++;
   }
 
-  inline void pop_back() {
+  void pop_back() {
     if (len > 0) {
       len--;
     }
   }
 
-  inline void pop_front() { erase(0); }
+  void pop_front() { erase(0); }
 
-  inline void assign(iterator v1, iterator v2) {
+  void assign(iterator v1, iterator v2) {
     size_t newLen = v2 - v1;
     resize_internal(newLen, false);
     this->len = newLen;
@@ -176,7 +180,7 @@ class Vector {
     }
   }
 
-  inline void assign(size_t number, T value) {
+  void assign(size_t number, T value) {
     resize_internal(number, false);
     this->len = number;
     for (int j = 0; j < number; j++) {
@@ -184,7 +188,7 @@ class Vector {
     }
   }
 
-  inline void swap(Vector<T> &in) {
+  void swap(Vector<T> &in) {
     // save data
     T *dataCpy = p_data;
     int bufferLenCpy = bufferLen;
@@ -199,12 +203,12 @@ class Vector {
     in.bufferLen = bufferLenCpy;
   }
 
-  inline T &operator[](int index) {
+  T &operator[](int index) {
     assert(p_data != nullptr);
     return p_data[index];
   }
 
-  inline Vector<T> &operator=(Vector<T> &copyFrom) {
+  Vector<T> &operator=(Vector<T> &copyFrom) {
     resize_internal(copyFrom.size(), false);
     for (int j = 0; j < copyFrom.size(); j++) {
       p_data[j] = copyFrom[j];
@@ -213,9 +217,9 @@ class Vector {
     return *this;
   }
 
-  inline T &operator[](const int index) const { return p_data[index]; }
+  T &operator[](const int index) const { return p_data[index]; }
 
-  inline bool resize(int newSize, T value) {
+  bool resize(int newSize, T value) {
     if (resize(newSize)) {
       for (int j = 0; j < newSize; j++) {
         p_data[j] = value;
@@ -225,28 +229,28 @@ class Vector {
     return false;
   }
 
-  inline void shrink_to_fit() { resize_internal(this->len, true, true); }
+  void shrink_to_fit() { resize_internal(this->len, true, true); }
 
   int capacity() { return this->bufferLen; }
 
-  inline bool resize(int newSize) {
+  bool resize(int newSize) {
     int oldSize = this->len;
     resize_internal(newSize, true);
     this->len = newSize;
     return this->len != oldSize;
   }
 
-  inline iterator begin() { return iterator(p_data, 0); }
+  iterator begin() { return iterator(p_data, 0); }
 
-  inline T &back() { return *iterator(p_data + (len - 1), len - 1); }
+  T &back() { return *iterator(p_data + (len - 1), len - 1); }
 
-  inline iterator end() { return iterator(p_data + len, len); }
-
-  // removes a single element
-  inline void erase(iterator it) { return erase(it.pos()); }
+  iterator end() { return iterator(p_data + len, len); }
 
   // removes a single element
-  inline void erase(int pos) {
+  void erase(iterator it) { return erase(it.pos()); }
+
+  // removes a single element
+  void erase(int pos) {
     if (pos < len) {
       int lenToEnd = len - pos - 1;
       // call destructor on data to be erased
@@ -281,7 +285,7 @@ class Vector {
   T *p_data = nullptr;
   Allocator *p_allocator = &DefaultAllocator;
 
-  inline void resize_internal(int newSize, bool copy, bool shrink = false) {
+  void resize_internal(int newSize, bool copy, bool shrink = false) {
     if (newSize <= 0) return;
     if (newSize > bufferLen || this->p_data == nullptr || shrink) {
       T *oldData = p_data;
