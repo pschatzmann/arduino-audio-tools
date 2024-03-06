@@ -22,30 +22,13 @@ namespace audio_tools {
  */
 class Url {
     public:
-        // empty url
-        Url() {
-            LOGD("Url");
-        }
-        
-        ~Url() {
-            LOGD("~Url");
-            pathStr.clear();
-            hostStr.clear();
-            protocolStr.clear();
-            urlRootStr.clear();
-            urlStr.clear();
-        }
+        /// Allow Empty constructor
+        Url() = default;
 
-        // setup url with string
+        /// setup url from string
         Url(const char *url){
             LOGD("Url %s",url);
             setUrl(url);
-        }
-
-        // copy constructor
-        Url(Url &url){
-            LOGD("Url %s",url.url());
-            setUrl(url.url());
         }
 
         const char* url() {return urlStr.c_str();}
@@ -63,12 +46,12 @@ class Url {
         }
 
     protected:
-        StrExt pathStr = StrExt(40);
-        StrExt hostStr = StrExt(20);
-        StrExt protocolStr = StrExt(6);
-        StrExt urlRootStr = StrExt(40);
-        StrExt urlStr = StrExt(40);
-        int portInt;
+        StrExt pathStr{40};
+        StrExt hostStr{20};
+        StrExt protocolStr{6};
+        StrExt urlRootStr{40};
+        StrExt urlStr{40};
+        int portInt = 0;
 
         void parse() {
             LOGI("Url::parse");
