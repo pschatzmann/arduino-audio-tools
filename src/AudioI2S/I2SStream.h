@@ -69,6 +69,11 @@ class I2SStream : public AudioStream {
   /// updates the sample rate dynamically
   virtual void setAudioInfo(AudioInfo info) {
     TRACEI();
+    
+    assert(info.sample_rate!=0);
+    assert(info.channels!=0);
+    assert(info.bits_per_sample!=0);
+
     AudioStream::setAudioInfo(info);
     I2SConfig cfg = i2s.config();
     if (cfg.sample_rate != info.sample_rate || cfg.channels != info.channels ||
