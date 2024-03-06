@@ -121,6 +121,16 @@ class Vector {
       p_data[j] = copyFrom[j];
     }
     this->len = copyFrom.size();
+  } 
+
+  /// copy operator
+  Vector<T> &operator=(Vector<T> &copyFrom) {
+    resize_internal(copyFrom.size(), false);
+    for (int j = 0; j < copyFrom.size(); j++) {
+      p_data[j] = copyFrom[j];
+    }
+    this->len = copyFrom.size();
+    return *this;
   }
 
   /// legacy constructor with pointer range
@@ -138,6 +148,7 @@ class Vector {
     clear();
     shrink_to_fit();
     p_allocator->free(p_data);  // delete [] this->p_data;
+    p_data = nullptr;
   }
 
   void clear() { len = 0; }
@@ -206,15 +217,6 @@ class Vector {
   T &operator[](int index) {
     assert(p_data != nullptr);
     return p_data[index];
-  }
-
-  Vector<T> &operator=(Vector<T> &copyFrom) {
-    resize_internal(copyFrom.size(), false);
-    for (int j = 0; j < copyFrom.size(); j++) {
-      p_data[j] = copyFrom[j];
-    }
-    this->len = copyFrom.size();
-    return *this;
   }
 
   T &operator[](const int index) const { return p_data[index]; }
