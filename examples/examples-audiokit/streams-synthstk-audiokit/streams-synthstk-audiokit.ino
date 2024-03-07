@@ -16,12 +16,12 @@ float noteAmplitude = 128;
 int group = 0;
 
 void actionKeyOn(bool active, int pin, void* ptr){
-  int note = *((int*)ptr);
+  float note = *((float*)ptr);
   voicer.noteOn(note, noteAmplitude, group);
 }
 
 void actionKeyOff(bool active, int pin, void* ptr){
-  int note = *((int*)ptr);
+  float note = *((float*)ptr);
   voicer.noteOff(note, noteAmplitude, group);
 }
 

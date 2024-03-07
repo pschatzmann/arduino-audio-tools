@@ -18,7 +18,7 @@ uint64_t time_on;
 uint64_t time_off;
 
 
-void actionKeyOn(int note){
+void actionKeyOn(float note){
   Serial.println("KeyOn");
   sine.setFrequency(note);
   adsr.keyOn();
