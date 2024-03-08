@@ -82,22 +82,57 @@ void testCopy() {
     vector.push_back(j);
   }
   print("testCopy", vector);
+  for (int j = 0; j < 9; j++) {
+    assert(vector[j] == j);
+  }
+
   Vector<int> v1{vector};
   assert(v1.size()==10);
+  for (int j = 0; j < 9; j++) {
+    assert(v1[j] == j);
+  }
 
   Vector<int> v2 = vector;
   assert(v2.size()==10);
+  for (int j = 0; j < 9; j++) {
+    assert(v1[j] == j);
+  }
 
   vector.erase(0);
   assert(v1.size()==10);
   assert(v2.size()==10);
-
-  testArg(v1);
 }
 
-void testArg(Vector<int> arg){
-  print("testArg", arg);
+void testArg1(Vector<int> arg){
+  print("testArg1", arg);
   assert(arg.size()==10);
+}
+
+void testArg2(Vector<int> &arg){
+  print("testArg2", arg);
+  assert(arg.size()==10);
+}
+
+
+Vector<int> testArg3(Vector<int> arg){
+  print("testArg3", arg);
+  Vector<int> result = arg;
+  assert(result.size()==10);
+  return result;
+}
+
+void testArg() {
+  Vector<int> vector;
+  for (int j = 0; j < 10; j++) {
+    vector.push_back(j);
+  }
+  testArg1(vector);
+  testArg2(vector);
+  Vector<int> v3 = testArg3(vector);
+  assert(v3.size()==10);
+  for (int j = 0; j < 9; j++) {
+    assert(v3[j] == j);
+  }
 }
 
 
@@ -109,6 +144,7 @@ void setup() {
   testPopBack();
   testErase();
   testCopy();
+  testArg();
   Serial.print("All tests passed");
 }
 
