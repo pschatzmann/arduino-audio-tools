@@ -340,7 +340,7 @@ class HttpHeader {
         StrExt protocol_str = StrExt(10);
         StrExt url_path = StrExt(70);
         StrExt status_msg = StrExt(20);
-        Vector<HttpHeaderLine> lines{0};
+        Vector<HttpHeaderLine> lines;
         HttpLineReader reader;
         const char* CRLF = "\r\n";
         int timeout_ms = URL_CLIENT_TIMEOUT;

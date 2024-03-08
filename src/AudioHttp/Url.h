@@ -31,6 +31,7 @@ class Url {
             setUrl(url);
         }
 
+    
         const char* url() {return urlStr.c_str();}
         const char* path() { return pathStr.c_str(); }
         const char* host() { return hostStr.c_str();}
@@ -46,11 +47,11 @@ class Url {
         }
 
     protected:
-        StrExt pathStr{40};
-        StrExt hostStr{20};
-        StrExt protocolStr{6};
-        StrExt urlRootStr{40};
-        StrExt urlStr{40};
+        StrExt pathStr{0};
+        StrExt hostStr{0};
+        StrExt protocolStr{0};
+        StrExt urlRootStr{0};
+        StrExt urlStr{0};
         int portInt = 0;
 
         void parse() {
