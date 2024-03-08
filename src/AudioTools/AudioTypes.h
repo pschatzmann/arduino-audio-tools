@@ -116,7 +116,7 @@ struct AudioInfo {
  */
 class AudioInfoSupport {
     public:
-      virtual void setAudioInfo(AudioInfo info)=0;
+      virtual void setAudioInfo(AudioInfo info) = 0;
       virtual AudioInfo audioInfo() = 0;
     //   virtual bool validate(AudioInfo &info){
     //     return true;

@@ -21,8 +21,6 @@ class List {
             Node* next = nullptr;
             Node* prior = nullptr;
             T data;
-
-            Node() = default;
         };
 
         class Iterator {
@@ -147,7 +145,7 @@ class List {
         }
 
         bool push_back(T data){
-            Node *node = (Node*) p_allocator->allocate(sizeof(Node));// new Node();
+            Node *node = createNode();
             if (node==nullptr) return false;
             node->data = data;
 
@@ -164,7 +162,7 @@ class List {
         }
 
         bool push_front(T data){
-            Node *node = (Node*) p_allocator->allocate(sizeof(Node));// new Node();
+            Node *node = createNode();
             if (node==nullptr) return false;
             node->data = data;
 
@@ -181,7 +179,7 @@ class List {
         }
 
         bool insert(Iterator it, const T& data){
-            Node *node = (Node*) p_allocator->allocate(sizeof(Node));// new Node();
+            Node *node = createNode();
             if (node==nullptr) return false;
             node->data = data;
 
@@ -223,7 +221,8 @@ class List {
             p_prior->next = p_next;
             p_next->prior = p_prior;
 
-            p_allocator->free(p_delete); //delete p_delete;
+            deleteNode(p_delete);
+
             record_count--;    
 
             validate();
@@ -243,7 +242,8 @@ class List {
             p_prior->next = p_next;
             p_next->prior = p_prior;
 
-            p_allocator->free(p_delete); //delete p_delete;
+            deleteNode(p_delete);
+
             record_count--;
 
             validate();
@@ -263,7 +263,8 @@ class List {
             p_prior->next = p_next;
             p_next->prior = p_prior;
 
-            p_allocator->free(p_delete);//delete p_delete;
+            deleteNode(p_delete);
+
             record_count--;    
             return true;
         }
@@ -325,6 +326,24 @@ class List {
         Node last; // empty dummy last node which which is always after the last data node 
         size_t record_count=0;
         Allocator *p_allocator = &DefaultAllocator;
+
+        Node* createNode() {
+#if USE_ALLOCATOR
+            Node *node = (Node*) p_allocator->allocate(sizeof(Node));// new Node();
+#else
+            Node *node = new Node();
+#endif
+            return node;
+        }
+
+        void deleteNode(Node* p_delete){
+#if USE_ALLOCATOR
+            p_allocator->free(p_delete); //delete p_delete;
+#else
+            delete p_delete;
+#endif
+
+        }
 
         void link(){
             first.next = &last;

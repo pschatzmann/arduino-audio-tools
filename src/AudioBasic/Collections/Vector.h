@@ -121,7 +121,7 @@ class Vector {
       p_data[j] = copyFrom[j];
     }
     this->len = copyFrom.size();
-  } 
+  }
 
   /// copy operator
   Vector<T> &operator=(Vector<T> &copyFrom) {
@@ -147,7 +147,11 @@ class Vector {
   virtual ~Vector() {
     clear();
     shrink_to_fit();
-    p_allocator->free(p_data);  // delete [] this->p_data;
+#if USE_ALLOCATOR
+    p_allocator->deleteArray<T>(p_data, size());  // delete [] this->p_data;
+#else
+    delete[] this->p_data;
+#endif
     p_data = nullptr;
   }
 
@@ -292,7 +296,11 @@ class Vector {
     if (newSize > bufferLen || this->p_data == nullptr || shrink) {
       T *oldData = p_data;
       int oldBufferLen = this->bufferLen;
-      p_data = allocateMemory(newSize);  // new T[newSize+1];
+#if USE_ALLOCATOR
+      p_data = p_allocator->createArray<T>(newSize+1);  // new T[newSize+1];
+#else
+      p_data = new T[newSize+1];
+#endif
       assert(p_data != nullptr);
       this->bufferLen = newSize;
       if (oldData != nullptr) {
@@ -302,18 +310,13 @@ class Vector {
         if (shrink) {
           cleanup(oldData, newSize, oldBufferLen);
         }
+#ifdef USE_ALLOCATOR
         p_allocator->free(oldData);  // delete [] oldData;
+#else
+        delete[] oldData;
+#endif
       }
     }
-  }
-
-  T *allocateMemory(int newSize) {
-    T *p_data = (T *)p_allocator->allocate((newSize + 1) *
-                                           sizeof(T));  // new T[newSize+1];
-    for (int j = 0; j < newSize; j++) {
-      new (p_data + j) T();
-    }
-    return p_data;
   }
 
   void cleanup(T *data, int from, int to) {

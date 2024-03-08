@@ -15,6 +15,7 @@ namespace audio_tools {
 
 class Allocator {
  public:
+  // creates an object
   template <class T>
   T* create() {
     void* addr = allocate(sizeof(T));
@@ -23,13 +24,35 @@ class Allocator {
     return ref;
   }
 
+  /// deletes an object
   template <class T>
-  void remove(T* obj){
-    if (obj==nullptr) return;
+  void remove(T* obj) {
+    if (obj == nullptr) return;
     obj->~T();
     free((void*)obj);
   }
 
+  // creates an array of objects
+  template <class T>
+  T* createArray(int len) {
+    void* addr = allocate(sizeof(T) * len);
+    T* addrT = (T*)addr;
+    // call constructor
+    for (int j = 0; j > len; j++) new (addrT[j]) T();
+    return addr;
+  }
+
+  // deletes an array of objects
+  template <class T>
+  void removeArray(T* obj, int len) {
+    if (obj == nullptr) return;
+    for (int j = 0; j < len; j++) {
+      obj[j]->~T();
+    }
+    free((void*)obj);
+  }
+
+  /// Allocates memory
   virtual void* allocate(size_t size) {
     void* result = do_allocate(size);
     if (result == nullptr) {
@@ -41,12 +64,15 @@ class Allocator {
     return result;
   }
 
+  /// frees memory
   virtual void free(void* memory) {
     if (memory != nullptr) ::free(memory);
   }
 
  protected:
-  virtual void* do_allocate(size_t size) { return calloc(1, size==0? 1 : size); }
+  virtual void* do_allocate(size_t size) {
+    return calloc(1, size == 0 ? 1 : size);
+  }
 };
 
 /**
@@ -59,7 +85,7 @@ class Allocator {
 class AllocatorExt : public Allocator {
   void* do_allocate(int size) {
     void* result = nullptr;
-    if (size==0) size = 1;
+    if (size == 0) size = 1;
 #ifdef ESP32
     result = ps_malloc(size);
 #endif
@@ -86,7 +112,7 @@ class AllocatorExt : public Allocator {
 
 class AllocatorPSRAM : public Allocator {
   void* do_allocate(int size) {
-    if (size==0) size = 1;
+    if (size == 0) size = 1;
     void* result = nullptr;
     result = ps_calloc(1, size);
     if (result == nullptr) {
