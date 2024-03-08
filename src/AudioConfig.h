@@ -740,6 +740,10 @@ typedef WiFiClient WiFiClientSecure;
 #  define USE_SERVER_ACCEPT false
 #endif
 
+#ifndef USE_ALLOCATOR
+#  define USE_ALLOCATOR false
+#endif
+
 // select int24 implementation
 #include "AudioBasic/Int24_3bytes_t.h"
 #include "AudioBasic/Int24_4bytes_t.h"
