@@ -148,7 +148,7 @@ class Vector {
     clear();
     shrink_to_fit();
 #if USE_ALLOCATOR
-    p_allocator->deleteArray<T>(p_data, size());  // delete [] this->p_data;
+    p_allocator->removeArray<T>(p_data, size());  // delete [] this->p_data;
 #else
     delete[] this->p_data;
 #endif
@@ -311,7 +311,7 @@ class Vector {
           cleanup(oldData, newSize, oldBufferLen);
         }
 #ifdef USE_ALLOCATOR
-        p_allocator->free(oldData);  // delete [] oldData;
+        p_allocator->removeArray(oldData, oldBufferLen);  // delete [] oldData;
 #else
         delete[] oldData;
 #endif

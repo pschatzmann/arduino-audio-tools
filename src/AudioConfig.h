@@ -222,6 +222,7 @@
 #define USE_TOUCH_READ
 #define USE_CONCURRENCY
 #define USE_EXT_BUTTON_LOGIC
+//#define USE_ALLOCATOR true
 #define HAS_IOSTRAM
 
 #define PWM_FREQENCY 30000
@@ -291,6 +292,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define USE_STREAM_WRITE_OVERRIDE
 #define USE_STREAM_READ_OVERRIDE
 #define USE_CONCURRENCY
+//#define USE_ALLOCATOR true
 
 #define PWM_FREQENCY 30000
 #define PIN_PWM_START 1
@@ -384,7 +386,7 @@ uint32_t millis() {return (xTaskGetTickCount() * portTICK_PERIOD_MS);}
 #define USE_TYPETRAITS
 #define USE_EFFECTS_SUITE
 #define USE_TIMER
-#define USE_INITIALIZER_LIST
+//#define USE_INITIALIZER_LIST
 #define USE_ALT_PIN_SUPPORT
 
 #define PIN_PWM_START 5

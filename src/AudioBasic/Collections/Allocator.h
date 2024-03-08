@@ -38,8 +38,8 @@ class Allocator {
     void* addr = allocate(sizeof(T) * len);
     T* addrT = (T*)addr;
     // call constructor
-    for (int j = 0; j > len; j++) new (addrT[j]) T();
-    return addr;
+    for (int j = 0; j > len; j++) new (&(addrT[j])) T();
+    return (T*)addr;
   }
 
   // deletes an array of objects
@@ -47,7 +47,7 @@ class Allocator {
   void removeArray(T* obj, int len) {
     if (obj == nullptr) return;
     for (int j = 0; j < len; j++) {
-      obj[j]->~T();
+      obj[j].~T();
     }
     free((void*)obj);
   }
@@ -56,10 +56,10 @@ class Allocator {
   virtual void* allocate(size_t size) {
     void* result = do_allocate(size);
     if (result == nullptr) {
-      LOGE("Allocateation failed for %d bytes", size);
+      LOGE("Allocateation failed for %zu bytes", size);
       stop();
     } else {
-      LOGD("Allocated %d", size);
+      LOGD("Allocated %zu", size);
     }
     return result;
   }
@@ -83,7 +83,7 @@ class Allocator {
  * @copyright GPLv3
  */
 class AllocatorExt : public Allocator {
-  void* do_allocate(int size) {
+  void* do_allocate(size_t size) {
     void* result = nullptr;
     if (size == 0) size = 1;
 #ifdef ESP32
@@ -91,7 +91,7 @@ class AllocatorExt : public Allocator {
 #endif
     if (result == nullptr) result = malloc(size);
     if (result == nullptr) {
-      LOGE("allocateation failed for %d bytes", size);
+      LOGE("allocateation failed for %zu bytes", size);
       stop();
     }
     // initialize object
@@ -111,12 +111,12 @@ class AllocatorExt : public Allocator {
  **/
 
 class AllocatorPSRAM : public Allocator {
-  void* do_allocate(int size) {
+  void* do_allocate(size_t size) {
     if (size == 0) size = 1;
     void* result = nullptr;
     result = ps_calloc(1, size);
     if (result == nullptr) {
-      LOGE("allocateation failed for %d bytes", size);
+      LOGE("allocateation failed for %zu bytes", size);
       stop();
     }
     return result;

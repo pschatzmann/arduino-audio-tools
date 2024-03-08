@@ -21,7 +21,8 @@ namespace audio_tools {
  */
 
 class StrExt : public Str {
- public:
+
+public:
   StrExt() = default;
 
   StrExt(int initialAllocatedLength) : Str() {
@@ -30,6 +31,8 @@ class StrExt : public Str {
   }
 
   StrExt(Str &source) : Str() { set(source); }
+
+  StrExt(StrExt &source) : Str() { set(source); }
 
   StrExt(const char *str) : Str() {
     if (str != nullptr) {
@@ -41,6 +44,23 @@ class StrExt : public Str {
       }
     }
   }
+
+  // move constructor
+  StrExt(StrExt &&obj) = default;
+
+  // move assignment
+  StrExt &operator=(StrExt &&obj) {
+    set(obj.c_str());
+    return *this;
+  }
+
+  // copy assingment
+  StrExt &operator=(StrExt &obj) {
+    set(obj.c_str());
+    return *this;
+  };
+
+  ~StrExt() {}
 
   bool isOnHeap() override { return true; }
 
@@ -111,7 +131,7 @@ class StrExt : public Str {
     this->len = strlen(temp);
   }
 
-  /// decodes a url encoded string
+  /// decodes a url encoded string 
   void urlDecode() {
     char szTemp[2];
     size_t i = 0;
@@ -135,7 +155,7 @@ class StrExt : public Str {
     this->len = result_idx;
   }
 
- protected:
+protected:
   Vector<char> vector;
 
   bool grow(int newMaxLen) {
@@ -181,11 +201,11 @@ class StrExt : public Str {
   char strToBin(char *pString) {
     char szBuffer[2];
     char ch;
-    szBuffer[0] = charToInt(pString[0]);    // make the B to 11 -- 00001011
-    szBuffer[1] = charToInt(pString[1]);    // make the 0 to 0 -- 00000000
-    ch = (szBuffer[0] << 4) | szBuffer[1];  // to change the BO to 10110000
+    szBuffer[0] = charToInt(pString[0]);   // make the B to 11 -- 00001011
+    szBuffer[1] = charToInt(pString[1]);   // make the 0 to 0 -- 00000000
+    ch = (szBuffer[0] << 4) | szBuffer[1]; // to change the BO to 10110000
     return ch;
   }
 };
 
-}  // namespace audio_tools
+} // namespace audio_tools
