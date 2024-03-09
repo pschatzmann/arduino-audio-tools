@@ -11,15 +11,15 @@ enum ID3TypeSelection { SELECT_ID3V1=0b001, SELECT_ID3V2=0b010, SELECT_ID3=0b011
 enum MetaDataType { Title, Artist, Album, Genre, Name, Description };
 
 // Description for meta info 
-INLINE_VAR const char* MetaDataTypeStr[] = {"Title", "Artist", "Album", "Genre","Name", "Description"};
+static const char* MetaDataTypeStr[] = {"Title", "Artist", "Album", "Genre","Name", "Description"};
 
 /// Converts the MetaDataType to a string @ingroup metadata
-INLINE_VAR const char *toStr(MetaDataType t){
+static const char *toStr(MetaDataType t){
     return MetaDataTypeStr[t];
 }
 
 /// unfortunatly strnlen or strnlen_s is not available in all implementations
-INLINE_VAR size_t strnlength (const char* s, size_t n)  { 
+static size_t strnlength (const char* s, size_t n)  { 
     size_t i;
     for (i = 0; i < n && s[i] != '\0'; i++)
         continue;

@@ -30,7 +30,7 @@ struct Nano_BLE_freq_info {
   float freq; // in mhz
 };
 
-INLINE_VAR const Nano_BLE_freq_info freq_table[] = {
+static const Nano_BLE_freq_info freq_table[] = {
   { I2S_CONFIG_MCKFREQ_MCKFREQ_32MDIV8, 32.0 / 8 },
   { I2S_CONFIG_MCKFREQ_MCKFREQ_32MDIV10, 32 / 10  },
   { I2S_CONFIG_MCKFREQ_MCKFREQ_32MDIV11, 32.0 / 11 },
@@ -54,7 +54,7 @@ struct Nano_BLE_ratio_info {
   float ratio;
 };
 
-INLINE_VAR const Nano_BLE_ratio_info ratio_table[] = {
+static const Nano_BLE_ratio_info ratio_table[] = {
   { I2S_CONFIG_RATIO_RATIO_32X, 32.0  },
   { I2S_CONFIG_RATIO_RATIO_48X, 48.0  },
   { I2S_CONFIG_RATIO_RATIO_64X, 64.0 },

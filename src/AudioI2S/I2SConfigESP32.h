@@ -22,7 +22,7 @@ enum I2SSignalType {
   PDM,
 };
 
-INLINE_VAR const char* i2s_signal_types[] = {"Digital","Analog","PDM","TDM"};
+static const char* i2s_signal_types[] = {"Digital","Analog","PDM","TDM"};
 
 /**
  * @brief Configuration for ESP32 legacy i2s 
