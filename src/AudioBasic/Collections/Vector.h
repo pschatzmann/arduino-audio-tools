@@ -147,11 +147,7 @@ class Vector {
   virtual ~Vector() {
     clear();
     shrink_to_fit();
-#if USE_ALLOCATOR
-    p_allocator->removeArray<T>(p_data, size());  // delete [] this->p_data;
-#else
-    delete[] this->p_data;
-#endif
+    deleteArray(p_data, size());  // delete [] this->p_data;
     p_data = nullptr;
   }
 
@@ -296,11 +292,7 @@ class Vector {
     if (newSize > bufferLen || this->p_data == nullptr || shrink) {
       T *oldData = p_data;
       int oldBufferLen = this->bufferLen;
-#if USE_ALLOCATOR
-      p_data = p_allocator->createArray<T>(newSize+1);  // new T[newSize+1];
-#else
-      p_data = new T[newSize+1];
-#endif
+      p_data = newArray(newSize);  // new T[newSize+1];
       assert(p_data != nullptr);
       this->bufferLen = newSize;
       if (oldData != nullptr) {
@@ -310,13 +302,27 @@ class Vector {
         if (shrink) {
           cleanup(oldData, newSize, oldBufferLen);
         }
-#ifdef USE_ALLOCATOR
-        p_allocator->removeArray(oldData, oldBufferLen);  // delete [] oldData;
-#else
-        delete[] oldData;
-#endif
+        deleteArray(oldData, oldBufferLen);  // delete [] oldData;
       }
     }
+  }
+
+  T *newArray(int newSize) {
+    T *data;
+#if USE_ALLOCATOR
+    data = p_allocator->createArray<T>(newSize);  // new T[newSize+1];
+#else
+    data = new T[newSize];
+#endif
+    return data;
+  }
+
+  void deleteArray(T *oldData, int oldBufferLen) {
+#ifdef USE_ALLOCATOR
+    p_allocator->removeArray(oldData, oldBufferLen);  // delete [] oldData;
+#else
+    delete[] oldData;
+#endif
   }
 
   void cleanup(T *data, int from, int to) {
