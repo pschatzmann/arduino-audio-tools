@@ -72,10 +72,6 @@
 #  define CHECK_MEMORY() 
 #endif
 
-// Change USE_INLINE_VARS to 1 if inline variables are supported
-#ifndef USE_INLINE_VARS
-#  define USE_INLINE_VARS 0
-#endif
 
 /**
  * @brief Common Default Settings that can usually be changed in the API
@@ -723,11 +719,6 @@ typedef WiFiClient WiFiClientSecure;
 #  define USE_INT24_FROM_INT
 #endif
 
-#if USE_INLINE_VARS && !defined(INGNORE_INLINE_VARS)
-#  define INLINE_VAR inline 
-#else
-#  define INLINE_VAR static 
-#endif
 
 #ifndef ANALOG_MAX_SAMPLE_RATE
 #  define ANALOG_MAX_SAMPLE_RATE 44000
