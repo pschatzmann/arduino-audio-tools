@@ -9,9 +9,9 @@
 
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 
-AudioKitStream kit; // Access I2S as stream
+AudioBoardStream kit(AudioKitEs8388V1); // Access I2S as stream
 StreamCopy copier(kit, kit); // copy kit to kit
 
 // Arduino Setup
@@ -21,7 +21,7 @@ void setup(void) {
     
     auto cfg = kit.defaultConfig(RXTX_MODE);
     cfg.sd_active = false;
-    cfg.input_device = AUDIO_HAL_ADC_INPUT_LINE2;
+    cfg.input_device = ADC_INPUT_LINE2;
     kit.begin(cfg);
 }
 

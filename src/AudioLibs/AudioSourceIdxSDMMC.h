@@ -26,14 +26,14 @@ namespace audio_tools {
  *    D1       4
  *
  *  On the AI Thinker boards the pin settings should be On, On, On, On, On,
- *
+ * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioSourceSDMMC : public AudioSource {
+class AudioSourceIdxSDMMC : public AudioSource {
 public:
   /// Default constructor
-  AudioSourceSDMMC(const char *startFilePath = "/", const char *ext = ".mp3", bool setupIndex=true) {
+  AudioSourceIdxSDMMC(const char *startFilePath = "/", const char *ext = ".mp3", bool setupIndex=true) {
     start_path = startFilePath;
     exension = ext;
     setup_index = setupIndex;
@@ -41,7 +41,6 @@ public:
 
   virtual void begin() override {
     TRACED();
-    static bool is_sd_setup = false;
     if (!is_sd_setup) {
       if (!SD_MMC.begin("/sdcard", true)) {
         LOGE("SD_MMC.begin failed");
@@ -51,6 +50,11 @@ public:
     }
     idx.begin(start_path, exension, file_name_pattern, setup_index);
     idx_pos = 0;
+  }
+
+  void end() {
+    SD_MMC.end();
+    is_sd_setup = false;
   }
 
   virtual Stream *nextStream(int offset = 1) override {
@@ -92,6 +96,9 @@ public:
   /// Allows to "correct" the start path if not defined in the constructor
   virtual void setPath(const char *p) { start_path = p; }
 
+  /// Provides the number of files (The max index is size()-1)
+  long size() { return idx.size();}
+
 protected:
   SDIndex<fs::SDMMCFS,fs::File> idx{SD_MMC};
   File file;
@@ -101,6 +108,7 @@ protected:
   const char *start_path = nullptr;
   const char *file_name_pattern = "*";
   bool setup_index = true;
+  bool is_sd_setup = false;
 };
 
 } // namespace audio_tools

@@ -1,9 +1,6 @@
 #pragma once
 
 #include "AudioConfig.h"
-#ifndef USE_UTF8_LONG_NAMES
-#define USE_UTF8_LONG_NAMES 1
-#endif  // USE_UTF8_LONG_NAMES
 
 #include <SPI.h>
 #include <SdFat.h>
@@ -15,7 +12,6 @@
 #include "AudioLibs/SDIndex.h"
 
 
-
 // SD_FAT_TYPE = 0 for SdFat/File as defined in SdFatConfig.h,
 // 1 for FAT16/FAT32, 2 for exFAT, 3 for FAT16/FAT32 and exFAT.
 #ifndef SD_FAT_TYPE
@@ -23,12 +19,6 @@
 #endif
 // Try max SPI clock for an SD. Reduce SPI_CLOCK if errors occur. (40?)
 #define SPI_CLOCK SD_SCK_MHZ(50)
-
-#if defined(ARDUINO_ARCH_RP2040) && !defined(PICO)
-    // only RP2040 from Earle Phil Hower is using the library with a sdfat namespace
-    typedef sdfat::SdSpiConfig SdSpiConfig;
-    typedef sdfat::SdFs AudioFs;
-#else
 #if SD_FAT_TYPE == 0
 	typedef SdFat AudioFs;
 	typedef File AudioFile;
@@ -41,8 +31,6 @@
 #elif SD_FAT_TYPE == 3
 	typedef SdFs AudioFs;
 	typedef FsFile AudioFile;
-#else  // SD_FAT_TYPE
-#endif
 #endif
 
 
@@ -50,15 +38,15 @@ namespace audio_tools {
 /**
  * @brief ESP32 AudioSource for AudioPlayer using an SD card as data source.
  * This class is based on the Arduino SD implementation
- * Connect the SD card to the following pins:
- * *
+ * For UTF8 Support change SdFatConfig.h #define USE_UTF8_LONG_NAMES 1
+ * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioSourceSDFAT : public AudioSource {
+class AudioSourceIdxSDFAT : public AudioSource {
 public:
   /// Default constructor
-  AudioSourceSDFAT(const char* startFilePath = "/", const char* ext = ".mp3", int chipSelect = PIN_CS, int speedMHz = 2, bool setupIndex=true) {
+  AudioSourceIdxSDFAT(const char* startFilePath = "/", const char* ext = ".mp3", int chipSelect = PIN_CS, int speedMHz = 10, bool setupIndex=true) {
         TRACED();
         LOGI("SD chipSelect: %d", chipSelect);
         LOGI("SD speedMHz: %d", speedMHz);
@@ -83,7 +71,6 @@ public:
 
   virtual void begin() override {
     TRACED();
-    static bool is_sd_setup = false;
     if (!is_sd_setup) {
         if (!sd.begin(*p_cfg)) {
           LOGE("sd.begin failed");
@@ -93,6 +80,13 @@ public:
     }
     idx.begin(start_path, exension, file_name_pattern, setup_index);
     idx_pos = 0;
+  }
+
+  void end() {
+  #ifdef ESP32
+    sd.end();
+  #endif
+    is_sd_setup = false;
   }
 
   virtual Stream *nextStream(int offset = 1) override {
@@ -139,6 +133,9 @@ public:
   /// Allows to "correct" the start path if not defined in the constructor
   virtual void setPath(const char *p) { start_path = p; }
 
+  /// Provides the number of files (The max index is size()-1)
+  long size() { return idx.size();}
+
 protected:
   SdSpiConfig *p_cfg = nullptr;
   AudioFs sd;
@@ -150,6 +147,7 @@ protected:
   const char *start_path = nullptr;
   const char *file_name_pattern = "*";
   bool setup_index = true;
+  bool is_sd_setup = false;
   int cs;
   bool owns_cfg=false;
 
@@ -158,7 +156,6 @@ protected:
        file.getName(name,MAX_FILE_LEN);
        return name;
   }
-
 
 };
 

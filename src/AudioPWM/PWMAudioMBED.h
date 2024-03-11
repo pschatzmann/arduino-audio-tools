@@ -1,29 +1,33 @@
 
 #pragma once
-#if defined(__arm__)  && __has_include("mbed.h") && !defined(ARDUINO_ARCH_MBED_RP2040)
+#if defined(ARDUINO_ARCH_MBED)
 #include "AudioPWM/PWMAudioBase.h"
 #include "AudioTimer/AudioTimer.h"
 #include "mbed.h"
 
+
 namespace audio_tools {
 
 // forward declaration
-class PWMAudioStreamMBED;
-typedef PWMAudioStreamMBED PWMAudioStream;
+class PWMDriverMBED;
+/**
+ * @typedef  DriverPWMBase
+ * @brief Please use DriverPWMBase!
+ */
+using PWMDriver = PWMDriverMBED;
 
 /**
  * @brief Audio output to PWM pins for MBED based Arduino implementations
+ * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 
-class PWMAudioStreamMBED : public PWMAudioStreamBase {
+class PWMDriverMBED : public DriverPWMBase {
 
     public:
 
-        PWMAudioStreamMBED(){
-            LOGD("PWMAudioStreamMBED");
-        }
+        PWMDriverMBED() = default;
 
         // Ends the output
         virtual void end() override {
@@ -80,6 +84,7 @@ class PWMAudioStreamMBED : public PWMAudioStreamBase {
         virtual void setupTimer() {
         } 
 
+        /// Maximum supported channels
         virtual int maxChannels() {
             return 16;
         };
@@ -96,8 +101,8 @@ class PWMAudioStreamMBED : public PWMAudioStreamBase {
         }
 
         /// timer callback: write the next frame to the pins
-        static inline void  defaultPWMAudioOutputCallback(void *obj) {
-            PWMAudioStreamMBED* accessAudioPWM = (PWMAudioStreamMBED*) obj;
+        static void  defaultPWMAudioOutputCallback(void *obj) {
+            PWMDriverMBED* accessAudioPWM = (PWMDriverMBED*) obj;
             if (accessAudioPWM!=nullptr){
                 accessAudioPWM->playNextFrame();
             }

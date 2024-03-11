@@ -8,7 +8,7 @@
 
 #include "AudioTools.h"
 #include "AudioCodecs/CodecMP3Helix.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 
 const char *urls[] = {
   "http://stream.srg-ssr.ch/m/rsj/mp3_128",
@@ -22,7 +22,7 @@ const char *password = "password";
 
 ICYStream urlStream(wifi, password);
 AudioSourceURL source(urlStream, urls, "audio/mp3");
-AudioKitStream kit;
+AudioBoardStream kit(AudioKitEs8388V1);
 MP3DecoderHelix decoder;
 AudioPlayer player(source, kit, decoder);
 
@@ -53,8 +53,8 @@ void setup() {
   kit.begin(cfg);
 
   // setup navigation
-  kit.addAction(PIN_KEY4, next);
-  kit.addAction(PIN_KEY3, previous);
+  kit.addAction(kit.getKey(4), next);
+  kit.addAction(kit.getKey(3), previous);
 
   // setup player
   player.setVolume(0.7);

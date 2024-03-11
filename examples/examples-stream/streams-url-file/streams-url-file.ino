@@ -40,11 +40,14 @@ void setup(void) {
     }
 
     // open music stream
-    url.begin("https://pschatzmann.github.io/arduino-audio-tools/resources/audio-8000.raw");
+    url.begin("https://pschatzmann.github.io/Resources/audio/audio-8000.raw");
 
     // copy file
     file = SD.open("/audio-8000.raw", FILE_WRITE);
-    file.seek(0); // overwirte from beginning
+    // overwirte from beginning
+    file.seek(0); 
+    // File returns avaiableForWrite() = 0, we we need to deactivate this check
+    copier.setCheckAvailableForWrite(false);
     copier.begin(file, url);
     copier.copyAll();
     file.close();

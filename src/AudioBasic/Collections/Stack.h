@@ -5,6 +5,7 @@ namespace audio_tools {
 
 /**
  * @brief LIFO Stack which is based on a List
+ * @ingroup collections
  * @author Phil Schatzmann
  * @copyright GPLv3
  * @tparam T 
@@ -23,8 +24,8 @@ class Stack {
         }
 
         bool peek(T& data){
-            if (l.end()->prior==nullptr) return false;
-            data = *(l.end()->prior);
+            if (size()==0) return false;
+            data = *(--l.end());
             return true;
         }
 
@@ -39,6 +40,11 @@ class Stack {
         bool empty() {
             return l.empty();
         }
+
+        void setAllocator(Allocator &allocator){
+            l.setAllocator(allocator);
+        }
+
     protected:
         List<T> l;
 };

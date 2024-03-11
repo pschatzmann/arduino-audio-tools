@@ -15,7 +15,7 @@
 #include "espeak.h"
 
 I2SStream i2s; // or replace with any other audio sink
-ESpeakPROGMEM espeak(i2s);
+ESpeak espeak(i2s);
 
 void setup() {
   Serial.begin(115200);

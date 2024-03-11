@@ -11,17 +11,17 @@
 #include "SD_MMC.h"
 #include "AudioTools.h"
 #include "AudioLibs/AudioSTK.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 
 
 STKStream<Instrmnt> in;
-AudioKitStream out;
+AudioBoardStream out(AudioKitEs8388V1);
 StreamCopy copier(out, in);
 MusicalNotes notes;
 Instrmnt* p_instrument=nullptr; // instrument depends on file system
 
 float note_amplitude = 0.5;
-static uint16_t notes_array[] = { // frequencies aleatoric C-scale
+static float notes_array[] = { // frequencies aleatoric C-scale
     N_C3, N_D3, N_E3, N_F3, N_G3, N_A3, N_B3,
     N_C4, N_D4, N_E4, N_F4, N_G4, N_A4, N_B4,
     N_C5, N_D5, N_E5, N_F5, N_G5, N_A5, N_B5
@@ -35,7 +35,7 @@ void play() {
   if (millis()>timeout){
     if (active){
       // play note for 800 ms
-      freq = notes_array[random(sizeof(notes_array)/sizeof(uint16_t))];
+      freq = notes_array[random(sizeof(notes_array)/sizeof(float))];
 
       Serial.print("playing ");
       Serial.println(freq);

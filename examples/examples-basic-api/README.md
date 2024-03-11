@@ -1,2 +1,3 @@
+# Basic API
 
-Just some examples using the basic API. Though this continues to work, we recommend that you use the Stream API because it is easier to use...
+Using the A2DP Callback directly is usually much more efficient then the A2DPStream which set up an additional buffer

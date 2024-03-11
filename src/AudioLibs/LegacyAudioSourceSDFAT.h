@@ -48,7 +48,7 @@ namespace audio_tools {
 class AudioSourceSDFAT : public AudioSource {
 public:
     /// Default constructor
-    AudioSourceSDFAT(const char* startFilePath = "/", const char* ext = ".mp3", int chipSelect = PIN_CS, int speedMHz = 2) {
+    AudioSourceSDFAT(const char* startFilePath = "/", const char* ext = ".mp3", int chipSelect = PIN_CS, int speedMHz = 10) {
         TRACED();
         LOGI("SD chipSelect: %d", chipSelect);
         LOGI("SD speedMHz: %d", speedMHz);

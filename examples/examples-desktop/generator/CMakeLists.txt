@@ -6,7 +6,6 @@ set (CMAKE_CXX_STANDARD 11)
 set (DCMAKE_CXX_FLAGS "-Werror")
 
 include(FetchContent)
-option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
 
 # Build with arduino-audio-tools
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
@@ -21,9 +20,6 @@ add_executable (generator generator.ino)
 target_compile_definitions(arduino_emulator PUBLIC -DDEFINE_MAIN)
 target_compile_definitions(generator PUBLIC -DARDUINO -DIS_DESKTOP -DEXIT_ON_STOP)
 
-# OS/X might need this setting for core audio
-target_compile_options(portaudio PRIVATE -Wno-deprecated)
-
 # specify libraries
-target_link_libraries(generator portaudio_static arduino_emulator arduino-audio-tools)
+target_link_libraries(generator portaudio arduino_emulator arduino-audio-tools)
 

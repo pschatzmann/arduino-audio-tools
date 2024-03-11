@@ -10,24 +10,26 @@
 
 #include "AudioCodecs/AudioEncoded.h"
 #include "AudioTools/Buffers.h"
+#include "AudioBasic/Net.h"
 #include "flac.h"
 
 #ifndef FLAC_READ_TIMEOUT_MS
 #define FLAC_READ_TIMEOUT_MS 10000
 #endif
 
-
 #ifndef FLAC_BUFFER_SIZE
 #define FLAC_BUFFER_SIZE (8 * 1024)
 #endif
+
 
 namespace audio_tools {
 
 /**
  * @brief Decoder for FLAC. Depends on https://github.com/pschatzmann/arduino-libflac. We support an efficient streaming API and an very memory intensitiv standard interface. So 
- * you should prefer the streaming interface where you call setOutputStream() before the begin and copy() in the loop.
+ * you should prefer the streaming interface where you call setOutput() before the begin and copy() in the loop.
  * Validated with http://www.2l.no/hires/
- * 
+ * @ingroup codecs
+ * @ingroup decoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -46,15 +48,15 @@ class FLACDecoder : public StreamingDecoder {
     is_ogg = isOgg;
   }
 
-  AudioBaseInfo audioInfo() { 
-    AudioBaseInfo info;
+  AudioInfo audioInfo() { 
+    AudioInfo info;
     info.sample_rate = FLAC__stream_decoder_get_sample_rate(decoder);
     info.channels = FLAC__stream_decoder_get_channels(decoder);
     info.bits_per_sample = 16; // only 16 is supported
     return info;
   }
 
-  void begin() {
+  bool begin() {
     TRACEI();
     is_active = true;
 
@@ -62,7 +64,7 @@ class FLACDecoder : public StreamingDecoder {
       if ((decoder = FLAC__stream_decoder_new()) == NULL) {
         LOGE("ERROR: allocating decoder");
         is_active = false;
-        return;
+        return false;
       }
     }
     LOGI("FLAC__stream_decoder_new");
@@ -78,9 +80,10 @@ class FLACDecoder : public StreamingDecoder {
     if (init_status != FLAC__STREAM_DECODER_INIT_STATUS_OK) {
       LOGE("ERROR: initializing decoder: %s", FLAC__StreamDecoderInitStatusString[init_status]);
       is_active = false;
-      return;
+      return false;
     }
-    LOGI("FLAC__stream_decoder_init_stream");
+    LOGI("FLAC is open");
+    return true;
   }
 
   void end() {
@@ -95,24 +98,13 @@ class FLACDecoder : public StreamingDecoder {
     while(FLAC__stream_decoder_process_single(decoder));
   }
 
-  void setNotifyAudioChange(AudioBaseInfoDependent &bi) {
-    p_notify = &bi;
-  }
-
-  /// Stream Interfce: Decode directly by taking data from the stream. This is more efficient
-  /// then feeding the decoder with write: just call copy() in the loop
-  void setInputStream(Stream &input) {
-    p_input = &input;
-  }
-
-  virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
 
   operator bool() { return is_active; }
 
 
   /// Stream Interface: Process a single frame - only relevant when input stream has been defined
   bool copy() {
-    LOGI("copy");
+    LOGD("copy");
     if (!is_active) {
       LOGE("not active");
       return false;
@@ -131,12 +123,9 @@ class FLACDecoder : public StreamingDecoder {
  protected:
   bool is_active = false;
   bool is_ogg = false;
-  AudioBaseInfo info;
-  AudioBaseInfoDependent *p_notify = nullptr;
+  AudioInfo info;
   FLAC__StreamDecoder *decoder = nullptr;
   FLAC__StreamDecoderInitStatus init_status;
-  Print *p_print = nullptr;
-  Stream *p_input = nullptr;
   uint64_t time_last_read = 0;
   uint64_t read_timeout_ms = FLAC_READ_TIMEOUT_MS;
 
@@ -158,7 +147,7 @@ class FLACDecoder : public StreamingDecoder {
   /// Callback which reads from stream
   static FLAC__StreamDecoderReadStatus read_callback(const FLAC__StreamDecoder *decoder, FLAC__byte result_buffer[],size_t *bytes, void *client_data) {
     FLAC__StreamDecoderReadStatus result = FLAC__STREAM_DECODER_READ_STATUS_CONTINUE;
-    LOGI("read_callback: %d", *bytes);
+    LOGD("read_callback: %d", (int) *bytes);
     FLACDecoder *self = (FLACDecoder *)client_data;
     if (self == nullptr || !self->is_active) {
       return FLAC__STREAM_DECODER_READ_STATUS_ABORT;
@@ -166,7 +155,7 @@ class FLACDecoder : public StreamingDecoder {
 
     // get data directly from stream
     *bytes = self->readBytes(result_buffer, *bytes);
-    LOGD("-> %d", *bytes);
+    LOGD("-> %d", (int) *bytes);
     if (self->isEof(*bytes)){
         result = FLAC__STREAM_DECODER_READ_STATUS_END_OF_STREAM;
         self->is_active = false;
@@ -188,12 +177,12 @@ class FLACDecoder : public StreamingDecoder {
       return result;
   }
 
-  /// Output decoded result to final output stream
+    /// Output decoded result to final output stream
   static FLAC__StreamDecoderWriteStatus write_callback(const FLAC__StreamDecoder *decoder, const FLAC__Frame *frame,const FLAC__int32 *const buffer[], void *client_data) {
-    LOGI("write_callback: %d", frame->header.blocksize);
+    LOGD("write_callback: %u", (unsigned)frame->header.blocksize);
     FLACDecoder *self = (FLACDecoder *)client_data;
 
-    AudioBaseInfo actual_info = self->audioInfo();
+    AudioInfo actual_info = self->audioInfo();
     if (self->info != actual_info){
       self->info = actual_info;
       self->info.logInfo();
@@ -201,50 +190,46 @@ class FLACDecoder : public StreamingDecoder {
       if (bps!=16){
         LOGI("Converting from %d bits", bps);
       }
-      if (self->p_notify != nullptr) {
-        self->info = actual_info;
-        self->p_notify->setAudioInfo(self->info);
-      }
+      self->info = actual_info;
+      self->notifyAudioChange(self->info);
     }
 
     // write audio data
     int bps = FLAC__stream_decoder_get_bits_per_sample(decoder);
-    int16_t sample;
+    int16_t result_frame[actual_info.channels];
+
     switch(bps){
       case 8:
         for (int j = 0; j < frame->header.blocksize; j++) {
           for (int i = 0; i < actual_info.channels; i++) {
             //self->output_buffer[j*actual_info.channels + i] = buffer[i][j]<<8;
-            sample = buffer[i][j]<<8;;
-            self->p_print->write((uint8_t *)&sample,2);
+            result_frame[i] = buffer[i][j]<<8;
           }
+          self->p_print->write((uint8_t *)result_frame, sizeof(result_frame));
         }
         break;
       case 16:
         for (int j = 0; j < frame->header.blocksize; j++) {
           for (int i = 0; i < actual_info.channels; i++) {
-            //self->output_buffer[j*actual_info.channels + i] = buffer[i][j];
-            sample = buffer[i][j];
-            self->p_print->write((uint8_t *)&sample,2);
+            result_frame[i] = buffer[i][j];
           }
+          self->p_print->write((uint8_t *)result_frame, sizeof(result_frame));
         }
         break;
       case 24:
         for (int j = 0; j < frame->header.blocksize; j++) {
           for (int i = 0; i < actual_info.channels; i++) {
-            //self->output_buffer[j*actual_info.channels + i] = buffer[i][j]>>8;
-            sample = buffer[i][j] >>8;
-            self->p_print->write((uint8_t *)&sample,2);
+            result_frame[i]  = buffer[i][j] >> 8;
           }
+          self->p_print->write((uint8_t *)result_frame, sizeof(result_frame));
         }
         break;
       case 32:
         for (int j = 0; j < frame->header.blocksize; j++) {
           for (int i = 0; i < actual_info.channels; i++) {
-             //self->output_buffer[j*actual_info.channels+ i] = buffer[i][j]>>16;           
-            sample = buffer[i][j] >>16;
-            self->p_print->write((uint8_t *)&sample,2);
+            result_frame[i] = buffer[i][j] >> 16;
           }
+          self->p_print->write((uint8_t *)result_frame, sizeof(result_frame));
         }
         break;
       default:
@@ -253,14 +238,13 @@ class FLACDecoder : public StreamingDecoder {
   
     return FLAC__STREAM_DECODER_WRITE_STATUS_CONTINUE;
   }
-
 };
-
 
 
 /**
  * @brief FLACEncoder
- *
+ * @ingroup codecs
+ * @ingroup encoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -288,31 +272,26 @@ class FLACEncoder : public AudioEncoder {
   int compressionLevel() {return flac_compression_level;}
 
   /// Defines the output Stream
-  void setOutputStream(Print &out_stream) override { p_print = &out_stream; }
+  void setOutput(Print &out_stream) override { p_print = &out_stream; }
 
   /// Provides "audio/pcm"
   const char *mime() override { return "audio/flac"; }
 
   /// We update the audio information which will be used in the begin method
-  virtual void setAudioInfo(AudioBaseInfo from) override { 
+  virtual void setAudioInfo(AudioInfo from) override { 
     cfg = from; 
     cfg.logInfo(); 
   }
 
-  virtual void begin(AudioBaseInfo from) {
-    setAudioInfo(from);
-    begin();
-  }
-
   /// starts the processing using the actual AudioInfo
-  virtual void begin() override {
+  virtual bool begin() override {
     TRACED();
     is_open = false;
     if (p_encoder==nullptr){
       p_encoder = FLAC__stream_encoder_new();
       if (p_encoder==nullptr){
         LOGE("FLAC__stream_encoder_new");
-        return;
+        return false;
       }
     }
 
@@ -334,15 +313,16 @@ class FLACEncoder : public AudioEncoder {
       if (status==FLAC__STREAM_ENCODER_INIT_STATUS_ENCODER_ERROR){
         LOGE(" -> %s", FLAC__StreamEncoderStateString[FLAC__stream_encoder_get_state(p_encoder)]);
       }
-      return;
+      return false;
     }
     is_open = true;
+    return true;
   }
 
   /// starts the processing
-  void begin(Print &out) {
+  bool begin(Print &out) {
     p_print = &out;
-    begin();
+    return begin();
   }
 
   /// stops the processing
@@ -356,7 +336,7 @@ class FLACEncoder : public AudioEncoder {
   /// Writes FLAC Packet
   virtual size_t write(const void *in_ptr, size_t in_size) override {
     if (!is_open || p_print == nullptr) return 0;
-    LOGD("write: %u", in_size);
+    LOGD("write: %zu", in_size);
     size_t result = 0;
     int samples=0;
     int frames=0;
@@ -369,6 +349,7 @@ class FLACEncoder : public AudioEncoder {
         data = buffer.data();
         break;
 
+      case 24:
       case 32:
         samples = in_size / sizeof(int32_t);
         frames = samples / cfg.channels;
@@ -376,7 +357,7 @@ class FLACEncoder : public AudioEncoder {
         break;
 
       default:
-        LOGE("bits_per_sample not supported: %d", cfg.bits_per_sample);
+        LOGE("bits_per_sample not supported: %d", (int) cfg.bits_per_sample);
         break;
     }
 
@@ -396,7 +377,7 @@ class FLACEncoder : public AudioEncoder {
   bool isOpen() { return is_open; }
 
  protected:
-  AudioBaseInfo cfg;
+  AudioInfo cfg;
   Vector<FLAC__int32> buffer;
   Print *p_print = nullptr;
   FLAC__StreamEncoder *p_encoder=nullptr;
@@ -410,7 +391,7 @@ class FLACEncoder : public AudioEncoder {
     if (self->p_print!=nullptr){
       size_t written = self->p_print->write((uint8_t*)buffer, bytes);
       if (written!=bytes){
-        LOGE("write_callback %d -> %d", bytes, written);
+        LOGE("write_callback %zu -> %zu", bytes, written);
         return FLAC__STREAM_ENCODER_WRITE_STATUS_FATAL_ERROR;
       }
     }

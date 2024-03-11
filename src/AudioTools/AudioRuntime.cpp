@@ -8,7 +8,6 @@
  * @copyright Copyright (c) 2022
  * 
  */
-#include "Arduino.h"
 #include "AudioConfig.h"
 
 #if defined(ARDUINO_ARCH_RP2040) && defined(FIX_SYNC_SYNCHRONIZE)

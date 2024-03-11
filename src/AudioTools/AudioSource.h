@@ -4,6 +4,7 @@ namespace audio_tools {
 
 /**
  * @brief Abstract Audio Data Source for the AudioPlayer which is used by the Audio Players
+ * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
  *
@@ -63,6 +64,7 @@ protected:
 
 /**
  * @brief Callback Audio Data Source which is used by the Audio Players
+ * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -71,7 +73,7 @@ public:
     AudioSourceCallback() {
     }
 
-    AudioSourceCallback(Stream* (*nextStreamCallback)(), void (*onStartCallback)() = nullptr) {
+    AudioSourceCallback(Stream* (*nextStreamCallback)(int offset), void (*onStartCallback)() = nullptr) {
         TRACED();
         this->onStartCallback = onStartCallback;
         this->nextStreamCallback = nextStreamCallback;
@@ -86,12 +88,23 @@ public:
     /// Returns next (with positive index) or previous stream (with negative index)
     virtual Stream* nextStream(int offset) override {
         TRACED();
-        return nextStreamCallback == nullptr ? nullptr : nextStreamCallback();
+        return nextStreamCallback == nullptr ? nullptr : nextStreamCallback(offset);
     }
 
     /// Returns selected audio stream
     virtual Stream* selectStream(int index) override {
-        return indexStreamCallback == nullptr ? nullptr : indexStreamCallback(index);
+        LOGI("selectStream: %d", index);
+        if (indexStreamCallback==nullptr){
+            LOGI("setCallbackSelectStream not provided");
+            if (index>0) {
+                begin();
+                return nextStream(index);
+            } else {
+                // nextStream(0) will return the directory but we need a file
+                return nextStream(1);
+            }
+        }
+        return indexStreamCallback(index);
     }
     /// Returns audio stream by path
     virtual Stream* selectStream(const char* path) override {
@@ -103,7 +116,7 @@ public:
         onStartCallback = callback;
     }
 
-    void setCallbackNextStream(Stream* (*callback)()) {
+    void setCallbackNextStream(Stream* (*callback)(int offset)) {
         nextStreamCallback = callback;
     }
 
@@ -127,7 +140,7 @@ public:
 protected:
     void (*onStartCallback)() = nullptr;
     bool auto_next = true;
-    Stream* (*nextStreamCallback)() = nullptr;
+    Stream* (*nextStreamCallback)(int offset) = nullptr;
     Stream* (*indexStreamCallback)(int index) = nullptr;
     const char*path=nullptr;
 };
@@ -136,6 +149,7 @@ protected:
 
 /**
  * @brief Audio Source which provides the data via the network from an URL
+ * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -165,13 +179,13 @@ public:
             pos = 0;
             LOGI("url array out of limits: %d -> %d", idx, pos);
         }
-        if (pos >= max) {
-            pos = max-1;
+        if (pos >= size()) {
+            pos = size() - 1;
             LOGI("url array out of limits: %d -> %d", idx, pos);
         }
-        LOGI("selectStream: %d/%d -> %s", pos, max-1, urlArray[pos]);
+        LOGI("selectStream: %d/%d -> %s", pos, size() - 1, value(pos));
         if (started) actual_stream->end();
-        actual_stream->begin(urlArray[pos], mime);
+        actual_stream->begin(value(pos), mime);
         started = true;
         return actual_stream;
     }
@@ -179,20 +193,20 @@ public:
     /// Opens the next url from the array
     Stream* nextStream(int offset) override {
         pos += offset;
-        if (pos < 0 || pos >= max) {
+        if (pos < 0 || pos >= size()) {
             pos = 0;
         }
-        LOGI("nextStream: %d/%d -> %s", pos, max-1, urlArray[pos]);
+        LOGI("nextStream: %d/%d -> %s", pos, max-1, value(pos));
         return selectStream(pos);
     }
 
     /// Opens the Previous url from the array
     Stream* previousStream(int offset) override {
         pos -= offset;
-        if (pos < 0 || pos >= max) {
-            pos = max-1;
+        if (pos < 0 || pos >= size()) {
+            pos = size() - 1;
         }
-        LOGI("previousStream: %d/%d -> %s", pos, max-1, urlArray[pos]);
+        LOGI("previousStream: %d/%d -> %s", pos, size() - 1, value(pos));
         return selectStream(pos);
     }
 
@@ -210,7 +224,7 @@ public:
     }
 
     const char *toStr() {
-        return urlArray[pos];
+        return value(pos);
     }
 
     /// Sets the timeout of the URL Stream in milliseconds
@@ -237,7 +251,70 @@ protected:
     int max = 0;
     const char* mime = nullptr;
     bool started = false;
+
+    /// allow use with empty constructor in subclasses
+    AudioSourceURL() = default;
+
+    virtual const char* value(int pos){
+        return urlArray[pos];
+    }
+
+    virtual int size(){
+        return max;
+    }
+
 };
+
+/**
+ * @brief Audio Source which provides the data via the network from an URL.
+ * The URLs are stored in an Vector of dynamically allocated strings
+ * @ingroup player
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+
+class AudioSourceDynamicURL : public AudioSourceURL {
+public:
+    template<typename T, size_t N>
+    AudioSourceDynamicURL(AbstractURLStream& urlStream, T(&urlArray)[N], const char* mime, int startPos = 0) {
+        this->actual_stream = &urlStream;
+        this->mime = mime;
+        this->pos = startPos - 1;
+        this->timeout_auto_next_value = 20000;   
+        for (int j=0;j<N;j++){
+            addURL(urlArray[j]);
+        }    
+    }
+
+    AudioSourceDynamicURL(AbstractURLStream& urlStream, const char* mime, int startPos = 0) {
+        this->actual_stream = &urlStream;
+        this->mime = mime;
+        this->pos = startPos - 1;
+        this->timeout_auto_next_value = 20000;   
+    }
+
+    /// add a new url: a copy of the string will be stored on the heap
+    void addURL(const char* url){
+        url_vector.push_back(url);
+    }
+
+    void clear(){
+        url_vector.clear();
+    }
+
+protected:
+    Vector<StrExt> url_vector;
+
+    const char* value(int pos) override {
+        return url_vector[pos].c_str();
+    }
+
+    int size() override {
+        return url_vector.size();
+    }
+ 
+};
+
 
 #endif
 

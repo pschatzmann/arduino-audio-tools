@@ -1,5 +1,5 @@
 /**
- * @file communication-codec-test.ino
+ * @file test-codec-iLBC.ino
  * @author Phil Schatzmann
  * @brief generate sine wave -> encoder -> decoder -> audiokit (i2s)
  * @version 0.1
@@ -10,17 +10,26 @@
  */
 #include "AudioTools.h"
 #include "AudioCodecs/CodecILBC.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 
-uint16_t sample_rate = 8000;
-uint8_t channels = 1;  // The stream will have 2 channels
+AudioInfo info(8000, 1, 16);
 SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound( sineWave); // Stream generated from sine wave
-AudioKitStream out; 
+AudioBoardStream out(AudioKitEs8388V1);
 EncodedAudioStream decoder(&out, new ILBCDecoder()); // encode and write
 EncodedAudioStream encoder(&decoder, new ILBCEncoder()); // encode and write
 StreamCopy copier(encoder, sound);     
 
+void loop1(void*) {
+  // start decoder
+  decoder.begin(info);
+
+  // start encoder
+  encoder.begin(info);
+  while(true){
+    copier.copy();
+  }
+}
 
 void setup() {
   Serial.begin(115200);
@@ -29,28 +38,18 @@ void setup() {
   // start I2S
   Serial.println("starting I2S...");
   auto cfgi = out.defaultConfig(TX_MODE);
-  cfgi.sample_rate = sample_rate;
-  cfgi.channels = channels;
-  cfgi.bits_per_sample = 16;
+  cfgi.copyFrom(info);
   out.begin(cfgi);
 
   // Setup sine wave
-  auto cfgs = sineWave.defaultConfig();
-  cfgs.sample_rate = sample_rate;
-  cfgs.channels = channels;
-  cfgs.bits_per_sample = 16;
-  sineWave.begin(cfgs, N_B4);
+  sineWave.begin(info, N_B4);
 
-  // start decoder
-  decoder.begin();
-
-  // start encoder
-  encoder.begin(cfgs);
+  int stack = 20000;
+  xTaskCreate(loop1,"loopTask", stack, nullptr,1, nullptr);
 
   Serial.println("Test started...");
 }
 
 
 void loop() { 
-  copier.copy();
 }

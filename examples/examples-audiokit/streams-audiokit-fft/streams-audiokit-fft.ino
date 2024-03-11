@@ -1,9 +1,9 @@
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 #include "AudioLibs/AudioRealFFT.h" // or AudioKissFFT
 
-AudioKitStream kit;  // Audio source
+AudioBoardStream kit(AudioKitEs8388V1);  // Audio source
 AudioRealFFT fft; // or AudioKissFFT
 StreamCopy copier(fft, kit);  // copy mic to tfl
 int channels = 2;
@@ -13,7 +13,7 @@ float value=0;
 
 // display fft result
 void fftResult(AudioFFTBase &fft){
-    int diff;
+    float diff;
     auto result = fft.result();
     if (result.magnitude>100){
         Serial.print(result.frequency);
@@ -32,7 +32,7 @@ void setup() {
 
   // setup Audiokit
   auto cfg = kit.defaultConfig(RX_MODE);
-  cfg.input_device = AUDIO_HAL_ADC_INPUT_LINE2;
+  cfg.input_device = ADC_INPUT_LINE2;
   cfg.channels = channels;
   cfg.sample_rate = samples_per_second;
   cfg.bits_per_sample = bits_per_sample;

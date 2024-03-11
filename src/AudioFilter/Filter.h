@@ -3,10 +3,25 @@
 #ifdef USE_TYPETRAITS
 #include <type_traits>
 #endif
+
+/** 
+ * @defgroup dsp DSP
+ * @ingroup main
+ * @brief Digital Signal Processing  
+**/
+
+/** 
+ * @defgroup filter Filters
+ * @ingroup dsp
+ * @brief Digital Filters  
+**/
+
+
 namespace audio_tools {
 
 /**
  * @brief Abstract filter interface definition;
+ * @ingroup filter
  * @author pschatzmann
  */
 template <typename T>
@@ -23,8 +38,8 @@ class Filter {
 
 /**
  * @brief No change to the input
+ * @ingroup filter
  * @author pschatzmann
- *
  * @tparam T
  */
 template <typename T>
@@ -40,6 +55,7 @@ class NoFilter : Filter<T> {
  * Converted from
  * https://github.com/sebnil/FIR-filter-Arduino-Library/tree/master/src
  * You can use https://www.arc.id.au/FilterDesign.html to design the filter
+ * @ingroup filter
  * @author Pieter P tttapa  / pschatzmann
  * @copyright GNU General Public License v3.0
  */
@@ -48,12 +64,20 @@ class FIR : public Filter<T> {
   public:
     template  <size_t B>
     FIR(const T (&b)[B], const T factor=1.0) : lenB(B), factor(factor) {
+      setValues(b);
+    }
+
+    template  <size_t B>
+    void setValues(const T (&b)[B]){
+      if (x!=nullptr) delete x;
       x = new T[lenB]();
       coeff_b = new T[2*lenB-1];
       for (uint16_t i = 0; i < 2*lenB-1; i++) {
         coeff_b[i] = b[(2*lenB - 1 - i)%lenB];
       } 
+
     }
+
     ~FIR() {
       delete[] x;
       delete[] coeff_b;
@@ -83,7 +107,7 @@ class FIR : public Filter<T> {
   private:
     const uint8_t lenB;
     uint8_t i_b = 0;
-    T *x;
+    T *x = nullptr;
     T *coeff_b;
     T factor;
 };
@@ -92,6 +116,7 @@ class FIR : public Filter<T> {
 /**
  * @brief IIRFilter
  * Converted from https://github.com/tttapa/Filters/blob/master/src/IIRFilter.h
+ * @ingroup filter
  * @author Pieter P tttapa  / pschatzmann
  * @copyright GNU General Public License v3.0
  * @tparam T
@@ -170,6 +195,7 @@ class IIR : public Filter<T> {
  * @brief Biquad DF1 Filter. 
  * converted from https://github.com/tttapa/Filters/blob/master/src/BiQuad.h
  * Use float or double (and not a integer type) as type parameter
+ * @ingroup filter
  * @author Pieter P tttapa  / pschatzmann
  * @copyright GNU General Public License v3.0
  * @tparam T 
@@ -228,6 +254,7 @@ class BiQuadDF1 : public Filter<T> {
  * To prevent this, BiQuadratic filters (second order) are used.
  * Converted from https://github.com/tttapa/Filters/blob/master/src/BiQuad.h
  * Use float or double (and not a integer type) as type parameter
+ * @ingroup filter
  * @author Pieter P tttapa  / pschatzmann
  * @copyright GNU General Public License v3.0
  * @tparam T 
@@ -279,6 +306,7 @@ class BiQuadDF2 : public Filter<T> {
  * @brief Second Order Filter: Instead of manually cascading BiQuad filters, you can use a Second Order Sections filter (SOS).
  * converted from https://github.com/tttapa/Filters/blob/master/src/SOSFilter.h
  * Use float or double (and not a integer type) as type parameter
+ * @ingroup filter
  * @author Pieter P tttapa  / pschatzmann
  * @copyright GNU General Public License v3.0
  */
@@ -340,7 +368,7 @@ class SOSFilter : public Filter<T>
 
 /**
  * @brief FilterChain - A Cascade of multiple filters
- * 
+ * @ingroup filter
  * @tparam T 
  * @tparam N 
  */

@@ -9,7 +9,6 @@
  * 
  */
 #include "AudioTools.h"
-#include "AudioLibs/SynchronizedBuffer.h"
 #include "freertos-all.h"
 
 SynchronizedBufferRTOS<int16_t> buffer(1024,512);

@@ -1,20 +1,26 @@
 #pragma once
-
-#include "AudioCodecs/ContainerOgg.h"
+#include "AudioConfig.h"
 #include "AudioCodecs/AudioEncoded.h"
-#include "ivorbiscodec.h"
-#include "ivorbisfile.h"
+#include "vorbis-tremor.h"
+
+// #include "AudioCodecs/ContainerOgg.h"
+// #include "ivorbiscodec.h"
+// #include "ivorbisfile.h"
+
 
 namespace audio_tools {
 
 #ifndef VARBIS_MAX_READ_SIZE
-#define VARBIS_MAX_READ_SIZE 512
+#  define VARBIS_MAX_READ_SIZE 256
 #endif
+
+#define VORBIS_HEADER_OPEN_LIMIT 1024
 
 /**
  * @brief Vorbis Streaming Decoder using
- * https://github.com/pschatzmann/arduino-libvorbis-idec
- * https://github.com/pschatzmann/arduino-libopus.git
+ * https://github.com/pschatzmann/arduino-libvorbis-tremor
+ * @ingroup codecs
+ * @ingroup decoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -29,12 +35,8 @@ public:
     }
   }
 
-  void setNotifyAudioChange(AudioBaseInfoDependent &bi) override {
-    p_notify = &bi;
-  }
-
   /// Starts the processing
-  void begin() override {
+  bool begin() override {
     LOGI("begin");
 
     callbacks.read_func = read_func;
@@ -42,97 +44,121 @@ public:
     callbacks.close_func = close_func;
     callbacks.tell_func = tell_func;
 
-    int rc = ov_open_callbacks(this, &file, nullptr, 0, callbacks);
-
-    pcm.resize(VARBIS_MAX_READ_SIZE);
+    if (p_input->available()>=VORBIS_HEADER_OPEN_LIMIT){
+      ovOpen();
+    }
 
     active = true;
     is_first = true;
+    return true;
   }
 
   /// Releases the reserved memory
   void end() override {
     LOGI("end");
     active = false;
+    is_ov_open = false;
+    is_first = true;
     ov_clear(&file);
   }
 
-  /// Defines the output Stream
-  void setOutputStream(Print &outStream) override { this->p_out = &outStream; }
-
-  /// Defines the output Stream
-  void setInputStream(Stream &inStream) override { this->p_in = &inStream; }
-
   /// Provides the last available MP3FrameInfo
-  AudioBaseInfo audioInfo() override { return cfg; }
+  AudioInfo audioInfo() override { return cfg; }
 
   /// checks if the class is active
   virtual operator bool() override { return active; }
 
   virtual bool copy() override {
-    LOGI("copy");
-
+    // wait for data
     if (is_first){
-          // wait for some data
-      while(p_in->available()==0){
-        delay(1);
+      // wait for some data
+      if(p_input->available()<VORBIS_HEADER_OPEN_LIMIT){
+        delay(20);
+        return false;
       }
+      LOGI("available: %d", p_input->available());
       is_first = false;
     }
 
+    // open if not already done
+    if (!is_ov_open){
+      if (!ovOpen()) {
+        LOGE("not open");
+        return false;
+      }
+    }
 
+    if(pcm.data()==nullptr){
+      LOGE("Not enough memory");
+      return false;
+    }
+
+    // convert to pcm
     long result = ov_read(&file, (char *)pcm.data(), pcm.size(), &bitstream);
+    LOGI("copy: %ld", result);
     if (result > 0) {
-      AudioBaseInfo current = currentInfo();
+      AudioInfo current = currentInfo();
       if (current != cfg) {
         cfg = current;
         cfg.logInfo();
-        if (p_notify!=nullptr){
-          p_notify->setAudioInfo(cfg);
-        } else {
-          LOGW("p_notify is null");
-        }
+        notifyAudioChange(cfg);
       }
-      p_out->write(pcm.data(), result);
+      p_print->write(pcm.data(), result);
+      delay(1);
       return true;
     } else {
-      LOGE("copy: %ld - %s", result, readError(result));
+      if (result==-3){
+        // data interruption
+        LOGD("copy: %ld - %s", result, readError(result));
+      } else {
+        LOGE("copy: %ld - %s", result, readError(result));
+      }
+    
       return false;
     }
   }
 
 protected:
-  AudioBaseInfo cfg;
-  AudioBaseInfoDependent *p_notify = nullptr;
-  Print *p_out = nullptr;
-  Stream *p_in = nullptr;
+  AudioInfo cfg;
   Vector<uint8_t> pcm;
   OggVorbis_File file;
   ov_callbacks callbacks;
   bool active;
   int bitstream;
   bool is_first = true;
+  bool is_ov_open = false;
 
-  AudioBaseInfo currentInfo() {
-    AudioBaseInfo result;
+  bool ovOpen(){
+    pcm.resize(VARBIS_MAX_READ_SIZE);
+    int rc = ov_open_callbacks(this, &file, nullptr, 0, callbacks);
+    if (rc<0){
+      LOGE("ov_open_callbacks: %d", rc);
+    } else {
+      is_ov_open = true;
+    }
+    return is_ov_open;
+  }
+
+  AudioInfo currentInfo() {
+    AudioInfo result;
     vorbis_info *info = ov_info(&file, -1);
     result.sample_rate = info->rate;
     result.channels = info->channels;
-    result.bits_per_sample = 2;
+    result.bits_per_sample = 16;
     return result;
   }
 
   virtual size_t readBytes(uint8_t *ptr, size_t size) override {
     size_t read_size =  min(size,(size_t)VARBIS_MAX_READ_SIZE);
-    size_t result = p_in->readBytes((uint8_t *)ptr, read_size);
-    LOGD("readBytes: %ld",result);
+    size_t result = p_input->readBytes((uint8_t *)ptr, read_size);
+    LOGD("readBytes: %zu",result);
     return result;
   }
 
   static size_t read_func(void *ptr, size_t size, size_t nmemb,
                           void *datasource) {
     VorbisDecoder *self = (VorbisDecoder *)datasource;
-    return self->readBytes((uint8_t *)ptr, size);
+    return self->readBytes((uint8_t *)ptr, size * nmemb);
   }
 
   static int seek_func(void *datasource, ogg_int64_t offset, int whence) {

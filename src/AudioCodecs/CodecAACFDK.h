@@ -4,15 +4,18 @@
 #include "AACDecoderFDK.h"
 #include "AACEncoderFDK.h"
 
+
 namespace audio_tools {
 
 // audio change notification target
-AudioBaseInfoDependent *audioChangeFDK = nullptr;
+AudioInfoSupport *audioChangeFDK = nullptr;
 
 /**
  * @brief Audio Decoder which decodes AAC into a PCM stream
  * This is basically just a wrapper using https://github.com/pschatzmann/arduino-fdk-aac
- * which uses AudioBaseInfo and provides the handlig of AudioBaseInfo changes.
+ * which uses AudioInfo and provides the handlig of AudioInfo changes.
+ * @ingroup codecs
+ * @ingroup decoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -33,17 +36,19 @@ class AACDecoderFDK : public AudioDecoder  {
         }
 
         /// Defines the output stream
-        void setOutputStream(Print &out_stream){
+        void setOutput(Print &out_stream){
             dec->setOutput(out_stream);
         }
 
-        void begin(){
+        bool begin(){
             dec->begin(TT_MP4_ADTS, 1);
+            return true;
         }
 
         // opens the decoder
-        void begin(TRANSPORT_TYPE transportType, UINT nrOfLayers){
+        bool begin(TRANSPORT_TYPE transportType, UINT nrOfLayers){
             dec->begin(transportType, nrOfLayers);
+            return true;
         }
 
         /**
@@ -68,8 +73,8 @@ class AACDecoderFDK : public AudioDecoder  {
         }
 
         // provides common information
-        AudioBaseInfo audioInfo() {
-            AudioBaseInfo result;
+        AudioInfo audioInfo() override {
+            AudioInfo result;
             CStreamInfo i = audioInfoEx();
             result.channels = i.numChannels;
             result.sample_rate = i.sampleRate;
@@ -93,7 +98,7 @@ class AACDecoderFDK : public AudioDecoder  {
 
         static void audioChangeCallback(CStreamInfo &info){
             if (audioChangeFDK!=nullptr){
-                AudioBaseInfo base;
+                AudioInfo base;
                 base.channels = info.numChannels;
                 base.sample_rate = info.sampleRate;
                 base.bits_per_sample = 16;
@@ -102,7 +107,7 @@ class AACDecoderFDK : public AudioDecoder  {
             }
         }
 
-        virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi) {
+        void addNotifyAudioChange(AudioInfoSupport &bi) override {
             audioChangeFDK = &bi;
             // register audio change handler
             dec->setInfoCallback(audioChangeCallback);
@@ -116,6 +121,8 @@ class AACDecoderFDK : public AudioDecoder  {
 /**
  * @brief Encodes PCM data to the AAC format and writes the result to a stream
  * This is basically just a wrapper using https://github.com/pschatzmann/arduino-fdk-aac
+ * @ingroup codecs
+ * @ingroup encoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -136,7 +143,7 @@ public:
          delete enc;
      }
 
-     void setOutputStream(Print &out_stream){
+     void setOutput(Print &out_stream){
          enc->setOutput(out_stream);
      }
 
@@ -231,8 +238,9 @@ public:
     }
 
     /// Defines the Audio Info
-    virtual void setAudioInfo(AudioBaseInfo from) {
+    void setAudioInfo(AudioInfo from) override {
         TRACED();
+        AudioEncoder::setAudioInfo(from);
         aac_fdk::AudioInfo info;
         info.channels = from.channels;
         info.sample_rate = from.sample_rate;
@@ -246,9 +254,9 @@ public:
      * @param info 
      * @return int 
      */
-    virtual void begin(AudioBaseInfo info) {
+    virtual bool begin(AudioInfo info) {
         TRACED();
-        enc->begin(info.channels,info.sample_rate, info.bits_per_sample);
+        return enc->begin(info.channels,info.sample_rate, info.bits_per_sample);
     }
 
     /**
@@ -259,14 +267,15 @@ public:
      * @param input_bits_per_sample 
      * @return int 0 => ok; error with negative number
      */
-    virtual void begin(int input_channels=2, int input_sample_rate=44100, int input_bits_per_sample=16) {
+    virtual bool begin(int input_channels=2, int input_sample_rate=44100, int input_bits_per_sample=16) {
         TRACED();
-        enc->begin(input_channels,input_sample_rate, input_bits_per_sample);
+        return enc->begin(input_channels,input_sample_rate, input_bits_per_sample);
     }
 
     // starts the processing
-    void begin() {
+    bool begin() {
         enc->begin();
+        return true;
     }
     
     // convert PCM data to AAC

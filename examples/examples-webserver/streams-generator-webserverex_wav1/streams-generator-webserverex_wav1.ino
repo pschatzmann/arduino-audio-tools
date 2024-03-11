@@ -14,9 +14,8 @@
 // WIFI
 const char *ssid = "SSID";
 const char *password = "password";
-const int sample_rate = 10000;
-const int channels = 1;
 
+AudioInfo info(10000, 1, 16);
 SineWaveGenerator<int16_t> sineWave;            // Subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> in(sineWave);     // Stream generated from sine wave
 AudioWAVServerEx server;
@@ -29,15 +28,14 @@ void setup() {
 
   // start server
   auto cfg = server.defaultConfig();
-  cfg.sample_rate = sample_rate;
-  cfg.channels = channels;
+  cfg.copyFrom(info);
   cfg.ssid = ssid;
   cfg.password = password; 
   cfg.input = &in; // Define input
   server.begin(cfg);
 
   // start generation of sound
-  sineWave.begin(channels, sample_rate, N_B4);
+  sineWave.begin(info, N_B4);
   in.begin();
 }
 

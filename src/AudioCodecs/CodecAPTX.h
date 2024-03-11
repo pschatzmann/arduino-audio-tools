@@ -9,6 +9,7 @@
  *
  */
 #pragma once
+#include "AudioConfig.h"
 #include "AudioCodecs/AudioEncoded.h"
 #include "openaptx.h"
 
@@ -17,6 +18,8 @@ namespace audio_tools {
 /**
  * @brief Decoder for OpenAptx. Depends on
  * https://github.com/pschatzmann/libopenaptx
+ * @ingroup codecs
+ * @ingroup decoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -29,29 +32,22 @@ class APTXDecoder : public AudioDecoder {
     info.bits_per_sample = isHd ? 24 : 16;
   }
 
-  virtual AudioBaseInfo audioInfo() { return info; }
-
-  virtual void begin() {
+  bool begin() override {
     TRACEI();
     ctx = aptx_init(is_hd);
     is_first_write = true;
-    if (notify != nullptr) {
-      notify->setAudioInfo(info);
-    }
+    notifyAudioChange(info);
+    return ctx != nullptr;
   }
 
-  virtual void end() {
+  void end() override {
     TRACEI();
     bool dropped = aptx_decode_sync_finish(ctx);
     aptx_finish(ctx);
     ctx = nullptr;
   }
 
-  virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi) {
-    notify = &bi;
-  }
-
-  virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
+  virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
 
   operator bool() { return ctx != nullptr; }
 
@@ -67,11 +63,6 @@ class APTXDecoder : public AudioDecoder {
         return 0;
       }
     }
-
-    // output_buffer.resize(length*10);
-    // processed = aptx_decode(ctx,(const uint8_t *) input_buffer, length,
-    // output_buffer.data(),
-    //                         output_buffer.size(), &written);
 
     output_buffer.resize(length * 10);
     memset(output_buffer.data(), 0, output_buffer.size());
@@ -94,9 +85,7 @@ class APTXDecoder : public AudioDecoder {
   }
 
  protected:
-  AudioBaseInfo info;
   struct aptx_context *ctx = nullptr;
-  AudioBaseInfoDependent *notify = nullptr;
   Print *p_print = nullptr;
   bool is_first_write = true;
   Vector<uint8_t> output_buffer;
@@ -190,6 +179,8 @@ class APTXDecoder : public AudioDecoder {
 /**
  * @brief Encoder for OpenAptx - Depends on
  * https://github.com/pschatzmann/libopenaptx
+ * @ingroup codecs
+ * @ingroup encoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -202,12 +193,7 @@ class APTXEncoder : public AudioEncoder {
     info.bits_per_sample = isHd ? 24 : 16;
   }
 
-  void begin(AudioBaseInfo info) {
-    setAudioInfo(info);
-    begin();
-  }
-
-  void begin() {
+  bool begin() {
     TRACEI();
     input_buffer.resize(4 * 2);
     output_buffer.resize(100 * (is_hd ? 6 : 4));
@@ -216,6 +202,7 @@ class APTXEncoder : public AudioEncoder {
     LOGI("output_buffer.size: %d", output_buffer.size());
     LOGI("is_hd: %s", is_hd ? "true" : "false");
     ctx = aptx_init(is_hd);
+    return ctx!=nullptr;
   }
 
   virtual void end() {
@@ -239,8 +226,8 @@ class APTXEncoder : public AudioEncoder {
 
   virtual const char *mime() { return "audio/aptx"; }
 
-  virtual void setAudioInfo(AudioBaseInfo info) {
-    this->info = info;
+  virtual void setAudioInfo(AudioInfo info) {
+    AudioEncoder::setAudioInfo(info);
     switch (info.bits_per_sample) {
       case 16:
         is_hd = false;
@@ -253,7 +240,7 @@ class APTXEncoder : public AudioEncoder {
     }
   }
 
-  virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
+  virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
 
   operator bool() { return ctx != nullptr; }
 
@@ -302,7 +289,6 @@ class APTXEncoder : public AudioEncoder {
 
  protected:
   bool is_hd;
-  AudioBaseInfo info;
   Vector<int24_t> input_buffer{4 * 2};
   Vector<uint8_t> output_buffer;
   int input_pos = 0;

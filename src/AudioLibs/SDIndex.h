@@ -23,10 +23,11 @@ class SDIndex {
     void begin(const char *startDir, const char *extension,
                const char *file_name_pattern, bool setupIndex=true) {
       TRACED();
+      this->start_dir = startDir;
       this->ext = extension;
       this->file_name_pattern = file_name_pattern;
-      idx_path = String(startDir)+"/idx.txt";
-      idx_defpath = String(startDir)+"/idx-def.txt";
+      idx_path = filePathString(startDir,"idx.txt");
+      idx_defpath = filePathString(startDir,"idx-def.txt");
       int idx_file_size = indexFileTSize();
       LOGI("Index file size: %d", idx_file_size);
       String keyNew = String(startDir) + "|" + extension + "|" + file_name_pattern;
@@ -56,8 +57,8 @@ class SDIndex {
     /// Access file name by index
     const char *operator[](int idx) {
       // return null when inx too big
-      if (size>=0 && idx>=size) {
-        LOGE("idx %d > size %d", idx, size);
+      if (max_idx>=0 && idx>max_idx) {
+        LOGE("idx %d > size %d", idx, max_idx);
         return nullptr;
       }
       // find record
@@ -87,11 +88,28 @@ class SDIndex {
         count++;
       }
       if (!found){
-        size = count;
+        max_idx = count;
       }
       idxfile.close();
 
       return found ? result.c_str(): nullptr;
+    }
+
+    long size() {
+      if (max_idx==-1){
+        FileT idxfile = p_sd->open(idx_path.c_str());
+        int count=0;
+
+        while (idxfile.available()>0) {
+          result = idxfile.readStringUntil('\n');
+          // result c-string
+          char *c_str = (char*)result.c_str();        
+          count++;
+        }
+        idxfile.close();
+        max_idx = count;
+      }
+      return max_idx;
     }
 
   protected:
@@ -101,10 +119,16 @@ class SDIndex {
     SDT *p_sd = nullptr;
     List<String> file_path_stack;
     String file_path_str;
+    const char* start_dir;    
     
     const char *ext = nullptr;
     const char *file_name_pattern = nullptr;
-    long size=-1;
+    long max_idx=-1;
+
+    String filePathString(const char* name, const char* suffix){
+      String result = name;
+      return result.endsWith("/") ? result+suffix: result+"/"+suffix;
+    }
 
     /// Writes the index file
     void listDir(Print &idxfile, const char *dirname) {
@@ -252,8 +276,10 @@ class SDIndex {
   const char* fileNamePath(FileT &file){
 #if defined(USE_SDFAT) || ESP_IDF_VERSION_MAJOR >= 4 
       LOGD("-> fileNamePath: %s", fileName(file));
-      file_path_str.clear();
-      file_path_str += "/";
+      file_path_str = start_dir;
+      if (!file_path_str.endsWith("/")){
+        file_path_str += "/";
+      }
       for (int j=0; j<file_path_stack.size(); j++){
          file_path_str += file_path_stack[j]+"/";
       } 

@@ -1,10 +1,6 @@
 #pragma once
-#include "Arduino.h"
+#include "AudioBasic/Collections/Vector.h"
 #include "AudioTools/AudioLogger.h"
-
-#ifndef ACTIONS_MAX
-#define ACTIONS_MAX 20
-#endif
 
 #ifndef TOUCH_LIMIT
 #define TOUCH_LIMIT 20
@@ -14,14 +10,24 @@
 #define DEBOUNCE_DELAY 500
 #endif
 
+#if defined(IS_MIN_DESKTOP)
+extern "C" void pinMode(int, int);
+extern "C" int digitalRead(int);
+#endif
+
 namespace audio_tools {
 
+// global reference to access from static callback methods
+class AudioActions;
+static AudioActions *selfAudioActions = nullptr;
+
 /**
- * @brief A simple class to assign Functions to Pins e.g. to implement a simple
- * navigation control or volume control with buttons
+ * @brief A simple class to assign functions to gpio pins e.g. to implement a
+ * simple navigation control or volume control with buttons
+ * @ingroup tools
  */
 class AudioActions {
- public:
+public:
   enum ActiveLogic : uint8_t {
     ActiveLow,
     ActiveHigh,
@@ -29,56 +35,135 @@ class AudioActions {
     ActiveTouch
   };
 
+  struct Action {
+    int16_t pin = -1;
+    void (*actionOn)(bool pinStatus, int pin, void *ref) = nullptr;
+    void (*actionOff)(bool pinStatus, int pin, void *ref) = nullptr;
+    void *ref = nullptr;
+    unsigned long debounceTimeout = 0;
+    ActiveLogic activeLogic;
+    bool lastState = true;
+    bool enabled = true;
+
+    /// determines the value for the action
+    int debounceDelayValue = DEBOUNCE_DELAY;
+    int touchLimit = TOUCH_LIMIT;
+
+    bool readValue() {
+#ifdef USE_TOUCH_READ
+      bool result;
+      if (this->activeLogic == ActiveTouch) {
+        int value = touchRead(this->pin);
+        result = value <= touchLimit;
+        if (result) {
+          // retry to confirm reading
+          value = touchRead(this->pin);
+          result = value <= touchLimit;
+          LOGI("touch pin: %d value %d (limit: %d) -> %s", this->pin, value,
+               touchLimit, result ? "true" : "false");
+        }
+      } else {
+        result = digitalRead(this->pin);
+      }
+      return result;
+#else
+      return digitalRead(this->pin);
+#endif
+    }
+
+    void process() {
+      if (this->enabled) {
+        bool value = readValue();
+        if (this->actionOn != nullptr && this->actionOff != nullptr) {
+          // we have on and off action defined
+          if (value != this->lastState) {
+            //LOGI("processActions: case with on and off");
+            // execute action -> reports active instead of pin state
+            if ((value && this->activeLogic == ActiveHigh) ||
+                (!value && this->activeLogic == ActiveLow)) {
+              this->actionOn(true, this->pin, this->ref);
+            } else {
+              this->actionOff(false, this->pin, this->ref);
+            }
+            this->lastState = value;
+          }
+        } else if (this->activeLogic == ActiveChange) {
+          bool active = value;
+          // reports pin state
+          if (value != this->lastState && millis() > this->debounceTimeout) {
+            //LOGI("processActions: ActiveChange");
+            //  execute action
+            this->actionOn(active, this->pin, this->ref);
+            this->lastState = value;
+            this->debounceTimeout = millis() + debounceDelayValue;
+          }
+        } else {
+          bool active = (this->activeLogic == ActiveLow) ? !value : value;
+          if (active &&
+              (active != this->lastState || millis() > this->debounceTimeout)) {
+            // LOGI("processActions: %d Active %d - %d", this->pin, value,
+            //  execute action
+            this->actionOn(active, this->pin, this->ref);
+            this->lastState = active;
+            this->debounceTimeout = millis() + debounceDelayValue;
+          }
+        }
+      }
+    }
+  };
+
+  /// Default constructor
+  AudioActions(bool useInterrupt = false) {
+    selfAudioActions = this;
+    setUsePinInterrupt(useInterrupt);
+  }
+
   /// Adds an action
-  void add(int pin, void (*actionOn)(bool pinStatus, int pin, void* ref),
-           ActiveLogic activeLogic = ActiveLow, void* ref = nullptr) {
+  void add(int pin, void (*actionOn)(bool pinStatus, int pin, void *ref),
+           ActiveLogic activeLogic = ActiveLow, void *ref = nullptr) {
     add(pin, actionOn, nullptr, activeLogic, ref);
   }
 
   /// Adds an action
-  void add(int pin, void (*actionOn)(bool pinStatus, int pin, void* ref),
-           void (*actionOff)(bool pinStatus, int pin, void* ref),
-           ActiveLogic activeLogicPar = ActiveLow, void* ref = nullptr) {
+  void add(int pin, void (*actionOn)(bool pinStatus, int pin, void *ref),
+           void (*actionOff)(bool pinStatus, int pin, void *ref),
+           ActiveLogic activeLogicPar = ActiveLow, void *ref = nullptr) {
     LOGI("ActionLogic::add pin: %d / logic: %d", pin, activeLogicPar);
-    if (maxIdx + 1 >= ACTIONS_MAX) {
-      LOGE("Too many actions: please increase ACTIONS_MAX")
-      return;
-    }
-    if (pin>0) {
-      int pos = findPin(pin);
+    if (pin >= 0) {
       // setup pin mode
-      if (activeLogicPar == ActiveLow) {
-        pinMode(pin, INPUT_PULLUP);
-        LOGI("pin %d -> INPUT_PULLUP", pin);
-      } else {
-        pinMode(pin, INPUT);
-        LOGI("pin %d -> INPUT", pin);
-      }
+      setupPin(pin, activeLogicPar);
 
-      if (pos != -1) {
-        actions[pos].actionOn = actionOn;
-        actions[pos].actionOff = actionOff;
-        actions[pos].activeLogic = activeLogicPar;
-        actions[pos].ref = ref;
+      Action *p_action = findAction(pin);
+      if (p_action) {
+        // replace value
+        p_action->actionOn = actionOn;
+        p_action->actionOff = actionOff;
+        p_action->activeLogic = activeLogicPar;
+        p_action->ref = ref;
       } else {
+        // add value
+        Action action;
+        action.pin = pin;
+        action.actionOn = actionOn;
+        action.actionOff = actionOff;
+        action.activeLogic = activeLogicPar;
+        action.ref = ref;
 
-        actions[maxIdx].pin = pin;
-        actions[maxIdx].actionOn = actionOn;
-        actions[maxIdx].actionOff = actionOff;
-        actions[maxIdx].activeLogic = activeLogicPar;
-        actions[maxIdx].ref = ref;
-        maxIdx++;
+        action.debounceDelayValue = debounceDelayValue;
+        action.touchLimit = touchLimit;
+
+        actions.push_back(action);
       }
     } else {
-        LOGW("pin %d -> Ignored", pin);
+      LOGW("pin %d -> Ignored", pin);
     }
   }
 
   /// enable/disable pin actions
   void setEnabled(int pin, bool enabled) {
-    int pos = findPin(pin);
-    if (pos != -1) {
-      actions[pos].enabled = enabled;
+    Action *p_action = findAction(pin);
+    if (p_action) {
+      p_action->enabled = enabled;
     }
   }
 
@@ -88,99 +173,70 @@ class AudioActions {
    */
   void processActions() {
     static int pos = 0;
-
+    if (actions.empty())
+      return;
     // execute action
-    Action* a = &(actions[pos]);
-    if (a->enabled) {
-      bool value = readValue(a);
-      if (a->actionOn != nullptr && a->actionOff != nullptr) {
-        // we have on and off action defined
-        if (value != a->lastState) {
-          // LOGI("processActions: case with on and off");
-          // execute action -> reports active instead of pin state
-          if ((value && a->activeLogic == ActiveHigh) ||
-              (!value && a->activeLogic == ActiveLow)) {
-            a->actionOn(true, a->pin, a->ref);
-          } else {
-            a->actionOff(false, a->pin, a->ref);
-          }
-          a->lastState = value;
-        }
-      } else if (a->activeLogic == ActiveChange) {
-        bool active = (a->activeLogic == ActiveLow) ? !value : value;
-        // reports pin state
-        if (value != a->lastState && millis() > a->debounceTimeout) {
-          //LOGI("processActions: ActiveChange");
-          // execute action
-          a->actionOn(active, a->pin, a->ref);
-          a->lastState = value;
-          a->debounceTimeout = millis() + DEBOUNCE_DELAY;
-        }
-      } else {
-        bool active = (a->activeLogic == ActiveLow) ? !value : value;
-        if (active &&
-            (active != a->lastState || millis() > a->debounceTimeout)) {
-          //LOGI("processActions: %d Active %d - %d", a->pin, value,  digitalRead(a->pin));
-          // execute action
-          a->actionOn(active, a->pin, a->ref);
-          a->lastState = active;
-          a->debounceTimeout = millis() + DEBOUNCE_DELAY;
-        }
-      }
-    }
+    actions[pos].process();
     pos++;
-    if (pos >= maxIdx) {
+    if (pos >= actions.size()) {
       pos = 0;
     }
   }
 
-  /// Defines the debounce delay
-  void setDeboundDelay(int value) { debounceDelayValue = value; }
-  /// Defines the touch limit (Default 20)
-  void setTouchLimit(int value) { touchLimit = value; }
-
- protected:
-  int maxIdx = 0;
-  int debounceDelayValue = DEBOUNCE_DELAY;
-  int touchLimit = TOUCH_LIMIT;
-
-  struct Action {
-    int16_t pin;
-    void (*actionOn)(bool pinStatus, int pin, void* ref) = nullptr;
-    void (*actionOff)(bool pinStatus, int pin, void* ref) = nullptr;
-    void* ref = nullptr;
-    unsigned long debounceTimeout;
-    ActiveLogic activeLogic;
-    bool lastState;
-    bool enabled = true;
-  } actions[ACTIONS_MAX];
-
-  /// determines the value for the action
-  bool readValue(Action* a) {
-    bool result;
-    if (a->activeLogic == ActiveTouch) {
-      int value = touchRead(a->pin);
-      result = value <= touchLimit;
-      if (result){
-        // retry to confirm reading
-        value = touchRead(a->pin);
-        result = value <= touchLimit;
-        LOGI("touch pin: %d value %d (limit: %d) -> %s", a->pin, value, touchLimit, result ? "true":"false");
-      }
-    } else {
-      result = digitalRead(a->pin);
+  /// Execute all actions
+  void processAllActions() {
+    for (Action &action : actions) {
+      action.process();
     }
-    return result;
   }
 
-  int findPin(int pin) {
-    for (int j = 0; j < maxIdx; j++) {
-      if (actions[j].pin == pin) {
-        return j;
+  /// Determines the action for the pin
+  Action *findAction(int pin) {
+    for (Action &action : actions) {
+      if (action.pin == pin) {
+        return &action;
       }
     }
-    return -1;
+    return nullptr;
+  }
+
+  /// Defines the debounce delay
+  void setDebounceDelay(int value) { debounceDelayValue = value; }
+  /// Defines the touch limit (Default 20)
+  void setTouchLimit(int value) { touchLimit = value; }
+  /// Use interrupts instead of processActions() call in loop
+  void setUsePinInterrupt(bool active) { use_pin_interrupt = active; }
+  /// setup pin mode when true
+  void setPinMode(bool active) { use_pin_mode = active; }
+
+protected:
+  int debounceDelayValue = DEBOUNCE_DELAY;
+  int touchLimit = TOUCH_LIMIT;
+  bool use_pin_interrupt = false;
+  bool use_pin_mode = true;
+
+  Vector<Action> actions{0};
+
+  static void audioActionsISR() { selfAudioActions->processAllActions(); }
+
+  void setupPin(int pin, ActiveLogic logic) {
+    // in the audio-driver library the pins are already set up
+    if (use_pin_mode) {
+      if (logic == ActiveLow) {
+        pinMode(pin, INPUT_PULLUP);
+        LOGI("pin %d -> INPUT_PULLUP", pin);
+      } else {
+        pinMode(pin, INPUT);
+        LOGI("pin %d -> INPUT", pin);
+      }
+    }
+
+#if !defined(IS_MIN_DESKTOP)
+    if (use_pin_interrupt) {
+      attachInterrupt(digitalPinToInterrupt(pin), audioActionsISR, CHANGE);
+    }
+#endif
   }
 };
 
-}  // namespace audio_tools
+} // namespace audio_tools

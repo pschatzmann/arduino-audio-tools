@@ -9,7 +9,7 @@ namespace audio_tools {
  * Supported bits_per_sample only 16
  *
  */
-struct AudioMP34DT05Config : public AudioBaseInfo {
+struct AudioMP34DT05Config : public AudioInfo {
   AudioMP34DT05Config() {
     channels = 1;
     sample_rate = 16000;
@@ -23,7 +23,7 @@ struct AudioMP34DT05Config : public AudioBaseInfo {
   // int pin_clk = PIN_PDM_CLK;
   // int pin_pwr = PIN_PDM_PWR;
   void logInfo() {
-    AudioBaseInfo::logInfo();
+    AudioInfo::logInfo();
     LOGI("gain: %d", gain);
     LOGI("buffer_size: %d", buffer_size);
   }
@@ -34,9 +34,9 @@ class AudioMP34DT05 *selfAudioMP34DT05 = nullptr;
 /**
  * @brief MP34DT05 Microphone of Nano BLE Sense. We provide a proper Stream
  * implementation. See https://github.com/arduino/ArduinoCore-nRF528x-mbedos
- *
+ * @ingroup io
  */
-class AudioMP34DT05 : public AudioStreamX {
+class AudioMP34DT05 : public AudioStream {
  public:
   AudioMP34DT05() { selfAudioMP34DT05 = this; };
   virtual ~AudioMP34DT05() {

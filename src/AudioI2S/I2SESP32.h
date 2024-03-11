@@ -1,29 +1,34 @@
 #pragma once
 
-#ifdef ESP32
-
 #include "AudioConfig.h"
+#if defined(ESP32) && defined(USE_I2S) && ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0 , 0) || defined(DOXYGEN)
+
 #include "AudioI2S/I2SConfig.h"
 #include "driver/i2s.h"
 #include "esp_system.h"
+
+#ifndef I2S_MCLK_MULTIPLE_DEFAULT
+#  define I2S_MCLK_MULTIPLE_DEFAULT ((i2s_mclk_multiple_t)0)
+#endif
 
 namespace audio_tools {
 
 /**
  * @brief Basic I2S API - for the ESP32. If we receive 1 channel, we expand the result to 2 channels.
+ * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class I2SBase {
-
+class I2SDriverESP32 {
+  
   friend class AnalogAudio;
   friend class AudioKitStream;
 
   public:
 
     /// Provides the default configuration
-    I2SConfig defaultConfig(RxTxMode mode) {
-        I2SConfig c(mode);
+    I2SConfigESP32 defaultConfig(RxTxMode mode) {
+        I2SConfigESP32 c(mode);
         return c;
     }
 
@@ -38,7 +43,7 @@ class I2SBase {
     }
 
     /// starts the DAC 
-    bool begin(I2SConfig cfg) {
+    bool begin(I2SConfigESP32 cfg) {
       TRACED();
       this->cfg = cfg;
       switch(cfg.rx_tx_mode){
@@ -71,7 +76,7 @@ class I2SBase {
     }
 
     /// provides the actual configuration
-    I2SConfig config() {
+    I2SConfigESP32 config() {
       return cfg;
     }
 
@@ -80,41 +85,41 @@ class I2SBase {
       TRACED();
 
       size_t result = 0;   
-      if (cfg.channels==2){
-        if (i2s_write(i2s_num, src, size_bytes, &result, portMAX_DELAY)!=ESP_OK){
+      if (isNoChannelConversion(cfg)){
+        if (i2s_write(i2s_num, src, size_bytes, &result, ticks_to_wait_write)!=ESP_OK){
           TRACEE();
         }
         LOGD("i2s_write %d -> %d bytes", size_bytes, result);
       } else {
-        result = I2SBase::writeExpandChannel(i2s_num, cfg.bits_per_sample, src, size_bytes);
+        result = writeExpandChannel(i2s_num, cfg.bits_per_sample, src, size_bytes);
       }       
       return result;
     }
 
     size_t readBytes(void *dest, size_t size_bytes){
       size_t result = 0;
-      if (cfg.channels==2){
-        if (i2s_read(i2s_num, dest, size_bytes, &result, portMAX_DELAY)!=ESP_OK){
+      if (isNoChannelConversion(cfg)){
+        if (i2s_read(i2s_num, dest, size_bytes, &result, ticks_to_wait_read)!=ESP_OK){
           TRACEE();
         }
       } else if (cfg.channels==1){
         // I2S has always 2 channels. We support to reduce it to 1
         uint8_t temp[size_bytes*2];
-        if (i2s_read(i2s_num, temp, size_bytes*2, &result, portMAX_DELAY)!=ESP_OK){
+        if (i2s_read(i2s_num, temp, size_bytes*2, &result, ticks_to_wait_read)!=ESP_OK){
           TRACEE();
         }
         // convert to 1 channel
         switch(cfg.bits_per_sample){
           case 16: {
-            ChannelReducer<int16_t> reducer16(1, 2);
+            ChannelReducerT<int16_t> reducer16(1, 2);
             result = reducer16.convert((uint8_t*)dest,temp, result);
             } break;
-          // case 24: {
-          //   ChannelReducer<int24_t> reducer24(1,2);
-          //   result = reducer24.convert((uint8_t*)dest,temp,result);
-          //   } break;
+           case 24: {
+             ChannelReducerT<int24_t> reducer24(1,2);
+             result = reducer24.convert((uint8_t*)dest,temp,result);
+             } break;
           case 32: {
-            ChannelReducer<int32_t> reducer32(1, 2);
+            ChannelReducerT<int32_t> reducer32(1, 2);
             result = reducer32.convert((uint8_t*)dest, temp, result);
             } break;
           default:
@@ -127,14 +132,32 @@ class I2SBase {
       return result;
     }
 
+  void setWaitTimeReadMs(TickType_t ms) {
+    ticks_to_wait_read = pdMS_TO_TICKS(ms);
+  }
+  void setWaitTimeWriteMs(TickType_t ms) {
+    ticks_to_wait_write = pdMS_TO_TICKS(ms);
+  }
+
   protected:
-    I2SConfig cfg = defaultConfig(RX_MODE);
+    I2SConfigESP32 cfg = defaultConfig(RX_MODE);
     i2s_port_t i2s_num;
     i2s_config_t i2s_config;
     bool is_started = false;
+    TickType_t ticks_to_wait_read = portMAX_DELAY;
+    TickType_t ticks_to_wait_write = portMAX_DELAY;
+
+    bool isNoChannelConversion(I2SConfigESP32 cfg) {
+      if (cfg.channels==2) return true;
+      if (cfg.channels==1 && cfg.channel_format == I2S_CHANNEL_FMT_ALL_RIGHT) return true;
+      if (cfg.channels==1 && cfg.channel_format == I2S_CHANNEL_FMT_ALL_LEFT) return true;
+      if (cfg.channels==1 && cfg.channel_format == I2S_CHANNEL_FMT_ONLY_RIGHT) return true;
+      if (cfg.channels==1 && cfg.channel_format == I2S_CHANNEL_FMT_ONLY_LEFT) return true;
+      return false;
+    }
 
     /// starts the DAC 
-    bool begin(I2SConfig cfg, int txPin, int rxPin) {
+    bool begin(I2SConfigESP32 cfg, int txPin, int rxPin) {
       TRACED();
       cfg.logInfo();
       this->cfg = cfg;
@@ -145,14 +168,18 @@ class I2SBase {
             .mode = toMode(cfg),
             .sample_rate = (eps32_i2s_sample_rate_type)cfg.sample_rate,
             .bits_per_sample = (i2s_bits_per_sample_t) cfg.bits_per_sample,
-            .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,
+            .channel_format = (i2s_channel_fmt_t) cfg.channel_format,
             .communication_format = toCommFormat(cfg.i2s_format),
             .intr_alloc_flags = 0, // default interrupt priority
             .dma_buf_count = cfg.buffer_count,
             .dma_buf_len = cfg.buffer_size,
             .use_apll = (bool) cfg.use_apll,
             .tx_desc_auto_clear = cfg.auto_clear, 
-            .fixed_mclk = (int) (cfg.fixed_mclk>0 ? cfg.fixed_mclk : 0 )
+#if ESP_IDF_VERSION_MAJOR >= 4 
+            .fixed_mclk = (int) (cfg.fixed_mclk>0 ? cfg.fixed_mclk : 0 ),
+            .mclk_multiple = I2S_MCLK_MULTIPLE_DEFAULT,
+            .bits_per_chan = I2S_BITS_PER_CHAN_DEFAULT,
+#endif
       };
       i2s_config = i2s_config_new;
 
@@ -171,7 +198,7 @@ class I2SBase {
       // setup pin config
       if (this->cfg.signal_type == Digital || this->cfg.signal_type == PDM  ) {
         i2s_pin_config_t pin_config = {
-#if ESP_IDF_VERSION_MAJOR >= 4 
+#if ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(4, 4, 0)                 
             .mck_io_num = cfg.pin_mck,
 #endif
             .bck_io_num = cfg.pin_bck,
@@ -205,8 +232,8 @@ class I2SBase {
     }
     
 
-    /// writes the data by making shure that we send 2 channels
-    static size_t writeExpandChannel(i2s_port_t i2s_num, const int bits_per_sample, const void *src, size_t size_bytes){
+    /// writes the data by making sure that we send 2 channels
+    size_t writeExpandChannel(i2s_port_t i2s_num, const int bits_per_sample, const void *src, size_t size_bytes){
         size_t result = 0;   
         int j;
         switch(bits_per_sample){
@@ -218,7 +245,7 @@ class I2SBase {
               frame[0]=data[j];
               frame[1]=data[j];
               size_t result_call = 0;   
-              if (i2s_write(i2s_num, frame, sizeof(int8_t)*2, &result_call, portMAX_DELAY)!=ESP_OK){
+              if (i2s_write(i2s_num, frame, sizeof(int8_t)*2, &result_call, ticks_to_wait_write)!=ESP_OK){
                 TRACEE();
               } else {
                 result += result_call;
@@ -233,7 +260,7 @@ class I2SBase {
               frame[0]=data[j];
               frame[1]=data[j];
               size_t result_call = 0;   
-              if (i2s_write(i2s_num, frame, sizeof(int16_t)*2, &result_call, portMAX_DELAY)!=ESP_OK){
+              if (i2s_write(i2s_num, frame, sizeof(int16_t)*2, &result_call, ticks_to_wait_write)!=ESP_OK){
                 TRACEE();
               } else {
                 result += result_call;
@@ -248,7 +275,7 @@ class I2SBase {
               frame[0]=data[j];
               frame[1]=data[j];
               size_t result_call = 0;   
-              if (i2s_write(i2s_num, frame, sizeof(int24_t)*2, &result_call, portMAX_DELAY)!=ESP_OK){
+              if (i2s_write(i2s_num, frame, sizeof(int24_t)*2, &result_call, ticks_to_wait_write)!=ESP_OK){
                 TRACEE();
               } else {
                 result += result_call;
@@ -263,7 +290,7 @@ class I2SBase {
               frame[0]=data[j];
               frame[1]=data[j];
               size_t result_call = 0;   
-              if (i2s_write(i2s_num, frame, sizeof(int32_t)*2, &result_call, portMAX_DELAY)!=ESP_OK){
+              if (i2s_write(i2s_num, frame, sizeof(int32_t)*2, &result_call, ticks_to_wait_write)!=ESP_OK){
                 TRACEE();
               } else {
                 result += result_call;
@@ -271,11 +298,11 @@ class I2SBase {
             }
             break;
         }
-        return result;
+        return size_bytes;
     }
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+  #pragma GCC diagnostic push
+  #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
     // determines the i2s_comm_format_t - by default we use I2S_COMM_FORMAT_STAND_I2S
     i2s_comm_format_t toCommFormat(I2SFormat mode){
@@ -290,20 +317,17 @@ class I2SBase {
           case I2S_RIGHT_JUSTIFIED_FORMAT:
           case I2S_LSB_FORMAT:
             return (i2s_comm_format_t) (I2S_COMM_FORMAT_I2S|I2S_COMM_FORMAT_I2S_LSB);
-          // this is strange but the docu specifies that 
-          // case I2S_PCM_LONG:
-          //   return (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_PCM_LONG;
-          // case I2S_PCM_SHORT:
-          //   return (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_PCM_SHORT;
+          case I2S_PCM:
+            return (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_PCM_SHORT;
 
           default:
             LOGE("unsupported mode");
             return (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_I2S;
         }
     }
-#pragma GCC diagnostic pop
+  #pragma GCC diagnostic pop
 
-    int getModeDigital(I2SConfig &cfg) {
+    int getModeDigital(I2SConfigESP32 &cfg) {
         int i2s_format = cfg.is_master ? I2S_MODE_MASTER : I2S_MODE_SLAVE;
         int i2s_rx_tx = 0;
         switch(cfg.rx_tx_mode){
@@ -323,8 +347,8 @@ class I2SBase {
     }
 
     // determines the i2s_format_t
-    i2s_mode_t toMode(I2SConfig &cfg) {
-      i2s_mode_t mode;
+    i2s_mode_t toMode(I2SConfigESP32 &cfg) {
+      i2s_mode_t mode = (i2s_mode_t) (I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_RX );
       switch (cfg.signal_type){
         case Digital:
           mode = (i2s_mode_t) getModeDigital(cfg);
@@ -335,7 +359,7 @@ class I2SBase {
           break;        
 
         case Analog:
-#if defined(USE_I2S_ANALOG) 
+#if defined(USE_ANALOG) 
           mode = (i2s_mode_t) (cfg.rx_tx_mode ? I2S_MODE_DAC_BUILT_IN : I2S_MODE_ADC_BUILT_IN);
 #else    
           LOGE("mode not supported");
@@ -349,8 +373,9 @@ class I2SBase {
       }
       return mode;
     }
-
 };
+
+using I2SDriver = I2SDriverESP32;
 
 }
 

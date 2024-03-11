@@ -10,14 +10,13 @@
  * 
  */
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 #include <SPI.h>
 #include <SD.h>
 
 const char *file_name = "/rec.raw";
-uint16_t sample_rate = 16000;
-uint8_t channels = 1;  // The stream will have 2 channels 
-AudioKitStream kit;
+AudioInfo info(16000, 1, 16);
+AudioBoardStream kit(AudioKitEs8388V1);
 File file;   // final output stream
 StreamCopy copier; // copies data
 bool recording = false;  // flag to make sure that close is only executed one
@@ -47,6 +46,14 @@ void setup(){
   while(!Serial); // wait for serial to be ready
   AudioLogger::instance().begin(Serial, AudioLogger::Warning);  
 
+  // setup input and output: setup audiokit before SD!
+  auto cfg = kit.defaultConfig(RXTX_MODE);
+  cfg.sd_active = true;
+  cfg.copyFrom(info);
+  cfg.input_device = ADC_INPUT_LINE2;
+  kit.begin(cfg);
+  kit.setVolume(1.0);
+
   // Open SD drive
   if (!SD.begin(PIN_AUDIO_KIT_SD_CARD_CS)) {
     Serial.println("Initialization failed!");
@@ -54,17 +61,9 @@ void setup(){
   }
   Serial.println("Initialization done.");
 
-  // setup input and output
-  auto cfg = kit.defaultConfig(RXTX_MODE);
-  cfg.sd_active = true;
-  cfg.sample_rate = sample_rate;
-  cfg.channels = channels;
-  cfg.input_device = AUDIO_HAL_ADC_INPUT_LINE2;
-  kit.begin(cfg);
-  kit.setVolume(1.0);
 
   // record when key 1 is pressed
-  kit.audioActions().add(PIN_KEY1, record_start, record_end);
+  kit.audioActions().add(kit.getKey(1), record_start, record_end);
   Serial.println("Press Key 1 to record");
 
 }

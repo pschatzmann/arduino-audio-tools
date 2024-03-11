@@ -34,7 +34,7 @@ static effectsuite_t **interpolationTable = nullptr;
 
 /**
  * @brief Base Class for Effects
- * 
+ * @ingroup effects
  */
 
 class EffectSuiteBase  : public AudioEffect {
@@ -51,7 +51,7 @@ class EffectSuiteBase  : public AudioEffect {
    * @returns an audio sample as a int16_t with effect applied
    */
   virtual effect_t process(effect_t inputSample) override {
-    return active_flag ? 32767.0 * processDouble(static_cast<effectsuite_t>(inputSample)/32767.0) : inputSample;
+    return active_flag ? 32767.0f * processDouble(static_cast<effectsuite_t>(inputSample)/32767.0f) : inputSample;
   }
 
 };
@@ -63,6 +63,7 @@ class EffectSuiteBase  : public AudioEffect {
  * to modulate The parameters of another effect. Class initialised with sample
  * rate.
  * @author Matthew Hamilton
+ * @ingroup effects
  * @copyright MIT License
  */
 class ModulationBaseClass {
@@ -101,7 +102,7 @@ public:
    */
   void setTriangle() {
     std::fill(waveTable, waveTable + sampleRate, 0);
-    const effectsuite_t radPerSec = 2 * 3.1415926536 * timeStep;
+    const effectsuite_t radPerSec = 2 * 3.1415926536f * timeStep;
     for (int i = 0; i < sampleRate; i++) {
       for (int j = 0; j < 35; j += 1)
         waveTable[i] += pow(-1., j) *
@@ -114,7 +115,7 @@ public:
    */
   void setSquare() {
     std::fill(waveTable, waveTable + sampleRate, 0);
-    const effectsuite_t radPerSec = 2 * 3.1415926536 * timeStep;
+    const effectsuite_t radPerSec = 2 * 3.1415926536f * timeStep;
     for (int i = 0; i < sampleRate; i++) {
       for (int j = 0; j < 35; j += 1)
         waveTable[i] += (sin((2 * j + 1) * i * radPerSec)) / (2 * j + 1);
@@ -125,7 +126,7 @@ public:
    */
   void setSawtooth() {
     std::fill(waveTable, waveTable + sampleRate, 0);
-    const effectsuite_t radPerSec = 2 * 3.1415926536 * timeStep;
+    const effectsuite_t radPerSec = 2 * 3.1415926536f * timeStep;
     for (int i = 0; i < sampleRate; i++) {
       for (int j = 1; j < 11; j += 1)
         waveTable[i] += pow(-1, j) * sin(j * radPerSec * i) / effectsuite_t(j);
@@ -135,7 +136,7 @@ public:
    * sets wavetable to one period of a sine wave oscillating between -1 and 1
    */
   void setSine() {
-    const effectsuite_t radPerSec = 2 * 3.1415926536 * timeStep;
+    const effectsuite_t radPerSec = 2 * 3.1415926536f * timeStep;
     for (int i = 0; i < sampleRate; i++)
       waveTable[i] = sin(i * radPerSec);
   }
@@ -143,10 +144,19 @@ public:
    * sets wavetable to one period of a sine wave oscillating between 0 and 1
    */
   void setOffSine() {
-    const effectsuite_t radPerSec = 2 * 3.1415926536 * timeStep;
+    const effectsuite_t radPerSec = 2 * 3.1415926536f * timeStep;
     for (int i = 0; i < sampleRate; i++)
-      waveTable[i] = (sin(i * radPerSec) + 1) * .5;
+      waveTable[i] = (sin(i * radPerSec) + 1) * .5f;
   }
+
+  void setNoise() {
+    is_noise = true;
+  }
+
+  bool isNoise() {
+    return is_noise;
+  }
+
   /**
    * sets wavetable to DC one
    */
@@ -274,6 +284,7 @@ protected:
    */
   bool allocateMemory() {
     waveTable = new effectsuite_t[sampleRate];
+    assert(waveTable!=nullptr);
     if (!waveTable) {
       return false;
     }
@@ -344,7 +355,36 @@ protected:
   static const int order = 4;
   static const int res = 100;
   effectsuite_t interpTable[order][res];// = {1};
+  bool is_noise = false;
 };
+
+/**
+ * @brief SoundGenerator using the ModulationBaseClass
+ * to generate the samples.
+ * @ingroup effects
+ * @tparam T 
+ */
+ template <class T>
+ class SoundGeneratorModulation : public SoundGenerator<T>{
+    public:
+      SoundGeneratorModulation(ModulationBaseClass &mod, int freq){
+        p_mod = &mod;
+        this->freq = freq;
+      }
+      bool begin(AudioInfo info) override{
+          max_value = pow(2, info.bits_per_sample)/2-1;
+          return SoundGenerator<T>::begin(info);
+      }
+      virtual  T readSample() override {
+        return p_mod->isNoise() ? max_value * p_mod->readNoise() : max_value * p_mod->readTable(freq);
+      }
+      
+  protected:
+    ModulationBaseClass *p_mod=nullptr;
+    int freq;
+    float max_value=32767;
+};
+
 
 /**
  * @brief A Base class for delay based digital effects. Provides the basic methods
@@ -352,6 +392,7 @@ protected:
  * @version 0.1
  * @see DelayEffectBase
  * @author Matthew Hamilton
+ * @ingroup effects
  * @copyright MIT License
  */
 class DelayEffectBase  {
@@ -586,6 +627,7 @@ protected: // member variables
  * high, low and band pass filtering
  * @see FilterEffectBase
  * @author Matthew Hamilton
+ * @ingroup effects
  * @copyright MIT License
  */
 class FilterEffectBase : public EffectSuiteBase  {
@@ -626,7 +668,7 @@ public:
 
   /// see applyFilter
   virtual effect_t process(effect_t inputSample) override {
-    return active_flag ? 32767.0 * applyFilter(static_cast<effectsuite_t>(inputSample)/32767.0) : inputSample;
+    return active_flag ? 32767.0 * processDouble(static_cast<effectsuite_t>(inputSample)/32767.0) : inputSample;
   }
 
   /**
@@ -955,6 +997,7 @@ protected: // variables
 /**
  * @brief SimpleLPF
  * @author Matthew Hamilton
+ * @ingroup effects
  * @copyright MIT License
  */
 class SimpleLPF : public FilterEffectBase {
@@ -984,6 +1027,7 @@ public:
  * @brief Simple Chorus effect with a single delay voice and mono output Chorus is
  * effective between 15 and 20 miliseconds delay of original audio. Requires the
  * sample rate when initialising.
+ * @ingroup effects
  * @author Matthew Hamilton
  * @copyright MIT License
  **/
@@ -996,7 +1040,7 @@ public:
    * Since the class inherits DelayEffectBase it must set a
    * delay buffer size when initialisi.
    */
-  SimpleChorus() : SimpleLPF(0.0001, 4) {}
+//  SimpleChorus() : SimpleLPF(0.0001, 4) {}
   SimpleChorus(int extSampleRate=44100) :
         DelayEffectBase(static_cast<int>(0.031 * extSampleRate)), 
         ModulationBaseClass(extSampleRate),
@@ -1016,7 +1060,7 @@ public:
    * @param inputSample input audio sample
    * @return processed audio sample
    */
-  virtual effectsuite_t processDouble(effectsuite_t inputSample) {
+  virtual effectsuite_t processDouble(effectsuite_t inputSample) override {
     delaySample(inputSample);
     const effectsuite_t waveDelay = getModSignal();
     const effectsuite_t delayAmount =
@@ -1056,7 +1100,7 @@ public:
    */
   void setBase(effectsuite_t baseAmount) { base = baseAmount * sampleRate; }
 
-  SimpleChorus* clone() {
+  SimpleChorus* clone() override {
     return new SimpleChorus(*this);
   }
 
@@ -1118,13 +1162,14 @@ protected:
 
 /**
  * @brief Delay effect that filters the repeat delay 
+ * @ingroup effects
  * @author Matthew Hamilton
  * @copyright MIT License
  */
 class FilteredDelay : public DelayEffectBase, public FilterEffectBase {
 public:
   /** Constructor */
-  FilteredDelay(int delayInSamples) : DelayEffectBase(44100) {
+  FilteredDelay(int delayInSamples, int sample_rate=44100) : DelayEffectBase(sample_rate) {
     delayTimeSamples = delayInSamples;
     changeChebyICoefficients(.05, true, .1, 4);
   };
@@ -1166,6 +1211,10 @@ public:
     return out;
   }
 
+  effect_t process(effect_t inputSample) override {
+    return active_flag ? 32767.0 * processDouble(static_cast<effectsuite_t>(inputSample)/32767.0) : inputSample;
+  }
+
   FilteredDelay *clone() override {
     return new FilteredDelay(*this);
   }
@@ -1192,6 +1241,7 @@ protected:
  * @brief Simple Delay effect consiting of a single tap delay with Effect Gain and
  * feed back controls
  * Constructor requires internal delay in samples
+ * @ingroup effects
  * @see process
  * @author Matthew Hamilton
  * @copyright MIT License
@@ -1270,6 +1320,10 @@ public:
       readHeadIndex = std::fmod(readHeadIndex, maxDelayBufferSize);
     }
     return outSample;
+  }
+
+  effect_t process(effect_t inputSample) override {
+    return active_flag ? 32767.0 * processDouble(static_cast<effectsuite_t>(inputSample)/32767.0) : inputSample;
   }
 
   /**
@@ -1365,6 +1419,7 @@ protected: // member vairables
  * The flanger has an effective range between 0 and 15 miliseconds
  * in this case dleay buffer should be set to sampleRate*3/200
  * Constructor requires internal delay in samples
+ * @ingroup effects
  * @see process
  * @author Matthew Hamilton
  * @copyright MIT License
@@ -1500,6 +1555,7 @@ protected:
 /**
  * @brief EnvelopeFilter
  * @author Matthew Hamilton
+ * @ingroup effects
  * @copyright MIT License
  */
 class EnvelopeFilter : public FilterEffectBase {

@@ -13,7 +13,7 @@
 
 URLStream music;  // Music Stream
 int channels = 2; // The stream has 2 channels 
-CsvStream<int16_t> printer(Serial, channels);  // ASCII stream 
+CsvOutput<int16_t> printer(Serial, channels);  // ASCII stream 
 StreamCopy copier(printer, music);    // copies music into printer
 
 // Arduino Setup
@@ -30,7 +30,7 @@ void setup(void) {
   }
 
   // open music stream - it contains 2 channels of int16_t data
-  music.begin("https://pschatzmann.github.io/arduino-audio-tools/resources/audio.raw");
+  music.begin("https://pschatzmann.github.io/Resources/audio/audio.raw");
 }
 
 

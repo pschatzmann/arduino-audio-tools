@@ -12,17 +12,13 @@
 
 I2SStream i2sStream;                            // Access I2S as stream
 A2DPStream a2dpStream;                          // access A2DP as stream
-VolumeStream volume(a2dpStream);
-StreamCopy copier(volume, i2sStream); // copy i2sStream to a2dpStream
+StreamCopy copier(a2dpStream, i2sStream); // copy i2sStream to a2dpStream
 ConverterFillLeftAndRight<int16_t> filler(LeftIsEmpty); // fill both channels
 
 // Arduino Setup
 void setup(void) {
     Serial.begin(115200);
     AudioLogger::instance().begin(Serial, AudioLogger::Info);
-
-    // set intial volume
-    volume.setVolume(0.3);
     
     // start bluetooth
     Serial.println("starting A2DP...");
@@ -30,9 +26,12 @@ void setup(void) {
     cfgA2DP.name = "LEXON MINO L";
     a2dpStream.begin(cfgA2DP);
 
+    // set intial volume
+    a2dpStream.setVolume(0.3);
+
     // start i2s input with default configuration
     Serial.println("starting I2S...");
-    a2dpStream.setNotifyAudioChange(i2sStream); // i2s is using the info from a2dp
+    a2dpStream.addNotifyAudioChange(i2sStream); // i2s is using the info from a2dp
     i2sStream.begin(i2sStream.defaultConfig(RX_MODE));
 
 }

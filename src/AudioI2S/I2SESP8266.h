@@ -5,21 +5,23 @@
 #include "AudioI2S/I2SConfig.h"
 #include <I2S.h>
 
+
 namespace audio_tools {
 
 /**
  * @brief Basic I2S API - for the ESP8266
  * Only 16 bits are supported !
+ * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class I2SBase {
+class I2SDriverESP8266 {
   friend class I2SStream;
   public:
 
     /// Provides the default configuration
-    I2SConfig defaultConfig(RxTxMode mode) {
-        I2SConfig c(mode);
+    I2SConfigStd defaultConfig(RxTxMode mode) {
+        I2SConfigStd c(mode);
         return c;
     }
 
@@ -29,7 +31,7 @@ class I2SBase {
     }
 
     /// starts the DAC 
-    bool begin(I2SConfig cfg) {
+    bool begin(I2SConfigStd cfg) {
       this->cfg = cfg;
       i2s_set_rate(cfg.sample_rate);
       cfg.bits_per_sample = 16;
@@ -56,12 +58,12 @@ class I2SBase {
     }
 
     /// provides the actual configuration
-    I2SConfig config() {
+    I2SConfigStd config() {
       return cfg;
     }
 
   protected:
-    I2SConfig cfg;
+    I2SConfigStd cfg;
     
     /// writes the data to the I2S interface
     size_t writeBytes(const void *src, size_t size_bytes){
@@ -177,6 +179,8 @@ class I2SBase {
     }
 
 };
+
+using I2SDriver = I2SDriverESP8266;
 
 }
 

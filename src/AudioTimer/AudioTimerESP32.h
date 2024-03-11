@@ -1,16 +1,14 @@
 #pragma once
 
-#ifdef ESP32
-#include "AudioTimer/AudioTimerDef.h"
+#if defined(ESP32) && defined(ARDUINO)
+#include "AudioTimer/AudioTimerBase.h"
 #include <esp_task_wdt.h>
 
 namespace audio_tools {
 
-typedef void (* simple_callback )(void);
-
-
 /**
  * @brief Internal class to manage User callbacks. An optinal parameter can be passed to the callback method
+ * We support 4 timers
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -38,7 +36,7 @@ class UserCallback {
     portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
     bool lock;
 
-} INLINE_VAR *simpleUserCallback = nullptr;
+} static *simpleUserCallback = nullptr;
 
 
 static IRAM_ATTR void userCallback0() {
@@ -90,7 +88,7 @@ class TimerCallback {
       portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
       TaskHandle_t *p_handler_task=nullptr;
 
-} INLINE_VAR *timerCallbackArray = nullptr;
+} static *timerCallbackArray = nullptr;
 
 
 static IRAM_ATTR void timerCallback0() {
@@ -107,40 +105,40 @@ static IRAM_ATTR void timerCallback3() {
 }
 
 
-
 /**
  * @brief Repeating Timer functions for simple scheduling of repeated execution.
  * The basic logic is taken from https://www.toptal.com/embedded/esp32-audio-sampling.
  * Plaease use the typedef TimerAlarmRepeating.
+ * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 
  */
-class TimerAlarmRepeatingESP32 : public TimerAlarmRepeatingDef {
+class TimerAlarmRepeatingDriverESP32 : public TimerAlarmRepeatingDriverBase  {
    
     public:
+        TimerAlarmRepeatingDriverESP32(){
+          setTimerFunction(DirectTimerCallback);
+          setTimer(0);
+        }
+
+        TimerAlarmRepeatingDriverESP32(int timer, TimerFunction function){
+          setTimerFunction(function);
+          setTimer(timer);
+        }
     
-        TimerAlarmRepeatingESP32(TimerFunction function=DirectTimerCallback, int id=0){
-          LOGI("%s: %d, id=%d",LOG_METHOD, function, id);
+        void setTimer(int id) override {
           if (id>=0 && id<4) {
             this->timer_id = id;
-            this->function = function;
             handler_task = nullptr;
           } else {
             LOGE("Invalid timer id %d", timer_id);
           }
         }
 
-        ~TimerAlarmRepeatingESP32(){
-          end();
-          if (simpleUserCallback!=nullptr){
-            delete [] simpleUserCallback;
-          }
-          if (timerCallbackArray!=nullptr){
-            delete [] timerCallbackArray;
-          }
+        void setTimerFunction(TimerFunction function=DirectTimerCallback) override{
+            this->function = function;
         }
-
 
         /// Starts the alarm timer
         bool begin(repeating_timer_callback_t callback_f, uint32_t time, TimeUnit unit = MS) override {
@@ -149,17 +147,24 @@ class TimerAlarmRepeatingESP32 : public TimerAlarmRepeatingDef {
             // we determine the time in microseconds
             switch(unit){
                 case MS:
-                    timeUs = time / 1000;
+                    timeUs = time * 1000;
                     break;
                 case US:
                     timeUs = time;
                     break;
+                case HZ:
+                    // convert hz to time in us
+                    timeUs = AudioTime::toTimeUs(time);
+                    break;
             }
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 1 , 0)
+            uint32_t freq = AudioTime::AudioTime::toRateUs(timeUs);
+            LOGI("Timer freq: %u hz",(unsigned) freq);
+            adc_timer = timerBegin(freq);  // divider=80 -> 1000000 calls per second
+#else
             LOGI("Timer every: %u us", timeUs);
-            uint32_t cpu_freq = getCpuFrequencyMhz();  // 80 ? 
-            adc_timer = timerBegin(0, cpu_freq, true);  // divider=80 -> 1000000 calls per second
-
-
+            adc_timer = timerBegin(timer_id, 80, true);  // divider=80 -> 1000000 calls per second
+#endif
             switch (function) {
                 case DirectTimerCallback:
                   setupDirectTimerCallback(callback_f);
@@ -172,7 +177,6 @@ class TimerAlarmRepeatingESP32 : public TimerAlarmRepeatingDef {
                 case SimpleThreadLoop:
                   setupSimpleThreadLoop(callback_f);
                   break;
-
             }
 
             started = true;
@@ -184,6 +188,7 @@ class TimerAlarmRepeatingESP32 : public TimerAlarmRepeatingDef {
         bool end() override {
             TRACED();
             if (started){
+              timerDetachInterrupt(adc_timer);
               timerEnd(adc_timer);
               if (handler_task!=nullptr){
                 vTaskDelete(handler_task);
@@ -197,60 +202,83 @@ class TimerAlarmRepeatingESP32 : public TimerAlarmRepeatingDef {
         void setCore(int core){
           this->core = core;
         }
+        
+        /// Selects the TimerFunction: default is DirectTimerCallback, when set to save we use TimerCallbackInThread
+        void setIsSave(bool is_save) override{
+            setTimerFunction(is_save?TimerCallbackInThread : DirectTimerCallback);
+        }
+
 
     protected:
       int timer_id=0;
       volatile bool started = false;
       TaskHandle_t handler_task = nullptr;
       hw_timer_t* adc_timer = nullptr; // our timer
-      UserCallback user_callback;
+      UserCallback user_callback; // for task
       TimerFunction function;
       int core = 1;
       int priority = configMAX_PRIORITIES -1;
       uint32_t timeUs;
 
+      /// call timerAttachInterrupt
+      void attach(hw_timer_t* timer, void (*cb)()){
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 1 , 0)
+        timerAttachInterrupt(timer, cb);
+#else
+        timerAttachInterrupt(timer, cb, false);
+#endif
+      }
 
       /// direct timer callback 
       void setupDirectTimerCallback(repeating_timer_callback_t callback_f){
-        TRACED();
-        // we start the timer which runs the callback in a seprate task
-        if (timerCallbackArray==nullptr){
-          timerCallbackArray = new TimerCallback[4];
-        }
-
-        if (timer_id==0) timerAttachInterrupt(adc_timer, timerCallback0, true); 
-        else if (timer_id==1) timerAttachInterrupt(adc_timer, timerCallback1, true); 
-        else if (timer_id==2) timerAttachInterrupt(adc_timer, timerCallback2, true); 
-        else if (timer_id==3) timerAttachInterrupt(adc_timer, timerCallback3, true); 
-
-        // we record the callback method and user data
-        user_callback.setup(callback_f, object, false);
-        timerCallbackArray[timer_id].setup(handler_task);
-        timerAlarmWrite(adc_timer, timeUs, true);
-
-        // setup the timercallback
-        xTaskCreatePinnedToCore(complexTaskHandler, "TimerAlarmRepeatingTask", configMINIMAL_STACK_SIZE+10000, &user_callback, priority, &handler_task, core);
-        LOGI("Task created on core %d", core);
-
-        timerAlarmEnable(adc_timer);
-      }
-
-      // timer callback is notifiying task
-      void setupTimerCallbackInThread(repeating_timer_callback_t callback_f){
         TRACED();
         // We start the timer which executes the callbacks directly
         if (simpleUserCallback==nullptr){
           simpleUserCallback = new UserCallback[4];
         }
         simpleUserCallback[timer_id].setup(callback_f, object, true);
-        if (timer_id==0) timerAttachInterrupt(adc_timer, userCallback0, true); 
-        else if (timer_id==1) timerAttachInterrupt(adc_timer, userCallback1, true); 
-        else if (timer_id==2) timerAttachInterrupt(adc_timer, userCallback2, true); 
-        else if (timer_id==3) timerAttachInterrupt(adc_timer, userCallback3, true); 
+        if (timer_id==0) attach(adc_timer, userCallback0); 
+        else if (timer_id==1) attach(adc_timer, userCallback1); 
+        else if (timer_id==2) attach(adc_timer, userCallback2); 
+        else if (timer_id==3) attach(adc_timer, userCallback3); 
 
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 1 , 0)
+        timerStart(adc_timer);
+#else
         timerAlarmWrite(adc_timer, timeUs, true);
         timerAlarmEnable(adc_timer);
+#endif
 
+      }
+
+      /// timer callback is notifiying task: supports functionality which can not be called in an interrupt e.g. i2c
+      void setupTimerCallbackInThread(repeating_timer_callback_t callback_f){
+        TRACED();
+        // we start the timer which runs the callback in a seprate task
+        if (timerCallbackArray==nullptr){
+          timerCallbackArray = new TimerCallback[4];
+        }
+
+        if (timer_id==0) attach(adc_timer, timerCallback0); 
+        else if (timer_id==1) attach(adc_timer, timerCallback1); 
+        else if (timer_id==2) attach(adc_timer, timerCallback2); 
+        else if (timer_id==3) attach(adc_timer, timerCallback3); 
+
+        // we record the callback method and user data
+        user_callback.setup(callback_f, object, false);
+        timerCallbackArray[timer_id].setup(handler_task);
+#if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 1 , 0)
+        timerAlarmWrite(adc_timer, timeUs, true);
+#endif
+        // setup the timercallback
+        xTaskCreatePinnedToCore(complexTaskHandler, "TimerAlarmRepeatingTask", configMINIMAL_STACK_SIZE+10000, &user_callback, priority, &handler_task, core);
+        LOGI("Task created on core %d", core);
+
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 1 , 0)
+        timerStart(adc_timer);
+#else
+        timerAlarmEnable(adc_timer);
+#endif
       }
 
       /// No timer - just a simple task loop
@@ -275,18 +303,22 @@ class TimerAlarmRepeatingESP32 : public TimerAlarmRepeatingDef {
           if (thread_notification){
               cb->call();
           }
+          yield();
         }
       }
 
       /// We can not do any I2C calls in the interrupt handler so we need to do this in a separate task. 
       static void simpleTaskLoop(void *param) {
         TRACEI();
-        TimerAlarmRepeatingESP32* ta = (TimerAlarmRepeatingESP32*) param;
+        TimerAlarmRepeatingDriverESP32* ta = (TimerAlarmRepeatingDriverESP32*) param;
 
         while (true) {
             unsigned long end = micros() + ta->timeUs;
             ta->user_callback.call();
             long waitUs = end - micros();
+            long waitMs = waitUs / 1000;
+            waitUs = waitUs - (waitMs * 1000);
+            delay(waitMs);
             if (waitUs>0){
               delayMicroseconds(waitUs);
             }
@@ -294,8 +326,8 @@ class TimerAlarmRepeatingESP32 : public TimerAlarmRepeatingDef {
       }      
 };
 
-// for User API
-typedef  TimerAlarmRepeatingESP32 TimerAlarmRepeating;
+/// @brief  use TimerAlarmRepeating!  @ingroup timer_esp32
+using TimerAlarmRepeatingDriver = TimerAlarmRepeatingDriverESP32;
 
 
 }

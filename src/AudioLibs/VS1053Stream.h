@@ -17,7 +17,7 @@ enum VS1053Mode {ENCODED_MODE, PCM_MODE, MIDI_MODE };
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class VS1053Config : public AudioBaseInfo {
+class VS1053Config : public AudioInfo {
   public:
     VS1053Config(){
         sample_rate = 44100;
@@ -45,21 +45,26 @@ class VS1053Config : public AudioBaseInfo {
 /**
  * @brief VS1053 Output Interface which processes PCM data by default. If you want to write
  * encoded data set is_encoded_data = true in the configuration;
+ * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class VS1053Stream : public AudioStreamX {
+class VS1053Stream : public AudioStream {
 
     /**
      * @brief Private output class for the EncodedAudioStream
      */
-    class VS1053StreamOut : public AudioStreamX {
+    class VS1053StreamOut : public AudioStream {
       public:
         VS1053StreamOut(VS1053 *vs){
             p_VS1053 = vs;
         }
         size_t write(const uint8_t *buffer, size_t size) override { 
-            if (p_VS1053==nullptr) return 0;
+            if (p_VS1053==nullptr) {
+                LOGE("NPE");
+                return 0;
+            }
+            TRACED();
             p_VS1053->playChunk((uint8_t*)buffer, size);
             return size;
         }
@@ -85,9 +90,11 @@ public:
     /// defines the default configuration that is used with the next begin()
     void setAudioInfo(VS1053Config c){
         cfg = c;
+        info(copyFrom(c));
     }
 
-    void setAudioInfo(AudioBaseInfo c){
+    void setAudioInfo(AudioInfo c){
+        AudioEnocoder::setAudioInfo(c);
         cfg.copyFrom(c);
     }
 
@@ -223,8 +230,13 @@ public:
     }
 
     /// Write audio data
-    virtual size_t write(const uint8_t *buffer, size_t size) override{ 
-        if (p_out==nullptr) return 0;
+    virtual size_t write(const uint8_t *buffer, size_t size) override { 
+        TRACED();
+        if (size==0) return 0;
+        if (p_out==nullptr) {
+            LOGE("vs1053 is closed");
+            return 0;
+        }
         return p_out->write(buffer, size);
     }
 

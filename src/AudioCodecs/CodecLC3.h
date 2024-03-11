@@ -23,35 +23,33 @@ namespace audio_tools {
 /**
  * @brief Decoder for LC3. Depends on
  * https://github.com/pschatzmann/arduino-liblc3
+ * @ingroup codecs
+ * @ingroup decoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 class LC3Decoder : public AudioDecoder {
  public:
-  LC3Decoder(AudioBaseInfo info, int dt_us = LC3_DEFAULT_DT_US,
+  LC3Decoder(AudioInfo info, int dt_us = LC3_DEFAULT_DT_US,
              uint16_t inputByteCount = DEFAULT_BYTE_COUNT) {
     this->dt_us = dt_us;
     this->info = info;
     this->input_byte_count = inputByteCount;
   }
 
-  LC3Decoder(int dt_us = LC3_DEFAULT_DT_US, uint16_t inputByteCount = DEFAULT_BYTE_COUNT) {
+  LC3Decoder(int dt_us = LC3_DEFAULT_DT_US,
+             uint16_t inputByteCount = DEFAULT_BYTE_COUNT) {
     this->dt_us = dt_us;
     this->input_byte_count = inputByteCount;
     info.sample_rate = 32000;
     info.bits_per_sample = 16;
-    info.channels = 2;
+    info.channels = 1;
   }
 
-  virtual AudioBaseInfo audioInfo() { return info; }
-
-  void begin(AudioBaseInfo bi) {
-    info = bi;
-    begin();
-  }
-
-  virtual void begin() {
+  virtual bool begin() {
     TRACEI();
+
+    // Return the number of PCM samples in a frame
     num_frames = lc3_frame_samples(dt_us, info.sample_rate);
     dec_size = lc3_decoder_size(dt_us, info.sample_rate);
 
@@ -63,23 +61,23 @@ class LC3Decoder : public AudioDecoder {
     LOGI("dec_size: %d", dec_size);
 
     if (!checkValues()) {
-      return;
+      LOGE("Invalid Parameters");
+      return false;
     }
 
     // setup memory
     input_buffer.resize(input_byte_count);
-    output_buffer.resize(num_frames*2);
+    output_buffer.resize(num_frames * 2);
     lc3_decoder_memory.resize(dec_size);
 
     // setup decoder
     lc3_decoder = lc3_setup_decoder(dt_us, info.sample_rate, 0,
                                     (void *)lc3_decoder_memory.data());
-    if (p_notify != nullptr) {
-      p_notify->setAudioInfo(info);
-    }
+    notifyAudioChange(info);
 
     input_pos = 0;
     active = true;
+    return true;
   }
 
   virtual void end() {
@@ -87,12 +85,7 @@ class LC3Decoder : public AudioDecoder {
     active = false;
   }
 
-  virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi) {
-    TRACEI();
-    p_notify = &bi;
-  }
-
-  virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
+  virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
 
   operator bool() { return active; }
 
@@ -125,8 +118,6 @@ class LC3Decoder : public AudioDecoder {
 
  protected:
   Print *p_print = nullptr;
-  AudioBaseInfo info;
-  AudioBaseInfoDependent *p_notify = nullptr;
   lc3_decoder_t lc3_decoder = nullptr;
   lc3_pcm_format pcm_format;
   Vector<uint8_t> lc3_decoder_memory;
@@ -153,6 +144,10 @@ class LC3Decoder : public AudioDecoder {
     if (!LC3_CHECK_SR_HZ(info.sample_rate)) {
       LOGE("sample_rate: %d", info.sample_rate);
       return false;
+    }
+
+    if (info.channels!=1){
+      LOGE("channels: %d", info.channels);
     }
 
     if (num_frames == -1) {
@@ -183,26 +178,25 @@ class LC3Decoder : public AudioDecoder {
 /**
  * @brief Encoder for LC3 - Depends on
  * https://github.com/pschatzmann/arduino-liblc3
+ * @ingroup codecs
+ * @ingroup encoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 class LC3Encoder : public AudioEncoder {
  public:
-  LC3Encoder(int dt_us = LC3_DEFAULT_DT_US, uint16_t outputByteCount = DEFAULT_BYTE_COUNT) {
+  LC3Encoder(int dt_us = LC3_DEFAULT_DT_US,
+             uint16_t outputByteCount = DEFAULT_BYTE_COUNT) {
     this->dt_us = dt_us;
     info.sample_rate = 32000;
     info.bits_per_sample = 16;
-    info.channels = 2;
+    info.channels = 1;
     output_byte_count = outputByteCount;
   }
 
-  void begin(AudioBaseInfo bi) {
-    setAudioInfo(bi);
-    begin();
-  }
-
-  void begin() {
+  bool begin() {
     TRACEI();
+
     unsigned enc_size = lc3_encoder_size(dt_us, info.sample_rate);
     num_frames = lc3_frame_samples(dt_us, info.sample_rate);
 
@@ -214,7 +208,7 @@ class LC3Encoder : public AudioEncoder {
     LOGI("num_frames: %d", num_frames);
 
     if (!checkValues()) {
-      return;
+      return false;
     }
 
     // setup memory
@@ -223,11 +217,12 @@ class LC3Encoder : public AudioEncoder {
     output_buffer.resize(output_byte_count);
 
     // setup encoder
-    lc3_encoder =
-        lc3_setup_encoder(dt_us, info.sample_rate, 0, lc3_encoder_memory.data());
+    lc3_encoder = lc3_setup_encoder(dt_us, info.sample_rate, 0,
+                                    lc3_encoder_memory.data());
 
     input_pos = 0;
     active = true;
+    return true;
   }
 
   virtual void end() {
@@ -237,9 +232,7 @@ class LC3Encoder : public AudioEncoder {
 
   virtual const char *mime() { return "audio/lc3"; }
 
-  virtual void setAudioInfo(AudioBaseInfo info) { this->info = info; }
-
-  virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
+  virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
 
   operator bool() { return lc3_encoder != nullptr; }
 
@@ -251,8 +244,9 @@ class LC3Encoder : public AudioEncoder {
     for (int j = 0; j < in_size; j++) {
       input_buffer[input_pos++] = p_ptr8[j];
       if (input_pos >= num_frames * 2) {
-        if (lc3_encode(lc3_encoder, pcm_format, (const int16_t *)input_buffer.data(),
-                       1, output_buffer.size(), output_buffer.data()) != 0) {
+        if (lc3_encode(lc3_encoder, pcm_format,
+                       (const int16_t *)input_buffer.data(), 1,
+                       output_buffer.size(), output_buffer.data()) != 0) {
           LOGE("lc3_encode");
         }
 
@@ -269,7 +263,6 @@ class LC3Encoder : public AudioEncoder {
   }
 
  protected:
-  AudioBaseInfo info;
   Print *p_print = nullptr;
   unsigned dt_us = 1000;
   uint16_t num_frames;
@@ -296,6 +289,10 @@ class LC3Encoder : public AudioEncoder {
     if (!LC3_CHECK_SR_HZ(info.sample_rate)) {
       LOGE("sample_rate: %d", info.sample_rate);
       return false;
+    }
+
+    if (info.channels!=1){
+      LOGE("channels: %d", info.channels);
     }
 
     if (num_frames == -1) {

@@ -8,13 +8,16 @@
 #include "AudioCodecs/AudioEncoded.h"
 #include "MP3DecoderMAD.h"
 
+
 namespace audio_tools {
 
 // forward audio changes
-AudioBaseInfoDependent *audioChangeMAD;
+static AudioInfoSupport *audioChangeMAD=nullptr;
 
 /**
  * @brief MP3 Decoder using https://github.com/pschatzmann/arduino-libmad
+ * @ingroup codecs
+ * @ingroup decoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -41,7 +44,7 @@ class MP3DecoderMAD : public AudioDecoder  {
             delete mad;
         }
 
-        void setOutputStream(Print &out){
+        void setOutput(Print &out){
             TRACED();
             mad->setOutput(out);
         }
@@ -59,9 +62,10 @@ class MP3DecoderMAD : public AudioDecoder  {
         }
 
          /// Starts the processing
-        void begin(){
+        bool begin(){
             TRACED();
             mad->begin();
+            return true;
         }
 
         /// Releases the reserved memory
@@ -76,10 +80,10 @@ class MP3DecoderMAD : public AudioDecoder  {
             return mad->audioInfo();
         }
 
-        AudioBaseInfo audioInfo(){
+        AudioInfo audioInfo() override {
             TRACED();
             libmad::MadAudioInfo info = audioInfoEx();
-            AudioBaseInfo base;
+            AudioInfo base;
             base.channels = info.channels;
             base.sample_rate = info.sample_rate;
             base.bits_per_sample = info.bits_per_sample; 
@@ -110,7 +114,7 @@ class MP3DecoderMAD : public AudioDecoder  {
         static void audioChangeCallback(libmad::MadAudioInfo &info){
             if (audioChangeMAD!=nullptr){
                 TRACED();
-                AudioBaseInfo base;
+                AudioInfo base;
                 base.channels = info.channels;
                 base.sample_rate = info.sample_rate;
                 base.bits_per_sample = info.bits_per_sample;
@@ -119,7 +123,7 @@ class MP3DecoderMAD : public AudioDecoder  {
             }
         }
 
-        virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi) {
+        virtual void addNotifyAudioChange(AudioInfoSupport &bi) {
             TRACED();
             audioChangeMAD = &bi;
             // register audio change handler

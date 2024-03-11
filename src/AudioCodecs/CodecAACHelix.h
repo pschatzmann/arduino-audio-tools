@@ -1,26 +1,26 @@
 #pragma once
 
-#include "Stream.h"
+//#include "Stream.h"
 #include "AudioCodecs/AudioEncoded.h"
 #include "AACDecoderHelix.h"
 
 namespace audio_tools {
 
-// audio change notification target
-AudioBaseInfoDependent *audioChangeAACHelix=nullptr;
-
 /**
  * @brief AAC Decoder using libhelix: https://github.com/pschatzmann/arduino-libhelix
- * This is basically just a simple wrapper to provide AudioBaseInfo and AudioBaseInfoDependent
+ * This is basically just a simple wrapper to provide AudioInfo and AudioInfoSupport
+ * @ingroup codecs
+ * @ingroup decoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 class AACDecoderHelix : public AudioDecoder  {
     public:
 
-        AACDecoderHelix() {
+        AACDecoderHelix(bool raw=false) {
             TRACED();
             aac = new libhelix::AACDecoderHelix();
+            setRaw(raw);
             if (aac==nullptr){
                 LOGE("Not enough memory for libhelix");
             }
@@ -45,13 +45,13 @@ class AACDecoderHelix : public AudioDecoder  {
          * @param out_stream 
          * @param bi 
          */
-        AACDecoderHelix(Print &out_stream, AudioBaseInfoDependent &bi){
+        AACDecoderHelix(Print &out_stream, AudioInfoSupport &bi){
             TRACED();
             aac = new libhelix::AACDecoderHelix(out_stream);
             if (aac==nullptr){
                 LOGE("Not enough memory for libhelix");
             }
-            setNotifyAudioChange(bi);
+            addNotifyAudioChange(bi);
         }  
 
         /**
@@ -63,23 +63,30 @@ class AACDecoderHelix : public AudioDecoder  {
             if (aac!=nullptr) delete aac;
         }
 
+        void setRaw(bool flag){
+            if (aac!=nullptr) aac->setRaw(flag);
+        }
+
         /// Defines the output Stream
-        virtual void setOutputStream(Print &out_stream){
+        virtual void setOutput(Print &out_stream){
             TRACED();
+            AudioDecoder::setOutput(out_stream);
             if (aac!=nullptr) aac->setOutput(out_stream);
         }
 
         /// Starts the processing
-        void begin(){
+        bool begin() override {
             TRACED();
             if (aac!=nullptr) {
                 aac->setDelay(CODEC_DELAY_MS);
+                aac->setInfoCallback(infoCallback, this);
                 aac->begin();
             }
+            return true;
         }
 
         /// Releases the reserved memory
-        virtual void end(){
+        virtual void end() override {
             TRACED();
             if (aac!=nullptr) aac->end();
         }
@@ -88,8 +95,8 @@ class AACDecoderHelix : public AudioDecoder  {
             return aac->audioInfo();
         }
 
-        virtual AudioBaseInfo audioInfo(){
-            AudioBaseInfo result;
+        AudioInfo audioInfo() override{
+            AudioInfo result;
             auto i = audioInfoEx();
             result.channels = i.nChans;
             result.sample_rate = i.sampRateOut;
@@ -97,13 +104,30 @@ class AACDecoderHelix : public AudioDecoder  {
             return result;
         }
 
+        void setAudioInfo(AudioInfo info) override {
+            this->info = info;
+            if(info_notifications_active){
+                notifyAudioChange(info);   
+            }
+        }
+
         /// Write AAC data to decoder
-        size_t write(const void* aac_data, size_t len) {
-            return aac==nullptr ? 0 : aac->write(aac_data, len);
+        size_t write(const void* aac_data, size_t len) override {
+            LOGD("AACDecoderHelix::write: %d", (int)len);
+            if (aac==nullptr) return 0;
+            int open = len;
+            int processed = 0;
+            uint8_t *data = (uint8_t*)aac_data;
+            while(open>0){
+                 int act_write = aac->write(data+processed, min(open, DEFAULT_BUFFER_SIZE));
+                 open -= act_write;
+                 processed += act_write;
+            }
+            return processed;
         }
 
         /// checks if the class is active 
-        virtual operator bool(){
+        virtual operator bool() override {
             return aac!=nullptr && (bool)*aac;
         }
 
@@ -111,26 +135,61 @@ class AACDecoderHelix : public AudioDecoder  {
         //     aac->flush();
         }
 
-        /// Defines the callback object to which the Audio information change is provided
-        virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi){
-            TRACED();
-            audioChangeAACHelix = &bi;
-            if (aac!=nullptr) aac->setInfoCallback(infoCallback);
-        }
-
         /// notifies the subscriber about a change
-        static void infoCallback(_AACFrameInfo &i){
-            if (audioChangeAACHelix!=nullptr){
+        static void infoCallback(_AACFrameInfo &i, void* ref){
+            AACDecoderHelix *p_helix =  (AACDecoderHelix *)ref;
+            if (p_helix!=nullptr){
                 TRACED();
-                AudioBaseInfo baseInfo;
+                AudioInfo baseInfo;
                 baseInfo.channels = i.nChans;
                 baseInfo.sample_rate = i.sampRateOut;
                 baseInfo.bits_per_sample = i.bitsPerSample;
-                audioChangeAACHelix->setAudioInfo(baseInfo);   
+                //p_helix->audioChangeAACHelix->setAudioInfo(baseInfo);   
+                LOGW("sample_rate: %d", i.sampRateOut);
+                p_helix->setAudioInfo(baseInfo);
             }
         }
+
+        /// Provides the maximum frame size - this is allocated on the heap and you can reduce the heap size my minimizing this value
+        size_t maxFrameSize() {
+            return aac->maxFrameSize();
+        }
+
+        /// Define your optimized maximum frame size
+        void setMaxFrameSize(size_t len){
+            aac->setMaxFrameSize(len);
+        }
+
+        void setAudioInfoNotifications(bool active){
+            info_notifications_active = active;
+        }
+
+#ifdef HELIX_PCM_CORRECTED
+        /// Provides the maximum pwm buffer size - this is allocated on the heap and you can reduce the heap size my minimizing this value
+        size_t maxPCMSize() {
+            return aac->maxPCMSize();
+        }
+
+        /// Define your optimized maximum pwm buffer size
+        void setMaxPCMSize(size_t len) {
+            aac->setMaxPCMSize(len);
+        }
+#else
+        /// Provides the maximum pwm buffer size - this is allocated on the heap and you can reduce the heap size my minimizing this value
+        size_t maxPCMSize() {
+            return aac->maxPWMSize();
+        }
+
+        /// Define your optimized maximum pwm buffer size
+        void setMaxPCMSize(size_t len) {
+            aac->setMaxPWMSize(len);
+        }
+#endif
+
     protected:
         libhelix::AACDecoderHelix *aac=nullptr;
+        bool info_notifications_active = true;
+
 
 };
 

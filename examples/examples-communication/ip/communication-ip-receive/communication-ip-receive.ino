@@ -11,16 +11,16 @@
 #include "AudioTools.h"
 #include <WiFi.h>
 
-uint16_t sample_rate = 16000;
+const char *ssid = "ssid";
+const char *password = "password";
+
+AudioInfo info(16000, 1, 16);
 uint16_t port = 8000;
-uint8_t channels = 1;  // The stream will have 2 channels
 WiFiServer server(port);
 WiFiClient client; 
 I2SStream out; 
 MeasuringStream outTimed(out);
 StreamCopy copier(outTimed, client);     
-const char *ssid = "ssid";
-const char *password = "password";
 
 void connectWifi(){
   // connect to WIFI
@@ -33,7 +33,7 @@ void connectWifi(){
   Serial.println(WiFi. localIP());
 
   // Performance Hack              
-  esp_wifi_set_ps(WIFI_PS_NONE);
+  WiFi.setSleep(false);
 }
 
 void setup() {
@@ -48,9 +48,7 @@ void setup() {
   // start I2S
   Serial.println("starting I2S...");
   auto config = out.defaultConfig(TX_MODE);
-  config.sample_rate = sample_rate; 
-  config.channels = channels;
-  config.bits_per_sample = 16;
+  config.copyFrom(info); 
   config.buffer_size = 512;
   config.buffer_count = 6;
   out.begin(config);
@@ -63,8 +61,12 @@ void loop() {
   if (!client){
     client = server.available();  
   }
+  
   // copy data if we are connected
   if (client.connected()){
     copier.copy();
+  } else {
+    // feed the dog
+    delay(100);
   }
 }

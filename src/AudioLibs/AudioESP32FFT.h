@@ -3,18 +3,28 @@
 #include "AudioFFT.h"
 #include "fft.h"
 
+/** 
+ * @defgroup fft-esp32 esp32-fft
+ * @ingroup fft
+ * @brief FFT using esp32-fft 
+**/
+
+
 namespace audio_tools {
 
 /**
  * @brief Driver for ESP32-FFT https://github.com/pschatzmann/esp32-fft  
+ * @ingroup fft-esp32
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 class FFTDriverESP32FFT : public FFTDriver {
     public:
-        void begin(int len) override {
+        bool begin(int len) override {
             this->len = len;
             if (p_fft_object==nullptr) p_fft_object = fft_init(len, FFT_REAL, FFT_FORWARD, NULL, NULL);
+            assert(p_fft_object!=nullptr);
+            return p_fft_object!=nullptr;
         }
         void end()override{
             if (p_fft_object!=nullptr) fft_destroy(p_fft_object);
@@ -31,6 +41,11 @@ class FFTDriverESP32FFT : public FFTDriver {
             return sqrt(pow(p_fft_object->output[2*idx],2) + pow(p_fft_object->output[2*idx+1],2));
         }
 
+        /// magnitude w/o sqrt
+        float magnitudeFast(int idx) override {
+            return (pow(p_fft_object->output[2*idx],2) + pow(p_fft_object->output[2*idx+1],2));
+        }
+
         virtual bool isValid() override{ return p_fft_object!=nullptr; }
 
         fft_config_t *p_fft_object=nullptr;
@@ -40,6 +55,7 @@ class FFTDriverESP32FFT : public FFTDriver {
 
 /**
  * @brief AudioFFT using RealFFT
+ * @ingroup fft-esp32
  * @author Phil Schatzmann
  * Warning: This does not work as expected yet: I did not get the expected results...
  * @copyright GPLv3

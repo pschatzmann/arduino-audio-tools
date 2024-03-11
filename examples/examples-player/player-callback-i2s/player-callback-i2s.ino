@@ -18,27 +18,27 @@
 
 // forward declarations
 void callbackInit();
-Stream* callbackStream();
-
+Stream* callbackNextStream(int offset);
 
 // data
 const int chipSelect=PIN_CS;
-AudioSourceCallback source(callbackStream,callbackInit);
+AudioSourceCallback source(callbackNextStream, callbackInit);
 I2SStream i2s;
 MP3DecoderHelix decoder;
 AudioPlayer player(source, i2s, decoder);
 File audioFile;
-
+File dir;
 
 void callbackInit() {
-  SD.begin(chipSelect);
-  audioFile = SD.open("/");
+  // make sure that the directory contains only mp3 files
+  dir = SD.open("/TomWaits");
 }
 
-Stream* callbackStream() {
-  auto lastFile = audioFile;
-  audioFile = audioFile.openNextFile();
-  lastFile.close();
+Stream* callbackNextStream(int offset) {
+  audioFile.close();
+  // the next files must be a mp3 file
+  for (int j=0;j<offset;j++)
+    audioFile = dir.openNextFile();
   return &audioFile;
 }
 
@@ -53,6 +53,9 @@ void callbackPrintMetaData(MetaDataType type, const char* str, int len){
 void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
+
+  // setup SD
+  SD.begin(chipSelect);
 
   // setup output
   auto cfg = i2s.defaultConfig(TX_MODE);

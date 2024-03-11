@@ -9,15 +9,14 @@
  * 
  */
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 #include "AudioCodecs/CodecOpusOgg.h"
 
-int sample_rate = 24000;
-int channels = 1;  
-
+AudioInfo info(24000, 1, 16);
 SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound( sineWave); // Stream generated from sine wave
-CsvStream<int16_t> out(Serial,channels); 
+AudioBoardStream out(AudioKitEs8388V1);
+//CsvOutput<int16_t> out(Serial); 
 OpusOggEncoder enc;
 OpusOggDecoder dec;
 EncodedAudioStream decoder(&out, &dec); // encode and write 
@@ -28,16 +27,19 @@ void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Warning);
 
+  // Setup output
+  auto cfgo = out.defaultConfig();
+  cfgo.copyFrom(info);
+  out.begin(cfgo);
+
   // Setup sine wave
   auto cfgs = sineWave.defaultConfig();
-  cfgs.sample_rate = sample_rate;
-  cfgs.channels = channels;
-  cfgs.bits_per_sample = 16;
+  cfgs.copyFrom(info);
   sineWave.begin(cfgs, N_B4);
 
   // Opus encoder needs to know the audio info
-  encoder.begin(cfgs);
-  decoder.begin();
+  encoder.begin(info);
+  decoder.begin(info);
 
   // configure additinal parameters
   //enc.config().application = OPUS_APPLICATION_RESTRICTED_LOWDELAY;

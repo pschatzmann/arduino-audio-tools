@@ -1,28 +1,36 @@
 #pragma once
-
 #include <stdlib.h>
+#include "AudioConfig.h"
 #include "AudioTools/AudioTypes.h"
 #include "AudioTools/AudioStreams.h"
 #include "AudioMetaData/MetaDataICY.h"
 #include "AudioMetaData/MetaDataID3.h"
 #include "AudioHttp/HttpRequest.h"
 
+/** 
+ * @defgroup metadata Metadata
+ * @ingroup main
+ * @brief Audio Metadata (Title, Author...)
+**/
+
 namespace audio_tools {
 
 /**
- * @brief ID3 and Icecast/Shoutcast metadata output support
+ * @brief ID3 and Icecast/Shoutcast metadata output support. Just write the audio data 
+ * to an object of this class and receive the metadata via the callback.
+ * @ingroup metadata
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 
  */
-class MetaDataPrint : public AudioPrint {
+class MetaDataOutput : public AudioOutput {
   public:
 
-    MetaDataPrint() = default;
-    MetaDataPrint(MetaDataPrint const&) = delete;
-    MetaDataPrint& operator=(MetaDataPrint const&) = delete;
+    MetaDataOutput() = default;
+    MetaDataOutput(MetaDataOutput const&) = delete;
+    MetaDataOutput& operator=(MetaDataOutput const&) = delete;
 
-    ~MetaDataPrint(){
+    ~MetaDataOutput(){
         end();
         if (meta!=nullptr) delete meta;
     }
@@ -33,6 +41,8 @@ class MetaDataPrint : public AudioPrint {
         callback = fn; 
     }
 
+#ifdef USE_URL_ARDUINO
+
     /// Starts the processing - iceMetaint is determined from the HttpRequest
     virtual void begin(HttpRequest &http) {
         TRACED();
@@ -41,13 +51,18 @@ class MetaDataPrint : public AudioPrint {
         icySetup.executeCallback(callback);
         begin(metaInt);
     }
+#endif
 
     /// Starts the processing - if iceMetaint is defined we use icecast
     virtual void begin(int iceMetaint=0) {
         LOGD("%s: %d", LOG_METHOD, iceMetaint);
         if (callback!=nullptr){
             if (meta == nullptr) {
+#if defined(USE_URL_ARDUINO)
                 meta = (iceMetaint > 0) ? new MetaDataICY() : (AbstractMetaData *)  new MetaDataID3();
+#else
+                meta =  new MetaDataID3();
+#endif
             }
             meta->setCallback(callback);    
             meta->setIcyMetaInt(iceMetaint);
@@ -93,5 +108,7 @@ class MetaDataPrint : public AudioPrint {
 
 };
 
+// legacy name
+using MetaDataPrint = MetaDataOutput;
 
 }

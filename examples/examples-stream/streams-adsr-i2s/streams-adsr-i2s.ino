@@ -6,19 +6,19 @@
  * 
  */
 #include "AudioTools.h"
-//#include "AudioLibs/AudioKit.h"
+//#include "AudioLibs/AudioBoardStream.h"
 
-I2SStream i2s; //AudioKitStream
+I2SStream i2s; //AudioBoardStream
 SineWaveGenerator<int16_t> sine;
-AudioEffects<SineWaveGenerator<int16_t>> effects(sine);
+GeneratedSoundStream<int16_t> stream(sine); 
+AudioEffectStream effects(stream);
 ADSRGain adsr(0.0001,0.0001, 0.9 , 0.0002);
-GeneratedSoundStream<int16_t> in(effects); 
-StreamCopy copier(i2s, in); 
+StreamCopy copier(i2s, effects); 
 uint64_t time_on;
 uint64_t time_off;
 
 
-void actionKeyOn(int note){
+void actionKeyOn(float note){
   Serial.println("KeyOn");
   sine.setFrequency(note);
   adsr.keyOn();
@@ -43,7 +43,8 @@ void setup() {
 
   // Setup sound generation based on AudioKit settins
   sine.begin(cfg, 0);
-  in.begin(cfg);
+  stream.begin(cfg);
+  effects.begin(cfg);
 
 }
 

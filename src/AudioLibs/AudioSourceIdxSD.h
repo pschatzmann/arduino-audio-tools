@@ -1,6 +1,5 @@
 #pragma once
 #include <SPI.h>
-#include <FS.h>
 #include <SD.h>
 #include "AudioLogger.h"
 #include "AudioBasic/StrExt.h"
@@ -26,14 +25,14 @@ namespace audio_tools {
  *    D1       -
  *
  *  On the AI Thinker boards the pin settings should be On, On, On, On, On,
- *  
+ * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioSourceSD : public AudioSource {
+class AudioSourceIdxSD : public AudioSource {
 public:
   /// Default constructor
-  AudioSourceSD(const char *startFilePath = "/", const char *ext = ".mp3", int chipSelect = PIN_CS, bool setupIndex=true) {
+  AudioSourceIdxSD(const char *startFilePath = "/", const char *ext = ".mp3", int chipSelect = PIN_CS, bool setupIndex=true) {
     start_path = startFilePath;
     exension = ext;
     setup_index = setupIndex;
@@ -42,16 +41,20 @@ public:
 
   virtual void begin() override {
     TRACED();
-    static bool is_sd_setup = false;
     if (!is_sd_setup) {
-      if (!SD.begin(cs)) {
-        LOGE("SD.begin cs=%d failed", cs);
-        return;
+      while (!SD.begin(cs)) {
+        LOGW("SD.begin cs=%d failed", cs);
+        delay(500);
       }
       is_sd_setup = true;
     }
     idx.begin(start_path, exension, file_name_pattern, setup_index);
     idx_pos = 0;
+  }
+
+  void end() {
+    SD.end();
+    is_sd_setup = false;
   }
 
   virtual Stream *nextStream(int offset = 1) override {
@@ -93,8 +96,15 @@ public:
   /// Allows to "correct" the start path if not defined in the constructor
   virtual void setPath(const char *p) { start_path = p; }
 
+    /// Provides the number of files (The max index is size()-1)
+  long size() { return idx.size();}
+
 protected:
+#if defined(USE_SD_NO_NS) 
+  SDIndex<SDClass, File> idx{SD};
+#else
   SDIndex<fs::SDFS,fs::File> idx{SD};
+#endif
   File file;
   size_t idx_pos = 0;
   const char *file_name;
@@ -102,6 +112,7 @@ protected:
   const char *start_path = nullptr;
   const char *file_name_pattern = "*";
   bool setup_index = true;
+  bool is_sd_setup = false;
   int cs;
 
 

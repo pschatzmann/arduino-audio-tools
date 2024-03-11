@@ -13,7 +13,7 @@
 
 
 A2DPStream in;
-CsvStream<int16_t> out(Serial, 2); // ASCII stream as csv 
+CsvOutput<int16_t> out(Serial, 2); // ASCII stream as csv 
 StreamCopy copier(out, in); // copy in to out
 
 // Arduino Setup

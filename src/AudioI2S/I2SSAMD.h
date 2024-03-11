@@ -4,21 +4,23 @@
 #include "AudioI2S/I2SConfig.h"
 #include <I2S.h>
 
+
 namespace audio_tools {
 
 /**
  * @brief Basic I2S API - for the SAMD
+ * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class I2SBase {
+class I2SDriverSAMD {
   friend class I2SStream;
 
   public:
 
     /// Provides the default configuration
-    I2SConfig defaultConfig(RxTxMode mode) {
-        I2SConfig c(mode);
+    I2SConfigStd defaultConfig(RxTxMode mode) {
+        I2SConfigStd c(mode);
         return c;
     }
 
@@ -28,7 +30,7 @@ class I2SBase {
     }
 
     /// starts the DAC 
-    bool begin(I2SConfig cfg) {
+    bool begin(I2SConfigStd cfg) {
         this->cfg = cfg;
         return I2S.begin(cfg.i2s_format, cfg.sample_rate, cfg.bits_per_sample);
     }
@@ -43,7 +45,7 @@ class I2SBase {
     }
 
     /// provides the actual configuration
-    I2SConfig config() {
+    I2SConfigStd config() {
       return cfg;
     }
 
@@ -64,10 +66,11 @@ class I2SBase {
     }
 
   protected:
-    I2SConfig cfg;
+    I2SConfigStd cfg;
     
-
 };
+
+using I2SDriver = I2SDriverSAMD;
 
 }
 

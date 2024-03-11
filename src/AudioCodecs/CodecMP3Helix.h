@@ -7,12 +7,11 @@
 
 namespace audio_tools {
 
-// audio change notification target
-AudioBaseInfoDependent *audioChangeMP3Helix=nullptr;
-
 /**
  * @brief MP3 Decoder using libhelix: https://github.com/pschatzmann/arduino-libhelix
- * This is basically just a simple wrapper to provide AudioBaseInfo and AudioBaseInfoDependent
+ * This is basically just a simple wrapper to provide AudioInfo and AudioInfoSupport
+ * @ingroup codecs
+ * @ingroup decoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -39,7 +38,7 @@ class MP3DecoderHelix : public AudioDecoder  {
             if (mp3==nullptr){
                 LOGE("Not enough memory for libhelix");
             }
-            setOutputStream(out_stream);
+            setOutput(out_stream);
         }  
 
         /**
@@ -49,15 +48,15 @@ class MP3DecoderHelix : public AudioDecoder  {
          * @param out_stream 
          * @param bi 
          */
-        MP3DecoderHelix(Print &out_stream, AudioBaseInfoDependent &bi){
+        MP3DecoderHelix(Print &out_stream, AudioInfoSupport &bi){
             TRACED();
             mp3 = new libhelix::MP3DecoderHelix();
             filter.setDecoder(mp3);
             if (mp3==nullptr){
                 LOGE("Not enough memory for libhelix");
             }
-            setOutputStream(out_stream);
-            setNotifyAudioChange(bi);
+            setOutput(out_stream);
+            addNotifyAudioChange(bi);
         }  
 
         /**
@@ -69,18 +68,19 @@ class MP3DecoderHelix : public AudioDecoder  {
         }
 
         /// Defines the output Stream
-        virtual void setOutputStream(Print &outStream){
+        virtual void setOutput(Print &outStream){
             if (mp3!=nullptr) mp3->setOutput(outStream);
         }
 
         /// Starts the processing
-        void begin(){
+        bool begin(){
             TRACED();
             if (mp3!=nullptr) {
                 mp3->setDelay(CODEC_DELAY_MS);   
                 mp3->begin();
                 filter.begin();
             } 
+            return true;
         }
 
         /// Releases the reserved memory
@@ -93,9 +93,9 @@ class MP3DecoderHelix : public AudioDecoder  {
             return mp3->audioInfo();
         }
 
-        AudioBaseInfo audioInfo(){
+        AudioInfo audioInfo() override {
             MP3FrameInfo i = audioInfoEx();
-            AudioBaseInfo baseInfo;
+            AudioInfo baseInfo;
             baseInfo.channels = i.nChans;
             baseInfo.sample_rate = i.samprate;
             baseInfo.bits_per_sample = i.bitsPerSample;
@@ -119,21 +119,22 @@ class MP3DecoderHelix : public AudioDecoder  {
         }
 
         /// Defines the callback object to which the Audio information change is provided
-        void setNotifyAudioChange(AudioBaseInfoDependent &bi){
+        void addNotifyAudioChange(AudioInfoSupport &bi) override {
             TRACED();
-            audioChangeMP3Helix = &bi;
-            if (mp3!=nullptr)  mp3->setInfoCallback(infoCallback);
+            AudioDecoder::addNotifyAudioChange(bi);
+            if (mp3!=nullptr) mp3->setInfoCallback(infoCallback, this);
         }
 
         /// notifies the subscriber about a change
-        static void infoCallback(MP3FrameInfo &i){
-            if (audioChangeMP3Helix!=nullptr){
+        static void infoCallback(MP3FrameInfo &i, void * ref){
+            MP3DecoderHelix* p_helix = (MP3DecoderHelix* )ref;
+            if (p_helix!=nullptr){
                 TRACED();
-                AudioBaseInfo baseInfo;
+                AudioInfo baseInfo;
                 baseInfo.channels = i.nChans;
                 baseInfo.sample_rate = i.samprate;
                 baseInfo.bits_per_sample = i.bitsPerSample;
-                audioChangeMP3Helix->setAudioInfo(baseInfo);   
+                p_helix->notifyAudioChange(baseInfo);   
             }
         }
 
@@ -147,7 +148,37 @@ class MP3DecoderHelix : public AudioDecoder  {
             return use_filter;
         }
 
+        /// Provides the maximum frame size - this is allocated on the heap and you can reduce the heap size my minimizing this value
+        size_t maxFrameSize() {
+            return mp3->maxFrameSize();
+        }
 
+        /// Define your optimized maximum frame size
+        void setMaxFrameSize(size_t len){
+            mp3->setMaxFrameSize(len);
+        }
+
+#ifdef HELIX_PCM_CORRECTED
+        /// Provides the maximum pwm buffer size - this is allocated on the heap and you can reduce the heap size my minimizing this value
+        size_t maxPCMSize() {
+            return mp3->maxPCMSize();
+        }
+
+        /// Define your optimized maximum pwm buffer size
+        void setMaxPCMSize(size_t len) {
+            mp3->setMaxPCMSize(len);
+        }
+#else
+        /// Provides the maximum pwm buffer size - this is allocated on the heap and you can reduce the heap size my minimizing this value
+        size_t maxPCMSize() {
+            return mp3->maxPWMSize();
+        }
+
+        /// Define your optimized maximum pwm buffer size
+        void setMaxPCMSize(size_t len) {
+            mp3->setMaxPWMSize(len);
+        }
+#endif
     protected:
         libhelix::MP3DecoderHelix *mp3=nullptr;
         MetaDataFilter<libhelix::MP3DecoderHelix> filter;

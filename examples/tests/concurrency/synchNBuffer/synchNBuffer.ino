@@ -9,7 +9,6 @@
  * 
  */
 #include "AudioTools.h"
-#include "AudioLibs/SynchronizedBuffer.h"
 #include "freertos-all.h"
 
 audio_tools::Mutex mutex;

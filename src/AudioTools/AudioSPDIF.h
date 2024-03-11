@@ -93,14 +93,14 @@ static const uint16_t bmc_tab_uint[256] = {
 static const int16_t *bmc_tab = (int16_t *)bmc_tab_uint;
 
 static uint32_t spdif_buf[SPDIF_BUF_ARRAY_SIZE];
-static uint32_t *spdif_ptr;
+static uint32_t *spdif_ptr = nullptr;
 
 /**
  * @brief SPDIF configuration
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-struct SPDIFConfig : public AudioBaseInfo {
+struct SPDIFConfig : public AudioInfo {
   SPDIFConfig() {
     bits_per_sample = 16;
     channels = 2;
@@ -112,24 +112,26 @@ struct SPDIFConfig : public AudioBaseInfo {
 
 /**
  * @brief Output as 16 bit stereo SPDIF on the I2S data output pin
+ * @ingroup io
  * @author Phil Schatzmann
  * @copyright GPLv3
  *
  */
-class SPDIFStream : public AudioStreamX {
+class SPDIFOutput : public AudioStream {
  public:
   /// default constructor
-  SPDIFStream() = default;
+  SPDIFOutput() = default;
 
   /// destructor
-  virtual ~SPDIFStream() { end(); }
+  virtual ~SPDIFOutput() { end(); }
 
   /// Starting with default settings
   bool begin() { return begin(defaultConfig()); }
 
   /// Start with the provided parameters
-  bool begin(SPDIFConfig cfg) {
+  bool begin(SPDIFConfig config) {
     TRACED();
+    cfg = config;
     // Some validations to make sure that the config is valid
     if (!(cfg.channels == 1 || cfg.channels == 2)) {
       LOGE("Unsupported number of channels: %d", cfg.channels);
@@ -151,6 +153,10 @@ class SPDIFStream : public AudioStreamX {
 
     // Setup I2S
     int sample_rate = cfg.sample_rate * BMC_BITS_FACTOR;
+    if (sample_rate==0){
+      TRACEE();
+      return false;
+    }
     int bclk = sample_rate * I2S_BITS_PER_SAMPLE * I2S_CHANNELS;
     int mclk = (I2S_BUG_MAGIC / bclk) * bclk;  // use mclk for avoiding I2S bug
 
@@ -164,10 +170,11 @@ class SPDIFStream : public AudioStreamX {
     i2s_cfg.pin_data = cfg.pin_data;
 #ifdef ESP32
     i2s_cfg.use_apll = true;
+#  if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0 , 0)
     i2s_cfg.fixed_mclk = mclk;
+#  endif
 #endif
-    i2s.begin(i2s_cfg);
-    i2sOn = true;
+    i2sOn = i2s.begin(i2s_cfg);
     return i2sOn;
   }
 
@@ -178,16 +185,21 @@ class SPDIFStream : public AudioStreamX {
   }
 
   /// Change the audio parameters
-  void setAudioInfo(AudioBaseInfo info) {
+  void setAudioInfo(AudioInfo info) {
     TRACED();
-    cfg.bits_per_sample = info.bits_per_sample;
-    cfg.channels = info.channels;
-    cfg.sample_rate = info.sample_rate;
     if (info.bits_per_sample != 16) {
       LOGE("Unsupported bits per sample: %d - must be 16!",
            info.bits_per_sample);
     }
-    begin(cfg);
+    if (cfg.bits_per_sample != info.bits_per_sample
+    || cfg.channels != info.channels
+    || cfg.sample_rate != info.sample_rate
+    || !i2sOn) {
+      cfg.bits_per_sample = info.bits_per_sample;
+      cfg.channels = info.channels;
+      cfg.sample_rate = info.sample_rate;
+      begin(cfg);
+    }
   }
 
   /// Provides the default configuration
@@ -245,5 +257,7 @@ class SPDIFStream : public AudioStreamX {
     }
   }
 };
+
+using SPDIFStream = SPDIFOutput;
 
 }  // namespace audio_tools

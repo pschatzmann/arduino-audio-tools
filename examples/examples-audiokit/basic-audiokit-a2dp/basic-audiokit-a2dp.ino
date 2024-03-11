@@ -1,17 +1,17 @@
 /**
  * @file base-audiokit-a2dp.ino
  * @author Phil Schatzmann
- * @brief We play mp4 files to an A2DP speaker
- * make sure that you compile with partition scheme: huge app
+ * @brief We play the input from the ADC to an A2DP speaker
  * @copyright GPLv3
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 #include "AudioLibs/AudioA2DP.h"
 
+AudioInfo info(44100, 2, 16);
 BluetoothA2DPSource a2dp_source;
-AudioKitStream i2s;
+AudioBoardStream i2s(AudioKitEs8388V1);
 const int16_t BYTES_PER_FRAME = 4;
 
 // callback used by A2DP to provide the sound data - usually len is 128 2 channel int16 frames
@@ -28,10 +28,8 @@ void setup(void) {
   Serial.println("starting I2S...");
   auto cfg = i2s.defaultConfig(RX_MODE);
   cfg.i2s_format = I2S_STD_FORMAT; // or try with I2S_LSB_FORMAT
-  cfg.bits_per_sample = 16;
-  cfg.channels = 2;
-  cfg.sample_rate = 44100;
-  cfg.input_device = AUDIO_HAL_ADC_INPUT_LINE2; // microphone
+  cfg.copyFrom(info);
+  cfg.input_device = ADC_INPUT_LINE2; // microphone
   i2s.begin(cfg);
 
   // start the bluetooth
@@ -41,4 +39,5 @@ void setup(void) {
 
 // Arduino loop - repeated processing 
 void loop() {
+  delay(1000);
 }

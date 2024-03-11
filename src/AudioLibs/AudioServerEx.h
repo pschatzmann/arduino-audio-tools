@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AudioConfig.h"
-#include "AudioTools/AudioPrint.h"
+#include "AudioTools/AudioOutput.h"
 #include "AudioCodecs/CodecWAV.h"
 #include "HttpServer.h"
 #include "HttpExtensions.h"
@@ -14,7 +14,7 @@ namespace audio_tools {
  * @copyright GPLv3
  */
 
-struct AudioServerExConfig : public AudioBaseInfo {
+struct AudioServerExConfig : public AudioInfo {
     const char* mime = nullptr;
     const char* ssid = nullptr;
     const char* password = nullptr;
@@ -29,11 +29,12 @@ struct AudioServerExConfig : public AudioBaseInfo {
  * https://github.com/pschatzmann/TinyHttp.
  * It supports multiple concurrent clients. You can e.g. use it to write mp3 data and make
  * it available in multiple clients.
+ * @ingroup http
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 
-class AudioServerEx : public AudioPrint {
+class AudioServerEx : public AudioOutput {
   public:
     // Default Constructor
     AudioServerEx() = default;
@@ -121,6 +122,7 @@ class AudioServerEx : public AudioPrint {
  * @brief A powerfull WAV Web server which is based on 
  * https://github.com/pschatzmann/TinyHttp.
  * It supports multiple concurrent clients
+ * @ingroup http
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 
@@ -154,13 +156,16 @@ class AudioWAVServerEx : public AudioServerEx {
         }
 
     protected:
+        // Dynamic memory
+        tinyhttp::StrExt header;
+
         // wav files start with a 44 bytes header
         virtual tinyhttp::Str* getReplyHeader() {
             header.allocate(44);
-            MemoryPrint mp{(uint8_t*)header.c_str(), 44};
-            WAVEncoder enc;
+            MemoryOutput mp{(uint8_t*)header.c_str(), 44};
+            WAVHeader enc;
             WAVAudioInfo wi;
-            wi.format = WAV_FORMAT_PCM;
+            wi.format = AudioFormat::PCM;
             wi.sample_rate = info.sample_rate;
             wi.bits_per_sample = info.bits_per_sample;
             wi.channels = info.channels;
@@ -172,10 +177,6 @@ class AudioWAVServerEx : public AudioServerEx {
 
             return &header;
         }
-
-        // Dynamic memory
-            tinyhttp::StrExt header;
-
 };
 
 }

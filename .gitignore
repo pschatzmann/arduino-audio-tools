@@ -15,6 +15,9 @@ local.properties
 .classpath
 .settings/
 .loadpath
+debug.cfg
+debug_custom.json
+esp32*.svd
 
 # External tool builders
 .externalToolBuilders/
@@ -218,3 +221,13 @@ pip-log.txt
 # Doxygen
 .DS_Store
 /.vs
+
+# Jupyter
+.ipynb_checkpoints/
+jupyter/*.wav
+.DS_Store
+
+# doxygen
+docs/html/
+
+debug.svd

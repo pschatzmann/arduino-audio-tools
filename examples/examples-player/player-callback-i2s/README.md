@@ -2,6 +2,9 @@
 
 The example demonstrates how to implement an __MP3 Player__ which __provides the data via callbacks__ and sends the audio via I2S to an external DAC. 
 
+This demonstrates the minimum implementation. I recommend however to provide implementations for the other callback methods to enhance the functionality: e.g absolute positioning, file selection by name etc. 
+
+
 ## SD Card
 
 Here is the information how to wire the SD card to the ESP32
@@ -20,7 +23,7 @@ Here is the information how to wire the SD card to the ESP32
 
 For my tests I am using the 24-bit PCM5102 PCM5102A Stereo DAC Digital-to-analog Converter PLL Voice Module pHAT
 
-![DAC](https://pschatzmann.github.io/arduino-audio-tools/resources/dac.jpeg)
+![DAC](https://pschatzmann.github.io/Resources/img/dac.jpeg)
 
 I am just using the default pins defined by the framework. However I could change them with the help of the config object. The mute pin can be defined in the constructor of the I2SStream - by not defining anything we use the default which is GPIO23
 

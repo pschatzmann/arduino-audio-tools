@@ -1,4 +1,6 @@
 #pragma once
+#include "AudioConfig.h"
+#ifdef USE_URL_ARDUINO
 
 #include "AudioMetaData/AbstractMetaData.h"
 #include "AudioBasic/Str.h"
@@ -6,12 +8,18 @@
 
 namespace audio_tools {
 
+/** 
+ * @defgroup metadata-icy ICY
+ * @ingroup metadata
+ * @brief Icecast/Shoutcast Metadata
+**/
 
 
 /**
  * @brief Icecast/Shoutcast Metadata Handling.
  * Metadata class which splits the data into audio and metadata. The result is provided via callback methods.
  * see https://www.codeproject.com/Articles/11308/SHOUTcast-Stream-Ripper
+ * @ingroup metadata-icy
  * @author Phil Schatzmann
  * @copyright GPLv3
  */ 
@@ -243,6 +251,7 @@ class MetaDataICY : public AbstractMetaData {
 
 /**
  * @brief Resolve icy-metaint from HttpRequest and execute metadata callbacks
+ * @ingroup metadata-icy
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -299,3 +308,5 @@ class ICYUrlSetup {
 };
 
 }
+
+#endif

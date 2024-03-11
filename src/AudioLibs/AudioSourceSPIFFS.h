@@ -10,7 +10,7 @@ namespace audio_tools {
 
 /**
  * @brief ESP32 AudioSource for AudioPlayer using an the SPIFFS file system
- *
+ * @ingroup player
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -24,7 +24,6 @@ public:
 
   virtual void begin() override {
     TRACED();
-    static bool is_sd_setup = false;
     if (!is_sd_setup) {
       while (!SPIFFS.begin()) {
         LOGE("SPIFFS.begin failed");
@@ -34,6 +33,11 @@ public:
     }
     idx.begin(start_path, exension, file_name_pattern);
     idx_pos = 0;
+  }
+
+  void end() {
+    SPIFFS.end();
+    is_sd_setup = false;
   }
 
   virtual Stream *nextStream(int offset = 1) override {
@@ -75,6 +79,9 @@ public:
   /// Allows to "correct" the start path if not defined in the constructor
   virtual void setPath(const char *p) { start_path = p; }
 
+  /// Provides the number of files (The max index is size()-1): WARNING this is very slow if you have a lot of files in many subdirectories
+  long size() { return idx.size();}
+
 protected:
   SDDirect<fs::SPIFFSFS,fs::File> idx{SPIFFS};
   File file;
@@ -83,6 +90,7 @@ protected:
   const char *exension = nullptr;
   const char *start_path = nullptr;
   const char *file_name_pattern = "*";
+  bool is_sd_setup = false;
 };
 
 } // namespace audio_tools

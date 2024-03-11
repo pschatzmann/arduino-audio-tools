@@ -4,7 +4,7 @@
 ## General Description:
 We implement a A2DP source: We stream the sound input which we read in from the I2S interface to a A2DP sink. We can use any device which provides the sound data via I2S. In order to test the functionality we use the INMP441 microphone.
 
-![INMP441](https://pschatzmann.github.io/arduino-audio-tools/resources/inmp441.jpeg)
+![INMP441](https://pschatzmann.github.io/Resources/img/inmp441.jpeg)
 
 The INMP441 is a high-performance, low power, digital-output, omnidirectional MEMS microphone with a bottom port. The complete INMP441 solution consists of a MEMS sensor, signal conditioning, an analog-to-digital converter, anti-aliasing filters, power management, and an industry-standard 24-bit I²S interface. The I²S interface allows the INMP441 to connect directly to digital processors, such as DSPs and microcontrollers, without the need for an audio codec in the system.
 

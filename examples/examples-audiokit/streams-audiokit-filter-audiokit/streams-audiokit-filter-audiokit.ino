@@ -6,14 +6,13 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
  
-uint16_t sample_rate=44100;
-uint16_t channels = 2;
-AudioKitStream kit;
+AudioInfo info(44100, 2, 16);
+AudioBoardStream kit(AudioKitEs8388V1);
 
 // copy filtered values
-FilteredStream<int16_t, float> filtered(kit, channels);  // Defiles the filter as BaseConverter
+FilteredStream<int16_t, float> filtered(kit, info.channels);  // Defiles the filter as BaseConverter
 StreamCopy copier(filtered, kit); // copies sound into i2s (both from kit to filtered or filered to kit are supported)
 
 // define FIR filter
@@ -33,10 +32,9 @@ void setup(void) {
   // start I2S in
   Serial.println("starting KIT...");
   auto config = kit.defaultConfig(RXTX_MODE);
-  config.sample_rate = sample_rate; 
-  config.channels = channels;
+  config.copyFrom(info); 
   config.sd_active = false;
-  config.input_device = AUDIO_HAL_ADC_INPUT_LINE2;
+  config.input_device = ADC_INPUT_LINE2;
   kit.begin(config);
 
   Serial.println("KIT started...");

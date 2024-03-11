@@ -37,7 +37,7 @@ Here is the information how to wire the SD card to the ESP32
 
 To test the output I am using piezo electric elements
 
-![DAC](https://pschatzmann.github.io/arduino-audio-tools/resources/piezo.jpeg)
+![DAC](https://pschatzmann.github.io/Resources/img/piezo.jpeg)
 
 It should also be possible to connect a headphone to the output pins.
 

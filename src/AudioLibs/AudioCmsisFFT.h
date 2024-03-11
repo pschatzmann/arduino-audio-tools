@@ -1,19 +1,28 @@
 #pragma once
 #include "AudioFFT.h"
-//#ifdef STM32
-#include "CMSIS_DSP.h"
-//#endif
+#ifdef STM32
+#  include "CMSIS_DSP.h"
+#endif
+#if defined(ARDUINO_ARCH_RENESAS) || defined(ARDUINO_ARCH_RP2040)
+#  include "arm_vec_fft.h"
+#endif
+/** 
+ * @defgroup fft-cmsis CMSIS
+ * @ingroup fft
+ * @brief FFT using CMSIS 
+**/
 
 namespace audio_tools {
 
 /**
  * @brief Driver for Cmsis-FFT see https://arm-software.github.io/CMSIS_5/DSP
+ * @ingroup fft-cmsis
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 class FFTDriverCmsisFFT : public FFTDriver {
     public:
-        void begin(int len) override {
+        bool begin(int len) override {
             TRACEI();
             this->len = len;
             input = new float[len];
@@ -23,6 +32,10 @@ class FFTDriverCmsisFFT : public FFTDriver {
             if (status!=ARM_MATH_SUCCESS){
                 LOGE("arm_rfft_fast_init_f32: %d", status);
             }
+            assert(input!=nullptr);
+            assert(output!=nullptr);
+            assert(output_magn != nullptr);
+            return input!=nullptr && output != nullptr && output_magn != nullptr;
         }
         void end()override{
             TRACEI();
@@ -51,6 +64,11 @@ class FFTDriverCmsisFFT : public FFTDriver {
             return output_magn[idx];
         }
 
+        /// same as magnitude
+        float magnitudeFast(int idx) override {
+            return output_magn[idx];
+        }
+
         virtual bool isValid() override{ return status==ARM_MATH_SUCCESS; }
 
 	    arm_rfft_fast_instance_f32 fft_instance;
@@ -67,6 +85,7 @@ class FFTDriverCmsisFFT : public FFTDriver {
 
 /**
  * @brief AudioFFT for ARM processors that provided Cmsis  DSP
+ * @ingroup fft-cmsis
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

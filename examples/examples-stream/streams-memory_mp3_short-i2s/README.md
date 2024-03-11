@@ -4,7 +4,7 @@ In this example we decode a very short MP3 file using lebhelix
 
 ### External DAC:
 
-![DAC](https://pschatzmann.github.io/arduino-audio-tools/resources/dac.jpeg)
+![DAC](https://pschatzmann.github.io/Resources/img/dac.jpeg)
 
 For my tests I am using the 24-bit PCM5102 PCM5102A Stereo DAC Digital-to-analog Converter PLL Voice Module pHAT
 

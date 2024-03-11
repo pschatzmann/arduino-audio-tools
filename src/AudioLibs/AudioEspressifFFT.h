@@ -3,16 +3,23 @@
 #include "AudioFFT.h"
 #include "esp_dsp.h"
 
+/** 
+ * @defgroup fft-dsp esp32-dsp
+ * @ingroup fft
+ * @brief FFT using esp32 esp-dsp library 
+**/
+
 namespace audio_tools {
 
 /**
  * @brief fft Driver for espressif dsp library: https://espressif-docs.readthedocs-hosted.com/projects/esp-dsp/en/latest/esp-dsp-apis.html
+ * @ingroup fft-dsp
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 class FFTDriverEspressifFFT : public FFTDriver {
     public:
-        void begin(int len) override {
+        bool begin(int len) override {
             N = len;
             if (p_data==nullptr){
                 p_data = new float[len*2];
@@ -20,10 +27,12 @@ class FFTDriverEspressifFFT : public FFTDriver {
                     LOGE("not enough memory");
                 }
             }
+            assert(p_data!=nullptr);
             ret = dsps_fft2r_init_fc32(NULL, CONFIG_DSP_MAX_FFT_SIZE);
             if (ret  != ESP_OK){
                 LOGE("dsps_fft2r_init_fc32 %d", ret);
             }
+            return p_data!=nullptr && ret == ESP_OK;
         }
 
         void end() override {
@@ -59,10 +68,12 @@ class FFTDriverEspressifFFT : public FFTDriver {
         };
 
         float magnitude(int idx) override { 
-            if (idx<N){
-                return sqrt(p_data[idx*2] * p_data[idx*2] + p_data[idx*2+1] * p_data[idx*2+1]);
-            } 
-            return 0.0f;
+            return sqrt(p_data[idx*2] * p_data[idx*2] + p_data[idx*2+1] * p_data[idx*2+1]);
+        }
+
+        /// magnitude w/o sqrt
+        float magnitudeFast(int idx) override { 
+            return (p_data[idx*2] * p_data[idx*2] + p_data[idx*2+1] * p_data[idx*2+1]);
         }
 
         virtual bool isValid() override{ return p_data!=nullptr && ret==ESP_OK; }
@@ -74,6 +85,7 @@ class FFTDriverEspressifFFT : public FFTDriver {
 };
 /**
  * @brief AudioFFT using FFTReal. The only specific functionality is the access to the dataArray
+ * @ingroup fft-dsp
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

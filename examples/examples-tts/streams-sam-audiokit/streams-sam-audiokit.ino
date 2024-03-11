@@ -7,10 +7,10 @@
 */
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 #include "sam_arduino.h"
 
-AudioKitStream kit;
+AudioBoardStream kit(AudioKitEs8388V1);
 SAM sam(kit);
 
 const char* text = "Hallo my name is SAM";

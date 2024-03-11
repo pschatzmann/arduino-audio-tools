@@ -1,5 +1,4 @@
 #pragma once
-#include "AudioConfig.h"
 
 namespace audio_tools {
 
@@ -12,13 +11,13 @@ namespace audio_tools {
 class float16 {
   public:
     float16() = default;
-    float16(float value){
-        value = float16::float_to_half(value);
+    float16(float in){
+        this->value = float16::float_to_half(in);
     }
     float16(const float16 &value16){
         this->value = value16.value;
     }
-    explicit inline operator float()  {
+    inline operator float()  {
         return half_to_float(value);
     }
     explicit inline operator double()  {

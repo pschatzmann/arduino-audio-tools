@@ -1,21 +1,24 @@
 #pragma once
 
 #include "AudioConfig.h"
-#include "Stream.h"
-
+#if defined(ARDUINO) && !defined(IS_MIN_DESKTOP)
+#  include "Print.h"
+#endif
 // Logging Implementation
 #if USE_AUDIO_LOGGING
 
 namespace audio_tools {
 
 #if defined(ESP32) && defined(SYNCHRONIZED_LOGGING)
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
+#  include "freertos/FreeRTOS.h"
+#  include "freertos/task.h"
 static portMUX_TYPE mutex_logger = portMUX_INITIALIZER_UNLOCKED;
 #endif
 
+
 /**
  * @brief A simple Logger that writes messages dependent on the log level
+ * @ingroup tools
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 
@@ -34,14 +37,14 @@ class AudioLogger {
         };
 
         /// activate the logging
-        void begin(Stream& out, LogLevel level=LOG_LEVEL) {
-            this->log_stream_ptr = &out;
+        void begin(Print& out, LogLevel level=LOG_LEVEL) {
+            this->log_print_ptr = &out;
             this->log_level = level;
         }
 
         /// checks if the logging is active
         bool isLogging(LogLevel level = Info){
-            return log_stream_ptr!=nullptr && level >= log_level;
+            return log_print_ptr!=nullptr && level >= log_level;
         }
 
         AudioLogger &prefix(const char* file, int line, LogLevel current_level){
@@ -51,7 +54,11 @@ class AudioLogger {
         }
 
         void println(){
-            log_stream_ptr->println(print_buffer);
+#if defined(IS_DESKTOP) || defined(IS_DESKTOP_WITH_TIME_ONLY)
+            fprintf( stderr, "%s\n", print_buffer);
+#else
+            log_print_ptr->println(print_buffer);
+#endif
             print_buffer[0]=0;
             unlock();
         }
@@ -73,10 +80,23 @@ class AudioLogger {
             return log_level;
         }
 
+        void print(const char *c){
+            log_print_ptr->print(c);
+        }
 
+        void printChar(char c){
+            log_print_ptr->print(c);
+        }
+
+        void printCharHex(char c){
+            char tmp[5];
+            unsigned char val = c;
+            snprintf(tmp, 5, "%02X ", val);
+            log_print_ptr->print(tmp);
+        }
 
     protected:
-        Stream *log_stream_ptr = &LOG_STREAM;
+        Print *log_print_ptr = &LOG_STREAM;
         const char* TAG = "AudioTools";
         LogLevel log_level = LOG_LEVEL;
         char print_buffer[LOG_PRINTF_BUFFER_SIZE];
@@ -100,13 +120,13 @@ class AudioLogger {
         int printPrefix(const char* file, int line, LogLevel current_level) const {
             const char* file_name = strrchr(file, '/') ? strrchr(file, '/') + 1 : file;
             const char* level_code = levelName(current_level);
-            int len = log_stream_ptr->print("[");
-            len += log_stream_ptr->print(level_code);
-            len += log_stream_ptr->print("] ");
-            len += log_stream_ptr->print(file_name);
-            len += log_stream_ptr->print(" : ");
-            len += log_stream_ptr->print(line);
-            len += log_stream_ptr->print(" - ");
+            int len = log_print_ptr->print("[");
+            len += log_print_ptr->print(level_code);
+            len += log_print_ptr->print("] ");
+            len += log_print_ptr->print(file_name);
+            len += log_print_ptr->print(" : ");
+            len += log_print_ptr->print(line);
+            len += log_print_ptr->print(" - ");
             return len;
         }
 
@@ -123,6 +143,41 @@ class AudioLogger {
         }
 };
 
+/// Class specific custom log level
+class CustomLogLevel {
+public:
+    AudioLogger::LogLevel getActual(){
+        return actual;
+    }
+
+    /// Defines a custom level
+    void set(AudioLogger::LogLevel level){
+      active = true;
+      original = AudioLogger::instance().level();
+      actual = level;
+    }
+
+    /// sets the defined log level
+    void set(){
+        if (active){
+            AudioLogger::instance().begin(Serial, actual);
+        }
+    }
+    /// resets to the original log level
+    void reset(){
+        if (active){
+            AudioLogger::instance().begin(Serial, original);
+        }
+    }
+protected:
+    bool active=false;
+    AudioLogger::LogLevel original;
+    AudioLogger::LogLevel actual;
+
+};
+
+
+
 }
 
 
@@ -138,35 +193,63 @@ class AudioLogger {
     snprintf(AudioLogger::instance().str(), LOG_PRINTF_BUFFER_SIZE, fmt,  ##__VA_ARGS__); \
     AudioLogger::instance().println();\
 }
+#define LOG_MIN(level) { \
+    AudioLogger::instance().prefix(__FILE__,__LINE__, level); \
+    AudioLogger::instance().println();\
+}
 
+#ifdef LOG_NO_MSG
+#define LOGD(fmt, ...) if (AudioLogger::instance().level()<=AudioLogger::Debug) { LOG_MIN(AudioLogger::Debug);}
+#define LOGI(fmt, ...) if (AudioLogger::instance().level()<=AudioLogger::Info) { LOG_MIN(AudioLogger::Info);}
+#define LOGW(fmt, ...) if (AudioLogger::instance().level()<=AudioLogger::Warning) { LOG_MIN(AudioLogger::Warning);}
+#define LOGE(fmt, ...) if (AudioLogger::instance().level()<=AudioLogger::Error) { LOG_MIN(AudioLogger::Error);}
+#else
 // Log statments which store the fmt string in Progmem
 #define LOGD(fmt, ...) if (AudioLogger::instance().level()<=AudioLogger::Debug) { LOG_OUT_PGMEM(AudioLogger::Debug, fmt, ##__VA_ARGS__);}
 #define LOGI(fmt, ...) if (AudioLogger::instance().level()<=AudioLogger::Info) { LOG_OUT_PGMEM(AudioLogger::Info, fmt, ##__VA_ARGS__);}
 #define LOGW(fmt, ...) if (AudioLogger::instance().level()<=AudioLogger::Warning) { LOG_OUT_PGMEM(AudioLogger::Warning, fmt, ##__VA_ARGS__);}
 #define LOGE(fmt, ...) if (AudioLogger::instance().level()<=AudioLogger::Error) { LOG_OUT_PGMEM(AudioLogger::Error, fmt, ##__VA_ARGS__);}
-    
-#else
-
-#define LOGD(...) 
-#define LOGI(...) 
-#define LOGW(...) 
-#define LOGE(...) 
-
 #endif
 
-// Log File and line 
-#ifdef NO_TRACED
+// Just log file and line 
+#if defined(NO_TRACED) || defined(NO_TRACE)
 #  define TRACED()
 #else
 #  define TRACED() if (AudioLogger::instance().level()<=AudioLogger::Debug) { LOG_OUT(AudioLogger::Debug, LOG_METHOD);}
 #endif
 
-#ifdef NO_TRACEI
+#if  defined(NO_TRACEI) || defined(NO_TRACE)
 #  define TRACEI()
 #else 
 #  define TRACEI() if (AudioLogger::instance().level()<=AudioLogger::Info) { LOG_OUT(AudioLogger::Info, LOG_METHOD);}
 #endif
-#define TRACEW() if (AudioLogger::instance().level()<=AudioLogger::Warning) { LOG_OUT(AudioLogger::Warning, LOG_METHOD);}
+
+#if  defined(NO_TRACEW) || defined(NO_TRACE)
+#  define TRACEW()
+#else 
+#  define TRACEW() if (AudioLogger::instance().level()<=AudioLogger::Warning) { LOG_OUT(AudioLogger::Warning, LOG_METHOD);}
+#endif
+
+#if  defined(NO_TRACEE) || defined(NO_TRACE)
+#  define TRACEE()
+#else 
 #define TRACEE() if (AudioLogger::instance().level()<=AudioLogger::Error) { LOG_OUT(AudioLogger::Error, LOG_METHOD);}
+#endif
+
+
+
+#else
+
+// Switch off logging
+#define LOGD(...) 
+#define LOGI(...) 
+#define LOGW(...) 
+#define LOGE(...) 
+#define TRACED()
+#define TRACEI()
+#define TRACEW()
+#define TRACEE()
+
+#endif
 
 

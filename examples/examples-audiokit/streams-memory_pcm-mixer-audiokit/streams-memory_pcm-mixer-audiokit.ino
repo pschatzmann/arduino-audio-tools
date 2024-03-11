@@ -9,19 +9,17 @@
  *
  */
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 #include "drums.h"
 #include "guitar.h"
 
 InputMixer<int16_t> mixer;
-AudioKitStream kit;
+AudioBoardStream kit(AudioKitEs8388V1);
 MemoryStream drums(drums_raw, drums_raw_len);
 MemoryStream guitar(guitar_raw, guitar_raw_len);
 StreamCopy copier(kit, mixer);
 
 void setup() {
-  mixer.add(drums);
-  mixer.add(guitar);
 
   // auto restart when MemoryStream has ended
   drums.setLoop(true);
@@ -34,6 +32,11 @@ void setup() {
   kit.begin(cfg);
   // max volume
   kit.setVolume(1.0);
+
+  mixer.add(drums);
+  mixer.add(guitar);
+  mixer.begin(cfg);
+
 }
 
 void loop() { copier.copy(); }

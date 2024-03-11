@@ -21,6 +21,8 @@ namespace audio_tools {
 /**
  * @brief Decoder for G.722. Depends on
  * https://github.com/pschatzmann/arduino-libg722.
+ * @ingroup codecs
+ * @ingroup decoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -28,35 +30,25 @@ class G722Decoder : public AudioDecoder {
  public:
   G722Decoder() = default;
 
-  virtual void setAudioInfo(AudioBaseInfo cfg) { this->cfg = cfg; }
-
-  virtual AudioBaseInfo audioInfo() { return cfg; }
-
-  virtual void begin(AudioBaseInfo cfg) {
-    setAudioInfo(cfg);
-    begin();
-  }
-
   /// Defines the options for the G.722 Codec: G722_SAMPLE_RATE_8000,G722_PACKED
   void setOptions(int options){
     this->options = options;
   }
 
-  virtual void begin() {
+  virtual bool begin() {
     TRACEI();
     input_buffer.resize(10);
     result_buffer.resize(40);
 
-    g722_dctx = g722_decoder_new(cfg.sample_rate, options);
+    g722_dctx = g722_decoder_new(info.sample_rate, options);
     if (g722_dctx == nullptr) {
       LOGE("g722_decoder_new");
-      return;
+      return false;
     }
 
-    if (p_notify != nullptr) {
-      p_notify->setAudioInfo(cfg);
-    }
+    notifyAudioChange(info);
     is_active = true;
+    return true;
   }
 
   virtual void end() {
@@ -65,11 +57,7 @@ class G722Decoder : public AudioDecoder {
     is_active = false;
   }
 
-  virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi) {
-    p_notify = &bi;
-  }
-
-  virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
+  virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
 
   operator bool() { return is_active; }
 
@@ -91,8 +79,6 @@ class G722Decoder : public AudioDecoder {
  protected:
   Print *p_print = nullptr;
   G722_DEC_CTX *g722_dctx=nullptr;
-  AudioBaseInfo cfg;
-  AudioBaseInfoDependent *p_notify = nullptr;
   Vector<uint8_t> input_buffer;
   Vector<uint8_t> result_buffer;
   int options = G722_SAMPLE_RATE_8000;
@@ -123,6 +109,8 @@ class G722Decoder : public AudioDecoder {
  * @brief Encoder for G.722 - Depends on
  * https://github.com/pschatzmann/arduino-libg722.
  * Inspired by g722enc.c
+ * @ingroup codecs
+ * @ingroup encoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -130,31 +118,27 @@ class G722Encoder : public AudioEncoder {
  public:
   G722Encoder() = default;
 
-  void begin(AudioBaseInfo bi) {
-    setAudioInfo(bi);
-    begin();
-  }
-
   /// Defines the options for the G.722 Codec: G722_SAMPLE_RATE_8000,G722_PACKED
   void setOptions(int options){
     this->options = options;
   }
 
-  void begin() {
+  bool begin() {
     TRACEI();
-    if (cfg.channels != 1) {
-      LOGW("1 channel expected, was: %d", cfg.channels);
+    if (info.channels != 1) {
+      LOGW("1 channel expected, was: %d", info.channels);
     }
 
-    g722_ectx = g722_encoder_new(cfg.sample_rate, options);
+    g722_ectx = g722_encoder_new(info.sample_rate, options);
     if (g722_ectx == NULL) {
       LOGE("g722_encoder_new");
-      return;
+      return false;
     }
 
     input_buffer.resize(G722_PCM_SIZE);
     result_buffer.resize(G722_ENC_SIZE);
     is_active = true;
+    return true;
   }
 
   virtual void end() {
@@ -165,9 +149,7 @@ class G722Encoder : public AudioEncoder {
 
   virtual const char *mime() { return "audio/g722"; }
 
-  virtual void setAudioInfo(AudioBaseInfo cfg) { this->cfg = cfg; }
-
-  virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
+  virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
 
   operator bool() { return is_active; }
 
@@ -186,7 +168,6 @@ class G722Encoder : public AudioEncoder {
   }
 
  protected:
-  AudioBaseInfo cfg;
   Print *p_print = nullptr;
   G722_ENC_CTX *g722_ectx = nullptr;
   Vector<uint8_t> input_buffer;

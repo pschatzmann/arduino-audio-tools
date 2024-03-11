@@ -1,6 +1,6 @@
 
 #pragma once
-#if defined(ARDUINO_ARCH_RP2040) || defined(ARDUINO_ARCH_MBED_RP2040)
+#if defined(RP2040_HOWER) 
 #include "AudioPWM/PWMAudioBase.h"
 #include "hardware/gpio.h"
 #include "hardware/adc.h"
@@ -13,8 +13,12 @@
 namespace audio_tools {
 
 // forwrd declaratioin of callback
-class PWMAudioStreamPico;
-typedef PWMAudioStreamPico PWMAudioStream;
+class PWMDriverRP2040;
+/**
+ * @typedef  DriverPWMBase
+ * @brief Please use DriverPWMBase!
+ */
+using PWMDriver = PWMDriverRP2040;
 
 /**
  * @brief Rasperry Pico Channel to pin assignments
@@ -32,18 +36,19 @@ struct PicoChannelOut {
 /**
  * @brief Audio output for the Rasperry Pico to PWM pins.
    The Raspberry Pi Pico has 8 PWM blocks/slices(1-8) and each PWM block provides up to two PWM outputs(A-B). 
+ * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
 
  */
 
-class PWMAudioStreamPico : public PWMAudioStreamBase {
+class PWMDriverRP2040 : public DriverPWMBase {
     //friend bool defaultPWMAudioOutputCallbackPico(repeating_timer* ptr);
 
     public:
 
-        PWMAudioStreamPico(){
-            LOGD("PWMAudioStreamPico");
+        PWMDriverRP2040(){
+            TRACED();
         }
 
         /// Ends the output -> resets the timer and the pins
@@ -148,8 +153,8 @@ class PWMAudioStreamPico : public PWMAudioStreamBase {
         }
 
         // timed output executed at the sampleRate
-        inline static void defaultPWMAudioOutputCallbackPico(void* ptr) {
-            PWMAudioStreamPico *self = (PWMAudioStreamPico*)  ptr;
+        static void defaultPWMAudioOutputCallbackPico(void* ptr) {
+            PWMDriverRP2040 *self = (PWMDriverRP2040*)  ptr;
             self->playNextFrame();
         }
 

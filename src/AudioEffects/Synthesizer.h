@@ -21,9 +21,10 @@ namespace audio_tools {
  */
 class AbstractSynthesizerChannel {
     public:
+        virtual ~AbstractSynthesizerChannel() = default;
         virtual AbstractSynthesizerChannel* clone() = 0;
         /// Start the sound generation
-        virtual void begin(AudioBaseInfo config);
+        virtual void begin(AudioInfo config);
         /// Checks if the ADSR is still active - and generating sound
         virtual bool isActive() = 0;
         /// Provides the key on event to ADSR to start the sound
@@ -43,34 +44,48 @@ class AbstractSynthesizerChannel {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-template <class EffectsT>
 class DefaultSynthesizerChannel : public AbstractSynthesizerChannel {
     public:
         /// Default constructor
         DefaultSynthesizerChannel() = default;
 
+        DefaultSynthesizerChannel(SoundGenerator<int16_t> &generator){
+            setGenerator(generator);
+        } 
+
         /// Copy constructor
-        DefaultSynthesizerChannel(DefaultSynthesizerChannel<EffectsT> &ch) = default;
+        DefaultSynthesizerChannel(DefaultSynthesizerChannel &ch) = default;
         
-        DefaultSynthesizerChannel<EffectsT> *clone() override {
+        DefaultSynthesizerChannel *clone() override {
             TRACED();
-            auto result = new DefaultSynthesizerChannel<EffectsT>(*this);
+            auto result = new DefaultSynthesizerChannel(*this);
             result->begin(config);
             return result;
         }
 
-        virtual void begin(AudioBaseInfo config) override {
+        void setGenerator(SoundGenerator<int16_t> &generator){
+            p_generator = &generator;
+        }
+
+        virtual void begin(AudioInfo config) override {
             TRACEI();
             this->config = config;
             config.logInfo();
+
+            // setup generator
+            if (p_generator==nullptr){
+                static FastSineGenerator<int16_t> sine;
+                p_generator = &sine;
+            }
+            p_generator->begin(config);
+
             // find ADSRGain
-            p_adsr = (ADSRGain*) audio_effects.findEffect(1);
+            p_adsr = (ADSRGain*) effects.findEffect(1);
             if (p_adsr==nullptr){
                 p_adsr = new ADSRGain(0.0001, 0.0001, 0.8, 0.0005);
                 p_adsr->setId(1);
-                audio_effects.addEffect(p_adsr);
+                effects.addEffect(p_adsr);
             } 
-            audio_effects.generator().begin(config);
         }
 
         virtual bool isActive() override{
@@ -79,7 +94,9 @@ class DefaultSynthesizerChannel : public AbstractSynthesizerChannel {
 
         /// start to play a note - note expects the frequency of the note!
         virtual void keyOn(int note, float tgt) override{
-            audio_effects.generator().setFrequency(note);
+            if (p_generator!=nullptr){
+                p_generator->setFrequency(note);
+            }
             if (p_adsr!=nullptr){
                 actual_note = note;
                 p_adsr->keyOn(tgt);  
@@ -96,7 +113,13 @@ class DefaultSynthesizerChannel : public AbstractSynthesizerChannel {
         }
 
         virtual int16_t readSample() override{
-            return audio_effects.readSample();
+            if (p_generator==nullptr) return 0;
+            int16_t sample = p_generator->readSample();
+            int size = effects.size();
+            for (int j=0; j<size; j++){
+                sample = effects[j]->process(sample);
+            }
+            return sample;
         }
 
         virtual int note() override {
@@ -104,84 +127,18 @@ class DefaultSynthesizerChannel : public AbstractSynthesizerChannel {
         }
 
         void addEffect(AudioEffect *ptr){
-            audio_effects.addEffect(ptr);
+            effects.addEffect(ptr);
         }
 
     protected:
-        AudioBaseInfo config;
-        EffectsT audio_effects;
+        AudioInfo config;
+        AudioEffectCommon effects;
+        SoundGenerator<int16_t> *p_generator = nullptr;
         ADSRGain *p_adsr = nullptr;
         int actual_note = 0;
 
 };
 
-/**
- * @brief Audio Processing Channel based on a Input Stream and an Audio Effects Chain. This can be used todo 
- * implement a Guitar Amplifier.
- * 
- */
-class DefaultGuitarChannel : public DefaultSynthesizerChannel<AudioEffects<GeneratorFromStream<int16_t>>> {
-    public:
-        /// Default constructor
-        DefaultGuitarChannel() = default;
-
-        /// Constructor which defines the input stream
-        DefaultGuitarChannel(Stream &input) {
-            setStream(input);
-        }
-
-        /// Copy constructor
-        DefaultGuitarChannel(DefaultGuitarChannel &ch) = default;
-        
-        /// Creates a copy of the channel
-        DefaultGuitarChannel *clone() override {
-            TRACED();
-            auto result = new DefaultGuitarChannel(*this);
-            result->begin(config);
-            return result;
-        }
-
-        /// Defines the inputStream
-        void setStream(Stream &input){
-            audio_effects.generator().setStream(input);
-        }
-
-        /// Starts the audio generator / audio processing
-        virtual void begin(AudioBaseInfo config) override {
-            TRACEI();
-            this->config = config;
-            config.logInfo();
-            audio_effects.generator().begin(config);
-        }
-
-        virtual bool isActive() override{
-            return true;
-        }
-
-        /// start to play a note - note expects the frequency of the note!
-        virtual void keyOn(int note, float tgt) override{
-        }
-
-        virtual void keyOff() override{
-        }
-
-        virtual int16_t readSample() override{
-            return audio_effects.readSample();
-        }
-
-        virtual int note() override {
-            return -1;
-        }
-
-        void addEffect(AudioEffect *ptr){
-            audio_effects.addEffect(ptr);
-        }
-
-    protected:
-        AudioBaseInfo config;
-        AudioEffects<GeneratorFromStream<int16_t>> audio_effects;
-
-};
 
 /**
  * @brief Arduino GPIO pin to note assossiation
@@ -191,20 +148,20 @@ class DefaultGuitarChannel : public DefaultSynthesizerChannel<AudioEffects<Gener
  */
 struct SynthesizerKey {
     int pin;
-    int note;
+    float note;
 };
-
 
 /**
  * @brief A simple Synthesizer which can generate sound having multiple keys pressed. The main purpose
  * of this class is managing the synthezizer channels
+ * @ingroup generator
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 class Synthesizer : public SoundGenerator<int16_t> {
     public:
         Synthesizer() {
-            defaultChannel = new DefaultSynthesizerChannel<AudioEffects<SineWaveGenerator<int16_t>>>();
+            defaultChannel = new DefaultSynthesizerChannel();
         }
 
         Synthesizer(AbstractSynthesizerChannel *ch){
@@ -214,7 +171,7 @@ class Synthesizer : public SoundGenerator<int16_t> {
         Synthesizer(Synthesizer const&) = delete;
         Synthesizer& operator=(Synthesizer const&) = delete;
 
-        ~Synthesizer(){
+        virtual ~Synthesizer(){
             TRACED();
             for (int j=0;j<channels.size();j++){
                 delete channels[j];
@@ -226,7 +183,7 @@ class Synthesizer : public SoundGenerator<int16_t> {
 #endif
        }
 
-        bool begin(AudioBaseInfo config) {
+        bool begin(AudioInfo config) {
             TRACEI();
             this->cfg = config;
             SoundGenerator<int16_t>::begin(config);
@@ -255,7 +212,7 @@ class Synthesizer : public SoundGenerator<int16_t> {
 
         /// Provides mixed samples of all channels
         int16_t readSample() override {
-            float total = 0;
+            int total = 0;
             uint16_t count = 0;
             // calculate sum of all channels
             for (int j=0;j<channels.size();j++){
@@ -265,9 +222,9 @@ class Synthesizer : public SoundGenerator<int16_t> {
                 }
             }
             // prevent divide by zero
-            int16_t result = 0;
+            int result = 0;
             if (count>0){
-                result = 0.9 * total / count;
+                result = NumberConverter::clip<int16_t>(total / count);
             }
             return result;
         }
@@ -286,7 +243,7 @@ class Synthesizer : public SoundGenerator<int16_t> {
         }
 
     protected:
-        AudioBaseInfo cfg;
+        AudioInfo cfg;
         AbstractSynthesizerChannel* defaultChannel;
         Vector<AbstractSynthesizerChannel*> channels;
         const char* midi_name = "Synthesizer";

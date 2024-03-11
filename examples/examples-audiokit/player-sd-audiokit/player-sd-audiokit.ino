@@ -8,16 +8,28 @@
 
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 #include "AudioLibs/AudioSourceSD.h" // or AudioSourceIdxSD.h
 #include "AudioCodecs/CodecMP3Helix.h"
 
 const char *startFilePath="/";
 const char* ext="mp3";
 AudioSourceSD source(startFilePath, ext, PIN_AUDIO_KIT_SD_CARD_CS);
-AudioKitStream kit;
+AudioBoardStream kit(AudioKitEs8388V1);
 MP3DecoderHelix decoder;  // or change to MP3DecoderMAD
 AudioPlayer player(source, kit, decoder);
+
+void next(bool, int, void*) {
+   player.next();
+}
+
+void previous(bool, int, void*) {
+   player.previous();
+}
+
+void startStop(bool, int, void*) {
+   player.setActive(!player.isActive());
+}
 
 void setup() {
   Serial.begin(115200);
@@ -29,6 +41,12 @@ void setup() {
   // SPI.begin(PIN_AUDIO_KIT_SD_CARD_CLK, PIN_AUDIO_KIT_SD_CARD_MISO, PIN_AUDIO_KIT_SD_CARD_MOSI, PIN_AUDIO_KIT_SD_CARD_CS);
   cfg.sd_active = true;
   kit.begin(cfg);
+
+  // setup additional buttons 
+  kit.addDefaultActions();
+  kit.addAction(kit.getKey(1), startStop);
+  kit.addAction(kit.getKey(4), next);
+  kit.addAction(kit.getKey(3), previous);
 
 
   // setup player
@@ -43,4 +61,6 @@ void setup() {
 
 void loop() {
   player.copy();
+  kit.processActions();
+
 }

@@ -5,7 +5,7 @@ SineWaveGenerator<int16_t> sine_wave(32000);      // subclass of SoundGenerator 
 SineFromTable<int16_t> sine_table(32000);         // subclass of SoundGenerator with max amplitude of 32000
 FastSineGenerator<int16_t> sine_fast(32000);  
 
-size_t measure(int sec, SoundGenerator<int16_t> *gen){
+size_t measure(SoundGenerator<int16_t> *gen){
     uint64_t start = millis();
     size_t count = 0;
     for(int i=0;i<1000000;i++){
@@ -28,10 +28,10 @@ void setup(){
 }
 
 void loop(){
-    Serial.print(resultStr("SineWaveGenerator", measure(sec, &sine_wave)));
+    Serial.print(resultStr("SineWaveGenerator", measure(&sine_wave)));
     Serial.print(" - ");
-    Serial.print(resultStr("SineFromTable", measure(sec, &sine_table)));
+    Serial.print(resultStr("SineFromTable", measure(&sine_table)));
     Serial.print(" - ");
-    Serial.print(resultStr("FastSineGenerator", measure(sec, &sine_fast)));
+    Serial.print(resultStr("FastSineGenerator", measure(&sine_fast)));
     Serial.println();
 }

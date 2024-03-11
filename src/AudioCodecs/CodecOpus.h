@@ -9,8 +9,9 @@
 #endif
 
 #ifndef OPUS_DEC_MAX_BUFFER_SIZE
-#define OPUS_DEC_MAX_BUFFER_SIZE 1024
+#define OPUS_DEC_MAX_BUFFER_SIZE 4*1024
 #endif
+
 
 namespace audio_tools {
 
@@ -19,7 +20,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-struct OpusSettings : public AudioBaseInfo {
+struct OpusSettings : public AudioInfo {
   OpusSettings() {
     /// 8000,12000,16000 ,24000,48000
     sample_rate = 48000;
@@ -29,6 +30,8 @@ struct OpusSettings : public AudioBaseInfo {
     bits_per_sample = 16;
   }
   int max_buffer_size = OPUS_DEC_MAX_BUFFER_SIZE;
+  int max_buffer_write_size = 512;
+
 };
 
 /**
@@ -57,7 +60,7 @@ setting the value.
 OPUS_SIGNAL_MUSIC};<br> int inband_fecs[3] = {0, 0, 1};<br> int
 packet_loss_perc[4] = {0, 1, 2, 5};<br> int lsb_depths[2] = {8, 24};<br> int
 prediction_disabled[3] = {0, 0, 1};<br> int use_dtx[2] = {0, 1};<br> int
-frame_sizes_ms_x2[9] = {OPUS_FRAMESIZE_2_5_MS,OPUS_FRAMESIZE_5_MS,OPUS_FRAMESIZE_10_MS,OPUS_FRAMESIZE_20_MS,OPUS_FRAMESIZE_40_MS,OPUS_FRAMESIZE_60_MS,OPUS_FRAMESIZE_80_MS,OPUS_FRAMESIZE_100_MS,OPUS_FRAMESIZE_120_MS}/* x2 to avoid 2.5 ms <br>
+frame_sizes_ms_x2[9] = {OPUS_FRAMESIZE_2_5_MS,OPUS_FRAMESIZE_5_MS,OPUS_FRAMESIZE_10_MS,OPUS_FRAMESIZE_20_MS,OPUS_FRAMESIZE_40_MS,OPUS_FRAMESIZE_60_MS,OPUS_FRAMESIZE_80_MS,OPUS_FRAMESIZE_100_MS,OPUS_FRAMESIZE_120_MS} x2 to avoid 2.5 ms <br>
  * @author Phil Schatzmann
  * @copyright GPLv3
 **/
@@ -103,8 +106,10 @@ struct OpusEncoderSettings : public OpusSettings {
 };
 
 /**
- * @brief OpusDecoder. Depends on https://github.com/pschatzmann/arduino-libopus.git
+ * @brief OpusAudioDecoder: Depends on https://github.com/pschatzmann/arduino-libopus.git
  * @author Phil Schatzmann
+ * @ingroup codecs
+ * @ingroup decoder
  * @copyright GPLv3
  */
 class OpusAudioDecoder : public AudioDecoder {
@@ -112,7 +117,7 @@ class OpusAudioDecoder : public AudioDecoder {
   /**
    * @brief Construct a new OpusDecoder object
    */
-  OpusAudioDecoder() { TRACED(); }
+  OpusAudioDecoder() = default;
 
   /**
    * @brief Construct a new OpusDecoder object
@@ -121,44 +126,52 @@ class OpusAudioDecoder : public AudioDecoder {
    */
   OpusAudioDecoder(Print &out_stream) {
     TRACED();
-    setOutputStream(out_stream);
+    setOutput(out_stream);
   }
 
   /// Defines the output Stream
-  void setOutputStream(Print &out_stream) override { p_print = &out_stream; }
+  void setOutput(Print &out_stream) override { p_print = &out_stream; }
 
-  void setNotifyAudioChange(AudioBaseInfoDependent &bi) override {
-    this->bid = &bi;
-  }
-
-  AudioBaseInfo audioInfo() override { return cfg; }
+  AudioInfo audioInfo() override { return cfg; }
 
   /// Provides access to the configuration
   OpusSettings &config() { return cfg; }
   OpusSettings &defaultConfig() { return cfg; }
 
-  void begin(OpusSettings info) {
+  bool begin(OpusSettings settings) {
     TRACED();
-    cfg = info;
-    if (bid != nullptr) {
-      bid->setAudioInfo(cfg);
-    }
-    begin();
+    AudioDecoder::setAudioInfo(settings);
+    cfg = settings;
+    notifyAudioChange(cfg);
+    return begin();
   }
 
-  void begin() override {
+  bool begin() override {
     TRACED();
+    if (!isValidRate(cfg.sample_rate)){
+      LOGE("Sample rate not supported: %d", cfg.sample_rate);
+      return false;
+    }
     outbuf.resize(cfg.max_buffer_size);
     assert(outbuf.data() != nullptr);
     
-    int err;
-    dec = opus_decoder_create(cfg.sample_rate, cfg.channels, &err);
+    // int err;
+    // dec = opus_decoder_create(cfg.sample_rate, cfg.channels, &err);
+   
+    size_t size = opus_decoder_get_size(cfg.channels);
+    decbuf.resize(size);
+    assert(decbuf.data() != nullptr);
+    dec = (OpusDecoder*)decbuf.data();
+    int err = opus_decoder_init(dec, cfg.sample_rate, cfg.channels);
+  
+
     if (err != OPUS_OK) {
       LOGE("opus_decoder_create: %s for sample_rate: %d, channels:%d",
            opus_strerror(err), cfg.sample_rate, cfg.channels);
-      return;
+      return false;
     }
     active = true;
+    return true;
   }
 
   void end() override {
@@ -167,29 +180,42 @@ class OpusAudioDecoder : public AudioDecoder {
       opus_decoder_destroy(dec);
       dec = nullptr;
     }
+    outbuf.resize(0);
+    decbuf.resize(0);
     active = false;
   }
 
-  void setAudioInfo(AudioBaseInfo from) override {
+  void setAudioInfo(AudioInfo from) override {
+    AudioDecoder::setAudioInfo(from);
+    info = from;
     cfg.sample_rate = from.sample_rate;
     cfg.channels = from.channels;
     cfg.bits_per_sample = from.bits_per_sample;
   }
 
-  size_t write(const void *in_ptr, size_t in_size) {
+  size_t write(const void *in_ptr, size_t in_size) override {
     if (!active || p_print == nullptr) return 0;
     // decode data
-    LOGD("opus_decode - bytes: %d", in_size);
-    int in_band_forware_error_correction = 0;
+    LOGD("OpusAudioDecoder::write: %d", (int)in_size);
+    int in_band_forward_error_correction = 0;
+    int frame_count = cfg.max_buffer_size / cfg.channels / sizeof(opus_int16);
     int out_samples = opus_decode(
         dec, (uint8_t *)in_ptr, in_size, (opus_int16 *)outbuf.data(),
-        cfg.max_buffer_size, in_band_forware_error_correction);
+        frame_count, in_band_forward_error_correction);
     if (out_samples < 0) {
-      LOGE("opus_decode: %s", opus_strerror(out_samples));
+      LOGW("opus-decode: %s", opus_strerror(out_samples));
     } else if (out_samples > 0) {
       // write data to final destination
       int out_bytes = out_samples * cfg.channels * sizeof(int16_t);
-      p_print->write(outbuf.data(), out_bytes);
+      LOGD("opus-decode: %d", out_bytes);
+      int open = out_bytes;
+      int processed = 0;
+      while(open>0){
+        int to_write = std::min(open, cfg.max_buffer_write_size);
+        int written = p_print->write(outbuf.data()+processed, to_write);
+        open -= written;
+        processed += written;
+      }
     }
     return in_size;
   }
@@ -198,42 +224,52 @@ class OpusAudioDecoder : public AudioDecoder {
 
  protected:
   Print *p_print = nullptr;
-  AudioBaseInfoDependent *bid = nullptr;
   OpusSettings cfg;
   OpusDecoder *dec;
-  bool active;
+  bool active = false;
   Vector<uint8_t> outbuf{0};
+  Vector<uint8_t> decbuf{0};
+  const uint32_t valid_rates[5] = {8000, 12000, 16000, 24000,  48000};
+
+  bool isValidRate(int rate){
+    for (auto &valid : valid_rates){
+      if (valid==rate) return true;
+    }
+    return false;
+  }
 };
 
 /**
- * @brief OpusDecoder - Actually this class does no encoding or decoding at
- * all. It just passes on the data. Dependent on https://github.com/pschatzmann/arduino-libopus.git
+ * @brief OpusAudioEncoder: Dependens on https://github.com/pschatzmann/arduino-libopus.git
+ * @ingroup codecs
+ * @ingroup encoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 class OpusAudioEncoder : public AudioEncoder {
  public:
   // Empty Constructor - the output stream must be provided with begin()
-  OpusAudioEncoder() {}
+  OpusAudioEncoder() = default;
 
   // Constructor providing the output stream
-  OpusAudioEncoder(Print &out) { setOutputStream(out); }
+  OpusAudioEncoder(Print &out) { setOutput(out); }
 
   /// Defines the output Stream
-  void setOutputStream(Print &out_stream) override { p_print = &out_stream; }
+  void setOutput(Print &out_stream) override { p_print = &out_stream; }
 
   /// Provides "audio/pcm"
   const char *mime() override { return "audio/opus"; }
 
   /// We actually do nothing with this
-  void setAudioInfo(AudioBaseInfo from) override {
+  void setAudioInfo(AudioInfo from) override {
+    AudioEncoder::setAudioInfo(from);
     cfg.sample_rate = from.sample_rate;
     cfg.channels = from.channels;
     cfg.bits_per_sample = from.bits_per_sample;
   }
 
   /// starts the processing using the actual OpusAudioInfo
-  void begin() override {
+  bool begin() override {
     int err;
     int size = getFrameSizeSamples(cfg.sample_rate) * 2;
     frame.resize(size);
@@ -242,18 +278,20 @@ class OpusAudioEncoder : public AudioEncoder {
     if (err != OPUS_OK) {
       LOGE("opus_encoder_create: %s for sample_rate: %d, channels:%d",
            opus_strerror(err), cfg.sample_rate, cfg.channels);
-      return;
+      return false;
     }
     is_open = settings();
+    return true;
   }
 
   /// Provides access to the configuration
   OpusEncoderSettings &config() { return cfg; }
+
   OpusEncoderSettings &defaultConfig() { return cfg; }
 
-  void begin(OpusEncoderSettings settings) {
+  bool begin(OpusEncoderSettings settings) {
     cfg = settings;
-    begin();
+    return begin();
   }
 
   /// stops the processing
@@ -266,8 +304,9 @@ class OpusAudioEncoder : public AudioEncoder {
   }
 
   /// Writes PCM data to be encoded as Opus
-  size_t write(const void *in_ptr, size_t in_size) {
+  size_t write(const void *in_ptr, size_t in_size) override {
     if (!is_open || p_print == nullptr) return 0;
+    LOGD("OpusAudioEncoder::write: %d", (int)in_size);
 
     // fill frame
     uint8_t *p_byte = (uint8_t *)in_ptr;
@@ -313,9 +352,10 @@ class OpusAudioEncoder : public AudioEncoder {
       if (len < 0) {
         LOGE("opus_encode: %s", opus_strerror(len));
       } else if (len > 0) {
+        LOGD("opus-encode: %d", len);
         int eff = p_print->write(packet, len);
         if (eff!=len){
-          LOGE("encodeFrame data lost");
+          LOGE("encodeFrame data lost: %d->%d", len, eff);
         }
       }
     }

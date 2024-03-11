@@ -10,12 +10,11 @@
  * 
  */
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 #include "AudioLibs/MemoryManager.h"
 
-uint16_t sample_rate = 16000;
-uint8_t channels = 1;  // The stream will have 2 channels 
-AudioKitStream kit;
+AudioInfo info(16000, 1, 16);
+AudioBoardStream kit(AudioKitEs8388V1);
 MemoryManager memory(500); // Activate SPI RAM for objects > 500 bytes
 DynamicMemoryStream recording(true); // Audio stored on heap 
 StreamCopy copier; // copies data
@@ -33,7 +32,7 @@ void record_end(bool pinStatus, int pin, void* ref){
   // Remove popping noise, from button: we delete 6 segments at the beginning and end 
   // and on the resulting audio we slowly raise the volume on the first segment
   // end decrease it on the last segment
-  recording.postProcessSmoothTransition<int16_t>(channels, 0.01, 6);
+  recording.postProcessSmoothTransition<int16_t>(info.channels, 0.01, 6);
 
   copier.begin(kit, recording);  // start playback
 }
@@ -46,14 +45,13 @@ void setup(){
   // setup input and output
   auto cfg = kit.defaultConfig(RXTX_MODE);
   cfg.sd_active = true;
-  cfg.sample_rate = sample_rate;
-  cfg.channels = channels;
-  cfg.input_device = AUDIO_HAL_ADC_INPUT_LINE2;
+  cfg.copyFrom(info);
+  cfg.input_device = ADC_INPUT_LINE2;
   kit.begin(cfg);
   kit.setVolume(1.0);
 
   // record when key 1 is pressed
-  kit.audioActions().add(PIN_KEY1, record_start, record_end);
+  kit.audioActions().add(kit.getKey(1), record_start, record_end);
   Serial.println("Press Key 1 to record");
 
 }

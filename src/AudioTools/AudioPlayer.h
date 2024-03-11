@@ -5,16 +5,23 @@
 #include "AudioBasic/Debouncer.h"
 #include "AudioTools/AudioTypes.h"
 #include "AudioTools/Buffers.h"
-#include "AudioTools/Converter.h"
+#include "AudioTools/BaseConverter.h"
 #include "AudioTools/AudioLogger.h"
 #include "AudioTools/AudioStreams.h"
-#include "AudioTools/AudioCopy.h"
+#include "AudioTools/StreamCopy.h"
 #include "AudioHttp/AudioHttp.h"
 #include "AudioTools/AudioSource.h"
+#include "AudioTools/Fade.h"
 // support for legacy USE_SDFAT
 #ifdef USE_SDFAT
 #include "AudioLibs/AudioSourceSDFAT.h"
 #endif
+
+/**
+ * @defgroup player Player
+ * @ingroup main
+ * @brief Audio Player
+ */
 
 
 namespace audio_tools {
@@ -25,62 +32,57 @@ namespace audio_tools {
      * - play
      * - stop
      * - next
-     * - setVolume
+     * - set Volume
+     * @ingroup player
      * @author Phil Schatzmann
      * @copyright GPLv3
      */
-    class AudioPlayer : public AudioBaseInfoDependent {
+    class AudioPlayer : public AudioInfoSupport {
 
     public:
+
+        /// Default constructor 
+        AudioPlayer() {
+            TRACED();
+        }
+
         /**
          * @brief Construct a new Audio Player object. The processing chain is
-         * AudioSource -> Stream -copy> EncodedAudioStream -> VolumeOutput -> Print
+         * AudioSource -> Stream-copy -> EncodedAudioStream -> VolumeStream -> FadeStream -> Print
          *
          * @param source
          * @param output
          * @param decoder
          */
-        AudioPlayer(AudioSource& source, AudioPrint& output, AudioDecoder& decoder) {
+        AudioPlayer(AudioSource& source, AudioOutput& output, AudioDecoder& decoder) {
             TRACED();
             this->p_source = &source;
             this->p_decoder = &decoder;
-            if (decoder.isResultPCM()){
-                this->volume_out.setTarget(output);
-                this->p_out_decoding = new EncodedAudioStream(volume_out, decoder);
-            } else {
-                this->p_out_decoding = new EncodedAudioStream(output, decoder);
-            }
-            this->p_final_print = &output;
-
+            setOutput(output);
             // notification for audio configuration
-            decoder.setNotifyAudioChange(*this);
+            decoder.addNotifyAudioChange(*this);
         }
 
         /**
          * @brief Construct a new Audio Player object. The processing chain is
-         * AudioSource -> Stream -copy> EncodedAudioStream -> VolumeOutput -> Print
+         * AudioSource -> Stream-copy -> EncodedAudioStream -> VolumeStream -> FadeStream -> Print
          *
          * @param source
          * @param output
          * @param decoder
          * @param notify
          */
-        AudioPlayer(AudioSource& source, Print& output, AudioDecoder& decoder, AudioBaseInfoDependent* notify = nullptr) {
+        AudioPlayer(AudioSource& source, Print& output, AudioDecoder& decoder, AudioInfoSupport* notify = nullptr) {
             TRACED();
             this->p_source = &source;
             this->p_decoder = &decoder;
-            if (decoder.isResultPCM()){
-                this->volume_out.setTarget(output);
-                this->p_out_decoding = new EncodedAudioStream(volume_out, decoder);
-            } else {
-                this->p_out_decoding = new EncodedAudioStream(output, decoder);
-            }
-            setNotify(notify);
+            setOutput(output);
+            addNotifyAudioChange(notify);
         }
 
         /**
          * @brief Construct a new Audio Player object. The processing chain is
-         * AudioSource -> Stream -copy> EncodedAudioStream -> VolumeOutput -> Print
+         * AudioSource -> Stream-copy -> EncodedAudioStream -> VolumeStream -> FadeStream -> Print
          *
          * @param source
          * @param output
@@ -89,26 +91,62 @@ namespace audio_tools {
         AudioPlayer(AudioSource& source, AudioStream& output, AudioDecoder& decoder) {
             TRACED();
             this->p_source = &source;
-            if (decoder.isResultPCM()){
-                this->volume_out.setTarget(output);
-                this->p_out_decoding = new EncodedAudioStream(volume_out, decoder);
-            } else {
-                this->p_out_decoding = new EncodedAudioStream(output, decoder);
-            }
-            this->p_final_stream = &output;
-
+            this->p_decoder = &decoder;
+            setOutput(output);
             // notification for audio configuration
-            decoder.setNotifyAudioChange(*this);
+            decoder.addNotifyAudioChange(*this);
         }
 
         AudioPlayer(AudioPlayer const&) = delete;
+
         AudioPlayer& operator=(AudioPlayer const&) = delete;
 
-        /// Default destructor
-        virtual ~AudioPlayer() {
-            if (p_out_decoding != nullptr) {
-                delete p_out_decoding;
+        void setOutput(AudioOutput& output){
+            if (p_decoder->isResultPCM()){
+                this->fade.setOutput(output);
+                this->volume_out.setOutput(fade);
+                out_decoding.setOutput(&volume_out);
+                out_decoding.setDecoder(p_decoder);
+            } else {
+                out_decoding.setOutput(&output);
+                out_decoding.setDecoder(p_decoder);
             }
+            this->p_final_print = &output;
+            this->p_final_stream = nullptr;
+        }
+
+        void setOutput(Print &output){
+            if (p_decoder->isResultPCM()){
+                this->fade.setOutput(output);
+                this->volume_out.setOutput(fade);
+                out_decoding.setOutput(&volume_out);
+                out_decoding.setDecoder(p_decoder);
+            } else {
+                out_decoding.setOutput(&output);
+                out_decoding.setDecoder(p_decoder);
+            }
+            this->p_final_print = nullptr;
+            this->p_final_stream = nullptr;
+        }
+
+        void setOutput(AudioStream& output){
+            if (p_decoder->isResultPCM()){
+                this->fade.setOutput(output);
+                this->volume_out.setOutput(fade);
+                out_decoding.setOutput(&volume_out);
+                out_decoding.setDecoder(p_decoder);
+            } else {
+                out_decoding.setOutput(&output);
+                out_decoding.setDecoder(p_decoder);
+
+            }
+            this->p_final_print = nullptr;
+            this->p_final_stream = &output;
+        }
+
+        /// Defines the number of bytes used by the copier
+        virtual void setBufferSize(int size){
+            copier.resize(size);
         }
 
         /// (Re)Starts the playing of the music (from the beginning)
@@ -122,11 +160,14 @@ namespace audio_tools {
                 setVolume(current_volume);
             }
 
-            // navigation support
+            // take definition from source
             autonext = p_source->isAutoNext();
 
+            // initial audio info for fade from output when not defined yet
+            setupFade();
+            
             // start dependent objects
-            p_out_decoding->begin();
+            out_decoding.begin();
             p_source->begin();
             meta_out.begin();
 
@@ -136,7 +177,7 @@ namespace audio_tools {
                     if (meta_active) {
                         copier.setCallbackOnWrite(decodeMetaData, this);
                     }
-                    copier.begin(*p_out_decoding, *p_input_stream);
+                    copier.begin(out_decoding, *p_input_stream);
                     timeout = millis() + p_source->timeoutAutoNext();
                     active = isActive;
                     result = true;
@@ -156,8 +197,14 @@ namespace audio_tools {
         virtual void end() {
             TRACED();
             active = false;
-            p_out_decoding->end();
+            out_decoding.end();
             meta_out.end();
+            // remove any data in the decoder
+            if (p_decoder!=nullptr){
+                LOGI("reset codec");
+                p_decoder->end();
+                p_decoder->begin();
+            }
         }
 
         /// (Re)defines the audio source
@@ -165,62 +212,58 @@ namespace audio_tools {
             this->p_source = &source;
         }
 
-        /// (Re)defines the output
-        void setOutput(Print& output){
-            this->volume_out.setTarget(output);
-        }
-
         /// (Re)defines the decoder
         void setDecoder(AudioDecoder& decoder){
-            if (this->p_out_decoding!=nullptr){
-                delete p_out_decoding;
-            }
-            this->p_out_decoding = new EncodedAudioStream(volume_out, decoder);
+            this->p_decoder = &decoder;
+            out_decoding.setDecoder(p_decoder);
         }
 
         /// (Re)defines the notify
-        void setNotify(AudioBaseInfoDependent* notify){
+        void addNotifyAudioChange(AudioInfoSupport* notify){
             this->p_final_notify = notify;
             // notification for audio configuration
             if (p_decoder!=nullptr){
-                p_decoder->setNotifyAudioChange(*this);
+                p_decoder->addNotifyAudioChange(*this);
             }
         } 
 
         /// Updates the audio info in the related objects
-        virtual void setAudioInfo(AudioBaseInfo info) {
+        virtual void setAudioInfo(AudioInfo info) override {
             TRACED();
             LOGI("sample_rate: %d", info.sample_rate);
             LOGI("bits_per_sample: %d", info.bits_per_sample);
             LOGI("channels: %d", info.channels);
+            this->info = info;
             // notifiy volume
             volume_out.setAudioInfo(info);
+            fade.setAudioInfo(info);
             // notifiy final ouput: e.g. i2s
             if (p_final_print != nullptr) p_final_print->setAudioInfo(info);
             if (p_final_stream != nullptr) p_final_stream->setAudioInfo(info);
             if (p_final_notify != nullptr) p_final_notify->setAudioInfo(info);
         };
 
-        virtual AudioBaseInfo audioInfo() override {
-            return volume_out.audioInfo();
+        virtual AudioInfo audioInfo() override {
+            return info;
         }
 
-        /// starts / resumes the playing of a matching song
+        /// starts / resumes the playing after calling stop()
         virtual void play() {
             TRACED();
-            active = true;
+            setActive(true);
         }
 
         /// halts the playing
         virtual void stop() {
             TRACED();
-            active = false;
+            setActive(false);
         }
 
-        /// moves to next file
+        /// moves to next file or nth next file when indicating an offset. Negative values are supported to move back.
         virtual bool next(int offset=1) {
             TRACED();
-            previous_stream = false;
+            writeEnd();
+            stream_increment = offset >= 0 ? 1 : -1;
             active = setStream(p_source->nextStream(offset));
             return active;
         }
@@ -228,7 +271,8 @@ namespace audio_tools {
         /// moves to selected file
         virtual bool setIndex(int idx) {
             TRACED();
-            previous_stream = false;
+            writeEnd();
+            stream_increment = 1;
             active = setStream(p_source->selectStream(idx));
             return active;
         }
@@ -236,7 +280,8 @@ namespace audio_tools {
         /// moves to selected file
         virtual bool setPath(const char* path) {
             TRACED();
-            previous_stream = false;
+            writeEnd();
+            stream_increment = 1;
             active = setStream(p_source->selectStream(path));
             return active;
         }
@@ -244,22 +289,28 @@ namespace audio_tools {
         /// moves to previous file
         virtual bool previous(int offset=1) {
             TRACED();
-            previous_stream = true;
-            active = setStream(p_source->previousStream(offset));
+            writeEnd();
+            stream_increment = -1;
+            active = setStream(p_source->previousStream(abs(offset)));
             return active;
         }
 
         /// start selected input stream
         virtual bool setStream(Stream *input) {
             end();
-            p_out_decoding->begin();
+            out_decoding.begin();
             p_input_stream = input;
             if (p_input_stream != nullptr) {
                 LOGD("open selected stream");
                 meta_out.begin();
-                copier.begin(*p_out_decoding, *p_input_stream);
+                copier.begin(out_decoding, *p_input_stream);
             }
             return p_input_stream != nullptr;
+        }
+
+        /// Provides the actual stream (=e.g.file)
+        virtual Stream* getStream(){
+            return p_input_stream;
         }
 
         /// determines if the player is active
@@ -270,6 +321,20 @@ namespace audio_tools {
         /// determines if the player is active
         operator bool() {
             return isActive();
+        }
+
+        /// The same like start() / stop()
+        virtual void setActive(bool isActive){
+            if (is_auto_fade){
+                if (isActive){
+                    fade.setFadeInActive(true); 
+                } else {
+                    fade.setFadeOutActive(true); 
+                    copier.copy();
+                    writeSilence(2048);
+                }            
+            }
+            active = isActive;
         }
 
         /// sets the volume - values need to be between 0.0 and 1.0
@@ -290,47 +355,41 @@ namespace audio_tools {
             return current_volume;
         }
 
-        /// Set move to next
+        /// Set automatically move to next file and end of current file: This is determined from the AudioSource. If you want to override it call this method after calling begin()!
         virtual void setAutoNext(bool next) {
             autonext = next;
         }
 
+        /// Defines the wait time in ms if the target output is full
+        virtual void setDelayIfOutputFull(int delayMs){
+            delay_if_full = delayMs;
+        }
+
         /// Call this method in the loop. 
-        virtual void copy() {
+        virtual size_t copy() {
+            size_t result = 0;
             if (active) {
                 TRACED();
-                if (p_final_print!=nullptr && p_final_print->availableForWrite()==0){
+                if (delay_if_full!=0 && ((p_final_print!=nullptr && p_final_print->availableForWrite()==0) || (p_final_stream!=nullptr && p_final_stream->availableForWrite()==0))){
                     // not ready to do anything - so we wait a bit
-                    delay(100);
-                    return;
+                    delay(delay_if_full);
+                    return 0;
                 }
                 // handle sound
-                if (copier.copy() || timeout == 0) {
-                    // reset timeout
+                result = copier.copy();
+                if (result>0 || timeout == 0) {
+                    // reset timeout if we had any data
                     timeout = millis() + p_source->timeoutAutoNext();
                 }
                 // move to next stream after timeout
-                if (p_input_stream == nullptr || millis() > timeout) {
-                    if (autonext) {
-                        if (previous_stream == false) {
-                            LOGW("-> timeout - moving to next stream");
-                            // open next stream
-                            if (!next(1)) {
-                                LOGD("stream is null");
-                            }
-                        } else {
-                            LOGW("-> timeout - moving to previous stream");
-                            // open previous stream
-                            if (!previous(1)) {
-                                LOGD("stream is null");
-                            }
-                        }
-                    } else {
-                        active = false;
-                    }
-                    timeout = millis() + p_source->timeoutAutoNext();
+                moveToNextFileOnTimeout();
+            } else {
+                // e.g. A2DP should still receive data to keep the connection open
+                if (silence_on_inactive){
+                    writeSilence(1024);
                 }
             }
+            return result;
         }
 
         /// Defines the medatadata callback
@@ -354,27 +413,108 @@ namespace audio_tools {
             volume_out.setVolumeControl(vc);
         }
 
+        /// Provides access to the StreamCopy, so that we can register additinal callbacks
+        StreamCopy &getStreamCopy(){
+            return copier;
+        }
+
+        /// If set to true the player writes 0 values instead of no data if the player is inactive
+        void setSilenceOnInactive(bool active){
+            silence_on_inactive = active;
+        }
+
+        /// Checks if silence_on_inactive has been activated (default false)
+        bool isSilenceOnInactive(){
+            return silence_on_inactive;
+        }
+
+        void writeSilence(size_t bytes) {
+            TRACEI();
+            if (p_final_print!=nullptr){
+                p_final_print->writeSilence(bytes);
+            } else if (p_final_stream!=nullptr){
+                p_final_stream->writeSilence(bytes);
+            }
+        }
+
+        /// Provides the Print object to which we send the decoding result
+        Print* getVolumeOutput(){
+            return &volume_out;
+        }
+
+        /// Activates/deactivates the automatic fade in and fade out to prevent popping sounds: default is active
+        void setAutoFade(bool active){
+            is_auto_fade = active;
+        }
+
+        bool isAutoFade() {
+            return is_auto_fade;
+        }
+
     protected:
         bool active = false;
-        bool autonext = false;
+        bool autonext = true;
+        bool silence_on_inactive = false;
         AudioSource* p_source = nullptr;
         VolumeStream volume_out; // Volume control
+        FadeStream fade; // Phase in / Phase Out to avoid popping noise
         MetaDataID3 meta_out; // Metadata parser
-        EncodedAudioStream* p_out_decoding = nullptr; // Decoding stream
-        AudioDecoder* p_decoder = nullptr;
+        EncodedAudioOutput out_decoding; // Decoding stream
+        CopyDecoder no_decoder{true};
+        AudioDecoder* p_decoder = &no_decoder;
         Stream* p_input_stream = nullptr;
-        AudioPrint* p_final_print = nullptr;
+        AudioOutput* p_final_print = nullptr;
         AudioStream* p_final_stream = nullptr;
-        AudioBaseInfoDependent* p_final_notify = nullptr;
+        AudioInfoSupport* p_final_notify = nullptr;
         StreamCopy copier; // copies sound into i2s
+        AudioInfo info;
         bool meta_active = false;
         uint32_t timeout = 0;
-        bool previous_stream = false;
+        int stream_increment = 1; // +1 moves forward; -1 moves backward
         float current_volume = -1.0; // illegal value which will trigger an update
+        int delay_if_full = 100;
+        bool is_auto_fade = true;
 
-        /// Default constructur only allowed in subclasses
-        AudioPlayer() {
-            TRACED();
+        void setupFade() {
+            if (p_final_print !=  nullptr) {
+                fade.setAudioInfo(p_final_print->audioInfo());
+            } else if (p_final_stream != nullptr){
+                fade.setAudioInfo(p_final_stream->audioInfo());
+            }                
+        }
+
+
+        virtual void moveToNextFileOnTimeout(){
+            if (!autonext) return;
+            if (p_final_stream==nullptr) return;
+            if (p_final_stream->availableForWrite()==0) return;
+            if (p_input_stream == nullptr || millis() > timeout) {
+                if (is_auto_fade) fade.setFadeInActive(true);
+                if (autonext) {
+                    LOGI("-> timeout - moving by %d", stream_increment);
+                    // open next stream
+                    if (!next(stream_increment)) {
+                        LOGD("stream is null");
+                    }
+                } else {
+                    active = false;
+                }
+                timeout = millis() + p_source->timeoutAutoNext();
+            }
+        }
+
+
+        void writeEnd() {
+            // end silently
+            TRACEI();
+            if (is_auto_fade){
+                fade.setFadeOutActive(true);
+                copier.copy();
+                // start by fading in
+                fade.setFadeInActive(true);
+            }
+            // restart the decoder to make sure it does not contain any audio when we continue
+            p_decoder->begin();
         }
 
         /// Callback implementation which writes to metadata
@@ -385,7 +525,6 @@ namespace audio_tools {
                 p->meta_out.write((const uint8_t*)data, len);
             }
         }
-
     };
 
 }

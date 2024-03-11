@@ -1,24 +1,28 @@
 #pragma once
 
+/** 
+ * @defgroup codecs Codecs
+ * @ingroup main
+ * @brief Audio Coder and Decoder  
+**/
+
+/** 
+ * @defgroup encoder Encoder
+ * @ingroup codecs
+ * @brief Audio Encoder 
+**/
+
+/** 
+ * @defgroup decoder Decoder
+ * @ingroup codecs
+ * @brief Audio Decoder 
+**/
+
+// codecs that do not require any additional library
 #include "AudioCodecs/CodecWAV.h"
-#include "AudioCodecs/CodecNOP.h"
-#include "AudioCodecs/CodecRAW.h"
-#include "AudioCodecs/Codec8Bit.h"
+#include "AudioCodecs/CodecCopy.h"
+#include "AudioCodecs/CodecL8.h"
+#include "AudioCodecs/CodecFloat.h"
+#include "AudioCodecs/CodecBase64.h"
+#include "AudioCodecs/DecoderFromStreaming.h"
 
-#if defined(USE_HELIX) || defined(USE_DECODERS)
-#include "AudioCodecs/CodecHelix.h"
-#include "AudioCodecs/CodecAACHelix.h"
-#include "AudioCodecs/CodecMP3Helix.h"
-#endif
-
-#if defined(USE_FDK) || defined(USE_DECODERS)
-#include "AudioCodecs/CodecAACFDK.h"
-#endif
-
-#if defined(USE_LAME) || defined(USE_DECODERS)
-#include "AudioCodecs/CodecMP3LAME.h"
-#endif
-
-#if defined(USE_MAD) || defined(USE_DECODERS)
-#include "AudioCodecs/CodecMP3MAD.h"
-#endif

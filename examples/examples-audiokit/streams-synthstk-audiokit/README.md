@@ -8,6 +8,6 @@ For [further info see my blog](https://www.pschatzmann.ch/home/2021/12/21/ai-thi
 ### Dependencies
 
 - https://github.com/pschatzmann/arduino-audio-tools
-- https://github.com/pschatzmann/arduino-audiokit
+- https://github.com/pschatzmann/arduino-audio-driver
 - https://github.com/pschatzmann/arduino-midi
 - https://github.com/pschatzmann/Arduino-STK

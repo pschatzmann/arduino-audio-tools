@@ -10,7 +10,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-struct AudioInfoLAME :  AudioBaseInfo  {
+struct AudioInfoLAME : public liblame::AudioInfo  {
     AudioInfoLAME () {
         sample_rate = 44100;
         channels = 2;
@@ -19,14 +19,13 @@ struct AudioInfoLAME :  AudioBaseInfo  {
     AudioInfoLAME (const AudioInfoLAME  &) = default;
 
     int quality = 7; // 0..9.  0=best (very slow).  9=worst.
-#ifdef ESP32
-    int extmem_limit = 10000;
-#endif    
 };
 
 /**
  * @brief Encodes PCM data to the MP3 format and writes the result to a stream
  * This is basically just a wrapper using https://github.com/pschatzmann/arduino-liblame
+ * @ingroup codecs
+ * @ingroup encoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -48,7 +47,7 @@ public:
      }
 
     /// Defines the output stream
-    void setOutputStream(Print &out_stream){
+    void setOutput(Print &out_stream){
         TRACED();
         p_print = &out_stream;
         if (enc!=nullptr){
@@ -57,54 +56,31 @@ public:
     }
 
     /// Defines the Audio Info
-    void setAudioInfo(AudioBaseInfo from) {
+    void setAudioInfo(AudioInfo from) {
         TRACED();
-        info.channels = from.channels;
-        info.sample_rate = from.sample_rate;
-        info.bits_per_sample = from.bits_per_sample;
+        AudioEncoder::setAudioInfo(from);
+        lame_info.channels = from.channels;
+        lame_info.sample_rate = from.sample_rate;
+        lame_info.bits_per_sample = from.bits_per_sample;
     }
 
     /// Defines the Audio Info
     void setAudioInfo(AudioInfoLAME from) {
         TRACED();
-        info = from;
+        lame_info = from;
     }
 
     // starts the processing
-    void begin() {
+    bool begin() {
         createEnc();
+        if (enc==nullptr) return false;
         enc->begin();
+        return true;
     }
 
-    /**
-     * @brief Opens the encoder  
-     * 
-     * @param info 
-     * @return int 
-     */
-    void begin(AudioInfoLAME info) {
-        TRACED();
-        createEnc();
-        setAudioInfo(info);
-        enc->begin();
-    }
 
-    // /**
-    //  * @brief Opens the encoder  
-    //  * 
-    //  * @param input_channels 
-    //  * @param input_sample_rate 
-    //  * @param input_bits_per_sample 
-    //  */
-    // void begin(int input_channels, int input_sample_rate, int input_bits_per_sample) {
-    //     TRACED();
-    //     createEnc();
-    //     enc->begin(input_channels, input_sample_rate, input_bits_per_sample);
-    // }
-
-
-    AudioInfoLAME &audioInfo(){
-        return info;
+    AudioInfoLAME &audioInfoExt(){
+        return lame_info;
     }
 
     AudioInfoLAME defaultConfig(){
@@ -143,25 +119,24 @@ public:
 
 protected:
     liblame::MP3EncoderLAME *enc=nullptr;
-    AudioInfoLAME info;
+    AudioInfoLAME lame_info;
     Print *p_print=nullptr;
 
     // Create enc only at begin so that we can use psram
     void createEnc(){
+        TRACED();
         if (enc==nullptr){
-#ifdef ESP32
-            // define psram limit
-            liblame_extmem_enable_limit = info.extmem_limit;
-#endif  
             enc = new liblame::MP3EncoderLAME();
             if (p_print!=nullptr){
-                setOutputStream(*p_print);
+                setOutput(*p_print);
+            } else {
+                LOGE("Output undefined");
             }
-            liblame::AudioInfo tmp;
-            tmp.channels = info.channels;
-            tmp.sample_rate = info.sample_rate;
-            tmp.bits_per_sample = info.bits_per_sample;
-            tmp.quality = info.quality;
+            AudioInfoLAME tmp;
+            tmp.channels = lame_info.channels;
+            tmp.sample_rate = lame_info.sample_rate;
+            tmp.bits_per_sample = lame_info.bits_per_sample;
+            tmp.quality = lame_info.quality;
             LOGI("LibLAME channels: %d", tmp.channels);
             LOGI("LibLAME sample_rate: %d", tmp.sample_rate);
             LOGI("LibLAME bits_per_sample: %d", tmp.bits_per_sample);

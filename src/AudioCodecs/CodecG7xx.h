@@ -4,6 +4,7 @@ extern "C"{
   #include "g72x.h"
 }
 
+
 namespace audio_tools {
 
 /**
@@ -16,6 +17,8 @@ enum G7xxCODEC_e {g723_24, g721, g723_40, others};
 
 /**
  * @brief g723_24, g721, g723_40 Decoder based on https://github.com/pschatzmann/arduino-libg7xx
+ * @ingroup codecs
+ * @ingroup decoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -23,9 +26,9 @@ enum G7xxCODEC_e {g723_24, g721, g723_40, others};
 class G7xxDecoder : public AudioDecoder {
  public:
   G7xxDecoder(G7xxCODEC_e codec) {
-    cfg.channels = 1;
-    cfg.sample_rate = 8000;
-    cfg.bits_per_sample = 16;
+    info.channels = 1;
+    info.sample_rate = 8000;
+    info.bits_per_sample = 16;
 
     switch(codec){
       case g723_24:
@@ -45,26 +48,24 @@ class G7xxDecoder : public AudioDecoder {
     }
   }
 
-  void setAudioInfo(AudioBaseInfo cfg) override { 
-    if (cfg.channels!=1){
-      LOGE("channels must be 1 instead of %d", cfg.channels);
+  void setAudioInfo(AudioInfo info) override { 
+    bool ok = true;
+    if (info.channels!=1){
+      LOGE("channels must be 1 instead of %d", info.channels);
+      ok = false;
     }
-    if (cfg.sample_rate!=8000){
-      LOGE("sample_rate must be 8000 instead of %d", cfg.sample_rate);
+    if (info.sample_rate!=8000){
+      LOGE("sample_rate must be 8000 instead of %d", info.sample_rate);
+      ok = false;
     }
-    if (cfg.bits_per_sample!=16){
-      LOGE("bits_per_sample must be 16 instead of %d", cfg.bits_per_sample);
+    if (info.bits_per_sample!=16){
+      LOGE("bits_per_sample must be 16 instead of %d", info.bits_per_sample);
+      ok = false;
     }
+    if (ok) AudioDecoder::setAudioInfo(info);
   }
 
-  AudioBaseInfo audioInfo()override { return cfg; }
-
-  virtual void begin(AudioBaseInfo cfg)  {
-    setAudioInfo(cfg);
-    begin();
-  }
-
-  void begin() override {
+  bool begin() override {
     TRACEI();
     in_buffer = 0;
     in_bits = 0;
@@ -72,6 +73,7 @@ class G7xxDecoder : public AudioDecoder {
     g72x_init_state(&state);
 
     is_active = true;
+    return true;
   }
 
   void end() override {
@@ -79,11 +81,7 @@ class G7xxDecoder : public AudioDecoder {
     is_active = false;
   }
 
-  void setNotifyAudioChange(AudioBaseInfoDependent &bi) override {
-    p_notify = &bi;
-  }
-
-  void setOutputStream(Print &out_stream) override { p_print = &out_stream; }
+  void setOutput(Print &out_stream) override { p_print = &out_stream; }
 
   operator bool() { return is_active; }
 
@@ -105,8 +103,6 @@ class G7xxDecoder : public AudioDecoder {
 
  protected:
   Print *p_print = nullptr;
-  AudioBaseInfo cfg;
-  AudioBaseInfoDependent *p_notify = nullptr;
   int input_pos = 0;
   bool is_active = false;
   int16_t sample;
@@ -123,15 +119,17 @@ class G7xxDecoder : public AudioDecoder {
 
 /**
  * @brief g723_24, g721, g723_40 Encoder based on https://github.com/pschatzmann/arduino-libg7xx
+ * @ingroup codecs
+ * @ingroup encoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 class G7xxEncoder : public AudioEncoder {
  public:
   G7xxEncoder(G7xxCODEC_e codec) {
-    cfg.channels = 1;
-    cfg.sample_rate = 8000;
-    cfg.bits_per_sample = 16;
+    info.channels = 1;
+    info.sample_rate = 8000;
+    info.bits_per_sample = 16;
 
     switch(codec){
 
@@ -155,18 +153,14 @@ class G7xxEncoder : public AudioEncoder {
     }
   }
 
-  virtual void begin(AudioBaseInfo bi) {
-    setAudioInfo(bi);
-    begin();
-  }
-
-  void begin() override {
+  bool begin() override {
     TRACEI();
     g72x_init_state(&state);
     out_buffer = 0;
     out_bits = 0;
 
     is_active = true;
+    return true;
   }
 
   void end() override {
@@ -176,19 +170,24 @@ class G7xxEncoder : public AudioEncoder {
 
   const char *mime() override { return p_mime; }
 
-  virtual void setAudioInfo(AudioBaseInfo cfg) { 
-    if (cfg.channels!=1){
-      LOGE("channels must be 1 instead of %d", cfg.channels);
+  virtual void setAudioInfo(AudioInfo info) { 
+    bool ok = true;
+    if (info.channels!=1){
+      LOGE("channels must be 1 instead of %d", info.channels);
+      ok = false;
     }
-    if (cfg.sample_rate!=8000){
-      LOGE("sample_rate must be 8000 instead of %d", cfg.sample_rate);
+    if (info.sample_rate!=8000){
+      LOGE("sample_rate must be 8000 instead of %d", info.sample_rate);
+      ok = false;
     }
-    if (cfg.bits_per_sample!=16){
-      LOGE("bits_per_sample must be 16 instead of %d", cfg.bits_per_sample);
+    if (info.bits_per_sample!=16){
+      LOGE("bits_per_sample must be 16 instead of %d", info.bits_per_sample);
+      ok = false;
     }
+    if (ok) AudioEncoder::setAudioInfo(info);
   }
 
-  void setOutputStream(Print &out_stream) override { p_print = &out_stream; }
+  void setOutput(Print &out_stream) override { p_print = &out_stream; }
 
   operator bool() { return is_active; }
 
@@ -210,7 +209,6 @@ class G7xxEncoder : public AudioEncoder {
   }
 
  protected:
-  AudioBaseInfo cfg;
   Print *p_print = nullptr;
   bool is_active = false;
   const char *p_mime = nullptr;
@@ -228,6 +226,8 @@ class G7xxEncoder : public AudioEncoder {
 
 /**
  * @brief 32Kbps G721 Decoder based on https://github.com/pschatzmann/arduino-libg7xx
+ * @ingroup codecs
+ * @ingroup decoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -237,6 +237,8 @@ class G721Decoder : public G7xxDecoder {
 };
 /**
  * @brief 32Kbps G721 Encoder based on https://github.com/pschatzmann/arduino-libg7xx
+ * @ingroup codecs
+ * @ingroup encoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -246,6 +248,8 @@ class G721Encoder : public G7xxEncoder {
 };
 /**
  * @brief 24Kbps G723 Decoder based on https://github.com/pschatzmann/arduino-libg7xx
+ * @ingroup codecs
+ * @ingroup decoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -255,6 +259,8 @@ class G723_24Decoder : public G7xxDecoder {
 };
 /**
  * @brief 24Kbps G723 Encoder based on https://github.com/pschatzmann/arduino-libg7xx
+ * @ingroup codecs
+ * @ingroup encoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -264,6 +270,8 @@ class G723_24Encoder : public G7xxEncoder {
 };
 /**
  * @brief 40Kbps G723 Decoder based on https://github.com/pschatzmann/arduino-libg7xx
+ * @ingroup codecs
+ * @ingroup decoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -273,6 +281,8 @@ class G723_40Decoder : public G7xxDecoder {
 };
 /**
  * @brief 40Kbps G723 Encoder based on https://github.com/pschatzmann/arduino-libg7xx
+ * @ingroup codecs
+ * @ingroup encoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -284,6 +294,8 @@ class G723_40Encoder : public G7xxEncoder {
 /**
  * @brief 64 kbit/s g711 ULOW Encoder based on https://github.com/pschatzmann/arduino-libg7xx
  * Supported encoder parameters: linear2alaw2, linear2ulaw
+ * @ingroup codecs
+ * @ingroup decoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -313,12 +325,12 @@ class G711Encoder : public G7xxEncoder {
   uint8_t(*enc)(int)=nullptr;
 };
 
-
-
 /**
  * @brief 64 kbit/s  g711 ULOW Decoder based on https://github.com/pschatzmann/arduino-libg7xx
  * Supported decoder parameters: alaw2linear, ulaw2linear
  * @author Phil Schatzmann
+ * @ingroup codecs
+ * @ingroup encoder
  * @copyright GPLv3
  */
 class G711Decoder : public G7xxDecoder {
@@ -349,6 +361,8 @@ class G711Decoder : public G7xxDecoder {
 
 /**
  * @brief 64 kbit/s  g711 ALOW Encoder based on https://github.com/pschatzmann/arduino-libg7xx
+ * @ingroup codecs
+ * @ingroup encoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -359,6 +373,8 @@ class G711_ALAWEncoder : public G711Encoder {
 
 /**
  * @brief 64 kbit/s  g711 ALOW Decoder based on https://github.com/pschatzmann/arduino-libg7xx
+ * @ingroup codecs
+ * @ingroup decoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -369,6 +385,8 @@ class G711_ALAWDecoder : public G711Decoder {
 
 /**
  * @brief 64 kbit/s  g711 ULOW Encoder based on https://github.com/pschatzmann/arduino-libg7xx
+ * @ingroup codecs
+ * @ingroup encoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -379,6 +397,8 @@ class G711_ULAWEncoder : public G711Encoder {
 
 /**
  * @brief 64 kbit/s  g711 ULOW Decoder based on https://github.com/pschatzmann/arduino-libg7xx
+ * @ingroup codecs
+ * @ingroup decoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */

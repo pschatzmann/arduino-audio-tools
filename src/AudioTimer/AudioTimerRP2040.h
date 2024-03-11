@@ -1,35 +1,29 @@
 #pragma once
 
 #if defined(ARDUINO_ARCH_RP2040) && !defined(ARDUINO_ARCH_MBED)
-#include "AudioTimer/AudioTimerDef.h"
+#include "AudioTimer/AudioTimerBase.h"
 #include "hardware/timer.h"
 #include "pico/time.h"
 #include <time.h>
 #include <functional>
 
-
 namespace audio_tools {
 
 typedef void (* my_repeating_timer_callback_t )(void* obj);
-//typedef bool (* repeating_timer_callback_bool_t )(void* obj);
 
 /**
  * @brief Repeating Timer functions for repeated execution: Plaease use the typedef TimerAlarmRepeating
- * 
+ * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 
  */
-class TimerAlarmRepeatingRP2040 : public TimerAlarmRepeatingDef{
+class TimerAlarmRepeatingDriverRP2040 : public TimerAlarmRepeatingDriverBase {
     public:
 
-        TimerAlarmRepeatingRP2040(TimerFunction function=DirectTimerCallback, int id=0) : TimerAlarmRepeatingDef(){
+        TimerAlarmRepeatingDriverRP2040(){
             alarm_pool_init_default();
             ap = alarm_pool_get_default();
-        }
-
-        ~TimerAlarmRepeatingRP2040(){
-            end();
         }
 
         /**
@@ -37,7 +31,7 @@ class TimerAlarmRepeatingRP2040 : public TimerAlarmRepeatingDef{
          */
         bool begin(const my_repeating_timer_callback_t callback_f, uint32_t time, TimeUnit unit = MS) override {
             bool result = false;
-            LOGI("timer time: %u %s",time, unit==MS ? "ms": "us");
+            LOGI("timer time: %u %s",(unsigned int)time, unit==MS ? "ms": "us");
             this->instanceCallback = callback_f;
 
             // we determine the time in microseconds
@@ -48,15 +42,18 @@ class TimerAlarmRepeatingRP2040 : public TimerAlarmRepeatingDef{
                 case US:
                     result = alarm_pool_add_repeating_timer_us(ap, time, &staticCallback, this, &timer);
                     break;
-                default:
-                    LOGE("Undefined Unit");
+                case HZ:
+                    // convert hz to time in us
+                    uint64_t time_us = AudioTime::toTimeUs(time);
+                    result = alarm_pool_add_repeating_timer_us(ap, time_us, &staticCallback, this, &timer);
+                    break;
             }
             
             return result;
         }
 
         inline static bool staticCallback(repeating_timer *ptr)  {
-            TimerAlarmRepeatingRP2040 *self = (TimerAlarmRepeatingRP2040 *)ptr->user_data; 
+            TimerAlarmRepeatingDriverRP2040 *self = (TimerAlarmRepeatingDriverRP2040 *)ptr->user_data; 
             self->instanceCallback(self->object);
             return true;
         }
@@ -72,7 +69,8 @@ class TimerAlarmRepeatingRP2040 : public TimerAlarmRepeatingDef{
         my_repeating_timer_callback_t instanceCallback=nullptr;
 };
 
-typedef  TimerAlarmRepeatingRP2040 TimerAlarmRepeating;
+/// @brief use TimerAlarmRepeating! @ingroup timer_rp2040
+using TimerAlarmRepeatingDriver = TimerAlarmRepeatingDriverRP2040;
 
 }
 

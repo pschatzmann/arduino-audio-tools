@@ -4,12 +4,21 @@
 #include <string.h>
 #include "AudioTools/AudioLogger.h"
 
+/**
+ * @defgroup string Strings
+ * @ingroup tools
+ * @brief Strings
+ * This framework is avoiding the use of Arduino Strings, so that we can use it
+ * easily also on other platforms!
+ */
+
 namespace audio_tools {
 
 /**
  * @brief A simple  wrapper to provide string functions on char*.
  * If the underlying char* is a const we do not allow any updates; The ownership
  * of the chr* must be managed externally!
+ * @ingroup string
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -34,11 +43,6 @@ class Str {
             set(chars, maxlen, len, false);
         }
 
-        Str (const Str & ) = default;    
-        Str (Str && ) = default;                
-        Str& operator = (const Str & ) = default;    
-        Str& operator = (Str && ) = default;    
-
         /// assigs a value
         virtual void set(const char *alt){
             if (alt==nullptr){
@@ -58,7 +62,6 @@ class Str {
                 }
             }
         }
-
         /// assigs from another Str value
         virtual void set(const Str &alt){
             grow(alt.len);
@@ -546,13 +549,14 @@ class Str {
         /// remove leading spaces
         virtual void ltrim(){
             int n = count(' ',0);
-            *this << n;
+            if (n > 0)
+                *this << n;
         }    
         
         /// remove trailing spaces
         virtual void rtrim(){
             if (!isConst()){
-                while(this->endsWith(" ")){
+                while(isspace(chars[len])){
                     len--;
                     chars[len] = 0;
                 }
@@ -861,4 +865,3 @@ class Str {
 
 
 }
-

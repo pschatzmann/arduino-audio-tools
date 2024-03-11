@@ -1,6 +1,6 @@
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 #include "FS.h"
 #include "SD.h"
 #include "SPI.h"

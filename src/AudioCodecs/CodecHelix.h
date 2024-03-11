@@ -1,7 +1,6 @@
 #pragma once
 
 #include "AudioCodecs/AudioEncoded.h"
-#include "AudioCodecs/CodecNOP.h"
 #include "AudioCodecs/CodecWAV.h"
 #include "AudioCodecs/CodecMP3Helix.h"
 #include "AudioCodecs/CodecAACHelix.h"
@@ -11,6 +10,8 @@ namespace audio_tools {
 /**
  * @brief MP3 and AAC Decoder using libhelix:
  * https://github.com/pschatzmann/arduino-libhelix. We dynamically create a MP3 or AAC decoder dependent on the provided audio format.
+ * @ingroup codecs
+ * @ingroup decoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -24,7 +25,7 @@ public:
     p_out_stream = &out_stream;
   }
 
-  DecoderHelix(Print &out_stream, AudioBaseInfoDependent &bi) {
+  DecoderHelix(Print &out_stream, AudioInfoSupport &bi) {
     TRACED();
     p_out_stream = &out_stream;
     p_bi = &bi;
@@ -33,13 +34,14 @@ public:
   ~DecoderHelix() { resetDecoder(); }
 
   /// Defines the output Stream
-  virtual void setOutputStream(Print &outStream) { p_out_stream = &outStream; }
+  virtual void setOutput(Print &outStream) { p_out_stream = &outStream; }
 
   /// Starts the processing
-  void begin() {
+  bool begin() {
     TRACED();
     // reset actual decoder so that we start a new determination
     resetDecoder();
+    return true;
   }
 
   /// Releases the reserved memory
@@ -51,7 +53,7 @@ public:
     resetDecoder();
   }
 
-  AudioBaseInfo audioInfo() {
+  AudioInfo audioInfo() override {
     return p_decoder != nullptr ? p_decoder->audioInfo() : noInfo;
   }
 
@@ -68,15 +70,11 @@ public:
   /// checks if the class is active
   operator bool() { return p_decoder == nullptr ? false : *p_decoder; }
 
-  /// Defines the callback object to which the Audio information change is
-  /// provided
-  void setNotifyAudioChange(AudioBaseInfoDependent &bi) { p_bi = &bi; }
-
 protected:
   AudioDecoder *p_decoder = nullptr;
   Print *p_out_stream = nullptr;
-  AudioBaseInfoDependent *p_bi = nullptr;
-  AudioBaseInfo noInfo;
+  AudioInfoSupport *p_bi = nullptr;
+  AudioInfo noInfo;
 
   /// Defines the decoder based on the audio format
   void setupDecoder(const byte *start) {
@@ -93,10 +91,10 @@ protected:
     // if we do not have a decoder yet we use a dummy to prevent NPE
     if (p_decoder == nullptr) {
       LOGW("Unknown Data Format: Content will be ignored...")
-      p_decoder = new DecoderNOP();
+      p_decoder = CodecNOP::instance();
     }
-    p_decoder->setOutputStream(*p_out_stream);
-    p_decoder->setNotifyAudioChange(*p_bi);
+    p_decoder->setOutput(*p_out_stream);
+    p_decoder->addNotifyAudioChange(*p_bi);
   }
 
   /// Deletes the decoder

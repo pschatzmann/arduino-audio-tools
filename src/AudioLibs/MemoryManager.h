@@ -13,6 +13,7 @@ namespace audio_tools {
  * to satisfy smaller allocation requests with internal memory and larger requests
  * with external memory. This sets the limit between the two, as well as generally
  * enabling allocation in external memory.
+ * @ingroup tools
  */
 class MemoryManager {
 public:

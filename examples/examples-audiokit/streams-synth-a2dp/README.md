@@ -9,7 +9,7 @@ The delay howver is still too big to be really useful...
 
 You need to install the following libraries:
 
-- [Arduino Audio Tolls](https://github.com/pschatzmann/arduino-audio-tools)
+- [Arduino Audio Tools](https://github.com/pschatzmann/arduino-audio-tools)
 - [Midi](https://github.com/pschatzmann/arduino-midi)
 - [ESP32-A2DP](https://github.com/pschatzmann/ESP32-A2DP)
 

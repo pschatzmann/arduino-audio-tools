@@ -1,7 +1,7 @@
 #pragma once
 
 #define MAX_FILE_LEN 256
-
+#define MAX_FILE_COUNT 1000000
 // Special logic for SDTFAT
 #ifdef SDT_FAT_VERSION
 #define USE_SDFAT
@@ -32,7 +32,7 @@ class SDDirect {
 
     /// Access file name by index
     const char *operator[](int idx) {
-      if (max_idx!=-1 && idx>=max_idx){
+      if (max_idx!=-1 && idx>max_idx){
         return nullptr;
       }
 
@@ -42,6 +42,18 @@ class SDDirect {
       listDir(start_dir);
       if (!found) return nullptr;
       return result.c_str();
+    }
+
+    /// Provides the number of files
+    long size() {
+      if (max_idx==-1){
+        requested_idx = MAX_FILE_COUNT;
+        actual_idx = -1;
+        found = false;
+        listDir(start_dir);
+        max_idx = actual_idx;
+      }
+      return max_idx;
     }
 
   protected:
@@ -57,10 +69,10 @@ class SDDirect {
     
     const char *ext = nullptr;
     const char *file_name_pattern = nullptr;
-    long size=-1;
 
     /// Writes the index file
     void listDir(const char *dirname) {
+      if (dirname==nullptr) return;
       LOGD("listDir: %s", dirname);
       FileT root = open(dirname);
       if (!root) {
@@ -93,8 +105,8 @@ class SDDirect {
         } else {
           const char* fn = fileNamePath(file);
           if (isValidAudioFile(file)) {
-            LOGD("Adding file to index: %s", fn);
             actual_idx++;
+            LOGD("File %s at index: %d", fn, actual_idx);
             if (actual_idx==requested_idx){
               result = String(fn);
               found = true;
@@ -197,8 +209,10 @@ class SDDirect {
     const char* fileNamePath(FileT &file){
 #if defined(USE_SDFAT) || ESP_IDF_VERSION_MAJOR >= 4 
       LOGD("-> fileNamePath: %s", fileName(file));
-      file_path_str.clear();
-      file_path_str += "/";
+      file_path_str = start_dir;
+      if (!file_path_str.endsWith("/")){
+        file_path_str += "/";
+      }
       for (int j=0; j<file_path_stack.size(); j++){
          file_path_str += file_path_stack[j]+"/";
       } 
@@ -228,7 +242,11 @@ class SDDirect {
 #ifdef USE_SDFAT
       FileT result;
       if (!result.open(name)){
-        LOGE("FileT open error: %s", name);
+        if (name!=nullptr){
+          LOGE("File open error: %s", name);
+        } else {
+          LOGE("File open error: name is null");
+        }
       }
       return result;
 #else

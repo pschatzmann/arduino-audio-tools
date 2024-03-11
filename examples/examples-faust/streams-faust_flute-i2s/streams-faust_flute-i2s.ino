@@ -13,12 +13,12 @@
 #define USE_MEMORY_MANAGER
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 #include "AudioLibs/AudioFaust.h"
 #include "fluteMIDI.h"
 
 FaustStream<mydsp> faust;
-AudioKitStream out; 
+AudioBoardStream out(AudioKitEs8388V1);
 StreamCopy copier(out, faust);  // copy mic to tfl
 
 // Arduino Setup

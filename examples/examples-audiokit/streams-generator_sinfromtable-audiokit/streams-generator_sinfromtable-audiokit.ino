@@ -6,14 +6,13 @@
  */
  
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 
-uint16_t sample_rate=32000;
-uint8_t channels = 2;                                      // The stream will have 2 channels 
+AudioInfo info(32000, 2, 16);
 SineFromTable<int16_t> sineWave(32000);                // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound(sineWave);             // Stream generated from sine wave
-AudioKitStream out; 
-//CsvStream<int16_t> out(Serial);
+AudioBoardStream out(AudioKitEs8388V1);
+//CsvOutput<int16_t> out(Serial);
 int sound_len=1024;
 StreamCopy copier(out, sound, sound_len);                             // copies sound into i2s
 int freq = 122;
@@ -27,16 +26,11 @@ void setup(void) {
   // start I2S
   Serial.println("starting I2S...");
   auto config = out.defaultConfig(); //TX_MODE
-  config.sample_rate = sample_rate; 
-  config.channels = channels;
-  config.bits_per_sample = 16;
+  config.copyFrom(info); 
   out.begin(config);
 
   // Setup sine wave
-  auto cfg = sineWave.defaultConfig();
-  cfg.channels = channels;
-  cfg.sample_rate = sample_rate;
-  sineWave.begin(cfg, freq);
+  sineWave.begin(info, freq);
   Serial.println("started...");
 }
 

@@ -1,33 +1,46 @@
 #pragma once
 
-#include "AudioTools/AudioPrint.h"
+#include "AudioTools/AudioOutput.h"
 #include "AudioLibs/FFT/FFTWindows.h"
+
+/** 
+ * @defgroup fft FFT
+ * @ingroup dsp
+ * @brief Fast Fourier Transform  
+**/
 
 namespace audio_tools {
 
 // forward declaration
 class AudioFFTBase;
-MusicalNotes AudioFFTNotes;
+static MusicalNotes AudioFFTNotes;
 
-/// Result of the FFT
+/**
+ * @brief Result of the FFT
+ * @ingroup fft
+*/
 struct AudioFFTResult {
     int bin;
     float magnitude;
     float frequency;
 
-    int frequncyAsInt(){
+    int frequencyAsInt(){
         return round(frequency);
     }
     const char* frequencyAsNote() {
-        return AudioFFTNotes.note(frequncyAsInt());
+        return AudioFFTNotes.note(frequency);
     }
-    const char* frequencyAsNote(int &diff) {
-        return AudioFFTNotes.note(frequncyAsInt(), diff);
+    const char* frequencyAsNote(float &diff) {
+        return AudioFFTNotes.note(frequency, diff);
     }
 };
 
-/// Configuration for AudioFFT. If there are more then 1 channel the channel_used is defining which channel is used to perform the fft on.
-struct AudioFFTConfig : public  AudioBaseInfo {
+/**
+ * @brief Configuration for AudioFFT. If there are more then 1 channel the 
+ * channel_used is defining which channel is used to perform the fft on.
+ * @ingroup fft
+ */
+struct AudioFFTConfig : public  AudioInfo {
     AudioFFTConfig(){
         channels = 2;
         bits_per_sample = 16;
@@ -45,25 +58,28 @@ struct AudioFFTConfig : public  AudioBaseInfo {
 
 /**
  * @brief Abstract Class which defines the basic FFT functionality 
+ * @ingroup fft
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 class FFTDriver {
     public:
-        virtual void begin(int len) =0;
+        virtual bool begin(int len) =0;
         virtual void end() =0;
         virtual void setValue(int pos, int value) =0;
         virtual void fft() = 0;
         virtual float magnitude(int idx) = 0;
+        virtual float magnitudeFast(int idx) = 0;
         virtual bool isValid() = 0;
 };
 
 /**
  * @brief Executes FFT using audio data. The Driver which is passed in the constructor selects a specifc FFT implementation. 
+ * @ingroup fft
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioFFTBase : public AudioPrint {
+class AudioFFTBase : public AudioOutput {
     public:
         /// Default Constructor. The len needs to be of the power of 2 (e.g. 512, 1024, 2048, 4096, 8192)
         AudioFFTBase(FFTDriver* driver){
@@ -83,24 +99,40 @@ class AudioFFTBase : public AudioPrint {
         /// starts the processing
         bool begin(AudioFFTConfig info) {
             cfg = info;
+            bins = cfg.length/2;
             if (!isPowerOfTwo(cfg.length)){
                 LOGE("Len must be of the power of 2: %d", cfg.length);
                 return false;
             }
-            if (!createStrideBuffer()){
-                return false;
+            if (cfg.stride>0 && cfg.stride<cfg.length){
+                // holds last N bytes that need to be reprocessed
+                stride_buffer.resize((cfg.length - cfg.stride)*bytesPerSample());
             }
-            p_driver->begin(cfg.length);
+            if (!p_driver->begin(cfg.length)){
+                LOGE("Not enough memory");
+            }
             if (cfg.window_function!=nullptr){
-                cfg.window_function->begin(cfg.length);
+                cfg.window_function->begin(length());
             }
 
             current_pos = 0;
             return p_driver->isValid();
         }
 
+        /// Just resets the current_pos e.g. to start a new cycle
+        void reset(){
+            current_pos = 0;
+            if (cfg.window_function!=nullptr){
+                cfg.window_function->begin(length());
+            }
+        }
+
+        operator bool() {
+            return p_driver!=nullptr && p_driver->isValid();
+        }
+
         /// Notify change of audio information
-        void setAudioInfo(AudioBaseInfo info) override {
+        void setAudioInfo(AudioInfo info) override {
             cfg.bits_per_sample = info.bits_per_sample;
             cfg.sample_rate = info.sample_rate;
             cfg.channels = info.channels;
@@ -108,9 +140,8 @@ class AudioFFTBase : public AudioPrint {
         }
 
         /// Release the allocated memory
-        void end() {
+        void end() override {
             p_driver->end();
-            if (p_stridebuffer!=nullptr) delete p_stridebuffer;
             if (p_magnitudes!=nullptr) delete []p_magnitudes;
         }
 
@@ -121,13 +152,13 @@ class AudioFFTBase : public AudioPrint {
                 result = len;
                 switch(cfg.bits_per_sample){
                     case 16:
-                        processSamples<int16_t>(data, len);
+                        processSamples<int16_t>(data, len/2);
                         break;
                     case 24:
-                        processSamples<int24_t>(data, len);
+                        processSamples<int24_t>(data, len/3);
                         break;
                     case 32:
-                        processSamples<int32_t>(data, len);
+                        processSamples<int32_t>(data, len/4);
                         break;
                     default:
                         LOGE("Unsupported bits_per_sample: %d",cfg.bits_per_sample);
@@ -138,13 +169,13 @@ class AudioFFTBase : public AudioPrint {
         }
 
         /// We try to fill the buffer at once
-        int availableForWrite() {
+        int availableForWrite() override {
             return cfg.bits_per_sample/8*cfg.length;
         }
 
         /// The number of bins used by the FFT which are relevant for the result
         int size() {
-            return cfg.length/2;
+            return bins; 
         }
 
         /// The number of samples
@@ -163,6 +194,10 @@ class AudioFFTBase : public AudioPrint {
 
         /// Determines the frequency of the indicated bin
         float frequency(int bin){
+            if (bin>=bins){
+                LOGE("Invalid bin %d", bin);
+                return 0;
+            }
             return static_cast<float>(bin) * cfg.sample_rate / cfg.length;
         }
 
@@ -172,7 +207,7 @@ class AudioFFTBase : public AudioPrint {
             ret_value.magnitude = 0;
             ret_value.bin = 0;
             // find max value and index
-            for (int j=1;j<size();j++){
+            for (int j=0;j<size();j++){
                 float m = magnitude(j);
                 if (m>ret_value.magnitude){
                     ret_value.magnitude = m;
@@ -189,15 +224,15 @@ class AudioFFTBase : public AudioPrint {
         void resultArray(AudioFFTResult (&result)[N]){
             // initialize to negative value
             for (int j=0;j<N;j++){
-                result[j].fft = -1000000;
+                result[j].magnitude = -1000000;
             }
             // find top n values
             AudioFFTResult act;
-            for (int j=1;j<size();j++){
+            for (int j=0;j<size();j++){
                 act.magnitude = magnitude(j);
                 act.bin = j;
                 act.frequency = frequency(j);
-                insertSorted(result, act);
+                insertSorted<N>(result, act);
             }
         }
 
@@ -208,9 +243,20 @@ class AudioFFTBase : public AudioPrint {
 
         /// Calculates the magnitude of the fft result to determine the max value (bin is 0 to size())
         float magnitude(int bin){
+            if (bin>=bins){
+                LOGE("Invalid bin %d", bin);
+                return 0;
+            }
             return p_driver->magnitude(bin);
         }
 
+        float magnitudeFast(int bin){
+            if (bin>=bins){
+                LOGE("Invalid bin %d", bin);
+                return 0;
+            }
+            return p_driver->magnitudeFast(bin);
+        }
         /// Provides the magnitudes as array of size size(). Please note that this method is allocating additinal memory!
         float* magnitudes() {
             if (p_magnitudes==nullptr){
@@ -222,8 +268,19 @@ class AudioFFTBase : public AudioPrint {
             return p_magnitudes;
         }
 
+        /// Provides the magnitudes w/o calling the square root function as array of size size(). Please note that this method is allocating additinal memory!
+        float* magnitudesFast() {
+            if (p_magnitudes==nullptr){
+                p_magnitudes = new float[size()];
+            }
+            for (int j=0;j<size();j++){
+                p_magnitudes[j]= magnitudeFast(j);
+            }
+            return p_magnitudes;
+        }
+
         /// Provides the actual configuration
-        AudioFFTConfig config() {
+        AudioFFTConfig &config() {
             return cfg;
         }
 
@@ -233,50 +290,50 @@ class AudioFFTBase : public AudioPrint {
         AudioFFTConfig cfg;
         unsigned long timestamp_begin=0l;
         unsigned long timestamp=0l;
-        RingBuffer<uint8_t> *p_stridebuffer = nullptr;
+        RingBuffer<uint8_t> stride_buffer{0};
         float *p_magnitudes = nullptr;
-
-        /// Allocates the stride buffer if necessary
-        bool createStrideBuffer() {
-            bool result = true;
-            if (p_stridebuffer!=nullptr) delete p_stridebuffer;
-            p_stridebuffer = nullptr;
-            if (cfg.stride>0){
-                // calculate the number of last bytes that we need to reprocess 
-                int size = cfg.length - cfg.stride;
-                if (size>0){
-                    p_stridebuffer = new RingBuffer<uint8_t>(size*bytesPerSample());
-                } else {
-                    LOGE("stride>length not supported");
-                    result = false;
-                }
-            }
-            return result;
-        }
+        int bins = 0;
 
 
         // Add samples to input data p_x - and process them if full
         template<typename T>
-        void processSamples(const void *data, size_t byteCount) {
+        void processSamples(const void *data, size_t samples) {
             T *dataT = (T*) data;
             T sample;
             float sample_windowed;
-            int samples = byteCount/sizeof(T);
             for (int j=0; j<samples; j+=cfg.channels){
                 sample = dataT[j+cfg.channel_used];
-                sample_windowed = sample;
-                // optionally apply window function
-                if (cfg.window_function!=nullptr){
-                    sample_windowed = cfg.window_function->factor(current_pos) * sample;
-                }
-                p_driver->setValue(current_pos, sample_windowed);
+                p_driver->setValue(current_pos, windowedSample(sample));
                 writeStrideBuffer((uint8_t*)&sample, sizeof(T));
                 if (++current_pos>=cfg.length){
-                    fft();
+                    // perform FFT
+                    fft<T>();
+
+                    // reprocess data in stride buffer
+                    if (stride_buffer.size()>0){
+                        // reload data from stride buffer
+                        while (stride_buffer.available()){
+                            T sample;
+                            stride_buffer.readArray((uint8_t*)&sample, sizeof(T));
+                            p_driver->setValue(current_pos, windowedSample(sample));
+                            current_pos++;
+                        }
+                    } 
+
                 }
             }
         }
 
+        template<typename T>
+        T windowedSample(T sample){
+            T result = sample;
+            if (cfg.window_function!=nullptr){
+                result = cfg.window_function->factor(current_pos) * sample;
+            }
+            return result;
+        }
+
+        template<typename T>
         void fft() {
             timestamp_begin = millis();
             p_driver->fft();
@@ -284,18 +341,7 @@ class AudioFFTBase : public AudioPrint {
             if (cfg.callback!=nullptr){
                 cfg.callback(*this);
             }
-
-            // reprocess data in stride buffer
-            if (p_stridebuffer!=nullptr){
-                // rewrite data in stride buffer
-                int byte_count = p_stridebuffer->available();
-                uint8_t buffer[byte_count];
-                p_stridebuffer->readArray(buffer, byte_count);
-                write(buffer, byte_count);
-                current_pos = byte_count / bytesPerSample();
-            } else {
-                current_pos = 0;
-            }
+            current_pos = 0;
         }
 
         int bytesPerSample() {
@@ -304,8 +350,10 @@ class AudioFFTBase : public AudioPrint {
 
         /// make sure that we do not reuse already found results
         template<int N>
-        bool InsertSorted(AudioFFTResult(&result)[N], AudioFFTResult tmp){
+        void insertSorted(AudioFFTResult(&result)[N], AudioFFTResult tmp){
+            // find place where we need to insert new record
             for (int j=0;j<N;j++){
+                // insert when biggen then current record
                 if (tmp.magnitude>result[j].magnitude){
                     // shift existing values right
                     for (int i=N-2;i>=j;i--){
@@ -313,22 +361,23 @@ class AudioFFTBase : public AudioPrint {
                     }
                     // insert new value
                     result[j]=tmp;
+                    // stop after we found the correct index
+                    break;
                 }
             }
-            return false;
         }
 
         void writeStrideBuffer(uint8_t* buffer, size_t len){
-            if (p_stridebuffer!=nullptr){
-                int available = p_stridebuffer->availableForWrite();
+            if (stride_buffer.size()>0){
+                int available = stride_buffer.availableForWrite();
                 if (len>available){
                     // clear oldest values to make space
                     int diff = len-available;
                     for(int j=0;j<diff;j++){
-                        p_stridebuffer->read();
+                        stride_buffer.read();
                     }
                 }
-                p_stridebuffer->writeArray(buffer, len);
+                stride_buffer.writeArray(buffer, len);
             }
         }
 

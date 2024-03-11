@@ -7,12 +7,12 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
-#include "AudioLibs/AudioA2DP.h"
+#include "AudioLibs/AudioA2DP.h" // install https://github.com/pschatzmann/ESP32-A2DP
+#include "AudioLibs/AudioBoardStream.h" // install https://github.com/pschatzmann/arduino-audio-driver
 
 
 BluetoothA2DPSink a2dp_sink;
-AudioKitStream kit;
+AudioBoardStream kit(AudioKitEs8388V1); 
 Equilizer3Bands eq(kit);
 ConfigEquilizer3Bands cfg_eq;
 
@@ -31,6 +31,9 @@ void setup() {
   cfg.sd_active = false;
   kit.begin(cfg);
 
+  // max volume
+  kit.setVolume(1.0);
+
   // setup equilizer
   cfg_eq = eq.defaultConfig();
   cfg_eq.setAudioInfo(cfg); // use channels, bits_per_sample and sample_rate from kit
@@ -45,5 +48,4 @@ void setup() {
 }
 
 void loop() {
-  // kit.processActions();  // uncomment for default button commands
 }

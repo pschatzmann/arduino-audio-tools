@@ -13,7 +13,7 @@ namespace audio_tools {
  * @brief Mozzi Configuration for input or output stream
  * 
  */
-struct MozziConfig : AudioBaseInfo {
+struct MozziConfig : AudioInfo {
     uint16_t control_rate=CONTROL_RATE;
     void (*updateControl)() = nullptr; //&::updateControl;
     AudioOutput_t (*updateAudio)() = nullptr; // = &::updateAudio;
@@ -30,7 +30,7 @@ struct MozziConfig : AudioBaseInfo {
  * Define your updateAudio() method.
  * Start by calling begin(control_rate)
  * do not call audioHook(); in the loop !
-
+ * @ingroup generator
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -49,7 +49,7 @@ class MozziGenerator : public SoundGenerator<int16_t> {
             end();
         }
 
-        void begin(MozziConfig config){
+        bool begin(MozziConfig config){
             SoundGenerator<int16_t>::begin();
             info = config;
             if (info.control_rate==0){
@@ -60,6 +60,7 @@ class MozziGenerator : public SoundGenerator<int16_t> {
                 control_counter_max = 1;
             }
             control_counter = control_counter_max;
+            return true;
         }
 
         /// Provides some key audio information
@@ -142,6 +143,7 @@ class MozziGenerator : public SoundGenerator<int16_t> {
  * @brief We use the output functionality of Mozzi to output audio data. We expect the data as array of int16_t with
  * one or two channels. Though we support the setting of a sample rate, we recommend to use the default sample rate
  * from Mozzi which is available with the AUDIO_RATE define.
+ * @ingroup dsp
  */
 class MozziStream : public AudioStream {
 
@@ -165,22 +167,24 @@ class MozziStream : public AudioStream {
         }
 
         /// Starts Mozzi with its default parameters
-        void begin(){
-            begin(defaultConfig());
+        bool begin(){
+            return begin(defaultConfig());
         }
 
         // Start Mozzi -  if controlRate > 0 we actiavate the sound generation (=>allow reads); the parameters describe the values if the
         // provided input stream or resulting output stream;
-        void begin(MozziConfig cfg){
+        bool begin(MozziConfig cfg){
               TRACED();
             config = cfg;
             Mozzi.setAudioRate(config.sample_rate);
             // in output mode we do not allocate any unnecessary functionality
             if (cfg.channels != config.channels){
                 LOGE("You need to change the AUDIO_CHANNELS in mozzi_config.h to %d", cfg.channels);
+                return false;
             }
 
             Mozzi.start(config.control_rate);
+            return true;
         }
 
         void end(){
@@ -223,13 +227,11 @@ class MozziStream : public AudioStream {
         }
 
         virtual int read(){
-            LOGE("read() not supported -  use readBytes!");
-            return -1;            
+            return not_supported(-1);
         }
 
         virtual int peek(){
-            LOGE("peek() not supported!");
-            return -1;            
+            return not_supported(-1);
         }
 
         virtual void flush(){

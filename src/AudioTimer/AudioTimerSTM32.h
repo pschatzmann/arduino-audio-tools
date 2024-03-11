@@ -1,33 +1,38 @@
 #pragma once
 
 #if defined(STM32)
-#include "AudioTimer/AudioTimerDef.h"
+#include "AudioTimer/AudioTimerBase.h"
 
 namespace audio_tools {
 
-class TimerAlarmRepeatingSTM32;
-INLINE_VAR TimerAlarmRepeatingSTM32 *timerAlarmRepeating = nullptr;
+class TimerAlarmRepeatingDriverSTM32;
+static TimerAlarmRepeatingDriverSTM32 *timerAlarmRepeating = nullptr;
 typedef void (* repeating_timer_callback_t )(void* obj);
 
 /**
  * @brief STM32 Repeating Timer functions for repeated execution: Plaease use the typedef TimerAlarmRepeating
- * 
+ * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
- * 
  */
-class TimerAlarmRepeatingSTM32 : public TimerAlarmRepeatingDef {
+class TimerAlarmRepeatingDriverSTM32 : public TimerAlarmRepeatingDriverBase {
     public:
+        TimerAlarmRepeatingDriverSTM32(){
+            setTimer(1);
+        }
 
-        TimerAlarmRepeatingSTM32(TimerFunction function=DirectTimerCallback, int timerIdx=1){
+        ~TimerAlarmRepeatingDriverSTM32(){
+            end();
+            delete this->timer;
+        }
+        /// selects the timer: 0 = TIM1, 1 = TIM2,2 = TIM3, 3 = TIM4, 4 = TIM5 
+        void setTimer(int timerIdx) override {
+            if (this->timer!=nullptr){
+                delete this->timer;
+            }
             this->timer = new HardwareTimer(timers[timerIdx]);
             timer_index = timerIdx;
             timer->pause();
-        }
-
-        ~TimerAlarmRepeatingSTM32(){
-            end();
-            delete this->timer;
         }
 
         /**
@@ -59,14 +64,14 @@ class TimerAlarmRepeatingSTM32 : public TimerAlarmRepeatingDef {
         }
 
     protected:
-        HardwareTimer *timer; 
+        HardwareTimer *timer=nullptr; 
         int timer_index;
         TIM_TypeDef *timers[6] = {TIM1, TIM2, TIM3, TIM4, TIM5 };
 
 };
 
-typedef  TimerAlarmRepeatingSTM32 TimerAlarmRepeating;
-
+///  @brief use TimerAlarmRepeating!  @ingroup timer_stm32
+using TimerAlarmRepeatingDriver = TimerAlarmRepeatingDriverSTM32;
 
 }
 

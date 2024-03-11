@@ -4,22 +4,32 @@
 
 namespace audio_tools {
 
+/// Enum to filter by type of metadata  @ingroup metadata
 enum ID3TypeSelection { SELECT_ID3V1=0b001, SELECT_ID3V2=0b010, SELECT_ID3=0b011, SELECT_ICY=0b100, SELECT_ANY=0b111 };
 
-/// Type of meta info
+/// Type of meta info @ingroup metadata
 enum MetaDataType { Title, Artist, Album, Genre, Name, Description };
 
-/// Test Description for meta info
-INLINE_VAR const char* MetaDataTypeStr[] = {"Title", "Artist", "Album", "Genre","Name", "Description"};
+// Description for meta info 
+static const char* MetaDataTypeStr[] = {"Title", "Artist", "Album", "Genre","Name", "Description"};
 
-/// Converts the MetaDataType to a string
-INLINE_VAR const char *toStr(MetaDataType t){
+/// Converts the MetaDataType to a string @ingroup metadata
+static const char *toStr(MetaDataType t){
     return MetaDataTypeStr[t];
 }
 
+/// unfortunatly strnlen or strnlen_s is not available in all implementations
+static size_t strnlength (const char* s, size_t n)  { 
+    size_t i;
+    for (i = 0; i < n && s[i] != '\0'; i++)
+        continue;
+    return i;
+}
+
+
 /**
  * @brief Common Metadata methods
- * 
+ * @ingroup metadata
  */
 class AbstractMetaData {
     public:
@@ -37,5 +47,7 @@ class AbstractMetaData {
         virtual void setIcyMetaInt(int value){}
 
 };
+
+
 
 }

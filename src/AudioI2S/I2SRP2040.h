@@ -1,171 +1,353 @@
 #pragma once
 
-#if defined(ARDUINO_ARCH_RP2040) 
 #include "AudioI2S/I2SConfig.h"
-#if defined(ARDUINO_ARCH_MBED_RP2040)
-#  include "RP2040-I2S.h"
-#else
-#  include <I2S.h>
-#endif
+#if defined(RP2040_HOWER)
+#include <I2S.h>
+
+
 namespace audio_tools {
-
-#if !defined(ARDUINO_ARCH_MBED_RP2040)
-INLINE_VAR ::I2S I2S;
-#endif
-
-
-class I2SBasePIO;
-typedef I2SBasePIO I2SBase;
-
 
 /**
  * @brief Basic I2S API - for the ...
+ * @ingroup platform
  * @author Phil Schatzmann
+ * @author LinusHeu
  * @copyright GPLv3
  */
-class I2SBasePIO {
+class I2SDriverRP2040 {
   friend class I2SStream;
 
   public:
 
     /// Provides the default configuration
-    I2SConfig defaultConfig(RxTxMode mode) {
-        I2SConfig c(mode);
+    I2SConfigStd defaultConfig(RxTxMode mode) {
+        I2SConfigStd c(mode);
         return c;
     }
 
     /// starts the DAC with the default config in TX Mode
-    bool begin(RxTxMode mode = TX_MODE)  {
+    bool begin(RxTxMode mode = TX_MODE) {
       TRACED();
       return begin(defaultConfig(mode));
     }
 
     /// starts the DAC 
-    bool begin(I2SConfig cfg) {
+    bool begin(I2SConfigStd cfg) {
       TRACEI();
       this->cfg = cfg;
       cfg.logInfo();
-      if (cfg.rx_tx_mode != TX_MODE ){
+      switch (cfg.rx_tx_mode){
+        case TX_MODE:
+          i2s = I2S(OUTPUT);
+          break;
+        case RX_MODE:
+          i2s = I2S(INPUT);
+          has_input[0] = has_input[1] = false;
+          break;
+        default:
           LOGE("Unsupported mode: only TX_MODE is supported");
           return false;
+          break;
       }
-      if (!I2S.setBCLK(cfg.pin_bck)){
+
+      if (cfg.pin_ws == cfg.pin_bck + 1){ //normal pin order
+        if(!i2s.setBCLK(cfg.pin_bck)){
           LOGE("Could not set bck pin: %d", cfg.pin_bck);
           return false;
-      }
-      if (!I2S.setDATA(cfg.pin_data)){
-          LOGE("Could not set data pin: %d", cfg.pin_data);
+        }
+      } else if(cfg.pin_ws == cfg.pin_bck - 1){ //reverse pin order
+        if (!i2s.swapClocks() || !i2s.setBCLK(cfg.pin_ws)){//setBCLK() actually sets the lower pin of bck/ws
+          LOGE("Could not set bck pin: %d", cfg.pin_bck);
           return false;
+        }
+      } else{
+        LOGE("pins bck: '%d' and ws: '%d' must be next to each other", cfg.pin_bck, cfg.pin_ws);
+        return false;
       }
-      if (cfg.bits_per_sample != 16){
-          LOGE("Unsupported bits_per_sample: %d", cfg.bits_per_sample);
+      if (!i2s.setDATA(cfg.pin_data)){
+        LOGE("Could not set data pin: %d", cfg.pin_data);
+        return false;
+      }
+      if (cfg.pin_mck != -1){
+        i2s.setMCLKmult(cfg.mck_multiplier);
+        if (!i2s.setMCLK(cfg.pin_mck)){
+          LOGE("Could not set data pin: %d", cfg.pin_mck);
           return false;
+        }
+      }
+
+      if (cfg.bits_per_sample==8 || !i2s.setBitsPerSample(cfg.bits_per_sample)){
+        LOGE("Could not set bits per sample: %d", cfg.bits_per_sample);
+        return false;
+      }
+
+      if (!i2s.setBuffers(cfg.buffer_count, cfg.buffer_size)){
+        LOGE("Could not set buffers: Count: '%d', size: '%d'", cfg.buffer_count, cfg.buffer_size);
+        return false;
+      }
+
+      // setup format
+      if(cfg.i2s_format == I2S_STD_FORMAT || cfg.i2s_format == I2S_PHILIPS_FORMAT){
+        // default setting: do nothing
+      } else if(cfg.i2s_format == I2S_LEFT_JUSTIFIED_FORMAT || cfg.i2s_format==I2S_LSB_FORMAT){
+        if(!i2s.setLSBJFormat()){
+          LOGE("Could not set LSB Format")
+          return false;
+        }
+      } else {
+        LOGE("Unsupported I2S format");
+        return false;
       }
 
       if (cfg.channels < 1 || cfg.channels > 2 ){
-          LOGE("Unsupported channels: '%d' - only 2 is supported", cfg.channels);
-          return false;
+        LOGE("Unsupported channels: '%d'", cfg.channels);
+        return false;
       }
 
-      int rate = cfg.sample_rate; 
-      if (cfg.channels==1){
-        rate = rate /2;
-      } 
-
-      if (!I2S.begin(rate)){
-          LOGE("Could not start I2S");
-          return false;
+      if (!i2s.begin(cfg.sample_rate)){
+        LOGE("Could not start I2S");
+        return false;
       }
       return true;
     }
 
-    /// stops the I2C and unistalls the driver
-    void end()  {
-      I2S.end();
+    /// stops the I2C and uninstalls the driver
+    void end() {
+      flush();
+      i2s.end();
     }
 
     /// provides the actual configuration
-    I2SConfig config() {
+    I2SConfigStd config() {
       return cfg;
     }
 
     /// writes the data to the I2S interface 
-    size_t writeBytes(const void *src, size_t size_bytes)  {
-      TRACED();
+    size_t writeBytes(const void *src, size_t size_bytes) {
+      LOGD("writeBytes(%d)", size_bytes);
       size_t result = 0;
-      int16_t *p16 = (int16_t *)src;
-      
+
       if (cfg.channels==1){
-        int samples = size_bytes/2;
-        // multiply 1 channel into 2
-        int16_t buffer[samples*2]; // from 1 byte to 2 bytes
-        for (int j=0;j<samples;j++){
-          buffer[j*2]= p16[j];
-          buffer[j*2+1]= p16[j];
-        } 
-        result = I2S.write((const uint8_t*)buffer, size_bytes*2)*2;
+        result = writeExpandChannel(src, size_bytes);
       } else if (cfg.channels==2){
-        result = I2S.write((const uint8_t*)src, size_bytes)*4;
-      } 
-      return result;
-    }
-
-    size_t readBytes(void *dest, size_t size_bytes)  {
-      TRACEE();
-      size_t result = 0;
-      return result;
-    }
-
-    int availableForWrite()  {
-      int result = 0;
-      if (cfg.channels == 1){
-        // it should be a multiple of 2
-        result = I2S.availableForWrite()/2*2;
-        // return half of it because we double when writing
-        result = result / 2;
-      } else {
-        // it should be a multiple of 4
-        result = I2S.availableForWrite()/4*4;
-      } 
-      if (result<4){
-        result = 0;
+        const uint8_t *p = (const uint8_t*) src;
+        while(size_bytes >= sizeof(int32_t)){
+          bool justWritten = i2s.write(*(int32_t*)p,true); //I2S::write(int32,bool) actually only returns 0 or 1
+          if(justWritten){
+            size_bytes -= sizeof(int32_t);
+            p += sizeof(int32_t);
+            result += sizeof(int32_t);
+          } else return result;
+        }
       }
       return result;
     }
 
-    int available()  {
+    size_t readBytes(void *dest, size_t size_bytes) {
+      TRACED();
+      switch(cfg.channels){
+        case 1:
+          return read1Channel(dest, size_bytes);
+        case 2:
+          return read2Channels(dest, size_bytes);
+      }
       return 0;
     }
 
-    void flush()   {
-      return I2S.flush();
+    int availableForWrite()  {
+      if (cfg.channels == 1){
+        return cfg.buffer_size;
+      } else {
+        return i2s.availableForWrite();
+      } 
+    }
+
+    int available() {
+      return min(i2s.available(), cfg.buffer_size);
+    }
+
+    void flush() {
+      i2s.flush();
     }
 
   protected:
-    I2SConfig cfg;
+    I2SConfigStd cfg;
+    I2S i2s;
+    bool has_input[2];
 
-    // blocking write
-    void writeSample(int16_t sample){
-        int written = I2S.write(sample);
-        while (!written) {
-          delay(5);
-          LOGW("written: %d ", written);
-          written = I2S.write(sample);
-        }
+    /// writes 1 channel to I2S while expanding it to 2 channels
+    //returns amount of bytes written from src to i2s
+    size_t writeExpandChannel(const void *src, size_t size_bytes) {
+      switch(cfg.bits_per_sample){
+        // case 8: {
+        //   int8_t *pt8 = (int8_t*) src;
+        //   int16_t sample16 = static_cast<int16_t>(*pt8) << 8;
+        //   for (int j=0;j<size_bytes;j++){
+        //     // 8 bit does not work
+        //     i2s.write8(pt8[j], pt8[j]); 
+        //     //LOGI("%d", pt8[j]);
+        //   }
+        // } break;
+        case 16: {
+          int16_t *pt16 = (int16_t*) src;
+          for (int j=0;j<size_bytes/sizeof(int16_t);j++){            
+            i2s.write16(pt16[j], pt16[j]); 
+          }
+        } break;
+        case 24: {
+          int32_t *pt24 = (int32_t*) src;
+          for (int j=0;j<size_bytes/sizeof(int32_t);j++){
+            i2s.write24(pt24[j], pt24[j]); 
+          }
+        } break;
+        case 32:{
+          int32_t *pt32 = (int32_t*) src;
+          for (int j=0;j<size_bytes/sizeof(int32_t);j++){
+            i2s.write32(pt32[j], pt32[j]); 
+          }
+        } break;
+      }
+      return size_bytes;
     }
 
-    int writeSamples(int samples, int16_t* values){
-        int result=0;
-        for (int j=0;j<samples;j++){
-          int16_t sample = values[j];
-          writeSample(sample);
-          writeSample(sample);
-          result++;
-        }
-        return result;
+    /// Provides sterio data from i2s
+    size_t read2Channels(void *dest, size_t size_bytes) {
+      TRACED();
+      size_t result = 0;
+      switch(cfg.bits_per_sample){
+        // case 8:{
+        //   int8_t *data = (int8_t*)dest;
+        //   for (int j=0;j<size_bytes;j+=2){
+        //     if (i2s.read8(data+j, data+j+1)){
+        //       result+=2;;
+        //     } else {
+        //       return result;
+        //     }
+        //   }
+        // }break;
+        
+        case 16:{
+          int16_t *data = (int16_t *)dest;
+          for (int j=0;j<size_bytes/sizeof(int16_t);j+=2){
+            if (i2s.read16(data+j, data+j+1)){
+              result+=4;
+            } else {
+              return result;
+            }
+          }
+        }break;
+
+        case 24:{
+          int32_t *data = (int32_t *)dest;
+          for (int j=0;j<size_bytes/sizeof(int32_t);j+=2){
+            if (i2s.read24(data+j, data+j+1)){
+              result+=8;
+            } else {
+              return result;
+            }
+          }          
+        }break;
+
+        case 32:{
+          int32_t *data = (int32_t *)dest;
+          for (int j=0;j<size_bytes/sizeof(int32_t);j+=2){
+            if (i2s.read32(data+j, data+j+1)){
+              result+=8;
+            } else {
+              return result;
+            }
+          }          
+          
+        }break;
+      }
+      return result;
     }
-    
+
+    /// Reads 2 channels from i2s and combineds them to 1
+    size_t read1Channel(void *dest, size_t size_bytes) {
+      TRACED();
+      size_t result = 0;
+      switch(cfg.bits_per_sample){
+        // case 8:{
+        //   int8_t tmp[2];
+        //   int8_t *data = (int8_t*)dest;
+        //   for (int j=0;j<size_bytes;j++){
+        //     if (i2s.read8(tmp, tmp+1)){
+        //       data[j] = mix(tmp[0], tmp[1]);
+        //       result++;;
+        //     } else {
+        //       return result;
+        //     }
+        //   }
+        // }break;
+        
+        case 16:{
+          int16_t tmp[2];
+          int16_t *data = (int16_t*)dest;
+          for (int j=0;j<size_bytes/sizeof(int16_t);j++){
+            if (i2s.read16(tmp, tmp+1)){
+              data[j] = mix(tmp[0], tmp[1]);
+              result+=2;
+            } else {
+              return result;
+            }
+          }
+        }break;
+
+        case 24:{
+          int32_t tmp[2];
+          int32_t *data = (int32_t*)dest;
+          for (int j=0;j<size_bytes/sizeof(int32_t);j++){
+            if (i2s.read24(tmp, tmp+1)){
+              data[j] = mix(tmp[0],tmp[1]);
+              result+=4;
+            } else {
+              return result;
+            }
+          }
+        }break;
+
+        case 32:{
+          int32_t tmp[2];
+          int32_t *data = (int32_t*)dest;
+          for (int j=0;j<size_bytes/sizeof(int32_t);j++){
+            if (i2s.read32(tmp, tmp+1)){
+              data[j] = mix(tmp[0],tmp[1]);
+              result+=4;
+            } else {
+              return result;
+            }
+          }          
+        }break;
+      }
+      return result;
+    }
+
+    // we just provide the avg of both samples
+    template <class T>
+    T mix (T left, T right) {
+      if (left!=0) has_input[0]=true;
+      if (right!=0) has_input[1]=true;
+
+      // if right is always empty we return left
+      if (has_input[0]&&!has_input[1]){
+        return left;
+      }
+
+      // if left is always empty we return right
+      if (!has_input[0]&&has_input[1]){
+        return right;
+      }
+      
+      return (left/2) + (right/2);
+
+    }
+
+
 };
+
+using I2SDriver = I2SDriverRP2040;
+
 
 }
 

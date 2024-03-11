@@ -1,7 +1,6 @@
 #pragma once
 
 #include "AudioConfig.h"
-#include "Arduino.h"
 #include "AudioEffects/AudioEffect.h"
 #ifdef ESP32
 #  include "freertos/FreeRTOS.h"
@@ -20,7 +19,7 @@ namespace audio_tools {
  * it was created in 1995. In the 90s the computers had limited processor power and memory available. 
  * In todays world we can get some cheap Microcontrollers, which provide almost the same capabilities.
  *
- * 
+ * @ingroup generator
  * @tparam T 
  */
 
@@ -39,8 +38,8 @@ class STKGenerator : public SoundGenerator<T> {
         }
 
         /// provides the default configuration
-        AudioBaseInfo defaultConfig() {
-            AudioBaseInfo info;
+        AudioInfo defaultConfig() {
+            AudioInfo info;
             info.channels = 2;
             info.bits_per_sample = sizeof(T) * 8;
             info.sample_rate = stk::Stk::sampleRate();
@@ -48,7 +47,7 @@ class STKGenerator : public SoundGenerator<T> {
         }
 
         /// Starts the processing
-        bool begin(AudioBaseInfo cfg){
+        bool begin(AudioInfo cfg){
             TRACEI();
             cfg.logInfo();
             SoundGenerator<T>::begin(cfg);
@@ -74,6 +73,7 @@ class STKGenerator : public SoundGenerator<T> {
 
 /**
  * @brief STK Stream for Instrument or Voicer
+ * @ingroup dsp
  */
 template <class StkCls>
 class STKStream : public GeneratedSoundStream<int16_t> {
@@ -95,8 +95,8 @@ class STKStream : public GeneratedSoundStream<int16_t> {
             GeneratedSoundStream<int16_t>::setInput(generator);
         }
 
-        AudioBaseInfo defaultConfig() {
-            AudioBaseInfo info;
+        AudioInfo defaultConfig() {
+            AudioInfo info;
             info.channels = 1;
             info.bits_per_sample = 16;
             info.sample_rate = stk::Stk::sampleRate();
@@ -112,6 +112,7 @@ class STKStream : public GeneratedSoundStream<int16_t> {
  * @brief Use any effect from the STK framework: e.g. Chorus, Echo, FreeVerb, JCRev,
  * PitShift... https://github.com/pschatzmann/Arduino-STK
  *
+ * @ingroup effects
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -131,12 +132,18 @@ protected:
 
 /**
  * @brief Chorus Effect
+ * @ingroup effects
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 class STKChorus : public AudioEffect, public stk::Chorus {
 public:
   STKChorus(float baseDelay = 6000) : stk::Chorus(baseDelay) {}
+  STKChorus(const STKChorus& copy) = default;
+
+  AudioEffect* clone() override{
+    return new STKChorus(*this);
+  }
 
   virtual effect_t process(effect_t in) {
     // just convert between int16 and float
@@ -147,6 +154,7 @@ public:
 
 /**
  * @brief Echo Effect
+ * @ingroup effects
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -154,6 +162,11 @@ class STKEcho : public AudioEffect, public stk::Echo {
 public:
   STKEcho(unsigned long maximumDelay = (unsigned long)Stk::sampleRate())
       : stk::Echo(maximumDelay) {}
+  STKEcho(const STKEcho& copy) = default;
+
+  AudioEffect* clone() override{
+    return new STKEcho(*this);
+  }
 
   virtual effect_t process(effect_t in) {
     // just convert between int16 and float
@@ -164,12 +177,21 @@ public:
 
 /**
  * @brief Jezar at Dreampoint's FreeVerb, implemented in STK.
+ * @ingroup effects
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 class STKFreeVerb : public AudioEffect, public stk::FreeVerb {
 public:
   STKFreeVerb() = default;
+  STKFreeVerb(const STKFreeVerb& copy) = default;
+  AudioEffect* clone() override{
+    return new STKFreeVerb(*this);
+  }
+  StkFloat tick (StkFloat input, unsigned int channel=0) override
+  {
+    return FreeVerb::tick(input, input, channel);
+  }
   virtual effect_t process(effect_t in) {
     // just convert between int16 and float
     float value = static_cast<float>(in) / 32767.0;
@@ -179,12 +201,17 @@ public:
 
 /**
  * @brief John Chowning's reverberator class.
+ * @ingroup effects
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 class STKChowningReverb : public AudioEffect, public stk::JCRev {
 public:
   STKChowningReverb() = default;
+  STKChowningReverb(const STKChowningReverb& copy) = default;
+  AudioEffect* clone() override{
+    return new STKChowningReverb(*this);
+  }
 
   virtual effect_t process(effect_t in) {
     // just convert between int16 and float
@@ -195,12 +222,17 @@ public:
 
 /**
  * @brief CCRMA's NRev reverberator class.
+ * @ingroup effects
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 class STKNReverb : public AudioEffect, public stk::NRev {
 public:
   STKNReverb(float t60 = 1.0) : NRev(t60) {}
+  STKNReverb(const STKNReverb& copy) = default;
+  AudioEffect* clone() override{
+    return new STKNReverb(*this);
+  }
   virtual effect_t process(effect_t in) {
     // just convert between int16 and float
     float value = static_cast<float>(in) / 32767.0;
@@ -210,12 +242,17 @@ public:
 
 /**
  * @brief Perry's simple reverberator class
+ * @ingroup effects
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 class STKPerryReverb : public AudioEffect, public stk::PRCRev {
 public:
   STKPerryReverb(float t60 = 1.0) : PRCRev(t60) {}
+  STKPerryReverb(const STKPerryReverb& copy) = default;
+  AudioEffect* clone() override{
+    return new STKPerryReverb(*this);
+  }
   virtual effect_t process(effect_t in) {
     // just convert between int16 and float
     float value = static_cast<float>(in) / 32767.0;
@@ -225,6 +262,7 @@ public:
 
 /**
  * @brief Pitch shifter effect class based on the Lent algorithm
+ * @ingroup effects
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -232,7 +270,11 @@ class STKLentPitShift : public AudioEffect, public stk::LentPitShift {
 public:
   STKLentPitShift(float periodRatio = 1.0, int tMax = 512)
       : stk::LentPitShift(periodRatio, tMax) {}
+  STKLentPitShift(const STKLentPitShift& copy) = default;
 
+  AudioEffect* clone() override{
+    return new STKLentPitShift(*this);
+  }
   virtual effect_t process(effect_t in) {
     // just convert between int16 and float
     float value = static_cast<float>(in) / 32767.0;
@@ -241,13 +283,20 @@ public:
 };
 
 /**
- * @brief Pitch shifter effect class based on the Lent algorithm
+ * @brief Simple Pitch shifter effect class: This class implements a simple pitch 
+ * shifter using a delay line.
+ * @ingroup effects
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 class STKPitShift : public AudioEffect, public stk::PitShift {
 public:
   STKPitShift() = default;
+  STKPitShift(const STKPitShift& copy) = default;
+
+  AudioEffect* clone() override{
+    return new STKPitShift(*this);
+  }
   virtual effect_t process(effect_t in) {
     // just convert between int16 and float
     float value = static_cast<float>(in) / 32767.0;

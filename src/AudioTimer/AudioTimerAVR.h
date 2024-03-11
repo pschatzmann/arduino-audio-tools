@@ -1,35 +1,26 @@
 #pragma once
 
 #ifdef __AVR__
-#include "AudioTimer/AudioTimerDef.h"
+#include "AudioTimer/AudioTimerBase.h"
 
 namespace audio_tools {
-
 typedef void (* repeating_timer_callback_t )(void* obj);
-class TimerAlarmRepeatingAVR;
-INLINE_VAR TimerAlarmRepeatingAVR *timerAlarmRepeatingRef = nullptr;
+class TimerAlarmRepeatingDriverAVR;
+static TimerAlarmRepeatingDriverAVR *timerAlarmRepeatingRef = nullptr;
 
 
 /**
  * @brief Repeating Timer functions for repeated execution: Plaease use the typedef TimerAlarmRepeating
- * 
+ * @ingroup platform
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 
  */
-class TimerAlarmRepeatingAVR : public TimerAlarmRepeatingDef {
+class TimerAlarmRepeatingDriverAVR : public TimerAlarmRepeatingDriverBase {
     public:
 
-        TimerAlarmRepeatingAVR(TimerFunction function=DirectTimerCallback, int id=0) : TimerAlarmRepeatingDef(){
+        TimerAlarmRepeatingDriverAVR() {
             timerAlarmRepeatingRef = this;
-        }
-
-        TimerAlarmRepeatingAVR(){
-            timerAlarmRepeatingRef = this;
-        }
-
-        ~TimerAlarmRepeatingAVR(){
-            end();
         }
 
         /**
@@ -46,6 +37,10 @@ class TimerAlarmRepeatingAVR : public TimerAlarmRepeatingDef {
                     break;
                 case US:
                     timeUs = time;
+                    break;
+                case HZ:
+                    // convert hz to time in us
+                    timeUs = AudioTime::toTimeUs(time);
                     break;
             }
             // frequency = beats / second
@@ -97,7 +92,7 @@ class TimerAlarmRepeatingAVR : public TimerAlarmRepeatingDef {
 
 };
 
-typedef  TimerAlarmRepeatingAVR TimerAlarmRepeating;
+using TimerAlarmRepeatingDriver = TimerAlarmRepeatingDriverAVR;
 
 } // namespace
 

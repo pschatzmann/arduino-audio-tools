@@ -13,13 +13,15 @@
 #include "AudioCodecs/AudioEncoded.h"
 #include "minimp3.h"
 
+
 namespace audio_tools {
 
 /**
  * @brief MP3 Decoder using https://github.com/pschatzmann/minimp3.
  * This decoder does not provide any good results and it is not suited to decode any audio above 32000 on an ESP32. So the
  * sample rate is limited by the MINIMP3_MAX_SAMPLE_RATE variable.
- * 
+ * @ingroup codecs
+ * @ingroup decoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -36,12 +38,8 @@ class MP3DecoderMini : public AudioDecoder {
 
   void setBufferLength(int len) { buffer_size = len; }
 
-  void setNotifyAudioChange(AudioBaseInfoDependent &bi) {
-    audioBaseInfoSupport = &bi;
-  }
-
   /// Starts the processing
-  void begin() {
+  bool begin() {
     TRACED();
     //esp_task_wdt_delete(nullptr);
     ::mp3dec_init(&mp3d);
@@ -49,6 +47,7 @@ class MP3DecoderMini : public AudioDecoder {
     pcm.resize(MINIMP3_MAX_SAMPLES_PER_FRAME);
     buffer_pos = 0;
     active = true;
+    return true;
   }
 
   /// Releases the reserved memory
@@ -59,10 +58,7 @@ class MP3DecoderMini : public AudioDecoder {
   }
 
   /// Defines the output Stream
-  void setOutputStream(Print &outStream) { this->out = &outStream; }
-
-  /// Provides the last available MP3FrameInfo
-  AudioBaseInfo audioInfo() { return audio_info; }
+  void setOutput(Print &outStream) { this->out = &outStream; }
 
   /// Write mp3 data to decoder
   size_t write(const void *data, size_t len) {
@@ -93,8 +89,6 @@ class MP3DecoderMini : public AudioDecoder {
   }
 
  protected:
-  AudioBaseInfo audio_info;
-  AudioBaseInfoDependent *audioBaseInfoSupport = nullptr;
   Print *out = nullptr;
   mp3dec_t mp3d;
   mp3dec_frame_info_t mp3dec_info;
@@ -136,18 +130,18 @@ class MP3DecoderMini : public AudioDecoder {
   /// Provides Metadata and PCM data
   void provideResult(int samples) {
     LOGD("provideResult: %d samples", samples);
-    AudioBaseInfo info;
-    info.sample_rate = mp3dec_info.hz>sample_rate_limit ? sample_rate_limit : mp3dec_info.hz;
-    info.channels = mp3dec_info.channels;
-    info.bits_per_sample = 16;
+    AudioInfo tmp;
+    tmp.sample_rate = mp3dec_info.hz>sample_rate_limit ? sample_rate_limit : mp3dec_info.hz;
+    tmp.channels = mp3dec_info.channels;
+    tmp.bits_per_sample = 16;
 
     // notify about audio changes
-    if (audioBaseInfoSupport != nullptr && info != audio_info) {
-      info.logInfo();
-      audioBaseInfoSupport->setAudioInfo(info);
+    if (tmp != info) {
+      tmp.logInfo();
+      notifyAudioChange(tmp);
     }
-    // store last audio_info so that we can detect any changes
-    audio_info = info;
+    // store last info so that we can detect any changes
+    info = info;
 
     // provide result pwm data
     if (out != nullptr) {

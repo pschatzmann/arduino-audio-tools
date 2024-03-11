@@ -13,11 +13,14 @@
 #include "AudioCodecs/AudioEncoded.h"
 #include "iLBC.h"
 
+
 namespace audio_tools {
 
 /**
  * @brief Decoder for iLBC. Depends on
  * https://github.com/pschatzmann/libilbc
+ * @ingroup codecs
+ * @ingroup decoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -35,13 +38,11 @@ class ILBCDecoder : public AudioDecoder {
     end();
   }
 
-  virtual AudioBaseInfo audioInfo() { return info; }
-
-  virtual void begin() {
+  virtual bool begin() {
     TRACEI();
     if (p_print==nullptr){
       LOGE("Output not defined");
-      return;
+      return false;
     }
 
     if (p_ilbc==nullptr){
@@ -53,9 +54,8 @@ class ILBCDecoder : public AudioDecoder {
     encoded_buffer.resize(p_ilbc->getEncodedBytes());
 
     // update audio information
-    if (notify != nullptr) {
-      notify->setAudioInfo(info);
-    }
+    notifyAudioChange(info);
+    return true;
   }
 
   virtual void end() {
@@ -64,11 +64,7 @@ class ILBCDecoder : public AudioDecoder {
     p_ilbc = nullptr;
   }
 
-  virtual void setNotifyAudioChange(AudioBaseInfoDependent &bi) {
-    notify = &bi;
-  }
-
-  virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
+  virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
 
   operator bool() { return p_ilbc != nullptr; }
 
@@ -84,6 +80,7 @@ class ILBCDecoder : public AudioDecoder {
         p_ilbc->decode(encoded_buffer.data(), decoded_buffer.data());
         if (p_print!=nullptr){
           p_print->write((uint8_t*)decoded_buffer.data(), decoded_buffer.size()*sizeof(int16_t));
+          delay(2);
         }
         encoded_buffer_pos = 0;
       }
@@ -92,8 +89,6 @@ class ILBCDecoder : public AudioDecoder {
   }
 
  protected:
-  AudioBaseInfo info;
-  AudioBaseInfoDependent *notify = nullptr;
   Print *p_print = nullptr;
   iLBCDecode *p_ilbc = nullptr;
   Vector<int16_t> decoded_buffer{0};
@@ -107,6 +102,8 @@ class ILBCDecoder : public AudioDecoder {
 /**
  * @brief Encoder for iLBC - Depends on
  * https://github.com/pschatzmann/libopenilbc
+ * @ingroup codecs
+ * @ingroup encoder
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -123,24 +120,15 @@ class ILBCEncoder : public AudioEncoder {
     end();
   }
 
-  void begin(AudioBaseInfo info) {
-    setAudioInfo(info);
-    begin();
-  }
-
-  void setAudioInfo(AudioBaseInfo info) {
-    this->info = info;
-  }
-
-  void begin() {
+  bool begin() {
     TRACEI();
     if (p_print==nullptr){
       LOGE("Output not defined");
-      return;
+      return false;
     }
     if (info.bits_per_sample!=16){
       LOGE("bits_per_sample must be 16: %d",info.bits_per_sample);
-      return;
+      return false;
     }
     if (info.sample_rate!=8000){
       LOGW("The sample rate should be 8000: %d", info.sample_rate);
@@ -154,6 +142,7 @@ class ILBCEncoder : public AudioEncoder {
     decoded_buffer.resize(p_ilbc->getSamples());
     encoded_buffer.resize(p_ilbc->getEncodedBytes());
     decoded_buffer_pos = 0;
+    return true;
   }
 
   virtual void end() {
@@ -166,7 +155,7 @@ class ILBCEncoder : public AudioEncoder {
 
   virtual const char *mime() { return "audio/ilbc"; }
 
-  virtual void setOutputStream(Print &out_stream) { p_print = &out_stream; }
+  virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
 
   operator bool() { return p_ilbc != nullptr; }
 
@@ -192,7 +181,6 @@ class ILBCEncoder : public AudioEncoder {
   }
 
  protected:
-  AudioBaseInfo info;
   Print *p_print = nullptr;
   iLBCEncode *p_ilbc = nullptr;
   Vector<float> decoded_buffer{0};
