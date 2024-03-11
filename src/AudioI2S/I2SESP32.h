@@ -171,8 +171,12 @@ class I2SDriverESP32 {
             .mclk_multiple = I2S_MCLK_MULTIPLE_DEFAULT,
             .bits_per_chan = I2S_BITS_PER_CHAN_DEFAULT,
 #endif
+
       };
       i2s_config = i2s_config_new;
+
+	cfg.logInfo();
+Serial.printf("mode: %i, sample_rate: %i, bits_per_sample: %i, channel_format: %i, communicaction_format: %i, dma_buf_count: %i, dma_buf_len: %i, use_apll: %c, tx_desc_auto_clear: %c, fixed_mclk: %i, mclk_multiple: %i, bits_per_chan: %i\r\n", i2s_config_new.mode, i2s_config_new.sample_rate, i2s_config_new.bits_per_sample, i2s_config_new.channel_format, i2s_config_new.communication_format, i2s_config_new.dma_buf_count, i2s_config_new.dma_buf_len, i2s_config_new.use_apll?'y':'n', i2s_config_new.tx_desc_auto_clear?'y':'n', i2s_config_new.fixed_mclk, i2s_config_new.mclk_multiple, i2s_config_new.bits_per_chan);
 
       // We make sure that we can reconfigure
       if (is_started) {

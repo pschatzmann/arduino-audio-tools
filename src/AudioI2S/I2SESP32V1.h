@@ -171,6 +171,7 @@ protected:
                       },
               },
       };
+// Serial.printf("I2S_STD_CONFIG_T: .clk_cfg %i, .slot_cfg %i, .gpio_cfg: mclk: %i, bclk: %i, ws: %i, dout: %i, din: %i\r\n", std_cfg.clk_cfg, std_cfg.slot_cfg, std_cfg.gpio_cfg.mclk, std_cfg.gpio_cfg.bclk, std_cfg.gpio_cfg.ws, std_cfg.gpio_cfg.dout, std_cfg.gpio_cfg.din);
 
       if (cfg.rx_tx_mode == RXTX_MODE || cfg.rx_tx_mode == TX_MODE) {
         if (i2s_channel_init_std_mode(tx_chan, &std_cfg) != ESP_OK) {
