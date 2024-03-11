@@ -62,6 +62,8 @@ class OggContainerDecoder : public AudioDecoder {
 
   void begin() override {
     TRACED();
+    out.setAudioInfo(this->info);
+    TRACED();
     out.begin();
     if (p_oggz == nullptr) {
       p_oggz = oggz_new(OGGZ_READ | OGGZ_AUTO);  // OGGZ_NONSTRICT
@@ -114,6 +116,7 @@ class OggContainerDecoder : public AudioDecoder {
                                          in_size - size_consumed);
       flush();
     }
+    // flush();
     return size_consumed;
   }
 
