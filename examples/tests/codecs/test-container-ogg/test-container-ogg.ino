@@ -11,12 +11,12 @@
 #include "AudioTools.h"
 #include "AudioCodecs/ContainerOgg.h"
 #include "AudioCodecs/CodecSBC.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 
 AudioInfo info(16000, 1, 16);
 SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound( sineWave); // Stream generated from sine wave
-AudioKitStream out; 
+AudioBoardStream out(AudioKitEs8388V1);
 OggContainerEncoder enc(new SBCEncoder());
 OggContainerDecoder dec(new SBCDecoder());
 //OggContainerEncoder enc;

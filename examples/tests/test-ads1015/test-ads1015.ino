@@ -1,6 +1,6 @@
 
 #include <Wire.h>
-#include "ADS1X15.h"
+#include "ADS1X15.h" // https://github.com/pschatzmann/ADS1X15.git
 
 ADS1115 ads1015(0x48); // ads1015 device  
 

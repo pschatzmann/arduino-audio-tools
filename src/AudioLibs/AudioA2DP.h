@@ -13,6 +13,7 @@
 #include "BluetoothA2DPSink.h"
 #include "BluetoothA2DPSource.h"
 #include "AudioTools/AudioStreams.h"
+#include "Concurrency/BufferRTOS.h"
 
 
 namespace audio_tools {
@@ -20,7 +21,7 @@ namespace audio_tools {
 class A2DPStream;
 static A2DPStream *A2DPStream_self=nullptr;
 // buffer which is used to exchange data
-static SynchronizedBufferRTOS<uint8_t>a2dp_buffer{A2DP_BUFFER_SIZE * A2DP_BUFFER_COUNT, A2DP_BUFFER_SIZE, portMAX_DELAY, portMAX_DELAY};
+static BufferRTOS<uint8_t>a2dp_buffer{A2DP_BUFFER_SIZE * A2DP_BUFFER_COUNT, A2DP_BUFFER_SIZE, portMAX_DELAY, portMAX_DELAY};
 // flag to indicated that we are ready to process data
 static bool is_a2dp_active = false;
 
@@ -112,11 +113,11 @@ class A2DPStream : public AudioStream {
         }
 
         /// Starts the processing
-        void begin(RxTxMode mode, const char* name){
+        bool begin(RxTxMode mode, const char* name){
             A2DPConfig cfg;
             cfg.mode = mode;
             cfg.name = name;
-            begin(cfg);
+            return begin(cfg);
         }
 
         /// Starts the processing
@@ -177,6 +178,13 @@ class A2DPStream : public AudioStream {
             } 
             
             return result;           
+        }
+
+        void end() override {
+            if (a2dp != nullptr) {
+                a2dp->disconnect();
+            }
+            AudioStream::end();
         }
 
         /// checks if we are connected
@@ -328,21 +336,17 @@ class A2DPStream : public AudioStream {
 
         /// notify subscriber with AudioInfo
         void notify_base_Info(int rate){
-            if (p_notify!=nullptr){
-                AudioInfo info;
-                info.channels = 2;
-                info.bits_per_sample = 16;
-                info.sample_rate = rate;
-                p_notify->setAudioInfo(info);
-            }
+            AudioInfo info;
+            info.channels = 2;
+            info.bits_per_sample = 16;
+            info.sample_rate = rate;
+            notifyAudioChange(info);            
         }
 
         /// callback to update audio info with used a2dp sample rate
         static void sample_rate_callback(uint16_t rate) {
             A2DPStream_self->info.sample_rate = rate;
-            if (A2DPStream_self->p_notify!=nullptr){
-                A2DPStream_self->notify_base_Info(rate);
-            }
+            A2DPStream_self->notify_base_Info(rate);
         }
 
 };

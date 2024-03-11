@@ -6,12 +6,12 @@
  */
 #include "AudioTools.h"
 #include "AudioLibs/AudioSTK.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 #include "MyFirstInstrument.h"
 
 MyFirstInstrument instrument;
 STKStream<Instrmnt> in(instrument);
-AudioKitStream out;
+AudioBoardStream out(AudioKitEs8388V1);
 StreamCopy copier(out, in);
 MusicalNotes notes;
 

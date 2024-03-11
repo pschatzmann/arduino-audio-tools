@@ -10,10 +10,10 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 
 AudioInfo info(8000, 2, 16);
-AudioKitStream kit; // Access I2S as stream
+AudioBoardStream kit(AudioKitEs8388V1); // Access I2S as stream
 CsvOutput<int16_t> csv(Serial);
 MultiOutput out;
 StreamCopy copier(out, kit); // copy kit to kit
@@ -29,7 +29,7 @@ void setup(void) {
     auto cfg = kit.defaultConfig(RXTX_MODE);
     cfg.copyFrom(info);
     cfg.sd_active = false;
-    cfg.input_device = AUDIO_HAL_ADC_INPUT_LINE2; // input from microphone
+    cfg.input_device = ADC_INPUT_LINE2; // input from microphone
     kit.setVolume(0.5);
     kit.begin(cfg);
 

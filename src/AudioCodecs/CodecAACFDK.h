@@ -40,13 +40,15 @@ class AACDecoderFDK : public AudioDecoder  {
             dec->setOutput(out_stream);
         }
 
-        void begin(){
+        bool begin(){
             dec->begin(TT_MP4_ADTS, 1);
+            return true;
         }
 
         // opens the decoder
-        void begin(TRANSPORT_TYPE transportType, UINT nrOfLayers){
+        bool begin(TRANSPORT_TYPE transportType, UINT nrOfLayers){
             dec->begin(transportType, nrOfLayers);
+            return true;
         }
 
         /**
@@ -71,7 +73,7 @@ class AACDecoderFDK : public AudioDecoder  {
         }
 
         // provides common information
-        AudioInfo audioInfo() {
+        AudioInfo audioInfo() override {
             AudioInfo result;
             CStreamInfo i = audioInfoEx();
             result.channels = i.numChannels;
@@ -105,7 +107,7 @@ class AACDecoderFDK : public AudioDecoder  {
             }
         }
 
-        virtual void setNotifyAudioChange(AudioInfoSupport &bi) {
+        void addNotifyAudioChange(AudioInfoSupport &bi) override {
             audioChangeFDK = &bi;
             // register audio change handler
             dec->setInfoCallback(audioChangeCallback);
@@ -236,8 +238,9 @@ public:
     }
 
     /// Defines the Audio Info
-    virtual void setAudioInfo(AudioInfo from) {
+    void setAudioInfo(AudioInfo from) override {
         TRACED();
+        AudioEncoder::setAudioInfo(from);
         aac_fdk::AudioInfo info;
         info.channels = from.channels;
         info.sample_rate = from.sample_rate;
@@ -251,9 +254,9 @@ public:
      * @param info 
      * @return int 
      */
-    virtual void begin(AudioInfo info) {
+    virtual bool begin(AudioInfo info) {
         TRACED();
-        enc->begin(info.channels,info.sample_rate, info.bits_per_sample);
+        return enc->begin(info.channels,info.sample_rate, info.bits_per_sample);
     }
 
     /**
@@ -264,14 +267,15 @@ public:
      * @param input_bits_per_sample 
      * @return int 0 => ok; error with negative number
      */
-    virtual void begin(int input_channels=2, int input_sample_rate=44100, int input_bits_per_sample=16) {
+    virtual bool begin(int input_channels=2, int input_sample_rate=44100, int input_bits_per_sample=16) {
         TRACED();
-        enc->begin(input_channels,input_sample_rate, input_bits_per_sample);
+        return enc->begin(input_channels,input_sample_rate, input_bits_per_sample);
     }
 
     // starts the processing
-    void begin() {
+    bool begin() {
         enc->begin();
+        return true;
     }
     
     // convert PCM data to AAC

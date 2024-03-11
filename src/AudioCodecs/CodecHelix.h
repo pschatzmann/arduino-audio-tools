@@ -37,10 +37,11 @@ public:
   virtual void setOutput(Print &outStream) { p_out_stream = &outStream; }
 
   /// Starts the processing
-  void begin() {
+  bool begin() {
     TRACED();
     // reset actual decoder so that we start a new determination
     resetDecoder();
+    return true;
   }
 
   /// Releases the reserved memory
@@ -52,7 +53,7 @@ public:
     resetDecoder();
   }
 
-  AudioInfo audioInfo() {
+  AudioInfo audioInfo() override {
     return p_decoder != nullptr ? p_decoder->audioInfo() : noInfo;
   }
 
@@ -68,10 +69,6 @@ public:
 
   /// checks if the class is active
   operator bool() { return p_decoder == nullptr ? false : *p_decoder; }
-
-  /// Defines the callback object to which the Audio information change is
-  /// provided
-  void setNotifyAudioChange(AudioInfoSupport &bi) { p_bi = &bi; }
 
 protected:
   AudioDecoder *p_decoder = nullptr;
@@ -97,7 +94,7 @@ protected:
       p_decoder = CodecNOP::instance();
     }
     p_decoder->setOutput(*p_out_stream);
-    p_decoder->setNotifyAudioChange(*p_bi);
+    p_decoder->addNotifyAudioChange(*p_bi);
   }
 
   /// Deletes the decoder

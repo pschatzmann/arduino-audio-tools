@@ -29,7 +29,7 @@ void setup(void) {
   // Setup sine wave
   auto cfg = in.defaultConfig();
   cfg.copyFrom(info);
-  in.setNotifyAudioChange(out);
+  in.addNotifyAudioChange(out);
   in.begin(cfg);
 
   // We send the test signal via A2DP - so we conect to the MyMusic Bluetooth Speaker

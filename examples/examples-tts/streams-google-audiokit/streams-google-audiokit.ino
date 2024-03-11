@@ -13,11 +13,11 @@
 
 #include "AudioTools.h"
 #include "AudioCodecs/CodecMP3Helix.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 
 
 URLStream url("ssid","password");  
-AudioKitStream i2s; // final output of decoded stream
+AudioBoardStream i2s(AudioKitEs8388V1); // final output of decoded stream
 EncodedAudioStream dec(&i2s, new MP3DecoderHelix()); // Decoding stream
 StreamCopy copier(dec, url); // copy url to decoder
 StrExt query("http://translate.google.com/translate_tts?ie=UTF-8&tl=%1&client=tw-ob&ttsspeed=%2&q=%3");

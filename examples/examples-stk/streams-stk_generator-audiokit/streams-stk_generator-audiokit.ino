@@ -7,13 +7,13 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 #include "AudioLibs/AudioSTK.h"
 
 Clarinet clarinet(440); // the stk clarinet instrument
 STKGenerator<Instrmnt, int16_t> generator(clarinet);    // subclass of SoundGenerator
 GeneratedSoundStream<int16_t> in(generator);  // Stream generated from sine wave
-AudioKitStream out;
+AudioBoardStream out(AudioKitEs8388V1);
 StreamCopy copier(out, in); // copy stkStream to a2dpStream
 MusicalNotes notes; // notes with frequencies
 
@@ -30,7 +30,7 @@ void setup(void) {
     Serial.println("starting STK...");
     auto cfgSTK = in.defaultConfig();
     cfgSTK.channels = 2;
-    in.setNotifyAudioChange(out);
+    in.addNotifyAudioChange(out);
     in.begin(cfgSTK);
 
 }

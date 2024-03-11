@@ -8,11 +8,11 @@
 
 #include "SimpleTTS.h"
 #include "AudioCodecs/CodecMP3Helix.h"
-//#include "AudioLibs/AudioKit.h"
+//#include "AudioLibs/AudioBoardStream.h"
 
 
 NumberToText ntt;
-I2SStream out; // Replace with desired class e.g. AudioKitStream, AnalogAudioStream etc.
+I2SStream out; // Replace with desired class e.g. AudioBoardStream, AnalogAudioStream etc.
 MP3DecoderHelix mp3;
 AudioDictionary dictionary(ExampleAudioDictionaryValues);
 TextToSpeech tts(ntt, out, mp3, dictionary);

@@ -51,7 +51,7 @@ class AACDecoderHelix : public AudioDecoder  {
             if (aac==nullptr){
                 LOGE("Not enough memory for libhelix");
             }
-            setNotifyAudioChange(bi);
+            addNotifyAudioChange(bi);
         }  
 
         /**
@@ -75,13 +75,14 @@ class AACDecoderHelix : public AudioDecoder  {
         }
 
         /// Starts the processing
-        void begin() override {
+        bool begin() override {
             TRACED();
             if (aac!=nullptr) {
                 aac->setDelay(CODEC_DELAY_MS);
                 aac->setInfoCallback(infoCallback, this);
                 aac->begin();
             }
+            return true;
         }
 
         /// Releases the reserved memory
@@ -94,7 +95,7 @@ class AACDecoderHelix : public AudioDecoder  {
             return aac->audioInfo();
         }
 
-        virtual AudioInfo audioInfo() override{
+        AudioInfo audioInfo() override{
             AudioInfo result;
             auto i = audioInfoEx();
             result.channels = i.nChans;
@@ -105,8 +106,8 @@ class AACDecoderHelix : public AudioDecoder  {
 
         void setAudioInfo(AudioInfo info) override {
             this->info = info;
-            if(p_notify!=nullptr && info_notifications_active){
-                p_notify->setAudioInfo(info);   
+            if(info_notifications_active){
+                notifyAudioChange(info);   
             }
         }
 
@@ -133,13 +134,6 @@ class AACDecoderHelix : public AudioDecoder  {
         void flush(){
         //     aac->flush();
         }
-
-        // /// Defines the callback object to which the Audio information change is provided
-        // virtual void setNotifyAudioChange(AudioInfoSupport &bi) override {
-        //     TRACED();
-        //     audioChangeAACHelix = &bi;
-        //     if (aac!=nullptr) aac->setInfoCallback(infoCallback, this);
-        // }
 
         /// notifies the subscriber about a change
         static void infoCallback(_AACFrameInfo &i, void* ref){

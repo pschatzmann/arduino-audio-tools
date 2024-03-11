@@ -15,7 +15,7 @@
 URLStream url("ssid","password");
 I2SStream i2s;                  // I2S stream 
 WAVDecoder decoder;             // decode wav to pcm and send it to I2S
-EncodedAudioStream out(i2s, decoder); // Decoder stream
+EncodedAudioStream out(&i2s, &decoder); // Decoder stream
 StreamCopy copier(out, url);    // copy in to out
 
 

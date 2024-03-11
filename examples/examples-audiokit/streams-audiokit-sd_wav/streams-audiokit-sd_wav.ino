@@ -13,11 +13,11 @@
 #include <SPI.h>
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 
 const char* file_name = "/rec.wav";
 AudioInfo info(16000, 1, 16);
-AudioKitStream in;
+AudioBoardStream in(AudioKitEs8388V1);
 File file;  // final output stream
 EncodedAudioStream out(&file, new WAVEncoder());
 StreamCopy copier(out, in);  // copies data
@@ -32,7 +32,7 @@ void setup() {
   auto cfg = in.defaultConfig(RX_MODE);
   cfg.sd_active = true;
   cfg.copyFrom(info);
-  cfg.input_device = AUDIO_HAL_ADC_INPUT_LINE2; // microphone
+  cfg.input_device = ADC_INPUT_LINE2; // microphone
   in.begin(cfg);
 
   // Open SD drive

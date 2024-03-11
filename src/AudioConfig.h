@@ -5,13 +5,15 @@
  * 
  */
 #pragma once
-#if defined(ARDUINO) 
-#  include "Arduino.h"
-#elif defined(IS_DESKTOP)
-#  include "Arduino.h"
+#if defined(IS_MIN_DESKTOP) 
+#  include "AudioLibs/Desktop/NoArduino.h"
 #elif defined(IS_DESKTOP_WITH_TIME_ONLY)
 #  include "AudioLibs/Desktop/Millis.h"
 #  include "AudioLibs/Desktop/NoArduino.h"
+#elif defined(IS_DESKTOP)
+#  include "Arduino.h"
+#elif defined(ARDUINO)
+#  include "Arduino.h"
 #else 
 #  include "AudioLibs/Desktop/NoArduino.h"
 #  define IS_JUPYTER
@@ -29,10 +31,16 @@
 #define AUDIOTOOLS_VERSION "0.9.4"
 
 // Use fixed point multiplication instead float for VolumeStream for slightly better performance on platforms without float hardware. Tested on RP2040 at 16 bit per second (still too slow for 32bit)
-//#define PREFER_FIXEDPOINT 
+#ifndef PREFER_FIXEDPOINT
+#  define PREFER_FIXEDPOINT false 
+#endif
+
+// Add automatic using namespace audio_tools;
+#ifndef USE_AUDIOTOOLS_NS
+#  define USE_AUDIOTOOLS_NS true
+#endif
 
 /**
- * ------------------------------------------------------------------------- 
  * @brief Logging
  * Logging Configuration in Arduino -> set USE_AUDIO_LOGGING to false if you want to deactivate Logging.
  * When using cmake you can set -DUSE_AUDIO_LOGGING=false
@@ -64,13 +72,8 @@
 #  define CHECK_MEMORY() 
 #endif
 
-// Change USE_INLINE_VARS to 1 if inline variables are supported
-#ifndef USE_INLINE_VARS
-#  define USE_INLINE_VARS 0
-#endif
 
 /**
- * ------------------------------------------------------------------------- 
  * @brief Common Default Settings that can usually be changed in the API
  */
 
@@ -110,7 +113,6 @@
 #  define ANALOG_BUFFER_COUNT 6 // 20
 #endif
 
-
 #ifndef A2DP_BUFFER_SIZE 
 #  define A2DP_BUFFER_SIZE 512
 #endif
@@ -140,8 +142,11 @@
 #  define HTTP_MAX_LEN 1024
 #endif
 
+#ifndef USE_RESAMPLE_BUFFER
+#  define USE_RESAMPLE_BUFFER false
+#endif
+
 /**
- * ------------------------------------------------------------------------- 
  * @brief PWM
  */
 #ifndef PWM_BUFFER_SIZE 
@@ -185,6 +190,12 @@
 #define ESP32X
 #endif
 
+#if defined(ESP32)
+#  if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0) 
+#    define USE_SERVER_ACCEPT true              
+#  endif
+#endif
+
 // ----- Regular ESP32 -----
 #if defined(ESP32)  && !defined(ESP32X)
 #if ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(5, 0 , 0)
@@ -207,6 +218,7 @@
 #define USE_TOUCH_READ
 #define USE_CONCURRENCY
 #define USE_EXT_BUTTON_LOGIC
+//#define USE_ALLOCATOR true
 #define HAS_IOSTRAM
 
 #define PWM_FREQENCY 30000
@@ -276,6 +288,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define USE_STREAM_WRITE_OVERRIDE
 #define USE_STREAM_READ_OVERRIDE
 #define USE_CONCURRENCY
+//#define USE_ALLOCATOR true
 
 #define PWM_FREQENCY 30000
 #define PIN_PWM_START 1
@@ -353,6 +366,7 @@ uint32_t millis() {return (xTaskGetTickCount() * portTICK_PERIOD_MS);}
 #define PIN_I2S_MUTE 23
 #define SOFT_MUTE_VALUE 0
 #define PIN_CS SS
+#define USE_SERVER_ACCEPT 1
 
 #define URL_CLIENT_TIMEOUT 60000;
 #define URL_HANDSHAKE_TIMEOUT 120000
@@ -368,7 +382,7 @@ uint32_t millis() {return (xTaskGetTickCount() * portTICK_PERIOD_MS);}
 #define USE_TYPETRAITS
 #define USE_EFFECTS_SUITE
 #define USE_TIMER
-#define USE_INITIALIZER_LIST
+//#define USE_INITIALIZER_LIST
 #define USE_ALT_PIN_SUPPORT
 
 #define PIN_PWM_START 5
@@ -441,9 +455,10 @@ uint32_t millis() {return (xTaskGetTickCount() * portTICK_PERIOD_MS);}
 #define PIN_I2S_MUTE -1
 #define SOFT_MUTE_VALUE 0
 #define PIN_CS PIN_SPI0_SS
+#define USE_SERVER_ACCEPT true
 
 // fix missing __sync_synchronize symbol
-#define FIX_SYNC_SYNCHRONIZE
+//#define FIX_SYNC_SYNCHRONIZE
 #define IRAM_ATTR
 
 #ifndef ANALOG_BUFFER_SIZE 
@@ -454,7 +469,17 @@ uint32_t millis() {return (xTaskGetTickCount() * portTICK_PERIOD_MS);}
 #define ANALOG_BUFFERS 100
 #endif
 
+#define USE_CONCURRENCY
 //#define USE_ESP8266_AUDIO
+
+// default pins for VS1053 shield
+#define VS1053_CS 17 
+#define VS1053_DCS 9 
+#define VS1053_DREQ 10 
+#define VS1053_CS_SD -1
+#define VS1053_RESET 11
+#define VS1053_DEFINED
+
 #endif
 
 // The Pico W has WIFI support
@@ -523,6 +548,7 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #define PIN_PWM_START PA0
 #define PWM_DEFAULT_TIMER TIM2
 #define PWM_FREQ_TIMER_NO 3
+#define USE_SD_NO_NS
 
 #define PIN_I2S_BCK -1
 #define PIN_I2S_WS -1
@@ -530,7 +556,7 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #define PIN_I2S_DATA_OUT -1
 #define PIN_I2S_MUTE -1
 #define SOFT_MUTE_VALUE 0
-#define PIN_CS 10
+#define PIN_CS -1
 #endif
 
 //---- SAMD ------------
@@ -640,7 +666,7 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #endif
 
 //------ VS1053 ----------
-
+// see https://github.com/pschatzmann/arduino-vs1053/wiki/Pinouts-for-Processors-and-Tested-Boards#microcontrollers
 // Default Pins for VS1053
 #ifndef VS1053_DEFINED
 #  define VS1053_CS 5
@@ -693,11 +719,6 @@ typedef WiFiClient WiFiClientSecure;
 #  define USE_INT24_FROM_INT
 #endif
 
-#if USE_INLINE_VARS && !defined(INGNORE_INLINE_VARS)
-#  define INLINE_VAR inline 
-#else
-#  define INLINE_VAR static 
-#endif
 
 #ifndef ANALOG_MAX_SAMPLE_RATE
 #  define ANALOG_MAX_SAMPLE_RATE 44000
@@ -708,14 +729,24 @@ typedef WiFiClient WiFiClientSecure;
 #  define URL_HANDSHAKE_TIMEOUT 120000
 #endif
 
+#ifndef USE_SERVER_ACCEPT
+#  define USE_SERVER_ACCEPT false
+#endif
+
+#ifndef USE_ALLOCATOR
+#  define USE_ALLOCATOR false
+#endif
+
 // select int24 implementation
 #include "AudioBasic/Int24_3bytes_t.h"
 #include "AudioBasic/Int24_4bytes_t.h"
+namespace audio_tools {
 #ifdef USE_3BYTE_INT24
 using int24_t = audio_tools::int24_3bytes_t;
 #else
 using int24_t = audio_tools::int24_4bytes_t;
 #endif
+}
 
 #ifndef ESP32
 #define ESP_IDF_VERSION_VAL(a, b , c) 0

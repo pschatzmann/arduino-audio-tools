@@ -41,6 +41,10 @@ class Queue {
             return l.empty();
         }
 
+        void setAllocator(Allocator &allocator){
+            l.setAllocator(allocator);
+        }
+
     protected:
         List<T> l;
 };

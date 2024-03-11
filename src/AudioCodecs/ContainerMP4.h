@@ -123,7 +123,7 @@ class MP4ParseBuffer {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class ContainerMP4 : public AudioDecoder {
+class ContainerMP4 : public ContainerDecoder {
   friend class MP4ParseBuffer;
 
  public:
@@ -142,12 +142,13 @@ class ContainerMP4 : public AudioDecoder {
   }
 
   /// starts the processing
-  void begin() override {
+  bool begin() override {
     current_pos = 0;
     assert(p_print!=nullptr);
     p_decoder->setOutput(*p_print);
-    p_decoder->begin();
+    bool rc = p_decoder->begin();
     is_active = true;
+    return rc;
   }
 
   /// ends the processing
@@ -272,7 +273,7 @@ class ContainerMP4 : public AudioDecoder {
     if (atom.is("hdlr") && atom.data != nullptr) {
       const uint8_t *sound = atom.data + 8;
       container.is_sound = memcmp("soun", sound, 4) == 0;
-      LOGI("    is_sound: %s", container.is_sound ? "true" : "flase");
+      LOGI("    is_sound: %s", container.is_sound ? "true" : "false");
     }
 
     // parse stsd -> audio info

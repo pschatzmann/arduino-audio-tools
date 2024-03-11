@@ -31,7 +31,7 @@ struct ADTSParser {
   uint8_t num_rawdata_blocks;
   uint32_t quick_check = 0;
 
-  void begin() { quick_check = 0; }
+  bool begin() { quick_check = 0; return true;}
 
   bool parse(uint8_t *hdr) {
     syncword = (hdr[0] << 4) | (hdr[1] >> 4);
@@ -124,9 +124,10 @@ struct ADTSParser {
  */
 class ADTSDecoder : public AudioDecoder {
  public:
-  void begin() override {
+  bool begin() override {
     parser.begin();
     buffer_write_size = 0;
+    return true;
   }
 
   void end() override { buffer.resize(0); }

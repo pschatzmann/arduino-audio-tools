@@ -7,10 +7,10 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 #include "flite_arduino.h"
 
-AudioKitStream kit; 
+AudioBoardStream kit(AudioKitEs8388V1); 
 Flite flite(kit);
 
 void button1(bool, int, void*) { flite.say("Button One"); }
@@ -32,16 +32,16 @@ void setup() {
   kit.begin(cfg);
 
   // Assign pins to methods
-  kit.addAction(PIN_KEY1, button1);
-  kit.addAction(PIN_KEY2, button2);
-  kit.addAction(PIN_KEY3, button3);
-  kit.addAction(PIN_KEY4, button4);
+  kit.addAction(kit.getKey(1), button1);
+  kit.addAction(kit.getKey(2), button2);
+  kit.addAction(kit.getKey(3), button3);
+  kit.addAction(kit.getKey(4), button4);
 
   // example with actions using lambda expression
-  auto down = [](bool,int,void*) { AudioKitStream::actionVolumeDown(true, -1, nullptr); flite.say("Volume down"); };
-  kit.addAction(PIN_KEY5, down);
-  auto up = [](bool,int,void*) { AudioKitStream::actionVolumeUp(true, -1, nullptr ); flite.say("Volume up");   };
-  kit.addAction(PIN_KEY6, up);
+  auto down = [](bool,int,void*) { AudioBoardStream::actionVolumeDown(true, -1, nullptr); flite.say("Volume down"); };
+  kit.addAction(kit.getKey(5), down);
+  auto up = [](bool,int,void*) { AudioBoardStream::actionVolumeUp(true, -1, nullptr ); flite.say("Volume up");   };
+  kit.addAction(kit.getKey(6), up);
 
   flite.say("Please push a button");
 }

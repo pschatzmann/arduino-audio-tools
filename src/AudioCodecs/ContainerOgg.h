@@ -23,7 +23,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class OggContainerDecoder : public AudioDecoder {
+class OggContainerDecoder : public ContainerDecoder {
  public:
   /**
    * @brief Construct a new OggContainerDecoder object
@@ -46,21 +46,21 @@ class OggContainerDecoder : public AudioDecoder {
   /// Defines the output Stream
   void setOutput(Print &print) override { out.setOutput(&print); }
 
-  void setNotifyAudioChange(AudioInfoSupport &bi) override {
-    out.setNotifyAudioChange(bi);
-    p_notify = &bi;
+  void addNotifyAudioChange(AudioInfoSupport &bi) override {
+    out.addNotifyAudioChange(bi);
+    ContainerDecoder::addNotifyAudioChange(bi);
   }
 
   AudioInfo audioInfo() override { return out.audioInfo(); }
 
-  void begin(AudioInfo info) override {
+  bool begin(AudioInfo info) override {
     TRACED();
     this->info = info;
     out.setAudioInfo(info);
-    begin();
+    return begin();
   }
 
-  void begin() override {
+  bool begin() override {
     TRACED();
     out.setAudioInfo(this->info);
     TRACED();
@@ -84,6 +84,7 @@ class OggContainerDecoder : public AudioDecoder {
         is_open = false;
       }
     }
+    return is_open;
   }
 
   void end() override {
@@ -215,11 +216,6 @@ class OggContainerOutput : public AudioOutput {
 
   /// Defines the output Stream
   void setOutput(Print &print) { p_out = &print; }
-
-  virtual bool begin(AudioInfo from) override {
-    setAudioInfo(from);
-    return begin();
-  }
 
   /// starts the processing using the actual AudioInfo
   virtual bool begin() override {
@@ -372,23 +368,23 @@ class OggContainerEncoder : public AudioEncoder {
 
   /// We actually do nothing with this
   virtual void setAudioInfo(AudioInfo info) override {
+    AudioEncoder::setAudioInfo(info);
     p_ogg->setAudioInfo(info);
     if (p_codec != nullptr) p_codec->setAudioInfo(info);
   }
 
-  virtual void begin(AudioInfo from) override {
+  virtual bool begin(AudioInfo from) override {
     setAudioInfo(from);
-    begin();
+    return begin();
   }
 
   /// starts the processing using the actual AudioInfo
-  virtual void begin() override {
+  virtual bool begin() override {
     TRACED();
     p_ogg->begin();
-    if (p_codec != nullptr) {
-      p_codec->setOutput(*p_ogg);
-      p_codec->begin(p_ogg->audioInfo());
-    }
+    if (p_codec==nullptr) return false;
+    p_codec->setOutput(*p_ogg);
+    return p_codec->begin(p_ogg->audioInfo());
   }
 
   /// stops the processing

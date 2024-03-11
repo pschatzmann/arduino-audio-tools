@@ -20,7 +20,7 @@ namespace audio_tools {
  * @copyright GPLv3
  */
 class I2SDriverESP32 {
-
+  
   friend class AnalogAudio;
   friend class AudioKitStream;
 
@@ -86,12 +86,12 @@ class I2SDriverESP32 {
 
       size_t result = 0;   
       if (isNoChannelConversion(cfg)){
-        if (i2s_write(i2s_num, src, size_bytes, &result, portMAX_DELAY)!=ESP_OK){
+        if (i2s_write(i2s_num, src, size_bytes, &result, ticks_to_wait_write)!=ESP_OK){
           TRACEE();
         }
         LOGD("i2s_write %d -> %d bytes", size_bytes, result);
       } else {
-        result = I2SDriverESP32::writeExpandChannel(i2s_num, cfg.bits_per_sample, src, size_bytes);
+        result = writeExpandChannel(i2s_num, cfg.bits_per_sample, src, size_bytes);
       }       
       return result;
     }
@@ -99,13 +99,13 @@ class I2SDriverESP32 {
     size_t readBytes(void *dest, size_t size_bytes){
       size_t result = 0;
       if (isNoChannelConversion(cfg)){
-        if (i2s_read(i2s_num, dest, size_bytes, &result, portMAX_DELAY)!=ESP_OK){
+        if (i2s_read(i2s_num, dest, size_bytes, &result, ticks_to_wait_read)!=ESP_OK){
           TRACEE();
         }
       } else if (cfg.channels==1){
         // I2S has always 2 channels. We support to reduce it to 1
         uint8_t temp[size_bytes*2];
-        if (i2s_read(i2s_num, temp, size_bytes*2, &result, portMAX_DELAY)!=ESP_OK){
+        if (i2s_read(i2s_num, temp, size_bytes*2, &result, ticks_to_wait_read)!=ESP_OK){
           TRACEE();
         }
         // convert to 1 channel
@@ -132,11 +132,20 @@ class I2SDriverESP32 {
       return result;
     }
 
+  void setWaitTimeReadMs(TickType_t ms) {
+    ticks_to_wait_read = pdMS_TO_TICKS(ms);
+  }
+  void setWaitTimeWriteMs(TickType_t ms) {
+    ticks_to_wait_write = pdMS_TO_TICKS(ms);
+  }
+
   protected:
     I2SConfigESP32 cfg = defaultConfig(RX_MODE);
     i2s_port_t i2s_num;
     i2s_config_t i2s_config;
     bool is_started = false;
+    TickType_t ticks_to_wait_read = portMAX_DELAY;
+    TickType_t ticks_to_wait_write = portMAX_DELAY;
 
     bool isNoChannelConversion(I2SConfigESP32 cfg) {
       if (cfg.channels==2) return true;
@@ -228,7 +237,7 @@ Serial.printf("mode: %i, sample_rate: %i, bits_per_sample: %i, channel_format: %
     
 
     /// writes the data by making sure that we send 2 channels
-    static size_t writeExpandChannel(i2s_port_t i2s_num, const int bits_per_sample, const void *src, size_t size_bytes){
+    size_t writeExpandChannel(i2s_port_t i2s_num, const int bits_per_sample, const void *src, size_t size_bytes){
         size_t result = 0;   
         int j;
         switch(bits_per_sample){
@@ -240,7 +249,7 @@ Serial.printf("mode: %i, sample_rate: %i, bits_per_sample: %i, channel_format: %
               frame[0]=data[j];
               frame[1]=data[j];
               size_t result_call = 0;   
-              if (i2s_write(i2s_num, frame, sizeof(int8_t)*2, &result_call, portMAX_DELAY)!=ESP_OK){
+              if (i2s_write(i2s_num, frame, sizeof(int8_t)*2, &result_call, ticks_to_wait_write)!=ESP_OK){
                 TRACEE();
               } else {
                 result += result_call;
@@ -255,7 +264,7 @@ Serial.printf("mode: %i, sample_rate: %i, bits_per_sample: %i, channel_format: %
               frame[0]=data[j];
               frame[1]=data[j];
               size_t result_call = 0;   
-              if (i2s_write(i2s_num, frame, sizeof(int16_t)*2, &result_call, portMAX_DELAY)!=ESP_OK){
+              if (i2s_write(i2s_num, frame, sizeof(int16_t)*2, &result_call, ticks_to_wait_write)!=ESP_OK){
                 TRACEE();
               } else {
                 result += result_call;
@@ -270,7 +279,7 @@ Serial.printf("mode: %i, sample_rate: %i, bits_per_sample: %i, channel_format: %
               frame[0]=data[j];
               frame[1]=data[j];
               size_t result_call = 0;   
-              if (i2s_write(i2s_num, frame, sizeof(int24_t)*2, &result_call, portMAX_DELAY)!=ESP_OK){
+              if (i2s_write(i2s_num, frame, sizeof(int24_t)*2, &result_call, ticks_to_wait_write)!=ESP_OK){
                 TRACEE();
               } else {
                 result += result_call;
@@ -285,7 +294,7 @@ Serial.printf("mode: %i, sample_rate: %i, bits_per_sample: %i, channel_format: %
               frame[0]=data[j];
               frame[1]=data[j];
               size_t result_call = 0;   
-              if (i2s_write(i2s_num, frame, sizeof(int32_t)*2, &result_call, portMAX_DELAY)!=ESP_OK){
+              if (i2s_write(i2s_num, frame, sizeof(int32_t)*2, &result_call, ticks_to_wait_write)!=ESP_OK){
                 TRACEE();
               } else {
                 result += result_call;

@@ -10,12 +10,12 @@
  */
 #include "AudioTools.h"
 #include "AudioCodecs/CodecG7xx.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 
 AudioInfo info(8000, 1, 16);
 SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound( sineWave); // Stream generated from sine wave
-AudioKitStream out; 
+AudioBoardStream out(AudioKitEs8388V1);
 EncodedAudioStream decoder(&out, new G721Decoder()); // encode and write
 EncodedAudioStream encoder(&decoder, new G721Encoder()); // encode and write
 StreamCopy copier(encoder, sound);     

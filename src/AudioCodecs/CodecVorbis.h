@@ -35,12 +35,8 @@ public:
     }
   }
 
-  void setNotifyAudioChange(AudioInfoSupport &bi) override {
-    p_notify = &bi;
-  }
-
   /// Starts the processing
-  void begin() override {
+  bool begin() override {
     LOGI("begin");
 
     callbacks.read_func = read_func;
@@ -48,12 +44,13 @@ public:
     callbacks.close_func = close_func;
     callbacks.tell_func = tell_func;
 
-    if (p_in->available()>=VORBIS_HEADER_OPEN_LIMIT){
+    if (p_input->available()>=VORBIS_HEADER_OPEN_LIMIT){
       ovOpen();
     }
 
     active = true;
     is_first = true;
+    return true;
   }
 
   /// Releases the reserved memory
@@ -65,12 +62,6 @@ public:
     ov_clear(&file);
   }
 
-  /// Defines the output Stream
-  void setOutput(Print &outStream) override { this->p_out = &outStream; }
-
-  /// Defines the output Stream
-  void setInputStream(Stream &inStream) override { this->p_in = &inStream; }
-
   /// Provides the last available MP3FrameInfo
   AudioInfo audioInfo() override { return cfg; }
 
@@ -81,11 +72,11 @@ public:
     // wait for data
     if (is_first){
       // wait for some data
-      if(p_in->available()<VORBIS_HEADER_OPEN_LIMIT){
+      if(p_input->available()<VORBIS_HEADER_OPEN_LIMIT){
         delay(20);
         return false;
       }
-      LOGI("available: %d", p_in->available());
+      LOGI("available: %d", p_input->available());
       is_first = false;
     }
 
@@ -110,13 +101,9 @@ public:
       if (current != cfg) {
         cfg = current;
         cfg.logInfo();
-        if (p_notify!=nullptr){
-          p_notify->setAudioInfo(cfg);
-        } else {
-          LOGW("p_notify is null");
-        }
+        notifyAudioChange(cfg);
       }
-      p_out->write(pcm.data(), result);
+      p_print->write(pcm.data(), result);
       delay(1);
       return true;
     } else {
@@ -133,9 +120,6 @@ public:
 
 protected:
   AudioInfo cfg;
-  AudioInfoSupport *p_notify = nullptr;
-  Print *p_out = nullptr;
-  Stream *p_in = nullptr;
   Vector<uint8_t> pcm;
   OggVorbis_File file;
   ov_callbacks callbacks;
@@ -166,7 +150,7 @@ protected:
 
   virtual size_t readBytes(uint8_t *ptr, size_t size) override {
     size_t read_size =  min(size,(size_t)VARBIS_MAX_READ_SIZE);
-    size_t result = p_in->readBytes((uint8_t *)ptr, read_size);
+    size_t result = p_input->readBytes((uint8_t *)ptr, read_size);
     LOGD("readBytes: %zu",result);
     return result;
   }

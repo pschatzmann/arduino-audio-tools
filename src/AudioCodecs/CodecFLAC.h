@@ -56,7 +56,7 @@ class FLACDecoder : public StreamingDecoder {
     return info;
   }
 
-  void begin() {
+  bool begin() {
     TRACEI();
     is_active = true;
 
@@ -64,7 +64,7 @@ class FLACDecoder : public StreamingDecoder {
       if ((decoder = FLAC__stream_decoder_new()) == NULL) {
         LOGE("ERROR: allocating decoder");
         is_active = false;
-        return;
+        return false;
       }
     }
     LOGI("FLAC__stream_decoder_new");
@@ -80,9 +80,10 @@ class FLACDecoder : public StreamingDecoder {
     if (init_status != FLAC__STREAM_DECODER_INIT_STATUS_OK) {
       LOGE("ERROR: initializing decoder: %s", FLAC__StreamDecoderInitStatusString[init_status]);
       is_active = false;
-      return;
+      return false;
     }
-    LOGI("FLAC__stream_decoder_init_stream");
+    LOGI("FLAC is open");
+    return true;
   }
 
   void end() {
@@ -97,17 +98,6 @@ class FLACDecoder : public StreamingDecoder {
     while(FLAC__stream_decoder_process_single(decoder));
   }
 
-  void setNotifyAudioChange(AudioInfoSupport &bi) {
-    p_notify = &bi;
-  }
-
-  /// Stream Interfce: Decode directly by taking data from the stream. This is more efficient
-  /// then feeding the decoder with write: just call copy() in the loop
-  void setInputStream(Stream &input) {
-    p_input = &input;
-  }
-
-  virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
 
   operator bool() { return is_active; }
 
@@ -134,11 +124,8 @@ class FLACDecoder : public StreamingDecoder {
   bool is_active = false;
   bool is_ogg = false;
   AudioInfo info;
-  AudioInfoSupport *p_notify = nullptr;
   FLAC__StreamDecoder *decoder = nullptr;
   FLAC__StreamDecoderInitStatus init_status;
-  Print *p_print = nullptr;
-  Stream *p_input = nullptr;
   uint64_t time_last_read = 0;
   uint64_t read_timeout_ms = FLAC_READ_TIMEOUT_MS;
 
@@ -203,10 +190,8 @@ class FLACDecoder : public StreamingDecoder {
       if (bps!=16){
         LOGI("Converting from %d bits", bps);
       }
-      if (self->p_notify != nullptr) {
-        self->info = actual_info;
-        self->p_notify->setAudioInfo(self->info);
-      }
+      self->info = actual_info;
+      self->notifyAudioChange(self->info);
     }
 
     // write audio data
@@ -298,20 +283,15 @@ class FLACEncoder : public AudioEncoder {
     cfg.logInfo(); 
   }
 
-  virtual void begin(AudioInfo from) {
-    setAudioInfo(from);
-    begin();
-  }
-
   /// starts the processing using the actual AudioInfo
-  virtual void begin() override {
+  virtual bool begin() override {
     TRACED();
     is_open = false;
     if (p_encoder==nullptr){
       p_encoder = FLAC__stream_encoder_new();
       if (p_encoder==nullptr){
         LOGE("FLAC__stream_encoder_new");
-        return;
+        return false;
       }
     }
 
@@ -333,15 +313,16 @@ class FLACEncoder : public AudioEncoder {
       if (status==FLAC__STREAM_ENCODER_INIT_STATUS_ENCODER_ERROR){
         LOGE(" -> %s", FLAC__StreamEncoderStateString[FLAC__stream_encoder_get_state(p_encoder)]);
       }
-      return;
+      return false;
     }
     is_open = true;
+    return true;
   }
 
   /// starts the processing
-  void begin(Print &out) {
+  bool begin(Print &out) {
     p_print = &out;
-    begin();
+    return begin();
   }
 
   /// stops the processing

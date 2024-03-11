@@ -1,4 +1,6 @@
 ../examples/examples-basic-api/base-adc-a2dp -> rc=0
+../examples/examples-basic-api/base-adc-average-mono-serial -> rc=0
+../examples/examples-basic-api/base-adc-measure -> rc=0
 ../examples/examples-basic-api/base-adc-serial -> rc=0
 ../examples/examples-basic-api/base-file_raw-serial -> rc=0
 ../examples/examples-basic-api/base-generator-a2dp -> rc=0
@@ -21,7 +23,7 @@
 ../examples/examples-webserver/streams-generator-webserver_aac -> rc=0
 ../examples/examples-webserver/streams-generator-webserverex_wav -> rc=0
 ../examples/examples-webserver/streams-generator-webserverex_wav1 -> rc=0
-../examples/examples-webserver/streams-generator-webserver_mp3 -> rc=1/0
+../examples/examples-webserver/streams-generator-webserver_mp3 -> rc=1
 ../examples/examples-webserver/streams-generator-webserver_ogg -> rc=0
 ../examples/examples-webserver/streams-generator-webserver_wav -> rc=0
 ../examples/examples-webserver/streams-i2s-webserver_wav -> rc=0
@@ -36,6 +38,7 @@
 ../examples/examples-stream/streams-generator-formatconverter-i2s -> rc=0
 ../examples/examples-stream/streams-generator_fromarray-analog -> rc=0
 ../examples/examples-stream/streams-generator-i2s -> rc=0
+../examples/examples-stream/streams-generator-merge-pwm -> rc=0
 ../examples/examples-stream/streams-generator-pwm -> rc=0
 ../examples/examples-stream/streams-generator-serial -> rc=0
 ../examples/examples-stream/streams-generator-spdif -> rc=0
@@ -70,10 +73,10 @@
 ../examples/examples-stream/streams-url_mp3_mad-i2s -> rc=0
 ../examples/examples-stream/streams-url_mp3-metadata -> rc=0
 ../examples/examples-stream/streams-url_mp3-metadata2 -> rc=0
+../examples/examples-stream/streams-url_mts-hex -> rc=0
 ../examples/examples-stream/streams-url_raw-i2s -> rc=0
 ../examples/examples-stream/streams-url_raw-serial -> rc=0
 ../examples/examples-stream/streams-url_vorbis_i2s -> rc=0
-../examples/examples-stream/streams-url_wav-i2s -> rc=1
 ../examples/examples-audiokit/basic-a2dp-audiokit -> rc=0
 ../examples/examples-audiokit/basic-a2dp-eq-audiokit -> rc=0
 ../examples/examples-audiokit/basic-audiokit-a2dp -> rc=0
@@ -83,6 +86,7 @@
 ../examples/examples-audiokit/player-sdmmc-audiokit -> rc=0
 ../examples/examples-audiokit/player-url_icy-audiokit -> rc=0
 ../examples/examples-audiokit/README.md -> rc=1
+../examples/examples-audiokit/stream-hls-audiokit -> rc=0
 ../examples/examples-audiokit/streams-a2dp-audiokit -> rc=0
 ../examples/examples-audiokit/streams-audiokit-audiokit -> rc=0
 ../examples/examples-audiokit/streams-audiokit-effects-audiokit -> rc=0
@@ -109,6 +113,7 @@
 ../examples/examples-audiokit/streams-memory_pcm-mixer-audiokit -> rc=0
 ../examples/examples-audiokit/streams-pins-audiokit -> rc=0
 ../examples/examples-audiokit/streams-sd-audiokit -> rc=0
+../examples/examples-audiokit/streams-sdmmc_wav-audiokit -> rc=0
 ../examples/examples-audiokit/streams-synth-a2dp -> rc=0
 ../examples/examples-audiokit/streams-synth-audiokit -> rc=0
 ../examples/examples-audiokit/streams-synthbasic1-audiokit -> rc=0
@@ -141,19 +146,24 @@
 ../examples/examples-maximilian/19-Enveloping2 -> rc=0
 ../examples/examples-maximilian/20-FFT -> rc=0
 ../examples/examples-maximilian/README.md -> rc=1
-../examples/examples-tts/streams-azure_tts-i2s -> rc=1
+../examples/examples-tts/streams-azure_tts-i2s -> rc=0
 ../examples/examples-tts/streams-espeak-audiokit -> rc=0
 ../examples/examples-tts/streams-espeak-i2s -> rc=0
 ../examples/examples-tts/streams-flite-audiokit -> rc=0
 ../examples/examples-tts/streams-flite-i2s -> rc=0
+../examples/examples-tts/streams-google-audiokit -> rc=0
 ../examples/examples-tts/streams-sam-audiokit -> rc=0
 ../examples/examples-tts/streams-sam-i2s -> rc=0
+../examples/examples-tts/streams-simple_tts-a2dp -> rc=0
 ../examples/examples-tts/streams-simple_tts-i2s -> rc=0
 ../examples/examples-tts/streams-tts-i2s -> rc=0
+../examples/examples-tts/streams-url_wav-i2s -> rc=0
 ../examples/examples-faust/streams-faust_flute-i2s -> rc=0
 ../examples/examples-faust/streams-faust_noise-i2s -> rc=0
 ../examples/examples-faust/streams-generator-faust-i2s -> rc=0
+../examples/examples-faust/streams-i2s-faust_copy-i2s -> rc=0
 ../examples/examples-faust/streams-i2s-faust_guitarix-i2s -> rc=0
+../examples/examples-faust/streams-i2s-faust_pitchshift-i2s -> rc=0
 ../examples/examples-communication/esp-now/codec/communication-codec-espnow-receive -> rc=0
 ../examples/examples-communication/esp-now/codec/communication-codec-espnow-receive_measure -> rc=0
 ../examples/examples-communication/esp-now/codec/communication-codec-espnow-send -> rc=0
@@ -169,9 +179,10 @@
 ../examples/examples-communication/rtsp/communication-audiokit-rtsp -> rc=0
 ../examples/examples-communication/rtsp/communication-codec-rtsp -> rc=0
 ../examples/examples-communication/rtsp/communication-generator-rtsp -> rc=0
+../examples/examples-communication/rtsp/communication-rtsp-audiokit -> rc=0
+../examples/examples-communication/rtsp/communication-rtsp-i2s -> rc=0
 ../examples/tests/test-ads1015 -> rc=0
 ../examples/tests/test-bitvector -> rc=0
-../examples/tests/test-filter -> rc=0
 ../examples/tests/test-list -> rc=0
 ../examples/tests/test-memory-helix -> rc=0
 ../examples/tests/test-mulit-compilation-units -> rc=0
@@ -179,6 +190,7 @@
 ../examples/tests/test-player -> rc=0
 ../examples/tests/test-resample-in -> rc=0
 ../examples/tests/test-resample-out -> rc=0
+../examples/tests/test-vector -> rc=0
 ../examples/tests/24bits/24bits-write -> rc=0
 ../examples/tests/codecs/test-codec-adpcm -> rc=0
 ../examples/tests/codecs/test-codec-adpcm-xq -> rc=0
@@ -227,6 +239,7 @@
 ../examples/tests/performance/mp3-SynchronizedNBuffer -> rc=0
 ../examples/tests/performance/mp3-SynchronizedRingBuffer -> rc=0
 ../examples/tests/performance/sine -> rc=0
+../examples/tests/performance/throttle -> rc=0
 ../examples/tests/performance/wifi -> rc=0
 ../examples/tests/pitch-shift/pitch-shift -> rc=0
 ../examples/tests/pitch-shift/pitch-shift-180 -> rc=0

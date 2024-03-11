@@ -11,22 +11,18 @@
 namespace audio_tools {
 
 /***
- * @brief We feed the URLLoader with some url strings. At each readBytes or available() call
- * we refill the buffer. The buffer must be big enough to bridge the delays caused by the
- * reloading of the segments
+ * @brief We feed the URLLoader with some url strings. At each readBytes or
+ * available() call we refill the buffer. The buffer must be big enough to
+ * bridge the delays caused by the reloading of the segments
  * @author Phil Schatzmann
  * @copyright GPLv3
-*/
+ */
 
 class URLLoader {
-  public:
-  URLLoader(URLStream &stream) {
-    p_stream = &stream;
-  };
+ public:
+  URLLoader(URLStream &stream) { p_stream = &stream; };
 
-  ~URLLoader(){
-    end();
-  }
+  ~URLLoader() { end(); }
 
   bool begin() {
     TRACED();
@@ -35,7 +31,7 @@ class URLLoader {
     return true;
   }
 
-  void end(){
+  void end() {
     TRACED();
     p_stream->end();
     p_stream = nullptr;
@@ -44,11 +40,11 @@ class URLLoader {
   }
 
   /// Adds the next url to be played in sequence
-  void addUrl(const char* url){
+  void addUrl(const char *url) {
     LOGI("Adding %s", url);
     Str url_str(url);
-    char *str = new char[url_str.length()+1];
-    memcpy(str, url_str.c_str(), url_str.length()+1);
+    char *str = new char[url_str.length() + 1];
+    memcpy(str, url_str.c_str(), url_str.length() + 1);
     urls.push_back(str);
     // URLStream *p_stream = new URLStream();
     // p_stream->setWaitForData(false);
@@ -60,52 +56,50 @@ class URLLoader {
     // urls.push_back(p_stream);
   }
 
-  /// Provides the number of open urls which can be played. Refills them, when min limit is reached.
-  int urlCount() {
-    return urls.size();
-  }
+  /// Provides the number of open urls which can be played. Refills them, when
+  /// min limit is reached.
+  int urlCount() { return urls.size(); }
 
   /// Available bytes of the audio stream
-  int available()  {
-    if(!active) return 0;
+  int available() {
+    if (!active) return 0;
     TRACED();
     bufferRefill();
     return buffer.available();
   }
 
   /// Provides data from the audio stream
-  size_t readBytes(uint8_t *data, size_t len)  {
-    if(!active) return 0;
+  size_t readBytes(uint8_t *data, size_t len) {
+    if (!active) return 0;
     TRACED();
     bufferRefill();
-    if (buffer.available()<len) LOGW("Buffer underflow");
+    if (buffer.available() < len) LOGW("Buffer underflow");
     return buffer.readArray(data, len);
   }
 
   const char *contentType() {
-    if (p_stream==nullptr) return nullptr;
+    if (p_stream == nullptr) return nullptr;
     return p_stream->httpRequest().reply().get(CONTENT_TYPE);
   }
 
   int contentLength() {
-    if (p_stream==nullptr) return 0;
+    if (p_stream == nullptr) return 0;
     return p_stream->contentLength();
   }
 
-  void setBuffer(int size, int count){
+  void setBuffer(int size, int count) {
     buffer_size = size;
     buffer_count = count;
   }
 
-protected:
-  Vector<const char*> urls{10};
+ protected:
+  Vector<const char *> urls{10};
   NBuffer<uint8_t> buffer{DEFAULT_BUFFER_SIZE, 50};
   bool active = false;
   int buffer_size = DEFAULT_BUFFER_SIZE;
   int buffer_count = 10;
   URLStream *p_stream = nullptr;
-  const char* url_to_play = nullptr;
-
+  const char *url_to_play = nullptr;
 
   /// try to keep the buffer filled
   void bufferRefill() {
@@ -115,52 +109,52 @@ protected:
       LOGD("urls empty");
       return;
     }
-    if (buffer.availableForWrite()==0) {
+    if (buffer.availableForWrite() == 0) {
       LOGD("buffer full");
       return;
     }
 
     // switch current stream if we have no more data
-    if ((p_stream->totalRead()==p_stream->contentLength()) && !urls.empty()) {
+    if ((p_stream->totalRead() == p_stream->contentLength()) && !urls.empty()) {
       LOGD("Refilling");
-      if (url_to_play!=nullptr) {
+      if (url_to_play != nullptr) {
         delete url_to_play;
       }
       url_to_play = urls[0];
       LOGI("playing %s", url_to_play);
-      if (p_stream->httpRequest().connected())
-        p_stream->end();
+      if (p_stream->httpRequest().connected()) p_stream->end();
       p_stream->begin(url_to_play);
       p_stream->waitForData(500);
       urls.pop_front();
-      //assert(urls[0]!=url);
+      // assert(urls[0]!=url);
 
 #ifdef ESP32
-      LOGI("Free heap: %u", (unsigned) ESP.getFreeHeap());
+      LOGI("Free heap: %u", (unsigned)ESP.getFreeHeap());
 #endif
-      LOGI("Playing %s of %d", p_stream->urlStr(),(int) urls.size());
+      LOGI("Playing %s of %d", p_stream->urlStr(), (int)urls.size());
     }
 
-    int to_write = min(buffer.availableForWrite(),DEFAULT_BUFFER_SIZE);
-    if (to_write>0){
+    int to_write = min(buffer.availableForWrite(), DEFAULT_BUFFER_SIZE);
+    if (to_write > 0) {
       int total = 0;
       int failed = 0;
-      while(to_write>0){
-        if (p_stream->totalRead()==p_stream->contentLength()) break;
-        uint8_t tmp[to_write]={0};
+      while (to_write > 0) {
+        if (p_stream->totalRead() == p_stream->contentLength()) break;
+        uint8_t tmp[to_write] = {0};
         int read = p_stream->readBytes(tmp, to_write);
         total += read;
-        if (read>0){
-          buffer.writeArray(tmp, read);      
-          to_write = min(buffer.availableForWrite(),DEFAULT_BUFFER_SIZE);
+        if (read > 0) {
+          buffer.writeArray(tmp, read);
+          to_write = min(buffer.availableForWrite(), DEFAULT_BUFFER_SIZE);
         } else {
           delay(5);
           // this should not really happen
           failed++;
-          if (failed>=3) break;
+          if (failed >= 3) break;
         }
       }
-      LOGD("Refilled with %d now %d available to write", total, buffer.availableForWrite());
+      LOGD("Refilled with %d now %d available to write", total,
+           buffer.availableForWrite());
     }
   }
 };
@@ -168,35 +162,34 @@ protected:
 /**
  * Prevent that the same url is loaded twice. We limit the history to
  * 20 entries.
-*/
+ */
 class URLHistory {
-  public:
-    bool add(const char *url){
-      bool found = false;
-      Str url_str(url);
-      for (int j=0;j<history.size();j++){
-        if (url_str.equals(history[j])){
-          found = true;
-          break;
-        }
+ public:
+  bool add(const char *url) {
+    bool found = false;
+    Str url_str(url);
+    for (int j = 0; j < history.size(); j++) {
+      if (url_str.equals(history[j])) {
+        found = true;
+        break;
       }
-      if (!found){
-        char *str = new char[url_str.length()+1];
-        memcpy(str, url, url_str.length()+1);
-        history.push_back(str);
-        if (history.size()>20){
-          delete(history[0]);
-          history.pop_front();
-        }
-      }
-      return !found;
     }
+    if (!found) {
+      char *str = new char[url_str.length() + 1];
+      memcpy(str, url, url_str.length() + 1);
+      history.push_back(str);
+      if (history.size() > 20) {
+        delete (history[0]);
+        history.pop_front();
+      }
+    }
+    return !found;
+  }
 
-    void clear(){
-      history.clear();
-    }
-  protected:
-    Vector<const char*> history;
+  void clear() { history.clear(); }
+
+ protected:
+  Vector<const char *> history;
 };
 
 /**
@@ -217,16 +210,16 @@ class HLSParser {
     custom_log_level.set();
     segments_url_str = "";
     bandwidth = 0;
-    if (!parseIndex()){
+    if (!parseIndex()) {
       TRACEE();
       return false;
     }
-    if (!parseSegments()){
+    if (!parseSegments()) {
       TRACEE();
       return false;
     }
 
-    if (!url_loader.begin()){
+    if (!url_loader.begin()) {
       TRACEE();
       return false;
     }
@@ -244,7 +237,7 @@ class HLSParser {
     return result;
   }
 
-  size_t readBytes(uint8_t* buffer, size_t len){
+  size_t readBytes(uint8_t *buffer, size_t len) {
     TRACED();
     size_t result = 0;
     custom_log_level.set();
@@ -254,12 +247,10 @@ class HLSParser {
     return result;
   }
 
-  const char *indexUrl() {
-    return index_url_str;
-  }
+  const char *indexUrl() { return index_url_str; }
 
   const char *segmentsUrl() {
-    if (segments_url_str==nullptr) return nullptr;
+    if (segments_url_str == nullptr) return nullptr;
     return segments_url_str.c_str();
   }
 
@@ -267,13 +258,9 @@ class HLSParser {
   const char *getCodec() { return codec.c_str(); }
 
   /// Provides the content type of the audio data
-  const char *contentType() {
-    return url_loader.contentType();
-  }
+  const char *contentType() { return url_loader.contentType(); }
 
-  int contentLength() {
-    return url_loader.contentLength();
-  }
+  int contentLength() { return url_loader.contentLength(); }
 
   /// Closes the processing
   void end() {
@@ -287,18 +274,12 @@ class HLSParser {
   }
 
   /// Defines the number of urls that are preloaded in the URLLoader
-  void setUrlCount(int count){
-    url_count = count;
-  } 
+  void setUrlCount(int count) { url_count = count; }
 
   /// Defines the class specific custom log level
-  void setLogLevel(AudioLogger::LogLevel level){
-    custom_log_level.set(level);
-  }
+  void setLogLevel(AudioLogger::LogLevel level) { custom_log_level.set(level); }
 
-  void setBuffer(int size, int count){
-    url_loader.setBuffer(size, count);
-  }
+  void setBuffer(int size, int count) { url_loader.setBuffer(size, count); }
 
  protected:
   CustomLogLevel custom_log_level;
@@ -315,17 +296,17 @@ class HLSParser {
   bool active = false;
   bool parse_segments_active = false;
   int media_sequence = 0;
-  int tartget_duration_ms=5000;
+  int tartget_duration_ms = 5000;
   int segment_count = 0;
   uint64_t next_sement_load_time = 0;
   URLHistory url_history;
 
   // trigger the reloading of segments if the limit is underflowing
-  static void reloadSegments(void *ref){
+  static void reloadSegments(void *ref) {
     TRACED();
-    HLSParser *self = (HLSParser*)ref;
+    HLSParser *self = (HLSParser *)ref;
     // get new urls
-    if (!self->segments_url_str.isEmpty()){
+    if (!self->segments_url_str.isEmpty()) {
       self->parseSegments();
     }
   }
@@ -334,25 +315,25 @@ class HLSParser {
   bool parseIndex() {
     TRACED();
     url_stream.setTimeout(1000);
-    //url_stream.setConnectionClose(true);
+    // url_stream.setConnectionClose(true);
 
     // we only update the content length
     url_stream.setAutoCreateLines(false);
     bool rc = url_stream.begin(index_url_str);
     url_active = true;
-    rc  = parse(true);
+    rc = parse(true);
     return rc;
   }
 
   // parse the segment url provided by the index
   bool parseSegments() {
     TRACED();
-    if (parse_segments_active){
+    if (parse_segments_active) {
       return false;
     }
 
-    // make sure that we load at relevant schedule 
-    if (millis() < next_sement_load_time && url_loader.urlCount()>0) {
+    // make sure that we load at relevant schedule
+    if (millis() < next_sement_load_time && url_loader.urlCount() > 0) {
       return false;
     }
     parse_segments_active = true;
@@ -362,32 +343,32 @@ class HLSParser {
     if (url_stream) url_stream.clear();
     LOGI("parsing %s", segments_url_str.c_str());
 
-    if (segments_url_str.isEmpty()){
+    if (segments_url_str.isEmpty()) {
       TRACEE();
       parse_segments_active = false;
       return false;
     }
 
-    if (!url_stream.begin(segments_url_str.c_str())){
+    if (!url_stream.begin(segments_url_str.c_str())) {
       TRACEE();
       parse_segments_active = false;
       return false;
     }
 
     segment_count = 0;
-    if (!parse(false)){
+    if (!parse(false)) {
       TRACEE();
       parse_segments_active = false;
       return false;
     }
 
     next_sement_load_time = millis() + (segment_count * tartget_duration_ms);
-    assert(segment_count>0);
+    assert(segment_count > 0);
 
     // we request a minimum of collected urls to play before we start
     active = true;
     parse_segments_active = false;
-    
+
     return true;
   }
 
@@ -402,26 +383,27 @@ class HLSParser {
     memset(tmp, 0, MAX_HLS_LINE);
     while (true) {
       memset(tmp, 0, MAX_HLS_LINE);
-      size_t len = url_stream.httpRequest().readBytesUntil('\n', tmp, MAX_HLS_LINE);
-      if (len==0 && url_stream.available()==0) break;
+      size_t len =
+          url_stream.httpRequest().readBytesUntil('\n', tmp, MAX_HLS_LINE);
+      if (len == 0 && url_stream.available() == 0) break;
       Str str(tmp);
 
       // check header
-      if (str.indexOf("#EXTM3U")>=0) {
+      if (str.indexOf("#EXTM3U") >= 0) {
         is_extm3u = true;
       }
 
       if (is_extm3u) {
         if (process_index) {
-          if (!parseIndexLine(str)){
+          if (!parseIndexLine(str)) {
             return false;
           }
         } else {
-          if (!parseSegmentLine(str)){
+          if (!parseSegmentLine(str)) {
             return false;
           }
         }
-      } 
+      }
     }
     return result;
   }
@@ -431,30 +413,30 @@ class HLSParser {
     TRACED();
     LOGI("> %s", str.c_str());
 
-    int pos = str.indexOf("#"); 
-    if (pos>=0){
+    int pos = str.indexOf("#");
+    if (pos >= 0) {
       LOGI("-> Segment:  %s", str.c_str());
 
-      pos = str.indexOf("#EXT-X-MEDIA-SEQUENCE:"); 
-      if (pos>=0){
-          int new_media_sequence = atoi(str.c_str()+pos+22);
-          LOGI("media_sequence: %d", new_media_sequence);
-          if (new_media_sequence == media_sequence){
-            LOGW("MEDIA-SEQUENCE already loaded: %d", media_sequence);
-            return false;
-          }
-          media_sequence = new_media_sequence;
+      pos = str.indexOf("#EXT-X-MEDIA-SEQUENCE:");
+      if (pos >= 0) {
+        int new_media_sequence = atoi(str.c_str() + pos + 22);
+        LOGI("media_sequence: %d", new_media_sequence);
+        if (new_media_sequence == media_sequence) {
+          LOGW("MEDIA-SEQUENCE already loaded: %d", media_sequence);
+          return false;
+        }
+        media_sequence = new_media_sequence;
       }
 
-      pos = str.indexOf("#EXT-X-TARGETDURATION:"); 
-      if (pos>=0){
-          const char* duration_str = str.c_str()+pos+22;
-          tartget_duration_ms = 1000 * atoi(duration_str);
-          LOGI("tartget_duration_ms: %d (%s)",tartget_duration_ms, duration_str);
+      pos = str.indexOf("#EXT-X-TARGETDURATION:");
+      if (pos >= 0) {
+        const char *duration_str = str.c_str() + pos + 22;
+        tartget_duration_ms = 1000 * atoi(duration_str);
+        LOGI("tartget_duration_ms: %d (%s)", tartget_duration_ms, duration_str);
       }
     } else {
       segment_count++;
-      if (url_history.add(str.c_str())){
+      if (url_history.add(str.c_str())) {
         // provide audio urls to the url_loader
         if (str.startsWith("http")) {
           url_str = str;
@@ -534,10 +516,10 @@ class HLSStream : public AudioStream {
     return rc;
   }
 
-  bool begin() { 
+  bool begin() {
     TRACEI();
     login();
-    bool rc = parser.begin(); 
+    bool rc = parser.begin();
     return rc;
   }
 
@@ -548,18 +530,14 @@ class HLSStream : public AudioStream {
   void setSSID(const char *ssid) { this->ssid = ssid; }
 
   /// Sets the password that will be used for logging in (when calling begin)
-  void setPassword(const char *password) {this->password = password;}
+  void setPassword(const char *password) { this->password = password; }
 
   /// Returns the string representation of the codec of the audio stream
   const char *codec() { return parser.getCodec(); }
 
-  const char *contentType() {
-    return parser.contentType();
-  }
+  const char *contentType() { return parser.contentType(); }
 
-  int contentLength() {
-    return parser.contentLength();
-  }
+  int contentLength() { return parser.contentLength(); }
 
   int available() override {
     TRACED();
@@ -572,33 +550,30 @@ class HLSStream : public AudioStream {
   }
 
   /// Defines the class specific custom log level
-  void setLogLevel(AudioLogger::LogLevel level){
-    parser.setLogLevel(level);
-  }
+  void setLogLevel(AudioLogger::LogLevel level) { parser.setLogLevel(level); }
 
   /// Defines the buffer size
-  void setBuffer(int size, int count){
-    parser.setBuffer(size, count);
-  }
+  void setBuffer(int size, int count) { parser.setBuffer(size, count); }
 
  protected:
   HLSParser parser;
-  const char* ssid = nullptr;
-  const char* password = nullptr;
+  const char *ssid = nullptr;
+  const char *password = nullptr;
 
-  void login(){
+  void login() {
 #ifdef USE_WIFI
-      if (ssid!=nullptr && password != nullptr && WiFi.status() != WL_CONNECTED){
-          TRACED();
-          WiFi.begin(ssid, password);
-          while (WiFi.status() != WL_CONNECTED){
-              Serial.print(".");
-              delay(500); 
-          }
+    if (ssid != nullptr && password != nullptr &&
+        WiFi.status() != WL_CONNECTED) {
+      TRACED();
+      WiFi.begin(ssid, password);
+      while (WiFi.status() != WL_CONNECTED) {
+        Serial.print(".");
+        delay(500);
       }
-#else   
-      LOGW("login not supported");
-#endif          
+    }
+#else
+    LOGW("login not supported");
+#endif
   }
 };
 

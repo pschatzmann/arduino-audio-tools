@@ -36,7 +36,7 @@ class AACDecoderFAAD : public AudioDecoder {
   ~AACDecoderFAAD() { end(); }
 
   /// Starts the processing
-  void begin() {
+  bool begin() {
     TRACED();
 
     unsigned long cap = NeAACDecGetCapabilities();
@@ -44,6 +44,7 @@ class AACDecoderFAAD : public AudioDecoder {
 
     if (!cap & FIXED_POINT_CAP) {
       LOGE("Fixed Point");
+      return false;
     }
 
     // Open the library
@@ -63,6 +64,7 @@ class AACDecoderFAAD : public AudioDecoder {
     // Set the new configuration
     if (!NeAACDecSetConfiguration(hAac, conf)) {
       LOGE("NeAACDecSetConfiguration");
+      return false;
     }
 
     // setup input buffer
@@ -70,6 +72,7 @@ class AACDecoderFAAD : public AudioDecoder {
       input_buffer.resize(buffer_size_input);
     }
     is_init = false;
+    return true;
   }
 
   /// Releases the reserved memory

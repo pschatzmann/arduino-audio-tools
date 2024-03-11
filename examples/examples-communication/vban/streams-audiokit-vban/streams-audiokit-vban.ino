@@ -6,10 +6,10 @@
 
 #include "AudioTools.h"
 #include "AudioLibs/VBANStream.h"
-#include "AudioLibs/AudioKit.h" // comment out when not using AudioKit
+#include "AudioLibs/AudioBoardStream.h" // comment out when not using AudioKit
 
 AudioInfo info(44100, 2, 16);
-AudioKitStream in;  // Audio source e.g. replace with I2SStream
+AudioBoardStream in(AudioKitEs8388V1);  // Audio source e.g. replace with I2SStream
 VBANStream out;
 StreamCopy copier(out, in, 2048);                             // copies sound into i2s
 
@@ -37,7 +37,7 @@ void setup(void) {
   cfg_in.buffer_size = 256;
   cfg_in.buffer_count = 4;
   cfg_in.copyFrom(info);
-  cfg_in.input_device = AUDIO_HAL_ADC_INPUT_LINE2; // microphone
+  cfg_in.input_device = ADC_INPUT_LINE2; // microphone
   in.begin(cfg_in);
 }
 

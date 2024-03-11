@@ -2,6 +2,7 @@
 #include "AudioLibs/Desktop/NoArduino.h"
 #include <iostream>
 
+#ifndef DESKTOP_MILLIS_DEFINED
 #define DESKTOP_MILLIS_DEFINED
 
 namespace audio_tools {
@@ -25,3 +26,5 @@ uint32_t millis(){
 }
 
 }
+
+#endif

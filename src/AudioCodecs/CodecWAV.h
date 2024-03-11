@@ -297,17 +297,13 @@ class WAVDecoder : public AudioDecoder {
   /// Defines the output Stream
   void setOutput(Print &out_stream) { this->p_print = &out_stream; }
 
-  /// Defines the object that needs to be notified about audio format changes
-  void setNotifyAudioChange(AudioInfoSupport &bi) {
-    this->audioBaseInfoSupport = &bi;
-  }
-
-  void begin() {
+  bool begin() {
     TRACED();
     setupEncodedAudio();
     buffer24.reset();
     isFirst = true;
     active = true;
+    return true;
   }
 
   void end() {
@@ -320,7 +316,7 @@ class WAVDecoder : public AudioDecoder {
 
   WAVAudioInfo &audioInfoEx() { return header.audioInfo(); }
 
-  AudioInfo audioInfo() { return header.audioInfo(); }
+  AudioInfo audioInfo() override { return header.audioInfo(); }
 
   virtual size_t write(const void *in_ptr, size_t in_size) {
     TRACED();
@@ -342,7 +338,6 @@ class WAVDecoder : public AudioDecoder {
 
  protected:
   WAVHeader header;
-  AudioInfoSupport *audioBaseInfoSupport=nullptr;
   bool isFirst = true;
   bool isValid = true;
   bool active = false;
@@ -442,20 +437,10 @@ class WAVDecoder : public AudioDecoder {
       bi.sample_rate = header.audioInfo().sample_rate;
       bi.channels = header.audioInfo().channels;
       bi.bits_per_sample = header.audioInfo().bits_per_sample;
-      // we provide some functionality so that we could check if the
-      // destination supports the requested format
-      if (audioBaseInfoSupport != nullptr) {
-        isValid = audioBaseInfoSupport->validate(bi);
-        if (isValid) {
-          LOGI("isValid: %s", isValid ? "true" : "false");
-          audioBaseInfoSupport->setAudioInfo(bi);
-          // write prm data from first record
-          LOGI("WAVDecoder writing first sound data");
-          result = out().write(sound_ptr, len);
-        } else {
-          LOGE("isValid: %s", isValid ? "true" : "false");
-        }
-      }
+      notifyAudioChange(bi);
+      // write prm data from first record
+      LOGI("WAVDecoder writing first sound data");
+      result = out().write(sound_ptr, len);
     } else {
       LOGE("WAV format not supported: %d", (int)format);
     }
@@ -535,6 +520,7 @@ class WAVEncoder : public AudioEncoder {
 
   /// Defines the WAVAudioInfo
   virtual void setAudioInfo(WAVAudioInfo ai) {
+    AudioEncoder::setAudioInfo(ai);
     audioInfo = ai;
     LOGI("sample_rate: %d", audioInfo.sample_rate);
     LOGI("channels: %d", audioInfo.channels);
@@ -556,17 +542,18 @@ class WAVEncoder : public AudioEncoder {
   }
 
   /// starts the processing
-  void begin(WAVAudioInfo ai) {
+  bool begin(WAVAudioInfo ai) {
     setAudioInfo(ai);
-    begin();
+    return begin();
   }
 
   /// starts the processing using the actual WAVAudioInfo
-  virtual void begin() override { 
+  virtual bool begin() override { 
     TRACED();
     setupEncodedAudio();
     header_written = false;
     is_open = true;
+    return true;
   }
 
   /// stops the processing

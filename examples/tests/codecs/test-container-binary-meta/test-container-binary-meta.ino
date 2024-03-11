@@ -13,7 +13,7 @@
 #include "AudioTools.h"
 #include "AudioCodecs/CodecOpus.h"
 #include "AudioCodecs/ContainerBinary.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 
 struct MetaData {
   MetaData(const char* typeArg, float vol) {
@@ -37,7 +37,7 @@ struct MetaData {
   char type[5];
 };
 
-void metaCallback(uint8_t* data, int len) {
+void metaCallback(uint8_t* data, int len, void*ref) {
   assert(sizeof(MetaData)==len);
   MetaData meta((MetaData*)data);
   meta.log();
@@ -46,7 +46,7 @@ void metaCallback(uint8_t* data, int len) {
 AudioInfo info(8000, 1, 16);
 SineWaveGenerator<int16_t> sineWave(32000);
 GeneratedSoundStream<int16_t> sound(sineWave);
-AudioKitStream out;
+AudioBoardStream out(AudioKitEs8388V1);
 BinaryContainerDecoder cont_dec(new OpusAudioDecoder());
 BinaryContainerEncoder cont_enc(new OpusAudioEncoder());
 EncodedAudioStream decoder(&out, &cont_dec);

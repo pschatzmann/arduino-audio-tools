@@ -10,7 +10,7 @@
  */
 #include "AudioTools.h"
 #include "AudioCodecs/CodecFLAC.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 
 AudioInfo info(44100, 2, 16);
 SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000

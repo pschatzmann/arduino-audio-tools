@@ -34,7 +34,6 @@ void setup(){
   i2s.begin(config);
 
   // aac radio
-  dec.setNotifyAudioChange(i2s);
   url.begin("http://peacefulpiano.stream.publicradio.org/peacefulpiano.aac","audio/aac");
 
   // initialize decoder

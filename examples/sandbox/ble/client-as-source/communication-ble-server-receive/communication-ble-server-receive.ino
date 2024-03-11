@@ -12,11 +12,11 @@
 #include "AudioTools.h"
 #include "AudioCodecs/CodecADPCM.h" // https://github.com/pschatzmann/adpcm
 #include "Sandbox/BLE/AudioBLE.h"
-//#include "AudioLibs/AudioKit.h"
+//#include "AudioLibs/AudioBoardStream.h"
 
 AudioInfo info(16000, 1, 16);
 ADPCMDecoder adpcm(AV_CODEC_ID_ADPCM_IMA_WAV);
-I2SStream i2s; // or AudioKitStream ...
+I2SStream i2s; // or AudioBoardStream ...
 EncodedAudioStream decoder(&i2s, &adpcm);
 AudioBLEServer ble;
 StreamCopy copier(decoder, ble);

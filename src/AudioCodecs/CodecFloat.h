@@ -16,21 +16,12 @@ class DecoderFloat : public AudioDecoder {
     public:
         /**
          * @brief Construct a new DecoderFloat object
-         */
-
-        DecoderFloat(){
-            TRACED();
-        }
-
-        /**
-         * @brief Construct a new DecoderFloat object
          * 
          * @param out_stream Output Stream to which we write the decoded result
          */
         DecoderFloat(Print &out_stream, bool active=true){
             TRACED();
             p_print = &out_stream;
-            this->active = active;
         }
 
         /**
@@ -43,38 +34,12 @@ class DecoderFloat : public AudioDecoder {
         DecoderFloat(Print &out_stream, AudioInfoSupport &bi){
             TRACED();
             p_print = &out_stream;
+            addNotifyAudioChange(bi);
         }
 
         /// Defines the output Stream
         void setOutput(Print &out_stream) override {
             p_print = &out_stream;
-        }
-
-        void setNotifyAudioChange(AudioInfoSupport &bi) override {
-            this->bid = &bi;
-        }
-
-        AudioInfo audioInfo() override {
-            return cfg;
-        }
-
-        void begin(AudioInfo info) override {
-            TRACED();
-            cfg = info;
-            if (bid!=nullptr){
-                bid->setAudioInfo(cfg);
-            }
-            active = true;
-        }
-
-        void begin() override {
-            TRACED();
-            active = true;
-        }
-
-        void end() override {
-            TRACED();
-            active = false;
         }
 
         /// Converts data from float to int16_t
@@ -90,14 +55,11 @@ class DecoderFloat : public AudioDecoder {
         }
 
         virtual operator bool() override {
-            return active;
+            return p_print!=nullptr;;
         }
 
     protected:
         Print *p_print=nullptr;
-        AudioInfoSupport *bid=nullptr;
-        AudioInfo cfg;
-        bool active;
         Vector<int16_t> buffer;
 
 };
@@ -131,19 +93,16 @@ class EncoderFloat : public AudioEncoder {
             return mime_pcm;
         }
 
-        /// We actually do nothing with this 
-        virtual void setAudioInfo(AudioInfo from) override {
-        }
-
         /// starts the processing using the actual RAWAudioInfo
-        virtual void begin() override{
+        virtual bool begin() override{
             is_open = true;
+            return true;
         }
 
         /// starts the processing
-        void begin(Print &out) {
+        bool begin(Print &out) {
             p_print = &out;
-            begin();
+            return begin();
         }
 
         /// stops the processing

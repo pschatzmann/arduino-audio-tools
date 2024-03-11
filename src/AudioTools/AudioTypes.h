@@ -33,13 +33,13 @@ enum MemoryType {RAM, PS_RAM, FLASH_RAM};
 /**
  * @brief Text string (description) for RxTxMode
 */
-INLINE_VAR const char* RxTxModeNames[]={"UNDEFINED_MODE","TX_MODE","RX_MODE","RXTX_MODE" };
+static const char* RxTxModeNames[]={"UNDEFINED_MODE","TX_MODE","RX_MODE","RXTX_MODE" };
 /**
  * @brief Time Units
  * @ingroup basic
  */
 enum TimeUnit {MS, US, HZ};
-INLINE_VAR const char* TimeUnitStr[] {"MS","US","HZ"};
+static const char* TimeUnitStr[] {"MS","US","HZ"};
 
 /**
  * @brief Basic Audio information which drives e.g. I2S
@@ -116,11 +116,11 @@ struct AudioInfo {
  */
 class AudioInfoSupport {
     public:
-      virtual void setAudioInfo(AudioInfo info)=0;
+      virtual void setAudioInfo(AudioInfo info) = 0;
       virtual AudioInfo audioInfo() = 0;
-      virtual bool validate(AudioInfo &info){
-        return true;
-      }
+    //   virtual bool validate(AudioInfo &info){
+    //     return true;
+    //   }
 };
 
 // Support legacy name
@@ -135,7 +135,44 @@ using AudioInfoDependent = AudioInfoSupport;
  */
 class AudioInfoSource {
     public:
-      virtual void  setNotifyAudioChange(AudioInfoSupport &bi) = 0;
+      /// Obsolete: Use addNotifyAudioChange
+      virtual void setNotifyAudioChange(AudioInfoSupport &bi) { 
+        addNotifyAudioChange(bi);
+      }
+      /// Adds target to be notified about audio changes
+      virtual void addNotifyAudioChange(AudioInfoSupport &bi) {
+        if (!contains(bi)) notify_vector.push_back(&bi);
+      }
+
+      /// Removes a target in order not to be notified about audio changes
+      virtual bool removeNotifyAudioChange(AudioInfoSupport &bi){
+        int pos = notify_vector.indexOf(&bi);
+        if (pos<0) return false;
+        notify_vector.erase(pos);
+        return true;
+      }
+
+      /// Deletes all change notify subscriptions
+      virtual void clearNotifyAudioChange() {
+        notify_vector.clear();
+      }
+
+    protected:
+      Vector<AudioInfoSupport*> notify_vector;
+
+      void notifyAudioChange(AudioInfo info){
+        for(auto n : notify_vector){
+            n->setAudioInfo(info);
+        }
+      }
+
+      bool contains(AudioInfoSupport &bi){
+        for(auto n : notify_vector){
+            if (n==&bi) return true;
+        }
+        return false;
+      }
+
 };
 
 
@@ -143,16 +180,16 @@ class AudioInfoSource {
  * @brief E.g. used by Encoders and Decoders
  * @ingroup basic
  */
-class AudioWriter {
+class AudioWriter : public AudioInfoSupport {
     public: 
         virtual size_t write(const void *in_ptr, size_t in_size) = 0;
         virtual void setAudioInfo(AudioInfo from) = 0;
         virtual void setOutput(Print &out_stream) = 0;
         virtual operator bool() = 0;
-        virtual void begin() = 0;
-        virtual void begin(AudioInfo info) {
+        virtual bool begin() = 0;
+        virtual bool begin(AudioInfo info) {
             setAudioInfo(info);
-            begin();
+            return begin();
         }
         virtual void end() = 0;
     protected:
@@ -307,7 +344,7 @@ enum I2SFormat {
   I2S_PCM,
 };
 
-INLINE_VAR const char* i2s_formats[] = {"I2S_STD_FORMAT","I2S_LSB_FORMAT","I2S_MSB_FORMAT","I2S_PHILIPS_FORMAT","I2S_RIGHT_JUSTIFIED_FORMAT","I2S_LEFT_JUSTIFIED_FORMAT","I2S_PCM"};
+static const char* i2s_formats[] = {"I2S_STD_FORMAT","I2S_LSB_FORMAT","I2S_MSB_FORMAT","I2S_PHILIPS_FORMAT","I2S_RIGHT_JUSTIFIED_FORMAT","I2S_LEFT_JUSTIFIED_FORMAT","I2S_PCM"};
 
 #endif
 

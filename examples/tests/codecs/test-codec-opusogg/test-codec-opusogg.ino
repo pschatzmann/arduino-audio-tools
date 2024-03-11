@@ -9,13 +9,13 @@
  * 
  */
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 #include "AudioCodecs/CodecOpusOgg.h"
 
 AudioInfo info(24000, 1, 16);
 SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound( sineWave); // Stream generated from sine wave
-AudioKitStream out;
+AudioBoardStream out(AudioKitEs8388V1);
 //CsvOutput<int16_t> out(Serial); 
 OpusOggEncoder enc;
 OpusOggDecoder dec;

@@ -43,11 +43,6 @@ class Str {
             set(chars, maxlen, len, false);
         }
 
-        Str (const Str & ) = default;    
-        Str (Str && ) = default;                
-        Str& operator = (const Str & ) = default;    
-        Str& operator = (Str && ) = default;    
-
         /// assigs a value
         virtual void set(const char *alt){
             if (alt==nullptr){
@@ -67,7 +62,6 @@ class Str {
                 }
             }
         }
-
         /// assigs from another Str value
         virtual void set(const Str &alt){
             grow(alt.len);
@@ -871,4 +865,3 @@ class Str {
 
 
 }
-

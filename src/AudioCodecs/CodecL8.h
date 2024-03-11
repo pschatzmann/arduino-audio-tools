@@ -35,7 +35,6 @@ class DecoderL8 : public AudioDecoder {
   DecoderL8(Print &out_stream, bool active = true) {
     TRACED();
     p_print = &out_stream;
-    this->active = active;
   }
 
   /**
@@ -48,41 +47,22 @@ class DecoderL8 : public AudioDecoder {
   DecoderL8(Print &out_stream, AudioInfoSupport &bi) {
     TRACED();
     setOutput(out_stream);
-    setNotifyAudioChange(bi);
+    addNotifyAudioChange(bi);
   }
 
   /// By default the encoded values are unsigned, but you can change them to
   /// signed
   void setSigned(bool isSigned) { is_signed = isSigned; }
 
-  void begin(AudioInfo info1) override {
-    TRACED();
-    info = info1;
-    info.bits_per_sample = 16;  //
-    if (p_notify != nullptr) {
-      p_notify->setAudioInfo(info);
-    }
-    active = true;
-  }
-
-  void begin() override {
-    TRACED();
-    active = true;
-  }
-
-  void end() override {
-    TRACED();
-    active = false;
-  }
-
   /// for most decoders this is not needed
   virtual void setAudioInfo(AudioInfo from) override {
     TRACED();
+    if (from.bits_per_sample!=16){
+      LOGE("Bits per sample not supported: %d", from.bits_per_sample);
+    }
     from.bits_per_sample = 16;
     if (info != from) {
-      if (p_notify != nullptr) {
-        p_notify->setAudioInfo(from);
-      }
+      notifyAudioChange(from);
     }
     info = from;
   }
@@ -116,10 +96,9 @@ class DecoderL8 : public AudioDecoder {
     return NumberConverter::clip<int16_t>(tmp * 258);
   }
 
-  virtual operator bool() override { return active; }
+  virtual operator bool() override { return p_print!=nullptr; }
 
  protected:
-  bool active;
   bool is_signed = false;
   Vector<int16_t> buffer;
 };
@@ -157,16 +136,13 @@ class EncoderL8 : public AudioEncoder {
   /// Provides "audio/pcm"
   const char *mime() override { return "audio/l8"; }
 
-  /// We actually do nothing with this
-  void setAudioInfo(AudioInfo from) override {}
-
   /// starts the processing using the actual RAWAudioInfo
-  void begin() override { is_open = true; }
+  bool begin() override { is_open = true; return true;}
 
   /// starts the processing
-  void begin(Print &out) {
+  bool begin(Print &out) {
     p_print = &out;
-    begin();
+    return begin();
   }
 
   /// stops the processing

@@ -22,7 +22,7 @@ enum I2SSignalType {
   PDM,
 };
 
-INLINE_VAR const char* i2s_signal_types[] = {"Digital","Analog","PDM","TDM"};
+static const char* i2s_signal_types[] = {"Digital","Analog","PDM","TDM"};
 
 /**
  * @brief Configuration for ESP32 legacy i2s 
@@ -74,7 +74,7 @@ class I2SConfigESP32 : public AudioInfo {
     int pin_ws = PIN_I2S_WS;
     int pin_bck = PIN_I2S_BCK;
     int pin_data; // rx or tx pin dependent on mode: tx pin for RXTX_MODE
-    int pin_data_rx; // rx pin for RXTX_MODE
+    int pin_data_rx = -1; // rx pin for RXTX_MODE
     int pin_mck = PIN_I2S_MCK;
     int buffer_count = I2S_BUFFER_COUNT;
     int buffer_size = I2S_BUFFER_SIZE;

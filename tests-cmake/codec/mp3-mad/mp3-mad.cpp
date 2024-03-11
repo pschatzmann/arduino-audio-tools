@@ -16,7 +16,7 @@ void setup(){
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);  
 
-  dec.setNotifyAudioChange(portaudio_stream);
+  dec.addNotifyAudioChange(portaudio_stream);
   dec.begin();
 
   portaudio_stream.begin();

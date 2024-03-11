@@ -1,9 +1,9 @@
 #include "AudioTools.h"
 #include "Communication/HDLCStream.h"
-// #include "AudioLibs/AudioKit.h"
+// #include "AudioLibs/AudioBoardStream.h"
 
 AudioInfo info(44000, 2, 16);
-I2SStream out; // or AudioKitStream
+I2SStream out; // or AudioBoardStream
 SineWaveGenerator<int16_t> sineWave(32000);
 GeneratedSoundStream<int16_t> sound(sineWave);
 QueueStream queue(1024,2); // we simulate a connection

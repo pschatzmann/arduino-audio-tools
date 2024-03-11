@@ -90,22 +90,20 @@ public:
   BinaryContainerEncoder(AudioEncoder &encoder) { p_codec = &encoder; }
   BinaryContainerEncoder(AudioEncoder *encoder) { p_codec = encoder; }
 
+  void setEncoder(AudioEncoder *encoder) { p_codec = encoder; }
+
   void setOutput(Print &outStream) {
     LOGD("BinaryContainerEncoder::setOutput");
     p_out = &outStream;
   }
 
-  void begin(AudioInfo info) {
-    setAudioInfo(info);
-    begin();
-  }
-
-  void begin() override {
+  bool begin() override {
     TRACED();
     // target.begin();
-    p_codec->begin();
+    bool rc = p_codec->begin();
     p_codec->setAudioInfo(cfg.info);
     is_beginning = true;
+    return rc;
   }
 
   void setAudioInfo(AudioInfo info) override {
@@ -115,7 +113,7 @@ public:
     }
   }
 
-  AudioInfo audioInfo() { return cfg.info; }
+  AudioInfo audioInfo() override { return cfg.info; }
 
   /// Adds meta data segment
   size_t writeMeta(const uint8_t *data, size_t len) {
@@ -195,11 +193,15 @@ protected:
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class BinaryContainerDecoder : public AudioDecoder {
+class BinaryContainerDecoder : public ContainerDecoder {
 public:
   BinaryContainerDecoder() = default;
   BinaryContainerDecoder(AudioDecoder &decoder) { p_codec = &decoder; }
   BinaryContainerDecoder(AudioDecoder *decoder) { p_codec = decoder; }
+
+  void setDecoder(AudioDecoder *decoder){
+    p_codec = decoder;
+  }
 
   // Defines the output: this method is called 2 times: first to define
   // output defined in the EnocdedAudioStream and then to define the
@@ -209,15 +211,14 @@ public:
     p_out = &outStream;
   }
 
-  void setMetaCallback(void (*callback)(uint8_t *, int)) {
+  void setMetaCallback(void (*callback)(uint8_t*, int, void*)) {
     meta_callback = callback;
   }
 
-  void setNotifyAudioChange(AudioInfoSupport &bi) {}
-
-  void begin() {
+  bool begin() {
     TRACED();
     is_first = true;
+    return true;
   }
 
   void end() { TRACED(); }
@@ -237,30 +238,33 @@ public:
     return ignore_write_errors ? len : result;
   }
 
-  AudioInfo audioInfo() { return info; }
-
   operator bool() { return true; };
 
-  void addErrorHandler(void (*error_handler)(BinaryContainerEncoderError error, BinaryContainerDecoder* source)){
+  void addErrorHandler(void (*error_handler)(BinaryContainerEncoderError error, BinaryContainerDecoder* source, void* ref)){
     this->error_handler = error_handler;
   }
 
-  // If set to true we do not expect a retry to write the missing data but continue just with the next. (Default is true);
+  /// If set to true we do not expect a retry to write the missing data but continue just with the next. (Default is true);
   void setIgnoreWriteErrors(bool flag){
     ignore_write_errors = flag;
   }
 
+  /// Provide additional information for callback
+  void setReference(void* ref){
+    reference = ref;
+  }
+
 protected:
   bool is_first = true;
-  AudioInfo info;
   CommonHeader header;
   const size_t header_size = sizeof(header);
   AudioDecoder *p_codec = nullptr;
-  void (*meta_callback)(uint8_t *, int) = nullptr;
   SingleBuffer<uint8_t> buffer{0};
   Print *p_out = nullptr;
-  void (*error_handler)(BinaryContainerEncoderError error, BinaryContainerDecoder* source) = nullptr;
+  void (*meta_callback)(uint8_t* data, int len, void* ref) = nullptr;
+  void (*error_handler)(BinaryContainerEncoderError error, BinaryContainerDecoder* source, void* ref) = nullptr;
   bool ignore_write_errors = true;
+  void * reference = nullptr;
 
 
   bool parseBuffer() {
@@ -281,7 +285,7 @@ protected:
       // check header
       if (!isValidHeader()) {
         LOGW("invalid header: %d", header.type);
-        if (error_handler) error_handler(InvalidHeader, this);
+        if (error_handler) error_handler(InvalidHeader, this, reference);
         nextRecord();
         return false;
       };
@@ -294,12 +298,12 @@ protected:
       } else {
         LOGD("not enough data - available %d / req: %d", buffer.available(),
              header.len);
-        if (error_handler) error_handler(DataMissing, this);
+        if (error_handler) error_handler(DataMissing, this, reference);
 
       }
     } else {
       LOGD("not enough data for header: %d", buffer.available());
-      if (error_handler) error_handler(DataMissing, this);
+      if (error_handler) error_handler(DataMissing, this, reference);
     }
     return result;
   }
@@ -314,9 +318,7 @@ protected:
       SimpleContainerConfig config;
       buffer.readArray((uint8_t *)&config, sizeof(config));
       info = config.info;
-      if (p_notify) {
-        p_notify->setAudioInfo(info);
-      }
+      notifyAudioChange(info);
       info.logInfo();
       p_codec->setAudioInfo(info);
       p_codec->begin();
@@ -341,7 +343,7 @@ protected:
         buffer.clearArray(data_len);
       } else {
         LOGW("invalid checksum");
-        if (error_handler) error_handler(InvalidChecksum, this);
+        if (error_handler) error_handler(InvalidChecksum, this, reference);
         // move to next record
         nextRecord();
         return false;
@@ -354,7 +356,7 @@ protected:
       buffer.clearArray(sizeof(header));
       int data_len = header.len - header_size;
       if (meta_callback != nullptr) {
-        meta_callback(buffer.data(), data_len);
+        meta_callback(buffer.data(), data_len, reference);
       }
       buffer.clearArray(data_len);
       rc = true;

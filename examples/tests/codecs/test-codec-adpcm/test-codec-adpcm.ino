@@ -11,14 +11,14 @@
  */
 #include "AudioTools.h"
 #include "AudioCodecs/CodecADPCM.h" // https://github.com/pschatzmann/adpcm
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 
 AudioInfo info(44100, 2, 16);
 SineWaveGenerator<int16_t> sineWave( 32000);  // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound( sineWave); // Stream generated from sine wave
-//AudioKitStream out; 
+//AudioBoardStream out(AudioKitEs8388V1);
 //I2SStream out; 
-AudioKitStream out; 
+AudioBoardStream out(AudioKitEs8388V1);
 EncodedAudioStream decoder(&out, new ADPCMDecoder(AV_CODEC_ID_ADPCM_IMA_WAV)); // encode and write
 EncodedAudioStream encoder(&decoder, new ADPCMEncoder(AV_CODEC_ID_ADPCM_IMA_WAV)); // encode and write
 StreamCopy copier(encoder, sound);     

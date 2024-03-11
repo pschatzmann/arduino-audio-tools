@@ -117,7 +117,7 @@ class OpusAudioDecoder : public AudioDecoder {
   /**
    * @brief Construct a new OpusDecoder object
    */
-  OpusAudioDecoder() { TRACED(); }
+  OpusAudioDecoder() = default;
 
   /**
    * @brief Construct a new OpusDecoder object
@@ -132,39 +132,46 @@ class OpusAudioDecoder : public AudioDecoder {
   /// Defines the output Stream
   void setOutput(Print &out_stream) override { p_print = &out_stream; }
 
-  void setNotifyAudioChange(AudioInfoSupport &bi) override {
-    this->p_notify = &bi;
-  }
-
   AudioInfo audioInfo() override { return cfg; }
 
   /// Provides access to the configuration
   OpusSettings &config() { return cfg; }
   OpusSettings &defaultConfig() { return cfg; }
 
-  void begin(OpusSettings settings) {
+  bool begin(OpusSettings settings) {
     TRACED();
     AudioDecoder::setAudioInfo(settings);
     cfg = settings;
-    if (p_notify != nullptr) {
-      p_notify->setAudioInfo(cfg);
-    }
-    begin();
+    notifyAudioChange(cfg);
+    return begin();
   }
 
-  void begin() override {
+  bool begin() override {
     TRACED();
+    if (!isValidRate(cfg.sample_rate)){
+      LOGE("Sample rate not supported: %d", cfg.sample_rate);
+      return false;
+    }
     outbuf.resize(cfg.max_buffer_size);
     assert(outbuf.data() != nullptr);
     
-    int err;
-    dec = opus_decoder_create(cfg.sample_rate, cfg.channels, &err);
+    // int err;
+    // dec = opus_decoder_create(cfg.sample_rate, cfg.channels, &err);
+   
+    size_t size = opus_decoder_get_size(cfg.channels);
+    decbuf.resize(size);
+    assert(decbuf.data() != nullptr);
+    dec = (OpusDecoder*)decbuf.data();
+    int err = opus_decoder_init(dec, cfg.sample_rate, cfg.channels);
+  
+
     if (err != OPUS_OK) {
       LOGE("opus_decoder_create: %s for sample_rate: %d, channels:%d",
            opus_strerror(err), cfg.sample_rate, cfg.channels);
-      return;
+      return false;
     }
     active = true;
+    return true;
   }
 
   void end() override {
@@ -173,6 +180,8 @@ class OpusAudioDecoder : public AudioDecoder {
       opus_decoder_destroy(dec);
       dec = nullptr;
     }
+    outbuf.resize(0);
+    decbuf.resize(0);
     active = false;
   }
 
@@ -219,6 +228,15 @@ class OpusAudioDecoder : public AudioDecoder {
   OpusDecoder *dec;
   bool active = false;
   Vector<uint8_t> outbuf{0};
+  Vector<uint8_t> decbuf{0};
+  const uint32_t valid_rates[5] = {8000, 12000, 16000, 24000,  48000};
+
+  bool isValidRate(int rate){
+    for (auto &valid : valid_rates){
+      if (valid==rate) return true;
+    }
+    return false;
+  }
 };
 
 /**
@@ -231,7 +249,7 @@ class OpusAudioDecoder : public AudioDecoder {
 class OpusAudioEncoder : public AudioEncoder {
  public:
   // Empty Constructor - the output stream must be provided with begin()
-  OpusAudioEncoder() {}
+  OpusAudioEncoder() = default;
 
   // Constructor providing the output stream
   OpusAudioEncoder(Print &out) { setOutput(out); }
@@ -244,13 +262,14 @@ class OpusAudioEncoder : public AudioEncoder {
 
   /// We actually do nothing with this
   void setAudioInfo(AudioInfo from) override {
+    AudioEncoder::setAudioInfo(from);
     cfg.sample_rate = from.sample_rate;
     cfg.channels = from.channels;
     cfg.bits_per_sample = from.bits_per_sample;
   }
 
   /// starts the processing using the actual OpusAudioInfo
-  void begin() override {
+  bool begin() override {
     int err;
     int size = getFrameSizeSamples(cfg.sample_rate) * 2;
     frame.resize(size);
@@ -259,18 +278,20 @@ class OpusAudioEncoder : public AudioEncoder {
     if (err != OPUS_OK) {
       LOGE("opus_encoder_create: %s for sample_rate: %d, channels:%d",
            opus_strerror(err), cfg.sample_rate, cfg.channels);
-      return;
+      return false;
     }
     is_open = settings();
+    return true;
   }
 
   /// Provides access to the configuration
   OpusEncoderSettings &config() { return cfg; }
+
   OpusEncoderSettings &defaultConfig() { return cfg; }
 
-  void begin(OpusEncoderSettings settings) {
+  bool begin(OpusEncoderSettings settings) {
     cfg = settings;
-    begin();
+    return begin();
   }
 
   /// stops the processing

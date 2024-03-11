@@ -26,7 +26,7 @@ int isascii(int c);
 namespace audio_tools {
 
 // String array with genres 
-INLINE_VAR const char *genres[] = { "Classic Rock", "Country", "Dance", "Disco", "Funk", "Grunge", "Hip-Hop", "Jazz", "Metal", "New Age", "Oldies", "Other", "Pop", "R&B", "Rap", "Reggae", "Rock", "Techno", "Industrial", "Alternative", "Ska", "Death Metal", "Pranks", "Soundtrack", "Euro-Techno", "Ambient", "Trip-Hop", "Vocal", "Jazz+Funk", "Fusion", "Trance", "Classical", "Instrumental", "Acid", "House", "Game", "Sound Clip", "Gospel", "Noise", "Alternative Rock", "Bass", "Soul", "Punk", "Space", "Meditative", "Instrumental Pop", "Instrumental Rock", "Ethnic", "Gothic", "Darkwave", "Techno-Insdustiral", "Electronic", "Pop-Folk", "Eurodance", "Dream", "Southern Rock", "Comedy", "Cult", "Gangsta", "Top 40", "Christian Rap", "Pop/Funk", "Jungle", "Native US", "Cabaret", "New Wave", "Psychadelic", "Rave", "Showtunes", "Trailer", "Lo-Fi", "Tribal", "Acid Punk", "Acid Jazz", "Polka", "Retro", "Musical", "Rock & Roll", "Hard Rock", "Folk", "Folk-Rock", "National Folk", "Swing", "Fast Fusion", "Bebob", "Latin", "Revival", "Celtic", "Bluegrass", "Avantgarde", "Gothic Rock", "Progressive Rock", "Psychedelic Rock", "Symphonic Rock", "Slow Rock", "Big Band", "Chorus", "Easy Listening", "Acoustic","Humour", "Speech", "Chanson", "Opera", "Chamber Music", "Sonata", "Symphony", "Booty Bass", "Primus", "Porn Groove", "Satire", "Slow Jam", "Club", "Tango", "Samba", "Folklore", "Ballad", "Power Ballad", "Rhytmic Soul", "Freestyle", "Duet", "Punk Rock", "Drum Solo", "Acapella", "Euro-House", "Dance Hall", "Goa", "Drum & Bass", "Club-House", "Hardcore", "Terror", "Indie", "BritPop", "Negerpunk", "Polsk Punk", "Beat", "Christian Gangsta", "Heavy Metal", "Black Metal", "Crossover", "Contemporary C", "Christian Rock", "Merengue", "Salsa", "Thrash Metal", "Anime", "JPop", "SynthPop" };
+static const char *genres[] = { "Classic Rock", "Country", "Dance", "Disco", "Funk", "Grunge", "Hip-Hop", "Jazz", "Metal", "New Age", "Oldies", "Other", "Pop", "R&B", "Rap", "Reggae", "Rock", "Techno", "Industrial", "Alternative", "Ska", "Death Metal", "Pranks", "Soundtrack", "Euro-Techno", "Ambient", "Trip-Hop", "Vocal", "Jazz+Funk", "Fusion", "Trance", "Classical", "Instrumental", "Acid", "House", "Game", "Sound Clip", "Gospel", "Noise", "Alternative Rock", "Bass", "Soul", "Punk", "Space", "Meditative", "Instrumental Pop", "Instrumental Rock", "Ethnic", "Gothic", "Darkwave", "Techno-Insdustiral", "Electronic", "Pop-Folk", "Eurodance", "Dream", "Southern Rock", "Comedy", "Cult", "Gangsta", "Top 40", "Christian Rap", "Pop/Funk", "Jungle", "Native US", "Cabaret", "New Wave", "Psychadelic", "Rave", "Showtunes", "Trailer", "Lo-Fi", "Tribal", "Acid Punk", "Acid Jazz", "Polka", "Retro", "Musical", "Rock & Roll", "Hard Rock", "Folk", "Folk-Rock", "National Folk", "Swing", "Fast Fusion", "Bebob", "Latin", "Revival", "Celtic", "Bluegrass", "Avantgarde", "Gothic Rock", "Progressive Rock", "Psychedelic Rock", "Symphonic Rock", "Slow Rock", "Big Band", "Chorus", "Easy Listening", "Acoustic","Humour", "Speech", "Chanson", "Opera", "Chamber Music", "Sonata", "Symphony", "Booty Bass", "Primus", "Porn Groove", "Satire", "Slow Jam", "Club", "Tango", "Samba", "Folklore", "Ballad", "Power Ballad", "Rhytmic Soul", "Freestyle", "Duet", "Punk Rock", "Drum Solo", "Acapella", "Euro-House", "Dance Hall", "Goa", "Drum & Bass", "Club-House", "Hardcore", "Terror", "Indie", "BritPop", "Negerpunk", "Polsk Punk", "Beat", "Christian Gangsta", "Heavy Metal", "Black Metal", "Crossover", "Contemporary C", "Christian Rock", "Merengue", "Salsa", "Thrash Metal", "Anime", "JPop", "SynthPop" };
 
 /// current status of the parsing @ingroup metadata-id3
 enum ParseStatus { TagNotFound, PartialTagAtTail, TagFoundPartial, TagFoundComplete, TagProcessed};
@@ -171,7 +171,7 @@ class MetaDataID3V1  : public MetaDataID3Base {
             if (tag_ext!=nullptr){
                 if (len-pos>=sizeof(ID3v1Enhanced)){
                     memcpy(tag,data+pos,sizeof(ID3v1Enhanced));
-                    processNotify();                    
+                    processnotifyAudioChange();                    
                 } else {
                     use_bytes_of_next_write = min(sizeof(ID3v1Enhanced), len-pos);
                     memcpy(tag_ext, data+pos, use_bytes_of_next_write);
@@ -185,7 +185,7 @@ class MetaDataID3V1  : public MetaDataID3Base {
                 if (tag!=nullptr){
                     if (len-pos>=sizeof(ID3v1)){
                         memcpy(tag,data+pos,sizeof(ID3v1));
-                        processNotify();                    
+                        processnotifyAudioChange();                    
                     } else {
                         use_bytes_of_next_write = min(sizeof(ID3v1), len-pos);
                         memcpy(tag,data+pos,use_bytes_of_next_write);
@@ -220,12 +220,12 @@ class MetaDataID3V1  : public MetaDataID3Base {
             tag_ext = new ID3v1Enhanced();
             memcpy(tag,tag_str, 4);
             memcpy(tag,data+len,sizeof(ID3v1Enhanced));
-            processNotify();                    
+            processnotifyAudioChange();                    
         } else if (strncmp((char*)tag_str,"TAG",3)==0){
             tag = new ID3v1();
             memcpy(tag,tag_str, 3);
             memcpy(tag,data+len,sizeof(ID3v1));
-            processNotify();                    
+            processnotifyAudioChange();                    
         }
     }
 
@@ -234,18 +234,18 @@ class MetaDataID3V1  : public MetaDataID3Base {
         if (tag!=nullptr){
             int remainder = sizeof(ID3v1) - use_bytes_of_next_write;
             memcpy(tag,data+use_bytes_of_next_write,remainder);
-            processNotify();                 
+            processnotifyAudioChange();                 
             use_bytes_of_next_write = 0;   
         } else if (tag_ext!=nullptr){
             int remainder = sizeof(ID3v1Enhanced) - use_bytes_of_next_write;
             memcpy(tag_ext,data+use_bytes_of_next_write,remainder);
-            processNotify();                 
+            processnotifyAudioChange();                 
             use_bytes_of_next_write = 0;   
         }
     }
 
     /// executes the callbacks
-    void processNotify() {
+    void processnotifyAudioChange() {
         if (callback==nullptr) return;
 
         if (tag_ext!=nullptr){
@@ -282,7 +282,7 @@ class MetaDataID3V1  : public MetaDataID3Base {
 #define ExperimentalIndicatorFlag 0x10
         
 // Relevant v2 Tags        
-INLINE_VAR const char* id3_v2_tags[] = {"TALB", "TOPE", "TPE1", "TIT2", "TCON"};
+static const char* id3_v2_tags[] = {"TALB", "TOPE", "TPE1", "TIT2", "TCON"};
 
 
 // ID3 verion 2 TAG Header (10 bytes)  @ingroup metadata-id3
@@ -322,7 +322,7 @@ struct ID3v2FrameString {
     uint8_t encoding; // encoding byte for strings
 }; 
 
-INLINE_VAR const int ID3FrameSize = 11;
+static const int ID3FrameSize = 11;
 
 /**
  * @brief Simple ID3 Meta Data API which supports ID3 V2: We only support the "TALB", "TOPE", "TIT2", "TCON" tags
@@ -448,7 +448,7 @@ class MetaDataID3V2 : public MetaDataID3Base  {
                         strncpy((char*)result, (char*) data+tag_pos+ID3FrameSize, l);
                         int checkLen = min(l, 10);
                         if (isAscii(checkLen)){
-                            processNotify();
+                            processnotifyAudioChange();
                         } else {
                             LOGW("TAG %s ignored", tag);
                         }
@@ -490,7 +490,7 @@ class MetaDataID3V2 : public MetaDataID3Base  {
     void processPartialTagAtTail(const uint8_t* data, size_t len) {
         int remainder = calcSize(frame_header.size) - use_bytes_of_next_write;
         memcpy(result+use_bytes_of_next_write, data, remainder);
-        processNotify();    
+        processnotifyAudioChange();    
 
         status = TagNotFound;
         processTagNotFound(data+use_bytes_of_next_write, len-use_bytes_of_next_write);
@@ -508,7 +508,7 @@ class MetaDataID3V2 : public MetaDataID3Base  {
 
 
     /// executes the callbacks
-    void processNotify() {
+    void processnotifyAudioChange() {
         if (callback!=nullptr && actual_tag!=nullptr && encodingIsSupported()){
             LOGI("callback %s",actual_tag);
             if (memcmp(actual_tag,"TALB",4)==0)

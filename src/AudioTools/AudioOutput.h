@@ -47,13 +47,7 @@ public:
     TRACED();
     cfg = info;
     info.logInfo();
-    if (p_notify != nullptr) {
-      p_notify->setAudioInfo(info);
-    }
-  }
-
-  virtual void setNotifyAudioChange(AudioInfoSupport &bi) override {
-    p_notify = &bi;
+    notifyAudioChange(info);
   }
 
   /// If true we need to release the related memory in the destructor
@@ -82,7 +76,6 @@ public:
 
 protected:
   int tmpPos = 0;
-  AudioInfoSupport *p_notify = nullptr;
   AudioInfo cfg;
   SingleBuffer<uint8_t> tmp{MAX_SINGLE_CHARS};
   bool is_active = false;
@@ -206,7 +199,7 @@ protected:
         }
         data_ptr++;
         if (ch < cfg.channels - 1)
-          this->out_ptr->print(",");
+          this->out_ptr->print(delimiter_str);
       }
       this->out_ptr->println();
     }
@@ -634,49 +627,49 @@ protected:
 // legacy name
 using MemoryPrint = MemoryOutput;
 
-/**
- * @brief Switched Output class. Class which can be used to filter the output
- * out based on a switch: If the switch is on the output is forwarded. If it is
- * off it is just ignored.
- * @ingroup transform
- * @author Phil Schatzmann
- * @copyright GPLv3
- */
-class OnOffOutput : public AudioOutput {
-public:
-  OnOffOutput() = default;
-  OnOffOutput(Print &out) { setOutput(out); }
+// /**
+//  * @brief Switched Output class. Class which can be used to filter the output
+//  * out based on a switch: If the switch is on the output is forwarded. If it is
+//  * off it is just ignored.
+//  * @ingroup transform
+//  * @author Phil Schatzmann
+//  * @copyright GPLv3
+//  */
+// class OnOffOutput : public AudioOutput {
+// public:
+//   OnOffOutput() = default;
+//   OnOffOutput(Print &out) { setOutput(out); }
 
-  /// Same as setActive(true)
-  bool begin() override {
-    setActive(true);
-    return true;
-  }
-  /// Same as setActive(false)
-  void end() override { setActive(false); }
+//   /// Same as setActive(true)
+//   bool begin() override {
+//     setActive(true);
+//     return true;
+//   }
+//   /// Same as setActive(false)
+//   void end() override { setActive(false); }
 
-  /// Redefines the final output
-  void setOutput(Print &out) { p_output = &out; }
+//   /// Redefines the final output
+//   void setOutput(Print &out) { p_output = &out; }
 
-  /// set the sitch to on or off
-  void setActive(bool on) { is_active = on; }
+//   /// set the sitch to on or off
+//   void setActive(bool on) { is_active = on; }
 
-  /// Determines if the switch is on
-  bool isActive() { return is_active; }
+//   /// Determines if the switch is on
+//   bool isActive() { return is_active; }
 
-  size_t write(const uint8_t *buffer, size_t len) override {
-    if (p_output == nullptr)
-      return 0;
-    size_t result = len;
-    if (is_active) {
-      len = p_output->write(buffer, len);
-    }
-    return len;
-  }
+//   size_t write(const uint8_t *buffer, size_t len) override {
+//     if (p_output == nullptr)
+//       return 0;
+//     size_t result = len;
+//     if (is_active) {
+//       len = p_output->write(buffer, len);
+//     }
+//     return len;
+//   }
 
-protected:
-  Print *p_output = nullptr;
-};
+// protected:
+//   Print *p_output = nullptr;
+// };
 
 /**
  * @brief Simple functionality to extract mono streams from a multichannel (e.g. stereo)

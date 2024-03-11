@@ -27,7 +27,6 @@ public:
   DecoderL16(Print &out_stream, bool active = true) {
     TRACED();
     p_print = &out_stream;
-    this->active = active;
   }
 
   /**
@@ -40,34 +39,11 @@ public:
   DecoderL16(Print &out_stream, AudioInfoSupport &bi) {
     TRACED();
     setOutput(out_stream);
-    setNotifyAudioChange(bi);
+    addNotifyAudioChange(bi);
   }
 
   /// Defines the output Stream
   void setOutput(Print &out_stream) override { p_print = &out_stream; }
-
-  void setNotifyAudioChange(AudioInfoSupport &bi) override { this->bid = &bi; }
-
-  AudioInfo audioInfo() override { return cfg; }
-
-  void begin(AudioInfo info) {
-    TRACED();
-    cfg = info;
-    if (bid != nullptr) {
-      bid->setAudioInfo(cfg);
-    }
-    active = true;
-  }
-
-  void begin() override {
-    TRACED();
-    active = true;
-  }
-
-  void end() override {
-    TRACED();
-    active = false;
-  }
 
   virtual size_t write(const void *in_ptr, size_t in_size) override {
     if (p_print == nullptr)
@@ -79,13 +55,10 @@ public:
     return p_print->write((uint8_t *)in_ptr, in_size);
   }
 
-  virtual operator bool() override { return active; }
+  virtual operator bool() override { return p_print!=nullptr; }
 
 protected:
   Print *p_print = nullptr;
-  AudioInfoSupport *bid = nullptr;
-  AudioInfo cfg;
-  bool active;
 };
 
 /**
@@ -113,16 +86,13 @@ public:
   /// Provides "audio/pcm"
   const char *mime() override { return "audio/l16"; }
 
-  /// We actually do nothing with this
-  virtual void setAudioInfo(AudioInfo from) override {}
-
   /// starts the processing using the actual RAWAudioInfo
-  virtual void begin() override { is_open = true; }
+  virtual bool begin() override { is_open = true; return true;}
 
   /// starts the processing
-  void begin(Print &out) {
+  bool begin(Print &out) {
     p_print = &out;
-    begin();
+    return begin();
   }
 
   /// stops the processing

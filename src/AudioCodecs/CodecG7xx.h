@@ -26,9 +26,9 @@ enum G7xxCODEC_e {g723_24, g721, g723_40, others};
 class G7xxDecoder : public AudioDecoder {
  public:
   G7xxDecoder(G7xxCODEC_e codec) {
-    cfg.channels = 1;
-    cfg.sample_rate = 8000;
-    cfg.bits_per_sample = 16;
+    info.channels = 1;
+    info.sample_rate = 8000;
+    info.bits_per_sample = 16;
 
     switch(codec){
       case g723_24:
@@ -48,26 +48,24 @@ class G7xxDecoder : public AudioDecoder {
     }
   }
 
-  void setAudioInfo(AudioInfo cfg) override { 
-    if (cfg.channels!=1){
-      LOGE("channels must be 1 instead of %d", cfg.channels);
+  void setAudioInfo(AudioInfo info) override { 
+    bool ok = true;
+    if (info.channels!=1){
+      LOGE("channels must be 1 instead of %d", info.channels);
+      ok = false;
     }
-    if (cfg.sample_rate!=8000){
-      LOGE("sample_rate must be 8000 instead of %d", cfg.sample_rate);
+    if (info.sample_rate!=8000){
+      LOGE("sample_rate must be 8000 instead of %d", info.sample_rate);
+      ok = false;
     }
-    if (cfg.bits_per_sample!=16){
-      LOGE("bits_per_sample must be 16 instead of %d", cfg.bits_per_sample);
+    if (info.bits_per_sample!=16){
+      LOGE("bits_per_sample must be 16 instead of %d", info.bits_per_sample);
+      ok = false;
     }
+    if (ok) AudioDecoder::setAudioInfo(info);
   }
 
-  AudioInfo audioInfo()override { return cfg; }
-
-  virtual void begin(AudioInfo cfg)  {
-    setAudioInfo(cfg);
-    begin();
-  }
-
-  void begin() override {
+  bool begin() override {
     TRACEI();
     in_buffer = 0;
     in_bits = 0;
@@ -75,15 +73,12 @@ class G7xxDecoder : public AudioDecoder {
     g72x_init_state(&state);
 
     is_active = true;
+    return true;
   }
 
   void end() override {
     TRACEI();
     is_active = false;
-  }
-
-  void setNotifyAudioChange(AudioInfoSupport &bi) override {
-    p_notify = &bi;
   }
 
   void setOutput(Print &out_stream) override { p_print = &out_stream; }
@@ -108,8 +103,6 @@ class G7xxDecoder : public AudioDecoder {
 
  protected:
   Print *p_print = nullptr;
-  AudioInfo cfg;
-  AudioInfoSupport *p_notify = nullptr;
   int input_pos = 0;
   bool is_active = false;
   int16_t sample;
@@ -134,9 +127,9 @@ class G7xxDecoder : public AudioDecoder {
 class G7xxEncoder : public AudioEncoder {
  public:
   G7xxEncoder(G7xxCODEC_e codec) {
-    cfg.channels = 1;
-    cfg.sample_rate = 8000;
-    cfg.bits_per_sample = 16;
+    info.channels = 1;
+    info.sample_rate = 8000;
+    info.bits_per_sample = 16;
 
     switch(codec){
 
@@ -160,18 +153,14 @@ class G7xxEncoder : public AudioEncoder {
     }
   }
 
-  virtual void begin(AudioInfo bi) {
-    setAudioInfo(bi);
-    begin();
-  }
-
-  void begin() override {
+  bool begin() override {
     TRACEI();
     g72x_init_state(&state);
     out_buffer = 0;
     out_bits = 0;
 
     is_active = true;
+    return true;
   }
 
   void end() override {
@@ -181,16 +170,21 @@ class G7xxEncoder : public AudioEncoder {
 
   const char *mime() override { return p_mime; }
 
-  virtual void setAudioInfo(AudioInfo cfg) { 
-    if (cfg.channels!=1){
-      LOGE("channels must be 1 instead of %d", cfg.channels);
+  virtual void setAudioInfo(AudioInfo info) { 
+    bool ok = true;
+    if (info.channels!=1){
+      LOGE("channels must be 1 instead of %d", info.channels);
+      ok = false;
     }
-    if (cfg.sample_rate!=8000){
-      LOGE("sample_rate must be 8000 instead of %d", cfg.sample_rate);
+    if (info.sample_rate!=8000){
+      LOGE("sample_rate must be 8000 instead of %d", info.sample_rate);
+      ok = false;
     }
-    if (cfg.bits_per_sample!=16){
-      LOGE("bits_per_sample must be 16 instead of %d", cfg.bits_per_sample);
+    if (info.bits_per_sample!=16){
+      LOGE("bits_per_sample must be 16 instead of %d", info.bits_per_sample);
+      ok = false;
     }
+    if (ok) AudioEncoder::setAudioInfo(info);
   }
 
   void setOutput(Print &out_stream) override { p_print = &out_stream; }
@@ -215,7 +209,6 @@ class G7xxEncoder : public AudioEncoder {
   }
 
  protected:
-  AudioInfo cfg;
   Print *p_print = nullptr;
   bool is_active = false;
   const char *p_mime = nullptr;

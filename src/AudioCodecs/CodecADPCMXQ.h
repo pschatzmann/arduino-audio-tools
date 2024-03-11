@@ -47,7 +47,7 @@ class ADPCMDecoderXQ : public AudioDecoder {
   /// Defines the noise shaping
   void setNoiseShaping(ADPCMNoiseShaping ns) { noise_shaping = (int)ns; }
 
-  void begin() override {
+  bool begin() override {
     TRACEI();
     current_byte = 0;
     if (adpcm_cnxt == nullptr) {
@@ -67,9 +67,8 @@ class ADPCMDecoderXQ : public AudioDecoder {
       adpcm_block.resize(block_size);
     }
 
-    if (p_notify != nullptr) {
-      p_notify->setAudioInfo(info);
-    }
+    notifyAudioChange(info);
+    return true;
   }
 
   void end() override {
@@ -157,12 +156,7 @@ class ADPCMEncoderXQ : public AudioEncoder {
   /// Defines the noise shaping
   void setNoiseShaping(ADPCMNoiseShaping ns) { noise_shaping = (int)ns; }
 
-  void begin(AudioInfo info) {
-    setAudioInfo(info);
-    begin();
-  }
-
-  void begin() override {
+  bool begin() override {
     TRACEI();
 
     if (block_size_pow2)
@@ -177,6 +171,7 @@ class ADPCMEncoderXQ : public AudioEncoder {
     pcm_block.resize(samples_per_block * info.channels);
     adpcm_block.resize(block_size);
     current_sample = 0;
+    return true;
   }
 
   void end() override {
@@ -190,8 +185,6 @@ class ADPCMEncoderXQ : public AudioEncoder {
   }
 
   const char *mime() override { return "audio/adpcm"; }
-
-  void setAudioInfo(AudioInfo info) override { this->info = info; }
 
   void setOutput(Print &out_stream) override { p_print = &out_stream; }
 
@@ -212,7 +205,6 @@ class ADPCMEncoderXQ : public AudioEncoder {
   }
 
  protected:
-  AudioInfo info;
   int current_sample = 0;
   void *adpcm_cnxt = nullptr;
   Vector<int16_t> pcm_block;

@@ -12,4 +12,4 @@ We implement a AudioKit source and sink: We stream the sound input which we read
 You need to install the following libraries:
 
 - https://github.com/pschatzmann/arduino-audio-tools
-- https://github.com/pschatzmann/arduino-audiokit
+- https://github.com/pschatzmann/arduino-audio-driver

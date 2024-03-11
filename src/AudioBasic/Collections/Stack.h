@@ -40,6 +40,11 @@ class Stack {
         bool empty() {
             return l.empty();
         }
+
+        void setAllocator(Allocator &allocator){
+            l.setAllocator(allocator);
+        }
+
     protected:
         List<T> l;
 };

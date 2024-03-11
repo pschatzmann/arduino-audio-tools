@@ -1,13 +1,13 @@
 #include "AudioTools.h"
 #include "AudioLibs/MaximilianDSP.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 #include "maximilian.h"
 #include <FS.h>
 #include <SD_MMC.h>
 
 
 // Define Arduino output
-AudioKitStream out;
+AudioBoardStream out(AudioKitEs8388V1);
 Maximilian maximilian(out);
 
 // MAXIMILIAN

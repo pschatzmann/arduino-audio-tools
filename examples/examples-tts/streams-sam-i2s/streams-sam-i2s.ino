@@ -7,10 +7,10 @@
  */
 #include "AudioTools.h"
 #include "sam_arduino.h"
-//#include "AudioLibs/AudioKit.h"
+//#include "AudioLibs/AudioBoardStream.h"
 
 
-I2SStream out; // Replace with desired class e.g. AudioKitStream, AnalogAudioStream etc.
+I2SStream out; // Replace with desired class e.g. AudioBoardStream, AnalogAudioStream etc.
 SAM sam(out, false);
 
 // Callback which provides the audio data 

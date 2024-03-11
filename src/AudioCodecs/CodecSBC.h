@@ -38,23 +38,18 @@ public:
       delete[] input_buffer;
   }
 
-  virtual AudioInfo audioInfo() { return info; }
-
-  virtual void begin() {
+  virtual bool begin() {
     TRACEI();
     is_first = true;
     is_active = true;
     sbc_init(&sbc, 0L);
+    return true;
   }
 
   virtual void end() {
     TRACEI();
     sbc_finish(&sbc);
     is_active = false;
-  }
-
-  virtual void setNotifyAudioChange(AudioInfoSupport &bi) {
-    p_notify = &bi;
   }
 
   virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
@@ -102,8 +97,6 @@ public:
 
 protected:
   Print *p_print = nullptr;
-  AudioInfo info;
-  AudioInfoSupport *p_notify = nullptr;
   sbc_t sbc;
   bool is_first = true;
   bool is_active = false;
@@ -143,9 +136,7 @@ protected:
       break;
     }
     LOGI("sample_rate: %d", info.sample_rate);
-    if (p_notify != nullptr) {
-      p_notify->setAudioInfo(info);
-    }
+    notifyAudioChange(info);
   }
 
   bool isValidFrameLen(int len) { return len > 0 && len < 256; }
@@ -243,20 +234,15 @@ public:
     }
   }
 
-  /// Starts the processing: channels 1 or 2, supported sample rates: 16000, 32000, 44100, 48000
-  void begin(AudioInfo bi) {
-    setAudioInfo(bi);
-    begin();
-  }
-
   /// Restarts the processing
-  void begin() {
+  bool begin() {
     TRACEI();
     is_first = true;
     is_active = setup();
     current_codesize = codeSize();
     buffer.resize(current_codesize);
     result_buffer.resize(frameLength());
+    return true;
   }
 
   /// Ends the processing
@@ -267,8 +253,6 @@ public:
   }
 
   virtual const char *mime() { return "audio/sbc"; }
-
-  virtual void setAudioInfo(AudioInfo info) { this->info = info; }
 
   virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
 
@@ -303,7 +287,6 @@ public:
   }
 
 protected:
-  AudioInfo info;
   Print *p_print = nullptr;
   sbc_t sbc;
   bool is_first = true;

@@ -87,7 +87,7 @@ class PWMDriverRenesas : public DriverPWMBase {
                 auto gpio = audio_config.pins()[j];
                 PwmOut* pin = new PwmOut(gpio);
                 LOGI("PWM Pin: %d", gpio);
-                pin->begin(50, 0);  // 50: 20000hz at 0%
+                pin->begin(20000.0f, 0.0f);  // 50: 20000hz at 0%
                 pins[j] = pin;
             }
         }

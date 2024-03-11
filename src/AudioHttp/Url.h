@@ -5,10 +5,9 @@
 
 namespace audio_tools {
 
-
 /**
  * @brief URL parser which breaks a full url string up into its individual parts
- * 
+ *
  * http://pschatzmann.ch:80/path1/path2
  * -> protocol: http
  * -> host: pschatzmann.ch
@@ -21,103 +20,85 @@ namespace audio_tools {
 
  */
 class Url {
-    public:
-        // empty url
-        Url() {
-            LOGD("Url");
-        }
-        
-        ~Url() {
-            LOGD("~Url");
-            pathStr.clear();
-            hostStr.clear();
-            protocolStr.clear();
-            urlRootStr.clear();
-            urlStr.clear();
-        }
+ public:
+  /// Allow Empty constructor
+  Url() = default;
 
-        // setup url with string
-        Url(const char *url){
-            LOGD("Url %s",url);
-            setUrl(url);
-        }
+  /// setup url from string
+  Url(const char* url) {
+    LOGD("Url %s", url);
+    setUrl(url);
+  }
 
-        // copy constructor
-        Url(Url &url){
-            LOGD("Url %s",url.url());
-            setUrl(url.url());
-        }
+  const char* url() { return urlStr.c_str(); }
+  const char* path() { return pathStr.c_str(); }
+  const char* host() { return hostStr.c_str(); }
+  const char* protocol() { return protocolStr.c_str(); }
+  const char* urlRoot() {
+    return urlRootStr.c_str();
+  }  // prefix w/o path -> https://host:port
+  int port() { return portInt; }
+  bool isSecure() { return portInt == 443; }
 
-        const char* url() {return urlStr.c_str();}
-        const char* path() { return pathStr.c_str(); }
-        const char* host() { return hostStr.c_str();}
-        const char* protocol() {return protocolStr.c_str();}
-        const char* urlRoot() {return urlRootStr.c_str();} // prefix w/o path -> https://host:port
-        int port() {return portInt;}
-        bool isSecure() { return portInt==443; }
+  void setUrl(const char* url) {
+    LOGD("setUrl %s", url);
+    this->urlStr = url;
+    parse();
+  }
 
-        void setUrl(const char* url){
-            LOGD("setUrl %s",url);
-            this->urlStr = url;
-            parse();
-        }
+ protected:
+  StrExt pathStr{0};
+  StrExt hostStr{0};
+  StrExt protocolStr{0};
+  StrExt urlRootStr{0};
+  StrExt urlStr{0};
+  int portInt = 0;
 
-    protected:
-        StrExt pathStr = StrExt(40);
-        StrExt hostStr = StrExt(20);
-        StrExt protocolStr = StrExt(6);
-        StrExt urlRootStr = StrExt(40);
-        StrExt urlStr = StrExt(40);
-        int portInt;
+  void parse() {
+    LOGI("Url::parse");
 
-        void parse() {
-            LOGI("Url::parse");
-            
-            int protocolEnd = urlStr.indexOf("://");
-            if (protocolEnd==-1){
-                return;
-            }
-            protocolStr.substring(urlStr, 0,protocolEnd);
-            int pathStart = urlStr.indexOf("/",protocolEnd+4);
-            int portStart = urlStr.indexOf(":",protocolEnd+3);
-            // check if the found portStart isn't part of the path
-            portStart = portStart < pathStart ? portStart : -1;
-            int hostEnd = portStart != -1 ? portStart : pathStart;
-            // we have not path -> so then host end is the end of string
-            if (hostEnd==-1){
-                hostEnd = urlStr.length();
-            }
-            hostStr.substring(urlStr, protocolEnd+3,hostEnd);
-            if (portStart>0){
-                portInt = atoi(urlStr.c_str()+portStart+1);
-            } else {
-                if (protocolStr.startsWith("https"))
-                    portInt = 443;
-                else if (protocolStr.startsWith("http"))
-                    portInt = 80;
-                else if (protocolStr.startsWith("ftp"))
-                    portInt = 21;
-                else 
-                    portInt = -1; // undefined
-            }
-            if (pathStart<=0){
-                // we have no path
-                pathStr = "/";
-                urlRootStr = urlStr;
-            } else {
-                pathStr.substring(urlStr, pathStart, urlStr.length());
-                pathStr.trim();
-                urlRootStr.substring(urlStr, 0, pathStart);
-            }
-            LOGI("url->%s",url());
-            LOGI("host->%s",host());
-            LOGI("protocol->%s",protocol());
-            LOGI("path->%s",path());
-            LOGI("port->%d",port());
-           
-        }
-
+    int protocolEnd = urlStr.indexOf("://");
+    if (protocolEnd == -1) {
+      return;
+    }
+    protocolStr.substring(urlStr, 0, protocolEnd);
+    int pathStart = urlStr.indexOf("/", protocolEnd + 4);
+    int portStart = urlStr.indexOf(":", protocolEnd + 3);
+    // check if the found portStart isn't part of the path
+    portStart = portStart < pathStart ? portStart : -1;
+    int hostEnd = portStart != -1 ? portStart : pathStart;
+    // we have not path -> so then host end is the end of string
+    if (hostEnd == -1) {
+      hostEnd = urlStr.length();
+    }
+    hostStr.substring(urlStr, protocolEnd + 3, hostEnd);
+    if (portStart > 0) {
+      portInt = atoi(urlStr.c_str() + portStart + 1);
+    } else {
+      if (protocolStr.startsWith("https"))
+        portInt = 443;
+      else if (protocolStr.startsWith("http"))
+        portInt = 80;
+      else if (protocolStr.startsWith("ftp"))
+        portInt = 21;
+      else
+        portInt = -1;  // undefined
+    }
+    if (pathStart <= 0) {
+      // we have no path
+      pathStr = "/";
+      urlRootStr = urlStr;
+    } else {
+      pathStr.substring(urlStr, pathStart, urlStr.length());
+      pathStr.trim();
+      urlRootStr.substring(urlStr, 0, pathStart);
+    }
+    LOGI("url->%s", url());
+    LOGI("host->%s", host());
+    LOGI("protocol->%s", protocol());
+    LOGI("path->%s", path());
+    LOGI("port->%d", port());
+  }
 };
 
-}
-
+}  // namespace audio_tools

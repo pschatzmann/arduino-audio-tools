@@ -46,14 +46,7 @@ class LC3Decoder : public AudioDecoder {
     info.channels = 1;
   }
 
-  virtual AudioInfo audioInfo() { return info; }
-
-  void begin(AudioInfo bi) {
-    info = bi;
-    begin();
-  }
-
-  virtual void begin() {
+  virtual bool begin() {
     TRACEI();
 
     // Return the number of PCM samples in a frame
@@ -69,7 +62,7 @@ class LC3Decoder : public AudioDecoder {
 
     if (!checkValues()) {
       LOGE("Invalid Parameters");
-      return;
+      return false;
     }
 
     // setup memory
@@ -80,22 +73,16 @@ class LC3Decoder : public AudioDecoder {
     // setup decoder
     lc3_decoder = lc3_setup_decoder(dt_us, info.sample_rate, 0,
                                     (void *)lc3_decoder_memory.data());
-    if (p_notify != nullptr) {
-      p_notify->setAudioInfo(info);
-    }
+    notifyAudioChange(info);
 
     input_pos = 0;
     active = true;
+    return true;
   }
 
   virtual void end() {
     TRACEI();
     active = false;
-  }
-
-  virtual void setNotifyAudioChange(AudioInfoSupport &bi) {
-    TRACEI();
-    p_notify = &bi;
   }
 
   virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
@@ -207,12 +194,7 @@ class LC3Encoder : public AudioEncoder {
     output_byte_count = outputByteCount;
   }
 
-  void begin(AudioInfo bi) {
-    setAudioInfo(bi);
-    begin();
-  }
-
-  void begin() {
+  bool begin() {
     TRACEI();
 
     unsigned enc_size = lc3_encoder_size(dt_us, info.sample_rate);
@@ -226,7 +208,7 @@ class LC3Encoder : public AudioEncoder {
     LOGI("num_frames: %d", num_frames);
 
     if (!checkValues()) {
-      return;
+      return false;
     }
 
     // setup memory
@@ -240,6 +222,7 @@ class LC3Encoder : public AudioEncoder {
 
     input_pos = 0;
     active = true;
+    return true;
   }
 
   virtual void end() {
@@ -248,8 +231,6 @@ class LC3Encoder : public AudioEncoder {
   }
 
   virtual const char *mime() { return "audio/lc3"; }
-
-  virtual void setAudioInfo(AudioInfo info) { this->info = info; }
 
   virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
 
@@ -282,7 +263,6 @@ class LC3Encoder : public AudioEncoder {
   }
 
  protected:
-  AudioInfo info;
   Print *p_print = nullptr;
   unsigned dt_us = 1000;
   uint16_t num_frames;

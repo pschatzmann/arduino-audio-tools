@@ -36,7 +36,7 @@ class UserCallback {
     portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
     bool lock;
 
-} INLINE_VAR *simpleUserCallback = nullptr;
+} static *simpleUserCallback = nullptr;
 
 
 static IRAM_ATTR void userCallback0() {
@@ -88,7 +88,7 @@ class TimerCallback {
       portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
       TaskHandle_t *p_handler_task=nullptr;
 
-} INLINE_VAR *timerCallbackArray = nullptr;
+} static *timerCallbackArray = nullptr;
 
 
 static IRAM_ATTR void timerCallback0() {
@@ -147,7 +147,7 @@ class TimerAlarmRepeatingDriverESP32 : public TimerAlarmRepeatingDriverBase  {
             // we determine the time in microseconds
             switch(unit){
                 case MS:
-                    timeUs = time / 1000;
+                    timeUs = time * 1000;
                     break;
                 case US:
                     timeUs = time;

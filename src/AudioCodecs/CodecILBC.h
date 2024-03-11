@@ -38,13 +38,11 @@ class ILBCDecoder : public AudioDecoder {
     end();
   }
 
-  virtual AudioInfo audioInfo() { return info; }
-
-  virtual void begin() {
+  virtual bool begin() {
     TRACEI();
     if (p_print==nullptr){
       LOGE("Output not defined");
-      return;
+      return false;
     }
 
     if (p_ilbc==nullptr){
@@ -56,19 +54,14 @@ class ILBCDecoder : public AudioDecoder {
     encoded_buffer.resize(p_ilbc->getEncodedBytes());
 
     // update audio information
-    if (notify != nullptr) {
-      notify->setAudioInfo(info);
-    }
+    notifyAudioChange(info);
+    return true;
   }
 
   virtual void end() {
     TRACEI();
     delete p_ilbc;
     p_ilbc = nullptr;
-  }
-
-  virtual void setNotifyAudioChange(AudioInfoSupport &bi) {
-    notify = &bi;
   }
 
   virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
@@ -96,8 +89,6 @@ class ILBCDecoder : public AudioDecoder {
   }
 
  protected:
-  AudioInfo info;
-  AudioInfoSupport *notify = nullptr;
   Print *p_print = nullptr;
   iLBCDecode *p_ilbc = nullptr;
   Vector<int16_t> decoded_buffer{0};
@@ -129,24 +120,15 @@ class ILBCEncoder : public AudioEncoder {
     end();
   }
 
-  void begin(AudioInfo info) {
-    setAudioInfo(info);
-    begin();
-  }
-
-  void setAudioInfo(AudioInfo info) {
-    this->info = info;
-  }
-
-  void begin() {
+  bool begin() {
     TRACEI();
     if (p_print==nullptr){
       LOGE("Output not defined");
-      return;
+      return false;
     }
     if (info.bits_per_sample!=16){
       LOGE("bits_per_sample must be 16: %d",info.bits_per_sample);
-      return;
+      return false;
     }
     if (info.sample_rate!=8000){
       LOGW("The sample rate should be 8000: %d", info.sample_rate);
@@ -160,6 +142,7 @@ class ILBCEncoder : public AudioEncoder {
     decoded_buffer.resize(p_ilbc->getSamples());
     encoded_buffer.resize(p_ilbc->getEncodedBytes());
     decoded_buffer_pos = 0;
+    return true;
   }
 
   virtual void end() {
@@ -198,7 +181,6 @@ class ILBCEncoder : public AudioEncoder {
   }
 
  protected:
-  AudioInfo info;
   Print *p_print = nullptr;
   iLBCEncode *p_ilbc = nullptr;
   Vector<float> decoded_buffer{0};

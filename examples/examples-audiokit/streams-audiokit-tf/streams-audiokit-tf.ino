@@ -1,10 +1,10 @@
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 #include "AudioLibs/TfLiteAudioStream.h"
 #include "model.h"  // tensorflow model
 
-AudioKitStream kit;  // Audio source
+AudioBoardStream kit(AudioKitEs8388V1);  // Audio source
 TfLiteAudioStream tfl;  // Audio sink
 const char* kCategoryLabels[4] = {
     "silence",
@@ -32,7 +32,7 @@ void setup() {
 
   // setup Audiokit
   auto cfg = kit.defaultConfig(RX_MODE);
-  cfg.input_device = AUDIO_HAL_ADC_INPUT_LINE2;
+  cfg.input_device = ADC_INPUT_LINE2;
   cfg.channels = channels;
   cfg.sample_rate = samples_per_second;
   cfg.use_apll = false;

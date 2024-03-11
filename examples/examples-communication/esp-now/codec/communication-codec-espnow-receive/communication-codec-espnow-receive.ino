@@ -11,11 +11,11 @@
 #include "AudioTools.h"
 #include "Communication/ESPNowStream.h"
 #include "AudioCodecs/CodecSBC.h"
-// #include "AudioLibs/AudioKit.h"
+// #include "AudioLibs/AudioBoardStream.h"
 
 
 ESPNowStream now;
-I2SStream out;  // or AudioKitStream
+I2SStream out;  // or AudioBoardStream
 EncodedAudioStream decoder(&out, new SBCDecoder(256)); // decode and write to I2S - ESP Now is limited to 256 bytes
 StreamCopy copier(decoder, now);     
 const char *peers[] = {"A8:48:FA:0B:93:02"};

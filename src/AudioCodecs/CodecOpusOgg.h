@@ -45,16 +45,15 @@ class OpusOggDecoder : public OggContainerDecoder {
 
   /// Provides access to the Opus configuration
   OpusSettings &config() { return dec.config(); }
-
-  void begin(OpusSettings settings) {
-    OggContainerDecoder::begin(settings);
-    dec.begin(settings);
+  bool begin(OpusSettings settings) {
+    OggContainerDecoder::begin();
+    return dec.begin(settings);
   }
 
-  void begin() override {
+  bool begin() override {
     TRACED();
     OggContainerDecoder::begin();
-    dec.begin();
+    return dec.begin();
   }
 
   void end() override {

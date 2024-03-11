@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AudioCodecs/AudioEncoded.h"
-#ifdef ARDUINO
+#if defined(ARDUINO) && !defined(IS_MIN_DESKTOP)
 #include "Print.h"
 #endif
 
@@ -30,11 +30,9 @@ public:
 
   virtual void setOutput(Print &out_stream) {pt_print=&out_stream;}
 
-  void begin() {}
+  bool begin() { return true; }
 
   void end() {}
-
-  AudioInfo audioInfo() { AudioInfo dummy; return dummy; }
 
   size_t write(const void *data, size_t len) { 
     TRACED();
@@ -42,8 +40,6 @@ public:
   }
 
   operator bool() { return true; }
-
-  void setNotifyAudioChange(AudioInfoSupport &bi) {}
 
   // The result is encoded data
   virtual bool isResultPCM() { return is_pcm;} 
@@ -72,25 +68,19 @@ public:
 
   virtual void setOutput(Print &out_stream) {pt_print=&out_stream;}
 
-  void begin() {}
+  bool begin() { return true;}
 
   void end() {}
-
-  AudioInfo audioInfo() { return info; }
-  void setAudioInfo(AudioInfo ai) { info = ai; }
 
   size_t write(const void *data, size_t len) { return pt_print->write((uint8_t*)data,len); }
 
   operator bool() { return true; }
-
-  void setNotifyAudioChange(AudioInfoSupport &bi) {}
 
   const char *mime() {return "audio/pcm";}
 
 
 protected:
   Print *pt_print=nullptr;
-  AudioInfo info;
 };
 
 using PCMEncoder = CopyEncoder;

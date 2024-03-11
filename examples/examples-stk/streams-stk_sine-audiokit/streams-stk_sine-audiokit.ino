@@ -8,11 +8,11 @@
 #include "SD_MMC.h"
 #include "AudioTools.h"
 #include "AudioLibs/AudioSTK.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 
 SineWave sine;
 STKStream<SineWave> in(sine);
-AudioKitStream out;
+AudioBoardStream out(AudioKitEs8388V1);
 StreamCopy copier(out, in);
 MusicalNotes notes;
 

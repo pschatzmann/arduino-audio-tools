@@ -43,7 +43,7 @@ public:
   DecoderBasic(Print &out_stream, AudioInfoSupport &bi) {
     TRACED();
     setOutput(out_stream);
-    setNotifyAudioChange(bi);
+    addNotifyAudioChange(bi);
   }
 
   /// Defines the output Stream
@@ -51,17 +51,17 @@ public:
     decoder.setOutput(out_stream);
   }
 
-  void setNotifyAudioChange(AudioInfoSupport &bi) override {
-    decoder.setNotifyAudioChange(bi);
+  void addNotifyAudioChange(AudioInfoSupport &bi) override {
+    decoder.addNotifyAudioChange(bi);
   }
 
   AudioInfo audioInfo() override { return decoder.audioInfo(); }
 
-  void begin(AudioInfo info) { decoder.begin(info); }
+  bool begin(AudioInfo info) { return decoder.begin(info); }
 
-  void begin() override {
+  bool begin() override {
     TRACED();
-    decoder.begin();
+    return decoder.begin();
   }
 
   void end() override { decoder.end(); }
@@ -102,11 +102,12 @@ public:
 
   /// We actually do nothing with this
   virtual void setAudioInfo(AudioInfo from) override {
+    AudioEncoder::setAudioInfo(from);
     encoder.setAudioInfo(from);
   }
 
   /// starts the processing using the actual RAWAudioInfo
-  virtual void begin() override { encoder.begin(); }
+  bool begin() override { return encoder.begin(); }
 
   /// stops the processing
   void end() override { encoder.end(); }

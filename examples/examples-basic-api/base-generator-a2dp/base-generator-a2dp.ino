@@ -2,15 +2,9 @@
  * @file base-generator-a2dp.ino
  * @author Phil Schatzmann
  * @brief We send a test sine signal to a bluetooth speaker
-  * @copyright GPLv3
+ * @copyright GPLv3
 */
 
-/**
- * @file base-generator-a2dp.ino
- * @author Phil Schatzmann
- * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/base-generator-a2dp/README.md
-  * @copyright GPLv3
-*/
 #include "AudioTools.h"
 #include "AudioLibs/AudioA2DP.h"
 

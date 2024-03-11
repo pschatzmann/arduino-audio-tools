@@ -12,14 +12,14 @@
 
 #include "AudioTools.h"
 #include "Communication/UDPStream.h"
-// #include "AudioLibs/AudioKit.h"
+// #include "AudioLibs/AudioBoardStream.h"
 
 const char* ssid="SSID";
 const char* password="password";
 AudioInfo info(22000, 1, 16);
 UDPStream udp(ssid, password); 
 const int udpPort = 7000;
-I2SStream out; // or ony other e.g. AudioKitStream
+I2SStream out; // or ony other e.g. AudioBoardStream
 StreamCopy copier(out, udp);     
 
 void setup() {

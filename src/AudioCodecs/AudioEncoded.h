@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AudioConfig.h"
+#include "AudioLogger.h"
 #include "AudioTools/AudioIO.h"
 #include "AudioTools/AudioOutput.h"
 #include "AudioTools/AudioStreams.h"
@@ -15,7 +16,7 @@ namespace audio_tools {
  * @copyright GPLv3
  */
 class AudioDecoder : public AudioWriter, public AudioInfoSource {
- public:
+public:
   AudioDecoder() = default;
   virtual ~AudioDecoder() = default;
   AudioDecoder(AudioDecoder const &) = delete;
@@ -27,9 +28,7 @@ class AudioDecoder : public AudioWriter, public AudioInfoSource {
   virtual void setAudioInfo(AudioInfo from) override {
     TRACED();
     if (info != from) {
-      if (p_notify != nullptr) {
-        p_notify->setAudioInfo(from);
-      }
+      notifyAudioChange(from);
     }
     info = from;
   }
@@ -37,32 +36,38 @@ class AudioDecoder : public AudioWriter, public AudioInfoSource {
   virtual void setOutput(AudioStream &out_stream) {
     Print *p_print = &out_stream;
     setOutput(*p_print);
-    setNotifyAudioChange(out_stream);
+    addNotifyAudioChange(out_stream);
   }
 
   /// Defines where the decoded result is written to
   virtual void setOutput(AudioOutput &out_stream) {
     Print *p_print = &out_stream;
     setOutput(*p_print);
-    setNotifyAudioChange(out_stream);
+    addNotifyAudioChange(out_stream);
   }
 
   /// Defines where the decoded result is written to
-  virtual void setOutput(Print &out_stream) override {
-    p_print = &out_stream;
-  }
+  virtual void setOutput(Print &out_stream) override { p_print = &out_stream; }
   /// If true, the decoding result is PCM data
   virtual bool isResultPCM() { return true; }
 
-  /// Registers an object that is notified if the audio format is changing
-  void setNotifyAudioChange(AudioInfoSupport &notify) override {
-    p_notify = &notify;
-  }
+  /// custom id to be used by application
+  int id;
 
- protected:
+protected:
   Print *p_print = nullptr;
   AudioInfo info;
-  AudioInfoSupport *p_notify = nullptr;
+};
+
+/**
+ * @brief Parent class for all container formats
+ * @ingroup codecs
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+
+class ContainerDecoder : public AudioDecoder {
+   bool isResultPCM() override { return true; }
 };
 
 /**
@@ -72,27 +77,31 @@ class AudioDecoder : public AudioWriter, public AudioInfoSource {
  * @copyright GPLv3
  */
 class AudioEncoder : public AudioWriter {
- public:
+public:
   AudioEncoder() = default;
   virtual ~AudioEncoder() = default;
   AudioEncoder(AudioEncoder const &) = delete;
   AudioEncoder &operator=(AudioEncoder const &) = delete;
   /// Provides the mime type of the encoded result
   virtual const char *mime() = 0;
-  /// Defines the sample rate, number of channels and bits per sample 
-  virtual void setAudioInfo(AudioInfo from) override{};
+  /// Defines the sample rate, number of channels and bits per sample
+  void setAudioInfo(AudioInfo from) override { info = from;};
+  AudioInfo audioInfo() {return info;}
+
+protected:
+  AudioInfo info;
+
 };
 
 class AudioDecoderExt : public AudioDecoder {
-  public:
+public:
   virtual void setBlockSize(int blockSize) = 0;
 };
 
 class AudioEncoderExt : public AudioEncoder {
-  public:
-  virtual int blockSize() =0;
+public:
+  virtual int blockSize() = 0;
 };
-
 
 /**
  * @brief Dummy no implmentation Codec. This is used so that we can initialize
@@ -103,16 +112,16 @@ class AudioEncoderExt : public AudioEncoder {
  * @copyright GPLv3
  */
 class CodecNOP : public AudioDecoder, public AudioEncoder {
- public:
+public:
   static CodecNOP *instance() {
     static CodecNOP self;
     return &self;
   }
 
-  virtual void begin() {}
+  virtual bool begin() { return true; }
   virtual void end() {}
   virtual void setOutput(Print &out_stream) {}
-  virtual void setNotifyAudioChange(AudioInfoSupport &bi) {}
+  virtual void addNotifyAudioChange(AudioInfoSupport &bi) {}
   virtual void setAudioInfo(AudioInfo info) {}
 
   virtual AudioInfo audioInfo() {
@@ -138,36 +147,37 @@ class CodecNOP : public AudioDecoder, public AudioEncoder {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class StreamingDecoder {
- public:
+class StreamingDecoder : public AudioInfoSource {
+public:
   /// Starts the processing
-  virtual void begin() = 0;
+  virtual bool begin() = 0;
 
   /// Releases the reserved memory
   virtual void end() = 0;
 
   /// Defines the output Stream
-  virtual void setOutput(Print &outStream) = 0;
-
-  /// Register Output Stream to be notified about changes
-  virtual void setNotifyAudioChange(AudioInfoSupport &bi) = 0;
+  virtual void setOutput(Print &out_stream) { p_print = &out_stream; }
 
   /// Defines the output streams and register to be notified
   virtual void setOutput(AudioStream &out_stream) {
     Print *p_print = &out_stream;
     setOutput(*p_print);
-    setNotifyAudioChange(out_stream);
+    addNotifyAudioChange(out_stream);
   }
 
   /// Defines the output streams and register to be notified
   virtual void setOutput(AudioOutput &out_stream) {
     Print *p_print = &out_stream;
     setOutput(*p_print);
-    setNotifyAudioChange(out_stream);
+    addNotifyAudioChange(out_stream);
   }
 
-  /// Defines the input data stream
-  virtual void setInputStream(Stream &inStream) = 0;
+  /// Stream Interface: Decode directly by taking data from the stream. This is
+  /// more efficient then feeding the decoder with write: just call copy() in
+  /// the loop
+  void setInput(Stream &inStream) { this->p_input = &inStream; }
+  /// Obsolete: same as setInput
+  void setInputStream(Stream &inStream) { setInput(inStream); }
 
   /// Provides the last available MP3FrameInfo
   virtual AudioInfo audioInfo() = 0;
@@ -178,8 +188,63 @@ class StreamingDecoder {
   /// Process a single read operation - to be called in the loop
   virtual bool copy() = 0;
 
- protected:
+protected:
   virtual size_t readBytes(uint8_t *buffer, size_t len) = 0;
+  Print *p_print = nullptr;
+  Stream *p_input = nullptr;
+};
+
+/**
+ * @brief Converts any AudioDecoder to a StreamingDecoder 
+ * @ingroup codecs
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+*/
+class StreamingDecoderAdapter : public StreamingDecoder {
+public:
+  StreamingDecoderAdapter(AudioDecoder &decoder,
+                          int copySize = DEFAULT_BUFFER_SIZE) {
+    p_decoder = &decoder;
+    if (copySize>0)
+      resize(copySize);
+  }
+  /// Starts the processing
+  bool begin() override {return p_input != nullptr && p_decoder->begin();}
+
+  /// Releases the reserved memory
+  void end() override {p_decoder->end();}
+
+  /// Defines the output Stream
+  void setOutput(Print &out_stream) override { p_decoder->setOutput(out_stream); }
+
+  /// Provides the last available MP3FrameInfo
+  AudioInfo audioInfo() override { return p_decoder->audioInfo();}
+
+  /// checks if the class is active
+  virtual operator bool() { return *p_decoder;}
+
+  /// Process a single read operation - to be called in the loop
+  virtual bool copy() {
+    int read = readBytes(&buffer[0], buffer.size());
+    int written = 0;
+    if (read > 0) written = p_decoder->write(&buffer[0], read);
+    return written > 0;
+  }
+
+  /// Adjust the buffer size: the existing content of the buffer is lost! 
+  void resize(int bufferSize){
+    buffer.resize(bufferSize);
+  }
+
+protected:
+  AudioDecoder *p_decoder = nullptr;
+  Vector<uint8_t> buffer{0};
+
+  size_t readBytes(uint8_t *buffer, size_t len) override {
+    if (p_input==nullptr) return 0;
+    return p_input->readBytes(buffer, len);
+  }
+
 };
 
 /**
@@ -191,8 +256,7 @@ class StreamingDecoder {
  * @copyright GPLv3
  */
 class EncodedAudioOutput : public AudioStream {
- public:
-
+public:
   EncodedAudioOutput() {
     TRACED();
     active = false;
@@ -210,7 +274,7 @@ class EncodedAudioOutput : public AudioStream {
     ptr_out = outputStream;
     decoder_ptr = decoder;
     decoder_ptr->setOutput(*outputStream);
-    decoder_ptr->setNotifyAudioChange(*outputStream);
+    decoder_ptr->addNotifyAudioChange(*outputStream);
     writer_ptr = decoder_ptr;
     active = false;
   }
@@ -220,7 +284,7 @@ class EncodedAudioOutput : public AudioStream {
     ptr_out = outputStream;
     decoder_ptr = decoder;
     decoder_ptr->setOutput(*outputStream);
-    decoder_ptr->setNotifyAudioChange(*outputStream);
+    decoder_ptr->addNotifyAudioChange(*outputStream);
     writer_ptr = decoder_ptr;
     active = false;
   }
@@ -248,7 +312,7 @@ class EncodedAudioOutput : public AudioStream {
     ptr_out = outputStream;
     encoder_ptr = encoder;
     encoder_ptr->setOutput(*outputStream);
-    decoder_ptr->setNotifyAudioChange(*outputStream);
+    decoder_ptr->addNotifyAudioChange(*outputStream);
     writer_ptr = encoder_ptr;
     active = false;
   }
@@ -258,16 +322,15 @@ class EncodedAudioOutput : public AudioStream {
     ptr_out = outputStream;
     encoder_ptr = encoder;
     encoder_ptr->setOutput(*outputStream);
-    decoder_ptr->setNotifyAudioChange(*outputStream);
+    decoder_ptr->addNotifyAudioChange(*outputStream);
     writer_ptr = encoder_ptr;
     active = false;
   }
 
-
   /// Define object which need to be notified if the basinfo is changing
-  void setNotifyAudioChange(AudioInfoSupport &bi) override {
+  void addNotifyAudioChange(AudioInfoSupport &bi) override {
     TRACEI();
-    decoder_ptr->setNotifyAudioChange(bi);
+    decoder_ptr->addNotifyAudioChange(bi);
   }
 
   AudioInfo defaultConfig() {
@@ -280,7 +343,7 @@ class EncodedAudioOutput : public AudioStream {
 
   virtual void setAudioInfo(AudioInfo info) override {
     TRACED();
-    if (this->info != info && info.channels!=0 && info.sample_rate!=0) {
+    if (this->info != info && info.channels != 0 && info.sample_rate != 0) {
       this->info = info;
       decoder_ptr->setAudioInfo(info);
       encoder_ptr->setAudioInfo(info);
@@ -292,7 +355,7 @@ class EncodedAudioOutput : public AudioStream {
     ptr_out = outputStream;
     if (decoder_ptr != nullptr) {
       decoder_ptr->setOutput(*ptr_out);
-    }    
+    }
     if (encoder_ptr != nullptr) {
       encoder_ptr->setOutput(*ptr_out);
     }
@@ -312,6 +375,8 @@ class EncodedAudioOutput : public AudioStream {
     }
   }
 
+  AudioEncoder *getEncoder() { return encoder_ptr; }
+
   void setDecoder(AudioDecoder *decoder) {
     if (decoder == nullptr) {
       decoder = CodecNOP::instance();
@@ -323,6 +388,8 @@ class EncodedAudioOutput : public AudioStream {
     }
   }
 
+  AudioDecoder *getDecoder() { return decoder_ptr; }
+
   /// Starts the processing - sets the status to active
   bool begin() override {
     custom_log_level.set();
@@ -332,10 +399,10 @@ class EncodedAudioOutput : public AudioStream {
       const CodecNOP *nop = CodecNOP::instance();
       if (decoder_ptr != nop || encoder_ptr != nop) {
         active = true;
-        decoder_ptr->setAudioInfo(info);
-        encoder_ptr->setAudioInfo(info);
-        decoder_ptr->begin();
-        encoder_ptr->begin();
+        if (!decoder_ptr->begin(info))
+          active = false;
+        if (!encoder_ptr->begin(info))
+          active = false;
       } else {
         LOGW("no decoder or encoder defined");
       }
@@ -374,7 +441,7 @@ class EncodedAudioOutput : public AudioStream {
       return 0;
     }
 
-    if(check_available_for_write && availableForWrite()==0){
+    if (check_available_for_write && availableForWrite() == 0) {
       return 0;
     }
 
@@ -386,8 +453,9 @@ class EncodedAudioOutput : public AudioStream {
   }
 
   int availableForWrite() override {
-    if (!check_available_for_write) return  frame_size;
-    return min(ptr_out->availableForWrite(), frame_size); 
+    if (!check_available_for_write)
+      return frame_size;
+    return min(ptr_out->availableForWrite(), frame_size);
   }
 
   /// Returns true if status is active and we still have data to be processed
@@ -400,23 +468,17 @@ class EncodedAudioOutput : public AudioStream {
   AudioEncoder &encoder() { return *encoder_ptr; }
 
   /// Defines the class specific custom log level
-  void setLogLevel(AudioLogger::LogLevel level){
-    custom_log_level.set(level);
-  }
+  void setLogLevel(AudioLogger::LogLevel level) { custom_log_level.set(level); }
   /// Is Available for Write check activated ?
-  bool isCheckAvailableForWrite() {
-      return check_available_for_write;
-  }
+  bool isCheckAvailableForWrite() { return check_available_for_write; }
 
   /// defines the size of the decoded frame in bytes
-  void setFrameSize(int size){
-    frame_size = size;
-  }
+  void setFrameSize(int size) { frame_size = size; }
 
- protected:
-  //AudioInfo info;
-  AudioDecoder *decoder_ptr = CodecNOP::instance();  // decoder
-  AudioEncoder *encoder_ptr = CodecNOP::instance();  // decoder
+protected:
+  // AudioInfo info;
+  AudioDecoder *decoder_ptr = CodecNOP::instance(); // decoder
+  AudioEncoder *encoder_ptr = CodecNOP::instance(); // decoder
   AudioWriter *writer_ptr = nullptr;
   Print *ptr_out = nullptr;
   bool active = false;
@@ -436,8 +498,7 @@ using EncodedAudioPrint = EncodedAudioOutput;
  * @copyright GPLv3
  */
 class EncodedAudioStream : public EncodedAudioOutput {
- public:
-
+public:
   EncodedAudioStream() : EncodedAudioOutput() {}
 
   EncodedAudioStream(AudioStream *ioStream, AudioDecoder *decoder)
@@ -464,10 +525,8 @@ class EncodedAudioStream : public EncodedAudioOutput {
   EncodedAudioStream(Print *outputStream, AudioDecoder *decoder)
       : EncodedAudioOutput(outputStream, decoder) {}
 
-
   EncodedAudioStream(Print *outputStream, AudioEncoder *encoder)
       : EncodedAudioOutput(outputStream, encoder) {}
-
 
   /// Same as setStream()
   void setInput(Stream *ioStream) { setStream(ioStream); }
@@ -496,7 +555,8 @@ class EncodedAudioStream : public EncodedAudioOutput {
   void resize() { resize(1024 * 10); }
 
   int available() override {
-    if (p_stream == nullptr) return 0;
+    if (p_stream == nullptr)
+      return 0;
     decode(reqested_bytes);
     return decoded_buffer.available();
   }
@@ -514,7 +574,7 @@ class EncodedAudioStream : public EncodedAudioOutput {
     return result;
   }
 
- protected:
+protected:
   RingBuffer<uint8_t> decoded_buffer{0};
   QueueStream<uint8_t> queue_stream{decoded_buffer};
   Vector<uint8_t> copy_buffer{DEFAULT_BUFFER_SIZE};
@@ -567,13 +627,13 @@ class EncodedAudioStream : public EncodedAudioOutput {
  */
 
 class AudioWriterToAudioOutput : public AudioOutputAdapter {
- public:
+public:
   void setWriter(AudioWriter *writer) { p_writer = writer; }
   size_t write(const uint8_t *in_ptr, size_t in_size) {
     return p_writer->write(in_ptr, in_size);
   };
 
- protected:
+protected:
   AudioWriter *p_writer = nullptr;
 };
 
@@ -585,19 +645,21 @@ class AudioWriterToAudioOutput : public AudioOutputAdapter {
  * @copyright GPLv3
  */
 class ContainerTarget {
- public:
+public:
   virtual bool begin() = 0;
   virtual void end() = 0;
   virtual void setAudioInfo(AudioInfo info) {
-    if (this->info != info && info.channels!=0 && info.sample_rate!=0) {
+    if (this->info != info && info.channels != 0 && info.sample_rate != 0) {
       this->info = info;
-      if (p_writer1 != nullptr) p_writer1->setAudioInfo(info);
-      if (p_writer2 != nullptr) p_writer2->setAudioInfo(info);
+      if (p_writer1 != nullptr)
+        p_writer1->setAudioInfo(info);
+      if (p_writer2 != nullptr)
+        p_writer2->setAudioInfo(info);
     }
   }
   virtual size_t write(uint8_t *data, size_t size) = 0;
 
- protected:
+protected:
   AudioInfo info;
   AudioWriter *p_writer1 = nullptr;
   AudioWriter *p_writer2 = nullptr;
@@ -606,7 +668,7 @@ class ContainerTarget {
 };
 
 class ContainerTargetPrint : public ContainerTarget {
- public:
+public:
   void setupOutput(AudioWriter *writer1, AudioWriter *writer2, Print &print) {
     p_print = &print;
     p_writer1 = writer1;
@@ -636,8 +698,10 @@ class ContainerTargetPrint : public ContainerTarget {
   }
   virtual void end() {
     if (active) {
-      if (p_writer1 != nullptr) p_writer1->end();
-      if (p_writer2 != nullptr) p_writer2->end();
+      if (p_writer1 != nullptr)
+        p_writer1->end();
+      if (p_writer2 != nullptr)
+        p_writer2->end();
     }
     active = false;
   }
@@ -646,9 +710,9 @@ class ContainerTargetPrint : public ContainerTarget {
     return p_writer1->write(data, size);
   }
 
- protected:
+protected:
   Print *p_print = nullptr;
   AudioWriterToAudioOutput print2;
 };
 
-}  // namespace audio_tools
+} // namespace audio_tools

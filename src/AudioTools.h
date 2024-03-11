@@ -65,7 +65,6 @@
 #include "AudioTimer/AudioTimer.h"
 #include "AudioTools/AudioTypes.h"
 #include "AudioTools/Buffers.h"
-#include "AudioTools/SynchronizedBuffers.h"
 #include "AudioTools/BaseConverter.h"
 #include "AudioFilter/Filter.h"
 #include "AudioFilter/Equilizer.h"
@@ -86,6 +85,7 @@
 #include "AudioCodecs/AudioCodecs.h"
 #include "AudioEffects/SoundGenerator.h"
 #include "AudioEffects/AudioEffects.h"
+#include "AudioEffects/AudioEffectsSuite.h"
 #include "AudioEffects/PitchShift.h"
 #include "AudioMetaData/MetaData.h"
 #include "AudioHttp/AudioHttp.h"
@@ -112,7 +112,7 @@
  * @brief Set namespace
  * 
  */
-#ifndef NO_AUDIOTOOLS_NS
+#if USE_AUDIOTOOLS_NS
 using namespace audio_tools;  
 #endif
 

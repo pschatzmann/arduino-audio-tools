@@ -11,7 +11,7 @@
 #include <ArduinoJson.h>  // https://arduinojson.org/
 #include "HttpServer.h" // https://github.com/pschatzmann/TinyHttp
 #include "AudioTools.h" // https://github.com/pschatzmann/arduino-audio-tools.git
-#include "AudioLibs/AudioKit.h" // https://github.com/pschatzmann/arduino-audiokit.git
+#include "AudioLibs/AudioBoardStream.h" // https://github.com/pschatzmann/arduino-audio-driver.git
 
 // Server
 WiFiServer wifi;
@@ -39,7 +39,7 @@ Fuzz fuzz(fuzzEffectValue);
 Tremolo tremolo(tremoloDuration, tremoloDepth, sample_rate);
 
 // Audio
-AudioKitStream kit; // Access I2S as stream
+AudioBoardStream kit(AudioKitEs8388V1); // Access I2S as stream
 AudioEffectStream effects(kit); // input from kit
 StreamCopy copier(kit, effects); // copy effects to kit
 
@@ -131,7 +131,7 @@ void setup(void) {
   // Setup Kit
   auto cfg = kit.defaultConfig(RXTX_MODE);
   cfg.sd_active = false;
-  cfg.input_device = AUDIO_HAL_ADC_INPUT_LINE2;
+  cfg.input_device = ADC_INPUT_LINE2;
   cfg.sample_rate = sample_rate;
   cfg.channels = channels;
   // minimize lag
