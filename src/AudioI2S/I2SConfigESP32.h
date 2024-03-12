@@ -74,7 +74,7 @@ class I2SConfigESP32 : public AudioInfo {
     int pin_ws = PIN_I2S_WS;
     int pin_bck = PIN_I2S_BCK;
     int pin_data; // rx or tx pin dependent on mode: tx pin for RXTX_MODE
-    int pin_data_rx; // rx pin for RXTX_MODE
+    int pin_data_rx = -1; // rx pin for RXTX_MODE
     int pin_mck = PIN_I2S_MCK;
     int buffer_count = I2S_BUFFER_COUNT;
     int buffer_size = I2S_BUFFER_SIZE;
