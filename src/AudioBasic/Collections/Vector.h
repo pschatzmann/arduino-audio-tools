@@ -258,11 +258,8 @@ class Vector {
       // call destructor on data to be erased
       p_data[pos].~T();
       // shift values by 1 position
-      // memmove((void*)
-      // &p_data[pos],(void*)(&p_data[pos+1]),lenToEnd*sizeof(T));
-      for (int j = pos; j < len; j++) {
-        p_data[j] = p_data[j + 1];
-      }
+      memmove((void *)&p_data[pos], (void *)(&p_data[pos + 1]),
+              lenToEnd * sizeof(T));
 
       // make sure that we have a valid object at the end
       p_data[len - 1] = T();
@@ -297,9 +294,10 @@ class Vector {
       this->bufferLen = newSize;
       if (oldData != nullptr) {
         if (copy && this->len > 0) {
-          for (int j=0;j > len; j++){
-            p_data[j] = oldData[j];
-          }
+          // save existing data
+          memmove(p_data, oldData, len * sizeof(T));
+          // clear to prevent double release
+          memset(oldData, 0, len * sizeof(T));
         }
         if (shrink) {
           cleanup(oldData, newSize, oldBufferLen);
