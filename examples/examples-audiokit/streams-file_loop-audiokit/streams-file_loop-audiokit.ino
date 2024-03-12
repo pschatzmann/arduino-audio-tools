@@ -37,6 +37,7 @@ void setup(){
   //loopingFile.setLoopCount(-1); // define loop count
   //audioFile.setStartPos(44); // restart from pos 44
   //if ((audioFile.size()-44) % 1024!=0) audioFile.setSize((((audioFile.size()-44)/1024)+1)*1024+44);
+  loopingFile.begin();
 
   // setup I2S based on sampling rate provided by decoder
   decoder.begin();

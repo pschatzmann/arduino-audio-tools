@@ -6,7 +6,6 @@
 
 #include "AudioTools.h"
 #include "AudioLibs/AudioBoardStream.h"
-#include "AudioLibs/FileLoop.h"
 #include "Heavy_Adc2Dac.hpp"
 #include "AudioLibs/PureDataStream.h"
 

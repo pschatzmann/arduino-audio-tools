@@ -105,7 +105,8 @@ public:
     int result1 = current_file.readBytes((READTYPE *)data, copy_len);
     int result2 = 0;
     int open = copy_len - result1;
-    if (isLoopActive() && open>0) {
+    if (isLoopActive() && open > 0) {
+      if (start_pos < 0) start_pos = 0;
       LOGI("seek %d", start_pos);
       // looping logic -> rewind to beginning: read step 2
       current_file.seek(start_pos);
@@ -135,7 +136,7 @@ public:
   bool isLoopActive() { return loop_count > 0 || loop_count == -1; }
 
 protected:
-  int start_pos = 0;
+  int start_pos = -1;
   int loop_count = -1;
   int size_open = -1;
   int total_size = -1;
