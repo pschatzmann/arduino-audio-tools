@@ -1,5 +1,5 @@
 /**
- * Test sketch for adc2dac.pd that was compiled with hvcc -n test test.pd
+ * Test sketch for adc2dac.pd that was compiled with hvcc -n Adc2Dac adc2dac.pd
  * The ADC receives data from the SineWaveGenerator and the output from the
  * DAC is copied to I2S (AudioBoardStream)
  */
