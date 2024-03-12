@@ -23,7 +23,7 @@ namespace audio_tools {
 template <class FileType> class FileLoopT : public AudioStream {
 public:
   FileLoopT() = default;
-  FileLoopT(FileType file, int count = -1, int rewindPos = 0) {
+  FileLoopT(FileType file, int count = -1, int rewindPos = -1) {
     setFile(file);
     setLoopCount(count);
     setStartPos(rewindPos);
@@ -32,7 +32,17 @@ public:
   // restarts the file from the beginning
   bool begin() override {
     TRACEI();
-    current_file.seek(start_pos);
+    // automatic determination of start pos
+    if (start_pos <= 0){
+      current_file.seek(0);
+      char tmp[5] = {0};
+      current_file.readBytes(tmp, 4);
+      // for wav files remove header
+      start_pos = Str(tmp).equals("RIFF") ? 44 : 0;
+      current_file.seek(0);
+    } else {
+      current_file.seek(start_pos);
+    }
     size_open = total_size;
     return current_file;
   }
@@ -96,7 +106,7 @@ public:
     int result2 = 0;
     int open = copy_len - result1;
     if (isLoopActive() && open>0) {
-      LOGI("seek 0");
+      LOGI("seek %d", start_pos);
       // looping logic -> rewind to beginning: read step 2
       current_file.seek(start_pos);
       // notify user
