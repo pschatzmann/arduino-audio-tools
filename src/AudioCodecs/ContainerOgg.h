@@ -56,12 +56,12 @@ class OggContainerDecoder : public ContainerDecoder {
   bool begin(AudioInfo info) override {
     TRACED();
     this->info = info;
-    out.setAudioInfo(info);
     return begin();
   }
 
   bool begin() override {
     TRACED();
+    out.setAudioInfo(info);
     out.begin();
     if (p_oggz == nullptr) {
       p_oggz = oggz_new(OGGZ_READ | OGGZ_AUTO);  // OGGZ_NONSTRICT

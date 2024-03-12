@@ -59,7 +59,7 @@ class OpusOggDecoder : public OggContainerDecoder {
 
   void end() override {
     TRACED();
-    OggContainerDecoder::begin();
+    OggContainerDecoder::end();
     dec.end();
   }
 
