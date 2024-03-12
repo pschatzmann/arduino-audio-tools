@@ -217,16 +217,38 @@ class I2SCodecStream : public AudioStream {
       cfg.pin_bck = i2s_pins.bck;
       cfg.pin_mck = i2s_pins.mclk;
       cfg.pin_ws = i2s_pins.ws;
-      cfg.pin_data = i2s_pins.data_out;
-      cfg.pin_data_rx = i2s_pins.data_in;
+      switch (cfg.rx_tx_mode) {
+        case RX_MODE:
+          cfg.pin_data = i2s_pins.data_in;
+          break;
+        case TX_MODE:
+          cfg.pin_data = i2s_pins.data_out;
+          break;
+        default:
+          cfg.pin_data = i2s_pins.data_out;
+          cfg.pin_data_rx = i2s_pins.data_in;
+          break;
+      }
     }
   }
 
   bool beginCodec(I2SCodecConfig info) {
+    switch (cfg.rx_tx_mode) {
+      case RX_MODE:
+        codec_cfg.input_device = info.input_device;
+        codec_cfg.output_device = DAC_OUTPUT_NONE;
+        break;
+      case TX_MODE:
+        codec_cfg.output_device = info.output_device;
+        codec_cfg.input_device = ADC_INPUT_NONE;
+        break;
+      default:
+        codec_cfg.input_device = info.input_device;
+        codec_cfg.output_device = info.output_device;
+        break;
+    }
     codec_cfg.sd_active = info.sd_active;
-    codec_cfg.input_device = info.input_device;
     LOGD("input: %d", info.input_device);
-    codec_cfg.output_device = info.output_device;
     LOGD("output: %d", info.output_device);
     codec_cfg.i2s.bits = toCodecBits(info.bits_per_sample);
     codec_cfg.i2s.rate = toRate(info.sample_rate);
