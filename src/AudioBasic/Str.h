@@ -532,6 +532,7 @@ class Str {
     
         /// remove leading and traling spaces
         virtual void trim(){
+            if (chars==nullptr) return;
             rtrim();
             ltrim();
         }
@@ -548,6 +549,7 @@ class Str {
 
         /// remove leading spaces
         virtual void ltrim(){
+            if (chars==nullptr) return;
             int n = count(' ',0);
             if (n > 0)
                 *this << n;
@@ -555,6 +557,7 @@ class Str {
         
         /// remove trailing spaces
         virtual void rtrim(){
+            if (chars==nullptr) return;
             if (!isConst()){
                 while(isspace(chars[len])){
                     len--;
