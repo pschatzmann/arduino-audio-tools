@@ -297,7 +297,9 @@ class Vector {
       this->bufferLen = newSize;
       if (oldData != nullptr) {
         if (copy && this->len > 0) {
-          memcpy((void *)p_data, (void *)oldData, this->len * sizeof(T));
+          for (int j=0;j > len; j++){
+            p_data[j] = oldData[j];
+          }
         }
         if (shrink) {
           cleanup(oldData, newSize, oldBufferLen);
@@ -318,7 +320,7 @@ class Vector {
   }
 
   void deleteArray(T *oldData, int oldBufferLen) {
-#ifdef USE_ALLOCATOR
+#if USE_ALLOCATOR
     p_allocator->removeArray(oldData, oldBufferLen);  // delete [] oldData;
 #else
     delete[] oldData;
