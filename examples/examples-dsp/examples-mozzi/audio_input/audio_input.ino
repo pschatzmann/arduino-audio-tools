@@ -1,6 +1,10 @@
 /**
  * Mozzi Input example: we get the input from a generator and
- * output the audio via i2s again.
+ * output the audio via i2s again. In this example we use the 
+ * default value range of 0-1023 for the getAudioInput() method.
+ * However usually it is easier to define the desired range in
+ * the Mozzi configuration object: e.g. cfg.input_range_from = -244;
+ * cfg.input_range_to = 243;
  */
 #include "AudioTools.h"
 #include "AudioLibs/AudioBoardStream.h"
