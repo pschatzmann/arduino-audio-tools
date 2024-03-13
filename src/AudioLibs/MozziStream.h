@@ -13,7 +13,6 @@ struct MozziConfig : AudioInfo {
   int input_range_from = 0;
   int input_range_to = 1023;
   int16_t output_volume = 10;
-  // STANDARD modes this is between -244 and 243 inclusive
 };
 
 /**
@@ -40,6 +39,12 @@ class MozziStream : public AudioStream {
     if (cfg.bits_per_sample != 16){
         return false;
     }
+
+    // initialize range
+    input_min = 32767;
+    input_max = -32768;
+
+    // setup control counter
     control_counter_max = info.sample_rate / cfg.control_rate;
     if (control_counter_max <= 0) {
       control_counter_max = 1;
@@ -80,7 +85,7 @@ class MozziStream : public AudioStream {
   }
 
   /// Gets the next audio value either from the assigned Input Stream or the
-  /// buffer that was filled by write()
+  /// buffer that was filled by write(). The data range is defined in MozziConfig
   int getAudioInput() {
     int16_t result[cfg.channels] = {0};
     if (p_input != nullptr) {
@@ -88,8 +93,11 @@ class MozziStream : public AudioStream {
     } else {
       buffer.readArray((uint8_t*)&result, sizeof(int16_t) * cfg.channels);
     }
-    return map(avg(result), -32768, 32767, cfg.input_range_from,
-               cfg.input_range_to);
+    int sample = avg(result);
+    if (sample < input_min) input_min = sample;
+    if (sample > input_max) input_max = sample;
+    int sample1 = map(sample, input_min, input_max, cfg.input_range_from, cfg.input_range_to );
+    return sample1;
   }
 
  protected:
@@ -99,6 +107,8 @@ class MozziStream : public AudioStream {
   RingBuffer<uint8_t> buffer{0};
   Stream* p_input = nullptr;
   bool active = false;
+  int input_min = 32767;
+  int input_max = -32768;
 
   int16_t avg(int16_t* values) {
     int total = 0;
@@ -118,7 +128,7 @@ class MozziStream : public AudioStream {
       }
     }
 
-    // return left value
+    // updateAudio() STANDARD mode is between -244 and 243 inclusive
     int result = updateAudio() * cfg.output_volume;
     // clip result
     if (result > 32767) result = 32767;
