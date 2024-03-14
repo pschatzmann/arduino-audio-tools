@@ -44,7 +44,7 @@ class MozziStream : public AudioStream {
 
   bool begin() {
     if (cfg.bits_per_sample != 16) {
-      LOG("bits_per_sample must be 16 and not %d", cfg.bits_per_sample);
+      LOGE("bits_per_sample must be 16 and not %d", cfg.bits_per_sample);
       return false;
     }
 
