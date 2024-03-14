@@ -289,10 +289,12 @@ class URLStream : public AbstractURLStream {
     if (active) end();
 
 #ifdef USE_WIFI
-    // optional: login if necessary
-    if (!login()){
-      LOGE("Not connected");
-      return false;
+    // optional: login if necessary if no external client is defined
+    if (client == nullptr){
+      if (!login()){
+        LOGE("Not connected");
+        return false;
+      }
     }
 
 #endif
@@ -404,6 +406,7 @@ class URLStream : public AbstractURLStream {
       delay(10);
       return WiFi.status() == WL_CONNECTED;
     }
+    return WiFi.status() == WL_CONNECTED;
 #else 
     return false;
 #endif
