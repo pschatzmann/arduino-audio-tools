@@ -10,9 +10,9 @@
 
 const int sample_rate = 16000;
 AudioInfo info(sample_rate, 1, 16);
-AudioBoardStream i2s(AudioKitEs8388V1);  // final output of decoded stream
-MozziStream mozzi;
-StreamCopy copier(i2s, mozzi);
+AudioBoardStream i2s(AudioKitEs8388V1);  // audio sink
+MozziStream mozzi; // audio source
+StreamCopy copier(i2s, mozzi); // copy source to sink
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file
 // of table #included above
 Oscil<SIN2048_NUM_CELLS, sample_rate> aSin(SIN2048_DATA);
