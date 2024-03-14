@@ -73,12 +73,16 @@ class PureDataStream : public AudioStream {
     flush();
     buffer_read.resize(0);
     buffer_write.resize(0);
+    in.resize(0);
+    out.resize(0);
   }
 
  protected:
   HeavyContextInterface *p_heavy = nullptr;
   RingBuffer<uint8_t> buffer_write{0};
   RingBuffer<uint8_t> buffer_read{0};
+  Vector<float> in{0};
+  Vector<float> out{0};
   float volume = 1.0f;
   int buffer_size;
   const float max_int = 32767.0;
@@ -94,8 +98,8 @@ class PureDataStream : public AudioStream {
     samples = samples / HV_N_SIMD * HV_N_SIMD;
     int frames = samples / out_channels;
 
-    float in[samples] = {0};
-    float out[samples] = {0};
+    if (in.size()<samples) in.resize(samples);
+    if (out.size()<samples) out.resize(samples);
 
     // convert int16 to float
     if (buffer_write.size() > 0) {
@@ -108,7 +112,7 @@ class PureDataStream : public AudioStream {
     }
 
     // process data
-    int frames_eff = p_heavy->processInlineInterleaved(in, out, frames);
+    int frames_eff = p_heavy->processInlineInterleaved(in.data(), out.data(), frames);
     // LOGI("%d -> %d", frames, frames_eff);
     assert(frames == frames_eff);
 
