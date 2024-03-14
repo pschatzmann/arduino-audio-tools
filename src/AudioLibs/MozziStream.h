@@ -23,9 +23,16 @@ struct MozziConfig : AudioInfo {
  */
 class MozziStream : public AudioStream {
  public:
+  MozziStream() = default;
+
+  MozziStream(Stream& in) { setInput(in); }
+
   MozziConfig defaultConfig() { return cfg; }
+
   void setAudioInfo(AudioInfo info) { cfg.copyFrom(info); }
+  
   int audioRate() { return cfg.sample_rate; }
+  
   void setInput(Stream& in) { p_input = &in; }
 
   AudioInfo audioInfo() { return cfg; }
@@ -36,11 +43,12 @@ class MozziStream : public AudioStream {
   }
 
   bool begin() {
-    if (cfg.bits_per_sample != 16){
-        return false;
+    if (cfg.bits_per_sample != 16) {
+      LOG("bits_per_sample must be 16 and not %d", cfg.bits_per_sample);
+      return false;
     }
 
-    // initialize range
+    // initialize range for input range determination
     input_min = 32767;
     input_max = -32768;
 
@@ -54,12 +62,12 @@ class MozziStream : public AudioStream {
     return true;
   }
 
-  void end() {
-    active = false;
-  }
+  void end() { active = false; }
 
+  /// Defines the multiplication factor to scale the Mozzi value range to int16_t
   void setVolume(int16_t vol) { cfg.output_volume = vol; }
 
+  /// Provides the data filled by calling updateAudio()
   size_t readBytes(uint8_t* data, size_t byteCount) {
     if (!active) return 0;
     int samples = byteCount / sizeof(int16_t);
@@ -85,7 +93,8 @@ class MozziStream : public AudioStream {
   }
 
   /// Gets the next audio value either from the assigned Input Stream or the
-  /// buffer that was filled by write(). The data range is defined in MozziConfig
+  /// buffer that was filled by write(). The data range is defined in
+  /// MozziConfig
   int getAudioInput() {
     int16_t result[cfg.channels] = {0};
     if (p_input != nullptr) {
@@ -93,10 +102,13 @@ class MozziStream : public AudioStream {
     } else {
       buffer.readArray((uint8_t*)&result, sizeof(int16_t) * cfg.channels);
     }
+    // when we have multiple channels we provide the avg value
     int sample = avg(result);
+    // calculate dynamic range 
     if (sample < input_min) input_min = sample;
     if (sample > input_max) input_max = sample;
-    int sample1 = map(sample, input_min, input_max, cfg.input_range_from, cfg.input_range_to );
+    int sample1 = map(sample, input_min, input_max, cfg.input_range_from,
+                      cfg.input_range_to);
     return sample1;
   }
 
@@ -122,10 +134,8 @@ class MozziStream : public AudioStream {
     // control update
     if (--control_counter < 0) {
       control_counter = control_counter_max;
-      if (updateControl != nullptr) {
-        LOGD("updateControl");
-        updateControl();
-      }
+      LOGD("updateControl");
+      updateControl();
     }
 
     // updateAudio() STANDARD mode is between -244 and 243 inclusive
@@ -133,7 +143,7 @@ class MozziStream : public AudioStream {
     // clip result
     if (result > 32767) result = 32767;
     if (result < -32768) result = -32768;
-    //Serial.println(result);
+    // Serial.println(result);
     return result;
   }
 };
