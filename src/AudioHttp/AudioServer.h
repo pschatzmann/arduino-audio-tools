@@ -176,11 +176,13 @@ class AudioServer {
     if (WiFi.status() != WL_CONNECTED && network != nullptr &&
         password != nullptr) {
       WiFi.begin(network, password);
-      // WiFi.setSleep(false);
       while (WiFi.status() != WL_CONNECTED) {
         Serial.print(".");
         delay(500);
       }
+#ifdef ESP32
+//      WiFi.setSleep(false);
+#endif
       Serial.println();
     }
     Serial.print("IP address: ");
