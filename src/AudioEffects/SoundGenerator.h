@@ -743,7 +743,7 @@ protected:
 };
 
 /**
- * @brief Mixer which combines multiple sound generators into one output
+ * @brief Generator which combines (mixes) multiple sound generators into one output
  * @ingroup generator
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -759,12 +759,16 @@ public:
   void clear() { vector.clear(); }
 
   T readSample() {
-    float result = 0.0f;
+    float total = 0.0f;
+    float count = 0.0f;
     for (auto &generator : vector) {
-      T sample = generator.readSample();
-      result += sample;
+      if (generator.isActive()){
+        T sample = generator.readSample();
+        total += sample;
+        count += 1.0f;
+      }
     }
-    return result / vector.size();
+    return count > 0.0f ? total / count : 0;
   }
 
 protected:
