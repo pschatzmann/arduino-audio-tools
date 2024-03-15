@@ -728,12 +728,6 @@ protected:
   struct ChannelSelectionOutputDef {
     Print *p_out = nullptr;
     Vector<int> channels;
-    bool hasChannel(int channel){
-      for (int ch : channels){
-        if (channel == ch) return true;
-      }
-      return false;
-    }
   };
   Vector<ChannelSelectionOutputDef> out_channels;
 };
