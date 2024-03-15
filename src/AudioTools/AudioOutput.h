@@ -714,10 +714,10 @@ public:
   }
 
   /// Define the stereo channels to be selected to the specified output. 0: first (=left) channel, 1: second (=right) channel
-  void addOutput(Print &out, uint16_t ch1, uint16_t ch2) {
+  void addOutput(Print &out, uint16_t left, uint16_t right) {
     Vector<uint16_t> channels;
-    channels.push_back(ch1);
-    channels.push_back(ch2);
+    channels.push_back(left);
+    channels.push_back(right);
     ChannelSelectionOutputDef def;
     def.channels = channels;
     def.p_out = &out;
