@@ -708,12 +708,12 @@ public:
     int result_size = sample_count / cfg.channels;
     T *data = (T *)buffer;
 
-    for (int i = 0; i < sample_count; i++) {
-      int actual_channel = i % cfg.channels;
-      T sample = data[i];
+    for (int i = 0; i < sample_count; i += cfg.channels) {
+      T* frame = data + i;
       for (auto &out : out_channels){
-        if (out.hasChannel(actual_channel)){
-          // write sample result 
+        for (auto &ch : out.channels){
+          assert(ch < cfg.channels);
+          T sample = frame[ch];
           size_t written = out.p_out->write((uint8_t *)sample, sizeof(T));
           if (written!=result_size * sizeof(T)){
             LOGW("Could not write all samples");
