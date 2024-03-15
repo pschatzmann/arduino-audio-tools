@@ -700,7 +700,7 @@ public:
     // make sure that selected channels are valid
     for (auto &out : out_channels) {
       for (auto &ch : out.channels) {
-        if (ch > cfg.channels - 1){
+        if (ch > cfg.channels - 1) {
           LOGE("Channel '%d' not valid for max %d channels", ch, cfg.channels);
           return false;
         }
@@ -752,8 +752,9 @@ public:
       T *frame = data + i;
       for (auto &out : out_channels) {
         for (auto &ch : out.channels) {
-          assert(ch < cfg.channels);
-          T sample = frame[ch];
+          // make sure we have a valid channel
+          int channel = (ch < cfg.channels) ? ch : cfg.channels - 1;
+          T sample = frame[channel];
           size_t written = out.p_out->write((uint8_t *)sample, sizeof(T));
           if (written != result_size * sizeof(T)) {
             LOGW("Could not write all samples");
