@@ -64,15 +64,17 @@ public:
     }
   }
 
-  virtual bool begin(AudioInfo info){
+  virtual bool begin(AudioInfo info) {
     setAudioInfo(info);
     return begin();
   }
 
-  virtual bool begin() { is_active = true; return true; }
-  virtual void end() { is_active = false;}
-  operator bool() {return is_active;}
-
+  virtual bool begin() {
+    is_active = true;
+    return true;
+  }
+  virtual void end() { is_active = false; }
+  operator bool() { return is_active; }
 
 protected:
   int tmpPos = 0;
@@ -110,7 +112,6 @@ public:
   /// Provides the current column delimiter
   const char *delimiter() { return delimiter_str; }
 
-
   AudioInfo defaultConfig(RxTxMode mode) { return defaultConfig(); }
 
   /// Provides the default configuration
@@ -123,9 +124,7 @@ public:
   }
 
   /// Starts the processing with the defined number of channels
-  bool begin(AudioInfo info) override {
-    return begin(info.channels);
-  }
+  bool begin(AudioInfo info) override { return begin(info.channels); }
 
   /// Starts the processing with the defined number of channels
   bool begin(int channels) {
@@ -141,7 +140,6 @@ public:
     return true;
   }
 
-
   /// defines the number of channels
   virtual void setAudioInfo(AudioInfo info) override {
     TRACEI();
@@ -153,7 +151,7 @@ public:
   /// Writes the data - formatted as CSV -  to the output stream
   virtual size_t write(const uint8_t *data, size_t len) override {
     LOGD("CsvOutput::write: %d", (int)len);
-    if (!is_active){
+    if (!is_active) {
       LOGE("is not active");
       return 0;
     }
@@ -235,7 +233,6 @@ public:
     return is_active;
   }
 
-
   void flush() override {
     out_ptr->println();
     pos = 0;
@@ -306,7 +303,8 @@ public:
     update_total_weights();
   }
 
-  /// Defines a new weight for the indicated channel: If you set it to 0.0 it is muted. The initial value is 1.0
+  /// Defines a new weight for the indicated channel: If you set it to 0.0 it is
+  /// muted. The initial value is 1.0
   void setWeight(int channel, float weight) {
     if (channel < size()) {
       weights[channel] = weight;
@@ -316,7 +314,7 @@ public:
     update_total_weights();
   }
 
-  /// Starts the processing. 
+  /// Starts the processing.
   bool begin(int copy_buffer_size_bytes = DEFAULT_BUFFER_SIZE,
              MemoryType memoryType = PS_RAM) {
     is_active = true;
@@ -340,7 +338,8 @@ public:
 
   size_t write(uint8_t) override { return 0; }
 
-  /// Write the data from a simgle stream which will be mixed together (the stream idx is increased)
+  /// Write the data from a simgle stream which will be mixed together (the
+  /// stream idx is increased)
   size_t write(const uint8_t *buffer_c, size_t bytes) override {
     size_t result = write(stream_idx, buffer_c, bytes);
     // after writing the last stream we flush
@@ -414,8 +413,8 @@ public:
   }
 
   /// Resizes the buffer to the indicated number of bytes
-  void resize(int size){
-    if(size != size_bytes){
+  void resize(int size) {
+    if (size != size_bytes) {
       allocate_buffers(size);
     }
     size_bytes = size;
@@ -490,7 +489,6 @@ protected:
  */
 class VolumeOutput : public AudioOutput {
 public:
-
   void setAudioInfo(AudioInfo info) {
     this->info = info;
     if (info.channels > 0) {
@@ -567,7 +565,7 @@ protected:
     }
     if (volumes_tmp.size() > 0 && info.channels > 0) {
       int ch = j % info.channels;
-      if (tmp>volumes_tmp[ch]){
+      if (tmp > volumes_tmp[ch]) {
         volumes_tmp[ch] = tmp;
       }
     }
@@ -627,23 +625,22 @@ protected:
 // legacy name
 using MemoryPrint = MemoryOutput;
 
-
 /**
- * @brief Simple functionality to extract mono streams from a multichannel (e.g. stereo)
- * signal.
+ * @brief Simple functionality to extract mono streams from a multichannel (e.g.
+ * stereo) signal.
  * @ingroup transform
  * @author Phil Schatzmann
  * @copyright GPLv3
  * @tparam T
  */
-template <typename T> 
-class ChannelSplitOutput : public AudioOutput {
+template <typename T> class ChannelSplitOutput : public AudioOutput {
 public:
   ChannelSplitOutput() = default;
 
   ChannelSplitOutput(int channel, Print &out) { addOutput(channel, out); }
 
-  /// Define the channel to be sent to the specified output. 0: first (=left) channel, 1: second (=right) channel
+  /// Define the channel to be sent to the specified output. 0: first (=left)
+  /// channel, 1: second (=right) channel
   void addOutput(int channel, Print &out) {
     ChannelSelectionOutputDef def;
     def.channel = channel;
@@ -658,15 +655,16 @@ public:
     T result[result_size];
 
     for (int ch = 0; ch < out_channels.size(); ch++) {
-      ChannelSelectionOutputDef &def = out_channels[ch]; 
+      ChannelSelectionOutputDef &def = out_channels[ch];
       // extract mono result
       int i = 0;
       for (int j = def.channel; j < sample_count; j += cfg.channels) {
         result[i++] = data[j];
       }
-      // write mono result 
-      size_t written = def.p_out->write((uint8_t *)result, result_size * sizeof(T));
-      if (written!=result_size * sizeof(T)){
+      // write mono result
+      size_t written =
+          def.p_out->write((uint8_t *)result, result_size * sizeof(T));
+      if (written != result_size * sizeof(T)) {
         LOGW("Could not write all samples");
       }
     }
@@ -682,28 +680,46 @@ protected:
 };
 
 /**
- * @brief Flexible functionality to extract one or more channels from a multichannel signal.
+ * @brief Flexible functionality to extract one or more channels from a
+ * multichannel signal.
  * @ingroup transform
  * @author Phil Schatzmann
  * @copyright GPLv3
  * @tparam T
  */
-template <typename T> 
-class ChannelsSelectOutput : public AudioOutput {
+template <typename T> class ChannelsSelectOutput : public AudioOutput {
 public:
   ChannelsSelectOutput() = default;
 
-  ChannelsSelectOutput(Vector<int> channels, Print &out) { addOutput(channels, out); }
+  ChannelsSelectOutput(Vector<int> channels, Print &out) {
+    addOutput(channels, out);
+  }
 
-  /// Define the channels to be selected to the specified output. 0: first (=left) channel, 1: second (=right) channel
-  void addOutput(Print &out, Vector<uint16_t> &channels ) {
+  bool begin() {
+    AudioOutput::begin();
+    // make sure that selected channels are valid
+    for (auto &out : out_channels) {
+      for (auto &ch : out.channels) {
+        if (ch > cfg.channels - 1){
+          LOGE("Channel '%d' not valid for max %d channels", ch, cfg.channels);
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  /// Define the channels to be selected to the specified output. 0: first
+  /// (=left) channel, 1: second (=right) channel
+  void addOutput(Print &out, Vector<uint16_t> &channels) {
     ChannelSelectionOutputDef def;
     def.channels = channels;
     def.p_out = &out;
     out_channels.push_back(def);
   }
 
-  /// Define the channel to be selected to the specified output. 0: first (=left) channel, 1: second (=right) channel
+  /// Define the channel to be selected to the specified output. 0: first
+  /// (=left) channel, 1: second (=right) channel
   void addOutput(Print &out, uint16_t channel) {
     Vector<uint16_t> channels;
     channels.push_back(channel);
@@ -713,7 +729,8 @@ public:
     out_channels.push_back(def);
   }
 
-  /// Define the stereo channels to be selected to the specified output. 0: first (=left) channel, 1: second (=right) channel
+  /// Define the stereo channels to be selected to the specified output. 0:
+  /// first (=left) channel, 1: second (=right) channel
   void addOutput(Print &out, uint16_t left, uint16_t right) {
     Vector<uint16_t> channels;
     channels.push_back(left);
@@ -725,18 +742,20 @@ public:
   }
 
   virtual size_t write(const uint8_t *buffer, size_t size) override {
+    if (!is_active)
+      return 0;
     int sample_count = size / sizeof(T);
     int result_size = sample_count / cfg.channels;
     T *data = (T *)buffer;
 
     for (int i = 0; i < sample_count; i += cfg.channels) {
-      T* frame = data + i;
-      for (auto &out : out_channels){
-        for (auto &ch : out.channels){
+      T *frame = data + i;
+      for (auto &out : out_channels) {
+        for (auto &ch : out.channels) {
           assert(ch < cfg.channels);
           T sample = frame[ch];
           size_t written = out.p_out->write((uint8_t *)sample, sizeof(T));
-          if (written!=result_size * sizeof(T)){
+          if (written != result_size * sizeof(T)) {
             LOGW("Could not write all samples");
           }
         }
@@ -752,7 +771,5 @@ protected:
   };
   Vector<ChannelSelectionOutputDef> out_channels;
 };
-
-
 
 } // namespace audio_tools
