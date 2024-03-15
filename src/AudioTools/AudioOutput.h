@@ -627,49 +627,6 @@ protected:
 // legacy name
 using MemoryPrint = MemoryOutput;
 
-// /**
-//  * @brief Switched Output class. Class which can be used to filter the output
-//  * out based on a switch: If the switch is on the output is forwarded. If it is
-//  * off it is just ignored.
-//  * @ingroup transform
-//  * @author Phil Schatzmann
-//  * @copyright GPLv3
-//  */
-// class OnOffOutput : public AudioOutput {
-// public:
-//   OnOffOutput() = default;
-//   OnOffOutput(Print &out) { setOutput(out); }
-
-//   /// Same as setActive(true)
-//   bool begin() override {
-//     setActive(true);
-//     return true;
-//   }
-//   /// Same as setActive(false)
-//   void end() override { setActive(false); }
-
-//   /// Redefines the final output
-//   void setOutput(Print &out) { p_output = &out; }
-
-//   /// set the sitch to on or off
-//   void setActive(bool on) { is_active = on; }
-
-//   /// Determines if the switch is on
-//   bool isActive() { return is_active; }
-
-//   size_t write(const uint8_t *buffer, size_t len) override {
-//     if (p_output == nullptr)
-//       return 0;
-//     size_t result = len;
-//     if (is_active) {
-//       len = p_output->write(buffer, len);
-//     }
-//     return len;
-//   }
-
-// protected:
-//   Print *p_output = nullptr;
-// };
 
 /**
  * @brief Simple functionality to extract mono streams from a multichannel (e.g. stereo)
@@ -691,7 +648,7 @@ public:
     ChannelSelectionOutputDef def;
     def.channel = channel;
     def.p_out = &out;
-    out_chanels.push_back(def);
+    out_channels.push_back(def);
   }
 
   virtual size_t write(const uint8_t *buffer, size_t size) override {
@@ -700,8 +657,8 @@ public:
     T *data = (T *)buffer;
     T result[result_size];
 
-    for (int ch = 0; ch < out_chanels.size(); ch++) {
-      ChannelSelectionOutputDef &def = out_chanels[ch]; 
+    for (int ch = 0; ch < out_channels.size(); ch++) {
+      ChannelSelectionOutputDef &def = out_channels[ch]; 
       // extract mono result
       int i = 0;
       for (int j = def.channel; j < sample_count; j += cfg.channels) {
@@ -721,7 +678,66 @@ protected:
     Print *p_out = nullptr;
     int channel;
   };
-  Vector<ChannelSelectionOutputDef> out_chanels;
+  Vector<ChannelSelectionOutputDef> out_channels;
 };
+
+/**
+ * @brief Flexible functionality to extract one or more channels from a multichannel signal.
+ * @ingroup transform
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ * @tparam T
+ */
+template <typename T> 
+class ChannelsSelectOutput : public AudioOutput {
+public:
+  ChannelsSelectOutput() = default;
+
+  ChannelsSelectOutput(Vector<int> channels, Print &out) { addOutput(channels, out); }
+
+  /// Define the channel to be selected to the specified output. 0: first (=left) channel, 1: second (=right) channel
+  void addOutput(Vector<int> &channels, Print &out) {
+    ChannelSelectionOutputDef def;
+    def.channels = channels;
+    def.p_out = &out;
+    out_channels.push_back(def);
+  }
+
+  virtual size_t write(const uint8_t *buffer, size_t size) override {
+    int sample_count = size / sizeof(T);
+    int result_size = sample_count / cfg.channels;
+    T *data = (T *)buffer;
+
+    for (int i = 0; i < sample_count; i++) {
+      int actual_channel = i % cfg.channels;
+      T sample = data[i];
+      for (auto &out : out_channels){
+        if (out.hasChannel(actual_channel)){
+          // write sample result 
+          size_t written = out.p_out->write((uint8_t *)sample, sizeof(T));
+          if (written!=result_size * sizeof(T)){
+            LOGW("Could not write all samples");
+          }
+        }
+      }
+    }
+    return size;
+  }
+
+protected:
+  struct ChannelSelectionOutputDef {
+    Print *p_out = nullptr;
+    Vector<int> channels;
+    bool hasChannel(int channel){
+      for (int ch : channels){
+        if (channel == ch) return true;
+      }
+      return false;
+    }
+  };
+  Vector<ChannelSelectionOutputDef> out_channels;
+};
+
+
 
 } // namespace audio_tools
