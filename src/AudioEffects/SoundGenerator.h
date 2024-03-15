@@ -762,8 +762,8 @@ public:
     float total = 0.0f;
     float count = 0.0f;
     for (auto &generator : vector) {
-      if (generator.isActive()){
-        T sample = generator.readSample();
+      if (generator->isActive()){
+        T sample = generator->readSample();
         total += sample;
         count += 1.0f;
       }
