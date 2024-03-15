@@ -695,8 +695,29 @@ public:
 
   ChannelsSelectOutput(Vector<int> channels, Print &out) { addOutput(channels, out); }
 
+  /// Define the channels to be selected to the specified output. 0: first (=left) channel, 1: second (=right) channel
+  void addOutput(Print &out, Vector<uint16_t> &channels ) {
+    ChannelSelectionOutputDef def;
+    def.channels = channels;
+    def.p_out = &out;
+    out_channels.push_back(def);
+  }
+
   /// Define the channel to be selected to the specified output. 0: first (=left) channel, 1: second (=right) channel
-  void addOutput(Vector<int> &channels, Print &out) {
+  void addOutput(Print &out, uint16_t channel) {
+    Vector<uint16_t> channels;
+    channels.push_back(channel);
+    ChannelSelectionOutputDef def;
+    def.channels = channels;
+    def.p_out = &out;
+    out_channels.push_back(def);
+  }
+
+  /// Define the stereo channels to be selected to the specified output. 0: first (=left) channel, 1: second (=right) channel
+  void addOutput(Print &out, uint16_t ch1, uint16_t ch2) {
+    Vector<uint16_t> channels;
+    channels.push_back(ch1);
+    channels.push_back(ch2);
     ChannelSelectionOutputDef def;
     def.channels = channels;
     def.p_out = &out;
@@ -727,7 +748,7 @@ public:
 protected:
   struct ChannelSelectionOutputDef {
     Print *p_out = nullptr;
-    Vector<int> channels;
+    Vector<uint16_t> channels;
   };
   Vector<ChannelSelectionOutputDef> out_channels;
 };
