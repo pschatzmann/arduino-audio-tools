@@ -759,20 +759,12 @@ public:
   void clear() { vector.clear(); }
 
   T readSample() {
-    T result;
-    int count = 0;
-    for (int j = 0; j < vector.size(); j++) {
-      T tmp = vector[j]->readSample();
-      if (j == actualChannel) {
-        result = tmp;
-      }
+    float result = 0.0f;
+    for (auto &generator : vector) {
+      T sample = generator.readSample();
+      result += sample;
     }
-    actualChannel++;
-    if (actualChannel >= vector.size()) {
-      actualChannel = 0;
-    }
-    return result;
-    ;
+    return result / vector.size();
   }
 
 protected:
