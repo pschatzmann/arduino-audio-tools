@@ -278,7 +278,8 @@ using HexDumpStream = HexDumpOutput;
  * @copyright GPLv3
  * @tparam T
  */
-template <typename T> class OutputMixer : public Print {
+template <typename T> 
+class OutputMixer : public Print {
 public:
   OutputMixer() = default;
 
@@ -633,22 +634,43 @@ using MemoryPrint = MemoryOutput;
  * @copyright GPLv3
  * @tparam T
  */
-template <typename T> class ChannelSplitOutput : public AudioOutput {
+class ChannelSplitOutput : public AudioOutput {
 public:
   ChannelSplitOutput() = default;
 
-  ChannelSplitOutput(int channel, Print &out) { addOutput(channel, out); }
+  ChannelSplitOutput(Print &out, int channel) { addOutput(out, channel); }
 
   /// Define the channel to be sent to the specified output. 0: first (=left)
   /// channel, 1: second (=right) channel
-  void addOutput(int channel, Print &out) {
+  void addOutput(Print &out, int channel) {
     ChannelSelectionOutputDef def;
     def.channel = channel;
     def.p_out = &out;
     out_channels.push_back(def);
   }
 
-  virtual size_t write(const uint8_t *buffer, size_t size) override {
+  size_t write(const uint8_t *buffer, size_t size) override {
+    switch(cfg.bits_per_sample){
+      case 16:
+        return writeT<int16_t>(buffer, size);
+      case 24:
+        return writeT<int24_t>(buffer, size);
+      case 32:
+        return writeT<int32_t>(buffer, size);
+      default:
+        return 0;
+    }
+  }
+
+protected:
+  struct ChannelSelectionOutputDef {
+    Print *p_out = nullptr;
+    int channel;
+  };
+  Vector<ChannelSelectionOutputDef> out_channels;
+
+  template <typename T> 
+  size_t writeT(const uint8_t *buffer, size_t size) {
     int sample_count = size / sizeof(T);
     int result_size = sample_count / cfg.channels;
     T *data = (T *)buffer;
@@ -671,12 +693,6 @@ public:
     return size;
   }
 
-protected:
-  struct ChannelSelectionOutputDef {
-    Print *p_out = nullptr;
-    int channel;
-  };
-  Vector<ChannelSelectionOutputDef> out_channels;
 };
 
 /**
@@ -687,12 +703,12 @@ protected:
  * @copyright GPLv3
  * @tparam T
  */
-template <typename T> class ChannelsSelectOutput : public AudioOutput {
+class ChannelsSelectOutput : public AudioOutput {
 public:
   ChannelsSelectOutput() = default;
 
   ChannelsSelectOutput(Vector<int> channels, Print &out) {
-    addOutput(channels, out);
+    addOutput(out, channels);
   }
 
   bool begin() {
@@ -741,7 +757,28 @@ public:
     out_channels.push_back(def);
   }
 
-  virtual size_t write(const uint8_t *buffer, size_t size) override {
+  size_t write(const uint8_t *buffer, size_t size) override {
+    switch(cfg.bits_per_sample){
+      case 16:
+        return writeT<int16_t>(buffer, size);
+      case 24:
+        return writeT<int24_t>(buffer, size);
+      case 32:
+        return writeT<int32_t>(buffer, size);
+      default:
+        return 0;
+    }
+  }
+
+protected:
+  struct ChannelSelectionOutputDef {
+    Print *p_out = nullptr;
+    Vector<uint16_t> channels;
+  };
+  Vector<ChannelSelectionOutputDef> out_channels;
+
+  template <typename T>
+  size_t writeT(const uint8_t *buffer, size_t size) {
     if (!is_active)
       return 0;
     int sample_count = size / sizeof(T);
@@ -755,7 +792,7 @@ public:
           // make sure we have a valid channel
           int channel = (ch < cfg.channels) ? ch : cfg.channels - 1;
           T sample = frame[channel];
-          size_t written = out.p_out->write((uint8_t *)sample, sizeof(T));
+          size_t written = out.p_out->write((uint8_t *)&sample, sizeof(T));
           if (written != result_size * sizeof(T)) {
             LOGW("Could not write all samples");
           }
@@ -764,13 +801,7 @@ public:
     }
     return size;
   }
-
-protected:
-  struct ChannelSelectionOutputDef {
-    Print *p_out = nullptr;
-    Vector<uint16_t> channels;
-  };
-  Vector<ChannelSelectionOutputDef> out_channels;
 };
+
 
 } // namespace audio_tools
