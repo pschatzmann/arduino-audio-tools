@@ -181,7 +181,7 @@ class AudioServer {
         delay(500);
       }
 #ifdef ESP32
-//      WiFi.setSleep(false);
+      WiFi.setSleep(false);
 #endif
       Serial.println();
     }
