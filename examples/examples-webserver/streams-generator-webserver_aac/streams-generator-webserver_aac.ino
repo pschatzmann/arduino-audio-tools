@@ -25,7 +25,7 @@ void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial,AudioLogger::Info);
 
-  // configure FDK to use less RAM
+  // configure FDK to use less RAM (not necessary if you activate PSRAM)
   fdk.setAudioObjectType(2);  // AAC low complexity
   fdk.setOutputBufferSize(1024); // decrease output buffer size
   fdk.setVariableBitrateMode(2); // low variable bitrate
