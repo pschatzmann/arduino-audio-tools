@@ -4,7 +4,6 @@
 #include "AudioBasic/Collections.h"
 #include "AudioTools/AudioLogger.h"
 #include <limits.h>         /* For INT_MAX */
-#include <atomic>        
 
 
 /**

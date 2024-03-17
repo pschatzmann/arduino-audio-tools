@@ -17,6 +17,7 @@
  * 
  */
 
+#ifndef AVR
 #include <cmath>
 #include <cstdint>
 #include <iostream>
@@ -1591,3 +1592,5 @@ protected:
 };
 
 } // namespace effectsuite_tools
+
+#endif
