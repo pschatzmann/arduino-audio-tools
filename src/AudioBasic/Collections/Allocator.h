@@ -9,7 +9,7 @@ namespace audio_tools {
 /**
  * @defgroup memorymgmt Memory Management
  * @ingroup tools
- * @brief Memory Management
+ * @brief Allocators and Memory Manager
  */
 
 /**
