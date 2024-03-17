@@ -64,15 +64,17 @@ public:
     }
   }
 
-  virtual bool begin(AudioInfo info){
+  virtual bool begin(AudioInfo info) {
     setAudioInfo(info);
     return begin();
   }
 
-  virtual bool begin() { is_active = true; return true; }
-  virtual void end() { is_active = false;}
-  operator bool() {return is_active;}
-
+  virtual bool begin() {
+    is_active = true;
+    return true;
+  }
+  virtual void end() { is_active = false; }
+  operator bool() { return is_active; }
 
 protected:
   int tmpPos = 0;
@@ -110,7 +112,6 @@ public:
   /// Provides the current column delimiter
   const char *delimiter() { return delimiter_str; }
 
-
   AudioInfo defaultConfig(RxTxMode mode) { return defaultConfig(); }
 
   /// Provides the default configuration
@@ -123,9 +124,7 @@ public:
   }
 
   /// Starts the processing with the defined number of channels
-  bool begin(AudioInfo info) override {
-    return begin(info.channels);
-  }
+  bool begin(AudioInfo info) override { return begin(info.channels); }
 
   /// Starts the processing with the defined number of channels
   bool begin(int channels) {
@@ -141,7 +140,6 @@ public:
     return true;
   }
 
-
   /// defines the number of channels
   virtual void setAudioInfo(AudioInfo info) override {
     TRACEI();
@@ -153,7 +151,7 @@ public:
   /// Writes the data - formatted as CSV -  to the output stream
   virtual size_t write(const uint8_t *data, size_t len) override {
     LOGD("CsvOutput::write: %d", (int)len);
-    if (!is_active){
+    if (!is_active) {
       LOGE("is not active");
       return 0;
     }
@@ -235,7 +233,6 @@ public:
     return is_active;
   }
 
-
   void flush() override {
     out_ptr->println();
     pos = 0;
@@ -281,7 +278,8 @@ using HexDumpStream = HexDumpOutput;
  * @copyright GPLv3
  * @tparam T
  */
-template <typename T> class OutputMixer : public Print {
+template <typename T> 
+class OutputMixer : public Print {
 public:
   OutputMixer() = default;
 
@@ -306,7 +304,8 @@ public:
     update_total_weights();
   }
 
-  /// Defines a new weight for the indicated channel: If you set it to 0.0 it is muted. The initial value is 1.0
+  /// Defines a new weight for the indicated channel: If you set it to 0.0 it is
+  /// muted. The initial value is 1.0
   void setWeight(int channel, float weight) {
     if (channel < size()) {
       weights[channel] = weight;
@@ -316,7 +315,7 @@ public:
     update_total_weights();
   }
 
-  /// Starts the processing. 
+  /// Starts the processing.
   bool begin(int copy_buffer_size_bytes = DEFAULT_BUFFER_SIZE,
              MemoryType memoryType = PS_RAM) {
     is_active = true;
@@ -340,7 +339,8 @@ public:
 
   size_t write(uint8_t) override { return 0; }
 
-  /// Write the data from a simgle stream which will be mixed together (the stream idx is increased)
+  /// Write the data from a simgle stream which will be mixed together (the
+  /// stream idx is increased)
   size_t write(const uint8_t *buffer_c, size_t bytes) override {
     size_t result = write(stream_idx, buffer_c, bytes);
     // after writing the last stream we flush
@@ -414,8 +414,8 @@ public:
   }
 
   /// Resizes the buffer to the indicated number of bytes
-  void resize(int size){
-    if(size != size_bytes){
+  void resize(int size) {
+    if (size != size_bytes) {
       allocate_buffers(size);
     }
     size_bytes = size;
@@ -485,12 +485,12 @@ protected:
 /**
  * @brief A simple class to determine the volume
  * @ingroup io
+ * @ingroup volume
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 class VolumeOutput : public AudioOutput {
 public:
-
   void setAudioInfo(AudioInfo info) {
     this->info = info;
     if (info.channels > 0) {
@@ -567,7 +567,7 @@ protected:
     }
     if (volumes_tmp.size() > 0 && info.channels > 0) {
       int ch = j % info.channels;
-      if (tmp>volumes_tmp[ch]){
+      if (tmp > volumes_tmp[ch]) {
         volumes_tmp[ch] = tmp;
       }
     }
@@ -627,93 +627,40 @@ protected:
 // legacy name
 using MemoryPrint = MemoryOutput;
 
-// /**
-//  * @brief Switched Output class. Class which can be used to filter the output
-//  * out based on a switch: If the switch is on the output is forwarded. If it is
-//  * off it is just ignored.
-//  * @ingroup transform
-//  * @author Phil Schatzmann
-//  * @copyright GPLv3
-//  */
-// class OnOffOutput : public AudioOutput {
-// public:
-//   OnOffOutput() = default;
-//   OnOffOutput(Print &out) { setOutput(out); }
-
-//   /// Same as setActive(true)
-//   bool begin() override {
-//     setActive(true);
-//     return true;
-//   }
-//   /// Same as setActive(false)
-//   void end() override { setActive(false); }
-
-//   /// Redefines the final output
-//   void setOutput(Print &out) { p_output = &out; }
-
-//   /// set the sitch to on or off
-//   void setActive(bool on) { is_active = on; }
-
-//   /// Determines if the switch is on
-//   bool isActive() { return is_active; }
-
-//   size_t write(const uint8_t *buffer, size_t len) override {
-//     if (p_output == nullptr)
-//       return 0;
-//     size_t result = len;
-//     if (is_active) {
-//       len = p_output->write(buffer, len);
-//     }
-//     return len;
-//   }
-
-// protected:
-//   Print *p_output = nullptr;
-// };
-
 /**
- * @brief Simple functionality to extract mono streams from a multichannel (e.g. stereo)
- * signal.
+ * @brief Simple functionality to extract mono streams from a multichannel (e.g.
+ * stereo) signal.
  * @ingroup transform
  * @author Phil Schatzmann
  * @copyright GPLv3
  * @tparam T
  */
-template <typename T> 
 class ChannelSplitOutput : public AudioOutput {
 public:
   ChannelSplitOutput() = default;
 
-  ChannelSplitOutput(int channel, Print &out) { addOutput(channel, out); }
+  ChannelSplitOutput(Print &out, int channel) { addOutput(out, channel); }
 
-  /// Define the channel to be sent to the specified output. 0: first (=left) channel, 1: second (=right) channel
-  void addOutput(int channel, Print &out) {
+  /// Define the channel to be sent to the specified output. 0: first (=left)
+  /// channel, 1: second (=right) channel
+  void addOutput(Print &out, int channel) {
     ChannelSelectionOutputDef def;
     def.channel = channel;
     def.p_out = &out;
-    out_chanels.push_back(def);
+    out_channels.push_back(def);
   }
 
-  virtual size_t write(const uint8_t *buffer, size_t size) override {
-    int sample_count = size / sizeof(T);
-    int result_size = sample_count / cfg.channels;
-    T *data = (T *)buffer;
-    T result[result_size];
-
-    for (int ch = 0; ch < out_chanels.size(); ch++) {
-      ChannelSelectionOutputDef &def = out_chanels[ch]; 
-      // extract mono result
-      int i = 0;
-      for (int j = def.channel; j < sample_count; j += cfg.channels) {
-        result[i++] = data[j];
-      }
-      // write mono result 
-      size_t written = def.p_out->write((uint8_t *)result, result_size * sizeof(T));
-      if (written!=result_size * sizeof(T)){
-        LOGW("Could not write all samples");
-      }
+  size_t write(const uint8_t *buffer, size_t size) override {
+    switch(cfg.bits_per_sample){
+      case 16:
+        return writeT<int16_t>(buffer, size);
+      case 24:
+        return writeT<int24_t>(buffer, size);
+      case 32:
+        return writeT<int32_t>(buffer, size);
+      default:
+        return 0;
     }
-    return size;
   }
 
 protected:
@@ -721,7 +668,141 @@ protected:
     Print *p_out = nullptr;
     int channel;
   };
-  Vector<ChannelSelectionOutputDef> out_chanels;
+  Vector<ChannelSelectionOutputDef> out_channels;
+
+  template <typename T> 
+  size_t writeT(const uint8_t *buffer, size_t size) {
+    int sample_count = size / sizeof(T);
+    int result_size = sample_count / cfg.channels;
+    T *data = (T *)buffer;
+    T result[result_size];
+
+    for (int ch = 0; ch < out_channels.size(); ch++) {
+      ChannelSelectionOutputDef &def = out_channels[ch];
+      // extract mono result
+      int i = 0;
+      for (int j = def.channel; j < sample_count; j += cfg.channels) {
+        result[i++] = data[j];
+      }
+      // write mono result
+      size_t written =
+          def.p_out->write((uint8_t *)result, result_size * sizeof(T));
+      if (written != result_size * sizeof(T)) {
+        LOGW("Could not write all samples");
+      }
+    }
+    return size;
+  }
+
 };
+
+/**
+ * @brief Flexible functionality to extract one or more channels from a
+ * multichannel signal.
+ * @ingroup transform
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ * @tparam T
+ */
+class ChannelsSelectOutput : public AudioOutput {
+public:
+  ChannelsSelectOutput() = default;
+
+  ChannelsSelectOutput(Vector<int> channels, Print &out) {
+    addOutput(out, channels);
+  }
+
+  bool begin() {
+    AudioOutput::begin();
+    // make sure that selected channels are valid
+    for (auto &out : out_channels) {
+      for (auto &ch : out.channels) {
+        if (ch > cfg.channels - 1) {
+          LOGE("Channel '%d' not valid for max %d channels", ch, cfg.channels);
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  /// Define the channels to be selected to the specified output. 0: first
+  /// (=left) channel, 1: second (=right) channel
+  void addOutput(Print &out, Vector<uint16_t> &channels) {
+    ChannelSelectionOutputDef def;
+    def.channels = channels;
+    def.p_out = &out;
+    out_channels.push_back(def);
+  }
+
+  /// Define the channel to be selected to the specified output. 0: first
+  /// (=left) channel, 1: second (=right) channel
+  void addOutput(Print &out, uint16_t channel) {
+    Vector<uint16_t> channels;
+    channels.push_back(channel);
+    ChannelSelectionOutputDef def;
+    def.channels = channels;
+    def.p_out = &out;
+    out_channels.push_back(def);
+  }
+
+  /// Define the stereo channels to be selected to the specified output. 0:
+  /// first (=left) channel, 1: second (=right) channel
+  void addOutput(Print &out, uint16_t left, uint16_t right) {
+    Vector<uint16_t> channels;
+    channels.push_back(left);
+    channels.push_back(right);
+    ChannelSelectionOutputDef def;
+    def.channels = channels;
+    def.p_out = &out;
+    out_channels.push_back(def);
+  }
+
+  size_t write(const uint8_t *buffer, size_t size) override {
+    switch(cfg.bits_per_sample){
+      case 16:
+        return writeT<int16_t>(buffer, size);
+      case 24:
+        return writeT<int24_t>(buffer, size);
+      case 32:
+        return writeT<int32_t>(buffer, size);
+      default:
+        return 0;
+    }
+  }
+
+protected:
+  struct ChannelSelectionOutputDef {
+    Print *p_out = nullptr;
+    Vector<uint16_t> channels;
+  };
+  Vector<ChannelSelectionOutputDef> out_channels;
+
+  template <typename T>
+  size_t writeT(const uint8_t *buffer, size_t size) {
+    if (!is_active)
+      return 0;
+    int sample_count = size / sizeof(T);
+    int result_size = sample_count / cfg.channels;
+    T *data = (T *)buffer;
+
+    for (int i = 0; i < sample_count; i += cfg.channels) {
+      T *frame = data + i;
+      for (auto &out : out_channels) {
+        for (auto &ch : out.channels) {
+          // make sure we have a valid channel
+          int channel = (ch < cfg.channels) ? ch : cfg.channels - 1;
+          T sample = frame[channel];
+          size_t written = out.p_out->write((uint8_t *)&sample, sizeof(T));
+          if (written != result_size * sizeof(T)) {
+            LOGW("Could not write all samples");
+          }
+        }
+      }
+    }
+    return size;
+  }
+};
+
 
 } // namespace audio_tools

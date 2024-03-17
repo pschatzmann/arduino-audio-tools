@@ -53,10 +53,12 @@ class URLStream : public AbstractURLStream {
       clientSecure = nullptr;
     }
 #endif
+#ifdef USE_WIFI
     if (clientInsecure != nullptr) {
       delete clientInsecure;
       clientInsecure = nullptr;
     }
+#endif
   }
 
   /// (Re-)defines the client
@@ -265,10 +267,12 @@ class URLStream : public AbstractURLStream {
   // optional
   const char* network = nullptr;
   const char* password = nullptr;
-  Client* client = nullptr;
-  WiFiClient* clientInsecure = nullptr;
+  Client* client = nullptr; // client defined via setClient
+#ifdef USE_WIFI
+  WiFiClient* clientInsecure = nullptr; // wifi client for http
+#endif
 #ifdef USE_WIFI_CLIENT_SECURE
-  WiFiClientSecure* clientSecure = nullptr;
+  WiFiClientSecure* clientSecure = nullptr; // wifi client for https
 #endif
   int clientTimeout = URL_CLIENT_TIMEOUT;                  // 60000;
   unsigned long handshakeTimeout = URL_HANDSHAKE_TIMEOUT;  // 120000
@@ -284,26 +288,27 @@ class URLStream : public AbstractURLStream {
     // close it - if we have an active connection
     if (active) end();
 
-    // optional: login if necessary
-    login();
-
-    // check if we are connected
-    if (WiFi.status() != WL_CONNECTED) {
-      LOGE("Not connected");
-      return false;
+#ifdef USE_WIFI
+    // optional: login if necessary if no external client is defined
+    if (client == nullptr){
+      if (!login()){
+        LOGE("Not connected");
+        return false;
+      }
     }
 
+#endif
     // request.reply().setAutoCreateLines(false);
     if (acceptMime != nullptr) {
       request.setAcceptMime(acceptMime);
     }
 
     // setup client
-    client = &getClient(url.isSecure());
-    request.setClient(*client);
+    Client& client = getClient(url.isSecure());
+    request.setClient(client);
 
     // set timeout
-    client->setTimeout(clientTimeout / 1000);
+    client.setTimeout(clientTimeout / 1000);
     request.setTimeout(clientTimeout);
 
 #ifdef ESP32
@@ -352,7 +357,6 @@ class URLStream : public AbstractURLStream {
 
   /// Determines the client
   Client& getClient(bool isSecure) {
-    if (client != nullptr) return *client;
 #ifdef USE_WIFI_CLIENT_SECURE
     if (isSecure) {
       if (clientSecure == nullptr) {
@@ -370,8 +374,10 @@ class URLStream : public AbstractURLStream {
     }
     return *clientInsecure;
 #else
-    LOGE("Client not set");
-    stop();
+    if (client == nullptr){ 
+      LOGE("Client not set");
+      stop();
+    }
     return *client;  // to avoid compiler warning
 #endif
   }
@@ -386,7 +392,7 @@ class URLStream : public AbstractURLStream {
 
   inline bool isEOS() { return read_pos >= read_size; }
 
-  void login() {
+  bool login() {
 #ifdef USE_WIFI
     if (network != nullptr && password != nullptr &&
         WiFi.status() != WL_CONNECTED) {
@@ -397,8 +403,12 @@ class URLStream : public AbstractURLStream {
         delay(500);
       }
       Serial.println();
-      delay(500);
+      delay(10);
+      return WiFi.status() == WL_CONNECTED;
     }
+    return WiFi.status() == WL_CONNECTED;
+#else 
+    return false;
 #endif
   }
 };

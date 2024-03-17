@@ -3,6 +3,7 @@
 #include "AudioTools/AudioStreams.h"
 #include "AudioTools/AudioOutput.h"
 #include "AudioTools/VolumeControl.h"
+#include "AudioTools/AudioTypes.h"
 
 namespace audio_tools {
 
@@ -26,10 +27,11 @@ struct VolumeStreamConfig : public AudioInfo {
  * bits per sample and number of channels!
  * AudioChanges are forwareded to the related Print or Stream class.
  * @ingroup transform
+ * @ingroup volume
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class VolumeStream : public AudioStream {
+class VolumeStream : public AudioStream, public VolumeSupport {
     public:
         /// Default Constructor
         VolumeStream() = default;
@@ -174,7 +176,7 @@ class VolumeStream : public AudioStream {
         }
 
         /// Defines the volume for all channels: needs to be in the range of 0 to 1.0 (if allow boost has not been set)
-        bool setVolume(float vol){
+        bool setVolume(float vol) override {
             bool result = true;
             // just to make sure that we have a valid start volume before begin
             info.volume = vol; 
@@ -213,7 +215,7 @@ class VolumeStream : public AudioStream {
         }
 
         /// Provides the current (avg) volume accross all channels
-        float volume() {
+        float volume() override {
             // prevent npe
             if (volume_values.size()==0) return 0;
             // calculate avg

@@ -148,6 +148,11 @@ class AudioServer {
   /// Checks if any clinent has connnected
   bool isClientConnected() { return client_obj.connected(); }
 
+  /// Changes the copy buffer size
+  void setCopyBufferSize(int size){
+    copier.resize(size);
+  }
+
  protected:
   // WIFI
 #ifdef ESP32
@@ -181,7 +186,7 @@ class AudioServer {
         delay(500);
       }
 #ifdef ESP32
-//      WiFi.setSleep(false);
+      WiFi.setSleep(false);
 #endif
       Serial.println();
     }
