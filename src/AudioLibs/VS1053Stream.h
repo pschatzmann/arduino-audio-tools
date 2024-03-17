@@ -90,11 +90,9 @@ public:
     /// defines the default configuration that is used with the next begin()
     void setAudioInfo(VS1053Config c){
         cfg = c;
-        info(copyFrom(c));
     }
 
     void setAudioInfo(AudioInfo c){
-        AudioEnocoder::setAudioInfo(c);
         cfg.copyFrom(c);
     }
 
