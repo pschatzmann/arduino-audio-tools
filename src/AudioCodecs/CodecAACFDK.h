@@ -21,12 +21,12 @@ AudioInfoSupport *audioChangeFDK = nullptr;
  */
 class AACDecoderFDK : public AudioDecoder  {
     public:
-        AACDecoderFDK(){
+        AACDecoderFDK(int output_buffer_size = 2048){
             TRACED();
-            dec = new aac_fdk::AACDecoderFDK();
+            dec = new aac_fdk::AACDecoderFDK(output_buffer_size);
         }
 
-        AACDecoderFDK(Print &out_stream, int output_buffer_size=2048){
+        AACDecoderFDK(Print &out_stream, int output_buffer_size = 2048){
             TRACED();
             dec = new aac_fdk::AACDecoderFDK(out_stream, output_buffer_size);
         }
@@ -41,14 +41,12 @@ class AACDecoderFDK : public AudioDecoder  {
         }
 
         bool begin(){
-            dec->begin(TT_MP4_ADTS, 1);
-            return true;
+            return dec->begin(TT_MP4_ADTS, 1);
         }
 
         // opens the decoder
         bool begin(TRANSPORT_TYPE transportType, UINT nrOfLayers){
-            dec->begin(transportType, nrOfLayers);
-            return true;
+            return dec->begin(transportType, nrOfLayers);
         }
 
         /**

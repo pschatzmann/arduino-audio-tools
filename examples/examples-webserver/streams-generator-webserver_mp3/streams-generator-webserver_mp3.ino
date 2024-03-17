@@ -3,6 +3,7 @@
  *
  *  This sketch generates a test sine wave. The result is provided as mp3 stream which can be listened to in a Web Browser
  *  Please note that MP3EncoderLAME needs a processor with PSRAM !
+ *  
  * @author Phil Schatzmann
  * @copyright GPLv3
  * 
@@ -15,7 +16,7 @@
 const char *ssid = "ssid";
 const char *password = "password";
 
-AudioInfo info(16000,1,16);
+AudioInfo info(24000, 1, 16);
 MP3EncoderLAME mp3;
 AudioEncoderServer server(&mp3, ssid, password);
 SineWaveGenerator<int16_t> sineWave;            // Subclass of SoundGenerator with max amplitude of 32000
