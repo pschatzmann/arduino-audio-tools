@@ -49,7 +49,7 @@ class VS1053Config : public AudioInfo {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class VS1053Stream : public AudioStream {
+class VS1053Stream : public AudioStream, public VolumeSupport {
 
     /**
      * @brief Private output class for the EncodedAudioStream
@@ -193,7 +193,7 @@ public:
     }
 
     /// value from 0 to 1.0
-    void setVolume(float vol){
+    bool setVolume(float vol) override {
         // make sure that value is between 0 and 1
         float volume = vol;
         if (volume>1.0) volume = 1.0;
@@ -203,10 +203,11 @@ public:
             // Set the player volume.Level from 0-100, higher is louder
             p_vs1053->setVolume(volume*100.0);
         } 
+        return true;
     }
 
     /// provides the volume
-    float volume() {
+    float volume() override {
         TRACED();
         if (p_vs1053==nullptr) return -1.0;
         return p_vs1053->getVolume()/100.0;;

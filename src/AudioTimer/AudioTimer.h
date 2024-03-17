@@ -2,7 +2,7 @@
 /**
  * @defgroup timer Timers
  * @ingroup tools
- * @brief Platform specific timers
+ * @brief Platform independent timer API
  */
 #include "AudioConfig.h"
 #if defined(USE_TIMER)  

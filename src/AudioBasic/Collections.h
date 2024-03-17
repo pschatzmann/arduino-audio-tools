@@ -2,7 +2,7 @@
 /**
  * @defgroup collections Collections
  * @ingroup tools
- * @brief Audio Player
+ * @brief Vector, List, Queue, Stack...
  */
 
 #include "AudioBasic/Collections/Vector.h"

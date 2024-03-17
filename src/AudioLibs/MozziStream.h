@@ -21,7 +21,7 @@ struct MozziConfig : AudioInfo {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class MozziStream : public AudioStream {
+class MozziStream : public AudioStream, public VolumeSupport {
  public:
   MozziStream() = default;
 
@@ -65,7 +65,10 @@ class MozziStream : public AudioStream {
   void end() { active = false; }
 
   /// Defines the multiplication factor to scale the Mozzi value range to int16_t
-  void setVolume(int16_t vol) { cfg.output_volume = vol; }
+  void setVolume(int16_t vol) { 
+    cfg.output_volume = vol; 
+    return VolumeSupport::setVolume(vol);
+  }
 
   /// Provides the data filled by calling updateAudio()
   size_t readBytes(uint8_t* data, size_t byteCount) {

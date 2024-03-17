@@ -25,8 +25,7 @@ class StreamCopyT {
         StreamCopyT(Print &to, AudioStream &from, int buffer_size=DEFAULT_BUFFER_SIZE){
             TRACED();
             begin(to, from);
-            this->buffer_size = buffer_size;
-            buffer.resize(buffer_size);
+            resize(buffer_size);
             if (!buffer){
                 LOGE(NOT_ENOUGH_MEMORY_MSG, buffer_size);
             }
@@ -35,8 +34,7 @@ class StreamCopyT {
         StreamCopyT(Print &to, Stream &from, int buffer_size=DEFAULT_BUFFER_SIZE){
             TRACED();
             begin(to, from);
-            this->buffer_size = buffer_size;
-            buffer.resize(buffer_size);
+            resize(buffer_size);
             if (!buffer){
                 LOGE(NOT_ENOUGH_MEMORY_MSG, buffer_size);
             }
@@ -44,8 +42,7 @@ class StreamCopyT {
 
         StreamCopyT(int buffer_size=DEFAULT_BUFFER_SIZE){
             TRACED();
-            this->buffer_size = buffer_size;
-            buffer.resize(buffer_size);
+            resize(buffer_size);
             if (!buffer){
                 LOGE(NOT_ENOUGH_MEMORY_MSG, buffer_size);
             }

@@ -16,8 +16,8 @@ AudioBoardStream i2s(AudioKitEs8388V1);  // final output of decoded stream
 SineWaveGenerator<int16_t> sineWave;     // subclass of SoundGenerator with max amplitude of 32000
 GeneratedSoundStream<int16_t> sound(sineWave);     // Stream generated from sine wave
 
-StreamCopy copierToPd(pd, sound, 256);
-StreamCopy copierFromPd(i2s, pd, 256);
+StreamCopy copierToPd(pd, sound, 1024);
+StreamCopy copierFromPd(i2s, pd, 1024);
 
 void setup() {
   Serial.begin(115200);

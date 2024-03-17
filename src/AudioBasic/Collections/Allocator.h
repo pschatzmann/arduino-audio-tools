@@ -7,8 +7,14 @@
 namespace audio_tools {
 
 /**
+ * @defgroup memorymgmt Memory Management
+ * @ingroup tools
+ * @brief Allocators and Memory Manager
+ */
+
+/**
  * @brief Memory allocateator which uses malloc.
- * @ingroup collections
+ * @ingroup memorymgmt
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -78,7 +84,7 @@ class Allocator {
 /**
  * @brief Memory allocateator which uses ps_malloc (on the ESP32) and if this
  * fails it resorts to malloc.
- * @ingroup collections
+ * @ingroup memorymgmt
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
@@ -105,7 +111,7 @@ class AllocatorExt : public Allocator {
 /**
  * @brief Memory allocateator which uses ps_malloc to allocate the memory in
  * PSRAM on the ESP32
- * @ingroup collections
+ * @ingroup memorymgmt
  * @author Phil Schatzmann
  * @copyright GPLv3
  **/
