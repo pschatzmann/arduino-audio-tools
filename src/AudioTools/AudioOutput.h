@@ -485,6 +485,7 @@ protected:
 /**
  * @brief A simple class to determine the volume
  * @ingroup io
+ * @ingroup volume
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
