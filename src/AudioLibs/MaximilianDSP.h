@@ -14,7 +14,7 @@ namespace audio_tools {
  * @brief AudioTools integration with Maximilian
  * @ingroup dsp
  */
-class Maximilian {
+class Maximilian : public VolumeSupport {
     public:
 
         Maximilian(Print &out, int bufferSize=DEFAULT_BUFFER_SIZE, void (*callback)(maxi_float_t *channels)=play){
@@ -35,14 +35,17 @@ class Maximilian {
         }
 
         /// Defines the volume. The values are between 0.0 and 1.0
-        void setVolume(float f){
-            volume = f;
-            if (volume>1){
-                volume = 1;
+        bool setVolume(float f) override{
+            if (f>1.0f){
+                VolumeSupport::setVolume(1.0f);
+                return false;
             }
-            if (volume<0){
-                volume = 0;
+            if (f<0.0f){
+                VolumeSupport::setVolume(0.0f);
+                return false;
             }
+            VolumeSupport::setVolume(f);
+            return true;
         }
 
         /// Copies the audio data from maximilian to the audio sink, Call this method from the Arduino Loop. 
@@ -65,7 +68,6 @@ class Maximilian {
 
     protected:
         uint8_t *p_buffer=nullptr;
-        float volume=1.0;
         int buffer_size=256;
         Print *p_sink=nullptr;
         AudioInfo cfg;

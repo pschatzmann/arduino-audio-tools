@@ -70,30 +70,24 @@ protected:
  *
  */
 
-class Boost : public AudioEffect {
+class Boost : public AudioEffect, public VolumeSupport {
 public:
   /// Boost Constructor: volume 0.1 - 1.0: decrease result; volume >0: increase
   /// result
-  Boost(float volume = 1.0) { effect_value = volume; }
+  Boost(float volume = 1.0) { setVolume(volume); }
 
   Boost(const Boost &copy) = default;
-
-  float volume() { return effect_value; }
-
-  void setVolume(float volume) { effect_value = volume; }
 
   effect_t process(effect_t input) {
     if (!active())
       return input;
-    int32_t result = effect_value * input;
+    int32_t result = volume() * input;
     // clip to int16_t
     return clip(result);
   }
 
   Boost *clone() { return new Boost(*this); }
 
-protected:
-  float effect_value;
 };
 
 /**

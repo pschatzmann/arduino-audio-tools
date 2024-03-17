@@ -66,7 +66,7 @@ class A2DPConfig {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class A2DPStream : public AudioStream {
+class A2DPStream : public AudioStream, public VolumeSupport {
 
     public:
         A2DPStream() {
@@ -138,7 +138,7 @@ class A2DPStream : public AudioStream {
                     LOGI("Starting a2dp_source...");
                     source(); // allocate object
                     a2dp_source->set_auto_reconnect(cfg.auto_reconnect);
-                    a2dp_source->set_volume(volume * A2DP_MAX_VOL);
+                    a2dp_source->set_volume(volume() * A2DP_MAX_VOL);
                     if(Str(cfg.name).equals("[Unknown]")){
                         //search next available device
                         a2dp_source->set_ssid_callback(detected_device);
@@ -160,7 +160,7 @@ class A2DPStream : public AudioStream {
                     sink(); // allocate object
                     a2dp_sink->set_auto_reconnect(cfg.auto_reconnect);
                     a2dp_sink->set_stream_reader(&a2dp_stream_sink_sound_data, false);
-                    a2dp_sink->set_volume(volume * A2DP_MAX_VOL);
+                    a2dp_sink->set_volume(volume() * A2DP_MAX_VOL);
                     a2dp_sink->set_on_connection_state_changed(a2dp_state_callback, this);
                     a2dp_sink->set_sample_rate_callback(sample_rate_callback);
                     a2dp_sink->start((char*)cfg.name);
@@ -255,8 +255,8 @@ class A2DPStream : public AudioStream {
         }
 
         // Define the volme (values between 0.0 and 1.0)
-        virtual void setVolume(float volume){
-            this->volume = volume;
+        void setVolume(float volume) override {
+            VolumeSupport::setVolume(volume);
             // 128 is max volume
             if (a2dp!=nullptr) a2dp->set_volume(volume * A2DP_MAX_VOL);
         }
@@ -266,7 +266,6 @@ class A2DPStream : public AudioStream {
         BluetoothA2DPSource *a2dp_source = nullptr;
         BluetoothA2DPSink *a2dp_sink = nullptr;
         BluetoothA2DPCommon *a2dp=nullptr;
-        float volume = 1.0;
         const int A2DP_MAX_VOL = 128;
 
         // auto-detect device to send audio to (TX-Mode)

@@ -175,6 +175,20 @@ class AudioInfoSource {
 
 };
 
+/**
+ * @brief Supports the setting and getting of the volume
+ * @ingroup volume
+ */
+class VolumeSupport {
+  public:
+    virtual float volume() { return volume_value; }
+    virtual bool setVolume(float volume) { 
+      volume_value = volume; 
+      return true; 
+    }
+  protected:
+    float volume_value = 1.0f;
+};
 
 /**
  * @brief E.g. used by Encoders and Decoders

@@ -41,7 +41,7 @@ struct I2SCodecConfig : public I2SConfig {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class I2SCodecStream : public AudioStream {
+class I2SCodecStream : public AudioStream, public VolumeSupport {
  public:
   /// Default Constructor (w/o codec)
   I2SCodecStream() = default;
@@ -77,8 +77,8 @@ class I2SCodecStream : public AudioStream {
     is_active = i2s.begin(cfg);
 
     // if setvolume was called before begin
-    if (is_active && volume >= 0.0f) {
-      setVolume(volume);
+    if (is_active && volume() >= 0.0f) {
+      setVolume(volume());
     }
     return is_active;
   }
@@ -145,17 +145,19 @@ class I2SCodecStream : public AudioStream {
   virtual int availableForWrite() override { return i2s.availableForWrite(); }
 
   /// sets the volume (range 0.0 - 1.0)
-  bool setVolume(float vol) {
-    volume = vol;
+  bool setVolume(float vol) override {
+    VolumeSupport::setVolume(vol);
     if (!is_active || p_board == nullptr) return false;
     return p_board->setVolume(vol * 100.0);
   }
 
   /// Provides the actual volume (0.0 - 1.0)
-  float getVolume() {
+  float volume() override {
     if (p_board == nullptr) return 0.0f;
     return static_cast<float>(p_board->getVolume()) / 100.0f;
   }
+  /// Provides the actual volume (0.0 - 1.0)
+  float getVolume()  { return volume(); }
 
   /// Mute / unmote
   bool setMute(bool mute) {
@@ -205,7 +207,6 @@ class I2SCodecStream : public AudioStream {
   CodecConfig codec_cfg;
   AudioBoard *p_board = nullptr;
   bool is_active = false;
-  float volume = -1.0f;
 
   /// We use the board pins if they are available
   void setupI2SPins() {

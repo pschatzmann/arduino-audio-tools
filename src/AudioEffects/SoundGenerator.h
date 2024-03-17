@@ -383,7 +383,7 @@ protected:
  * @copyright GPLv3
  * @tparam T
  */
-template <class T> class GeneratorFromStream : public SoundGenerator<T> {
+template <class T> class GeneratorFromStream : public SoundGenerator<T>, public VolumeSupport {
 public:
   GeneratorFromStream() {
     maxValue = NumberConverter::maxValue(sizeof(T) * 8);
@@ -410,9 +410,6 @@ public:
 
   void setChannels(int channels) { this->channels = channels; }
 
-  /// Multiplies the input with the indicated factor (e.g. )
-  void setVolume(float factor) { this->volume = factor; }
-
   /// Provides a single sample from the stream
   T readSample() {
     T data = 0;
@@ -422,7 +419,7 @@ public:
         p_stream->readBytes((uint8_t *)&data, sizeof(T));
         total += data;
       }
-      float avg = (total / channels) * volume;
+      float avg = (total / channels) * volume();
       if (avg > maxValue) {
         data = maxValue;
       } else if (avg < -maxValue) {
@@ -437,7 +434,6 @@ public:
 protected:
   Stream *p_stream = nullptr;
   int channels = 1;
-  int volume = 1.0;
   float maxValue;
 };
 
