@@ -141,11 +141,12 @@ public:
          delete enc;
      }
 
+     /// Defines the output
      void setOutput(Print &out_stream){
          enc->setOutput(out_stream);
      }
 
-    /*!< Total encoder bitrate. This parameter is    
+    /** @brief Total encoder bitrate. This parameter is    
                 mandatory and interacts with ::AACENC_BITRATEMODE.
                 - CBR: Bitrate in bits/second.
                 - VBR: Variable bitrate. Bitrate argument will
@@ -154,7 +155,7 @@ public:
         enc->setBitrate(bitrate);
     }
 
-    /*!< Audio object type. See ::AUDIO_OBJECT_TYPE in FDK_audio.h.
+    /** @brief Audio object type. See ::AUDIO_OBJECT_TYPE in FDK_audio.h.
                    - 2: MPEG-4 AAC Low Complexity.
                    - 5: MPEG-4 AAC Low Complexity with Spectral Band Replication
                  (HE-AAC).
@@ -179,7 +180,7 @@ public:
         enc->setAudioObjectType(aot);
     }
 
-    /*!< This parameter controls the use of the afterburner feature.
+    /** @brief This parameter controls the use of the afterburner feature.
                    The afterburner is a type of analysis by synthesis algorithm
                  which increases the audio quality but also the required
                  processing power. It is recommended to always activate this if
@@ -194,7 +195,7 @@ public:
         enc->setAfterburner(afterburner);
     }
 
-    /*!< Configure SBR independently of the chosen Audio
+    /** @brief Configure SBR independently of the chosen Audio
                 Object Type ::AUDIO_OBJECT_TYPE. This parameter
                 is for ELD audio object type only.
                     - -1: Use ELD SBR auto configurator (default).
@@ -204,7 +205,7 @@ public:
         enc->setSpectralBandReplication(eld_sbr);
     }
 
-     /*!< Bitrate mode. Configuration can be different
+     /** @brief  Bitrate mode. Configuration can be different
                 kind of bitrate configurations:
                 - 0: Constant bitrate, use bitrate according
                 to ::AACENC_BITRATE. (default) Within none
