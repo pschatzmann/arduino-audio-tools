@@ -199,11 +199,16 @@ class AudioServer {
     // HTTP headers always start with a response code (e.g. HTTP/1.1 200 OK)
     // and a content-type so the client knows what's coming, then a blank line:
     client_obj.println("HTTP/1.1 200 OK");
+    LOGI("Reply: HTTP/1.1 200 OK");
     if (content_type != nullptr) {
       client_obj.print("Content-type:");
       client_obj.println(content_type);
+      LOGI("Content-type: %s", content_type);
     }
     client_obj.println();
+      if (!client_obj.connected()){
+        LOGE("connection was closed");
+      }
   }
 
   virtual void sendReplyContent() {
@@ -217,6 +222,9 @@ class AudioServer {
       // provide data for stream
       LOGI("sendReply - Returning audio stream...");
       copier.begin(client_obj, *in);
+      if (!client_obj.connected()){
+        LOGE("connection was closed");
+      }
     }
   }
 
@@ -224,7 +232,7 @@ class AudioServer {
   void processClient() {
     // LOGD("processClient");
     if (client_obj) {       // if you get a client,
-      LOGI("New Client.");  // print a message out the serial port
+      LOGI("New Client:");  // print a message out the serial port
       String currentLine =
           "";  // make a String to hold incoming data from the client
       while (client_obj.connected()) {  // loop while the client's connected
@@ -232,7 +240,7 @@ class AudioServer {
                 .available()) {  // if there's bytes to read from the client,
           char c = client_obj.read();  // read a byte, then
           if (c == '\n') {             // if the byte is a newline character
-
+            LOGI("Request: %s", currentLine.c_str());
             // if the current line is blank, you got two newline characters in a
             // row. that's the end of the client HTTP request, so send a
             // response:
@@ -382,7 +390,10 @@ class AudioEncoderServer : public AudioServer {
   AudioInfo audio_info;
   AudioEncoder *encoder = nullptr;
 
-  virtual void sendReplyContent() {
+   // moved to be part of reply content to avoid timeout issues in Chrome 
+   void sendReplyHeader() override {}
+
+   void sendReplyContent() override {
     TRACED();
     // restart encoder
     if (encoder) {
@@ -398,6 +409,8 @@ class AudioEncoderServer : public AudioServer {
 
       // provide data via Callback to encoded_stream
       LOGI("sendReply - calling callback");
+      // Send delayed header
+      AudioServer::sendReplyHeader();
       callback(&encoded_stream);
       client_obj.stop();
     } else if (in != nullptr) {
@@ -409,6 +422,11 @@ class AudioEncoderServer : public AudioServer {
       encoded_stream.begin();
 
       copier.begin(encoded_stream, *in);
+      if (!client_obj.connected()){
+        LOGE("connection was closed");
+      }
+      // Send delayed header
+      AudioServer::sendReplyHeader();
     }
   }
 };
