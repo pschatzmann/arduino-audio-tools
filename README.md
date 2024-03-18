@@ -2,14 +2,14 @@
 
 Some basic __header-only C++ classes__ that can be used for __Audio Processing__ provided as __Arduino and cmake C++ Library__:
 
-- We provide different "Audio Sources" and "Audio Sinks" (see next section)
+- We provide different ["Audio Sources" and "Audio Sinks"](https://github.com/pschatzmann/arduino-audio-tools/wiki/Audio-Sources-and-Sinks)
 - Support for different [Encoders](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_audio_encoder.html) and [Decoders](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_audio_decoder.html) for MP3, AAC, WAV, FLAC, etc for [EncodedAudioStream](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_encoded_audio_stream.html)
 - Different [Sound Generators](https://pschatzmann.github.io/arduino-audio-tools/group__generator.html) (e.g. to generate a sine tone) for [GeneratedSoundStream](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_generated_sound_stream.html)
 - Support for [Sound Effects](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_audio_effect_stream.html) with different [Effect Implementations](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_audio_effect.html) (e.g. Boost, Distortion, Echo, Reverb...) for [AudioEffectStream](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_audio_effect_stream_t.html)
-- Different [Buffer Implementations](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_base_buffer.html) for [QueueStream](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_queue_stream.html)
 - Different [Converters](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_base_converter.html) for [ConverterStream](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_converter_stream.html)
 - Different [Filters](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_filter.html) for [FilteredStream](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_filtered_stream.html)
 - [Musical Notes](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_musical_notes.html) (with frequencies of notes)
+- Different [Buffer Implementations](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_base_buffer.html) for [QueueStream](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_queue_stream.html) 
 - A [Repeating Timer](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_timer_alarm_repeating.html) (e.g. for sampling audio data using exact times) for [TimerCallbackAudioStream](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_timer_callback_audio_stream.html)
 - Desktop Integration: Building of Arduino Audio Sketches to be run on [Linux, Windows and OS/X](https://github.com/pschatzmann/arduino-audio-tools/wiki/Running-an-Audio-Sketch-on-the-Desktop)
 
