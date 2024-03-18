@@ -13,7 +13,7 @@ Some basic __header-only C++ classes__ that can be used for __Audio Processing__
 - A [Repeating Timer](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_timer_alarm_repeating.html) (e.g. for sampling audio data using exact times) for [TimerCallbackAudioStream](https://pschatzmann.github.io/arduino-audio-tools/classaudio__tools_1_1_timer_callback_audio_stream.html)
 - Desktop Integration: Building of Arduino Audio Sketches to be run on [Linux, Windows and OS/X](https://github.com/pschatzmann/arduino-audio-tools/wiki/Running-an-Audio-Sketch-on-the-Desktop)
 
-This functionality provides the glue which makes different audio processing components and libraries work together.
+This functionality provides the glue which makes different audio processing components and [libraries](https://github.com/pschatzmann/arduino-audio-tools/wiki/Optional-Libraries) work together.
 
 We also provide [plenty of examples](https://github.com/pschatzmann/arduino-audio-tools/wiki/Examples) that demonstrate how to implement the different scenarios. The __design philosophy__ is based on the Arduino conventions: we use the ```begin()``` and ```end()``` methods to start and stop the processing and we propagate the __use of Streams__.  
 
