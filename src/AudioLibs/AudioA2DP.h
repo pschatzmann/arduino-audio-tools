@@ -255,10 +255,11 @@ class A2DPStream : public AudioStream, public VolumeSupport {
         }
 
         // Define the volme (values between 0.0 and 1.0)
-        void setVolume(float volume) override {
+        bool setVolume(float volume) override {
             VolumeSupport::setVolume(volume);
             // 128 is max volume
             if (a2dp!=nullptr) a2dp->set_volume(volume * A2DP_MAX_VOL);
+            return true;
         }
 
     protected:
