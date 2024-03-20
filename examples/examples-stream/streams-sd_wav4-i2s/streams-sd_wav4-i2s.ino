@@ -49,7 +49,7 @@ void setup() {
   //out.addNotifyAudioChange(i2s_2);
   out.begin(info);
 
-  // setup I2S based on sampling rate provided by decoder
+  // setup decoder
   decoder.begin();
 
   // begin copy
