@@ -1,0 +1,48 @@
+
+/***
+ * We use the RP2040 SPISlave to implement the SPI slave
+ * which receives the data
+ *
+ * Untested DRAFT implementation!
+ */
+#include <SPISlave.h>
+
+AudioInfo info(44100, 2, 16);  //
+I2SStream out;                 // or replace with another output
+
+// Wiring:
+// Master RX  GP0 <-> GP11  Slave TX
+// Master CS  GP1 <-> GP9   Slave CS
+// Master CK  GP2 <-> GP10  Slave CK
+// Master TX  GP3 <-> GP8   Slave RX
+
+SPISettings spisettings(2000000, MSBFIRST, SPI_MODE0);
+
+// Core 1 will be SPI slave
+void recvCallback(uint8_t *data, size_t len) { out.write(data, len); }
+
+void setup() {
+  Serial.begin(115200);
+
+  // setup I2S
+  auto cfg = out.defaultConfig(TX_MODE);
+  cfg.copyFrom(info);
+  // cfg.pin_bck = 14;
+  // cfg.pin_ws = 15;
+  // cfg.pin_data = 22;
+  out.begin(cfg);
+
+  // setup SPI
+  SPISlave.setRX(8);
+  SPISlave.setCS(9);
+  SPISlave.setSCK(10);
+  SPISlave.setTX(11);
+  // Hook our callbacks into the slave
+  SPISlave.onDataRecv(recvCallback);
+  SPISlave.begin(spisettings);
+
+  delay(1000);
+  Serial.println("SPISlave started");
+}
+
+void loop() {}
