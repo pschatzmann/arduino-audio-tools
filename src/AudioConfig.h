@@ -627,7 +627,7 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #if defined(ARDUINO_ARCH_RENESAS) || defined(_RENESAS_RA_) 
 // no trace to save on memory
 #define NO_TRACE
-//#define LOG_NO_MSG  // around 4K less
+#define LOG_NO_MSG  // around 4K less
 
 #define USE_INT24_FROM_INT
 #define IS_RENESAS 1
