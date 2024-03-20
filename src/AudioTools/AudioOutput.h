@@ -698,7 +698,8 @@ protected:
 
 /**
  * @brief Flexible functionality to extract one or more channels from a
- * multichannel signal.
+ * multichannel signal. Warning: the destinatios added with addOutput
+ * are not automatically notified about audio changes. 
  * @ingroup transform
  * @author Phil Schatzmann
  * @copyright GPLv3
@@ -710,6 +711,11 @@ public:
 
   ChannelsSelectOutput(Vector<int> channels, Print &out) {
     addOutput(out, channels);
+  }
+
+  bool begin(AudioInfo info) {
+    setAudioInfo(info);
+    return begin();
   }
 
   bool begin() {
@@ -771,6 +777,16 @@ public:
     }
   }
 
+  void notifyAudioChange(AudioInfo info){
+    for(auto n : notify_vector){
+        // do not change target channels
+        int target_channels = n->audioInfo().channels;
+        target_channels = getChannels((Print*)n, target_channels);
+        info.channels = target_channels;
+        n->setAudioInfo(info);
+    }
+  }
+
 protected:
   struct ChannelSelectionOutputDef {
     Print *p_out = nullptr;
@@ -802,6 +818,15 @@ protected:
     }
     return size;
   }
+
+  /// Determine number of channels for destination
+  int getChannels(Print*out, int defaultChannels){
+    for (auto& channels_select : out_channels){
+      if (channels_select.p_out == out) return channels_select.channels.size();
+    }
+    return defaultChannels;
+  }
+
 };
 
 
