@@ -144,19 +144,19 @@ class I2SCodecStream : public AudioStream, public VolumeSupport {
   /// Provides the available audio data
   virtual int availableForWrite() override { return i2s.availableForWrite(); }
 
-  /// sets the volume (range 0.0 - 1.0)
+  /// sets the volume (range 0.0f - 1.0f)
   bool setVolume(float vol) override {
     VolumeSupport::setVolume(vol);
     if (!is_active || p_board == nullptr) return false;
     return p_board->setVolume(vol * 100.0);
   }
 
-  /// Provides the actual volume (0.0 - 1.0)
+  /// Provides the actual volume (0.0f - 1.0f)
   float volume() override {
     if (p_board == nullptr) return 0.0f;
     return static_cast<float>(p_board->getVolume()) / 100.0f;
   }
-  /// Provides the actual volume (0.0 - 1.0)
+  /// legacy: same as volume()
   float getVolume()  { return volume(); }
 
   /// Mute / unmote
