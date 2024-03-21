@@ -251,6 +251,7 @@ class MemoryStream : public AudioStream {
 
   virtual size_t write(uint8_t byte) override {
     if (!is_active) return 0;
+    if (memory_type == FLASH_RAM) return 0;
     if (buffer==nullptr) return 0;
     int result = 0;
     if (write_pos < buffer_size) {
@@ -263,6 +264,7 @@ class MemoryStream : public AudioStream {
 
   virtual size_t write(const uint8_t *buffer, size_t size) override {
     if (!is_active) return 0;
+    if (memory_type == FLASH_RAM) return 0;
     size_t result = 0;
     for (size_t j = 0; j < size; j++) {
       if (!write(buffer[j])) {
@@ -289,6 +291,7 @@ class MemoryStream : public AudioStream {
 
   virtual int availableForWrite() override {
     if (!is_active) return 0;
+    if (memory_type == FLASH_RAM) return 0;
     return buffer_size - write_pos;
   } 
 
