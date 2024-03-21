@@ -8,7 +8,7 @@
 
 #include "AudioTools.h"
 #include "AudioCodecs/CodecMP3Helix.h"
-#include "AudioLibs/AudioA2DP.h"
+#include "AudioLibs/A2DPStream.h"
 #include "SimpleTTS.h"
 
 const char* name = "LEXON MINO L";                         // Replace with your device name

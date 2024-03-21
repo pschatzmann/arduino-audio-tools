@@ -8,7 +8,7 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioA2DP.h"
+#include "AudioLibs/A2DPStream.h"
 
 I2SStream i2sStream;                            // Access I2S as stream
 A2DPStream a2dpStream;                          // access A2DP as stream

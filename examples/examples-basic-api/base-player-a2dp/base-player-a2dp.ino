@@ -11,7 +11,7 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioA2DP.h"
+#include "AudioLibs/A2DPStream.h"
 #include "AudioLibs/AudioSourceSDFAT.h"
 #include "AudioCodecs/CodecMP3Helix.h"
 #include "AudioLibs/AudioBoardStream.h" // for SD Pins

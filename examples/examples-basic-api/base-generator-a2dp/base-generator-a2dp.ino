@@ -6,7 +6,7 @@
 */
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioA2DP.h"
+#include "AudioLibs/A2DPStream.h"
 
 const char* name = "LEXON MINO L";                        // Replace with your bluetooth speaker name  
 SineWaveGenerator<int16_t> sineWave(15000);               // subclass of SoundGenerator, set max amplitude (=volume)

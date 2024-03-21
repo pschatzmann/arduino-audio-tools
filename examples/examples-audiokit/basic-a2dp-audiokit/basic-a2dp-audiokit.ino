@@ -7,7 +7,7 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioA2DP.h" // install https://github.com/pschatzmann/ESP32-A2DP
+#include "AudioLibs/A2DPStream.h" // install https://github.com/pschatzmann/ESP32-A2DP
 #include "AudioLibs/AudioBoardStream.h" // install https://github.com/pschatzmann/arduino-audio-driver
 
 
