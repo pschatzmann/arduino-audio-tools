@@ -181,7 +181,9 @@ class AudioInfoSource {
  */
 class VolumeSupport {
   public:
+    /// provides the actual volume in the range of 0.0f to 1.0f
     virtual float volume() { return volume_value; }
+    /// define the actual volume in the range of 0.0f to 1.0f
     virtual bool setVolume(float volume) { 
       volume_value = volume; 
       return true; 
