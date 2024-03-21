@@ -549,7 +549,7 @@ class DecimateT : public BaseConverter {
 };
 
 /**
- * @brief Provides reduced the sampling rates
+ * @brief Provides a reduced sampling rate by ignoring a defined rate of samples
  * @ingroup convert
 */
 
@@ -604,7 +604,7 @@ class Decimate : public BaseConverter {
 };
 
 /**
- * @brief Provides reduced sampling rates through binning
+ * @brief Provides a reduced sampling rate through binning
  * @ingroup convert
 */
 
