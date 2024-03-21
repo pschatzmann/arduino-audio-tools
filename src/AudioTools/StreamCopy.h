@@ -114,12 +114,14 @@ class StreamCopyT {
 
             if (len > 0){
                 bytes_to_read = min(len, static_cast<size_t>(buffer_size));
-                size_t samples = bytes_to_read / sizeof(T);
-                bytes_to_read = samples * sizeof(T);
                 // don't overflow buffer
                 if (to_write > 0){
                     bytes_to_read = min((int)bytes_to_read, to_write);
                 }
+
+                // round to full frames 
+                size_t samples = bytes_to_read / minCopySize();
+                bytes_to_read = samples * minCopySize();
 
                 // get the data now
                 bytes_read = 0;
@@ -304,6 +306,12 @@ class StreamCopyT {
             retry_delay = delay;
         }
 
+        /// use frame size if possible
+        virtual int minCopySize() {
+            if (channels==0) channels = from->audioInfo().channels;
+            return sizeof(T) * channels;;
+        }
+
     protected:
         AudioStream *from = nullptr;
         Print *to = nullptr;
@@ -322,6 +330,7 @@ class StreamCopyT {
         bool active = true;
         const char* log_name = "";
         int retry_delay = 10;
+        int channels = 0;
 
         /// blocking write - until everything is processed
         size_t write(size_t len, size_t &delayCount ){
@@ -434,6 +443,18 @@ class StreamCopy : public StreamCopyT<uint8_t> {
         inline size_t copy()  {
             return StreamCopyT<uint8_t>::copy();
         }
+
+        /// Determine frame size
+        int minCopySize() {
+            if (min_copy_size==0){
+             AudioInfo info = from->audioInfo();
+             min_copy_size = info.bits_per_sample / 8 * info.channels;
+            }
+            return min_copy_size;
+        }
+    protected:
+        int min_copy_size = 0;
+
         
 };
 
