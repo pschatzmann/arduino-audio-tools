@@ -214,12 +214,30 @@ class MemoryStream : public AudioStream {
     is_active = isActive;
   }
 
+  /// Copy Constructor
+  MemoryStream(MemoryStream& source) {
+    copy(source);
+  }
+
+  /// Move Constructor
+  MemoryStream(MemoryStream&& source) {
+      setValue(source.buffer, source.buffer_size, source.memory_type);
+      // clear source data
+      source.setValue(nullptr, 0, source.memory_type);
+  }
+
   ~MemoryStream() {
     TRACED();
     if (memoryCanChange() && buffer!=nullptr) free(buffer);
   }
 
-  // resets the read pointer
+  /// copy assignement operator
+  MemoryStream& operator=(MemoryStream& other) {
+    copy(other);
+    return *this;
+  }
+
+  /// resets the read pointer
   bool begin() override {
     TRACED();
     write_pos = memoryCanChange() ? 0 : buffer_size;
@@ -394,6 +412,17 @@ class MemoryStream : public AudioStream {
 
   bool memoryCanChange() {
     return memory_type!=FLASH_RAM;
+  }
+
+  void copy(MemoryStream& source) {
+    if (this == &source) return;
+    if (source.memory_type == FLASH_RAM){
+      setValue(source.buffer, source.buffer_size, source.memory_type);
+    } else {
+      setValue(nullptr, source.buffer_size, source.memory_type);
+      resize(buffer_size);
+      memcpy(buffer, source.buffer, buffer_size);
+    }
   }
 };
 
