@@ -603,6 +603,162 @@ class Decimate : public BaseConverter {
 
 };
 
+/**
+ * @brief Provides reduced sampling rates through binning
+ * @ingroup convert
+*/
+
+// Helper template to define the integer type for the summation based on input data type T
+template<typename T>
+struct AppropriateSumType;
+template<> struct AppropriateSumType<int8_t>  { using type = int16_t; };
+template<> struct AppropriateSumType<int16_t> { using type = int32_t; };
+template<> struct AppropriateSumType<int24_t> { using type = int32_t; };
+template<> struct AppropriateSumType<int32_t> { using type = int64_t; };
+
+template<typename T>
+class BinT : public BaseConverter {
+    public:
+        BinT(int binSize, int channels, bool average){
+            setChannels(channels);
+            setBinSize(binSize);
+            setAverage(average);
+        }
+        /// Defines the number of channels
+        void setChannels(int channels){
+            this->channels = channels;
+        }
+
+        /// Sets the bins: e.g. with 4 we sum 4 sample
+        void setBinSize(int binSize){
+            this->binSize = binSize;
+        }
+
+        /// Enables averaging: e.g. when true it divides the sum by number of bins
+        void setAverage(bool average){
+            this->average = average;
+        }
+
+        size_t convert(uint8_t*src, size_t size) {
+            return convert(src, src, size);
+        }
+
+        size_t convert(uint8_t* target, uint8_t* src, size_t size) {
+            int frame_count = size / (sizeof(T) * channels);
+            T* p_target = (T*) target ;
+            T* p_source = (T*) src;
+            size_t result_size = 0;
+
+            // Allocate stack memory for sums to avoid dynamic allocation overhead.
+            // Ensure you have enough stack space or adjust accordingly for your environment.
+            typename AppropriateSumType<T>::type sums[channels];
+
+            for (int i = 0; i < frame_count; i += binSize) {
+                // Initialize sums for each channel to the first element in the bin
+                for (int ch = 0; ch < channels; ch++) {
+                    sums[ch] = (i * channels + ch < frame_count * channels) ? p_source[i * channels + ch] : static_cast<T>(0);
+                }
+
+                // Sum up binSize number of samples for each channel, starting from the second sample in the bin
+                for (int j = 1; j < binSize && (i + j) < frame_count; j++) {
+                    for (int ch = 0; ch < channels; ch++) {
+                        sums[ch] += p_source[(i + j) * channels + ch];
+                    }
+                }
+
+                // Compute average or sum for each channel and write to target buffer
+                for (int ch = 0; ch < channels; ch++) {
+                    if (average) {
+                        T avg = static_cast<T>(sums[ch] / binSize);
+                        *p_target++ = avg;
+                    } else {
+                        *p_target++ = static_cast<T>(sums[ch]);
+                    }
+                }
+                result_size += sizeof(T) * channels;
+            }
+
+            //LOGI("%d: %d -> %d avg:%s", binSize, (int)size, (int)result_size, average ? "on" : "off");
+            return result_size;
+        }
+
+        operator bool() {return binSize>1;};
+
+    protected:
+        int channels=2;
+        int binSize=1;
+        bool average=true;
+        uint16_t count=0;
+};
+
+/**
+ * @brief Provides reduced sampling rates through binning
+ * @ingroup convert
+*/
+
+class Bin : public BaseConverter {
+    public:
+        Bin() = default;
+        Bin(int binSize, int channels, bool average, int bits_per_sample){
+            setBinSize(binSize);
+            setChannels(channels);
+            setAverage(average);
+            setBits(bits_per_sample);
+        }
+        /// Defines the number of channels
+        void setChannels(int channels){
+            this->channels = channels;
+        }
+        void setBits(int bits){
+            this->bits = bits;
+        }
+        /// Sets the binning size: e.g. with 4 we sum 4 samples
+        void setBinSize(int binSize){
+            this->binSize = binSize;
+        }
+        /// Enables averaging: e.g. when true it divides the sum by number of bins
+        void setAverage(bool average){
+            this->average = average;
+        }
+
+        size_t convert(uint8_t*src, size_t size) {
+            return convert(src, src, size);
+        }
+        size_t convert(uint8_t*target, uint8_t*src, size_t size) {
+            switch(bits){
+                case 8:{
+                    BinT<int8_t> bin8(binSize, channels, average);
+                    return bin8.convert(target, src, size);
+                }
+                case 16:{
+                    BinT<int16_t> bin16(binSize, channels, average);
+                    return bin16.convert(target, src, size);
+                }
+                case 24:{
+                    BinT<int24_t> bin24(binSize, channels, average);
+                    return bin24.convert(target, src, size);
+                }
+                case 32:{
+                    BinT<int32_t> bin32(binSize, channels, average);
+                    return bin32.convert(target, src, size);
+                }
+                default:{
+                    LOGE("Number of bits %d not supported.", bits);
+                    return 0;
+                }
+            }
+            return 0;
+        }
+
+        operator bool() {return binSize>1;};
+
+    protected:
+        int channels=2;
+        int bits=16;
+        int binSize=1;
+        bool average=false;
+
+};
 
 /**
  * @brief Increases the channel count
@@ -933,7 +1089,7 @@ class ConverterNChannels : public BaseConverter {
     }
   }
 
-  /// Destrucotr
+  /// Destructor
   ~ConverterNChannels() {
     for (int j = 0; j < channels; j++) {
       if (filters[j]!=nullptr){
