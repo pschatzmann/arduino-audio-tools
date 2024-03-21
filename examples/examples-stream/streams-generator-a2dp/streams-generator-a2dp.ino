@@ -9,7 +9,7 @@
  */
 
 #include "AudioTools.h"
-#include "AudioLibs/AudioA2DP.h"
+#include "AudioLibs/A2DPStream.h"
 
 const char* name = "LEXON MINO L";                         // Replace with your device name
 AudioInfo info(44100, 2, 16);

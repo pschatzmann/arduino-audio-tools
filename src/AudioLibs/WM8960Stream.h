@@ -109,10 +109,11 @@ public:
     }
 
     /// Sets both input and output volume value (from 0 to 1.0)
-    void setVolume(float vol){
+    bool setVolume(float vol){
         // make sure that value is between 0 and 1
         setVolumeIn(vol);
         setVolumeOut(vol);
+        return true;
     }
 
     void setVolumeIn(float vol){

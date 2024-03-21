@@ -3,16 +3,16 @@
  * Inspired by https://sensorium.github.io/Mozzi/examples/#01.Basics
  */
 #include "AudioTools.h"
-#include "AudioLibs/AudioBoardStream.h"
+#include "AudioLibs/A2DPStream.h"
 #include "AudioLibs/MozziStream.h"
 #include <Oscil.h>                // oscillator template
 #include <tables/sin2048_int8.h>  // sine table for oscillator
 
-const int sample_rate = 16000;
-AudioInfo info(sample_rate, 1, 16);
-AudioBoardStream i2s(AudioKitEs8388V1);  // audio sink
+const int sample_rate = 44100; 
+AudioInfo info(sample_rate, 2, 16); // bluetooth requires 44100, stereo, 16 bits
+A2DPStream out;
 MozziStream mozzi; // audio source
-StreamCopy copier(i2s, mozzi); // copy source to sink
+StreamCopy copier(out, mozzi); // copy source to sink
 // use: Oscil <table_size, update_rate> oscilName (wavetable), look in .h file
 // of table #included above
 Oscil<SIN2048_NUM_CELLS, sample_rate> aSin(SIN2048_DATA);
@@ -31,9 +31,7 @@ void setup() {
   mozzi.begin(cfg);
 
   // setup output
-  auto out_cfg = i2s.defaultConfig();
-  out_cfg.copyFrom(info);
-  i2s.begin(out_cfg);
+  out.begin(TX_MODE, "Mozzi");
 
   // setup mozzi sine
   aSin.setFreq(3320);  // set the frequency

@@ -65,7 +65,7 @@ class MozziStream : public AudioStream, public VolumeSupport {
   void end() { active = false; }
 
   /// Defines the multiplication factor to scale the Mozzi value range to int16_t
-  void setVolume(int16_t vol) { 
+  bool setVolume(int16_t vol) { 
     cfg.output_volume = vol; 
     return VolumeSupport::setVolume(vol);
   }
