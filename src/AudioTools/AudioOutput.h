@@ -604,6 +604,7 @@ public:
     is_active = true;
     p_next = p_start;
     pos = 0;
+    return true;
   }
 
   size_t write(const uint8_t *buffer, size_t len) override {

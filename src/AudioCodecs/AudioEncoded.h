@@ -49,7 +49,10 @@ public:
   /// Defines where the decoded result is written to
   virtual void setOutput(Print &out_stream) override { p_print = &out_stream; }
   /// If true, the decoding result is PCM data
-  virtual bool isResultPCM() { return true; }
+  virtual bool isResultPCM() { setAudioInfo(info); return begin(); }
+  bool begin(AudioInfo info) override {return true;}
+  bool begin() override {return true;}
+  void end() override {}
 
   /// custom id to be used by application
   int id;
@@ -85,7 +88,7 @@ public:
   /// Provides the mime type of the encoded result
   virtual const char *mime() = 0;
   /// Defines the sample rate, number of channels and bits per sample
-  void setAudioInfo(AudioInfo from) override { info = from;};
+  void setAudioInfo(AudioInfo from) override { info = from;}
   AudioInfo audioInfo() {return info;}
 
 protected:

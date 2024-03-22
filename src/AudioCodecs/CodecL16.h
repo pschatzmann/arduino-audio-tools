@@ -1,7 +1,6 @@
 #pragma once
 
 #include "AudioCodecs/AudioEncoded.h"
-
 namespace audio_tools {
 
 /**
@@ -56,6 +55,7 @@ public:
   }
 
   virtual operator bool() override { return p_print!=nullptr; }
+
 
 protected:
   Print *p_print = nullptr;

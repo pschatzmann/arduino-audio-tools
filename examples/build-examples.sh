@@ -26,7 +26,7 @@ function compile_example {
       echo -e "$f -> rc=$EC" >> "build-examples-log.txt"
     #fi
   done
-
+}
 
 rm build-examples-log.txt
 compile_example "esp32:esp32:esp32" "../examples/examples-basic-api/base*"

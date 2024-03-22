@@ -98,6 +98,7 @@ class DecoderL8 : public AudioDecoder {
 
   virtual operator bool() override { return p_print!=nullptr; }
 
+
  protected:
   bool is_signed = false;
   Vector<int16_t> buffer;
