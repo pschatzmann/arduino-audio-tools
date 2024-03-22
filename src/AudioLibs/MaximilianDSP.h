@@ -58,7 +58,7 @@ class Maximilian : public VolumeSupport {
                 callback(out);
                 // convert all channels to int16
                 for (int ch=0;ch<cfg.channels;ch++){
-                    p_samples[j+ch] = out[ch]*32767*volume;
+                    p_samples[j+ch] = volume() * out[ch] * 32767.0f;
                 }
             }
             // write buffer to audio sink
