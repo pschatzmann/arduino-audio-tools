@@ -599,6 +599,11 @@ public:
     }
   }
 
+  bool begin() {
+    p_next = p_start;
+    pos = 0;
+  }
+
   size_t write(const uint8_t *buffer, size_t len) override {
     if (p_next == nullptr)
       return 0;
