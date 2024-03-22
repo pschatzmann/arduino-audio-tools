@@ -600,6 +600,7 @@ public:
   }
 
   bool begin() {
+    is_active = true;
     p_next = p_start;
     pos = 0;
   }
