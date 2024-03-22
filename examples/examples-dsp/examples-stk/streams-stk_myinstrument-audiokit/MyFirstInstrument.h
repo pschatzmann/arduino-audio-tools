@@ -1,5 +1,5 @@
 #pragma once
-#include "StkAllh.h"
+#include "StkAll.h"
 
 /**
  * @brief Demo how you can compose your own instrument
