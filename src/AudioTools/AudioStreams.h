@@ -2063,8 +2063,7 @@ struct TimerCallbackAudioStreamInfo : public AudioInfo {
 };
 
 // forward declaration: relevant only if use_timer == true
-// void IRAM_ATTR timerCallback(void* obj);
-
+  void IRAM_ATTR timerCallback(void *obj);
 /**
  * @brief Callback driven Audio Source (rx_tx_mode==RX_MODE) or Audio Sink
  * (rx_tx_mode==TX_MODE). This class allows to to integrate external libraries
@@ -2229,12 +2228,10 @@ class TimerCallbackAudioStream : public BufferedStream {
       notifyAudioChange(cfg);
     }
   }
-
-  inline static void IRAM_ATTR timerCallback(void *obj);
 };
 
 // relevant only if use_timer == true
-inline void TimerCallbackAudioStream::timerCallback(void *obj) {
+void IRAM_ATTR timerCallback(void *obj) {
   TimerCallbackAudioStream *src = (TimerCallbackAudioStream *)obj;
   if (src != nullptr) {
     // LOGD("%s:  %s", LOG_METHOD, src->cfg.rx_tx_mode==RX_MODE ?
