@@ -1,8 +1,6 @@
 
 #include "AudioTools.h"
 
-
-
 TimerCallbackAudioStream timerStream;
 
 // Reads the data in the callback driven by a timer

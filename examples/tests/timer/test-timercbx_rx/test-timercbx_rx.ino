@@ -1,9 +1,6 @@
 
 #include "AudioTools.h"
 
-
-
-
 TimerCallbackAudioStream timerStream;
 
 uint16_t IRAM_ATTR callback(uint8_t *data, uint16_t len){
@@ -25,7 +22,7 @@ void setup(){
     cfg.channels = 1;
     cfg.sample_rate = 5000;
     cfg.bits_per_sample = 16;
-    cfg.secure_timer = true; // Use separate Task
+    cfg.timer_function = TimerCallbackInThread; // Use separate Task
     cfg.callback = callback;
     timerStream.begin(cfg);
 
