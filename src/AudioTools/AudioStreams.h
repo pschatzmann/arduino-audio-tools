@@ -2063,7 +2063,7 @@ struct TimerCallbackAudioStreamInfo : public AudioInfo {
 };
 
 // forward declaration: relevant only if use_timer == true
-  void IRAM_ATTR timerCallback(void *obj);
+static  void IRAM_ATTR timerCallback(void *obj);
 /**
  * @brief Callback driven Audio Source (rx_tx_mode==RX_MODE) or Audio Sink
  * (rx_tx_mode==TX_MODE). This class allows to to integrate external libraries
