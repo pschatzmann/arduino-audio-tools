@@ -57,7 +57,10 @@ public:
 
   AudioInfo audioInfo() override { return decoder.audioInfo(); }
 
-  bool begin(AudioInfo info) { return decoder.begin(info); }
+  bool begin(AudioInfo info) { 
+    decoder.setAudioInfo(info);
+    return decoder.begin(); 
+  }
 
   bool begin() override {
     TRACED();
