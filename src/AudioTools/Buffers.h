@@ -501,6 +501,10 @@ class RingBufferFile : public BaseBuffer<T> {
   // not supported
   T *address() override { return nullptr; }
 
+  size_t size() override {
+    return write_pos - read_pos;
+  }
+
  protected:
   File *p_file = nullptr;
   int write_pos;
