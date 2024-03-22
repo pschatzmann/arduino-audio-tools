@@ -34,7 +34,7 @@ class Task {
     }
   }
 
-  bool begin(void (*process)()) {
+  bool begin(std::function<void()> process) {
     LOGI("staring task");
     loop_code = process;
     resume();
@@ -52,7 +52,7 @@ class Task {
 
  protected:
   TaskHandle_t xHandle = nullptr;
-  void (*loop_code)() = nop;
+  std::function<void()> loop_code = nop;
 
   static void nop() { delay(100); }
 

@@ -11,6 +11,7 @@
  */
 
 #include "AudioTools.h"
+#include "AudioLibs/HLSStream.h"
 #include "AudioCodecs/CodecMTS.h"
 #include "AudioCodecs/CodecADTS.h"
 #include "AudioCodecs/CodecAACHelix.h"
