@@ -9,15 +9,14 @@
 
 #ifdef IS_DESKTOP
 #include "AudioLibs/PortAudioStream.h"
-typedef PortAudioStream MyStdOut;
+PortAudioStream out;
 #else
-#include "AudioLibs/AudioBoardStream.h"
-typedef AudioBoardStream MyStdOut;
-
+#include "AudioLibs/AudioBoardStream.h" // install https://github.com/pschatzmann/arduino-audio-driver
+AudioBoardStream out(AudioKitEs8388V1); 
 #endif
+
 Instrmnt *p_Instrmnt=nullptr; // will be allocated dynamically
 STKStream<Instrmnt> in;
-MyStdOut out; // or replace with I2SStream or any other output class
 StreamCopy copier(out, in);
 MusicalNotes notes;
 

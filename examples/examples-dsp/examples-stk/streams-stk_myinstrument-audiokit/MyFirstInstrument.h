@@ -23,9 +23,9 @@ class MyFirstInstrument : public Instrmnt  {
        adsr.keyOff();
     }
 
-    float tick() {
+    float tick( unsigned int channel = 0) override {
        return echo.tick(wave.tick()) * adsr.tick();
-    }
+    };
 
   protected:
     stk::SineWave wave;
