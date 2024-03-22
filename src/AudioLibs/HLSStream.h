@@ -5,6 +5,7 @@
 #ifdef USE_URL_ARDUINO
 #include "AudioBasic/StrExt.h"
 #include "AudioHttp/URLStream.h"
+#include "Concurrency/Concurrency.h"
 
 #define MAX_HLS_LINE 512
 
@@ -20,19 +21,23 @@ namespace audio_tools {
 
 class URLLoader {
  public:
-  URLLoader(URLStream &stream) { p_stream = &stream; };
+  URLLoader(URLStream &stream) { 
+    p_stream = &stream;
+  };
 
   ~URLLoader() { end(); }
 
   bool begin() {
     TRACED();
-    buffer.resize(buffer_size, buffer_count);
+    buffer.resize(buffer_size * buffer_count);
+    task.begin(std::bind(&URLLoader::bufferRefill, this));
     active = true;
     return true;
   }
 
   void end() {
     TRACED();
+    task.end();
     p_stream->end();
     p_stream = nullptr;
     buffer.clear();
@@ -64,7 +69,7 @@ class URLLoader {
   int available() {
     if (!active) return 0;
     TRACED();
-    bufferRefill();
+    //bufferRefill();
     return buffer.available();
   }
 
@@ -72,7 +77,7 @@ class URLLoader {
   size_t readBytes(uint8_t *data, size_t len) {
     if (!active) return 0;
     TRACED();
-    bufferRefill();
+    //bufferRefill();
     if (buffer.available() < len) LOGW("Buffer underflow");
     return buffer.readArray(data, len);
   }
@@ -94,7 +99,8 @@ class URLLoader {
 
  protected:
   Vector<const char *> urls{10};
-  NBuffer<uint8_t> buffer{DEFAULT_BUFFER_SIZE, 50};
+  BufferRTOS<uint8_t> buffer{0};
+  Task task{"Refill",1024*5,1,1};
   bool active = false;
   int buffer_size = DEFAULT_BUFFER_SIZE;
   int buffer_count = 10;
@@ -107,10 +113,12 @@ class URLLoader {
     // we have nothing to do
     if (urls.empty()) {
       LOGD("urls empty");
+      delay(10);
       return;
     }
     if (buffer.availableForWrite() == 0) {
       LOGD("buffer full");
+      delay(10);
       return;
     }
 
