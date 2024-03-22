@@ -594,6 +594,7 @@ public:
     p_start = start;
     p_next = start;
     max_size = len;
+    is_active = true;
     if (p_next == nullptr) {
       LOGE("start must not be null");
     }
