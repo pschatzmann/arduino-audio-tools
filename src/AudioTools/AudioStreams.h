@@ -200,7 +200,7 @@ class AudioStreamWrapper : public AudioStream {
 class MemoryStream : public AudioStream {
  public:
   /// Constructor for alloction in RAM
-  MemoryStream(int buffer_size = 512, MemoryType memoryType = RAM) {
+  MemoryStream(int buffer_size, MemoryType memoryType) {
     LOGD("MemoryStream: %d", buffer_size);
     this->buffer_size = buffer_size;
     this->memory_type = memoryType;
