@@ -287,6 +287,7 @@ typedef uint32_t eps32_i2s_sample_rate_type;
 #define USE_STREAM_READ_OVERRIDE
 #define USE_CONCURRENCY
 //#define USE_ALLOCATOR true
+//#define USE_INITIALIZER_LIST
 
 #define PWM_FREQENCY 30000
 #define PIN_PWM_START 1
