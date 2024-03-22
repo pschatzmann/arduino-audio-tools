@@ -1,5 +1,5 @@
 /**
- * @file base-SynchronizedBufferRTOS.ino
+ * @file base-BufferRTOS.ino
  * @author Phil Schatzmann
  * @brief Data provider on core 0 with data consumer on core 1
  * @version 0.1
@@ -9,11 +9,11 @@
  * 
  */
 #include "AudioTools.h"
-#include "freertos-all.h" // https://github.com/pschatzmann/arduino-freertos-addons
+#include "Concurrency/Concurrency.h" // https://github.com/pschatzmann/arduino-freertos-addons
 
-SynchronizedBufferRTOS<int16_t> buffer(1024);
+BufferRTOS<int16_t> buffer(1024);
 void doWrite(); // forward declaration 
-Task writeTask("write",5000,10, doWrite);  // FreeRTOS task from addons
+Task writeTask("write",5000,10, 0);  // FreeRTOS task from addons
 
 // create data and write it to buffer
 void doWrite() {
@@ -30,7 +30,7 @@ void setup(){
     AudioLogger::instance().begin(Serial, AudioLogger::Info);
     
     // start on core 0
-    writeTask.Start(0); 
+    writeTask.begin(doWrite); 
 }
 
 // The loop runs on core 1: We read back the data

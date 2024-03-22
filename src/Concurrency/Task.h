@@ -34,10 +34,16 @@ class Task {
     }
   }
 
-  void begin(void (*process)()) {
+  bool begin(void (*process)()) {
     LOGI("staring task");
     loop_code = process;
     resume();
+    return true;
+  }
+
+  /// suspends the task
+  void end() {
+    suspend();
   }
 
   void suspend() { vTaskSuspend(xHandle); }
