@@ -15,7 +15,7 @@
 #include "AudioCodecs/CodecMP3Helix.h"
 
 
-URLStream url("Phil Schatzmann","sabrina01");
+URLStream url("ssid","password");
 I2SStream i2s; // final output of decoded stream
 NumberFormatConverterStream nfc(i2s);
 EncodedAudioStream dec(&nfc, new MP3DecoderHelix()); // Decoding stream
