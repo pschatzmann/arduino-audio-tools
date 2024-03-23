@@ -125,7 +125,7 @@ class Str {
         virtual void add(int value){
             if (!this->isConst()){
                 grow(this->length()+11);
-                sprintf(this->chars+len,"%d",value);
+                snprintf(this->chars+len,10, "%d",value);
                 len = strlen(chars);
             }
         }
@@ -750,8 +750,8 @@ class Str {
 
     protected:
         char* chars = nullptr;
-        bool is_const=false;
-        int len=0;
+        bool is_const = false;
+        int len = 0;
         int maxlen = 0;
         int savedLen = -1;
         char savedChar;

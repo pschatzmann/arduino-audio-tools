@@ -74,7 +74,7 @@ class HttpChunkReader : public HttpLineReader {
   int available() {
     int result = has_ended ? 0 : open_chunk_len;
     char msg[50];
-    sprintf(msg, "available=>%d", result);
+    snprintf(msg, 50, "available=>%d", result);
     LOGD("HttpChunkReader: %s", msg);
 
     return result;
@@ -107,7 +107,7 @@ class HttpChunkReader : public HttpLineReader {
     open_chunk_len = strtol((char *)len_str, nullptr, 16);
 
     char msg[40];
-    sprintf(msg, "chunk_len: %d", open_chunk_len);
+    snprintf(msg,40, "chunk_len: %d", open_chunk_len);
     LOGD("HttpChunkReader::readChunkLen->%s", msg);
 
     if (open_chunk_len == 0) {

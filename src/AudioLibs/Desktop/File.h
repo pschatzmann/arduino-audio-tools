@@ -76,14 +76,14 @@ class File : public Stream {
     
     virtual int print(int number) NOARD_OVR {
         char buffer[80];
-        int len = sprintf(buffer, "%d", number);
+        int len = snprintf(buffer,80, "%d", number);
         print(buffer);
         return len;
     }
     
     virtual int println(int number){
         char buffer[80];
-        int len = sprintf(buffer, "%d\n", number);
+        int len = snprintf(buffer,80, "%d\n", number);
         print(buffer);
         return len;
     }

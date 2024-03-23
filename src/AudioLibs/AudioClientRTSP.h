@@ -683,7 +683,7 @@ void OurSink::afterGettingFrame(unsigned frameSize,
     envir() << " (with " << numTruncatedBytes << " bytes truncated)";
   char uSecsStr[6 + 1];  // used to output the 'microseconds' part of the
                          // presentation time
-  sprintf(uSecsStr, "%06u", (unsigned)presentationTime.tv_usec);
+  snprintf(uSecsStr,7 , "%06u", (unsigned)presentationTime.tv_usec);
   envir() << ".\tPresentation time: " << (int)presentationTime.tv_sec << "."
           << uSecsStr;
   if (fSubsession.rtpSource() != NULL &&

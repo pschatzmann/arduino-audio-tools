@@ -718,7 +718,7 @@ class TfLiteMicroSpeachWriter : public TfLiteWriter {
       TRACED();
       if (is_new_command) {
         char buffer[80];
-        sprintf(buffer, "Result: %s, score: %d, is_new: %s", found_command,
+        snprintf(buffer, 80, "Result: %s, score: %d, is_new: %s", found_command,
                 score, is_new_command ? "true" : "false");
         Serial.println(buffer);
       }
