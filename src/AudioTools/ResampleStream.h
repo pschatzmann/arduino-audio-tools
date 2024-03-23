@@ -142,7 +142,17 @@ class ReformatBaseStream : public AudioStream {
     p_print = &stream;
   }
 
+  virtual void setStream(AudioStream &stream) {
+    p_stream = &stream;
+    p_print = &stream;
+    addNotifyAudioChange(stream);
+  }
+
   virtual void setStream(Print &print) { p_print = &print; }
+  virtual void setStream(AudioOutput &print) { 
+    p_print = &print; 
+    addNotifyAudioChange(print);
+  }
 
   virtual Print *getPrint() { return p_print; }
 
