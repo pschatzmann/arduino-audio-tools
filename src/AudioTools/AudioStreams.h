@@ -1525,11 +1525,15 @@ class InputMixer : public AudioStream {
         len = min((int)len, availableBytes());
       }
 
-      // result_len must be full frames
-      int result_len = len * frame_size / frame_size;
-      // replace sample based with vector based implementation
-      //readBytesSamples((T*)data, result_len));
-      readBytesVector((T*)data, result_len);
+      int result_len = 0;
+
+      if (len > 0) {
+        // result_len must be full frames
+        result_len = len * frame_size / frame_size;
+        // replace sample based with vector based implementation
+        //readBytesSamples((T*)data, result_len));
+        result_len = readBytesVector((T*)data, result_len);
+      }
       return result_len;
     }
 
@@ -1561,15 +1565,18 @@ class InputMixer : public AudioStream {
     Vector<T> current_vect;
 
     /// mixing using a vector of samples
-    void readBytesVector(T* p_data, int byteCount) {
+    int readBytesVector(T* p_data, int byteCount) {
       int samples = byteCount / sizeof(T);
       result_vect.resize(samples);
       current_vect.resize(samples);
       int stream_count = size();
       resultClear();
+      int samples_eff_max = 0;
       for (int j=0;j<stream_count;j++){
         if (weights[j]>0){
-          readSamples(streams[j],current_vect.data(), samples);
+          int samples_eff = readSamples(streams[j],current_vect.data(), samples);
+          if (samples_eff > samples_eff_max)
+            samples_eff_max = samples_eff;
           float fact = static_cast<float>(weights[j]) / total_weights;
           resultAdd(fact);
         }
@@ -1578,6 +1585,7 @@ class InputMixer : public AudioStream {
       for (int j=0;j<samples;j++){
         p_data[j] = result_vect[j];
       }
+      return samples_eff_max * sizeof(T);
     }
 
     /// Provides the available bytes from the first stream with data
