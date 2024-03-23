@@ -8,6 +8,7 @@
 #include "Concurrency/Concurrency.h"
 
 #define MAX_HLS_LINE 512
+#define USE_TASK false
 
 namespace audio_tools {
 
@@ -29,15 +30,22 @@ class URLLoader {
 
   bool begin() {
     TRACED();
+#if USE_TASK
     buffer.resize(buffer_size * buffer_count);
     task.begin(std::bind(&URLLoader::bufferRefill, this));
+#else
+    buffer.resize(buffer_size, buffer_count);
+#endif
+
     active = true;
     return true;
   }
 
   void end() {
     TRACED();
+#if USE_TASK
     task.end();
+#endif
     p_stream->end();
     p_stream = nullptr;
     buffer.clear();
@@ -69,7 +77,9 @@ class URLLoader {
   int available() {
     if (!active) return 0;
     TRACED();
-    //bufferRefill();
+#if !USE_TASK
+    bufferRefill();
+#endif
     return buffer.available();
   }
 
@@ -77,7 +87,9 @@ class URLLoader {
   size_t readBytes(uint8_t *data, size_t len) {
     if (!active) return 0;
     TRACED();
-    //bufferRefill();
+#if !USE_TASK
+    bufferRefill();
+#endif
     if (buffer.available() < len) LOGW("Buffer underflow");
     return buffer.readArray(data, len);
   }
@@ -99,8 +111,12 @@ class URLLoader {
 
  protected:
   Vector<const char *> urls{10};
+#if USE_TASK
   BufferRTOS<uint8_t> buffer{0};
   Task task{"Refill",1024*5,1,1};
+#else
+  NBuffer<uint8_t> buffer{0,0};
+#endif
   bool active = false;
   int buffer_size = DEFAULT_BUFFER_SIZE;
   int buffer_count = 10;
@@ -371,7 +387,7 @@ class HLSParser {
     }
 
     next_sement_load_time = millis() + (segment_count * tartget_duration_ms);
-    assert(segment_count > 0);
+    //assert(segment_count > 0);
 
     // we request a minimum of collected urls to play before we start
     active = true;
