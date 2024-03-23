@@ -272,6 +272,7 @@ template <typename TFrom, typename TTo>
 class NumberFormatConverterStreamT : public ReformatBaseStream {
  public:
   NumberFormatConverterStreamT() = default;
+  NumberFormatConverterStreamT(float gain) { setGain(gain); }
   NumberFormatConverterStreamT(Stream &stream) { setStream(stream); }
   NumberFormatConverterStreamT(Print &print) { setStream(print); }
   NumberFormatConverterStreamT(AudioStream &stream) { setStream(stream); }
@@ -312,7 +313,7 @@ class NumberFormatConverterStreamT : public ReformatBaseStream {
     } else {
       int size_bytes = sizeof(TTo) * samples;
       buffer.resize(size_bytes);
-      NumberConverter::convertArray<TFrom, TTo>(data_source,(TTo*) buffer.data(), samples);
+      NumberConverter::convertArray<TFrom, TTo>(data_source,(TTo*) buffer.data(), samples, gain);
       p_print->write((uint8_t *)buffer.address(), size_bytes);
       buffer.reset();
     }
@@ -336,7 +337,7 @@ class NumberFormatConverterStreamT : public ReformatBaseStream {
       buffer.resize(sizeof(TFrom) * samples);
       readSamples<TFrom>(p_stream, (TFrom *)buffer.address(), samples);
       TFrom *data = (TFrom *)buffer.address();
-      NumberConverter::convertArray<TFrom, TTo>(data, data_target, samples);
+      NumberConverter::convertArray<TFrom, TTo>(data, data_target, samples, gain);
       buffer.reset();
     }
     return size;
@@ -354,9 +355,15 @@ class NumberFormatConverterStreamT : public ReformatBaseStream {
   /// sample
   void setBuffered(bool flag) { is_buffered = flag; }
 
+  /// Defines the gain (only available when buffered is true)
+  void setGain(float value){
+    gain = value;
+  }
+
  protected:
   SingleBuffer<uint8_t> buffer{0};
   bool is_buffered = true;
+  float gain = 1.0f;
 };
 
 /**
@@ -386,12 +393,12 @@ class NumberFormatConverterStream : public ReformatBaseStream {
     notifyAudioChange(to_format);
   }
 
-  bool begin(AudioInfo info, int to_bit_per_samples) {
+  bool begin(AudioInfo info, int to_bit_per_samples, float gain=1.0f) {
     setAudioInfo(info);
-    return begin(info.bits_per_sample, to_bit_per_samples);
+    return begin(info.bits_per_sample, to_bit_per_samples, gain);
   }
 
-  bool begin(int from_bit_per_samples, int to_bit_per_samples) {
+  bool begin(int from_bit_per_samples, int to_bit_per_samples, float gain = 1.0) {
     LOGI("begin %d -> %d bits", from_bit_per_samples, to_bit_per_samples);
     bool result = true;
     this->from_bit_per_samples = from_bit_per_samples;
@@ -401,17 +408,17 @@ class NumberFormatConverterStream : public ReformatBaseStream {
       LOGI("no bit conversion: %d -> %d", from_bit_per_samples,
            to_bit_per_samples);
     } else if (from_bit_per_samples == 8 && to_bit_per_samples == 16) {
-      converter = new NumberFormatConverterStreamT<int8_t, int16_t>();
+      converter = new NumberFormatConverterStreamT<int8_t, int16_t>(gain);
     } else if (from_bit_per_samples == 16 && to_bit_per_samples == 8) {
-      converter = new NumberFormatConverterStreamT<int16_t, int8_t>();
+      converter = new NumberFormatConverterStreamT<int16_t, int8_t>(gain);
     } else if (from_bit_per_samples == 24 && to_bit_per_samples == 16) {
-      converter = new NumberFormatConverterStreamT<int24_t, int16_t>();
+      converter = new NumberFormatConverterStreamT<int24_t, int16_t>(gain);
     } else if (from_bit_per_samples == 16 && to_bit_per_samples == 24) {
-      converter = new NumberFormatConverterStreamT<int16_t, int24_t>();
+      converter = new NumberFormatConverterStreamT<int16_t, int24_t>(gain);
     } else if (from_bit_per_samples == 32 && to_bit_per_samples == 16) {
-      converter = new NumberFormatConverterStreamT<int32_t, int16_t>();
+      converter = new NumberFormatConverterStreamT<int32_t, int16_t>(gain);
     } else if (from_bit_per_samples == 16 && to_bit_per_samples == 32) {
-      converter = new NumberFormatConverterStreamT<int16_t, int32_t>();
+      converter = new NumberFormatConverterStreamT<int16_t, int32_t>(gain);
     } else {
       result = false;
       LOGE("bit combination not supported %d -> %d", from_bit_per_samples,
