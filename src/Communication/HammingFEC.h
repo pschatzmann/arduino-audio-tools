@@ -232,7 +232,7 @@ class HammingFEC : public Stream {
                 
                 // Check for multiple errors //
                 if (!(onCount & 1 ^ getBit(input[b], 0))) { // last bit of onCount (total parity) XOR first bit of block_t (parity bit)
-                    printf("\nMore than one error detected. Aborting.\n");
+                    LOGE("\nMore than one error detected. Aborting.\n");
                     return false;
                 }
                 

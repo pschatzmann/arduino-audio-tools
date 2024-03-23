@@ -1162,9 +1162,9 @@ class MeasuringStream : public AudioStream {
     void printResult() {
         char msg[70];
         if (frame_size==0){
-          sprintf(msg, "==> Bytes per second: %d", bytes_per_second);
+          snprintf(msg, 70, "==> Bytes per second: %d", bytes_per_second);
         } else {
-          sprintf(msg, "==> Samples per second: %d", bytes_per_second/frame_size);
+          snprintf(msg, 70, "==> Samples per second: %d", bytes_per_second/frame_size);
         }
         if (p_logout!=nullptr){
           p_logout->println(msg);

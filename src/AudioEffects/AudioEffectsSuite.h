@@ -499,14 +499,14 @@ protected:
     return interpTable;
   }
 
-  void printInterpTable() {
-    for (int j = 0; j < interpResolution; j++) {
-      for (int i = 0; i < interpOrder; i++) {
-        printf("index %d: %.2f \t", i, interpolationTable[i][j]);
-      }
-      printf("\n");
-    }
-  }
+  // void printInterpTable() {
+  //   for (int j = 0; j < interpResolution; j++) {
+  //     for (int i = 0; i < interpOrder; i++) {
+  //       printf("index %d: %.2f \t", i, interpolationTable[i][j]);
+  //     }
+  //     printf("\n");
+  //   }
+  // }
 
 protected:
   /**
@@ -679,21 +679,21 @@ public:
    */
   effectsuite_t envelope(effectsuite_t sample) { return applyFilter(rms(sample)); }
 
-  void printBuffers() {
-    printf("FIRb\t\tIIRb\n");
-    for (int i = 0; i < filterOrder; i++) {
-      printf("%.4e\t%.4e\n", firBuffer[i], iirBuffer[i]);
-    }
-    printf("\n");
-  }
+  // void printBuffers() {
+  //   printf("FIRb\t\tIIRb\n");
+  //   for (int i = 0; i < filterOrder; i++) {
+  //     printf("%.4e\t%.4e\n", firBuffer[i], iirBuffer[i]);
+  //   }
+  //   printf("\n");
+  // }
 
-  void printCoefs() {
-    printf("FIR\t\tIIR\n");
-    for (int i = 0; i < filterOrder; i++) {
-      printf("%.4e\t%.4e\n", firCoefficients[i], iirCoefficients[i]);
-    }
-    printf("\n");
-  }
+  // void printCoefs() {
+  //   printf("FIR\t\tIIR\n");
+  //   for (int i = 0; i < filterOrder; i++) {
+  //     printf("%.4e\t%.4e\n", firCoefficients[i], iirCoefficients[i]);
+  //   }
+  //   printf("\n");
+  // }
 
   /** changes the current Chebyshev type 1 coefficients without altering the
    * filter order. This allows for use in an audio process thread as it avoids

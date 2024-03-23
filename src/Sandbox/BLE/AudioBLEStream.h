@@ -46,7 +46,7 @@ public:
   void setFramed(bool flag) { is_framed = flag; }
 
   Str toStr(AudioInfo info) {
-    sprintf(audio_info_str, "%d:%d:%d", info.sample_rate, info.channels,
+    snprintf(audio_info_str, 40, "%d:%d:%d", info.sample_rate, info.channels,
             info.bits_per_sample);
     return Str(audio_info_str);
   }
