@@ -17,8 +17,8 @@
 
 URLStream url("Phil Schatzmann","sabrina01");
 I2SStream i2s; // final output of decoded stream
-NumberFormatConverterStream fc(i2s);
-EncodedAudioStream dec(&fc, new MP3DecoderHelix()); // Decoding stream
+NumberFormatConverterStream nfc(i2s);
+EncodedAudioStream dec(&nfc, new MP3DecoderHelix()); // Decoding stream
 StreamCopy copier(dec, url); // copy url to decoder
 
 
@@ -27,7 +27,7 @@ void setup(){
   AudioLogger::instance().begin(Serial, AudioLogger::Info);  
 
   // convert 16 bits to 32
-  fc.begin(16, 32); 
+  nfc.begin(16, 32); 
 
   // setup i2s
   auto config = i2s.defaultConfig(TX_MODE);
@@ -36,7 +36,7 @@ void setup(){
   //config.pin_bck = 11;
   //config.pin_data = 12;
   //config.mode = I2S_STD_FORMAT;
-  //config.bits_per_sample = 32;
+  //config.bits_per_sample = 32; // we coult do this explicitly
   i2s.begin(config);
 
   // setup I2S based on sampling rate provided by decoder
