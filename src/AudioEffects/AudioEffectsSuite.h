@@ -17,7 +17,7 @@
  * 
  */
 
-#ifndef AVR
+#ifndef NO_EFFECTS_SUITE
 #include <cmath>
 #include <cstdint>
 #include <iostream>
