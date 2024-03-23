@@ -310,12 +310,10 @@ class NumberFormatConverterStreamT : public ReformatBaseStream {
         result_size += p_print->write((uint8_t *)&value, sizeof(TTo));
       }
     } else {
-      buffer.resize(sizeof(TTo) * samples);
-      for (size_t j = 0; j < samples; j++) {
-        TTo value = NumberConverter::convert<TFrom, TTo>(data_source[j]);
-        result_size += buffer.writeArray((uint8_t *)&value, sizeof(TTo));
-      }
-      p_print->write((uint8_t *)buffer.address(), result_size);
+      int size_bytes = sizeof(TTo) * samples;
+      buffer.resize(size_bytes);
+      NumberConverter::convertArray<TFrom, TTo>(data_source,(TTo*) buffer.data(), samples);
+      p_print->write((uint8_t *)buffer.address(), size_bytes);
       buffer.reset();
     }
 
@@ -338,9 +336,8 @@ class NumberFormatConverterStreamT : public ReformatBaseStream {
       buffer.resize(sizeof(TFrom) * samples);
       readSamples<TFrom>(p_stream, (TFrom *)buffer.address(), samples);
       TFrom *data = (TFrom *)buffer.address();
-      for (size_t j = 0; j < samples; j++) {
-        data_target[j] = NumberConverter::convert<TFrom, TTo>(data[j]);
-      }
+      NumberConverter::convertArray<TFrom, TTo>(data, data_target, samples);
+      buffer.reset();
     }
     return size;
   }

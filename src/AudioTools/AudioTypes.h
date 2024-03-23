@@ -343,6 +343,15 @@ class NumberConverter {
             return clip<ToT>(value1 * maxValueT<ToT>() / maxValueT<FromT>());
         }
 
+        template <typename FromT, typename ToT> 
+        static void convertArray(FromT* from, ToT*to, int samples, float vol=1.0f){
+            float  factor = static_cast<float>(maxValueT<ToT>()) / maxValueT<FromT>();
+            float vol_factor = factor * vol;
+            for (int j=0;j<samples;j++){
+              to[j] = clip<ToT>(vol_factor * from[j]);
+            }
+        }
+
 };
 
 #if defined(USE_I2S) 
