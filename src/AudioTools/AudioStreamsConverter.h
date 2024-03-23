@@ -274,6 +274,23 @@ class NumberFormatConverterStreamT : public ReformatBaseStream {
   NumberFormatConverterStreamT() = default;
   NumberFormatConverterStreamT(Stream &stream) { setStream(stream); }
   NumberFormatConverterStreamT(Print &print) { setStream(print); }
+  NumberFormatConverterStreamT(AudioStream &stream) { setStream(stream); }
+  NumberFormatConverterStreamT(AudioOutput &print) { setStream(print); }
+
+  void setAudioInfo (AudioInfo info) override {
+    this->info = info;
+    if (info.bits_per_sample == sizeof(TFrom)*8){
+      LOGE("Invalid bits_per_sample %d", info.bits_per_sample);
+      info.logInfo();
+    } 
+    info.logInfo();
+    
+    // notify format change with target bit per sample
+    AudioInfo to_format;
+    to_format.copyFrom(info);
+    to_format.bits_per_sample = sizeof(TTo)*8;
+    notifyAudioChange(to_format);
+  }
 
   bool begin() override {
     LOGI("begin %d -> %d bits", (int) sizeof(TFrom),(int) sizeof(TTo));
@@ -342,7 +359,7 @@ class NumberFormatConverterStreamT : public ReformatBaseStream {
 
  protected:
   SingleBuffer<uint8_t> buffer{0};
-  bool is_buffered = false;
+  bool is_buffered = true;
 };
 
 /**
@@ -358,14 +375,22 @@ class NumberFormatConverterStream : public ReformatBaseStream {
   NumberFormatConverterStream() = default;
   NumberFormatConverterStream(Stream &stream) { setStream(stream); }
   NumberFormatConverterStream(Print &print) { setStream(print); }
+  NumberFormatConverterStream(AudioStream &stream) { setStream(stream); }
+  NumberFormatConverterStream(AudioOutput &print) { setStream(print); }
 
   void setAudioInfo (AudioInfo info) override {
-    this->from_bit_per_samples = info.sample_rate;
-    AudioStream::setAudioInfo(info);
+    this->from_bit_per_samples = info.bits_per_sample;
+    this->info = info;
+    info.logInfo();
+    // notify format change with target bit per sample
+    AudioInfo to_format;
+    to_format.copyFrom(info);
+    to_format.bits_per_sample = this->to_bit_per_samples;
+    notifyAudioChange(to_format);
   }
 
   bool begin(AudioInfo info, int to_bit_per_samples) {
-    AudioStream::setAudioInfo(info);
+    setAudioInfo(info);
     return begin(info.bits_per_sample, to_bit_per_samples);
   }
 
@@ -425,7 +450,8 @@ class NumberFormatConverterStream : public ReformatBaseStream {
     } else if (from_bit_per_samples == 16 && to_bit_per_samples == 32) {
       return getConverter<int16_t, int32_t>()->write(data, size);
     } else {
-      TRACEE();
+      LOGE("bit combination not supported %d -> %d", from_bit_per_samples,
+           to_bit_per_samples);
       return 0;
     }
   }
