@@ -26,7 +26,7 @@ void setup(){
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);  
 
-  // convert 16 bits to 32
+  // convert 16 bits to 32, you could also change the gain
   nfc.begin(16, 32); 
 
   // setup i2s

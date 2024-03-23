@@ -395,14 +395,24 @@ size_t  readSamples(Stream* p_stream, T* data, int samples){
   uint8_t *p_result = (uint8_t*) data;
   int open = samples*sizeof(T);
   int total = 0;
-  // copy missing data
-  while (open>0){
+  int count0 = 0;
+  // copy missing data - we abort after 5 x read returned 0 bytes
+  while (open > 0){
     int read = p_stream->readBytes(p_result+total, open);
     open -= read;
     total += read;
+    if (read == 0){
+      count0++;
+      delay(1);
+    } else {
+      count0 = 0;
+    }
+    // abort loop
+    if (count0 > 5)
+      break;
   }
   // convert bytes to samples
-  return samples / sizeof(T);
+  return total / sizeof(T);
 }
 
 /// guaranteed to return the requested data

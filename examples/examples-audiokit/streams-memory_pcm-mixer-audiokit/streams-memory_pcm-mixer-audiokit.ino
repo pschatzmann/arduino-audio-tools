@@ -20,6 +20,8 @@ MemoryStream guitar(guitar_raw, guitar_raw_len);
 StreamCopy copier(kit, mixer);
 
 void setup() {
+  Serial.begin(115200);
+  AudioLogger::instance().begin(Serial, AudioLogger::Info);  
 
   // auto restart when MemoryStream has ended
   drums.setLoop(true);
