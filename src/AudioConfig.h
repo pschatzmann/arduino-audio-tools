@@ -208,12 +208,14 @@
 
 #define USE_ANALOG
 #define USE_PWM
-#define USE_URL_ARDUINO
-#define USE_WIFI
-#define USE_WIFI_CLIENT_SECURE
 #define USE_I2S
 #define USE_PDM
+
+#define USE_WIFI
+#define USE_WIFI_CLIENT_SECURE
+#define USE_URL_ARDUINO
 #define USE_AUDIO_SERVER
+
 #define USE_TYPETRAITS
 #define USE_EFFECTS_SUITE
 #define USE_TIMER
@@ -224,6 +226,7 @@
 #define USE_EXT_BUTTON_LOGIC
 //#define USE_ALLOCATOR true
 #define HAS_IOSTRAM
+#define USE_TASK true
 
 #define PWM_FREQENCY 30000
 #define PIN_PWM_START 12

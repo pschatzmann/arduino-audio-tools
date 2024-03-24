@@ -8,7 +8,6 @@
 #include "Concurrency/Concurrency.h"
 
 #define MAX_HLS_LINE 512
-#define USE_TASK false
 
 namespace audio_tools {
 
@@ -22,9 +21,8 @@ namespace audio_tools {
 
 class URLLoader {
  public:
-  URLLoader(URLStream &stream) { 
-    p_stream = &stream;
-  };
+  URLLoader(URLStream &stream) { p_stream = &stream; };
+  URLLoader() { p_stream = &default_stream; };
 
   ~URLLoader() { end(); }
 
@@ -46,7 +44,7 @@ class URLLoader {
 #if USE_TASK
     task.end();
 #endif
-    p_stream->end();
+    if (p_stream != nullptr) p_stream->end();
     p_stream = nullptr;
     buffer.clear();
     active = false;
@@ -58,15 +56,8 @@ class URLLoader {
     Str url_str(url);
     char *str = new char[url_str.length() + 1];
     memcpy(str, url_str.c_str(), url_str.length() + 1);
+    LockGuard lock_guard{mutex};
     urls.push_back(str);
-    // URLStream *p_stream = new URLStream();
-    // p_stream->setWaitForData(false);
-    // p_stream->setAutoCreateLines(false);
-    // if (!p_stream->begin(url)){
-    //   TRACEE();
-    // }
-
-    // urls.push_back(p_stream);
   }
 
   /// Provides the number of open urls which can be played. Refills them, when
@@ -110,12 +101,14 @@ class URLLoader {
   }
 
  protected:
+  URLStream default_stream;
   Vector<const char *> urls{10};
 #if USE_TASK
   BufferRTOS<uint8_t> buffer{0};
-  Task task{"Refill",1024*5,1,1};
+  Task task{"Refill", 1024 * 5, 1, 1};
+  Mutex mutex;
 #else
-  NBuffer<uint8_t> buffer{0,0};
+  NBuffer<uint8_t> buffer{0, 0};
 #endif
   bool active = false;
   int buffer_size = DEFAULT_BUFFER_SIZE;
@@ -139,7 +132,8 @@ class URLLoader {
     }
 
     // switch current stream if we have no more data
-    if ((p_stream->totalRead() == p_stream->contentLength()) && !urls.empty()) {
+    if ((!*p_stream || p_stream->totalRead() == p_stream->contentLength()) &&
+        !urls.empty()) {
       LOGD("Refilling");
       if (url_to_play != nullptr) {
         delete url_to_play;
@@ -149,6 +143,7 @@ class URLLoader {
       if (p_stream->httpRequest().connected()) p_stream->end();
       p_stream->begin(url_to_play);
       p_stream->waitForData(500);
+      LockGuard lock_guard{mutex};
       urls.pop_front();
       // assert(urls[0]!=url);
 
@@ -212,6 +207,8 @@ class URLHistory {
 
   void clear() { history.clear(); }
 
+  int size() { return history.size(); }
+
  protected:
   Vector<const char *> history;
 };
@@ -247,6 +244,11 @@ class HLSParser {
       TRACEE();
       return false;
     }
+
+#if USE_TASK
+    segment_load_task.begin(std::bind(&HLSParser::reloadSegments, this));
+#endif
+
     custom_log_level.reset();
     return true;
   }
@@ -255,7 +257,9 @@ class HLSParser {
     TRACED();
     int result = 0;
     custom_log_level.set();
-    reloadSegments(this);
+#if USE_TASK
+    reloadSegments();
+#endif
     if (active) result = url_loader.available();
     custom_log_level.reset();
     return result;
@@ -265,7 +269,9 @@ class HLSParser {
     TRACED();
     size_t result = 0;
     custom_log_level.set();
-    reloadSegments(this);
+#if USE_TASK
+    reloadSegments();
+#endif
     if (active) result = url_loader.readBytes(buffer, len);
     custom_log_level.reset();
     return result;
@@ -289,6 +295,9 @@ class HLSParser {
   /// Closes the processing
   void end() {
     TRACEI();
+#if USE_TASK
+    segment_load_task.end();
+#endif
     codec.clear();
     segments_url_str.clear();
     url_stream.end();
@@ -316,22 +325,24 @@ class HLSParser {
   StrExt url_str;
   const char *index_url_str = nullptr;
   URLStream url_stream;
-  URLLoader url_loader{url_stream};
+  URLLoader url_loader;
+  URLHistory url_history;
+#if USE_TASK
+  Task segment_load_task{"Refill", 1024 * 5, 1, 1};
+#endif
   bool active = false;
   bool parse_segments_active = false;
   int media_sequence = 0;
   int tartget_duration_ms = 5000;
   int segment_count = 0;
   uint64_t next_sement_load_time = 0;
-  URLHistory url_history;
 
   // trigger the reloading of segments if the limit is underflowing
-  static void reloadSegments(void *ref) {
+  void reloadSegments() {
     TRACED();
-    HLSParser *self = (HLSParser *)ref;
     // get new urls
-    if (!self->segments_url_str.isEmpty()) {
-      self->parseSegments();
+    if (!segments_url_str.isEmpty()) {
+      parseSegments();
     }
   }
 
@@ -345,7 +356,7 @@ class HLSParser {
     url_stream.setAutoCreateLines(false);
     bool rc = url_stream.begin(index_url_str);
     url_active = true;
-    rc = parse(true);
+    rc = parseIndexLines();
     return rc;
   }
 
@@ -380,25 +391,25 @@ class HLSParser {
     }
 
     segment_count = 0;
-    if (!parse(false)) {
+    if (!parseSegmentLines()) {
       TRACEE();
       parse_segments_active = false;
       return false;
     }
 
     next_sement_load_time = millis() + (segment_count * tartget_duration_ms);
-    //assert(segment_count > 0);
+    // assert(segment_count > 0);
 
     // we request a minimum of collected urls to play before we start
-    active = true;
+    if (url_history.size() > 8) active = true;
     parse_segments_active = false;
 
     return true;
   }
 
   // parse the index file and the segments
-  bool parse(bool process_index) {
-    LOGI("parsing %s", process_index ? "Index" : "Segements")
+  bool parseIndexLines() {
+    TRACEI();
     char tmp[MAX_HLS_LINE];
     bool result = true;
     is_extm3u = false;
@@ -418,14 +429,38 @@ class HLSParser {
       }
 
       if (is_extm3u) {
-        if (process_index) {
-          if (!parseIndexLine(str)) {
-            return false;
-          }
-        } else {
-          if (!parseSegmentLine(str)) {
-            return false;
-          }
+        if (!parseIndexLine(str)) {
+          return false;
+        }
+      }
+    }
+    return result;
+  }
+
+  // parse the index file and the segments
+  bool parseSegmentLines() {
+    TRACEI();
+    char tmp[MAX_HLS_LINE];
+    bool result = true;
+    is_extm3u = false;
+
+    // parse lines
+    memset(tmp, 0, MAX_HLS_LINE);
+    while (true) {
+      memset(tmp, 0, MAX_HLS_LINE);
+      size_t len =
+          url_stream.httpRequest().readBytesUntil('\n', tmp, MAX_HLS_LINE);
+      if (len == 0 && url_stream.available() == 0) break;
+      Str str(tmp);
+
+      // check header
+      if (str.indexOf("#EXTM3U") >= 0) {
+        is_extm3u = true;
+      }
+
+      if (is_extm3u) {
+        if (!parseSegmentLine(str)) {
+          return false;
         }
       }
     }

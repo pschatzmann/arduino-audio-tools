@@ -57,7 +57,6 @@ class HttpLineReader {
               // remove cr
               str[j - 1] = 0;
               break;
-              ;
             } else {
               // remove nl
               str[j] = 0;
