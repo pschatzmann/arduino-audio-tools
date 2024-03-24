@@ -161,6 +161,10 @@
 #  define PWM_AUDIO_FREQUENCY 30000
 #endif
 
+// Activate Networking for All Processors
+// #define USE_ETHERNET
+// #define USE_AUDIO_SERVER
+// #define USE_URL_ARDUINO
 
 /**
  * ------------------------------------------------------------------------- 
@@ -352,9 +356,9 @@ uint32_t millis() {return (xTaskGetTickCount() * portTICK_PERIOD_MS);}
 #define USE_TYPETRAITS
 #define USE_EFFECTS_SUITE
 #define USE_TIMER
+#define USE_WIFI
 #define USE_AUDIO_SERVER
 #define USE_URL_ARDUINO
-#define USE_WIFI
 
 #define PIN_PWM_START 12
 #define PIN_I2S_BCK -1
@@ -484,9 +488,9 @@ uint32_t millis() {return (xTaskGetTickCount() * portTICK_PERIOD_MS);}
 // The Pico W has WIFI support
 #if defined(ARDUINO_ARCH_RP2040) && LWIP_IPV4==1
 #  include <WiFi.h>
-#  define USE_URL_ARDUINO
 #  define USE_WIFI
 #  define USE_WIFI_CLIENT_SECURE
+#  define USE_URL_ARDUINO
 #  define USE_AUDIO_SERVER
 using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #endif
@@ -543,10 +547,6 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #define USE_TIMER
 #define USE_ANALOG_ARDUINO
 #define USE_INT24_FROM_INT
-
-#define USE_ETHERNET
-#define USE_AUDIO_SERVER
-#define USE_URL_ARDUINO
 
 #define PIN_ANALOG_START PA0
 #define PIN_PWM_START PA0
