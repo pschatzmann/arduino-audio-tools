@@ -56,7 +56,9 @@ class URLLoader {
     Str url_str(url);
     char *str = new char[url_str.length() + 1];
     memcpy(str, url_str.c_str(), url_str.length() + 1);
+#if USE_TASK
     LockGuard lock_guard{mutex};
+#endif
     urls.push_back(str);
   }
 
@@ -143,7 +145,9 @@ class URLLoader {
       if (p_stream->httpRequest().connected()) p_stream->end();
       p_stream->begin(url_to_play);
       p_stream->waitForData(500);
+#if USE_TASK
       LockGuard lock_guard{mutex};
+#endif
       urls.pop_front();
       // assert(urls[0]!=url);
 
