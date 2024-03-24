@@ -349,10 +349,10 @@ uint32_t millis() {return (xTaskGetTickCount() * portTICK_PERIOD_MS);}
 #  include <ESP8266WiFi.h>
 //#define USE_URL_ARDUINO // commented out because of compile errors
 #define USE_I2S
-#define USE_AUDIO_SERVER
 #define USE_TYPETRAITS
 #define USE_EFFECTS_SUITE
 #define USE_TIMER
+#define USE_AUDIO_SERVER
 #define USE_URL_ARDUINO
 #define USE_WIFI
 
@@ -543,6 +543,10 @@ using WiFiServerSecure = BearSSL::WiFiServerSecure;
 #define USE_TIMER
 #define USE_ANALOG_ARDUINO
 #define USE_INT24_FROM_INT
+
+#define USE_ETHERNET
+#define USE_AUDIO_SERVER
+#define USE_URL_ARDUINO
 
 #define PIN_ANALOG_START PA0
 #define PIN_PWM_START PA0
