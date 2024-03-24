@@ -1,11 +1,15 @@
 #pragma once
 
 #include "AudioConfig.h"
-#ifdef USE_AUDIO_SERVER
+#if defined(USE_AUDIO_SERVER) && (defined(USE_ETHERNET) || defined(USE_WIFI))
 
-#ifdef ESP32
+#ifdef USE_WIFI
 #include <WiFi.h>
 #endif
+#ifdef USE_ETHERNET
+#include <Ethernet.h>
+#endif
+
 #include "AudioCodecs/CodecWAV.h"
 #include "AudioTools.h"
 
@@ -23,13 +27,14 @@ typedef void (*AudioServerDataCallback)(Print *out);
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class AudioServer {
+template<class Client,class Server>
+class AudioServerT {
  public:
   /**
    * @brief Construct a new Audio W A V Server object
    * We assume that the WiFi is already connected
    */
-  AudioServer(int port = 80) {
+  AudioServerT(int port = 80) {
     // the client returns 0 for avialableForWrite()
     copier.setCheckAvailableForWrite(false);
     setupServer(port);
@@ -41,7 +46,7 @@ class AudioServer {
    * @param network
    * @param password
    */
-  AudioServer(const char *network, const char *password, int port = 80) {
+  AudioServerT(const char *network, const char *password, int port = 80) {
     this->network = (char *)network;
     this->password = (char *)password;
     // the client returns 0 for avialableForWrite()
@@ -61,8 +66,9 @@ class AudioServer {
     this->in = &in;
     this->content_type = contentType;
 
+#ifdef USE_WIFI
     connectWiFi();
-
+#endif
     // start server
     server.begin();
     return true;
@@ -80,7 +86,9 @@ class AudioServer {
     this->callback = cb;
     this->content_type = contentType;
 
+#ifdef USE_WIFI
     connectWiFi();
+#endif
 
     // start server
     server.begin();
@@ -143,7 +151,7 @@ class AudioServer {
   Stream &out() { return client_obj; }
 
   /// Provides a pointer to the WiFiClient
-  WiFiClient *out_ptr() { return &client_obj; }
+  Client *out_ptr() { return &client_obj; }
 
   /// Checks if any clinent has connnected
   bool isClientConnected() { return client_obj.connected(); }
@@ -156,11 +164,11 @@ class AudioServer {
  protected:
   // WIFI
 #ifdef ESP32
-  WiFiServer server;
+  Server server;
 #else
-  WiFiServer server{80};
+  Server server{80};
 #endif
-  WiFiClient client_obj;
+  Client client_obj;
   char *password = nullptr;
   char *network = nullptr;
 
@@ -172,10 +180,11 @@ class AudioServer {
   BaseConverter *converter_ptr = nullptr;
 
   void setupServer(int port) {
-    WiFiServer tmp(port);
+    Server tmp(port);
     server = tmp;
   }
 
+#ifdef USE_WIFI
   void connectWiFi() {
     TRACED();
     if (WiFi.status() != WL_CONNECTED && network != nullptr &&
@@ -193,6 +202,7 @@ class AudioServer {
     Serial.print("IP address: ");
     Serial.println(WiFi.localIP());
   }
+#endif
 
   virtual void sendReplyHeader() {
     TRACED();
@@ -262,6 +272,16 @@ class AudioServer {
   }
 };
 
+#ifdef USE_WIFI
+using AudioServer = AudioServerT<WiFiClient, WiFiServer>;
+using AudioServerWiFi = AudioServerT<WiFiClient, WiFiServer>;
+#else
+using AudioServer = AudioServerT<EthernetClient, EthernetServer>;
+#endif
+
+#ifdef USE_ETHERNET
+using AudioServerEthernet = AudioServerT<EthernetClient, EthernetServer>;
+#endif
 /**
  * @brief A simple Arduino Webserver which streams the audio using the indicated
  * encoder.. This class is based on the WiFiServer class. All you need to do is
