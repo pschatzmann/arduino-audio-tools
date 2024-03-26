@@ -3,6 +3,7 @@
 #include "AudioTools/AudioLogger.h"
 #include "AudioBasic/Collections/Allocator.h"
 
+#if USE_TASK
 #ifdef ESP32
 #  include <freertos/stream_buffer.h>
 #  include "freertos/FreeRTOS.h"
@@ -196,3 +197,5 @@ template <class T>
 using SynchronizedBufferRTOS = BufferRTOS<T>;
 
 }  // namespace audio_tools
+
+#endif

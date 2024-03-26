@@ -6,6 +6,7 @@
 #  include <mutex>
 #endif
 
+#if USE_TASK
 #ifdef ESP32
 #  include "freertos/FreeRTOS.h"
 #  include "freertos/semphr.h"
@@ -84,6 +85,7 @@ protected:
   SemaphoreHandle_t xSemaphore = NULL;
 };
 
+
 /**
  * @brief RAII implementaion using a Mutex: Only a few microcontrollers provide
  * lock guards, so I decided to roll my own solution where we can just use a
@@ -115,3 +117,5 @@ protected:
 };
 
 }
+
+#endif

@@ -1,5 +1,6 @@
 #pragma once
 
+#if USE_TASK
 #ifdef ESP32
 #  include "freertos/FreeRTOS.h"
 #  include "freertos/task.h"
@@ -65,3 +66,5 @@ class Task {
 };
 
 }
+
+#endif

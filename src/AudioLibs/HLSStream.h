@@ -8,38 +8,83 @@
 #include "Concurrency/Concurrency.h"
 
 #define MAX_HLS_LINE 512
+#define START_URLS_LIMIT 4
+#define HLS_BUFFER_COUNT 10
 
 namespace audio_tools {
 
+/// @brief Abstract API for URLLoaderHLS
+class URLLoaderHLSBase {
+ public:
+  virtual bool begin() = 0;
+  virtual void end() = 0;
+  virtual void addUrl(const char *url) = 0;
+  virtual int urlCount() = 0;
+  virtual int available() { return 0; }
+  virtual size_t readBytes(uint8_t *data, size_t len) { return 0; }
+  const char *contentType() { return nullptr; }
+  int contentLength() { return 0; }
+
+  virtual void setBuffer(int size, int count) {}
+};
+
+/// URLLoader which saves the HLS segments to the indicated output
+class URLLoaderHLSOutput {
+ public:
+  URLLoaderHLSOutput(Print &out, int maxUrls = 20) {
+    max = maxUrls;
+    p_print = &out;
+  }
+  virtual bool begin() { return true; };
+  virtual void end(){};
+  virtual void addUrl(const char *url) {
+    LOGI("saving data for %s", url);
+    url_stream.begin(url);
+    url_stream.waitForData(500);
+    copier.begin(*p_print, url_stream);
+    int bytes_copied = copier.copyAll();
+    LOGI("Copied %d of %d", bytes_copied, url_stream.contentLength());
+    assert(bytes_copied == url_stream.contentLength());
+    url_stream.end();
+  }
+  virtual int urlCount() { return 0; }
+
+ protected:
+  int count = 0;
+  int max = 20;
+  Print *p_print;
+  URLStream url_stream;
+  StreamCopy copier;
+};
+
 /***
- * @brief We feed the URLLoader with some url strings. At each readBytes or
- * available() call we refill the buffer. The buffer must be big enough to
- * bridge the delays caused by the reloading of the segments
+ * @brief We feed the URLLoaderHLS with some url strings. The data of the
+ * related segments are provided via the readBytes() method.
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 
-class URLLoader {
+class URLLoaderHLS : public URLLoaderHLSBase {
  public:
-  URLLoader(URLStream &stream) { p_stream = &stream; };
-  URLLoader() { p_stream = &default_stream; };
+  // URLLoaderHLS(URLStream &stream) { p_stream = &stream; };
+  URLLoaderHLS() = default;
 
-  ~URLLoader() { end(); }
+  ~URLLoaderHLS() { end(); }
 
-  bool begin() {
+  bool begin() override {
     TRACED();
 #if USE_TASK
     buffer.resize(buffer_size * buffer_count);
-    task.begin(std::bind(&URLLoader::bufferRefill, this));
+    task.begin(std::bind(&URLLoaderHLS::bufferRefill, this));
 #else
-    buffer.resize(buffer_size, buffer_count);
+    buffer.resize(buffer_size * buffer_count);
 #endif
 
     active = true;
     return true;
   }
 
-  void end() {
+  void end() override {
     TRACED();
 #if USE_TASK
     task.end();
@@ -51,7 +96,7 @@ class URLLoader {
   }
 
   /// Adds the next url to be played in sequence
-  void addUrl(const char *url) {
+  void addUrl(const char *url) override {
     LOGI("Adding %s", url);
     Str url_str(url);
     char *str = new char[url_str.length() + 1];
@@ -64,10 +109,10 @@ class URLLoader {
 
   /// Provides the number of open urls which can be played. Refills them, when
   /// min limit is reached.
-  int urlCount() { return urls.size(); }
+  int urlCount() override { return urls.size(); }
 
   /// Available bytes of the audio stream
-  int available() {
+  int available() override {
     if (!active) return 0;
     TRACED();
 #if !USE_TASK
@@ -77,7 +122,7 @@ class URLLoader {
   }
 
   /// Provides data from the audio stream
-  size_t readBytes(uint8_t *data, size_t len) {
+  size_t readBytes(uint8_t *data, size_t len) override {
     if (!active) return 0;
     TRACED();
 #if !USE_TASK
@@ -97,25 +142,25 @@ class URLLoader {
     return p_stream->contentLength();
   }
 
-  void setBuffer(int size, int count) {
+  void setBuffer(int size, int count) override {
     buffer_size = size;
     buffer_count = count;
   }
 
  protected:
-  URLStream default_stream;
   Vector<const char *> urls{10};
 #if USE_TASK
   BufferRTOS<uint8_t> buffer{0};
   Task task{"Refill", 1024 * 5, 1, 1};
   Mutex mutex;
 #else
-  NBuffer<uint8_t> buffer{0, 0};
+  RingBuffer<uint8_t> buffer{0};
 #endif
   bool active = false;
   int buffer_size = DEFAULT_BUFFER_SIZE;
-  int buffer_count = 10;
-  URLStream *p_stream = nullptr;
+  int buffer_count = HLS_BUFFER_COUNT;
+  URLStream default_stream;
+  URLStream *p_stream = &default_stream;
   const char *url_to_play = nullptr;
 
   /// try to keep the buffer filled
@@ -134,15 +179,14 @@ class URLLoader {
     }
 
     // switch current stream if we have no more data
-    if ((!*p_stream || p_stream->totalRead() == p_stream->contentLength()) &&
-        !urls.empty()) {
+    if (!*p_stream && !urls.empty()) {
       LOGD("Refilling");
       if (url_to_play != nullptr) {
         delete url_to_play;
       }
       url_to_play = urls[0];
       LOGI("playing %s", url_to_play);
-      if (p_stream->httpRequest().connected()) p_stream->end();
+      p_stream->setTimeout(5000);
       p_stream->begin(url_to_play);
       p_stream->waitForData(500);
 #if USE_TASK
@@ -157,24 +201,35 @@ class URLLoader {
       LOGI("Playing %s of %d", p_stream->urlStr(), (int)urls.size());
     }
 
+    int total = 0;
+    int failed = 0;
     int to_write = min(buffer.availableForWrite(), DEFAULT_BUFFER_SIZE);
-    if (to_write > 0) {
-      int total = 0;
-      int failed = 0;
-      while (to_write > 0) {
-        if (p_stream->totalRead() == p_stream->contentLength()) break;
-        uint8_t tmp[to_write] = {0};
-        int read = p_stream->readBytes(tmp, to_write);
-        total += read;
-        if (read > 0) {
-          buffer.writeArray(tmp, read);
-          to_write = min(buffer.availableForWrite(), DEFAULT_BUFFER_SIZE);
-        } else {
-          delay(5);
-          // this should not really happen
-          failed++;
-          if (failed >= 3) break;
+    // try to keep the buffer filled
+    while (to_write > 0) {
+      uint8_t tmp[to_write] = {0};
+      int read = p_stream->readBytes(tmp, to_write);
+      total += read;
+      if (read > 0) {
+        failed = 0;
+        buffer.writeArray(tmp, read);
+        LOGI("buffer add %d -> %d:", read, buffer.available());
+
+        to_write = min(buffer.availableForWrite(), DEFAULT_BUFFER_SIZE);
+      } else {
+        delay(10);
+        // this should not really happen
+        failed++;
+        LOGW("No data idx %d: available: %d", failed, p_stream->available());
+        if (failed >= 5) {
+          LOGE("No data idx %d: available: %d", failed, p_stream->available());
+          if (p_stream->available() == 0) p_stream->end();
+          break;
         }
+      }
+      // After we processed all data we close the stream to get a new url
+      if (p_stream->totalRead() == p_stream->contentLength()) {
+        p_stream->end();
+        break;
       }
       LOGD("Refilled with %d now %d available to write", total,
            buffer.availableForWrite());
@@ -244,7 +299,7 @@ class HLSParser {
       return false;
     }
 
-    if (!url_loader.begin()) {
+    if (!p_url_loader->begin()) {
       TRACEE();
       return false;
     }
@@ -261,10 +316,10 @@ class HLSParser {
     TRACED();
     int result = 0;
     custom_log_level.set();
-#if USE_TASK
+#if !USE_TASK
     reloadSegments();
 #endif
-    if (active) result = url_loader.available();
+    if (active) result = p_url_loader->available();
     custom_log_level.reset();
     return result;
   }
@@ -273,10 +328,10 @@ class HLSParser {
     TRACED();
     size_t result = 0;
     custom_log_level.set();
-#if USE_TASK
+#if !USE_TASK
     reloadSegments();
 #endif
-    if (active) result = url_loader.readBytes(buffer, len);
+    if (active) result = p_url_loader->readBytes(buffer, len);
     custom_log_level.reset();
     return result;
   }
@@ -292,9 +347,9 @@ class HLSParser {
   const char *getCodec() { return codec.c_str(); }
 
   /// Provides the content type of the audio data
-  const char *contentType() { return url_loader.contentType(); }
+  const char *contentType() { return p_url_loader->contentType(); }
 
-  int contentLength() { return url_loader.contentLength(); }
+  int contentLength() { return p_url_loader->contentLength(); }
 
   /// Closes the processing
   void end() {
@@ -305,18 +360,20 @@ class HLSParser {
     codec.clear();
     segments_url_str.clear();
     url_stream.end();
-    url_loader.end();
+    p_url_loader->end();
     url_history.clear();
     active = false;
   }
 
-  /// Defines the number of urls that are preloaded in the URLLoader
+  /// Defines the number of urls that are preloaded in the URLLoaderHLS
   void setUrlCount(int count) { url_count = count; }
 
   /// Defines the class specific custom log level
   void setLogLevel(AudioLogger::LogLevel level) { custom_log_level.set(level); }
 
-  void setBuffer(int size, int count) { url_loader.setBuffer(size, count); }
+  void setBuffer(int size, int count) { p_url_loader->setBuffer(size, count); }
+
+  void setUrlLoader(URLLoaderHLSBase &loader) { p_url_loader = &loader; }
 
  protected:
   CustomLogLevel custom_log_level;
@@ -329,7 +386,8 @@ class HLSParser {
   StrExt url_str;
   const char *index_url_str = nullptr;
   URLStream url_stream;
-  URLLoader url_loader;
+  URLLoaderHLS default_url_loader;
+  URLLoaderHLSBase *p_url_loader = &default_url_loader;
   URLHistory url_history;
 #if USE_TASK
   Task segment_load_task{"Refill", 1024 * 5, 1, 1};
@@ -353,7 +411,7 @@ class HLSParser {
   // parse the index file and the segments
   bool parseIndex() {
     TRACED();
-    url_stream.setTimeout(1000);
+    url_stream.setTimeout(5000);
     // url_stream.setConnectionClose(true);
 
     // we only update the content length
@@ -364,54 +422,7 @@ class HLSParser {
     return rc;
   }
 
-  // parse the segment url provided by the index
-  bool parseSegments() {
-    TRACED();
-    if (parse_segments_active) {
-      return false;
-    }
-
-    // make sure that we load at relevant schedule
-    if (millis() < next_sement_load_time && url_loader.urlCount() > 0) {
-      return false;
-    }
-    parse_segments_active = true;
-
-    LOGI("Available urls: %d", url_loader.urlCount());
-
-    if (url_stream) url_stream.clear();
-    LOGI("parsing %s", segments_url_str.c_str());
-
-    if (segments_url_str.isEmpty()) {
-      TRACEE();
-      parse_segments_active = false;
-      return false;
-    }
-
-    if (!url_stream.begin(segments_url_str.c_str())) {
-      TRACEE();
-      parse_segments_active = false;
-      return false;
-    }
-
-    segment_count = 0;
-    if (!parseSegmentLines()) {
-      TRACEE();
-      parse_segments_active = false;
-      return false;
-    }
-
-    next_sement_load_time = millis() + (segment_count * tartget_duration_ms);
-    // assert(segment_count > 0);
-
-    // we request a minimum of collected urls to play before we start
-    if (url_history.size() > 8) active = true;
-    parse_segments_active = false;
-
-    return true;
-  }
-
-  // parse the index file and the segments
+  // parse the index file 
   bool parseIndexLines() {
     TRACEI();
     char tmp[MAX_HLS_LINE];
@@ -441,7 +452,57 @@ class HLSParser {
     return result;
   }
 
-  // parse the index file and the segments
+
+  // parse the segment url provided by the index
+  bool parseSegments() {
+    TRACED();
+    if (parse_segments_active) {
+      return false;
+    }
+
+    // make sure that we load at relevant schedule
+    if (millis() < next_sement_load_time && p_url_loader->urlCount() > 1) {
+      delay(1);
+      return false;
+    }
+    parse_segments_active = true;
+
+    LOGI("Available urls: %d", p_url_loader->urlCount());
+
+    if (url_stream) url_stream.clear();
+    LOGI("parsing %s", segments_url_str.c_str());
+
+    if (segments_url_str.isEmpty()) {
+      TRACEE();
+      parse_segments_active = false;
+      return false;
+    }
+
+    if (!url_stream.begin(segments_url_str.c_str())) {
+      TRACEE();
+      parse_segments_active = false;
+      return false;
+    }
+
+    segment_count = 0;
+    if (!parseSegmentLines()) {
+      TRACEE();
+      parse_segments_active = false;
+      // do not display as erro
+      return true;
+    }
+
+    next_sement_load_time = millis() + (segment_count * tartget_duration_ms);
+    // assert(segment_count > 0);
+
+    // we request a minimum of collected urls to play before we start
+    if (url_history.size() > START_URLS_LIMIT) active = true;
+    parse_segments_active = false;
+
+    return true;
+  }
+
+  // parse the segments
   bool parseSegmentLines() {
     TRACEI();
     char tmp[MAX_HLS_LINE];
@@ -509,9 +570,9 @@ class HLSParser {
           url_str.add("/");
           url_str.add(str.c_str());
         }
-        url_loader.addUrl(url_str.c_str());
+        p_url_loader->addUrl(url_str.c_str());
       } else {
-        LOGD("Douplicate ignored: %s", str.c_str());
+        LOGD("Duplicate ignored: %s", str.c_str());
       }
     }
     return true;

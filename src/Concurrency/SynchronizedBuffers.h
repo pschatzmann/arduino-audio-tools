@@ -4,6 +4,7 @@
 #include "AudioTools/Buffers.h"
 #include "AudioTools/AudioLogger.h"
 
+#if USE_TASK
 #ifdef ESP32
 #  include "freertos/FreeRTOS.h"
 #  include "Concurrency/QueueRTOS.h"
@@ -205,3 +206,4 @@ protected:
 } // namespace audio_tools
 
 
+#endif

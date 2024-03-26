@@ -13,7 +13,7 @@ namespace audio_tools {
 #endif
 
 #ifndef MTS_UNDERFLOW_LIMIT
-#  define MTS_UNDERFLOW_LIMIT 200
+#  define MTS_UNDERFLOW_LIMIT 188
 #endif
 
 #ifndef MTS_WRITE_BUFFER_SIZE
@@ -177,13 +177,13 @@ class MTSDecoder : public AudioDecoder {
     TRACED();
     TSDCode res = TSD_OK;
     int count = 0;
-    while (res == TSD_OK && buffer.available() > limit) {
+    while (res == TSD_OK && buffer.available() >= limit) {
       // Unfortunatly we need to reset the demux after each file
       if (is_new_file(buffer.data())){
         LOGD("parsing new file");
         begin();
       }
-      size_t len;
+      size_t len = 0;
       res = tsd_demux(&ctx, (void *)buffer.data(), buffer.available(), &len);
       // remove processed bytes
       buffer.clearArray(len);
